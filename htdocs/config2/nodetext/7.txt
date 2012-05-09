@@ -1,0 +1,11 @@
+site_title OPENCACHING.no/se
+site_url http://www.opencaching.se
+site_contact http://opencaching.wikispaces.com/Kontakt
+faq_login http://opencaching.wikispaces.com/FAQ
+faq_npa http://opencaching.wikispaces.com
+faq_htmltag http://opencaching.wikispaces.com
+terms_of_service http://opencaching.wikispaces.com/Anv%C3%A4ndarvillkor
+faq_cacheinfo http://opencaching.wikispaces.com/Cache+egenskaper
+terms_privacy articles.php?page=dsb
+faq_logpw http://opencaching.wikispaces.com
+faq_searchtime http://opencaching.wikispaces.com

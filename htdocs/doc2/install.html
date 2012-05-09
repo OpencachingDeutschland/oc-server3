@@ -1,0 +1,982 @@
+<html>
+<head>
+<title>Installationsanleitung Opencaching Quellcode</title>
+<style type="text/css">
+<!--
+td
+{
+	vertical-align:top;
+}
+
+.code
+{
+	border:2px black solid;
+	padding:10px;
+	background-color:#EFEFEF;
+	font-family:monospace;
+}
+-->
+</style>
+</head>
+<body>
+	<h1>
+	Installationsanleitung Opencaching Quellcode</h1>
+	<h2>
+	Inhalt</h2>
+	<h2>
+	Voraussetzungen<br />
+	</h2>
+	<ul>
+		<li>
+	Installiertes Linux System (mit root-Berechtigungen)</li>
+		<li>
+	Apache Webserver</li>
+		<li>MySQL Datenbank</li>
+		<li>PHP</li>
+	</ul>
+	<p>
+		Die Komponenten mülauffäg sein. Auf deren Konfiguration wird nur eingegangen,
+		wenn diese von der Standardkonfiguration abweicht.</p>
+	<h3>
+	Empfohlene Versionen</h3>
+	<ul>
+		<li>Apache 2.2.x </li>
+		<li>PHP 5.2.2</li>
+		<li>MySQL 5.0.27</li>
+	</ul>
+	Möcherweise funktioniert der Quellcode auch mit äeren Releases, dann sind jedoch
+	fü Produktiveinsatz stäere Tests erforderlich.<br />
+	<br />
+	<h3>
+		PHP Module</h3>
+	<p>
+		Folgende PHP Module werden von den Quellcodes verwendet:</p>
+	<ul>
+		<li>mysql</li>
+		<li>gd</li>
+		<li>zlib</li>
+		<li>freetype</li>
+		<li>jpeg</li>
+		<li>png</li>
+		<li>mbstring</li>
+		<li>gettext</li>
+		<li>iconv</li>
+		<li>mcrypt</li>
+		<li>tokenizer</li>
+	</ul>
+	<p>
+		PHP muss mit CLI (Command Line Interface) installiert werden.<br />
+		Zusälich wird noch eine pecl-Extension empfohlen, siehe "Konfiguration Cracklib".</p>
+	<h3>
+		Empfohlene Software</h3>
+	<ul>
+		<li>phpMyAdmin (jeweils aktuelle Version)</li>
+		<li>CVS Client</li>
+	</ul>
+	<h2>
+		Installation und Konfiguration Grundlagen</h2>
+	<h3>
+		Konfiguration Apache, PHP</h3>
+	<p class="code">
+		User wwwrun<br />
+		Group www<br />
+		<br />
+		&lt;Directory /wwwroot&gt;<br />
+		&nbsp; &nbsp;
+		AllowOverride AuthConfig<br />
+		&nbsp; &nbsp;
+		Options -FollowSymLinks -SymLinksIfOwnerMatch<br />
+		&nbsp; &nbsp; ...<br />
+		&lt;/Directory&gt;<br />
+		<br />
+		&lt;VirtualHost ...&gt;<br />
+		&nbsp; &nbsp; ...<br />
+		&nbsp; &nbsp; DocumentRoot /wwwroot<br />
+		&nbsp; &nbsp;
+		DirectoryIndex index.php index.htm index.html<br />
+		&nbsp; &nbsp;
+		RewriteEngine On # vgl. "Konfiguration Statistikbilder"<br />
+		&lt;/VirtualHost&gt;
+	</p>
+	Der Pfad /wwwroot kann beliebig gewät werden, ebenso User und Group.<h4>
+		Konfigration safe_mode</h4>
+	<p>
+		PHP kann im safe_mode ausgefüerden, ist fü Entwicklung jedoch oft hinderlich.</p>
+	<p>
+		open_basedir muss dann neben /wwwroot auch den upload_tmp_dir enthalten</p>
+	<p>
+		safe_mode_exec_dir muss definiert werden (vgl. "Installation phpzip")</p>
+	<h3>
+		Download der CVS Quellcodes</h3>
+	<p>
+		Alle Quellcodes werden mit CVS verwaltet. Füeberechtigungen ist kein Benutzeraccount
+		notwendig. Sollen spär geäerte Quellcodes in das CVS gespeichert werden, richten
+		wir gernen einen Benutzeraccount ein (bitte im Entwicklerforum melden).</p>
+	<p>
+		Auf der Linux-Kommandozeile:</p>
+	<p class="code">
+		cd /wwwroot<br />
+		export CVSROOT=:pserver:anoncvs@devel.opencaching.de:2401/opencaching<br />
+		cvs co html</p>
+	<p>
+		Der Download kann eine Weile dauern, die Repository ist mittlerweile etwas grö.
+		Die Opencaching Quellcodes befinden sich daraufhin im Unterverzeichnis html</p>
+	<p>
+		Um Äderungen zu inspizieren haben wir einen WebCVS eingerichtet:</p>
+	<p>
+		http://devel.opencaching.de/viewcvs/viewcvs.cgi/html/</p>
+	<h3>
+		Konfiguration MySQL</h3>
+	<p>
+		Die Quellcodes benöen die MyISAM- und InnoDB-Engines und etwa 350 MB (Stand:
+		Sept. 2007) um alle Opencaching-Daten zu laden.</p>
+	<p>
+		Charset füe Datenbanken, Tabellen und Felder ist immer
+			UTF8. Die Namen der
+		Datenbanken und Benutzer kann frei gewät werden.</p>
+	<h4>
+		Datenbankem anlegen</h4>
+	<p>
+		Es werden
+			2 Datenbanken benöt: Eine fü eigentlichen Daten und eine fü Erstellung
+			von temporän Tabellen.</p>
+	<p class="code">
+		CREATE DATABASE `opencaching` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;<br />
+		CREATE DATABASE `oc_tmpdb` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;<br />
+  </p>
+	<h4>
+		<span class="syntax"><span class="syntax_punct syntax_punct_queryend"><span class="syntax_punct syntax_punct_queryend">
+		</span>Benutzer anlegen</span></span></h4>
+	<p>
+		<span class="syntax"><span class="syntax_punct syntax_punct_queryend">Es werden 2
+			Benutzer benöt:</span></span></p>
+	<p>
+		1. Mit geringen Berechtigungen fümale Ausfü</p>
+	<p>
+		Im einzelnen:</p>
+	<p>
+		<table>
+			<tr>
+				<td>
+					<strong>Datenbank</strong></td>
+				<td>
+					<strong>Berechtigungen</strong></td>
+			</tr>
+			<tr>
+				<td>
+					opencaching</td>
+				<td>
+					SELECT, INSERT, UPDATE, DELETE<br />
+					<br />
+					Solange das alte Template System nochgenutzt wird:<br />
+					CREATE, ALTER, INDEX, DROP, CREATE TEMPORARY TABLES</td>
+			</tr>
+			<tr>
+				<td>
+					oc_tmpdb</td>
+				<td>
+					SELECT, INSERT, UPDATE, DELETE<br />
+					CREATE, ALTER, INDEX, DROP, CREATE TEMPORARY TABLES</td>
+			</tr>
+		</table>
+	</p>
+	<p>
+		2. Mit SUPER-Berechtigungen, um Trigger und Stored Procedures anlegen zu kön</p>
+	<p>
+		<table>
+			<tr>
+				<td>
+					<strong>Datenbank</strong></td>
+				<td>
+					<strong>Berechtigungen</strong></td>
+			</tr>
+			<tr>
+				<td>
+					&lt;ALLGEMEIN&gt;</td>
+				<td>
+					SUPER</td>
+			</tr>
+			<tr>
+				<td>
+					opencaching</td>
+				<td>
+					SELECT, INSERT, UPDATE, DELETE<br />
+					CREATE, ALTER, INDEX, DROP, CREATE TEMPORARY TABLES, CREATE VIEW, SHOW VIEW, CREATE
+					ROUTINE, ALTER ROUTINE, EXECUTE</td>
+			</tr>
+			<tr>
+				<td>
+					oc_tmpdb</td>
+				<td>
+					SELECT, INSERT, UPDATE, DELETE<br />
+					CREATE, ALTER, INDEX, DROP, CREATE TEMPORARY TABLES</td>
+			</tr>
+		</table>
+		<p>
+			SUPER-Berechtigungen entsprechen root-Berechtigungen fü Datenbank. Das Passwort
+			wird spär als Klartext in einer php-Datei gespeichert. Wem das zu unsicher ist,
+			kann auch den normalen root-Account nehmen und das Passwort in die php-Datei nur
+			bei Bedarf schreiben und danach wieder löen.</p>
+		<h3>
+			Anlegen der Tabellen</h3>
+		<p>
+			Alle Tabellen sind als SQL-Datei im Verzeichnis doc/sql/tables abgelegt. Datensäe
+			füe leere Datenbank in doc/sql/static-data.<br />
+			Trigger und Stored Procedures werden spär per PHP-Script angelegt.</p>
+		<p class="code">
+			cd doc/sql/tables<br />
+			find . -maxdepth 1 -type f -name \*.sql -exec cat {} \; | mysql -uroot -p opencaching<br />
+			<br />
+			cd ../static-data<br />
+			find . -maxdepth 1 -type f -name \*.sql -exec cat {} \; | mysql -uroot -p opencaching</p>
+		<p>
+			Alternativ köe auch jede Datei einzeln geöet werden und mit phpMyAdmin eingespielt
+			werden.</p>
+	<h3>
+		Verzeichnisrechte vergeben</h3>
+		<p>
+			Generell sollten so wenig Rechte wie möch vergeben werden. In diesem Beispiel
+			gehen wir davon aus, dass die Dateien nicht von Hand editiert werden sollen. Füdie Entwicklung muss der Entwickler natü Schreibrechte fü Dateien haben.</p>
+		<p class="code">
+			cd /wwwroot<br />
+			chown -R wwwrun:www .<br />
+			<br />
+			find . -type f -exec chmod 440 {} \;<br />
+			find . -type d -exec chmod 550 {} \;<br />
+			<br />
+			find cache -type f -exec chmod 660 {} \;<br />
+			find cache -type d -exec chmod 770 {} \;<br />
+			<br />
+			find cache2 -type f -exec chmod 660 {} \;<br />
+			find cache2 -type d -exec chmod 770 {} \;<br />
+		</p>
+		<p>
+			Ein späres CVS-Update muss mit dem wwwrun-Benutzer ausgefüerden, da sonst
+			der Dateibesitzer evtl. wieder wechselt!<br />
+			Ausserdem müdann die Dateien und Verzeichnisse beschreibbar sein (im ersten
+			Schritt 660 und 770 verwenden).</p>
+	<h3>
+		Konfiguration der Quellcodes</h3>
+		<p>
+			Die Konfiguration der Quellcodes ist derzeit noch 2x notwendig (Stand: September
+			2007):</p>
+		<p>
+			Das alte Template-System verwendet Verzeichnisse ohne 2 am Ende.<br />
+			Das neue Template-System verwendet Verzeichnisse mit 2 am Ende.</p>
+		<p>
+			Derzeit werden alle Skripte aus dem alten Template-System fü neue System umgeschrieben.<br />
+			Skripts die bereits umgestellt wurden, kön in den Quellcodes an require('./lib2/...');
+			erkannt werden und im Browser an den Flaggen oben links.</p>
+		<h4>
+			Altes Templatesystem</h4>
+		<p>
+			Datei lib/settings-dist.inc.php nach nach lib/settings.inc.php kopieren.<br />
+			Datei-Owner und Berechtigungen beachten!<br />
+			Die Kopie kann bearbeitet werden, ohne dass bei einem spären CVS-Commit falsche
+			Daten zurüpielt werden.</p>
+		<p>
+			Die Parameter sind soweit nö kommentiert. Besonderes Augenmerk sollte man folgenden
+			Paramtern widmen:</p>
+		<p class="code">
+			$oc_nodeid<br />
+			$absolute_server_URI<br />
+			$dbusername<br />
+			$dbname<br />
+			$dbserver<br />
+			$dbpasswd<br />
+			$tmpdbname</p>
+		<p>
+			Sowie die diversen E-Mail-Adressen.<br />
+			Sollte die Website aus dem Internet erreichbar sein, MUSS das Impressum abgeäert
+			werden (templates2/stdstyle/articles/DE/impressum.tpl).</p>
+		<h4>
+			Neues Templatesystem</h4>
+		<p>
+			Datei config2/settings-dist.inc.php nach nach config2/settings.inc.php kopieren.<br />
+			Datei-Owner und Berechtigungen beachten!<br />
+			Die Kopie kann bearbeitet werden, ohne dass bei einem spären CVS-Commit falsche
+			Daten zurüpielt werden.</p>
+		<p>
+			Es werden jedoch beide Dateien von den Quellcodes verwendet: Zuerst werden Vorgabewerte
+			mit settings-dist.inc.php gesetzt und diese dann (wo nö) mit settings.inc.php
+			ührieben. Falls also ein Vorgabewert in den Einstellungen beibehalten werden
+			soll, kann die entsprechende Zeile aus settings.inc.php gelöt werden. Ädert
+			sich spär der Vorgabewert im CVS ist keine manuelle Anpassung notwendig.</p>
+		<p>
+			Die Parameter sind soweit nö kommentiert. Besonderes Augenmerk sollte man folgenden
+			Paramtern widmen:</p>
+		<p class="code">
+			$opt['db']['servername']<br />
+			$opt['db']['username']<br />
+			$opt['db']['password']<br />
+			$opt['db']['placeholder']['db']<br />
+			$opt['db']['placeholder']['tmpdb']<br />
+			$opt['debug']<br />
+			$opt['page']['absolute_url']<br />
+			$opt['logic']['node']['id']<br />
+			$opt['logic']['pictures']['url']</p>
+		<p>
+			Sowie die diversen E-Mail-Adressen.<br />
+			WICHTIG: die Paramtert im lib/settings.inc.php und config2/settings.inc.php mü			ünstimmen. Insbesondere die Cookie-Einstellungen und die node-id.</p>
+		<p>
+			Sollte die Website aus dem Internet erreichbar sein, MUSS das Impressum abgeäert
+			werden (templates2/stdstyle/articles/DE/impressum.tpl).</p>
+	<h3>
+		Anlegen der Trigger und Stored Procedures</h3>
+		<p>
+			Zunäst müdie Zugangsdaten fü Benutzer mit SUPER-Privilegien hinterlegt
+			werden. Dazu muss im Datei util/mysql_root/settings-dist.inc.php nach &nbsp;util/mysql_root/settings.inc.php
+			kopiert werden. Die Kopie muss angepasst werden.</p>
+		<p>
+			Anschließn muss doc/sql/stored-proc/maintain.php als CLI-Skript (oder aus dem Browser)
+			aufgerufen werden.</p>
+		<p>
+			Um zu prüb das Skript erfolgreich ausgefüurde, kann der SQL-Befehl SHOW
+			TRIGGERS und SHOW PROCEDURE STATUS verwendet werden. Beide Befehle mümehere
+			Zeilen zurüen.</p>
+		<h3>
+			Testen der Installation</h3>
+		<p>
+			Die Startseite (neues Templatesystem) und die Suchseite (altes Tempalte System,
+			Stand 6. September 2007) sollten nun im Browser aufrufbar sein.<br />
+			Viele Kleinigkeiten funktionieren noch nicht, da dazu weitere Vorbereitungen notwendig
+			sind u.A. die PLZ-Suche, Ortssuche, der Benutzerlogin (noch keine Benutzer) ...</p>
+		<h4>
+			Fehlersuche</h4>
+		<p>
+			Wichtig: vor jeder Fehlersuche $opt['debug'] = DEBUG_DEVELOPER | DEBUG_TEMPLATES;
+			setzen. Ansonsten werden die falschen Ausgaben gecacht und auch ausgegeben wenn
+			der Fehler evtl. schon behoben ist.</p>
+		<h5>
+			Die Seiten werden nur auf Englisch angezeigt</h5>
+		<p>
+			Dann liegt ein Fehler bei gettext vor. Zunäst einmal das Caching abschalten. Dann
+			mit locale -a prüb z.B. de_DE vorhanden ist. Fehlt das, muss es nachinstalliert
+			werden. Unter Debian z.B. apt-get install locales-all. Danach Apache neu starten!</p>
+		<h5>
+			Das Menü nur auf Englisch angezeigt</h5>
+		<p>
+			Wenn die Inhalte bereits richtig ützt werden, das Menü noch auf Englisch
+			angezeigt wird, muss die Datei cache2/menu-DE.inc.php gelöt werden. Mit dem nästen
+			Aufruf wird diese neu erstellt und dabei mit gettext das Menüsetzt.</p>
+	<h3>
+		Laden der Opencaching-Daten</h3>
+		<p>
+			Damit die Opencaching.de-Daten in die Datenbank gelangen, muss der XML-Client konfiguriert
+			werden. Die dann geladenen Daten kön als Testdaten verwendet werden. Die Installation
+			kann auch in ein anderes Verzeichnis gemacht werden, damit die geäerten Dateien
+			nicht vom CVS-Client moniert werden.</p>
+		<p>
+			Voraussetzung ist die "Installation von phpzip"</p>
+		<p>
+			1. In das Verzeichnis util/ocxml11client wechseln und settings-dist.php nach settings.php
+			kopieren und bearbeiten.</p>
+		<p>
+			2. Folgende Parameter besonders beachten:</p>
+		<p class="code">
+			$opt['unzip']<br />
+			$opt['pictures']['download']<br />
+			$opt['pictures']['url']</p>
+		<p>
+			3. Die Verzeichnisse tmp und data-files rekursiv mit Schreibrechten versehen.</p>
+		<p>
+			4. Nun noch den Pfad zu dem php-Binary im Header von index.php abäern und der
+			Datei Ausfürechte geben.</p>
+		<p>
+			Die Synchronisation kann nun mit ./index.php gestartet werden. Der Start kann ein
+			paar Sekunden dauern, da erst auf dem opencching.de-Server die entsprechenden Daten
+			aufbereitet werden. Der Download und das Einspielen in die Datenbank dauert bis
+			zu meherern Stunden.</p>
+		<p>
+			Wird die Synchronisation nach dem Download abgebrochen, kann durch auskommentieren
+			der entsprechenden Funktionsaufrufe in index.php mit den bereits heruntergeladenen
+			Daten weitergearbeitet werden.</p>
+		<h3>
+			Eigene Zugangsdaten hinterlegen</h3>
+		<p>
+			Damit man selbst auf der Webseite einloggen kann, muss nach dem Laden der Daten
+			von Opencaching.de nur util/ocxml10client/newuser.php aufgerufen und bestägt werden.</p>
+		<h4>
+			Ich bin root und ich darf alles</h4>
+		<p>
+			Füche Funkionen sind admin-Rechte auf der Webseite notwendig. Die kön gesetzt
+			werden, indem in der user-Tabelle der admin-Wert fü entsprechenden Benutzer
+			auf 255 gesetzt wird. Einzelne Admin-Rechte kön aus lib2/logic/const.inc.php
+			entnommen werden (Stand: September 2007: noch in Entwicklung).</p>
+	<h2>
+		Konfiguration von einzelnen Komponenten</h2>
+	<h3>
+		Konfiguration Statistikbilder</h3>
+		<p>
+			Fü Statistikbilder wird benöt:</p>
+		<ul>
+			<li>rewrite-Modul des Apache</li>
+			<li>GD-Modul fü</li>
+		</ul>
+		<p>
+			Konfiguration:</p>
+		<p>
+			1. Schreibrechte füages/statpics</p>
+		<p>
+			2. Funnktion des PHP-Skript prüocstats.php?userid=1 aufrufen. Statt der userid
+			kann eine beliebige andere verwendet werden. Nun muss ein Bild in /images/statpics
+			erstellt werden und auf dieses Weitergeleitet.</p>
+		<p>
+			3. Rewrite-Rule konfigurieren, damit das Bild als statische Datei referenziert werden
+			kann (füen). In der Apache-Konfiguration:</p>
+		<p class="code">
+			&lt;VirtualHost ...&gt;<br />
+			&nbsp;&nbsp; ...<br />
+			&nbsp;&nbsp; RewriteEngine On<br />
+			&nbsp;&nbsp; ...<br />
+			&nbsp; &lt;Directory /var/www/html/statpics&gt;<br />
+			&nbsp; &nbsp; &nbsp; AllowOverride FileInfo<br />
+			&nbsp; &nbsp; &nbsp;
+			Options FollowSymLinks SymLinksIfOwnerMatch<br />
+			&nbsp; &lt;/Directory&gt;<br />
+			&lt;/VirtualHost&gt;</p>
+		<p>Und die Datei /statpics/htaccess-dist nach .htaccess kopieren, sowie /ocstats.php
+		den absoluten (http-)Pfad voranstellen.</p>
+		<p class="code">
+		RewriteRule ^([0-9]+)\.jpg$ /html/ocstats.php?userid=$1 [R,L]</p>
+		Nun sollte beim Aufruf von /statpics/1.jpg auf ocstats.php weitergeleitet werden,
+		das Bild erstellt und gleich weiter zu /images/statpics geleitet werden. Der Umweg
+		ist notwenig, damit das Statistikbild ertellt und aktualisiert werden kann.<h3>
+		Installation Cracklib</h3>
+		<p>
+			Das neue Templatesystem kann prüob Passwör bestimmten Sicherheitsanforderungen
+			genüazu ist eine pecl-Extension fücklib erforderlich. Je nach System fät
+			die Installation allerdings unterschiedlich aus. Sollte die pecl-Extension nicht
+			verfüsein, wird diese Prünicht durchgefüFüian kann folgendes
+			verwendet werden:</p>
+		<p class="code">
+			apt-get install cracklib2<br />
+			apt-get install php-pear<br />
+			apt-get install php5-dev<br />
+		</p>
+		<p>
+			Falls nicht als RPM verfü kön auch von http://sourceforge.net/projects/cracklib
+			die Sourcen verwendet werden.<br />
+			Auf jeden Fall sollte das kleine Wörbuch verwendet werden, da sonst die Passwör
+			benutzerunfreundlich ausfallen mü</p>
+		<p class="code">
+			cd /usr/src<br />
+			mkdir crack-0.4<br />
+			wget http://pecl.php.net/get/crack-0.4.tgz<br />
+			tar zxf crack-0.4.tgz<br />
+			cd crack-0.4<br />
+			phpize<br />
+			./configure<br />
+			make<br />
+			copy crack.so to your php-extension directory</p>
+		<p>
+			Wurde die Extension korrekt installiert, schlä eine Registrierung mit dem Passwort
+			123456 fehl.</p>
+		<p>
+			In den Cracklib-Sourcen befindet sich auch eine Wörbuchdatei (cracklib-small).
+			Diese kann mit mkdict präriert werden und in der php.ini als Default-Wörbuch
+			hinterlegt werden:</p>
+		<p class="code">
+			[Crack]<br />
+			crack.default_dictionary = "/usr/local/share/cracklib/pw_dict"
+		</p>
+		<p>
+			Weiter Informationen zur cracklib-Konfiguration kön hier gefunden werden:<br />
+			http://www.php.net/manual/de/function.crack-check.php<br />
+			http://www.phpbar.de/w/PECL<br />
+			http://pecl.php.net/package/crack
+		</p>
+		<h3>
+		Installation phpzip</h3>
+		<p>
+			Um ZIP, BZ2 und GZIP-Dateien zu erstellen werden die entsprechenden Unix-Programme
+			verwendet. Da diese jedoch nicht den Einschräungen des safe_mode unterliegen,
+			köe damit leicht /etc/passwd oder schlimmeres gezipt und heruntergeladen werden,
+			falls in den (Opencaching-)Quellcodes ein Sicherheitsloch ist. Deshalb werden die
+			Programme üinen Wrapper aufgerufen, der die übenen Pfadangaben prü		phpzip wird fü XML-Client, das XML-Interface und fü Download von Suchergebnissen
+			benöt.</p>
+		<p>
+			1. Ein Verzeichnis suchen das nicht üas HTTP erreichbar ist z.B. /srv/www/bin</p>
+		<p>
+			2. Die Dateien util/safemode_zip/phpzip.php und util/safemode_zip/phpunzip.php dort
+			hinein kopieren</p>
+		<p>
+			3. Owner und Group auf root setzen</p>
+		<p>
+			4. Dateiberechtigungen auf der Dateien auf 755 setzen, der Webserver darf keinesfalls
+			Schreibberechtigungen besitzen!</p>
+		<p>
+			5. Im Kopf der beiden Dateien den Pfad fü php-Binary setzen (PHP muss mit --enable-cli
+			kompiliert sein). Den Pfad bekommt man mit "which php".<br />
+			Z.B. #!/usr/bin/php -q</p>
+		<p>
+			6. Sicherstellen, dass gzip, bzip2 und zip auf dem System installiert sind</p>
+		<p>
+			7. phpzip.php und phpunzip.php öen und $basedir auf das root-Verzeichnis der
+			Opencaching-Quellcodes setzen. Z.B. /var/www/html</p>
+		<p>
+			8. Wird nun phpzip.php aufgerufen mit ./phpzip.php muss die Ausgabe "wrong parameter"
+			erscheinen.</p>
+		<p>
+			9. Den Pfad in safe_mode_exec_dir in der apache/php-Konfiguration aufnehmen</p>
+		<p>
+			10. Die Parameter $safemode_zip, $zip_basedir und $zip_wwwdir in lib/settings.inc.php
+			setzen</p>
+	<h3>
+		Laden der gns-Datenbank</h3>
+		<p>
+			Die GNS-Datenbank enthä Koordinaten füe rund um die Welt und wird fü
+			Suchfunktion verwendet. Auf Opencaching.de sind die Dateien fütschland (GM),
+			Öterreich (AU) und die Schweiz (SZ) geladen.</p>
+		<p>
+			1. Download der Dateien von http://earth-info.nga.mil/gns/html/namefiles.htm nach
+			util/gns</p>
+		<p>
+			2. Entpacken der ZIP-Dateien (gleiches Verzeichnis)</p>
+		<p>
+			3. Sollen andere Dateien als sz.txt, gm.txt und au.txt importiert werden, muss gns_import.php
+			entsprechend angepasst werden.</p>
+		<p>
+			4. Importieren der Dateien mit "php gns_import.php"</p>
+		<p>
+			Die CSV-Dateien werden daraufhin in die Tabelle gns_locations importiert.</p>
+	<h4>
+		Suchindex aufbauen</h4>
+		<p>
+			Damit die Suche nach Ortsnamen zum einen schnell, zum anderen gegen Vertipper resistent
+			ist, wird ein Suchindex aufgebaut (gns_search).<br />
+			Nach dem Laden oder Aktualisieren der GNS-Daten muss dazu "php mksearchindex.php"
+			ausgefüerden.</p>
+		<p>
+			Bleibt der Import-Prozess mit einem Integer + Ortsname stehen, muss der Matching-Algorithmus
+			an die neuen Daten
+			angepasst werden, bitte im Forum melden.</p>
+		<h4>
+			Administrations-Texte aufbauen</h4>
+		<p>
+			Um bei der Ortssuche den Landkreis, Regierungsbezirk und das Land anzeigen zu kön
+			muss der Befehel "php mkadmtxt.php" ausgefüerden. Hierzu muss allerdings er
+			die geodb geladen werden (siehe näster Abschnitt).</p>
+	<h3>
+		Laden der geodb-Datenbank</h3>
+		<p>
+			1.
+			Download der Daten von http://sourceforge.net/projects/opengeodb<br />
+			Package Data<br />
+			opengeodb-0.2.4d-UTF8-mysql.zip (ggf. eine neuere Version, falls Datenstruktur gleich)</p>
+		<p>
+			2. Entpacken</p>
+		<p>
+			3. Importieren</p>
+		<p class="code">
+			cat opengeodb-0.2.4d-UTF8-mysql.sql | mysql -uroot -p opencaching</p>
+	<h4>
+		Suchindex aufbauen</h4>
+		<p>
+			Damit die Suche nach Ortsnamen zum einen schnell, zum anderen gegen Vertipper resistent
+			ist, wird ein Suchindex aufgebaut (geodb_search).<br />
+			Nach dem Laden oder Aktualisieren der geodb-Daten muss dazu "php index.php" im Verzeichnis
+			util/geodb_searchindex ausgefüerden.</p>
+		<p>
+			Bleibt der Import-Prozess mit einem Integer + Ortsname stehen, muss der Matching-Algorithmus
+			an die neuen Daten angepasst werden, bitte im Forum melden.</p>
+	<h3>
+		Volltext-Suchindex aufbauen</h3>
+		<p>
+			Fü Volltextsuche von Cachebeschreibungen und Logeinträn ist die Tabelle search_index
+			zustäig. Diese wird mit "php util/search_index/fill_search_index.php" inkrementell
+			gefüDie erste Fü dauert allerdings einige Zeit.</p>
+	<h3>
+		cronjob fühe_location einrichten</h3>
+		<p>
+			In cache_location wird Land &gt; Regierungsbezirk &gt; Landkreis fü Anzeige
+			gespeichert. Gefüird die Tabelle mit "php util/cron/runcron.php". Üer dieses
+			Skript kön auch weitere Skripte angesteuert werden, die regelmäg ausgefü		werden (Unterverzeichnis modules).</p>
+	<h3>
+		Konfiguration XML-Interface</h3>
+		<p>
+			Das aktuelle XML-Interface ist /xml/ocxml11.php (Stand: September 2007).<br />
+			phpzip muss vorher installiert werden.<br />
+			<br />
+			TODO: phpzip-Konfiguration stimmt hier nicht ... falscher basedir!<br />
+			<br />
+			Schreibrechte fünload/zip/ocxml11 fü Webserver-Prozess erteilen.</p>
+	<h2>
+		Üersetzen von neuen Templates</h2>
+		<p>
+			Templates werden immer in Englisch geschrieben. Die Üersetzung erfolgt durch translate.php
+			(Adminrechte fü Benutzer erforderlich).<br />
+			<br />
+			TODO</p>
+	<h2>
+		Update der Quellcodes</h2>
+		<p>
+			Werden Quellcodes per CVS aktualisiert, sollte immer die CVS-Clientausgabe inspiziert
+			werden. Gibt es Äderungen im Verzeichnis /doc/sql oder /util/ocxml11client mü			diese entsprechend nachgepflegt werden.</p>
+	<h2>
+		Anhang</h2>
+	<h3>
+		PHP-CLI</h3>
+		<p>
+			CLI (Command Line Interface) ist eine Erweiterung von PHP, damit PHP-Skripte wie
+			Bash-Skripte von der Kommandozeile aus aufgerufen werden kön. Entweder muss im
+			Header der Skripte dazu das php-Binary angegeben werden z.B. #!/usr/bin/php -q oder
+			man ruft die PHP mit dem Skript als Argument auf "php skript.php".</p>
+		<p>
+			Vorteil: CLI-Skripte haben kein Timeout. Apache und PHP haben verschiedene (einstellbare)
+			Timeouts, die Skripte mit läeren Laufzeiten (&gt;30 Sek.) behindern.</p>
+		<p>
+			Nachteil: werden CLI-Skripte als cronjob aufgerufen, mürelative Pfade durch
+			absolute Pfade ersetzt werden.</p>
+		<h3>
+			Konfiguration füwicklung</h3>
+		<ul>
+		<li>
+			(php.ini) display_errors = true</li>
+			<li>
+		(php.ini) error_reporting = E_ALL</li>
+			<li>
+		(php.ini) mysql.trace_mode = true</li>
+		</ul>
+		<p>
+		Alle angezeigten Meldungen von dem Commit beseitigen!</p>
+		<h3>
+		Bearbeiten der Quellcodes</h3>
+		<p>
+	Um die Quellcodes zu bearbeiten ist ein UTF-8 fäger Texteditor zu benutzen. Dies
+	kann man erkennen, indem in den PHP-Dateien in den ersten Zeilen hinter dem Unicode
+	Reminder japanische Textzeichen zu sehen sind. Sind diese nicht zu erkennen, sollte
+	der Texteditor nicht zur Bearbeitung verwendet werden.</p>
+		<p>
+	Um die Quellcodes korrekt zu speichern, kann in vielen Editoren unter "Speichern
+	unter ..." der Zeichensatz ausgewät werden.<br />
+	Hier ist wichtig, dass Unicode (UTF-8 ohne Signatur) - Codepage 65001 o.äverwendet
+	wird.</p>
+		<p>
+	Signatur bedeutet, dass der Editor 3 Bytes zu Beginn der Textdatei schreibt, die
+	die Datei als Unicode-Datei identifizieren. Mit PHP füdiese Bytes jedoch zu
+	falschen Browserausgaben.</p>
+		<p>
+	Wer kein Texteditor hat, kann unter Windows Visual Studio 2005 Express Edition verwenden
+	(kostenlos bei Microsoft). Dort Datei &gt; Speichern unter ... &gt; Speichern (auf
+	den Pfeil nach unten) &gt; Mit Codierung speichern &gt; Codierung: Unicode (UTF-8
+	ohne Signatur) - Codepage 65001, Zeilenende: Unix (LF)</p>
+		<h3>
+			Neues Skript anlegen</h3>
+		<p>
+			Zuerst muss in der Tabelle sys_menu ein neuer Menüag definiert werden und der
+			(Menühe gelöt werden.</p>
+		<p>
+			Folgender Header kann dann verwendet werden füe PHP-Dateien verwendet werden:</p>
+		<p class="code">&lt;?php<br />
+/***************************************************************************<br />
+			&nbsp;*  You can find the license in the docs directory &nbsp; &nbsp; &nbsp; &nbsp;
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+ *<br />
+			&nbsp;*  Unicode Reminder .. &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+ *<br />
+			&nbsp;*  Display some status information about the server and Opencaching &nbsp;
+			&nbsp; &nbsp; &nbsp;*<br />
+			&nbsp;***************************************************************************/
+			<br />
+			$opt['rootpath'] = './';<br />
+			require($opt['rootpath'] . '/lib2/web.inc.php');<br />
+	$tpl->name = 'neuestemplate';<br />
+	$tpl->menuitem = MNU_NEU;<br />
+			...<br />
+			[eigene Quellcodes]<br />
+			...<br />
+			$tpl-&gt;display();</p>
+		<p>
+			Befindet sich das Skript in Basisverzeichnis der Quellcodes, muss $opt['rootpath']
+			nicht definiert werden.<br />
+			$tpl-&gt;name gibt den Namen des Template im Verzeichnis /template2/design an. Diese
+			Templates enden mit .tpl (muss bei $tpl-&gt;name weggelassen werden).</p>
+		<h4>
+			Methoden von $tpl</h4>
+		<p>
+			$tpl ist eine Klasse vom Typ OcSmarty, die von Smarty vererbt ist.</p>
+		<p>
+			Üer die Funktionen von Smarty hinaus gibt es folgende (wichtigen) Funktionen:</p>
+		<p>
+			<table>
+				<tr>
+					<td style="width: 198px; height: 21px">
+						<strong>Name</strong></td>
+					<td style="width: 768px; height: 21px">
+						<strong>Funktion</strong></td>
+				</tr>
+				<tr>
+					<td style="width: 198px; height: 21px">
+						error($id)</td>
+					<td style="width: 768px; height: 21px">
+						Zeigt ein Template mit der Fehlermeldung an. $id ist eine Konstant die in lib2/error.inc.php
+						definiert ist. In /template2/design/error.tpl muss der Text fü Fehlermeldung
+						definiert sein.</td>
+				</tr>
+				<tr>
+					<td style="width: 198px">
+						redirect($page)</td>
+					<td style="width: 768px">
+						Leitet den Browser an das angegebene Skript weiter und beendet die Skriptausfü.<br />
+						Kann ein absoluter oder relativer Pfad (zum Quellcode-Basisverzeichnis) sein.<br />
+						Paramter müurlencode() codiert sein.<br />
+						Beispiel: $tpl-&gt;redirect('viewcache.php?wp=' . urlencode($wp));</td>
+				</tr>
+				<tr>
+					<td style="width: 198px; height: 21px">
+						assign_rs($name, $rs)</td>
+					<td style="width: 768px; height: 21px">
+						Erstellt ein 2-Dimensionales Array in das alle Datensäe des Recordset $rs gespeichert
+						werden und weist der Smarty-Variable $name dieses Array zu.</td>
+				</tr>
+			</table>
+		</p>
+		<h4>
+			Attribute von $sql</h4>
+		<p>
+			<table>
+				<tr>
+					<td style="width: 197px">
+						<strong>Name</strong></td>
+					<td style="width: 769px">
+						<strong>Funktion</strong></td>
+				</tr>
+				<tr>
+					<td style="width: 197px">
+						$name</td>
+					<td style="width: 769px">
+						Name der .tpl-Datei im Verzeichnis /template2/design/</td>
+				</tr>
+				<tr>
+					<td style="width: 197px">
+						$main_template</td>
+					<td style="width: 769px">
+						Normalerweise immer sys_main.tpl</td>
+				</tr>
+				<tr>
+					<td style="width: 197px">
+						$title</td>
+					<td style="width: 769px">
+						Seitentitel (wird auch durch menuitem gesetzt)</td>
+				</tr>
+				<tr>
+					<td style="width: 197px; height: 4px">
+						$menuitem</td>
+					<td style="width: 769px; height: 4px">
+						siehe oben "Neues Skript anlegen"</td>
+				</tr>
+				<tr>
+					<td style="width: 197px">
+						$popup</td>
+					<td style="width: 769px">
+						Ist popup=false, wird die Menütur usw. nicht angezeigt.<br />
+						Beispiel siehe "weitere Koodinatensysteme" auf viewcache.php</td>
+				</tr>
+				<tr>
+					<td style="width: 197px">
+						$target</td>
+					<td style="width: 769px">
+						Ziel fü Login. Wird üerweise automatisch gesetzt.</td>
+				</tr>
+			</table>
+		</p>
+		<h3>
+			SQL-Abfragen</h3>
+		<p>
+			Alle SQL-Abfragen müdurch die Framework-Funktionen abgesetzt werden. Die Datenbankverbindung
+			wird automatisch mit dem ersten SQL-Befehl aufgebaut.</p>
+		<p>
+			Wichtige Funktionen (vollstäige Liste siehe lib2/db.inc.php):</p>
+		<p>
+			<table>
+				<tr>
+					<td style="width: 246px">
+						<strong>Name</strong></td>
+					<td style="width: 720px">
+						<strong>Funktion</strong></td>
+				</tr>
+				<tr>
+					<td style="width: 246px">
+						sql($sql, [parameters])</td>
+					<td style="width: 720px">
+						Wrapper füql_query()<br />
+						Parameter werden mit sql_escape() bearbeitet, dadurch sind bei konsquenter Verwendung
+						keine SQL-Injections möch. Parameter kön entweder als Array angegeben werden,
+						oder als normale Parameter beim Funktionsaufruf.<br />
+						<br />
+						Gibt ein Recordset zurür />
+						<br />
+						Aufrufbeispiel:<br />
+						sql("SELECT id FROM table WHERE a='&amp;1' AND b='&amp;2'", 12345, 'abc');</td>
+				</tr>
+				<tr>
+					<td style="width: 246px">
+						sql_value($sql, default, [parameters])</td>
+					<td style="width: 720px">
+						Gleich wie sql(), es wird jedoch nur die erste Zelle der ersten Zeile zurüeben.<br />
+						Default gibt den Wert an, der verwendet wird wenn die erste Zelle NULL ist oder
+						das Ergebnis der Abfrage keine Zeile zurüt.</td>
+				</tr>
+				<tr>
+					<td style="width: 246px">
+						sql_escape($value)</td>
+					<td style="width: 720px">
+						Ruft mysql_real_escape auf.</td>
+				</tr>
+				<tr>
+					<td style="width: 246px">
+						sql_escape_backtick($value)</td>
+					<td style="width: 720px">
+						Escape fükticks. Kann verwendet werden um Feldname dynamisch zu setzen.<br />
+						<br />
+						Beispiel:<br />
+						sql("SELECT id FROM table WHERE `" . sql_escape_backtick('a') . "`='&amp;1' AND
+						b='&amp;2'", 12345, 'abc');</td>
+				</tr>
+				<tr>
+					<td style="width: 246px">
+						sql_fetch_assoc($rs)</td>
+					<td style="width: 720px">
+						Wrapper füql_fetch_assoc($rs)</td>
+				</tr>
+				<tr>
+					<td style="width: 246px">
+						sql_temp_table($table)</td>
+					<td style="width: 720px">
+						Reserviert einen Namen füe Temporä Tabelle. Wird mysql_pconnect() verwendet
+						um die Datenbankverbindung aufzubauen (siehe config2/settings.inc.php), werden diese
+						Tabellen korrekt gelöt. Ansonsten besteht die Möchkeit, dass temporä Tabellen
+						üehere Skriptaufrufe existent bleiben.<br />
+						<br />
+						Beispiel siehe /tops.php</td>
+				</tr>
+				<tr>
+					<td style="width: 246px">
+						sql_drop_temp_table($table)</td>
+					<td style="width: 720px">
+						Löt die temporä Tabelle</td>
+				</tr>
+				<tr>
+					<td style="width: 246px">
+						sql_free_result($rs)</td>
+					<td style="width: 720px">
+						Wrapper füql_free_result()</td>
+				</tr>
+				<tr>
+					<td style="width: 246px">
+						sql_affected_rows()</td>
+					<td style="width: 720px">
+						Wrapper füql_affected_rows()</td>
+				</tr>
+				<tr>
+					<td style="width: 246px">
+						sql_insert_id()</td>
+					<td style="width: 720px">
+						Wrapper füql_insert_id()</td>
+				</tr>
+				<tr>
+					<td style="width: 246px">
+						sql_num_rows($rs)</td>
+					<td style="width: 720px">
+						Wrapper füql_num_rows()</td>
+				</tr>
+				<tr>
+					<td style="width: 246px">
+						sqlf()</td>
+					<td style="width: 720px">
+						wie sql(), die SQL-Befehle werden jedoch im SQL-Debugger unter Framework angezeigt.</td>
+				</tr>
+				<tr>
+					<td style="width: 246px">
+						sqlf_value()</td>
+					<td style="width: 720px">
+						wie sql_value(), die SQL-Befehle werden jedoch im SQL-Debugger unter Framework angezeigt.</td>
+				</tr>
+				<tr>
+					<td style="width: 246px; height: 21px">
+						sqll()</td>
+					<td style="width: 720px; height: 21px">
+						wie sql(), die SQL-Befehle werden jedoch im SQL-Debugger unter Business Layer angezeigt.</td>
+				</tr>
+				<tr>
+					<td style="width: 246px">
+						sqll_value()</td>
+					<td style="width: 720px">
+						wie sql_value(), die SQL-Befehle werden jedoch im SQL-Debugger unter Business Layer
+						angezeigt.</td>
+				</tr>
+			</table>
+		</p>
+		<h4>
+			SQL-Debugging</h4>
+		<p>
+			Um die Abarbeitung von SQL-Befehlen zu kontrollieren, muss in $opt['debug'] DEBUG_SQLDEBUGGER
+			gesetzt sein. Wird daraufhin eine URL mit dem Parameter &amp;sqldebug=1 aufgerufen,
+			werden alle beteiligten SQL-Befehle angezeigt. Die Ausgabe entspricht EXPLAIN EXTENDED
+			SELECT ... andere SQL-Befehle z.B. UPDATE und DELETE werden ebenfalls analysiert.</p>
+		<h3>
+			Sonstige globale Objekte</h3>
+		<p>
+			<table>
+				<tr>
+					<td style="width: 166px">
+						<strong>Name</strong></td>
+					<td style="width: 808px">
+						<strong>Funktion</strong></td>
+				</tr>
+				<tr>
+					<td style="width: 166px; height: 21px">
+						$cookie</td>
+					<td style="width: 808px; height: 21px">
+						Speichert einen Wert im Cookie. Generell sollten die Cookies so klein wie möch
+						gehalten werden.<br />
+						<br />
+						Lesen mit get($name, $default='')<br />
+						Setzen mit set($name, $value, $default=null)<br />
+						Löen mit un_set($name)<br />
+						Prüit is_set($name)</td>
+				</tr>
+				<tr>
+					<td style="width: 166px">
+						$login</td>
+					<td style="width: 808px">
+						Aktueller Benutzer<br />
+						<br />
+						$userid gibt die Userid zurüalls nicht eingeloggt ist $userid=0<br />
+						$username ist der Benutzername<br />
+						$admin gibt an, welche Admin-Rechte der Benutzer hat.</td>
+				</tr>
+				<tr>
+					<td style="width: 166px">
+						$translate</td>
+					<td style="width: 808px">
+						Funktion t($value) ützt Strings<br />
+						Wann immer möch direkt in den Templates ützen!<br />
+						Nicht im Quellcode!</td>
+				</tr>
+			</table>
+		</p>
+		<h3>
+			Programmierkonventionen</h3>
+		<ul>
+			<li>immer mb-String Funktionen einsetzen</li>
+		</ul>
+		<h3>
+			Einsatz auf Produktivsystemen</h3>
+		<p>
+			Sollten die Quellcodes auf Produktivsystem eingesetzt werden, sollten einige Sicherheitsmaßahmen
+			beachtet werden. Unter anderen:</p>
+		<ul>
+			<li>safe_mode von PHP aktivieren</li>
+			<li>Lesezugriff füzeichnisse sperren. Unter anderem: doc (insb. doc/sql), doc2,
+				util (mit Ausnahmen z.B. util/google_earth), util2, cache, cache2 (ohne cache2/captcha),
+				config2, lang, lib (ohne lib/tinymce), lib2, templates2 (wenn das neue Templatesystem
+				fertig ist, wird das Verfahren vereinfacht).</li>
+			<li>$opt['debug'] auf DEBUG_NO setzen</li>
+		</ul>
+
+</body>
+</html>

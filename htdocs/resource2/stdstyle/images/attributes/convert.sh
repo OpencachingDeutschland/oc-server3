@@ -1,0 +1,107 @@
+#!/bin/bash
+
+function convertRound
+{
+	rm -f "$1-disabled.png"
+	rm -f "$1-no.png"
+
+	cp "$1.png" "$1-disabled.png"
+	mogrify -modulate 150,0 "$1-disabled.png"
+	composite -compose src-over -geometry +0+0 "cross-35x35-round.png" "$1-disabled.png" "$1-no.png"
+}
+function convertTriangle
+{
+	rm -f "$1-disabled.png"
+	rm -f "$1-no.png"
+
+	cp "$1.png" "$1-disabled.png"
+	mogrify -modulate 100,0 "$1-disabled.png"
+	composite -compose src-over -geometry +0+0 "cross-40x35-triangle.png" "$1-disabled.png" "$1-no.png"
+}
+function convertRectangle
+{
+	rm -f "$1-disabled.png"
+	rm -f "$1-no.png"
+
+	cp "$1.png" "$1-disabled.png"
+	mogrify -modulate 150,0 "$1-disabled.png"
+	composite -compose src-over -geometry +0+0 "cross-35x35-rectangle.png" "$1-disabled.png" "$1-no.png"
+}
+
+#convertRound "aircraft"
+#convertRound "tide"
+#convertRound "cave"
+#convertRound "rappeling"
+#convertRound "time"
+#convertRound "naturschutz"
+#convertRound "tools"
+#convertRound "fee"
+#convertRound "night"
+#convertRound "riddle"
+#convertRound "arith_prob"
+#convertRound "compass"
+#convertRound "scuba"
+#convertRound "ask"
+#convertRound "flashlight"
+#convertRound "oconly"
+#convertRound "season_snow"
+#convertRound "available"
+#convertRound "othercache"
+#convertRound "snow"
+#convertRound "boat"
+#convertRound "overnight"
+#convertRound "wiki"
+#convertRound "date"
+#convertRound "wwwlink"
+#convertRound "day"
+
+# automatische konvertierung nicht möglich
+#convertRound "bicycles"
+#convertRound "campfires"
+#convertRound "camping"
+#convertRound "dogs"
+#convertRound "jeeps"
+#convertRound "wheelchair"
+#convertRound "stroller"
+#convertRound "snowmobiles"
+#convertRound "picnic"
+#convertRound "quads"
+#convertRound "offtrail"
+#convertRound "mtbs"
+#convertRound "motorcycles"
+#convertRound "horses"
+#convertRound "family_forbid"
+#convertRound "family_notrec"
+#convertRound "family_rec"
+#convertRound "family_allow"
+
+# nachbearbeitung notwendig
+#convertTriangle "train"
+#convertTriangle "danger"
+#convertTriangle "cliff"
+#convertTriangle "hunting"
+#convertTriangle "animals"
+#convertTriangle "plants"
+#convertTriangle "mine"
+#convertTriangle "ticks"
+#convertTriangle "thorn"
+
+#convertRectangle "webcam"
+#convertRectangle "submerged"
+#convertRectangle "nogps"
+#convertRectangle "moving"
+#convertRectangle "interestsign"
+#convertRectangle "indoor"
+#convertRectangle "water"
+#convertRectangle "wading"
+#convertRectangle "swimming"
+#convertRectangle "steep"
+#convertRectangle "restrooms"
+#convertRectangle "public"
+#convertRectangle "phone"
+#convertRectangle "parking"
+#convertRectangle "hiking"
+#convertRectangle "firstaid"
+#convertRectangle "climbing"
+#convertRectangle "car"
+#convertRectangle "letter"

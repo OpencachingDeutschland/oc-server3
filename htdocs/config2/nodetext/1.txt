@@ -1,0 +1,12 @@
+site_title Opencaching.de
+site_url http://www.opencaching.de
+site_contact http://opencaching.wikispaces.com/Kontakt
+faq_login http://cms.opencaching.de/index.php?id=login
+faq_npa http://cms.opencaching.de/index.php?id=140
+faq_htmltag http://www.opencaching.de/articles.php?page=htmltags
+terms_of_service articles.php?page=impressum#tos
+faq_cacheinfo articles.php?page=cacheinfo
+terms_privacy articles.php?page=dsb
+faq_logpw articles.php?page=cacheinfo#logpw
+faq_searchtime articles.php?page=cacheinfo#time
+

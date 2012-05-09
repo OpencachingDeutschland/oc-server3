@@ -1,0 +1,43 @@
+body {
+	background-color: #FFFFFF;
+	
+  font-family:verdana,arial,helvetica,helv,sans-serif;
+  font-size:x-small;
+  letter-spacing:0px;
+  /*line-height:3ex;*/
+  vertical-align:top;
+  
+	scrollbar-3dlight-color: #F0F0EE;
+	scrollbar-arrow-color: #676662;
+	scrollbar-base-color: #F0F0EE;
+	scrollbar-darkshadow-color: #DDDDDD;
+	scrollbar-face-color: #E0E0DD;
+	scrollbar-highlight-color: #F0F0EE;
+	scrollbar-shadow-color: #F0F0EE;
+	scrollbar-track-color: #F5F5F5;
+}
+
+h1
+{
+  font-family:sans-serif;
+  font-size:x-small;
+  text-align:justify;
+}
+
+h2
+{
+  font-family:sans-serif;
+  font-size:x-small;
+  text-align:justify;
+}
+
+a
+{
+	color:black;
+	text-decoration:underline;
+}
+
+a:hover
+{
+	color:blue;
+}

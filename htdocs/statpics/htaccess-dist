@@ -1,0 +1,3 @@
+RewriteEngine On
+RewriteRule ^([A-Z]{2})/([0-9]+)\.jpg$ /ocstats.php?lang=$1&userid=$2 [R,L]
+RewriteRule ^([0-9]+)\.jpg$ /ocstats.php?userid=$1 [R,L]

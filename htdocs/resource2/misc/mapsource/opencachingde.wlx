@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<weblink xmlns="http://www.garmin.com/xmlschemas/WebLinkExtensions/v1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.garmin.com/xmlschemas/WebLinkExtensions/v1 http://www.garmin.com/xmlschemas/WebLinkExtensions/v1/WebLinkExtensionsv1.xsd">
+	<displayName>
+		<token xsi:type="LocalizedLiteral_t">
+			<content language="DEU" string="Unter opencaching.de nach Geocaches in der Nähe suchen" />
+      <content language="ENU" string="Find nearby Geocaches on opencaching.de" />
+			<content language="PLK" string="ZnajdĹş pobliskie kryjĂłwki na stronie opencaching.de" />
+		</token>
+	</displayName>
+	<wlxNamespace>www.garmin.com/xmlschemas/WebLinkExtensions/opencaching.de</wlxNamespace>
+	<version>2</version>
+	<supportedLanguages>
+		<supportedLanguage>CHS</supportedLanguage>
+		<supportedLanguage>CHT</supportedLanguage>
+		<supportedLanguage>CSY</supportedLanguage>
+		<supportedLanguage>DAN</supportedLanguage>
+		<supportedLanguage>DEU</supportedLanguage>
+		<supportedLanguage>ELL</supportedLanguage>
+		<supportedLanguage>ENU</supportedLanguage>
+		<supportedLanguage>ESP</supportedLanguage>
+		<supportedLanguage>FIN</supportedLanguage>
+		<supportedLanguage>FRA</supportedLanguage>
+		<supportedLanguage>HRV</supportedLanguage>
+		<supportedLanguage>HUN</supportedLanguage>
+		<supportedLanguage>ITA</supportedLanguage>
+		<supportedLanguage>JPN</supportedLanguage>
+		<supportedLanguage>KOR</supportedLanguage>
+		<supportedLanguage>NLD</supportedLanguage>
+		<supportedLanguage>NOR</supportedLanguage>
+		<supportedLanguage>PLK</supportedLanguage>
+		<supportedLanguage>PTG</supportedLanguage>
+		<supportedLanguage>RUS</supportedLanguage>
+		<supportedLanguage>SKY</supportedLanguage>
+		<supportedLanguage>SLV</supportedLanguage>
+		<supportedLanguage>SVE</supportedLanguage>
+		<supportedLanguage>TRK</supportedLanguage>
+	</supportedLanguages>
+	<url>
+		<token xsi:type="Literal_t" content="http://www.opencaching.de/search.php?client=mapsource&amp;searchto=searchbydistance&amp;f_userowner=1&amp;f_userfound=1&amp;f_ignored=1&amp;showresult=1&amp;expert=0&amp;output=HTML&amp;sort=bydistance&amp;f_inactive=1&amp;distance=25&amp;unit=km" />
+		<token xsi:type="Literal_t" content="&amp;latNS="/>
+		<token xsi:type="Value_t" format="LAT_ORIENTATION"/>
+		<token xsi:type="Literal_t" content="&amp;lonEW="/>
+		<token xsi:type="Value_t" format="LON_ORIENTATION"/>
+		<token xsi:type="Literal_t" content="&amp;lat_h=" />
+		<token xsi:type="Value_t" format="LAT_DEGREES_FLOOR" />
+		<token xsi:type="Literal_t" content="&amp;lat_min=" />
+		<token xsi:type="Value_t" format="LAT_MINUTES" />
+		<token xsi:type="Literal_t" content="&amp;lon_h=" />
+		<token xsi:type="Value_t" format="LON_DEGREES_FLOOR" />
+		<token xsi:type="Literal_t" content="&amp;lon_min=" />
+		<token xsi:type="Value_t" format="LON_MINUTES" />
+	</url>
+</weblink>

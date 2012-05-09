@@ -1,0 +1,25 @@
+Hallo {username},
+
+soeben wurde in deinem Suchradius ein neuer Cache gemeldet:
+---
+{user} hat am {date} den Cache "{cachename}" versteckt.
+Entfernung: {distance} {unit} Richtung {bearing}
+Typ: {cachetype}
+Größe: {cachesize}
+
+Link: http://www.opencaching.de/viewcache.php?wp={wp_oc}
+---
+
+
+Die Einstellungen für deinen Suchradius kannst du unter
+http://www.opencaching.de/myprofile.php ansehen und bearbeiten.
+
+Happy Geocaching,
+das Opencaching.de-Team
+
+---
+Diese E-Mail wurde automatisch generiert - bitte nicht antworten. Falls du
+Kontakt mit Opencaching.de aufnehmen möchtest, kannst unter
+http://www.opencaching.de/articles.php?page=contact alle Möglichkeiten
+nachlesen. In dringenden Fällen kannst du die E-Mail-Adresse
+contact@opencaching.de verwenden.

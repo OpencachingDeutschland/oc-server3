@@ -1,0 +1,3 @@
+RewriteEngine on
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([0-9A-F])([0-9A-F])([0-9A-F]{6}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12}.+)$ /images/uploads/$1/$2/$1$2$3 [R,L]

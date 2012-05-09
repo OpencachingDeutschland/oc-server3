@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://earth.google.com/kml/2.0">
+<Document>
+  <LookAt>
+    <longitude>10.8</longitude>
+    <latitude>50.8</latitude>
+    <range>909966</range>
+    <tilt>0</tilt>
+    <heading>-2</heading>
+  </LookAt>
+  <NetworkLink>
+    <name>Opencaching</name>
+    <Url>
+      <href>http://www.opencaching.de/util2/google-earth/caches.php</href>
+      <viewRefreshTime>1</viewRefreshTime>
+      <viewRefreshMode>onStop</viewRefreshMode>
+    </Url>
+  </NetworkLink>
+</Document>
+</kml>

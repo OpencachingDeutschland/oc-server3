@@ -1,0 +1,126 @@
+<!ELEMENT oc11xml (attrlist*, user*, cache*, cachedesc*, cachelog*, picture*, removedobject*)>
+<!ATTLIST oc11xml
+	version CDATA #REQUIRED
+  date CDATA #REQUIRED
+  since CDATA #REQUIRED
+>
+
+<!ELEMENT attrlist (attr*)>
+<!ELEMENT user (id, username, pmr, datecreated, lastmodified)>
+<!ELEMENT cache (id, userid, name, longitude, latitude, type, status, country, size, desclanguages, difficulty, terrain, rating, waypoints, datehidden, datecreated, lastmodified)>
+<!ELEMENT cachedesc (id, cacheid, language, shortdesc, desc, hint, lastmodified)>
+<!ELEMENT cachelog (id, cacheid, userid, logtype, date, text, datecreated, lastmodified)>
+<!ELEMENT picture (id, url, title, object, attributes, datecreated, lastmodified)>
+<!ELEMENT removedobject (id, object, removeddate)>
+
+<!-- common elements -->
+<!ELEMENT id (#PCDATA)>
+<!ATTLIST id
+	id CDATA #IMPLIED
+	node CDATA #IMPLIED
+>
+<!ELEMENT datecreated (#PCDATA)>
+<!ELEMENT lastmodified (#PCDATA)>
+
+<!-- attrlist -->
+<!ELEMENT attr (#PCDATA)>
+<!ATTLIST attr
+	id CDATA #REQUIRED
+	icon_large CDATA #REQUIRED
+	icon_no CDATA #REQUIRED
+	icon_undef CDATA #REQUIRED
+>
+
+<!-- user -->
+<!ELEMENT username (#PCDATA)>
+<!ELEMENT pmr (#PCDATA)>
+
+<!-- cache -->
+<!ELEMENT userid (#PCDATA)>
+<!ATTLIST userid
+	id CDATA #IMPLIED
+	uuid CDATA #REQUIRED
+>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT latitude (#PCDATA)>
+<!ELEMENT longitude (#PCDATA)>
+<!ELEMENT type (#PCDATA)>
+<!ATTLIST type
+	id CDATA #REQUIRED
+	short CDATA #IMPLIED
+>
+<!ELEMENT status (#PCDATA)>
+<!ATTLIST status
+	id CDATA #REQUIRED
+>
+<!ELEMENT country (#PCDATA)>
+<!ATTLIST country
+	id CDATA #REQUIRED
+>
+<!ELEMENT size (#PCDATA)>
+<!ATTLIST size
+	id CDATA #REQUIRED
+>
+<!ELEMENT desclanguages (#PCDATA)>
+<!ELEMENT difficulty (#PCDATA)>
+<!ELEMENT terrain (#PCDATA)>
+<!ELEMENT rating (#PCDATA)>
+<!ATTLIST rating
+	waylength CDATA #REQUIRED
+	needtime CDATA #REQUIRED
+>
+<!ELEMENT waypoints (#PCDATA)>
+<!ATTLIST waypoints
+	gccom CDATA #IMPLIED
+	nccom CDATA #IMPLIED
+	oc CDATA #REQUIRED
+>
+<!ELEMENT datehidden (#PCDATA)>
+
+<!-- cachedesc -->
+<!ELEMENT cacheid (#PCDATA)>
+<!ATTLIST cacheid
+	id CDATA #IMPLIED
+>
+<!ELEMENT language (#PCDATA)>
+<!ATTLIST language
+	id CDATA #REQUIRED
+>
+<!ELEMENT shortdesc (#PCDATA)>
+<!ELEMENT desc (#PCDATA)>
+<!ATTLIST desc
+	html CDATA #REQUIRED
+>
+<!ELEMENT hint (#PCDATA)>
+
+<!-- cachelog -->
+
+<!-- cacheid see cachedesc -->
+<!-- userid see cache -->
+<!ELEMENT logtype (#PCDATA)>
+<!ATTLIST logtype
+	id CDATA #REQUIRED
+	recommended CDATA #IMPLIED
+>
+<!ELEMENT date (#PCDATA)>
+<!ELEMENT text (#PCDATA)>
+
+<!-- picture -->
+<!ELEMENT url (#PCDATA)>
+<!ELEMENT title (#PCDATA)>
+<!ELEMENT object (#PCDATA)>
+<!ATTLIST object
+	id CDATA #IMPLIED
+	type CDATA #REQUIRED
+	typename CDATA #IMPLIED
+>
+<!ELEMENT attributes (#PCDATA)>
+<!ATTLIST attributes
+	spoiler CDATA #IMPLIED
+	display CDATA #REQUIRED
+>
+
+<!-- removedobject -->
+
+<!-- object see picture -->
+<!ELEMENT removeddate (#PCDATA)>

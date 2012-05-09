@@ -1,0 +1,35 @@
+body {
+	background-color: #fff;
+}
+
+div#bg1 {
+	display: block; 
+	position: absolute; 
+	width: 500px; /* 330 */
+	height: 100%; 
+	left: -501px; /* 301 */
+	top: -2px; 
+	background-repeat: no-repeat; 
+	background-image: url(background-winter.jpg);
+}
+
+div#bg2 {
+	display: block; 
+	position: absolute;  
+	width: 500px;  /* 330 */
+	height: 100%; 
+	right: -501px;  /* 301 */
+	top: -2px; 
+	background-repeat: no-repeat; 
+	background-image: url(background-winter.jpg);
+	background-position: top right;
+}
+
+div#langstripe {
+	background: #fff url(bg-langstripe-winter.png) 0 100% repeat-x;
+}
+
+/* Hack for Internet 'Exploder' */
+html {
+	overflow-x:hidden;
+}

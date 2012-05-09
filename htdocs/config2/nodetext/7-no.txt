@@ -1,0 +1,9 @@
+site_contact http://opencachingno.wikispaces.com/Kontakt
+faq_login http://opencachingno.wikispaces.com/Sp%C3%B8rsm%C3%A5l+og+svar
+faq_npa http://opencachingno.wikispaces.com
+faq_htmltag http://opencachingno.wikispaces.com
+terms_of_service http://opencachingno.wikispaces.com/Bruksvilkar
+faq_cacheinfo http://opencachingno.wikispaces.com/Cache-egenskaper
+terms_privacy articles.php?page=dsb
+faq_logpw http://opencachingno.wikispaces.com
+faq_searchtime http://opencachingno.wikispaces.com

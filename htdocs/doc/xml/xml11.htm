@@ -1,0 +1,339 @@
+<html>
+	<head>
+		<title>Dokumentation Opencaching XML-Interface Version 1.1</title>
+		<meta name="vs_showGrid" content="True">
+	</head>
+	<body>
+		<h1>Dokumentation Opencaching XML-Interface Version 1.1</h1>
+		<p>
+			Das XML-Interface dient zum automatisierten abfragen aller Caches, Logeinträ, 
+			Benutzer und/oder Bilder. Dieses Interface ist nicht fübenutzer gedacht, 
+			sondern primäfüsite-Entwickler.
+		</p>
+		<h2>Ausgabeformat</h2>
+		<p>
+		Die Ausgabe ist eine oder mehrere xml,zip,gz&nbsp;oder bz2-Dateien. Es stehen 2 
+		Üertragungsmodi bereit: in Paketen zu&nbsp;je 500 Datensäen&nbsp;oder in 
+		einer Datei.
+		<P>Die folgenden XML-Abschnitte stehen zur Verfü Sie werden immer in dieser 
+			Reihenfolge ausgegeben:
+			<ol>
+				<li>
+				user (Benutzerdaten)
+				<li>
+				caches (Caches)
+				<li>
+				cachedesc (Cachebeschreibungen)
+				<li>
+				cachelog (Logeinträ)
+				<li>
+				picture (Bilder)
+				<li>
+					removedobject (gelöte Objekte)</li>
+			</ol>
+		<P></P>
+		<h3>Allgemeine XML-Elemente</h3>
+		<h4>lastmodified</h4>
+		<p>Datum an dem dieser Datensatz zuletzt geäert wurde. Es werden keine 
+			Abhäigkeiten berühtigt. D.h. Wenn eine Cachebeschreibung geäert wird, 
+			äert sich nur deren lastmodified, nicht jedoch das des Caches. Datumsangaben 
+			sind immer in der Form "yyyy-mm-dd hh:mm:ss" oder "yyyy-mm-dd"</p>
+		<h4>datecreated</h4>
+		<p>Datum an dem dieser Datensatz angelegt wurde.</p>
+		<h4>id</h4>
+		<p>Zu unterscheiden ist die id (identifier) und die uuid (universal unique 
+			identifier). Die id (Zahl) ist ein nur auf der jeweiligen Webseite gür 
+			identifier, wäend die uuid (alphanumerische Folge) auf jeder Seite die 
+			Opencaching-Daten verwendet güsein sollte. Beispiel: bei dem Datenabgleich 
+			von www.opencaching.de und devel.opencaching.de wird auf devel.opencaching.de 
+			eine neue id fü Datensatz erzeugt und die uuid beibhalten.</p>
+		<h3>Attributliste</h3>
+		<p>&lt;attrlist&gt;<br />
+			&nbsp; &lt;attr id="1" icon_large="http://www.opencaching.de/images/attributes/night.gif"<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; icon_no="http://www.opencaching.de/images/attributes/night-no.gif"<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; icon_undef="http://www.opencaching.de/images/attributes/night-undef.gif"&gt;<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;![CDATA[Nachtcache]]&gt;<br />
+			&nbsp; &lt;/attr&gt;<br />
+			&nbsp; &lt;attr id="6" icon_large="http://www.opencaching.de/images/attributes/oconly.gif"<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; icon_no="http://www.opencaching.de/images/attributes/oconly-no.gif"<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; icon_undef="http://www.opencaching.de/images/attributes/oconly-undef.gif"&gt;<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;![CDATA[Nur bei Opencaching]]&gt;<br />
+			&nbsp; &lt;/attr&gt;<br />
+			&nbsp; &lt;attr id="7" icon_large="http://www.opencaching.de/images/attributes/wwwlink.gif"<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; icon_no="http://www.opencaching.de/images/attributes/wwwlink-no.gif"<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; icon_undef="http://www.opencaching.de/images/attributes/wwwlink-undef.gif"&gt;<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;![CDATA[Nur Hyperlink]]&gt;<br />
+			&nbsp; &lt;/attr&gt;<br />
+			&nbsp; &lt;attr id="8" icon_large="http://www.opencaching.de/images/attributes/letterbox.gif"<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; icon_no="http://www.opencaching.de/images/attributes/letterbox-no.gif"<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; icon_undef="http://www.opencaching.de/images/attributes/letterbox-undef.gif"&gt;<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;![CDATA[Letterbox (benöt Stempel)]]&gt;<br />
+			&nbsp; &lt;/attr&gt;<br />
+			&lt;/attrlist&gt;<br />  
+  	</p>
+		<h3>user (Benutzerdaten)</h3>
+		<p>&lt;user&gt;<br>
+			&nbsp; &lt;id id="12345"&gt;4CE405E5-C110-CE00-9E88-8907F2212C73&lt;/id&gt;<br>
+			&nbsp; &lt;username&gt;&lt;![CDATA[Joe Geocacher]]&gt;&lt;/username&gt;<br>
+			&nbsp; &lt;pmr&gt;0&lt;/pmr&gt;<br>
+			&nbsp; &lt;datecreated&gt;2005-12-24 11:22:34&lt;/datecreated&gt;<br>
+			&nbsp; &lt;lastmodified&gt;2005-12-29 15:38:01&lt;/lastmodified&gt;<br>
+			&lt;/user&gt;</p>
+		<h4>username</h4>
+		<p>Benutzername</p>
+		<h4>pmr</h4>
+		<p>1: Der Benutzer hat angegeben ein PMR-Funkgeräauf Kanal 2 mit auf Tour zu 
+			nehmen.<br>
+			0: Keine Angabe</p>
+		<h3>cache (Caches)</h3>
+		<P>&lt;cache&gt;<BR>
+			&nbsp; &lt;id id="270"&gt;D455C916-7737-8210-F7FF-C6872E561CEB&lt;/id&gt;<br>
+			&nbsp; &lt;user id="113" uuid= 
+			"CAA9E3C5-50DF-4E9E-191F-CECABA6A8A19"&gt;&lt;![CDATA[TeamSchnitzeljagd]]&gt;&lt;/user&gt;<br>
+			&nbsp; &lt;name&gt;&lt;![CDATA[Pegeluhr]]&gt;&lt;/name&gt;<br>
+			&nbsp; &lt;longitude&gt;8.45058&lt;/longitude&gt;<br>
+			&nbsp; &lt;latitude&gt;49.46393&lt;/latitude&gt;<br>
+			&nbsp; &lt;type id="2" short="Trad."&gt;&lt;![CDATA[normaler 
+			Cache]]&gt;&lt;/type&gt;<br>
+			&nbsp; &lt;status id="2"&gt;&lt;![CDATA[Momentan nicht 
+			verfü]&gt;&lt;/status&gt;<br>
+			&nbsp; &lt;country id="DE"&gt;&lt;![CDATA[Deutschland]]&gt;&lt;/country&gt;<br>
+			&nbsp; &lt;size id="2"&gt;&lt;![CDATA[mikro]]&gt;&lt;/size&gt;<br>
+			&nbsp; &lt;desclanguages&gt;DE&lt;/desclanguages&gt;<br>
+			&nbsp; &lt;difficulty&gt;4&lt;/difficulty&gt;<br>
+			&nbsp; &lt;terrain&gt;2&lt;/terrain&gt;<BR>
+			&nbsp;&nbsp;&lt;rating waylength="1.5" needtime= "0.5"&gt;&lt;/rating&gt;<br>
+			&nbsp; &lt;waypoints gccom= "" nccom="" oc="OCR2D2"&gt;&lt;/waypoints&gt;<br>
+			&nbsp; &lt;datehidden&gt;2005-08-01&lt;/datehidden&gt;<br>
+			&nbsp; &lt;datecreated&gt;2005-09-08 15:45:02&lt;/datecreated&gt;<br>
+			&nbsp; &lt;lastmodified&gt;2005-12-20 20:58:41&lt;/lastmodified&gt;<br>
+			&nbsp; &lt;attributes&gt;<br>
+			&nbsp;&nbsp;&nbsp;&nbsp;&lt;attribute id="6"&gt;&lt;![CDATA[ Nur bei Opencaching]]&gt;&lt;/attribute&gt;<br>
+			&nbsp; &lt;/attributes&gt;<br>
+  			&lt;/cache&gt;</P>
+		<h3>cachedesc (Cachebeschreibungen)</h3>
+		<p>
+			&lt;cachedesc&gt;<br>
+			&nbsp; &lt;id id="5697"&gt;9BA489ED-AC62-B26D-6EC8-4D52DF3CD008&amp;&lt;/id&gt;<br>
+			&nbsp; &lt;cacheid 
+			id="4927"&gt;AB551E31-8633-0CD1-26AD-324355D4E920&lt;/cacheid&gt;<br>
+			&nbsp; &lt;language id="EN"&gt;&lt;![CDATA[Englisch]]&gt;&lt;/language&gt;<br>
+			&nbsp; &lt;shortdesc&gt;&lt;![CDATA[Drive-In-Cache especially for 
+			motorcyclists]]&gt;&lt;/shortdesc&gt;<br>
+			&nbsp; &lt;desc html="1"&gt;&lt;![CDATA[This MoCache is intended to connect the 
+			MoCache series to other<br>
+			motorcycle-friendly caches on The Alb. Furthermore this great road<br>
+			between Erpfingen and Undingen was really worth it... &amp;lt;br /&amp;gt;<br>
+			&nbsp; &amp;lt;br /&amp;gt;<br>
+			&nbsp; &amp;lt;a 
+			href=&amp;quot;http://people.freenet.de/6x7/mocaches.html&amp;quot;&amp;gt;Other 
+			MoCaches&lt;/a&amp;gt;<br>
+			&nbsp; ]]&gt;&lt;/desc&gt;<br>
+			&nbsp; &lt;hint&gt;&lt;![CDATA[guard rail pole]]&gt;&lt;/hint&gt;<br>
+			&nbsp; &lt;lastmodified&gt;2005-12-24 14:38:13&lt;/lastmodified&gt;<br>
+			&lt;/cachedesc&gt;
+		</p>
+		<h3>cachelog (Logeinträ)</h3>
+		<p>
+			&lt;cachelog&gt;<br>
+			&nbsp; &lt;id id="13037"&gt;F0DAC335-0FA6-3479-45AF-03E2F6BC28B9&lt;/id&gt;<br>
+			&nbsp; &lt;cacheid 
+			id="3439"&gt;048A8BF3-AA75-0741-CF60-6FBAE239EE11&lt;/cacheid&gt;<br>
+			&nbsp; &lt;user id="113" 
+			uuid="CAA9E3C5-50DF-4E9E-191F-CECABA6A8A19"&gt;&lt;![CDATA[Team 
+			Schnitzeljagd]]&gt;&lt;/user&gt;<BR>
+			&nbsp; &lt;logtype id="1" recommended="0"&gt;&lt;![CDATA[Gefunden]]&gt;&lt;/type&gt;<br>
+			&nbsp; &lt;date&gt;2005-05-18&lt;/date&gt;<br>
+			&nbsp; &lt;text&gt;&lt;![CDATA[Gut gefunden.&amp;lt;br /&amp;gt;<br>
+			Gr&amp;uuml;&amp;szlig;e von&amp;lt;br /&amp;gt;<br>
+			Volker]]&gt;&lt;/text&gt;<br>
+			&nbsp; &lt;datecreated&gt;2005-12-24 06:24:07&lt;/datecreated&gt;<br>
+			&nbsp; &lt;lastmodified&gt;2005-12-24 06:24:07&lt;/lastmodified&gt;<br>
+			&lt;/cachelog&gt;
+		</p>
+		<h3>picture (Bilder)</h3>
+		<p>
+			&lt;picture&gt;<br>
+			&nbsp; &lt;id id="4619"&gt;558990D1-4DE2-50AF-B53A-135E87704D70&lt;/id&gt;<br>
+			&nbsp; 
+			&lt;url&gt;http://www.opencaching.de/images/uploads/558990D1-4DE2-50AF-B53A-135E87704D70.jpg&lt;/url&gt;<br>
+			&nbsp; &lt;title&gt;&lt;![CDATA[Schlurfende Gestalten]]&gt;&lt;/title&gt;<br>
+			&nbsp; &lt;desc html="0"&gt;&lt;/desc&gt;<br>
+			&nbsp; &lt;object id="73240" type="1" typename= 
+			"cachelog"&gt;4FE4B999-315D-43C1-11C2-2B81E68168CD&lt;/object&gt;<BR>
+			<SPAN class="m">&nbsp; &lt;</SPAN><SPAN class="t">attributes</SPAN>
+			<SPAN class="t">spoiler</SPAN><SPAN class="m">="</SPAN>0<SPAN class="m">"</SPAN><SPAN class="t"> display</SPAN><SPAN class="m">="</SPAN>1<SPAN class="m">"</SPAN><SPAN class="m"> /&gt;&lt; /SPAN&gt; 
+			<br>
+			&nbsp; &lt;datecreated&gt;2005-12-24 01:01:38&lt;/datecreated&gt;<br>
+			&nbsp; &lt;lastmodified&gt;2005-12-24 01:01:38&lt;/lastmodified&gt;<br>
+			&lt;/picture&gt;
+		</p>
+		<h3>removedobject (gelöte Objekte)</h3>
+		<p>
+			&lt;removedobject&gt;<br>
+			&nbsp; &lt;id id="748" /&gt;<br>
+			&nbsp; &lt;object id="2388" type="6" 
+			typename="picture"&gt;3C5A2147-BC21-CC96-B240-E3BEA829D936&lt;/object&gt;<br>
+			&nbsp; &lt;removeddate&gt;2005-12-24 15:11:23&lt;/removeddate&gt;<br>
+			&lt;/removedobject&gt;
+		</p>
+		<h2>Datenauswahl</h2>
+		<p>Die Auswahl erfolgt zum einen durch den Paramter modifiedsince, mit dem 
+			inkrementelle Updates gesteuert werden, zum anderen üine Gebietsauswahl.</p>
+		<h3>Zu üagende Daten auswäen</h3>
+		<P>Folgende Parameter stehen zur Verfüum die zu üagenden Daten 
+			auszuwäen.</P>
+		<P>Die Werte dü1 oder 0 sein, Default ist 0.<BR>
+			0=Datensäe nicht üagen<BR>
+			1=Datensäe üagen</P>
+		<UL>
+			<LI>
+			user
+			<LI>
+			cache
+			<LI>
+			cachedesc
+			<LI>
+			cachelog
+			<LI>
+			picture
+			<LI>
+				removedobject</LI></UL>
+		<h3>modifiedsince</h3>
+		<p>Alle Datensä üagen, die nach diesem Datum angelegt oder modifiziert 
+			wurden. Das Datumsformat ist yyyymmddhhnnss</p>
+		<h3>Gebietsauswahl</h3>
+		<p>Es muss keine Gebietsauswahl getroffen werden. Eine Kombination von Land,  
+			Koordinaten oder cacheid ist nicht möch.</p>
+		<h4>Nach Land</h4>
+		<p>Parameter country ... wird dieser Parameter angegeben, werden nur Datensä 
+			üagen, die mit Caches in Zusammenhang stehen, die in diesem Land versteckt 
+			wurden. User-Records werden nicht üagen, removedobjects werden alle 
+			ügen.</p>
+		<P>Füder muss dabei angegeben werden, ob nur Bilder üagen werden die 
+			von Caches stammen oder auch von Cachelogs:<BR>
+			Paramter: picturefromcachelog = 0/1, default 0</P>
+		<h4>Nach Koordinaten</h4>
+		<P>Parameter&nbsp;lat, lon, distance&nbsp;... werden diese Parameter angegeben, 
+			werden nur Datensä üagen, die mit Caches in Zusammenhang stehen, die in 
+			diesem&nbsp;Gebiet versteckt wurden. User-Records werden nicht üagen, 
+			removedobjects werden alle ügen.</P>
+		<h4>Nach cacheid</h4>
+		<P>Parameter&nbsp;cacheid&nbsp;... wird dieser Parameter angegeben, 
+			werden nur Datensä üagen, die mit Cache in Zusammenhang stehen.
+			User-Records werden nicht üagen, 
+			removedobjects werden alle ügen.</P>
+		<P>Füder muss dabei angegeben werden, ob nur Bilder üagen werden die 
+			von Caches stammen oder auch von Cachelogs:<BR>
+			Paramter: picturefromcachelog = 0/1, default 0</P>
+		<h4>Nach Wegpunkt</h4>
+		<p>Paramter wp ... wie cacheid, ausser dass statt der cacheid der Opencaching Wegpunkt verwendet wird.</p>
+		<h4>Nach uuid</h4>
+		<p>Paramter uuid ... wie cacheid, ausser dass statt der cacheid die UUID des Caches verwendet wird.</p>
+		<h3>Beispiele</h3>
+		<p>1. Alle Daten inkrementell abrufen<BR>
+			<A>http://www.opencaching.de/xml/ocxml11.php?modifiedsince=&lt;date&gt;&amp;user=1&amp;cache=1&amp;cachedesc=1&amp;cachelog=1&amp;picture=1&amp;removedobject=1</A></p>
+		<P>2. Alle Daten von Deutschland inkrementell abrufen<BR>
+			<A>http://www.opencaching.de/xml/ocxml11.php?modifiedsince=&lt;date&gt;&amp;cache=1&amp;cachedesc=1&amp;cachelog=1&amp;picture=1&amp;removedobject=1&amp;country=DE&amp;picturefromcachelog=1</A></P>
+		<P>3. Alle Caches ohne Logs von Deutschland inkrementell abrufen<BR>
+			<A>http://www.opencaching.de/xml/ocxml11.php?modifiedsince=&lt;date&gt;&amp;cache=1&amp;cachedesc=1&amp;picture=1&amp;removedobject=1&amp;country=DE</A></P>
+		<P>4. Alle Daten im Umkreis von 100 km abrufen<BR>
+			<A>http://www.opencaching.de/xml/ocxml11.php?modifiedsince=&lt;date&gt;&amp;cache=1&amp;cachedesc=1&amp;cachelog=1&amp;picture=1&amp;removedobject=1&amp;lat=48&amp;lon=9&amp;distance=100&amp;picturefromcachelog=1</A></P>
+		<P>5. Alle Bilder abrufen<BR>
+			<A>http://www.opencaching.de/xml/ocxml11.php?modifiedsince=&lt;date&gt;&amp;picture=1</A></P>
+		<P>6. Alle Bilder von Caches abrufen die in Deutschland versteckt sind<BR>
+			<A>http://www.opencaching.de/xml/ocxml11.php?modifiedsince=&lt;date&gt;&amp;picture=1&amp;country=DE</A></P>
+		<P>7. Alle Bilder von Caches und deren Logs abrufen die in Deutschland versteckt 
+			sind<BR>
+			<A>http://www.opencaching.de/xml/ocxml11.php?modifiedsince=&lt;date&gt;&amp;picture=1&amp;country=DE</A>&amp;picturefromcachelog=1</P>
+		<P>Diese Anfragen werden mit einem kurzen XML-Stream beantwortet, der die 
+			XML-Session-Id zurüt. Mit dieser Id kön dann die Daten abgerufen 
+			werden.</P>
+		<P>&lt;?xml version="1.0"?&gt;<BR>
+			&lt;ocxmlsession&gt;<BR>
+			&nbsp; &lt;sessionid&gt;12345&lt;/sessionid&gt;<BR>
+			&nbsp; &lt;records user="193" cache="211" cachedesc="235" cachelog="439" 
+			picture="108" removeobject="19" /&gt;<BR>
+			&lt;/ocxmlsession&gt;</P>
+		<P>Die Sessionid ist 24h gü danach muss eine neue sessionid angefordert 
+			werden. Die Anzahl der Datensä muss nicht exakt mit den üagenen 
+			ünstimmen - mehr Datensäe werden jedoch auf keinen Fall üagen. Die 
+			Summe der Datensäe ist in diesem Beispiel 1205 - es werden also 3 Aufrufe 
+			benöt (500, 500, 205 Datensäe).</P>
+		<P>Die Daten kön dann mit folgender Anfrage abgerufen werden:<BR>
+			<A>http://www.opencaching.de/xml/ocxml11.php?sessionid=12345&amp;file=1</A><BR>
+			<A>http://www.opencaching.de/xml/ocxml11.php?sessionid=12345&amp;file=2</A><BR>
+			<A>http://www.opencaching.de/xml/ocxml11.php?sessionid=12345&amp;file=3</A></P>
+		<H3>Alle Ergebnisse mit einem Aufruf abfragen</H3>
+		<P>Um alle Ergebnisse in einer Datei abzurufen muss bei dem Aufruf der Paramter 
+			session auf 0 gesetzt werden.</P>
+		<P>Beispeil:<BR>
+			<A>http://www.opencaching.de/xml/ocxml11.php?modifiedsince=&lt;date&gt;&amp;user=1&amp;cache=1&amp;cachedesc=1&amp;cachelog=1&amp;picture=1&amp;removedobject=1&amp;session=0</A></P>
+		<H3>Dateikomprimierung einstellen</H3>
+		<P>Dei Dateikomprimierung kann mit dem Paramter zip eingestellt weren. Möche 
+			Werte sind 0, zip, bzip2, gzip. Null bedeutet hier keine Kompression. Wird 
+			keine Kompression angegeben, wird zip verwendet.</P>
+		<P>Beispeil:<BR>
+			<A>http://www.opencaching.de/xml/ocxml11.php?modifiedsince=&lt;date&gt;&amp;user=1&amp;cache=1&amp;cachedesc=1&amp;cachelog=1&amp;picture=1&amp;removedobject=1&amp;session=0&amp;zip=bzip2</A><BR>
+			<A>http://www.opencaching.de/xml/ocxml11.php?sessionid=12345&amp;file=1&amp;zip=gzip</A></P>
+            <H3>XML-Optionen</H3>
+            <P>Die folgenden XML-Optionen mübei jedem Aufruf üben
+            werden.</P>
+            <P>xmldecl ... 0 = keine Xml-Deklaration / (Default) 1=Xml-Deklaration<br>
+            doctype ... 0 = keine Xml-Document-Type-Definition /
+            (Default) 1=Xml-Document-Type-Definition<br>
+            ocxmltag ... 0 = kein oc11xml-Tag zu Beginn / (Default) 1=oc11xml-Tag
+            zu Beginn<br>
+            cdata ... 0=XML-Steuerzeichen in Texten maskieren (z.B. &amp; =&gt;
+            &amp;amp;) / (Default) 1=Texte in CDATA-Abschnitte einfassen<br>
+            charset ... (Default) iso-8859-1 / utf-8<br />
+            attrlist ... (Default) 0 = keine Attributliste &uuml;bertragen / 1 = Attributliste &uuml;bertragen</P>
+            <h4><a>Beispiele</a></h4>
+            <P>http://www.opencaching.de/xml/ocxml11.php?modifiedsince=20060320000000&amp;user=1&amp;cache=1&amp;cachelog=1&amp;cachedesc=1&amp;picture=1&amp;removedobject=1&amp;session=1&amp;charset=utf-8&amp;cdata=1&amp;xmldecl=0&amp;ocxmltag=0&amp;doctype=0<br>
+            http://www.opencaching.de/xml/ocxml11.php?sessionid=4711&amp;file=1&amp;charset=utf-8&amp;cdata=1&amp;xmldecl=0&amp;ocxmltag=0&amp;doctype=0</P>
+		<H3>Sonstige Bemerkungen</H3>
+		<UL>
+			<LI>
+			Fü ersten Aufruf des Interface muss als modifiedsince das Datum 1.8.2005 
+			um 00:00:00 Uhr angegeben werden. Es gibt keine Datensäe die vor diesem Datum 
+			angelegt wurden.
+			<LI>
+				Um Probleme wegen Differenzen der Uhrzeit zwischen Client und Server zu 
+				umgehen, muss fü nästen Inkrementellen Abruf der Daten das Datum um Kopf 
+				der XML-Datei minus 1 Sekunde angeben werden:<BR>
+				<SPAN class="m"><BR>&lt;?</SPAN><SPAN class="pi">xml version="1.0" encoding="iso-8859-1" 
+  standalone="no" </SPAN><SPAN class="m">?&gt;</SPAN>
+				<BR>
+				<SPAN><SPAN class="d">&lt;!DOCTYPE oc11xml<I>...</I>&gt;</SPAN>&nbsp;<BR></SPAN>&nbsp;
+				<SPAN class="m">&lt;</SPAN><SPAN class="t">oc11xml</SPAN><SPAN class="t"> 
+  version</SPAN><SPAN class="m">="</SPAN>1.1<SPAN class="m">"</SPAN><SPAN class="t"> 
+  date</SPAN><SPAN class="m">="</SPAN><STRONG>2006-03-10 18:37:34</STRONG><SPAN class="m">"</SPAN><SPAN class="t"> since</SPAN><SPAN class="m">="</SPAN>2006-03-08 
+				22:02:42<SPAN class="m">"</SPAN><SPAN class="m">&gt;</SPAN>
+			<LI>
+			Zeitverschiebungen / unterschiedliche Zeitzonen zwischen Client und Server 
+			werden nicht unterstü			<LI>
+			Das XML-Dokument enthä folgende DTD (Document Type Definition): 
+			http://www.opencaching.de/xml/ocxml11.dtd
+			<LI>
+			Äderungen werden des XML-Interface werden im Entwicklerforum bekanntgegeben: 
+			http://develforum.opencaching.de/viewforum.php?f=2
+			<LI>
+				Fragen zum Interface kön ebenfalls im Entwicklerforum&nbsp;gestellt werden: <A href="http://develforum.opencaching.de/viewforum.php?f=2">
+					http://develforum.opencaching.de/viewforum.php?f=2</A>
+			<LI>
+				Der Quellcode des Interface kann hier downgeloadet werden: <A href="http://devel.opencaching.de/viewcvs/viewcvs.cgi/html/xml/ocxml11.php?rev=1.2&amp;content-type=text/vnd.viewcvs-markup">
+					http://devel.opencaching.de/viewcvs/viewcvs.cgi/html/xml/ocxml11.php?rev=1.2&amp;content-type=text/vnd.viewcvs-markup</A>
+			<LI>
+				Eine Referenzimplementierung kann hier downgeloadet werden: <A href="http://devel.opencaching.de/viewcvs/viewcvs.cgi/html/util/ocxml11client/">
+					http://devel.opencaching.de/viewcvs/viewcvs.cgi/html/util/ocxml11client/</A></LI></UL>
+		<P>Lizenz:</P>
+		<UL>
+			<LI>
+			der Quellcode steht unter der GNU Gerneral Public Licenses
+			<LI>
+Fuer die Nutzung des XML-Interface ist eine gesonderte Nutzungserlaubnis durch den Betreiber von opencaching.de notwendig. Darin wird geregelt, auf welche Art und Weise die bezogenen Daten genutzt werden duerfen.
+		</LI></UL>
+		<P>&nbsp;</P>
+		</SPAN>
+	</body>
+</html>

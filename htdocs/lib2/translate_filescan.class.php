@@ -1,0 +1,119 @@
+<?php
+/***************************************************************************
+ *  You can find the license in the docs directory
+ *
+ *  Unicode Reminder メモ
+ ***************************************************************************/
+
+class translate_filescan
+{
+	private $msFilename;
+	private $msContent;
+	public $textlist;
+
+	function __construct($sFilename)
+	{
+		$this->filelist = array();
+		$this->msFilename = $sFilename;
+
+		$sContent = '';
+		$hFile = fopen($sFilename, 'rb');
+		while (!feof($hFile))
+			$sContent .= fread($hFile, 8192);
+		fclose($hFile);
+
+		$this->msContent = $sContent;
+	}
+
+	function parse()
+	{
+		$this->scanTranslationPlaceholders();
+		$this->scanTranslateFunctionCalls();
+	}
+
+	function scanTranslateFunctionCalls()
+	{
+		$nNextPos = strpos($this->msContent, "t"."('");
+		while ($nNextPos !== false)
+		{
+			// check for match
+			$bMatch = false;
+			if (substr($this->msContent, $nNextPos-12, 12) == '$translate->')
+				$bMatch = true;
+			else
+			{
+				if ($nNextPos == 0)
+					$sPrevChar = ' ';
+				else
+					$sPrevChar = substr($this->msContent, $nNextPos-1, 1);
+
+				if (preg_match('/^[a-zA-Z0-9_]$/', $sPrevChar) == 0)
+					$bMatch = true;
+			}
+
+			if ($bMatch == true)
+			{
+				$nEnd = $this->findEndOfPHPString($this->msContent, $nNextPos+3);
+
+				$nLine = $this->findLineOfPos($nNextPos);
+				$sText = substr($this->msContent, $nNextPos+3, $nEnd-$nNextPos-3);
+
+				$this->textlist[] = array('text' => $sText, 'line' => $nLine);
+			}
+
+			$nNextPos = strpos($this->msContent, "t"."('", $nNextPos+1);
+		}
+	}
+
+	function findEndOfPHPString($sCode, $nStartSearch)
+	{
+		$nEnd = 0;
+		while ($nEnd==0)
+		{
+			$nEnd = strpos($sCode, "'", $nStartSearch); 
+			if (substr($sCode, $nEnd-1, 1) == '\\')
+			{
+				$nStartSearch = $nEnd+1;
+				$nEnd = 0;
+			}
+		}
+	
+		return $nEnd;
+	}
+
+	function scanTranslationPlaceholders()
+	{
+		$nNextPos = strpos($this->msContent, '{'.'t');
+		while ($nNextPos !== false)
+		{
+			// check for match
+			if ((substr($this->msContent, $nNextPos, 3) == '{'.'t}') || 
+			    (substr($this->msContent, $nNextPos, 3) == '{'.'t '))
+			{
+				$nStart = strpos($this->msContent, '}', $nNextPos);
+				$nEnd = strpos($this->msContent, '{/t}', $nNextPos);
+
+				$nLine = $this->findLineOfPos($nNextPos);
+				$sText = substr($this->msContent, $nStart+1, $nEnd-$nStart-1);
+
+				// TODO:plural
+				$this->textlist[] = array('text' => $sText, 'line' => $nLine);
+			}
+
+			$nNextPos = strpos($this->msContent, '{'.'t', $nNextPos+1);
+		}
+	}
+
+	// TODO: performance ... scan once at __construct and store line positions
+	function findLineOfPos($nPos)
+	{
+		$nLine = 1;
+
+		for ($n = 0; $n < $nPos; $n++)
+			if (substr($this->msContent, $n, 1) == "\n")
+				$nLine++;
+
+		return $nLine;
+	}
+}
+?>

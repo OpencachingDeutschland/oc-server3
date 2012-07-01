@@ -9,8 +9,7 @@
 	<div class="content-txtbox-noshade" style="padding-right: 25px;">
 
 			<p>Wir freuen uns, dass Sie die Spenden-Seite aufgerufen haben. Neben tatkr&auml;ftigen, 
-			helfenden H&auml;nden im Freiwilligen-Team Geocaching.de f&uuml;r die Seiten <b>geocaching.de</b> und 
-			<b>opencaching.de</b> k&ouml;nnen wir zur Sicherung und Erweiterung des f&uuml;r Sie v&ouml;llig kostenfreien 
+			helfenden H&auml;nden im Freiwilligen-Team <b>opencaching.de</b> k&ouml;nnen wir zur Sicherung und Erweiterung des f&uuml;r Sie v&ouml;llig kostenfreien 
 			Angebotes Ihre Unterst&uuml;tzung gut gebrauchen.</p>
 
 			<p>Mit Ihrer freundlichen Spende sorgen Sie daf&uuml;r, dass wir die (Ersatz)Beschaffung 
@@ -19,35 +18,24 @@
 			<h1>Per PayPal spenden:</h1>
 
 			<p>Bei einer Spende &uuml;ber PayPal (Spenden-Button) betragen die Geb&uuml;hren f&uuml;r uns 1,9% + 0,35 .. 
-			So erreichen uns von einer 2,- Euro Spende 1,61 Euro (~80%). Besonders bei Betr&auml;gen unter 10 Euro k&ouml;nnte also eine 
-			'Spende per &Uuml;erweisung' zielf&uuml;hrender sein.</p>
+			So erreichen uns von einer 2,- Euro Spende 1,61 Euro (~80%).</p>
 
 			<p>Um per Paypal zu spenden, bitte auf folgendes Bild klicken:<br />
 				<div style="margin-left:50px;">
 					<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
-						<input type="hidden" name="cmd" value="_s-xclick" />
-						<input type="hidden" name="hosted_button_id" value="277103" />
-						<input type="image" src="https://www.paypal.com/de_DE/DE/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="" />
-						<img alt="" border="0" src="https://www.paypal.com/de_DE/i/scr/pixel.gif" width="1" height="1" />
+						<input type="hidden" name="cmd" value="_s-xclick">
+						<input type="hidden" name="hosted_button_id" value="EP7T62APWTCU6">
+						<input type="image" src="https://www.paypalobjects.com/de_DE/DE/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="Jetzt einfach, schnell und sicher online bezahlen – mit PayPal.">
+						<img alt="" border="0" src="https://www.paypalobjects.com/de_DE/i/scr/pixel.gif" width="1" height="1">
 					</form>
 				</div>
 			</p>
-
-			<h1>Per &Uuml;berweisung spenden:</h1>
-
-			<p>Kontonr. 1098419, BLZ 52050353,<br />
-			Kasseler Sparkasse, Inhaber: Deutsche Wanderjugend<br />
-			<u>Ganz wichtig</u>: Im Verwendungszweck wg. Zuordnung <b>&quot;Spende f&uuml;r Team Geocaching&quot;</b> angeben.</p>
-
-			<p><i>(Spenden sind steuerlich abzugsf&auml;hig, da als gemeinn&uuml;tzig anerkannt. Informationen hierzu und zu 
-			Zuwendungsbescheinigungen ("Spendenquittung") finden sie weiter unten im Text.)</i></p>
-
 			<div class="content2-container bg-blue02">
-	<p class="content-title-noshade-size3">
-		<img src="resource2/{$opt.template.style}/images/misc/32x32-news.png" style="align: left; margin-right: 10px;" width="32" height="32" alt="Bekanntmachung" />
-		Bekanntmachung vom 23.10.2008
-	</p>
-	</div>
+			<p class="content-title-noshade-size3">
+			<img src="resource2/{$opt.template.style}/images/misc/32x32-news.png" style="align: left; margin-right: 10px;" width="32" height="32" alt="Bekanntmachung" />
+			Bekanntmachung vom 23.10.2008
+			</p>
+			</div>
 
 			<p>Liebe Benutzer von Geocaching.de und Opencaching.de,</p>
 

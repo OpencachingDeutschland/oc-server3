@@ -28,43 +28,35 @@
 <p><b>Betreiber des Internetangebotes</b></p>
 
 			<p>Das Internetangebot auf Opencaching.de wurde in gemeinschaftlicher 
-			Arbeit von mehreren Privatpersonen erstellt. Mit Ausnahme der unten 
+			Arbeit von mehreren Privatpersonen erstellt und wird seitdem vom Verein <b>Opencaching Deutschland</b> betrieben. Mit Ausnahme der unten 
 			aufgef&uuml;hrten Bereiche ist nach &sect; 10 Absatz 3 MDStV f&uuml;r den Inhalt des 
 			Internetaufritts verantwortlich:</p>
 
 <p>Herausgeber, Betreiber und rechtlich verantwortlich f&uuml;r die Inhalte unter Opencaching.de ist:<br />
 <br />
 Herausgeber (Postanschrift)<br />
-Deutsche Wanderjugend<br />
-im Verband Deutscher Gebirgs- und Wandervereine e.V.<br />
-Wilhelmsh&ouml;her Allee 157<br />
-34121 Kassel<br />
+Verein Opencaching Deutschland<br />
+c/o Michael Vaahsen<br />
+Hattsteiner Allee 26<br />
+61250 Usingen<br />
 <br />
-Telefon: 0561/400498-0<br />
-E-Mail: info@wanderjugend.de<br />
+Telefon: 0172/3011455<br />
+E-Mail: verein@opencaching.de<br />
 <b>ACHTUNG</b>: Fragen und Hinweise zu Schatzverstecken oder den Nutzungsbedingungen von opencaching.de 
 k&ouml;nnen wir leider nicht beantworten. Sie erhalten <u>keine</u> Antwort!<br />
 Bitte richten Sie Ihre Frage ausschlie&szlig;lich an die E-Mailadresse 
 <a href="mailto:contact@opencaching.de">contact@opencaching.de</a><br />
 <br />
 Verantwortlich im Sinne des TDG/MStV<br />
-Eingetragen im Vereinsregister des Amtsgerichtes Stuttgart: VR432<br />
 <br />
-Bundesjugendbeirat der Deutschen Wanderjugend<br />
-Der Bundesjugendbeirat (=Bundesvorstand)<br />
-der Deutschen Wanderjugend<br />
+Verein Opencaching Deutschland
 <br />
-Zur Zeit sind im Bundesjugendbeirat (Stand 10.04.2011):<br />
+Zur Zeit sind im BGB-Vorstand (Stand 30.06.2012):<br />
 <br />
-* Elisabeth Schmidt, Verbandsjugendwartin<br />
-* Matthias Sch&auml;fer, stellv. Verbandsjugendwart<br />
-* Jens Bohl, Finanzverwalter<br />
-* Daniel Gabel, Beisitzer<br />
-* Michael Kaminski, Beisitzer<br />
-* Ramona Richert, Beisitzerin<br />
-* Silvia R&ouml;ll, Beisitzerin<br />
-<br />
-Vertretungsberechtigter Gesch&auml;ftsf&uuml;hrer: J&ouml;rg Bertram</p>
+* Michael Vaahsen, Vorsitzender<br />
+* Gerald Halbig, stellv. Vorsitzender<br />
+* Daniel Christ, Kassenwart<br />
+<br /></p>
 
 			
 			<p>Alle Rechte und Pflichten von namentlich gekennzeichneten Artikeln liegen bei den jeweiligen Autoren. 
@@ -107,8 +99,8 @@ Vertretungsberechtigter Gesch&auml;ftsf&uuml;hrer: J&ouml;rg Bertram</p>
 			Vorschriften nur durch Stichproben kontrollieren und ist deshalb darauf 
 			angewiesen, dass fragw&uuml;rdige oder rechtswidrige Inhalte von den Benutzern gemeldet werden. Die 
 			Meldung kann direkt &uuml;ber den Melde-Hyperlink in jedem Cachelisting oder per E-Mail an
-      <a href="mailto:webmaster@opencaching.de">webmaster@opencaching.de</a> erfolgen. Die 
-			entsprechenden Inhalte werden dann schnellstm&ouml;glich vom Opencaching-Team kontrolliert
+      <a href="mailto:verein@opencaching.de">verein@opencaching.de</a> erfolgen. Die 
+			entsprechenden Inhalte werden dann schnellstm&ouml;glich vom Verein Opencaching Deutschland kontrolliert
       und bei Bedarf unverz&uuml;glich entfernt.</p>
 			
 			<p><b>Wie definiert Opencaching.de den Begriff "Geocache"?</b></p>

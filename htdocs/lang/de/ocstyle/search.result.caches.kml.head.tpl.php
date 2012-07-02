@@ -3,7 +3,7 @@
 <Document>
 	<Style id="tradi">
 		<IconStyle>
-			<scale>.4</scale>
+			<scale>1</scale>
 			<Icon>
 				<href>http://www.opencaching.de/resource2/misc/google-earth/tradi.png</href>
 			</Icon>
@@ -11,7 +11,7 @@
 	</Style>
 	<Style id="multi">
 		<IconStyle>
-			<scale>.4</scale>
+			<scale>1</scale>
 			<Icon>
 				<href>http://www.opencaching.de/resource2/misc/google-earth/multi.png</href>
 			</Icon>
@@ -19,7 +19,7 @@
 	</Style>
 	<Style id="virtual">
 		<IconStyle>
-			<scale>.4</scale>
+			<scale>1</scale>
 			<Icon>
 				<href>http://www.opencaching.de/resource2/misc/google-earth/virtual.png</href>
 			</Icon>
@@ -27,7 +27,7 @@
 	</Style>
 	<Style id="webcam">
 		<IconStyle>
-			<scale>.4</scale>
+			<scale>1</scale>
 			<Icon>
 				<href>http://www.opencaching.de/resource2/misc/google-earth/webcam.png</href>
 			</Icon>
@@ -35,7 +35,7 @@
 	</Style>
 	<Style id="event">
 		<IconStyle>
-			<scale>.4</scale>
+			<scale>1</scale>
 			<Icon>
 				<href>http://www.opencaching.de/resource2/misc/google-earth/event.png</href>
 			</Icon>
@@ -43,7 +43,7 @@
 	</Style>
 	<Style id="mystery">
 		<IconStyle>
-			<scale>.4</scale>
+			<scale>1</scale>
 			<Icon>
 				<href>http://www.opencaching.de/resource2/misc/google-earth/myst.png</href>
 			</Icon>
@@ -51,7 +51,7 @@
 	</Style>
 	<Style id="mathe">
 		<IconStyle>
-			<scale>.4</scale>
+			<scale>1</scale>
 			<Icon>
 				<href>http://www.opencaching.de/resource2/misc/google-earth/math.png</href>
 			</Icon>
@@ -59,7 +59,7 @@
 	</Style>
 	<Style id="drivein">
 		<IconStyle>
-			<scale>.4</scale>
+			<scale>1</scale>
 			<Icon>
 				<href>http://www.opencaching.de/resource2/misc/google-earth/drivein.png</href>
 			</Icon>
@@ -67,7 +67,7 @@
 	</Style>
 	<Style id="moving">
 		<IconStyle>
-			<scale>.4</scale>
+			<scale>1</scale>
 			<Icon>
 				<href>http://www.opencaching.de/resource2/misc/google-earth/moving.png</href>
 			</Icon>
@@ -75,7 +75,7 @@
 	</Style>
 	<Style id="other">
 		<IconStyle>
-			<scale>.4</scale>
+			<scale>1</scale>
 			<Icon>
 				<href>http://www.opencaching.de/resource2/misc/google-earth/unknown.png</href>
 			</Icon>

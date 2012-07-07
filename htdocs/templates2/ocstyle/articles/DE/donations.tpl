@@ -8,12 +8,10 @@
 	</div>
 	<div class="content-txtbox-noshade" style="padding-right: 25px;">
 
-			<p>Wir freuen uns, dass Sie die Spenden-Seite aufgerufen haben. Neben tatkr&auml;ftigen, 
-			helfenden H&auml;nden im Freiwilligen-Team <b>opencaching.de</b> k&ouml;nnen wir zur Sicherung und Erweiterung des f&uuml;r Sie v&ouml;llig kostenfreien 
-			Angebotes Ihre Unterst&uuml;tzung gut gebrauchen.</p>
+			<p>Wir freuen uns, dass Ihr die Spenden-Seite aufgerufen haben. Neben tatkr&auml;ftigen, helfenden H&auml;nden im Freiwilligen-Team <b>opencaching.de</b> k&ouml;nnen wir zur Sicherung und Erweiterung des f&uuml;r Euch v&ouml;llig kostenfreien 
+			Angebotes Eure Unterst&uuml;tzung gut gebrauchen.</p>
 
-			<p>Mit Ihrer freundlichen Spende sorgen Sie daf&uuml;r, dass wir die (Ersatz)Beschaffung 
-			notwendiger Hardware finanzieren k&ouml;nnen. Details zur Verwendung finden Sie weiter unten.</p>
+			<p>Mit Eurer freundlichen Spende sorgt Ihr daf&uuml;r, dass wir die (Ersatz)Beschaffung notwendiger Hardware finanzieren k&ouml;nnen. Details zur Verwendung finden Ihr weiter unten.</p>
 
 			<h1>Per PayPal spenden:</h1>
 
@@ -26,74 +24,54 @@
 						<input type="hidden" name="cmd" value="_s-xclick">
 						<input type="hidden" name="hosted_button_id" value="EP7T62APWTCU6">
 						<input type="image" src="https://www.paypalobjects.com/de_DE/DE/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="Jetzt einfach, schnell und sicher online bezahlen – mit PayPal.">
-						<img alt="" border="0" src="https://www.paypalobjects.com/de_DE/i/scr/pixel.gif" width="1" height="1">
+
+							<img alt="" border="0" src="https://www.paypalobjects.com/de_DE/i/scr/pixel.gif" width="1" height="1">
+
 					</form>
 				</div>
-			</p>
+			</p></p>
 			<div class="content2-container bg-blue02">
 			<p class="content-title-noshade-size3">
 			<img src="resource2/{$opt.template.style}/images/misc/32x32-news.png" style="align: left; margin-right: 10px;" width="32" height="32" alt="Bekanntmachung" />
-			Bekanntmachung vom 23.10.2008
+			Bekanntmachung vom 09.06.2012
 			</p>
 			</div>
 
-			<p>Liebe Benutzer von Geocaching.de und Opencaching.de,</p>
+			<p>Liebe Benutzer von opencaching.de,</p>
 
-			<p>wie ihr sicher mitbekommen habt, existieren die beiden Portale 
-			(Informationsplattform Geocaching.de und Schatzversteckdatenbank 
-			Opencaching.de) schon einige Jahre. Die stetig steigenden Zugriffszahlen 
-			(im Schnitt monatlich derzeit &uuml;ber 100.000 Besuche auf GC.de und &uuml;ber 
-			400.000 Besuche auf OC.de) sowie zunehmenden Schatzversteck- sowie 
-			Logeintr&auml;ge zeigen das enorme Interesse an den beiden Seiten.</p>
+			<p>wie ihr sicher mitbekommen habt, existiert die Plattform opencaching.de schon seit einigen Jahren und wurde stets ausschließlich mit Freiwilligenarbeit und Spenden am Leben erhalten. Die stetig steigenden Zugriffszahlen (im Schnitt monatlich derzeit &uuml;ber 
+			500.000 Besuche) sowie zunehmenden Schatzversteck- sowie Logeintr&auml;ge zeigen das enorme Interesse an dieser Seite.</p>
 
 			<p>Vieles wurde &quot;unter der Motorhaube&quot; immer wieder mal ver&auml;ndert und 
 			verbessert. Anregungen von Euch flie&szlig;en ein und das Angebot f&uuml;r Euch soll 
-			kontinuierlich ausgebaut werden. Opencaching.de und Geocaching.de arbeiten 
-			aufgrund der personellen Überschneidungen im Team mittlerweile immer enger Hand in Hand.</p>
+			kontinuierlich ausgebaut werden.</p>
 
 			<p>Das alles macht eine kleine Anzahl von Personen in ihrer knappen Freizeit v&ouml;llig 
-			freiwillig ohne jegliche Bezahlung und das wird auch so bleiben. Au&szlig;erdem sind beide 
-			Plattformen bis auf die Hinweise auf die Deutsche Wanderjugend und den Housing-Sponsor 
-			schwarzwald.de v&ouml;llig werbefrei gehalten.</p>
+			freiwillig ohne jegliche Bezahlung und das wird auch so bleiben.</p>
 
-			<p>Ihr habt uns im Geoclub immer wieder deutlich gemacht, dass ihr auch bereit seid, 
+			<p>Ihr habt uns immer wieder deutlich gemacht, dass ihr auch bereit seid, 
 			Euch mit kleinen Spenden an den Kosten f&uuml;r die Bereitstellung zu beteiligen.</p>
 
-			<p>Unsere beiden Sponsoren, die Deutsche Wanderjugend und unser Housing-Sponsor 
-			schwarzwald.de unterst&uuml;tzen uns bereits so gut wie m&ouml;glich und werden dies auch 
-			in Zukunft tun. Allerdings k&ouml;nnen sie nicht alle Kosten abdecken, so zum Beispiel 
+			<p>Unser Hauptsponsor schwarzwald.de unterst&uuml;tzt uns bereits so gut wie m&ouml;glich und wird dies auch 
+			in Zukunft tun. Allerdings kann er nicht alle Kosten abdecken, so zum Beispiel 
 			f&uuml;r die n&ouml;tigen Erweiterungen der Hardware, weil immer mehr Zugriffe erfolgen, oder 
 			im Notfall f&uuml;r Ersatzhardware im Falle von defekter Serverhardware.</p>
 
-			<p>Daher m&ouml;chten wir Euch beim Wort nehmen und bieten Euch bald die M&ouml;glichkeit, 
-			sich mit ausschlie&szlig;lich zweckgebundenen Spenden f&uuml;r die beiden Portale geocaching.de 
-			und opencaching.de zu beteiligen und uns und Euch somit noch mehr Handlungsspielraum 
+			<p>Daher m&ouml;chten wir Euch beim Wort nehmen und bieten Euch die M&ouml;glichkeit, 
+			sich mit ausschlie&szlig;lich zweckgebundenen Spenden f&uuml;r die Seite opencaching.de zu beteiligen und uns und Euch somit noch mehr Handlungsspielraum 
 			zu erm&ouml;glichen.</p>
 
-			<p>Wenn gew&uuml;nscht, stellt Euch die (gemeinn&uuml;tzig anerkannte) Deutsche Wanderjugend 
-			als formeller Betreiber eine Spendenbescheinigung (<b>Zuwendungsbescheinigung</b>) <b>ab</b> einem 
-			Spendenbetrag in H&ouml;he von <b>200 Euro</b> aus, die Ihr dann bei Eurer Steuererkl&auml;rung entsprechend 
-			geltend machen k&ouml;nnt. Spenden bis 200 Euro an gemeinn&uuml;tzige Organisationen werden i.d.R. 
-			vom Finanzamt ohne eine solche Zuwendungsbescheinigung problemlos anerkannt. Ein 
-			geeigneter Beleg einer Zahlung gen&uuml;gt, dazu bitte ggf. beim &ouml;rtlichen Finanzamt nachfragen. 
-			Sollte es mal Probleme geben, einfach melden.</p>
-
-			<p>Die Auswahl und Entscheidung &uuml;ber die Verwendung Eurer Spenden wird ausschlie&szlig;lich das 
-			Team Geocaching.de/Opencaching.de treffen, es orientiert sich dabei an den technischen 
-			Notwendigkeiten zum Erhalt und zum Verbessern der beiden Portale. Au&szlig;erdem werden wir 
+			<p>Die Auswahl und Entscheidung &uuml;ber die Verwendung Eurer Spenden wird ausschlie&szlig;lich der 
+			Verein Opencaching Deutschland treffen, er orientiert sich dabei an den technischen 
+			Notwendigkeiten zum Erhalt und zum Verbessern der Seite. Au&szlig;erdem werden wir 
 			Euch gerne stets &uuml;ber die aktuell mit den Spenden realisierten Verbesserungen informieren.</p>
 
 			<p>Was wir nicht planen, ist die Bereitstellung von z.B. Premium-Mitgliedschaften oder 
 			&auml;hnlichen Angeboten. Die Spenden werden rein zweckgebunden f&uuml;r den Betrieb und ggf. den 
-			Austausch oder Neukauf der n&ouml;tige Hardware und die Kosten durch die Domains von geocaching.de 
-			und opencaching.de verwendet. Die Gelder sollen die Qualit&auml;t der beiden Portale verbessern und 
+			Austausch oder Neukauf der n&ouml;tige Hardware und die Kosten durch die Domains von opencaching.de verwendet. Die Gelder sollen die Qualit&auml;t der Listingplattform verbessern und 
 			ggf. neue Funktionen erm&ouml;glichen. Eine anderweitige Verwendung ist nicht vorgesehen.</p>
 
-			<p>Wir freuen uns, wenn Ihr uns mit kleinen Spenden ein wenig unterst&uuml;tzt, dazu habt Ihr in 
-			K&uuml;rze die M&ouml;glichkeit, per PayPal oder per Bank&uuml;berweisung uns einen kleinen Betrag zukommen 
-			zu lassen.</p>
-
 			<p>Viele Gr&uuml;&szlig;e<br />
-			Euer Team Geocaching.de/Opencaching.de</p>
+			Euer Team von Opencaching Deutschland</p>
 
 </div>

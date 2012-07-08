@@ -208,7 +208,6 @@
 					<a href="http://www.opencaching.de" target="_blank"><img src="resource2/{$opt.template.style}/images/nodes/oc-de.png" width="100" height="22" /></a><br />
 					<a href="http://www.opencachingspain.es" target="_blank"><img src="resource2/{$opt.template.style}/images/nodes/oc-es.png" width="100" height="22" /></a><br />
 					<a href="http://www.opencaching.it" target="_blank"><img src="resource2/{$opt.template.style}/images/nodes/oc-it.png" width="100" height="22" /></a><br />
-					<a href="http://www.opencaching.jp" target="_blank"><img src="resource2/{$opt.template.style}/images/nodes/oc-jp.png" width="100" height="22" /></a><br />
 					<a href="http://www.opencaching.no" target="_blank"><img src="resource2/{$opt.template.style}/images/nodes/oc-no.png" width="100" height="22" /></a><br />
 					<a href="http://www.opencaching.nl" target="_blank"><img src="resource2/{$opt.template.style}/images/nodes/oc-nl.png" width="100" height="22" /></a><br />
 					<a href="http://www.opencaching.pl" target="_blank"><img src="resource2/{$opt.template.style}/images/nodes/oc-pl.png" width="100" height="22" /></a><br />

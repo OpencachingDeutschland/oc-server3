@@ -75,13 +75,12 @@
 														`cache_location`.`adm3`,
 														`cache_location`.`adm4`
 											 FROM `caches`
-								 INNER JOIN `cache_status` ON `caches`.`status`=`cache_status`.`id`
 								 INNER JOIN `user` ON `user`.`user_id`=`caches`.`user_id`
 									LEFT JOIN `cache_location` ON `caches`.`cache_id`=`cache_location`.`cache_id`
 											WHERE `caches`.`country`='&1' AND 
 											      `caches`.`date_hidden` >= curdate() AND 
 														`caches`.`type` = 6 AND 
-														`cache_status`.`allow_user_view`=1
+														`caches`.`status`=1
 									 ORDER BY `date_hidden` ASC LIMIT 0, 10",
 									          $sUserCountry);
 		$tpl->assign_rs('events', $rs);

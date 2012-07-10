@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /***************************************************************************
  *  You can find the license in the docs directory
  *
@@ -469,8 +469,8 @@
 	 */
 
 	// explanation of common login errors
-	$opt['cms']['login'] = 'http://blog.geocaching.de/?page_id=268';
+	$opt['cms']['login'] = 'http://blog.opencaching.de/?page_id=268';
 
 	// explanation of nature protection areas
-	$opt['cms']['npa'] = 'http://blog.geocaching.de/?page_id=274';
+	$opt['cms']['npa'] = 'http://blog.opencaching.de/?page_id=274';
 ?>

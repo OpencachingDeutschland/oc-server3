@@ -1,4 +1,4 @@
-{***************************************************************************
+﻿{***************************************************************************
 *  You can find the license in the docs directory
 *
 *  Unicode Reminder メモ
@@ -35,7 +35,7 @@
 		<td>
 			Hierfür gibt es ein eigenes Unterforum auf 
 			<a href="http://forum.geocaching-network.com/index.php?board=33.0">forum.geocaching-network.com</a>.
-			Dort findest du auch weitere Informationen, falls du in userem Team mitmachen möchtest.
+			Dort findest du auch weitere Informationen, falls du in unserem Team mitmachen möchtest.
 			<br />
 			&nbsp;
 		</td>

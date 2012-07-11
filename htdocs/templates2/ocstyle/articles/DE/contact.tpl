@@ -1,4 +1,4 @@
-{***************************************************************************
+﻿{***************************************************************************
 *  You can find the license in the docs directory
 *
 *  Unicode Reminder メモ
@@ -20,8 +20,8 @@
 			<br />
 			<br />
 			Wenn du ein spezielles Problem hast und darauf keine Antwort findest, 
-			kannst du dir unter <a href="http://www.geocaching.de/index.php?id=7">www.geocaching.de</a>
-			in der Forenliste das passende Forum raussuchen und dich dort erkundigen.<br />
+			kannst du dir unter <a href="http://forum.geocaching-network.com/">forum.geocaching-network.com</a>
+			ein passendes Forum raussuchen und dich dort erkundigen.<br />
 			&nbsp;
 		</td>
 	</tr>
@@ -33,22 +33,10 @@
 	<tr><td class="spacer"></td></tr>
 	<tr>
 		<td>
-			Für allgemeine Fragen zu <i>opencaching</i> gibt es ein eigenes Unterforum auf 
-			<a href="http://forum.geocaching-network.com/">forum.geocaching-network.com</a><br />
-			&nbsp;
-		</td>
-	</tr>
-
-	<tr><td class="spacer"></td></tr>
-	<tr>
-		<td class="header-small"><b>Für Entwickler</b></td>
-	</tr>
-	<tr><td class="spacer"></td></tr>
-	<tr>
-		<td>
-			Hast du Ideen oder Verbesserungsvorschläge für <i>opencaching.de</i>?<br />
-			Und könntest du eventuell selbst zu deren Realisierung beitragen?<br />
-			Für all diese Zwecke haben wir ein eigenes <a href="http://forum.geocaching-network.com/">Forum</a> eingerichtet.<br />
+			Hierfür gibt es ein eigenes Unterforum auf 
+			<a href="http://forum.geocaching-network.com/index.php?board=33.0">forum.geocaching-network.com</a>.
+			Dort findest du auch weitere Informationen, falls du in unserem Team mitmachen möchtest.
+			<br />
 			&nbsp;
 		</td>
 	</tr>

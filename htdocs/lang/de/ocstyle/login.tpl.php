@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /***************************************************************************
 											./lang/de/ocstyle/login.tpl.php
 															-------------------
@@ -64,7 +64,7 @@
 		{t}Not registered?{/t} <a href="register.php">{t}Register{/t}</a><br />
 		{t}Forgotten your password?{/t} <a href="newpw.php">{t}Create a new password{/t}</a><br />
 		{t}Forgotten your E-Mail-Address?{/t} <a href="remindemail.php">{t}Remind me{/t}</a><br />
-		{t}Here you can find more troubleshooting:{/t} <a href="http://blog.geocaching.de/?page_id=268">{t}Problems with login{/t}</a>.
+		{t}Here you can find more troubleshooting:{/t} <a href="http://blog.opencaching.de/?page_id=268">{t}Problems with login{/t}</a>.
 	</p>
 	<div class="buffer" style="width: 500px;">&nbsp;</div>
 </div>

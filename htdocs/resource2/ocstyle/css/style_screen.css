@@ -885,7 +885,7 @@ ul.nodot li {
 
 /* internal links without symbol */
 
-#ocmain a[href^="http://www.opencaching"], #ocmain a[href^="http://blog.geocaching"],#ocmain a[href^="http://opencaching"], #ocmain a[href^="http://leute.geocaching.de"], #ocmain a[href^="http://geocaching.de"], #ocmain a[href^="http://cms.opencaching"], #ocmain a[href^="http://cms.geocaching.de"], #ocmain a[href^="http://oc-devel"], #ocmain a[href^="http://www.dietz"]
+#ocmain a[href^="http://www.opencaching"], #ocmain a[href^="http://blog.opencaching"],#ocmain a[href^="http://opencaching"], #ocmain a[href^="http://leute.geocaching.de"], #ocmain a[href^="http://geocaching.de"], #ocmain a[href^="http://cms.opencaching"], #ocmain a[href^="http://cms.geocaching.de"], #ocmain a[href^="http://oc-devel"], #ocmain a[href^="http://www.dietz"]
 {
 	padding-right: 0;
 	background-image: none;

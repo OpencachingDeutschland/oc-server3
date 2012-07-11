@@ -18,7 +18,7 @@
 <div class="content2-container bg-blue02">
 	<p class="content-title-noshade-size3">
 		<img src="resource2/{$opt.template.style}/images/misc/32x32-news.png" style="align: left; margin-right: 10px;" width="24" height="24" alt="{t}News{/t}" />
-		<a href="http://blog.geocaching.de" style="color:rgb(88,144,168); text-decoration: none;">{t}News{/t}</a>
+		<a href="http://blog.opencaching.de" style="color:rgb(88,144,168); text-decoration: none;">{t}News{/t}</a>
 	</p>
 </div>
 {if !$extern_news}

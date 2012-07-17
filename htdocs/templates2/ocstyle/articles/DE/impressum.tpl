@@ -57,6 +57,7 @@ Zur Zeit sind im BGB-Vorstand (Stand 30.06.2012):<br />
 * Gerald Halbig, stellv. Vorsitzender<br />
 * Daniel Christ, Kassenwart<br />
 <br /></p>
+<p>
 
 			
 			<p>Alle Rechte und Pflichten von namentlich gekennzeichneten Artikeln liegen bei den jeweiligen Autoren. 

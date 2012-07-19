@@ -28,7 +28,7 @@
 	{if $list == true}
 		<ul>
 			{foreach from=$reportedcaches item=rc}
-				<li><a href="adminreports.php?id={$rc.id}">{$rc.new|escape}{$rc.name|escape} reported by {$rc.username|escape}</a></li>
+				<li><a href="adminreports.php?id={$rc.id}">{$rc.new|escape}{$rc.name|escape} reported by {$rc.username|escape} ({$rc.lastmodified|date_format:$opt.format.datelong})</a></li>
 			{foreachelse}
 				<li>{t}No reported caches{/t}</li>
 			{/foreach}

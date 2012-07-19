@@ -113,13 +113,14 @@
 		$rs = sql("SELECT `cr`.`id`,
 				               IF(`cr`.`status`=1,'(*) ', '') AS `new`,
 				               `c`.`name`,
-				               `u`.`username`
+				               `u`.`username`,
+                               `cr`.`lastmodified`
 				          FROM `cache_reports` `cr`
 				    INNER JOIN `caches` `c` ON `c`.`cache_id` = `cr`.`cacheid`
 				    INNER JOIN `user` `u` ON `u`.`user_id`  = `cr`.`userid`
 				         WHERE `cr`.`status` < 3
 				           AND (`cr`.`adminid` IS NULL OR `cr`.`adminid`=&1)
-			        ORDER BY `cr`.`status` DESC, `cr`.`lastmodified` DESC", 
+			        ORDER BY `cr`.`status` DESC, `cr`.`lastmodified` ASC", 
 			    $login->userid);
 
 		$tpl->assign_rs('reportedcaches', $rs);

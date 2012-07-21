@@ -192,29 +192,29 @@ function getChildWaypoints($cacheid)
 
 	/* begin insertion/change Uwe 20091215 for printing purposes
 	   reworked on 20100106 for better performance after Olivers intervention
+	   rewritten 2012-07-22 following for bugfix, first log was lost in print
 	 */
-	// See how many logs are in the db for the cache if logprinting is selected
-	// If not or just five logs may printed, the system will set this fixed values for calling the DB.
 
-	$rscount = 99; 											//Preset the value
-	$rsreturn = array(88);										//Preset the value
+	$rscount = 5; 
 
-	if(isset($_REQUEST['log']) && $_REQUEST['log'] == 'N'){
-		$rscount = 0;
+	if (isset($_REQUEST['log']))
+	  switch ($_REQUEST['log'])
+		{
+			case 'N': $rscount = 0; 
+								break;
+								
+			case 'A': $rscount = current(cache::getLogsCount($cacheid));
+								break;
+ 								
+			default:  if ($_REQUEST['log'] > 0)
+									$rscount = $_REQUEST['log'] + 0;
+		}	
 
-	}elseif (isset($_REQUEST['log']) && $_REQUEST['log'] == 'A'){
-		$rsreturn = cache::getLogsCount($cacheid);
-		$rscount = current($rsreturn);
-	}else{
-		$rscount = 5;
-	}	
-
-	$tpl->assign('logcount', $rscount);
-	$logs = cache::getLogsArray($cacheid, 0, $rscount);
+	$logs = cache::getLogsArray($cacheid, 0, $rscount+1);
 	
-	if (isset($logs[$rscount-1])) 
+	if (isset($logs[$rscount])) 
 	{
-		unset($logs[$rscount-1]);
+		unset($logs[$rscount]);
 		$tpl->assign('showalllogs', true);
 	}
 	$loganz = sizeof($logs);

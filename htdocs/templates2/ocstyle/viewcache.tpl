@@ -221,7 +221,7 @@
 				{/if}
 			</p>
 		</div>
-		<div id="viewcache-map" class="content2-container-2col-right">
+		<div id="viewcache-map" class="content2-container-2col-right" style="overflow:hidden">
 			{if $cachemap.iframe}
 				<div class="img-shadow">
 					<iframe src="{$cachemap.url}" width="200px" height="200px" frameborder="0">
@@ -233,7 +233,7 @@
 		</div>
 
 		<b>Maps:</b> 
-		<a href="map2.php?wp={$cache.wpoc}" target="_blank">{t}Opencaching.de{/t}</a>, <a href="http://www.mapquest.com/maps/map.adp?latlongtype=decimal&latitude={$cache.latitude}&longitude={$cache.longitude}" target="_blank">Mapquest</a>,<br />
+		<a href="map2.php?wp={$cache.wpoc}" target="_blank">{t}Opencaching.de{/t}</a>,<br /><a href="http://www.mapquest.com/maps/map.adp?latlongtype=decimal&latitude={$cache.latitude}&longitude={$cache.longitude}" target="_blank">Mapquest</a>,<br />
 		<a href="http://maps.google.de/maps?q={$cache.latitude},{$cache.longitude}+({$cache.wpoc}%20-%20{$cache.name|replace:'(':''|replace:')':''|escape:'url'})&z=15" target="_blank">{t}Google Maps{/t}</a>			
 	</div>
 </div>

@@ -209,7 +209,7 @@
 	<div class="content2-container-2col-right" id="viewcache-maptypes">
 		<div class="content2-container-2col-left" id="viewcache-numstats">
 			<p style="line-height: 1.4em;"><br /><br />
-				<img src="resource2/{$opt.template.style}/images/{if $cache.type==6}log{else}viewcache{/if}/16x16-{if $cache.type==6}attended{else}found{/if}.png" class="icon16" alt="" /> {if $cache.type==6} {$cache.attended} {t}Attended{/t}{else} {$cache.found} {t}Found{/t}{/if}<br />
+				<img src="resource2/{$opt.template.style}/images/{if $cache.type==6}log{else}viewcache{/if}/16x16-{if $cache.type==6}attended{else}found{/if}.png" class="icon16" alt="" /> {$cache.found} {if $cache.type==6} {t}Attended{/t}{else}{t}Found{/t}{/if}<br />
 				<img src="resource2/{$opt.template.style}/images/{if $cache.type==6}log{else}viewcache{/if}/16x16-{if $cache.type==6}will_attend{else}dnf{/if}.png" class="icon16" alt="" /> {if $cache.type==6} {$cache.willattend} {t}Will attend{/t}{else} {$cache.notfound} {t}Not Found{/t}{/if}<br />
 				<img src="resource2/{$opt.template.style}/images/viewcache/16x16-note.png" class="icon16" alt="" /> {$cache.note} {t}Notes{/t}<br />
 				<img src="resource2/{$opt.template.style}/images/viewcache/16x16-watch.png" class="icon16" alt="" /> {$cache.watcher} {t}Watched{/t}<br />

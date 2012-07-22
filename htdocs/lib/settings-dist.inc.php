@@ -156,6 +156,7 @@
 	$opt['template']['locales']['RU']['name'] = 'Russian';
 
 	$opt['locale']['EN']['locales'] = array('en_US.utf8', 'en_US', 'en');
+	$opt['locale']['EN']['format']['timezone'] = 'Europe/Berlin';
 	$opt['locale']['EN']['format']['date'] = '%x';
 	$opt['locale']['EN']['format']['datelong'] = '%d. %B %Y';
 	$opt['locale']['EN']['format']['datetime'] = '%x %I:%M %p';
@@ -164,6 +165,7 @@
 	$opt['locale']['EN']['format']['timesec'] = '%X';
 
 	$opt['locale']['DE']['locales'] = array('de_DE.utf8', 'de_DE@euro', 'de_DE', 'de', 'ge');
+	$opt['locale']['DE']['format']['timezone'] = 'Europe/Berlin';
 	$opt['locale']['DE']['format']['date'] = '%x';
 	$opt['locale']['DE']['format']['datelong'] = '%d. %B %Y';
 	$opt['locale']['DE']['format']['datetime'] = '%x %H:%M';
@@ -174,6 +176,7 @@
 	$opt['locale']['DE']['page']['subtitle2'] = '';
 
 	$opt['locale']['PL']['locales'] = array('pl_PL.utf8', 'pl_PL', 'pl');
+	$opt['locale']['PL']['format']['timezone'] = 'Europe/Berlin';
 	$opt['locale']['PL']['format']['date'] = '%x';
 	$opt['locale']['PL']['format']['datelong'] = '%d. %B %Y';
 	$opt['locale']['PL']['format']['datetime'] = '%x %H:%M';
@@ -182,6 +185,7 @@
 	$opt['locale']['PL']['format']['timesec'] = '%X';
 
 	$opt['locale']['NL']['locales'] = array('nl_NL.utf8', 'nl_NL', 'nl');
+	$opt['locale']['NL']['format']['timezone'] = 'Europe/Berlin';
 	$opt['locale']['NL']['format']['date'] = '%x';
 	$opt['locale']['NL']['format']['datelong'] = '%d. %B %Y';
 	$opt['locale']['NL']['format']['datetime'] = '%x %H:%M';
@@ -192,6 +196,7 @@
 	$opt['locale']['NL']['page']['subtitle2'] = '';
 
 	$opt['locale']['IT']['locales'] = array('it_IT.utf8', 'it_IT', 'it');
+	$opt['locale']['IT']['format']['timezone'] = 'Europe/Berlin';
 	$opt['locale']['IT']['format']['date'] = '%x';
 	$opt['locale']['IT']['format']['datelong'] = '%d. %B %Y';
 	$opt['locale']['IT']['format']['datetime'] = '%x %H:%M';
@@ -202,6 +207,7 @@
 	$opt['locale']['IT']['page']['subtitle2'] = '';
 
 	$opt['locale']['FR']['locales'] = array('fr_FR.utf8', 'fr_FR@euro', 'fr_FR', 'french', 'fr');
+	$opt['locale']['FR']['format']['timezone'] = 'Europe/Berlin';
 	$opt['locale']['FR']['format']['date'] = '%x';
 	$opt['locale']['FR']['format']['datelong'] = '%d. %B %Y';
 	$opt['locale']['FR']['format']['datetime'] = '%x %H:%M';
@@ -210,6 +216,7 @@
 	$opt['locale']['FR']['format']['timesec'] = '%X';
 
 	$opt['locale']['RU']['locales'] = array('ru_RU.utf8', 'ru_RU', 'ru');
+	$opt['locale']['RU']['format']['timezone'] = 'Europe/Berlin';
 	$opt['locale']['RU']['format']['date'] = '%x';
 	$opt['locale']['RU']['format']['datelong'] = '%d. %B %Y';
 	$opt['locale']['RU']['format']['datetime'] = '%x %H:%M';
@@ -218,6 +225,7 @@
 	$opt['locale']['RU']['format']['timesec'] = '%X';
 
 	$opt['locale']['ES']['locales'] = array('es_ES.utf8', 'es_ES', 'es');
+	$opt['locale']['ES']['format']['timezone'] = 'Europe/Berlin';
 	$opt['locale']['ES']['format']['date'] = '%x';
 	$opt['locale']['ES']['format']['datelong'] = '%d. %B %Y';
 	$opt['locale']['ES']['format']['datetime'] = '%x %H:%M';

@@ -53,6 +53,7 @@ function __autoload($class_name)
 	require($opt['rootpath'] . 'lib2/cookie.class.php');
 	normalize_settings();
 	set_language();
+	set_timezone();
 	set_usercountry();
 
 	// set stylepath and langpath
@@ -182,7 +183,7 @@ function set_language()
 	$cookie->set('locale', $opt['template']['locale'], $opt['template']['default']['locale']);
 
 	bindtextdomain('messages', $opt['rootpath'] . 'cache2/translate');
-
+	
 	// setup the PHP locale
 	setlocale(LC_MONETARY, $opt['locale'][$opt['template']['locale']]['locales']);
 	setlocale(LC_TIME, $opt['locale'][$opt['template']['locale']]['locales']);
@@ -195,6 +196,12 @@ function set_language()
 	setlocale(LC_NUMERIC, $opt['locale']['EN']['locales']); // important for mysql-queries!
 
   textdomain('messages');
+}
+
+function set_timezone() {
+	global $opt;
+	// setting timezone (PHP5.3 compatibility)
+	date_default_timezone_set($opt['locale'][$opt['template']['locale']]['timezone']);
 }
 
 function set_usercountry()

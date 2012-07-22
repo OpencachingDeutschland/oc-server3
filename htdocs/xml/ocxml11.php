@@ -14,6 +14,7 @@
 	
 	$opt['rootpath'] = '../';
   require($opt['rootpath'] . 'lib/common.inc.php');
+  require($opt['rootpath'] . 'lib/charset.inc.php');
   if ($error == true)
 	{
 		echo 'Unable to connect to database';
@@ -267,7 +268,7 @@
 			if ($bOcXmlTag == '1') $xmloutput .= '</ocxmlsession>';
 
 			if ($sCharset == 'iso-8859-1')
-				echo iconv('UTF-8', 'ISO-8859-1', $xmloutput);
+				echo utf8ToIso88591($xmloutput);
 			else if ($sCharset == 'utf-8')
 				echo $xmloutput;
 
@@ -293,7 +294,7 @@
 
 function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $ziptype)
 {
-	global $zip_basedir, $zip_wwwdir, $sDateformat, $sDateshort, $t1, $t2, $safemode_zip, $safemode_zip, $sCharset, $bAttrlist, $absolute_server_URI;
+	global $zip_basedir, $zip_wwwdir, $sDateformat, $sDateshort, $t1, $t2, $t3, $safemode_zip, $safemode_zip, $sCharset, $bAttrlist, $absolute_server_URI;
 	// alle records aus tmpxml_* übertragen
 	
 	if (!mb_ereg_match('^[0-9]{1,11}', $sessionid))
@@ -376,7 +377,7 @@ function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $z
 		$fileid++;
 		
 	$xmlfilename = $zip_basedir . 'ocxml11/' . $sessionid . '/' . $sessionid . '-' . $filenr . '-' . $fileid . '.xml';
-	
+
 	$f = fopen($xmlfilename, 'w');
 	
 	if ($bXmlDecl == '1')
@@ -595,7 +596,7 @@ function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $z
 	// zippen und url-redirect
 	if ($ziptype == '0')
 	{
-		tpl_redirect($zip_wwwdir . 'ocxml11/' . $sessionid . '/' . $sessionid . '-' . $filenr . '-' . $fileid . '.xml');
+		tpl_redirect($zip_wwwdir . $rel_xmlfile);
 		exit;
 	}
 	else if ($ziptype == 'zip')
@@ -916,8 +917,8 @@ function xmlcdata($str)
 
 	if ($bXmlCData == '1')
 	{
-		$str = mb_ereg_replace(']]>', ']] >', $str);
 		$str = output_convert($str);
+		$str = mb_ereg_replace(']]>', ']] >', $str);
 		return '<![CDATA[' . filterevilchars($str) . ']]>';
 	}
 	else
@@ -1037,12 +1038,9 @@ function output_convert($str)
 	if ($sCharset == 'iso-8859-1')
 	{
 		if ($str != null)
-		{
-			$str = @iconv('UTF-8', 'ISO-8859-1', $str);
-			if ($str == false)
-				$str = '--- charset conversion error ---';
-		}
-		return $str;
+			return utf8ToIso88591($str);
+		else
+			return $str;
 	}
 	else if ($sCharset == 'utf-8')
 		return $str;

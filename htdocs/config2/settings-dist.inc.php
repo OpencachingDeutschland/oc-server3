@@ -165,9 +165,10 @@
 	/* Default locale and style
 	 *
 	 */
-	$opt['template']['default']['locale'] = 'DE';      // may be overwritten by $opt['domain'][...]['locale']
-	$opt['template']['default']['style'] = 'ocstyle';  // may be overwritten by $opt['domain'][...]['style']
-	$opt['template']['default']['country'] = 'DE';     // may be overwritten by $opt['domain'][...]['country']
+	$opt['template']['default']['locale'] = 'DE';              // may be overwritten by $opt['domain'][...]['locale']
+	$opt['template']['default']['timezone'] = 'Europe/Berlin'; // may be overwritten by $opt['domain'][...]['timezone']
+	$opt['template']['default']['style'] = 'ocstyle';          // may be overwritten by $opt['domain'][...]['style']
+	$opt['template']['default']['country'] = 'DE';             // may be overwritten by $opt['domain'][...]['country']
 
 	// smiley path
 	$opt['template']['smiley'] = 'resource2/tinymce/plugins/emotions/img/';

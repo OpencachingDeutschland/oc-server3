@@ -183,6 +183,9 @@ function set_language()
 
 	bindtextdomain('messages', $opt['rootpath'] . 'cache2/translate');
 
+	// setting timezone (PHP5.3 compatibility)
+	date_default_timezone_set($opt['locale'][$opt['template']['locale']]['timezone']);
+	
 	// setup the PHP locale
 	setlocale(LC_MONETARY, $opt['locale'][$opt['template']['locale']]['locales']);
 	setlocale(LC_TIME, $opt['locale'][$opt['template']['locale']]['locales']);

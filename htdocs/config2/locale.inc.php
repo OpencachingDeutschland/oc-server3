@@ -81,7 +81,7 @@
 	$opt['locale']['PT']['locales'] = array('pt_PT.utf8', 'pt_PT', 'pt');
 	$opt['locale']['JA']['locales'] = array('ja_JP.utf8', 'ja_JP', 'jp');
 
-	$opt['locale']['EN']['format']['timezone'] = 'Europe/Berlin';
+	$opt['locale']['EN']['timezone'] = 'Europe/Berlin';
 	$opt['locale']['EN']['format']['date'] = '%x';
 	$opt['locale']['EN']['format']['datelong'] = '%d. %B %Y';
 	$opt['locale']['EN']['format']['datetime'] = '%x %I:%M %p';
@@ -90,7 +90,7 @@
 	$opt['locale']['EN']['format']['timesec'] = '%X';
 	$opt['locale']['EN']['country'] = 'UK';
 
-	$opt['locale']['DE']['format']['timezone'] = 'Europe/Berlin';
+	$opt['locale']['DE']['timezone'] = 'Europe/Berlin';
 	$opt['locale']['DE']['format']['date'] = '%x';
 	$opt['locale']['DE']['format']['datelong'] = '%d. %B %Y';
 	$opt['locale']['DE']['format']['datetime'] = '%x %H:%M';
@@ -101,7 +101,7 @@
 	$opt['locale']['DE']['page']['subtitle1'] = 'Geocaching in Deutschland,';
 	$opt['locale']['DE']['page']['subtitle2'] = 'Österreich und der Schweiz';
 
-	$opt['locale']['FR']['format']['timezone'] = 'Europe/Berlin';
+	$opt['locale']['FR']['timezone'] = 'Europe/Berlin';
 	$opt['locale']['FR']['format']['date'] = '%x';
 	$opt['locale']['FR']['format']['datelong'] = '%d. %B %Y';
 	$opt['locale']['FR']['format']['datetime'] = '%x %H:%M';
@@ -110,7 +110,7 @@
 	$opt['locale']['FR']['format']['timesec'] = '%X';
 	$opt['locale']['FR']['country'] = 'FR';
 
-	$opt['locale']['PL']['format']['timezone'] = 'Europe/Berlin';
+	$opt['locale']['PL']['timezone'] = 'Europe/Berlin';
 	$opt['locale']['PL']['format']['date'] = '%x';
 	$opt['locale']['PL']['format']['datelong'] = '%d. %B %Y';
 	$opt['locale']['PL']['format']['datetime'] = '%x %H:%M';
@@ -119,7 +119,7 @@
 	$opt['locale']['PL']['format']['timesec'] = '%X';
 	$opt['locale']['PL']['country'] = 'PL';
 
-	$opt['locale']['NL']['format']['timezone'] = 'Europe/Berlin';
+	$opt['locale']['NL']['timezone'] = 'Europe/Berlin';
 	$opt['locale']['NL']['format']['date'] = '%x';
 	$opt['locale']['NL']['format']['datelong'] = '%d. %B %Y';
 	$opt['locale']['NL']['format']['datetime'] = '%x %H:%M';
@@ -130,7 +130,7 @@
 	$opt['locale']['NL']['page']['subtitle2'] = '';
 	$opt['locale']['NL']['country'] = 'NL';
 
-	$opt['locale']['IT']['format']['timezone'] = 'Europe/Berlin';
+	$opt['locale']['IT']['timezone'] = 'Europe/Berlin';
 	$opt['locale']['IT']['format']['date'] = '%x';
 	$opt['locale']['IT']['format']['datelong'] = '%d. %B %Y';
 	$opt['locale']['IT']['format']['datetime'] = '%x %H:%M';
@@ -141,7 +141,7 @@
 	$opt['locale']['IT']['page']['subtitle1'] = 'Geocaching con Opencaching';
 	$opt['locale']['IT']['page']['subtitle2'] = '';
 
-	$opt['locale']['RU']['format']['timezone'] = 'Europe/Berlin';
+	$opt['locale']['RU']['timezone'] = 'Europe/Berlin';
 	$opt['locale']['RU']['format']['date'] = '%x';
 	$opt['locale']['RU']['format']['datelong'] = '%d. %B %Y';
 	$opt['locale']['RU']['format']['datetime'] = '%x %H:%M';
@@ -150,7 +150,7 @@
 	$opt['locale']['RU']['format']['timesec'] = '%X';
 	$opt['locale']['RU']['country'] = 'RU';
 
-	$opt['locale']['ES']['format']['timezone'] = 'Europe/Berlin';
+	$opt['locale']['ES']['timezone'] = 'Europe/Berlin';
 	$opt['locale']['ES']['format']['date'] = '%x';
 	$opt['locale']['ES']['format']['datelong'] = '%d. %B %Y';
 	$opt['locale']['ES']['format']['datetime'] = '%x %H:%M';
@@ -161,7 +161,7 @@
 	$opt['locale']['ES']['page']['subtitle1'] = 'Geocaching con Opencaching';
 	$opt['locale']['ES']['page']['subtitle2'] = '';
 
-	$opt['locale']['SV']['format']['timezone'] = 'Europe/Berlin';
+	$opt['locale']['SV']['timezone'] = 'Europe/Berlin';
 	$opt['locale']['SV']['format']['date'] = '%Y-%m-%d';
 	$opt['locale']['SV']['format']['datelong'] = '%Y-%m-%d';
 	$opt['locale']['SV']['format']['datetime'] = '%x %H:%M';
@@ -172,7 +172,7 @@
 	$opt['locale']['SV']['page']['subtitle1'] = 'Geocaching med Opencaching';
 	$opt['locale']['SV']['page']['subtitle2'] = '';
 
-	$opt['locale']['NO']['format']['timezone'] = 'Europe/Berlin';
+	$opt['locale']['NO']['timezone'] = 'Europe/Berlin';
 	$opt['locale']['NO']['format']['date'] = '%Y-%m-%d';
 	$opt['locale']['NO']['format']['datelong'] = '%Y-%m-%d';
 	$opt['locale']['NO']['format']['datetime'] = '%x %H:%M';
@@ -183,7 +183,7 @@
 	$opt['locale']['NO']['page']['subtitle1'] = 'Geocaching med Opencaching';
 	$opt['locale']['NO']['page']['subtitle2'] = '';
 
-	$opt['locale']['DA']['format']['timezone'] = 'Europe/Berlin';
+	$opt['locale']['DA']['timezone'] = 'Europe/Berlin';
 	$opt['locale']['DA']['format']['date'] = '%Y-%m-%d';
 	$opt['locale']['DA']['format']['datelong'] = '%Y-%m-%d';
 	$opt['locale']['DA']['format']['datetime'] = '%x %H:%M';
@@ -194,7 +194,7 @@
 	$opt['locale']['DA']['page']['subtitle1'] = 'Geocaching med Opencaching';
 	$opt['locale']['DA']['page']['subtitle2'] = '';
 
-	$opt['locale']['PT']['format']['timezone'] = 'Europe/Berlin';
+	$opt['locale']['PT']['timezone'] = 'Europe/Berlin';
 	$opt['locale']['PT']['format']['date'] = '%Y-%m-%d';
 	$opt['locale']['PT']['format']['datelong'] = '%Y-%m-%d';
 	$opt['locale']['PT']['format']['datetime'] = '%x %H:%M';
@@ -205,7 +205,7 @@
 	$opt['locale']['PT']['page']['subtitle1'] = 'Geocaching com Opencaching';
 	$opt['locale']['PT']['page']['subtitle2'] = '';
 
-	$opt['locale']['JA']['format']['timezone'] = 'Europe/Berlin';
+	$opt['locale']['JA']['timezone'] = 'Europe/Berlin';
 	$opt['locale']['JA']['format']['date'] = '%Y-%m-%d';
 	$opt['locale']['JA']['format']['datelong'] = '%Y-%m-%d';
 	$opt['locale']['JA']['format']['datetime'] = '%x %H:%M';

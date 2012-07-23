@@ -67,7 +67,7 @@
 			$rs_coords = sql_slave("SELECT `latitude`, `longitude` FROM `user` WHERE `user_id`='&1'", $usr['userid']);
 			$record_coords = sql_fetch_array($rs_coords);
 
-			if ((($record_coords['latitude'] == NULL) || ($record_coords['longitude'] == NULL)) || (($record_coords['latitude'] == 0) || ($record_coords['longitude'] == 0)))
+			if ((($record_coords['latitude'] == NULL) && ($record_coords['longitude'] == NULL)) || (($record_coords['latitude'] == 0) && ($record_coords['longitude'] == 0)))
 			{
 				$sql .= 'NULL distance, ';
 			}

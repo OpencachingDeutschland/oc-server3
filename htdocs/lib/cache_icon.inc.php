@@ -44,9 +44,9 @@ function getCacheIcon($user_id, $cache_id, $cache_status, $cache_userid, $iconna
 			{
 				switch($row['type'])
 				{
-				case 1:
-				case 7: $found = $row['type']; $cacheicon_type = "-found"; $inactive = true; break;
-				case 2: $found = $row['type']; $cacheicon_type = "-dnf"; break;
+				  case 1:
+				  case 7: $found = $row['type']; $cacheicon_type = "-found"; $inactive = true; break;
+				  case 2: $found = $row['type']; $cacheicon_type = "-dnf"; break;
 				}
 			}
 		}
@@ -62,6 +62,7 @@ function getCacheIcon($user_id, $cache_id, $cache_status, $cache_userid, $iconna
 			case 2: $cacheicon_searchable = "-n"; break;
 			case 3: $cacheicon_searchable = "-a"; break;
 			case 4: $cacheicon_searchable = "-a"; break;
+			case 5: $cacheicon_searchable = "-s"; break;      // fix for RT ticket #3403
 			case 6: $cacheicon_searchable = "-a"; break;
 			case 7: $cacheicon_searchable = "-a"; break;
 		}

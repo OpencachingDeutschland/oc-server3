@@ -210,7 +210,7 @@
 		<div class="content2-container-2col-left" id="viewcache-numstats">
 			<p style="line-height: 1.4em;"><br /><br />
 				<img src="resource2/{$opt.template.style}/images/{if $cache.type==6}log{else}viewcache{/if}/16x16-{if $cache.type==6}attended{else}found{/if}.png" class="icon16" alt="" /> {if $cache.type==6} {$cache.attended} {t}Attended{/t}{else} {$cache.found} {t}Found{/t}{/if}<br />
-				<img src="resource2/{$opt.template.style}/images/{if $cache.type==6}log{else}viewcache{/if}/16x16-{if $cache.type==6}will_attend{else}dnf{/if}.png" class="icon16" alt="" /> {if $cache.type==6} {$cache.willattend} {t}Will attend{/t}{else} {$cache.notfound} {t}Not Found{/t}{/if}<br />
+				<img src="resource2/{$opt.template.style}/images/{if $cache.type==6}log{else}viewcache{/if}/16x16-{if $cache.type==6}will_attend{else}dnf{/if}.png" class="icon16" alt="" /> {if $cache.type==6} {$cache.willattend} {t}Will attend{/t}{else} {$cache.notfound} {t}Not found{/t}{/if}<br />
 				<img src="resource2/{$opt.template.style}/images/viewcache/16x16-note.png" class="icon16" alt="" /> {$cache.note} {t}Notes{/t}<br />
 				<img src="resource2/{$opt.template.style}/images/viewcache/16x16-watch.png" class="icon16" alt="" /> {$cache.watcher} {t}Watched{/t}<br />
 				<img src="resource2/{$opt.template.style}/images/viewcache/ignore-18.png" class="icon16" alt="" /> {$cache.ignorercount} {t}Ignored{/t}<br />
@@ -232,7 +232,7 @@
 			{/if}
 		</div>
 
-		<b>Maps:</b> 
+		<b>{t}Maps:{/t}</b> 
 		<a href="map2.php?wp={$cache.wpoc}" target="_blank">{t}Opencaching.de{/t}</a>,<br /><a href="http://www.mapquest.com/maps/map.adp?latlongtype=decimal&latitude={$cache.latitude}&longitude={$cache.longitude}" target="_blank">Mapquest</a>,<br />
 		<a href="http://maps.google.de/maps?q={$cache.latitude},{$cache.longitude}+({$cache.wpoc}%20-%20{$cache.name|replace:'(':''|replace:')':''|escape:'url'})&z=15" target="_blank">{t}Google Maps{/t}</a>			
 	</div>

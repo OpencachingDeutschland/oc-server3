@@ -59,7 +59,7 @@
 	{
 		if ($usr === false)
 		{
-			$sql .= '0 distance, ';
+			$sql .= 'NULL distance, ';
 		}
 		else
 		{
@@ -69,7 +69,7 @@
 
 			if ((($record_coords['latitude'] == NULL) || ($record_coords['longitude'] == NULL)) || (($record_coords['latitude'] == 0) || ($record_coords['longitude'] == 0)))
 			{
-				$sql .= '0 distance, ';
+				$sql .= 'NULL distance, ';
 			}
 			else
 			{
@@ -232,8 +232,12 @@
 		$tmpline = mb_ereg_replace('{urlencode_cacheid}', htmlspecialchars(urlencode($caches_record['cache_id']), ENT_COMPAT, 'UTF-8'), $tmpline);
 		$tmpline = mb_ereg_replace('{urlencode_userid}', htmlspecialchars(urlencode($caches_record['user_id']), ENT_COMPAT, 'UTF-8'), $tmpline);
 		$tmpline = mb_ereg_replace('{username}', htmlspecialchars($caches_record['username'], ENT_COMPAT, 'UTF-8'), $tmpline);
-		$tmpline = mb_ereg_replace('{distance}', htmlspecialchars(sprintf("%01.1f", $caches_record['distance']), ENT_COMPAT, 'UTF-8'), $tmpline);
 		$tmpline = mb_ereg_replace('{position}', $nRowIndex + $startat + 1, $tmpline);
+
+		if ($caches_record['distance'] == NULL)
+			$tmpline = mb_ereg_replace('{distance}', '', $tmpline);
+		else
+			$tmpline = mb_ereg_replace('{distance}', htmlspecialchars(sprintf("%01.1f", $caches_record['distance']), ENT_COMPAT, 'UTF-8'), $tmpline);
 
 		// backgroundcolor of line
 		if (($nRowIndex % 2) == 1) 	$bgcolor = $bgcolor2;

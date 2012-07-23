@@ -4809,7 +4809,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('505', 'DE', 'Versteckte Caches: %1', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('506', 'DE', 'Deine letzten versteckten Caches:', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('507', 'DE', 'Keine versteckten Geocaches gefunden', '2010-08-28 11:48:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('508', 'DE', 'Deine noch nicht veröffentlichten Caches werden veröffentlicht:', '2010-08-28 11:48:06');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('508', 'DE', 'Deine noch nicht veröffentlichten Caches:', '2012-07-23 15:54:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('509', 'DE', 'Keine nicht veröffentlichten Caches', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('510', 'DE', 'Versendete E-Mails', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('511', 'DE', 'Versendete E-Mails: %1', '2010-08-28 11:48:06');
@@ -6187,7 +6187,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('505', 'EN', 'Geocaches hidden: %1', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('506', 'EN', 'Your latest geocaches hidden:', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('507', 'EN', 'No geocaches hidden ', '2010-08-28 11:48:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('508', 'EN', 'Your pending geocaches will be published', '2010-08-28 11:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('508', 'EN', 'Your pending geocaches:', '2012-07-23 15:54:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('509', 'EN', 'All your geocaches are published.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('510', 'EN', 'E-mails sent', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('511', 'EN', 'E-mails sent: %1 ', '2010-08-28 11:48:07');
@@ -10221,7 +10221,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('505', 'NL', 'Geplaatste caches: %1', '2011-02-04 19:50:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('506', 'NL', 'Jouw laatste geplaatste caches:', '2011-02-04 19:50:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('507', 'NL', 'Geen geplaatste caches gevonden', '2011-02-04 19:50:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('508', 'NL', 'Jouw nog niet gepubliceerde caches zijn beschikbaar', '2011-02-04 19:50:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('508', 'NL', 'Jouw nog niet gepubliceerde caches:', '2012-07-23 15:54:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('509', 'NL', 'Geen ongepubliceerde caches.', '2011-02-04 19:50:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('510', 'NL', 'Verzonden E-Mails', '2011-02-04 19:50:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('511', 'NL', 'Verzonden E-Mails: %1', '2011-02-04 19:50:07');

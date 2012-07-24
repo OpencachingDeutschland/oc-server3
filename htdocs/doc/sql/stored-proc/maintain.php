@@ -458,6 +458,11 @@
 						   OLD.`latitude`!=NEW.`latitude` THEN
 							SET NEW.`need_npa_recalc`=1;
 						END IF;
+
+						IF OLD.`status`=5 AND NEW.`status`<>5 THEN
+							SET NEW.`date_created`=NOW();
+							SET NEW.`is_publishdate`=1;
+						END IF;
 					END;");
 
 	sql_dropTrigger('cachesAfterUpdate');

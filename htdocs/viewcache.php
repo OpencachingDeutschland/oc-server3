@@ -99,6 +99,7 @@ function getChildWaypoints($cacheid)
 				`caches`.`wp_gc` AS `wpgc`,
 				`caches`.`wp_nc` AS `wpnc`,
 				`caches`.`date_created` AS `datecreated`,
+				`caches`.`is_publishdate` AS `is_publishdate`,
 				`caches`.`difficulty` AS `difficulty`,
 				`caches`.`terrain` AS `terrain`,
 				`cache_desc`.`language` AS `desclanguage`,

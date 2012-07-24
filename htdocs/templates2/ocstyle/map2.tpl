@@ -774,6 +774,7 @@
 			var nGeoKreties = aCaches[0].getAttribute("geokreties");
 			var bFound = aCaches[0].getAttribute("found");
 			var bNotFound = aCaches[0].getAttribute("notfound");
+			var bAttended = aCaches[0].getAttribute("attended");
 			var bOwner = aCaches[0].getAttribute("owner");
 			var sUsername = aCaches[0].getAttribute("username");
 			var nUserId = aCaches[0].getAttribute("userid");
@@ -798,6 +799,9 @@
 
 			if (bNotFound==1)
 				sHtml += "<tr><td colspan='2'><img src='resource2/ocstyle/images/viewcache/16x16-dnf.png' alt='' /> {/literal}{t escape=js}You havn't found this cache, yet{/t}{literal}</td></tr>";
+
+			if (bAttended==1)
+				sHtml += "<tr><td colspan='2'><img src='resource2/ocstyle/images/log/16x16-attended.png' alt='' /> {/literal}{t escape=js}You have attended this event!{/t}{literal}</td></tr>";
 
 			if (nGeoKreties>0)
 				sHtml += "<tr><td colspan='2'><img src='resource2/ocstyle/images/viewcache/gk.png' alt='' /> {/literal}{t escape=js}This cache stores a GeoKrety{/t}{literal}</td></tr>";

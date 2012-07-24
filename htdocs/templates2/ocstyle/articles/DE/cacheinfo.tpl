@@ -52,8 +52,9 @@
 				<tr><td class="spacer"><img src="/images/trans.gif" border="0" width="1" height="1" alt="" title=""></td></tr>
 				<tr>
 					<td valign="top" style="padding-top:5px"><img src="resource2/ocstyle/images/cacheicon/webcam.gif" width="32" border="0" height="32" align="left" alt="Webcam" title="Webcam"></td>
-					<td>Webcam-Cache: Zum L&ouml;sen des Caches wird eine &ouml;ffentliche WebCam genutzt. Meist muss die Webcam an den angegebenen Koordinaten gefunden werden, um von dieser ein Bild mit sich selbst zu machen. Das Bild wird dann beim Logeintrag hinzugef&uuml;gt. Es gibt keinen Tauschbeh&auml;lter oder Logbuch.</td>
+					<td>Webcam-Cache: Zum L&ouml;sen des Caches wird eine &ouml;ffentliche Webcam genutzt. Meist muss die Webcam an den angegebenen Koordinaten gefunden werden, um von dieser ein Bild mit sich selbst zu machen. Das Bild wird dann beim Logeintrag hinzugef&uuml;gt. Es gibt keinen Tauschbeh&auml;lter oder Logbuch.</td>
 				</tr>
+				<tr><td class="spacer"><img src="/images/trans.gif" border="0" width="1" height="1" alt="" title=""></td></tr>
 				<tr>
 					<td valign="top" style="padding-top:5px"><img src="resource2/ocstyle/images/cacheicon/event.gif" width="32" border="0" height="32" align="left" alt="Event" title="Event"></td>
 					<td>Event-Cache: Treffen von Geocachern zum gemeinsamen Plausch. Es darf jeder Geocacher teilnehmen, der Lust hat. Vor dem Treffen loggt man, dass man teilnehmen m&ouml;chte, und danach dass man teilgenommen hat.</td>
@@ -66,16 +67,15 @@
 				<tr><td class="spacer"><img src="/images/trans.gif" border="0" width="1" height="1" alt="" title=""></td></tr>
 			</table>
 
-		<p><b>Koordinaten:</b> Der Ort, an dem der Cache versteckt ist, oder der Startpunkt oder Parkplatz bei einem mehrteiligen Cache. Wenn der Ort oder Startpunkt err&auml;tselt werden muss: Eine beliebige Koordinate im Zielgebiet, damit man ungef&auml;hr die Entfernung bis zum Cache absch&auml;tzen kann.</p>
+		<p><b>Koordinaten:</b> Der Ort, an dem der Cache versteckt ist, oder der Startpunkt oder Parkplatz bei einem mehrteiligen Cache. Wenn der Ort oder Startpunkt err&auml;tselt werden muss: Eine beliebige Koordinate im Zielgebiet, damit man den Cache auf der Karte finden und die ungef&auml;hre Entfernung absch&auml;tzen kann.</p>
 		<p><b>Land:</b> In welchem Land liegt der Cache? Besonders wichtig ist diese Angabe bei Caches in Grenzn&auml;he.</p>
-
 		<p id="difficulty"><b>Bewertung:</b> Schwierigkeit und Gel&auml;nde: Auf einer Skala von 1 bis 5 wird angegeben, wie schwer die gestellte Aufgabe zu l&ouml;sen und der Cache zu finden ist, bzw. wie anspruchsvoll der Weg zum Cache ist.</p>
 		<p>Anhaltspunkt f&uuml;r die Schwierigkeit des Caches sind:</p>
 			<table  class="table">
 				<tr>
 					<td></td>
 					<td valign="top" style="padding-top:5px;"><img src='./resource2/{$opt.template.style}/images/difficulty/diff-10.gif' border='0' width='19' height='16' hspace='2' /></td>
-					<td>1: in wenigen Minuten zu finden, geeignet f&uuml; Anf&auml;nger </td>
+					<td>1: in wenigen Minuten zu finden, geeignet f&uuml;r Anf&auml;nger </td>
 				</tr>
 				<tr><td class="spacer"><img src="/images/trans.gif" border="0" width="1" height="1" alt="" title=""></td></tr>
 				<tr>
@@ -87,7 +87,7 @@
 				<tr>
 					<td></td>
 					<td valign="top" style="padding-top:5px"><img src='./resource2/{$opt.template.style}/images/difficulty/diff-30.gif' border='0' width='19' height='16' hspace='2' /></td>
-					<td>3: anspruchsvoller Cache, auch ein erfahrener Geocacher wird hier eine zeitlang suchen; f&uuml;r Anf&auml;nger wenig geeignet</td> 
+					<td>3: anspruchsvoller Cache; auch ein erfahrener Geocacher wird hier eine Zeitlang suchen; f&uuml;r Anf&auml;nger wenig geeignet</td> 
 				</tr>
 				<tr><td class="spacer"><img src="/images/trans.gif" border="0" width="1" height="1" alt="" title=""></td></tr>
 				<tr>
@@ -109,13 +109,13 @@
 				<tr>
 					<td></td>
 					<td valign="top" style="padding-top:5px;"><img src='./resource2/{$opt.template.style}/images/difficulty/terr-10.gif' border='0' width='19' height='16' hspace='2' /></td>
-					<td>1: flaches Gel&auml;nde mit asphaltierten oder glatt gepflasterten Wegen, weniger als ein Kilometer zu gehen; behindertengerecht</td>
+					<td>1: flaches Gel&auml;nde mit asphaltierten oder glatt gepflasterten Wegen, deutlich weniger als ein Kilometer zu gehen; behindertengerecht</td>
 				</tr>
 				<tr><td class="spacer"><img src="/images/trans.gif" border="0" width="1" height="1" alt="" title=""></td></tr>
 				<tr>
 					<td></td>
 					<td valign="top" style="padding-top:5px;"><img src='./resource2/{$opt.template.style}/images/difficulty/terr-20.gif' border='0' width='19' height='16' hspace='2' /></td>
-					<td>2: ohne gro&szlig;e H&ouml;henunterschiede; &uuml;ber befestigter Wege, Rasenfl&auml;chen etc., maximal wenige Kilometer zu gehen; geeignet f&uuml;r kleine Kinder </td>
+					<td>2: ohne gro&szlig;e H&ouml;henunterschiede, &uuml;ber befestigter Wege, Rasenfl&auml;chen etc., maximal wenige Kilometer zu gehen; geeignet f&uuml;r kleine Kinder </td>
 				</tr>
 				<tr><td class="spacer"><img src="/images/trans.gif" border="0" width="1" height="1" alt="" title=""></td></tr>
 				<tr>
@@ -137,16 +137,16 @@
 				</tr>
 			</table>
 
-		<p><a name="time"></a><b>Aufwand:</b> Wiviel Zeit und welche Wegstrecke sollte man ab dem Parkplatz/Startpunkt einplanen, um den Cache zu finden und wieder an den Parkplatz/Startpunkt zur&uuml;ck zu kommen? 
+		<p><a name="time"></a><b>Aufwand:</b> Wieviel Zeit und welche Wegstrecke sollte man ab dem Parkplatz/Startpunkt einplanen, um den Cache zu finden und wieder an den Parkplatz/Startpunkt zur&uuml;ck zu kommen? 
 		Gehe davon aus, dass der Cacher erfahren ist, aber bei zweideutigen Aufgaben gerne mal auf dem Schlauch steht. Solltest du der Meinung sein, dass man f&uuml;r diesen Cache keine 
-		vern&uuml;nftige Aussage &uuml;ber den Zeitaufwand machen, lasse einfach 0&nbsp;h / 0&nbsp;min stehen und 
+		eindeutige Aussage &uuml;ber den Zeitaufwand machen, lasse einfach 0&nbsp;h / 0&nbsp;min stehen und 
 		erl&auml;utere den Aufwand in der Cachebeschreibung. Wenn du bei der 
-		Sch&auml;tzung davon ausgehst, dass eine Teilstrecke mit Inline-Skates, dem Fahrrad oder dem Auto zur&uuml;ckgelegt wird, weise ebenfalls in die Beschreibung darauf hin.</p>
+		Sch&auml;tzung davon ausgehst, dass eine Teilstrecke mit Inline-Skates, dem Fahrrad oder dem Auto zur&uuml;ckgelegt wird, weise ebenfalls in der Beschreibung darauf hin.</p>
 
 		<p>
 			<b>Cacheattribute:</b> Mit den Cacheattributen kannst du genauere Angaben zu deinem Cache machen, die z.B. bei der <a href="search.php">Suche</a> als Kriterium angegeben werden k&ouml;nnen.
 			Viele Attribute sind dabei Erfahrungswerte (z.B. Zeckengefahr). Als Finder eines Geocaches kannst du gerne den Owner darauf hinweisen, dass er dem Geocache die entsprechenden Attribute zuordnen kann.
-			Bei den Angaben f&uuml;r deine eigenen Geocaches solltest du von gew&ouml;hnlichen, trockenen Witterungsverh&auml;ltnissen ausgehen.</p>
+			Bei den Angaben f&uuml;r deine eigenen Caches solltest du von gew&ouml;hnlichen, trockenen Witterungsverh&auml;ltnissen ausgehen.</p>
 
 			<table class="table">
 				<tr><td class="spacer"><img src="/images/trans.gif" border="0" width="1" height="1" alt="" title=""></td></tr>
@@ -172,13 +172,13 @@
 		indem du zu viel Hilfe gibst.</p>
 		<p><b>Hinweis:</b> Kann es sein, dass jemand so auf dem Schlauch steht, dass er den Cache nicht findet? Dann solltest du hier noch einen letzten Tip 
 		f&uuml;r unterwegs mitgeben.</p>
-		<p><b>Versteckt seit:</b> Wann hast du den Cache versteckt? Ist das Datum in der Zukunft, wird der Cache als "Momentan nicht verf&uuml;gbar" gef&uuml;hrt - du
+		<p><b>Versteckt seit:</b> Wann hast du den Cache versteckt? Ist das Datum in der Zukunft, wird der Cache als "Momentan nicht verf&uuml;gbar" gef&uuml;hrt &ndash; du
 		musst den Status dann jedoch selbst &auml;ndern sobald der Cache tats&auml;chlich versteckt ist. Bei einem Eventcache sollte das Datum angebenen werden,
 		an dem das Treffen stattfindet.</p>
 		<p><a name="logpw"></a><b>Kennwort zum Loggen:</b> Jeder der einen &bdquo;gefunden&ldquo;-Logeintrag machen m&ouml;chte, muss dieses Kennwort eingeben. Sollte ein
 		Finder ein falsches Kennwort eingeben, kann er seinen Fund nicht online loggen. Falls kein Kennwort gew&uuml;nscht wird, muss dieses Feld leer gelassen werden.
 		Die Gro&szlig;- und Kleinschreibung wird nicht ber&uuml;cksichtigt. Vorsicht ist bei Kennw&ouml;rtern geboten, die 0, O, i oder j enthalten, da diese Buchtaben leicht zu verwechseln sind.</p>
 		<p><b>Nutzungsbedinungen:</b> Lies dir bitte die Nutzungsbedinungen genau durch! Wir haben versucht, diese m&ouml;glichst kurz und fair zu halten.</p>
-		<p><b>Bilder:</b> Bilder k&ouml;nnen erst hochgeladen werden, wenn der Cache schon erstellt wurde. Dazu must du dich einloggen und die Cacheseite &ouml;ffnen. Dann rechts oben auf &bdquo;;Bearbeiten&ldquo; klicken &ndash; im unteren Teil findest du wonach du suchst.</p>
+		<p><b>Bilder:</b> Bilder k&ouml;nnen erst hochgeladen werden, wenn der Cache erstellt wurde. Dazu rufst du deinen Cache auf und klickst rechts oben auf &bdquo;Bearbeiten&ldquo;. Weiter unten findet du den Abschnitt &bdquo;Bilder&ldquo; mit dem Link &bdquo;Neues Bild hinzuf&uuml;gen&ldquo;.</p>
 
 </div>

@@ -122,10 +122,14 @@
 						<ul>
 							<li><strong>{t}Language:{/t}</strong></li>
 <?php
+							$nbsp = "";
 							foreach ($opt['template']['locales'] AS $k => $lang)
 							{
 								if ($lang['show'] == true)
-									echo '<li><a style="text-decoration: none;" href="index.php?locale=' . $k . '"><img src="' . $lang['flag'] . '" alt="' . $lang['name'] . '" width="24px" height="24px" /></a></li>';
+									echo '<li>' . $nbsp . '<a style="text-decoration: none;" href="index.php?locale=' . $k . '"><img src="' . $lang['flag'] . '" alt="' . $lang['name'] . '" width="24px" height="24px" /></a></li>';
+								// insert space between flags to match search.php layout with other pages (see RT ticket #4505);
+								// reason of different flag spacing is unknown
+								$nbsp = "&nbsp;";
 							}
 ?>
             	<li>&nbsp;&nbsp;&nbsp;&nbsp;<strong>{t}Country:{/t}</strong></li>
@@ -226,6 +230,7 @@
 						<a href="http://www.opencachingspain.es" target="_blank"><img src="resource2/ocstyle/images/nodes/oc-es.png" width="100" height="22" /></a><br />
 						<a href="http://www.opencaching.it" target="_blank"><img src="resource2/ocstyle/images/nodes/oc-it.png" width="100" height="22" /></a><br />
 						<a href="http://www.opencaching.no" target="_blank"><img src="resource2/ocstyle/images/nodes/oc-no.png" width="100" height="22" /></a><br />
+						<a href="http://www.opencaching.nl" target="_blank"><img src="resource2/ocstyle/images/nodes/oc-nl.png" width="100" height="22" /></a><br />
 						<a href="http://www.opencaching.pl" target="_blank"><img src="resource2/ocstyle/images/nodes/oc-pl.png" width="100" height="22" /></a><br />
 						<a href="http://www.opencaching.se" target="_blank"><img src="resource2/ocstyle/images/nodes/oc-se.png" width="100" height="22" /></a><br />
 						<a href="http://www.opencaching.org.uk" target="_blank"><img src="resource2/ocstyle/images/nodes/oc-org-uk.png" width="100" height="22" /></a><br />

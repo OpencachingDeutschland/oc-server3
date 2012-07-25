@@ -1921,7 +1921,6 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1468', '(intern
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1469', '(internal error) it already exists a description for this language.', '2010-09-07 20:19:09');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1471', 'There already exists a description in this language', '2010-09-07 20:19:09');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1473', 'Are you sure to remove your log entry?', '2010-09-10 23:08:21');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1474', 'Login as', '2010-09-11 01:38:44');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1475', 'A database command could not be performed.', '2010-09-11 01:38:44');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1476', 'Edit cache <a href=\"viewcache.php?cacheid={cacheid}\">{name}</a>', '2010-09-11 01:38:44');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1477', 'offer for adoption', '2010-09-11 01:38:44');
@@ -3968,7 +3967,6 @@ INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1468'
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1469', './lang/de/ocstyle/editdesc.inc.php', '34');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1471', './lang/de/ocstyle/newdesc.inc.php', '31');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1473', './lang/de/ocstyle/removelog_logowner.tpl.php', '39');
-INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1474', './lang/de/ocstyle/varset.inc.php', '40');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1475', './lang/de/ocstyle/varset.inc.php', '67');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1476', './lang/de/ocstyle/editcache.tpl.php', '121');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1477', './lang/de/ocstyle/editcache.tpl.php', '138');
@@ -5396,7 +5394,6 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1469', 'DE', '(Interner Fehler) Es existiert bereits eine Beschreibung mit dieser Sprache.', '2010-09-10 23:16:52');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1471', 'DE', 'Es existiert bereits eine Beschreibung in dieser Sprache', '2010-09-10 23:16:13');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1473', 'DE', 'Bist du sicher, dass dein Logeintrag entfernt werden soll?', '2010-09-10 23:15:52');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1474', 'DE', 'Eingeloggt als', '2010-09-11 02:35:36');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1475', 'DE', 'Ein Datenbankbefehl konnte nicht ausgeführt werden.', '2010-09-11 02:35:10');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1476', 'DE', 'Cache <a href=\"viewcache.php?cacheid={cacheid}\">{name}</a> bearbeiten', '2010-09-11 02:36:38');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1477', 'DE', 'zur Adoption anbieten', '2010-09-11 02:34:42');
@@ -6774,7 +6771,6 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1469', 'EN', '(internal error) There already exists a description for this language.', '2010-09-10 23:17:02');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1471', 'EN', 'There already exists a description in this languag', '2010-09-10 23:16:13');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1473', 'EN', 'Are you sure to remove your log entry?', '2010-09-10 23:15:56');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1474', 'EN', 'Login as', '2010-09-11 02:46:26');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1475', 'EN', 'A database command could not be performed.', '2010-09-11 02:46:21');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1476', 'EN', 'Edit cache <a href=\"viewcache.php?cacheid={cacheid}\">{name}</a>', '2010-09-11 02:36:38');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1477', 'EN', 'offer for adoption', '2010-09-11 02:34:42');
@@ -6827,7 +6823,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1532', 'EN', 'The owner of the has written you the following comment:', '2010-09-11 02:23:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1533', 'EN', 'For virtual and webcam caches, the cache size has to be -no container-!', '2010-09-11 02:45:28');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1537', 'EN', 'Your HTML code will be changed again by a special filter. This is nacessary to avoid dangerous HTML-tags, such as \&lt;script\&gt;. A list of allowed HTML tags can be find <a href=\"http://www.opencaching.de/articles.php?page=htmltags\">here</a>.', '2010-09-11 02:56:58');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1538', 'EN', 'Language', '2010-09-11 02:57:12');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1538', 'EN', 'Language:', '2010-09-11 02:57:12');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1539', 'EN', 'Didn\'t find', '2010-09-12 22:28:52');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1541', 'EN', 'Only at night', '2010-09-12 22:54:51');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1542', 'EN', 'Hyperlink to another caching portal only', '2010-09-12 22:54:55');
@@ -8088,7 +8084,6 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1469', 'ES', '(Error interno) Ya existe una descripción en este idioma.', '2010-12-09 00:18:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1471', 'ES', 'Ya existe una descripción en este idioma.', '2010-12-09 00:18:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1473', 'ES', '¿Estás seguro de que tu log debe ser eliminado?', '2010-12-09 00:18:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1474', 'ES', 'Acceder como', '2010-12-09 00:18:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1475', 'ES', 'Un comando de la base de datos no se pudo ejecutar.', '2010-12-09 00:18:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1476', 'ES', 'Editar cache <a href=\"viewcache.php?cacheid={cacheid}\">{name}</a>', '2010-12-09 00:18:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1477', 'ES', 'Oferta para adopción', '2010-12-09 00:18:00');
@@ -9489,7 +9484,6 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1469', 'IT', '(Errore interno) Esiste già una descrizione con questa lingua.', '2010-09-10 23:16:52');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1471', 'IT', 'Esiste già una descrizione in questa lingua', '2010-09-10 23:16:13');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1473', 'IT', 'Vuoi veramente cancellare questo log?', '2010-09-10 23:15:52');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1474', 'IT', 'Accedi come', '2010-09-13 22:10:04');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1475', 'IT', 'Un comando di database non può essere completato.', '2010-10-27 18:49:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1476', 'IT', 'Modifica cache <a href=\"viewcache.php?cacheid={cacheid}\">{name}</a>', '2010-09-11 02:36:38');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1477', 'IT', 'offerta in adozione', '2010-09-11 02:34:42');

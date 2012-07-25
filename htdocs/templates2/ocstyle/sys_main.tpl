@@ -96,7 +96,7 @@
 				</div>
 				<div class="navflag">
 					<ul>
-						<li><strong>{t}Language{/t}</strong></li>
+						<li><strong>{t}Language:{/t}</strong></li>
 						{foreach from=$opt.template.locales key=localeKey item=localeItem}
 							{if $localeItem.show}
 								<li><a style="text-decoration: none;" href="index.php?locale={$localeKey}"><img src="{$localeItem.flag}" alt="{$localeItem.name|escape}" width="24px" height="24px" /></a></li>

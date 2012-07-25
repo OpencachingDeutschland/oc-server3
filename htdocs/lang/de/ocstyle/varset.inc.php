@@ -37,7 +37,7 @@
 
 	//set up main template specific string
 	$sLoggedOut = '<form action="login.php" method="post" enctype="application/x-www-form-urlencoded" name="login" dir="ltr" style="display: inline;">' . t('User') . ':&nbsp;<input name="email" size="10" type="text" class="textboxes" value="" />&nbsp;' . t('Password') . ':&nbsp;<input name="password" size="10" type="password" class="textboxes" value="" />&nbsp;<input type="hidden" name="action" value="login" /><input type="hidden" name="target" value="{target}" /><input type="submit" name="LogMeIn" value="' . t('Login') . '" class="formbuttons" style="width: 60px;" /></form>';
-	$sLoggedIn = t('Login as') . ' <a href="myhome.php">{username}</a> - <a href="login.php?action=logout">' . t('Logout') . '</a>';
+	$sLoggedIn = "<b>" . t('Logged in as') . ':</b> <a href="myhome.php">{username}</a> - <a href="login.php?action=logout">' . t('Logout') . '</a>';
 
 	// target in Loginbox setzen
 	$target = basename($_SERVER['PHP_SELF']).'?';

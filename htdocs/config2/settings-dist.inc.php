@@ -166,6 +166,7 @@
 	 *
 	 */
 	$opt['template']['default']['locale'] = 'DE';      // may be overwritten by $opt['domain'][...]['locale']
+	$opt['template']['default']['article_locale'] = 'EN';    // may be overwritten by $opt['domain'][...]['article_locale']
 	$opt['template']['default']['style'] = 'ocstyle';  // may be overwritten by $opt['domain'][...]['style']
 	$opt['template']['default']['country'] = 'DE';     // may be overwritten by $opt['domain'][...]['country']
 

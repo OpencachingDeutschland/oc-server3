@@ -26,9 +26,9 @@
 	else if (!file_exists($opt['stylepath'] . '/articles/' . $language . '/' . $article . '.tpl'))
 	{
 		// does article exist in default-language?
-		if (file_exists($opt['stylepath'] . '/articles/' . $opt['template']['default']['locale'] . '/' . $article . '.tpl'))
+		if (file_exists($opt['stylepath'] . '/articles/' . $opt['template']['default']['article_locale'] . '/' . $article . '.tpl'))
 		{
-			$language = $opt['template']['default']['locale'];
+			$language = $opt['template']['default']['article_locale'];
 		}
 		elseif (file_exists($opt['stylepath'] . '/articles/EN/' . $article . '.tpl'))
 		{

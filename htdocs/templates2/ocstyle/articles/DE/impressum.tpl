@@ -24,7 +24,7 @@
 			f&ouml;rdern, bietet Opencaching alle Stammdaten in einer einfach zu 
 			verarbeitenden Form zum Download an. Dabei sind die geltenden Datenschutzhinweise 
 			sowie Nutzungsbedingungen zu beachten.</p>
-
+<p>
 <p><b>Betreiber des Internetangebotes</b></p>
 
 			<p>Das Internetangebot auf Opencaching.de wurde in gemeinschaftlicher 
@@ -51,7 +51,7 @@ Verantwortlich im Sinne des TDG/MStV<br />
 <br />
 Verein Opencaching Deutschland
 <br />
-Zur Zeit sind im BGB-Vorstand (Stand 30.06.2012):<br />
+Zur Zeit sind im BGB-Vorstand (Stand 30.07.2012):<br />
 <br />
 * Michael Vaahsen, Vorsitzender<br />
 * Gerald Halbig, stellv. Vorsitzender<br />

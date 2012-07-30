@@ -54,7 +54,7 @@ function __autoload($class_name)
 	normalize_settings();
 	set_language();
 	set_usercountry();
-
+	set_timezone();
 	// set stylepath and langpath
 	if (isset($opt['template']['style']))
 	{
@@ -203,6 +203,13 @@ function set_usercountry()
 
 	if (isset($_REQUEST['usercountry']))
 		$cookie->set('usercountry', $_REQUEST['usercountry']);
+}
+
+function set_timezone()
+{
+	global $opt;
+	
+	date_default_timezone_set($opt['locale'][$opt['template']['locale']]['timezone']);
 }
 
 function fix_magic_quotes_gpc()

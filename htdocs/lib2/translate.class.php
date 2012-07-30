@@ -106,7 +106,7 @@ class translateEdit extends translate
 		$this->backtrace_level = $backtrace_level;
 	}
 
-	function t($message, $style, $resource_name, $line, $plural='', $count=1)
+	function t($message, $style, $resource_name, $line, $plural='', $count=1, $lang=null)
 	{
 		global $opt;
 

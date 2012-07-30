@@ -108,19 +108,19 @@
 				<tr>
 					<td></td>
 					<td valign="top" style="padding-top:5px;"><img src='./resource2/{$opt.template.style}/images/difficulty/terr-10.gif' border='0' width='19' height='16' hspace='2' /></td>
-					<td>1: flat area with evenly paved ways, maximum halve a mile (0.8&nbsp;km) total route; suited for handicapped people</td>
+					<td>1: flat area with evenly paved ways, maximum 0.8&nbsp;km (halve a mile) total route; suited for handicapped people</td>
 				</tr>
 				<tr><td class="spacer"><img src="/images/trans.gif" border="0" width="1" height="1" alt="" title=""></td></tr>
 				<tr>
 					<td></td>
 					<td valign="top" style="padding-top:5px;"><img src='./resource2/{$opt.template.style}/images/difficulty/terr-20.gif' border='0' width='19' height='16' hspace='2' /></td>
-					<td>2: no major changes in altitude; paved ways, paths, lawns etc.; maxium total route of two miles (3.2&nbsp;km); suited for small children</td>
+					<td>2: no major changes in altitude; paved ways, paths, lawns etc.; maxium total route of 3.2&nbsp;km (2&nbsp;miles); suited for small children</td>
 				</tr>
 				<tr><td class="spacer"><img src="/images/trans.gif" border="0" width="1" height="1" alt="" title=""></td></tr>
 				<tr>
 					<td></td>
 					<td valign="top" style="padding-top:5px"><img src='./resource2/{$opt.template.style}/images/difficulty/terr-30.gif' border='0' width='19' height='16' hspace='2' /></td>
-					<td>3: pathless or steep area, some undergrow, maximum 10 miles (16&nbsp;km) of total route; not suited for small children</td> 
+					<td>3: pathless or steep area, some undergrow, maximum 16&nbsp;km (10&nbsp;miles) of total route; not suited for small children</td> 
 				</tr>
 				<tr><td class="spacer"><img src="/images/trans.gif" border="0" width="1" height="1" alt="" title=""></td></tr>
 				<tr>

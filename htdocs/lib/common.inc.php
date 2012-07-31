@@ -1198,7 +1198,7 @@ function __autoload($class_name)
 
 	function getUserCountry()
 	{
-		global $opt, $cookie;
+		global $opt, $cookie, $usr;
 
 		// language specified in cookie?
 		if ($cookie->is_set('usercountry'))
@@ -1223,7 +1223,8 @@ function __autoload($class_name)
 		// default country of installation (or domain)
 		if (isset($opt['template']['default']['country']))
 			return $opt['template']['default']['country'];
-
-		return 'EN';
+		
+		// country could not be determined by the above checks -> return "GB"
+		return 'GB';
 	}
 ?>

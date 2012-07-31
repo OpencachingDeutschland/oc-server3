@@ -1,0 +1,142 @@
+﻿
+             Opencaching Network Implementation Version 2.0
+
+
+                                                                  18th July 2007
+
+License Information
+
+Copyright (C) 2006, 2007  opencaching.de
+
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA
+
+
+In addition to the GNU GPL:
+
+You have to name and/or link opencaching.de to your customers as 
+original author of the used parts in your implementation.
+
+This license is only valid for the source code and documents stored in the 
+public CVS repository. There is a separate license agreement located on 
+opencaching.de for data transfer from and to opencaching.de.
+
+If you are using this source code to establish a geocache listing service
+or some sort of service which can be compared with it, you agree to 
+populate your geocaching data via XML the same way and under the same 
+(or less restrictive) conditions as opencaching.de does.
+
+
+A different license may apply to third party components being used.
+
+List of third party components:
+
+    1.  Smarty: Template Engine
+        Path    : code/htdocs/lib2/smarty/
+        URI     : http://www.smarty.net/
+        License : LGPL 3.0
+
+    2.  Smarty Gettext (modified)
+        URI     : http://sourceforge.net/projects/smarty-gettext
+        License : LGPL 2.1
+
+    3.  cracklib: Password checking library
+        URI     : http://sourceforge.net/projects/cracklib
+        License : LGPL 2.1
+
+    4.  b2evo captcha
+        Path    : code/htdocs/lib/b2evo-captcha/
+        Path    : code/htdocs/lib2/b2evo-captcha/
+        URI     : http://sourceforge.net/projects/b2evo-captcha
+        License : GPL
+        TODO: *** Package contains fonts, font licenses are not checked yet. ***
+
+    5.  OpenGeoDB
+        URI     : http://sourceforge.net/projects/opengeodb/
+        License : Public domain
+
+    6.  NGA GEOnet Names Server (GNS)
+        http://earth-info.nga.mil/gns/html/index.html
+
+    7.  InputFilter (modified)
+        URI     : http://freshmeat.net/projects/inputfilter/
+        URI     : http://cyberai.users.phpclasses.org/package/2189-PHP-Filter-out-unwanted-PHP-Javascript-HTML-tags-.html
+        License : GPL
+
+    8.  RFC(2)822 Email Parser by Cal Henderson
+        URI     : http://iamcal.com/publish/articles/php/parsing_email
+        License : CC BY-SA 2.5 / GPL 3.0
+
+    9.  ImageCreateFromBMP & ImageBMP
+        http://www.jpexs.com/eng/default/php.html   *** DEAD LINK ***
+
+    10. PROJ.4: Cartographic Projections Library
+        URI     : http://proj.maptools.org/
+        License : MIT
+
+    11. NUTS boundaries from Eurostat
+        URI     : http://epp.eurostat.ec.europa.eu/portal/page?_pageid=2254,62148876,2254_62153840&_dad=portal&_schema=PORTAL
+        (*** DEAD LINK ***)
+
+    12. NuSOAP: SOAP Toolkit for PHP
+        URI     : http://sourceforge.net/projects/nusoap/
+        License : LGPL 2.1
+
+    13. FamFamFam Flag
+        URI     : http://www.famfamfam.com/lab/icons/flags/
+        License : Public domain
+
+        “Flags” are 247 icons — in GIF and PNG formats — representing
+        most countries in the world as small pixel icons. These flag
+        icons are available for free use for any purpose with no
+        requirement for attribution.
+
+    14. JavaScript, DHTML Tooltips 
+        URI     : http://www.walterzorn.de/tooltip/tooltip.htm
+        License : LGPL
+
+    15. PHP Class: HTML to Plain Text Conversion
+        URI     : http://www.chuggnutt.com/html2text.php
+        License : GPL
+
+    16. Garmin Communicator API
+        https://my.garmin.com/api/communicator/key-generator.jsp
+
+    17. Prototype JavaScript framework
+        URI     : http://www.prototypejs.org/
+        License : MIT
+
+    18. In his hands: Font
+        URI     : http://www.fontdownloadsfree.com/fonts/1/22/inhishands_inhishan.html
+        Licence : *** UNKNOWN ***
+
+    19. EnlargeIt!: A little Javascript enlarging thumbnail images with a mouse click.
+        URI     : http://enlargeit.timos-welt.de
+        License : GPL 3.0
+
+    20. IE PNG Fix
+        URI     : http://www.twinhelix.com/css/iepngfix/
+        License : LGPL 2.1
+
+    21. Automatic Image Rotator
+        URI     : http://www.automaticlabs.com/ (*** no longer available online ***)
+        License : *** ??? ***
+
+    22. MultiFlex-2 CSS Design
+        http://www.openwebdesign.org/design/2876/MultiFlex21/
+
+    23. TinyMCE: JavaScript WYSIWYG Editor
+        Path    : code/htdocs/resource2/tinymce/
+        URI     : http://tinymce.moxiecode.com/
+        License : LGPL 2.1

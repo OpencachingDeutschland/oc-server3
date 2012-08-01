@@ -1,0 +1,118 @@
+
+    Opencaching MySQL Master/slave replication
+
+ 1. Overview
+
+    You can use MySQL master/slave-replication to execute readonly-queries
+    on slave servers. This is especially usefull because the most expensive
+    queries are search quries that do not need to modify tables (expect temporary
+    tables). Beside the server load the execution of long running queries on 
+    the slave reduces locking issues experienced with higher load scenarios.
+
+    Beware that a real load balancing is only achieved when you have at least 
+    a total of 3 MySQL servers available. One server is the master where fast
+    select quries and all insert/update quries are executed. The 2nd and 3rd server 
+    (the first slave) executes all search queries. The search queries are balanced 
+    between this 2 slaves by a custom relative weight.
+
+    Because most search-queries in search.php require the generation of temporary 
+    tables, these queries are logged in the binary log. Therefore if a search query 
+    is executed on the master, all slaves would execute this query again, which would
+    drop down the overall performance.
+
+    If you have only 2 physical servers available and the master has additional resource
+    available, you can setup a second mysql server on that physical server on a different
+    tcp port.
+
+ 2. Time lack between master and slave
+
+    On fast networks and medium server loads, the time difference required to update
+    the slaves is nearly 0 seconds. With increasing load or other technical problems like
+    network interupts the time lack grows. The OC source code detects this situation 
+    and does only redirect queries to slaves that are within a defined time difference.
+
+    However, you have to take care about what queries exactly will be redirected to the 
+    slaves. If a user generates a new log entry and is redirect to viewcache.php, after 
+    that short time difference, the new log is probably not replicated to the slaves.
+    Therefore the logs in viewcache.php should be read from the master.
+
+    TODO: Store in cookie, when the last critical write operation has been done by the
+          user and disable slave redirection for this user, until all slaves are up2date.
+          => can be done by calling sql_slave_exclude()
+
+ 3. Configuration and scripts to use replication
+
+ 3.1 settings.inc.php
+
+    You need to configure each slave database in the configuration see settings-dist.inc.php
+    for available options.
+
+ 3.2 util2/replication_monitor/replication_monitor.sh
+
+    This script updates a timestamp in the database every 10 seconds.
+    This timestamp will be replicated to each slave and can therefore
+    detect in a reliable way what time lack is in the binary log.
+
+    See remarks in the script how to install and use it.
+
+ 3.3 util2/cron/modules/replication_monitor.class.php
+
+    util2/cron/runcron.php should invoked once a minute. It will check if all slaves 
+    are reachable and what time lack they have. It will also check at what 
+    position the binary log is on the slave servers (see next section).
+
+    The DB user requires privilege "REPLICATION CLIENT". If you require SSL
+    replication, this may be a security risk.
+
+ 3.4 util2/replication_monitor/purge_master_logs.php
+
+    This script purges old binary logs that are no more required by any slave.
+
+    See remarks in the script how to install and use it.
+
+ 3.5 Excludes
+
+    Add to the my.cnf of the slave servers the following configuration:
+
+    replicate-ignore-table=ocde.sys_temptables
+    replicate-ignore-table=ocde.mapresult
+    replicate-ignore-table=ocde.mapresult_data
+    replicate-ignore-table=ocde.map2_data
+
+ 4. Fallback
+
+    If no slave is online, the code will fallback to the master.
+    However, because temporary tables are logged in the binary log,
+    the resync of the slaves will consume more time than without 
+    a fallback.
+
+ 5. Remarks
+
+ 5.1 Relative weights in settings.inc.php
+
+    Relative weight might be difficult to set up. When determining
+    what slave to use, the following query is issued (with filter
+    of slaves that are not up to date):
+
+    SELECT RAND()*weight AS rand_order, id, server 
+      FROM `sys_dbslaves` ORDER BY rand_order DESC LIMIT 1
+
+    The follwing weights for 2 or 3 slaves will result in
+    the follwing loads:
+
+    Weight 1   Weight 2   Weight 3   Load 1     Load 2    Load 3
+      100        100                   50%        50%
+      100         75                   63%        37%
+      100         50                   75%        25%
+      100         25                   87%        13%
+      100        100        100        33%        33%       33%
+      100         75         75        50%        25%       25%
+      100         50         50        66%        17%       17%
+
+ 5.2 Scripts using slave servers
+
+    newcaches.php
+    newcachesrest.php
+    newlogs.php
+    search.php
+    tops.php

@@ -1,0 +1,37 @@
+
+             Opencaching Network Implementation Version 2.0
+
+
+                                                                   22 May 2007
+
+ Copyright (C) 2007 opencaching.de
+
+ cracklib Information
+
+ 1) Install cracklib
+
+ Download and Install
+ http://sourceforge.net/projects/cracklib
+
+ Use the small wordlist shipped with the package.
+
+ 2) Install php-extension
+
+ Downlad pecl-extension
+ http://pecl.php.net/get/crack-0.4.tgz
+
+ Extract the content
+ # cd into the source-directory
+ # phpize
+ # ./configure
+ # make
+ # copy crack.so to your php-extension directory
+
+ set php.ini
+ [Crack]
+ crack.default_dictionary = "/usr/local/share/cracklib/pw_dict"
+
+ Further reading:
+ http://www.php.net/manual/de/function.crack-check.php
+ http://www.phpbar.de/w/PECL
+ http://pecl.php.net/package/crack

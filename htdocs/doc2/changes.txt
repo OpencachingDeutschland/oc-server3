@@ -1,0 +1,147 @@
+
+             Opencaching Network Implementation Version 2.0
+
+                        Changes File
+27.08.2010 (Oliver)
+  - modified translation system
+    (see translation.php, "scan source files" added)
+    Re-creation of table sys_trans_ref required - execute doc\sql\tables\sys_trans_ref.sql
+
+04.06.2010 (Oliver)
+  - master/slave replication added, see doc2/replication.txt
+
+01.05.2010 (Maik)
+  - integration of new design
+
+01.09.2009 (Uwe)
+  - change viewchache.php to distinguish between printout and just display
+  - change /templates2/viewcache_print.tpl to a new layout and add some graphics
+
+14.02.2009 (Oliver)
+  - added fix to check correct translation. Sometimes template
+    was not translated correct upon compilation
+  - added nature protection areas
+
+ 11.07.2008 (Oliver)
+  - display current top ratings
+
+ 06.07.2008 (Oliver)
+  - migration of util/stats/rank.php
+  - migration of util/google-earth/caches.php
+    and implemented Zoom In message when download area is to big
+  - delete not activated users after 21 days
+
+ 02.07.2008 (Oliver)
+  - migrated util/publish_caches to util2/cron
+  - added and modified triggers to allow notify of new caches
+    and refreshing the signature image (ocstats.php)
+
+ 01.07.2008 (Oliver)
+  - added options to show not found's or log notes 
+    in search.php and viewprofile.php
+
+ 15.06.2008 (Oliver)
+  - added script to disable or delete users
+    adminuser.php
+
+ 13.06.2008 (Oliver)
+  - modified cache adoption
+  - table adoptionrequests changed to cache_adoption
+  - changed/new files: adoptcache.php, lib2/logic/cache.class.php
+  - changed/new templates: adoptcache.tpl, viewcache.tpl
+
+ 08.06.2008 (Carsten)
+  - added support for adoption of caches by users
+  - new table: adoptionrequests.sql
+  - changed/new files: adoptcache.php, lib2/logic/cache.class.php
+  - changed/new templates: adoptcache.tpl, viewcache.tpl
+
+ 17.02.2008 (Oliver)
+  - added SOAP service prototype
+
+ 03.02.2008 (Carsten)
+  - new detailed user profile (all details are optional)
+  - new tables: - profile_options.sql (all possible profile options)
+                - user_options.sql (user saved values for profile details)
+  - new data: for profile_options and sys_menu in static-data/data.sql
+  - new constants: lib2/const.inc.php (only for internally used profile options)
+  - changed/new files: mydetails.php, viewuserdetails.php, viewcache.php,
+                       lib2/logic/useroptions.class.php
+  - changed/new templates: mydetails.tpl, viewuserdetails.tpl, viewcache.tpl, viewprofile.tpl
+
+ 27.01.2008 (Oliver)
+  - static-data/data.sql ersetzt einzelne Dateien
+
+ 25.11.2007 (Carsten)
+  - reporting caches to oc-team-members
+  - new tables (+ static data): cache_reports, cache_report_reasons,
+                                cache_report_status
+  - changed sql: sys_menu.sql, sys_trans.sql, sys_trans_text.sql
+  - new php: adminreports.php, reportcache.php
+  - changed php: lib2/logic/cache.class.php
+  - new templates: templates2/stdstyle/adminreports.tpl, reportcache.tpl
+  - changed templates: templates2/stdstyle/viewcache.tpl             
+
+ 02.11.2007 (Oliver)
+  - Table cache_location erweitert
+  - New tables nuts_layer and nuts_codes
+
+  - Changed calculation of cache_location to GIS data
+
+ 01.06.2007 (Oliver)
+  - added support for php sessions
+    development version - not fully tested!
+    use SAVE_COOKIE in productive environment
+
+ 27.06.2007 (Oliver)
+  - improved sqldebugger (filter for framework DB calls)
+  - businesslayer functions have to use sqll() and sqll_value()
+  - framework functions have to use sqlf() and sqlf_value()
+  - all new 4 functions behave like sql() and sql_value(), expect
+    that sqldebugger can filter the statements
+
+ 25.06.2007 (Oliver)
+  - added function to switch to db root privileges
+  - added function to export sys_trans etc. to doc/sql/static-data
+  - added config options to allow the same code hosted on different
+    domains with different default language
+
+ 23.06.2007 (Oliver)
+  - new tables languages_list_default and countries_list_default
+  - tables languages and countries modified
+  - modifed translate.php to allow country and language translation
+
+ 28.05.2007 (Oliver)
+
+  - modified Smarty_Compiler.class.php to give $resource_name to prefilter's
+  - new tables sys_trans, sys_trans_text, sys_trans_ref
+  - new debug flag DEBUG_TRANSLATE
+
+ 23.05.2007 (Oliver)
+
+  - modified mail.class.php to use smarty template processing
+
+ 22.05.2007 (Oliver)
+
+  - added cracklib-support for checking password strength
+    see cracklib.txt for install instructions
+
+ 11.05.2007 (Oliver)
+
+  - new index on sys_menu.href
+
+ 04.05.2007 (Oliver)
+
+  - handling of DEBUG_SQLDEBUGGER changed
+  - sql_error() and sql_warn() implemented
+  - new configuration parameters
+  - configure php.ini at startup to show or hide error messages
+  - upgraded news-site to new template system
+  - date-formats in variables (see settings-dist.inc.php)
+    {$newsItem.date_posted|date_format:$opt.format.datetime}
+
+ 22.01.2007 (Oliver)
+
+  Inital development release of version 2
+
+  DO NOT MIX VERSION 1 AND VERSION 2 SOURCES

@@ -5011,7 +5011,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('710', 'DE', 'andere Koordinatensysteme', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('711', 'DE', 'Größe', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('712', 'DE', 'Zeitaufwand', '2010-08-28 11:48:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('713', 'DE', 'Weglänge', '2010-08-28 11:48:06');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('713', 'DE', 'Entfernung', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('715', 'DE', 'Versteckt am', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('716', 'DE', 'Gelistet seit', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('717', 'DE', 'Letzte Änderung', '2010-08-28 11:48:06');
@@ -5344,7 +5344,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1415', 'DE', '(nur für Gefunden-Logs)', '2010-09-10 23:44:54');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1416', 'DE', 'Neuen Cache eintragen', '2010-09-10 23:44:37');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1417', 'DE', 'Falls dies dein erster Cache auf Opencaching.de sein sollte, lies bitte zuerst die <a href=\"articles.php?page=cacheinfo\">Beschreibung</a> zu den einzelnen Feldern durch.', '2010-09-10 23:46:21');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1418', 'DE', 'Entfernung', '2010-09-10 23:32:36');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1418', 'DE', 'Wegstrecke', '2010-09-10 23:32:36');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1419', 'DE', 'Der Aufwand kann natürlich nur geschätzt werden und kann auch je nach Umwelteinflüssen sehr verschieden sein. Solltest du keine ausreichend genauen Angaben machen können, schreibe in beide Felder 0 (Null). (Siehe auch: <a href=\"articles.php?page=cacheinfo#time\" target=\"_blank\">Beschreibung</a>)', '2010-09-10 23:46:13');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1420', 'DE', 'Sprache:', '2010-09-10 23:45:25');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1421', 'DE', 'Weitere Beschreibungen in anderen Sprachen können nach dem Veröffentlichen des Caches eingetragen werden.', '2010-09-10 23:44:19');
@@ -9437,7 +9437,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1415', 'IT', '(solo per i log \"trovata\")', '2010-09-10 23:44:54');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1416', 'IT', 'Proponi una nuova cache', '2010-09-10 23:44:37');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1417', 'IT', 'Se questa è la tua prima cache su Opencaching.de, assicurati di controllare le dimensioni nella <a href=\"articles.php?page=cacheinfo\">descrizione</a>', '2010-10-27 18:49:19');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1418', 'IT', 'Distanza', '2010-09-10 23:32:36');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1418', 'IT', 'Tragitto', '2010-09-10 23:32:36');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1419', 'IT', 'Lo sforzo naturalmente può solo essere stimato e può variare anche a seconda delle condizioni ambientali. Se non è possibile rendere disponibili informazioni sufficientemente dettagliate, scrivere in entrambi i campi 0 (zero). (Vedi anche la <a href=\"articles.php?page=cacheinfo#time\" target=\"_blank\">descrizione</a>)', '2010-10-27 18:49:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1420', 'IT', 'Lingua:', '2010-09-10 23:45:25');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1421', 'IT', 'Descrizioni in altre lingue possono essere aggiunte dopo la pubblicazione della cache.', '2010-09-10 23:44:19');

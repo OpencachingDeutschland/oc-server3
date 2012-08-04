@@ -24,7 +24,7 @@
 			f&ouml;rdern, bietet Opencaching alle Stammdaten in einer einfach zu 
 			verarbeitenden Form zum Download an. Dabei sind die geltenden Datenschutzhinweise 
 			sowie Nutzungsbedingungen zu beachten.</p>
-<p>
+<br />
 <p><b>Betreiber des Internetangebotes</b></p>
 
 			<p>Das Internetangebot auf Opencaching.de wurde in gemeinschaftlicher 
@@ -72,6 +72,8 @@ Zur Zeit sind im BGB-Vorstand (Stand 30.07.2012):<br />
 			
 			<p>Opencaching.de wird im folgenden als Synonym f&uuml;r den Betreiber des 
 			Internetauftritts verwendet.</p>
+
+<br />			
 <p><b>Haftungshinweis f&uuml;r externe Links</b></p>
 
 			<p>Trotz sorgf&auml;ltiger inhaltlicher Kontrolle &uuml;bernehmen wir keine Haftung f&uuml;r 
@@ -80,6 +82,8 @@ Zur Zeit sind im BGB-Vorstand (Stand 30.07.2012):<br />
 			verlinken Seiten bedenkliche Inhalte zu finden sein, oder auf solche verlinkt 
 			werden, bittet Opencaching.de darum per E-Mail dar&uuml;ber informiert zu werden. 
 			Der entsprechende Link wird dann gepr&uuml;ft und ggf. unverz&uuml;glich entfernt.</p>
+
+<br />
 <p><b><a name="tos"></a>Nutzungsbedingungen</b></p>
 
 			<p>Die Nutzung des Internetangebotes erfolgt ausdr&uuml;cklich auf eigene Gefahr. 

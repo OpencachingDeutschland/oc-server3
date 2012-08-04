@@ -36,7 +36,7 @@
     <tr><td><img src="images/team/dummy.jpg" /</td><td><a href="http://opencaching.de/viewprofile.php?userid=222261">Danlex</a></td><td>Anwendersupport, Datenpflege</td></tr>
     <tr><td><img src="images/team/dl6hbo.jpg" /</td><td><a href="http://opencaching.de/viewprofile.php?userid=148310">dl6hbo</a></td><td>Serverbetrieb, Dokumentation</td></tr>
     <tr><td><img src="images/team/flopp.png" /</td><td><a href="http://opencaching.de/viewprofile.php?userid=126329">Flopp</a></td><td>Softwareentwicklung, Anwendersupport, Datenpflege</td></tr>
-    <tr><td><img src="images/team/following.png" /</td><td><a href="http://opencaching.de/viewprofile.php?userid=150360">following</a></td><td>Softwareentwicklung, Datenpflege, Forenmoderation</td></tr>
+    <tr><td><img src="images/team/following.png" /</td><td><a href="http://opencaching.de/viewprofile.php?userid=150360">following</a></td><td>stellvertretender Entwicklungsleiter, Datenpflege, Forenmoderation</td></tr>
     <tr><td><img src="images/team/dummy.jpg" /</td><td><a href="http://opencaching.de/viewprofile.php?userid=205779">Hanekju</a></td><td>Datenpflege</td></tr>
     <tr><td><img src="images/team/joerg.jpg" /</td><td><a href="http://opencaching.de/viewprofile.php?userid=102153">Jörg</a></td><td>Berater für Naturschutz und Kontakte zu Behörden und Verbänden</td></tr>
     <tr><td><img src="images/team/dummy.jpg" /</td><td><a href="http://opencaching.de/viewprofile.php?userid=137500">MATiKaL</a></td><td>Serverbetrieb</td></tr>

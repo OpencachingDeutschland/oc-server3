@@ -9,7 +9,7 @@
 	<div class="content-txtbox-noshade" style="padding-right: 25px;">
 
 
-<p><img src="images/ueber.jpg" alt="Über Geocaching" align="right" style="margin-left: 5px;" />Geocaching l&auml;sst sich am besten als eine Art moderner Schnitzeljagd beschreiben. Kurz und generalisiert gefasst: Es gibt Leute, die verstecken irgendwo Dosen voller kleiner netter Dinge sowie einem Logbuch. Und ver&ouml;ffentlichen das Versteck in Form von Koordinaten im Internet.</p>
+<p><img src="images/ueber_oc.jpg" alt="&uuml;ber Geocaching" align="right" style="margin-left: 5px;" />Geocaching l&auml;sst sich am besten als eine Art moderner Schnitzeljagd beschreiben. Kurz und generalisiert gefasst: Es gibt Leute, die verstecken irgendwo Dosen voller kleiner netter Dinge sowie einem Logbuch. Und ver&ouml;ffentlichen das Versteck in Form von Koordinaten im Internet.</p>
 <p>Dies lesen andere, merken sich die Koordinaten und nutzen ihr GPS-Ger&auml;t, um die Sch&auml;tze zu finden. Dann wird eine Kleinigkeit aus dem Inhalt ausgetauscht, der Besuch geloggt und die Dose wieder an derselben Stelle versteckt - f&uuml;r den n&auml;chsten...</p>
 <p>Soweit zu den Grundregeln. Aber nat&uuml;rlich steckt viel mehr dahinter. Beispielsweise gibt es unterschiedlichste Cache-Arten, vom einfachen Cache, bei dem man praktisch fast mit dem Auto vorfahren kann &uuml;ber Caches, die nur mit speziellem Equipment erreichbar sind (z.B. mit Bergsteiger- oder Schnorchelausr&uuml;stung) bis hin zu R&auml;tselcaches, die vor Ort oder sogar schon im Vorfeld Recherche und Knobelei erfordern.</p>
 

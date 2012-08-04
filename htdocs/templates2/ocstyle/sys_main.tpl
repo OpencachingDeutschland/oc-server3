@@ -159,9 +159,9 @@
 
 			{* <!-- Debugschalter hier wieder einsetzen --> *}
 			{if ($opt.debug & DEBUG_DEVELOPER) == DEBUG_DEVELOPER}
-				<div id="debugoc"><font size="6" face="arial" color="red"><center>{t}Developer system - only testing{/t}</center></font></div>
+				<div id="debugoc"><font size="5" face="arial" color="red"><center>{t}Developer system - only testing{/t}</center></font></div>
 			{elseif ($opt.debug & DEBUG_TESTING) == DEBUG_TESTING}
-				<div id="debugoc"><font size="6" face="arial" color="red"><center>{t}Testing - do not login, please{/t}</center></font></div>
+				<div id="debugoc"><font size="5" face="arial" color="red"><center>{t}Testing - do not login, please{/t}</center></font></div>
 			{/if}
 
 

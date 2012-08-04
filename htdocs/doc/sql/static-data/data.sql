@@ -4911,7 +4911,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('609', 'DE', 'Der angegebene Benutzer ist noch nicht aktiviert.', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('610', 'DE', 'Sicherheitscode:', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('611', 'DE', 'Der Sicherheits-Code ist abgelaufen. Fordern Sie einen neuen an.', '2010-08-28 11:48:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('612', 'DE', 'Die beiden Passwörter stimmen nicht überein.', '2010-08-28 11:48:06');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('612', 'DE', 'Der Sicherheitscode stimmt nicht.', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('613', 'DE', 'Passwort wiederholen:', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('614', 'DE', 'Das Passwort wurde geändert, du kannst dich nun mit dem neuen Passwort <a href=\"login.php\">anmelden</a>.', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('615', 'DE', 'Sicherheitscode für eine neue E-Mail-Adresse', '2010-08-28 11:48:06');

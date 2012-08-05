@@ -30,7 +30,6 @@
     <tr><td class="header-small"><b>Bild</b></td><td class="header-small"><b>Nickname</b></td><td class="header-small"><b>Aufgabenbereiche</b></td></tr>
     <tr><td></td><td></td><td></td></tr>
     <tr><td><img src="images/team/aldeyn.jpg" /</td><td><a href="http://opencaching.de/viewprofile.php?userid=174233">Aldeyn</a></td><td>Softwareentwicklung</td></tr>
-    <tr><td><img src="images/team/dummy.jpg" /</td><td><a href="http://opencaching.de/viewprofile.php?userid=129285">biboleck30</a></td><td>Anwendersupport, Datenpflege</td></tr>
     <tr><td><img src="images/team/bundy609.jpg" /</td><td><a href="http://opencaching.de/viewprofile.php?userid=189552">Bundy609</a></td><td>Anwendersupport, Datenpflege</td></tr>
     <tr><td><img src="images/team/dummy.jpg" /</td><td><a href="http://opencaching.de/viewprofile.php?userid=122006">Carnosaurus</a></td><td>Serverbetrieb</td></tr>
     <tr><td><img src="images/team/dummy.jpg" /</td><td><a href="http://opencaching.de/viewprofile.php?userid=222261">Danlex</a></td><td>Anwendersupport, Datenpflege</td></tr>

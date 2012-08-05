@@ -1,7 +1,7 @@
 <?php
 	// Unicode Reminder メモ
 
-	$mailfrom = 'watch@mail.opencaching.de';
+	$mailfrom = 'noreply@opencaching.de';
 	$mailsubject = '[opencaching.de] Deine Watchlist vom ' . date('d.m.Y');
 
 	$debug = false;

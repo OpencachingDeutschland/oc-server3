@@ -20,10 +20,10 @@
 		
 	***************************************************************************/
 
-  $rootpath = '../../';
-	require_once($rootpath . 'lib/clicompatbase.inc.php');
+  $rootpath = '/mnt/opencaching/www.opencaching.de/code/htdocs/';
+	require_once('/mnt/opencaching/www.opencaching.de/code/htdocs/lib/clicompatbase.inc.php');
   require_once('settings.inc.php');
-	require_once($rootpath . 'lib/consts.inc.php');
+	require_once('/mnt/opencaching/www.opencaching.de/code/htdocs/lib/consts.inc.php');
 	require_once($rootpath . 'lib2/html2text.class.php');
 
 	// use posix pid-files to lock process 
@@ -102,7 +102,7 @@
 				if ($r['count'] > 0)
 				{
 					// ok, eine mail ist fäig
-					$mailbody = read_file('watchlist.email');
+					$mailbody = read_file('/mnt/opencaching/www.opencaching.de/code/htdocs/util/watchlist/watchlist.email');
 					$mailbody = mb_ereg_replace('{username}', $rUser['username'], $mailbody);
 
 					$rsWatchesOwner = sql("SELECT id, watchtext FROM watches_waiting WHERE user_id='&1' AND watchtype=1 ORDER BY id DESC", $rUser['user_id']);

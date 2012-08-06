@@ -23,7 +23,7 @@
 	define('RE_INSERT_UUID', 8);          // UUID()
 	define('RE_INSERT_NOW', 16);          // NOW()
 
-	define('REGEX_USERNAME', '^[a-zA-Z0-9\.\-_@äüöÄÜÖ=)(\/\\\&*+~#][a-zA-Z0-9\.\-_ @äüöÄÜÖ=)(\/\\\&*+~#]{2,58}[a-zA-Z0-9\.\-_@äüöÄÜÖ=)(\/\\\&*+~#]$');
+	define('REGEX_USERNAME', '^[a-zA-Z0-9\.\-_@äüöÄÜÖ=)(\/\\\&*+~#][a-zA-Z0-9\.\-_ @äüöÄÜÖ=)(\/\\\&*+~#]{1,58}[a-zA-Z0-9\.\-_@äüöÄÜÖ=)(\/\\\&*+~#]$');   // min. 4 -> 3 chars -- following 2012-8-6
 	define('REGEX_PASSWORD', '^[a-zA-Z0-9\.\-_ @äüöÄÜÖ=)(\/\\\&*+~#]{3,60}$');
 	define('REGEX_LAST_NAME', '^[a-zA-Z][a-zA-Z0-9\.\- äüöÄÜÖ]{1,59}$');
 	define('REGEX_FIRST_NAME', '^[a-zA-Z][a-zA-Z0-9\.\- äüöÄÜÖ]{1,59}$');

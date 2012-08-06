@@ -156,11 +156,11 @@ INSERT INTO `cache_type` (`id`, `name`, `trans_id`, `ordinal`, `short`, `de`, `e
 INSERT INTO `cache_type` (`id`, `name`, `trans_id`, `ordinal`, `short`, `de`, `en`, `icon_large`) VALUES ('2', 'Traditional Cache', '536', '1', 'Trad.', 'normaler Cache', 'Traditional Cache', 'cache/traditional.gif');
 INSERT INTO `cache_type` (`id`, `name`, `trans_id`, `ordinal`, `short`, `de`, `en`, `icon_large`) VALUES ('3', 'Multicache', '514', '2', 'Multi', 'Multicache', 'Multicache', 'cache/multi.gif');
 INSERT INTO `cache_type` (`id`, `name`, `trans_id`, `ordinal`, `short`, `de`, `en`, `icon_large`) VALUES ('4', 'virtual Cache', '537', '6', 'Virt.', 'virtueller Cache', 'virtual Cache', 'cache/virtual.gif');
-INSERT INTO `cache_type` (`id`, `name`, `trans_id`, `ordinal`, `short`, `de`, `en`, `icon_large`) VALUES ('5', 'Webcam Cache', '538', '7', 'ICam.', 'Webcam Cache', 'Webcam Cache', 'cache/webcam.gif');
-INSERT INTO `cache_type` (`id`, `name`, `trans_id`, `ordinal`, `short`, `de`, `en`, `icon_large`) VALUES ('6', 'Event Cache', '539', '3', 'Event', 'Event Cache', 'Event Cache', 'cache/event.gif');
+INSERT INTO `cache_type` (`id`, `name`, `trans_id`, `ordinal`, `short`, `de`, `en`, `icon_large`) VALUES ('5', 'Webcam Cache', '538', '7', 'ICam.', 'Webcam-Cache', 'Webcam Cache', 'cache/webcam.gif');
+INSERT INTO `cache_type` (`id`, `name`, `trans_id`, `ordinal`, `short`, `de`, `en`, `icon_large`) VALUES ('6', 'Event Cache', '539', '3', 'Event', 'Event-Cache', 'Event Cache', 'cache/event.gif');
 INSERT INTO `cache_type` (`id`, `name`, `trans_id`, `ordinal`, `short`, `de`, `en`, `icon_large`) VALUES ('7', 'Quizcache', '518', '8', 'Quiz', 'Rätselcache', 'Quizcache', 'cache/mystery.gif');
 INSERT INTO `cache_type` (`id`, `name`, `trans_id`, `ordinal`, `short`, `de`, `en`, `icon_large`) VALUES ('8', 'Math/Physics-Cache', '540', '9', 'Math', 'Mathe-/Physikcache', 'Math/Physics-Cache', 'cache/mathe.gif');
-INSERT INTO `cache_type` (`id`, `name`, `trans_id`, `ordinal`, `short`, `de`, `en`, `icon_large`) VALUES ('9', 'Moving Cache', '541', '4', 'Moving', 'Beweglicher Cache', 'Moving Cache', 'cache/moving.gif');
+INSERT INTO `cache_type` (`id`, `name`, `trans_id`, `ordinal`, `short`, `de`, `en`, `icon_large`) VALUES ('9', 'Moving Cache', '541', '4', 'Moving', 'beweglicher Cache', 'Moving Cache', 'cache/moving.gif');
 INSERT INTO `cache_type` (`id`, `name`, `trans_id`, `ordinal`, `short`, `de`, `en`, `icon_large`) VALUES ('10', 'Drive-In', '542', '5', 'Driv.', 'Drive-In', 'Drive-In', 'cache/drivein.gif');
 
 -- Table cache_logtype
@@ -572,25 +572,25 @@ INSERT INTO `languages_list_default` (`lang`, `show`) VALUES ('IT', 'SK');
 -- Table log_types
 SET NAMES 'utf8';
 TRUNCATE TABLE `log_types`;
-INSERT INTO `log_types` (`id`, `name`, `trans_id`, `permission`, `cache_status`, `de`, `en`, `icon_small`, `allow_rating`, `require_password`) VALUES ('1', 'Found', '56', 'C', '0', 'Gefunden', 'Found', 'log/16x16-found.png', '1', '1');
-INSERT INTO `log_types` (`id`, `name`, `trans_id`, `permission`, `cache_status`, `de`, `en`, `icon_small`, `allow_rating`, `require_password`) VALUES ('2', 'Not found', '497', 'C', '0', 'Nicht gefunden', 'Not found', 'log/16x16-dnf.png', '0', '0');
+INSERT INTO `log_types` (`id`, `name`, `trans_id`, `permission`, `cache_status`, `de`, `en`, `icon_small`, `allow_rating`, `require_password`) VALUES ('1', 'Found', '56', 'C', '0', 'gefunden', 'Found', 'log/16x16-found.png', '1', '1');
+INSERT INTO `log_types` (`id`, `name`, `trans_id`, `permission`, `cache_status`, `de`, `en`, `icon_small`, `allow_rating`, `require_password`) VALUES ('2', 'Not found', '497', 'C', '0', 'nicht gefunden', 'Not found', 'log/16x16-dnf.png', '0', '0');
 INSERT INTO `log_types` (`id`, `name`, `trans_id`, `permission`, `cache_status`, `de`, `en`, `icon_small`, `allow_rating`, `require_password`) VALUES ('3', 'Note', '20', 'A', '0', 'Bemerkung', 'Note', 'log/16x16-note.png', '0', '0');
-INSERT INTO `log_types` (`id`, `name`, `trans_id`, `permission`, `cache_status`, `de`, `en`, `icon_small`, `allow_rating`, `require_password`) VALUES ('7', 'Attended', '498', 'C', '0', 'Teilgenommen', 'Attended', 'log/16x16-go.png', '1', '1');
-INSERT INTO `log_types` (`id`, `name`, `trans_id`, `permission`, `cache_status`, `de`, `en`, `icon_small`, `allow_rating`, `require_password`) VALUES ('8', 'Will attend', '499', 'C', '0', 'Will dabei sein', 'Will attend', 'log/16x16-trash.png', '0', '0');
+INSERT INTO `log_types` (`id`, `name`, `trans_id`, `permission`, `cache_status`, `de`, `en`, `icon_small`, `allow_rating`, `require_password`) VALUES ('7', 'Attended', '498', 'C', '0', 'teilgenommen', 'Attended', 'log/16x16-go.png', '1', '1');
+INSERT INTO `log_types` (`id`, `name`, `trans_id`, `permission`, `cache_status`, `de`, `en`, `icon_small`, `allow_rating`, `require_password`) VALUES ('8', 'Will attend', '499', 'C', '0', 'will dabei sein', 'Will attend', 'log/16x16-trash.png', '0', '0');
 
 -- Table log_types_text
 SET NAMES 'utf8';
 TRUNCATE TABLE `log_types_text`;
-INSERT INTO `log_types_text` (`id`, `log_types_id`, `lang`, `text_combo`, `text_listing`) VALUES ('1', '1', 'DE', 'Gefunden', 'hat den Cache gefunden');
-INSERT INTO `log_types_text` (`id`, `log_types_id`, `lang`, `text_combo`, `text_listing`) VALUES ('2', '2', 'DE', 'Nicht gefunden', 'hat den Cache nicht gefunden');
+INSERT INTO `log_types_text` (`id`, `log_types_id`, `lang`, `text_combo`, `text_listing`) VALUES ('1', '1', 'DE', 'gefunden', 'hat den Cache gefunden');
+INSERT INTO `log_types_text` (`id`, `log_types_id`, `lang`, `text_combo`, `text_listing`) VALUES ('2', '2', 'DE', 'nicht gefunden', 'hat den Cache nicht gefunden');
 INSERT INTO `log_types_text` (`id`, `log_types_id`, `lang`, `text_combo`, `text_listing`) VALUES ('3', '3', 'DE', 'Bemerkung', 'hat eine Bemerkung geschrieben');
-INSERT INTO `log_types_text` (`id`, `log_types_id`, `lang`, `text_combo`, `text_listing`) VALUES ('4', '4', 'DE', 'Gesperrt', 'hat den Cache gesperrt');
-INSERT INTO `log_types_text` (`id`, `log_types_id`, `lang`, `text_combo`, `text_listing`) VALUES ('5', '5', 'DE', 'Fregegeben', 'hat den Cache wieder freigegeben');
-INSERT INTO `log_types_text` (`id`, `log_types_id`, `lang`, `text_combo`, `text_listing`) VALUES ('6', '6', 'DE', 'Entfernt', 'hat den Cache entfernt');
+INSERT INTO `log_types_text` (`id`, `log_types_id`, `lang`, `text_combo`, `text_listing`) VALUES ('4', '4', 'DE', 'gesperrt', 'hat den Cache gesperrt');
+INSERT INTO `log_types_text` (`id`, `log_types_id`, `lang`, `text_combo`, `text_listing`) VALUES ('5', '5', 'DE', 'fregegeben', 'hat den Cache wieder freigegeben');
+INSERT INTO `log_types_text` (`id`, `log_types_id`, `lang`, `text_combo`, `text_listing`) VALUES ('6', '6', 'DE', 'entfernt', 'hat den Cache entfernt');
 INSERT INTO `log_types_text` (`id`, `log_types_id`, `lang`, `text_combo`, `text_listing`) VALUES ('13', '7', 'EN', 'attended', 'attended the event');
 INSERT INTO `log_types_text` (`id`, `log_types_id`, `lang`, `text_combo`, `text_listing`) VALUES ('14', '8', 'EN', 'will attend', 'will attend the event');
 INSERT INTO `log_types_text` (`id`, `log_types_id`, `lang`, `text_combo`, `text_listing`) VALUES ('15', '7', 'DE', 'Teilgenommen', 'hat am Event teilgenommen');
-INSERT INTO `log_types_text` (`id`, `log_types_id`, `lang`, `text_combo`, `text_listing`) VALUES ('16', '8', 'DE', 'Will dabei sein', 'beabsichtigt, am Event teilzunehmen');
+INSERT INTO `log_types_text` (`id`, `log_types_id`, `lang`, `text_combo`, `text_listing`) VALUES ('16', '8', 'DE', 'will dabei sein', 'beabsichtigt, am Event teilzunehmen');
 
 -- Table logentries_types
 SET NAMES 'utf8';
@@ -4364,7 +4364,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('52', 'DE', 'Besondere Caches', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('54', 'DE', 'Index', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('55', 'DE', 'Empfehlungen', '2010-08-28 11:48:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('56', 'DE', 'Gefunden', '2010-08-28 11:48:06');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('56', 'DE', 'gefunden', '2012-07-24 21:30:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('57', 'DE', 'von', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('58', 'DE', 'HTML Vorschau', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('59', 'DE', 'Rumänisch', '2010-08-28 11:48:06');
@@ -4796,9 +4796,9 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('494', 'DE', 'Kann gesucht werden', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('495', 'DE', 'Momentan nicht verfügbar', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('496', 'DE', 'Archiviert', '2010-08-28 11:48:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('497', 'DE', 'Nicht gefunden', '2010-08-28 11:48:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('498', 'DE', 'Teilgenommen', '2010-08-28 11:48:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('499', 'DE', 'Möchte teilnehmen', '2010-08-28 11:48:06');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('497', 'DE', 'nicht gefunden', '2012-07-24 21:30:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('498', 'DE', 'teilgenommen', '2012-07-24 21:30:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('499', 'DE', 'möchte teilnehmen', '2012-07-24 21:30:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('500', 'DE', 'Herzlich Willkommen %1', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('501', 'DE', 'Logs', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('502', 'DE', 'Gefundene Caches: %1', '2010-08-28 11:48:06');
@@ -4836,10 +4836,10 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('535', 'DE', 'unbekannter Cachetyp', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('536', 'DE', 'normaler Cache', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('537', 'DE', 'virtueller Cache', '2010-08-28 11:48:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('538', 'DE', 'Webcam Cache', '2010-08-28 11:48:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('539', 'DE', 'Event Cache', '2010-08-28 11:48:06');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('538', 'DE', 'Webcam-Cache', '2012-07-24 21:30:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('539', 'DE', 'Event-Cache', '2012-07-24 21:30:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('540', 'DE', 'Mathe-/Physikcache', '2010-08-28 11:48:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('541', 'DE', 'Beweglicher Cache', '2010-08-28 11:48:06');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('541', 'DE', 'beweglicher Cache', '2012-07-24 21:30:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('542', 'DE', 'Drive-In Cache', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('544', 'DE', 'Ich möchte über neue Caches im Umkreis von %1 km benachrichtigt werden.', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('545', 'DE', 'BBCode (für Foren):', '2010-08-28 11:48:06');
@@ -4944,10 +4944,10 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('644', 'DE', 'Keine ignorierten Caches gefunden', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('645', 'DE', 'Beobachtete Caches - Einstellungen', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('646', 'DE', 'Versandart:', '2010-08-28 11:48:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('647', 'DE', 'Sofort', '2010-08-28 11:48:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('648', 'DE', 'Täglich', '2010-08-28 11:48:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('649', 'DE', 'Wöchentlich', '2010-08-28 11:48:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('650', 'DE', 'Versenden um:', '2010-08-28 11:48:06');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('647', 'DE', 'sofort', '2012-07-24 21:30:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('648', 'DE', 'täglich', '2012-07-24 21:30:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('649', 'DE', 'wöchentlich', '2012-07-24 21:30:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('650', 'DE', 'versenden um:', '2012-07-24 21:30:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('651', 'DE', 'Uhr', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('652', 'DE', 'Versenden am:', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('653', 'DE', 'Versandstunde und -tag wird nur bei täglichem/wöchentlichem Versand berücksichtigt', '2010-08-28 11:48:06');
@@ -5308,15 +5308,15 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1380', 'DE', 'Cachesuche', '2010-09-10 23:52:44');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1381', 'DE', 'JavaScript ist bei dir deaktiviert, du kannst die folgenden Optionen nicht nutzen - die Suche funktioniert aber trotzdem.', '2010-09-10 23:52:36');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1382', 'DE', 'Ausgabe sortieren nach:', '2010-09-10 23:52:28');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1383', 'DE', 'Letzte Logs', '2010-09-10 23:52:16');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1383', 'DE', 'letzte Logs', '2012-07-24 21:30:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1384', 'DE', 'Empfehlungen von anderen Benutzern zuerst anzeigen', '2010-09-10 23:51:58');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1385', 'DE', 'Entfernung nur nutzbar falls eingeloggt und Heimkoordinaten vorhanden<br />Bei Suche nach Entfernung wird die Entfernung von den eingegebenen Koordinaten verwendet.', '2010-09-10 23:51:48');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1386', 'DE', 'Caches ausblenden:', '2010-09-10 23:51:41');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1387', 'DE', 'Eigene', '2010-09-10 23:51:32');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1388', 'DE', 'Gefundene', '2010-09-10 23:51:21');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1389', 'DE', 'Ignorierte', '2010-09-10 23:51:14');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1387', 'DE', 'eigene', '2012-07-24 21:30:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1388', 'DE', 'gefundene', '2012-07-24 21:30:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1389', 'DE', 'ignorierte', '2012-07-24 21:30:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1390', 'DE', 'Nur nutzbar falls eingeloggt.', '2010-09-10 23:51:04');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1391', 'DE', 'Inaktive', '2010-09-10 23:50:53');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1391', 'DE', 'inaktive', '2012-07-24 21:30:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1392', 'DE', 'Cacheattribute:', '2010-09-10 23:50:44');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1393', 'DE', 'Suche nach Entfernung', '2010-09-10 23:50:34');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1394', 'DE', 'Von Koordinaten:', '2010-09-10 23:50:24');
@@ -5351,9 +5351,9 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1425', 'DE', 'Zus\&auml;tzlicher Hinweis:', '2010-09-10 23:42:23');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1426', 'DE', 'Bilder für diesen Cache können nach dem Anlegen des Caches hinzugefügt werden.', '2010-09-10 23:42:12');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1427', 'DE', 'Veröffentlichung:', '2010-09-10 23:40:47');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1428', 'DE', 'Sofort veröffentlichen', '2010-09-10 23:40:08');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1429', 'DE', 'Veröffentlichen am', '2010-09-11 00:08:26');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1430', 'DE', 'Noch nicht veröffentlichen', '2010-09-11 02:36:32');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1428', 'DE', 'sofort veröffentlichen', '2012-07-24 21:30:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1429', 'DE', 'veröffentlichen am', '2012-07-24 21:30:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1430', 'DE', 'noch nicht veröffentlichen', '2012-07-24 21:30:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1431', 'DE', 'Die <a href=\"articles.php?page=impressum#tos\" target=\"_BLANK\">Opencaching.de-Nutzungsbedingungen</a> habe ich gelesen und bin damit einverstanden', '2010-09-10 23:39:25');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1432', 'DE', 'Info: dein Logeintrag wurde vom Cachebesitzer entfernt', '2010-09-10 23:39:09');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1433', 'DE', 'Ortsauswahl', '2010-09-10 23:39:01');
@@ -5389,7 +5389,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1464', 'DE', 'Keine Cachegröße ausgewählt!', '2010-09-10 23:17:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1465', 'DE', 'Der HTML-Code ist nicht gültig.', '2010-09-10 23:17:42');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1466', 'DE', 'Dein Cache wurde in der Datenbank eingetragen. Du wirst nun auf die Cacheseite weitergeleitet.', '2010-09-10 23:17:33');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1467', 'DE', 'Wählen', '2010-09-10 23:17:23');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1467', 'DE', 'wählen', '2012-07-24 21:30:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1468', 'DE', '(Interner Fehler) Die Beschreibung wurde nicht gefunden.', '2010-09-10 23:17:10');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1469', 'DE', '(Interner Fehler) Es existiert bereits eine Beschreibung mit dieser Sprache.', '2010-09-10 23:16:52');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1471', 'DE', 'Es existiert bereits eine Beschreibung in dieser Sprache', '2010-09-10 23:16:13');

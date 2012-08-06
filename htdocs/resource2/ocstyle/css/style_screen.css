@@ -225,9 +225,11 @@ ul#statmenu { padding: 0px; margin: 0px;}
 .content3 {float: left; width: 790px; min-height: 500px; margin: 0px; padding: 0px 0px 0px 20px; color: rgb(75,75,75); font-size: 1.0em;}
 .content2-container, .content3-container {clear: both; float: left; width: 769px; margin: 0px 0px 15px 0px; padding: 0px;}
 .content2-container-1col, .content3-container-1col {overflow: hidden; width: 769px; margin: 0px; padding: 0px;}
-.content2-container-2col {overflow: hidden; width: 272px; margin: 0px; padding: 0px;}
-.content2-container-2col-left, .content3-container-2col-left {overflow: hidden; float: left; width: 272px; margin: 0px; padding: 0px;}
-.content2-container-2col-right, .content3-container-2col-right {overflow: hidden; float: right; width: 372px; margin: 0px; padding: 0px;}
+/* removed "overflow:hidden" from content2-container-2col* to fix bug RT #3886 ... */
+.content2-container-2col {width: 272px; margin: 0px; padding: 0px;}
+.content2-container-2col-left, .content3-container-2col-left {float: left; width: 272px; margin: 0px; padding: 0px;}
+.content2-container-2col-right, .content3-container-2col-right {float: right; width: 372px; margin: 0px; padding: 0px;}
+/* ... up to here */
 .content2-pagetitle, .content3-pagetitle {overflow: hidden; width: 769px; margin: 0px 0px 10px 0px; padding: 0px 0px 2px 0px; border-bottom: solid 3px rgb(88,144,168); color: rgb(88,144,168); font-weight: bold; font-size: 180%;}
 
 /*********************************/

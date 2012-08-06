@@ -32,7 +32,7 @@
     <tr><td><img src="images/team/aldeyn.jpg" /</td><td><a href="http://opencaching.de/viewprofile.php?userid=174233">Aldeyn</a></td><td>Softwareentwicklung</td></tr>
     <tr><td><img src="images/team/bundy609.jpg" /</td><td><a href="http://opencaching.de/viewprofile.php?userid=189552">Bundy609</a></td><td>Anwendersupport, Datenpflege</td></tr>
     <tr><td><img src="images/team/dummy.jpg" /</td><td><a href="http://opencaching.de/viewprofile.php?userid=122006">Carnosaurus</a></td><td>Serverbetrieb</td></tr>
-    <tr><td><img src="images/team/dummy.jpg" /</td><td><a href="http://opencaching.de/viewprofile.php?userid=222261">Danlex</a></td><td>Anwendersupport, Datenpflege</td></tr>
+    <tr><td><img src="images/team/danlex.png" /</td><td><a href="http://opencaching.de/viewprofile.php?userid=222261">Danlex</a></td><td>Anwendersupport, Datenpflege</td></tr>
     <tr><td><img src="images/team/dl6hbo.jpg" /</td><td><a href="http://opencaching.de/viewprofile.php?userid=148310">dl6hbo</a></td><td>Serverbetrieb, Dokumentation</td></tr>
     <tr><td><img src="images/team/flopp.png" /</td><td><a href="http://opencaching.de/viewprofile.php?userid=126329">Flopp</a></td><td>Softwareentwicklung, Anwendersupport, Datenpflege</td></tr>
     <tr><td><img src="images/team/following.png" /</td><td><a href="http://opencaching.de/viewprofile.php?userid=150360">following</a></td><td>stellvertretender Entwicklungsleiter, Datenpflege, Forenmoderation</td></tr>
@@ -43,7 +43,7 @@
     <tr><td><img src="images/team/dummy.jpg" /</td><td><a href="http://opencaching.de/viewprofile.php?userid=118274">michasch</a></td><td>Softwareentwicklung, Systemadministration</td></tr>
     <tr><td><img src="images/team/nikleo.jpg" /</td><td><a href="http://opencaching.de/viewprofile.php?userid=161682">Nikleo</a></td><td>Anwendersupport, Datenpflege, Dokumentation </td></tr>
     <tr><td><img src="images/team/dummy.jpg" /</td><td><a href="http://opencaching.de/viewprofile.php?userid=188231">Nuggets</a></td><td>Serverbetrieb</td></tr>
-    <tr><td><img src="images/team/oliver.jpg" /</td><td><a href="http://opencaching.de/viewprofile.php?userid=118951">Oliver</a></td><td>Softwareentwicklung, Serverbetrieb</td></tr>
+    <tr><td><img src="images/team/oliver.jpg" /</td><td><a href="http://opencaching.de/viewprofile.php?userid=118951">Oliver</a></td><td>Serverbetrieb, Berater für Softwareentwicklung</td></tr>
     <tr><td><img src="images/team/oliver44.jpg" /</td><td><a href="http://opencaching.de/viewprofile.php?userid=227656">Oliver44</a></td><td>Serverbetrieb</td></tr>
     <tr><td><img src="images/team/poker4ace.jpg" /</td><td><a href="http://opencaching.de/viewprofile.php?userid=239198">poker4ace</a></td><td>Systemadministration</td></tr>
     <tr><td><img src="images/team/sampiero.jpg" /</td><td><a href="http://opencaching.de/viewprofile.php?userid=156218">Sampiero</a></td><td>Softwareentwicklung</td></tr>

@@ -17,7 +17,7 @@
 	{
 		$article = $_REQUEST['page'];
 	}
-
+	
 	if ($article == '')
 	{
 		//no article specified
@@ -70,7 +70,7 @@
 	if (!$tpl->is_cached())
 	{
 		$tpl->menuitem = sql_value("SELECT `id` FROM `sys_menu` WHERE `href`='&1' LIMIT 1", 0, 'articles.php?page=' . urlencode($article));
-		if ($tpl->menuitem == 0)
+		if ($tpl->menuitem == 0 && $article != 'verein')    // workaround for 4_Vs
 			$tpl->redirect('index.php');
 
 		$tpl->assign('article', $article);

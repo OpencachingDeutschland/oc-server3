@@ -844,7 +844,9 @@
 	sql("CREATE TRIGGER `sysTransBeforeInsert` BEFORE INSERT ON `sys_trans` 
 				FOR EACH ROW 
 					BEGIN 
-						SET NEW.`last_modified`=NOW();
+						IF NEW.`last_modified` < '2000' THEN  
+							SET NEW.`last_modified`=NOW();
+						END IF;
 					END;");
 
 	sql_dropTrigger('sysTransBeforeUpdate');
@@ -857,8 +859,10 @@
 	sql_dropTrigger('sysTransTextBeforeInsert');
 	sql("CREATE TRIGGER `sysTransTextBeforeInsert` BEFORE INSERT ON `sys_trans_text` 
 				FOR EACH ROW 
-					BEGIN 
-						SET NEW.`last_modified`=NOW();
+					BEGIN
+						IF NEW.`last_modified` < '2000' THEN  
+							SET NEW.`last_modified`=NOW();
+						END IF;
 					END;");
 
 	sql_dropTrigger('sysTransTextBeforeUpdate');

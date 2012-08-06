@@ -73,7 +73,7 @@ Zur Zeit sind im BGB-Vorstand (Stand 30.07.2012):<br />
 			<p>Opencaching.de wird im folgenden als Synonym f&uuml;r den Betreiber des 
 			Internetauftritts verwendet.</p>
 
-<br />			
+<br /><br />			
 <p><b>Haftungshinweis f&uuml;r externe Links</b></p>
 
 			<p>Trotz sorgf&auml;ltiger inhaltlicher Kontrolle &uuml;bernehmen wir keine Haftung f&uuml;r 

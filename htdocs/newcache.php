@@ -88,7 +88,7 @@
 				$sel_size = isset($_POST['size']) ? $_POST['size'] : -1;
 			}
 			$sel_lang = isset($_POST['desc_lang']) ? $_POST['desc_lang'] : $default_lang;
-			$sel_country = isset($_POST['country']) ? $_POST['country'] : $default_country;
+			$sel_country = isset($_POST['country']) ? $_POST['country'] : getUserCountry();
 			$show_all_countries = isset($_POST['show_all_countries']) ? $_POST['show_all_countries'] : 0;
 			$show_all_langs = isset($_POST['show_all_langs']) ? $_POST['show_all_langs'] : 0;
 
@@ -427,10 +427,10 @@
 			}
 
 			// $opt['locale'][$locale]['country'] would give country of chosen langugage
-			$sUserCountry = getUserCountry(); // gives country selected at top right corner
+			// build the "country" dropdown list, preselect $sel_country
 			while ($record = sql_fetch_array($rs))
 			{
-				$sSelected = ($record['short'] == $sUserCountry) ? ' selected="selected"' : '';
+				$sSelected = ($record['short'] == $sel_country) ? ' selected="selected"' : '';
 				$countriesoptions .= '<option value="' . htmlspecialchars($record['short'], ENT_COMPAT, 'UTF-8') . '"' . $sSelected . '>' . htmlspecialchars($record['name'], ENT_COMPAT, 'UTF-8') . '</option>' . "\n";
 			}
 			sql_free_result($rs);

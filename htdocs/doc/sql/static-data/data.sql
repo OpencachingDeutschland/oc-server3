@@ -2217,6 +2217,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1792', 'Additio
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1793', 'No waypoints available', '2011-07-15 22:33:33');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1794', 'Additional waypoints can make searching easier, for example by pointing to a suitable parkering or start of a path. The waypoints are downloaded in the GPX-file.', '2011-07-15 22:34:44');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1795', 'Maps:', '2012-07-23 22:26:31');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1796', 'Published on', '2012-07-24 19:16:00');
 
 -- Table sys_trans_ref
 SET NAMES 'utf8';
@@ -4307,6 +4308,7 @@ INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1792'
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1793', './lang/de/ocstyle/editcache.inc.php', '48');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1794', './templates2/ocstyle/viewcache.tpl', '323');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1795', './templates2/ocstyle/viewcache.tpl', '235');
+INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1796', './templates2/ocstyle/viewcache.tpl', '173');
 
 -- Table sys_trans_text
 SET NAMES 'utf8';
@@ -5690,6 +5692,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1793', 'DE', 'Keine zusätzlichen Wegpunkte angelegt', '2011-07-17 20:51:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1794', 'DE', 'Zusätzliche Wegpunkte können die Suche vereinfachen, indem sie z.B. auf einem Parkplatz oder den Anfang der Strecke zeigen. Die Wegpunkte werden auch in der GPX-Datei gespeichert.', '2011-07-17 20:52:52');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1795', 'DE', 'Karten:', '2012-07-23 22:26:38');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1796', 'DE', 'Veröffentlicht am', '2012-07-23 22:26:38');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'EN', 'Reorder IDs \r', '2010-09-02 00:15:30');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'EN', 'The database could not be reconnected.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'EN', 'Testing – please do not login', '2010-08-28 11:48:07');

@@ -32,7 +32,7 @@
 				<tr><td class="spacer"><img src="/images/trans.gif" border="0" width="1" height="1" alt="" title=""></td></tr>
 				<tr>
 					<td valign="top" style="padding-top:5px"><img src="resource2/ocstyle/images/cacheicon/mystery.gif" width="32" border="0" height="32" align="left" alt="R&auml;tsel Cache" title="R&auml;tsel Cache"></td>
-					<td>R&auml;tselcache (&bdquo;Mystery&ldquo;): Um die Koordinaten des Caches herauszufinden, muss zuerst ein R&auml;tsel gel&ouml;st werden. Im weiteren Verkauf kann es sich um jede Art von Cache (normal, multi, virtuell usw.) handeln.</td>
+					<td>R&auml;tselcache (&bdquo;Mystery&ldquo;): Um die Koordinaten des Caches herauszufinden, muss zuerst ein R&auml;tsel gel&ouml;st werden. Im weiteren Verlauf kann es sich um jede Art von Cache (normal, multi, virtuell usw.) handeln.</td>
 				</tr>
 				<tr><td class="spacer"><img src="/images/trans.gif" border="0" width="1" height="1" alt="" title=""></td></tr>
 				<tr>
@@ -115,7 +115,7 @@
 				<tr>
 					<td></td>
 					<td valign="top" style="padding-top:5px;"><img src='./resource2/{$opt.template.style}/images/difficulty/terr-20.gif' border='0' width='19' height='16' hspace='2' /></td>
-					<td>2: ohne gro&szlig;e H&ouml;henunterschiede, &uuml;ber befestigter Wege, Rasenfl&auml;chen etc., maximal wenige Kilometer zu gehen; geeignet f&uuml;r kleine Kinder </td>
+					<td>2: ohne gro&szlig;e H&ouml;henunterschiede, &uuml;ber befestigte Wege, Rasenfl&auml;chen etc., maximal wenige Kilometer zu gehen; geeignet f&uuml;r kleine Kinder </td>
 				</tr>
 				<tr><td class="spacer"><img src="/images/trans.gif" border="0" width="1" height="1" alt="" title=""></td></tr>
 				<tr>

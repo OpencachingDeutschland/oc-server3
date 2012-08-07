@@ -16,6 +16,14 @@
 
   require_once($opt['rootpath'] . 'util/mysql_root/sql_root.inc.php');
 
+  if ($db_root_password == '')
+  {
+		echo "enter DB $db_root_username password: ";
+		$fh = fopen('php://stdin', 'r');
+		$db_root_password = trim(fgets($fh, 1024));
+		fclose($fh);
+  }
+
 /* begin db connect */
 	db_root_connect();
 	if ($dblink === false)

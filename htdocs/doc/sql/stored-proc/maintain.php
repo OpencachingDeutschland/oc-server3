@@ -22,6 +22,8 @@
 		$fh = fopen('php://stdin', 'r');
 		$db_root_password = trim(fgets($fh, 1024));
 		fclose($fh);
+		if ($db_root_password == '')
+		  die("no DB password - aborting.\n");
   }
 
 /* begin db connect */

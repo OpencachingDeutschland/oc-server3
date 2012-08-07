@@ -188,7 +188,7 @@ function output_cachexml($sWaypoint)
 {
 	global $opt, $login;
 
-	$rsCache = sql_slave("SELECT `caches`.`name`, `caches`.`wp_oc`, `caches`.`cache_id`, 
+	$rsCache = sql_slave("SELECT `caches`.`name`, `caches`.`wp_oc`, `caches`.`cache_id`, `caches`.`type`,
 	                             `caches`.`longitude`, `caches`.`latitude`, 
 	                             IF(`caches`.`status`=2, 1, 0) AS `tna`, 
 	                             IFNULL(`trans_status_text`.`text`, `cache_status`.`name`) AS `statustext`,
@@ -224,10 +224,12 @@ function output_cachexml($sWaypoint)
 	}
 
 	$nGeokretyCount = sql_value_slave("SELECT COUNT(*) FROM `gk_item_waypoint` WHERE `wp`='&1'", 0, $sWaypoint);
-	$nNotFoundCount = 0;
+	$nNotFoundCount = $nAttendedCount = 0;
 	$nFoundCount = sql_value_slave("SELECT COUNT(*) FROM `cache_logs` WHERE `user_id`='&1' AND `cache_id`='&2' AND `type`=1", 0, $login->userid, $rCache['cache_id']);
 	if ($nFoundCount == 0)
 		$nNotFoundCount = sql_value_slave("SELECT COUNT(*) FROM `cache_logs` WHERE `user_id`='&1' AND `cache_id`='&2' AND `type`=2", 0, $login->userid, $rCache['cache_id']);
+	if ($rCache['type'] == 6)
+		$nAttendedCount = sql_value_slave("SELECT COUNT(*) FROM `cache_logs` WHERE `user_id`='&1' AND `cache_id`='&2' AND `type`=7", 0, $login->userid, $rCache['cache_id']);
 
 	echo '<caches>' . "\n";
 	echo '  <cache ';
@@ -246,6 +248,7 @@ function output_cachexml($sWaypoint)
 	echo 'geokreties="' . xmlentities($nGeokretyCount) . '" ';
 	echo 'found="' . xmlentities(($nFoundCount>0) ? 1 : 0) . '" ';
 	echo 'notfound="' . xmlentities(($nNotFoundCount>0) ? 1 : 0) . '" ';
+	echo 'attended="' . xmlentities(($nAttendedCount>0) ? 1 : 0) . '" ';
 	echo 'owner="' . xmlentities($rCache['owner']) . '" ';
 	echo 'username="' . xmlentities($rCache['username']) . '" ';
 	echo 'userid="' . xmlentities($rCache['user_id']) . '" />' . "\n";

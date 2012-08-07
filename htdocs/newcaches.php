@@ -27,7 +27,7 @@
 
 		$newCaches = array();
 
-		$rsNewCaches = sql_slave('SELECT `caches`.`cache_id` `cacheid`, `caches`.`wp_oc` `wpoc`, `user`.`user_id` `userid`, `caches`.`country` `country`, `caches`.`name` `cachename`, `user`.`username` `username`, `caches`.`date_created` `date_created`, `cache_type`.`icon_large` FROM `caches` INNER JOIN `user` ON `caches`.`user_id`=`user`.`user_id` INNER JOIN `cache_type` ON `caches`.`type`=`cache_type`.`id` INNER JOIN `cache_status` ON `caches`.`status`=`cache_status`.`id` WHERE `cache_status`.`allow_user_view`=1 ORDER BY `caches`.`date_created` DESC LIMIT ' . ($startat+0) . ', ' . ($perpage+0));
+		$rsNewCaches = sql_slave('SELECT `caches`.`cache_id` `cacheid`, `caches`.`wp_oc` `wpoc`, `user`.`user_id` `userid`, `caches`.`country` `country`, `caches`.`name` `cachename`, `user`.`username` `username`, `caches`.`date_created` `date_created`, `cache_type`.`icon_large` FROM `caches` INNER JOIN `user` ON `caches`.`user_id`=`user`.`user_id` INNER JOIN `cache_type` ON `caches`.`type`=`cache_type`.`id` WHERE `caches`.`status` = 1 ORDER BY `caches`.`date_created` DESC LIMIT ' . ($startat+0) . ', ' . ($perpage+0));
 		while ($rNewCache = sql_fetch_assoc($rsNewCaches))
 		{
 			$rNewCache['icon_large'] = getSmallCacheIcon($rNewCache['icon_large']);

@@ -5,6 +5,7 @@ CREATE TABLE `caches` (
   `uuid` varchar(36) NOT NULL,
   `node` tinyint(3) unsigned NOT NULL default '0',
   `date_created` datetime NOT NULL COMMENT 'via Trigger (caches)',
+  `is_publishdate` tinyint(1) NOT NULL default '0' COMMENT '1 = date_created is publication date',
   `last_modified` datetime NOT NULL COMMENT 'via Trigger (caches)',
   `user_id` int(10) unsigned NOT NULL,
   `name` varchar(255) NOT NULL,

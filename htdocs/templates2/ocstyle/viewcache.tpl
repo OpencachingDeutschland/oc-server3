@@ -104,9 +104,9 @@
 		<div class="buffer" style="width: 500px;">&nbsp;</div>
 
 		<div class="content2-container-2col-left" style="width:60px; clear: left;">
-			<div>{include file="res_cacheicon.tpl" cachetype=$cache.type status=$cache.status}</div>
-			<div><img src='./resource2/{$opt.template.style}/images/difficulty/diff-{$cache.difficulty*5}.gif' border='0' width='19' height='16' hspace='2' alt='{t 1=$cache.difficulty*0.5|sprintf:'%01.1f'}Difficulty: %1 of 5.0{/t}' /></div>
-			<div><img src='./resource2/{$opt.template.style}/images/difficulty/terr-{$cache.terrain*5}.gif' border='0' width='19' height='16' hspace='2' alt='{t 1=$cache.terrain*0.5|sprintf:'%01.1f'}Terrain: %1 of 5.0{/t}' /></div>
+			<div><a href="articles.php?page=cacheinfo#cachetype">{include file="res_cacheicon.tpl" cachetype=$cache.type status=$cache.status}</a></div>
+			<div><a href="articles.php?page=cacheinfo#difficulty"><img src='./resource2/{$opt.template.style}/images/difficulty/diff-{$cache.difficulty*5}.gif' border='0' width='19' height='16' hspace='2' alt='{t 1=$cache.difficulty*0.5|sprintf:'%01.1f'}Difficulty: %1 of 5.0{/t}' title='{t 1=$cache.difficulty*0.5|sprintf:'%01.1f'}Difficulty: %1 of 5.0{/t}' /></a></div>
+			<div><a href="articles.php?page=cacheinfo#difficulty"><img src='./resource2/{$opt.template.style}/images/difficulty/terr-{$cache.terrain*5}.gif' border='0' width='19' height='16' hspace='2' title='{t 1=$cache.terrain*0.5|sprintf:'%01.1f'}Terrain: %1 of 5.0{/t}' alt='{t 1=$cache.terrain*0.5|sprintf:'%01.1f'}Terrain: %1 of 5.0{/t}' /></a></div>
 			<div></div>
 		</div>
 

@@ -15,7 +15,7 @@
 		essere evitato. Possibilmente il nome dovrebbe avere a che fare direttamente con la cache o con l'ambiente; evitare 
 		nomi privi di significato come "A81 # 589". L'unica limitazione &egrave; la lunghezza del nome: sono consentiti al massimo 60 caratteri.
 		</p><p>
-			<b>L'arte della cache:</b> Ci sono diversi modi per creare una cache di interessante ed emozionante.</p>
+			<b id="cachetype">L'arte della cache:</b> Ci sono diversi modi per creare una cache di interessante ed emozionante.</p>
 			<table  class="table">
 				<tr>
 					<td valign="top" style="padding-top:5px"><img src="resource2/ocstyle/images/cacheicon/traditional.gif" width="32" border="0" height="32" align="left" alt="Cache Normale" title="Cache Normale"></td>
@@ -70,7 +70,7 @@
 
 		<p><b>Coordinate:</b> posizione della cache, della zona di arrivo o del parcheggio. Inserire le coordinate della posizione della cache, tutto ci&ograve; che &egrave; necessario per trovare le cache &egrave; contenuto nella descrizione.</p>
 		<p><b>Paese:</b> In quale paese &egrave; la cache? Particolarmente importante &egrave; questa informazione per le cache vicino ai confini.</p>
-		<p><b>Valutazione:</b> difficolt&agrave; e terreno - su una scala da 1 a 5 indicano quanto siano difficili i compitida svolgere, quanto sia difficile il nascondiglio della cache e quanto sia impegnativo il terreno nella zona in cui si trova la cache.</p>
+		<p id="difficulty"><b>Valutazione:</b> difficolt&agrave; e terreno - su una scala da 1 a 5 indicano quanto siano difficili i compitida svolgere, quanto sia difficile il nascondiglio della cache e quanto sia impegnativo il terreno nella zona in cui si trova la cache.</p>
 		<p><a name="time"></a><b>Sforzo:</b> Quanto tempo deve essere pianificato dal parcheggio / punto di partenza per trovare la cache e tornare al parcheggio / punto di partenza del viaggio? Si supponga che il cacher sia esperto, ma i compiti devono essere momenti felici. Se siete del parere che per questa cache non sia necessaria alcuna indicazione, semplicemente lasciare il tempo a 0 ore e 0 min sono e scrivere nella descrizione quanto impegno ci si dovrebbe aspettare. Se nella stima si assume che un tratto sia percorso con i pattini, in bicicletta o in auto, scrivere anche questo nella descrizione.</p>
 		<p>
 			<b>Attributi Cache:</b> E' possibile specificare degli attributi per la cache che, per esempio, possono essere utilizzati nella <a href="search.php">Ricerca</a>.

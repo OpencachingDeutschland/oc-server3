@@ -1,7 +1,7 @@
 <div><img src="http://www.opencaching.de/resource2/ocstyle/images/misc/32x32-tools.png" width="32" height="32" alt="" />CREAR UN NUEVO CACHE </div>
 <div>
   <p><strong>Nombre:</strong> Ha cada cache se le da un nombre. Múltiples caches pueden tener el mismo nombre, pero se debe evitar esto. Buscando un nombre que tenga que ver con el cache -y evitar significativa denominaciones tales como &quot;A81 # 589&quot;. La única restricción en el nombre de la longitud, con un máximo de 60 caracteres están permitidos.</p>
-  <p><strong>Tipo de caches:</strong> Hay varios tipo de caches.</p>
+  <p id="cachetype"><strong>Tipo de caches:</strong> Hay varios tipo de caches.</p>
   <table>
     <tbody>
       <tr>
@@ -72,7 +72,7 @@
   </table>
   <p><strong>Coordenadas:</strong> posición de la cache, la zona de destino o el estacionamiento. Introduzca las coordenadas de la posición de cache.</p>
   <p><strong>País:</strong> ¿En qué país esta el cache? Especialmente importante es esta información en caches cercanos a las fronteras.</p>
-  <p><strong>Clasificación:</strong> dificultad y el terreno - en una escala de 1 a 5 se indican lo difícil que son las tareas, lo difícil que es un cache y en que terreno se encuentra.</p>
+  <p id="difficulty"><strong>Clasificación:</strong> dificultad y el terreno - en una escala de 1 a 5 se indican lo difícil que son las tareas, lo difícil que es un cache y en que terreno se encuentra.</p>
   <p><a name="time" id="time"></a><strong>Esfuerzo:</strong> ¿Cuánto tiempo tardaré en encontrar el cache desde el punto de partida?</p>
   <p><strong>Atributos del Cache:</strong> los atributos donde se puede obtener más datos de la cache.</p>
 

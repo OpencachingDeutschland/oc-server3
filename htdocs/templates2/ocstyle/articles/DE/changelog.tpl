@@ -37,10 +37,11 @@
 	   <li>chg: Entfernungsangabe "0.0 km" in Suchlisten in ausgeloggtem Zustand ausgeblendet (keine Homekoordinaten verfügbar)<br /><br /></li>
 
 	   <li>new: Versionsgeschichte</li>
+	   <li>new: Kurzadressen für Direktzugriff auf Cachelistings, z.B. <a href="http://www.opencaching.de/OCD93B">http://www.opencaching.de/OCD93B</a></li>
 	   <li>new: Anzeige &bdquo;Du hast dieses Event besucht&ldquo; in Karten-Popup-Fenstern
 	   <li>new: englische Übersetzung der Seiten <a href="./articles.php?page=geocaching">Über Geocaching</a>, <a href="./articles.php?page=cacheinfo">Cachebeschreibung</a>, <a href="./articles.php?page=impressum">Impressum &amp; Nutzungsbedingungen</a>, <a href="./articles.php?page=dsb">Datenschutzbelehrung</a>, <a href="./articles.php?page=donations">Spenden</a>, <a href="./articles.php?page=contact">Kontakt</a> und <a href="./articles.php?page=team">Teamliste</a> (umschalten auf englischsprachige Seite oben mit <img src="images/flag/EN.gif">)
 
-	 </ul>
-
+	</ul>
+	<br />
 
 	</div>

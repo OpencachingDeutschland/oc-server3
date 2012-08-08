@@ -35,8 +35,10 @@
 	   <li>chg: removed "0.0 km" dinstance in search lists when logged off (no home coordinates available)<br /><br /></li>
 
 	   <li>new: changelog</li>
+	   <li>new: URL shortener for direct cache listing access, e.g. <a href="http://www.opencaching.de/OCD93B">http://www.opencaching.de/OCD93B</a></li>
 	   <li>new: englisch translation of <a href="./articles.php?page=geocaching">About Geocaching</a>, <a href="./articles.php?page=cacheinfo">Cache descriptions</a>, <a href="./articles.php?page=impressum">Legal information</a>, <a href="./articles.php?page=dsb">Privacy statement</a>, <a href="./articles.php?page=donations">Donations</a>, <a href="./articles.php?page=contact">Contact</a> and <a href="./articles.php?page=team">Team members' list</a> pages; legal information and donations pages have been updated</li>
 	   <li>new: display of &bdquo;You have attended this event&ldquo; in map popups</li>
-	 </ul>
+	</ul>
+	<br />
 
 	</div>

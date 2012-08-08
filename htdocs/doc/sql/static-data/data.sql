@@ -813,7 +813,7 @@ INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustrin
 INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('48', 'MNU_LOGIN_NEWPW', 'Change password', '491', 'Change password', '491', '0', 'newpw.php', '0', '32', '1', '', '1', NULL);
 INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('49', 'MNU_LOGIN_REMINDEMAIL', 'Remind E-Mail', '659', 'Remind E-Mail', '659', '0', 'remindemail.php', '0', '32', '3', '', '1', NULL);
 INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('50', 'MNU_CACHES_SEARCH_RECOMMENDATIONS', 'Recommendations', '55', 'Recommendations', '55', '0', 'recommendations.php', '0', '20', '1', '', '0', NULL);
-INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('51', 'MNU_SITEMAP', 'Sitemap', '17', 'Sitemap', '17', '0', 'sitemap.php', '0', '0', '10', '#D5D9FF', '1', NULL);
+INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('51', 'MNU_SITEMAP', 'Sitemap', '17', 'Sitemap', '17', '0', 'sitemap.php', '0', '0', '11', '#D5D9FF', '1', NULL);
 INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('52', 'MNU_ADMIN_DBMAINTAIN', 'Database maintainance', '672', 'DB Maintainance', '673', '1', 'dbmaintain.php', '1', '12', '2', '', '0', NULL);
 INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('53', 'MNU_USER', 'User', '4', 'User', '4', '0', '', '0', '0', '5', '#FFFFC5', '0', NULL);
 INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('54', 'MNU_USER_MAILTO', 'Send E-Mail', '148', 'Send E-Mail', '148', '0', 'mailto.php', '0', '53', '1', '', '0', NULL);
@@ -833,6 +833,8 @@ INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustrin
 INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('69', 'MNU_START_TEAM', 'Our Team', '907', 'Our Team', '907', '0', 'articles.php?page=team', '1', '1', '7', '', '1', NULL);
 INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('70', 'MNU_MAP', 'Map', '1269', 'Map', '1269', '0', 'map2.php', '1', '0', '4', '#FFFFC5', '1', NULL);
 INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('85', 'MNU_CACHES_LOG', 'Create a logentry', '1687', 'Create a logentry', '1687', '0', 'log2.php', '0', '10', '10', '', '0', NULL);
+INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('86', 'MNU_START_CHANGELOG', 'Changelog', '1797', 'Changelog', '1797', '0', 'articles.php?page=changelog', '0', '0', '10', '', '1', NULL);
+INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('87', 'MNU_START_OPERATOR', 'Operator Association', '1798', 'Operator Association', '1798', '0', 'articles.php?page=verein', '0', '1', '12', '', '0', NULL);
 
 -- Table sys_trans
 SET NAMES 'utf8';
@@ -2218,6 +2220,8 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1793', 'No wayp
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1794', 'Additional waypoints can make searching easier, for example by pointing to a suitable parkering or start of a path. The waypoints are downloaded in the GPX-file.', '2011-07-15 22:34:44');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1795', 'Maps:', '2012-07-23 22:26:31');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1796', 'Published on', '2012-07-24 19:16:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1797', 'Changelog', '2012-08-08 14:16:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1798', 'Operator Association', '2012-08-08 14:16:00');
 
 -- Table sys_trans_ref
 SET NAMES 'utf8';
@@ -4309,6 +4313,12 @@ INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1793'
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1794', './templates2/ocstyle/viewcache.tpl', '323');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1795', './templates2/ocstyle/viewcache.tpl', '235');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1796', './templates2/ocstyle/viewcache.tpl', '173');
+INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1797', './lang/de/ocstyle/main.tpl.php', '282');
+INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1797', './templates2/ocstyle/sys_main.tpl', '271');
+INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1797', 'table:sys_menu;field=menustring', '0');
+INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1797', 'table:sys_menu;field=title', '0');
+INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1798', 'table:sys_menu;field=menustring', '0');
+INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1798', 'table:sys_menu;field=title', '0');
 
 -- Table sys_trans_text
 SET NAMES 'utf8';
@@ -5693,6 +5703,8 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1794', 'DE', 'Zusätzliche Wegpunkte können die Suche vereinfachen, indem sie z.B. auf einem Parkplatz oder den Anfang der Strecke zeigen. Die Wegpunkte werden auch in der GPX-Datei gespeichert.', '2011-07-17 20:52:52');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1795', 'DE', 'Karten:', '2012-07-23 22:26:38');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1796', 'DE', 'Veröffentlicht am', '2012-07-23 22:26:38');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1797', 'DE', 'Versionsgeschichte', '2012-07-08 14:50:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1798', 'DE', 'Verein', '2012-07-08 14:50:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'EN', 'Reorder IDs \r', '2010-09-02 00:15:30');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'EN', 'The database could not be reconnected.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'EN', 'Testing – please do not login', '2010-08-28 11:48:07');
@@ -7006,6 +7018,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1758', 'EN', 'The account is already activated. Please try to <a href=\"login.php\">login</a>.<br /> If you cannot login, please read the following page: <a href=\"%1\">Login problems</a>', '2011-05-23 22:29:04');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1763', 'EN', 'Your browser has rejected our cookie.<br /> For more information on this topic, see <a href=\"%1\">Opencaching.de-help</a>.', '2011-05-23 22:25:18');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1766', 'EN', 'This geocache is probably placed within the following nature reserves (<a href=\"%1\">Info</a>):', '2011-05-23 22:19:23');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1798', 'EN', 'Verein', '2012-07-08 14:50:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'ES', 'Reordenar ID', '2010-12-09 00:17:55');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'ES', 'La base de datos no se pudo conectar.', '2010-12-09 00:17:55');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'ES', 'En pruebas - por favor, no entre.', '2010-12-09 00:17:55');
@@ -8320,6 +8333,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1758', 'ES', 'La cuenta ya está activada. Por favor trate de <a href=\"login.php\">login</a>.<br /> Si no puede acceder, por favor lea la página siguiente: <a href=\"%1\">Login problems</a>', '2011-05-23 22:30:36');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1763', 'ES', 'Su navegador ha rechazado nuestra cookie.<br /> Para obtener más información sobre este tema, véase <a href=\"%1\">Opencaching.de-help</a>.', '2011-05-23 22:26:26');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1766', 'ES', 'Este geocache está probablemente en las siguientes áreas protegidas (<a href=\"%1\">Info</a>):', '2011-05-23 22:20:30');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1798', 'ES', 'Verein', '2012-07-08 14:50:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('6', 'FR', 'Pseudo', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('7', 'FR', 'Quite', '2010-10-04 00:17:39');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('24', 'FR', 'Prénom', '2010-10-04 00:17:39');
@@ -9726,6 +9740,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1758', 'IT', 'Questo utente è già stato attivato. Per favore prova a <a href=\"login.php\">connetterti</a>.<br />Se non è possibile connetterti, per favore leggi la pagina sui <a href=\"%1\">problemi con la connessione</a>', '2011-05-23 22:30:04');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1763', 'IT', 'Il tuo browser ha rifiutato il nostro cookie.<br/> Puoi trovare ulteriori informazioni su questo argomento in <a href=\"%1\">Opencaching.de-help</a>.', '2011-05-23 22:26:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1766', 'IT', 'Questa geocache probabilmente è situata in una riserva naturale (<a href=\"%1\">Info</a>):', '2011-05-23 22:19:58');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1798', 'IT', 'Verein', '2012-07-08 14:50:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('922', 'JA', 'JA', '2011-05-15 16:04:51');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'NL', 'ID\'s opnieuw sorteren', '2011-02-04 19:49:56');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'NL', 'De verbinding met de database kon niet hersteld worden.', '2011-02-04 19:49:56');

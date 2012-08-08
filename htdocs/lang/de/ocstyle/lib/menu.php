@@ -234,11 +234,25 @@ $menu = array(
 		'siteid' => 'message'
 	),
 	array(
+		'title' => t('Changelog'),
+		'visible' => false,
+		'filename' => 'index.php',
+		'menustring' => t('Changelog'),
+		'siteid' => 'changelog'
+	),
+	array(
 		'title' => t('Sitemap'),
 		'visible' => false,
 		'filename' => 'index.php',
 		'menustring' => t('Sitemap'),
 		'siteid' => 'sitemap'
+	),
+array(
+		'title' => t('Verein'),
+		'visible' => false,
+		'filename' => 'index.php',
+		'menustring' => t('Verein'),
+		'siteid' => 'verein'
 	)
 );
 

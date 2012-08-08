@@ -15,8 +15,8 @@
 
 			<h1>Per PayPal spenden:</h1>
 
-			<p>Bei einer Spende &uuml;ber PayPal (Spenden-Button) betragen die Geb&uuml;hren f&uuml;r uns 1,9% + 0,35 .. 
-			So erreichen uns von einer 2,- Euro Spende 1,61 Euro (~80%).</p>
+			<p>Bei einer Spende &uuml;ber PayPal (Spenden-Button) betragen die Geb&uuml;hren f&uuml;r uns 1,9% + 0,35 &euro;.
+			So erreichen uns von einer 2,- &euro; Spende 1,61 &euro; (~80%) und von einer 10,- &euro; Spende 9,46 &euro; (~95%).</p>
 
 			<p>Um per Paypal zu spenden, bitte auf folgendes Bild klicken:<br />
 				<div style="margin-left:50px;">

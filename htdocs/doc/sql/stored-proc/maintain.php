@@ -407,6 +407,9 @@
 							SET NEW.`date_created`=NOW();
 							SET NEW.`last_modified`=NOW();
 						END IF;
+						IF NEW.`status` <> 5 THEN
+							SET NEW.`is_publishdate`=1;
+						END IF;
 						SET NEW.`need_npa_recalc`=1;
 					END;");
 

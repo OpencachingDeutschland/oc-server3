@@ -7,3 +7,4 @@ date         commit ID    change
 ----         ---------    --------
 2012-08-06   1ba2be52     changed triggers sysTransBeforeInsert and sysTransTextBeforeInsert
 2012-08-07   eda58c51     new field caches.is_publishdate; changed trigger cachesBeforeUpdate
+2012-08-08   fc481334     changed trigger cachesBeforeInsert

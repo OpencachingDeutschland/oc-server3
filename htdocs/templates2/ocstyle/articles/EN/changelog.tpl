@@ -32,7 +32,7 @@
 	   <li class="changelogitem">chg: inactive caches are hidden in new caches lists</li>
 	   <li class="changelogitem">chg: GC waypoints will be no longer truncated when copy-and-pasted with leading spaces (frequent problem)</li>
 	   <li class="changelogitem">chg: layout adjustment of <a href="./search.php">search page</a> and <a href="http://www.blog.opencaching.de">blog/info page</a></li>
-	   <li class="changelogitem">chg: removed "0.0 km" dinstance in search lists when logged off (no home coordinates available)<br /><br /></li>
+	   <li class="changelogitem">chg: removed "0.0 km" distance in search lists when logged off (no home coordinates available)<br /><br /></li>
 
 	   <li class="changelogitem">new: changelog</li>
 	   <li class="changelogitem">new: URL shortener for direct cache listing access, e.g. <a href="http://www.opencaching.de/OCD93B">http://www.opencaching.de/OCD93B</a></li>

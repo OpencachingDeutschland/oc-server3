@@ -105,13 +105,13 @@
 	/* other template options
 	 *
 	 */
-	$opt['page']['absolute_url'] = 'http://local.opencaching.de/oc-server/server-3.0/htdocs';
+	$opt['page']['absolute_url'] = 'http://' . $dev_domain . '/' . $dev_codepath . 'htdocs';
 	$opt['mail']['from'] = '<admin email>';
 
 	/* location of uploaded images
 	 */
-	$opt['logic']['pictures']['dir'] = '/var/www/html/oc-server/server-3.0/htdocs/images/uploads';
-	$opt['logic']['pictures']['url'] = 'http://local.opencaching.de/oc-server/server-3.0/htdocs/images/uploads';
+	$opt['logic']['pictures']['dir'] = $dev_basepath . $dev_codepath . 'htdocs/images/uploads';
+	$opt['logic']['pictures']['url'] = 'http://' .  $dev_domain . '/' . $dev_codepath . 'htdocs/images/uploads';
 	$opt['logic']['pictures']['thumb_url'] = $opt['logic']['pictures']['url'] . '/thumbs';
 
 	/* cachemaps

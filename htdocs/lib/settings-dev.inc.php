@@ -57,14 +57,14 @@
 	
 	//if you are running this site on a other domain than staging.opencaching.de, you can set
 	//this in private_db.inc.php, but don't forget the ending /
-	$absolute_server_URI = 'http://local.opencaching.de/oc-server/server-3.0/htdocs/';
+	$absolute_server_URI = 'http://' . $dev_domain . '/' . $dev_codepath . 'htdocs/';
 	
 	// EMail address of the sender
 	if (!isset($emailaddr)) $emailaddr = 'contact@mail.opencaching.de';
 	
 	// location of cache images
 	if (!isset($picdir)) $picdir = $rootpath . 'images/uploads';
-	if (!isset($picurl)) $picurl = 'http://local.opencaching.de/oc-server/server-3.0/htdocs/images/uploads';
+	if (!isset($picurl)) $picurl = 'http://' . $dev_domain . '/' . $dev_codepath . 'htdocs/images/uploads';
 
 	// Thumbsize
 	$thumb_max_width = 175;
@@ -110,8 +110,8 @@
 
 	// safemode_zip-binary
 	$safemode_zip = '/var/www/bin/phpzip.php';
-	$zip_basedir = '/var/www/html/oc-server/server-3.0/htdocs/download/zip/';
-	$zip_wwwdir = 'oc-server/server-3.0/htdocs/download/zip/';
+	$zip_basedir = $dev_basepath . $dev_codepath . 'htdocs/download/zip/';
+	$zip_wwwdir = $dev_codepath . 'htdocs/download/zip/';
 
 	$googlemap_key = "<key>";
 	$googlemap_type = "G_MAP_TYPE"; // alternativ: _HYBRID_TYPE

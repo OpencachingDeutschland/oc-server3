@@ -94,7 +94,7 @@
 						{/if}
 						<br />
 						{t}Hidden at{/t}: {$cache.datehidden|date_format:$opt.format.datelong}<br />
-						{t}Listed since{/t}: {$cache.datecreated|date_format:$opt.format.datelong}<br />
+						{if $cache.is_publishdate==0}{t}Listed since{/t}{else}{t}Published on{/t}{/if}: {$cache.datecreated|date_format:$opt.format.datelong}<br />
 						{t}Last update{/t}: {$cache.lastmodified|date_format:$opt.format.datelong}<br />
 						
 						{if $cache.wpgc!='' || $cache.wpnc!=''}
@@ -130,7 +130,7 @@
 						<!-- <a href="http://maps.google.com/maps?q={$cache.latitude}+{$cache.longitude}" target="_blank">{t}Google Maps{/t}</a><br />                                        -->
 
 						<img src="resource2/{$opt.template.style}/images/log/16x16-found.png" width="16" height="16" border="0"> {$cache.found} {if $cache.type==6}{t}Attended{/t}{else}{t}Found{/t}{/if}<br />
-						<nobr><img src="resource2/{$opt.template.style}/images/log/16x16-dnf.png" width="16" height="16" border="0">{if $cache.type==6} {$cache.willattend} {t}Will attend{/t}{else} {$cache.notfound} {t}Not Found{/t}{/if}</nobr><br />
+						<nobr><img src="resource2/{$opt.template.style}/images/log/16x16-dnf.png" width="16" height="16" border="0">{if $cache.type==6} {$cache.willattend} {t}Will attend{/t}{else} {$cache.notfound} {t}Not found{/t}{/if}</nobr><br />
 						<img src="resource2/{$opt.template.style}/images/log/16x16-note.png" width="16" height="16" border="0"> {$cache.note} {t}Notes{/t}<br />
 						<img src="resource2/{$opt.template.style}/images/action/16x16-watch.png" width="16" height="16" border="0"> {$cache.watcher} {t}Watched{/t}<br />
 						<img src="resource2/{$opt.template.style}/images/action/16x16-ignore.png" width="16" height="16" border="0"> {$cache.ignorercount} {t}Ignored{/t}<br />

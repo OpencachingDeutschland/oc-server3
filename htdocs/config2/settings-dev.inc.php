@@ -123,6 +123,10 @@
 
 	$opt['bin']['cs2cs'] = '/var/www/bin/cs2cs';
 	
+	// other settings
+	$opt['logic']['enableHTMLInUserDescription'] = false;
+	$opt['page']['showdonations'] = true;
+
 	// Flag paths
 	$opt['template']['locales']['DE']['flag'] = 'images/flag/DE.gif';
 	$opt['template']['locales']['FR']['flag'] = 'images/flag/FR.gif';

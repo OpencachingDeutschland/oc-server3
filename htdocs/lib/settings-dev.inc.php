@@ -39,10 +39,18 @@
 
 	//pagetitle
 	if (!isset($pagetitle)) $pagetitle = 'www.opencaching.de';
+	$opt['page']['title'] = 'OPENCACHING';
+	$opt['page']['subtitle1'] = 'Geocaching with Opencaching';
+	$opt['page']['subtitle2'] = '';
 	
 	//id of the node
 	$oc_nodeid = 4;
+	$opt['logic']['node']['id'] = 4;
 	
+	// waypoint prefix of the node
+	// OC = oc.de, OP = oc.pl, ... AA = local development
+	$oc_waypoint_prefix = 'OC';
+
 	//name of the cookie
 	$opt['cookie']['name'] = 'oc_devel';
 	$opt['cookie']['path'] = '/';
@@ -80,7 +88,7 @@
 	$use_news_approving = true;
 	$news_approver_email = 'root';
 
-	$opt['page']['showdonations'] = false;
+	$opt['page']['showdonations'] = true;
 
 	// date format
 	$opt['db']['dateformat'] = 'Y-m-d H:i:s';
@@ -230,11 +238,5 @@
 	// (e.g. xml-interface and mapserver-results)
 	// you can use -1 to use the master (not recommended, because replicated to slaves)
 	$opt['db']['slave']['primary'] = -1;
-	
-	$opt['logic']['node']['id'] = 4;
-	$opt['page']['subtitle1'] = 'Geocaching with Opencaching';
-	$opt['page']['subtitle2'] = '';
-	$opt['page']['title'] = 'OPENCACHING';
-	$oc_waypoint_prefix = 'OC';
 	
 ?>

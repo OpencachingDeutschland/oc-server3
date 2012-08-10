@@ -38,11 +38,6 @@
 	/* settings for the template engine
 	 *
 	 */
-	$opt['db']['servername'] = ':/var/lib/mysql/mysql.sock';
-	$opt['db']['username'] = 'oc';
-	$opt['db']['password'] = 'developer';
-	$opt['db']['pconnect'] = true;
-
 	// ... how long a query can take without warning (0 <= disabled)
 	$opt['db']['warn']['time'] = 0;
 	$opt['db']['warn']['mail'] = 'root';
@@ -52,11 +47,6 @@
 	$opt['db']['error']['display'] = true;
 	$opt['db']['error']['mail'] = 'root';
 	$opt['db']['error']['subject'] = 'sql_error';
-
-	// database placeholder
-	$opt['db']['placeholder']['db'] = 'opencaching';
-	$opt['db']['placeholder']['tmpdb'] = 'octmp';
-	$opt['db']['placeholder']['hist'] = 'ochist';
 
 	/* cookie or session
 	 *
@@ -131,9 +121,6 @@
 
 	$opt['template']['default']['style'] = 'ocstyle';
 
- 	// Google maps key
-        $opt['lib']['google']['mapkey']['local.opencaching.de'] = 'ABQIAAAAwY6rAeeTA2cLnBDnf5FWGhQ9ZMVXtHZ4yn114tr66PefbkFZhBQXKkJK_k96Ci1JimzyaUwfhFhGrQ';
-
 	$opt['bin']['cs2cs'] = '/var/www/bin/cs2cs';
 	
 	// Flag paths
@@ -152,6 +139,5 @@
 	$opt['template']['locales']['DA']['show'] = false;
 	$opt['template']['locales']['PT']['show'] = false;
 	$opt['template']['locales']['JA']['show'] = false;
-
 	
 ?>

@@ -78,18 +78,9 @@
 	
 	// news settings
 	$use_news_approving = true;
-	$news_approver_email = 'news-approver@devel.opencaching.de';
+	$news_approver_email = 'root';
 
 	$opt['page']['showdonations'] = false;
-
-	//local database settings
-	$dbusername = 'ocold';
-	$dbname = 'opencaching';
-	$dbserver = ':/var/lib/mysql/mysql.sock';
-	$dbpasswd = 'developer';
-	$dbpconnect = false;
-
-	$tmpdbname = 'test'; // empty db with CREATE and DROP priviledges
 
 	// date format
 	$opt['db']['dateformat'] = 'Y-m-d H:i:s';

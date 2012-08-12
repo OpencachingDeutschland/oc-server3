@@ -113,11 +113,13 @@
 		$rs = sql("SELECT `cr`.`id`,
 				               IF(`cr`.`status`=1,'(*) ', '') AS `new`,
 				               `c`.`name`,
+				               `u2`.`username` AS `ownernick`,
 				               `u`.`username`,
-                               `cr`.`lastmodified`
+				               `cr`.`lastmodified`
 				          FROM `cache_reports` `cr`
 				    INNER JOIN `caches` `c` ON `c`.`cache_id` = `cr`.`cacheid`
 				    INNER JOIN `user` `u` ON `u`.`user_id`  = `cr`.`userid`
+				    INNER JOIN `user` AS `u2` ON `u2`.`user_id`=`c`.`user_id`
 				         WHERE `cr`.`status` < 3
 				           AND (`cr`.`adminid` IS NULL OR `cr`.`adminid`=&1)
 			        ORDER BY `cr`.`status` DESC, `cr`.`lastmodified` ASC", 

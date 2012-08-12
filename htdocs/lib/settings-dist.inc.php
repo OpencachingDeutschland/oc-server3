@@ -30,7 +30,10 @@
 
 	//default used language
 	if (!isset($lang)) $lang = 'de';
-	
+
+	//default timezone
+	if (!isset($timezone)) $timezone = 'Europe/Berlin';
+
 	//default used style
 	if (!isset($style)) $style = 'ocstyle';
 

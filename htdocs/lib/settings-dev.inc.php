@@ -21,8 +21,8 @@
  *
  *	Unicode Reminder メモ
  *	                                         				                                
- *  Default settings for developer system. See also
- *    - settings-dist.inc.php for global default settings
+ *  Default settings for OC.de developer system. See also
+ *    - settings-dist.inc.php for sample settings
  *    - settings.inc.php for local settings
  *    - config2/settings* for version-2-code settings
 	
@@ -34,6 +34,9 @@
 	//default used language
 	if (!isset($lang)) $lang = 'de';
 	
+	//default timezone
+	if (!isset($timezone)) $timezone = 'Europe/Berlin';
+
 	//default used style
 	if (!isset($style)) $style = 'ocstyle';
 

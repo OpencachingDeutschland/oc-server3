@@ -4,8 +4,8 @@
  *
  *  Unicode Reminder メモ
  *
- *  Default settings for developer system. See also
- *    - config2/settings-dist.inc.php for global default settings
+ *  Default settings for OC.de developer system. See also
+ *    - config2/settings-dist.inc.php for sample settings
  *    - config2/settings.inc.php for local settings
  *    - lib/settings* for version-1-code settings
  ***************************************************************************/

@@ -61,6 +61,9 @@
 	require_once($opt['rootpath'] . 'lib/calculation.inc.php');
 	require_once($opt['rootpath'] . 'lib/consts.inc.php');
 
+	// timezone
+	date_default_timezone_set($timezone);
+
 	$dblink_slave = false;
 
 	// sql debugger?

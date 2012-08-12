@@ -26,13 +26,16 @@
 	{/if}
 
 	{if $list == true}
-		<ul>
-			{foreach from=$reportedcaches item=rc}
-				<li><a href="adminreports.php?id={$rc.id}">{$rc.new|escape}{$rc.name|escape} reported by {$rc.username|escape}</a></li>
-			{foreachelse}
-				<li>{t}No reported caches{/t}</li>
-			{/foreach}
-		</ul>
+	
+		<table>
+		<tr><th>{t}ID{/t}</th><th>{t}Name{/t}</th><th>{t}Owner{/t}</th><th>{t}Reporter{/t}</th><th>{t}Date{/t}</th></tr>
+		{foreach from=$reportedcaches item=rc}
+			<td><a href="adminreports.php?id={$rc.id}">{$rc.id}</td><td><a href="adminreports.php?id={$rc.id}">{$rc.new|escape}{$rc.name|escape}</a></td><td>{$rc.ownernick|escape}</td><td>{$rc.username|escape}</td><td>{$rc.lastmodified|date_format:$opt.format.datelong}</td></tr>
+		{foreachelse}
+			<tr><td colspan=5>{t}No reported caches{/t}</td></tr>
+		{/foreach}
+		</table>
+		
 		{if $reportedcaches != NULL}
 			<p style="line-height: 1.6em;">{t}(*) New reports{/t}</p>
 		{/if}

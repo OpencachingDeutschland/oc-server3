@@ -8,9 +8,10 @@
 	
  ****************************************************************************/
 
-  //prepare the templates and include all neccessary
-  $rootpath = '../../';
-  $pidfile = '/var/www/www.opencaching.de/code/htdocs/cache/search.pid';
+	//prepare the templates and include all neccessary
+	// needs absolute rootpath because called as cronjob
+	$rootpath = dirname(__FILE__) . '/../../';
+	$pidfile = $rootpath . 'cache/search.pid';
 
 	// chdir to proper directory (needed for cronjobs)
 	chdir(substr(realpath($_SERVER['PHP_SELF']), 0, strrpos(realpath($_SERVER['PHP_SELF']), '/')));

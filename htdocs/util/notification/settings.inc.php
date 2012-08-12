@@ -9,5 +9,5 @@
 
 	$nologs = 'Keine neuen Logeinträge';
 
-	$notifypid = '/mnt/opencaching/www.opencaching.de/code/htdocs/cache/notify.pid';
+	$notifypid = $rootpath . 'cache/notify.pid';
 ?>

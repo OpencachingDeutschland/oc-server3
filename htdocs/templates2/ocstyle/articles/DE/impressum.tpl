@@ -42,6 +42,7 @@ Hattsteiner Allee 26<br />
 <br />
 Telefon: 0172/3011455<br />
 E-Mail: verein@opencaching.de<br />
+<br />
 <b>ACHTUNG</b>: Fragen und Hinweise zu Schatzverstecken oder den Nutzungsbedingungen von opencaching.de 
 k&ouml;nnen wir leider nicht beantworten. Sie erhalten <u>keine</u> Antwort!<br />
 Bitte richten Sie Ihre Frage ausschlie&szlig;lich an die E-Mailadresse 
@@ -104,7 +105,7 @@ Zur Zeit sind im BGB-Vorstand (Stand 30.07.2012):<br />
 			Vorschriften nur durch Stichproben kontrollieren und ist deshalb darauf 
 			angewiesen, dass fragw&uuml;rdige oder rechtswidrige Inhalte von den Benutzern gemeldet werden. Die 
 			Meldung kann direkt &uuml;ber den Melde-Hyperlink in jedem Cachelisting oder per E-Mail an
-      <a href="mailto:verein@opencaching.de">verein@opencaching.de</a> erfolgen. Die 
+      <a href="mailto:contact@opencaching.de">contact@opencaching.de</a> erfolgen. Die
 			entsprechenden Inhalte werden dann schnellstm&ouml;glich vom Verein Opencaching Deutschland kontrolliert
       und bei Bedarf unverz&uuml;glich entfernt.</p>
 			
@@ -153,7 +154,7 @@ Zur Zeit sind im BGB-Vorstand (Stand 30.07.2012):<br />
 			<p><b>F&uuml;r das Suchen eines Geocaches gilt grunds&auml;tzlich:</b></p>
 			<ul>
 			<li>Das Suchen eines Geocaches geschieht in eigenem Interesse und auf eigene Gefahr - Opencaching.de &uuml;bernimmt in keinem Fall irgendeine Haftung f&uuml;r Sch&auml;den die durch einen Geocache entstehen.</li>
-			<li>Geocaches, die gegen die oben genannten Richtlinien f&uuml;r das Verstecken eines Geocaches versto&szlig;en, sind unverz&uuml;glich &uuml;ber den Melde-Hyperlink im Cachelisting oder per E-Mail an <a href="mailto:webmaster@opencaching.de">webmaster@opencaching.de</a> zu melden. Damit hilft jeder Benutzer die Qualit&auml;t dieser Geocaching Seite auf hohem Niveau zu halten und so den langfristigen Betrieb zu erm&ouml;glichen.</li>
+			<li>Geocaches, die gegen die oben genannten Richtlinien f&uuml;r das Verstecken eines Geocaches versto&szlig;en, sind unverz&uuml;glich &uuml;ber den Melde-Hyperlink im Cachelisting oder per E-Mail an <a href="mailto:contact@opencaching.de">contact@opencaching.de</a> zu melden. Damit hilft jeder Benutzer die Qualit&auml;t dieser Geocaching Seite auf hohem Niveau zu halten und so den langfristigen Betrieb zu erm&ouml;glichen.</li>
 			<li>Des weiteren ist die Anleitung zum Suchen eines Geocaches auf <a href="http://www.geocaching.de">http://www.geocaching.de</a> zu beachten.</li>
 			</ul>
 

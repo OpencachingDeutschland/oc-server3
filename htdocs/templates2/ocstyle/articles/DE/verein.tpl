@@ -17,10 +17,10 @@ Der Sitz des Vereins ist Bad Homburg vor der Höhe. Wir haben diesen Sitz gewäh
 Für ordentliche Mitglieder, die Opencaching.de mitgestalten, ist die Mitgliedschaft kostenfrei. Wir sind immer auf der Suche nach Entwicklern, Grafikern, Fotografen, Lektoren, Supportlern, Dokumentatoren etc.! Wer nicht die Zeit hat, um sich bei Opencaching einzubringen, kann stattdessen  Fördermitglied werden. Der Mitgliedsbeitrag ist noch festzusetzen.<br /><br />
 
 <em>Wo finde ich die aktuelle Satzung?</em><br />
-Die <a href="verein/OC_Satzung_aktuell.pdf">aktuelle Satzung</a> kannst Du <a href="verein/OC_Satzung_aktuell.pdf">hier</a> herunterladen.<br /><br />
+Die <a href="http://www.opencaching.de/verein/OC_Satzung_aktuell.pdf">aktuelle Satzung</a> kannst Du <a href="http://www.opencaching.de/verein/OC_Satzung_aktuell.pdf">hier</a> herunterladen.<br /><br />
 
 <em>Wo finde ich den Mitgliedsantrag?</em><br />
-Den <a href="verein/OC_Antrag_aktuell.pdf">Mitgliedsantrag</a> kannst Du <a href="verein/OC_Antrag_aktuell.pdf">hier</a> herunterladen.<br /><br />
+Den <a href="http://www.opencaching.de/verein/OC_Antrag_aktuell.pdf">Mitgliedsantrag</a> kannst Du <a href="http://www.opencaching.de/verein/OC_Antrag_aktuell.pdf">hier</a> herunterladen.<br /><br />
 
 <em>Ich m&ouml;chte Opencaching unterst&uuml;tzen, habe aber kein Interesse an einem Vereinsbeitritt. Was kann ich noch tun?</em><br />
 Da das die Anschaffung von neuer Hardware, Lizenzen, Zertifikaten etc. Kosten verursacht, sind wir auch auf Spenden angewiesen. Daher kannst Du uns über unsere <a href="./articles.php?page=donations" target="_blank">Spendenseite</a> jederzeit einen kleinen Obolus zukommen lassen, auch wenige Euro helfen uns weiter.<br /><br />
@@ -29,5 +29,5 @@ Da das die Anschaffung von neuer Hardware, Lizenzen, Zertifikaten etc. Kosten ve
 Du kannst den Vereinsvorstand unter <a href="mailto:verein@opencaching.de">verein@opencaching.de</a> gerne kontaktieren.<br /><br />
 
 <em>Ich möchte dem Verein Programmcode, Bilder, Grafiken, Texte etc. zur Verfügung stellen, was muss ich da beachten?</em><br />
-Um sicherzustellen, dass wir Deinen Beitrag zu Opencaching.de auch nutzen können, gibt es eine <a href="verein/OC_AE_aktuell.pdf">Einverst&auml;ndnis-/ Abtretungserkl&auml;rung</a> zum Download. Wir möchten Dich bitten, diese <a href="verein/OC_AE_aktuell.pdf">herunterzuladen</a> und Dich an die beschriebene Vorgehensweise im PDF zu halten.<br /><br />
+Um sicherzustellen, dass wir Deinen Beitrag zu Opencaching.de auch nutzen können, gibt es eine <a href="http://www.opencaching.de/verein/OC_AE_aktuell.pdf">Einverst&auml;ndnis-/ Abtretungserkl&auml;rung</a> zum Download. Wir möchten Dich bitten, diese <a href="http://www.opencaching.de/verein/OC_AE_aktuell.pdf">herunterzuladen</a> und Dich an die beschriebene Vorgehensweise im PDF zu halten.<br /><br />
 </div>

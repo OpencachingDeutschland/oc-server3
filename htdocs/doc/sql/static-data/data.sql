@@ -11300,4 +11300,4 @@ TRUNCATE TABLE `watches_waitingtypes`;
 INSERT INTO `watches_waitingtypes` (`id`, `watchtype`) VALUES ('1', 'ownerlog');
 INSERT INTO `watches_waitingtypes` (`id`, `watchtype`) VALUES ('2', 'cache_watches');
 
-INSERT INTO `sysconfig` (`name`, `value`) VALUES ('datasql_checksum', '5fa57156ee245c10f95d831d06f042d6') ON DUPLICATE KEY UPDATE `value`='5fa57156ee245c10f95d831d06f042d6';
+INSERT INTO `sysconfig` (`name`, `value`) VALUES ('datasql_checksum', 'bc9130761960bed6b629462454d88b43') ON DUPLICATE KEY UPDATE `value`='bc9130761960bed6b629462454d88b43';

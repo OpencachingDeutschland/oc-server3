@@ -68,14 +68,14 @@
 	
 	//if you are running this site on a other domain than staging.opencaching.de, you can set
 	//this in private_db.inc.php, but don't forget the ending /
-	$absolute_server_URI = 'http://' . $dev_domain . '/' . $dev_codepath . 'htdocs/';
+	$absolute_server_URI = $dev_baseurl . '/';
 	
 	// EMail address of the sender
 	if (!isset($emailaddr)) $emailaddr = 'contact@mail.opencaching.de';
 	
 	// location of cache images
 	if (!isset($picdir)) $picdir = $rootpath . 'images/uploads';
-	if (!isset($picurl)) $picurl = 'http://' . $dev_domain . '/' . $dev_codepath . 'htdocs/images/uploads';
+	if (!isset($picurl)) $picurl = $absolute_server_URI . 'images/uploads';
 
 	// Thumbsize
 	$thumb_max_width = 175;

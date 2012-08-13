@@ -95,13 +95,13 @@
 	/* other template options
 	 *
 	 */
-	$opt['page']['absolute_url'] = 'http://' . $dev_domain . '/' . $dev_codepath . 'htdocs';
+	$opt['page']['absolute_url'] = $dev_baseurl;
 	$opt['mail']['from'] = '<admin email>';
 
 	/* location of uploaded images
 	 */
 	$opt['logic']['pictures']['dir'] = $dev_basepath . $dev_codepath . 'htdocs/images/uploads';
-	$opt['logic']['pictures']['url'] = 'http://' .  $dev_domain . '/' . $dev_codepath . 'htdocs/images/uploads';
+	$opt['logic']['pictures']['url'] = $opt['page']['absolute_url'] . '/images/uploads';
 	$opt['logic']['pictures']['thumb_url'] = $opt['logic']['pictures']['url'] . '/thumbs';
 
 	/* cachemaps

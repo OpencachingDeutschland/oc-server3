@@ -5,7 +5,7 @@
  *  Unicode Reminder メモ
  *
  *  Default settings for OC.de developer system. See also
- *    - config2/settings-dist.inc.php for sample settings
+ *    - config2/settings-dist.inc.php for common settings
  *    - config2/settings.inc.php for local settings
  *    - lib/settings* for version-1-code settings
  ***************************************************************************/
@@ -92,11 +92,15 @@
 	//$opt['debug'] = DEBUG_DEVELOPER|DEBUG_TEMPLATES|DEBUG_SQLDEBUGGER;
 	//$opt['debug'] = DEBUG_DEVELOPER|DEBUG_SQLDEBUGGER;
 
+	// node ID
+	$opt['logic']['node']['id'] = 4;
+
 	/* other template options
 	 *
 	 */
 	$opt['page']['absolute_url'] = $dev_baseurl;
-	$opt['mail']['from'] = '<admin email>';
+	$opt['mail']['from'] = 'root';
+	$opt['mail']['subject'] = '[local.opencaching.de] ';
 
 	/* location of uploaded images
 	 */
@@ -110,8 +114,8 @@
 
  	/* E-Mail for notification about news (newstopic.php)
  	 */
- 	$opt['news']['mail'] = '<admin email>';
- 	$opt['mail']['subject'] = '[<domain>] ';
+	$opt['news']['mail'] = 'root';
+	$opt['mail']['subject'] = '[local.opencaching.de] ';
 
  	/* 3rd party library options
  	 * see https://my.garmin.com/api/communicator/key-generator.jsp

@@ -27,7 +27,7 @@
 
 	{if $list == true}
 	
-		<table>
+		<table class="table">
 		<tr><th>{t}ID{/t}</th><th>{t}Name{/t}</th><th>{t}Owner{/t}</th><th>{t}Reporter{/t}</th><th>{t}Date{/t}</th></tr>
 		{foreach from=$reportedcaches item=rc}
 			<td><a href="adminreports.php?id={$rc.id}">{$rc.id}</td><td><a href="adminreports.php?id={$rc.id}">{$rc.new|escape}{$rc.name|escape}</a></td><td>{$rc.ownernick|escape}</td><td>{$rc.username|escape}</td><td>{$rc.lastmodified|date_format:$opt.format.datelong}</td></tr>

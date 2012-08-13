@@ -122,7 +122,7 @@
 				    INNER JOIN `user` AS `u2` ON `u2`.`user_id`=`c`.`user_id`
 				         WHERE `cr`.`status` < 3
 				           AND (`cr`.`adminid` IS NULL OR `cr`.`adminid`=&1)
-			        ORDER BY `cr`.`status` DESC, `cr`.`lastmodified` ASC", 
+			        ORDER BY `cr`.`status` ASC, `cr`.`lastmodified` ASC", 
 			    $login->userid);
 
 		$tpl->assign_rs('reportedcaches', $rs);

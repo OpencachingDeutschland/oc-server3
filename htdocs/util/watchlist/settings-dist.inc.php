@@ -1,8 +1,10 @@
 <?php
 	// Unicode Reminder メモ
 
-	$mailfrom = 'noreply@opencaching.de';
-	$mailsubject = '[opencaching.de] Deine Watchlist vom ' . date('d.m.Y');
+	if (!isset($maildomain)) $maildomain = 'opencaching.de';
+
+	$mailfrom = 'noreply@' . $maildomain;
+	$mailsubject = '[' . $maildomain . '] Deine Watchlist vom ' . date('d.m.Y');
 
 	$debug = false;
 	$debug_mailto = 'abc@xyz.de';

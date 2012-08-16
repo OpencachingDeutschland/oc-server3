@@ -287,12 +287,12 @@
             <h4><a>Beispiele</a></h4>
             <p>http://www.opencaching.de/xml/ocxml11.php?modifiedsince=20060320000000&amp;user=1&amp;cache=1&amp;cachelog=1&amp;cachedesc=1&amp;picture=1&amp;removedobject=1&amp;session=1&amp;charset=utf-8&amp;cdata=1&amp;xmldecl=0&amp;ocxmltag=0&amp;doctype=0<br/>
             http://www.opencaching.de/xml/ocxml11.php?sessionid=4711&amp;file=1&amp;charset=utf-8&amp;cdata=1&amp;xmldecl=0&amp;ocxmltag=0&amp;doctype=0</p>
-		<h3>Sonstige Bemerkungen</h3>
+		<h3>Sonstige Anmerkungen</h3>
 		<ul>
 			<li>
 			Für den ersten Aufruf des Interface muss als modifiedsince das Datum 1.8.2005 
 			um 00:00:00 Uhr angegeben werden. Es gibt keine Datensätze die vor diesem Datum 
-			angelegt wurden.</li>
+			angelegt wurden.<br /><br /></li>
 			<li>
 				Um Probleme wegen Differenzen der Uhrzeit zwischen Client und Server zu 
 				umgehen, muss für den nächsten Inkrementellen Abruf der Daten das Datum um Kopf 
@@ -308,19 +308,22 @@
 			</li>
 			<li>Zeitverschiebungen / unterschiedliche Zeitzonen zwischen Client und Server 
 			werden nicht unterstützt.</li>
+		</ul>
+		<h3>Ressourcen</h3>
+		<ul>
 			<li>Das XML-Dokument enthält folgende DTD (Document Type Definition): 
 			http://www.opencaching.de/xml/ocxml11.dtd</li>
 			<li>Der Quellcode ist hier erhältlich: <a href="https://github.com/OpencachingDeutschland/oc-server3/tree/stable/htdocs/xml">
 					https://github.com/OpencachingDeutschland/oc-server3/tree/stable/htdocs/xml</a></li>
-			<li>Eine Referenzimplementierung kann hier downgeloadet werden: <s>
-					http://devel.opencaching.de/viewcvs/viewcvs.cgi/html/util/ocxml11client/</s> (neue Adresse folgt ...)</li>
+			<li>Eine Referenzimplementierung kann hier heruntergeladen werden:
+					<a href="https://github.com/OpencachingDeutschland/oc-server3/tree/stable/htdocs/util-local/ocxml11client">https://github.com/OpencachingDeutschland/oc-server3/tree/stable/htdocs/util-local/ocxml11client</a></li>
 			<li>Fragen zum Interface können im Opencaching-Forum gestellt werden: <a href="http://forum.opencaching-network.org/">http://forum.opencaching-network.org/</a></a></li>
 		</ul>
 		<p>Lizenz:</p>
 		<ul>
-			<li>Der Quellcode steht unter der GNU Gerneral Public License Version 2 und später.</li>
+			<li>Der Quellcode steht unter der GNU Gerneral Public License Version 2 und später, siehe <a href="https://github.com/OpencachingDeutschland/oc-server3/tree/stable/doc/license.txt">https://github.com/OpencachingDeutschland/oc-server3/tree/stable/doc/license.txt</a>.</li>
 			<li>
-				Für Daten die über das XML-Interface abgerufen werden, gelten die 
+				Für Daten, die über das XML-Interface abgerufen werden, gelten die 
 				Nutzungsbedingungen von Opencaching.de: <a href="http://www.opencaching.de/articles.php?page=impressum#tos">
 					http://www.opencaching.de/articles.php?page=impressum#tos</a></li></ul>
 		<p>&nbsp;</p>

@@ -1,6 +1,6 @@
 <?php
 /***************************************************************************
- *  You can find the license in the docs directory
+ *  For license information see doc/license.txt
  *
  *  Unicode Reminder メモ
  ***************************************************************************/

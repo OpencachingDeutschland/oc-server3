@@ -4,10 +4,9 @@
 		./util/publish_caches/run_publish.php
 															-------------------
 		begin                : Sat September 2 2006
-		copyright            : (C) 2005 The OpenCaching Group
-		forum contact at     : http://www.opencaching.com/phpBB2
 
-	***************************************************************************/
+		For license information see doc/license.txt
+ ****************************************************************************/
 
  /***************************************************************************
 

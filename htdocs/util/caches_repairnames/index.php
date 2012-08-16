@@ -1,6 +1,10 @@
 #!/usr/local/bin/php -q
 <?php
-	// Unicode Reminder メモ
+/***************************************************************************
+ *  For license information see doc/license.txt
+ *
+ *  Unicode Reminder メモ
+ ***************************************************************************/
 
 	$rootpath = '../../';
 	require($rootpath . 'lib/clicompatbase.inc.php');

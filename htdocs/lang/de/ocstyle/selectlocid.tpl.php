@@ -1,5 +1,9 @@
 <?php
-   // Unicode Reminder メモ
+/****************************************************************************
+		For license information see doc/license.txt
+
+		Unicode Reminder メモ
+ ****************************************************************************/
 ?>
 
 		  <div class="content2-pagetitle"><img src="resource2/ocstyle/images/cacheicon/traditional.gif" style="align: left; margin-right: 10px;" width="32" height="32" alt="{t}Search result{/t}" />{t}Selection of city{/t} - {t}Total of {resultscount} cities matched{/t}</div>

@@ -1,5 +1,9 @@
 <?php
-	// Unicode Reminder メモ
+/***************************************************************************
+ *	For license information see doc/license.txt
+ *
+ *  Unicode Reminder メモ
+ ***************************************************************************/
 
 	if (!isset($maildomain)) $maildomain = 'opencaching.de';
 

@@ -1,7 +1,8 @@
 <?php
 /****************************************************************************
-   Unicode Reminder メモ
+  For license information see doc/license.txt
 
+  Unicode Reminder メモ
  ****************************************************************************/
 
 	require('./lib2/web.inc.php');

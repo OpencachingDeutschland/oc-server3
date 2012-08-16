@@ -3,10 +3,9 @@
 													./util/change_owner/cache.php
 															-------------------
 		begin                : September 8 2007
-		copyright            : (C) 2007 The OpenCaching Group
-		forum contact at     : http://www.opencaching.com/phpBB2
 
-	***************************************************************************/
+		For license information see doc/license.txt
+ ****************************************************************************/
 
  /***************************************************************************
 

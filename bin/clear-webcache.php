@@ -1,5 +1,11 @@
 #!/usr/bin/php
 <?php
+/***************************************************************************
+ *  For license information see doc/license.txt
+ *
+ *  Unicode Reminder メモ
+ ***************************************************************************/
+
 	/*  refresh cached files and translations
 	 *
 	 *  stop/start apache

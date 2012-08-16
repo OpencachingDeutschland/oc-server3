@@ -37,9 +37,10 @@
 	   <li class="changelogitem">correct default country for new caches, fixed &bdquo;Belgium/Afghanistan problem&ldquo;</li>
 	   <li class="changelogitem">first log was missing in print view</li>
 	   <li class="changelogitem">display of event attenders' count</li>
-	   <li class="changelogitem">display of cache type icon for unpublished caches in user profile</li>
+	   <li class="changelogitem">display of cache type icon for unpublished caches at <a href="./myhome.php">user profile</a> &rarr; Show all</li>
 	   <li class="changelogitem">link "Geokrety history" and recommendation count in cache listings will not be cropped when using big fonts</li>
 	   <li class="changelogitem">complete, clickable opencaching.de links in log notification emails</li>
+	   <li class="changelogitem">added missing links to <a href="http://www.opencaching.nl/">opencaching.nl</a></li>
 	   <li class="changelogitem">correct error message when entering a wrong email-address-change confirmation code</li>
  	 </ul>
 	<br />

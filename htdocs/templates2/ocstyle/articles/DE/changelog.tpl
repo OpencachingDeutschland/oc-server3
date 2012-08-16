@@ -39,9 +39,10 @@
 	   <li class="changelogitem">korrekte Ländervorgabe für neue Caches, &bdquo;Belgien/Afghanistan-Problem&ldquo; behoben</li>
 	   <li class="changelogitem">erstes Log fehlte in der Druckansicht</li>
 	   <li class="changelogitem">Anzeige der Teilnehmerzahl von Event-Caches</li>
-	   <li class="changelogitem">Anzeige des Cachetyp-Icons im Benutzerprofil für unveröffentlichte Caches</li>
+	   <li class="changelogitem">Anzeige des Cachetyp-Icons für unveröffentlichte Caches (bei <a href="./myhome.php">Benutzerprofil</a> &rarr; Alle anzeigen)</li>
 	   <li class="changelogitem">Link &bdquo;Geokrety-Verlauf&ldquo; und Empfehlungszahl im Cachelisting werden bei großer Schrift nicht mehr abgeschnitten</li>
 	   <li class="changelogitem">vollständige, anklickbare opencaching.de-Links in Log-Benachrichtigungsmails</li>
+	   <li class="changelogitem">fehlende Verweise auf <a href="http://www.opencaching.nl/">opencaching.nl</a> ergänzt</li>
 	   <li class="changelogitem">korrekte Fehlermeldung bei falschem Email-Adress-Bestätigungscode</li>
 	   <li class="changelogitem">einige Dutzend Rechtschreibfehler korrigiert</li>
    </ul>

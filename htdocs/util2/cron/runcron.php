@@ -30,7 +30,11 @@
 	$hDir = opendir($modules_dir);
 	while (false !== ($file = readdir($hDir)))
 		if (substr($file, -10) == '.class.php')
+		{
+			if ($opt['debug'] & DEBUG_DEVELOPER)
+				echo "running $file ...\n";
 			require($modules_dir . $file);
+		}
 
   CleanupAndExit($opt['cron']['pidfile']); 
 

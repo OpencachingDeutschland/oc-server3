@@ -20,7 +20,7 @@
       foreach ($r AS $k => $v)
       {
         if ($bFirstCol == false) echo ';';
-	echo str_getcsv($k);
+        echo strGetCsv($k);
         $bFirstCol = false;
       }
       echo "\n";
@@ -32,7 +32,7 @@
     foreach ($r AS $k => $v)
     {
       if ($bFirstCol == false) echo ';';
-      echo str_getcsv($v);
+      echo strGetCsv($v);
       $bFirstCol = false;
     }
 
@@ -40,7 +40,8 @@
   }
   sql_free_result($rs);
 
-  function str_getcsv($str)
+  // renamed function from "str_getcsv" to avoid collision with PHP 5.3 str_getcsv()
+  function strGetCsv($str)
   {
     return '"' . mb_ereg_replace('"', '\"', $str) . '"';
   }

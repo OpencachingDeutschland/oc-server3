@@ -4,9 +4,8 @@
 		./util/notification/run_notify.php
 															-------------------
 		begin                : August 25 2006
-		copyright            : (C) 2006 The OpenCaching Group
-		forum contact at     : http://www.opencaching.com/phpBB2
 
+		For license information see doc/license.txt
 	***************************************************************************/
 
  /***************************************************************************

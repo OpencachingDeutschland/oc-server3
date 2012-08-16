@@ -1,5 +1,7 @@
 <?php
 /* ***
+ *  For license information see doc/license.txt
+ 
 * RSS Class for Opencaching.de
 * *************************************
 * @author: Tobias Hannaske (poker4ace)

@@ -4,10 +4,9 @@
 													./util/gns/mkadmtxt.php
 															-------------------
 		begin                : Thu November 6 2005
-		copyright            : (C) 2005 The OpenCaching Group
-		forum contact at     : http://www.opencaching.com/phpBB2
 
-	***************************************************************************/
+		For license information see doc/license.txt
+ ****************************************************************************/
 
  /***************************************************************************
 		

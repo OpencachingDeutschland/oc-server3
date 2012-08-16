@@ -1,4 +1,10 @@
 <?php
+/***************************************************************************
+ *  For license information see doc/license.txt
+ *
+ *  Unicode Reminder メモ
+ ***************************************************************************/
+
   //prepare the templates and include all neccessary
   $opt['rootpath'] = '../../';
 	require_once($opt['rootpath'] . 'lib2/web.inc.php');

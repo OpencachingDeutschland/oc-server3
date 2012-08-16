@@ -1,23 +1,9 @@
 <?php
-/***************************************************************************
-
-		$Id: icons.inc.php,v 1.12 2007/10/30 20:23:10 oliver Exp $
-		$Date: 2007/10/30 20:23:10 $
-		$Revision: 1.12 $
+/****************************************************************************
 		begin                : Fr Sept 9 2005
-		copyright            : (C) 2004 The OpenCaching Group
-		forum contact at     : http://www.opencaching.com/phpBB2
 
-	***************************************************************************/
-
-/***************************************************************************
-	*
-	*   This program is free software; you can redistribute it and/or modify
-	*   it under the terms of the GNU General Public License as published by
-	*   the Free Software Foundation; either version 2 of the License, or
-	*   (at your option) any later version.
-	*
-	***************************************************************************/
+		For license information see doc/license.txt
+ ****************************************************************************/
 
 /****************************************************************************
 

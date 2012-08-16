@@ -1,5 +1,9 @@
 <?php
-	// Unicode Reminder メモ
+/***************************************************************************
+ *	For license information see doc/license.txt
+ *
+ *  Unicode Reminder メモ
+ ***************************************************************************/
 
 	$mailfrom = 'noreply@opencaching.de';
 	$mailsubject = '[opencaching.de] Neuer Cache: {cachename}';

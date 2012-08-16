@@ -4,10 +4,9 @@
 													./util/gns/mksearchindex.php
 															-------------------
 		begin                : Thu November 1 2005
-		copyright            : (C) 2005 The OpenCaching Group
-		forum contact at     : http://www.opencaching.com/phpBB2
 
-	***************************************************************************/
+		For license information see doc/license.txt
+ ****************************************************************************/
 
  /***************************************************************************
 		

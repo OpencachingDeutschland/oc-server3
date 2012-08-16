@@ -1,6 +1,10 @@
 #!/usr/local/bin/php -q
 <?php
-	// Unicode Reminder メモ
+/***************************************************************************
+ *	For license information see doc/license.txt
+ *
+		Unicode Reminder メモ
+ ***************************************************************************/
 
 	// needs absolute rootpath because called as cronjob
 	$rootpath = dirname(__FILE__) . '/../../';

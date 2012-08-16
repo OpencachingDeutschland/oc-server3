@@ -1,0 +1,1 @@
+see ../../doc for license information and other documentation

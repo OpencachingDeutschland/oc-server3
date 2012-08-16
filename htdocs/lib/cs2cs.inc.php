@@ -1,6 +1,9 @@
 <?php
+/****************************************************************************
+		For license information see doc/license.txt
 
-	// Unicode Reminder メモ
+		Unicode Reminder メモ
+ ****************************************************************************/
 
 define("CS2CS", "cs2cs");
 

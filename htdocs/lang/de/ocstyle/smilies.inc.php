@@ -1,21 +1,11 @@
 <?php
-/***************************************************************************
+/****************************************************************************
 		./lang/de/ocstyle/smilies.inc.php
 		-------------------
-		begin                : December 1^2 2005
-		copyright            : (C) 2005 The OpenCaching Group
-		forum contact at     : http://www.opencaching.com/phpBB2
+		begin                : December 12 2005
 
-	***************************************************************************/
-
-/***************************************************************************
-	*
-	*   This program is free software; you can redistribute it and/or modify
-	*   it under the terms of the GNU General Public License as published by
-	*   the Free Software Foundation; either version 2 of the License, or
-	*   (at your option) any later version.
-	*
-	***************************************************************************/
+		For license information see doc/license.txt
+ ****************************************************************************/
 
 /****************************************************************************
 

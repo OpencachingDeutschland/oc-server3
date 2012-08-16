@@ -1,12 +1,12 @@
 ﻿
-             Opencaching Network Implementation Version 2.0
+             Opencaching Network Implementation Version 3
 
 
-                                                                  18th July 2007
+                                                                  August 16, 2012
 
 License Information
 
-Copyright (C) 2006, 2007  opencaching.de
+Copyright (C) 2006-2012  Opencaching Deutschland and Contributors
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -29,13 +29,14 @@ You have to name and/or link opencaching.de to your customers as
 original author of the used parts in your implementation.
 
 This license is only valid for the source code and documents stored in the 
-public CVS repository. There is a separate license agreement located on 
-opencaching.de for data transfer from and to opencaching.de.
+public Git repository. For data transfer to and from opencaching.de, see
+the legal information at opencaching.de.
 
 If you are using this source code to establish a geocache listing service
 or some sort of service which can be compared with it, you agree to 
-populate your geocaching data via XML the same way and under the same 
-(or less restrictive) conditions as opencaching.de does.
+publish your geocaching data via XML Interface the same way and under the same
+(or less restrictive) conditions as opencaching.de does; see
+http://www.opencaching.de/doc/xml .
 
 
 A different license may apply to third party components being used.

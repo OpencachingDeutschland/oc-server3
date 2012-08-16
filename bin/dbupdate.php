@@ -1,5 +1,11 @@
 #!/usr/bin/php
 <?php
+/***************************************************************************
+ *  For license information see doc/license.txt
+ *
+  *  Unicode Reminder メモ
+***************************************************************************/
+
 	/*
 	 * update of static data and triggers in developer system
 	 *

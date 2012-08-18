@@ -1,0 +1,38 @@
+<xml>
+	<brief>Retrieve log entries of a specified user</brief>
+	<issue-id>80</issue-id>
+	<desc>
+		<p>Retrieve log entries of a specified user.</p>
+	</desc>
+	<req name='user_uuid'>
+		<p>ID of the user. (Use services/users/by_username to get it.)</p>
+	</req>
+	<opt name='limit' default='20'>
+		<p>Integer N. If given, no more than N logs will be returned (the most recent ones).
+		Maximum allowed value is 1000.</p>
+		<p>Note: Some users have thousands of log entries!</p>
+	</opt>
+	<opt name='offset' default='0'>
+		<p>Combined with the <b>limit</b> argument, this gives you an abbility to get
+		<b>all</b> log entries of the user (with multiple requests).</p>
+	</opt>
+	<common-format-params/>
+	<returns>
+		<p>Log entries. A dictionary of the following format:</p>
+		<ul>
+			<li><b>uuid</b> - ID of the log entry,</li>
+			<li>
+				<p><b>date</b> - date and time (ISO 8601) when the log entry was submitted.</p>
+				<p>Note, that some OpenCaching servers don't store the exact times along
+				with the log entries.</p>
+			</li>
+			<li><b>cache_code</b> - code of the geocache,</li>
+			<li>
+				<p><b>type</b> - string; log type. This could be <b>pretty much everything</b>, but
+				there are three primary types: "Found it", "Didn't find it" or "Comment".
+				You may treat every other string as "Comment".</p>
+			</li>
+			<li><b>comment</b> - HTML string, text entered with the log entry.</li>
+		</ul>
+	</returns>
+</xml>

@@ -1,3 +1,7 @@
+# common exclude files list
+#
+# for local exclude files, see .git/info/exclude
+
 htdocs/*/settings.inc.php
 htdocs/*/*/settings.inc.php
 htdocs/cache/*
@@ -9,3 +13,8 @@ htdocs/resource2/tinymce/tiny_mce_*.gz
 htdocs/sitemap*xml*
 htdocs/util-local/ocxml11client/data-files
 htdocs/util-local/ocxml11client/tmp
+
+lib/htmlpurifier-4.2.0/library/HTMLPurifier/DefinitionCache/Serializer/CSS/*
+lib/htmlpurifier-4.2.0/library/HTMLPurifier/DefinitionCache/Serializer/HTML/*
+lib/htmlpurifier-4.2.0/library/HTMLPurifier/DefinitionCache/Serializer/URI/*
+

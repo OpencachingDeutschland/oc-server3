@@ -1,0 +1,11 @@
+htdocs/*/settings.inc.php
+htdocs/*/*/settings.inc.php
+htdocs/cache/*
+htdocs/cache2/*
+htdocs/download/*
+htdocs/images/statpics/*
+htdocs/images/uploads/*
+htdocs/resource2/tinymce/tiny_mce_*.gz
+htdocs/sitemap*xml*
+htdocs/util-local/ocxml11client/data-files
+htdocs/util-local/ocxml11client/tmp

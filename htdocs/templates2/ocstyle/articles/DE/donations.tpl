@@ -13,6 +13,14 @@
 
 			<p>Mit Eurer freundlichen Spende sorgt Ihr daf&uuml;r, dass wir die (Ersatz)Beschaffung notwendiger Hardware finanzieren k&ouml;nnen. Details zur Verwendung finden Ihr weiter unten.</p>
 
+			<h1>Per &Uuml;berweisung spenden:</h1>
+			<p>Bank: Deutsche Skatbank<br />
+			Kontoinhaber: Opencaching Deutschland<br />
+			Kontonummer: 4752678<br />
+			BLZ: 83065408<br /><br />
+			IBAN: DE42 8306 5408 0004 7526 78<br />
+			BIC (SWIFT): GENODEF1SLR</p>
+			
 			<h1>Per PayPal spenden:</h1>
 
 			<p>Bei einer Spende &uuml;ber PayPal (Spenden-Button) betragen die Geb&uuml;hren f&uuml;r uns 1,9% + 0,35 &euro;.

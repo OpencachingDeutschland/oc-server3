@@ -22,6 +22,7 @@
     <tr><td><img src="http://www.opencaching.de/images/team/4_vs.jpg" /></td><td><a href="http://opencaching.de/viewprofile.php?userid=162754">4_Vs</a></td><td>Vorsitzender</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/dl8ndm.jpg" /></td><td><a href="http://opencaching.de/viewprofile.php?userid=102263">dl8ndm</a></td><td>stellvertretender Vorsitzender</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/danishop.jpg" /></td><td><a href="http://opencaching.de/viewprofile.php?userid=222126">Danishop</a></td><td>Kassenwart</td></tr>
+    <tr><td><img src="http://www.opencaching.de/images/team/danlex.png" /></td><td><a href="http://opencaching.de/viewprofile.php?userid=222261">Danlex</a></td><td>Pressesprecher; Anwendersupport, Datenpflege</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/dummy.jpg" /></td><td><a href="http://opencaching.de/viewprofile.php?userid=137473">bohrsty</a></td><td>Leiter Technik/Systemadministration</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/metrax.png" /></td><td><a href="http://opencaching.de/viewprofile.php?userid=212145">Metrax</a></td><td>Leiter Softwareentwicklung</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/pirate77.jpg" /></td><td><a href="http://opencaching.de/viewprofile.php?userid=152708">pirate77</a></td><td>Leiter Anwendersupport, Datenpflege</td></tr>
@@ -32,7 +33,6 @@
     <tr><td><img src="http://www.opencaching.de/images/team/aldeyn.jpg" /></td><td><a href="http://opencaching.de/viewprofile.php?userid=174233">Aldeyn</a></td><td>Softwareentwicklung</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/bundy609.jpg" /></td><td><a href="http://opencaching.de/viewprofile.php?userid=189552">Bundy609</a></td><td>Anwendersupport, Datenpflege</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/dummy.jpg" /></td><td><a href="http://opencaching.de/viewprofile.php?userid=122006">Carnosaurus</a></td><td>Serverbetrieb</td></tr>
-    <tr><td><img src="http://www.opencaching.de/images/team/danlex.png" /></td><td><a href="http://opencaching.de/viewprofile.php?userid=222261">Danlex</a></td><td>Anwendersupport, Datenpflege</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/dl6hbo.jpg" /></td><td><a href="http://opencaching.de/viewprofile.php?userid=148310">dl6hbo</a></td><td>Serverbetrieb, Dokumentation</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/flopp.png" /></td><td><a href="http://opencaching.de/viewprofile.php?userid=126329">Flopp</a></td><td>Softwareentwicklung, Anwendersupport, Datenpflege</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/following.png" /></td><td><a href="http://opencaching.de/viewprofile.php?userid=150360">following</a></td><td>stellvertretender Entwicklungsleiter, Datenpflege, Forenmoderation</td></tr>

@@ -297,4 +297,11 @@ function post_config()
 		'filename' => 'http://geokrety.org/index.php?lang=de_DE.UTF-8'
 	);
 }
+
+$OKAPI_SETTINGS = array(
+	'OC_BRANCH' => 'oc.de',
+	'SITELANG' => 'de',
+	'VAR_DIR' => $opt['rootpath'].'var',
+);
+
 ?>

@@ -1,20 +1,21 @@
-# common exclude files list
-#
-# for local exclude files, see .git/info/exclude
+# Commonly ignored files list. For locally ignored files (e.g. local IDE
+# settings), use .git/info/exclude file. Keep the lines in this file sorted.
 
-htdocs/*/settings.inc.php
-htdocs/*/*/settings.inc.php
-htdocs/cache/*
-htdocs/cache2/*
-htdocs/download/*
-htdocs/images/statpics/*
-htdocs/images/uploads/*
-htdocs/resource2/tinymce/tiny_mce_*.gz
-htdocs/sitemap*xml*
-htdocs/util-local/ocxml11client/data-files
-htdocs/util-local/ocxml11client/tmp
-
-lib/htmlpurifier-4.2.0/library/HTMLPurifier/DefinitionCache/Serializer/CSS/*
-lib/htmlpurifier-4.2.0/library/HTMLPurifier/DefinitionCache/Serializer/HTML/*
-lib/htmlpurifier-4.2.0/library/HTMLPurifier/DefinitionCache/Serializer/URI/*
-
+/lib/htmlpurifier-4.2.0/library/HTMLPurifier/DefinitionCache/Serializer/CSS/*
+/lib/htmlpurifier-4.2.0/library/HTMLPurifier/DefinitionCache/Serializer/HTML/*
+/lib/htmlpurifier-4.2.0/library/HTMLPurifier/DefinitionCache/Serializer/URI/*
+/htdocs/cache/*
+/htdocs/cache2/*
+/htdocs/config2/settings.inc.php
+/htdocs/download/*
+/htdocs/images/statpics/*
+/htdocs/images/uploads/*
+/htdocs/lib/settings.inc.php
+/htdocs/resource2/tinymce/tiny_mce_*.gz
+/htdocs/util-local/ocxml11client/data-files
+/htdocs/util-local/ocxml11client/tmp
+/htdocs/util/mysql_root/settings.inc.php
+/htdocs/util/notification/settings.inc.php
+/htdocs/util/publish_caches/settings.inc.php
+/htdocs/util/watchlist/settings.inc.php
+/htdocs/var/*

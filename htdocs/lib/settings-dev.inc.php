@@ -231,5 +231,11 @@
 	// (e.g. xml-interface and mapserver-results)
 	// you can use -1 to use the master (not recommended, because replicated to slaves)
 	$opt['db']['slave']['primary'] = -1;
-	
+
+	$OKAPI_SETTINGS = array(
+		'OC_BRANCH' => 'oc.de',
+		'SITELANG' => 'de',
+		'VAR_DIR' => $opt['rootpath'].'var',
+	);
+
 ?>

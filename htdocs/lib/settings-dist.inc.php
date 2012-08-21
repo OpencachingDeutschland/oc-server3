@@ -301,7 +301,7 @@ function post_config()
 $OKAPI_SETTINGS = array(
 	'OC_BRANCH' => 'oc.de',
 	'SITELANG' => 'de',
-	'VAR_DIR' => $opt['rootpath'].'var',
+	'VAR_DIR' => $rootpath.'var',
 );
 
 ?>

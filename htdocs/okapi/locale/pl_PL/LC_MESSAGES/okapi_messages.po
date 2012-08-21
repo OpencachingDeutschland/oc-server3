@@ -1,0 +1,269 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: OKAPI\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-06-14 12:07+0100\n"
+"PO-Revision-Date: 2012-06-14 12:07+0100\n"
+"Last-Translator: Wojciech Rygielski <rygielski@mimuw.edu.pl>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop\n"
+"X-Poedit-Basepath: D:\\PRIV\\Projekty\\EclipseWorkspace\\opencaching-api\\okapi\n"
+"Plural-Forms: nplurals=3; plural= n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Poedit-Language: Polish\n"
+"X-Poedit-Country: POLAND\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: services/caches/geocaches.php:634
+msgid "Stage"
+msgstr "Etap"
+
+#: services/caches/formatters/gpxfile.tpl.php:27
+#: services/caches/formatters/gpxfile.tpl.php:44
+msgid "hidden by"
+msgstr "ukryta przez"
+
+#: services/caches/formatters/gpxfile.tpl.php:46
+#, php-format
+msgid "%d recommendation"
+msgid_plural "%d recommendations"
+msgstr[0] "%d rekomendacja"
+msgstr[1] "%d rekomendacje"
+msgstr[2] "%d rekomendacji"
+
+#: services/caches/formatters/gpxfile.tpl.php:47
+#, php-format
+msgid "found %d time"
+msgid_plural "found %d times"
+msgstr[0] "znaleziona %d raz"
+msgstr[1] "znaleziona %d razy"
+msgstr[2] "znaleziona %d razy"
+
+#: services/caches/formatters/gpxfile.tpl.php:50
+#, php-format
+msgid "%d trackable"
+msgid_plural "%d trackables"
+msgstr[0] "%d GeoKret (lub TravelBug)"
+msgstr[1] "%d GeoKrety (lub TravelBugi)"
+msgstr[2] "%d GeoKretów (lub TravelBugów)"
+
+#: services/caches/formatters/gpxfile.tpl.php:54
+msgid "Personal notes"
+msgstr "Osobiste notatki"
+
+#: services/caches/formatters/gpxfile.tpl.php:58
+msgid "Attributes"
+msgstr "Atrybuty"
+
+#: services/caches/formatters/gpxfile.tpl.php:62
+msgid "Trackables"
+msgstr "Geokrety, Travelbugi itp."
+
+#: services/caches/formatters/gpxfile.tpl.php:80
+msgid "Images"
+msgstr "Obrazki"
+
+#: services/caches/formatters/gpxfile.tpl.php:87
+msgid "Spoilers"
+msgstr "Spoilery"
+
+#: services/caches/formatters/gpxfile.tpl.php:95
+msgid "Image descriptions"
+msgstr "Opisy obrazków"
+
+#: services/logs/submit.php:63
+msgid "You are trying to publish a log entry with a date in future. Cache log entries are allowed to be published in the past, but NOT in the future."
+msgstr "Próbujesz opublikować wpis do logbooka używając daty w przyszłości. Wpisy mogą być publikowane z datą w przeszłości, ale NIE w przyszłości."
+
+#: services/logs/submit.php:83
+#: services/logs/submit.php:377
+msgid "Your cache log entry was posted successfully."
+msgstr "Twój wpis do logbooka został opublikowany pomyślnie."
+
+#: services/logs/submit.php:84
+#, php-format
+msgid "However, your cache rating was ignored, because %s does not have a rating system."
+msgstr "Niestety Twoja ocena skrzynki nie została zapisana, ponieważ %s nie prowadzi oceny skrzynek."
+
+#: services/logs/submit.php:107
+msgid "This cache is archived. Only admins and the owner are allowed to add a log entry."
+msgstr "Ta skrzynka jest zarchiwizowana. Jedynie administratorzy oraz właściciel mogą dodawać komentarze."
+
+#: services/logs/submit.php:111
+msgid "This cache is an Event cache. You cannot \"Find it\"! (But - you may \"Comment\" on it.)"
+msgstr "Ta skrzynka jest typu Wydarzenie. Nie możesz jej \"znaleźć\"! (Ale - możesz dodać wpis typu \"Komentarz\".)"
+
+#: services/logs/submit.php:113
+msgid "Your have to supply some text for your comment."
+msgstr "Wpis typu \"Komentarz\" wymaga wpisania komentarza."
+
+#: services/logs/submit.php:126
+msgid "This cache requires a password. You didn't provide one!"
+msgstr "Ta skrzynka wymaga podania hasła. Nie wpisałeś go."
+
+#: services/logs/submit.php:128
+msgid "Invalid password!"
+msgstr "Niepoprawne hasło!"
+
+#: services/logs/submit.php:172
+msgid "You have already submitted a log entry with exactly the same contents."
+msgstr "Już opublikowałeś wcześniej wpis z dokładnie taką samą treścią."
+
+#: services/logs/submit.php:191
+msgid "You have already submitted a \"Found it\" log entry once. Now you may submit \"Comments\" only!"
+msgstr "Już opublikowałeś jeden wpis typu \"Znaleziona\" dla tej skrzynki. Teraz możesz dodawać jedynie \"Komentarze\"!"
+
+#: services/logs/submit.php:193
+msgid "You are the owner of this cache. You cannot \"Find it\"."
+msgstr "Jesteś właścicielem tej skrzynki. Nie możesz jej \"Znaleźć\"."
+
+#: services/logs/submit.php:211
+msgid "You have already rated this cache once. Your rating cannot be changed."
+msgstr "Już oceniłeś tę skrzynkę. Ocena nie może być zmieniona."
+
+#: views/apps/authorize.tpl.php:5
+msgid "Authorization Form"
+msgstr "Formularz autoryzacyjny"
+
+#: views/apps/authorize.tpl.php:46
+msgid "Expired request"
+msgstr "Przeterminowane żądanie"
+
+#: views/apps/authorize.tpl.php:47
+msgid "Unfortunately, the request has expired. Please try again."
+msgstr "Niestety upłynął termin ważności żądania. Prosimy sprobować ponownie."
+
+#: views/apps/authorize.tpl.php:49
+msgid "External application is requesting access..."
+msgstr "Aplikacja zewnętrzna prosi o dostęp..."
+
+#: views/apps/authorize.tpl.php:50
+#, php-format
+msgid "<b>%s</b> wants to access your <b>%s</b> account. Do you agree to grant access to this application?"
+msgstr "<b>%s</b> chce uzyskać dostęp do Twojego konta <b>%s</b>. Czy zgadzasz się na udzielenie dostępu tej aplikacji?"
+
+#: views/apps/authorize.tpl.php:53
+msgid "I agree"
+msgstr "Zgadzam się"
+
+#: views/apps/authorize.tpl.php:54
+msgid "Decline"
+msgstr "Odmawiam"
+
+#: views/apps/authorize.tpl.php:56
+#, php-format
+msgid ""
+"\n"
+"\t\t\t\t\t<p>Once permission is granted it is valid until its withdrawal on\n"
+"\t\t\t\t\tthe <a href='%s'>applications management</a> page.</p>\n"
+"\t\t\t\t\t<p>The application will access your acount via <a href='%s'>the OKAPI Framework</a>.\n"
+"\t\t\t\t\tIf you allow this request application will be able to access all methods delivered\n"
+"\t\t\t\t\tby the OKAPI Framework, i.e. post log entries on geocaches in your name.\n"
+"\t\t\t\t\tYou can revoke this permission at any moment.</p>\n"
+"\t\t\t\t"
+msgstr ""
+"\n"
+"<p>Raz udzielona zgoda jest ważna aż do momentu jej wycofania na stronie <a href='%s'>zarządzania aplikacjami</a>.</p><p>Aplikacja będzie łączyć się z Twoim kontem poprzez <a href='%s'>platformę OKAPI</a> (strona w języku angielskim). Uzyskanie zgody na dostęp pozwoli aplikacji na korzystanie ze wszystkich metod udostępnianych przez platformę OKAPI (m.in. aplikacja będzie mogła umieszczać komentarze pod znajdowanymi przez Ciebie skrzynkami). Zgodę możesz wycofać w każdym momencie.</p>"
+
+#: views/apps/authorized.tpl.php:5
+msgid "Authorization Succeeded"
+msgstr "Autoryzacja powiodła się"
+
+#: views/apps/authorized.tpl.php:28
+msgid "Access successfully granted"
+msgstr "Pomyślnie dałeś dostęp"
+
+#: views/apps/authorized.tpl.php:29
+#, php-format
+msgid ""
+"\n"
+"\t\t\t\t<p><b>You've just granted %s application access to your %s account.</b>\n"
+"\t\t\t\tTo complete the operation, go back to %s and enter the following PIN code:</p>\n"
+"\t\t\t"
+msgstr ""
+"\n"
+"<p><b>Właśnie dałeś dostęp aplikacji %s do Twojego konta %s.</b>\n"
+"Aby zakończyć operację, wróć teraz do aplikacji %s i wpisz następujący kod PIN:</p>"
+
+#: views/apps/index.tpl.php:5
+msgid "My Apps"
+msgstr "Moje aplikacje"
+
+#: views/apps/index.tpl.php:29
+msgid "Your external applications"
+msgstr "Twoje zewnętrzne aplikacje"
+
+#: views/apps/index.tpl.php:31
+#, php-format
+msgid ""
+"\n"
+"\t\t\t\t\t<p>This is the list of applications which you granted access to your <b>%s</b> account.\n"
+"\t\t\t\t\tThis page gives you the abbility to revoke all previously granted privileges.\n"
+"\t\t\t\t\tOnce you click \"remove\" the application will no longer be able to perform any\n"
+"\t\t\t\t\tactions on your behalf.</p>\n"
+"\t\t\t\t"
+msgstr ""
+"\n"
+"<p>Następującym aplikacjom zezwoliłeś na dostęp do swojego konta <b>%s</b>.\n"
+"Na tej stronie możesz wycofać udzielone poprzednio zezwolenia. Po kliknięciu\n"
+"\"usuń\" aplikacja nie będzie już mogła wykonywać żadnych operacji w Twoim imieniu.</p>"
+
+#: views/apps/index.tpl.php:45
+msgid "remove"
+msgstr "usuń"
+
+#: views/apps/index.tpl.php:50
+#, php-format
+msgid ""
+"\n"
+"\t\t\t\t\t<p>Thanks to the <a href='%s'>OKAPI Framework</a> you can grant external applications\n"
+"\t\t\t\t\taccess to your <b>%s</b> account. Currently no applications are authorized to act\n"
+"\t\t\t\t\ton your behalf. Once you start using external OpenCaching applications, they will appear here.</p>\n"
+"\t\t\t\t"
+msgstr ""
+"\n"
+"<p>Dzięki platformie <a href='%s'>OKAPI</a> możesz dawać zewnętrznym aplikacjom\n"
+"dostęp do Twojego konta <b>%s</b>. Aktualnie nie pozwalasz żadnej aplikacji na działania\n"
+"w Twoim imieniu. Jeśli kiedyś dodasz jakieś aplikacje, to ich lista pojawi się tutaj.</p>"
+
+#~ msgid "from among %d vote"
+
+#~ msgid_plural "from among %d votes"
+#~ msgstr[0] "spośród %d oceny"
+#~ msgstr[1] "spośród %d ocen"
+#~ msgstr[2] "spośród %d ocen"
+
+#~ msgid "I don't agree"
+#~ msgstr "Odmawiam"
+
+#~ msgid ""
+#~ "Once you grant access, the application has access to your account until "
+#~ "the moment you revoke this access on the <a href='%s'>applications "
+#~ "management</a> page."
+#~ msgstr ""
+#~ "Raz udzielona zgoda jest ważna aż do momentu jej wycofania na stronie <a "
+#~ "href='%s'>zarządzania aplikacjami</a>."
+
+#~ msgid ""
+#~ "Application will access your acount via <a href='%s'>OKAPI Framework</a>."
+#~ msgstr ""
+#~ "Aplikacja będzie łączyć się z Twoim kontem poprzez <a href='%s'>platformę "
+#~ "OKAPI</a> (strona w języku angielskim)."
+
+#~ msgid ""
+#~ "If you allow this request application will be able to access all methods "
+#~ "delivered by the OKAPI Framework, i.e. post log entries on geocaches you "
+#~ "have found."
+#~ msgstr ""
+#~ "Uzyskanie zgody na dostęp pozwoli aplikacji na korzystanie ze wszystkich "
+#~ "metod udostępnianych przez platformę OKAPI (m.in. aplikacja będzie mogła "
+#~ "umieszczać komentarze pod znajdowanymi przez Ciebie skrzynkami)."
+
+#~ msgid "You can revoke this permission at any moment."
+#~ msgstr "Zgodę możesz wycofać w każdym momencie."
+
+#~ msgid "Test in English"
+#~ msgstr "Test po polsku"

@@ -1,0 +1,140 @@
+<xml>
+	<brief>Retrieve geocaches in GPX format</brief>
+	<issue-id>40</issue-id>
+	<desc>
+		<p>Produces a standards-compliant Geocaching GPX file.</p>
+		<p>Unlike the services/caches/geocaches method responses, GPX files cannot
+		contain names and descriptions in separate multiple languages. This method
+		will attempt to choose the best language based on your preference
+		(see <b>langpref</b> argument).</p>
+		<p>Remember that a full-blown GPX file is much larger than a basic one.
+		This method can produce many various types of GPX files. The simplest list of
+		waypoints takes ~50 times less space than the same list with cache descriptions
+		and log entries included.</p>
+	</desc>
+	<req name='cache_codes'>
+		<p>Pipe-separated list of cache codes which you are interested in.
+		No more than 500 codes are allowed. This CAN be an empty string (it will
+		result in an empty, but valid, GPX file). All invalid cache codes will
+		be skipped without any notice!</p>
+	</req>
+	<opt name='langpref' default='en'>
+		<p>Pipe-separated list of ISO 639-1 language codes. This indicates the
+		order of preference in which language will be chosen for GPX entities.</p>
+	</opt>
+	<opt name='ns_ground' default='false'>
+		Boolean. If <b>true</b> then response will include
+		<a href='http://www.groundspeak.com/cache/1/0/cache.xsd'>Groundspeak's
+		GPX extension</a>. This namespace declares an extra &lt;cache&gt; element
+		used by <a href='http://www.geocaching.com/'>geocaching.com</a> and <b>many others</b>.
+		This namespace was initially associatied with geocaching.com, but now seems to
+		be used in every geocaching GPX file. You probably want to have it.
+	</opt>
+	<opt name='ns_gsak' default='false'>
+		<p>Boolean. If <b>true</b> then response will include
+		<a href='http://www.gsak.net/xmlv1/5/gsak.xsd'>GSAK GPX extension</a>.
+		This namespace declares an extra &lt;wptExtension&gt; element,
+		which allows including "waypoint inheritance" information (parent-child relations).
+		This in turn allows us to include "alternate waypoints" in the response.</p>
+		<p>We know of <b>at least</b> <a href='http://www.gsak.net/'>one tool</a> that
+		makes use of this.</p> 
+	</opt>
+	<opt name='ns_ox' default='false'>
+		Boolean. If <b>true</b> then response will include Garmin's
+		<a href='http://www.opencaching.com/xmlschemas/opencaching/1/0/opencaching.xsd'>OpenCaching.com
+		GPX extension</a>. This namespace declares an extra &lt;opencaching&gt; element
+		used by <a href='http://www.opencaching.com/'>Garmin's Opencaching.com</a>.
+		The element includes information on cache difficulty, ratings, tags and images.
+		It is used within Garmin's Geocaching-enabled handheld GPS devices.
+	</opt>
+	<opt name='images' default='descrefs:nonspoilers'>
+		<p>Which images to include (and how to include them). One of the following values:</p>
+		<ul>
+			<li><b>none</b> - no images will be included,</li>
+			<li><b>descrefs:nonspoilers</b> - all non-spoiler images will be included
+			as &lt;img&gt; references at the end of each cache description,</li>
+			<li><b>descrefs:all</b> - all images will be included (including spoilers)
+			as &lt;img&gt; references at the end of each cache description,</li>
+			<li><b>ox:all</b> - all images will be included (including spoilers)
+			as Garmin's &lt;ox:image&gt; references.</li>
+		</ul>
+		<p>Note: When using "descrefs:" mode, remember to set <b>ns_ground</b> to <b>true</b>.</p>
+		<p>Note: When using "ox:" mode, remember to set <b>ns_ox</b> to <b>true</b>. You must also
+		include JPEG files along the GPX for this to work properly - see
+		services/caches/formatters/garmin for more information.</p>
+		<p>In the future, more generic ways of including images in GPX files may emerge.</p>
+	</opt>
+	<opt name='attrs' default='desc:text'>
+		<p>This argument controls wether cache attributes are included and how they are included.
+		One of the following values:</p>
+		<ul>
+			<li><b>none</b> - no attributes will be included,</li>
+			<li><b>desc:text</b> - attributes will be listed (in plain-text) within the cache description,</li>
+			<li><b>ox:tags</b> - attributes will be converted to Garmin's ox:tag elements.</li>
+		</ul>
+		<p>Note: When using "desc:" mode, remember to set <b>ns_ground</b> to <b>true</b>.</p>
+		<p>Note: When using "ox:" mode, remember to set <b>ns_ox</b> to <b>true</b>.</p>
+	</opt>
+	<opt name='trackables' default='none'>
+		<p>This argument controls wether information on trackables is included and how it is included.
+		One of the following values:</p>
+		<ul>
+			<li><b>none</b> - no trackables-data will be included,</li>
+			<li><b>desc:list</b> - trackables will be listed (in plain-text) within the cache description,</li>
+			<li><b>desc:count</b> - total number of trackables will be included (in plain-text) within the cache description.</li>
+		</ul>
+		<p>Note: When using "desc:" mode, remember to set <b>ns_ground</b> to <b>true</b>.</p>
+	</opt>
+	<opt name='recommendations' default='none'>
+		<p>This argument controls wether information on recommendations is included and how it is included.
+		One of the following values:</p>
+		<ul>
+			<li><b>none</b> - no recommendations-info will be included,</li>
+			<li><b>desc:count</b> - number of recommendations (and founds) will be included
+				(in plain-text) within the cache description.</li>
+		</ul>
+		<p>Note: When using "desc:" mode, remember to set <b>ns_ground</b> to <b>true</b>.</p>
+	</opt>
+	<opt name='my_notes' default='none'>
+		<p>Allows you to include personal user's notes on each cache. One of the following values:</p>
+		<ul>
+			<li><b>none</b> - don't include personal notes,</li>
+			<li><b>desc:text</b> - include personal notes as part of the cache description.</li>
+		</ul>
+		<p>Note: You need to use Level 3 Authentication in order to set it to anything else than "none".</p>
+	</opt>
+	<opt name='latest_logs' default='false'>
+		<p>Boolean. If <b>true</b> then response will include a couple of
+		latest log entries for this cache (see also the <b>lpc</b> argument).</p>
+		<p>You <b>must</b> set <b>ns_ground</b> argument to <b>true</b> if you want to use this.</p>
+	</opt>
+	<opt name='lpc' default='10'>
+		Log-entries per cache - the number of log entries included in each returned cache.
+		This should be an integer or a special "all" value. Please note, that the <b>ns_ground</b>
+		and <b>latest_logs</b> arguments must be set to <b>true</b> in order for the logs to be included.
+	</opt>
+	<opt name='alt_wpts' default='false'>
+		<p>Boolean. If <b>true</b> then we will include additional (alternate) waypoints in the response.
+		These are all places associated with the cache.</p>
+		<p>Combine this with <b>ns_gsak</b> if you want the result to include additional references between
+		waypoints and their geocaches. Please note that not many applications are currently able to
+		properly understand GSAK metadata.</p>
+	</opt>
+	<opt name='mark_found' default='false'>
+		<p>Boolean. If <b>true</b> then all caches which are already found, will be marked appropriately
+		(i.e. with an "found cache" symbol).</p>
+		<p>This field requires you to use the <b>user_uuid</b> parameter (or Level 3 Authentication).</p>
+	</opt>
+	<opt name="user_uuid">
+		<p>User'd ID. Required to mark found caches using <b>Level 1</b> Authentication.</p>
+		<p>If you use <b>Level 3</b> Authentication, you shouldn't use this parameter. Or, to be exact:</p>
+		<ul>
+			<li><b>user_uuid</b> will be extracted from the Access Token you use. You don't have to provide it.</li>
+			<li>If you provide <b>user_uuid</b>, then it HAS TO match your Access Token. If it doesn't, OKAPI
+			will respond with HTTP 400 error.</li>
+		</ul>
+	</opt>
+	<returns>
+		<p>GPX file. All invalid cache codes will be skipped without any notice!</p>
+	</returns>
+</xml>

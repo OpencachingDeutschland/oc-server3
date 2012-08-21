@@ -1,0 +1,36 @@
+<?php
+
+# This method is the simplest of all. It just returns all cashes, in any order.
+# Results might be limited only with the "standard filtering arguments",
+# implemented in the OkapiSearchAssistant::get_common_search_params.
+#
+# Its existance is intentional - though a bit inpractical, it serves as a
+# reference base for every other search method which might use "standard
+# filters" (those defined in OkapiSearchAssistant::get_common_search_params).
+
+namespace okapi\services\caches\search\all;
+
+use okapi\Okapi;
+use okapi\OkapiRequest;
+use okapi\ParamMissing;
+use okapi\InvalidParam;
+use okapi\services\caches\search\SearchAssistant;
+
+require_once 'searching.inc.php';
+
+class WebService
+{
+	public static function options()
+	{
+		return array(
+			'min_auth_level' => 1
+		);
+	}
+	
+	public static function call(OkapiRequest $request)
+	{
+		$search_params = SearchAssistant::get_common_search_params($request);
+		$result = SearchAssistant::get_common_search_result($search_params);
+		return Okapi::formatted_response($request, $result);
+	}
+}

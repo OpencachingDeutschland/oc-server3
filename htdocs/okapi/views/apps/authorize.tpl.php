@@ -60,7 +60,7 @@
 					If you allow this request application will be able to access all methods delivered
 					by the OKAPI Framework, i.e. post log entries on geocaches in your name.
 					You can revoke this permission at any moment.</p>
-				"), $vars['okapi_base_url']."apps/", <?= $vars['okapi_base_url'] ?>) ?>
+				"), $vars['okapi_base_url']."apps/", $vars['okapi_base_url']) ?>
 			<? } ?>
 		</div>
 

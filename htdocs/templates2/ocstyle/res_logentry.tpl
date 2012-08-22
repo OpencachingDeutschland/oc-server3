@@ -13,7 +13,7 @@
 			{capture name=cachename}<a href="viewcache.php?wp={$cache.wpoc|urlencode}">{$cache.name|escape}</a>{/capture}
 			{t 1=$smarty.capture.cachename}Logentries for %1{/t}
 			<span style="font-weight: 400;">&nbsp;&nbsp;
-				<img src="resource2/{$opt.template.style}/images/log/16x16-{if $cache.type==6}attended{else}found{/if}.png" width="16" height="16" align="middle" border="0" align="left" alt="{if $cache.type==6}{t}Attended{/t}{else}{t}Found{/t}{/if}" title="{if $cache.type==6}{t}Attended{/t}{else}{t}Found{/t}{/if}"> {if $cache.type==6}{$cache.attended}{else}{$cache.found}{/if}x 
+				<img src="resource2/{$opt.template.style}/images/log/16x16-{if $cache.type==6}attended{else}found{/if}.png" width="16" height="16" align="middle" border="0" align="left" alt="{if $cache.type==6}{t}Attended{/t}{else}{t}Found{/t}{/if}" title="{if $cache.type==6}{t}Attended{/t}{else}{t}Found{/t}{/if}"> {$cache.found}x
 
 				<img src="resource2/{$opt.template.style}/images/log/16x16-{if $cache.type==6}will_attend{else}dnf{/if}.png" width="16" height="16" align="middle" border="0" align="left" alt="{if $cache.type==6}{t}Will attend{/t}{else}{t}Not Found{/t}{/if}" title="{if $cache.type==6}{t}Will attend{/t}{else}{t}Not Found{/t}{/if}"> {if $cache.type==6}{$cache.willattend}{else}{$cache.notfound}{/if}x 
 

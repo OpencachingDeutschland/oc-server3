@@ -44,7 +44,7 @@ A different license may apply to third party components being used.
 List of third party components:
 
     1.  Smarty: Template Engine
-        Path    : code/htdocs/lib2/smarty/
+        Path    : htdocs/lib2/smarty/
         URI     : http://www.smarty.net/
         License : LGPL 3.0
 
@@ -57,8 +57,8 @@ List of third party components:
         License : LGPL 2.1
 
     4.  b2evo captcha
-        Path    : code/htdocs/lib/b2evo-captcha/
-        Path    : code/htdocs/lib2/b2evo-captcha/
+        Path    : htdocs/lib/b2evo-captcha/
+        Path    : htdocs/lib2/b2evo-captcha/
         URI     : http://sourceforge.net/projects/b2evo-captcha
         License : GPL
         TODO: *** Package contains fonts, font licenses are not checked yet. ***
@@ -80,7 +80,7 @@ List of third party components:
         License : CC BY-SA 2.5 / GPL 3.0
 
     9.  ImageCreateFromBMP & ImageBMP
-        http://www.jpexs.com/eng/default/php.html   *** DEAD LINK ***
+        URI:    : http://www.jpexs.com/eng/default/php.html   *** DEAD LINK ***
 
     10. PROJ.4: Cartographic Projections Library
         URI     : http://proj.maptools.org/
@@ -112,7 +112,7 @@ List of third party components:
         License : GPL
 
     16. Garmin Communicator API
-        https://my.garmin.com/api/communicator/key-generator.jsp
+        URI     : https://my.garmin.com/api/communicator/key-generator.jsp
 
     17. Prototype JavaScript framework
         URI     : http://www.prototypejs.org/
@@ -138,6 +138,11 @@ List of third party components:
         http://www.openwebdesign.org/design/2876/MultiFlex21/
 
     23. TinyMCE: JavaScript WYSIWYG Editor
-        Path    : code/htdocs/resource2/tinymce/
+        Path    : htdocs/resource2/tinymce/
         URI     : http://tinymce.moxiecode.com/
         License : LGPL 2.1
+
+    24. OKAPI: Opencaching API
+        Path    : htdocs/okapi
+        URI     : http://code.google.com/p/opencaching-api/
+        License : MIT

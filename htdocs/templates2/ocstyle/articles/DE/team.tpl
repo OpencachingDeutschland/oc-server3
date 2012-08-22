@@ -21,7 +21,6 @@
     <tr><td></td><td></td><td></td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/4_vs.jpg" /></td><td><a href="http://opencaching.de/viewprofile.php?userid=162754">4_Vs</a></td><td>Vorsitzender</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/dl8ndm.jpg" /></td><td><a href="http://opencaching.de/viewprofile.php?userid=102263">dl8ndm</a></td><td>stellvertretender Vorsitzender</td></tr>
-    <tr><td><img src="http://www.opencaching.de/images/team/danishop.jpg" /></td><td><a href="http://opencaching.de/viewprofile.php?userid=222126">Danishop</a></td><td>Kassenwart</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/danlex.png" /></td><td><a href="http://opencaching.de/viewprofile.php?userid=222261">Danlex</a></td><td>Pressesprecher; Anwendersupport, Datenpflege</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/dummy.jpg" /></td><td><a href="http://opencaching.de/viewprofile.php?userid=137473">bohrsty</a></td><td>Leiter Technik/Systemadministration</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/metrax.png" /></td><td><a href="http://opencaching.de/viewprofile.php?userid=212145">Metrax</a></td><td>Leiter Softwareentwicklung</td></tr>

@@ -10,6 +10,13 @@
 
 <p>Thanks for viewing our donations page! Besides of engaged volunteers in the Opencaching.de team, we also depend on your financial support to operate and extend this completely free website. By your donation you will help us to pay for acquisition and replacement of server hardware.</p>
  
+			<h1>Donate by bank transfer:</h1>
+			<p>Bank: Deutsche Skatbank<br />
+			Account owner: Opencaching Deutschland<br />
+			Account number: 4752678<br />
+			BLZ: 83065408<br /><br />
+			IBAN: DE42 8306 5408 0004 7526 78<br />
+			BIC (SWIFT): GENODEF1SLR</p>
 
 			<h1>Donate by PayPal:</h1>
 

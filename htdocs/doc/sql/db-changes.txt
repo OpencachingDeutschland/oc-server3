@@ -8,12 +8,10 @@ date         commit ID    change
 2012-08-06   1ba2be52     changed triggers sysTransBeforeInsert and sysTransTextBeforeInsert
 2012-08-07   eda58c51     new field caches.is_publishdate; changed trigger cachesBeforeUpdate
 2012-08-08   fc481334     changed trigger cachesBeforeInsert
+2012-08-23   b7ae9cc1     increased caches.wp_oc length from 6 to 7 chars
 
-2012-08-18   56b80e02     OKAPI will do these changes AUTOMATICALLY upon installation:
+2012-08-23   bdc79495     OKAPI will do these changes AUTOMATICALLY upon installation:
                             - add okapi_* tables
                             - add caches.okapi_syncbase, initialize it and add corresponding index
-                            - change cache_logs.last_modified and cache_logs_archived.last_modified
-                              field type from 'datetime' to 'timestamp'
+                            - add and initialize cache_logs(_archived).okapi_syncbase
                           See installation instructions at http://code.google.com/p/opencaching-api
-
-2012-08-23                increased caches.wp_oc length from 6 to 7 chars

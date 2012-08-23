@@ -88,34 +88,40 @@
 	{
 		global $oc_waypoint_prefix;
 
-		$bLoop = true;
+		// The following code runs into trouble, if multiple users/threads request a new  
+		// waypoint synchronously (-> RT ticket #4071). We will hack around this problem by  
+		// repeating the operation with random delays. Another solution would be a table-lock.
 
-		// falls mal was nicht so funktioniert wie es soll ...
-		$nMaxLoop = 10;
-		$nLoop = 0;
+		// 2012-08-23 following
+		//		changes:  removed 4 hexdigits limit; added random delay;
+		//              increased maxloop 10 -> 20; simplified loop
 
-		while (($bLoop == true) && ($nLoop < $nMaxLoop))
+		$nLoop = 20;
+
+		do
 		{
-			$rs = sql("SELECT MAX(`wp_oc`) `maxwp` FROM `caches` WHERE wp_oc!='OCGC77'");
+			// add zero to convert CONV's string result to a sortable number
+			$rs = sql("SELECT MAX(0 + CONV(SUBSTR(wp_oc,3),16,10)) maxwp FROM `caches` WHERE wp_oc!='OCGC77'");
 			$r = sql_fetch_assoc($rs);
 			mysql_free_result($rs);
 
 			if ($r['maxwp'] == null)
-				$nNext = 1;
+				$nNext = 1;			// first cache in database
 			else
-				$nNext = hexdec(mb_substr($r['maxwp'], 2, 4)) + 1;
+				$nNext = $r['maxwp'] + 1;
 			
 			$nNext = dechex($nNext);
-			
 			while (mb_strlen($nNext) < 4)
 				$nNext = '0' . $nNext;
 
 			$sWP = $oc_waypoint_prefix . mb_strtoupper($nNext);
 
-			$bLoop = false;
-			$nLoop++;
-			sql("UPDATE IGNORE `caches` SET `wp_oc`='&1' WHERE `cache_id`='&2' AND ISNULL(`wp_oc`)", $sWP, $cacheid) || $bLoop = true;
-		}
+			if (sql("UPDATE IGNORE `caches` SET `wp_oc`='&1' WHERE `cache_id`='&2' AND ISNULL(`wp_oc`)", $sWP, $cacheid))
+				$nLoop = 0;
+			else
+				usleep(rand(0,50000));
+
+		} while (--$nLoop > 0);
 	}
 
 	function setLastFound($cacheid)

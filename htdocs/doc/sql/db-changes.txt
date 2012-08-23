@@ -15,3 +15,5 @@ date         commit ID    change
                             - change cache_logs.last_modified and cache_logs_archived.last_modified
                               field type from 'datetime' to 'timestamp'
                           See installation instructions at http://code.google.com/p/opencaching-api
+
+2012-08-23                increased caches.wp_oc length from 6 to 7 chars

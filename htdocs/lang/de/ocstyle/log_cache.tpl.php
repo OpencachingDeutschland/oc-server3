@@ -145,6 +145,8 @@ function _chkFound () {
 </form>
 <script language="javascript" type="text/javascript">
 <!--
+	_chkFound();
+
 	/*
 		1 = Text
 		2 = HTML

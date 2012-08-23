@@ -124,8 +124,11 @@
 						//log entfernen
 						sql("DELETE FROM `cache_logs` WHERE `cache_logs`.`id`='&1' LIMIT 1", $log_id);
 
-						// remove cache from users top caches, because the found log was deleted for some reason
-						sql("DELETE FROM `cache_rating` WHERE `user_id` = '&1' AND `cache_id` = '&2'", $log_record['log_user_id'], $log_record['cache_id']);
+						// remove cache from users top caches, if the only found or attended log  
+						// of this user was deleted
+						sql("DELETE FROM `cache_rating` WHERE `user_id` = '&1' AND `cache_id` = '&2' AND
+									0 = (SELECT COUNT(*) FROM `cache_logs` WHERE `user_id` = '&1' AND `cache_id` = '&2' AND `type` IN (1,7))", 
+							$log_record['log_user_id'], $log_record['cache_id']);
 
 						// do not use slave server for the next time ...
 						db_slave_exclude();

@@ -99,7 +99,7 @@
 				$log_date_day = isset($_POST['logday']) ? ($_POST['logday']+0) : date('d');
 				$log_date_month = isset($_POST['logmonth']) ? ($_POST['logmonth']+0) : date('m');
 				$log_date_year = isset($_POST['logyear']) ? ($_POST['logyear']+0) : date('Y');
-				$top_cache = isset($_POST['rating']) ? $_POST['rating']+0 : 0;
+				$top_cache = isset($_POST['rating']) ? $_POST['rating']+0 : null;
 
 				// check if user has exceeded his top5% limit
 				$user_founds = sqlValue("SELECT IFNULL(`stat_user`.`found`, 0) FROM `user` LEFT JOIN `stat_user` ON `user`.`user_id`=`stat_user`.`user_id` WHERE `user`.`user_id`='" .  sql_escape($usr['userid']) . "'", 0);
@@ -107,7 +107,7 @@
 
 				if (($user_founds * rating_percentage/100) < 1)
 				{
-					$top_cache = 0;
+					$top_cache = null;
 					$anzahl = (1 - ($user_founds * rating_percentage/100)) / (rating_percentage/100);
 					if ($anzahl > 1)
 					{
@@ -120,13 +120,15 @@
 				}
 				elseif ($user_tops < floor($user_founds * rating_percentage/100))
 				{
-					$rating_msg = mb_ereg_replace('{chk_sel}', '', $rating_allowed.'<br />'.$rating_stat);
+					// initialize checkbox with value of past recommandation for this cache (if one exists)
+					$recommended = sqlValue("SELECT COUNT(`user_id`) FROM `cache_rating` WHERE `user_id`='" .  sql_escape($usr['userid']) . "' AND `cache_id`='" . sql_escape($cache_id) . "'", 0);
+					$rating_msg = mb_ereg_replace('{chk_sel}', $recommended ? "checked" : "", $rating_allowed.'<br />'.$rating_stat);
 					$rating_msg = mb_ereg_replace('{max}', floor($user_founds * rating_percentage/100), $rating_msg);
 					$rating_msg = mb_ereg_replace('{curr}', $user_tops, $rating_msg);
 				}
 				else
 				{
-					$top_cache = 0;
+					$top_cache = null;
 					$anzahl = ($user_tops + 1 - ($user_founds * rating_percentage/100)) / (rating_percentage/100);
 					if ($anzahl > 1)
 					{
@@ -224,7 +226,7 @@
 				// not a found log? then ignore the rating
 				if ($log_type != 1 && $log_type != 7)
 				{
-					$top_cache = 0;
+					$top_cache = null;
 				}
 
 				$pw_not_ok = false;
@@ -280,7 +282,7 @@
 					// update top-list
 					if ($top_cache == 1)
 						sql("INSERT IGNORE INTO `cache_rating` (`user_id`, `cache_id`) VALUES('&1', '&2')", $usr['userid'], $cache_id);
-					else
+					else if ($top_cache === 0)   // 0 but not null
 						sql("DELETE FROM `cache_rating` WHERE `user_id`='&1' AND `cache_id`='&2'", $usr['userid'], $cache_id);
 
 					//call eventhandler
@@ -296,6 +298,10 @@
 				{
 					//build logtypeoptions
 					$logtypeoptions = '';
+					if ($cache_type == 6)  // event
+						$logtypeorder = 'DESC';
+					else
+						$logtypeorder = 'ASC';
 					$rsLogTypes = sql("SELECT `log_types`.`id`, IFNULL(`sys_trans_text`.`text`, `log_types`.`name`) AS `name`
 											         FROM `caches` 
 								         INNER JOIN `cache_type` ON `caches`.`type`=`cache_type`.`id` 
@@ -304,7 +310,7 @@
 									        LEFT JOIN `sys_trans` ON `log_types`.`trans_id`=`sys_trans`.`id` 
 									        LEFT JOIN `sys_trans_text` ON `sys_trans`.`id`=`sys_trans_text`.`trans_id` AND `sys_trans_text`.`lang`='" . sql_escape($locale) . "' 
 											        WHERE `caches`.`cache_id`='" . ($cache_id+0) . "'
-											     ORDER BY `log_types`.`id` ASC");
+											     ORDER BY `log_types`.`id` " . $logtypeorder);
 					while ($rLogTypes = sql_fetch_assoc($rsLogTypes))
 					{
 						$sSelected = ($rLogTypes['id'] == $log_type) ? ' selected="selected"' : '';

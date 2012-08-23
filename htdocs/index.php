@@ -114,7 +114,8 @@
 		$tpl->assign_rs('newcaches', $rs);
 		sql_free_result($rs);
 
-		$rs = sql_slave("SELECT COUNT(`cache_logs`.`cache_id`) AS `cRatings`, 
+		// last 30 days' top ratings
+		$rs = sql_slave("SELECT COUNT(DISTINCT `cache_logs`.`user_id`) AS `cRatings`, 
 																	`cache_logs`.`cache_id`, 
 																	MAX(`cache_logs`.`date`) AS `dLastLog`, 
 																	`user`.`user_id` AS `user_id`,

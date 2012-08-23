@@ -285,7 +285,7 @@ class cache
 				`cache_logs`.`text_html` AS `texthtml`,
 				`cache_logs`.`picture`,
 				`user`.`username` AS `username`,
-				IF(ISNULL(`cache_rating`.`cache_id`), 0, 1) AS `recommended`
+				IF(ISNULL(`cache_rating`.`cache_id`), 0, `cache_logs`.`type` IN (1,7)) AS `recommended`
 			FROM `cache_logs`
 			INNER JOIN `user` ON `user`.`user_id` = `cache_logs`.`user_id`
 			LEFT JOIN `cache_rating` ON `cache_logs`.`cache_id`=`cache_rating`.`cache_id` AND `cache_logs`.`user_id`=`cache_rating`.`user_id`

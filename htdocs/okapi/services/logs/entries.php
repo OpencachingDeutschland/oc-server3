@@ -56,6 +56,7 @@ class WebService
 				and ".((Settings::get('OC_BRANCH') == 'oc.pl') ? "cl.deleted = 0" : "true")."
 				and cl.user_id = u.user_id
 				and c.cache_id = cl.cache_id
+				and c.status in (1,2,3)
 		");
 		$results = array();
 		while ($row = mysql_fetch_assoc($rs))

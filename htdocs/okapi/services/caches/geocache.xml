@@ -22,7 +22,7 @@
 			<li><b>code</b> - unique code of the geocache,</li>
 			<li><b>name</b> - name of the geocache,</li>
 			<li><b>names</b> - a dictionary (language code => plain-text string) of
-				names of the geocache (at this time, there will be only one language,)
+				names of the geocache (at this time, there will be only one language,
 				but this may change in future),</li>
 			<li><b>location</b> - location of the cache in the "lat|lon" format
 				(<i>lat</i> and <i>lon</i> are in full degrees with a dot as a decimal point),</li>

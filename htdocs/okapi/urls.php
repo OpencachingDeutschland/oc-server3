@@ -24,5 +24,6 @@ class OkapiUrls
 		'^cron5$' => 'cron5',
 		'^devel/attrlist$' => 'devel/attrlist',
 		'^devel/dbstruct$' => 'devel/dbstruct',
+		'^devel/cronreport$' => 'devel/cronreport',
 	);
 }

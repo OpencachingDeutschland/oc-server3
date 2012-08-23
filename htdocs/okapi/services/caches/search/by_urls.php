@@ -112,7 +112,9 @@ class WebService
 			$rs = Db::query("
 				select cache_id, wp_oc
 				from caches
-				where cache_id in ('".implode("','", array_map('mysql_real_escape_string', $internal_ids))."')
+				where
+					cache_id in ('".implode("','", array_map('mysql_real_escape_string', $internal_ids))."')
+					and status in (1,2,3)
 			");
 			$dict = array();
 			while ($row = mysql_fetch_assoc($rs))
@@ -134,7 +136,9 @@ class WebService
 			$rs = Db::query("
 				select uuid, wp_oc
 				from caches
-				where uuid in ('".implode("','", array_map('mysql_real_escape_string', $uuids))."')
+				where
+					uuid in ('".implode("','", array_map('mysql_real_escape_string', $uuids))."')
+					and status in (1,2,3)
 			");
 			$dict = array();
 			while ($row = mysql_fetch_assoc($rs))

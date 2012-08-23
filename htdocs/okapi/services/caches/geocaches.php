@@ -135,6 +135,7 @@ class WebService
 					left join stat_caches as sc on c.cache_id = sc.cache_id
 				where
 					binary wp_oc in ('".implode("','", array_map('mysql_real_escape_string', $cache_codes))."')
+					and status in (1,2,3)
 			");
 		}
 		elseif (Settings::get('OC_BRANCH') == 'oc.pl')
@@ -161,6 +162,7 @@ class WebService
 				where
 					binary wp_oc in ('".implode("','", array_map('mysql_real_escape_string', $cache_codes))."')
 					and c.user_id = u.user_id
+					and c.status in (1,2,3)
 			");
 		}
 

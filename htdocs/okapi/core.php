@@ -705,7 +705,7 @@ class Okapi
 {
 	public static $data_store;
 	public static $server;
-	public static $revision = 413; # This gets replaced in automatically deployed packages
+	public static $revision = 424; # This gets replaced in automatically deployed packages
 	private static $okapi_vars = null;
 	
 	/** Get a variable stored in okapi_vars. If variable not found, return $default. */
@@ -1332,11 +1332,30 @@ class Okapi
 	}
 	
 	private static $cache_types = array(
-		# Primary types
-		'Traditional' => 2, 'Multi' => 3, 'Quiz' => 7, 'Virtual' => 4,
-		# Additional types - these should include ALL types used in
-		# ANY of the opencaching installations. Contact me if you want to modify this.
-		'Event' => 6, 'Webcam' => 5, 'Moving' => 8, 'Own' => 9, 'Other' => 1,
+		#
+		# OKAPI does not expose type IDs. Instead, it uses the following
+		# "code words". Only the "primary" cache types are documented.
+		# This means that all other types may (in theory) be altered.
+		# Cache type may become "primary" ONLY when *all* OC servers recognize
+		# that type.
+		#
+		# Changing this may introduce nasty bugs (e.g. in the replicate module).
+		# CONTACT ME BEFORE YOU MODIFY THIS!
+		#
+		'oc.pl' => array(
+			# Primary types (documented, cannot change)
+			'Traditional' => 2, 'Multi' => 3, 'Quiz' => 7, 'Virtual' => 4,
+			# Additional types (may get changed)
+			'Other' => 1, 'Webcam' => 5, 'Event' => 6,
+			'Moving' => 8, 'Own' => 9,
+		),
+		'oc.de' => array(
+			# Primary types (documented, cannot change)
+			'Traditional' => 2, 'Multi' => 3, 'Quiz' => 7, 'Virtual' => 4,
+			# Additional types (might get changed)
+			'Other' => 1, 'Webcam' => 5, 'Event' => 6,
+			'Math/Physics-Cache' => 8, 'Moving' => 9, 'Drive-In' => 10,
+		)
 	);
 	
 	private static $cache_statuses = array(
@@ -1346,8 +1365,9 @@ class Okapi
 	/** E.g. 'Traditional' => 2. For unknown names throw an Exception. */
 	public static function cache_type_name2id($name)
 	{
-		if (isset(self::$cache_types[$name]))
-			return self::$cache_types[$name];
+		$ref = &self::$cache_types[Settings::get('OC_BRANCH')];
+		if (isset($ref[$name]))
+			return $ref[$name];
 		throw new Exception("Method cache_type_name2id called with unsupported cache ".
 			"type name '$name'. You should not allow users to submit caches ".
 			"of non-primary type.");
@@ -1360,7 +1380,7 @@ class Okapi
 		if ($reversed == null)
 		{
 			$reversed = array();
-			foreach (self::$cache_types as $key => $value)
+			foreach (self::$cache_types[Settings::get('OC_BRANCH')] as $key => $value)
 				$reversed[$value] = $key;
 		}
 		if (isset($reversed[$id]))

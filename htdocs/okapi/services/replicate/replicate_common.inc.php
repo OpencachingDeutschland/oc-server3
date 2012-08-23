@@ -50,7 +50,7 @@ class ReplicateCommon
 	 */
 	private static function get_diff($old, $new)
 	{
-		if ($old === null)
+		if (!$old)
 			return $new;
 		$changed_keys = array();
 		foreach ($new as $key => $value)
@@ -82,6 +82,9 @@ class ReplicateCommon
 		ignore_user_abort(true); 
 		
 		# Get the list of modified cache codes. Split it into groups of N cache codes.
+		# Note that we should include ALL cache codes in this particular query, not
+		# only "status in (1,2,3)". This way, when the cache changes its status, e.g.
+		# from 3 to 6, changelog will include a proper "delete" statement.
 		
 		$cache_codes = Db::select_column("
 			select wp_oc
@@ -107,7 +110,7 @@ class ReplicateCommon
 			$log_uuids = Db::select_column("
 				select uuid
 				from cache_logs
-				where last_modified > '".mysql_real_escape_string($last_update)."'
+				where okapi_syncbase > '".mysql_real_escape_string($last_update)."'
 				limit $offset, 10000;
 			");
 			if (count($log_uuids) == 0)
@@ -131,7 +134,7 @@ class ReplicateCommon
 			$DELETED_uuids = Db::select_column("
 				select uuid
 				from cache_logs_archived
-				where last_modified > '".mysql_real_escape_string($last_update)."'
+				where okapi_syncbase > '".mysql_real_escape_string($last_update)."'
 			");
 			self::generate_changelog_entries('services/logs/entries', 'log', 'log_uuids',
 				'uuid', $DELETED_uuids, self::$logged_log_entry_fields, false, true, 3600);
@@ -179,11 +182,15 @@ class ReplicateCommon
 		{
 			if ($object !== null)
 			{
+				# Currently, the object exists.
 				if ($use_cache)
 				{
 					$diff = self::get_diff($cached_values['clog#'.$object_type.'#'.$key], $object);
 					if (count($diff) == 0)
+					{
+						# No field has changed since the object was last replaced.
 						continue;
+					}
 				}
 				$entries[] = array(
 					'object_type' => $object_type,
@@ -192,17 +199,29 @@ class ReplicateCommon
 					'data' => ($use_cache ? $diff : $object),
 				);
 				if ($use_cache)
+				{
+					# Save the last-published state of the object, for future comparison.
 					$cached_values['clog#'.$object_type.'#'.$key] = $object;
+				}
 			}
 			else
 			{
+				# Currently, the object does not exist.
+				if ($use_cache && ($cached_values['clog#'.$object_type.'#'.$key] === false))
+				{
+					# No need to delete, we have already published its deletion.
+					continue;
+				}
 				$entries[] = array(
 					'object_type' => $object_type,
 					'object_key' => array($key_name => $key),
 					'change_type' => 'delete',
 				);
 				if ($use_cache)
-					$cached_values['clog#'.$object_type.'#'.$key] = null;
+				{
+					# Cache the fact, that the object was deleted.
+					$cached_values['clog#'.$object_type.'#'.$key] = false;
+				}
 			}
 		}
 		

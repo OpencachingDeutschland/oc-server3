@@ -54,7 +54,7 @@ class WebService
 			where
 				cl.user_id = '".mysql_real_escape_string($user['internal_id'])."'
 				and ".((Settings::get('OC_BRANCH') == 'oc.pl') ? "cl.deleted = 0" : "true")."
-				and c.status not in (4,5,6)
+				and c.status in (1,2,3)
 				and cl.cache_id = c.cache_id
 			order by cl.date desc
 			limit $offset, $limit

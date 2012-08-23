@@ -1,0 +1,310 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: OKAPI\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-08-22 21:18+0100\n"
+"PO-Revision-Date: 2012-08-22 21:18+0100\n"
+"Last-Translator: \n"
+"Language-Team: following <following-okapi@online.de>\n"
+"Language: German\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop\n"
+"X-Poedit-Basepath: c:\\source\\oc\\server-3.0\\htdocs\\okapi\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: c:\\source\\oc\\server-3.0\\htdocs\\okapi\n"
+
+#: c:\source\oc\server-3.0\htdocs\okapi/services/caches/geocaches.php:640
+msgid "Stage"
+msgstr "Station"
+
+#: c:\source\oc\server-3.0\htdocs\okapi/services/caches/formatters/gpxfile.tpl.php:27
+#: c:\source\oc\server-3.0\htdocs\okapi/services/caches/formatters/gpxfile.tpl.php:44
+msgid "hidden by"
+msgstr "versteckt von"
+
+#: c:\source\oc\server-3.0\htdocs\okapi/services/caches/formatters/gpxfile.tpl.php:46
+#, php-format
+msgid "%d recommendation"
+msgid_plural "%d recommendations"
+msgstr[0] "%d Empfehlung"
+msgstr[1] "%d Empfehlungen"
+
+#: c:\source\oc\server-3.0\htdocs\okapi/services/caches/formatters/gpxfile.tpl.php:47
+#, php-format
+msgid "found %d time"
+msgid_plural "found %d times"
+msgstr[0] "%d mal gefunden"
+msgstr[1] "%d mal gefunden"
+
+#: c:\source\oc\server-3.0\htdocs\okapi/services/caches/formatters/gpxfile.tpl.php:50
+#, php-format
+msgid "%d trackable"
+msgid_plural "%d trackables"
+msgstr[0] "%d Geokret"
+msgstr[1] "%d Geokrets"
+
+#: c:\source\oc\server-3.0\htdocs\okapi/services/caches/formatters/gpxfile.tpl.php:54
+msgid "Personal notes"
+msgstr "Persönliche Notizen"
+
+#: c:\source\oc\server-3.0\htdocs\okapi/services/caches/formatters/gpxfile.tpl.php:58
+msgid "Attributes"
+msgstr "Attribute"
+
+#: c:\source\oc\server-3.0\htdocs\okapi/services/caches/formatters/gpxfile.tpl.php:62
+msgid "Trackables"
+msgstr "Geokrets"
+
+#: c:\source\oc\server-3.0\htdocs\okapi/services/caches/formatters/gpxfile.tpl.php:80
+msgid "Images"
+msgstr "Bilder"
+
+#: c:\source\oc\server-3.0\htdocs\okapi/services/caches/formatters/gpxfile.tpl.php:87
+msgid "Spoilers"
+msgstr "Spoiler"
+
+#: c:\source\oc\server-3.0\htdocs\okapi/services/caches/formatters/gpxfile.tpl.php:95
+msgid "Image descriptions"
+msgstr "Bildbeschreibungen"
+
+#: c:\source\oc\server-3.0\htdocs\okapi/services/logs/submit.php:62
+msgid ""
+"You are trying to publish a log entry with a date in future. Cache log "
+"entries are allowed to be published in the past, but NOT in the future."
+msgstr ""
+"Das Datum deines Logeintrags liegt in der Zukunft. Cache-Logs können nur für "
+"die Vergangenheit oder für heute eingetragen werden."
+
+#: c:\source\oc\server-3.0\htdocs\okapi/services/logs/submit.php:82
+#, php-format
+msgid ""
+"However, your cache rating was ignored, because %s does not have a rating "
+"system."
+msgstr ""
+"Deine Cachewertung wurde jedoch ignoriert, weil %s kein Bewertungssystem hat."
+
+#: c:\source\oc\server-3.0\htdocs\okapi/services/logs/submit.php:92
+msgid "Recommending is allowed only for 'Found it' logtypes."
+msgstr "Empfehlungen sind nur bei 'Gefunden'-Logs erlaubt."
+
+#: c:\source\oc\server-3.0\htdocs\okapi/services/logs/submit.php:101
+#, php-format
+msgid ""
+"However, your \"needs maintenance\" flag was ignored, because %s does not "
+"support this feature."
+msgstr ""
+"Deine Angabe \"benötigt Wartung\" wurde jedoch ignoriert, weil es diese "
+"Funktion bei %s nicht gibt."
+
+#: c:\source\oc\server-3.0\htdocs\okapi/services/logs/submit.php:124
+msgid ""
+"This cache is archived. Only admins and the owner are allowed to add a log "
+"entry."
+msgstr ""
+"Dieser Cache ist archiviert. Nur OC-Admins und der Besitzer können "
+"Logeinträge machen."
+
+#: c:\source\oc\server-3.0\htdocs\okapi/services/logs/submit.php:128
+msgid ""
+"This cache is an Event cache. You cannot \"Find it\"! (But - you may "
+"\"Comment\" on it.)"
+msgstr ""
+"Dies ist ein Event-Cache. Du kannst ihn nicht \"finden\" (aber du kannst "
+"einen Hinweis loggen)."
+
+#: c:\source\oc\server-3.0\htdocs\okapi/services/logs/submit.php:130
+msgid "Your have to supply some text for your comment."
+msgstr "Du musst einen Text für dein Hinweislog eingeben!"
+
+#: c:\source\oc\server-3.0\htdocs\okapi/services/logs/submit.php:143
+msgid "This cache requires a password. You didn't provide one!"
+msgstr ""
+"Dieser Cache kann nur mit Kennwort geloggt werden, aber du hast keines "
+"angegeben."
+
+#: c:\source\oc\server-3.0\htdocs\okapi/services/logs/submit.php:145
+msgid "Invalid password!"
+msgstr "Ungültiges Kennwort!"
+
+#: c:\source\oc\server-3.0\htdocs\okapi/services/logs/submit.php:194
+msgid "You have already submitted a log entry with exactly the same contents."
+msgstr ""
+"Du hast bereits einen Logeintrag mit genau dem gleichen Inhalt gemacht."
+
+#: c:\source\oc\server-3.0\htdocs\okapi/services/logs/submit.php:213
+msgid ""
+"You have already submitted a \"Found it\" log entry once. Now you may submit "
+"\"Comments\" only!"
+msgstr ""
+"Du hast diesen Cache bereits als gefunden geloggt. Ein zweites Fundlog ist "
+"nicht möglich, aber du kannst stattdessen einen Hinweis loggen."
+
+#: c:\source\oc\server-3.0\htdocs\okapi/services/logs/submit.php:215
+msgid "You are the owner of this cache. You may submit \"Comments\" only!"
+msgstr ""
+"Als Besitzer des Caches kannst du nur Hinweise loggen, keine Funde oder "
+"Nichtfunde."
+
+#: c:\source\oc\server-3.0\htdocs\okapi/services/logs/submit.php:233
+msgid "You have already rated this cache once. Your rating cannot be changed."
+msgstr ""
+"Du hast diesen Cache bereits bewertet. Deine Bewertung ist nicht änderbar."
+
+#: c:\source\oc\server-3.0\htdocs\okapi/services/logs/submit.php:250
+msgid "You have already recommended this cache once."
+msgstr "Du hast diesen Cache bereits empfohlen."
+
+#: c:\source\oc\server-3.0\htdocs\okapi/services/logs/submit.php:257
+msgid "You don't have any recommendations to give. Find more caches first!"
+msgstr ""
+"Du musst mehr Caches finden, um eine weitere Bewertung abgeben zu können!"
+
+#: c:\source\oc\server-3.0\htdocs\okapi/services/logs/submit.php:409
+msgid "Your cache log entry was posted successfully."
+msgstr "Dein Log wurde veröffentlicht."
+
+#: c:\source\oc\server-3.0\htdocs\okapi/views/apps/authorize.tpl.php:5
+msgid "Authorization Form"
+msgstr "Authorisierungs-Formular"
+
+#: c:\source\oc\server-3.0\htdocs\okapi/views/apps/authorize.tpl.php:46
+msgid "Expired request"
+msgstr "Anfrage abgelaufen"
+
+#: c:\source\oc\server-3.0\htdocs\okapi/views/apps/authorize.tpl.php:47
+msgid "Unfortunately, the request has expired. Please try again."
+msgstr ""
+"Die Anfrage ist wegen Zeitüberschreitung abgelaufen. Bitte versuche es noch "
+"einmal."
+
+#: c:\source\oc\server-3.0\htdocs\okapi/views/apps/authorize.tpl.php:49
+msgid "External application is requesting access..."
+msgstr "Eine externe Anwendung wünscht Zugriff ..."
+
+#: c:\source\oc\server-3.0\htdocs\okapi/views/apps/authorize.tpl.php:50
+#, php-format
+msgid ""
+"<b>%s</b> wants to access your <b>%s</b> account. Do you agree to grant "
+"access to this application?"
+msgstr ""
+"<b>%s</b> möchte auf dein <b>%s</b>-Benutzerkonto zugreifen. Möchtest du "
+"dieser Anwendung Zugriff gewähren?"
+
+#: c:\source\oc\server-3.0\htdocs\okapi/views/apps/authorize.tpl.php:53
+msgid "I agree"
+msgstr "Ja"
+
+#: c:\source\oc\server-3.0\htdocs\okapi/views/apps/authorize.tpl.php:54
+msgid "Decline"
+msgstr "Nein"
+
+#: c:\source\oc\server-3.0\htdocs\okapi/views/apps/authorize.tpl.php:56
+#, php-format
+msgid ""
+"\n"
+"\t\t\t\t\t<p>Once permission is granted it is valid until its withdrawal on\n"
+"\t\t\t\t\tthe <a href='%s'>applications management</a> page.</p>\n"
+"\t\t\t\t\t<p>The application will access your acount via <a href='%s'>the "
+"OKAPI Framework</a>.\n"
+"\t\t\t\t\tIf you allow this request application will be able to access all "
+"methods delivered\n"
+"\t\t\t\t\tby the OKAPI Framework, i.e. post log entries on geocaches in your "
+"name.\n"
+"\t\t\t\t\tYou can revoke this permission at any moment.</p>\n"
+"\t\t\t\t"
+msgstr ""
+"\n"
+"\t\t\t\t\t<p>Wenn die Erlaubnis erteilt wurde, ist sie so lange gültig, bis "
+"sie auf\n"
+"\t\t\t\t\tder <a href='%s'>Anwendungs-Verwaltungsseite</a> widerrufen wird.</"
+"p>\n"
+"\t\t\t\t\t<p>Die Anwendung wird über die <a href='%s'>OKAPI-Schnittstelle</"
+"a> auf dein Benutzerkonto zugreifen</a>.\n"
+"\t\t\t\t\tWenn du diesen Zugriff erlaubst, kann die Anwendung alle OKAPI-"
+"Funktionen verwenden,\n"
+"\t\t\t\t\tz.B. Logeinträge unter deinem Namen veröffentlichen.\n"
+"\t\t\t\t\tDu kannst diese Erlaubnis jederzeit widerrufen.</p>\n"
+"\t\t\t\t"
+
+#: c:\source\oc\server-3.0\htdocs\okapi/views/apps/authorized.tpl.php:5
+msgid "Authorization Succeeded"
+msgstr "Authorisierung erfolgreich"
+
+#: c:\source\oc\server-3.0\htdocs\okapi/views/apps/authorized.tpl.php:28
+msgid "Access successfully granted"
+msgstr "Zugang wurde gewährt"
+
+#: c:\source\oc\server-3.0\htdocs\okapi/views/apps/authorized.tpl.php:29
+#, php-format
+msgid ""
+"\n"
+"\t\t\t\t<p><b>You've just granted %s application access to your %s account.</"
+"b>\n"
+"\t\t\t\tTo complete the operation, go back to %s and enter the following PIN "
+"code:</p>\n"
+"\t\t\t"
+msgstr ""
+"\n"
+"\t\t\t\t<p><b>Du hast der Anwendung \"%s\" Zugriff auf dein %s-Benutzerkonto "
+"gewährt.</b>\n"
+"\t\t\t\tUm den Vorgang abzuschließen, gehe zurück nach %s und gib folgenden "
+"PIN-Code ein:</p>\n"
+"\t\t\t"
+
+#: c:\source\oc\server-3.0\htdocs\okapi/views/apps/index.tpl.php:5
+msgid "My Apps"
+msgstr "Meine Apps"
+
+#: c:\source\oc\server-3.0\htdocs\okapi/views/apps/index.tpl.php:29
+msgid "Your external applications"
+msgstr "Deine externe Anwendung"
+
+#: c:\source\oc\server-3.0\htdocs\okapi/views/apps/index.tpl.php:31
+#, php-format
+msgid ""
+"\n"
+"\t\t\t\t\t<p>This is the list of applications which you granted access to "
+"your <b>%s</b> account.\n"
+"\t\t\t\t\tThis page gives you the abbility to revoke all previously granted "
+"privileges.\n"
+"\t\t\t\t\tOnce you click \"remove\" the application will no longer be able "
+"to perform any\n"
+"\t\t\t\t\tactions on your behalf.</p>\n"
+"\t\t\t\t"
+msgstr ""
+"\n"
+"\t\t\t\t\t<p>Dies ist eine Liste der Anwendungen, denen du Zugriff auf dein "
+"<b>%s</b>-Benutzerkonto gewährt hast.\n"
+"\t\t\t\t\tHier hast du die Möglichkeit, alle bisher vergebenen "
+"Zugriffsrechte zu widerrufen.\n"
+"\t\t\t\t\tWenn du auf \"entfernen\" klickst, wird die Anwendung keine "
+"Aktionen mehr unter deinem \t\t\t\t\tBenutzername ausführen können.</p>\n"
+"\t\t\t\t"
+
+#: c:\source\oc\server-3.0\htdocs\okapi/views/apps/index.tpl.php:45
+msgid "remove"
+msgstr "entfernen"
+
+#: c:\source\oc\server-3.0\htdocs\okapi/views/apps/index.tpl.php:50
+#, php-format
+msgid ""
+"\n"
+"\t\t\t\t\t<p>Thanks to the <a href='%s'>OKAPI Framework</a> you can grant "
+"external applications\n"
+"\t\t\t\t\taccess to your <b>%s</b> account. Currently no applications are "
+"authorized to act\n"
+"\t\t\t\t\ton your behalf. Once you start using external OpenCaching "
+"applications, they will appear here.</p>\n"
+"\t\t\t\t"
+msgstr ""
+"\n"
+"\t\t\t\t\t<p>Die <a href='%s'>OKAPI-Schnittstelle</a> ermöglichst es dir, "
+"externen Anwendungen\n"
+"\t\t\t\t\tZugriff auf dein <b>%s</b>-Benutzerkonto zu geben. Zurzeit sind "
+"keine Anwendungen\n"
+"\t\t\t\t\tdazu ermächtigt. Sobald du externe Opencaching-Anwendungen "
+"aktivierst, werden diese hier erscheinen.</p>\n"
+"\t\t\t\t"

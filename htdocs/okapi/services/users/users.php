@@ -105,12 +105,15 @@ class WebService
 				
 				$rs = Db::query("
 					select
-						user_id,
-						found as founds_count,
-						notfound as notfounds_count,
-						hidden as hidden_count
-					from stat_user
-					where user_id in ('".implode("','", array_map('mysql_real_escape_string', array_keys($id2uuid)))."')
+						u.user_id,
+						ifnull(su.found, 0) as founds_count,
+						ifnull(su.notfound, 0) as notfounds_count,
+						ifnull(su.hidden, 0) as hidden_count
+					from
+						user u
+						left join stat_user su
+							on su.user_id = u.user_id
+					where u.user_id in ('".implode("','", array_map('mysql_real_escape_string', array_keys($id2uuid)))."')
 				");
 			}
 			

@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OKAPI\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-06-14 12:07+0100\n"
-"PO-Revision-Date: 2012-06-14 12:07+0100\n"
+"POT-Creation-Date: 2012-08-23 10:20+0100\n"
+"PO-Revision-Date: 2012-08-23 10:27+0100\n"
 "Last-Translator: Wojciech Rygielski <rygielski@mimuw.edu.pl>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -17,7 +17,7 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: services/caches/geocaches.php:634
+#: services/caches/geocaches.php:642
 msgid "Stage"
 msgstr "Etap"
 
@@ -74,55 +74,71 @@ msgstr "Spoilery"
 msgid "Image descriptions"
 msgstr "Opisy obrazków"
 
-#: services/logs/submit.php:63
+#: services/logs/submit.php:62
 msgid "You are trying to publish a log entry with a date in future. Cache log entries are allowed to be published in the past, but NOT in the future."
 msgstr "Próbujesz opublikować wpis do logbooka używając daty w przyszłości. Wpisy mogą być publikowane z datą w przeszłości, ale NIE w przyszłości."
 
-#: services/logs/submit.php:83
-#: services/logs/submit.php:377
-msgid "Your cache log entry was posted successfully."
-msgstr "Twój wpis do logbooka został opublikowany pomyślnie."
-
-#: services/logs/submit.php:84
+#: services/logs/submit.php:82
 #, php-format
 msgid "However, your cache rating was ignored, because %s does not have a rating system."
 msgstr "Niestety Twoja ocena skrzynki nie została zapisana, ponieważ %s nie prowadzi oceny skrzynek."
 
-#: services/logs/submit.php:107
+#: services/logs/submit.php:92
+msgid "Recommending is allowed only for 'Found it' logtypes."
+msgstr "Rekomendacje są dozwolone jedynie z wpisem \"Znaleziona\"."
+
+#: services/logs/submit.php:101
+#, php-format
+msgid "However, your \"needs maintenance\" flag was ignored, because %s does not support this feature."
+msgstr "Niestety, wpis \"potrzebny serwis\" został zignorowany, ponieważ %s nie wspiera tej funkcjonalności."
+
+#: services/logs/submit.php:124
 msgid "This cache is archived. Only admins and the owner are allowed to add a log entry."
 msgstr "Ta skrzynka jest zarchiwizowana. Jedynie administratorzy oraz właściciel mogą dodawać komentarze."
 
-#: services/logs/submit.php:111
+#: services/logs/submit.php:128
 msgid "This cache is an Event cache. You cannot \"Find it\"! (But - you may \"Comment\" on it.)"
 msgstr "Ta skrzynka jest typu Wydarzenie. Nie możesz jej \"znaleźć\"! (Ale - możesz dodać wpis typu \"Komentarz\".)"
 
-#: services/logs/submit.php:113
+#: services/logs/submit.php:130
 msgid "Your have to supply some text for your comment."
 msgstr "Wpis typu \"Komentarz\" wymaga wpisania komentarza."
 
-#: services/logs/submit.php:126
+#: services/logs/submit.php:143
 msgid "This cache requires a password. You didn't provide one!"
 msgstr "Ta skrzynka wymaga podania hasła. Nie wpisałeś go."
 
-#: services/logs/submit.php:128
+#: services/logs/submit.php:145
 msgid "Invalid password!"
 msgstr "Niepoprawne hasło!"
 
-#: services/logs/submit.php:172
+#: services/logs/submit.php:194
 msgid "You have already submitted a log entry with exactly the same contents."
 msgstr "Już opublikowałeś wcześniej wpis z dokładnie taką samą treścią."
 
-#: services/logs/submit.php:191
+#: services/logs/submit.php:213
 msgid "You have already submitted a \"Found it\" log entry once. Now you may submit \"Comments\" only!"
 msgstr "Już opublikowałeś jeden wpis typu \"Znaleziona\" dla tej skrzynki. Teraz możesz dodawać jedynie \"Komentarze\"!"
 
-#: services/logs/submit.php:193
-msgid "You are the owner of this cache. You cannot \"Find it\"."
-msgstr "Jesteś właścicielem tej skrzynki. Nie możesz jej \"Znaleźć\"."
+#: services/logs/submit.php:215
+msgid "You are the owner of this cache. You may submit \"Comments\" only!"
+msgstr "Jesteś właścicielem tej skrzynki. Możesz przesyłać jedynie \"Komentarze\"."
 
-#: services/logs/submit.php:211
+#: services/logs/submit.php:233
 msgid "You have already rated this cache once. Your rating cannot be changed."
 msgstr "Już oceniłeś tę skrzynkę. Ocena nie może być zmieniona."
+
+#: services/logs/submit.php:250
+msgid "You have already recommended this cache once."
+msgstr "Już raz zarekomendowałeś tę skrzynkę."
+
+#: services/logs/submit.php:257
+msgid "You don't have any recommendations to give. Find more caches first!"
+msgstr "Aktualnie nie możesz wystawić kolejnej rekomendacji. Znajdź najpierw więcej skrzynek!"
+
+#: services/logs/submit.php:409
+msgid "Your cache log entry was posted successfully."
+msgstr "Twój wpis do logbooka został opublikowany pomyślnie."
 
 #: views/apps/authorize.tpl.php:5
 msgid "Authorization Form"

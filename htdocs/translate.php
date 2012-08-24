@@ -672,12 +672,14 @@ function xmlimport3()
 	$tpl->redirect('translate.php?translang=' . $translang);
 }
 
+// 2012-08-24 following - changed output format from tab-separated lines to multiple lines
+//                        for better readability, and delimiter from *nix \n to canonical \r\n
 function textexport($translang, $all)
 {
 	global $opt;
 
-	header('Content-type:application/octet-stream');
-	header('Content-Disposition:attachment;filename="translation.txt"');
+	header('Content-type: text/plain');
+	header('Content-Disposition: attachment; filename="translation.txt"');
 
 	$rs = sql("SELECT `id`, `text` FROM `sys_trans` ORDER BY `id` ASC");
 	while ($r = sql_fetch_assoc($rs))
@@ -686,9 +688,10 @@ function textexport($translang, $all)
 		if (($all) || (mb_strlen($translated)==0))
 		{
 			$thisline = $r['text'];
-			$thisline .= "\t";
+			$thisline .= "\r\n";
 			$thisline .= $translated;
-			$thisline .= "\n";
+			$thisline .= "\r\n";
+			$thisline .= "\r\n";
 			echo($thisline);
 		}
 	}
@@ -697,6 +700,7 @@ function textexport($translang, $all)
 	exit;
 }
 
+// 2012-08-24 following - changed input format from tab-separated lines to multiple lines
 function textimport($lang)
 {
 	global $translate, $tpl, $opt;
@@ -717,54 +721,50 @@ function textimport($lang)
 	*/
 	$saTexts = array();
 
-	for ($i=0;$i<count($lines);$i++) 
+	for ($i=0; $i+1 < count($lines); $i += 3)
 	{
-		$cols = explode("\t", $lines[$i]); //create array separate by new line
+		$sCodeText = trim($lines[$i]);
+		$sLangText = trim($lines[$i+1]);
 
-		$sCodeText = $cols[0];
-		if (mb_strlen($sCodeText)>0)
+		if ($sCodeText . $sLangText != '')
 		{
-			$sLangText = $cols[1];
-			if (mb_strlen($sLangText)>0)
+			$transId = sql_value("SELECT `id` FROM `sys_trans` WHERE `text`='&1'", 0, $sCodeText);
+			if ($transId == 0)
 			{
-				$transId = sql_value("SELECT `id` FROM `sys_trans` WHERE `text`='&1'", 0, $sCodeText);
-				if ($transId == 0)
+				if ($sLangText != '')
 				{
-					if ($sLangText != '')
-					{
-						// text not in sys_trans => code changed while translation has been done
-						$saTexts[$sCodeText]['id'] = 0;
-						$saTexts[$sCodeText]['count'] = count($saTexts);
-						$saTexts[$sCodeText]['type'] = 1;
-						$saTexts[$sCodeText]['code'] = $sCodeText;
-						$saTexts[$sCodeText][$lang]['new'] = $sLangText;
-						$saTexts[$sCodeText][$lang]['old'] = '';
-					}
+					// text not in sys_trans => code changed while translation has been done
+					$saTexts[$sCodeText]['id'] = 0;
+					$saTexts[$sCodeText]['count'] = count($saTexts);
+					$saTexts[$sCodeText]['type'] = 1;
+					$saTexts[$sCodeText]['code'] = $sCodeText;
+					$saTexts[$sCodeText][$lang]['new'] = $sLangText;
+					$saTexts[$sCodeText][$lang]['old'] = '';
 				}
-				else
+			}
+			else
+			{
+				$sOldText = sql_value("SELECT `text` FROM `sys_trans_text` WHERE `trans_id`='&1' AND `lang`='&2'", '', $transId, $lang);
+				if (($sOldText == '') && ($sLangText != ''))
 				{
-					$sOldText = sql_value("SELECT `text` FROM `sys_trans_text` WHERE `trans_id`='&1' AND `lang`='&2'", '', $transId, $lang);
-					if (($sOldText == '') && ($sLangText != ''))
-					{
-						// new translation
-						$saTexts[$sCodeText]['id'] = $transId;
-						$saTexts[$sCodeText]['count'] = count($saTexts);
-						$saTexts[$sCodeText]['type'] = 2;
-						$saTexts[$sCodeText]['code'] = $sCodeText;
-						$saTexts[$sCodeText][$lang]['new'] = $sLangText;
-						$saTexts[$sCodeText][$lang]['old'] = $sOldText;
+					// new translation
+					$saTexts[$sCodeText]['id'] = $transId;
+					$saTexts[$sCodeText]['count'] = count($saTexts);
+					$saTexts[$sCodeText]['type'] = 2;
+					$saTexts[$sCodeText]['code'] = $sCodeText;
+					$saTexts[$sCodeText][$lang]['new'] = $sLangText;
+					$saTexts[$sCodeText][$lang]['old'] = $sOldText;
 echo($saTexts[$sCodeText]);
-					}
-					else if ($sOldText != $sLangText)
-					{
-						// translation changed
-						$saTexts[$sCodeText]['id'] = $transId;
-						$saTexts[$sCodeText]['count'] = count($saTexts);
-						$saTexts[$sCodeText]['type'] = 3;
-						$saTexts[$sCodeText]['code'] = $sCodeText;
-						$saTexts[$sCodeText][$lang]['new'] = $sLangText;
-						$saTexts[$sCodeText][$lang]['old'] = $sOldText;
-					}
+				}
+				else if ($sOldText != $sLangText)
+				{
+					// translation changed
+					$saTexts[$sCodeText]['id'] = $transId;
+					$saTexts[$sCodeText]['count'] = count($saTexts);
+					$saTexts[$sCodeText]['type'] = 3;
+					$saTexts[$sCodeText]['code'] = $sCodeText;
+					$saTexts[$sCodeText][$lang]['new'] = $sLangText;
+					$saTexts[$sCodeText][$lang]['old'] = $sOldText;
 				}
 			}
 		}

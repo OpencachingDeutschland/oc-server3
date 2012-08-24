@@ -21,6 +21,7 @@
    </ul>
 	 <p>Changed / improved:</p>
 	 <ul class="changelog">
+     <li class="changelogitem">improved <a href="./index.php">Homepag</a> performance</li>
      <li class="changelogitem">rewritten <a href="./articles.php?page=cacheinfo">cache description</a> info</li>
 	   <li class="changelogitem">recommendations stars are display with Found and Attended logs only.</li>
 	   <li class="changelogitem">reversed log type order for event caches</li>
@@ -36,7 +37,7 @@
 	   <li class="changelogitem">added missing event attendees count in log summary line</li>
 	   <li class="changelogitem">fixed OC waypoint creation error</li>
 	   <li class="changelogitem">Recommendations are no longer lost when logging a cache again, e.g. a note after a found log.</li>
-	   <li class="changelogitem">Recommendations are no longer lost when deleting one of multiple logs of the same user.</li>
+	   <li class="changelogitem">Recommendations are no longer lost when deleting one of multiple logs of the same user, or when editing one of them.</li>
 	   <li class="changelogitem">Multiple logs by the same used only count once at the homepage top ratings list.</li>
    </ul>
 	<br />

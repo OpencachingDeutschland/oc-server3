@@ -79,7 +79,7 @@
 					$log_date_day = isset($_POST['logday']) ? $_POST['logday'] : date('d', strtotime($log_record['date']));
 					$log_date_month = isset($_POST['logmonth']) ? $_POST['logmonth'] : date('m', strtotime($log_record['date']));
 					$log_date_year = isset($_POST['logyear']) ? $_POST['logyear'] : date('Y', strtotime($log_record['date']));
-					$top_cache = isset($_POST['rating']) ? $_POST['rating']+0 : 0;
+					$top_cache = isset($_POST['rating']) ? $_POST['rating']+0 : null;
 
 					$log_pw = '';
 					$use_log_pw = (($log_record['logpw'] == NULL) || ($log_record['logpw'] == '')) ? false : true;
@@ -98,7 +98,7 @@
 					{
 						if (($user_founds * rating_percentage/100) < 1)
 						{
-							$top_cache = 0;
+							$top_cache = null;
 							$anzahl = (1 - ($user_founds * rating_percentage/100)) / (rating_percentage/100);
 							if ($anzahl > 1)
 							{
@@ -117,7 +117,7 @@
 						}
 						else
 						{
-							$top_cache = 0;
+							$top_cache = null;
 							$anzahl = ($user_tops + 1 - ($user_founds * rating_percentage/100)) / (rating_percentage/100);
 							if ($anzahl > 1)
 							{
@@ -243,7 +243,7 @@
 					// not a found log? then ignore the rating
 					if ($log_type != 1 && $log_type != 7)
 					{
-						$top_cache = 0;
+						$top_cache = null;
 					}
 
 
@@ -293,7 +293,7 @@
 						// update top-list
 						if ($top_cache == 1)
 							sql("INSERT IGNORE INTO `cache_rating` (`user_id`, `cache_id`) VALUES('&1', '&2')", $usr['userid'], $log_record['cache_id']);
-						else
+						else if ($top_cache === 0)   // 0 but not null
 							sql("DELETE FROM `cache_rating` WHERE `user_id`='&1' AND `cache_id`='&2'", $usr['userid'], $log_record['cache_id']);
 
 						// do not use slave server for the next time ...

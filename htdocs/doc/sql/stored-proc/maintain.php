@@ -668,6 +668,13 @@
 						INSERT IGNORE INTO `removed_objects` (`localId`, `uuid`, `type`, `node`) VALUES (OLD.`id`, OLD.`uuid`, 1, OLD.`node`);
 					END;");
 
+	sql_dropTrigger('cacheRatingBeforeInsert');
+	sql("CREATE TRIGGER `cacheRatingBeforeInsert` BEFORE INSERT ON `cache_rating`
+				FOR EACH ROW
+					BEGIN
+						SET NEW.`rating_date` = NOW();
+					END;");
+
 	sql_dropTrigger('cacheRatingAfterInsert');
 	sql("CREATE TRIGGER `cacheRatingAfterInsert` AFTER INSERT ON `cache_rating` 
 				FOR EACH ROW 

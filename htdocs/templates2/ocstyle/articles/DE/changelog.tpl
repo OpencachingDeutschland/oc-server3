@@ -20,6 +20,7 @@
    </ul>
 	 <p>Geändert / verbessert:</p>
 	 <ul class="changelog">
+     <li class="changelogitem"><a href="./index.php">Startseite</a> beschleunigt</li>
      <li class="changelogitem"><a href="./articles.php?page=cacheinfo">Cachebeschreibungs-Info</a> überarbeitet</li>
 	   <li class="changelogitem">Empfehlungssterne erscheinen nur noch bei Gefunden- und Teilgenommen-Logs.</li>
 	   <li class="changelogitem">Logtypreihenfolge bei Event-Caches umgedreht</li>
@@ -36,7 +37,7 @@
 	   <li class="changelogitem">Anzeige der Event-Teilnehmerzahl in der Logzusammenfassungszeile</li>
 	   <li class="changelogitem">seltenen Fehler bei der Erzeugung von OC-Wegpunkten behoben</li>
 	   <li class="changelogitem">Empfehlungen gehen beim mehrfachen Loggen eines Caches &ndash; z.B. Fund + Hinweis &ndash; nicht mehr verloren.</li>
-	   <li class="changelogitem">Empfehlungen gehen beim Löschen eines von mehreren Logs des gleichen Benutzers nicht mehr verloren.</li>
+	   <li class="changelogitem">Empfehlungen gehen beim Löschen eines von mehreren Logs des gleichen Benutzers oder beim Bearbeiten von einem der Logs nicht mehr verloren.</li>
 	   <li class="changelogitem">Mehrfachlogs eines Benutzers zählen bei der Bewertungsübersicht auf der Startseite nur noch einmal.</li>
    </ul>
 	<br />

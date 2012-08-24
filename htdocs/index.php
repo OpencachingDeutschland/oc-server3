@@ -63,12 +63,6 @@
 														`user`.`username` `username`,
 														`caches`.`cache_id` `cache_id`,
 														`caches`.`name` `name`,
-														`caches`.`longitude` `longitude`,
-														`caches`.`latitude` `latitude`,
-														`caches`.`date_created` `date_created`,
-														`caches`.`country` `country`,
-														`caches`.`difficulty` `difficulty`,
-														`caches`.`terrain` `terrain`,
 														`caches`.`date_hidden`,
 														`cache_location`.`adm1`,
 														`cache_location`.`adm2`,
@@ -91,13 +85,7 @@
 														`user`.`username` `username`,
 														`caches`.`cache_id` `cache_id`,
 														`caches`.`name` `name`,
-														`caches`.`longitude` `longitude`,
-														`caches`.`latitude` `latitude`,
 														`caches`.`date_created` `date_created`,
-														`caches`.`country` `country`,
-														`caches`.`difficulty` `difficulty`,
-														`caches`.`terrain` `terrain`,
-														`caches`.`date_hidden`,
 														`caches`.`type`,
 														`cache_location`.`adm1`,
 														`cache_location`.`adm2`,
@@ -115,39 +103,33 @@
 		sql_free_result($rs);
 
 		// last 30 days' top ratings
-		$rs = sql_slave("SELECT COUNT(DISTINCT `cache_logs`.`user_id`) AS `cRatings`, 
-																	`cache_logs`.`cache_id`, 
-																	MAX(`cache_logs`.`date`) AS `dLastLog`, 
+		//
+		// 2012-08-24 following
+		//		optimized by adding rating_date field to cache_rating, so we don't need the log table. 
+
+		$rs = sql_slave("SELECT COUNT(`cache_rating`.`user_id`) AS `cRatings`, 
+																	MAX(`cache_rating`.`rating_date`) AS `dLastLog`, 
 																	`user`.`user_id` AS `user_id`,
 																	`user`.`username` AS `username`,
 																	`caches`.`cache_id` AS `cache_id`,
 																	`caches`.`name` AS `name`,
-																	`caches`.`longitude` AS `longitude`,
-																	`caches`.`latitude` AS `latitude`,
-																	`caches`.`date_created` AS `date_created`,
-																	`caches`.`country` AS `country`,
-																	`caches`.`difficulty` AS `difficulty`,
-																	`caches`.`terrain` AS `terrain`,
-																	`caches`.`date_hidden`,
 																	`caches`.`type`,
 																	`cache_location`.`adm1`,
 																	`cache_location`.`adm2`,
 																	`cache_location`.`adm3`,
 																	`cache_location`.`adm4`
-														 FROM `cache_logs` 
-											 INNER JOIN `cache_rating` ON `cache_logs`.`cache_id`=`cache_rating`.`cache_id` AND 
-																										`cache_logs`.`user_id`=`cache_rating`.`user_id` 
-											 INNER JOIN `caches` ON `cache_logs`.`cache_id`=`caches`.`cache_id`
-											 INNER JOIN `user` ON `user`.`user_id`=`caches`.`user_id`
-												LEFT JOIN `cache_location` ON `caches`.`cache_id`=`cache_location`.`cache_id`
+														 FROM `cache_rating` 
+											 INNER JOIN `caches` ON `caches`.`cache_id`=`cache_rating`.`cache_id`
+											 INNER JOIN `user` ON `user`.`user_id`=`cache_rating`.`user_id`
+												LEFT JOIN `cache_location` ON `cache_rating`.`cache_id`=`cache_location`.`cache_id`
 														WHERE `caches`.`country`='&1' AND 
-														      `cache_logs`.`type`=1 AND 
-																	`cache_logs`.`date`>DATE_SUB(NOW(), INTERVAL 30 DAY) AND 
+																	`cache_rating`.`rating_date`>DATE_SUB(NOW(), INTERVAL 30 DAY) AND 
 																	`caches`.`type`!=6 AND 
 																	`caches`.`status`=1
-												 GROUP BY `cache_logs`.`cache_id` 
+												 GROUP BY `cache_rating`.`cache_id` 
 												 ORDER BY `cRatings` DESC, 
-																	`dLastLog` DESC 
+																	`dLastLog` DESC,
+																	`cache_id` DESC 
 														LIMIT 0, 10",
 									                $sUserCountry);
 		$tpl->assign_rs('topratings', $rs);

@@ -754,7 +754,6 @@ function textimport($lang)
 					$saTexts[$sCodeText]['code'] = $sCodeText;
 					$saTexts[$sCodeText][$lang]['new'] = $sLangText;
 					$saTexts[$sCodeText][$lang]['old'] = $sOldText;
-echo($saTexts[$sCodeText]);
 				}
 				else if ($sOldText != $sLangText)
 				{

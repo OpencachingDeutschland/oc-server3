@@ -8,9 +8,37 @@
 	</div>
 	<div class="content-txtbox-noshade" style="padding-right: 25px;">
 
-	<p>Opencaching.de Version 1.0 went online in 2006 und was steadily enhanced in the following years, switching to Version 2. In the beginning of 2011, development was halted, until the new Opencaching Deutschland association restarted it in July 2012 at Version&nbsp;3.0. The new developement team starts with simple tasks for learning the ropes.</p>
+	<p>Opencaching.de Version 1.0 went online in August 2005 und was steadily enhanced in the following years, switching to Version 2. In the beginning of 2011, development was halted, until the new Opencaching Deutschland association restarted it in July 2012 at Version&nbsp;3.0. The new developement team has started with simple tasks for learning the ropes.</p>
 
-	<p>This page lists all changes of version 3.0.</p>
+	<p>This page lists all changes since version 3.0.</p>
+	<br />
+
+	 <p><strong>Release 3.0.2</strong> &ndash; (scheduled for September)</p>
+   <p>New:</p>
+	 <ul class="changelog">
+	   <li class="changelogitem"><a href="./articles.php?page=cacheinfo#difficulty">Difficulty ratings</a> explained, including tooltips and links within the cache listings</li>
+	   <li class="changelogitem"><a href="./articles.php?page=verein">Vereinsseite</a> (currently German only)
+   </ul>
+	 <p>Changed / improved:</p>
+	 <ul class="changelog">
+     <li class="changelogitem">rewritten <a href="./articles.php?page=cacheinfo">cache description</a> info</li>
+	   <li class="changelogitem">recommendations stars are display with Found and Attended logs only.</li>
+	   <li class="changelogitem">reversed log type order for event caches</li>
+	   <li class="changelogitem">updated <a href="./doc/xml/">XML Interface Documentation</a> (German) and <a href="https://github.com/OpencachingDeutschland/oc-server3/blob/master/doc/license.txt">Source code license</a></li>
+	   <li class="changelogitem">updated <a href="./articles.php?page=team">Team members list</a></li>
+	   <li class="changelogitem">announced new <a href="./articles.php?page=donations">bank account</a> for donations</li>
+	   <li class="changelogitem">better display of cache reports for the support team</li>
+	   <li class="changelogitem">removed 65565-cache-listings-limit (OCFFFF, including archived caches)</li>
+	   <li class="changelogitem">Completed Spanish translations</li>
+   </ul>
+	 <p>Fixed:</p>
+	 <ul class="changelog">
+	   <li class="changelogitem">added missing event attendees count in log summary line</li>
+	   <li class="changelogitem">fixed OC waypoint creation error</li>
+	   <li class="changelogitem">Recommendations are no longer lost when logging a cache again, e.g. a note after a found log.</li>
+	   <li class="changelogitem">Recommendations are no longer lost when deleting one of multiple logs of the same user.</li>
+	   <li class="changelogitem">Multiple logs by the same used only count once at the homepage top ratings list.</li>
+   </ul>
 	<br />
 
 	 <p><strong>Release 3.0.1</strong> &ndash; August 8, 2012</p>

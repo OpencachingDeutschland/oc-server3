@@ -29,7 +29,8 @@
 	   <li class="changelogitem">neue <a href="./articles.php?page=donations">Bankverbindung</a> bekanntgegeben</li>
 	   <li class="changelogitem">übersichtlichere Darstellung von Cachemeldungen für das OC-Supportteam</li>
 	   <li class="changelogitem">Platz für neue Caches: Beschränkung auf 65535 Listings (OCFFFF, inkl. archivierter Caches) aufgehoben</li>
-	   <li class="changelogitem">spanische Übersetzung vervollständigt</li>
+	 	 <li class="changelogitem">spanische Übersetzung vervollständigt</li>
+		 <li class="changelogitem">inaktive Caches auch auf der <a href="./newcachesrest.php">Alle-außer-Deutschland-Seite</a> ausgeblendet</li>
    </ul>
 	 <p>Korrigiert (Bugfixes):</p>
 	 <ul class="changelog">

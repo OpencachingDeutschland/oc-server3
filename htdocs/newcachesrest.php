@@ -29,6 +29,7 @@
 		                      INNER JOIN `countries` ON `countries`.`short`=`caches`.`country`
 		                       LEFT JOIN `sys_trans` ON `countries`.`trans_id`=`sys_trans`.`id`
 		                       LEFT JOIN `sys_trans_text` ON `sys_trans`.`id`=`sys_trans_text`.`trans_id` AND `sys_trans_text`.`lang`='&1'
+		                           WHERE `status` = 1
 		                        ORDER BY `country_name`, `caches`.`date_created` DESC LIMIT 200", 
 		                                 $opt['template']['locale']);
 		while ($rNewCache = sql_fetch_assoc($rsNewCaches))

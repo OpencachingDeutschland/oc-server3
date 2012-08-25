@@ -20,17 +20,18 @@
    </ul>
 	 <p>Geändert / verbessert:</p>
 	 <ul class="changelog">
-     <li class="changelogitem"><a href="./index.php">Startseite</a> beschleunigt</li>
      <li class="changelogitem"><a href="./articles.php?page=cacheinfo">Cachebeschreibungs-Info</a> überarbeitet</li>
 	   <li class="changelogitem">Empfehlungssterne erscheinen nur noch bei Gefunden- und Teilgenommen-Logs.</li>
 	   <li class="changelogitem">Logtypreihenfolge bei Event-Caches umgedreht</li>
+     <li class="changelogitem"><a href="./index.php">Startseite</a> beschleunigt</li>
 	   <li class="changelogitem"><a href="./doc/xml/">XML-Interface-Doku</a> und <a href="https://github.com/OpencachingDeutschland/oc-server3/blob/master/doc/license.txt">Quellcodelizenz</a> aktualisiert</li>
 	   <li class="changelogitem"><a href="./articles.php?page=team">Teamliste</a> aktualisiert</li>
 	   <li class="changelogitem">neue <a href="./articles.php?page=donations">Bankverbindung</a> bekanntgegeben</li>
 	   <li class="changelogitem">übersichtlichere Darstellung von Cachemeldungen für das OC-Supportteam</li>
 	   <li class="changelogitem">Platz für neue Caches: Beschränkung auf 65535 Listings (OCFFFF, inkl. archivierter Caches) aufgehoben</li>
-	 	 <li class="changelogitem">spanische Übersetzung vervollständigt</li>
+		 <li class="changelogitem">spanische und italienische Übersetzung vervollständigt</li>
 		 <li class="changelogitem">inaktive Caches auch auf der <a href="./newcachesrest.php">Alle-außer-Deutschland-Seite</a> ausgeblendet</li>
+		 <li class="changelogitem">einheitliche Schreibweise für Attributnamen</li>
    </ul>
 	 <p>Korrigiert (Bugfixes):</p>
 	 <ul class="changelog">

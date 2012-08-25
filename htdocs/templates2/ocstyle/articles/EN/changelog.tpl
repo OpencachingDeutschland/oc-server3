@@ -30,7 +30,7 @@
 	   <li class="changelogitem">announced new <a href="./articles.php?page=donations">bank account</a> for donations</li>
 	   <li class="changelogitem">better display of cache reports for the support team</li>
 	   <li class="changelogitem">removed 65565-cache-listings-limit (OCFFFF, including archived caches)</li>
-	   <li class="changelogitem">Completed Spanish translations</li>
+	   <li class="changelogitem">Completed Spanish and Italian translations</li>
 	   <li class="changelogitem">hidden inaktive new Caches on <a href="./newcachesrest.php">All-but-Germany</a> page</li>
    </ul>
 	 <p>Fixed:</p>

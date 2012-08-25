@@ -81,7 +81,7 @@
 		if ($article == 'cacheinfo')
 		{
 			require_once($opt['rootpath'] . 'lib2/logic/attribute.class.php');
-			$attributes = attribute::getSelectableAttrbutesListArray();
+			$attributes = attribute::getSelectableAttrbutesListArray(true);
 			$tpl->assign('attributes', $attributes);
 		}
 	}

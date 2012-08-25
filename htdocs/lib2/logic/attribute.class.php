@@ -8,22 +8,22 @@
 class attribute
 {
 	/* array with all attributes grouped by attribute group */
-	static function getAttrbutesListArray()
+	static function getAttrbutesListArray($firstLetterUppercase = false)
 	{
-		return attribute::getAttrbutesListArrayInternal(0, false);
+		return attribute::getAttrbutesListArrayInternal(0, false, $firstLetterUppercase);
 	}
 
-	static function getSelectableAttrbutesListArray()
+	static function getSelectableAttrbutesListArray($firstLetterUppercase = false)
 	{
-		return attribute::getAttrbutesListArrayInternal(0, true);
+		return attribute::getAttrbutesListArrayInternal(0, true, $firstLetterUppercase);
 	}
 
-	static function getAttrbutesListArrayByCacheId($cacheId)
+	static function getAttrbutesListArrayByCacheId($cacheId, $firstLetterUppercase = false)
 	{
-		return attribute::getAttrbutesListArrayInternal($cacheId, false);
+		return attribute::getAttrbutesListArrayInternal($cacheId, false, $firstLetterUppercase);
 	}
 
-	static function getAttrbutesListArrayInternal($cacheId, $bOnlySelectable)
+	static function getAttrbutesListArrayInternal($cacheId, $bOnlySelectable, $firstLetterUppercase)
 	{
 		global $opt;
 
@@ -76,7 +76,11 @@ class attribute
 										 ORDER BY `cache_attrib`.`group_id` ASC", $cacheId, $opt['template']['locale'], $rAttrGroup['id']);
 			}
 			while ($rAttr = sql_fetch_assoc($rsAttr))
+			{
+				if ($firstLetterUppercase)
+				  $rAttr['name'] = mb_strtoupper(mb_substr($rAttr['name'],0,1)) . mb_substr($rAttr['name'],1);
 				$attr[] = $rAttr;
+			}
 			sql_free_result($rsAttr);
 
 			if (count($attr) > 0)

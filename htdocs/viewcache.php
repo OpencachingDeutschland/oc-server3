@@ -107,6 +107,7 @@ function getChildWaypoints($cacheid)
 				`cache_desc`.`desc` AS `desc`,
 				`cache_desc`.`hint` AS `hint`,
 				`cache_desc`.`desc_html` AS `deschtml`,
+				`cache_status`.`allow_user_log`=1 OR `caches`.`user_id`='&4' AS `log_allowed`,
 				IFNULL(`stat_caches`.`found`, 0) AS `found`,
 				IFNULL(`stat_caches`.`notfound`, 0) AS `notfound`,
 				IFNULL(`stat_caches`.`note`, 0) AS `note`,
@@ -125,6 +126,7 @@ function getChildWaypoints($cacheid)
 		     FROM `caches`
 		    INNER JOIN `user` ON `caches`.`user_id`=`user`.`user_id`
 		    INNER JOIN `cache_desc` ON `caches`.`cache_id`=`cache_desc`.`cache_id` AND `cache_desc`.`language`=PREFERED_LANG(`caches`.`desc_languages`, '&3')
+		    INNER JOIN `cache_status` ON `caches`.`status`=`cache_status`.`id`
 		     LEFT JOIN `countries` ON `caches`.`country`=`countries`.`short`
 		     LEFT JOIN `sys_trans` AS `tCountry` ON `countries`.`trans_id`=`tCountry`.`id` AND `countries`.`name`=`tCountry`.`text`
 		     LEFT JOIN `sys_trans_text` AS `ttCountry` ON `tCountry`.`id`=`ttCountry`.`trans_id` AND `ttCountry`.`lang`='&2'

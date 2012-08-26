@@ -31,7 +31,8 @@
 	   <li class="changelogitem">better display of cache reports for the support team</li>
 	   <li class="changelogitem">removed 65565-cache-listings-limit (OCFFFF, including archived caches)</li>
 	   <li class="changelogitem">Completed Spanish and Italian translations</li>
-	   <li class="changelogitem">hidden inaktive new Caches on <a href="./newcachesrest.php">All-but-Germany</a> page</li>
+	   <li class="changelogitem">hidden inaktive new caches on <a href="./newcachesrest.php">All-but-Germany</a> page</li>
+	   <li class="changelogitem">hidden log button for locked caches, instead of linking it to an emty page</li>
    </ul>
 	 <p>Fixed:</p>
 	 <ul class="changelog">

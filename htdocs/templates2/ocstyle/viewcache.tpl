@@ -80,7 +80,9 @@
 			<ul id="cachemenu">
 				<li class="title" >Cache Menu</li>
 				{if $login.userid!=0}
+					{if $cache.log_allowed}
 					<li class="group"><a style="background-image: url(resource2/{$opt.template.style}/images/viewcache/new-entry-18.png);background-repeat:no-repeat;" href="log.php?cacheid={$cache.cacheid|urlencode}">{t}Log this cache{/t}</a></li>
+					{/if}
 				
 					{if $watched==1}
 						<li class="group"><a style="background-image: url(resource2/{$opt.template.style}/images/viewcache/watch-18.png);background-repeat:no-repeat;" href="mywatches.php?action=remove&amp;cacheid={$cache.cacheid|urlencode}&amp;target=viewcache.php%3Fcacheid%3D{$cache.cacheid|urlencode}">{t}Don't watch{/t}</a></li>

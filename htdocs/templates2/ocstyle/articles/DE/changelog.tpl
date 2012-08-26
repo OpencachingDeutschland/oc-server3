@@ -33,6 +33,7 @@
 		 <li class="changelogitem">inaktive Caches auch auf der <a href="./newcachesrest.php">Alle-außer-Deutschland-Seite</a> ausgeblendet</li>
 		 <li class="changelogitem">einheitliche Schreibweise für Attributnamen</li>
 		 <li class="changelogitem">Cachelisting: &bdquo;Decrypt&ldquo; &rarr; &bdquo;Entschlüsseln&ldquo;</li>
+	   <li class="changelogitem">bei gesperrten Caches den Logbutton ausgeblendet, statt auf eine leere Seite zu verlinken</li>
    </ul>
 	 <p>Korrigiert (Bugfixes):</p>
 	 <ul class="changelog">

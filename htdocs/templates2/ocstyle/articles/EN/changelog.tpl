@@ -48,6 +48,7 @@
 	   <li class="changelogitem">removed non-workink log entry deletion link for cache owners</li>
 	   <li class="changelogitem">fixed log edit permissions for locked caches</li>
 	   <li class="changelogitem">removed dummy spoiler option when uploading log pictures</li>
+	   <li class="changelogitem">fixed overwriting a saved query</li>
    </ul>
 	<br />
 

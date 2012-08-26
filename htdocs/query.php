@@ -105,7 +105,7 @@ function savequery($queryid, $queryname, $saveas, $submit, $saveas_queryid)
 
 			// save as
 			$oOptions = sql_value("SELECT `options` FROM `queries` WHERE `id`='&1'", array(), $queryid);
-			sql("UPDATE `queries` SET `options`='&1' WHERE `id`='&3'", $oOptions, $saveas_queryid);
+			sql("UPDATE `queries` SET `options`='&1' WHERE `id`='&2'", $oOptions, $saveas_queryid);
 
 			$tpl->redirect('query.php?action=view');
 		}

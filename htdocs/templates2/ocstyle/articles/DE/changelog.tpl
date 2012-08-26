@@ -50,6 +50,7 @@
 	   <li class="changelogitem">nicht funktionierenden Log-Bild-Löschlink für Cachebesitzer entfernt</li>
 	   <li class="changelogitem">Logbearbeitungsberechtigungen für gesperrte Caches korrigiert</li>
 	   <li class="changelogitem">wirkungslose Spoileroption beim Hochladen von Logbildern entfernt</li>
+	   <li class="changelogitem">Überschreiben einer gespeicherten Suche funktioniert jetzt</li>
    </ul>
 	<br />
 

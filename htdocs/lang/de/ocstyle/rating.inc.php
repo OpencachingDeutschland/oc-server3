@@ -26,9 +26,9 @@
 			</tr>
 			<tr><td class="spacer" colspan="2"></td></tr>';
 
-	$rating_allowed = '<input type="checkbox" name="rating" value="1" class="checkbox" {chk_sel}/>&nbsp;' . t('This cache is one of my recommendations.');
-	$rating_maxreached = t('Alternatively, you can withdraw a <a href="mytop5.php">existing recommendation</a>.');
+	$rating_allowed = '<input type="hidden" name="ratingoption" value="1"><input type="checkbox" name="rating" value="1" class="checkbox" {chk_sel}/>&nbsp;' . t('This cache is one of my recommendations.');
 	$rating_too_few_founds = t('You need additional {anzahl} finds, to make another recommandation.');
+	$rating_maywithdraw = t('Alternatively, you can withdraw a <a href="mytop5.php">existing recommendation</a>.');
 	$rating_stat = t('You have given {curr} of {max} possible recommendations.');
 
 ?>

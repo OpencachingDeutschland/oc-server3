@@ -79,7 +79,8 @@
 					$log_date_day = isset($_POST['logday']) ? $_POST['logday'] : date('d', strtotime($log_record['date']));
 					$log_date_month = isset($_POST['logmonth']) ? $_POST['logmonth'] : date('m', strtotime($log_record['date']));
 					$log_date_year = isset($_POST['logyear']) ? $_POST['logyear'] : date('Y', strtotime($log_record['date']));
-					$top_cache = isset($_POST['rating']) ? $_POST['rating']+0 : null;
+					$top_option = isset($_POST['ratingoption']) ? $_POST['ratingoption']+0 : 0;
+					$top_cache = isset($_POST['rating']) ? $_POST['rating']+0 : 0;
 
 					$log_pw = '';
 					$use_log_pw = (($log_record['logpw'] == NULL) || ($log_record['logpw'] == '')) ? false : true;
@@ -89,52 +90,27 @@
 					if ($use_log_pw)
 						$log_pw = $log_record['logpw'];
 
-					// check if user has exceeded his top5% limit
+					// check if user has exceeded his top 10% limit
 					$is_top = sqlValue("SELECT COUNT(`cache_id`) FROM `cache_rating` WHERE `user_id`='" . sql_escape($usr['userid']) . "' AND `cache_id`='" . sql_escape($log_record['cache_id']) . "'", 0);
 					$user_founds = sqlValue("SELECT IFNULL(`found`, 0) FROM `user` LEFT JOIN `stat_user` ON `user`.`user_id`=`stat_user`.`user_id` WHERE `user`.`user_id`='" .  sql_escape($usr['userid']) . "'", 0);
 					$user_tops = sqlValue("SELECT COUNT(`user_id`) FROM `cache_rating` WHERE `user_id`='" .  sql_escape($usr['userid']) . "'", 0);
 
-					if ($is_top == 0)
+					if ($is_top || ($user_tops < floor($user_founds * rating_percentage/100)))
 					{
-						if (($user_founds * rating_percentage/100) < 1)
-						{
-							$top_cache = null;
-							$anzahl = (1 - ($user_founds * rating_percentage/100)) / (rating_percentage/100);
-							if ($anzahl > 1)
-							{
-								$rating_msg = mb_ereg_replace('{anzahl}', $anzahl, $rating_too_few_founds);
-							}
-							else
-							{
-								$rating_msg = mb_ereg_replace('{anzahl}', $anzahl, $rating_too_few_founds);
-							}
-						}
-						elseif ($user_tops < floor($user_founds * rating_percentage/100))
-						{
-							$rating_msg = mb_ereg_replace('{chk_sel}', '', $rating_allowed.'<br />'.$rating_stat);
-							$rating_msg = mb_ereg_replace('{max}', floor($user_founds * rating_percentage/100), $rating_msg);
-							$rating_msg = mb_ereg_replace('{curr}', $user_tops, $rating_msg);
-						}
-						else
-						{
-							$top_cache = null;
-							$anzahl = ($user_tops + 1 - ($user_founds * rating_percentage/100)) / (rating_percentage/100);
-							if ($anzahl > 1)
-							{
-								$rating_msg = mb_ereg_replace('{anzahl}', $anzahl, $rating_too_few_founds);
-							}
-							else
-							{
-								$rating_msg = mb_ereg_replace('{anzahl}', $anzahl, $rating_too_few_founds);
-							}
-							$rating_msg .= '<br />'.$rating_maxreached;
-						}
+						$rating_msg = mb_ereg_replace('{chk_sel}', ($is_top ? 'checked' : ''), $rating_allowed.'<br />'.$rating_stat);
+						$rating_msg = mb_ereg_replace('{max}', floor($user_founds * rating_percentage/100), $rating_msg);
+						$rating_msg = mb_ereg_replace('{curr}', $user_tops, $rating_msg);
 					}
 					else
 					{
-						$rating_msg = mb_ereg_replace('{chk_sel}', ' checked', $rating_allowed.'<br />'.$rating_stat);
-						$rating_msg = mb_ereg_replace('{max}', floor($user_founds * rating_percentage/100), $rating_msg);
-						$rating_msg = mb_ereg_replace('{curr}', $user_tops, $rating_msg);
+						$anzahl = ($user_tops + 1 - ($user_founds * rating_percentage/100)) / (rating_percentage/100);
+						if ($anzahl > 1)
+							$rating_msg = mb_ereg_replace('{anzahl}', $anzahl, $rating_too_few_founds);
+						else
+							$rating_msg = mb_ereg_replace('{anzahl}', $anzahl, $rating_too_few_founds);
+
+						if ($user_tops)
+							$rating_msg .= '<br />'.$rating_maywithdraw;
 					}
 
 					tpl_set_var('rating_message', mb_ereg_replace('{rating_msg}', $rating_msg, $rating_tpl));
@@ -242,10 +218,7 @@
 
 					// not a found log? then ignore the rating
 					if ($log_type != 1 && $log_type != 7)
-					{
-						$top_cache = null;
-					}
-
+						$top_option = 0;
 
 					$pw_not_ok = false;
 					if (($use_log_pw) && $log_type == 1)
@@ -291,10 +264,11 @@
 						}
 
 						// update top-list
-						if ($top_cache == 1)
-							sql("INSERT IGNORE INTO `cache_rating` (`user_id`, `cache_id`) VALUES('&1', '&2')", $usr['userid'], $log_record['cache_id']);
-						else if ($top_cache === 0)   // 0 but not null
-							sql("DELETE FROM `cache_rating` WHERE `user_id`='&1' AND `cache_id`='&2'", $usr['userid'], $log_record['cache_id']);
+						if ($top_option)
+							if ($top_cache)
+								sql("INSERT IGNORE INTO `cache_rating` (`user_id`, `cache_id`) VALUES('&1', '&2')", $usr['userid'], $log_record['cache_id']);
+							else
+								sql("DELETE FROM `cache_rating` WHERE `user_id`='&1' AND `cache_id`='&2'", $usr['userid'], $log_record['cache_id']);
 
 						// do not use slave server for the next time ...
 						db_slave_exclude();

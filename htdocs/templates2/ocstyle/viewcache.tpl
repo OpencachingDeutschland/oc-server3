@@ -323,25 +323,23 @@
 		{t}Additional waypoints can make searching easier, for example by pointing to a suitable parkering or start of a path. The waypoints are downloaded in the GPX-file.{/t}
 	</div>
 {/if}
-
+}
 <!-- Hints -->
 {if $cache.hint!=''}
 	<div class="content2-container bg-blue02">
   	<p class="content-title-noshade-size2">
   		<img src="resource2/{$opt.template.style}/images/description/22x22-encrypted.png" style="align: left; margin-right: 10px;" width="22" height="22" alt="{t}Additional hint{/t}" /> {t}Additional hint{/t}&nbsp;&nbsp;
-  		<span id="decrypt-info">
+  		<span id="decrypt-info">{if $crypt}
 				<img src="resource2/{$opt.template.style}/images/viewcache/decrypt.png" class="icon32" width="22" height="22" alt="" />
-				{literal}
-					<span style="font-weight: 400;"><a href="viewcache.php?wp={$cache.wpoc|urlencode}&nocrypt=1&desclang={$cache.desclanguage|urlencode}#decrypt-info" onclick="var ch = document.getElementById('decrypt-hints').childNodes;for(var i=0;i < ch.length;++i) {var e = ch[i]; decrypt(e);} document.getElementById('decrypt-info').style.display = 'none';
-					bNoCrypt = 1;
-					return false;">Decrypt</a></span>
-				{/literal}
+				<span style="font-weight: 400;"><a href="viewcache.php?wp={$cache.wpoc}&nocrypt=1&desclang={$cache.desclanguage|urlencode}#decrypt-info" {literal}onclick="var ch = document.getElementById('decrypt-hints').childNodes;for(var i=0;i < ch.length;++i) {var e = ch[i]; decrypt(e);} document.getElementById('decrypt-info').style.display = 'none';
+				bNoCrypt = 1;
+				return false;"{/literal}>{t}Decrypt{/t}</a>{/if}</span>
 			</span>
 		</p>
 	</div>
 
 	<div class="content2-container">
-		<p id="decrypt-hints">{$cache.hint|rot13html}</p>
+		<p id="decrypt-hints">{if $crypt}{$cache.hint|rot13html}{else}{$cache.hint}{/if}</p>
 		<div style="width: 200px; float: right;">
 			<font style="font-family: 'Courier New',FreeMono,Monospace;" face="Courier" size="2">A|B|C|D|E|F|G|H|I|J|K|L|M</font>
 			<font style="font-family: 'Courier New',FreeMono,Monospace;" face="Courier" size="2">N|O|P|Q|R|S|T|U|V|W|X|Y|Z</font>

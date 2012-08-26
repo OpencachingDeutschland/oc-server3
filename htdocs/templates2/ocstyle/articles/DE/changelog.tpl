@@ -32,6 +32,7 @@
 		 <li class="changelogitem">spanische und italienische Übersetzung vervollständigt</li>
 		 <li class="changelogitem">inaktive Caches auch auf der <a href="./newcachesrest.php">Alle-außer-Deutschland-Seite</a> ausgeblendet</li>
 		 <li class="changelogitem">einheitliche Schreibweise für Attributnamen</li>
+		 <li class="changelogitem">Cachelisting: &bdquo;Decrypt&ldquo; &rarr; &bdquo;Entschlüsseln&ldquo;</li>
    </ul>
 	 <p>Korrigiert (Bugfixes):</p>
 	 <ul class="changelog">
@@ -44,6 +45,7 @@
 	   <li class="changelogitem"><a href="doc/xml/">Das XML-Interface</a> schneidet im Standardzeichensatz keine Daten mehr bei unbekannten Zeichen ab.</li>
 	   <li class="changelogitem">Fehlermeldung bei ungültigem Logdatum korrigiert</li>
 	   <li class="changelogitem">Schreibweisenabhängigkeit von Logpasswörtern korrigiert (Groß-/Kleinschreibung ist nun immer egal)</li>
+	   <li class="changelogitem">Hinweis-Entschlüsselung bei abgeschaltetem JavaScript</li>
    </ul>
 	<br />
 

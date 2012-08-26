@@ -43,6 +43,7 @@
 	   <li class="changelogitem"><a href="doc/xml/">XML-Interface</a> will not truncate default charset data at unknown characters.</li>
 	   <li class="changelogitem">fixed error message for invalid log date</li>
 	   <li class="changelogitem">fixed case insensitivity of log passwords</li>
+	   <li class="changelogitem">decrypting hints when JavaScript is disabled</li>
    </ul>
 	<br />
 

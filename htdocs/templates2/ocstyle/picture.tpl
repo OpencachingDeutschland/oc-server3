@@ -82,11 +82,11 @@
 			{/if}
 		{/if}
 
-		<tr>
-			<td align="right"><input class="checkbox" type="checkbox" name="spoiler" value="1" {if $spoilerchecked==true}checked="checked"{/if} /></td>
-			<td>{t}This picture is a spoiler - dont show a thumbnail.{/t}</td>
-		</tr>
 		{if $objecttype==OBJECT_CACHE}
+			<tr>
+				<td align="right"><input class="checkbox" type="checkbox" name="spoiler" value="1" {if $spoilerchecked==true}checked="checked"{/if} /></td>
+				<td>{t}This picture is a spoiler - dont show a thumbnail.{/t}</td>
+			</tr>
 			<tr>
 				<td align="right"><input class="checkbox" type="checkbox" name="notdisplay" value="1" {if $displaychecked==false}checked="checked"{/if}></td>
 				<td>{t}Do not display this picture (only used in HTML description){/t}</td>

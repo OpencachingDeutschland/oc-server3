@@ -166,80 +166,35 @@
 					}
 
 					//validate date
-					$date_not_ok = true;
+					$date_ok = false;
 					if (is_numeric($log_date_day) && is_numeric($log_date_month) && is_numeric($log_date_year))
 					{
-						if (checkdate($log_date_month, $log_date_day, $log_date_year) == true)
-						{
-							$date_not_ok = false;
-						}
-						if($date_not_ok == false)
-						{
-							if(isset($_POST['submitform']))
-							{
-								if(mktime(0, 0, 0, $log_date_month, $log_date_day, $log_date_year)>=mktime())
-								{
-									$date_not_ok = true;
-								}
-								else
-								{
-									$date_not_ok = false;
-								}
-							}
-						}
+						if (checkdate($log_date_month, $log_date_day, $log_date_year) &&
+								$log_date_year >= 2000)
+								  $date_ok = true;
+						if ($date_ok)
+							if (isset($_POST['submitform']))
+								if (mktime(0, 0, 0, $log_date_month, $log_date_day, $log_date_year) >= mktime())
+									$date_ok = false;
 					}
 
-					if ($cache_type == 6)
-					{
-						switch($log_type)
-						{
-							case 1:
-							case 2:
-								$logtype_not_ok = true;
-								break;
-							default:
-								$logtype_not_ok = false;
-								break;
-						}
-					}
-					else
-					{
-						switch($log_type)
-						{
-							case 7:
-							case 8:
-								$logtype_not_ok = true;
-								break;
-							default:
-								$logtype_not_ok = false;
-								break;
-						}
-					}
+					$logtype_ok = sqlValue("SELECT COUNT(*) FROM cache_logtype WHERE cache_type_id='" . sql_escape($cache_type) . "' AND log_type_id='" . sql_escape($log_type) . "'", 0) > 0; 
 
 					// not a found log? then ignore the rating
 					if ($log_type != 1 && $log_type != 7)
 						$top_option = 0;
 
-					$pw_not_ok = false;
-					if (($use_log_pw) && $log_type == 1)
-					{
-						if (isset($_POST['log_pw']))
+					$pw_ok = true;
+					if ($use_log_pw && $log_type == 1)
+						if (!isset($_POST['log_pw']) ||
+								mb_strtolower($log_pw) != mb_strtolower($_POST['log_pw']))
 						{
-							if (mb_strtolower($log_pw) != mb_strtolower($_POST['log_pw']))
-							{
-								$pw_not_ok = true;
-								$all_ok = false;
-							}
-						}
-						else
-						{
-							$pw_not_ok = true;
+							$pw_ok = false;
 							$all_ok = false;
 						}
-					}
 
 					//store?
-					if (isset($_POST['submitform']) && $date_not_ok == false && $logtype_not_ok == false && $pw_not_ok == false)
+					if (isset($_POST['submitform']) && $date_ok && $logtype_ok && $pw_ok)
 					{
 						//store changed data
 						sql("UPDATE `cache_logs` SET `type`='&1',
@@ -307,7 +262,7 @@
 					tpl_set_var('reset', $reset);
 					tpl_set_var('submit', $submit);
 					tpl_set_var('logid', $log_id);
-					tpl_set_var('date_message', ($date_not_ok == true) ? $date_message : '');
+					tpl_set_var('date_message', !$date_ok ? $date_message : '');
 
 					if ($descMode != 1)
 						tpl_set_var('logtext', htmlspecialchars($log_text, ENT_COMPAT, 'UTF-8'), true);
@@ -333,26 +288,18 @@
 					}
 
 					if ($use_log_pw == true && $log_pw != '')
-					{
-						if ($pw_not_ok == true && isset($_POST['submitform']))
-						{
+						if (!$pw_ok && isset($_POST['submitform']))
 							tpl_set_var('log_pw_field', $log_pw_field_pw_not_ok);
-						}
 						else
-						{
 							tpl_set_var('log_pw_field', $log_pw_field);
-						}
-					}
 					else
-					{
 						tpl_set_var('log_pw_field', '');
-					}
 
 					// build smilies
 					$smilies = '';
 					if ($descMode != 3)
 					{
-						for($i=0; $i<count($smileyshow); $i++)
+						for ($i=0; $i<count($smileyshow); $i++)
 						{
 							if($smileyshow[$i] == '1')
 							{

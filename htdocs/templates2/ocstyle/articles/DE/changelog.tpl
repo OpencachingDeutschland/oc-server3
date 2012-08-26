@@ -35,13 +35,15 @@
    </ul>
 	 <p>Korrigiert (Bugfixes):</p>
 	 <ul class="changelog">
-	   <li class="changelogitem">Anzeige von &bdquo;Nicht gefunden&ldquo; und &bdquo;Veröffentlicht am&ldquo; in der Druckansicht</li> 
+	   <li class="changelogitem">Anzeige von &bdquo;nicht gefunden&ldquo; und &bdquo;veröffentlicht am&ldquo; in der Druckansicht</li> 
 	   <li class="changelogitem">Anzeige der Event-Teilnehmerzahl in der Logzusammenfassungszeile</li>
 	   <li class="changelogitem">seltenen Fehler bei der Erzeugung von OC-Wegpunkten behoben</li>
 	   <li class="changelogitem">Empfehlungen gehen beim mehrfachen Loggen eines Caches &ndash; z.B. Fund + Hinweis &ndash; nicht mehr verloren.</li>
 	   <li class="changelogitem">Empfehlungen gehen beim Löschen eines von mehreren Logs des gleichen Benutzers oder beim Bearbeiten von einem der Logs nicht mehr verloren.</li>
 	   <li class="changelogitem">Mehrfachlogs eines Benutzers zählen bei der Bewertungsübersicht auf der Startseite nur noch einmal.</li>
 	   <li class="changelogitem"><a href="doc/xml/">Das XML-Interface</a> schneidet im Standardzeichensatz keine Daten mehr bei unbekannten Zeichen ab.</li>
+	   <li class="changelogitem">Fehlermeldung bei ungültigem Logdatum korrigiert</li>
+	   <li class="changelogitem">Schreibweisenabhängigkeit von Logpasswörtern korrigiert (Groß-/Kleinschreibung ist nun immer egal)</li>
    </ul>
 	<br />
 

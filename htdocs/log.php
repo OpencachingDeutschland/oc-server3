@@ -159,79 +159,34 @@
 				//validate data
 				if (is_numeric($log_date_month) && is_numeric($log_date_day) && is_numeric($log_date_year))
 				{
-					$date_not_ok = (checkdate($log_date_month, $log_date_day, $log_date_year) == false);
-					if($date_not_ok == false)
-					{
+					$date_ok = checkdate($log_date_month, $log_date_day, $log_date_year)
+											&& ($log_date_year >= 2000); 
+					if ($date_ok)
 						if (isset($_POST['submitform']))
-						{
-							if(mktime(0, 0, 0, $log_date_month, $log_date_day, $log_date_year)>=mktime())
-							{
-								$date_not_ok = true;
-							}
-							else
-							{
-								$date_not_ok = false;
-							}
-						}
-					}
+							if (mktime(0, 0, 0, $log_date_month, $log_date_day, $log_date_year) >= mktime())
+							  $date_ok = false;
 				}
 				else
-				{
-					$date_not_ok = true;
-				}
-
-				if ($cache_type == 6)
-				{
-					switch($log_type)
-					{
-						case 1:
-						case 2:
-							$logtype_not_ok = true;
-							break;
-						default:
-							$logtype_not_ok = false;
-							break;
-					}
-				}
-				else
-				{
-					switch($log_type)
-					{
-						case 7:
-						case 8:
-							$logtype_not_ok = true;
-							break;
-						default:
-							$logtype_not_ok = false;
-							break;
-					}
-				}
+					$date_ok = false;
+					
+				$logtype_ok = sqlValue("SELECT COUNT(*) FROM cache_logtype WHERE cache_type_id='" . sql_escape($cache_type) . "' AND log_type_id='" . sql_escape($log_type) . "'", 0) > 0; 
 
 				// not a found log? then ignore the rating
 				if ($log_type != 1 && $log_type != 7)
 					$top_option = 0;
 
-				$pw_not_ok = false;
+				$pw_ok = true;
 				if (isset($_POST['submitform']))
 				{
-					$all_ok = ($date_not_ok == false) && ($logtype_not_ok == false);
+					$all_ok = $date_ok && $logtype_ok;
 
-					if (($all_ok) && ($use_log_pw) && $log_type == 1)
-					{
-						if (isset($_POST['log_pw']))
+					if ($all_ok && $use_log_pw && $log_type == 1)
+						if (!isset($_POST['log_pw']) ||
+								mb_strtolower($log_pw) != mb_strtolower($_POST['log_pw']))
 						{
-							if (strtolower($log_pw) != strtolower($_POST['log_pw']))
-							{
-								$pw_not_ok = true;
-								$all_ok = false;
-							}
-						}
-						else
-						{
-							$pw_not_ok = true;
+							$pw_ok = false;
 							$all_ok = false;
 						}
-					}
 				}
 
 				if (isset($_POST['submitform']) && ($all_ok == true))
@@ -248,10 +203,10 @@
 
 					// update cache_status
 					$rs = sql("SELECT `log_types`.`cache_status` FROM `log_types` WHERE `id`='&1'", $log_type);
-					if($record = sql_fetch_array($rs))
+					if ($record = sql_fetch_array($rs))
 					{
 						$cache_status = $record['cache_status'];
-						if($cache_status != 0)
+						if ($cache_status != 0)
 						{
 							$rs = sql("UPDATE `caches` SET `status`='&1' WHERE `cache_id`='&2'", $cache_status, $cache_id);
 						}
@@ -336,12 +291,12 @@
 						tpl_set_var('logtext', $log_text);
 
 					$listed_on = array();
-					if($wp_gc > "")
+					if ($wp_gc > "")
 						$listed_on[] = '<a href="http://www.geocaching.com/seek/cache_details.aspx?wp='.$wp_gc.'"  target="_blank">geocaching.com</a> <a href="http://www.geocaching.com/seek/log.aspx?wp='.$wp_gc.'" target="_blank">(loggen)</a>';
-					if($wp_nc > "")
+					if ($wp_nc > "")
 						$listed_on[] = 'navicache.com';
 
-					if(sizeof($listed_on))
+					if (sizeof($listed_on))
 					{
 						tpl_set_var('listed_start', "");
 						tpl_set_var('listed_end', "");
@@ -349,37 +304,28 @@
 					}
 					else
 					{
-					tpl_set_var('listed_start', "<!--");
-					tpl_set_var('listed_end', "-->");
+						tpl_set_var('listed_start', "<!--");
+						tpl_set_var('listed_end', "-->");
 					}
+					
 					if ($use_log_pw == true)
-					{
-						if ($pw_not_ok == true)
-						{
+						if (!$pw_ok == true)
 							tpl_set_var('log_pw_field', $log_pw_field_pw_not_ok);
-						}
 						else
-						{
 							tpl_set_var('log_pw_field', $log_pw_field);
-						}
-					}
 					else
-					{
 						tpl_set_var('log_pw_field', '');
-					}
 
-					if ($date_not_ok == true)
-					{
+					if (!$date_ok)
 						tpl_set_var('date_message', $date_message);
-					}
 
 					// build smilies
 					$smilies = '';
 					if ($descMode != 3)
 					{
-						for($i=0; $i<count($smileyshow); $i++)
+						for ($i=0; $i<count($smileyshow); $i++)
 						{
-							if($smileyshow[$i] == '1')
+							if ($smileyshow[$i] == '1')
 							{
 								$tmp_smiley = $smiley_link;
 								$tmp_smiley = mb_ereg_replace('{smiley_image}', $smileyimage[$i], $tmp_smiley);

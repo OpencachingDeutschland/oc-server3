@@ -41,6 +41,8 @@
 	   <li class="changelogitem">Recommendations are no longer lost when deleting one of multiple logs of the same user, or when editing one of them.</li>
 	   <li class="changelogitem">Multiple logs by the same used only count once at the homepage top ratings list.</li>
 	   <li class="changelogitem"><a href="doc/xml/">XML-Interface</a> will not truncate default charset data at unknown characters.</li>
+	   <li class="changelogitem">fixed error message for invalid log date</li>
+	   <li class="changelogitem">fixed case insensitivity of log passwords</li>
    </ul>
 	<br />
 

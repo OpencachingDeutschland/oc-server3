@@ -13,7 +13,7 @@
 	<p>This page lists all changes since version 3.0.</p>
 	<br />
 
-	 <p><strong>Release 3.0.2</strong> &ndash; (scheduled for September)</p>
+	 <p><strong>Release 3.0.2</strong> &ndash; August 26, 2012</p>
    <p>New:</p>
 	 <ul class="changelog">
 	   <li class="changelogitem"><a href="./articles.php?page=cacheinfo#difficulty">Difficulty ratings</a> explained, including tooltips and links within the cache listings</li>
@@ -23,8 +23,6 @@
 	 <ul class="changelog">
      <li class="changelogitem">improved <a href="./index.php">Homepag</a> performance</li>
      <li class="changelogitem">rewritten <a href="./articles.php?page=cacheinfo">cache description</a> info</li>
-	   <li class="changelogitem">recommendations stars are display with Found and Attended logs only.</li>
-	   <li class="changelogitem">reversed log type order for event caches</li>
 	   <li class="changelogitem">updated <a href="./doc/xml/">XML Interface Documentation</a> (German) and <a href="https://github.com/OpencachingDeutschland/oc-server3/blob/master/doc/license.txt">Source code license</a></li>
 	   <li class="changelogitem">updated <a href="./articles.php?page=team">Team members list</a></li>
 	   <li class="changelogitem">announced new <a href="./articles.php?page=donations">bank account</a> for donations</li>
@@ -33,10 +31,13 @@
 	   <li class="changelogitem">Completed Spanish and Italian translations</li>
 	   <li class="changelogitem">hidden inaktive new caches on <a href="./newcachesrest.php">All-but-Germany</a> page</li>
 	   <li class="changelogitem">hidden log button for locked caches, instead of linking it to an emty page</li>
+	   <li class="changelogitem">recommendations stars are display with Found and Attended logs only.</li>
+	   <li class="changelogitem">reversed log type order for event caches</li>
    </ul>
 	 <p>Fixed:</p>
 	 <ul class="changelog">
 	   <li class="changelogitem">added missing event attendees count in log summary line</li>
+	   <li class="changelogitem">fixed overwriting saved queries</li>
 	   <li class="changelogitem">fixed OC waypoint creation error</li>
 	   <li class="changelogitem">Recommendations are no longer lost when logging a cache again, e.g. a note after a found log.</li>
 	   <li class="changelogitem">Recommendations are no longer lost when deleting one of multiple logs of the same user, or when editing one of them.</li>
@@ -48,7 +49,6 @@
 	   <li class="changelogitem">removed non-workink log entry deletion link for cache owners</li>
 	   <li class="changelogitem">fixed log edit permissions for locked caches</li>
 	   <li class="changelogitem">removed dummy spoiler option when uploading log pictures</li>
-	   <li class="changelogitem">fixed overwriting a saved query</li>
    </ul>
 	<br />
 

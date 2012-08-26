@@ -12,7 +12,7 @@
 	<p>Im Folgenden sind alle Veränderungen ab OC Version&nbsp;3.0 aufgelistet.</p>
 	<br />
 
-	 <p><strong>Version 3.0.2</strong> &ndash; (September)</p>
+	 <p><strong>Version 3.0.2</strong> &ndash; 26. August 2012</p>
    <p>Neu:</p>
 	 <ul class="changelog">
 	   <li class="changelogitem"><a href="./articles.php?page=cacheinfo#difficulty">Schwierigkeitsgrade</a> erklärt, inklusive Tooltip und Link in den Cachelistings</li>
@@ -21,24 +21,25 @@
 	 <p>Geändert / verbessert:</p>
 	 <ul class="changelog">
      <li class="changelogitem"><a href="./articles.php?page=cacheinfo">Cachebeschreibungs-Info</a> überarbeitet</li>
-	   <li class="changelogitem">Empfehlungssterne erscheinen nur noch bei Gefunden- und Teilgenommen-Logs.</li>
-	   <li class="changelogitem">Logtypreihenfolge bei Event-Caches umgedreht</li>
-     <li class="changelogitem"><a href="./index.php">Startseite</a> beschleunigt</li>
-	   <li class="changelogitem"><a href="./doc/xml/">XML-Interface-Doku</a> und <a href="https://github.com/OpencachingDeutschland/oc-server3/blob/master/doc/license.txt">Quellcodelizenz</a> aktualisiert</li>
+     <li class="changelogitem"><a href="./doc/xml/">XML-Interface-Doku</a> und <a href="https://github.com/OpencachingDeutschland/oc-server3/blob/master/doc/license.txt">Quellcodelizenz</a> aktualisiert</li>
 	   <li class="changelogitem"><a href="./articles.php?page=team">Teamliste</a> aktualisiert</li>
 	   <li class="changelogitem">neue <a href="./articles.php?page=donations">Bankverbindung</a> bekanntgegeben</li>
 	   <li class="changelogitem">übersichtlichere Darstellung von Cachemeldungen für das OC-Supportteam</li>
 	   <li class="changelogitem">Platz für neue Caches: Beschränkung auf 65535 Listings (OCFFFF, inkl. archivierter Caches) aufgehoben</li>
 		 <li class="changelogitem">spanische und italienische Übersetzung vervollständigt</li>
 		 <li class="changelogitem">inaktive Caches auch auf der <a href="./newcachesrest.php">Alle-außer-Deutschland-Seite</a> ausgeblendet</li>
-		 <li class="changelogitem">einheitliche Schreibweise für Attributnamen</li>
+		 <li class="changelogitem"><a href="./index.php">Startseite</a> beschleunigt</li>
+	   <li class="changelogitem">einheitliche Schreibweise für Attributnamen</li>
 		 <li class="changelogitem">Cachelisting: &bdquo;Decrypt&ldquo; &rarr; &bdquo;Entschlüsseln&ldquo;</li>
 	   <li class="changelogitem">bei gesperrten Caches den Logbutton ausgeblendet, statt auf eine leere Seite zu verlinken</li>
+	   <li class="changelogitem">Empfehlungssterne erscheinen nur noch bei Gefunden- und Teilgenommen-Logs.</li>
+	   <li class="changelogitem">Logtypreihenfolge bei Event-Caches umgedreht</li>
    </ul>
 	 <p>Korrigiert (Bugfixes):</p>
 	 <ul class="changelog">
 	   <li class="changelogitem">Anzeige von &bdquo;nicht gefunden&ldquo; und &bdquo;veröffentlicht am&ldquo; in der Druckansicht</li> 
 	   <li class="changelogitem">Anzeige der Event-Teilnehmerzahl in der Logzusammenfassungszeile</li>
+	   <li class="changelogitem">Überschreiben von gespeicherten Suchen funktioniert jetzt</li>
 	   <li class="changelogitem">seltenen Fehler bei der Erzeugung von OC-Wegpunkten behoben</li>
 	   <li class="changelogitem">Empfehlungen gehen beim mehrfachen Loggen eines Caches &ndash; z.B. Fund + Hinweis &ndash; nicht mehr verloren.</li>
 	   <li class="changelogitem">Empfehlungen gehen beim Löschen eines von mehreren Logs des gleichen Benutzers oder beim Bearbeiten von einem der Logs nicht mehr verloren.</li>
@@ -50,7 +51,6 @@
 	   <li class="changelogitem">nicht funktionierenden Log-Bild-Löschlink für Cachebesitzer entfernt</li>
 	   <li class="changelogitem">Logbearbeitungsberechtigungen für gesperrte Caches korrigiert</li>
 	   <li class="changelogitem">wirkungslose Spoileroption beim Hochladen von Logbildern entfernt</li>
-	   <li class="changelogitem">Überschreiben einer gespeicherten Suche funktioniert jetzt</li>
    </ul>
 	<br />
 

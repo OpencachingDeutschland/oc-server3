@@ -63,7 +63,7 @@
 			{/if}
 
 			<a href="{$pictureItem.url}">{$pictureItem.title|escape}</a>
-			{if $logItem.userid==$login.userid || $cache.userid==$login.userid}
+			{if $logItem.userid==$login.userid}
 				[<a href="picture.php?action=delete&uuid={$pictureItem.uuid|escape}">{t}Delete{/t}</a>]
 			{/if}
 			<br />

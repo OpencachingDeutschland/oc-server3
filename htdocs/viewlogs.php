@@ -39,7 +39,17 @@
 	if ($cache_id != 0)
 	{ 
 		//get cache record
-		$rs = sql("SELECT `caches`.`cache_id`, `caches`.`wp_oc` AS `wpoc`, `caches`.`user_id` AS `userid`, `caches`.`name`, IFNULL(`stat_caches`.`found`, 0) AS `found`, IFNULL(`stat_caches`.`notfound`, 0) AS `notfound`, IFNULL(`stat_caches`.`note`, 0) AS `note`, `cache_status`.`allow_user_view` FROM `caches` INNER JOIN `cache_status` ON `caches`.`status`=`cache_status`.`id` LEFT JOIN `stat_caches` ON `caches`.`cache_id`=`stat_caches`.`cache_id` WHERE `caches`.`cache_id`='&1'", $cache_id);
+		$rs = sql("SELECT `caches`.`cache_id`, `caches`.`wp_oc` AS `wpoc`, 
+											`caches`.`user_id` AS `userid`, `caches`.`name`, 
+											`caches`.`status` AS `status`,
+											IFNULL(`stat_caches`.`found`, 0) AS `found`, 
+											IFNULL(`stat_caches`.`notfound`, 0) AS `notfound`, 
+											IFNULL(`stat_caches`.`note`, 0) AS `note`, 
+											`cache_status`.`allow_user_view` 
+							 FROM `caches` 
+							 INNER JOIN `cache_status` ON `caches`.`status`=`cache_status`.`id` 
+							 LEFT JOIN `stat_caches` ON `caches`.`cache_id`=`stat_caches`.`cache_id` 
+							 WHERE `caches`.`cache_id`='&1'", $cache_id);
 		$rCache = sql_fetch_array($rs);
 		sql_free_result($rs);
 

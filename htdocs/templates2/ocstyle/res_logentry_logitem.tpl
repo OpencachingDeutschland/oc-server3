@@ -38,7 +38,7 @@
 				[<a href="editlog.php?logid={$logItem.id|urlencode}">{t}Edit{/t}</a>]
 			{/if}
 
-			{if $logItem.userid==$login.userid}
+			{if $cache.userid==$login.userid || $logItem.userid==$login.userid}
 				<a href="removelog.php?logid={$logItem.id|urlencode}"><img src="resource2/{$opt.template.style}/images/log/16x16-trash.png" border="0" align="middle" border="0" width="16" height="16" alt="" /></a>
 				[<a href="removelog.php?logid={$logItem.id|urlencode}">{t}Delete{/t}</a>]
 			{/if}

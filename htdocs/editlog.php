@@ -50,11 +50,27 @@
 		else
 		{
 			//does log with this logid exist?
-			$log_rs = sql("SELECT `cache_logs`.`cache_id` AS `cache_id`, `cache_logs`.`node` AS `node`, `cache_logs`.`text` AS `text`, `cache_logs`.`date` AS `date`, `cache_logs`.`user_id` AS `user_id`, `cache_logs`.`type` AS `logtype`, `cache_logs`.`text_html` AS `text_html`, `cache_logs`.`text_htmledit` AS `text_htmledit`, `caches`.`name` AS `cachename`, `caches`.`type` AS `cachetype`, `caches`.`user_id` AS `cache_user_id`, `caches`.`logpw` as `logpw`, `caches`.`status` as `status` FROM `cache_logs` INNER JOIN `caches` ON (`caches`.`cache_id`=`cache_logs`.`cache_id`) WHERE `id`='&1'", $log_id);
+			$log_rs = sql("SELECT `cache_logs`.`cache_id` AS `cache_id`, 
+														`cache_logs`.`node` AS `node`, 
+														`cache_logs`.`text` AS `text`, 
+														`cache_logs`.`date` AS `date`, 
+														`cache_logs`.`user_id` AS `user_id`, 
+														`cache_logs`.`type` AS `logtype`, 
+														`cache_logs`.`text_html` AS `text_html`, 
+														`cache_logs`.`text_htmledit` AS `text_htmledit`, 
+														`caches`.`name` AS `cachename`, 
+														`caches`.`type` AS `cachetype`, 
+														`caches`.`user_id` AS `cache_user_id`, 
+														`caches`.`logpw` as `logpw`, 
+														`caches`.`status` as `status` 
+											FROM `cache_logs` 
+											INNER JOIN `caches` ON (`caches`.`cache_id`=`cache_logs`.`cache_id`) WHERE `id`='&1'", 
+											$log_id);
 			$log_record = sql_fetch_array($log_rs);
 			sql_free_result($log_rs);
-
-			if ($log_record !== false && $log_record['status'] != 6 && $log_record['status'] != 7)
+			if ($log_record !== false && 
+					($log_record['status'] != 6 || ($log_record['cache_user_id'] == $login->userid && $log_record['user_id'] == $login->userid)) &&   
+					$log_record['status'] != 7)
 			{
 				require($stylepath . '/editlog.inc.php');
 				require($stylepath.'/rating.inc.php');

@@ -45,6 +45,8 @@
 	   <li class="changelogitem">fixed error message for invalid log date</li>
 	   <li class="changelogitem">fixed case insensitivity of log passwords</li>
 	   <li class="changelogitem">decrypting hints when JavaScript is disabled</li>
+	   <li class="changelogitem">removed non-workink log entry deletion link for cache owners</li>
+	   <li class="changelogitem">fixed log edit permissions for locked caches</li>
    </ul>
 	<br />
 

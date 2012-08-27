@@ -120,7 +120,7 @@
 																	`cache_location`.`adm4`
 														 FROM `cache_rating` 
 											 INNER JOIN `caches` ON `caches`.`cache_id`=`cache_rating`.`cache_id`
-											 INNER JOIN `user` ON `user`.`user_id`=`cache_rating`.`user_id`
+											 INNER JOIN `user` ON `user`.`user_id`=`caches`.`user_id`
 												LEFT JOIN `cache_location` ON `cache_rating`.`cache_id`=`cache_location`.`cache_id`
 														WHERE `caches`.`country`='&1' AND 
 																	`cache_rating`.`rating_date`>DATE_SUB(NOW(), INTERVAL 30 DAY) AND 

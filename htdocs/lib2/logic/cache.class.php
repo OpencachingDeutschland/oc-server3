@@ -419,6 +419,7 @@ class cache
 	}
 	function addRecommendation($nUserId)
 	{
+		// rating_date will be set to NOW() by Insert-trigger
 		sql("INSERT IGNORE INTO `cache_rating` (`cache_id`, `user_id`) VALUES ('&1', '&2')", $this->nCacheId, $nUserId);
 	}
 	function removeRecommendation($nUserId)

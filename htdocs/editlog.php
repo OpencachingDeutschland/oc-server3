@@ -212,6 +212,8 @@
 					//store?
 					if (isset($_POST['submitform']) && $date_ok && $logtype_ok && $pw_ok)
 					{
+						$log_date = date('Y-m-d', mktime(0, 0, 0, $log_date_month, $log_date_day, $log_date_year));
+
 						//store changed data
 						sql("UPDATE `cache_logs` SET `type`='&1',
 						                             `date`='&2',
@@ -220,7 +222,7 @@
 						                             `text_htmledit`='&5'
 						                       WHERE `id`='&6'",
 						                             $log_type,
-						                             date('Y-m-d', mktime(0, 0, 0, $log_date_month, $log_date_day, $log_date_year)),
+						                             $log_date,
 						                             (($descMode != 1) ? $log_text : nl2br($log_text)),
 						                             (($descMode != 1) ? 1 : 0),
 						                             (($descMode == 3) ? 1 : 0),
@@ -237,7 +239,10 @@
 						// update top-list
 						if ($top_option)
 							if ($top_cache)
-								sql("INSERT IGNORE INTO `cache_rating` (`user_id`, `cache_id`) VALUES('&1', '&2')", $usr['userid'], $log_record['cache_id']);
+								sql("INSERT INTO `cache_rating` (`user_id`, `cache_id`, `rating_date`)
+					 					 VALUES('&1', '&2','&3')
+										 ON DUPLICATE KEY UPDATE `rating_date`='&3'",
+										 $usr['userid'], $log_record['cache_id'], $log_date);
 							else
 								sql("DELETE FROM `cache_rating` WHERE `user_id`='&1' AND `cache_id`='&2'", $usr['userid'], $log_record['cache_id']);
 

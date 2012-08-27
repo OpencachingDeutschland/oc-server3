@@ -668,11 +668,14 @@
 						INSERT IGNORE INTO `removed_objects` (`localId`, `uuid`, `type`, `node`) VALUES (OLD.`id`, OLD.`uuid`, 1, OLD.`node`);
 					END;");
 
+	// IF condition is defined to work with both, rating_date field may be NULL or not
 	sql_dropTrigger('cacheRatingBeforeInsert');
 	sql("CREATE TRIGGER `cacheRatingBeforeInsert` BEFORE INSERT ON `cache_rating`
 				FOR EACH ROW
 					BEGIN
-						SET NEW.`rating_date` = NOW();
+						IF ISNULL(NEW.`rating_date`) OR NEW.`rating_date` < '2000' THEN
+							SET NEW.`rating_date` = NOW(); 
+						END IF;
 					END;");
 
 	sql_dropTrigger('cacheRatingAfterInsert');

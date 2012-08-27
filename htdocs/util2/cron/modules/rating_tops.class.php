@@ -4,7 +4,7 @@
  *
  *  Unicode Reminder メモ
  *
- *  Publish new geocaches that are marked for timed publish
+ *  Update top rating statistics
  ***************************************************************************/
 
 checkJob(new rating_tops());

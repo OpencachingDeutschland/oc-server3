@@ -219,7 +219,7 @@
 					// update top-list
 					if ($top_option)
 						if ($top_cache)
-							sql("INSERT IGNORE INTO `cache_rating` (`user_id`, `cache_id`) VALUES('&1', '&2')", $usr['userid'], $cache_id);
+							sql("INSERT IGNORE INTO `cache_rating` (`user_id`, `cache_id`, `rating_date`) VALUES('&1', '&2', '&3')", $usr['userid'], $cache_id, $log_date);
 						else
 							sql("DELETE FROM `cache_rating` WHERE `user_id`='&1' AND `cache_id`='&2'", $usr['userid'], $cache_id);
 

@@ -16,6 +16,7 @@ date         commit ID    change
                             - add and initialize cache_logs(_archived).okapi_syncbase
                           See installation instructions at http://code.google.com/p/opencaching-api
 
-2012-08-24   c32a4b06f    added cache_rating.rating_date and index 'date'; must be initialized by:
+2012-08-24   c32a4b06     added cache_rating.rating_date and index 'date'; must be initialized by:
                             UPDATE cache_rating SET rating_date = (SELECT MIN(`date`) FROM cache_logs WHERE cache_logs.cache_id=cache_rating.cache_id AND cache_logs.user_id=cache_rating.user_id AND cache_logs.type IN (1,7))
                           added trigger cacheRatingBeforeInsert
+2012-08-27   9bc361c3     changed trigger cacheRatingBeforeInsert

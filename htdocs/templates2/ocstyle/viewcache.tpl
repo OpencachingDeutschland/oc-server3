@@ -325,7 +325,7 @@
 		{t}Additional waypoints can make searching easier, for example by pointing to a suitable parkering or start of a path. The waypoints are downloaded in the GPX-file.{/t}
 	</div>
 {/if}
-}
+
 <!-- Hints -->
 {if $cache.hint!=''}
 	<div class="content2-container bg-blue02">

@@ -34,7 +34,6 @@
     <tr><td><img src="http://www.opencaching.de/images/team/dummy.jpg" /></td><td><a href="http://opencaching.de/viewprofile.php?userid=122006">Carnosaurus</a></td><td>server operation</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/dl6hbo.jpg" /></td><td><a href="http://opencaching.de/viewprofile.php?userid=148310">dl6hbo</a></td><td>server operation, documentation</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/flopp.png" /></td><td><a href="http://opencaching.de/viewprofile.php?userid=126329">Flopp</a></td><td>software development, user support, data maintenance</td></tr>
-    <tr><td><img src="http://www.opencaching.de/images/team/following.png" /></td><td><a href="http://opencaching.de/viewprofile.php?userid=150360">following</a></td><td>software development, data maintenance, message board moderation</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/dummy.jpg" /></td><td><a href="http://opencaching.de/viewprofile.php?userid=205779">Hanekju</a></td><td>data maintenance</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/joerg.jpg" /></td><td><a href="http://opencaching.de/viewprofile.php?userid=102153">Jörg</a></td><td>advisor for nature protection and authority relations</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/dummy.jpg" /></td><td><a href="http://opencaching.de/viewprofile.php?userid=137500">MATiKaL</a></td><td>server operation</td></tr>

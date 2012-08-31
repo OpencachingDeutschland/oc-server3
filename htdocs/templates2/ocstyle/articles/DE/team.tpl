@@ -34,6 +34,7 @@
     <tr><td><img src="http://www.opencaching.de/images/team/dummy.jpg" /></td><td><a href="http://opencaching.de/viewprofile.php?userid=122006">Carnosaurus</a></td><td>Serverbetrieb</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/dl6hbo.jpg" /></td><td><a href="http://opencaching.de/viewprofile.php?userid=148310">dl6hbo</a></td><td>Serverbetrieb, Dokumentation</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/flopp.png" /></td><td><a href="http://opencaching.de/viewprofile.php?userid=126329">Flopp</a></td><td>Softwareentwicklung, Anwendersupport, Datenpflege</td></tr>
+    <tr><td><img src="http://www.opencaching.de/images/team/following.png" /></td><td><a href="http://opencaching.de/viewprofile.php?userid=150360">following</a></td><td>Datenpflege</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/dummy.jpg" /></td><td><a href="http://opencaching.de/viewprofile.php?userid=205779">Hanekju</a></td><td>Datenpflege</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/joerg.jpg" /></td><td><a href="http://opencaching.de/viewprofile.php?userid=102153">Jörg</a></td><td>Berater für Naturschutz und Kontakte zu Behörden und Verbänden</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/dummy.jpg" /></td><td><a href="http://opencaching.de/viewprofile.php?userid=137500">MATiKaL</a></td><td>Serverbetrieb</td></tr>
@@ -45,7 +46,6 @@
     <tr><td><img src="http://www.opencaching.de/images/team/poker4ace.jpg" /></td><td><a href="http://opencaching.de/viewprofile.php?userid=239198">poker4ace</a></td><td>Systemadministration</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/sampiero.jpg" /></td><td><a href="http://opencaching.de/viewprofile.php?userid=156218">Sampiero</a></td><td>Softwareentwicklung</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/schrottie.jpg" /></td><td><a href="http://opencaching.de/viewprofile.php?userid=140946">Schrottie</a></td><td>Anwendersupport, Datenpflege, Teamblog-Admin, Forenadmin</td></tr>
-    <tr><td><img src="http://www.opencaching.de/images/team/steingesicht.jpg" /></td><td><a href="http://opencaching.de/viewprofile.php?userid=165774">Steingesicht</a></td><td>Datenpflege</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/dummy.jpg" /></td><td><a href="http://opencaching.de/viewprofile.php?userid=101546">Tiger</a></td><td>Hosting, Serverbetrieb</td></tr>
     <tr><td></td><td></td><td></td></tr>
   </table>

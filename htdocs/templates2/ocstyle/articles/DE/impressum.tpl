@@ -26,38 +26,35 @@
 			sowie Nutzungsbedingungen zu beachten.</p>
 <br />
 <p><b>Betreiber des Internetangebotes</b></p>
-
-			<p>Das Internetangebot auf Opencaching.de wurde in gemeinschaftlicher 
-			Arbeit von mehreren Privatpersonen erstellt und wird seitdem vom Verein <b>Opencaching Deutschland</b> betrieben. Mit Ausnahme der unten 
-			aufgef&uuml;hrten Bereiche ist nach &sect; 10 Absatz 3 MDStV f&uuml;r den Inhalt des 
-			Internetaufritts verantwortlich:</p>
-
-<p>Herausgeber, Betreiber und rechtlich verantwortlich f&uuml;r die Inhalte unter Opencaching.de ist:<br />
 <br />
-Herausgeber (Postanschrift)<br />
-Verein Opencaching Deutschland<br />
+<p>Angaben gem. &sect;5 Telemediengesetz<br />
+Verantwortlich im Sinne des TDG/MDStV<br />
+<br />
+Opencaching Deutschland e.V.<br />
+Eingetragen im Vereinsregister des Amtsgerichtes Bad Homburg v. d. H., Registernummer 2054</p>
+<br />
+<p><b>Postanschrift und Kontaktdaten</b></p>
+<br />
+<p>Opencaching Deutschland e.V.<br />
 c/o Michael Vaahsen<br />
 Hattsteiner Allee 26<br />
 61250 Usingen<br />
 <br />
-Telefon: 0172/3011455<br />
+Telefon: 0172 / 3011455<br />
 E-Mail: verein@opencaching.de<br />
 <br />
-<b>ACHTUNG</b>: Fragen und Hinweise zu Schatzverstecken oder den Nutzungsbedingungen von opencaching.de 
-k&ouml;nnen wir leider nicht beantworten. Sie erhalten <u>keine</u> Antwort!<br />
-Bitte richten Sie Ihre Frage ausschlie&szlig;lich an die E-Mailadresse 
-<a href="mailto:contact@opencaching.de">contact@opencaching.de</a><br />
+ACHTUNG: Fragen und Hinweise zu Schatzverstecken oder den Nutzungsbedingungen von opencaching.de richten Sie bitte an contact@opencaching.de</p>
 <br />
-Verantwortlich im Sinne des TDG/MStV<br />
+<p><b>Vertretungsberechtigt</b></p>
 <br />
-Verein Opencaching Deutschland
+<p>Laut &sect;10 der Vereinssatzung sind je zwei Mitglieder des gesch&auml;ftsf&uuml;hrende Vorstandes gemeinsam vertretungsberechtigt.<br />
 <br />
-Zur Zeit sind im BGB-Vorstand (Stand 30.07.2012):<br />
+Der gesch&auml;ftsf&uuml;hrende Vorstand besteht aus (Stand 31.08.2012):<br />
 <br />
 * Michael Vaahsen, Vorsitzender<br />
 * Gerald Halbig, stellv. Vorsitzender<br />
-* Daniel Christ, Kassenwart<br />
-<br /></p>
+* Maik Bischoff, Kassenwart</p>
+<br />
 <p>
 
 			

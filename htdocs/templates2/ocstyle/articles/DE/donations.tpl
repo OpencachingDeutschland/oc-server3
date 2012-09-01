@@ -15,9 +15,9 @@
 
 			<h1>Per &Uuml;berweisung spenden:</h1>
 			<p>Bank: Deutsche Skatbank<br />
-			Kontoinhaber: Opencaching Deutschland<br />
-			Kontonummer: 4752678<br />
-			BLZ: 83065408<br /><br />
+			Kontoinhaber: Opencaching Deutschland e.V.<br />
+			Kontonummer: 475 26 78<br />
+			BLZ: 830 654 08<br /><br />
 			IBAN: DE42 8306 5408 0004 7526 78<br />
 			BIC (SWIFT): GENODEF1SLR</p>
 			

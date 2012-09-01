@@ -12,9 +12,9 @@
  
 			<h1>Donate by bank transfer:</h1>
 			<p>Bank: Deutsche Skatbank<br />
-			Account owner: Opencaching Deutschland<br />
-			Account number: 4752678<br />
-			BLZ: 83065408<br /><br />
+			Account owner: Opencaching Deutschland e.V.<br />
+			Account number: 475 26 78<br />
+			BLZ: 830 654 08<br /><br />
 			IBAN: DE42 8306 5408 0004 7526 78<br />
 			BIC (SWIFT): GENODEF1SLR</p>
 

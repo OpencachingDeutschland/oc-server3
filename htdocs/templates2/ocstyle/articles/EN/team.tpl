@@ -20,6 +20,7 @@
     <tr><td></td><td></td><td></td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/4_vs.jpg" /></td><td><a href="http://opencaching.de/viewprofile.php?userid=162754">4_Vs</a></td><td>chairman</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/dl8ndm.jpg" /></td><td><a href="http://opencaching.de/viewprofile.php?userid=102263">dl8ndm</a></td><td>vice chairman</td></tr>
+    <tr><td><img src="http://www.opencaching.de/images/team/schrottie.jpg" /></td><td><a href="http://opencaching.de/viewprofile.php?userid=140946">Schrottie</a></td><td>treasurer, user support, data maintenance</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/danlex.png" /></td><td><a href="http://opencaching.de/viewprofile.php?userid=222261">Danlex</a></td><td>press spokesman; user support, data maintenance</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/dummy.jpg" /></td><td><a href="http://opencaching.de/viewprofile.php?userid=137473">bohrsty</a></td><td>head of system administration</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/metrax.png" /></td><td><a href="http://opencaching.de/viewprofile.php?userid=212145">Metrax</a></td><td>head of software development</td></tr>
@@ -45,7 +46,6 @@
     <tr><td><img src="http://www.opencaching.de/images/team/oliver44.jpg" /></td><td><a href="http://opencaching.de/viewprofile.php?userid=227656">Oliver44</a></td><td>server operation</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/poker4ace.jpg" /></td><td><a href="http://opencaching.de/viewprofile.php?userid=239198">poker4ace</a></td><td>system administration</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/sampiero.jpg" /></td><td><a href="http://opencaching.de/viewprofile.php?userid=156218">Sampiero</a></td><td>software development</td></tr>
-    <tr><td><img src="http://www.opencaching.de/images/team/schrottie.jpg" /></td><td><a href="http://opencaching.de/viewprofile.php?userid=140946">Schrottie</a></td><td>template development and design, user support, data maintenance, teamblog admin, message board admin</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/dummy.jpg" /></td><td><a href="http://opencaching.de/viewprofile.php?userid=101546">Tiger</a></td><td>hosting, server operation</td></tr>
     <tr><td></td><td></td><td></td></tr>
   </table>

@@ -4,14 +4,14 @@
 *  Unicode Reminder メモ
 ***************************************************************************}
 	<div class="content2-pagetitle">
-		<img src="resource2/{$opt.template.style}/images/misc/32x32-verein.png" style="align: left; margin-right: 10px;" width="32" height="32" alt="" />Der Verein Opencaching Deutschland
+		<img src="resource2/{$opt.template.style}/images/misc/32x32-verein.png" style="align: left; margin-right: 10px;" width="32" height="32" alt="" />Der Verein Opencaching Deutschland e.V.
 	</div>
 	<div class="content-txtbox-noshade" style="padding-right: 25px;">
 
 <p>Der Verein Opencaching Deutschland wurde am 9. Juni 2012 gegründet mit dem Zweck, den Betrieb von Opencaching.de (OC) zu übernehmen und die zukünftige Entwicklung von OC sicherzustellen. Ferner wird der Verein auch zukünftige Projekte zum Thema Opencaching begleiten.<br /><br />
 
 <em>Wo ist der Sitz des Vereins?</em><br />
-Der Sitz des Vereins ist Bad Homburg vor der Höhe. Wir haben diesen Sitz gewählt, da er zentral gelegen ist. Letztenendes ist der Sitz von Opencaching Deutschland aber zweitrangig, denn es handelt sich um einen online agierenden Verein, der das Vereinsleben (fast) komplett online abbildet.<br />Mitgliederversammlungen, Vorstandssitzungen und Konferenzen zur weiteren Entwicklung von Opencaching werden per TeamSpeak abgehalten und dokumentiert. Wir arbeiten viel mit eMail und natürlich in unserem <a href="http://forum.opencaching-network.org" target="_blank">Forum</a>.<br /><br />
+Der Sitz des Vereins ist Bad Homburg vor der Höhe. Wir haben diesen Sitz gewählt, da er zentral gelegen ist. Letztenendes ist der Sitz von Opencaching Deutschland aber zweitrangig, denn es handelt sich um einen online agierenden Verein, der das Vereinsleben (fast) komplett online abbildet.<br />Mitgliederversammlungen, Vorstandssitzungen und Konferenzen zur weiteren Entwicklung von Opencaching werden per TeamSpeak abgehalten und dokumentiert. Wir arbeiten viel mit E-Mail und natürlich in unserem <a href="http://forum.opencaching-network.org" target="_blank">Forum</a>.<br /><br />
 
 <em>Was kostet die Mitgliedschaft im Verein?</em><br />
 Für ordentliche Mitglieder, die Opencaching.de mitgestalten, ist die Mitgliedschaft kostenfrei. Wir sind immer auf der Suche nach Entwicklern, Grafikern, Fotografen, Lektoren, Supportlern, Dokumentatoren etc.! Wer nicht die Zeit hat, um sich bei Opencaching einzubringen, kann stattdessen  Fördermitglied werden. Der Mitgliedsbeitrag ist noch festzusetzen.<br /><br />

@@ -15,7 +15,7 @@
 <p>The Opencaching.de website was created by a team of private Geocachers and is now operated by the <b>Opencaching Deutschland</b> association, which is legally responsible for the content of this website as of German MDStV, title 10, part 3.</p>
 
 <p>Address:</p>
-<p>Verein Opencaching Deutschland<br />
+<p>Opencaching Deutschland e.V.<br />
 c/o Michael Vaahsen<br />
 Hattsteiner Allee 26<br />
 61250 Usingen<br />
@@ -30,11 +30,11 @@ Responsible according to of German TDG/MStV is:<br />
 <br />
 Verein Opencaching Deutschland
 <br />
-Board members as of June 30, 2012:<br />
+Board members as of August 31, 2012:<br />
 <br />
 * Michael Vaahsen, chairman<br />
 * Gerald Halbig, vice chairman<br />
-* Daniel Christ, treasurer<br />
+* Maik Bischoff, treasurer<br />
 <br /></p>
 <p>
 

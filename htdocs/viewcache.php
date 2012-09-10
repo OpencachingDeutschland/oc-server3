@@ -62,7 +62,7 @@ function getChildWaypoints($cacheid)
 		exit;
 	}
 
-	$bCrypt = !isset($_REQUEST['nocrypt']) || ($_REQUEST['nocrypt'] != 1);
+	$bCrypt = !isset($_REQUEST['nocrypt']) || ($_REQUEST['nocrypt'] != 0);
 	$tpl->assign('crypt', $bCrypt);
 
 	if (isset($_REQUEST['desclang']))

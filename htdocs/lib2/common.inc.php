@@ -17,11 +17,16 @@ function __autoload($class_name)
 	if (!preg_match('/^[\w]{1,}$/', $class_name))
 		return;
 	
+	$class_name2 = $class_name;
 	$class_name = str_replace('_', '/', $class_name);
 	
 	$file = $opt['rootpath'] . '../lib/classes/' . $class_name . '.php';
-	if (file_exists($file))
-	  require_once($file);
+	$file2 = $opt['rootpath'] . 'lib2/class.' . $class_name2 . '.php';
+	if (file_exists($file)) {
+		require_once($file);
+	} elseif(file_exists($file2)) {
+		require_once($file2);
+	}
 }
 
 	// yepp, we will use UTF-8

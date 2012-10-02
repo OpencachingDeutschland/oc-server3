@@ -59,12 +59,13 @@
 		 * requires $opt['forum']['count'] in settings for number of lastest forum-posts
 		 * requires $opt['forum']['url'] in settings: RSS-feed-URL of the forum
 		 */
+		$tpl->assign('phpbb_enabled', $opt['forum']['count'] > 0);
 		$forumcontent = RSSParser::parse($opt['forum']['count'],$opt['forum']['url']);
 		$tpl->assign('forum',$forumcontent);
 
 			$phpbb_topics = array();
 		$tpl->assign('phpbb_topics', $phpbb_topics);
-		$tpl->assign('phpbb_enabled', ($opt['cron']['phpbbtopics']['url'] != ''));
+//		$tpl->assign('phpbb_enabled', ($opt['cron']['phpbbtopics']['url'] != ''));
 		$tpl->assign('phpbb_name', $opt['cron']['phpbbtopics']['name']);
 		$tpl->assign('phpbb_link', $opt['cron']['phpbbtopics']['link']);
 

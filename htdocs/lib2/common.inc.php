@@ -21,7 +21,7 @@ function __autoload($class_name)
 	$class_name = str_replace('_', '/', $class_name);
 	
 	$file = $opt['rootpath'] . '../lib/classes/' . $class_name . '.php';
-	$file2 = $opt['rootpath'] . 'lib2/class.' . $class_name2 . '.php';
+	$file2 = $opt['rootpath'] . 'lib2/' . $class_name2 . '.class.php';
 	if (file_exists($file)) {
 		require_once($file);
 	} elseif(file_exists($file2)) {

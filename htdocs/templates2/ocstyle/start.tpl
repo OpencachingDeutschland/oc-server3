@@ -113,7 +113,7 @@
                 <div class="buffer" style="width: 500px;">&nbsp;</div>
         </div>
 *}
-{forum}
+{$forum}
 {*
 	<ul class="nodot">
 		{foreach from=$phpbb_topics item=phpbbItem}

@@ -9,36 +9,39 @@
 <div class="content-txtbox-noshade" style="padding-right: 25px;">
 <p><i>This is a tentative English translation of the German legal information for this website, which is available by selecting German language and choosing "Nutzungsbedingungen" in the menu. When in doubt, or the translation is incomplete or contradicting, the German version is always the valid reference for legal issues.</i></p>
 
-<p><br /></p>
 <p><b>Operator of this website</b></p>
-
-<p>The Opencaching.de website was created by a team of private Geocachers and is now operated by the <b>Opencaching Deutschland</b> association, which is legally responsible for the content of this website as of German MDStV, title 10, part 3.</p>
-
-<p>Address:</p>
+<br />
+<p>Information according to &sect;5 German Teleservices Act<br />
+Responsible as of German remote services statue / value added tax law<br />
+<br />
+Opencaching Deutschland e.V.<br />
+Registered in register of associations of district court Bad Homburg v. d. H., register number 2054</p>
+<br />
+<p><b>Address and contact</b></p>
+<br />
 <p>Opencaching Deutschland e.V.<br />
 c/o Michael Vaahsen<br />
 Hattsteiner Allee 26<br />
 61250 Usingen<br />
-Germany<br />
+GERMANY<br />
 <br />
 Phone: +49 172 3011455<br />
 E-Mail: verein@opencaching.de<br />
 <br />
-<b>NOTE</b>: Please don't use this address for questions regarding Geocaching, the opencaching.de website or our terms of use. Wil will not answer them. Instead, please contact the Opencaching support team by email: <a href="mailto:contact@opencaching.de">contact@opencaching.de</a>.<br />
+NOTE: As for questions and information on cache locations and hides or the terms of use of opencaching.de please refer to contact@opencaching.de</p>
 <br />
-Responsible according to of German TDG/MStV is:<br />
+<p><b>Authorized to represent</b></p>
 <br />
-Verein Opencaching Deutschland
+<p>Due to &sect;10 of the associations statutes two members of the managing committee together are authorized to represent.<br />
 <br />
-Board members as of August 31, 2012:<br />
+The managing comittee are (as of August 31, 2012):<br />
 <br />
 * Michael Vaahsen, chairman<br />
 * Gerald Halbig, vice chairman<br />
-* Maik Bischoff, treasurer<br />
-<br /></p>
+* Maik Bischoff, treasurer</p>
+<br />
 <p>
 
-			
 			<p>All rights and responsibilities for articles marked with authors' names are held by the authors. If terms of use change, the new terms will be published at our hompage timely, and changes will be marked. By further using the website you will agree to the changed terms. If any of our regulations should violate applicable law or sould be invalidated by changes in law, the other regulations will not be affected. This also applies to the case that loss of validity will occur while already using this website.</p>
 			
 			<p>Throughout the rest of this page, Opencaching.de will be used synonyme for the operator of this website.</p>

@@ -107,10 +107,13 @@
 			<a href="{$phpbb_link|escape}" style="color: rgb(88, 144, 168); text-decoration: none;">{t 1=$phpbb_name|escape}New forum topcis (%1){/t}</a>
 		</p> 
 	</div>
+{* adapted by bohrsty for forums-posts on homepage using RSS-feed
         <div class="content-txtbox-noshade">
                 <p style="line-height: 1.6em;">Unser neues Forum findest du unter <a href="http://forum.geocaching-network.org">forum.geocaching-network.org</a>.</p>
                 <div class="buffer" style="width: 500px;">&nbsp;</div>
         </div>
+*}
+{$forum}
 {*
 	<ul class="nodot">
 		{foreach from=$phpbb_topics item=phpbbItem}

@@ -33,9 +33,16 @@
 		}
 		else
 		{
-			$url = $opt['news']['include'];
-			$url = str_replace('{style}', $opt['template']['style'], $url);
-			$newscontent = read_file($url, $opt['news']['maxsize']);
+			/*
+			 * changed by bohrsty to fix error in displaying news from blog
+			 * requires $opt['news']['count'] in settings for number of blog-items
+			 * $opt['news']['include'] needs to be the RSS-URL of the blog
+			 * 
+				$url = $opt['news']['include'];
+				$url = str_replace('{style}', $opt['template']['style'], $url);
+				$newscontent = read_file($url, $opt['news']['maxsize']);
+			*/
+			$newscontent = RSSParser::parse($opt['news']['count'],$opt['news']['include']);
 
 			$tpl->assign('news', $newscontent);
 			$tpl->assign('extern_news', true);
@@ -46,9 +53,19 @@
 			require_once($opt['rootpath'] . 'cache2/phpbb.inc.php');
 		else
 */
+
+		/*
+		 * changed by bohrsty to add lastest forum-entries using RSS-feed
+		 * requires $opt['forum']['count'] in settings for number of lastest forum-posts
+		 * requires $opt['forum']['url'] in settings: RSS-feed-URL of the forum
+		 */
+		$tpl->assign('phpbb_enabled', $opt['forum']['count'] > 0);
+		$forumcontent = RSSParser::parse($opt['forum']['count'],$opt['forum']['url']);
+		$tpl->assign('forum',$forumcontent);
+
 			$phpbb_topics = array();
 		$tpl->assign('phpbb_topics', $phpbb_topics);
-		$tpl->assign('phpbb_enabled', ($opt['cron']['phpbbtopics']['url'] != ''));
+//		$tpl->assign('phpbb_enabled', ($opt['cron']['phpbbtopics']['url'] != ''));
 		$tpl->assign('phpbb_name', $opt['cron']['phpbbtopics']['name']);
 		$tpl->assign('phpbb_link', $opt['cron']['phpbbtopics']['link']);
 

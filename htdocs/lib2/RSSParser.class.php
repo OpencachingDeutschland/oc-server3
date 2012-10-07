@@ -12,6 +12,9 @@ class RSSParser {
 	 */
 	public static function parse($items,$url) {
 		
+    if ($items <= 0)
+      return '';
+    
 		// error
 		$error = false;
 		

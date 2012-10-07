@@ -386,6 +386,7 @@
  	 * You can use '{style}' as placeholder for the current style-name
  	 */
  	$opt['news']['include'] = '';
+  $opt['news']['count'] = 3;
 
  	// redirect news.php to the following url
  	$opt['news']['redirect'] = '';
@@ -398,6 +399,13 @@
 
 	// show news block in start page
 	$opt['news']['onstart'] = true;
+
+  /* current forum topcis on start page
+   * requires url to be a vaild rss feed
+   * -> show the number of 'count' topics from rss feed
+   */
+  $opt['forum']['url'] = '';
+  $opt['forum']['count'] = 5;
 
 	/* 3rd party library options
  	 */

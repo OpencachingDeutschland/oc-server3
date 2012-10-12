@@ -130,13 +130,14 @@ INSERT INTO `cache_report_status` (`id`, `name`, `trans_id`) VALUES ('3', 'Done'
 -- Table cache_size
 SET NAMES 'utf8';
 TRUNCATE TABLE `cache_size`;
-INSERT INTO `cache_size` (`id`, `name`, `trans_id`, `ordinal`, `de`, `en`) VALUES ('1', 'other size', '524', '7', 'andere Größe', 'other size');
-INSERT INTO `cache_size` (`id`, `name`, `trans_id`, `ordinal`, `de`, `en`) VALUES ('2', 'micro', '525', '1', 'mikro', 'micro');
-INSERT INTO `cache_size` (`id`, `name`, `trans_id`, `ordinal`, `de`, `en`) VALUES ('3', 'small', '526', '2', 'klein', 'small');
-INSERT INTO `cache_size` (`id`, `name`, `trans_id`, `ordinal`, `de`, `en`) VALUES ('4', 'normal', '527', '3', 'normal', 'normal');
-INSERT INTO `cache_size` (`id`, `name`, `trans_id`, `ordinal`, `de`, `en`) VALUES ('5', 'large', '528', '4', 'groß', 'large');
-INSERT INTO `cache_size` (`id`, `name`, `trans_id`, `ordinal`, `de`, `en`) VALUES ('6', 'very large', '529', '5', 'extrem groß', 'very large');
-INSERT INTO `cache_size` (`id`, `name`, `trans_id`, `ordinal`, `de`, `en`) VALUES ('7', 'no container', '530', '6', 'kein Behälter', 'no container');
+INSERT INTO `cache_size` (`id`, `name`, `trans_id`, `ordinal`, `de`, `en`) VALUES ('1', 'other size', '524', '8', 'andere Größe', 'other size');
+INSERT INTO `cache_size` (`id`, `name`, `trans_id`, `ordinal`, `de`, `en`) VALUES ('2', 'micro', '525', '2', 'mikro', 'micro');
+INSERT INTO `cache_size` (`id`, `name`, `trans_id`, `ordinal`, `de`, `en`) VALUES ('3', 'small', '526', '3', 'klein', 'small');
+INSERT INTO `cache_size` (`id`, `name`, `trans_id`, `ordinal`, `de`, `en`) VALUES ('4', 'normal', '527', '4', 'normal', 'normal');
+INSERT INTO `cache_size` (`id`, `name`, `trans_id`, `ordinal`, `de`, `en`) VALUES ('5', 'large', '528', '5', 'groß', 'large');
+INSERT INTO `cache_size` (`id`, `name`, `trans_id`, `ordinal`, `de`, `en`) VALUES ('6', 'very large', '529', '6', 'extrem groß', 'very large');
+INSERT INTO `cache_size` (`id`, `name`, `trans_id`, `ordinal`, `de`, `en`) VALUES ('7', 'no container', '530', '7', 'kein Behälter', 'no container');
+INSERT INTO `cache_size` (`id`, `name`, `trans_id`, `ordinal`, `de`, `en`) VALUES ('8', 'nano', '1799', '1', 'sehr klein', 'very small');
 
 -- Table cache_status
 SET NAMES 'utf8';
@@ -2223,6 +2224,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1795', 'Maps:',
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1796', 'Published on', '2012-07-24 19:16:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1797', 'Changelog', '2012-08-08 14:16:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1798', 'Operator Association', '2012-08-08 14:16:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1799', 'nano', '2012-10-11 00:00:00');
 
 -- Table sys_trans_ref
 SET NAMES 'utf8';
@@ -5706,6 +5708,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1796', 'DE', 'Veröffentlicht am', '2012-07-23 22:26:38');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1797', 'DE', 'Versionsgeschichte', '2012-07-08 14:50:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1798', 'DE', 'Verein', '2012-07-08 14:50:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1799', 'DE', 'nano', '2012-10-11 00:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'EN', 'Reorder IDs \r', '2010-09-02 00:15:30');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'EN', 'The database could not be reconnected.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'EN', 'Testing – please do not login', '2010-08-28 11:48:07');
@@ -7089,6 +7092,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1796', 'EN', 'Published on', '2012-08-24 17:38:05');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1797', 'EN', 'Changelog', '2012-08-24 17:38:05');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1798', 'EN', 'Verein', '2012-07-08 14:50:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1799', 'EN', 'nano', '2012-10-11 00:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'ES', 'Reordenar ID', '2010-12-09 00:17:55');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'ES', 'La base de datos no se pudo conectar.', '2010-12-09 00:17:55');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'ES', 'En pruebas - por favor, no entre.', '2010-12-09 00:17:55');
@@ -8472,6 +8476,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1796', 'ES', 'Publicado en', '2012-08-24 17:43:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1797', 'ES', 'Cambios', '2012-08-24 17:43:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1798', 'ES', 'Verein', '2012-07-08 14:50:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1799', 'ES', 'nano', '2012-10-11 00:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('6', 'FR', 'Pseudo', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('7', 'FR', 'Quite', '2010-10-04 00:17:39');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('24', 'FR', 'Prénom', '2010-10-04 00:17:39');
@@ -8558,6 +8563,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('740', 'FR', 'C O P I E', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('922', 'FR', 'FR', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1654', 'FR', 'Statut', '2010-09-13 00:16:38');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1799', 'FR', 'nano', '2012-10-11 00:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'IT', 'Riordina gli ID', '2010-10-27 18:49:18');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'IT', 'Impossibile riconnettersi al database', '2010-08-28 20:28:01');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'IT', 'Test - per favore non connettersi', '2010-08-28 20:36:53');
@@ -9941,6 +9947,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1796', 'IT', 'Pubblicata il', '2012-08-26 02:39:48');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1797', 'IT', 'Elenco modifiche', '2012-08-26 02:39:48');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1798', 'IT', 'Verein', '2012-07-08 14:50:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1799', 'IT', 'nano', '2012-10-11 00:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('922', 'JA', 'JA', '2011-05-15 16:04:51');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'NL', 'ID\'s opnieuw sorteren', '2011-02-04 19:49:56');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'NL', 'De verbinding met de database kon niet hersteld worden.', '2011-02-04 19:49:56');
@@ -10921,6 +10928,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1741', 'NL', 'Het account is al geactiveerd. Probeer <a href=\"login.php\">inloggen</a>.<br /> Indien je niet in kunt loggen. lees dan de volgende pagina: <a href=\"{$opt.cms.login}\">problemen met inloggen</a>', '2011-04-04 21:34:57');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1742', 'NL', 'Jouw browser heeft onze cookie van opencaching.nl afgewezen.<br />\r', '2011-04-04 21:30:40');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1758', 'NL', 'Het account is al geactiveerd. Probeer <a href=\"login.php\">inloggen</a>.<br /> Indien je niet in kunt loggen. lees dan de volgende pagina: <a href=\"%1\">problemen met inloggen</a>', '2011-05-23 22:28:31');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1799', 'NL', 'nano', '2012-10-11 00:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('922', 'NO', 'NO', '2011-05-15 11:46:21');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'PL', 'Test - proszę nie logować się', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('4', 'PL', 'Użytkownik', '2010-08-28 11:48:08');
@@ -11000,7 +11008,9 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('922', 'PL', 'PL', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1479', 'PL', 'Szukaj-Waypoint', '2010-09-11 02:35:20');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1490', 'PL', 'Hasło', '2010-09-11 02:33:52');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1799', 'PL', 'nano', '2012-10-11 00:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('922', 'PT', 'PT', '2011-05-15 11:46:47');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1799', 'PT', 'nano', '2012-10-11 00:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('6', 'RU', 'Вы вошли как', '2010-12-06 22:17:35');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('7', 'RU', 'Выход', '2010-12-06 22:17:35');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('14', 'RU', 'О конфиденциальности', '2010-12-06 22:17:35');
@@ -11492,7 +11502,9 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1658', 'RU', 'Путь', '2010-12-06 22:17:36');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1659', 'RU', 'Размер контейнера', '2010-12-06 22:17:36');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1710', 'RU', 'Новые тайники в %1', '2010-12-06 22:17:36');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1799', 'RU', 'nano', '2012-10-11 00:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('922', 'SV', 'SV', '2011-05-15 11:46:05');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1799', 'SV', 'nano', '2012-10-11 00:00:00');
 
 -- Table watches_waitingtypes
 SET NAMES 'utf8';

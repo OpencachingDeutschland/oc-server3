@@ -1,18 +1,30 @@
-function CacheMarker(latlng, wp, type)
+function CacheMarker(latlng, wp, type, owned, found, map)
 {
   this.latlng = latlng;
   this.wp_ = wp;
-  this.image_ = 'resource2/ocstyle/images/map/24x24-cachetype-' + type + '.png';
+  if(found) {
+    this.image_ = 'resource2/ocstyle/images/map/24x24-found.png';
+  }
+  /*
+  else if(owned) {
+    this.image_ = 'resource2/ocstyle/images/map/24x24-owned.png';
+  }
+  */ 
+  else {
+    this.image_ = 'resource2/ocstyle/images/map/24x24-cachetype-' + type + '.png';
+  }
   this.height_ = 24;
   this.width_ = 24;
+  this.map_ = map;
+  this.setMap( map );
 }
 
-CacheMarker.prototype = new GOverlay();
+CacheMarker.prototype = new google.maps.OverlayView;
 
 /* Creates the DIV representing this CacheMarker.
  * @param map {GMap2} Map that bar overlay is added to.
  */
-CacheMarker.prototype.initialize = function(map) {
+CacheMarker.prototype.onAdd = function() {
   var me = this;
 
   // Create the DIV representing our CacheMarker
@@ -28,43 +40,41 @@ CacheMarker.prototype.initialize = function(map) {
   img.style.width = me.width_ + "px";
   img.style.height = me.height_ + "px";
   div.appendChild(img);
-  GEvent.addDomListener(div, "click", function()
+  google.maps.event.addDomListener(div, "click", function()
   {
-    GEvent.trigger(me, "click", me.wp_);
+    google.maps.event.trigger(me, "click", me.wp_);
   });
-  map.getPane(G_MAP_MARKER_PANE).appendChild(div);
-
-  this.map_ = map;
+  //map.getPane(G_MAP_MARKER_PANE).appendChild(div);
+  var pane = this.getPanes().overlayImage;
+  pane.appendChild(div);
+  
   this.div_ = div;
 };
 
 /* Remove the main DIV from the map pane
  */
-CacheMarker.prototype.remove = function() {
+CacheMarker.prototype.onRemove = function() {
   this.div_.parentNode.removeChild(this.div_);
+  this.div_ = null;
 };
 
 /* Redraw the CacheMarker based on the current projection and zoom level
  * @param force {boolean} Helps decide whether to redraw overlay
  */
-CacheMarker.prototype.redraw = function(force) {
-
-  // We only need to redraw if the coordinate system has changed
-  if (!force) return;
-
+CacheMarker.prototype.draw = function() {
   // Calculate the DIV coordinates of two opposite corners 
   // of our bounds to get the size and position of our CacheMarker
-  var divPixel = this.map_.fromLatLngToDivPixel(this.latlng);
+  var divPixel = this.getProjection().fromLatLngToDivPixel(this.latlng);
 
   // Now position our DIV based on the DIV coordinates of our bounds
   this.div_.style.width = this.width_ + "px";
-  this.div_.style.left = (divPixel.x) + "px"
+  this.div_.style.left = (divPixel.x-this.width_/2) + "px"
   this.div_.style.height = (this.height_) + "px";
-  this.div_.style.top = (divPixel.y) - this.height_ + "px";
+  this.div_.style.top = (divPixel.y+this.height_/2) - this.height_ + "px";
 };
 
 CacheMarker.prototype.getZIndex = function(m) {
-  return GOverlay.getZIndex(marker.getPoint().lat())-m.clicked*10000;
+  return google.maps.Overlay.getZIndex(marker.getPoint().lat())-m.clicked*10000;
 }
 
 CacheMarker.prototype.getPoint = function() {

@@ -1,6 +1,6 @@
 <?php
 /***************************************************************************
- *  For license information see doc/license.txt
+ *  You can find the license in the docs directory
  *
  *  Unicode Reminder メモ
  ***************************************************************************/
@@ -53,7 +53,7 @@
 		$tpl->popupmargin = false;
 	}
 
-	$tpl->name = 'map2';
+	$tpl->name = 'map2full';
 	$tpl->menuitem = MNU_MAP;
 	$tpl->nowpsearch = true;
 

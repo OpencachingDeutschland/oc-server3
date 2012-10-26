@@ -502,7 +502,21 @@ function mapLoad()
 	google.maps.event.addListener(moMap, "dragend", function(){map_moveend()});
 	google.maps.event.addListener(moMap, "zoom_changed", function(){map_moveend()});
 	google.maps.event.addListener(moMap, "maptypeid_changed", function(){map_maptypechanged()});
-
+	
+	/* hack to suppress google's info windows, when clicking on POIs */
+	/* inspired by http://stackoverflow.com/questions/7950030/can-i-remove-just-the-popup-bubbles-of-pois-in-google-maps-api-v3 */
+	/* patch "InfoWindow.open"-method such that a window is only opened if "force" is true */
+	{
+		var proto = google.maps.InfoWindow.prototype,
+		open = proto.open;
+		proto.open = function( map, anchor, force ) {
+			if( force ) {
+				return open.apply( this, arguments );
+			}
+		}
+	}
+	/**/
+	
 	if (msInitWaypoint != "")
 	{
 		show_cachepopup_wp(msInitWaypoint, true);
@@ -705,7 +719,7 @@ function searchlist_openitem(nIndex)
 		
 		moInfoWindow.close();
 		moInfoWindow = new google.maps.InfoWindow({ position: oCoords, content: xmlentities(sText) });
-		moInfoWindow.open( moMap );
+		moInfoWindow.open( moMap, null, true );
 		
 		data_load();
 	}
@@ -873,7 +887,7 @@ function show_cachepopup_url(sURL, sWaypoint, bAllowZoomChange)
 		var oPopupHTML = parseXML_GetHTML(oXML);
 		
 		moInfoWindow = new google.maps.InfoWindow({ position: oCoords, content: oPopupHTML });
-		moInfoWindow.open( moMap );
+		moInfoWindow.open( moMap, null, true );
 	});
 }
 

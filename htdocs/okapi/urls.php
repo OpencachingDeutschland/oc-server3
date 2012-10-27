@@ -25,5 +25,9 @@ class OkapiUrls
 		'^devel/attrlist$' => 'devel/attrlist',
 		'^devel/dbstruct$' => 'devel/dbstruct',
 		'^devel/cronreport$' => 'devel/cronreport',
+		'^devel/tilereport$' => 'devel/tilereport',
+
+		# For debugging TileMap performance only.
+		// '^tilestress$' => 'tilestress',
 	);
 }

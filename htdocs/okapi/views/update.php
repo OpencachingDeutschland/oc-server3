@@ -3,6 +3,7 @@
 namespace okapi\views\update;
 
 use Exception;
+
 use okapi\Okapi;
 use okapi\Cache;
 use okapi\Db;
@@ -14,7 +15,10 @@ use okapi\InvalidParam;
 use okapi\OkapiServiceRunner;
 use okapi\OkapiInternalRequest;
 use okapi\Settings;
+use okapi\OkapiLock;
+
 use okapi\cronjobs\CronJobController;
+
 
 class View
 {
@@ -326,7 +330,7 @@ class View
 			"Hello there, you've just updated OKAPI on your server. Thanks!\n\n".
 			"We need you to do one more thing. This version of OKAPI requires\n".
 			"additional crontab entry. Please add the following line to your crontab:\n\n".
-			"*/5 * * * * wget -O - -q -t 1 ".$GLOBALS['absolute_server_URI']."okapi/cron5\n\n".
+			"*/5 * * * * wget -O - -q -t 1 ".Settings::get('SITE_URL')."okapi/cron5\n\n".
 			"This is required for OKAPI to function properly from now on.\n\n".
 			"-- \n".
 			"Thanks, OKAPI developers."
@@ -529,4 +533,92 @@ class View
 		}
 		Db::execute("alter table cache_logs_archived add key okapi_syncbase (okapi_syncbase);");
 	}
+	
+	private static function ver63()
+	{
+		Db::execute("
+			CREATE TABLE `okapi_tile_status` (
+				`z` tinyint(2) NOT NULL,
+				`x` mediumint(6) unsigned NOT NULL,
+				`y` mediumint(6) unsigned NOT NULL,
+				`status` tinyint(1) unsigned NOT NULL,
+				PRIMARY KEY (`z`,`x`,`y`)
+			) ENGINE=MEMORY DEFAULT CHARSET=utf8;
+		");
+	}
+	
+	private static function ver64()
+	{
+		Db::execute("
+			CREATE TABLE `okapi_tile_caches` (
+				`z` tinyint(2) NOT NULL,
+				`x` mediumint(6) unsigned NOT NULL,
+				`y` mediumint(6) unsigned NOT NULL,
+				`cache_id` mediumint(6) unsigned NOT NULL,
+				`z21x` int(10) unsigned NOT NULL,
+				`z21y` int(10) unsigned NOT NULL,
+				`status` tinyint(1) unsigned NOT NULL,
+				`type` tinyint(1) unsigned NOT NULL,
+				`rating` tinyint(1) unsigned DEFAULT NULL,
+				`flags` tinyint(1) unsigned NOT NULL,
+				PRIMARY KEY (`z`,`x`,`y`,`cache_id`)
+			) ENGINE=MEMORY DEFAULT CHARSET=utf8;
+		");
+	}
+	
+	private static function ver65() { Db::execute("alter table okapi_tile_status engine=innodb;"); }
+	private static function ver66() { Db::execute("alter table okapi_tile_caches engine=innodb;"); }
+	
+	private static function ver67()
+	{
+		# Remove unused locks (these might have been created in previous versions of OKAPI).
+		
+		for ($z=0; $z<=2; $z++)
+			for ($x=0; $x<(1<<$z); $x++)
+				for ($y=0; $y<(1<<$z); $y++)
+				{
+					$lockname = "tile-computation-$z-$x-$y";
+					if (OkapiLock::exists($lockname))
+						OkapiLock::get($lockname)->remove();
+				}
+	}
+	
+	private static function ver68()
+	{
+		# Once again, remove unused locks.
+		
+		for ($z=0; $z<=21; $z++)
+		{
+			foreach (array("", "-0", "-1") as $suffix)
+			{
+				$lockname = "tile-$z$suffix";
+				if (OkapiLock::exists($lockname))
+					OkapiLock::get($lockname)->remove();
+			}
+		}
+	}
+	
+	private static function ver69()
+	{
+		# TileTree border margins changed. We need to recalculate all nodes
+		# but the root.
+		
+		Db::execute("delete from okapi_tile_caches where z > 0");
+		Db::execute("delete from okapi_tile_status where z > 0");
+	}
+	
+	private static function ver70()
+	{
+		Db::execute("
+			CREATE TABLE `okapi_cache_reads` (
+				`cache_key` varchar(64) NOT NULL
+			) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+		");
+	}
+	
+	private static function ver71() { Db::execute("alter table okapi_cache add column score float(4,2) default null after `key`"); }
+	private static function ver72() { Db::execute("alter table okapi_cache change column expires expires datetime after score"); }
+	private static function ver73() { Db::execute("update okapi_cache set score=1, expires=date_add(now(), interval 360 day) where `key` like 'tile/%'"); }
+	private static function ver74() { Db::execute("update okapi_cache set score=1, expires=date_add(now(), interval 360 day) where `key` like 'tilecaption/%'"); }
+	private static function ver75() { Db::execute("alter table okapi_cache modify column score float default null"); }
 }

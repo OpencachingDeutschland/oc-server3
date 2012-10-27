@@ -62,14 +62,17 @@
 		Only caches with size attribute between these numbers (inclusive) will be returned
 		(1 - micro, 5 - very big).</p>
 		<p><b>Notice:</b> If you use this parameter, all caches which do not have a container
-		(like Event or Virtual caches) will be excluded from the results.</p>
+		(like Event or Virtual caches) will be excluded from the results. If you want caches
+		with no container included, append "|X" suffix to the value of this parameter
+		(e.g. "3-5|X").</p>
 	</opt>
 	<opt name='rating'>
 		<p>A string "X-Y", where X and Y are integers between 1 and 5, and X &lt;= Y.
 		Only caches with an overall rating between these numbers (inclusive) will be returned
 		(1 - poor, 5 - excellent).</p>
 		<p><b>Notice:</b> If you use this parameter, all caches with too few votes will be
-		excluded from results.</p>
+		excluded from results. If you still want unrated caches included, append "|X" suffix
+		to the value of this parameter (e.g. "3-5|X").</p>
 		<p><b>Notice:</b> Some OC installations do not provide ratings for their geocaches.
 		On such installation, this parameter will be ignored.</p>
 	</opt>
@@ -117,6 +120,12 @@
 	<opt name='not_found_by'>
 		<p>User UUID. If given, the response will only include geocaches not found by
 		the given user.</p>
+	</opt>
+	<opt name='exclude_ignored' default='false'>
+		<p><b>Notice:</b> This parameter may be used only for requests signed
+		with an Access Token (you will need to use <b>Level 3</b> Authentication).</p>
+		<p>Boolean. If set to <b>true</b>, caches which the user has marked as ignored
+		will not be included in the result.</p>
 	</opt>
 	<opt name='exclude_my_own' default='false'>
 		<p><b>Notice:</b> This parameter may be used only for requests signed

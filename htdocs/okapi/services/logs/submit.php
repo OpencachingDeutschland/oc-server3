@@ -95,7 +95,7 @@ class WebService
 		if (!in_array($needs_maintenance, array('true', 'false')))
 			throw new InvalidParam('needs_maintenance', "Unknown option: '$needs_maintenance'.");
 		$needs_maintenance = ($needs_maintenance == 'true');
-		if (!Settings::get('SUPPORTS_LOGTYPE_NEEDS_MAINTENANCE'))
+		if ($needs_maintenance && (!Settings::get('SUPPORTS_LOGTYPE_NEEDS_MAINTENANCE')))
 		{
 			# If not supported, just ignore it.
 			self::$success_message .= " ".sprintf(_("However, your \"needs maintenance\" flag was ignored, because %s does not support this feature."),
@@ -115,15 +115,6 @@ class WebService
 		
 		# Various integrity checks.
 		
-		if (!in_array($cache['status'], array("Available", "Temporarily unavailable")))
-		{
-			# Only admins and cache owners may publish comments for Archived caches.
-			if ($user['is_admin'] || ($user['uuid'] == $cache['owner']['uuid'])) {
-				/* pass */
-			} else {
-				throw new CannotPublishException(_("This cache is archived. Only admins and the owner are allowed to add a log entry."));
-			}
-		}
 		if ($cache['type'] == 'Event' && $logtype != 'Comment')
 			throw new CannotPublishException(_('This cache is an Event cache. You cannot "Find it"! (But - you may "Comment" on it.)'));
 		if ($logtype == 'Comment' && strlen(trim($comment)) == 0)
@@ -381,11 +372,13 @@ class WebService
 			");
 		}
 				
-		# Call OC's event handler.
+		# We need to delete the copy of stats-picture for this user. Otherwise,
+		# the legacy OC code won't detect that the picture needs to be refreshed.
 		
-		require_once($GLOBALS['rootpath'].'lib/eventhandler.inc.php');
-		event_new_log($cache['internal_id'], $user['internal_id']);
-		
+		$filepath = Settings::get('VAR_DIR').'images/statpics/statpic'.$user['internal_id'].'.jpg';
+		if (file_exists($filepath))
+			unlink($filepath);
+
 		# Success. Return the uuid.
 		
 		return $log_uuid;
@@ -500,9 +493,20 @@ class WebService
 		}
 	}
 	
+	private static function create_uuid()
+	{
+		return sprintf('%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
+			mt_rand(0, 0xffff), mt_rand(0, 0xffff),
+			mt_rand(0, 0xffff),
+			mt_rand(0, 0x0fff) | 0x4000,
+			mt_rand(0, 0x3fff) | 0x8000,
+			mt_rand(0, 0xffff), mt_rand(0, 0xffff), mt_rand(0, 0xffff)
+		);
+	}
+	
 	private static function insert_log_row($consumer_key, $cache_internal_id, $user_internal_id, $logtype, $when, $PSEUDOENCODED_comment)
 	{
-		$log_uuid = create_uuid();
+		$log_uuid = self::create_uuid();
 		Db::execute("
 			insert into cache_logs (uuid, cache_id, user_id, type, date, text, last_modified, date_created, node)
 			values (
@@ -514,7 +518,7 @@ class WebService
 				'".mysql_real_escape_string($PSEUDOENCODED_comment)."',
 				now(),
 				now(),
-				'".mysql_real_escape_string($GLOBALS['oc_nodeid'])."'
+				'".mysql_real_escape_string(Settings::get('OC_NODE_ID'))."'
 			);
 		");
 		$log_internal_id = Db::last_insert_id();

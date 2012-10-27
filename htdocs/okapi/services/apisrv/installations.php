@@ -5,6 +5,7 @@ namespace okapi\services\apisrv\installations;
 use Exception;
 use ErrorException;
 use okapi\Okapi;
+use okapi\Settings;
 use okapi\Cache;
 use okapi\OkapiRequest;
 use okapi\ParamMissing;
@@ -61,9 +62,9 @@ class WebService
 				
 				$results = array(
 					array(
-						'site_url' => $GLOBALS['absolute_server_URI'],
+						'site_url' => Settings::get('SITE_URL'),
 						'site_name' => "Unable to retrieve!",
-						'okapi_base_url' => $GLOBALS['absolute_server_URI']."okapi/",
+						'okapi_base_url' => Settings::get('SITE_URL')."okapi/",
 					)
 				);
 				Cache::set($cachekey, $results, 12 * 3600); # so to retry no earlier than after 12 hours
@@ -89,7 +90,7 @@ class WebService
 					'site_name' => $site_name,
 					'okapi_base_url' => $okapi_base_url,
 				);
-				if ($site_url == $GLOBALS['absolute_server_URI'])
+				if ($site_url == Settings::get('SITE_URL'))
 					$i_was_included = true;
 			}
 			
@@ -99,9 +100,9 @@ class WebService
 			if (!$i_was_included)
 			{
 				$results[] = array(
-					'site_url' => $GLOBALS['absolute_server_URI'],
+					'site_url' => Settings::get('SITE_URL'),
 					'site_name' => "DEVELSITE",
-					'okapi_base_url' => $GLOBALS['absolute_server_URI']."okapi/",
+					'okapi_base_url' => Settings::get('SITE_URL')."okapi/",
 				);
 				# Contact OKAPI developers in order to get added to the official sites list!
 			}

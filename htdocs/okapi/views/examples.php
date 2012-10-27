@@ -4,6 +4,7 @@ namespace okapi\views\examples;
 
 use Exception;
 use okapi\Okapi;
+use okapi\Settings;
 use okapi\OkapiRequest;
 use okapi\OkapiHttpResponse;
 use okapi\ParamMissing;
@@ -16,13 +17,13 @@ class View
 {
 	public static function call()
 	{
-		require_once $GLOBALS['rootpath'].'okapi/service_runner.php';
-		require_once $GLOBALS['rootpath'].'okapi/views/menu.inc.php';
+		require_once($GLOBALS['rootpath'].'okapi/service_runner.php');
+		require_once($GLOBALS['rootpath'].'okapi/views/menu.inc.php');
 		
 		$vars = array(
 			'menu' => OkapiMenu::get_menu_html("examples.html"),
-			'okapi_base_url' => $GLOBALS['absolute_server_URI']."okapi/",
-			'site_url' => $GLOBALS['absolute_server_URI'],
+			'okapi_base_url' => Settings::get('SITE_URL')."okapi/",
+			'site_url' => Settings::get('SITE_URL'),
 			'installations' => OkapiMenu::get_installations(),
 			'okapi_rev' => Okapi::$revision,
 			'site_name' => Okapi::get_normalized_site_name(),

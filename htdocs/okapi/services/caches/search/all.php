@@ -16,7 +16,7 @@ use okapi\ParamMissing;
 use okapi\InvalidParam;
 use okapi\services\caches\search\SearchAssistant;
 
-require_once 'searching.inc.php';
+require_once('searching.inc.php');
 
 class WebService
 {

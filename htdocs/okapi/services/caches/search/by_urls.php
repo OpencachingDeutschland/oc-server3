@@ -2,9 +2,10 @@
 
 namespace okapi\services\caches\search\by_urls;
 
-require_once 'searching.inc.php';
+require_once('searching.inc.php');
 
 use okapi\Okapi;
+use okapi\Settings;
 use okapi\OkapiRequest;
 use okapi\ParamMissing;
 use okapi\InvalidParam;
@@ -31,7 +32,7 @@ class WebService
 		static $length = null;
 		if ($host == null)
 		{
-			$host = parse_url($GLOBALS['absolute_server_URI'], PHP_URL_HOST);
+			$host = parse_url(Settings::get('SITE_URL'), PHP_URL_HOST);
 			if (strpos($host, "www.") === 0)
 				$host = substr($host, 4);
 			$length = strlen($host);
@@ -46,6 +47,13 @@ class WebService
 			return null;
 		if ((!isset($uri['host'])) || (substr($uri['host'], -$length) != $host))
 			return null;
+		if (!isset($uri['path']))
+			return null;
+		if (preg_match("#^/(O[A-Z][A-Z0-9]{4,5})$#", $uri['path'], $matches))
+		{
+			# Some servers allow "http://oc.xx/<cache_code>" shortcut.
+			return array('cache_code', $matches[1]);
+		}
 		$parts = array();
 		if (isset($uri['query']))
 			$parts = array_merge($parts, explode('&', $uri['query']));

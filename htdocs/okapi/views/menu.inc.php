@@ -7,14 +7,15 @@ use okapi\Okapi;
 use okapi\OkapiServiceRunner;
 use okapi\OkapiInternalRequest;
 use okapi\OkapiInternalConsumer;
+use okapi\Settings;
 
-require_once $GLOBALS['rootpath'].'okapi/service_runner.php';
+require_once($GLOBALS['rootpath'].'okapi/service_runner.php');
 
 class OkapiMenu
 {
 	private static function link($current_path, $link_path, $link_name)
 	{
-		return "<a href='".$GLOBALS['absolute_server_URI']."okapi/$link_path'".(($current_path == $link_path)
+		return "<a href='".Settings::get('SITE_URL')."okapi/$link_path'".(($current_path == $link_path)
 			? " class='selected'" : "").">$link_name</a><br>";
 	}
 	
@@ -68,7 +69,7 @@ class OkapiMenu
 		$installations = OkapiServiceRunner::call("services/apisrv/installations",
 			new OkapiInternalRequest(new OkapiInternalConsumer(), null, array()));
 		foreach ($installations as &$inst_ref)
-			$inst_ref['selected'] = ($inst_ref['site_url'] == $GLOBALS['absolute_server_URI']);
+			$inst_ref['selected'] = ($inst_ref['site_url'] == Settings::get('SITE_URL'));
 		return $installations;
 	}
 }

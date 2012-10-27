@@ -4,19 +4,8 @@ namespace okapi;
 
 # OKAPI Framework -- Wojciech Rygielski <rygielski@mimuw.edu.pl>
 
-# Including this file will initialize OKAPI Framework with its default
-# exception and error handlers. OKAPI is strict about PHP warnings and
-# notices. You might need to temporarily disable the error handler in
-# order to get it to work in some legacy code. Do this by calling
-# OkapiErrorHandler::disable() BEFORE calling the "buggy" code, and
-# OkapiErrorHandler::reenable() AFTER returning from it.
-
-# When I was installing it for the first time on the opencaching.pl
-# site, I needed to change some minor things in order to get it to work
-# properly, i.e., turn some "die()"-like statements into exceptions.
-# Contact me for details.
-
-# I hope this will come in handy...  - WR.
+# If you want to include_once/require_once OKAPI in your code,
+# see facade.php. You should not rely on any other file, never!
 
 use Exception;
 use ErrorException;
@@ -34,19 +23,19 @@ use okapi\cronjobs\CronJobController;
 /** Return an array of email addresses which always get notified on OKAPI errors. */
 function get_admin_emails()
 {
-	$emails = array(
-		isset($GLOBALS['sql_errormail']) ? $GLOBALS['sql_errormail'] : 'root@localhost',
-	);
+	$emails = array();
 	if (class_exists("okapi\\Settings"))
 	{
 		try
 		{
-			foreach (Settings::get('EXTRA_ADMINS') as $email)
+			foreach (Settings::get('ADMINS') as $email)
 				if (!in_array($email, $emails))
 					$emails[] = $email;
 		}
 		catch (Exception $e) { /* pass */ }
 	}
+	if (count($emails) == 0)
+		$emails[] = 'root@localhost';
 	return $emails;
 }
 
@@ -66,7 +55,7 @@ class BadRequest extends Exception {
 			'reason_stack' => array(),
 		);
 		$this->provideExtras($extras);
-		$extras['more_info'] = $GLOBALS['absolute_server_URI']."okapi/introduction.html#errors";
+		$extras['more_info'] = Settings::get('SITE_URL')."okapi/introduction.html#errors";
 		return json_encode(array("error" => $extras));
 	}
 }
@@ -96,7 +85,7 @@ class OkapiExceptionHandler
 			else
 				header("HTTP/1.0 401 Unauthorized");
 			header("Access-Control-Allow-Origin: *");
-			header("Content-Type: text/plain; charset=utf-8");
+			header("Content-Type: application/json; charset=utf-8");
 			
 			print $e->getOkapiJSON();
 		}
@@ -108,7 +97,7 @@ class OkapiExceptionHandler
 			
 			header("HTTP/1.0 400 Bad Request");
 			header("Access-Control-Allow-Origin: *");
-			header("Content-Type: text/plain; charset=utf-8");
+			header("Content-Type: application/json; charset=utf-8");
 			
 			print $e->getOkapiJSON();
 		}
@@ -133,7 +122,7 @@ class OkapiExceptionHandler
 			
 			$exception_info = self::get_exception_info($e);
 			
-			if (isset($GLOBALS['debug_page']) && $GLOBALS['debug_page'])
+			if (class_exists("okapi\\Settings") && (Settings::get('DEBUG')))
 			{
 				print "\n\nBUT! Since the DEBUG flag is on, then you probably ARE a developer yourself.\n";
 				print "Let's cut to the chase then:";
@@ -146,22 +135,50 @@ class OkapiExceptionHandler
 			}
 			else
 			{
-				$admin_email = implode(", ", get_admin_emails());
-				$sender_email = isset($GLOBALS['emailaddr']) ? $GLOBALS['emailaddr'] : 'root@localhost';
-				mail(
-					$admin_email,
-					"OKAPI Method Error - ".(
-						isset($GLOBALS['absolute_server_URI'])
-						? $GLOBALS['absolute_server_URI'] : "unknown location"
-					),
+				$subject = "OKAPI Method Error - ".substr(
+					$_SERVER['REQUEST_URI'], 0, strpos(
+					$_SERVER['REQUEST_URI'].'?', '?'));
+				
+				$message = (
 					"OKAPI caught the following exception while executing API method request.\n".
 					"This is an error in OUR code and should be fixed. Please contact the\n".
 					"developer of the module that threw this error. Thanks!\n\n".
-					$exception_info,
-					"Content-Type: text/plain; charset=utf-8\n".
-					"From: OKAPI <$sender_email>\n".
-					"Reply-To: $sender_email\n"
+					$exception_info
+				);
+				try
+				{
+					Okapi::mail_admins($subject, $message);
+				}
+				catch (Exception $e)
+				{
+					# Unable to use full-featured mail_admins version. We'll use a backup.
+					# We need to make sure we're not spamming.
+					
+					$lock_file = "/tmp/okapi-fatal-error-mode";
+					$last_email = false;
+					if (file_exists($lock_file))
+						$last_email = filemtime($lock_file);
+					if ($last_email === false) {
+						# Assume this is the first email.
+						$last_email = 0;
+					}
+					if (time() - $last_email < 60) {
+						# Send no more than one per minute.
+						return;
+					}
+					@touch($lock_file);
+					
+					$admin_email = implode(", ", get_admin_emails());
+					$sender_email = class_exists("okapi\\Settings") ? Settings::get('FROM_FIELD') : 'root@localhost';
+					$subject = "Fatal error mode: ".$subject;
+					$message = "Fatal error mode: OKAPI will send at most ONE message per minute.\n\n".$message;
+					$headers = (
+						"Content-Type: text/plain; charset=utf-8\n".
+						"From: OKAPI <$sender_email>\n".
+						"Reply-To: $sender_email\n"
 					);
+					mail($admin_email, $subject, $message, $headers);
+				}
 			}
 		}
 	}
@@ -304,6 +321,20 @@ class DbException extends Exception {}
 /** Database access class. Use this instead of mysql_query, sql or sqlValue. */
 class Db
 {
+	private static $connected = false;
+	
+	public static function connect()
+	{
+		if (mysql_connect(Settings::get('DB_SERVER'), Settings::get('DB_USERNAME'), Settings::get('DB_PASSWORD')))
+		{
+			mysql_select_db(Settings::get('DB_NAME'));
+			mysql_query("set names 'utf8'");
+			self::$connected = true;
+		}
+		else
+			throw new Exception("Could not connect to MySQL: ".mysql_error());
+	}
+	
 	public static function select_row($query)
 	{
 		$rows = self::select_all($query);
@@ -379,6 +410,8 @@ class Db
 	
 	public static function query($query)
 	{
+		if (!self::$connected)
+			self::connect();
 		$rs = mysql_query($query);
 		if (!$rs)
 		{
@@ -392,7 +425,7 @@ class Db
 # Including OAuth internals. Preparing OKAPI Consumer and Token classes.
 #
 
-require_once('oauth.php');
+require_once($GLOBALS['rootpath']."okapi/oauth.php");
 
 class OkapiConsumer extends OAuthConsumer
 {
@@ -556,16 +589,18 @@ class OkapiOAuthServer extends OAuthServer
 
 # Including local datastore and settings (connecting SQL database etc.).
 
-require_once('settings.php');
-require_once('datastore.php');
+require_once($GLOBALS['rootpath']."okapi/settings.php");
+require_once($GLOBALS['rootpath']."okapi/datastore.php");
 
 class OkapiHttpResponse
 {
 	public $status = "200 OK";
+	public $cache_control = "no-store, no-cache, must-revalidate, post-check=0, pre-check=0, max-age=0";
 	public $content_type = "text/plain; charset=utf-8";
 	public $content_disposition = null;
 	public $allow_gzip = true;
 	public $connection_close = false;
+	public $etag = null;
 	
 	/** Use this only as a setter, use get_body or print_body for reading! */
 	public $body;
@@ -616,11 +651,13 @@ class OkapiHttpResponse
 		header("HTTP/1.1 ".$this->status);
 		header("Access-Control-Allow-Origin: *");
 		header("Content-Type: ".$this->content_type);
-		header("Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0, max-age=0");
+		header("Cache-Control: ".$this->cache_control);
 		if ($this->connection_close)
 			header("Connection: close");
 		if ($this->content_disposition)
 			header("Content-Disposition: ".$this->content_disposition);
+		if ($this->etag)
+			header("ETag: $this->etag");
 		
 		# Make sure that gzip is supported by the client.
 		$try_gzip = $this->allow_gzip;
@@ -660,7 +697,15 @@ class OkapiRedirectResponse extends OkapiHttpResponse
 
 class OkapiLock
 {
+	private $lockfile;
 	private $lock;
+	
+	/** Note: This does NOT tell you if someone currently locked it! */
+	public static function exists($name)
+	{
+		$lockfile = Okapi::get_var_dir()."/okapi-lock-".$name;
+		return file_exists($lockfile);
+	}
 	
 	public static function get($name)
 	{
@@ -677,13 +722,13 @@ class OkapiLock
 		}
 		else
 		{
-			$lockfile = Okapi::get_var_dir()."/okapi-lock-".$name;
-			if (!file_exists($lockfile))
+			$this->lockfile = Okapi::get_var_dir()."/okapi-lock-".$name;
+			if (!file_exists($this->lockfile))
 			{
-				$fp = fopen($lockfile, "wb");
+				$fp = fopen($this->lockfile, "wb");
 				fclose($fp);
 			}
-			$this->lock = sem_get(fileinode($lockfile));
+			$this->lock = sem_get(fileinode($this->lockfile));
 		}
 	}
 	
@@ -698,6 +743,15 @@ class OkapiLock
 		if ($this->lock !== null)
 			sem_release($this->lock);
 	}
+	
+	public function remove()
+	{
+		if ($this->lock !== null)
+		{
+			sem_remove($this->lock);
+			unlink($this->lockfile);
+		}
+	}
 }
 
 /** Container for various OKAPI functions. */
@@ -705,7 +759,7 @@ class Okapi
 {
 	public static $data_store;
 	public static $server;
-	public static $revision = 424; # This gets replaced in automatically deployed packages
+	public static $revision = 483; # This gets replaced in automatically deployed packages
 	private static $okapi_vars = null;
 	
 	/** Get a variable stored in okapi_vars. If variable not found, return $default. */
@@ -743,16 +797,54 @@ class Okapi
 		self::$okapi_vars[$varname] = $value;
 	}
 	
-	/** Return true if the server is running in a debug mode. */
-	public static function debug_mode()
-	{
-		return (isset($GLOBALS['debug_page']) && $GLOBALS['debug_page']);
-	}
-	
 	/** Send an email message to local OKAPI administrators. */
 	public static function mail_admins($subject, $message)
 	{
-		self::mail_from_okapi(get_admin_emails(), $subject, $message);
+		# First, make sure we're not spamming.
+		
+		$cache_key = 'mail_admins_counter/'.(floor(time() / 3600) * 3600).'/'.md5($subject);
+		try {
+			$counter = Cache::get($cache_key);
+		} catch (DbException $e) {
+			# Why catching exceptions here? See bug#156.
+			$counter = null;
+		}
+		if ($counter === null)
+			$counter = 0;
+		$counter++;
+		try {
+			Cache::set($cache_key, $counter, 3600);
+		} catch (DbException $e) {
+			# Why catching exceptions here? See bug#156.
+		}
+		if ($counter <= 5)
+		{
+			# We're not spamming yet.
+			
+			self::mail_from_okapi(get_admin_emails(), $subject, $message);
+		}
+		else
+		{
+			# We are spamming. Prevent sending more emails.
+			
+			$content_cache_key_prefix = 'mail_admins_spam/'.(floor(time() / 3600) * 3600).'/';
+			$timeout = 86400;
+			if ($counter == 6)
+			{
+				self::mail_from_okapi(get_admin_emails(), "Anti-spam mode activated for '$subject'",
+					"OKAPI has activated an \"anti-spam\" mode for the following subject:\n\n".
+					"\"$subject\"\n\n".
+					"Anti-spam mode is activiated when more than 5 messages with\n".
+					"the same subject are sent within one hour.\n\n".
+					"Additional debug information:\n".
+					"- counter cache key: $cache_key\n".
+					"- content prefix: $content_cache_key_prefix<n>\n".
+					"- content timeout: $timeout\n"
+				);
+			}
+			$content_cache_key = $content_cache_key_prefix.$counter;
+			Cache::set($content_cache_key, $message, $timeout);
+		}
 	}
 
 	/** Send an email message from OKAPI to the given recipients. */
@@ -766,7 +858,7 @@ class Okapi
 		}
 		if (!is_array($email_addresses))
 			$email_addresses = array($email_addresses);
-		$sender_email = isset($GLOBALS['emailaddr']) ? $GLOBALS['emailaddr'] : 'root@localhost';
+		$sender_email = class_exists("okapi\\Settings") ? Settings::get('FROM_FIELD') : 'root@localhost';
 		mail(implode(", ", $email_addresses), $subject, $message,
 			"Content-Type: text/plain; charset=utf-8\n".
 			"From: OKAPI <$sender_email>\n".
@@ -780,7 +872,7 @@ class Okapi
 		$dir = Settings::get('VAR_DIR');
 		if ($dir != null)
 			return rtrim($dir, "/");
-		return isset($GLOBALS['dynbasepath']) ? $GLOBALS['dynbasepath'] : "/tmp";
+		throw new Exception("You need to set a valid VAR_DIR.");
 	}
 	
 	/**
@@ -826,7 +918,7 @@ class Okapi
 	public static function get_normalized_site_name($site_url = null)
 	{
 		if ($site_url == null)
-			$site_url = $GLOBALS['absolute_server_URI'];
+			$site_url = Settings::get('SITE_URL');
 		$matches = null;
 		if (preg_match("#^https?://(www.)?opencaching.([a-z.]+)/$#", $site_url, $matches)) {
 			return "OpenCaching.".strtoupper($matches[2]);
@@ -881,7 +973,7 @@ class Okapi
 		$nearest_event = Okapi::get_var("cron_nearest_event");
 		if ($nearest_event + 0 <= time())
 		{
-			require_once 'cronjobs.php';
+			require_once($GLOBALS['rootpath']."okapi/cronjobs.php");
 			$nearest_event = CronJobController::run_jobs('pre-request');
 			Okapi::set_var("cron_nearest_event", $nearest_event);
 		}
@@ -898,7 +990,7 @@ class Okapi
 		{
 			set_time_limit(0);
 			ignore_user_abort(true); 
-			require_once 'cronjobs.php';
+			require_once($GLOBALS['rootpath']."okapi/cronjobs.php");
 			$nearest_event = CronJobController::run_jobs('cron-5');
 			Okapi::set_var("cron_nearest_event", $nearest_event);
 		}
@@ -1023,7 +1115,7 @@ class Okapi
 	 */
 	public static function register_new_consumer($appname, $appurl, $email)
 	{
-		include_once 'service_runner.php';
+		require_once($GLOBALS['rootpath']."okapi/service_runner.php");
 		$consumer = new OkapiConsumer(Okapi::generate_key(20), Okapi::generate_key(40),
 			$appname, $appurl, $email);
 		$sample_cache = OkapiServiceRunner::call("services/caches/search/all",
@@ -1032,7 +1124,6 @@ class Okapi
 			$sample_cache_code = $sample_cache['results'][0];
 		else
 			$sample_cache_code = "CACHECODE";
-		$sender_email = isset($GLOBALS['emailaddr']) ? $GLOBALS['emailaddr'] : 'root@localhost';
 		
 		# Message for the Consumer.
 		ob_start();
@@ -1042,7 +1133,7 @@ class Okapi
 		print "Note: Consumer Secret is needed only when you intend to use OAuth.\n";
 		print "You don't need Consumer Secret for Level 1 Authentication.\n\n";
 		print "Now you may easily access Level 1 methods of OKAPI! For example:\n";
-		print $GLOBALS['absolute_server_URI']."okapi/services/caches/geocache?cache_code=$sample_cache_code&consumer_key=$consumer->key\n\n";
+		print Settings::get('SITE_URL')."okapi/services/caches/geocache?cache_code=$sample_cache_code&consumer_key=$consumer->key\n\n";
 		print "If you plan on using OKAPI for a longer time, then you should subscribe\n";
 		print "to the OKAPI News blog to stay up-to-date. Check it out here:\n";
 		print "http://opencaching-api.blogspot.com/\n\n";
@@ -1347,14 +1438,14 @@ class Okapi
 			'Traditional' => 2, 'Multi' => 3, 'Quiz' => 7, 'Virtual' => 4,
 			# Additional types (may get changed)
 			'Other' => 1, 'Webcam' => 5, 'Event' => 6,
-			'Moving' => 8, 'Own' => 9,
+			'Moving' => 8, 'Podcast' => 9, 'Own' => 10,
 		),
 		'oc.de' => array(
 			# Primary types (documented, cannot change)
 			'Traditional' => 2, 'Multi' => 3, 'Quiz' => 7, 'Virtual' => 4,
 			# Additional types (might get changed)
 			'Other' => 1, 'Webcam' => 5, 'Event' => 6,
-			'Math/Physics-Cache' => 8, 'Moving' => 9, 'Drive-In' => 10,
+			'Math/Physics' => 8, 'Moving' => 9, 'Drive-In' => 10,
 		)
 	);
 	
@@ -1485,7 +1576,7 @@ class Cache
 {
 	/**
 	 * Save object $value under the key $key. Store this object for
-	 * $timeout seconds. $key must be a string of max 32 characters in length.
+	 * $timeout seconds. $key must be a string of max 64 characters in length.
 	 * $value might be any serializable PHP object.
 	 */
 	public static function set($key, $value, $timeout)
@@ -1496,6 +1587,23 @@ class Cache
 				'".mysql_real_escape_string($key)."',
 				'".mysql_real_escape_string(gzdeflate(serialize($value)))."',
 				date_add(now(), interval '".mysql_real_escape_string($timeout)."' second)
+			);
+		");
+	}
+	
+	/**
+	 * Scored version of set. Elements set up this way will expire when they're
+	 * not used.
+	 */
+	public static function set_scored($key, $value)
+	{
+		Db::execute("
+			replace into okapi_cache (`key`, value, expires, score)
+			values (
+				'".mysql_real_escape_string($key)."',
+				'".mysql_real_escape_string(gzdeflate(serialize($value)))."',
+				date_add(now(), interval 120 day),
+				1.0
 			);
 		");
 	}
@@ -1526,15 +1634,23 @@ class Cache
 	 */
 	public static function get($key)
 	{
-		$blob = Db::select_value("
-			select value
+		$rs = Db::query("
+			select value, score
 			from okapi_cache
 			where
 				`key` = '".mysql_real_escape_string($key)."'
 				and expires > now()
 		");
+		list($blob, $score) = mysql_fetch_array($rs);
 		if (!$blob)
 			return null;
+		if ($score != null)  # Only non-null entries are scored.
+		{
+			Db::execute("
+				insert into okapi_cache_reads (`cache_key`)
+				values ('".mysql_real_escape_string($key)."')
+			");
+		}
 		return unserialize(gzinflate($blob));
 	}
 	
@@ -1593,6 +1709,34 @@ class Cache
 }
 
 /**
+ * Sometimes it is desireable to get the cached contents in a file,
+ * instead in a string (i.e. for imagecreatefromgd2). In such cases, you
+ * may use this class instead of the Cache class.
+ */
+class FileCache
+{
+	public static function get_file_path($key)
+	{
+		$filename = Okapi::get_var_dir()."/okapi_filecache_".md5($key);
+		if (!file_exists($filename))
+			return null;
+		return $filename;
+	}
+	
+	/**
+	 * Note, there is no $timeout (time to live) parameter. Currently,
+	 * OKAPI will delete every old file after certain amount of time.
+	 * See CacheCleanupCronJob for details.
+	 */
+	public static function set($key, $value)
+	{
+		$filename = Okapi::get_var_dir()."/okapi_filecache_".md5($key);
+		file_put_contents($filename, $value);
+		return $filename;
+	}
+}
+
+/**
  * Represents an OKAPI web method request.
  *
  * Use this class to get parameters from your request and access
@@ -1607,12 +1751,27 @@ abstract class OkapiRequest
 {
 	public $consumer;
 	public $token;
+	public $etag;  # see: http://en.wikipedia.org/wiki/HTTP_ETag
+
+	/**
+	 * Set this to true, for some method to allow you to set higher "limit"
+	 * parameter than usually allowed. This should be used ONLY by trusted,
+	 * fast and *cacheable* code!
+	 */
+	public $skip_limits = false;
 	
 	/**
 	 * Return request parameter, or NULL when not found. Use this instead of
 	 * $_GET or $_POST or $_REQUEST.
 	 */
 	public abstract function get_parameter($name);
+	
+	/**
+	 * Return the list of all request parameters. You should use this method
+	 * ONLY when you use <import-params/> in your documentation and you want
+	 * to pass all unknown parameters onto the other method.
+	 */
+	public abstract function get_all_parameters_including_unknown();
 	
 	/** Return true, if this requests is to be logged as HTTP request in okapi_stats. */
 	public abstract function is_http_request();
@@ -1655,6 +1814,11 @@ class OkapiInternalRequest extends OkapiRequest
 			return $this->parameters[$name];
 		else
 			return null;
+	}
+	
+	public function get_all_parameters_including_unknown()
+	{
+		return $this->parameters;
 	}
 	
 	public function is_http_request() { return $this->perceive_as_http_request; }
@@ -1707,7 +1871,7 @@ class OkapiHttpRequest extends OkapiRequest
 			# Enables debugging Level 2 and Level 3 methods. Should not be committed
 			# at any time! If run on production server, make it an error.
 			
-			if (!Okapi::debug_mode())
+			if (!Settings::get('DEBUG'))
 			{
 				throw new Exception("Attempted to set DEBUG_AS_USERNAME set in ".
 					"non-debug environment. Accidental commit?");
@@ -1785,6 +1949,11 @@ class OkapiHttpRequest extends OkapiRequest
 			$this->consumer = new OkapiDebugConsumer();
 			$this->token = new OkapiDebugAccessToken($debug_user_id);
 		}
+		
+		# Read the ETag.
+		
+		if (isset($_SERVER['HTTP_IF_NONE_MATCH']))
+			$this->etag = $_SERVER['HTTP_IF_NONE_MATCH'];
 	}
 	
 	private function init_request()
@@ -1813,6 +1982,11 @@ class OkapiHttpRequest extends OkapiRequest
 		if (is_array($value))
 			throw new InvalidParam($name, "Make sure you are using '$name' no more than ONCE in your URL.");
 		return $value;
+	}
+	
+	public function get_all_parameters_including_unknown()
+	{
+		return $this->request->get_parameters();
 	}
 	
 	public function is_http_request() { return true; }

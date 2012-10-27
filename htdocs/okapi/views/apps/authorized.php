@@ -37,11 +37,11 @@ class View
 		{
 			# Probably Request Token has expired or it was already used. We'll
 			# just redirect to the OpenCaching main page.
-			return new OkapiRedirectResponse($GLOBALS['absolute_server_URI']);
+			return new OkapiRedirectResponse(Settings::get('SITE_URL'));
 		}
 		
 		$vars = array(
-			'okapi_base_url' => $GLOBALS['absolute_server_URI']."okapi/",
+			'okapi_base_url' => Settings::get('SITE_URL')."okapi/",
 			'token' => $token,
 			'verifier' => $verifier,
 			'site_name' => Okapi::get_normalized_site_name()

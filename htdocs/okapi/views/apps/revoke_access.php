@@ -4,21 +4,28 @@ namespace okapi\views\apps\revoke_access;
 
 use Exception;
 use okapi\Okapi;
+use okapi\Settings;
 use okapi\Db;
 use okapi\OkapiHttpResponse;
 use okapi\OkapiHttpRequest;
 use okapi\OkapiRedirectResponse;
+use okapi\OCSession;
 
 class View
 {
 	public static function call()
 	{
+		# Determine which user is logged in to OC.
+		
+		require_once($GLOBALS['rootpath']."okapi/lib/oc_session.php");
+		$OC_user_id = OCSession::get_user_id();
+		
 		# Ensure a user is logged in.
 	
-		if ($GLOBALS['usr'] == false)
+		if ($OC_user_id == null)
 		{
 			$after_login = "okapi/apps/"; # it is correct, if you're wondering
-			$login_url = $GLOBALS['absolute_server_URI']."login.php?target=".urlencode($after_login);
+			$login_url = Settings::get('SITE_URL')."login.php?target=".urlencode($after_login);
 			return new OkapiRedirectResponse($login_url);
 		}
 		
@@ -29,18 +36,18 @@ class View
 		Db::execute("
 			delete from okapi_tokens
 			where
-				user_id = '".mysql_real_escape_string($GLOBALS['usr']['userid'])."'
+				user_id = '".mysql_real_escape_string($OC_user_id)."'
 				and consumer_key = '".mysql_real_escape_string($consumer_key)."'
 		");
 		Db::execute("
 			delete from okapi_authorizations
 			where
-				user_id = '".mysql_real_escape_string($GLOBALS['usr']['userid'])."'
+				user_id = '".mysql_real_escape_string($OC_user_id)."'
 				and consumer_key = '".mysql_real_escape_string($consumer_key)."'
 		");
 		
 		# Redirect back to the apps page.
 		
-		return new OkapiRedirectResponse($GLOBALS['absolute_server_URI']."okapi/apps/");
+		return new OkapiRedirectResponse(Settings::get('SITE_URL')."okapi/apps/");
 	}
 }

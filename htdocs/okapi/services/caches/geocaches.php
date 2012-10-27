@@ -45,7 +45,7 @@ class WebService
 		else
 			$cache_codes = explode("|", $cache_codes);
 		
-		if (count($cache_codes) > 500)
+		if ((count($cache_codes) > 500) && (!$request->skip_limits))
 			throw new InvalidParam('cache_codes', "Maximum allowed number of referenced ".
 				"caches is 500. You provided ".count($cache_codes)." cache codes.");
 		if (count($cache_codes) != count(array_unique($cache_codes)))
@@ -121,7 +121,7 @@ class WebService
 				select
 					c.cache_id, c.name, c.longitude, c.latitude, c.last_modified,
 					c.date_created, c.type, c.status, c.date_hidden, c.size, c.difficulty,
-					c.terrain, c.wp_oc, c.logpw, u.uuid as user_uuid, u.username, u.user_id,
+					c.terrain, c.wp_oc, c.logpw, c.user_id,
 					
 					ifnull(sc.toprating, 0) as topratings,
 					ifnull(sc.found, 0) as founds,
@@ -131,10 +131,9 @@ class WebService
 					-- SEE ALSO OC.PL BRANCH BELOW
 				from
 					caches c
-					inner join user u on c.user_id = u.user_id
 					left join stat_caches as sc on c.cache_id = sc.cache_id
 				where
-					binary wp_oc in ('".implode("','", array_map('mysql_real_escape_string', $cache_codes))."')
+					wp_oc in ('".implode("','", array_map('mysql_real_escape_string', $cache_codes))."')
 					and status in (1,2,3)
 			");
 		}
@@ -148,7 +147,7 @@ class WebService
 				select
 					c.cache_id, c.name, c.longitude, c.latitude, c.last_modified,
 					c.date_created, c.type, c.status, c.date_hidden, c.size, c.difficulty,
-					c.terrain, c.wp_oc, c.logpw, u.uuid as user_uuid, u.username, u.user_id,
+					c.terrain, c.wp_oc, c.logpw, c.user_id,
 					
 					c.topratings,
 					c.founds,
@@ -157,17 +156,16 @@ class WebService
 					c.votes, c.score
 					-- SEE ALSO OC.DE BRANCH ABOVE
 				from
-					caches c,
-					user u
+					caches c
 				where
-					binary wp_oc in ('".implode("','", array_map('mysql_real_escape_string', $cache_codes))."')
-					and c.user_id = u.user_id
+					wp_oc in ('".implode("','", array_map('mysql_real_escape_string', $cache_codes))."')
 					and c.status in (1,2,3)
 			");
 		}
 
 		$results = array();
 		$cacheid2wptcode = array();
+		$owner_ids = array();
 		while ($row = mysql_fetch_assoc($rs))
 		{
 			$entry = array();
@@ -182,13 +180,10 @@ class WebService
 					case 'location': $entry['location'] = round($row['latitude'], 6)."|".round($row['longitude'], 6); break;
 					case 'type': $entry['type'] = Okapi::cache_type_id2name($row['type']); break;
 					case 'status': $entry['status'] = Okapi::cache_status_id2name($row['status']); break;
-					case 'url': $entry['url'] = $GLOBALS['absolute_server_URI']."viewcache.php?wp=".$row['wp_oc']; break;
+					case 'url': $entry['url'] = Settings::get('SITE_URL')."viewcache.php?wp=".$row['wp_oc']; break;
 					case 'owner':
-						$entry['owner'] = array(
-							'uuid' => $row['user_uuid'],
-							'username' => $row['username'],
-							'profile_url' => $GLOBALS['absolute_server_URI']."viewprofile.php?userid=".$row['user_id']
-						);
+						$owner_ids[$row['wp_oc']] = $row['user_id'];
+						/* continued later */
 						break;
 					case 'distance':
 						$entry['distance'] = (int)Okapi::get_distance($center_lat, $center_lon, $row['latitude'], $row['longitude']);
@@ -245,6 +240,29 @@ class WebService
 			$results[$row['wp_oc']] = $entry;
 		}
 		mysql_free_result($rs);
+		
+		# owner
+		
+		if (in_array('owner', $fields) && (count($results) > 0))
+		{
+			$rs = Db::query("
+				select user_id, uuid, username
+				from user
+				where user_id in ('".implode("','", array_map('mysql_real_escape_string', array_values($owner_ids)))."')
+			");
+			$tmp = array();
+			while ($row = mysql_fetch_assoc($rs))
+				$tmp[$row['user_id']] = $row;
+			foreach ($results as $cache_code => &$result_ref)
+			{
+				$row = $tmp[$owner_ids[$cache_code]];
+				$result_ref['owner'] = array(
+					'uuid' => $row['uuid'],
+					'username' => $row['username'],
+					'profile_url' => Settings::get('SITE_URL')."viewprofile.php?userid=".$row['user_id']
+				);
+			}
+		}
 		
 		# is_found
 		
@@ -466,7 +484,7 @@ class WebService
 					'user' => array(
 						'uuid' => $row['user_uuid'],
 						'username' => $row['username'],
-						'profile_url' => $GLOBALS['absolute_server_URI']."viewprofile.php?userid=".$row['user_id'],
+						'profile_url' => Settings::get('SITE_URL')."viewprofile.php?userid=".$row['user_id'],
 					),
 					'type' => Okapi::logtypeid2name($row['type']),
 					'comment' => $row['text']
@@ -706,7 +724,7 @@ class WebService
 	
 	public static function get_cache_attribution_note($cache_id, $lang)
 	{
-		$site_url = $GLOBALS['absolute_server_URI'];
+		$site_url = Settings::get('SITE_URL');
 		$site_name = Okapi::get_normalized_site_name();
 		$cache_url = $site_url."viewcache.php?cacheid=$cache_id";
 		

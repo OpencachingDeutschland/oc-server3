@@ -26,7 +26,7 @@ class WebService
 	
 	public static function call(OkapiRequest $request)
 	{
-		require_once 'replicate_common.inc.php';
+		require_once('replicate_common.inc.php');
 
 		$since = $request->get_parameter('since');
 		if ($since === null) throw new ParamMissing('since');

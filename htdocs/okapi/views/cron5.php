@@ -31,7 +31,7 @@ class View
 		# every 5 minutes (run 'crontab -e' to change or disable it) AND additionally
 		# every time you visit http://yoursite/okapi/cron5
 		
-		# require_once 'cronjobs.php'; CronJobController::force_run("JOB_NAME"); die();
+		# require_once($GLOBALS['rootpath']."okapi/cronjobs.php"); CronJobController::force_run("JOB_NAME"); die();
 		
 		Okapi::execute_cron5_cronjobs();
 	}

@@ -152,9 +152,9 @@ if (!navigator.cookieEnabled)
 }
 
 var moGeocoder = new google.maps.Geocoder();
-var moSearchList = document.getElementById('mapselectlist');
+var moSearchList = null;
 var maSearchListCoords = new Array();
-var moMapSearch = document.getElementById('mapsearch');
+var moMapSearch = null;
 var moMap = null;
 var moInfoWindow = null;
 var moMarkerList = new Array();
@@ -239,6 +239,9 @@ function mapLoad()
 	OSM_addMapType();
 
 	moInfoWindow = new google.maps.InfoWindow();
+
+	moSearchList = document.getElementById('mapselectlist');
+	moMapSearch = document.getElementById('mapsearch');
 
 	rqc_initialize(moMap);
 	tmd_initialize(moMap);

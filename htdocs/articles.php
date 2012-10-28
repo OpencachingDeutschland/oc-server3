@@ -67,11 +67,12 @@
 	$tpl->cache_id = 'articles|' . $language . '|' . $article;
 	$tpl->cache_lifetime = 43200;
 
+	$tpl->menuitem = sql_value("SELECT `id` FROM `sys_menu` WHERE `href`='&1' LIMIT 1", 0, 'articles.php?page=' . urlencode($article));
+	if ($tpl->menuitem == 0)
+		$tpl->redirect('index.php');
+
 	if (!$tpl->is_cached())
 	{
-		$tpl->menuitem = sql_value("SELECT `id` FROM `sys_menu` WHERE `href`='&1' LIMIT 1", 0, 'articles.php?page=' . urlencode($article));
-		if ($tpl->menuitem == 0)
-			$tpl->redirect('index.php');
 
 		$tpl->assign('article', $article);
 		$tpl->assign('language', $language);

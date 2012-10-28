@@ -10,10 +10,10 @@
 		{t}Stored queries{/t}
 	</div>
 
-	<table class="table" style="width:100%">
+	<table  class="null" border="0" cellspacing="0" width="98%">
 		<tr>
 			<td>
-				<table class="null" border="0" cellspacing="0">
+				<table class="table" style="width:100%">
 					<tr>
 						<td class="header-small" width="300px">{t}Name{/t}</td>
 						<td class="header-small" width="200px">{t}Download{/t}</td>

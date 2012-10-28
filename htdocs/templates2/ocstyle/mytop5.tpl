@@ -16,10 +16,10 @@
 	</div> 
 {/if}
 
-<table class="table">
+<table  class="null" border="0" cellspacing="0" width="98%">
 	<tr>
 		<td>
-			<table class="null" border="0" cellspacing="0" width="100%">
+			<table class="table">
 				<tr class="searchresult">
 					<td width="50px"><b>{t}Type{/t}</b></td>
 					<td width="50px"><b>{t}State{/t}</b></td>
@@ -36,7 +36,7 @@
 					</tr>
 					<tr><td class="spacer" colspan="4"></td></tr>
 				{foreachelse}
-					<tr><td colspan="2">{t}You haven't recommended a Geocache.{/t}</td></tr>
+					<tr><td colspan="3">{t}You haven't recommended a Geocache.{/t}</td></tr>
 				{/foreach}
 			</table>
 		</td>

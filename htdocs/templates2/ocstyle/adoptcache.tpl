@@ -93,7 +93,7 @@
 		
 	<div class="content2-pagetitle"><img src="resource2/{$opt.template.style}/images/profile/22x22-email.png" style="align: left; margin-right: 10px;" width="22" height="22" alt="" />{t}Geocaches the owner offers you for adoption{/t}</div>
 
-	<table class="content">
+	<table class="table">
 		{foreach from=$adoptions item=adoptItem}
 			<tr>
 				<td>

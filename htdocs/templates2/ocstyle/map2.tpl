@@ -28,255 +28,7 @@
 <script type="text/javascript" src="resource2/{$opt.template.style}/js/tip_balloon.js"></script>
 <script type="text/javascript" src="resource2/{$opt.template.style}/js/tip_centerwindow.js"></script>
 
-{if $opt.template.popup==false}
-	<div class="content2-pagetitle">
-		<img src="resource2/{$opt.template.style}/images/misc/32x32-home.png" style="align: left; margin-right: 10px;" width="32" height="32" alt="" />
-		{t}Map{/t}
-	</div>
 
-	<div class="mapform">
-		<form onsubmit="javascript:mapsubmit_click(); return false;" id="cachemap">
-			<table class="mapsearch">
-				<tr>
-					<td>
-						<input type="text" id="mapsearch" value="" onfocus="javascript:mapsearch_onfocus()" onblur="javascript:mapsearch_onblur()" size="50" />
-					</td>
-					<td>
-						<input type="button" id="mapsubmit" value="{t}Search{/t}" onclick="javascript:mapsubmit_click()" />
-					</td>
-					<td>
-						<a href="#" onclick="javascript:showPermlinkBox_click()"><img src="resource2/{$opt.template.style}/images/map/35x35-star.png" align="right" style="margin-left:15px; margin-right: 0px;" height="35" width="35" alt="{t}Show link to this map{/t}" /></a>
-						{if !$bDisableFullscreen}
-							<a href="#" onclick="javascript:fullscreen_click()"><img src="resource2/{$opt.template.style}/images/map/35x35-fullscreen.png" align="right" style="margin-left:15px; margin-right: 0px;" height="35" width="35" alt="{t}Switch to full screen{/t}" /></a>
-						{/if}
-						<a href="#" onclick="javascript:fullscreen_click()"><img src="resource2/{$opt.template.style}/images/map/35x35-fullscreen.png" align="right" style="margin-left:15px; margin-right: 0px;" height="35" width="35" alt="{t}Switch to full screen{/t}" /></a>
-						<a href="#" onclick="javascript:download_gpx()"><img id="download_gpx_img" src="resource2/{$opt.template.style}/images/map/35x35-gpx-download.png" align="right" style="margin-left:15px; margin-right: 0px;" height="35" width="35" alt="{t}Download GPX file (max. 500){/t}" /></a>
-						<a href="#" onclick="javascript:center_home()"><img id="center_home_img" src="resource2/{$opt.template.style}/images/misc/32x32-home.png" align="right" style="margin-left:15px; margin-right: 0px;" height="35" width="35" alt="{t}Goto home coordinates{/t}" /></a>
-					</td>
-				</tr>
-			</table>
-		</form>
-	</div>
-
-	<div class="mapselectgeocode">
-		<select id="mapselectlist" name="mapselectlist" size="6" class="mapselectlist" onblur="mapselectlist_onblur()" onchange="mapselectlist_onchange()">
-		</select>
-	</div>
-
-	<div id="permalink_box" class="mappermalink" style="display:none;">
-		<table>
-			<tr><td><img src="resource2/ocstyle/images/viewcache/link.png" alt="" height="16" width="16" /> {t}Link{/t} ( <a href="#" onclick="javascript:openPermalink_click()">{t}Open{/t}</a> )</td></tr>
-			<tr><td><input id="permalink_text" type="text" value="" size="50"/></td></tr>
-			<tr id="permalink_addFavorites"><td align="right"><input type="button" value="{t}Add to favorites...{/t}" onclick="javascript:addFavorites_click()" /></td></tr>
-		</table>
-	</div>
-{/if}
-
-{if $opt.template.popup==false}
-	<p>&nbsp;</p>
-{/if}
-
-{if $opt.template.popup==false}
-	<div id="map" style="width:770px;height:600px;"></div>
-	<div style="width:770px;text-align:right;">{t}Caches displayed{/t} <span id="statCachesCount">0</span>, {t}Time to load{/t} <span id="statLoadTime">0</span> {t}Sec.{/t}</div>
-{else}
-	<div id="map" style="width:100%;height:100%;"></div>
-{/if}
-
-{if $opt.template.popup==false}
-
-<div class="buffer" style="width: 500px; height: 5px;">&nbsp;</div>
-	<p class="content-title-noshade-size2">{t}Only show Geocaches with the following properties:{/t}</p>
-<div class="buffer" style="width: 500px; height: 5px;">&nbsp;</div>
-	<table>
-		<tr>
-			<td class="mapfilter pad10" width="752"><strong>{t}Name:{/t}</strong> <input type="text" id="cachename" name="cachename" value="" onkeypress="filter_changed()" onchange="filter_changed()" class="input200" /></td>
-		</tr>
-	</table>
-	<table>
-		<tr>
-			<td valign="top" class="mapfilter pad10" width="140">
-				<table>
-					<tr><td class="mapfiltertopic">{t}Cachetype{/t}</td></tr>
-					<tr><td><span style="line-height: 5px;">&nbsp;</span></td></tr>
-					{foreach from=$aCacheType item=cacheTypeItem}
-						<tr>
-							<td>
-								<input type="checkbox" id="cachetype{$cacheTypeItem.id}" name="cachetype{$cacheTypeItem.id}" value="1" checked="checked" onclick="filter_changed()" class="checkbox" />
-								<label for="cachetype{$cacheTypeItem.id}">{$cacheTypeItem.text|escape}</label>
-							</td>
-						</tr>
-					{/foreach}
-				</table>
-			</td>
-			<td valign="top" class="mapfilter pad10" width="150">
-				<table>
-					<tr><td class="mapfiltertopic">{t}Cache container{/t}</td></tr>
-					<tr><td><span style="line-height: 5px;">&nbsp;</span></td></tr>
-					{foreach from=$aCacheSize item=cacheSizeItem}
-						<tr>
-							<td>
-								<input type="checkbox" id="cachesize{$cacheSizeItem.id}" name="cachesize{$cacheSizeItem.id}" value="1" checked="checked" onclick="filter_changed()" class="checkbox" />
-								<label for="cachesize{$cacheSizeItem.id}">{$cacheSizeItem.text|escape}</label>
-							</td>
-						</tr>
-					{/foreach}
-				</table>
-			</td>
-			<td valign="top" class="mapfilter pad10" width="110">
-				<table>
-					<tr><td class="mapfiltertopic">{t}Hide{/t}</td></tr>
-					<tr><td><span style="line-height: 5px;">&nbsp;</span></td></tr>
-					<tr>
-						<td>
-							<input type="checkbox" id="f_userowner" name="f_userowner" value="1" onclick="filter_changed()" class="checkbox" />
-							<label for="f_userowner">{t}My owns{/t}</label>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<input type="checkbox" id="f_userfound" name="f_userfound" value="1" onclick="filter_changed()" class="checkbox" />
-							<label for="f_userfound">{t}My finds{/t}</label>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<input type="checkbox" id="f_ignored" name="f_ignored" value="1" onclick="filter_changed()" class="checkbox" />
-							<label for="f_ignored">{t}My ignored{/t}</label>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<input type="checkbox" id="f_inactive" name="f_inactive" value="1" checked="checked" onclick="filter_changed()" class="checkbox" />
-							<label for="f_inactive">{t}Not active{/t}</label>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<input type="checkbox" id="f_otherPlatforms" name="f_otherPlatforms" value="1" onclick="filter_changed()" class="checkbox" />
-							<label for="f_otherPlatforms">{t}Double listings{/t}</label>
-						</td>
-					</tr>
-				</table>
-			</td>
-			<td valign="top" class="mapfilter pad10" width="280"> 
-				<table>
-					<tr>
-						<td colspan="2" class="mapfiltertopic">{t}Rating{/t}</td>
-					<tr><td colspan="2"><span style="line-height: 5px;">&nbsp;</span></td></tr>
-					</tr>
-					<tr>
-						<td>{t}Difficulty{/t}</td>
-						<td>
-							<select id="difficultymin" name="difficultymin" onchange="filter_changed()">
-								<option value="0" selected="selected">-</option>
-								<option value="2">1.0</option>
-								<option value="3">1.5</option>
-								<option value="4">2.0</option>
-								<option value="5">2.5</option>
-								<option value="6">3.0</option>
-								<option value="7">3.5</option>
-								<option value="8">4.0</option>
-								<option value="9">4.5</option>
-								<option value="10">5.0</option>
-							</select>
-							&nbsp;&nbsp;&nbsp;{t}to{/t}&nbsp;&nbsp;&nbsp;
-							<select id="difficultymax" name="difficultymax" onchange="filter_changed()">
-								<option value="0" selected="selected">-</option>
-								<option value="2">1.0</option>
-								<option value="3">1.5</option>
-								<option value="4">2.0</option>
-								<option value="5">2.5</option>
-								<option value="6">3.0</option>
-								<option value="7">3.5</option>
-								<option value="8">4.0</option>
-								<option value="9">4.5</option>
-								<option value="10">5.0</option>
-							</select>
-						</td>
-					</tr>
-					<tr>
-						<td>{t}Terrain{/t}</td>
-						<td>
-							<select id="terrainmin" name="terrainmin" onchange="filter_changed()">
-								<option value="0" selected="selected">-</option>
-								<option value="2">1.0</option>
-								<option value="3">1.5</option>
-								<option value="4">2.0</option>
-								<option value="5">2.5</option>
-								<option value="6">3.0</option>
-								<option value="7">3.5</option>
-								<option value="8">4.0</option>
-								<option value="9">4.5</option>
-								<option value="10">5.0</option>
-							</select>
-							&nbsp;&nbsp;&nbsp;{t}to{/t}&nbsp;&nbsp;&nbsp;
-							<select id="terrainmax" name="terrainmax" onchange="filter_changed()">
-								<option value="0" selected="selected">-</option>
-								<option value="2">1.0</option>
-								<option value="3">1.5</option>
-								<option value="4">2.0</option>
-								<option value="5">2.5</option>
-								<option value="6">3.0</option>
-								<option value="7">3.5</option>
-								<option value="8">4.0</option>
-								<option value="9">4.5</option>
-								<option value="10">5.0</option>
-							</select>
-						</td>
-					</tr>
-					<tr>
-						<td>{t}Min. recommendations{/t}</td>
-						<td>
-							<select id="recommendationmin" name="recommendationmin" onchange="filter_changed()">
-								<option value="0" selected="selected">-</option>
-								<option value="1">1</option>
-								<option value="2">2</option>
-								<option value="3">3</option>
-								<option value="4">4</option>
-								<option value="5">5</option>
-								<option value="6">6</option>
-								<option value="7">7</option>
-								<option value="8">8</option>
-								<option value="9">9</option>
-								<option value="10">10</option>
-								<option value="11">11</option>
-								<option value="12">12</option>
-								<option value="13">13</option>
-								<option value="14">14</option>
-								<option value="15">15</option>
-								<option value="16">16</option>
-								<option value="17">17</option>
-								<option value="18">18</option>
-								<option value="19">19</option>
-								<option value="20">20</option>
-							</select>
-						</td>
-					</tr>
-				</table>
-			</td>
-		</tr>
-	</table>
-
-	{* attributes *}
-	<table>
-		<tr>
-			<td  valign="top" class="mapfilter pad10" width="752">
-				<table>
-					<tr><td class="mapfiltertopic">Attribute</td></tr>
-					<tr><td><span style="line-height: 5px;">&nbsp;</span></td></tr>
-					<tr>
-						<td>
-							{include file="res_attribgroup.tpl" attriblist=$aAttributes onmousedown="attribute_onmousedown" inputprefix="attribute" stateDisable=$aAttributesDisabled}
-						</td>
-					</tr>
-				</table>
-			</td>
-		</tr>
-	</table>
-<div class="buffer" style="width: 500px; height: 5px;">&nbsp;</div>
-
-{/if}
 
 {literal}
 <script type="text/javascript">
@@ -383,6 +135,10 @@ var mbInitCookiePos = {/literal}{$bGMInitCookiePos}{literal};
 var msInitWaypoint = "{/literal}{$sGMInitWaypoint}{literal}";
 var msInitType = '';
 
+/* home coordinates */
+var mnUserLat = {/literal}{$nUserLat}{literal};
+var mnUserLon = {/literal}{$nUserLon}{literal};
+
 var msSearchHint = "{/literal}{t escape=js}Search for city, cache or waypoint{/t}{literal}";
 var mbResetSearchTextOnFocus = false;
 var msPermalink = 'map2.php';
@@ -473,9 +229,10 @@ function mapLoad()
 		zoom: mnInitZoom,
 		center: new google.maps.LatLng( mnInitLat, mnInitLon ),
 		mapTypeControlOptions: {
-			mapTypeIds: ['OSM', google.maps.MapTypeId.ROADMAP, google.maps.MapTypeId.SATELLITE, google.maps.MapTypeId.HYBRID, google.maps.MapTypeId.TERRAIN],
+			mapTypeIds: ['OSM', google.maps.MapTypeId.ROADMAP, google.maps.MapTypeId.SATELLITE, google.maps.MapTypeId.HYBRID, google.maps.MapTypeId.TERRAIN]
 		},
-		mapTypeId: google.maps.MapTypeId.ROADMAP
+		mapTypeId: google.maps.MapTypeId.ROADMAP,
+		streetViewControl: false
 	};
 
 	moMap = new google.maps.Map( document.getElementById("map"), myOptions);
@@ -496,8 +253,10 @@ function mapLoad()
 	copyrightDiv.style.background = "#FFFFFF";
 	moMap.controls[google.maps.ControlPosition.BOTTOM_RIGHT].push(copyrightDiv);    
 	
-	moMap.setCenter(new google.maps.LatLng(mnInitLat, mnInitLon), mnInitZoom, map_GetMapTypeByName(msInitType));
-
+	moMap.setCenter( new google.maps.LatLng(mnInitLat, mnInitLon) );
+	moMap.setZoom( mnInitZoom );
+	moMap.setMapTypeId( map_GetMapTypeByName(msInitType) );
+	
 	google.maps.event.addListener(moMap, "dragstart", function(){map_movestart()});
 	google.maps.event.addListener(moMap, "dragend", function(){map_moveend()});
 	google.maps.event.addListener(moMap, "zoom_changed", function(){map_moveend()});
@@ -555,27 +314,18 @@ function updateCopyrights()
 
 function map_GetMapTypeByName(sName)
 {
-	//TODO: doesn't work yet
-	var oMapTypeFound = null;
-	
-	/*
-	// old gmaps v2 code
-	var aMapTypes = moMap.getMapTypes();
-
-	for (var nIndex=0; nIndex<aMapTypes.length; nIndex++)
+	if( sName == google.maps.MapTypeId.HYBRID ||
+		sName == google.maps.MapTypeId.SATELLITE ||
+		sName == google.maps.MapTypeId.ROADMAP || 
+		sName == google.maps.MapTypeId.TERRAIN ||
+		sName == "OSM" )
 	{
-		if (aMapTypes[nIndex].getName(false) == sName)
-		{
-			oMapTypeFound = aMapTypes[nIndex];
-			break;
-		}
+		return sName;
 	}
-	*/
-	
-	if (oMapTypeFound==null)
-		oMapTypeFound = google.maps.MapTypeId.HYBRID;
-
-	return oMapTypeFound;
+	else
+	{
+		return google.maps.MapTypeId.HYBRID;
+	}
 }
 
 function map_movestart()
@@ -595,6 +345,19 @@ function map_maptypechanged()
 {
 	updateCopyrights();
 	cookieSave();
+}
+
+function center_home()
+{
+	if( mnUserLat != 0 || mnUserLon != 0 )
+	{
+		moMap.setCenter( new google.maps.LatLng(mnUserLat, mnUserLon) );
+		moMap.setZoom( 12 );
+	}
+	else
+	{
+		alert( "no home coordinates!" );
+	}
 }
 
 function fullscreen_click()
@@ -1565,3 +1328,257 @@ function rqc_visible()
 //-->
 </script>
 {/literal}
+
+
+
+{if $opt.template.popup==false}
+	<div class="content2-pagetitle">
+		<img src="resource2/{$opt.template.style}/images/misc/32x32-home.png" style="align: left; margin-right: 10px;" width="32" height="32" alt="" />
+		{t}Map{/t}
+	</div>
+
+	<div class="mapform">
+		<form onsubmit="javascript:mapsubmit_click(); return false;" id="cachemap">
+			<table class="mapsearch">
+				<tr>
+					<td>
+						<input type="text" id="mapsearch" value="" onfocus="javascript:mapsearch_onfocus()" onblur="javascript:mapsearch_onblur()" size="50" />
+					</td>
+					<td>
+						<input type="button" id="mapsubmit" value="{t}Search{/t}" onclick="javascript:mapsubmit_click()" />
+					</td>
+					<td>
+						<a href="#" onclick="javascript:showPermlinkBox_click()"><img src="resource2/{$opt.template.style}/images/map/35x35-star.png" align="right" style="margin-left:15px; margin-right: 0px;" height="35" width="35" alt="{t}Show link to this map{/t}" /></a>
+						{if !$bDisableFullscreen}
+							<a href="#" onclick="javascript:fullscreen_click()"><img src="resource2/{$opt.template.style}/images/map/35x35-fullscreen.png" align="right" style="margin-left:15px; margin-right: 0px;" height="35" width="35" alt="{t}Switch to full screen{/t}" /></a>
+						{/if}
+						<a href="#" onclick="javascript:fullscreen_click()"><img src="resource2/{$opt.template.style}/images/map/35x35-fullscreen.png" align="right" style="margin-left:15px; margin-right: 0px;" height="35" width="35" alt="{t}Switch to full screen{/t}" /></a>
+						<a href="#" onclick="javascript:download_gpx()"><img id="download_gpx_img" src="resource2/{$opt.template.style}/images/map/35x35-gpx-download.png" align="right" style="margin-left:15px; margin-right: 0px;" height="35" width="35" alt="{t}Download GPX file (max. 500){/t}" /></a>
+						{if $nUserLat != 0 || $nUserLon != 0 }
+						<a href="#" onclick="javascript:center_home()"><img id="center_home_img" src="resource2/{$opt.template.style}/images/misc/32x32-home.png" align="right" style="margin-left:15px; margin-right: 0px;" height="35" width="35" alt="{t}Goto home coordinates{/t}" /></a>
+						{/if}
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+
+	<div class="mapselectgeocode">
+		<select id="mapselectlist" name="mapselectlist" size="6" class="mapselectlist" onblur="mapselectlist_onblur()" onchange="mapselectlist_onchange()">
+		</select>
+	</div>
+
+	<div id="permalink_box" class="mappermalink" style="display:none;">
+		<table>
+			<tr><td><img src="resource2/ocstyle/images/viewcache/link.png" alt="" height="16" width="16" /> {t}Link{/t} ( <a href="#" onclick="javascript:openPermalink_click()">{t}Open{/t}</a> )</td></tr>
+			<tr><td><input id="permalink_text" type="text" value="" size="50"/></td></tr>
+			<tr id="permalink_addFavorites"><td align="right"><input type="button" value="{t}Add to favorites...{/t}" onclick="javascript:addFavorites_click()" /></td></tr>
+		</table>
+	</div>
+{/if}
+
+{if $opt.template.popup==false}
+	<p>&nbsp;</p>
+{/if}
+
+{if $opt.template.popup==false}
+	<div id="map" style="width:770px;height:600px;"></div>
+	<div style="width:770px;text-align:right;">{t}Caches displayed{/t} <span id="statCachesCount">0</span>, {t}Time to load{/t} <span id="statLoadTime">0</span> {t}Sec.{/t}</div>
+{else}
+	<div id="map" style="width:100%;height:100%;"></div>
+{/if}
+
+{if $opt.template.popup==false}
+
+<div class="buffer" style="width: 500px; height: 5px;">&nbsp;</div>
+	<p class="content-title-noshade-size2">{t}Only show Geocaches with the following properties:{/t}</p>
+<div class="buffer" style="width: 500px; height: 5px;">&nbsp;</div>
+	<table>
+		<tr>
+			<td class="mapfilter pad10" width="752"><strong>{t}Name:{/t}</strong> <input type="text" id="cachename" name="cachename" value="" onkeypress="filter_changed()" onchange="filter_changed()" class="input200" /></td>
+		</tr>
+	</table>
+	<table>
+		<tr>
+			<td valign="top" class="mapfilter pad10" width="140">
+				<table>
+					<tr><td class="mapfiltertopic">{t}Cachetype{/t}</td></tr>
+					<tr><td><span style="line-height: 5px;">&nbsp;</span></td></tr>
+					{foreach from=$aCacheType item=cacheTypeItem}
+						<tr>
+							<td>
+								<input type="checkbox" id="cachetype{$cacheTypeItem.id}" name="cachetype{$cacheTypeItem.id}" value="1" checked="checked" onclick="filter_changed()" class="checkbox" />
+								<label for="cachetype{$cacheTypeItem.id}">{$cacheTypeItem.text|escape}</label>
+							</td>
+						</tr>
+					{/foreach}
+				</table>
+			</td>
+			<td valign="top" class="mapfilter pad10" width="150">
+				<table>
+					<tr><td class="mapfiltertopic">{t}Cache container{/t}</td></tr>
+					<tr><td><span style="line-height: 5px;">&nbsp;</span></td></tr>
+					{foreach from=$aCacheSize item=cacheSizeItem}
+						<tr>
+							<td>
+								<input type="checkbox" id="cachesize{$cacheSizeItem.id}" name="cachesize{$cacheSizeItem.id}" value="1" checked="checked" onclick="filter_changed()" class="checkbox" />
+								<label for="cachesize{$cacheSizeItem.id}">{$cacheSizeItem.text|escape}</label>
+							</td>
+						</tr>
+					{/foreach}
+				</table>
+			</td>
+			<td valign="top" class="mapfilter pad10" width="110">
+				<table>
+					<tr><td class="mapfiltertopic">{t}Hide{/t}</td></tr>
+					<tr><td><span style="line-height: 5px;">&nbsp;</span></td></tr>
+					<tr>
+						<td>
+							<input type="checkbox" id="f_userowner" name="f_userowner" value="1" onclick="filter_changed()" class="checkbox" />
+							<label for="f_userowner">{t}My owns{/t}</label>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<input type="checkbox" id="f_userfound" name="f_userfound" value="1" onclick="filter_changed()" class="checkbox" />
+							<label for="f_userfound">{t}My finds{/t}</label>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<input type="checkbox" id="f_ignored" name="f_ignored" value="1" onclick="filter_changed()" class="checkbox" />
+							<label for="f_ignored">{t}My ignored{/t}</label>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<input type="checkbox" id="f_inactive" name="f_inactive" value="1" checked="checked" onclick="filter_changed()" class="checkbox" />
+							<label for="f_inactive">{t}Not active{/t}</label>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<input type="checkbox" id="f_otherPlatforms" name="f_otherPlatforms" value="1" onclick="filter_changed()" class="checkbox" />
+							<label for="f_otherPlatforms">{t}Double listings{/t}</label>
+						</td>
+					</tr>
+				</table>
+			</td>
+			<td valign="top" class="mapfilter pad10" width="280"> 
+				<table>
+					<tr>
+						<td colspan="2" class="mapfiltertopic">{t}Rating{/t}</td>
+					<tr><td colspan="2"><span style="line-height: 5px;">&nbsp;</span></td></tr>
+					</tr>
+					<tr>
+						<td>{t}Difficulty{/t}</td>
+						<td>
+							<select id="difficultymin" name="difficultymin" onchange="filter_changed()">
+								<option value="0" selected="selected">-</option>
+								<option value="2">1.0</option>
+								<option value="3">1.5</option>
+								<option value="4">2.0</option>
+								<option value="5">2.5</option>
+								<option value="6">3.0</option>
+								<option value="7">3.5</option>
+								<option value="8">4.0</option>
+								<option value="9">4.5</option>
+								<option value="10">5.0</option>
+							</select>
+							&nbsp;&nbsp;&nbsp;{t}to{/t}&nbsp;&nbsp;&nbsp;
+							<select id="difficultymax" name="difficultymax" onchange="filter_changed()">
+								<option value="0" selected="selected">-</option>
+								<option value="2">1.0</option>
+								<option value="3">1.5</option>
+								<option value="4">2.0</option>
+								<option value="5">2.5</option>
+								<option value="6">3.0</option>
+								<option value="7">3.5</option>
+								<option value="8">4.0</option>
+								<option value="9">4.5</option>
+								<option value="10">5.0</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td>{t}Terrain{/t}</td>
+						<td>
+							<select id="terrainmin" name="terrainmin" onchange="filter_changed()">
+								<option value="0" selected="selected">-</option>
+								<option value="2">1.0</option>
+								<option value="3">1.5</option>
+								<option value="4">2.0</option>
+								<option value="5">2.5</option>
+								<option value="6">3.0</option>
+								<option value="7">3.5</option>
+								<option value="8">4.0</option>
+								<option value="9">4.5</option>
+								<option value="10">5.0</option>
+							</select>
+							&nbsp;&nbsp;&nbsp;{t}to{/t}&nbsp;&nbsp;&nbsp;
+							<select id="terrainmax" name="terrainmax" onchange="filter_changed()">
+								<option value="0" selected="selected">-</option>
+								<option value="2">1.0</option>
+								<option value="3">1.5</option>
+								<option value="4">2.0</option>
+								<option value="5">2.5</option>
+								<option value="6">3.0</option>
+								<option value="7">3.5</option>
+								<option value="8">4.0</option>
+								<option value="9">4.5</option>
+								<option value="10">5.0</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td>{t}Min. recommendations{/t}</td>
+						<td>
+							<select id="recommendationmin" name="recommendationmin" onchange="filter_changed()">
+								<option value="0" selected="selected">-</option>
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+								<option value="5">5</option>
+								<option value="6">6</option>
+								<option value="7">7</option>
+								<option value="8">8</option>
+								<option value="9">9</option>
+								<option value="10">10</option>
+								<option value="11">11</option>
+								<option value="12">12</option>
+								<option value="13">13</option>
+								<option value="14">14</option>
+								<option value="15">15</option>
+								<option value="16">16</option>
+								<option value="17">17</option>
+								<option value="18">18</option>
+								<option value="19">19</option>
+								<option value="20">20</option>
+							</select>
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
+
+	{* attributes *}
+	<table>
+		<tr>
+			<td  valign="top" class="mapfilter pad10" width="752">
+				<table>
+					<tr><td class="mapfiltertopic">Attribute</td></tr>
+					<tr><td><span style="line-height: 5px;">&nbsp;</span></td></tr>
+					<tr>
+						<td>
+							{include file="res_attribgroup.tpl" attriblist=$aAttributes onmousedown="attribute_onmousedown" inputprefix="attribute" stateDisable=$aAttributesDisabled}
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
+<div class="buffer" style="width: 500px; height: 5px;">&nbsp;</div>
+
+{/if}

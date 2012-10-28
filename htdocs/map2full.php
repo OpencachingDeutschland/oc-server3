@@ -7,6 +7,7 @@
 
 	require('./lib2/web.inc.php');
 	require_once('./lib2/logic/cache.class.php');
+	require_once('./lib2/logic/user.class.php');
 	require_once('./lib2/logic/attribute.class.php');
 
 	/* because the map does access some private info like
@@ -65,7 +66,7 @@
 		$tpl->error($translate->t('There is no google maps key registered for this domain.', '', '', 0));
 
   //$tpl->add_header_javascript('https://maps.googleapis.com/maps/api/js?key=' . urlencode($sGMKey) . '&amp;sensor=false');
-  $tpl->add_header_javascript('https://maps.googleapis.com/maps/api/js?sensor=false');
+  $tpl->add_header_javascript('https://maps.googleapis.com/maps/api/js?sensor=false&key=' . urlencode($sGMKey));
   $tpl->add_header_javascript('resource2/misc/map/CacheMarker.js');
   $tpl->add_body_load('mapLoad()');
   $tpl->add_body_unload('GUnload()');
@@ -122,7 +123,18 @@
 				$sGMInitWaypoint = '';
 		}
 	}
-
+	
+	$nUserLon = 0;
+	$nUserLat = 0;
+	if( $login->userid != 0 )
+	{
+		$user = new user($login->userid);
+		$nUserLat = $user->getLatitude();
+		$nUserLon = $user->getLongitude();
+	}
+	$tpl->assign('nUserLon', $nUserLon);
+	$tpl->assign('nUserLat', $nUserLat);
+	
 	$tpl->assign('nGMInitLon', $nGMInitLon);
 	$tpl->assign('nGMInitLat', $nGMInitLat);
 	$tpl->assign('nGMInitZoom', $nGMInitZoom);

@@ -92,26 +92,17 @@
 					if ((($target == 'oc') || ($target == 'nc') || ($target == 'gc')) && mb_ereg_match('(('.$opt['logic']['ocprefixes'].'|gc)([a-z0-9]){4,5}|n([a-f0-9]){5,5})$', mb_strtolower($searchfor)))
 					{
 						// get cache_id from DB
-						$rs = sql("SELECT `cache_id` FROM `caches` INNER JOIN `cache_status` ON `caches`.`status`=`cache_status`.`id` WHERE (`cache_status`.`allow_user_view`=1 OR `caches`.`user_id`='&1') AND `wp_" . sql_escape($target) . "`='&2'", $login->userid, $searchfor);
-						$count = sql_num_rows($rs);
-						if ($count == 1)
+						// GC/NC waypoints can be duplicates -> return first match with least status number
+						$rs = sql("SELECT `cache_id` FROM `caches` INNER JOIN `cache_status` ON `caches`.`status`=`cache_status`.`id` WHERE (`cache_status`.`allow_user_view`=1 OR `caches`.`user_id`='&1') AND `wp_" . sql_escape($target) . "`='&2' ORDER BY `caches`.`status`,`caches`.`cache_id` LIMIT 0,1", $login->userid, $searchfor);
+						if (sql_num_rows($rs))
 						{
 							$record = sql_fetch_array($rs);
-							sql_free_result($rs);
 							$targeturl = 'viewcache.php?cacheid=' . $record['cache_id'];
 							unset($record);
 						}
-						else if ($count == 0)
-						{
-							sql_free_result($rs);
+						else
 							$tpl->error(ERROR_SEARCHPLUGIN_WAYPOINT_NOTFOUND, $searchfor);
-						}
-						else if ($count > 1)
-						{
-							sql_free_result($rs);
-							$tpl->error(ERROR_SEARCHPLUGIN_WAYPOINT_MANY, $searchfor);
-						}
-						unset($count);
+						sql_free_result($rs);
 					}
 					else
 					{

@@ -346,7 +346,14 @@ class rowEditor
 			return false;
 
 		$sFormatedValue = $this->pFormatValue($this->fields[$sField]['type'], $sValue);
-		if ($this->fields[$sField]['value'] != $sFormatedValue)
+		if ($this->fields[$sField]['type'] == RE_TYPE_FLOAT)
+		  // Direct float comparison is deprecated and can result in last-digit errors.
+		  // Floats in OC database are only used for reasonably large numbers like coordinates,
+		  // waylengths and time estimates, so using a fixed epsilon threshold is safe:
+		  $changed = (abs($sFormatedValue - $this->fields[$sField]['value'])  >= 1e-13);
+		else
+		  $changed = ($sFormatedValue != $this->fields[$sField]['value']);
+		if ($changed)
 		{
 			$this->fields[$sField]['value'] = $sFormatedValue;
 			$this->fields[$sField]['changed'] = true;

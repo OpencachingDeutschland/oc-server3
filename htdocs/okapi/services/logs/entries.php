@@ -68,7 +68,7 @@ class WebService
 				'user' => array(
 					'uuid' => $row['user_uuid'],
 					'username' => $row['username'],
-					'profile_url' => $GLOBALS['absolute_server_URI']."viewprofile.php?userid=".$row['user_id'],
+					'profile_url' => Settings::get('SITE_URL')."viewprofile.php?userid=".$row['user_id'],
 				),
 				'type' => Okapi::logtypeid2name($row['type']),
 				'comment' => $row['text']

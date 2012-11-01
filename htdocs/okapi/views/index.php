@@ -4,6 +4,7 @@ namespace okapi\views\index;
 
 use Exception;
 use okapi\Okapi;
+use okapi\Settings;
 use okapi\OkapiRequest;
 use okapi\OkapiRedirectResponse;
 use okapi\ParamMissing;
@@ -18,7 +19,7 @@ class View
 		# This is called when someone displays "http://../okapi/" (with no
 		# html path at the end). We will redirect to the introduction page.
 		
-		return new OkapiRedirectResponse($GLOBALS['absolute_server_URI'].
+		return new OkapiRedirectResponse(Settings::get('SITE_URL').
 			"okapi/introduction.html");
 	}
 }

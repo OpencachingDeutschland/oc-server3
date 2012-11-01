@@ -140,7 +140,7 @@ class ReplicateCommon
 				'uuid', $DELETED_uuids, self::$logged_log_entry_fields, false, true, 3600);
 		}
 		
-		# Update state variables and release DB lock.
+		# Update state variables.
 		
 		Okapi::set_var("last_clog_update", $now);
 		$revision = Db::select_value("select max(id) from okapi_clog");
@@ -173,7 +173,7 @@ class ReplicateCommon
 		# Get the current values for objects. Compare them with their previous versions
 		# and generate changelog entries.
 		
-		require_once $GLOBALS['rootpath'].'okapi/service_runner.php';
+		require_once($GLOBALS['rootpath'].'okapi/service_runner.php');
 		$current_values = OkapiServiceRunner::call($feeder_method, new OkapiInternalRequest(
 			new OkapiInternalConsumer(), null, array($feeder_keys_param => implode("|", $key_values),
 			'fields' => $fields)));
@@ -379,9 +379,7 @@ class ReplicateCommon
 				if ($entry['change_type'] == 'replace')
 					$filtered[] = $entry;
 			unset($entries);
-			$fp = fopen("$dir/$basename.json", "wb");
-			fwrite($fp, json_encode($filtered));
-			fclose($fp);
+			file_put_contents("$dir/$basename.json", json_encode($filtered));
 			unset($filtered);
 			$i++;
 		}
@@ -416,9 +414,7 @@ class ReplicateCommon
 					if ($entry['change_type'] == 'replace')
 						$filtered[] = $entry;
 				unset($entries);
-				$fp = fopen("$dir/$basename.json", "wb");
-				fwrite($fp, json_encode($filtered));
-				fclose($fp);
+				file_put_contents("$dir/$basename.json", json_encode($filtered));
 				unset($filtered);
 				$i++;
 			}
@@ -435,9 +431,7 @@ class ReplicateCommon
 				'generated_at' => $generated_at,
 			),
 		);
-		$fp = fopen("$dir/index.json", "wb");
-		fwrite($fp, json_encode($metadata));
-		fclose($fp);
+		file_put_contents("$dir/index.json", json_encode($metadata));
 		
 		# Compute uncompressed size.
 		

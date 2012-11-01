@@ -35,6 +35,7 @@ class OkapiServiceRunner
 		'services/caches/geocaches',
 		'services/caches/formatters/gpx',
 		'services/caches/formatters/garmin',
+		'services/caches/map/tile',
 		'services/logs/entries',
 		'services/logs/entry',
 		'services/logs/logs',
@@ -62,7 +63,7 @@ class OkapiServiceRunner
 	{
 		if (!self::exists($service_name))
 			throw new Exception();
-		require_once "$service_name.php";
+		require_once($GLOBALS['rootpath']."okapi/$service_name.php");
 		try
 		{
 			return call_user_func(array('\\okapi\\'.
@@ -123,7 +124,7 @@ class OkapiServiceRunner
 		Okapi::gettext_domain_init();
 		try
 		{
-			require_once "$service_name.php";
+			require_once($GLOBALS['rootpath']."okapi/$service_name.php");
 			$response = call_user_func(array('\\okapi\\'.
 				str_replace('/', '\\', $service_name).'\\WebService', 'call'), $request);
 			Okapi::gettext_domain_restore();
@@ -140,19 +141,35 @@ class OkapiServiceRunner
 		return $response;
 	}
 	
-	private static function save_stats($service_name, OkapiRequest $request, $runtime)
+	/**
+	 * For internal use only. The stats table can be used to store any kind of
+	 * runtime-stats data, i.e. not only regarding services. This is a special
+	 * version of save_stats which saves runtime stats under the name of $extra_name.
+	 * Note, that $request can be null.
+	 */
+	public static function save_stats_extra($extra_name, $request, $runtime)
+	{
+		self::save_stats("extra/".$extra_name, $request, $runtime);
+	}
+	
+	private static function save_stats($service_name, $request, $runtime)
 	{
 		# Getting rid of nulls. MySQL PRIMARY keys cannot contain nullable columns.
 		# Temp table doesn't have primary key, but other stats tables (which are
 		# dependant on stats table) - do.
 		
-		$consumer_key = ($request->consumer != null) ? $request->consumer->key : 'anonymous';
-		$user_id = (($request->token != null) && ($request->token instanceof OkapiAccessToken)) ? $request->token->user_id : -1;
-		
-		if ($request->is_http_request())
-			$calltype = 'http';
-		else
+		if ($request !== null) {
+			$consumer_key = ($request->consumer != null) ? $request->consumer->key : 'anonymous';
+			$user_id = (($request->token != null) && ($request->token instanceof OkapiAccessToken)) ? $request->token->user_id : -1;
+			if ($request->is_http_request() && ($service_name[0] == 's'))  # 's' for "services/", we don't want "extra/" included
+				$calltype = 'http';
+			else
+				$calltype = 'internal';
+		} else {
+			$consumer_key = 'internal';
+			$user_id = -1;
 			$calltype = 'internal';
+		}
 		
 		Db::execute("
 			insert into okapi_stats_temp (`datetime`, consumer_key, user_id, service_name, calltype, runtime)

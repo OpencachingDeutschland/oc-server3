@@ -9,6 +9,7 @@ use okapi\OkapiHttpResponse;
 use okapi\OkapiHttpRequest;
 use okapi\OkapiRedirectResponse;
 use okapi\Settings;
+use okapi\OCSession;
 
 class View
 {
@@ -17,12 +18,15 @@ class View
 		$langpref = isset($_GET['langpref']) ? $_GET['langpref'] : Settings::get('SITELANG');
 		$langprefs = explode("|", $langpref);
 		
-		# Ensure a user is logged in.
-	
-		if ($GLOBALS['usr'] == false)
+		# Determine which user is logged in to OC.
+		
+		require_once($GLOBALS['rootpath']."okapi/lib/oc_session.php");
+		$OC_user_id = OCSession::get_user_id();
+
+		if ($OC_user_id == null)
 		{
 			$after_login = "okapi/apps/".(($langpref != Settings::get('SITELANG'))?"?langpref=".$langpref:"");
-			$login_url = $GLOBALS['absolute_server_URI']."login.php?target=".urlencode($after_login);
+			$login_url = Settings::get('SITE_URL')."login.php?target=".urlencode($after_login);
 			return new OkapiRedirectResponse($login_url);
 		}
 		
@@ -34,12 +38,12 @@ class View
 				okapi_consumers c,
 				okapi_authorizations a
 			where
-				a.user_id = '".mysql_real_escape_string($GLOBALS['usr']['userid'])."'
+				a.user_id = '".mysql_real_escape_string($OC_user_id)."'
 				and c.`key` = a.consumer_key
 			order by c.name
 		");
 		$vars = array();
-		$vars['okapi_base_url'] = $GLOBALS['absolute_server_URI']."okapi/";
+		$vars['okapi_base_url'] = Settings::get('SITE_URL')."okapi/";
 		$vars['site_name'] = Okapi::get_normalized_site_name();
 		$vars['apps'] = array();
 		while ($row = mysql_fetch_assoc($rs))

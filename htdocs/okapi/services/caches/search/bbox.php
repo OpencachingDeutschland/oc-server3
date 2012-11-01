@@ -2,7 +2,7 @@
 
 namespace okapi\services\caches\search\bbox;
 
-require_once 'searching.inc.php';
+require_once('searching.inc.php');
 
 use okapi\Okapi;
 use okapi\OkapiRequest;

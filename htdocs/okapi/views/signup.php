@@ -2,10 +2,9 @@
 
 namespace okapi\views\signup;
 
-use okapi\OkapiHttpRequest;
-
 use Exception;
 use okapi\Okapi;
+use okapi\Settings;
 use okapi\OkapiRequest;
 use okapi\OkapiHttpResponse;
 use okapi\ParamMissing;
@@ -13,6 +12,7 @@ use okapi\InvalidParam;
 use okapi\OkapiServiceRunner;
 use okapi\OkapiInternalRequest;
 use okapi\views\menu\OkapiMenu;
+use okapi\OkapiHttpRequest;
 
 class View
 {
@@ -55,16 +55,19 @@ class View
 			return $response;
 		}
 	
-		require_once $GLOBALS['rootpath'].'okapi/service_runner.php';
-		require_once $GLOBALS['rootpath'].'okapi/views/menu.inc.php';
+		require_once($GLOBALS['rootpath'].'okapi/service_runner.php');
+		require_once($GLOBALS['rootpath'].'okapi/views/menu.inc.php');
 		
 		$vars = array(
 			'menu' => OkapiMenu::get_menu_html("signup.html"),
-			'okapi_base_url' => $GLOBALS['absolute_server_URI']."okapi/",
-			'site_url' => $GLOBALS['absolute_server_URI'],
+			'okapi_base_url' => Settings::get('SITE_URL')."okapi/",
+			'site_url' => Settings::get('SITE_URL'),
 			'site_name' => Okapi::get_normalized_site_name(),
 			'installations' => OkapiMenu::get_installations(),
 			'okapi_rev' => Okapi::$revision,
+			'data_license_html' => Settings::get('DATA_LICENSE_URL')
+				? "<a href='".Settings::get('DATA_LICENSE_URL')."'>Data License</a>"
+				: "Data License",
 		);
 		
 		$response = new OkapiHttpResponse();

@@ -10,10 +10,10 @@
 	{t}Ignored Geocaches{/t}
 </div>
 
-<table class="table">
+<table class="null" border="0" cellspacing="0" width="98%">
 	<tr>
 		<td colspan="2">
-			<table class="null" border="0" cellspacing="0" width="100%">
+			<table class="table">
 				<tr class="searchresult">
 					<td width="50px"><b>{t}Type{/t}</b></td>
 					<td width="50px"><b>{t}State{/t}</b></td>

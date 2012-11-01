@@ -36,7 +36,7 @@
 		{/literal}
 	</script>
 	<form action="mywatches.php" method="post">
-		<input type="hidden" name="action" value="edit">
+		<input type="hidden" name="action" value="edit" />
 
 		<div class="content2-pagetitle">
 			<img src="resource2/{$opt.template.style}/images/misc/32x32-searchresults.png" style="align: left; margin-right: 10px;" width="32" height="32" alt="Watched Caches" />
@@ -114,10 +114,10 @@
 		{t}Watched Geocaches{/t}
 	</div>
 
-	<table class="table">
+	<table class="null" border="0" cellspacing="0" width="98%">
 		<tr>
 			<td colspan="2">
-				<table class="table" border="0" cellspacing="0" width="100%">
+				<table class="table">
 					<tr class="searchresult">
 						<td width="50px"><b>{t}Type{/t}</b></td>
 						<td width="50px"><b>{t}State{/t}</b></td>

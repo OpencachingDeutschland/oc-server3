@@ -111,6 +111,7 @@ INSERT INTO `cache_attrib` (`id`, `name`, `icon`, `trans_id`, `group_id`, `selec
 INSERT INTO `cache_attrib` (`id`, `name`, `icon`, `trans_id`, `group_id`, `selectable`, `category`, `search_default`, `default`, `icon_large`, `icon_no`, `icon_undef`, `html_desc`, `html_desc_trans_id`, `hidden`) VALUES ('57', 'Other cache type', 'othercache', '1596', '10', '1', '0', '0', '0', 'resource2/ocstyle/images/attributes/othercache.png', 'resource2/ocstyle/images/attributes/othercache-no.png', 'resource2/ocstyle/images/attributes/othercache-disabled.png', 'This is none of the standard, pre-defined types of cache. Use this attribute for special, unusual caches.', '1622', '0');
 INSERT INTO `cache_attrib` (`id`, `name`, `icon`, `trans_id`, `group_id`, `selectable`, `category`, `search_default`, `default`, `icon_large`, `icon_no`, `icon_undef`, `html_desc`, `html_desc_trans_id`, `hidden`) VALUES ('58', 'Ask owner for start conditions', 'ask', '1597', '10', '1', '0', '0', '0', 'resource2/ocstyle/images/attributes/ask.png', 'resource2/ocstyle/images/attributes/ask-no.png', 'resource2/ocstyle/images/attributes/ask-disabled.png', 'Before doing this cache, you must ask the owner for the starting conditions. E.g. the cache may be linked to certain events at varying dates.', '1623', '0');
 INSERT INTO `cache_attrib` (`id`, `name`, `icon`, `trans_id`, `group_id`, `selectable`, `category`, `search_default`, `default`, `icon_large`, `icon_no`, `icon_undef`, `html_desc`, `html_desc_trans_id`, `hidden`) VALUES ('59', 'Suited for children', 'kids', '1598', '11', '1', '0', '1', '0', 'resource2/ocstyle/images/attributes/kids.png', 'resource2/ocstyle/images/attributes/kids-no.png', 'resource2/ocstyle/images/attributes/kids-disabled.png', 'This geocache is created for children. All challenges can be solved by child in the age of 10 to 12 years and the terrain has no risks (like highways, abysms). There is a large geocache container with trading items inside and the challenges are interesting.', '1624', '0');
+INSERT INTO `cache_attrib` (`id`, `name`, `icon`, `trans_id`, `group_id`, `selectable`, `category`, `search_default`, `default`, `icon_large`, `icon_no`, `icon_undef`, `html_desc`, `html_desc_trans_id`, `hidden`) VALUES ('60', 'Only available during specified seasons', 'calendar', '1799', '7', '1', '0', '0', '0', 'resource2/ocstyle/images/attributes/calendar.png', 'resource2/ocstyle/images/attributes/calendar-no.png', 'resource2/ocstyle/images/attributes/calendar-disabled.png', 'This cache can be done at certain seasons only - see the cache description for more details. For example, the cache may be placed in a corn labyrinth, which only exists from bloom to harvest season.', '1800', '0');
 
 -- Table cache_report_reasons
 SET NAMES 'utf8';
@@ -2223,6 +2224,8 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1795', 'Maps:',
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1796', 'Published on', '2012-07-24 19:16:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1797', 'Changelog', '2012-08-08 14:16:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1798', 'Operator Association', '2012-08-08 14:16:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1799', 'Only available during specified seasons', '2012-10-29 14:28:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1800', 'This cache can be done at certain seasons only - see the cache description for more details. For example, the cache may be placed in a corn labyrinth, which only exists from bloom to harvest season.', '2012-10-29 14:28:00');
 
 -- Table sys_trans_ref
 SET NAMES 'utf8';
@@ -4320,6 +4323,8 @@ INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1797'
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1797', 'table:sys_menu;field=title', '0');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1798', 'table:sys_menu;field=menustring', '0');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1798', 'table:sys_menu;field=title', '0');
+INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1799', 'table:cache_attrib;field=html_desc', '0');
+INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1800', 'table:cache_attrib;field=html_desc', '0');
 
 -- Table sys_trans_text
 SET NAMES 'utf8';
@@ -5527,7 +5532,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1603', 'DE', 'Je nach Saison gibt es in dem Gebiet besonders viele Zecken. Es wird daher empfohlen entsprechend lange Kleidung zu tragen und nach der Cachetour nach Zecken Ausschau zu halten. FSME-Risikogebiete und weitere Informationen zum Thema Zecken k\&ouml;nnt ihr z.B. auf <a href=\"http://www.meningitis.de\" target=\"_blank\">www.meningitis.de</a> nachsehen.', '2010-09-12 23:12:52');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1604', 'DE', 'Im Wasser', '2010-09-12 23:19:45');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1605', 'DE', 'Dieser Cache ist jederzeit machbar, sowohl am Tage als auch in der Nacht.', '2010-09-12 23:30:34');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1606', 'DE', 'Dieser Cache l\&auml;sst sich nur zu bestimmten Tageszeiten absolvieren. N\&auml;here Angaben sind in der Beschreibung des Caches zu finden. Der Cache kann zum Beispiel auf einem Gel&auml;nde mit festgelegten Öffnungszeiten versteckt sein.', '2010-09-12 23:30:39');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1606', 'DE', 'Dieser Cache l\&auml;sst sich nur zu bestimmten Tageszeiten absolvieren. N\&auml;here Angaben sind in der Beschreibung des Caches zu finden. Der Cache kann zum Beispiel auf einem Gel\&auml;nde mit festgelegten Öffnungszeiten versteckt sein.', '2010-09-12 23:30:39');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1607', 'DE', 'Dieser Cache l\&auml;sst sich nur tags\&uuml;ber angehen. Ein Beispiel w\&auml;ren Gebiete mit Klippen oder Abgr\&uuml;nden. Ein anderes Beispiel sind Orte, an denen die Suche mit Taschenlampen in der Dunkelheit besonders negativ auffallen w\&uuml;rde (z.B. Wohngebiete).', '2010-09-12 23:30:29');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1608', 'DE', 'Der Geocache kann nur bei einem bestimmten Tidenstand (Ebbe oder Flut) gesucht werden.', '2010-09-12 23:30:43');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1609', 'DE', 'Dieser Cache l\&auml;sst sich w\&auml;hrend des gesamten Jahres finden, wobei je nach Jahreszeit die Schwierigkeit bei der Suche schwanken kann. Die Schwierigkeit soll bei guten Bedingungen angegeben werden.', '2010-09-12 23:30:47');
@@ -5706,6 +5711,8 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1796', 'DE', 'Veröffentlicht am', '2012-07-23 22:26:38');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1797', 'DE', 'Versionsgeschichte', '2012-07-08 14:50:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1798', 'DE', 'Verein', '2012-07-08 14:50:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1799', 'DE', 'Nur zu bestimmten Zeiten im Jahr', '2012-10-29 14:28:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1800', 'DE', 'Dieser Cache l\&auml;sst sich nur zu bestimmten Zeite im Jahr absolvieren. N\&auml;here Angaben sind in der Beschreibung des Caches zu finden. Der Cache kann beispielsweise in einem Maislabyrinth versteckt sein, das nur zwischen Bl\&uuml;te- und Erntezeit existiert.', '2012-10-29 14:28:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'EN', 'Reorder IDs \r', '2010-09-02 00:15:30');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'EN', 'The database could not be reconnected.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'EN', 'Testing – please do not login', '2010-08-28 11:48:07');
@@ -7089,6 +7096,8 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1796', 'EN', 'Published on', '2012-08-24 17:38:05');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1797', 'EN', 'Changelog', '2012-08-24 17:38:05');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1798', 'EN', 'Verein', '2012-07-08 14:50:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1799', 'EN', 'Only available during specified seasons', '2012-10-29 14:28:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1800', 'EN', 'This cache can be done at certain seasons only - see the cache description for more details. For example, the cache may be placed in a corn labyrinth, which only exists from bloom to harvest season.', '2012-10-29 14:28:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'ES', 'Reordenar ID', '2010-12-09 00:17:55');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'ES', 'La base de datos no se pudo conectar.', '2010-12-09 00:17:55');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'ES', 'En pruebas - por favor, no entre.', '2010-12-09 00:17:55');
@@ -11497,4 +11506,4 @@ TRUNCATE TABLE `watches_waitingtypes`;
 INSERT INTO `watches_waitingtypes` (`id`, `watchtype`) VALUES ('1', 'ownerlog');
 INSERT INTO `watches_waitingtypes` (`id`, `watchtype`) VALUES ('2', 'cache_watches');
 
-INSERT INTO `sysconfig` (`name`, `value`) VALUES ('datasql_checksum', 'cdb153869ff59782d0f93dfb629e780a') ON DUPLICATE KEY UPDATE `value`='cdb153869ff59782d0f93dfb629e780a';
+INSERT INTO `sysconfig` (`name`, `value`) VALUES ('datasql_checksum', 'b5463e8c7d92c84043d194910ee6ba67') ON DUPLICATE KEY UPDATE `value`='b5463e8c7d92c84043d194910ee6ba67';

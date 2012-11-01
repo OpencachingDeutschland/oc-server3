@@ -709,7 +709,7 @@ function switchAttributeCat2()
 		<tr>
 			<td></td>
 			<td colspan="2">
-				<table width="250px">
+				<table class="table" width="250px">
 					<tr>
 						<td><input type="checkbox" name="ft_name" id="ft_name" class="checkbox" value="1" {ft_name_checked} /> <label for="ft_name">{t}Name{/t}</label></td>
 						<td><input type="checkbox" name="ft_desc" id="ft_desc" class="checkbox" value="1" {ft_desc_checked} /> <label for="ft_desc">{t}Description{/t}</label></td>

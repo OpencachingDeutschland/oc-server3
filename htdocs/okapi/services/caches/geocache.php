@@ -23,6 +23,7 @@ class WebService
 	{
 		$cache_code = $request->get_parameter('cache_code');
 		if (!$cache_code) throw new ParamMissing('cache_code');
+		if (strpos($cache_code, "|") !== false) throw new InvalidParam('cache_code');
 		$langpref = $request->get_parameter('langpref');
 		if (!$langpref) $langpref = "en";
 		$fields = $request->get_parameter('fields');

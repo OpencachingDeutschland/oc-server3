@@ -4,6 +4,7 @@ namespace okapi\views\devel\dbstruct;
 
 use Exception;
 use okapi\Okapi;
+use okapi\Settings;
 use okapi\Cache;
 use okapi\Db;
 use okapi\OkapiRequest;
@@ -22,9 +23,9 @@ class View
 		# structure of the database. This is useful for making OKAPI compatible
 		# across different OC installations.
 		
-		$user = $GLOBALS['dbusername'];
-		$password = $GLOBALS['dbpasswd'];
-		$dbname = $GLOBALS['dbname'];
+		$user = Settings::get('DB_USERNAME');
+		$password = Settings::get('DB_PASSWORD');
+		$dbname = Settings::get('DB_NAME');
 		$struct = shell_exec("mysqldump --no-data -u$user -p$password $dbname");
 		
 		# Remove the "AUTO_INCREMENT=..." values. They break the diffs.
@@ -51,13 +52,13 @@ class View
 					"-- Note: The following script has some limitations. It will render database\n".
 					"-- structure compatible, but not necessarilly EXACTLY the same. It might be\n".
 					"-- better to use manual diff instead.\n\n";
-				require_once 'comparator.inc.php';
+				require_once("comparator.inc.php");
 				$updater = new \dbStructUpdater();
 				if (isset($_GET['reverse']) && ($_GET['reverse'] == 'true'))
 				{
 					$response->body .=
 						"-- REVERSE MODE. The following will alter [2], so that it has the structure of [1].\n".
-						"-- 1. ".$GLOBALS['absolute_server_URI']."okapi/devel/dbstruct (".md5($struct).")\n".
+						"-- 1. ".Settings::get('SITE_URL')."okapi/devel/dbstruct (".md5($struct).")\n".
 						"-- 2. ".$_GET['compare_to']." (".md5($alternate_struct).")\n\n";
 					$alters = $updater->getUpdates($alternate_struct, $struct);
 				}
@@ -65,7 +66,7 @@ class View
 				{
 					$response->body .=
 						"-- The following will alter [1], so that it has the structure of [2].\n".
-						"-- 1. ".$GLOBALS['absolute_server_URI']."okapi/devel/dbstruct (".md5($struct).")\n".
+						"-- 1. ".Settings::get('SITE_URL')."okapi/devel/dbstruct (".md5($struct).")\n".
 						"-- 2. ".$_GET['compare_to']." (".md5($alternate_struct).")\n\n";
 					$alters = $updater->getUpdates($struct, $alternate_struct);
 				}

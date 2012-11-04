@@ -130,6 +130,8 @@
 		$gpxAttribName[55] = 'Field puzzle';
 		$gpxAttribID[24] = '53';
 		$gpxAttribName[24] = 'Park and grab';
+		$gpxAttribID[60] = '162';
+		$gpxAttribName[60] = 'Seasonal access';
 		// facilities
 		$gpxAttribID[18] = '25';
 		$gpxAttribName[18] = 'Parking available';

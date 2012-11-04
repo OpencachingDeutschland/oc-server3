@@ -9,14 +9,8 @@ use okapi\Locales;
 # http://code.google.com/p/opencaching-api/source/browse/trunk/okapi/settings.php
 #
 # HOW TO MODIFY OKAPI SETTINGS: If you want a setting X to have a value of Y,
-# add following lines to your OC's lib/settings.inc.php file:
-#
-#     $OKAPI_SETTINGS = array(
-#         'X' => 'Y',
-#         // ... etc ...
-#     );
-#
-#     // E.g. $OKAPI_SETTINGS = array('OC_BRANCH' => 'oc.de', 'SITELANG' => 'de');
+# create/edit the "<rootpath>/okapi_settings.php" file. See example here:
+# http://code.google.com/p/opencaching-pl/source/browse/trunk/okapi_settings.php
 #
 # This file provides documentation and DEFAULT values for those settings.
 #
@@ -28,6 +22,15 @@ final class Settings
 	/** Default values for setting keys. */
 	private static $DEFAULT_SETTINGS = array(
 	
+		/**
+		 * List of administrator email addresses. OKAPI will send important messages
+		 * to this addresses. You should replace this with your true email address.
+		 */
+		'ADMINS' => array(),
+		
+		/** Set this to true on development machines. */
+		'DEBUG' => false,
+
 		/**
 		 * Currently there are two mainstream branches of OpenCaching code.
 		 * Which branch is you installation using?
@@ -45,6 +48,9 @@ final class Settings
 		 * E.g. "pl", "en", "de".
 		 */
 		'SITELANG' => "en",
+		
+		/** Email address to use in the "From:" when sending messages. */
+		'FROM_FIELD' => 'root@localhost',
 		
 		/**
 		 * All OKAPI documentation pages should remain English-only, but some
@@ -65,18 +71,24 @@ final class Settings
 		'GETTEXT_DOMAIN' => 'okapi_messages',
 		
 		/**
-		 * By default, OKAPI sends messages to email address defined in $GLOBALS['sql_errormail'].
-		 * However, there can be only one address defined there. If you want to add more, you may
-		 * use this setting to provide a list of additional email addresses.
-		 */
-		'EXTRA_ADMINS' => array(),
-		
-		/**
 		 * Where should OKAPI store dynamically generated cache files? If you leave it at null,
 		 * OKAPI will try to guess (not recommended). If you move this directory, it's better
 		 * if you also move all the files which were inside.
 		 */
 		'VAR_DIR' => null,
+		
+		/**
+		 * Where to store uploaded images? This directory needs to be shared among
+		 * both OKAPI and OC code (see $picdir in your settings.inc.php).
+		 */
+		'IMAGES_DIR' => null,
+		
+		/**
+		 * Name of the cookie within which OC stores serialized session id, etc.
+		 * OKAPI requires to access this in order to make sure which user is logged
+		 * in.
+		 */
+		'OC_COOKIE_NAME' => null,
 		
 		/**
 		 * Set to true, if your installation supports "Needs maintenance" log type (with
@@ -98,6 +110,25 @@ final class Settings
 		 * performance and data integrity!
 		 */
 		'DEBUG_PREVENT_SEMAPHORES' => false,
+		
+		/* Database settings */
+		
+		'DB_SERVER' => 'localhost',
+		'DB_NAME' => null,
+		'DB_USERNAME' => null,
+		'DB_PASSWORD' => null,
+		
+		/** URL of the OC site (with slash, and without the "/okapi" part). */
+		'SITE_URL' => null,
+		
+		/** OKAPI needs this when inserting new data to cache_logs table. */
+		'OC_NODE_ID' => null,
+		
+		/**
+		 * Your OC sites data licencing document. All OKAPI Consumers will be
+		 * required to accept this.
+		 */
+		'DATA_LICENSE_URL' => null,
 	);
 	
 	/** 
@@ -111,44 +142,50 @@ final class Settings
 	 */
 	private static function load_settings()
 	{
-		# Check the settings.inc.php for overrides.
-		
+		try {
+			require_once($GLOBALS['rootpath']."okapi_settings.php");
+			$ref = get_okapi_settings();
+		} catch (Exception $e) {
+			throw new Exception("Could not import <rootpath>/okapi_settings.php:\n".$e->getMessage());
+		}
 		self::$SETTINGS = self::$DEFAULT_SETTINGS;
-		
-		$ref = null;
-		if (isset($GLOBALS['OKAPI_SETTINGS']))
-		{
-			$ref = &$GLOBALS['OKAPI_SETTINGS'];
-		}
-		else
-		{
-			throw new Exception("Could not locate OKAPI settings! Put your settings array in ".
-				"\$GLOBALS['OKAPI_SETTINGS']]. Settings may be empty, but must exist.");
-		}
-
 		foreach (self::$SETTINGS as $key => $_)
 		{
 			if (isset($ref[$key]))
 			{
 				self::$SETTINGS[$key] = $ref[$key];
-				self::verify($key, self::$SETTINGS[$key]);
 			}
 		}
+		self::verify(self::$SETTINGS);
 	}
 	
-	/** Throw an exception, if given $value is invalid for the given $key. */
-	private static function verify($key, $value)
+	private static function verify($dict)
 	{
-		$debug = (isset($GLOBALS['debug_page']) && $GLOBALS['debug_page']);
-		if (($key == 'OC_BRANCH') && (!in_array($value, array('oc.pl', 'oc.de'))))
+		if (!in_array($dict['OC_BRANCH'], array('oc.pl', 'oc.de')))
 			throw new Exception("Currently, OC_BRANCH has to be either 'oc.pl' or 'oc.de'. Hint: Whom did you get your code from?");
-		$boolean_keys = array('SUPPORTS_LOGTYPE_NEEDS_MAINTENANCE', 'DEBUG_PREVENT_EMAILS', 'DEBUG_PREVENT_SEMAPHORES');
-		if (in_array($key, $boolean_keys) && (!in_array($value, array(true, false))))
-			throw new Exception("Invalid value for $key.");
-		if (($key == 'DEBUG_PREVENT_EMAILS') and ($value == true) and ($debug == false))
-			throw new Exception("DEBUG_PREVENT_EMAILS might be used only when debugging. Sending emails is vital in production environment.");
-		if (($key == 'DEBUG_PREVENT_SEMAPHORES') and ($value == true) and ($debug == false))
-			throw new Exception("USE_SEMAPHORES might be used only when debugging. Semaphores are vital in production environment.");
+		$boolean_keys = array('SUPPORTS_LOGTYPE_NEEDS_MAINTENANCE', 'DEBUG', 'DEBUG_PREVENT_EMAILS', 'DEBUG_PREVENT_SEMAPHORES');
+		foreach ($boolean_keys as $key)
+			if (!in_array($dict[$key], array(true, false)))
+				throw new Exception("Invalid value for $key.");
+		if (count($dict['ADMINS']) == 0)
+			throw new Exception("ADMINS array has to filled (e.g. array('root@localhost')).");
+		if ($dict['DEBUG'] == false)
+			foreach ($dict as $k => $v)
+				if ((strpos($k, 'DEBUG_') === 0) && $v == true)
+					throw new Exception("When DEBUG is false, $k has to be false too.");
+		if ($dict['VAR_DIR'] == null)
+			throw new Exception("VAR_DIR cannot be null. Please provide a valid directory.");
+		if ($dict['IMAGES_DIR'] == null)
+			throw new Exception("IMAGES_DIR cannot be null. Please provide a valid directory.");
+		foreach ($dict as $k => $v)
+			if ((strpos($k, '_DIR') !== false) && ($k[strlen($k) - 1] == '/'))
+				throw new Exception("All *_DIR settings may not end with a slash. Check $k.");
+		$notnull = array('OC_COOKIE_NAME', 'DB_SERVER', 'DB_NAME', 'DB_USERNAME', 'SITE_URL', 'OC_NODE_ID');
+		foreach ($notnull as $k)
+			if ($dict[$k] === null)
+				throw new Exception("$k cannot be null.");
+		if ($dict['SITE_URL'][strlen($dict['SITE_URL']) - 1] != '/')
+			throw new Exception("SITE_URL must end with a slash.");
 	}
 	
 	/** 
@@ -178,7 +215,7 @@ final class Settings
 	 */
 	public static function default_gettext_init($langprefs)
 	{
-		require_once 'locale/locales.php';
+		require_once($GLOBALS['rootpath']."okapi/locale/locales.php");
 		$locale = Locales::get_best_locale($langprefs);
 		putenv("LC_ALL=$locale");
 		setlocale(LC_ALL, $locale);

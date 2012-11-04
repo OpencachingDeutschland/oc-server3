@@ -4,8 +4,6 @@ namespace okapi;
 
 use OAuthDataStore;
 
-require_once($rootpath.'lib/common.inc.php');
-
 class OkapiDataStore extends OAuthDataStore
 {
 	public function lookup_consumer($consumer_key)

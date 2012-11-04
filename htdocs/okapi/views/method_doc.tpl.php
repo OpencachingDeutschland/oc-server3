@@ -41,7 +41,7 @@ $m = $vars['method'];
 							</tr>
 							<tr>
 								<td class='caption' colspan='3'>
-									<b><?= $GLOBALS['absolute_server_URI']."okapi/".$m['name'] ?></b>
+									<b><?= \okapi\Settings::get('SITE_URL')."okapi/".$m['name'] ?></b>
 								</td>
 							</tr>
 							<tr>

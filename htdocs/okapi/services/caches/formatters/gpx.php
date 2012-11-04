@@ -153,7 +153,7 @@ class WebService
 		
 		$response = new OkapiHttpResponse();
 		$response->content_type = "text/xml; charset=utf-8";
-		$response->content_disposition = 'Content-Disposition: attachment; filename="results.gpx"';
+		$response->content_disposition = 'attachment; filename="results.gpx"';
 		ob_start();
 		Okapi::gettext_domain_init(explode("|", $langpref)); # Consumer gets properly localized GPX file.
 		include 'gpxfile.tpl.php';

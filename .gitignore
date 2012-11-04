@@ -16,6 +16,7 @@
 /htdocs/images/statpics/*
 /htdocs/images/uploads/*
 /htdocs/resource2/tinymce/tiny_mce_*.gz
+/htdocs/robots.txt
 /htdocs/sitemap*xml*
 /htdocs/util-local/ocxml11client/data-files
 /htdocs/util-local/ocxml11client/tmp

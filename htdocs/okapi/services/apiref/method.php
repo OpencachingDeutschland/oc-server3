@@ -4,6 +4,7 @@ namespace okapi\services\apiref\method;
 
 use Exception;
 use okapi\Okapi;
+use okapi\Settings;
 use okapi\OkapiRequest;
 use okapi\ParamMissing;
 use okapi\InvalidParam;
@@ -59,7 +60,7 @@ class WebService
 		$result = array(
 			'name' => $methodname,
 			'short_name' => end($exploded),
-			'ref_url' => $GLOBALS['absolute_server_URI']."okapi/$methodname.html",
+			'ref_url' => Settings::get('SITE_URL')."okapi/$methodname.html",
 			'auth_options' => array(
 				'min_auth_level' => $options['min_auth_level'],
 				'oauth_consumer' => $options['min_auth_level'] >= 2,
@@ -93,12 +94,23 @@ class WebService
 			$referenced_methodname = $attrs['method'];
 			$referenced_method_info = OkapiServiceRunner::call('services/apiref/method',
 				new OkapiInternalRequest(new OkapiInternalConsumer(), null, array('name' => $referenced_methodname)));
+			$include_list = isset($attrs['params']) ? explode("|", $attrs['params']) : null;
 			foreach ($referenced_method_info['arguments'] as $arg)
 			{
 				if ($arg['class'] == 'common-formatting')
 					continue;
-				$arg['description'] = "<i>Inherited from <a href='".$referenced_method_info['ref_url'].
-					"'>".$referenced_method_info['name']."</a> method.</i>";
+				if ($include_list === null)
+				{
+					$arg['description'] = "<i>Inherited from <a href='".$referenced_method_info['ref_url'].
+						"'>".$referenced_method_info['name']."</a> method.</i>";
+				}
+				elseif (in_array($arg['name'], $include_list))
+				{
+					$arg['description'] = "<i>Same as in the <a href='".$referenced_method_info['ref_url'].
+						"'>".$referenced_method_info['name']."</a> method.</i>";
+				} else {
+					continue;
+				}
 				$arg['class'] = 'inherited';
 				$result['arguments'][] = $arg;
 			}
@@ -109,13 +121,13 @@ class WebService
 				'name' => 'format',
 				'is_required' => false,
 				'class' => 'common-formatting',
-				'description' => "<i>Standard <a href='".$GLOBALS['absolute_server_URI']."okapi/introduction.html#common-formatting'>common formatting</a> argument.</i>"
+				'description' => "<i>Standard <a href='".Settings::get('SITE_URL')."okapi/introduction.html#common-formatting'>common formatting</a> argument.</i>"
 			);
 			$result['arguments'][] = array(
 				'name' => 'callback',
 				'is_required' => false,
 				'class' => 'common-formatting',
-				'description' => "<i>Standard <a href='".$GLOBALS['absolute_server_URI']."okapi/introduction.html#common-formatting'>common formatting</a> argument.</i>"
+				'description' => "<i>Standard <a href='".Settings::get('SITE_URL')."okapi/introduction.html#common-formatting'>common formatting</a> argument.</i>"
 			);
 		}
 		if (!$docs->returns)

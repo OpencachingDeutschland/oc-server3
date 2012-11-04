@@ -152,30 +152,58 @@ class SearchAssistant
 		{
 			if ($tmp = $request->get_parameter($param_name))
 			{
-				if (!preg_match("/^[1-5]-[1-5]$/", $tmp))
+				if (!preg_match("/^[1-5]-[1-5](\|X)?$/", $tmp))
 					throw new InvalidParam($param_name, "'$tmp'");
 				list($min, $max) = explode("-", $tmp);
+				if (strpos($max, "|X") !== false)
+				{
+					$max = $max[0];
+					$allow_null = true;
+				} else {
+					$allow_null = false;
+				}
 				if ($min > $max)
 					throw new InvalidParam($param_name, "'$tmp'");
 				switch ($param_name)
 				{
 					case 'terrain':
-						$where_conds[] = "caches.terrain between 2*$min and 2*$max";
+						if ($allow_null)
+							throw new InvalidParam($param_name, "The '|X' suffix is not allowed here.");
+						if (($min == 1) && ($max == 5)) {
+							/* no extra condition necessary */
+						} else {
+							$where_conds[] = "caches.terrain between 2*$min and 2*$max";
+						}
 						break;
 					case 'difficulty':
-						$where_conds[] = "caches.difficulty between 2*$min and 2*$max";
+						if ($allow_null)
+							throw new InvalidParam($param_name, "The '|X' suffix is not allowed here.");
+						if (($min == 1) && ($max == 5)) {
+							/* no extra condition necessary */
+						} else {
+							$where_conds[] = "caches.difficulty between 2*$min and 2*$max";
+						}
 						break;
 					case 'size':
-						$where_conds[] = "caches.size between $min+1 and $max+1";
+						if (($min == 1) && ($max == 5) && $allow_null) {
+							/* no extra condition necessary */
+						} else {
+							$where_conds[] = "(caches.size between $min+1 and $max+1)".
+								($allow_null ? " or caches.size=7" : "");
+						}
 						break;
 					case 'rating':
 						if (Settings::get('OC_BRANCH') == 'oc.pl')
 						{
-							$divisors = array(-3.0, -1.0, 0.1, 1.4, 2.2, 3.0);
-							$min = $divisors[$min - 1];
-							$max = $divisors[$max];
-							$where_conds[] = "$X_SCORE between $min and $max";
-							$where_conds[] = "$X_VOTES > 3";
+							if (($min == 1) && ($max == 5) && $allow_null) {
+								/* no extra condition necessary */
+							} else {
+								$divisors = array(-3.0, -1.0, 0.1, 1.4, 2.2, 3.0);
+								$min = $divisors[$min - 1];
+								$max = $divisors[$max];
+								$where_conds[] = "(($X_SCORE between $min and $max) and ($X_VOTES >= 3))".
+									($allow_null ? " or ($X_VOTES < 3)" : "");
+							}
 						}
 						else
 						{
@@ -295,6 +323,26 @@ class SearchAssistant
 		}
 		
 		#
+		# exclude_ignored
+		#
+		
+		if ($tmp = $request->get_parameter('exclude_ignored'))
+		{
+			if ($request->token == null)
+				throw new InvalidParam('exclude_ignored', "Might be used only for requests signed with an Access Token.");
+			if (!in_array($tmp, array('true', 'false')))
+				throw new InvalidParam('exclude_ignored', "'$tmp'");
+			if ($tmp == 'true') {
+				$ignored_cache_ids = Db::select_column("
+					select cache_id
+					from cache_ignore
+					where user_id = '".mysql_real_escape_string($request->token->user_id)."'
+				");
+				$where_conds[] = "cache_id not in ('".implode("','", array_map('mysql_real_escape_string', $ignored_cache_ids))."')";
+			}
+		}
+		
+		#
 		# exclude_my_own
 		#
 		
@@ -331,7 +379,7 @@ class SearchAssistant
 		if ($limit == null) $limit = "100";
 		if (!is_numeric($limit))
 			throw new InvalidParam('limit', "'$limit'");
-		if ($limit < 1 || $limit > 500)
+		if ($limit < 1 || (($limit > 500) && (!$request->skip_limits)))
 			throw new InvalidParam('limit', "Has to be between 1 and 500.");
 		
 		#
@@ -342,7 +390,7 @@ class SearchAssistant
 		if ($offset == null) $offset = "0";
 		if (!is_numeric($offset))
 			throw new InvalidParam('offset', "'$offset'");
-		if ($offset + $limit > 500)
+		if (($offset + $limit > 500) && (!$request->skip_limits))
 			throw new BadRequest("The sum of offset and limit may not exceed 500.");
 		if ($offset < 0 || $offset > 499)
 			throw new InvalidParam('offset', "Has to be between 0 and 499.");
@@ -381,7 +429,7 @@ class SearchAssistant
 				$order_clauses[] = "($cl) $dir";
 			}
 		}
-	
+		
 		$ret_array = array(
 			'where_conds' => $where_conds,
 			'offset' => (int)$offset,

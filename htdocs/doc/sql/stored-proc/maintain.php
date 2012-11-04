@@ -75,6 +75,99 @@
          END IF;
 			 END;");
 
+	// get decimal value of waypoint
+	sql_dropFunction('WPTODEC');
+	sql("CREATE FUNCTION `WPTODEC` (wp VARCHAR(7), prefix VARCHAR(2)) RETURNS INT DETERMINISTIC SQL SECURITY INVOKER
+		BEGIN
+		  -- all used chars in waypoint, in their ascending order
+		  DECLARE WP_ORDER CHAR(36) DEFAULT '&1';
+		  -- list of base 36 chars in their ascending order
+		  DECLARE B36_ORDER CHAR(36) DEFAULT '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+		  -- will contain the waypoint value, without prefix
+		  DECLARE WP_VALUE CHAR(5) DEFAULT '00000';
+		  -- will contain WP_VALUE where all chars replaced by their equivalents in B36_ORDER
+		  DECLARE B36_VALUE CHAR(5) DEFAULT '';
+		  -- loop counter
+		  DECLARE WP_POS INT DEFAULT 1;
+		  -- index of a char in WP_ORDER/B36_ORDER
+		  DECLARE WP_ORDER_INDEX INT;
+
+		  -- validate input
+		  IF ISNULL(wp) OR ISNULL(prefix) THEN
+			RETURN 0;
+		  END IF;
+		  IF LENGTH(prefix) != 2 OR LENGTH(wp)<3 OR LENGTH(wp)>7 THEN
+			RETURN 0;
+		  END IF;
+		  IF LEFT(wp, 2) != prefix THEN
+			RETURN 0;
+		  END IF;
+
+		  -- get waypoint value with exactly 5 digits
+		  SET WP_VALUE = RIGHT(CONCAT('00000', SUBSTRING(wp, 3)), 5);
+
+		  -- replace each char in WP_VALUE with the equivalent base 36 char
+		  REPEAT
+			SET WP_ORDER_INDEX = LOCATE(SUBSTRING(WP_VALUE, WP_POS, 1), WP_ORDER);
+			IF WP_ORDER_INDEX = 0 THEN
+			  RETURN 0;
+			END IF;
+			SET B36_VALUE = CONCAT(B36_VALUE, SUBSTRING(B36_ORDER, WP_ORDER_INDEX, 1));
+			SET WP_POS = WP_POS + 1;
+		  UNTIL WP_POS>5 END REPEAT;
+
+		  -- now use CONV() to convert from base 36 system to decimal
+		  RETURN CONV(B36_VALUE, LENGTH(WP_ORDER), 10);
+
+		END;",
+		$opt['logic']['waypoint_pool']['valid_chars']);
+
+	// inverse function of WPTODEC
+	sql_dropFunction('DECTOWP');
+	sql("CREATE FUNCTION `DECTOWP` (wp INT, prefix VARCHAR(2)) RETURNS VARCHAR(7) DETERMINISTIC SQL SECURITY INVOKER
+		BEGIN
+		  -- all used chars in waypoint, in their ascending order
+		  DECLARE WP_ORDER CHAR(36) DEFAULT '&1';
+		  -- list of base 36 chars in their ascending order
+		  DECLARE B36_ORDER CHAR(36) DEFAULT '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+		  -- base 36 value of the decimal waypoint value
+		  DECLARE B36_VALUE VARCHAR(5);
+		  -- will contain the waypoint value, without prefix
+		  DECLARE WP_VALUE CHAR(5) DEFAULT '';
+		  -- loop counter
+		  DECLARE B36_POS INT DEFAULT 1;
+		  -- index of a char in WP_ORDER/B36_ORDER
+		  DECLARE B36_ORDER_INDEX INT;
+
+		  -- validate input
+		  IF ISNULL(wp) OR ISNULL(prefix) THEN
+			RETURN '';
+		  END IF;
+		  IF LENGTH(prefix) != 2 OR wp=0 THEN
+			RETURN '';
+		  END IF;
+
+		  -- convert the decimal waypoint value to base 36
+		  SET B36_VALUE = CONV(wp, 10, LENGTH(WP_ORDER));
+
+		  -- replace each char in B36_VALUE with the equivalent wp-char
+		  REPEAT
+			SET B36_ORDER_INDEX = LOCATE(SUBSTRING(B36_VALUE, B36_POS, 1), B36_ORDER);
+			IF B36_ORDER_INDEX = 0 THEN
+			  RETURN '';
+			END IF;
+			SET WP_VALUE = CONCAT(WP_VALUE, SUBSTRING(WP_ORDER, B36_ORDER_INDEX, 1));
+			SET B36_POS = B36_POS + 1;
+		  UNTIL B36_POS>LENGTH(B36_VALUE) END REPEAT;
+
+		  IF LENGTH(WP_VALUE)<4 THEN
+			RETURN CONCAT(prefix, RIGHT(CONCAT('0000', WP_VALUE), 4));
+		  ELSE
+			RETURN CONCAT(prefix, WP_VALUE);
+		  END IF;
+		END;",
+		$opt['logic']['waypoint_pool']['valid_chars']);
+
 	/* Stored procedures containing database logic
 	 */
 

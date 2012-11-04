@@ -316,7 +316,24 @@
 	 */
 	$opt['logic']['ocprefixes'] = 'oc';
 
-	/* Database charset
+  /* pregenerated waypoint list for new caches
+   * - Waypoint prefix (OC, OP, OZ ... AA=local development)
+   * - When pool contains less than min_count, generation process starts
+   *   and fills up the pool until max_count is reached.
+   */
+  $opt['logic']['waypoint_pool']['prefix'] = 'AA';
+  $opt['logic']['waypoint_pool']['min_count'] = 1000;
+  $opt['logic']['waypoint_pool']['max_count'] = 2000;
+  // chars used for waypoints. Remember to reinstall triggers and clear cache_waypoint_pool after changing
+  $opt['logic']['waypoint_pool']['valid_chars'] = '0123456789ABCDEF';
+  // fill_gaps = true: search for gaps between used waypoints and fill up these gaps
+  //                   (fill_gaps is slow and CPU intensive on database server. For
+  //                    productive servers you may want to generate some waypoints
+  //                    without fill_gaps first)
+  // fill_gaps = false: continue with the last waypoint
+  $opt['logic']['waypoint_pool']['fill_gaps'] = false;
+
+  /* Database charset
 	 *   frontend and php charsets are UTF-8
 	 *   here you can set a different charset for the MySQL-Engine
 	 *   usefull if your database is not UTF-8.

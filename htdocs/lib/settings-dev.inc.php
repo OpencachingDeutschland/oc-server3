@@ -40,10 +40,6 @@
 	$oc_nodeid = 4;
 	$opt['logic']['node']['id'] = 4;
 	
-	// waypoint prefix of the node
-	// OC = oc.de, OP = oc.pl, ... AA = local development
-	$oc_waypoint_prefix = 'OC';
-
 	//name of the cookie
 	$opt['cookie']['name'] = 'oc_devel';
 	$opt['cookie']['path'] = '/';
@@ -120,7 +116,25 @@
 
 	$opt['translate']['debug'] = false;
 
-	// see config2/settings-dist.inc.php
+  // copy of config2/settings-dist.inc.php
+  /* pregenerated waypoint list for new caches
+   * - Waypoint prefix (OC, OP, OZ etc.)
+   * - When pool contains less than min_count, generation process starts
+   *   and fills up the pool until max_count is reached.
+   */
+  $opt['logic']['waypoint_pool']['prefix'] = 'AA';
+  $opt['logic']['waypoint_pool']['min_count'] = 1000;
+  $opt['logic']['waypoint_pool']['max_count'] = 2000;
+  // chars used for waypoints. Remember to reinstall triggers and clear cache_waypoint_pool after changing
+  $opt['logic']['waypoint_pool']['valid_chars'] = '0123456789ABCDEF';
+  // fill_gaps = true: search for gaps between used waypoints and fill up these gaps
+  //                   (fill_gaps is slow and CPU intensive on database server. For
+  //                    productive servers you may want to generate some waypoints
+  //                    without fill_gaps first)
+  // fill_gaps = false: continue with the last waypoint
+  $opt['logic']['waypoint_pool']['fill_gaps'] = false;
+
+  // see config2/settings-dist.inc.php
 	$opt['template']['default']['locale'] = 'DE';      // may be overwritten by $opt['domain'][...]['locale']
 
 	$opt['template']['locales']['DE']['show'] = true;

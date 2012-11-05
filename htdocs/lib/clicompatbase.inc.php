@@ -94,9 +94,22 @@
     // reserve a waypoint
     sql("UPDATE `cache_waypoint_pool` SET `cache_id`='&1' WHERE `cache_id` IS NULL ORDER BY WPTODEC(`wp_oc`, '&2') ASC LIMIT 1", $cacheid, $opt['logic']['waypoint_pool']['prefix']);
 
-    // TODO: cronjob for waypoint pool generation may not run on development systems
-    //       add a fix to generate a new waypoints on demand (insert this new waypoint to cache_waypoint_pool with reserved cache_id
-    //       and follow standard assignment code to prevent race conditions with cronjob)
+    if (sqlValue("SELECT `wp_oc` FROM `cache_waypoint_pool` WHERE `cache_id`='" . ($cacheid+0) . "'", "") == "")
+    {
+      // waypoint reservation was not successfull. Maybe we are on a development machine, where cronjob for waypoint pool
+      // generation did not run or the pool is empty. To get a valid waypoint, we simply increment the highest used waypoint by one.
+      // (note: this ignores the setting of $opt['logic']['waypoint_pool']['fill_gaps'])
+      // CAUTION: This statement is realy slow and you should always keep your waypoint pool filled with some waypoint on a production server
+      sql("INSERT INTO `cache_waypoint_pool` (`wp_oc`, `cache_id`) 
+                  SELECT DECTOWP(MAX(`dec_wp`)+1, '&1'), '&2' AS `cache_id` 
+                    FROM (
+                          SELECT MAX(WPTODEC(`wp_oc`, '&1')) AS dec_wp FROM `caches` WHERE `wp_oc` REGEXP '&3' 
+                    UNION SELECT MAX(WPTODEC(`wp_oc`, '&1')) AS dec_wp FROM `cache_waypoint_pool`
+                         ) AS `tbl`",
+          $opt['logic']['waypoint_pool']['prefix'],
+          $cacheid,
+          '^' . $opt['logic']['waypoint_pool']['prefix'] . '[' . $opt['logic']['waypoint_pool']['valid_chars'] . ']{1,}$');
+    }
 
     // assign reserved waypoint to the cache
     // for the moment, we use IGNORE to catch duplicate keys that occur in any failure case

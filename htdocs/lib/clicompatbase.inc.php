@@ -92,7 +92,7 @@
     sql("DELETE FROM `cache_waypoint_pool` WHERE `cache_id`='&1'", $cacheid);
 
     // reserve a waypoint
-    sql("UPDATE `cache_waypoint_pool` SET `cache_id`='&1' ORDER BY WPTODEC(`wp_oc`, '&2') ASC LIMIT 1", $cacheid, $opt['logic']['waypoint_pool']['prefix']);
+    sql("UPDATE `cache_waypoint_pool` SET `cache_id`='&1' WHERE `cache_id` IS NULL ORDER BY WPTODEC(`wp_oc`, '&2') ASC LIMIT 1", $cacheid, $opt['logic']['waypoint_pool']['prefix']);
 
     // TODO: cronjob for waypoint pool generation may not run on development systems
     //       add a fix to generate a new waypoints on demand (insert this new waypoint to cache_waypoint_pool with reserved cache_id

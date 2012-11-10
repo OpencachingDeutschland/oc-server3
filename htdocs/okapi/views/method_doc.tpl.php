@@ -35,7 +35,7 @@ $m = $vars['method'];
 								<td class='precaption' colspan='3'>
 									<table><tr>
 										<td>Minimum Authentication: <span class='level level<?= $m['auth_options']['min_auth_level'] ?>'>Level <?= $m['auth_options']['min_auth_level'] ?></span></td>
-										<td>(see <a href='<?= $vars['okapi_base_url'] ?>introduction#auth_level'>Authentication Levels</a>)</td>
+										<td>(see <a href='<?= $vars['okapi_base_url'] ?>introduction.html#auth_levels'>Authentication Levels</a>)</td>
 									</tr></table>
 								</td>
 							</tr>

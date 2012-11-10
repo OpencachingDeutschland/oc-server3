@@ -114,7 +114,7 @@ class WebService
 		# We can get all the data we need from the services/caches/geocaches method.
 		# We don't need to do any additional queries here.
 		
-		$fields = 'code|name|location|date_created|url|type|status|size2|oxsize'.
+		$fields = 'code|name|location|date_created|url|type|status|size|size2|oxsize'.
 			'|difficulty|terrain|description|hint|rating|owner|url|internal_id';
 		if ($vars['images'] != 'none')
 			$fields .= "|images";

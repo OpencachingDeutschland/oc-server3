@@ -35,7 +35,7 @@ http://www.gsak.net/xmlv1/5 http://www.gsak.net/xmlv1/5/gsak.xsd
 					<groundspeak:placed_by><?= htmlspecialchars($c['owner']['username'], ENT_COMPAT, 'UTF-8') ?></groundspeak:placed_by>
 					<groundspeak:owner id="<?= $c['owner']['uuid'] ?>"><?= htmlspecialchars($c['owner']['username'], ENT_COMPAT, 'UTF-8') ?></groundspeak:owner>
 					<groundspeak:type><?= $vars['cache_GPX_types'][$c['type']] ?></groundspeak:type>
-					<groundspeak:container><?= $vars['cache_GPX_sizes'][$c['size']] ?></groundspeak:container>
+					<groundspeak:container><?= $vars['cache_GPX_sizes'][$c['size2']] ?></groundspeak:container>
 					<groundspeak:difficulty><?= $c['difficulty'] ?></groundspeak:difficulty>
 					<groundspeak:terrain><?= $c['terrain'] ?></groundspeak:terrain>
 					<groundspeak:long_description html="True">
@@ -121,7 +121,7 @@ http://www.gsak.net/xmlv1/5 http://www.gsak.net/xmlv1/5/gsak.xsd
 					<ox:ratings>
 						<? if ($c['rating'] !== null) { ?><ox:awesomeness><?= $c['rating'] ?></ox:awesomeness><? } ?>
 						<ox:difficulty><?= $c['difficulty'] ?></ox:difficulty>
-						<? if ($c['size'] !== null) { ?><ox:size><?= $vars['cache_OX_sizes'][$c['size']] ?></ox:size><? } ?>
+						<? if ([$c['oxsize'] !== null) { ?><ox:size><?= [$c['oxsize']] ?></ox:size><? } ?>
 						<ox:terrain><?= $c['terrain'] ?></ox:terrain>
 					</ox:ratings>
 					<? if ($vars['attrs'] == 'ox:tags' && count($c['attrnames']) > 0) { /* Does user want us to include ox:tags? */ ?>

@@ -131,13 +131,14 @@ INSERT INTO `cache_report_status` (`id`, `name`, `trans_id`) VALUES ('3', 'Done'
 -- Table cache_size
 SET NAMES 'utf8';
 TRUNCATE TABLE `cache_size`;
+INSERT INTO `cache_size` (`id`, `name`, `trans_id`, `ordinal`, `de`, `en`) VALUES ('8', 'nano', '1802', '1', 'nano', 'nano');
 INSERT INTO `cache_size` (`id`, `name`, `trans_id`, `ordinal`, `de`, `en`) VALUES ('1', 'other size', '524', '7', 'andere Größe', 'other size');
-INSERT INTO `cache_size` (`id`, `name`, `trans_id`, `ordinal`, `de`, `en`) VALUES ('2', 'micro', '525', '1', 'mikro', 'micro');
-INSERT INTO `cache_size` (`id`, `name`, `trans_id`, `ordinal`, `de`, `en`) VALUES ('3', 'small', '526', '2', 'klein', 'small');
-INSERT INTO `cache_size` (`id`, `name`, `trans_id`, `ordinal`, `de`, `en`) VALUES ('4', 'normal', '527', '3', 'normal', 'normal');
-INSERT INTO `cache_size` (`id`, `name`, `trans_id`, `ordinal`, `de`, `en`) VALUES ('5', 'large', '528', '4', 'groß', 'large');
-INSERT INTO `cache_size` (`id`, `name`, `trans_id`, `ordinal`, `de`, `en`) VALUES ('6', 'very large', '529', '5', 'extrem groß', 'very large');
-INSERT INTO `cache_size` (`id`, `name`, `trans_id`, `ordinal`, `de`, `en`) VALUES ('7', 'no container', '530', '6', 'kein Behälter', 'no container');
+INSERT INTO `cache_size` (`id`, `name`, `trans_id`, `ordinal`, `de`, `en`) VALUES ('2', 'micro', '525', '2', 'mikro', 'micro');
+INSERT INTO `cache_size` (`id`, `name`, `trans_id`, `ordinal`, `de`, `en`) VALUES ('3', 'small', '526', '3', 'klein', 'small');
+INSERT INTO `cache_size` (`id`, `name`, `trans_id`, `ordinal`, `de`, `en`) VALUES ('4', 'normal', '527', '4', 'normal', 'normal');
+INSERT INTO `cache_size` (`id`, `name`, `trans_id`, `ordinal`, `de`, `en`) VALUES ('5', 'large', '528', '5', 'groß', 'large');
+INSERT INTO `cache_size` (`id`, `name`, `trans_id`, `ordinal`, `de`, `en`) VALUES ('6', 'very large', '529', '6', 'extrem groß', 'very large');
+INSERT INTO `cache_size` (`id`, `name`, `trans_id`, `ordinal`, `de`, `en`) VALUES ('7', 'no container', '530', '8', 'kein Behälter', 'no container');
 
 -- Table cache_status
 SET NAMES 'utf8';
@@ -2226,6 +2227,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1797', 'Changel
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1798', 'Operator Association', '2012-08-08 14:16:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1799', 'Only available during specified seasons', '2012-10-29 14:28:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1800', 'This cache can be done at certain seasons only - see the cache description for more details. For example, the cache may be placed in a corn labyrinth, which only exists from bloom to harvest season.', '2012-10-29 14:28:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1802', 'nano', '2012-11-10 15:51:00');
 
 -- Table sys_trans_ref
 SET NAMES 'utf8';
@@ -4325,6 +4327,8 @@ INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1798'
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1798', 'table:sys_menu;field=title', '0');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1799', 'table:cache_attrib;field=html_desc', '0');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1800', 'table:cache_attrib;field=html_desc', '0');
+INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1802', './lang/de/ocstyle/search.tpl.php', '326');
+INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1802', 'table:cache_size;field=name', '0');
 
 -- Table sys_trans_text
 SET NAMES 'utf8';
@@ -5585,7 +5589,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1656', 'DE', 'Länderknoten', '2010-09-13 00:16:22');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1657', 'DE', 'bis', '2010-09-14 01:26:52');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1658', 'DE', 'Der Weg', '2010-09-15 15:06:51');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1659', 'DE', 'Cachegröße', '2010-09-27 00:34:11');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1659', 'DE', 'Cachegröße:', '2010-09-27 00:34:11');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1660', 'DE', 'Link', '2010-09-27 00:34:02');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1661', 'DE', 'Öffnen', '2010-09-27 00:33:57');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1662', 'DE', 'Zu den Favoriten hinzufügen...', '2010-09-27 00:33:50');
@@ -5713,6 +5717,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1798', 'DE', 'Verein', '2012-07-08 14:50:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1799', 'DE', 'Nur zu bestimmten Zeiten im Jahr', '2012-10-29 14:28:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1800', 'DE', 'Dieser Cache l\&auml;sst sich nur zu bestimmten Zeite im Jahr absolvieren. N\&auml;here Angaben sind in der Beschreibung des Caches zu finden. Der Cache kann beispielsweise in einem Maislabyrinth versteckt sein, das nur zwischen Bl\&uuml;te- und Erntezeit existiert.', '2012-10-29 14:28:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1802', 'DE', 'nano', '2012-11-10 15:56:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'EN', 'Reorder IDs \r', '2010-09-02 00:15:30');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'EN', 'The database could not be reconnected.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'EN', 'Testing – please do not login', '2010-08-28 11:48:07');
@@ -6695,7 +6700,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1364', 'EN', 'JavaScript is disabled in your browser, you can enter text only. To use HTML, or the editor, please enable JavaScript.', '2010-09-10 23:57:54');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1365', 'EN', 'New cache', '2010-09-10 23:57:04');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1366', 'EN', 'Owner:', '2010-09-10 23:56:45');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1367', 'EN', 'Cachetype:', '2010-09-10 23:55:47');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1367', 'EN', 'Cache type:', '2010-09-10 23:55:47');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1368', 'EN', 'Size:', '2010-09-10 23:55:33');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1369', 'EN', 'Coordinates:', '2010-09-10 23:55:24');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1370', 'EN', 'Rating:', '2010-09-10 23:55:16');
@@ -6968,7 +6973,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1656', 'EN', 'Countries', '2010-09-13 00:17:55');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1657', 'EN', 'to', '2010-09-14 01:27:02');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1658', 'EN', 'Route', '2010-09-27 00:21:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1659', 'EN', 'Cachesize', '2010-09-27 00:23:55');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1659', 'EN', 'Cache size:', '2010-09-27 00:23:55');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1660', 'EN', 'Link', '2010-09-27 00:23:50');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1661', 'EN', 'Open', '2010-09-27 00:23:44');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1662', 'EN', 'Add to favorites...', '2010-09-27 00:23:38');
@@ -7098,6 +7103,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1798', 'EN', 'Verein', '2012-07-08 14:50:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1799', 'EN', 'Only available during specified seasons', '2012-10-29 14:28:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1800', 'EN', 'This cache can be done at certain seasons only - see the cache description for more details. For example, the cache may be placed in a corn labyrinth, which only exists from bloom to harvest season.', '2012-10-29 14:28:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1802', 'EN', 'nano', '2012-11-10 15:56:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'ES', 'Reordenar ID', '2010-12-09 00:17:55');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'ES', 'La base de datos no se pudo conectar.', '2010-12-09 00:17:55');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'ES', 'En pruebas - por favor, no entre.', '2010-12-09 00:17:55');
@@ -8352,7 +8358,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1656', 'ES', 'Países', '2010-12-09 00:18:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1657', 'ES', 'a', '2010-12-09 00:18:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1658', 'ES', 'Ruta', '2010-12-09 00:18:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1659', 'ES', 'Tamaño del cache', '2010-12-09 00:18:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1659', 'ES', 'Tamaño del cache:', '2010-12-09 00:18:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1660', 'ES', 'Link', '2010-12-09 00:18:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1661', 'ES', 'Abierto', '2010-12-09 00:18:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1662', 'ES', 'Añadir a favoritos...', '2010-12-09 00:18:00');
@@ -9820,7 +9826,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1656', 'IT', 'Paesi', '2010-09-13 22:10:04');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1657', 'IT', 'a', '2010-10-27 18:49:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1658', 'IT', 'Percorso', '2010-10-27 18:49:19');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1659', 'IT', 'Dimensioni cache', '2010-10-27 18:49:19');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1659', 'IT', 'Dimensioni cache:', '2010-10-27 18:49:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1660', 'IT', 'Link', '2010-10-27 18:49:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1661', 'IT', 'Aperto', '2010-10-27 18:49:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1662', 'IT', 'Aggiungi ai favoriti...', '2010-10-27 18:49:19');
@@ -10855,7 +10861,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1656', 'NL', 'Landen (nodes)', '2011-02-04 19:50:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1657', 'NL', 'tot', '2011-02-04 19:50:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1658', 'NL', 'Route', '2011-02-04 19:50:08');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1659', 'NL', 'Cachegrootte', '2011-02-04 19:50:08');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1659', 'NL', 'Cachegrootte:', '2011-02-04 19:50:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1660', 'NL', 'Link', '2011-02-04 19:50:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1661', 'NL', 'Openen', '2011-02-04 19:50:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1662', 'NL', 'Aan favorieten toevoegen', '2011-02-04 19:50:08');

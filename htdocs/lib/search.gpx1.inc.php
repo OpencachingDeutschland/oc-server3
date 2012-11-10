@@ -88,6 +88,7 @@
 	$gpxContainer[5] = 'Large';
 	$gpxContainer[6] = 'Large';
 	$gpxContainer[7] = 'Virtual';
+	$gpxContainer[8] = 'Micro';
 
 	// known by gpx
 	$gpxType[0] = 'Other';

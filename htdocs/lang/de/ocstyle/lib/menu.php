@@ -196,6 +196,13 @@ $menu = array(
 		'filename' => 'map2.php'
 	),
 	array(
+		'title' => t('Help'),
+		'menustring' => t('Help'),
+		'siteid' => 'help',
+		'visible' => true,
+		'filename' => 'articles.php?page=help'
+	),
+	array(
 		'title' => t('Add picture'),
 		'visible' => false,
 		'filename' => 'newpic.php',

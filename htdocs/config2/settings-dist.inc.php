@@ -504,8 +504,8 @@
 	 */
 
 	// explanation of common login errors
-	$opt['cms']['login'] = 'http://blog.opencaching.de/?page_id=268';
+	$opt['cms']['login'] = 'http://wiki.opencaching.de/index.php/Login_auf_Opencaching.de';
 
 	// explanation of nature protection areas
-	$opt['cms']['npa'] = 'http://blog.opencaching.de/?page_id=274';
+	$opt['cms']['npa'] = 'http://wiki.opencaching.de/index.php/Schutzgebiete';
 ?>

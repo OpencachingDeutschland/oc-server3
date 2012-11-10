@@ -13,7 +13,7 @@
 	<tr>
 		<td style="padding-left:32px; padding-bottom:32px;">
 			{t 1=$opt.template.style}The following list is generated automatically by the given recommendations of the users. You can find more informations on
-			regional classification in the <a href="http://blog.opencaching.de/?page_id=271">help</a>.<br />
+			regional classification in the <a href="http://wiki.opencaching.de/index.php/Empfehlungen">Wiki</a>.<br />
 			<br />
 			The numbers in the list below means:<br />
 			<img src="images/rating-star.gif" border="0" alt="Recommendations"> Number of users that recommend this cache<br />

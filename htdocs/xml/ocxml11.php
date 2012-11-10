@@ -439,6 +439,13 @@ function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $z
 	while ($r = sql_fetch_array($rs))
 	{
 		$bAllowView = ($r['allow_user_view'] == 1);
+
+		// To avoid breaking existing XML clients, the new nano size is returned as other in "size" field
+		// and as nano in new "size2" field.
+		if ($r['size'] > 7)
+			$size1_id = 1;
+		else
+			$size1_id = $r['size'];
 	
 		fwrite($f, $t1 . '<cache>' . "\n");
 		
@@ -450,7 +457,8 @@ function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $z
 		fwrite($f, $t2 . '<type id="' . $r['type'] . '" short="' . xmlentities($cachetypes[$r['type']]['short']) . '">' . xmlcdata($cachetypes[$r['type']]['de']) . '</type>' . "\n");
 		fwrite($f, $t2 . '<status id="' . $r['status'] . '">' . xmlcdata($cachestatus[$r['status']]['de']) . '</status>' . "\n");
 		fwrite($f, $t2 . '<country id="' . $r['country'] . '">' . xmlcdata($counties[$r['country']]['de']) . '</country>' . "\n");
-		fwrite($f, $t2 . '<size id="' . $r['size'] . '">' . xmlcdata($cachesizes[$r['size']]['de']) . '</size>' . "\n");
+		fwrite($f, $t2 . '<size id="' . $size1_id . '">' . xmlcdata($cachesizes[$size1_id]['de']) . '</size>' . "\n");
+		fwrite($f, $t2 . '<size2 id="' . $r['size'] . '">' . xmlcdata($cachesizes[$r['size']]['de']) . '</size2>' . "\n");
 		fwrite($f, $t2 . '<desclanguages>' . $r['desclanguages'] . '</desclanguages>' . "\n");
 		fwrite($f, $t2 . '<difficulty>' . sprintf('%01.1f', $r['difficulty'] / 2) . '</difficulty>' . "\n");
 		fwrite($f, $t2 . '<terrain>' . sprintf('%01.1f', $r['terrain'] / 2) . '</terrain>' . "\n");

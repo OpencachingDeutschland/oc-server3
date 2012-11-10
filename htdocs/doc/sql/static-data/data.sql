@@ -837,7 +837,6 @@ INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustrin
 INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('85', 'MNU_CACHES_LOG', 'Create a logentry', '1687', 'Create a logentry', '1687', '0', 'log2.php', '0', '10', '10', '', '0', NULL);
 INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('86', 'MNU_START_CHANGELOG', 'Changelog', '1797', 'Changelog', '1797', '0', 'articles.php?page=changelog', '0', '0', '10', '', '1', NULL);
 INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('87', 'MNU_START_OPERATOR', 'Operator Association', '1798', 'Operator Association', '1798', '0', 'articles.php?page=verein', '1', '1', '8', '', '1', NULL);
-INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('88', 'MNU_HELP', 'Help', '1801', 'Help', '1801', '0', 'articles.php?page=help', '1', '0', '5', '#FFFFC5', '1', NULL);
 
 -- Table sys_trans
 SET NAMES 'utf8';

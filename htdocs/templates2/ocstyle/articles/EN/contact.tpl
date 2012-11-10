@@ -11,12 +11,12 @@
 <table class="table">
 	
 	<tr>
-		<td class="header-small"><b>General questions regarding Geocaching</b></td>
+		<td class="header-small"><b>General questions regarding Opencaching and Geocaching</b></td>
 	</tr>
 	<tr><td class="spacer"></td></tr>
 	<tr>
 		<td>
-		  For general questions, there is a good German website named <a href="http://www.geocaching.de">www.geocaching.de</a>.
+		  For general questions, you will find lots of information at the German websites <a href="http://wiki.opencaching.de">wiki.opencaching.de</a> and <a href="http://www.geocaching.de">www.geocaching.de</a>.
 			<br />
 			<br />
 			If you encounter a special problem, you may ask your questions in one of the German or international discussion boards at <a href="http://forum.geocaching-network.com/">forum.geocaching-network.com</a>.<br />

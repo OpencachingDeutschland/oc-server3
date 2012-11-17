@@ -1759,7 +1759,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1279', '\&lt;ht
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1292', 'Setting smilies is not supported', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1296', 'Only the following picture formats are allowed: BMP, GIF, PNG and JPEG.', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1297', 'at (time)', '2010-08-28 11:48:04');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1298', 'The following list is generated automatically by the given recommendations of the users. You can find more informations on regional classification in the <a href=\"http://blog.opencaching.de/?page_id=271\">help</a>.<br /> <br /> The numbers in the list below means:<br /> <img src=\"images/rating-star.gif\" border=\"0\" alt=\"Recommendations\"> Number of users that recommend this cache<br /> <img src=\"resource2/%1/images/log/16x16-found.png\" width=\"16\" height=\"16\" border=\"0\" alt=\"Found\"> Checks = Number of time the cache was found<br /> Index tries to take the number of recommendations and founds in an order to show \'the best\' geocache first.<br /> <img src=\"images/tops-formula.png\" border=\"0\" alt=\"Formula\">', '2010-08-28 12:03:52');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1298', 'The following list is generated automatically by the given recommendations of the users. You can find more informations on regional classification in the <a href=\"http://wiki.opencaching.de/index.php/Empfehlungen\">Wiki</a>.<br /> <br /> The numbers in the list below means:<br /> <img src=\"images/rating-star.gif\" border=\"0\" alt=\"Recommendations\"> Number of users that recommend this cache<br /> <img src=\"resource2/%1/images/log/16x16-found.png\" width=\"16\" height=\"16\" border=\"0\" alt=\"Found\"> Checks = Number of time the cache was found<br /> Index tries to take the number of recommendations and founds in an order to show \'the best\' geocache first.<br /> <img src=\"images/tops-formula.png\" border=\"0\" alt=\"Formula\">', '2010-08-28 12:03:52');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1299', 'File upload failed!', '2010-08-29 17:44:48');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1300', 'XML file could not be loaded!', '2010-08-29 17:44:53');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1301', 'SQL Export', '2010-08-29 17:45:41');
@@ -2226,6 +2226,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1797', 'Changel
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1798', 'Operator Association', '2012-08-08 14:16:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1799', 'Only available during specified seasons', '2012-10-29 14:28:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1800', 'This cache can be done at certain seasons only - see the cache description for more details. For example, the cache may be placed in a corn labyrinth, which only exists from bloom to harvest season.', '2012-10-29 14:28:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1801', 'Help', '2012-11-09 19:28:00');
 
 -- Table sys_trans_ref
 SET NAMES 'utf8';
@@ -4325,6 +4326,7 @@ INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1798'
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1798', 'table:sys_menu;field=title', '0');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1799', 'table:cache_attrib;field=html_desc', '0');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1800', 'table:cache_attrib;field=html_desc', '0');
+INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1801', './lang/de/ocstyle/lib/menu.php', '199');
 
 -- Table sys_trans_text
 SET NAMES 'utf8';
@@ -4540,7 +4542,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('216', 'DE', 'Noch nicht registriert?', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('217', 'DE', 'Passwort vergessen?', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('218', 'DE', 'E-Mail-Adresse vergessen?', '2010-08-28 11:48:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('219', 'DE', 'Weitere Ursachen findest du unter', '2010-08-28 11:48:06');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('219', 'DE', 'Weitere Hilfestellungen findest du im', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('220', 'DE', 'Druck ohne Logs', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('221', 'DE', 'Neues Passwort eingeben', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('222', 'DE', 'Erinnerung schicken', '2010-08-28 11:48:06');
@@ -5222,7 +5224,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('954', 'DE', 'Standard', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('957', 'DE', 'Chat/IRC', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1059', 'DE', 'Es ist bereits ein Account mit diesem Benutzername vorhanden.', '2010-08-28 11:48:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1060', 'DE', 'Probleme beim Login', '2010-08-28 11:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1060', 'DE', 'Opencaching-Wiki', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1061', 'DE', 'Impressum', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1062', 'DE', 'Seitenberechnung', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1063', 'DE', 'Seitenerstellung', '2010-08-28 11:48:07');
@@ -5248,7 +5250,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1292', 'DE', 'Smilies werden nicht unterstützt', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1296', 'DE', 'Nur die folgenden Dateiformate sind für Bilder erlaubt: BMP, GIF, PNG and JPEG.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1297', 'DE', 'am', '2010-08-28 11:48:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1298', 'DE', 'Die Liste wird automatisch anhand der Empfehlungen unserer Benutzer aktualisiert. Mehr Informationen zur regionalen Einteilung kannst du in der <a href=\"http://blog.opencaching.de/?page_id=271\">Hilfe</a> finden.<br />\r\n<br />\r\nDie Zahlen bedeuten Folgendes:<br />\r\n<img src=\"images/rating-star.gif\" border=\"0\" alt=\"Empfehlungen\"> Anzahl der Benutzer die diesen Geocache empfohlen haben<br />\r\n<img src=\"resource2/%1/images/log/16x16-found.png\" width=\"16\" height=\"16\" border=\"0\" alt=\"Gefunden\"> Anzahl der Funde des Geocache<br />\r\nDer Index setzt die beiden Zahlen in Relation, um den besten Geocache zu ermitteln<br />\r\n<img src=\"images/tops-formula.png\" border=\"0\" alt=\"Formel\">', '2010-08-28 12:10:29');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1298', 'DE', 'Die Liste wird automatisch anhand der Empfehlungen unserer Benutzer aktualisiert. Mehr Informationen zur regionalen Einteilung kannst du in der <a href=\"http://wiki.opencaching.de/index.php/Empfehlungen\" target=\"_blank\">Wiki</a> finden.<br />\r\n<br />\r\nDie Zahlen bedeuten Folgendes:<br />\r\n<img src=\"images/rating-star.gif\" border=\"0\" alt=\"Empfehlungen\"> Anzahl der Benutzer die diesen Geocache empfohlen haben<br />\r\n<img src=\"resource2/%1/images/log/16x16-found.png\" width=\"16\" height=\"16\" border=\"0\" alt=\"Gefunden\"> Anzahl der Funde des Geocache<br />\r\nDer Index setzt die beiden Zahlen in Relation, um den besten Geocache zu ermitteln<br />\r\n<img src=\"images/tops-formula.png\" border=\"0\" alt=\"Formel\">', '2010-08-28 12:10:29');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1299', 'DE', 'Datei upload fehlerhaft!', '2010-08-29 17:46:28');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1300', 'DE', 'XML Datei konnte nicht geladen werden!', '2010-08-29 17:50:25');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1301', 'DE', 'SQL Export', '2010-08-29 17:50:10');
@@ -5665,8 +5667,8 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1740', 'DE', '<Benutzer unbekannt>', '2011-04-04 21:27:10');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1741', 'DE', 'Der Account ist bereits aktiviert. Versuche dich bitte <a href=\"login.php\">einzuloggen</a>.<br />\r\nSollte der Login nicht möglich sein, lese bitte unter <a href=\"{$opt.cms.login}\">Loginprobleme</a> nach, wie du das Problem beheben kannst.\r\n', '2011-04-04 21:35:47');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1742', 'DE', 'Dein Browser hat das Cookie von Opencaching.de nicht gespeichert.<br />\r\nMehr Informationen findest du in der <a href=\"{$opt.cms.login}\">Opencaching.de-Hilfe</a>.', '2011-04-04 21:31:28');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1743', 'DE', 'Dieser Geocache liegt vermutlich in einem Naturschutzgebiet. Bitte verhalte dich entsprechend umsichtig! <font size=\"1\">(<a href=\"{$opt.cms.npa}\">Info</a>)</font>', '2011-04-04 21:26:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1744', 'DE', 'Dieser Geocache liegt vermutlich in den folgenden Schutzgebieten (<a href=\"{$opt.cms.npa}\">Info</a>):', '2011-04-04 21:23:13');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1743', 'DE', 'Dieser Geocache liegt vermutlich in einem Naturschutzgebiet. Bitte verhalte dich entsprechend umsichtig! <font size=\"1\">(<a href=\"{$opt.cms.npa}\" target=\"_blank\">Info</a>)</font>', '2011-04-04 21:26:14');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1744', 'DE', 'Dieser Geocache liegt vermutlich in den folgenden Schutzgebieten (<a href=\"{$opt.cms.npa}\" target=\"_blank\">Info</a>):', '2011-04-04 21:23:13');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1745', 'DE', 'Standardlogo', '2011-04-24 22:21:24');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1747', 'DE', 'Alternative by nybbler', '2011-04-24 22:21:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1752', 'DE', 'Alternativlogo', '2011-04-24 22:20:33');
@@ -5681,8 +5683,8 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1761', 'DE', 'Diese Notiz ist für andere Benutzer nicht sichtbar. Die Notiz und die Koordinaten sind in der GPX-Datei enthalten.', '2011-05-21 00:00:23');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1763', 'DE', 'Dein Browser hat das Cookie von Opencaching.de nicht gespeichert.<br /> Mehr Informationen findest du in der <a href=\"%1\">Opencaching.de-Hilfe</a>.', '2011-05-23 22:25:23');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1764', 'DE', 'Persönliche Notiz', '2011-05-21 00:02:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1765', 'DE', 'Dieser Geocache liegt vermutlich in einem Naturschutzgebiet. Bitte verhalte dich entsprechend umsichtig! <font size=\"1\">(<a href=\"{$opt.cms.npa}\">Info</a>)</font>', '2011-05-23 22:24:10');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1766', 'DE', 'Dieser Geocache liegt vermutlich in den folgenden Schutzgebieten (<a href=\"%1\">Info</a>):', '2011-05-23 22:18:40');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1765', 'DE', 'Dieser Geocache liegt vermutlich in einem Naturschutzgebiet. Bitte verhalte dich entsprechend umsichtig! <font size=\"1\">(<a href=\"{$opt.cms.npa}\" target=\"_blank\">Info</a>)</font>', '2011-05-23 22:24:10');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1766', 'DE', 'Dieser Geocache liegt vermutlich in den folgenden Schutzgebieten (<a href=\"%1\" target=\"_blank\">Info</a>):', '2011-05-23 22:18:40');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1767', 'DE', 'Schnellübersetzung', '2011-07-10 18:09:51');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1768', 'DE', 'Deaktivieren', '2011-07-10 18:10:02');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1769', 'DE', 'Aktivieren - neu', '2011-07-10 18:10:27');
@@ -5713,6 +5715,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1798', 'DE', 'Verein', '2012-07-08 14:50:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1799', 'DE', 'Nur zu bestimmten Zeiten im Jahr', '2012-10-29 14:28:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1800', 'DE', 'Dieser Cache l\&auml;sst sich nur zu bestimmten Zeite im Jahr absolvieren. N\&auml;here Angaben sind in der Beschreibung des Caches zu finden. Der Cache kann beispielsweise in einem Maislabyrinth versteckt sein, das nur zwischen Bl\&uuml;te- und Erntezeit existiert.', '2012-10-29 14:28:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1801', 'DE', 'Hilfe', '2012-11-09 19:32:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'EN', 'Reorder IDs \r', '2010-09-02 00:15:30');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'EN', 'The database could not be reconnected.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'EN', 'Testing – please do not login', '2010-08-28 11:48:07');
@@ -6605,7 +6608,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('954', 'EN', 'Default', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('957', 'EN', 'Chat/IRC', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1059', 'EN', 'An account with that username already exists.', '2010-08-28 11:48:08');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1060', 'EN', 'Problems with login', '2010-08-28 11:48:08');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1060', 'EN', 'Opencaching-Wiki', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1061', 'EN', 'Terms of use and legal information', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1062', 'EN', 'Page performance', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1063', 'EN', 'Page creation', '2010-08-28 11:48:08');
@@ -6631,7 +6634,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1292', 'EN', 'Setting smilies is not supported', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1296', 'EN', 'Only the following picture formats are allowed: BMP, GIF, PNG and JPEG.', '2010-08-28 11:50:56');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1297', 'EN', 'am', '2010-08-28 11:48:08');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1298', 'EN', 'The following list is generated automatically by the given recommendations of the users. You can find more informations on regional classification in the <a href=\"http://blog.opencaching.de/?page_id=271\">help</a>.<br /> <br /> The numbers in the list below means:<br /> <img src=\"images/rating-star.gif\" border=\"0\" alt=\"Recommendations\"> Number of users that recommend this cache<br /> <img src=\"resource2/%1/images/log/16x16-found.png\" width=\"16\" height=\"16\" border=\"0\" alt=\"Found\"> Checks = Number of time the cache was found<br /> Index tries to take the number of recommendations and founds in an order to show \'the best\' geocache first.<br /> <img src=\"images/tops-formula.png\" border=\"0\" alt=\"Formula\">', '2010-08-29 22:49:51');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1298', 'EN', 'The following list is generated automatically by the given recommendations of the users. You can find more informations on regional classification in the <a href=\"http://wiki.opencaching.de/index.php/Empfehlungen\" target=\"_blank\">Wiki</a>.<br /> <br /> The numbers in the list below means:<br /> <img src=\"images/rating-star.gif\" border=\"0\" alt=\"Recommendations\"> Number of users that recommend this cache<br /> <img src=\"resource2/%1/images/log/16x16-found.png\" width=\"16\" height=\"16\" border=\"0\" alt=\"Found\"> Checks = Number of time the cache was found<br /> Index tries to take the number of recommendations and founds in an order to show \'the best\' geocache first.<br /> <img src=\"images/tops-formula.png\" border=\"0\" alt=\"Formula\">', '2010-08-29 22:49:51');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1299', 'EN', 'File upload failed!', '2010-08-29 22:50:32');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1300', 'EN', 'XML file could not be loaded!', '2010-08-29 22:50:38');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1301', 'EN', 'SQL Export', '2010-08-29 23:28:25');
@@ -7049,8 +7052,8 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1740', 'EN', '<Unknown user>', '2012-08-24 17:35:49');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1741', 'EN', 'The account is already activated. Please try to <a href=\"login.php\">login</a>.<br /> If you cannot login, please read the following page: <a href=\"{$opt.cms.login}\">Login problems</a>', '2011-04-04 21:35:32');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1742', 'EN', 'Your browser has rejected our cookie.<br /> For more information on this topic, see <a href=\"{$opt.cms.login}\">Opencaching.de-help</a>.', '2011-04-04 21:31:45');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1743', 'EN', 'This geocache is probably placed within a nature reserve! Pleas read <a href=\"{$opt.cms.npa}\">this</a> for further information.', '2011-04-04 21:25:53');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1744', 'EN', 'This geocache is probably placed within the following nature reserves (<a href=\"{$opt.cms.npa}\">Info</a>):', '2011-04-04 21:23:58');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1743', 'EN', 'This geocache is probably placed within a nature reserve! Pleas read <a href=\"{$opt.cms.npa}\" target=\"_blank\">this</a> for further information.', '2011-04-04 21:25:53');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1744', 'EN', 'This geocache is probably placed within the following nature reserves (<a href=\"{$opt.cms.npa}\" target=\"_blank\">Info</a>):', '2011-04-04 21:23:58');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1745', 'EN', 'Default logo', '2012-08-24 17:35:49');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1747', 'EN', 'Alternative logo by nybbler', '2012-08-24 17:35:49');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1752', 'EN', 'Alternative logo', '2012-08-24 17:35:49');
@@ -7066,8 +7069,8 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1762', 'EN', 'Subscribe to feeds from opencaching', '2012-08-24 17:35:49');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1763', 'EN', 'Your browser has rejected our cookie.<br /> For more information on this topic, see <a href=\"%1\">Opencaching.de-help</a>.', '2011-05-23 22:25:18');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1764', 'EN', 'Personal cache note', '2012-08-24 17:35:49');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1765', 'EN', 'This geocache is probably placed within a nature protection area! Please see <a href=\"%1\">here</a> for further information.', '2012-08-24 17:35:49');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1766', 'EN', 'This geocache is probably placed within the following nature reserves (<a href=\"%1\">Info</a>):', '2011-05-23 22:19:23');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1765', 'EN', 'This geocache is probably placed within a nature protection area! Please see <a href=\"%1\" target=\"_blank\">here</a> for further information.', '2012-08-24 17:35:49');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1766', 'EN', 'This geocache is probably placed within the following nature reserves (<a href=\"%1\" target=\"_blank\">Info</a>):', '2011-05-23 22:19:23');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1767', 'EN', 'Quick translation', '2012-08-24 17:35:49');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1768', 'EN', 'Disable', '2012-08-24 17:35:49');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1769', 'EN', 'Enable - new', '2012-08-24 17:35:49');
@@ -7098,6 +7101,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1798', 'EN', 'Verein', '2012-07-08 14:50:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1799', 'EN', 'Only available during specified seasons', '2012-10-29 14:28:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1800', 'EN', 'This cache can be done at certain seasons only - see the cache description for more details. For example, the cache may be placed in a corn labyrinth, which only exists from bloom to harvest season.', '2012-10-29 14:28:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1801', 'EN', 'Help', '2012-11-09 19:32:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'ES', 'Reordenar ID', '2010-12-09 00:17:55');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'ES', 'La base de datos no se pudo conectar.', '2010-12-09 00:17:55');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'ES', 'En pruebas - por favor, no entre.', '2010-12-09 00:17:55');
@@ -7990,7 +7994,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('954', 'ES', 'Standard', '2010-12-09 00:17:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('957', 'ES', 'Chat/IRC', '2010-12-09 00:17:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1059', 'ES', 'Ya existe una cuenta con este nombre de usuario existe.', '2010-12-09 00:17:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1060', 'ES', 'Problemas con la autentificación', '2010-12-09 00:17:59');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1060', 'ES', 'Opencaching-Wiki', '2010-12-09 00:17:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1061', 'ES', 'Condiciones de uso e información legal', '2010-12-09 00:17:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1062', 'ES', 'Página de presentación', '2010-12-09 00:17:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1063', 'ES', 'Creación de página', '2010-12-09 00:17:59');
@@ -8016,7 +8020,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1292', 'ES', 'Smilies no son compatibles', '2010-12-09 00:17:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1296', 'ES', 'Sólo los siguientes formatos de archivo se permite para las imágenes: BMP, GIF, PNG y JPEG.', '2010-12-09 00:17:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1297', 'ES', 'a la (hora)', '2010-12-09 00:17:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1298', 'ES', 'La lista se actualizará automáticamente basado en las recomendaciones de nuestros usuarios. Más información sobre la división regional se puede en el <a href=\"http://blog.opencaching.de/?page_id=271\">Hilfe</a> finden.<br />\r\n<br />\r\nLos números indican lo siguiente:<br />\r\n<img src=\"images/rating-star.gif\" border=\"0\" alt=\"Empfehlungen\">Número de hallazgos del Geocache<br />\r\n<img src=\"resource2/%1/images/log/16x16-found.png\" width=\"16\" height=\"16\" border=\"0\" alt=\"Que se encuentranquot;>Número de hallazgos del Geocache<br />\r\nEl índice es el número dos en relación a determinar el mejor Geocache<br />\r\n<img src=\"images/tops-formula.png\" border=\"0\" alt=\"Formel\">', '2010-12-09 00:17:59');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1298', 'ES', 'La lista se actualizará automáticamente basado en las recomendaciones de nuestros usuarios. Más información sobre la división regional se puede en el <a href=\"http://wiki.opencaching.de/index.php/Empfehlungen\" target=\"_blank\">Wiki</a>.<br />\r\n<br />\r\nLos números indican lo siguiente:<br />\r\n<img src=\"images/rating-star.gif\" border=\"0\" alt=\"Empfehlungen\">Número de hallazgos del Geocache<br />\r\n<img src=\"resource2/%1/images/log/16x16-found.png\" width=\"16\" height=\"16\" border=\"0\" alt=\"Que se encuentranquot;>Número de hallazgos del Geocache<br />\r\nEl índice es el número dos en relación a determinar el mejor Geocache<br />\r\n<img src=\"images/tops-formula.png\" border=\"0\" alt=\"Formel\">', '2010-12-09 00:17:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1299', 'ES', '¡Archivo de errores de carga!', '2010-12-09 00:17:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1300', 'ES', '¡El fichero XML no se pudo cargar!', '2010-12-09 00:17:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1301', 'ES', 'Exportar SQL', '2010-12-09 00:17:59');
@@ -8433,8 +8437,8 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1740', 'ES', '<Usuario no conocido>', '2012-08-24 17:43:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1741', 'ES', 'La cuenta ya está activada. Por favor trate de <a href=\"login.php\">login</a>.<br /> Si no puede acceder, por favor lea la página siguiente: <a href=\"{$opt.cms.login}\">Login problems</a>', '2011-04-04 21:34:03');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1742', 'ES', 'Su navegador ha rechazado nuestra cookie.<br /> Para obtener más información sobre este tema, véase <a href=\"{$opt.cms.login}\">Opencaching.de-help</a>.', '2011-04-04 21:32:56');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1743', 'ES', 'Este geocache está probablemente en una reserva natural. ¡Por favor, en consecuencia compórtate con cuidado!<font size=\"1\">(<a href=\"{$opt.cms.npa}\">Info</a>)</font>', '2011-04-04 21:24:52');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1744', 'ES', 'Este geocache está probablemente en las siguientes áreas protegidas (<a href=\"{$opt.cms.npa}\">Info</a>):', '2011-04-04 21:24:38');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1743', 'ES', 'Este geocache está probablemente en una reserva natural. ¡Por favor, en consecuencia compórtate con cuidado!<font size=\"1\">(<a href=\"{$opt.cms.npa}\" target=\"_blank\">Info</a>)</font>', '2011-04-04 21:24:52');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1744', 'ES', 'Este geocache está probablemente en las siguientes áreas protegidas (<a href=\"{$opt.cms.npa}\" target=\"_blank\">Info</a>):', '2011-04-04 21:24:38');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1745', 'ES', 'Logo standard', '2012-08-24 17:43:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1747', 'ES', 'Alternativa para nybbler', '2012-08-24 17:43:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1752', 'ES', 'Alternativa de logo', '2012-08-24 17:43:19');
@@ -8450,8 +8454,8 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1762', 'ES', 'Suscribirse a los feeds de opencaching', '2012-08-24 17:43:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1763', 'ES', 'Su navegador ha rechazado nuestra cookie.<br /> Para obtener más información sobre este tema, véase <a href=\"%1\">Opencaching.de-help</a>.', '2011-05-23 22:26:26');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1764', 'ES', 'Nota persona del cache', '2012-08-24 17:43:19');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1765', 'ES', '¡Este geocache está probablemente situado dentro de una zona de protección de la naturaleza! Mira <a href=\"%1\">aqui</a> para obtener más información, por favor.', '2012-08-24 17:43:19');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1766', 'ES', 'Este geocache está probablemente en las siguientes áreas protegidas (<a href=\"%1\">Info</a>):', '2011-05-23 22:20:30');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1765', 'ES', '¡Este geocache está probablemente situado dentro de una zona de protección de la naturaleza! Mira <a href=\"%1\" target=\"_blank\">aqui</a> para obtener más información, por favor.', '2012-08-24 17:43:19');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1766', 'ES', 'Este geocache está probablemente en las siguientes áreas protegidas (<a href=\"%1\" target=\"_blank\">Info</a>):', '2011-05-23 22:20:30');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1767', 'ES', 'Traducción rápida', '2012-08-24 17:43:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1768', 'ES', 'Inhabilitar', '2012-08-24 17:43:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1769', 'ES', 'Habilitar - nuevo', '2012-08-24 17:43:19');
@@ -8480,6 +8484,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1796', 'ES', 'Publicado en', '2012-08-24 17:43:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1797', 'ES', 'Cambios', '2012-08-24 17:43:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1798', 'ES', 'Verein', '2012-07-08 14:50:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1801', 'ES', 'Ayuda', '2012-11-09 19:32:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('6', 'FR', 'Pseudo', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('7', 'FR', 'Quite', '2010-10-04 00:17:39');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('24', 'FR', 'Prénom', '2010-10-04 00:17:39');
@@ -9458,7 +9463,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('954', 'IT', 'Standard', '2010-09-10 23:15:36');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('957', 'IT', 'Chat/IRC', '2010-09-10 23:15:36');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1059', 'IT', 'Esiste già un utente con questo nome.', '2010-09-10 23:15:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1060', 'IT', 'Problemi nella autenticazione', '2010-10-27 18:49:19');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1060', 'IT', 'Opencaching-Wiki', '2010-10-27 18:49:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1061', 'IT', 'Condizioni d\'uso e informazioni legali', '2010-09-10 23:15:36');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1062', 'IT', 'Pagina sulle prestazioni', '2010-09-10 23:15:36');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1063', 'IT', 'Creazione della pagina', '2010-10-27 18:49:19');
@@ -9484,7 +9489,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1292', 'IT', 'L\'utilizzo degli smilies non è supportato', '2010-09-10 23:15:37');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1296', 'IT', 'Sono ammesse solo le immagini nei seguenti formati: BMP, GIF, PNG e JPEG.', '2010-10-27 18:49:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1297', 'IT', 'alle (ora)', '2010-08-28 22:26:55');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1298', 'IT', 'Questa lista è generata automaticamente sulla base delle raccomandazioni degli utenti. Puoi trovare maggiori informazioni sulla classificazione regionale nell\'<a href=\"http://blog.opencaching.de/?page_id=271\">help</a>.<br /> <br /> I numeri nella lista qui sotto significano:<br /> <img src=\"images/rating-star.gif\" border=\"0\" alt=\"Recommendations\"> Numbero di utenti che raccomandano questa cache<br /> <img src=\"resource2/%1/images/log/16x16-found.png\" width=\"16\" height=\"16\" border=\"0\" alt=\"Found\"> Checks = Numero di volte in cui la cache è stata trovata<br /> L\' indice cerca di ordinare il numero di raccomandazioni e i ritrovamenti in modo da visualizzare per prime \'le migliori\' geocache.<br /> <img src=\"images/tops-formula.png\" border=\"0\" alt=\"Formula\"> \r\n', '2010-08-28 22:26:30');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1298', 'IT', 'Questa lista è generata automaticamente sulla base delle raccomandazioni degli utenti. Puoi trovare maggiori informazioni sulla classificazione regionale nell <a href=\"http://wiki.opencaching.de/index.php/Empfehlungen\" target=\"_blank\">Wiki</a>.<br /> <br /> I numeri nella lista qui sotto significano:<br /> <img src=\"images/rating-star.gif\" border=\"0\" alt=\"Recommendations\"> Numbero di utenti che raccomandano questa cache<br /> <img src=\"resource2/%1/images/log/16x16-found.png\" width=\"16\" height=\"16\" border=\"0\" alt=\"Found\"> Checks = Numero di volte in cui la cache è stata trovata<br /> L\' indice cerca di ordinare il numero di raccomandazioni e i ritrovamenti in modo da visualizzare per prime \'le migliori\' geocache.<br /> <img src=\"images/tops-formula.png\" border=\"0\" alt=\"Formula\"> \r\n', '2010-08-28 22:26:30');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1299', 'IT', 'Errore caricamento file!', '2010-09-10 23:15:37');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1300', 'IT', 'Il file XML non può essere caricato!', '2010-09-10 23:15:37');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1301', 'IT', 'Esportazione SQL', '2010-09-10 23:15:37');
@@ -9901,8 +9906,8 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1740', 'IT', '<Utente sconosciuto>', '2012-08-26 02:39:48');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1741', 'IT', 'Questo utente è già stato attivato. Per favore prova a  <a href=\"login.php\">connetterti</a>.<br />Se non è possibile connetterti, per favore leggi la pagina sui <a href=\"{$opt.cms.login}\">problemi con la connessione</a>', '2011-04-04 21:34:36');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1742', 'IT', 'Il tuo browser ha rifiutato il nostro cookie.<br/> Puoi trovare ulteriori informazioni su questo argomento in <a href=\"{$opt.cms.login}\">Opencaching.de-help</a>.', '2011-04-04 21:32:29');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1743', 'IT', 'Questa geocache probabilmente è situata in una riserva naturale! Per favore leggi <a href=\"{$opt.cms.npa}\">questo</a> per ulteriori informazioni.', '2011-04-04 21:25:24');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1744', 'IT', 'Questa geocache probabilmente è situata in una riserva naturale (<a href=\"{$opt.cms.npa}\">Info</a>):', '2011-04-04 21:24:22');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1743', 'IT', 'Questa geocache probabilmente è situata in una riserva naturale! Per favore leggi <a href=\"{$opt.cms.npa}\ target=\"_blank\"">questo</a> per ulteriori informazioni.', '2011-04-04 21:25:24');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1744', 'IT', 'Questa geocache probabilmente è situata in una riserva naturale (<a href=\"{$opt.cms.npa}\" target=\"_blank\">Info</a>):', '2011-04-04 21:24:22');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1745', 'IT', 'logo standard', '2012-08-26 02:39:48');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1747', 'IT', 'Alternativa per nybbler', '2012-08-26 02:39:48');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1752', 'IT', 'Logo alternativo', '2012-08-26 02:39:48');
@@ -9918,8 +9923,8 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1762', 'IT', 'Sottoscrivi i feeds di opencaching', '2012-08-26 02:39:48');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1763', 'IT', 'Il tuo browser ha rifiutato il nostro cookie.<br/> Puoi trovare ulteriori informazioni su questo argomento in <a href=\"%1\">Opencaching.de-help</a>.', '2011-05-23 22:26:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1764', 'IT', 'Nota personale per la cache', '2012-08-26 02:39:48');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1765', 'IT', 'Questa geocache è probabilmente situata all\'interno di un\'area naturale protetta! Per favore, vedi <a href=\"%1\">qui</a> per ulteriori informazioni.', '2012-08-26 02:39:48');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1766', 'IT', 'Questa geocache probabilmente è situata in una riserva naturale (<a href=\"%1\">Info</a>):', '2011-05-23 22:19:58');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1765', 'IT', 'Questa geocache è probabilmente situata all\'interno di un\'area naturale protetta! Per favore, vedi <a href=\"%1\" target=\"_blank\">qui</a> per ulteriori informazioni.', '2012-08-26 02:39:48');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1766', 'IT', 'Questa geocache probabilmente è situata in una riserva naturale (<a href=\"%1\" target=\"_blank\">Info</a>):', '2011-05-23 22:19:58');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1767', 'IT', 'Traduzione rapida', '2012-08-26 02:39:48');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1768', 'IT', 'Disabilita', '2012-08-26 02:39:48');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1769', 'IT', 'Abilita - nuova', '2012-08-26 02:39:48');
@@ -9948,6 +9953,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1796', 'IT', 'Pubblicata il', '2012-08-26 02:39:48');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1797', 'IT', 'Elenco modifiche', '2012-08-26 02:39:48');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1798', 'IT', 'Verein', '2012-07-08 14:50:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1801', 'IT', 'Assistenza', '2012-11-09 19:32:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('922', 'JA', 'JA', '2011-05-15 16:04:51');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'NL', 'ID\'s opnieuw sorteren', '2011-02-04 19:49:56');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'NL', 'De verbinding met de database kon niet hersteld worden.', '2011-02-04 19:49:56');

@@ -759,7 +759,7 @@ class Okapi
 {
 	public static $data_store;
 	public static $server;
-	public static $revision = 483; # This gets replaced in automatically deployed packages
+	public static $revision = 500; # This gets replaced in automatically deployed packages
 	private static $okapi_vars = null;
 	
 	/** Get a variable stored in okapi_vars. If variable not found, return $default. */
@@ -1449,10 +1449,6 @@ class Okapi
 		)
 	);
 	
-	private static $cache_statuses = array(
-		'Available' => 1, 'Temporarily unavailable' => 2, 'Archived' => 3
-	);
-	
 	/** E.g. 'Traditional' => 2. For unknown names throw an Exception. */
 	public static function cache_type_name2id($name)
 	{
@@ -1479,6 +1475,10 @@ class Okapi
 		return "Other";
 	}
 	
+	private static $cache_statuses = array(
+		'Available' => 1, 'Temporarily unavailable' => 2, 'Archived' => 3
+	);
+	
 	/** E.g. 'Available' => 1. For unknown names throws an Exception. */
 	public static function cache_status_name2id($name)
 	{
@@ -1500,6 +1500,64 @@ class Okapi
 		if (isset($reversed[$id]))
 			return $reversed[$id];
 		return 'Archived';
+	}
+
+	private static $cache_sizes = array(
+		'none' => 7,
+		'nano' => 8,
+		'micro' => 2,
+		'small' => 3,
+		'regular' => 4,
+		'large' => 5,
+		'xlarge' => 6,
+		'other' => 1,
+	);
+	
+	/** E.g. 'micro' => 2. For unknown names throw an Exception. */
+	public static function cache_size2_to_sizeid($size2)
+	{
+		if (isset(self::$cache_sizes[$size2]))
+			return self::$cache_sizes[$size2];
+		throw new Exception("Method cache_size2_to_sizeid called with invalid size2 '$size2'.");
+	}
+	
+	/** E.g. 2 => 'micro'. For unknown ids returns "other". */
+	public static function cache_sizeid_to_size2($id)
+	{
+		static $reversed = null;
+		if ($reversed == null)
+		{
+			$reversed = array();
+			foreach (self::$cache_sizes as $key => $value)
+				$reversed[$value] = $key;
+		}
+		if (isset($reversed[$id]))
+			return $reversed[$id];
+		return "other";
+	}
+
+	/** Maps OKAPI's 'size2' values to opencaching.com (OX) size codes. */
+	private static $cache_OX_sizes = array(
+		'none' => null,
+		'nano' => 1.3,
+		'micro' => 2.0,
+		'small' => 3.0,
+		'regular' => 3.8,
+		'large' => 4.6,
+		'xlarge' => 4.9,
+		'other' => null,
+	);
+	
+	/**
+	 * E.g. 'micro' => 2.0, 'other' => null. For unknown names throw an
+	 * Exception. Note, that this is not a bijection ('none' are 'other' are
+	 * both null).
+	 */
+	public static function cache_size2_to_oxsize($size2)
+	{
+		if (array_key_exists($size2, self::$cache_OX_sizes))
+			return self::$cache_OX_sizes[$size2];
+		throw new Exception("Method cache_size2_to_oxsize called with invalid size2 '$size2'.");
 	}
 	
 	/**
@@ -1578,9 +1636,18 @@ class Cache
 	 * Save object $value under the key $key. Store this object for
 	 * $timeout seconds. $key must be a string of max 64 characters in length.
 	 * $value might be any serializable PHP object.
+	 *
+	 * If $timeout is null, then the object will be treated as persistent
+	 * (the Cache will do its best to NEVER remove it).
 	 */
 	public static function set($key, $value, $timeout)
 	{
+		if ($timeout == null)
+		{
+			# The current cache implementation is ALWAYS persistent, so we will
+			# just replace it with a big value.
+			$timeout = 100*365*86400;
+		}
 		Db::execute("
 			replace into okapi_cache (`key`, value, expires)
 			values (
@@ -1613,6 +1680,12 @@ class Cache
 	{
 		if (count($dict) == 0)
 			return;
+		if ($timeout == null)
+		{
+			# The current cache implementation is ALWAYS persistent, so we will
+			# just replace it with a big value.
+			$timeout = 100*365*86400;
+		}
 		$entries = array();
 		foreach ($dict as $key => $value)
 		{

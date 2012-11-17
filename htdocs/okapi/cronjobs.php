@@ -16,6 +16,7 @@ namespace okapi\cronjobs;
 
 use Exception;
 use okapi\Okapi;
+use okapi\BadRequest;
 use okapi\Settings;
 use okapi\OkapiLock;
 use okapi\OkapiExceptionHandler;
@@ -43,6 +44,7 @@ class CronJobController
 				new CheckCronTab2(),
 				new ChangeLogWriterJob(),
 				new ChangeLogCleanerJob(),
+				new ChangeLogCheckerJob(),
 				new AdminStatsSender(),
 				new LocaleChecker(),
 				new FulldumpGeneratorJob(),
@@ -93,13 +95,27 @@ class CronJobController
 					$next_run = $cronjob->get_next_scheduled_run(isset($schedule[$name]) ? $schedule[$name] : time());
 				}
 				$schedule[$name] = $next_run;
+				Cache::set("cron_schedule", $schedule, 30*86400);
 			}
 		}
+		
+		# Remove "stale" schedule keys (those which are no longer declared).
+		
+		$fixed_schedule = array();
+		foreach (self::get_enabled_cronjobs() as $cronjob)
+		{
+			$name = $cronjob->get_name();
+			$fixed_schedule[$name] = $schedule[$name];
+		}
+		unset($schedule);
+		
+		# Return the nearest scheduled event time.
+		
 		$nearest = time() + 3600;
-		foreach ($schedule as $name => $time)
+		foreach ($fixed_schedule as $name => $time)
 			if ($time < $nearest)
 				$nearest = $time;
-		Cache::set("cron_schedule", $schedule, 30*86400);
+		Cache::set("cron_schedule", $fixed_schedule, 30*86400);
 		$lock->release();
 		return $nearest;
 	}
@@ -447,6 +463,22 @@ class ChangeLogWriterJob extends Cron5Job
 }
 
 /**
+ * Once per day, compares alle caches to the cached versions
+ * kept by the 'replicate' module. If it finds any inconsistencies, it
+ * emails the developers (such inconsistencies shouldn't happen) and it changes
+ * the okapi_syncbase column accordingly. See issue 157.
+ */
+class ChangeLogCheckerJob extends Cron5Job
+{
+	public function get_period() { return 86400; }
+	public function execute()
+	{
+		require_once($GLOBALS['rootpath']."okapi/services/replicate/replicate_common.inc.php");
+		ReplicateCommon::verify_clog_consistency();
+	}
+}
+
+/**
  * Once per week, generates the fulldump archive.
  */
 class FulldumpGeneratorJob extends Cron5Job
@@ -473,17 +505,26 @@ class TileTreeUpdater extends Cron5Job
 			# No update necessary.
 		} elseif ($tiletree_revision < $current_clog_revision) {
 			require_once($GLOBALS['rootpath']."okapi/services/caches/map/replicate_listener.inc.php");
-			if ($current_clog_revision - $tiletree_revision < 100000)  # In the middle of 2012, OCPL generated 30000 entries per week
+			if ($current_clog_revision - $tiletree_revision < 30000)  # In the middle of 2012, OCPL generated 30000 entries per week
 			{
-				for ($i=0; $i<100; $i++)  # This gives us no more than 20000 (?) at a time.
+				for ($timeout = time() + 240; time() < $timeout; )  # Try to stop after 4 minutes.
 				{
-					$response = OkapiServiceRunner::call('services/replicate/changelog', new OkapiInternalRequest(
-						new OkapiInternalConsumer(), null, array('since' => $tiletree_revision)));
-					\okapi\services\caches\map\ReplicateListener::receive($response['changelog']);
-					$tiletree_revision = $response['revision'];
-					Okapi::set_var('clog_followup_revision', $tiletree_revision);
-					if (!$response['more'])
-						break;
+					try {
+						$response = OkapiServiceRunner::call('services/replicate/changelog', new OkapiInternalRequest(
+							new OkapiInternalConsumer(), null, array('since' => $tiletree_revision)));
+						\okapi\services\caches\map\ReplicateListener::receive($response['changelog']);
+						$tiletree_revision = $response['revision'];
+						Okapi::set_var('clog_followup_revision', $tiletree_revision);
+						if (!$response['more'])
+							break;
+					} catch (BadRequest $e) {
+						# Invalid 'since' parameter? May happen whne crontab was
+						# not working for more than 10 days. Or, just after OKAPI
+						# is installed (and this is the first time this cronjob
+						# if being run).
+						\okapi\services\caches\map\ReplicateListener::reset();
+						Okapi::set_var('clog_followup_revision', $current_clog_revision);
+					}
 				}
 			} else {
 				# Some kind of bigger update. Resetting TileTree might be a better option.

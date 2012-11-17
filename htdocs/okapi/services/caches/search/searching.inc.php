@@ -98,6 +98,34 @@ class SearchAssistant
 		}
 		
 		#
+		# size2
+		#
+		
+		if ($tmp = $request->get_parameter('size2'))
+		{
+			$operator = "in";
+			if ($tmp[0] == '-')
+			{
+				$tmp = substr($tmp, 1);
+				$operator = "not in";
+			}
+			$types = array();
+			foreach (explode("|", $tmp) as $name)
+			{
+				try
+				{
+					$id = Okapi::cache_size2_to_sizeid($name);
+					$types[] = $id;
+				}
+				catch (Exception $e)
+				{
+					throw new InvalidParam('size2', "'$name' is not a valid cache size.");
+				}
+			}
+			$where_conds[] = "caches.size $operator ('".implode("','", array_map('mysql_real_escape_string', $types))."')";
+		}
+
+		#
 		# status - filter by status codes
 		#
 		
@@ -185,11 +213,17 @@ class SearchAssistant
 						}
 						break;
 					case 'size':
+						# Deprecated. Leave it for backward-compatibility. See issue 155.
 						if (($min == 1) && ($max == 5) && $allow_null) {
-							/* no extra condition necessary */
+							# No extra condition necessary ('other' caches will be
+							# included).
 						} else {
+							# 'other' size caches will NOT be included (user must use the
+							# 'size2' parameter to search these). 'nano' caches will be
+							# included whenever 'micro' caches are included ($min=1).
 							$where_conds[] = "(caches.size between $min+1 and $max+1)".
-								($allow_null ? " or caches.size=7" : "");
+								($allow_null ? " or caches.size=7" : "").
+								(($min == 1) ? " or caches.size=8" : "");
 						}
 						break;
 					case 'rating':

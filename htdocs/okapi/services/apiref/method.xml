@@ -38,11 +38,12 @@
 				<ul>
 					<li><b>name</b> - name of an argument,</li>
 					<li><b>is_required</b> - boolean, true if the argument is required,</li>
+					<li><b>is_deprecated</b> - boolean, true if the argument is deprecated,</li>
 					<li><b>description</b> - HTML-formatted description of an argument.</li>
 					<li>
-						<p><b>class</b> - one of the following values: <i>public</i>,
-						<i>inherited</i> or <i>common-formatting</i> (other values might be
-						introduced in future).</p>
+						<p><b>class</b> - space separated list of the following values: <i>public</i>,
+						<i>inherited</i>, <i>common-formatting</i> and <i>deprecated</i>
+						(other values might be introduced in future).</p>
 						<p>Currently these values do not mean anything specific. They are
 						used for different coloring/styling in the documentation pages.</p>
 					</li>

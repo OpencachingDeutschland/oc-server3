@@ -26,7 +26,7 @@ class WebService
 	
 	private static $valid_field_names = array('code', 'name', 'names', 'location', 'type',
 		'status', 'url', 'owner', 'distance', 'bearing', 'bearing2', 'bearing3', 'is_found',
-		'is_not_found', 'founds', 'notfounds', 'size', 'difficulty', 'terrain',
+		'is_not_found', 'founds', 'notfounds', 'size', 'size2', 'oxsize', 'difficulty', 'terrain',
 		'rating', 'rating_votes', 'recommendations', 'req_passwd', 'description',
 		'descriptions', 'hint', 'hints', 'images', 'attrnames', 'latest_logs',
 		'my_notes', 'trackables_count', 'trackables', 'alt_wpts', 'last_found',
@@ -204,7 +204,23 @@ class WebService
 					case 'is_not_found': /* handled separately */ break;
 					case 'founds': $entry['founds'] = $row['founds'] + 0; break;
 					case 'notfounds': $entry['notfounds'] = $row['notfounds'] + 0; break;
-					case 'size': $entry['size'] = ($row['size'] < 7) ? (float)($row['size'] - 1) : null; break;
+					case 'size':
+						# Deprecated. Leave it for backward-compatibility. See issue 155.
+						switch (Okapi::cache_sizeid_to_size2($row['size']))
+						{
+							case 'none': $entry['size'] = null; break;
+							case 'nano': $entry['size'] = 1.0; break;  # same as micro
+							case 'micro': $entry['size'] = 1.0; break;
+							case 'small': $entry['size'] = 2.0; break;
+							case 'regular': $entry['size'] = 3.0; break;
+							case 'large': $entry['size'] = 4.0; break;
+							case 'xlarge': $entry['size'] = 5.0; break;
+							case 'other': $entry['size'] = null; break;  # same as none
+							default: throw new Exception();
+						}
+						break;
+					case 'size2': $entry['size2'] = Okapi::cache_sizeid_to_size2($row['size']); break;
+					case 'oxsize': $entry['oxsize'] = Okapi::cache_size2_to_oxsize(Okapi::cache_sizeid_to_size2($row['size'])); break;
 					case 'difficulty': $entry['difficulty'] = round($row['difficulty'] / 2.0, 1); break;
 					case 'terrain': $entry['terrain'] = round($row['terrain'] / 2.0, 1); break;
 					case 'rating':

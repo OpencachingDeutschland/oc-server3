@@ -861,8 +861,6 @@
 					// do not use slave server for the next time ...
 					db_slave_exclude();
 
-					// waypoint erstellen
-					setCacheWaypoint($cache_id);
 					//add record to cache_desc table
 					if ($descMode != 1)
 					{

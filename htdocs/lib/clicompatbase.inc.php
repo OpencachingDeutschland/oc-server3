@@ -69,43 +69,6 @@
 																 $module, $eventid, $userid, $objectid1, $objectid2, $logtext, serialize($details));
 	}
 
-	// set a unique waypoint to this cache
-	function setCacheWaypoint($cacheid)
-	{
-		global $opt;
-
-    // cleanup previous assignments failures
-    sql("DELETE FROM `cache_waypoint_pool` WHERE `cache_id`='&1'", $cacheid);
-
-    // reserve a waypoint
-    sql("UPDATE `cache_waypoint_pool` SET `cache_id`='&1' WHERE `cache_id` IS NULL ORDER BY WPTODEC(`wp_oc`, '&2') ASC LIMIT 1", $cacheid, $opt['logic']['waypoint_pool']['prefix']);
-
-    if (sqlValue("SELECT `wp_oc` FROM `cache_waypoint_pool` WHERE `cache_id`='" . ($cacheid+0) . "'", "") == "")
-    {
-      // waypoint reservation was not successfull. Maybe we are on a development machine, where cronjob for waypoint pool
-      // generation did not run or the pool is empty. To get a valid waypoint, we simply increment the highest used waypoint by one.
-      // (note: this ignores the setting of $opt['logic']['waypoint_pool']['fill_gaps'])
-      // CAUTION: This statement is realy slow and you should always keep your waypoint pool filled with some waypoint on a production server
-      sql("INSERT INTO `cache_waypoint_pool` (`wp_oc`, `cache_id`) 
-                  SELECT DECTOWP(MAX(`dec_wp`)+1, '&1'), '&2' AS `cache_id` 
-                    FROM (
-                          SELECT MAX(WPTODEC(`wp_oc`, '&1')) AS dec_wp FROM `caches` WHERE `wp_oc` REGEXP '&3' 
-                    UNION SELECT MAX(WPTODEC(`wp_oc`, '&1')) AS dec_wp FROM `cache_waypoint_pool`
-                         ) AS `tbl`",
-          $opt['logic']['waypoint_pool']['prefix'],
-          $cacheid,
-          '^' . $opt['logic']['waypoint_pool']['prefix'] . '[' . $opt['logic']['waypoint_pool']['valid_chars'] . ']{1,}$');
-    }
-
-    // assign reserved waypoint to the cache
-    // for the moment, we use IGNORE to catch duplicate keys that occur in any failure case
-    // the cache keeps without a waypoint in this case. Later we change field caches.wp_oc to NOT NULL and assign waypoint in BEFORE INSERT trigger
-    sql("UPDATE IGNORE `caches` INNER JOIN `cache_waypoint_pool` ON `caches`.`cache_id`=`cache_waypoint_pool`.`cache_id` SET `caches`.`wp_oc`=`cache_waypoint_pool`.`wp_oc` WHERE `caches`.`cache_id`='&1'", $cacheid);
-
-    // cleanup
-    sql("DELETE FROM `cache_waypoint_pool` WHERE `cache_id`='&1'", $cacheid);
-  }
-
 	function setLastFound($cacheid)
 	{
 		$rs = sql("SELECT MAX(`date`) `date` FROM `cache_logs` WHERE `cache_id`=&1 AND `type`=1", $cacheid);

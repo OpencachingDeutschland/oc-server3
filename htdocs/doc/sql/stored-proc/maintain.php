@@ -521,7 +521,43 @@
 						IF ISNULL(NEW.`uuid`) OR NEW.`uuid`='' THEN
 							SET NEW.`uuid`=CREATE_UUID();
 						END IF;
-					END;");
+
+						/* reserve and set cache waypoint 
+						 *
+						 * Table cache_waypoint_pool is used to prevent race conditions
+						 * when 2 caches will be inserted simultaneously
+						 */
+						IF ISNULL(NEW.`wp_oc`) OR NEW.`wp_oc`='' THEN
+							
+							/* cleanup previous assignments failures /*
+							DELETE FROM `cache_waypoint_pool` WHERE `uuid`=NEW.`uuid`;
+
+							/* reserve a waypoint */
+							UPDATE `cache_waypoint_pool` SET `uuid`=NEW.`uuid` WHERE `uuid` IS NULL ORDER BY WPTODEC(`wp_oc`, '&1') ASC LIMIT 1;
+							
+							IF (SELECT COUNT(*) FROM `cache_waypoint_pool` WHERE `uuid`=NEW.`uuid`) = 0 THEN
+
+								/* waypoint reservation was not successfull. Maybe we are on a development machine, where cronjob for waypoint pool
+								 * generation did not run or the pool is empty. To get a valid waypoint, we simply increment the highest used waypoint by one.
+								 * NOTE: This ignores the setting of $opt['logic']['waypoint_pool']['fill_gaps']
+								 * CAUTION: This statement is realy slow and you should always keep your waypoint pool filled with some waypoint on a production server
+								 */
+								INSERT INTO `cache_waypoint_pool` (`wp_oc`, `uuid`) 
+									SELECT DECTOWP(MAX(`dec_wp`)+1, '&1'), NEW.`uuid` AS `uuid` 
+										FROM (
+												  SELECT MAX(WPTODEC(`wp_oc`, '&1')) AS dec_wp FROM `caches` WHERE `wp_oc` REGEXP '&2' 
+											UNION SELECT MAX(WPTODEC(`wp_oc`, '&1')) AS dec_wp FROM `cache_waypoint_pool`
+										) AS `tbl`;
+
+							END IF;
+
+							/* query and assign the reserved waypoint */
+							SET NEW.`wp_oc` = (SELECT `wp_oc` FROM `cache_waypoint_pool` WHERE `uuid`=`NEW`.`uuid`);
+
+						END IF;
+					END;",
+					$opt['logic']['waypoint_pool']['prefix'],
+					'^' . $opt['logic']['waypoint_pool']['prefix'] . '[' . $opt['logic']['waypoint_pool']['valid_chars'] . ']{1,}$');
 
 	sql_dropTrigger('cachesAfterInsert');
 	sql("CREATE TRIGGER `cachesAfterInsert` AFTER INSERT ON `caches` 
@@ -534,9 +570,12 @@
 
 						CALL sp_update_hiddenstat(NEW.`user_id`, FALSE);
 
-            IF NEW.`status`=1 THEN
-              CALL sp_notify_new_cache(NEW.`cache_id`, NEW.`longitude`, NEW.`latitude`);
-            END IF;
+						IF NEW.`status`=1 THEN
+						  CALL sp_notify_new_cache(NEW.`cache_id`, NEW.`longitude`, NEW.`latitude`);
+						END IF;
+
+						/* cleanup/delete reserved waypoint */
+						DELETE FROM `cache_waypoint_pool` WHERE `uuid`=NEW.`uuid`;
 					END;");
 
 	sql_dropTrigger('cachesBeforeUpdate');

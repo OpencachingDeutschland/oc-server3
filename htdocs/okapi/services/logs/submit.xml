@@ -65,7 +65,6 @@
 		set on him by the OC site. If criteria are not met, the request will
 		end with user error (HTTP 200, success=false).</p>
 	</opt>
-	<!--
 	<opt name='needs_maintenance' default='false'>
 		<p>Set to <b>true</b> if the user thinks that the cache needs some special attension
 		of its owner. Users should describe the reason for maintenance in their comments.</p>
@@ -75,7 +74,6 @@
 		only one of those entries). Moreover, on some OC servers this flag might be
 		<b>completely ignored</b> (not all OC servers support this feature).</p>
 	</opt>
-	-->
 	<common-format-params/>
 	<returns>
 		<p>A dictionary of the following structure:</p>

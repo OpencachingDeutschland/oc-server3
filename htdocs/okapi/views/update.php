@@ -621,4 +621,5 @@ class View
 	private static function ver73() { Db::execute("update okapi_cache set score=1, expires=date_add(now(), interval 360 day) where `key` like 'tile/%'"); }
 	private static function ver74() { Db::execute("update okapi_cache set score=1, expires=date_add(now(), interval 360 day) where `key` like 'tilecaption/%'"); }
 	private static function ver75() { Db::execute("alter table okapi_cache modify column score float default null"); }
+	private static function ver76() { Db::execute("update okapi_cache set expires=date_add(now(), interval 100 year) where `key` like 'clog#geocache#%'"); }
 }

@@ -57,7 +57,10 @@
 		<p>A string "X-Y", where X and Y are integers between 1 and 5, and X &lt;= Y.
 		Only caches with difficulty rating between these numbers (inclusive) will be returned.</p>
 	</opt>
-	<opt name='size'>
+	<opt name='size' class='deprecated'>
+		<p>Deprecated. Please use <b>size2</b> instead - this will allow you to
+		differentiate "nano" vs. "micro" and "none" vs. "other" sizes
+		(<a href='http://code.google.com/p/opencaching-api/issues/detail?id=155'>details</a>).</p>
 		<p>A string "X-Y", where X and Y are integers between 1 and 5, and X &lt;= Y.
 		Only caches with size attribute between these numbers (inclusive) will be returned
 		(1 - micro, 5 - very big).</p>
@@ -65,6 +68,13 @@
 		(like Event or Virtual caches) will be excluded from the results. If you want caches
 		with no container included, append "|X" suffix to the value of this parameter
 		(e.g. "3-5|X").</p>
+	</opt>
+	<opt name='size2'>
+		<p>Pipe-separated list of "size2 codes". Only matching caches will be
+		included. The codes are: 'none', 'nano', 'micro', 'small', 'regular',
+		'large', 'xlarge', 'other'.</p>
+		<p><b>Note:</b> Not all OC servers use all of these. I.e. OCPL does not
+		have 'nano' nor 'other' caches (but it might have them in the future).</p>
 	</opt>
 	<opt name='rating'>
 		<p>A string "X-Y", where X and Y are integers between 1 and 5, and X &lt;= Y.

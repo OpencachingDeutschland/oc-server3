@@ -89,8 +89,25 @@
 			</li>
 			<li><b>founds</b> - number of times the geocache was successfully found,</li>
 			<li><b>notfounds</b> - number of times the geocache was not found,</li>
-			<li><b>size</b> - float (between 1 and 5), size rating of the container, or
-				<b>null</b> if geocache does not have a container,</li>
+			<li class='deprecated'>
+				<b>size</b> - deprecated
+				(<a href='http://code.google.com/p/opencaching-api/issues/detail?id=155'>why?</a>),
+				use <b>size2</b> instead. Float (between 1 and 5), size rating of the container, or
+				<b>null</b> if geocache does not have a container,
+			</li>
+			<li>
+				<p><b>size2</b> - string indicating the size od the container, so called 
+				"size2 code". One of the following values:
+				'none', 'nano', 'micro', 'small', 'regular', 'large', 'xlarge', 'other'.</p>
+			</li>
+			<li>
+				<p><b>oxsize</b> - float (between 1 and 5) or null, this is a size rating
+				variant, compatible with the one used by opencaching.com (and lately,
+				Garmin GPS devices).</p>
+				<p><b>Note:</b> The mapping is undocumented and may change without notice.</p>
+				<p><b>Note:</b> Some of OC's size values cannot be properly mapped to <b>oxcode</b>,
+				i.e. the 'other' size.</p>
+			</li>
 			<li><b>difficulty</b> - float (between 1 and 5), difficulty rating of the cache,</li>
 			<li><b>terrain</b> - float (between 1 and 5), terrain rating of the cache,</li>
 			<li>

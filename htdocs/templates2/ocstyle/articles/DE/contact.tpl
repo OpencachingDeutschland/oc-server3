@@ -11,12 +11,12 @@
 <table class="table">
 	
 	<tr>
-		<td class="header-small"><b>Allgemeine Fragen zum Thema Geocaching</b></td>
+		<td class="header-small"><b>Allgemeine Fragen zu Opencaching.de und zum Thema Geocaching</b></td>
 	</tr>
 	<tr><td class="spacer"></td></tr>
 	<tr>
 		<td>
-			Für allgemeine Fragen zum Thema Geocaching ist <a href="http://www.geocaching.de">www.geocaching.de</a> eine gute Anlaufstelle.
+			Für Fragen rund um Opencaching und zum Thema Geocaching ist das <a href="http://wiki.opencaching.de">Opencaching-Wiki</a> eine gute Anlaufstelle. Weitere Informationen zum Geocaching gibt es auf <a href="http://www.geocaching.de">www.geocaching.de</a>.
 			<br />
 			<br />
 			Wenn du ein spezielles Problem hast und darauf keine Antwort findest, 

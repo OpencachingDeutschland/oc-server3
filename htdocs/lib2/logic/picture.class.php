@@ -39,7 +39,7 @@ class picture
 
 		$this->rePicture = new rowEditor('pictures');
 		$this->rePicture->addPKInt('id', null, false, RE_INSERT_AUTOINCREMENT);
-		$this->rePicture->addString('uuid', '', false);
+		$this->rePicture->addString('uuid', '', false, RE_INSERT_AUTOUUID);
 		$this->rePicture->addInt('node', 0, false);
 		$this->rePicture->addDate('date_created', time(), true, RE_INSERT_IGNORE);
 		$this->rePicture->addDate('last_modified', time(), true, RE_INSERT_IGNORE);

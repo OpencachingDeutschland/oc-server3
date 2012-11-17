@@ -815,7 +815,6 @@
 						$activation_date = 'NULL';
 					}
 
-					$cache_uuid = create_uuid();
 					//add record to caches table
 					sql("INSERT INTO `caches` (
 												`cache_id`,
@@ -831,7 +830,6 @@
 												`size` ,
 												`difficulty` ,
 												`terrain`,
-												`uuid`,
 												`logpw`,
 												`search_time`,
 												`way_length`,
@@ -840,7 +838,7 @@
 												`node`
 											) VALUES (
 												'', '&1', '&2', '&3', '&4', '&5', '&6', '&7', '&8', $activation_date, 
-												'&9', '&10', '&11', '&12', '&13', '&14', '&15', '&16', '&17', '&18')",
+												'&9', '&10', '&11', '&12', '&13', '&14', '&15', '&16', '&17')",
 											$usr['userid'],
 											$name,
 											$longitude,
@@ -852,7 +850,6 @@
 											$sel_size,
 											$difficulty,
 											$terrain,
-											$cache_uuid,
 											$log_pw,
 											$search_time,
 											$way_length,
@@ -866,8 +863,6 @@
 
 					// waypoint erstellen
 					setCacheWaypoint($cache_id);
-
-					$desc_uuid = create_uuid();
 					//add record to cache_desc table
 					if ($descMode != 1)
 					{
@@ -880,16 +875,14 @@
 													`hint`,
 													`short_desc`,
 													`last_modified`,
-													`uuid`,
 													`desc_htmledit`,
 													`node`
-												) VALUES ('', '&1', '&2', '&3', '1', '&4', '&5', NOW(), '&6', '&7', '&8')",
+												) VALUES ('', '&1', '&2', '&3', '1', '&4', '&5', NOW(), '&6', '&7')",
 												$cache_id,
 												$sel_lang,
 												$desc,
 												nl2br(htmlspecialchars($hints, ENT_COMPAT, 'UTF-8')),
 												$short_desc,
-												$desc_uuid,
 												(($descMode == 3) ? 1 : 0),
 												$oc_nodeid);
 					}
@@ -904,16 +897,14 @@
 													`hint`,
 													`short_desc`,
 													`last_modified`,
-													`uuid`,
 													`desc_htmledit`,
 													`node`
-												) VALUES ('', '&1', '&2', '&3', '0', '&4', '&5', NOW(), '&6', 0, '&7')",
+												) VALUES ('', '&1', '&2', '&3', '0', '&4', '&5', NOW(), 0, '&6')",
 												$cache_id,
 												$sel_lang,
 												nl2br(htmlspecialchars($desc, ENT_COMPAT, 'UTF-8')),
 												nl2br(htmlspecialchars($hints, ENT_COMPAT, 'UTF-8')),
 												$short_desc,
-												$desc_uuid,
 												$oc_nodeid);
 					}
 

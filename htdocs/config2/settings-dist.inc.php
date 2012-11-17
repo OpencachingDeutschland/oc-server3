@@ -179,9 +179,14 @@
 	$opt['page']['subtitle1'] = 'Geocaching with Opencaching';
 	$opt['page']['subtitle2'] = '';
 	$opt['page']['title'] = 'OPENCACHING';
-	$opt['page']['absolute_url'] = 'http://devel.opencaching.de/'; // may be overwritten by $opt['domain'][...]['uri']
-	$opt['page']['max_logins_per_hour'] = 25;
  	$opt['page']['showdonations'] = false; // Show donations button
+
+  $opt['page']['absolute_url'] = 'http://devel.opencaching.de/'; // may be overwritten by $opt['domain'][...]['uri']
+
+  /* maximum number of failed logins per hour before that IP address is blocked
+   * (used to prevent brute-force-attacks)
+   */
+	$opt['page']['max_logins_per_hour'] = 25;
 
   /* Sponsoring advertisements
    * (plain HTML)

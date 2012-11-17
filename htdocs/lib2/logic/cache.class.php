@@ -81,7 +81,7 @@ class cache
 	{
 		$this->reCache = new rowEditor('caches');
 		$this->reCache->addPKInt('cache_id', null, false, RE_INSERT_AUTOINCREMENT);
-		$this->reCache->addString('uuid', '', false, RE_INSERT_OVERWRITE|RE_INSERT_UUID);
+		$this->reCache->addString('uuid', '', false, RE_INSERT_AUTOUUID);
 		$this->reCache->addInt('node', 0, false);
 		$this->reCache->addDate('date_created', time(), true, RE_INSERT_IGNORE);
 		$this->reCache->addDate('last_modified', time(), true, RE_INSERT_IGNORE);

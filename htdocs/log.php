@@ -194,8 +194,8 @@
 					$log_date = date('Y-m-d', mktime(0, 0, 0, $log_date_month, $log_date_day, $log_date_year));
 
 					//add logentry to db
-					sql("INSERT INTO `cache_logs` (`id`, `cache_id`, `user_id`, `type`, `date`, `text`, `text_html`, `text_htmledit`, `uuid`, `node`)
-					         VALUES ('', '&1', '&2', '&3', '&4', '&5', '&6', '&7', UUID(), '&8')",
+					sql("INSERT INTO `cache_logs` (`id`, `cache_id`, `user_id`, `type`, `date`, `text`, `text_html`, `text_htmledit`, `node`)
+					         VALUES ('', '&1', '&2', '&3', '&4', '&5', '&6', '&7', '&8')",
 					         $cache_id, $usr['userid'], $log_type, $log_date, $log_text, (($descMode != 1) ? 1 : 0), (($descMode == 3) ? 1 : 0), $oc_nodeid);
 
 					// do not use slave server for the next time ...

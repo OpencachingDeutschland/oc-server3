@@ -61,7 +61,7 @@ class user
 		$this->reUser->addString('new_email_code', null, true);
 		$this->reUser->addDate('new_email_date', null, true);
 		$this->reUser->addString('new_email', null, true);
-		$this->reUser->addString('uuid', '', false, RE_INSERT_OVERWRITE|RE_INSERT_UUID);
+		$this->reUser->addString('uuid', '', false, RE_INSERT_AUTOUUID);
 		$this->reUser->addBoolean('permanent_login_flag', false, false);
 		$this->reUser->addInt('watchmail_mode', 1, false);
 		$this->reUser->addInt('watchmail_hour', 0, false);

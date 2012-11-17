@@ -168,6 +168,19 @@
 		END;",
 		$opt['logic']['waypoint_pool']['valid_chars']);
 
+	sql_dropFunction('CREATE_UUID');
+	sql("CREATE FUNCTION `CREATE_UUID` () RETURNS VARCHAR(36) DETERMINISTIC SQL SECURITY INVOKER
+		BEGIN
+			SET @LAST_UUID = UUID();
+			RETURN @LAST_UUID;
+		END;");
+
+	sql_dropFunction('GET_LAST_UUID');
+	sql("CREATE FUNCTION `GET_LAST_UUID` () RETURNS VARCHAR(36) DETERMINISTIC SQL SECURITY INVOKER
+		BEGIN
+			RETURN @LAST_UUID;
+		END;");
+
 	/* Stored procedures containing database logic
 	 */
 
@@ -504,6 +517,10 @@
 							SET NEW.`is_publishdate`=1;
 						END IF;
 						SET NEW.`need_npa_recalc`=1;
+
+						IF ISNULL(NEW.`uuid`) OR NEW.`uuid`='' THEN
+							SET NEW.`uuid`=CREATE_UUID();
+						END IF;
 					END;");
 
 	sql_dropTrigger('cachesAfterInsert');
@@ -612,6 +629,10 @@
 							SET NEW.`date_created`=NOW();
 							SET NEW.`last_modified`=NOW();
 						END IF;
+						
+						IF ISNULL(NEW.`uuid`) OR NEW.`uuid`='' THEN
+							SET NEW.`uuid`=CREATE_UUID();
+						END IF;
 					END;");
 
 	sql_dropTrigger('cacheDescAfterInsert');
@@ -698,6 +719,10 @@
 							SET NEW.`date_created`=NOW();
 							SET NEW.`last_modified`=NOW();
 						END IF;
+
+						IF ISNULL(NEW.`uuid`) OR NEW.`uuid`='' THEN
+							SET NEW.`uuid`=CREATE_UUID();
+						END IF;
 					END;");
 
 	sql_dropTrigger('cacheLogsAfterInsert');
@@ -709,7 +734,7 @@
 						DECLARE cur1 CURSOR FOR SELECT `cache_watches`.`user_id` FROM `cache_watches` INNER JOIN `caches` ON `cache_watches`.`cache_id`=`caches`.`cache_id` INNER JOIN `cache_status` ON `caches`.`status`=`cache_status`.`id` WHERE `cache_watches`.`cache_id`=NEW.cache_id AND `cache_status`.`allow_user_view`=1;
 						DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = 1;
 
-	          CALL sp_update_logstat(NEW.`cache_id`, NEW.`user_id`, NEW.`type`, FALSE);
+						CALL sp_update_logstat(NEW.`cache_id`, NEW.`user_id`, NEW.`type`, FALSE);
 
 						OPEN cur1;
 						REPEAT
@@ -863,6 +888,10 @@
 							SET NEW.`date_created`=NOW();
 							SET NEW.`last_modified`=NOW();
 						END IF;
+
+						IF ISNULL(NEW.`uuid`) OR NEW.`uuid`='' THEN
+							SET NEW.`uuid`=CREATE_UUID();
+						END IF;
 					END;");
 
 	sql_dropTrigger('picturesAfterInsert');
@@ -1002,6 +1031,10 @@
 							SET NEW.`date_created`=NOW();
 							SET NEW.`last_modified`=NOW();
 						END IF;
+
+						IF ISNULL(NEW.`uuid`) OR NEW.`uuid`='' THEN
+							SET NEW.`uuid`=CREATE_UUID();
+						END IF;
 					END;");
 
 	sql_dropTrigger('userBeforeUpdate');
@@ -1083,6 +1116,13 @@
 				FOR EACH ROW 
 					BEGIN 
 						SET NEW.`date_created`=NOW();
+					END;");
+
+	sql_dropTrigger('sysSessionsBeforeInsert');
+	sql("CREATE TRIGGER `sysSessionsBeforeInsert` BEFORE INSERT ON `sys_sessions` 
+				FOR EACH ROW 
+					BEGIN 
+						SET NEW.`last_login`=NOW();
 					END;");
 
 	sql_dropTrigger('sysSessionsAfterInsert');

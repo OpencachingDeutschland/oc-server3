@@ -19,7 +19,7 @@ class user
 	{
 		$this->reUser = new rowEditor('cache_desc');
 		$this->reUser->addPKInt('id', null, false, RE_INSERT_AUTOINCREMENT);
-		$this->reUser->addString('uuid', '', false, RE_INSERT_OVERWRITE|RE_INSERT_UUID);
+		$this->reUser->addString('uuid', '', false, RE_INSERT_AUTOUUID);
 		$this->reUser->addInt('node', 0, false);
 		$this->reUser->addDate('date_created', time(), true, RE_INSERT_IGNORE);
 		$this->reUser->addDate('last_modified', time(), true, RE_INSERT_IGNORE);

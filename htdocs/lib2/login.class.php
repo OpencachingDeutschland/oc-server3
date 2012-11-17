@@ -237,8 +237,8 @@ class login
 			if ($rUser['is_active_flag'] != 0)
 			{
 				// begin session
-				$uuid = sqlf_value('SELECT UUID()', '');
-				sqlf("INSERT INTO `sys_sessions` (`uuid`, `user_id`, `permanent`, `last_login`) VALUES ('&1', '&2', '&3', NOW())", $uuid, $rUser['user_id'], ($permanent!=false ? 1 : 0));
+				$uuid = self::create_sessionid();
+				sqlf("INSERT INTO `sys_sessions` (`uuid`, `user_id`, `permanent`) VALUES ('&1', '&2', '&3')", $uuid, $rUser['user_id'], ($permanent!=false ? 1 : 0));
 				$this->userid = $rUser['user_id'];
 				$this->username = $rUser['username'];
 				$this->permanent = $permanent;
@@ -266,7 +266,18 @@ class login
 		return $retval;
 	}
 
-	function getUserCountry()
+	private static function create_sessionid()
+	{
+		return sprintf('%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
+			mt_rand(0, 0xffff), mt_rand(0, 0xffff),
+			mt_rand(0, 0xffff),
+			mt_rand(0, 0xffff),
+			mt_rand(0, 0xffff),
+			mt_rand(0, 0xffff), mt_rand(0, 0xffff), mt_rand(0, 0xffff)
+		);
+	}
+
+  function getUserCountry()
 	{
 		global $opt, $cookie;
 

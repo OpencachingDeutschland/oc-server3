@@ -51,7 +51,7 @@ class cachelog
 	{
 		$this->reCacheLog = new rowEditor('cache_logs');
 		$this->reCacheLog->addPKInt('id', null, false, RE_INSERT_AUTOINCREMENT);
-		$this->reCacheLog->addString('uuid', '', false, RE_INSERT_OVERWRITE|RE_INSERT_UUID);
+		$this->reCacheLog->addString('uuid', '', false, RE_INSERT_AUTOUUID);
 		$this->reCacheLog->addInt('node', 0, false);
 		$this->reCacheLog->addDate('date_created', time(), true, RE_INSERT_IGNORE);
 		$this->reCacheLog->addDate('last_modified', time(), true, RE_INSERT_IGNORE);

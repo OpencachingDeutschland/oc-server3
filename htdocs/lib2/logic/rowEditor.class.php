@@ -58,6 +58,9 @@ class rowEditor
 
 	function addPKString($sField, $sDefault, $bNullable, $nInsertFunction=RE_INSERT_NOTHING)
 	{
+    if (($nInsertFunction & RE_INSERT_AUTOUUID) == RE_INSERT_AUTOUUID)
+      die('rowEditor: RE_INSERT_AUTOUUID not supported for primary key fields');
+
 		$this->pk[$sField] = array('type' => RE_TYPE_STRING, 
 		                           'default' => $sDefault, 
 		                           'nullable' => $bNullable, 
@@ -390,6 +393,9 @@ class rowEditor
 					$this->fields[$this->sAutoIncrementField]['value'] = $nInsertId;
 			}
 
+      /* reload the record to get the actual stored values
+       * (inserted values maybe truncated by mysql or trigger could modify values)
+       */
 			$pkv = array();
 			foreach ($this->pk AS $k => $v)
 			{
@@ -454,9 +460,7 @@ class rowEditor
 
 			if ((($field['insertfunction'] & RE_INSERT_OVERWRITE) == RE_INSERT_OVERWRITE) || (($field['changed'] == false) && ($field['insertfunction'] != RE_INSERT_NOTHING)))
 			{
-				if (($field['insertfunction'] & RE_INSERT_UUID) == RE_INSERT_UUID)
-					$sValues[] = 'UUID()';
-				else if (($field['insertfunction'] & RE_INSERT_NOW) == RE_INSERT_NOW)
+				if (($field['insertfunction'] & RE_INSERT_NOW) == RE_INSERT_NOW)
 					$sValues[] = 'NOW()';
 				else
 					$sValues[] = 'NULL';
@@ -479,9 +483,7 @@ class rowEditor
 
 			if ((($field['insertfunction'] & RE_INSERT_OVERWRITE) == RE_INSERT_OVERWRITE) || (($field['changed'] == false) && ($field['insertfunction'] != RE_INSERT_NOTHING)))
 			{
-				if (($field['insertfunction'] & RE_INSERT_UUID) == RE_INSERT_UUID)
-					$sValues[] = 'UUID()';
-				else if (($field['insertfunction'] & RE_INSERT_NOW) == RE_INSERT_NOW)
+				if (($field['insertfunction'] & RE_INSERT_NOW) == RE_INSERT_NOW)
 					$sValues[] = 'NOW()';
 				else
 					$sValues[] = 'NULL';

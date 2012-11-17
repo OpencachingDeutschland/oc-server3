@@ -96,7 +96,6 @@
 
 						if ($desc_lang_exists == false)
 						{
-							$desc_uuid = create_uuid();
 							//add to DB
 							if ($descMode != 1)
 							{
@@ -110,16 +109,14 @@
 															`hint`, 
 															`short_desc`,
 															`last_modified`,
-															`uuid`,
 															`node`
-														) VALUES ('', '&1', '&2', '&3', 1, '&4', '&5', '&6', NOW(), '&7', '&8')",
+														) VALUES ('', '&1', '&2', '&3', 1, '&4', '&5', '&6', NOW(), '&7')",
 															$cache_id,
 															$sel_lang,
 															$desc,
 															($descMode == 3) ? '1' : '0',
 															nl2br(htmlspecialchars($hints, ENT_COMPAT, 'UTF-8')),
 															$short_desc,
-															$desc_uuid,
 															$oc_nodeid);
 							}
 							else
@@ -134,15 +131,13 @@
 															`hint`, 
 															`short_desc`,
 															`last_modified`,
-															`uuid`,
 															`node`
-														) VALUES ('', '&1', '&2', '&3', 0, 0, '&4', '&5', NOW(), '&6', '&7')", 
+														) VALUES ('', '&1', '&2', '&3', 0, 0, '&4', '&5', NOW(), '&6')", 
 														$cache_id,
 														$sel_lang,
 														nl2br(htmlspecialchars($desc, ENT_COMPAT, 'UTF-8')),
 														nl2br(htmlspecialchars($hints, ENT_COMPAT, 'UTF-8')),
 														$short_desc,
-														$desc_uuid,
 														$oc_nodeid);
 							}
 

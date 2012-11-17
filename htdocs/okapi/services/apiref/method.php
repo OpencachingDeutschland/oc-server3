@@ -27,6 +27,7 @@ class WebService
 		return array(
 			'name' => (string)$attrs['name'],
 			'is_required' => $arg_node->getName() == 'req',
+			'is_deprecated' => (isset($attrs['class']) && (strpos($attrs['class'], 'deprecated') !== false)),
 			'class' => 'public',
 			'description' =>
 				(isset($attrs['default']) ? ("<p>Default value: <b>".$attrs['default']."</b></p>") : "").
@@ -120,16 +121,21 @@ class WebService
 			$result['arguments'][] = array(
 				'name' => 'format',
 				'is_required' => false,
+				'is_deprecated' => false,
 				'class' => 'common-formatting',
 				'description' => "<i>Standard <a href='".Settings::get('SITE_URL')."okapi/introduction.html#common-formatting'>common formatting</a> argument.</i>"
 			);
 			$result['arguments'][] = array(
 				'name' => 'callback',
 				'is_required' => false,
+				'is_deprecated' => false,
 				'class' => 'common-formatting',
 				'description' => "<i>Standard <a href='".Settings::get('SITE_URL')."okapi/introduction.html#common-formatting'>common formatting</a> argument.</i>"
 			);
 		}
+		foreach ($result['arguments'] as &$arg_ref)
+			if ($arg_ref['is_deprecated'])
+				$arg_ref['class'] .= " deprecated";
 		if (!$docs->returns)
 			throw new Exception("Missing <returns> element in the $methodname.xml file. ".
 				"If your method does not return anything, you should document in nonetheless.");

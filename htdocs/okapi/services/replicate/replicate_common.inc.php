@@ -19,7 +19,7 @@ use okapi\Settings;
 class ReplicateCommon
 {
 	private static $chunk_size = 200;
-	private static $logged_cache_fields = 'code|names|location|type|status|url|owner|founds|notfounds|size|difficulty|terrain|rating|rating_votes|recommendations|req_passwd|descriptions|hints|images|trackables_count|trackables|alt_wpts|last_found|last_modified|date_created|date_hidden';
+	private static $logged_cache_fields = 'code|names|location|type|status|url|owner|founds|notfounds|size|size2|oxsize|difficulty|terrain|rating|rating_votes|recommendations|req_passwd|descriptions|hints|images|trackables_count|trackables|alt_wpts|last_found|last_modified|date_created|date_hidden';
 	
 	private static $logged_log_entry_fields = 'uuid|cache_code|date|user|type|comment';
 	
@@ -69,7 +69,7 @@ class ReplicateCommon
 	/** Check for modifications in the database and update the changelog table accordingly. */
 	public static function update_clog_table()
 	{
-		$now = Db::select_value("select now()");
+		$now = Db::select_value("select date_add(now(), interval -1 minute)");  # See issue 157.
 		$last_update = Okapi::get_var('last_clog_update');
 		if ($last_update === null)
 			$last_update = Db::select_value("select date_add(now(), interval -1 day)");
@@ -99,7 +99,7 @@ class ReplicateCommon
 		foreach ($cache_code_groups as $cache_codes)
 		{
 			self::generate_changelog_entries('services/caches/geocaches', 'geocache', 'cache_codes',
-				'code', $cache_codes, self::$logged_cache_fields, false, true, 30*86400);
+				'code', $cache_codes, self::$logged_cache_fields, false, true, null);
 		}
 		
 		# Same as above, for log entries.
@@ -148,12 +148,77 @@ class ReplicateCommon
 	}
 
 	/**
+	 * Scan the database and compare the current values of old entries to
+	 * the cached values of the same entries. If differences found, update
+	 * okapi_syncbase accordingly, and email the admins.
+	 *
+	 * Currently, only caches are checked (log entries are not).
+	 */
+	public static function verify_clog_consistency()
+	{
+		set_time_limit(0);
+		ignore_user_abort(true);
+		
+		# We will SKIP the entries which have been modified SINCE one day ago.
+		# Such entries might have not been seen by the update_clog_table() yet
+		# (e.g. other long-running cronjob is preventing update_clog_table from
+		# running).
+		
+		$cache_codes = Db::select_column("
+			select wp_oc
+			from caches
+			where okapi_syncbase < date_add(now(), interval -1 day);
+		");
+		$cache_code_groups = Okapi::make_groups($cache_codes, 50);
+		unset($cache_codes);
+		
+		# For each group, get the changelog entries, but don't store them
+		# (the "fulldump" mode). Instead, just update the okapi_syncbase column.
+		
+		$sum = 0;
+		foreach ($cache_code_groups as $cache_codes)
+		{
+			$entries = self::generate_changelog_entries(
+				'services/caches/geocaches', 'geocache', 'cache_codes',
+				'code', $cache_codes, self::$logged_cache_fields, true, true, null
+			);
+			foreach ($entries as $entry)
+			{
+				if ($entry['object_type'] != 'geocache')
+					continue;
+				$cache_code = $entry['object_key']['code'];
+				Db::execute("
+					update caches
+					set okapi_syncbase = now()
+					where wp_oc = '".mysql_real_escape_string($cache_code)."'
+				");
+				$sum += 1;
+			}
+		}
+		if ($sum > 0)
+		{
+			Okapi::mail_from_okapi(
+				"rygielski@mimuw.edu.pl",
+				"verify_clog_consistency",
+				"Number of invalid entries fixed: $sum\n\n".
+				print_r(Db::select_all("select * from okapi_vars"), true)
+			);
+		}
+	}
+
+	
+	/**
 	 * Generate OKAPI changelog entries. This method will call $feeder_method OKAPI
 	 * service with the following parameters: array($feeder_keys_param => implode('|', $key_values),
 	 * 'fields' => $fields). Then it will generate the changelog, based on the result.
 	 * This looks pretty much the same for various object types, that's why it's here.
+	 *
 	 * If $use_cache is true, then all the dictionaries from $feeder_method will be also
-	 * kept in OKAPI cache, for future comparison. 
+	 * kept in OKAPI cache, for future comparison.
+	 *
+	 * In normal mode, update the changelog and don't return anything.
+	 * In fulldump mode, return the generated changelog entries *instead* of
+	 * updating it.
 	 */
 	private static function generate_changelog_entries($feeder_method, $object_type, $feeder_keys_param,
 		$key_name, $key_values, $fields, $fulldump_mode, $use_cache, $cache_timeout = 86400)
@@ -162,12 +227,21 @@ class ReplicateCommon
 		
 		if ($use_cache)
 		{
-			$cache_keys = array();
+			$cache_keys1 = array();
+			$cache_keys2 = array();
 			foreach ($key_values as $key)
-				$cache_keys[] = 'clog#'.$object_type.'#'.$key;
-			$cached_values = Cache::get_many($cache_keys);
-			Cache::delete_many($cache_keys);
-			unset($cache_keys);
+				$cache_keys1[] = 'clog#'.$object_type.'#'.$key;
+			foreach ($key_values as $key)
+				$cache_keys2[] = 'clogmd5#'.$object_type.'#'.$key;
+			$cached_values1 = Cache::get_many($cache_keys1);
+			$cached_values2 = Cache::get_many($cache_keys2);
+			if (!$fulldump_mode)
+			{
+				Cache::delete_many($cache_keys1);
+				Cache::delete_many($cache_keys2);
+			}
+			unset($cache_keys1);
+			unset($cache_keys2);
 		}
 		
 		# Get the current values for objects. Compare them with their previous versions
@@ -185,10 +259,21 @@ class ReplicateCommon
 				# Currently, the object exists.
 				if ($use_cache)
 				{
-					$diff = self::get_diff($cached_values['clog#'.$object_type.'#'.$key], $object);
+					# First, compare the cached hash. The hash has much longer lifetime
+					# than the actual cached object.
+					$cached_md5 = $cached_values2['clogmd5#'.$object_type.'#'.$key];
+					$current_md5 = md5(serialize($object));
+					if ($cached_md5 == $current_md5)
+					{
+						# The object was not changed since it was last replaced.
+						continue;
+					}
+					$diff = self::get_diff($cached_values1['clog#'.$object_type.'#'.$key], $object);
 					if (count($diff) == 0)
 					{
-						# No field has changed since the object was last replaced.
+						# Md5 differs, but diff does not. Weird, but it can happen
+						# (e.g. just after the md5 extension was introduced, or if
+						# md5 somehow expired before the actual object did).
 						continue;
 					}
 				}
@@ -201,13 +286,14 @@ class ReplicateCommon
 				if ($use_cache)
 				{
 					# Save the last-published state of the object, for future comparison.
-					$cached_values['clog#'.$object_type.'#'.$key] = $object;
+					$cached_values2['clogmd5#'.$object_type.'#'.$key] = $current_md5;
+					$cached_values1['clog#'.$object_type.'#'.$key] = $object;
 				}
 			}
 			else
 			{
 				# Currently, the object does not exist.
-				if ($use_cache && ($cached_values['clog#'.$object_type.'#'.$key] === false))
+				if ($use_cache && ($cached_values1['clog#'.$object_type.'#'.$key] === false))
 				{
 					# No need to delete, we have already published its deletion.
 					continue;
@@ -220,7 +306,8 @@ class ReplicateCommon
 				if ($use_cache)
 				{
 					# Cache the fact, that the object was deleted.
-					$cached_values['clog#'.$object_type.'#'.$key] = false;
+					$cached_values2['clogmd5#'.$object_type.'#'.$key] = false;
+					$cached_values1['clog#'.$object_type.'#'.$key] = false;
 				}
 			}
 		}
@@ -247,7 +334,10 @@ class ReplicateCommon
 			# Update the values kept in OKAPI cache.
 			
 			if ($use_cache)
-				Cache::set_many($cached_values, $cache_timeout);
+			{
+				Cache::set_many($cached_values1, $cache_timeout);
+				Cache::set_many($cached_values2, null);  # make it persistent
+			}
 		}
 	}
 	

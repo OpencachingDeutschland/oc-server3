@@ -97,6 +97,8 @@
 	$opt['locale']['EN']['format']['time'] = '%I:%M %p';
 	$opt['locale']['EN']['format']['timesec'] = '%X';
 	$opt['locale']['EN']['country'] = 'UK';
+	$opt['locale']['EN']['page']['subtitle1'] = 'Geocaching with Opencaching';
+	$opt['locale']['EN']['page']['subtitle2'] = '';
 
 	$opt['locale']['DE']['timezone'] = 'Europe/Berlin';
 	$opt['locale']['DE']['format']['date'] = '%x';

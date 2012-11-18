@@ -130,22 +130,10 @@
 	// other settings
 	$opt['logic']['enableHTMLInUserDescription'] = false;
 	$opt['page']['showdonations'] = true;
-
-	// Flag paths
-	$opt['template']['locales']['DE']['flag'] = 'images/flag/DE.gif';
-	$opt['template']['locales']['FR']['flag'] = 'images/flag/FR.gif';
-	$opt['template']['locales']['NL']['flag'] = 'images/flag/NL.gif';
-	$opt['template']['locales']['EN']['flag'] = 'images/flag/EN.gif';
-	$opt['template']['locales']['PL']['flag'] = 'images/flag/PL.gif';
-	$opt['template']['locales']['IT']['flag'] = 'images/flag/IT.gif';
-	$opt['template']['locales']['RU']['flag'] = 'images/flag/RU.gif';
-	$opt['template']['locales']['ES']['flag'] = 'images/flag/ES.png';
-	$opt['template']['locales']['JA']['flag'] = 'images/flag/JP.gif';
 	
 	$opt['template']['locales']['SV']['show'] = false;
 	$opt['template']['locales']['NO']['show'] = false;
 	$opt['template']['locales']['DA']['show'] = false;
 	$opt['template']['locales']['PT']['show'] = false;
 	$opt['template']['locales']['JA']['show'] = false;
-	
 ?>

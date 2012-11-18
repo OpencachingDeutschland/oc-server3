@@ -4,40 +4,48 @@
  *
  *  Unicode Reminder メモ
  *
- *  Default settings for all options in settings.inc.php
+ *  Default settings for all locale options in settings.inc.php
  *  Do not modify this file - use settings.inc.php!
+ *
+ *  ATTENTION: This file is also used in old template system.
+ *             (this means any call to framework functions may be incompatible)
+ *
+ *             Only set the following keys in $opt[]
+ *
+ *                 $opt['template']['locales']
+ *                 $opt['geokrety']['locales']
+ *                 $opt['locale']
  ***************************************************************************/
-
 
 	/* Locale definitions
 	 *
 	 */
 	$opt['template']['locales']['DE']['show'] = true;
-	$opt['template']['locales']['DE']['flag'] = 'images/flags/de.gif';
+	$opt['template']['locales']['DE']['flag'] = 'images/flag/DE.gif';
 	$opt['template']['locales']['DE']['name'] = 'Deutsch';
 	$opt['template']['locales']['FR']['show'] = true;
-	$opt['template']['locales']['FR']['flag'] = 'images/flags/fr.gif';
+	$opt['template']['locales']['FR']['flag'] = 'images/flag/FR.gif';
 	$opt['template']['locales']['FR']['name'] = 'Français';
 	$opt['template']['locales']['NL']['show'] = true;
-	$opt['template']['locales']['NL']['flag'] = 'images/flags/nl.gif';
+	$opt['template']['locales']['NL']['flag'] = 'images/flag/NL.gif';
 	$opt['template']['locales']['NL']['name'] = 'Nederlands';
 	$opt['template']['locales']['EN']['show'] = true;
-	$opt['template']['locales']['EN']['flag'] = 'images/flags/en.gif';
+	$opt['template']['locales']['EN']['flag'] = 'images/flag/EN.gif';
 	$opt['template']['locales']['EN']['name'] = 'English';
 	$opt['template']['locales']['PL']['show'] = true;
-	$opt['template']['locales']['PL']['flag'] = 'images/flags/pl.gif';
+	$opt['template']['locales']['PL']['flag'] = 'images/flag/PL.gif';
 	$opt['template']['locales']['PL']['name'] = 'Polski';
 	$opt['template']['locales']['IT']['show'] = true;
-	$opt['template']['locales']['IT']['flag'] = 'images/flags/it.gif';
+	$opt['template']['locales']['IT']['flag'] = 'images/flag/IT.gif';
 	$opt['template']['locales']['IT']['name'] = 'Italiano';
 	$opt['template']['locales']['RU']['show'] = true;
-	$opt['template']['locales']['RU']['flag'] = 'images/flags/ru.gif';
+	$opt['template']['locales']['RU']['flag'] = 'images/flag/RU.gif';
 	$opt['template']['locales']['RU']['name'] = 'Русский';
 	$opt['template']['locales']['ES']['show'] = true;
-	$opt['template']['locales']['ES']['flag'] = 'images/flags/es.gif';
+	$opt['template']['locales']['ES']['flag'] = 'images/flag/ES.png';
 	$opt['template']['locales']['ES']['name'] = 'Español';
 	$opt['template']['locales']['SV']['show'] = true; // sv_SE
-	$opt['template']['locales']['SV']['flag'] = 'images/flags/se.gif';
+	$opt['template']['locales']['SV']['flag'] = 'images/flag/SE.png';
 	$opt['template']['locales']['SV']['name'] = 'Svenska';
 	$opt['template']['locales']['NO']['show'] = true; // no_NO
 	$opt['template']['locales']['NO']['flag'] = 'images/flags/no.gif';
@@ -49,7 +57,7 @@
 	$opt['template']['locales']['PT']['flag'] = 'images/flags/pt.gif';
 	$opt['template']['locales']['PT']['name'] = 'Portuguesa';
 	$opt['template']['locales']['JA']['show'] = true; // ja_JP
-	$opt['template']['locales']['JA']['flag'] = 'images/flags/jp.gif';
+	$opt['template']['locales']['JA']['flag'] = 'images/flag/JP.gif';
 	$opt['template']['locales']['JA']['name'] = '日本語';
 
 	// geokrety language key association

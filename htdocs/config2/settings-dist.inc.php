@@ -289,8 +289,9 @@
 	 * {userzoom} = user zoomlevel (see myprofile.php)
 	 * {latitude} = latitude of the cache
 	 * {longitude} = longitude of the cache
+   * {gmkey} = google maps key for current domain
 	 */
-	$opt['logic']['cachemaps']['url'] = 'http://maps.google.com/maps/api/staticmap?center={latitude},{longitude}&zoom={userzoom}&size=200x200&maptype=hybrid&markers=color:blue|label:|{latitude},{longitude}&sensor=false';
+	$opt['logic']['cachemaps']['url'] = 'http://maps.google.com/maps/api/staticmap?center={latitude},{longitude}&zoom={userzoom}&size=200x200&maptype=hybrid&markers=color:blue|label:|{latitude},{longitude}&sensor=false&key={gmkey}';
 	$opt['logic']['cachemaps']['iframe'] = false;
  
 	/* target vars

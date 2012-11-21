@@ -281,11 +281,19 @@ function getChildWaypoints($cacheid)
 	}
 	$tpl->assign('userzoom', $userzoom);
 
-	$cachemap['iframe'] = $opt['logic']['cachemaps']['iframe'];
+	// get the correct mapkey
+	$sHost = strtolower($_SERVER['HTTP_HOST']);
+
+  $sGMKey = '';
+	if (isset($opt['lib']['google']['mapkey'][$sHost]))
+		$sGMKey = $opt['lib']['google']['mapkey'][$sHost];
+
+  $cachemap['iframe'] = $opt['logic']['cachemaps']['iframe'];
 	$url = $opt['logic']['cachemaps']['url'];
 	$url = str_replace('{userzoom}', $userzoom, $url);
 	$url = str_replace('{latitude}', $rCache['latitude'], $url);
 	$url = str_replace('{longitude}', $rCache['longitude'], $url);
+	$url = str_replace('{gmkey}', $sGMKey, $url);
 	$cachemap['url'] = $url;
 	$tpl->assign('cachemap', $cachemap);
 

@@ -1,2 +1,0 @@
-Sitemap: http://www.opencaching.de/sitemap.xml
-User-agent: *

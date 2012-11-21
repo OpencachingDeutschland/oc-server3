@@ -1,1 +1,16 @@
 Sitemap: http://www.domain.org/sitemap.xml
+
+User-agent: *
+Disallow: /search.php?*output=gpx*
+Disallow: /search.php?*output=gpx1*
+Disallow: /search.php?*output=gpx2*
+Disallow: /search.php?*output=garmin*
+Disallow: /search.php?*output=kml*
+Disallow: /search.php?*output=loc*
+Disallow: /search.php?*output=map*
+Disallow: /search.php?*output=map2*
+Disallow: /search.php?*output=ov2*
+Disallow: /search.php?*output=ovl*
+Disallow: /search.php?*output=txt*
+Disallow: /search.php?*output=xml*
+Disallow: /search.php?*queryid=*

@@ -12,14 +12,14 @@
 	 * Tables must be updated manually, see htdocs/doc/sql/db-changes.txt
 	 */ 
   
-  $rootpath = dirname(__FILE__) . '/../htdocs/';
-  require($rootpath . 'lib/settings.inc.php');
+  $rootpath = dirname(__FILE__) . '/../';
+  require($rootpath . 'htdocs/lib/settings.inc.php');
 	
   echo "importing data.sql ...\n";
-  system('cat ' . $rootpath . 'doc/sql/static-data/data.sql | mysql -u' . $dbusername . ' --password=' . $dbpasswd . ' ' . $dbname);
+  system('cat ' . $rootpath . 'htdocs/doc/sql/static-data/data.sql | mysql -u' . $dbusername . ' --password=' . $dbpasswd . ' ' . $dbname);
 
   echo "importing triggers ...\n";
-  chdir ($rootpath . 'doc/sql/stored-proc');
+  chdir ($rootpath . 'htdocs/doc/sql/stored-proc');
   system('php maintain.php');
 
   echo "resettings webcache ...\n";

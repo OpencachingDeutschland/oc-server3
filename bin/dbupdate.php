@@ -16,7 +16,7 @@
   require($rootpath . 'lib/settings.inc.php');
 	
   echo "importing data.sql ...\n";
-  system('cat ' . $rootpath . 'doc/sql/static-data/data.sql | mysql -u' . $dbusername . ' --password=' . $dbpasswd . ' ' . $dbname);
+  system('cat ' . $rootpath . 'doc/sql/static-data/data.sql | mysql -h' . $dbserver . ' -u' . $dbusername . ' --password=' . $dbpasswd . ' ' . $dbname);
 
   echo "importing triggers ...\n";
   chdir ($rootpath . 'doc/sql/stored-proc');

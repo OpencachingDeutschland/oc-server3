@@ -46,10 +46,12 @@ function sql_dropTrigger($triggername)
 
 function sql_dropFunction($name)
 {
+  global $dbserver;
+
 	$rs = sql("SHOW FUNCTION STATUS LIKE '&1'", $name);
 	while ($r = sql_fetch_assoc($rs))
 	{
-		if ($r['Name'] == $name && $r['Type'] == 'FUNCTION')
+		if ($r['Db'] == $dbserver && $r['Name'] == $name && $r['Type'] == 'FUNCTION')
 		{
 			sql('DROP FUNCTION `&1`', $name);
 			return;
@@ -60,10 +62,12 @@ function sql_dropFunction($name)
 
 function sql_dropProcedure($name)
 {
+  global $dbserver;
+
 	$rs = sql("SHOW PROCEDURE STATUS LIKE '&1'", $name);
 	while ($r = sql_fetch_assoc($rs))
 	{
-		if ($r['Name'] == $name && $r['Type'] == 'PROCEDURE')
+		if ($r['Db'] == $dbserver && $r['Name'] == $name && $r['Type'] == 'PROCEDURE')
 		{
 			sql('DROP PROCEDURE `&1`', $name);
 			return;

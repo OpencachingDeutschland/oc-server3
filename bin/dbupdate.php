@@ -23,7 +23,7 @@
   system('php maintain.php');
 
   echo "resettings webcache ...\n";
-  chdir ($rootpath . "bin");
+  chdir ($rootpath . '../bin');
   system('php clear-webcache.php');
   
 ?>

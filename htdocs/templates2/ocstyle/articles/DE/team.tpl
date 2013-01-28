@@ -29,7 +29,6 @@
     <tr><td colspan="3"><br /><i>weitere Teammitglieder</i></td></tr>
     <tr><td class="header-small"><b>Bild</b></td><td class="header-small"><b>Nickname</b></td><td class="header-small"><b>Aufgabenbereiche</b></td></tr>
     <tr><td></td><td></td><td></td></tr>
-    <tr><td><img src="http://www.opencaching.de/images/team/aldeyn.jpg" /></td><td><a href="http://opencaching.de/viewprofile.php?userid=174233">Aldeyn</a></td><td>Organisation</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/bundy609.jpg" /></td><td><a href="http://opencaching.de/viewprofile.php?userid=189552">Bundy609</a></td><td>Anwendersupport, Datenpflege</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/clanfamily.jpg" /></td><td><a href="http://opencaching.de/viewprofile.php?userid=244244">ClanFamily</a></td><td>Design, Softwareentwicklung</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/dl6hbo.jpg" /></td><td><a href="http://opencaching.de/viewprofile.php?userid=148310">dl6hbo</a></td><td>Serverbetrieb, Dokumentation</td></tr>
@@ -43,11 +42,10 @@
     <tr><td><img src="http://www.opencaching.de/images/team/mic@.jpg" /></td><td><a href="http://opencaching.de/viewprofile.php?userid=103599">mic@</a></td><td>Anwendersupport, Datenpflege, Forenmoderation</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/dummy.jpg" /></td><td><a href="http://opencaching.de/viewprofile.php?userid=118274">michasch</a></td><td>Systemadministration, Softwareentwicklung</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/mrspommelhorst.jpg" /></td><td><a href="http://opencaching.de/viewprofile.php?userid=144252">Mrs.Pommelhorst</a></td><td>Anwendersupport, Datenpflege, Wiki</td></tr>
-    <tr><td><img src="http://www.opencaching.de/images/team/dummy.jpg" /></td><td><a href="http://opencaching.de/viewprofile.php?userid=161682">Nikleo</a></td><td>Anwendersupport, Datenpflege, Dokumentation </td></tr>
+    <tr><td><img src="http://www.opencaching.de/images/team/dummy.jpg" /></td><td><a href="http://opencaching.de/viewprofile.php?userid=161682">Nikleo</a></td><td>Anwendersupport, Datenpflege</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/oliver44.jpg" /></td><td><a href="http://opencaching.de/viewprofile.php?userid=227656">Oliver44</a></td><td>Serverbetrieb</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/dummy.jpg" /></td><td><a href="http://opencaching.de/viewprofile.php?userid=159941">Slini11</a></td><td>Datenpflege</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/steingesicht.jpg" /></td><td><a href="http://opencaching.de/viewprofile.php?userid=165774">Steingesicht</a></td><td>Datenpflege</td></tr>
-    <tr><td><img src="http://www.opencaching.de/images/team/dummy.jpg" /></td><td><a href="http://opencaching.de/viewprofile.php?userid=101546">Tiger</a></td><td>Hosting, Serverbetrieb</td></tr>
     <tr><td></td><td></td><td></td></tr>
   </table>
 

@@ -163,4 +163,10 @@
 	// (e.g. xml-interface and mapserver-results)
 	// you can use -1 to use the master (not recommended, because replicated to slaves)
 	$opt['db']['slave']['primary'] = -1;
+
+	$opt['template']['locales']['SV']['show'] = false;
+	$opt['template']['locales']['NO']['show'] = false;
+	$opt['template']['locales']['DA']['show'] = false;
+	$opt['template']['locales']['PT']['show'] = false;
+	$opt['template']['locales']['JA']['show'] = false;
 ?>

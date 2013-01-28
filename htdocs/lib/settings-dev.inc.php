@@ -116,6 +116,11 @@
 
 	$opt['translate']['debug'] = false;
 
+  /* maximum number of failed logins per hour before that IP address is blocked
+   * (used to prevent brute-force-attacks)
+   */
+	$opt['page']['max_logins_per_hour'] = 1000;    // for development ... 
+
   // copy of config2/settings-dist.inc.php
   /* pregenerated waypoint list for new caches
    * - Waypoint prefix (OC, OP, OZ etc.)

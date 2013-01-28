@@ -10,11 +10,11 @@
 	 * update of static data and triggers in developer system
 	 *
 	 * Tables must be updated manually, see htdocs/doc/sql/db-changes.txt
-	 */ 
-  
+	 */
+ 
   $rootpath = dirname(__FILE__) . '/../htdocs/';
   require($rootpath . 'lib/settings.inc.php');
-	
+
   echo "importing data.sql ...\n";
   system('cat ' . $rootpath . 'doc/sql/static-data/data.sql | mysql -h' . $dbserver . ' -u' . $dbusername . ' --password=' . $dbpasswd . ' ' . $dbname);
 
@@ -25,5 +25,5 @@
   echo "resettings webcache ...\n";
   chdir ($rootpath . '../bin');
   system('php clear-webcache.php');
-  
+
 ?>

@@ -13,6 +13,31 @@
 	<p>This page lists all changes since version 3.0.</p>
 	<br />
 
+	 <p><strong>Release  3.0.3</strong> &ndash; November 18, 2012</p>
+   <p>New:</p>
+	 <ul class="changelog">
+     <li class="changelogitem">attribute &bdquo;only at certain seasons&ldquo;</li>
+     <li class="changelogitem">new forum posts are listed on start page</li>
+   </ul>
+
+	 <p>Changed / improved:</p>
+	 <ul class="changelog">
+     <li class="changelogitem">moved help pages to the new <a href="http://wiki.opencaching.de/">Wiki</a> (German)</li>
+     <li class="changelogitem">updated <a href="./articles.php?page=team">team members list</a></li>
+     <li class="changelogitem">optimized search engine access</li>
+     <li class="changelogitem">simplified internal software configuration</li>
+   </ul>
+
+	 <p>Bugfixes:</p>
+	 <ul class="changelog">
+     <li class="changelogitem">fixed waypoint generation error</li>
+     <li class="changelogitem">fixed error message when saving unchanged user profile</li>
+     <li class="changelogitem">fixed main menu when logged off</li>
+     <li class="changelogitem">GC waypoing search will work with duplicates</li>
+     <li class="changelogitem">user profile and search page layout fixes</li>
+   </ul>
+	<br />
+
 	 <p><strong>Release 3.0.2</strong> &ndash; August 26, 2012</p>
    <p>New:</p>
 	 <ul class="changelog">

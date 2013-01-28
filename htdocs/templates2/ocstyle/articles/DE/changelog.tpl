@@ -12,6 +12,31 @@
 	<p>Im Folgenden sind alle Veränderungen ab OC Version&nbsp;3.0 aufgelistet.</p>
 	<br />
 
+	 <p><strong>Version 3.0.3</strong> &ndash; 18. November 2012</p>
+   <p>Neu:</p>
+	 <ul class="changelog">
+     <li class="changelogitem">Attribut &bdquo;nur zu bestimmten Jahreszeiten&ldquo;</li>
+     <li class="changelogitem">Anzeige der neuesten Forenbeiträge</li>
+   </ul>
+
+	 <p>Geändert / verbessert:</p>
+	 <ul class="changelog">
+     <li class="changelogitem">Hilfsseiten ins <a href="http://wiki.opencaching.de/">Wiki</a> ausgelagert</li>
+     <li class="changelogitem"><a href="./articles.php?page=team">Teamliste</a> aktualisiert</li>
+     <li class="changelogitem">Suchmaschinenoptimierung</li>
+     <li class="changelogitem">interne Softwarekonfiguration vereinfacht</li>
+   </ul>
+
+	 <p>Korrigiert (Bugfixes):</p>
+	 <ul class="changelog">
+     <li class="changelogitem">Fehler bei Wegpunktgenerierung behoben</li>
+     <li class="changelogitem">Fehler beim Speichern eines unveränderten Benutzerprofils behoben</li>
+     <li class="changelogitem">Menüdarstellung im ausgeloggten Zustand korrigiert</li>
+     <li class="changelogitem">GC-Wegpunktesuche funktioniert auch bei Duplikaten</li>
+     <li class="changelogitem">Layoutkorrekturen im Benutzerprofil und Suchformular</li>
+   </ul>
+	<br />
+
 	 <p><strong>Version 3.0.2</strong> &ndash; 26. August 2012</p>
    <p>Neu:</p>
 	 <ul class="changelog">

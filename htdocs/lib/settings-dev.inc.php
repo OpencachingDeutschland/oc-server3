@@ -19,7 +19,7 @@
  ****************************************************************************/
  
  	//relative path to the root directory
-	if (!isset($rootpath)) $rootpath = './';
+	if (!isset($rootpath)) $rootpath = dirname(__FILE__) . '/../';
 	
 	//default used language
 	if (!isset($lang)) $lang = 'de';

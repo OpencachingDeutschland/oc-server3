@@ -4462,7 +4462,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('133', 'DE', 'Fehlermeldung', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('134', 'DE', '%2 hat %1 gefunden', '2010-08-29 18:00:23');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('135', 'DE', '%2 hat %1 nicht gefunden', '2010-08-29 18:00:13');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('136', 'DE', '%1 bekam eine Bemerkung von %2', '2010-08-29 17:59:56');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('136', 'DE', '%2 hat %1 kommentiert', '2010-08-29 17:59:56');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('137', 'DE', '%2 hat %1 besucht', '2010-08-29 17:59:44');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('138', 'DE', '%2 möchte %1 besuchen', '2010-08-29 17:59:36');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('139', 'DE', 'Registrierungsbestätigung', '2010-08-28 11:48:06');

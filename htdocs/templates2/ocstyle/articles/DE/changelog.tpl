@@ -12,11 +12,28 @@
 	<p>Im Folgenden sind alle Veränderungen ab OC Version&nbsp;3.0 aufgelistet.</p>
 	<br />
 
+	 <p><strong>Version 3.0.4</strong> &ndash; <i>in Arbeit</i></p>
+   <p>Neu:</p>
+	 <ul class="changelog">
+   </ul>
+
+	 <p>Geändert / verbessert:</p>
+	 <ul class="changelog">
+     <li class="changelogitem">einheitliche Darstellung in der <a href="newlogs.php">Liste neuer Logs</a></li>
+   </ul>
+
+	 <p>Korrigiert (Bugfixes):</p>
+	 <ul class="changelog">
+     <li class="changelogitem">explizite Länderangabe für Cachelistings hat Vorrang vor automatischer Zuordnung</li>
+     <li class="changelogitem">Icons für Event-Logs in der <a href="newlogs.php">Liste neuer Logs</a></li>
+   </ul>
+	<br />
+
 	 <p><strong>Version 3.0.3</strong> &ndash; 18. November 2012</p>
    <p>Neu:</p>
 	 <ul class="changelog">
      <li class="changelogitem">Attribut &bdquo;nur zu bestimmten Jahreszeiten&ldquo;</li>
-     <li class="changelogitem">Anzeige der neuesten Forenbeiträge</li>
+     <li class="changelogitem">Anzeige der neuesten Forenbeiträge auf der Startseite</li>
    </ul>
 
 	 <p>Geändert / verbessert:</p>

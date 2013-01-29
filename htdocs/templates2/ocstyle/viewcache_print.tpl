@@ -109,20 +109,20 @@
 						{/if}
 					</td>
 					<td valign="top">
-						{if $cache.code1==""}
-							<img src="images/flags/{$cache.countryCode|lower}.gif" style="vertical-align:middle" />&nbsp;
+						{if $cache.code1=="" or $cache.code1 != $cache.countryCode}
+							<img src="images/flags/{$cache.countryCode|lower}.gif" style="vertical-align:middle" />&nbsp; <b>{$cache.country|escape}</b><br />
 						{else}
 							<img src="images/flags/{$cache.code1|lower}.gif" style="vertical-align:middle" />&nbsp;
-						{/if}
-						<b>{if $cache.adm1==""}{$cache.country|escape}{else}{$cache.adm1}{/if}</b><br />
-						{if $cache.adm2!=""}
-							<font size="1">
-							{$cache.adm2}
-							{if $cache.adm4!=""}
-								&nbsp;=>&nbsp;{$cache.adm4}
+							<b>{$cache.adm1}</b><br />
+							{if $cache.adm2!=""}
+								<font size="1">
+								{$cache.adm2}
+								{if $cache.adm4!=""}
+									&nbsp;=>&nbsp;{$cache.adm4}
+								{/if}
+								</font>
+								<br />
 							{/if}
-							</font>
-							<br />
 						{/if}
 
 						<!-- <a href="http://www.mapquest.com/maps/map.adp?latlongtype=decimal&latitude={$cache.latitude}&longitude={$cache.longitude}" target="_blank">Mapquest</a><br />    -->

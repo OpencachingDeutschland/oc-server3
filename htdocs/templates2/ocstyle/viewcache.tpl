@@ -120,19 +120,15 @@
 
 			<p>{t}by{/t}&nbsp;<a class="links" href="viewprofile.php?userid={$cache.userid}">{$cache.username|escape}</a>&nbsp;&nbsp;
 				<span style="color: rgb(88, 144, 168); font-weight: bold;">
-					{if $cache.code1==""}<img src="images/flags/{$cache.countryCode|lower}.gif" style="vertical-align:middle" />&nbsp;
+					{if $cache.code1=="" or $cache.code1 != $cache.countryCode}
+						<img src="images/flags/{$cache.countryCode|lower}.gif" style="vertical-align:middle" />&nbsp; {$cache.country|escape}
 					{else}
-					<img src="images/flags/{$cache.code1|lower}.gif" style="vertical-align:middle" />&nbsp;
-					{/if} 
-					{if $cache.adm1==""}
-						{$cache.country|escape}
-					{else}
-						{$cache.adm1}
-					{/if} 
-					{if $cache.adm2!=""}
-				 		{$cache.adm2}
-				 			{if $cache.adm4!=""}&nbsp;=>&nbsp;{$cache.adm4}
+						<img src="images/flags/{$cache.code1|lower}.gif" style="vertical-align:middle" />&nbsp;
+						{$cache.adm1}{if $cache.adm2!=""},
+							{$cache.adm2}{if $cache.adm4!=""}
+								&nbsp;=>&nbsp;{$cache.adm4}
 							{/if}
+						{/if}
 					{/if}
 				</span>
 			</p>

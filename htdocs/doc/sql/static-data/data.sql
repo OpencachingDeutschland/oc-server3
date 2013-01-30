@@ -2227,6 +2227,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1798', 'Operato
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1799', 'Only available during specified seasons', '2012-10-29 14:28:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1800', 'This cache can be done at certain seasons only - see the cache description for more details. For example, the cache may be placed in a corn labyrinth, which only exists from bloom to harvest season.', '2012-10-29 14:28:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1801', 'Help', '2012-11-09 19:28:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1802', 'Warning: This report is already assigned to another admin. Consult him first before you assume the report!', '2013-01-30 16:26:00');
 
 -- Table sys_trans_ref
 SET NAMES 'utf8';
@@ -4327,6 +4328,7 @@ INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1798'
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1799', 'table:cache_attrib;field=html_desc', '0');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1800', 'table:cache_attrib;field=html_desc', '0');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1801', './lang/de/ocstyle/lib/menu.php', '199');
+INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1802', './lang/de/ocstyle/adminreports.tpl', '83');
 
 -- Table sys_trans_text
 SET NAMES 'utf8';
@@ -5716,6 +5718,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1799', 'DE', 'Nur zu bestimmten Zeiten im Jahr', '2012-10-29 14:28:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1800', 'DE', 'Dieser Cache l\&auml;sst sich nur zu bestimmten Zeite im Jahr absolvieren. N\&auml;here Angaben sind in der Beschreibung des Caches zu finden. Der Cache kann beispielsweise in einem Maislabyrinth versteckt sein, das nur zwischen Bl\&uuml;te- und Erntezeit existiert.', '2012-10-29 14:28:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1801', 'DE', 'Hilfe', '2012-11-09 19:32:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1802', 'DE', 'Warnung: Diese Cachemeldung wird bereits von einem anderen Admin bearbeitet. Bitte sprich dich mit ihm ab, bevor du sie &uuml;bernimmst!', '2013-01-30 16:28:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'EN', 'Reorder IDs \r', '2010-09-02 00:15:30');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'EN', 'The database could not be reconnected.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'EN', 'Testing – please do not login', '2010-08-28 11:48:07');

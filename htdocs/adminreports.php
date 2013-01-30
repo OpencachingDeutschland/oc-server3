@@ -27,7 +27,7 @@
 	$ownerid = isset($_REQUEST['ownerid']) ? $_REQUEST['ownerid']+0 : 0;
 	$adminid = sql_value("SELECT `adminid` FROM `cache_reports` WHERE `id`=&1", 0, $rid);
 
-	if (isset($_REQUEST['assign']) && $rid > 0 && $adminid == 0)
+	if (isset($_REQUEST['assign']) && $rid > 0)  //  && $adminid == 0)
 	{
 		sql("UPDATE `cache_reports` SET `status`=2, `adminid`=&2 WHERE `id`=&1", $rid, $login->userid);
 		$tpl->redirect('adminreports.php?id='.$rid);
@@ -115,14 +115,19 @@
 				               `c`.`name`,
 				               `u2`.`username` AS `ownernick`,
 				               `u`.`username`,
-				               `cr`.`lastmodified`
+				               IF(LENGTH(`u3`.`username`)>10, CONCAT(LEFT(`u3`.`username`,9),'.'),`u3`.`username`) AS `adminname`,
+				               `cr`.`lastmodified`,
+				               `cr`.`adminid` IS NOT NULL AND `cr`.`adminid`!=&1 AS otheradmin 
 				          FROM `cache_reports` `cr`
 				    INNER JOIN `caches` `c` ON `c`.`cache_id` = `cr`.`cacheid`
 				    INNER JOIN `user` `u` ON `u`.`user_id`  = `cr`.`userid`
 				    INNER JOIN `user` AS `u2` ON `u2`.`user_id`=`c`.`user_id`
-				         WHERE `cr`.`status` < 3
-				           AND (`cr`.`adminid` IS NULL OR `cr`.`adminid`=&1)
-			        ORDER BY `cr`.`status` ASC, `cr`.`lastmodified` ASC", 
+				     LEFT JOIN `user` AS `u3` ON `u3`.`user_id`=`cr`.`adminid`
+				         WHERE `cr`.`status` < 3 " .
+				         //  AND (`cr`.`adminid` IS NULL OR `cr`.`adminid`=&1)
+		         "ORDER BY (`cr`.`adminid` IS NULL OR `cr`.`adminid`=&1) DESC,
+						            `cr`.`status` ASC, 
+												`cr`.`lastmodified` ASC",
 			    $login->userid);
 
 		$tpl->assign_rs('reportedcaches', $rs);
@@ -168,6 +173,8 @@
 		sql_free_result($rs);
 
 		$tpl->assign('list', false);
+		$tpl->assign('otheradmin',$record['adminid']>0 && $record['adminid'] != $login->userid);
+		$tpl->assign('ownreport',$record['adminid'] == $login->userid);
 	}
 
 	$tpl->assign('error', $error);	

@@ -171,6 +171,7 @@ class WebService
 					and type = '".mysql_real_escape_string(Okapi::logtypename2id($logtype))."'
 					and date = from_unixtime('".mysql_real_escape_string($when)."')
 					and text = '".mysql_real_escape_string($PSEUDOENCODED_comment)."'
+					".((Settings::get('OC_BRANCH') == 'oc.pl') ? "and deleted = 0" : "")."
 				limit 1
 			");
 			if ($duplicate_uuid != null)
@@ -375,7 +376,7 @@ class WebService
 		# We need to delete the copy of stats-picture for this user. Otherwise,
 		# the legacy OC code won't detect that the picture needs to be refreshed.
 		
-		$filepath = Settings::get('VAR_DIR').'images/statpics/statpic'.$user['internal_id'].'.jpg';
+		$filepath = Okapi::get_var_dir().'/images/statpics/statpic'.$user['internal_id'].'.jpg';
 		if (file_exists($filepath))
 			unlink($filepath);
 

@@ -3,6 +3,7 @@
 namespace okapi\services\caches\formatters\garmin;
 
 use okapi\Okapi;
+use okapi\Cache;
 use okapi\Settings;
 use okapi\OkapiRequest;
 use okapi\OkapiHttpResponse;
@@ -15,6 +16,7 @@ use okapi\OkapiAccessToken;
 use okapi\services\caches\search\SearchAssistant;
 
 use \ZipArchive;
+use \Exception;
 
 class WebService
 {
@@ -45,7 +47,7 @@ class WebService
 		
 		# Start creating ZIP archive.
 		
-		$tempfilename = sys_get_temp_dir()."/garmin".time().rand(100000,999999).".zip";
+		$tempfilename = Okapi::get_var_dir()."/garmin".time().rand(100000,999999).".zip";
 		$zip = new ZipArchive();
 		if ($zip->open($tempfilename, ZIPARCHIVE::CREATE) !== true)
 			throw new Exception("ZipArchive class could not create temp file $tempfilename. Check permissions!");
@@ -87,6 +89,7 @@ class WebService
 			throw new InvalidParam('cache_codes', "The maximum number of caches allowed to be downloaded with this method is 50.");
 		if ($images != 'none')
 		{
+			$supported_extensions = array('jpg', 'jpeg', 'gif', 'png', 'bmp');
 			foreach ($caches as $cache_code => $dict)
 			{
 				$imgs = $dict['images'];
@@ -104,8 +107,18 @@ class WebService
 						continue;
 					if ($images == 'nonspoilers' && $img['is_spoiler'])
 						continue;
-					if (strtolower(substr($img['url'], strlen($img['url']) - 4)) != ".jpg")
-						continue;
+					$tmp = false;
+					foreach ($supported_extensions as $ext)
+					{
+						if (strtolower(substr($img['url'], strlen($img['url']) - strlen($ext) - 1)) != ".".$ext)
+						{
+							$tmp = true;
+							continue;
+						}
+					}
+					if (!$tmp)
+						continue;  # unsupported file extension
+					
 					if ($img['is_spoiler']) {
 						$zip->addEmptyDir($dir."/Spoilers");
 						$zippath = $dir."/Spoilers/".$img['unique_caption'].".jpg";
@@ -121,11 +134,50 @@ class WebService
 					# be accessed locally. But all the files have 'local' set to 1 anyway.
 					
 					$syspath = Settings::get('IMAGES_DIR')."/".$img['uuid'].".jpg";
-					if (!file_exists($syspath))
-						continue;
-					$file = file_get_contents($syspath);
-					if ($file)
-						$zip->addFromString($zippath, $file);
+					if (file_exists($syspath))
+					{
+						$file = file_get_contents($syspath);
+						if ($file)
+							$zip->addFromString($zippath, $file);
+					}
+					else
+					{
+						# If file exists, but does not end with ".jpg", we will create 
+						# JPEG version of it and store it in the cache.
+						
+						$cache_key = "jpg#".$img['uuid'];
+						$jpeg_contents = Cache::get($cache_key);
+						if ($jpeg_contents === null)
+						{
+							foreach ($supported_extensions as $ext)
+							{
+								$syspath_other = Settings::get('IMAGES_DIR')."/".$img['uuid'].".".$ext;
+								if (file_exists($syspath_other))
+								{
+									try
+									{
+										$image = imagecreatefromstring(file_get_contents($syspath_other));
+										ob_start();
+										imagejpeg($image);
+										$jpeg_contents = ob_get_clean();
+										imagedestroy($image);
+									}
+									catch (Exception $e)
+									{
+										# GD couldn't parse the file. We will skip it, and cache
+										# the "false" value as the contents. This way, we won't
+										# attempt to parse it during the next 24 hours.
+										
+										$jpeg_contents = false;
+									}
+									Cache::set($cache_key, $jpeg_contents, 86400);
+									break;
+								}
+							}
+						}
+						if ($jpeg_contents)  # This can be "null" *or* "false"!
+							$zip->addFromString($zippath, $jpeg_contents);
+					}
 				}
 			}
 		}

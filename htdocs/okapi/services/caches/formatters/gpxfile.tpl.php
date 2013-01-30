@@ -1,5 +1,9 @@
 <?
 
+namespace okapi\services\caches\formatters\gpx;
+
+use okapi\Okapi;
+
 echo '<?xml version="1.0" encoding="utf-8"?>'."\n";
 
 ?>
@@ -24,24 +28,24 @@ http://www.gsak.net/xmlv1/5 http://www.gsak.net/xmlv1/5/gsak.xsd
 		<wpt lat="<?= $lat ?>" lon="<?= $lon ?>">
 			<time><?= $c['date_created'] ?></time>
 			<name><?= $c['code'] ?></name>
-			<desc><?= htmlspecialchars($c['name'], ENT_COMPAT, 'UTF-8') ?> <?= _("hidden by") ?> <?= htmlspecialchars($c['owner']['username'], ENT_COMPAT, 'UTF-8') ?> :: <?= ucfirst($c['type']) ?> Cache (<?= $c['difficulty'] ?>/<?= $c['terrain'] ?><? if ($c['size'] !== null) { echo "/".$c['size']; } else { echo "/X"; } ?>/<?= $c['rating'] ?>)</desc>
+			<desc><?= Okapi::xmlescape($c['name']) ?> <?= _("hidden by") ?> <?= Okapi::xmlescape($c['owner']['username']) ?> :: <?= ucfirst($c['type']) ?> Cache (<?= $c['difficulty'] ?>/<?= $c['terrain'] ?><? if ($c['size'] !== null) { echo "/".$c['size']; } else { echo "/X"; } ?>/<?= $c['rating'] ?>)</desc>
 			<url><?= $c['url'] ?></url>
-			<urlname><?= htmlspecialchars($c['name'], ENT_COMPAT, 'UTF-8') ?></urlname>
+			<urlname><?= Okapi::xmlescape($c['name']) ?></urlname>
 			<sym><?= ($vars['mark_found'] && $c['is_found']) ? "Geocache Found" : "Geocache" ?></sym>
 			<type>Geocache|<?= $vars['cache_GPX_types'][$c['type']] ?></type>
 			<? if ($vars['ns_ground']) { /* Does user want us to include Groundspeak's <cache> element? */ ?>
 				<groundspeak:cache archived="<?= ($c['status'] == 'Archived') ? "True" : "False" ?>" available="<?= ($c['status'] == 'Available') ? "True" : "False" ?>" id="<?= $c['internal_id'] ?>" xmlns:groundspeak="http://www.groundspeak.com/cache/1/0/1">
-					<groundspeak:name><?= htmlspecialchars($c['name'], ENT_COMPAT, 'UTF-8') ?></groundspeak:name>
-					<groundspeak:placed_by><?= htmlspecialchars($c['owner']['username'], ENT_COMPAT, 'UTF-8') ?></groundspeak:placed_by>
-					<groundspeak:owner id="<?= $c['owner']['uuid'] ?>"><?= htmlspecialchars($c['owner']['username'], ENT_COMPAT, 'UTF-8') ?></groundspeak:owner>
+					<groundspeak:name><?= Okapi::xmlescape($c['name']) ?></groundspeak:name>
+					<groundspeak:placed_by><?= Okapi::xmlescape($c['owner']['username']) ?></groundspeak:placed_by>
+					<groundspeak:owner id="<?= $c['owner']['uuid'] ?>"><?= Okapi::xmlescape($c['owner']['username']) ?></groundspeak:owner>
 					<groundspeak:type><?= $vars['cache_GPX_types'][$c['type']] ?></groundspeak:type>
 					<groundspeak:container><?= $vars['cache_GPX_sizes'][$c['size2']] ?></groundspeak:container>
 					<groundspeak:difficulty><?= $c['difficulty'] ?></groundspeak:difficulty>
 					<groundspeak:terrain><?= $c['terrain'] ?></groundspeak:terrain>
 					<groundspeak:long_description html="True">
 						&lt;p&gt;
-							&lt;a href="<?= $c['url'] ?>"&gt;<?= htmlspecialchars($c['name'], ENT_COMPAT, 'UTF-8') ?>&lt;/a&gt;
-							<?= _("hidden by") ?> &lt;a href='<?= $c['owner']['profile_url'] ?>'&gt;<?= htmlspecialchars($c['owner']['username'], ENT_COMPAT, 'UTF-8') ?>&lt;/a&gt;&lt;br/&gt;
+							&lt;a href="<?= $c['url'] ?>"&gt;<?= Okapi::xmlescape($c['name']) ?>&lt;/a&gt;
+							<?= _("hidden by") ?> &lt;a href='<?= $c['owner']['profile_url'] ?>'&gt;<?= Okapi::xmlescape($c['owner']['username']) ?>&lt;/a&gt;&lt;br/&gt;
 							<? if ($vars['recommendations'] == 'desc:count') { /* Does user want us to include recommendations count? */ ?>
 								<?= sprintf(ngettext("%d recommendation", "%d recommendations", $c['recommendations']), $c['recommendations']) ?>
 								(<?= sprintf(ngettext("found %d time", "found %d times", $c['founds']), $c['founds']) ?>).
@@ -51,7 +55,7 @@ http://www.gsak.net/xmlv1/5 http://www.gsak.net/xmlv1/5/gsak.xsd
 							<? } ?>
 						&lt;/p&gt;
 						<? if (($vars['my_notes'] == 'desc:text') && ($c['my_notes'] != null)) { /* Does user want us to include personal notes? */ ?>
-							&lt;p&gt;&lt;b&gt;<?= _("Personal notes") ?>:&lt;/b&gt; <?= htmlspecialchars($c['my_notes'], ENT_COMPAT, 'UTF-8') ?>&lt;/p&gt;
+							&lt;p&gt;&lt;b&gt;<?= _("Personal notes") ?>:&lt;/b&gt; <?= Okapi::xmlescape($c['my_notes']) ?>&lt;/p&gt;
 						<? } ?>
 						
 						<? if ($vars['attrs'] == 'desc:text' && count($c['attrnames']) > 0) { /* Does user want us to include attributes? */ ?>
@@ -62,11 +66,11 @@ http://www.gsak.net/xmlv1/5 http://www.gsak.net/xmlv1/5/gsak.xsd
 							&lt;p&gt;<?= _("Trackables") ?>:&lt;/p&gt;
 							&lt;ul&gt;
 							<? foreach ($c['trackables'] as $t) { ?>
-								&lt;li&gt;&lt;a href='<?= htmlspecialchars($t['url'], ENT_COMPAT, 'UTF-8') ?>'&gt;<?= htmlspecialchars($t['name'], ENT_COMPAT, 'UTF-8') ?>&lt;/a&gt; (<?= $t['code'] ?>)&lt;/li&gt;
+								&lt;li&gt;&lt;a href='<?= Okapi::xmlescape($t['url']) ?>'&gt;<?= Okapi::xmlescape($t['name']) ?>&lt;/a&gt; (<?= $t['code'] ?>)&lt;/li&gt;
 							<? } ?>
 							&lt;/ul&gt;
 						<? } ?>
-						<?= htmlspecialchars($c['description'], ENT_COMPAT, 'UTF-8') ?>
+						<?= Okapi::xmlescape($c['description']) ?>
 						<? if ((strpos($vars['images'], "descrefs:") === 0) && count($c['images']) > 0) { /* Does user want us to include <img> references in cache descriptions? */ ?>
 							<?
 								# We will split images into two subcategories: spoilers and nonspoilers.
@@ -79,15 +83,15 @@ http://www.gsak.net/xmlv1/5 http://www.gsak.net/xmlv1/5/gsak.xsd
 							<? if (count($nonspoilers) > 0) { ?>
 								&lt;h2&gt;<?= _("Images") ?> (<?= count($nonspoilers) ?>)&lt;/h2&gt;
 								<? foreach ($nonspoilers as $img) { ?>
-									&lt;p&gt;&lt;img src='<?= htmlspecialchars($img['url'], ENT_COMPAT, 'UTF-8') ?>'&gt;&lt;br&gt;
-									<?= htmlspecialchars($img['caption'], ENT_COMPAT, 'UTF-8') ?>&lt;/p&gt;
+									&lt;p&gt;&lt;img src='<?= Okapi::xmlescape($img['url']) ?>'&gt;&lt;br&gt;
+									<?= Okapi::xmlescape($img['caption']) ?>&lt;/p&gt;
 								<? } ?>
 							<? } ?>
 							<? if (count($spoilers) > 0 && $vars['images'] == 'descrefs:all') { ?>
 								&lt;h2&gt;<?= _("Spoilers") ?> (<?= count($spoilers) ?>)&lt;/h2&gt;
 								<? foreach ($spoilers as $img) { ?>
-									&lt;p&gt;&lt;img src='<?= htmlspecialchars($img['url'], ENT_COMPAT, 'UTF-8') ?>'&gt;&lt;br&gt;
-									<?= htmlspecialchars($img['caption'], ENT_COMPAT, 'UTF-8') ?>&lt;/p&gt;
+									&lt;p&gt;&lt;img src='<?= Okapi::xmlescape($img['url']) ?>'&gt;&lt;br&gt;
+									<?= Okapi::xmlescape($img['caption']) ?>&lt;/p&gt;
 								<? } ?>
 							<? } ?>
 						<? } ?>
@@ -95,20 +99,20 @@ http://www.gsak.net/xmlv1/5 http://www.gsak.net/xmlv1/5/gsak.xsd
 							&lt;p&gt;<?= _("Image descriptions") ?>:&lt;/p&gt;
 							&lt;ul&gt;
 								<? foreach ($c['images'] as $no => $img) { ?>
-									&lt;li&gt;<?= $img['unique_caption'] ?>. <?= htmlspecialchars($img['caption'], ENT_COMPAT, 'UTF-8') ?>&lt;/li&gt;
+									&lt;li&gt;<?= $img['unique_caption'] ?>. <?= Okapi::xmlescape($img['caption']) ?>&lt;/li&gt;
 								<? } ?>
 							&lt;/ul&gt;
 						<? } ?>
 					</groundspeak:long_description>
-					<groundspeak:encoded_hints><?= htmlspecialchars($c['hint'], ENT_COMPAT, 'UTF-8') ?></groundspeak:encoded_hints>
+					<groundspeak:encoded_hints><?= Okapi::xmlescape($c['hint']) ?></groundspeak:encoded_hints>
 					<? if ($vars['latest_logs']) { /* Does user want us to include latest log entries? */ ?>
 						<groundspeak:logs>
 							<? foreach ($c['latest_logs'] as $log) { ?>
 								<groundspeak:log id="<?= $log['uuid'] ?>">
 									<groundspeak:date><?= $log['date'] ?></groundspeak:date>
 									<groundspeak:type><?= $log['type'] ?></groundspeak:type>
-									<groundspeak:finder id="<?= $log['user']['uuid'] ?>"><?= htmlspecialchars($log['user']['username'], ENT_COMPAT, 'UTF-8') ?></groundspeak:finder>
-									<groundspeak:text encoded="False"><?= htmlspecialchars($log['comment'], ENT_COMPAT, 'UTF-8') ?></groundspeak:text>
+									<groundspeak:finder id="<?= $log['user']['uuid'] ?>"><?= Okapi::xmlescape($log['user']['username']) ?></groundspeak:finder>
+									<groundspeak:text encoded="False"><?= Okapi::xmlescape($log['comment']) ?></groundspeak:text>
 								</groundspeak:log>
 							<? } ?>
 						</groundspeak:logs>
@@ -150,11 +154,11 @@ http://www.gsak.net/xmlv1/5 http://www.gsak.net/xmlv1/5/gsak.xsd
 				<? list($lat, $lon) = explode("|", $wpt['location']); ?>
 				<wpt lat="<?= $lat ?>" lon="<?= $lon ?>">
 					<time><?= $c['date_created'] ?></time>
-					<name><?= htmlspecialchars($wpt['name'], ENT_COMPAT, 'UTF-8') ?></name>
-					<cmt><?= htmlspecialchars($wpt['description'], ENT_COMPAT, 'UTF-8') ?></cmt>
-					<desc><?= htmlspecialchars($wpt['description'], ENT_COMPAT, 'UTF-8') ?></desc>
+					<name><?= Okapi::xmlescape($wpt['name']) ?></name>
+					<cmt><?= Okapi::xmlescape($wpt['description']) ?></cmt>
+					<desc><?= Okapi::xmlescape($wpt['description']) ?></desc>
 					<url><?= $c['url'] ?></url>
-					<urlname><?= htmlspecialchars($c['name'], ENT_COMPAT, 'UTF-8') ?></urlname>
+					<urlname><?= Okapi::xmlescape($c['name']) ?></urlname>
 					<sym><?= $wpt['sym'] ?></sym>
 					<type>Waypoint|<?= $wpt['sym'] ?></type>
 					<? if ($vars['ns_gsak']) { ?>

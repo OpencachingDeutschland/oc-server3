@@ -8,7 +8,7 @@
 		the user, then it has to be exchanged for an Access Token.</p>
 	</desc>
 	<req name='oauth_callback'>
-		<p>An URL which you want a User to be redirected to after a
+		<p>URL which you want a User to be redirected to after a
 		successful Request Token Authorization (see "authorize" method).
 		If the client is unable to receive callbacks, the parameter
 		must be set to "oob", OKAPI will provide a user with a

@@ -24,12 +24,12 @@ class WebService
 	
 	public static function call(OkapiRequest $request)
 	{
-		$cache_key = "api_ref/method_index";
+		$methodnames = OkapiServiceRunner::$all_names;
+		sort($methodnames);
+		$cache_key = "api_ref/method_index#".md5(implode("#", $methodnames));
 		$results = Cache::get($cache_key);
 		if ($results == null)
 		{
-			$methodnames = OkapiServiceRunner::$all_names;
-			sort($methodnames);
 			$results = array();
 			foreach ($methodnames as $methodname)
 			{

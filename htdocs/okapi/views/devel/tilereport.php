@@ -115,7 +115,7 @@ class View
 		$etag_hits = $calls['B'] - $calls['C'];
 		
 		print "\n";
-		print "               $etag_hits of the requests matched the ETag and were served a HTTP 304 response.\n";
+		print "               $etag_hits of the requests matched the ETag and were served an HTTP 304 response.\n";
 		print "\n";
 		
 		$calls_left = $calls['C'];

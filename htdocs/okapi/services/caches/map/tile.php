@@ -17,13 +17,15 @@ use okapi\DoesNotExist;
 use okapi\OkapiInternalRequest;
 use okapi\OkapiInternalConsumer;
 use okapi\OkapiServiceRunner;
+use okapi\OkapiLock;
 
 use okapi\services\caches\map\TileTree;
 use okapi\services\caches\map\DefaultTileRenderer;
-
+use okapi\services\caches\search\SearchAssistant;
 
 require_once('tiletree.inc.php');
 require_once('tilerenderer.inc.php');
+require_once($GLOBALS['rootpath']."okapi/services/caches/search/searching.inc.php");
 
 class WebService
 {
@@ -48,7 +50,7 @@ class WebService
 	public static function options()
 	{
 		return array(
-			'min_auth_level' => 1
+			'min_auth_level' => 3
 		);
 	}
 	
@@ -84,261 +86,96 @@ class WebService
 		if ($y >= 1<<$zoom)
 			throw new InvalidParam('y', "Should be in 0..".((1<<$zoom) - 1).".");
 		
-		# status
+		# Now, we will create a search set (or use one previously created).
+		# Instead of creating a new OkapiInternalRequest object, we will pass
+		# the current request directly. We can do that, because we inherit all
+		# of the "save" method's parameters.
 		
-		$filter_conds = array();
-		$tmp = $request->get_parameter('status');
-		if ($tmp == null) $tmp = "Available";
-		$allowed_status_codes = array();
-		foreach (explode("|", $tmp) as $name)
-		{
-			try
-			{
-				$allowed_status_codes[] = Okapi::cache_status_name2id($name);
-			}
-			catch (Exception $e)
-			{
-				throw new InvalidParam('status', "'$name' is not a valid cache status.");
-			}
-		}
-		sort($allowed_status_codes);
-		if (count($allowed_status_codes) == 0)
-			throw new InvalidParam('status');
-		if (count($allowed_status_codes) < 3)
-			$filter_conds[] = "status in ('".implode("','", array_map('mysql_real_escape_string', $allowed_status_codes))."')";
+		$search_set = OkapiServiceRunner::call('services/caches/search/save', $request);
+		$set_id = $search_set['set_id'];
 		
-		# type
+		# Get caches which are present in the result set AND within the tile
+		# (+ those around the borders).
 		
-		if ($tmp = $request->get_parameter('type'))
-		{
-			$operator = "in";
-			if ($tmp[0] == '-')
-			{
-				$tmp = substr($tmp, 1);
-				$operator = "not in";
-			}
-			$types = array();
-			foreach (explode("|", $tmp) as $name)
-			{
-				try
-				{
-					$id = Okapi::cache_type_name2id($name);
-					$types[] = $id;
-				}
-				catch (Exception $e)
-				{
-					throw new InvalidParam('type', "'$name' is not a valid cache type.");
-				}
-			}
-			sort($types);
-			
-			# Check if all cache types were selected. Since we're running
-			# on various OC installations, we don't know which caches types
-			# are "all" here. We have to check.
-			
-			$all = self::$USE_OTHER_CACHE ? Cache::get('all_cache_types') : null;
-			if ($all === null)
-			{
-				$all = Db::select_column("
-					select distinct type
-					from caches
-					where status in (1,2,3)
-				");
-				Cache::set('all_cache_types', $all, 86400);
-			}
-			$all_included = true;
-			foreach ($all as $type)
-				if (!in_array($type, $types))
-				{
-					$all_included = false;
-					break;
-				}
-					
-			if ($all_included && ($operator == "in"))
-			{
-				# All cache types are to be included. This is common.
-			}
-			else
-			{
-				$filter_conds[] = "type $operator ('".implode("','", array_map('mysql_real_escape_string', $types))."')";
-			}
-		}
-		
-		# User-specific geocaches (cached together).
-		
-		$cache_key = "tileuser/".$request->token->user_id;
-		$user = self::$USE_OTHER_CACHE ? Cache::get($cache_key) : null;
-		if ($user === null)
-		{
-			$user = array();
-			
-			# Ignored caches.
-			
-			$rs = Db::query("
-				select cache_id
-				from cache_ignore
-				where user_id = '".mysql_real_escape_string($request->token->user_id)."'
-			");
-			$user['ignored'] = array();
-			while (list($cache_id) = mysql_fetch_row($rs))
-				$user['ignored'][$cache_id] = true;
-			
-			# Found caches.
-			
-			$rs = Db::query("
-				select distinct cache_id
-				from cache_logs
-				where
-					user_id = '".mysql_real_escape_string($request->token->user_id)."'
-					and type = 1
-					and ".((Settings::get('OC_BRANCH') == 'oc.pl') ? "deleted = 0" : "true")."
-			");
-			$user['found'] = array();
-			while (list($cache_id) = mysql_fetch_row($rs))
-				$user['found'][$cache_id] = true;
-
-			# Own caches.
-			
-			$rs = Db::query("
-				select distinct cache_id
-				from caches
-				where user_id = '".mysql_real_escape_string($request->token->user_id)."'
-			");
-			$user['own'] = array();
-			while (list($cache_id) = mysql_fetch_row($rs))
-				$user['own'][$cache_id] = true;
-			
-			Cache::set($cache_key, $user, 30);
-		}
-
-		# exclude_ignored
-		
-		$tmp = $request->get_parameter('exclude_ignored');
-		if ($tmp === null) $tmp = "false";
-		if (!in_array($tmp, array('true', 'false'), true))
-			throw new InvalidParam('exclude_ignored', "'$tmp'");
-		if ($tmp == 'true')
-		{
-			$excluded_dict = $user['ignored'];
-		} else {
-			$excluded_dict = array();
-		}
-		
-		# exclude_my_own
-		
-		if ($tmp = $request->get_parameter('exclude_my_own'))
-		{
-			if (!in_array($tmp, array('true', 'false'), 1))
-				throw new InvalidParam('exclude_my_own', "'$tmp'");
-			if (($tmp == 'true') && (count($user['own']) > 0))
-			{
-				foreach ($user['own'] as $cache_id => $v)
-					$excluded_dict[$cache_id] = true;
-			}
-		}
-		
-		# found_status
-		
-		if ($tmp = $request->get_parameter('found_status'))
-		{
-			if (!in_array($tmp, array('found_only', 'notfound_only', 'either')))
-				throw new InvalidParam('found_status', "'$tmp'");
-			if ($tmp == 'either') {
-				# Do nothing.
-			} elseif ($tmp == 'notfound_only') {
-				# Easy.
-				foreach ($user['found'] as $cache_id => $v)
-					$excluded_dict[$cache_id] = true;
-			} else {
-				# Found only. This will slow down queries somewhat. But it is rare.
-				$filter_conds[] = "cache_id in ('".implode("','", array_map('mysql_real_escape_string', array_keys($user['found'])))."')";
-			}
-		}
-		
-		# with_trackables_only
-		
-		if ($tmp = $request->get_parameter('with_trackables_only'))
-		{
-			if (!in_array($tmp, array('true', 'false'), 1))
-				throw new InvalidParam('with_trackables_only', "'$tmp'");
-			if ($tmp == 'true')
-			{
-				$filter_conds[] = "flags & ".TileTree::$FLAG_HAS_TRACKABLES;
-			}
-		}
-		
-		# not_yet_found_only
-		
-		if ($tmp = $request->get_parameter('not_yet_found_only'))  # ftf hunter
-		{
-			if (!in_array($tmp, array('true', 'false'), 1))
-				throw new InvalidParam('not_yet_found_only', "'$tmp'");
-			if ($tmp == 'true')
-			{
-				$filter_conds[] = "flags & ".TileTree::$FLAG_NOT_YET_FOUND;
-			}
-		}
-		
-		# rating
-		
-		if ($tmp = $request->get_parameter('rating'))
-		{
-			if (!preg_match("/^[1-5]-[1-5](\|X)?$/", $tmp))
-				throw new InvalidParam('rating', "'$tmp'");
-			list($min, $max) = explode("-", $tmp);
-			if (strpos($max, "|X") !== false)
-			{
-				$max = $max[0];
-				$allow_null = true;
-			} else {
-				$allow_null = false;
-			}
-			if ($min > $max)
-				throw new InvalidParam('rating', "'$tmp'");
-			if (($min == 1) && ($max == 5) && $allow_null) {
-				/* no extra condition necessary */
-			} else {
-				$filter_conds[] = "(rating between $min and $max)".
-					($allow_null ? " or rating is null" : "");
-			}
-		}
-		
-		# Filter out caches in $excluded_dict.
-		
-		if (count($excluded_dict) > 0)
-		{
-			$filter_conds[] = "cache_id not in ('".implode("','", array_keys($excluded_dict))."')";
-		}
-		
-		# Get caches within the tile (+ those around the borders). All filtering
-		# options need to be applied here.
-		
-		$rs = TileTree::query_fast($zoom, $x, $y, $filter_conds);
-		OkapiServiceRunner::save_stats_extra("caches/map/tile/checkpointA", null,
-			microtime(true) - $checkpointA_started);
-		$checkpointB_started = microtime(true);
-
-		# Read the rows and add extra flags to them.
-
+		$rs = TileTree::query_fast($zoom, $x, $y, $set_id);
 		$rows = array();
 		if ($rs !== null)
 		{
 			while ($row = mysql_fetch_row($rs))
-			{
-				# Add the "found" flag, to indicate that this cache needs
-				# to be drawn as found.
-
-				if (isset($user['found'][$row[0]]))
-					$row[6] |= TileTree::$FLAG_FOUND;  # $row[6] is "flags"
-				if (isset($user['own'][$row[0]]))
-					$row[6] |= TileTree::$FLAG_OWN;  # $row[6] is "flags"
-
 				$rows[] = $row;
-			}
 			unset($row);
 		}
+		OkapiServiceRunner::save_stats_extra("caches/map/tile/checkpointA", null,
+			microtime(true) - $checkpointA_started);
+		$checkpointB_started = microtime(true);
 
-		# Compute a fast image fingerprint. This will be used both for ETags
+		# Add dynamic, user-related flags.
+		
+		if (count($rows) > 0)
+		{
+			# Load user-related cache ids.
+			
+			$cache_key = "tileuser/".$request->token->user_id;
+			$user = self::$USE_OTHER_CACHE ? Cache::get($cache_key) : null;
+			if ($user === null)
+			{
+				$user = array();
+				
+				# Ignored caches.
+				
+				$rs = Db::query("
+					select cache_id
+					from cache_ignore
+					where user_id = '".mysql_real_escape_string($request->token->user_id)."'
+				");
+				$user['ignored'] = array();
+				while (list($cache_id) = mysql_fetch_row($rs))
+					$user['ignored'][$cache_id] = true;
+				
+				# Found caches.
+				
+				$rs = Db::query("
+					select distinct cache_id
+					from cache_logs
+					where
+						user_id = '".mysql_real_escape_string($request->token->user_id)."'
+						and type = 1
+						and ".((Settings::get('OC_BRANCH') == 'oc.pl') ? "deleted = 0" : "true")."
+				");
+				$user['found'] = array();
+				while (list($cache_id) = mysql_fetch_row($rs))
+					$user['found'][$cache_id] = true;
+
+				# Own caches.
+				
+				$rs = Db::query("
+					select distinct cache_id
+					from caches
+					where user_id = '".mysql_real_escape_string($request->token->user_id)."'
+				");
+				$user['own'] = array();
+				while (list($cache_id) = mysql_fetch_row($rs))
+					$user['own'][$cache_id] = true;
+				
+				Cache::set($cache_key, $user, 30);
+			}
+
+			# Add extra flags to geocaches.
+			
+			foreach ($rows as &$row_ref)
+			{
+				# Add the "found" flag (to indicate that this cache needs
+				# to be drawn as found) and the "own" flag (to indicate that
+				# the current user is the owner).
+
+				if (isset($user['found'][$row_ref[0]]))
+					$row_ref[6] |= TileTree::$FLAG_FOUND;  # $row[6] is "flags"
+				if (isset($user['own'][$row_ref[0]]))
+					$row_ref[6] |= TileTree::$FLAG_OWN;  # $row[6] is "flags"
+			}
+		}
+		
+		# Compute the image hash/fingerprint. This will be used both for ETags
 		# and internal cache ($cache_key).
 		
 		$tile = new DefaultTileRenderer($zoom, $rows);

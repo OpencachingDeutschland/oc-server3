@@ -7,7 +7,7 @@
 		keep your database in sync with ours.</p>
 		
 		<p>For some applications it might be desireable to have a quick access to the entire
-		OpenCaching database (instead of quering for specific portions of it). You may use
+		OpenCaching database (instead of querying for specific portions of it). You may use
 		OKAPI's <b>replicate</b> module to achive this effect. The <b>changelog</b> method
 		is the primary replication service which you will use. However, to correctly set up
 		your first database copy, you will need to use the <b>fulldump</b> method.</p>

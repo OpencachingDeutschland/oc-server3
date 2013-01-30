@@ -5099,7 +5099,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('777', 'DE', 'Urheberrechtsverletzung', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('778', 'DE', 'Cache ist weg', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('779', 'DE', 'Sonstiges', '2010-08-28 11:48:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('780', 'DE', 'Der Bericht ist bereits einem anderen Admin zugeordnet!', '2010-08-28 11:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('780', 'DE', 'Der Bericht ist bereits einem anderen Admin zugeordnet! Du kannst ihn erst übernehmen, wenn er mindestens zwei Wochen alt ist.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('781', 'DE', 'Der Bericht wurde dir bereits zugeordnet!', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('782', 'DE', 'Du kannst diesen Bericht nicht bearbeiten, weil er bereits von einem anderen Admin bearbeitet wird.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('783', 'DE', 'Um einen Bericht zu bearbeiten, musst du ihn dir zuordnen!', '2010-08-28 11:48:07');
@@ -6484,7 +6484,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('777', 'EN', 'Copyright violation', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('778', 'EN', 'Cache is gone', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('779', 'EN', 'Other reason', '2010-08-28 11:48:08');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('780', 'EN', 'This report is already assigned to another admin!', '2010-08-28 11:48:08');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('780', 'EN', 'This report is already assigned to another admin! It must be at least two weeks old before you can assume it.', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('781', 'EN', 'This report is already assigned to you! ', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('782', 'EN', 'You cannot work on this report, it is already assigned to another admin!', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('783', 'EN', 'To work on a report you have to assign it to you!', '2010-08-28 11:48:08');

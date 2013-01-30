@@ -26,8 +26,10 @@
 	$cacheid = isset($_REQUEST['cacheid']) ? $_REQUEST['cacheid']+0 : 0;
 	$ownerid = isset($_REQUEST['ownerid']) ? $_REQUEST['ownerid']+0 : 0;
 	$adminid = sql_value("SELECT `adminid` FROM `cache_reports` WHERE `id`=&1", 0, $rid);
+	$age = sql_value("SELECT DATEDIFF(NOW(),`lastmodified`) FROM `cache_reports` WHERE `id`=&1", 0, $rid);
 
-	if (isset($_REQUEST['assign']) && $rid > 0)  //  && $adminid == 0)
+	if (isset($_REQUEST['assign']) && $rid > 0 && 
+			($adminid == 0 || ($adminid != $login->userid && $age >= 14)))  
 	{
 		sql("UPDATE `cache_reports` SET `status`=2, `adminid`=&2 WHERE `id`=&1", $rid, $login->userid);
 		$tpl->redirect('adminreports.php?id='.$rid);

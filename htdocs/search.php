@@ -1261,6 +1261,7 @@ function outputSearchForm($options)
 		tpl_set_var('cachetype' . $n . 'checked', ((strpos(';' . $options['cachetype'] . ';', ';' . $n . ';') !== false) || ($options['cachetype']=='')) ? ' checked="checked"' : '');
 
 	$nCount = sqlValue("SELECT COUNT(*) FROM `cache_size`", 0);
+	tpl_set_var('cachesizes', $nCount);
 	for ($n = 1; $n <= $nCount; $n++)
 		tpl_set_var('cachesize' . $n . 'checked', ((strpos(';' . $options['cachesize'] . ';', ';' . $n . ';') !== false) || ($options['cachesize']=='')) ? ' checked="checked"' : '');
 

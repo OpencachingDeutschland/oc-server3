@@ -22,6 +22,6 @@
 		and each value will be a dictionary of fields you have selected.</p>
 		<p>Value of <b>null</b> means that the given UUID haven't been found.
 		(This behavior is different than in the services/logs/entry method, which
-		responds with a HTTP 400 error in such case.)</p>
+		responds with an HTTP 400 error in such case.)</p>
 	</returns>
 </xml>

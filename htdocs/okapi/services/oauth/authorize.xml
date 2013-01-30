@@ -46,12 +46,12 @@
 		OpenCaching installation.</p>
 	</opt>
 	<returns>
-		<p>Technically, a HTTP 302 Redirect - it will direct user's browser to the OKAPI apps
+		<p>Technically, an HTTP 302 Redirect - it will direct user's browser to the OKAPI apps
 		authorization page.</p>
 		<p>Whether with callback_url or with a manual user entry - you will get
 		your <b>oauth_verifier</b>, which allows you to continue the 3-legged
 		authentication dance.</p>
-		<p>If you used <b>callback_url</b>, you should wait for a HTTP GET request,
+		<p>If you used <b>callback_url</b>, you should wait for an HTTP GET request,
 		with one additional GET parameter appended:</p>
 		<ul>
 			<li><b>oauth_token</b> - the Request Token that has been just authorized,</li>

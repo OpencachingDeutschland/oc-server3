@@ -4,20 +4,17 @@
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 		<title>OKAPI Examples</title>
 		<link rel="stylesheet" href="<?= $vars['okapi_base_url'] ?>static/common.css?<?= $vars['okapi_rev'] ?>">
-		<link type="text/css" rel="stylesheet" href="<?= $vars['okapi_base_url'] ?>static/syntax_highlighter/SyntaxHighlighter.css"></link>
 		<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js'></script>
 		<script>
 			var okapi_base_url = "<?= $vars['okapi_base_url'] ?>";
-		</script>
-		<script src='<?= $vars['okapi_base_url'] ?>static/common.js?<?= $vars['okapi_rev'] ?>'></script>
-		<script language="javascript" src="<?= $vars['okapi_base_url'] ?>static/syntax_highlighter/shCore.js"></script>
-		<script language="javascript" src="<?= $vars['okapi_base_url'] ?>static/syntax_highlighter/shBrushPhp.js"></script>
-		<script language="javascript">
 			$(function() {
-				dp.SyntaxHighlighter.ClipboardSwf = '<?= $vars['okapi_base_url'] ?>static/syntax_highlighter/clipboard.swf';
-				dp.SyntaxHighlighter.HighlightAll('code');
+				$('h2').each(function() {
+					$('#toc').append($("<div></div>").append($("<a></a>")
+						.text($(this).text()).attr("href", "#" + $(this).attr('id'))));
+				});
 			});
 		</script>
+		<script src='<?= $vars['okapi_base_url'] ?>static/common.js?<?= $vars['okapi_rev'] ?>'></script>
 	</head>
 	<body class='api'>
 		<div class='okd_mid'>
@@ -29,11 +26,20 @@
 					</td>
 					<td class='article'>
 
-<h1>Examples and libraries</h1>
+<h1>Examples, libraries and tools</h1>
 
-<p>Here you will find basic examples of OKAPI usage with popular programming languages.</p>
+<div id='toc'></div>
 
-<h2>Are there any client libraries?</h2>
+<h2 id='tools'>Tools</h2>
+
+If you're just getting to know OKAPI, you might want to check out
+<a href='https://github.com/wrygiel/okapi-browser'>OKAPI Browser</a>
+(<a href='https://raw.github.com/wrygiel/okapi-browser/master/extras/screenshot.png'>screenshot</a>),
+a basic OAuth Console for OKAPI methods. It is an open-source project. You can
+<a href='https://github.com/wrygiel/okapi-browser'>fork it</a> on GitHub or simply
+<a href='http://usosphp.mimuw.edu.pl/~rygielski/okapi-browser/'>install it here</a>.
+
+<h2 id='libraries'>Are there any client libraries?</h2>
 
 <p>OKAPI <b>does not</b> require you to use any special libraries, usually you will want to
 use OKAPI "as is", via basic HTTP requests and responses.</p>
@@ -53,65 +59,23 @@ protocol might be the safest choice.</p>
 
 <div class='issue-comments' issue_id='96'></div>
 
-<h2>PHP Example</h2>
+<h2 id='php1'>PHP Example 1 - simple query</h2>
 
-<p><b>Example 1.</b> This will print the number of users in the <?= $vars['site_name'] ?> installation:
-
-<pre name="code" class="php:nogutter:nocontrols">
-&lt;?
-
-$json = file_get_contents("<?= $vars['okapi_base_url'] ?>services/apisrv/stats");
-$data = json_decode($json);
-print "Number of <?= $vars['site_name'] ?> users: ".$data->user_count;
-
-?>
-</pre>
-
-<p><b>Example 2.</b> This will print the codes of some nearest unfound caches:</p>
-
-<pre name="code" class="php:nogutter:nocontrols">
-&lt;?
-
-/* Enter your OKAPI's URL here. */
-$okapi_base_url = "http://opencaching.pl/okapi/";
-
-/* Enter your Consumer Key here. */
-$consumer_key = "YOUR_KEY_HERE";
-
-/* Username. Caches found by the given user will be excluded from the results. */
-$username = "USERNAME_HERE";
-
-/* Your location. */
-$lat = 54.3;
-$lon = 22.3;
-
-/* 1. Get the UUID of the user. */
-$json = @file_get_contents($okapi_base_url."services/users/by_username".
-	"?username=".$username."&amp;fields=uuid&amp;consumer_key=".$consumer_key);
-if (!$json)
-	die("ERROR! Check your consumer_key and/or username!\n");
-$user_uuid = json_decode($json)->uuid;
-print "Your UUID: ".$user_uuid."\n";
-	
-/* 2. Search for caches. */
-$json = @file_get_contents($okapi_base_url."services/caches/search/nearest".
-	"?center=".$lat."|".$lon."&amp;not_found_by=".$user_uuid."&amp;limit=5".
-	"&amp;consumer_key=".$consumer_key);
-if (!$json)
-	die("ERROR!");
-$cache_codes = json_decode($json)->results;
-
-/* Display them. */
-print "Five nearest unfound caches: ".implode(", ", $cache_codes)."\n";
-
-?>
-</pre>
-
-<p>Please note that the above examples use very simple error checking routines.
+<p>Please note that the examples below use very simple error checking routines.
 If you want to be "professional", you should catch HTTP 400 Responses, read their
 bodies (OKAPI error messages), and deal with them more gracefully.</p>
 
-<h2>JavaScript Example</h2>
+<p>This will print the number of users in the <?= $vars['site_name'] ?> installation:
+
+<script src="https://gist.github.com/4231796.js?file=users.php"></script>
+
+<h2 id='php2'>PHP Example 2 - search for nearest geocaches</h2>
+
+<p>This will print the codes of some nearest unfound caches:</p>
+
+<script src="https://gist.github.com/4231824.js?file=nearest_unfound.php"></script>
+
+<h2 id='js1'>JavaScript Example</h2>
 
 <p>It is possible to access OKAPI directly from user's browser, without the
 need for server backend. OKAPI allows <a href='http://en.wikipedia.org/wiki/XMLHttpRequest#Cross-domain_requests'>Cross-domain
@@ -129,7 +93,17 @@ There are some limitations of both these techniques though.</p>
 
 <p><a href='<?= $vars['okapi_base_url'] ?>static/examples/javascript_nearest.html' style='font-size: 130%; font-weight: bold'>Run this example</a></p>
 
-<h2>Comments</h2>
+<h2 id='cs1'>C# Example</h2>
+
+<p><a href='https://github.com/wrygiel/okapi-browser'>OKAPI Browser</a>
+(already mentioned in the Tools section) is an open-source project. Written in C#.NET, uses
+the <a href='<?= $vars['okapi_base_url'] ?>services/apisrv/installations.html'>apisrv</a>
+and <a href='<?= $vars['okapi_base_url'] ?>services/apiref/method_index.html'>apiref</a>
+modules to dynamically retrieve the current list of OKAPI installations and methods.
+<a href='https://github.com/wrygiel/okapi-browser'>Get the source</a> or
+<a href='http://usosphp.mimuw.edu.pl/~rygielski/okapi-browser/'>try it</a> first.</p>
+
+<h2 id='comments'>Comments</h2>
 
 <div class='issue-comments' issue_id='36'></div>
 

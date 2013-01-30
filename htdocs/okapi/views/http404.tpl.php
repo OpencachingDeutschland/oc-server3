@@ -18,7 +18,7 @@
 							Page Not Found
 							<div class='subh1'>:: 404 Error</div>
 						</h1>
-						<p>The page you requested does not exist. Try one of the page in the side menu!</p>
+						<p>The page you requested does not exist. Try one of the pages in the side menu!</p>
 					</td>
 				</tr></table>
 			</div>

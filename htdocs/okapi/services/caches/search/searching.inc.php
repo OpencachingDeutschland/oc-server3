@@ -232,10 +232,10 @@ class SearchAssistant
 							if (($min == 1) && ($max == 5) && $allow_null) {
 								/* no extra condition necessary */
 							} else {
-								$divisors = array(-3.0, -1.0, 0.1, 1.4, 2.2, 3.0);
+								$divisors = array(-999, -1.0, 0.1, 1.4, 2.2, 999);
 								$min = $divisors[$min - 1];
 								$max = $divisors[$max];
-								$where_conds[] = "(($X_SCORE between $min and $max) and ($X_VOTES >= 3))".
+								$where_conds[] = "($X_SCORE >= $min and $X_SCORE < $max and $X_VOTES >= 3)".
 									($allow_null ? " or ($X_VOTES < 3)" : "");
 							}
 						}
@@ -357,6 +357,27 @@ class SearchAssistant
 		}
 		
 		#
+		# watched_only
+		#
+		
+		if ($tmp = $request->get_parameter('watched_only'))
+		{
+			if ($request->token == null)
+				throw new InvalidParam('watched_only', "Might be used only for requests signed with an Access Token.");
+			if (!in_array($tmp, array('true', 'false')))
+				throw new InvalidParam('watched_only', "'$tmp'");
+			if ($tmp == 'true')
+			{
+				$watched_cache_ids = Db::select_column("
+					select cache_id
+					from cache_watches
+					where user_id = '".mysql_real_escape_string($request->token->user_id)."'
+				");
+				$where_conds[] = "cache_id in ('".implode("','", array_map('mysql_real_escape_string', $watched_cache_ids))."')";
+			}
+		}
+
+		#
 		# exclude_ignored
 		#
 		
@@ -403,6 +424,59 @@ class SearchAssistant
 				throw new InvalidParam('name', "Maximum length of 'name' parameter is 100 characters");
 			$tmp = str_replace("*", "%", str_replace("%", "%%", $tmp));	
 			$where_conds[] = "caches.name LIKE '".mysql_real_escape_string($tmp)."'";
+		}
+		
+		#
+		# with_trackables_only
+		#
+		
+		if ($tmp = $request->get_parameter('with_trackables_only'))
+		{
+			if (!in_array($tmp, array('true', 'false'), 1))
+				throw new InvalidParam('with_trackables_only', "'$tmp'");
+			if ($tmp == 'true')
+			{
+				$where_conds[] = "
+					caches.wp_oc in (
+						select distinct wp
+						from gk_item_waypoint
+					)
+				";
+			}
+		}
+		
+		#
+		# ftf_hunter
+		#
+		
+		if ($tmp = $request->get_parameter('ftf_hunter'))
+		{
+			if (!in_array($tmp, array('true', 'false'), 1))
+				throw new InvalidParam('not_yet_found_only', "'$tmp'");
+			if ($tmp == 'true')
+			{
+				$where_conds[] = "caches.founds = 0";
+			}
+		}
+		
+		#
+		# set_and
+		#
+		
+		if ($tmp = $request->get_parameter('set_and'))
+		{
+			# Check if the set exists.
+			
+			$exists = Db::select_value("
+				select 1
+				from okapi_search_sets
+				where id = '".mysql_real_escape_string($tmp)."'
+			");
+			if (!$exists)
+				throw new InvalidParam('set_and', "Couldn't find a set by given ID.");
+			$extra_tables[] = "okapi_search_results osr_and";
+			$where_conds[] = "osr_and.cache_id = caches.cache_id";
+			$where_conds[] = "osr_and.set_id = '".mysql_real_escape_string($tmp)."'";
 		}
 		
 		#
@@ -463,6 +537,14 @@ class SearchAssistant
 				$order_clauses[] = "($cl) $dir";
 			}
 		}
+		
+		# To avoid join errors, put each of the $where_conds in extra paranthesis.
+		
+		$tmp = array();
+		foreach($where_conds as $cond)
+			$tmp[] = "(".$cond.")";
+		$where_conds = $tmp;
+		unset($tmp);
 		
 		$ret_array = array(
 			'where_conds' => $where_conds,
@@ -537,7 +619,10 @@ class SearchAssistant
 			from cache_logs
 			where
 				user_id = '".mysql_real_escape_string($internal_user_id)."'
-				and type = 1
+				and type in (
+					'".mysql_real_escape_string(Okapi::logtypename2id("Found it"))."',
+					'".mysql_real_escape_string(Okapi::logtypename2id("Attended"))."'
+				)
 				and ".((Settings::get('OC_BRANCH') == 'oc.pl') ? "deleted = 0" : "true")."
 		");
 	}

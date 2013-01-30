@@ -49,6 +49,7 @@ class CronJobController
 				new LocaleChecker(),
 				new FulldumpGeneratorJob(),
 				new TileTreeUpdater(),
+				new SearchSetsCleanerJob(),
 			);
 			foreach ($cache as $cronjob)
 				if (!in_array($cronjob->get_type(), array('pre-request', 'cron-5')))
@@ -261,6 +262,24 @@ class OAuthCleanupCronJob extends PrerequestCronJob
 	}
 }
 
+/** Clean up the saved search tables, every 10 minutes. */
+class SearchSetsCleanerJob extends Cron5Job
+{
+	public function get_period() { return 600; }
+	public function execute()
+	{
+		Db::execute("
+			delete oss, osr
+			from
+				okapi_search_sets oss
+				left join okapi_search_results osr
+					on oss.id = osr.set_id
+			where
+				date_add(oss.expires, interval 60 second) < now()
+		");
+	}
+}
+
 /** Clean up the cache, once per hour. */
 class CacheCleanupCronJob extends Cron5Job
 {
@@ -413,7 +432,7 @@ class CheckCronTab2 extends PrerequestCronJob
 			# There was a ping during the last hour. Everything is okay.
 			# Reset the counter and return.
 			
-			Cache::set('crontab_check_counter', 3, 86400);
+			Cache::set('crontab_check_counter', 5, 86400);
 			return;
 		}
 		
@@ -421,7 +440,7 @@ class CheckCronTab2 extends PrerequestCronJob
 		
 		$counter = Cache::get('crontab_check_counter');
 		if ($counter === null)
-			$counter = 3;
+			$counter = 5;
 		$counter--;
 		if ($counter > 0)
 		{
@@ -522,8 +541,11 @@ class TileTreeUpdater extends Cron5Job
 						# not working for more than 10 days. Or, just after OKAPI
 						# is installed (and this is the first time this cronjob
 						# if being run).
-						\okapi\services\caches\map\ReplicateListener::reset();
+						
+						$mail_admins = ($tiletree_revision > 0);
+						\okapi\services\caches\map\ReplicateListener::reset($mail_admins);
 						Okapi::set_var('clog_followup_revision', $current_clog_revision);
+						break;
 					}
 				}
 			} else {

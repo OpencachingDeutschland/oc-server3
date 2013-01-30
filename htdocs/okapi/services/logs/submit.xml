@@ -10,7 +10,8 @@
 	</req>
 	<req name='logtype'>
 		<p>Type of an entry. This should be one of: <i>Found it</i>, <i>Didn't find it</i>
-		or <i>Comment</i>.</p>
+		or <i>Comment</i>. Currently this method does not support "Will attend" nor "Attended"
+		log types which are used for Event Caches (we are planning to add this).</p>
 	</req>
 	<opt name='comment'>
 		<p>Text to be submitted with the log entry. Plain-text (no HTML).</p>

@@ -30,7 +30,8 @@ class WebService
 		'rating', 'rating_votes', 'recommendations', 'req_passwd', 'description',
 		'descriptions', 'hint', 'hints', 'images', 'attrnames', 'latest_logs',
 		'my_notes', 'trackables_count', 'trackables', 'alt_wpts', 'last_found',
-		'last_modified', 'date_created', 'date_hidden', 'internal_id');
+		'last_modified', 'date_created', 'date_hidden', 'internal_id', 'is_watched',
+		'is_ignored', 'willattends');
 	
 	public static function call(OkapiRequest $request)
 	{
@@ -202,8 +203,26 @@ class WebService
 						break;
 					case 'is_found': /* handled separately */ break;
 					case 'is_not_found': /* handled separately */ break;
+					case 'is_watched': /* handled separately */ break;
+					case 'is_ignored': /* handled separately */ break;
 					case 'founds': $entry['founds'] = $row['founds'] + 0; break;
-					case 'notfounds': $entry['notfounds'] = $row['notfounds'] + 0; break;
+					case 'notfounds':
+						if ($row['type'] != 6) {  # non-event
+							$entry['notfounds'] = $row['notfounds'] + 0;
+						} else {  # event
+							$entry['notfounds'] = 0;
+						}
+						break;
+					case 'willattends':
+						# OCPL stats count "Will attend" log entries as "notfounds"
+						# (just another pecularity regarding "event caches").
+						# I am not sure about OCDE branch though...
+						if ($row['type'] == 6) {  # event
+							$entry['willattends'] = $row['notfounds'] + 0;
+						} else {  # non-event
+							$entry['willattends'] = 0;
+						}
+						break;
 					case 'size':
 						# Deprecated. Leave it for backward-compatibility. See issue 155.
 						switch (Okapi::cache_sizeid_to_size2($row['size']))
@@ -293,8 +312,12 @@ class WebService
 					cache_logs cl
 				where
 					c.cache_id = cl.cache_id
-					and cl.type = '".mysql_real_escape_string(Okapi::logtypename2id("Found it"))."'
+					and cl.type in (
+						'".mysql_real_escape_string(Okapi::logtypename2id("Found it"))."',
+						'".mysql_real_escape_string(Okapi::logtypename2id("Attended"))."'
+					)
 					and cl.user_id = '".mysql_real_escape_string($user_id)."'
+					".((Settings::get('OC_BRANCH') == 'oc.pl') ? "and cl.deleted = 0" : "")."
 			");
 			$tmp2 = array();
 			foreach ($tmp as $cache_code)
@@ -318,6 +341,7 @@ class WebService
 					c.cache_id = cl.cache_id
 					and cl.type = '".mysql_real_escape_string(Okapi::logtypename2id("Didn't find it"))."'
 					and cl.user_id = '".mysql_real_escape_string($user_id)."'
+					".((Settings::get('OC_BRANCH') == 'oc.pl') ? "and cl.deleted = 0" : "")."
 			");
 			$tmp2 = array();
 			foreach ($tmp as $cache_code)
@@ -326,6 +350,50 @@ class WebService
 				$result_ref['is_not_found'] = isset($tmp2[$cache_code]);
 		}
 		
+		# is_watched
+		
+		if (in_array('is_watched', $fields))
+		{
+			if ($request->token == null)
+				throw new BadRequest("Level 3 Authentication is required to access 'is_watched' field.");
+			$tmp = Db::select_column("
+				select c.wp_oc
+				from
+					caches c,
+					cache_watches cw
+				where
+					c.cache_id = cw.cache_id
+					and cw.user_id = '".mysql_real_escape_string($request->token->user_id)."'
+			");
+			$tmp2 = array();
+			foreach ($tmp as $cache_code)
+				$tmp2[$cache_code] = true;
+			foreach ($results as $cache_code => &$result_ref)
+				$result_ref['is_watched'] = isset($tmp2[$cache_code]);
+		}
+
+		# is_ignored
+		
+		if (in_array('is_ignored', $fields))
+		{
+			if ($request->token == null)
+				throw new BadRequest("Level 3 Authentication is required to access 'is_ignored' field.");
+			$tmp = Db::select_column("
+				select c.wp_oc
+				from
+					caches c,
+					cache_ignore ci
+				where
+					c.cache_id = ci.cache_id
+					and ci.user_id = '".mysql_real_escape_string($request->token->user_id)."'
+			");
+			$tmp2 = array();
+			foreach ($tmp as $cache_code)
+				$tmp2[$cache_code] = true;
+			foreach ($results as $cache_code => &$result_ref)
+				$result_ref['is_ignored'] = isset($tmp2[$cache_code]);
+		}
+
 		# Descriptions and hints.
 		
 		if (in_array('description', $fields) || in_array('descriptions', $fields)

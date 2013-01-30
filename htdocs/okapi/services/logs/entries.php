@@ -22,7 +22,10 @@ class WebService
 		);
 	}
 	
-	private static $valid_field_names = array('uuid', 'cache_code', 'date', 'user', 'type', 'comment');
+	private static $valid_field_names = array(
+		'uuid', 'cache_code', 'date', 'user', 'type', 'was_recommended', 'comment',
+		'internal_id',
+	);
 
 	public static function call(OkapiRequest $request)
 	{
@@ -35,7 +38,7 @@ class WebService
 		else
 			$log_uuids = explode("|", $log_uuids);
 		
-		if (count($log_uuids) > 500)
+		if ((count($log_uuids) > 500) && (!$request->skip_limits))
 			throw new InvalidParam('log_uuids', "Maximum allowed number of referenced ".
 				"log entries is 500. You provided ".count($log_uuids)." UUIDs.");
 		if (count($log_uuids) != count(array_unique($log_uuids)))
@@ -48,9 +51,18 @@ class WebService
 				throw new InvalidParam('fields', "'$field' is not a valid field code.");
 		
 		$rs = Db::query("
-			select cl.id, c.wp_oc as cache_code, cl.uuid, cl.type, unix_timestamp(cl.date) as date, cl.text,
-				u.uuid as user_uuid, u.username, u.user_id
-			from cache_logs cl, user u, caches c
+			select
+				cl.id, c.wp_oc as cache_code, cl.uuid, cl.type,
+				unix_timestamp(cl.date) as date, cl.text,
+				u.uuid as user_uuid, u.username, u.user_id,
+				if(cr.user_id is null, 0, 1) as was_recommended
+			from
+				(cache_logs cl,
+				user u,
+				caches c)
+				left join cache_rating cr
+					on cr.user_id = u.user_id
+					and cr.cache_id = c.cache_id
 			where
 				cl.uuid in ('".implode("','", array_map('mysql_real_escape_string', $log_uuids))."')
 				and ".((Settings::get('OC_BRANCH') == 'oc.pl') ? "cl.deleted = 0" : "true")."
@@ -71,7 +83,9 @@ class WebService
 					'profile_url' => Settings::get('SITE_URL')."viewprofile.php?userid=".$row['user_id'],
 				),
 				'type' => Okapi::logtypeid2name($row['type']),
-				'comment' => $row['text']
+				'was_recommended' => $row['was_recommended'] ? true : false,
+				'comment' => $row['text'],
+				'internal_id' => $row['id'],
 			);
 		}
 		mysql_free_result($rs);

@@ -46,9 +46,10 @@ class TileTree
 				and y = '".mysql_real_escape_string($y)."'
 		");
 	}
-
+	
 	/**
-	 * Return MySQL's result set iterator over all caches matched by your query.
+	 * Return MySQL's result set iterator over all caches which are present
+	 * in the given result set AND in the given tile.
 	 *
 	 * Each row is an array of the following format:
 	 * list(cache_id, $pixel_x, $pixel_y, status, type, rating, flags, count).
@@ -57,10 +58,8 @@ class TileTree
 	 * Count is the number of other caches "eclipsed" by this geocache (such
 	 * eclipsed geocaches are not included in the result).
 	 */
-	public static function query_fast($zoom, $x, $y, $filter_conds)
+	public static function query_fast($zoom, $x, $y, $set_id)
 	{
-		$time_started = microtime(true);
-		
 		# First, we check if the cache-set for this tile was already computed
 		# (and if it was, was it empty).
 		
@@ -68,16 +67,9 @@ class TileTree
 		if ($status === null)  # Not yet computed.
 		{
 			# Note, that computing the tile does not involve taking any
-			# filtering parameters.
+			# search parameters.
 			
 			$status = self::compute_tile($zoom, $x, $y);
-			OkapiServiceRunner::save_stats_extra("tiletree/query_fast/preparetile-miss",
-				null, microtime(true) - $time_started);
-		}
-		else
-		{
-			OkapiServiceRunner::save_stats_extra("tiletree/query_fast/preparetile-hit",
-				null, microtime(true) - $time_started);
 		}
 		
 		if ($status === 1)  # Computed and empty.
@@ -87,26 +79,25 @@ class TileTree
 		}
 		
 		# If we got here, then the tile is computed and not empty (status 2).
-		# Since all search parameters are aggregated, we just need a simple
-		# SQL query to get the filtered result.
 		
 		$tile_upper_x = $x << 8;
 		$tile_leftmost_y = $y << 8;
 		
-		if (count($filter_conds) == 0)
-			$filter_conds[] = "true";
 		return Db::query("
 			select
-				cache_id,
-				cast(z21x >> (21 - $zoom) as signed) - $tile_upper_x as px,
-				cast(z21y >> (21 - $zoom) as signed) - $tile_leftmost_y as py,
-				status, type, rating, flags, count(*)
-			from okapi_tile_caches
+				otc.cache_id,
+				cast(otc.z21x >> (21 - $zoom) as signed) - $tile_upper_x as px,
+				cast(otc.z21y >> (21 - $zoom) as signed) - $tile_leftmost_y as py,
+				otc.status, otc.type, otc.rating, otc.flags, count(*)
+			from
+				okapi_tile_caches otc,
+				okapi_search_results osr
 			where
 				z = '".mysql_real_escape_string($zoom)."'
 				and x = '".mysql_real_escape_string($x)."'
 				and y = '".mysql_real_escape_string($y)."'
-				and (".implode(") and (", $filter_conds).")
+				and otc.cache_id = osr.cache_id
+				and osr.set_id = '".mysql_real_escape_string($set_id)."'
 			group by
 				z21x >> (3 + (21 - $zoom)),
 				z21y >> (3 + (21 - $zoom))
@@ -176,9 +167,6 @@ class TileTree
 				");
 			}
 			$status = 2;
-			
-			OkapiServiceRunner::save_stats_extra("tiletree/compute_tile/rebuild-0",
-				null, microtime(true) - $time_started);
 		}
 		else
 		{
@@ -193,13 +181,6 @@ class TileTree
 			{
 				$time_started = microtime(true);
 				$status = self::compute_tile($parent_zoom, $parent_x, $parent_y);
-				OkapiServiceRunner::save_stats_extra("tiletree/compute_tile/build",
-					null, microtime(true) - $time_started);
-			}
-			else
-			{
-				OkapiServiceRunner::save_stats_extra("tiletree/compute_tile/hit",
-					null, microtime(true) - $time_started);
 			}
 			
 			if ($status === 1)  # Computed and empty.

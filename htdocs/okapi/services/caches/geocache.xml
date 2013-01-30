@@ -9,7 +9,7 @@
 		<p>Pipe-separated list of ISO 639-1 language codes. This indicates the
 		order of preference in which language will be chosen for fields like
 		<b>name</b> and <b>description</b>.</p>
-		<p>Please note, that you may also access caches descriptions in all
+		<p>Please note, that you may also access caches' descriptions in all
 		available languages. If you want to do this, you should use fields
 		<b>names</b>, <b>descriptions</b> (etc.) instead of <b>name</b> and
 		<b>description</b> (etc.).</p>
@@ -34,9 +34,15 @@
 					<li><b>Traditional</b>,</li>
 					<li><b>Multi</b>,</li>
 					<li><b>Quiz</b>,</li>
-					<li><b>Virtual</b>.</li>
+					<li><b>Virtual</b>,</li>
+					<li><b>Event</b>,</li>
 					<li><i>(any other value is valid too)</i></li>
 				</ul>
+				<p><b>Event</b> is a peculiar type of geocache which is NOT a geocache
+				at all, but it <b>is</b> stored as a geocache in OC database (this design
+				decision is old as the OC network itself!). Just keep in mind, that
+				in case of Event Caches, some fields may have a little different meaning
+				than you would tell by their name.</p>
 			</li>
 			<li>
 				<p><b>status</b> - cache status. Valid cache status codes currently include:</p>
@@ -58,37 +64,62 @@
 			<li>
 				<p><b>distance</b> - float, the distance to a cache, in meters.
 				This requires <b>my_location</b> parameter to be provided.</p>
-				<p>Please note, that sometimes it is faster to compute this yourself, on client-side, instead of quering OKAPI.</p>
+				<p>Please note, that sometimes it is faster to compute this yourself, on client-side, instead of querying OKAPI.</p>
 			</li>
 			<li>
 				<p><b>bearing</b> - float, the absolute bearing to the cache, measured in degrees from north,
 				<b>or null</b> if it cannot be calculated (i.e. when you are exactly at the target's location).
 				This requires <b>my_location</b> parameter to be provided.</p>
-				<p>Please note, that sometimes it is faster to compute this yourself, on client-side, instead of quering OKAPI.</p>
+				<p>Please note, that sometimes it is faster to compute this yourself, on client-side, instead of querying OKAPI.</p>
 			</li>
 			<li>
 				<p><b>bearing2</b> - string, the absolute bearing to the cache, represented as a typical direction
 				string of length of 1 or 2 characters (ex. "N", "NE", "E", "SE", etc.), or "n/a" if it cannot be calculated.
 				This requires <b>my_location</b> parameter to be provided.</p>
-				<p>Please note, that sometimes it is faster to compute this yourself, on client-side, instead of quering OKAPI.</p>
+				<p>Please note, that sometimes it is faster to compute this yourself, on client-side, instead of querying OKAPI.</p>
 			</li>
 			<li>
 				<p><b>bearing3</b> - string, the absolute bearing to the cache, represented as a typical directon
 				string of length of 1 or 2 or 3 characters (ex. "N", "NNE", "NE", "ENE", etc.), or "n/a" if it cannot be calculated.
 				This requires <b>my_location</b> parameter to be provided.</p>
-				<p>Please note, that sometimes it is faster to compute this yourself, on client-side, instead of quering OKAPI.</p>
+				<p>Please note, that sometimes it is faster to compute this yourself, on client-side, instead of querying OKAPI.</p>
 			</li>
 			<li>
-				<p><b>is_found</b> - boolean, true if user already found this cache. See also <b>found_status</b> parameter
-				of the services/caches/search/all method.</p>
+				<p><b>is_found</b> - boolean, true if the user already found this cache.
+				See also <b>found_status</b> parameter of the services/caches/search/all
+				method.</p>
+				<p>This field requires you to use the <b>user_uuid</b> parameter
+				(or Level 3 Authentication). Please note, that this will also return <b>true</b>
+				for attended Event Caches.</p>
+			</li>
+			<li>
+				<p><b>is_not_found</b> - boolean, true if the user has submitted "Didn't find it" log entry for this cache.</p>
 				<p>This field requires you to use the <b>user_uuid</b> parameter (or Level 3 Authentication).</p>
 			</li>
 			<li>
-				<p><b>is_not_found</b> - boolean, true if user has submitted "Didn't find it" log entry for this cache.</p>
-				<p>This field requires you to use the <b>user_uuid</b> parameter (or Level 3 Authentication).</p>
+				<p><b>is_watched</b> - boolean, true if the user is watching this cache. You may consider highlighting
+				such geocaches in some fashion, as the users may use this functionality to temporarily mark geocaches
+				of particular interest (i.e. geocaches they plan to find today).</p>
+				<p>This is private data. You will need Level 3 Authentication to access this field.</p>
 			</li>
-			<li><b>founds</b> - number of times the geocache was successfully found,</li>
-			<li><b>notfounds</b> - number of times the geocache was not found,</li>
+			<li>
+				<p><b>is_ignored</b> - boolean, true if the user is ignoring this cache. (See also <b>exclude_ignored</b>
+				parameter of all search methods.)</p>
+				<p>This is private data. You will need Level 3 Authentication to access this field.</p>
+			</li>
+			<li>
+				<p><b>founds</b> - number of times the geocache was successfully found
+				(or attended, in case of Event Caches),</p>
+			</li>
+			<li>
+				<p><b>notfounds</b> - number of times the geocache was not found
+				(in case of Event Caches this will always be zero),</p>
+			</li>
+			<li>
+				<p><b>willattends</b> - in case of Event Caches, this is the number of
+				"Will attend" log entries. In case of any other cache type, it will
+				be <b>null</b></p>
+			</li>
 			<li class='deprecated'>
 				<b>size</b> - deprecated
 				(<a href='http://code.google.com/p/opencaching-api/issues/detail?id=155'>why?</a>),
@@ -138,8 +169,8 @@
 				following structure:</p>
 				<ul>
 					<li><b>uuid</b> - UUID of the image,</li>
-					<li><b>url</b> - an URL of the image,</li>
-					<li><b>thumb_url</b> - an URL of a small (thumb) version of the image
+					<li><b>url</b> - URL of the image,</li>
+					<li><b>thumb_url</b> - URL of a small (thumb) version of the image
 						<b>or null</b> when no thumb is available (e.g. there are no thumbs
 						for spoiler images),</li>
 					<li><b>caption</b> - plain-text string, caption of the image,</li>
@@ -188,8 +219,11 @@
 					<li><b>name</b> - plain-text "codename" for the waypoint (not unique),</li>
 					<li><b>location</b> - location of the waypoint in the "lat|lon" format
 						(<i>lat</i> and <i>lon</i> are in full degrees with a dot as a decimal point),</li>
-					<li><b>sym</b> - string, one of globally-recognized waypoint symbol
-						names (such as "Flag, Green" or "Parking Area"),</li>
+					<li>
+						<b>sym</b> - string, one of commonly recognized waypoint symbol
+						names, originally introduced by Garmin in their devices and GPX
+						files (e.g. "Flag, Green" or "Parking Area"),
+					</li>
 					<li><b>description</b> - plain-text longer description of the waypoint.</li>
 				</ul>
 			</li>
@@ -244,6 +278,6 @@
 		query, the result might look something link this:</p>
 		<pre>{"type": "Traditional"}</pre>
 		<p>If given cache code does not exist, the method will
-		respond with a HTTP 400 error.</p>
+		respond with an HTTP 400 error.</p>
 	</returns>
 </xml>

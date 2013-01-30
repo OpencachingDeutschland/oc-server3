@@ -759,7 +759,7 @@ class Okapi
 {
 	public static $data_store;
 	public static $server;
-	public static $revision = 500; # This gets replaced in automatically deployed packages
+	public static $revision = 554; # This gets replaced in automatically deployed packages
 	private static $okapi_vars = null;
 	
 	/** Get a variable stored in okapi_vars. If variable not found, return $default. */
@@ -1079,6 +1079,7 @@ class Okapi
 		if ($init_made)
 			return;
 		ini_set('memory_limit', '128M');
+		Db::connect();
 		if (!self::$data_store)
 			self::$data_store = new OkapiDataStore();
 		if (!self::$server)
@@ -1223,9 +1224,11 @@ class Okapi
 		return $names[round(($b / 360.0) * 16.0) % 16];
 	}
 	
-	/** Escape string for use with XML. */
-	public static function xmlentities($string)
+	/** Escape string for use with XML. See issue 169. */
+	public static function xmlescape($string)
 	{
+		static $pattern = '/[^\x{0009}\x{000a}\x{000d}\x{0020}-\x{D7FF}\x{E000}-\x{FFFD}]+/u';
+		$string = preg_replace($pattern, '', $string);
 		return strtr($string, array("<" => "&lt;", ">" => "&gt;", "\"" => "&quot;", "'" => "&apos;", "&" => "&amp;"));
 	}
 	
@@ -1296,7 +1299,7 @@ class Okapi
 		if (is_string($obj))
 		{
 			$chunks[] = "<string>";
-			$chunks[] = self::xmlentities($obj);
+			$chunks[] = self::xmlescape($obj);
 			$chunks[] = "</string>";
 		}
 		elseif (is_int($obj))
@@ -1336,7 +1339,7 @@ class Okapi
 				$chunks[] = "<dict>";
 				foreach ($obj as $key => &$item_ref)
 				{
-					$chunks[] = "<item key=\"".self::xmlentities($key)."\">";
+					$chunks[] = "<item key=\"".self::xmlescape($key)."\">";
 					self::_xmlmap_add($chunks, $item_ref);
 					$chunks[] = "</item>";
 				}
@@ -1352,11 +1355,11 @@ class Okapi
 
 	private static function _xmlmap2_add(&$chunks, &$obj, $key)
 	{
-		$attrs = ($key !== null) ? " key=\"".self::xmlentities($key)."\"" : "";
+		$attrs = ($key !== null) ? " key=\"".self::xmlescape($key)."\"" : "";
 		if (is_string($obj))
 		{
 			$chunks[] = "<string$attrs>";
-			$chunks[] = self::xmlentities($obj);
+			$chunks[] = self::xmlescape($obj);
 			$chunks[] = "</string>";
 		}
 		elseif (is_int($obj))
@@ -1436,15 +1439,17 @@ class Okapi
 		'oc.pl' => array(
 			# Primary types (documented, cannot change)
 			'Traditional' => 2, 'Multi' => 3, 'Quiz' => 7, 'Virtual' => 4,
+			'Event' => 6,
 			# Additional types (may get changed)
-			'Other' => 1, 'Webcam' => 5, 'Event' => 6,
+			'Other' => 1, 'Webcam' => 5,
 			'Moving' => 8, 'Podcast' => 9, 'Own' => 10,
 		),
 		'oc.de' => array(
 			# Primary types (documented, cannot change)
 			'Traditional' => 2, 'Multi' => 3, 'Quiz' => 7, 'Virtual' => 4,
+			'Event' => 6,
 			# Additional types (might get changed)
-			'Other' => 1, 'Webcam' => 5, 'Event' => 6,
+			'Other' => 1, 'Webcam' => 5,
 			'Math/Physics' => 8, 'Moving' => 9, 'Drive-In' => 10,
 		)
 	);
@@ -1568,6 +1573,8 @@ class Okapi
 		if ($name == 'Found it') return 1;
 		if ($name == "Didn't find it") return 2;
 		if ($name == 'Comment') return 3;
+		if ($name == 'Attended') return 7;
+		if ($name == 'Will attend') return 8;
 		if (($name == 'Needs maintenance') && (Settings::get('SUPPORTS_LOGTYPE_NEEDS_MAINTENANCE')))
 			return 5;
 		throw new Exception("logtype2id called with invalid log type argument: $name");
@@ -1584,6 +1591,8 @@ class Okapi
 		if ($id == 1) return "Found it";
 		if ($id == 2) return "Didn't find it";
 		if ($id == 3) return "Comment";
+		if ($id == 7) return "Attended";
+		if ($id == 8) return "Will attend";
 		
 		static $other_types = null;
 		if ($other_types === null)

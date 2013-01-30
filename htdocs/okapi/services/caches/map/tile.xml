@@ -11,14 +11,7 @@
 	<req name='z'>Zoom level (0..21).</req>
 	<req name='x'>Tile number on the X axis.</req>
 	<req name='y'>Tile number on the Y axis.</req>
-	<opt name='with_trackables_only' default='false'>
-		All geocaches without trackables will be skipped.
-	</opt>
-	<opt name='not_yet_found_only' default='false'>
-		All geocaches which have been already found by someone, will be skipped.
-	</opt>
-	<import-params method="services/caches/search/all"
-		params="status|type|exclude_ignored|exclude_my_own|found_status|rating"/>
+	<import-params method="services/caches/search/save"/>
 	<returns>
 		The PNG image with the requested map tile.
 	</returns>

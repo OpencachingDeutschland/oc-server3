@@ -58,9 +58,11 @@ class WebService
 		
 		# Getting the logs themselves. Formatting as an ordered list.
 		
-		$logs = OkapiServiceRunner::call('services/logs/entries', new OkapiInternalRequest(
+		$internal_request = new OkapiInternalRequest(
 			$request->consumer, $request->token, array('log_uuids' => implode("|", $log_uuids),
-			'fields' => 'uuid|date|user|type|comment')));
+			'fields' => $fields));
+		$internal_request->skip_limits = true;
+		$logs = OkapiServiceRunner::call('services/logs/entries', $internal_request);
 		$results = array();
 		foreach ($log_uuids as $log_uuid)
 			$results[] = $logs[$log_uuid];

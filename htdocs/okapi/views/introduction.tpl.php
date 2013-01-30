@@ -148,7 +148,7 @@ parameters required for the method to run):</p>
 			<li><b>jsonp</b> - <a href='http://en.wikipedia.org/wiki/JSONP'>JSONP</a> format, if
 			you choose this one, you have to specify the <b>callback</b> parameter,</li>
 			<li class='deprecated'><b>xmlmap</b> - deprecated (<a href='http://code.google.com/p/opencaching-api/issues/detail?id=128'>why?</a>),</li>
-			<li><b>xmlmap2</b> - XML format. This is produced by mapping JSON datatypes to XML elements.
+			<li><b>xmlmap2</b> - XML format. This is produced by mapping JSON data types to XML elements.
 			Keep in mind, that XML format is larger than JSON and it takes more time to generate
 			and parse. Try to use JSON when it's possible.</li>
 		</ul>
@@ -159,12 +159,12 @@ parameters required for the method to run):</p>
 	</li>
 </ul>
 
-<p><b><u>Important:</u></b> Almost all of the returned datatypes are <b>extendible</b>. This means,
+<p><b><u>Important:</u></b> Almost all of the returned data types are <b>extendible</b>. This means,
 that (in future) they <b>may contain data that currently they don't</b>.
 Such data will be included in backward-compatible manner, but still you should remember about
 it in some cases (i.e. when iterating over attributes of an object). This additional data may
 appear as extra elements in GPX files or extra keys in JSON responses.
-Your software <b>must ignore</b> such occurances if it doesn't understand them!</p>
+Your software <b>must ignore</b> such occurrences if it doesn't understand them!</p>
 
 <p>Some methods expose some <b>special formatting</b> of their own, for example, they may return
 a JPEG or a GPX file. Such methods do not accept <i>common formatting parameters</i>.</p>
@@ -192,7 +192,7 @@ method calls and redirects which provide you with an Access Token).</p>
 	</li>
 </ul>
 
-<p>Things you should pay attantion to:</p>
+<p>Things you should pay attention to:</p>
 <ul>
 	<li>
 		<p>The <b>oauth_callback</b> argument of the <b>request_token</b> method is <b>required</b>.</p>

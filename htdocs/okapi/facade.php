@@ -31,6 +31,7 @@ use okapi\OkapiFacadeAccessToken;
 require_once($GLOBALS['rootpath']."okapi/core.php");
 OkapiErrorHandler::$treat_notices_as_errors = true;
 require_once($GLOBALS['rootpath']."okapi/service_runner.php");
+Okapi::init_internals();
 
 /**
  * Use this class to access OKAPI's services from external code (i.e. OC code).
@@ -72,5 +73,29 @@ class Facade
 			$request->etag = $_SERVER['HTTP_IF_NONE_MATCH'];
 		$response = OkapiServiceRunner::call($service_name, $request);
 		$response->display();
+	}
+	
+	/**
+	 * Create a search set from a temporary table. This is very similar to
+	 * the "services/caches/search/save" method, but allows OC server to
+	 * include its own result instead of using OKAPI's search options. The
+	 * $temp_table should be a valid name of a temporary table with the
+	 * following (or similar) structure:
+	 *
+	 *   create temporary table temp_12345 (
+	 *     cache_id integer primary key
+	 *   ) engine=memory;
+	 */
+	public static function import_search_set($temp_table, $min_store, $max_ref_age)
+	{
+		require_once 'services/caches/search/save.php';
+		$tables = array('caches', $temp_table);
+		$where_conds = array(
+			$temp_table.".cache_id = caches.cache_id",
+			'caches.status in (1,2,3)',
+		);
+		return \okapi\services\caches\search\save\WebService::get_set(
+			$tables, $where_conds, $min_store, $max_ref_age
+		);
 	}
 }

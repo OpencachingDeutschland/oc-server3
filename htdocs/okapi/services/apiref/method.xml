@@ -27,10 +27,10 @@
 				<ul>
 					<li><b>min_auth_level</b> - integer, in range from 0 to 3,
 						see Introduction page.</li>
-					<li><b>oauth_consumer</b> - "required" when min_auth_level >= 2,
-						"optional" otherwise,</li>
-					<li><b>oauth_token</b> - "required" when min_auth_level == 3,
-						"optional" otherwise.</li>
+					<li><b>oauth_consumer</b> - true, if requests are required to be signed
+						with OAuth Consumer Key (min_auth_level >= 2),</li>
+					<li><b>oauth_token</b> - true, if requests are required to include an
+						OAuth Token (min_auth_level == 3).</li>
 				</ul>
 			</li>
 			<li><b>arguments</b> - list of dictionaries, describes method

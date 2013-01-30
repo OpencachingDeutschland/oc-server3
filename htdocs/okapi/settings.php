@@ -143,8 +143,14 @@ final class Settings
 	private static function load_settings()
 	{
 		try {
+			# This is an external code and it MAY generate E_NOTICEs.
+			# We have to temporarilly disable our default error handler.
+			
+			OkapiErrorHandler::disable();
 			require_once($GLOBALS['rootpath']."okapi_settings.php");
 			$ref = get_okapi_settings();
+			OkapiErrorHandler::reenable();
+			
 		} catch (Exception $e) {
 			throw new Exception("Could not import <rootpath>/okapi_settings.php:\n".$e->getMessage());
 		}

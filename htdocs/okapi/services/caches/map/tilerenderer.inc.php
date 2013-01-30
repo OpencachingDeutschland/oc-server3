@@ -34,7 +34,7 @@ class DefaultTileRenderer implements TileRenderer
 	 * Changing this will affect all generated hashes. You should increment it
 	 * whenever you alter anything in the drawing algorithm.
 	 */
-	private static $VERSION = 41;
+	private static $VERSION = 56;
 	
 	/**
 	 * Should be always true. You may temporarily set it to false, when you're
@@ -121,12 +121,20 @@ class DefaultTileRenderer implements TileRenderer
 		{
 			# Miss. Check default cache.  WRTODO: upgrade to normal Cache?
 			
-			$cache_key = "tilesrc/".Okapi::$revision."/".self::$VERSION."/".$key;
-			$gd2_path = self::$USE_STATIC_IMAGE_CACHE
-				? FileCache::get_file_path($cache_key) : null;
-			if ($gd2_path === null)
+			try
 			{
-				# Miss again. Read the image from PNG.
+				$cache_key = "tilesrc/".Okapi::$revision."/".self::$VERSION."/".$key;
+				$gd2_path = self::$USE_STATIC_IMAGE_CACHE
+					? FileCache::get_file_path($cache_key) : null;
+				if ($gd2_path === null)
+					throw new Exception("Not in cache");
+				# File cache hit. GD2 files are much faster to read than PNGs.
+				# This can throw an Exception (see bug#160).
+				$locmem_cache[$key] = imagecreatefromgd2($gd2_path);
+			}
+			catch (Exception $e)
+			{
+				# Miss again (or error decoding). Read the image from PNG.
 				
 				$locmem_cache[$key] = imagecreatefrompng($GLOBALS['rootpath']."okapi/static/tilemap/$name.png");
 				
@@ -150,11 +158,6 @@ class DefaultTileRenderer implements TileRenderer
 				imagegd2($locmem_cache[$key]);
 				$gd2 = ob_get_clean();
 				FileCache::set($cache_key, $gd2);
-			}
-			else
-			{
-				# File cache hit. GD2 files are much faster to read than PNGs.
-				$locmem_cache[$key] = imagecreatefromgd2($gd2_path);
 			}
 		}
 		return $locmem_cache[$key];
@@ -185,9 +188,10 @@ class DefaultTileRenderer implements TileRenderer
 
 	private function draw_cache(&$cache_struct)
 	{
-		if ($this->zoom <= 8)
+		$capt = ($cache_struct[6] & TileTree::$FLAG_DRAW_CAPTION);
+		if (($this->zoom <= 8) && (!$capt))
 			$this->draw_cache_tiny($cache_struct);
-		elseif ($this->zoom <= 12)
+		elseif (($this->zoom <= 12) && (!$capt))
 			$this->draw_cache_medium($cache_struct);
 		else
 			$this->draw_cache_large($cache_struct);
@@ -219,7 +223,8 @@ class DefaultTileRenderer implements TileRenderer
 			$r = 0; $g = 0; $b = 0;
 		} elseif ($found) {
 			$key = 'large_outer_found';
-			$a = 1; $br = 40; $c = 20;
+			$a = ($flags & TileTree::$FLAG_DRAW_CAPTION) ? .7 : .35;
+			$br = 40; $c = 20;
 			//$a = 0.5; $br = 0; $c = 0;
 			$r = 0; $g = 0; $b = 0;
 		} elseif ($new) {
@@ -289,7 +294,7 @@ class DefaultTileRenderer implements TileRenderer
 		
 		if ($found)
 		{
-			$icon = self::get_image("found", 0.7, $br, $c, $r, $g, $b);
+			$icon = self::get_image("found", 0.7*$a, $br, $c, $r, $g, $b);
 			imagecopy($this->im, $icon, $px - 2, $py - $center_y - 3, 0, 0, 16, 16);
 		}
 		
@@ -428,10 +433,14 @@ class DefaultTileRenderer implements TileRenderer
 		$found = $flags & TileTree::$FLAG_FOUND;
 		$own = $flags & TileTree::$FLAG_OWN;
 		$new = $flags & TileTree::$FLAG_NEW;
+		if ($found && (!($flags & TileTree::$FLAG_DRAW_CAPTION)))
+			$a = .35;
+		else
+			$a = 1;
 		
 		# Put the marker (indicates the type).
 		
-		$marker = self::get_image("medium_".self::get_type_suffix($type, false));
+		$marker = self::get_image("medium_".self::get_type_suffix($type, false), $a);
 		$width = 14;
 		$height = 14;
 		$center_x = 7;
@@ -459,6 +468,24 @@ class DefaultTileRenderer implements TileRenderer
 				$py - ($center_y - $markercenter_y) - 8, 0, 0, 16, 16);
 		}
 		
+		# Put small versions of rating icons.
+		
+		if ($status == 1)
+		{
+			if ($rating >= 4.2)
+			{
+				if ($flags & TileTree::$FLAG_STAR) {
+					$icon = self::get_image("rating_grin_small", max(0.6, $a));
+					imagecopy($this->im, $icon, $px - 5, $py - $center_y - 1, 0, 0, 6, 6);
+					$icon = self::get_image("rating_star_small", max(0.6, $a));
+					imagecopy($this->im, $icon, $px - 2, $py - $center_y - 3, 0, 0, 10, 10);
+				} else {
+					$icon = self::get_image("rating_grin_small", max(0.6, $a));
+					imagecopy($this->im, $icon, $px - 3, $py - $center_y - 1, 0, 0, 6, 6);
+				}
+			}
+		}
+		
 		if ($own)
 		{
 			# Mark own caches with additional overlay.
@@ -470,7 +497,7 @@ class DefaultTileRenderer implements TileRenderer
 		{
 			# Mark found caches with V.
 			
-			$icon = self::get_image("found", 0.7);
+			$icon = self::get_image("found", 0.7*$a);
 			imagecopy($this->im, $icon, $px - ($center_x - $markercenter_x) - 7,
 				$py - ($center_y - $markercenter_y) - 9, 0, 0, 16, 16);
 		}

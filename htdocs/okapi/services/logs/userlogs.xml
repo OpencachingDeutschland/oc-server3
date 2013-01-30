@@ -28,9 +28,9 @@
 			</li>
 			<li><b>cache_code</b> - code of the geocache,</li>
 			<li>
-				<p><b>type</b> - string; log type. This could be <b>pretty much everything</b>, but
-				there are three primary types: "Found it", "Didn't find it" or "Comment".
-				You may treat every other string as "Comment".</p>
+				<p><b>type</b> - string; log type. This could be <b>pretty much
+				everything</b>, but there are some primary types (see logs/entry
+				method for more info).</p>
 			</li>
 			<li><b>comment</b> - HTML string, text entered with the log entry.</li>
 		</ul>

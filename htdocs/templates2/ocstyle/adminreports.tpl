@@ -26,34 +26,37 @@
 	{/if}
 
 	{if $list == true}
-	
 		<table class="table">
-		<tr><th>{t}ID{/t}</th><th>{t}Name{/t}</th><th>{t}Owner{/t}</th><th>{t}Reporter{/t}</th><th>{t}Admin{/t}</th><th>{t}Date{/t}</th></tr>
+		<tr><th>{t}ID{/t}</th><th>{t}Name{/t}</th><th>{t}Owner{/t}</th><th>{t}Reporter{/t}</th><th>{t}Date{/t}</th></tr>
 		{assign var="otheradmins" value=0}
 		{foreach from=$reportedcaches item=rc}
 			<tr>
 			{if $rc.otheradmin > $otheradmins}
-				<td colspan="6"><hr /></td></tr><tr>
+				<td colspan=5"><p style="line-height: 1.6em;">{t}(*) New reports{/t}</p>
+				</td></tr>
+				<tr><th>{t}ID{/t}</th><th>{t}Name{/t}</th><th>{t}Owner{/t}</th><th>{t}Reporter{/t}</th><th>{t}Admin{/t}</th><th>{t}Date{/t}</th></tr>
 				{assign var="otheradmins" value=$rc.otheradmin}
 			{/if}
 			<td><a href="adminreports.php?id={$rc.id}">{$rc.id}</td>
 			<td><a href="adminreports.php?id={$rc.id}">{$rc.new|escape}{$rc.name|escape}</a></td>
 			<td>{$rc.ownernick|escape}</td>
 			<td>{$rc.username|escape}</td>
-			<td>{$rc.adminname|escape}</td>
+			{if $otheradmins}
+				<td>{$rc.adminname|escape}</td>
+			{/if}
 			<td style="white-space: nowrap;">{$rc.lastmodified|date_format:$opt.format.date}</td></tr>
 		{foreachelse}
 			<tr><td colspan=5>{t}No reported caches{/t}</td></tr>
 		{/foreach}
 		</table>
 		
-		{if $reportedcaches != NULL}
+		{if $reportedcaches != NULL and $otheradmins==0}
 			<p style="line-height: 1.6em;">{t}(*) New reports{/t}</p>
 		{/if}
 	{else}
 		<p style="line-height: 1.6em;">{t}Details for report of {/t} <a href="viewcache.php?cacheid={$cacheid}" target="_blank">{$cachename|escape}</a> {t} by {/t} <a href="viewprofile.php?userid={$userid}" target="_blank">{$usernick|escape}</a></p>
 		<p style="line-height: 1.6em;"><b>{t}Last modified:{/t}</b>&nbsp;{$lastmodified|date_format:$opt.format.datelong}</p>
-		<p style="line-height: 1.6em;"><b>{t}State:{/t}</b>&nbsp;{$status}&nbsp;<b>Admin:</b>&nbsp;{if $adminnick==''}{t}not assigned{/t}{else}{$adminnick|escape}{/if}</p>
+		<p style="line-height: 1.6em;"><b>{t}State:{/t}</b>&nbsp;{$status}&nbsp;&nbsp;<b>Admin:</b>&nbsp;{if $adminnick==''}{t}not assigned{/t}{else}{if $otheradmin}<font color="red"><b>{/if}{$adminnick|escape}{if $otheradmin}</b></font>{/if}{/if}</p>
 		<p style="line-height: 1.6em;"><b>{t}Reason:{/t}</b>&nbsp;{$reason|escape|nl2br}</p>
 		<p style="line-height: 1.6em;"><b>{t}Comment:{/t}</b>&nbsp;{$note|escape|nl2br}</p>
 
@@ -64,7 +67,9 @@
 	  	</p>
 	  </div>
 
-		<p style="line-height: 1.6em;"><input type="submit" name="assign" value="{t}Assign to me{/t}" class="formbuttons" />&nbsp;&nbsp;<input type="submit" name="contact" value="{t}Contact owner{/t}" class="formbuttons" />&nbsp;&nbsp;<input type="submit" name="done" value="{t}Mark as finished{/t}" class="formbuttons" /></p>
+		<p style="line-height: 1.6em;"><input type="submit" name="assign" value="{t}Assign to me{/t}" class="formbuttons" />
+		{if $ownreport}
+		&nbsp;<input type="submit" name="contact" value="{t}Contact owner{/t}" class="formbuttons" />&nbsp;&nbsp;<input type="submit" name="done" value="{t}Mark as finished{/t}" class="formbuttons" /></p>
 
 		<div class="content2-container bg-blue02">
 	  	<p class="content-title-noshade-size2">
@@ -74,6 +79,9 @@
 	  </div>
 
 		<p style="line-height: 1.6em;"><input type="submit" name="statusActive" value="{t}Ready for search{/t}" class="formbuttons" />&nbsp;&nbsp;<input type="submit" name="statusTNA" value="{t}Temporary not available{/t}" class="formbuttons" />&nbsp;&nbsp;<input type="submit" name="statusArchived" value="{t}Archived{/t}" class="formbuttons" />&nbsp;&nbsp;<input type="submit" name="statusLockedVisible" value="{t}Locked, visible{/t}" class="formbuttons" />&nbsp;&nbsp;<input type="submit" name="statusLockedInvisible" value="{t}Locked, invisible{/t}" class="formbuttons" /></p>
+		{elseif $otheradmin}
+			<br />{t}Warning: This report is already assigned to another admin. Consult him first before you assume the report!{/t}
+		{/if}
 	{/if}
 
 </form>

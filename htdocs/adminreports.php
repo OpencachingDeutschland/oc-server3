@@ -27,7 +27,7 @@
 	$ownerid = isset($_REQUEST['ownerid']) ? $_REQUEST['ownerid']+0 : 0;
 	$adminid = sql_value("SELECT `adminid` FROM `cache_reports` WHERE `id`=&1", 0, $rid);
 
-	if (isset($_REQUEST['assign']) && $rid > 0 && $adminid == 0)
+	if (isset($_REQUEST['assign']) && $rid > 0)  //  && $adminid == 0)
 	{
 		sql("UPDATE `cache_reports` SET `status`=2, `adminid`=&2 WHERE `id`=&1", $rid, $login->userid);
 		$tpl->redirect('adminreports.php?id='.$rid);
@@ -115,7 +115,7 @@
 				               `c`.`name`,
 				               `u2`.`username` AS `ownernick`,
 				               `u`.`username`,
-				               `u3`.`username` AS `adminname`,
+				               IF(LENGTH(`u3`.`username`)>10, CONCAT(LEFT(`u3`.`username`,9),'.'),`u3`.`username`) AS `adminname`,
 				               `cr`.`lastmodified`,
 				               `cr`.`adminid` IS NOT NULL AND `cr`.`adminid`!=&1 AS otheradmin 
 				          FROM `cache_reports` `cr`
@@ -173,6 +173,8 @@
 		sql_free_result($rs);
 
 		$tpl->assign('list', false);
+		$tpl->assign('otheradmin',$record['adminid']>0 && $record['adminid'] != $login->userid);
+		$tpl->assign('ownreport',$record['adminid'] == $login->userid);
 	}
 
 	$tpl->assign('error', $error);	

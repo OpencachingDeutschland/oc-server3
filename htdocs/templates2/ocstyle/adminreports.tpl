@@ -28,13 +28,20 @@
 	{if $list == true}
 	
 		<table class="table">
-		<tr><th>{t}ID{/t}</th><th>{t}Name{/t}</th><th>{t}Owner{/t}</th><th>{t}Reporter{/t}</th><th>{t}Date{/t}</th></tr>
+		<tr><th>{t}ID{/t}</th><th>{t}Name{/t}</th><th>{t}Owner{/t}</th><th>{t}Reporter{/t}</th><th>{t}Admin{/t}</th><th>{t}Date{/t}</th></tr>
+		{assign var="otheradmins" value=0}
 		{foreach from=$reportedcaches item=rc}
+			<tr>
+			{if $rc.otheradmin > $otheradmins}
+				<td colspan="6"><hr /></td></tr><tr>
+				{assign var="otheradmins" value=$rc.otheradmin}
+			{/if}
 			<td><a href="adminreports.php?id={$rc.id}">{$rc.id}</td>
 			<td><a href="adminreports.php?id={$rc.id}">{$rc.new|escape}{$rc.name|escape}</a></td>
 			<td>{$rc.ownernick|escape}</td>
 			<td>{$rc.username|escape}</td>
-			<td style="white-space: nowrap;">{$rc.lastmodified|date_format:$opt.format.datelong}</td></tr>
+			<td>{$rc.adminname|escape}</td>
+			<td style="white-space: nowrap;">{$rc.lastmodified|date_format:$opt.format.date}</td></tr>
 		{foreachelse}
 			<tr><td colspan=5>{t}No reported caches{/t}</td></tr>
 		{/foreach}

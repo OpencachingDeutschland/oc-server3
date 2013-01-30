@@ -412,20 +412,20 @@
 
 			<img src="resource2/{$opt.template.style}/images/viewcache/16x16-search.png" class="icon16" alt="" />
 			{t}Search geocaches nearby:{/t} 
-			<a href="search.php?searchto=searchbydistance&showresult=1&expert=0&output=HTML&sort=bydistance&f_userowner=0&f_userfound=0&f_inactive=1&lat={$cache.latitude}&lon={$cache.longitude}&distance=150&unit=km">{t}all{/t}</a> - 
-			<a href="search.php?searchto=searchbydistance&showresult=1&expert=0&output=HTML&sort=bydistance&f_userowner=1&f_userfound=1&f_inactive=1&lat={$cache.latitude}&lon={$cache.longitude}&distance=150&unit=km">{t}searchable{/t}</a> - 
-			<a href="search.php?searchto=searchbydistance&showresult=1&expert=0&output=HTML&sort=bydistance&f_userowner=1&f_userfound=1&f_inactive=1&lat={$cache.latitude}&lon={$cache.longitude}&distance=150&unit=km&cachetype={$cache.type}">{t}same type{/t}</a>
+			<a href="search.php?searchto=searchbydistance&showresult=1&expert=0&output=HTML&sort=bydistance&f_userowner=0&f_userfound=0&f_inactive=1&lat={$cache.latitude}&lon={$cache.longitude}&distance=150&unit=km" rel="nofollow">{t}all{/t}</a> - 
+			<a href="search.php?searchto=searchbydistance&showresult=1&expert=0&output=HTML&sort=bydistance&f_userowner=1&f_userfound=1&f_inactive=1&lat={$cache.latitude}&lon={$cache.longitude}&distance=150&unit=km" rel="nofollow">{t}searchable{/t}</a> - 
+			<a href="search.php?searchto=searchbydistance&showresult=1&expert=0&output=HTML&sort=bydistance&f_userowner=1&f_userfound=1&f_inactive=1&lat={$cache.latitude}&lon={$cache.longitude}&distance=150&unit=km&cachetype={$cache.type}" rel="nofollow">{t}same type{/t}</a>
 			<br />
 
 			<img src="resource2/{$opt.template.style}/images/viewcache/16x16-search.png" class="icon16" alt="" /> {t}Send this waypoint to GPS device:{/t} <a href="#" onClick="javascript:window.open('garmin.php?&lat={$cache.latitude}&lon={$cache.longitude}&wp={$cache.wpoc}','{t escape=js}Send{/t}','width=640,height=290,resizable=no,scrollbars=1')">Garmin</a><br />
 			<img src="resource2/{$opt.template.style}/images/viewcache/16x16-save.png" class="icon16" alt="" /> {t}Download as file:{/t} 
-			<a href="search.php?searchto=searchbycacheid&showresult=1&f_inactive=0&f_ignored=0&startat=0&cacheid={$cache.cacheid}&output=gpx" title="{t}GPS Exchange Format .gpx{/t}">GPX</a> - 
-			<a href="search.php?searchto=searchbycacheid&showresult=1&f_inactive=0&f_ignored=0&startat=0&cacheid={$cache.cacheid}&output=loc" title="{t}Waypointfile .loc{/t}">LOC</a> - 
-			<a href="search.php?searchto=searchbycacheid&showresult=1&f_inactive=0&f_ignored=0&startat=0&cacheid={$cache.cacheid}&output=kml" title="{t}Google Earth .kml{/t}">KML</a> - 
-			<a href="http://maps.google.de/maps?f=q&hl=de&q={$opt.page.absolute_url|escape:'url'}search.php%3Fsearchto%3Dsearchbydistance%26showresult%3D1%26expert%3D0%26output%3Dkml%26sort%3Dbydistance%26f_userowner%3D0%26f_userfound%3D0%26f_inactive%3D0%26%26f_ignored%3D0%26lat%3D{$cache.latitude}%26lon%3D{$cache.longitude}%26distance%3D50%26unit%3Dkm%26zip%3D1%26count%3Dmax" title="{t}Show in Google Maps{/t}">{t}(in GM){/t}</a> - 
-			<a href="search.php?searchto=searchbycacheid&showresult=1&f_inactive=0&f_ignored=0&startat=0&cacheid={$cache.cacheid}&output=ov2" title="{t}TomTom POI .ov2{/t}">OV2</a> - 
-			<a href="search.php?searchto=searchbycacheid&showresult=1&f_inactive=0&f_ignored=0&startat=0&cacheid={$cache.cacheid}&output=ovl" title="{t}TOP50-Overlay .ovl{/t}">OVL</a> - 
-			<a href="search.php?searchto=searchbycacheid&showresult=1&f_inactive=0&f_ignored=0&startat=0&cacheid={$cache.cacheid}&output=txt" title="{t}Textfile .txt{/t}">TXT</a>
+			<a href="search.php?searchto=searchbycacheid&showresult=1&f_inactive=0&f_ignored=0&startat=0&cacheid={$cache.cacheid}&output=gpx" rel="nofollow" title="{t}GPS Exchange Format .gpx{/t}">GPX</a> - 
+			<a href="search.php?searchto=searchbycacheid&showresult=1&f_inactive=0&f_ignored=0&startat=0&cacheid={$cache.cacheid}&output=loc" rel="nofollow" title="{t}Waypointfile .loc{/t}">LOC</a> - 
+			<a href="search.php?searchto=searchbycacheid&showresult=1&f_inactive=0&f_ignored=0&startat=0&cacheid={$cache.cacheid}&output=kml" rel="nofollow" title="{t}Google Earth .kml{/t}">KML</a> - 
+			<a href="http://maps.google.de/maps?f=q&hl=de&q={$opt.page.absolute_url|escape:'url'}search.php%3Fsearchto%3Dsearchbydistance%26showresult%3D1%26expert%3D0%26output%3Dkml%26sort%3Dbydistance%26f_userowner%3D0%26f_userfound%3D0%26f_inactive%3D0%26%26f_ignored%3D0%26lat%3D{$cache.latitude}%26lon%3D{$cache.longitude}%26distance%3D50%26unit%3Dkm%26zip%3D1%26count%3Dmax" rel="nofollow" title="{t}Show in Google Maps{/t}">{t}(in GM){/t}</a> - 
+			<a href="search.php?searchto=searchbycacheid&showresult=1&f_inactive=0&f_ignored=0&startat=0&cacheid={$cache.cacheid}&output=ov2" rel="nofollow" title="{t}TomTom POI .ov2{/t}">OV2</a> - 
+			<a href="search.php?searchto=searchbycacheid&showresult=1&f_inactive=0&f_ignored=0&startat=0&cacheid={$cache.cacheid}&output=ovl" rel="nofollow" title="{t}TOP50-Overlay .ovl{/t}">OVL</a> - 
+			<a href="search.php?searchto=searchbycacheid&showresult=1&f_inactive=0&f_ignored=0&startat=0s&cacheid={$cache.cacheid}&output=txt" rel="nofollow" title="{t}Textfile .txt{/t}">TXT</a>
 			<br />
 
 			<small>

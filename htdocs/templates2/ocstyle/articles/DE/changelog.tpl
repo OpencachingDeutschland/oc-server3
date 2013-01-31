@@ -19,7 +19,11 @@
 
 	 <p>Geändert / verbessert:</p>
 	 <ul class="changelog">
+     <li class="changelogitem">Die <a href="map2.php">Karte</a> zeigt jetzt bis zu 600 statt 180 Cachesymbole an (MS Internet Explorer: bis zu 200).</a></li>
+     <li class="changelogitem">auch Hamburg ist jetzt im Menü der <a href="map2.php">Kartenseite</a> direkt anwählbar</a></li>
      <li class="changelogitem">einheitliche Darstellung in der <a href="newlogs.php">Liste neuer Logs</a></li>
+     <li class="changelogitem">verbesserte Verwaltung von Cachemeldungen (intern)</a></li>
+     <li class="changelogitem">Suchmaschinenoptimierung</a></li>
    </ul>
 
 	 <p>Korrigiert (Bugfixes):</p>

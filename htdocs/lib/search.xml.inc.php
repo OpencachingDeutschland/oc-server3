@@ -220,7 +220,7 @@
 		}
 		else
 		{
-			$thisline = str_replace('{htmlwarn}', ' (Text pøeveden z HTML)', $thisline);
+			$thisline = str_replace('{htmlwarn}', ' (Text converted from HTML)', $thisline);
 			$thisline = str_replace('{desc}', html2txt(filterevilchars($r['desc'])), $thisline);
 		}
 		

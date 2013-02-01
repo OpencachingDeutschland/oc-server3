@@ -19,7 +19,7 @@ class OkapiDataStore extends OAuthDataStore
 			$row['url'], $row['email']);
 	}
 
-	public function lookup_token(OkapiConsumer $consumer, $token_type, $token)
+	public function lookup_token($consumer, $token_type, $token)
 	{
 		$row = Db::select_row("
 			select `key`, consumer_key, secret, token_type, user_id, verifier, callback
@@ -45,10 +45,10 @@ class OkapiDataStore extends OAuthDataStore
 		}
 	}
 
-	public function lookup_nonce(OkapiConsumer $consumer, $token, $nonce, $timestamp)
+	public function lookup_nonce($consumer, $token, $nonce, $timestamp)
 	{
 		# First, see if it exists. Note, that old nonces are periodically deleted.
-		
+
 		$exists = Db::select_value("
 			select 1
 			from okapi_nonces
@@ -59,9 +59,9 @@ class OkapiDataStore extends OAuthDataStore
 		");
 		if ($exists)
 			return $nonce;
-		
+
 		# It didn't exist. We have to remember it.
-		
+
 		Db::execute("
 			insert into okapi_nonces (consumer_key, `key`, timestamp)
 			values (
@@ -73,7 +73,7 @@ class OkapiDataStore extends OAuthDataStore
 		return null;
 	}
 
-	public function new_request_token(OkapiConsumer $consumer, $callback)
+	public function new_request_token($consumer, $callback = null)
 	{
 		if ((preg_match("#^[a-z][a-z0-9_.-]*://#", $callback) > 0) ||
 			$callback == "oob")
@@ -102,7 +102,7 @@ class OkapiDataStore extends OAuthDataStore
 		return $token;
 	}
 
-	public function new_access_token(OkapiRequestToken $token, $consumer, $verifier)
+	public function new_access_token($token, $consumer, $verifier = null)
 	{
 		if ($token->consumer_key != $consumer->key)
 			throw new BadRequest("Request Token given is not associated with the Consumer who signed the request.");
@@ -110,19 +110,19 @@ class OkapiDataStore extends OAuthDataStore
 			throw new BadRequest("Request Token given has not been authorized.");
 		if ($token->verifier != $verifier)
 			throw new BadRequest("Invalid verifier.");
-		
+
 		# Invalidate the Request Token.
-		
+
 		Db::execute("
 			delete from okapi_tokens
 			where `key` = '".mysql_real_escape_string($token->key)."'
 		");
-		
+
 		# In OKAPI, all Access Tokens are long lived. Therefore, we don't want
 		# to generate a new one every time a Consumer wants it. We will check
 		# if there is already an Access Token generated for this (Consumer, User)
 		# pair and return it if there is.
-		
+
 		$row = Db::select_row("
 			select `key`, secret
 			from okapi_tokens
@@ -134,14 +134,14 @@ class OkapiDataStore extends OAuthDataStore
 		if ($row)
 		{
 			# Use existing Access Token
-			
+
 			$access_token = new OkapiAccessToken($row['key'], $row['secret'],
 				$consumer->key, $token->authorized_by_user_id);
 		}
 		else
 		{
 			# Generate a new Access Token.
-			
+
 			$access_token = new OkapiAccessToken(Okapi::generate_key(20), Okapi::generate_key(40),
 				$consumer->key, $token->authorized_by_user_id);
 			Db::execute("
@@ -159,7 +159,7 @@ class OkapiDataStore extends OAuthDataStore
 		}
 		return $access_token;
 	}
-	
+
 	public function cleanup()
 	{
 		Db::execute("

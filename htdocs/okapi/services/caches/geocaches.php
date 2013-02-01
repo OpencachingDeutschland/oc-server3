@@ -23,7 +23,7 @@ class WebService
 			'min_auth_level' => 1
 		);
 	}
-	
+
 	private static $valid_field_names = array('code', 'name', 'names', 'location', 'type',
 		'status', 'url', 'owner', 'distance', 'bearing', 'bearing2', 'bearing3', 'is_found',
 		'is_not_found', 'founds', 'notfounds', 'size', 'size2', 'oxsize', 'difficulty', 'terrain',
@@ -31,8 +31,8 @@ class WebService
 		'descriptions', 'hint', 'hints', 'images', 'attrnames', 'latest_logs',
 		'my_notes', 'trackables_count', 'trackables', 'alt_wpts', 'last_found',
 		'last_modified', 'date_created', 'date_hidden', 'internal_id', 'is_watched',
-		'is_ignored', 'willattends');
-	
+		'is_ignored', 'willattends', 'country', 'state');
+
 	public static function call(OkapiRequest $request)
 	{
 		$cache_codes = $request->get_parameter('cache_codes');
@@ -45,24 +45,24 @@ class WebService
 		}
 		else
 			$cache_codes = explode("|", $cache_codes);
-		
+
 		if ((count($cache_codes) > 500) && (!$request->skip_limits))
 			throw new InvalidParam('cache_codes', "Maximum allowed number of referenced ".
 				"caches is 500. You provided ".count($cache_codes)." cache codes.");
 		if (count($cache_codes) != count(array_unique($cache_codes)))
 			throw new InvalidParam('cache_codes', "Duplicate codes detected (make sure each cache is referenced only once).");
-		
+
 		$langpref = $request->get_parameter('langpref');
 		if (!$langpref) $langpref = "en";
 		$langpref = explode("|", $langpref);
-		
+
 		$fields = $request->get_parameter('fields');
 		if (!$fields) $fields = "code|name|location|type|status";
 		$fields = explode("|", $fields);
 		foreach ($fields as $field)
 			if (!in_array($field, self::$valid_field_names))
 				throw new InvalidParam('fields', "'$field' is not a valid field code.");
-		
+
 		$user_uuid = $request->get_parameter('user_uuid');
 		if ($user_uuid != null)
 		{
@@ -76,7 +76,7 @@ class WebService
 			$user_id = $request->token->user_id;
 		else
 			$user_id = null;
-		
+
 		$lpc = $request->get_parameter('lpc');
 		if ($lpc === null) $lpc = 10;
 		if ($lpc == 'all')
@@ -89,7 +89,7 @@ class WebService
 			if ($lpc < 0)
 				throw new InvalidParam('lpc', "Must be a positive value.");
 		}
-		
+
 		if (in_array('distance', $fields) || in_array('bearing', $fields) || in_array('bearing2', $fields)
 			|| in_array('bearing3', $fields))
 		{
@@ -117,13 +117,13 @@ class WebService
 			# DE branch:
 			# - Caches do not have ratings.
 			# - Total numbers of founds and notfounds are kept in the "stat_caches" table.
-			
+
 			$rs = Db::query("
 				select
 					c.cache_id, c.name, c.longitude, c.latitude, c.last_modified,
 					c.date_created, c.type, c.status, c.date_hidden, c.size, c.difficulty,
 					c.terrain, c.wp_oc, c.logpw, c.user_id,
-					
+
 					ifnull(sc.toprating, 0) as topratings,
 					ifnull(sc.found, 0) as founds,
 					ifnull(sc.notfound, 0) as notfounds,
@@ -143,13 +143,13 @@ class WebService
 			# PL branch:
 			# - Caches have ratings.
 			# - Total numbers of found and notfounds are kept in the "caches" table.
-			
+
 			$rs = Db::query("
 				select
 					c.cache_id, c.name, c.longitude, c.latitude, c.last_modified,
 					c.date_created, c.type, c.status, c.date_hidden, c.size, c.difficulty,
 					c.terrain, c.wp_oc, c.logpw, c.user_id,
-					
+
 					c.topratings,
 					c.founds,
 					c.notfounds,
@@ -264,6 +264,8 @@ class WebService
 					case 'trackables_count': /* handled separately */ break;
 					case 'trackables': /* handled separately */ break;
 					case 'alt_wpts': /* handled separately */ break;
+					case 'country': /* handled separately */ break;
+					case 'state': /* handled separately */ break;
 					case 'last_found': $entry['last_found'] = ($row['last_found'] > '1980') ? date('c', strtotime($row['last_found'])) : null; break;
 					case 'last_modified': $entry['last_modified'] = date('c', strtotime($row['last_modified'])); break;
 					case 'date_created': $entry['date_created'] = date('c', strtotime($row['date_created'])); break;
@@ -275,9 +277,9 @@ class WebService
 			$results[$row['wp_oc']] = $entry;
 		}
 		mysql_free_result($rs);
-		
+
 		# owner
-		
+
 		if (in_array('owner', $fields) && (count($results) > 0))
 		{
 			$rs = Db::query("
@@ -298,9 +300,9 @@ class WebService
 				);
 			}
 		}
-		
+
 		# is_found
-		
+
 		if (in_array('is_found', $fields))
 		{
 			if ($user_id == null)
@@ -325,9 +327,9 @@ class WebService
 			foreach ($results as $cache_code => &$result_ref)
 				$result_ref['is_found'] = isset($tmp2[$cache_code]);
 		}
-		
+
 		# is_not_found
-		
+
 		if (in_array('is_not_found', $fields))
 		{
 			if ($user_id == null)
@@ -349,9 +351,9 @@ class WebService
 			foreach ($results as $cache_code => &$result_ref)
 				$result_ref['is_not_found'] = isset($tmp2[$cache_code]);
 		}
-		
+
 		# is_watched
-		
+
 		if (in_array('is_watched', $fields))
 		{
 			if ($request->token == null)
@@ -373,7 +375,7 @@ class WebService
 		}
 
 		# is_ignored
-		
+
 		if (in_array('is_ignored', $fields))
 		{
 			if ($request->token == null)
@@ -395,20 +397,20 @@ class WebService
 		}
 
 		# Descriptions and hints.
-		
+
 		if (in_array('description', $fields) || in_array('descriptions', $fields)
 			|| in_array('hint', $fields) || in_array('hints', $fields))
 		{
 			# At first, we will fill all those 4 fields, even if user requested just one
 			# of them. We will chop off the remaining three at the end.
-			
+
 			foreach ($results as &$result_ref)
 				$result_ref['descriptions'] = array();
 			foreach ($results as &$result_ref)
 				$result_ref['hints'] = array();
-			
+
 			# Get cache descriptions and hints.
-			
+
 			$rs = Db::query("
 				select cache_id, language, `desc`, hint
 				from cache_desc
@@ -429,17 +431,17 @@ class WebService
 				$result_ref['description'] = Okapi::pick_best_language($result_ref['descriptions'], $langpref);
 				$result_ref['hint'] = Okapi::pick_best_language($result_ref['hints'], $langpref);
 			}
-			
+
 			# Remove unwanted fields.
-			
+
 			foreach (array('description', 'descriptions', 'hint', 'hints') as $field)
 				if (!in_array($field, $fields))
 					foreach ($results as &$result_ref)
 						unset($result_ref[$field]);
 		}
-		
+
 		# Images.
-		
+
 		if (in_array('images', $fields))
 		{
 			foreach ($results as &$result_ref)
@@ -474,18 +476,18 @@ class WebService
 				);
 			}
 		}
-		
+
 		# Attrnames
-		
+
 		if (in_array('attrnames', $fields))
 		{
 			foreach ($results as &$result_ref)
 				$result_ref['attrnames'] = array();
-			
+
 			# ALL attribute names are loaded into memory here. Assuming there are
 			# not so many of them, this will be fast enough. Possible optimalization:
 			# Let mysql do the matching.
-			
+
 			$dict = Okapi::get_all_atribute_names();
 			$rs = Db::query("
 				select cache_id, attrib_id
@@ -503,17 +505,17 @@ class WebService
 				}
 			}
 		}
-		
+
 		# Latest log entries.
-		
+
 		if (in_array('latest_logs', $fields))
 		{
 			foreach ($results as &$result_ref)
 				$result_ref['latest_logs'] = array();
-			
+
 			# Get all log IDs with dates. Sort in groups. Filter out latest ones. This is the fastest
 			# technique I could think of...
-			
+
 			$rs = Db::query("
 				select cache_id, id, date
 				from cache_logs
@@ -546,9 +548,9 @@ class WebService
 				while ($row = mysql_fetch_assoc($rs))
 					$logids[] = $row['id'];
 			}
-			
+
 			# Now retrieve text and join.
-			
+
 			$rs = Db::query("
 				select cl.cache_id, cl.id, cl.uuid, cl.type, unix_timestamp(cl.date) as date, cl.text,
 					u.uuid as user_uuid, u.username, u.user_id
@@ -575,9 +577,9 @@ class WebService
 				);
 			}
 		}
-		
+
 		# My notes
-		
+
 		if (in_array('my_notes', $fields))
 		{
 			if ($request->token == null)
@@ -587,7 +589,7 @@ class WebService
 			if (Settings::get('OC_BRANCH') == 'oc.pl')
 			{
 				# OCPL uses cache_notes table to store notes.
-				
+
 				$rs = Db::query("
 					select cache_id, max(date) as date, group_concat(`desc`) as `desc`
 					from cache_notes
@@ -600,7 +602,7 @@ class WebService
 			else
 			{
 				# OCDE uses coordinates table (with type == 2) to store notes (this is somewhat weird).
-				
+
 				$rs = Db::query("
 					select cache_id, null as date, group_concat(description) as `desc`
 					from coordinates
@@ -617,12 +619,12 @@ class WebService
 				$results[$cacheid2wptcode[$row['cache_id']]]['my_notes'] = strip_tags($row['desc']);
 			}
 		}
-		
+
 		if (in_array('trackables', $fields))
 		{
 			# Currently we support Geokrety only. But this interface should remain
 			# compatible. In future, other trackables might be returned the same way.
-			
+
 			$rs = Db::query("
 				select
 					gkiw.wp as cache_code,
@@ -683,9 +685,9 @@ class WebService
 				unset($tr_counts);
 			}
 		}
-		
+
 		# Alternate/Additional waypoints.
-		
+
 		if (in_array('alt_wpts', $fields))
 		{
 			foreach ($results as &$result_ref)
@@ -696,7 +698,7 @@ class WebService
 				# a special 'status' field to denote a hidden waypoint (i.e. final location
 				# of a multicache). Such hidden waypoints are not exposed by OKAPI. A stage
 				# fields is used for ordering and naming.
-				
+
 				$rs = Db::query("
 					select
 						cache_id, stage, latitude, longitude, `desc`,
@@ -717,7 +719,7 @@ class WebService
 			{
 				# OCDE uses 'coordinates' table (with type=1) to store additional waypoints.
 				# All waypoints are are public.
-				
+
 				$rs = Db::query("
 					select
 						cache_id,
@@ -745,25 +747,62 @@ class WebService
 				);
 			}
 		}
-		
+
+		# Country and/or state.
+
+		if (in_array('country', $fields) || in_array('state', $fields))
+		{
+			$rs = Db::query("
+				select
+					c.wp_oc as cache_code,
+					cl.adm1 as country,
+					cl.adm3 as state
+				from
+					caches c,
+					cache_location cl
+				where
+					c.wp_oc in ('".implode("','", array_map('mysql_real_escape_string', $cache_codes))."')
+					and c.cache_id = cl.cache_id
+			");
+			$countries = array();
+			$states = array();
+			while ($row = mysql_fetch_assoc($rs))
+			{
+				$countries[$row['cache_code']] = $row['country'];
+				$states[$row['cache_code']] = $row['state'];
+			}
+			if (in_array('country', $fields))
+			{
+				foreach ($results as $cache_code => &$row_ref)
+					$row_ref['country'] = isset($countries[$cache_code]) ? $countries[$cache_code] : null;
+			}
+			if (in_array('state', $fields))
+			{
+				foreach ($results as $cache_code => &$row_ref)
+					$row_ref['state'] = isset($states[$cache_code]) ? $states[$cache_code] : null;
+			}
+			unset($countries);
+			unset($states);
+		}
+
 		# Check which cache codes were not found and mark them with null.
 		foreach ($cache_codes as $cache_code)
 			if (!isset($results[$cache_code]))
 				$results[$cache_code] = null;
-		
+
 		# Order the results in the same order as the input codes were given.
 		# This might come in handy for languages which support ordered dictionaries
 		# (especially with conjunction with the search_and_retrieve method).
 		# See issue#97. PHP dictionaries (assoc arrays) are ordered structures,
 		# so we just have to rewrite it (sequentially).
-		
+
 		$ordered_results = array();
 		foreach ($cache_codes as $cache_code)
 			$ordered_results[$cache_code] = $results[$cache_code];
-		
+
 		return Okapi::formatted_response($request, $ordered_results);
 	}
-	
+
 	/**
 	 * Create unique caption, safe to be used as a file name for images
 	 * uploaded into Garmin's GPS devices. Use reset_unique_captions to reset
@@ -774,11 +813,11 @@ class WebService
 		# Garmins keep hanging on long file names. We don't have any specification from
 		# Garmin and cannot determine WHY. That's why we won't use captions until we
 		# know more.
-		
+
 		$caption = self::$caption_no."";
 		self::$caption_no++;
 		return $caption;
-		
+
 		/* This code is harmful for Garmins!
 		$caption = preg_replace('#[^\\pL\d ]+#u', '-', $caption);
 		$caption = trim($caption, '-');
@@ -805,15 +844,15 @@ class WebService
 	{
 		self::$caption_no = 1;
 	}
-	
+
 	public static function get_cache_attribution_note($cache_id, $lang)
 	{
 		$site_url = Settings::get('SITE_URL');
 		$site_name = Okapi::get_normalized_site_name();
 		$cache_url = $site_url."viewcache.php?cacheid=$cache_id";
-		
+
 		# This list if to be extended (opencaching.de, etc.). (_)
-		
+
 		switch ($lang)
 		{
 			case 'pl':

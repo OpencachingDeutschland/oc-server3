@@ -30,6 +30,7 @@ function get_okapi_settings()
 		'DB_USERNAME' => $dbusername,
 		'DB_PASSWORD' => $dbpasswd,
 		'SITELANG' => $lang,
+		'TIMEZONE' => $timezone,  # BTW, OCPL doesn't have it in settings.inc.php
 		'SITE_URL' => $absolute_server_URI,
 		'VAR_DIR' => $GLOBALS['rootpath'].'var',
 		'IMAGES_DIR' => rtrim($picdir, '/'),

@@ -228,6 +228,22 @@
 				</ul>
 			</li>
 			<li>
+				<p><b>country</b> - name of the country the cache is placed in.</p>
+				<p><b>Note:</b> This data is user-supplied and is not validated in
+				any way. Consider using external geocoding services instead. Also,
+				currently you have no way of knowing in which language it will appear
+				in (but it *may* start to vary on the value of your <b>langpref</b>
+				parameter in the future).</p>
+			</li>
+			<li>
+				<p><b>state</b> - name of the state the cache is placed in.</p>
+				<p><b>Note:</b> This data is user-supplied and is not validated in
+				any way. Consider using external geocoding services instead. Also,
+				currently you have no way of knowing in which language it will appear
+				in (but it *may* start to vary on the value of your <b>langpref</b>
+				parameter in the future).</p>
+			</li>
+			<li>
 				<p><b>last_found</b> - date and time (ISO 8601) when the
 				geocache was last found <b>or null</b> when it hasn't been yet found.</p>
 				<p>Note, that some OpenCaching servers don't store the exact times along

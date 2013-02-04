@@ -712,7 +712,11 @@ function parseXML_GetHTML(xmlobject)
 		sHtml += "<tr><td>&nbsp;</td><td>&nbsp;</td></tr>";
 	}
 
-	sHtml += "<tr><td><img src='resource2/ocstyle/images/cacheicon/16x16-" + nTypeId + ".gif' alt='" + xmlentities(sTypeText) + "' title='" + xmlentities(sTypeText) + "' /> <a href='viewcache.php?wp=" + encodeURI(sWPOC) + "' target='_blank'><font size='2'>" + xmlentities(sName) + "</font></a></td><td align='right' width='60px'><font size='2'><b>" + xmlentities(sWPOC) + "</b></font></td></tr>";
+	sHtml += "<tr><td>";
+	if (sName.length <= 60) sHtml += "<span style='white-space:nowrap'>";
+	sHtml += "<img src='resource2/ocstyle/images/cacheicon/16x16-" + nTypeId + ".gif' alt='" + xmlentities(sTypeText) + "' title='" + xmlentities(sTypeText) + "' /> <a href='viewcache.php?wp=" + encodeURI(sWPOC) + "' target='_blank'><font size='2'>" + xmlentities(sName) + "</font></a>";
+	if (sName.length <= 60) sHtml += "</span>";
+	sHtml += "</td><td align='right' width='60px'><font size='2'>&nbsp;<b>" + xmlentities(sWPOC) + "</b></font></td></tr>";
 	sHtml += "<tr><td colspan='2'>{/literal}{t escape=js}by{/t}{literal} <a href='viewprofile.php?userid=" + encodeURI(nUserId) + "' target='_blank'>" + xmlentities(sUsername) + "</a></td></tr>";
 	sHtml += "<tr><td colspan='2'>" + xmlentities(sTypeText) + " (" + xmlentities(sSizeText) + ")&nbsp;&nbsp;&nbsp;{t escape=js}D/T:{/t} " + parseFloat(nDifficulty).toFixed(1) + "/" + parseFloat(nTerrain).toFixed(1) + "</td></tr>";
 	sHtml += "<tr><td colspan='2'>{/literal}{t escape=js}Listed since:{/t}{literal} " + xmlentities(sListedSince) + "</td></tr>";

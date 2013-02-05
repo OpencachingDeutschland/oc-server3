@@ -353,7 +353,7 @@ class rowEditor
 		  // Direct float comparison is deprecated and can result in last-digit errors.
 		  // Floats in OC database are only used for reasonably large numbers like coordinates,
 		  // waylengths and time estimates, so using a fixed epsilon threshold is safe:
-		  $changed = (abs($sFormatedValue - $this->fields[$sField]['value'])  >= 1e-13);
+		  $changed = (abs($sFormatedValue - $this->fields[$sField]['value'])  >= 1e-12);
 		else
 		  $changed = ($sFormatedValue != $this->fields[$sField]['value']);
 		if ($changed)

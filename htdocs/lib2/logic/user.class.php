@@ -353,7 +353,7 @@ class user
 	{
 		return $this->reUser->getValue('watchmail_nextmail');
 	}
-	function setWatchmailNext()
+	function setWatchmailNext($value)
 	{
 		return $this->reUser->setValue('watchmail_nextmail', $value);
 	}

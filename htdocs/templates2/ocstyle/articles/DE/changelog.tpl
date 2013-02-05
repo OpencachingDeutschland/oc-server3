@@ -24,12 +24,15 @@
      <li class="changelogitem">einheitliche Darstellung in der <a href="newlogs.php">Liste neuer Logs</a></li>
      <li class="changelogitem">verbesserte Verwaltung von Cachemeldungen (intern)</a></li>
      <li class="changelogitem">Suchmaschinenoptimierung</a></li>
+     <li class="changelogitem">Team- und Spendenseite aktualisiert</a></li>
    </ul>
 
 	 <p>Korrigiert (Bugfixes):</p>
 	 <ul class="changelog">
      <li class="changelogitem">explizite Länderangabe für Cachelistings hat Vorrang vor automatischer Zuordnung</li>
      <li class="changelogitem">Icons für Event-Logs in der <a href="newlogs.php">Liste neuer Logs</a></li>
+     <li class="changelogitem">geändertes Statistikbild erscheint sofort im Benutzerprofil</a></li>
+     <li class="changelogitem">diverse interne Änderungen zur Umstellung von PHP 5.2 auf PHP 5.3</li>
    </ul>
 	<br />
 

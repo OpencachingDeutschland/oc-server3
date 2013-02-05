@@ -9,7 +9,7 @@
 		{t}What do i find on this website?{/t}
 	</div>
 	<div class="content-txtbox-noshade">
-		<p style="line-height: 1.6em;">{t}You can find everything you need to go Geocaching ...{/t}</p>
+		<p style="line-height: 1.6em;">{$message}</p>
 		<div class="buffer" style="width: 500px;">&nbsp;</div>
 	</div> 
 </div>

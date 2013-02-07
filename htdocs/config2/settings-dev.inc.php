@@ -92,9 +92,10 @@
 	//$opt['debug'] = DEBUG_DEVELOPER|DEBUG_TEMPLATES|DEBUG_SQLDEBUGGER;
 	//$opt['debug'] = DEBUG_DEVELOPER|DEBUG_SQLDEBUGGER;
 
-	// node ID
+	// node options
 	$opt['logic']['node']['id'] = 4;
-
+  $opt['logic']['waypoint_pool']['prefix'] = 'OC';
+  
 	/* other template options
 	 *
 	 */

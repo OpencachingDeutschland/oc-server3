@@ -1,10 +1,10 @@
 ﻿<html>
 	<head>
-		<title>Dokumentation Opencaching XML-Interface Version 1.1</title>
+		<title>Dokumentation Opencaching XML-Interface Version 1.2</title>
 		<meta name="vs_showGrid" content="True">
 	</head>
 	<body>
-		<h1>Dokumentation Opencaching XML-Interface Version 1.1</h1>
+		<h1>Dokumentation Opencaching XML-Interface Version 1.2</h1>
 		<p>
 			Das XML-Interface dient zum automatisierten abfragen aller Caches, Logeinträge,
 			Benutzer und/oder Bilder. Dieses Interface ist nicht für Endbenutzer gedacht,
@@ -17,6 +17,12 @@
 			please contact us at <a href="mailto:contact@opencaching.de">contact@opencaching.de</a>
 			and tell us about the application you are going to develop; then we may translate it.</em>
 		</p>
+		<h2>Änderungen in Version 1.2</h2>
+		<ul>
+			<li>neues Attribut <em>ispublishdate</em> bei cache.datecreated</li>
+			<li>Ausgabe von Nano-Cachgrößen</li>
+		</ul>
+		<p>Der XML-Doctype lautet in allen Versionen "oc11xml".</p>
 		<h2>Ausgabeformat</h2>
 		<p>
 		Die Ausgabe ist eine oder mehrere xml,zip,gz&nbsp;oder bz2-Dateien. Es stehen 2 
@@ -106,7 +112,6 @@
 			verfügbar]]&gt;&lt;/status&gt;<br>
 			&nbsp; &lt;country id="DE"&gt;&lt;![CDATA[Deutschland]]&gt;&lt;/country&gt;<br>
 			&nbsp; &lt;size id="2"&gt;&lt;![CDATA[mikro]]&gt;&lt;/size&gt;<br>
-			&nbsp; &lt;size2 id="2"&gt;&lt;![CDATA[mikro]]&gt;&lt;/size&gt;<br>
 			&nbsp; &lt;desclanguages&gt;DE&lt;/desclanguages&gt;<br>
 			&nbsp; &lt;difficulty&gt;4&lt;/difficulty&gt;<br>
 			&nbsp; &lt;terrain&gt;2&lt;/terrain&gt;<BR>
@@ -119,9 +124,8 @@
 			&nbsp;&nbsp;&nbsp;&nbsp;&lt;attribute id="6"&gt;&lt;![CDATA[ Nur bei Opencaching]]&gt;&lt;/attribute&gt;<br>
 			&nbsp; &lt;/attributes&gt;<br>
   			&lt;/cache&gt;</P>
-		<p><em>datecreated</em> will show date of listing creation for caches created with OC software versions 1 to 2
-		   and date of publication &ndash; indicated by <em>ispublishdate="1"</em> &ndash; from OC version 3.</p>
-		<p><em>size</em> field will return nano cache size as 'other size', while <em>size2</em> supports the new 'nano' cache size.</p>
+		<p><em>datecreated</em> ist bei mit OC Version 1 und 2 angelegten Caches das Datum, an dem das Listing angelegt wurde, bei mit Version 3 angelegten Caches das Veröffentlichungsdatum. Ab Interface Version 1.2 zeigt das Attribut <em>ispublishdate="1"</em> an, dass es sich um das Veröffentlichungsdatum handelt.</p>
+		<p>Ab XML-Version 1.2 werden im <em>size</em>-Feld auch Nano-Größen zurückgeliefert. In älteren Interface-Versionen wird stattdessen "micro" ausgegeben.</p>
 		<h3>cachedesc (Cachebeschreibungen)</h3>
 		<p>
 			&lt;cachedesc&gt;<br>
@@ -237,20 +241,21 @@
 		<p>Paramter uuid ... wie cacheid, ausser dass statt der cacheid die UUID des Caches verwendet wird.</p>
 		<h3>Beispiele</h3>
 		<p>1. Alle Daten inkrementell abrufen<br/>
-			<a>http://www.opencaching.de/xml/ocxml11.php?modifiedsince=&lt;date&gt;&amp;user=1&amp;cache=1&amp;cachedesc=1&amp;cachelog=1&amp;picture=1&amp;removedobject=1</a></p>
+			<a>http://www.opencaching.de/xml/ocxml12.php?modifiedsince=&lt;date&gt;&amp;user=1&amp;cache=1&amp;cachedesc=1&amp;cachelog=1&amp;picture=1&amp;removedobject=1</a></p>
 		<p>2. Alle Daten von Deutschland inkrementell abrufen<br/>
-			<A>http://www.opencaching.de/xml/ocxml11.php?modifiedsince=&lt;date&gt;&amp;cache=1&amp;cachedesc=1&amp;cachelog=1&amp;picture=1&amp;removedobject=1&amp;country=DE&amp;picturefromcachelog=1</a></p>
+			<A>http://www.opencaching.de/xml/ocxml12.php?modifiedsince=&lt;date&gt;&amp;cache=1&amp;cachedesc=1&amp;cachelog=1&amp;picture=1&amp;removedobject=1&amp;country=DE&amp;picturefromcachelog=1</a></p>
 		<p>3. Alle Caches ohne Logs von Deutschland inkrementell abrufen<br/>
-			<a>http://www.opencaching.de/xml/ocxml11.php?modifiedsince=&lt;date&gt;&amp;cache=1&amp;cachedesc=1&amp;picture=1&amp;removedobject=1&amp;country=DE</a></p>
+			<a>http://www.opencaching.de/xml/ocxml12.php?modifiedsince=&lt;date&gt;&amp;cache=1&amp;cachedesc=1&amp;picture=1&amp;removedobject=1&amp;country=DE</a></p>
 		<p>4. Alle Daten im Umkreis von 100 km abrufen<br/>
-			<a>http://www.opencaching.de/xml/ocxml11.php?modifiedsince=&lt;date&gt;&amp;cache=1&amp;cachedesc=1&amp;cachelog=1&amp;picture=1&amp;removedobject=1&amp;lat=48&amp;lon=9&amp;distance=100&amp;picturefromcachelog=1</a></p>
+			<a>http://www.opencaching.de/xml/ocxml12.php?modifiedsince=&lt;date&gt;&amp;cache=1&amp;cachedesc=1&amp;cachelog=1&amp;picture=1&amp;removedobject=1&amp;lat=48&amp;lon=9&amp;distance=100&amp;picturefromcachelog=1</a></p>
 		<p>5. Alle Bilder abrufen<br/>
-			<a>http://www.opencaching.de/xml/ocxml11.php?modifiedsince=&lt;date&gt;&amp;picture=1</a></p>
+			<a>http://www.opencaching.de/xml/ocxml12.php?modifiedsince=&lt;date&gt;&amp;picture=1</a></p>
 		<p>6. Alle Bilder von Caches abrufen die in Deutschland versteckt sind<br/>
-			<a>http://www.opencaching.de/xml/ocxml11.php?modifiedsince=&lt;date&gt;&amp;picture=1&amp;country=DE</a></p>
+			<a>http://www.opencaching.de/xml/ocxml2.php?modifiedsince=&lt;date&gt;&amp;picture=1&amp;country=DE</a></p>
 		<p>7. Alle Bilder von Caches und deren Logs abrufen die in Deutschland versteckt 
 			sind<br/>
-			<a>http://www.opencaching.de/xml/ocxml11.php?modifiedsince=&lt;date&gt;&amp;picture=1&amp;country=DE</a>&amp;picturefromcachelog=1</p>
+			<a>http://www.opencaching.de/xml/ocxml12.php?modifiedsince=&lt;date&gt;&amp;picture=1&amp;country=DE</a>&amp;picturefromcachelog=1</p>
+		<p>Mit ocxml11.php kann stattdessen die Interface-Version 1.1 verwendet werden.</p>
 		<p>Diese Anfragen werden mit einem kurzen XML-Stream beantwortet, der die 
 			XML-Session-Id zurückgibt. Mit dieser Id können dann die Daten abgerufen 
 			werden.</p>
@@ -266,21 +271,21 @@
 			Summe der Datensätze ist in diesem Beispiel 1205 - es werden also 3 Aufrufe 
 			benötigt (500, 500, 205 Datensätze).</p>
 		<p>Die Daten können dann mit folgender Anfrage abgerufen werden:<br/>
-			<a>http://www.opencaching.de/xml/ocxml11.php?sessionid=12345&amp;file=1</a><br/>
-			<a>http://www.opencaching.de/xml/ocxml11.php?sessionid=12345&amp;file=2</a><br/>
-			<a>http://www.opencaching.de/xml/ocxml11.php?sessionid=12345&amp;file=3</a></p>
+			<a>http://www.opencaching.de/xml/ocxml12.php?sessionid=12345&amp;file=1</a><br/>
+			<a>http://www.opencaching.de/xml/ocxml12.php?sessionid=12345&amp;file=2</a><br/>
+			<a>http://www.opencaching.de/xml/ocxml12.php?sessionid=12345&amp;file=3</a></p>
 		<h3>Alle Ergebnisse mit einem Aufruf abfragen</h3>
 		<p>Um alle Ergebnisse in einer Datei abzurufen muss bei dem Aufruf der Paramter 
 			session auf 0 gesetzt werden.</p>
 		<p>Beispeil:<br/>
-			<a>http://www.opencaching.de/xml/ocxml11.php?modifiedsince=&lt;date&gt;&amp;user=1&amp;cache=1&amp;cachedesc=1&amp;cachelog=1&amp;picture=1&amp;removedobject=1&amp;session=0</a></p>
+			<a>http://www.opencaching.de/xml/ocxml12.php?modifiedsince=&lt;date&gt;&amp;user=1&amp;cache=1&amp;cachedesc=1&amp;cachelog=1&amp;picture=1&amp;removedobject=1&amp;session=0</a></p>
 		<h3>Dateikomprimierung einstellen</h3>
 		<p>Dei Dateikomprimierung kann mit dem Paramter zip eingestellt weren. Mögliche 
 			Werte sind 0, zip, bzip2, gzip. Null bedeutet hier keine Kompression. Wird 
 			keine Kompression angegeben, wird zip verwendet.</p>
 		<p>Beispeil:<br/>
-			<a>http://www.opencaching.de/xml/ocxml11.php?modifiedsince=&lt;date&gt;&amp;user=1&amp;cache=1&amp;cachedesc=1&amp;cachelog=1&amp;picture=1&amp;removedobject=1&amp;session=0&amp;zip=bzip2</a><br/>
-			<a>http://www.opencaching.de/xml/ocxml11.php?sessionid=12345&amp;file=1&amp;zip=gzip</a></p>
+			<a>http://www.opencaching.de/xml/ocxml12.php?modifiedsince=&lt;date&gt;&amp;user=1&amp;cache=1&amp;cachedesc=1&amp;cachelog=1&amp;picture=1&amp;removedobject=1&amp;session=0&amp;zip=bzip2</a><br/>
+			<a>http://www.opencaching.de/xml/ocxml12.php?sessionid=12345&amp;file=1&amp;zip=gzip</a></p>
             <h3>XML-Optionen</h3>
             <p>Die folgenden XML-Optionen müssen bei jedem Aufruf übergeben
             werden.</p>
@@ -294,8 +299,8 @@
             charset ... (Default) iso-8859-1 / utf-8<br />
             attrlist ... (Default) 0 = keine Attributliste &uuml;bertragen / 1 = Attributliste &uuml;bertragen</p>
             <h4><a>Beispiele</a></h4>
-            <p>http://www.opencaching.de/xml/ocxml11.php?modifiedsince=20060320000000&amp;user=1&amp;cache=1&amp;cachelog=1&amp;cachedesc=1&amp;picture=1&amp;removedobject=1&amp;session=1&amp;charset=utf-8&amp;cdata=1&amp;xmldecl=0&amp;ocxmltag=0&amp;doctype=0<br/>
-            http://www.opencaching.de/xml/ocxml11.php?sessionid=4711&amp;file=1&amp;charset=utf-8&amp;cdata=1&amp;xmldecl=0&amp;ocxmltag=0&amp;doctype=0</p>
+            <p>http://www.opencaching.de/xml/ocxml12.php?modifiedsince=20060320000000&amp;user=1&amp;cache=1&amp;cachelog=1&amp;cachedesc=1&amp;picture=1&amp;removedobject=1&amp;session=1&amp;charset=utf-8&amp;cdata=1&amp;xmldecl=0&amp;ocxmltag=0&amp;doctype=0<br/>
+            http://www.opencaching.de/xml/ocxml12.php?sessionid=4711&amp;file=1&amp;charset=utf-8&amp;cdata=1&amp;xmldecl=0&amp;ocxmltag=0&amp;doctype=0</p>
 		<h3>Sonstige Anmerkungen</h3>
 		<ul>
 			<li>
@@ -311,7 +316,7 @@
 				<br/>
 				<span><span class="d">&lt;!DOCTYPE oc11xml<I>...</I>&gt;</span>&nbsp;<br/></span>&nbsp;
 				<span class="m">&lt;</span><span class="t">oc11xml</span><span class="t"> 
-  version</span><span class="m">="</span>1.1<span class="m">"</span><span class="t"> 
+  version</span><span class="m">="</span>1.2<span class="m">"</span><span class="t"> 
   date</span><span class="m">="</span><strong>2006-03-10 18:37:34</strong><span class="m">"</span><span class="t"> since</span><span class="m">="</span>2006-03-08 
 				22:02:42<span class="m">"</span><span class="m">&gt;</span><br /><br />
 			</li>
@@ -321,7 +326,7 @@
 		<h3>Ressourcen</h3>
 		<ul>
 			<li>Das XML-Dokument enthält folgende DTD (Document Type Definition): 
-			http://www.opencaching.de/xml/ocxml11.dtd</li>
+			http://www.opencaching.de/xml/ocxml11.dtd (Version 1.1) bzw. http://www.opencaching.de/xml/ocxml12.dtd (Version 1.2)</li>
 			<li>Der Quellcode ist hier erhältlich: <a href="https://github.com/OpencachingDeutschland/oc-server3/tree/stable/htdocs/xml">
 					https://github.com/OpencachingDeutschland/oc-server3/tree/stable/htdocs/xml</a></li>
 			<li>Eine Referenzimplementierung kann hier heruntergeladen werden:

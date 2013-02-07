@@ -11,6 +11,12 @@
 	***************************************************************************/
 
 /* begin configuration */
+
+	if (!isset($ocxmlversion))
+	{
+	  $ocxmlversion = 11;
+	  $doctype = "oc11xml";
+	}
 	
 	$opt['rootpath'] = '../';
   require($opt['rootpath'] . 'lib/common.inc.php');
@@ -295,6 +301,7 @@
 function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $ziptype)
 {
 	global $zip_basedir, $zip_wwwdir, $sDateformat, $sDateshort, $t1, $t2, $t3, $safemode_zip, $safemode_zip, $sCharset, $bAttrlist, $absolute_server_URI;
+	global $ocxmlversion;
 	// alle records aus tmpxml_* übertragen
 	
 	if (!mb_ereg_match('^[0-9]{1,11}', $sessionid))
@@ -387,12 +394,13 @@ function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $z
 		else if ($sCharset == 'utf-8')
 			fwrite($f, '<?xml version="1.0" encoding="UTF-8" standalone="no" ?>' . "\n");
 	}
-	if ($bDocType == '1') fwrite($f, '<!DOCTYPE oc11xml PUBLIC "-//Opencaching Network//DTD OCXml V 1.1//EN" "http://www.opencaching.de/xml/ocxml11.dtd">' . "\n");
+
+	if ($bDocType == '1') fwrite($f, '<!DOCTYPE oc11xml PUBLIC "-//Opencaching Network//DTD OCXml V 1.' . ($ocxmlversion % 10) . '//EN" "http://www.opencaching.de/xml/ocxml' . $ocxmlversion . '.dtd">' . "\n");
 	if ($bOcXmlTag == '1')
 	{
 		$rs = sql('SELECT `date_created`, `modified_since` FROM `xmlsession` WHERE `id`=&1', $sessionid);
 		$r = sql_fetch_array($rs);
-		fwrite($f, '<oc11xml version="1.1" date="' . date($sDateformat, strtotime($r['date_created'])) . '" since="' . date($sDateformat, strtotime($r['modified_since'])) . '">' . "\n");
+		fwrite($f, '<oc11xml version="1.' . ($ocxmlversion % 10) . '" date="' . date($sDateformat, strtotime($r['date_created'])) . '" since="' . date($sDateformat, strtotime($r['modified_since'])) . '">' . "\n");
 		mysql_free_result($rs);
 	}
 
@@ -440,12 +448,8 @@ function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $z
 	{
 		$bAllowView = ($r['allow_user_view'] == 1);
 
-		// To avoid breaking existing XML clients, the new nano size is returned as other in "size" field
-		// and as nano in new "size2" field.
-		if ($r['size'] > 7)
-			$size1_id = 1;
-		else
-			$size1_id = $r['size'];
+		if ($r['size'] == 8 && $ocxmlversion < 12)
+			$r['size'] = 2;   // return as micro in old interface version
 	
 		fwrite($f, $t1 . '<cache>' . "\n");
 		
@@ -457,15 +461,16 @@ function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $z
 		fwrite($f, $t2 . '<type id="' . $r['type'] . '" short="' . xmlentities($cachetypes[$r['type']]['short']) . '">' . xmlcdata($cachetypes[$r['type']]['de']) . '</type>' . "\n");
 		fwrite($f, $t2 . '<status id="' . $r['status'] . '">' . xmlcdata($cachestatus[$r['status']]['de']) . '</status>' . "\n");
 		fwrite($f, $t2 . '<country id="' . $r['country'] . '">' . xmlcdata($counties[$r['country']]['de']) . '</country>' . "\n");
-		fwrite($f, $t2 . '<size id="' . $size1_id . '">' . xmlcdata($cachesizes[$size1_id]['de']) . '</size>' . "\n");
-		fwrite($f, $t2 . '<size2 id="' . $r['size'] . '">' . xmlcdata($cachesizes[$r['size']]['de']) . '</size2>' . "\n");
+		fwrite($f, $t2 . '<size id="' . $r['size'] . '">' . xmlcdata($cachesizes[$r['size']]['de']) . '</size>' . "\n");
 		fwrite($f, $t2 . '<desclanguages>' . $r['desclanguages'] . '</desclanguages>' . "\n");
 		fwrite($f, $t2 . '<difficulty>' . sprintf('%01.1f', $r['difficulty'] / 2) . '</difficulty>' . "\n");
 		fwrite($f, $t2 . '<terrain>' . sprintf('%01.1f', $r['terrain'] / 2) . '</terrain>' . "\n");
 		fwrite($f, $t2 . '<rating waylength="' . $r['way_length'] . '" needtime="' . $r['search_time'] . '" />' . "\n");
 		fwrite($f, $t2 . '<waypoints gccom="' . xmlentities($r['wp_gc']) . '" nccom="' . xmlentities($r['wp_nc']) . '" oc="' . xmlentities($r['wp_oc']) . '" />' . "\n");
 		fwrite($f, $t2 . '<datehidden>' . date($sDateformat, strtotime($r['date_hidden'])) . '</datehidden>' . "\n");
-		fwrite($f, $t2 . '<datecreated ispublishdate="' . $r['is_publishdate'] . '">' . date($sDateformat, strtotime($r['date_created'])) . '</datecreated>' . "\n");
+		if ($ocxmlversion >= 12) $pd = ' ispublishdate="' . $r['is_publishdate'] . '"';
+		else $pd = "";
+		fwrite($f, $t2 . '<datecreated' . $pd . '>' . date($sDateformat, strtotime($r['date_created'])) . '</datecreated>' . "\n");
 		fwrite($f, $t2 . '<lastmodified>' . date($sDateformat, strtotime($r['last_modified'])) . '</lastmodified>' . "\n");
 
 		$rsAttributes = sql("SELECT `cache_attrib`.`id`, `cache_attrib`.`name` FROM `caches_attributes` INNER JOIN `cache_attrib` ON `caches_attributes`.`attrib_id`=`cache_attrib`.`id` WHERE `caches_attributes`.`cache_id`='&1'", $r['id']);

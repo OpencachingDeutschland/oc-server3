@@ -112,6 +112,20 @@
 	 */
 	$opt['logic']['cachemaps']['wmsurl'] = 'http://www.opencaching.de/cachemaps.php?wp={wp_oc}';
 
+	/* cachemaps (new)
+	* how to display the cache map on viewcache.php (200x200 pixel)
+	*
+	* option 1) via <img> tag (e.g. google maps)
+	*        2) via <iframe> tag (e.g. own mapserver)
+	*
+	* placeholders:
+	* {userzoom} = user zoomlevel (see myprofile.php)
+	* {latitude} = latitude of the cache
+	* {longitude} = longitude of the cache
+	*/
+	$opt['logic']['cachemaps']['url'] = 'http://maps.google.com/maps/api/staticmap?center={latitude},{longitude}&zoom={userzoom}&size=200x200&markers=color:blue|label:|{latitude},{longitude}&sensor=false';  // &key={gmkey}
+	$opt['logic']['cachemaps']['iframe'] = false;
+
  	/* E-Mail for notification about news (newstopic.php)
  	 */
 	$opt['news']['mail'] = 'root';

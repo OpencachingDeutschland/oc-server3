@@ -211,7 +211,7 @@ function process_owner_log($user_id, $log_id)
 	if ($rLog['text_html'] != 0)
 	{
 		$logtext = html_entity_decode($logtext, ENT_COMPAT, 'UTF-8');
-		$h2t =& new html2text($logtext);
+		$h2t = new html2text($logtext);
 		$h2t->set_base_url($absolute_server_URI);
 		$logtext = $h2t->get_text();
 /*
@@ -253,7 +253,7 @@ function process_log_watch($user_id, $log_id)
 	if ($rLog['text_html'] != 0)
 	{
 		$logtext = html_entity_decode($logtext, ENT_COMPAT, 'UTF-8');
-		$h2t =& new html2text($logtext);
+		$h2t = new html2text($logtext);
 		$h2t->set_base_url($absolute_server_URI);
 		$logtext = $h2t->get_text();
 /*

@@ -135,7 +135,7 @@ class OcSmarty extends Smarty
 		$this->_cache_including = $_cache_including;
 	}
 
-	function display()
+	function display($dummy1=null, $dummy2=null, $dummy3=null)
 	{
 		global $opt, $db, $cookie, $login, $menu, $sqldebugger, $translate;
 		$cookie->close();
@@ -303,7 +303,7 @@ class OcSmarty extends Smarty
 	}
 
 	// check if this template is valid
-	function is_cached()
+	function is_cached($dummy1=null, $dummy2=null, $dummy3=null)
 	{
 		global $login;
 

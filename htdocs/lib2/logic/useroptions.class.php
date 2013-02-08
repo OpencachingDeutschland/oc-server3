@@ -105,7 +105,7 @@ class useroptions
 			$this->nOptions[$pId]['option_value'] = $pValue;
 			return true;
 		}
-		else if (ereg($this->nOptions[$pId]['check_regex'], $pValue) || strlen($pValue) == 0)
+		else if (preg_match("/" . $this->nOptions[$pId]['check_regex'] . "/", $pValue) || strlen($pValue) == 0)
 		{
 			$this->nOptions[$pId]['option_value'] = $pValue;
 			return true;

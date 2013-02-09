@@ -391,7 +391,7 @@ function toggleAttr(id)
 	<tr>
 		<td colspan="2">
 			<input class="checkbox" type="checkbox" name="TOS" value="1"{toschecked}/>
-			{t}I have read and agree to the <a href="articles.php?page=impressum#tos" target="_blank">Opencaching.de Terms of Service</a>{/t}
+			{t}I have read and agree to the <a href="articles.php?page=impressum#tos" target="_blank">Opencaching.de Terms of Service</a> and the <a href="articles.php?page=impressum#datalicense" target="_blank">Opencaching.de Datalicense</a>{/t}
 			{tos_message}
 		</td>
 	</tr>

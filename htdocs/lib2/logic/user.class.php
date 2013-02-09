@@ -721,6 +721,352 @@ class user
 
 		return true;
 	}
+	
+	/**
+	 * disables user (if not disabled), removes all licensed content from db and
+	 * replaces every picture with a dummy one
+	 * 
+	 * @return bool false, if anything went wrong, true otherwise
+	 */
+	function disduelicense() {
+		
+		// get translation-object
+		global $translate;
+		
+		// check if disabled, disable if not
+		if($this->canDisable()) {
+			if(!$this->disable()) {
+				return 'disable user failed';
+			}
+		} 
+		
+		
+		
+		
+		/*
+		 * set all cache_desc and hint to ''
+		 */
+		// check if there are caches
+		$num_caches = sql_value("SELECT COUNT(*) FROM `caches` WHERE `user_id`='&1'",0,$this->getUserId());
+		if($num_caches > 0) {
+			
+			$cache_descs = array();
+			
+			$rs = sql(	"SELECT `cache_desc`.`id`,`cache_desc`.`language` " .
+						"FROM `cache_desc`,`caches` " .
+						"WHERE `caches`.`cache_id`=`cache_desc`.`cache_id` " .
+						"AND `caches`.`user_id`='&1'",
+							$this->getUserId()
+					);
+			while($cache_desc = sql_fetch_array($rs,MYSQL_ASSOC)) {
+				$cache_descs[] = $cache_desc;
+			}
+			
+			// walk through cache_descs and set message for each language
+			foreach($cache_descs as $desc) {
+				
+				sql("UPDATE `cache_desc` " .
+					"SET `desc`='&1',`hint`='&2' " .
+					"WHERE `id`='&3'",
+						$translate->t('Removed because owner declined content license', '',	basename(__FILE__), __LINE__, '', 1, $desc['language']),
+						'',
+						$desc['id']
+					);
+			}
+			
+			// replace pictures
+			$errmesg = $this->replace_pictures(OBJECT_CACHE);
+			if($errmesg !== true) {
+				return "removing cache pictures: $errmesg";
+			}
+		} 
+		
+		
+		
+		
+		/*
+		 * set all cache_logs ''
+		 */
+		// check if there are cache_logs
+		$num_cache_logs = sql_value("SELECT COUNT(*) " .
+									"FROM `cache_logs` " .
+									"WHERE `user_id`='&1'",
+										0,
+										$this->getUserId()
+									);
+		if($num_cache_logs > 0) {
+			
+			// set text ''
+			sql("UPDATE `cache_logs` " .
+				"SET `text`='&1' WHERE `user_id`='&2'",
+					'Removed because user declined content license',
+					$this->getUserId());
+			
+			// replace pictures
+			$errmesg = $this->replace_pictures(OBJECT_CACHELOG);
+			if($errmesg !== true) {
+				return "removing log pictures: $errmesg";
+			}
+		}
+		
+		// success
+		return true;
+		
+	}
+	
+	/**
+	 * replaces all pictures of $this-user with a dummy for the given object-type
+	 * @param int $object_type object_types-id from table object_types
+	 * @return bool true, if replacement worked, false otherwise
+	 */
+	function replace_pictures($object_type) {
+		
+		// get optionsarray
+		global $opt;
+		
+		// load bmp-support
+		require_once($opt['rootpath'].'lib2/imagebmp.inc.php');
+		
+		// paths cleared by trailing '/'
+		if(substr($opt['logic']['pictures']['dir'],-1) != '/') {
+			$picpath = $opt['logic']['pictures']['dir'];
+		} else {
+			$picpath = substr($opt['logic']['pictures']['dir'],0,-1);
+		}
+		$thumbpath = "$picpath/thumbs";
+		
+		if(isset($opt['logic']['pictures']['dummy']['bgcolor']) && is_array($opt['logic']['pictures']['dummy']['bgcolor'])) {
+			$dummybg = $opt['logic']['pictures']['dummy']['bgcolor'];
+		} else {
+			$dummybg = array(255,255,255);
+		}
+		if(isset($opt['logic']['pictures']['dummy']['text'])) {
+			$dummytext = $opt['logic']['pictures']['dummy']['text'];
+		} else {
+			$dummytext = '';
+		}
+		if(isset($opt['logic']['pictures']['dummy']['textcolor']) && is_array($opt['logic']['pictures']['dummy']['textcolor'])) {
+			$dummytextcolor = $opt['logic']['pictures']['dummy']['textcolor'];
+		} else {
+			$dummytextcolor = array(0,0,0);
+		}
+		
+		$tmh = 0;
+		$tmw = 0;
+		
+		/*
+		 * check log or cache
+		 */
+		if($object_type == OBJECT_CACHE) {
+			
+			// get filenames of the pictures of $this' caches
+			$rs = sql(	"SELECT `pictures`.`url` " .
+						"FROM `pictures`,`caches` " .
+						"WHERE `caches`.`cache_id`=`pictures`.`object_id`" .
+						"AND `caches`.`user_id`='&1'",
+							$this->getUserId()
+					);
+			
+			// set thumb-dimensions
+			$tmh = $opt['logic']['pictures']['thumb_max_height'];
+			$tmw = $opt['logic']['pictures']['thumb_max_width'];		
+		} elseif($object_type == OBJECT_CACHELOG) {
+			
+			// get filenames of the pictures of $this' logs
+			$rs = sql(	"SELECT `pictures`.`url` " .
+						"FROM `pictures`,`cache_logs` " .
+						"WHERE `cache_logs`.`id`=`pictures`.`object_id`" .
+						"AND `cache_logs`.`user_id`='&1'",
+							$this->getUserId()
+					);
+			
+			// set thumb-dimensions
+			$tmh = $opt['logic']['pictures']['thumb_max_height']/3;
+			$tmw = $opt['logic']['pictures']['thumb_max_width']/3;
+		}
+		
+		$filenames = array();
+		$i = 0;
+		while($url = sql_fetch_array($rs,MYSQL_NUM)) {
+			$filenames[] = substr($url[$i],-40);
+			$i++;
+		}
+		
+		// free result
+		sql_free_result($rs);	
+	
+	
+		/*
+		 * walk through filenames and replace original
+		 */
+		// check if there is something to replace
+		if(count($filenames) > 0) {
+			
+			foreach($filenames as $fn) {
+				
+				// get uuid and extension
+				$uuid = substr($fn,0,36);
+				$ext = substr($fn,-3);
+				$thumb_dir1 = substr($uuid,0,1);
+				$thumb_dir2 = substr($uuid,1,1);
+				
+				// read original size
+				if(file_exists("$picpath/$fn")) {
+					list($w,$h,$t,$attr) = getimagesize("$picpath/$fn");
+				} else {
+					$w = 600;
+					$h = 480;
+				}
+				
+				// create new image
+				$im = imagecreatetruecolor($w,$h);
+				// allocate colors
+				$col_bg = imagecolorallocate($im,$dummybg[0],$dummybg[1],$dummybg[2]);
+				$col_text = imagecolorallocate($im,$dummytextcolor[0],$dummytextcolor[1],$dummytextcolor[2]);
+				
+				// fill bg
+				imagefill($im,0,0,$col_bg);
+				
+				// check for replacement-image
+				if($opt['logic']['pictures']['dummy']['replacepic'] != $opt['rootpath'] . 'images/' && file_exists($opt['logic']['pictures']['dummy']['replacepic'])) {
+					
+					// get dimensions of the replacement
+					list($rw,$rh,$rt,$rattr) = getimagesize($opt['logic']['pictures']['dummy']['replacepic']);
+					$rwh = 0;
+					if($rw > $rh) {
+						$rwh = $rh;
+					} else {
+						$rwh = $rw;
+					}
+					
+					// check dimensions of original and set replacement size
+					$rsize = 0;
+					if($w > $h) {
+						if(($h * 0.85) > $rwh) {
+							$rsize = $rwh;
+						} else {
+							$rsize = $h * 0.9;
+						}
+					} else {
+						if(($w * 0.85) > $rwh) {
+							$rsize = $rwh;
+						} else {
+							$rsize = $w * 0.9;
+						}
+					}
+					$dx = ($w-$rsize)/2;
+					$dy = ($h-$rsize)/2;
+					
+					// get replacement image
+					$rext = substr($opt['logic']['pictures']['dummy']['replacepic'],-3);
+					$rim = null;
+					if($rext == 'jpg') {
+						$rim = imagecreatefromjpeg($opt['logic']['pictures']['dummy']['replacepic']);
+					} elseif($rext == 'png') {
+						$rim = imagecreatefrompng($opt['logic']['pictures']['dummy']['replacepic']);
+					} elseif($rext == 'gif') {
+						$rim = imagecreatefromgif($opt['logic']['pictures']['dummy']['replacepic']);
+					} elseif($rext == 'bmp') {
+						$rim = imagecreatefrombmp($opt['logic']['pictures']['dummy']['replacepic']);
+					}
+					
+					// copy image
+					if(!is_null($rim)) {
+						imagecopyresampled($im, $rim, $dx, $dy, 0, 0, $rsize, $rsize, $rw, $rh);
+					}
+					
+					
+				} else {
+				
+					// set text
+					if($dummytext != '') {
+						imagestring($im,1,10,$h/2,$dummytext,$col_text);
+					}
+				}
+				
+				// save dummy
+				if($ext == 'jpg') {
+					if(!imagejpeg($im,"$picpath/$fn",75)) {
+						return "save dummy failed [$ext]";
+					}
+				} elseif($ext == 'png') {
+					if(!imagepng($im,"$picpath/$fn",4)) {
+						return "save dummy failed [$ext]";
+					}
+				} elseif($ext == 'gif') {
+					if(!imagegif($im,"$picpath/$fn")) {
+						return "save dummy failed [$ext]";
+					}
+				} elseif($ext == 'bmp') {
+					if(!imagebmp($im,"$picpath/$fn")) {
+						return "save dummy failed [$ext]";
+					}
+				}else {
+					return "save dummy failed [$ext], unknown extension";
+				}
+				
+				// set thumb-dimensions
+				if (($h > $tmh) || ($w > $tmw))
+				{
+					if ($h > $w)
+					{
+						$th = $tmh;
+						$tw = $w * ($th / $h);
+					}
+					else
+					{
+						$tw = $tmw;
+						$th = $h * ($tw / $w);
+					}
+				}
+				else
+				{
+					$tw = $w;
+					$th = $h;
+				}
+				
+				// copy dummy
+				$tim = imagecreatetruecolor($tw, $th);
+				imagecopyresampled($tim, $im, 0, 0, 0, 0, $tw, $th, $w, $h);
+				
+				// check directories or create them
+				if(!file_exists("$thumbpath/$thumb_dir1")){
+					if(!mkdir("$thumbpath/$thumb_dir1")) {
+						return 'mkdir in thumbpath failed';
+					}
+				}
+				if(!file_exists("$thumbpath/$thumb_dir1/$thumb_dir2")){
+					if(!mkdir("$thumbpath/$thumb_dir1/$thumb_dir2")) {
+						return 'mkdir in thumbpath failed';
+					}
+				}
+				
+				// save thumb
+				if($ext == 'jpg') {
+					if(!imagejpeg($tim,"$thumbpath/$thumb_dir1/$thumb_dir2/$fn",75)) {
+						return "save thumb failed [$ext]";
+					}
+				} elseif($ext == 'png') {
+					if(!imagepng($tim,"$thumbpath/$thumb_dir1/$thumb_dir2/$fn",4)) {
+						return "save thumb failed [$ext]";
+					}
+				} elseif($ext == 'gif') {
+					if(!imagegif($tim,"$thumbpath/$thumb_dir1/$thumb_dir2/$fn")) {
+						return "save thumb failed [$ext]";
+					}
+				} elseif($ext == 'bmp') {
+					if(!imagebmp($tim,"$thumbpath/$thumb_dir1/$thumb_dir2/$fn")) {
+						return "save thumb failed [$ext]";
+					}
+				}else {
+					return "save thumb failed [$ext], unknown extension";
+				}
+			}
+		}
+		
+		// success
+		return true;
+	}
 
 	function canDelete()
 	{

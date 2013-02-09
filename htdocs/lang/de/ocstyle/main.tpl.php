@@ -222,9 +222,18 @@
 								<img src="https://www.paypal.com/de_DE/DE/i/btn/btn_donateCC_LG.gif" alt="{t}Donations{/t}" style="border:0px;" />
 							</a>
 						</div>
+						<p>&nbsp;</p>
 <?php
 					}
 ?>
+
+					<!-- Datalicense -->
+					<p class="sidebar-maintitle">{t}Datalicense{/t}</p>
+					<div style="margin-top:20px;width:100%;text-align:center;">
+						<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/3.0/de/"><img alt="Creative Commons Lizenzvertrag" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-nd/3.0/de/88x31.png" /></a><br />Die Inhalte von www.opencaching.de stehen unter einer<br /><a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/3.0/de/">Creative Commons Namensnennung-NichtKommerziell-KeineBearbeitung 3.0 Deutschland Lizenz</a>.
+						<br />
+						&nbsp;
+					</div>
 
 					<div class="sidebar-txtbox-noshade">
 						<p class="content-txtbox-noshade-size5">

@@ -206,9 +206,9 @@
 			<tr>
 				<td colspan="2">
 					<input type="checkbox" name="TOS" value="ON" style="border:0;" />
-						{t}I've  read and understand the <a target="_blank" href="articles.php?page=dsb">privacy statement</a> and the <a target="_blank" href="articles.php?page=tos">terms of use</a> and accept them.{/t}
+						{t}I've  read and understand the <a target="_blank" href="articles.php?page=dsb">privacy statement</a>, the <a target="_blank" href="articles.php?page=impressum#tos">terms of service</a> and the <a href="articles.php?page=impressum#datalicense" target="_blank">Datalicense</a> and accept them.{/t}
 					{if $error_tos_not_ok==1}
-						<br /><span class="errormsg">{t}You have to accept the privacy statement and terms of use to register at opencaching.de{/t}</span>
+						<br /><span class="errormsg">{t}You have to accept the privacy statement, terms of service and the datalicense to register at opencaching.de{/t}</span>
 					{/if}
 				</td>
 			</tr>

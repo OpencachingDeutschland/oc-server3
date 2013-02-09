@@ -106,6 +106,11 @@
 
 			<tr><td class="spacer" colspan="2"></td></tr>
 
+			<tr>
+				<td>&nbsp;</td>
+				<td><input type="checkbox" name="chkdisduelicense" value="1" /> {t}Disable (and lock all geocaches owned) and remove all foreign licensed content{/t}</td>
+			</tr>
+
 			{if $candisable==true}
 				<tr>
 					<td>&nbsp;</td>
@@ -119,7 +124,7 @@
 				</tr>
 			{/if}
 
-			{if $candelete==true || $candisable==true}
+{*			{if $candelete==true || $candisable==true} *}
 				<tr>
 					<td>&nbsp;</td>
 					<td><input type="checkbox" name="chkcommit" value="1" /> {t}Sure?{/t}</td>
@@ -130,7 +135,7 @@
 					<td>&nbsp;</td>
 					<td><input type="submit" value="{t}Submit{/t}" /></td>
 				</tr>
-			{/if}
+{*			{/if} *}
 		</table>
 	</form>
 {/if}

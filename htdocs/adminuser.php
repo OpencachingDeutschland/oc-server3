@@ -61,19 +61,24 @@ function formAction()
 	$delete = isset($_REQUEST['chkdelete']) ? $_REQUEST['chkdelete']+0 : 0;
 	$disable = isset($_REQUEST['chkdisable']) ? $_REQUEST['chkdisable']+0 : 0;
 	$userid = isset($_REQUEST['userid']) ? $_REQUEST['userid']+0 : 0;
+	$disduelicense = isset($_REQUEST['chkdisduelicense']) ? $_REQUEST['chkdisduelicense']+0 : 0;
 
 	$user = new user($userid);
 	if ($user->exist() == false)
 		$tpl->error(ERROR_UNKNOWN);
 	$username = $user->getUsername();
 
-	if ($delete == 1 && $disable == 1)
-		$tpl->error('You cannot delete and disable the same time!');
+	if ($delete + $disable + $disduelicense > 1)
+		$tpl->error('Please select only one of the delete/disable options!');
 
 	if ($commit == 0)
 		$tpl->error('You have to check that you are sure!');
 
-	if ($disable == 1)
+	if ($disduelicense == 1) {
+		$errmesg = $user->disduelicense();
+		if ($errmesg !== true)
+			$tpl->error($errmesg);
+	} elseif ($disable == 1)
 	{
 		if ($user->disable() == false)
 			$tpl->error(ERROR_UNKNOWN);
@@ -83,7 +88,7 @@ function formAction()
 		if ($user->delete() == false)
 			$tpl->error(ERROR_UNKNOWN);
 	}
-
+	
 	$tpl->redirect('adminuser.php?action=searchuser&username=' . urlencode($username));
 }
 

@@ -4,6 +4,8 @@
 																-------------------
 			begin                : November 1 2005 
 
+			This OLD CODE is included only for reference and no longer used.
+			
 		For license information see doc/license.txt
 	****************************************************************************/
 

@@ -90,9 +90,7 @@ List of third party components:
         URI     : http://epp.eurostat.ec.europa.eu/portal/page?_pageid=2254,62148876,2254_62153840&_dad=portal&_schema=PORTAL
         (*** DEAD LINK ***)
 
-    12. NuSOAP: SOAP Toolkit for PHP
-        URI     : http://sourceforge.net/projects/nusoap/
-        License : LGPL 2.1
+    12. (NuSOAP - cancelled)
 
     13. FamFamFam Flag
         URI     : http://www.famfamfam.com/lab/icons/flags/

@@ -723,6 +723,17 @@ class user
 	}
 	
 	
+	function canDisableDueLicense()
+	{
+		global $login;
+		$login->verify();
+
+		if ($login->userid != $this->nUserId && ($login->admin & ADMIN_USER) != ADMIN_USER)
+			return false;
+		else
+			return true;
+	}
+
 	/**
 	 * disables user (if not disabled), removes all licensed content from db and
 	 * replaces every picture with a dummy one
@@ -735,7 +746,9 @@ class user
 		global $translate;
 		
 		// check if disabled, disable if not
-		if ($this->canDisable()) 
+		if (!$this->canDisableDueLicense())
+			return 'this user must not be disabled';
+	 	if ($this->canDisable()) 
 			if (!$this->disable()) 
 				return 'disable user failed';
 		
@@ -790,9 +803,9 @@ class user
 			// set text ''
 			sql("UPDATE `cache_logs` " .
 					"SET `text`='&1' WHERE `user_id`='&2'",
-						"<em>Der Logtext wurde entfernt, weil der Benutzer die Opencaching.de-Datenlizenz abgelehnt hat." .
+						"<em>Dieser Logtext wurde entfernt, weil der Benutzer die Opencaching.de-Datenlizenz abgelehnt hat." .
 						"<br /><br />" .
-						"The text has been deleted because the used declined the Opencaching.de data license.</em>", 
+						"This text has been deleted because the used declined the Opencaching.de data license.</em>", 
 					$this->getUserId());
 			
 			// replace pictures

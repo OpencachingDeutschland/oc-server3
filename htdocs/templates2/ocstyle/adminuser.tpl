@@ -16,6 +16,9 @@
 		{if $error=='userunknown'}
 			<p style="line-height: 1.6em; color: red; font-weight: bold;">{t}Username unknown{/t}</p>
 		{/if}
+		{if $success=='1'}
+			<p style="line-height: 1.6em; color: green; font-weight: bold;">{t}User status was successfully changed.{/t}</p>		
+		{/if}
 		
 		<p style="line-height: 1.6em;"><input type="submit" value="{t}Submit{/t}" /></p>
 		

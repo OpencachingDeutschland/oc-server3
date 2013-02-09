@@ -17,6 +17,9 @@
 
 	if (($login->admin & ADMIN_USER) != ADMIN_USER)
 		$tpl->error(ERROR_NO_ACCESS);
+	
+	if (isset($_REQUEST['success']) && $_REQUEST['success'])
+	  $tpl->assign('success','1'); 
 
 	$action = isset($_REQUEST['action']) ? $_REQUEST['action'] : 'display';
 
@@ -55,7 +58,7 @@ function sendCode()
 
 function formAction()
 {
-	global $tpl, $login;
+	global $tpl, $login, $translate;
 
 	$commit = isset($_REQUEST['chkcommit']) ? $_REQUEST['chkcommit']+0 : 0;
 	$delete = isset($_REQUEST['chkdelete']) ? $_REQUEST['chkdelete']+0 : 0;
@@ -69,10 +72,10 @@ function formAction()
 	$username = $user->getUsername();
 
 	if ($delete + $disable + $disduelicense > 1)
-		$tpl->error('Please select only one of the delete/disable options!');
+		$tpl->error($translate->t('Please select only one of the delete/disable options!','','',0));
 
 	if ($commit == 0)
-		$tpl->error('You have to check that you are sure!');
+		$tpl->error($translate->t('You have to check that you are sure!','','',0));
 
 	if ($disduelicense == 1) {
 		$errmesg = $user->disduelicense();
@@ -89,7 +92,8 @@ function formAction()
 			$tpl->error(ERROR_UNKNOWN);
 	}
 	
-	$tpl->redirect('adminuser.php?action=searchuser&username=' . urlencode($username));
+	$tpl->redirect('adminuser.php?action=searchuser&username=' . urlencode($username) . 
+								 '&success=' . ($disduelicense + $disable + $delete));  
 }
 
 function searchUser()

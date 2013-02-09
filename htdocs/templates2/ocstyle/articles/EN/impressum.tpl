@@ -105,7 +105,7 @@
 	</p>
 	
 	<p>&nbsp;</p>
-<div>
+</div>
 
 <div class="content2-container bg-blue02">
 	<p class="content-title-noshade-size3">
@@ -253,7 +253,7 @@
 		The form of attribution is:
 	</p>
 	<p style="font-weight: 800;">
-		&copy; $USERNAME, www.opencaching.de, CC-BY-NC-ND, Stand: $DATUM
+		&copy; $USERNAME, www.opencaching.de, CC-BY-NC-ND, as of $DATUM
 	</p>
 	<p>
 		Date may be omitted for photos and log entries.

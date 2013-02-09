@@ -93,7 +93,7 @@ function formAction()
 	}
 	
 	$tpl->redirect('adminuser.php?action=searchuser&username=' . urlencode($username) . 
-								 '&success=' . ($disduelicense + $disable + $delete));  
+								 '&success=' . ($disduelicense + $disable));  
 }
 
 function searchUser()

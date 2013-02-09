@@ -4,11 +4,11 @@
 *  Unicode Reminder メモ
 ***************************************************************************}
 	<div class="content2-pagetitle">
-		<img src="resource2/{$opt.template.style}/images/misc/32x32-haken-white-bg.png" style="align: left; margin-right: 10px;" width="32" height="32" alt="" />So k&ouml;nnen Sie uns unterst&uuml;tzen
+		<img src="resource2/{$opt.template.style}/images/misc/32x32-haken-white-bg.png" style="align: left; margin-right: 10px;" width="32" height="32" alt="" />So kannst Du uns unterst&uuml;tzen
 	</div>
 	<div class="content-txtbox-noshade" style="padding-right: 25px;">
 
-			<p>Wir freuen uns, dass Ihr die Spenden-Seite aufgerufen haben. Neben tatkr&auml;ftigen, helfenden H&auml;nden im Freiwilligen-Team <b>Opencaching.de</b> k&ouml;nnen wir zur Sicherung und Erweiterung des f&uuml;r Euch v&ouml;llig kostenfreien 
+			<p>Wir freuen uns, dass Du die Spenden-Seite aufgerufen hast. Neben tatkr&auml;ftigen, helfenden H&auml;nden im Freiwilligen-Team <b>Opencaching.de</b> k&ouml;nnen wir zur Sicherung und Erweiterung des f&uuml;r Euch v&ouml;llig kostenfreien 
 			Angebotes Eure Unterst&uuml;tzung gut gebrauchen.</p>
 
 			<p>Mit Eurer freundlichen Spende sorgt Ihr vor allem daf&uuml;r, dass wir das Webhosting der Opencaching-Angebote finanzieren k&ouml;nnen. Details zur Verwendung finden Ihr weiter unten.</p>

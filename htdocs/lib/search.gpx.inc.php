@@ -13,61 +13,75 @@
 	$gpxHead = 
 '<?xml version="1.0" encoding="utf-8"?>
 <gpx xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" version="1.0" creator="Opencaching.de - http://www.opencaching.de" xsi:schemaLocation="http://www.topografix.com/GPX/1/0 http://www.topografix.com/GPX/1/0/gpx.xsd http://www.groundspeak.com/cache/1/0/1 http://www.groundspeak.com/cache/1/0/1/cache.xsd" xmlns="http://www.topografix.com/GPX/1/0">
-  <name>Cache Listing Generated from Opencaching.de</name>
+  <name>Cache listing generated from Opencaching.de</name>
   <desc>This is a waypoint file generated from Opencaching.de</desc>
   <author>Opencaching.de</author>
-  <email>info@opencaching.de</email>
+  <email>contact@opencaching.de</email>
   <url>http://www.opencaching.de</url>
-  <urlname>Geocaching in Deutschland, Oesterreich und der Schweiz</urlname>
+  <urlname>Opencaching.de - Geocaching in Deutschland, Oesterreich und der Schweiz</urlname>
   <time>{time}</time>
-  <keywords>cache, geocache, opencaching, waypoint, opencachingnetwork</keywords>';
+  <keywords>cache, geocache, opencaching, waypoint</keywords>
+';
 	
 	$gpxLine = 
 '  <wpt lat="{lat}" lon="{lon}">
-	<time>{time}</time>
-	<name>{waypoint}</name>
-	<desc>{cachename}</desc>
-	<src>www.opencaching.de</src>
-	<url>http://www.opencaching.de/viewcache.php?cacheid={cacheid}</url>
-	<urlname>{cachename}</urlname>
-	<sym>{sym}</sym>
-	<type>Geocache|{type}</type>
-	<groundspeak:cache  id="{cacheid}" {status} xmlns:groundspeak="http://www.groundspeak.com/cache/1/0">
-	  <groundspeak:name>{cachename}</groundspeak:name>
-	  <groundspeak:placed_by>{owner}</groundspeak:placed_by>
-	  <groundspeak:owner id="{userid}">{owner}</groundspeak:owner>
-	  <groundspeak:type>{type}</groundspeak:type>
-	  <groundspeak:container>{container}</groundspeak:container>
-	  <groundspeak:attributes>
-{attributes}	  </groundspeak:attributes>
-	  <groundspeak:difficulty>{difficulty}</groundspeak:difficulty>
-	  <groundspeak:terrain>{terrain}</groundspeak:terrain>
-	  <groundspeak:country>{country}</groundspeak:country>
-	  <groundspeak:state>{state}</groundspeak:state>
-	  <groundspeak:short_description html="True">{shortdesc}</groundspeak:short_description>
-	  <groundspeak:long_description html="True">{desc}</groundspeak:long_description>
-	  {hints}
-	  <groundspeak:logs>
-{logs}	  </groundspeak:logs>
-	  <groundspeak:travelbugs>
-{geokrety}	  </groundspeak:travelbugs>
-	</groundspeak:cache>
+    <time>{time}</time>
+    <name>{waypoint}</name>
+    <desc>{cachename}</desc>
+    <src>www.opencaching.de</src>
+    <url>http://www.opencaching.de/viewcache.php?cacheid={cacheid}</url>
+    <urlname>{cachename}</urlname>
+    <sym>{sym}</sym>
+    <type>Geocache|{type}</type>
+    <groundspeak:cache id="{cacheid}" {status} xmlns:groundspeak="http://www.groundspeak.com/cache/1/0">
+      <groundspeak:name>{cachename}</groundspeak:name>
+      <groundspeak:placed_by>{owner}</groundspeak:placed_by>
+      <groundspeak:owner id="{userid}">{owner}</groundspeak:owner>
+      <groundspeak:type>{type}</groundspeak:type>
+      <groundspeak:container>{container}</groundspeak:container>
+      <groundspeak:attributes>
+{attributes}      </groundspeak:attributes>
+      <groundspeak:difficulty>{difficulty}</groundspeak:difficulty>
+      <groundspeak:terrain>{terrain}</groundspeak:terrain>
+      <groundspeak:country>{country}</groundspeak:country>
+      <groundspeak:state>{state}</groundspeak:state>
+      <groundspeak:short_description html="True">{shortdesc}</groundspeak:short_description>
+      <groundspeak:long_description html="True">{desc}</groundspeak:long_description>
+{hints}      <groundspeak:logs>
+{logs}      </groundspeak:logs>
+      <groundspeak:travelbugs>
+{geokrety}      </groundspeak:travelbugs>
+    </groundspeak:cache>
   </wpt>
-';
+{cache_waypoints}';
 
-	$gpxAttributes = '		  <groundspeak:attribute id="{attrib_id}" inc="1">{attrib_name}</groundspeak:attribute>';
+	$gpxAttributes = ' 	      <groundspeak:attribute id="{attrib_id}" inc="1">{attrib_name}</groundspeak:attribute>';
 
-	$gpxLog = '		<groundspeak:log id="{id}">
-		  <groundspeak:date>{date}</groundspeak:date>
-		  <groundspeak:type>{type}</groundspeak:type>
-		  <groundspeak:finder id="{userid}">{username}</groundspeak:finder>
-		  <groundspeak:text encoded="False">{text}</groundspeak:text>
-		</groundspeak:log>';
+	$gpxLog = '      <groundspeak:log id="{id}">
+        <groundspeak:date>{date}</groundspeak:date>
+        <groundspeak:type>{type}</groundspeak:type>
+        <groundspeak:finder id="{userid}">{username}</groundspeak:finder>
+        <groundspeak:text encoded="False">{text}</groundspeak:text>
+      </groundspeak:log>';
 
 	$gpxGeokrety = '		<groundspeak:travelbug id="{gkid}" ref="{gkref}">
 		  <groundspeak:name>{gkname}</groundspeak:name>
 		</groundspeak:travelbug>';
 
+	$gpxWaypoints = '  <wpt lat="{wp_lat}" lon="{wp_lon}">
+    <time>{time}</time>
+    <name>{name}</name>
+    <cmt>{comment}</cmt>
+    <desc>{desc}</desc>
+    <url>' . $absolute_server_URI . 'viewcache.php?cacheid={cacheid}</url>
+    <urlname>{parent} {cachename}</urlname>
+    <sym>{type}</sym>
+    <type>Waypoint|{type}</type>
+    <gsak:wptExtension xmlns:gsak="http://www.gsak.net/xmlv1/4">
+      <gsak:Parent>{parent}</gsak:Parent>
+    </gsak:wptExtension>
+  </wpt>
+';
 
 	$gpxFoot = '</gpx>';
 
@@ -88,7 +102,7 @@
 	$gpxContainer[7] = 'Virtual';
 	$gpxContainer[8] = 'Micro';
 
-	// known by gpx
+	// cache types known by gpx
 	$gpxType[0] = 'Unknown Cache';
 	$gpxType[2] = 'Traditional Cache';
 	$gpxType[3] = 'Multi-cache';
@@ -375,6 +389,8 @@
 	$gpxHead = mb_ereg_replace('{time}', date($gpxTimeFormat, time()), $gpxHead);
 	append_output($gpxHead);
 
+	$childwphandler = new ChildWp_Handler();
+
 	// ok, output ...
 
 	if ($usr === false)
@@ -416,7 +432,8 @@
 		if ($r['hint'] == '')
 			$thisline = mb_ereg_replace('{hints}', '', $thisline);
 		else
-			$thisline = mb_ereg_replace('{hints}', '<groundspeak:encoded_hints>' . xmlentities(strip_tags($r['hint'])) . '</groundspeak:encoded_hints>', $thisline);
+			$thisline = mb_ereg_replace('{hints}', '      <groundspeak:encoded_hints>' . xmlentities(strip_tags($r['hint'])) . '</groundspeak:encoded_hints>
+', $thisline);
 
 		$thisline = mb_ereg_replace('{shortdesc}', xmlentities($r['short_desc']), $thisline);
 		$thisline = mb_ereg_replace('{desc}', xmlentities($r['desc']), $thisline);
@@ -454,15 +471,33 @@
 		else
 			$thisline = mb_ereg_replace('{sym}', xmlentities($gpxSymNormal), $thisline);
 
-		// clear logs, attributes and geokrety
+		// clear cache specific data
 		$logentries = '';
+		$cache_note = false;
 		$attribentries = '';
+		$waypoints = '';
 		$gkentries = '';
 
 		// fetch logs
 
 		if ($user_id != 0)
 		{
+			// insert personal note
+			$cacheNote = getCacheNote($user_id, $r['cacheid']);
+			if ($cacheNote)
+			{
+				$thislog = $gpxLog;
+
+				$thislog = mb_ereg_replace('{id}', 0, $thislog);
+				$thislog = mb_ereg_replace('{date}', date($gpxTimeFormat), $thislog);
+				$thislog = mb_ereg_replace('{userid}', $user_id, $thislog);
+				$thislog = mb_ereg_replace('{username}', xmlentities($login->username), $thislog);
+				$thislog = mb_ereg_replace('{type}', $gpxLogType[3], $thislog);
+				$thislog = mb_ereg_replace('{text}', xmlentities($cacheNote['note']), $thislog);
+
+				$logentries .= $thislog . "\n";
+			}
+
 			// current users logs
 			$rsLogs = sql_slave("SELECT `cache_logs`.`id`, `cache_logs`.`type`, `cache_logs`.`date`, `cache_logs`.`text`, `user`.`username`, `user`.`user_id` FROM `cache_logs`, `user` WHERE `cache_logs`.`user_id`=`user`.`user_id` AND `cache_logs`.`cache_id`=&1 AND `user`.`user_id`=&2 ORDER BY `cache_logs`.`date` DESC", $r['cacheid'], $user_id);
 			while ($rLog = sql_fetch_array($rsLogs))
@@ -543,6 +578,50 @@
 		mysql_free_result($rsGeokrety);
 		$thisline = mb_ereg_replace('{geokrety}', $gkentries, $thisline);
 
+		// additional waypoints, including personal cache note
+		$childWaypoints = $childwphandler->getChildWps($r['cacheid']);
+		$n = 1;
+
+		foreach ($childWaypoints as $childWaypoint)
+		{
+			$thiswp = $gpxWaypoints;
+			$thiswp = str_replace('{wp_lat}', sprintf('%01.5f', $childWaypoint['latitude']), $thiswp);
+			$thiswp = str_replace('{wp_lon}', sprintf('%01.5f', $childWaypoint['longitude']), $thiswp);
+			$thiswp = str_replace('{time}', $time, $thiswp);
+			$thiswp = str_replace('{name}', $r['waypoint'].'W'.$n , $thiswp);
+			$thiswp = str_replace('{cachename}', xmlentities($r['name']), $thiswp);
+			$thiswp = str_replace('{comment}',xmlentities($childWaypoint['description']), $thiswp);
+			$thiswp = str_replace('{desc}', $translate->t('Waypoint','','',0).' '.$n, $thiswp);
+			switch ($childWaypoint['type'])
+			{
+				case 1: $wp_typename = "Parking Area";
+				defailt: $wp_typename = "Reference Point";
+			}
+			$thiswp = str_replace('{type}', $wp_typename, $thiswp);
+			$thiswp = str_replace('{parent}', $r['waypoint'], $thiswp);
+		  $thiswp = str_replace('{cacheid}', $r['cacheid'], $thiswp);
+			$waypoints .= $thiswp;
+			++$n;
+		}
+
+		if ($cacheNote && !empty($cacheNote['latitude']) && !empty($cacheNote['longitude']))
+		{
+			$thiswp = $gpxWaypoints;
+			$thiswp = str_replace('{wp_lat}', sprintf('%01.5f', $cacheNote['latitude']), $thiswp);
+			$thiswp = str_replace('{wp_lon}', sprintf('%01.5f', $cacheNote['longitude']), $thiswp);
+			$thiswp = str_replace('{time}', $time, $thiswp);
+			$thiswp = str_replace('{name}', $r['waypoint'].'NOTE', $thiswp);
+			$thiswp = str_replace('{cachename}', xmlentities($r['name']), $thiswp);
+			$thiswp = str_replace('{comment}', xmlentities($cacheNote['note']), $thiswp);
+			$thiswp = str_replace('{desc}', $translate->t('Personal cache note','','',0), $thiswp);
+			$thiswp = str_replace('{type}', "Reference Point", $thiswp);
+			$thiswp = str_replace('{parent}', $r['waypoint'], $thiswp);
+		  $thiswp = str_replace('{cacheid}', $r['cacheid'], $thiswp);
+			$waypoints .= $thiswp;
+		}
+
+		$thisline = mb_ereg_replace('{cache_waypoints}', $waypoints, $thisline);
+
 		append_output($thisline);
 	}
 	mysql_free_result($rs);
@@ -590,4 +669,16 @@
 		else
 			echo $str;
 	}
+
+	function getCacheNote($userid, $cacheid)
+	{
+		$cacheNoteHandler = new CacheNote_Handler();
+		$cacheNote = $cacheNoteHandler->getCacheNote($userid, $cacheid);
+
+		if (isset($cacheNote['note']) || isset($cacheNote['latitude']) || isset($cacheNote['longitude']))
+			return $cacheNote;
+
+		return null;
+	}
+
 ?>

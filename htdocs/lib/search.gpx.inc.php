@@ -581,6 +581,7 @@
 		// additional waypoints, including personal cache note
 		$childWaypoints = $childwphandler->getChildWps($r['cacheid']);
 		$n = 1;
+		$digits = "%0" . (floor(log10(count($childWaypoints))) + 1) . "d";
 
 		foreach ($childWaypoints as $childWaypoint)
 		{
@@ -588,14 +589,14 @@
 			$thiswp = str_replace('{wp_lat}', sprintf('%01.5f', $childWaypoint['latitude']), $thiswp);
 			$thiswp = str_replace('{wp_lon}', sprintf('%01.5f', $childWaypoint['longitude']), $thiswp);
 			$thiswp = str_replace('{time}', $time, $thiswp);
-			$thiswp = str_replace('{name}', $r['waypoint'].'W'.$n , $thiswp);
+			$thiswp = str_replace('{name}', $r['waypoint'].'W'.sprintf($digits,$n) , $thiswp);
 			$thiswp = str_replace('{cachename}', xmlentities($r['name']), $thiswp);
 			$thiswp = str_replace('{comment}',xmlentities($childWaypoint['description']), $thiswp);
 			$thiswp = str_replace('{desc}', $translate->t('Waypoint','','',0).' '.$n, $thiswp);
 			switch ($childWaypoint['type'])
 			{
-				case 1: $wp_typename = "Parking Area";
-				defailt: $wp_typename = "Reference Point";
+				case 1: $wp_typename = "Parking Area"; break;
+				default: $wp_typename = "Reference Point";
 			}
 			$thiswp = str_replace('{type}', $wp_typename, $thiswp);
 			$thiswp = str_replace('{parent}', $r['waypoint'], $thiswp);

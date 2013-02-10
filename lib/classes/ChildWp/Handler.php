@@ -36,7 +36,7 @@ class ChildWp_Handler
 
   public function getChildWp($childid)
   {
-    $rs = sql("SELECT id, cache_id, type, subtype, latitude, longitude, description FROM coordinates WHERE id = &1", $childid);
+    $rs = sql("SELECT id, cache_id, subtype, latitude, longitude, description FROM coordinates WHERE id = &1", $childid);
     $ret = $this->recordToArray(sql_fetch_array($rs));
     mysql_free_result($rs);
 

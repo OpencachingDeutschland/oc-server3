@@ -2254,6 +2254,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1814', 'Reporte
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1815', 'You have to check that you are sure!', '2013-02-09 17:34:01');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1816', 'cache description was removed because owner declined content license', '2013-02-09 17:34:01');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1817', 'User status was successfully changed.', '2013-02-09 17:34:01');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1818', 'Spoiler', '2013-02-11 11:40:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1819', 'After saving, you may need to press the reload button in your browser to see the selected picture in your profile.', '2013-02-15 00:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1820', 'You can now <a href=\"login.php\">login</a> with the new password.', '2013-02-14 00:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1821', 'OC.de new', '2013-02-15 00:48:04');
@@ -4378,6 +4379,7 @@ INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1814'
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1815', './adminuser.php', '75');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1816', './lib2/logic/user.class.php', '765');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1817', './templates2/ocstyle/adminuser.tpl', '20');
+INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1818', './lib/search.gpx.inc.php', '698');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1819', './lang/de/ocstyle/change_statpic.tpl', '72');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1820', './lang/de/ocstyle/newpw.tpl', '14');
 
@@ -5785,6 +5787,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1815', 'DE', 'Du muss bestaetigen, dass du sicher bist!', '2013-02-09 19:31:30');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1816', 'DE', 'Die Cachebeschreibung wurde gel\&ouml;scht, weil der Besitzer die Opencaching.de-Datenlizenz abgelehnt hat.', '2013-02-09 19:31:30');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1817', 'DE', 'Der Benutzerstatus wurde erfolgreich geändert.', '2013-02-09 19:31:30');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1818', 'DE', 'Spoiler', '2013-02-11 11:40:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1819', 'DE', 'Nach dem Speichern musst du evtl. auf den Seiten-Neuladeknopf deines Browsers drücken, um das gewählte Bild in deinem Profil zu sehen.', '2013-02-15 00:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1820', 'DE', 'Du kannst dich nun mit dem neuen Passwort <a href=\"login.php\">anmelden</a>.', '2013-02-14 00:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1821', 'DE', 'OC.de neu', '2013-02-14 00:48:07');
@@ -7191,6 +7194,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1815', 'EN', 'You have to check that you are sure!', '2013-02-09 19:30:23');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1816', 'EN', 'The cache description was removed, because the owner declined the Opencaching.de data license.', '2013-02-09 19:30:23');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1817', 'EN', 'User status was successfully changed.', '2013-02-09 19:31:30');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1818', 'EN', 'Spoiler', '2013-02-11 11:40:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1819', 'EN', 'After saving, you may need to press the reload button in your browser to see the selected picture in your profile.', '2013-02-14 00:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1820', 'EN', 'You can now <a href=\"login.php\">login</a> with the new password.', '2013-02-14 00:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1821', 'EN', 'OC.de new', '2013-02-14 00:48:07');

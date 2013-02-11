@@ -46,7 +46,7 @@
       <groundspeak:country>{country}</groundspeak:country>
       <groundspeak:state>{state}</groundspeak:state>
       <groundspeak:short_description html="True">{shortdesc}</groundspeak:short_description>
-      <groundspeak:long_description html="True">{desc}</groundspeak:long_description>
+      <groundspeak:long_description html="True">{desc}&lt;br /&gt;{images}</groundspeak:long_description>
 {hints}      <groundspeak:logs>
 {logs}      </groundspeak:logs>
       <groundspeak:travelbugs>
@@ -437,6 +437,7 @@
 
 		$thisline = mb_ereg_replace('{shortdesc}', xmlentities($r['short_desc']), $thisline);
 		$thisline = mb_ereg_replace('{desc}', xmlentities($r['desc']), $thisline);
+		$thisline = mb_ereg_replace('{images}', getPictures($r['cacheid']), $thisline);
 
 		if (isset($gpxType[$r['type']]))
 		$thisline = mb_ereg_replace('{type}', $gpxType[$r['type']], $thisline);
@@ -680,6 +681,26 @@
 			return $cacheNote;
 
 		return null;
+	}
+
+  // based on oc.pl code
+	function getPictures($cacheid)
+	{
+		global $translate;
+
+		$retval = "";
+		$rs = sql_slave("SELECT uuid, title, url, spoiler FROM pictures WHERE object_id='&1' AND object_type=2 AND display=1 ORDER BY date_created", $cacheid);
+
+		while ($r = sql_fetch_array($rs))
+		{
+			$retval .= '&lt;img src="' . $r['url'] . '"&gt;&lt;br /&gt;';
+			if ($r['spoiler'])
+			  $retval .= $translate->t('Spoiler','',basename(__FILE__), __LINE__) . ': ';
+			$retval .= xmlentities($r['title']) . '&lt;br /&gt; ';
+		}
+		mysql_free_result($rs);
+
+		return $retval;
 	}
 
 ?>

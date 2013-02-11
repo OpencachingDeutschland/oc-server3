@@ -159,6 +159,7 @@ class OcSmarty extends Smarty
 		$optn['template']['country'] = $login->getUserCountry();
 		$optn['page']['subtitle1'] = isset($opt['locale'][$opt['template']['locale']]['page']['subtitle1']) ? $opt['locale'][$opt['template']['locale']]['page']['subtitle1'] : $opt['page']['subtitle1'];
 		$optn['page']['subtitle2'] = isset($opt['locale'][$opt['template']['locale']]['page']['subtitle2']) ? $opt['locale'][$opt['template']['locale']]['page']['subtitle2'] : $opt['page']['subtitle2'];
+		$optn['page']['headimagepath'] = $opt['page']['headimagepath'];
 		$optn['page']['max_logins_per_hour'] = $opt['page']['max_logins_per_hour'];
 		$optn['page']['absolute_url'] = $opt['page']['absolute_url'];
 		$optn['page']['target'] = $this->target;

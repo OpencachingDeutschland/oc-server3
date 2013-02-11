@@ -828,7 +828,7 @@ a.info:hover span{ /*the span will display just on :hover state*/
 #breadcrumb
 {
 	position: absolute; 
-	top:180px; 
+	top:110px;
 	right: 250px;
 	left: 180px;
 	color:#505050;
@@ -844,7 +844,7 @@ a.info:hover span{ /*the span will display just on :hover state*/
 #breadcrumb_fullsize
 {
 	position: absolute; 
-	top:180px; 
+	top:110px;
 	right: 20px;
 	left: 180px;
 
@@ -873,7 +873,7 @@ ul.nodot li {
 
 #suchbox {
 	position: absolute; 
-	top:182px; 
+	top:112px; 
 	right: 5px;
 }
 
@@ -944,8 +944,8 @@ div.attribgroup table {
 
 #debugoc {
 	position: absolute;
-	left: 20px;
-	top: 75px;
+	left: 305px;
+	top: 4px;
 	border: solid 3px red;
 	padding: 15px;
 	z-index: 2;

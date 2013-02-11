@@ -131,32 +131,7 @@
 				<div id="bg1">&nbsp;</div>
 				<div id="bg2">&nbsp;</div>
 
-				{* <!-- HEADER --> *}
-				{* <!-- OC-Logo --> *}
-				<div><img src="resource2/{$opt.template.style}/images/oc_logo.png" alt="" style="margin-top: 5px; margin-left: 3px;" /></div>
-
-				{* <!-- Sitename --> *}
-				<div class="site-name">
-					<a href="index.php">
-						<p class="title">{$opt.page.title|escape}</p>
-						<p class="subtitle1">{$opt.page.subtitle1|escape}</p>
-						<p class="subtitle2">{$opt.page.subtitle2|escape}</p>
-					</a>
-				</div>
-
-				{* <!-- Site slogan --> *}
-				<div class="site-slogan-container">
-					{if $opt.page.sponsor.topright!=''}
-						{$opt.page.sponsor.topright}
-					{else}
-						<div class="site-slogan" style="border-width:0px;">
-							<div style="width: 100%; text-align: left;">
-								<p class="search">&nbsp;<br />&nbsp;</p>
-							</div>
-    				</div>
-					{/if}
-			</div>
-
+			{* <!-- HEADER --> *}
 			{* <!-- Debugschalter hier wieder einsetzen --> *}
 			{if ($opt.debug & DEBUG_DEVELOPER) == DEBUG_DEVELOPER}
 				<div id="debugoc"><font size="5" face="arial" color="red"><center>{t}Developer system - only testing{/t}</center></font></div>
@@ -166,9 +141,9 @@
 
 
 			{* <!-- Header banner --> *}						    		 						
-			<div class="header" style="height:81px;">
-				<div style="width: 970px; padding-top: 1px;">
-					<img src="resource2/{$opt.template.style}/images/head/rotator.php" width="970" height="80" alt="" style="border: 0px none ;" />
+			<div class="header" style="height:80px;">
+				<div style="width: 970px; ">
+					<img src="resource2/{$opt.template.style}/images/head/rotator.php?path={$opt.page.headimagepath}" width="970" height="80" alt="" style="border: 0px none ;" />
 				</div>
 			</div>
 

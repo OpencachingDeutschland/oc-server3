@@ -102,6 +102,7 @@
 	$opt['page']['absolute_url'] = $dev_baseurl;
 	$opt['mail']['from'] = 'root';
 	$opt['mail']['subject'] = '[local.opencaching.de] ';
+	$opt['page']['headimagepath'] = 'ocde';
 
 	/* location of uploaded images
 	 */

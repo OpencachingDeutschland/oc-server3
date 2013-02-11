@@ -158,27 +158,11 @@
 				<div id="bg2">&nbsp;</div>
 
   			<!-- HEADER -->
-				<!-- OC-Logo -->
-				<div><img src="resource2/{style}/images/oc_logo.png" alt="" style="margin-top: 5px; margin-left: 3px;" /></div>
-				<!-- Sitename -->
-				<div class="site-name">
-					<a href="index.php">
-						<p class="title">{opt_page_title}</p>
-						<p class="subtitle1">{opt_page_subtitle1}</p>
-						<p class="subtitle2">{opt_page_subtitle2}</p>
-					</a>
-				</div>
-
-				<!-- Site slogan -->
-				<div class="site-slogan-container">
-					{sponsortopright}
-				</div>	
-		
 				<?php echo isset($develwarning) ? $develwarning : '' ?>
 
 				<!-- Header banner -->
-				<div class="header" style="height:81px;">
-					<div style="width: 970px; padding-top: 1px;"><img src="resource2/{style}/images/head/rotator.php" width="970" height="80" alt="" style="border: 0px none ;" /></div>
+				<div class="header" style="height:80px;">
+					<div style="width: 970px; "><img src="resource2/{style}/images/head/rotator.php?path=<?php echo $opt['page']['headimagepath']; ?>" width="970" height="80" alt="" style="border: 0px none ;" /></div>
 				</div>	
 
 				<!-- Navigation Level 2 -->

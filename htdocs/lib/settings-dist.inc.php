@@ -151,6 +151,7 @@
 	$opt['page']['title'] = 'OPENCACHING';
 	$opt['page']['subtitle1'] = 'Geocaching with Opencaching';
 	$opt['page']['subtitle2'] = '';
+	$opt['page']['headimagepath'] = '';
 
   /* Sponsoring advertisements
    * (plain HTML)

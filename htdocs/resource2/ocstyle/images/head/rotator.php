@@ -104,9 +104,10 @@
 
 */
 
-
-	$folder = '.';
-
+	if (!empty($_REQUEST["path"]))
+		$folder = basename($_REQUEST["path"]);		// strip dirs for security reasons
+	else
+		$folder = '.';
 
 /*	
 

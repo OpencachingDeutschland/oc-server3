@@ -197,8 +197,10 @@
 	
 	// sponsor link on e.g. print preview and garmin-plugin
 	$opt['page']['sponsor']['popup'] = '';
-
   $opt['page']['sponsor']['bottom'] = 'Driven by the Opencaching Community';
+  
+  // directory of rotator pictures and script, relative to head images dir
+  $opt['page']['headimagepath'] = '';
 
  	/* disable or enable https access to the main site
  	 * if false and connection is https, redirect to $opt['page']['absolute_url']

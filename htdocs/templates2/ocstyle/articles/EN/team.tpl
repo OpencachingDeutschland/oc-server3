@@ -33,7 +33,7 @@
     <tr><td><img src="http://www.opencaching.de/images/team/dl6hbo.jpg" /></td><td><a href="http://opencaching.de/viewprofile.php?userid=148310">dl6hbo</a></td><td>server operation, documentation</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/doglobe.jpg" /></td><td><a href="http://opencaching.de/viewprofile.php?userid=193414">doglobe</a></td><td>cache maintenance organization</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/flopp.png" /></td><td><a href="http://opencaching.de/viewprofile.php?userid=126329">Flopp</a></td><td>software development, user support, data maintenance</td></tr>
-    <tr><td><img src="http://www.opencaching.de/images/team/following.png" /></td><td><a href="http://opencaching.de/viewprofile.php?userid=150360">following</a></td><td>data maintenance, message board moderation, wiki</td></tr>
+    <tr><td><img src="http://www.opencaching.de/images/team/following.png" /></td><td><a href="http://opencaching.de/viewprofile.php?userid=150360">following</a></td><td>data maintenance, software development, message board moderation, wiki</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/friedrichfroebel.jpg" /></td><td><a href="http://opencaching.de/viewprofile.php?userid=234947">FriedrichFröbel</a></td><td>wiki</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/dummy.jpg" /></td><td><a href="http://opencaching.de/viewprofile.php?userid=205779">Hanekju</a></td><td>data maintenance</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/hellstormde.jpg" /></td><td><a href="http://opencaching.de/viewprofile.php?userid=246033">HellstormDe</a></td><td>software development</td></tr>

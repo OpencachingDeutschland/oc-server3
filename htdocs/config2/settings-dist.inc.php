@@ -264,6 +264,15 @@
 	$opt['logic']['pictures']['thumb_url'] = $opt['logic']['pictures']['url'] . '/thumbs';
 	$opt['logic']['pictures']['thumb_dir'] = $opt['rootpath'] . 'images/uploads/thumbs';
 
+	/* Defaults for picture replacement on declined license
+	 *
+	 * replacement picture must be square sized
+	 */
+	$opt['logic']['pictures']['dummy']['bgcolor'] = array(255,255,255);
+	$opt['logic']['pictures']['dummy']['text'] = '';
+	$opt['logic']['pictures']['dummy']['textcolor'] = array(0,0,0);
+	$opt['logic']['pictures']['dummy']['replacepic'] = $opt['rootpath'] . 'images/';  	   
+
 	/* location of uploaded podcasts
 	 */
 	$opt['logic']['podcasts']['dir'] = $opt['rootpath'] . 'podcasts/uploads';

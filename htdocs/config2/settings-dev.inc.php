@@ -133,6 +133,11 @@
 	$opt['news']['mail'] = 'root';
 	$opt['mail']['subject'] = '[local.opencaching.de] ';
 
+	/* Purge log files - age in days (0 = keep infinite)
+	 */
+	$opt['logic']['logs']['purge_email'] = 0;
+	$opt['logic']['logs']['purge_userdata'] = 0;
+
  	/* 3rd party library options
  	 * see https://my.garmin.com/api/communicator/key-generator.jsp
  	 */

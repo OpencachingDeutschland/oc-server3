@@ -9,5 +9,6 @@ CREATE TABLE `email_user` (
   `to_user_id` int(10) unsigned NOT NULL default '0',
   `to_email` varchar(60) NOT NULL,
   PRIMARY KEY  (`id`),
-  KEY `from_user_id` (`from_user_id`)
+  KEY `from_user_id` (`from_user_id`),
+  KEY `date` (`date_created`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ;

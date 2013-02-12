@@ -604,6 +604,7 @@ INSERT INTO `logentries_types` (`id`, `module`, `eventname`) VALUES ('4', 'appro
 INSERT INTO `logentries_types` (`id`, `module`, `eventname`) VALUES ('5', 'cache', 'changeowner');
 INSERT INTO `logentries_types` (`id`, `module`, `eventname`) VALUES ('6', 'user', 'disable');
 INSERT INTO `logentries_types` (`id`, `module`, `eventname`) VALUES ('7', 'user', 'delete');
+INSERT INTO `logentries_types` (`id`, `module`, `eventname`) VALUES ('8', 'notification', 'sendmail');
 
 -- Table news_topics
 SET NAMES 'utf8';

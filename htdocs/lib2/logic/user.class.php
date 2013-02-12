@@ -711,12 +711,13 @@ class user
 		sql("UPDATE `user` SET `password`=NULL, `email`=NULL, 
 		                       `is_active_flag`=0, 
 		                       `latitude`=0, `longitude`=0, 
-		                       `last_name`='', `first_name`='', 
-		                       `country`=NULL, `new_pw_code`=NULL,
-		                       `new_pw_date`=NULL, `new_email`=NULL,
-		                       `new_email_code`=NULL, `activation_code`='',
+		                       `last_name`='', `first_name`='', `country`=NULL,
+		                       `new_pw_code`=NULL, `new_pw_date`=NULL,
+		                       `new_email`=NULL, `new_email_code`=NULL, `new_email_date`=NULL,
+		                       `permanent_login_flag`=0, `activation_code`='',
 		                       `notify_radius`=0, `statpic_text`=''
 		                 WHERE `user_id`='&1'", $this->nUserId);
+		sql("DELETE FROM `user_options` WHERE `user_id`='&1'", $this->nUserId);
 		$this->reload();
 
 		return true;

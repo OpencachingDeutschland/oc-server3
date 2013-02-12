@@ -10,5 +10,6 @@ CREATE TABLE `logentries` (
   `objectid2` int(10) unsigned NOT NULL default '0',
   `logtext` mediumtext NOT NULL,
   `details` blob NOT NULL,
-  PRIMARY KEY  (`id`)
+  PRIMARY KEY  (`id`),
+  KEY `date` (`date_created`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ;

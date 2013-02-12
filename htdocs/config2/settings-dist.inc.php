@@ -341,6 +341,11 @@
   // fill_gaps = false: continue with the last waypoint
   $opt['logic']['waypoint_pool']['fill_gaps'] = false;
 
+	/* Purge log files - age in days (0 = keep infinite)
+	 */
+	$opt['logic']['logs']['purge_email'] = 30;
+	$opt['logic']['logs']['purge_userdata'] = 14;
+
   /* Database charset
 	 *   frontend and php charsets are UTF-8
 	 *   here you can set a different charset for the MySQL-Engine

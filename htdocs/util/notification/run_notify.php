@@ -129,7 +129,7 @@ function process_new_cache($notify)
 	}
 
 	// logentry($module, $eventid, $userid, $objectid1, $objectid2, $logtext, $details)
-	logentry('notify_newcache', 5, $notify['recid'], $notify['cache_id'], 0, 'Sending mail to ' . $mailadr, array());
+	logentry('notify_newcache', 8, $notify['recid'], $notify['cache_id'], 0, 'Sending mail to ' . $mailadr, array());
 
 	return 0;
 }

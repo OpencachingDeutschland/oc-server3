@@ -86,6 +86,8 @@ function change()
 			$bError = true;
 			$tpl->assign('errorUnknown', true);
 		}
+		else if (!$bError)
+		  $tpl->redirect('mydetails.php');
 	}
 
 	assignFromDB($login->userid);

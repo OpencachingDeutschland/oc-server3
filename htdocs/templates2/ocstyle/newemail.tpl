@@ -9,6 +9,10 @@
 	{t}Change E-Mail address{/t}
 </div>
 
+{if $codeChanged==true}
+	<br /><p>&nbsp;<span class="okmsg">{t}The E-Mail-Address was changed.{/t}</span></p>
+{else}
+
 <form action="newemail.php" method="post" style="display: inline;">
 	<input type="hidden" name="request" value="1" />
 
@@ -94,8 +98,6 @@
 			<tr><td>&nbsp;</td><td class="errormsg">{t}There already exists an account with that E-Mail address. It's not possible the register a scond account with the same E-Mail address.{/t}</td></tr>
 		{elseif $codeErrorUnkown==true}
 			<tr><td>&nbsp;</td><td class="errormsg">{t}An unknown error occured.{/t}</td></tr>
-		{elseif $codeChanged==true}
-			<tr><td>&nbsp;</td><td class="successmsg">{t}The E-Mail-Address was changed.{/t}</td></tr>
 		{/if}
 		<tr><td class="spacer" colspan="2"></td></tr>
 		<tr><td class="spacer" colspan="2"></td></tr>
@@ -107,3 +109,5 @@
 		</tr>
 	</table>
 </form>
+
+{/if}

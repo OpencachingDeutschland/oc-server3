@@ -110,8 +110,8 @@
 				{
 					$tpl->assign('codeChanged', true);
 					$user->clearNewEMailCode();
-					$tpl->assign('newemail', '');
-					$tpl->assign('code', '');
+					// $tpl->assign('newemail', '');
+					// $tpl->assign('code', '');
 				}
 			}
 		}

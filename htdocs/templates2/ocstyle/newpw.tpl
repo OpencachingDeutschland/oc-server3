@@ -9,6 +9,11 @@
 	{t}Change password{/t}
 </div>
 
+{if $passwordChanged==true}
+	<br /><p>&nbsp;<span class="okmsg">{t}The password has been changed.{/t}</span></p>
+	<p>&nbsp;{t}You can now <a href="login.php">login</a> with the new password.{/t}</p>
+{else}
+
 <form action="newpw.php" method="post" style="display: inline;">
 	<table class="table">
 		<tr>
@@ -105,9 +110,6 @@
 			</td>	
 		</tr>
 		<tr><td class="spacer" colspan="2"></td></tr>
-		{if $passwordChanged==true}
-			<tr><td width="150px">&nbsp;</td><td><span class="successmsg">{t}The password has been changed, you can now <a href="login.php">login</a> with the new password.{/t}</span></td></tr>
-		{/if}
 		<tr><td class="spacer" colspan="2"></td></tr>
 		<tr>
 			<td class="header-small" colspan="2">
@@ -117,3 +119,5 @@
 		</tr>
 	</table>
 </form>
+
+{/if}

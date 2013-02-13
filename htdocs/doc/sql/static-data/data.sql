@@ -1443,7 +1443,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('610', 'Security
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('611', 'The security code is expired. Request a new one.', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('612', 'The security code does not match.', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('613', 'Please repeat:', '2010-08-28 11:48:04');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('614', 'The password has been changed, you can now <a href=\"login.php\">login</a> with the new password.', '2010-08-28 11:48:04');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('614', 'The password has been changed.', '2013-02-14 00:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('615', 'New email code', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('616', 'you requested at %1 a security code to change your E-Mail-Address.', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('617', 'You can verify your new E-Mail-Address at %1newemail.php', '2010-08-28 11:48:04');
@@ -2229,6 +2229,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1799', 'Only av
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1800', 'This cache can be done at certain seasons only - see the cache description for more details. For example, the cache may be placed in a corn labyrinth, which only exists from bloom to harvest season.', '2012-10-29 14:28:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1801', 'Help', '2012-11-09 19:28:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1802', 'Warning: This report is already assigned to another admin. Consult him first before you assume the report!', '2013-01-30 16:26:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1820', 'You can now <a href=\"login.php\">login</a> with the new password.', '2013-02-14 00:48:04');
 
 -- Table sys_trans_ref
 SET NAMES 'utf8';
@@ -4330,6 +4331,7 @@ INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1799'
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1800', 'table:cache_attrib;field=html_desc', '0');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1801', './lang/de/ocstyle/lib/menu.php', '199');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1802', './lang/de/ocstyle/adminreports.tpl', '83');
+INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1820', './lang/de/ocstyle/newpw.tpl', '14');
 
 -- Table sys_trans_text
 SET NAMES 'utf8';
@@ -4936,7 +4938,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('611', 'DE', 'Der Sicherheits-Code ist abgelaufen. Fordern Sie einen neuen an.', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('612', 'DE', 'Der Sicherheitscode stimmt nicht.', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('613', 'DE', 'Passwort wiederholen:', '2010-08-28 11:48:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('614', 'DE', 'Das Passwort wurde geändert, du kannst dich nun mit dem neuen Passwort <a href=\"login.php\">anmelden</a>.', '2010-08-28 11:48:06');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('614', 'DE', 'Das Passwort wurde geändert.', '2013-02-14 0:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('615', 'DE', 'Sicherheitscode für eine neue E-Mail-Adresse', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('616', 'DE', 'du hast am %1 einen Sicherheitscode angefordert, um deine E-Mail-Adresse zu ändern.', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('617', 'DE', 'Deine neue E-Mail-Adresse kannst du unter %1newemail.php aktivieren.', '2010-08-28 11:48:06');
@@ -5720,6 +5722,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1800', 'DE', 'Dieser Cache l\&auml;sst sich nur zu bestimmten Zeite im Jahr absolvieren. N\&auml;here Angaben sind in der Beschreibung des Caches zu finden. Der Cache kann beispielsweise in einem Maislabyrinth versteckt sein, das nur zwischen Bl\&uuml;te- und Erntezeit existiert.', '2012-10-29 14:28:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1801', 'DE', 'Hilfe', '2012-11-09 19:32:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1802', 'DE', 'Warnung: Diese Cachemeldung wird bereits von einem anderen Admin bearbeitet. Bitte sprich dich mit ihm ab, bevor du sie &uuml;bernimmst!', '2013-01-30 16:28:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1820', 'DE', 'Du kannst dich nun mit dem neuen Passwort <a href=\"login.php\">anmelden</a>.', '2013-02-14 00:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'EN', 'Reorder IDs \r', '2010-09-02 00:15:30');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'EN', 'The database could not be reconnected.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'EN', 'Testing – please do not login', '2010-08-28 11:48:07');
@@ -6321,7 +6324,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('611', 'EN', 'The security code is expired. Please request a new one.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('612', 'EN', 'The security code does not match.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('613', 'EN', 'Please repeat:', '2010-08-28 11:48:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('614', 'EN', 'The password has been changed. You can now <a href=\"login.php\">login</a> with the new password.', '2010-08-28 11:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('614', 'EN', 'The password has been changed.', '2013-02-14 00:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('615', 'EN', 'Security code for new e-mail address ', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('616', 'EN', 'on %1 you requested a security code to change your e-mail address.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('617', 'EN', 'You can verify your new e-mail address at %1newemail.php', '2010-08-28 11:48:07');
@@ -7106,6 +7109,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1799', 'EN', 'Only available during specified seasons', '2012-10-29 14:28:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1800', 'EN', 'This cache can be done at certain seasons only - see the cache description for more details. For example, the cache may be placed in a corn labyrinth, which only exists from bloom to harvest season.', '2012-10-29 14:28:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1801', 'EN', 'Help', '2012-11-09 19:32:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1820', 'EN', 'You can now <a href=\"login.php\">login</a> with the new password.', '2013-02-14 00:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'ES', 'Reordenar ID', '2010-12-09 00:17:55');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'ES', 'La base de datos no se pudo conectar.', '2010-12-09 00:17:55');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'ES', 'En pruebas - por favor, no entre.', '2010-12-09 00:17:55');
@@ -7707,7 +7711,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('611', 'ES', 'El Código de seguridad ha caducado. Por favor solicite uno nuevo.', '2010-12-09 00:17:57');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('612', 'ES', 'El código de seguridad no coincide', '2010-12-09 00:17:57');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('613', 'ES', 'Por favor repitalo:', '2010-12-09 00:17:57');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('614', 'ES', 'La contraseña se ha cambiado. Ahora puede <a href=\"login.php\">login</a> con el nuevo password.', '2010-12-09 00:17:57');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('614', 'ES', 'La contraseña se ha cambiado.', '2013-02-14 00:17:57');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('615', 'ES', 'Código de seguridad para la nueva dirección de email', '2010-12-09 00:17:57');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('616', 'ES', 'en %1 la solicitud de un código de seguridad para cambiar su dirección de email.', '2010-12-09 00:17:57');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('617', 'ES', 'Verifique su nueva dirección de email en la pagina %1newemail.php', '2010-12-09 00:17:57');
@@ -8489,6 +8493,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1797', 'ES', 'Cambios', '2012-08-24 17:43:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1798', 'ES', 'Opencaching e.V.', '2012-07-08 14:50:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1801', 'ES', 'Ayuda', '2012-11-09 19:32:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1820', 'ES', 'Ahora puede <a href=\"login.php\">login</a> con el nuevo password.', '2013-02-09 00:17:57');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('6', 'FR', 'Pseudo', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('7', 'FR', 'Quite', '2010-10-04 00:17:39');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('24', 'FR', 'Prénom', '2010-10-04 00:17:39');
@@ -9176,7 +9181,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('611', 'IT', 'Il codice di sicurezza è scaduto. Per favore richiedine uno nuovo.', '2010-10-27 18:49:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('612', 'IT', 'Il codice di sicurezza non coincide.', '2010-08-31 20:06:23');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('613', 'IT', 'Per favore ripeti:', '2010-09-01 23:49:03');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('614', 'IT', 'La password è stata cambiata. Ora puoi <a href=\"login.php\">autenticarti</a> con la nuova password.', '2010-08-31 20:06:23');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('614', 'IT', 'La password è stata cambiata.', '2013-02-14 00:06:23');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('615', 'IT', 'Codice di sicurezza per nuovo indirizzo email', '2010-09-01 23:49:03');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('616', 'IT', 'il %1 hai richiesto un codice di sicurezza per modificare il tuo indirizzo email.', '2010-08-31 20:06:23');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('617', 'IT', 'Puoi verificare il tuo nuovo indirizzo email alla pagina %1newemail.php', '2010-09-01 23:49:03');
@@ -9958,6 +9963,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1797', 'IT', 'Elenco modifiche', '2012-08-26 02:39:48');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1798', 'IT', 'Opencaching e.V.', '2012-07-08 14:50:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1801', 'IT', 'Assistenza', '2012-11-09 19:32:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1820', 'IT', 'Ora puoi <a href=\"login.php\">autenticarti</a> con la nuova password.', '2013-02-14 00:06:23');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('922', 'JA', 'JA', '2011-05-15 16:04:51');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'NL', 'ID\'s opnieuw sorteren', '2011-02-04 19:49:56');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'NL', 'De verbinding met de database kon niet hersteld worden.', '2011-02-04 19:49:56');
@@ -10557,7 +10563,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('611', 'NL', 'De veiligheidscode is verlopen. Vraag een nieuwe aan.', '2011-02-04 19:50:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('612', 'NL', 'De wachtwoorden komen niet overeen.', '2011-02-04 19:50:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('613', 'NL', 'Wachtwoord herhalen:', '2011-02-04 19:50:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('614', 'NL', 'Het wachtwoord is veranderd, je kunt nu met je nieuwe wachtwoord <a href=\"login.php\">inloggen</a>.', '2011-02-04 19:50:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('614', 'NL', 'Het wachtwoord is veranderd.', '2013-02-14 00:50:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('615', 'NL', 'Veiligheidscode voor een nieuw E-Mail adres', '2011-02-04 19:50:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('616', 'NL', 'je hebt op %1 een veiligheidscode opgevraagt om je E-Mail adres te veranderen.', '2011-02-04 19:50:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('617', 'NL', 'Je E-Mail adres kun je op %1newemail.php activeren.', '2011-02-04 19:50:07');
@@ -10937,6 +10943,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1741', 'NL', 'Het account is al geactiveerd. Probeer <a href=\"login.php\">inloggen</a>.<br /> Indien je niet in kunt loggen. lees dan de volgende pagina: <a href=\"{$opt.cms.login}\">problemen met inloggen</a>', '2011-04-04 21:34:57');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1742', 'NL', 'Jouw browser heeft onze cookie van opencaching.nl afgewezen.<br />\r', '2011-04-04 21:30:40');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1758', 'NL', 'Het account is al geactiveerd. Probeer <a href=\"login.php\">inloggen</a>.<br /> Indien je niet in kunt loggen. lees dan de volgende pagina: <a href=\"%1\">problemen met inloggen</a>', '2011-05-23 22:28:31');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1820', 'NL', 'Je kunt nu met je nieuwe wachtwoord <a href=\"login.php\">inloggen</a>.', '2013-02-14 00:50:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('922', 'NO', 'NO', '2011-05-15 11:46:21');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'PL', 'Test - proszę nie logować się', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('4', 'PL', 'Użytkownik', '2010-08-28 11:48:08');

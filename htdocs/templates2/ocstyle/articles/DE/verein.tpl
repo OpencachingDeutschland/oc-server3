@@ -23,7 +23,7 @@ Die <a href="http://www.opencaching.de/verein/OC_Satzung_aktuell.pdf">aktuelle S
 Den <a href="http://www.opencaching.de/verein/OC_Antrag_aktuell.pdf">Mitgliedsantrag</a> kannst Du <a href="http://www.opencaching.de/verein/OC_Antrag_aktuell.pdf">hier</a> herunterladen.<br /><br />
 
 <em>Ich m&ouml;chte Opencaching unterst&uuml;tzen, habe aber kein Interesse an einem Vereinsbeitritt. Was kann ich noch tun?</em><br />
-Da das die Anschaffung von neuer Hardware, Lizenzen, Zertifikaten etc. Kosten verursacht, sind wir auch auf Spenden angewiesen. Daher kannst Du uns über unsere <a href="./articles.php?page=donations" target="_blank">Spendenseite</a> jederzeit einen kleinen Obolus zukommen lassen, auch wenige Euro helfen uns weiter.<br /><br />
+Da der technische Betrieb der Website laufende Kosten verursacht, sind wir auf Spenden angewiesen. Über unsere <a href="./articles.php?page=donations" target="_blank">Spendenseite</a> kannst du uns jederzeit einen kleinen Obolus zukommen lassen, auch wenige Euro helfen uns weiter.<br /><br />
 
 <em>Ich habe Fragen oder Anregungen zum Verein, an wen kann ich mich wenden?</em><br />
 Du kannst den Vereinsvorstand unter <a href="mailto:verein@opencaching.de">verein@opencaching.de</a> gerne kontaktieren.<br /><br />

@@ -13,6 +13,11 @@
 	<br />
 
 	 <p><strong>Version 3.0.4</strong> &ndash; <i>in Arbeit</i></p>
+   <p>Neu:</p>
+	 <ul class="changelog">
+     <li class="changelogitem">Statistikbilder mit neuem Logo</a></li>
+   </ul>
+
 	 <p>Geändert / verbessert:</p>
 	 <ul class="changelog">
      <li class="changelogitem">neues Design des Seitenkopfes mit neuem Logo</a></li>

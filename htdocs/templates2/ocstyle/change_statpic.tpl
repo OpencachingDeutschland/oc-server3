@@ -35,6 +35,8 @@
 		<tr>
 			<td>{t}Available logos:{/t}</td>
 			<td class="help"></td>
+			<td style="width:15%"></td>
+			<td style="width:15%"></td>
 		</tr>
 		<tr><td class="spacer" colspan="2"></td></tr>
 
@@ -65,6 +67,12 @@
 			<td class="header-small" colspan="2">
 				<input type="submit" name="cancel" value="{t}Cancel{/t}" style="width:120px"/>&nbsp;&nbsp;
 				<input type="submit" name="ok" value="{t}Save{/t}" style="width:120px"/>
+			</td>
+		</tr>
+
+		<tr>
+			<td colspan="3">
+				<br />{t}After saving, you may need to press the reload button in your browser to see the selected picture in your profile.{/t}
 			</td>
 		</tr>
 	</table>

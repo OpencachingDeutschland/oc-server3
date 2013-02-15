@@ -766,10 +766,13 @@ INSERT INTO `statpics` (`id`, `tplpath`, `previewpath`, `description`, `trans_id
 INSERT INTO `statpics` (`id`, `tplpath`, `previewpath`, `description`, `trans_id`, `maxtextwidth`) VALUES ('2', 'images/ocstats2.gif', 'images/ocstats2_prev.jpg', 'Alternative logo', '1752', '50');
 INSERT INTO `statpics` (`id`, `tplpath`, `previewpath`, `description`, `trans_id`, `maxtextwidth`) VALUES ('3', 'images/ocstats3.gif', 'images/ocstats3_prev.jpg', 'Alternative by nybbler', '1747', '50');
 INSERT INTO `statpics` (`id`, `tplpath`, `previewpath`, `description`, `trans_id`, `maxtextwidth`) VALUES ('4', 'images/ocstats4.gif', 'images/ocstats4_prev.jpg', 'Slimline', '1753', '50');
-INSERT INTO `statpics` (`id`, `tplpath`, `previewpath`, `description`, `trans_id`, `maxtextwidth`) VALUES ('5', 'images/ocstats5.gif', 'images/ocstats5_prev.jpg', 'Red logo, Slimline', '1754', '50');
+INSERT INTO `statpics` (`id`, `tplpath`, `previewpath`, `description`, `trans_id`, `maxtextwidth`) VALUES ('5', 'images/ocstats5.gif', 'images/ocstats5_prev.jpg', 'Red logo, slimline', '1754', '50');
 INSERT INTO `statpics` (`id`, `tplpath`, `previewpath`, `description`, `trans_id`, `maxtextwidth`) VALUES ('6', 'images/ocstats4.gif', 'images/ocstats4a_prev.jpg', 'Slimline, without statistics', '1755', '50');
 INSERT INTO `statpics` (`id`, `tplpath`, `previewpath`, `description`, `trans_id`, `maxtextwidth`) VALUES ('7', 'images/ocstats5.gif', 'images/ocstats5a_prev.jpg', 'Slimline red, without statistics', '1756', '50');
 INSERT INTO `statpics` (`id`, `tplpath`, `previewpath`, `description`, `trans_id`, `maxtextwidth`) VALUES ('8', 'images/ocstats6.gif', 'images/ocstats6_prev.jpg', 'Round corners', '1757', '50');
+INSERT INTO `statpics` (`id`, `tplpath`, `previewpath`, `description`, `trans_id`, `maxtextwidth`) VALUES ('9', 'images/ocstats7.gif', 'images/ocstats7_prev.jpg', 'OC.de new', '1821', '60');
+INSERT INTO `statpics` (`id`, `tplpath`, `previewpath`, `description`, `trans_id`, `maxtextwidth`) VALUES ('10', 'images/ocstats8.gif', 'images/ocstats8_prev.jpg', 'OC.de new, slimline', '1822', '50');
+INSERT INTO `statpics` (`id`, `tplpath`, `previewpath`, `description`, `trans_id`, `maxtextwidth`) VALUES ('11', 'images/ocstats8.gif', 'images/ocstats8a_prev.jpg', 'OC.de new, without statistics', '1823', '50');
 
 -- Table sys_menu
 SET NAMES 'utf8';
@@ -2184,7 +2187,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1745', 'Standar
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1747', 'Alternative by nybbler', '2011-04-24 22:18:08');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1752', 'Alternative logo', '2011-04-24 22:23:38');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1753', 'Slimline', '2011-04-24 22:23:38');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1754', 'Red logo, Slimline', '2011-04-24 22:23:38');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1754', 'Red logo, slimline', '2011-04-24 22:23:38');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1755', 'Slimline, without statistics', '2011-04-24 22:23:38');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1756', 'Slimline red, without statistics', '2011-04-24 22:23:38');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1757', 'Round corners', '2011-05-20 23:46:04');
@@ -2229,7 +2232,11 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1799', 'Only av
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1800', 'This cache can be done at certain seasons only - see the cache description for more details. For example, the cache may be placed in a corn labyrinth, which only exists from bloom to harvest season.', '2012-10-29 14:28:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1801', 'Help', '2012-11-09 19:28:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1802', 'Warning: This report is already assigned to another admin. Consult him first before you assume the report!', '2013-01-30 16:26:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1819', 'After saving, you may need to press the reload button in your browser to see the selected picture in your profile.', '2013-02-15 00:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1820', 'You can now <a href=\"login.php\">login</a> with the new password.', '2013-02-14 00:48:04');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1821', 'OC.de new', '2013-02-15 00:48:04');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1822', 'OC.de new, slimline', '2013-02-15 00:48:04');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1823', 'OC.de new, without statistics', '2013-02-15 00:48:04');
 
 -- Table sys_trans_ref
 SET NAMES 'utf8';
@@ -4331,6 +4338,7 @@ INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1799'
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1800', 'table:cache_attrib;field=html_desc', '0');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1801', './lang/de/ocstyle/lib/menu.php', '199');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1802', './lang/de/ocstyle/adminreports.tpl', '83');
+INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1819', './lang/de/ocstyle/change_statpic.tpl', '72');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1820', './lang/de/ocstyle/newpw.tpl', '14');
 
 -- Table sys_trans_text
@@ -5678,7 +5686,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1747', 'DE', 'Alternative by nybbler', '2011-04-24 22:21:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1752', 'DE', 'Alternativlogo', '2011-04-24 22:20:33');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1753', 'DE', 'Slimline', '2011-04-24 22:20:23');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1754', 'DE', 'rotes Logo, Slimline', '2011-04-24 22:20:16');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1754', 'DE', 'rotes Logo, slimline', '2011-04-24 22:20:16');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1755', 'DE', 'Slimline, ohne Statistik', '2011-04-24 22:20:02');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1756', 'DE', 'Slimline rot, ohne Statistik', '2011-04-24 22:17:15');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1757', 'DE', 'Runde Ecken', '2011-05-21 00:03:34');
@@ -5722,7 +5730,11 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1800', 'DE', 'Dieser Cache l\&auml;sst sich nur zu bestimmten Zeite im Jahr absolvieren. N\&auml;here Angaben sind in der Beschreibung des Caches zu finden. Der Cache kann beispielsweise in einem Maislabyrinth versteckt sein, das nur zwischen Bl\&uuml;te- und Erntezeit existiert.', '2012-10-29 14:28:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1801', 'DE', 'Hilfe', '2012-11-09 19:32:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1802', 'DE', 'Warnung: Diese Cachemeldung wird bereits von einem anderen Admin bearbeitet. Bitte sprich dich mit ihm ab, bevor du sie &uuml;bernimmst!', '2013-01-30 16:28:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1819', 'DE', 'Nach dem Speichern musst du evtl. auf den Seiten-Neuladeknopf deines Browsers drücken, um das gewählte Bild in deinem Profil zu sehen.', '2013-02-15 00:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1820', 'DE', 'Du kannst dich nun mit dem neuen Passwort <a href=\"login.php\">anmelden</a>.', '2013-02-14 00:48:06');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1821', 'DE', 'OC.de neu', '2013-02-14 00:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1822', 'DE', 'OC.de neu, slimline', '2013-02-14 00:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1823', 'DE', 'OC.de neu, ohne Statistik', '2013-02-14 00:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'EN', 'Reorder IDs \r', '2010-09-02 00:15:30');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'EN', 'The database could not be reconnected.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'EN', 'Testing – please do not login', '2010-08-28 11:48:07');
@@ -7109,7 +7121,11 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1799', 'EN', 'Only available during specified seasons', '2012-10-29 14:28:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1800', 'EN', 'This cache can be done at certain seasons only - see the cache description for more details. For example, the cache may be placed in a corn labyrinth, which only exists from bloom to harvest season.', '2012-10-29 14:28:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1801', 'EN', 'Help', '2012-11-09 19:32:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1819', 'EN', 'After saving, you may need to press the reload button in your browser to see the selected picture in your profile.', '2013-02-14 00:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1820', 'EN', 'You can now <a href=\"login.php\">login</a> with the new password.', '2013-02-14 00:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1821', 'EN', 'OC.de new', '2013-02-14 00:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1822', 'EN', 'OC.de new, slimline', '2013-02-14 00:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1823', 'EN', 'OC.de new, without statistics', '2013-02-14 00:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'ES', 'Reordenar ID', '2010-12-09 00:17:55');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'ES', 'La base de datos no se pudo conectar.', '2010-12-09 00:17:55');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'ES', 'En pruebas - por favor, no entre.', '2010-12-09 00:17:55');

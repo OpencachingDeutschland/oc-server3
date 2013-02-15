@@ -81,6 +81,7 @@
 		{
 		case 4:
 		case 5:
+		case 10:
 			// write text
 			$fontsize = 10;
 			$text = $username;
@@ -107,6 +108,7 @@
 			break;
 		case 6:
 		case 7:
+		case 11:
 			// write text
 			$fontsize = 10;
 			$text = $username;
@@ -131,6 +133,7 @@
 
 			break;
 		case 1:
+		case 9:
 		default:
 			// write text
 			$fontsize = 10;

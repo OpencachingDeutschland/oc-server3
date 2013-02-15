@@ -33,8 +33,9 @@ public Git repository. For data transfer to and from opencaching.de, see
 the legal information at opencaching.de.
 
 The Opencaching Deutschland logo, as it is contained in files like the
-rotator pictures, is NOT licensed under GPL. Instead it is subject to a
-special license which can be obtained from Opencaching Deutschland. 
+rotator pictures and statistics pictures, is NOT licensed under GPL. 
+Instead it is subject to a special license which can be obtained from 
+Opencaching Deutschland. 
 
 If you are using this source code to establish a geocache listing service
 or some sort of service which can be compared with it, you agree to 

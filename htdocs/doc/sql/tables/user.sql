@@ -8,7 +8,7 @@ CREATE TABLE `user` (
   `last_modified` datetime NOT NULL COMMENT 'via Trigger (user)',
   `last_login` date default NULL,
   `username` varchar(60) NOT NULL,
-  `password` varchar(512) default NULL,
+  `password` varchar(32) default NULL,
   `email` varchar(60) default NULL,
   `latitude` double NOT NULL,
   `longitude` double NOT NULL,

@@ -11,5 +11,6 @@ CREATE TABLE `logentries` (
   `logtext` mediumtext NOT NULL,
   `details` blob NOT NULL,
   PRIMARY KEY  (`id`),
+  KEY `userid` (`userid`,`objectid1`,`module`),
   KEY `date` (`date_created`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ;

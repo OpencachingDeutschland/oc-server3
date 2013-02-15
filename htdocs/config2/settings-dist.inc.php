@@ -250,6 +250,13 @@
 	 */
 	$opt['logic']['node']['id'] = 4;
 
+	/* data license for new registered users:
+	     0 = not specified
+	     1 = old Opencaching.de license
+	     2 = CC BY-NC-ND 3.0
+	 */
+	$opt['logic']['license'] = 2;
+
 	/* location of uploaded images
 	 */
 	$opt['logic']['pictures']['dir'] = $opt['rootpath'] . 'images/uploads';

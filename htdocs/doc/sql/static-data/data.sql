@@ -12,6 +12,7 @@
 -- countries
 -- countries_list_default
 -- countries_options
+-- data_licenses
 -- languages
 -- languages_list_default
 -- log_types
@@ -510,6 +511,12 @@ INSERT INTO `countries_options` (`country`, `display`, `gmLat`, `gmLon`, `gmZoom
 INSERT INTO `countries_options` (`country`, `display`, `gmLat`, `gmLon`, `gmZoom`, `nodeId`) VALUES ('SK', '1', '48.6220164284684', '18.907470703125', '8', '0');
 INSERT INTO `countries_options` (`country`, `display`, `gmLat`, `gmLon`, `gmZoom`, `nodeId`) VALUES ('TR', '1', '38.0307856938229', '33.90380859375', '6', '0');
 INSERT INTO `countries_options` (`country`, `display`, `gmLat`, `gmLon`, `gmZoom`, `nodeId`) VALUES ('US', '1', '30.1451271833761', '-94.658203125', '4', '10');
+
+-- Table data_licenses
+SET NAMES 'utf8';
+TRUNCATE TABLE `data_licenses`;
+INSERT INTO `data_licenses` (`id`, `license`) VALUES ('1', 'old Opencaching.de license');
+INSERT INTO `data_licenses` (`id`, `license`) VALUES ('2', 'CC BY-NC-ND 3.0');
 
 -- Table languages
 SET NAMES 'utf8';

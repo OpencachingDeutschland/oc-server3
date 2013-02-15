@@ -42,6 +42,8 @@ class user
 
 	function __construct($nNewUserId=ID_NEW)
 	{
+		global $opt;
+
 		$this->reUser = new rowEditor('user');
 		$this->reUser->addPKInt('user_id', null, false, RE_INSERT_AUTOINCREMENT);
 		$this->reUser->addString('username', '', false);
@@ -71,6 +73,7 @@ class user
 		$this->reUser->addBoolean('no_htmledit_flag', false, false);
 		$this->reUser->addInt('notify_radius', 0, false);
 		$this->reUser->addInt('admin', 0, false);
+		$this->reUser->addInt('data_license', $opt['logic']['license'], false);
 		$this->reUser->addInt('node', 0, false);
 
 		$this->reUserStat = new rowEditor('stat_user');
@@ -751,7 +754,10 @@ class user
 	 	if ($this->canDisable()) 
 			if (!$this->disable()) 
 				return 'disable user failed';
-		
+
+		// remember that data license was declined
+		sql("UPDATE user SET data_license=1 WHERE user_id='&1'", $this->getUserId());
+
 		/*
 		 * set all cache_desc and hint to ''
 		 */

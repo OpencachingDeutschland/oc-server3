@@ -430,8 +430,7 @@
 
 			<small>
 				<img src="resource2/{$opt.template.style}/images/viewcache/16x16-info.png" class="icon16" alt="Terms of use" /> 
-				{t}When downloading this file, you accept our <a href="articles.php?page=impressum#tos">terms of use</a>.{/t}
-			</small>
+				{t}When downloading this file, you accept our <a href="articles.php?page=impressum#tos">terms of use</a> and <a href="articles.php?page=impressum#datalicense" target="_blank">Datalicense</a>.{/t}			</small>
 			<br />
 		</p>
 	{/if}

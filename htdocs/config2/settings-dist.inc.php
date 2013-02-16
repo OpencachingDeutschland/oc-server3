@@ -250,6 +250,13 @@
 	 */
 	$opt['logic']['node']['id'] = 4;
 
+	/* data license for new registered users:
+	     0 = not specified
+	     1 = old Opencaching.de license
+	     2 = CC BY-NC-ND 3.0
+	 */
+	$opt['logic']['license'] = 2;
+
 	/* location of uploaded images
 	 */
 	$opt['logic']['pictures']['dir'] = $opt['rootpath'] . 'images/uploads';
@@ -263,6 +270,15 @@
 	$opt['logic']['pictures']['thumb_max_height'] = 175;
 	$opt['logic']['pictures']['thumb_url'] = $opt['logic']['pictures']['url'] . '/thumbs';
 	$opt['logic']['pictures']['thumb_dir'] = $opt['rootpath'] . 'images/uploads/thumbs';
+
+	/* Defaults for picture replacement on declined license
+	 *
+	 * replacement picture must be square sized
+	 */
+	$opt['logic']['pictures']['dummy']['bgcolor'] = array(255,255,255);
+	$opt['logic']['pictures']['dummy']['text'] = '';
+	$opt['logic']['pictures']['dummy']['textcolor'] = array(0,0,0);
+	$opt['logic']['pictures']['dummy']['replacepic'] = $opt['rootpath'] . 'images/';  	   
 
 	/* location of uploaded podcasts
 	 */

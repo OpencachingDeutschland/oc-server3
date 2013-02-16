@@ -33,6 +33,7 @@ CREATE TABLE `user` (
   `no_htmledit_flag` tinyint(1) NOT NULL default '0',
   `notify_radius` int(10) unsigned NOT NULL default '0',
   `admin` tinyint(3) unsigned NOT NULL default '0',
+  `data_license` tinyint(1) NOT NULL default '0',
   PRIMARY KEY  (`user_id`),
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `uuid` (`uuid`),

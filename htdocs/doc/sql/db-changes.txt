@@ -26,7 +26,9 @@ date         commit ID    change
                           added cache_waypoint_pool.uuid and index uuid
                           changed caches.wp_oc to 'NOT NULL'
 2013-02-12   d15ee5f9     added indices logentries:date and email_user:date
-2013-02-15                adjusted developer and production system:
+2013-02-15   92e522f6     adjusted developer and production system:
                           - added index logentries:userid
                           - changed user.password length to 32
 													- removed sqlsession.remote_addr and index remote_addr
+2013-02-16                new table data_licenses
+                          added user.data_license

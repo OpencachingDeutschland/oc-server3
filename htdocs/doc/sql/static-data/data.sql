@@ -12,6 +12,7 @@
 -- countries
 -- countries_list_default
 -- countries_options
+-- data_licenses
 -- languages
 -- languages_list_default
 -- log_types
@@ -510,6 +511,12 @@ INSERT INTO `countries_options` (`country`, `display`, `gmLat`, `gmLon`, `gmZoom
 INSERT INTO `countries_options` (`country`, `display`, `gmLat`, `gmLon`, `gmZoom`, `nodeId`) VALUES ('SK', '1', '48.6220164284684', '18.907470703125', '8', '0');
 INSERT INTO `countries_options` (`country`, `display`, `gmLat`, `gmLon`, `gmZoom`, `nodeId`) VALUES ('TR', '1', '38.0307856938229', '33.90380859375', '6', '0');
 INSERT INTO `countries_options` (`country`, `display`, `gmLat`, `gmLon`, `gmZoom`, `nodeId`) VALUES ('US', '1', '30.1451271833761', '-94.658203125', '4', '10');
+
+-- Table data_licenses
+SET NAMES 'utf8';
+TRUNCATE TABLE `data_licenses`;
+INSERT INTO `data_licenses` (`id`, `license`) VALUES ('1', 'old Opencaching.de license');
+INSERT INTO `data_licenses` (`id`, `license`) VALUES ('2', 'CC BY-NC-ND 3.0');
 
 -- Table languages
 SET NAMES 'utf8';
@@ -1014,7 +1021,6 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('172', 'Yemen', 
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('173', 'Samoa', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('174', 'Go', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('175', 'Developer system - only testing', '2010-08-28 11:48:03');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('176', 'I\'ve read and understand the <a target=\"_blank\" href=\"articles.php?page=dsb\">privacy statement</a> and the <a target=\"_blank\" href=\"articles.php?page=tos\">terms of use</a> and accept them.', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('177', 'With this wizard, you can make some part of your description <b>bold</b> or <i>italic</i>. No HTML knowledge required.', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('178', 'Here you can see the HTML code generated from your text. If you want to make a word <b>bold</b>, insert before the word \&lt;b\&gt; and after the word \&lt;/b\&gt;', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('179', 'Wallis And Futuna Islands', '2010-08-28 11:48:03');
@@ -1889,7 +1895,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1427', 'Publica
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1428', 'Publish now', '2010-09-07 20:19:05');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1429', 'Publish on', '2010-09-07 20:19:05');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1430', 'Do not publish now.', '2010-09-07 20:19:05');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1431', 'I have read and agree to the <a href=\"articles.php?page=impressum#tos\" target=\"_blank\">Opencaching.de Terms of Service</a>', '2010-09-07 20:19:05');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1431', 'I have read and agree to the <a href=\"articles.php?page=impressum#tos\" target=\"_blank\">Opencaching.de Terms of Service</a> and the <a href=\"articles.php?page=impressum#datalicense\" target=\"_blank\">Opencaching.de Datalicense</a>', '2010-09-07 20:19:05');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1432', 'Info: Your log entry has been removed from the cache owner', '2010-09-07 20:19:05');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1433', 'Selection of city', '2010-09-07 20:19:05');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1434', 'Total of {resultscount} cities matched', '2010-09-07 20:19:05');
@@ -2232,6 +2238,20 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1799', 'Only av
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1800', 'This cache can be done at certain seasons only - see the cache description for more details. For example, the cache may be placed in a corn labyrinth, which only exists from bloom to harvest season.', '2012-10-29 14:28:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1801', 'Help', '2012-11-09 19:28:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1802', 'Warning: This report is already assigned to another admin. Consult him first before you assume the report!', '2013-01-30 16:26:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1804', 'Datalicense', '2013-02-09 18:28:52');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1805', 'The www.opencaching.de content is licensed under <br /><a rel=\"license\" href=\"http://creativecommons.org/licenses/by-nc-nd/3.0/de/\">German Creative Commons Attribution-NonCommercial-NoDerivs 3.0 Unported</a> License</a>.', '2013-02-09 18:28:52');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1806', 'Please select only one of the delete/disable options!', '2013-02-09 17:34:01');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1807', 'By submitting I accept the <a href=\"articles.php?page=impressum#tos\" target=\"_blank\">Opencaching.de Terms of Service</a> and the <a href=\"articles.php?page=impressum#datalicense\" target=\"_blank\">Opencaching.de Datalicense</a>', '2013-02-09 19:12:41');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1808', 'I\'ve read and understand the <a target=\"_blank\" href=\"articles.php?page=dsb\">privacy statement</a>, the <a target=\"_blank\" href=\"articles.php?page=impressum#tos\">terms of service</a> and the <a href=\"articles.php?page=impressum#datalicense\" target=\"_blank\">Datalicense</a> and accept them.', '2013-02-09 19:06:41');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1809', 'You have to accept the privacy statement, terms of service and the datalicense to register at opencaching.de', '2013-02-09 19:06:41');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1810', 'When downloading this file, you accept our <a href=\"articles.php?page=impressum#tos\">terms of use</a> and <a href=\"articles.php?page=impressum#datalicense\" target=\"_blank\">Datalicense</a>.', '2013-02-09 19:12:30');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1811', 'Disable (and lock all geocaches owned) and remove all foreign licensed content', '2013-02-09 19:28:12');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1812', 'ID', '2013-02-09 19:28:46');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1813', 'Owner', '2013-02-09 19:28:46');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1814', 'Reporter', '2013-02-09 19:28:46');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1815', 'You have to check that you are sure!', '2013-02-09 17:34:01');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1816', 'cache description was removed because owner declined content license', '2013-02-09 17:34:01');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1817', 'User status was successfully changed.', '2013-02-09 17:34:01');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1819', 'After saving, you may need to press the reload button in your browser to see the selected picture in your profile.', '2013-02-15 00:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1820', 'You can now <a href=\"login.php\">login</a> with the new password.', '2013-02-14 00:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1821', 'OC.de new', '2013-02-15 00:48:04');
@@ -2631,7 +2651,6 @@ INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('172',
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('173', 'table:countries;field=name', '0');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('174', './templates2/ocstyle/sys_main.tpl', '190');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('175', './templates2/ocstyle/sys_main.tpl', '162');
-INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('176', './templates2/ocstyle/register.tpl', '209');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('177', './templates2/ocstyle/htmlprev.tpl', '17');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('178', './templates2/ocstyle/htmlprev.tpl', '44');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('179', 'table:countries;field=name', '0');
@@ -4338,6 +4357,23 @@ INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1799'
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1800', 'table:cache_attrib;field=html_desc', '0');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1801', './lang/de/ocstyle/lib/menu.php', '199');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1802', './lang/de/ocstyle/adminreports.tpl', '83');
+INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1804', './lib2/smarty/ocplugins/prefilter.t.php', '241');
+INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1805', './lib2/smarty/ocplugins/prefilter.t.php', '241');
+INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1806', './adminuser.php', '72');
+INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1807', './lang/de/ocstyle/editcache.tpl.php', '353');
+INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1807', './lang/de/ocstyle/editdesc.tpl.php', '104');
+INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1807', './lang/de/ocstyle/editlog.tpl.php', '146');
+INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1807', './lang/de/ocstyle/log_cache.tpl.php', '140');
+INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1808', '/mnt/server-3.0/htdocs/lib2/smarty/ocplugins/prefilter.t.php', '241');
+INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1809', '/mnt/server-3.0/htdocs/lib2/smarty/ocplugins/prefilter.t.php', '241');
+INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1810', '/mnt/server-3.0/htdocs/lib2/smarty/ocplugins/prefilter.t.php', '241');
+INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1811', '/mnt/server-3.0/htdocs/lib2/smarty/ocplugins/prefilter.t.php', '241');
+INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1812', '/mnt/server-3.0/htdocs/lib2/smarty/ocplugins/prefilter.t.php', '241');
+INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1813', '/mnt/server-3.0/htdocs/lib2/smarty/ocplugins/prefilter.t.php', '241');
+INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1814', '/mnt/server-3.0/htdocs/lib2/smarty/ocplugins/prefilter.t.php', '241');
+INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1815', './adminuser.php', '75');
+INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1816', './lib2/logic/user.class.php', '765');
+INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1817', './templates2/ocstyle/adminuser.tpl', '20');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1819', './lang/de/ocstyle/change_statpic.tpl', '72');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1820', './lang/de/ocstyle/newpw.tpl', '14');
 
@@ -5389,7 +5425,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1428', 'DE', 'sofort veröffentlichen', '2012-07-24 21:30:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1429', 'DE', 'veröffentlichen am', '2012-07-24 21:30:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1430', 'DE', 'noch nicht veröffentlichen', '2012-07-24 21:30:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1431', 'DE', 'Die <a href=\"articles.php?page=impressum#tos\" target=\"_BLANK\">Opencaching.de-Nutzungsbedingungen</a> habe ich gelesen und bin damit einverstanden', '2010-09-10 23:39:25');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1431', 'DE', 'Die <a href=\"articles.php?page=impressum#tos\" target=\"_blank\">Opencaching.de-Nutzungsbedingungen</a> und <a href=\"articles.php?page=impressum#datalicense\" target=\"_blank\">-Datenlizenz</a> habe ich gelesen und bin damit einverstanden.', '2010-09-10 23:39:25');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1432', 'DE', 'Info: dein Logeintrag wurde vom Cachebesitzer entfernt', '2010-09-10 23:39:09');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1433', 'DE', 'Ortsauswahl', '2010-09-10 23:39:01');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1434', 'DE', 'Insgesamt {resultscount} Ortschaften gefunden', '2010-09-10 23:38:52');
@@ -5729,7 +5765,21 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1799', 'DE', 'Nur zu bestimmten Zeiten im Jahr', '2012-10-29 14:28:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1800', 'DE', 'Dieser Cache l\&auml;sst sich nur zu bestimmten Zeite im Jahr absolvieren. N\&auml;here Angaben sind in der Beschreibung des Caches zu finden. Der Cache kann beispielsweise in einem Maislabyrinth versteckt sein, das nur zwischen Bl\&uuml;te- und Erntezeit existiert.', '2012-10-29 14:28:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1801', 'DE', 'Hilfe', '2012-11-09 19:32:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1802', 'DE', 'Warnung: Diese Cachemeldung wird bereits von einem anderen Admin bearbeitet. Bitte sprich dich mit ihm ab, bevor du sie &uuml;bernimmst!', '2013-01-30 16:28:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1802', 'DE', 'Warnung: Diese Cachemeldung wird bereits von einem anderen Admin bearbeitet. Bitte sprich dich mit ihm ab, bevor du sie \&uuml;bernimmst!', '2013-01-30 16:28:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1804', 'DE', 'Datenlizenz', '2013-02-09 18:29:08');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1805', 'DE', 'Der Inhalt von www.opencaching.de steht unter einer <br /><a rel=\"license\" href=\"http://creativecommons.org/licenses/by-nc-nd/3.0/de/\">Creative Commons Namensnennung-NichtKommerziell-KeineBearbeitung-3.0-Deutschland</a>-Lizenz</a>.', '2013-02-09 18:30:58');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1806', 'DE', 'Bitte waehle nur eine der Lösch-/Sperroptionen aus!', '2013-02-09 17:34:01');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1807', 'DE', 'Mit dem Absenden akzeptiere ich die <a href=\"articles.php?page=impressum#tos\" target=\"_blank\">Opencaching.de-Nutzungsbedingungen</a> und <a href=\"articles.php?page=impressum#datalicense\" target=\"_blank\">-Datenlizenz</a>.', '2013-02-09 19:13:15');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1808', 'DE', 'Die <a target=\"_blank\" href=\"articles.php?page=dsb\">Datenschutzbelehrung</a>, die <a href=\"articles.php?page=impressum#tos\" target=\"_blank\">Nutzungsbedingungen</a> und die <a href=\"articles.php?page=impressum#datalicense\" target=\"_blank\">Datenlizenz</a> habe ich gelesen und bin damit einverstanden.', '2013-02-09 19:07:09');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1809', 'DE', 'Du musst die Datenschutzbelehrung, die Nutzungsbedingungen  und die Datenlizenz akzeptieren, um dich bei Opencaching.de zu registrieren.', '2013-02-09 19:21:22');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1810', 'DE', 'Mit dem Herunterladen dieser Datei akzeptierst du unsere <a href=\"articles.php?page=impressum#tos\">Nutzungsbedingungen</a> und <a href=\"articles.php?page=impressum#datalicense\" target=\"_blank\">Datenlizenz</a>.', '2013-02-09 19:20:44');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1811', 'DE', 'Deaktivieren (und Geocaches sperren) und alle Fremdlizenz-Inhalte löschen', '2013-02-09 19:30:12');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1812', 'DE', 'ID', '2013-02-09 19:31:58');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1813', 'DE', 'Besitzer', '2013-02-09 19:31:45');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1814', 'DE', 'Melder', '2013-02-09 19:31:30');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1815', 'DE', 'Du muss bestaetigen, dass du sicher bist!', '2013-02-09 19:31:30');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1816', 'DE', 'Die Cachebeschreibung wurde gel\&ouml;scht, weil der Besitzer die Opencaching.de-Datenlizenz abgelehnt hat.', '2013-02-09 19:31:30');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1817', 'DE', 'Der Benutzerstatus wurde erfolgreich geändert.', '2013-02-09 19:31:30');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1819', 'DE', 'Nach dem Speichern musst du evtl. auf den Seiten-Neuladeknopf deines Browsers drücken, um das gewählte Bild in deinem Profil zu sehen.', '2013-02-15 00:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1820', 'DE', 'Du kannst dich nun mit dem neuen Passwort <a href=\"login.php\">anmelden</a>.', '2013-02-14 00:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1821', 'DE', 'OC.de neu', '2013-02-14 00:48:07');
@@ -5904,7 +5954,6 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('173', 'EN', 'Samoa', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('174', 'EN', 'Go', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('175', 'EN', 'Developer system – testing only', '2010-08-28 11:48:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('176', 'EN', 'I\'ve read and understand the <a target=\"_blank\" href=\"articles.php?page=dsb\">privacy statement</a> and the <a target=\"_blank\" href=\"articles.php?page=tos\">terms of use</a> and accept them.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('177', 'EN', 'With this wizard, you can make some part of your description <b>bold</b> or <i>italic</i>. No HTML knowledge required.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('178', 'EN', 'Here you can see the HTML code generated from your text. If you want to make a word <b>bold</b>, insert \&lt;b\&gt; before the word and \&lt;/b\&gt; after.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('179', 'EN', 'Wallis And Futuna Islands', '2010-08-28 11:48:07');
@@ -6779,7 +6828,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1428', 'EN', 'Publish now', '2010-09-10 23:40:13');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1429', 'EN', 'Publish on', '2010-09-10 23:40:38');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1430', 'EN', 'Do not publish now.', '2010-09-10 23:40:30');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1431', 'EN', 'I have read and agree to the <a href=\"articles.php?page=impressum#tos\" target=\"_blank\">Opencaching.de Terms of Service</a>', '2010-09-10 23:39:25');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1431', 'EN', 'I have read and agree to the <a href=\"articles.php?page=impressum#tos\" target=\"_blank\">Opencaching.de Terms of Service</a> and <a href=\"articles.php?page=impressum#datalicense\" target=\"_blank\">Opencaching.de Data license</a>.', '2010-09-10 23:39:25');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1432', 'EN', 'Info: Your log entry has been removed from the cache owner', '2010-09-10 23:39:09');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1433', 'EN', 'Selection of city', '2010-09-10 23:39:01');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1434', 'EN', 'Total of {resultscount} cities matched', '2010-09-10 23:38:52');
@@ -7121,6 +7170,21 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1799', 'EN', 'Only available during specified seasons', '2012-10-29 14:28:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1800', 'EN', 'This cache can be done at certain seasons only - see the cache description for more details. For example, the cache may be placed in a corn labyrinth, which only exists from bloom to harvest season.', '2012-10-29 14:28:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1801', 'EN', 'Help', '2012-11-09 19:32:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1802', 'EN', 'Warning: This report is already assigned to another admin. Consult him first before you assume the report!', '2013-02-09 18:29:23');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1804', 'EN', 'Data licsense', '2013-02-09 18:30:12');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1805', 'EN', 'The www.opencaching.de content is licensed under <br /><a rel=\"license\" href=\"http://creativecommons.org/licenses/by-nc-nd/3.0/de/\">German Creative Commons Attribution-NonCommercial-NoDerivs 3.0 Unported</a> License</a>.', '2013-02-09 18:31:27');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1806', 'EN', 'Please select only one of the delete/disable options!', '2013-02-09 17:34:01');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1807', 'EN', 'By submitting I accept the <a href=\"articles.php?page=impressum#tos\" target=\"_blank\">Opencaching.de Terms of Service</a> and the <a href=\"articles.php?page=impressum#datalicense\" target=\"_blank\">Opencaching.de Data license</a>.', '2013-02-09 19:23:36');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1808', 'EN', 'I\'ve read and understand the <a target=\"_blank\" href=\"articles.php?page=dsb\">privacy statement</a>, the <a target=\"_blank\" href=\"articles.php?page=impressum#tos\">terms of service</a> and the <a href=\"articles.php?page=impressum#datalicense\" target=\"_blank\">Data license</a> and accept them.', '2013-02-09 19:07:39');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1809', 'EN', 'You have to accept the privacy statement, the terms of service and the data license to register at opencaching.de.', '2013-02-09 19:23:21');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1810', 'EN', 'When downloading this file, you accept our <a href=\"articles.php?page=impressum#tos\">terms of use</a> and <a href=\"articles.php?page=impressum#datalicense\" target=\"_blank\">Data license</a>.', '2013-02-09 19:23:02');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1811', 'EN', 'Disable (and lock all geocaches owned) and remove all foreign licensed content', '2013-02-09 19:30:44');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1812', 'EN', 'By submitting I accept the <a href=\"articles.php?page=impressum#tos\" target=\"_blank\">Opencaching.de Terms of Service</a> and the <a href=\"articles.php?page=impressum#datalicense\" target=\"_blank\">Data license</a>.', '2013-02-09 19:13:54');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1813', 'EN', 'Owner', '2013-02-09 19:30:32');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1814', 'EN', 'Reporter', '2013-02-09 19:30:23');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1815', 'EN', 'You have to check that you are sure!', '2013-02-09 19:30:23');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1816', 'EN', 'The cache description was removed, because the owner declined the Opencaching.de data license.', '2013-02-09 19:30:23');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1817', 'EN', 'User status was successfully changed.', '2013-02-09 19:31:30');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1819', 'EN', 'After saving, you may need to press the reload button in your browser to see the selected picture in your profile.', '2013-02-14 00:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1820', 'EN', 'You can now <a href=\"login.php\">login</a> with the new password.', '2013-02-14 00:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1821', 'EN', 'OC.de new', '2013-02-14 00:48:07');
@@ -7295,7 +7359,6 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('173', 'ES', 'Samoa', '2010-12-09 00:17:56');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('174', 'ES', 'Ir', '2010-12-09 00:17:56');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('175', 'ES', 'Developer system – testing only', '2010-12-09 00:17:56');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('176', 'ES', 'He leído y entendido las <a target=\"_blank\" href=\"articles.php?page=dsb\">privacy statement</a> y las lt;a target=\"_blank\" href=\"articles.php?page=tos\"> de los terminos de uso </a> y las acepto.', '2010-12-09 00:17:56');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('177', 'ES', 'Con este asistente, puede hacer que alguna parte de su descripción <b>bold</b> or <i>italic</i>. No requiere conocimientos en HTML', '2010-12-09 00:17:56');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('178', 'ES', 'Aquí puedes ver el código HTML generado por el texto. Si quieres poner una palabra <b>bold</b> insertar insert \&lt;b\&gt; antes de una palabra y \&lt;/b\&gt; después.', '2010-12-09 00:17:56');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('179', 'ES', 'Islas de Wallis y Futuna', '2010-12-09 00:17:56');
@@ -8170,7 +8233,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1428', 'ES', 'Publicado ahora', '2010-12-09 00:18:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1429', 'ES', 'Publicado el', '2010-12-09 00:18:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1430', 'ES', 'No publicar ahora.', '2010-12-09 00:18:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1431', 'ES', 'He leído y acepto las <a href=\"articles.php?page=impressum#tos\" target=\"_BLANK\">la condiciones de uso de Opencaching.de</a>', '2010-12-09 00:18:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1431', 'ES', 'He leído y acepto las <a href=\"articles.php?page=impressum#tos\" target=\"_blank\">la condiciones de uso de Opencaching.de</a>', '2010-12-09 00:18:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1432', 'ES', 'Información: el registro ha sido retirado por el titular del cache', '2010-12-09 00:18:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1433', 'ES', 'Seleccione una ciudad', '2010-12-09 00:18:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1434', 'ES', 'Total de {resultscount} las ciudades correspondientes', '2010-12-09 00:18:00');
@@ -8765,7 +8828,6 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('173', 'IT', 'Samoa', '2010-08-28 22:11:42');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('174', 'IT', 'Vai', '2010-08-28 22:13:36');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('175', 'IT', 'Sistema di sviluppo - solo test', '2010-08-28 22:13:55');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('176', 'IT', 'Ho letto e compreso la <a target=\"_blank\" href=\"articles.php?page=dsb\">nota informativa</a> e le <a target=\"_blank\" href=\"articles.php?page=tos\">condizioni d\'uso</a> e li accetto.', '2010-10-27 18:49:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('177', 'IT', 'Utilizzando questa procedura, puoi rendere parte della tua descizione in <b>grassetto</> o in <i>corsivo</>. Non è necessario conoscere l\'HTML.', '2010-08-28 22:16:35');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('178', 'IT', 'Qui puoi vedere il codice HTML generato a partire dal tuo testo. Se desideri rendere una parola in <b>grassetto</b>, inserisci \&lt;b\&gt; prima della parola e \&lt;/b\&gt; dopo.', '2010-08-28 22:18:11');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('179', 'IT', 'Isole Wallis e Futuna', '2010-08-28 22:18:32');
@@ -9640,7 +9702,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1428', 'IT', 'Già pubblicata', '2010-09-10 23:40:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1429', 'IT', 'Pubblicata su', '2010-09-13 22:10:04');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1430', 'IT', 'Non ancora pubblicata.', '2010-09-13 22:10:04');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1431', 'IT', 'Ho letto e accetto le <a href=\"articles.php?page=impressum#tos\" target=\"_BLANK\">condizioni d\'uso di Opencaching.de</a>', '2010-09-10 23:39:25');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1431', 'IT', 'Ho letto e accetto le <a href=\"articles.php?page=impressum#tos\" target=\"_blank\">condizioni d\'uso di Opencaching.de</a>', '2010-09-10 23:39:25');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1432', 'IT', 'Informazione: il tuo log è stato cancellato dal proprietario della cache', '2010-09-10 23:39:09');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1433', 'IT', 'Seleziona città', '2010-10-27 18:49:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1434', 'IT', 'Totale di {resultscount} città corrispondenti', '2010-09-10 23:38:52');
@@ -9931,7 +9993,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1740', 'IT', '<Utente sconosciuto>', '2012-08-26 02:39:48');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1741', 'IT', 'Questo utente è già stato attivato. Per favore prova a  <a href=\"login.php\">connetterti</a>.<br />Se non è possibile connetterti, per favore leggi la pagina sui <a href=\"{$opt.cms.login}\">problemi con la connessione</a>', '2011-04-04 21:34:36');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1742', 'IT', 'Il tuo browser ha rifiutato il nostro cookie.<br/> Puoi trovare ulteriori informazioni su questo argomento in <a href=\"{$opt.cms.login}\">Opencaching.de-help</a>.', '2011-04-04 21:32:29');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1743', 'IT', 'Questa geocache probabilmente è situata in una riserva naturale! Per favore leggi <a href=\"{$opt.cms.npa}\ target=\"_blank\"">questo</a> per ulteriori informazioni.', '2011-04-04 21:25:24');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1743', 'IT', 'Questa geocache probabilmente è situata in una riserva naturale! Per favore leggi <a href=\"{$opt.cms.npa} target=\"_blank\"\">questo</a> per ulteriori informazioni.', '2011-04-04 21:25:24');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1744', 'IT', 'Questa geocache probabilmente è situata in una riserva naturale (<a href=\"{$opt.cms.npa}\" target=\"_blank\">Info</a>):', '2011-04-04 21:24:22');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1745', 'IT', 'logo standard', '2012-08-26 02:39:48');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1747', 'IT', 'Alternativa per nybbler', '2012-08-26 02:39:48');
@@ -11020,7 +11082,6 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('153', 'PL', 'Znalezione skrzynki', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('154', 'PL', '%1 z możliwych %2', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('167', 'PL', 'W celu rejestracji na OpenCaching musisz posiadać rzeczywisty adres E-mail na który zostanie wysłany kod aktywacyjny. Możesz tylko jednego użytkownika zarejestrować na jeden adres E-mail.', '2010-08-28 11:48:08');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('176', 'PL', 'Tak. Zapoznałem się z zasadmi o <a target=\"_blank\" href=\"articles.php?page=dsb\">Ochronie danych osobowych</a> oraz <a target=\"_blank\" href=\"articles.php?page=tos\">Zasadami Używania OC</a> i akceptuje je.', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('199', 'PL', 'Języki', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('207', 'PL', 'Login', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('208', 'PL', 'Hasło', '2010-08-28 11:48:08');
@@ -11122,7 +11183,6 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('167', 'RU', 'Для регистрации вы должны выбрать имя пользователя (псевдоним, под которым вы будете известны на сайте) \n  и указать действующий адрес электронной почты. \n  На этот адрес будет выслано письмо с кодом активации.\n  Вы можете указать также ваши настоящие имя и фамилию, \n  но это не является обязательным.', '2010-12-06 22:17:35');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('172', 'RU', 'Йемен', '2010-10-06 22:23:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('173', 'RU', 'Самоа', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('176', 'RU', 'Я принимаю <a target=\"_blank\" href=\"articles.php?page=dsb\">Положение о конфиденциальности</a> и <a target=\"_blank\" href=\"articles.php?page=tos\">Условия использования</a>.', '2010-12-06 22:17:35');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('179', 'RU', 'Уоллис и Футуна', '2010-10-06 22:23:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('180', 'RU', 'Опубликовать новость', '2010-12-06 22:17:35');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('181', 'RU', 'Вануату', '2010-10-06 22:23:06');
@@ -11539,4 +11599,4 @@ TRUNCATE TABLE `watches_waitingtypes`;
 INSERT INTO `watches_waitingtypes` (`id`, `watchtype`) VALUES ('1', 'ownerlog');
 INSERT INTO `watches_waitingtypes` (`id`, `watchtype`) VALUES ('2', 'cache_watches');
 
-INSERT INTO `sysconfig` (`name`, `value`) VALUES ('datasql_checksum', 'b5463e8c7d92c84043d194910ee6ba67') ON DUPLICATE KEY UPDATE `value`='b5463e8c7d92c84043d194910ee6ba67';
+INSERT INTO `sysconfig` (`name`, `value`) VALUES ('datasql_checksum', '40c2925aa2f7645961f610c006b13d42') ON DUPLICATE KEY UPDATE `value`='40c2925aa2f7645961f610c006b13d42';

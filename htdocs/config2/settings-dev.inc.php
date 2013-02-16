@@ -151,6 +151,7 @@
 	// other settings
 	$opt['logic']['enableHTMLInUserDescription'] = false;
 	$opt['page']['showdonations'] = true;
+	$opt['logic']['pictures']['dummy']['replacepic'] = $dev_basepath . $dev_codepath . 'htdocs/images/no_image_license.png';
 	
 	$opt['template']['locales']['SV']['show'] = false;
 	$opt['template']['locales']['NO']['show'] = false;

@@ -136,6 +136,12 @@ function _chkFound () {
 
 	<tr><td class="spacer" colspan="2"></td></tr>
 	<tr>
+		<td colspan="2">
+			{t}By submitting I accept the <a href="articles.php?page=impressum#tos" target="_blank">Opencaching.de Terms of Service</a> and the <a href="articles.php?page=impressum#datalicense" target="_blank">Opencaching.de Datalicense</a>{/t}
+		</td>
+	</tr>
+	<tr><td class="spacer" colspan="2"></td></tr>
+	<tr>
 		<td class="header-small" colspan="2">
 			<input type="reset" name="reset" value="{reset}" style="width:120px"/>&nbsp;&nbsp;
 			<input type="submit" name="submitform" value="{submit}" style="width:120px"/>

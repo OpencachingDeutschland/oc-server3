@@ -240,7 +240,7 @@
 	<p>
 		<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/3.0/">
 		<img alt="Creative Commons Licenseagreement" style="border: 0; padding-right: 15px; padding-bottom: 15px; float: left;" src="http://i.creativecommons.org/l/by-nc-nd/3.0/de/88x31.png" /></a>
-		Starting April&nbsp;xx, 2013, all Opencaching.de content which has been contributed by users is licensed under 
+		Starting April&nbsp;7, 2013, all Opencaching.de content which has been contributed by users is licensed under 
 		the terms of "Creative Commons Attribution-NonCommercial-NoDerivs 3.0", which means 
 		that you may reproduce, distribute and publish it. When doing this, the author has to 
 		be named in the form given below. The content  must not be used for any commercial 

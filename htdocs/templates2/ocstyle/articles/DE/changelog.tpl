@@ -15,6 +15,7 @@
 	 <p><strong>Version 3.0.4</strong> &ndash; <i>in Arbeit</i></p>
    <p>Neu:</p>
 	 <ul class="changelog">
+     <li class="changelogitem"><a href="articles.php?page=impressum#datalicense">Datenlizenz CC-BY-NC-ND</a></li>
      <li class="changelogitem">Statistikbilder mit neuem Logo</a></li>
    </ul>
 

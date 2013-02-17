@@ -1,9 +1,12 @@
 <?php
 /****************************************************************************
-															./lib/search.gpx.inc.php
+															./lib/search.garmin.inc.php
 																-------------------
 			begin                : November 1 2005 
 
+			This OLD CODE is included only for reference and no longer used.
+			Garmin Download uses search.gpx.inc.php.
+			
 		For license information see doc/license.txt
  ****************************************************************************/
 

@@ -12,9 +12,12 @@
 	<p>Im Folgenden sind alle Veränderungen ab OC Version&nbsp;3.0 aufgelistet.</p>
 	<br />
 
-	 <p><strong>Version 3.0.4</strong> &ndash; <i>in Arbeit</i></p>
+	 <p><strong>Version 3.0.4</strong> &ndash; 17. Februar 2013
    <p>Neu:</p>
 	 <ul class="changelog">
+     <li class="changelogitem">neue Cachegröße &bdquo;nano&ldquo;</li>
+     <li class="changelogitem"><a href="http://wiki.opencaching.de/index.php/Wegpunkte#Interne.2C_zus.C3.A4tzliche_Wegpunkte" target="_blank">zusätzliche Wegpunkte</a> sind in <a href="http://wiki.opencaching.de/index.php/Wie_erhalte_ich_eine_GPX-Datei%3F" target="_blank">GPX-Dateien</a> enthalten</li>
+     <li class="changelogitem">Bilder (inkl. Spoilerbildern) aus Cachelistings werden in GPX-Dateien eingebettet. Um sie unterwegs sehen zu können, ist eine Internetverbindung nötig.</li>
      <li class="changelogitem"><a href="articles.php?page=impressum#datalicense">Datenlizenz CC-BY-NC-ND</a></li>
      <li class="changelogitem">Statistikbilder mit neuem Logo</a></li>
    </ul>
@@ -29,13 +32,13 @@
      <li class="changelogitem">verbesserte Verwaltung von Cachemeldungen (intern)</a></li>
      <li class="changelogitem">Suchmaschinenoptimierung</a></li>
      <li class="changelogitem"><a href="articles.php?page=team">Team-</a> und <a href="articles.php?page=donations">Spendenseite</a> aktualisiert</a></li>
-     <li class="changelogitem">Verbesserungen beim Datenschutz</a></li>
-     <li class="changelogitem">diverse interne Änderungen zur Umstellung von PHP 5.2 auf PHP 5.3</li>
+     <li class="changelogitem"><a href="articles.php?page=dsb">Datenschutzbelehrung</a> aktualisiert; Verbesserungen beim Datenschutz</a></li>
+     <li class="changelogitem">diverse interne Änderungen zur Umstellung von PHP 5.2 auf 5.3</li>
    </ul>
 
 	 <p>Korrigiert (Bugfixes):</p>
 	 <ul class="changelog">
-     <li class="changelogitem">explizite Länderangabe für Cachelistings hat Vorrang vor automatischer Zuordnung</li>
+     <li class="changelogitem">explizite Länderangabe für Cachelistings hat Vorrang vor automatischer Erkennung via Koordinaten</li>
      <li class="changelogitem">Icons für Event-Logs in der <a href="newlogs.php">Liste neuer Logs</a></li>
    </ul>
 	<br />

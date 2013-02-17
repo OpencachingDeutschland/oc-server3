@@ -13,6 +13,36 @@
 	<p>This page lists all changes since version 3.0.</p>
 	<br />
 
+	 <p><strong>Release  3.0.4</strong> &ndash; February 17, 2013
+   <p>New:</p>
+	 <ul class="changelog">
+     <li class="changelogitem">new cache size &bdquo;nano&ldquo;</li>
+     <li class="changelogitem">GPX files downloaded from Opencaching.de contain additional waypoints</li>
+     <li class="changelogitem">Picturs (including spoilers) from cache listings are embedded in GPX files. You will need internet connection to view them in field.</li>
+     <li class="changelogitem"><a href="articles.php?page=impressum#datalicense">data license CC-BY-NC-ND</a></li>
+     <li class="changelogitem">statistic pictures with new Opencaching.de logo</a></li>
+   </ul>
+
+	 <p>Changed / improved:</p>
+	 <ul class="changelog">
+     <li class="changelogitem">new page head design with new logo</a></li>
+     <li class="changelogitem">The <a href="map2.php">map</a> will now show up to 600 instead of 180 cache symbols (MS Internet Explorer: up to 200).</a></li>
+     <li class="changelogitem">consistend display of <a href="newlogs.php">new logs list</a></li>
+     <li class="changelogitem">improved user interface feedback when changing profile details, email address or password</li>
+     <li class="changelogitem">improved display of cache reports for OC admins</a></li>
+     <li class="changelogitem">optimized search engine access</a></li>
+     <li class="changelogitem">updated <a href="articles.php?page=team">team</a> and <a href="articles.php?page=donations">donations</a> page</a></li>
+     <li class="changelogitem">updated <a href="articles.php?page=dsb">privacy statement</a> and improved data privacy</li>
+     <li class="changelogitem">internal modifications for migration from PHP 5.2 to 5.3</li>
+   </ul>
+
+	 <p>Fixed:</p>
+	 <ul class="changelog">
+     <li class="changelogitem">explicit country setting of cache listings is preferred to automatical detection from coordinates</li>
+     <li class="changelogitem">icons for event logs in <a href="newlogs.php">new logs list</a></li>
+   </ul>
+	<br />
+
 	 <p><strong>Release  3.0.3</strong> &ndash; November 18, 2012</p>
    <p>New:</p>
 	 <ul class="changelog">
@@ -28,7 +58,7 @@
      <li class="changelogitem">simplified internal software configuration</li>
    </ul>
 
-	 <p>Bugfixes:</p>
+	 <p>Fixed:</p>
 	 <ul class="changelog">
      <li class="changelogitem">fixed waypoint generation error</li>
      <li class="changelogitem">fixed error message when saving unchanged user profile</li>

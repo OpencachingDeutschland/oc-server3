@@ -29,7 +29,7 @@
      <li class="changelogitem">verbesserte Verwaltung von Cachemeldungen (intern)</a></li>
      <li class="changelogitem">Suchmaschinenoptimierung</a></li>
      <li class="changelogitem"><a href="articles.php?page=team">Team-</a> und <a href="articles.php?page=donations">Spendenseite</a> aktualisiert</a></li>
-     <li class="changelogitem"><a href="articles.php?page=dsb">Datenschutzbelehrung</a> aktualisiert; Verbesserungen beim Datenschutz</a></li>
+     <li class="changelogitem">Verbesserungen beim Datenschutz</a></li>
      <li class="changelogitem">diverse interne Änderungen zur Umstellung von PHP 5.2 auf PHP 5.3</li>
    </ul>
 

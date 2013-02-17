@@ -45,7 +45,7 @@
 			</tr>
 			<tr>
 				<td>{t}E-Mail:{/t}</td>
-				<td>{$user.email|escape}</td>
+				<td>{if $user.email_problems > 0}<span class="errormsg">{$user.email|escape}</span>{else}{$user.email|escape}{/if}</td>
 			</tr>
 			<tr>
 				<td>{t}Date created:{/t}</td>
@@ -124,6 +124,12 @@
 				<tr>
 					<td>&nbsp;</td>
 					<td><input type="checkbox" name="chkdelete" value="1" /> {t}Delete{/t}</td>
+				</tr>
+			{/if}
+			{if $cansetemail==true}
+				<tr>
+					<td></td>
+					<td><input type="checkbox" name="chkemail" value="1"> {t}Mark e-mail address as invalid{/t}&nbsp;&nbsp;&nbsp;<input type="checkbox" name="chkdl" value="1"> {t}data license mail was not delivered{/t}</td>
 				</tr>
 			{/if}
 

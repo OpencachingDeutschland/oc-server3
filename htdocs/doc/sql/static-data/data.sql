@@ -849,6 +849,7 @@ INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustrin
 INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('85', 'MNU_CACHES_LOG', 'Create a logentry', '1687', 'Create a logentry', '1687', '0', 'log2.php', '0', '10', '10', '', '0', NULL);
 INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('86', 'MNU_START_CHANGELOG', 'Changelog', '1797', 'Changelog', '1797', '0', 'articles.php?page=changelog', '0', '0', '10', '', '1', NULL);
 INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('87', 'MNU_START_OPERATOR', 'Operator Association', '1798', 'Operator Association', '1798', '0', 'articles.php?page=verein', '1', '1', '8', '', '1', NULL);
+INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('88', 'MNU_VERIFY_EMAIL', 'Verify e-mail address', '1824', 'Verify e-mail address', '1824', '0', 'verifyemail.php', '0', '0', '0', '', '0', NULL);
 
 -- Table sys_trans
 SET NAMES 'utf8';
@@ -2260,6 +2261,13 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1820', 'You can
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1821', 'OC.de new', '2013-02-15 00:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1822', 'OC.de new, slimline', '2013-02-15 00:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1823', 'OC.de new, without statistics', '2013-02-15 00:48:04');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1824', 'Verify e-mail address', '2013-02-17 18:48:04');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1825', 'One or more e-mails could not be delivered to the address you specified in your user profile', '2013-02-17 18:48:04');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1826', 'Please confirm that this email address is correct, or enter a new one.', '2013-02-17 18:48:04');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1827', 'Enter new email address', '2013-02-17 18:48:04');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1828', 'Confirm this email address', '2013-02-17 18:48:04');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1829', 'Mark e-mail address as invalid', '2013-02-17 18:48:04');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1830', 'data license mail was not delivered', '2013-02-17 18:48:04');
 
 -- Table sys_trans_ref
 SET NAMES 'utf8';
@@ -5793,6 +5801,13 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1821', 'DE', 'OC.de neu', '2013-02-14 00:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1822', 'DE', 'OC.de neu, slimline', '2013-02-14 00:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1823', 'DE', 'OC.de neu, ohne Statistik', '2013-02-14 00:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1824', 'DE', 'E-Mail-Adresse bestätigen', '2013-02-17 18:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1825', 'DE', 'Eine oder mehrere Emails konnte nicht an deine hinterlegte Adresse zugestellt werden', '2013-02-17 18:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1826', 'DE', 'Bitte bestätige, dass diese Adresse korrekt ist, oder gib eine neue ein!', '2013-02-17 18:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1827', 'DE', 'Neue Adresse eingeben', '2013-02-17 18:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1828', 'DE', 'Diese Adresse bestätigen', '2013-02-17 18:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1829', 'DE', 'E-Mail-Adresse als ungültig markieren', '2013-02-17 18:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1830', 'DE', 'Datenlizenzmail wurde nicht zugestellt', '2013-02-17 18:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'EN', 'Reorder IDs \r', '2010-09-02 00:15:30');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'EN', 'The database could not be reconnected.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'EN', 'Testing – please do not login', '2010-08-28 11:48:07');
@@ -7200,6 +7215,13 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1821', 'EN', 'OC.de new', '2013-02-14 00:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1822', 'EN', 'OC.de new, slimline', '2013-02-14 00:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1823', 'EN', 'OC.de new, without statistics', '2013-02-14 00:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1824', 'EN', 'Verify email address', '2013-02-17 18:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1825', 'EN', 'One or more e-mails could not be delivered to the address you specified in your user profile', '2013-02-17 18:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1826', 'EN', 'Please confirm that this email address is correct, or enter a new one.', '2013-02-17 18:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1827', 'EN', 'Enter new email address', '2013-02-17 18:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1828', 'EN', 'Confirm this email address', '2013-02-17 18:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1829', 'EN', 'Mark e-mail address as invalid', '2013-02-17 18:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1830', 'EN', 'data license mail was not delivered', '2013-02-17 18:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'ES', 'Reordenar ID', '2010-12-09 00:17:55');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'ES', 'La base de datos no se pudo conectar.', '2010-12-09 00:17:55');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'ES', 'En pruebas - por favor, no entre.', '2010-12-09 00:17:55');

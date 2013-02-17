@@ -30,5 +30,6 @@ date         commit ID    change
                           - added index logentries:userid
                           - changed user.password length to 32
 													- removed sqlsession.remote_addr and index remote_addr
-2013-02-16                new table data_licenses
+2013-02-16   06d832c3     new table data_licenses
                           added user.data_license
+2013-02-17                added user.email_problems

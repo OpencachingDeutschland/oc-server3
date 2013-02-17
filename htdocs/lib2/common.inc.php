@@ -95,6 +95,17 @@ function __autoload($class_name)
 	if (function_exists('post_config'))
 		post_config();
 
+	// check for email address problems
+	// use direct database access instead of user class for performance reasons - need not
+	//	to include user.class.php in any script
+	if (!isset($verifyemail) &&
+			$login->userid > 0 &&
+			sql_value("SELECT `email_problems` FROM `user` WHERE `user_id`='&1'", 0, $login->userid) != 0)
+	{
+		header("Location: verifyemail.php?page=" . basename($_SERVER['REQUEST_URI']));
+		exit;
+	}
+
 // normalize important settings
 function normalize_settings()
 {

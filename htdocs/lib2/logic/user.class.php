@@ -49,6 +49,7 @@ class user
 		$this->reUser->addString('username', '', false);
 		$this->reUser->addString('password', null, true);
 		$this->reUser->addString('email', null, true);
+		$this->reUser->addString('email_problems', 0, false);
 		$this->reUser->addFloat('latitude', 0, false);
 		$this->reUser->addFloat('longitude', 0, false);
 		$this->reUser->addDate('last_modified', time(), true, RE_INSERT_IGNORE);
@@ -1111,6 +1112,31 @@ class user
 		$this->reload();
 
 		return true;
+	}
+
+	// email bounce processing
+	function addEmailProblem($licensemail=false)
+	{
+		if ($licensemail)
+			return $this->reUser->setValue('email_problems', 1000001) && $this->save();
+		else
+			return $this->reUser->setValue('email_problems', $this->getEmailProblems() + 1) && $this->save();
+	}
+
+	function getEmailProblems()
+	{
+		// see also common.inc.php "SELECT `email_problems`"
+		return $this->reUser->getValue('email_problems') % 1000000;
+	}
+
+	function missedDataLicenseMail()
+	{
+		return $this->reUser->getValue('email_problems') > 1000000;
+	}
+
+	function confirmEmailAddress()
+	{
+		return $this->reUser->setValue('email_problems', 0) && $this->save();
 	}
 
 	function reload()

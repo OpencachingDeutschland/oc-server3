@@ -63,6 +63,8 @@ function formAction()
 	$commit = isset($_REQUEST['chkcommit']) ? $_REQUEST['chkcommit']+0 : 0;
 	$delete = isset($_REQUEST['chkdelete']) ? $_REQUEST['chkdelete']+0 : 0;
 	$disable = isset($_REQUEST['chkdisable']) ? $_REQUEST['chkdisable']+0 : 0;
+	$emailproblem = isset($_REQUEST['chkemail']) ? $_REQUEST['chkemail']+0 : 0;
+	$datalicense = isset($_REQUEST['chkdl']) ? $_REQUEST['chkdl']+0 : 0;
 	$userid = isset($_REQUEST['userid']) ? $_REQUEST['userid']+0 : 0;
 	$disduelicense = isset($_REQUEST['chkdisduelicense']) ? $_REQUEST['chkdisduelicense']+0 : 0;
 
@@ -77,11 +79,13 @@ function formAction()
 	if ($commit == 0)
 		$tpl->error($translate->t('You have to check that you are sure!','','',0));
 
-	if ($disduelicense == 1) {
+	if ($disduelicense == 1) 
+	{
 		$errmesg = $user->disduelicense();
 		if ($errmesg !== true)
 			$tpl->error($errmesg);
-	} elseif ($disable == 1)
+	} 
+	else if ($disable == 1)
 	{
 		if ($user->disable() == false)
 			$tpl->error(ERROR_UNKNOWN);
@@ -90,6 +94,10 @@ function formAction()
 	{
 		if ($user->delete() == false)
 			$tpl->error(ERROR_UNKNOWN);
+	}
+	else if ($emailproblem == 1)
+	{
+		$user->addEmailProblem($datalicense);
 	}
 	
 	$tpl->redirect('adminuser.php?action=searchuser&username=' . urlencode($username) . 
@@ -106,7 +114,7 @@ function searchUser()
 	$tpl->assign('username', $username);
 	$tpl->assign('msg', $msg);
 	
-	$rs = sql("SELECT `user_id`, `username`, `email`, `date_created`, `last_modified`, `is_active_flag`, `activation_code`, `first_name`, `last_name` FROM `user` WHERE `username`='&1' OR `email`='&1'", $username);
+	$rs = sql("SELECT `user_id`, `username`, `email`, `email_problems`, `date_created`, `last_modified`, `is_active_flag`, `activation_code`, `first_name`, `last_name` FROM `user` WHERE `username`='&1' OR `email`='&1'", $username);
 	$r = sql_fetch_assoc($rs);
 	sql_free_result($rs);
 	if ($r == false)
@@ -130,6 +138,7 @@ function searchUser()
 		$tpl->error(ERROR_UNKNOWN);
 	$tpl->assign('candisable', $user->canDisable());
 	$tpl->assign('candelete', $user->canDelete());
+	$tpl->assign('cansetemail', !$user->missedDataLicenseMail());
 
 	$tpl->display();
 }

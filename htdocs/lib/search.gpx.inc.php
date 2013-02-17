@@ -14,7 +14,7 @@
 '<?xml version="1.0" encoding="utf-8"?>
 <gpx xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" version="1.0" creator="Opencaching.de - http://www.opencaching.de" xsi:schemaLocation="http://www.topografix.com/GPX/1/0 http://www.topografix.com/GPX/1/0/gpx.xsd http://www.groundspeak.com/cache/1/0/1 http://www.groundspeak.com/cache/1/0/1/cache.xsd" xmlns="http://www.topografix.com/GPX/1/0">
   <name>Cache listing generated from Opencaching.de</name>
-  <desc>This is a waypoint file generated from Opencaching.de</desc>
+  <desc>This is a waypoint file generated from Opencaching.de{wpchildren}</desc>
   <author>Opencaching.de</author>
   <email>contact@opencaching.de</email>
   <url>http://www.opencaching.de</url>
@@ -386,12 +386,20 @@
 		}
 	}
 	
-	$gpxHead = mb_ereg_replace('{time}', date($gpxTimeFormat, time()), $gpxHead);
-	append_output($gpxHead);
-
 	$childwphandler = new ChildWp_Handler();
 
 	// ok, output ...
+
+	$children='';
+	$rs = sql('SELECT `gpxcontent`.`cache_id` `cacheid` FROM `gpxcontent`');
+	while ($r = sql_fetch_array($rs))
+		if (count($childwphandler->getChildWps($r['cacheid'])))
+			$children=" (HasChildren)"; 
+	mysql_free_result($rs);
+
+	$gpxHead = mb_ereg_replace('{wpchildren}', $children, $gpxHead);
+	$gpxHead = mb_ereg_replace('{time}', date($gpxTimeFormat, time()), $gpxHead);
+	append_output($gpxHead);
 
 	if ($usr === false)
 		$user_id = 0;
@@ -411,6 +419,7 @@
 							INNER JOIN `cache_desc` ON `caches`.`cache_id`=`cache_desc`.`cache_id` 
 								AND `caches`.`default_desclang`=`cache_desc`.`language`
 								LEFT JOIN `stat_cache_logs` ON `gpxcontent`.`cache_id`=`stat_cache_logs`.`cache_id` AND `stat_cache_logs`.`user_id`='&1'", $user_id);
+
 	while($r = sql_fetch_array($rs))
 	{
 		$thisline = $gpxLine;
@@ -587,21 +596,21 @@
 		foreach ($childWaypoints as $childWaypoint)
 		{
 			$thiswp = $gpxWaypoints;
-			$thiswp = str_replace('{wp_lat}', sprintf('%01.5f', $childWaypoint['latitude']), $thiswp);
-			$thiswp = str_replace('{wp_lon}', sprintf('%01.5f', $childWaypoint['longitude']), $thiswp);
-			$thiswp = str_replace('{time}', $time, $thiswp);
-			$thiswp = str_replace('{name}', $r['waypoint'].'W'.sprintf($digits,$n) , $thiswp);
-			$thiswp = str_replace('{cachename}', xmlentities($r['name']), $thiswp);
-			$thiswp = str_replace('{comment}',xmlentities($childWaypoint['description']), $thiswp);
-			$thiswp = str_replace('{desc}', $translate->t('Waypoint','','',0).' '.$n, $thiswp);
+			$thiswp = mb_ereg_replace('{wp_lat}', sprintf('%01.5f', $childWaypoint['latitude']), $thiswp);
+			$thiswp = mb_ereg_replace('{wp_lon}', sprintf('%01.5f', $childWaypoint['longitude']), $thiswp);
+			$thiswp = mb_ereg_replace('{time}', $time, $thiswp);
+			$thiswp = mb_ereg_replace('{name}', $r['waypoint'].'W'.sprintf($digits,$n) , $thiswp);
+			$thiswp = mb_ereg_replace('{cachename}', xmlentities($r['name']), $thiswp);
+			$thiswp = mb_ereg_replace('{comment}',xmlentities($childWaypoint['description']), $thiswp);
+			$thiswp = mb_ereg_replace('{desc}', $translate->t('Waypoint','','',0).' '.$n, $thiswp);
 			switch ($childWaypoint['type'])
 			{
 				case 1: $wp_typename = "Parking Area"; break;
 				default: $wp_typename = "Reference Point";
 			}
-			$thiswp = str_replace('{type}', $wp_typename, $thiswp);
-			$thiswp = str_replace('{parent}', $r['waypoint'], $thiswp);
-		  $thiswp = str_replace('{cacheid}', $r['cacheid'], $thiswp);
+			$thiswp = mb_ereg_replace('{type}', $wp_typename, $thiswp);
+			$thiswp = mb_ereg_replace('{parent}', $r['waypoint'], $thiswp);
+			$thiswp = mb_ereg_replace('{cacheid}', $r['cacheid'], $thiswp);
 			$waypoints .= $thiswp;
 			++$n;
 		}
@@ -609,16 +618,16 @@
 		if ($cacheNote && !empty($cacheNote['latitude']) && !empty($cacheNote['longitude']))
 		{
 			$thiswp = $gpxWaypoints;
-			$thiswp = str_replace('{wp_lat}', sprintf('%01.5f', $cacheNote['latitude']), $thiswp);
-			$thiswp = str_replace('{wp_lon}', sprintf('%01.5f', $cacheNote['longitude']), $thiswp);
-			$thiswp = str_replace('{time}', $time, $thiswp);
-			$thiswp = str_replace('{name}', $r['waypoint'].'NOTE', $thiswp);
-			$thiswp = str_replace('{cachename}', xmlentities($r['name']), $thiswp);
-			$thiswp = str_replace('{comment}', xmlentities($cacheNote['note']), $thiswp);
-			$thiswp = str_replace('{desc}', $translate->t('Personal cache note','','',0), $thiswp);
-			$thiswp = str_replace('{type}', "Reference Point", $thiswp);
-			$thiswp = str_replace('{parent}', $r['waypoint'], $thiswp);
-		  $thiswp = str_replace('{cacheid}', $r['cacheid'], $thiswp);
+			$thiswp = mb_ereg_replace('{wp_lat}', sprintf('%01.5f', $cacheNote['latitude']), $thiswp);
+			$thiswp = mb_ereg_replace('{wp_lon}', sprintf('%01.5f', $cacheNote['longitude']), $thiswp);
+			$thiswp = mb_ereg_replace('{time}', $time, $thiswp);
+			$thiswp = mb_ereg_replace('{name}', $r['waypoint'].'NOTE', $thiswp);
+			$thiswp = mb_ereg_replace('{cachename}', xmlentities($r['name']), $thiswp);
+			$thiswp = mb_ereg_replace('{comment}', xmlentities($cacheNote['note']), $thiswp);
+			$thiswp = mb_ereg_replace('{desc}', $translate->t('Personal cache note','','',0), $thiswp);
+			$thiswp = mb_ereg_replace('{type}', "Reference Point", $thiswp);
+			$thiswp = mb_ereg_replace('{parent}', $r['waypoint'], $thiswp);
+			$thiswp = mb_ereg_replace('{cacheid}', $r['cacheid'], $thiswp);
 			$waypoints .= $thiswp;
 		}
 

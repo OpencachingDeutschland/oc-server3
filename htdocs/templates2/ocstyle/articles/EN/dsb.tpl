@@ -65,13 +65,13 @@
 			about new caches and logs. It contains data for the last 30 days, is accessible only
 			for system admins and will only be used for diagnoses of email delivery problems.</p>
 			
-			<p><b>Inspecting your stored data</b></p>
+			<h2>Inspecting your stored data</h2>
 			
 			<p>After logging in, you can view and change your data at the "My Profile" page.
 			You can also see your registration date there.</p>
 			<p>You can inspect the stored cookies within your web browser.</p>
 	
-			<p><b>Deleting your stored data</b></p>
+			<h2>Deleting your stored data</h2>
 			
 			<p>You can always delete all optional data from your user profile, and you can change
 			the mandantory user name, email address and password as you like (as long as the email address stays valid).</p>

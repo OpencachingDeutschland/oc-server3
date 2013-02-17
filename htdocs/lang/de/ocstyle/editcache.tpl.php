@@ -307,7 +307,7 @@ function toggleAttr(id)
 	<tr>
 		<td class="help" colspan="2">
 			<img src="lang/de/ocstyle/images/misc/hint.gif" border="0" width="15" height="11" alt="{t}Notice{/t}" title="{t}Notice{/t}">
-			{t}Additional waypoints can be entered to make searching easier, for example by pointing to a suitable parkering or start of a path (the waypoint's description may contain more information). Waypoints are downloaded in the GPX-file.{/t}
+			{t}Additional waypoints can be entered to make searching easier, for example by pointing to a suitable parking location or start of a path (the waypoint's description may contain more information). The waypoints are included in GPX-file downloads and will be sent to the GPS device.{/t}
 		</td>
 	</tr>
 	<tr><td class="spacer" colspan="2">&nbsp;</td></tr>

@@ -17,7 +17,7 @@
    <p>New:</p>
 	 <ul class="changelog">
      <li class="changelogitem">new cache size &bdquo;nano&ldquo;</li>
-     <li class="changelogitem">GPX files downloaded from Opencaching.de contain additional waypoints</li>
+     <li class="changelogitem">GPX files downloaded from Opencaching.de or sent to GPS devices contain additional waypoints</li>
      <li class="changelogitem">Picturs (including spoilers) from cache listings are embedded in GPX files. You will need internet connection to view them in field.</li>
      <li class="changelogitem"><a href="articles.php?page=impressum#datalicense">data license CC-BY-NC-ND</a></li>
      <li class="changelogitem">statistic pictures with new Opencaching.de logo</a></li>

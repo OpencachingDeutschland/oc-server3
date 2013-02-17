@@ -318,7 +318,7 @@
 		{/foreach}
 		</table>
 		<img src="resource2/{$opt.template.style}/images/viewcache/16x16-info.png" class="icon16" alt="Info" />
-		{t}Additional waypoints can make searching easier, for example by pointing to a suitable parkering or start of a path. The waypoints are downloaded in the GPX-file.{/t}
+		{t}Additional waypoints can make searching easier, for example by pointing to a suitable parking location or start of a path. The waypoints are included in GPX-file downloads and will be sent to the GPS device.{/t}
 	</div>
 {/if}
 

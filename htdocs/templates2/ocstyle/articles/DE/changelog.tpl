@@ -16,7 +16,7 @@
    <p>Neu:</p>
 	 <ul class="changelog">
      <li class="changelogitem">neue Cachegröße &bdquo;nano&ldquo;</li>
-     <li class="changelogitem"><a href="http://wiki.opencaching.de/index.php/Wegpunkte#Interne.2C_zus.C3.A4tzliche_Wegpunkte" target="_blank">zusätzliche Wegpunkte</a> sind in <a href="http://wiki.opencaching.de/index.php/Wie_erhalte_ich_eine_GPX-Datei%3F" target="_blank">GPX-Dateien</a> enthalten</li>
+     <li class="changelogitem"><a href="http://wiki.opencaching.de/index.php/Wegpunkte#Interne.2C_zus.C3.A4tzliche_Wegpunkte" target="_blank">zusätzliche Wegpunkte</a> sind in <a href="http://wiki.opencaching.de/index.php/Wie_erhalte_ich_eine_GPX-Datei%3F" target="_blank">GPX-Dateien</a> enthalten und werden ans GPS-Gerät gesendet</li>
      <li class="changelogitem">Bilder (inkl. Spoilerbildern) aus Cachelistings werden in GPX-Dateien eingebettet. Um sie unterwegs sehen zu können, ist eine Internetverbindung nötig.</li>
      <li class="changelogitem"><a href="articles.php?page=impressum#datalicense">Datenlizenz CC-BY-NC-ND</a></li>
      <li class="changelogitem">Statistikbilder mit neuem Logo</a></li>

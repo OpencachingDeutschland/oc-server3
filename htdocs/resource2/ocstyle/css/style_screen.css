@@ -1173,7 +1173,7 @@ div.isarchived {
 div#havefound {
 	position: absolute;
 	z-index: 25;
-	top: 250px;
+	top: 180px;
 	right: 20px;
 	width: 35px;
 	padding: 5px 5px 5px 0px;
@@ -1181,5 +1181,5 @@ div#havefound {
 	height: 35px;
 }
 
-* html div#havefound {top: 230px;}
-*+html div#havefound {top: 230px;}
+* html div#havefound {top: 160px;}
+*+html div#havefound {top: 160px;}

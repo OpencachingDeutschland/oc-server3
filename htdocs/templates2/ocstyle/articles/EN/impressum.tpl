@@ -256,7 +256,7 @@
 		&copy; $USERNAME, www.opencaching.de, CC-BY-NC-ND, as of $DATUM
 	</p>
 	<p>
-		Date may be omitted for photos and log entries.
+		The date refers to the day when the data was downloaded from www.opencaching.de, and it may be omitted for photos and log entries.
 	</p>
 	
 	<p>&nbsp;</p>

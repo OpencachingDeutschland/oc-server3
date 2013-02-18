@@ -7,7 +7,7 @@
  *  Display some status information about the server and Opencaching
  ***************************************************************************/
 
-	$verifyemail = true;
+	$disable_verifyemail = true;
 	require('./lib2/web.inc.php');
 	$tpl->name = 'login';
 	$tpl->menuitem = MNU_LOGIN;

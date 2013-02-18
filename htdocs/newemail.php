@@ -7,7 +7,7 @@
  *  Display some status information about the server and Opencaching
  ***************************************************************************/
 
-	$verifyemail = true;
+	$disable_verifyemail = true;
 	require('./lib2/web.inc.php');
 	require_once('./lib2/logic/user.class.php');
 	$tpl->name = 'newemail';

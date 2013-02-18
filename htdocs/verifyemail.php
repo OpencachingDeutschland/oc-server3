@@ -5,7 +5,7 @@
  *  Unicode Reminder メモ
  ***************************************************************************/
 
-	$verifyemail = true;
+	$disable_verifyemail = true;
 	require_once('lib2/web.inc.php');
 	require_once('lib2/logic/user.class.php');
 	require_once('lib2/logic/useroptions.class.php');

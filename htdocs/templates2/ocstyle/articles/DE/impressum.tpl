@@ -295,7 +295,7 @@
 		&copy; $USERNAME, www.opencaching.de, CC-BY-NC-ND, Stand: $DATUM
 	</p>
 	<p>
-		zu verwenden ist, wobei das Datum sich auf den Abrufzeitpunkt von www.opencaching.de bezieht. Bei Fotos und Logeintr&auml;gen kann vom Datum abgesehen werden.
+		zu verwenden, wobei das Datum sich auf den Abrufzeitpunkt von www.opencaching.de bezieht. Bei Fotos und Logeintr&auml;gen kann vom Datum abgesehen werden.
 		<br />
 		<br />
 		Weitere Erläuterungen zur Datenlizenz gibt es im <a href="http://wiki.opencaching.de/index.php/Datenlizenz" target="_blank">Wiki</a>.</p>

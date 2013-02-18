@@ -98,7 +98,7 @@ function __autoload($class_name)
 	// check for email address problems
 	// use direct database access instead of user class for performance reasons - need not
 	//	to include user.class.php in any script
-	if (!isset($verifyemail) &&
+	if (!isset($disable_verifyemail) &&
 			$login->userid > 0 &&
 			sql_value("SELECT `email_problems` FROM `user` WHERE `user_id`='&1'", 0, $login->userid) != 0)
 	{

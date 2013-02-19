@@ -18,7 +18,7 @@ function get_okapi_settings()
 
 		'OC_BRANCH' => 'oc.de',  # Tell OKAPI to work in "OCDE mode".
 		'SUPPORTS_LOGTYPE_NEEDS_MAINTENANCE' => false,  # OCDE doesn't support it, see [2] for more info.
-		'DATA_LICENSE_URL' => null,  # TODO!
+		'DATA_LICENSE_URL' => 'http://www.opencaching.de/articles.php?page=impressum#datalicense',
 		
 		# Settings which ARE present in settings.inc.php:
 		

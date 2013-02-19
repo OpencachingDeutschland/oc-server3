@@ -850,6 +850,7 @@ INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustrin
 INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('86', 'MNU_START_CHANGELOG', 'Changelog', '1797', 'Changelog', '1797', '0', 'articles.php?page=changelog', '0', '0', '10', '', '1', NULL);
 INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('87', 'MNU_START_OPERATOR', 'Operator Association', '1798', 'Operator Association', '1798', '0', 'articles.php?page=verein', '1', '1', '8', '', '1', NULL);
 INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('88', 'MNU_VERIFY_EMAIL', 'Verify e-mail address', '1824', 'Verify e-mail address', '1824', '0', 'verifyemail.php', '0', '0', '0', '', '0', NULL);
+INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('89', 'MNU_ADMIN_ADMINS', 'Admins', '1831', 'Admins', '1831', '1', 'admins.php', '1', '12', '6', '', '0', NULL);
 
 -- Table sys_trans
 SET NAMES 'utf8';
@@ -2268,6 +2269,9 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1827', 'Enter n
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1828', 'Confirm this email address', '2013-02-17 18:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1829', 'Mark e-mail address as invalid', '2013-02-17 18:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1830', 'data license mail was not delivered', '2013-02-17 18:48:04');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1831', 'Admins', '2013-02-19 05:40:04');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1832', 'Rights', '2013-02-19 05:40:04');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1833', 'Admin rights can be granted and revoked by a system administrator with database access.', '2013-02-19 05:40:04');
 
 -- Table sys_trans_ref
 SET NAMES 'utf8';
@@ -5808,6 +5812,9 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1828', 'DE', 'Diese Adresse bestätigen', '2013-02-17 18:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1829', 'DE', 'E-Mail-Adresse als ungültig markieren', '2013-02-17 18:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1830', 'DE', 'Datenlizenzmail wurde nicht zugestellt', '2013-02-17 18:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1831', 'DE', 'Admins', '2013-02-19 05:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1832', 'DE', 'Rechte', '2013-02-19 05:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1833', 'DE', 'Adminrechte können von einem Systemadministrator mit Datenbankzugriff vergeben oder entzogen werden.', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'EN', 'Reorder IDs \r', '2010-09-02 00:15:30');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'EN', 'The database could not be reconnected.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'EN', 'Testing – please do not login', '2010-08-28 11:48:07');
@@ -7203,7 +7210,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1809', 'EN', 'You have to accept the privacy statement, the terms of service and the data license to register at opencaching.de.', '2013-02-09 19:23:21');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1810', 'EN', 'When downloading this file, you accept our <a href=\"articles.php?page=impressum#tos\">terms of use</a> and <a href=\"articles.php?page=impressum#datalicense\" target=\"_blank\">Data license</a>.', '2013-02-09 19:23:02');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1811', 'EN', 'Disable (and lock all geocaches owned) and remove all foreign licensed content', '2013-02-09 19:30:44');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1812', 'EN', 'By submitting I accept the <a href=\"articles.php?page=impressum#tos\" target=\"_blank\">Opencaching.de Terms of Service</a> and the <a href=\"articles.php?page=impressum#datalicense\" target=\"_blank\">Data license</a>.', '2013-02-09 19:13:54');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1812', 'EN', 'ID', '2013-02-09 19:13:54');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1813', 'EN', 'Owner', '2013-02-09 19:30:32');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1814', 'EN', 'Reporter', '2013-02-09 19:30:23');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1815', 'EN', 'You have to check that you are sure!', '2013-02-09 19:30:23');
@@ -7222,6 +7229,9 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1828', 'EN', 'Confirm this email address', '2013-02-17 18:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1829', 'EN', 'Mark e-mail address as invalid', '2013-02-17 18:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1830', 'EN', 'data license mail was not delivered', '2013-02-17 18:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1831', 'EN', 'Admins', '2013-02-19 05:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1832', 'EN', 'Rights', '2013-02-19 05:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1833', 'EN', 'Admin rights can be granted and revoked by a system administrator with database access.', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'ES', 'Reordenar ID', '2010-12-09 00:17:55');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'ES', 'La base de datos no se pudo conectar.', '2010-12-09 00:17:55');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'ES', 'En pruebas - por favor, no entre.', '2010-12-09 00:17:55');

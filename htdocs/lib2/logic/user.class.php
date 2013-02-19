@@ -874,8 +874,8 @@ class user
 			$rs = sql("SELECT `pictures`.`url` " .
 								"FROM `pictures`,`caches` " .
 								"WHERE `caches`.`cache_id`=`pictures`.`object_id`" .
-								"AND `caches`.`user_id`='&1'",
-								$this->getUserId()
+								" AND `pictures`.`object_type`='&1' AND `caches`.`user_id`='&2'",
+								OBJECT_CACHE, $this->getUserId()
 							);
 			
 		elseif ($object_type == OBJECT_CACHELOG) 
@@ -883,8 +883,8 @@ class user
 			$rs = sql("SELECT `pictures`.`url` " .
 								"FROM `pictures`,`cache_logs` " .
 								"WHERE `cache_logs`.`id`=`pictures`.`object_id`" .
-								"AND `cache_logs`.`user_id`='&1'",
-								$this->getUserId()
+								" AND `pictures`.`object_type`='&1' AND `cache_logs`.`user_id`='&2'",
+								OBJECT_CACHELOG, $this->getUserId()
 							);
 		
 		// set thumb-dimensions

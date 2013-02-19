@@ -32,4 +32,4 @@ date         commit ID    change
 													- removed sqlsession.remote_addr and index remote_addr
 2013-02-16   06d832c3     new table data_licenses
                           added user.data_license
-2013-02-17                added user.email_problems
+2013-02-17   b7b51eab     added user.email_problems

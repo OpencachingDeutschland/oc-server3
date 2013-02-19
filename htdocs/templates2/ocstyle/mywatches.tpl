@@ -130,7 +130,7 @@
 						<tr>
 							<td style="border-bottom: solid 1px grey;">{include file="res_cacheicon_22.tpl" cachetype=$watchItem.type|escape}</td>
 							<td style="border-bottom: solid 1px grey;">{include file="res_cachestatus.tpl" status=$watchItem.status}</td>
-							<td style="border-bottom: solid 1px grey;"><a href="viewcache.php?wp={$watchItem.wp}">{$watchItem.name|escape}</a></td>
+							<td style="border-bottom: solid 1px grey;"><span style="{include file="res_cachestatus_span.tpl" status=$ratingItem.status}"><a href="viewcache.php?wp={$watchItem.wp}">{$watchItem.name|escape}</a></span></td>
 							<td style="border-bottom: solid 1px grey;">
 								{if $watchItem.lastfound==null}
 									---

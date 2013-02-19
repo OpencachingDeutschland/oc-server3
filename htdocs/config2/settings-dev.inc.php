@@ -93,6 +93,7 @@
 	//$opt['debug'] = DEBUG_DEVELOPER|DEBUG_SQLDEBUGGER;
 
 	// node options
+	// see settings-dist.inc.php for known node IDs
 	$opt['logic']['node']['id'] = 4;
   $opt['logic']['waypoint_pool']['prefix'] = 'OC';
   

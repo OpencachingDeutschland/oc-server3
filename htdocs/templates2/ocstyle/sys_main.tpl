@@ -206,7 +206,7 @@
 				{*
 				<p class="sidebar-maintitle">{t}Datalicense{/t}</p>
 				<div style="margin-top:20px;width:100%;text-align:center;">
-					<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/3.0/de/" target="_blank"><img alt="Creative Commons Lizenzvertrag" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-nd/3.0/de/88x31.png" /></a><br />{t}The www.opencaching.de content is licensed under <br /><a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/3.0/de/" target="_blank">German Creative Commons Attribution-NonCommercial-NoDerivs 3.0 Unported</a> License</a>.{/t}
+					<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/3.0/de/" target="_blank"><img alt="Creative Commons Lizenzvertrag" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-nd/3.0/de/88x31.png" /></a><br />{t}The www.opencaching.de content is licensed under <br /><a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/3.0/de/deed.en" target="_blank">Creative Commons Attribution-NonCommercial-NoDerivs 3.0 Germany</a> License.{/t}
 					<br />
 					&nbsp;
 				</div>

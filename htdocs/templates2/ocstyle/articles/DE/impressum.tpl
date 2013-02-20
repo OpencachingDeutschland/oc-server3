@@ -284,7 +284,7 @@
 		"Namensnennung-NichtKommerziell-KeineBearbeitung 3.0" (CC BY-NC-ND 3.0), das hei&szlig;t, 
 		Sie d&uuml;rfen die Inhalte vervielf&auml;ltigen, verbreiten und &ouml;ffentlich 
 		zug&auml;nglich machen. Dabei ist die Namensnennung des Autors/Rechteinhabers in der 
-		unten angegeben Form zu wahren. Eine kommerzielle Nutzung der Inhalte ist in 
+		unten angegebenen Form zu wahren. Eine kommerzielle Nutzung der Inhalte ist in 
 		jeglicher Form ausgeschlossen, ebenso d&uuml;rfen keine Ver&auml;nderungen/Abwandlungen 
 		der Inhalte vorgenommen werden.
 		<br />

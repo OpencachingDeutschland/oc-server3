@@ -516,8 +516,9 @@ INSERT INTO `countries_options` (`country`, `display`, `gmLat`, `gmLon`, `gmZoom
 -- Table data_licenses
 SET NAMES 'utf8';
 TRUNCATE TABLE `data_licenses`;
-INSERT INTO `data_licenses` (`id`, `license`) VALUES ('1', 'old Opencaching.de license');
-INSERT INTO `data_licenses` (`id`, `license`) VALUES ('2', 'CC BY-NC-ND 3.0');
+INSERT INTO `data_licenses` (`id`, `license`) VALUES ('0', 'passively accepted new license');
+INSERT INTO `data_licenses` (`id`, `license`) VALUES ('1', 'declined new license');
+INSERT INTO `data_licenses` (`id`, `license`) VALUES ('2', 'actively accepted new license');
 
 -- Table languages
 SET NAMES 'utf8';
@@ -9744,7 +9745,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1428', 'IT', 'Già pubblicata', '2010-09-10 23:40:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1429', 'IT', 'Pubblicata su', '2010-09-13 22:10:04');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1430', 'IT', 'Non ancora pubblicata.', '2010-09-13 22:10:04');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1431', 'IT', 'Ho letto e accetto le <a href=\"articles.php?page=impressum#tos\" target=\"_blank\">condizioni d\'uso di Opencaching.de</a>', '2010-09-10 23:39:25');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1431', 'IT', 'Ho letto e accetto le <a href=\"articles.php?page=impressum#tos\" target=\"_blank\">condizioni d\'uso di Opencaching.de</a> e la <a href=\"http://www.opencaching.de/articles.php?page=impressum#datalicense\">Lecenza dati Opencaching.de</a>.', '2010-09-10 23:39:25');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1432', 'IT', 'Informazione: il tuo log è stato cancellato dal proprietario della cache', '2010-09-10 23:39:09');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1433', 'IT', 'Seleziona città', '2010-10-27 18:49:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1434', 'IT', 'Totale di {resultscount} città corrispondenti', '2010-09-10 23:38:52');

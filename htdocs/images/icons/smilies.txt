@@ -1,0 +1,5 @@
+This are replacement smilies for GC images which are frequently linked from
+copied cache descriptions and logs.
+
+Icons are partly from /htdocs/resource2/tinymce/plugins/emotions/img and
+from free-to-use smilie site http://www.smilys.net.

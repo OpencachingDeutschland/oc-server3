@@ -1,8 +1,18 @@
-function CacheMarker(latlng, wp, type)
+function CacheMarker(latlng, wp, type, flags)
 {
   this.latlng = latlng;
   this.wp_ = wp;
-  this.image_ = 'resource2/ocstyle/images/map/24x24-cachetype-' + type + '.png';
+
+  if (flags & 4) state = '-inactive';
+  else if (flags & 8) state = '-oconly';
+  else state = '';
+
+  if (flags & 1)
+		this.image_ = 'resource2/ocstyle/images/map/24x24-owned' + state  + '.png';
+  else if (flags & 2)
+		this.image_ = 'resource2/ocstyle/images/map/24x24-found' + state + '.png';
+  else
+		this.image_ = 'resource2/ocstyle/images/map/24x24-cachetype-' + type + state + '.png';
   this.height_ = 24;
   this.width_ = 24;
 }

@@ -287,7 +287,7 @@ function output_namesearch($sName, $nLat, $nLon, $nResultId)
 
 function output_searchresult($nResultId, $nLon1, $nLat1, $nLon2, $nLat2)
 {
-	global $opt;
+	global $opt, $login;
 
 	// check if data is available and connect the right slave server
 	$nSlaveId = sql_value("SELECT `slave_id` FROM `map2_result` WHERE `result_id`='&1' AND DATE_ADD(`date_created`, INTERVAL '&2' SECOND)>NOW()", -2, $nResultId, $opt['map']['maxcacheage']);
@@ -313,10 +313,28 @@ function output_searchresult($nResultId, $nLon1, $nLat1, $nLon2, $nLat2)
 
 	if ($bMaxRecordReached == false)
 	{
-		$rs = sql_slave("SELECT SQL_BUFFER_RESULT `caches`.`wp_oc`, `caches`.`longitude`, `caches`.`latitude`, `caches`.`type` FROM `map2_data` INNER JOIN `caches` ON `map2_data`.`cache_id`=`caches`.`cache_id` WHERE `map2_data`.`result_id`='&1' AND `caches`.`longitude`>'&2' AND `caches`.`longitude`<'&3' AND `caches`.`latitude`>'&4' AND `caches`.`latitude`<'&5' LIMIT " . ($opt['map']['maxrecords']+0), $nResultId, $nLon1, $nLon2, $nLat1, $nLat2);
+		$rs = sql_slave("SELECT SQL_BUFFER_RESULT 
+                            `caches`.`wp_oc`, `caches`.`longitude`, `caches`.`latitude`,
+                            `caches`.`type`, 
+                            `caches`.`status`>1 AS `inactive`,
+                            `user`.`user_id`='&6' AS `owned`,
+                            IF(`cache_logs`.`id` IS NULL, 0, 1) AS `found`,
+                            IF(`caches_attributes`.`attrib_id` IS NULL, 0, 1) AS  `oconly`
+                       FROM `map2_data`
+                 INNER JOIN `caches` ON `map2_data`.`cache_id`=`caches`.`cache_id`
+                  LEFT JOIN `user` ON `user`.`user_id`=`caches`.`user_id`
+                  LEFT JOIN `cache_logs` ON `cache_logs`.`cache_id`=`caches`.`cache_id` AND `cache_logs`.`user_id`='&6' AND `cache_logs`.`type` IN (1,7)
+                  LEFT JOIN `caches_attributes` ON `caches_attributes`.`cache_id`=`caches`.`cache_id` AND `caches_attributes`.`attrib_id`=6
+                      WHERE `map2_data`.`result_id`='&1' AND `caches`.`longitude`>'&2' AND `caches`.`longitude`<'&3' AND `caches`.`latitude`>'&4' AND `caches`.`latitude`<'&5' LIMIT " . ($opt['map']['maxrecords']+0),
+                    $nResultId, $nLon1, $nLon2, $nLat1, $nLat2, $login->userid);
 		while ($r = sql_fetch_assoc($rs))
 		{
-			echo '<cache wp="' . xmlentities($r['wp_oc']) . '" lon="' . xmlentities($r['longitude']) . '" lat="' . xmlentities($r['latitude']) . '" type="' . xmlentities($r['type']) . '" />' . "\n";
+			$flags = 0; 
+			if ($r['owned']) $flags |= 1;
+			if ($r['found']) $flags |= 2;
+			if ($r['inactive']) $flags |= 4;
+			if ($r['oconly']) $flags |= 8;
+			echo '<cache wp="' . xmlentities($r['wp_oc']) . '" lon="' . xmlentities($r['longitude']) . '" lat="' . xmlentities($r['latitude']) . '" type="' . xmlentities($r['type']) . '" flags="' . xmlentities($flags) . '" />' . "\n";
 		}
 		sql_free_result($rs);
 	}

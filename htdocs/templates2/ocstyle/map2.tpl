@@ -1099,8 +1099,9 @@
 				var nLon = oCachesList[nIndex].getAttribute("lon");
 				var nLat = oCachesList[nIndex].getAttribute("lat");
 				var nType = oCachesList[nIndex].getAttribute("type");
+				var nFlags = oCachesList[nIndex].getAttribute("flags");
 
-				addCacheToMap(sWaypoint, nLon, nLat, nType);
+				addCacheToMap(sWaypoint, nLon, nLat, nType, nFlags);
 			}
 
 			document.getElementById('statCachesCount').firstChild.nodeValue = oCachesList.length;
@@ -1121,7 +1122,7 @@
 			return ((dTime2-dTime1)/1000).toFixed(1);
 		}
 
-		function addCacheToMap(sWaypoint, nLon, nLat, nType)
+		function addCacheToMap(sWaypoint, nLon, nLat, nType, nFlags)
 		{
 			if (sWaypoint == msPopupMarkerWP)
 			{
@@ -1133,7 +1134,7 @@
 				}
 			}
 
-			var oMarker = new CacheMarker(new GLatLng(nLat, nLon), sWaypoint, nType);
+			var oMarker = new CacheMarker(new GLatLng(nLat, nLon), sWaypoint, nType, nFlags);
 			GEvent.addListener(oMarker, "click", function(wp){CacheMarker_click(wp);});
 			moMap.addOverlay(oMarker);
 

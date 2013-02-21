@@ -114,7 +114,7 @@ function searchUser()
 	$tpl->assign('username', $username);
 	$tpl->assign('msg', $msg);
 	
-	$rs = sql("SELECT `user_id`, `username`, `email`, `email_problems`, `date_created`, `last_modified`, `is_active_flag`, `activation_code`, `first_name`, `last_name` FROM `user` WHERE `username`='&1' OR `email`='&1'", $username);
+	$rs = sql("SELECT `user_id`, `username`, `email`, `email_problems`, `date_created`, `last_modified`, `is_active_flag`, `activation_code`, `first_name`, `last_name`, `data_license`=1 AS `license_declined` FROM `user` WHERE `username`='&1' OR `email`='&1'", $username);
 	$r = sql_fetch_assoc($rs);
 	sql_free_result($rs);
 	if ($r == false)

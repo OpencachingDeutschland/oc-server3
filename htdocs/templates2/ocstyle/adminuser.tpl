@@ -57,7 +57,8 @@
 			</tr>
 			<tr>
 				<td>{t}User active:{/t}</td>
-				<td>{if $user.is_active_flag}{t}Yes{/t}{else}{t}No{/t}{/if}</td>
+				<td>{if $user.is_active_flag}{t}Yes{/t}{else}{t}No{/t}{/if}
+						{if $user.license_declined}&nbsp;({t}declined data license{/t}){/if}</td>
 			</tr>
 			<tr>
 				<td>{t}Activation code:{/t}</td>
@@ -94,17 +95,12 @@
 				<td>{t}Active geocaches:{/t}</td>
 				<td>{$user.hidden_active|escape}</td>
 			</tr>
-			<tr><td class="spacer" colspan="2"></td></tr>
 			<tr>
 				<td>{t}Last known login:{/t}</td>
 				<td>{if $user.last_known_login}{$user.last_known_login|date_format:$opt.format.date}{else}{t}Unknown{/t}{/if}</td>
 			</tr>
 			<tr>
 				<td>&nbsp;</td>
-			  <td>
-					{t}* If the user explicitly logged out after page visit or last login <br />
-					is older than 90 days, the last login cannot be determined.{/t}
-			  </td>
 			</tr>
 
 			<tr><td class="spacer" colspan="2"></td></tr>

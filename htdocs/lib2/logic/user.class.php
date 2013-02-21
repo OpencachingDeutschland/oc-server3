@@ -718,6 +718,7 @@ class user
 		                       `last_name`='', `first_name`='', `country`=NULL,
 		                       `new_pw_code`=NULL, `new_pw_date`=NULL,
 		                       `new_email`=NULL, `new_email_code`=NULL, `new_email_date`=NULL,
+		                       `email_problems`=0,
 		                       `permanent_login_flag`=0, `activation_code`='',
 		                       `notify_radius`=0, `statpic_text`=''
 		                 WHERE `user_id`='&1'", $this->nUserId);
@@ -809,12 +810,7 @@ class user
 
 		if ($num_cache_logs > 0) {
 			// set text ''
-			sql("UPDATE `cache_logs` " .
-					"SET `text`='&1' WHERE `user_id`='&2'",
-						"<em>Dieser Logtext wurde entfernt, weil der Benutzer die Opencaching.de-Datenlizenz abgelehnt hat." .
-						"<br /><br />" .
-						"This text has been deleted because the used declined the Opencaching.de data license.</em>", 
-					$this->getUserId());
+			sql("UPDATE `cache_logs` SET `text`='' WHERE `user_id`='&1'", $this->getUserId());
 			
 			// replace pictures
 			$errmesg = $this->replace_pictures(OBJECT_CACHELOG);

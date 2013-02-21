@@ -47,11 +47,11 @@
 	{/if}
 
 	<tr>
-		<td><b>{t}Registered since{/t}:</b></td>
+		<td><b>{t}Registered&nbsp;since{/t}:</b></td>
 		<td>{$registered|date_format:$opt.format.date}</td>
 	</tr>
 	<tr>
-		<td><b>{t}Last login{/t}:</b></td>
+		<td style="vertical-align:top"><b>{t}Last&nbsp;login{/t}:</b></td>
 		{if $lastlogin==1}
 			<td>{t}Within the last month{/t}</td>
 		{elseif $lastlogin==2}
@@ -61,7 +61,11 @@
 		{elseif $lastlogin==4}
 			<td>{t}More than 12 months ago{/t}</td>
 		{elseif $lastlogin==6}
-			<td>{t}The user account has been disabled.{/t}</td>
+			{if $license_declined}
+				<td>{t}The user account has been disabled, because the user declined the <a href="articles.php?page=impressum#datalicense">data license</a>. Cache descriptions, log texts and pictures have been deleted.{/t}</td>
+			{else}
+				<td>{t}The user account has been disabled.{/t}</td>
+			{/if}
 		{else}
 			<td>{t}unknown{/t}</td>
 		{/if}

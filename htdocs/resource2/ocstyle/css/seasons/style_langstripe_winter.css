@@ -1,0 +1,11 @@
+div#langstripe {
+	background: #fff url(bg-langstripe-winter.png) 0 100% repeat-x;
+}
+
+div#maplangstripe {
+	background: #fff url(bg-langstripe-winter-map.png) 0 100% repeat-x;
+}
+
+.faintseasoncolor {
+	background: #e1eef9;
+}

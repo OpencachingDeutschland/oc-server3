@@ -1,18 +1,19 @@
-function CacheMarker(latlng, wp, type, owned, found, map)
+function CacheMarker(latlng, wp, type, flags, map)
 {
   this.latlng = latlng;
   this.wp_ = wp;
-  if(found) {
-    this.image_ = 'resource2/ocstyle/images/map/24x24-found.png';
-  }
-  /*
-  else if(owned) {
-    this.image_ = 'resource2/ocstyle/images/map/24x24-owned.png';
-  }
-  */ 
-  else {
-    this.image_ = 'resource2/ocstyle/images/map/24x24-cachetype-' + type + '.png';
-  }
+
+  if (flags & 4) state = '-inactive';
+  else if (flags & 8) state = '-oconly';
+  else state = '';
+
+  if (flags & 1)
+		this.image_ = 'resource2/ocstyle/images/map/24x24-owned' + state  + '.png';
+  else if (flags & 2)
+		this.image_ = 'resource2/ocstyle/images/map/24x24-found' + state + '.png';
+  else
+		this.image_ = 'resource2/ocstyle/images/map/24x24-cachetype-' + type + state + '.png';
+		
   this.height_ = 24;
   this.width_ = 24;
   this.map_ = map;
@@ -45,7 +46,7 @@ CacheMarker.prototype.onAdd = function() {
     google.maps.event.trigger(me, "click", me.wp_);
   });
   //map.getPane(G_MAP_MARKER_PANE).appendChild(div);
-  var pane = this.getPanes().overlayImage;
+  var pane = this.getPanes().overlayMouseTarget;
   pane.appendChild(div);
   
   this.div_ = div;

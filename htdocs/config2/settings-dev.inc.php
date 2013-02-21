@@ -108,9 +108,10 @@
 	$opt['logic']['pictures']['url'] = $opt['page']['absolute_url'] . '/images/uploads';
 	$opt['logic']['pictures']['thumb_url'] = $opt['logic']['pictures']['url'] . '/thumbs';
 
-	/* cachemaps
+	/* maps
 	 */
 	$opt['logic']['cachemaps']['wmsurl'] = 'http://www.opencaching.de/cachemaps.php?wp={wp_oc}';
+	$opt['map']['disablefullscreen'] = false;
 
  	/* E-Mail for notification about news (newstopic.php)
  	 */

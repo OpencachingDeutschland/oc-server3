@@ -9,5 +9,6 @@ CREATE TABLE `profile_options` (
   `check_regex` varchar(255) default NULL,
   `option_order` int(11) NOT NULL default '100',
   `option_input` varchar(20) NOT NULL default 'text',
+  `optionset`, tinyint(2) NOT NULL default '1',
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='static content' ;

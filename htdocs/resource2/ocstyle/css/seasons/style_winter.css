@@ -25,10 +25,6 @@ div#bg2 {
 	background-position: top right;
 }
 
-div#langstripe {
-	background: #fff url(bg-langstripe-winter.png) 0 100% repeat-x;
-}
-
 /* Hack for Internet 'Exploder' */
 html {
 	overflow-x:hidden;

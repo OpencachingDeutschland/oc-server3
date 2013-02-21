@@ -70,6 +70,11 @@
 					                 'spring' => 'resource2/ocstyle/css/seasons/style_spring.css',
 					                 'summer' => 'resource2/ocstyle/css/seasons/style_summer.css',
 					                 'autumn' => 'resource2/ocstyle/css/seasons/style_autumn.css');
+					$seasons_stripe
+									 = array('winter' => 'resource2/ocstyle/css/seasons/style_langstripe_winter.css',
+					                 'spring' => 'resource2/ocstyle/css/seasons/style_langstripe_spring.css',
+					                 'summer' => 'resource2/ocstyle/css/seasons/style_langstripe_summer.css',
+					                 'autumn' => 'resource2/ocstyle/css/seasons/style_langstripe_autumn.css');
 					$smarty_dummy = 0;
 ?>
 					var nWindowWidth = 9999;
@@ -79,6 +84,7 @@
 						nWindowWidth = screen.availWidth;
 					if (nWindowWidth > 970)
 						document.writeln('<link rel="stylesheet" type="text/css" media="screen,projection" href="<?php echo smarty_function_season($seasons, $smarty_dummy); ?>">');
+					document.writeln('<link rel="stylesheet" type="text/css" media="screen,projection" href="<?php echo smarty_function_season($seasons_stripe, $smarty_dummy); ?>">');
 
 					function usercountry_change()
 					{

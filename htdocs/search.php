@@ -915,6 +915,8 @@
 						$sql_where[] = '`caches`.`type` IN (' . implode(',', $types) . ')';
 					}
 				}
+				else 
+					$sql_where[] = '0';
 
 				if($options['cachesize'] != '')
 				{
@@ -925,6 +927,8 @@
 						$sql_where[] = '`caches`.`size` IN (' . implode(',', $sizes) . ')';
 					}
 				}
+				else
+					$sql_where[] = '0';
 
 				if ($options['difficultymin'] != 0)
 				{
@@ -1325,7 +1329,7 @@ function outputSearchForm($options)
 		        LEFT JOIN `sys_trans_text` AS `ttname` ON `tname`.`id`=`ttname`.`trans_id` AND `ttname`.`lang`='&1'
 		        LEFT JOIN `sys_trans` AS `tdesc` ON `cache_attrib`.`html_desc_trans_id`=`tdesc`.`id` AND `cache_attrib`.`html_desc`=`tdesc`.`text`
 		        LEFT JOIN `sys_trans_text` AS `ttdesc` ON `tdesc`.`id`=`ttdesc`.`trans_id` AND `ttdesc`.`lang`='&1'
-		            WHERE `cache_attrib`.`group_id`='&2'
+		            WHERE `cache_attrib`.`group_id`='&2' AND `selectable`
 					  AND NOT IFNULL(`cache_attrib`.`hidden`, 0)=1
 		         ORDER BY `cache_attrib`.`id`", $locale, $rAttrGroup['id']);
 		while ($record = sql_fetch_array($rs))
@@ -1423,7 +1427,7 @@ function outputSearchForm($options)
 		        LEFT JOIN `sys_trans` AS `tdesc` ON `cache_attrib`.`html_desc_trans_id`=`tdesc`.`id` AND `cache_attrib`.`html_desc`=`tdesc`.`text`
 		        LEFT JOIN `sys_trans_text` AS `ttdesc` ON `tdesc`.`id`=`ttdesc`.`trans_id` AND `ttdesc`.`lang`='&1'
 		            WHERE `cache_attrib`.`group_id`='&2'
-		              AND `cache_attrib`.`search_default`=1
+		              AND `cache_attrib`.`search_default`=1 AND `selectable`
 					  AND NOT IFNULL(`cache_attrib`.`hidden`, 0)=1
 		         ORDER BY `cache_attrib`.`id`", $locale, $rAttrGroup['id']);
 		while ($record = sql_fetch_array($rs))

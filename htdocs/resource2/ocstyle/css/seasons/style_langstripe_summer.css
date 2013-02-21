@@ -1,0 +1,11 @@
+div#langstripe {
+	background: #9db820 url(bg-langstripe-summer.png) 0 100% repeat-x;
+}
+
+div#maplangstripe {
+	background: #9db820 url(bg-langstripe-summer-map.png) 0 100% repeat-x;
+}
+
+.faintseasoncolor {
+	background: #f2f5dd;
+}

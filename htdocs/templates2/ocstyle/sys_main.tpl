@@ -30,6 +30,7 @@
 					nWindowWidth = screen.availWidth;
 				if (nWindowWidth > 970)
 					document.writeln('<link rel="stylesheet" type="text/css" media="screen,projection" href="{/literal}{season winter='resource2/ocstyle/css/seasons/style_winter.css' spring='resource2/ocstyle/css/seasons/style_spring.css' summer='resource2/ocstyle/css/seasons/style_summer.css' autumn='resource2/ocstyle/css/seasons/style_autumn.css'}{literal}">');
+				document.writeln('<link rel="stylesheet" type="text/css" media="screen,projection" href="{/literal}{season winter='resource2/ocstyle/css/seasons/style_langstripe_winter.css' spring='resource2/ocstyle/css/seasons/style_langstripe_spring.css' summer='resource2/ocstyle/css/seasons/style_langstripe_summer.css' autumn='resource2/ocstyle/css/seasons/style_langstripe_autumn.css'}{literal}">');
 
 				function usercountry_change()
 				{

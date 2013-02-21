@@ -441,11 +441,23 @@
 	$opt['map']['maxcachereducedsize'] = 10 * 1048576; // = 10MB
 
 	// max number of caches displayed in google maps
-	$opt['map']['maxrecords'] = 180;
+	if (isset($_SERVER['HTTP_USER_AGENT']))
+	{
+		$user_agent = " " . $_SERVER['HTTP_USER_AGENT'];
+		if (strpos($user_agent,"MSIE") && !strpos($user_agent,"Opera"))
+			$opt['map']['maxrecords'] = 200;
+		else
+			$opt['map']['maxrecords'] = 2500;
+	}
+	else
+		$opt['map']['maxrecords'] = 250;
+			// ... selectable by user:
+	$opt['map']['min_maxrecords'] = 100;
+	$opt['map']['max_maxrecords'] = 4000;
 
 	// the full screen mode requires a GIS server at the moment
 	// has to be migrated to map2.php
-	$opt['map']['disablefullscreen'] = true;
+	// $opt['map']['disablefullscreen'] = true;   no longer used
 
  	/* external binaries
  	 */

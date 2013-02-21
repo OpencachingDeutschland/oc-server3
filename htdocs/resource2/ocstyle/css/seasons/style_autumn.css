@@ -25,10 +25,6 @@ div#bg2 {
 	background-position: top right;
 }
 
-div#langstripe {
-	background: #e17f28 url(bg-langstripe-autumn.png) 0 100% repeat-x;
-}
-
 /* Hack for Internet 'Exploder' */
 html {
 	overflow-x:hidden;

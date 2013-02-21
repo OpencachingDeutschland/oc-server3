@@ -139,10 +139,21 @@ List of third party components:
 
     23. TinyMCE: JavaScript WYSIWYG Editor
         Path    : htdocs/resource2/tinymce/
+				          htdocs/images/icons/
         URI     : http://tinymce.moxiecode.com/
         License : LGPL 2.1
 
     24. OKAPI: Opencaching API
-        Path    : htdocs/okapi
+        Path    : htdocs/okapi/
         URI     : http://code.google.com/p/opencaching-api/
         License : MIT
+
+        OKAPI cache icons
+        Path    : htdocs/resource2/ocstyle/images/map/caches2/
+        URI     : http://code.google.com/p/opencaching-pl/source/browse/#svn%2Ftrunk%2Fokapi%2Fstatic%2Ftilemap
+        License : MIT
+
+    25. OpenIcons
+				Path    : htdocs/resource2/ocstyle/images/openicons/
+				URI     : http://openiconlibrary.sourceforge.net/
+				License : Creative Commons BY-SA 3.0

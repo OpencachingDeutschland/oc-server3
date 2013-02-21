@@ -775,6 +775,7 @@
 			var bFound = aCaches[0].getAttribute("found");
 			var bNotFound = aCaches[0].getAttribute("notfound");
 			var bAttended = aCaches[0].getAttribute("attended");
+			var bOconly = aCaches[0].getAttribute("oconly");
 			var bOwner = aCaches[0].getAttribute("owner");
 			var sUsername = aCaches[0].getAttribute("username");
 			var nUserId = aCaches[0].getAttribute("userid");
@@ -786,8 +787,10 @@
 				sHtml += "<tr><td>&nbsp;</td><td>&nbsp;</td></tr>";
 			}
 
-			sHtml += "<tr><td><img src='resource2/ocstyle/images/cacheicon/16x16-" + nTypeId + ".gif' alt='" + xmlentities(sTypeText) + "' title='" + xmlentities(sTypeText) + "' /> <a href='viewcache.php?wp=" + encodeURI(sWPOC) + "' target='_blank'><font size='2'>" + xmlentities(sName) + "</font></a></td><td align='right' width='60px'><font size='2'><b>" + xmlentities(sWPOC) + "</b></font></td></tr>";
-			sHtml += "<tr><td colspan='2'>{/literal}{t escape=js}by{/t}{literal} <a href='viewprofile.php?userid=" + encodeURI(nUserId) + "' target='_blank'>" + xmlentities(sUsername) + "</a></td></tr>";
+			sHtml += "<tr><td";
+			if (name.length <= 60) sHtml += " style='white-space: nowrap;'"; 
+			sHtml += "><img src='resource2/ocstyle/images/cacheicon/16x16-" + nTypeId + ".gif' alt='" + xmlentities(sTypeText) + "' title='" + xmlentities(sTypeText) + "' /> <a href='viewcache.php?wp=" + encodeURI(sWPOC) + "' target='_blank'><font size='2'>" + xmlentities(sName) + "</font></a></td><td align='right' width='60px'><font size='2'><b>" + xmlentities(sWPOC) + "</b></font></td></tr>";
+			sHtml += "<tr><td>{/literal}{t escape=js}by{/t}{literal} <a href='viewprofile.php?userid=" + encodeURI(nUserId) + "' target='_blank'>" + xmlentities(sUsername) + "</a></td><td align='right'>" + (bOconly==1 ? "<img src='resource2/ocstyle/images/misc/is_oconly_small.png' alt='OConly' title='OConly' />" : "") + "</td></tr>";
 			sHtml += "<tr><td colspan='2'>" + xmlentities(sTypeText) + " (" + xmlentities(sSizeText) + ")&nbsp;&nbsp;&nbsp;{t escape=js}D/T:{/t} " + parseFloat(nDifficulty).toFixed(1) + "/" + parseFloat(nTerrain).toFixed(1) + "</td></tr>";
 			sHtml += "<tr><td colspan='2'>{/literal}{t escape=js}Listed since:{/t}{literal} " + xmlentities(sListedSince) + "</td></tr>";
 

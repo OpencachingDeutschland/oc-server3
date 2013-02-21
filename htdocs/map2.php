@@ -198,7 +198,8 @@ function output_cachexml($sWaypoint)
 	                             `caches`.`date_created`, 
 	                             IFNULL(`stat_caches`.`toprating`, 0) AS `toprating`, 
 	                             IF(`caches`.`user_id`='&1', 1, 0) AS `owner`, 
-	                             `user`.`username`, `user`.`user_id`
+	                             `user`.`username`, `user`.`user_id`,
+	                             IF(`caches_attributes`.`attrib_id` IS NULL, 0, 1) AS  `oconly`
 	                        FROM `caches` 
 	                  INNER JOIN `cache_type` ON `caches`.`type`=`cache_type`.`id` 
 	                  INNER JOIN `cache_status` ON `caches`.`status`=`cache_status`.`id` 
@@ -211,6 +212,7 @@ function output_cachexml($sWaypoint)
 	                   LEFT JOIN `sys_trans_text` AS `trans_type_text` ON `trans_type`.`id`=`trans_type_text`.`trans_id` AND `trans_type_text`.`lang`='&2'
 	                   LEFT JOIN `sys_trans` AS `trans_size` ON `cache_size`.`trans_id`=`trans_size`.`id` AND `cache_size`.`name`=`trans_size`.`text`
 	                   LEFT JOIN `sys_trans_text` AS `trans_size_text` ON `trans_size`.`id`=`trans_size_text`.`trans_id` AND `trans_size_text`.`lang`='&2'
+	                   LEFT JOIN `caches_attributes` ON `caches_attributes`.`cache_id`=`caches`.`cache_id` AND `caches_attributes`.`attrib_id`=6
 	                       WHERE (`caches`.`wp_oc`='&3' OR (`caches`.`wp_oc`!='&3' AND `caches`.`wp_gc`='&3') OR (`caches`.`wp_oc`!='&3' AND `caches`.`wp_nc`='&3')) AND 
       									       (`cache_status`.`allow_user_view`=1 OR `caches`.`user_id`='&1')",
 										           $login->userid, $opt['template']['locale'], $sWaypoint);
@@ -249,6 +251,7 @@ function output_cachexml($sWaypoint)
 	echo 'found="' . xmlentities(($nFoundCount>0) ? 1 : 0) . '" ';
 	echo 'notfound="' . xmlentities(($nNotFoundCount>0) ? 1 : 0) . '" ';
 	echo 'attended="' . xmlentities(($nAttendedCount>0) ? 1 : 0) . '" ';
+	echo 'oconly="' . xmlentities($rCache['oconly']) . '" ';
 	echo 'owner="' . xmlentities($rCache['owner']) . '" ';
 	echo 'username="' . xmlentities($rCache['username']) . '" ';
 	echo 'userid="' . xmlentities($rCache['user_id']) . '" />' . "\n";

@@ -11,7 +11,7 @@
 
 <form method="post" action="adminuser.php">
 	<input type="hidden" name="action" value="searchuser" />
-		<p style="line-height: 1.6em;"><strong>{t}Username:{/t}</strong> <input type="text" name="username" size="30" value="{$username|escape}" /></p>
+		<p style="line-height: 1.6em;"><strong>{t}Username or email address{/t}:</strong> &nbsp;<input type="text" name="username" size="30" value="{$username|escape}" /></p>
 		
 		{if $error=='userunknown'}
 			<p style="line-height: 1.6em; color: red; font-weight: bold;">{t}Username unknown{/t}</p>

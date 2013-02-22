@@ -715,7 +715,7 @@ class user
 		sql("UPDATE `user` SET `password`=NULL, `email`=NULL, 
 		                       `is_active_flag`=0, 
 		                       `latitude`=0, `longitude`=0, 
-		                       `last_name`='', `first_name`='', `country`=NULL,
+		                       `last_name`='', `first_name`='', `country`=NULL, `pmr_flag`=0,
 		                       `new_pw_code`=NULL, `new_pw_date`=NULL,
 		                       `new_email`=NULL, `new_email_code`=NULL, `new_email_date`=NULL,
 		                       `email_problems`=0,

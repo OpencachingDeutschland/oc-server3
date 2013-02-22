@@ -328,7 +328,9 @@ function output_searchresult($nResultId, $nLon1, $nLat1, $nLon2, $nLat2)
                   LEFT JOIN `user` ON `user`.`user_id`=`caches`.`user_id`
                   LEFT JOIN `cache_logs` ON `cache_logs`.`cache_id`=`caches`.`cache_id` AND `cache_logs`.`user_id`='&6' AND `cache_logs`.`type` IN (1,7)
                   LEFT JOIN `caches_attributes` ON `caches_attributes`.`cache_id`=`caches`.`cache_id` AND `caches_attributes`.`attrib_id`=6
-                      WHERE `map2_data`.`result_id`='&1' AND `caches`.`longitude`>'&2' AND `caches`.`longitude`<'&3' AND `caches`.`latitude`>'&4' AND `caches`.`latitude`<'&5' LIMIT " . ($opt['map']['maxrecords']+0),
+WHERE `map2_data`.`result_id`='&1' AND `caches`.`longitude`>'&2' AND `caches`.`longitude`<'&3' AND `caches`.`latitude`>'&4' AND `caches`.`latitude`<'&5'
+									 ORDER BY `caches`.`status` DESC, `oconly`
+									 LIMIT " . ($opt['map']['maxrecords']+0),
                     $nResultId, $nLon1, $nLon2, $nLat1, $nLat2, $login->userid);
 		while ($r = sql_fetch_assoc($rs))
 		{

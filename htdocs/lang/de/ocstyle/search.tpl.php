@@ -264,10 +264,10 @@ function switchAttributeCat2()
 		
 		<tr><td class="spacer" colspan="3"><span id="scriptwarning" class="errormsg">{t}JavaScrupt is not activated, you cannot use the following options - basic search is supported nevertheless.{/t}</span></td></tr>
 		<tr>
-			<td>{t}Sorting of result:{/t}</td>
+			<td style="vertical-align:top">{t}Sorting of result:{/t}</td>
 			<td colspan="2">
 				<input type="radio" name="sort" value="byname" index="0" id="l_sortbyname" class="radio" onclick="javascript:sync_options(this)" {byname_checked}> <label for="l_sortbyname">{t}Cachename{/t}</label>&nbsp;
-				<input type="radio" name="sort" value="bydistance" index="1" id="l_sortbydistance" class="radio" onclick="javascript:sync_options(this)" {bydistance_checked}> <label for="l_sortbydistance">{t}Distance{/t}</label>&nbsp;
+				<input type="radio" name="sort" value="bydistance" index="1" id="l_sortbydistance" class="radio" onclick="javascript:sync_options(this)" {bydistance_checked} {bydistance_enabled} accept=""> <label for="l_sortbydistance">{t}Distance from <a href="myprofile.php">user-profile home coordinates</a>{/t}</label><br />
 				<input type="radio" name="sort" value="bycreated" index="2" id="l_sortbycreated" class="radio" onclick="javascript:sync_options(this)" {bycreated_checked}> <label for="l_sortbycreated">{t}Listed since{/t}</label>&nbsp;
 				<input type="radio" name="sort" value="bylastlog" index="3" id="l_sortbylastlog" class="radio" onclick="javascript:sync_options(this)" {bylastlog_checked}> <label for="l_sortbylastlog">{t}Last log{/t}</label>
 			</td>
@@ -277,13 +277,6 @@ function switchAttributeCat2()
 			<td>
 				<input id="orderRatingFirst" type="checkbox" name="orderRatingFirst" class="checkbox" value="1" onclick="javascript:sync_options(this)" {orderRatingFirst_checked} />
 				<label for="orderRatingFirst">{t}Show recommendation from other users first{/t}</label>
-			</td>
-		</tr>
-		<tr>
-			<td>&nbsp;</td>
-			<td class="help" colspan="2">
-				<img src="lang/de/ocstyle/images/misc/hint.gif" border="0" width="15" height="11" alt="{t}Notice{/t}" title="{t}Notice{/t}" align="middle">
-				{t}Distance can only be used if you are signed in and entered your home coordinates.<br />For the search by distance the entered coordinates are used to calculate the distance.{/t}
 			</td>
 		</tr>
 	</table>
@@ -311,52 +304,41 @@ function switchAttributeCat2()
 <div class="searchdiv">
 	<table class="table">
 		<tr>
-			<td valign="top">{t}Cachetype:{/t}</td>
-			<td>
-				<table class="table">
-					<tr>
-						<td><input type="checkbox" id="cachetype2" name="cachetype2" value="2" onclick="javascript:sync_options(this)" class="checkbox" {cachetype2checked} /> <label for="cachetype2">{t}Traditional Cache{/t}</label></td>
-						<td><input type="checkbox" id="cachetype3" name="cachetype3" value="3" onclick="javascript:sync_options(this)" class="checkbox" {cachetype3checked} /> <label for="cachetype3">{t}Multicache{/t}</label></td>
-						<td><input type="checkbox" id="cachetype5" name="cachetype5" value="5" onclick="javascript:sync_options(this)" class="checkbox" {cachetype5checked} /> <label for="cachetype5">{t}Webcam Cache{/t}</label></td>
-						<td><input type="checkbox" id="cachetype6" name="cachetype6" value="6" onclick="javascript:sync_options(this)" class="checkbox" {cachetype6checked} /> <label for="cachetype6">{t}Event Cache{/t}</label></td>
-					</tr>
-					<tr>
-						<td><input type="checkbox" id="cachetype7" name="cachetype7" value="7" onclick="javascript:sync_options(this)" class="checkbox" {cachetype7checked} /> <label for="cachetype7">{t}Quizcache{/t}</label></td>
-						<td><input type="checkbox" id="cachetype8" name="cachetype8" value="8" onclick="javascript:sync_options(this)" class="checkbox" {cachetype8checked} /> <label for="cachetype8">{t}Math/Physics-Cache{/t}</label></td>
-						<td><input type="checkbox" id="cachetype9" name="cachetype9" value="9" onclick="javascript:sync_options(this)" class="checkbox" {cachetype9checked} /> <label for="cachetype9">{t}Moving Cache{/t}</label></td>
-						<td><input type="checkbox" id="cachetype10" name="cachetype10" value="10" onclick="javascript:sync_options(this)" class="checkbox" {cachetype10checked} /> <label for="cachetype10">{t}Drive-In{/t}</label></td>
-					</tr>
-					<tr>
-						<td><input type="checkbox" id="cachetype4" name="cachetype4" value="4" onclick="javascript:sync_options(this)" class="checkbox" {cachetype4checked} /> <label for="cachetype4">{t}virtual Cache{/t}</label></td>
-						<td><input type="checkbox" id="cachetype1" name="cachetype1" value="1" onclick="javascript:sync_options(this)" class="checkbox" {cachetype1checked} /> <label for="cachetype1">{t}unknown cachetyp{/t}</label></td>
-						<td>&nbsp;</td>
-						<td>&nbsp;</td>
-					</tr>
-				</table>
-			</td>
+			<td>{t}Cachetype:{/t}</td>
+			<td><input type="checkbox" id="cachetype2" name="cachetype2" value="2" onclick="javascript:sync_options(this)" class="checkbox" {cachetype2checked} /> <label for="cachetype2">{t}Traditional Cache{/t}</label></td>
+			<td><input type="checkbox" id="cachetype3" name="cachetype3" value="3" onclick="javascript:sync_options(this)" class="checkbox" {cachetype3checked} /> <label for="cachetype3">{t}Multicache{/t}</label></td>
+			<td><input type="checkbox" id="cachetype5" name="cachetype5" value="5" onclick="javascript:sync_options(this)" class="checkbox" {cachetype5checked} /> <label for="cachetype5">{t}Webcam Cache{/t}</label></td>
+			<td><input type="checkbox" id="cachetype6" name="cachetype6" value="6" onclick="javascript:sync_options(this)" class="checkbox" {cachetype6checked} /> <label for="cachetype6">{t}Event Cache{/t}</label></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><input type="checkbox" id="cachetype7" name="cachetype7" value="7" onclick="javascript:sync_options(this)" class="checkbox" {cachetype7checked} /> <label for="cachetype7">{t}Quizcache{/t}</label></td>
+			<td><input type="checkbox" id="cachetype8" name="cachetype8" value="8" onclick="javascript:sync_options(this)" class="checkbox" {cachetype8checked} /> <label for="cachetype8">{t}Math/Physics-Cache{/t}</label></td>
+			<td><input type="checkbox" id="cachetype9" name="cachetype9" value="9" onclick="javascript:sync_options(this)" class="checkbox" {cachetype9checked} /> <label for="cachetype9">{t}Moving Cache{/t}</label></td>
+			<td><input type="checkbox" id="cachetype10" name="cachetype10" value="10" onclick="javascript:sync_options(this)" class="checkbox" {cachetype10checked} /> <label for="cachetype10">{t}Drive-In{/t}</label></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><input type="checkbox" id="cachetype4" name="cachetype4" value="4" onclick="javascript:sync_options(this)" class="checkbox" {cachetype4checked} /> <label for="cachetype4">{t}virtual Cache{/t}</label></td>
+			<td><input type="checkbox" id="cachetype1" name="cachetype1" value="1" onclick="javascript:sync_options(this)" class="checkbox" {cachetype1checked} /> <label for="cachetype1">{t}unknown cachetyp{/t}</label></td>
 		</tr>
 	</table>
 </div>
 <div class="searchdiv">
 	<table class="table">
 		<tr>
-			<td valign="top">{t}Cachesize:{/t}</td>
-			<td>
-				<table class="table">
-					<tr>
-						<td><input type="checkbox" id="cachesize8" name="cachesize8" value="8" onclick="javascript:sync_options(this)" class="checkbox" {cachesize2checked} /> <label for="cachesize2">{t}nano{/t}</label>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-						<td><input type="checkbox" id="cachesize2" name="cachesize2" value="2" onclick="javascript:sync_options(this)" class="checkbox" {cachesize2checked} /> <label for="cachesize2">{t}micro{/t}</label></td>
-						<td><input type="checkbox" id="cachesize3" name="cachesize3" value="3" onclick="javascript:sync_options(this)" class="checkbox" {cachesize3checked} /> <label for="cachesize3">{t}small{/t}</label></td>
-						<td><input type="checkbox" id="cachesize4" name="cachesize4" value="4" onclick="javascript:sync_options(this)" class="checkbox" {cachesize4checked} /> <label for="cachesize4">{t}normal{/t}</label></td>
-					</tr>
-					<tr>
-						<td><input type="checkbox" id="cachesize5" name="cachesize5" value="5" onclick="javascript:sync_options(this)" class="checkbox" {cachesize5checked} /> <label for="cachesize5">{t}large{/t}</label></td>
-						<td><input type="checkbox" id="cachesize6" name="cachesize6" value="6" onclick="javascript:sync_options(this)" class="checkbox" {cachesize6checked} /> <label for="cachesize6">{t}very large{/t}</label></td>
-						<td><input type="checkbox" id="cachesize7" name="cachesize7" value="7" onclick="javascript:sync_options(this)" class="checkbox" {cachesize7checked} /> <label for="cachesize7">{t}no container{/t}</label></td>
-						<td><input type="checkbox" id="cachesize1" name="cachesize1" value="1" onclick="javascript:sync_options(this)" class="checkbox" {cachesize1checked} /> <label for="cachesize1">{t}other size{/t}</label></td>
-					</tr>
-				</table>
-			</td>
+			<td>{t}Cachesize:{/t}</td>
+			<td><input type="checkbox" id="cachesize8" name="cachesize8" value="8" onclick="javascript:sync_options(this)" class="checkbox" {cachesize2checked} /> <label for="cachesize2">{t}nano{/t}</label>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+			<td><input type="checkbox" id="cachesize2" name="cachesize2" value="2" onclick="javascript:sync_options(this)" class="checkbox" {cachesize2checked} /> <label for="cachesize2">{t}micro{/t}</label></td>
+			<td><input type="checkbox" id="cachesize3" name="cachesize3" value="3" onclick="javascript:sync_options(this)" class="checkbox" {cachesize3checked} /> <label for="cachesize3">{t}small{/t}</label></td>
+			<td><input type="checkbox" id="cachesize4" name="cachesize4" value="4" onclick="javascript:sync_options(this)" class="checkbox" {cachesize4checked} /> <label for="cachesize4">{t}normal{/t}</label></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><input type="checkbox" id="cachesize5" name="cachesize5" value="5" onclick="javascript:sync_options(this)" class="checkbox" {cachesize5checked} /> <label for="cachesize5">{t}large{/t}</label></td>
+			<td><input type="checkbox" id="cachesize6" name="cachesize6" value="6" onclick="javascript:sync_options(this)" class="checkbox" {cachesize6checked} /> <label for="cachesize6">{t}very large{/t}</label></td>
+			<td><input type="checkbox" id="cachesize7" name="cachesize7" value="7" onclick="javascript:sync_options(this)" class="checkbox" {cachesize7checked} /> <label for="cachesize7">{t}no container{/t}</label></td>
+			<td><input type="checkbox" id="cachesize1" name="cachesize1" value="1" onclick="javascript:sync_options(this)" class="checkbox" {cachesize1checked} /> <label for="cachesize1">{t}other size{/t}</label></td>
 		</tr>
 	</table>
 </div>
@@ -391,7 +373,7 @@ function switchAttributeCat2()
 <div class="searchdiv">
 	<table class="table">
 		<tr>
-			<td>{t}Country:{/t}</td>
+			<td>{t}Country:{/t}&nbsp;&nbsp;</td>
 			<td>
 				<select name="country" class="input200" onChange="javascript:sync_options(this)">
 					{countryoptions}

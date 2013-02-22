@@ -1043,6 +1043,7 @@
 
 function outputSearchForm($options)
 {
+	global $login;
 	global $stylepath, $usr, $error_plz, $error_locidnocoords, $error_ort, $error_noort, $error_nofulltext, $error_fulltexttoolong;
 	global $default_lang, $search_all_countries, $cache_attrib_jsarray_line;
 	global $cache_attrib_group, $cache_attrib_img_line1, $cache_attrib_img_line2, $locale;
@@ -1053,6 +1054,11 @@ function outputSearchForm($options)
 	tpl_set_var('formmethod', 'get');
 
 	// checkboxen
+	$homecoords = ($login->userid>0 && sql_value_slave("SELECT `latitude`+`longitude` FROM user WHERE `user_id`='&1'",  $login->userid) <> 0);
+	if (!$homecoords && isset($options['sort']) && $options['sort'] == 'bydistance')
+		$options['sort'] = 'byname';
+	tpl_set_var('bydistance_enabled', ($homecoords ? "" : 'disabled="disabled"'));
+
 	if (isset($options['sort']))
 		$bBynameChecked = ($options['sort'] == 'byname');
 	else

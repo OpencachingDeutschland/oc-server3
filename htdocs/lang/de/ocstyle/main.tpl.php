@@ -161,9 +161,14 @@
 				<?php echo isset($develwarning) ? $develwarning : '' ?>
 
 				<!-- Header banner -->
-				<div class="header" style="height:80px;">
-					<div style="width: 970px; "><img src="resource2/{style}/images/head/rotator.php?path=<?php echo $opt['page']['headimagepath']; ?>" width="970" height="80" alt="" style="border: 0px none ;" /></div>
-				</div>	
+				<div class="header">
+					<div class="headerimage">
+						<img src="resource2/{style}/images/head/rotator.php?path=<?php echo $opt['page']['headimagepath']; ?>" class="headerimagecontent" />
+					</div>
+					<div class="headerlogo">
+						<img src="resource2/{style}/images/head/overlay/oc_head_alpha3.png" class="headerimagecontent" />
+					</div>
+				</div>
 
 				<!-- Navigation Level 2 -->
 				<div class="nav2">

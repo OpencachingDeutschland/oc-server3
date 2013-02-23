@@ -141,9 +141,12 @@
 
 
 			{* <!-- Header banner --> *}						    		 						
-			<div class="header" style="height:80px;">
-				<div style="width: 970px; ">
-					<img src="resource2/{$opt.template.style}/images/head/rotator.php?path={$opt.page.headimagepath}" width="970" height="80" alt="" style="border: 0px none ;" />
+			<div class="header">
+				<div class="headerimage">
+					<img src="resource2/{$opt.template.style}/images/head/rotator.php?path={$opt.page.headimagepath}" class="headerimagecontent" />
+				</div>
+				<div class="headerlogo">
+					<img src="resource2/{$opt.template.style}/images/head/overlay/oc_head_alpha3.png" class="headerimagecontent" />
 				</div>
 			</div>
 

@@ -102,8 +102,28 @@ div#bg2 {display: none;}
 /* 2.1 - Sitename, slogan and banner */
 /*-----------------------------------*/
 .header {
-	height:81px;
+	height: 81px;
 }
+
+.headerimage {
+	height: 80px;
+	width: 970px;
+	overflow: hidden;
+	position: absolute;
+	top: 1px;
+	z-index: 1;
+}
+
+.headerlogo {
+	position: absolute;
+	top: 0px;
+	z-index: 2;
+}
+
+.headerimagecontent {
+	border: 0px none;
+}
+
 
 .site-name {
 	width: 300px;
@@ -877,7 +897,7 @@ ul.nodot li {
 
 #suchbox {
 	position: absolute; 
-	top:112px; 
+	top:112px;
 	right: 5px;
 }
 

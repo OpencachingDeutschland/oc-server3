@@ -830,7 +830,7 @@ a.info:hover span{ /*the span will display just on :hover state*/
 #breadcrumb
 {
 	position: absolute; 
-	top:110px;
+	top:111px;
 	right: 250px;
 	left: 180px;
 	color:#505050;
@@ -846,7 +846,7 @@ a.info:hover span{ /*the span will display just on :hover state*/
 #breadcrumb_fullsize
 {
 	position: absolute; 
-	top:110px;
+	top:111px;
 	right: 20px;
 	left: 180px;
 
@@ -875,7 +875,7 @@ ul.nodot li {
 
 #suchbox {
 	position: absolute; 
-	top:112px; 
+	top:113px; 
 	right: 5px;
 }
 
@@ -1174,7 +1174,7 @@ div.isarchived {
 div#havefound {
 	position: absolute;
 	z-index: 25;
-	top: 180px;
+	top: 181px;
 	right: 20px;
 	width: 35px;
 	padding: 5px 5px 5px 0px;

@@ -35,7 +35,7 @@
 	$opt['page']['title'] = 'OPENCACHING';
 	$opt['page']['subtitle1'] = 'Geocaching with Opencaching';
 	$opt['page']['subtitle2'] = '';
-	$opt['page']['headimagepath'] = 'ocde';
+	$opt['page']['headimagepath'] = '';
 	
 	//id of the node
 	$oc_nodeid = 4;

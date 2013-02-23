@@ -57,20 +57,20 @@
 			{t}Store query{/t}
 		</div>
 
-		<table class="content">
+		<table class="table">
 			<tr>
 				<td class="header-small" colspan="2">{t}Store options as new search{/t}</td>
 			</tr>
 			<tr>
-				<td>{t}Name of the search{/t}</td>
+				<td>{t}Name of the search{/t}:</td>
 				<td>
-					<input type="text" name="queryname" class="input200" maxlength="60" value="{$queryname}" /> 
+					<input type="text" name="queryname" class="input300" maxlength="60" value="{$queryname}" /> 
 				</td>
 			</tr>
 			{if $errorEmptyName==true}
-				<tr><td colspan="2"><span class="errormsg">{t}You have to enter a name for this search{/t}</span></td></tr>
+				<tr><td colspan="2"><span class="errormsg">{t}You have to enter a name for this search.{/t}</span></td></tr>
 			{elseif $errorNameExists==true}
-				<tr><td colspan="2" class="errormsg">{t}There already exists a search with this name{/t}</td></tr>
+				<tr><td colspan="2" class="errormsg">{t}There already exists a search with this name.{/t}</td></tr>
 			{/if}
 			<tr>
 				<td>&nbsp;</td>
@@ -81,22 +81,20 @@
 		</table>
 	</form>
 
+	<p>&nbsp;</p>
+
 	<form action="query.php" method="post">
 		<input type="hidden" name="action" value="saveas" />
 		<input type="hidden" name="queryid" value="{$queryid}" />
 		<input type="hidden" name="submit" value="1" />
-		<table class="content">
-			<colgroup>
-				<col width="150">
-				<col>
-			</colgroup>
+		<table class="table">
 			<tr>
 				<td class="header-small" colspan="2">{t}Overwrite old search options{/t}</td>
 			</tr>
 			<tr>
-				<td>{t}Name of the search{/t}</td>
+				<td>{t}Name of the search{/t}:</td>
 				<td>
-					<select name="oldqueryid" class="input300">
+					<select name="oldqueryid" class="input350">
 						{foreach from=$queries item=queriesItem name="queries"}
 							{if $smarty.foreach.queries.first}
 								<option value="0" selected="selected">{t}-- Select search to overwrite --{/t}</option>
@@ -108,6 +106,9 @@
 					</select>
 				</td>
 			</tr>
+			{if $errorMustSelectQuery==true}
+				<tr><td colspan="2" class="errormsg">{t}You must select a search to overwrite.{/t}</td></tr>
+			{/if}
 			<tr>
 				<td>&nbsp;</td>
 				<td>

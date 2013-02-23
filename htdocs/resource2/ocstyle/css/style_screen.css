@@ -564,6 +564,7 @@ input {	border:1px solid black;	background-color:white;	padding:1px; font-size:1
 *.input120 {width:120px;}	/* emailadress */
 *.input200 {width:200px;}
 *.input300 {width:300px;}
+*.input350 {width:350px;}	/* overwrite saved query */
 *.input400 {width:400px;}	/* short cachedescription */
 
 input.checkbox {width:12px; height:12px; font-size:12px; border:0;}

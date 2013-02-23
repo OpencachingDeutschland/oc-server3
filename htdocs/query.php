@@ -101,13 +101,15 @@ function savequery($queryid, $queryname, $saveas, $submit, $saveas_queryid)
 		else
 		{
 			if (sql_value("SELECT COUNT(*) FROM `queries` WHERE `id`='&1' AND `user_id`='&2'", 0, $saveas_queryid, $login->userid) == 0)
-				$tpl->error(ERROR_UNKNOWN);
+				$tpl->assign('errorMustSelectQuery',true);
+			else
+			{
+				// save as
+				$oOptions = sql_value("SELECT `options` FROM `queries` WHERE `id`='&1'", array(), $queryid);
+				sql("UPDATE `queries` SET `options`='&1' WHERE `id`='&2'", $oOptions, $saveas_queryid);
 
-			// save as
-			$oOptions = sql_value("SELECT `options` FROM `queries` WHERE `id`='&1'", array(), $queryid);
-			sql("UPDATE `queries` SET `options`='&1' WHERE `id`='&2'", $oOptions, $saveas_queryid);
-
-			$tpl->redirect('query.php?action=view');
+				$tpl->redirect('query.php?action=view');
+			}
 		}
 	}
 

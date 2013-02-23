@@ -1474,8 +1474,8 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('628', 'With the
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('629', 'Store query', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('630', 'Store options as new search', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('631', 'Name of the search', '2010-08-28 11:48:04');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('632', 'You have to enter a name for this search', '2010-08-28 11:48:04');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('633', 'There already exists a search with this name', '2010-08-28 11:48:04');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('632', 'You have to enter a name for this search.', '2010-08-28 11:48:04');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('633', 'There already exists a search with this name.', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('634', 'Store', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('635', 'Overwrite old search options', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('636', '-- Select search to overwrite --', '2010-08-28 11:48:04');
@@ -2275,6 +2275,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1832', 'Rights'
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1833', 'Admin rights can be granted and revoked by a system administrator with database access.', '2013-02-19 05:40:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1834', 'declined data license', '2013-02-19 05:40:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1835', 'The user account has been disabled, because the user declined the <a href=\"articles.php?page=impressum#datalicense\">data license</a>. Cache descriptions, log texts and pictures have been deleted.', '2013-02-19 05:40:04');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1839', 'You must select a search to overwrite.', '2013-02-23 19:00:04');
 
 -- Table sys_trans_ref
 SET NAMES 'utf8';
@@ -5021,8 +5022,8 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('629', 'DE', 'Suche speichern', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('630', 'DE', 'Suchoptionen als neue Suche abspeichern', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('631', 'DE', 'Name der Suche', '2010-08-28 11:48:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('632', 'DE', 'Es muss ein Name der Suche angegeben werden', '2010-08-28 11:48:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('633', 'DE', 'Es existiert bereits eine Suche unter diesem Namen', '2010-08-28 11:48:06');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('632', 'DE', 'Es muss ein Name der Suche angegeben werden.', '2010-08-28 11:48:06');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('633', 'DE', 'Es existiert bereits eine Suche unter diesem Namen.', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('634', 'DE', 'Speichern', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('635', 'DE', 'Alte Suchoptionen überschreiben', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('636', 'DE', '-- Bitte zu überschreibende Suche auswählen --', '2010-08-28 11:48:06');
@@ -5820,6 +5821,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1833', 'DE', 'Adminrechte können von einem Systemadministrator mit Datenbankzugriff vergeben oder entzogen werden.', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1834', 'DE', 'Datenlizenz abgelehnt', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1835', 'DE', 'Das Benutzerprofil wurde deaktiviert, weil der Benutzer die <a href=\"articles.php?page=impressum#datalicense\">Datenlizenz</a> abgelehnt hat. Cachebeschreibungen, Logtexte und Bilder des Benutzers wurden entfernt.', '2013-02-19 05:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1839', 'DE', 'Es muss eine zu überschreibende Suche gewählt werden.', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'EN', 'Reorder IDs \r', '2010-09-02 00:15:30');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'EN', 'The database could not be reconnected.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'EN', 'Testing – please do not login', '2010-08-28 11:48:07');
@@ -6438,8 +6440,8 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('629', 'EN', 'Store query', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('630', 'EN', 'Store options as a new search', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('631', 'EN', 'Name of the search', '2010-08-28 11:48:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('632', 'EN', 'You have to enter a name for this search', '2010-08-28 11:48:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('633', 'EN', 'A search with this name already exists', '2010-08-28 11:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('632', 'EN', 'You have to enter a name for this search.', '2010-08-28 11:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('633', 'EN', 'A search with this name already exists.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('634', 'EN', 'Store', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('635', 'EN', 'Overwrite old search options', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('636', 'EN', '-- Select search to overwrite --', '2010-08-28 11:48:07');
@@ -7239,6 +7241,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1833', 'EN', 'Admin rights can be granted and revoked by a system administrator with database access.', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1834', 'EN', 'declined data license', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1835', 'EN', 'The user account has been disabled, because the user declined the <a href=\"articles.php?page=impressum#datalicense\">data license</a>. Cache descriptions, log texts and pictures have been deleted.', '2013-02-19 05:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1839', 'EN', 'You must select a search to overwrite.', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'ES', 'Reordenar ID', '2010-12-09 00:17:55');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'ES', 'La base de datos no se pudo conectar.', '2010-12-09 00:17:55');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'ES', 'En pruebas - por favor, no entre.', '2010-12-09 00:17:55');
@@ -7857,8 +7860,8 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('629', 'ES', 'Guardar búsqueda', '2010-12-09 00:17:57');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('630', 'ES', 'Opciones de búsqueda guardar como una nueva búsqueda', '2010-12-09 00:17:57');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('631', 'ES', 'Nombre de la búsqueda', '2010-12-09 00:17:57');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('632', 'ES', 'Usted tiene que introducir un nombre para esta búsqueda', '2010-12-09 00:17:57');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('633', 'ES', 'Existe una búsqueda con el mismo nombre', '2010-12-09 00:17:57');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('632', 'ES', 'Usted tiene que introducir un nombre para esta búsqueda.', '2010-12-09 00:17:57');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('633', 'ES', 'Existe una búsqueda con el mismo nombre.', '2010-12-09 00:17:57');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('634', 'ES', 'Guardar', '2010-12-09 00:17:57');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('635', 'ES', 'Opción de sobreescribir búsquedas antiguas', '2010-12-09 00:17:57');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('636', 'ES', '-- Seleccione la búsqueda para sobrescribir --', '2010-12-09 00:17:57');
@@ -9356,8 +9359,8 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('629', 'IT', 'Salva ricerca', '2010-09-01 23:49:03');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('630', 'IT', 'Salva le opzioni di ricerca in una nuova ricerca', '2010-08-31 20:06:23');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('631', 'IT', 'Nome della ricerca', '2010-09-01 23:49:03');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('632', 'IT', 'Devi inserire un nome per questa ricerca', '2010-08-31 20:06:23');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('633', 'IT', 'Esiste già una ricerca con questo nome', '2010-09-01 23:49:03');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('632', 'IT', 'Devi inserire un nome per questa ricerca.', '2010-08-31 20:06:23');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('633', 'IT', 'Esiste già una ricerca con questo nome.', '2010-09-01 23:49:03');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('634', 'IT', 'Salva', '2010-08-31 20:06:23');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('635', 'IT', 'Sovrascrivi le vecchie opzioni di ricerca', '2010-09-01 23:49:03');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('636', 'IT', '-- Seleziona una ricerca da sovrascrivere --', '2010-08-31 20:06:23');
@@ -10769,8 +10772,8 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('629', 'NL', 'Zoekopdracht opslaan', '2011-02-04 19:50:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('630', 'NL', 'Bewaar zoekopties voor zoekopdracht', '2011-02-04 19:50:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('631', 'NL', 'Naam van zoekopdracht', '2011-02-04 19:50:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('632', 'NL', 'Er moet een naam voor de zoekopdracht opgegeven worden', '2011-02-04 19:50:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('633', 'NL', 'Er bestaat al een zoekopdracht met deze naam', '2011-02-04 19:50:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('632', 'NL', 'Er moet een naam voor de zoekopdracht opgegeven worden.', '2011-02-04 19:50:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('633', 'NL', 'Er bestaat al een zoekopdracht met deze naam.', '2011-02-04 19:50:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('634', 'NL', 'Opslaan', '2011-02-04 19:50:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('635', 'NL', 'Oude zoekopties overschrijven', '2011-02-04 19:50:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('636', 'NL', 'Het over te schrijven zoekopdracht kiezen', '2011-02-04 19:50:07');

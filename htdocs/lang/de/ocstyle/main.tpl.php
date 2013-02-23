@@ -161,12 +161,12 @@
 				<?php echo isset($develwarning) ? $develwarning : '' ?>
 
 				<!-- Header banner -->
-				<div style="height:81px;">
-					<div class="header" style="height:80px; position:absolute; z-order:1;">
-						<div style="width: 970px; "><img src="resource2/{style}/images/head/rotator.php?path=<?php echo $opt['page']['headimagepath']; ?>" style="border: 0px none ;" /></div>
+				<div class="header">
+					<div class="headerimage">
+						<img src="resource2/{style}/images/head/rotator.php?path=<?php echo $opt['page']['headimagepath']; ?>" class="headerimagecontent" />
 					</div>
-					<div style="position:absolute; z-order:2;">
-						<img src="resource2/{style}/images/head/overlay/oc_head_alpha3.png" style="border: 0px none ;" />
+					<div class="headerlogo">
+						<img src="resource2/{style}/images/head/overlay/oc_head_alpha3.png" class="headerimagecontent" />
 					</div>
 				</div>
 

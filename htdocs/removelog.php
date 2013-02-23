@@ -101,10 +101,12 @@
 							//get cache owner name
 							$cache_owner_rs = sql("SELECT `username` FROM `user` WHERE `user_id`='&1'", $log_record['cache_owner_id']);
 							$cache_owner_record = sql_fetch_array($cache_owner_rs);
+							mysql_free_result($cache_owner_rs);
 
 							//get email address of logowner
 							$log_user_rs = sql("SELECT `email`, `username` FROM `user` WHERE `user_id`='&1'", $log_record['log_user_id']);
 							$log_user_record = sql_fetch_array($log_user_rs);
+							mysql_free_result($log_user_rs);
 
 							$email_content = mb_ereg_replace('%log_owner%', $log_user_record['username'], $email_content);
 							$email_content = mb_ereg_replace('%cache_owner%', $cache_owner_record['username'], $email_content);
@@ -121,7 +123,9 @@
 						// move to archive
 						sql("INSERT INTO `cache_logs_archived` SELECT * FROM `cache_logs` WHERE `cache_logs`.`id`='&1' LIMIT 1", $log_id);
 
-						//log entfernen
+						// TO DO: remove log pictures
+
+						// remove log entry
 						sql("DELETE FROM `cache_logs` WHERE `cache_logs`.`id`='&1' LIMIT 1", $log_id);
 
 						// remove cache from users top caches, if the only found or attended log  
@@ -135,7 +139,7 @@
 
 						//call eventhandler
 						require_once($opt['rootpath'] . 'lib/eventhandler.inc.php');
-						event_remove_log($cacheid, $usr['userid']+0);
+						event_remove_log($log_record['cache_id'], $log_record['log_user_id']);
 
 						//cache anzeigen
 						tpl_redirect('viewcache.php?cacheid=' . urlencode($log_record['cache_id']));

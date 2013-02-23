@@ -22,20 +22,22 @@
 <form action="removelog.php" method="post" enctype="application/x-www-form-urlencoded" name="removelog_form" dir="ltr">
 <input type="hidden" name="commit" value="1"/>
 <input type="hidden" name="logid" value="{logid}"/>
-<table class="content">
-	<tr><td class="header" colspan="2"><img src="lang/de/ocstyle/images/description/22x22-logs.png" border="0" width="32" height="32" alt="" title="" align="middle"> <b>{t}Remove log entry for <a href="viewcache.php?cacheid={cacheid}">{cachename}</a>{/t}</b></td></tr>
+<table class="table">
+	<tr><td class="header" colspan="2"><img src="lang/de/ocstyle/images/description/22x22-logs.png" border="0" width="32" height="32" alt="" title="" align="middle"> <b>{t}remove log entry for <a href="viewcache.php?cacheid={cacheid}">{cachename}</a>{/t}</b></td></tr>
 	<tr><td class="spacer"></td></tr>
 
-	<tr><td>{t}Are you sure to remove your log entry?{/t}</td></tr>
+	<tr><td colspan="2">{t}Are you sure to remove your log entry?{/t}</td></tr>
 	<tr><td class="spacer"></td></tr>
 
 	<tr>
-		<td class="header-small">
+		<td>&nbsp;&nbsp;&nbsp;</td>
+		<td>
 			{logimage} {date} {typetext}
 		</td>
 	</tr>
 	<tr><td class="spacer"></td></tr>
 	<tr>
+		<td></td>
 		<td>
 			{logtext}
 		</td>
@@ -43,8 +45,8 @@
 	<tr><td class="spacer"></td></tr>
 
 	<tr>
-		<td class="header-small">
-		<input type="submit" name="submit" value="{t}Remove log entry{/t}" style="width:120px"/>
+		<td class="header-small" colspan="2">
+			<input type="submit" name="submit" value="{t}Remove log entry{/t}" style="width:140px"/>
 		</td>
 	</tr>
 </table>

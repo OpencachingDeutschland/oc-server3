@@ -1,5 +1,6 @@
 This are replacement smilies for GC images which are frequently linked from
-copied cache descriptions and logs.
+copied cache descriptions and logs. icon_smile_dissapprove is a GC misspelling;
+icon is kept in both spellings for the case they fix it.
 
 Icons are partly from /htdocs/resource2/tinymce/plugins/emotions/img and
 from free-to-use smilie site http://www.smilys.net.

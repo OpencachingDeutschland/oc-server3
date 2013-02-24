@@ -49,7 +49,7 @@ function insertSmiley(parSmiley) {
   /* fuer die anderen Browser */
   else
   {
-    alert(navigator.appName + ': {t}Setting smilies is not supported{/t}');
+    alert(navigator.appName + ": {t}Setting smilies is not supported{/t}");
   }
 }
 

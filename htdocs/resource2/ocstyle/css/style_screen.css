@@ -600,11 +600,11 @@ input.formbuttons {background-color:rgb(219,230,241); width:120px; border:1px so
 {
 	background-color:#F0F0EE;
 	margin:2px 2px 2px 2px;
-	padding:2px 2px 2px 2px;
+	padding:2px 4px 2px 4px;
 	border:solid 1px #CCCCCC;
 	font-size:smaller;
-	width:155px;
 	cursor:default;
+	float:left;
 }
 
 .buttonNormal

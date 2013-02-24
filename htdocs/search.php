@@ -75,6 +75,7 @@
 					$queryid = 0;
 			}
 
+		newquery:
 			if ($queryid == 0)
 			{
 				// das Suchformular wird initialisiert (keine Vorbelegungen vorhanden)
@@ -106,11 +107,15 @@
 
 			if (mysql_num_rows($query_rs) == 0)
 			{
+				$queryid = 0;
+				goto newquery;		// can happen if logged out after query was created (fix for #3915)
+				/*
 				$tplname = 'error';
 				tpl_set_var('tplname', 'search.php');
 				tpl_set_var('error_msg', $error_query_not_found);
 				tpl_BuildTemplate();
 				exit;
+				*/
 			}
 			else
 			{

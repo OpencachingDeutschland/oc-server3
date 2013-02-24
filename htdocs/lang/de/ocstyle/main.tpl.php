@@ -27,7 +27,7 @@
  ****************************************************************************/
 
 	//Menü laden
-	global $mnu_bgcolor, $mnu_selmenuitem, $develwarning, $tpl_subtitle, $opt, $rootpath;
+	global $mnu_bgcolor, $mnu_selmenuitem, $develwarning, $tpl_subtitle, $opt, $rootpath, $usr;
 
 	require_once($stylepath . '/lib/menu.php');
 	if (function_exists('post_config'))

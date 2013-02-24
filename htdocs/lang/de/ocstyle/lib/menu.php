@@ -196,6 +196,13 @@ $menu = array(
 		'filename' => 'map2.php'
 	),
 	array(
+		'title' => t('Admin'),
+		'menustring' => t('Admin'),
+		'siteid' => 'admin',
+		'visible' => $usr['admin'] > 0,
+		'filename' => 'translate.php'
+	),
+	array(
 		'title' => t('Add picture'),
 		'visible' => false,
 		'filename' => 'newpic.php',

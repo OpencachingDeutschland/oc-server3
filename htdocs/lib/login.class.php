@@ -34,11 +34,11 @@ class login
 {
 	var $userid = 0;
 	var $username = '';
-	var $lastlogin = 0;
 	var $permanent = false;
+	var $lastlogin = 0;
 	var $sessionid = '';
+	var $admin = 0;
 	var $verified = false;
-	var $admin = false;
 
 	function login()
 	{
@@ -51,7 +51,7 @@ class login
 			$this->permanent = (($cookie->get('permanent')+0) == 1);
 			$this->lastlogin = $cookie->get('lastlogin');
 			$this->sessionid = $cookie->get('sessionid');
-			$this->admin = (($cookie->get('admin')+0) == 1);
+			// $this->admin = $cookie->get('admin');		nonsense
 			$this->verified = false;
 
       $this->verify();
@@ -68,7 +68,7 @@ class login
 		$this->permanent = false;
 		$this->lastlogin = '';
 		$this->sessionid = '';
-		$this->admin = false;
+		$this->admin = 0;
 		$this->verified = true;
 
 		$this->pStoreCookie();
@@ -82,7 +82,7 @@ class login
 		$cookie->set('permanent', ($this->permanent==true ? 1 : 0));
 		$cookie->set('lastlogin', $this->lastlogin);
 		$cookie->set('sessionid', $this->sessionid);
-		$cookie->set('admin', ($this->admin==true ? 1 : 0));
+		// $cookie->set('admin', $this->admin);		nonsense
 	}
 
 	function verify()
@@ -119,7 +119,7 @@ class login
 			sql("UPDATE `user` SET `user`.`last_login`=NOW() WHERE `user`.`user_id`='&1'", $this->userid);
 
 			$this->lastlogin = $rUser['last_login'];
-			$this->admin = ($rUser['admin'] == 1);
+			$this->admin = $rUser['admin'];
 			$this->verified = true;
 		}
 		else
@@ -142,7 +142,7 @@ class login
 		$this->verify();
 
 		if ($privilege === false)
-			return $this->admin != 0;
+			return $this->admin > 0;
 
 		return ($this->admin & $privilege) == $privilege;
 	}

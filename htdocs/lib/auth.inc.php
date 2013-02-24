@@ -40,6 +40,7 @@
 			$usr['userid'] = $login->userid;
 			$usr['email'] = sqlValue("SELECT `email` FROM `user` WHERE `user_id`='" . sql_escape($login->userid) .  "'", '');
 			$usr['username'] = $login->username;
+			$usr['admin'] = $login->admin;
 		}
 		else
 			$usr = false;

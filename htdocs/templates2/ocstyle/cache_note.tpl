@@ -14,7 +14,7 @@
     <tr>
       <td></td>
       <td colspan="2">
-        <button type="submit" name="submit_cache_note" value="submit" style="width:120px">{t}Save{/t}</button>
+        <button type="submit" name="submit_cache_note" value="submit" class="formbuttons">{t}Save{/t}</button>
         <img src="resource2/{$opt.template.style}/images/viewcache/16x16-info.png" class="icon16" alt="Info" />
         <small>
           {t}The note is not visible to other users. The note and the optional coordinate will be included in GPX-file downloads and sent to the GPS device.{/t}</td>

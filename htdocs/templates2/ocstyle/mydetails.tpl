@@ -43,7 +43,7 @@
 
 	{foreach from=$useroptions item=useropt}
 		<tr>
-			<td style="vertical-align:top;"><b>{$useropt.name|escape}:</b></td>
+			<td style="vertical-align:top;">{$useropt.name|escape}:</td>
 			<td style="vertical-align:top;">
 				{if $edit==true}
 					{if $useropt.internal_use!=1}
@@ -96,8 +96,8 @@
 	{if $edit==true}
 		<tr>
 			<td class="header-small" colspan="3">
-				<input type="submit" name="cancel" value="{t}Cancel{/t}" style="width:120px" />&nbsp;&nbsp;
-				<input type="submit" name="save" value="{t}Submit{/t}" style="width:120px" />
+				<input type="submit" name="cancel" value="{t}Cancel{/t}" class="formbuttons" />&nbsp;&nbsp;
+				<input type="submit" name="save" value="{t}Submit{/t}" class="formbuttons" />
 			</td>
 		</tr>
 		<tr><td class="spacer" colspan="3"></td></tr>

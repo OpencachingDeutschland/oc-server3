@@ -143,8 +143,8 @@ function _chkFound () {
 	<tr><td class="spacer" colspan="2"></td></tr>
 	<tr>
 		<td class="header-small" colspan="2">
-			<input type="reset" name="reset" value="{reset}" style="width:120px"/>&nbsp;&nbsp;
-			<input type="submit" name="submitform" value="{submit}" style="width:120px"/>
+			<input type="reset" name="reset" value="{reset}" class="formbuttons"/>&nbsp;&nbsp;
+			<input type="submit" name="submitform" value="{submit}" class="formbuttons"/>
 		</td>
 	</tr>
 </table>

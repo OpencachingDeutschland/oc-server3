@@ -900,7 +900,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('41', '* are req
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('42', 'Swedish', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('43', 'Slovenian', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('44', 'length at least 6 chars', '2010-08-28 11:48:03');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('45', 'at least 4 different chars', '2010-08-28 11:48:03');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('45', 'At least 4 different chars', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('46', 'not part of the username', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('47', 'not in the wordlist with often used passwords', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('48', 'Slovak', '2010-08-28 11:48:03');
@@ -5234,10 +5234,10 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('847', 'DE', 'Durch diese Regeln ist dein Passwort sicher und kann nicht durch automatisierte Programme oder andere Benutzer erraten werden.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('848', 'DE', 'a-z A-Z 0-9 und .-_ @\&auml;\&uuml;\&ouml;\&Auml;\&Uuml;\&Ouml;=)(/\\\&amp;*+~# \r\n', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('849', 'DE', 'Es sind nicht alle Sonderzeichen erlaubt. Verwende nur die Folgenden:', '2010-08-28 11:48:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('850', 'DE', 'Verwende keine Wörter aus dem Wörterbuch z.B. \'geheim\'', '2010-08-28 11:48:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('851', 'DE', 'Verwende keine Begriffe aus dem Geocaching', '2010-08-28 11:48:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('852', 'DE', 'Verwende keine Teile deines Benutzernamen, Namen oder deiner E-Mail', '2010-08-28 11:48:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('853', 'DE', 'Zwischen 6 und 60 Zeichen lang', '2010-08-28 11:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('850', 'DE', 'Verwende keine Wörter aus dem Wörterbuch z.B. \'geheim\'.', '2010-08-28 11:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('851', 'DE', 'Verwende keine Begriffe aus dem Geocaching.', '2010-08-28 11:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('852', 'DE', 'Verwende keine Teile deines Benutzernamen, deines Namens oder deiner E-Mail.', '2010-08-28 11:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('853', 'DE', 'zwischen 6 und 60 Zeichen lang', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('854', 'DE', 'Überprüfe, dass dein Passwort folgende Kriterien erfüllt:', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('855', 'DE', 'Dein Passwort hat unsere Sicherheitsprüfung nicht bestanden.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('856', 'DE', 'Montenegro', '2010-08-28 11:48:07');
@@ -5405,7 +5405,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1382', 'DE', 'Ausgabe sortieren nach:', '2010-09-10 23:52:28');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1383', 'DE', 'letztes Log', '2012-07-24 21:30:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1384', 'DE', 'von anderen Benutzern empfohlene Caches zuerst anzeigen', '2010-09-10 23:51:58');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1385', 'DE', 'Entfernung nur nutzbar falls eingeloggt und Heimkoordinaten vorhanden<br />Bei Suche nach Entfernung wird die Entfernung von den eingegebenen Koordinaten verwendet.', '2010-09-10 23:51:48');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1385', 'DE', 'Entfernung nur nutzbar falls eingeloggt und Heimkoordinaten vorhanden.<br />Bei Suche nach Entfernung wird die Entfernung von den eingegebenen Koordinaten verwendet.', '2010-09-10 23:51:48');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1386', 'DE', 'Caches ausblenden:', '2010-09-10 23:51:41');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1387', 'DE', 'eigene', '2012-07-24 21:30:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1388', 'DE', 'gefundene', '2012-07-24 21:30:00');

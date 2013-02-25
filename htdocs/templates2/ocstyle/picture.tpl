@@ -115,8 +115,8 @@
 
 		<tr>
 			<td class="header-small" colspan="2">
-				<input type="reset" name="reset" value="{t}Reset{/t}" style="width:120px"/>&nbsp;&nbsp;
-				<input type="submit" name="ok" value="{if $action=='add'}{t}Upload{/t}{else}{t}Submit{/t}{/if}" style="width:120px"/>
+				<input type="reset" name="reset" value="{t}Reset{/t}" class="formbuttons"/>&nbsp;&nbsp;
+				<input type="submit" name="ok" value="{if $action=='add'}{t}Upload{/t}{else}{t}Submit{/t}{/if}" class="formbuttons"/>
 			</td>
 		</tr>
 	</table>

@@ -96,7 +96,7 @@
 			<tr><td class="spacer" colspan="2"></td></tr>
 			<tr>
 				<td>
-					<input type="submit" value="{t}Submit{/t}" />
+					<input type="submit" value="{t}Submit{/t}" class="formbuttons"/>
 				</td>
 			</tr>
 		</table>

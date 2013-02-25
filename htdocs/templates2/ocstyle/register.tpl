@@ -105,9 +105,9 @@
 						{foreach from=$countries item=countryItem}
 							<option value="{$countryItem.id}" {if $countryItem.id==$country}selected="selected"{/if}>{$countryItem.name|escape}</option>
 						{/foreach}
-					</select>
+					</select>&nbsp;&nbsp;
 					{if $show_all_countries==0}
-						<input type="submit" name="show_all_countries_submit" value="{t}Show all{/t}" />
+						<input type="submit" name="show_all_countries_submit" value="{t}Show all{/t}" class="formbuttons"/>
 					{/if}
 				</td>
 			</tr>

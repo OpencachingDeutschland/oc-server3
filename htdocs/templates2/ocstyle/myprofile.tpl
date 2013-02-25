@@ -197,12 +197,11 @@
 					</td>
 				</tr>
 			{/if}
-			<tr><td class="spacer" colspan="2">&nbsp;</td></tr>
 
 			{if $edit==false}
 				<tr><td class="spacer" colspan="2">&nbsp;</td></tr>
 				<tr>
-					<td style="vertical-align:top;">{t}Statistic picture:{/t}</td>
+					<td style="vertical-align:top;"><strong>{t}Statistic picture:{/t}</strong></td>
 					<td><img src="statpics/{$opt.template.locale}/{$login.userid}.jpg" align="middle"></td>
 				</tr>
 				<tr><td class="spacer" colspan="2"></td></tr>
@@ -217,26 +216,14 @@
 					<td style="vertical-align:top;">{t}BBCode for webforums:{/t}</td>
 					<td class="help">[url={$opt.page.absolute_url|escape|escape}viewprofile.php?userid={$login.userid}][img]{$opt.page.absolute_url|escape|escape}statpics/{$opt.template.locale}/{$login.userid}.jpg[/img][/url]</td>
 				</tr>
-				<tr><td class="spacer" colspan="2"></td></tr>
 			{/if}
 
-			<tr>
-				<td></td>
-				<td></td>
-			</tr>
-			<tr><td class="spacer" colspan="2"></td></tr>
-
-			<tr>
-				<td></td>
-				<td></td>
-			</tr>
-			<tr><td class="spacer" colspan="2"></td></tr>
-
 			{if $edit==true}
+				<tr><td class="spacer" colspan="2">&nbsp;</td></tr>
 				<tr>
 					<td class="header-small" colspan="2">
-						<input type="submit" name="cancel" value="{t}Cancel{/t}" style="width:120px"/>&nbsp;&nbsp;
-						<input type="submit" name="save" value="{t}Submit{/t}" style="width:120px"/>
+						<input type="submit" name="cancel" value="{t}Cancel{/t}" class="formbuttons"/>&nbsp;&nbsp;
+						<input type="submit" name="save" value="{t}Submit{/t}" class="formbuttons"/>
 					</td>
 				</tr>
 			{/if}

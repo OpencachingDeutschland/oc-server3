@@ -19,8 +19,8 @@
 	<p><br />{t}Please confirm that this email address is correct, or enter a new one.{/t}</p>
 	<br />
 
-	<input type="submit" name="action" value="{t}Enter new email address{/t}" style="width:200px" />&nbsp;&nbsp;
-	<input type="submit" name="action" value="{t}Confirm this email address{/t}" style="width:200px" />
+	<input type="submit" name="action" value="{t}Enter new email address{/t}" class="formbuttons" style="width:200px" />&nbsp;&nbsp;
+	<input type="submit" name="action" value="{t}Confirm this email address{/t}" class="formbuttons" style="width:200px" />
 	<br />
 
 	{$datalicensemail}

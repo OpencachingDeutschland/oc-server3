@@ -83,7 +83,7 @@
 			<tr>
 				<td>&nbsp;</td>
 				<td colspan="2">
-					<input type="submit" value="{t}Submit{/t}" />
+					<input type="submit" value="{t}Submit{/t}" class="formbuttons" />
 				</td>
 			</tr>
 		</table>

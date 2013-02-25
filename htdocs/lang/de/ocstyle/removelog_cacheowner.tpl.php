@@ -50,7 +50,7 @@
 
 	<tr>
 		<td class="header-small" colspan="2">
-			<input type="submit" name="submit" value="{t}Remove log entry{/t}" style="width:140px"/>
+			<input type="submit" name="submit" value="{t}Remove log entry{/t}"  class="formbuttons" style="width: 150px;"/>
 		</td>
 	</tr>
 </table>

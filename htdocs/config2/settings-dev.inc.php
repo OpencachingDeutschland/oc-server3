@@ -110,9 +110,10 @@
 	$opt['logic']['pictures']['url'] = $opt['page']['absolute_url'] . '/images/uploads';
 	$opt['logic']['pictures']['thumb_url'] = $opt['logic']['pictures']['url'] . '/thumbs';
 
-	/* cachemaps
+	/* maps
 	 */
 	$opt['logic']['cachemaps']['wmsurl'] = 'http://www.opencaching.de/cachemaps.php?wp={wp_oc}';
+	$opt['map']['disablefullscreen'] = false;
 
 	/* cachemaps (new)
 	* how to display the cache map on viewcache.php (200x200 pixel)
@@ -142,7 +143,9 @@
  	 * see https://my.garmin.com/api/communicator/key-generator.jsp
  	 */
  	$opt['lib']['garmin']['key'] = '00112233445566778899AABBCCDDEEFF00';
- 	$opt['lib']['garmin']['url'] = 'http://www.site.org/';
+	$opt['lib']['garmin']['domain'] = 'local.opencaching.de';
+	$opt['lib']['garmin']['url'] = 'http://local.opencaching.de/';
+	$opt['lib']['garmin']['redirect'] = $opt['lib']['garmin']['url'] . 'garmin.php?redirect=1&cacheid={cacheid}';
 
 	$opt['template']['default']['style'] = 'ocstyle';
 

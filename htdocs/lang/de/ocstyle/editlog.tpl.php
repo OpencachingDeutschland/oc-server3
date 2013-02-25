@@ -105,7 +105,7 @@ function _chkFound () {
 	<tr><td class="spacer" colspan="2"></td></tr>
 	{rating_message}
 </table>
-<table class="content">
+<table class="table">
 	<tr>
 		<td colspan="2">{t}Log-entry:{/t}</td>
 		</td>

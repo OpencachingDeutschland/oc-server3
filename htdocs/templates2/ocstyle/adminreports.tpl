@@ -26,13 +26,13 @@
 	{/if}
 
 	{if $list == true}
-		<table class="table">
+		<table class="narrowtable">
 		<tr><th>{t}ID{/t}</th><th>{t}Name{/t}</th><th>{t}Owner{/t}</th><th>{t}Reporter{/t}</th><th>{t}Date{/t}</th></tr>
 		{assign var="otheradmins" value=0}
 		{foreach from=$reportedcaches item=rc}
 			<tr>
 			{if $rc.otheradmin > $otheradmins}
-				<td colspan=5"><p style="line-height: 1.6em;">{t}(*) New reports{/t}</p>
+				<td colspan=5"><p style="line-height: 2.5em;">{t}(*) New reports{/t}</p>
 				</td></tr>
 				<tr><th>{t}ID{/t}</th><th>{t}Name{/t}</th><th>{t}Owner{/t}</th><th>{t}Reporter{/t}</th><th>{t}Admin{/t}</th><th>{t}Date{/t}</th></tr>
 				{assign var="otheradmins" value=$rc.otheradmin}
@@ -49,9 +49,8 @@
 			<tr><td colspan=5>{t}No reported caches{/t}</td></tr>
 		{/foreach}
 		</table>
-		
 		{if $reportedcaches != NULL and $otheradmins==0}
-			<p style="line-height: 1.6em;">{t}(*) New reports{/t}</p>
+			<p style="line-height: 2.5m;">{t}(*) New reports{/t}</p>
 		{/if}
 	{else}
 		<p style="line-height: 1.6em;">{t}Details for report of {/t} <a href="viewcache.php?cacheid={$cacheid}" target="_blank">{$cachename|escape}</a> {t} by {/t} <a href="viewprofile.php?userid={$userid}" target="_blank">{$usernick|escape}</a></p>

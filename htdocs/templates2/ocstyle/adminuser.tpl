@@ -34,7 +34,7 @@
 			{t}Useraccount details{/t}
 		</div>
 
-		<table class="content">
+		<table class="narrowtable">
 			<tr>
 				<td>{t}Username:{/t}</td>
 				<td><a href="viewprofile.php?userid={$user.user_id|escape}" target="_blank">{$user.username|escape}</a></td>

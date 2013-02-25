@@ -5,7 +5,7 @@
 ***************************************************************************}
  {* OCSTYLE - ohne Änderungen *}
 <form action="dbmaintain.php" method="post">
-	<table class="content">
+	<table class="table">
 		<colgroup>
 			<col width="150">
 			<col>
@@ -22,9 +22,9 @@
 			<tr colspan="2"><td class="successmsg">{t 1=$proc|escape 2=$count}%1 corrected: %2 entries{/t}</td></tr>
 		{/if}
 
-		<tr><td class="spacer" colspan="2"></td></tr>
+		<tr><td class="spacer" colspan="2">&nbsp;</td></tr>
 		<tr>
-			<td width="150px">&nbsp;</td>
+			<td width="1500px">&nbsp;</td>
 			<td>
 				<input type="submit" name="ok" value="{t}Execute{/t}" class="formbuttons" />
 			</td>

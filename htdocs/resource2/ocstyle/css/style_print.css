@@ -49,7 +49,7 @@ body {font-size: 62.5%; margin: 0px auto; padding: 0px; background-color: #fffff
 
 .site-slogan p.text {clear: both; float: right; width: 300px; margin: 10px 0px 0px 0px; padding: 10px; color: rgb(234,239,247); background-color: rgb(127,162,202); font-family: arial, sans serif; text-align: right; font-weight: bold; line-height: 1.0em; font-size: 140%;}
 
-.site-slogan p.search {clear: both; float: right; padding: 0px; color: rgb(255,255,255); font-family: arial, sans serif; text-align: right; font-weight: none; line-height: 1.0em; font-size: 9px; white-space: nowrap;}
+.site-slogan p.search {clear: both; float: right; padding: 0px; color: rgb(255,255,255); font-family: arial, sans serif; text-align: right; line-height: 1.0em; font-size: 9px; white-space: nowrap;}
 
 .site-slogan a {color: rgb(234,239,247); text-decoration: underline;}
 .site-slogan a:hover {text-decoration: none; color: rgb(50,50,50);}
@@ -243,7 +243,7 @@ ul.linklist-indent {margin: -0.3em 0px 0.5em 0px; padding: 0px 0px 0px 10px; lis
 /*----------------------------*/
 .box-on {float: left; min-width: 0.3em; margin-right: 0.2em; padding: 0px 0.2em 0px 0.3em;}
 .box-off {display: none;}
-/* html box-on {width: 1%;} /* IE6-Hack for min-width. Also compliant with IE7-Beta2 */ */
+/* html box-on {width: 1%;} /* IE6-Hack for min-width. Also compliant with IE7-Beta2 */
 
 /*-----------------------------*/
 /* 7.2 - Horizontal alignments */
@@ -379,7 +379,6 @@ ul.linklist-indent {margin: -0.3em 0px 0.5em 0px; padding: 0px 0px 0px 10px; lis
 /*---------------------------*/
 /* 7.5  Bottom border colors */
 /*---------------------------*/
-.box-blue {padding: 15px 9px 5px 10px; margin:10 10 10 10;border-top:1px solid rgb(88,144,168);border-left:1px solid rgb(88,144,168);border-right:1px solid rgb(88,144,168);border-bottom:1px solid rgb(88,144,168);}
 .line-box {border-bottom: solid 1px rgb(200,200,200); padding-bottom: 7px; margin: 0px 0px 15px 0px;}
 
 .line-white {border-bottom: solid 1px rgb(255,255,255); padding-bottom: 2px; margin: 0px 0px 1px 0px;}
@@ -532,7 +531,7 @@ div.viewcache_log-content { margin-left: 20px }
 div.viewlogs-logpictures span.info { font-weight: bold; font-size: 120%;display: block;}
 div.viewlogs-logpictures div.logimage { float: left; }
 div.viewlogs-logpictures div.allimages { background-color: rgb(219,230,241);padding: 5px;  max-width: 750px; float: left;}
-div.viewlogs-logpictures span.desc { vertical-align: center; display: block; float: right; width: 112px; margin-top: 5px; padding-left: 3px;} /* should fit 4 images */
+div.viewlogs-logpictures span.desc { vertical-align: middle; display: block; float: right; width: 112px; margin-top: 5px; padding-left: 3px;} /* should fit 4 images */
 div.viewlogs-logpictures img { max-width: 64px; max-height: 64px; vertical-align: top;}
 div.viewlogs-logpictures span.removepic { display: block; }
 

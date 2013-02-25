@@ -3,7 +3,7 @@
  *
  *  Unicode Reminder メモ
  ***************************************************************************}
-<table class="content">
+<table class="table">
 	<tr>
 		<td class="header">
 			<img src="resource2/{$opt.template.style}/images/misc/32x32-tools.png" border="0" width="32" height="32" alt="{t}HTML preview{/t}" align="middle" />
@@ -27,9 +27,7 @@
 							</tr>
 							<tr><td colspan="2">&nbsp;</td></tr>
 							<tr>
-								<td alignment="left" width="50%">
-								</td>
-								<td align="right" width="50%">
+								<td>
 									<input type="submit" name="toStep2" value="{t}Next{/t}" class="formbuttons">
 								</td>
 							</tr>

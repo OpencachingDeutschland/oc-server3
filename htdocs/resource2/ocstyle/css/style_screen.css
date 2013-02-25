@@ -175,7 +175,7 @@ div#bg2 {display: none;}
 /* 2.3 - Navigation - Level 1 */
 /*----------------------------*/
 /* .nav1-container {width: 970px; top: 35px; position: absolute; z-index: 3; background: transparent;} */
-.nav1-container {top: 10x; left: 5px; background: transparent; position: absolute; float: left;} 
+.nav1-container {left: 5px; background: transparent; position: absolute; float: left;} 
 
 .nav1 {margin: 3px; padding: 0px; font-family: verdana, arial, sans serif; font-size: 1.0em;}
 .nav1 ul {float: right; margin: 0px; padding: 0px 20px 0px 0px; border-left: solid 1px rgb(115,162,182); background-color: rgb(255,255,255); font-weight: bold;}	
@@ -234,7 +234,7 @@ ul#statmenu { padding: 0px; margin: 0px;}
 /******************************************************/
 /* SECTION 4 - SPECIFIC CLASSES FOR LAYOUTS #2 and #3 */
 /******************************************************/
-.notice {overflow: hidden; width: 735px; height: 24px; margin: 0px 0px 0px 0px; padding: 0px 16px 12px 20px; color: rgb(88,144,168); font-weight: italic; font-size: 11px; background-image: url(../images/misc/16x16-info.png); background-position: top left; background-repeat:no-repeat;behavior: url(resource2/ocstyle/css/iepngfix.htc);}
+.notice {overflow: hidden; width: 735px; height: 24px; margin: 0px 0px 0px 0px; padding: 0px 16px 12px 20px; color: rgb(88,144,168); font-style: italic; font-size: 11px; background-image: url(../images/misc/16x16-info.png); background-position: top left; background-repeat:no-repeat;behavior: url(resource2/ocstyle/css/iepngfix.htc);}
 .warning {overflow: hidden;  width: 735px; height: 24px; border: 1px solid black; background-color: rgb(240,100,100); margin: 0px 0px 0px 0px; padding: 8px 0px 0px 32px; color: rgb(50,50,50); font-weight: bold; font-size: 12px; background-image: url(../images/misc/32x32-impressum.png); background-position: top left; background-repeat:no-repeat;behavior: url(resource2/ocstyle/css/iepngfix.htc);}
 
 .errormsg {color: rgb(240,100,100); font-weight: bold;}
@@ -319,6 +319,12 @@ ul.linklist-indent {margin: -0.3em 0px 0.5em 0px; padding: 0px 0px 0px 10px; lis
 .table th {margin: 0px; background-color: rgb(127,162,202); padding: 2px 7px 2px 7px; border: solid 0px rgb(150,150,150); empty-cells: show; text-align: left; font-size: 120%; color: rgb(255,255,255);	}
 .table-caption {margin: 0.5em 0px 1.0em 30px; padding: 0px; clear: both; text-align: left; font-size: 120%;}
 
+.narrowtable {font-size: 10px; line-height: 2.0em; clear: left; padding: 0px; margin: 0.5em 0px 0.2em 0px; border: solid 0px rgb(150,150,150); empty-cells: show; border-collapse: collapse; background-color: rgb(255,255,255);}
+.narrowtable tr {margin: 0px; padding: 0px;}
+.narrowtable td {padding: 0 7px 0 7px; border: solid 0px rgb(150,150,150); text-align: left; font-size: 120%;}
+.narrowtable th {margin: 0px; background-color: rgb(127,162,202); padding: 0 7px 0 7px; border: solid 0px rgb(150,150,150); empty-cells: show; text-align: left; font-size: 120%; color: rgb(255,255,255);	}
+.narrowtable-caption {margin: 0.5em 0px 1.0em 30px; padding: 0px; clear: both; text-align: left; font-size: 120%;}
+
 /* Images */
 .img-left-noborder-notopmargin {float: left; margin: 0px 10px 0px 0px;}
 .img-left-noborder-topmargin {float: left; margin: 3px 10px 0px 0px;}
@@ -365,7 +371,7 @@ ul.linklist-indent {margin: -0.3em 0px 0.5em 0px; padding: 0px 0px 0px 10px; lis
 /*----------------------------*/
 .box-on {float: left; min-width: 0.3em; margin-right: 0.2em; padding: 0px 0.2em 0px 0.3em;}
 .box-off {display: none;}
-/* html box-on {width: 1%;} /* IE6-Hack for min-width. Also compliant with IE7-Beta2 */ */
+/* html box-on {width: 1%;} /* IE6-Hack for min-width. Also compliant with IE7-Beta2 */
 
 /*-----------------------------*/
 /* 7.2 - Horizontal alignments */
@@ -502,7 +508,6 @@ ul.linklist-indent {margin: -0.3em 0px 0.5em 0px; padding: 0px 0px 0px 10px; lis
 /*---------------------------*/
 /* 7.5  Bottom border colors */
 /*---------------------------*/
-.box-blue {width:750px; padding: 15px 9px 5px 10px; margin:10 10 10 10;border-top:1px solid rgb(88,144,168);border-left:1px solid rgb(88,144,168);border-right:1px solid rgb(88,144,168);border-bottom:1px solid rgb(88,144,168);}
 .line-box {width:769px; border-bottom: solid 1px rgb(200,200,200); padding-bottom: 7px; margin: 0px 0px 15px 0px;}
 
 .line-white {border-bottom: solid 1px rgb(255,255,255); padding-bottom: 2px; margin: 0px 0px 1px 0px;}
@@ -656,7 +661,7 @@ div.viewcache_log-content { margin-left: 20px }
 div.viewlogs-logpictures span.info { font-weight: bold; font-size: 120%;display: block;}
 div.viewlogs-logpictures div.logimage { float: left; }
 div.viewlogs-logpictures div.allimages { background-color: rgb(219,230,241);padding: 5px;  max-width: 750px; float: left;}
-div.viewlogs-logpictures span.desc { vertical-align: center; display: block; float: right; width: 112px; margin-top: 5px; padding-left: 3px;font-size: 12px;} /* should fit 4 images */
+div.viewlogs-logpictures span.desc { vertical-align: middle; display: block; float: right; width: 112px; margin-top: 5px; padding-left: 3px;font-size: 12px;} /* should fit 4 images */
 div.viewlogs-logpictures img { max-width: 64px; max-height: 64px; vertical-align: top;}
 div.viewlogs-logpictures span.removepic { display: block; font-size: 12px;}
 
@@ -1083,7 +1088,6 @@ td.mapsearch-c {
 	background: #ccc;
 	color:#000;
 	cursor:pointer;
-	width: 70;
 	height:30px;
 	margin:0;
 	vertical-align:top;
@@ -1206,3 +1210,7 @@ div#havefound {
 
 * html div#havefound {top: 160px;}
 *+html div#havefound {top: 160px;}
+
+.garmintext {
+	font-size: 1.1em;
+}

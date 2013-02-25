@@ -356,12 +356,12 @@ ul.linklist-indent {margin: -0.3em 0px 0.5em 0px; padding: 0px 0px 0px 10px; lis
 /*-------------------*/
 /* 6.4 - Hyperlinks  */
 /*-------------------*/
-.content1 a, .content2 a, .content3 a, .sidebar-txtbox-noshade a, .sidebar-txtbox-shade a {color: rgb(75,75,75); text-decoration: underline;}
-.content1 a:hover, .content2 a:hover, .content3 a:hover, .sidebar-txtbox-noshade a:hover, .sidebar-txtbox-shade a:hover {color: rgb(0,0,0); text-decoration: none;}
+.content1 a, .content2 a, .content3 a, .sidebar-txtbox-noshade a, .sidebar-txtbox-shade a {color: #069; text-decoration: none;}
+.content1 a:hover, .content2 a:hover, .content3 a:hover, .sidebar-txtbox-noshade a:hover, .sidebar-txtbox-shade a:hover {color: rgb(0,0,0); text-decoration: none; border-bottom: dotted 1px black;}
 .content1 a:visited, .content2 a:visited, .content3 a:visited, .sidebar-txtbox-noshade a:visited, .sidebar-txtbox-shade a:visited  {color: rgb(130,75,150);}
-.footer a {color: rgb(255,255,255); text-decoration: underline;}
-.footer a:hover {color: rgb(0,0,0); text-decoration: none;}
-
+.footer a {color: rgb(255,255,255); text-decoration: none; }
+.footer a:hover {color: rgb(0,0,0); text-decoration: none; border-bottom: dotted 1px black;}
+p.content-title-noshade-size1 a, div.logs a, div.content2-container-2col-left a {color: rgb(75,75,75); }
 /*******************************/
 /* SECTION 7 - GENERIC CLASSES */
 /*******************************/

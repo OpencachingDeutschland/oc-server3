@@ -66,9 +66,9 @@
 	  	</p>
 	  </div>
 
-		<p style="line-height: 1.6em;"><input type="submit" name="assign" value="{t}Assign to me{/t}" class="formbuttons" />
+		<p style="line-height: 1.6em;"><input type="submit" name="assign" value="{t}Assign to me{/t}" class="formbutton" onclick="javascript:submitbutton('assign')" />
 		{if $ownreport}
-		&nbsp;<input type="submit" name="contact" value="{t}Contact owner{/t}" class="formbuttons" />&nbsp;&nbsp;<input type="submit" name="done" value="{t}Mark as finished{/t}" class="formbuttons" /></p>
+		&nbsp;<input type="submit" name="contact" value="{t}Contact owner{/t}" class="formbutton" onclick="javascript:submitbutton('contact')" />&nbsp;&nbsp;<input type="submit" name="done" value="{t}Mark as finished{/t}" class="formbutton" onclick="javascript:submitbutton('done')" /></p>
 
 		<div class="content2-container bg-blue02">
 	  	<p class="content-title-noshade-size2">
@@ -77,7 +77,7 @@
 	  	</p>
 	  </div>
 
-		<p style="line-height: 1.6em;"><input type="submit" name="statusActive" value="{t}Ready for search{/t}" class="formbuttons" />&nbsp;&nbsp;<input type="submit" name="statusTNA" value="{t}Temporary not available{/t}" class="formbuttons" />&nbsp;&nbsp;<input type="submit" name="statusArchived" value="{t}Archived{/t}" class="formbuttons" />&nbsp;&nbsp;<input type="submit" name="statusLockedVisible" value="{t}Locked, visible{/t}" class="formbuttons" />&nbsp;&nbsp;<input type="submit" name="statusLockedInvisible" value="{t}Locked, invisible{/t}" class="formbuttons" /></p>
+		<p style="line-height: 1.6em;"><input type="submit" name="statusActive" value="{t}Ready for search{/t}" class="formbutton"  onclick="javascript:submitbutton('statusActive')" />&nbsp;&nbsp;<input type="submit" name="statusTNA" value="{t}Temporary not available{/t}" class="formbutton" onclick="javascript:submitbutton('statusTNA')" />&nbsp;&nbsp;<input type="submit" name="statusArchived" value="{t}Archived{/t}" class="formbutton" onclick="javasscript:submitbutton('statusArchived')" />&nbsp;&nbsp;<input type="submit" name="statusLockedVisible" value="{t}Locked, visible{/t}" class="formbutton" onclick="javascript:submitbutton('statusLockedVisible')" />&nbsp;&nbsp;<input type="submit" name="statusLockedInvisible" value="{t}Locked, invisible{/t}" class="formbutton" onclick="javascript:submitbutton('statusLockedInvisible')" /></p>
 		{elseif $otheradmin}
 			<br />{t}Warning: This report is already assigned to another admin. Consult him first before you assume the report!{/t}
 		{/if}

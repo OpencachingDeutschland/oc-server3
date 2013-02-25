@@ -356,8 +356,8 @@ function toggleAttr(id)
 	<tr><td class="spacer" colspan="2"></td></tr>
 	<tr>
 		<td class="header-small" colspan="2">
-			<input type="reset" name="reset" value="{reset}" class="formbuttons"/>&nbsp;&nbsp;
-			<input type="submit" name="submit" value="{submit}" class="formbuttons"/>
+			<input type="reset" name="reset" value="{reset}" class="formbutton" onclick="javascript:flashbutton('reset')" />&nbsp;&nbsp;
+			<input type="submit" name="submit" value="{submit}" class="formbutton" onclick="javascript:submitbutton('submit')" />
 		</td>
 	</tr>
 </table>

@@ -22,7 +22,7 @@
     {if isset($wpTypeError)}
     <tr>
       <td></td>
-      <td>
+      <td class="errormsg">
         {$wpTypeError}
       </td>
     </tr>
@@ -49,8 +49,8 @@
     <tr>
       <td></td>
       <td>
-        <button type="submit" name="back" value="back" class="formbuttons">{t}Cancel{/t}</button>&nbsp;&nbsp;
-        <button type="submit" name="submitform" value="submit" class="formbuttons">{$submitButton}</button>
+        <input type="submit" name="back" value="{t}Cancel{/t}" class="formbutton" onclick="javascript:submitbutton('back')" />&nbsp;&nbsp;
+        <input type="submit" name="submitform" value="{$submitButton}" class="formbutton" onclick="javascript:submitbutton('submitform')" /></button>
       </td>
     </tr>
   </table>

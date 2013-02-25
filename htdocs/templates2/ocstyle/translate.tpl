@@ -104,7 +104,7 @@
 				</tr>
 				<tr>
 					<td align="right">
-						<input type="submit" name="submit" value="Speichern" class="formbuttons"/>
+						<input type="submit" name="submit2" value="Speichern" class="formbuttons" onclick="javascript:submitbutton('submit2')" />
 					<td>
 				</tr>
 				<tr><td>{t}Use existing translations:{/t}</td></tr>
@@ -138,7 +138,7 @@
 			{/foreach}
 			<br />
 			<br />
-			<input type="submit" name="submitfile" value="{t}Scan file{/t}" class="formbuttons"/>
+			<input type="submit" name="submitfile1" value="{t}Scan file{/t}" class="formbutton" onclick="javascript:submitbutton('submitfile1')" />
 		</form>
 	{elseif $action=="textimport"}
 		<form action="translate.php" method="post" enctype="multipart/form-data">
@@ -148,7 +148,7 @@
 			{t}Text file containing the translations:{/t} {$translang}<br />
 			<input name="textfile" type="file" size="50" /><br />
 			<br />
-			<input type="submit" name="submitfile" value="{t}Scan file{/t}" class="formbuttons"/>
+			<input type="submit" name="submitfile2" value="{t}Scan file{/t}" class="formbutton" onclick="javascript:submitbutton('submitfile2')" />
 		</form>
 	{elseif $action=="xmlimport2" || $action=="textimport2"}
 		<form action="translate.php" method="post" enctype="multipart/form-data">

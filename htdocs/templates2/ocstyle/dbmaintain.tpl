@@ -24,9 +24,9 @@
 
 		<tr><td class="spacer" colspan="2">&nbsp;</td></tr>
 		<tr>
-			<td width="1500px">&nbsp;</td>
+			<td width="150px">&nbsp;</td>
 			<td>
-				<input type="submit" name="ok" value="{t}Execute{/t}" class="formbuttons" />
+				<input type="submit" name="ok" value="{t}Execute{/t}" class="formbutton" onclick="javascript:submitbutton('ok')" />
 			</td>
 		</tr>
 	</table>

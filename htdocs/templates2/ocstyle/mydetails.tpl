@@ -96,8 +96,8 @@
 	{if $edit==true}
 		<tr>
 			<td class="header-small" colspan="3">
-				<input type="submit" name="cancel" value="{t}Cancel{/t}" class="formbuttons" />&nbsp;&nbsp;
-				<input type="submit" name="save" value="{t}Submit{/t}" class="formbuttons" />
+				<input type="submit" name="cancel" value="{t}Cancel{/t}" class="formbutton" onclick="javascript:submitbutton('cancel')" />&nbsp;&nbsp;
+				<input type="submit" name="save" value="{t}Submit{/t}" class="formbutton" onclick="javascript:submitbutton('save')"(/>
 			</td>
 		</tr>
 		<tr><td class="spacer" colspan="3"></td></tr>

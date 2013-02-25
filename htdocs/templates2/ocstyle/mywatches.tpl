@@ -92,8 +92,8 @@
 
 			<tr>
 				<td class="header-small" colspan="2">
-					<input type="reset" name="cancel" value="{t}Reset{/t}" class="formbuttons" />&nbsp;&nbsp;
-					<input type="submit" name="ok" value="{t}Change{/t}" class="formbuttons" />
+					<input type="reset" name="cancel" value="{t}Reset{/t}" class="formbutton" onclick="javascript:flashbutton('cancel')" />&nbsp;&nbsp;
+					<input type="submit" name="ok" value="{t}Change{/t}" class="formbutton" onclick="javascript:submitbutton('ok')" />
 				</td>
 			</tr>
 		</table>
@@ -141,7 +141,7 @@
 							<td style="border-bottom: solid 1px grey;">[<a href="javascript:if(confirm('{t escape=js}Do you really want to delete this entry?{/t}'))location.href='mywatches.php?action=remove&cacheid={$watchItem.cacheid}&target=mywatches.php'">{t}remove{/t}</a>]</td>
 						</tr>
 					{foreachelse}
-						<tr><td colspan="5">{t}No Geocaches watched.{/t}</td></tr>
+						<tr><td colspan="5"><br />{t}No Geocaches watched.{/t}</td></tr>
 					{/foreach}
 				</table>
 			</td>

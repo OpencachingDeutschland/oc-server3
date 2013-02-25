@@ -90,6 +90,22 @@
 							window.location = 'index.php?usercountry=' + oUserCountryCombo.value;
 						}
 					}
+
+				function submitbutton(bname)
+				{
+					document.getElementsByName(bname)[0].className = "formbutton_active";
+				}
+
+				function resetbutton(bname)
+				{
+					document.getElementsByName(bname)[0].className = "formbutton"
+				}
+
+				function flashbutton(bname)
+				{
+					document.getElementsByName(bname)[0].className = "formbutton_active";
+					window.setTimeout('resetbutton(\'' + bname + '\')', 350);
+				}
 				//-->
       </script>
   	<link rel="stylesheet" type="text/css" media="print" href="resource2/{style}/css/style_print.css">

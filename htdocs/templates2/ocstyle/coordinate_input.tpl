@@ -1,4 +1,4 @@
-<table class="input_coord">
+<table class="table">
   <tr>
     <td>
       <select name="lat_hem" class="input40" {if $disabled}disabled=""{/if}>
@@ -30,7 +30,7 @@
 
   {if isset($coord_error)}
   <tr>
-    <td  colspan="3">
+    <td colspan="3" class="errormsg">
       {$coord_error}
     </td>
   </tr>

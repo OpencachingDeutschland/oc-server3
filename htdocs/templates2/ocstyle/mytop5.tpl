@@ -36,7 +36,7 @@
 					</tr>
 					<tr><td class="spacer" colspan="4"></td></tr>
 				{foreachelse}
-					<tr><td colspan="3">{t}You haven't recommended a Geocache.{/t}</td></tr>
+					<tr><td colspan="3"><br />{t}You haven't recommended a Geocache.{/t}</td></tr>
 				{/foreach}
 			</table>
 		</td>

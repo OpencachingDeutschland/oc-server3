@@ -22,7 +22,6 @@
 {else}
 
 	<form action="activation.php" method="post" enctype="application/x-www-form-urlencoded" style="display: inline;">
-		<input type="hidden" name="submit" value="1" />
 	  <div class="content2-pagetitle">
 			<img src="resource2/{$opt.template.style}/images/profile/32x32-profile.png" style="align: left; margin-right: 10px;" width="32" height="32" alt="{t}Activation{/t}" />
 			{t}Activate account{/t}
@@ -36,12 +35,13 @@
 		<table class="table">
 	  	<tr>
 				<td>{t}E-Mail{/t}:</td>
-				<td><input type="text" name="email" maxlength="60" value="{$email|escape}" class="input200" />{if $errorEMail==true}<span class="errormsg">{t}E-Mail-Adress is not valid.{/t}</span>{/if}</td>
+				<td><input type="text" name="email" maxlength="60" value="{$email|escape}" class="input200" />{if $errorEMail==true} &nbsp;<span class="errormsg">{t}E-Mail-Adress is not valid.{/t}</span>{/if}</td>
 	  	</tr>
 	  	<tr>
 				<td>{t}Activation code:{/t}</td>
 				<td><input type="text" name="code" maxlength="20" value="{$code|escape}" class="input200" /></td>
 	  	</tr>
+	  	<tr><td class="spacer"></td></tr>
 		</table>
 
 		{if $errorCode==true}
@@ -65,8 +65,8 @@
 		{/if}
 
 		<p style="line-height: 1.6em;">
-			<input type="reset" name="reset" value="{t}Reset{/t}" class="formbuttons" />&nbsp;&nbsp;
-			<input type="submit" name="submit" value="{t}Submit{/t}" class="formbuttons" />
+			<input type="reset" name="reset" value="{t}Reset{/t}" class="formbutton" onclick="javascript:flashbutton('reset')" />&nbsp;&nbsp;
+			<input type="submit" name="submit" value="{t}Submit{/t}" class="formbutton" onclick="javascript:submitbutton('submit')" />
 		</p>
 	</form>
 

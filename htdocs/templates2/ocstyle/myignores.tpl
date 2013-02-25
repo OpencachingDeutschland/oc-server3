@@ -29,7 +29,7 @@
 						<td style="border-bottom: solid 1px grey;">[<a href="javascript:if(confirm('{t escape=js}Do you really want to delete this entry?{/t}'))location.href='ignore.php?cacheid={$ignoreItem.cacheid}&action=removeignore'">{t}remove{/t}</a>]</td>
 					</tr>
 				{foreachelse}
-					<tr><td colspan="4">{t}No ignored Geocaches found.{/t}</td></tr>
+					<tr><td colspan="4"><br />{t}No ignored Geocaches found.{/t}</td></tr>
 				{/foreach}
 			</table>
 		</td>

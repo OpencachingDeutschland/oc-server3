@@ -65,8 +65,8 @@
 
 		<tr>
 			<td class="header-small" colspan="2">
-				<input type="submit" name="cancel" value="{t}Cancel{/t}" class="formbuttons"/>&nbsp;&nbsp;
-				<input type="submit" name="ok" value="{t}Save{/t}" class="formbuttons"/>
+				<input type="submit" name="cancel" value="{t}Cancel{/t}" class="formbutton" onclick="javascript:submitbutton('cancel')" />&nbsp;&nbsp;
+				<input type="submit" name="ok" value="{t}Save{/t}" class="formbutton" onclick="javascript:submitbutton('ok')" />
 			</td>
 		</tr>
 

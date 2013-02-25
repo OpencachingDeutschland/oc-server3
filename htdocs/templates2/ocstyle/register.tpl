@@ -48,6 +48,7 @@
 	</table>
 
 {else}
+
 	<form name="register" action="register.php" method="post" enctype="application/x-www-form-urlencoded" style="display: inline;">
 		<input type="hidden" name="show_all_countries" value="{$show_all_countries}" />
 		<div class="content2-pagetitle">
@@ -107,7 +108,7 @@
 						{/foreach}
 					</select>&nbsp;&nbsp;
 					{if $show_all_countries==0}
-						<input type="submit" name="show_all_countries_submit" value="{t}Show all{/t}" class="formbuttons"/>
+						<input type="submit" name="show_all_countries_submit" value="{t}Show all{/t}" class="formbutton" onclick="javascript:submitbutton('show_all_countries_submit')" />
 					{/if}
 				</td>
 			</tr>
@@ -217,8 +218,8 @@
 
 			<tr>
 				<td class="header-small" colspan="2">
-					<input type="reset" name="reset" value="{t}Reset{/t}" class="formbuttons"/>&nbsp;&nbsp;
-					<input type="submit" name="submit" value="{t}Register{/t}" class="formbuttons"/>
+					<input type="reset" name="reset" value="{t}Reset{/t}" class="formbutton" onclick="javascript:flashbutton('reset')"/>&nbsp;&nbsp;
+					<input type="submit" name="submit" value="{t}Register{/t}" class="formbutton" onclick="javascript:submitbutton('submit')"/>
 				</td>
 			</tr>
 		</table>

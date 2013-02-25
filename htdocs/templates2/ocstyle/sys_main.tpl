@@ -41,6 +41,22 @@
 						window.location = 'index.php?usercountry=' + oUserCountryCombo.value;
 					}
 				}
+
+				function submitbutton(bname)
+				{
+					document.getElementsByName(bname)[0].className = "formbutton_active";
+				}
+
+				function resetbutton(bname)
+				{
+					document.getElementsByName(bname)[0].className = "formbutton"
+				}
+
+				function flashbutton(bname)
+				{
+					document.getElementsByName(bname)[0].className = "formbutton_active";
+					window.setTimeout('resetbutton(\'' + bname + '\')', 350);
+				}
 			//-->
 			</script>
 		{/literal}
@@ -84,10 +100,10 @@
 							Automatische Abmeldung in <div id="sessionTimout">0</div>&nbsp;Minuten - <a href="#" onclick="cancelSessionTimeout()">Abbrechen</a>
 						</div>
 					{/if}
-					<div class="nav1" style="text-align: right;">
+					<div class="nav1" style="text-align: right; margin-right: 20px;">
 						{nocache}
 							{if ($login.userid==0)}
-								<b><form action="login.php" method="post" enctype="application/x-www-form-urlencoded" name="login" dir="ltr" style="display: inline;">{t}User{/t}:&nbsp;<input name="email" size="10" type="text" class="textboxes" value="" />&nbsp;{t}Password{/t}:&nbsp;<input name="password" size="10" type="password" class="textboxes" value="" />&nbsp;<input type="hidden" name="action" value="login" /><input type="hidden" name="target" value="{$opt.page.target|escape}" /><input name="LogMeIn" value="{t}Login{/t}" class="formbuttons" style="width: 60px;" type="submit"></form></b>	
+								<b><form action="login.php" method="post" enctype="application/x-www-form-urlencoded" name="login" dir="ltr" style="display: inline;">{t}User{/t}:&nbsp;<input name="email" size="10" type="text" class="textboxes" value="" />&nbsp;{t}Password{/t}:&nbsp;<input name="password" size="10" type="password" class="textboxes" value="" />&nbsp;<input type="hidden" name="action" value="login" /><input type="hidden" name="target" value="{$opt.page.target|escape}" /><input name="LogMeIn" value="{t}Login{/t}" class="formbutton_header" style="width: 65px;" type="submit"></form></b>	
 							{else}
 								<b>{t}Logged in as{/t}:</b> <a href="myhome.php">{$login.username|escape}</a> - <a href="login.php?action=logout">{t}Logout{/t}</a>&nbsp;
 							{/if}

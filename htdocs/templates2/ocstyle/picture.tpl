@@ -12,6 +12,7 @@
 		if (document.fpicture.title.value == "")
 		{
 			alert('{/literal}{t escape=js}Please give the picture a name!{/t}{literal}');
+			resetbutton('ok');
 			return false;
 		}
 		return true;
@@ -115,8 +116,8 @@
 
 		<tr>
 			<td class="header-small" colspan="2">
-				<input type="reset" name="reset" value="{t}Reset{/t}" class="formbuttons"/>&nbsp;&nbsp;
-				<input type="submit" name="ok" value="{if $action=='add'}{t}Upload{/t}{else}{t}Submit{/t}{/if}" class="formbuttons"/>
+				<input type="reset" name="reset" value="{t}Reset{/t}" class="formbutton" onclick="javascript:flashbutton('reset')" />&nbsp;&nbsp;
+				<input type="submit" name="ok" value="{if $action=='add'}{t}Upload{/t}{else}{t}Submit{/t}{/if}" class="formbutton" onclick="javascript:submitbutton('ok')" />
 			</td>
 		</tr>
 	</table>

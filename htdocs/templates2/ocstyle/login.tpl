@@ -54,8 +54,8 @@
 
 		<tr>
 			<td class="header-small" colspan="2">
-				<input type="reset" value="{t}Reset{/t}" class="formbuttons" />&nbsp;&nbsp;
-				<input type="submit" value="{t}Login{/t}" class="formbuttons" />
+				<input type="reset" name="reset" value="{t}Reset{/t}" class="formbutton" onclick="javascript:flashbutton('reset')" />&nbsp;&nbsp;
+				<input type="submit" name="submit" value="{t}Login{/t}" class="formbutton" onclick="javascript:submitbutton('submit')" />
 			</td>
 		</tr>
 	</table>

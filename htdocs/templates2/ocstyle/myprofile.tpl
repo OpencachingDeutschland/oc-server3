@@ -222,8 +222,8 @@
 				<tr><td class="spacer" colspan="2">&nbsp;</td></tr>
 				<tr>
 					<td class="header-small" colspan="2">
-						<input type="submit" name="cancel" value="{t}Cancel{/t}" class="formbuttons"/>&nbsp;&nbsp;
-						<input type="submit" name="save" value="{t}Submit{/t}" class="formbuttons"/>
+						<input type="submit" name="cancel" value="{t}Cancel{/t}" class="formbutton" onclick="javascript:flashbutton('cancel')" />&nbsp;&nbsp;
+						<input type="submit" name="save" value="{t}Submit{/t}" class="formbutton" onclick="javascript:submitbutton('save')" />
 					</td>
 				</tr>
 			{/if}

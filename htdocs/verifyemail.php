@@ -18,22 +18,13 @@
 		$tpl->redirect_login();
 
 	$orgpage = isset($_REQUEST['page']) ? $_REQUEST['page'] : 'index.php'; 
-	$action = isset($_REQUEST['action']) ? $_REQUEST['action'] : 'ask';
-
-	if ($action == $translate->t("Enter new email address",'','',0))
-		$action = 'change';
-	else if ($action == $translate->t("Confirm this email address",'','',0))
-		$action = 'confirm';
-	else
-		$action = 'ask';
-
 	$user = new user($login->userid);
 
-	if ($action == 'change')
+	if (isset($_REQUEST['new']))
 	{
 		$tpl->redirect('newemail.php');
 	}
-	else if ($action == 'confirm')
+	else if (isset($_REQUEST['confirm']))
 	{
 		$user->confirmEmailAddress();
 		$tpl->redirect($orgpage);

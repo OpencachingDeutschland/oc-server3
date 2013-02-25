@@ -83,7 +83,7 @@
 			<tr>
 				<td>&nbsp;</td>
 				<td colspan="2">
-					<input type="submit" value="{t}Submit{/t}" class="formbuttons" />
+					<input type="submit" value="{t}Submit{/t}" class="formbutton" onclick="javascript:submitbutton('submit')" />
 				</td>
 			</tr>
 		</table>
@@ -111,6 +111,7 @@
 		{foreachelse}
 			<tr>
 				<td colspan="3">
+					<br />
 					{t}There are no caches that can be adopted by you at the moment.{/t}
 				</td>
 			</tr>

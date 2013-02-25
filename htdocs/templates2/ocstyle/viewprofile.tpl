@@ -9,7 +9,7 @@
 	{t 1=$username}Userprofile of %1{/t}
 </div>
 
-<div style="text-align: right;padding-right: 22px;">
+<div class="default" style="text-align: right;padding-right: 22px;">
 	<a href="mailto.php?userid={$userid}"><img src="resource2/{$opt.template.style}/images/misc/16x16-email.png" width="16" height="16" border="0" alt="{t}Send E-Mail{/t}" align="middle" /></a>&nbsp;
 	[<a href="mailto.php?userid={$userid}">{t}Send E-Mail{/t}</a>]
 </div>

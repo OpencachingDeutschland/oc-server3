@@ -27,6 +27,7 @@ function _sbn_click()
 	if (document.searchbyname.cachename.value == "")
 	{
 		alert("{t}Enter a name, please!{/t}");
+		resetbutton('submit_cachename');
 		return false;
 	}
 	return true;
@@ -37,6 +38,7 @@ function _sbft_click()
 	if (document.searchbyfulltext.fulltext.value == "")
 	{
 		alert("{t}Fill out the text field, please!{/t}");
+		resetbutton('submit_ft');
 		return false;
 	}
 
@@ -46,6 +48,7 @@ function _sbft_click()
 	   (document.searchbyfulltext.ft_pictures.checked == false))
 	{
 		alert("{t}You have to check at least one field!{/t}");
+		resetbutton('submit_ft');
 		return false;
 	}
 
@@ -57,21 +60,25 @@ function _sbd_click()
 	if (isNaN(document.searchbydistance.lon_h.value) || isNaN(document.searchbydistance.lon_min.value))
 	{
 		alert("{t}Longitude has to be a number!\nFormat: hh° mm.mmm{/t}");
+		resetbutton('submit_dist');
 		return false;
 	}
 	else if (isNaN(document.searchbydistance.lat_h.value) || isNaN(document.searchbydistance.lat_min.value))
 	{
 		alert("{t}Latitude has to be a number!\nFormat: hh° mm.mmm{/t}");
+		resetbutton('submit_dist');
 		return false;
 	}
 	else if (isNaN(document.searchbydistance.distance.value))
 	{
 		alert("{t}The maximum distance has to be a number!{/t}");
+		resetbutton('submit_dist');
 		return false;
 	}
 	else if (document.searchbydistance.distance.value <= 0 || document.searchbydistance.distance.value > 9999)
 	{
 		alert("{t}The distance has to be between 0 and 9999{/t}");
+		resetbutton('submit_dist');
 		return false;
 	}
 	return true;
@@ -82,6 +89,7 @@ function _sbplz_click()
 	if (document.searchbyplz.plz.value == "")
 	{
 		alert("{t}Enter the postal code, please!{/t}");
+		resetbutton('submit_plz');
 		return false;
 	}
 	return true;
@@ -92,6 +100,7 @@ function _sbort_click()
 	if (document.searchbyort.ort.value == "")
 	{
 		alert("{t}Enter the city, please!{/t}");
+		resetbutton('submit_city');
 		return false;
 	}
 	return true;
@@ -102,6 +111,7 @@ function _sbo_click()
 	if (document.searchbyowner.owner.value == "")
 	{
 		alert("{t}Enter the owner, please!{/t}");
+		resetbutton('submit_owner');
 		return false;
 	}
 	return true;
@@ -112,6 +122,7 @@ function _sbf_click()
 	if (document.searchbyfinder.finder.value == "")
 	{
 		alert("{t}Enter the username, please!{/t}");
+		resetbutton('submit_finder');
 		return false;
 	}
 	return true;
@@ -461,7 +472,7 @@ function switchAttributeCat2()
 		<tr>
 			<td>{t}Name:{/t}</td>
 			<td><input type="text" name="cachename" value="{cachename}" class="input200" /></td>
-			<td><input type="submit" value="{t}Search{/t}" class="formbuttons" /></td>
+			<td><input type="submit" name="submit_cachename" value="{t}Search{/t}" class="formbutton" onclick="javascript:submitbutton('submit_cachename')" /></td>
 		</tr>
 		<tr><td class="spacer" colspan="3"></td></tr>
 	</table>
@@ -534,7 +545,7 @@ function switchAttributeCat2()
 					<option value="nm" {sel_nm}>{t}Seamiles{/t}</option>
 				</select>
 			</td>
-			<td><input type="submit" value="{t}Search{/t}" class="formbuttons" /></td>
+			<td><input type="submit" name="submit_dist" value="{t}Search{/t}" class="formbutton" onclick="javascript:submitbutton('submit_dist')" /></td>
 		</tr>
 		<tr><td class="spacer" colspan="3"></td></tr>
 	</table>
@@ -592,7 +603,7 @@ function switchAttributeCat2()
 		<tr>
 			<td>{t}Postal code:{/t}</td>
 			<td><input type="text" name="plz" value="{plz}" maxlength="5" class="input50" /></td>
-			<td><input type="submit" value="{t}Search{/t}" class="formbuttons" /></td>
+			<td><input type="submit" name="submit_plz" value="{t}Search{/t}" class="formbutton" onclick="javascript:submitbutton('submit_plz')" /></td>
 		</tr>
 	</table>
 </form>
@@ -630,7 +641,7 @@ function switchAttributeCat2()
 		<tr>
 			<td>{t}City:{/t}</td>
 			<td><input type="text" name="ort" value="{ort}" class="input200" /></td>
-			<td><input type="submit" value="{t}Search{/t}" class="formbuttons" /></td>
+			<td><input type="submit" name="submit_city" value="{t}Search{/t}" class="formbutton" onclick="javascript:submitbutton('submit_city')" /></td>
 		</tr>
 	</table>
 </form>
@@ -687,7 +698,7 @@ function switchAttributeCat2()
 		<tr>
 			<td>Text:</td>
 			<td><input type="text" name="fulltext" value="{fulltext}" class="input200" /></td>
-			<td><input type="submit" value="{t}Search{/t}" class="formbuttons" /></td>
+			<td><input type="submit" name="submit_ft" value="{t}Search{/t}" class="formbutton" onclick="javascript:submitbutton('submit_ft')" /></td>
 		</tr>
 		<tr>
 			<td></td>
@@ -750,7 +761,7 @@ function switchAttributeCat2()
 		<tr>
 			<td>{t}Owner:{/t}</td>
 			<td><input type="text" name="owner" value="{owner}" maxlength="40" class="input200" /></td>
-			<td><input type="submit" value="{t}Search{/t}" class="formbuttons" /></td>
+			<td><input type="submit" name="submit_owner" value="{t}Search{/t}" class="formbutton" onclick="javascript:submitbutton('submit_owner')" /></td>
 		</tr>
 		<tr><td class="spacer" colspan="3"></td></tr>
 	</table>
@@ -806,7 +817,7 @@ function switchAttributeCat2()
 		<tr>
 			<td>{t}Username:{/t}</td>
 			<td><input type="text" name="finder" value="{finder}" maxlength="40" class="input200" /></td>
-			<td><input type="submit" value="{t}Search{/t}" class="formbuttons" /></td>
+			<td><input type="submit" name="submit_finder" value="{t}Search{/t}" class="formbutton" onclick="javascript:submitbutton('submit_finder')" /></td>
 		</tr>
 		<tr><td class="spacer" colspan="3"></td></tr>
 	</table>

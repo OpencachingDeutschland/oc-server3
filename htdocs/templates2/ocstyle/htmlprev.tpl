@@ -28,7 +28,7 @@
 							<tr><td colspan="2">&nbsp;</td></tr>
 							<tr>
 								<td>
-									<input type="submit" name="toStep2" value="{t}Next{/t}" class="formbuttons">
+									<input type="submit" name="toStep2a" value="{t}Next{/t}" class="formbutton" onclick="javascript:submitbutton('toStep2a')" />
 								</td>
 							</tr>
 						</table>
@@ -53,10 +53,10 @@
 							<tr><td colspan="2">&nbsp;</td></tr>
 							<tr>
 								<td alignment="left" width="50%">
-									<input type="submit" name="toStep1" value="{t}Back{/t}" class="formbuttons"/>
+									<input type="submit" name="toStep1" value="{t}Back{/t}" class="formbutton" onclick="javascript:submitbutton('toStep1')" />
 								</td>
 								<td align="right" width="50%">
-									<input type="submit" name="toStep3" value="{t}Preview{/t}" class="formbuttons"/>
+									<input type="submit" name="toStep3" value="{t}Preview{/t}" class="formbutton" onclick="javascript:submitbutton('toStep3')" />
 								</td>
 							</tr>
 						</table>
@@ -78,7 +78,7 @@
 						<input type="hidden" name="step" value="3" />
 						<input type="hidden" name="thetext" value="{$thetext|escape}" />
 						<input type="hidden" name="thehtml" value="{$thehtml|escape}" />
-						<input type="submit" name="toStep2" value="{t}Back{/t}" class="formbuttons"/>
+						<input type="submit" name="toStep2b" value="{t}Back{/t}" class="formbutton" onclick="javascript:submitbutton('toStep2b')" />
 					</form>
 				</p>
 			</td>

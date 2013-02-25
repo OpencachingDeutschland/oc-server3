@@ -15,7 +15,7 @@
 	$the_html = isset($_REQUEST['thehtml']) ? $_REQUEST['thehtml'] : '';
 	$step = isset($_REQUEST['step']) ? $_REQUEST['step']+0 : 1;
 
-	if (isset($_REQUEST['toStep2']))
+	if (isset($_REQUEST['toStep2a']) || isset($_REQUEST['toStep2b']))
 	{
 		$tpl->assign('step', 2);
 

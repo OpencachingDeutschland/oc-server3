@@ -18,8 +18,8 @@
 		<meta http-equiv="gallerimg" content="no" />
 		<meta http-equiv="cache-control" content="no-cache" />
 		<link rel="SHORTCUT ICON" href="favicon.ico">
-		<link rel="stylesheet" type="text/css" media="screen,projection" href="resource2/{$opt.template.style}/css/style_screen.css">
-		<link rel="stylesheet" type="text/css" media="print" href="resource2/{$opt.template.style}/css/style_print.css">
+		<link rel="stylesheet" type="text/css" media="screen,projection" href="resource2/{$opt.template.style}/css/style_screen.css?ft={$screen_css_time}">
+		<link rel="stylesheet" type="text/css" media="print" href="resource2/{$opt.template.style}/css/style_print.css?ft={$print_css_time}">
 		{literal}
 			<script type="text/javascript">
 			<!--

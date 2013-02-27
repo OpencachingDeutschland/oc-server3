@@ -5,6 +5,10 @@
  *
  *  Unicode Reminder メモ
  ***************************************************************************/
+
+// implementation incomplete in sys_main.tpl and missing in main.tpl
+// therefore not in use
+
 var nSessionTimeout = 30; // in minutes (default 30)
 nSessionTimeout -= 3;     // tolerance
 

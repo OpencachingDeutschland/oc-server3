@@ -133,7 +133,7 @@
 	 * 
 	 * other parameters may be customized
 	 */
-	$opt['session']['mode'] = SAVE_COOKIE;
+	$opt['session']['mode'] = SAVE_COOKIE;	 // don't change - other option "SAVE_SESSION" is not implemented properly
 	$opt['session']['cookiename'] = 'oc_devel'; // only with SAVE_COOKIE
 	$opt['session']['path'] = '/';
 	$opt['session']['domain'] = '';    // may be overwritten by $opt['domain'][...]['cookiedomain']

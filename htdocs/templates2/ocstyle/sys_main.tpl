@@ -18,8 +18,8 @@
 		<meta http-equiv="gallerimg" content="no" />
 		<meta http-equiv="cache-control" content="no-cache" />
 		<link rel="SHORTCUT ICON" href="favicon.ico">
-		<link rel="stylesheet" type="text/css" media="screen,projection" href="resource2/{$opt.template.style}/css/style_screen.css">
-		<link rel="stylesheet" type="text/css" media="print" href="resource2/{$opt.template.style}/css/style_print.css">
+		<link rel="stylesheet" type="text/css" media="screen,projection" href="resource2/{$opt.template.style}/css/style_screen.css?ft={$screen_css_time}">
+		<link rel="stylesheet" type="text/css" media="print" href="resource2/{$opt.template.style}/css/style_print.css?ft={$print_css_time}">
 		{literal}
 			<script type="text/javascript">
 			<!--
@@ -94,32 +94,35 @@
 			<div id="langstripe">
 
 				{* <!-- Navigation Level 1 --> *}
-				<div class="nav1-container">
-					{if $opt.session.url==true}
-						<div id="sessionWarn">
-							Automatische Abmeldung in <div id="sessionTimout">0</div>&nbsp;Minuten - <a href="#" onclick="cancelSessionTimeout()">Abbrechen</a>
-						</div>
-					{/if}
-					<div class="nav1" style="text-align: right; margin-right: 20px;">
-						{nocache}
-							{if ($login.userid==0)}
-								<b><form action="login.php" method="post" enctype="application/x-www-form-urlencoded" name="login" dir="ltr" style="display: inline;">{t}User{/t}:&nbsp;<input name="email" size="10" type="text" class="textboxes" value="" />&nbsp;{t}Password{/t}:&nbsp;<input name="password" size="10" type="password" class="textboxes" value="" />&nbsp;<input type="hidden" name="action" value="login" /><input type="hidden" name="target" value="{$opt.page.target|escape}" /><input name="LogMeIn" value="{t}Login{/t}" class="formbutton_header" style="width: 65px;" type="submit"></form></b>	
-							{else}
-								<b>{t}Logged in as{/t}:</b> <a href="myhome.php">{$login.username|escape}</a> - <a href="login.php?action=logout">{t}Logout{/t}</a>&nbsp;
+				<table class="nav1" cellspacing=0>
+					<tr>
+						{if $opt.session.url==true}
+							<div id="sessionWarn">
+								{* message is not properly formated and displays always 0 
+							   don't enable this feature until this is fixed and tested *}												
+								Automatische Abmeldung in <div id="sessionTimout">0</div>&nbsp;Minuten - <a href="#" onclick="cancelSessionTimeout()">Abbrechen</a>
+							</div>
+						{/if}
+						<td width="100%">
+							{nocache}
+								&nbsp;
+								{if $login.userid==0}
+									<b><form action="login.php" method="post" enctype="application/x-www-form-urlencoded" name="login" dir="ltr" style="display: inline;">{t}User{/t}:&nbsp;&nbsp;<input name="email" size="10" type="text" class="textboxes" value="" />&nbsp;&nbsp;&nbsp;{t}Password{/t}:&nbsp;&nbsp;<input name="password" size="10" type="password" class="textboxes" value="" />&nbsp;<input type="hidden" name="action" value="login" /><input type="hidden" name="target" value="{$opt.page.target|escape}" />&nbsp;<input name="LogMeIn" value="{t}Login{/t}" class="formbuttons" style="width: 65px;" type="submit"></form></b>	
+								{else}
+									<b>{t}Logged in as{/t} <a href="myhome.php">{$login.username|escape}</a></b> - <a href="login.php?action=logout">{t}Logout{/t}</a>
+								{/if}
+							{/nocache}
+						</td>
+						<td><strong>{t}Language:{/t}&nbsp;</strong></td>
+						<td>
+							{foreach from=$opt.template.locales key=localeKey item=localeItem}
+								{if $localeItem.show}
+								<a style="text-decoration: none;" href="index.php?locale={$localeKey}"><img src="{$localeItem.flag}" alt="{$localeItem.name|escape}" width="24px" height="18px" /></a>
 							{/if}
-						{/nocache}  
-					</div>
-				</div>
-				<div class="navflag">
-					<ul>
-						<li><strong>{t}Language:{/t}</strong></li>
-						{foreach from=$opt.template.locales key=localeKey item=localeItem}
-							{if $localeItem.show}
-								<li><a style="text-decoration: none;" href="index.php?locale={$localeKey}"><img src="{$localeItem.flag}" alt="{$localeItem.name|escape}" width="24px" height="24px" /></a></li>
-							{/if}
-						{/foreach}
-						<li>&nbsp;&nbsp;&nbsp;&nbsp;<strong>{t}Country:{/t}</strong></li>
-						<li>
+							{/foreach}
+						</td>
+						<td>&nbsp;&nbsp;&nbsp;&nbsp;<strong>{t}Country:{/t}&nbsp;</strong></td>
+						<td>
 							<select id="usercountry" onclick="javascript:usercountry_change()">
 								{foreach from=$opt.template.usercountrieslist item=countryItem name=userCountryList}
 									{if $countryItem.begin_group==1 || $smarty.foreach.userCountryList.first}
@@ -137,10 +140,10 @@
 									{/if}
 									<option value="{$countryItem.country|escape}"{if $opt.template.country==$countryItem.country} selected="selected"{/if}>{$countryItem.name|escape}</option>
 								{/foreach}
-							</select>
-						</li>
-					</ul>
-				</div>
+							</select>&nbsp;
+						</td>
+					</tr>
+				</table>
 			</div>
 			<div class="page-container-1" style="position: relative;">
 

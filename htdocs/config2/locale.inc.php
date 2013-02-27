@@ -21,25 +21,25 @@
 	 *
 	 */
 	$opt['template']['locales']['DE']['show'] = true;
-	$opt['template']['locales']['DE']['flag'] = 'images/flag/DE.gif';
+	$opt['template']['locales']['DE']['flag'] = 'images/flag/DE.png';
 	$opt['template']['locales']['DE']['name'] = 'Deutsch';
 	$opt['template']['locales']['FR']['show'] = true;
-	$opt['template']['locales']['FR']['flag'] = 'images/flag/FR.gif';
+	$opt['template']['locales']['FR']['flag'] = 'images/flag/FR.png';
 	$opt['template']['locales']['FR']['name'] = 'Français';
 	$opt['template']['locales']['NL']['show'] = true;
-	$opt['template']['locales']['NL']['flag'] = 'images/flag/NL.gif';
+	$opt['template']['locales']['NL']['flag'] = 'images/flag/NL.png';
 	$opt['template']['locales']['NL']['name'] = 'Nederlands';
 	$opt['template']['locales']['EN']['show'] = true;
-	$opt['template']['locales']['EN']['flag'] = 'images/flag/EN.gif';
+	$opt['template']['locales']['EN']['flag'] = 'images/flag/EN.png';
 	$opt['template']['locales']['EN']['name'] = 'English';
 	$opt['template']['locales']['PL']['show'] = true;
-	$opt['template']['locales']['PL']['flag'] = 'images/flag/PL.gif';
+	$opt['template']['locales']['PL']['flag'] = 'images/flag/PL.png';
 	$opt['template']['locales']['PL']['name'] = 'Polski';
 	$opt['template']['locales']['IT']['show'] = true;
-	$opt['template']['locales']['IT']['flag'] = 'images/flag/IT.gif';
+	$opt['template']['locales']['IT']['flag'] = 'images/flag/IT.png';
 	$opt['template']['locales']['IT']['name'] = 'Italiano';
 	$opt['template']['locales']['RU']['show'] = true;
-	$opt['template']['locales']['RU']['flag'] = 'images/flag/RU.gif';
+	$opt['template']['locales']['RU']['flag'] = 'images/flag/RU.png';
 	$opt['template']['locales']['RU']['name'] = 'Русский';
 	$opt['template']['locales']['ES']['show'] = true;
 	$opt['template']['locales']['ES']['flag'] = 'images/flag/ES.png';
@@ -48,16 +48,16 @@
 	$opt['template']['locales']['SV']['flag'] = 'images/flag/SE.png';
 	$opt['template']['locales']['SV']['name'] = 'Svenska';
 	$opt['template']['locales']['NO']['show'] = true; // no_NO
-	$opt['template']['locales']['NO']['flag'] = 'images/flags/no.gif';
+	$opt['template']['locales']['NO']['flag'] = 'images/flags/no.png';
 	$opt['template']['locales']['NO']['name'] = 'Norsk';
 	$opt['template']['locales']['DA']['show'] = true; // da_DK
-	$opt['template']['locales']['DA']['flag'] = 'images/flags/dk.gif';
+	$opt['template']['locales']['DA']['flag'] = 'images/flags/dk.png';
 	$opt['template']['locales']['DA']['name'] = 'Danske';
 	$opt['template']['locales']['PT']['show'] = true; // pt_PT
-	$opt['template']['locales']['PT']['flag'] = 'images/flags/pt.gif';
+	$opt['template']['locales']['PT']['flag'] = 'images/flags/pt.png';
 	$opt['template']['locales']['PT']['name'] = 'Portuguesa';
 	$opt['template']['locales']['JA']['show'] = true; // ja_JP
-	$opt['template']['locales']['JA']['flag'] = 'images/flag/JP.gif';
+	$opt['template']['locales']['JA']['flag'] = 'images/flag/JP.png';
 	$opt['template']['locales']['JA']['name'] = '日本語';
 
 	// geokrety language key association

@@ -46,8 +46,8 @@ div#langstripe {
 	top: 0;
 	left: 0;
 	width: 100%;
-	padding-top: 3px;
-	height: 28px;
+	padding-top: 0;
+	height: 31px;
 	background: #707070 url(../images/bg-langstripe.png) 0 100% repeat-x;
 	color: black;
 	z-index: 5;
@@ -124,7 +124,6 @@ div#bg2 {display: none;}
 	border: 0px none;
 }
 
-
 .site-name {
 	width: 300px;
 	height: 60px;
@@ -160,28 +159,19 @@ div#bg2 {display: none;}
 .site-slogan a {color: rgb(234,239,247); text-decoration: underline;}
 .site-slogan a:hover {text-decoration: none; color: rgb(50,50,50);}
 
-/*--------------------------*/
-/* 2.2 - Navigation - Flags */
-/*--------------------------*/
-.navflag-container {width: 970px; top: 14px; position: absolute; z-index: 2; background-color: transparent;}
-.navflag {margin: 0px; padding: 0px; font-size: 1.0em; }	
-.navflag ul {float: right; margin: 0px; padding: 0px 20px 0px 0px;}	
-.navflag li {display: inline; list-style: none; margin: 0px; padding: 0px;}
-.navflag li a {margin: 0px; padding: 0px 0px 0px 1px;}
-.navflag a:hover {color: rgb(0,0,0); text-decoration: none;}
-.img-navflag {display: inline; height: 14px; margin: 0px; padding: 0px; border: none;}
-
 /*----------------------------*/
 /* 2.3 - Navigation - Level 1 */
 /*----------------------------*/
-/* .nav1-container {width: 970px; top: 35px; position: absolute; z-index: 3; background: transparent;} */
-.nav1-container {left: 5px; background: transparent; position: absolute; float: left;} 
+.nav1 {
+	height:29px;
+	}
 
-.nav1 {margin: 3px; padding: 0px; font-family: verdana, arial, sans serif; font-size: 1.0em;}
-.nav1 ul {float: right; margin: 0px; padding: 0px 20px 0px 0px; border-left: solid 1px rgb(115,162,182); background-color: rgb(255,255,255); font-weight: bold;}	
-.nav1 li {display: inline; list-style: none; margin: 0px; padding: 0px;}
-.nav1 li a {display: block; float: left; margin: 0px; padding: 2px 5px 2px 5px; border-right: solid 1px rgb(115,162,182); color: rgb(115,162,182); text-decoration: none; font-size: 10px;}
-.nav1 a:hover, .nav2 a.selected {color: rgb(50,50,50); text-decoration: none;}
+.nav1 td {
+	font-family: verdana, arial, sans serif;
+	font-size: 1.0em;
+	vertical-align: middle;
+	white-space:nowrap;
+	}
 
 /*----------------------------*/
 /* 2.4 - Navigation - Level 2 */

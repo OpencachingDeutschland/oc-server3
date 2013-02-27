@@ -432,13 +432,16 @@ function __autoload($class_name)
 	function tpl_BuildTemplate($dbdisconnect=true)
 	{
 		//template handling vars
-		global $stylepath, $tplname, $vars, $langpath, $locale, $opt, $oc_nodeid;
+		global $style, $stylepath, $tplname, $vars, $langpath, $locale, $opt, $oc_nodeid;
 		//language specific expression
 		global $error_pagenotexist;
 		//only for debbuging
 		global $b, $bScriptExecution;
 		// country dropdown
 		global $tpl_usercountries;
+
+		tpl_set_var('screen_css_time',filemtime($opt['rootpath'] . "resource2/" . $style . "/css/style_screen.css"));
+		tpl_set_var('print_css_time',filemtime($opt['rootpath'] . "resource2/" . $style . "/css/style_print.css"));
 
 		if (isset($bScriptExecution))
 		{

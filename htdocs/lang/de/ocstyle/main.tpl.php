@@ -62,7 +62,7 @@
 		<meta http-equiv="gallerimg" content="no" />
 		<meta http-equiv="cache-control" content="no-cache" />
 		<link rel="SHORTCUT ICON" href="favicon.ico">
-		<link rel="stylesheet" type="text/css" media="screen,projection" href="resource2/{style}/css/style_screen.css">
+		<link rel="stylesheet" type="text/css" media="screen,projection" href="resource2/{style}/css/style_screen.css?ft={screen_css_time}">
       <script type="text/javascript">
 				<!--
 <?php
@@ -108,38 +108,31 @@
 				}
 				//-->
       </script>
-  	<link rel="stylesheet" type="text/css" media="print" href="resource2/{style}/css/style_print.css">
+		<link rel="stylesheet" type="text/css" media="print" href="resource2/{style}/css/style_print.css?ft={print_css_time}">
 		<script type="text/javascript" src="resource2/{style}/js/enlargeit.js"></script>
 		{htmlheaders}
 	</head>
 
 	<body>
 		<div id="overall">
-				<div id="langstripe">
+			<div id="langstripe">
 
 				<!-- Navigation Level 1 -->
-				<div class="nav1-container">
-					<div class="nav1" style="text-align: right; margin-right: 20px;">
-						{loginbox}
-					</div>
-				</div>
-
-					<div class="navflag">
-						<ul>
-							<li><strong>{t}Language:{/t}</strong></li>
+				<table class="nav1" cellspacing=0>
+					<tr>
+						<td width="100%">
+							&nbsp; {loginbox}
+						</td>
+						<td><strong>{t}Language:{/t}&nbsp;</strong></td>
+						<td>
 <?php
-							$nbsp = "";
 							foreach ($opt['template']['locales'] AS $k => $lang)
-							{
 								if ($lang['show'] == true)
-									echo '<li>' . $nbsp . '<a style="text-decoration: none;" href="index.php?locale=' . $k . '"><img src="' . $lang['flag'] . '" alt="' . $lang['name'] . '" width="24px" height="24px" /></a></li>';
-								// insert space between flags to match search.php layout with other pages (see RT ticket #4505);
-								// reason of different flag spacing is unknown
-								$nbsp = "&nbsp;";
-							}
+									echo '<a style="text-decoration: none;" href="index.php?locale=' . $k . '"><img src="' . $lang['flag'] . '" alt="' . $lang['name'] . '" width="24px" height="18px" /></a> '; 
 ?>
-            	<li>&nbsp;&nbsp;&nbsp;&nbsp;<strong>{t}Country:{/t}</strong></li>
-							<li>
+						</td>
+						<td>&nbsp;&nbsp;&nbsp;&nbsp;<strong>{t}Country:{/t}&nbsp;</strong></td>
+						<td>
 								<select id="usercountry" onclick="javascript:usercountry_change()">
 <?php
 									global $tpl_usercountries;
@@ -164,11 +157,11 @@
 										echo '<option value="' . htmlspecialchars($tpl_usercountries[$i]['country'], ENT_COMPAT, 'UTF-8') . '"' . (($sUserCountry==$tpl_usercountries[$i]['country']) ? ' selected="selected"' : '') . '>' . htmlspecialchars($tpl_usercountries[$i]['name'], ENT_COMPAT, 'UTF-8') . '</option>';
 									}
 ?>
-								</select>
-							</li>
-            </ul>
-					</div>
-				</div>
+								</select>&nbsp;
+            </td>
+					</tr>
+				</table>
+			</div>
 		  <div class="page-container-1" style="position: relative;">
 				<div id="bg1">&nbsp;</div>
 				<div id="bg2">&nbsp;</div>

@@ -141,7 +141,7 @@ ul#statmenu { padding: 0px; margin: 0px;}
 /******************************************************/
 /* SECTION 4 - SPECIFIC CLASSES FOR LAYOUTS #2 and #3 */
 /******************************************************/
-.notice {overflow: hidden; width: 735px; height: 24px; margin: 0px 0px 0px 0px; padding: 0px 16px 12px 20px; color: rgb(88,144,168); font-weight: italic; font-size: 11px; background-image: url(../images/misc/16x16-info.png); background-position: top left; background-repeat:no-repeat;}
+.notice {overflow: hidden; width: 735px; height: 24px; margin: 0px 0px 0px 0px; padding: 0px 16px 12px 20px; color: rgb(88,144,168); font-style: italic; font-size: 11px; background-image: url(../images/misc/16x16-info.png); background-position: top left; background-repeat:no-repeat;}
 .warning {overflow: hidden;  width: 735px; height: 24px; border: 1px solid black; background-color: rgb(240,100,100); margin: 0px 0px 0px 0px; padding: 8px 0px 0px 32px; color: rgb(50,50,50); font-weight: bold; font-size: 12px; background-image: url(../images/misc/32x32-impressum.png); background-position: top left; background-repeat:no-repeat;}
 
 .errormsg {color: rgb(240,100,100); font-weight: bold;}
@@ -205,6 +205,8 @@ ul.indent {margin: 0px 0px 7px 15px; padding: 0px 0px 0px 15px; list-style-type:
 ol {margin: 0px 0px 0px 9px; padding: 0px 0px 0px 25px; list-style-type: decimal; list-style-position: outside; font-size: 120%;}
 ul.linklist-noindent {margin: -0.3em 0px 0.5em 0px; padding: 0px; list-style-type: none; line-height: 1.2em; font-size: 120%; }
 ul.linklist-indent {margin: -0.3em 0px 0.5em 0px; padding: 0px 0px 0px 10px; list-style-type: none; line-height: 1.2em; font-size: 120%; }
+div.changelog ul {font-size: 105%; margin: 0px 0px 10px 0px; }
+div.changelog ul li {margin: 0px 0px 0.1em 0px; }
 
 /* Tables */
 .table {font-size: 100%; clear: left; padding: 0px; margin: 0.5em 0px 0.2em 0px; border: solid 0px rgb(150,150,150); empty-cells: show; border-collapse: collapse; background-color: rgb(255,255,255);}
@@ -212,6 +214,12 @@ ul.linklist-indent {margin: -0.3em 0px 0.5em 0px; padding: 0px 0px 0px 10px; lis
 .table td {padding: 2px 7px 2px 7px; border: solid 0px rgb(150,150,150); text-align: left; font-size: 120%;}
 .table th {margin: 0px; background-color: rgb(127,162,202); padding: 2px 7px 2px 7px; border: solid 0px rgb(150,150,150); empty-cells: show; text-align: left; font-size: 120%; color: rgb(255,255,255);	}
 .table-caption {margin: 0.5em 0px 1.0em 30px; padding: 0px; clear: both; text-align: left; font-size: 120%;}
+
+.narrowtable {font-size: 10px; line-height: 2.0em; clear: left; padding: 0px; margin: 0.5em 0px 0.2em 0px; border: solid 0px rgb(150,150,150); empty-cells: show; border-collapse: collapse; background-color: rgb(255,255,255);}
+.narrowtable tr {margin: 0px; padding: 0px;}
+.narrowtable td {padding: 0 7px 0 7px; border: solid 0px rgb(150,150,150); text-align: left; font-size: 120%;}
+.narrowtable th {margin: 0px; background-color: rgb(127,162,202); padding: 0 7px 0 7px; border: solid 0px rgb(150,150,150); empty-cells: show; text-align: left; font-size: 120%; color: rgb(255,255,255);	}
+.narrowtable-caption {margin: 0.5em 0px 1.0em 30px; padding: 0px; clear: both; text-align: left; font-size: 120%;}
 
 /* Images */
 .img-left-noborder-notopmargin {float: left; margin: 0px 10px 0px 0px;}
@@ -222,6 +230,11 @@ ul.linklist-indent {margin: -0.3em 0px 0.5em 0px; padding: 0px 0px 0px 10px; lis
 .img-right-noborder-topmargin {float: right; margin: 3px 0px 0px 10px;}
 .img-right-border-notopmargin {float: right; margin: 0px 0px 0px 10px; border: solid 1px rgb(150,150,150);}
 .img-right-border-topmargin {float: right; margin: 3px 0px 0px 10px; border: solid 1px rgb(150,150,150);}
+
+/* Other */
+div.default {
+	font-size:110%;
+}
 
 /*--------------------*/
 /* 6.2 - Sidebar Area */
@@ -486,17 +499,55 @@ input.radio {border:0px; border-width: 0px; width:12px; height:12px; background-
 select {border:1px solid black; background-color:white; padding:1px; font-size:12px; color: black;}
 
 
-input.formbuttons {background-color:rgb(219,230,241); width:120px; border:1px solid black; padding:0px; color: #000000; }
+input.formbutton_header {
+	width:65px;
+	border:1px solid black;
+	background-color:#dbe6f1;
+	color: #000000;
+	padding:0;
+	}
+
+input.formbutton {
+	width:120px;
+	border:1px solid #5f90bb;
+	padding:2px 0px 2px 0;
+	background-color:#dbe6f1;
+	color: #000000;
+	border-radius: 3px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	}
+
+input.formbutton:hover {
+	background-color:#e5eef5;
+	box-shadow: 0px 0px 2px #555;
+	-moz-box-shadow: 0px 0px 2px #555;
+	-webkit-box-shadow: 0px 0px 2px #555;
+	}
+
+input.formbutton_active {
+	width:120px;
+	border:1px solid #ffe9c5;
+	padding:2px 0px 2px 0;
+	color: #000000;
+	background-color:#ffe9c5;
+	border-radius: 3px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	box-shadow: 0px 0px 2px #555;
+	-moz-box-shadow: 0px 0px 2px #555;
+	-webkit-box-shadow: 0px 0px 2px #555;
+	}
 
 .menuBar
 {
 	background-color:#F0F0EE;
 	margin:2px 2px 2px 2px;
-	padding:2px 2px 2px 2px;
+	padding:2px 4px 2px 4px;
 	border:solid 1px #CCCCCC;
 	font-size:smaller;
-	width:155px;
 	cursor:default;
+	float:left;
 }
 
 .buttonNormal
@@ -625,3 +676,6 @@ div.gsc-resultsRoot, div.gsc-branding-text, img.gsc-branding-img {
 	font-size: 14px;
 }
 
+.garmintext {
+	font-size: 1.1em;
+}

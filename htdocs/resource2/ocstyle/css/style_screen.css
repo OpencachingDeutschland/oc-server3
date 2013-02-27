@@ -167,7 +167,6 @@ div#bg2 {display: none;}
 	}
 
 .nav1 td {
-	font-family: verdana, arial, sans serif;
 	font-size: 1.0em;
 	vertical-align: middle;
 	white-space:nowrap;
@@ -589,7 +588,7 @@ input.checkbox {width:12px; height:12px; font-size:12px; border:0;}
 
 input.radio {border:0px; border-width: 0px; width:12px; height:12px; background-color: transparent;}
 
-select {border:1px solid black; background-color:white; padding:1px; font-size:12px; color: black;}
+select {border:1px solid black; background-color:white; padding:1px; font-size:11px; color: black;}
 
 input.formbutton_header {
 	width:65px;

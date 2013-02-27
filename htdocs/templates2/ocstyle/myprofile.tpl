@@ -19,7 +19,7 @@
 			<p style="line-height: 1.6em;">
 				{t}The following informations are stored in your userprofile:{/t}<br />
 				<img src="resource2/{$opt.template.style}/images/misc/hint.gif" border="0" width="15" height="11" alt="" align="middle" />
-				<span style="color:#666666; font-size:10px;">{t}Gray entries will be hidden to other users.{/t}</span>
+				<span style="color:#808080; font-size:10px;">{t}Gray entries will be hidden to other users.{/t}</span>
 			</p>
 		</div>
 
@@ -42,15 +42,15 @@
 			<tr><td class="spacer" colspan="2"></td></tr>
 
 			<tr>
-				<td>{t}E-Mail-Address:{/t}</td>
-				<td><font color="#666666">{$email|escape}</font></td>
+				<td><font color="#808080">{t}E-Mail-Address:{/t}</font></td>
+				<td><font color="#808080">{$email|escape}</font></td>
 			</tr>
 			<tr><td class="spacer" colspan="2"></td></tr>
 
 			<tr>
-				<td>{t}First name:{/t}</td>
+				<td><font color="#808080">{t}First name:{/t}</font></td>
 				<td>
-					<font color="#666666">
+					<font color="#808080">
 						{if $edit==true}
 							<input type="text" name="firstName" value="{$firstName|escape}" maxlength="60" size="30" />
 							{if $firstNameError==true}
@@ -64,9 +64,9 @@
 			</tr>
 
 			<tr>
-				<td>{t}Last name:{/t}</td>
+				<td><font color="#808080">{t}Last name:{/t}</font></td>
 				<td>
-					<font color="#666666">
+					<font color="#808080">
 						{if $edit==true}
 							<input type="text" name="lastName" value="{$lastName|escape}" maxlength="60" size="30" />
 							{if $lastNameError==true}
@@ -91,7 +91,7 @@
 							{/foreach}
 						</select>
 						{if $showAllCountries==false}
-							<input type="submit" name="showAllCountriesSubmit" value="{t}Show all{/t}" />
+							&nbsp;&nbsp;<input type="submit" name="showAllCountriesSubmit" value="{t}Show all{/t}" class="formbutton" onclick="javascript:submitbutton('showAllCountriesSubmit')" />
 						{/if}
 						{if $countryError==true}
 							<span class="errormsg">{t}The country is not valid.{/t}</span>
@@ -104,9 +104,9 @@
 			<tr><td class="spacer" colspan="2"></td></tr>
 
 			<tr>
-				<td valign=top>{t}Home coordinates:{/t}</td>
+				<td valign=top><font color="#808080">{t}Home coordinates:{/t}</font></td>
 				<td>
-					<font color="#666666">
+					<font color="#808080">
 						{if $edit==true}
 							{coordinput prefix="coord" lat=$coordsDecimal.lat lon=$coordsDecimal.lon}
 						{else}
@@ -118,16 +118,16 @@
 			<tr><td class="spacer" colspan="2"></td></tr>
 
 			<tr>
-				<td valign=top>{t}Notifications:{/t}</td>
+				<td valign=top ><font color="#808080">{t}Notifications:{/t}</font></td>
 				<td>
-					<font color="#666666">
+					<font color="#808080">
 						{if $edit==true}
 							{capture name=inputfield}
 								<input type="text" name="notifyRadius" maxlength="3" value="{$notifyRadius|escape}" class="input30" />
 							{/capture}
 							{t 1=$smarty.capture.inputfield}I want to be notified about new Geocaches within an radius of %1 km.{/t}<br />
 							<img src="resource2/{$opt.template.style}/images/misc/hint.gif" border="0" width="15" height="11" align="middle">
-							<span style="color:#666666; font-size:10px;">
+							<span style="color:#808080; font-size:10px;">
 								{t}The notification radius must be not more than 150 km. To deaktivate notifications, set the radius to 0.{/t}
 							</span>
 							{if $notifyRadiusError==true}
@@ -159,7 +159,7 @@
 					{/if}
 					{if $edit==true}
 						<input type="checkbox" name="permanentLogin" value="1" {if $permanentLogin==true}checked="checked"{/if} id="l_using_permanent_login" class="checkbox" />
-						<label for="l_using_permanent_login"><font color="#666666">{t}Don't log me out after 15 minutes inaktivity.{/t}</font></label><br/>
+						<label for="l_using_permanent_login"><font color="#808080">{t}Don't log me out after 15 minutes inaktivity.{/t}</font></label><br/>
 						<div style="padding-left:25px;">
 							<img src="resource2/{$opt.template.style}/images/misc/hint.gif" border="0" width="15" height="11" align="middle">
 							<font style="color:#FF0000; font-size:10px;">
@@ -169,16 +169,16 @@
 						</div>
 					{else}
 						{if $permanentLogin==true}
-							<li><font color="#666666">{t}Don't log me out after 15 minutes inaktivity.{/t}</font></li>
+							<li><font color="#808080">{t}Don't log me out after 15 minutes inaktivity.{/t}</font></li>
 						{/if}
 					{/if}
 					{if $edit==true}
 						<input type="checkbox" name="noHTMLEditor" value="1" {if $noHTMLEditor==true}checked="checked"{/if} id="l_no_htmledit" class="checkbox" /> 
-						<label for="l_no_htmledit"><font color="#666666">{t}Don't use an HTML editor by default.{/t}</font></label>
+						<label for="l_no_htmledit"><font color="#808080">{t}Don't use an HTML editor by default.{/t}</font></label>
 						<br />
 					{else}
 						{if $useHTMLEditor==true}
-							<li><font color="#666666">{t}Don't use an HTML editor by default.{/t}</font></li>
+							<li><font color="#808080">{t}Don't use an HTML editor by default.{/t}</font></li>
 						{/if}
 					{/if}
 				</td>
@@ -186,7 +186,7 @@
 			<tr><td class="spacer" colspan="2"></td></tr>
 
 			<tr>
-				<td>{t}Registered since:{/t}</td>
+				<td>{t}Registered since{/t}:</td>
 				<td>{$registeredSince|date_format:$opt.format.datelong}</td>
 			</tr>
 

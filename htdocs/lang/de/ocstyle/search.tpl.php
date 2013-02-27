@@ -270,15 +270,19 @@ function switchAttributeCat2()
 
 <form name="optionsform" style="display:inline;">
 
+<div id="scriptwarning" style="margin:0 5px 0 5px;">
+	<p><span class="errormsg">{t}JavaScrupt is not activated, you cannot use the following options (sorting to attributes) - basic search is supported nevertheless.{/t}</span></p>
+</div>
+
 <div class="searchdiv">
 	<table class="table">
 		
-		<tr><td class="spacer" colspan="3"><span id="scriptwarning" class="errormsg">{t}JavaScrupt is not activated, you cannot use the following options - basic search is supported nevertheless.{/t}</span></td></tr>
 		<tr>
 			<td style="vertical-align:top">{t}Sorting of result:{/t}</td>
 			<td colspan="2">
-				<input type="radio" name="sort" value="byname" index="0" id="l_sortbyname" class="radio" onclick="javascript:sync_options(this)" {byname_checked}> <label for="l_sortbyname">{t}Cachename{/t}</label>&nbsp;
-				<input type="radio" name="sort" value="bydistance" index="1" id="l_sortbydistance" class="radio" onclick="javascript:sync_options(this)" {bydistance_checked} {bydistance_enabled} accept=""> <label for="l_sortbydistance">{t}Distance from <a href="myprofile.php">user-profile home coordinates</a>{/t}</label><br />
+				<div style="padding:0 0 5px 0">
+					<input type="radio" name="sort" value="byname" index="0" id="l_sortbyname" class="radio" onclick="javascript:sync_options(this)" {byname_checked}> <label for="l_sortbyname">{t}Cachename{/t}</label>&nbsp;
+					<input type="radio" name="sort" value="bydistance" index="1" id="l_sortbydistance" class="radio" onclick="javascript:sync_options(this)" {bydistance_checked} {bydistance_enabled} accept=""> <label for="l_sortbydistance">{t}Distance from <a href="myprofile.php">user-profile home coordinates</a>{/t}</label></div>
 				<input type="radio" name="sort" value="bycreated" index="2" id="l_sortbycreated" class="radio" onclick="javascript:sync_options(this)" {bycreated_checked}> <label for="l_sortbycreated">{t}Listed since{/t}</label>&nbsp;
 				<input type="radio" name="sort" value="bylastlog" index="3" id="l_sortbylastlog" class="radio" onclick="javascript:sync_options(this)" {bylastlog_checked}> <label for="l_sortbylastlog">{t}Last log{/t}</label>
 			</td>
@@ -411,7 +415,7 @@ function switchAttributeCat2()
 
 <script language="javascript">
 <!--
-	document.getElementById("scriptwarning").firstChild.nodeValue = "";
+	document.getElementById("scriptwarning").style.display = "none";
 
 	// hide advanced attributes if none is selected
 	var i = 0;

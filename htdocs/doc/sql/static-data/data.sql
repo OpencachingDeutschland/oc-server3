@@ -7256,7 +7256,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1839', 'EN', 'You must select a search to overwrite.', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1846', 'EN', 'Please select waypoint type ', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1847', 'EN', 'invalid coordinate ', '2013-02-19 05:48:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1848', 'DE', 'Registered since', '2013-02-19 05:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1848', 'EN', 'Registered since', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'ES', 'Reordenar ID', '2010-12-09 00:17:55');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'ES', 'La base de datos no se pudo conectar.', '2010-12-09 00:17:55');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'ES', 'En pruebas - por favor, no entre.', '2010-12-09 00:17:55');

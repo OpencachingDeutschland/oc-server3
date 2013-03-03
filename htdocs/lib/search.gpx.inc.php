@@ -532,7 +532,7 @@
 			mysql_free_result($rsLogs);
 		}
 
-		// first 20 logs (except current users)
+		// newest 20 logs (except current users)
 		$rsLogs = sql_slave("SELECT `cache_logs`.`id`, `cache_logs`.`type`, `cache_logs`.`date`, `cache_logs`.`text`, `user`.`username`, `user`.`user_id` FROM `cache_logs`, `user` WHERE `cache_logs`.`user_id`=`user`.`user_id` AND `cache_logs`.`cache_id`=&1 AND `user`.`user_id`!=&2 ORDER BY `cache_logs`.`date` DESC LIMIT 20", $r['cacheid'], $user_id);
 		while ($rLog = sql_fetch_array($rsLogs))
 		{

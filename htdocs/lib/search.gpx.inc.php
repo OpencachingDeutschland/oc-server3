@@ -29,7 +29,7 @@
     <name>{waypoint}</name>
     <desc>{cachename}</desc>
     <src>www.opencaching.de</src>
-    <url>http://www.opencaching.de/viewcache.php?cacheid={cacheid}</url>
+    <url>' . $absolute_server_URI . 'viewcache.php?cacheid={cacheid}</url>
     <urlname>{cachename}</urlname>
     <sym>{sym}</sym>
     <type>Geocache|{type}</type>
@@ -445,8 +445,8 @@
 ', $thisline);
 
 		$thisline = mb_ereg_replace('{shortdesc}', xmlentities($r['short_desc']), $thisline);
-		$thisline = mb_ereg_replace('{desc}', xmlentities($r['desc']), $thisline);
-		$thisline = mb_ereg_replace('{images}', getPictures($r['cacheid']), $thisline);
+		$thisline = mb_ereg_replace('{desc}', xmlentities(str_replace('<img src="images/uploads/','<img src="' . $absolute_server_URI . 'images/uploads/', $r['desc'])), $thisline);
+		$thisline = mb_ereg_replace('{images}', xmlentities(getPictures($r['cacheid'])), $thisline);
 
 		if (isset($gpxType[$r['type']]))
 		$thisline = mb_ereg_replace('{type}', $gpxType[$r['type']], $thisline);
@@ -692,20 +692,25 @@
 		return null;
 	}
 
-  // based on oc.pl code
+  // based on oc.pl code, but embedded thumbs instead of full pictures
+  // (also to hide spoilers first)
 	function getPictures($cacheid)
 	{
-		global $translate;
+		global $translate, $absolute_server_URI;
 
 		$retval = "";
-		$rs = sql_slave("SELECT uuid, title, url, spoiler FROM pictures WHERE object_id='&1' AND object_type=2 AND display=1 ORDER BY date_created", $cacheid);
+		$rs = sql_slave("SELECT uuid, title, url, spoiler FROM pictures
+		                 WHERE object_id='&1' AND object_type=2 AND display=1 
+                     ORDER BY date_created", $cacheid);
 
 		while ($r = sql_fetch_array($rs))
 		{
-			$retval .= '&lt;img src="' . $r['url'] . '"&gt;&lt;br /&gt;';
+			$retval .= '<div style="float:left; padding:8px"><a href="' . $r['url'] . '" target="_blank">' .
+			           '<img src="' . $absolute_server_URI . 'thumbs.php?uuid=' . $r["uuid"]. '" >' .
+			           '</a><br />' . $r['title'];
 			if ($r['spoiler'])
-			  $retval .= $translate->t('Spoiler','',basename(__FILE__), __LINE__) . ': ';
-			$retval .= xmlentities($r['title']) . '&lt;br /&gt; ';
+				$retval .= ' (' . $translate->t('click on spoiler to display','',basename(__FILE__), __LINE__) . ')';
+			$retval .= "</div>";
 		}
 		mysql_free_result($rs);
 

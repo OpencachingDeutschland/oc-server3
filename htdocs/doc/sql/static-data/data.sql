@@ -2136,7 +2136,6 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1677', 'Drag Zo
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1678', 'Enter a search text, please!', '2010-09-19 00:23:51');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1680', 'Waypoint %1 not found!', '2010-09-27 00:19:52');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1681', 'D/T:', '2010-09-27 00:19:52');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1682', 'Maps \&copy; 2009 <a href=\"http://www.openstreetmap.org/\">OpenStreetMap</a> Contributors', '2010-09-27 00:19:52');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1683', 'Error: Unable to download the search result (HTTP error code %1)', '2010-09-27 00:19:52');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1684', 'Error: Unable to download the search result. The data was not available on the server.', '2010-09-27 00:19:52');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1685', 'There are %1 Geocaches in the selected area, matching the filter options. Please zoom in to display the caches.', '2010-09-27 00:19:52');
@@ -2314,6 +2313,9 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1872', 'Cache i
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1873', 'classic OC', '2013-03-03 00:00:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1874', 'OKAPI style', '2013-03-03 00:00:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1875', 'You must be logged in to change map settings.', '2013-03-03 00:00:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1876', 'Map data \&copy; <a href=\"http://www.openstreetmap.org/copyright\" target=\"_blank\">OpenStreetMap</a> contributors', '2013-03-03 00:00:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1877', 'tiles provided by <a href=\"http://www.mapquest.com/\" target=\"_blank\">MapQuest</a>', '2013-03-03 00:00:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1878', 'Map data \&copy; <a href=\"http://www.openstreetmap.org/copyright\" target=\"_blank\">OpenStreetMap</a> and <a href=\"http://www.thunderforest.com/opencyclemap/\" target=\"_blank\">OpenCycleMap</a> contributors', '2013-03-03 00:00:00');
 
 -- Table sys_trans_ref
 SET NAMES 'utf8';
@@ -4280,7 +4282,6 @@ INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1677'
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1678', './templates2/ocstyle/map2.tpl', '582');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1680', './templates2/ocstyle/map2.tpl', '717');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1681', './templates2/ocstyle/map2.tpl', '790');
-INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1682', './templates2/ocstyle/map2.tpl', '829');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1683', './templates2/ocstyle/map2.tpl', '1061');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1684', './templates2/ocstyle/map2.tpl', '1074');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1685', './templates2/ocstyle/map2.tpl', '1218');
@@ -5718,7 +5719,6 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1678', 'DE', 'Bitte Suchtext eingeben!', '2010-09-27 00:28:17');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1680', 'DE', 'Wegpunkt %1 nicht gefunden!', '2010-09-27 00:28:04');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1681', 'DE', 'D/T:', '2010-09-27 00:27:45');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1682', 'DE', 'Kartendaten \&copy; 2009 <a href=\"http://www.openstreetmap.org/\">OpenStreetMap</a> Contributors', '2010-09-27 00:27:38');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1683', 'DE', 'Fehler: Das Suchergebnis konnte nicht heruntergeladen werden (HTTP Fehler Code %1)', '2010-09-27 00:27:22');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1684', 'DE', 'Fehler: Das Suchergebnis konnte nicht heruntergeladen werden. Die Daten waren auf dem Server nicht verfügbar.', '2010-09-27 00:26:21');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1685', 'DE', 'Es sind %1 Geocaches auf dem Kartenausschnitt. Bitte vergrößere die Ansicht, um die Geocaches anzuzeigen.', '2010-09-27 00:36:44');
@@ -5894,6 +5894,9 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1873', 'DE', 'OC klassisch', '2012-10-11 00:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1874', 'DE', 'OKAPI-Stil', '2012-10-11 00:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1875', 'DE', 'Du musst eingeloggt sein, um die Einstellungen zu ändern.', '2012-10-11 00:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1876', 'DE', 'Kartendaten \&copy; <a href=\"http://www.openstreetmap.org/copyright\" target=\"_blank\">OpenStreetMap</a>-Mitwirkende', '2012-10-11 00:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1877', 'DE', 'Kacheln bereitgestellt von <a href=\"http://www.mapquest.com/\" target=\"_blank\">MapQuest</a>', '2012-10-11 00:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1878', 'DE', 'Kartendaten \&copy; <a href=\"http://www.openstreetmap.org/copyright\" target=\"_blank\">OpenStreetMap</a>- und <a href="http://www.thunderforest.com/opencyclemap/" target="_blank">OpenCycleMap</a>-Mitwirkende', '2012-10-11 00:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'EN', 'Reorder IDs \r', '2010-09-02 00:15:30');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'EN', 'The database could not be reconnected.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'EN', 'Testing – please do not login', '2010-08-28 11:48:07');
@@ -7170,7 +7173,6 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1678', 'EN', 'Enter a search text, please!', '2010-09-27 00:21:52');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1680', 'EN', 'Waypoint %1 not found!', '2010-09-27 00:21:46');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1681', 'EN', 'D/T:', '2010-09-27 00:21:37');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1682', 'EN', 'Maps \&copy; 2009 <a href=\"http://www.openstreetmap.org/\">OpenStreetMap</a> Contributors', '2010-09-27 00:21:31');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1683', 'EN', 'Error: Unable to download the search result (HTTP error code %1)', '2010-09-27 00:21:23');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1684', 'EN', 'Error: Unable to download the search result. The data was not available on the server.', '2010-09-27 00:21:15');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1685', 'EN', 'There are %1 Geocaches in the selected area, matching the filter options. Please zoom in to display the caches.', '2010-09-27 00:21:08');
@@ -7348,6 +7350,9 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1873', 'EN', 'classic OC', '2012-10-11 00:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1874', 'EN', 'OKAPI style', '2012-10-11 00:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1875', 'EN', 'You must be logged in to change map settings.', '2012-10-11 00:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1876', 'EN', 'Map data \&copy; <a href=\"http://www.openstreetmap.org/copyright\" target=\"_blank\">OpenStreetMap</a> contributors', '2012-10-11 00:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1877', 'EN', 'tiles provided by <a href=\"http://www.mapquest.com/\" target=\"_blank\">MapQuest</a>', '2012-10-11 00:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1878', 'EN', 'Map data \&copy; <a href=\"http://www.openstreetmap.org/copyright\" target=\"_blank\">OpenStreetMap</a> and <a href=\"http://www.thunderforest.com/opencyclemap/\" target=\"_blank\">OpenCycleMap</a> contributors', '2012-10-11 00:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'ES', 'Reordenar ID', '2010-12-09 00:17:55');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'ES', 'La base de datos no se pudo conectar.', '2010-12-09 00:17:55');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'ES', 'En pruebas - por favor, no entre.', '2010-12-09 00:17:55');
@@ -8623,7 +8628,6 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1678', 'ES', '¡Insertar una busqueda de texto, por favor!', '2010-12-09 00:18:01');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1680', 'ES', 'Waypoint %1 no encontrado!', '2010-12-09 00:18:01');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1681', 'ES', 'D/T', '2010-12-09 00:18:01');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1682', 'ES', 'Maps \&copy; 2009 <a href=\"http://www.openstreetmap.org/\">OpenStreetMap</a> Contributors', '2010-12-09 00:18:01');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1683', 'ES', 'Error: No se puede descargar los resultados de búsqueda (código de erro HTTP %1)', '2010-12-09 00:18:01');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1684', 'ES', 'Error: No se puede descargar los resultados de búsqueda. Los datos no están disponibles en el servidor.', '2010-12-09 00:18:01');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1685', 'ES', 'Hemos encontrado %1 geocache en la región seleccionada que cumplen las condiciones de filtro. Zoom para ver la cache.', '2010-12-09 00:18:01');
@@ -10130,7 +10134,6 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1678', 'IT', 'Inserire un testo da cercare!', '2010-10-27 18:49:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1680', 'IT', 'Waypoint %1 non trovato!', '2010-10-27 18:49:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1681', 'IT', 'D/T:', '2010-10-27 18:49:19');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1682', 'IT', 'Maps \&copy; 2009 <a href=\"http://www.openstreetmap.org/\">OpenStreetMap</a> Contributors', '2010-10-27 18:49:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1683', 'IT', 'Errore: Impossibile scaricare i risultati della ricerca (codice di errore HTTP %1)', '2010-10-27 18:49:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1684', 'IT', 'Errore: Impossibile scaricare i risultati della ricerca. I dati non sono disponibili sul server.', '2010-10-27 18:49:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1685', 'IT', 'Sono state trovate %1 geocache nella regione selezionata che soddisfano le condizioni di filtro. Zoomare per visualizzare le cache.', '2010-10-27 18:49:19');

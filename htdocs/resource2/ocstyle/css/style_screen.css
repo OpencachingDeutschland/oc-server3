@@ -621,8 +621,8 @@ input.formbutton:hover {
 
 input.formbutton_active {
 	width:120px;
-	border:1px solid #ffe9c5;
-	padding:2px 0px 2px 0;
+	border:1px solid #a0a0a0;
+	padding:1px 0px 1px 0;
 	color: #000000;
 	background-color:#ffe9c5;
 	border-radius: 3px;
@@ -718,10 +718,6 @@ div#main-cachemap-block { width: 265px; margin-top: 80px; }
 
 p.main-totalstats {
 	font-weight: bold;
-}
-
-div#fullscreen_map_filters * {
-	font-size: 11px;
 }
 
 .img-shadow {
@@ -1043,14 +1039,14 @@ div.attribgroup table {
 	top: 80px;
 	font-size: 1.6em;
 	z-index:0;
-	}
+}
 
 .mapversion {
 	position: absolute;
 	right:5px;
 	bottom:5px;
 	z-index:0;
-	}
+}
 
 .maplogin {
 	text-align:left;
@@ -1123,15 +1119,6 @@ td.mapheader_spacer {
 #ocmain input.searchfield_fullscreen {
 	font-size:12px;
 	width: 290px;
-}
-
-#ocmain input.searchbutton {
-	font-size:13px;
-	border: 1px solid black;
-}
-
-#ocmain input.searchbutton:hover {
-	background: rgb(217,217,217);
 }
 
 #ocmain div.mappermalink {
@@ -1208,7 +1195,7 @@ table.mappopup td {
 
 div.mapcoord_normalscreen {
 	position: absolute;
-	top: 176px;
+	top: 106px;
 	right: 25px;
 	text-align: right;
 	margin-top: 8px;

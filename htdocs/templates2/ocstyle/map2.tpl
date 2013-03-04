@@ -3,10 +3,7 @@
 *
 *  Unicode Reminder メモ
 *
-*  TODO (old list by Oliver):
-*  - show wait dialog while requesting data from OC
-*  - ignore/owned/found in post filter?
-*  - smaller icons with any caches shown
+*  TODO (old, may be outdated):
 *  - monitor and improve DB cleanup
 *  - review/rewrite mapsubmit_click
 *  - rewrite function names
@@ -25,6 +22,7 @@
 ***************************************************************************}
 {* OCSTYLE *}
 
+
 {if $old_msie}
 	<script type="text/javascript">
 	{literal}<!--
@@ -40,105 +38,32 @@
 <script type="text/javascript" src="resource2/{$opt.template.style}/js/wz_tooltip.js"></script>
 <script type="text/javascript" src="resource2/{$opt.template.style}/js/tip_balloon.js"></script>
 <script type="text/javascript" src="resource2/{$opt.template.style}/js/tip_centerwindow.js"></script>
-<script type="text/javascript" src="resource2/{$opt.template.style}/js/debug.js"></script>
+{* <script type="text/javascript" src="resource2/{$opt.template.style}/js/debug.js"></script> *}
 
 {literal}
 <script type="text/javascript">
 <!--
 
-function ajaxLoad( url, callback, postData ) 
+function trim(s)
 {
-	var http_request = false;
-	
-	if (window.XMLHttpRequest) 
-	{ // Mozilla, Safari, ...
-		http_request = new XMLHttpRequest();
-	} 
-	else if (window.ActiveXObject) 
-	{ // IE
-		try {
-			http_request = new ActiveXObject("Msxml2.XMLHTTP");
-		} catch (e) {
-			try {
-				http_request = new ActiveXObject("Microsoft.XMLHTTP");
-			} catch (e) {}
-		}
-	}
-	if (!http_request) 
-	{
-		alert('Giving up: Cannot create an XMLHTTP instance');
-		return false;
-	}
-	
-	http_request.onreadystatechange =  function() {
-		if (http_request.readyState == 4) 
-		{
-			if (http_request.status == 200) 
-			{
-				callback(http_request.responseText, http_request.status);
-			}
-			else if (http_request.status != 0)     // avoid dummy messages when aborting transfer 
-			{
-				alert('Request Failed: ' + http_request.status);
-			}
-		}
-	};
+	while (s.substring(0, 1) == ' ')
+		s = s.substring(1, s.length);
 
-	if (postData) 
-	{ // POST
-		http_request.open('POST', url, true);
-		http_request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');  
-		http_request.send(postData);
-	}
-	else 
-	{
-		http_request.open('GET', url, true);
-		http_request.send(null);
-	}
+	while (s.substring(s.length-1, s.length) == ' ')
+		s = s.substring(0, s.length-1);
+		
+	return s;
 }
 
-/**
-* This functions wraps XMLHttpRequest open/send function.
-* It lets you specify a URL and will call the callback if
-* it gets a status code of 200.
-* @param {String} url The URL to retrieve
-* @param {Function} callback The function to call once retrieved.
-*/
-function downloadUrl( url, callback, postbody ) 
+function getTimeDiff(dTime1, dTime2)
 {
-    ajaxLoad( url, callback, postbody );
-    //GDownloadUrl( url, callback );
+	return ((dTime2-dTime1)/1000).toFixed(1);
 }
 
-function downloadUrl2(url, callback, postbody) {
-    ajaxLoad( url, callback, postbody );
-    //GDownloadUrl( url, callback, postbody );
-}
 
-/**
- * Parses the given XML string and returns the parsed document in a
- * DOM data structure. This function will return an empty DOM node if
- * XML parsing is not supported in this browser.
- * @param {string} str XML string.
- * @return {Element|Document} DOM.
- */
-function xmlParse( str ) 
-{
-	if (typeof ActiveXObject != 'undefined' && typeof GetObject != 'undefined') 
-	{
-		var doc = new ActiveXObject('Microsoft.XMLDOM');
-		doc.loadXML(str);
-		return doc;
-	}
-
-	if (typeof DOMParser != 'undefined') 
-	{
-		return (new DOMParser()).parseFromString(str, 'text/xml');
-	}
-
-	return createElement('div', null);
-}
-
+/*========================================================================= 
+    Initialization and Configuration
+ ==========================================================================*/
 
 var bFullscreen = {/literal}{$bFullscreen}{literal};
 var nDefaultZoom = 13;
@@ -392,17 +317,24 @@ function mapLoad()
 		
 	if (bFullscreen && msInitSiderbarDisplay == "block")
     toggle_sidebar(false);
+
+	var maptypes = ['OSM', 'MQ', 'OCM',
+	                google.maps.MapTypeId.ROADMAP, google.maps.MapTypeId.SATELLITE, 
+	                google.maps.MapTypeId.HYBRID, google.maps.MapTypeId.TERRAIN ];
+  var initType = google.maps.MapTypeId.ROADMAP;
+  for (var i=0; i<maptypes.length; i++)
+    if (msInitType == maptypes[i])
+			initType = msInitType;
 	
 	var myOptions = {
 		zoom: mnInitZoom,
-		center: new google.maps.LatLng( mnInitLat, mnInitLon ),
-		mapTypeId: map_GetMapTypeByName(msInitType),
+		center: new google.maps.LatLng(mnInitLat, mnInitLon),
+		mapTypeId: msInitType,
 		disableDoubleClickZoom : true,
 		backgroundColor: "#d0dccc",
 
 		mapTypeControl: true,
-		mapTypeControlOptions:
-			{ mapTypeIds: ['OSM', google.maps.MapTypeId.ROADMAP, google.maps.MapTypeId.SATELLITE, google.maps.MapTypeId.HYBRID, google.maps.MapTypeId.TERRAIN] },
+		mapTypeControlOptions: { mapTypeIds: maptypes },
 			
 		panControl: false,
 		zoomControl: true,
@@ -420,8 +352,11 @@ function mapLoad()
 			// poi types: https://developers.google.com/maps/documentation/javascript/reference#MapTypeStyleFeatureType
 	};
 
-	moMap = new google.maps.Map( document.getElementById("googlemap"), myOptions);
-	OSM_addMapType();
+	moMap = new google.maps.Map(document.getElementById("googlemap"), myOptions);
+
+	setMapType("OSM", "OpenStreetMap", "http://tile.openstreetmap.org/", 18);
+	setMapType("MQ"," MapQuest", "http://otile1.mqcdn.com/tiles/1.0.0/osm/", 19);
+	setMapType("OCM", "OpenCycleMap", "http://tile.opencyclemap.org/cycle/", 18);		
 
 	moInfoWindow = new google.maps.InfoWindow();
 
@@ -434,17 +369,19 @@ function mapLoad()
 	copyrightDiv.id = "map-copyright";
 	copyrightDiv.style.fontSize = "11px";
 	copyrightDiv.style.fontFamily = "Arial, sans-serif";
-	copyrightDiv.style.margin = "0 2px 1px 0";
 	copyrightDiv.style.padding = "0 2px 0 2px";
 	copyrightDiv.style.whiteSpace = "nowrap";
 	copyrightDiv.style.background = "#FFFFFF";
-	copyrightDiv.style.opacity = "0.7",
+	copyrightDiv.style.opacity = "0.7";
+
+	//copyrightDiv.class = "mapattribution";
 	moMap.controls[google.maps.ControlPosition.BOTTOM_RIGHT].push(copyrightDiv);
 	
 	google.maps.event.addListener(moMap, "dragstart", function(){map_movestart()});
 	google.maps.event.addListener(moMap, "dragend", function(){map_moveend()});
 	google.maps.event.addListener(moMap, "bounds_changed", function(){map_moveend()});
-	google.maps.event.addListener(moMap, "zoom_changed", function(){map_moveend()});
+	// google.maps.event.addListener(moMap, "zoom_changed", function(){map_moveend()});
+	// is included in bounds_changed
 	google.maps.event.addListener(moMap, "maptypeid_changed", function(){map_maptypechanged()});
 	google.maps.event.addListener(moMap, "mousemove", function(event){map_mousemove(event)});
 	google.maps.event.addListener(moMap, "click", function(event){map_clicked()});
@@ -462,39 +399,28 @@ function mapLoad()
 	queue_dataload(500);
 }
 
+function setMapType(shortname,longname,url,max_zoom)
+{
+	moMap.mapTypes.set(shortname, new google.maps.ImageMapType({
+		getTileUrl: function(coord, zoom) {
+			return url + zoom + "/" + coord.x + "/" + coord.y + ".png";
+		},
+		tileSize: new google.maps.Size(256, 256),
+		name: shortname,
+		alt: longname,
+		maxZoom: max_zoom
+	}));
+}
+
 function mapUnload()
 {
 	cookieSave();
 }
 
-function updateCopyrights() 
-{
-	if (copyrightDiv == null )
-		return;
-	
-	var newMapType = moMap.getMapTypeId();
-	
-	if (newMapType == "OSM" )
-		copyrightDiv.innerHTML = "Map data (C) by <a href=\"http://www.openstreetmap.org/\">OpenStreetMap.org</a> and its contributors";
-	else
-		copyrightDiv.innerHTML = "";
-}
 
-function map_GetMapTypeByName(sName)
-{
-	if( sName == google.maps.MapTypeId.HYBRID ||
-		sName == google.maps.MapTypeId.SATELLITE ||
-		sName == google.maps.MapTypeId.ROADMAP || 
-		sName == google.maps.MapTypeId.TERRAIN ||
-		sName == "OSM" )
-	{
-		return sName;
-	}
-	else
-	{
-		return google.maps.MapTypeId.HYBRID;
-	}
-}
+/*========================================================================= 
+    GM hooks and custom controls
+ =========================================================================*/
 
 function map_movestart()
 {
@@ -513,6 +439,574 @@ function map_maptypechanged()
 	updateCopyrights();
 	cookieSave();
 }
+
+function map_mousemove(event)
+{
+	showcoords(event.latLng.lat(), event.latLng.lng());
+}
+
+function map_clicked()
+{
+	if (bFullscreen)
+		if (document.getElementById("sidebar").style.display != 'none')
+			toggle_sidebar();
+	mapselectlist_hide();		// firefox needs this
+	moInfoWindow.close();
+	permalinkbox_hide();
+}
+
+function updateCopyrights() 
+{
+	if (copyrightDiv == null )
+		return;
+	
+	var newMapType = moMap.getMapTypeId();
+	
+	if (newMapType == "OSM" || newMapType == "MQ" || newMapType == "OCM")
+	{
+		{/literal}
+		if (newMapType == "OCM")
+			copyrightDiv.innerHTML = '{t escape=js}Map data &copy; <a href="http://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a> and <a href="http://www.thunderforest.com/opencyclemap/" target="_blank">OpenCycleMap</a> contributors{/t}';
+		else
+			copyrightDiv.innerHTML = '{t escape=js}Map data &copy; <a href="http://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a> contributors{/t}';
+		if (newMapType == "MQ")
+			copyrightDiv.innerHTML += ', ' + '{t escape=js}tiles provided by <a href="http://www.mapquest.com/" target="_blank">MapQuest</a>{/t}' + ' <img src="http://developer.mapquest.com/content/osm/mq_logo.png">';
+		{literal}
+	}
+	else
+		copyrightDiv.innerHTML = "";
+}
+
+
+/*========================================================================= 
+    XML cache data download
+ =========================================================================*/
+
+function ajaxLoad( url, callback, postData ) 
+{
+	var http_request = false;
+	
+	if (window.XMLHttpRequest) 
+	{ // Mozilla, Safari, ...
+		http_request = new XMLHttpRequest();
+	} 
+	else if (window.ActiveXObject) 
+	{ // IE
+		try {
+			http_request = new ActiveXObject("Msxml2.XMLHTTP");
+		} catch (e) {
+			try {
+				http_request = new ActiveXObject("Microsoft.XMLHTTP");
+			} catch (e) {}
+		}
+	}
+	if (!http_request) 
+	{
+		alert('Giving up: Cannot create an XMLHTTP instance');
+		return false;
+	}
+	
+	http_request.onreadystatechange =  function() {
+		if (http_request.readyState == 4) 
+		{
+			if (http_request.status == 200) 
+			{
+				callback(http_request.responseText, http_request.status);
+			}
+			else if (http_request.status != 0)     // avoid dummy messages when aborting transfer 
+			{
+				alert('Request Failed: ' + http_request.status);
+			}
+		}
+	};
+
+	if (postData) 
+	{ // POST
+		http_request.open('POST', url, true);
+		http_request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');  
+		http_request.send(postData);
+	}
+	else 
+	{
+		http_request.open('GET', url, true);
+		http_request.send(null);
+	}
+}
+
+/**
+* This functions wraps XMLHttpRequest open/send function.
+* It lets you specify a URL and will call the callback if
+* it gets a status code of 200.
+* @param {String} url The URL to retrieve
+* @param {Function} callback The function to call once retrieved.
+*/
+function downloadUrl( url, callback, postbody ) 
+{
+    ajaxLoad( url, callback, postbody );
+    //GDownloadUrl( url, callback );
+}
+
+function downloadUrl2(url, callback, postbody) {
+    ajaxLoad( url, callback, postbody );
+    //GDownloadUrl( url, callback, postbody );
+}
+
+/**
+ * Parses the given XML string and returns the parsed document in a
+ * DOM data structure. This function will return an empty DOM node if
+ * XML parsing is not supported in this browser.
+ * @param {string} str XML string.
+ * @return {Element|Document} DOM.
+ */
+function xmlParse( str ) 
+{
+	if (typeof ActiveXObject != 'undefined' && typeof GetObject != 'undefined') 
+	{
+		var doc = new ActiveXObject('Microsoft.XMLDOM');
+		doc.loadXML(str);
+		return doc;
+	}
+
+	if (typeof DOMParser != 'undefined') 
+	{
+		return (new DOMParser()).parseFromString(str, 'text/xml');
+	}
+
+	return createElement('div', null);
+}
+
+function queue_dataload(nMs)
+{
+	if (moDataLoadTimer != null)
+		clearTimeout(moDataLoadTimer);
+	moDataLoadTimer = window.setTimeout('data_load()', nMs);
+}
+
+function data_load()
+{
+	if (bFilterChanged)
+		moInfoWindow.close();
+	bResetFilterHeading = bFilterChanged;
+	bFilterChanged = false;
+
+	window.clearTimeout(moDataLoadTimer);
+	moDataLoadTimer = null;
+	mbDataDownloadStartTime = new Date();
+
+	if (mnResultId != 0)
+	{
+		tmd_hide();
+		mbDataDownloadHaveSecondChance = true;
+		ajaxLoad(msURLMapPHP, data_mapreceive, get_mapfilter_params());
+	}
+	else
+	{
+		gpx_download_enabled(false);
+		ajaxLoad(msURLSearchPHP, data_searchreceive, get_searchfilter_params('map2', true, false));
+	}
+}
+
+function data_mapreceive(data, responseCode)
+{
+	if (bResetFilterHeading)
+		reset_filter_heading();
+
+	if (responseCode != 200)
+	{
+		var sMessage = '{t escape=js}Error: Unable to download the search result (HTTP error code %1){/t}';
+		sMessage = sMessage.replace(/%1/, responseCode);
+		alert(sMessage);
+		return;
+	}
+
+	var oXML = xmlParse(data);
+
+	if (oXML.documentElement.getAttribute("available") +0 == 0)
+	{
+		if (mbDataDownloadHaveSecondChance == true)
+		{
+			ajaxLoad(msURLSearchPHP, data_searchreceive, get_searchfilter_params('map2', true, false));
+		}
+		else
+		{
+			// alert('{t escape=js}Error: Unable to download the search result. The data was not available on the server.{/t}');
+			error_no_data(true);
+		}
+		return;
+	}
+	else
+		error_no_data(false);
+	
+	var record_count = oXML.documentElement.getAttribute("count");
+
+	gpx_download_enabled((record_count<=mnMaxDownloadCount) && (record_count>0));
+
+	/* nee too many markers -> clear all and display message */
+	if (oXML.documentElement.getAttribute("maxrecordreached") == 1)
+	{
+		data_clear();
+		tmd_show(record_count);
+		return;
+	}
+    
+	/* compute set of markers to keep */
+	var wpset = {};
+	var oCachesList = oXML.documentElement.getElementsByTagName("c");
+	for (var nIndex=0; nIndex<oCachesList.length; nIndex++)
+	{
+		var sCacheData = oCachesList[nIndex].getAttribute("d");
+		var sWaypoint = sCacheData.substring(0,sCacheData.indexOf('/')); 
+		wpset[sWaypoint] = true;
+	}
+	/* delete unneeded markers */
+	var alreadythere = data_clear_except( wpset );
+	
+	/* add new markers (skip existing) */
+	for (var nIndex=0; nIndex<oCachesList.length; nIndex++)
+	{
+		var aCacheData = oCachesList[nIndex].getAttribute("d").split('/');
+		var sWaypoint = aCacheData[0];
+		if (!(sWaypoint in alreadythere))
+		{
+			var nLon = aCacheData[1];
+			var nLat = aCacheData[2];
+			var nType = aCacheData[3];
+			var nFlags = aCacheData[4];
+
+			addCacheToMap(sWaypoint, nLon, nLat, nType, nFlags,
+			              oCachesList[nIndex].getAttribute("n"), nIndex);
+		}
+	}
+
+	document.getElementById('statCachesCount').innerHTML = oCachesList.length;
+	document.getElementById('statLoadTime').innerHTML = getTimeDiff(mbDataDownloadStartTime, new Date());
+}
+
+// receives the result of map2.php (if result is not available, search.php has to be invoked)
+function data_searchreceive(data, responseCode)
+{
+	// TODO: check
+	if (responseCode == 200)
+	{
+		// TODO: make sure that data must is a numeric ID
+		mnResultId = data;
+	}
+	
+	// continue with data download
+	tmd_hide();
+	mbDataDownloadHaveSecondChance = false;
+	ajaxLoad(msURLMapPHP, data_mapreceive, get_mapfilter_params());
+}
+
+function error_no_data(errorstate)
+{
+	var msgo = document.getElementById('mapstat_caches');
+	msgo.style.color = (errorstate ? 'red' : 'black');
+	msgo.style.fontWeight = (errorstate ? 'bold' : 'normal');
+}
+
+function xmlentities(str)
+{
+	str = str.replace(/&/, '&amp;');
+	str = str.replace(/</, '&lt;');
+	str = str.replace(/>/, '&gt;');
+	str = str.replace(/"/, '&quot;');
+	// hack for phpDesigner syntax HL problem: "
+
+	return str;
+}
+
+
+/*========================================================================= 
+    Markers
+ =========================================================================*/
+
+function NewCacheMarker(nLat, nLon, sWaypoint, nType, nFlags, sName, nZindex)
+{
+	var image, anchor;
+
+	{/literal}
+	{if $opt_cacheicons == 1}
+		image = 'resource2/ocstyle/images/map/caches1/24x24-';
+		anchor = new google.maps.Point(12,12);
+	{else}
+		image = 'resource2/ocstyle/images/map/caches2/';
+		anchor = new google.maps.Point(13,24);
+	{/if}
+	{literal}
+
+  if (nFlags & 1)				image += 'owned';
+  else if (nFlags & 2)	image += 'found';
+  else									image += 'cachetype-' + nType;
+
+  if (nFlags & 4) 			image += '-inactive';
+  else if (nFlags & 8)	image += '-oconly';
+
+	var mi = new google.maps.MarkerImage(image + '.png');
+	mi.anchor = anchor;
+
+	marker = new google.maps.Marker(
+		{	position: new google.maps.LatLng(nLat, nLon),
+			map: moMap,
+			title: sName,
+			icon: mi,
+			zIndex: nZindex });
+	marker.waypoint = sWaypoint;
+	return marker;
+}			
+
+function addCacheToMap(sWaypoint, nLon, nLat, nType, nFlags, sName, nZindex)
+{
+	var oMarker = NewCacheMarker(nLat, nLon, sWaypoint, nType, nFlags, sName, nZindex);
+	google.maps.event.addListener(oMarker, "click", function(){CacheMarker_click(sWaypoint);});
+
+	moMarkerList[moMarkerList.length] = oMarker;
+}
+
+function data_clear()
+{
+	document.getElementById('statCachesCount').innerHTML = '0';
+	for (var nIndex=0; nIndex<moMarkerList.length; nIndex++)
+		moMarkerList[nIndex].setMap(null);
+	moMarkerList = new Array();
+}
+
+
+/* delete all markers, except those specified in "wpset". return the set of remaining markers */
+function data_clear_except(wpset)
+{
+	var existing = {};
+	
+	document.getElementById('statCachesCount').innerHTML = '0';
+	
+	var newList = new Array();
+	
+	for (var nIndex=0; nIndex<moMarkerList.length; nIndex++)
+	{
+		var oMarker = moMarkerList[nIndex];
+		var wp = oMarker.waypoint;
+		
+		if (wp != msPopupMarkerWP && !(wp in wpset))
+		{
+			oMarker.setMap(null);
+		}
+		else
+		{
+			existing[wp] = true;
+			newList[newList.length] = oMarker;
+		}
+	}
+	
+	moMarkerList = newList;
+	
+	return existing;
+}
+
+function CacheMarker_click(sWaypoint)
+{
+	show_cachepopup_wp(sWaypoint, false);
+}
+
+
+/*========================================================================= 
+    Cache-InfoWindow popup
+ =========================================================================*/
+
+function show_cachepopup_wp(sWaypoint, bAllowZoomChange)
+{
+	show_cachepopup_url(msURLMapPHP + "?mode=wpsearch&wp=" + sWaypoint, sWaypoint, bAllowZoomChange);
+}
+
+function show_cachepopup_latlon(nLat, nLon, bAllowZoomChange)
+{
+	show_cachepopup_url(msURLMapPHP + "?mode=locate&lat=" + nLat + "&lon=" + nLon, "", bAllowZoomChange);
+}
+
+{/literal}
+{* In some browers and zoom levels, a wrong size is calculated by GM for some infowindow
+ * contents. If the caluclated size is too small, the containing div will show a scrollbar:
+ *
+ *   http://stackoverflow.com/questions/1554893/google-maps-api-v3-infowindow-not-sizing-correctly
+ *
+ * The only solution working under all conditions seems to be increasing the container
+ * div's size (while tampering with it's overflow setting will cause other problems 
+ * especiallyin Chrome, with waypoints cut off at the right). This will neither affect the 
+ * size of our 'mapinfowindow' div nor of the infowindow, but only give our content more 
+ * space. We allocate as much fits into the InfoWindow borders.
+ *
+ * Also, there is another MSIE issue regading a second inner pair of scrollbars. We get 
+ * rid of them by settings overflow:hidden on mapinfowindow (see style_screen.css).
+ *}
+{literal}
+
+function adjust_infowindow()
+{
+	if (mhInfoWindowHackTries > 0 &&
+			document.getElementById('mapinfowindow') != null)
+		if (typeof document.getElementById('mapinfowindow').parentNode != null)
+			if (typeof document.getElementById('mapinfowindow').parentNode.parentNode != null)
+				if (typeof document.getElementById('mapinfowindow').parentNode.parentNode.style != null)
+	{
+		var iw_frame = document.getElementById('mapinfowindow').parentNode.parentNode;
+		var iw_width = parseInt(iw_frame.style.width.substr(0, iw_frame.style.width.indexOf('px')));
+		var iw_height = parseInt(iw_frame.style.height.substr(0, iw_frame.style.height.indexOf('px')));
+
+		if (iw_width != "" && iw_height != "")
+		{
+			mhInfoWindowHackTries = 0;
+			// alert("Before: " + iw_frame.style.width +  " / " + iw_frame.style.height);  
+			iw_frame.style.width = String(iw_width + 25) + "px";
+			iw_frame.style.height = String(iw_height + 25) + "px";
+			// alert("After: " + iw_frame.style.width +  " / " + iw_frame.style.height);  
+		}
+		else
+			mhInfoWindowHackTries -= 1;
+	}
+
+	if (mhInfoWindowHackTries <= 0)
+		clearInterval(mhInfoWindowHackTimer);
+}
+
+function reopen_infowindow(oCoords, sText)
+{
+	moInfoWindow.close();
+	moInfoWindow = new google.maps.InfoWindow({ position: oCoords, content: sText });
+	moInfoWindow.open( moMap, null, true );
+	wid = document.getElementById('mapinfowindow');
+	mhInfoWindowHackTries = 150;
+	mhInfoWindowHackTimer = window.setInterval("adjust_infowindow()",10);
+}
+
+function show_cachepopup_url(sURL, sWaypoint, bAllowZoomChange)
+{
+	moInfoWindow.close();
+
+	ajaxLoad(sURL, function(data, responseCode) {
+		var oXML = xmlParse(data);
+		var oCoords = parseXML_GetPoint(oXML);
+		if (!oCoords)
+		{
+			if (sWaypoint != '')
+			{
+				var sMessage = '{t escape=js}Waypoint %1 not found!{/t}';
+				sMessage = sMessage.replace(/%1/, sWaypoint);
+				alert(sMessage);
+			}
+			
+			return;
+		}
+
+		msPopupMarkerWP = parseXML_GetWaypoint(oXML);
+
+		if (bAllowZoomChange==true)
+		{
+			moMap.setCenter(oCoords);
+			if (Math.abs(moMap.getZoom() - nDefaultZoom) > 1)
+			  moMap.setZoom(nDefaultZoom);
+		}
+
+		reopen_infowindow(oCoords, parseXML_GetHTML(oXML));
+	});
+
+}
+
+function parseXML_GetWaypoint(xmlobject)
+{
+	var aCaches = xmlobject.documentElement.getElementsByTagName("cache");
+	if (aCaches.length<1)
+		return false;
+	return aCaches[0].getAttribute("wpoc");
+}
+
+function parseXML_GetHTML(xmlobject)
+{
+	var aCaches = xmlobject.documentElement.getElementsByTagName("cache");
+	if (aCaches.length<1)
+		return false;
+
+	var sName = aCaches[0].getAttribute("name");
+	var sWPOC = aCaches[0].getAttribute("wpoc");
+	var sCoords = aCaches[0].getAttribute("coords");
+	var bStatusTNA = aCaches[0].getAttribute("status_tna");
+	var sStatusText = aCaches[0].getAttribute("status_text");
+	var nTypeId = aCaches[0].getAttribute("type_id");
+	var sTypeText = aCaches[0].getAttribute("type_text");
+	var sSizeText = aCaches[0].getAttribute("size");
+	var nDifficulty = aCaches[0].getAttribute("difficulty");
+	var nTerrain = aCaches[0].getAttribute("terrain");
+	var sListedSince = aCaches[0].getAttribute("listed_since");
+	var bIsPublishdate = aCaches[0].getAttribute("is_publishdate");
+	var nTopRating = aCaches[0].getAttribute("toprating");
+	var nGeoKreties = aCaches[0].getAttribute("geokreties");
+	var bFound = aCaches[0].getAttribute("found");
+	var bNotFound = aCaches[0].getAttribute("notfound");
+	var bAttended = aCaches[0].getAttribute("attended");
+	var bOconly = aCaches[0].getAttribute("oconly");
+	var bOwner = aCaches[0].getAttribute("owner");
+	var sUsername = aCaches[0].getAttribute("username");
+	var nUserId = aCaches[0].getAttribute("userid");
+
+	{/literal}{*
+	// When changing any of the following HTML code, test the map popups carefully
+	// on many different browsers and zoom levels! Even trivial changes can cause
+	// inernal rendering errors which create annoying scrollbars within the info window.
+	*}{literal}
+
+	var sHtml = "<div id='mapinfowindow' class='mappopup'><table class='mappopup'>";
+	if (bStatusTNA == 1)
+		sHtml += "<tr><td colspan='2'><font size='2' color='red'><b>" + xmlentities(sStatusText) + "</b></font></td></tr>";
+
+	// InfoWindows have a min width; set min width for content to avoid large right borders:
+	sHtml += "<tr><td><img src='resource2/ocstyle/images/cacheicon/20x20-" + nTypeId + ".png' alt='" + xmlentities(sTypeText) + "' title='" + xmlentities(sTypeText) + "' height='20px' width='20px'/></td><td style='min-width:150px";
+	if (sName.length > 60)
+		sHtml += "; white-space:normal";
+	sHtml += "'><a href='viewcache.php?wp=" + encodeURI(sWPOC) + "' target='_blank'><font size='2'>" + xmlentities(sName) + "</font></a></td><td align='right' vertical-align:'top'><font size='2'><b>&nbsp;" + xmlentities(sWPOC) + "</b></font></td></tr>";
+	sHtml += "<tr><td colspan='2' style='vertical-align:top;'>{/literal}{t escape=js}by{/t}{literal} <a href='viewprofile.php?userid=" + encodeURI(nUserId) + "' target='_blank'>" + xmlentities(sUsername) + "</a></td><td align='right'><a class='nooutline' href='articles.php?page=cacheinfo#difficulty' target='_blank'><img src='resource2/{/literal}{$opt.template.style}/images/difficulty/diff-" + String(nDifficulty*10) + ".gif' border='0' width='19' height='16' hspace='2' alt='{t}D{/t} " + nDifficulty + "' title='{t}Difficulty{/t} " + nDifficulty + "/5'{literal} /><img src='resource2/{/literal}{$opt.template.style}/images/difficulty/terr-" + String(nTerrain*10) + ".gif' border='0' width='19' height='16' hspace='2' alt='{t}T{/t} " + nTerrain + "' title='{t}Terrain{/t} " + nTerrain + "/5'{literal} /></a></td></tr>";
+	sHtml += "<tr><td colspan='3' height='3px'></td></tr>";
+	
+	sHtml += "<tr><td colspan='2'>" + xmlentities(sTypeText) + " (" + xmlentities(sSizeText) + ")</td><td align='right' rowspan='2'>" + (bOconly==1 ? "{/literal}{$help_oconly}{literal}<img src='resource2/ocstyle/images/misc/is_oconly_small.png' alt='OConly' title='OConly' /></a>" : "") + "</td></tr>";
+	sHtml += "<tr><td colspan='2'>" + {/literal}(bIsPublishdate == true ? "{t escape=js}Published on{/t}:" : "{t escape=js}Listed since:{/t}"){literal} + " " + xmlentities(sListedSince) + "</td></tr>";
+
+	if (bOwner==1)
+		sHtml += "<tr><td colspan='3'><img src='resource2/ocstyle/images/misc/16x16-home.png' alt='' /> {/literal}{t escape=js}This cache is yours{/t}{literal}</td></tr>";
+
+	if (bFound==1)
+		sHtml += "<tr><td colspan='3'><img src='resource2/ocstyle/images/viewcache/16x16-found.png' alt='' /> {/literal}{t escape=js}You found this cache{/t}{literal}</td></tr>";
+
+	if (bNotFound==1)
+		sHtml += "<tr><td colspan='3'><img src='resource2/ocstyle/images/viewcache/16x16-dnf.png' alt='' /> {/literal}{t escape=js}You havn't found this cache, yet{/t}{literal}</td></tr>";
+
+	if (bAttended==1)
+		sHtml += "<tr><td colspan='3'><img src='resource2/ocstyle/images/log/16x16-attended.png' alt='' /> {/literal}{t escape=js}You have attended this event!{/t}{literal}</td></tr>";
+
+	if (nGeoKreties>0)
+		sHtml += "<tr><td colspan='3'><img src='resource2/ocstyle/images/viewcache/gk.png' alt='' /> {/literal}{t escape=js}This cache stores a GeoKrety{/t}{literal}</td></tr>";
+
+	if (nTopRating>0)
+		sHtml += "<tr><td colspan='3'><img src='resource2/ocstyle/images/viewcache/rating-star.gif' alt='' /> {/literal}{t escape=js}This cache has %1 recommandations{/t}{literal}</td></tr>".replace(/%1/, nTopRating);
+
+	sHtml += "</table></div>";
+
+	return sHtml;
+}
+
+function parseXML_GetPoint(oXMLObject)
+{
+	var oCaches = oXMLObject.documentElement.getElementsByTagName("cache");
+
+	if (oCaches.length<1)
+		return false;
+
+	var oCoords = oCaches[0].getAttribute("coords").split(",");
+	var oCoordsYX = new google.maps.LatLng(oCoords[1],oCoords[0]);
+
+	return oCoordsYX;
+}
+
+
+/*========================================================================= 
+    Status display
+ =========================================================================*/
 
 function coordtext(coord)
 {
@@ -547,21 +1041,29 @@ function showcoords(lat,lng)
 	{literal}
 }
 
-function map_mousemove(event)
+function tmd_show(number)
 {
-	showcoords(event.latLng.lat(), event.latLng.lng());
+	var tmd = document.getElementById("toomanycaches");
+	var txt = document.getElementById("toomanycaches_txt");
+
+	var sMessage = '{t escape=js}There are %1 Geocaches in the selected area, matching the filter options. Please zoom in to display the caches.{/t}';
+	sMessage = sMessage.replace(/%1/, number);
+	txt.innerHTML = sMessage;
+
+	tmd.style.display = 'block';
 }
 
-function map_clicked()
+function tmd_hide()
 {
-	if (bFullscreen)
-		if (document.getElementById("sidebar").style.display != 'none')
-			toggle_sidebar();
-	mapselectlist_hide();		// firefox needs this
-	moInfoWindow.close();
-	permalinkbox_hide();
+	document.getElementById("toomanycaches").style.display = 'none';
 }
 
+
+/*========================================================================= 
+    Function buttons
+ =========================================================================*/
+
+// HOME
 function center_home()
 {
 	if (mnUserLat != 0 || mnUserLon != 0)
@@ -575,6 +1077,34 @@ function center_home()
 	}
 }
 
+// GPX DOWNLOAD
+function gpx_download_enabled(enabled)
+{
+	mbDownloadEnabled = enabled;
+	if (enabled)
+		document.getElementById('download_gpx_img').src = 'resource2/ocstyle/images/map/35x35-gpx-download.png';
+	else
+		document.getElementById('download_gpx_img').src = 'resource2/ocstyle/images/map/35x35-no-gpx-download.png';
+}
+
+function download_gpx()
+{
+	var oBounds = moMap.getBounds();
+	var params = get_searchfilter_params('gpx', false, true);
+
+	if (mbDownloadEnabled == false)
+	{
+		alert({/literal}"{t}Between 1 and 500 caches must be displayed for download.{/t}"{literal});
+		return;
+	}
+
+	params += '&bbox=' + oBounds.getSouthWest().lng() + ',' + oBounds.getSouthWest().lat() + ',' + oBounds.getNorthEast().lng() + ',' + oBounds.getNorthEast().lat();
+	params += '&count=max';
+
+	location.href = msURLSearchPHP + '?' + params;
+}
+
+// PERMALINK
 function showPermlinkBox_click()
 {
 	if (window.opera)
@@ -618,23 +1148,20 @@ function permalinkbox_hide()
 	moPermalinkBox.style.display = 'none';
 }
 
-function mapselectlist_onblur()
-{
-	mapselectlist_hide();
-}
-
-function show_settings()
-{
-	document.getElementById('mapoptions').style.display= "block";
-}
-
+// SETTINGS
 function toggle_settings()
 {
-	so = document.getElementById('mapoptions');
+	var so = document.getElementById('mapoptions');
 	if (so.style.display == 'block')
 	  so.style.display = 'none';
 	else
 		so.style.display = 'block';
+}
+
+// SEARCH
+function mapselectlist_onblur()
+{
+	mapselectlist_hide();
 }
 
 function mapselectlist_clear()
@@ -714,9 +1241,10 @@ function searchlist_openitem(nIndex)
 	}
 }
 
-// search button clicked
-function mapsubmit_click()
+function mapsearch_click()
 {
+	flashbutton('mapsubmit');
+
 	var sSearchText = moMapSearch.value;
 	var oTempOption;
 
@@ -843,227 +1371,6 @@ function mapsubmit_click()
 		});
 }
 
-function show_cachepopup_wp(sWaypoint, bAllowZoomChange)
-{
-	show_cachepopup_url(msURLMapPHP + "?mode=wpsearch&wp=" + sWaypoint, sWaypoint, bAllowZoomChange);
-}
-
-function show_cachepopup_latlon(nLat, nLon, bAllowZoomChange)
-{
-	show_cachepopup_url(msURLMapPHP + "?mode=locate&lat=" + nLat + "&lon=" + nLon, "", bAllowZoomChange);
-}
-
-{/literal}
-/* In some browers and zoom levels, a wrong size is calculated by GM for some infowindow
- * contents. If the caluclated size is too small, the containing div will show a scrollbar:
- *
- *   http://stackoverflow.com/questions/1554893/google-maps-api-v3-infowindow-not-sizing-correctly
- *
- * The only solution working under all conditions seems to be increasing the container
- * div's size (while tampering with it's overflow setting will cause other problems 
- * especiallyin Chrome, with waypoints cut off at the right). This will neither affect the 
- * size of our 'mapinfowindow' div nor of the infowindow, but only give our content more 
- * space. We allocate as much fits into the InfoWindow borders.
- *
- * Also, there is another MSIE issue regading a second inner pair of scrollbars. We get 
- * rid of them by settings overflow:hidden on mapinfowindow (see style_screen.css).
- */
-{literal}
-
-function adjust_infowindow()
-{
-	if (mhInfoWindowHackTries > 0 &&
-			document.getElementById('mapinfowindow') != null)
-		if (typeof document.getElementById('mapinfowindow').parentNode != null)
-			if (typeof document.getElementById('mapinfowindow').parentNode.parentNode != null)
-				if (typeof document.getElementById('mapinfowindow').parentNode.parentNode.style != null)
-	{
-		var iw_frame = document.getElementById('mapinfowindow').parentNode.parentNode;
-		var iw_width = parseInt(iw_frame.style.width.substr(0, iw_frame.style.width.indexOf('px')));
-		var iw_height = parseInt(iw_frame.style.height.substr(0, iw_frame.style.height.indexOf('px')));
-
-		if (iw_width != "" && iw_height != "")
-		{
-			mhInfoWindowHackTries = 0;
-			// alert("Before: " + iw_frame.style.width +  " / " + iw_frame.style.height);  
-			iw_frame.style.width = String(iw_width + 25) + "px";
-			iw_frame.style.height = String(iw_height + 25) + "px";
-			// alert("After: " + iw_frame.style.width +  " / " + iw_frame.style.height);  
-		}
-		else
-			mhInfoWindowHackTries -= 1;
-	}
-
-	if (mhInfoWindowHackTries <= 0)
-		clearInterval(mhInfoWindowHackTimer);
-}
-
-function reopen_infowindow(oCoords, sText)
-{
-	moInfoWindow.close();
-	moInfoWindow = new google.maps.InfoWindow({ position: oCoords, content: sText });
-	moInfoWindow.open( moMap, null, true );
-	wid = document.getElementById('mapinfowindow');
-	mhInfoWindowHackTries = 150;
-	mhInfoWindowHackTimer = window.setInterval("adjust_infowindow()",10);
-}
-
-function show_cachepopup_url(sURL, sWaypoint, bAllowZoomChange)
-{
-	moInfoWindow.close();
-
-	ajaxLoad(sURL, function(data, responseCode) {
-		var oXML = xmlParse(data);
-		var oCoords = parseXML_GetPoint(oXML);
-		if (!oCoords)
-		{
-			if (sWaypoint != '')
-			{
-				var sMessage = '{t escape=js}Waypoint %1 not found!{/t}';
-				sMessage = sMessage.replace(/%1/, sWaypoint);
-				alert(sMessage);
-			}
-			
-			return;
-		}
-
-		msPopupMarkerWP = parseXML_GetWaypoint(oXML);
-
-		if (bAllowZoomChange==true)
-		{
-			moMap.setCenter(oCoords);
-			if (Math.abs(moMap.getZoom() - nDefaultZoom) > 1)
-			  moMap.setZoom(nDefaultZoom);
-		}
-
-		reopen_infowindow(oCoords, parseXML_GetHTML(oXML));
-	});
-
-}
-
-function download_gpx()
-{
-	var oBounds = moMap.getBounds();
-	var params = get_searchfilter_params('gpx', false, true);
-
-	if (mbDownloadEnabled == false)
-	{
-		alert({/literal}"{t}Between 1 and 500 caches must be displayed for download.{/t}"{literal});
-		return;
-	}
-
-	params += '&bbox=' + oBounds.getSouthWest().lng() + ',' + oBounds.getSouthWest().lat() + ',' + oBounds.getNorthEast().lng() + ',' + oBounds.getNorthEast().lat();
-	params += '&count=max';
-
-	location.href = msURLSearchPHP + '?' + params;
-}
-
-function parseXML_GetWaypoint(xmlobject)
-{
-	var aCaches = xmlobject.documentElement.getElementsByTagName("cache");
-	if (aCaches.length<1)
-		return false;
-	return aCaches[0].getAttribute("wpoc");
-}
-
-function parseXML_GetHTML(xmlobject)
-{
-	var aCaches = xmlobject.documentElement.getElementsByTagName("cache");
-	if (aCaches.length<1)
-		return false;
-
-	var sName = aCaches[0].getAttribute("name");
-	var sWPOC = aCaches[0].getAttribute("wpoc");
-	var sCoords = aCaches[0].getAttribute("coords");
-	var bStatusTNA = aCaches[0].getAttribute("status_tna");
-	var sStatusText = aCaches[0].getAttribute("status_text");
-	var nTypeId = aCaches[0].getAttribute("type_id");
-	var sTypeText = aCaches[0].getAttribute("type_text");
-	var sSizeText = aCaches[0].getAttribute("size");
-	var nDifficulty = aCaches[0].getAttribute("difficulty");
-	var nTerrain = aCaches[0].getAttribute("terrain");
-	var sListedSince = aCaches[0].getAttribute("listed_since");
-	var bIsPublishdate = aCaches[0].getAttribute("is_publishdate");
-	var nTopRating = aCaches[0].getAttribute("toprating");
-	var nGeoKreties = aCaches[0].getAttribute("geokreties");
-	var bFound = aCaches[0].getAttribute("found");
-	var bNotFound = aCaches[0].getAttribute("notfound");
-	var bAttended = aCaches[0].getAttribute("attended");
-	var bOconly = aCaches[0].getAttribute("oconly");
-	var bOwner = aCaches[0].getAttribute("owner");
-	var sUsername = aCaches[0].getAttribute("username");
-	var nUserId = aCaches[0].getAttribute("userid");
-
-	{/literal}{*
-	// When changing any of the following HTML code, test the map popups carefully
-	// on many different browsers and zoom levels! Even trivial changes can cause
-	// inernal rendering errors which create annoying scrollbars within the info window.
-	*}{literal}
-
-	var sHtml = "<div id='mapinfowindow' class='mappopup'><table class='mappopup'>";
-	if (bStatusTNA == 1)
-		sHtml += "<tr><td colspan='2'><font size='2' color='red'><b>" + xmlentities(sStatusText) + "</b></font></td></tr>";
-
-	// InfoWindows have a min width; set min width for content to avoid large right borders:
-	sHtml += "<tr><td><img src='resource2/ocstyle/images/cacheicon/20x20-" + nTypeId + ".png' alt='" + xmlentities(sTypeText) + "' title='" + xmlentities(sTypeText) + "' height='20px' width='20px'/></td><td style='min-width:150px";
-	if (sName.length > 60)
-		sHtml += "; white-space:normal";
-	sHtml += "'><a href='viewcache.php?wp=" + encodeURI(sWPOC) + "' target='_blank'><font size='2'>" + xmlentities(sName) + "</font></a></td><td align='right' vertical-align:'top'><font size='2'><b>&nbsp;" + xmlentities(sWPOC) + "</b></font></td></tr>";
-	sHtml += "<tr><td colspan='2' style='vertical-align:top;'>{/literal}{t escape=js}by{/t}{literal} <a href='viewprofile.php?userid=" + encodeURI(nUserId) + "' target='_blank'>" + xmlentities(sUsername) + "</a></td><td align='right'><a class='nooutline' href='articles.php?page=cacheinfo#difficulty' target='_blank'><img src='resource2/{/literal}{$opt.template.style}/images/difficulty/diff-" + String(nDifficulty*10) + ".gif' border='0' width='19' height='16' hspace='2' alt='{t}D{/t} " + nDifficulty + "' title='{t}Difficulty{/t} " + nDifficulty + "/5'{literal} /><img src='resource2/{/literal}{$opt.template.style}/images/difficulty/terr-" + String(nTerrain*10) + ".gif' border='0' width='19' height='16' hspace='2' alt='{t}T{/t} " + nTerrain + "' title='{t}Terrain{/t} " + nTerrain + "/5'{literal} /></a></td></tr>";
-	sHtml += "<tr><td colspan='3' height='3px'></td></tr>";
-	
-	sHtml += "<tr><td colspan='2'>" + xmlentities(sTypeText) + " (" + xmlentities(sSizeText) + ")</td><td align='right' rowspan='2'>" + (bOconly==1 ? "{/literal}{$help_oconly}{literal}<img src='resource2/ocstyle/images/misc/is_oconly_small.png' alt='OConly' title='OConly' /></a>" : "") + "</td></tr>";
-	sHtml += "<tr><td colspan='2'>" + {/literal}(bIsPublishdate == true ? "{t escape=js}Published on{/t}:" : "{t escape=js}Listed since:{/t}"){literal} + " " + xmlentities(sListedSince) + "</td></tr>";
-
-	if (bOwner==1)
-		sHtml += "<tr><td colspan='3'><img src='resource2/ocstyle/images/misc/16x16-home.png' alt='' /> {/literal}{t escape=js}This cache is yours{/t}{literal}</td></tr>";
-
-	if (bFound==1)
-		sHtml += "<tr><td colspan='3'><img src='resource2/ocstyle/images/viewcache/16x16-found.png' alt='' /> {/literal}{t escape=js}You found this cache{/t}{literal}</td></tr>";
-
-	if (bNotFound==1)
-		sHtml += "<tr><td colspan='3'><img src='resource2/ocstyle/images/viewcache/16x16-dnf.png' alt='' /> {/literal}{t escape=js}You havn't found this cache, yet{/t}{literal}</td></tr>";
-
-	if (bAttended==1)
-		sHtml += "<tr><td colspan='3'><img src='resource2/ocstyle/images/log/16x16-attended.png' alt='' /> {/literal}{t escape=js}You have attended this event!{/t}{literal}</td></tr>";
-
-	if (nGeoKreties>0)
-		sHtml += "<tr><td colspan='3'><img src='resource2/ocstyle/images/viewcache/gk.png' alt='' /> {/literal}{t escape=js}This cache stores a GeoKrety{/t}{literal}</td></tr>";
-
-	if (nTopRating>0)
-		sHtml += "<tr><td colspan='3'><img src='resource2/ocstyle/images/viewcache/rating-star.gif' alt='' /> {/literal}{t escape=js}This cache has %1 recommandations{/t}{literal}</td></tr>".replace(/%1/, nTopRating);
-
-	sHtml += "</table></div>";
-
-	return sHtml;
-}
-
-function parseXML_GetPoint(oXMLObject)
-{
-	var oCaches = oXMLObject.documentElement.getElementsByTagName("cache");
-
-	if (oCaches.length<1)
-		return false;
-
-	var oCoords = oCaches[0].getAttribute("coords").split(",");
-	var oCoordsYX = new google.maps.LatLng(oCoords[1],oCoords[0]);
-
-	return oCoordsYX;
-}
-
-function OSM_addMapType()
-{
-	moMap.mapTypes.set("OSM", new google.maps.ImageMapType({
-		getTileUrl: function(coord, zoom) {
-			return "http://tile.openstreetmap.org/" + zoom + "/" + coord.x + "/" + coord.y + ".png";
-		},
-		tileSize: new google.maps.Size(256, 256),
-		name: "OSM",
-		alt: "OpenStreetMap",
-		maxZoom: 18
-	}));
-}
-
 function mapsearch_onfocus()
 {
 	if (moMapSearch.value==msSearchHint || mbResetSearchTextOnFocus==true)
@@ -1077,29 +1384,10 @@ function mapsearch_onblur()
 		moMapSearch.value = msSearchHint;
 }
 
-function trim(s)
-{
-	while (s.substring(0, 1) == ' ')
-	{
-		s = s.substring(1, s.length);
-	}
-	while (s.substring(s.length-1, s.length) == ' ')
-	{
-		s = s.substring(0, s.length-1);
-	}
-	return s;
-}
 
-function xmlentities(str)
-{
-	str = str.replace(/&/, '&amp;');
-	str = str.replace(/</, '&lt;');
-	str = str.replace(/>/, '&gt;');
-	str = str.replace(/"/, '&quot;');
-	// hack for phpDesigner syntax HL problem: "
-
-	return str;
-}
+/*========================================================================= 
+    Filtering
+ =========================================================================*/
 
 function attribute_onmousedown(nId, sIcon)
 {
@@ -1206,8 +1494,9 @@ function reset_filter_heading()
 	heading.style.color = bFilterSaveColor;
 }  
 
-function reset_form()
+function reset_filter()
 {
+	flashbutton('resetfilter');
 	document.getElementById('cachename').value = "";
 	
 	for (var i=1; i<=nCacheTypeCount; i++)
@@ -1346,271 +1635,17 @@ function get_mapfilter_params()
 	sPostBody += '&lon2=' + oBounds.getNorthEast().lng();
 
 	{/literal}
-	/* - marker tooltips are unreliable in Firefox
+	{* - marker tooltips are unreliable in Firefox
 	   - anti-flicker mechanism (clear_marker_except) is irritating here because
 		 - names are not added/removed when zooming for already existing markers
 		 therefore this feature is disabled
 	// if (moMap.getZoom() > 12)
 	//  	sPostBody += '&cachenames=1';
-	*/
+	*}
 	{literal}
 	if (!bFullscreen) sPostBody += "&smallmap=1"; 
 
 	return sPostBody;
-}
-
-function data_clear()
-{
-	document.getElementById('statCachesCount').innerHTML = '0';
-	for (var nIndex=0; nIndex<moMarkerList.length; nIndex++)
-		moMarkerList[nIndex].setMap(null);
-	moMarkerList = new Array();
-}
-
-
-/* delete all markers, except those specified in "wpset". return the set of remaining markers */
-function data_clear_except( wpset )
-{
-	var existing = {};
-	
-	document.getElementById('statCachesCount').innerHTML = '0';
-	
-	var newList = new Array();
-	
-	for (var nIndex=0; nIndex<moMarkerList.length; nIndex++)
-	{
-		var oMarker = moMarkerList[nIndex];
-		var wp = oMarker.waypoint;
-		
-		if( wp != msPopupMarkerWP && !( wp in wpset ) )
-		{
-			oMarker.setMap(null);
-		}
-		else
-		{
-			existing[wp] = true;
-			newList[newList.length] = oMarker;
-		}
-	}
-	
-	moMarkerList = newList;
-	
-	return existing;
-}
-
-function queue_dataload(nMs)
-{
-	if (moDataLoadTimer != null)
-		clearTimeout(moDataLoadTimer);
-	moDataLoadTimer = window.setTimeout('data_load()', nMs);
-}
-
-function data_load()
-{
-	if (bFilterChanged)
-		moInfoWindow.close();
-	bResetFilterHeading = bFilterChanged;
-	bFilterChanged = false;
-
-	window.clearTimeout(moDataLoadTimer);
-	moDataLoadTimer = null;
-	mbDataDownloadStartTime = new Date();
-
-	if (mnResultId != 0)
-	{
-		tmd_hide();
-		mbDataDownloadHaveSecondChance = true;
-		ajaxLoad(msURLMapPHP, data_mapreceive, get_mapfilter_params());
-	}
-	else
-	{
-		gpx_download_enabled(false);
-		ajaxLoad(msURLSearchPHP, data_searchreceive, get_searchfilter_params('map2', true, false));
-	}
-}
-
-function data_mapreceive(data, responseCode)
-{
-	if (bResetFilterHeading)
-		reset_filter_heading();
-
-	if (responseCode != 200)
-	{
-		var sMessage = '{t escape=js}Error: Unable to download the search result (HTTP error code %1){/t}';
-		sMessage = sMessage.replace(/%1/, responseCode);
-		alert(sMessage);
-		return;
-	}
-
-	var oXML = xmlParse(data);
-
-	if (oXML.documentElement.getAttribute("available") +0 == 0)
-	{
-		if (mbDataDownloadHaveSecondChance == true)
-		{
-			ajaxLoad(msURLSearchPHP, data_searchreceive, get_searchfilter_params('map2', true, false));
-		}
-		else
-		{
-			// alert('{t escape=js}Error: Unable to download the search result. The data was not available on the server.{/t}');
-			error_no_data(true);
-		}
-		return;
-	}
-	else
-		error_no_data(false);
-	
-	var record_count = oXML.documentElement.getAttribute("count");
-
-	gpx_download_enabled((record_count<=mnMaxDownloadCount) && (record_count>0));
-
-	/* nee too many markers -> clear all and display message */
-	if (oXML.documentElement.getAttribute("maxrecordreached") == 1)
-	{
-		data_clear();
-		tmd_show(record_count);
-		return;
-	}
-    
-	/* compute set of markers to keep */
-	var wpset = {};
-	var oCachesList = oXML.documentElement.getElementsByTagName("c");
-	for (var nIndex=0; nIndex<oCachesList.length; nIndex++)
-	{
-		var sCacheData = oCachesList[nIndex].getAttribute("d");
-		var sWaypoint = sCacheData.substring(0,sCacheData.indexOf('/')); 
-		wpset[sWaypoint] = true;
-	}
-	/* delete unneeded markers */
-	var alreadythere = data_clear_except( wpset );
-	
-	/* add new markers (skip existing) */
-	for (var nIndex=0; nIndex<oCachesList.length; nIndex++)
-	{
-		var aCacheData = oCachesList[nIndex].getAttribute("d").split('/');
-		var sWaypoint = aCacheData[0];
-		if (!(sWaypoint in alreadythere))
-		{
-			var nLon = aCacheData[1];
-			var nLat = aCacheData[2];
-			var nType = aCacheData[3];
-			var nFlags = aCacheData[4];
-
-			addCacheToMap(sWaypoint, nLon, nLat, nType, nFlags, oCachesList[nIndex].getAttribute("n"), nIndex);
-		}
-	}
-
-	document.getElementById('statCachesCount').innerHTML = oCachesList.length;
-	document.getElementById('statLoadTime').innerHTML = getTimeDiff(mbDataDownloadStartTime, new Date());
-}
-
-function error_no_data(errorstate)
-{
-	var msgo = document.getElementById('mapstat_caches');
-	msgo.style.color = (errorstate ? 'red' : 'black');
-	msgo.style.fontWeight = (errorstate ? 'bold' : 'normal');
-}
-
-function gpx_download_enabled(enabled)
-{
-	mbDownloadEnabled = enabled;
-	if (enabled)
-		document.getElementById('download_gpx_img').src = 'resource2/ocstyle/images/map/35x35-gpx-download.png';
-	else
-		document.getElementById('download_gpx_img').src = 'resource2/ocstyle/images/map/35x35-no-gpx-download.png';
-}
-
-function getTimeDiff(dTime1, dTime2)
-{
-	return ((dTime2-dTime1)/1000).toFixed(1);
-}
-
-function NewCacheMarker(nLat, nLon, sWaypoint, nType, nFlags, sName, nZindex)
-{
-	var image, anchor;
-
-	{/literal}
-	{if $opt_cacheicons == 1}
-		image = 'resource2/ocstyle/images/map/caches1/24x24-';
-		anchor = new google.maps.Point(12,12);
-	{else}
-		image = 'resource2/ocstyle/images/map/caches2/';
-		anchor = new google.maps.Point(13,24);
-	{/if}
-	{literal}
-
-  if (nFlags & 1)				image += 'owned';
-  else if (nFlags & 2)	image += 'found';
-  else									image += 'cachetype-' + nType;
-
-  if (nFlags & 4) 			image += '-inactive';
-  else if (nFlags & 8)	image += '-oconly';
-
-	var mi = new google.maps.MarkerImage(image + '.png');
-	mi.anchor = anchor;
-
-	marker = new google.maps.Marker(
-		{	position: new google.maps.LatLng(nLat, nLon),
-			map: moMap,
-			title: sName,
-			icon: mi,
-			zIndex: nZindex });
-	marker.waypoint = sWaypoint;
-	return marker;
-}			
-
-function addCacheToMap(sWaypoint, nLon, nLat, nType, nFlags, sName, nZindex)
-{
-	if (sWaypoint == msPopupMarkerWP)
-		for (var nIndex=0; nIndex<moMarkerList.length; nIndex++)
-		{
-			var oMarker = moMarkerList[nIndex];
-			if (oMarker.getTitle() == msPopupMarkerWP)
-				return;
-		}
-
-	var oMarker = NewCacheMarker(nLat, nLon, sWaypoint, nType, nFlags, sName, nZindex);
-	google.maps.event.addListener(oMarker, "click", function(){CacheMarker_click(sWaypoint);});
-
-	moMarkerList[moMarkerList.length] = oMarker;
-}
-
-function CacheMarker_click(sWaypoint)
-{
-	show_cachepopup_wp(sWaypoint, false);
-}
-
-// receives the result of map2.php (if result is not available, search.php has to be invoked)
-function data_searchreceive(data, responseCode)
-{
-	// TODO: check
-	if (responseCode == 200)
-	{
-		// TODO: make sure that data must is a numeric ID
-		mnResultId = data;
-	}
-	
-	// continue with data download
-	tmd_hide();
-	mbDataDownloadHaveSecondChance = false;
-	ajaxLoad(msURLMapPHP, data_mapreceive, get_mapfilter_params());
-}
-
-function tmd_show(number)
-{
-	var tmd = document.getElementById("toomanycaches");
-	var txt = document.getElementById("toomanycaches_txt");
-
-	var sMessage = '{t escape=js}There are %1 Geocaches in the selected area, matching the filter options. Please zoom in to display the caches.{/t}';
-	sMessage = sMessage.replace(/%1/, number);
-	txt.innerHTML = sMessage;
-
-	tmd.style.display = 'block';
-}
-
-function tmd_hide()
-{
-	document.getElementById("toomanycaches").style.display = 'none';
 }
 
 function toggle_attribselection(bSaveCookies)
@@ -1648,14 +1683,15 @@ function toggle_attribselection(bSaveCookies)
 	}
 }
 
-//-->
+/*========================================================================= 
+    End of JavaScript code
+ =========================================================================*/
+
+-->
 </script>
 {/literal}
-{/if}
+{/if}  {* not old MSIE *}
 
-{*
- * --- End of JavaScript Code ----------------------------------------------------
- *}
 
 <div id="{if $bFullscreen}fullmap{else}smallmap{/if}" class="mapframe">
 
@@ -1678,9 +1714,7 @@ function toggle_attribselection(bSaveCookies)
 	{/if}
 	
 	{* search and buttons bar *}
-	<div class="mapform" style="z-index:15">
-		<form onsubmit="javascript:mapsubmit_click(); return false;" id="cachemap">
-			<div style="position:relative; z-index:90">
+	<div class="mapform" style="position:relative; z-index:90">
 			<table class="mapsearch" align="center">
 				<tr>
 					{if $bFullscreen}
@@ -1695,7 +1729,7 @@ function toggle_attribselection(bSaveCookies)
 					<td rowspan="2" class="mapheader_spacer"></td>
 
 					{* search bar and button *}
-					<td rowspan="2"><input type="text" id="mapsearch" style="margin-right:5px" value="" onfocus="javascript:mapsearch_onfocus()" onblur="javascript:mapsearch_onblur()" class="searchfield{if $bFullscreen}_fullscreen{/if}" size="{if $bFullscreen}40{else}50{/if}" /></td><td rowspan="2"><input type="button" id="mapsubmit" value="{t}Search{/t}" class="searchbutton{if $bFullscreen}_fullscreen{/if}" onclick="javascript:mapsubmit_click()" /></td>
+					<td rowspan="2"><input type="text" id="mapsearch" style="margin-right:5px" value="" onfocus="javascript:mapsearch_onfocus()" onblur="javascript:mapsearch_onblur()" class="searchfield{if $bFullscreen}_fullscreen{/if}" size="{if $bFullscreen}40{else}50{/if}" /></td><td rowspan="2"><input type="button" id="mapsubmit" name="mapsubmit" value="&nbsp;&nbsp;{t}Search{/t}&nbsp;&nbsp;" class="formbutton" style="width:auto; font-size:{if $bFullscreen}11px{else}12px{/if}" onclick="mapsearch_click()" /></td>
 					<td rowspan="2" class="mapheader_spacer"></td>
 
 					{* home button *}
@@ -1728,8 +1762,7 @@ function toggle_attribselection(bSaveCookies)
 				{if !$bFullscreen}
 					<td rowspan="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 				{/if}
-			</table></div>
-		</form>
+			</table>
 	</div>
 
 	{* dropdown list for search results *}
@@ -1776,7 +1809,7 @@ function toggle_attribselection(bSaveCookies)
 						<tr><td>{t}Show overview map{/t}:</td><td><input type="checkbox" name="opt_overview" value="1" {if $opt_overview==1}checked="checked"{/if}/></td></tr>
 						<tr><td>{t 1=$min_maxrecords 2=$max_maxrecords}Maximum caches on map<br />(%1-%2, 0=automatic){/t}:</td><td><input type="text" name="opt_maxcaches" size="6" value="{$opt_maxcaches}" /></td></tr>
 						<tr><td>{t}Cache icons{/t}:</td><td><select name="opt_cacheicons"><option value="1" {if $opt_cacheicons==1}selected="selected"{/if}>{t}classic OC{/t}<option value="2" {if $opt_cacheicons==2}selected="selected"{/if}>{t}OKAPI-Stil{/t}</option></select></td></tr>
-						<tr><td colspan="2">{if $login.userid>0}<input type="button" class="formbuttons" value="{t}Cancel{/t}" onclick="toggle_settings()"/>&nbsp; <input type="submit" class="formbuttons" value="{t}Change{/t}" />{else}<em>{t}You must be logged in to change map settings.{/t}</em>{/if}</td></tr>	
+						<tr><td colspan="2">{if $login.userid>0}<input type="button" class="formbutton" value="{t}Cancel{/t}" onclick="toggle_settings()"/>&nbsp; <input type="submit" name="submitsettings" class="formbutton" value="{t}Change{/t}" onclick="submitbutton('submitsettings')" />{else}<em>{t}You must be logged in to change map settings.{/t}</em>{/if}</td></tr>	
 					</table>
 				</form>
 			</div>
@@ -1856,7 +1889,7 @@ function toggle_attribselection(bSaveCookies)
 							<strong>{t}Name:{/t}</strong>&nbsp; <input type="text" id="cachename" name="cachename" value="" onkeyup="filter_changed()" onchange="filter_changed()" class="input200" /></td>
 						</td>
 						<td style="text-align:right">
-							<input type="button" class="formbuttons" value="{t}Reset{/t}" onclick="reset_form()" />&nbsp;
+							<input type="button" name="resetfilter" class="formbutton" style="width:auto" value="&nbsp;&nbsp;{t}Reset{/t}&nbsp;&nbsp;" onclick="reset_filter()" />&nbsp;
 						</td>
 					</tr>
 				</table>

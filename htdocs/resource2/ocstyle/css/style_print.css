@@ -617,10 +617,6 @@ div#main-cachemap-block { width: 265px; }
 
 p.main-totalstats { font-weight: bold; }
 
-div#fullscreen_map_filters * {
-	font-size: 11px;
-}
-
 .img-shadow {
   float:left;
   background: url(shadowAlpha.png) no-repeat bottom right !important;

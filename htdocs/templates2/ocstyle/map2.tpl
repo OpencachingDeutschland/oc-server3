@@ -1270,6 +1270,9 @@ function get_searchfilter_params(output, skipqueryid, zip)
 			sCacheTypes += i;
 		}
 	}
+	// search.php will traditionally ignore 'cachetype' option if it is empty,
+	// so we must force it to find nothing if nothing is selected here:
+	if (sCacheTypes == '') sCacheTypes = 'none';
 	sPostBody += '&cachetype=' + sCacheTypes;
 
 	/* cachesize
@@ -1283,6 +1286,7 @@ function get_searchfilter_params(output, skipqueryid, zip)
 			sCacheSizes += i;
 		}
 	}
+	if (sCacheSizes == '') sCacheSizes = 'none';
 	sPostBody += '&cachesize=' + sCacheSizes;
 
 	/* hide options

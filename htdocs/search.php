@@ -920,8 +920,6 @@
 						$sql_where[] = '`caches`.`type` IN (' . implode(',', $types) . ')';
 					}
 				}
-				else 
-					$sql_where[] = '0';
 
 				if($options['cachesize'] != '')
 				{
@@ -932,8 +930,6 @@
 						$sql_where[] = '`caches`.`size` IN (' . implode(',', $sizes) . ')';
 					}
 				}
-				else
-					$sql_where[] = '0';
 
 				if ($options['difficultymin'] != 0)
 				{

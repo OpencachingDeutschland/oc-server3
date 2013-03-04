@@ -316,4 +316,19 @@ function fix_magic_quotes_gpc()
 		}
 	}
 }
+
+// prelminary wiki help embedding; needs translation table
+//
+// pay attention to use only ' quotes in $text (escape other ')
+function helppagelink($pagename)
+{
+	global $opt;
+
+	if (isset($opt['locale'][$opt['template']['locale']]['helpwiki']))
+	  return "<a class='nooutline' href='" . $opt['locale'][$opt['template']['locale']]['helpwiki'] .
+					 str_replace(' ','_',$pagename) . "' target='_blank'>";
+	else
+		return $text;
+}
+
 ?>

@@ -1,0 +1,11 @@
+div#langstripe {
+	background: #9fbc00 url(bg-langstripe-spring.png) 0 100% repeat-x;
+}
+
+div#maplangstripe {
+	background: #9fbc00 url(bg-langstripe-spring-map.png) 0 100% repeat-x;
+}
+
+.faintseasoncolor {
+	background: #f2f5dd;
+}

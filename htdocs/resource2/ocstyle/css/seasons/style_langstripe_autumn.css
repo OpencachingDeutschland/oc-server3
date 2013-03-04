@@ -1,0 +1,10 @@
+div#langstripe {
+	background: #e17f28 url(bg-langstripe-autumn.png) 0 100% repeat-x;
+}
+
+div#maplangstripe {
+	background: #e17f28 url(bg-langstripe-autumn-map.png) 0 100% repeat-x;
+}
+.faintseasoncolor {
+	background: #f9ede1;
+}

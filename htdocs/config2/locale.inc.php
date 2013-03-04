@@ -110,6 +110,7 @@
 	$opt['locale']['DE']['country'] = 'DE';
 	$opt['locale']['DE']['page']['subtitle1'] = 'Geocaching in Deutschland,';
 	$opt['locale']['DE']['page']['subtitle2'] = 'Österreich und der Schweiz';
+	$opt['locale']['DE']['helpwiki'] = "http://wiki.opencaching.de/index.php/";
 
 	$opt['locale']['FR']['timezone'] = 'Europe/Berlin';
 	$opt['locale']['FR']['format']['date'] = '%x';

@@ -1,18 +1,35 @@
 <?php
 /***************************************************************************
- *  For license information see doc/license.txt
+ *  You can find the license in the docs directory
  *
  *  Unicode Reminder メモ
  ***************************************************************************/
 
 	require('./lib2/web.inc.php');
 	require_once('./lib2/logic/cache.class.php');
+	require_once('./lib2/logic/user.class.php');
 	require_once('./lib2/logic/attribute.class.php');
 
 	/* because the map does access some private info like
 	 * ignored caches, we need to verify the login data
 	 */
 	$login->verify();
+	
+	if ($login->userid > 0)
+	{
+		$user_maxrecords = $maxrecords =
+			sql_value("SELECT option_value FROM user_options WHERE user_id='&1' AND option_id=8",
+                $opt['map']['maxrecords'] + 0, $login->userid);
+		if ($maxrecords == 0)
+			$maxrecords = $opt['map']['maxrecords'] + 0;
+		else
+			$maxrecords = min(max($maxrecords, $opt['map']['min_maxrecords']), $opt['map']['max_maxrecords']);
+	}
+	else
+	{
+		$maxrecords = $opt['map']['maxrecords'] + 0;
+		$user_maxrecords = 0;
+	}
 
 	$sMode = isset($_REQUEST['mode']) ? $_REQUEST['mode'] : '';
 	if ($sMode == 'locate')
@@ -40,22 +57,65 @@
 	else if ($sMode == 'searchresult')
 	{
 		$nResultId = isset($_REQUEST['resultid']) ? $_REQUEST['resultid']+0 : 0;
+		$compact = isset($_REQUEST['compact']) && $_REQUEST['compact'];
 		$nLon1 = isset($_REQUEST['lon1']) ? $_REQUEST['lon1']+0 : 0;
 		$nLon2 = isset($_REQUEST['lon2']) ? $_REQUEST['lon2']+0 : 0;
 		$nLat1 = isset($_REQUEST['lat1']) ? $_REQUEST['lat1']+0 : 0;
 		$nLat2 = isset($_REQUEST['lat2']) ? $_REQUEST['lat2']+0 : 0;
+		$cachenames = isset($_REQUEST['cachenames']) ? $_REQUEST['cachenames']+0 : 0;
+		
+		if (isset($_REQUEST['smallmap']) && $_REQUEST['smallmap'] && 
+		    $user_maxrecords == 0 && $maxrecords > 1000)
+			$maxrecords = floor($maxrecords*0.65);
 
-		output_searchresult($nResultId, $nLon1, $nLat1, $nLon2, $nLat2);
+		output_searchresult($nResultId, $compact, $nLon1, $nLon2, $nLat1, $nLat2, $cachenames);
 	}
-	else if ($sMode == 'fullscreen')
+	else if ($sMode == 'fullscreen' ||
+	         ($sMode == '' &&
+            sql_value("SELECT option_value FROM user_options
+                       INNER JOIN user ON user_options.user_id=user.user_id
+                       WHERE option_id=6 AND user.user_id='&1'", true, $login->userid)))
 	{
-		$tpl->popup = true;
+		$fullscreen = true;
+		$tpl->popup = true;        // disables page header and -framefrapage
 		$tpl->popupmargin = false;
+	}
+	else
+	{
+		$fullscreen = false;
+	}
+
+	// save options
+	if (isset($_REQUEST['submit']) && $_REQUEST['submit'] && $login->userid > 0)
+	{
+		sql("INSERT INTO `user_options` (`user_id`, `option_id`, `option_visible`, `option_value`)
+		          VALUES ('&1', '&2', '&3', '&4')
+							ON DUPLICATE KEY UPDATE `option_value`='&4'",
+							$login->userid, 6, 0, min(max($_REQUEST['opt_menumap']+0, 0), 1) );
+		sql("INSERT INTO `user_options` (`user_id`, `option_id`, `option_visible`, `option_value`)
+		          VALUES ('&1', '&2', '&3', '&4')
+							ON DUPLICATE KEY UPDATE `option_value`='&4'",
+							$login->userid, 7, 0, isset($_REQUEST['opt_overview']) ? min(max($_REQUEST['opt_overview']+0, 0), 1) : 0);
+		sql("INSERT INTO `user_options` (`user_id`, `option_id`, `option_visible`, `option_value`)
+		          VALUES ('&1', '&2', '&3', '&4')
+							ON DUPLICATE KEY UPDATE `option_value`='&4'",
+							$login->userid, 8, 0, $_REQUEST['opt_maxcaches'] == 0 ? 0 : min(max($_REQUEST['opt_maxcaches']+0, $opt['map']['min_maxrecords']), $opt['map']['max_maxrecords']) );
+		sql("INSERT INTO `user_options` (`user_id`, `option_id`, `option_visible`, `option_value`)
+		          VALUES ('&1', '&2', '&3', '&4')
+							ON DUPLICATE KEY UPDATE `option_value`='&4'",
+							$login->userid, 9, 0, min(max($_REQUEST['opt_cacheicons']+0, 1), 2) );
 	}
 
 	$tpl->name = 'map2';
 	$tpl->menuitem = MNU_MAP;
 	$tpl->nowpsearch = true;
+
+	// check for browser compatibility
+	if (preg_match('/MSIE [1-9]+.[0-9]+/',$_SERVER['HTTP_USER_AGENT']))
+		$tpl->assign('msie',true);
+	if (preg_match('/MSIE [1-6].[0-9]+/',$_SERVER['HTTP_USER_AGENT']))
+		$tpl->assign('old_msie',true);
+	$tpl->assign('maxrecords',$maxrecords);
 
 	// get the correct mapkey
 	$sHost = strtolower($_SERVER['HTTP_HOST']);
@@ -64,13 +124,11 @@
 	else
 		$tpl->error($translate->t('There is no google maps key registered for this domain.', '', '', 0));
 
-  $tpl->add_header_javascript('http://maps.google.com/maps?file=api&amp;v=2.x&amp;key=' . urlencode($sGMKey));
-  $tpl->add_header_javascript('resource2/misc/map/dragzoom_packed.js');
-  $tpl->add_header_javascript('resource2/misc/map/LatLonDisplayControl.js');
-  $tpl->add_header_javascript('resource2/misc/map/CacheMarker.js');
-  //$tpl->add_header_javascript('resource2/misc/map/MessageControl.js');
+  $tpl->add_header_javascript('http://maps.googleapis.com/maps/api/js?sensor=false&key=' . urlencode($sGMKey));
+  	// https is supported by google, but may make problems in some environments,
+  	// e.g. does not work with MSIE 7 on WinXP
   $tpl->add_body_load('mapLoad()');
-  $tpl->add_body_unload('GUnload()');
+  $tpl->add_body_unload('mapUnload()');
 
 	// process start params
 	$bGMInitCookiePos = true;
@@ -117,39 +175,79 @@
 			{
 				$nGMInitLon = $cache->getLongitude();
 				$nGMInitLat = $cache->getLatitude();
-				$nGMInitZoom = 13;
+				$nGMInitZoom = -1;
 				$bGMInitCookiePos = false;
 			}
 			else
 				$sGMInitWaypoint = '';
 		}
 	}
-
+	
+	$nUserLon = 0;
+	$nUserLat = 0;
+	if ($login->userid != 0 )
+	{
+		$user = new user($login->userid);
+		$nUserLat = $user->getLatitude();
+		$nUserLon = $user->getLongitude();
+		$tpl->assign('username',$user->getUsername());
+	}
+	else
+		$tpl->assign('username',"");
+	$tpl->assign('nUserLon', $nUserLon);
+	$tpl->assign('nUserLat', $nUserLat);
+	
 	$tpl->assign('nGMInitLon', $nGMInitLon);
 	$tpl->assign('nGMInitLat', $nGMInitLat);
 	$tpl->assign('nGMInitZoom', $nGMInitZoom);
 	$tpl->assign('bGMInitCookiePos', ($bGMInitCookiePos ? 1 : 0));
 	$tpl->assign('sGMInitWaypoint', $sGMInitWaypoint);
-	$tpl->assign('bFullscreen', ($sMode == 'fullscreen' ? 1 : 0));
-	$tpl->assign('bDisableFullscreen', $opt['map']['disablefullscreen']);
+	$tpl->assign('bFullscreen', $fullscreen ? 1 : 0);
 
-	$rsCacheType = sql("SELECT `cache_type`.`id`, IFNULL(`sys_trans_text`.`text`, `cache_type`.`name`) AS `text` FROM `cache_type` LEFT JOIN `sys_trans` ON `cache_type`.`trans_id`=`sys_trans`.`id` LEFT JOIN `sys_trans_text` ON `sys_trans`.`id`=`sys_trans_text`.`trans_id` AND `sys_trans_text`.`lang`='&1' ORDER BY `cache_type`.`ordinal` ASC", $opt['template']['locale']);
+	$rsCacheType = sql("SELECT `cache_type`.`id`, IFNULL(`sys_trans_text`.`text`, `cache_type`.`short2`) AS `text` FROM `cache_type` LEFT JOIN `sys_trans_text` ON `cache_type`.`short2_trans_id`=`sys_trans_text`.`trans_id` AND `sys_trans_text`.`lang`='&1' ORDER BY `cache_type`.`ordinal` ASC", $opt['template']['locale']);
 	$tpl->assign_rs('aCacheType', $rsCacheType);
 	sql_free_result($rsCacheType);
 
-	$rsCacheSize = sql("SELECT `cache_size`.`id`, IFNULL(`sys_trans_text`.`text`, `cache_size`.`name`) AS `text` FROM `cache_size` LEFT JOIN `sys_trans` ON `cache_size`.`trans_id`=`sys_trans`.`id` LEFT JOIN `sys_trans_text` ON `sys_trans`.`id`=`sys_trans_text`.`trans_id` AND `sys_trans_text`.`lang`='&1' ORDER BY `cache_size`.`ordinal` ASC", $opt['template']['locale']);
+	$rsCacheSize = sql("SELECT `cache_size`.`id`, IFNULL(`sys_trans_text`.`text`, `cache_size`.`name`) AS `text` FROM `cache_size` LEFT JOIN `sys_trans_text` ON `cache_size`.`trans_id`=`sys_trans_text`.`trans_id` AND `sys_trans_text`.`lang`='&1' ORDER BY `cache_size`.`ordinal` ASC", $opt['template']['locale']);
 	$tpl->assign_rs('aCacheSize', $rsCacheSize);
 	sql_free_result($rsCacheSize);
 
 	/* assign attributes */
-	$tpl->assign('aAttributes', attribute::getAttrbutesListArray());
+	$tpl->assign('aAttributes', attribute::getSelectableAttrbutesListArray());
 
 	$aAttributesDisabled = array();
+	$maxaid = 0;
 	$rs = sql("SELECT `id` FROM `cache_attrib`");
 	while ($r = sql_fetch_assoc($rs))
+	{
 		$aAttributesDisabled[] = $r['id'];
+		if ($r['id'] > $maxaid) $maxaid = $r['id'];
+	}
 	sql_free_result($rs);
 	$tpl->assign('aAttributesDisabled', $aAttributesDisabled);
+	$tpl->assign('maxAttributeId', $maxaid);
+
+	// options
+	$rs = sql("SELECT `profile_options`.`id`,
+                    IF(`option_value` IS NULL, `default_value`, `option_value`) AS `value`
+	             FROM `profile_options`
+          LEFT JOIN `user_options` ON `profile_options`.`id`=`user_options`.`option_id`  AND `user_id`='&1' 
+              WHERE `optionset`=2",
+						$login->userid);
+	while ($r = sql_fetch_assoc($rs))
+		switch ($r['id'])
+		{
+			case 6: $tpl->assign('opt_menumap',    $r['value']); break;
+			case 7: $tpl->assign('opt_overview',   $r['value']); break;
+			case 8: $tpl->assign('opt_maxcaches',  $r['value']); break;
+			case 9: $tpl->assign('opt_cacheicons', $r['value']); break;
+		}
+	sql_free_result($rs);
+	$tpl->assign('min_maxrecords', $opt['map']['min_maxrecords']);
+	$tpl->assign('max_maxrecords', $opt['map']['max_maxrecords']);
+
+	$tpl->assign('help_oconly', helppagelink("OConly"));
+	$tpl->assign('help_map', helppagelink("Cachekarte"));
 
 	$tpl->display();
 
@@ -190,16 +288,16 @@ function output_cachexml($sWaypoint)
 
 	$rsCache = sql_slave("SELECT `caches`.`name`, `caches`.`wp_oc`, `caches`.`cache_id`, `caches`.`type`,
 	                             `caches`.`longitude`, `caches`.`latitude`, 
-	                             IF(`caches`.`status`=2, 1, 0) AS `tna`, 
+	                             IF(`caches`.`status` IN (2,3,6), 1, 0) AS `tna`, 
 	                             IFNULL(`trans_status_text`.`text`, `cache_status`.`name`) AS `statustext`,
 	                             IFNULL(`trans_type_text`.`text`, `cache_type`.`name`) AS `type_text`, `cache_type`.`id` AS `type_id`, 
 	                             IFNULL(`trans_size_text`.`text`, `cache_size`.`name`) AS `size`, 
 	                             `caches`.`difficulty`, `caches`.`terrain`, 
-	                             `caches`.`date_created`, 
+	                             `caches`.`date_created`, `caches`.`is_publishdate`,
 	                             IFNULL(`stat_caches`.`toprating`, 0) AS `toprating`, 
 	                             IF(`caches`.`user_id`='&1', 1, 0) AS `owner`, 
 	                             `user`.`username`, `user`.`user_id`,
-	                             IF(`caches_attributes`.`attrib_id` IS NULL, 0, 1) AS  `oconly`
+	                             IF(`caches_attributes`.`attrib_id` IS NULL, 0, 1) AS `oconly`
 	                        FROM `caches` 
 	                  INNER JOIN `cache_type` ON `caches`.`type`=`cache_type`.`id` 
 	                  INNER JOIN `cache_status` ON `caches`.`status`=`cache_status`.`id` 
@@ -246,6 +344,7 @@ function output_cachexml($sWaypoint)
 	echo 'difficulty="' . xmlentities($rCache['difficulty']/2) . '" ';
 	echo 'terrain="' . xmlentities($rCache['terrain']/2) . '" ';
 	echo 'listed_since="' . xmlentities(strftime($opt['locale'][$opt['template']['locale']]['format']['date'], strtotime($rCache['date_created']))) . '" ';
+	echo 'is_publishdate="' . xmlentities($rCache['is_publishdate']) . '" ';
 	echo 'toprating="' . xmlentities($rCache['toprating']) . '" ';
 	echo 'geokreties="' . xmlentities($nGeokretyCount) . '" ';
 	echo 'found="' . xmlentities(($nFoundCount>0) ? 1 : 0) . '" ';
@@ -271,7 +370,7 @@ function output_namesearch($sName, $nLat, $nLon, $nResultId)
                           `caches`.`name`, `caches`.`wp_oc` 
                      FROM `map2_data` 
                INNER JOIN `caches` ON `map2_data`.`cache_id`=`caches`.`cache_id`
-               INNeR JOIN `cache_status` ON `caches`.`status`=`cache_status`.`id`
+               INNER JOIN `cache_status` ON `caches`.`status`=`cache_status`.`id`
                     WHERE `caches`.`name` LIKE '&1' 
                       AND (`cache_status`.`allow_user_view`=1 OR `caches`.`user_id`='&3')
                       AND `map2_data`.`result_id`='&2'
@@ -288,9 +387,9 @@ function output_namesearch($sName, $nLat, $nLon, $nResultId)
   exit;
 }
 
-function output_searchresult($nResultId, $nLon1, $nLat1, $nLon2, $nLat2)
+function output_searchresult($nResultId, $compact, $nLon1, $nLon2, $nLat1, $nLat2, $cachenames)
 {
-	global $opt, $login;
+	global $login, $opt, $maxrecords;
 
 	// check if data is available and connect the right slave server
 	$nSlaveId = sql_value("SELECT `slave_id` FROM `map2_result` WHERE `result_id`='&1' AND DATE_ADD(`date_created`, INTERVAL '&2' SECOND)>NOW()", -2, $nResultId, $opt['map']['maxcacheage']);
@@ -309,8 +408,9 @@ function output_searchresult($nResultId, $nLon1, $nLat1, $nLon2, $nLat2)
 	// TODO: SQL_CALC_FOUND_ROWS + $nRecordCount = sql_value_slave("SELECT FOUND_ROWS()", 0);
 
 	$bMaxRecordReached = false;
-	if ($nRecordCount > $opt['map']['maxrecords'])
+	if ($nRecordCount > $maxrecords)
 		$bMaxRecordReached = true;
+	$namequery = ($cachenames ? ", `caches`.`name` AS `cachename`" : "");
 
 	echo '<searchresult count="' . $nRecordCount . '" available="1" maxrecordreached="' . ($bMaxRecordReached ? '1' : '0') . '">' . "\n";
 
@@ -322,19 +422,21 @@ function output_searchresult($nResultId, $nLon1, $nLat1, $nLon2, $nLat2)
                             `caches`.`status`>1 AS `inactive`,
                             `user`.`user_id`='&6' AS `owned`,
                             IF(`cache_logs`.`id` IS NULL, 0, 1) AS `found`,
-                            IF(`caches_attributes`.`attrib_id` IS NULL, 0, 1) AS  `oconly`
+                            IF(`caches_attributes`.`attrib_id` IS NULL, 0, 1) AS `oconly`" .
+                            $namequery . "
                        FROM `map2_data`
                  INNER JOIN `caches` ON `map2_data`.`cache_id`=`caches`.`cache_id`
                   LEFT JOIN `user` ON `user`.`user_id`=`caches`.`user_id`
                   LEFT JOIN `cache_logs` ON `cache_logs`.`cache_id`=`caches`.`cache_id` AND `cache_logs`.`user_id`='&6' AND `cache_logs`.`type` IN (1,7)
                   LEFT JOIN `caches_attributes` ON `caches_attributes`.`cache_id`=`caches`.`cache_id` AND `caches_attributes`.`attrib_id`=6
-WHERE `map2_data`.`result_id`='&1' AND `caches`.`longitude`>'&2' AND `caches`.`longitude`<'&3' AND `caches`.`latitude`>'&4' AND `caches`.`latitude`<'&5'
+                      WHERE `map2_data`.`result_id`='&1' AND `caches`.`longitude`>'&2' AND `caches`.`longitude`<'&3' AND `caches`.`latitude`>'&4' AND `caches`.`latitude`<'&5'
 									 ORDER BY `caches`.`status` DESC, `oconly` AND NOT `found`, NOT `found`, `caches`.`type`<>4, MD5(`caches`.`name`)
-									 LIMIT " . ($opt['map']['maxrecords']+0),
+									 LIMIT &7",
 									    // sort in reverse order, because last are on top of map;
 									    // fixed order avoids oscillations when panning;
 									    // MD5 pseudo-randomness gives equal changes for all kinds of caches to be on top
-									    $nResultId, $nLon1, $nLon2, $nLat1, $nLat2, $login->userid);
+									    $nResultId, $nLon1, $nLon2, $nLat1, $nLat2, $login->userid, $maxrecords);
+
 		while ($r = sql_fetch_assoc($rs))
 		{
 			$flags = 0; 
@@ -342,7 +444,21 @@ WHERE `map2_data`.`result_id`='&1' AND `caches`.`longitude`>'&2' AND `caches`.`l
 			if ($r['found']) $flags |= 2;
 			if ($r['inactive']) $flags |= 4;
 			if ($r['oconly']) $flags |= 8;
-			echo '<cache wp="' . xmlentities($r['wp_oc']) . '" lon="' . xmlentities($r['longitude']) . '" lat="' . xmlentities($r['latitude']) . '" type="' . xmlentities($r['type']) . '" flags="' . xmlentities($flags) . '" />' . "\n";
+
+			if ($compact)
+				echo '<c d="' . xmlentities($r['wp_oc']) . '/' .
+							xmlentities(round($r['longitude'],5)) . '/' . 
+							xmlentities(round($r['latitude'],5)) . '/' .
+							xmlentities($r['type']) . '/' . xmlentities($flags) . '"' .
+							(isset($r['cachename']) ? ' n="' . xmlentities($r['cachename']) . '"' : '') . 
+							' />';
+			else
+				echo '<cache wp="' . xmlentities($r['wp_oc']) . '"' .
+							' lon="' . xmlentities(round($r['longitude'],5)) . '"' . 
+							' lat="' . xmlentities(round($r['latitude'],5)) . '"' . 
+							' type="' . xmlentities($r['type']) . '"' .
+							(isset($r['cachename']) ? ' n="' . xmlentities($r['cachename']) . '"' : '') .  
+							' f="' . xmlentities($flags) . '" />' . "\n";
 		}
 		sql_free_result($rs);
 	}

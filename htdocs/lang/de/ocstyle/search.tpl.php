@@ -271,7 +271,7 @@ function switchAttributeCat2()
 <form name="optionsform" style="display:inline;">
 
 <div id="scriptwarning" style="margin:0 5px 0 5px;">
-	<p><span class="errormsg">{t}JavaScrupt is not activated, you cannot use the following options (sorting to attributes) - basic search is supported nevertheless.{/t}</span></p>
+	<p><span class="errormsg">{t}JavaScript is not activated, you cannot use the following options (sorting to attributes) - basic search is supported nevertheless.{/t}</span></p>
 </div>
 
 <div class="searchdiv">

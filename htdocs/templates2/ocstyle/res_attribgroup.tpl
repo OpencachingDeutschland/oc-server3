@@ -17,7 +17,7 @@
 *}
 
 {foreach from=$attriblist item=attribGroupItem}
-	<div class="attribgroup">
+	<div id="attribgroup{$attribGroupItem.id}" class="attribgroup">
 		<table cellspacing="0">
 			<tr>
 				<td bgcolor="{$attribGroupItem.color|escape}" style="line-height:9px;padding-top:2px;margin:0 0 0 0;border-left:1px solid gray;border-right:1px solid gray;border-top:1px solid gray;">

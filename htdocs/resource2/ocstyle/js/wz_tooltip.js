@@ -1,4 +1,7 @@
-/* This notice must be untouched at all times.
+/*
+	This is used for attribute tooltips.
+
+This notice must be untouched at all times.
 Copyright (c) 2002-2008 Walter Zorn. All rights reserved.
 
 wz_tooltip.js	 v. 5.31

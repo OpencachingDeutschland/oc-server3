@@ -42,8 +42,7 @@ function change()
 
 	if (isset($_REQUEST['save']))
 	{
-		$rs = sql('SELECT `id` FROM `profile_options` ORDER BY `id`');
-
+		$rs = sql('SELECT `id` FROM `profile_options` WHERE `optionset`=1 ORDER BY `id`');
 		$bError = false;
 		$error = ': ';
 		$errorlen = ': ';
@@ -111,6 +110,7 @@ function assignFromDB($userid)
 		      LEFT JOIN `user_options` AS `u` ON `p`.`id`=`u`.`option_id` AND (`u`.`user_id` IS NULL OR `u`.`user_id`='&1')
 		      LEFT JOIN `sys_trans` AS `st` ON `p`.`trans_id`=`st`.`id` AND `p`.`name`=`st`.`text`
 		      LEFT JOIN `sys_trans_text` AS `tt` ON `st`.`id`=`tt`.`trans_id` AND `tt`.`lang`='&2'
+		          WHERE `optionset`=1
 		       ORDER BY `p`.`internal_use` DESC, `p`.`option_order`", 
 		                $userid+0, 
 		                $opt['template']['locale']);

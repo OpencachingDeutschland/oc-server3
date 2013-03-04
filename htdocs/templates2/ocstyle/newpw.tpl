@@ -93,20 +93,21 @@
 			<tr><td width="150px">&nbsp;</td><td><span class="errormsg">{t}The security code does not match.{/t}</span></td></tr>
 		{/if}
 		<tr>
-			<td>{t}New password{/t}</td>
+			<td style="vertical-align:top">{t}New password{/t}:</td>
 			<td>
 				<input name="password1" type="password" value="" maxlength="60" class="input120" />
-				{if $passwordNotMatch==true}
-					<span class="errormsg">{t}The passwords did not match.{/t}</span>
-				{elseif $passwordError==true}
-					<span class="errormsg">{t}The password contains invalid chars.{/t}</span>
-				{/if}
 			</td>
 		</tr>
+		{if $passwordError==true}
+			<tr><td></td><td>{include file="res_passworderror.tpl"}</td></tr>
+		{/if}
 		<tr>
 			<td>{t}Please repeat:{/t}</td>
 			<td>
 				<input name="password2" type="password" value="" maxlength="60" class="input120" />
+				{if $passwordNotMatch==true}
+					&nbsp;<span class="errormsg">{t}The passwords do not match.{/t}</span>
+				{/if}
 			</td>	
 		</tr>
 		<tr><td class="spacer" colspan="2"></td></tr>

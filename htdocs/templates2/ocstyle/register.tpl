@@ -143,22 +143,9 @@
 					<td>&nbsp;</td>
 					<td>
 						{if $error_password_not_ok==1}
-							<span class="errormsg">
-								{t}Your password did not pass our security check.{/t}<br />
-								{t}Verify that your password matches the following criteria:{/t}<br />
-								<ul>
-									<li>{t}Between 6 and 60 chars of length{/t}</li>
-									<li>{t}At least 4 different chars{/t}</li>
-									<li>{t}Do not use parts of your username, name or email{/t}</li>
-									<li>{t}Do not use common geocaching words{/t}</li>
-									<li>{t}Do not use dictionary words like 'master'{/t}</li>
-									<li>{t}Not all special characters are allowed. You may only use{/t}<br />
-											{t}a-z A-Z 0-9 and .-_ @&auml;&uuml;&ouml;&Auml;&Uuml;&Ouml;=)(/\&amp;*+~#{/t}</li>
-								</ul>
-								{t}This rules ensures that your password cannot be guessed by an automated script.{/t}
-							</span>
+							{include file="res_passworderror.tpl"}
 						{elseif $error_password_diffs==1}
-							<span class="errormsg">{t}The passwords did not match.{/t}</span>
+							<span class="errormsg">{t}The passwords do not match.{/t}</span>
 						{/if}
 					</td>
 				</tr>
@@ -176,22 +163,6 @@
 					{/if}
 				</td>
 			</tr>
-			{if $error_password_toosimple==1}
-				<tr>
-					<td colspan="2">
-						<span class="errormsg">
-							{t}Your choosen password was too simple. For your own security, we recommend
-							a stronger password:{/t}
-							<ul>
-								<li>{t}length at least 6 chars{/t}</li>
-								<li>{t}at least 4 different chars{/t}</li>
-								<li>{t}not part of the username{/t}</li>
-								<li>{t}not in the wordlist with often used passwords{/t}</li>
-							</ul>
-						</span>
-					</td>
-				</tr>
-			{/if}
 			<tr><td class="spacer" colspan="2"></td></tr>
 
 			<tr>

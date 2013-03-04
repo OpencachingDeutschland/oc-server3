@@ -527,7 +527,7 @@ input.formbutton:hover {
 input.formbutton_active {
 	width:120px;
 	border:1px solid #ffe9c5;
-	padding:2px 0px 2px 0;
+	padding:1px 0px 1px 0;
 	color: #000000;
 	background-color:#ffe9c5;
 	border-radius: 3px;

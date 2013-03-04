@@ -8,12 +8,57 @@
 	</div>
 	<div class="content-txtbox-noshade changelog" style="padding-right: 25px;">
 
-	<p>Opencaching Version 1.0 ging im August 2005 online. In den nachfolgenden Jahren wurde die Website stetig verbessert und zur Version 2 weiterentwickelt. Anfang 2011 wurde die Entwicklung vorübergehend eingestellt, bis der neue Verein Opencaching Deutschland sie Mitte 2012 unter der Versionsnummer&nbsp;3.0 wieder aufnahm. Das neue Entwicklerteam arbeitet sich zunächst mit einfachen Aufgaben ein.</p>
+	<p>Opencaching Version 1.0 ging im August 2005 online. In den nachfolgenden Jahren wurde die Website stetig verbessert und zur Version 2 weiterentwickelt. Anfang 2011 wurde die Entwicklung vorübergehend eingestellt, bis der neue Verein Opencaching Deutschland sie Mitte 2012 unter der Versionsnummer&nbsp;3.0 wieder aufnahm.</p>
+
 	<p>Im Folgenden sind alle Veränderungen ab OC Version&nbsp;3.0 aufgelistet.</p>
 	<br />
 
-	<div>
-	 <p><strong>Version 3.0.4</strong> &ndash; 17. Februar 2013
+	<p><strong>Version 3.0.5</strong> &ndash; xx. März 2013</p>
+	<p>Karte komplett überarbeitet:</p>
+	<ul>
+		<li>Markierung von eigenen, gefundenen, nicht gefundenen und <a href="http://wiki.opencaching.de/index.php/OConly" target="_blank">OConly</a>-Caches</li>
+		<li><a href="map2.php?mode=fullscreen">Vollbildkarte</a> mit ausklappbaren Filtereinstellungen</li> 
+		<li><a href="http://wiki.opencaching.de/index.php/Zusätzliche_Wegpunkte" target="_blank">zusätzliche Wegpunkte</a> des gewählten Caches werden angezeigt</li>
+		<li>bis zu 4000 Caches auf einer Karte</li>
+		<li>alternative Cachesymbole wählbar (Opencaching.pl-Stil)</li>
+		<li>Home-Button springt zu den im <a href="myprofile.php">Profil</a> eingetragenen Heimkoordinaten</li>
+		<li>Verbesserungen bei der Cacheauswahl / Filter:
+			<ul>
+				<li>komfortablere Auswahl von einzelnen Cachetypen oder -größen</li>
+				<li>Vorauswahl der wichtigsten Attribute wie auf der <a href="search.php">Suchseite</a></li>
+				<li>Änderungen werden automatisch übernommen, ohne nochmal &bdquo;Ok&ldquo; klicken zu müssen</li>
+				<li>Einstellungen bleiben bis zum Beenden des Browsers erhalten</li>
+			</ul>
+		</li>
+		<li>schönere Popup-Fenster mit OConly-Icons, Schwierigkeits- und Geländesymbolen und größeren Cachesymbolen</li>
+		<li>OConly-Caches werden oben angezeigt; inaktive und (nicht) gefundene im Hintergrund</li>
+		<li>besser lesbare Koordinatenanzeige</li>
+		<li>Bedienung der Suchfunktion verbessert</li>
+		<li>schnellerer Abruf der Cachedaten</li>
+		<li>zusätzliches Katenmaterial von <a href="http://www.thunderforest.com/opencyclemap/" target="_blank">OpenCycleMap</a> und <a href="http://www.mapquest.de/" target="_blank">MapQuest</a></li>
+		<li>interne Umstellung von Google Maps Version 2 auf Version 3; <span class="redtext">im Microsoft Internet Explorer recht träge, Verwendung eines anderen Browsers wird empfohlen</span></li>
+	</ul>
+
+	<p>Sonstige Neuerungen und Änderungen:</p>
+	<ul>
+		<li>Auf den meisten Seiten gibt es nun rechts oben einen Hilfe-Knopf, der auf eine passende Seite im <a href="http://wiki.opencaching.de/" target="_blank">Opencaching-Wiki</a> verweist.</li>
+		<li>neue Wegpunkttypen <em>Pfad</em>, <em>Ziel</em> und <em>interessanter Ort</em></li>
+		<li>Bei unzustellbaren Emails erhalten Benutzer ggf. eine Aufforderung, ihre Mailadresse zu ändern oder zu bestätigen.</li>
+		<li>inaktive Caches werden in der Beobachtungsliste durchgestrichen, wie bereits in der Ignorierliste</li>
+		<li>verbesserte Bildeinbettung in GPX-Dateien, nun alles wie im Originallisting</li>
+		<li>viele Detailverbesserungen bei Formuarlayouts</li>
+		<li>Adminliste (intern)</li>
+	</ul>
+
+	<p>Korrigiert (Bugfixes):</p>
+	<ul>
+		<li>Handhabung von Nano-Caches bei gespeicherten Suchen korrigiert</li>
+		<li>Javascript-Warnung beim Loggen auf der italenischen Seite beseitigt</li>
+		<li>dänische Flagge bei dänischen Cachebeschreibungen</li>
+		<li>Suchprobleme nach Logout behoben</li>
+	</ul>
+
+	 <p><strong>Version 3.0.4</strong> &ndash; 17. Februar 2013</p>
    <p>Neu:</p>
 	 <ul>
      <li>neue Cachegröße &bdquo;nano&ldquo;</li>
@@ -147,4 +192,4 @@
    </ul>
 	<br />
 
-	</div>
+</div>

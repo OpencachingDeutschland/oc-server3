@@ -8,10 +8,55 @@
 	</div>
 	<div class="content-txtbox-noshade changelog" style="padding-right: 25px;">
 
-	<p>Opencaching.de Version 1.0 went online in August 2005 und was steadily enhanced in the following years, switching to Version 2. In the beginning of 2011, development was halted, until the new Opencaching Deutschland association restarted it in July 2012 at Version&nbsp;3.0. The new developement team has started with simple tasks for learning the ropes.</p>
+	<p>Opencaching.de Version 1.0 went online in August 2005 und was steadily enhanced in the following years, switching to Version 2. In the beginning of 2011, development was halted, until the new Opencaching Deutschland association restarted it in July 2012 at Version&nbsp;3.0.</p>
 
 	<p>This page lists all changes since version 3.0.</p>
 	<br />
+
+	<p><strong>Releaas 3.0.5</strong> &ndash; March xx, 2013</p>
+	<p>Completely reworked map:</p>
+	<ul>
+		<li>Own, found, not found and <a href="http://wiki.opencaching.de/index.php/OConly" target="_blank">OConly</a> caches are marked</li>
+		<li><a href="map2.php?mode=fullscreen">Full screen map</a> with swing-out filter options</li> 
+		<li>additional waypoints of the selected cache are shown</li>
+		<li>up to 4000 caches on one map view</li>
+		<li>optional you can use Opencaching.pl-style cache icons</li>
+		<li>home button jumps to the home coordinates given in your <a href="myprofile.php">user profile</a></li>
+		<li>Cache selection / filtering improvements:
+			<ul>
+				<li>easier selection of single cache types and sizes</li>
+				<li>preselection of the most relevant attributes like at the <a href="search.php">search pache</a></li>
+				<li>changes are automatically activated in the map without having to click "ok"</li>
+				<li>settings will be retained until you close your web browser</li>
+			</ul>
+		</li>
+		<li>nicer popup windows with OConly, difficulty and terrain symbols and larger cache type symbols</li>
+		<li>OConly are shown in topm inactive and (not) found caches caches below</li>
+		<li>better readable coordinate display</li>
+		<li>improved search function handling</li>
+		<li>faster retreival of cache data</li>
+		<li>additional maps from <a href="http://www.thunderforest.com/opencyclemap/" target="_blank">OpenCycleMap</a> and <a href="http://www.mapquest.com/" target="_blank">MapQuest</a></li>
+		<li>internal change from Google Maps Version 2 to Version 3; <span class="redtext">somewhat sluggish in Microsoft Internet Explorer, we recommend to use another browser</span></li>
+	</ul>
+
+	<p>Sonstige Neuerungen und Änderungen:</p>
+	<ul>
+		<li>Auf den meisten Seiten gibt es nun rechts oben einen Hilfe-Knopf, der auf eine passende Seite im <a href="http://wiki.opencaching.de/" target="_blank">Opencaching-Wiki</a> verweist.</li>
+		<li>neue Wegpunkttypen <em>Pfad</em>, <em>Ziel</em> und <em>interessanter Ort</em></li>
+		<li>Bei unzustellbaren Emails erhalten Benutzer ggf. eine Aufforderung, ihre Mailadresse zu ändern oder zu bestätigen.</li>
+		<li>inaktive Caches werden in der Beobachtungsliste durchgestrichen, wie bereits in der Ignorierliste</li>
+		<li>verbesserte Bildeinbettung in GPX-Dateien, nun alles wie im Originallisting</li>
+		<li>viele Detailverbesserungen bei Formuarlayouts</li>
+		<li>Adminliste (intern)</li>
+	</ul>
+
+	<p>Korrigiert (Bugfixes):</p>
+	<ul>
+		<li>Handhabung von Nano-Caches bei gespeicherten Suchen korrigiert</li>
+		<li>Javascript-Warnung beim Loggen auf der italenischen Seite beseitigt</li>
+		<li>dänische Flagge bei dänischen Cachebeschreibungen</li>
+		<li>Suchprobleme nach Logout behoben</li>
+	</ul>
 
 	 <p><strong>Release  3.0.4</strong> &ndash; February 17, 2013
    <p>New:</p>

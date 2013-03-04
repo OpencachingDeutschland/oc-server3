@@ -228,6 +228,7 @@ ul#statmenu { padding: 0px; margin: 0px;}
 
 .errormsg {color: rgb(240,100,100); font-weight: bold;}
 .okmsg {color: rgb(0,191,0); font-weight: bold;}
+.redtext {color: rgb(191,0,0);}
 
 #cache_name_block { width: 670px; padding-left: 5px; padding-top: 5px;}
 
@@ -301,6 +302,7 @@ ul.linklist-noindent {margin: -0.3em 0px 0.5em 0px; padding: 0px; list-style-typ
 ul.linklist-indent {margin: -0.3em 0px 0.5em 0px; padding: 0px 0px 0px 10px; list-style-type: none; line-height: 1.2em; font-size: 120%; }
 div.changelog ul {font-size: 105%; margin: 0px 0px 10px 0px; }
 div.changelog ul li {margin: 0px 0px 0.1em 0px; }
+div.changelog ul li ul {font-size: 90%; margin:0}
 
 /* Tables */
 .table {font-size: 10px; line-height: 1.8em; clear: left; padding: 0px; margin: 0.5em 0px 0.2em 0px; border: solid 0px rgb(150,150,150); empty-cells: show; border-collapse: collapse; background-color: rgb(255,255,255);}

@@ -240,7 +240,7 @@ ul#statmenu { padding: 0px; margin: 0px;}
 .content2-container-2col-left, .content3-container-2col-left {float: left; width: 272px; margin: 0px; padding: 0px;}
 .content2-container-2col-right, .content3-container-2col-right {float: right; width: 372px; margin: 0px; padding: 0px;}
 /* ... up to here */
-.content2-pagetitle, .content3-pagetitle {overflow: hidden; width: 769px; margin: 0px 0px 10px 0px; padding: 0px 0px 2px 0px; border-bottom: solid 3px rgb(88,144,168); color: rgb(88,144,168); font-weight: bold; font-size: 180%;}
+.content2-pagetitle, .content3-pagetitle {overflow: hidden; width: 773px; margin: 0px 0px 10px 0px; padding: 0px 0px 2px 0px; border-bottom: solid 3px rgb(88,144,168); color: rgb(88,144,168); font-weight: bold; font-size: 180%;}
 
 /*********************************/
 /* SECTION 6 - COMMON PARAMETERS */
@@ -921,6 +921,13 @@ a.info:hover span{ /*the span will display just on :hover state*/
 	text-indent:1ex;
 }
 
+div.tplhelp
+{
+	position:absolute;
+	top:135px;
+	right:12px;
+}
+
 /* lists at hompage */
 
 ul.nodot {
@@ -936,7 +943,7 @@ ul.nodot li {
 #suchbox {
 	position: absolute; 
 	top:112px;
-	right: 5px;
+	right: 15px;
 }
 
 /* external links in Maindiv, decorated with ext-icon */
@@ -1208,7 +1215,7 @@ table.mappopup td {
 
 div.mapcoord_normalscreen {
 	position: absolute;
-	top: 176px;
+	top: 106px;
 	right: 25px;
 	text-align: right;
 	margin-top: 8px;

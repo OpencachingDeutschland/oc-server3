@@ -270,9 +270,10 @@
   			<!-- CONTENT -->
 				<div class="content2">
 					<div id="breadcrumb">
-<?php
-						mnu_EchoBreadCrumb($tplname, $pageidx);
-?>
+						<?php mnu_EchoBreadCrumb($tplname, $pageidx); ?>
+					</div>
+					<div class="tplhelp">
+						<?php mnu_EchoHelpLink($tplname); ?>
 					</div>
 			
 				<div id="ocmain">

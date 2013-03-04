@@ -216,6 +216,7 @@ class OcSmarty extends Smarty
 		$this->assign('submenu', $menu->getSubMenu());
 		$this->assign('breadcrumb', $menu->getBreadcrumb());
 		$this->assign('menucolor', $menu->getMenuColor());
+		$this->assign('helplink', helppagelink($this->name));
 
 		if ($this->title == '')
 			$optn['template']['title'] = $menu->GetMenuTitle();

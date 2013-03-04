@@ -13,6 +13,7 @@
 -- countries_list_default
 -- countries_options
 -- data_licenses
+-- helppages
 -- languages
 -- languages_list_default
 -- log_types
@@ -519,6 +520,43 @@ TRUNCATE TABLE `data_licenses`;
 INSERT INTO `data_licenses` (`id`, `license`) VALUES ('0', 'passively accepted new license');
 INSERT INTO `data_licenses` (`id`, `license`) VALUES ('1', 'declined new license');
 INSERT INTO `data_licenses` (`id`, `license`) VALUES ('2', 'actively accepted new license');
+
+-- Table helppages
+SET NAMES 'utf8';
+TRUNCATE TABLE `helppages`;
+INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES('activation', 'DE', 'Aktivierung');
+INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES('adoptcache', 'DE', 'Adoption');
+INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES('change_statpic', 'DE', 'Statistikbild');
+INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES('editcache', '*', '!articles.php?page=cacheinfo');
+INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES('editdesc', 'DE', 'Beschreibungstext');
+INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES('editlog', 'DE', 'Das Onlinelog');
+INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES('error', 'DE', 'Fehlermeldungen');
+INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES('htmlprev', 'DE', 'HTML-Vorschau');
+INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES('log_cache', 'DE', 'Das Onlinelog');
+INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES('login', 'DE', 'Login');
+INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES('mailto', 'DE', 'Benutzerprofil#Emailversand');
+INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES('*map2', 'DE', 'Cachekarte');
+INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES('mydetails', 'DE', 'Benutzerprofil#Einstellungen');
+INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES('myhome', 'DE', 'Benutzerprofil');
+INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES('myignores', 'DE', 'Caches ignorieren');
+INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES('mytop5', 'DE', 'Empfehlungen');
+INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES('myprofile', 'DE', 'Benutzerprofil#Einstellungen');
+INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES('mywatches', 'DE', 'Benachrichtigungen');
+INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES('newcache', '*', '!articles.php?page=cacheinfo');
+INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES('newdesc', 'DE', 'Beschreibungstext');
+INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES('newpw', 'DE', 'Passwort');
+INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES('picture', 'DE', 'Bilder');
+INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES('query', 'DE', 'Gespeicherte Suchen');
+INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES('register', 'DE', 'Registrierung');
+INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES('removelog_logowner', 'DE', 'Logeintrag löschen');
+INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES('removelog_cacheowner', 'DE', 'Logeintrag löschen');
+INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES('reportcache', 'DE', 'Cache melden');
+INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES('search', 'DE', 'Suchformular');
+INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES('tops', 'DE', 'Empfehlungen');
+INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES('usertops', 'DE', 'Empfehlungen');
+INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES('viewcache', 'DE', 'Listing');
+INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES('viewlogs', 'DE', 'Das Onlinelog');
+INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES('viewprofile', 'DE', 'Benutzerprofil');
 
 -- Table languages
 SET NAMES 'utf8';
@@ -5472,7 +5510,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1414', 'DE', 'ungültiges Datum', '2012-08-26 09:10:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1415', 'DE', '(nur für Gefunden-Logs)', '2010-09-10 23:44:54');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1416', 'DE', 'Neuen Cache eintragen', '2010-09-10 23:44:37');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1417', 'DE', 'Falls dies dein erster Cache auf Opencaching.de sein sollte, lies bitte zuerst die <a href=\"articles.php?page=cacheinfo\">Beschreibung</a> zu den einzelnen Feldern durch.', '2010-09-10 23:46:21');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1417', 'DE', 'Falls dies dein erster Cache auf Opencaching.de sein sollte, lies bitte zuerst die <a href=\"articles.php?page=cacheinfo\">Beschreibung</a> zu den einzelnen Feldern durch. Beachte auch die <a href="http://wiki.opencaching.de/index.php/Wie_verstecke_ich_einen_Cache%3F" target="_blank">Anleitung</a> zum Verstecken von Caches!', '2010-09-10 23:46:21');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1418', 'DE', 'Wegstrecke', '2010-09-10 23:32:36');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1419', 'DE', 'Der Aufwand kann natürlich nur geschätzt werden und kann auch je nach Umwelteinflüssen sehr verschieden sein. Solltest du keine ausreichend genauen Angaben machen können, schreibe in beide Felder 0 (Null). (Siehe auch: <a href=\"articles.php?page=cacheinfo#time\" target=\"_blank\">Beschreibung</a>)', '2010-09-10 23:46:13');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1420', 'DE', 'Sprache:', '2010-09-10 23:45:25');

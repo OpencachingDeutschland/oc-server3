@@ -52,7 +52,7 @@
 				<td>{$user.date_created|date_format:$opt.format.date}</td>
 			</tr>
 			<tr>
-				<td>{t}Last modified:{/t}</td>
+				<td>{t}Last modified{/t}:</td>
 				<td>{$user.last_modified|date_format:$opt.format.date}</td>
 			</tr>
 			<tr>
@@ -85,7 +85,9 @@
 			</tr>
 			<tr>
 				<td>{t}Logentries:{/t}</td>
-				<td>{$user.logentries|escape}</td>
+				<td>{$user.logentries}
+				    {if $user.deleted_logentries > 0}&nbsp;(+ {$user.deleted_logentries} {t}deleted{/t} / {t}archived{/t}){/if}
+				</td>
 			</tr>
 			<tr>
 				<td>{t}Total hidden:{/t}</td>
@@ -94,6 +96,10 @@
 			<tr>
 				<td>{t}Active geocaches:{/t}</td>
 				<td>{$user.hidden_active|escape}</td>
+			</tr>
+			<tr>
+				<td>{t}Cache reports{/t}:</td>
+				<td>{$user.reports|escape}</td>
 			</tr>
 			<tr>
 				<td>{t}Last known login:{/t}</td>

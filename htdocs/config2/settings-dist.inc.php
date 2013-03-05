@@ -179,6 +179,7 @@
  	$opt['page']['showdonations'] = false; // Show donations button
 
   $opt['page']['absolute_url'] = 'http://devel.opencaching.de/'; // may be overwritten by $opt['domain'][...]['uri']
+	$opt['page']['develsystem'] = false;
 
   /* maximum number of failed logins per hour before that IP address is blocked
    * (used to prevent brute-force-attacks)

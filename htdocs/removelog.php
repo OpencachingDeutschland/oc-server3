@@ -71,24 +71,25 @@
 				if ($log_record['allow_user_view'] != 1 && $log_record['cache_owner_id'] != $usr['userid'])
 					exit;
 
-				//cache-owner or log-owner
+				// deleted allowed by cache-owner or log-owner
 				if (($log_record['log_user_id'] == $usr['userid']) || ($log_record['cache_owner_id'] == $usr['userid']))
 				{
-					//Daten lesen
 					$commit = isset($_REQUEST['commit']) ? $_REQUEST['commit'] : 0;
 
-					//we are the logger
-					if ($log_record['log_user_id'] == $usr['userid'])
+					$ownlog = ($log_record['log_user_id'] == $usr['userid']);
+					if ($ownlog)
 					{
+						// we are the log-owner
 						$tplname = 'removelog_logowner';
 					}
 					else
 					{
+						// we are the cache-owner
 						$tplname = 'removelog_cacheowner';
 
 						if ($commit == 1)
 						{
-							//send email to logowner schicken
+							//send email to logowner
 							$email_content = read_file($stylepath . '/email/removed_log.email');
 
 							$message = isset($_POST['logowner_message']) ? $_POST['logowner_message'] : '';
@@ -120,10 +121,54 @@
 
 					if ($commit == 1)
 					{
-						// move to archive
-						sql("INSERT IGNORE INTO `cache_logs_archived` SELECT *, NOW() AS `deletion_date`, '&2' AS `deleted_by`, 0 AS `restored_by` FROM `cache_logs` WHERE `cache_logs`.`id`='&1' LIMIT 1", $log_id, $usr['userid']);
+						// remove log pictures
+						// see also picture.class.php: delete()
+						require('lib2/const.inc.php');
+						require('config2/settings.inc.php');
 
-						// TO DO: remove log pictures
+						$rs = sql("SELECT `id`, `url` FROM `pictures`
+						           WHERE `object_type`=1 AND `object_id`='&1'",
+                      $log_id);
+
+						while ($r = sql_fetch_assoc($rs))
+						{
+							if (!$ownlog)
+								sql("SET @archive_picop=TRUE");
+							else
+								sql("SET @archive_picop=FALSE");
+
+							sql("DELETE FROM `pictures` WHERE `id`='&1'", $r['id']);
+							$archived = (sqlValue("SELECT `id` FROM `pictures_modified` WHERE `id`=" . $r['id'], 0) > 0);
+							$fna = mb_split('\\/', $r['url']);
+							$filename = end($fna);
+							if (mb_substr($opt['logic']['pictures']['dir'], -1, 1) != '/')
+								$path = $opt['logic']['pictures']['dir'] . "/";
+							else
+								$path = $opt['logic']['pictures']['dir'];
+
+							if ($archived)
+								@rename($path . $filename, $path . "deleted/" . $filename);
+							else
+								@unlink($path . $filename);
+
+							$path .= mb_strtoupper(mb_substr($filename, 0, 1)) . '/' .
+							         mb_strtoupper(mb_substr($filename, 1, 1)) . '/';
+							@unlink($path . $filename);  // Thumb
+
+							/* lib2 code would be ...
+							$rs = sql("SELECT `id` FROM `pictures` WHERE `object_type`=1 AND `object_id`='&1'", $log_id);
+							while ($r = sql_fetch_assoc($rs))
+							{
+								$pic = new picture($rs['id']);
+								$pic->delete();
+							}
+							sql_free_result($rs);
+							*/
+						}
+						sql_free_result($rs);
+
+						// move to archive, even if own log (uuids are used for OKAPI replication)
+						sql("INSERT IGNORE INTO `cache_logs_archived` SELECT *, NOW() AS `deletion_date`, '&2' AS `deleted_by`, 0 AS `restored_by` FROM `cache_logs` WHERE `cache_logs`.`id`='&1' LIMIT 1", $log_id, $usr['userid']);
 
 						// remove log entry
 						sql("DELETE FROM `cache_logs` WHERE `cache_logs`.`id`='&1' LIMIT 1", $log_id);

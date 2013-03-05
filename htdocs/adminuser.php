@@ -128,6 +128,8 @@ function searchUser()
 	$r['hidden'] = sql_value("SELECT COUNT(*) FROM `caches` WHERE `user_id`='&1'", 0, $r['user_id']);
 	$r['hidden_active'] = sql_value("SELECT COUNT(*) FROM `caches` WHERE `user_id`='&1' AND `status`=1", 0, $r['user_id']);
 	$r['logentries'] = sql_value("SELECT COUNT(*) FROM `cache_logs` WHERE `user_id`='&1'", 0, $r['user_id']);
+	$r['deleted_logentries'] = sql_value("SELECT COUNT(*) FROM `cache_logs_archived` WHERE `user_id`='&1'", 0, $r['user_id']);
+	$r['reports'] = sql_value("SELECT COUNT(*) FROM `cache_reports` WHERE `userid`='&1'", 0, $r['user_id']);
 	
 	$r['last_known_login'] = sql_value("SELECT MAX(`last_login`) FROM `sys_sessions` WHERE `user_id`='&1'", 0, $r['user_id']);
 

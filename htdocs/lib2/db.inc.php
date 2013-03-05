@@ -201,7 +201,7 @@
 							else if ((substr($sql, $sqlpos - $arglength - 1, 1) == '`') && (substr($sql, $sqlpos + 1, 1) == '`'))
 								$filtered_sql .= sql_escape_backtick($args[$arg]);
 							else
-								sql_error();
+								sql_error($sql);
 						}
 					}
 					else
@@ -258,7 +258,7 @@
 							$filtered_sql .= '`';
 					}
 					else
-						sql_error();
+						sql_error($sql);
 
 					$sqlpos = $nextarg + $arglength + 1;
 				}
@@ -302,7 +302,7 @@
 			$result = $sqldebugger->execute($filtered_sql, $dblink, ($dblink===$db['dblink_slave']), $db['slave_server']);
 			if ($result === false)
 			{
-				sql_error();
+				sql_error($filtered_sql);
 			}
 		}
 		else
@@ -318,7 +318,7 @@
 			$result = @mysql_query($filtered_sql, $dblink);
 			if ($result === false)
 			{
-				sql_error();
+				sql_error($filtered_sql);
 			}
 
 			if ($opt['db']['warn']['time'] > 0)
@@ -876,7 +876,7 @@
 		$db['dblink_slave'] = false;
 	}
 
-	function sql_error()
+	function sql_error($sqlstatement="")
 	{
 		global $tpl, $opt, $db;
 		global $bSmartyNoTranslate;
@@ -888,6 +888,8 @@
 
 		$errno = mysql_errno();
 		$error = mysql_error();
+		if ($sqlstatement != "")
+			$error .= "\n\nSQL statement: " . $sqlstatement;
 
 		if ($db['connected'] == false)
 			$bSmartyNoTranslate = true;
@@ -902,7 +904,7 @@
 			$mail->name = 'sql_error';
 
 			$mail->assign('errno', $errno);
-			$mail->assign('error', $error);
+			$mail->assign('error', str_replace("\n","\r\n",$error));
 			$mail->assign('trace', print_r(debug_backtrace(), true));
 
 			$mail->send();
@@ -914,14 +916,14 @@
 			if (isset($tpl))
 			{
 				if ($opt['db']['error']['display'] == true)
-					$tpl->error('MySQL error' . ' (' . $errno . '): ' . $error);
+					$tpl->error('MySQL error (' . $errno . '): ' . $error);
 				else
 					$tpl->error('A database command could not be performed.');
 			}
 			else
 			{
 				if ($opt['db']['error']['display'] == true)
-					die('<html><body>' . htmlspecialchars('MySQL error (' .$errno . '): ' . $error) . '</body></html>');
+					die('<html><body>' . htmlspecialchars('MySQL error (' .$errno . '): ' . str_replace("\n,","<br />", $error)) . '</body></html>');
 				else
 					die('<html><body>A database command could not be performed</body></html>');
 			}

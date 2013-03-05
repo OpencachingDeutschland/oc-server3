@@ -880,6 +880,9 @@ class user
 			sql_free_result($rsp);
 		}
 		sql_free_result($rs);
+
+		// discard achived logs' texts
+		sql("UPDATE `cache_logs_archived` SET `text`='' WHERE `user_id`='&1'", $this->getUserId());
 		
 		// success
 		return true;
@@ -1130,13 +1133,12 @@ class user
 		if ($login->userid != $this->nUserId && ($login->admin & ADMIN_USER) != ADMIN_USER)
 			return false;
 
-		if (sql_value("SELECT COUNT(*) FROM `caches` WHERE `user_id`='&1'", 0, $this->nUserId) > 0)
-			return false;
-
-		if (sql_value("SELECT COUNT(*) FROM `cache_logs` WHERE `user_id`='&1'", 0, $this->nUserId) > 0)
-			return false;
-
-		return true;
+		return 
+			sql_value("SELECT COUNT(*) FROM `caches` WHERE `user_id`='&1'", 0, $this->nUserId)
+		  + sql_value("SELECT COUNT(*) FROM `cache_logs` WHERE `user_id`='&1'", 0, $this->nUserId)
+			+ sql_value("SELECT COUNT(*) FROM `cache_logs_archived` WHERE `user_id`='&1'", 0, $this->nUserId)
+			+ sql_value("SELECT COUNT(*) FROM `cache_reports` WHERE `userid`='&1'", 0, $this->nUserId)
+			== 0;
 	}
 
 	function delete()
@@ -1160,13 +1162,7 @@ class user
 		                       serialize($backup));
 
 		sql("DELETE FROM `user` WHERE `user_id`='&1'", $this->nUserId);
-		sql("DELETE FROM `cache_adoption` WHERE `user_id`='&1'", $this->nUserId);
-		sql("DELETE FROM `cache_ignore` WHERE `user_id`='&1'", $this->nUserId);
-		sql("DELETE FROM `cache_rating` WHERE `user_id`='&1'", $this->nUserId);
-		sql("DELETE FROM `cache_watches` WHERE `user_id`='&1'", $this->nUserId);
-		sql("DELETE FROM `stat_user` WHERE `user_id`='&1'", $this->nUserId);
-		sql("DELETE FROM `user_options` WHERE `user_id`='&1'", $this->nUserId);
-		sql("DELETE FROM `watches_waiting` WHERE `user_id`='&1'", $this->nUserId);
+		// all data in depending tables is cleared via trigger 
 
 		$this->reload();
 

@@ -76,6 +76,7 @@
 	 *
 	 */
 	$opt['page']['absolute_url'] = $dev_baseurl;
+	$opt['page']['develsystem'] = true;
 	$opt['mail']['from'] = 'root';
 	$opt['mail']['subject'] = '[local.opencaching.de] ';
 

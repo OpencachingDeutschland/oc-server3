@@ -441,16 +441,19 @@
 
 	function sql_error()
 	{
+		global $debug_page;
 		global $sql_errormail;
 		global $emailheaders;
 		global $absolute_server_URI;
 		global $interface_output;
 		global $dberrormsg;
 
+		$msql_error = mysql_errno() . ": " . mysql_error();
+
 		if ($sql_errormail != '')
 		{
 			// sendout email
-			$email_content = mysql_errno() . ": " . mysql_error();
+			$email_content = $msql_error;
 			$email_content .= "\n--------------------\n";
 			$email_content .= print_r(debug_backtrace(), true);
 			mb_send_mail($sql_errormail, 'sql_error: ' . $absolute_server_URI, $email_content, $emailheaders);
@@ -459,13 +462,14 @@
 		if ($interface_output == 'html')
 		{
 			// display errorpage
-			tpl_errorMsg('sql_error', $dberrormsg);
+			tpl_errorMsg('sql_error', $dberrormsg . ($debug_page ? "<br />" . $msql_error : ""));
 			exit;
 		}
 		else if ($interface_output == 'plain')
 		{
 			echo "\n";
 			echo 'sql_error' . "\n";
+			if ($debug_page) echo $msql_error . "\n";
 			echo '---------' . "\n";
 			echo print_r(debug_backtrace(), true) . "\n";
 			exit;

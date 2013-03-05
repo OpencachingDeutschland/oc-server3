@@ -33,6 +33,7 @@
 	define('ADMIN_MAINTAINANCE', 2);  // check table etc.
 	define('ADMIN_USER', 4);          // drop users, caches etc.
 	define('ADMIN_NEWS', 8);          // approve news entries
+	define('ADMIN_RESTORE', 16);      // restore vandalized listings
 	define('ADMIN_ROOT', 128 | 127);  // root + all previous rights
 
 	define('ATTRIB_SELECTED', 1);

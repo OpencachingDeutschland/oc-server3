@@ -1142,12 +1142,14 @@ td.mapheader_spacer {
 }
 
 #ocmain select.mapselectlist {
+	position:absolute;
 	display:none;
 	width:100%;
 	font-size:13px;
 }
 
 #ocmain select.mapselectlist_fullscreen {
+	position:absolute;
 	display:none;
 	width:100%;
 }

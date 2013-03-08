@@ -328,8 +328,7 @@ function mapLoad()
 	var myOptions = {
 		zoom: mnInitZoom,
 		center: new google.maps.LatLng(mnInitLat, mnInitLon),
-		mapTypeId: msInitType,
-		disableDoubleClickZoom : true,
+		mapTypeId: initType,
 		backgroundColor: "#d0dccc",
 
 		mapTypeControl: true,
@@ -384,8 +383,6 @@ function mapLoad()
 	google.maps.event.addListener(moMap, "maptypeid_changed", function(){map_maptypechanged()});
 	google.maps.event.addListener(moMap, "mousemove", function(event){map_mousemove(event)});
 	google.maps.event.addListener(moMap, "click", function(event){map_clicked()});
-	if (bFullscreen)
-		google.maps.event.addListener(moMap, "dblclick", function(){toggle_sidebar()});
 
 	if (msInitWaypoint != "")
 		show_cachepopup_wp(msInitWaypoint, true);
@@ -966,23 +963,27 @@ function parseXML_GetHTML(xmlobject)
 	sHtml += "<tr><td colspan='2'>" + xmlentities(sTypeText) + " (" + xmlentities(sSizeText) + ")</td><td align='right' rowspan='2'>" + (bOconly==1 ? "{/literal}{$help_oconly}{literal}<img src='resource2/ocstyle/images/misc/is_oconly_small.png' alt='OConly' title='OConly' /></a>" : "") + "</td></tr>";
 	sHtml += "<tr><td colspan='2'>" + {/literal}(bIsPublishdate == true ? "{t escape=js}Published on{/t}:" : "{t escape=js}Listed since:{/t}"){literal} + " " + xmlentities(sListedSince) + "</td></tr>";
 
+	sAddHtml = "";
 	if (bOwner==1)
-		sHtml += "<tr><td colspan='3'><img src='resource2/ocstyle/images/misc/16x16-home.png' alt='' /> {/literal}{t escape=js}This cache is yours{/t}{literal}</td></tr>";
+		sAddHtml += "<tr><td colspan='3'><img src='resource2/ocstyle/images/misc/16x16-home.png' alt='' /> {/literal}{t escape=js}This cache is yours{/t}{literal}</td></tr>";
 
 	if (bFound==1)
-		sHtml += "<tr><td colspan='3'><img src='resource2/ocstyle/images/viewcache/16x16-found.png' alt='' /> {/literal}{t escape=js}You found this cache{/t}{literal}</td></tr>";
+		sAddHtml += "<tr><td colspan='3'><img src='resource2/ocstyle/images/viewcache/16x16-found.png' alt='' /> {/literal}{t escape=js}You found this cache{/t}{literal}</td></tr>";
 
 	if (bNotFound==1)
-		sHtml += "<tr><td colspan='3'><img src='resource2/ocstyle/images/viewcache/16x16-dnf.png' alt='' /> {/literal}{t escape=js}You havn't found this cache, yet{/t}{literal}</td></tr>";
+		sAddHtml += "<tr><td colspan='3'><img src='resource2/ocstyle/images/viewcache/16x16-dnf.png' alt='' /> {/literal}{t escape=js}You havn't found this cache, yet{/t}{literal}</td></tr>";
 
 	if (bAttended==1)
-		sHtml += "<tr><td colspan='3'><img src='resource2/ocstyle/images/log/16x16-attended.png' alt='' /> {/literal}{t escape=js}You have attended this event!{/t}{literal}</td></tr>";
+		sAddHtml += "<tr><td colspan='3'><img src='resource2/ocstyle/images/log/16x16-attended.png' alt='' /> {/literal}{t escape=js}You have attended this event!{/t}{literal}</td></tr>";
 
 	if (nGeoKreties>0)
-		sHtml += "<tr><td colspan='3'><img src='resource2/ocstyle/images/viewcache/gk.png' alt='' /> {/literal}{t escape=js}This cache stores a GeoKrety{/t}{literal}</td></tr>";
+		sAddHtml += "<tr><td colspan='3'><img src='resource2/ocstyle/images/viewcache/gk.png' alt='' /> {/literal}{t escape=js}This cache stores a GeoKrety{/t}{literal}</td></tr>";
 
 	if (nTopRating>0)
-		sHtml += "<tr><td colspan='3'><img src='resource2/ocstyle/images/viewcache/rating-star.gif' alt='' /> {/literal}{t escape=js}This cache has %1 recommandations{/t}{literal}</td></tr>".replace(/%1/, nTopRating);
+		sAddHtml += "<tr><td colspan='3'><img src='resource2/ocstyle/images/viewcache/rating-star.gif' alt='' /> {/literal}{t escape=js}This cache has %1 recommandations{/t}{literal}</td></tr>".replace(/%1/, nTopRating);
+
+	if (sAddHtml != "")
+		sHtml += 	"<tr><td colspan='3' height='3px'></td></tr>" + sAddHtml;
 
 	sHtml += "</table></div>";
 
@@ -1714,56 +1715,58 @@ function toggle_attribselection(bSaveCookies)
 	
 	{* search and buttons bar *}
 	<div class="mapform" style="position:relative; z-index:90">
-			<table class="mapsearch" align="center">
-				<tr>
-					{if $bFullscreen}
-						{* login status *}
-						<td rowspan="2">&nbsp;&nbsp;</td>
-						<td rowspan="2" class="maplogin">
-							{if $username != ""}{t}Logged in as{/t}<br /><a href="myhome.php"><b>{$username}</b></a>{else}<a href="login.php?target=map2.php&mode=fullscreen">{t}Login{/t} ...</a>{/if}
-						</td>
-						<td rowspan="2">&nbsp;&nbsp;</td>
-					{/if}
-
-					<td rowspan="2" class="mapheader_spacer"></td>
-
-					{* search bar and button *}
-					<td rowspan="2"><input type="text" id="mapsearch" style="margin-right:5px" value="" onfocus="javascript:mapsearch_onfocus()" onblur="javascript:mapsearch_onblur()" class="searchfield{if $bFullscreen}_fullscreen{/if}" size="{if $bFullscreen}40{else}50{/if}" /></td><td rowspan="2"><input type="button" id="mapsubmit" name="mapsubmit" value="&nbsp;&nbsp;{t}Search{/t}&nbsp;&nbsp;" class="formbutton" style="width:auto; font-size:{if $bFullscreen}11px{else}12px{/if}" onclick="mapsearch_click()" /></td>
-					<td rowspan="2" class="mapheader_spacer"></td>
-
-					{* home button *}
-					{if $nUserLat != 0 || $nUserLon != 0 }
-						<td rowspan="2"><a class="jslink" onclick="javascript:center_home()"><img id="center_home_img" style="margin-left:5px; margin-right:5px" src="resource2/{$opt.template.style}/images/misc/32x32-home.png" alt="{t}Go to home coordinates{/t}" title="{t}Go to home coordinates{/t}" /></a></td>
-					{/if}
-
-					{* GPX download button *}
-					<td rowspan="2"><a class="jslink" onclick="javascript:download_gpx()"><img id="download_gpx_img" src="resource2/{$opt.template.style}/images/map/35x35-gpx-download.png" style="margin-left:5px; margin-right:5px" height="35" width="35" alt="{t}Download GPX file (max. 500 caches){/t}" title="{t}Download GPX file (max. 500){/t}"/></a></td>
-
-					{* permalink button *}
-					<td rowspan="2"><a class="jslink" onclick="showPermlinkBox_click()"><img src="resource2/{$opt.template.style}/images/map/35x35-star.png" style="margin-left:3px; margin-right:1px" height="35" width="35" alt="{t}Show link to this map{/t}" title="{t}Show link to this map{/t}" /></a></td>
-
-					{* configure button *}
-					<td rowspan="2"><a class="jslink" onclick="toggle_settings()"><img src="resource2/{$opt.template.style}/images/openicons/35x35-configure.png" class="mapbutton" style="margin-left:0px; margin-right:0px" height="35" width="35" alt="{t}Settings{/t}" title="{t}Settings{/t}" /></a></td>
-
-					{* help button *}
-					{if $help_map != ""}
-						<td rowspan="2">{$help_map}<img src="resource2/{$opt.template.style}/images/openicons/35x35-system-help.png" class="mapbutton" style="margin-left:2px; margin-right:3px" height="35" width="35" alt="{t}Instructions{/t}" title="{t}Instructions{/t}" /></a></td>
-					{/if}
-
-					{* normal / full screen button *}
-					<td rowspan="2">
-						{if $bFullscreen}
-							<a class="nooutline" href="map2.php?mode=normal"><img src="resource2/{$opt.template.style}/images/map/35x35-normalscreen.png" align="right" style="margin-left:4px; margin-right:4px" height="35" width="35" alt="{t}Switch to small map{/t}" title="{t}Switch to small map{/t}" /></a>
-						{else} 
-							<a class="nooutline" href="map2.php?mode=fullscreen"><img src="resource2/{$opt.template.style}/images/map/35x35-fullscreen.png" align="right" style="margin-left:4px; margin-right:4px" height="35" width="35" alt="{t}Switch to full screen{/t}" title="{t}Switch to full screen{/t}" /></a>
-						{/if}
+	<form onsubmit="mapsearch_click(); return false;">
+		<table class="mapsearch" align="center">
+			<tr>
+				{if $bFullscreen}
+					{* login status *}
+					<td rowspan="2">&nbsp;&nbsp;</td>
+					<td rowspan="2" class="maplogin">
+						{if $username != ""}{t}Logged in as{/t}<br /><a href="myhome.php"><b>{$username}</b></a>{else}<a href="login.php?target=map2.php%3Fmode%3Dfullscreen">{t}Login{/t} ...</a>{/if}
 					</td>
+					<td rowspan="2">&nbsp;&nbsp;</td>
+				{/if}
 
 				<td rowspan="2" class="mapheader_spacer"></td>
-				{if !$bFullscreen}
-					<td rowspan="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+
+				{* search bar and button *}
+				<td rowspan="2"><input type="text" id="mapsearch" style="margin-right:5px" value="" onfocus="javascript:mapsearch_onfocus()" onblur="javascript:mapsearch_onblur()" class="searchfield{if $bFullscreen}_fullscreen{/if}" size="{if $bFullscreen}40{else}50{/if}" /></td><td rowspan="2"><input type="button" id="mapsubmit" name="mapsubmit" value="&nbsp;&nbsp;{t}Search{/t}&nbsp;&nbsp;" class="formbutton" style="width:auto; font-size:{if $bFullscreen}11px{else}12px{/if}" onclick="mapsearch_click()" /></td>
+				<td rowspan="2" class="mapheader_spacer"></td>
+
+				{* home button *}
+				{if $nUserLat != 0 || $nUserLon != 0 }
+					<td rowspan="2"><a class="jslink" onclick="javascript:center_home()"><img id="center_home_img" style="margin-left:5px; margin-right:5px" src="resource2/{$opt.template.style}/images/misc/32x32-home.png" alt="{t}Go to home coordinates{/t}" title="{t}Go to home coordinates{/t}" /></a></td>
 				{/if}
-			</table>
+
+				{* GPX download button *}
+				<td rowspan="2"><a class="jslink" onclick="javascript:download_gpx()"><img id="download_gpx_img" src="resource2/{$opt.template.style}/images/map/35x35-gpx-download.png" style="margin-left:5px; margin-right:5px" height="35" width="35" alt="{t}Download GPX file (max. 500 caches){/t}" title="{t}Download GPX file (max. 500){/t}"/></a></td>
+
+				{* permalink button *}
+				<td rowspan="2"><a class="jslink" onclick="showPermlinkBox_click()"><img src="resource2/{$opt.template.style}/images/map/35x35-star.png" style="margin-left:3px; margin-right:1px" height="35" width="35" alt="{t}Show link to this map{/t}" title="{t}Show link to this map{/t}" /></a></td>
+
+				{* configure button *}
+				<td rowspan="2"><a class="jslink" onclick="toggle_settings()"><img src="resource2/{$opt.template.style}/images/openicons/35x35-configure.png" class="mapbutton" style="margin-left:0px; margin-right:0px" height="35" width="35" alt="{t}Settings{/t}" title="{t}Settings{/t}" /></a></td>
+
+				{* help button *}
+				{if $help_map != ""}
+					<td rowspan="2">{$help_map}<img src="resource2/{$opt.template.style}/images/openicons/35x35-system-help.png" class="mapbutton" style="margin-left:2px; margin-right:3px" height="35" width="35" alt="{t}Instructions{/t}" title="{t}Instructions{/t}" /></a></td>
+				{/if}
+
+				{* normal / full screen button *}
+				<td rowspan="2">
+					{if $bFullscreen}
+						<a class="nooutline" href="map2.php?mode=normal"><img src="resource2/{$opt.template.style}/images/map/35x35-normalscreen.png" align="right" style="margin-left:4px; margin-right:4px" height="35" width="35" alt="{t}Switch to small map{/t}" title="{t}Switch to small map{/t}" /></a>
+					{else}
+						<a class="nooutline" href="map2.php?mode=fullscreen"><img src="resource2/{$opt.template.style}/images/map/35x35-fullscreen.png" align="right" style="margin-left:4px; margin-right:4px" height="35" width="35" alt="{t}Switch to full screen{/t}" title="{t}Switch to full screen{/t}" /></a>
+					{/if}
+				</td>
+
+			<td rowspan="2" class="mapheader_spacer"></td>
+			{if !$bFullscreen}
+				<td rowspan="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+			{/if}
+		</table>
+		</form>
 	</div>
 
 	{* dropdown list for search results *}

@@ -42,3 +42,4 @@ date         commit ID    change
                             - added tables caches_modified, cache_desc_modified,
                                 caches_attributes_modified, cache_logs_restored,
 																cache_pictures_modified and listing_restored
+                            - modified lots of triggers

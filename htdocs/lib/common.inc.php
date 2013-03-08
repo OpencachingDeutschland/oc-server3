@@ -1220,4 +1220,43 @@ function __autoload($class_name)
 		// country could not be determined by the above checks -> return "GB"
 		return 'GB';
 	}
+
+
+// wiki help embedding
+// pay attention to use only ' quotes in $text (escape other ')
+//
+// see corresponding function in lib2/common.inc.php
+function helppagelink($ocpage)
+{
+	global $opt, $locale, $translate;
+
+	$rs = sql("SELECT `helppage` FROM `helppages` WHERE `ocpage`='&1' AND `language`='&2'",
+             $ocpage, $locale);
+	if (mysql_num_rows($rs) == 0)
+	{
+		mysql_free_result($rs);
+		$rs = sql("SELECT `helppage` FROM `helppages` WHERE `ocpage`='&1' AND `language`='*'",
+		          $ocpage);
+	}
+	if (mysql_num_rows($rs) > 0)
+	{
+		$record = sql_fetch_array($rs);
+		$helppage = $record['helppage'];
+	}
+	else
+		$helppage = "";
+
+	$imgtitle = $translate->t('Instructions', '', basename(__FILE__), __LINE__);
+	$imgtitle = "alt='" . $imgtitle . "' title='" . $imgtitle  . "'";
+
+	if (substr($helppage,0,1) == "!")
+		return "<a class='nooutline' href='" . substr($helppage,1) . "' " . $imgtitle . " target='_blank'>";
+	else
+		if ($helppage != "" && isset($opt['locale'][$locale]['helpwiki']))
+			return "<a class='nooutline' href='" . $opt['locale'][$locale]['helpwiki'] .
+			       str_replace(' ','_',$helppage) . "' " . $imgtitle . " target='_blank'>";
+
+	return "";
+}
+
 ?>

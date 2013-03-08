@@ -456,4 +456,16 @@ function mnu_prv_EchoBreadCrumbSubItem($pageid, $menustructure)
 		}
 	}
 }
+
+/*
+ * show help icon, if a help page exists for this template
+ */
+
+function mnu_EchoHelpLink($tplname)
+{
+	$helplink = helppagelink($tplname);
+	if ($helplink != "")
+		echo $helplink . '<img src="resource2/ocstyle/images/openicons/35x35-system-help.png" /></a>';
+}
+
 ?>

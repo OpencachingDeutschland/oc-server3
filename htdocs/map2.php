@@ -247,7 +247,7 @@
 	$tpl->assign('max_maxrecords', $opt['map']['max_maxrecords']);
 
 	$tpl->assign('help_oconly', helppagelink("OConly"));
-	$tpl->assign('help_map', helppagelink("Cachekarte"));
+	$tpl->assign('help_map', helppagelink("*map2"));
 
 	$tpl->display();
 

@@ -35,3 +35,4 @@ date         commit ID    change
 2013-02-17   b7b51eab     added user.email_problems
 2013-03-01                added caches.short2 und .short2_trans_id
 2013-03-03                added profile_options.optionset
+2013-03-04                new table helppages

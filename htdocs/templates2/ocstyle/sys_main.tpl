@@ -190,6 +190,10 @@
 				<div id="breadcrumb_fullsize">{include file="sys_breadcrumb.tpl" items="$breadcrumb"}</div>
 			{/if}
 
+			{if $helplink != ""}
+				<div class="tplhelp">{$helplink}<img src="resource2/ocstyle/images/openicons/35x35-system-help.png" /></a></div>
+			{/if}
+
 			{* <!-- NAVIGATION --> *}				
 			{* <!-- Navigation Level 3 --> *}
 			<div class="nav3">

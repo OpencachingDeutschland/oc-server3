@@ -352,6 +352,7 @@
 
 			$options['country'] = isset($_REQUEST['country']) ? $_REQUEST['country'] : '';
 			$options['cachetype'] = isset($_REQUEST['cachetype']) ? $_REQUEST['cachetype'] : '';
+
 			$options['cachesize'] = isset($_REQUEST['cachesize']) ? $_REQUEST['cachesize'] : '';
 			$options['difficultymin'] = isset($_REQUEST['difficultymin']) ? $_REQUEST['difficultymin']+0 : 0;
 			$options['difficultymax'] = isset($_REQUEST['difficultymax']) ? $_REQUEST['difficultymax']+0 : 0;

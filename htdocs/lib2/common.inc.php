@@ -317,18 +317,35 @@ function fix_magic_quotes_gpc()
 	}
 }
 
-// prelminary wiki help embedding; needs translation table
-//
+// wiki help embedding
 // pay attention to use only ' quotes in $text (escape other ')
-function helppagelink($pagename)
+//
+// see corresponding function in lib/common.inc.php
+function helppagelink($ocpage)
 {
-	global $opt;
+	global $opt, $translate;
 
-	if (isset($opt['locale'][$opt['template']['locale']]['helpwiki']))
-	  return "<a class='nooutline' href='" . $opt['locale'][$opt['template']['locale']]['helpwiki'] .
-					 str_replace(' ','_',$pagename) . "' target='_blank'>";
+	$helppage = sql_value("SELECT `helppage` FROM `helppages`
+	                        WHERE `ocpage`='&1' AND `language`='&2'",
+                         "", $ocpage, $opt['template']['locale']);
+  if ($helppage == "")
+		$helppage = sql_value("SELECT `helppage` FROM `helppages`
+		                        WHERE `ocpage`='&1' AND `language`='*'",
+                          "", $ocpage);
+	if ($helppage == "" && isset($opt['locale'][$opt['template']['locale']]['help'][$ocpage]))
+		$helppage = $opt['locale'][$opt['template']['locale']]['help'][$ocpage];
+
+	$imgtitle = $translate->t('Instructions', '', basename(__FILE__), __LINE__);
+	$imgtitle = "alt='" . $imgtitle . "' title='" . $imgtitle  . "'";
+
+	if (substr($helppage,0,1) == "!")
+		return "<a class='nooutline' href='" . substr($helppage,1) . "' " . $imgtitle . " target='_blank'>";
 	else
-		return $text;
+		if ($helppage != "" && isset($opt['locale'][$opt['template']['locale']]['helpwiki']))
+			return "<a class='nooutline' href='" . $opt['locale'][$opt['template']['locale']]['helpwiki'] .
+			       str_replace(' ','_',$helppage) . "' " . $imgtitle . " target='_blank'>";
+
+	return "";
 }
 
 ?>

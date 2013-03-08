@@ -22,7 +22,6 @@
 ***************************************************************************}
 {* OCSTYLE *}
 
-
 {if $old_msie}
 	<script type="text/javascript">
 	{literal}<!--
@@ -1747,7 +1746,9 @@ function toggle_attribselection(bSaveCookies)
 					<td rowspan="2"><a class="jslink" onclick="toggle_settings()"><img src="resource2/{$opt.template.style}/images/openicons/35x35-configure.png" class="mapbutton" style="margin-left:0px; margin-right:0px" height="35" width="35" alt="{t}Settings{/t}" title="{t}Settings{/t}" /></a></td>
 
 					{* help button *}
-					<td rowspan="2">{$help_map}<img src="resource2/{$opt.template.style}/images/openicons/35x35-system-help.png" class="mapbutton" style="margin-left:3px; margin-right:3px" height="35" width="35" alt="{t}Instructions{/t}" title="{t}Instructions{/t}" /></a></td>
+					{if $help_map != ""}
+						<td rowspan="2">{$help_map}<img src="resource2/{$opt.template.style}/images/openicons/35x35-system-help.png" class="mapbutton" style="margin-left:2px; margin-right:3px" height="35" width="35" alt="{t}Instructions{/t}" title="{t}Instructions{/t}" /></a></td>
+					{/if}
 
 					{* normal / full screen button *}
 					<td rowspan="2">

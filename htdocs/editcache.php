@@ -453,17 +453,20 @@ function getWaypoints($cacheid)
 							// do not use slave server for the next time ...
 							db_slave_exclude();
 
-							// delete old cache-attributes
-							sql("DELETE FROM `caches_attributes` WHERE `cache_id`='&1'", $cache_id);
-
-							// insert new cache-attributes
-							for($i=0; $i<count($cache_attribs); $i++)
+							// update cache attributes
+							$attriblist = "999";
+							for ($i=0; $i<count($cache_attribs); $i++)
 							{
-								if(($cache_attribs[$i]+0) > 0)
+								if ($cache_attribs[$i]+0 > 0)
 								{
 									sql("INSERT IGNORE INTO `caches_attributes` (`cache_id`, `attrib_id`) VALUES('&1', '&2')", $cache_id, $cache_attribs[$i]+0);
+									$attriblist .= "," . ($cache_attribs[$i]+0); 
 								}
 							}
+
+							sql("DELETE FROM `caches_attributes` WHERE `cache_id`='&1' AND `attrib_id` NOT IN (" . $attriblist . ")",
+							    // SQL injections in $attriblist prevented by adding 0 above
+							    $cache_id);
 
 							//call eventhandler
 							require_once($opt['rootpath'] . 'lib/eventhandler.inc.php');

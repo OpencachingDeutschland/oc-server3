@@ -639,6 +639,15 @@
 							INSERT IGNORE INTO `cache_countries` (`cache_id`, `date_created`, `country`) 
 								VALUES (NEW.`cache_id`, NOW(), NEW.`country`); 
 						END IF;
+						IF NEW.`cache_id` = OLD.`cache_id` AND
+						   OLD.`status` <> 5 AND
+							 OLD.`date_created` < LEFT(NOW(),10) AND
+							 (NEW.`name` != OLD.`name` OR NEW.`type` != OLD.`type` OR NEW.`date_hidden` != OLD.`date_hidden` OR NEW.`size` != OLD.`size` OR NEW.`difficulty` != OLD.`difficulty` OR NEW.`terrain` != OLD.`terrain` OR NEW.`search_time` != OLD.`search_time` OR NEW.`way_length` != OLD.`way_length` OR NEW.`wp_gc` != OLD.`wp_gc` OR NEW.`wp_nc` != OLD.`wp_nc`)
+							 THEN
+							INSERT IGNORE INTO `caches_modified` (`cache_id`, `date_modified`, `name`, `type`, `date_hidden`, `size`, `difficulty`, `terrain`, `search_time`, `way_length`, `wp_gc`, `wp_nc`) VALUES (OLD.`cache_id`, NOW(), OLD.`name`, OLD.`type`, OLD.`date_hidden`, OLD.`size`, OLD.`difficulty`, OLD.`terrain`, OLD.`search_time`, OLD.`way_length`, OLD.`wp_gc`, OLD.`wp_nc`);
+							/* logpw needs not to be saved */
+							/* for further explanation see restorecaches.php */
+						END IF;
 						IF NEW.`user_id`!=OLD.`user_id` THEN
 							CALL sp_update_hiddenstat(OLD.`user_id`, TRUE);
 							CALL sp_update_hiddenstat(NEW.`user_id`, FALSE);
@@ -655,6 +664,8 @@
 						DELETE FROM `cache_coordinates` WHERE `cache_id`=OLD.`cache_id`;
 						DELETE FROM `cache_countries` WHERE `cache_id`=OLD.`cache_id`;
 						DELETE FROM `cache_npa_areas` WHERE `cache_id`=OLD.`cache_id`;
+						DELETE FROM `caches_modified` WHERE `cache_id`=OLD.`cache_id`;
+						/* lots of things are missing here - descs, logs, pictures ... */
 						CALL sp_update_hiddenstat(OLD.`user_id`, TRUE);
 						INSERT IGNORE INTO `removed_objects` (`localId`, `uuid`, `type`, `node`) VALUES (OLD.`cache_id`, OLD.`uuid`, 2, OLD.`node`);
 					END;");
@@ -678,6 +689,10 @@
 	sql("CREATE TRIGGER `cacheDescAfterInsert` AFTER INSERT ON `cache_desc` 
 				FOR EACH ROW 
 					BEGIN 
+						IF (SELECT `date_created` FROM `caches` WHERE `cache_id`=NEW.`cache_id`) < LEFT(NOW(),10) AND 
+						   (SELECT `status` FROM `caches` WHERE `caches`.`cache_id`=NEW.`cache_id`) != 5 THEN
+							INSERT IGNORE INTO `cache_desc_modified` (`cache_id`, `language`, `date_modified`, `desc`) VALUES (NEW.`cache_id`, NEW.`language`, NOW(), NULL);
+						END IF;
 						CALL sp_update_caches_descLanguages(NEW.`cache_id`);
 					END;");
 
@@ -701,6 +716,15 @@
 							END IF;
 							CALL sp_update_caches_descLanguages(NEW.`cache_id`);
 						END IF;
+						/* changes at date of creation are ignored to save archive space */
+						IF NEW.`cache_id`=OLD.`cache_id` AND
+						   (OLD.`date_created` < LEFT(NOW(),10)) AND
+							 (SELECT `status` FROM `caches` WHERE `caches`.`cache_id`=OLD.`cache_id`) != 5 THEN 
+							INSERT IGNORE INTO `cache_desc_modified` (`cache_id`, `language`, `date_modified`, `date_created`, `desc`, `desc_html`, `desc_htmledit`, `hint`, `short_desc`) VALUES (OLD.`cache_id`, OLD.`language`, NOW(), OLD.`date_created`, OLD.`desc`, OLD.`desc_html`, OLD.`desc_htmledit`, OLD.`hint`, OLD.`short_desc`);
+							IF NEW.`language`!=OLD.`language` THEN
+								INSERT IGNORE INTO `cache_desc_modified` (`cache_id`, `language`, `date_modified`, `desc`) VALUES (NEW.`cache_id`, NEW.`language`, NOW(), NULL);
+							END IF;
+						END IF;
 					END;");
 
 	sql_dropTrigger('cacheDescAfterDelete');
@@ -708,6 +732,11 @@
 				FOR EACH ROW 
 					BEGIN 
 						INSERT IGNORE INTO `removed_objects` (`localId`, `uuid`, `type`, `node`) VALUES (OLD.`id`, OLD.`uuid`, 3, OLD.`node`);
+						/* changes at date of creation are ignored to save archive space */
+						IF (OLD.`date_created` < LEFT(NOW(),10)) AND
+						   (SELECT `status` FROM `caches` WHERE `caches`.`cache_id`=OLD.`cache_id`) != 5 THEN
+							INSERT IGNORE INTO `cache_desc_modified` (`cache_id`, `language`, `date_modified`, `date_created`, `desc`, `desc_html`, `desc_htmledit`, `hint`, `short_desc`) VALUES (OLD.`cache_id`, OLD.`language`, NOW(), OLD.`date_created`, OLD.`desc`, OLD.`desc_html`, OLD.`desc_htmledit`, OLD.`hint`, OLD.`short_desc`);
+						END IF;
 						CALL sp_update_caches_descLanguages(OLD.`cache_id`);
 					END;");
 
@@ -937,6 +966,13 @@
 	sql("CREATE TRIGGER `picturesAfterInsert` AFTER INSERT ON `pictures` 
 				FOR EACH ROW 
 					BEGIN 
+						IF @archive_picop AND
+							(NEW.`object_type`=1 OR   /* re-insert of owner-deleted other user's logpic */
+						   (NEW.`object_type`=2 AND
+							  ((SELECT `date_created` FROM `caches` WHERE `cache_id`=NEW.`object_id`) < LEFT(NOW(),10)) AND
+							  (SELECT `status` FROM `caches` WHERE `caches`.`cache_id`=NEW.`object_id`) != 5)) THEN
+							INSERT IGNORE INTO `pictures_modified` (`id`, `date_modified`, `operation`, `object_type`, `object_id`, `title`, `original_id`) VALUES (NEW.`id`, NOW(), 'I', NEW.`object_type`, NEW.`object_id`, NEW.`title`, @original_picid);
+						END IF;
 						IF NEW.`object_type`=1 THEN
 							CALL sp_update_cachelog_picturestat(NEW.`object_id`, FALSE);
 						ELSEIF NEW.`object_type`=2 THEN
@@ -969,6 +1005,12 @@
 							ELSEIF NEW.`object_type`=2 THEN
 								CALL sp_update_cache_picturestat(NEW.`object_id`, FALSE);
 							END IF;
+						ELSEIF @archive_picop AND
+						       NEW.`object_type`=2 AND
+						       (OLD.`date_created` < LEFT(NOW(),10)) AND
+									 (SELECT `status` FROM `caches` WHERE `caches`.`cache_id`=OLD.`object_id`) != 5 AND
+									 (NEW.`title` != OLD.`title` OR NEW.`spoiler` != OLD.`spoiler` OR NEW.`display` != OLD.`display`) THEN
+							INSERT IGNORE INTO `pictures_modified` (`id`, `date_modified`, `operation`, `date_created`, `url`, `title`, `object_id`, `object_type`, `spoiler`, `unknown_format`, `display`) VALUES (OLD.`id`, NOW(), 'U', OLD.`date_created`, OLD.`url`, OLD.`title`, OLD.`object_id`, OLD.`object_type`, OLD.`spoiler`, OLD.`unknown_format`, OLD.`display`);
 						END IF;
 					END;");
 
@@ -977,6 +1019,15 @@
 				FOR EACH ROW 
 					BEGIN 
 						INSERT IGNORE INTO `removed_objects` (`localId`, `uuid`, `type`, `node`) VALUES (OLD.`id`, OLD.`uuid`, 6, OLD.`node`);
+						IF @archive_picop AND
+						    (OLD.`object_type`=1 OR
+							     /* @archive_picop ensures that type-1 pics here are non-cacheowner's pics */
+							   (OLD.`object_type`=2 AND
+						      (SELECT `date_created` FROM `caches` WHERE `cache_id`=OLD.`object_id`) < LEFT(NOW(),10) AND
+							    (SELECT `status` FROM `caches` WHERE `caches`.`cache_id`=OLD.`object_id`) != 5
+							  )) THEN
+							INSERT IGNORE INTO `pictures_modified` (`id`, `date_modified`, `operation`, `date_created`, `url`, `title`, `object_id`, `object_type`, `spoiler`, `unknown_format`, `display`) VALUES (OLD.`id`, NOW(), 'D', OLD.`date_created`, OLD.`url`, OLD.`title`, OLD.`object_id`, OLD.`object_type`, OLD.`spoiler`, OLD.`unknown_format`, OLD.`display`);
+						END IF;
 						IF OLD.`object_type`=1 THEN
 							CALL sp_update_cachelog_picturestat(OLD.`object_id`, TRUE);
 						ELSEIF OLD.`object_type`=2 THEN
@@ -1176,6 +1227,10 @@
 				FOR EACH ROW 
 					BEGIN 
 						UPDATE `caches` SET `last_modified`=NOW() WHERE `cache_id`=NEW.`cache_id`;
+						IF (SELECT `status` FROM `caches` WHERE `cache_id`=NEW.`cache_id`) != 5 AND 
+						   (SELECT `date_created` FROM `caches` WHERE `cache_id`=NEW.`cache_id`) < LEFT(NOW(),10) THEN
+							INSERT IGNORE INTO `caches_attributes_modified` (`cache_id`, `attrib_id`, `date_modified`, `was_set`) VALUES (NEW.`cache_id`, NEW.`attrib_id`, NOW(), 0);
+						END IF;
 					END;");
 
 	sql_dropTrigger('cacheAttributesAfterUpdate');
@@ -1186,6 +1241,7 @@
 						IF OLD.`cache_id`!=NEW.`cache_id` THEN
 							UPDATE `caches` SET `last_modified`=NOW() WHERE `cache_id`=OLD.`cache_id`;
 						END IF;
+						/* is not called, otherweise cache_attributes_modified would have to be updated */
 					END;");
 
 	sql_dropTrigger('cacheAttributesAfterDelete');
@@ -1193,6 +1249,10 @@
 				FOR EACH ROW 
 					BEGIN 
 						UPDATE `caches` SET `last_modified`=NOW() WHERE `cache_id`=OLD.`cache_id`;
+						IF (SELECT `status` FROM `caches` WHERE `cache_id`=OLD.`cache_id`) != 5 AND 
+						   (SELECT `date_created` FROM `caches` WHERE `cache_id`=OLD.`cache_id`) < LEFT(NOW(),10) THEN
+							INSERT IGNORE INTO `caches_attributes_modified` (`cache_id`, `attrib_id`, `date_modified`, `was_set`) VALUES (OLD.`cache_id`, OLD.`attrib_id`, NOW(), 1);
+						END IF;
 					END;");
 
 	sql_dropTrigger('map2resultAfterDelete');

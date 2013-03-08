@@ -13,5 +13,6 @@ CREATE TABLE `caches_modified` (
   `way_length` float unsigned NOT NULL default '0',
   `wp_gc` varchar(7) NOT NULL,
   `wp_nc` varchar(6) NOT NULL,
+  `restored_by` int(10) NOT NULL,
   UNIQUE KEY `cache_id` (`cache_id`,`date_modified`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ;

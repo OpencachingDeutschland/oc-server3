@@ -10,5 +10,6 @@ CREATE TABLE `cache_desc_modified` (
   `desc_htmledit` tinyint(1) NOT NULL default '0',
   `hint` mediumtext,
   `short_desc` varchar(120) NOT NULL,
+  `restored_by` int(10) NOT NULL,
   UNIQUE KEY `cache_id` (`cache_id`,`date_modified`,`language`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ;

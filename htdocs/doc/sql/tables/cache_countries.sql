@@ -5,6 +5,7 @@ CREATE TABLE `cache_countries` (
   `date_created` datetime NOT NULL,
   `cache_id` int(10) unsigned NOT NULL,
   `country` char(2) NOT NULL default '',
+  `restored_by` int(10) NOT NULL,
   PRIMARY KEY  (`id`),
   KEY `cache_id` (`cache_id`,`date_created`),
   KEY `country` (`country`)

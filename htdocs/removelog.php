@@ -119,7 +119,7 @@
 					if ($commit == 1)
 					{
 						// move to archive
-						sql("INSERT IGNORE INTO `cache_logs_archived` SELECT *, NOW() AS `deletion_date`, '&2' AS `deleted_by` FROM `cache_logs` WHERE `cache_logs`.`id`='&1' LIMIT 1", $log_id, $usr['userid']);
+						sql("INSERT IGNORE INTO `cache_logs_archived` SELECT *, NOW() AS `deletion_date`, '&2' AS `deleted_by`, 0 AS `restored_by` FROM `cache_logs` WHERE `cache_logs`.`id`='&1' LIMIT 1", $log_id, $usr['userid']);
 
 						//log entfernen
 						sql("DELETE FROM `cache_logs` WHERE `cache_logs`.`id`='&1' LIMIT 1", $log_id);

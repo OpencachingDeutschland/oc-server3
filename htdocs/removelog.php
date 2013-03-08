@@ -121,7 +121,7 @@
 					if ($commit == 1)
 					{
 						// move to archive
-						sql("INSERT INTO `cache_logs_archived` SELECT * FROM `cache_logs` WHERE `cache_logs`.`id`='&1' LIMIT 1", $log_id);
+						sql("INSERT IGNORE INTO `cache_logs_archived` SELECT *, NOW() AS `deletion_date`, '&2' AS `deleted_by` FROM `cache_logs` WHERE `cache_logs`.`id`='&1' LIMIT 1", $log_id, $usr['userid']);
 
 						// TO DO: remove log pictures
 

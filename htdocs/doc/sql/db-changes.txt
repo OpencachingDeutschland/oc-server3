@@ -36,3 +36,9 @@ date         commit ID    change
 2013-03-01   c5057c88     added caches.short2 und .short2_trans_id
 2013-03-03   c5057c88     added profile_options.optionset
 2013-03-04   df313402     new table helppages
+
+2013-03-08                changes for vandalism archive-and-restore:
+                            - added cache_logs_archived.deletion_date and deleted_by
+                            - added tables caches_modified, cache_desc_modified,
+                                caches_attributes_modified, cache_logs_restored,
+																cache_pictures_modified and listing_restored

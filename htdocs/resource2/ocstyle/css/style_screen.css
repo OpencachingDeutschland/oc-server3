@@ -599,7 +599,7 @@ input.formbutton_header {
 	background-color:#dbe6f1;
 	color: #000000;
 	padding:0;
-	}
+}
 
 input.formbutton {
 	width:120px;
@@ -610,28 +610,28 @@ input.formbutton {
 	border-radius: 3px;
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
-	}
+}
 
 input.formbutton:hover {
 	background-color:#e5eef5;
-	box-shadow: 0px 0px 2px #555;
-	-moz-box-shadow: 0px 0px 2px #555;
-	-webkit-box-shadow: 0px 0px 2px #555;
-	}
+	box-shadow: 0px 0px 1px #555;
+	-moz-box-shadow: 0px 0px 1px #555;
+	-webkit-box-shadow: 0px 0px 1px #555;
+}
 
 input.formbutton_active {
 	width:120px;
-	border:1px solid #a0a0a0;
+	border:1px solid #5f90bb;
 	padding:1px 0px 1px 0;
 	color: #000000;
-	background-color:#ffe9c5;
+	background-color:#e5eef5;
 	border-radius: 3px;
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
-	box-shadow: 0px 0px 2px #555;
-	-moz-box-shadow: 0px 0px 2px #555;
-	-webkit-box-shadow: 0px 0px 2px #555;
-	}
+	box-shadow: 0px 0px 1px #555;
+	-moz-box-shadow: 0px 0px 1px #555;
+	-webkit-box-shadow: 0px 0px 1px #555;
+}
 
 .menuBar
 {

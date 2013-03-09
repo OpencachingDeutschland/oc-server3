@@ -632,19 +632,19 @@
 				FOR EACH ROW 
 					BEGIN 
 						IF NEW.`longitude` != OLD.`longitude` OR NEW.`latitude` != OLD.`latitude` THEN 
-							INSERT IGNORE INTO `cache_coordinates` (`cache_id`, `date_created`, `longitude`, `latitude`) 
-								VALUES (NEW.`cache_id`, NOW(), NEW.`longitude`, NEW.`latitude`); 
+							INSERT IGNORE INTO `cache_coordinates` (`cache_id`, `date_created`, `longitude`, `latitude`, `restored_by`)
+								VALUES (NEW.`cache_id`, NOW(), NEW.`longitude`, NEW.`latitude`, IFNULL(@restoredby,0));
 						END IF; 
 						IF NEW.`country` != OLD.`country` THEN 
-							INSERT IGNORE INTO `cache_countries` (`cache_id`, `date_created`, `country`) 
-								VALUES (NEW.`cache_id`, NOW(), NEW.`country`); 
+							INSERT IGNORE INTO `cache_countries` (`cache_id`, `date_created`, `country`, `restored_by`)
+								VALUES (NEW.`cache_id`, NOW(), NEW.`country`, IFNULL(@restoredby,0));
 						END IF;
 						IF NEW.`cache_id` = OLD.`cache_id` AND
 						   OLD.`status` <> 5 AND
 							 OLD.`date_created` < LEFT(NOW(),10) AND
 							 (NEW.`name` != OLD.`name` OR NEW.`type` != OLD.`type` OR NEW.`date_hidden` != OLD.`date_hidden` OR NEW.`size` != OLD.`size` OR NEW.`difficulty` != OLD.`difficulty` OR NEW.`terrain` != OLD.`terrain` OR NEW.`search_time` != OLD.`search_time` OR NEW.`way_length` != OLD.`way_length` OR NEW.`wp_gc` != OLD.`wp_gc` OR NEW.`wp_nc` != OLD.`wp_nc`)
 							 THEN
-							INSERT IGNORE INTO `caches_modified` (`cache_id`, `date_modified`, `name`, `type`, `date_hidden`, `size`, `difficulty`, `terrain`, `search_time`, `way_length`, `wp_gc`, `wp_nc`) VALUES (OLD.`cache_id`, NOW(), OLD.`name`, OLD.`type`, OLD.`date_hidden`, OLD.`size`, OLD.`difficulty`, OLD.`terrain`, OLD.`search_time`, OLD.`way_length`, OLD.`wp_gc`, OLD.`wp_nc`);
+							INSERT IGNORE INTO `caches_modified` (`cache_id`, `date_modified`, `name`, `type`, `date_hidden`, `size`, `difficulty`, `terrain`, `search_time`, `way_length`, `wp_gc`, `wp_nc`, `restored_by`) VALUES (OLD.`cache_id`, NOW(), OLD.`name`, OLD.`type`, OLD.`date_hidden`, OLD.`size`, OLD.`difficulty`, OLD.`terrain`, OLD.`search_time`, OLD.`way_length`, OLD.`wp_gc`, OLD.`wp_nc`, IFNULL(@restoredby,0));
 							/* logpw needs not to be saved */
 							/* for further explanation see restorecaches.php */
 						END IF;
@@ -691,7 +691,7 @@
 					BEGIN 
 						IF (SELECT `date_created` FROM `caches` WHERE `cache_id`=NEW.`cache_id`) < LEFT(NOW(),10) AND 
 						   (SELECT `status` FROM `caches` WHERE `caches`.`cache_id`=NEW.`cache_id`) != 5 THEN
-							INSERT IGNORE INTO `cache_desc_modified` (`cache_id`, `language`, `date_modified`, `desc`) VALUES (NEW.`cache_id`, NEW.`language`, NOW(), NULL);
+							INSERT IGNORE INTO `cache_desc_modified` (`cache_id`, `language`, `date_modified`, `desc`, `restored_by`) VALUES (NEW.`cache_id`, NEW.`language`, NOW(), NULL, IFNULL(@restoredby,0));
 						END IF;
 						CALL sp_update_caches_descLanguages(NEW.`cache_id`);
 					END;");
@@ -720,7 +720,7 @@
 						IF NEW.`cache_id`=OLD.`cache_id` AND
 							 (SELECT `status` FROM `caches` WHERE `caches`.`cache_id`=OLD.`cache_id`) != 5 THEN
 							IF (OLD.`date_created` < LEFT(NOW(),10)) THEN
-								INSERT IGNORE INTO `cache_desc_modified` (`cache_id`, `language`, `date_modified`, `date_created`, `desc`, `desc_html`, `desc_htmledit`, `hint`, `short_desc`) VALUES (OLD.`cache_id`, OLD.`language`, NOW(), OLD.`date_created`, OLD.`desc`, OLD.`desc_html`, OLD.`desc_htmledit`, OLD.`hint`, OLD.`short_desc`);
+								INSERT IGNORE INTO `cache_desc_modified` (`cache_id`, `language`, `date_modified`, `date_created`, `desc`, `desc_html`, `desc_htmledit`, `hint`, `short_desc`, `restored_by`) VALUES (OLD.`cache_id`, OLD.`language`, NOW(), OLD.`date_created`, OLD.`desc`, OLD.`desc_html`, OLD.`desc_htmledit`, OLD.`hint`, OLD.`short_desc`, IFNULL(@restoredby,0));
 							END IF;
 							IF NEW.`language`!=OLD.`language` THEN
 								INSERT IGNORE INTO `cache_desc_modified` (`cache_id`, `language`, `date_modified`, `desc`) VALUES (NEW.`cache_id`, NEW.`language`, NOW(), NULL);
@@ -736,7 +736,7 @@
 						/* changes at date of creation are ignored to save archive space */
 						IF (OLD.`date_created` < LEFT(NOW(),10)) AND
 						   (SELECT `status` FROM `caches` WHERE `caches`.`cache_id`=OLD.`cache_id`) != 5 THEN
-							INSERT IGNORE INTO `cache_desc_modified` (`cache_id`, `language`, `date_modified`, `date_created`, `desc`, `desc_html`, `desc_htmledit`, `hint`, `short_desc`) VALUES (OLD.`cache_id`, OLD.`language`, NOW(), OLD.`date_created`, OLD.`desc`, OLD.`desc_html`, OLD.`desc_htmledit`, OLD.`hint`, OLD.`short_desc`);
+							INSERT IGNORE INTO `cache_desc_modified` (`cache_id`, `language`, `date_modified`, `date_created`, `desc`, `desc_html`, `desc_htmledit`, `hint`, `short_desc`, `restored_by`) VALUES (OLD.`cache_id`, OLD.`language`, NOW(), OLD.`date_created`, OLD.`desc`, OLD.`desc_html`, OLD.`desc_htmledit`, OLD.`hint`, OLD.`short_desc`, IFNULL(@restoredby,0));
 						END IF;
 						CALL sp_update_caches_descLanguages(OLD.`cache_id`);
 					END;");
@@ -972,7 +972,7 @@
 						   (NEW.`object_type`=2 AND
 							  ((SELECT `date_created` FROM `caches` WHERE `cache_id`=NEW.`object_id`) < LEFT(NOW(),10)) AND
 							  (SELECT `status` FROM `caches` WHERE `caches`.`cache_id`=NEW.`object_id`) != 5)) THEN
-							INSERT IGNORE INTO `pictures_modified` (`id`, `date_modified`, `operation`, `object_type`, `object_id`, `title`, `original_id`) VALUES (NEW.`id`, NOW(), 'I', NEW.`object_type`, NEW.`object_id`, NEW.`title`, @original_picid);
+							INSERT IGNORE INTO `pictures_modified` (`id`, `date_modified`, `operation`, `object_type`, `object_id`, `title`, `original_id`, `restored_by`) VALUES (NEW.`id`, NOW(), 'I', NEW.`object_type`, NEW.`object_id`, NEW.`title`, IFNULL(@original_picid,0), IFNULL(@restoredby,0));
 						END IF;
 						IF NEW.`object_type`=1 THEN
 							CALL sp_update_cachelog_picturestat(NEW.`object_id`, FALSE);
@@ -1011,7 +1011,7 @@
 						       (OLD.`date_created` < LEFT(NOW(),10)) AND
 									 (SELECT `status` FROM `caches` WHERE `caches`.`cache_id`=OLD.`object_id`) != 5 AND
 									 (NEW.`title` != OLD.`title` OR NEW.`spoiler` != OLD.`spoiler` OR NEW.`display` != OLD.`display`) THEN
-							INSERT IGNORE INTO `pictures_modified` (`id`, `date_modified`, `operation`, `date_created`, `url`, `title`, `object_id`, `object_type`, `spoiler`, `unknown_format`, `display`) VALUES (OLD.`id`, NOW(), 'U', OLD.`date_created`, OLD.`url`, OLD.`title`, OLD.`object_id`, OLD.`object_type`, OLD.`spoiler`, OLD.`unknown_format`, OLD.`display`);
+							INSERT IGNORE INTO `pictures_modified` (`id`, `date_modified`, `operation`, `date_created`, `url`, `title`, `object_id`, `object_type`, `spoiler`, `unknown_format`, `display`, `restored_by`) VALUES (OLD.`id`, NOW(), 'U', OLD.`date_created`, OLD.`url`, OLD.`title`, OLD.`object_id`, OLD.`object_type`, OLD.`spoiler`, OLD.`unknown_format`, OLD.`display`, IFNULL(@restoredby,0));
 						END IF;
 					END;");
 
@@ -1027,7 +1027,7 @@
 						      (SELECT `date_created` FROM `caches` WHERE `cache_id`=OLD.`object_id`) < LEFT(NOW(),10) AND
 							    (SELECT `status` FROM `caches` WHERE `caches`.`cache_id`=OLD.`object_id`) != 5
 							  )) THEN
-							INSERT IGNORE INTO `pictures_modified` (`id`, `date_modified`, `operation`, `date_created`, `url`, `title`, `object_id`, `object_type`, `spoiler`, `unknown_format`, `display`) VALUES (OLD.`id`, NOW(), 'D', OLD.`date_created`, OLD.`url`, OLD.`title`, OLD.`object_id`, OLD.`object_type`, OLD.`spoiler`, OLD.`unknown_format`, OLD.`display`);
+							INSERT IGNORE INTO `pictures_modified` (`id`, `date_modified`, `operation`, `date_created`, `url`, `title`, `object_id`, `object_type`, `spoiler`, `unknown_format`, `display`, `restored_by`) VALUES (OLD.`id`, NOW(), 'D', OLD.`date_created`, OLD.`url`, OLD.`title`, OLD.`object_id`, OLD.`object_type`, OLD.`spoiler`, OLD.`unknown_format`, OLD.`display`, IFNULL(@restoredby,0));
 						END IF;
 						IF OLD.`object_type`=1 THEN
 							CALL sp_update_cachelog_picturestat(OLD.`object_id`, TRUE);
@@ -1230,7 +1230,7 @@
 						UPDATE `caches` SET `last_modified`=NOW() WHERE `cache_id`=NEW.`cache_id`;
 						IF (SELECT `status` FROM `caches` WHERE `cache_id`=NEW.`cache_id`) != 5 AND 
 						   (SELECT `date_created` FROM `caches` WHERE `cache_id`=NEW.`cache_id`) < LEFT(NOW(),10) THEN
-							INSERT IGNORE INTO `caches_attributes_modified` (`cache_id`, `attrib_id`, `date_modified`, `was_set`) VALUES (NEW.`cache_id`, NEW.`attrib_id`, NOW(), 0);
+							INSERT IGNORE INTO `caches_attributes_modified` (`cache_id`, `attrib_id`, `date_modified`, `was_set`, `restored_by`) VALUES (NEW.`cache_id`, NEW.`attrib_id`, NOW(), 0, IFNULL(@restoredby,0));
 						END IF;
 					END;");
 
@@ -1252,7 +1252,7 @@
 						UPDATE `caches` SET `last_modified`=NOW() WHERE `cache_id`=OLD.`cache_id`;
 						IF (SELECT `status` FROM `caches` WHERE `cache_id`=OLD.`cache_id`) != 5 AND 
 						   (SELECT `date_created` FROM `caches` WHERE `cache_id`=OLD.`cache_id`) < LEFT(NOW(),10) THEN
-							INSERT IGNORE INTO `caches_attributes_modified` (`cache_id`, `attrib_id`, `date_modified`, `was_set`) VALUES (OLD.`cache_id`, OLD.`attrib_id`, NOW(), 1);
+							INSERT IGNORE INTO `caches_attributes_modified` (`cache_id`, `attrib_id`, `date_modified`, `was_set`, `restored_by`) VALUES (OLD.`cache_id`, OLD.`attrib_id`, NOW(), 1, IFNULL(@restoredby,0));
 						END IF;
 					END;");
 

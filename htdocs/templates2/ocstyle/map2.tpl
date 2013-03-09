@@ -1118,7 +1118,7 @@ function showPermlinkBox_click()
 	{
 		var oCenterPos = moMap.getCenter();
 		var nZoomLevel = moMap.getZoom();
-		var msPermalink = msURLMapPHP + "?lat=" + Math.round(oCenterPos.lat()*1000000)/1000000 + "&lon=" + Math.round(oCenterPos.lng()*1000000)/1000000 + "&zoom=" + nZoomLevel + "&map=" + encodeURI(moMap.getMapTypeId()) {/literal}{if $bFullscreen}+ "&mode=fullscreen"{/if}{literal};
+		var msPermalink = msURLMapPHP + "?lat=" + Math.round(oCenterPos.lat()*1000000)/1000000 + "&lon=" + Math.round(oCenterPos.lng()*1000000)/1000000 + "&zoom=" + nZoomLevel + "&map=" + encodeURI(moMap.getMapTypeId()) + "&mode={/literal}{if $bFullscreen}full{else}normal{/if}screen"{literal};
 
 		var oPermalinkTextBox = document.getElementById('permalink_text');
 		if (oPermalinkTextBox)
@@ -1755,7 +1755,7 @@ function toggle_attribselection(bSaveCookies)
 				{* normal / full screen button *}
 				<td rowspan="2">
 					{if $bFullscreen}
-						<a class="nooutline" href="map2.php?mode=normal"><img src="resource2/{$opt.template.style}/images/map/35x35-normalscreen.png" align="right" style="margin-left:4px; margin-right:4px" height="35" width="35" alt="{t}Switch to small map{/t}" title="{t}Switch to small map{/t}" /></a>
+						<a class="nooutline" href="map2.php?mode=normalscreen"><img src="resource2/{$opt.template.style}/images/map/35x35-normalscreen.png" align="right" style="margin-left:4px; margin-right:4px" height="35" width="35" alt="{t}Switch to small map{/t}" title="{t}Switch to small map{/t}" /></a>
 					{else}
 						<a class="nooutline" href="map2.php?mode=fullscreen"><img src="resource2/{$opt.template.style}/images/map/35x35-fullscreen.png" align="right" style="margin-left:4px; margin-right:4px" height="35" width="35" alt="{t}Switch to full screen{/t}" title="{t}Switch to full screen{/t}" /></a>
 					{/if}
@@ -1805,7 +1805,7 @@ function toggle_attribselection(bSaveCookies)
 			<div class="mapversion">GM Version <script type="text/javascript">document.write(google.maps.version);</script></div>
 
 			<div id="mapoptions" class="mapoptions mapboxshadow" style="z-index:999; display:none">
-				<form action="map2.php?mode={if $bFullscreen}fullscreen{else}normalscreen{/if}" method="post" style="display:inline;">
+				<form action="map2.php?mode={if $bFullscreen}full{else}normal{/if}screen" method="post" style="display:inline;">
 					<input type="hidden" name="submit" value="1" />
 					<table>
 						<tr><td><strong>{t}Settings{/t}</strong></td><td style="text-align:right"><a href="javascript:toggle_settings()"><img src="resource2/ocstyle/images/misc/close-medium.png" /></a></tr>

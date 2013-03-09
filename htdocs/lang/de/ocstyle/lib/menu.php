@@ -244,11 +244,11 @@ $menu = array(
 		'menustring' => t('Sitemap'),
 		'siteid' => 'sitemap'
 	),
-array(
-		'title' => t('Verein'),
+	array(
+		'title' => t('Operator Association'),
 		'visible' => false,
 		'filename' => 'index.php',
-		'menustring' => t('Verein'),
+		'menustring' => t('Operator Association'),
 		'siteid' => 'verein'
 	)
 );

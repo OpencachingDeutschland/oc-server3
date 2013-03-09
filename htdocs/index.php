@@ -23,7 +23,7 @@
 		if (isset ($opt['page']['message']))
 			$tpl->assign('message',$opt['page']['message']);
 		else
-			$tpl->assign('message',$translate->t('You can find everything you need to go Geocaching ...', '', '', 0));
+			$tpl->assign('message',$translate->t('<p>You can find everything you need to go Geocaching ...</p>', '', '', 0));
 
 		// news entries
 		$tpl->assign('news_onstart', $opt['news']['onstart'] );

@@ -1739,7 +1739,7 @@ function toggle_attribselection(bSaveCookies)
 				{/if}
 
 				{* GPX download button *}
-				<td rowspan="2"><a class="jslink" onclick="javascript:download_gpx()"><img id="download_gpx_img" src="resource2/{$opt.template.style}/images/map/35x35-gpx-download.png" style="margin-left:5px; margin-right:5px" height="35" width="35" alt="{t}Download GPX file (max. 500 caches){/t}" title="{t}Download GPX file (max. 500){/t}"/></a></td>
+				<td rowspan="2"><a class="jslink" onclick="javascript:download_gpx()"><img id="download_gpx_img" src="resource2/{$opt.template.style}/images/map/35x35-gpx-download.png" style="margin-left:5px; margin-right:5px" height="35" width="35" alt="{t}Download GPX file (max. 500 caches){/t}" title="{t}Download GPX file (max. 500 caches){/t}"/></a></td>
 
 				{* permalink button *}
 				<td rowspan="2"><a class="jslink" onclick="showPermlinkBox_click()"><img src="resource2/{$opt.template.style}/images/map/35x35-star.png" style="margin-left:3px; margin-right:1px" height="35" width="35" alt="{t}Show link to this map{/t}" title="{t}Show link to this map{/t}" /></a></td>
@@ -1812,7 +1812,7 @@ function toggle_attribselection(bSaveCookies)
 						<tr><td>{t}Menu option 'Map' shows{/t}:</td><td><select name="opt_menumap"><option value="0" {if $opt_menumap==0}selected="selected"{/if}>{t}small map{/t}</option><option value="1" {if $opt_menumap==1}selected="selected"{/if}>{t}fullscreen map{/t}</option></select></td></tr>
 						<tr><td>{t}Show overview map{/t}:</td><td><input type="checkbox" name="opt_overview" value="1" {if $opt_overview==1}checked="checked"{/if}/></td></tr>
 						<tr><td>{t 1=$min_maxrecords 2=$max_maxrecords}Maximum caches on map<br />(%1-%2, 0=automatic){/t}:</td><td><input type="text" name="opt_maxcaches" size="6" value="{$opt_maxcaches}" /></td></tr>
-						<tr><td>{t}Cache icons{/t}:</td><td><select name="opt_cacheicons"><option value="1" {if $opt_cacheicons==1}selected="selected"{/if}>{t}classic OC{/t}<option value="2" {if $opt_cacheicons==2}selected="selected"{/if}>{t}OKAPI-Stil{/t}</option></select></td></tr>
+						<tr><td>{t}Cache icons{/t}:</td><td><select name="opt_cacheicons"><option value="1" {if $opt_cacheicons==1}selected="selected"{/if}>{t}classic OC{/t}<option value="2" {if $opt_cacheicons==2}selected="selected"{/if}>{t}OKAPI style{/t}</option></select></td></tr>
 						<tr><td colspan="2">{if $login.userid>0}<input type="button" class="formbutton" value="{t}Cancel{/t}" onclick="toggle_settings()"/>&nbsp; <input type="submit" name="submitsettings" class="formbutton" value="{t}Change{/t}" onclick="submitbutton('submitsettings')" />{else}<em>{t}You must be logged in to change map settings.{/t}</em>{/if}</td></tr>	
 					</table>
 				</form>

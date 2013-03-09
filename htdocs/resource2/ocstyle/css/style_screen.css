@@ -284,6 +284,7 @@ p.embed {float: left; width: 120px; margin: 7px 7px 5px 0px; padding: 5px 5px 5p
 p.embed-caption {float: left; margin: 5px 0px 0px 0px; padding: 0px; font-style: italic; font-weight: normal; line-height: 1.2em; font-size: 70%;}
 div.cachedesc {font-size: 120%;}
 div.cachedesc p {font-size: 100%;}
+div.welcome p {line-height: 1.6em;}
 
 /* Quote */
 p.quote {clear: left; margin: 0em 30px 0.6em 30px;	line-height: 120%; font-size: 110%;}

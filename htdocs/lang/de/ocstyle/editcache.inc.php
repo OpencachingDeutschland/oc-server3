@@ -24,7 +24,7 @@
 	$all_countries_submit = '<input type="submit" name="show_all_countries_submit" value="' . t('Show all') . '"/>';
  	$error_general = "<tr><td class='error' colspan='2'><b>" . t('Some errors occured, please check the marked fields.') . "</b></td></tr>";
 	$name_message = '&nbsp;<span class="errormsg">' . t('Cachename is invalid') . '</span>';
-	$date_message = '<span class="errormsg">' . t('date is invalid, format: TT-MM-JJJJ') . '</span>';
+	$date_message = '<span class="errormsg">' . t('date is invalid') . '</span>';
 	$coords_message = '<span class="errormsg">' . t('The used coordinates are invalid.') . '</span>';
 	$time_not_ok_message = '<span class="errormsg">' . t('The entered time is invalid.') . '</span>';
 	$way_length_not_ok_message = '<span class="errormsg">' . t('The distance you have entered is invalid. Format aa.aaa') . '</span>';

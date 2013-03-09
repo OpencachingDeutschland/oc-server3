@@ -8,8 +8,8 @@
 		<img src="resource2/{$opt.template.style}/images/misc/32x32-world.png" style="align: left; margin-right: 10px;" width="32" height="32" alt="" />
 		{t}What do i find on this website?{/t}
 	</div>
-	<div class="content-txtbox-noshade">
-		<p style="line-height: 1.6em;">{$message}</p>
+	<div class="content-txtbox-noshade welcome">
+		{$message}
 		<div class="buffer" style="width: 500px;">&nbsp;</div>
 	</div> 
 </div>

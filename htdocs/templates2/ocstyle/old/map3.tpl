@@ -50,7 +50,7 @@
 						{if !$bDisableFullscreen}
 							<a href="#" onclick="javascript:fullscreen_click()"><img src="resource2/{$opt.template.style}/images/map/35x35-fullscreen.png" align="right" style="margin-left:15px; margin-right: 0px;" height="35" width="35" alt="{t}Switch to full screen{/t}" /></a>
 						{/if}
-						<a href="#" onclick="javascript:download_gpx()"><img id="download_gpx_img" src="resource2/{$opt.template.style}/images/map/35x35-gpx-download.png" align="right" style="margin-left:15px; margin-right: 0px;" height="35" width="35" alt="{t}Download GPX file (max. 500){/t}" /></a>
+						<a href="#" onclick="javascript:download_gpx()"><img id="download_gpx_img" src="resource2/{$opt.template.style}/images/map/35x35-gpx-download.png" align="right" style="margin-left:15px; margin-right: 0px;" height="35" width="35" alt="{t}Download GPX file (max. 500 caches){/t}" /></a>
 					</td>
 				</tr>
 			</table>
@@ -113,7 +113,7 @@
 			</td>
 			<td valign="top" class="mapfilter pad10" width="150">
 				<table>
-					<tr><td class="mapfiltertopic">{t}Cache container{/t}</td></tr>
+					<tr><td class="mapfiltertopic">{t}Container{/t}</td></tr>
 					<tr><td><span style="line-height: 5px;">&nbsp;</span></td></tr>
 					{foreach from=$aCacheSize item=cacheSizeItem}
 						<tr>

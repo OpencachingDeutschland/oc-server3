@@ -36,7 +36,7 @@
 	$picturelines = '{lines}<tr><td colspan="2">&nbsp;</td></tr>';
 
 	$nowaypoints = '<tr><td colspan="2">' . t('No waypoints available') . '</td></tr>';
-	$waypointline = '<tr bgcolor="#ffffff"><td><img src="{wp_image}" />&nbsp;{wp_type}&nbsp;</td><td><table class="narrowtable"><tr><td>{wp_coordinate}</td></tr></table></tp><td>{wp_description}</td><td>&nbsp;[<a href="childwp.php?cacheid={cacheid}&childid={childid}">' . t('Edit') . '</a>] [<a href="childwp.php?cacheid={cacheid}&deleteid={childid}">' . t('Delete') . '</a>]&nbsp;</td></tr>';
+	$waypointline = '<tr bgcolor="#ffffff"><td><table class="narrowtable" cellspacing="0" cellpadding="0"><tr><td><img src="{wp_image}" /></td><td>{wp_type}</td></tr></table></td><td><table class="narrowtable"><tr><td style="white-space:nowrap">{wp_coordinate}</td></tr></table></tp><td>{wp_description}</td><td>[<a href="childwp.php?cacheid={cacheid}&childid={childid}">' . t('Edit') . '</a>] [<a href="childwp.php?cacheid={cacheid}&deleteid={childid}">' . t('Delete') . '</a>]</td></tr>';
 	$waypointlines = '<tr><td colspan="2"><table class="edit_wptable">{lines}</table></td></tr><tr><td colspan="2">&nbsp;</td></tr>';
 
 	$cache_attrib_js = "new Array({id}, {selected}, '{img_undef}', '{img_large}')";

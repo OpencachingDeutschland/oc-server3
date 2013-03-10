@@ -311,8 +311,8 @@
 		<table bgcolor="#dddddd" width="95%" cellpadding="5%" style="margin-bottom:4px">
 		{foreach from=$childWaypoints item=childWaypoint}
 			<tr bgcolor="{cycle values="#ffffff,#eeeeee"}">
-				<td width="25%"><img src="{$childWaypoint.image}" />{$childWaypoint.name|escape}</td>
-				<td width="20%">{$childWaypoint.coordinateHtml}</td>
+				<td width="25%"><table cellspacing="0" cellpadding="0"><tr><td><img src="{$childWaypoint.image}" /></td><td>{$childWaypoint.name|escape}</td></tr></table></td>
+				<td width="18%">{$childWaypoint.coordinateHtml}</td>
 				<td>{$childWaypoint.description|escape}</td>
 			</tr>
 		{/foreach}

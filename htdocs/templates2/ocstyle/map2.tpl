@@ -996,19 +996,8 @@ function get_wp_imgparams(wp)
 		return [wp.getAttribute('image'), wp.getAttribute('imagewidth'), wp.getAttribute('imageheight'),
 		        wp.getAttribute('imagewidth')/2, wp.getAttribute('imageheight')/2];
 	{else}
-		var image;
-		{literal}
-		switch (wp.getAttribute('typeid'))
-		{
-			case '0': image = 'personal'; break;
-			case '2': image = 'parking'; break;
-			case '3': image = 'path'; break;
-			case '4': image = 'final'; break;
-			case '5': image = 'poi'; break;
-			default:  image = 'reference'; break;
-		}
-		{/literal}
-		return ['resource2/ocstyle/images/map/caches2/wp_' + image + '.png', 32, 32, 13, 24];
+		return [wp.getAttribute('image').replace('/misc/','/map/caches2/'),
+		        32, 32, 13, 24];
 	{/if}
 	{literal}
 }

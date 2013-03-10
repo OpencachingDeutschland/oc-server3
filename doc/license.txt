@@ -160,3 +160,10 @@ List of third party components:
 				Path    : htdocs/resource2/ocstyle/images/openicons/
 				URI     : http://openiconlibrary.sourceforge.net/
 				License : Creative Commons BY-SA 3.0
+
+		26. 16x16 Icons 'flag-checker' and 'footprints'
+				Path    : htdocs/resource2/ocstyle/images/misc/
+				          htdocs/resource2/ocstyle/images/map/caches2/
+				URI     : http://www.softicons.com/free-icons/toolbar-icons/fugue-16px-additional-icons-2-by-yusuke-kamiyamane
+				License : Creative Commons BY 3.0
+				Author  : Yusuke Kamiyamane

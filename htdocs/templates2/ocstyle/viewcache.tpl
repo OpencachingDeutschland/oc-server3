@@ -308,7 +308,7 @@
 	</div>
 
 	<div class="content2-container" style="margin-left:10px;">
-		<table bgcolor="#dddddd" width="95%" cellpadding="5%">
+		<table bgcolor="#dddddd" width="95%" cellpadding="5%" style="margin-bottom:4px">
 		{foreach from=$childWaypoints item=childWaypoint}
 			<tr bgcolor="{cycle values="#ffffff,#eeeeee"}">
 				<td width="25%"><img src="{$childWaypoint.image}" />{$childWaypoint.name|escape}</td>
@@ -318,7 +318,7 @@
 		{/foreach}
 		</table>
 		<img src="resource2/{$opt.template.style}/images/viewcache/16x16-info.png" class="icon16" alt="Info" />
-		{t}Additional waypoints can make searching easier, for example by pointing to a suitable parking location or start of a path. The waypoints are included in GPX-file downloads and will be sent to the GPS device.{/t}
+		{t}The additional waypoints are shown on the map when the cache is selected, are included in GPX file downloads and will be sent to the GPS device.{/t}
 	</div>
 {/if}
 

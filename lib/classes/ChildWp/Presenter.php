@@ -14,6 +14,7 @@ abstract class ChildWp_Presenter
   const tpl_wp_desc = 'wpDesc';
   const tpl_wp_type_ids = 'wpTypeIds';
   const tpl_wp_type_names = 'wpTypeNames';
+  const tpl_wp_name_images = 'wpNameImages';
   const tpl_wp_type_error = 'wpTypeError';
   const tpl_submit_button = 'submitButton';
   const tpl_disabled = 'disabled';
@@ -23,6 +24,7 @@ abstract class ChildWp_Presenter
   protected $coordinate;
   private $waypointTypes = array();
   private $waypointTypeValid = true;
+  private $typeImages = array();
   protected $type = '0';
   protected $description;
   protected $cacheId;
@@ -58,6 +60,7 @@ abstract class ChildWp_Presenter
     $this->childWpHandler = $childWpHandler;
     $this->cacheId = $cacheId;
     $this->waypointTypes = $childWpHandler->getChildWpIdAndNames();
+    $this->typeImages = $childWpHandler->getChildNamesAndImages();
   }
 
   public function initChildWp($childId, $childWp)
@@ -93,6 +96,7 @@ abstract class ChildWp_Presenter
   {
     $template->assign(self::tpl_wp_type_ids, $this->getWaypointTypeIds());
     $template->assign(self::tpl_wp_type_names, $this->waypointTypes);
+    $template->assign(self::tpl_wp_name_images, $this->typeImages);
   }
 
   abstract protected function getTitle();

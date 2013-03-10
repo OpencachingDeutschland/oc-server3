@@ -248,6 +248,8 @@
 
 	$tpl->assign('help_oconly', helppagelink("OConly"));
 	$tpl->assign('help_map', helppagelink("*map2"));
+	$tpl->assign('help_wps', helppagelink("additional_waypoints"));
+	$tpl->assign('help_note', helppagelink("usernote"));
 
 	$tpl->display();
 
@@ -286,7 +288,7 @@ function output_cachexml($sWaypoint)
 {
 	global $opt, $login;
 
-	$rsCache = sql_slave("SELECT `caches`.`name`, `caches`.`wp_oc`, `caches`.`cache_id`, `caches`.`type`,
+	$rsCache = sql_slave("SELECT `caches`.`cache_id`, `caches`.`name`, `caches`.`wp_oc`, `caches`.`cache_id`, `caches`.`type`,
 	                             `caches`.`longitude`, `caches`.`latitude`, 
 	                             IF(`caches`.`status` IN (2,3,6), 1, 0) AS `tna`, 
 	                             IFNULL(`trans_status_text`.`text`, `cache_status`.`name`) AS `statustext`,
@@ -331,6 +333,9 @@ function output_cachexml($sWaypoint)
 	if ($rCache['type'] == 6)
 		$nAttendedCount = sql_value_slave("SELECT COUNT(*) FROM `cache_logs` WHERE `user_id`='&1' AND `cache_id`='&2' AND `type`=7", 0, $login->userid, $rCache['cache_id']);
 
+  $wphandler = new ChildWp_Handler();
+  $waypoints = $wphandler->getChildWps($rCache['cache_id'],true);
+
 	echo '<caches>' . "\n";
 	echo '  <cache ';
 	echo 'name="' . xmlentities($rCache['name']) . '" ';
@@ -353,7 +358,22 @@ function output_cachexml($sWaypoint)
 	echo 'oconly="' . xmlentities($rCache['oconly']) . '" ';
 	echo 'owner="' . xmlentities($rCache['owner']) . '" ';
 	echo 'username="' . xmlentities($rCache['username']) . '" ';
-	echo 'userid="' . xmlentities($rCache['user_id']) . '" />' . "\n";
+	echo 'userid="' . xmlentities($rCache['user_id']) . '" >' . "\n";
+
+	foreach ($waypoints as $waypoint)
+	{
+		echo '    <wpt ';
+		echo 'typeid="' . xmlentities($waypoint['type']) . '" ';
+		echo 'typename="' . xmlentities($waypoint['name']) . '" ';
+		echo 'image="' . xmlentities($waypoint['image']) . '" ';
+		echo 'imagewidth="38" imageheight="38" ';
+		echo 'latitude="' . xmlentities($waypoint['latitude']) . '" ';
+		echo 'longitude="' . xmlentities($waypoint['longitude']) . '" ';
+		echo 'description="' . xmlentities($waypoint['description']) . '" />\n';
+	}
+
+	echo '  </cache>\n';
+
 	echo '</caches>';
 
 	exit;
@@ -421,16 +441,18 @@ function output_searchresult($nResultId, $compact, $nLon1, $nLon2, $nLat1, $nLat
                             `caches`.`type`, 
                             `caches`.`status`>1 AS `inactive`,
                             `user`.`user_id`='&6' AS `owned`,
-                            IF(`cache_logs`.`id` IS NULL, 0, 1) AS `found`,
+                            IF(`found_logs`.`id` IS NULL, 0, 1) AS `found`,
+                            IF(`found_logs`.`id` IS NULL AND `notfound_logs`.`id` IS NOT NULL, 1, 0) AS `notfound`,
                             IF(`caches_attributes`.`attrib_id` IS NULL, 0, 1) AS `oconly`" .
                             $namequery . "
                        FROM `map2_data`
                  INNER JOIN `caches` ON `map2_data`.`cache_id`=`caches`.`cache_id`
                   LEFT JOIN `user` ON `user`.`user_id`=`caches`.`user_id`
-                  LEFT JOIN `cache_logs` ON `cache_logs`.`cache_id`=`caches`.`cache_id` AND `cache_logs`.`user_id`='&6' AND `cache_logs`.`type` IN (1,7)
+                  LEFT JOIN `cache_logs` `found_logs` ON `found_logs`.`cache_id`=`caches`.`cache_id` AND `found_logs`.`user_id`='&6' AND `found_logs`.`type` IN (1,7)
+                  LEFT JOIN `cache_logs` `notfound_logs` ON `notfound_logs`.`cache_id`=`caches`.`cache_id` AND `notfound_logs`.`user_id`='&6' AND `notfound_logs`.`type`=2
                   LEFT JOIN `caches_attributes` ON `caches_attributes`.`cache_id`=`caches`.`cache_id` AND `caches_attributes`.`attrib_id`=6
                       WHERE `map2_data`.`result_id`='&1' AND `caches`.`longitude`>'&2' AND `caches`.`longitude`<'&3' AND `caches`.`latitude`>'&4' AND `caches`.`latitude`<'&5'
-									 ORDER BY `caches`.`status` DESC, `oconly` AND NOT `found`, NOT `found`, `caches`.`type`<>4, MD5(`caches`.`name`)
+									 ORDER BY `caches`.`status` DESC, `oconly` AND NOT (`found` OR `notfound`), NOT (`found` OR `notfound`), `caches`.`type`<>4, MD5(`caches`.`name`)
 									 LIMIT &7",
 									    // sort in reverse order, because last are on top of map;
 									    // fixed order avoids oscillations when panning;
@@ -442,8 +464,9 @@ function output_searchresult($nResultId, $compact, $nLon1, $nLon2, $nLat1, $nLat
 			$flags = 0; 
 			if ($r['owned']) $flags |= 1;
 			if ($r['found']) $flags |= 2;
-			if ($r['inactive']) $flags |= 4;
-			if ($r['oconly']) $flags |= 8;
+			if ($r['notfound']) $flags |= 4;
+			if ($r['inactive']) $flags |= 8;
+			if ($r['oconly']) $flags |= 16;
 
 			if ($compact)
 				echo '<c d="' . xmlentities($r['wp_oc']) . '/' .

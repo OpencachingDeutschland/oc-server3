@@ -8,6 +8,7 @@ class CacheNote_Presenter
   const tpl_note_id = 'noteid';
   const tpl_note = 'note';
   const tpl_incl_coord = 'inclCoord';
+  const image = 'resource2/ocstyle/images/misc/wp_note.png';
 
   private $request;
   private $translator;

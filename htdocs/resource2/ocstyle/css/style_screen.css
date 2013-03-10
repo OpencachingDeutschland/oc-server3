@@ -1223,7 +1223,6 @@ div.mapstat_fullscreen {
 	position:relative;
 	top:21px;
 	padding-right:5px;
-	background:none;
 	text-align:right;
 }
 
@@ -1348,4 +1347,9 @@ div#havefound {
 /* a / no href / onclick=javascript:... */
 .jslink {
 	cursor:pointer;
+}
+
+.edit_wptable {
+	background-color:#dddddd;
+	font-size:0.85em;
 }

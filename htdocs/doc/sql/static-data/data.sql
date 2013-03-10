@@ -205,7 +205,10 @@ INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('10', '3');
 SET NAMES 'utf8';
 TRUNCATE TABLE `coordinates_type`;
 INSERT INTO `coordinates_type` (`id`, `name`, `trans_id`, `image`) VALUES ('1', 'Parking', '1788', 'resource2/ocstyle/images/misc/wp_parking.png');
-INSERT INTO `coordinates_type` (`id`, `name`, `trans_id`, `image`) VALUES ('2', 'Reference point', '1789', 'resource2/ocstyle/images/misc/wp_reference.png');
+INSERT INTO `coordinates_type` (`id`, `name`, `trans_id`, `image`) VALUES ('2', 'Stage or reference point', '1789', 'resource2/ocstyle/images/misc/wp_reference.png');
+INSERT INTO `coordinates_type` (`id`, `name`, `trans_id`, `image`) VALUES ('3', 'Path', '1926', 'resource2/ocstyle/images/misc/wp_path.png');
+INSERT INTO `coordinates_type` (`id`, `name`, `trans_id`, `image`) VALUES ('4', 'Final', '1927', 'resource2/ocstyle/images/misc/wp_final.png');
+INSERT INTO `coordinates_type` (`id`, `name`, `trans_id`, `image`) VALUES ('5', 'Point of interest', '1570', 'resource2/ocstyle/images/misc/wp_poi.png');
 
 -- Table countries
 SET NAMES 'utf8';
@@ -557,6 +560,8 @@ INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('usertops', '
 INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('viewcache', 'DE', 'Listing');
 INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('viewlogs', 'DE', 'Das Onlinelog');
 INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('viewprofile', 'DE', 'Benutzerprofil');
+INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('additional_waypoints', 'DE', 'Zusätzliche Wegpunkte');
+INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('usernote', 'DE', 'Persönliche Notiz');
 
 -- Table languages
 SET NAMES 'utf8';
@@ -2269,12 +2274,12 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1781', 'Add new
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1782', 'Delete waypoint', '2011-07-10 18:55:33');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1783', 'Edit waypoint', '2011-07-10 18:55:33');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1788', 'Parking', '2011-07-15 20:08:12');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1789', 'Reference point', '2011-07-15 20:08:12');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1789', 'Stage or reference point', '2011-07-15 20:08:12');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1790', 'Additional waypoints', '2011-07-15 22:33:19');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1791', 'Add a waypoint', '2011-07-15 22:33:19');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1792', 'Additional waypoints can be entered to make searching easier, for example by pointing to a suitable parking location or start of a path (the waypoint\'s description may contain more information). The waypoints are included in GPX-file downloads and will be sent to the GPS device.', '2011-07-15 22:33:19');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1792', 'Additional waypoints can be entered to make searching easier, for example by pointing to a suitable parking location or start of a path (the waypoint\'s description may contain more information). They may also specify the stages of a multicache. The waypoints are shown on the map when the cache is selected, are included in GPX file downloads and will be sent to the GPS device.', '2011-07-15 22:33:19');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1793', 'No waypoints available', '2011-07-15 22:33:33');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1794', 'Additional waypoints can make searching easier, for example by pointing to a suitable parking location or start of a path. The waypoints are included in GPX-file downloads and will be sent to the GPS device.', '2011-07-15 22:34:44');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1794', 'The additional waypoints are shown on the map when the cache is selected, are included in GPX file downloads and will be sent to the GPS device.', '2011-07-15 22:34:44');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1795', 'Maps:', '2012-07-23 22:26:31');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1796', 'Published on', '2012-07-24 19:16:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1797', 'Changelog', '2012-08-08 14:16:00');
@@ -2357,6 +2362,11 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1878', 'Map dat
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1920', 'D', '2013-03-03 00:00:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1921', 'T', '2013-03-03 00:00:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1922', 'click on spoiler to display', '2013-03-03 00:00:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1923', 'for', '2013-03-03 00:00:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1924', 'The cache has %1 %2additional waypoints%3.', '2013-03-03 00:00:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1925', 'The cache has an %2additional waypoint%3.', '2013-03-03 00:00:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1926', 'Path', '2013-03-03 00:00:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1927', 'Final', '2013-03-03 00:00:00');
 
 -- Table sys_trans_ref
 SET NAMES 'utf8';
@@ -5853,12 +5863,12 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1782', 'DE', 'Wegpunkt Löschen', '2011-07-10 20:17:25');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1783', 'DE', 'Wegpunkt bearbeiten', '2011-07-10 20:18:43');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1788', 'DE', 'Parkplatz', '2011-07-15 20:13:26');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1789', 'DE', 'Referenzpunkt', '2011-07-15 20:12:55');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1789', 'DE', 'Station oder Referenzpunkt', '2011-07-15 20:12:55');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1790', 'DE', 'Zusätzliche Wegpunkte', '2011-07-17 20:52:34');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1791', 'DE', 'Wegpunkt hinzufügen', '2011-07-17 20:53:01');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1792', 'DE', 'Zusätzliche Wegpunkte können angelegt werden um die Suche zu erleichtern. Zum Beispiel ein Parkplatz oder Startpunkt für die Suche. Die Wegpunkte sind in heruntergeladenen GPX-Dateien enthalten und werden ans GPS-Gerät gesendet.', '2011-07-17 20:50:33');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1792', 'DE', 'Zusätzliche Wegpunkte können angelegt werden um die Suche zu erleichtern, zum Beispiel indem sie einen Parkplatz oder Startpunkt für die Suche angeben. Außerdem können hier die Stationen eines Multicaches eingetragen werden. Die Wegpunkte werden bei Auswahl des Caches auf der Karte angezeigt, sind in heruntergeladenen GPX-Dateien enthalten und werden an das GPS-Gerät gesendet.', '2011-07-17 20:50:33');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1793', 'DE', 'Keine zusätzlichen Wegpunkte angelegt', '2011-07-17 20:51:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1794', 'DE', 'Zusätzliche Wegpunkte können die Suche vereinfachen, indem sie z.B. auf einem Parkplatz oder den Anfang der Strecke zeigen. Die Wegpunkte sind in heruntergeladenen GPX-Dateien enthalten und werden ans GPS-Gerät gesendet.', '2011-07-17 20:52:52');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1794', 'DE', 'Die zusätzlichen Wegpunkte werden bei Auswahl des Caches auf der Karte angezeigt, sind in heruntergeladenen GPX-Dateien enthalten und werden an das GPS-Gerät gesendet.', '2011-07-17 20:52:52');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1795', 'DE', 'Karten:', '2012-07-23 22:26:38');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1796', 'DE', 'Veröffentlicht am', '2012-07-23 22:26:38');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1797', 'DE', 'Versionsgeschichte', '2012-07-08 14:50:00');
@@ -5941,6 +5951,11 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1920', 'DE', 'D', '2012-10-11 00:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1921', 'DE', 'T', '2012-10-11 00:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1922', 'DE', 'Spoiler anklicken zum Anzeigen', '2012-10-11 00:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1923', 'DE', 'für', '2012-10-11 00:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1924', 'DE', 'Der Cache hat %1 %2zusätzliche Wegpunkte%3.', '2012-10-11 00:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1925', 'DE', 'Der Cache hat einen %1zusätzlichen Wegpunkt%2.', '2012-10-11 00:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1926', 'DE', 'Pfad', '2012-10-11 00:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1927', 'DE', 'Ziel', '2012-10-11 00:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'EN', 'Reorder IDs \r', '2010-09-02 00:15:30');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'EN', 'The database could not be reconnected.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'EN', 'Testing – please do not login', '2010-08-28 11:48:07');
@@ -7312,12 +7327,12 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1782', 'EN', 'Delete waypoint', '2012-08-24 17:35:49');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1783', 'EN', 'Edit waypoint', '2012-08-24 17:35:49');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1788', 'EN', 'Parking', '2012-08-24 17:35:49');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1789', 'EN', 'Reference point', '2012-08-24 17:35:49');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1789', 'EN', 'Stage or reference point', '2012-08-24 17:35:49');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1790', 'EN', 'Additional waypoints', '2012-08-24 17:35:49');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1791', 'EN', 'Add a waypoint', '2012-08-24 17:35:49');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1792', 'EN', 'Additional waypoints can be entered to make searching easier, for example by pointing to a suitable parking location or start of a path (the waypoint\'s description may contain more information). The waypoints are included in GPX-file downloads and will be sent to the GPS device.', '2012-08-24 17:35:49');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1792', 'EN', 'Additional waypoints can be entered to make searching easier, for example by pointing to a suitable parking location or start of a path (the waypoint\'s description may contain more information). They may also specify the stages of a multicache. The waypoints are shown on the map when the cache is selected, are included in GPX file downloads and will be sent to the GPS device.', '2012-08-24 17:35:49');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1793', 'EN', 'No waypoints available', '2012-08-24 17:35:49');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1794', 'EN', 'Additional waypoints can make searching easier, for example by pointing to a suitable parking location or start of a path. The waypoints are included in GPX-file downloads and will be sent to the GPS device.', '2012-08-24 17:35:49');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1794', 'EN', 'The additional waypoints are shown on the map when the cache is selected, are included in GPX file downloads and will be sent to the GPS device.', '2012-08-24 17:35:49');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1795', 'EN', 'Maps:', '2012-08-24 17:38:05');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1796', 'EN', 'Published on', '2012-08-24 17:38:05');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1797', 'EN', 'Changelog', '2012-08-24 17:38:05');
@@ -7400,6 +7415,11 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1920', 'EN', 'D', '2012-10-11 00:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1921', 'EN', 'T', '2012-10-11 00:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1922', 'EN', 'click on spoler to display', '2012-10-11 00:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1923', 'EN', 'for', '2012-10-11 00:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1924', 'EN', 'The cache has %1 %2additional waypoints%3.', '2012-10-11 00:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1925', 'EN', 'The cache has an %2additional waypoint%3.', '2012-10-11 00:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1926', 'EN', 'Path', '2012-10-11 00:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1927', 'EN', 'Final', '2012-10-11 00:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'ES', 'Reordenar ID', '2010-12-09 00:17:55');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'ES', 'La base de datos no se pudo conectar.', '2010-12-09 00:17:55');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'ES', 'En pruebas - por favor, no entre.', '2010-12-09 00:17:55');

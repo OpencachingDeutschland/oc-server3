@@ -36,16 +36,20 @@ class ChildWp_Handler
 
   public function getChildWp($childid)
   {
-    $rs = sql("SELECT id, cache_id, subtype, latitude, longitude, description FROM coordinates WHERE id = &1", $childid);
+    $rs = sql("SELECT id, cache_id, type, subtype, latitude, longitude, description FROM coordinates WHERE id = &1", $childid);
     $ret = $this->recordToArray(sql_fetch_array($rs));
     mysql_free_result($rs);
 
     return $ret;
   }
 
-  public function getChildWps($cacheid)
+  public function getChildWps($cacheid, $include_usernote=false)
   {
-    $rs = sql("SELECT id, cache_id, subtype, latitude, longitude, description FROM coordinates WHERE cache_id = &1 AND type = &2", $cacheid, Coordinate_Type::ChildWaypoint);
+		if ($include_usernote)
+			$type2 = Coordinate_Type::UserNote;
+		else
+			$type2 = 0;
+    $rs = sql("SELECT id, cache_id, type, subtype, latitude, longitude, description FROM coordinates WHERE cache_id = &1 AND type IN (&2,&3)", $cacheid, Coordinate_Type::ChildWaypoint, $type2);
     $ret = array();
 
     while ($r = sql_fetch_array($rs))
@@ -70,24 +74,45 @@ class ChildWp_Handler
     return $idAndNames;
   }
 
+  public function getChildNamesAndImages()
+  {
+    $nameAndTypes= array();
+
+    foreach ($this->childWpTypes as $type)
+    {
+      $nameAndTypes[$this->translator->translate($type->getName())] = $type->getImage();
+    }
+
+    return $nameAndTypes;
+  }
+
   private function recordToArray($r)
   {
     $ret = array();
 
     $ret['cacheid'] = $r['cache_id'];
     $ret['childid'] = $r['id'];
-    $ret['type'] = $r['subtype'];
     $ret['latitude'] = $r['latitude'];
     $ret['longitude'] = $r['longitude'];
     $ret['coordinate'] = new Coordinate_Coordinate($ret['latitude'], $ret['longitude']);
     $ret['description'] = $r['description'];
 
-    $type = $this->childWpTypes[$ret['type']];
-
-    if ($type)
+    if ($r['type'] == Coordinate_Type::ChildWaypoint)
     {
-      $ret['name'] = $this->translator->translate($type->getName());
-      $ret['image'] = $type->getImage();
+      $ret['type'] = $r['subtype'];
+      $type = $this->childWpTypes[$ret['type']];
+
+      if ($type)
+      {
+        $ret['name'] = $this->translator->translate($type->getName());
+        $ret['image'] = $type->getImage();
+      }
+    }
+    else
+    {
+      $ret['type'] = 0;
+      $ret['name'] = $this->translator->translate('Personal cache note');
+      $ret['image'] = CacheNote_Presenter::image;
     }
 
     return $ret;

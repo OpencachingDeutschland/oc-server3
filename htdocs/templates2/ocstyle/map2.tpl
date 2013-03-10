@@ -104,6 +104,9 @@ var moMarkerList = new Array();
 var msPopupMarkerWP = '';
 var mhInfoWindowHackTimer = null;
 var mhInfoWindowHackTries = 0;
+var moWpInfoWindow = null;
+var maWpWaypoints;
+var moWaypointList = new Array();
 
 var mnMapWidth = 770;
 var mnMapHeight = 600;
@@ -357,6 +360,7 @@ function mapLoad()
 	setMapType("OCM", "OpenCycleMap", "http://tile.opencyclemap.org/cycle/", 18);		
 
 	moInfoWindow = new google.maps.InfoWindow();
+	moWpInfoWindow = new google.maps.InfoWindow();
 
 	moSearchList = document.getElementById('mapselectlist');
 	moMapSearch = document.getElementById('mapsearch');
@@ -448,6 +452,7 @@ function map_clicked()
 			toggle_sidebar();
 	mapselectlist_hide();		// firefox needs this
 	moInfoWindow.close();
+	moWpInfoWindow.close();
 	permalinkbox_hide();
 }
 
@@ -581,7 +586,10 @@ function queue_dataload(nMs)
 function data_load()
 {
 	if (bFilterChanged)
+	{
 		moInfoWindow.close();
+		clear_waypoints();
+	}
 	bResetFilterHeading = bFilterChanged;
 	bFilterChanged = false;
 
@@ -670,7 +678,8 @@ function data_mapreceive(data, responseCode)
 			var nFlags = aCacheData[4];
 
 			addCacheToMap(sWaypoint, nLon, nLat, nType, nFlags,
-			              oCachesList[nIndex].getAttribute("n"), nIndex);
+			              oCachesList[nIndex].getAttribute("n"),
+			              sWaypoint == msPopupMarkerWP ? 999999 : nIndex);
 		}
 	}
 
@@ -731,12 +740,13 @@ function NewCacheMarker(nLat, nLon, sWaypoint, nType, nFlags, sName, nZindex)
 	{/if}
 	{literal}
 
-  if (nFlags & 1)				image += 'owned';
-  else if (nFlags & 2)	image += 'found';
-  else									image += 'cachetype-' + nType;
+  if (nFlags & 1)       image += 'owned';
+  else if (nFlags & 2)  image += 'found';
+  else if (nFlags & 4)  image += 'notfound';
+  else                  image += 'cachetype-' + nType;
 
-  if (nFlags & 4) 			image += '-inactive';
-  else if (nFlags & 8)	image += '-oconly';
+  if (nFlags & 8)       image += '-inactive';
+  else if (nFlags & 16) image += '-oconly';
 
 	var mi = new google.maps.MarkerImage(image + '.png');
 	mi.anchor = anchor;
@@ -754,7 +764,7 @@ function NewCacheMarker(nLat, nLon, sWaypoint, nType, nFlags, sName, nZindex)
 function addCacheToMap(sWaypoint, nLon, nLat, nType, nFlags, sName, nZindex)
 {
 	var oMarker = NewCacheMarker(nLat, nLon, sWaypoint, nType, nFlags, sName, nZindex);
-	google.maps.event.addListener(oMarker, "click", function(){CacheMarker_click(sWaypoint);});
+	google.maps.event.addListener(oMarker, "click", function(){show_cachepopup_wp(sWaypoint,false);});
 
 	moMarkerList[moMarkerList.length] = oMarker;
 }
@@ -765,6 +775,7 @@ function data_clear()
 	for (var nIndex=0; nIndex<moMarkerList.length; nIndex++)
 		moMarkerList[nIndex].setMap(null);
 	moMarkerList = new Array();
+	clear_waypoints();
 }
 
 
@@ -796,11 +807,6 @@ function data_clear_except(wpset)
 	moMarkerList = newList;
 	
 	return existing;
-}
-
-function CacheMarker_click(sWaypoint)
-{
-	show_cachepopup_wp(sWaypoint, false);
 }
 
 
@@ -837,11 +843,8 @@ function show_cachepopup_latlon(nLat, nLon, bAllowZoomChange)
 
 function adjust_infowindow()
 {
-	if (mhInfoWindowHackTries > 0 &&
-			document.getElementById('mapinfowindow') != null)
-		if (typeof document.getElementById('mapinfowindow').parentNode != null)
-			if (typeof document.getElementById('mapinfowindow').parentNode.parentNode != null)
-				if (typeof document.getElementById('mapinfowindow').parentNode.parentNode.style != null)
+	if (mhInfoWindowHackTries > 0)
+	try
 	{
 		var iw_frame = document.getElementById('mapinfowindow').parentNode.parentNode;
 		var iw_width = parseInt(iw_frame.style.width.substr(0, iw_frame.style.width.indexOf('px')));
@@ -850,32 +853,178 @@ function adjust_infowindow()
 		if (iw_width != "" && iw_height != "")
 		{
 			mhInfoWindowHackTries = 0;
-			// alert("Before: " + iw_frame.style.width +  " / " + iw_frame.style.height);  
-			iw_frame.style.width = String(iw_width + 25) + "px";
+			// alert("Before: " + iw_frame.style.width +  " / " + iw_frame.style.height);
+			iw_frame.style.width = String(iw_width + 2) + "px";
+				// making it too wide would let additional wp text flow into the margin at MSIE
 			iw_frame.style.height = String(iw_height + 25) + "px";
 			// alert("After: " + iw_frame.style.width +  " / " + iw_frame.style.height);  
 		}
 		else
 			mhInfoWindowHackTries -= 1;
 	}
+	catch (e)
+	{
+		// we were too fast and will try again
+	}
 
 	if (mhInfoWindowHackTries <= 0)
 		clearInterval(mhInfoWindowHackTimer);
 }
 
-function reopen_infowindow(oCoords, sText)
+function hack_infowindow()
 {
+	mhInfoWindowHackTries = 150;
+	mhInfoWindowHackTimer = window.setInterval("adjust_infowindow()",10);
+}
+
+function show_infowindow(oCoords, sText, aWaypoints)
+{
+	// close last info window, if open, and discard waypoin list
 	moInfoWindow.close();
+	clear_waypoints();
+
+	// open new info window
 	moInfoWindow = new google.maps.InfoWindow({ position: oCoords, content: sText });
 	moInfoWindow.open( moMap, null, true );
 	wid = document.getElementById('mapinfowindow');
-	mhInfoWindowHackTries = 150;
-	mhInfoWindowHackTimer = window.setInterval("adjust_infowindow()",10);
+	hack_infowindow();
+
+	// save waypoint list and create waypoint markers and handlers
+	maWpWaypoints = aWaypoints;
+
+	for (var nWp=0; nWp<aWaypoints.length; nWp++)
+	{
+		var imgparams = get_wp_imgparams(aWaypoints[nWp]);
+		var image       = imgparams[0];
+		var anchorx     = imgparams[3];
+		var anchory     = imgparams[4];
+
+		var latitude    = aWaypoints[nWp].getAttribute('latitude');
+		var longitude   = aWaypoints[nWp].getAttribute('longitude');
+
+		var mi = new google.maps.MarkerImage(image);
+		mi.anchor = new google.maps.Point(anchorx, anchory);
+		var coords = new google.maps.LatLng(latitude, longitude);
+
+		marker = new google.maps.Marker(
+			{	position: coords,
+				map: moMap,
+				icon: mi,
+				zIndex: 99998 });
+
+		{/literal}
+		{*
+		 * We cannot use the show_infowindow() loop variables in the event handler
+		 * function - they would all use variable values after end of loop, i.e. sho 
+		 * all the last waypoint's infowindow. To solve this, the handler finds the
+		 * clicked waypoint's data by the coordinates. GM passes the marker's
+		 * coordinates here (with rounding differences), but to be sure we just look 
+		 * for the nearest marker.
+		 *}
+		 {literal}
+
+		google.maps.event.addListener(marker, "click",
+			function (event)
+			{
+				var distance = 360;
+				var reflat = event.latLng.lat();
+				var reflon = event.latLng.lng();
+				var nearestwp;
+
+				for (nWp=0; nWp<maWpWaypoints.length; nWp++)
+				{
+					var lat = maWpWaypoints[nWp].getAttribute('latitude');
+					var lon = maWpWaypoints[nWp].getAttribute('longitude');
+					var d = Math.sqrt((lat-reflat) * (lat-reflat) + (lon-reflon) * (lon-reflon));
+
+					if (d < distance)
+					{
+						nearestwp = nWp;
+						nearestlon = lon;
+						nearestlat = lat;
+						distance = d;
+					}
+				}
+
+				moInfoWindow.close();
+				moWpInfoWindow.close();
+
+				var imgparams 	= get_wp_imgparams(aWaypoints[nearestwp]);
+				var image       = aWaypoints[nearestwp].getAttribute('image');
+				var imagewidth  = aWaypoints[nearestwp].getAttribute('imagewidth');
+				var imageheight = aWaypoints[nearestwp].getAttribute('imageheight');
+				var wptype      = maWpWaypoints[nearestwp].getAttribute('typeid');
+				var typename    = maWpWaypoints[nearestwp].getAttribute('typename');
+				var description = maWpWaypoints[nearestwp].getAttribute('description');
+
+				{/literal}
+				var typetext;
+				if (wptype+0 == 0 && {if $help_note != ""}1{else}0{/if})
+					typetext = "{$help_note}";
+				else if ({if $help_wps != ""}1{else}0{/if})
+					typetext = "{$help_wps}";
+				if (typetext != "")
+					typetext += typename + "</a>";
+				else
+					typetext += typename;
+
+				var text =    // MSIE needs max width to wrap long descriptions
+					"<div id='mapinfowindow' style='max-width:350px; max-height:350px'><table class='mappopup'>" +
+					"<tr><td><table cellspacing='0' cellpadding='0'><tr><td>" +
+						"<img src='" + image + "' width='" + imagewidth + "' height='" + imageheight + "' ></td>" +
+						"<td style='font-size:1.2em'>" + typetext + " {t}for{/t}" + "&nbsp;</td>" +
+						"<td style='font-weight:bold; font-size:1.2em'><a href='viewcache.php?wp=" + msPopupMarkerWP + "' target='_blank_'>" + msPopupMarkerWP + "</a></td>" +
+					"</tr></table></td></tr>";
+				if (description != "")
+					text += "<tr><td style='padding:8px; max-width:350px; white-space:normal' colspan='4'>" + description + "</td></tr>";
+				text += "</table></div>";
+				{literal}
+
+				moWpInfoWindow = new google.maps.InfoWindow({ position: event.latLng, content: text });
+				moWpInfoWindow.open( moMap, null, true );
+				hack_infowindow();
+			} );
+
+		moWaypointList[moWaypointList.length] = marker;
+	}
+}
+
+function get_wp_imgparams(wp)
+{
+	{/literal}
+	{if $opt_cacheicons == 1}
+		return [wp.getAttribute('image'), wp.getAttribute('imagewidth'), wp.getAttribute('imageheight'),
+		        wp.getAttribute('imagewidth')/2, wp.getAttribute('imageheight')/2];
+	{else}
+		var image;
+		{literal}
+		switch (wp.getAttribute('typeid'))
+		{
+			case '0': image = 'personal'; break;
+			case '2': image = 'parking'; break;
+			case '3': image = 'path'; break;
+			case '4': image = 'final'; break;
+			case '5': image = 'poi'; break;
+			default:  image = 'reference'; break;
+		}
+		{/literal}
+		return ['resource2/ocstyle/images/map/caches2/wp_' + image + '.png', 32, 32, 13, 24];
+	{/if}
+	{literal}
+}
+
+function clear_waypoints()
+{
+	moWpInfoWindow.close();
+	for (nOldWp = 0; nOldWp<moWaypointList.length; nOldWp++)
+		moWaypointList[nOldWp].setMap(null);
+	moWaypointList = new Array();
 }
 
 function show_cachepopup_url(sURL, sWaypoint, bAllowZoomChange)
 {
 	moInfoWindow.close();
+	moWpInfoWindow.close();
 
 	ajaxLoad(sURL, function(data, responseCode) {
 		var oXML = xmlParse(data);
@@ -901,9 +1050,8 @@ function show_cachepopup_url(sURL, sWaypoint, bAllowZoomChange)
 			  moMap.setZoom(nDefaultZoom);
 		}
 
-		reopen_infowindow(oCoords, parseXML_GetHTML(oXML));
+		show_infowindow(oCoords, parseXML_GetHTML(oXML), parseXML_GetWaypoints(oXML));
 	});
-
 }
 
 function parseXML_GetWaypoint(xmlobject)
@@ -941,6 +1089,8 @@ function parseXML_GetHTML(xmlobject)
 	var bOwner = aCaches[0].getAttribute("owner");
 	var sUsername = aCaches[0].getAttribute("username");
 	var nUserId = aCaches[0].getAttribute("userid");
+
+	var oWaypoints = aCaches[0].getElementsByTagName("wpt");
 
 	{/literal}{*
 	// When changing any of the following HTML code, test the map popups carefully
@@ -985,10 +1135,36 @@ function parseXML_GetHTML(xmlobject)
 	if (sAddHtml != "")
 		sHtml += 	"<tr><td colspan='3' height='3px'></td></tr>" + sAddHtml;
 
+	if (oWaypoints.length)
+	{
+		{/literal}
+		var sMsg;
+		if (oWaypoints.length > 1)
+			sMsg = "{t}The cache has %1 %2additional waypoints%3.{/t}"; 
+		else
+			sMsg = "{t}The cache has an %2additional waypoint%3.{/t}";
+		sMsg = sMsg.replace("%1",oWaypoints.length);
+		sMsg = sMsg.replace("%2","{$help_wps}");
+		sMsg = sMsg.replace("%3","{if $help_wps != ""}</a>{/if}");
+
+		sHtml += "<tr><td colspan='3'><img src='resource2/ocstyle/images/misc/16x16-wp_reference.png' alt='' /> " + sMsg + "</td></tr>";
+		{literal}
+	}
+
 	sHtml += "</table></div>";
 
 	return sHtml;
 }
+
+function parseXML_GetWaypoints(xmlobject)
+{
+	var aCaches = xmlobject.documentElement.getElementsByTagName("cache");
+	if (aCaches.length<1)
+		return false;
+	else
+		return aCaches[0].getElementsByTagName("wpt");
+}
+
 
 function parseXML_GetPoint(oXMLObject)
 {
@@ -1233,7 +1409,7 @@ function searchlist_openitem(nIndex)
 	else
 	{
 		var oCoords = new google.maps.LatLng(nLat, nLon);
-		reopen_infowindow(oCoords, xmlentities(sText));
+		show_infowindow(oCoords, xmlentities(sText), new Array());
 		moMap.setCenter(oCoords);
 	  moMap.setZoom(nDefaultZoom-1);
 

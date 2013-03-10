@@ -8,6 +8,14 @@
     {$pagetitle|escape}
   </div>
 
+  <table>
+    <tr>
+      {foreach from=$wpNameImages key=typeName item=typeImage}
+        <td><img src="{$typeImage}"></td><td>{$typeName}</td><td>&nbsp;&nbsp;&nbsp;</td>
+     {/foreach}
+   </tr>
+  </table>
+
   <table class="table">
     <tr>
       <td valign="top">{t}Waypoint type:{/t}</td>

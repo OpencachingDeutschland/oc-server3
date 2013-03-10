@@ -605,8 +605,12 @@
 			$thiswp = mb_ereg_replace('{desc}', $translate->t('Waypoint','','',0).' '.$n, $thiswp);
 			switch ($childWaypoint['type'])
 			{
-				case 1: $wp_typename = "Parking Area"; break;
-				default: $wp_typename = "Reference Point";
+				case 1: $wp_typename = "Parking Area"; break;  // well-known garmin symbols
+				case 2: $wp_typename = "Flag, Green"; break;   // stage / ref point
+				case 3: $wp_typename = "Flag, Blue"; break;    // path
+				case 4: $wp_typename = "Circle with X"; break; // final
+				case 5: $wp_typename = "Diamond, Green"; break;  // point of interest
+				default: $wp_typename = "Flag, Blue"; break;  // for the case new types are forgotten here ..
 			}
 			$thiswp = mb_ereg_replace('{type}', $wp_typename, $thiswp);
 			$thiswp = mb_ereg_replace('{parent}', $r['waypoint'], $thiswp);

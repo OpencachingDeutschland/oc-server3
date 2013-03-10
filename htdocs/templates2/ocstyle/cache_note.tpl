@@ -15,8 +15,12 @@
       <td></td>
       <td colspan="2">
         <input type="submit" name="submit_cache_note" value="{t}Save{/t}" class="formbutton" onclick="javascript:submitbutton('submit_cache_note')" >
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
         <img src="resource2/{$opt.template.style}/images/viewcache/16x16-info.png" class="icon16" alt="Info" />
-        <small>
+        <small style="line-height:1em">
           {t}The note is not visible to other users. The note and the optional coordinate will be included in GPX-file downloads and sent to the GPS device.{/t}</td>
         </small>
       </td>

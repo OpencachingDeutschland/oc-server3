@@ -191,7 +191,7 @@
 			{/if}
 
 			{if $helplink != ""}
-				<div class="tplhelp">{$helplink}<img src="resource2/ocstyle/images/openicons/35x35-system-help.png" /></a></div>
+				<div class="tplhelp">{$helplink}<img src="resource2/ocstyle/images/misc/32x32-help.png" /></a></div>
 			{/if}
 
 			{* <!-- NAVIGATION --> *}				

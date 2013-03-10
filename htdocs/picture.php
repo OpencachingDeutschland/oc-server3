@@ -77,6 +77,7 @@
 
 			$picture->setSpoiler(isset($_REQUEST['spoiler']) && $_REQUEST['spoiler']=='1');
 			$picture->setDisplay((isset($_REQUEST['notdisplay']) && $_REQUEST['notdisplay']=='1') == false);
+			$picture->setMapPreview(isset($_REQUEST['mappreview']) && $_REQUEST['mappreview']=='1');
 
 			$title = isset($_REQUEST['title']) ? $_REQUEST['title'] : '';
 			if ($title == '')
@@ -164,6 +165,7 @@
 				// overwrite values
 				$picture->setSpoiler(isset($_REQUEST['spoiler']) && $_REQUEST['spoiler']=='1');
 				$picture->setDisplay((isset($_REQUEST['notdisplay']) && $_REQUEST['notdisplay']=='1') == false);
+				$picture->setMapPreview(isset($_REQUEST['mappreview']) && $_REQUEST['mappreview']=='1');
 
 				$title = isset($_REQUEST['title']) ? $_REQUEST['title'] : $picture->getTitle();
 				if ($title == '')
@@ -212,6 +214,7 @@
 	$tpl->assign('title', $picture->getTitle());
 	$tpl->assign('spoilerchecked', $picture->getSpoiler());
 	$tpl->assign('displaychecked', $picture->getDisplay());
+	$tpl->assign('mappreviewchecked', $picture->getMapPreview());
 
 	$tpl->display();
 ?>

@@ -17,6 +17,7 @@ CREATE TABLE `pictures` (
   `local` tinyint(1) NOT NULL default '1',
   `unknown_format` tinyint(1) NOT NULL default '0',
   `display` tinyint(1) NOT NULL default '1',
+  `mappreview` tinyint(2) NOT NULL default '7',
   PRIMARY KEY  (`id`),
   UNIQUE KEY `uuid` (`uuid`),
   KEY `last_modified` (`last_modified`),

@@ -562,6 +562,7 @@ INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('viewlogs', '
 INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('viewprofile', 'DE', 'Benutzerprofil');
 INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('additional_waypoints', 'DE', 'Zusätzliche Wegpunkte');
 INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('usernote', 'DE', 'Persönliche Notiz');
+INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('previewpics', 'DE', 'Vorschaubilder');
 
 -- Table languages
 SET NAMES 'utf8';
@@ -705,6 +706,7 @@ INSERT INTO `profile_options` (`id`, `name`, `trans_id`, `internal_use`, `defaul
 INSERT INTO `profile_options` (`id`, `name`, `trans_id`, `internal_use`, `default_value`, `check_regex`, `option_order`, `option_input`, `optionset`) VALUES ('7', 'Show overview map', '1870', '1', '0', '^[0-1]$', '120', 'checkbox', '2');
 INSERT INTO `profile_options` (`id`, `name`, `trans_id`, `internal_use`, `default_value`, `check_regex`, `option_order`, `option_input`, `optionset`) VALUES ('8', 'Maximum caches on map<br />(%1-%2, 0=automatic)', '1871', '1', '0', '^[1-9][0-9]{2,3}$', '130', 'text', '2');
 INSERT INTO `profile_options` (`id`, `name`, `trans_id`, `internal_use`, `default_value`, `check_regex`, `option_order`, `option_input`, `optionset`) VALUES ('9', 'Cache icons', '1872', '1', '1', '^[1-9]$', '140', 'select:1=classic OC,', '2');
+INSERT INTO `profile_options` (`id`, `name`, `trans_id`, `internal_use`, `default_value`, `check_regex`, `option_order`, `option_input`, `optionset`) VALUES ('10', 'Show %1preview pictures</a><br />(% of map area, 0=off)', '1928', '1', '7', '^[0-5]?[0-9]$', '150', 'text', '2');
 
 -- Table replication_overwritetypes
 SET NAMES 'utf8';
@@ -1680,7 +1682,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('789', 'Contact 
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('792', 'Mark as finished', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('793', 'Action', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('794', 'Prior to reporting a cache to your Opencaching team you should try to contact the owner, to solve possible problems immediate user to user. This does not apply for caches violating the Opencaching terms of use in a way, that requires immediate action of an Opencaching administrator.', '2010-08-28 11:48:04');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('795', 'Do not display this picture (only used in HTML description)', '2010-08-28 11:48:04');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('795', 'Do not separately display this picture (used in HTML description etc.)', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('796', 'No information on user details found.', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('797', 'Coordinates', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('798', 'Geokrets', '2010-08-28 11:48:04');
@@ -2367,6 +2369,9 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1924', 'The cac
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1925', 'The cache has an %2additional waypoint%3.', '2013-03-03 00:00:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1926', 'Path', '2013-03-03 00:00:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1927', 'Final', '2013-03-03 00:00:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1928', 'Show %1preview pictures</a><br />(% of map area, 0=off)', '2013-03-03 00:00:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1929', 'Preview picture for map \&ndash; is shown when this cache is selected on the map. You can have only <em>one</em> preview picture per cache.', '2013-03-03 00:00:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1930', 'Max. %1 caches can be displayed with Microsoft Internet Explorer.', '2013-03-03 00:00:00');
 
 -- Table sys_trans_ref
 SET NAMES 'utf8';
@@ -5271,7 +5276,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('792', 'DE', 'Als erledigt markieren', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('793', 'DE', 'Aktion', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('794', 'DE', 'Bevor du einen Cache an das Opencaching-Team meldest, solltest du versuchen, Kontakt mit dem Owner aufzunehmen, um mögliche Probleme direkt untereinander zu klären. Davon ausgenommen sind Caches, die durch ihre Beschreibung oder das Versteck eine sofortige Archivierung notwendig machen.', '2010-08-28 11:48:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('795', 'DE', 'Dieses Bild nicht anzeigen (Hintergrundbild in HTML Beschreibung o.ä.)', '2010-08-28 11:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('795', 'DE', 'Dieses Bild nicht separat anzeigen (Hintergrundbild in HTML-Beschreibung o.ä.)', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('796', 'DE', 'Es wurden keine Benutzerdetails eingegeben.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('797', 'DE', 'Koordinaten', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('798', 'DE', 'Geokrets', '2010-08-28 11:48:07');
@@ -5956,6 +5961,9 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1925', 'DE', 'Der Cache hat einen %1zusätzlichen Wegpunkt%2.', '2012-10-11 00:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1926', 'DE', 'Pfad', '2012-10-11 00:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1927', 'DE', 'Ziel', '2012-10-11 00:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1928', 'DE', '%1Vorschaubilder</a> anzeigen<br />(% der Kartenfläche, 0=aus)', '2012-10-11 00:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1929', 'DE', 'Kartenvorschaubild \&ndash; wird angezeigt, wenn dieser Cache auf der Karte angeklickt wird. Es ist maximal <em>ein</em> Vorschaubild pro Cache wählbar.', '2012-10-11 00:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1930', 'DE', 'Mit dem Microsoft Internet Explorer werden<br />maximal %1 Caches angezeigt.', '2012-10-11 00:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'EN', 'Reorder IDs \r', '2010-09-02 00:15:30');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'EN', 'The database could not be reconnected.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'EN', 'Testing – please do not login', '2010-08-28 11:48:07');
@@ -6733,7 +6741,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('792', 'EN', 'Mark as done', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('793', 'EN', 'Action', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('794', 'EN', 'Prior to reporting a cache to the Opencaching team, you should try to contact the owner and try to solve the presumed problems yourself. This does not apply for caches violating the Opencaching terms of use in a way that requires immediate action of an Opencaching administrator.', '2010-08-28 11:48:08');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('795', 'EN', 'Do not display this picture (which is only used in HTML description etc.)', '2010-08-28 11:48:08');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('795', 'EN', 'Do not separately display this picture (which is only used in HTML description etc.)', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('796', 'EN', 'No information on user details found.', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('797', 'EN', 'Coordinates', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('798', 'EN', 'Geokrets', '2010-08-28 11:48:08');
@@ -7420,6 +7428,9 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1925', 'EN', 'The cache has an %2additional waypoint%3.', '2012-10-11 00:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1926', 'EN', 'Path', '2012-10-11 00:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1927', 'EN', 'Final', '2012-10-11 00:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1928', 'EN', 'Show %1preview pictures</a><br />(% of map area, 0=off)', '2012-10-11 00:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1929', 'EN', 'Preview picture for map \&ndash; is shown when this cache is selected on the map. You can have only <em>one</em> preview picture per cache.', '2012-10-11 00:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1930', 'EN', 'Max. %1 caches can be displayed with Microsoft Internet Explorer.', '2012-10-11 00:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'ES', 'Reordenar ID', '2010-12-09 00:17:55');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'ES', 'La base de datos no se pudo conectar.', '2010-12-09 00:17:55');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'ES', 'En pruebas - por favor, no entre.', '2010-12-09 00:17:55');
@@ -11902,4 +11913,4 @@ TRUNCATE TABLE `watches_waitingtypes`;
 INSERT INTO `watches_waitingtypes` (`id`, `watchtype`) VALUES ('1', 'ownerlog');
 INSERT INTO `watches_waitingtypes` (`id`, `watchtype`) VALUES ('2', 'cache_watches');
 
-INSERT INTO `sysconfig` (`name`, `value`) VALUES ('datasql_checksum', 'bdff93f2b9d8559f5a29e0d8e6bd1170') ON DUPLICATE KEY UPDATE `value`='bdff93f2b9d8559f5a29e0d8e6bd1170';
+INSERT INTO `sysconfig` (`name`, `value`) VALUES ('datasql_checksum', '92a5fe8a1694cd46efbcb9992bce66b4') ON DUPLICATE KEY UPDATE `value`='92a5fe8a1694cd46efbcb9992bce66b4';

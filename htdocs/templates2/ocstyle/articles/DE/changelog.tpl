@@ -20,8 +20,9 @@
 		<li><a href="map2.php?mode=fullscreen">Vollbildkarte</a> mit ausklappbaren Filtereinstellungen</li> 
 		<li><a href="http://wiki.opencaching.de/index.php/Zusätzliche_Wegpunkte" target="_blank">zusätzliche Wegpunkte</a> des gewählten Caches werden angezeigt</li>
 		<li>bis zu 4000 Caches auf einer Karte</li>
-		<li>alternative Cachesymbole wählbar (Opencaching.pl-Stil)</li>
 		<li>Home-Button springt zu den im <a href="myprofile.php">Profil</a> eingetragenen Heimkoordinaten</li>
+		<li>alternative Cachesymbole wählbar (Opencaching.pl-Stil)</li>
+		<li>pro Cache ist ein <a href="http://wiki.opencaching.de/index.php?title=Vorschaubilder" target="_blank">Vorschaubild</a> einstellbar, das bei Auswahl des Caches auf der Karte erscheint</li>
 		<li>Verbesserungen bei der Cacheauswahl / Filter:
 			<ul>
 				<li>komfortablere Auswahl von einzelnen Cachetypen oder -größen</li>

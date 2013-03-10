@@ -465,7 +465,7 @@ function mnu_EchoHelpLink($tplname)
 {
 	$helplink = helppagelink($tplname);
 	if ($helplink != "")
-		echo $helplink . '<img src="resource2/ocstyle/images/openicons/35x35-system-help.png" /></a>';
+		echo $helplink . '<img src="resource2/ocstyle/images/misc/32x32-help.png" /></a>';
 }
 
 ?>

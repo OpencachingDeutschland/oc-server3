@@ -496,7 +496,7 @@
 			$opt['map']['maxrecords'] = 2500;
 	}
 	else
-		$opt['map']['maxrecords'] = 250;
+		$opt['map']['maxrecords'] = 200;
 			// ... selectable by user:
 	$opt['map']['min_maxrecords'] = 100;
 	$opt['map']['max_maxrecords'] = 4000;

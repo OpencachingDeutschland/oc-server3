@@ -923,8 +923,8 @@ a.info:hover span{ /*the span will display just on :hover state*/
 div.tplhelp
 {
 	position:absolute;
-	top:135px;
-	right:12px;
+	top:136px;
+	right:13px;
 }
 
 /* lists at hompage */
@@ -1136,7 +1136,6 @@ td.mapheader_spacer {
 	position:absolute;
 	z-index:999;
 	background-color:white;
-	border:solid 1px darkblue;
 	padding:10px;
 	right:15px;
 	opacity:0.9;
@@ -1199,6 +1198,10 @@ table.mappopup td {
 	white-space: nowrap;
 	}
 
+.mapboxframe {
+	border:1px solid #777777;
+}
+
 .mapboxshadow  {
 	box-shadow: 1px 2px 3px #555;
 	-moz-box-shadow: 1px 2px 3px #555;
@@ -1260,7 +1263,6 @@ div.mapoptions {
 	position:absolute;
 	right:100px;
 	top: 80px;
-	border: 1px solid rgb(0,0,60);
 	opacity: 0.9;
 	background: #FFFFFF;
 	padding:10px 10px 10px 10px;

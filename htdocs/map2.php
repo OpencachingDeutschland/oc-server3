@@ -14,22 +14,11 @@
 	 * ignored caches, we need to verify the login data
 	 */
 	$login->verify();
-	
-	if ($login->userid > 0)
-	{
-		$user_maxrecords = $maxrecords =
-			sql_value("SELECT option_value FROM user_options WHERE user_id='&1' AND option_id=8",
-                $opt['map']['maxrecords'] + 0, $login->userid);
-		if ($maxrecords == 0)
-			$maxrecords = $opt['map']['maxrecords'] + 0;
-		else
-			$maxrecords = min(max($maxrecords, $opt['map']['min_maxrecords']), $opt['map']['max_maxrecords']);
-	}
-	else
-	{
-		$maxrecords = $opt['map']['maxrecords'] + 0;
-		$user_maxrecords = 0;
-	}
+
+	// check for peculiar browsers
+	$msie = preg_match('/MSIE [1-9]+.[0-9]+/',$_SERVER['HTTP_USER_AGENT']) &&
+	                   !strpos($user_agent,"Opera");
+	$old_msie = $msie && preg_match('/MSIE [1-6].[0-9]+/',$_SERVER['HTTP_USER_AGENT']);
 
 	$sMode = isset($_REQUEST['mode']) ? $_REQUEST['mode'] : '';
 	if ($sMode == 'locate')
@@ -63,12 +52,10 @@
 		$nLat1 = isset($_REQUEST['lat1']) ? $_REQUEST['lat1']+0 : 0;
 		$nLat2 = isset($_REQUEST['lat2']) ? $_REQUEST['lat2']+0 : 0;
 		$cachenames = isset($_REQUEST['cachenames']) ? $_REQUEST['cachenames']+0 : 0;
+		$smallmap = isset($_REQUEST['smallmap']) ? $_REQUEST['smallmap']+0 : 0;
 		
-		if (isset($_REQUEST['smallmap']) && $_REQUEST['smallmap'] && 
-		    $user_maxrecords == 0 && $maxrecords > 1000)
-			$maxrecords = floor($maxrecords*0.65);
-
-		output_searchresult($nResultId, $compact, $nLon1, $nLon2, $nLat1, $nLat2, $cachenames);
+		output_searchresult($nResultId, $compact, $nLon1, $nLon2, $nLat1, $nLat2,
+		                    $cachenames, $smallmap);
 	}
 	else if ($sMode == 'fullscreen' ||
 	         ($sMode == '' &&
@@ -95,27 +82,24 @@
 		sql("INSERT INTO `user_options` (`user_id`, `option_id`, `option_visible`, `option_value`)
 		          VALUES ('&1', '&2', '&3', '&4')
 							ON DUPLICATE KEY UPDATE `option_value`='&4'",
-							$login->userid, 7, 0, isset($_REQUEST['opt_overview']) ? min(max($_REQUEST['opt_overview']+0, 0), 1) : 0);
+							$login->userid, 7, 0, isset($_REQUEST['opt_overview']) ? min(max(round($_REQUEST['opt_overview']+0), 0), 1) : 0);
 		sql("INSERT INTO `user_options` (`user_id`, `option_id`, `option_visible`, `option_value`)
 		          VALUES ('&1', '&2', '&3', '&4')
 							ON DUPLICATE KEY UPDATE `option_value`='&4'",
-							$login->userid, 8, 0, $_REQUEST['opt_maxcaches'] == 0 ? 0 : min(max($_REQUEST['opt_maxcaches']+0, $opt['map']['min_maxrecords']), $opt['map']['max_maxrecords']) );
+							$login->userid, 8, 0, $_REQUEST['opt_maxcaches'] == 0 ? 0 : min(max(round($_REQUEST['opt_maxcaches']+0), $opt['map']['min_maxrecords']), $opt['map']['max_maxrecords']) );
 		sql("INSERT INTO `user_options` (`user_id`, `option_id`, `option_visible`, `option_value`)
 		          VALUES ('&1', '&2', '&3', '&4')
 							ON DUPLICATE KEY UPDATE `option_value`='&4'",
 							$login->userid, 9, 0, min(max($_REQUEST['opt_cacheicons']+0, 1), 2) );
+		sql("INSERT INTO `user_options` (`user_id`, `option_id`, `option_visible`, `option_value`)
+		          VALUES ('&1', '&2', '&3', '&4')
+							ON DUPLICATE KEY UPDATE `option_value`='&4'",
+							$login->userid, 10, 0, min(max($_REQUEST['opt_pictures']+0, 0), 50) );
 	}
 
 	$tpl->name = 'map2';
 	$tpl->menuitem = MNU_MAP;
 	$tpl->nowpsearch = true;
-
-	// check for browser compatibility
-	if (preg_match('/MSIE [1-9]+.[0-9]+/',$_SERVER['HTTP_USER_AGENT']))
-		$tpl->assign('msie',true);
-	if (preg_match('/MSIE [1-6].[0-9]+/',$_SERVER['HTTP_USER_AGENT']))
-		$tpl->assign('old_msie',true);
-	$tpl->assign('maxrecords',$maxrecords);
 
 	// get the correct mapkey
 	$sHost = strtolower($_SERVER['HTTP_HOST']);
@@ -237,19 +221,26 @@
 	while ($r = sql_fetch_assoc($rs))
 		switch ($r['id'])
 		{
-			case 6: $tpl->assign('opt_menumap',    $r['value']); break;
-			case 7: $tpl->assign('opt_overview',   $r['value']); break;
-			case 8: $tpl->assign('opt_maxcaches',  $r['value']); break;
-			case 9: $tpl->assign('opt_cacheicons', $r['value']); break;
+			case  6: $tpl->assign('opt_menumap',    $r['value']); break;
+			case  7: $tpl->assign('opt_overview',   $r['value']); break;
+			case  8: $tpl->assign('opt_maxcaches',  $r['value']); break;
+			case  9: $tpl->assign('opt_cacheicons', $r['value']); break;
+			case 10: $tpl->assign('opt_pictures',   $r['value']); break;
 		}
 	sql_free_result($rs);
+
+	$tpl->assign('maxrecords',$opt['map']['maxrecords'] + 0);
 	$tpl->assign('min_maxrecords', $opt['map']['min_maxrecords']);
 	$tpl->assign('max_maxrecords', $opt['map']['max_maxrecords']);
+
+	$tpl->assign('msie',$msie);
+	$tpl->assign('old_msie',$old_msie);
 
 	$tpl->assign('help_oconly', helppagelink("OConly"));
 	$tpl->assign('help_map', helppagelink("*map2"));
 	$tpl->assign('help_wps', helppagelink("additional_waypoints"));
 	$tpl->assign('help_note', helppagelink("usernote"));
+	$tpl->assign('help_previewpics', helppagelink("previewpics"));
 
 	$tpl->display();
 
@@ -299,7 +290,9 @@ function output_cachexml($sWaypoint)
 	                             IFNULL(`stat_caches`.`toprating`, 0) AS `toprating`, 
 	                             IF(`caches`.`user_id`='&1', 1, 0) AS `owner`, 
 	                             `user`.`username`, `user`.`user_id`,
-	                             IF(`caches_attributes`.`attrib_id` IS NULL, 0, 1) AS `oconly`
+	                             IF(`caches_attributes`.`attrib_id` IS NULL, 0, 1) AS `oconly`,
+	                             IFNULL(`pictures`.`url`,'') AS `picurl`,
+	                             IFNULL(`pictures`.`title`,'') AS `pictitle`
 	                        FROM `caches` 
 	                  INNER JOIN `cache_type` ON `caches`.`type`=`cache_type`.`id` 
 	                  INNER JOIN `cache_status` ON `caches`.`status`=`cache_status`.`id` 
@@ -313,9 +306,11 @@ function output_cachexml($sWaypoint)
 	                   LEFT JOIN `sys_trans` AS `trans_size` ON `cache_size`.`trans_id`=`trans_size`.`id` AND `cache_size`.`name`=`trans_size`.`text`
 	                   LEFT JOIN `sys_trans_text` AS `trans_size_text` ON `trans_size`.`id`=`trans_size_text`.`trans_id` AND `trans_size_text`.`lang`='&2'
 	                   LEFT JOIN `caches_attributes` ON `caches_attributes`.`cache_id`=`caches`.`cache_id` AND `caches_attributes`.`attrib_id`=6
+	                   LEFT JOIN `pictures` ON `pictures`.`object_id`=`caches`.`cache_id` AND `pictures`.`object_type`='&4' AND `pictures`.`mappreview`=1
 	                       WHERE (`caches`.`wp_oc`='&3' OR (`caches`.`wp_oc`!='&3' AND `caches`.`wp_gc`='&3') OR (`caches`.`wp_oc`!='&3' AND `caches`.`wp_nc`='&3')) AND 
-      									       (`cache_status`.`allow_user_view`=1 OR `caches`.`user_id`='&1')",
-										           $login->userid, $opt['template']['locale'], $sWaypoint);
+	                             (`cache_status`.`allow_user_view`=1 OR `caches`.`user_id`='&1')",
+	                              $login->userid, $opt['template']['locale'], $sWaypoint, OBJECT_CACHE);
+
 	$rCache = sql_fetch_assoc($rsCache);
 	sql_free_result($rsCache);
 
@@ -358,7 +353,9 @@ function output_cachexml($sWaypoint)
 	echo 'oconly="' . xmlentities($rCache['oconly']) . '" ';
 	echo 'owner="' . xmlentities($rCache['owner']) . '" ';
 	echo 'username="' . xmlentities($rCache['username']) . '" ';
-	echo 'userid="' . xmlentities($rCache['user_id']) . '" >' . "\n";
+	echo 'userid="' . xmlentities($rCache['user_id']) . '" ';
+	echo 'picurl="' . xmlentities($rCache['picurl']) . '" ';
+	echo 'pictitle="' . xmlentities(trim($rCache['pictitle'])) . '" >\n';
 
 	foreach ($waypoints as $waypoint)
 	{
@@ -407,9 +404,10 @@ function output_namesearch($sName, $nLat, $nLon, $nResultId)
   exit;
 }
 
-function output_searchresult($nResultId, $compact, $nLon1, $nLon2, $nLat1, $nLat2, $cachenames)
+function output_searchresult($nResultId, $compact, $nLon1, $nLon2, $nLat1, $nLat2,
+                             $cachenames, $smallmap)
 {
-	global $login, $opt, $maxrecords;
+	global $login, $opt, $maxrecords, $msie;
 
 	// check if data is available and connect the right slave server
 	$nSlaveId = sql_value("SELECT `slave_id` FROM `map2_result` WHERE `result_id`='&1' AND DATE_ADD(`date_created`, INTERVAL '&2' SECOND)>NOW()", -2, $nResultId, $opt['map']['maxcacheage']);
@@ -427,15 +425,32 @@ function output_searchresult($nResultId, $compact, $nLon1, $nLon2, $nLat1, $nLat
 	$nRecordCount = sql_value_slave("SELECT COUNT(*) FROM `map2_data` INNER JOIN `caches` ON `map2_data`.`cache_id`=`caches`.`cache_id` WHERE `map2_data`.`result_id`='&1' AND `caches`.`longitude`>'&2' AND `caches`.`longitude`<'&3' AND `caches`.`latitude`>'&4' AND `caches`.`latitude`<'&5'", 0, $nResultId, $nLon1, $nLon2, $nLat1, $nLat2);
 	// TODO: SQL_CALC_FOUND_ROWS + $nRecordCount = sql_value_slave("SELECT FOUND_ROWS()", 0);
 
-	$bMaxRecordReached = false;
-	if ($nRecordCount > $maxrecords)
-		$bMaxRecordReached = true;
-	$namequery = ($cachenames ? ", `caches`.`name` AS `cachename`" : "");
-
-	echo '<searchresult count="' . $nRecordCount . '" available="1" maxrecordreached="' . ($bMaxRecordReached ? '1' : '0') . '">' . "\n";
-
-	if ($bMaxRecordReached == false)
+	// determine max. number of records to send
+	$maxrecords = $opt['map']['maxrecords'] + 0;
+	if ($login->userid > 0)
 	{
+		$user_maxrecords =
+			sql_value("SELECT option_value FROM user_options WHERE user_id='&1' AND option_id=8",
+	               $opt['map']['maxrecords'] + 0, $login->userid);
+		if ($user_maxrecords > 0 && (!$msie || $user_maxrecords < $maxrecords))
+			$maxrecords = min(max($user_maxrecords, $opt['map']['min_maxrecords']), 
+			                  $opt['map']['max_maxrecords']);
+	}
+	else
+		$user_maxrecords = 0;
+
+	if ($smallmap && $user_maxrecords == 0 && $maxrecords > 1000)
+		$maxrecords = floor($maxrecords*0.65);
+
+	$bMaxRecordReached = ($nRecordCount > $maxrecords);
+
+	// output data
+	echo '<searchresult count="' . xmlentities($nRecordCount) . '" available="1"' .
+	     ' maxrecordreached="' .	($bMaxRecordReached ? '1' : '0') . '">' . "\n";
+
+	if (!$bMaxRecordReached)
+	{
+		$namequery = ($cachenames ? ", `caches`.`name` AS `cachename`" : "");
 		$rs = sql_slave("SELECT SQL_BUFFER_RESULT 
                             `caches`.`wp_oc`, `caches`.`longitude`, `caches`.`latitude`,
                             `caches`.`type`, 

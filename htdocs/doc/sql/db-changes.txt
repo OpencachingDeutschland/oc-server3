@@ -47,3 +47,4 @@ date         commit ID    change
                             cache_logs_archived, all new tables and to triggers
                           removed table listing_restored
                           added index cache_logs_archived:user_id
+2013-03-10                added field 'mappreview' in pictures and pictures_modified

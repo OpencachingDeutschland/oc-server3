@@ -45,11 +45,13 @@ class ChildWp_Handler
 
   public function getChildWps($cacheid, $include_usernote=false)
   {
+    global $login;
+
 		if ($include_usernote)
 			$type2 = Coordinate_Type::UserNote;
 		else
 			$type2 = 0;
-    $rs = sql("SELECT id, cache_id, type, subtype, latitude, longitude, description FROM coordinates WHERE cache_id = &1 AND type IN (&2,&3)", $cacheid, Coordinate_Type::ChildWaypoint, $type2);
+    $rs = sql("SELECT id, cache_id, type, subtype, latitude, longitude, description FROM coordinates WHERE cache_id = &1 AND type IN (&2,&3) AND (type='&2' OR (user_id='&4' and latitude!=0 and longitude!=0))", $cacheid, Coordinate_Type::ChildWaypoint, $type2, $login->userid);
     $ret = array();
 
     while ($r = sql_fetch_array($rs))

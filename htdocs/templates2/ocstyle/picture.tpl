@@ -90,7 +90,11 @@
 			</tr>
 			<tr>
 				<td align="right"><input class="checkbox" type="checkbox" name="notdisplay" value="1" {if $displaychecked==false}checked="checked"{/if}></td>
-				<td>{t}Do not display this picture (only used in HTML description){/t}</td>
+				<td>{t}Do not separately display this picture (used in HTML description etc.){/t}</td>
+			</tr>
+			<tr>
+				<td align="right"><input class="checkbox" type="checkbox" name="mappreview" value="1" {if $mappreviewchecked==true}checked="checked"{/if}></td>
+				<td>{t}Preview picture for map &ndash; is shown when this cache is selected on the map. You can have only <em>one</em> preview picture per cache.{/t}</td>
 			</tr>
 		{/if}
 		{if $action=='add'}
@@ -106,11 +110,13 @@
 
 		<tr><td class="spacer" colspan="2"></td></tr>
 		
-		<tr>
-			<td colspan="2">
-				{t}By submitting I accept the <a href="articles.php?page=impressum#tos" target="_blank">Opencaching.de Terms of Service</a> and the <a href="articles.php?page=impressum#datalicense" target="_blank">Opencaching.de Datalicense</a>{/t}
-			</td>
-		</tr>
+		{if $action == "add"}
+			<tr>
+				<td colspan="2">
+					{t}By submitting I accept the <a href="articles.php?page=impressum#tos" target="_blank">Opencaching.de Terms of Service</a> and the <a href="articles.php?page=impressum#datalicense" target="_blank">Opencaching.de Datalicense</a>{/t}
+				</td>
+			</tr>
+		{/if}
 		
 		<tr><td class="spacer" colspan="2"></td></tr>
 

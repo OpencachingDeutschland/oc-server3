@@ -1012,6 +1012,7 @@
 									 (SELECT `status` FROM `caches` WHERE `caches`.`cache_id`=OLD.`object_id`) != 5 AND
 									 (NEW.`title` != OLD.`title` OR NEW.`spoiler` != OLD.`spoiler` OR NEW.`display` != OLD.`display`) THEN
 							INSERT IGNORE INTO `pictures_modified` (`id`, `date_modified`, `operation`, `date_created`, `url`, `title`, `object_id`, `object_type`, `spoiler`, `unknown_format`, `display`, `restored_by`) VALUES (OLD.`id`, NOW(), 'U', OLD.`date_created`, OLD.`url`, OLD.`title`, OLD.`object_id`, OLD.`object_type`, OLD.`spoiler`, OLD.`unknown_format`, OLD.`display`, IFNULL(@restoredby,0));
+							/* mappreview is not archived, can be safely set to 0 on restore */
 						END IF;
 					END;");
 
@@ -1028,6 +1029,7 @@
 							    (SELECT `status` FROM `caches` WHERE `caches`.`cache_id`=OLD.`object_id`) != 5
 							  )) THEN
 							INSERT IGNORE INTO `pictures_modified` (`id`, `date_modified`, `operation`, `date_created`, `url`, `title`, `object_id`, `object_type`, `spoiler`, `unknown_format`, `display`, `restored_by`) VALUES (OLD.`id`, NOW(), 'D', OLD.`date_created`, OLD.`url`, OLD.`title`, OLD.`object_id`, OLD.`object_type`, OLD.`spoiler`, OLD.`unknown_format`, OLD.`display`, IFNULL(@restoredby,0));
+							/* mappreview is not archived, can be safely set to 0 on restore */
 						END IF;
 						IF OLD.`object_type`=1 THEN
 							CALL sp_update_cachelog_picturestat(OLD.`object_id`, TRUE);

@@ -50,7 +50,7 @@ function trim(s)
 
 	while (s.substring(s.length-1, s.length) == ' ')
 		s = s.substring(0, s.length-1);
-		
+
 	return s;
 }
 
@@ -60,7 +60,7 @@ function getTimeDiff(dTime1, dTime2)
 }
 
 
-/*========================================================================= 
+/*=========================================================================
     Initialization and Configuration
  ==========================================================================*/
 
@@ -107,6 +107,7 @@ var mhInfoWindowHackTries = 0;
 var moWpInfoWindow = null;
 var maWpWaypoints;
 var moWaypointList = new Array();
+var mhPictureTimer = null;
 
 var mnMapWidth = 770;
 var mnMapHeight = 600;
@@ -286,7 +287,7 @@ function cookieSave()
 	if (document.getElementById('f_otherPlatforms').checked) sFilter += 'M';
 
 	sFilter += '/rated:' +
-		document.getElementById('terrainmin').value + ',' +  
+		document.getElementById('terrainmin').value + ',' +
 		document.getElementById('terrainmax').value + ',' +
 		document.getElementById('difficultymin').value + ',' +
 		document.getElementById('difficultymax').value + ',' +
@@ -303,9 +304,9 @@ function cookieSave()
   if (sAttrFilter != "")
 		sFilter += '/attr:' + sAttrFilter.substring(1);
 
-	document.cookie = msInitCookieFilterName + "=" + sFilter.substring(1); 
-		// "expires" not set, so that the cookie will expire when browser is closed
- 		// ;because the user can easily forget or overlook that filtering is acive. 
+	document.cookie = msInitCookieFilterName + "=" + sFilter.substring(1);
+		// "expires" not set, so that the cookie will expire when browser is closed,
+		// because the user can easily forget or overlook that filtering is acive.
 }
 
 
@@ -316,18 +317,18 @@ function mapLoad()
 
 	if (!msInitAttribSelection)
 		toggle_attribselection(false);
-		
+
 	if (bFullscreen && msInitSiderbarDisplay == "block")
     toggle_sidebar(false);
 
 	var maptypes = ['OSM', 'MQ', 'OCM',
-	                google.maps.MapTypeId.ROADMAP, google.maps.MapTypeId.SATELLITE, 
+	                google.maps.MapTypeId.ROADMAP, google.maps.MapTypeId.SATELLITE,
 	                google.maps.MapTypeId.HYBRID, google.maps.MapTypeId.TERRAIN ];
   var initType = google.maps.MapTypeId.ROADMAP;
   for (var i=0; i<maptypes.length; i++)
     if (msInitType == maptypes[i])
 			initType = msInitType;
-	
+
 	var myOptions = {
 		zoom: mnInitZoom,
 		center: new google.maps.LatLng(mnInitLat, mnInitLon),
@@ -336,7 +337,7 @@ function mapLoad()
 
 		mapTypeControl: true,
 		mapTypeControlOptions: { mapTypeIds: maptypes },
-			
+
 		panControl: false,
 		zoomControl: true,
 		scaleControl: true,
@@ -357,7 +358,7 @@ function mapLoad()
 
 	setMapType("OSM", "OpenStreetMap", "http://tile.openstreetmap.org/", 18);
 	setMapType("MQ"," MapQuest", "http://otile1.mqcdn.com/tiles/1.0.0/osm/", 19);
-	setMapType("OCM", "OpenCycleMap", "http://tile.opencyclemap.org/cycle/", 18);		
+	setMapType("OCM", "OpenCycleMap", "http://tile.opencyclemap.org/cycle/", 18);
 
 	moInfoWindow = new google.maps.InfoWindow();
 	moWpInfoWindow = new google.maps.InfoWindow();
@@ -378,7 +379,7 @@ function mapLoad()
 
 	//copyrightDiv.class = "mapattribution";
 	moMap.controls[google.maps.ControlPosition.BOTTOM_RIGHT].push(copyrightDiv);
-	
+
 	google.maps.event.addListener(moMap, "dragstart", function(){map_movestart()});
 	google.maps.event.addListener(moMap, "dragend", function(){map_moveend()});
 	google.maps.event.addListener(moMap, "bounds_changed", function(){map_moveend()});
@@ -386,14 +387,15 @@ function mapLoad()
 	// is included in bounds_changed
 	google.maps.event.addListener(moMap, "maptypeid_changed", function(){map_maptypechanged()});
 	google.maps.event.addListener(moMap, "mousemove", function(event){map_mousemove(event)});
-	google.maps.event.addListener(moMap, "click", function(event){map_clicked()});
+	google.maps.event.addListener(moMap, "click", function(){map_clicked()});
+	// google.maps.event.addListener(moMap, "rightclick", function(){toggle_sidebar(false)});
 
 	if (msInitWaypoint != "")
 		show_cachepopup_wp(msInitWaypoint, true);
 
 	if (moMapSearch)
 		moMapSearch.value = msSearchHint;
-    
+
 	updateCopyrights();
 	cookieSave();
 	queue_dataload(500);
@@ -418,7 +420,7 @@ function mapUnload()
 }
 
 
-/*========================================================================= 
+/*=========================================================================
     GM hooks and custom controls
  =========================================================================*/
 
@@ -448,21 +450,25 @@ function map_mousemove(event)
 function map_clicked()
 {
 	if (bFullscreen)
+	{
 		if (document.getElementById("sidebar").style.display != 'none')
 			toggle_sidebar();
+	}
+	else
+		dataload_on_filterchange();
 	mapselectlist_hide();		// firefox needs this
-	moInfoWindow.close();
 	moWpInfoWindow.close();
+	close_infowindow(false);
 	permalinkbox_hide();
 }
 
-function updateCopyrights() 
+function updateCopyrights()
 {
 	if (copyrightDiv == null )
 		return;
-	
+
 	var newMapType = moMap.getMapTypeId();
-	
+
 	if (newMapType == "OSM" || newMapType == "MQ" || newMapType == "OCM")
 	{
 		{/literal}
@@ -479,19 +485,19 @@ function updateCopyrights()
 }
 
 
-/*========================================================================= 
+/*=========================================================================
     XML cache data download
  =========================================================================*/
 
-function ajaxLoad( url, callback, postData ) 
+function ajaxLoad( url, callback, postData )
 {
 	var http_request = false;
-	
-	if (window.XMLHttpRequest) 
+
+	if (window.XMLHttpRequest)
 	{ // Mozilla, Safari, ...
 		http_request = new XMLHttpRequest();
-	} 
-	else if (window.ActiveXObject) 
+	}
+	else if (window.ActiveXObject)
 	{ // IE
 		try {
 			http_request = new ActiveXObject("Msxml2.XMLHTTP");
@@ -501,33 +507,33 @@ function ajaxLoad( url, callback, postData )
 			} catch (e) {}
 		}
 	}
-	if (!http_request) 
+	if (!http_request)
 	{
 		alert('Giving up: Cannot create an XMLHTTP instance');
 		return false;
 	}
-	
+
 	http_request.onreadystatechange =  function() {
-		if (http_request.readyState == 4) 
+		if (http_request.readyState == 4)
 		{
-			if (http_request.status == 200) 
+			if (http_request.status == 200)
 			{
 				callback(http_request.responseText, http_request.status);
 			}
-			else if (http_request.status != 0)     // avoid dummy messages when aborting transfer 
+			else if (http_request.status != 0)     // avoid dummy messages when aborting transfer
 			{
 				alert('Request Failed: ' + http_request.status);
 			}
 		}
 	};
 
-	if (postData) 
+	if (postData)
 	{ // POST
 		http_request.open('POST', url, true);
-		http_request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');  
+		http_request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 		http_request.send(postData);
 	}
-	else 
+	else
 	{
 		http_request.open('GET', url, true);
 		http_request.send(null);
@@ -541,7 +547,7 @@ function ajaxLoad( url, callback, postData )
 * @param {String} url The URL to retrieve
 * @param {Function} callback The function to call once retrieved.
 */
-function downloadUrl( url, callback, postbody ) 
+function downloadUrl( url, callback, postbody )
 {
     ajaxLoad( url, callback, postbody );
     //GDownloadUrl( url, callback );
@@ -559,16 +565,16 @@ function downloadUrl2(url, callback, postbody) {
  * @param {string} str XML string.
  * @return {Element|Document} DOM.
  */
-function xmlParse( str ) 
+function xmlParse( str )
 {
-	if (typeof ActiveXObject != 'undefined' && typeof GetObject != 'undefined') 
+	if (typeof ActiveXObject != 'undefined' && typeof GetObject != 'undefined')
 	{
 		var doc = new ActiveXObject('Microsoft.XMLDOM');
 		doc.loadXML(str);
 		return doc;
 	}
 
-	if (typeof DOMParser != 'undefined') 
+	if (typeof DOMParser != 'undefined')
 	{
 		return (new DOMParser()).parseFromString(str, 'text/xml');
 	}
@@ -579,15 +585,21 @@ function xmlParse( str )
 function queue_dataload(nMs)
 {
 	if (moDataLoadTimer != null)
-		clearTimeout(moDataLoadTimer);
+		window.clearTimeout(moDataLoadTimer);
 	moDataLoadTimer = window.setTimeout('data_load()', nMs);
 }
+
+function dataload_on_filterchange()
+{
+	if (bFilterChanged)
+		queue_dataload(100);
+}	
 
 function data_load()
 {
 	if (bFilterChanged)
 	{
-		moInfoWindow.close();
+		close_infowindow(true);
 		clear_waypoints();
 	}
 	bResetFilterHeading = bFilterChanged;
@@ -640,7 +652,7 @@ function data_mapreceive(data, responseCode)
 	}
 	else
 		error_no_data(false);
-	
+
 	var record_count = oXML.documentElement.getAttribute("count");
 
 	gpx_download_enabled((record_count<=mnMaxDownloadCount) && (record_count>0));
@@ -652,19 +664,19 @@ function data_mapreceive(data, responseCode)
 		tmd_show(record_count);
 		return;
 	}
-    
+
 	/* compute set of markers to keep */
 	var wpset = {};
 	var oCachesList = oXML.documentElement.getElementsByTagName("c");
 	for (var nIndex=0; nIndex<oCachesList.length; nIndex++)
 	{
 		var sCacheData = oCachesList[nIndex].getAttribute("d");
-		var sWaypoint = sCacheData.substring(0,sCacheData.indexOf('/')); 
+		var sWaypoint = sCacheData.substring(0,sCacheData.indexOf('/'));
 		wpset[sWaypoint] = true;
 	}
 	/* delete unneeded markers */
 	var alreadythere = data_clear_except( wpset );
-	
+
 	/* add new markers (skip existing) */
 	for (var nIndex=0; nIndex<oCachesList.length; nIndex++)
 	{
@@ -696,7 +708,7 @@ function data_searchreceive(data, responseCode)
 		// TODO: make sure that data must is a numeric ID
 		mnResultId = data;
 	}
-	
+
 	// continue with data download
 	tmd_hide();
 	mbDataDownloadHaveSecondChance = false;
@@ -722,7 +734,7 @@ function xmlentities(str)
 }
 
 
-/*========================================================================= 
+/*=========================================================================
     Markers
  =========================================================================*/
 
@@ -759,7 +771,7 @@ function NewCacheMarker(nLat, nLon, sWaypoint, nType, nFlags, sName, nZindex)
 			zIndex: nZindex });
 	marker.waypoint = sWaypoint;
 	return marker;
-}			
+}
 
 function addCacheToMap(sWaypoint, nLon, nLat, nType, nFlags, sName, nZindex)
 {
@@ -783,16 +795,16 @@ function data_clear()
 function data_clear_except(wpset)
 {
 	var existing = {};
-	
+
 	document.getElementById('statCachesCount').innerHTML = '0';
-	
+
 	var newList = new Array();
-	
+
 	for (var nIndex=0; nIndex<moMarkerList.length; nIndex++)
 	{
 		var oMarker = moMarkerList[nIndex];
 		var wp = oMarker.waypoint;
-		
+
 		if (wp != msPopupMarkerWP && !(wp in wpset))
 		{
 			oMarker.setMap(null);
@@ -803,15 +815,15 @@ function data_clear_except(wpset)
 			newList[newList.length] = oMarker;
 		}
 	}
-	
+
 	moMarkerList = newList;
-	
+
 	return existing;
 }
 
 
-/*========================================================================= 
-    Cache-InfoWindow popup
+/*=========================================================================
+    InfoWindows (popups)
  =========================================================================*/
 
 function show_cachepopup_wp(sWaypoint, bAllowZoomChange)
@@ -825,18 +837,25 @@ function show_cachepopup_latlon(nLat, nLon, bAllowZoomChange)
 }
 
 {/literal}
-{* In some browers and zoom levels, a wrong size is calculated by GM for some infowindow
- * contents. If the caluclated size is too small, the containing div will show a scrollbar:
+{* In some browers and zoom levels (especially Chrome and MSIE at small zoom), a wrong
+ * size is calculated by GM for some infowindow contents. If the caluclated size is too
+ * small, the containing div will show a scrollbar:
  *
  *   http://stackoverflow.com/questions/1554893/google-maps-api-v3-infowindow-not-sizing-correctly
  *
- * The only solution working under all conditions seems to be increasing the container
- * div's size (while tampering with it's overflow setting will cause other problems 
- * especiallyin Chrome, with waypoints cut off at the right). This will neither affect the 
- * size of our 'mapinfowindow' div nor of the infowindow, but only give our content more 
- * space. We allocate as much fits into the InfoWindow borders.
+ * The only solution working under all conditions seems to be changing the container
+ * div's properties - either letting it overflow or increasing it's size size.
+ * This will neither affect the size of our 'mapinfowindow' div nor of the infowindow, but
+ * only give our content more space.
  *
- * Also, there is another MSIE issue regading a second inner pair of scrollbars. We get 
+ * The 'overflow solution' also prevents scrollbars if the browser zoom is changed with
+ * open infowindow. It also may work better with dynamic window content (not tested yet).
+ * It has the disatvantage that text will temporarily flow out at the bottom of the
+ * window then zoom is increased with open infowindow in Firefox. Also, it will flow out
+ * at the *right* with Firefox if the contained data is formatted with
+ * max-width + white-space:nobr (which wee currently need not to do).
+ *
+ * Also, there is another MSIE issue regading a second inner pair of scrollbars. We get
  * rid of them by settings overflow:hidden on mapinfowindow (see style_screen.css).
  *}
 {literal}
@@ -846,25 +865,36 @@ function adjust_infowindow()
 	if (mhInfoWindowHackTries > 0)
 	try
 	{
+		var iw_frame = document.getElementById('mapinfowindow').parentNode;
+		iw_frame.parentNode.style.overflow = "visible";
+		iw_frame.style.overflow = "visible";
+			// BOTH divs overflow must be set so that it works right in all browsers!
+		mhInfoWindowHackTries = 0;
+
+		{/literal}
+		{* old code version, which did it by increasing the outer container div's size:
+
 		var iw_frame = document.getElementById('mapinfowindow').parentNode.parentNode;
 		var iw_width = parseInt(iw_frame.style.width.substr(0, iw_frame.style.width.indexOf('px')));
 		var iw_height = parseInt(iw_frame.style.height.substr(0, iw_frame.style.height.indexOf('px')));
 
-		if (iw_width != "" && iw_height != "")
+		if (iw_width > 0 && iw_height > 0)
 		{
 			mhInfoWindowHackTries = 0;
 			// alert("Before: " + iw_frame.style.width +  " / " + iw_frame.style.height);
 			iw_frame.style.width = String(iw_width + 2) + "px";
 				// making it too wide would let additional wp text flow into the margin at MSIE
 			iw_frame.style.height = String(iw_height + 25) + "px";
-			// alert("After: " + iw_frame.style.width +  " / " + iw_frame.style.height);  
+			// alert("After: " + iw_frame.style.width +  " / " + iw_frame.style.height);
 		}
 		else
 			mhInfoWindowHackTries -= 1;
+		*} {literal}
 	}
 	catch (e)
 	{
 		// we were too fast and will try again
+			mhInfoWindowHackTries -= 1;
 	}
 
 	if (mhInfoWindowHackTries <= 0)
@@ -877,19 +907,19 @@ function hack_infowindow()
 	mhInfoWindowHackTimer = window.setInterval("adjust_infowindow()",10);
 }
 
-function show_infowindow(oCoords, sText, aWaypoints)
+function show_infowindow(oCoords, sText)
 {
-	// close last info window, if open, and discard waypoin list
-	moInfoWindow.close();
+	close_infowindow(true);
 	clear_waypoints();
 
-	// open new info window
 	moInfoWindow = new google.maps.InfoWindow({ position: oCoords, content: sText });
 	moInfoWindow.open( moMap, null, true );
 	wid = document.getElementById('mapinfowindow');
 	hack_infowindow();
+}
 
-	// save waypoint list and create waypoint markers and handlers
+function init_waypoint_markers(aWaypoints)
+{
 	maWpWaypoints = aWaypoints;
 
 	for (var nWp=0; nWp<aWaypoints.length; nWp++)
@@ -915,10 +945,10 @@ function show_infowindow(oCoords, sText, aWaypoints)
 		{/literal}
 		{*
 		 * We cannot use the show_infowindow() loop variables in the event handler
-		 * function - they would all use variable values after end of loop, i.e. sho 
+		 * function - they would all use variable values after end of loop, i.e. sho
 		 * all the last waypoint's infowindow. To solve this, the handler finds the
 		 * clicked waypoint's data by the coordinates. GM passes the marker's
-		 * coordinates here (with rounding differences), but to be sure we just look 
+		 * coordinates here (with rounding differences), but to be sure we just look
 		 * for the nearest marker.
 		 *}
 		 {literal}
@@ -946,7 +976,10 @@ function show_infowindow(oCoords, sText, aWaypoints)
 					}
 				}
 
-				moInfoWindow.close();
+				// if a picture is shown, it is from the same cache, so we keep it open
+				// by the 'false' param here
+				close_infowindow(false);
+
 				moWpInfoWindow.close();
 
 				var imgparams 	= get_wp_imgparams(aWaypoints[nearestwp]);
@@ -969,11 +1002,11 @@ function show_infowindow(oCoords, sText, aWaypoints)
 					typetext += typename;
 
 				var text =    // MSIE needs max width to wrap long descriptions
-					"<div id='mapinfowindow' style='max-width:350px; max-height:350px'><table class='mappopup'>" +
+					"<div id='mapinfowindow' style='max-width:400px; max-height:400px'><table class='mappopup'>" +
 					"<tr><td><table cellspacing='0' cellpadding='0'><tr><td>" +
 						"<img src='" + image + "' width='" + imagewidth + "' height='" + imageheight + "' ></td>" +
-						"<td style='font-size:1.2em'>" + typetext + " {t}for{/t}" + "&nbsp;</td>" +
-						"<td style='font-weight:bold; font-size:1.2em'><a href='viewcache.php?wp=" + msPopupMarkerWP + "' target='_blank_'>" + msPopupMarkerWP + "</a></td>" +
+						"<td style='font-size:1.15em'><span style='white-space:normal'>" + typetext + " {t}for{/t}" + "</span></td>" +
+						"<td style='font-weight:bold; font-size:1.2em'>&nbsp;<a href='viewcache.php?wp=" + msPopupMarkerWP + "' target='_blank_'>" + msPopupMarkerWP + "</a></td>" +
 					"</tr></table></td></tr>";
 				if (description != "")
 					text += "<tr><td style='padding:8px; max-width:350px; white-space:normal' colspan='4'>" + description + "</td></tr>";
@@ -1012,7 +1045,7 @@ function clear_waypoints()
 
 function show_cachepopup_url(sURL, sWaypoint, bAllowZoomChange)
 {
-	moInfoWindow.close();
+	close_infowindow(true);
 	moWpInfoWindow.close();
 
 	ajaxLoad(sURL, function(data, responseCode) {
@@ -1026,7 +1059,7 @@ function show_cachepopup_url(sURL, sWaypoint, bAllowZoomChange)
 				sMessage = sMessage.replace(/%1/, sWaypoint);
 				alert(sMessage);
 			}
-			
+
 			return;
 		}
 
@@ -1039,7 +1072,9 @@ function show_cachepopup_url(sURL, sWaypoint, bAllowZoomChange)
 			  moMap.setZoom(nDefaultZoom);
 		}
 
-		show_infowindow(oCoords, parseXML_GetHTML(oXML), parseXML_GetWaypoints(oXML));
+		show_infowindow(oCoords, parseXML_GetHTML(oXML));
+		init_waypoint_markers(parseXML_GetWaypoints(oXML));
+		load_cache_pic(oXML);
 	});
 }
 
@@ -1087,7 +1122,7 @@ function parseXML_GetHTML(xmlobject)
 	// inernal rendering errors which create annoying scrollbars within the info window.
 	*}{literal}
 
-	var sHtml = "<div id='mapinfowindow' class='mappopup'><table class='mappopup'>";
+	var sHtml = "<div id='mapinfowindow' class='mappopup' style='z-index:800'><table class='mappopup'>";
 	if (bStatusTNA == 1)
 		sHtml += "<tr><td colspan='2'><font size='2' color='red'><b>" + xmlentities(sStatusText) + "</b></font></td></tr>";
 
@@ -1098,7 +1133,7 @@ function parseXML_GetHTML(xmlobject)
 	sHtml += "'><a href='viewcache.php?wp=" + encodeURI(sWPOC) + "' target='_blank'><font size='2'>" + xmlentities(sName) + "</font></a></td><td align='right' vertical-align:'top'><font size='2'><b>&nbsp;" + xmlentities(sWPOC) + "</b></font></td></tr>";
 	sHtml += "<tr><td colspan='2' style='vertical-align:top;'>{/literal}{t escape=js}by{/t}{literal} <a href='viewprofile.php?userid=" + encodeURI(nUserId) + "' target='_blank'>" + xmlentities(sUsername) + "</a></td><td align='right'><a class='nooutline' href='articles.php?page=cacheinfo#difficulty' target='_blank'><img src='resource2/{/literal}{$opt.template.style}/images/difficulty/diff-" + String(nDifficulty*10) + ".gif' border='0' width='19' height='16' hspace='2' alt='{t}D{/t} " + nDifficulty + "' title='{t}Difficulty{/t} " + nDifficulty + "/5'{literal} /><img src='resource2/{/literal}{$opt.template.style}/images/difficulty/terr-" + String(nTerrain*10) + ".gif' border='0' width='19' height='16' hspace='2' alt='{t}T{/t} " + nTerrain + "' title='{t}Terrain{/t} " + nTerrain + "/5'{literal} /></a></td></tr>";
 	sHtml += "<tr><td colspan='3' height='3px'></td></tr>";
-	
+
 	sHtml += "<tr><td colspan='2'>" + xmlentities(sTypeText) + " (" + xmlentities(sSizeText) + ")</td><td align='right' rowspan='2'>" + (bOconly==1 ? "{/literal}{$help_oconly}{literal}<img src='resource2/ocstyle/images/misc/is_oconly_small.png' alt='OConly' title='OConly' /></a>" : "") + "</td></tr>";
 	sHtml += "<tr><td colspan='2'>" + {/literal}(bIsPublishdate == true ? "{t escape=js}Published on{/t}:" : "{t escape=js}Listed since:{/t}"){literal} + " " + xmlentities(sListedSince) + "</td></tr>";
 
@@ -1129,7 +1164,7 @@ function parseXML_GetHTML(xmlobject)
 		{/literal}
 		var sMsg;
 		if (oWaypoints.length > 1)
-			sMsg = "{t}The cache has %1 %2additional waypoints%3.{/t}"; 
+			sMsg = "{t}The cache has %1 %2additional waypoints%3.{/t}";
 		else
 			sMsg = "{t}The cache has an %2additional waypoint%3.{/t}";
 		sMsg = sMsg.replace("%1",oWaypoints.length);
@@ -1154,7 +1189,6 @@ function parseXML_GetWaypoints(xmlobject)
 		return aCaches[0].getElementsByTagName("wpt");
 }
 
-
 function parseXML_GetPoint(oXMLObject)
 {
 	var oCaches = oXMLObject.documentElement.getElementsByTagName("cache");
@@ -1168,8 +1202,150 @@ function parseXML_GetPoint(oXMLObject)
 	return oCoordsYX;
 }
 
+function load_cache_pic(xmlobject)
+{
+	{/literal}{if $opt_pictures > 0}{literal}
+		var aCaches = xmlobject.documentElement.getElementsByTagName("cache");
+		if (aCaches.length<1)
+			return "";
 
-/*========================================================================= 
+		var picurl = aCaches[0].getAttribute("picurl");
+		var pictitle = aCaches[0].getAttribute("pictitle");  // "name"
+		if (picurl != "")
+		{
+			if (pictitle != "")
+			{
+				document.getElementById('cachepictitle').innerHTML = pictitle;
+				document.getElementById('cachepictitle').style.display = 'block';
+			}
+			else
+				document.getElementById('cachepictitle').style.display = 'none';
+
+			var imagebox = document.getElementById('cachepiccontainer');
+			imagebox.removeChild(document.getElementById('cachepic'))	;
+
+			var img = document.createElement("img");
+			img.onclick = "enlarge(this)";
+			img.className = "viewcache-thumbimg";
+			img.id = "cachepic";
+			img.onload = function() { show_picture(1000); }
+			imagebox.appendChild(img);
+			img.src = picurl;
+			img.style.cursor = "url(resource2/ocstyle/js/enlargeit/pluscur.cur), auto";
+			imagebox.href = "javascript:toggle_imagesize()";
+		}
+	{/literal}{/if}{literal}
+}
+
+function toggle_imagesize(img)
+{
+	img = document.getElementById('cachepic');
+	var enlarge = img.style.cursor.indexOf('pluscur') > 0;
+	if (enlarge)
+	{
+		img.width *= 2;
+		img.height *= 2;
+		img.style.cursor = "url(resource2/ocstyle/js/enlargeit/minuscur.cur), auto";
+	}
+	else
+	{
+		img.width /= 2;
+		img.height /= 2;
+		img.style.cursor = "url(resource2/ocstyle/js/enlargeit/pluscur.cur), auto";
+	}
+	set_img_title_width();
+}
+
+function fade_picture(step)
+{
+	{/literal}{if $opt_pictures > 0}{literal}
+		if (mhPictureTimer != null)
+			window.clearTimeout(mhPictureTimer);
+		var next = parseFloat(document.getElementById('cachepicbox').style.opacity) + step;
+		next = Math.max(0,Math.min(next,1));
+		document.getElementById('cachepicbox').style.opacity = next;
+		document.getElementById('oclogo').style.opacity = 1 - Math.log(10*next)/Math.LN10;
+
+		if (next <= 0)
+		{
+			var logo = document.getElementById('oclogo');
+			if (logo) logo.style.display = 'block';
+		}
+		else if (next < 1)
+			mhPictureTimer = window.setTimeout('fade_picture(' + step + ')', 20);
+	{/literal}{/if}{literal}
+}
+
+function show_picture(time_left)
+{
+	{/literal}{if $opt_pictures > 0}{literal}
+	var img = document.getElementById('cachepic');
+	var mapwidth = document.getElementById('googlemap').offsetWidth;
+	var mapheight = document.getElementById('googlemap').offsetHeight;
+	var imgwidth = img.width;
+	var imgheight = img.height;
+
+	// alert(mapwidth+"x"+ mapheight + " " + imgwidth+"x"+imgheight);
+	if (mapwidth * mapheight * imgwidth * imgheight < 100000)
+	{
+		if (time_left > 0)
+		{
+			// MSIE may need to show the image first before size is set
+			document.getElementById('cachepicbox').style.zIndex = 0;
+			document.getElementById('cachepicbox').style.display = 'block';
+			window.setTimeout('show_picture(' + (time_left-100) + ')', 100);
+		}
+		return;
+	}
+
+	var maximgpixels = mapwidth * mapheight * {/literal}{$opt_pictures}{literal} / 100;
+	var maxmappart = 0.6;
+	var scale = Math.sqrt(maximgpixels / (imgwidth * imgheight));
+	if (mapwidth*maxmappart/imgwidth < scale) scale = mapwidth*maxmappart/imgwidth;
+	if (mapheight*maxmappart/imgheight < scale) scale = mapheight*maxmappart/imgheight;
+
+	if (scale < 1)
+	{
+		var imgratio = imgwidth / imgheight;
+		img.width *= scale;
+		img.height = img.width / imgratio;
+	}
+	set_img_title_width();
+
+	// document.getElementById('cachepicbox').style.opacity = 0;
+	// fade_picture(0.1);
+	// fading does not work properly on all browsers.
+
+	if (bFullscreen) document.getElementById('oclogo').style.display = 'none';
+	document.getElementById('cachepicbox').style.display = 'block';
+	document.getElementById('cachepicbox').style.zIndex = 20;
+	{/literal}{/if}{literal}
+}
+
+function set_img_title_width()
+{
+	var img = document.getElementById('cachepic');
+	var imgtitle = document.getElementById('cachepictitle').style;
+	imgtitle.maxWidth = (img.width - parseInt(imgtitle.paddingLeft) - parseInt(imgtitle.paddingRight)) + "px";
+}
+
+function hide_picture()
+{
+	// fade_picture(-0.05);
+	// fading does not work properly on all browsers.
+
+	document.getElementById('cachepicbox').style.display = 'none';
+	if (bFullscreen) document.getElementById('oclogo').style.display = 'block';
+}
+
+function close_infowindow(closepic)
+{
+	moInfoWindow.close();
+	if (closepic) hide_picture();
+}
+
+
+/*=========================================================================
     Status display
  =========================================================================*/
 
@@ -1189,7 +1365,7 @@ function coordtext(coord)
 		}
 	}
 
-	return (deg < 10 ? "0" : "") + String(deg) + "°" + (min < 10 ? "0" : "") + String(min) + "." + 
+	return (deg < 10 ? "0" : "") + String(deg) + "°" + (min < 10 ? "0" : "") + String(min) + "." +
 	       (tmin < 10 ? "00" : (tmin < 100 ? "0" : "")) + String(tmin) + "'";
 }
 
@@ -1224,7 +1400,7 @@ function tmd_hide()
 }
 
 
-/*========================================================================= 
+/*=========================================================================
     Function buttons
  =========================================================================*/
 
@@ -1275,7 +1451,7 @@ function showPermlinkBox_click()
 	if (window.opera)
 		document.getElementById('permalink_addFavorites').style.display = 'none';
 	else
-		if ((typeof window.external.AddFavorite == 'undefined') && 
+		if ((typeof window.external.AddFavorite == 'undefined') &&
 			(typeof window.external.addPanel == 'undefined'))
 			document.getElementById('permalink_addFavorites').style.display = 'none';
 
@@ -1320,7 +1496,20 @@ function toggle_settings()
 	if (so.style.display == 'block')
 	  so.style.display = 'none';
 	else
+	{
+		{/literal}
+		// set controls to config values
+		document.getElementById('opt_menumap0').selected    = '{$opt_menumap == 0 ? "selected" : ""}';
+		document.getElementById('opt_menumap1').selected    = '{$opt_menumap == 1 ? "selected" : ""}';
+		document.getElementById('opt_overview').checked     = '{$opt_overview == 1 ? "checked" : ""}';
+		document.getElementById('opt_maxcaches').value      = '{$opt_maxcaches}';
+		document.getElementById('opt_cacheicons1').selected = '{$opt_cacheicons == 1 ? "selected":""}';
+		document.getElementById('opt_cacheicons2').selected = '{$opt_cacheicons == 2 ? "selected":""}';
+		document.getElementById('opt_pictures').value       = '{$opt_pictures}';
+
 		so.style.display = 'block';
+		{literal}
+	}
 }
 
 // SEARCH
@@ -1398,7 +1587,7 @@ function searchlist_openitem(nIndex)
 	else
 	{
 		var oCoords = new google.maps.LatLng(nLat, nLon);
-		show_infowindow(oCoords, xmlentities(sText), new Array());
+		show_infowindow(oCoords, xmlentities(sText));
 		moMap.setCenter(oCoords);
 	  moMap.setZoom(nDefaultZoom-1);
 
@@ -1424,18 +1613,18 @@ function mapsearch_click()
 	// do search on opencaching.de
 	// TODO: ensure mnResultId is set
 	var oCenterPos = moMap.getCenter();
-	
+
 	// check for geocaching waypoint
-	if (sSearchText.match(/^OC[\S]{1,}$/i) || 
-		sSearchText.match(/^GC[\S]{1,}$/i) || 
+	if (sSearchText.match(/^OC[\S]{1,}$/i) ||
+		sSearchText.match(/^GC[\S]{1,}$/i) ||
 		sSearchText.match(/^N[0-9]{1,5}$/i))
 	{
 		searchpar = "wpsearch&wp=" + sSearchText;
 	}
 	else
-	  searchpar = "namesearch&name=" + encodeURI(sSearchText) + "&lat=" + oCenterPos.lat() + "&lon=" + oCenterPos.lng() + "&resultid=" + mnResultId; 
+	  searchpar = "namesearch&name=" + encodeURI(sSearchText) + "&lat=" + oCenterPos.lat() + "&lon=" + oCenterPos.lng() + "&resultid=" + mnResultId;
 
-	ajaxLoad(msURLMapPHP + "?mode=" + searchpar, 
+	ajaxLoad(msURLMapPHP + "?mode=" + searchpar,
 		function(data, responseCode) {
 			var xml = xmlParse(data);
 			var caches = xml.documentElement.getElementsByTagName("cache");
@@ -1449,7 +1638,7 @@ function mapsearch_click()
 				var oTempOption = new Option("{t escape=js}Geocaches found, nearest first:{/t}", -1);
 				oTempOption.style.color = "gray";
 				moSearchList.options[moSearchList.length] = oTempOption;
-				
+
 				for (var nCacheIndex=0; nCacheIndex<caches.length; nCacheIndex++)
 				{
 					var name = caches[nCacheIndex].getAttribute("name");
@@ -1461,7 +1650,7 @@ function mapsearch_click()
 
 					moSearchList.options[moSearchList.length] = item;
 				}
-				
+
 				if (caches.length >= 30)
 				{
 					var item = new Option("     {/literal}{t escape=js}Some more items found...{/t}{literal}", -1);
@@ -1472,7 +1661,7 @@ function mapsearch_click()
 			}
 
 			// do search on google
-			moGeocoder.geocode( { 'address': sSearchText }, 
+			moGeocoder.geocode( { 'address': sSearchText },
 				function(results, status)
 				{
 					if (status == google.maps.GeocoderStatus.ZERO_RESULTS)
@@ -1550,7 +1739,7 @@ function mapsearch_onblur()
 }
 
 
-/*========================================================================= 
+/*=========================================================================
     Filtering
  =========================================================================*/
 
@@ -1591,7 +1780,7 @@ function filter_changed()
 		mnResultId = 0;
 		tmd_hide();
 		gpx_download_enabled(false);
-		
+
 		var heading = document.getElementById("filterboxtitle");
 		if (heading.style.color != "#f88c00")
 		{
@@ -1601,7 +1790,7 @@ function filter_changed()
 			heading.style.color = "#f88c00";
 		}
 	}
-	
+
 	queue_dataload(2000);
 	cookieSave();
 }
@@ -1628,7 +1817,7 @@ function cachesize_all_set()
 		if (!document.getElementById('cachesize' + i).checked)
 			bAll = false;
 	document.getElementById("all_cachesizes").checked = bAll;
-}	
+}
 
 function cachesize_filter_changed()
 {
@@ -1643,27 +1832,27 @@ function alltypes_changed()
 		document.getElementById('cachetype' + i).checked = bAll;
 	filter_changed();
 }
-	
+
 function allsizes_changed()
 {
 	var bAll = document.getElementById("all_cachesizes").checked != false;
 	for (var i=1; i<=nCacheSizeCount; i++)
 		document.getElementById('cachesize' + i).checked = bAll;
 	filter_changed();
-}	
+}
 
 function reset_filter_heading()
 {
 	var heading = document.getElementById("filterboxtitle");
 	heading.innerHTML = sFilterSaveText;
 	heading.style.color = bFilterSaveColor;
-}  
+}
 
 function reset_filter()
 {
 	flashbutton('resetfilter');
 	document.getElementById('cachename').value = "";
-	
+
 	for (var i=1; i<=nCacheTypeCount; i++)
 		document.getElementById('cachetype' + i).checked = "checked";
 	document.getElementById('all_cachetypes').checked = "checked";
@@ -1808,7 +1997,7 @@ function get_mapfilter_params()
 	//  	sPostBody += '&cachenames=1';
 	*}
 	{literal}
-	if (!bFullscreen) sPostBody += "&smallmap=1"; 
+	if (!bFullscreen) sPostBody += "&smallmap=1";
 
 	return sPostBody;
 }
@@ -1817,7 +2006,7 @@ function toggle_attribselection(bSaveCookies)
 {
 	{/literal}
 	var filterbefore = get_attrib_filter_params(false) + '/' + get_attrib_filter_params(true);
-	
+
 	var tas = document.getElementById('toggle_attribselection');
 	var bShow = !bAllAttribs;
 	var sShow = (bShow ? 'inline-block' : 'none');
@@ -1848,7 +2037,7 @@ function toggle_attribselection(bSaveCookies)
 	}
 }
 
-/*========================================================================= 
+/*=========================================================================
     End of JavaScript code
  =========================================================================*/
 
@@ -1877,7 +2066,7 @@ function toggle_attribselection(bSaveCookies)
 			</p>
 		{/if}
 	{/if}
-	
+
 	{* search and buttons bar *}
 	<div class="mapform" style="position:relative; z-index:90">
 	<form onsubmit="mapsearch_click(); return false;">
@@ -1910,11 +2099,11 @@ function toggle_attribselection(bSaveCookies)
 				<td rowspan="2"><a class="jslink" onclick="showPermlinkBox_click()"><img src="resource2/{$opt.template.style}/images/map/35x35-star.png" style="margin-left:3px; margin-right:1px" height="35" width="35" alt="{t}Show link to this map{/t}" title="{t}Show link to this map{/t}" /></a></td>
 
 				{* configure button *}
-				<td rowspan="2"><a class="jslink" onclick="toggle_settings()"><img src="resource2/{$opt.template.style}/images/openicons/35x35-configure.png" class="mapbutton" style="margin-left:0px; margin-right:0px" height="35" width="35" alt="{t}Settings{/t}" title="{t}Settings{/t}" /></a></td>
+				<td rowspan="2"><a class="jslink" onclick="toggle_settings()"><img src="resource2/{$opt.template.style}/images/map/35x35-configure.png" class="mapbutton" style="margin-left:0px; margin-right:2px" height="35" width="35" alt="{t}Settings{/t}" title="{t}Settings{/t}" /></a></td>
 
 				{* help button *}
 				{if $help_map != ""}
-					<td rowspan="2">{$help_map}<img src="resource2/{$opt.template.style}/images/openicons/35x35-system-help.png" class="mapbutton" style="margin-left:2px; margin-right:3px" height="35" width="35" alt="{t}Instructions{/t}" title="{t}Instructions{/t}" /></a></td>
+					<td rowspan="2">{$help_map}<img src="resource2/{$opt.template.style}/images/misc/32x32-help.png" class="mapbutton" style="margin-left:2px; margin-right:4px" height="32" width="32" alt="{t}Instructions{/t}" title="{t}Instructions{/t}" /></a></td>
 				{/if}
 
 				{* normal / full screen button *}
@@ -1941,9 +2130,9 @@ function toggle_attribselection(bSaveCookies)
 	</div>
 
 	{* popup box for permalink *}
-	<div id="permalink_box" class="mappermalink mapboxshadow" style="display:none;">
+	<div id="permalink_box" class="mappermalink mapboxframe mapboxshadow" style="display:none;">
 		<table>
-			<tr><td><img src="resource2/ocstyle/images/viewcache/link.png" alt="" height="16" width="16" /> {t}Link to this map view{/t}:</td><td align="right"><a href="javascript:permalinkbox_hide()"><img src="resource2/ocstyle/images/misc/close-medium.png"></a></td></tr>
+			<tr><td><img src="resource2/ocstyle/images/viewcache/link.png" alt="" height="16" width="16" /> {t}Link to this map view{/t}:</td><td align="right"><a href="javascript:permalinkbox_hide()"><img src="resource2/ocstyle/images/misc/close-medium.png" style="opacity:0.7" ></a></td></tr>
 			<tr><td><input id="permalink_text" type="text" value="" size="55"/></td></tr>
 			<tr id="permalink_addFavorites"><td align="right"><input type="button" value="{t}Add to favorites...{/t}" onclick="javascript:addFavorites_click()" /></td></tr>
 		</table>
@@ -1954,7 +2143,7 @@ function toggle_attribselection(bSaveCookies)
 
 	{* map and map overlays *}
 	{if $bFullscreen}
-		{* let fullscreen map float 1 pixel under the header bar, to compensate for 1px chrome rounding errors *}		
+		{* let fullscreen map float 1 pixel under the header bar, to compensate for 1px chrome rounding errors *}
 		<div style="position:absolute; top:41px; bottom:0; width:100%; z-index:1">
 	{else}
 		<div class="buffer" style="width: 500px; height: 18px;">&nbsp;</div>
@@ -1969,18 +2158,35 @@ function toggle_attribselection(bSaveCookies)
 			<div class="maploading">{t}Loading map{/t} ...</div>
 			<div class="mapversion">GM Version <script type="text/javascript">document.write(google.maps.version);</script></div>
 
-			<div id="mapoptions" class="mapoptions mapboxshadow" style="z-index:999; display:none">
+			<div id="mapoptions" class="mapoptions mapboxframe mapboxshadow" style="z-index:999; display:none">
 				<form action="map2.php?mode={if $bFullscreen}full{else}normal{/if}screen" method="post" style="display:inline;">
 					<input type="hidden" name="submit" value="1" />
 					<table>
-						<tr><td><strong>{t}Settings{/t}</strong></td><td style="text-align:right"><a href="javascript:toggle_settings()"><img src="resource2/ocstyle/images/misc/close-medium.png" /></a></tr>
-						<tr><td>{t}Menu option 'Map' shows{/t}:</td><td><select name="opt_menumap"><option value="0" {if $opt_menumap==0}selected="selected"{/if}>{t}small map{/t}</option><option value="1" {if $opt_menumap==1}selected="selected"{/if}>{t}fullscreen map{/t}</option></select></td></tr>
-						<tr><td>{t}Show overview map{/t}:</td><td><input type="checkbox" name="opt_overview" value="1" {if $opt_overview==1}checked="checked"{/if}/></td></tr>
-						<tr><td>{t 1=$min_maxrecords 2=$max_maxrecords}Maximum caches on map<br />(%1-%2, 0=automatic){/t}:</td><td><input type="text" name="opt_maxcaches" size="6" value="{$opt_maxcaches}" /></td></tr>
-						<tr><td>{t}Cache icons{/t}:</td><td><select name="opt_cacheicons"><option value="1" {if $opt_cacheicons==1}selected="selected"{/if}>{t}classic OC{/t}<option value="2" {if $opt_cacheicons==2}selected="selected"{/if}>{t}OKAPI style{/t}</option></select></td></tr>
-						<tr><td colspan="2">{if $login.userid>0}<input type="button" class="formbutton" value="{t}Cancel{/t}" onclick="toggle_settings()"/>&nbsp; <input type="submit" name="submitsettings" class="formbutton" value="{t}Change{/t}" onclick="submitbutton('submitsettings')" />{else}<em>{t}You must be logged in to change map settings.{/t}</em>{/if}</td></tr>	
+						<tr><td><span style="font-size:1.2em; font-weight:bold">{t}Settings{/t}</strong></td><td style="text-align:right"><a href="javascript:toggle_settings()"><img src="resource2/ocstyle/images/misc/close-medium.png" style="opacity:0.7" /></a></tr>
+						<tr><td>{t}Menu option 'Map' shows{/t}:</td><td><select name="opt_menumap"><option id="opt_menumap0" value="0">{t}small map{/t}</option><option id="opt_menumap1" value="1">{t}fullscreen map{/t}</option></select></td></tr>
+						<tr><td>{t}Show overview map{/t}:</td><td><input type="checkbox" id="opt_overview" name="opt_overview" value="1" /></td></tr>
+						<tr><td>{t 1=$min_maxrecords 2=$max_maxrecords}Maximum caches on map<br />(%1-%2, 0=automatic){/t}:</td><td><input type="text" id="opt_maxcaches" name="opt_maxcaches" size="6" /></td></tr>
+						{if $msie}
+							<tr><td colspan="2" style="padding-top:0; white-space:normal">
+								<img src="resource2/{$opt.template.style}/images/misc/hint.gif" alt="" />
+								<small>{t 1=$maxrecords}Max. %1 caches can be displayed with Microsoft Internet Explorer.{/t}
+							</td></tr>
+						{/if} 
+						<tr><td>{t}Cache icons{/t}:</td><td><select name="opt_cacheicons"><option id="opt_cacheicons1" value="1">{t}classic OC{/t}<option id="opt_cacheicons2" value="2">{t}OKAPI style{/t}</option></select></td></tr>
+						<tr><td>{t 1=$help_previewpics}Show %1preview pictures</a><br />(% of map area, 0=off){/t}:</td><td><input type="text" id="opt_pictures" name="opt_pictures" size="2" maxlength="2" /></td></tr>
+						<tr><td colspan="2">{if $login.userid>0}<input type="button" class="formbutton" value="{t}Cancel{/t}" onclick="toggle_settings()"/>&nbsp; <input type="submit" name="submitsettings" class="formbutton" value="{t}Change{/t}" onclick="submitbutton('submitsettings')" />{else}<em>{t}You must be logged in to change map settings.{/t}</em>{/if}</td></tr>
 					</table>
 				</form>
+			</div>
+
+			<div id="cachepicbox" class="mapboxframe mapboxshadow" style="position:absolute; {if $bFullscreen}left:4px; top:7px;{else}left:0; top:0;{/if} background:#fdfdfd; display:none; z-index:60">
+				<div style="position:absolute; right:-19px; top:2px; opacity:0.7">
+					<img src="resource2/ocstyle/images/misc/close-smaller.png" onclick="hide_picture()" style="cursor:pointer"/>
+				</div>
+				<div>
+					<a id="cachepiccontainer" class="nooutline"><img id="cachepic"/></a>
+				</div>
+				<div id="cachepictitle" style="clear:both; padding:0px 4px 0px 4px; line-height:1.3em; max-height:2.6em; overflow:hidden"></div>
 			</div>
 
 			{* THE MAP *}
@@ -1989,11 +2195,11 @@ function toggle_attribselection(bSaveCookies)
 
 	{if $bFullscreen}
 		{* the logo *}
-		<a href="index.php"><img src="resource2/ocstyle/images/head/overlay/oc_logo_alpha3.png" style="position:absolute; left:32px; top:50px; z-index:2; border:0;"></a>
-		
+		<a href="index.php"><img id="oclogo" src="resource2/ocstyle/images/head/overlay/oc_logo_alpha3.png" style="position:absolute; left:32px; top:50px; z-index:2; border:0;"></a>
+
 		{literal}
 		<script language="javascript">
-		function toggle_sidebar(savecookies) 
+		function toggle_sidebar(savecookies)
 		{
 			var ele = document.getElementById("sidebar");
 			var img = document.getElementById("sidbar-toggle-img");
@@ -2005,8 +2211,7 @@ function toggle_attribselection(bSaveCookies)
 				ele.style.display = "none";
 				// img.src=showimg;
 				img.style.display = "block";
-				if (bFilterChanged)
-					queue_dataload(100);
+				dataload_on_filterchange();
 			}
 			else {
 				ele.style.display = "block";
@@ -2015,21 +2220,21 @@ function toggle_attribselection(bSaveCookies)
 				if (bFilterChanged)  // for the case ...
 					reset_filter_heading();
 			}
-			msInitSiderbarDisplay = ele.style.display; 
+			msInitSiderbarDisplay = ele.style.display;
 			if (savecookies) cookieSave();
 		}
 		</script>
-		{/literal}		
+		{/literal}
 
 		{* frame for all sidebare contents: *}
-		<div class="mapboxshadow" style="position:absolute; top: 80px; right:0px; margin: 0px; padding: 4px; border:1px solid #000; background:#fff; opacity: .9; z-index:2">
+		<div class="mapboxframe mapboxshadow" style="position:absolute; top: 80px; right:0px; margin: 0px; padding: 4px; background:#fff; opacity: .9; z-index:2">
 			{* sidebar hidden: '<' icon to open *}
 			<a class="jslink nofocus" onclick="javascript:toggle_sidebar(true);" id='sidebar-toggle' style="width: 32px; height: 32px"><img id="sidbar-toggle-img" src="resource2/{$opt.template.style}/images/map/32x32-left.png"></a>
 			{* sidebar visible: filter options table & '>' icon to close *}
 			<div id="sidebar" style="display:none; overflow:auto">
 
 	{* filter options header *}
-	{* outer table es needed to use "width=100%" for inner table (to position the close 
+	{* outer table es needed to use "width=100%" for inner table (to position the close
      icon right) without consuming whole screen width in MSIE *}
 	<table cellspacing=0 cellpadding=0><tr><td>
 		<table style="width:100%">
@@ -2070,7 +2275,7 @@ function toggle_attribselection(bSaveCookies)
 		<tr>
 			{* cache types *}
 			<td valign="top" class="mapfilter pad10" width="{if $bFullscreen}140{else}150{/if}">
-				<table>                                                                 
+				<table>
 					<tr><td colspan="3" class="mapfiltertopic mft_withcheckbox"><input id="all_cachetypes" type="checkbox" checked="checked" onchange="alltypes_changed()"> <label for="all_cachetypes">{t}Cachetype{/t}</label></td></tr>
 					<tr><td><span style="line-height: 5px;">&nbsp;</span></td></tr>
 					{foreach from=$aCacheType item=cacheTypeItem}
@@ -2085,7 +2290,7 @@ function toggle_attribselection(bSaveCookies)
 
 			{* cache sizes *}
 			<td valign="top" class="mapfilter pad10" width="{if $bFullscreen}128{else}137{/if}">
-				<table>                                                     
+				<table>
 					<tr><td class="mapfiltertopic mft_withcheckbox"><input id="all_cachesizes" type="checkbox" checked="checked" onchange="allsizes_changed()"> <label for="all_cachesizes">{t}Container{/t}</label></td></tr>
 					<tr><td><span style="line-height: 5px;">&nbsp;</span></td></tr>
 					{foreach from=$aCacheSize item=cacheSizeItem}
@@ -2138,7 +2343,7 @@ function toggle_attribselection(bSaveCookies)
 			</td>
 
 			{* rating *}
-			<td valign="top" class="mapfilter pad10" width="{if $bFullscreen}160{else}282{/if}"> 
+			<td valign="top" class="mapfilter pad10" width="{if $bFullscreen}160{else}282{/if}">
 				<table>
 					<tr>
 						<td colspan="2" class="mapfiltertopic">{t}Rating{/t}</td>
@@ -2255,7 +2460,7 @@ function toggle_attribselection(bSaveCookies)
 			</td>
 		</tr>
 	</table>
-	
+
 	{if $bFullscreen}
 		</td></tr></td></table>
 		</div>

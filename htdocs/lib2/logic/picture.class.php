@@ -54,6 +54,7 @@ class picture
 		$this->rePicture->addInt('local', 0, false);
 		$this->rePicture->addInt('unknown_format', 0, false);
 		$this->rePicture->addInt('display', 1, false);
+		$this->rePicture->addInt('mappreview', 0, false);
 
 		$this->nPictureId = $nNewPictureId+0;
 
@@ -186,6 +187,14 @@ class picture
 	{
 		return $this->rePicture->setValue('display', $value ? 1 : 0);
 	}
+	function getMapPreview()
+	{
+		return $this->rePicture->getValue('mappreview') != 0;
+	}
+	function setMapPreview($value)
+	{
+		return $this->rePicture->setValue('mappreview', $value ? 1 : 0);
+	}
 	function getFilename()
 	{
 		global $opt;
@@ -293,7 +302,13 @@ class picture
 		$bRetVal = $this->rePicture->save();
 
 		if ($bRetVal)
+		{
+			$this->nPictureId = $this->rePicture->getValue('id');
+			if ($this->getObjectType() == OBJECT_CACHE && $this->getMapPreview())
+				sql("UPDATE `pictures` SET `mappreview`=0 WHERE `object_type`='&1' AND `object_id`='&2' AND `id`!='&3'", 
+				    OBJECT_CACHE, $this->getObjectId(), $this->getPictureId());
 			sql_slave_exclude();
+		}
 
 		return $bRetVal;
 	}

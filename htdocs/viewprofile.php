@@ -9,11 +9,14 @@
 
 	require('./lib2/web.inc.php');
 	require_once('./lib2/logic/useroptions.class.php');
+	require_once('./lib2/logic/logpics.inc.php');
 
 	$tpl->name = 'viewprofile';
 	$tpl->menuitem = MNU_CACHES_USERPROFILE;
 
 	$userid = isset($_REQUEST['userid']) ? $_REQUEST['userid']+0 : 0;
+	$allpics = isset($_REQUEST['allpics']) ? $_REQUEST['allpics']+0 : 0;
+	$startat = isset($_REQUEST['startat']) ? $_REQUEST['startat']+0 : 0; 
 
 	$rs = sql("SELECT `user`.`username`, 
 										`user`.`last_login`, 
@@ -94,6 +97,48 @@
 	$tpl->assign('hidden', $record['hidden'] <= 0 ? '0' : $record['hidden']);
 	$tpl->assign('recommended', sql_value("SELECT COUNT(*) FROM `cache_rating` WHERE `user_id`='&1'", 0, $userid));
 	$tpl->assign('maxrecommended', floor($record['found'] * $opt['logic']['rating']['percentageOfFounds'] / 100));
+
+	$picstat = ($useropt->getOptValue(USR_OPT_PICSTAT) == 1);
+	$tpl->assign('show_picstat', $picstat);
+	if ($picstat)
+	{
+		// user has allowed picture stat and gallery view
+		$tpl->assign('allpics',$allpics);
+		if ($allpics)
+		{
+			$pictures = get_logpics(LOGPICS_FOR_USER_GALLERY, $userid, 0, $startat);
+			$more = (count($pictures) > MAX_PICTURES_PER_GALLERY_PAGE);
+			if ($more)
+				array_splice($pictures, MAX_PICTURES_PER_GALLERY_PAGE);
+			$tpl->assign('pictures', $pictures);
+
+			$paging = $more || ($startat>0 && count($pictures)>0);
+			$tpl->assign('paging', $paging);
+			if ($paging)
+			{
+				$pages = floor(get_logpics(LOGPICS_FOR_USER_STAT, $userid)/MAX_PICTURES_PER_GALLERY_PAGE) + 1;
+				$page = floor($startat/MAX_PICTURES_PER_GALLERY_PAGE) + 1;
+
+				$pl = "";
+				for ($p=1; $p<=$pages; $p++)
+				{
+					if ($pl != "")   $pl .= " ";
+					if ($p != $page) $pl .= "<a href='viewprofile.php?userid=" . $userid . "&allpics=1&startat=" . (($p-1)*MAX_PICTURES_PER_GALLERY_PAGE) . "'>";
+					else             $pl .= "<strong>";
+					                 $pl .= $p;
+					if ($p != $page) $pl .= "</a>";
+					else             $pl .= "</strong>";
+				}
+
+				$tpl->assign('pagelinks', $pl);
+			}
+
+			$tpl->name = 'viewprofile_pics';
+				// actually we dont need all the other stuff here ..
+		}
+		else
+			$tpl->assign('logpics', get_logpics(LOGPICS_FOR_USER_STAT, $userid));
+	}
 
 	$tpl->assign('showcountry', (strlen(trim($record['country'])) > 0));
 	$tpl->assign('country', $record['country']);

@@ -67,7 +67,7 @@
 						<input type="text" name="inp{$useropt.id}" value="{$useropt.option_value|escape}" class="input200" />
 					{/if}
 					{if $useropt.option_input=="textarea"}
-						<textarea class="logs" cols="68" rows="6" name="inp{$useropt.id}">{$useropt.option_value|escape}</textarea>
+						<textarea class="logs" cols="68" rows="6" name="inp{$useropt.id}" style="max-width:500px; max-height:250px">{$useropt.option_value|escape}</textarea>
 					{/if}
 					{if $useropt.option_input=="checkbox"}
 						<input type="checkbox" class="checkbox" name="inp{$useropt.id}" value="1" {if $useropt.option_value=="1"}checked="checked"{/if} />

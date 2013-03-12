@@ -14,8 +14,6 @@
 
 	if (!$tpl->is_cached())
 	{
-		$newLogs = array();
-
 		sql_temp_table_slave('loglist');
 		sql_slave("CREATE TEMPORARY TABLE &loglist (`id` INT(11) PRIMARY KEY) SELECT `cache_logs`.`id` FROM `cache_logs` INNER JOIN `caches` ON `cache_logs`.`cache_id`=`caches`.`cache_id` INNER JOIN `cache_status` ON `caches`.`status`=`cache_status`.`id` WHERE `cache_status`.`allow_user_view`=1 ORDER BY `cache_logs`.`date_created` DESC LIMIT 200");
 
@@ -31,7 +29,11 @@
 																`caches`.`wp_oc`, 
 																`cache_logs`.`type`, 
 																`cacheloguser`.`user_id`, 
-																`cacheloguser`.`username` 
+																`cacheloguser`.`username`,
+																`cache_logs`.`cache_id`,
+																'' AS `pic_uuid`,
+																0 AS `picshown`,
+																(SELECT COUNT(*) FROM `pictures` WHERE `object_type`=1 AND `object_id`=`cache_logs`.`id`) AS `pics`
 													 FROM &loglist 
 										 INNER JOIN `cache_logs` ON &loglist.`id`=`cache_logs`.`id` 
 										 INNER JOIN `caches` ON `cache_logs`.`cache_id`=`caches`.`cache_id` 
@@ -40,8 +42,35 @@
 										  LEFT JOIN `sys_trans_text` ON `countries`.`trans_id`=`sys_trans_text`.`trans_id` AND `sys_trans_text`.`lang`='&1'
 										   ORDER BY " . $sqlOrderBy . "`cache_logs`.`date_created` DESC",
 											          $opt['template']['locale']);
+
+		$newLogs = array();
+
+		$lines_per_pic = 5;
+		$tpl->assign('lines_per_pic',$lines_per_pic);
+		$pics = 0;
+
 		while ($rLog = sql_fetch_assoc($rsLogs))
 		{
+			if ($pics <= 0 ||
+			    ($pics == $lines_per_pic && count($newLogs)==1 && !$newLogs[0]['picshow']))
+			{
+				$rsPic = sql_slave("SELECT `uuid` FROM `pictures`
+                             WHERE `object_type`=1 AND `object_id`='&1'
+														   AND `local`=1 AND `display`=1 AND `spoiler`=0 AND `unknown_format`=0
+				                     LIMIT 1", $rLog['id']);
+				if ($rPic = sql_fetch_assoc($rsPic))
+				{
+					if (count($newLogs))
+						$newLogs[count($newLogs)-1]['pic_uuid'] = $rPic['uuid'];
+					else
+						$rLog['pic_uuid'] = $rPic['uuid'];
+					$rLog['picshown'] = true;
+					$pics = $lines_per_pic;
+				}
+				sql_free_result($rsPic);
+			}
+			$pics--;
+
 			$newLogs[] = $rLog;
 		}
 		sql_free_result($rsLogs);

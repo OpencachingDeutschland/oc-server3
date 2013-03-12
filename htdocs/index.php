@@ -8,6 +8,7 @@
  ***************************************************************************/
 
 	require('./lib2/web.inc.php');
+	require('./lib2/logic/logpics.inc.php');
 	$sUserCountry = $login->getUserCountry();
 	
 	$tpl->name = 'start';
@@ -24,6 +25,9 @@
 			$tpl->assign('message',$opt['page']['message']);
 		else
 			$tpl->assign('message',$translate->t('<p>You can find everything you need to go Geocaching ...</p>', '', '', 0));
+
+		// pictures
+		$tpl->assign('pictures', get_logpics(LOGPICS_FOR_STARTPAGE_GALLERY));
 
 		// news entries
 		$tpl->assign('news_onstart', $opt['news']['onstart'] );

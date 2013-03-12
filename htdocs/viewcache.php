@@ -12,7 +12,8 @@
 	require_once('./lib2/logic/cache.class.php');
 	require_once('./lib2/logic/attribute.class.php');
 	require_once('./lib2/logic/coordinate.class.php');
-	require_once($opt['rootpath'] . 'lib2/logic/useroptions.class.php');
+	require_once('./lib2/logic/useroptions.class.php');
+	require_once('./lib2/logic/logpics.inc.php');
 
 	$login->verify();
 
@@ -69,6 +70,8 @@ function getChildWaypoints($cacheid)
 		$sPreferedDescLang = $_REQUEST['desclang'] . ',' . $opt['template']['locale'] . ',EN';
 	else
 		$sPreferedDescLang = $opt['template']['locale'] . ',EN';
+
+	$logpics = isset($_REQUEST['logpics']) && ($_REQUEST['logpics'] == 1); 
 
 	//$tpl->caching = true;
 	//$tpl->cache_lifetime = 31*24*60*60;
@@ -198,7 +201,7 @@ function getChildWaypoints($cacheid)
 	   rewritten 2012-07-22 following for bugfix, first log was lost in print
 	 */
 
-	$rscount = 5; 
+	$rscount = MAX_LOGENTRIES_ON_CACHEPAGE;
 
 	if (isset($_REQUEST['log']))
 	  switch ($_REQUEST['log'])
@@ -270,6 +273,20 @@ function getChildWaypoints($cacheid)
 		$tpl->name = 'viewcache_print';
 		$tpl->assign('log', $_REQUEST['log']);
 	}
+	
+	/* logpics
+	 */
+	$tpl->assign('show_logpics', $logpics ? 1 : 0);
+	if ($logpics)
+	{
+		$pictures = get_logpics(LOGPICS_FOR_CACHE_GALLERY, 0, $cacheid);		
+		$tpl->assign('morepics', count($pictures) > MAX_PICTURES_IN_CACHE_GALLERY);
+		$tpl->assign('maxpics', MAX_PICTURES_IN_CACHE_GALLERY);
+		array_splice($pictures, MAX_PICTURES_IN_CACHE_GALLERY);
+		$tpl->assign('pictures', $pictures);
+	}
+	else
+		$tpl->assign('logpics', get_logpics(LOGPICS_FOR_CACHE_STAT, 0, $cacheid));
 
 	/* process the cachmap options
 	 */

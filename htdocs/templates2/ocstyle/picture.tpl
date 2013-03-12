@@ -83,11 +83,16 @@
 			{/if}
 		{/if}
 
+		<tr>
+			<td align="right"><input class="checkbox" type="checkbox" name="spoiler" value="1" {if $spoilerchecked==true}checked="checked"{/if} /></td>
+			<td>{t}This picture is a spoiler - dont show a thumbnail.{/t} {if $objecttype==OBJECT_CACHELOG}{t}Please use the spoiler mark also for log pictures, to prevent that they appear on log gallery pages.{/t}{/if}</td>
+		</tr>
+
+		<tr>
+			<td height="8px"></td>
+		</tr>
+
 		{if $objecttype==OBJECT_CACHE}
-			<tr>
-				<td align="right"><input class="checkbox" type="checkbox" name="spoiler" value="1" {if $spoilerchecked==true}checked="checked"{/if} /></td>
-				<td>{t}This picture is a spoiler - dont show a thumbnail.{/t}</td>
-			</tr>
 			<tr>
 				<td align="right"><input class="checkbox" type="checkbox" name="notdisplay" value="1" {if $displaychecked==false}checked="checked"{/if}></td>
 				<td>{t}Do not separately display this picture (used in HTML description etc.){/t}</td>
@@ -106,11 +111,9 @@
 					{t}After click to upload, it can take a while, until the next page is been shown.{/t}
 				</td>
 			</tr>
-		{/if}
 
-		<tr><td class="spacer" colspan="2"></td></tr>
+			<tr><td class="spacer" colspan="2"></td></tr>
 		
-		{if $action == "add"}
 			<tr>
 				<td colspan="2">
 					{t}By submitting I accept the <a href="articles.php?page=impressum#tos" target="_blank">Opencaching.de Terms of Service</a> and the <a href="articles.php?page=impressum#datalicense" target="_blank">Opencaching.de Datalicense</a>{/t}

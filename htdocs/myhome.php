@@ -6,6 +6,8 @@
  ***************************************************************************/
 
 	require_once('./lib2/web.inc.php');
+	require('./lib2/logic/logpics.inc.php');
+
 	$tpl->name = 'myhome';
 	$tpl->menuitem = MNU_MYPROFILE_OVERVIEW;
 	$login->verify();
@@ -47,6 +49,11 @@
 
 	// get number of sent emails
 	$tpl->assign('emails', sql_value("SELECT COUNT(*) FROM `email_user` WHERE `from_user_id`='&1'", 0, $login->userid));
+	
+	// get log pictures
+	$tpl->assign('pictures', get_logpics(LOGPICS_FOR_MYHOME_GALLERY));
+	$tpl->assign('allpics', isset($_REQUEST['allpics']) && $_REQUEST['allpics'] ? 1 : 0); 
 
+	// display
 	$tpl->display();
 ?>

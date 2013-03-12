@@ -153,7 +153,14 @@
 			$tpl->error(ERROR_PICTURE_NOT_EXISTS);
 
 		if ($redirect == '')
+		{
 			$redirect = 'viewcache.php?cacheid=' . urlencode($picture->getCacheId());
+			if ($picture->getObjectType() == OBJECT_CACHELOG)
+				if ($picture->isVisibleOnCachePage())
+					$redirect .= "#logentries";
+				else
+					$redirect = "viewlogs.php?logid=" . urlencode($picture->getLogId());
+		}
 
 		if ($picture->allowEdit() == false)
 			$tpl->error(ERROR_NO_ACCESS);
@@ -175,6 +182,7 @@
 					$picture->setTitle($title);
 
 					$picture->save();
+
 					$tpl->redirect($redirect);
 				}
 			}

@@ -233,6 +233,24 @@ class picture
 		else
 			return false;
 	}
+	function isVisibleOnCachePage()
+	{
+		if ($this->getObjectType() != OBJECT_CACHELOG)
+			return null;
+		else
+			$rs = sql("SELECT `id` FROM `cache_logs` WHERE `cache_id`='&1'
+                         ORDER BY `date` DESC
+                            LIMIT &2",
+																	 $this->getCacheId(), MAX_LOGENTRIES_ON_CACHEPAGE);
+		$firstlogs = false;
+		while ($r = sql_fetch_assoc($rs))
+			if ($r['id'] == $this->getLogId())
+				$firstlogs = true;
+
+		sql_free_result($rs);
+		return $firstlogs;
+	}
+
 	function getCacheId()
 	{
 		if ($this->getObjectType() == OBJECT_CACHELOG)

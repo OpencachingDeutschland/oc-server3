@@ -249,7 +249,7 @@ class cache
 		sql("INSERT INTO `cache_visits` (`cache_id`, `user_id_ip`, `count`) VALUES (&1, '&2', 1)
 				ON DUPLICATE KEY UPDATE `count`=`count`+1", $nCacheId, $sIdentifier);
 
-		// if the previous statement does an INSERT, it was the first visit for this user
+		// if the previous statement does an INSERT, it was the first visit for this user today
 		if (sql_affected_rows() == 1)
 		{
 			if ($nVisitUserId != sql_value("SELECT `user_id` FROM `caches` WHERE `cache_id`='&1'", 0, $nCacheId))
@@ -296,7 +296,7 @@ class cache
 		while ($rLog = sql_fetch_assoc($rsLogs))
 		{
 			$pictures = array();
-			$rsPictures = sql("SELECT `url`, `title`, `uuid` FROM `pictures` WHERE `object_id`='&1' AND `object_type`=1", $rLog['id']);
+			$rsPictures = sql("SELECT `url`, `title`, `uuid`, `id`, `spoiler` FROM `pictures` WHERE `object_id`='&1' AND `object_type`=1", $rLog['id']);
 			while ($rPicture = sql_fetch_assoc($rsPictures))
 				$pictures[] = $rPicture;
 			sql_free_result($rsPictures);

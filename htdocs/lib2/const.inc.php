@@ -37,4 +37,5 @@
 	define('USR_OPT_GMZOOM', 1);
 	define('USR_OPT_SHOWSTATS', 5);
 	define('USR_OPT_TRANSLANG', 6);
+	define('USR_OPT_PICSTAT', 11);
 ?>

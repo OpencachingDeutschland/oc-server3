@@ -16,8 +16,9 @@
 		sql_escape_backtick($value)     ... escape $value for use within backticks
 		sql_value($sql, $default)       ... Query SQL and return first row of first line
 		sql_fetch_array($rs)            ... mysql_fetch_array with charset conversion
-		sql_fetch_assoc($rs)            ... mysql_fetch_assoc with charset conversion 
+		sql_fetch_assoc($rs)            ... mysql_fetch_assoc with charset conversion
 		sql_fetch_row($rs)              ... mysql_fetch_row with charset conversion
+		sql_fetch_assoc_table($rs)      ... fetch_assoc for all rows 
 		sql_temp_table($table)          ... registers an placeholder for use as temporary
 		                                    table and drop's temporary tables if 
 		                                    mysql_pconnect is used
@@ -524,6 +525,15 @@
 		return $retval;
 	}
 	
+	function sql_fetch_assoc_table($rs)
+	{
+		$result = array();
+		while ($r = sql_fetch_assoc($rs))
+			$result[] = $r;
+		sql_free_result($rs);
+		return $result;
+	}
+
 	function sql_fetch_row($rs)
 	{
 		global $opt;

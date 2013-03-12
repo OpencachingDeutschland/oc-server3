@@ -175,9 +175,20 @@
 
 	<tr>
 		<td class="header-small">
-		<img src="resource2/{$opt.template.style}/images/viewcache/cache-rate.png"  align="middle" border="0" alt="{t}Recommendations{/t}" title="{t}Recommendations{/t}">&nbsp;&nbsp;&nbsp;<b>{t}Recommendations{/t}:</b></td>
+		<img src="resource2/{$opt.template.style}/images/viewcache/cache-rate.png" align="middle" border="0" alt="{t}Recommendations{/t}" title="{t}Recommendations{/t}">&nbsp;&nbsp;&nbsp;<b>{t}Recommendations{/t}:</b></td>
 		<td class="header-small" >{t 1=$recommended 2=$maxrecommended}%1 of %2 possibles{/t} [<a href="usertops.php?userid={$userid}">{t}Show all{/t}</a>]
 		</td>
 	</tr>
+	<tr><td class="spacer" colspan="2"></td></tr>
+
+	{if $show_picstat}
+		<tr>
+			<td class="header-small">
+			<img src="resource2/{$opt.template.style}/images/action/16x16-addimage.png" align="middle" border="0" alt="{t}Log pictures{/t}" title="{t}Log pictures{/t}">&nbsp;&nbsp;&nbsp;<b>{t}Log pictures{/t}:</b></td> 
+			<td class="header-small" >{$logpics} [<a href="viewprofile.php?userid={$userid}&allpics=1">{t}Show all{/t}</a>]
+			</td>
+		</tr>
+	{/if}
+	
 	<tr><td class="spacer" colspan="2"></td></tr>
 </table>

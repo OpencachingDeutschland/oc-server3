@@ -3,7 +3,7 @@
 *
 *  Unicode Reminder メモ
 ***************************************************************************}
-<div class="content-txtbox-noshade">
+<div class="content-txtbox-noshade" id="log{$logItem.id}">
 	<div class="logs">
 	<p class="content-title-noshade-size1" style="display:inline;">
 		{include file="res_logtype.tpl" type=$logItem.type} 
@@ -62,9 +62,15 @@
 				<b>{t}Pictures for this logentry:{/t}</b><br />
 			{/if}
 
-			<a href="{$pictureItem.url}">{$pictureItem.title|escape}</a>
+			<a onclick="javascript:enlarge(document.getElementById('pic{$pictureItem.id}'))" style="cursor:pointer">{$pictureItem.title|escape}</a>
+			{* the position of this image is the anchor for enlargit activity: *}
+			<img id="pic{$pictureItem.id}" src="resource2/ocstyle/images/misc/empty.png" longdesc="{$pictureItem.url}" alt="{$pictureItem.title|escape}" style="cursor:pointer" onclick="enlarge(this)"/>
 			{if $logItem.userid==$login.userid}
+				[<a href="picture.php?action=edit&uuid={$pictureItem.uuid|escape}">{t}Edit{/t}</a>]
 				[<a href="picture.php?action=delete&uuid={$pictureItem.uuid|escape}">{t}Delete{/t}</a>]
+			{/if}
+			{if $pictureItem.spoiler}
+				&nbsp;({t}Spoiler{/t})
 			{/if}
 			<br />
 		{/foreach}

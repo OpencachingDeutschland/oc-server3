@@ -6,11 +6,16 @@
  ***************************************************************************/
 
 	// define image paths
-	$imgurl_404 = 'lang/de/ocstyle/images/thumb/thumb404.gif';
-	$imgurl_intern = 'lang/de/ocstyle/images/thumb/thumbintern.gif';
-	$imgurl_extern = 'lang/de/ocstyle/images/thumb/thumbextern.gif';
-	$imgurl_spoiler = 'lang/de/ocstyle/images/thumb/thumbspoiler.gif';
-	$imgurl_format = 'lang/de/ocstyle/images/thumb/thumbunknown.gif';
+	$imgurl_404[1] = 'lang/de/ocstyle/images/thumb/thumb404_1.gif';
+	$imgurl_404[2]= 'lang/de/ocstyle/images/thumb/thumb404_2.gif';
+	$imgurl_intern[1] = 'lang/de/ocstyle/images/thumb/thumbintern_1.gif';
+	$imgurl_intern[2] = 'lang/de/ocstyle/images/thumb/thumbintern_2.gif';
+	$imgurl_extern[1] = 'lang/de/ocstyle/images/thumb/thumbextern_1.gif';
+	$imgurl_extern[2] = 'lang/de/ocstyle/images/thumb/thumbextern_2.gif';
+	$imgurl_spoiler[1] = 'lang/de/ocstyle/images/thumb/thumbspoiler_1.gif';
+	$imgurl_spoiler[2] = 'lang/de/ocstyle/images/thumb/thumbspoiler_2.gif';
+	$imgurl_format[1] = 'lang/de/ocstyle/images/thumb/thumbunknown_1.gif';
+	$imgurl_format[2] = 'lang/de/ocstyle/images/thumb/thumbunknown_2.gif';
 
 	require('./lib2/web.inc.php');
 
@@ -35,7 +40,7 @@
 				if ($debug == 1)
 					die('Debug: line ' . __LINE__);
 				else
-					$tpl->redirect($imgurl_extern);
+					$tpl->redirect($imgurl_extern[$r['object_type']]);
 			}
 		}
 		else if ($r['object_type'] == 2)
@@ -45,7 +50,7 @@
 				if ($debug == 1)
 					die('Debug: line ' . __LINE__);
 				else
-					$tpl->redirect($imgurl_extern);
+					$tpl->redirect($imgurl_extern[$r['object_type']]);
 			}
 		}
 
@@ -53,13 +58,13 @@
 			if ($debug == 1)
 				die('Debug: line ' . __LINE__);
 			else
-				$tpl->redirect($imgurl_extern);
+				$tpl->redirect($imgurl_extern[$r['object_type']]);
 
 		if (($r['spoiler'] == 1) && ($showspoiler != 1))
 			if ($debug == 1)
 				die('Debug: line ' . __LINE__);
 			else
-				$tpl->redirect($imgurl_spoiler);
+				$tpl->redirect($imgurl_spoiler[$r['object_type']]);
 		$imgurl = $r['url'];
 		$urlparts = mb_split('/', $imgurl);
 
@@ -67,7 +72,7 @@
 			if ($debug == 1)
 				die('Debug: line ' . __LINE__);
 			else
-				$tpl->redirect($imgurl_intern);
+				$tpl->redirect($imgurl_intern[$r['object_type']]);
 
 		// thumb neu erstellen?
 		$bGenerate = false;
@@ -85,7 +90,7 @@
 				if ($debug == 1)
 					die('Debug: line ' . __LINE__);
 				else
-					$tpl->redirect($imgurl_format);
+					$tpl->redirect($imgurl_format[$r['object_type']]);
 
 			// ok, mal kucken ob das Dateiformat unterstützt wird
 			$filename = $urlparts[count($urlparts) - 1];
@@ -99,7 +104,7 @@
 				if ($debug == 1)
 					die('Debug: line ' . __LINE__);
 				else
-					$tpl->redirect($imgurl_format);
+					$tpl->redirect($imgurl_format[$r['object_type']]);
 			}
 
 			if ($extension == 'jpeg') $extension = 'jpg';
@@ -130,7 +135,7 @@
 				if ($debug == 1)
 					die('Debug: line ' . __LINE__);
 				else
-					$tpl->redirect($imgurl_format);
+					$tpl->redirect($imgurl_format[$r['object_type']]);
 			}
 
 			$imheight = imagesy($im);
@@ -138,8 +143,10 @@
 
 			if ($r['object_type'] == 1)
 			{
-				$thumb_max_height = $opt['logic']['pictures']['thumb_max_height']/3;
-				$thumb_max_width = $opt['logic']['pictures']['thumb_max_width']/3;
+				// Log picture gallery in thumbs.php relies on this format!
+				// It is large enough to have the pics look nice ... 
+				$thumb_max_height = 105;
+				$thumb_max_width = 105;
 			}
 			else
 			{
@@ -217,6 +224,6 @@
 		if ($debug == 1)
 			die('Debug: line ' . __LINE__);
 		else
-			$tpl->redirect($imgurl_404);
+			$tpl->redirect($imgurl_404[$r['object_type']]);
 	}
 ?>

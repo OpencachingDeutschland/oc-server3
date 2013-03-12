@@ -53,7 +53,17 @@
 					{t 1=$smarty.capture.cachename 2=$smarty.capture.username}%2 want's to visit %1{/t}
 				{/if}
 
+				{if $newLog.pics}
+					<img src="resource2/ocstyle/images/action/16x16-addimage.png" />
+					{if $newLog.picshown}&rarr;{/if}
+				{/if}
 			</td>
+			{if $newLog.pic_uuid != ""}
+				<td rowspan="{$lines_per_pic}">
+					{include file="res_logpicture.tpl" picture=$newLog logdate=false loguser=false}
+				</td>
+				<td></td>
+			{/if}
 		</tr>
 		{assign var='lastCountry' value=$newLog.country_name}
 	{/foreach}

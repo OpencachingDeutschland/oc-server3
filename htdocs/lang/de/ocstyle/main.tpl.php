@@ -115,7 +115,7 @@
 				//-->
       </script>
 		<link rel="stylesheet" type="text/css" media="print" href="resource2/{style}/css/style_print.css?ft={print_css_time}">
-		<script type="text/javascript" src="resource2/{style}/js/enlargeit.js"></script>
+		<script type="text/javascript" src="resource2/{style}/js/enlargeit/enlargeit.js"></script>
 		{htmlheaders}
 	</head>
 

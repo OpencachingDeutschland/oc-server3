@@ -3,13 +3,10 @@
 *
 *  Unicode Reminder メモ
 ***************************************************************************}
+
 <div class="content-txtbox-noshade">
-	<div class="content2-pagetitle">
-		<img src="resource2/{$opt.template.style}/images/misc/32x32-world.png" style="align: left; margin-right: 10px;" width="32" height="32" alt="" />
-		{t}What do i find on this website?{/t}
-	</div>
-	<div class="content-txtbox-noshade welcome">
-		{$message}
+	<div class="content-txtbox-noshade">
+		<p style="line-height: 1.6em;">{$message}</p>
 		<div class="buffer" style="width: 500px;">&nbsp;</div>
 	</div> 
 </div>
@@ -65,6 +62,15 @@
 		</li>
 	{/foreach}	
 </ul>
+
+{* new logpix *}
+<div class="content2-container bg-blue02" style="margin-bottom:6px">
+	<p class="content-title-noshade-size3">
+		<img src="resource2/{$opt.template.style}/images/misc/32x32-news.png" style="align: left; margin-right: 10px;" width="24" height="24" alt="{t}News{/t}" />
+		<a href="newlogpics.php" style="color:rgb(88,144,168); text-decoration: none;">{t}New log pictures{/t}</a>
+	</p>
+</div>
+{include file="res_logpictures.tpl" logdate=true loguser=true}
 
 {* recommendations *}
 <div class="content2-container bg-blue02">
@@ -154,3 +160,4 @@
 		</li>
 	{/foreach}	
 </ul>		
+

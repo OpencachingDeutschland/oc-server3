@@ -741,6 +741,14 @@ p.main-totalstats {
 	padding: 2px;
 }
 
+.img-shadow-loggallery {
+	border: 1px solid #a9a9a9;
+	padding: 2px;
+	box-shadow: 1px 2px 2px #555;
+	-moz-box-shadow: 1px 2px 2px #555;
+	-webkit-box-shadow: 1px 2px 2px #555;
+}
+
 form#register label { 
 	text-align: right; 
 	width: 14em; 

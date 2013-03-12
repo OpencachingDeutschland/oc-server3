@@ -884,7 +884,7 @@ function adjust_infowindow()
 			// alert("Before: " + iw_frame.style.width +  " / " + iw_frame.style.height);
 			iw_frame.style.width = String(iw_width + 2) + "px";
 				// making it too wide would let additional wp text flow into the margin at MSIE
-			iw_frame.style.height = String(iw_height + 25) + "px";
+			iw_frame.style.height = String(iw_height + 10) + "px";
 			// alert("After: " + iw_frame.style.width +  " / " + iw_frame.style.height);
 		}
 		else
@@ -990,26 +990,22 @@ function init_waypoint_markers(aWaypoints)
 				var typename    = maWpWaypoints[nearestwp].getAttribute('typename');
 				var description = maWpWaypoints[nearestwp].getAttribute('description');
 
-				{/literal}
-				var typetext;
-				if (wptype+0 == 0 && {if $help_note != ""}1{else}0{/if})
-					typetext = "{$help_note}";
-				else if ({if $help_wps != ""}1{else}0{/if})
-					typetext = "{$help_wps}";
-				if (typetext != "")
-					typetext += typename + "</a>";
+				var maxwidth;
+				if (description.length < 512)
+					maxwidth = "320px";
 				else
-					typetext += typename;
+					maxwidth = "480px";
 
-				var text =    // MSIE needs max width to wrap long descriptions
-					"<div id='mapinfowindow' style='max-width:400px; max-height:400px'><table class='mappopup'>" +
+				{/literal}
+				var text =
+					"<div id='mapinfowindow' style='max-height:320px;" + {if $msie}" max-width:" + maxwidth + ";" +{/if} " overflow:auto'><table class='mappopup'>" +
 					"<tr><td><table cellspacing='0' cellpadding='0'><tr><td>" +
 						"<img src='" + image + "' width='" + imagewidth + "' height='" + imageheight + "' ></td>" +
-						"<td style='font-size:1.15em'><span style='white-space:normal'>" + typetext + " {t}for{/t}" + "</span></td>" +
-						"<td style='font-weight:bold; font-size:1.2em'>&nbsp;<a href='viewcache.php?wp=" + msPopupMarkerWP + "' target='_blank_'>" + msPopupMarkerWP + "</a></td>" +
+						"<td class='wppopupheader'><span style='white-space:normal'>" + typename + "</span></td><td style='vertical-align:top'></td><td class='wppopupheader'>&nbsp;{t}for{/t}" + "</span></td>" +
+						"<td class='wppopupheader' style='font-weight:bold'>&nbsp;<a href='viewcache.php?wp=" + msPopupMarkerWP + "' target='_blank_'>" + msPopupMarkerWP + "</a></td>" +
 					"</tr></table></td></tr>";
 				if (description != "")
-					text += "<tr><td style='padding:8px; max-width:350px; white-space:normal' colspan='4'>" + description + "</td></tr>";
+					text += "<tr><td style='padding:8px; max-width:" + maxwidth + "; white-space:normal' colspan='4'>" + description + "</td></tr>";
 				text += "</table></div>";
 				{literal}
 

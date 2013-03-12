@@ -1191,12 +1191,16 @@ td.mapheader_spacer {
 
 div.mappopup {
 	overflow:hidden;      /* avoids double-scrollbars in MSIE; 'visible' wont work */
- }
+}
 
 table.mappopup td {
 	font-size: 11px;
 	white-space: nowrap;
-	}
+}
+
+td.wppopupheader {
+	font-size:1.15em;
+}
 
 .mapboxframe {
 	border:1px solid #777777;

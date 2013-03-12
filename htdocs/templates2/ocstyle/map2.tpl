@@ -14,10 +14,11 @@
 *  - switch current options/view to search result page
 *
 *  KNOWN PROBLEMS:
-*  - InfoWindow sizing problems, (preliminarily?) solved by workaround, see adjust_infowindow()
+*  - InfoWindow sizing problems, solved by workaround, see adjust_infowindow()
 *  - not all marker tootltips are displayed in Firefox, therefore disabled
 *  - strange GM zoom control jumping while panning or resizing the map
 *  - memory leak on MSIE, closing the map page then awfully slow due to garbage collection?
+*  - searchlist scrollpos is not reset on new search in Firefox
 *
 ***************************************************************************}
 {* OCSTYLE *}
@@ -1444,12 +1445,18 @@ function download_gpx()
 // PERMALINK
 function showPermlinkBox_click()
 {
-	if (window.opera)
-		document.getElementById('permalink_addFavorites').style.display = 'none';
-	else
-		if ((typeof window.external.AddFavorite == 'undefined') &&
-			(typeof window.external.addPanel == 'undefined'))
-			document.getElementById('permalink_addFavorites').style.display = 'none';
+	var addfavorites = document.getElementById('permalink_addFavorites');
+	try
+	{
+		if ((typeof window.external.AddFavorite == 'undefined') &&  // MSIE
+			(typeof window.external.addPanel == 'undefined'))         // Mozilla
+				addfavorites.style.display = 'none';
+	}
+	catch(e)
+	{
+		// Opera, Safari ...
+		addfavorites.style.display = 'none';
+	}
 
 	if (moPermalinkBox.style.display == 'none')
 	{
@@ -1519,6 +1526,7 @@ function mapselectlist_clear()
 	moSearchList.selectedIndex = 0;
 	while (moSearchList.length>0)
 		moSearchList.options[moSearchList.length-1] = null;
+	moSearchList.scrollTop = 0;  // does not work in firefox - why?
 	maSearchListCoords = new Array();
 }
 
@@ -1567,6 +1575,15 @@ function mapselectlist_onclick()
 		}
 	}
 }
+
+function mapselectlist_onkey(e)
+{
+	if (e.which == 13)
+		mapselectlist_onclick();
+	else if (e.which == 27)
+		mapselectlist_hide();
+}
+
 
 function searchlist_openitem(nIndex)
 {
@@ -1620,77 +1637,75 @@ function mapsearch_click()
 	else
 	  searchpar = "namesearch&name=" + encodeURI(sSearchText) + "&lat=" + oCenterPos.lat() + "&lon=" + oCenterPos.lng() + "&resultid=" + mnResultId;
 
-	ajaxLoad(msURLMapPHP + "?mode=" + searchpar,
-		function(data, responseCode) {
-			var xml = xmlParse(data);
-			var caches = xml.documentElement.getElementsByTagName("cache");
+	// clear the result list
+	mapselectlist_clear();
 
-			// clear the result list
-			mapselectlist_clear();
-
-			if (caches.length>0)
+	// do search on google
+	moGeocoder.geocode( { 'address': sSearchText },
+		function(results, status)
+		{
+			if (status == google.maps.GeocoderStatus.ZERO_RESULTS)
+			{
+				// no result
+			}
+			else if (status != google.maps.GeocoderStatus.OK)
 			{
 				//TODO: translate
-				var oTempOption = new Option("{t escape=js}Geocaches found, nearest first:{/t}", -1);
+				alert("Internal search error");
+				return;
+			}
+
+			var nPlacemarksCount = 0;
+			var nPlacemarkIndex;
+
+			if (status == google.maps.GeocoderStatus.OK)
+				nPlacemarksCount = results.length;
+
+			if (nPlacemarksCount>0)
+			{
+				var oTempOption = new Option("{t escape=js}Places found via Google:{/t}", -1);
 				oTempOption.style.color = "gray";
 				moSearchList.options[moSearchList.length] = oTempOption;
 
-				for (var nCacheIndex=0; nCacheIndex<caches.length; nCacheIndex++)
+				for (nPlacemarkIndex=0; nPlacemarkIndex<nPlacemarksCount; nPlacemarkIndex++)
 				{
-					var name = caches[nCacheIndex].getAttribute("name");
-					var wpoc = caches[nCacheIndex].getAttribute("wpoc");
-					var text = name + " (" + wpoc + ")";
-					var value = add_searchlist_itemcoords(0, 0, wpoc, text);
-					var item = new Option("     " + text, value);
+					var coord = results[nPlacemarkIndex].geometry.location;
+					var text = results[nPlacemarkIndex].formatted_address;
+					var value = add_searchlist_itemcoords(coord.lat(), coord.lng(), "", text);
+					var item = new Option("     " + text, value);  // spaces are ignored by Chrome
 					item.style.marginLeft = "20px";
-
-					moSearchList.options[moSearchList.length] = item;
-				}
-
-				if (caches.length >= 30)
-				{
-					var item = new Option("     {/literal}{t escape=js}Some more items found...{/t}{literal}", -1);
-					item.style.marginLeft = "20px";
-					item.style.color = "gray";
 					moSearchList.options[moSearchList.length] = item;
 				}
 			}
 
-			// do search on google
-			moGeocoder.geocode( { 'address': sSearchText },
-				function(results, status)
-				{
-					if (status == google.maps.GeocoderStatus.ZERO_RESULTS)
-					{
-						// no result
-					}
-					else if (status != google.maps.GeocoderStatus.OK)
-					{
-						//TODO: translate
-						alert("Internal search error");
-						return;
-					}
+			ajaxLoad(msURLMapPHP + "?mode=" + searchpar,
+				function(data, responseCode) {
+					var xml = xmlParse(data);
+					var caches = xml.documentElement.getElementsByTagName("cache");
 
-					var nPlacemarksCount = 0;
-					var nPlacemarkIndex;
-
-					if (status == google.maps.GeocoderStatus.OK)
-						nPlacemarksCount = results.length;
-
-					if (nPlacemarksCount>0)
+					if (caches.length>0)
 					{
-						//TODO: translate
-						var oTempOption = new Option("{t escape=js}Places found via Google:{/t}", -1);
+						var oTempOption = new Option("{t escape=js}Geocaches found, nearest first:{/t}", -1);
 						oTempOption.style.color = "gray";
 						moSearchList.options[moSearchList.length] = oTempOption;
 
-						for (nPlacemarkIndex=0; nPlacemarkIndex<nPlacemarksCount; nPlacemarkIndex++)
+						for (var nCacheIndex=0; nCacheIndex<caches.length; nCacheIndex++)
 						{
-							var coord = results[nPlacemarkIndex].geometry.location;
-							var text = results[nPlacemarkIndex].formatted_address;
-							var value = add_searchlist_itemcoords(coord.lat(), coord.lng(), "", text);
+							var name = caches[nCacheIndex].getAttribute("name");
+							var wpoc = caches[nCacheIndex].getAttribute("wpoc");
+							var text = name + " (" + wpoc + ")";
+							var value = add_searchlist_itemcoords(0, 0, wpoc, text);
 							var item = new Option("     " + text, value);
-								item.style.marginLeft = "20px";
+							item.style.marginLeft = "20px";
+
+							moSearchList.options[moSearchList.length] = item;
+						}
+
+						if (caches.length >= 30)
+						{
+							var item = new Option("     {/literal}{t escape=js}Some more items found...{/t}{literal}", -1);
+							item.style.marginLeft = "20px";
+							item.style.color = "gray";
 							moSearchList.options[moSearchList.length] = item;
 						}
 					}
@@ -1698,7 +1713,6 @@ function mapsearch_click()
 					if (moSearchList.length==0)
 					{
 						mapselectlist_hide();
-						//TODO: translate
 						alert("'" + sSearchText + "' {/literal}{t escape=js}was not found (with the selected settings){/t}{literal}");
 						return;
 					}
@@ -1715,7 +1729,6 @@ function mapsearch_click()
 					else
 						moSearchList.size = moSearchList.length;
 
-					moSearchList.selectedIndex = 0;
 					mapselectlist_show();
 				});
 		});
@@ -2121,12 +2134,12 @@ function toggle_attribselection(bSaveCookies)
 
 	{* dropdown list for search results *}
 	<div class="mapselectgeocode">
-		<select id="mapselectlist" name="mapselectlist" class="mapselectlist{if $bFullscreen}_fullscreen{/if} mapboxshadow" onblur="mapselectlist_onblur()" onclick="mapselectlist_onclick()">
+		<select id="mapselectlist" name="mapselectlist" class="mapselectlist{if $bFullscreen}_fullscreen{/if} mapboxshadow" onblur="mapselectlist_onblur()" onclick="mapselectlist_onclick()" onkeydown="mapselectlist_onkey(event)" >
 		</select>
 	</div>
 
 	{* popup box for permalink *}
-	<div id="permalink_box" class="mappermalink mapboxframe mapboxshadow" style="display:none;">
+	<div id="permalink_box" class="mappermalink mapboxframe mapboxshadow" style="display:none">
 		<table>
 			<tr><td><img src="resource2/ocstyle/images/viewcache/link.png" alt="" height="16" width="16" /> {t}Link to this map view{/t}:</td><td align="right"><a href="javascript:permalinkbox_hide()"><img src="resource2/ocstyle/images/misc/close-medium.png" style="opacity:0.7" ></a></td></tr>
 			<tr><td><input id="permalink_text" type="text" value="" size="55"/></td></tr>

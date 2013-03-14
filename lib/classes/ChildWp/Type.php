@@ -4,12 +4,14 @@ class ChildWp_Type
 {
   private $id;
   private $name;
+  private $preposition;
   private $image;
 
-  public function __construct($id, $name, $image = false)
+  public function __construct($id, $name, $preposition, $image = false)
   {
     $this->id = $id;
     $this->name = $name;
+    $this->preposition = $preposition;
     $this->image = $image;
   }
 
@@ -21,6 +23,11 @@ class ChildWp_Type
   public function getName()
   {
     return $this->name;
+  }
+
+  public function getPreposition()
+  {
+    return $this->preposition;
   }
 
   public function getImage()

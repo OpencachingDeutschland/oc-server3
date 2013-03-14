@@ -204,11 +204,11 @@ INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('10', '3');
 -- Table coordinates_type
 SET NAMES 'utf8';
 TRUNCATE TABLE `coordinates_type`;
-INSERT INTO `coordinates_type` (`id`, `name`, `trans_id`, `image`) VALUES ('1', 'Parking', '1788', 'resource2/ocstyle/images/misc/wp_parking.png');
-INSERT INTO `coordinates_type` (`id`, `name`, `trans_id`, `image`) VALUES ('2', 'Stage or reference point', '1789', 'resource2/ocstyle/images/misc/wp_reference.png');
-INSERT INTO `coordinates_type` (`id`, `name`, `trans_id`, `image`) VALUES ('3', 'Path', '1926', 'resource2/ocstyle/images/misc/wp_path.png');
-INSERT INTO `coordinates_type` (`id`, `name`, `trans_id`, `image`) VALUES ('4', 'Final', '1927', 'resource2/ocstyle/images/misc/wp_final.png');
-INSERT INTO `coordinates_type` (`id`, `name`, `trans_id`, `image`) VALUES ('5', 'Point of interest', '1570', 'resource2/ocstyle/images/misc/wp_poi.png');
+INSERT INTO `coordinates_type` (`id`, `name`, `trans_id`, `image`, `preposition`, `pp_trans_id`) VALUES ('1', 'Parking', '1788', 'resource2/ocstyle/images/misc/wp_parking.png', 'for', 1923);
+INSERT INTO `coordinates_type` (`id`, `name`, `trans_id`, `image`, `preposition`, `pp_trans_id`) VALUES ('2', 'Stage or reference point', '1789', 'resource2/ocstyle/images/misc/wp_reference.png', 'of', 894);
+INSERT INTO `coordinates_type` (`id`, `name`, `trans_id`, `image`, `preposition`, `pp_trans_id`) VALUES ('3', 'Path', '1926', 'resource2/ocstyle/images/misc/wp_path.png', 'to ', 1961);
+INSERT INTO `coordinates_type` (`id`, `name`, `trans_id`, `image`, `preposition`, `pp_trans_id`) VALUES ('4', 'Final', '1927', 'resource2/ocstyle/images/misc/wp_final.png', 'of', 894);
+INSERT INTO `coordinates_type` (`id`, `name`, `trans_id`, `image`, `preposition`, `pp_trans_id`) VALUES ('5', 'Point of interest', '1570', 'resource2/ocstyle/images/misc/wp_poi.png', 'at', 1962);
 
 -- Table countries
 SET NAMES 'utf8';
@@ -2399,6 +2399,8 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1957', '\"Spoil
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1958', 'Back to the cache description', '2013-02-23 19:00:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1959', 'Only the last %1 pictures are displayed.', '2013-02-23 19:00:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1960', 'Page', '2013-02-23 19:00:04');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1961', 'to ', '2013-02-23 19:00:04');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1962', 'at', '2013-02-23 19:00:04');
 
 -- Table sys_trans_ref
 SET NAMES 'utf8';
@@ -6055,7 +6057,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1922', 'DE', 'Spoiler anklicken zum Anzeigen', '2012-10-11 00:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1923', 'DE', 'für', '2012-10-11 00:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1924', 'DE', 'Der Cache hat %1 %2zusätzliche Wegpunkte%3.', '2012-10-11 00:00:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1925', 'DE', 'Der Cache hat einen %1zusätzlichen Wegpunkt%2.', '2012-10-11 00:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1925', 'DE', 'Der Cache hat einen %2zusätzlichen Wegpunkt%3.', '2012-10-11 00:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1926', 'DE', 'Pfad', '2012-10-11 00:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1927', 'DE', 'Ziel', '2012-10-11 00:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1928', 'DE', '%1Vorschaubilder</a> anzeigen<br />(% der Kartenfläche, 0=aus)', '2012-10-11 00:00:00');
@@ -6082,6 +6084,8 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1958', 'DE', 'zurück zur Cachebeschreibung', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1959', 'DE', 'Es werden nur die neuesten %1 Bilder angezeigt.', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1960', 'DE', 'Seite', '2013-02-19 05:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1961', 'DE', 'zu', '2013-02-19 05:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1962', 'DE', 'bei', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'EN', 'Reorder IDs \r', '2010-09-02 00:15:30');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'EN', 'The database could not be reconnected.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'EN', 'Testing – please do not login', '2010-08-28 11:48:07');
@@ -7572,6 +7576,8 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1958', 'EN', 'Back to the cache description', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1959', 'EN', 'Only the last %1 pictures are displayed.', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1960', 'EN', 'Seite', '2013-02-19 05:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1961', 'EN', 'to', '2013-02-19 05:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1962', 'EN', 'at', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'ES', 'Reordenar ID', '2010-12-09 00:17:55');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'ES', 'La base de datos no se pudo conectar.', '2010-12-09 00:17:55');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'ES', 'En pruebas - por favor, no entre.', '2010-12-09 00:17:55');
@@ -8991,6 +8997,8 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1861', 'ES', 'Mat./Física', '2012-10-11 00:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1862', 'ES', 'movimiento', '2012-10-11 00:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1863', 'ES', 'Drive-In', '2012-10-11 00:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1961', 'ES', 'a', '2013-02-19 05:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1962', 'ES', 'cerca de', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('6', 'FR', 'Pseudo', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('7', 'FR', 'Quite', '2010-10-04 00:17:39');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('24', 'FR', 'Prénom', '2010-10-04 00:17:39');
@@ -10548,6 +10556,8 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1930', 'IT', 'Al massimo %1 cache possono essere visualizzate con Microsoft Internet Explorer.', '2013-03-14 10:49:58');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1940', 'IT', 'Galleria di immagini', '2013-03-14 10:49:58');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1943', 'IT', 'Tutte le immagini sono protette da copyright. Se vuoi utilizzarle chiedi il permesso all\'autore. Dal 7 aprile 2013 i log che includono immagini possono essere usati senza alcuna modifica secondo i termini dellla <a href=\"articles.php?page=impressum#datalicense\">nuova licenza dati</a>.', '2013-03-14 10:49:58');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1961', 'IT', 'a', '2013-02-19 05:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1962', 'IT', 'presso', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('922', 'JA', 'JA', '2011-05-15 16:04:51');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'NL', 'ID\'s opnieuw sorteren', '2011-02-04 19:49:56');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'NL', 'De verbinding met de database kon niet hersteld worden.', '2011-02-04 19:49:56');

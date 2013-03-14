@@ -48,3 +48,4 @@ date         commit ID    change
                           removed table listing_restored
                           added index cache_logs_archived:user_id
 2013-03-10                added field 'mappreview' in pictures and pictures_modified
+2013-03-14                added fields coordinates_type.preposition and pp_trans_id

@@ -362,6 +362,7 @@ function output_cachexml($sWaypoint)
 		echo '    <wpt ';
 		echo 'typeid="' . xmlentities($waypoint['type']) . '" ';
 		echo 'typename="' . xmlentities($waypoint['name']) . '" ';
+		echo 'typepreposition="' . xmlentities($waypoint['preposition']) . '" ';
 		echo 'image="' . xmlentities($waypoint['image']) . '" ';
 		echo 'imagewidth="38" imageheight="38" ';
 		echo 'latitude="' . xmlentities($waypoint['latitude']) . '" ';
@@ -484,12 +485,12 @@ function output_searchresult($nResultId, $compact, $nLon1, $nLon2, $nLat1, $nLat
 			if ($r['oconly']) $flags |= 16;
 
 			if ($compact)
-				echo '<c d="' . xmlentities($r['wp_oc']) . '/' .
-							xmlentities(round($r['longitude'],5)) . '/' . 
-							xmlentities(round($r['latitude'],5)) . '/' .
-							xmlentities($r['type']) . '/' . xmlentities($flags) . '"' .
-							(isset($r['cachename']) ? ' n="' . xmlentities($r['cachename']) . '"' : '') . 
-							' />';
+				echo '<c d="' .
+				       xmlentities(
+				         $r['wp_oc'] . '/' . round($r['longitude'],5) . '/' .
+				         round($r['latitude'],5) . '/' . $r['type'] . '/' . $flags) . '"' .
+				         (isset($r['cachename']) ? ' n="' . xmlentities($r['cachename']) . '"' : '') . 
+				     ' />';
 			else
 				echo '<cache wp="' . xmlentities($r['wp_oc']) . '"' .
 							' lon="' . xmlentities(round($r['longitude'],5)) . '"' . 

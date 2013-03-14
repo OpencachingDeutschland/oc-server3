@@ -28,8 +28,8 @@
 	{literal}<!--
 	function mapLoad()
 	{
-		document.getElementById('map').innerHTML =
-			"<p>{t}Your Internet Explorer is too old to display the map. Please upgrade at least to version 7, better 8.{/t}</p>";
+		document.getElementById('googlemap').innerHTML =
+			"<div style='position:relative; top:180px; left:10px'><p>{t escape=js}Your Internet Explorer is too old to display the map. Please upgrade at least to version 7, better 8.{/t}</p></div>";
 	}
 	-->{/literal}
 	</script>
@@ -989,6 +989,7 @@ function init_waypoint_markers(aWaypoints)
 				var imageheight = aWaypoints[nearestwp].getAttribute('imageheight');
 				var wptype      = maWpWaypoints[nearestwp].getAttribute('typeid');
 				var typename    = maWpWaypoints[nearestwp].getAttribute('typename');
+				var preposition = maWpWaypoints[nearestwp].getAttribute('typepreposition');
 				var description = maWpWaypoints[nearestwp].getAttribute('description');
 
 				var maxwidth;
@@ -1002,7 +1003,7 @@ function init_waypoint_markers(aWaypoints)
 					"<div id='mapinfowindow' style='max-height:320px;" + {if $msie}" max-width:" + maxwidth + ";" +{/if} " overflow:auto'><table class='mappopup'>" +
 					"<tr><td><table cellspacing='0' cellpadding='0'><tr><td>" +
 						"<img src='" + image + "' width='" + imagewidth + "' height='" + imageheight + "' ></td>" +
-						"<td class='wppopupheader'><span style='white-space:normal'>" + typename + "</span></td><td style='vertical-align:top'></td><td class='wppopupheader'>&nbsp;{t}for{/t}" + "</span></td>" +
+						"<td class='wppopupheader'><span style='white-space:normal'>" + typename + "</span></td><td style='vertical-align:top'></td><td class='wppopupheader'>&nbsp;" + preposition + "</span></td>" +
 						"<td class='wppopupheader' style='font-weight:bold'>&nbsp;<a href='viewcache.php?wp=" + msPopupMarkerWP + "' target='_blank_'>" + msPopupMarkerWP + "</a></td>" +
 					"</tr></table></td></tr>";
 				if (description != "")
@@ -1128,7 +1129,7 @@ function parseXML_GetHTML(xmlobject)
 	if (sName.length > 60)
 		sHtml += "; white-space:normal";
 	sHtml += "'><a href='viewcache.php?wp=" + encodeURI(sWPOC) + "' target='_blank'><font size='2'>" + xmlentities(sName) + "</font></a></td><td align='right' vertical-align:'top'><font size='2'><b>&nbsp;" + xmlentities(sWPOC) + "</b></font></td></tr>";
-	sHtml += "<tr><td colspan='2' style='vertical-align:top;'>{/literal}{t escape=js}by{/t}{literal} <a href='viewprofile.php?userid=" + encodeURI(nUserId) + "' target='_blank'>" + xmlentities(sUsername) + "</a></td><td align='right'><a class='nooutline' href='articles.php?page=cacheinfo#difficulty' target='_blank'><img src='resource2/{/literal}{$opt.template.style}/images/difficulty/diff-" + String(nDifficulty*10) + ".gif' border='0' width='19' height='16' hspace='2' alt='{t}D{/t} " + nDifficulty + "' title='{t}Difficulty{/t} " + nDifficulty + "/5'{literal} /><img src='resource2/{/literal}{$opt.template.style}/images/difficulty/terr-" + String(nTerrain*10) + ".gif' border='0' width='19' height='16' hspace='2' alt='{t}T{/t} " + nTerrain + "' title='{t}Terrain{/t} " + nTerrain + "/5'{literal} /></a></td></tr>";
+	sHtml += "<tr><td colspan='2' style='vertical-align:top;'>{/literal}{t escape=js}by{/t}{literal} <a href='viewprofile.php?userid=" + encodeURI(nUserId) + "' target='_blank'>" + xmlentities(sUsername) + "</a></td><td align='right'><a class='nooutline' href='articles.php?page=cacheinfo#difficulty' target='_blank'><img src='resource2/{/literal}{$opt.template.style}/images/difficulty/diff-" + String(nDifficulty*10) + ".gif' border='0' width='19' height='16' hspace='2' alt='{t escape=js}D{/t} " + nDifficulty + "' title='{t escape=js}Difficulty{/t} " + nDifficulty + "/5'{literal} /><img src='resource2/{/literal}{$opt.template.style}/images/difficulty/terr-" + String(nTerrain*10) + ".gif' border='0' width='19' height='16' hspace='2' alt='{t escape=js}T{/t} " + nTerrain + "' title='{t escape=js}Terrain{/t} " + nTerrain + "/5'{literal} /></a></td></tr>";
 	sHtml += "<tr><td colspan='3' height='3px'></td></tr>";
 
 	sHtml += "<tr><td colspan='2'>" + xmlentities(sTypeText) + " (" + xmlentities(sSizeText) + ")</td><td align='right' rowspan='2'>" + (bOconly==1 ? "{/literal}{$help_oconly}{literal}<img src='resource2/ocstyle/images/misc/is_oconly_small.png' alt='OConly' title='OConly' /></a>" : "") + "</td></tr>";
@@ -1161,9 +1162,9 @@ function parseXML_GetHTML(xmlobject)
 		{/literal}
 		var sMsg;
 		if (oWaypoints.length > 1)
-			sMsg = "{t}The cache has %1 %2additional waypoints%3.{/t}";
+			sMsg = "{t escape=js}The cache has %1 %2additional waypoints%3.{/t}";
 		else
-			sMsg = "{t}The cache has an %2additional waypoint%3.{/t}";
+			sMsg = "{t escape=js}The cache has an %2additional waypoint%3.{/t}";
 		sMsg = sMsg.replace("%1",oWaypoints.length);
 		sMsg = sMsg.replace("%2","{$help_wps}");
 		sMsg = sMsg.replace("%3","{if $help_wps != ""}</a>{/if}");
@@ -1430,7 +1431,7 @@ function download_gpx()
 
 	if (mbDownloadEnabled == false)
 	{
-		alert({/literal}"{t}Between 1 and 500 caches must be displayed for download.{/t}"{literal});
+		alert({/literal}"{t escape=js}Between 1 and 500 caches must be displayed for download.{/t}"{literal});
 		return;
 	}
 
@@ -1500,13 +1501,13 @@ function toggle_settings()
 	{
 		{/literal}
 		// set controls to config values
-		document.getElementById('opt_menumap0').selected    = '{$opt_menumap == 0 ? "selected" : ""}';
-		document.getElementById('opt_menumap1').selected    = '{$opt_menumap == 1 ? "selected" : ""}';
-		document.getElementById('opt_overview').checked     = '{$opt_overview == 1 ? "checked" : ""}';
-		document.getElementById('opt_maxcaches').value      = '{$opt_maxcaches}';
-		document.getElementById('opt_cacheicons1').selected = '{$opt_cacheicons == 1 ? "selected":""}';
-		document.getElementById('opt_cacheicons2').selected = '{$opt_cacheicons == 2 ? "selected":""}';
-		document.getElementById('opt_pictures').value       = '{$opt_pictures}';
+		document.getElementById('opt_menumap0').selected    = "{if $opt_menumap == 0}selected{/if}";
+		document.getElementById('opt_menumap1').selected    = "{if $opt_menumap == 1}selected{/if}";
+		document.getElementById('opt_overview').checked     = "{if $opt_overview == 1}checked{/if}";
+		document.getElementById('opt_maxcaches').value      = "{$opt_maxcaches}";
+		document.getElementById('opt_cacheicons1').selected = "{if $opt_cacheicons == 1}selected{/if}";
+		document.getElementById('opt_cacheicons2').selected = "{if $opt_cacheicons == 2}selected{/if}";
+		document.getElementById('opt_pictures').value       = "{$opt_pictures}";
 
 		so.style.display = 'block';
 		{literal}
@@ -2030,7 +2031,7 @@ function toggle_attribselection(bSaveCookies)
 		{/foreach}
 	{/foreach}
 
-	tas.innerHTML = (bShow ? "{t}Less{/t}" : "{t}Show all{/t}");
+	tas.innerHTML = (bShow ? "{t escape=js}Less{/t}" : "{t escape=js}Show all{/t}");
 	if (bFullscreen)
 		document.getElementById('attribcell').style.width = (bShow ? '675px' : '600px');
 	bAllAttribs = !bAllAttribs;
@@ -2186,7 +2187,7 @@ function toggle_attribselection(bSaveCookies)
 				</form>
 			</div>
 
-			<div id="cachepicbox" class="mapboxframe mapboxshadow" style="position:absolute; {if $bFullscreen}left:4px; top:7px;{else}left:0; top:0;{/if} background:#fdfdfd; display:none; z-index:60">
+			<div id="cachepicbox" class="default mapboxframe mapboxshadow" style="position:absolute; {if $bFullscreen}left:4px; top:7px;{else}left:0; top:0;{/if} background:#fdfdfd; display:none; z-index:60">
 				<div style="position:absolute; right:-19px; top:2px; opacity:0.7">
 					<img src="resource2/ocstyle/images/misc/close-smaller.png" onclick="hide_picture()" style="cursor:pointer"/>
 				</div>

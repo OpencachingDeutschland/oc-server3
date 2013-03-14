@@ -12,13 +12,14 @@ class ChildWp_Handler
     $this->translator = new Language_Translator();
 
 		// read available types from DB
-		$rs = sql("SELECT `coordinates_type`.`id`, IFNULL(`sys_trans_text`.`text`, `coordinates_type`.`name`) AS `name`, `coordinates_type`.`image`
+		$rs = sql("SELECT `coordinates_type`.`id`, IFNULL(`trans`.`text`, `coordinates_type`.`name`) AS `name`, `coordinates_type`.`image`, IFNULL(`trans_pp`.`text`, `coordinates_type`.`preposition`) AS `preposition`
 		             FROM `coordinates_type`
-						LEFT JOIN `sys_trans_text` ON `coordinates_type`.`trans_id`=`sys_trans_text`.`trans_id` AND `sys_trans_text`.`lang`='&1'",
+						LEFT JOIN `sys_trans_text` `trans` ON `coordinates_type`.`trans_id`=`trans`.`trans_id` AND `trans`.`lang`='&1'
+						LEFT JOIN `sys_trans_text` `trans_pp` ON `coordinates_type`.`pp_trans_id`=`trans_pp`.`trans_id` AND `trans_pp`.`lang`='&1'",
 						          $opt['template']['locale']);
 		while ($r = sql_fetch_assoc($rs))
 		{
-			$type = new ChildWp_Type($r['id'], $r['name'], $r['image']);
+			$type = new ChildWp_Type($r['id'], $r['name'], $r['preposition'], $r['image']);
 			$this->childWpTypes[$type->getId()] = $type;
 		}
 		sql_free_result($rs);
@@ -69,9 +70,7 @@ class ChildWp_Handler
     $idAndNames = array();
 
     foreach ($this->childWpTypes as $type)
-    {
-      $idAndNames[$type->getId()] = $this->translator->translate($type->getName());
-    }
+      $idAndNames[$type->getId()] = $type->getName();
 
     return $idAndNames;
   }
@@ -81,9 +80,7 @@ class ChildWp_Handler
     $nameAndTypes= array();
 
     foreach ($this->childWpTypes as $type)
-    {
-      $nameAndTypes[$this->translator->translate($type->getName())] = $type->getImage();
-    }
+      $nameAndTypes[$type->getName()] = $type->getImage();
 
     return $nameAndTypes;
   }
@@ -106,7 +103,8 @@ class ChildWp_Handler
 
       if ($type)
       {
-        $ret['name'] = $this->translator->translate($type->getName());
+        $ret['name'] = $type->getName();
+        $ret['preposition'] = $type->getPreposition();
         $ret['image'] = $type->getImage();
       }
     }

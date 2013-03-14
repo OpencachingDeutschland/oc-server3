@@ -13,7 +13,7 @@
 	<p>Im Folgenden sind alle Veränderungen ab OC Version&nbsp;3.0 aufgelistet.</p>
 	<br />
 
-	<p><strong>Version 3.0.5</strong> &ndash; xx. März 2013</p>
+	<p><strong>Version 3.0.5</strong> &ndash; 16. März 2013</p>
 	<p>Karte komplett überarbeitet:</p>
 	<ul>
 		<li>Markierung von eigenen, gefundenen, nicht gefundenen und <a href="http://wiki.opencaching.de/index.php/OConly" target="_blank">OConly</a>-Caches</li>
@@ -43,9 +43,13 @@
 	<p>Sonstige Neuerungen und Änderungen:</p>
 	<ul>
 		<li>Auf den meisten Seiten gibt es nun rechts oben einen Hilfe-Knopf, der auf eine passende Seite im <a href="http://wiki.opencaching.de/" target="_blank">Opencaching-Wiki</a> verweist.</li>
+		<li>Logbild-Galerien auf der Startseite, der neuen <a href="newlogpics.php">Galerieseite</a>, in den Cachelistings (erreichbar per Link &bdquo;Logbilder&ldquo;) und in den Benutzerprofilen. Die Profil-Bildgalerien sind per <a href="mydetails.php">Profileinstellungen</a> abschaltbar.</li>
+		<li>Spoileroption für Logbilder reaktiviert (vgl. Version 3.0.2)</li>
+		<li>Titel und Spoilereinstellung von Logbildern ist nachträglich änderbar</li>
+		<li>Bilder werden in einem schicken Popup-Fenster dargestellt statt auf einer separaten Seite.</li>
 		<li>neue Wegpunkttypen <em>Pfad</em>, <em>Ziel</em> und <em>interessanter Ort</em></li>
 		<li>Bei unzustellbaren Emails erhalten Benutzer ggf. eine Aufforderung, ihre Mailadresse zu ändern oder zu bestätigen.</li>
-		<li>inaktive Caches werden in der Beobachtungsliste durchgestrichen, wie bereits in der Ignorierliste</li>
+		<li>Inaktive Caches werden in der Beobachtungsliste durchgestrichen, wie bereits in der Ignorierliste.</li>
 		<li>verbesserte Bildeinbettung in GPX-Dateien, nun alles wie im Originallisting</li>
 		<li>viele Detailverbesserungen bei Formuarlayouts</li>
 		<li>Adminliste (intern)</li>
@@ -63,7 +67,7 @@
    <p>Neu:</p>
 	 <ul>
      <li>neue Cachegröße &bdquo;nano&ldquo;</li>
-     <li><a href="http://wiki.opencaching.de/index.php/Wegpunkte#Interne.2C_zus.C3.A4tzliche_Wegpunkte" target="_blank">zusätzliche Wegpunkte</a> sind in <a href="http://wiki.opencaching.de/index.php/Wie_erhalte_ich_eine_GPX-Datei%3F" target="_blank">GPX-Dateien</a> enthalten und werden ans GPS-Gerät gesendet</li>
+     <li><a href="http://wiki.opencaching.de/index.php/Wegpunkte#Interne.2C_zus.C3.A4tzliche_Wegpunkte" target="_blank">Zusätzliche Wegpunkte</a> sind in <a href="http://wiki.opencaching.de/index.php/Wie_erhalte_ich_eine_GPX-Datei%3F" target="_blank">GPX-Dateien</a> enthalten und werden ans GPS-Gerät gesendet</li>
      <li>Bilder (inkl. Spoilerbildern) aus Cachelistings werden in GPX-Dateien eingebettet. Um sie unterwegs sehen zu können, ist eine Internetverbindung nötig.</li>
      <li><a href="articles.php?page=impressum#datalicense">Datenlizenz CC-BY-NC-ND</a></li>
      <li>Statistikbilder mit neuem Logo</a></li>

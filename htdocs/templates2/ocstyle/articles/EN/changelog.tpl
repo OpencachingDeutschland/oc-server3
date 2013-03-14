@@ -13,7 +13,7 @@
 	<p>This page lists all changes since version 3.0.</p>
 	<br />
 
-	<p><strong>Releaas 3.0.5</strong> &ndash; March xx, 2013</p>
+	<p><strong>Releaas 3.0.5</strong> &ndash; March 16, 2013</p>
 	<p>Completely reworked map:</p>
 	<ul>
 		<li>Own, found, not found and <a href="http://wiki.opencaching.de/index.php/OConly" target="_blank">OConly</a> caches are marked</li>
@@ -39,23 +39,26 @@
 		<li>internal change from Google Maps Version 2 to Version 3; <span class="redtext">somewhat sluggish in Microsoft Internet Explorer, we recommend to use another browser</span></li>
 	</ul>
 
-	<p>Sonstige Neuerungen und Änderungen:</p>
+	<p>Other new features and changes:</p>
 	<ul>
-		<li>Auf den meisten Seiten gibt es nun rechts oben einen Hilfe-Knopf, der auf eine passende Seite im <a href="http://wiki.opencaching.de/" target="_blank">Opencaching-Wiki</a> verweist.</li>
-		<li>neue Wegpunkttypen <em>Pfad</em>, <em>Ziel</em> und <em>interessanter Ort</em></li>
-		<li>Bei unzustellbaren Emails erhalten Benutzer ggf. eine Aufforderung, ihre Mailadresse zu ändern oder zu bestätigen.</li>
-		<li>inaktive Caches werden in der Beobachtungsliste durchgestrichen, wie bereits in der Ignorierliste</li>
-		<li>verbesserte Bildeinbettung in GPX-Dateien, nun alles wie im Originallisting</li>
-		<li>viele Detailverbesserungen bei Formuarlayouts</li>
-		<li>Adminliste (intern)</li>
+		<li>Log picture galleries on the start page, the new <a href="newlogpics.php">gallery page</a>, in cache listings (via link "log pictures") and in user profiles. The profile galleries can be disabled via <a href="mydetails.php">profile settings.</a></li>
+		<li>re-added spoiler option for log pics (see rev. 3.0.2)disab
+		<li>title and spoiler settings of log pictures can be changed</li>
+		<li>pictures are displayed within a nice popup window instead of a separate pagewill be disp</li>				led spoiler</li>		via the us		
+		<li>new waypoint types <em>path</em>, <em>final</em> and <em>point of interest</em></li>
+		<li>After emails could not be delivert, users may be prompted to confirm or change their email address.</li>
+		<li>inactive caches are striked out in the <a href="mywatches.php">"watch list</a>, like it was already the case in the ignore list.</li>
+		<li>improved picture embedding in GPX files, should be identical now with listing display</li>
+		<li>many detail improvements of form layouts</li>
+		<li>admin list (internal)</li>
 	</ul>
 
-	<p>Korrigiert (Bugfixes):</p>
+	<p>Fixed:</p>
 	<ul>
-		<li>Handhabung von Nano-Caches bei gespeicherten Suchen korrigiert</li>
-		<li>Javascript-Warnung beim Loggen auf der italenischen Seite beseitigt</li>
-		<li>dänische Flagge bei dänischen Cachebeschreibungen</li>
-		<li>Suchprobleme nach Logout behoben</li>
+		<li>fixed handling of nano caches with saved searches</li>
+		<li>removed JavaScript warning when logging on the Italien page</li>
+		<li>show Danish flag with Danish cache descriptions</li>
+		<li>fixed search problems after logging out</li>
 	</ul>
 
 	 <p><strong>Release  3.0.4</strong> &ndash; February 17, 2013

@@ -1222,8 +1222,6 @@ function load_cache_pic(xmlobject)
 			imagebox.removeChild(document.getElementById('cachepic'))	;
 
 			var img = document.createElement("img");
-			img.onclick = "enlarge(this)";
-			img.className = "viewcache-thumbimg";
 			img.id = "cachepic";
 			img.onload = function() { show_picture(1000); }
 			imagebox.appendChild(img);

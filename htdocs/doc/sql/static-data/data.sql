@@ -563,6 +563,8 @@ INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('viewprofile'
 INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('additional_waypoints', 'DE', 'Zusätzliche Wegpunkte');
 INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('usernote', 'DE', 'Persönliche Notiz');
 INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('previewpics', 'DE', 'Vorschaubilder');
+INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('newlogpics', 'DE', 'Logbild-Galerien');
+INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('viewprofile_pics', 'DE', 'Logbild-Galerien');
 
 -- Table languages
 SET NAMES 'utf8';

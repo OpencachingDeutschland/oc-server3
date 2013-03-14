@@ -6,30 +6,32 @@ version 3 of the License, or (at your option) any later version. See LICENSE.TXT
 for details. */
 
 // modify these
-var enl_gifpath='./files/'; // path to graphics
-var enl_brdsize=12;    // border thickness (5-30)
-var enl_brdcolor='';   // border color (white if empty)
+var enl_gifpath='./resource2/ocstyle/js/enlargeit/'; // path to graphics
+var enl_brdsize=6;    // border thickness (5-30)
+var enl_brdcolor='#000';   // border color (white if empty)
 var enl_brdbck='';     // border background pic, '' for no pic
-var enl_brdround=1;    // use rounded borders (Mozilla/Safari only)
-var enl_maxstep=18;    // ani steps (10-30)
-var enl_speed=12;      // time between steps
-var enl_ani=5;         // 0=no,1=fade,2=glide,3=bumpglide,4=smoothglide,5=expglide
-var enl_opaglide=0;    // glide transparency
+var enl_brdround=0;    // use rounded borders (Mozilla/Safari only)
+var enl_maxstep=6;     // ani steps (10-30)
+  // Speed of ani steps ist very dependend on the machine and browser. 
+  // Must be kept relatively slow to be bearable in slow environments.
+var enl_speed=5;       // time between steps
+var enl_ani=2;         // 0=no,1=fade,2=glide,3=bumpglide,4=smoothglide,5=expglide
+var enl_opaglide=1;    // glide transparency
 var enl_shadow=1;      // shadow under border
 var enl_shadowsize=1;  // size of shadow right/bottom (0-20)
 var enl_shadowcolor='';// shadow color (empty: black)
-var enl_shadowintens=9;// shadow intensity (5-30)
-var enl_dark=1;        // darken screen (0=off/1=on/2=keep dark when nav)
-var enl_darkprct=20;   // how dark the screen should be (0-100)
-var enl_darksteps=9;   // how long darkening should take
-var enl_center=1;      // center enlarged pic on screen
+var enl_shadowintens=15;// shadow intensity (5-30)
+var enl_dark=2;        // darken screen (0=off/1=on/2=keep dark when nav)
+var enl_darkprct=30;   // how dark the screen should be (0-100)
+var enl_darksteps=2;   // how long darkening should take
+var enl_center=0;      // center enlarged pic on screen
 var enl_drgdrop=1;     // enable drag&drop for pics
-var enl_preload=1;     // preload next/prev pic
+var enl_preload=0;     // preload next/prev pic
 var enl_titlebar=1;    // show pic title bar
 var enl_keynav=1;      // key navigation
 var enl_wheelnav=1;    // mouse wheel navigation
-var enl_titletxtcol='';// color of title bar text (empty: dark grey)
-var enl_ajaxcolor='';  // background color for AJAX (empty: light grey)
+var enl_titletxtcol='#ddd';// color of title bar text (empty: dark grey)
+var enl_ajaxcolor='#000';  // background color for AJAX (empty: light grey)
 var enl_usecounter=0;  // hidden call of counter page
 var enl_counterurl=''; // base URL of counter page
 var enl_btnact='bact.png';               // active buttons
@@ -41,8 +43,16 @@ var enl_canceltext='Click to cancel';    // tooltip to cancel loading
 
 // don't modify next line
 var enl_buttonurl = new Array(),enl_buttontxt = new Array(),enl_buttonoff = new Array();
-
 // define your buttons here
+enl_buttonurl[0] = 'prev';
+enl_buttontxt[0] = '';
+enl_buttonoff[0] = -180;
+enl_buttonurl[1] = 'next';
+enl_buttontxt[1] = '';
+enl_buttonoff[1] = -198;
+enl_buttonurl[2] = 'close';
+enl_buttontxt[2] = '';
+enl_buttonoff[2] = -126;
 
 // stuff to leave alone
 
@@ -274,6 +284,7 @@ function enl_makedraggable(enl_imgid)
 {
   enl_infront = enl_imgid;
   enl_img = enl_geto(enl_imgid);
+  if (enl_img.issmaller == 1 && enl_isie) enl_img.style.msInterpolationMode = 'bicubic';
   enl_orig = enl_geto(enl_img.orig);
   enl_setcur(enl_orig,'','default','default');
   if (enl_drgdrop)
@@ -539,6 +550,7 @@ function enl_doenlarge(enl_imgid)
   if (typeof cpgif_conf_reflection_p == 'number' && enl_geto(enl_img.orig).className == "imgflowimg") enl_img.oldh = parseInt(enl_r.height / (1+cpgif_conf_reflection_p));
   else enl_img.oldh = enl_r.height;
   enl_img.oldw = enl_r.width;
+  enl_img.issmaller = 0;
   if (enl_img.oldw+enl_img.oldl > enl_brwsx-20) enl_img.oldl = enl_brwsx-enl_img.oldw-20;
   if (enl_img.ispic) {
     enl_img.neww = parseInt(enl_prldimg[enl_prldcnt].width);
@@ -552,10 +564,12 @@ function enl_doenlarge(enl_imgid)
   if (enl_img.neww > enl_brwsx-100) {
       enl_img.newh = Math.round(enl_img.newh * (enl_brwsx-100) / enl_img.neww);
       enl_img.neww = enl_brwsx-100;
+      enl_img.issmaller = 1;
   }
   if (enl_img.newh > enl_brwsy-80)  {
       enl_img.neww = Math.round(enl_img.neww * (enl_brwsy-80) / enl_img.newh);
       enl_img.newh = enl_brwsy-80;
+      enl_img.issmaller = 1;
   }
   enl_img.newl = Math.round(enl_img.oldl - (enl_img.neww-enl_img.oldw)/2);
   enl_img.newt = Math.round(enl_img.oldt - (enl_img.newh-enl_img.oldh)/2);
@@ -575,8 +589,16 @@ function enl_doenlarge(enl_imgid)
   enl_img.thumbpic = enl_img.src;
   if (enl_titlebar) enl_mktitlebar(enl_imgid);
   if (!enl_ani || !enl_img.ispic ) enl_donoani(enl_imgid);
-  else if (enl_ani==1) setTimeout('enl_dofadein("'+enl_imgid+'")' ,50);
-  else setTimeout('enl_doglidein("'+enl_imgid+'")' ,50);
+  else
+  {
+    if (enl_dark)
+    {
+      enl_infront = enl_imgid;
+      setTimeout('enl_darken()', enl_speed*4);
+    }
+    if (enl_ani==1) setTimeout('enl_dofadein("'+enl_imgid+'")' ,50);
+    else setTimeout('enl_doglidein("'+enl_imgid+'")' ,50);
+  }
 }
 
 // show pic without animation
@@ -641,6 +663,7 @@ function enl_shrink(enl_imgid)
   enl_infront = '';
   enl_ctlslid(0);
   enl_img = enl_geto(enl_imgid);
+  if (enl_img.issmaller == 1 && enl_isie) enl_img.style.msInterpolationMode = 'nearest-neighbor';
   enl_setcur(enl_img,'','pointer','hand');
   enl_noevents(enl_img);
   enl_orig = enl_geto(enl_img.orig);
@@ -751,7 +774,8 @@ function enl_doglidein(enl_imgid)
       enl_img.style.filter = '';
     }
     setTimeout('enl_mkborder("'+enl_imgid+'")' ,enl_speed);
-    if (enl_dark) setTimeout('enl_darken()', enl_speed*4);
+    // if (enl_dark) setTimeout('enl_darken()', enl_speed*4);
+    // moved before function call to darken first
     setTimeout('enl_makedraggable("'+enl_imgid+'")' ,enl_speed*3);
     if (enl_titlebar) setTimeout('enl_showbtn("'+enl_imgid+'")' ,enl_speed*2);
   }
@@ -818,7 +842,8 @@ function enl_dofadein(enl_imgid)
     enl_mkborder(enl_imgid);
     if (enl_titlebar) enl_showbtn(enl_imgid);
     setTimeout('enl_makedraggable("'+enl_imgid+'")' ,30);
-    if (enl_dark) setTimeout('enl_darken()', 100);
+    // if (enl_dark) setTimeout('enl_darken()', 100);
+    // moved before function call to darken first
   }
   else
   {

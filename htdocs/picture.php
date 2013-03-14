@@ -159,7 +159,7 @@
 				if ($picture->isVisibleOnCachePage())
 					$redirect .= "#logentries";
 				else
-					$redirect = "viewlogs.php?logid=" . urlencode($picture->getLogId());
+					$redirect = "viewlogs.php?cacheid=" . urlencode($picture->getCacheId()) . "#log" . $picture->getLogId();
 		}
 
 		if ($picture->allowEdit() == false)

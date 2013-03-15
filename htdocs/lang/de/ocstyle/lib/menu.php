@@ -164,13 +164,6 @@ $menu = array(
 						'siteid' => 'articles/cacheinfo'
 					),
 					array(
-						'title' => t('HTML preview'),
-						'menustring' => t('HTML preview'),
-						'visible' => true,
-						'filename' => 'htmlprev.php',
-						'siteid' => 'htmlprev'
-					),
-					array(
 						'title' => t('HTML Tags'),
 						'menustring' => t('HTML Tags'),
 						'visible' => true,

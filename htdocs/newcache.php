@@ -725,7 +725,6 @@
 				}
 
 				//html-desc?
-				$desc_html_not_ok = false;
 				if ($descMode != 1)
 				{
           // Filter Input
@@ -733,14 +732,6 @@
           $desc = $purifier->purify($desc);
 
 					tpl_set_var('desc', htmlspecialchars($desc, ENT_COMPAT, 'UTF-8'));
-
-				  $desc_html_not_ok = false;
-
-					if ($desc_html_not_ok == true)
-					{
-						tpl_set_var('desc_message', mb_ereg_replace('%text%', $errmsg, $html_desc_errbox));
-						$error = true;
-					}
 				}
 
 				//cache-size
@@ -778,7 +769,7 @@
 				}
 
 				//no errors?
-				if (!($tos_not_ok || $name_not_ok || $hidden_date_not_ok || $activation_date_not_ok || $lon_not_ok || $lat_not_ok || $desc_html_not_ok || $time_not_ok || $way_length_not_ok || $size_not_ok || $type_not_ok || $diff_not_ok))
+				if (!($tos_not_ok || $name_not_ok || $hidden_date_not_ok || $activation_date_not_ok || $lon_not_ok || $lat_not_ok || $time_not_ok || $way_length_not_ok || $size_not_ok || $type_not_ok || $diff_not_ok))
 				{
 					//sel_status
 					$now = getdate();

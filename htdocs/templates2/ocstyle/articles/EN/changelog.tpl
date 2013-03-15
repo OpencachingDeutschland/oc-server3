@@ -51,6 +51,7 @@
 		<li>improved picture embedding in GPX files, should be identical now with listing display</li>
 		<li>many detail improvements of form layouts</li>
 		<li>admin list (internal)</li>
+		<li>discarded old HTML preview function</li>
 	</ul>
 
 	<p>Fixed:</p>

@@ -53,6 +53,7 @@
 		<li>verbesserte Bildeinbettung in GPX-Dateien, nun alles wie im Originallisting</li>
 		<li>viele Detailverbesserungen bei Formuarlayouts</li>
 		<li>Adminliste (intern)</li>
+		<li>alte HTML-Vorschaufunktion entsorgt</li>
 	</ul>
 
 	<p>Korrigiert (Bugfixes):</p>

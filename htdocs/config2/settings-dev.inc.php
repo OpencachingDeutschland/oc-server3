@@ -48,35 +48,6 @@
 	$opt['db']['error']['mail'] = 'root';
 	$opt['db']['error']['subject'] = 'sql_error';
 
-	/* cookie or session
-	 *
-	 * SAVE_COOKIE            = only use cookies
-	 * SAVE_SESSION           = use php sessions
-	 *
-	 * to use SESSIONS set php.ini to session default values:
-	 *
-	 * session.auto_start = 0
-	 * session.use_cookies = 1
-	 * session.use_only_cookies = 0
-	 * session.cookie_lifetime = 0
-	 * session.cookie_path = "/"
-	 * session.cookie_domain = ""
-	 * session.cookie_secure = off
-	 * session.use_trans_sid = 0
-	 * 
-	 * other parameters may be customized
-	 */
-	$opt['session']['mode'] = SAVE_COOKIE;
-	$opt['session']['cookiename'] = 'oc_devel'; // only with SAVE_COOKIE
-	$opt['session']['path'] = '/';
-	$opt['session']['domain'] = '';    // may be overwritten by $opt['domain'][...]['cookiedomain']
-
-	/* If the Referer was sent by the client and the substring was not found,
-	 * the embedded session id will be marked as invalid.
-	 * Only used with session.mode = SAVE_SESSION
-	 */
-	$opt['session']['check_referer'] = true;
-
 	/* Debug level (combine with OR | )
 	 *  DEBUG_NO              = productive use
 	 *  DEBUG_DEVELOPER       = developer system
@@ -97,6 +68,10 @@
 	$opt['logic']['node']['id'] = 4;
   $opt['logic']['waypoint_pool']['prefix'] = 'OC';
   
+	/* cachemaps
+	*/
+	$opt['logic']['cachemaps']['url'] = 'http://maps.google.com/maps/api/staticmap?center={latitude},{longitude}&zoom={userzoom}&size=200x200&maptype=hybrid&markers=color:blue|label:|{latitude},{longitude}&sensor=false';
+
 	/* other template options
 	 *
 	 */
@@ -109,25 +84,6 @@
 	$opt['logic']['pictures']['dir'] = $dev_basepath . $dev_codepath . 'htdocs/images/uploads';
 	$opt['logic']['pictures']['url'] = $opt['page']['absolute_url'] . '/images/uploads';
 	$opt['logic']['pictures']['thumb_url'] = $opt['logic']['pictures']['url'] . '/thumbs';
-
-	/* maps
-	 */
-	$opt['logic']['cachemaps']['wmsurl'] = 'http://www.opencaching.de/cachemaps.php?wp={wp_oc}';
-	$opt['map']['disablefullscreen'] = false;
-
-	/* cachemaps (new)
-	* how to display the cache map on viewcache.php (200x200 pixel)
-	*
-	* option 1) via <img> tag (e.g. google maps)
-	*        2) via <iframe> tag (e.g. own mapserver)
-	*
-	* placeholders:
-	* {userzoom} = user zoomlevel (see myprofile.php)
-	* {latitude} = latitude of the cache
-	* {longitude} = longitude of the cache
-	*/
-	$opt['logic']['cachemaps']['url'] = 'http://maps.google.com/maps/api/staticmap?center={latitude},{longitude}&zoom={userzoom}&size=200x200&markers=color:blue|label:|{latitude},{longitude}&sensor=false';  // &key={gmkey}
-	$opt['logic']['cachemaps']['iframe'] = false;
 
  	/* E-Mail for notification about news (newstopic.php)
  	 */
@@ -146,8 +102,6 @@
 	$opt['lib']['garmin']['domain'] = 'local.opencaching.de';
 	$opt['lib']['garmin']['url'] = 'http://local.opencaching.de/';
 	$opt['lib']['garmin']['redirect'] = $opt['lib']['garmin']['url'] . 'garmin.php?redirect=1&cacheid={cacheid}';
-
-	$opt['template']['default']['style'] = 'ocstyle';
 
 	$opt['bin']['cs2cs'] = '/var/www/bin/cs2cs';
 	

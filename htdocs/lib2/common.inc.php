@@ -225,7 +225,7 @@ function set_timezone()
 {
 	global $opt;
 	
-	date_default_timezone_set($opt['locale'][$opt['template']['locale']]['timezone']);
+	date_default_timezone_set($opt['php']['timezone']);
 }
 
 function fix_magic_quotes_gpc()

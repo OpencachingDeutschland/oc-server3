@@ -4,36 +4,25 @@
  *
  *  Unicode Reminder メモ
  *
- *  All settings to run the website.
+ *  Sample of settings.inc.php - all lib2 settings needed to run the website.
+ *  In addition to this, you must create settings.inc.php files from 
+ *  .dist files at the following places:
+ *
+ *    lib
+ *    util/mysql_root
+ *    util/notifications
+ *    util/publish_caches
+ *    util/watchlist
+ *
  ***************************************************************************/
 
 	/* PHP settings
-	 *
-	 * PHP_DEBUG_SKIP
-	 *
-	 *  dont use ini_set()
-	 *
-	 * PHP_DEBUG_OFF
-	 *
-	 *  use the following php.ini-settings
-	 *    display_errors = On
-	 *    error_reporting = E_ALL & ~E_NOTICE
-	 *    mysql.trace_mode = Off
-	 *
-	 *  strongly recommended settings
-	 *    register_globals = Off
-	 *
-	 * PHP_DEBUG_ON 
-	 *
-	 *  use the following php.ini-settings
-	 *    display_errors = On
-	 *    error_reporting = E_ALL
-	 *    mysql.trace_mode = On
+	 * see settings-dist.inc.php for explanation
 	 */
 	$opt['php']['debug'] = PHP_DEBUG_ON;
+	$opt['php']['timezone'] = 'Europe/Berlin';
 
-	/* settings for the template engine
-	 *
+	/* database settings
 	 */
 	$opt['db']['servername'] = 'localhost';
 	$opt['db']['username'] = '<db>';
@@ -50,10 +39,10 @@
 	$opt['db']['error']['mail'] = '<admin email>';
 	$opt['db']['error']['subject'] = 'sql_error';
 
-	// database placeholder
+	// database names
 	$opt['db']['placeholder']['db'] = 'ocde';
 	$opt['db']['placeholder']['tmpdb'] = 'ocdetmp';
-	$opt['db']['placeholder']['hist'] = 'ocdehist';
+	$opt['db']['placeholder']['hist'] = 'ocde';
 
 	/* cookie or session
 	 *
@@ -70,13 +59,14 @@
 	 * session.cookie_domain = ""
 	 * session.cookie_secure = off
 	 * session.use_trans_sid = 0
+	 *
+	 * set session.safe_path to a secure place
 	 * 
 	 * other parameters may be customized
 	 */
 	$opt['session']['mode'] = SAVE_COOKIE;
-	$opt['session']['cookiename'] = '<cookiename>'; // only with SAVE_COOKIE
-	$opt['session']['path'] = '/';
-	$opt['session']['domain'] = '';    // may be overwritten by $opt['domain'][...]['cookiedomain']
+	$opt['session']['cookiename'] = '<cookiename>';   // e.g. 'ocde'
+	$opt['session']['domain'] = '<do.main>';  // may be overwritten by $opt['domain'][...]['cookiedomain']
 
 	/* If the Referer was sent by the client and the substring was not found,
 	 * the embedded session id will be marked as invalid.
@@ -102,8 +92,10 @@
 	/* other template options
 	 *
 	 */
+	$opt['page']['name'] = 'Geocaching mit Opencaching';
 	$opt['page']['absolute_url'] = 'http://<domain>';
 	$opt['mail']['from'] = '<admin email>';
+	$opt['page']['max_logins_per_hour'] = 250;
 
 	/* location of uploaded images
 	 */
@@ -115,10 +107,6 @@
 	 */
 	$opt['logic']['podcasts']['url'] = 'http://<domain>/podcasts/uploads';
 
-	/* cachemaps
-	 */
-	$opt['logic']['cachemaps']['wmsurl'] = 'http://www.opencaching.de/cachemaps.php?wp={wp_oc}';
-
 	/* password authentication method
 	 * (true means extra hash on the digested password)
 	 */
@@ -129,6 +117,23 @@
  	$opt['news']['mail'] = '<admin email>';
  	$opt['mail']['subject'] = '[<domain>] ';
 
+	/* pregenerated waypoint list for new caches
+	 * - Waypoint prefix (OC, OP, OZ ... AA=local development)
+	 * - When pool contains less than min_count, generation process starts
+	 *   and fills up the pool until max_count is reached.
+	 */
+	$opt['logic']['waypoint_pool']['prefix'] = 'AA';
+	$opt['logic']['waypoint_pool']['min_count'] = 1000;
+	$opt['logic']['waypoint_pool']['max_count'] = 2000;
+	// chars used for waypoints. Remember to reinstall triggers and clear cache_waypoint_pool after changing
+	$opt['logic']['waypoint_pool']['valid_chars'] = '0123456789ABCDEF';
+	// fill_gaps = true: search for gaps between used waypoints and fill up these gaps
+	//                   (fill_gaps is slow and CPU intensive on database server. For
+	//                    productive servers you may want to generate some waypoints
+	//                    without fill_gaps first)
+	// fill_gaps = false: continue with the last waypoint
+	$opt['logic']['waypoint_pool']['fill_gaps'] = false;
+
  	/* 3rd party library options
  	 * see https://my.garmin.com/api/communicator/key-generator.jsp
  	 */
@@ -137,8 +142,19 @@
 
 	$opt['logic']['node']['id'] = 4;
 
-	$opt['logic']['theme'] = 'seasons'; // leave blank to disable theme
-	$opt['logic']['lowresfriendly'] = false;
+	// Google Maps API key
+	// http://code.google.com/intl/de/apis/maps/signup.html
+	// $opt['lib']['google']['mapkey']['<domain>'] = 'EEFFGGHH...';
+
+	// email address for user contact emails
+	// has to be an autoresponder informing about wrong mail usage
+	$opt['mail']['usermail'] = 'usermail@opencaching.de';
+
+	// contact address
+	$opt['mail']['contact'] = 'contact@opencaching.de';
+
+	$opt['page']['showdonations'] = true;
+
 
 function post_config()
 {

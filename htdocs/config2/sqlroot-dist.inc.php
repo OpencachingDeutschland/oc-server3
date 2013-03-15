@@ -13,6 +13,9 @@
  *
  *  Default settings for all options in sqlroot.inc.php
  *  Do not modify this file - use settings.inc.php!
+ *
+ *  This is currently needed only for 'reset IDs' function in translate.php
+ *  (via sql_connect_root in lib2/db.inc.php).
  ***************************************************************************/
 
 	if ($opt['debug'] == DEBUG_NO)

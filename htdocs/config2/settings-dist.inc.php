@@ -34,10 +34,7 @@
 	 *    mysql.trace_mode = On
 	 */
 	$opt['php']['debug'] = PHP_DEBUG_SKIP;
-
-	/* settings for the template engine
-	 *
-	 */
+	$opt['php']['timezone'] = 'Europe/Berlin';
 
 	// database connection
 	
@@ -500,10 +497,6 @@
 			// ... selectable by user:
 	$opt['map']['min_maxrecords'] = 100;
 	$opt['map']['max_maxrecords'] = 4000;
-
-	// the full screen mode requires a GIS server at the moment
-	// has to be migrated to map2.php
-	// $opt['map']['disablefullscreen'] = true;   no longer used
 
  	/* external binaries
  	 */

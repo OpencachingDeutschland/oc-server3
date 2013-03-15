@@ -20,7 +20,7 @@
 			<p style="line-height: 1.6em; color: green; font-weight: bold;">{t}User status was successfully changed.{/t}</p>		
 		{/if}
 		
-		<p style="line-height: 1.6em;"><input type="submit" name="find" value="{t}Submit{/t}" class="formbutton" onclick="javascript:submitbutton('find')" /></p>
+		<p style="line-height: 1.6em;"><input type="submit" name="find" value="{t}Submit{/t}" class="formbutton" onclick="submitbutton('find')" /></p>
 		
 </form>
 
@@ -138,7 +138,7 @@
 
 				<tr>
 					<td>&nbsp;</td>
-					<td><input type="submit" name="execute" value="{t}Submit{/t}" class="formbutton" onclick="javascript:submitbutton('execute')" /></td>
+					<td><input type="submit" name="execute" value="{t}Submit{/t}" class="formbutton" onclick="submitbutton('execute')" /></td>
 				</tr>
 {*			{/if} *}
 		</table>

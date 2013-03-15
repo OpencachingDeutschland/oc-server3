@@ -83,7 +83,7 @@
 			<tr>
 				<td>&nbsp;</td>
 				<td colspan="2">
-					<input type="submit" value="{t}Submit{/t}" class="formbutton" onclick="javascript:submitbutton('submit')" />
+					<input type="submit" value="{t}Submit{/t}" class="formbutton" onclick="submitbutton('submit')" />
 				</td>
 			</tr>
 		</table>

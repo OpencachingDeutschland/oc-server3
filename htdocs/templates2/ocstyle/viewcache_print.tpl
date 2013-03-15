@@ -41,7 +41,7 @@
 						{/if}
 		
 						{if $cache.type==6}
-							<a href="#" onClick="javascript:window.open('event_attendance.php?id={$cache.cacheid}&popup=y','{t escape=js}List of participants{/t}','width=320,height=440,resizable=no,scrollbars=1')">{t}List of participants{/t}</a>
+							<a href="#" onclick="window.open('event_attendance.php?id={$cache.cacheid}&popup=y','{t escape=js}List of participants{/t}','width=320,height=440,resizable=no,scrollbars=1')">{t}List of participants{/t}</a>
 						{/if}
 					</td>
 					<td valign="top" nowrap="1" width="140" style="text-align:right">
@@ -78,7 +78,7 @@
 					<td valign="top">
 						<img src="resource2/{$opt.template.style}/images/description/22x22-location.png"  width="22" height="22" border="0" alt="" title="" align="left">
 						<font size="3"><b><nobr>{$coordinates.lat|escape}</nobr> <nobr>{$coordinates.lon|escape}</nobr></b></font> <font size="1">(WGS84)</font><br />
-						<font size="1"><a href="#" onClick="javascript:window.open('coordinates.php?lat={$cache.latitude}&lon={$cache.longitude}&popup=y&wp={$cache.wpoc}','{t escape=js}Coordinates{/t}','width=280,height=394,resizable=no,scrollbars=0')">{t}Convert coordinates{/t}</a></font><br />
+						<font size="1"><a href="#" onclick="window.open('coordinates.php?lat={$cache.latitude}&lon={$cache.longitude}&popup=y&wp={$cache.wpoc}','{t escape=js}Coordinates{/t}','width=280,height=394,resizable=no,scrollbars=0')">{t}Convert coordinates{/t}</a></font><br />
 						{t}Size{/t}: {$cache.sizeName|escape}<br />
 						{if $cache.searchtime>0}
 							<nobr>{t}Time required{/t}: {$cache.searchtime|format_hour} h</nobr>

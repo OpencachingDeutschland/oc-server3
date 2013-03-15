@@ -91,7 +91,7 @@
 							{/foreach}
 						</select>
 						{if $showAllCountries==false}
-							&nbsp;&nbsp;<input type="submit" name="showAllCountriesSubmit" value="{t}Show all{/t}" class="formbutton" onclick="javascript:submitbutton('showAllCountriesSubmit')" />
+							&nbsp;&nbsp;<input type="submit" name="showAllCountriesSubmit" value="{t}Show all{/t}" class="formbutton" onclick="submitbutton('showAllCountriesSubmit')" />
 						{/if}
 						{if $countryError==true}
 							<span class="errormsg">{t}The country is not valid.{/t}</span>
@@ -222,8 +222,8 @@
 				<tr><td class="spacer" colspan="2">&nbsp;</td></tr>
 				<tr>
 					<td class="header-small" colspan="2">
-						<input type="submit" name="cancel" value="{t}Cancel{/t}" class="formbutton" onclick="javascript:flashbutton('cancel')" />&nbsp;&nbsp;
-						<input type="submit" name="save" value="{t}Submit{/t}" class="formbutton" onclick="javascript:submitbutton('save')" />
+						<input type="submit" name="cancel" value="{t}Cancel{/t}" class="formbutton" onclick="flashbutton('cancel')" />&nbsp;&nbsp;
+						<input type="submit" name="save" value="{t}Submit{/t}" class="formbutton" onclick="submitbutton('save')" />
 					</td>
 				</tr>
 			{/if}

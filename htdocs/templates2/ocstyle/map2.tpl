@@ -2092,16 +2092,16 @@ function toggle_attribselection(bSaveCookies)
 				<td rowspan="2" class="mapheader_spacer"></td>
 
 				{* search bar and button *}
-				<td rowspan="2"><input type="text" id="mapsearch" style="margin-right:5px" value="" onfocus="javascript:mapsearch_onfocus()" onblur="javascript:mapsearch_onblur()" class="searchfield{if $bFullscreen}_fullscreen{/if}" size="{if $bFullscreen}40{else}50{/if}" /></td><td rowspan="2"><input type="button" id="mapsubmit" name="mapsubmit" value="&nbsp;&nbsp;{t}Search{/t}&nbsp;&nbsp;" class="formbutton" style="width:auto; font-size:{if $bFullscreen}11px{else}12px{/if}" onclick="mapsearch_click()" /></td>
+				<td rowspan="2"><input type="text" id="mapsearch" style="margin-right:5px" value="" onfocus="mapsearch_onfocus()" onblur="mapsearch_onblur()" class="searchfield{if $bFullscreen}_fullscreen{/if}" size="{if $bFullscreen}40{else}50{/if}" /></td><td rowspan="2"><input type="button" id="mapsubmit" name="mapsubmit" value="&nbsp;&nbsp;{t}Search{/t}&nbsp;&nbsp;" class="formbutton" style="width:auto; font-size:{if $bFullscreen}11px{else}12px{/if}" onclick="mapsearch_click()" /></td>
 				<td rowspan="2" class="mapheader_spacer"></td>
 
 				{* home button *}
 				{if $nUserLat != 0 || $nUserLon != 0 }
-					<td rowspan="2"><a class="jslink" onclick="javascript:center_home()"><img id="center_home_img" style="margin-left:5px; margin-right:5px" src="resource2/{$opt.template.style}/images/misc/32x32-home.png" alt="{t}Go to home coordinates{/t}" title="{t}Go to home coordinates{/t}" /></a></td>
+					<td rowspan="2"><a class="jslink" onclick="center_home()"><img id="center_home_img" style="margin-left:5px; margin-right:5px" src="resource2/{$opt.template.style}/images/misc/32x32-home.png" alt="{t}Go to home coordinates{/t}" title="{t}Go to home coordinates{/t}" /></a></td>
 				{/if}
 
 				{* GPX download button *}
-				<td rowspan="2"><a class="jslink" onclick="javascript:download_gpx()"><img id="download_gpx_img" src="resource2/{$opt.template.style}/images/map/35x35-gpx-download.png" style="margin-left:5px; margin-right:5px" height="35" width="35" alt="{t}Download GPX file (max. 500 caches){/t}" title="{t}Download GPX file (max. 500 caches){/t}"/></a></td>
+				<td rowspan="2"><a class="jslink" onclick="download_gpx()"><img id="download_gpx_img" src="resource2/{$opt.template.style}/images/map/35x35-gpx-download.png" style="margin-left:5px; margin-right:5px" height="35" width="35" alt="{t}Download GPX file (max. 500 caches){/t}" title="{t}Download GPX file (max. 500 caches){/t}"/></a></td>
 
 				{* permalink button *}
 				<td rowspan="2"><a class="jslink" onclick="showPermlinkBox_click()"><img src="resource2/{$opt.template.style}/images/map/35x35-star.png" style="margin-left:3px; margin-right:1px" height="35" width="35" alt="{t}Show link to this map{/t}" title="{t}Show link to this map{/t}" /></a></td>
@@ -2142,7 +2142,7 @@ function toggle_attribselection(bSaveCookies)
 		<table>
 			<tr><td><img src="resource2/ocstyle/images/viewcache/link.png" alt="" height="16" width="16" /> {t}Link to this map view{/t}:</td><td align="right"><a href="javascript:permalinkbox_hide()"><img src="resource2/ocstyle/images/misc/close-medium.png" style="opacity:0.7" ></a></td></tr>
 			<tr><td><input id="permalink_text" type="text" value="" size="55"/></td></tr>
-			<tr id="permalink_addFavorites"><td align="right"><input type="button" value="{t}Add to favorites...{/t}" onclick="javascript:addFavorites_click()" /></td></tr>
+			<tr id="permalink_addFavorites"><td align="right"><input type="button" value="{t}Add to favorites...{/t}" onclick="addFavorites_click()" /></td></tr>
 		</table>
 	</div>
 	{if $bFullscreen}
@@ -2237,7 +2237,7 @@ function toggle_attribselection(bSaveCookies)
 		{* frame for all sidebare contents: *}
 		<div class="mapboxframe mapboxshadow" style="position:absolute; top: 80px; right:0px; margin: 0px; padding: 4px; background:#fff; opacity: .9; z-index:2">
 			{* sidebar hidden: '<' icon to open *}
-			<a class="jslink nofocus" onclick="javascript:toggle_sidebar(true);" id='sidebar-toggle' style="width: 32px; height: 32px"><img id="sidbar-toggle-img" src="resource2/{$opt.template.style}/images/map/32x32-left.png"></a>
+			<a class="jslink nofocus" onclick="toggle_sidebar(true);" id='sidebar-toggle' style="width: 32px; height: 32px"><img id="sidbar-toggle-img" src="resource2/{$opt.template.style}/images/map/32x32-left.png"></a>
 			{* sidebar visible: filter options table & '>' icon to close *}
 			<div id="sidebar" style="display:none; overflow:auto">
 
@@ -2249,7 +2249,7 @@ function toggle_attribselection(bSaveCookies)
 			<tr>
 				<td style="width:3px"></td>
 				<td id="filterboxtitle" class="content-title-noshade-size1">{t}Only show Geocaches with the following properties:{/t}</td>
-				<td align="right""><a class="jslink" onclick="javascript:toggle_sidebar(true);"><img src="resource2/ocstyle/images/map/32x32-right.png"></a></td>
+				<td align="right""><a class="jslink" onclick="toggle_sidebar(true);"><img src="resource2/ocstyle/images/map/32x32-right.png"></a></td>
 			</tr>
 		</table>
 	{else}

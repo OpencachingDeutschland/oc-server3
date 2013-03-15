@@ -86,8 +86,8 @@
 
 			<tr>
 				<td class="header-small" colspan="2">
-					<input type="reset" name="cancel" value="{t}Reset{/t}" class="formbutton" onclick="javascript:flashbutton('cancel')" />&nbsp;&nbsp;
-					<input type="submit" name="ok" value="{t}Send{/t}" class="formbutton" onclick="javascript:submitbutton('ok')" />
+					<input type="reset" name="cancel" value="{t}Reset{/t}" class="formbutton" onclick="flashbutton('cancel')" />&nbsp;&nbsp;
+					<input type="submit" name="ok" value="{t}Send{/t}" class="formbutton" onclick="submitbutton('ok')" />
 				</td>
 			</tr>
 			<tr><td class="spacer" colspan="2"></td></tr>

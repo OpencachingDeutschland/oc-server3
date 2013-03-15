@@ -46,7 +46,7 @@
 
 	<tr>
 		<td class="header-small" colspan="2">
-			<input type="submit" name="submit" value="{t}Remove log entry{/t}"  class="formbutton" style="width: 150px;" onclick="javascript:submitbutton('submit')" />
+			<input type="submit" name="submit" value="{t}Remove log entry{/t}"  class="formbutton" style="width: 150px;" onclick="submitbutton('submit')" />
 		</td>
 	</tr>
 </table>

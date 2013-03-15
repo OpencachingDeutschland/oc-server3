@@ -62,7 +62,7 @@
 				<b>{t}Pictures for this logentry:{/t}</b><br />
 			{/if}
 
-			<a onclick="javascript:enlarge(document.getElementById('pic{$pictureItem.id}'))" style="cursor:pointer">{$pictureItem.title|escape}</a>
+			<a onclick="enlarge(document.getElementById('pic{$pictureItem.id}'))" style="cursor:pointer">{$pictureItem.title|escape}</a>
 			{* the position of this image is the anchor for enlargit activity: *}
 			<img id="pic{$pictureItem.id}" src="resource2/ocstyle/images/misc/empty.png" longdesc="{$pictureItem.url}" alt="{$pictureItem.title|escape}" style="cursor:pointer" onclick="enlarge(this)"/>
 			{if $logItem.userid==$login.userid}

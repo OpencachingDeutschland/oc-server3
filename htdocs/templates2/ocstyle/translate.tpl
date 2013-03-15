@@ -104,7 +104,7 @@
 				</tr>
 				<tr>
 					<td align="right">
-						<input type="submit" name="submit2" value="Speichern" class="formbuttons" onclick="javascript:submitbutton('submit2')" />
+						<input type="submit" name="submit2" value="Speichern" class="formbuttons" onclick="submitbutton('submit2')" />
 					<td>
 				</tr>
 				<tr><td>{t}Use existing translations:{/t}</td></tr>
@@ -138,7 +138,7 @@
 			{/foreach}
 			<br />
 			<br />
-			<input type="submit" name="submitfile1" value="{t}Scan file{/t}" class="formbutton" onclick="javascript:submitbutton('submitfile1')" />
+			<input type="submit" name="submitfile1" value="{t}Scan file{/t}" class="formbutton" onclick="submitbutton('submitfile1')" />
 		</form>
 	{elseif $action=="textimport"}
 		<form action="translate.php" method="post" enctype="multipart/form-data">
@@ -148,7 +148,7 @@
 			{t}Text file containing the translations:{/t} {$translang}<br />
 			<input name="textfile" type="file" size="50" /><br />
 			<br />
-			<input type="submit" name="submitfile2" value="{t}Scan file{/t}" class="formbutton" onclick="javascript:submitbutton('submitfile2')" />
+			<input type="submit" name="submitfile2" value="{t}Scan file{/t}" class="formbutton" onclick="submitbutton('submitfile2')" />
 		</form>
 	{elseif $action=="xmlimport2" || $action=="textimport2"}
 		<form action="translate.php" method="post" enctype="multipart/form-data">
@@ -227,7 +227,7 @@
 		</script>
 	{elseif $action=="scan"}
 		<p>
-			<input type="button" id="scanbutton" value="Scan" onclick="javascript:scanFiles()" /><br />
+			<input type="button" id="scanbutton" value="Scan" onclick="scanFiles()" /><br />
 			{t}Current file:{/t} <span id="currentfile">-</span>
 		</p>
 		{foreach from=$files item=fileItem key=fileKey}

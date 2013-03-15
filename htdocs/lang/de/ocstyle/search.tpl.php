@@ -281,16 +281,16 @@ function switchAttributeCat2()
 			<td style="vertical-align:top">{t}Sorting of result:{/t}</td>
 			<td colspan="2">
 				<div style="padding:0 0 5px 0">
-					<input type="radio" name="sort" value="byname" index="0" id="l_sortbyname" class="radio" onclick="javascript:sync_options(this)" {byname_checked}> <label for="l_sortbyname">{t}Cachename{/t}</label>&nbsp;
-					<input type="radio" name="sort" value="bydistance" index="1" id="l_sortbydistance" class="radio" onclick="javascript:sync_options(this)" {bydistance_checked} {bydistance_enabled} accept=""> <label for="l_sortbydistance">{t}Distance from <a href="myprofile.php">user-profile home coordinates</a>{/t}</label></div>
-				<input type="radio" name="sort" value="bycreated" index="2" id="l_sortbycreated" class="radio" onclick="javascript:sync_options(this)" {bycreated_checked}> <label for="l_sortbycreated">{t}Listed since{/t}</label>&nbsp;
-				<input type="radio" name="sort" value="bylastlog" index="3" id="l_sortbylastlog" class="radio" onclick="javascript:sync_options(this)" {bylastlog_checked}> <label for="l_sortbylastlog">{t}Last log{/t}</label>
+					<input type="radio" name="sort" value="byname" index="0" id="l_sortbyname" class="radio" onclick="sync_options(this)" {byname_checked}> <label for="l_sortbyname">{t}Cachename{/t}</label>&nbsp;
+					<input type="radio" name="sort" value="bydistance" index="1" id="l_sortbydistance" class="radio" onclick="sync_options(this)" {bydistance_checked} {bydistance_enabled} accept=""> <label for="l_sortbydistance">{t}Distance from <a href="myprofile.php">user-profile home coordinates</a>{/t}</label></div>
+				<input type="radio" name="sort" value="bycreated" index="2" id="l_sortbycreated" class="radio" onclick="sync_options(this)" {bycreated_checked}> <label for="l_sortbycreated">{t}Listed since{/t}</label>&nbsp;
+				<input type="radio" name="sort" value="bylastlog" index="3" id="l_sortbylastlog" class="radio" onclick="sync_options(this)" {bylastlog_checked}> <label for="l_sortbylastlog">{t}Last log{/t}</label>
 			</td>
 		</tr>
 		<tr>
 			<td>&nbsp;</td>
 			<td>
-				<input id="orderRatingFirst" type="checkbox" name="orderRatingFirst" class="checkbox" value="1" onclick="javascript:sync_options(this)" {orderRatingFirst_checked} />
+				<input id="orderRatingFirst" type="checkbox" name="orderRatingFirst" class="checkbox" value="1" onclick="sync_options(this)" {orderRatingFirst_checked} />
 				<label for="orderRatingFirst">{t}Show recommendation from other users first{/t}</label>
 			</td>
 		</tr>
@@ -301,17 +301,17 @@ function switchAttributeCat2()
 		<tr>
 			<td>{t}Hide following caches:{/t}</td>
 			<td colspan="2">
-				<input type="checkbox" name="f_userowner" value="1" id="l_userowner" class="checkbox" onclick="javascript:sync_options(this)" {f_userowner_disabled} /> <label for="l_userowner">{t}My owned{/t}</label>&nbsp;&nbsp;
-				<input type="checkbox" name="f_userfound" value="1" id="l_userfound" class="checkbox" onclick="javascript:sync_options(this)" {f_userfound_disabled} /> <label for="l_userfound">{t}My finds{/t}</label>&nbsp;&nbsp;
-				<input type="checkbox" name="f_ignored" value="1" id="l_ignored" class="checkbox" onclick="javascript:sync_options(this)" {f_ignored_disabled} > <label for="l_ignored">{t}My ignored{/t}</label>&nbsp;&nbsp;
+				<input type="checkbox" name="f_userowner" value="1" id="l_userowner" class="checkbox" onclick="sync_options(this)" {f_userowner_disabled} /> <label for="l_userowner">{t}My owned{/t}</label>&nbsp;&nbsp;
+				<input type="checkbox" name="f_userfound" value="1" id="l_userfound" class="checkbox" onclick="sync_options(this)" {f_userfound_disabled} /> <label for="l_userfound">{t}My finds{/t}</label>&nbsp;&nbsp;
+				<input type="checkbox" name="f_ignored" value="1" id="l_ignored" class="checkbox" onclick="sync_options(this)" {f_ignored_disabled} > <label for="l_ignored">{t}My ignored{/t}</label>&nbsp;&nbsp;
 				<img src="lang/de/ocstyle/images/misc/hint.gif" border="0" width="15" height="11" alt="{t}Notice{/t}" title="{t}Notice{/t}" align="middle">{t}Only usable if signed in.{/t}
 			</td>
 		</tr>
 		<tr>
 			<td>&nbsp;</td>
 			<td colspan="2">
-				<input type="checkbox" name="f_inactive" value="1" id="l_inactive" class="checkbox" onclick="javascript:sync_options(this)" {f_inactive_checked} > <label for="l_inactive">{t}Inactive{/t}</label>
-				<input type="checkbox" name="f_otherPlatforms" value="1" id="l_otherPlatforms" class="checkbox" onclick="javascript:sync_options(this)" {f_otherPlatforms_checked} > <label for="l_otherPlatforms">{t}Multiple listings (waypoint is also set on gc.com or nc.com){/t}</label>
+				<input type="checkbox" name="f_inactive" value="1" id="l_inactive" class="checkbox" onclick="sync_options(this)" {f_inactive_checked} > <label for="l_inactive">{t}Inactive{/t}</label>
+				<input type="checkbox" name="f_otherPlatforms" value="1" id="l_otherPlatforms" class="checkbox" onclick="sync_options(this)" {f_otherPlatforms_checked} > <label for="l_otherPlatforms">{t}Multiple listings (waypoint is also set on gc.com or nc.com){/t}</label>
 			</td>
 		</tr>
 	</table>
@@ -320,22 +320,22 @@ function switchAttributeCat2()
 	<table class="table">
 		<tr>
 			<td>{t}Cachetype:{/t}</td>
-			<td><input type="checkbox" id="cachetype2" name="cachetype2" value="2" onclick="javascript:sync_options(this)" class="checkbox" {cachetype2checked} /> <label for="cachetype2">{t}Traditional Cache{/t}</label></td>
-			<td><input type="checkbox" id="cachetype3" name="cachetype3" value="3" onclick="javascript:sync_options(this)" class="checkbox" {cachetype3checked} /> <label for="cachetype3">{t}Multicache{/t}</label></td>
-			<td><input type="checkbox" id="cachetype5" name="cachetype5" value="5" onclick="javascript:sync_options(this)" class="checkbox" {cachetype5checked} /> <label for="cachetype5">{t}Webcam Cache{/t}</label></td>
-			<td><input type="checkbox" id="cachetype6" name="cachetype6" value="6" onclick="javascript:sync_options(this)" class="checkbox" {cachetype6checked} /> <label for="cachetype6">{t}Event Cache{/t}</label></td>
+			<td><input type="checkbox" id="cachetype2" name="cachetype2" value="2" onclick="sync_options(this)" class="checkbox" {cachetype2checked} /> <label for="cachetype2">{t}Traditional Cache{/t}</label></td>
+			<td><input type="checkbox" id="cachetype3" name="cachetype3" value="3" onclick="sync_options(this)" class="checkbox" {cachetype3checked} /> <label for="cachetype3">{t}Multicache{/t}</label></td>
+			<td><input type="checkbox" id="cachetype5" name="cachetype5" value="5" onclick="sync_options(this)" class="checkbox" {cachetype5checked} /> <label for="cachetype5">{t}Webcam Cache{/t}</label></td>
+			<td><input type="checkbox" id="cachetype6" name="cachetype6" value="6" onclick="sync_options(this)" class="checkbox" {cachetype6checked} /> <label for="cachetype6">{t}Event Cache{/t}</label></td>
 		</tr>
 		<tr>
 			<td></td>
-			<td><input type="checkbox" id="cachetype7" name="cachetype7" value="7" onclick="javascript:sync_options(this)" class="checkbox" {cachetype7checked} /> <label for="cachetype7">{t}Quizcache{/t}</label></td>
-			<td><input type="checkbox" id="cachetype8" name="cachetype8" value="8" onclick="javascript:sync_options(this)" class="checkbox" {cachetype8checked} /> <label for="cachetype8">{t}Math/Physics-Cache{/t}</label></td>
-			<td><input type="checkbox" id="cachetype9" name="cachetype9" value="9" onclick="javascript:sync_options(this)" class="checkbox" {cachetype9checked} /> <label for="cachetype9">{t}Moving Cache{/t}</label></td>
-			<td><input type="checkbox" id="cachetype10" name="cachetype10" value="10" onclick="javascript:sync_options(this)" class="checkbox" {cachetype10checked} /> <label for="cachetype10">{t}Drive-In{/t}</label></td>
+			<td><input type="checkbox" id="cachetype7" name="cachetype7" value="7" onclick="sync_options(this)" class="checkbox" {cachetype7checked} /> <label for="cachetype7">{t}Quizcache{/t}</label></td>
+			<td><input type="checkbox" id="cachetype8" name="cachetype8" value="8" onclick="sync_options(this)" class="checkbox" {cachetype8checked} /> <label for="cachetype8">{t}Math/Physics-Cache{/t}</label></td>
+			<td><input type="checkbox" id="cachetype9" name="cachetype9" value="9" onclick="sync_options(this)" class="checkbox" {cachetype9checked} /> <label for="cachetype9">{t}Moving Cache{/t}</label></td>
+			<td><input type="checkbox" id="cachetype10" name="cachetype10" value="10" onclick="sync_options(this)" class="checkbox" {cachetype10checked} /> <label for="cachetype10">{t}Drive-In{/t}</label></td>
 		</tr>
 		<tr>
 			<td></td>
-			<td><input type="checkbox" id="cachetype4" name="cachetype4" value="4" onclick="javascript:sync_options(this)" class="checkbox" {cachetype4checked} /> <label for="cachetype4">{t}virtual Cache{/t}</label></td>
-			<td><input type="checkbox" id="cachetype1" name="cachetype1" value="1" onclick="javascript:sync_options(this)" class="checkbox" {cachetype1checked} /> <label for="cachetype1">{t}unknown cachetyp{/t}</label></td>
+			<td><input type="checkbox" id="cachetype4" name="cachetype4" value="4" onclick="sync_options(this)" class="checkbox" {cachetype4checked} /> <label for="cachetype4">{t}virtual Cache{/t}</label></td>
+			<td><input type="checkbox" id="cachetype1" name="cachetype1" value="1" onclick="sync_options(this)" class="checkbox" {cachetype1checked} /> <label for="cachetype1">{t}unknown cachetyp{/t}</label></td>
 		</tr>
 	</table>
 </div>
@@ -343,17 +343,17 @@ function switchAttributeCat2()
 	<table class="table">
 		<tr>
 			<td>{t}Cachesize:{/t}</td>
-			<td><input type="checkbox" id="cachesize8" name="cachesize8" value="8" onclick="javascript:sync_options(this)" class="checkbox" {cachesize2checked} /> <label for="cachesize2">{t}nano{/t}</label>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-			<td><input type="checkbox" id="cachesize2" name="cachesize2" value="2" onclick="javascript:sync_options(this)" class="checkbox" {cachesize8checked} /> <label for="cachesize2">{t}micro{/t}</label></td>
-			<td><input type="checkbox" id="cachesize3" name="cachesize3" value="3" onclick="javascript:sync_options(this)" class="checkbox" {cachesize3checked} /> <label for="cachesize3">{t}small{/t}</label></td>
-			<td><input type="checkbox" id="cachesize4" name="cachesize4" value="4" onclick="javascript:sync_options(this)" class="checkbox" {cachesize4checked} /> <label for="cachesize4">{t}normal{/t}</label></td>
+			<td><input type="checkbox" id="cachesize8" name="cachesize8" value="8" onclick="sync_options(this)" class="checkbox" {cachesize2checked} /> <label for="cachesize2">{t}nano{/t}</label>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+			<td><input type="checkbox" id="cachesize2" name="cachesize2" value="2" onclick="sync_options(this)" class="checkbox" {cachesize8checked} /> <label for="cachesize2">{t}micro{/t}</label></td>
+			<td><input type="checkbox" id="cachesize3" name="cachesize3" value="3" onclick="sync_options(this)" class="checkbox" {cachesize3checked} /> <label for="cachesize3">{t}small{/t}</label></td>
+			<td><input type="checkbox" id="cachesize4" name="cachesize4" value="4" onclick="sync_options(this)" class="checkbox" {cachesize4checked} /> <label for="cachesize4">{t}normal{/t}</label></td>
 		</tr>
 		<tr>
 			<td></td>
-			<td><input type="checkbox" id="cachesize5" name="cachesize5" value="5" onclick="javascript:sync_options(this)" class="checkbox" {cachesize5checked} /> <label for="cachesize5">{t}large{/t}</label></td>
-			<td><input type="checkbox" id="cachesize6" name="cachesize6" value="6" onclick="javascript:sync_options(this)" class="checkbox" {cachesize6checked} /> <label for="cachesize6">{t}very large{/t}</label></td>
-			<td><input type="checkbox" id="cachesize7" name="cachesize7" value="7" onclick="javascript:sync_options(this)" class="checkbox" {cachesize7checked} /> <label for="cachesize7">{t}no container{/t}</label></td>
-			<td><input type="checkbox" id="cachesize1" name="cachesize1" value="1" onclick="javascript:sync_options(this)" class="checkbox" {cachesize1checked} /> <label for="cachesize1">{t}other size{/t}</label></td>
+			<td><input type="checkbox" id="cachesize5" name="cachesize5" value="5" onclick="sync_options(this)" class="checkbox" {cachesize5checked} /> <label for="cachesize5">{t}large{/t}</label></td>
+			<td><input type="checkbox" id="cachesize6" name="cachesize6" value="6" onclick="sync_options(this)" class="checkbox" {cachesize6checked} /> <label for="cachesize6">{t}very large{/t}</label></td>
+			<td><input type="checkbox" id="cachesize7" name="cachesize7" value="7" onclick="sync_options(this)" class="checkbox" {cachesize7checked} /> <label for="cachesize7">{t}no container{/t}</label></td>
+			<td><input type="checkbox" id="cachesize1" name="cachesize1" value="1" onclick="sync_options(this)" class="checkbox" {cachesize1checked} /> <label for="cachesize1">{t}other size{/t}</label></td>
 		</tr>
 	</table>
 </div>
@@ -362,11 +362,11 @@ function switchAttributeCat2()
 		<tr>
 			<td>{t}Difficulty:{/t}</td>
 			<td>
-				<select name="difficultymin" class="input80" onChange="javascript:sync_options(this)">
+				<select name="difficultymin" class="input80" onchange="sync_options(this)">
 					{difficultymin_options}
 				</select>
 				&nbsp;&nbsp;&nbsp;{t}to{/t}&nbsp;&nbsp;&nbsp;
-				<select name="difficultymax" class="input80" onChange="javascript:sync_options(this)">
+				<select name="difficultymax" class="input80" onchange="sync_options(this)">
 					{difficultymax_options}
 				</select>
 			</td>
@@ -374,11 +374,11 @@ function switchAttributeCat2()
 		<tr>
 			<td>{t}Terrain:{/t}</td>
 			<td>
-				<select name="terrainmin" class="input80" onChange="javascript:sync_options(this)">
+				<select name="terrainmin" class="input80" onchange="sync_options(this)">
 					{terrainmin_options}
 				</select>
 				&nbsp;&nbsp;&nbsp;{t}to{/t}&nbsp;&nbsp;&nbsp;
-				<select name="terrainmax" class="input80" onChange="javascript:sync_options(this)">
+				<select name="terrainmax" class="input80" onchange="sync_options(this)">
 					{terrainmax_options}
 				</select>
 			</td>
@@ -390,7 +390,7 @@ function switchAttributeCat2()
 		<tr>
 			<td>{t}Country:{/t}&nbsp;&nbsp;</td>
 			<td>
-				<select name="country" class="input200" onChange="javascript:sync_options(this)">
+				<select name="country" class="input200" onchange="sync_options(this)">
 					{countryoptions}
 				</select>
 			</td>
@@ -434,7 +434,7 @@ function switchAttributeCat2()
 -->
 </script>
 
-<form action="search.php" onsubmit="javascript:return(_sbn_click());" method="{formmethod}" enctype="application/x-www-form-urlencoded" name="searchbyname" dir="ltr" style="display:inline;">
+<form action="search.php" onsubmit="return(_sbn_click());" method="{formmethod}" enctype="application/x-www-form-urlencoded" name="searchbyname" dir="ltr" style="display:inline;">
 	<input type="hidden" name="searchto" value="searchbyname" />
 	<input type="hidden" name="showresult" value="1" />
 	<input type="hidden" name="expert" value="0" />
@@ -476,13 +476,13 @@ function switchAttributeCat2()
 		<tr>
 			<td>{t}Name:{/t}</td>
 			<td><input type="text" name="cachename" value="{cachename}" class="input200" /></td>
-			<td><input type="submit" name="submit_cachename" value="{t}Search{/t}" class="formbutton" onclick="javascript:submitbutton('submit_cachename')" /></td>
+			<td><input type="submit" name="submit_cachename" value="{t}Search{/t}" class="formbutton" onclick="submitbutton('submit_cachename')" /></td>
 		</tr>
 		<tr><td class="spacer" colspan="3"></td></tr>
 	</table>
 </form>
 
-<form action="search.php" onsubmit="javascript:return(_sbd_click());" method="{formmethod}" enctype="application/x-www-form-urlencoded" name="searchbydistance" dir="ltr" style="display:inline;">
+<form action="search.php" onsubmit="return(_sbd_click());" method="{formmethod}" enctype="application/x-www-form-urlencoded" name="searchbydistance" dir="ltr" style="display:inline;">
 	<input type="hidden" name="searchto" value="searchbydistance" />
 	<input type="hidden" name="showresult" value="1" />
 	<input type="hidden" name="expert" value="0" />
@@ -549,7 +549,7 @@ function switchAttributeCat2()
 					<option value="nm" {sel_nm}>{t}Seamiles{/t}</option>
 				</select>
 			</td>
-			<td><input type="submit" name="submit_dist" value="{t}Search{/t}" class="formbutton" onclick="javascript:submitbutton('submit_dist')" /></td>
+			<td><input type="submit" name="submit_dist" value="{t}Search{/t}" class="formbutton" onclick="submitbutton('submit_dist')" /></td>
 		</tr>
 		<tr><td class="spacer" colspan="3"></td></tr>
 	</table>
@@ -574,7 +574,7 @@ function switchAttributeCat2()
 	{ortserror}
 </table>
 
-<form action="search.php" onsubmit="javascript:return(_sbplz_click());" method="{formmethod}" enctype="application/x-www-form-urlencoded" name="searchbyplz" dir="ltr" style="display:inline;">
+<form action="search.php" onsubmit="return(_sbplz_click());" method="{formmethod}" enctype="application/x-www-form-urlencoded" name="searchbyplz" dir="ltr" style="display:inline;">
 	<input type="hidden" name="searchto" value="searchbyplz" />
 	<input type="hidden" name="showresult" value="1" />
 	<input type="hidden" name="expert" value="0" />
@@ -607,12 +607,12 @@ function switchAttributeCat2()
 		<tr>
 			<td>{t}Postal code:{/t}</td>
 			<td><input type="text" name="plz" value="{plz}" maxlength="5" class="input50" /></td>
-			<td><input type="submit" name="submit_plz" value="{t}Search{/t}" class="formbutton" onclick="javascript:submitbutton('submit_plz')" /></td>
+			<td><input type="submit" name="submit_plz" value="{t}Search{/t}" class="formbutton" onclick="submitbutton('submit_plz')" /></td>
 		</tr>
 	</table>
 </form>
 
-<form action="search.php" onsubmit="javascript:return(_sbort_click());" method="{formmethod}" enctype="application/x-www-form-urlencoded" name="searchbyort" dir="ltr" style="display:inline;">
+<form action="search.php" onsubmit="return(_sbort_click());" method="{formmethod}" enctype="application/x-www-form-urlencoded" name="searchbyort" dir="ltr" style="display:inline;">
 	<input type="hidden" name="searchto" value="searchbyort" />
 	<input type="hidden" name="showresult" value="1" />
 	<input type="hidden" name="expert" value="0" />
@@ -645,7 +645,7 @@ function switchAttributeCat2()
 		<tr>
 			<td>{t}City:{/t}</td>
 			<td><input type="text" name="ort" value="{ort}" class="input200" /></td>
-			<td><input type="submit" name="submit_city" value="{t}Search{/t}" class="formbutton" onclick="javascript:submitbutton('submit_city')" /></td>
+			<td><input type="submit" name="submit_city" value="{t}Search{/t}" class="formbutton" onclick="submitbutton('submit_city')" /></td>
 		</tr>
 	</table>
 </form>
@@ -659,7 +659,7 @@ function switchAttributeCat2()
 	<tr><td class="spacer" colspan="3"></td></tr>
 </table>
 
-<form action="search.php" onsubmit="javascript:return(_sbft_click());" method="{formmethod}" enctype="application/x-www-form-urlencoded" name="searchbyfulltext" dir="ltr" style="display:inline;">
+<form action="search.php" onsubmit="return(_sbft_click());" method="{formmethod}" enctype="application/x-www-form-urlencoded" name="searchbyfulltext" dir="ltr" style="display:inline;">
 	<input type="hidden" name="searchto" value="searchbyfulltext" />
 	<input type="hidden" name="showresult" value="1" />
 	<input type="hidden" name="expert" value="0" />
@@ -702,7 +702,7 @@ function switchAttributeCat2()
 		<tr>
 			<td>Text:</td>
 			<td><input type="text" name="fulltext" value="{fulltext}" class="input200" /></td>
-			<td><input type="submit" name="submit_ft" value="{t}Search{/t}" class="formbutton" onclick="javascript:submitbutton('submit_ft')" /></td>
+			<td><input type="submit" name="submit_ft" value="{t}Search{/t}" class="formbutton" onclick="submitbutton('submit_ft')" /></td>
 		</tr>
 		<tr>
 			<td></td>
@@ -723,7 +723,7 @@ function switchAttributeCat2()
 	</table>
 </form>
 
-<form action="search.php" onsubmit="javascript:return(_sbo_click());" method="{formmethod}" enctype="application/x-www-form-urlencoded" name="searchbyowner" dir="ltr" style="display:inline;">
+<form action="search.php" onsubmit="return(_sbo_click());" method="{formmethod}" enctype="application/x-www-form-urlencoded" name="searchbyowner" dir="ltr" style="display:inline;">
 	<input type="hidden" name="searchto" value="searchbyowner" />
 	<input type="hidden" name="showresult" value="1" />
 	<input type="hidden" name="expert" value="0" />
@@ -765,13 +765,13 @@ function switchAttributeCat2()
 		<tr>
 			<td>{t}Owner:{/t}</td>
 			<td><input type="text" name="owner" value="{owner}" maxlength="40" class="input200" /></td>
-			<td><input type="submit" name="submit_owner" value="{t}Search{/t}" class="formbutton" onclick="javascript:submitbutton('submit_owner')" /></td>
+			<td><input type="submit" name="submit_owner" value="{t}Search{/t}" class="formbutton" onclick="submitbutton('submit_owner')" /></td>
 		</tr>
 		<tr><td class="spacer" colspan="3"></td></tr>
 	</table>
 </form>
 
-<form action="search.php" onsubmit="javascript:return(_sbf_click());" method="{formmethod}" enctype="application/x-www-form-urlencoded" name="searchbyfinder" dir="ltr" style="display:inline;">
+<form action="search.php" onsubmit="return(_sbf_click());" method="{formmethod}" enctype="application/x-www-form-urlencoded" name="searchbyfinder" dir="ltr" style="display:inline;">
 	<input type="hidden" name="searchto" value="searchbyfinder" />
 	<input type="hidden" name="showresult" value="1" />
 	<input type="hidden" name="expert" value="0" />
@@ -821,7 +821,7 @@ function switchAttributeCat2()
 		<tr>
 			<td>{t}Username:{/t}</td>
 			<td><input type="text" name="finder" value="{finder}" maxlength="40" class="input200" /></td>
-			<td><input type="submit" name="submit_finder" value="{t}Search{/t}" class="formbutton" onclick="javascript:submitbutton('submit_finder')" /></td>
+			<td><input type="submit" name="submit_finder" value="{t}Search{/t}" class="formbutton" onclick="submitbutton('submit_finder')" /></td>
 		</tr>
 		<tr><td class="spacer" colspan="3"></td></tr>
 	</table>

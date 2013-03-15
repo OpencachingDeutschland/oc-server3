@@ -108,7 +108,7 @@
 						{/foreach}
 					</select>&nbsp;&nbsp;
 					{if $show_all_countries==0}
-						<input type="submit" name="show_all_countries_submit" value="{t}Show all{/t}" class="formbutton" onclick="javascript:submitbutton('show_all_countries_submit')" />
+						<input type="submit" name="show_all_countries_submit" value="{t}Show all{/t}" class="formbutton" onclick="submitbutton('show_all_countries_submit')" />
 					{/if}
 				</td>
 			</tr>
@@ -189,8 +189,8 @@
 
 			<tr>
 				<td class="header-small" colspan="2">
-					<input type="reset" name="reset" value="{t}Reset{/t}" class="formbutton" onclick="javascript:flashbutton('reset')"/>&nbsp;&nbsp;
-					<input type="submit" name="submit" value="{t}Register{/t}" class="formbutton" onclick="javascript:submitbutton('submit')"/>
+					<input type="reset" name="reset" value="{t}Reset{/t}" class="formbutton" onclick="flashbutton('reset')"/>&nbsp;&nbsp;
+					<input type="submit" name="submit" value="{t}Register{/t}" class="formbutton" onclick="submitbutton('submit')"/>
 				</td>
 			</tr>
 		</table>

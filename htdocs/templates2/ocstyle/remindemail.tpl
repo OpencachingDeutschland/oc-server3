@@ -41,7 +41,7 @@
 		<tr>
 			<td width="150px">&nbsp;</td>
 			<td>
-				<input type="submit" name="ok" value="{t}Submit{/t}" class="formbutton" onclick="javascript:submitbutton('ok')" />
+				<input type="submit" name="ok" value="{t}Submit{/t}" class="formbutton" onclick="submitbutton('ok')" />
 			</td>
 		</tr>
 	</table>

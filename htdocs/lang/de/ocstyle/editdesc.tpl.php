@@ -107,8 +107,8 @@
 	<tr><td class="spacer" colspan="2"></td></tr>
 	<tr>
 		<td class="header-small" colspan="2">
-			<input type="reset" name="reset" value="{reset}" class="formbutton" onclick="javascript:flashbutton('reset')" />&nbsp;&nbsp;
-			<input type="submit" name="submitform" value="{submit}" class="formbutton" onclick="javascript:submitbutton('submitform')" />
+			<input type="reset" name="reset" value="{reset}" class="formbutton" onclick="flashbutton('reset')" />&nbsp;&nbsp;
+			<input type="submit" name="submitform" value="{submit}" class="formbutton" onclick="submitbutton('submitform')" />
 		</td>
 	</tr>
 </table>

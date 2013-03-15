@@ -57,8 +57,8 @@
     <tr>
       <td></td>
       <td>
-        <input type="submit" name="back" value="{t}Cancel{/t}" class="formbutton" onclick="javascript:submitbutton('back')" />&nbsp;&nbsp;
-        <input type="submit" name="submitform" value="{$submitButton}" class="formbutton" onclick="javascript:submitbutton('submitform')" /></button>
+        <input type="submit" name="back" value="{t}Cancel{/t}" class="formbutton" onclick="submitbutton('back')" />&nbsp;&nbsp;
+        <input type="submit" name="submitform" value="{$submitButton}" class="formbutton" onclick="submitbutton('submitform')" /></button>
       </td>
     </tr>
   </table>

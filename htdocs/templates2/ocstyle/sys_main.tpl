@@ -124,7 +124,7 @@
 						</td>
 						<td>&nbsp;&nbsp;&nbsp;&nbsp;<strong>{t}Country:{/t}&nbsp;</strong></td>
 						<td>
-							<select id="usercountry" onclick="javascript:usercountry_change()">
+							<select id="usercountry" onclick="usercountry_change()">
 								{foreach from=$opt.template.usercountrieslist item=countryItem name=userCountryList}
 									{if $countryItem.begin_group==1 || $smarty.foreach.userCountryList.first}
 										<option disabled="disabled">

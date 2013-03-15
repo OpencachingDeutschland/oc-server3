@@ -36,7 +36,7 @@
 		<tr>
 			<td width="150px">&nbsp;</td>
 			<td>
-        <input type="submit" name="rqcode" value="{t}Request code{/t}" class="formbutton" onclick="javascript:submitbutton('rqcode')" />
+        <input type="submit" name="rqcode" value="{t}Request code{/t}" class="formbutton" onclick="submitbutton('rqcode')" />
 			</td>
 		</tr>
 		{if $emailErrorNotFound==true}
@@ -114,8 +114,8 @@
 		<tr><td class="spacer" colspan="2"></td></tr>
 		<tr>
 			<td class="header-small" colspan="2">
-				<input type="reset" name="cancel" value="{t}Reset{/t}" class="formbutton" onclick="javascript:flashbutton('cancel')" />&nbsp;&nbsp;
-				<input type="submit" name="changepw" value="{t}Change{/t}" class="formbutton" onclick="javascript:submitbutton('changepw')" />
+				<input type="reset" name="cancel" value="{t}Reset{/t}" class="formbutton" onclick="flashbutton('cancel')" />&nbsp;&nbsp;
+				<input type="submit" name="changepw" value="{t}Change{/t}" class="formbutton" onclick="submitbutton('changepw')" />
 			</td>
 		</tr>
 	</table>

@@ -139,7 +139,7 @@
 						</td>
 						<td>&nbsp;&nbsp;&nbsp;&nbsp;<strong>{t}Country:{/t}&nbsp;</strong></td>
 						<td>
-								<select id="usercountry" onclick="javascript:usercountry_change()">
+								<select id="usercountry" onclick="usercountry_change()">
 <?php
 									global $tpl_usercountries;
 									$nLastGroup = 0;

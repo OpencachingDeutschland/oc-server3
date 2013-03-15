@@ -133,7 +133,7 @@
 				</span>
 			</p>
 			{if $cache.type==6}
-				<span class="participants"><img src="resource2/{$opt.template.style}/images/cacheicon/16x16-event.gif" width="16" height="16" alt="{t}List of participants{/t}" />&nbsp;<a href="#" onClick="javascript:window.open('event_attendance.php?id={$cache.cacheid}&popup=y','{t escape=js}List{/t}','width=320,height=440,resizable=no,scrollbars=1')">{t}List of participants{/t}</a></span>
+				<span class="participants"><img src="resource2/{$opt.template.style}/images/cacheicon/16x16-event.gif" width="16" height="16" alt="{t}List of participants{/t}" />&nbsp;<a href="#" onclick="window.open('event_attendance.php?id={$cache.cacheid}&popup=y','{t escape=js}List{/t}','width=320,height=440,resizable=no,scrollbars=1')">{t}List of participants{/t}</a></span>
 			{/if}
 		</div>
 	</div>
@@ -170,7 +170,7 @@
 			<b><nobr>{$coordinates.lat|escape}</nobr> <nobr>{$coordinates.lon|escape}</nobr></b> <span class="content-title-noshade-size0">(WGS84)</span><br />
 		</p>
 		<p style="line-height: 1.6em;">
-			<img src="resource2/{$opt.template.style}/images/viewcache/map.png" class="icon16" alt="" title="" align="middle" />&nbsp;<a href="#" onClick="javascript:window.open('coordinates.php?lat={$cache.latitude}&lon={$cache.longitude}&popup=y&wp={$cache.wpoc}','{t escape=js}Coordinates{/t}','width=280,height=430,resizable=no,scrollbars=0')">{t}Convert coordinates{/t}</a><br />
+			<img src="resource2/{$opt.template.style}/images/viewcache/map.png" class="icon16" alt="" title="" align="middle" />&nbsp;<a href="#" onclick="window.open('coordinates.php?lat={$cache.latitude}&lon={$cache.longitude}&popup=y&wp={$cache.wpoc}','{t escape=js}Coordinates{/t}','width=280,height=430,resizable=no,scrollbars=0')">{t}Convert coordinates{/t}</a><br />
 			<!-- <img src="resource2/{$opt.template.style}/images/viewcache/box.png" class="icon16" alt="" title="" align="middle" />&nbsp;Cache type: <b>Traditional</b><br /> -->
 			<img src="resource2/{$opt.template.style}/images/viewcache/package_green.png" class="icon16" alt="" title="" align="middle" />&nbsp;{t}Size{/t}: <b>{$cache.sizeName|escape}</b><br />
 			<img src="resource2/{$opt.template.style}/images/viewcache/page.png" class="icon16" alt="" title="" align="middle" />{if $cache.status!=1}
@@ -200,16 +200,16 @@
 			{/if}
 		</p>
 		<p>
-			<a style="background-image: url(resource2/{$opt.template.style}/images/viewcache/print-18.png);background-repeat:no-repeat;" onClick="javascript:window.location='viewcache.php?cacheid={$cache.cacheid}&print=y&log=A&nocrypt=' + bNoCrypt"><input name="PrintA" id="PrintA" value="{t}Print{/t}" type="button" /></a>
-			<a style="background-image: url(resource2/{$opt.template.style}/images/viewcache/print-18.png);background-repeat:no-repeat;" onClick="javascript:window.location='viewcache.php?cacheid={$cache.cacheid}&print=y&log=N&nocrypt=' + bNoCrypt"><input name="PrintN" id="PrintN" value="{t}Print no logs{/t}" type="button" /></a>
-			<a style="background-image: url(resource2/{$opt.template.style}/images/viewcache/print-18.png);background-repeat:no-repeat;" onClick="javascript:window.location='viewcache.php?cacheid={$cache.cacheid}&print=y&log=5&nocrypt=' + bNoCrypt"><input name="Print5" id="Print5" value="{t}Print last logs{/t}" type="button" /></a>
+			<a style="background-image: url(resource2/{$opt.template.style}/images/viewcache/print-18.png);background-repeat:no-repeat;" onclick="window.location='viewcache.php?cacheid={$cache.cacheid}&print=y&log=A&nocrypt=' + bNoCrypt"><input name="PrintA" id="PrintA" value="{t}Print{/t}" type="button" /></a>
+			<a style="background-image: url(resource2/{$opt.template.style}/images/viewcache/print-18.png);background-repeat:no-repeat;" onclick="window.location='viewcache.php?cacheid={$cache.cacheid}&print=y&log=N&nocrypt=' + bNoCrypt"><input name="PrintN" id="PrintN" value="{t}Print no logs{/t}" type="button" /></a>
+			<a style="background-image: url(resource2/{$opt.template.style}/images/viewcache/print-18.png);background-repeat:no-repeat;" onclick="window.location='viewcache.php?cacheid={$cache.cacheid}&print=y&log=5&nocrypt=' + bNoCrypt"><input name="Print5" id="Print5" value="{t}Print last logs{/t}" type="button" /></a>
 		</p>
 		<p>
-			<a class="send-to-gps" href="#" onClick="javascript:window.open('garmin.php?lat={$cache.latitude}&lon={$cache.longitude}&wp={$cache.wpoc}','{t escape=js}Send{/t}','width=640,height=315,resizable=no,scrollbars=1')"><input name="SendToGPS" value="{t}Send to GPS device{/t}" id="SendToGPS" type="button" /></a>
+			<a class="send-to-gps" href="#" onclick="window.open('garmin.php?lat={$cache.latitude}&lon={$cache.longitude}&wp={$cache.wpoc}','{t escape=js}Send{/t}','width=640,height=315,resizable=no,scrollbars=1')"><input name="SendToGPS" value="{t}Send to GPS device{/t}" id="SendToGPS" type="button" /></a>
 
 			&nbsp;&nbsp;<img src="resource2/{$opt.template.style}/images/viewcache/16x16-save.png" class="icon16" alt="" />
 
-			<select name="wpdownload" class="wpdownload" onChange="location.href=this.options[this.selectedIndex].value"> 
+			<select name="wpdownload" class="wpdownload" onchange="location.href=this.options[this.selectedIndex].value"> 
 				<option value="#">{t}Download as...{/t}</option>
 				<option value="search.php?searchto=searchbycacheid&showresult=1&f_inactive=0&f_ignored=0&startat=0&cacheid={$cache.cacheid}&output=gpx">GPX</option>
 				<option value="search.php?searchto=searchbycacheid&showresult=1&f_inactive=0&f_ignored=0&startat=0&cacheid={$cache.cacheid}&output=loc">LOC</option>
@@ -436,7 +436,7 @@
 			<a href="search.php?searchto=searchbydistance&showresult=1&expert=0&output=HTML&sort=bydistance&f_userowner=1&f_userfound=1&f_inactive=1&lat={$cache.latitude}&lon={$cache.longitude}&distance=150&unit=km&cachetype={$cache.type}" rel="nofollow">{t}same type{/t}</a>
 			<br />
 
-			<img src="resource2/{$opt.template.style}/images/viewcache/16x16-search.png" class="icon16" alt="" /> {t}Send this waypoint to GPS device:{/t} <a href="#" onClick="javascript:window.open('garmin.php?&lat={$cache.latitude}&lon={$cache.longitude}&wp={$cache.wpoc}','{t escape=js}Send{/t}','width=640,height=290,resizable=no,scrollbars=1')">Garmin</a><br />
+			<img src="resource2/{$opt.template.style}/images/viewcache/16x16-search.png" class="icon16" alt="" /> {t}Send this waypoint to GPS device:{/t} <a href="#" onclick="window.open('garmin.php?&lat={$cache.latitude}&lon={$cache.longitude}&wp={$cache.wpoc}','{t escape=js}Send{/t}','width=640,height=290,resizable=no,scrollbars=1')">Garmin</a><br />
 			<img src="resource2/{$opt.template.style}/images/viewcache/16x16-save.png" class="icon16" alt="" /> {t}Download as file:{/t} 
 			<a href="search.php?searchto=searchbycacheid&showresult=1&f_inactive=0&f_ignored=0&startat=0&cacheid={$cache.cacheid}&output=gpx" rel="nofollow" title="{t}GPS Exchange Format .gpx{/t}">GPX</a> - 
 			<a href="search.php?searchto=searchbycacheid&showresult=1&f_inactive=0&f_ignored=0&startat=0&cacheid={$cache.cacheid}&output=loc" rel="nofollow" title="{t}Waypointfile .loc{/t}">LOC</a> - 

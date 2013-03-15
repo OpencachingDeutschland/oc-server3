@@ -75,7 +75,7 @@
 			<tr>
 				<td>&nbsp;</td>
 				<td>
-					<input type="submit" name="savenew" value="{t}Store{/t}" class="formbutton" onclick="javascript:submitbutton('savenew')" />
+					<input type="submit" name="savenew" value="{t}Store{/t}" class="formbutton" onclick="submitbutton('savenew')" />
 				</td>
 			</tr>
 		</table>
@@ -112,7 +112,7 @@
 			<tr>
 				<td>&nbsp;</td>
 				<td>
-					<input type="submit" name="overwrite" value="{t}Store{/t}" class="formbutton" onclick="javascript:submitbutton('overwrite')" />
+					<input type="submit" name="overwrite" value="{t}Store{/t}" class="formbutton" onclick="submitbutton('overwrite')" />
 				</td>
 			</tr>
 		</table>

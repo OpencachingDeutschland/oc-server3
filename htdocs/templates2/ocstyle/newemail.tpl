@@ -37,7 +37,7 @@
 		<tr>
 			<td>&nbsp;</td>
 			<td>
-        <input type="submit" name="erequest" value="{t}Request{/t}" class="formbutton" onclick="javascript:submitbutton('erequest')" />
+        <input type="submit" name="erequest" value="{t}Request{/t}" class="formbutton" onclick="submitbutton('erequest')" />
 			</td>
 		</tr>
 		{if $emailErrorSame==true}
@@ -103,8 +103,8 @@
 		<tr><td class="spacer" colspan="2"></td></tr>
 		<tr>
 			<td class="header-small" colspan="2">
-				<input type="reset" name="clear" value="{t}Reset{/t}" class="formbutton" onclick="javascript:flashbutton('clear')" />&nbsp;&nbsp;
-				<input type="submit" name="confirm" value="{t}Change{/t}" class="formbutton" onclick="javascript:submitbutton('confirm	')" />
+				<input type="reset" name="clear" value="{t}Reset{/t}" class="formbutton" onclick="flashbutton('clear')" />&nbsp;&nbsp;
+				<input type="submit" name="confirm" value="{t}Change{/t}" class="formbutton" onclick="submitbutton('confirm	')" />
 			</td>
 		</tr>
 	</table>

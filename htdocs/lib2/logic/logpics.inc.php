@@ -25,14 +25,6 @@ function get_logpics($purpose, $userid=0, $cacheid=0, $startat=0)
 {
 	global $login;
 	
-	// Variables to return for res_logpictures are
-	//
-	//   from pictures:    uuid, url and title
-	//   from cache_logs:  id, cache_id, date and type  (type currently unused)
-	//   from user:        user_id and username, only if no $userid param is given
-	
-	$rs = false;
-	
 	$fields =      "`pics`.`uuid` AS `pic_uuid`, `pics`.`url` AS `pic_url`,
 			            `pics`.`title`, `pics`.`date_created`,
 			            `logs`.`user_id`, `logs`.`cache_id`,
@@ -44,6 +36,8 @@ function get_logpics($purpose, $userid=0, $cacheid=0, $startat=0)
                  "INNER JOIN `cache_status` ON `caches`.`status`=`cache_status`.`id` AND `allow_user_view`=1";
 	$join_user   = "INNER JOIN `user` ON `user`.`user_id`=`logs`.`user_id`";
 	
+	$rs = false;
+
 	switch ($purpose)
 	{
 		case LOGPICS_FOR_STARTPAGE_GALLERY:

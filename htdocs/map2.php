@@ -1,6 +1,6 @@
 <?php
 /***************************************************************************
- *  You can find the license in the docs directory
+ *  For license information see doc/license.txt
  *
  *  Unicode Reminder メモ
  ***************************************************************************/
@@ -8,6 +8,7 @@
 	require('./lib2/web.inc.php');
 	require_once('./lib2/logic/cache.class.php');
 	require_once('./lib2/logic/user.class.php');
+	require_once('./lib2/logic/useroptions.class.php');
 	require_once('./lib2/logic/attribute.class.php');
 
 	/* because the map does access some private info like
@@ -60,11 +61,10 @@
 	else if ($sMode == 'fullscreen' ||
 	         ($sMode == '' &&
             sql_value("SELECT option_value FROM user_options
-                       INNER JOIN user ON user_options.user_id=user.user_id
-                       WHERE option_id=6 AND user.user_id='&1'", true, $login->userid)))
+                       WHERE option_id=6 AND user_id='&1'", true, $login->userid)))
 	{
 		$fullscreen = true;
-		$tpl->popup = true;        // disables page header and -framefrapage
+		$tpl->popup = true;        // disables page header and -frame
 		$tpl->popupmargin = false;
 	}
 	else
@@ -75,26 +75,15 @@
 	// save options
 	if (isset($_REQUEST['submit']) && $_REQUEST['submit'] && $login->userid > 0)
 	{
-		sql("INSERT INTO `user_options` (`user_id`, `option_id`, `option_visible`, `option_value`)
-		          VALUES ('&1', '&2', '&3', '&4')
-							ON DUPLICATE KEY UPDATE `option_value`='&4'",
-							$login->userid, 6, 0, min(max($_REQUEST['opt_menumap']+0, 0), 1) );
-		sql("INSERT INTO `user_options` (`user_id`, `option_id`, `option_visible`, `option_value`)
-		          VALUES ('&1', '&2', '&3', '&4')
-							ON DUPLICATE KEY UPDATE `option_value`='&4'",
-							$login->userid, 7, 0, isset($_REQUEST['opt_overview']) ? min(max(round($_REQUEST['opt_overview']+0), 0), 1) : 0);
-		sql("INSERT INTO `user_options` (`user_id`, `option_id`, `option_visible`, `option_value`)
-		          VALUES ('&1', '&2', '&3', '&4')
-							ON DUPLICATE KEY UPDATE `option_value`='&4'",
-							$login->userid, 8, 0, $_REQUEST['opt_maxcaches'] == 0 ? 0 : min(max(round($_REQUEST['opt_maxcaches']+0), $opt['map']['min_maxrecords']), $opt['map']['max_maxrecords']) );
-		sql("INSERT INTO `user_options` (`user_id`, `option_id`, `option_visible`, `option_value`)
-		          VALUES ('&1', '&2', '&3', '&4')
-							ON DUPLICATE KEY UPDATE `option_value`='&4'",
-							$login->userid, 9, 0, min(max($_REQUEST['opt_cacheicons']+0, 1), 2) );
-		sql("INSERT INTO `user_options` (`user_id`, `option_id`, `option_visible`, `option_value`)
-		          VALUES ('&1', '&2', '&3', '&4')
-							ON DUPLICATE KEY UPDATE `option_value`='&4'",
-							$login->userid, 10, 0, min(max($_REQUEST['opt_pictures']+0, 0), 50) );
+		$useroptions = new useroptions($login->userid);
+
+		if (isset($_REQUEST['opt_menumap']))    $useroptions->setOptValue(USR_OPT_MAP_MENU,      $_REQUEST['opt_menumap']+0);
+		if (isset($_REQUEST['opt_overview']))   $useroptions->setOptValue(USR_OPT_MAP_OVERVIEW,  $_REQUEST['opt_overview']+0);
+		if (isset($_REQUEST['opt_maxcaches']))  $useroptions->setOptValue(USR_OPT_MAP_MAXCACHES, $_REQUEST['opt_maxcaches'] == 0 ? 0 : min(max(round($_REQUEST['opt_maxcaches']+0), $opt['map']['min_maxrecords']), $opt['map']['max_maxrecords']) );
+		if (isset($_REQUEST['opt_cacheicons'])) $useroptions->setOptValue(USR_OPT_MAP_ICONSET,   $_REQUEST['opt_cacheicons']+0);
+		if (isset($_REQUEST['opt_pictures']))   $useroptions->setOptValue(USR_OPT_MAP_PREVIEW,   min(max(round($_REQUEST['opt_pictures']+0), 0), 50) );
+
+		$useroptions->save();
 	}
 
 	$tpl->name = 'map2';
@@ -111,6 +100,7 @@
   $tpl->add_header_javascript('http://maps.googleapis.com/maps/api/js?sensor=false&key=' . urlencode($sGMKey));
   	// https is supported by google, but may make problems in some environments,
   	// e.g. does not work with MSIE 7 on WinXP
+	$tpl->add_header_javascript('resource2/misc/map/dragzoom_packed.js');
   $tpl->add_body_load('mapLoad()');
   $tpl->add_body_unload('mapUnload()');
 
@@ -212,22 +202,12 @@
 	$tpl->assign('maxAttributeId', $maxaid);
 
 	// options
-	$rs = sql("SELECT `profile_options`.`id`,
-                    IF(`option_value` IS NULL, `default_value`, `option_value`) AS `value`
-	             FROM `profile_options`
-          LEFT JOIN `user_options` ON `profile_options`.`id`=`user_options`.`option_id`  AND `user_id`='&1' 
-              WHERE `optionset`=2",
-						$login->userid);
-	while ($r = sql_fetch_assoc($rs))
-		switch ($r['id'])
-		{
-			case  6: $tpl->assign('opt_menumap',    $r['value']); break;
-			case  7: $tpl->assign('opt_overview',   $r['value']); break;
-			case  8: $tpl->assign('opt_maxcaches',  $r['value']); break;
-			case  9: $tpl->assign('opt_cacheicons', $r['value']); break;
-			case 10: $tpl->assign('opt_pictures',   $r['value']); break;
-		}
-	sql_free_result($rs);
+	$useroptions = new useroptions($login->userid);
+	$tpl->assign('opt_menumap',    $useroptions->getOptValue(USR_OPT_MAP_MENU));
+	$tpl->assign('opt_overview',   $useroptions->getOptValue(USR_OPT_MAP_OVERVIEW));
+	$tpl->assign('opt_maxcaches',  $useroptions->getOptValue(USR_OPT_MAP_MAXCACHES));
+	$tpl->assign('opt_cacheicons', $useroptions->getOptValue(USR_OPT_MAP_ICONSET));
+	$tpl->assign('opt_pictures',   $useroptions->getOptValue(USR_OPT_MAP_PREVIEW));
 
 	$tpl->assign('maxrecords',$opt['map']['maxrecords'] + 0);
 	$tpl->assign('min_maxrecords', $opt['map']['min_maxrecords']);
@@ -408,7 +388,7 @@ function output_namesearch($sName, $nLat, $nLon, $nResultId)
 function output_searchresult($nResultId, $compact, $nLon1, $nLon2, $nLat1, $nLat2,
                              $cachenames, $smallmap)
 {
-	global $login, $opt, $maxrecords, $msie;
+	global $login, $opt, $msie;
 
 	// check if data is available and connect the right slave server
 	$nSlaveId = sql_value("SELECT `slave_id` FROM `map2_result` WHERE `result_id`='&1' AND DATE_ADD(`date_created`, INTERVAL '&2' SECOND)>NOW()", -2, $nResultId, $opt['map']['maxcacheage']);

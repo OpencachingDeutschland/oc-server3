@@ -61,6 +61,7 @@
 		<li>Javascript-Warnung beim Loggen auf der italenischen Seite beseitigt</li>
 		<li>dänische Flagge bei dänischen Cachebeschreibungen</li>
 		<li>Suchprobleme nach Logout behoben</li>
+		<li>Auswahl der Nano-Größe im Suchforumlar korrigiert</li>
 	</ul>
 
 	 <p><strong>Version 3.0.4</strong> &ndash; 17. Februar 2013</p>

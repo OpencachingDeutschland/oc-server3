@@ -21,7 +21,6 @@
 
   //prepare the templates and include all neccessary
 	require_once('./lib/common.inc.php');
-	require_once('./lib2/logic/const.inc.php');
 
 function getWaypoints($cacheid)
 {

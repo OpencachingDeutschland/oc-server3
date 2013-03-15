@@ -104,7 +104,9 @@
 	{
 		// user has allowed picture stat and gallery view
 		$tpl->assign('allpics',$allpics);
-		if ($allpics)
+		if (!$allpics)
+			$tpl->assign('logpics', get_logpics(LOGPICS_FOR_USER_STAT, $userid));
+		else
 		{
 			$pictures = get_logpics(LOGPICS_FOR_USER_GALLERY, $userid, 0, $startat);
 			$more = (count($pictures) > MAX_PICTURES_PER_GALLERY_PAGE);
@@ -116,7 +118,7 @@
 			$tpl->assign('paging', $paging);
 			if ($paging)
 			{
-				$pages = floor(get_logpics(LOGPICS_FOR_USER_STAT, $userid)/MAX_PICTURES_PER_GALLERY_PAGE) + 1;
+				$pages = floor((get_logpics(LOGPICS_FOR_USER_STAT, $userid) + MAX_PICTURES_PER_GALLERY_PAGE - 1)/MAX_PICTURES_PER_GALLERY_PAGE);
 				$page = floor($startat/MAX_PICTURES_PER_GALLERY_PAGE) + 1;
 
 				$pl = "";
@@ -136,8 +138,6 @@
 			$tpl->name = 'viewprofile_pics';
 				// actually we dont need all the other stuff here ..
 		}
-		else
-			$tpl->assign('logpics', get_logpics(LOGPICS_FOR_USER_STAT, $userid));
 	}
 
 	$tpl->assign('showcountry', (strlen(trim($record['country'])) > 0));

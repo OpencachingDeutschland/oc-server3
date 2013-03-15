@@ -343,8 +343,8 @@ function switchAttributeCat2()
 	<table class="table">
 		<tr>
 			<td>{t}Cachesize:{/t}</td>
-			<td><input type="checkbox" id="cachesize8" name="cachesize8" value="8" onclick="sync_options(this)" class="checkbox" {cachesize2checked} /> <label for="cachesize2">{t}nano{/t}</label>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-			<td><input type="checkbox" id="cachesize2" name="cachesize2" value="2" onclick="sync_options(this)" class="checkbox" {cachesize8checked} /> <label for="cachesize2">{t}micro{/t}</label></td>
+			<td><input type="checkbox" id="cachesize8" name="cachesize8" value="8" onclick="sync_options(this)" class="checkbox" {cachesize8checked} /> <label for="cachesize8">{t}nano{/t}</label>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+			<td><input type="checkbox" id="cachesize2" name="cachesize2" value="2" onclick="sync_options(this)" class="checkbox" {cachesize2checked} /> <label for="cachesize2">{t}micro{/t}</label></td>
 			<td><input type="checkbox" id="cachesize3" name="cachesize3" value="3" onclick="sync_options(this)" class="checkbox" {cachesize3checked} /> <label for="cachesize3">{t}small{/t}</label></td>
 			<td><input type="checkbox" id="cachesize4" name="cachesize4" value="4" onclick="sync_options(this)" class="checkbox" {cachesize4checked} /> <label for="cachesize4">{t}normal{/t}</label></td>
 		</tr>

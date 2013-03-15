@@ -59,7 +59,8 @@ abstract class ChildWp_Presenter
   {
     $this->childWpHandler = $childWpHandler;
     $this->cacheId = $cacheId;
-    $this->waypointTypes = $childWpHandler->getChildWpIdAndNames();    $this->typeImages = $childWpHandler->getChildNamesAndImages();
+    $this->waypointTypes = $childWpHandler->getChildWpIdAndNames();
+		$this->typeImages = $childWpHandler->getChildNamesAndImages();
   }
 
   public function initChildWp($childId, $childWp)

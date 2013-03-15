@@ -59,6 +59,7 @@
 		<li>removed JavaScript warning when logging on the Italien page</li>
 		<li>show Danish flag with Danish cache descriptions</li>
 		<li>fixed search problems after logging out</li>
+		<li>fixed nano size selection in search form</li>
 	</ul>
 
 	 <p><strong>Release  3.0.4</strong> &ndash; February 17, 2013

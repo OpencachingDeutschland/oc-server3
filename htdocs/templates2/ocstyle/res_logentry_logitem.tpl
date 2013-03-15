@@ -64,7 +64,7 @@
 
 			<a onclick="enlarge(document.getElementById('pic{$pictureItem.id}'))" style="cursor:pointer">{$pictureItem.title|escape}</a>
 			{* the position of this image is the anchor for enlargit activity: *}
-			<img id="pic{$pictureItem.id}" src="resource2/ocstyle/images/misc/empty.png" longdesc="{$pictureItem.url}" alt="{$pictureItem.title|escape}" style="cursor:pointer" onclick="enlarge(this)"/>
+			<img id="pic{$pictureItem.id}" src="resource2/ocstyle/images/misc/empty.png" longdesc="{$pictureItem.url}" />
 			{if $logItem.userid==$login.userid}
 				[<a href="picture.php?action=edit&uuid={$pictureItem.uuid|escape}">{t}Edit{/t}</a>]
 				[<a href="picture.php?action=delete&uuid={$pictureItem.uuid|escape}">{t}Delete{/t}</a>]

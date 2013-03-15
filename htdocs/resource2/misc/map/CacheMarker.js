@@ -1,3 +1,7 @@
+// Old CacheMarker implementation from the Google version 2 map.
+// Currently not used, because it slows down marker handling;
+// renders current Firefox unsusable.
+
 function CacheMarker(latlng, wp, type, flags, map)
 {
   this.latlng = latlng;

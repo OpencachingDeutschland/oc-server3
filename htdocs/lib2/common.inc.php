@@ -317,7 +317,7 @@ function fix_magic_quotes_gpc()
 	}
 }
 
-// wiki help embedding
+// external help embedding
 // pay attention to use only ' quotes in $text (escape other ')
 //
 // see corresponding function in lib/common.inc.php

@@ -179,7 +179,6 @@
 		<td class="header-small" >{t 1=$recommended 2=$maxrecommended}%1 of %2 possibles{/t} [<a href="usertops.php?userid={$userid}">{t}Show all{/t}</a>]
 		</td>
 	</tr>
-	<tr><td class="spacer" colspan="2"></td></tr>
 
 	{if $show_picstat}
 		<tr>

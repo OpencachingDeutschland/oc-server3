@@ -356,6 +356,7 @@ function mapLoad()
 	};
 
 	moMap = new google.maps.Map(document.getElementById("googlemap"), myOptions);
+	moMap.enableKeyDragZoom();
 
 	setMapType("OSM", "OpenStreetMap", "http://tile.openstreetmap.org/", 18);
 	setMapType("MQ"," MapQuest", "http://otile1.mqcdn.com/tiles/1.0.0/osm/", 19);

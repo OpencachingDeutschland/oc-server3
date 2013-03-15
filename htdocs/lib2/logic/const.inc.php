@@ -53,4 +53,15 @@
 	  // As of march 2013, there are a good deal of OC.de caches with 50-100 pics,
 		// but only one with more (~500 pics). If lots of caches have >100 pics,
 		// it may pay out to limit the gallery e.g. to 60 pics and implement browsing.
+
+	// constants for user options (must match values in DB!)
+	define('USR_OPT_GMZOOM', 1);
+	define('USR_OPT_SHOWSTATS', 5);
+	define('USR_OPT_MAP_MENU', 6);
+	define('USR_OPT_MAP_OVERVIEW', 7);
+	define('USR_OPT_MAP_MAXCACHES', 8);
+	define('USR_OPT_MAP_ICONSET', 9);
+	define('USR_OPT_MAP_PREVIEW', 10);
+	define('USR_OPT_PICSTAT', 11);
+	define('USR_OPT_TRANSLANG', 12);
 ?>

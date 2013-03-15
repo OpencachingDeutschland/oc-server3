@@ -1222,7 +1222,7 @@ function __autoload($class_name)
 	}
 
 
-// wiki help embedding
+// external help embedding
 // pay attention to use only ' quotes in $text (escape other ')
 //
 // see corresponding function in lib2/common.inc.php
@@ -1245,6 +1245,7 @@ function helppagelink($ocpage)
 	}
 	else
 		$helppage = "";
+	mysql_free_result($rs);
 
 	$imgtitle = $translate->t('Instructions', '', basename(__FILE__), __LINE__);
 	$imgtitle = "alt='" . $imgtitle . "' title='" . $imgtitle  . "'";

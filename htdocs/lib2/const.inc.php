@@ -32,10 +32,4 @@
 	define('DB_MODE_BUSINESSLAYER', 1);
 	define('DB_MODE_USER', 2);
 	define('DB_DATE_FORMAT', '%Y-%m-%d %H:%M:%S');
-
-	// constants for user options (must match values in DB!)
-	define('USR_OPT_GMZOOM', 1);
-	define('USR_OPT_SHOWSTATS', 5);
-	define('USR_OPT_TRANSLANG', 6);
-	define('USR_OPT_PICSTAT', 11);
 ?>

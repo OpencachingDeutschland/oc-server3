@@ -5,7 +5,7 @@
 ***************************************************************************}
 {* OCSTYLE *}
 <div class="content2-pagetitle">
-	<img src="resource2/{$opt.template.style}/images/cacheicon/traditional.gif" style="align: left; margin-right: 10px;" width="32" height="32" alt="{t}Log pictures{/t}" />
+	<img src="resource2/{$opt.template.style}/images/cacheicon/webcam.gif" style="align: left; margin-right: 10px;" width="32" height="32" alt="" />
 	{t 1=$username}Log pictures of %1{/t}
 </div>
 

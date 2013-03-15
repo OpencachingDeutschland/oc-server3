@@ -517,13 +517,6 @@ INSERT INTO `countries_options` (`country`, `display`, `gmLat`, `gmLon`, `gmZoom
 INSERT INTO `countries_options` (`country`, `display`, `gmLat`, `gmLon`, `gmZoom`, `nodeId`) VALUES ('TR', '1', '38.0307856938229', '33.90380859375', '6', '0');
 INSERT INTO `countries_options` (`country`, `display`, `gmLat`, `gmLon`, `gmZoom`, `nodeId`) VALUES ('US', '1', '30.1451271833761', '-94.658203125', '4', '10');
 
--- Table data_licenses
-SET NAMES 'utf8';
-TRUNCATE TABLE `data_licenses`;
-INSERT INTO `data_licenses` (`id`, `license`) VALUES ('0', 'passively accepted new license');
-INSERT INTO `data_licenses` (`id`, `license`) VALUES ('1', 'declined new license');
-INSERT INTO `data_licenses` (`id`, `license`) VALUES ('2', 'actively accepted new license');
-
 -- Table helppages
 SET NAMES 'utf8';
 TRUNCATE TABLE `helppages`;

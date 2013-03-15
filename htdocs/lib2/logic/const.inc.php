@@ -64,4 +64,10 @@
 	define('USR_OPT_MAP_PREVIEW', 10);
 	define('USR_OPT_PICSTAT', 11);
 	define('USR_OPT_TRANSLANG', 12);
+
+	// user.data_license values
+	define('OLD_DATA_LICSENSE',0);                       // deadline not reached
+	define('NEW_DATA_LICENSE_DECLINED',1);               // declined license
+	define('NEW_DATA_LICSENSE_ACTIVELY_ACCEPTED',1);     // accepted new license on registration
+	define('NEW_DATA_LICSENSE_PASSIVELY_ACCEPTED',2);    // did not decline license until deadline    
 ?>

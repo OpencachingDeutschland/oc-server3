@@ -50,3 +50,4 @@ date         commit ID    change
                           
 2013-03-10   f8738936     added field 'mappreview' in pictures and pictures_modified
 2013-03-14   69abeb67     added fields coordinates_type.preposition and pp_trans_id
+2013-03-15                discarded table 'data_license'

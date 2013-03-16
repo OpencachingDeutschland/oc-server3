@@ -84,9 +84,7 @@ class sitemaps
 
 	function write_newcaches_urls()
 	{
-		$nCount = sql_value("SELECT COUNT(*) FROM `caches`
-		                               INNER JOIN `cache_status` ON `caches`.`status`=`cache_status`.`id`
-		                                    WHERE `cache_status`.`allow_user_view`=1", 0);
+		$nCount = sql_value("SELECT COUNT(*) FROM `caches` WHERE `caches`.`status`=1", 0);
 		$nIndex = 0;
 		while ($nIndex < $nCount)
 		{
@@ -129,7 +127,9 @@ class sitemaps
 	{
 		$rs = sql("SELECT SQL_BUFFER_RESULT `caches`.`wp_oc`, `caches`.`cache_id`, `cache_desc`.`language`
 		             FROM `caches` 
-		       INNER JOIN `cache_desc` ON `caches`.`cache_id`=`cache_desc`.`cache_id`");
+		       INNER JOIN `cache_desc` ON `caches`.`cache_id`=`cache_desc`.`cache_id`
+					 INNER JOIN `cache_status` ON `caches`.`status`=`cache_status`.`id`
+		            WHERE `cache_status`.`allow_user_view`=1");
 		while ($r = sql_fetch_assoc($rs))
 		{
 			$dLastMod = sql_value("SELECT MAX(`last_modified`) `last_modified` FROM (SELECT `last_modified` FROM `caches` WHERE `cache_id` ='&1' UNION 

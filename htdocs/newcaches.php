@@ -36,7 +36,7 @@
 		sql_free_result($rsNewCaches);
 		$tpl->assign('newCaches', $newCaches);
 
-		$count = sql_value_slave('SELECT COUNT(*) `count` FROM `caches`INNER JOIN `cache_status` ON `caches`.`status`=`cache_status`.`id` WHERE `cache_status`.`allow_user_view`=1', 0);
+		$count = sql_value_slave('SELECT COUNT(*) `count` FROM `caches` WHERE `caches`.`status`=1', 0);
 		$maxstart = (ceil($count / $perpage)-1) * $perpage;
 
 		if ($startat < 4 * $perpage)

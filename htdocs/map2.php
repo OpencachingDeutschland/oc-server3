@@ -17,9 +17,9 @@
 	$login->verify();
 
 	// check for peculiar browsers
-	$msie = preg_match('/MSIE [1-9]+.[0-9]+/',$_SERVER['HTTP_USER_AGENT']) &&
-	                   !strpos($user_agent,"Opera");
-	$old_msie = $msie && preg_match('/MSIE [1-6].[0-9]+/',$_SERVER['HTTP_USER_AGENT']);
+	$ua = isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : "";
+	$msie = preg_match('/MSIE [1-9]+.[0-9]+/',$ua) && !strpos($ua,"Opera");
+	$old_msie = $msie && preg_match('/MSIE [1-6].[0-9]+/',$ua);
 
 	$sMode = isset($_REQUEST['mode']) ? $_REQUEST['mode'] : '';
 	if ($sMode == 'locate')

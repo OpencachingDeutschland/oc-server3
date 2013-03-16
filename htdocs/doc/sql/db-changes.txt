@@ -33,7 +33,7 @@ date         commit ID    change
 2013-02-16   06d832c3     new table data_licenses
                           added user.data_license
 2013-02-17   b7b51eab     added user.email_problems
-2013-03-01   c5057c88     added caches.short2 und .short2_trans_id
+2013-03-01   c5057c88     added cache_type.short2 und .short2_trans_id
 2013-03-03   c5057c88     added profile_options.optionset
 2013-03-04   df313402     new table helppages
 

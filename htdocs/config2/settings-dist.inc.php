@@ -333,6 +333,12 @@
 	 */
 	$opt['logic']['new_logs_per_country'] = true;
 
+	/* search engines
+	 * will be excluded from cache visitor count
+	 * current active bots on www.opencaching.de in 03/2013:
+	 */
+	$opt['logic']['search_engines'] = 'AcoonBot;AhrefsBot;Baiduspider;bingbot;Exabot;Ezooms;Googlebot;Googlebot-mobile;ia_archiver,Linguee Bot;Mail.RU_Bot;MJ12bot;msnbot;SISTRIX Crawler;Sophora Linkchecker;TweetmemeBot;WBSearchBot;Yahoo! Slurp;YandexBot';
+
 	/* opencaching prefixes in database available to search for
 	 */
 	$opt['logic']['ocprefixes'] = 'oc';

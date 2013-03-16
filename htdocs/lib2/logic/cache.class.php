@@ -237,11 +237,21 @@ class cache
 
 	static function visitCounter($nVisitUserId, $sRemoteAddr, $nCacheId)
 	{
+		global $opt, $_SERVER;
+
 		// delete cache_visits older 1 day 60*60*24 = 86400
 		sql("DELETE FROM `cache_visits` WHERE `cache_id`='&1' AND `user_id_ip`!='0' AND NOW()-`last_modified`>86400", $nCacheId);
 
 		if ($nVisitUserId==0)
+		{
+			$se = explode(';',$opt['logic']['search_engines']);
+			$ua = isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : "";
+			foreach ($se as $s)
+				if (strpos($ua,$s) !== FALSE)
+					return;   // do not count search engine views
+
 			$sIdentifier = $sRemoteAddr;
+		}
 		else
 			$sIdentifier = $nVisitUserId;
 

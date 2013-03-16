@@ -48,7 +48,8 @@
 	                                   ORDER BY `date_activate` DESC, `caches`.`date_created` DESC", $login->userid));
 
 	// get number of sent emails
-	$tpl->assign('emails', sql_value("SELECT COUNT(*) FROM `email_user` WHERE `from_user_id`='&1'", 0, $login->userid));
+	// useless information when email protocol is cleaned-up (cronjob 'purge_logs')
+	// $tpl->assign('emails', sql_value("SELECT COUNT(*) FROM `email_user` WHERE `from_user_id`='&1'", 0, $login->userid));
 	
 	// get log pictures
 	$tpl->assign('pictures', get_logpics(LOGPICS_FOR_MYHOME_GALLERY));

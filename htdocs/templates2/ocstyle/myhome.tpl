@@ -105,18 +105,21 @@
 	</table>
 
 	{* Other information *}
+	{*
 	<div class="content2-container bg-blue02" style="margin-top:20px;">
 		<p class="content-title-noshade-size3">
 			<img src="resource2/{$opt.template.style}/images/misc/25x25-world.png" width="25" height="25" style="align: left; margin-right: 10px;" alt="{t}Other information{/t}" />&nbsp;
 			{t}Other information{/t}
 		</p>
 	</div>
-
+	*}
 	{* Emails sent *}
+	{* useless information when email protocol is regularly cleand-up 
 	<p>
 		<img src="resource2/{$opt.template.style}/images/misc/22x22-email.png" width="22" height="22" style="align: left; margin-right: 10px;" alt="{t}E-Mails sent{/t}" />&nbsp;
 		<strong>{t 1=$emails}E-Mails sent: %1{/t}</strong>
 	</p>
+	*}
 	<div class="buffer">&nbsp;</div>
 
 	{* link to public profile *}

@@ -166,12 +166,7 @@ function get_logpics($purpose, $userid=0, $cacheid=0, $startat=0)
 	}
 	
 	if ($rs !== false)
-	{
 		$result = sql_fetch_assoc_table($rs);
-		while (count($result) % 6)
-			// fill up table to full line length, so that < 6 pics do not spread over the table width
-			$result[] = array('pic_uuid' => '');
-	}
 	
 	return $result;
 }

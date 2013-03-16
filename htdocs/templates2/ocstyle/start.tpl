@@ -37,7 +37,9 @@
 		{/foreach}
 	</table>
 {else}
-	{$news}
+	<div id="blog">
+		{$news}
+	</div>
 {/if}
 
 {* next events *}
@@ -113,7 +115,9 @@
                 <div class="buffer" style="width: 500px;">&nbsp;</div>
         </div>
 *}
-{$forum}
+<div id="forum">
+	{$forum}
+</div>
 {*
 	<ul class="nodot">
 		{foreach from=$phpbb_topics item=phpbbItem}

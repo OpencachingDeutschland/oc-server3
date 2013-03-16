@@ -256,6 +256,7 @@ ul#statmenu { padding: 0px; margin: 0px;}
 .content-title-noshade-size0 {margin: 0px; padding: 0px; color: rgb(88,144,168); font-weight: bold; font-size: 70%;}
 .content-title-noshade-size05 {margin: 0px; padding: 0px; color: rgb(88,144,168); font-weight: bold; font-size: 80%;}
 .content-title-noshade-size1 {margin: 0px; padding: 0px; color: rgb(88,144,168); font-weight: bold; font-size: 130%;}
+.content-title-noshade-size15 {margin: 0px; padding: 0px; color: rgb(88,144,168); font-weight: bold; font-size: 136%;}
 .content-title-noshade-size2 {margin: 0px; padding: 0px; color: rgb(88,144,168); font-weight: bold; font-size: 150%;}
 .content-title-noshade-size3 {
 	margin: 0px; 
@@ -1194,3 +1195,11 @@ div#havefound {
 
 * html div#havefound {top: 160px;}
 *+html div#havefound {top: 160px;}
+
+/* RSS feeds */
+#blog div.newsblock { margin-left:12px }
+#forum div.newsblock { margin-left:12px }
+#blog div.rsstext {margin: 0px 30px 0.5em 0; padding: 0px; line-height: 1.3em; font-family: arial, sans serif; font-size: 12px; }
+.quoteheader, .topslice_quote, .bbc_standard_quote  { display:none; }
+#forum div.rsstext {margin: 0px 30px 0.5em 28px; padding: 0px; line-height: 1.3em; font-family: arial, sans serif; font-size: 12px; }
+.quoteheader, .topslice_quote, .bbc_standard_quote  { display:none; }

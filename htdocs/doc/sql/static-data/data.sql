@@ -12,7 +12,6 @@
 -- countries
 -- countries_list_default
 -- countries_options
--- data_licenses
 -- helppages
 -- languages
 -- languages_list_default
@@ -204,11 +203,11 @@ INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('10', '3');
 -- Table coordinates_type
 SET NAMES 'utf8';
 TRUNCATE TABLE `coordinates_type`;
-INSERT INTO `coordinates_type` (`id`, `name`, `trans_id`, `image`, `preposition`, `pp_trans_id`) VALUES ('1', 'Parking', '1788', 'resource2/ocstyle/images/misc/wp_parking.png', 'for', 1923);
-INSERT INTO `coordinates_type` (`id`, `name`, `trans_id`, `image`, `preposition`, `pp_trans_id`) VALUES ('2', 'Stage or reference point', '1789', 'resource2/ocstyle/images/misc/wp_reference.png', 'of', 894);
-INSERT INTO `coordinates_type` (`id`, `name`, `trans_id`, `image`, `preposition`, `pp_trans_id`) VALUES ('3', 'Path', '1926', 'resource2/ocstyle/images/misc/wp_path.png', 'to ', 1961);
-INSERT INTO `coordinates_type` (`id`, `name`, `trans_id`, `image`, `preposition`, `pp_trans_id`) VALUES ('4', 'Final', '1927', 'resource2/ocstyle/images/misc/wp_final.png', 'of', 894);
-INSERT INTO `coordinates_type` (`id`, `name`, `trans_id`, `image`, `preposition`, `pp_trans_id`) VALUES ('5', 'Point of interest', '1570', 'resource2/ocstyle/images/misc/wp_poi.png', 'at', 1962);
+INSERT INTO `coordinates_type` (`id`, `name`, `trans_id`, `image`, `preposition`, `pp_trans_id`) VALUES ('1', 'Parking', '1788', 'resource2/ocstyle/images/misc/wp_parking.png', 'for', '1923');
+INSERT INTO `coordinates_type` (`id`, `name`, `trans_id`, `image`, `preposition`, `pp_trans_id`) VALUES ('2', 'Stage or reference point', '1789', 'resource2/ocstyle/images/misc/wp_reference.png', 'of', '894');
+INSERT INTO `coordinates_type` (`id`, `name`, `trans_id`, `image`, `preposition`, `pp_trans_id`) VALUES ('3', 'Path', '1926', 'resource2/ocstyle/images/misc/wp_path.png', 'to ', '1961');
+INSERT INTO `coordinates_type` (`id`, `name`, `trans_id`, `image`, `preposition`, `pp_trans_id`) VALUES ('4', 'Final', '1927', 'resource2/ocstyle/images/misc/wp_final.png', 'of', '894');
+INSERT INTO `coordinates_type` (`id`, `name`, `trans_id`, `image`, `preposition`, `pp_trans_id`) VALUES ('5', 'Point of interest', '1570', 'resource2/ocstyle/images/misc/wp_poi.png', 'at', '1962');
 
 -- Table countries
 SET NAMES 'utf8';
@@ -8476,6 +8475,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1334', 'ES', 'Común', '2010-12-09 00:17:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1335', 'ES', 'Tiempo', '2010-12-09 00:17:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1336', 'ES', 'Estacionales', '2010-12-09 00:17:59');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1337', 'ES', 'Listado', '2013-03-16 17:23:42');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1338', 'ES', 'Requiere de herramientas', '2010-12-09 00:17:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1339', 'ES', 'Necesita preparación', '2010-12-09 00:17:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1340', 'ES', 'Personas', '2010-12-09 00:17:59');
@@ -8909,6 +8909,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1802', 'ES', 'Advertencia: Este informe ya está asignado a otro administrador. ¡Consulte a él primero antes de asumir el informe!', '2013-02-21 00:32:43');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1803', 'ES', 'nano', '2013-02-21 00:32:43');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1804', 'ES', 'Licencia de datos', '2013-02-21 00:32:43');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1805', 'ES', 'El contenido está disponible bajo licencia <br/><a rel=\"license\" href=\"http://creativecommons.org/licenses/by-nc-nd/3.0/de/deed.en\" target=\"_blank\">Creative Commons Attribution-NonCommercial-NoDerivs 3.0 Germany</a> Licencia.', '2013-03-16 17:23:42');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1806', 'ES', '¡Por favor, seleccione sólo una de las opciones de eliminar / desactivar!', '2013-02-21 00:32:43');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1807', 'ES', 'Al enviar Acepto los  <a href=\"articles.php?page=impressum#tos\" target=\"_blank\">los terminos de servicio de Opencaching.de</a> y la <a href=\"articles.php?page=impressum#datalicense\" target=\"_blank\">licencia de datos de Opencaching.de</a>.', '2013-02-21 00:32:43');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1808', 'ES', 'He leído y entendido la <a target=\"_blank\" href=\"articles.php?page=dsb\">declaración de privacidad</a>, los <a target=\"_blank\" href=\"articles.php?page=impressum#tos\">terminos de servicio</a> y la <a href=\"articles.php?page=impressum#datalicense\" target=\"_blank\">Licencia de Datos</a> y aceptarlos.', '2013-02-21 00:32:43');
@@ -8934,6 +8935,27 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1828', 'ES', 'Confirma el email', '2013-02-21 00:32:43');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1829', 'ES', 'Marca el email no válido', '2013-02-21 00:32:43');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1830', 'ES', 'el email de los datos licencia no se entregó', '2013-02-21 00:32:43');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1831', 'ES', 'Administradores', '2013-03-16 17:23:42');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1832', 'ES', 'Derechos', '2013-03-16 17:23:42');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1833', 'ES', 'Derechos de administrador puede otorgar y revocar un administrador de sistemas con acceso a la base de datos.', '2013-03-16 17:23:42');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1834', 'ES', 'declino los datos de licencia', '2013-03-16 17:23:42');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1835', 'ES', 'La cuenta de usuario ha sido desactivado, ya que el usuario declinó la <a href=\"articles.php?page=impressum#datalicense\">licencia de datos/a>. Descripciones del cache, textos logs e imagenes que han sido borradas.', '2013-03-16 17:23:42');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1837', 'ES', 'Distancia desde <a href=\"myprofile.php\">de las coordenadas de origen del usuario</a>', '2013-03-16 17:23:42');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1838', 'ES', 'Username o dirección de email', '2013-03-16 17:23:42');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1839', 'ES', 'Debes seleccionar un registro para sobrescribirlo.', '2013-03-16 17:23:42');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1840', 'ES', 'Enlace a esta vista del mapa', '2013-03-16 17:23:42');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1841', 'ES', 'Tu Internet Explorer es demasiado viejo para visualizar el mapa. Por favor, actualice al menos a la versión 7 o mejor 8.', '2013-03-16 17:23:42');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1842', 'ES', 'Ir a las Coordenadas de origen', '2013-03-16 17:23:42');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1843', 'ES', 'Cambiar a mapa pequeño', '2013-03-16 17:23:42');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1844', 'ES', 'Entre 1 y 500 cachés se mostraran en tu descarga.', '2013-03-16 17:23:42');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1846', 'ES', 'Seleccionar un tipo de waypoint', '2013-03-16 17:23:42');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1847', 'ES', 'Coordenada invalida', '2013-03-16 17:23:42');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1848', 'ES', 'Registrado desde', '2013-03-16 17:23:42');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1849', 'ES', 'El mapa está en proceso de actualización', '2013-03-16 17:23:42');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1850', 'ES', 'no se encontró (con los ajustes seleccionados)', '2013-03-16 17:23:42');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1851', 'ES', 'Visualización del mapa con Microsoft Internet Explorer es lento y limitado a %1 geocaches. Utilice otro navegador para un mejor rendimiento.', '2013-03-16 17:23:42');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1852', 'ES', 'Geocaches encontrados, más cercano en primer lugar:', '2013-03-16 17:23:42');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1853', 'ES', 'Lugares encontrar a través de Google:', '2013-03-16 17:23:42');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1855', 'ES', 'tradicional', '2012-10-11 00:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1857', 'ES', 'virtual', '2012-10-11 00:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1858', 'ES', 'Webcam', '2012-10-11 00:00:00');
@@ -8942,6 +8964,54 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1861', 'ES', 'Mat./Física', '2012-10-11 00:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1862', 'ES', 'movimiento', '2012-10-11 00:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1863', 'ES', 'Drive-In', '2012-10-11 00:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1865', 'ES', 'Cargando mapa', '2013-03-16 17:23:42');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1866', 'ES', 'Instrucciones', '2013-03-16 17:23:42');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1867', 'ES', '\'Map\' opción de menu', '2013-03-16 17:23:42');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1868', 'ES', 'pequeño mapa', '2013-03-16 17:23:42');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1869', 'ES', 'mapa en pantalla completa', '2013-03-16 17:23:42');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1870', 'ES', 'Mostrar mapa general', '2013-03-16 17:23:42');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1871', 'ES', 'Maximo de cache en el mapa<br />(%1-%2, 0=automatic)', '2013-03-16 17:23:42');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1872', 'ES', 'Iconos de cache', '2013-03-16 17:23:42');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1873', 'ES', 'OC clasico', '2013-03-16 17:23:42');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1874', 'ES', 'estilo OKAPI', '2013-03-16 17:23:42');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1875', 'ES', 'Debes estar conectado para cambiar la configuración del mapa.', '2013-03-16 17:23:42');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1876', 'ES', 'Datos del mapa \&copy; <a href=\"http://www.openstreetmap.org/copyright\" target=\"_blank\">OpenStreetMap</a> colaboradores', '2013-03-16 17:23:42');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1877', 'ES', 'capas proporcionadas por <a href=\"http://www.mapquest.com/\" target=\"_blank\">MapQuest</a>', '2013-03-16 17:23:42');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1878', 'ES', 'Datos del mapa \&copy; <a href=\"http://www.openstreetmap.org/copyright\" target=\"_blank\">OpenStreetMap</a> and <a href=\"http://www.thunderforest.com/opencyclemap/\" target=\"_blank\">OpenCycleMap</a> colaboradores', '2013-03-16 17:23:42');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1918', 'ES', 'Por favor, utiliza la marca de spoiler también para los cuadros de registro, para evitar que aparezcan en páginas de la galería de registro.', '2013-03-16 17:23:42');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1919', 'ES', 'Nuevas fotos de registro', '2013-03-16 17:23:42');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1920', 'ES', 'D', '2013-03-16 17:23:42');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1921', 'ES', 'T', '2013-03-16 17:23:42');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1922', 'ES', 'click en el spoiler para mostrarlo', '2013-03-16 17:23:42');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1923', 'ES', 'para', '2013-03-16 17:23:42');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1924', 'ES', 'El cache tiene %1 %2additional waypoints%3.', '2013-03-16 17:23:42');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1925', 'ES', 'El cache tiene unos %2additional waypoint%3.', '2013-03-16 17:23:42');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1926', 'ES', 'Path', '2013-03-16 17:23:42');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1927', 'ES', 'Final', '2013-03-16 17:23:42');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1928', 'ES', 'Mostrar $1preview de la imagen</a><br />(% of map area, 0=off)', '2013-03-16 17:23:42');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1929', 'ES', 'Imagen de vista previa para ver el mapa - se muestra cuando se selecciona esta cache en el mapa. Sólo puede tener <em>una</em> imagen de vista previa por cache.', '2013-03-16 17:23:42');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1930', 'ES', 'Max. %1 caches se pueden visualizar con Microsoft Internet Explorer.', '2013-03-16 17:23:42');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1940', 'ES', 'Galeria de imagenes', '2013-03-16 17:23:42');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1941', 'ES', 'Calendario de exposiciones de la fecha de la subida de imágenes, cosa que puede diferir de la fecha de registro.', '2013-03-16 17:23:42');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1942', 'ES', 'Máximo una foto por día y usuario se muestra aquí. La pequeña galería en la página de inicio es, además, limitada a una imagen por cache y el día.', '2013-03-16 17:23:42');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1943', 'ES', 'Todas las imágenes tienen derechos de autor. Si desea utilizarlas, pedir al autor de imagen permiso. Del 7 de abril de 2013, incluyendo los registros de imágenes pueden utilizarse en forma inalterada en los términos de la nueva licencia <href=\"articles.php?page=impressum#datalicense\">data license</a>.', '2013-03-16 17:23:42');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1944', 'ES', 'Muéstreles la lámina estadísticas y galería', '2013-03-16 17:23:42');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1945', 'ES', 'Los de imagenes', '2013-03-16 17:23:42');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1946', 'ES', 'Log de las imagenes: %1', '2013-03-16 17:23:42');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1947', 'ES', 'Log de la imagenes de %1', '2013-03-16 17:23:42');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1948', 'ES', 'Los log de las imagenes', '2013-03-16 17:23:42');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1949', 'ES', 'Los log de las imagenes', '2013-03-16 17:23:42');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1950', 'ES', 'En la configuración del perfil <a href=\"mydetails.php\"> </a> se puede elegir si el registro de imágenes de estadísticas y galería es visible para otros usuarios.', '2013-03-16 17:23:42');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1951', 'ES', 'Esto es lo que su perfil se parece a otros usuarios:', '2013-03-16 17:23:42');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1952', 'ES', 'Tu perfil público', '2013-03-16 17:23:42');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1953', 'ES', 'No has subido ninguna foto aún de registro.', '2013-03-16 17:23:42');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1954', 'ES', 'Las fotografías marcadas como spoiler no se muestran, por lo que el número de imágenes en esta página puede ser menor que en las estadísticas de perfil.', '2013-03-16 17:23:42');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1955', 'ES', 'Otra información', '2013-03-16 17:23:42');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1956', 'ES', 'Log de la imagen', '2013-03-16 17:23:42');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1957', 'ES', '\"Spoiler\" imágenes que muestran detalles del escondite no debe ser visible aquí. Si se encuentra con un spoiler visible abierto, puede comunicarse con el registrador en el botón de e-mail en su perfil y le pido que marcarlo como spoiler.', '2013-03-16 17:23:42');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1958', 'ES', 'Volver a la descripción del cache', '2013-02-19 05:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1959', 'ES', 'Sólo en los últimos %1 se visualizan imágenes.', '2013-02-19 05:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1960', 'ES', 'Página', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1961', 'ES', 'a', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1962', 'ES', 'cerca de', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('6', 'FR', 'Pseudo', '2010-08-28 11:48:08');
@@ -12045,4 +12115,4 @@ TRUNCATE TABLE `watches_waitingtypes`;
 INSERT INTO `watches_waitingtypes` (`id`, `watchtype`) VALUES ('1', 'ownerlog');
 INSERT INTO `watches_waitingtypes` (`id`, `watchtype`) VALUES ('2', 'cache_watches');
 
-INSERT INTO `sysconfig` (`name`, `value`) VALUES ('datasql_checksum', '239b10092df425ab450065104e56e8c9') ON DUPLICATE KEY UPDATE `value`='239b10092df425ab450065104e56e8c9';
+INSERT INTO `sysconfig` (`name`, `value`) VALUES ('datasql_checksum', 'baa47d349d1c35e4b14c2b1329a75138') ON DUPLICATE KEY UPDATE `value`='baa47d349d1c35e4b14c2b1329a75138';

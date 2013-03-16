@@ -47,6 +47,10 @@
 	define('OBJECT_PICTURE', 6);
 	define('OBJECT_REMOVEDOBJECT', 7);
 
+	// coordinate types
+	define('COORDINATE_WAYPOINT', 1);
+	define('COORDINATE_USERNOTE', 2);
+
 	define('MAX_LOGENTRIES_ON_CACHEPAGE', 5);
 	define('MAX_PICTURES_PER_GALLERY_PAGE', 48);   // must be multiple of 6
 	define('MAX_PICTURES_IN_CACHE_GALLERY', 120);  // must be multiple of 6

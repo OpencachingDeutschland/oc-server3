@@ -194,6 +194,7 @@
 
 				 UPDATE `cache_desc` SET `last_modified`=NOW() WHERE `cache_id`=nCacheId;
 				 UPDATE `cache_logs` SET `last_modified`=NOW() WHERE `cache_id`=nCacheId;
+				 UPDATE `coordinates` SET `last_modified`=NOW() WHERE `cache_id`=nCacheId AND `type`=1;
 				 UPDATE `pictures` SET `last_modified`=NOW() WHERE `object_type`=2 AND `object_id`=nCacheId;
 				 UPDATE `pictures`, `cache_logs` SET `pictures`.`last_modified`=NOW() WHERE `pictures`.`object_type`=1 AND `pictures`.`object_id`=`cache_logs`.`id` AND `cache_logs`.`cache_id`=nCacheId;
 				 UPDATE `mp3` SET `last_modified`=NOW() WHERE `object_id`=nCacheId;
@@ -1281,4 +1282,26 @@
 					BEGIN 
 						DELETE FROM `map2_data` WHERE `result_id`=OLD.`result_id`;
 					END;");
+
+	sql_dropTrigger('coordinatesBeforeInsert');
+	sql("CREATE TRIGGER `coordinatesBeforeInsert` BEFORE INSERT ON `coordinates`
+				FOR EACH ROW
+					BEGIN
+						/* dont overwrite date values while XML client is running */
+						IF ISNULL(@XMLSYNC) OR @XMLSYNC!=1 THEN
+							SET NEW.`date_created`=NOW();
+							SET NEW.`last_modified`=NOW();
+						END IF;
+					END;");
+
+	sql_dropTrigger('coordinatesBeforeUpdate');
+	sql("CREATE TRIGGER `coordinatesBeforeUpdate` BEFORE UPDATE ON `coordinates`
+				FOR EACH ROW
+					BEGIN
+						/* dont overwrite `last_modified` while XML client is running */
+						IF ISNULL(@XMLSYNC) OR @XMLSYNC!=1 THEN
+							SET NEW.`last_modified`=NOW();
+						END IF;
+					END;");
+
 ?>

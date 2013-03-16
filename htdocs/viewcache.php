@@ -153,8 +153,9 @@ function getChildWaypoints($cacheid)
 
 	$rCache['lastmodified'] = sql_value("SELECT MAX(`last_modified`) `last_modified` FROM 
 	(SELECT `last_modified` FROM `caches` WHERE `cache_id` ='&1'
-	UNION SELECT `last_modified` FROM `cache_desc` WHERE `cache_id` ='&1') `tmp_result`",
-	null,  	$cacheid);
+	UNION SELECT `last_modified` FROM `cache_desc` WHERE `cache_id` ='&1'
+	UNION SELECT `last_modified` FROM `coordinates` WHERE `cache_id`='&1' AND `type`='&2') `tmp_result`",
+	null,  	$cacheid, COORDINATE_WAYPOINT);
 
 	$rCache['desclanguages'] = explode(',', $rCache['desclanguages']);
 

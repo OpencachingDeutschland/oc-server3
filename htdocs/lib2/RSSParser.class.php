@@ -25,6 +25,7 @@ class RSSParser {
 			
 			// output
 			$html = '<div class="buffer" style="width: 500px;height: 2px;">&nbsp;</div>'."\n";
+			$html .= '<div class="newsblock">';
 			
 			// get xml-data
 			$data = file_get_contents($url);
@@ -50,10 +51,10 @@ class RSSParser {
 						} else {
 							
 							// add html
-							$html .= '<p class="content-title-noshade-size2" style="display: inline;">'."\n";
+							$html .= '<p class="content-title-noshade-size15" style="display: inline;">'."\n";
 							$html .= strftime('%e. %B %Y',strtotime($item->pubDate)).' - '. $item->title;
 							$html .= '</p> <p style="line-height: 1.6em;display: inline;">&emsp;[<b><a class="link" href="'.$item->link.'">mehr...</a></b>]</p>'."\n";
-							$html .= '<p>'.$item->description.'</p>'."\n";
+							$html .= '<div class="rsstext">'.$item->description.'</div>'."\n";
 						}
 						
 						// increment counter
@@ -61,6 +62,7 @@ class RSSParser {
 					}
 				
 					// finish html
+					$html .= "</div>";
 					$html .= '<div class="buffer" style="width: 500px;">&nbsp;</div>'."\n";
 				}
 				catch(Exception $e) {

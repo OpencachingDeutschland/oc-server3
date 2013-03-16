@@ -79,6 +79,7 @@
 
 		if (isset($_REQUEST['opt_menumap']))    $useroptions->setOptValue(USR_OPT_MAP_MENU,      $_REQUEST['opt_menumap']+0);
 		if (isset($_REQUEST['opt_overview']))   $useroptions->setOptValue(USR_OPT_MAP_OVERVIEW,  $_REQUEST['opt_overview']+0);
+		                                   else $useroptions->setOptValue(USR_OPT_MAP_OVERVIEW,  0);
 		if (isset($_REQUEST['opt_maxcaches']))  $useroptions->setOptValue(USR_OPT_MAP_MAXCACHES, $_REQUEST['opt_maxcaches'] == 0 ? 0 : min(max(round($_REQUEST['opt_maxcaches']+0), $opt['map']['min_maxrecords']), $opt['map']['max_maxrecords']) );
 		if (isset($_REQUEST['opt_cacheicons'])) $useroptions->setOptValue(USR_OPT_MAP_ICONSET,   $_REQUEST['opt_cacheicons']+0);
 		if (isset($_REQUEST['opt_pictures']))   $useroptions->setOptValue(USR_OPT_MAP_PREVIEW,   min(max(round($_REQUEST['opt_pictures']+0), 0), 50) );

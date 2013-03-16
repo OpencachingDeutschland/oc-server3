@@ -332,7 +332,7 @@
 			<tr bgcolor="{cycle values="#ffffff,#eeeeee"}">
 				<td width="25%"><table cellspacing="0" cellpadding="0"><tr><td><img src="{$childWaypoint.image}" /></td><td>{$childWaypoint.name|escape}</td></tr></table></td>
 				<td width="18%">{$childWaypoint.coordinateHtml}</td>
-				<td>{$childWaypoint.description|escape}</td>
+				<td>{$childWaypoint.description|escape|replace:"\r\n":"<br />"}</td>
 			</tr>
 		{/foreach}
 		</table>

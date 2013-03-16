@@ -348,7 +348,7 @@ function output_cachexml($sWaypoint)
 		echo 'imagewidth="38" imageheight="38" ';
 		echo 'latitude="' . xmlentities($waypoint['latitude']) . '" ';
 		echo 'longitude="' . xmlentities($waypoint['longitude']) . '" ';
-		echo 'description="' . xmlentities(mb_ereg_replace('\r\n','<br />',htmlentities($waypoint['description'],ENT_NOQUOTES,'UTF-8'))) . '" />\n';
+		echo 'description="' . xmlentities(mb_ereg_replace('\r\n','<br />',htmlentities(trim($waypoint['description']),ENT_NOQUOTES,'UTF-8'))) . '" />\n';
 	}
 
 	echo '  </cache>\n';

@@ -30,6 +30,7 @@ function getChildWaypoints($cacheid)
     for ($i = 0; $i < $count; $i++)
     {
       $waypoints[$i]['coordinateHtml'] = $formatter->formatHtml($waypoints[$i]['coordinate'], '<br />');
+      $waypoints[$i]['description'] = trim($waypoints[$i]['description']);
     }
   }
 

@@ -1007,10 +1007,12 @@
 								CALL sp_update_cache_picturestat(NEW.`object_id`, FALSE);
 							END IF;
 						ELSEIF @archive_picop AND
-						       NEW.`object_type`=2 AND
-						       (OLD.`date_created` < LEFT(NOW(),10)) AND
-									 (SELECT `status` FROM `caches` WHERE `caches`.`cache_id`=OLD.`object_id`) != 5 AND
-									 (NEW.`title` != OLD.`title` OR NEW.`spoiler` != OLD.`spoiler` OR NEW.`display` != OLD.`display`) THEN
+						       ( ( NEW.`object_type`=2 AND
+									     OLD.`date_created` < LEFT(NOW(),10) AND
+									     (SELECT `status` FROM `caches` WHERE `caches`.`cache_id`=OLD.`object_id`) != 5
+										 ) OR
+		                 NEW.`object_type`=1 ) AND
+		               (NEW.`title` != OLD.`title` OR NEW.`spoiler` != OLD.`spoiler` OR NEW.`display` != OLD.`display`) THEN
 							INSERT IGNORE INTO `pictures_modified` (`id`, `date_modified`, `operation`, `date_created`, `url`, `title`, `object_id`, `object_type`, `spoiler`, `unknown_format`, `display`, `restored_by`) VALUES (OLD.`id`, NOW(), 'U', OLD.`date_created`, OLD.`url`, OLD.`title`, OLD.`object_id`, OLD.`object_type`, OLD.`spoiler`, OLD.`unknown_format`, OLD.`display`, IFNULL(@restoredby,0));
 						END IF;
 					END;");
@@ -1144,6 +1146,21 @@
 								SET NEW.`last_modified`=NOW();
 							END IF;
 						END IF;
+					END;");
+
+	sql_dropTrigger('userBeforeDelete');
+	sql("CREATE TRIGGER `userBeforeDelete` BEFORE DELETE ON `user` 
+				FOR EACH ROW 
+					BEGIN
+						DELETE FROM `cache_adoption` WHERE `user_id`=OLD.user_id;
+						DELETE FROM `cache_ignore` WHERE `user_id`=OLD.user_id;
+						DELETE FROM `cache_rating` WHERE `user_id`=OLD.user_id;
+						DELETE FROM `cache_watches` WHERE `user_id`=OLD.user_id;
+						DELETE FROM `stat_user` WHERE `user_id`=OLD.user_id;
+						DELETE FROM `user_options` WHERE `user_id`=OLD.user_id;
+						DELETE FROM `user_statpic` WHERE `user_id`=OLD.user_id;
+						DELETE FROM `watches_waiting` WHERE `user_id`=OLD.user_id;
+						DELETE FROM `notify_waiting` WHERE `user_id`=OLD.user_id;
 					END;");
 
 	sql_dropTrigger('userAfterDelete');

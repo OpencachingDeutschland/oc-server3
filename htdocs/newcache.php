@@ -502,7 +502,7 @@
 
 					if ($bBeginLine == true)
 					{
-						$cache_attrib_list .= '<div id="attribs1">';
+						$cache_attrib_list .= '<div class="attribswide">';
 						$bBeginLine = false;
 					}
 

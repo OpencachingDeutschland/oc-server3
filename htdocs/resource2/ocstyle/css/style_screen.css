@@ -976,17 +976,30 @@ ul.nodot li {
 	background-image: none;
 }
 
-/* Attribute auf der Suchseite */
+/* attributes on search page */
 
 div#attribs1 {
+	max-width: 670px;  /* MSIE needs this */
 	padding: 0;
 	margin: 0;
 }
 
 div#attribs2 {
+	max-width: 670px;  /* MSIE needs this */
 	padding: 0;
 	margin: 0;
 }
+
+/* attributes on cache page */
+div.attribswide {
+	max-width: 770px;  /* MSIE needs this */
+	padding: 0;
+	margin: 0;
+}
+
+
+div.attribgroup td {padding: 3px 5px 2px 5px; text-align: left; font-size: 120%;}
+
 
  /* CSS-Hack for Firefox */
  

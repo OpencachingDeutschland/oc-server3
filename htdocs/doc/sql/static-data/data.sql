@@ -1888,7 +1888,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1377', '(leave 
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1378', 'Please note the <a href=\"articles.php?page=cacheinfo#logpw\" target=\"_blank\">description</a>', '2010-09-07 20:19:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1379', 'Less', '2010-09-07 20:19:02');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1380', 'Search for caches', '2010-09-07 20:19:02');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1381', 'JavaScript is not activated, you cannot use the following options (sorting to attributes) - basic search is supported nevertheless.', '2010-09-07 20:19:02');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1381', 'JavaScript is not activated, you cannot use the above options (sorting to attributes) - basic search is supported nevertheless.', '2010-09-07 20:19:02');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1382', 'Sorting of result:', '2010-09-07 20:19:02');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1383', 'Last log', '2010-09-07 20:19:02');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1384', 'Show recommendation from other users first', '2010-09-07 20:19:02');
@@ -5553,7 +5553,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1378', 'DE', 'Bitte die <a href=\"articles.php?page=cacheinfo#logpw\" target=\"_blank\">Beschreibung</a> beachten!', '2010-09-10 23:53:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1379', 'DE', 'weniger', '2010-09-10 23:52:53');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1380', 'DE', 'Cachesuche', '2010-09-10 23:52:44');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1381', 'DE', 'JavaScript ist bei dir deaktiviert, du kannst die folgenden Optionen (Sortierung bis Attribute) nicht nutzen - die Suche funktioniert aber trotzdem.', '2010-09-10 23:52:36');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1381', 'DE', 'JavaScript ist bei dir deaktiviert, daher kannst du die obenstehenden Optionen (Sortierung bis Attribute) nicht nutzen - die Suche funktioniert aber trotzdem.', '2010-09-10 23:52:36');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1382', 'DE', 'Ausgabe sortieren nach:', '2010-09-10 23:52:28');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1383', 'DE', 'letztes Log', '2012-07-24 21:30:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1384', 'DE', 'von anderen Benutzern empfohlene Caches zuerst anzeigen', '2010-09-10 23:51:58');
@@ -7035,7 +7035,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1378', 'EN', 'Please note the <a href=\"articles.php?page=cacheinfo#logpw\" target=\"_blank\">description</a>', '2010-09-10 23:53:16');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1379', 'EN', 'Less', '2010-09-10 23:52:53');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1380', 'EN', 'Search for caches', '2010-09-10 23:52:44');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1381', 'EN', 'JavaScript is not activated, you cannot use the following options (search to attributes) - basic search is supported nevertheless.', '2010-09-10 23:52:36');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1381', 'EN', 'JavaScript is not activated, therefore you cannot use the above options (search to attributes) - basic search is supported nevertheless.', '2010-09-10 23:52:36');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1382', 'EN', 'Sort results by:', '2010-09-10 23:52:28');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1383', 'EN', 'Last logs', '2010-09-10 23:52:16');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1384', 'EN', 'Show caches recommended by other users first', '2010-09-10 23:51:58');
@@ -8519,7 +8519,6 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1378', 'ES', '¡Por favor, tenga en cuenta la <a href=\"articles.php?page=cacheinfo#logpw\" target=\"_blank\">descripción</a>!', '2010-12-09 00:17:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1379', 'ES', 'Menor', '2010-12-09 00:17:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1380', 'ES', 'Buscar por caches', '2010-12-09 00:17:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1381', 'ES', 'JavaScript no se activa, no puede utilizar las siguientes opciones - búsqueda básica se admite.', '2010-12-09 00:17:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1382', 'ES', 'Ordenar los resultados por:', '2010-12-09 00:17:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1383', 'ES', 'Último log', '2010-12-09 00:17:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1384', 'ES', 'Mostar primero las recomendaciones de otros usuarios', '2010-12-09 00:17:59');
@@ -10090,7 +10089,6 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1378', 'IT', 'Si prega di prendere visione della <a href=\"articles.php?page=cacheinfo#logpw\" target=\"_blank\">Descrizione</a>!', '2010-09-10 23:53:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1379', 'IT', 'Meno', '2010-09-10 23:52:53');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1380', 'IT', 'Ricerca cache', '2010-09-10 23:52:44');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1381', 'IT', 'JavaScript non è attivo, non puoi usare le seguenti opzioni - tuttavia la ricerca di base è ugualmente possibile.', '2010-09-10 23:52:36');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1382', 'IT', 'Risultati ordinati per:', '2010-10-27 18:49:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1383', 'IT', 'Ultimo log', '2010-09-10 23:52:16');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1384', 'IT', 'Visualizza prima le raccomandazioni di altri utenti', '2010-09-10 23:51:58');

@@ -2,7 +2,9 @@
 	<table width="100%" height="100%"><tr>
 		<td style="text-align:center; padding:0" align="center" valign="middle">
 			<div style="max-width:{$itemwidth}px; overflow:hidden">
-				<img src="thumbs.php?uuid={$picture.pic_uuid}" class="img-shadow-loggallery" onclick="enlarge(this);" longdesc="{$picture.pic_url}" onload="this.alt='{$picture.title}'"/>
+				<a name="piclink" href="{$picture.pic_url}">
+					<img src="thumbs.php?uuid={$picture.pic_uuid}" class="img-shadow-loggallery" onclick="enlarge(this);" longdesc="{$picture.pic_url}" onload="this.alt='{$picture.title}'" />
+				</a>
 				{if $logdate || $loguser}
 					<div style="line-height:1.2em; max-height:2.4em; margin-top:5px">
 						{if $logdate}

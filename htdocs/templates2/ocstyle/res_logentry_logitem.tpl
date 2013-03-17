@@ -62,15 +62,15 @@
 				<b>{t}Pictures for this logentry:{/t}</b><br />
 			{/if}
 
-			<a onclick="enlarge(document.getElementById('pic{$pictureItem.id}'))" style="cursor:pointer">{$pictureItem.title|escape}</a>
-			{* the position of this image is the anchor for enlargit activity: *}
-			<img id="pic{$pictureItem.id}" src="resource2/ocstyle/images/misc/empty.png" longdesc="{$pictureItem.url}" />
+			{* the position of the following image is the anchor for enlargit activity: *}
+			<a name="piclink" href="{$pictureItem.url}" onclick="enlarge(document.getElementById('pic{$pictureItem.id}'))" style="cursor:pointer">{$pictureItem.title|escape}<img id="pic{$pictureItem.id}" src="resource2/ocstyle/images/misc/empty.png" longdesc="{$pictureItem.url}" /></a>
+			{if $pictureItem.spoiler}
+				({t}Spoiler{/t})
+			{/if}
 			{if $logItem.userid==$login.userid}
+				&nbsp;
 				[<a href="picture.php?action=edit&uuid={$pictureItem.uuid|escape}">{t}Edit{/t}</a>]
 				[<a href="picture.php?action=delete&uuid={$pictureItem.uuid|escape}">{t}Delete{/t}</a>]
-			{/if}
-			{if $pictureItem.spoiler}
-				&nbsp;({t}Spoiler{/t})
 			{/if}
 			<br />
 		{/foreach}

@@ -30,3 +30,9 @@
 	</table>
 	<div style="height:8px"></div>
 </div>
+
+<script type="text/javascript">
+<!--
+ remove_piclinks();
+-->
+</script>

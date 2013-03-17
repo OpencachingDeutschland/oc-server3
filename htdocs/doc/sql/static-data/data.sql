@@ -831,8 +831,8 @@ SET NAMES 'utf8';
 TRUNCATE TABLE `sys_menu`;
 INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('1', 'MNU_START', '', '0', 'Start', '80', '0', 'index.php', '1', '0', '1', '#D5D9FF', '1', NULL);
 INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('2', 'MNU_START_ABOUTGC', 'About Geocaching', '123', 'About Geocaching', '123', '0', 'articles.php?page=geocaching', '1', '1', '1', '', '1', NULL);
-INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('3', 'MNU_START_REGISTER', 'Register', '18', 'Register', '18', '0', 'register.php', '1', '1', '2', '', '1', NULL);
-INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('4', 'MNU_START_NEWS', 'News', '70', 'News', '70', '0', 'news.php', '1', '1', '3', '', '1', NULL);
+INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('3', 'MNU_START_REGISTER', 'Register', '18', 'Register', '18', '0', 'register.php', '1', '1', '3', '', '1', NULL);
+INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('4', 'MNU_START_NEWS', 'News', '70', 'News', '70', '0', 'news.php', '0', '1', '3', '', '1', NULL);
 INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('5', 'MNU_START_NEWCACHES', 'New caches', '122', 'New caches', '122', '0', 'newcaches.php', '1', '1', '4', '', '1', NULL);
 INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('6', 'MNU_START_NEWCACHES_WITHOUTOWN', 'Without Germany', '121', 'Without Germany', '121', '0', 'newcachesrest.php', '1', '5', '1', '', '1', NULL);
 INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('7', 'MNU_START_NEWLOGS', 'New logs', '120', 'New logs', '120', '0', 'newlogs.php', '1', '1', '5', '', '1', NULL);
@@ -895,6 +895,7 @@ INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustrin
 INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('88', 'MNU_VERIFY_EMAIL', 'Verify e-mail address', '1824', 'Verify e-mail address', '1824', '0', 'verifyemail.php', '0', '0', '0', '', '0', NULL);
 INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('89', 'MNU_ADMIN_ADMINS', 'Admins', '1831', 'Admins', '1831', '1', 'admins.php', '1', '12', '6', '', '0', NULL);
 INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('90', 'MNU_START_NEWLOGPICS', 'Picture gallery', '1940', 'Picture gallery', '1940', '0', 'newlogpics.php', '1', '7', '7', '', '1', NULL);
+INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('91', 'MNU_START_OPENCACHING', 'About Opencaching', '1963', 'About Opencaching', '1963', '0', 'http://wiki.opencaching.de/index.php/Opencaching.de', '1', '1', '2', '', '1', NULL);
 
 -- Table sys_trans
 SET NAMES 'utf8';
@@ -2383,6 +2384,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1959', 'Only th
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1960', 'Page', '2013-02-23 19:00:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1961', 'to ', '2013-02-23 19:00:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1962', 'at', '2013-02-23 19:00:04');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1963', 'About Opencaching', '2013-02-23 19:00:04');
 
 -- Table sys_trans_ref
 SET NAMES 'utf8';
@@ -4639,7 +4641,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('79', 'DE', 'Isländisch', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('80', 'DE', 'Startseite', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('81', 'DE', 'Was finde ich auf dieser Website?', '2010-08-28 11:48:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('82', 'DE', 'Auf dieser Website findest du Geocaches aus der ganzen Welt, mit Schwerpunkt Deutschland, \&Ouml;sterreich, Schweiz, Italien und Spanien. Au\&szlig;erdem gibt es Informationsangebote rund ums Geocaching, und ein Forum und einen Chat zum Austausch mit Gleichgesinnten.', '2010-08-28 11:48:06');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('82', 'DE', 'Auf dieser Website findest du Geocaches aus der ganzen Welt, mit Schwerpunkt Deutschland, \&Ouml;sterreich, Schweiz, Italien und Spanien. Au\&szlig;erdem gibt es das <a href=\"http://wiki.opencaching.de\">Opencaching-Wiki</a> mit Anleitungen und Informationen rund um Opencaching und Geocaching, und ein Diskussionsforum.', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('83', 'DE', 'Bei der Dateiübertragung ist ein Fehler aufgetreten.', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('84', 'DE', 'Die Datei war zu groß. Es sind maximal 150 kB erlaubt.', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('85', 'DE', 'Kein Bild angegeben.', '2010-08-28 11:48:06');
@@ -5469,7 +5471,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1212', 'DE', 'Seite:', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1269', 'DE', 'Karte', '2010-08-29 16:29:31');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1272', 'DE', 'Vollbild anzeigen', '2010-08-28 11:48:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1275', 'DE', 'Hauptmenü', '2010-08-28 11:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1275', 'DE', 'Auswahl', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1278', 'DE', 'Editor', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1279', 'DE', '\&lt;html\&gt;', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1292', 'DE', 'Smilies werden nicht unterstützt', '2010-08-28 11:48:07');
@@ -6023,7 +6025,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1928', 'DE', '%1Vorschaubilder</a> anzeigen<br />(% der Kartenfläche, 0=aus)', '2012-10-11 00:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1929', 'DE', 'Kartenvorschaubild \&ndash; wird angezeigt, wenn dieser Cache auf der Karte angeklickt wird. Es ist maximal <em>ein</em> Vorschaubild pro Cache wählbar.', '2012-10-11 00:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1930', 'DE', 'Mit dem Microsoft Internet Explorer werden<br />maximal %1 Caches angezeigt.', '2012-10-11 00:00:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1940', 'DE', 'Bildgalerie', '2013-02-19 05:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1940', 'DE', 'Logbildgalerie', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1941', 'DE', 'Es wird jeweils das Datum angezeigt, an dem das Bild hochgeladen wurde, das heißt es kann vom Logdatum abweichen.', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1942', 'DE', 'Es wird höchstens ein Bild pro Tag und Benutzer angezeigt. Die kleine Galerie auf der Startseite ist zusätzlich auf ein Bild pro Cache und Tag beschränkt.', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1943', 'DE', 'Alle Bilder sind urheberrechtlich geschützt. Wenn du sie verwenden möchtest, frage den jeweiligen Autor um Erlaubnis. Ab dem 7.\&nbsp;April 2013 unterliegen die Logs inklusive Bildern der neuen <a href=\"articles.php?page=impressum#datalicense\">Datenlizenz</a>.', '2013-02-19 05:48:07');
@@ -6046,6 +6048,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1960', 'DE', 'Seite', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1961', 'DE', 'zu', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1962', 'DE', 'bei', '2013-02-19 05:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1963', 'DE', 'Über Opencaching', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'EN', 'Reorder IDs \r', '2010-09-02 00:15:30');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'EN', 'The database could not be reconnected.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'EN', 'Testing – please do not login', '2010-08-28 11:48:07');
@@ -6951,7 +6954,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1212', 'EN', 'Page:', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1269', 'EN', 'map', '2010-09-02 00:15:31');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1272', 'EN', 'show fullscreen', '2010-09-02 00:15:31');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1275', 'EN', 'main menu', '2010-09-02 00:15:31');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1275', 'EN', 'Menu', '2010-09-02 00:15:31');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1278', 'EN', 'Editor', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1279', 'EN', '\&lt;html\&gt;', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1292', 'EN', 'Setting smilies is not supported', '2010-08-28 11:48:08');
@@ -7530,6 +7533,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1960', 'EN', 'Seite', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1961', 'EN', 'to', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1962', 'EN', 'at', '2013-02-19 05:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1963', 'EN', 'About Opencaching', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'ES', 'Reordenar ID', '2010-12-09 00:17:55');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'ES', 'La base de datos no se pudo conectar.', '2010-12-09 00:17:55');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'ES', 'En pruebas - por favor, no entre.', '2010-12-09 00:17:55');

@@ -16,7 +16,6 @@
 
 	$userid = isset($_REQUEST['userid']) ? $_REQUEST['userid']+0 : 0;
 	$allpics = isset($_REQUEST['allpics']) ? $_REQUEST['allpics']+0 : 0;
-	$startat = isset($_REQUEST['startat']) ? $_REQUEST['startat']+0 : 0; 
 
 	$rs = sql("SELECT `user`.`username`, 
 										`user`.`last_login`, 
@@ -108,33 +107,7 @@
 			$tpl->assign('logpics', get_logpics(LOGPICS_FOR_USER_STAT, $userid));
 		else
 		{
-			$pictures = get_logpics(LOGPICS_FOR_USER_GALLERY, $userid, 0, $startat);
-			$more = (count($pictures) > MAX_PICTURES_PER_GALLERY_PAGE);
-			if ($more)
-				array_splice($pictures, MAX_PICTURES_PER_GALLERY_PAGE);
-			$tpl->assign('pictures', $pictures);
-
-			$paging = $more || ($startat>0 && count($pictures)>0);
-			$tpl->assign('paging', $paging);
-			if ($paging)
-			{
-				$pages = floor((get_logpics(LOGPICS_FOR_USER_STAT, $userid) + MAX_PICTURES_PER_GALLERY_PAGE - 1)/MAX_PICTURES_PER_GALLERY_PAGE);
-				$page = floor($startat/MAX_PICTURES_PER_GALLERY_PAGE) + 1;
-
-				$pl = "";
-				for ($p=1; $p<=$pages; $p++)
-				{
-					if ($pl != "")   $pl .= " ";
-					if ($p != $page) $pl .= "<a href='viewprofile.php?userid=" . $userid . "&allpics=1&startat=" . (($p-1)*MAX_PICTURES_PER_GALLERY_PAGE) . "'>";
-					else             $pl .= "<strong>";
-					                 $pl .= $p;
-					if ($p != $page) $pl .= "</a>";
-					else             $pl .= "</strong>";
-				}
-
-				$tpl->assign('pagelinks', $pl);
-			}
-
+			set_paged_pics(LOGPICS_FOR_USER_GALLERY, $userid, 0, $tpl, "viewprofile.php?userid=" . $userid . "&allpics=1"); 
 			$tpl->name = 'viewprofile_pics';
 				// actually we dont need all the other stuff here ..
 		}

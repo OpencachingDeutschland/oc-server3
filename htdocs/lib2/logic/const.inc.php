@@ -53,10 +53,6 @@
 
 	define('MAX_LOGENTRIES_ON_CACHEPAGE', 5);
 	define('MAX_PICTURES_PER_GALLERY_PAGE', 48);   // must be multiple of 6
-	define('MAX_PICTURES_IN_CACHE_GALLERY', 120);  // must be multiple of 6
-	  // As of march 2013, there are a good deal of OC.de caches with 50-100 pics,
-		// but only one with more (~500 pics). If lots of caches have >100 pics,
-		// it may pay out to limit the gallery e.g. to 60 pics and implement browsing.
 
 	// constants for user options (must match values in DB!)
 	define('USR_OPT_GMZOOM', 1);

@@ -281,11 +281,10 @@ function getChildWaypoints($cacheid)
 	$tpl->assign('show_logpics', $logpics ? 1 : 0);
 	if ($logpics)
 	{
-		$pictures = get_logpics(LOGPICS_FOR_CACHE_GALLERY, 0, $cacheid);		
-		$tpl->assign('morepics', count($pictures) > MAX_PICTURES_IN_CACHE_GALLERY);
-		$tpl->assign('maxpics', MAX_PICTURES_IN_CACHE_GALLERY);
-		array_splice($pictures, MAX_PICTURES_IN_CACHE_GALLERY);
-		$tpl->assign('pictures', $pictures);
+		set_paged_pics(LOGPICS_FOR_CACHE_GALLERY, 0, $cacheid, $tpl, "viewcache.php?cacheid=" . $cacheid . "&logpics=1");
+		$tpl->assign('subtitle',"&lt;&lt; <a href='viewcache.php?cacheid=" . $cacheid . "'>" .
+		             $translate->t("Back to the cache description", "", "", 0) . "</a>");
+
 	}
 	else
 		$tpl->assign('logpics', get_logpics(LOGPICS_FOR_CACHE_STAT, 0, $cacheid));

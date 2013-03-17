@@ -52,8 +52,12 @@
 	// $tpl->assign('emails', sql_value("SELECT COUNT(*) FROM `email_user` WHERE `from_user_id`='&1'", 0, $login->userid));
 	
 	// get log pictures
-	$tpl->assign('pictures', get_logpics(LOGPICS_FOR_MYHOME_GALLERY));
-	$tpl->assign('allpics', isset($_REQUEST['allpics']) && $_REQUEST['allpics'] ? 1 : 0); 
+	$allpics = isset($_REQUEST['allpics']) && $_REQUEST['allpics'];
+	if ($allpics)
+		set_paged_pics(LOGPICS_FOR_MYHOME_GALLERY, 0, 0, $tpl, "myhome.php?allpics=1");
+	else
+		$tpl->assign('pictures',get_logpics(LOGPICS_FOR_MYHOME_GALLERY));
+	$tpl->assign('allpics', $allpics ? 1 : 0); 
 
 	// display
 	$tpl->display();

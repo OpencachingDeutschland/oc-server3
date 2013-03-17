@@ -140,19 +140,10 @@
 </div>
 <!-- End Cachemeta -->
 
-<!-- Warning, if temporary not available, archived or locked -->
-	{include file="res_state_warning.tpl" cache=$cache}
-<!--  End Warning -->
-
 {if $show_logpics}
 	<!-- picture gallery -->
 	<div class="content2-container">
-		<p>&lt;&lt; <a href="viewcache.php?cacheid={$cache.cacheid|urlencode}">{t}Back to the cache description{/t}</a></p>
 		{include file="res_logpictures.tpl" logdate=true loguser=true profilelink=true shortyear=true}
-
-		{if $morepics}
-			<p>{t 1=$maxpics}Only the last %1 pictures are displayed.{/t}</p>
-		{/if}
 
 		{if $cache.type != 5 && $cache.type != 6}
 			<br />
@@ -162,6 +153,10 @@
 	</div>
 
 {else}
+<!-- Warning, if temporary not available, archived or locked -->
+	{include file="res_state_warning.tpl" cache=$cache}
+<!--  End Warning -->
+
 <!-- Cachedetails -->
 <div class="content2-container">
 	<div class="content2-container-2col-left" id="viewcache-baseinfo">

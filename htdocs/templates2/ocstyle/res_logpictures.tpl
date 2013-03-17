@@ -1,5 +1,18 @@
 {* see lib2/logic/logpics.inc.php for data retreival *}
 
+{if $paging}
+	<div class="content2-container">
+		<table width="100%" cellspacing="0" cellpadding="0">
+			<tr>
+				<td><font size="2">{$subtitle}</font></td>
+				<td class="picpaging">{t}Page{/t} {$pagelinks}</td>
+			</tr>
+		</table>
+	</div>
+{elseif "$subtitle" != ""}
+	<p>{$subtitle}</p>
+{/if}
+
 {assign var=itemwidth value=120}
 
 <div style="padding-right:14px; clear:both">
@@ -21,18 +34,12 @@
 				{/if}
 			{/foreach}
 			{* fill up remaining cells so that 2..5 pictures will not spread over container width *}
-			{if $piccount<6}<td width="{$itemwidth+6}px"></td>{/if}
-			{if $piccount<5}<td width="{$itemwidth+6}px"></td>{/if}
-			{if $piccount<4}<td width="{$itemwidth+6}px"></td>{/if}
-			{if $piccount<3}<td width="{$itemwidth+6}px"></td>{/if}
-			{if $piccount<2}<td width="{$itemwidth+6}px"></td>{/if}
+			{if $piccount<6}<td width="{$itemwidth+4}px"></td>{/if}
+			{if $piccount<5}<td width="{$itemwidth+4}px"></td>{/if}
+			{if $piccount<4}<td width="{$itemwidth+4}px"></td>{/if}
+			{if $piccount<3}<td width="{$itemwidth+4}px"></td>{/if}
+			{if $piccount<2}<td width="{$itemwidth+4}px"></td>{/if}
 		</tr>
 	</table>
 	<div style="height:8px"></div>
 </div>
-
-<script type="text/javascript">
-<!--
- remove_piclinks();
--->
-</script>

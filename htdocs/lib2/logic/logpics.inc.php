@@ -15,13 +15,13 @@
 define('LOGPICS_FOR_STARTPAGE_GALLERY',  1);
 define('LOGPICS_FOR_NEWPICS_GALLERY',    2);
 define('LOGPICS_FOR_USER_STAT',          3);
-define('LOGPICS_FOR_USER_GALLERY',       4);  // params: userid, startat
+define('LOGPICS_FOR_USER_GALLERY',       4);  // params: userid
 define('LOGPICS_FOR_MYHOME_GALLERY',     5);
 define('LOGPICS_FOR_CACHE_STAT',         6);  // params: cacheid
 define('LOGPICS_FOR_CACHE_GALLERY',      7);  // params: userid, cacheid
 	
 
-function get_logpics($purpose, $userid=0, $cacheid=0, $startat=0)
+function get_logpics($purpose, $userid=0, $cacheid=0)
 {
 	global $login;
 	
@@ -117,8 +117,7 @@ function get_logpics($purpose, $userid=0, $cacheid=0, $startat=0)
 		                 $join_caches
 		                 $join_cachestatus
 		                WHERE `object_type`=1 AND `logs`.`user_id`='&1' AND NOT `spoiler`
-				         ORDER BY `logs`.`date` DESC
-								    LIMIT &2, &3", $userid, $startat, MAX_PICTURES_PER_GALLERY_PAGE+1);
+				         ORDER BY `logs`.`date` DESC", $userid);
 				break;
 				         
 			case LOGPICS_FOR_MYHOME_GALLERY:
@@ -155,8 +154,7 @@ function get_logpics($purpose, $userid=0, $cacheid=0, $startat=0)
 	                   ($userid == $login->userid ? "" : "$join_caches $join_cachestatus") . "
 	                   $join_user
                     WHERE `object_type`=1 AND `logs`.`cache_id`='&1'
-                 ORDER BY `logs`.`date` DESC
-								    LIMIT &2", $cacheid, MAX_PICTURES_IN_CACHE_GALLERY+1);
+                 ORDER BY `logs`.`date` DESC", $cacheid);
 				break; 
 				
 			default:
@@ -171,5 +169,52 @@ function get_logpics($purpose, $userid=0, $cacheid=0, $startat=0)
 	return $result;
 }
 
+
+// set all template variables needed to display log pictures page browser;
+// all displaying is done in res_logpictures.tpl
+
+function set_paged_pics($purpose, $userid, $cacheid, $tpl, $url)
+{
+	global $_REQUEST;
+	$startat = isset($_REQUEST['startat']) ? $_REQUEST['startat']+0 : 0;
+
+	$pictures = get_logpics($purpose, $userid, $cacheid);
+	$tpl->assign('pictures', array_slice($pictures, $startat, MAX_PICTURES_PER_GALLERY_PAGE));
+
+	$paging = (count($pictures) > MAX_PICTURES_PER_GALLERY_PAGE);
+	$tpl->assign('paging', $paging);
+	if ($paging)
+	{
+		$pages = floor((count($pictures) + MAX_PICTURES_PER_GALLERY_PAGE - 1)/MAX_PICTURES_PER_GALLERY_PAGE);
+		$page = floor($startat/MAX_PICTURES_PER_GALLERY_PAGE) + 1;
+
+		$pl = "";
+		/* paging overhead - does not look nice ...
+		if ($startat > 0)
+			$pl .= "<a href='" . $url . "&startat=" . ($startat - MAX_PICTURES_PER_GALLERY_PAGE) . "'>&lt;</a> ";
+		else
+			$pl .= "&lt; ";
+		*/
+
+		for ($p=1; $p<=$pages; $p++)
+		{
+			if ($pl != "")   $pl .= " ";
+			if ($p != $page) $pl .= "<a href='" . $url . "&startat=" . (($p-1)*MAX_PICTURES_PER_GALLERY_PAGE) . "'>";
+			else             $pl .= "<strong>";
+			                 $pl .= $p;
+			if ($p != $page) $pl .= "</a>";
+			else             $pl .= "</strong>";
+		}
+
+		/*
+		if ($startat + MAX_PICTURES_PER_GALLERY_PAGE < count($pictures))
+			$pl .= " <a href='" . $url . "&startat=" . ($startat + MAX_PICTURES_PER_GALLERY_PAGE) . "'>&gt;</a> ";
+		else
+			$pl .= " &gt;";
+		*/
+
+		$tpl->assign('pagelinks', $pl);
+	}
+}
 				
 ?>

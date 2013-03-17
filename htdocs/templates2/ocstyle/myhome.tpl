@@ -51,7 +51,7 @@
 			[<a href="myhome.php?allpics=1">{t}Show all{/t}</a>] - <b>{t}Your latest log pictures{/t}:</b></p>
 			{assign var=maxlines value=1}
 		{else}
-			<b>{t}Your log pictures{/t}:</b>
+			{assign var=subtitle value="{t}Your log pictures{/t}:"}
 			{assign var=maxlines value=0}
 		{/if}
 	</p>

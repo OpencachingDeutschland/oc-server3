@@ -1388,6 +1388,12 @@ div#havefound {
 	color: #819ac1;
 }
 
+.picpaging {
+	text-align: right;
+	font-size: 1.2em;
+	margin: 0 0 6px 0;
+}
+
 /* RSS feeds */
 #blog div.newsblock { margin-left:00px }
 #forum div.newsblock { margin-left:20px }

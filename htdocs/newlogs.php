@@ -54,16 +54,24 @@
 			if ($pics <= 0 ||
 			    ($pics == $lines_per_pic && count($newLogs)==1 && !$newLogs[0]['picshow']))
 			{
-				$rsPic = sql_slave("SELECT `uuid` FROM `pictures`
+				$rsPic = sql_slave("SELECT `uuid`,`url`,`title` FROM `pictures`
                              WHERE `object_type`=1 AND `object_id`='&1'
 														   AND `local`=1 AND `display`=1 AND `spoiler`=0 AND `unknown_format`=0
 				                     LIMIT 1", $rLog['id']);
 				if ($rPic = sql_fetch_assoc($rsPic))
 				{
 					if (count($newLogs))
+					{
 						$newLogs[count($newLogs)-1]['pic_uuid'] = $rPic['uuid'];
+						$newLogs[count($newLogs)-1]['pic_url'] = $rPic['url'];
+						$newLogs[count($newLogs)-1]['title'] = $rPic['title'];
+					}
 					else
+					{
 						$rLog['pic_uuid'] = $rPic['uuid'];
+						$rLog['pic_url'] = $rPic['url'];
+						$rLog['title'] = $rPic['title'];
+					}
 					$rLog['picshown'] = true;
 					$pics = $lines_per_pic;
 				}

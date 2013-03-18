@@ -8,6 +8,7 @@
  ***************************************************************************/
 
 	require('./lib2/web.inc.php');
+	require_once('./lib2/logic/user.class.php');
 	require_once('./lib2/logic/useroptions.class.php');
 	require_once('./lib2/logic/logpics.inc.php');
 
@@ -16,6 +17,17 @@
 
 	$userid = isset($_REQUEST['userid']) ? $_REQUEST['userid']+0 : 0;
 	$allpics = isset($_REQUEST['allpics']) ? $_REQUEST['allpics']+0 : 0;
+
+	if ($userid == 0)
+	{
+		$login->verify();
+		if ($login->userid != 0)
+		{
+			// 'show public profile' in my-profile menu 
+			$userid = $login->userid;
+			$tpl->menuitem = MNU_MYPROFILE_PUBLIC;
+		}
+	}
 
 	$rs = sql("SELECT `user`.`username`, 
 										`user`.`last_login`, 
@@ -97,7 +109,9 @@
 	$tpl->assign('recommended', sql_value("SELECT COUNT(*) FROM `cache_rating` WHERE `user_id`='&1'", 0, $userid));
 	$tpl->assign('maxrecommended', floor($record['found'] * $opt['logic']['rating']['percentageOfFounds'] / 100));
 
-	$picstat = ($useropt->getOptValue(USR_OPT_PICSTAT) == 1);
+	$user = new user($userid);
+
+	$picstat = ($useropt->getOptValue(USR_OPT_PICSTAT) == 1) && !$user->getLicenseDeclined();
 	$tpl->assign('show_picstat', $picstat);
 	if ($picstat)
 	{
@@ -146,7 +160,8 @@
 			$tpl->assign('lastlogin', 4);
 	}
 
-	$tpl->assign('license_declined', $record['data_license'] == 1);
+	$tpl->assign('license_actively_declined', $record['data_license'] == NEW_DATA_LICENSE_ACTIVELY_DECLINED);
+	$tpl->assign('license_passively_declined', $record['data_license'] == NEW_DATA_LICENSE_PASSIVELY_DECLINED);
 	$tpl->assign('pmr', $record['pmr_flag']);
 
 	$tpl->display();

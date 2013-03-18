@@ -432,7 +432,7 @@ function __autoload($class_name)
 	function tpl_BuildTemplate($dbdisconnect=true)
 	{
 		//template handling vars
-		global $style, $stylepath, $tplname, $vars, $langpath, $locale, $opt, $oc_nodeid;
+		global $style, $stylepath, $tplname, $vars, $langpath, $locale, $opt, $oc_nodeid, $translate;
 		//language specific expression
 		global $error_pagenotexist;
 		//only for debbuging
@@ -459,6 +459,30 @@ function __autoload($class_name)
 		tpl_set_var('opt_page_subtitle1', $opt['page']['subtitle1']);
 		tpl_set_var('opt_page_subtitle2', $opt['page']['subtitle2']);
 		tpl_set_var('opt_page_title', $opt['page']['title']);
+
+		if ($opt['logic']['license']['disclaimer'])
+		{
+			if (isset($opt['locale'][$locale]['page']['license_url']))
+				$lurl = $opt['locale'][$locale]['page']['license_url'];
+			else
+				$lurl = $opt['locale']['EN']['page']['license_url'];
+
+			if (isset($opt['locale'][$locale]['page']['license']))
+				$ltext = $opt['locale'][$locale]['page']['license'];
+			else
+				$ltext = $opt['locale']['EN']['page']['license'];
+
+			$ld = '<p class="sidebar-maintitle">' .
+			      $translate->t('Datalicense', '', '', 0) .
+						'</p>' .
+            '<div style="margin-top:20px;width:100%;text-align:center;">' .
+            mb_ereg_replace('%1', $lurl, $ltext) .
+						'<br />&nbsp;' .
+						'</div>';
+			tpl_set_var('license_disclaimer', $ld);
+		}
+		else
+			tpl_set_var('license_disclaimer','');
 
 		$bTemplateBuild = new Cbench;
 		$bTemplateBuild->Start();

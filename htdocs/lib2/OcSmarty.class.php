@@ -140,10 +140,10 @@ class OcSmarty extends Smarty
 		global $opt, $db, $cookie, $login, $menu, $sqldebugger, $translate;
 		$cookie->close();
 
-//		// if the user is an admin, dont cache the content
-//		if (isset($login))
-//			if ($login->admin)
-//				$this->caching = false;
+		// if the user is an admin, dont cache the content
+		if (isset($login))
+			if ($login->admin)
+				$this->caching = false;
 
     //Give Smarty access to the whole options array.
     $this->assign('siteSettings', $opt);
@@ -152,13 +152,15 @@ class OcSmarty extends Smarty
     //access using the siteSettings above?
 		// assign main template vars
 		// ... and some of the $opt
+		$locale = $opt['template']['locale'];
+
 		$optn['debug'] = $opt['debug'];
 		$optn['template']['locales'] = $opt['template']['locales'];
 		$optn['template']['locale'] = $opt['template']['locale'];
 		$optn['template']['style'] = $opt['template']['style'];
 		$optn['template']['country'] = $login->getUserCountry();
-		$optn['page']['subtitle1'] = isset($opt['locale'][$opt['template']['locale']]['page']['subtitle1']) ? $opt['locale'][$opt['template']['locale']]['page']['subtitle1'] : $opt['page']['subtitle1'];
-		$optn['page']['subtitle2'] = isset($opt['locale'][$opt['template']['locale']]['page']['subtitle2']) ? $opt['locale'][$opt['template']['locale']]['page']['subtitle2'] : $opt['page']['subtitle2'];
+		$optn['page']['subtitle1'] = isset($opt['locale'][$locale]['page']['subtitle1']) ? $opt['locale'][$locale]['page']['subtitle1'] : $opt['page']['subtitle1'];
+		$optn['page']['subtitle2'] = isset($opt['locale'][$locale]['page']['subtitle2']) ? $opt['locale'][$locale]['page']['subtitle2'] : $opt['page']['subtitle2'];
 		$optn['page']['headimagepath'] = $opt['page']['headimagepath'];
 		$optn['page']['max_logins_per_hour'] = $opt['page']['max_logins_per_hour'];
 		$optn['page']['absolute_url'] = $opt['page']['absolute_url'];
@@ -220,6 +222,24 @@ class OcSmarty extends Smarty
 
 		if ($this->title == '')
 			$optn['template']['title'] = $menu->GetMenuTitle();
+
+
+		if ($opt['logic']['license']['disclaimer'])
+		{
+			if (isset($opt['locale'][$locale]['page']['license_url']))
+				$lurl = $opt['locale'][$locale]['page']['license_url'];
+			else
+				$lurl = $opt['locale']['EN']['page']['license_url'];
+
+			if (isset($opt['locale'][$locale]['page']['license']))
+				$ltext = $opt['locale'][$locale]['page']['license'];
+			else
+				$ltext = $opt['locale']['EN']['page']['license'];
+
+			$this->assign('license_disclaimer', mb_ereg_replace('%1', $lurl, $ltext));
+		}
+		else
+			$this->assign('license_disclaimer','');
 
 		$this->assign('opt', $optn);
 		$this->assign('login', $loginn);

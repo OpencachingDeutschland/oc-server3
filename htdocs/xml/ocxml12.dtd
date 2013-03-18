@@ -8,8 +8,8 @@
 <!ELEMENT attrlist (attr*)>
 <!ELEMENT user (id, username, pmr, datecreated, lastmodified)>
 <!ELEMENT cache (id, userid, name, longitude, latitude, type, status, country, size, desclanguages, difficulty, terrain, rating, waypoints, datehidden, datecreated, lastmodified)>
-<!ELEMENT cachedesc (id, cacheid, language, shortdesc, desc, hint, lastmodified)>
-<!ELEMENT cachelog (id, cacheid, userid, logtype, date, text, datecreated, lastmodified)>
+<!ELEMENT cachedesc (id, cacheid, language, shortdesc, desc, hint, license, lastmodified)>
+<!ELEMENT cachelog (id, cacheid, userid, logtype, date, text, license, datecreated, lastmodified)>
 <!ELEMENT picture (id, url, title, object, attributes, datecreated, lastmodified)>
 <!ELEMENT removedobject (id, object, removeddate)>
 

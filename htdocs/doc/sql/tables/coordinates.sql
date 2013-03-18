@@ -2,6 +2,8 @@ SET NAMES 'utf8';
 DROP TABLE IF EXISTS `coordinates`;
 CREATE TABLE `coordinates` (
   `id` int(11) NOT NULL auto_increment,
+  `date_created` datetime NOT NULL,
+  `last_modified` datetime NOT NULL,
   `type` int(11) NOT NULL,
   `subtype` int(11) default NULL,
   `latitude` double NOT NULL,

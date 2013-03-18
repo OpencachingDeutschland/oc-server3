@@ -52,3 +52,5 @@ date         commit ID    change
 2013-03-14   69abeb67     added fields coordinates_type.preposition and pp_trans_id
 2013-03-15   a15b5582     discarded table 'data_license'
 2013-03-16                added fields coordinates.date_created and .last_modified
+2013-03-18                added table 'saved_texts' + triggers
+                          added triggers to table 'coordinates'

@@ -1294,6 +1294,16 @@
 						END IF;
 					END;");
 
+	sql_dropTrigger('coordinatesAfterInsert');
+	sql("CREATE TRIGGER `coordinatesAfterInsert` AFTER INSERT ON `coordinates`
+				FOR EACH ROW
+					BEGIN
+						/* dont overwrite date values while XML client is running */
+						IF ISNULL(@XMLSYNC) OR @XMLSYNC!=1 AND NEW.`type`=1 THEN
+							UPDATE `caches` SET `last_modified`=NOW() WHERE `caches`.`cache_id`=NEW.`cache_id`;
+						END IF;
+					END;");
+
 	sql_dropTrigger('coordinatesBeforeUpdate');
 	sql("CREATE TRIGGER `coordinatesBeforeUpdate` BEFORE UPDATE ON `coordinates`
 				FOR EACH ROW
@@ -1301,6 +1311,36 @@
 						/* dont overwrite `last_modified` while XML client is running */
 						IF ISNULL(@XMLSYNC) OR @XMLSYNC!=1 THEN
 							SET NEW.`last_modified`=NOW();
+						END IF;
+					END;");
+
+	sql_dropTrigger('coordinatesAfterUpdate');
+	sql("CREATE TRIGGER `coordinatesAfterUpdate` AFTER UPDATE ON `coordinates`
+				FOR EACH ROW
+					BEGIN
+						/* dont overwrite date values while XML client is running */
+						IF ISNULL(@XMLSYNC) OR @XMLSYNC!=1 AND NEW.`type`=1 THEN
+							UPDATE `caches` SET `last_modified`=NOW() WHERE `caches`.`cache_id`=NEW.`cache_id`;
+						END IF;
+					END;");
+
+	sql_dropTrigger('coordinatesAfterDelete');
+	sql("CREATE TRIGGER `coordinatesAfterDelete` AFTER DELETE ON `coordinates`
+				FOR EACH ROW
+					BEGIN
+						/* dont overwrite date values while XML client is running */
+						IF ISNULL(@XMLSYNC) OR @XMLSYNC!=1 AND OLD.`type`=1 THEN
+							UPDATE `caches` SET `last_modified`=NOW() WHERE `caches`.`cache_id`=OLD.`cache_id`;
+						END IF;
+					END;");
+
+	sql_dropTrigger('savedTextsBeforeInsert');
+	sql("CREATE TRIGGER `savedTextsBeforeInsert` BEFORE INSERT ON `saved_texts`
+				FOR EACH ROW
+					BEGIN
+						/* dont overwrite date values while XML client is running */
+						IF ISNULL(@XMLSYNC) OR @XMLSYNC!=1 THEN
+							SET NEW.`date_created`=NOW();
 						END IF;
 					END;");
 

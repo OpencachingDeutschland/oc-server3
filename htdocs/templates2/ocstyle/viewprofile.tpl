@@ -61,8 +61,10 @@
 		{elseif $lastlogin==4}
 			<td>{t}More than 12 months ago{/t}</td>
 		{elseif $lastlogin==6}
-			{if $license_declined}
+			{if $license_actively_declined}
 				<td>{t}The user account has been disabled, because the user declined the <a href="articles.php?page=impressum#datalicense">data license</a>. Cache descriptions, log texts and pictures have been deleted.{/t}</td>
+			{elseif $license_passively_declined}
+				<td>{t}The user account has been disabled.{/t} {t}Cache descriptions, log texts and pictures have been deleted, because the account was disabled before transition to the <a href="articles.php?page=impressum#datalicense">new data license</a>.{/t}</td>
 			{else}
 				<td>{t}The user account has been disabled.{/t}</td>
 			{/if}
@@ -170,7 +172,6 @@
 				[<a href="search.php?showresult=1&amp;expert=0&amp;f_inactive=0&amp;output=HTML&amp;sort=byname&amp;finderid={$userid}&amp;searchbyfinder=&amp;logtype=3">{t}Show all{/t}</a>]
 			</td>
 		</tr>
-		<tr><td class="spacer" colspan="2"></td></tr>
 	{/if}
 
 	<tr>

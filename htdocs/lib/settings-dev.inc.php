@@ -139,6 +139,9 @@
   //                    without fill_gaps first)
   // fill_gaps = false: continue with the last waypoint
   $opt['logic']['waypoint_pool']['fill_gaps'] = false;
+  
+  // data license
+	$opt['logic']['license']['disclaimer'] = true;   // also in lib2/settings-dist.inc.php
 
   // see config2/settings-dist.inc.php
 	$opt['template']['default']['locale'] = 'DE';      // may be overwritten by $opt['domain'][...]['locale']

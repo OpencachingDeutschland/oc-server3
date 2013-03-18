@@ -46,6 +46,7 @@
 	define('OBJECT_TRAVELER', 5);
 	define('OBJECT_PICTURE', 6);
 	define('OBJECT_REMOVEDOBJECT', 7);
+	define('OBJECT_WAYPOINT', 8);
 
 	// coordinate types
 	define('COORDINATE_WAYPOINT', 1);
@@ -66,8 +67,10 @@
 	define('USR_OPT_TRANSLANG', 12);
 
 	// user.data_license values
-	define('OLD_DATA_LICSENSE',0);                       // deadline not reached
-	define('NEW_DATA_LICENSE_DECLINED',1);               // declined license
-	define('NEW_DATA_LICSENSE_ACTIVELY_ACCEPTED',1);     // accepted new license on registration
-	define('NEW_DATA_LICSENSE_PASSIVELY_ACCEPTED',2);    // did not decline license until deadline    
+	define('OLD_DATA_LICSENSE',0);                       // before deadline
+	define('NEW_DATA_LICENSE_ACTIVELY_DECLINED',1);      // declined license
+	define('NEW_DATA_LICENSE_ACTIVELY_ACCEPTED',2);      // accepted new license on registration
+	define('NEW_DATA_LICENSE_PASSIVELY_ACCEPTED',3);     // did not decline license until deadline
+	define('NEW_DATA_LICENSE_PASSIVELY_DECLINED',4);     // could accept/decline because disabled
+
 ?>

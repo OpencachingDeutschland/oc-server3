@@ -105,10 +105,12 @@
 
 			<tr><td class="spacer" colspan="2"></td></tr>
 
-			<tr>
-				<td>&nbsp;</td>
-				<td><input type="checkbox" name="chkdisduelicense" value="1" /> {t}Disable (and lock all geocaches owned) and remove all foreign licensed content{/t}</td>
-			</tr>
+			{if $licensefunctions==true}
+				<tr>
+					<td>&nbsp;</td>
+					<td><input type="checkbox" name="chkdisduelicense" value="1" /> {t}Disable (and lock all geocaches owned) and remove all foreign licensed content{/t}</td>
+				</tr>
+			{/if}
 
 			{if $candisable==true}
 				<tr>
@@ -125,11 +127,11 @@
 			{if $cansetemail==true}
 				<tr>
 					<td></td>
-					<td><input type="checkbox" name="chkemail" value="1"> {t}Mark e-mail address as invalid{/t}&nbsp;&nbsp;&nbsp;<input type="checkbox" name="chkdl" value="1"> {t}data license mail was not delivered{/t}</td>
+					<td><input type="checkbox" name="chkemail" value="1"> {t}Mark e-mail address as invalid{/t}{if $licensefunctions}&nbsp;&nbsp;&nbsp;<input type="checkbox" name="chkdl" value="1"> {t}data license mail was not delivered{/t}{/if}</td>
 				</tr>
 			{/if}
 
-{*			{if $candelete==true || $candisable==true} *}
+			{if $licensefunctions==true || $candelete==true || $candisable==true || $cansetemail==true}
 				<tr>
 					<td>&nbsp;</td>
 					<td><input type="checkbox" name="chkcommit" value="1" /> {t}Sure?{/t}</td>
@@ -140,7 +142,7 @@
 					<td>&nbsp;</td>
 					<td><input type="submit" name="execute" value="{t}Submit{/t}" class="formbutton" onclick="submitbutton('execute')" /></td>
 				</tr>
-{*			{/if} *}
+			{/if} 
 		</table>
 	</form>
 {/if}

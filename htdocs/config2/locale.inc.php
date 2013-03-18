@@ -97,9 +97,12 @@
 	$opt['locale']['EN']['format']['datetimesec'] = '%x %X';
 	$opt['locale']['EN']['format']['time'] = '%I:%M %p';
 	$opt['locale']['EN']['format']['timesec'] = '%X';
+	$opt['locale']['EN']['format']['phpdate'] = 'm/d/Y';
 	$opt['locale']['EN']['country'] = 'UK';
 	$opt['locale']['EN']['page']['subtitle1'] = 'Geocaching with Opencaching';
 	$opt['locale']['EN']['page']['subtitle2'] = '';
+	$opt['locale']['EN']['page']['license_url'] = 'http://creativecommons.org/licenses/by-nc-nd/3.0/de/deed.en';
+	$opt['locale']['EN']['page']['license'] = '<a rel="license" href="%1" target="_blank"><img alt="Creative Commons License Terms" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-nd/3.0/de/88x31.png" /></a><br />The www.opencaching.de content is licensed under <br /><a rel="license" href=%1" target="_blank">Creative Commons Attribution-NonCommercial-NoDerivs 3.0 Germany</a> License.';
 
 	$opt['locale']['DE']['format']['dm'] = '%d.%m.';
 	$opt['locale']['DE']['format']['dateshort'] = '%d.%m.%y';
@@ -109,44 +112,50 @@
 	$opt['locale']['DE']['format']['datetimesec'] = '%x %X';
 	$opt['locale']['DE']['format']['time'] = '%H:%M';
 	$opt['locale']['DE']['format']['timesec'] = '%X';
+	$opt['locale']['DE']['format']['phpdate'] = 'd.m.Y';
 	$opt['locale']['DE']['country'] = 'DE';
-	$opt['locale']['DE']['page']['subtitle1'] = 'Geocaching in Deutschland,';
-	$opt['locale']['DE']['page']['subtitle2'] = 'Österreich und der Schweiz';
+	$opt['locale']['DE']['page']['subtitle1'] = 'Geocaching mit Opencaching';
+	$opt['locale']['DE']['page']['subtitle2'] = '';
+	$opt['locale']['DE']['page']['license_url'] = 'http://creativecommons.org/licenses/by-nc-nd/3.0/de/';
+	$opt['locale']['DE']['page']['license'] = '<a rel="license" href="%1" target="_blank"><img alt="Creative Commons Lizenzvertrag" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-nd/3.0/de/88x31.png" /></a><br />Der Inhalt von www.opencaching.de steht unter einer <br /><a rel="license" href="%1" target="_blank">Creative Commons Namensnennung-NichtKommerziell-KeineBearbeitung-3.0-Deutschland</a>-Lizenz.';
 	$opt['locale']['DE']['helpwiki'] = "http://wiki.opencaching.de/index.php/";
 
 	$opt['locale']['FR']['format']['dm'] = '%d.%m.';
-	$opt['locale']['DE']['format']['dateshort'] = '%d.%m.%y';
+	$opt['locale']['FR']['format']['dateshort'] = '%d.%m.%y';
 	$opt['locale']['FR']['format']['date'] = '%x';
 	$opt['locale']['FR']['format']['datelong'] = '%d. %B %Y';
 	$opt['locale']['FR']['format']['datetime'] = '%x %H:%M';
 	$opt['locale']['FR']['format']['datetimesec'] = '%x %X';
 	$opt['locale']['FR']['format']['time'] = '%H:%M';
 	$opt['locale']['FR']['format']['timesec'] = '%X';
+	$opt['locale']['FR']['format']['phpdate'] = 'd-m-Y';
 	$opt['locale']['FR']['country'] = 'FR';
 
 	$opt['locale']['PL']['format']['dm'] = '%d.%m.';
-	$opt['locale']['DE']['format']['dateshort'] = '%d.%m.%y';
+	$opt['locale']['PL']['format']['dateshort'] = '%d.%m.%y';
 	$opt['locale']['PL']['format']['date'] = '%x';
 	$opt['locale']['PL']['format']['datelong'] = '%d. %B %Y';
 	$opt['locale']['PL']['format']['datetime'] = '%x %H:%M';
 	$opt['locale']['PL']['format']['datetimesec'] = '%x %X';
 	$opt['locale']['PL']['format']['time'] = '%H:%M';
 	$opt['locale']['PL']['format']['timesec'] = '%X';
+	$opt['locale']['PL']['format']['phpdate'] = 'd-m-Y';
 	$opt['locale']['PL']['country'] = 'PL';
 
 	$opt['locale']['NL']['format']['dm'] = '%d.%m.';
-	$opt['locale']['DE']['format']['dateshort'] = '%d.%m.%y';
+	$opt['locale']['NL']['format']['dateshort'] = '%d.%m.%y';
 	$opt['locale']['NL']['format']['date'] = '%x';
 	$opt['locale']['NL']['format']['datelong'] = '%d. %B %Y';
 	$opt['locale']['NL']['format']['datetime'] = '%x %H:%M';
 	$opt['locale']['NL']['format']['datetimesec'] = '%x %X';
 	$opt['locale']['NL']['format']['time'] = '%H:%M';
 	$opt['locale']['NL']['format']['timesec'] = '%X';
+	$opt['locale']['NL']['format']['phpdate'] = 'd-m-Y';
 	$opt['locale']['NL']['page']['subtitle1'] = 'Geocaching met Opencaching';
 	$opt['locale']['NL']['page']['subtitle2'] = '';
 	$opt['locale']['NL']['country'] = 'NL';
 
-	$opt['locale']['DE']['format']['dateshort'] = '%d.%m.%y';
+	$opt['locale']['IT']['format']['dateshort'] = '%d.%m.%y';
 	$opt['locale']['IT']['format']['dm'] = '%d.%m.';
 	$opt['locale']['IT']['format']['date'] = '%x';
 	$opt['locale']['IT']['format']['datelong'] = '%d. %B %Y';
@@ -154,11 +163,14 @@
 	$opt['locale']['IT']['format']['datetimesec'] = '%x %X';
 	$opt['locale']['IT']['format']['time'] = '%H:%M';
 	$opt['locale']['IT']['format']['timesec'] = '%X';
+	$opt['locale']['IT']['format']['phpdate'] = 'd-m-Y';
 	$opt['locale']['IT']['country'] = 'IT';
 	$opt['locale']['IT']['page']['subtitle1'] = 'Geocaching con Opencaching';
 	$opt['locale']['IT']['page']['subtitle2'] = '';
+	$opt['locale']['IT']['page']['license_url'] = 'http://creativecommons.org/licenses/by-nc-nd/3.0/de/deed.it';
+	$opt['locale']['IT']['page']['license'] = '<a rel="license" href="%1" target="_blank"><img alt="Creative Commons License Terms" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-nd/3.0/de/88x31.png" /></a><br />Il contenuto di www.opencaching.de è rilasciato sotto <br />Licenza <a rel="license" href="%1" target="_blank">Attribuzione - Non commerciale - Non opere derivate 3.0 Germania</a>.';
 
-	$opt['locale']['DE']['format']['dateshort'] = '%d.%m.%y';
+	$opt['locale']['RU']['format']['dateshort'] = '%d.%m.%y';
 	$opt['locale']['RU']['format']['dm'] = '%d.%m.';
 	$opt['locale']['RU']['format']['date'] = '%x';
 	$opt['locale']['RU']['format']['datelong'] = '%d. %B %Y';
@@ -166,9 +178,10 @@
 	$opt['locale']['RU']['format']['datetimesec'] = '%x %X';
 	$opt['locale']['RU']['format']['time'] = '%H:%M';
 	$opt['locale']['RU']['format']['timesec'] = '%X';
+	$opt['locale']['RU']['format']['phpdate'] = 'd-m-Y';
 	$opt['locale']['RU']['country'] = 'RU';
 
-	$opt['locale']['DE']['format']['dateshort'] = '%d.%m.%y';
+	$opt['locale']['ES']['format']['dateshort'] = '%d.%m.%y';
 	$opt['locale']['ES']['format']['dm'] = '%d.%m.';
 	$opt['locale']['ES']['format']['date'] = '%x';
 	$opt['locale']['ES']['format']['datelong'] = '%d. %B %Y';
@@ -176,11 +189,14 @@
 	$opt['locale']['ES']['format']['datetimesec'] = '%x %X';
 	$opt['locale']['ES']['format']['time'] = '%H:%M';
 	$opt['locale']['ES']['format']['timesec'] = '%X';
+	$opt['locale']['ES']['format']['phpdate'] = 'd-m-Y';
 	$opt['locale']['ES']['country'] = 'ES';
 	$opt['locale']['ES']['page']['subtitle1'] = 'Geocaching con Opencaching';
 	$opt['locale']['ES']['page']['subtitle2'] = '';
+	$opt['locale']['ES']['page']['license_url'] = 'http://creativecommons.org/licenses/by-nc-nd/3.0/de/deed.es_ES';
+	$opt['locale']['ES']['page']['license'] = '<a rel="license" href="%1" target="_blank"><img alt="Creative Commons License Terms" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-nd/3.0/de/88x31.png" /></a><br />El contenido está disponible bajo licencia <br/><a rel="license" href="%1" target="_blank">Reconocimiento-NoComercial-SinObraDerivada 3.0 Alemania</a> Licencia.';
 
-	$opt['locale']['DE']['format']['dateshort'] = '%d.%m.%y';
+	$opt['locale']['SV']['format']['dateshort'] = '%d.%m.%y';
 	$opt['locale']['SV']['format']['dm'] = '%d.%m.';
 	$opt['locale']['SV']['format']['date'] = '%Y-%m-%d';
 	$opt['locale']['SV']['format']['datelong'] = '%Y-%m-%d';
@@ -188,11 +204,12 @@
 	$opt['locale']['SV']['format']['datetimesec'] = '%x %X';
 	$opt['locale']['SV']['format']['time'] = '%H:%M';
 	$opt['locale']['SV']['format']['timesec'] = '%X';
+	$opt['locale']['SV']['format']['phpdate'] = 'd-m-Y';
 	$opt['locale']['SV']['country'] = 'SE';
 	$opt['locale']['SV']['page']['subtitle1'] = 'Geocaching med Opencaching';
 	$opt['locale']['SV']['page']['subtitle2'] = '';
 
-	$opt['locale']['DE']['format']['dateshort'] = '%d.%m.%y';
+	$opt['locale']['NO']['format']['dateshort'] = '%d.%m.%y';
 	$opt['locale']['NO']['format']['dm'] = '%d.%m.';
 	$opt['locale']['NO']['format']['date'] = '%Y-%m-%d';
 	$opt['locale']['NO']['format']['datelong'] = '%Y-%m-%d';
@@ -200,11 +217,12 @@
 	$opt['locale']['NO']['format']['datetimesec'] = '%x %X';
 	$opt['locale']['NO']['format']['time'] = '%H:%M';
 	$opt['locale']['NO']['format']['timesec'] = '%X';
+	$opt['locale']['NO']['format']['phpdate'] = 'd-m-Y';
 	$opt['locale']['NO']['country'] = 'NO';
 	$opt['locale']['NO']['page']['subtitle1'] = 'Geocaching med Opencaching';
 	$opt['locale']['NO']['page']['subtitle2'] = '';
 
-	$opt['locale']['DE']['format']['dateshort'] = '%d.%m.%y';
+	$opt['locale']['DA']['format']['dateshort'] = '%d.%m.%y';
 	$opt['locale']['DA']['format']['dm'] = '%d.%m.';
 	$opt['locale']['DA']['format']['date'] = '%Y-%m-%d';
 	$opt['locale']['DA']['format']['datelong'] = '%Y-%m-%d';
@@ -212,11 +230,12 @@
 	$opt['locale']['DA']['format']['datetimesec'] = '%x %X';
 	$opt['locale']['DA']['format']['time'] = '%H:%M';
 	$opt['locale']['DA']['format']['timesec'] = '%X';
+	$opt['locale']['DA']['format']['phpdate'] = 'd-m-Y';
 	$opt['locale']['DA']['country'] = 'DK';
 	$opt['locale']['DA']['page']['subtitle1'] = 'Geocaching med Opencaching';
 	$opt['locale']['DA']['page']['subtitle2'] = '';
 
-	$opt['locale']['DE']['format']['dateshort'] = '%d.%m.%y';
+	$opt['locale']['PT']['format']['dateshort'] = '%d.%m.%y';
 	$opt['locale']['PT']['format']['dm'] = '%d.%m.';
 	$opt['locale']['PT']['format']['date'] = '%Y-%m-%d';
 	$opt['locale']['PT']['format']['datelong'] = '%Y-%m-%d';
@@ -224,11 +243,12 @@
 	$opt['locale']['PT']['format']['datetimesec'] = '%x %X';
 	$opt['locale']['PT']['format']['time'] = '%H:%M';
 	$opt['locale']['PT']['format']['timesec'] = '%X';
+	$opt['locale']['PT']['format']['phpdate'] = 'd-m-Y';
 	$opt['locale']['PT']['country'] = 'PT';
 	$opt['locale']['PT']['page']['subtitle1'] = 'Geocaching com Opencaching';
 	$opt['locale']['PT']['page']['subtitle2'] = '';
 
-	$opt['locale']['DE']['format']['dateshort'] = '%d.%m.%y';
+	$opt['locale']['JA']['format']['dateshort'] = '%d.%m.%y';
 	$opt['locale']['JA']['format']['dm'] = '%d.%m.';
 	$opt['locale']['JA']['format']['date'] = '%Y-%m-%d';
 	$opt['locale']['JA']['format']['datelong'] = '%Y-%m-%d';
@@ -236,6 +256,7 @@
 	$opt['locale']['JA']['format']['datetimesec'] = '%x %X';
 	$opt['locale']['JA']['format']['time'] = '%H:%M';
 	$opt['locale']['JA']['format']['timesec'] = '%X';
+	$opt['locale']['JA']['format']['phpdate'] = 'd-m-Y';
 	$opt['locale']['JA']['country'] = 'JP';
 	$opt['locale']['JA']['page']['subtitle1'] = 'Opencachingとジオキャッシング';
 	$opt['locale']['JA']['page']['subtitle2'] = '';

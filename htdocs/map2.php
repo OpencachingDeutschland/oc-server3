@@ -289,7 +289,8 @@ function output_cachexml($sWaypoint)
 	                   LEFT JOIN `caches_attributes` ON `caches_attributes`.`cache_id`=`caches`.`cache_id` AND `caches_attributes`.`attrib_id`=6
 	                   LEFT JOIN `pictures` ON `pictures`.`object_id`=`caches`.`cache_id` AND `pictures`.`object_type`='&4' AND `pictures`.`mappreview`=1
 	                       WHERE (`caches`.`wp_oc`='&3' OR (`caches`.`wp_oc`!='&3' AND `caches`.`wp_gc`='&3') OR (`caches`.`wp_oc`!='&3' AND `caches`.`wp_nc`='&3')) AND 
-	                             (`cache_status`.`allow_user_view`=1 OR `caches`.`user_id`='&1')",
+	                             (`cache_status`.`allow_user_view`=1 OR `caches`.`user_id`='&1')
+	                       LIMIT 1",  // for the case of illegal duplicates in pictures.mappreview etc.
 	                              $login->userid, $opt['template']['locale'], $sWaypoint, OBJECT_CACHE);
 
 	$rCache = sql_fetch_assoc($rsCache);

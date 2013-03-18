@@ -55,6 +55,7 @@
 	</div>
 
 	<table class="table">
+		<tr><td class="spacer" colspan="2"></td></tr>
 		<tr>
 			<td valign="top">{t}Name:{/t}</td>
 			<td>
@@ -83,13 +84,11 @@
 			{/if}
 		{/if}
 
+		<tr><td class="spacer" colspan="2"></td></tr>
+
 		<tr>
 			<td align="right"><input class="checkbox" type="checkbox" name="spoiler" value="1" {if $spoilerchecked==true}checked="checked"{/if} /></td>
 			<td>{t}This picture is a spoiler - dont show a thumbnail.{/t} {if $objecttype==OBJECT_CACHELOG}{t}Please use the spoiler mark also for log pictures, to prevent that they appear on log gallery pages.{/t}{/if}</td>
-		</tr>
-
-		<tr>
-			<td height="8px"></td>
 		</tr>
 
 		{if $objecttype==OBJECT_CACHE}
@@ -103,6 +102,7 @@
 			</tr>
 		{/if}
 		{if $action=='add'}
+			<tr><td class="spacer" colspan="2"></td></tr>
 			<tr>
 				<td class="help" colspan="2">
 					<img src="resource2/{$opt.template.style}/images/misc/hint.gif" border="0" width="15" height="11" alt="{t}Note{/t}" title="{t}Note{/t}">

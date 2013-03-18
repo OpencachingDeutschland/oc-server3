@@ -12,6 +12,7 @@ require_once($opt['rootpath'] . 'lib2/mail.class.php');
 require_once($opt['rootpath'] . 'lib2/logic/rowEditor.class.php');
 require_once($opt['rootpath'] . 'lib2/logic/statpic.class.php');
 require_once($opt['rootpath'] . 'lib2/logic/countriesList.class.php');
+require_once($opt['rootpath'] . 'lib2/logic/picture.class.php');
 require_once($opt['rootpath'] . 'lib2/logic/cracklib.inc.php');
 require_once($opt['rootpath'] . 'lib2/translate.class.php');
 
@@ -744,32 +745,39 @@ class user
 	 * disables user (if not disabled), removes all licensed content from db and
 	 * replaces every picture with a dummy one
 	 * 
-	 * @return bool false, if anything went wrong, true otherwise
+	 * @return string error message, if anything went wrong, true otherwise
+	 *
+	 * old_disabled: the user was disabled already before license transition
+	 *               and therefore could not accept/decline the license
 	 */
-	function disduelicense() {
+	function disduelicense($old_disabled=false) {
 		
 		// get translation-object
 		global $translate;
-		
+
 		// check if disabled, disable if not
 		if (!$this->canDisableDueLicense())
 			return 'this user must not be disabled';
-	 	if ($this->canDisable()) 
-			if (!$this->disable()) 
-				return 'disable user failed';
+
+		if (!$old_disabled)
+			if ($this->canDisable())
+				if (!$this->disable())
+					return 'disable user failed';
 
 		// remember that data license was declined
-		sql("UPDATE user SET data_license=1 WHERE user_id='&1'", $this->getUserId());
+		sql("UPDATE user SET data_license='&2' WHERE user_id='&1'", 
+		    $this->getUserId(),
+		    $old_disabled ? NEW_DATA_LICENSE_PASSIVELY_DECLINED : NEW_DATA_LICENSE_ACTIVELY_DECLINED);
 
 		/*
-		 * set all cache_desc and hint to ''
+		 * set all cache_desc and hint to '', save old texts
 		 */
 		// check if there are caches
 		$num_caches = sql_value("SELECT COUNT(*) FROM `caches` WHERE `user_id`='&1'", 
 														0, $this->getUserId());
 		if ($num_caches > 0) {
 			$cache_descs = array();
-			$rs = sql("SELECT `cache_desc`.`id`,`cache_desc`.`language` " .
+			$rs = sql("SELECT `id`, `language`, `desc`, `hint` " .
 								"FROM `cache_desc`,`caches` " .
 								"WHERE `caches`.`cache_id`=`cache_desc`.`cache_id` " .
 								"AND `caches`.`user_id`='&1'",
@@ -782,41 +790,96 @@ class user
 			// walk through cache_descs and set message for each language
 			foreach ($cache_descs as $desc)
 			{ 
+				// save text - added 2013/03/18 to be enable restoring data on reactivation
+				// of accounts that were disabled before license transition
+				if ($desc['desc'] != "")
+					sql("INSERT IGNORE INTO `saved_texts` (`object_type`, `object_id`, `subtype`, `text`)
+					     VALUES ('&1', '&2', '&3', '&4')",
+					     OBJECT_CACHEDESC, $desc['id'], 1, $desc['desc'] );
+				if ($desc['hint'] != "")
+					sql("INSERT IGNORE INTO `saved_texts` (`object_type`, `object_id`, `subtype`, `text`)
+					     VALUES ('&1', '&2', '&3', '&4')",
+					     OBJECT_CACHEDESC, $desc['id'], 2, $desc['hint'] );
+
+				if ($desc['desc'] != "")
+					if ($old_disabled)
+						$descmsg = $translate->t('cache description was removed because the owner\'s account was inactive when the <a href="articles.php?page=impressum#datalicense">new content license</a> was launched', '',  basename(__FILE__), __LINE__, '', 1, $desc['language']);
+					else
+						$descmsg = $translate->t('cache description was removed because owner declined content license', '',  basename(__FILE__), __LINE__, '', 1, $desc['language']);
+				else
+					$descmsg = "";
+
 				sql("UPDATE `cache_desc` " .
 						"SET `desc`='&1',`hint`='&2' " .
 						"WHERE `id`='&3'",
-						"<em>" . $translate->t('cache description was removed because owner declined content license', '',  basename(__FILE__), __LINE__, '', 1, $desc['language']) . "</em>", 
+						"<em>" . $descmsg . "</em>", 
 						'',
 						$desc['id']
-					);
+					 );
 			}
 
 			// replace pictures
 			$errmesg = $this->replace_pictures(OBJECT_CACHE);
 			if ($errmesg !== true) 
 				return "removing cache pictures: $errmesg";
-		} 
+		}
+
+		// delete additional waypoint texts
+		$rs = sql("SELECT `id`, `description` FROM `coordinates`
+		           WHERE `type`='&1'
+	             AND `cache_id` IN (SELECT `cache_id` FROM `caches` WHERE `user_id`='&2')",
+				      COORDINATE_WAYPOINT, $this->getUserId());
+		while ($wp = sql_fetch_assoc($rs))
+		{
+			if ($wp['description'] != "")
+				sql("INSERT IGNORE INTO `saved_texts` (`object_type`, `object_id`, `subtype`, `text`)
+				     VALUES ('&1', '&2', '&3', '&4')",
+				    OBJECT_WAYPOINT, $wp['id'], 0, $wp['description'] );
+
+			sql("UPDATE `coordinates` SET `description`=''
+		       WHERE `id`='&1'",
+			    $wp['id']);
+		}
+		sql_free_result($rs);
 		
 		/*
-		 * set all cache_logs ''
+		 * set all cache_logs '', save old texts and delete pictures
 		 */
-		// check if there are cache_logs
-		$num_cache_logs = sql_value("SELECT COUNT(*) " .
-									"FROM `cache_logs` " .
-									"WHERE `user_id`='&1'",
-										0,
-										$this->getUserId()
-									);
+		$rs = sql("SELECT `id`, `text`
+							 FROM `cache_logs`
+							 WHERE `user_id`='&1'",
+							$this->getUserId()
+						 );
+		while ($log = sql_fetch_array($rs,MYSQL_ASSOC))
+		{
+			// save text - added 2013/03/18 to be enable restoring data on reactivation
+			// of accounts that were disabled before license transition
+			sql("INSERT IGNORE INTO `saved_texts` (`object_type`, `object_id`, `subtype`, `text`)
+			     VALUES ('&1', '&2', '&3', '&4')",
+			     OBJECT_CACHELOG, $log['id'], 0, $log['text']);
 
-		if ($num_cache_logs > 0) {
 			// set text ''
-			sql("UPDATE `cache_logs` SET `text`='' WHERE `user_id`='&1'", $this->getUserId());
+			sql("UPDATE `cache_logs` SET `text`='' WHERE `id`='&1'", $log['id']);
 			
+			/*
 			// replace pictures
 			$errmesg = $this->replace_pictures(OBJECT_CACHELOG);
 			if ($errmesg !== true) 
 				return "removing log pictures: $errmesg";
+			*/
+
+			// delete log pictures
+			$rsp = sql("SELECT `id` FROM `pictures`
+			            WHERE `object_type`='&1' AND `object_id`='&2'",
+			            OBJECT_CACHELOG, $log['id']);
+			while ($pic = sql_fetch_assoc($rsp))
+			{
+				$picture = new picture($pic['id']);
+				$picture->delete();
+			}
+			sql_free_result($rsp);
 		}
+		sql_free_result($rs);
 		
 		// success
 		return true;
@@ -892,8 +955,8 @@ class user
 			$filenames[] = substr($url['url'],-40);
 		
 		// free result
-		sql_free_result($rs);	
-	
+		sql_free_result($rs);
+
 		/*
 		 * walk through filenames and replace original
 		 */
@@ -1123,6 +1186,17 @@ class user
 	{
 		// see also common.inc.php "SELECT `email_problems`"
 		return $this->reUser->getValue('email_problems') % 1000000;
+	}
+
+	function getDataLicense()
+	{
+		return $this->reUser->getValue('data_license');
+	}
+
+	function getLicenseDeclined()
+	{
+		return $this->getDataLicense() == NEW_DATA_LICENSE_ACTIVELY_DECLINED ||
+		       $this->getDataLicense() == NEW_DATA_LICENSE_PASSIVELY_DECLINED;
 	}
 
 	function missedDataLicenseMail()

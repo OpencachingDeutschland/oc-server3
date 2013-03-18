@@ -45,3 +45,10 @@
 
 {* $log != "N" *}
 {/if}
+
+
+<script type="text/javascript">
+<!--
+ remove_piclinks();
+-->
+</script> 

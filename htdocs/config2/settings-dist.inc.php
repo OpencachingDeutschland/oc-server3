@@ -365,6 +365,12 @@
 	$opt['logic']['logs']['purge_email'] = 30;
 	$opt['logic']['logs']['purge_userdata'] = 14;
 
+	/* license-related functions
+	 */
+	$opt['logic']['license'] = array();   // PHP warning without this - why only here??
+	$opt['logic']['license']['admin'] = true;
+	$opt['logic']['license']['disclaimer'] = false;   // also in lib/settings.inc.php
+
   /* Database charset
 	 *   frontend and php charsets are UTF-8
 	 *   here you can set a different charset for the MySQL-Engine

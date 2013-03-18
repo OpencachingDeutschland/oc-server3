@@ -34,11 +34,11 @@
 				{/if}
 			{/foreach}
 			{* fill up remaining cells so that 2..5 pictures will not spread over container width *}
-			{if $piccount<6}<td width="{$itemwidth+4}px"></td>{/if}
-			{if $piccount<5}<td width="{$itemwidth+4}px"></td>{/if}
-			{if $piccount<4}<td width="{$itemwidth+4}px"></td>{/if}
-			{if $piccount<3}<td width="{$itemwidth+4}px"></td>{/if}
-			{if $piccount<2}<td width="{$itemwidth+4}px"></td>{/if}
+			{if $piccount<6}<td width="{$itemwidth}px"></td>{/if}
+			{if $piccount<5}<td width="{$itemwidth}px"></td>{/if}
+			{if $piccount<4}<td width="{$itemwidth}px"></td>{/if}
+			{if $piccount<3}<td width="{$itemwidth}px"></td>{/if}
+			{if $piccount<2}<td width="{$itemwidth}px"></td>{/if}
 		</tr>
 	</table>
 	<div style="height:8px"></div>

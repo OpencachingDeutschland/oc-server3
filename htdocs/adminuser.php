@@ -106,7 +106,7 @@ function formAction()
 
 function searchUser()
 {
-	global $tpl;
+	global $tpl, $opt;
 
 	$username = isset($_REQUEST['username']) ? $_REQUEST['username'] : '';
 	$msg = isset($_REQUEST['msg']) ? $_REQUEST['msg'] : '';
@@ -114,7 +114,7 @@ function searchUser()
 	$tpl->assign('username', $username);
 	$tpl->assign('msg', $msg);
 	
-	$rs = sql("SELECT `user_id`, `username`, `email`, `email_problems`, `date_created`, `last_modified`, `is_active_flag`, `activation_code`, `first_name`, `last_name`, `data_license`=1 AS `license_declined` FROM `user` WHERE `username`='&1' OR `email`='&1'", $username);
+	$rs = sql("SELECT `user_id`, `username`, `email`, `email_problems`, `date_created`, `last_modified`, `is_active_flag`, `activation_code`, `first_name`, `last_name`, `data_license`='&2' AS `license_declined` FROM `user` WHERE `username`='&1' OR `email`='&1'", $username, NEW_DATA_LICENSE_ACTIVELY_DECLINED);
 	$r = sql_fetch_assoc($rs);
 	sql_free_result($rs);
 	if ($r == false)
@@ -138,7 +138,8 @@ function searchUser()
 		$tpl->error(ERROR_UNKNOWN);
 	$tpl->assign('candisable', $user->canDisable());
 	$tpl->assign('candelete', $user->canDelete());
-	$tpl->assign('cansetemail', !$user->missedDataLicenseMail());
+	$tpl->assign('cansetemail', !$user->missedDataLicenseMail() && $r['email'] != "");
+	$tpl->assign('licensefunctions', $opt['logic']['license']['admin']);
 
 	$tpl->display();
 }

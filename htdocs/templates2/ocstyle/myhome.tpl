@@ -113,17 +113,18 @@
 		</p>
 	</div>
 	*}
+
 	{* Emails sent *}
-	{* useless information when email protocol is regularly cleand-up 
+	{* useless information when email protocol is regularly cleand-up
 	<p>
 		<img src="resource2/{$opt.template.style}/images/misc/22x22-email.png" width="22" height="22" style="align: left; margin-right: 10px;" alt="{t}E-Mails sent{/t}" />&nbsp;
 		<strong>{t 1=$emails}E-Mails sent: %1{/t}</strong>
 	</p>
 	*}
-	<div class="buffer">&nbsp;</div>
-
 	{* link to public profile *}
+	{* now in menu
 	<p>{t}This is what your profile looks like to other users:{/t} <a href="viewprofile.php?userid={$login.userid}">{t}Your public profile{/t}</a></p>
+	*}
 {/if}
 
 <div class="buffer">&nbsp;</div>

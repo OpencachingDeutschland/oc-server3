@@ -133,19 +133,21 @@ function get_logpics($purpose, $userid=0, $cacheid=0)
 				break;
 				
 			case LOGPICS_FOR_CACHE_STAT:
-				// all pictures for a cache
+				// all pictures for a cache except license-replacement pics
 				// need not to exclude invisible caches, as this is only displayed in listing view
 
 				$result = sql_value(
 				          "SELECT COUNT(*)
 				             FROM `pictures` AS `pics`
 				             $join_logs
-                    WHERE `object_type`=1 AND `logs`.`cache_id`='&1'",
-                    0, $cacheid);
+				             $join_user
+                    WHERE `object_type`=1 AND `logs`.`cache_id`='&1'
+										  AND NOT (`data_license` IN ('&2','&3'))",
+                    0, $cacheid, NEW_DATA_LICENSE_ACTIVELY_DECLINED, NEW_DATA_LICENSE_PASSIVELY_DECLINED);
 				break; 
 
 			case LOGPICS_FOR_CACHE_GALLERY:
-				// all picture for a cache
+				// all picture for a cache except license-replacement pics
 				// for all users except owner: also excluding invisble caches
 					
 				$rs = sql("SELECT $fields, `user`.`username`, `logs`.`date` AS `picdate`
@@ -154,7 +156,9 @@ function get_logpics($purpose, $userid=0, $cacheid=0)
 	                   ($userid == $login->userid ? "" : "$join_caches $join_cachestatus") . "
 	                   $join_user
                     WHERE `object_type`=1 AND `logs`.`cache_id`='&1'
-                 ORDER BY `logs`.`date` DESC", $cacheid);
+										  AND NOT (`data_license` IN ('&2','&3'))
+                 ORDER BY `logs`.`date` DESC",
+								  $cacheid, NEW_DATA_LICENSE_ACTIVELY_DECLINED, NEW_DATA_LICENSE_PASSIVELY_DECLINED);
 				break; 
 				
 			default:

@@ -5,6 +5,14 @@ General Public License as published by the Free Software Foundation, either
 version 3 of the License, or (at your option) any later version. See LICENSE.TXT 
 for details. */
 
+// disable non-javascript fallback links do that enlargeit receives the mouse clicks
+function remove_piclinks()
+{
+  var piclinks = document.getElementsByName("piclink");
+  for (var pic=0; pic<piclinks.length; pic++)
+    piclinks[pic].removeAttribute('href');
+}
+
 // modify these
 var enl_gifpath='./resource2/ocstyle/js/enlargeit/'; // path to graphics
 var enl_brdsize=6;    // border thickness (5-30)

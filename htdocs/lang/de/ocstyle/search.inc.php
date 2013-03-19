@@ -68,10 +68,10 @@
 	$rating_text = t("Rating: {rating}%");
 	$not_rated = t('No Rating');
 
-	$error_plz = '<tr><td><span class="errormsg">' . t('The postal code could not be found') . '</span></td></tr>';
-	$error_ort = '<tr><td><span class="errormsg">' . t('There does no city exist with this name') . '</span></td></tr>';
-	$error_locidnocoords = '<tr><td><span class="errormsg">' . t('There are no Koordinates available for the selected city') . '</span></td></tr>';
-	$error_noort = '<tr><td><span class="errormsg">' . t('The entered city is not valid.') . '</span></td></tr>';
+	$error_plz = '<tr><td colspan="3"><span class="errormsg">' . t('The postal code could not be found') . '</span></td></tr>';
+	$error_ort = '<tr><td colspan="3"><span class="errormsg">' . t('There does no city exist with this name') . '</span></td></tr>';
+	$error_locidnocoords = '<tr><td colspan="3"><span class="errormsg">' . t('There are no Koordinates available for the selected city') . '</span></td></tr>';
+	$error_noort = '<tr><td colspan="3"><span class="errormsg">' . t('The entered city is not valid.') . '</span></td></tr>';
 	$error_nofulltext = '<tr><td colspan="3"><span class="errormsg">' . t('The entered text is invalid.') . '</span></td></tr>';
 	$error_fulltexttoolong = '<tr><td colspan="3"><span class="errormsg">' . t('The entered text contains more than 50 words.') . '</span></td></tr>';
 

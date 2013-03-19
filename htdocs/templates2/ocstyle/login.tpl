@@ -58,6 +58,7 @@
 				<input type="submit" name="submit" value="{t}Login{/t}" class="formbutton" onclick="submitbutton('submit')" />
 			</td>
 		</tr>
+		<tr><td class="spacer" colspan="2"></td></tr>
 	</table>
 </form>
 

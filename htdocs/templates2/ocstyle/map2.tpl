@@ -2085,7 +2085,7 @@ function toggle_attribselection(bSaveCookies)
 					{* login status *}
 					<td rowspan="2">&nbsp;&nbsp;</td>
 					<td rowspan="2" class="maplogin">
-						{if $username != ""}{t}Logged in as{/t}<br /><a href="myhome.php"><b>{$username}</b></a>{else}<a href="login.php?target=map2.php%3Fmode%3Dfullscreen">{t}Login{/t} ...</a>{/if}
+						{if $username != ""}{t}Logged in as{/t}<br /><a href="myhome.php"><b>{$username}</b></a> &nbsp;<a href="map2.php?action=logout&mode=fullscreen"><img src="resource2/ocstyle/images/action/15x13-logout.png" style="margin-bottom:2px" alt="{t}Logout{/t}" title="{t}Logout{/t}"></a>{else}<a href="login.php?target=map2.php%3Fmode%3Dfullscreen">{t}Login{/t}...</a>{/if}
 					</td>
 					<td rowspan="2">&nbsp;&nbsp;</td>
 				{/if}

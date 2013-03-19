@@ -14,7 +14,10 @@
 	/* because the map does access some private info like
 	 * ignored caches, we need to verify the login data
 	 */
-	$login->verify();
+	if (isset($_REQUEST['action']) && isset($_REQUEST['action']) == 'logout')
+		$login->logout();
+	else
+		$login->verify();
 
 	// check for peculiar browsers
 	$ua = isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : "";

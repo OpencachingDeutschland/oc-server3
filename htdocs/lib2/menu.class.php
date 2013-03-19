@@ -63,7 +63,16 @@ class Menu
 			$aMenu[$r['id']]['title'] = $translate->t($r['title'], '', basename(__FILE__), __LINE__);
 			$aMenu[$r['id']]['menustring'] = $translate->t($r['menustring'], '', basename(__FILE__), __LINE__);
 			$aMenu[$r['id']]['authlevel'] = ($r['access']==0) ? AUTH_LEVEL_ALL : AUTH_LEVEL_ADMIN;
-			$aMenu[$r['id']]['href'] = $r['href'];
+			if (substr($r['href'],0,1) == '!')
+			{
+				$aMenu[$r['id']]['href'] = substr($r['href'],1);
+				$aMenu[$r['id']]['target'] = 'target="_blank"';
+			}
+			else
+			{
+				$aMenu[$r['id']]['href'] = $r['href'];
+				$aMenu[$r['id']]['target'] = '';
+			}
 			$aMenu[$r['id']]['visible'] = ($r['visible'] == 1) ? true : false;
 			$aMenu[$r['id']]['sublevel'] = $this->pGetMenuSublevel($r['id']);
 

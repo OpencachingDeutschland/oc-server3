@@ -2389,7 +2389,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1963', 'About O
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1964', 'Cache descriptions, log texts and pictures have been deleted, because the account was disabled before transition to the <a href=\"articles.php?page=impressum#datalicense\">new data license</a>.', '2013-02-23 19:00:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1965', 'cache description was removed because the owner\'s account was inactive when the <a href=\"articles.php?page=impressum#datalicense\">new content license</a> was launched', '2013-02-23 19:00:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1966', 'as of', '2013-02-23 19:00:04');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1967', 'all log entries &copy; their authors', '2013-02-23 19:00:04');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1967', 'all log entries \&copy; their authors', '2013-02-23 19:00:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1968', 'more', '2013-02-23 19:00:04');
 
 -- Table sys_trans_ref
@@ -6058,7 +6058,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1964', 'DE', 'Cachebeschreibungen, Logtexte und Bilder des Benutzers wurden entfernt, weil die Deaktivierung vor der Umstellung auf die <a href=\"articles.php?page=impressum#datalicense\">neue Datenlizenz</a> stattfand.', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1965', 'DE', 'Das Benutzerkonto des Cachebesitzers war zum Zeitpunkt der Umstellung auf die <a href=\"articles.php?page=impressum#datalicense\">neue Datenlizenz</a> nicht mehr aktiv. Da er der neuen Lizenz nicht zustimmen konnte, wurden seine Cachebeschreibungen entfernt.', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1966', 'DE', 'Stand:', '2013-02-19 05:48:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1967', 'DE', 'alle Logeinträge &copy; jeweiliger Autor', '2013-02-19 05:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1967', 'DE', 'alle Logeinträge \&copy; jeweiliger Autor', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1968', 'DE', 'mehr', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'EN', 'Reorder IDs \r', '2010-09-02 00:15:30');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'EN', 'The database could not be reconnected.', '2010-08-28 11:48:07');
@@ -7548,7 +7548,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1964', 'EN', 'Cache descriptions, log texts and pictures have been deleted, because the account was disabled before transition to the <a href=\"articles.php?page=impressum#datalicense\">new data license</a>.', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1965', 'EN', 'cache description was removed because the owner\'s account was inactive when the <a href=\"articles.php?page=impressum#datalicense\">new content license</a> was launched', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1966', 'EN', 'as of', '2013-02-19 05:48:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1967', 'EN', 'all log entries &copy; their authors', '2013-02-19 05:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1967', 'EN', 'all log entries \&copy; their authors', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1968', 'EN', 'more', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'ES', 'Reordenar ID', '2010-12-09 00:17:55');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'ES', 'La base de datos no se pudo conectar.', '2010-12-09 00:17:55');
@@ -9033,6 +9033,8 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1960', 'ES', 'Página', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1961', 'ES', 'a', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1962', 'ES', 'cerca de', '2013-02-19 05:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1963', 'ES', 'Acerca de Opencaching', '2010-12-09 00:17:56');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1968', 'ES', 'más', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('6', 'FR', 'Pseudo', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('7', 'FR', 'Quite', '2010-10-04 00:17:39');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('24', 'FR', 'Prénom', '2010-10-04 00:17:39');
@@ -10109,6 +10111,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1378', 'IT', 'Si prega di prendere visione della <a href=\"articles.php?page=cacheinfo#logpw\" target=\"_blank\">Descrizione</a>!', '2010-09-10 23:53:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1379', 'IT', 'Meno', '2010-09-10 23:52:53');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1380', 'IT', 'Ricerca cache', '2010-09-10 23:52:44');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1381', 'IT', 'JavaScript non è attivo, non puoi usare le opzioni precedenti (ordinamento per attrivuti) - tuttavia è possibile la ricerca base.', '2013-03-19 15:12:21');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1382', 'IT', 'Risultati ordinati per:', '2010-10-27 18:49:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1383', 'IT', 'Ultimo log', '2010-09-10 23:52:16');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1384', 'IT', 'Visualizza prima le raccomandazioni di altri utenti', '2010-09-10 23:51:58');
@@ -10567,6 +10570,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1876', 'IT', 'Dati mappa \&copy; <a href=\"http://www.openstreetmap.org/copyright\" target=\"_blank\">OpenStreetMap</a> contributori', '2013-03-14 10:49:58');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1877', 'IT', 'quadri forniti da <a href=\"http://www.mapquest.com/\" target=\"_blank\">MapQuest</a>', '2013-03-14 10:49:58');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1878', 'IT', 'Dati mappa \&copy; <a href=\"http://www.openstreetmap.org/copyright\" target=\"_blank\">OpenStreetMap</a> e <a href=\"http://www.thunderforest.com/opencyclemap/\" target=\"_blank\">OpenCycleMap</a> contributori', '2013-03-14 10:49:58');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1918', 'IT', 'Per favore usa l\\\'indicazione di spoiler anche per le immagini del log per evitare che appiano nelle gallerie di immagini.', '2013-03-19 15:12:21');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1919', 'IT', 'Nuovi log immagini', '2013-03-14 10:49:58');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1920', 'IT', 'D', '2013-03-14 10:51:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1921', 'IT', 'T', '2013-03-14 10:51:59');
@@ -10580,9 +10584,31 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1929', 'IT', 'Anteprima immagine per la mappa \&ndash; è visualizzata quando queta cache è selezionata sulla mappa. Puoi avere solo <em>una</em> immagine di anteprima per cache', '2013-03-14 10:49:58');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1930', 'IT', 'Al massimo %1 cache possono essere visualizzate con Microsoft Internet Explorer.', '2013-03-14 10:49:58');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1940', 'IT', 'Galleria di immagini', '2013-03-14 10:49:58');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1941', 'IT', 'La data visualizza la data del caricamento dell\\\'immagine, che può essere diversa dalla data del log.', '2013-03-19 15:12:21');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1942', 'IT', 'Qui viene visualizzata al massimo una immagine al giorno per utente. La piccola galleria nella pagina di avvio è anche limitata ad una immagine per cache e per giorno.', '2013-03-19 15:12:21');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1943', 'IT', 'Tutte le immagini sono protette da copyright. Se vuoi utilizzarle chiedi il permesso all\'autore. Dal 7 aprile 2013 i log che includono immagini possono essere usati senza alcuna modifica secondo i termini dellla <a href=\"articles.php?page=impressum#datalicense\">nuova licenza dati</a>.', '2013-03-14 10:49:58');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1944', 'IT', 'Visualizza le immagini di stato e la galleria.', '2013-03-19 15:12:21');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1945', 'IT', 'Log immagini', '2013-03-19 15:12:21');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1946', 'IT', 'Log immagini: %1', '2013-03-19 15:12:21');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1947', 'IT', 'Log immagini di %1', '2013-03-19 15:12:21');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1948', 'IT', 'Le tue immagini di log', '2013-03-19 15:12:21');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1949', 'IT', 'Le tue ultime immagini di log', '2013-03-19 15:12:21');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1950', 'IT', 'Nelle tue <a href=\"mydetails.php\">impostazioni profilo</a> puoi scegliere se le immagine di stato e la galleria sono visibili ad altri utenti.', '2013-03-19 15:12:21');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1952', 'IT', 'Profilo pubblico', '2013-03-19 15:12:21');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1953', 'IT', 'Non hai ancora caricato nessuna immagine di log.', '2013-03-19 15:12:21');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1954', 'IT', 'Le immagino segnalate come spoiler non sono visualizzate; pertanto il numero delle immagini in questa pagina può essere inferiore a quello nelle statistiche di profilo.', '2013-03-19 15:12:21');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1956', 'IT', 'Immagine di log', '2013-03-19 15:12:21');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1957', 'IT', 'Le immagini \"spoiler\" che visualizzano dettagli del nascondiglio non dovrebbero essere visibili qui. Se trovi uno spoiler liberamente visibile puoi contattare il proprietario cliccando il pulsante e-amil sul suo profile e chiedergli di segnalarlo come spoiler.', '2013-03-19 15:12:21');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1958', 'IT', 'Ritorna alla descrizione della cache', '2013-03-19 15:12:21');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1960', 'IT', 'Pagina', '2013-03-19 15:12:21');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1961', 'IT', 'a', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1962', 'IT', 'presso', '2013-02-19 05:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1963', 'IT', 'A proposito di Opencaching', '2013-03-19 15:12:21');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1964', 'IT', 'La descrizione della cache, i messaggi di log e le immagini sono state cancellate perché l\'account è stato cancellato dopo il passaggio alla <a href=\"articles.php?page=impressum#datalicense\">nuova licenza dati</a>.', '2013-03-19 15:12:21');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1965', 'IT', 'la descrizione della cache è stata rimossa perché l\'account del proprietario era inattivo quando è stata attivata la <a href=\"articles.php?page=impressum#datalicense\">nuova licenza contenuti</a>.', '2013-03-19 15:12:21');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1966', 'IT', 'di', '2013-03-19 15:12:21');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1967', 'IT', 'tutti i logo sono \&copy; dei rispettivi autori', '2013-03-19 15:12:21');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1968', 'IT', 'altre', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('922', 'JA', 'JA', '2011-05-15 16:04:51');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'NL', 'ID\'s opnieuw sorteren', '2011-02-04 19:49:56');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'NL', 'De verbinding met de database kon niet hersteld worden.', '2011-02-04 19:49:56');
@@ -12133,4 +12159,4 @@ TRUNCATE TABLE `watches_waitingtypes`;
 INSERT INTO `watches_waitingtypes` (`id`, `watchtype`) VALUES ('1', 'ownerlog');
 INSERT INTO `watches_waitingtypes` (`id`, `watchtype`) VALUES ('2', 'cache_watches');
 
-INSERT INTO `sysconfig` (`name`, `value`) VALUES ('datasql_checksum', 'baa47d349d1c35e4b14c2b1329a75138') ON DUPLICATE KEY UPDATE `value`='baa47d349d1c35e4b14c2b1329a75138';
+INSERT INTO `sysconfig` (`name`, `value`) VALUES ('datasql_checksum', '88114246f67a7b351ee2184d93624cc3') ON DUPLICATE KEY UPDATE `value`='88114246f67a7b351ee2184d93624cc3';

@@ -367,7 +367,6 @@ function export()
 	$stab[] = 'countries';
 	$stab[] = 'countries_list_default';
 	$stab[] = 'countries_options';
-	$stab[] = 'data_licenses';
 	$stab[] = 'helppages';
 	$stab[] = 'languages';
 	$stab[] = 'languages_list_default';

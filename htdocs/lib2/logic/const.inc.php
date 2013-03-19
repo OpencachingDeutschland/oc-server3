@@ -71,6 +71,6 @@
 	define('NEW_DATA_LICENSE_ACTIVELY_DECLINED',1);      // declined license
 	define('NEW_DATA_LICENSE_ACTIVELY_ACCEPTED',2);      // accepted new license on registration
 	define('NEW_DATA_LICENSE_PASSIVELY_ACCEPTED',3);     // did not decline license until deadline
-	define('NEW_DATA_LICENSE_PASSIVELY_DECLINED',4);     // could accept/decline because disabled
+	define('NEW_DATA_LICENSE_PASSIVELY_DECLINED',4);     // could not accept/decline because disabled
 
 ?>

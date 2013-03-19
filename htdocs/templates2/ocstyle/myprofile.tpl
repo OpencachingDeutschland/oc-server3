@@ -19,16 +19,16 @@
 			<p style="line-height: 1.6em;">
 				{t}The following informations are stored in your userprofile:{/t}<br />
 				<img src="resource2/{$opt.template.style}/images/misc/hint.gif" border="0" width="15" height="11" alt="" align="middle" />
-				<span style="color:#808080; font-size:10px;">{t}Gray entries will be hidden to other users.{/t}</span>
+				<span style="font-size:10px;">{t}Only the <span class="public-setting">green entries</span> are visible to other users.{/t}</span>
 			</p>
 		</div>
 
 		<table class="table">
 			<tr>
-				<td>{t}Username:{/t}</td>
-				<td>
+				<td class="public-setting">{t}Username:{/t}</td>
+				<td class="public-setting">
 					{if $edit==true}
-						<input type="text" name="username" value="{$username|escape}" maxlength="60" size="30" />
+						<input type="text" name="username" class="public-setting" value="{$username|escape}" maxlength="60" size="30" />
 						{if $usernameErrorInvalidChars==true}
 							<span class="errormsg">{t}The username is not valid.{/t}</span>
 						{elseif $errorUsernameExist==true}
@@ -42,49 +42,45 @@
 			<tr><td class="spacer" colspan="2"></td></tr>
 
 			<tr>
-				<td><font color="#808080">{t}E-Mail-Address:{/t}</font></td>
-				<td><font color="#808080">{$email|escape}</font></td>
+				<td>{t}E-Mail-Address:{/t}</td>
+				<td>{$email|escape}</td>
 			</tr>
 			<tr><td class="spacer" colspan="2"></td></tr>
 
 			<tr>
-				<td><font color="#808080">{t}First name:{/t}</font></td>
-				<td>
-					<font color="#808080">
-						{if $edit==true}
-							<input type="text" name="firstName" value="{$firstName|escape}" maxlength="60" size="30" />
-							{if $firstNameError==true}
-								<span class="errormsg">{t}The first name is not valid.{/t}</span>
-							{/if}
-						{else}
-							{$firstName|escape}
-						{/if}
-					</font>
-				</td>
-			</tr>
-
-			<tr>
-				<td><font color="#808080">{t}Last name:{/t}</font></td>
-				<td>
-					<font color="#808080">
-						{if $edit==true}
-							<input type="text" name="lastName" value="{$lastName|escape}" maxlength="60" size="30" />
-							{if $lastNameError==true}
-								<span class="errormsg">{t}The last name is not valid.{/t}</span>
-							{/if}
-						{else}
-							{$lastName|escape}
-						{/if}
-					</font>
-				</td>
-			</tr>
-			<tr><td class="spacer" colspan="2"></td></tr>
-
-			<tr>
-				<td>{t}Country:{/t}</td>
+				<td>{t}First name:{/t}</td>
 				<td>
 					{if $edit==true}
-						<select name="country">
+						<input type="text" name="firstName" value="{$firstName|escape}" maxlength="60" size="30" />
+						{if $firstNameError==true}
+							<span class="errormsg">{t}The first name is not valid.{/t}</span>
+						{/if}
+					{else}
+						{$firstName|escape}
+					{/if}
+				</td>
+			</tr>
+
+			<tr>
+				<td>{t}Last name:{/t}</td>
+				<td>
+					{if $edit==true}
+						<input type="text" name="lastName" value="{$lastName|escape}" maxlength="60" size="30" />
+						{if $lastNameError==true}
+							<span class="errormsg">{t}The last name is not valid.{/t}</span>
+						{/if}
+					{else}
+						{$lastName|escape}
+					{/if}
+				</td>
+			</tr>
+			<tr><td class="spacer" colspan="2"></td></tr>
+
+			<tr>
+				<td class="public-setting">{t}Country:{/t}</td>
+				<td class="public-setting">
+					{if $edit==true}
+						<select name="country"class="public-setting">
 							<option value="XX" {if $countryCode=="XX"}selected="selected"{/if}>{t}Not defined{/t}</option>
 							{foreach from=$countries item=countryItem}
 								<option value="{$countryItem.id|escape}" {if $countryCode==$countryItem.id}selected="selected"{/if}>{$countryItem.name|escape}</option>
@@ -104,43 +100,39 @@
 			<tr><td class="spacer" colspan="2"></td></tr>
 
 			<tr>
-				<td valign=top><font color="#808080">{t}Home coordinates:{/t}</font></td>
+				<td valign=top>{t}Home coordinates:{/t}</td>
 				<td>
-					<font color="#808080">
-						{if $edit==true}
-							{coordinput prefix="coord" lat=$coordsDecimal.lat lon=$coordsDecimal.lon}
-						{else}
-							{$coords.lat|escape} {$coords.lon|escape}
-						{/if}
-					</font>
+					{if $edit==true}
+						{coordinput prefix="coord" lat=$coordsDecimal.lat lon=$coordsDecimal.lon}
+					{else}
+						{$coords.lat|escape} {$coords.lon|escape}
+					{/if}
 				</td>
 			</tr>
 			<tr><td class="spacer" colspan="2"></td></tr>
 
 			<tr>
-				<td valign=top ><font color="#808080">{t}Notifications:{/t}</font></td>
+				<td valign=top >{t}Notifications:{/t}</td>
 				<td>
-					<font color="#808080">
-						{if $edit==true}
-							{capture name=inputfield}
-								<input type="text" name="notifyRadius" maxlength="3" value="{$notifyRadius|escape}" class="input30" />
-							{/capture}
-							{t 1=$smarty.capture.inputfield}I want to be notified about new Geocaches within an radius of %1 km.{/t}<br />
-							<img src="resource2/{$opt.template.style}/images/misc/hint.gif" border="0" width="15" height="11" align="middle">
-							<span style="color:#808080; font-size:10px;">
-								{t}The notification radius must be not more than 150 km. To deaktivate notifications, set the radius to 0.{/t}
-							</span>
-							{if $notifyRadiusError==true}
-								<span class="errormsg">{t}The entered radius is not valid.{/t}</span>
-							{/if}
-						{else}
-							{if $notifyRadius>0}
-								{t 1=$notifyRadius|escape}Notify about new Geocaches in a radius of %1 km.{/t}
-							{else}
-								{t}Notification about new Geocaches is not activated.{/t}
-							{/if}
+					{if $edit==true}
+						{capture name=inputfield}
+							<input type="text" name="notifyRadius" maxlength="3" value="{$notifyRadius|escape}" class="input30" />
+						{/capture}
+						{t 1=$smarty.capture.inputfield}I want to be notified about new Geocaches within an radius of %1 km.{/t}<br />
+						<img src="resource2/{$opt.template.style}/images/misc/hint.gif" border="0" width="15" height="11" align="middle">
+						<span style="font-size:10px;">
+							{t}The notification radius must be not more than 150 km. To deaktivate notifications, set the radius to 0.{/t}
+						</span>
+						{if $notifyRadiusError==true}
+							<span class="errormsg">{t}The entered radius is not valid.{/t}</span>
 						{/if}
-					</font>
+					{else}
+						{if $notifyRadius>0}
+							{t 1=$notifyRadius|escape}Notify about new Geocaches in a radius of %1 km.{/t}
+						{else}
+							{t}Notification about new Geocaches is not activated.{/t}
+						{/if}
+					{/if}
 				</td>
 			</tr>
 			<tr><td class="spacer" colspan="2"></td></tr>
@@ -149,8 +141,8 @@
 				<td valign="top">{t}Others:{/t}</td>
 				<td valign="top">
 					{if $edit==true}
-						<input type="checkbox" name="usePMR" value="1" {if $usePMR==true}checked="checked"{/if} id="l_using_pmr" class="checkbox" /> 
-						<label for="l_using_pmr">{t}I'm taking an PMR walkie talkie on channel 2 with me.{/t}</label>
+						<input type="checkbox" name="usePMR" class="public-setting" value="1" {if $usePMR==true}checked="checked"{/if} id="l_using_pmr" class="checkbox" /> 
+						<label for="l_using_pmr" class="public-setting">{t}I'm taking an PMR walkie talkie on channel 2 with me.{/t}</label>
 						<br />
 					{else}
 						{if $usePMR==true}
@@ -159,26 +151,24 @@
 					{/if}
 					{if $edit==true}
 						<input type="checkbox" name="permanentLogin" value="1" {if $permanentLogin==true}checked="checked"{/if} id="l_using_permanent_login" class="checkbox" />
-						<label for="l_using_permanent_login"><font color="#808080">{t}Don't log me out after 15 minutes inaktivity.{/t}</font></label><br/>
+						<label for="l_using_permanent_login">{t}Don't log me out after 15 minutes inaktivity.{/t}</label><br/>
 						<div style="padding-left:25px;">
 							<img src="resource2/{$opt.template.style}/images/misc/hint.gif" border="0" width="15" height="11" align="middle">
-							<font style="color:#FF0000; font-size:10px;">
-								{t}Attention: If you are using this option, don't forget to log out before other persons can use your computer.
-								Otherwise, they can use and modify your personal data.{/t}
-							</font>
+							<span style="color:red; font-size:10px; line-height:1.3em">{t}Attention: If you are using this option, don't forget to log out before other persons can use your computer.
+							Otherwise, they can use and modify your personal data.{/t}</span>
 						</div>
 					{else}
 						{if $permanentLogin==true}
-							<li><font color="#808080">{t}Don't log me out after 15 minutes inaktivity.{/t}</font></li>
+							<li>{t}Don't log me out after 15 minutes inaktivity.{/t}</li>
 						{/if}
 					{/if}
 					{if $edit==true}
 						<input type="checkbox" name="noHTMLEditor" value="1" {if $noHTMLEditor==true}checked="checked"{/if} id="l_no_htmledit" class="checkbox" /> 
-						<label for="l_no_htmledit"><font color="#808080">{t}Don't use an HTML editor by default.{/t}</font></label>
+						<label for="l_no_htmledit">{t}Don't use an HTML editor by default.{/t}</label>
 						<br />
 					{else}
 						{if $useHTMLEditor==true}
-							<li><font color="#808080">{t}Don't use an HTML editor by default.{/t}</font></li>
+							<li>{t}Don't use an HTML editor by default.{/t}</li>
 						{/if}
 					{/if}
 				</td>
@@ -186,8 +176,8 @@
 			<tr><td class="spacer" colspan="2"></td></tr>
 
 			<tr>
-				<td>{t}Registered since{/t}:</td>
-				<td>{$registeredSince|date_format:$opt.format.datelong}</td>
+				<td class="public-setting">{t}Registered since{/t}:</td>
+				<td class="public-setting">{$registeredSince|date_format:$opt.format.datelong}</td>
 			</tr>
 
 			{if $errorUnknown==true}
@@ -219,7 +209,7 @@
 			{/if}
 
 			{if $edit==true}
-				<tr><td class="spacer" colspan="2">&nbsp;</td></tr>
+				<tr><td class="spacer" colspan="2"></td></tr>
 				<tr>
 					<td class="header-small" colspan="2">
 						<input type="submit" name="cancel" value="{t}Cancel{/t}" class="formbutton" onclick="flashbutton('cancel')" />&nbsp;&nbsp;

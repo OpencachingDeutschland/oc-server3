@@ -72,7 +72,6 @@
 			<td>{t}unknown{/t}</td>
 		{/if}
 	</tr>
-	<tr><td class="spacer" colspan="2"></td></tr>
 
 	{foreach from=$useroptions item=optionItem}
 		<tr>

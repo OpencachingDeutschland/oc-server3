@@ -6,7 +6,7 @@
 
 <div class="content-txtbox-noshade">
 	<div class="content-txtbox-noshade">
-		<p style="line-height: 1.6em;">{$message}</p>
+		<p style="line-height: 1.5em;">{$message}</p>
 		<div class="buffer" style="width: 500px;">&nbsp;</div>
 	</div> 
 </div>

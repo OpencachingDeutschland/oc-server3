@@ -1394,6 +1394,10 @@ div#havefound {
 	margin: 0 0 6px 0;
 }
 
+.public-setting {
+	color: #428d1d;
+}
+
 /* RSS feeds */
 #blog div.newsblock { margin-left:00px }
 #forum div.newsblock { margin-left:20px }

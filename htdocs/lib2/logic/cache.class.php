@@ -85,6 +85,7 @@ class cache
 		$this->reCache->addInt('node', 0, false);
 		$this->reCache->addDate('date_created', time(), true, RE_INSERT_IGNORE);
 		$this->reCache->addDate('last_modified', time(), true, RE_INSERT_IGNORE);
+		$this->reCache->addDate('listing_last_modified', time(), true, RE_INSERT_IGNORE);
 		$this->reCache->addInt('user_id', 0, false);
 		$this->reCache->addString('name', '', false);
 		$this->reCache->addDouble('longitude', 0, false);
@@ -173,13 +174,17 @@ class cache
 	{
 		return $this->reCache->getValue('uuid');
 	}
+	function getDateCreated()
+	{
+		return $this->reCache->getValue('date_created');
+	}
 	function getLastModified()
 	{
 		return $this->reCache->getValue('last_modified');
 	}
-	function getDateCreated()
+	function getListingLastModified()
 	{
-		return $this->reCache->getValue('date_created');
+		return $this->reCache->getValue('listing_last_modified');
 	}
 	function getNode()
 	{

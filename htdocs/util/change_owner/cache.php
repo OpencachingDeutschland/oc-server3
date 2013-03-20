@@ -41,7 +41,7 @@
 		if ($rCache === false) die('Cache existiert nicht!');
 		if ($rUser === false) die('User existiert nicht!');
 
-		sql("UPDATE caches SET user_id='&1', last_modified=NOW() WHERE cache_id='&2'", $rUser['user_id'], $rCache['cache_id']);
+		sql("UPDATE caches SET user_id='&1' WHERE cache_id='&2'", $rUser['user_id'], $rCache['cache_id']);
 
 		// send event to delete statpic
 		event_change_statpic($rCache['user_id']);

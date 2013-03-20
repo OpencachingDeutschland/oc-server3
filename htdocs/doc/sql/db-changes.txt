@@ -29,7 +29,7 @@ date         commit ID    change
 2013-02-15   92e522f6     adjusted developer and production system:
                           - added index logentries:userid
                           - changed user.password length to 32
-													- removed sqlsession.remote_addr and index remote_addr
+													- removed xmlsession.remote_addr and index remote_addr
 2013-02-16   06d832c3     new table data_licenses
                           added user.data_license
 2013-02-17   b7b51eab     added user.email_problems
@@ -45,12 +45,15 @@ date         commit ID    change
                             - modified lots of triggers
 2013-03-09   09b51ecc     added field 'restored_by' to cache_coordinates, cache_countries,
                             cache_logs_archived, all new tables and to triggers
-                          removed table listing_restored
+                          discarded table listing_restored
                           added index cache_logs_archived:user_id
                           
-2013-03-10   f8738936     added field 'mappreview' in pictures and pictures_modified
+2013-03-10   f8738936     added field pictures.mappreview
 2013-03-14   69abeb67     added fields coordinates_type.preposition and pp_trans_id
-2013-03-15   a15b5582     discarded table 'data_license'
-2013-03-16                added fields coordinates.date_created and .last_modified
-2013-03-18                added table 'saved_texts' + triggers
+2013-03-15   a15b5582     discarded table 'data_licenses'
+2013-03-16   80b89939     added fields coordinates.date_created and .last_modified
+2013-03-18   37b5268a     added table 'saved_texts' + triggers
                           added triggers to table 'coordinates'
+
+2013-03-20                added field caches.listing_last_modified;
+                            must be initialized once via Admin / DB Maintenance / sp_updateall_cache_listingdates

@@ -132,9 +132,10 @@ class sitemaps
 		            WHERE `cache_status`.`allow_user_view`=1");
 		while ($r = sql_fetch_assoc($rs))
 		{
-			$dLastMod = sql_value("SELECT MAX(`last_modified`) `last_modified` FROM (SELECT `last_modified` FROM `caches` WHERE `cache_id` ='&1' UNION 
-			                                                                         SELECT `last_modified` FROM `cache_desc` WHERE `cache_id` ='&1' UNION 
-			                                                                         SELECT MAX(`last_modified`) AS `last_modified` FROM `cache_logs` WHERE `cache_id` ='&1') `tmp_result`", time(), $r['cache_id']);
+			$dLastMod = sql_value("SELECT MAX(`last_modified`) `last_modified` FROM
+			                         (SELECT `listing_last_modified` AS `last_modified` FROM `caches` WHERE `cache_id` ='&1' UNION
+			                          SELECT MAX(`last_modified`) AS `last_modified` FROM `cache_logs` WHERE `cache_id` ='&1') `tmp_result`",
+                            time(), $r['cache_id']);
 			$this->oSitemapXML->write('viewcache.php?wp=' . $r['wp_oc'] . '&desclang=' . $r['language'], strtotime($dLastMod));
 		}
 		sql_free_result($rs);

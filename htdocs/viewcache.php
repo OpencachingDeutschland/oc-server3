@@ -86,6 +86,7 @@ function getChildWaypoints($cacheid)
 
 	//get cache record
 	$rs = sql("SELECT	`caches`.`cache_id` AS `cacheid`,
+				`caches`.`listing_last_modified` AS `lastmodified`,
 				`caches`.`user_id` AS `userid`,
 				`caches`.`status` AS `status`,
 				`caches`.`latitude` AS `latitude`,
@@ -151,12 +152,6 @@ function getChildWaypoints($cacheid)
 		if ($rCache['userid'] != $login->userid)
 			$tpl->error(ERROR_CACHE_NOT_PUBLISHED);
 	}
-
-	$rCache['lastmodified'] = sql_value("SELECT MAX(`last_modified`) `last_modified` FROM 
-	(SELECT `last_modified` FROM `caches` WHERE `cache_id` ='&1'
-	UNION SELECT `last_modified` FROM `cache_desc` WHERE `cache_id` ='&1'
-	UNION SELECT `last_modified` FROM `coordinates` WHERE `cache_id`='&1' AND `type`='&2') `tmp_result`",
-	null,  	$cacheid, COORDINATE_WAYPOINT);
 
 	$rCache['desclanguages'] = explode(',', $rCache['desclanguages']);
 

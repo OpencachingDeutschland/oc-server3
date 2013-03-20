@@ -48,7 +48,7 @@
 		$cacheid = $rPublish['cache_id'];
 
 		// update cache status to active
-		sql("UPDATE `caches` SET `status`=1, `date_activate`=NULL, `last_modified`=NOW() WHERE `cache_id`='&1'", $cacheid);
+		sql("UPDATE `caches` SET `status`=1, `date_activate`=NULL WHERE `cache_id`='&1'", $cacheid);
 
 		// send events
 		touchCache($cacheid);

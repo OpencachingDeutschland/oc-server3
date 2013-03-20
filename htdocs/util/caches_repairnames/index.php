@@ -49,7 +49,7 @@
 			{
 				echo "Changed name to: " . $name . "\n";
 				
-				sql("UPDATE `caches` SET `last_modified`=NOW(), `name`='&1' WHERE `cache_id`=&2", $name, $r['cache_id']);
+				sql("UPDATE `caches` SET `name`='&1' WHERE `cache_id`=&2", $name, $r['cache_id']);
 			}
 		}
 		else

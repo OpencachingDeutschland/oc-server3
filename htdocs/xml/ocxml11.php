@@ -126,7 +126,7 @@
 	}
 	else
 	{
-		// fitler parameters
+		// filter parameters
 		$dModifiedsince = isset($_REQUEST['modifiedsince']) ? $_REQUEST['modifiedsince'] : '0';
 		
 		// selections
@@ -531,6 +531,11 @@ function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $z
 		}
 		fwrite($f, $t2 . '</attributes>' . "\n");
 		sql_free_result($rsAttributes);
+
+		// If additional waypoints are added here, last_modified date handling must be changed
+		// to include also max(last_modified) of all waypoints: either set caches.last_modified via
+		// coordinates trigger, or - better - check coordinates.last_modified when constructing
+		// xml session data.
 
 		fwrite($f, $t1 . '</cache>' . "\n");
 	}

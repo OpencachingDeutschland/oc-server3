@@ -200,6 +200,27 @@
 				 UPDATE `mp3` SET `last_modified`=NOW() WHERE `object_id`=nCacheId;
 	     END;");
 
+	// update listing modification date
+	sql_dropProcedure('sp_update_cache_listingdate');
+	sql("CREATE PROCEDURE sp_update_cache_listingdate (IN nCacheId INT(10) UNSIGNED)
+	     BEGIN
+	       IF ISNULL(@XMLSYNC) OR @XMLSYNC!=1 THEN
+	         UPDATE `caches` SET `listing_last_modified`=NOW() WHERE `cache_id`=nCacheId LIMIT 1;
+	       END IF;
+	     END;");
+
+	sql_dropProcedure('sp_updateall_cache_listingdates');
+	sql("CREATE PROCEDURE sp_updateall_cache_listingdates (OUT nModified INT)
+	     BEGIN
+			   UPDATE `caches` SET `listing_last_modified` =
+						GREATEST(`last_modified`,
+						GREATEST(IFNULL((SELECT MAX(`last_modified`) FROM `cache_desc` WHERE `cache_desc`.`cache_id`=`caches`.`cache_id`),'0'),
+						GREATEST(IFNULL((SELECT MAX(`last_modified`) FROM `coordinates` WHERE `coordinates`.`type`=1 AND `coordinates`.`cache_id`=`caches`.`cache_id`),'0'),
+						         IFNULL((SELECT MAX(`last_modified`) FROM `pictures` WHERE `pictures`.`object_type`=2 AND `pictures`.`object_id` = `caches`.`cache_id`),'0')
+						        )));
+	       SET nModified = ROW_COUNT();
+	     END;");
+
 	// set caches.desc_languages of given cacheid and fill cache_desc_prefered
 	sql_dropProcedure('sp_update_caches_descLanguages');
 	sql("CREATE PROCEDURE sp_update_caches_descLanguages (IN nCacheId INT(10) UNSIGNED)
@@ -214,9 +235,8 @@
 	sql_dropProcedure('sp_updateall_caches_descLanguages');
 	sql("CREATE PROCEDURE sp_updateall_caches_descLanguages (OUT nModified INT)
 	     BEGIN
-			   SET nModified = 0;
 	       UPDATE `caches`, (SELECT `cache_id`, GROUP_CONCAT(DISTINCT `language` ORDER BY `language` SEPARATOR ',') AS `dl` FROM `cache_desc` GROUP BY `cache_id`) AS `tbl` SET `caches`.`desc_languages`=`tbl`.`dl`, `caches`.`default_desclang`=PREFERED_LANG(`tbl`.`dl`, '&1') WHERE `caches`.`cache_id`=`tbl`.`cache_id`;
-	       SET nModified = nModified + ROW_COUNT() ;
+	       SET nModified = ROW_COUNT() ;
 	     END;", strtoupper($lang . ',EN'));
 
 	// update found, last_found, notfound and note of stat_cache_logs, stat_caches and stat_user
@@ -513,6 +533,7 @@
 						IF ISNULL(@XMLSYNC) OR @XMLSYNC!=1 THEN
 							SET NEW.`date_created`=NOW();
 							SET NEW.`last_modified`=NOW();
+							SET NEW.`listing_last_modified`=NOW();
 						END IF;
 						IF NEW.`status` <> 5 THEN
 							SET NEW.`is_publishdate`=1;
@@ -589,6 +610,7 @@
 							   OLD.`uuid`!=NEW.`uuid` OR 
 							   OLD.`node`!=NEW.`node` OR 
 							   OLD.`date_created`!=NEW.`date_created` OR 
+							   OLD.`is_publishdate`!=NEW.`is_publishdate` OR 
 							   OLD.`user_id`!=NEW.`user_id` OR 
 							   OLD.`name`!=NEW.`name` OR 
 							   OLD.`longitude`!=NEW.`longitude` OR 
@@ -610,6 +632,10 @@
 							   OLD.`date_activate`!=NEW.`date_activate` THEN
 
 								SET NEW.`last_modified`=NOW();
+							END IF;
+
+							IF NEW.`last_modified` != OLD.`last_modified` THEN
+								SET NEW.`listing_last_modified`=NOW();
 							END IF;
 
 							IF OLD.`status`!=NEW.`status` THEN
@@ -690,6 +716,7 @@
 	sql("CREATE TRIGGER `cacheDescAfterInsert` AFTER INSERT ON `cache_desc` 
 				FOR EACH ROW 
 					BEGIN 
+						CALL sp_update_cache_listingdate(NEW.`cache_id`);
 						IF (SELECT `date_created` FROM `caches` WHERE `cache_id`=NEW.`cache_id`) < LEFT(NOW(),10) AND 
 						   (SELECT `status` FROM `caches` WHERE `caches`.`cache_id`=NEW.`cache_id`) != 5 THEN
 							INSERT IGNORE INTO `cache_desc_modified` (`cache_id`, `language`, `date_modified`, `desc`, `restored_by`) VALUES (NEW.`cache_id`, NEW.`language`, NOW(), NULL, IFNULL(@restoredby,0));
@@ -714,9 +741,11 @@
 						IF OLD.`language`!=NEW.`language` OR OLD.`cache_id`!=NEW.`cache_id` THEN
 							IF OLD.`cache_id`!=NEW.`cache_id` THEN
 								CALL sp_update_caches_descLanguages(OLD.`cache_id`);
+								CALL sp_update_cache_listingdate(OLD.`cache_id`);
 							END IF;
 							CALL sp_update_caches_descLanguages(NEW.`cache_id`);
 						END IF;
+						CALL sp_update_cache_listingdate(NEW.`cache_id`);
 						/* changes at date of creation are ignored to save archive space */
 						IF NEW.`cache_id`=OLD.`cache_id` AND
 							 (SELECT `status` FROM `caches` WHERE `caches`.`cache_id`=OLD.`cache_id`) != 5 THEN
@@ -733,6 +762,7 @@
 	sql("CREATE TRIGGER `cacheDescAfterDelete` AFTER DELETE ON `cache_desc` 
 				FOR EACH ROW 
 					BEGIN 
+						CALL sp_update_cache_listingdate(OLD.`cache_id`);
 						INSERT IGNORE INTO `removed_objects` (`localId`, `uuid`, `type`, `node`) VALUES (OLD.`id`, OLD.`uuid`, 3, OLD.`node`);
 						/* changes at date of creation are ignored to save archive space */
 						IF (OLD.`date_created` < LEFT(NOW(),10)) AND
@@ -979,6 +1009,7 @@
 							CALL sp_update_cachelog_picturestat(NEW.`object_id`, FALSE);
 						ELSEIF NEW.`object_type`=2 THEN
 							CALL sp_update_cache_picturestat(NEW.`object_id`, FALSE);
+							CALL sp_update_cache_listingdate(NEW.`object_id`);
 						END IF;
 					END;");
 
@@ -1001,21 +1032,28 @@
 								CALL sp_update_cachelog_picturestat(OLD.`object_id`, TRUE);
 							ELSEIF OLD.`object_type`=2 THEN
 								CALL sp_update_cache_picturestat(OLD.`object_id`, TRUE);
+								CALL sp_update_cache_listingdate(OLD.`object_id`);
 							END IF;
 							IF NEW.`object_type`=1 THEN
 								CALL sp_update_cachelog_picturestat(NEW.`object_id`, FALSE);
 							ELSEIF NEW.`object_type`=2 THEN
 								CALL sp_update_cache_picturestat(NEW.`object_id`, FALSE);
+								CALL sp_update_cache_listingdate(NEW.`object_id`);
 							END IF;
-						ELSEIF @archive_picop AND
+						ELSE
+							IF NEW.`object_type`=2 THEN
+								CALL sp_update_cache_listingdate(NEW.`object_id`);
+							END IF;
+							IF @archive_picop AND
 						       ( ( NEW.`object_type`=2 AND
 						           OLD.`date_created` < LEFT(NOW(),10) AND
 						           (SELECT `status` FROM `caches` WHERE `caches`.`cache_id`=OLD.`object_id`) != 5
 						       	 ) OR
 						         NEW.`object_type`=1 ) AND
 						       (NEW.`title` != OLD.`title` OR NEW.`spoiler` != OLD.`spoiler` OR NEW.`display` != OLD.`display`) THEN
-							INSERT IGNORE INTO `pictures_modified` (`id`, `date_modified`, `operation`, `date_created`, `url`, `title`, `object_id`, `object_type`, `spoiler`, `unknown_format`, `display`, `restored_by`) VALUES (OLD.`id`, NOW(), 'U', OLD.`date_created`, OLD.`url`, OLD.`title`, OLD.`object_id`, OLD.`object_type`, OLD.`spoiler`, OLD.`unknown_format`, OLD.`display`, IFNULL(@restoredby,0));
-							/* mappreview is not archived, can be safely set to 0 on restore */
+								INSERT IGNORE INTO `pictures_modified` (`id`, `date_modified`, `operation`, `date_created`, `url`, `title`, `object_id`, `object_type`, `spoiler`, `unknown_format`, `display`, `restored_by`) VALUES (OLD.`id`, NOW(), 'U', OLD.`date_created`, OLD.`url`, OLD.`title`, OLD.`object_id`, OLD.`object_type`, OLD.`spoiler`, OLD.`unknown_format`, OLD.`display`, IFNULL(@restoredby,0));
+								/* mappreview is not archived, can be safely set to 0 on restore */
+							END IF;
 						END IF;
 					END;");
 
@@ -1038,6 +1076,7 @@
 							CALL sp_update_cachelog_picturestat(OLD.`object_id`, TRUE);
 						ELSEIF OLD.`object_type`=2 THEN
 							CALL sp_update_cache_picturestat(OLD.`object_id`, TRUE);
+							CALL sp_update_cache_listingdate(OLD.`object_id`);
 						END IF;
 					END;");
 
@@ -1247,7 +1286,10 @@
 	sql("CREATE TRIGGER `cacheAttributesAfterInsert` AFTER INSERT ON `caches_attributes` 
 				FOR EACH ROW 
 					BEGIN 
-						UPDATE `caches` SET `last_modified`=NOW() WHERE `cache_id`=NEW.`cache_id`;
+						IF ISNULL(@XMLSYNC) OR @XMLSYNC!=1 THEN
+							UPDATE `caches` SET `last_modified`=NOW() WHERE `cache_id`=NEW.`cache_id`;
+							CALL sp_update_cache_listingdate(NEW.`cache_id`);
+						END IF;
 						IF (SELECT `status` FROM `caches` WHERE `cache_id`=NEW.`cache_id`) != 5 AND 
 						   (SELECT `date_created` FROM `caches` WHERE `cache_id`=NEW.`cache_id`) < LEFT(NOW(),10) THEN
 							INSERT IGNORE INTO `caches_attributes_modified` (`cache_id`, `attrib_id`, `date_modified`, `was_set`, `restored_by`) VALUES (NEW.`cache_id`, NEW.`attrib_id`, NOW(), 0, IFNULL(@restoredby,0));
@@ -1258,9 +1300,13 @@
 	sql("CREATE TRIGGER `cacheAttributesAfterUpdate` AFTER UPDATE ON `caches_attributes` 
 				FOR EACH ROW 
 					BEGIN 
-						UPDATE `caches` SET `last_modified`=NOW() WHERE `cache_id`=NEW.`cache_id`;
-						IF OLD.`cache_id`!=NEW.`cache_id` THEN
-							UPDATE `caches` SET `last_modified`=NOW() WHERE `cache_id`=OLD.`cache_id`;
+						IF ISNULL(@XMLSYNC) OR @XMLSYNC!=1 THEN
+							UPDATE `caches` SET `last_modified`=NOW() WHERE `cache_id`=NEW.`cache_id`;
+							CALL sp_update_cache_listingdate(NEW.`cache_id`);
+							IF OLD.`cache_id`!=NEW.`cache_id` THEN
+								UPDATE `caches` SET `last_modified`=NOW() WHERE `cache_id`=OLD.`cache_id`;
+								CALL sp_update_cache_listingdate(OLD.`cache_id`);
+							END IF;
 						END IF;
 						/* is not called, otherweise cache_attributes_modified would have to be updated */
 					END;");
@@ -1269,7 +1315,10 @@
 	sql("CREATE TRIGGER `cacheAttributesAfterDelete` AFTER DELETE ON `caches_attributes` 
 				FOR EACH ROW 
 					BEGIN 
-						UPDATE `caches` SET `last_modified`=NOW() WHERE `cache_id`=OLD.`cache_id`;
+						IF ISNULL(@XMLSYNC) OR @XMLSYNC!=1 THEN
+							UPDATE `caches` SET `last_modified`=NOW() WHERE `cache_id`=OLD.`cache_id`;
+							CALL sp_update_cache_listingdate(OLD.`cache_id`);
+						END IF;
 						IF (SELECT `status` FROM `caches` WHERE `cache_id`=OLD.`cache_id`) != 5 AND 
 						   (SELECT `date_created` FROM `caches` WHERE `cache_id`=OLD.`cache_id`) < LEFT(NOW(),10) THEN
 							INSERT IGNORE INTO `caches_attributes_modified` (`cache_id`, `attrib_id`, `date_modified`, `was_set`, `restored_by`) VALUES (OLD.`cache_id`, OLD.`attrib_id`, NOW(), 1, IFNULL(@restoredby,0));
@@ -1298,10 +1347,7 @@
 	sql("CREATE TRIGGER `coordinatesAfterInsert` AFTER INSERT ON `coordinates`
 				FOR EACH ROW
 					BEGIN
-						/* dont overwrite date values while XML client is running */
-						IF ISNULL(@XMLSYNC) OR @XMLSYNC!=1 AND NEW.`type`=1 THEN
-							UPDATE `caches` SET `last_modified`=NOW() WHERE `caches`.`cache_id`=NEW.`cache_id`;
-						END IF;
+						CALL sp_update_cache_listingdate(NEW.`cache_id`);
 					END;");
 
 	sql_dropTrigger('coordinatesBeforeUpdate');
@@ -1318,9 +1364,9 @@
 	sql("CREATE TRIGGER `coordinatesAfterUpdate` AFTER UPDATE ON `coordinates`
 				FOR EACH ROW
 					BEGIN
-						/* dont overwrite date values while XML client is running */
-						IF ISNULL(@XMLSYNC) OR @XMLSYNC!=1 AND NEW.`type`=1 THEN
-							UPDATE `caches` SET `last_modified`=NOW() WHERE `caches`.`cache_id`=NEW.`cache_id`;
+						CALL sp_update_cache_listingdate(NEW.`cache_id`);
+						IF OLD.`cache_id`!=NEW.`cache_id` THEN
+							CALL sp_update_cache_listingdate(OLD.`cache_id`);
 						END IF;
 					END;");
 
@@ -1328,17 +1374,14 @@
 	sql("CREATE TRIGGER `coordinatesAfterDelete` AFTER DELETE ON `coordinates`
 				FOR EACH ROW
 					BEGIN
-						/* dont overwrite date values while XML client is running */
-						IF ISNULL(@XMLSYNC) OR @XMLSYNC!=1 AND OLD.`type`=1 THEN
-							UPDATE `caches` SET `last_modified`=NOW() WHERE `caches`.`cache_id`=OLD.`cache_id`;
-						END IF;
+						CALL sp_update_cache_listingdate(OLD.`cache_id`);
 					END;");
 
 	sql_dropTrigger('savedTextsBeforeInsert');
 	sql("CREATE TRIGGER `savedTextsBeforeInsert` BEFORE INSERT ON `saved_texts`
 				FOR EACH ROW
 					BEGIN
-						/* dont overwrite date values while XML client is running */
+						/* dont overwrite creation date while XML client is running */
 						IF ISNULL(@XMLSYNC) OR @XMLSYNC!=1 THEN
 							SET NEW.`date_created`=NOW();
 						END IF;

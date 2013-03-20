@@ -93,7 +93,7 @@ class picture
 			return false;
 
 		$sExtension = mb_strtolower(substr($sFilename, strrpos($sFilename, '.') + 1));
-		
+
 		if (strpos(';' . $opt['logic']['pictures']['extensions'] . ';', ';' . $sExtension . ';') !== false)
 			return true;
 		else
@@ -108,13 +108,15 @@ class picture
 			return;
 		if (strpos($sFilename, '.') === false)
 			return;
+
 		$sExtension = mb_strtolower(substr($sFilename, strrpos($sFilename, '.') + 1));
+		$this->sFileExtension = $sExtension;
 
 		$sUUID = $this->getUUID();
 
-		$this->sFileExtension = $sExtension;
 		$this->setUrl($opt['logic']['pictures']['url'] . $sUUID . '.' . $sExtension);
 		//$this->setThumbUrl($opt['logic']['pictures']['thumb_url'] . substr($sUUID, 0, 1) . '/' . substr($sUUID, 1, 1) . '/' . $sUUID . '.' . $sExtension);
+
 		$this->bFilenamesSet = true;
 	}
 
@@ -123,17 +125,51 @@ class picture
 		return $this->nPictureId;
 	}
 
-	function delete()
+	private function setArchiveFlag($bRestoring, $original_id=0)
 	{
-		global $opt;
+		global $login;
 
-		// delete record, image and thumb
-		@unlink($this->getFilename());
-		@unlink($this->getThumbFilename());
+		// This function determines if an insert, update oder deletion at pictures table
+		// ist to be recorded for vandalism recovery, depending on WHO OR WHY the 
+		// operation is done. Other conditions, depending on the data, are handled 
+		// by triggers.
+		//
+		// Data is passed by ugly global DB variables, so try call this function as
+		// close before the targetet DB operation as possible.
 
-		sql("DELETE FROM `pictures` WHERE `id`='&1'", $this->nPictureId);
+		if ($this->getObjectType() == 1)
+		{
+			/*
+			$owner_id = sql_value("SELECT `user_id` FROM `caches` WHERE `cache_id`=
+			                         IFNULL((SELECT `cache_id` FROM `cache_logs` WHERE `id`='&1'),
+			                           (SELECT `cache_id` FROM `cache_logs_archived` WHERE `id`='&1'))",
+								 					  0, $this->getObjectId());
+			*/
+			$logger_id = sql_value("SELECT
+			                         IFNULL((SELECT `user_id` FROM `cache_logs` WHERE `id`='&1'),
+			                           (SELECT `user_id` FROM `cache_logs_archived` WHERE `id`='&1'))",
+				                      0, $this->getObjectId());
 
-		return true;
+			$archive = ($bRestoring || $login->userid != $logger_id);
+		}
+		else
+			$archive = true;
+
+		sql("SET @archive_picop=" . ($archive ? "TRUE" : "FALSE"));
+		sql_slave("SET @archive_picop=" . ($archive ? "TRUE" : "FALSE"));
+
+		sql("SET @original_picid='&1'", $original_id);
+		sql_slave("SET @original_picid='&1'", $original_id);
+
+		// @archive_picop and @original_picid are evaluated by trigger functions
+	}
+
+	private function resetArchiveFlag()
+	{
+		sql("SET @archive_picop=FALSE");
+		sql("SET @original_picid=0");
+		sql_slave("SET @archive_picop=FALSE");
+		sql_slave("SET @original_picid=0");
 	}
 
 	function getUrl()
@@ -179,6 +215,14 @@ class picture
 	{
 		return $this->rePicture->setValue('local', $value ? 1 : 0);
 	}
+	function getUnknownFormat()
+	{
+		return $this->rePicture->getValue('unknown_format')!=0;
+	}
+	function setUnknownFormat($value)
+	{
+		return $this->rePicture->setValue('unknown_format', $value ? 1 : 0);
+	}
 	function getDisplay()
 	{
 		return $this->rePicture->getValue('display')!=0;
@@ -197,18 +241,18 @@ class picture
 	}
 	function getFilename()
 	{
+		// works intendently before bFilenameSet == true !
 		global $opt;
 
 		if (mb_substr($opt['logic']['pictures']['dir'], -1, 1) != '/')
 			$opt['logic']['pictures']['dir'] .= '/';
 
-		$uuid = $this->getUUID();
 		$url = $this->getUrl();
-		$fna = mb_split('\\.', $url);
-		$extension = mb_strtolower($fna[count($fna) - 1]);
-		
-		return $opt['logic']['pictures']['dir'] . $uuid . '.' . $extension;
+		$fna = mb_split('\\/', $url);
+
+		return $opt['logic']['pictures']['dir'] . end($fna);
 	}
+
 	function getThumbFilename()
 	{
 		global $opt;
@@ -216,16 +260,16 @@ class picture
 		if (mb_substr($opt['logic']['pictures']['thumb_dir'], -1, 1) != '/')
 			$opt['logic']['pictures']['thumb_dir'] .= '/';
 
-		$uuid = $this->getUUID();
 		$url = $this->getUrl();
-		$fna = mb_split('\\.', $url);
-		$extension = mb_strtolower($fna[count($fna) - 1]);
+		$fna = mb_split('\\/', $url);
+		$filename = end($fna);
 
-		$dir1 = mb_strtoupper(mb_substr($uuid, 0, 1));
-		$dir2 = mb_strtoupper(mb_substr($uuid, 1, 1));
+		$dir1 = mb_strtoupper(mb_substr($filename, 0, 1));
+		$dir2 = mb_strtoupper(mb_substr($filename, 1, 1));
 
-		return $opt['logic']['pictures']['thumb_dir'] . $dir1 . '/' . $dir2 . '/' . $uuid . '.' . $extension;
+		return $opt['logic']['pictures']['thumb_dir'] . $dir1 . '/' . $dir2 . '/' . $filename;
 	}
+
 	function getLogId()
 	{
 		if ($this->getObjectType() == OBJECT_CACHELOG)
@@ -311,13 +355,29 @@ class picture
 		return $this->rePicture->getAnyChanged();
 	}
 
-	// return if successfull (with insert)
-	function save()
+	// return true if successful (with insert)
+	function save($restore=false, $original_id=0, $original_url="")
 	{
+		$undelete = ($original_id != 0);
+
+		if ($undelete)
+			if ($this->bFilenamesSet == true)
+				return false;
+			else
+			{
+				// restore picture file
+				$this->setUrl($original_url);        // set the url, so that we can
+				$filename = $this->getFilename();    // .. retreive the file path+name
+				$this->setFilenames($filename);      // now set url(s) from the new uuid
+				@rename($this->deleted_filename($filename), $this->getFilename());
+			}
+
 		if ($this->bFilenamesSet == false)
 			return false;
 
+		$this->setArchiveFlag($restore, $original_id);
 		$bRetVal = $this->rePicture->save();
+		$this->resetArchiveFlag();
 
 		if ($bRetVal)
 		{
@@ -329,6 +389,43 @@ class picture
 		}
 
 		return $bRetVal;
+	}
+
+	function delete($restore=false)
+	{
+		// see also removelog.php, 'remove log pictures'
+
+		global $opt;
+
+		// delete record, image and thumb
+		$this->setArchiveFlag($restore);
+		sql("DELETE FROM `pictures` WHERE `id`='&1'", $this->nPictureId);
+		$this->resetArchiveFlag();
+
+		// archive picture if picture record has been archived
+		if (sql_value("SELECT `id` FROM `pictures_modified` WHERE `id`='&1'",
+		              0, $this->getPictureId()) != 0)
+		{
+			$filename = $this->getFilename();
+			@rename($filename, $this->deleted_filename($filename));
+		}
+		else
+			@unlink($filename);
+
+		@unlink($this->getThumbFilename());
+
+		return true;
+	}
+
+	private function deleted_filename($filename)
+	{
+		$fna = mb_split('\\/',$filename);
+		$fna[] = end($fna);
+		$fna[count($fna)-2] = 'deleted';
+		$dp = "";
+		foreach ($fna as $fp)
+			$dp .= "/" . $fp;
+		return substr($dp,1);
 	}
 
 	function allowEdit()

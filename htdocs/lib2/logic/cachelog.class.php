@@ -146,7 +146,6 @@ class cachelog
 	{
 		return $this->reCacheLog->setValue('text_htmledit', $value);
 	}
-
 	function getUUID()
 	{
 		return $this->reCacheLog->getValue('uuid');
@@ -168,6 +167,15 @@ class cachelog
 		return $this->reCacheLog->setValue('node', $value);
 	}
 
+	function getOwnerNotified()
+	{
+		return $this->reCacheLog->getValue('owner_notified') != 0;
+	}
+	function setOwnerNotified($value)
+	{
+		return $this->reCacheLog->setValue('owner_notified', $value ? 1 : 0);
+	}
+
 	function getAnyChanged()
 	{
 		return $this->reCacheLog->getAnyChanged();
@@ -177,7 +185,18 @@ class cachelog
 	function save()
 	{
 		sql_slave_exclude();
-		return $this->reCacheLog->save();
+		$saved = $this->reCacheLog->save();
+		if ($saved && $this->nLogId == ID_NEW)
+			$this->nLogId = $this->reCacheLog->getValue('id');
+		return $saved;
+	}
+
+	function updatePictureStat()
+	{
+		sql("UPDATE `cache_logs` SET `picture` =
+		       (SELECT COUNT(*) FROM `pictures` WHERE `object_type`=1 AND `object_id`='&1')
+		     WHERE `id`= '&1'",
+         $this->getLogId());
 	}
 
 	function allowView()

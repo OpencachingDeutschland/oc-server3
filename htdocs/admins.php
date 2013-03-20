@@ -30,6 +30,7 @@
 		if ($record['admin'] & ADMIN_MAINTAINANCE) 	$rights[] = "dbmaint";
 		if ($record['admin'] & ADMIN_USER)					$rights[] = "user/caches";
 		if ($record['admin'] & ADMIN_NEWS)					$rights[] = "newsapprove";
+		if ($record['admin'] & ADMIN_RESTORE)				$rights[] = "vand.restore";
 		if ($record['admin'] & 128)									$rights[] = "root";
 		$admin['rights'] = implode(", ", $rights);
 		$admins[] = $admin;

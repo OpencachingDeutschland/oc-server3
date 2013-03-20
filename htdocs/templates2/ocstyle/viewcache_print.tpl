@@ -46,9 +46,9 @@
 					</td>
 					<td valign="top" nowrap="1" width="140" style="text-align:right">
 						{t}Difficulty{/t}:
-						<img src="./resource2/{$opt.template.style}/images/difficulty/diff-{$cache.difficulty*5}.gif" border="0" width="19" height="16" hspace="2" alt="{t 1=$cache.difficulty*0.5|sprintf:'%01.1f'}Difficulty: %1 of 5.0{/t}" /><br />
+						<img src="./resource2/{$opt.template.style}/images/difficulty/diff-{$cache.difficulty*5}.gif" border="0" width="19" height="16" hspace="2" /><br />
 						{t}Terrain{/t}:
-						<img src="./resource2/{$opt.template.style}/images/difficulty/terr-{$cache.terrain*5}.gif" border="0" width="19" height="16" hspace="2" alt="{t 1=$cache.terrain*0.5|sprintf:'%01.1f'}Terrain: %1 of 5.0{/t}" />
+						<img src="./resource2/{$opt.template.style}/images/difficulty/terr-{$cache.terrain*5}.gif" border="0" width="19" height="16" hspace="2" />
 					</td>
 				</tr>
 
@@ -76,7 +76,7 @@
 			<table border="0" cellpadding="0" cellspacing="0" width="100%">
 				<tr>
 					<td valign="top">
-						<img src="resource2/{$opt.template.style}/images/description/22x22-location.png"  width="22" height="22" border="0" alt="" title="" align="left">
+						<img src="resource2/{$opt.template.style}/images/description/22x22-location.png"  width="22" height="22" border="0" alt="" title="" align="left">&nbsp;
 						<font size="3"><b><nobr>{$coordinates.lat|escape}</nobr> <nobr>{$coordinates.lon|escape}</nobr></b></font> <font size="1">(WGS84)</font><br />
 						<font size="1"><a href="#" onclick="window.open('coordinates.php?lat={$cache.latitude}&lon={$cache.longitude}&popup=y&wp={$cache.wpoc}','{t escape=js}Coordinates{/t}','width=280,height=394,resizable=no,scrollbars=0')">{t}Convert coordinates{/t}</a></font><br />
 						{t}Size{/t}: {$cache.sizeName|escape}<br />

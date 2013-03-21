@@ -16,12 +16,19 @@
 		{if $newLogsPerCountry}
 			{if $newLog.country_name!=$lastCountry}
 				<tr><td class="spacer"></td></tr>
-				<tr><td><b>{$newLog.country_name|escape}</b></td><tr>
+				<tr><td colspan="3">
+					<table cellspacing="0" cellpadding="0"><tr>
+						<td class="content-title-flag" ><img src="images/flags/{$newLog.country|lower}.gif" width="16px" height="11px"></td>
+						<td><b class="content-title-noshade-size08">{$newLog.country_name|escape}</b>&nbsp;</b></td>
+					</tr></table>
+				</td></tr>
 			{/if}
 		{/if}
 		<tr>
 			<td>
-				{$newLog.date_created|date_format:$opt.format.date} - 
+				{$newLog.date_created|date_format:$opt.format.date}
+			</td>
+			<td class="listicon">
 				{if $newLog.type==1}
 					<img src="resource2/{$opt.template.style}/images/log/16x16-found.png" width="16" height="16" border="0" alt="" style="margin-top:4px;" /> 
 				{elseif $newLog.type==2}
@@ -33,7 +40,8 @@
 				{elseif $newLog.type==8}
 					<img src="resource2/{$opt.template.style}/images/log/16x16-will_attend.png" width="16" height="16" border="0" alt="" style="margin-top:4px;" /> 
 				{/if}
-
+			</td>
+			<td>
 				{capture name=cachename}
 					<a href="viewcache.php?wp={$newLog.wp_oc}">{$newLog.cachename|escape}</a>
 				{/capture}
@@ -67,4 +75,5 @@
 		</tr>
 		{assign var='lastCountry' value=$newLog.country_name}
 	{/foreach}
+	<tr><td class="spacer"></td></tr>
 </table>

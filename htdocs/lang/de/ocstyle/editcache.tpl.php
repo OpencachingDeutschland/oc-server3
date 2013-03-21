@@ -360,6 +360,7 @@ function toggleAttr(id)
 			<input type="submit" name="submit" value="{submit}" class="formbutton" onclick="submitbutton('submit')" />
 		</td>
 	</tr>
+	<tr><td class="spacer"></td></tr>
 </table>
 </form>
 <script type="text/javascript">

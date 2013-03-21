@@ -403,6 +403,7 @@ function toggleAttr(id)
 		<input type="submit" name="submitform" value="{submit}" class="formbutton" onclick="submitbutton('submitform') "/>
 		</td>
 	</tr>
+	<tr><td class="spacer"></td></tr>
 </table>
 </form>
 <script language="javascript" type="text/javascript">

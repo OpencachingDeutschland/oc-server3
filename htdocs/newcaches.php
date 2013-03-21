@@ -27,13 +27,10 @@
 
 		$newCaches = array();
 
-		$rsNewCaches = sql_slave('SELECT `caches`.`cache_id` `cacheid`, `caches`.`wp_oc` `wpoc`, `user`.`user_id` `userid`, `caches`.`country` `country`, `caches`.`name` `cachename`, `user`.`username` `username`, `caches`.`date_created` `date_created`, `cache_type`.`icon_large` FROM `caches` INNER JOIN `user` ON `caches`.`user_id`=`user`.`user_id` INNER JOIN `cache_type` ON `caches`.`type`=`cache_type`.`id` WHERE `caches`.`status` = 1 ORDER BY `caches`.`date_created` DESC LIMIT ' . ($startat+0) . ', ' . ($perpage+0));
+		$rsNewCaches = sql_slave('SELECT `caches`.`cache_id` `cacheid`, `caches`.`wp_oc` `wpoc`, `user`.`user_id` `userid`, `caches`.`country` `country`, `caches`.`name` `cachename`, `caches`.`type`, `user`.`username` `username`, `caches`.`date_created` `date_created` FROM `caches` INNER JOIN `user` ON `caches`.`user_id`=`user`.`user_id` WHERE `caches`.`status` = 1 ORDER BY `caches`.`date_created` DESC LIMIT ' . ($startat+0) . ', ' . ($perpage+0));
 			// see also write_newcaches_urls() in sitemap.class.php
 		while ($rNewCache = sql_fetch_assoc($rsNewCaches))
-		{
-			$rNewCache['icon_large'] = getSmallCacheIcon($rNewCache['icon_large']);
 			$newCaches[] = $rNewCache;
-		}
 		sql_free_result($rsNewCaches);
 		$tpl->assign('newCaches', $newCaches);
 
@@ -59,6 +56,7 @@
 
 		$tpl->assign('startat', $startat);
 		$tpl->assign('maxstart', $maxstart);
+		$tpl->assign('defaultcountry', $opt['template']['default']['country']);
 	}
 
 	$tpl->display();

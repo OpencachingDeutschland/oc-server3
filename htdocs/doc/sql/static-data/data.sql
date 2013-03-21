@@ -834,7 +834,7 @@ INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustrin
 INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('3', 'MNU_START_REGISTER', 'Register', '18', 'Register', '18', '0', 'register.php', '1', '1', '3', '', '1', NULL);
 INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('4', 'MNU_START_NEWS', 'News', '70', 'News', '70', '0', 'news.php', '0', '1', '3', '', '1', NULL);
 INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('5', 'MNU_START_NEWCACHES', 'New caches', '122', 'New caches', '122', '0', 'newcaches.php', '1', '1', '4', '', '1', NULL);
-INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('6', 'MNU_START_NEWCACHES_WITHOUTOWN', 'Without Germany', '121', 'Without Germany', '121', '0', 'newcachesrest.php', '1', '5', '1', '', '1', NULL);
+INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('6', 'MNU_START_NEWCACHESREST', 'Without Germany', '121', 'Without Germany', '121', '0', 'newcachesrest.php', '1', '5', '1', '', '1', NULL);
 INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('7', 'MNU_START_NEWLOGS', 'New logs', '120', 'New logs', '120', '0', 'newlogs.php', '1', '1', '5', '', '1', NULL);
 INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('8', 'MNU_START_IMPRINT', 'Imprint', '15', 'Imprint', '15', '0', 'articles.php?page=impressum', '1', '1', '11', '', '1', NULL);
 INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('9', 'MNU_MYPROFILE', 'My profile', '119', 'My profile', '119', '0', 'myhome.php', '1', '0', '2', '#E8DDE4', '1', NULL);
@@ -2597,7 +2597,7 @@ INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('57', 
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('57', './templates2/ocstyle/map2.tpl', '1131');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('57', './templates2/ocstyle/myhome.tpl', '30');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('57', './templates2/ocstyle/newcaches.tpl', '44');
-INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('57', './templates2/ocstyle/newcaches_withoutown.tpl', '20');
+INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('57', './templates2/ocstyle/newcachesrest.tpl', '20');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('57', './templates2/ocstyle/recommendations.tpl', '39');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('57', './templates2/ocstyle/start.tpl', '53');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('57', './templates2/ocstyle/start.tpl', '93');
@@ -2630,8 +2630,8 @@ INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('70', 
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('70', 'table:sys_menu;field=title', '0');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('71', './templates2/ocstyle/newcaches.tpl', '8');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('71', './templates2/ocstyle/newcaches.tpl', '9');
-INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('72', './templates2/ocstyle/newcaches_withoutown.tpl', '8');
-INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('72', './templates2/ocstyle/newcaches_withoutown.tpl', '9');
+INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('72', './templates2/ocstyle/newcachesrest.tpl', '8');
+INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('72', './templates2/ocstyle/newcachesrest.tpl', '9');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('73', './templates2/ocstyle/newlogpics.tpl', '8');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('73', './templates2/ocstyle/newlogs.tpl', '8');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('73', './templates2/ocstyle/newlogs.tpl', '9');

@@ -255,6 +255,7 @@ ul#statmenu { padding: 0px; margin: 0px;}
 .content-title-noshade {margin: 0px; padding: 0px; color: rgb(88,144,168); font-weight: bold; font-size: 100%;}
 .content-title-noshade-size0 {margin: 0px; padding: 0px; color: rgb(88,144,168); font-weight: bold; font-size: 70%;}
 .content-title-noshade-size05 {margin: 0px; padding: 0px; color: rgb(88,144,168); font-weight: bold; font-size: 80%;}
+.content-title-noshade-size08 {margin: 0px; padding: 0px; color: rgb(88,144,168); font-weight: bold; font-size: 110%;}
 .content-title-noshade-size1 {margin: 0px; padding: 0px; color: rgb(88,144,168); font-weight: bold; font-size: 130%;}
 .content-title-noshade-size15 {margin: 0px; padding: 0px; color: rgb(88,144,168); font-weight: bold; font-size: 136%;}
 .content-title-noshade-size2 {margin: 0px; padding: 0px; color: rgb(88,144,168); font-weight: bold; font-size: 150%;}
@@ -266,6 +267,13 @@ ul#statmenu { padding: 0px; margin: 0px;}
 	font-size: 160%;
 }
 .content-title-noshade-size5 {margin: 0px; padding: 0px; color: rgb(88,144,168); font-weight: bold; font-size: 200%;}
+
+td.content-title-flag {
+	margin-left:0 !important;
+	padding-left:0 !important;
+	margin-right:3px !important;
+	padding-right:3px !important;
+}
 
 .content-txtbox-noshade {margin: 0px; padding: 7px 0px 0px 0px; background-color: rgb(255,255,255);}
 .content-score {margin: 0px; margin-top: 3px; padding: 4px 0px 0px 0px; background-color: rgb(255,255,255); border-style:dotted; border-width:1px; width:75px; height:20px;vertical-align:middle;}
@@ -317,6 +325,13 @@ div.changelog ul li ul {font-size: 90%; margin:0}
 .narrowtable td {padding: 0 7px 0 7px; border: solid 0px rgb(150,150,150); text-align: left; font-size: 120%;}
 .narrowtable th {margin: 0px; background-color: rgb(127,162,202); padding: 0 7px 0 7px; border: solid 0px rgb(150,150,150); empty-cells: show; text-align: left; font-size: 120%; color: rgb(255,255,255);	}
 .narrowtable-caption {margin: 0.5em 0px 1.0em 30px; padding: 0px; clear: both; text-align: left; font-size: 120%;}
+
+td.listicon {
+	width:1%;
+	margin-right:0 !important;
+	padding-right:1px !important;
+	vertical-align:center;
+}
 
 /* Images */
 .img-left-noborder-notopmargin {float: left; margin: 0px 10px 0px 0px;}

@@ -27,6 +27,7 @@
 																`cache_logs`.`date_created`, 
 																`caches`.`name` AS `cachename`, 
 																`caches`.`wp_oc`, 
+																`caches`.`country` AS `country`,
 																`cache_logs`.`type`, 
 																`cacheloguser`.`user_id`, 
 																`cacheloguser`.`username`,

@@ -18,7 +18,7 @@
 			<tr>
 				<td colspan="3">
 					<table cellspacing="0" cellpadding="0"><tr>
-						<td class="content-title-flag"><img src="images/flags/{$newCache.country|lower}.gif" width="16px" height="11px"></td>
+						<td class="content-title-flag"><img src="images/flags/{$newCache.country|lower}.gif" ></td>
 						<td><p class="content-title-noshade-size08">{$newCache.country_name|escape}</p></td>
 					</tr></table>
 				<td>

@@ -18,7 +18,7 @@
 				<tr><td class="spacer"></td></tr>
 				<tr><td colspan="3">
 					<table cellspacing="0" cellpadding="0"><tr>
-						<td class="content-title-flag" ><img src="images/flags/{$newLog.country|lower}.gif" width="16px" height="11px"></td>
+						<td class="content-title-flag" ><img src="images/flags/{$newLog.country|lower}.gif" ></td>
 						<td><b class="content-title-noshade-size08">{$newLog.country_name|escape}</b>&nbsp;</b></td>
 					</tr></table>
 				</td></tr>

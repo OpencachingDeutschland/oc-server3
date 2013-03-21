@@ -163,9 +163,10 @@ List of third party components:
 				          http://openiconlibrary.sourceforge.net/gallery2/?./Icons/categories/preferences-other-3.png
 				License : Creative Commons BY-SA 3.0
 
-		26. 16x16 Icons 'flag-checker' and 'footprints'
+		26. 16x16 Icons 'flag-checker', 'footprints', 'clock select', lock
 				Path    : htdocs/resource2/ocstyle/images/misc/
 				          htdocs/resource2/ocstyle/images/map/caches2/
+				          htdocs/resource2/ocstyle/images/cachestatus/
 				URI     : http://www.softicons.com/free-icons/toolbar-icons/fugue-16px-additional-icons-2-by-yusuke-kamiyamane
 				License : Creative Commons BY 3.0
 				Author  : Yusuke Kamiyamane

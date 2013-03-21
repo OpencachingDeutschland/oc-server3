@@ -170,3 +170,9 @@ List of third party components:
 				URI     : http://www.softicons.com/free-icons/toolbar-icons/fugue-16px-additional-icons-2-by-yusuke-kamiyamane
 				License : Creative Commons BY 3.0
 				Author  : Yusuke Kamiyamane
+
+		27. gears icon
+			  Path    : htdocs/resource2/ocstyle/images/misc/
+			  URI     : http://www.softicons.com/free-icons/toolbar-icons/fatcow-hosting-icons-by-fatcow/gear-in-icon
+			  License : Creative Commons BY 3.0
+			  Author  : FatCow

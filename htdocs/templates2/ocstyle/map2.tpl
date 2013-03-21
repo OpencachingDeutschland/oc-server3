@@ -2142,7 +2142,7 @@ function toggle_attribselection(bSaveCookies)
 	{* popup box for permalink *}
 	<div id="permalink_box" class="mappermalink mapboxframe mapboxshadow" style="display:none">
 		<table>
-			<tr><td><img src="resource2/ocstyle/images/viewcache/link.png" alt="" height="16" width="16" /> {t}Link to this map view{/t}:</td><td align="right"><a href="javascript:permalinkbox_hide()"><img src="resource2/ocstyle/images/misc/close-medium.png" style="opacity:0.7" ></a></td></tr>
+			<tr><td><img src="resource2/ocstyle/images/viewcache/link.png" alt="" height="16" width="16" /> {t}Link to this map view{/t}:</td><td align="right"><a href="javascript:permalinkbox_hide()"><img src="resource2/ocstyle/images/navigation/close-medium.png" style="opacity:0.7" ></a></td></tr>
 			<tr><td><input id="permalink_text" type="text" value="" size="55"/></td></tr>
 			<tr id="permalink_addFavorites"><td align="right"><input type="button" value="{t}Add to favorites...{/t}" onclick="addFavorites_click()" /></td></tr>
 		</table>
@@ -2172,7 +2172,7 @@ function toggle_attribselection(bSaveCookies)
 				<form action="map2.php?mode={if $bFullscreen}full{else}normal{/if}screen" method="post" style="display:inline;">
 					<input type="hidden" name="submit" value="1" />
 					<table>
-						<tr><td><span style="font-size:1.2em; font-weight:bold">{t}Settings{/t}</strong></td><td style="text-align:right"><a href="javascript:toggle_settings()"><img src="resource2/ocstyle/images/misc/close-medium.png" style="opacity:0.7" /></a></tr>
+						<tr><td><span style="font-size:1.2em; font-weight:bold">{t}Settings{/t}</strong></td><td style="text-align:right"><a href="javascript:toggle_settings()"><img src="resource2/ocstyle/images/navigation/close-medium.png" style="opacity:0.7" /></a></tr>
 						<tr><td>{t}Menu option 'Map' shows{/t}:</td><td><select name="opt_menumap"><option id="opt_menumap0" value="0">{t}small map{/t}</option><option id="opt_menumap1" value="1">{t}fullscreen map{/t}</option></select></td></tr>
 						<tr><td>{t}Show overview map{/t}:</td><td><input type="checkbox" id="opt_overview" name="opt_overview" value="1" /></td></tr>
 						<tr><td>{t 1=$min_maxrecords 2=$max_maxrecords}Maximum caches on map<br />(%1-%2, 0=automatic){/t}:</td><td><input type="text" id="opt_maxcaches" name="opt_maxcaches" size="6" /></td></tr>
@@ -2191,7 +2191,7 @@ function toggle_attribselection(bSaveCookies)
 
 			<div id="cachepicbox" class="default mapboxframe mapboxshadow" style="position:absolute; {if $bFullscreen}left:4px; top:7px;{else}left:0; top:0;{/if} background:#fdfdfd; display:none; z-index:60">
 				<div style="position:absolute; right:-19px; top:2px; opacity:0.7">
-					<img src="resource2/ocstyle/images/misc/close-smaller.png" onclick="hide_picture()" style="cursor:pointer"/>
+					<img src="resource2/ocstyle/images/navigation/close-smaller.png" onclick="hide_picture()" style="cursor:pointer"/>
 				</div>
 				<div>
 					<a id="cachepiccontainer" class="nooutline"><img id="cachepic"/></a>

@@ -179,7 +179,8 @@ function get_logpics($purpose, $userid=0, $cacheid=0)
 
 function set_paged_pics($purpose, $userid, $cacheid, $tpl, $url)
 {
-	global $_REQUEST;
+	global $_REQUEST, $opt;
+
 	$startat = isset($_REQUEST['startat']) ? $_REQUEST['startat']+0 : 0;
 
 	$pictures = get_logpics($purpose, $userid, $cacheid);
@@ -193,12 +194,18 @@ function set_paged_pics($purpose, $userid, $cacheid, $tpl, $url)
 		$page = floor($startat/MAX_PICTURES_PER_GALLERY_PAGE) + 1;
 
 		$pl = "";
-		/* paging overhead - does not look nice ...
 		if ($startat > 0)
-			$pl .= "<a href='" . $url . "&startat=" . ($startat - MAX_PICTURES_PER_GALLERY_PAGE) . "'>&lt;</a> ";
+		{
+			if ($pages > 2)
+				$pl .= "<a href='" . $url . "&startat=0'><img src='resource2/" . $opt['template']['style'] . "/images/navigation/16x16-browse-first.png' width='16px' height='16px' alt='&lt;&lt;'></a> ";
+			$pl .= "<a href='" . $url . "&startat=" . ($startat - MAX_PICTURES_PER_GALLERY_PAGE) . "'><img src='resource2/" . $opt['template']['style'] . "/images/navigation/16x16-browse-prev.png' width='16px' height='16px' alt='&lt;'></a> ";
+		}
 		else
-			$pl .= "&lt; ";
-		*/
+		{
+			if ($pages > 2)
+				$pl .= "<a href='" . $url . "&startat=0'><img src='resource2/" . $opt['template']['style'] . "/images/navigation/16x16-browse-first-inactive.png' width='16px' height='16px' alt='&lt;&lt;'></a> ";
+			$pl .= "<img src='resource2/" . $opt['template']['style'] . "/images/navigation/16x16-browse-prev-inactive.png' width='16px' height='16px' alt='&lt;'> ";
+		}
 
 		for ($p=1; $p<=$pages; $p++)
 		{
@@ -210,12 +217,18 @@ function set_paged_pics($purpose, $userid, $cacheid, $tpl, $url)
 			else             $pl .= "</strong>";
 		}
 
-		/*
 		if ($startat + MAX_PICTURES_PER_GALLERY_PAGE < count($pictures))
-			$pl .= " <a href='" . $url . "&startat=" . ($startat + MAX_PICTURES_PER_GALLERY_PAGE) . "'>&gt;</a> ";
+		{
+			$pl .= " <a href='" . $url . "&startat=" . ($startat + MAX_PICTURES_PER_GALLERY_PAGE) . "'><img src='resource2/" . $opt['template']['style'] . "/images/navigation/16x16-browse-next.png' width='16px' height='16px' alt='&gt;'></a> ";
+			if ($pages > 2)
+				$pl .= " <a href='" . $url . "&startat=" . ($startat + MAX_PICTURES_PER_GALLERY_PAGE) . "'><img src='resource2/" . $opt['template']['style'] . "/images/navigation/16x16-browse-last.png' width='16px' height='16px' alt='&gt;&gt;'></a> ";
+		}
 		else
-			$pl .= " &gt;";
-		*/
+		{
+			$pl .= " <img src='resource2/" . $opt['template']['style'] . "/images/navigation/16x16-browse-next-inactive.png' width='16px' height='16px' alt='&gt;'>";
+			if ($pages > 2)
+				$pl .= " <a href='" . $url . "&startat=" . ($startat + MAX_PICTURES_PER_GALLERY_PAGE) . "'><img src='resource2/" . $opt['template']['style'] . "/images/navigation/16x16-browse-last-inactive.png' width='16px' height='16px' alt='&gt;&gt;'></a> ";
+		}
 
 		$tpl->assign('pagelinks', $pl);
 	}

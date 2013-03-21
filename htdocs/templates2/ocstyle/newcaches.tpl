@@ -12,14 +12,7 @@
 <table width="100%" class="table">
 	<tr>
 		<td class="header-small">
-
-			{if $startat>0}
-				<a href="newcaches.php?startat=0">&lt;&lt;</a>
-				<a href="newcaches.php?startat={$startat-$perpage}">&lt;</a>
-			{else}
-				&lt;&lt;
-				&lt;
-			{/if}
+			{include file="res_browse_left.tpl" page="newcaches"}
 
 			{section name=page start=$firstpage loop=$lastpage+1 step=100}
 				{if $smarty.section.page.index!=$startat}
@@ -29,14 +22,7 @@
 				{/if}
 			{/section}
 
-			{if $startat<$maxstart}
-				<a href="newcaches.php?startat={$startat+$perpage}">&gt;</a>
-				<a href="newcaches.php?startat={$maxstart}">&gt;&gt;</a>
-			{else}
-				&gt;
-				&gt;&gt;
-			{/if}
-
+			{include file="res_browse_right.tpl" page="newcaches"}
 		</td>
 	</tr>
 
@@ -46,14 +32,7 @@
 
 	<tr>
 		<td class="header-small">
-
-			{if $startat>0}
-				<a href="newcaches.php?startat=0">&lt;&lt;</a>
-				<a href="newcaches.php?startat={$startat-$perpage}">&lt;</a>
-			{else}
-				&lt;&lt;
-				&lt;
-			{/if}
+			{include file="res_browse_left.tpl" page="newcaches"}
 
 			{section name=page start=$firstpage loop=$lastpage+1 step=100}
 				{if $smarty.section.page.index!=$startat}
@@ -63,14 +42,7 @@
 				{/if}
 			{/section}
 
-			{if $startat<$maxstart}
-				<a href="newcaches.php?startat={$startat+$perpage}">&gt;</a>
-				<a href="newcaches.php?startat={$maxstart}">&gt;&gt;</a>
-			{else}
-				&gt;
-				&gt;&gt;
-			{/if}
-
+			{include file="res_browse_right.tpl" page="newcaches"}
 		</td>
 	</tr>
 </table>

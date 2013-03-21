@@ -204,7 +204,10 @@
 	sql_dropProcedure('sp_update_cache_listingdate');
 	sql("CREATE PROCEDURE sp_update_cache_listingdate (IN nCacheId INT(10) UNSIGNED)
 	     BEGIN
-	       IF ISNULL(@XMLSYNC) OR @XMLSYNC!=1 THEN
+	       IF (ISNULL(@XMLSYNC) OR @XMLSYNC!=1) AND IFNULL(@dont_update_listingdate,0)=0 THEN
+	         /* @dont_update_listingdate avoids illegal update recursions in caches table, e.g.
+					      update caches.status -> sp_touch_cache -> update coordinates 
+								  -> sp_update_cache_listingdate -> update caches  */
 	         UPDATE `caches` SET `listing_last_modified`=NOW() WHERE `cache_id`=nCacheId LIMIT 1;
 	       END IF;
 	     END;");
@@ -529,6 +532,8 @@
 	sql("CREATE TRIGGER `cachesBeforeInsert` BEFORE INSERT ON `caches` 
 				FOR EACH ROW 
 					BEGIN 
+						SET @dont_update_listingdate=1;
+
 						/* dont overwrite date values while XML client is running */
 						IF ISNULL(@XMLSYNC) OR @XMLSYNC!=1 THEN
 							SET NEW.`date_created`=NOW();
@@ -577,6 +582,8 @@
 							SET NEW.`wp_oc` = (SELECT `wp_oc` FROM `cache_waypoint_pool` WHERE `uuid`=`NEW`.`uuid`);
 
 						END IF;
+
+						SET @dont_update_listingdate=0;
 					END;",
 					$opt['logic']['waypoint_pool']['prefix'],
 					'^' . $opt['logic']['waypoint_pool']['prefix'] . '[' . $opt['logic']['waypoint_pool']['valid_chars'] . ']{1,}$');
@@ -585,6 +592,8 @@
 	sql("CREATE TRIGGER `cachesAfterInsert` AFTER INSERT ON `caches` 
 				FOR EACH ROW 
 					BEGIN 
+						SET @dont_update_listingdate=1;
+
 						INSERT IGNORE INTO `cache_coordinates` (`cache_id`, `date_created`, `longitude`, `latitude`) 
 						                                VALUES (NEW.`cache_id`, NOW(), NEW.`longitude`, NEW.`latitude`);
 						INSERT IGNORE INTO `cache_countries` (`cache_id`, `date_created`, `country`) 
@@ -598,12 +607,16 @@
 
 						/* cleanup/delete reserved waypoint */
 						DELETE FROM `cache_waypoint_pool` WHERE `uuid`=NEW.`uuid`;
+
+						SET @dont_update_listingdate=0;
 					END;");
 
 	sql_dropTrigger('cachesBeforeUpdate');
 	sql("CREATE TRIGGER `cachesBeforeUpdate` BEFORE UPDATE ON `caches` 
 				FOR EACH ROW 
 					BEGIN 
+						SET @dont_update_listingdate=1;
+
 						/* dont overwrite date values while XML client is running */
 						IF ISNULL(@XMLSYNC) OR @XMLSYNC!=1 THEN
 							IF OLD.`cache_id`!=NEW.`cache_id` OR 
@@ -652,12 +665,16 @@
 							SET NEW.`date_created`=NOW();
 							SET NEW.`is_publishdate`=1;
 						END IF;
+
+						SET @dont_update_listingdate=0;
 					END;");
 
 	sql_dropTrigger('cachesAfterUpdate');
 	sql("CREATE TRIGGER `cachesAfterUpdate` AFTER UPDATE ON `caches` 
 				FOR EACH ROW 
 					BEGIN 
+						SET @dont_update_listingdate=1;
+
 						IF NEW.`longitude` != OLD.`longitude` OR NEW.`latitude` != OLD.`latitude` THEN 
 							INSERT IGNORE INTO `cache_coordinates` (`cache_id`, `date_created`, `longitude`, `latitude`, `restored_by`)
 								VALUES (NEW.`cache_id`, NOW(), NEW.`longitude`, NEW.`latitude`, IFNULL(@restoredby,0));
@@ -682,19 +699,27 @@
             IF OLD.`status`=5 AND NEW.`status`=1 THEN
               CALL sp_notify_new_cache(NEW.`cache_id`, NEW.`longitude`, NEW.`latitude`);
             END IF;
+
+						SET @dont_update_listingdate=0;
 					END;");
 
 	sql_dropTrigger('cachesAfterDelete');
 	sql("CREATE TRIGGER `cachesAfterDelete` AFTER DELETE ON `caches` 
 				FOR EACH ROW 
 					BEGIN 
+						SET @dont_update_listingdate=1;
+
+						/* lots of things are missing here - descs, logs, pictures ...
+						   also, the depending deletions should be done BEFORE deleting from caches! */
+
 						DELETE FROM `cache_coordinates` WHERE `cache_id`=OLD.`cache_id`;
 						DELETE FROM `cache_countries` WHERE `cache_id`=OLD.`cache_id`;
 						DELETE FROM `cache_npa_areas` WHERE `cache_id`=OLD.`cache_id`;
 						DELETE FROM `caches_modified` WHERE `cache_id`=OLD.`cache_id`;
-						/* lots of things are missing here - descs, logs, pictures ... */
 						CALL sp_update_hiddenstat(OLD.`user_id`, TRUE);
 						INSERT IGNORE INTO `removed_objects` (`localId`, `uuid`, `type`, `node`) VALUES (OLD.`cache_id`, OLD.`uuid`, 2, OLD.`node`);
+
+						SET @dont_update_listingdate=0;
 					END;");
 
 	sql_dropTrigger('cacheDescBeforeInsert');
@@ -1019,7 +1044,10 @@
 					BEGIN 
 						/* dont overwrite date values while XML client is running */
 						IF ISNULL(@XMLSYNC) OR @XMLSYNC!=1 THEN
-							SET NEW.`last_modified`=NOW();
+							IF NEW.`id`!=OLD.`id` OR NEW.`uuid`!=OLD.`uuid` OR NEW.`node`!=OLD.`node` OR NEW.`date_created`!=OLD.`date_created` OR NEW.`url`!=OLD.`url` OR NEW.`title`!=OLD.`title` OR NEW.`object_id`!=OLD.`object_id` OR NEW.`object_type`!=OLD.`object_type` OR NEW.`spoiler`!=OLD.`spoiler` OR NEW.`local`!=OLD.`local` OR NEW.`unknown_format`!=OLD.`unknown_format` OR NEW.`display`!=OLD.`display` OR NEW.`mappreview`!=OLD.`mappreview` THEN
+								/* everything except last_url_check, thumb_url and thumb_last_generated */
+								SET NEW.`last_modified`=NOW();
+							END IF;
 						END IF;
 					END;");
 
@@ -1041,7 +1069,7 @@
 								CALL sp_update_cache_listingdate(NEW.`object_id`);
 							END IF;
 						ELSE
-							IF NEW.`object_type`=2 THEN
+							IF NEW.`object_type`=2 AND NEW.`last_modified` != OLD.`last_modified` THEN
 								CALL sp_update_cache_listingdate(NEW.`object_id`);
 							END IF;
 							IF @archive_picop AND

@@ -55,6 +55,7 @@
 			$newscontent = RSSParser::parse($opt['news']['count'],$opt['news']['include']);
 
 			$tpl->assign('news', $newscontent);
+			$tpl->assign('newsfeed', $opt['news']['include']);
 			$tpl->assign('extern_news', true);
 		}
 /*

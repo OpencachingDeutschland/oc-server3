@@ -100,6 +100,9 @@ class mail extends Smarty
 
 	static function is_existent_maildomain($domain)
 	{
+		if ($domain == "localhost")
+			return true;  // allow maintenance mails e.g. to root
+
 		$smtp_serverlist = array();
 		$smtp_serverweight = array();
 

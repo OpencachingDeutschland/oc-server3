@@ -5,7 +5,7 @@
  ***************************************************************************}
 {* OCSTYLE *}
 <div class="content2-pagetitle">
-	<img src="resource2/{$opt.template.style}/images/misc/32x32-world.png" style="align: left; margin-right: 10px;" width="32" height="32" alt="World" />
+	<img src="resource2/{$opt.template.style}/images/misc/32x32-gears.png" style="align: left; margin-right: 10px;" width="32" height="32" alt="World" />
 	{t}An error occured while processing the page{/t}
 </div>
 

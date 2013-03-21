@@ -170,11 +170,11 @@ x                    cache_logs_restored   I*     here          datetime     no 
 
 		// get cache set for this user
 		$user_id = $r['user_id'];
-		$rs = sql("SELECT `cache_id`,`wp_oc`,`name`,`latitude`,`longitude`,
+		$rs = sql("SELECT `cache_id`,`wp_oc`,`name`,`latitude`,`longitude`, `status`,
 		           LEFT(`listing_last_modified`,10) AS `last_modified`,
 		           (SELECT COUNT(*) FROM `cache_logs` WHERE `cache_logs`.`cache_id`=`caches`.`cache_id`) AS `logs`
                FROM `caches`
-		           WHERE `user_id`='&1'", $user_id);
+		           WHERE `user_id`='&1' AND `status`!=5", $user_id);
 		$caches = array();
 		while ($rCache = sql_fetch_assoc($rs))
 		{

@@ -76,7 +76,7 @@
 			<table class="table">
 				<tr>
 					<th></th>
-					<th>{t}Waypoint{/t}</th>
+					<th style="text-align:right">{t}Waypoint{/t}</th>
 					<th>{t}Coordinates{/t}</th>
 					<th>{t}Logs{/t}</th>
 					<th>{t}modified{/t}</th>
@@ -85,7 +85,7 @@
 				{foreach from=$aCaches item=cache}
 					<tr>
 						<td>{if $cache.data|@count > 0}<input type="checkbox" name="cache_{$cache.cache_id}" value="1" />{/if}</td>
-						<td><a href="viewcache.php?cacheid={$cache.cache_id}" target="_ocv">{$cache.wp_oc}</a></td>
+						<td style="white-space:nowrap">{include file="res_cachestatus.tpl" status=$cache.status}&nbsp;<a href="viewcache.php?cacheid={$cache.cache_id}" target="_ocv">{$cache.wp_oc}</a></td>
 						<td style="font-size:1em; line-height:1em; white-space:nowrap">{$cache.coordinates.lat|escape}<br />{$cache.coordinates.lon|escape}</td>
 						<td style="text-align:right">{$cache.logs}&nbsp;</td>
 						<td>{$cache.last_modified|date_format:$opt.format.date}</td>

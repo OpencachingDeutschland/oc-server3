@@ -192,6 +192,12 @@
 					 UPDATE `caches` SET `last_modified`=NOW() WHERE `cache_id`=nCacheId;
 				 END IF;
 
+				 /* This is a hack for the XML interface which delivers cache-related records
+				  * like descriptions and pictures only depending on their last_modified date.
+				  * Data may not have been deliverd or stored somewhere depending on the cache 
+				  * status, so when status changes, all has to be sent (again) via XML.
+				  */
+
 				 UPDATE `cache_desc` SET `last_modified`=NOW() WHERE `cache_id`=nCacheId;
 				 UPDATE `cache_logs` SET `last_modified`=NOW() WHERE `cache_id`=nCacheId;
 				 UPDATE `coordinates` SET `last_modified`=NOW() WHERE `cache_id`=nCacheId AND `type`=1;

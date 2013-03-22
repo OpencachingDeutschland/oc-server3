@@ -23,8 +23,6 @@
 		sql("DELETE FROM `caches_attributes` WHERE `cache_id`='&1'", $cache_id);
 		foreach ($attrs AS $attr)
 			sql("INSERT INTO `caches_attributes` (`cache_id`, `attrib_id`) VALUES ('&1', '&2')", $cache_id, $attr);
-
-		sql("UPDATE `caches` SET `last_modified`=NOW() WHERE `cache_id`='&1'", $cache_id);
 	}
 
 	$attrs = array();

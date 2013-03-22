@@ -447,7 +447,8 @@ function getWaypoints($cacheid)
 								$activation_date = 'NULL';
 							}
 
-							//save to DB
+							// save to DB
+							// status update will trigger touching the last_modified date of all depending records					
 							sql("UPDATE `caches` SET `name`='&1', `longitude`='&2', `latitude`='&3', `type`='&4', `date_hidden`='&5', `country`='&6', `size`='&7', `difficulty`='&8', `terrain`='&9', `status`='&10', `search_time`='&11', `way_length`='&12', `logpw`='&13', `wp_gc`='&14', `wp_nc`='&15', `date_activate` = $activation_date WHERE `cache_id`='&16'", $cache_name, $cache_lon, $cache_lat, $cache_type, date('Y-m-d', mktime(0, 0, 0, $cache_hidden_month, $cache_hidden_day, $cache_hidden_year)), $cache_country, $sel_size, $cache_difficulty, $cache_terrain, $status, $search_time, $way_length, $log_pw, $wp_gc, $wp_nc, $cache_id);
 
 							// do not use slave server for the next time ...
@@ -475,8 +476,6 @@ function getWaypoints($cacheid)
 							// if old status is not yet published and new status is published => notify-event
 							if ($status_old == 5 && $status != 5)
 							{
-								touchCache($cache_id);
-								// send new cache event
 								event_notify_new_cache($cache_id);
 							}
 

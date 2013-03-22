@@ -13,7 +13,7 @@
 
   if (isset($_REQUEST['post']))
 	{
-		sql("UPDATE `caches` SET `status`=3, `last_modified`=NOW() WHERE `wp_oc`='&1'", $wp);
+		sql("UPDATE `caches` SET `status`=3 WHERE `wp_oc`='&1'", $wp);
 	}
 ?>
 <html>

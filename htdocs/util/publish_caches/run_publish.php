@@ -48,10 +48,10 @@
 		$cacheid = $rPublish['cache_id'];
 
 		// update cache status to active
+		// will touch the last_modified date of all depending records
 		sql("UPDATE `caches` SET `status`=1, `date_activate`=NULL WHERE `cache_id`='&1'", $cacheid);
 
 		// send events
-		touchCache($cacheid);
 		event_new_cache($userid);
 		event_notify_new_cache($cacheid);
 	}

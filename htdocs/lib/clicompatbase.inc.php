@@ -81,16 +81,6 @@
 			sql("UPDATE `caches` SET `last_found`='&1' WHERE `cache_id`=&2", $r['date'], $cacheid);
 	}
 
-	// update last_modified=NOW() for every object depending on that cacheid
-	function touchCache($cacheid)
-	{
-		sql("UPDATE `caches` SET `last_modified`=NOW() WHERE `cache_id`='&1'", $cacheid);
-		sql("UPDATE `caches`, `cache_logs` SET `cache_logs`.`last_modified`=NOW() WHERE `caches`.`cache_id`=`cache_logs`.`cache_id` AND `caches`.`cache_id`='&1'", $cacheid);
-		sql("UPDATE `caches`, `cache_desc` SET `cache_desc`.`last_modified`=NOW() WHERE `caches`.`cache_id`=`cache_desc`.`cache_id` AND `caches`.`cache_id`='&1'", $cacheid);
-		sql("UPDATE `caches`, `pictures` SET `pictures`.`last_modified`=NOW() WHERE `caches`.`cache_id`=`pictures`.`object_id` AND `pictures`.`object_type`=2 AND `caches`.`cache_id`='&1'", $cacheid);
-		sql("UPDATE `caches`, `cache_logs`, `pictures` SET `pictures`.`last_modified`=NOW() WHERE `caches`.`cache_id`=`cache_logs`.`cache_id` AND `cache_logs`.`id`=`pictures`.`object_id` AND `pictures`.`object_type`=1 AND `caches`.`cache_id`='&1'", $cacheid);
-	}
-
 	// read a file and return it as a string
 	// WARNING: no huge files!
 	function read_file($file='')

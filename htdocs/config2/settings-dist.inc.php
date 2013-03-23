@@ -361,7 +361,7 @@
 
 	/* license-related functions
 	 */
-	$opt['logic']['license']['newusers'] = NEW_DATA_LICENSE_ACTIVELY_ACCEPTED; 
+	$opt['logic']['license']['newusers'] = 2;  // see license constants in lib2/logic/const.inc.php
 	$opt['logic']['license']['admin'] = true;
 	$opt['logic']['license']['disclaimer'] = false;
 	$opt['logic']['license']['terms'] = 'http://www.opencaching.de/articles.php?page=impressum#datalicense';

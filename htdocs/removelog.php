@@ -123,8 +123,6 @@
 					{
 						// remove log pictures
 						// see also picture.class.php: delete()
-						require('lib2/const.inc.php');
-						require('config2/settings.inc.php');
 
 						$rs = sql("SELECT `id`, `url` FROM `pictures`
 						           WHERE `object_type`=1 AND `object_id`='&1'",
@@ -141,10 +139,10 @@
 							$archived = (sqlValue("SELECT `id` FROM `pictures_modified` WHERE `id`=" . $r['id'], 0) > 0);
 							$fna = mb_split('\\/', $r['url']);
 							$filename = end($fna);
-							if (mb_substr($opt['logic']['pictures']['dir'], -1, 1) != '/')
-								$path = $opt['logic']['pictures']['dir'] . "/";
+							if (mb_substr($picdir, -1, 1) != '/')
+								$path = $picdir . "/";
 							else
-								$path = $opt['logic']['pictures']['dir'];
+								$path = $picdir;
 
 							if ($archived)
 								@rename($path . $filename, $path . "deleted/" . $filename);

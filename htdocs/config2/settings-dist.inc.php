@@ -248,13 +248,6 @@
 	 */
 	$opt['logic']['node']['id'] = 4;
 
-	/* data license for new registered users:
-	     0 = not specified
-	     1 = old Opencaching.de license
-	     2 = CC BY-NC-ND 3.0
-	 */
-	$opt['logic']['license'] = 2;
-
 	/* location of uploaded images
 	 */
 	$opt['logic']['pictures']['dir'] = $opt['rootpath'] . 'images/uploads';
@@ -368,9 +361,11 @@
 
 	/* license-related functions
 	 */
-	$opt['logic']['license'] = array();   // PHP warning without this - why only here??
+	$opt['logic']['license']['newusers'] = NEW_DATA_LICENSE_ACTIVELY_ACCEPTED; 
 	$opt['logic']['license']['admin'] = true;
-	$opt['logic']['license']['disclaimer'] = false;   // also in lib/settings.inc.php
+	$opt['logic']['license']['disclaimer'] = false;
+	$opt['logic']['license']['terms'] = 'http://www.opencaching.de/articles.php?page=impressum#datalicense';
+	   // 'disclaimer' and 'terms' also in lib/settings.inc.php
 
   /* Database charset
 	 *   frontend and php charsets are UTF-8

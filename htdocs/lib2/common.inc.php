@@ -37,8 +37,9 @@ function __autoload($class_name)
 	fix_magic_quotes_gpc();
 
 	// set options
-	require($opt['rootpath'] . 'config2/settings-dist.inc.php');
-	require($opt['rootpath'] . 'config2/settings.inc.php');
+	require_once($opt['rootpath'] . 'lib2/logic/const.inc.php');
+	require_once($opt['rootpath'] . 'config2/settings-dist.inc.php');
+	require_once($opt['rootpath'] . 'config2/settings.inc.php');
 
 	set_domain();
 
@@ -81,7 +82,6 @@ function __autoload($class_name)
 	$tpl = new OcSmarty();
 
 	// include all we need
-	require_once($opt['rootpath'] . 'lib2/logic/const.inc.php');
 	require_once($opt['rootpath'] . 'lib2/logic/geomath.class.php');
 	require_once($opt['rootpath'] . 'lib2/error.inc.php');
 	require_once($opt['rootpath'] . 'lib2/util.inc.php');

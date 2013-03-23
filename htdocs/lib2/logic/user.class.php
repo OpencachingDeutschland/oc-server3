@@ -75,7 +75,7 @@ class user
 		$this->reUser->addBoolean('no_htmledit_flag', false, false);
 		$this->reUser->addInt('notify_radius', 0, false);
 		$this->reUser->addInt('admin', 0, false);
-		$this->reUser->addInt('data_license', $opt['logic']['license'], false);
+		$this->reUser->addInt('data_license', $opt['logic']['license']['newusers'], false);
 		$this->reUser->addInt('node', 0, false);
 
 		$this->reUserStat = new rowEditor('stat_user');

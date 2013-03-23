@@ -15,7 +15,7 @@
 			<table class="null" border="0">
 				<tr>
 					<td width="30">
-						<img src="images/logo_new_small.gif" width="66" height="66" border="0" alt="" align="left" />
+						<img src="images/newlogo.png" height="66" border="0" alt="" align="left" />
 					</td>
 					<td align="center">
 						<font size="4">{t}Waypoint{/t}: {$cache.wpoc}</font>

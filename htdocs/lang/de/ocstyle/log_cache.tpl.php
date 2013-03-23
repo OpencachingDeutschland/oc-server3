@@ -122,7 +122,7 @@ function _chkFound () {
 	</tr>
 	<tr>
 		<td>
-			<textarea name="logtext" id="logtext" cols="68" rows="25" >{logtext}</textarea>
+			<textarea name="logtext" id="logtext" cols="68" rows="25" class="logs">{logtext}</textarea>
     </td>
 	</tr>
 	<tr>

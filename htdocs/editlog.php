@@ -92,9 +92,11 @@
 					$cache_user_id = $log_record['cache_user_id'];
 					$log_type = isset($_POST['logtype']) ? $_POST['logtype'] : $log_record['logtype'];
 
-					$log_date_day = isset($_POST['logday']) ? $_POST['logday'] : date('d', strtotime($log_record['date']));
-					$log_date_month = isset($_POST['logmonth']) ? $_POST['logmonth'] : date('m', strtotime($log_record['date']));
-					$log_date_year = isset($_POST['logyear']) ? $_POST['logyear'] : date('Y', strtotime($log_record['date']));
+					$log_date_day = isset($_POST['logday']) ? trim($_POST['logday']) : date('d', strtotime($log_record['date']));
+					$log_date_month = isset($_POST['logmonth']) ? trim($_POST['logmonth']) : date('m', strtotime($log_record['date']));
+					$log_date_year = isset($_POST['logyear']) ? trim($_POST['logyear']) : date('Y', strtotime($log_record['date']));
+					$log_time_hour = isset($_POST['loghour']) ? trim($_POST['loghour']) : (substr($log_record['date'],11) == "00:00:00" ? "" : date('H', strtotime($log_record['date'])));
+					$log_time_minute = isset($_POST['logminute']) ? trim($_POST['logminute']) : (substr($log_record['date'],11) == "00:00:00" ? "" : date('i', strtotime($log_record['date'])));
 					$top_option = isset($_POST['ratingoption']) ? $_POST['ratingoption']+0 : 0;
 					$top_cache = isset($_POST['rating']) ? $_POST['rating']+0 : 0;
 
@@ -183,15 +185,19 @@
 
 					//validate date
 					$date_ok = false;
-					if (is_numeric($log_date_day) && is_numeric($log_date_month) && is_numeric($log_date_year))
+					if (is_numeric($log_date_month) && is_numeric($log_date_day) && is_numeric($log_date_year) &&
+					    ("$log_time_hour$log_time_minute"=="" || is_numeric($log_time_hour)) &&
+							($log_time_minute=="" || is_numeric($log_time_minute)))
 					{
-						if (checkdate($log_date_month, $log_date_day, $log_date_year) &&
-								$log_date_year >= 2000)
-								  $date_ok = true;
+						$date_ok = checkdate($log_date_month, $log_date_day, $log_date_year)
+												&& ($log_date_year >= 2000) 
+												&& ($log_time_hour>=0) && ($log_time_hour<=23)
+												&& ($log_time_minute>=0) && ($log_time_minute<=59);
 						if ($date_ok)
 							if (isset($_POST['submitform']))
-								if (mktime(0, 0, 0, $log_date_month, $log_date_day, $log_date_year) >= mktime())
-									$date_ok = false;
+								if (mktime($log_time_hour+0, $log_time_minute+0, 0,
+								           $log_date_month, $log_date_day, $log_date_year) >= mktime())
+								  $date_ok = false;
 					}
 
 					$logtype_ok = sqlValue("SELECT COUNT(*) FROM cache_logtype WHERE cache_type_id='" . sql_escape($cache_type) . "' AND log_type_id='" . sql_escape($log_type) . "'", 0) > 0; 
@@ -212,7 +218,15 @@
 					//store?
 					if (isset($_POST['submitform']) && $date_ok && $logtype_ok && $pw_ok)
 					{
-						$log_date = date('Y-m-d', mktime(0, 0, 0, $log_date_month, $log_date_day, $log_date_year));
+						// 00:00:01 = "00:00 was logged"
+						// 00:00:00 = "no time was logged"
+						if ("$log_time_hour$log_time_minute" != "" &&
+						    $log_time_hour == 0 && $log_time_minute == 0)
+							$log_time_second = 1;
+						else
+							$log_time_second = 0;
+
+						$log_date = date('Y-m-d H:i:s', mktime($log_time_hour+0, $log_time_minute+0,  $log_time_second, $log_date_month, $log_date_day, $log_date_year));
 
 						//store changed data
 						sql("UPDATE `cache_logs` SET `type`='&1',
@@ -278,6 +292,8 @@
 					tpl_set_var('logday', htmlspecialchars($log_date_day, ENT_COMPAT, 'UTF-8'));
 					tpl_set_var('logmonth', htmlspecialchars($log_date_month, ENT_COMPAT, 'UTF-8'));
 					tpl_set_var('logyear', htmlspecialchars($log_date_year, ENT_COMPAT, 'UTF-8'));
+					tpl_set_var('loghour', htmlspecialchars($log_time_hour, ENT_COMPAT, 'UTF-8'));
+					tpl_set_var('logminute', htmlspecialchars($log_time_minute, ENT_COMPAT, 'UTF-8'));
 					tpl_set_var('cachename', htmlspecialchars($cache_name, ENT_COMPAT, 'UTF-8'));
 					tpl_set_var('cacheid', $log_record['cache_id']);
 					tpl_set_var('reset', $reset);

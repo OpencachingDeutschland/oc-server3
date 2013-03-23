@@ -5,12 +5,12 @@
 ***************************************************************************}
 <div class="content-txtbox-noshade">  {* Ocprop: <div class="content-txtbox-noshade">(.*?)<\/div> *}
 	<div class="logs" id="log{$logItem.id}">
-	<p class="content-title-noshade-size1" style="display:inline;">
+	<p class="content-title-noshade-size1" style="display:inline; margin-right:0">
 		{include file="res_logtype.tpl" type=$logItem.type} 
-		{if $logItem.recommended==1}
+		{if $logItem.recommended==1}  {* Ocprop: rating-star\.gif *}
 			<img src="images/rating-star.gif" border="0" alt="{t}Recommended{/t}" width="17px" height="16px" />
 		{/if}
-		{$logItem.date|date_format:$opt.format.datelong}
+		{$logItem.date|date_format:$opt.format.datelong}{if $logItem.time!="00:00:00"}, {$logItem.time|substr:0:5}{/if}
 
 		{capture name=username}
 			<a href="viewprofile.php?userid={$logItem.userid}">{$logItem.username|escape}</a>
@@ -31,8 +31,9 @@
 		{/if}
 	</p>
 
+	{* Ocprop: /\?logid=([0-9a-f\-]+)" *}
 	{if $cache.userid==$login.userid || $logItem.userid==$login.userid}
-		<p style="font-weight: 400;display:inline;"><img src="images/trans.gif" border="0" width="16" height="16" alt="" title="" />
+		<p class="editlog"><img src="images/trans.gif" border="0" width="16" height="16" alt="" title="" />
 			{if $logItem.userid==$login.userid && ($cache.userid==$login.userid || $cache.status!=6)}
 				<a href="editlog.php?logid={$logItem.id|urlencode}"><img src="resource2/{$opt.template.style}/images/action/16x16-properties.png" border="0" align="middle" border="0" width="16" height="16" alt="" /></a>
 				[<a href="editlog.php?logid={$logItem.id|urlencode}">{t}Edit{/t}</a>]

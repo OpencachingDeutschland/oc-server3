@@ -60,4 +60,4 @@ date         commit ID    change
 2013-03-24   9644465b     added table 'pw_dict'
 2013-03-25   21d92feb     added field cache_reports.date_created + trigger
 2013-03-27   467aae47     added fields cache_attrib.gc_id, .gc_inc and .gc_name
-2013-03-28                made cache_attrib.gc_id unsigned
+2013-04-06                changed cach_logs.date and cach_logs_archived.date type to datetime 

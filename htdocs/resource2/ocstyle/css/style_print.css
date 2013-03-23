@@ -674,3 +674,5 @@ div.gsc-resultsRoot, div.gsc-branding-text, img.gsc-branding-img {
 .garmintext {
 	font-size: 1.1em;
 }
+
+p.editlog { display:none; }

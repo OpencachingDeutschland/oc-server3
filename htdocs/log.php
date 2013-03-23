@@ -96,9 +96,11 @@
 				$all_ok = false;
 				$log_text  = isset($_POST['logtext']) ? ($_POST['logtext']) : '';
 				$log_type = isset($_POST['logtype']) ? ($_POST['logtype']+0) : 1;
-				$log_date_day = isset($_POST['logday']) ? ($_POST['logday']+0) : date('d');
-				$log_date_month = isset($_POST['logmonth']) ? ($_POST['logmonth']+0) : date('m');
-				$log_date_year = isset($_POST['logyear']) ? ($_POST['logyear']+0) : date('Y');
+				$log_date_day = isset($_POST['logday']) ? trim($_POST['logday']) : date('d');
+				$log_date_month = isset($_POST['logmonth']) ? trim($_POST['logmonth']) : date('m');
+				$log_date_year = isset($_POST['logyear']) ? trim($_POST['logyear']) : date('Y');
+				$log_time_hour = isset($_POST['loghour']) ? trim($_POST['loghour']) : "";
+				$log_time_minute = isset($_POST['logminute']) ? trim($_POST['logminute']) : "";
 				$top_option = isset($_POST['ratingoption']) ? $_POST['ratingoption']+0 : 0;
 				$top_cache = isset($_POST['rating']) ? $_POST['rating']+0 : 0;
 
@@ -156,14 +158,19 @@
 					$log_text = nl2br(htmlspecialchars($log_text, ENT_COMPAT, 'UTF-8'));
 				}
 
-				//validate data
-				if (is_numeric($log_date_month) && is_numeric($log_date_day) && is_numeric($log_date_year))
+				// validate data
+				if (is_numeric($log_date_month) && is_numeric($log_date_day) && is_numeric($log_date_year) &&
+				    ("$log_time_hour$log_time_minute"=="" || is_numeric($log_time_hour)) &&
+						($log_time_minute=="" || is_numeric($log_time_minute)))
 				{
 					$date_ok = checkdate($log_date_month, $log_date_day, $log_date_year)
-											&& ($log_date_year >= 2000); 
+											&& ($log_date_year >= 2000) 
+											&& ($log_time_hour>=0) && ($log_time_hour<=23)
+											&& ($log_time_minute>=0) && ($log_time_minute<=59);
 					if ($date_ok)
 						if (isset($_POST['submitform']))
-							if (mktime(0, 0, 0, $log_date_month, $log_date_day, $log_date_year) >= mktime())
+							if (mktime($log_time_hour+0, $log_time_minute+0, 0,
+							           $log_date_month, $log_date_day, $log_date_year) >= mktime())
 							  $date_ok = false;
 				}
 				else
@@ -191,7 +198,15 @@
 
 				if (isset($_POST['submitform']) && ($all_ok == true))
 				{
-					$log_date = date('Y-m-d', mktime(0, 0, 0, $log_date_month, $log_date_day, $log_date_year));
+					// 00:00:01 = "00:00 was logged"
+					// 00:00:00 = "no time was logged"
+					if ("$log_time_hour$log_time_minute" != "" &&
+					    $log_time_hour == 0 && $log_time_minute == 0)
+						$log_time_second = 1;
+					else
+						$log_time_second = 0;
+
+					$log_date = date('Y-m-d H:i:s', mktime($log_time_hour+0, $log_time_minute+0, $log_time_second, $log_date_month, $log_date_day, $log_date_year));
 
 					// add logentry to db if not already exists (e.g. by multiple sending the form
 					// or by ocprop errors)
@@ -270,6 +285,8 @@
 					tpl_set_var('logday', htmlspecialchars($log_date_day, ENT_COMPAT, 'UTF-8'));
 					tpl_set_var('logmonth', htmlspecialchars($log_date_month, ENT_COMPAT, 'UTF-8'));
 					tpl_set_var('logyear', htmlspecialchars($log_date_year, ENT_COMPAT, 'UTF-8'));
+					tpl_set_var('loghour', htmlspecialchars($log_time_hour, ENT_COMPAT, 'UTF-8'));
+					tpl_set_var('logminute', htmlspecialchars($log_time_minute, ENT_COMPAT, 'UTF-8'));
 					tpl_set_var('logtypeoptions', $logtypeoptions);
 					tpl_set_var('reset', $reset);
 					tpl_set_var('submit', $submit);

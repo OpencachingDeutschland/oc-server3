@@ -73,18 +73,6 @@
 																 $module, $eventid, $userid, $objectid1, $objectid2, $logtext, serialize($details));
 	}
 
-	function setLastFound($cacheid)
-	{
-		$rs = sql("SELECT MAX(`date`) `date` FROM `cache_logs` WHERE `cache_id`=&1 AND `type`=1", $cacheid);
-		$r = sql_fetch_array($rs);
-		mysql_free_result($rs);
-
-		if ($r['date'] == null)
-			sql("UPDATE `caches` SET `last_found`=null WHERE `cache_id`=&1", $cacheid);
-		else
-			sql("UPDATE `caches` SET `last_found`='&1' WHERE `cache_id`=&2", $r['date'], $cacheid);
-	}
-
 	// read a file and return it as a string
 	// WARNING: no huge files!
 	function read_file($file='')

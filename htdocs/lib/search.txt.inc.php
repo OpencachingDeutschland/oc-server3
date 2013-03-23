@@ -254,7 +254,11 @@ Logeinträge:
 			$thislog = $txtLogs;
 			
 			$thislog = mb_ereg_replace('{id}', $rLog['id'], $thislog);
-			$thislog = mb_ereg_replace('{date}', date('d.m.Y', strtotime($rLog['date'])), $thislog);
+			if (substr($rLog['date'],11) == "00:00:00")
+				$dateformat = "d.m.Y";
+			else
+				$dateformat = "d.m.Y H:i";
+			$thislog = mb_ereg_replace('{date}', date($dateformat, strtotime($rLog['date'])), $thislog);
 			$thislog = mb_ereg_replace('{username}', $rLog['username'], $thislog);
 			
 			$logtype = $rLog['type'];

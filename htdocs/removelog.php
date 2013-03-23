@@ -219,6 +219,7 @@
 
 					tpl_set_var('logimage', icon_log_type($log_record['icon_small'], ""));
 					tpl_set_var('date', htmlspecialchars(strftime($dateformat, strtotime($log_record['log_date'])), ENT_COMPAT, 'UTF-8'));
+					tpl_set_var('time', substr($log_record['log_date'],11)=="00:00:00" ? "" : ", " . substr($log_record['log_date'],11,5)); 
 					tpl_set_var('userid', htmlspecialchars($log_record['log_user_id'] + 0, ENT_COMPAT, 'UTF-8'));
 					tpl_set_var('username', htmlspecialchars($log_record['log_username'], ENT_COMPAT, 'UTF-8'));
 					tpl_set_var('typetext', htmlspecialchars($sLogTypeText, ENT_COMPAT, 'UTF-8'));

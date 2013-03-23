@@ -2430,6 +2430,8 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1966', 'as of',
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1967', 'all log entries \&copy; their authors', '2013-02-23 19:00:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1968', 'more', '2013-02-23 19:00:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1969', 'Only the <span class=\"public-setting\">green entries</span> are visible to other users.', '2013-02-23 19:00:04');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1970', 'Date / time:', '2013-02-23 19:00:04');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1971', 'date or time is invalid', '2013-02-23 19:00:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1973', 'Generally, spoiler pictures should not be logged. In the case that en exception from this rule makes sense, e.g. to document your finding or problems with the stash, please mark the picture als spoiler so that it won\'t appear in galleries.', '2013-02-23 19:00:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1974', 'If you do not see any E-Mail, please check the spam folder of your mailbox.', '2013-02-23 19:00:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1975', 'Do not use easy-to-guess number and letter sequences like \'123456\' or \'qwerty\'', '2013-02-23 19:00:04');
@@ -6141,6 +6143,8 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1967', 'DE', 'alle Logeinträge \&copy; jeweiliger Autor', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1968', 'DE', 'mehr', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1969', 'DE', 'Nur die <span class=\"public-setting\">grünen Einträge</span> sind für andere Benutzer sichtbar.', '2013-02-19 05:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1970', 'DE', 'Datum / Uhrzeit:', '2013-02-19 05:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1971', 'DE', 'Datum oder Uhrzeit ist ungültig', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1973', 'DE', 'Es sollten möglichst keine Spoilerbilder geloggt werden. In Ausnahmefällen, wo es sinnvoll erscheint \&ndash; z.B. um den Fund nachzuweisen oder Probleme mit dem Versteck zu dokumentieren \&ndash; kennzeichne sie bitte als Spoiler, damit sie nicht in Bildgalerien erscheinen.', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1974', 'DE', 'Falls du keine E-Mail sehen solltest, prüfe bitte ob sie im Spam-Ordner deines Postfachs einsortiert wurde.', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1975', 'DE', 'Verwende keine einfach erratbaren Ziffern- oder Buchstabenkombinationen wie \&bdquo;123456\&ldquo; oder \&bdquo;qwertz\&ldquo;.', '2013-02-19 05:48:07');

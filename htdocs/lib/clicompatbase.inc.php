@@ -55,6 +55,7 @@
 	date_default_timezone_set($timezone);
 
 	$dblink_slave = false;
+	$db_error = 0;
 
 	// sql debugger?
 	if (!isset($sql_allow_debug)) $sql_allow_debug = 0;
@@ -437,8 +438,12 @@
 		global $absolute_server_URI;
 		global $interface_output;
 		global $dberrormsg;
+		global $db_error;
 
+		$db_error += 1;
 		$msql_error = mysql_errno() . ": " . mysql_error();
+		if ($db_error > 1)
+			$msql_error .= "\n(** error recursion **)";
 
 		if ($sql_errormail != '')
 		{
@@ -452,7 +457,19 @@
 		if ($interface_output == 'html')
 		{
 			// display errorpage
-			tpl_errorMsg('sql_error', $dberrormsg . ($debug_page ? "<br />" . $msql_error : ""));
+			$dberrmsg = $dberrormsg . ($debug_page ? "<br />" . $msql_error : "");
+			if ($db_error <= 1)
+			{
+				tpl_errorMsg('sql_error', $dberrmsg);
+			}
+			else
+			{
+				// datbase error recursion, because another error occured while trying to
+				// build the error template (e.g. because connection was lost, or an error mail
+				// could not load translations from database)
+
+				require("html/dberror.php");
+			}
 			exit;
 		}
 		else if ($interface_output == 'plain')

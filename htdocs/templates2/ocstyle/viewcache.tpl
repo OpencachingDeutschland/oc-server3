@@ -200,7 +200,7 @@
 			<a style="background-image: url(resource2/{$opt.template.style}/images/viewcache/print-18.png);background-repeat:no-repeat;" onclick="window.location='viewcache.php?cacheid={$cache.cacheid}&print=y&log=5&nocrypt=' + bNoCrypt"><input name="Print5" id="Print5" value="{t}Print last logs{/t}" type="button" /></a>
 		</p>
 		<p>
-			<a class="send-to-gps" href="#" onclick="window.open('garmin.php?lat={$cache.latitude}&lon={$cache.longitude}&wp={$cache.wpoc}','{t escape=js}Send{/t}','width=640,height=315,resizable=no,scrollbars=1')"><input name="SendToGPS" value="{t}Send to GPS device{/t}" id="SendToGPS" type="button" /></a>
+			<a class="send-to-gps" href="#" onclick="window.open('garmin.php?lat={$cache.latitude}&lon={$cache.longitude}&wp={$cache.wpoc}','{t escape=js}Send{/t}','width=640,height=320,resizable=no,scrollbars=1')"><input name="SendToGPS" value="{t}Send to GPS device{/t}" id="SendToGPS" type="button" /></a>
 
 			&nbsp;&nbsp;<img src="resource2/{$opt.template.style}/images/viewcache/16x16-save.png" class="icon16" alt="" />
 

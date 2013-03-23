@@ -881,15 +881,23 @@
 		global $tpl, $opt, $db;
 		global $bSmartyNoTranslate;
 
-		if ($db['error'] == true)
-			die("sql_error() recursion, aborting!\nCheck if database connect does work.\nMost often, an error mail tried to load translations from database.\nMySQL Error no " . mysql_errno() . "\n");
-
-		$db['error'] = true;
-
 		$errno = mysql_errno();
 		$error = mysql_error();
 		if ($sqlstatement != "")
 			$error .= "\n\nSQL statement: " . $sqlstatement;
+
+		if ($db['error'] == true)
+		{
+			// datbase error recursion, because another error occured while trying to
+			// build the error template (e.g. because connection was lost, or an error mail
+			// could not load translations from database)
+
+			$dberrmsg = 'MySQL error (' . $errno . '): ' . $error;
+			require("html/dberror.php");
+			exit;
+		}
+
+		$db['error'] = true;
 
 		if ($db['connected'] == false)
 			$bSmartyNoTranslate = true;
@@ -932,7 +940,7 @@
 		{
 			// CLI script, simple text output
 			if ($opt['db']['error']['display'] == true)
-				die('MySQL error' . ' (' . $errno . '): ' . $error . "\n");
+				die('MySQL error (' . $errno . '): ' . $error . "\n");
 			else
 				die("A database command could not be performed.\n");
 		}

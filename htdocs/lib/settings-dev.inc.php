@@ -58,7 +58,7 @@
 	$absolute_server_URI = $dev_baseurl . '/';
 	
 	// EMail address of the sender
-	if (!isset($emailaddr)) $emailaddr = 'noreply@opencaching.de';
+	if (!isset($emailaddr)) $emailaddr = 'contact@opencaching.de';
 	
 	// location of cache images
 	if (!isset($picdir)) $picdir = $rootpath . 'images/uploads';

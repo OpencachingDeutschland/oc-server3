@@ -3,7 +3,7 @@
 		<td style="text-align:center; padding:0" align="center" valign="middle">
 			<div style="max-width:{$itemwidth}px; overflow:hidden">
 				<a id="pl{$picture.pic_uuid}" href="{$picture.pic_url}">
-					<img src="thumbs.php?uuid={$picture.pic_uuid}" class="img-shadow-loggallery" onclick="enlarge(this);" longdesc="{$picture.pic_url}" onload="document.getElementById('pl{$picture.pic_uuid}').removeAttribute('href'); this.alt='{$picture.title}'"/>
+					<img src="thumbs.php?uuid={$picture.pic_uuid}" class="img-shadow-loggallery" onclick="enlarge(this);" longdesc="{$picture.pic_url}" onload="document.getElementById('pl{$picture.pic_uuid}').removeAttribute('href'); this.alt='{$picture.title|escape}'" title="{$picture.title|escape}"/>
 				</a>
 				{if $logdate || $loguser}
 					<div style="line-height:1.2em; max-height:2.4em; margin-top:5px">

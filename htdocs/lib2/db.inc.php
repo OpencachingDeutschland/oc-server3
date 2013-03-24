@@ -326,7 +326,10 @@
 				$cSqlExecution->stop();
 
 				if ($cSqlExecution->diff() > $opt['db']['warn']['time'])
-					sql_warn('execution took ' . $cSqlExecution->diff() . ' seconds');
+				{
+					$ua = isset($_SERVER['HTTP_USER_AGENT']) ? "\r\n" . $_SERVER['HTTP_USER_AGENT'] : "";
+					sql_warn("execution took " . $cSqlExecution->diff() . " seconds" . $ua);
+				}
 			}
 		}
 

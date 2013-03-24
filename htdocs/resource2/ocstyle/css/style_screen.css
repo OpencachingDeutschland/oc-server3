@@ -1420,3 +1420,4 @@ div#havefound {
 .quoteheader, .topslice_quote, .bbc_standard_quote  { display:none; }
 #forum div.rsstext {margin: 0px 30px 0.5em 0px; padding: 0px; line-height: 1.3em; font-family: arial, sans serif; font-size: 12px; }
 .quoteheader, .topslice_quote, .bbc_standard_quote  { display:none; }
+#forum div.rsstext img {max-width:200px; max-height:120px;}

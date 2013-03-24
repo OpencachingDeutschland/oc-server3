@@ -415,8 +415,8 @@
 
 			$cSqlExecution->stop();
 
-			if ($cSqlExecution->diff() > $sql_warntime)
-				sql_warn('execution took ' . $cSqlExecution->diff() . ' seconds');
+			if ($sql_warntime>0 && $cSqlExecution->diff() > $sql_warntime)
+				sql_warn("execution took " . $cSqlExecution->diff() . " seconds:\r\n" . $filtered_sql);
 		}
 
 		return $result;
@@ -495,7 +495,7 @@
 		$email_content .= "\n--------------------\n";
 		$email_content .= print_r(debug_backtrace(), true);
 
-		//mb_send_mail($sql_errormail, 'sql_warn: ' . $absolute_server_URI, $email_content, $emailheaders);
+		@mb_send_mail($sql_errormail, 'sql_warn: ' . $absolute_server_URI, $email_content, $emailheaders);
 	}
 
 	/*

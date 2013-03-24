@@ -326,7 +326,7 @@
 				$cSqlExecution->stop();
 
 				if ($cSqlExecution->diff() > $opt['db']['warn']['time'])
-					sql_warn('execution took ' . $cSqlExecution->diff() . ' seconds');
+					sql_warn("execution took " . $cSqlExecution->diff() . " seconds:\r\n" . $filtered_sql);
 			}
 		}
 

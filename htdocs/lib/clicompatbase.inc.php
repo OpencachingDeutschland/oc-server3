@@ -416,7 +416,10 @@
 			$cSqlExecution->stop();
 
 			if ($sql_warntime>0 && $cSqlExecution->diff() > $sql_warntime)
-				sql_warn("execution took " . $cSqlExecution->diff() . " seconds:\r\n" . $filtered_sql);
+			{
+				$ua = isset($_SERVER['HTTP_USER_AGENT']) ? "\r\n" . $_SERVER['HTTP_USER_AGENT'] : "";
+				sql_warn("execution took " . $cSqlExecution->diff() . " seconds" . $ua);
+			}
 		}
 
 		return $result;

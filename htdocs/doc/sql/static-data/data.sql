@@ -2430,6 +2430,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1966', 'as of',
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1967', 'all log entries \&copy; their authors', '2013-02-23 19:00:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1968', 'more', '2013-02-23 19:00:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1969', 'Only the <span class=\"public-setting\">green entries</span> are visible to other users.', '2013-02-23 19:00:04');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1973', 'Generally, spoiler pictures should not be logged. In the case that en exception from this rule makes sense, e.g. to document your finding or problems with the stash, please mark the picture als spoiler so that it won\'t appear in galleries.', '2013-02-23 19:00:04');
 
 -- Table sys_trans_ref
 SET NAMES 'utf8';
@@ -6137,6 +6138,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1967', 'DE', 'alle Logeinträge \&copy; jeweiliger Autor', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1968', 'DE', 'mehr', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1969', 'DE', 'Nur die <span class=\"public-setting\">grüne Einträge</span> sind für andere Benutzer sichtbar.', '2013-02-19 05:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1973', 'DE', 'Es sollten möglichst keine Spoilerbilder geloggt werden. In Ausnahmefällen, wo es sinnvoll erscheint &ndash; z.B. um den Fund nachzuweisen oder Probleme mit dem Versteck zu dokumentieren &ndash; kennzeichne sie bitte als Spoiler, damit sie nicht in Bildgalerien erscheinen.', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'EN', 'Reorder IDs \r', '2010-09-02 00:15:30');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'EN', 'The database could not be reconnected.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'EN', 'Testing – please do not login', '2010-08-28 11:48:07');
@@ -7631,6 +7633,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1967', 'EN', 'all log entries \&copy; their authors', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1968', 'EN', 'more', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1969', 'EN', 'Only the <span class=\"public-setting\">green entries</span> are visible to other users.', '2013-02-19 05:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1973', 'EN', 'Generally, spoiler pictures should not be logged. In the case that en exception from this rule makes sense, e.g. to document your finding or problems with the stash, please mark the picture als spoiler so that it won\'t appear in galleries.', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'ES', 'Reordenar ID', '2010-12-09 00:17:55');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'ES', 'La base de datos no se pudo conectar.', '2010-12-09 00:17:55');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'ES', 'En pruebas - por favor, no entre.', '2010-12-09 00:17:55');

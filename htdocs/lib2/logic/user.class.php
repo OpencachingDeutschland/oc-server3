@@ -157,7 +157,7 @@ class user
 		if (!mb_ereg_match(REGEX_PASSWORD, $value))
 			return false;
 
-		if (cracklib_checkPW($value, array('open', 'caching', $this->getUsername(), $this->getFirstName(), $this->getLastName())) == false)
+		if (cracklib_checkPW($value, array('open', 'caching', 'cache', $this->getUsername(), $this->getFirstName(), $this->getLastName())) == false)
 			return false;
 
 		$pwmd5 = md5($value);

@@ -70,13 +70,17 @@ function cracklib_checkpw($pw, $addwords)
 
 	// $pw may not contain one of $addwords[]
 	foreach ($wordlist AS $v)
-		if (mb_strpos($pw_lc, $v) !== false)
+		if (mb_stripos($pw_lc, $v) !== false)
 			return false;
 
 	// one of $addwords[] may not contain $pw
 	foreach ($wordlist AS $v)
-		if (mb_strpos($v, $pw_lc) !== false)
+		if (mb_stripos($v, $pw_lc) !== false)
 			return false;
+
+	// words from pw library are not allowed
+	if (sql_value("SELECT COUNT(*) FROM `pw_dict` WHERE `pw`='&1'", 0, $pw))
+		return false;
 
 	if ($opt['logic']['cracklib'] == true)
 	{

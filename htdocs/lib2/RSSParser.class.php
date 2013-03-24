@@ -11,6 +11,7 @@ class RSSParser {
 	 * @return string $item feeditems as HTML-string
 	 */
 	public static function parse($items,$url) {
+		global $translate;
 		
     if ($items <= 0)
       return '';
@@ -28,7 +29,7 @@ class RSSParser {
 			$html .= '<div class="newsblock">';
 			
 			// get xml-data
-			$data = file_get_contents($url);
+			$data = @file_get_contents($url);
 			
 			// check data
 			if($data === false || strpos($data, 'rss version=') === false) {
@@ -75,7 +76,7 @@ class RSSParser {
 		if(!$error) {
 			return $html;
 		} else {
-			return '';
+			return '<p><em>' . $translate->t('currently not available','','',0) . '</em></p>';
 		}
 	}
 }

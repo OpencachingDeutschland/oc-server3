@@ -19,7 +19,7 @@
 		  For general questions, you will find lots of information at the German websites <a href="http://wiki.opencaching.de">wiki.opencaching.de</a> and <a href="http://www.geocaching.de">www.geocaching.de</a>.
 			<br />
 			<br />
-			If you encounter a special problem, you may ask your questions in one of the German or international discussion boards at <a href="http://forum.geocaching-network.com/">forum.geocaching-network.com</a>.<br />
+			If you encounter a special problem, you may ask your questions in one of the German or international discussion boards at <a href="http://forum.opencaching-network.org/">forum.opencaching-network.org</a>.<br />
 			&nbsp;
 		</td>
 	</tr>
@@ -32,7 +32,7 @@
 	<tr>
 		<td>
 		  There is a board for this purpose at  
-			<a href="http://forum.geocaching-network.com/index.php?board=33.0">forum.geocaching-network.com</a> (<em>Opencaching 3.0 &ndash; Ideen und Gedanken</em>). It also conatains (German) information on joining our team.
+			<a href="http://forum.opencaching-network.org/index.php?board=33.0">forum.opencaching-network.org</a> (<em>Opencaching 3.0 &ndash; Ideen und Gedanken</em>). It also conatains (German) information on joining our team.
 			<br />
 			&nbsp;
 		</td>

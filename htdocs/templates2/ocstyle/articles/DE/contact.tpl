@@ -20,7 +20,7 @@
 			<br />
 			<br />
 			Wenn du ein spezielles Problem hast und darauf keine Antwort findest, 
-			kannst du dir unter <a href="http://forum.geocaching-network.com/">forum.geocaching-network.com</a>
+			kannst du dir unter <a href="http://forum.opencaching-network.org/">forum.opencaching-network.org</a>
 			ein passendes Forum raussuchen und dich dort erkundigen.<br />
 			&nbsp;
 		</td>
@@ -34,7 +34,7 @@
 	<tr>
 		<td>
 			Hierfür gibt es ein eigenes Unterforum auf 
-			<a href="http://forum.geocaching-network.com/index.php?board=33.0">forum.geocaching-network.com</a>.
+			<a href="http://forum.opencaching-network.org/index.php?board=33.0">forum.opencaching-network.org</a>.
 			Dort findest du auch weitere Informationen, falls du in unserem Team mitmachen möchtest.
 			<br />
 			&nbsp;

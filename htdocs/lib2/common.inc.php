@@ -29,6 +29,7 @@ function __autoload($class_name)
 	}
 }
 
+
 	// yepp, we will use UTF-8
 	mb_internal_encoding('UTF-8');
 	mb_regex_encoding('UTF-8');
@@ -73,6 +74,8 @@ function __autoload($class_name)
 	else
 		$opt['template']['style'] = $opt['template']['default']['style'];
 	$opt['stylepath'] = $opt['rootpath'] . 'templates2/' . $opt['template']['style'] . '/';
+
+	check_useragent();
 
 	/* setup smarty
 	 *
@@ -226,6 +229,14 @@ function set_timezone()
 	global $opt;
 	
 	date_default_timezone_set($opt['php']['timezone']);
+}
+
+function check_useragent()
+{
+	global $_SERVER, $ocpropping;
+
+	// are we Ocprop?
+	$ocpropping = isset($_SERVER['HTTP_USER_AGENT']) && strpos($_SERVER['HTTP_USER_AGENT'],"Ocprop/");
 }
 
 function fix_magic_quotes_gpc()

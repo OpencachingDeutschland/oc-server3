@@ -33,6 +33,8 @@ function __autoload($class_name)
 	  require_once($file);
 }
 
+
+
 	if (isset($opt['rootpath']))
 		$rootpath = $opt['rootpath'];
 	else if (isset($rootpath))
@@ -246,6 +248,9 @@ function __autoload($class_name)
 			unset($sTmpString);
 		}
 	}
+
+	// are we Ocprop?
+	$ocpropping = isset($_SERVER['HTTP_USER_AGENT']) && strpos($_SERVER['HTTP_USER_AGENT'],"Ocprop/");
 
 	// zeitmessung
 	require_once($rootpath . 'lib/bench.inc.php');

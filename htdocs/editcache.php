@@ -447,6 +447,22 @@ function getWaypoints($cacheid)
 								$activation_date = 'NULL';
 							}
 
+							// check for Ocprop data to ignore
+							if ($ocpropping)
+							{
+								$rs = sql("SELECT `type`, `size` FROM `caches` WHERE `cache_id`='&1'", $cache_id);
+								if ($r = sql_fetch_assoc($rs))
+								{
+									if ($r['type'] == 8 && $cache_type == 7)
+										$cache_type = 8;
+									if ($r['type'] == 10 && $cache_type == 2)
+										$cache_type = 10;
+									if ($r['size'] == 8 && ($sel_size == 1 || $sel_size == 2))
+										$sel_size = 8;
+								}
+								sql_free_result($rs);
+							}
+
 							// save to DB
 							// status update will trigger touching the last_modified date of all depending records					
 							sql("UPDATE `caches` SET `name`='&1', `longitude`='&2', `latitude`='&3', `type`='&4', `date_hidden`='&5', `country`='&6', `size`='&7', `difficulty`='&8', `terrain`='&9', `status`='&10', `search_time`='&11', `way_length`='&12', `logpw`='&13', `wp_gc`='&14', `wp_nc`='&15', `date_activate` = $activation_date WHERE `cache_id`='&16'", $cache_name, $cache_lon, $cache_lat, $cache_type, date('Y-m-d', mktime(0, 0, 0, $cache_hidden_month, $cache_hidden_day, $cache_hidden_year)), $cache_country, $sel_size, $cache_difficulty, $cache_terrain, $status, $search_time, $way_length, $log_pw, $wp_gc, $wp_nc, $cache_id);

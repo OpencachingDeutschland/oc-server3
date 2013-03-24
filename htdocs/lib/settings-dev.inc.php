@@ -174,8 +174,4 @@
 	$opt['template']['locales']['DA']['show'] = false;
 	$opt['template']['locales']['PT']['show'] = false;
 	$opt['template']['locales']['JA']['show'] = false;
-
-	function post_config()
-	{
-	}
 ?>

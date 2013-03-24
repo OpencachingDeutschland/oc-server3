@@ -1463,7 +1463,8 @@ function showPermlinkBox_click()
 	{
 		var oCenterPos = moMap.getCenter();
 		var nZoomLevel = moMap.getZoom();
-		var msPermalink = msURLMapPHP + "?lat=" + Math.round(oCenterPos.lat()*1000000)/1000000 + "&lon=" + Math.round(oCenterPos.lng()*1000000)/1000000 + "&zoom=" + nZoomLevel + "&map=" + encodeURI(moMap.getMapTypeId()) + "&mode={/literal}{if $bFullscreen}full{else}normal{/if}screen"{literal};
+		var msPermalink = msURLMapPHP + "?lat=" + Math.round(oCenterPos.lat()*1000000)/1000000 + "&lon=" + Math.round(oCenterPos.lng()*1000000)/1000000 + "&zoom=" + nZoomLevel + /* "&map=" + encodeURI(moMap.getMapTypeId()) + */ "&mode={/literal}{if $bFullscreen}full{else}normal{/if}screen"{literal};
+		// "map" currently is not evaluated anywhere
 
 		var oPermalinkTextBox = document.getElementById('permalink_text');
 		if (oPermalinkTextBox)
@@ -1944,11 +1945,11 @@ function get_searchfilter_params(output, skipqueryid, zip)
 
 	/* hide options
 	 */
-	sPostBody += document.getElementById('f_userowner').checked ? '&f_userowner=1' : '';
-	sPostBody += document.getElementById('f_userfound').checked ? '&f_userfound=1' : '';
-	sPostBody += document.getElementById('f_ignored').checked ? '&f_ignored=1' : '';
+	sPostBody += document.getElementById('f_userowner').checked ? '&f_userowner=1' : '&f_userowner=0';
+	sPostBody += document.getElementById('f_userfound').checked ? '&f_userfound=1' : '&f_userfound=0';
+	sPostBody += document.getElementById('f_ignored').checked ? '&f_ignored=1' : '&f_ignored=0';
 	sPostBody += document.getElementById('f_inactive').checked ? '&f_inactive=1' : '&f_inactive=0';
-	sPostBody += document.getElementById('f_otherPlatforms').checked ? '&f_otherPlatforms=1' : '';
+	sPostBody += document.getElementById('f_otherPlatforms').checked ? '&f_otherPlatforms=1' : '&f_otherPlatforms=0';
 
 	/* rating options
 	 */

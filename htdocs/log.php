@@ -193,39 +193,47 @@
 				{
 					$log_date = date('Y-m-d', mktime(0, 0, 0, $log_date_month, $log_date_day, $log_date_year));
 
-					//add logentry to db
-					sql("INSERT INTO `cache_logs` (`id`, `cache_id`, `user_id`, `type`, `date`, `text`, `text_html`, `text_htmledit`, `node`)
-					         VALUES ('', '&1', '&2', '&3', '&4', '&5', '&6', '&7', '&8')",
-					         $cache_id, $usr['userid'], $log_type, $log_date, $log_text, (($descMode != 1) ? 1 : 0), (($descMode == 3) ? 1 : 0), $oc_nodeid);
+					// add logentry to db if not already exists (e.g. by multiple sending the form
+					// or by ocprop errors)
+					$rs = sql("SELECT `id` FROM `cache_logs`
+					            WHERE `cache_id`='&1' AND `user_id`='&2' AND `type`='&3' AND `date`='&4' AND `text`='&5'",
+					           $cache_id, $usr['userid'], $log_type, $log_date, $log_text);
+					$already_exists = sql_fetch_row($rs) != null;
+					sql_free_result($rs);
 
-					// do not use slave server for the next time ...
-					db_slave_exclude();
-
-					// update cache_status
-					$rs = sql("SELECT `log_types`.`cache_status` FROM `log_types` WHERE `id`='&1'", $log_type);
-					if ($record = sql_fetch_array($rs))
+					if (!$already_exists)
 					{
-						$cache_status = $record['cache_status'];
-						if ($cache_status != 0)
+						sql("INSERT INTO `cache_logs` (`id`, `cache_id`, `user_id`, `type`, `date`, `text`, `text_html`, `text_htmledit`, `node`)
+						         VALUES ('', '&1', '&2', '&3', '&4', '&5', '&6', '&7', '&8')",
+						         $cache_id, $usr['userid'], $log_type, $log_date, $log_text, (($descMode != 1) ? 1 : 0), (($descMode == 3) ? 1 : 0), $oc_nodeid);
+
+						// do not use slave server for the next time ...
+						db_slave_exclude();
+
+						// update cache_status
+						$rs = sql("SELECT `log_types`.`cache_status` FROM `log_types` WHERE `id`='&1'", $log_type);
+						if ($record = sql_fetch_array($rs))
 						{
-							$rs = sql("UPDATE `caches` SET `status`='&1' WHERE `cache_id`='&2'", $cache_status, $cache_id);
+							$cache_status = $record['cache_status'];
+							if ($cache_status != 0)
+								$rs = sql("UPDATE `caches` SET `status`='&1' WHERE `cache_id`='&2'", $cache_status, $cache_id);
 						}
-					}
-					else
-					{
-						die("OPS!");
-					}
-
-					// update top-list
-					if ($top_option)
-						if ($top_cache)
-							sql("INSERT IGNORE INTO `cache_rating` (`user_id`, `cache_id`, `rating_date`) VALUES('&1', '&2', '&3')", $usr['userid'], $cache_id, $log_date);
 						else
-							sql("DELETE FROM `cache_rating` WHERE `user_id`='&1' AND `cache_id`='&2'", $usr['userid'], $cache_id);
+						{
+							die("OPS!");
+						}
 
-					//call eventhandler
-					require_once($rootpath . 'lib/eventhandler.inc.php');
-					event_new_log($cache_id, $usr['userid']+0);
+						// update top-list
+						if ($top_option)
+							if ($top_cache)
+								sql("INSERT IGNORE INTO `cache_rating` (`user_id`, `cache_id`, `rating_date`) VALUES('&1', '&2', '&3')", $usr['userid'], $cache_id, $log_date);
+							else
+								sql("DELETE FROM `cache_rating` WHERE `user_id`='&1' AND `cache_id`='&2'", $usr['userid'], $cache_id);
+
+						//call eventhandler
+						require_once($rootpath . 'lib/eventhandler.inc.php');
+						event_new_log($cache_id, $usr['userid']+0);
+					}
 
 					//redirect to viewcache
 					$no_tpl_build = true;

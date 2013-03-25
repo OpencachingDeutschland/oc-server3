@@ -31,7 +31,7 @@
 	if (!isset($style)) $style = 'ocstyle';
 
 	//pagetitle
-	if (!isset($pagetitle)) $pagetitle = 'www.opencaching.de';
+	$pagetitle = 'local.opencaching.de';
 	$opt['page']['title'] = 'OPENCACHING';
 	$opt['page']['subtitle1'] = 'Geocaching with Opencaching';
 	$opt['page']['subtitle2'] = '';

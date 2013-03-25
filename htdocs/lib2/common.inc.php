@@ -54,6 +54,7 @@ function __autoload($class_name)
 			$opt['debug'] = $opt['debug'] & ~DEBUG_TRANSLATE;
 	}
 
+	require_once($opt['rootpath'] . 'lib2/errorhandler.inc.php');
 	configure_php();
 
 	require($opt['rootpath'] . 'lib2/cookie.class.php');
@@ -139,6 +140,9 @@ function configure_php()
 		ini_set('display_errors', true);
 		ini_set('error_reporting', E_ALL);
 		ini_set('mysql.trace_mode', true);
+
+		// not for production use yet (has to be tested thoroughly)
+		register_errorhandlers();
 	}
 	else
 	{

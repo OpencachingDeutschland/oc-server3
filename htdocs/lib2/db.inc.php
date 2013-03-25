@@ -895,11 +895,14 @@
 			// build the error template (e.g. because connection was lost, or an error mail
 			// could not load translations from database)
 
-			$dberrmsg = 'MySQL error (' . $errno . '): ' . $error;
-			require("html/dberror.php");
+			if ($opt['db']['error']['display'] == true)
+				$errmsg = 'MySQL error recursion (' . $errno . '): ' . $error;
+			else
+				$errmsg = "";
+			$errtitle = "Datenbankfehler";
+			require("html/error.php");
 			exit;
 		}
-
 		$db['error'] = true;
 
 		if ($db['connected'] == false)

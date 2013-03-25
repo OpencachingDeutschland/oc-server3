@@ -50,9 +50,12 @@
 	require_once($opt['rootpath'] . 'lib/settings.inc.php');
 	require_once($opt['rootpath'] . 'lib/calculation.inc.php');
 	require_once($opt['rootpath'] . 'lib/consts.inc.php');
+	require_once($opt['rootpath'] . 'lib2/errorhandler.inc.php');
 
-	// timezone
+	// basic PHP settings
 	date_default_timezone_set($timezone);
+	if ($debug_page)
+		register_errorhandlers();  // not for production use yet, must be tested
 
 	$dblink_slave = false;
 	$db_error = 0;
@@ -460,10 +463,10 @@
 		if ($interface_output == 'html')
 		{
 			// display errorpage
-			$dberrmsg = $dberrormsg . ($debug_page ? "<br />" . $msql_error : "");
+			$errmsg = $dberrormsg . ($debug_page ? "<br />" . $msql_error : "");
 			if ($db_error <= 1)
 			{
-				tpl_errorMsg('sql_error', $dberrmsg);
+				tpl_errorMsg('sql_error', $errmsg);
 			}
 			else
 			{
@@ -471,7 +474,8 @@
 				// build the error template (e.g. because connection was lost, or an error mail
 				// could not load translations from database)
 
-				require("html/dberror.php");
+				$errtitle = "Datenbankfehler";
+				require("html/error.php");
 			}
 			exit;
 		}

@@ -1421,4 +1421,13 @@
 						END IF;
 					END;");
 
+	sql_dropTrigger('cacheReportsBeforeInsert');
+	sql("CREATE TRIGGER `cacheReportsBeforeInsert` BEFORE INSERT ON `cache_reports`
+				FOR EACH ROW
+					BEGIN
+						/* dont overwrite creation date while XML client is running */
+						IF ISNULL(@XMLSYNC) OR @XMLSYNC!=1 THEN
+							SET NEW.`date_created`=NOW();
+						END IF;
+					END;");
 ?>

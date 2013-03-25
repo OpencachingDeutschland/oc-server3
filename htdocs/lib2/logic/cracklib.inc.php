@@ -79,7 +79,7 @@ function cracklib_checkpw($pw, $addwords)
 			return false;
 
 	// words from pw library are not allowed
-	if (sql_value("SELECT COUNT(*) FROM `pw_dict` WHERE `pw`='&1'", 0, $pw))
+	if (sql_value("SELECT COUNT(*) FROM `pw_dict` WHERE `pw`='&1'", 0, $pw) > 0)
 		return false;
 
 	if ($opt['logic']['cracklib'] == true)

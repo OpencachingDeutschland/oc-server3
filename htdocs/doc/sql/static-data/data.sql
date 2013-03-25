@@ -1058,7 +1058,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('162', 'Zimbabwe
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('163', 'Zambia', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('164', 'South Africa', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('165', 'Mayotte', '2010-08-28 11:48:03');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('166', 'The activation code was sent with an E-Mail to you.<br> Please follow the instructions in the E-Mail.', '2010-08-28 11:48:03');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('166', 'The activation code was sent with an E-Mail to you.<br /> Please follow the instructions in the E-Mail.', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('167', 'To create an account on opencaching.de, you have to enter a vaild E-Mail address and an username. An E-Mail will be sent to the address you supplied with an activation code. Only one account can be created per E-Mail address. First name, last name and country are optional.', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('168', 'There already exists an account with that E-Mail address. It\'s not possible the register a scond account with the same E-Mail address.', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('170', 'Your choosen password was too simple. For your own security, we recommend a stronger password:', '2010-08-28 11:48:03');
@@ -2430,6 +2430,8 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1966', 'as of',
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1967', 'all log entries \&copy; their authors', '2013-02-23 19:00:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1968', 'more', '2013-02-23 19:00:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1969', 'Only the <span class=\"public-setting\">green entries</span> are visible to other users.', '2013-02-23 19:00:04');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1973', 'Generally, spoiler pictures should not be logged. In the case that en exception from this rule makes sense, e.g. to document your finding or problems with the stash, please mark the picture als spoiler so that it won\'t appear in galleries.', '2013-02-23 19:00:04');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1974', 'If you do not see any E-Mail, please check the spam folder of your mailbox.', '2013-02-23 19:00:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1975', 'Do not use easy-to-guess number and letter sequences like \'123456\' or \'qwerty\'', '2013-02-23 19:00:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1976', 'currently not available', '2013-02-23 19:00:04');
 
@@ -6139,6 +6141,8 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1967', 'DE', 'alle Logeinträge \&copy; jeweiliger Autor', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1968', 'DE', 'mehr', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1969', 'DE', 'Nur die <span class=\"public-setting\">grüne Einträge</span> sind für andere Benutzer sichtbar.', '2013-02-19 05:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1973', 'DE', 'Es sollten möglichst keine Spoilerbilder geloggt werden. In Ausnahmefällen, wo es sinnvoll erscheint &ndash; z.B. um den Fund nachzuweisen oder Probleme mit dem Versteck zu dokumentieren &ndash; kennzeichne sie bitte als Spoiler, damit sie nicht in Bildgalerien erscheinen.', '2013-02-19 05:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1974', 'DE', 'Falls du keine E-Mail sehen solltest, prüfe bitte ob sie im Spam-Ordner deines Postfachs einsortiert wurde.', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1975', 'DE', 'Verwende keine einfach erratbaren Ziffern- oder Buchstabenkombinationen wie &bdquo;123456&ldquo; oder &bdquo;qwertz&ldquo;.', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1976', 'DE', 'zurzeit nicht verfügbar', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'EN', 'Reorder IDs \r', '2010-09-02 00:15:30');
@@ -6297,7 +6301,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('163', 'EN', 'Zambia', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('164', 'EN', 'South Africa', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('165', 'EN', 'Mayotte', '2010-08-28 11:48:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('166', 'EN', 'The activation code was sent to you by e-mail.<br> Please follow the instructions in the e-mail.', '2010-08-28 11:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('166', 'EN', 'The activation code was sent to you by e-mail.<br /> Please follow the instructions in the e-mail.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('167', 'EN', 'To create an account at opencaching.de, you have to enter a vaild e-mail address and a user name. An activation code will be sent to the e-mail address you supplied. Only one account can be created per e-mail address. First name, last name and country are optional.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('168', 'EN', 'An account with that e-mail address already exists. It is not possible to create a second account with the same e-mail address.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('170', 'EN', 'The password you have entered is too simple. For your own security, we recommend a stronger password:', '2010-08-28 11:48:07');
@@ -7635,6 +7639,8 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1967', 'EN', 'all log entries \&copy; their authors', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1968', 'EN', 'more', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1969', 'EN', 'Only the <span class=\"public-setting\">green entries</span> are visible to other users.', '2013-02-19 05:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1973', 'EN', 'Generally, spoiler pictures should not be logged. In the case that en exception from this rule makes sense, e.g. to document your finding or problems with the stash, please mark the picture als spoiler so that it won\'t appear in galleries.', '2013-02-19 05:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1974', 'EN', 'If you do not see any E-Mail, please check the spam folder of your mailbox.', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1975', 'EN', 'Do not use easy-to-guess number and letter sequences like \'123456\' or \'qwerty\'.', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1976', 'EN', 'currently not available', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'ES', 'Reordenar ID', '2010-12-09 00:17:55');
@@ -7793,7 +7799,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('163', 'ES', 'Zambia', '2010-12-09 00:17:56');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('164', 'ES', 'Sudafrica', '2010-12-09 00:17:56');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('165', 'ES', 'Mayotte', '2010-12-09 00:17:56');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('166', 'ES', 'El código de activación se envían por email.<br> Por favor, siga las instrucciones del email.', '2010-12-09 00:17:56');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('166', 'ES', 'El código de activación se envían por email.<br /> Por favor, siga las instrucciones del email.', '2010-12-09 00:17:56');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('167', 'ES', 'Para crear una cuenta en opencaching.de, tiene que introducir una dirección de email valida y un nombre de usuario. Un código de activación será enviado a la dirección de email que proporcionó. Sólo una cuenta se puede crear por dirección de email. Nombre, apellido y país son opcionales.', '2010-12-09 00:17:56');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('168', 'ES', 'Una cuenta con esa dirección de email ya existe. No sera posible crear una segunda cuenta con la misma dirección de email.', '2010-12-09 00:17:56');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('170', 'ES', 'La contraseña que has escrito es demasiado sencilla. Para su propia seguridad, se recomienda una contraseña más fuerte o compleja:', '2010-12-09 00:17:56');
@@ -9363,7 +9369,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('163', 'IT', 'Zambia', '2010-08-28 22:00:32');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('164', 'IT', 'Sudafrica', '2010-08-28 22:00:39');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('165', 'IT', 'Mayotte', '2010-08-28 22:00:55');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('166', 'IT', 'Ti è stato spedito via email il codice di attivazione.<br>Per favore segui le istruzioni contenute nella email.', '2010-08-28 22:01:58');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('166', 'IT', 'Ti è stato spedito via email il codice di attivazione.<br />Per favore segui le istruzioni contenute nella email.', '2010-08-28 22:01:58');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('167', 'IT', 'Per creare un utente registrato su opencaching.de devi inserire un indirizzo di email valido e un nome utente. Verrà spedita una email contenete un codice di attivazione all\'indirizzo da te indicato. Un solo utente registrato può essere creato per ciascun indirizzo email. Nome, Cognome e Nazione sono campi opzionali.', '2010-10-27 18:49:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('168', 'IT', 'Esiste già un utente registrato con questo indirizzo email. Non è possibile registrare un secondo utente con lo stesso indirizzo email.', '2010-08-28 22:05:18');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('170', 'IT', 'La password che hai scelto è troppo semplice. Per la tua sicurezza, raccomandiamo una password più robusta:', '2010-08-28 22:08:23');

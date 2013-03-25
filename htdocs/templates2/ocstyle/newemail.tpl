@@ -45,7 +45,8 @@
 		{elseif $emailErrorInvalid==true}
 			<tr><td>&nbsp;</td><td class="errormsg">{t}The E-Mail is not valid.{/t}</td></tr>
 		{elseif $emailRequested==true}
-			<tr><td>&nbsp;</td><td class="successmsg">{t}An E-Mail was sent to you with the security code.{/t}</td></tr>
+			<tr><td>&nbsp;</td><td class="successmsg">{t}An E-Mail was sent to you with the security code.{/t}<br />
+			{t}If you do not see any E-Mail, please check the spam folder of your mailbox.{/t}</td></tr>
 		{elseif $emailErrorUnkown==true}
 			<tr><td>&nbsp;</td><td class="errormsg">{t}An unknown error occured.{/t}</td></tr>
 		{elseif $emailErrorExists==true}

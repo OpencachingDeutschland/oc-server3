@@ -33,7 +33,8 @@
 		{elseif $errorUnkown==true}
 			<tr><td colspan="2" class="errormsg">{t}An unkown error occured.{/t}</td></tr>
 		{elseif $remindMailSent==true}
-			<tr><td colspan="2" class="successmsg">{t}The remind E-Mail was sent.{/t}</td></tr>
+			<tr><td colspan="2" class="successmsg">{t}The remind E-Mail was sent.{/t}<br />
+			{t}If you do not see any E-Mail, please check the spam folder of your mailbox.{/t}</td></tr>
 		{/if}
 
 		<tr><td class="spacer" colspan="2"></td></tr>

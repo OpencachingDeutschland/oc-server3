@@ -42,7 +42,7 @@
 		{if $emailErrorNotFound==true}
 			<tr><td width="150px">&nbsp;</td><td><span class="errormsg">{t}This E-Mail-Address is not registered with a valid username.{/t}</span></td></tr>
 		{elseif $emailRequested==true}
-			<tr><td width="150px">&nbsp;</td><td><span class="successmsg">{t}An E-Mail was sent to you with the security code.{/t}</span></td></tr>
+			<tr><td width="150px">&nbsp;</td><td><span class="successmsg">{t}An E-Mail was sent to you with the security code.{/t}<br />{t}If you do not see any E-Mail, please check the spam folder of your mailbox.{/t}</span></td></tr>
 		{elseif $emailErrorUnknown==true}
 			<tr><td width="150px">&nbsp;</td><td><span class="errormsg">{t}An unknown error occured. The security code could not be sent to you.{/t}</span></td></tr>
 		{/if}

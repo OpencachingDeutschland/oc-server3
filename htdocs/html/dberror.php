@@ -26,17 +26,15 @@
   <div id="content">
 		<h1>Fehler beim Datenbankzugriff</h1>
 		<?php
-			require('lib/settings.inc.php');
-
 			echo '<p>Entschuldigung, bei der Darstellung der Seite ist ein interner Fehler aufgetreten.
 			      Falls dieses Problem für längere Zeit bestehen sollte, informiere uns bitte per
-			      <a href="mailto:' . $emailaddr . '">Email</a>.</p>
+			      <a href="mailto:contact@opencaching.de">Email</a>.</p>
 			      <p>' . $dberrmsg  . '</p>
 			      <p><a href="index.php">Zurück zur Startseite</a></p>
 
 			      <p><br /><br /><em>An error occured while displaying the requested page.
 			      If this problem persists for a longer time, please inform us via
-			      <a href="mailto:' . $emailaddr . '">email</a>.</em></p>';
+			      <a href="mailto:contact@opencaching.de">email</a>.</em></p>';
 		?>
   </div>
 	</body>

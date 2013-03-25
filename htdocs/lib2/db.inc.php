@@ -895,7 +895,10 @@
 			// build the error template (e.g. because connection was lost, or an error mail
 			// could not load translations from database)
 
-			$dberrmsg = 'MySQL error (' . $errno . '): ' . $error;
+			if ($opt['db']['error']['display'] == true)
+				$dberrmsg = 'MySQL error (' . $errno . '): ' . $error;
+			else
+				$dberrmsg = "";
 			require("html/dberror.php");
 			exit;
 		}

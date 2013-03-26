@@ -3,8 +3,8 @@
 *
 *  Unicode Reminder メモ
 ***************************************************************************}
-<div class="content-txtbox-noshade" id="log{$logItem.id}">
-	<div class="logs">
+<div class="content-txtbox-noshade">  {* Ocprop: /<div class="content-txtbox-noshade">(.*?)<\/div>/sig *}
+	<div class="logs" id="log{$logItem.id}">
 	<p class="content-title-noshade-size1" style="display:inline;">
 		{include file="res_logtype.tpl" type=$logItem.type} 
 		{if $logItem.recommended==1}

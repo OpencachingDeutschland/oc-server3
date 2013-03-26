@@ -97,7 +97,7 @@ function getChildWaypoints($cacheid)
 				`caches`.`search_time` AS `searchtime`,
 				`caches`.`way_length` AS `waylength`,
 				`caches`.`country` AS `countryCode`,
-				IFNULL(`ttCountry`.`text`, `countries`.`name`) AS `country`, 
+				IFNULL(`ttCountry`.`text`, `countries`.`name`) AS `country`,
 				`caches`.`logpw` AS `logpw`,
 				`caches`.`date_hidden` AS `datehidden`,
 				`caches`.`wp_oc` AS `wpoc`,
@@ -124,7 +124,7 @@ function getChildWaypoints($cacheid)
 				IFNULL(`cache_visits`.`count`, 0) AS `visits`,
 				`user`.`username` AS `username`,
 				IFNULL(`cache_location`.`code1`, '') AS `code1`,
-				IFNULL(`cache_location`.`adm1`, '') AS `adm1`,
+				IFNULL(`trans2`.`text`, IFNULL(`cache_location`.`adm1`,'')) AS `adm1`,
 				IFNULL(`cache_location`.`adm2`, '') AS `adm2`,
 				IFNULL(`cache_location`.`adm3`, '') AS `adm3`,
 				IFNULL(`cache_location`.`adm4`, '') AS `adm4`
@@ -132,12 +132,14 @@ function getChildWaypoints($cacheid)
 		    INNER JOIN `user` ON `caches`.`user_id`=`user`.`user_id`
 		    INNER JOIN `cache_desc` ON `caches`.`cache_id`=`cache_desc`.`cache_id` AND `cache_desc`.`language`=PREFERED_LANG(`caches`.`desc_languages`, '&3')
 		    INNER JOIN `cache_status` ON `caches`.`status`=`cache_status`.`id`
+		     LEFT JOIN `cache_location` ON `caches`.`cache_id` = `cache_location`.`cache_id`
 		     LEFT JOIN `countries` ON `caches`.`country`=`countries`.`short`
 		     LEFT JOIN `sys_trans` AS `tCountry` ON `countries`.`trans_id`=`tCountry`.`id` AND `countries`.`name`=`tCountry`.`text`
 		     LEFT JOIN `sys_trans_text` AS `ttCountry` ON `tCountry`.`id`=`ttCountry`.`trans_id` AND `ttCountry`.`lang`='&2'
+		     LEFT JOIN `countries` `c2` ON `c2`.`short`=`cache_location`.`code1`
+		     LEFT JOIN `sys_trans_text` `trans2` ON `trans2`.`trans_id`=`c2`.`trans_id` AND `trans2`.`lang`='&2'
 		     LEFT JOIN `cache_visits` ON `cache_visits`.`cache_id`=`caches`.`cache_id` AND `user_id_ip`='0'
 		     LEFT JOIN `stat_caches` ON `caches`.`cache_id`=`stat_caches`.`cache_id`
-		     LEFT JOIN `cache_location` ON `caches`.`cache_id` = `cache_location`.`cache_id`
 		    WHERE `caches`.`cache_id`='&1'", $cacheid, $opt['template']['locale'], $sPreferedDescLang, $login->userid);
 	$rCache = sql_fetch_assoc($rs);
 	sql_free_result($rs);

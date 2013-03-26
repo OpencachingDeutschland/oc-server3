@@ -18,7 +18,7 @@ class View
 		$verifier = isset($_GET['oauth_verifier']) ? $_GET['oauth_verifier'] : '';
 		$langpref = isset($_GET['langpref']) ? $_GET['langpref'] : Settings::get('SITELANG');
 		$langprefs = explode("|", $langpref);
-		
+
 		$token = Db::select_row("
 			select
 				c.`key` as consumer_key,
@@ -39,7 +39,7 @@ class View
 			# just redirect to the OpenCaching main page.
 			return new OkapiRedirectResponse(Settings::get('SITE_URL'));
 		}
-		
+
 		$vars = array(
 			'okapi_base_url' => Settings::get('SITE_URL')."okapi/",
 			'token' => $token,

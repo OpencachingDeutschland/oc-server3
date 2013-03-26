@@ -20,7 +20,7 @@ class WebService
 			'min_auth_level' => 1
 		);
 	}
-	
+
 	private static function count_calls($consumer_key, $days)
 	{
 		return (
@@ -43,18 +43,18 @@ class WebService
 			")
 		);
 	}
-	
+
 	public static function call(OkapiRequest $request)
 	{
 		require_once('replicate_common.inc.php');
-		
+
 		$data = Cache::get("last_fulldump");
 		if ($data == null)
 			throw new BadRequest("No fulldump found. Try again later. If this doesn't help ".
 				"contact site administrator and/or OKAPI developers.");
-		
+
 		# Check consumer's quota
-		
+
 		$please = $request->get_parameter('pleeaase');
 		if ($please != 'true')
 		{
@@ -68,7 +68,7 @@ class WebService
 			if ($not_good)
 				throw new BadRequest("No more please. Seriously, dude...");
 		}
-		
+
 		$response = new OkapiHttpResponse();
 		$response->content_type = $data['meta']['content_type'];
 		$response->content_disposition = 'attachment; filename="'.$data['meta']['public_filename'].'"';

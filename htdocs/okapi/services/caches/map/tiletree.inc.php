@@ -25,13 +25,13 @@ class TileTree
 	public static $FLAG_STAR = 0x01;
 	public static $FLAG_HAS_TRACKABLES = 0x02;
 	public static $FLAG_NOT_YET_FOUND = 0x04;
-	
+
 	# Dynamic flags (added at runtime).
 	public static $FLAG_FOUND = 0x0100;
 	public static $FLAG_OWN = 0x0200;
 	public static $FLAG_NEW = 0x0400;
 	public static $FLAG_DRAW_CAPTION = 0x0800;
-	
+
 	/**
 	 * Return null if not computed, 1 if computed and empty, 2 if computed and not empty.
 	 */
@@ -46,7 +46,7 @@ class TileTree
 				and y = '".mysql_real_escape_string($y)."'
 		");
 	}
-	
+
 	/**
 	 * Return MySQL's result set iterator over all caches which are present
 	 * in the given result set AND in the given tile.
@@ -62,27 +62,27 @@ class TileTree
 	{
 		# First, we check if the cache-set for this tile was already computed
 		# (and if it was, was it empty).
-		
+
 		$status = self::get_tile_status($zoom, $x, $y);
 		if ($status === null)  # Not yet computed.
 		{
 			# Note, that computing the tile does not involve taking any
 			# search parameters.
-			
+
 			$status = self::compute_tile($zoom, $x, $y);
 		}
-		
+
 		if ($status === 1)  # Computed and empty.
 		{
 			# This tile was already computed and it is empty.
 			return null;
 		}
-		
+
 		# If we got here, then the tile is computed and not empty (status 2).
-		
+
 		$tile_upper_x = $x << 8;
 		$tile_leftmost_y = $y << 8;
-		
+
 		return Db::query("
 			select
 				otc.cache_id,
@@ -106,14 +106,14 @@ class TileTree
 				z21x >> (3 + (21 - $zoom))
 		");
 	}
-	
+
 	/**
 	 * Precache the ($zoom, $x, $y) slot in the okapi_tile_caches table.
 	 */
 	public static function compute_tile($zoom, $x, $y)
 	{
 		$time_started = microtime(true);
-		
+
 		# Note, that multiple threads may try to compute tiles simulatanously.
 		# For low-level tiles, this can be expensive. WRTODO: Think of some
 		# appropriate locks.
@@ -121,33 +121,33 @@ class TileTree
 		$status = self::get_tile_status($zoom, $x, $y);
 		if ($status !== null)
 			return $status;
-		
+
 		if ($zoom === 0)
 		{
 			# When computing zoom zero, we don't have a parent to speed up
 			# the computation. We need to use the caches table. Note, that
 			# zoom level 0 contains *entire world*, so we don't have to use
 			# any WHERE condition in the following query.
-			
+
 			# This can be done a little faster (without the use of internal requests),
 			# but there is *no need* to - this query is run seldom and is cached.
-			
+
 			$params = array();
 			$params['status'] = "Available|Temporarily unavailable|Archived";  # we want them all
 			$params['limit'] = "10000000";  # no limit
-			
+
 			$internal_request = new OkapiInternalRequest(new OkapiInternalConsumer(), null, $params);
 			$internal_request->skip_limits = true;
 			$response = OkapiServiceRunner::call("services/caches/search/all", $internal_request);
 			$cache_codes = $response['results'];
-			
+
 			$internal_request = new OkapiInternalRequest(new OkapiInternalConsumer(), null, array(
 				'cache_codes' => implode('|', $cache_codes),
 				'fields' => 'internal_id|code|name|location|type|status|rating|recommendations|founds|trackables_count'
 			));
 			$internal_request->skip_limits = true;
 			$caches = OkapiServiceRunner::call("services/caches/geocaches", $internal_request);
-			
+
 			foreach ($caches as $cache)
 			{
 				$row = self::generate_short_row($cache);
@@ -171,18 +171,18 @@ class TileTree
 		else
 		{
 			# We will use the parent tile to compute the contents of this tile.
-			
+
 			$parent_zoom = $zoom - 1;
 			$parent_x = $x >> 1;
 			$parent_y = $y >> 1;
-			
+
 			$status = self::get_tile_status($parent_zoom, $parent_x, $parent_y);
 			if ($status === null)  # Not computed.
 			{
 				$time_started = microtime(true);
 				$status = self::compute_tile($parent_zoom, $parent_x, $parent_y);
 			}
-			
+
 			if ($status === 1)  # Computed and empty.
 			{
 				# No need to check.
@@ -197,11 +197,11 @@ class TileTree
 				$right_z21x = ((($parent_x + 1) << 1) << $scale) + $margin;
 				$top_z21y = (($parent_y << 1) << $scale) - $margin;
 				$bottom_z21y = ((($parent_y + 1) << 1) << $scale) + $margin;
-				
+
 				# Choose the right quarter.
 				# |1 2|
 				# |3 4|
-				
+
 				if ($x & 1)  # 2 or 4
 					$left_z21x = $parentcenter_z21x - $margin;
 				else  # 1 or 3
@@ -210,9 +210,9 @@ class TileTree
 					$top_z21y = $parentcenter_z21y - $margin;
 				else  # 1 or 2
 					$bottom_z21y = $parentcenter_z21y + $margin;
-				
+
 				# Cache the result.
-				
+
 				Db::execute("
 					replace into okapi_tile_caches (
 						z, x, y, cache_id, z21x, z21y, status, type, rating, flags
@@ -245,9 +245,9 @@ class TileTree
 					$status = 1;
 			}
 		}
-		
+
 		# Mark tile as computed.
-		
+
 		Db::execute("
 			replace into okapi_tile_status (z, x, y, status)
 			values (
@@ -257,10 +257,10 @@ class TileTree
 				'".mysql_real_escape_string($status)."'
 			);
 		");
-		
+
 		return $status;
 	}
-	
+
 	/**
 	 * Convert OKAPI's cache object to a short database row to be inserted
 	 * into okapi_tile_caches table. Returns the list of the following attributes:
@@ -280,7 +280,7 @@ class TileTree
 		return array($cache['internal_id'], $z21x, $z21y, Okapi::cache_status_name2id($cache['status']),
 			Okapi::cache_type_name2id($cache['type']), $cache['rating'], $flags);
 	}
-	
+
 	private static function latlon_to_z21xy($lat, $lon)
 	{
 		$offset = 128 << 21;

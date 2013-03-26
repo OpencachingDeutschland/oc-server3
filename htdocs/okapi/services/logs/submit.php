@@ -16,7 +16,7 @@ use okapi\services\caches\search\SearchAssistant;
 use okapi\BadRequest;
 
 
-/** 
+/**
  * This exception is thrown by WebService::_call method, when error is detected in
  * user-supplied data. It is not a BadRequest exception - it does not imply that
  * the Consumer did anything wrong (it's the user who did). This exception shouldn't
@@ -31,9 +31,9 @@ class WebService
 		return array(
 			'min_auth_level' => 3
 		);
-	} 
-	
-	/** 
+	}
+
+	/**
 	 * Publish a new log entry and return log entry uuid. Throws
 	 * CannotPublishException or BadRequest on errors.
 	 */
@@ -43,7 +43,7 @@ class WebService
 		# CannotPublishException and standard BadRequest/InvalidParam exceptions!
 		# Notice, that this is "_call" method, not the usual "call" (see below
 		# for "call").
-		
+
 		$cache_code = $request->get_parameter('cache_code');
 		if (!$cache_code) throw new ParamMissing('cache_code');
 		$logtype = $request->get_parameter('logtype');
@@ -78,7 +78,7 @@ class WebService
 			# We will remove the rating request and change the success message
 			# (which will be returned IF the rest of the query will meet all the
 			# requirements).
-			
+
 			self::$success_message .= " ".sprintf(_("However, your cache rating was ignored, because %s does not have a rating system."),
 				Okapi::get_normalized_site_name());
 			$rating = null;
@@ -102,26 +102,26 @@ class WebService
 				Okapi::get_normalized_site_name());
 			$needs_maintenance = false;
 		}
-		
+
 		# Check if cache exists and retrieve cache internal ID (this will throw
 		# a proper exception on invalid cache_code). Also, get the user object.
-		
+
 		$cache = OkapiServiceRunner::call('services/caches/geocache', new OkapiInternalRequest(
 			$request->consumer, null, array('cache_code' => $cache_code,
 			'fields' => 'internal_id|status|owner|type|req_passwd')));
 		$user = OkapiServiceRunner::call('services/users/by_internal_id', new OkapiInternalRequest(
 			$request->consumer, $request->token, array('internal_id' => $request->token->user_id,
 			'fields' => 'is_admin|uuid|internal_id|caches_found|rcmds_given')));
-		
+
 		# Various integrity checks.
-		
+
 		if ($cache['type'] == 'Event' && $logtype != 'Comment')
 			throw new CannotPublishException(_('This cache is an Event cache. You cannot "Find it"! (But - you may "Comment" on it.)'));
 		if ($logtype == 'Comment' && strlen(trim($comment)) == 0)
 			throw new CannotPublishException(_("Your have to supply some text for your comment."));
-		
+
 		# Password check.
-		
+
 		if ($logtype == 'Found it' && $cache['req_passwd'])
 		{
 			$valid_password = Db::select_value("
@@ -135,7 +135,7 @@ class WebService
 			if (strtolower($supplied_password) != strtolower($valid_password))
 				throw new CannotPublishException(_("Invalid password!"));
 		}
-		
+
 		# Very weird part (as usual). OC stores HTML-lized comments in the database
 		# (it doesn't really matter if 'text_html' field is set to FALSE). OKAPI must
 		# save it in HTML either way. However, escaping plain-text doesn't work.
@@ -146,13 +146,13 @@ class WebService
 		# the end. Since text_html=0 doesn't add <br/>s on its own, we can only add
 		# proper <br/>s and hope it's okay. We will remove the original $comment
 		# variable from our namespace and act on the "pseudoencoded" one.
-		
+
 		$PSEUDOENCODED_comment = htmlspecialchars($comment, ENT_QUOTES);
 		$PSEUDOENCODED_comment = nl2br($PSEUDOENCODED_comment);
 		unset($comment);
-		
+
 		# Duplicate detection.
-		
+
 		if ($on_duplicate != 'continue')
 		{
 			# Attempt to find a log entry made by the same user, for the same cache, with
@@ -161,7 +161,7 @@ class WebService
 			# DO NOT guarantee that duplicate detection will succeed. If it doesn't,
 			# nothing bad happens (user will just post two similar log entries).
 			# Keep this simple!
-			
+
 			$duplicate_uuid = Db::select_value("
 				select uuid
 				from cache_logs
@@ -187,9 +187,9 @@ class WebService
 				}
 			}
 		}
-		
+
 		# Check if already found it (and make sure the user is not the owner).
-		
+
 		if (($logtype == 'Found it') || ($logtype == "Didn't find it"))
 		{
 			$has_already_found_it = Db::select_value("
@@ -206,12 +206,12 @@ class WebService
 			if ($user['uuid'] == $cache['owner']['uuid'])
 				throw new CannotPublishException(_("You are the owner of this cache. You may submit \"Comments\" only!"));
 		}
-		
+
 		# Check if the user has already rated the cache. BTW: I don't get this one.
 		# If we already know, that the cache was NOT found yet, then HOW could the
 		# user submit a rating for it? Anyway, I will stick to the procedure
 		# found in log.php. On the bright side, it's fail-safe.
-		
+
 		if ($rating)
 		{
 			$has_already_rated = Db::select_value("
@@ -224,13 +224,13 @@ class WebService
 			if ($has_already_rated)
 				throw new CannotPublishException(_("You have already rated this cache once. Your rating cannot be changed."));
 		}
-		
+
 		# If user wants to recommend...
-		
+
 		if ($recommend)
 		{
 			# Do the same "fail-safety" check as we did for the rating.
-			
+
 			$already_recommended = Db::select_value("
 				select 1
 				from cache_rating
@@ -240,28 +240,28 @@ class WebService
 			");
 			if ($already_recommended)
 				throw new CannotPublishException(_("You have already recommended this cache once."));
-			
+
 			# Check the number of recommendations.
-			
+
 			$founds = $user['caches_found'] + 1;  // +1, because he'll find THIS ONE in a moment, right?
 			$rcmds_left = floor($founds / 10.0) - $user['rcmds_given'];
 			if ($rcmds_left <= 0)
 				throw new CannotPublishException(_("You don't have any recommendations to give. Find more caches first!"));
 		}
-		
+
 		# If user checked the "needs_maintenance" flag, we will shuffle things a little...
-		
+
 		if ($needs_maintenance)
 		{
 			# If we're here, then we also know that the "Needs maintenance" log type is supported
 			# by this OC site. However, it's a separate log type, so we might have to submit
 			# two log types together:
-			
+
 			if ($logtype == 'Comment')
 			{
 				# If user submits a "Comment", we'll just change its type to "Needs maintenance".
 				# Only one log entry will be issued.
-				
+
 				$logtype = 'Needs maintenance';
 				$second_logtype = null;
 				$second_PSEUDOENCODED_comment = null;
@@ -270,7 +270,7 @@ class WebService
 			{
 				# If "Found it", then we'll issue two log entries: one "Found it" with the
 				# original comment, and second one "Needs maintenance" with empty comment.
-				
+
 				$second_logtype = 'Needs maintenance';
 				$second_PSEUDOENCODED_comment = "";
 			}
@@ -281,7 +281,7 @@ class WebService
 				# will have an empty comment. We will move the comment to the second
 				# "Needs maintenance" log entry. (It's okay for this behavior to change
 				# in the future, but it seems natural to me.)
-				
+
 				$second_logtype = 'Needs maintenance';
 				$second_PSEUDOENCODED_comment = $PSEUDOENCODED_comment;
 				$PSEUDOENCODED_comment = "";
@@ -293,33 +293,33 @@ class WebService
 		{
 			# User didn't check the "Needs maintenance" flag OR "Needs maintenance" log type
 			# isn't supported by this server.
-			
+
 			$second_logtype = null;
 			$second_PSEUDOENCODED_comment = null;
 		}
-		
+
 		# Finally! Insert the rows into the log entries table. Update
 		# cache stats and user stats.
-		
+
 		$log_uuid = self::insert_log_row($request->consumer->key, $cache['internal_id'], $user['internal_id'], $logtype, $when, $PSEUDOENCODED_comment);
 		self::increment_cache_stats($cache['internal_id'], $when, $logtype);
 		self::increment_user_stats($user['internal_id'], $logtype);
 		if ($second_logtype != null)
 		{
 			# Reminder: This will never be called while SUPPORTS_LOGTYPE_NEEDS_MAINTENANCE is off.
-			
+
 			self::insert_log_row($request->consumer->key, $cache['internal_id'], $user['internal_id'], $second_logtype, $when + 1, $second_PSEUDOENCODED_comment);
 			self::increment_cache_stats($cache['internal_id'], $when + 1, $second_logtype);
 			self::increment_user_stats($user['internal_id'], $second_logtype);
 		}
-		
+
 		# Save the rating.
-		
+
 		if ($rating)
 		{
 			# This code will be called for OCPL branch only. Earlier, we made sure,
 			# to set $rating to null, if we're running on OCDE.
-			
+
 			# OCPL has a little strange way of storing cumulative rating. Instead
 			# of storing the sum of all ratings, OCPL stores the computed average
 			# and update it using multiple floating-point operations. Moreover,
@@ -329,7 +329,7 @@ class WebService
 			# the rating can never be changed. It surely feels quite inconsistent,
 			# but presumably has some deep logic into it. See also here (Polish):
 			# http://wiki.opencaching.pl/index.php/Oceny_skrzynek
-			
+
 			switch ($rating)
 			{
 				case 1: $db_score = -2.0; break;
@@ -355,47 +355,57 @@ class WebService
 				);
 			");
 		}
-		
+
 		# Save recommendation.
-		
+
 		if ($recommend)
 		{
-			# Both OCPL and OCDE don't update any stats regarding the number of recommendations
-			# (or - if they do - they do so using triggers). In other words, this is the only
-			# query we have to execute here, regarding the recommendation.
-			
-			Db::execute("
-				insert into cache_rating (user_id, cache_id)
-				values (
-					'".mysql_real_escape_string($user['internal_id'])."',
-					'".mysql_real_escape_string($cache['internal_id'])."'
-				);
-			");
+			if (Db::field_exists('cache_rating', 'rating_date'))
+			{
+				Db::execute("
+					insert into cache_rating (user_id, cache_id, rating_date)
+					values (
+						'".mysql_real_escape_string($user['internal_id'])."',
+						'".mysql_real_escape_string($cache['internal_id'])."',
+						from_unixtime('".mysql_real_escape_string($when)."')
+					);
+				");
+			}
+			else
+			{
+				Db::execute("
+					insert into cache_rating (user_id, cache_id)
+					values (
+						'".mysql_real_escape_string($user['internal_id'])."',
+						'".mysql_real_escape_string($cache['internal_id'])."'
+					);
+				");
+			}
 		}
-				
+
 		# We need to delete the copy of stats-picture for this user. Otherwise,
 		# the legacy OC code won't detect that the picture needs to be refreshed.
-		
+
 		$filepath = Okapi::get_var_dir().'/images/statpics/statpic'.$user['internal_id'].'.jpg';
 		if (file_exists($filepath))
 			unlink($filepath);
 
 		# Success. Return the uuid.
-		
+
 		return $log_uuid;
 	}
-	
+
 	private static $success_message = null;
 	public static function call(OkapiRequest $request)
 	{
 		# This is the "real" entry point. A wrapper for the _call method.
-		
+
 		$langpref = $request->get_parameter('langpref');
 		if (!$langpref) $langpref = "en";
-		
+
 		# Error messages thrown via CannotPublishException exceptions should be localized.
 		# They will be delivered for end user to display in his language.
-		
+
 		Okapi::gettext_domain_init(explode("|", $langpref));
 		try
 		{
@@ -421,7 +431,7 @@ class WebService
 
 		return Okapi::formatted_response($request, $result);
 	}
-	
+
 	private static function increment_cache_stats($cache_internal_id, $when, $logtype)
 	{
 		if (Settings::get('OC_BRANCH') == 'oc.de')
@@ -432,7 +442,7 @@ class WebService
 		else
 		{
 			# OCPL doesn't use triggers for this. We need to update manually.
-			
+
 			if ($logtype == 'Found it')
 			{
 				Db::execute("
@@ -465,7 +475,7 @@ class WebService
 			}
 		}
 	}
-	
+
 	private static function increment_user_stats($user_internal_id, $logtype)
 	{
 		if (Settings::get('OC_BRANCH') == 'oc.de')
@@ -476,7 +486,7 @@ class WebService
 		else
 		{
 			# OCPL doesn't have triggers for this. We need to update manually.
-			
+
 			switch ($logtype)
 			{
 				case 'Found it': $field_to_increment = 'founds_count'; break;
@@ -493,7 +503,7 @@ class WebService
 			");
 		}
 	}
-	
+
 	private static function create_uuid()
 	{
 		return sprintf('%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
@@ -504,7 +514,7 @@ class WebService
 			mt_rand(0, 0xffff), mt_rand(0, 0xffff), mt_rand(0, 0xffff)
 		);
 	}
-	
+
 	private static function insert_log_row($consumer_key, $cache_internal_id, $user_internal_id, $logtype, $when, $PSEUDOENCODED_comment)
 	{
 		$log_uuid = self::create_uuid();
@@ -523,10 +533,10 @@ class WebService
 			);
 		");
 		$log_internal_id = Db::last_insert_id();
-		
+
 		# Store additional information on consumer_key which have created this log entry.
 		# (Maybe we'll want to display this somewhere later.)
-		
+
 		Db::execute("
 			insert into okapi_cache_logs (log_id, consumer_key)
 			values (
@@ -534,7 +544,7 @@ class WebService
 				'".mysql_real_escape_string($consumer_key)."'
 			);
 		");
-		
+
 		return $log_uuid;
 	}
 }

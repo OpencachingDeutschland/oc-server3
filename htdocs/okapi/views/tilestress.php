@@ -29,16 +29,16 @@ class View
 		print $str;
 		flush();
 	}
-	
+
 	public static function call()
 	{
 		# By default, this view is turned off in the urls.php file.
 		# This view is for debugging TileMap performace only!
-		
+
 		set_time_limit(0);
-		
+
 		header("Content-Type: text/plain; charset=utf-8");
-		
+
 		$user_id = $_GET['u'];
 		self::out("Yo. I'm $user_id.\n\n");
 
@@ -64,14 +64,14 @@ class View
 				$x = rand(0, (1 << $z) - 1);
 				$y = rand(0, (1 << $z) - 1);
 			}
-			
+
 			$tiles = array();
 			for ($xx=$x; $xx<$x+4; $xx++)
 				for ($yy=$y; $yy<$y+4; $yy++)
 					$tiles[] = array($xx, $yy);
 			srand();
 			shuffle($tiles);
-			
+
 			foreach ($tiles as $tile)
 			{
 				list($x, $y) = $tile;
@@ -93,5 +93,5 @@ class View
 			}
 		}
 	}
-	
+
 }

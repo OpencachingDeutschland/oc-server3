@@ -53,13 +53,13 @@ class OkapiServiceRunner
 		'services/replicate/fulldump',
 		'services/replicate/info',
 	);
-	
+
 	/** Check if method exists. */
 	public static function exists($service_name)
 	{
 		return in_array($service_name, self::$all_names);
 	}
-	
+
 	/** Get method options (is consumer required etc.). */
 	public static function options($service_name)
 	{
@@ -77,8 +77,8 @@ class OkapiServiceRunner
 				$e->getMessage());
 		}
 	}
-	
-	/** 
+
+	/**
 	 * Get method documentation file contents (stuff within the XML file).
 	 * If you're looking for a parsed representation, use services/apiref/method.
 	 */
@@ -92,13 +92,13 @@ class OkapiServiceRunner
 			throw new Exception("Missing documentation file: $service_name.xml");
 		}
 	}
-	
-	/** 
+
+	/**
 	 * Execute the method and return the result.
-	 * 
+	 *
 	 * OKAPI methods return OkapiHttpResponses, but some MAY also return
 	 * PHP objects (see OkapiRequest::construct_inside_request for details).
-	 * 
+	 *
 	 * If $request must be consistent with given method's options (must
 	 * include Consumer and Token, if they are required).
 	 */
@@ -108,7 +108,7 @@ class OkapiServiceRunner
 
 		if (!self::exists($service_name))
 			throw new Exception("Method does not exist: '$service_name'");
-		
+
 		$options = self::options($service_name);
 		if ($options['min_auth_level'] >= 2 && $request->consumer == null)
 		{
@@ -121,7 +121,7 @@ class OkapiServiceRunner
 			throw new Exception("Method '$service_name' called with mismatched OkapiRequest: ".
 				"\$request->token MAY NOT be empty for Level 3 methods.");
 		}
-		
+
 		$time_started = microtime(true);
 		Okapi::gettext_domain_init();
 		try
@@ -135,14 +135,14 @@ class OkapiServiceRunner
 			throw $e;
 		}
 		$runtime = microtime(true) - $time_started;
-		
+
 		# Log the request to the stats table. Only valid requests (these which didn't end up
 		# with an exception) are logged.
 		self::save_stats($service_name, $request, $runtime);
-		
+
 		return $response;
 	}
-	
+
 	/**
 	 * For internal use only. The stats table can be used to store any kind of
 	 * runtime-stats data, i.e. not only regarding services. This is a special
@@ -153,13 +153,13 @@ class OkapiServiceRunner
 	{
 		self::save_stats("extra/".$extra_name, $request, $runtime);
 	}
-	
+
 	private static function save_stats($service_name, $request, $runtime)
 	{
 		# Getting rid of nulls. MySQL PRIMARY keys cannot contain nullable columns.
 		# Temp table doesn't have primary key, but other stats tables (which are
 		# dependant on stats table) - do.
-		
+
 		if ($request !== null) {
 			$consumer_key = ($request->consumer != null) ? $request->consumer->key : 'anonymous';
 			$user_id = (($request->token != null) && ($request->token instanceof OkapiAccessToken)) ? $request->token->user_id : -1;
@@ -172,7 +172,7 @@ class OkapiServiceRunner
 			$user_id = -1;
 			$calltype = 'internal';
 		}
-		
+
 		Db::execute("
 			insert into okapi_stats_temp (`datetime`, consumer_key, user_id, service_name, calltype, runtime)
 			values (

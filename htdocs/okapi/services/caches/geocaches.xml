@@ -28,6 +28,9 @@
 	<opt name='lpc' default='10'>
 		Same as in the services/caches/geocache method.
 	</opt>
+	<opt name='log_fields' default='uuid|date|user|type|comment'>
+		Same as in the services/caches/geocache method.
+	</opt>
 	<opt name='user_uuid'>
 		Same as in the services/caches/geocache method.
 	</opt>

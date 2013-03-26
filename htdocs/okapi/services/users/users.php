@@ -19,10 +19,10 @@ class WebService
 			'min_auth_level' => 1
 		);
 	}
-	
+
 	private static $valid_field_names = array('uuid', 'username', 'profile_url', 'internal_id', 'is_admin',
 		'caches_found', 'caches_notfound', 'caches_hidden', 'rcmds_given');
-	
+
 	public static function call(OkapiRequest $request)
 	{
 		$user_uuids = $request->get_parameter('user_uuids');
@@ -78,21 +78,21 @@ class WebService
 			$results[$row['uuid']] = $entry;
 		}
 		mysql_free_result($rs);
-		
+
 		# caches_found, caches_notfound, caches_hidden
-		
+
 		if (in_array('caches_found', $fields) || in_array('caches_notfound', $fields) || in_array('caches_hidden', $fields)
 			|| in_array('rcmds_given', $fields))
 		{
 			# We will load all these stats together. Then we may remove these which
 			# the user doesn't need.
-			
+
 			$extras = array();
-			
+
 			if (Settings::get('OC_BRANCH') == 'oc.pl')
 			{
 				# OCPL stores user stats in 'user' table.
-				
+
 				$rs = Db::query("
 					select user_id, founds_count, notfounds_count, hidden_count
 					from user
@@ -102,7 +102,7 @@ class WebService
 			else
 			{
 				# OCDE stores user stats in 'stat_user' table.
-				
+
 				$rs = Db::query("
 					select
 						u.user_id,
@@ -116,7 +116,7 @@ class WebService
 					where u.user_id in ('".implode("','", array_map('mysql_real_escape_string', array_keys($id2uuid)))."')
 				");
 			}
-			
+
 			while ($row = mysql_fetch_assoc($rs))
 			{
 				$extras[$row['user_id']] = array();;
@@ -126,7 +126,7 @@ class WebService
 				$extra_ref['caches_hidden'] = 0 + $row['hidden_count'];
 			}
 			mysql_free_result($rs);
-			
+
 			if (in_array('rcmds_given', $fields))
 			{
 				$rs = Db::query("
@@ -143,9 +143,9 @@ class WebService
 					$extra_ref['rcmds_given'] = isset($rcmds_counts[$user_id]) ? 0 + $rcmds_counts[$user_id] : 0;
 				}
 			}
-			
+
 			# "Apply" only those fields which the consumer wanted.
-			
+
 			foreach (array('caches_found', 'caches_notfound', 'caches_hidden', 'rcmds_given') as $field)
 			{
 				if (!in_array($field, $fields))
@@ -154,13 +154,13 @@ class WebService
 					$result_ref[$field] = $extras[$uuid2id[$uuid]][$field];
 			}
 		}
-		
+
 		# Check which user IDs were not found and mark them with null.
-		
+
 		foreach ($user_uuids as $user_uuid)
 			if (!isset($results[$user_uuid]))
 				$results[$user_uuid] = null;
-		
+
 		return Okapi::formatted_response($request, $results);
 	}
 }

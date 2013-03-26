@@ -25,7 +25,7 @@ $m = $vars['method'];
 						<?= $vars['menu'] ?>
 					</td>
 					<td class='article'>
-					
+
 						<h1>
 							<?= $m['brief_description'] ?>
 							<div class='subh1'>:: <b><?= $m['name'] ?></b> method</div>

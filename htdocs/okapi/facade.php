@@ -4,22 +4,23 @@ namespace okapi;
 
 # OKAPI Framework -- Wojciech Rygielski <rygielski@mimuw.edu.pl>
 
-# Include this file if you want to use OKAPI's services with any
-# external code (your service calls will appear under the name "Facade"
-# in the weekly OKAPI usage report).
+# Use this class when you want to use OKAPI's services within OC code.
+# (Your service calls will appear with the name "Facade" in the weekly
+# OKAPI usage report).
 
-# Note, that his is the *ONLY* internal OKAPI file that is guaranteed
-# to stay backward-compatible (I'm speaking about INTERNAL files here,
-# all OKAPI methods will stay compatible forever). If you want to use
-# something that has not been exposed through the Facade class, contact
+# IMPORTANT COMPATIBILITY NOTES:
+
+# Note, that this is the *ONLY* internal OKAPI file that is guaranteed
+# to stay backward-compatible (note that we mean FILES here, all OKAPI
+# methods will stay compatible forever). If you want to use any class or
+# method that has not been exposed through the Facade class, contact
 # OKAPI developers, we will add it here.
 
 # Including this file will initialize OKAPI Framework with its default
 # exception and error handlers. OKAPI is strict about PHP warnings and
-# notices. You might need to temporarily disable the error handler in
-# order to get it to work with some legacy code. Do this by calling
-# OkapiErrorHandler::disable() BEFORE calling the "buggy" code, and
-# OkapiErrorHandler::reenable() AFTER returning from it.
+# notices, so you might need to temporarily disable the error handler in
+# order to get it to work with your code. Just call this after you
+# include the Facade file: OkapiErrorHandler::disable().
 
 
 use Exception;
@@ -54,7 +55,7 @@ class Facade
 		$request->perceive_as_http_request = true;
 		return OkapiServiceRunner::call($service_name, $request);
 	}
-	
+
 	/**
 	 * This works like service_call with two exceptions: 1. It passes all your
 	 * current HTTP request headers to OKAPI (which can make use of them in
@@ -74,7 +75,7 @@ class Facade
 		$response = OkapiServiceRunner::call($service_name, $request);
 		$response->display();
 	}
-	
+
 	/**
 	 * Create a search set from a temporary table. This is very similar to
 	 * the "services/caches/search/save" method, but allows OC server to
@@ -97,5 +98,43 @@ class Facade
 		return \okapi\services\caches\search\save\WebService::get_set(
 			$tables, $where_conds, $min_store, $max_ref_age
 		);
+	}
+
+	/**
+	 * Mark the specified caches as *possibly* modified. The replicate module
+	 * will scan for changes within these caches on the next changelog update.
+	 * This is useful in some cases, when OKAPI cannot detect the modification
+	 * for itself (grep OCPL code for examples). See issue #179.
+	 *
+	 * $cache_codes may be a single cache code or an array of codes.
+	 */
+	public static function schedule_geocache_check($cache_codes)
+	{
+		if (!is_array($cache_codes))
+			$cache_codes = array($cache_codes);
+		Db::execute("
+			update caches
+			set okapi_syncbase = now()
+			where wp_oc in ('".implode("','", array_map('mysql_real_escape_string', $cache_codes))."')
+		");
+	}
+
+	/**
+	 * You will probably want to call that with FALSE when using Facade
+	 * in buggy, legacy OC code. This will disable OKAPI's default behavior
+	 * of treating NOTICEs as errors.
+	 */
+	public static function disable_error_handling()
+	{
+		OkapiErrorHandler::disable();
+	}
+
+	/**
+	 * If you disabled OKAPI's error handling with disable_error_handling,
+	 * you may reenable it with this method.
+	 */
+	public static function reenable_error_handling()
+	{
+		OkapiErrorHandler::reenable();
 	}
 }

@@ -28,9 +28,9 @@ class WebService
 		$username = $request->get_parameter('username');
 		if (!$username) throw new ParamMissing('username');
 		$fields = $request->get_parameter('fields');
-		
+
 		# There's no need to validate the fields parameter.
-		
+
 		$results = OkapiServiceRunner::call('services/users/by_usernames', new OkapiInternalRequest(
 			$request->consumer, $request->token, array('usernames' => $username,
 			'fields' => $fields)));

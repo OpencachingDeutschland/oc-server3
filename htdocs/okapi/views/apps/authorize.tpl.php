@@ -32,7 +32,7 @@
 			<a href='<?= $vars['okapi_base_url'] ?>'><img src='<?= $vars['okapi_base_url'] ?>static/logo-xsmall.gif' alt='OKAPI' style='float: right; margin-left: 10px;'></a>
 			<a href='/'><img src="/images/oc_logo.png" alt='OpenCaching' style='float: left; margin-right: 10px'></a>
 			<a class='opencaching'><?= $vars['site_name'] ?></a>
-			
+
 			<div style='float: right; clear: right; margin: 10px 0 10px 30px'>
 				Choose your language:
 				<select id='langpref' style='border: 1px solid #ccc'>
@@ -41,7 +41,7 @@
 					<? } ?>
 				</select>
 			</div>
-			
+
 			<? if (isset($vars['token_expired']) && $vars['token_expired']) { ?>
 				<h1 style='clear: both'><?= _("Expired request") ?></h1>
 				<p><?= _("Unfortunately, the request has expired. Please try again.") ?></p>

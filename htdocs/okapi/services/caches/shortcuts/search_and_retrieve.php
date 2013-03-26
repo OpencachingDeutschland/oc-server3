@@ -18,7 +18,7 @@ class WebService
 			'min_auth_level' => 1
 		);
 	}
-	
+
 	public static function call(OkapiRequest $request)
 	{
 		# Check search method
@@ -35,7 +35,7 @@ class WebService
 		$search_params = json_decode($search_params, true);
 		if (!is_array($search_params))
 			throw new InvalidParam('search_params', "Should be a JSON-encoded dictionary");
-		
+
 		# Check retrieval method
 		$retr_method = $request->get_parameter('retr_method');
 		if (!$retr_method)
@@ -48,14 +48,14 @@ class WebService
 		$retr_params = json_decode($retr_params, true);
 		if (!is_array($retr_params))
 			throw new InvalidParam('retr_params', "Should be a JSON-encoded dictionary");
-		
+
 		# Wrapped?
 		$wrap = $request->get_parameter('wrap');
 		if ($wrap == null) throw new ParamMissing('wrap');
 		if (!in_array($wrap, array('true', 'false')))
 			throw new InvalidParam('wrap');
 		$wrap = ($wrap == 'true');
-			
+
 		# Run search method
 		try
 		{
@@ -67,7 +67,7 @@ class WebService
 			throw new InvalidParam('search_params', "Search method responded with the ".
 				"following error message: ".$e->getMessage());
 		}
-		
+
 		# Run retrieval method
 		try
 		{
@@ -80,7 +80,7 @@ class WebService
 			throw new InvalidParam('retr_params', "Retrieval method responded with the ".
 				"following error message: ".$e->getMessage());
 		}
-		
+
 		if ($wrap)
 		{
 			# $retr_result might be a PHP object, but also might be a binary response

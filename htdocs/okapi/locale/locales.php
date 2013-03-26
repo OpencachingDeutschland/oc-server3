@@ -10,7 +10,7 @@ class Locales
 		'nl' => array('lang' => 'nl', 'locale' => 'nl_NL.utf8', 'name' => 'Dutch'),
 		'de' => array('lang' => 'de', 'locale' => 'de_DE.utf8', 'name' => 'German'),
 	);
-	
+
 	/**
 	 * Get the list of locales that should be installed on the system in order
 	 * for all translations to work properly.
@@ -22,7 +22,7 @@ class Locales
 			$arr[] = $value['locale'];
 		return $arr;
 	}
-	
+
 	/**
 	 * Get the list of locales installed on the current system.
 	 */
@@ -34,14 +34,14 @@ class Locales
 				$arr[] = $item;
 		return $arr;
 	}
-	
+
 	private static function get_locale_for_language($lang)
 	{
 		if (isset(self::$languages[$lang]))
 			return self::$languages[$lang]['locale'];
 		return null;
 	}
-	
+
 	public static function get_best_locale($langprefs)
 	{
 		foreach ($langprefs as $lang)

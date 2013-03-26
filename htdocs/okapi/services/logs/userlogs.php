@@ -39,14 +39,14 @@ class WebService
 		$offset = intval($offset);
 		if ($offset < 0)
 			throw new InvalidParam('offset', "'$offset'");
-		
+
 		# Check if user exists and retrieve user's ID (this will throw
 		# a proper exception on invalid UUID).
 		$user = OkapiServiceRunner::call('services/users/user', new OkapiInternalRequest(
 			$request->consumer, null, array('user_uuid' => $user_uuid, 'fields' => 'internal_id')));
-		
+
 		# User exists. Retrieving logs.
-			
+
 		$rs = Db::query("
 			select cl.id, cl.uuid, cl.type, unix_timestamp(cl.date) as date, cl.text,
 				c.wp_oc as cache_code
@@ -70,7 +70,7 @@ class WebService
 				'comment' => $row['text']
 			);
 		}
-		
+
 		return Okapi::formatted_response($request, $results);
 	}
 }

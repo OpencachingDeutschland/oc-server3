@@ -43,12 +43,12 @@
 						<?= $vars['menu'] ?>
 					</td>
 					<td class='article'>
-					
+
 						<h1>
 							Sign up for an API Key
 							<div class='subh1'>:: <b>OpenCaching API</b> Reference</div>
 						</h1>
-						
+
 						<form id='signup'>
 							<table cellspacing='1px' class='signup'>
 								<tr>
@@ -86,7 +86,7 @@
 						</form>
 
 						<h2>Terms of Use</h2>
-						
+
 						<p>When using data from <b><?= $vars['site_name'] ?></b> you <b>must</b> attribute the
 						data back to <?= $vars['site_name'] ?>.</p>
 						<ul>

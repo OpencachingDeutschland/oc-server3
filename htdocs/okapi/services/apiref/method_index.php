@@ -21,7 +21,7 @@ class WebService
 			'min_auth_level' => 0
 		);
 	}
-	
+
 	public static function call(OkapiRequest $request)
 	{
 		$methodnames = OkapiServiceRunner::$all_names;

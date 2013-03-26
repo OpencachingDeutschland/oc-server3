@@ -26,7 +26,7 @@ class WebService
 			'min_auth_level' => 1
 		);
 	}
-	
+
 	public static function call(OkapiRequest $request)
 	{
 		$search_params = SearchAssistant::get_common_search_params($request);

@@ -19,7 +19,7 @@ class WebService
 			'min_auth_level' => 1
 		);
 	}
-	
+
 	/**
 	 * Returns one of: array('cache_code', 'OPXXXX'), array('internal_id', '12345'),
 	 * array('uuid', 'A408C3...') or null.
@@ -27,7 +27,7 @@ class WebService
 	private static function get_cache_key($url)
 	{
 		# Determine our own domain.
-		
+
 		static $host = null;
 		static $length = null;
 		if ($host == null)
@@ -37,9 +37,9 @@ class WebService
 				$host = substr($host, 4);
 			$length = strlen($host);
 		}
-		
+
 		# Parse the URL
-			
+
 		$uri = parse_url($url);
 		if ($uri == false)
 			return null;
@@ -75,11 +75,11 @@ class WebService
 		}
 		return null;
 	}
-	
+
 	public static function call(OkapiRequest $request)
 	{
 		# Retrieve the list of URLs to check.
-		
+
 		$tmp = $request->get_parameter('urls');
 		if (!$tmp)
 			throw new ParamMissing('urls');
@@ -89,9 +89,9 @@ class WebService
 		if (!in_array($as_dict, array('true', 'false')))
 			throw new InvalidParam('as_dict');
 		$as_dict = ($as_dict == 'true');
-		
+
 		# Generate the lists of keys.
-		
+
 		$results = array();
 		$urls_with = array(
 			'cache_code' => array(),
@@ -106,14 +106,14 @@ class WebService
 			else
 				$results[$url_ref] = null;
 		}
-		
+
 		# Include 'cache_code' references.
-		
+
 		foreach ($urls_with['cache_code'] as $url => $cache_code)
 			$results[$url] = $cache_code;
-		
+
 		# Include 'internal_id' references.
-		
+
 		$internal_ids = array_values($urls_with['internal_id']);
 		if (count($internal_ids) > 0)
 		{
@@ -135,9 +135,9 @@ class WebService
 					$results[$url] = null;
 			}
 		}
-		
+
 		# Include 'uuid' references.
-		
+
 		$uuids = array_values($urls_with['uuid']);
 		if (count($uuids) > 0)
 		{
@@ -159,9 +159,9 @@ class WebService
 					$results[$url] = null;
 			}
 		}
-		
+
 		# Format the results according to the 'as_dict' parameter.
-		
+
 		if ($as_dict)
 			return Okapi::formatted_response($request, $results);
 		else

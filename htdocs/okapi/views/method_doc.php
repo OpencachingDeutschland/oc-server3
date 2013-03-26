@@ -21,7 +21,7 @@ class View
 	{
 		require_once($GLOBALS['rootpath'].'okapi/service_runner.php');
 		require_once($GLOBALS['rootpath'].'okapi/views/menu.inc.php');
-		
+
 		try
 		{
 			$method = OkapiServiceRunner::call('services/apiref/method', new OkapiInternalRequest(
@@ -38,7 +38,7 @@ class View
 			'installations' => OkapiMenu::get_installations(),
 			'okapi_rev' => Okapi::$revision,
 		);
-		
+
 		$response = new OkapiHttpResponse();
 		$response->content_type = "text/html; charset=utf-8";
 		ob_start();

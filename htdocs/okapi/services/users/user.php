@@ -41,10 +41,10 @@ class WebService
 			}
 		}
 		$fields = $request->get_parameter('fields');
-		
+
 		# There's no need to validate the fields parameter as the 'users'
 		# method does this (it will raise a proper exception on invalid values).
-		
+
 		$results = OkapiServiceRunner::call('services/users/users', new OkapiInternalRequest(
 			$request->consumer, $request->token, array('user_uuids' => $user_uuid,
 			'fields' => $fields)));

@@ -21,11 +21,11 @@ class View
 	{
 		# This is a hidden page for OKAPI developers. It will output a cronjobs
 		# report. This is useful for debugging.
-		
+
 		$response = new OkapiHttpResponse();
 		$response->content_type = "text/plain; charset=utf-8";
 		ob_start();
-		
+
 		require_once($GLOBALS['rootpath']."okapi/cronjobs.php");
 		$schedule = Cache::get("cron_schedule");
 		if ($schedule == null)

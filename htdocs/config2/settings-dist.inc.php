@@ -35,6 +35,7 @@
 	 */
 	$opt['php']['debug'] = PHP_DEBUG_SKIP;
 	$opt['php']['timezone'] = 'Europe/Berlin';
+	$opt['php']['semaphores'] = true;
 
 	// database connection
 	
@@ -364,7 +365,7 @@
 	$opt['logic']['license']['newusers'] = 2;  // see license constants in lib2/logic/const.inc.php
 	$opt['logic']['license']['admin'] = true;
 	$opt['logic']['license']['disclaimer'] = false;
-	$opt['logic']['license']['terms'] = 'http://www.opencaching.de/articles.php?page=impressum#datalicense';
+	$opt['logic']['license']['terms'] = 'articles.php?page=impressum#datalicense';
 	   // 'disclaimer' and 'terms' also in lib/settings.inc.php
 
   /* Database charset

@@ -174,7 +174,4 @@
 	$opt['template']['locales']['DA']['show'] = false;
 	$opt['template']['locales']['PT']['show'] = false;
 	$opt['template']['locales']['JA']['show'] = false;
-
-	// OKAPI settings
-	$disable_semaphores = true;
 ?>

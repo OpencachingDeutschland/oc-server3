@@ -211,10 +211,6 @@
 	// you can use -1 to use the master (not recommended, because replicated to slaves)
 	$opt['db']['slave']['primary'] = -1;
 
-	// OKAPI settings
-	$disable_semaphores = false;
-
-
 /* post_config() is invoked directly before the first HTML line of the main.tpl.php is sent to the client.
  */
 function post_config()

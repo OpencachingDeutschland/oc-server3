@@ -599,7 +599,7 @@
 			$thiswp = mb_ereg_replace('{wp_lat}', sprintf('%01.5f', $childWaypoint['latitude']), $thiswp);
 			$thiswp = mb_ereg_replace('{wp_lon}', sprintf('%01.5f', $childWaypoint['longitude']), $thiswp);
 			$thiswp = mb_ereg_replace('{time}', $time, $thiswp);
-			$thiswp = mb_ereg_replace('{name}', $r['waypoint'].'W'.sprintf($digits,$n) , $thiswp);
+			$thiswp = mb_ereg_replace('{name}', $r['waypoint'].'-'.sprintf($digits,$n) , $thiswp);
 			$thiswp = mb_ereg_replace('{cachename}', xmlentities($r['name']), $thiswp);
 			$thiswp = mb_ereg_replace('{comment}',xmlentities($childWaypoint['description']), $thiswp);
 			$thiswp = mb_ereg_replace('{desc}', $translate->t('Waypoint','','',0).' '.$n, $thiswp);

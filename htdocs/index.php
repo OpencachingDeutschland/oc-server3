@@ -99,19 +99,21 @@
 														`caches`.`cache_id` `cache_id`,
 														`caches`.`name` `name`,
 														`caches`.`date_hidden`,
-														`cache_location`.`adm1`,
+														IFNULL(`sys_trans_text`.`text`,`cache_location`.`adm1`) AS `adm1`,
 														`cache_location`.`adm2`,
 														`cache_location`.`adm3`,
 														`cache_location`.`adm4`
 											 FROM `caches`
 								 INNER JOIN `user` ON `user`.`user_id`=`caches`.`user_id`
 									LEFT JOIN `cache_location` ON `caches`.`cache_id`=`cache_location`.`cache_id`
+									LEFT JOIN `countries` ON `countries`.`short`=`cache_location`.`code1`
+									LEFT JOIN `sys_trans_text` ON `sys_trans_text`.`trans_id`=`countries`.`trans_id` AND `sys_trans_text`.`lang`='&2'
 											WHERE `caches`.`country`='&1' AND 
 											      `caches`.`date_hidden` >= curdate() AND 
 														`caches`.`type` = 6 AND 
 														`caches`.`status`=1
 									 ORDER BY `date_hidden` ASC LIMIT 0, 10",
-									          $sUserCountry);
+									          $sUserCountry, $opt['template']['locale']);
 		$tpl->assign_rs('events', $rs);
 		sql_free_result($rs);
 
@@ -122,18 +124,20 @@
 														`caches`.`name` `name`,
 														`caches`.`date_created` `date_created`,
 														`caches`.`type`,
-														`cache_location`.`adm1`,
+														IFNULL(`sys_trans_text`.`text`,`cache_location`.`adm1`) AS `adm1`,
 														`cache_location`.`adm2`,
 														`cache_location`.`adm3`,
 														`cache_location`.`adm4`
 											 FROM `caches` 
 								 INNER JOIN `user` ON `user`.`user_id`=`caches`.`user_id` 
 									LEFT JOIN `cache_location` ON `caches`.`cache_id`=`cache_location`.`cache_id`
+									LEFT JOIN `countries` ON `countries`.`short`=`cache_location`.`code1`
+									LEFT JOIN `sys_trans_text` ON `sys_trans_text`.`trans_id`=`countries`.`trans_id` AND `sys_trans_text`.`lang`='&2'
 											WHERE `caches`.`country`='&1' AND 
 											      `caches`.`type` != 6 AND 
 														`caches`.`status` = 1
 									 ORDER BY `caches`.`date_created` DESC LIMIT 0, 10",
-									          $sUserCountry);
+									          $sUserCountry, $opt['template']['locale']);
 		$tpl->assign_rs('newcaches', $rs);
 		sql_free_result($rs);
 
@@ -149,7 +153,7 @@
 																	`caches`.`cache_id` AS `cache_id`,
 																	`caches`.`name` AS `name`,
 																	`caches`.`type`,
-																	`cache_location`.`adm1`,
+																	IFNULL(`sys_trans_text`.`text`,`cache_location`.`adm1`) AS `adm1`,
 																	`cache_location`.`adm2`,
 																	`cache_location`.`adm3`,
 																	`cache_location`.`adm4`
@@ -157,6 +161,8 @@
 											 INNER JOIN `caches` ON `caches`.`cache_id`=`cache_rating`.`cache_id`
 											 INNER JOIN `user` ON `user`.`user_id`=`caches`.`user_id`
 												LEFT JOIN `cache_location` ON `cache_rating`.`cache_id`=`cache_location`.`cache_id`
+												LEFT JOIN `countries` ON `countries`.`short`=`cache_location`.`code1`
+												LEFT JOIN `sys_trans_text` ON `sys_trans_text`.`trans_id`=`countries`.`trans_id` AND `sys_trans_text`.`lang`='&2'
 														WHERE `caches`.`country`='&1' AND 
 																	`cache_rating`.`rating_date`>DATE_SUB(NOW(), INTERVAL 30 DAY) AND 
 																	`caches`.`type`!=6 AND 
@@ -166,7 +172,7 @@
 																	`dLastLog` DESC,
 																	`cache_id` DESC 
 														LIMIT 0, 10",
-									                $sUserCountry);
+									                $sUserCountry, $opt['template']['locale']);
 		$tpl->assign_rs('topratings', $rs);
 		sql_free_result($rs);
 

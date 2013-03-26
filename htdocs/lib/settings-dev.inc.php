@@ -58,7 +58,7 @@
 	$absolute_server_URI = $dev_baseurl . '/';
 	
 	// EMail address of the sender
-	if (!isset($emailaddr)) $emailaddr = 'contact@opencaching.de';
+	if (!isset($emailaddr)) $emailaddr = 'root@local.opencaching.de';
 	
 	// location of cache images
 	if (!isset($picdir)) $picdir = $rootpath . 'images/uploads';
@@ -142,7 +142,7 @@
   
   // data license
 	$opt['logic']['license']['disclaimer'] = true;   // also in lib2/settings-dist.inc.php
-	$opt['logic']['license']['terms'] = 'http://www.opencaching.de/articles.php?page=impressum#datalicense';
+	$opt['logic']['license']['terms'] = $absolute_server_URI . 'articles.php?page=impressum#datalicense';
 
   // see config2/settings-dist.inc.php
 	$opt['template']['default']['locale'] = 'DE';      // may be overwritten by $opt['domain'][...]['locale']
@@ -174,4 +174,7 @@
 	$opt['template']['locales']['DA']['show'] = false;
 	$opt['template']['locales']['PT']['show'] = false;
 	$opt['template']['locales']['JA']['show'] = false;
+
+	// OKAPI settings
+	$disable_semaphores = true;
 ?>

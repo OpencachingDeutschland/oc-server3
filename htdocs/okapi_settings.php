@@ -25,6 +25,7 @@ function get_okapi_settings()
 		'ADMINS' => array($sql_errormail,'rygielski@mimuw.edu.pl'),
 		'FROM_FIELD' => $emailaddr,
 		'DEBUG' => $debug_page,
+		'DEBUG_PREVENT_SEMAPHORES' => $disable_semaphores,  # not available on current developer system
 		'DB_SERVER' => $dbserver,
 		'DB_NAME' => $dbname,
 		'DB_USERNAME' => $dbusername,

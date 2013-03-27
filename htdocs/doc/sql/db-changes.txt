@@ -57,5 +57,6 @@ date         commit ID    change
 
 2013-03-20   085c1398     added field caches.listing_last_modified;
                             must be initialized once via Admin / DB Maintenance / sp_updateall_cache_listingdates
-2013-03-24                added table 'pw_dict'
-2013-03-25                added field cache_reports.date_created
+2013-03-24   9644465b     added table 'pw_dict'
+2013-03-25   21d92feb     added field cache_reports.date_created + trigger
+2013-03-27                added fields cache_attrib.gc_id, .gc_inc and .gc_name

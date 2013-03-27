@@ -709,6 +709,8 @@ class WebService
 		{
 			foreach ($results as &$result_ref)
 				$result_ref['alt_wpts'] = array();
+			$cachelist = implode("','", array_map('mysql_real_escape_string', array_keys($cacheid2wptcode)));
+
 			if (Settings::get('OC_BRANCH') == 'oc.pl')
 			{
 				# OCPL uses 'waypoints' table to store additional waypoints. OCPL also have
@@ -716,6 +718,13 @@ class WebService
 				# of a multicache). Such hidden waypoints are not exposed by OKAPI. A stage
 				# fields is used for ordering and naming.
 
+				$waypoints = Db::select_value("
+					select count(*)
+					from waypoints
+					where
+						cache_id in ('".$cachelist."')
+						and status = 1
+				");
 				$rs = Db::query("
 					select
 						cache_id, stage, latitude, longitude, `desc`,
@@ -727,7 +736,7 @@ class WebService
 						end as sym
 					from waypoints
 					where
-						cache_id in ('".implode("','", array_map('mysql_real_escape_string', array_keys($cacheid2wptcode)))."')
+						cache_id in ('".$cachelist."')
 						and status = 1
 					order by cache_id, stage, `desc`
 				");
@@ -736,28 +745,40 @@ class WebService
 			{
 				# OCDE uses 'coordinates' table (with type=1) to store additional waypoints.
 				# All waypoints are are public.
-
+				
+				$waypoints = Db::select_value("
+					select count(*)
+					from coordinates
+					where
+						type = 1
+						and cache_id in ('".$cachelist."')
+				");
 				$rs = Db::query("
 					select
 						cache_id,
-						null as stage,
+						@stage := @stage + 1 as stage,
 						latitude, longitude,
 						description as `desc`,
 						case subtype
 							when 1 then 'Parking Area'
+							when 3 then 'Flag, Blue'
+							when 4 then 'Circle with X'
+							when 5 then 'Diamond, Green'
 							else 'Flag, Green'
 						end as sym
 					from coordinates
+					join (select @stage := 0) s
 					where
 						type = 1
-						and cache_id in ('".implode("','", array_map('mysql_real_escape_string', array_keys($cacheid2wptcode)))."')
-					order by cache_id, `desc`
+						and cache_id in ('".$cachelist."')
+					order by cache_id, id, `desc`
 				");
 			}
+			$wpt_format = "%s-%0" . ($waypoints>0 ? (floor(log10(count($waypoints))) + 1) : "") . "d";
 			while ($row = mysql_fetch_assoc($rs))
 			{
 				$results[$cacheid2wptcode[$row['cache_id']]]['alt_wpts'][] = array(
-					'name' => $cacheid2wptcode[$row['cache_id']]."-".($row['stage'] ? $row['stage'] : "wpt"),
+					'name' => sprintf($wpt_format, $cacheid2wptcode[$row['cache_id']], $row['stage']),
 					'location' => round($row['latitude'], 6)."|".round($row['longitude'], 6),
 					'sym' => $row['sym'],
 					'description' => ($row['stage'] ? _("Stage")." ".$row['stage'].": " : "").$row['desc'],

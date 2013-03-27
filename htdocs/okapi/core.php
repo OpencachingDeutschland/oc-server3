@@ -689,7 +689,7 @@ class OkapiHttpResponse
 		if ($try_gzip && is_string($this->body))
 		{
 			header("Content-Encoding: gzip");
-			$gzipped = gzencode($this->body, 5, true);
+			$gzipped = gzencode($this->body, 5);
 			header("Content-Length: ".strlen($gzipped));
 			print $gzipped;
 		}
@@ -778,7 +778,7 @@ class Okapi
 {
 	public static $data_store;
 	public static $server;
-	public static $revision = 567; # This gets replaced in automatically deployed packages
+	public static $revision = 576; # This gets replaced in automatically deployed packages
 	private static $okapi_vars = null;
 
 	/** Get a variable stored in okapi_vars. If variable not found, return $default. */

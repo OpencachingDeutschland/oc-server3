@@ -127,7 +127,7 @@
 				<b>null</b> if geocache does not have a container,
 			</li>
 			<li>
-				<p><b>size2</b> - string indicating the size od the container, so called 
+				<p><b>size2</b> - string indicating the size of the container, so called 
 				"size2 code". One of the following values:
 				'none', 'nano', 'micro', 'small', 'regular', 'large', 'xlarge', 'other'.</p>
 			</li>

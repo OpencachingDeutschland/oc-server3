@@ -251,7 +251,7 @@
 
 	/* location of uploaded images
 	 */
-	$opt['logic']['pictures']['dir'] = $opt['rootpath'] . 'images/uploads';
+	$opt['logic']['pictures']['dir'] = $opt['rootpath'] . 'images/uploads';  // Ocprop
 	$opt['logic']['pictures']['url'] = 'http://devel.opencaching.de/images/uploads';
 	$opt['logic']['pictures']['maxsize'] = 153600;
 	$opt['logic']['pictures']['extensions'] = 'jpg;jpeg;gif;png;bmp';

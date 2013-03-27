@@ -54,6 +54,27 @@
     </groundspeak:cache>
   </wpt>
 {cache_waypoints}';
+  /* Ocprop:
+   *    <wpt\s+lat=\"([0-9\-\+\.]+)\"\s+lon=\"([0-9\-\+\.]+)\">
+   *    <time>(.*?)<\/time>
+   *      (Date: ^([0-9]{4})\-([0-9]{2})\-([0-9]{2})T[0-9\:\-\.]+(Z)?$/s)
+   *    <name>(.*?)<\/name>
+   *    <url>http:\/\/www\.opencaching\.de\/viewcache\.php\?cacheid=([0-9]+)<\/url>
+   *    <sym>(.*?)<\/sym>
+   *    <groundspeak:cache\s+id=\"[0-9]+\"\s+available=\"(True|False)\"\s+archived=\"(True|False)\"
+   *    <groundspeak:name>(.*?)<\/groundspeak:name>
+   *    <groundspeak:placed_by>(.*?)<\/groundspeak:placed_by>
+   *    <groundspeak:owner id="([0-9])+">(.*?)<\/groundspeak:owner>
+   *    <groundspeak:type>(.*?)<\/groundspeak:type>
+   *    <groundspeak:container>(.*?)<\/groundspeak:container>
+   *    <groundspeak:difficulty>(.*?)<\/groundspeak:difficulty>
+   *    <groundspeak:terrain>(.*?)<\/groundspeak:terrain>
+   *    <groundspeak:country>(.*?)<\/groundspeak:country>
+   *    <groundspeak:state>(.*?)<\/groundspeak:state>
+	 *    <groundspeak:short_description html="(.*?)".*?>(.*?)<\/groundspeak:short_description>
+   *    <groundspeak:long_description html="(.*?)".*?>(.*?)<\/groundspeak:long_description>
+   *    <groundspeak:encoded_hints>(.*?)<\/groundspeak:encoded_hints>
+   */
 
 	$gpxAttributes = ' 	      <groundspeak:attribute id="{attrib_id}" inc="{attrib_inc}">{attrib_name}</groundspeak:attribute>';
 
@@ -209,10 +230,10 @@
 	}
 
 	//startat?
-	$startat = isset($_REQUEST['startat']) ? $_REQUEST['startat'] : 0;
+	$startat = isset($_REQUEST['startat']) ? $_REQUEST['startat'] : 0;  // Ocprop
 	if (!is_numeric($startat)) $startat = 0;
 	
-	if (isset($_REQUEST['count']))
+	if (isset($_REQUEST['count']))  // Ocprop
 		$count = $_REQUEST['count'];
 	else
 		$count = $caches_per_page;
@@ -243,7 +264,7 @@
 		$sFilebasename = 'ocde' . $options['queryid'];
 		
 	$bUseZip = ($rCount['count'] > 20);
-	$bUseZip = $bUseZip || (isset($_REQUEST['zip']) && ($_REQUEST['zip'] == '1'));
+	$bUseZip = $bUseZip || (isset($_REQUEST['zip']) && ($_REQUEST['zip'] == '1'));  // Ocprop
 	
 	if ($bUseZip == true)
 	{
@@ -323,6 +344,7 @@
 		if ($r['hint'] == '')
 			$thisline = mb_ereg_replace('{hints}', '', $thisline);
 		else
+		  // Ocprop:  <groundspeak:encoded_hints>(.*?)<\/groundspeak:encoded_hints>
 			$thisline = mb_ereg_replace('{hints}', '      <groundspeak:encoded_hints>' . xmlentities(strip_tags($r['hint'])) . '</groundspeak:encoded_hints>
 ', $thisline);
 

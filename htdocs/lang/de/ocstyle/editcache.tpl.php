@@ -112,7 +112,7 @@ function toggleAttr(id)
 </div>
 
 <form action="editcache.php" method="post" enctype="application/x-www-form-urlencoded" name="editcache_form" dir="ltr">
-<input type="hidden" name="cacheid" value="{cacheid}"/>
+<input type="hidden" name="cacheid" value="{cacheid}"/> <!-- Ocprop -->
 <input type="hidden" id="cache_attribs" name="cache_attribs" value="{cache_attribs}" />
 <input type="hidden" name="show_all_countries" value="{show_all_countries}"/>
 <table class="table">
@@ -282,7 +282,7 @@ function toggleAttr(id)
 					<img src="lang/de/ocstyle/images/description/22x22-image.png" width="22" height="22" align="middle" border="0">
 					{t}Pictures{/t}&nbsp;&nbsp;
 					<img src="lang/de/ocstyle/images/action/16x16-addimage.png" width="16" height="16" align="middle" border="0">
-					<span style="font-weight: 400;font-size: small;">[<a href="picture.php?action=add&cacheuuid={cacheuuid_urlencode}">{t}Upload a picture{/t}</a>]</span>
+					<span style="font-weight: 400;font-size: small;">[<!-- Ocprop >> --><a href="picture.php?action=add&cacheuuid={cacheuuid_urlencode}">{t}Upload a picture{/t}</a>]</span>
 				</p>
 			</div>
 		</td>
@@ -323,7 +323,7 @@ function toggleAttr(id)
 	</tr>
 	<tr><td class="spacer" colspan="2"></td></tr>
 	<tr>
-		<td>{t}Hidden since:{/t}</td>
+		<td>{t}Hidden since:{/t}</td><!-- << Ocprop -->
 		<td>
 			<input class="input20" type="text" name="hidden_day" maxlength="2" value="{date_day}"/>.
 			<input class="input20" type="text" name="hidden_month" maxlength="2" value="{date_month}"/>.

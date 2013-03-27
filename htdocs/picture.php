@@ -33,11 +33,11 @@
 	$tpl->assign('action', $action);
 	$tpl->assign('redirect', $redirect);
 
-	if ($action == 'add')
+	if ($action == 'add')  // Ocprop
 	{
 		$picture = new picture();
 
-		if (isset($_REQUEST['cacheuuid']))
+		if (isset($_REQUEST['cacheuuid']))  // Ocprop
 		{
 			$cache = cache::fromUUID($_REQUEST['cacheuuid']);
 			if ($cache === null)
@@ -51,7 +51,7 @@
 
 			$cache = null;
 		}
-		else if (isset($_REQUEST['loguuid']))
+		else if (isset($_REQUEST['loguuid']))  // Ocprop
 		{
 			$cachelog = cachelog::fromUUID($_REQUEST['loguuid']);
 			if ($cachelog === null)
@@ -71,15 +71,15 @@
 			$tpl->error(ERROR_INVALID_OPERATION);
 
 		// uploaded file ok?
-		if (isset($_REQUEST['ok']))
+		if (isset($_REQUEST['ok']))  // Ocprop
 		{
 			$bError = false;
 
-			$picture->setSpoiler(isset($_REQUEST['spoiler']) && $_REQUEST['spoiler']=='1');
-			$picture->setDisplay((isset($_REQUEST['notdisplay']) && $_REQUEST['notdisplay']=='1') == false);
+			$picture->setSpoiler(isset($_REQUEST['spoiler']) && $_REQUEST['spoiler']=='1');  // Ocprop
+			$picture->setDisplay((isset($_REQUEST['notdisplay']) && $_REQUEST['notdisplay']=='1') == false);  // Ocprop
 			$picture->setMapPreview(isset($_REQUEST['mappreview']) && $_REQUEST['mappreview']=='1');
 
-			$title = isset($_REQUEST['title']) ? $_REQUEST['title'] : '';
+			$title = isset($_REQUEST['title']) ? $_REQUEST['title'] : '';  // Ocprop
 			if ($title == '')
 			{
 				$tpl->assign('errortitle', true);
@@ -88,7 +88,7 @@
 			else
 				$picture->setTitle($title);
 
-			if (!isset($_FILES['file']))
+			if (!isset($_FILES['file']))  // Ocprop
 			{
 				$tpl->assign('errorfile', ERROR_UPLOAD_ERR_NO_FILE);
 				$bError = true;

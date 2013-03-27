@@ -29,10 +29,10 @@
 		require($stylepath . '/editdesc.inc.php');
 
 		// check for old-style parameters
-		if (isset($_REQUEST['cacheid']) && isset($_REQUEST['desclang']) && !isset($_REQUEST['descid']))
+		if (isset($_REQUEST['cacheid']) && isset($_REQUEST['desclang']) && !isset($_REQUEST['descid']))  // Ocprop
 		{
-			$cache_id = $_REQUEST['cacheid'];
-			$desc_lang = $_REQUEST['desclang'];
+			$cache_id = $_REQUEST['cacheid'];  // Ocprop
+			$desc_lang = $_REQUEST['desclang'];  // Ocprop
 
 			$rs = sql("SELECT `id` FROM `cache_desc` WHERE `cache_id`='&1' AND `language`='&2'", $cache_id, $desc_lang);
 			if (mysql_num_rows($rs) == 1)
@@ -89,10 +89,10 @@
 					$show_all_langs = false;
 
 					//save to DB?
-					if (isset($_POST['post']))
+					if (isset($_POST['post']))  // Ocprop
 					{
 						//here we read all used information from the form if submitted
-						$descMode = isset($_POST['descMode']) ? $_POST['descMode'] : 1;
+						$descMode = isset($_POST['descMode']) ? $_POST['descMode'] : 1;  // Ocprop
 
 						// fuer alte Versionen von OCProp
 						if (isset($_POST['submit']) && !isset($_POST['version2']))
@@ -116,7 +116,7 @@
 								$desc_html = 0;
 								break;
 						}
-						$short_desc = $_POST['short_desc'];
+						$short_desc = $_POST['short_desc'];  // Ocprop
 						$hint = htmlspecialchars($_POST['hints'], ENT_COMPAT, 'UTF-8');
 						$desclang = $_POST['desclang'];
 						$show_all_langs = isset($_POST['show_all_langs_value']) ? $_POST['show_all_langs_value'] : 0;
@@ -132,7 +132,7 @@
 						if ($desc_html == 1)
 						{
 							// Text from textarea
-							$desc = $_POST['desc'];
+							$desc = $_POST['desc'];  // Ocprop
 						
 							// fuer alte Versionen von OCProp
 							if (isset($_POST['submit']) && !isset($_POST['version2']))
@@ -156,7 +156,7 @@
 							}
 						}
 
-						if (isset($_POST['submitform']))
+						if (isset($_POST['submitform']))  // Ocprop
 						{
 							// prüfen, ob sprache nicht schon vorhanden
 							$rs = sql("SELECT COUNT(*) `count` FROM `cache_desc` WHERE `cache_id`='&1' AND `id` != '&2' AND `language`='&3'", $desc_record['cache_id'], $descid, $desclang);

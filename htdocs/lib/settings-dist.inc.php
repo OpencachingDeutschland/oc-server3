@@ -53,7 +53,7 @@
 	if (!isset($emailaddr)) $emailaddr = 'contact@opencaching.de';
 	
 	// location of cache images
-	if (!isset($picdir)) $picdir = $rootpath . 'images/uploads';
+	if (!isset($picdir)) $picdir = $rootpath . 'images/uploads';  // Ocprop
 	if (!isset($picurl)) $picurl = 'http://www.opencaching.de/images/uploads';
 
 	// Thumbsize

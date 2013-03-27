@@ -33,6 +33,7 @@
 	$diff_not_ok_message = '&nbsp;<span class="errormsg">' . t('Choose both valuations!') . '</span>';
 	$nopictures = '<tr><td colspan="2">' . t('No pictures available') . '</td></tr>';
 	$pictureline = '<tr><td colspan="2"><a href="{link}">{title}</a> [<a href="picture.php?action=edit&uuid={uuid}">' . t('Edit') . '</a>] [<a href="picture.php?action=delete&uuid={uuid}">' . t('Delete') . '</a>]</td></tr>';
+	  // Ocprop: <a href=\"http://.*?\.opencaching\.de/images/uploads/.*?\">(.*?)<\/a>.*?\[<a href=\"picture\.php\?action=[a-z]*?\&uuid=(.*?)\">
 	$picturelines = '{lines}<tr><td colspan="2">&nbsp;</td></tr>';
 
 	$nowaypoints = '<tr><td colspan="2">' . t('No waypoints available') . '</td></tr>';

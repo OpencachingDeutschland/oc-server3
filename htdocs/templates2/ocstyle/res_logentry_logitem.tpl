@@ -3,7 +3,7 @@
 *
 *  Unicode Reminder メモ
 ***************************************************************************}
-<div class="content-txtbox-noshade">  {* Ocprop: /<div class="content-txtbox-noshade">(.*?)<\/div>/sig *}
+<div class="content-txtbox-noshade">  {* Ocprop: <div class="content-txtbox-noshade">(.*?)<\/div> *}
 	<div class="logs" id="log{$logItem.id}">
 	<p class="content-title-noshade-size1" style="display:inline;">
 		{include file="res_logtype.tpl" type=$logItem.type} 
@@ -16,9 +16,9 @@
 			<a href="viewprofile.php?userid={$logItem.userid}">{$logItem.username|escape}</a>
 		{/capture}
 
-		{if $logItem.type==1}
+		{if $logItem.type==1}  {* Ocprop: $htmluserid<\/a>\s*(hat das Event besucht|hat den Geocache gefunden|found the Geocache|has visited the event) *}
 			{t 1=$smarty.capture.username}%1 found the Geocache{/t}
-		{elseif $logItem.type==2}
+		{elseif $logItem.type==2}  {* Ocprop: $htmluserid<\/a>.\s*(hat den Geocache nicht gefunden|didn't find the Geocache|didn't find the Geoacache) *}
 			{t 1=$smarty.capture.username}%1 didn't find the Geoacache{/t}
 		{elseif $logItem.type==3}
 			{t 1=$smarty.capture.username}%1 wrote a note{/t}

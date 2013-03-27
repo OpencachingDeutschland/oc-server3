@@ -66,6 +66,7 @@ class coordinate
 	// d° mm.mmm
 	function getDecimalMinutes()
 	{
+		// Ocprop: ([N|S].*?)&#039;
 		$nLat = $this->nLat;
 		$bLatN = ($nLat < 0) ? false : true;
 		if (!$bLatN) $nLat = -$nLat;
@@ -76,6 +77,7 @@ class coordinate
 		else
 			$sLat = 'S ' . sprintf("%02d", $nLatDeg) . '° ' . sprintf("%06.3f", $nLatMin) . '\'';
 
+		// Ocprop: ([E|W].*?)&#039;
 		$nLon = $this->nLon;
 		$bLonE = ($nLon < 0) ? false : true;
 		if (!$bLonE) $nLon = -$nLon;

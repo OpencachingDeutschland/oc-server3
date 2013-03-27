@@ -256,7 +256,7 @@
 
 	//more than one page?
 	if ($startat > 0)
-	{
+	{  // Ocprop:  queryid=([0-9]+)
 		$pages = t('Seite:') . ' <a href="search.php?queryid=' . $options['queryid'] . '&startat=0">&lt;&lt;</a> <a href="search.php?queryid=' . $options['queryid'] . '&startat=' . ($startat - $caches_per_page) . '">&lt;</a> ';
 	}
 	else

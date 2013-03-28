@@ -216,7 +216,7 @@
 				<p><b>alt_wpts</b> - list of alternate/additional waypoints associated
 				with this geocache. Each item is a dictionary of the following structure:</p>
 				<ul>
-					<li><b>name</b> - plain-text "codename" for the waypoint (not unique),</li>
+					<li><b>name</b> - plain-text, short, unique "codename" for the waypoint,</li>
 					<li><b>location</b> - location of the waypoint in the "lat|lon" format
 						(<i>lat</i> and <i>lon</i> are in full degrees with a dot as a decimal point),</li>
 					<li>

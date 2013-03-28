@@ -12,12 +12,12 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 xsi:schemaLocation="
 http://www.topografix.com/GPX/1/0 http://www.topografix.com/GPX/1/0/gpx.xsd
 http://www.opencaching.com/xmlschemas/opencaching/1/0 http://www.opencaching.com/xmlschemas/opencaching/1/0/opencaching.xsd
-http://www.groundspeak.com/cache/1/0 http://www.groundspeak.com/cache/1/0/cache.xsd
+http://www.groundspeak.com/cache/1/0/1 http://www.groundspeak.com/cache/1/0/1/cache.xsd
 http://geocaching.com.au/geocache/1 http://geocaching.com.au/geocache/1/geocache.xsd
 http://www.gsak.net/xmlv1/5 http://www.gsak.net/xmlv1/5/gsak.xsd
 ">
 	<name><?= $vars['installation']['site_name'] ?> Geocache Search Results</name>
-	<desc><?= $vars['installation']['site_name'] ?> Geocache Search Results, downloaded via OKAPI - <?= $vars['installation']['okapi_base_url'] ?></desc>
+	<desc><?= $vars['installation']['site_name'] ?> Geocache Search Results, downloaded via OKAPI - <?= $vars['installation']['okapi_base_url'] . ($vars['alt_wpts'] && $vars['ns_gsak'] ? ' (HasChildren)' : '') ?></desc>
 	<author><?= $vars['installation']['site_name'] ?></author>
 	<url><?= $vars['installation']['site_url'] ?></url>
 	<urlname><?= $vars['installation']['site_name'] ?></urlname>
@@ -162,9 +162,9 @@ http://www.gsak.net/xmlv1/5 http://www.gsak.net/xmlv1/5/gsak.xsd
 					<sym><?= $wpt['sym'] ?></sym>
 					<type>Waypoint|<?= $wpt['sym'] ?></type>
 					<? if ($vars['ns_gsak']) { ?>
-						<wptExtension xmlns="http://www.gsak.net/xmlv1/5">
-							<Parent><?= $c['code'] ?></Parent>
-						</wptExtension>
+						<gsak:wptExtension xmlns:gsak="http://www.gsak.net/xmlv1/5">
+							<gsak:Parent><?= $c['code'] ?></gsak:Parent>
+						</gsak:wptExtension>
 					<? } ?>
 				</wpt>
 			<? } ?>

@@ -709,7 +709,7 @@ class WebService
 		{
 			foreach ($results as &$result_ref)
 				$result_ref['alt_wpts'] = array();
-			$cachelist = implode("','", array_map('mysql_real_escape_string', array_keys($cacheid2wptcode)));
+			$cache_codes_escaped_and_imploded = "'".implode("','", array_map('mysql_real_escape_string', array_keys($cacheid2wptcode)))."'";
 
 			if (Settings::get('OC_BRANCH') == 'oc.pl')
 			{
@@ -718,14 +718,7 @@ class WebService
 				# of a multicache). Such hidden waypoints are not exposed by OKAPI. A stage
 				# fields is used for ordering and naming.
 
-				$waypoints = Db::select_value("
-					select count(*)
-					from waypoints
-					where
-						cache_id in ('".$cachelist."')
-						and status = 1
-				");
-				$rs = Db::query("
+				$waypoints = Db::select_all("
 					select
 						cache_id, stage, latitude, longitude, `desc`,
 						case type
@@ -736,7 +729,7 @@ class WebService
 						end as sym
 					from waypoints
 					where
-						cache_id in ('".$cachelist."')
+						cache_id in (".$cache_codes_escaped_and_imploded.")
 						and status = 1
 					order by cache_id, stage, `desc`
 				");
@@ -746,14 +739,7 @@ class WebService
 				# OCDE uses 'coordinates' table (with type=1) to store additional waypoints.
 				# All waypoints are are public.
 				
-				$waypoints = Db::select_value("
-					select count(*)
-					from coordinates
-					where
-						type = 1
-						and cache_id in ('".$cachelist."')
-				");
-				$rs = Db::query("
+				$waypoints = Db::select_all("
 					select
 						cache_id,
 						@stage := @stage + 1 as stage,
@@ -770,15 +756,15 @@ class WebService
 					join (select @stage := 0) s
 					where
 						type = 1
-						and cache_id in ('".$cachelist."')
+						and cache_id in (".$cache_codes_escaped_and_imploded.")
 					order by cache_id, id, `desc`
 				");
 			}
-			$wpt_format = "%s-%0" . ($waypoints>0 ? (floor(log10(count($waypoints))) + 1) : "") . "d";
-			while ($row = mysql_fetch_assoc($rs))
+			$wpt_format = "%s-%0".strlen(count($waypoints))."d";
+			foreach ($waypoints as $index => $row)
 			{
 				$results[$cacheid2wptcode[$row['cache_id']]]['alt_wpts'][] = array(
-					'name' => sprintf($wpt_format, $cacheid2wptcode[$row['cache_id']], $row['stage']),
+					'name' => sprintf($wpt_format, $cacheid2wptcode[$row['cache_id']], $index + 1),
 					'location' => round($row['latitude'], 6)."|".round($row['longitude'], 6),
 					'sym' => $row['sym'],
 					'description' => ($row['stage'] ? _("Stage")." ".$row['stage'].": " : "").$row['desc'],

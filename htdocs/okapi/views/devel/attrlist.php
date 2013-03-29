@@ -46,6 +46,19 @@ class View
 			foreach ($langkeys as $langkey)
 				print "        $langkey: ".$langs[$langkey]."\n";
 		}
+		foreach ($dict as $internal_id => $langs)
+		{
+			print "<attr okapi_attr_id=\"TODO\">\n";
+			print "\t<groundspeak id=\"TODO\" inc=\"TODO\" name=\"TODO\" />\n";
+			print "\t<opencaching site_url=\"SITEURLTODO\" id=\"$internal_id\" />\n";
+			$langkeys = array_keys($langs);
+			usort($langkeys, function($a, $b) {
+				return ($a == "en") ? -1 : (($a == $b) ? 0 : (($a < $b) ? -1 : 1));
+			});
+			foreach ($langkeys as $langkey)
+				print "\t<name lang=\"$langkey\">".$langs[$langkey]."</name>\n";
+			print "</attr>\n";
+		}
 
 		$response = new OkapiHttpResponse();
 		$response->content_type = "text/plain; charset=utf-8";

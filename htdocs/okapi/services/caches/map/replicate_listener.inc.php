@@ -45,24 +45,8 @@ class ReplicateListener
 	{
 		# This will be called when there are "too many" entries in the changelog
 		# and the replicate module thinks it better to just reset the entire TileTree.
-		# For the first hours after such reset maps may work very slow!
+		# For the first hours after such reset maps may work a little slower.
 
-		if ($mail_admins)
-		{
-			Okapi::mail_admins("OKAPI TileMap database reset",
-				"Hello,\n\n".
-				"OKAPI's 'replicate' module detected a big database update. As result\n".
-				"of this, OKAPI decided to reset the TileMap cache. This may\n".
-				"temporarily influence TileMap performance. The map may work much\n".
-				"slower during the next few hours or days, while the cache is being\n".
-				"rebuilt.\n\n".
-				"If this happens frequently, please contact OKAPI developers. It may\n".
-				"indicate a bug in OKAPI's 'replicate' module or cronjob settings.\n\n".
-				"Thanks!\n\n".
-				"P.S. This may also happen if you didn't run OKAPI on this server\n".
-				"for a while (your server was down or OKAPI didn't work properly)."
-			);
-		}
 		Db::execute("delete from okapi_tile_status");
 		Db::execute("delete from okapi_tile_caches");
 	}

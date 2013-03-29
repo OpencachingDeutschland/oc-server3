@@ -23,6 +23,7 @@ class OkapiServiceRunner
 		'services/apiref/method',
 		'services/apiref/method_index',
 		'services/apiref/issue',
+		'services/attrs/info',
 		'services/oauth/request_token',
 		'services/oauth/authorize',
 		'services/oauth/access_token',

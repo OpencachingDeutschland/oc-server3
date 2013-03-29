@@ -581,7 +581,7 @@
 
 			$thiskrety = mb_ereg_replace('{gkid}', $rGK['id'], $thiskrety);
 			$thiskrety = mb_ereg_replace('{gkref}', sprintf("GK%04X",$rGK['id']), $thiskrety);
-			$thiskrety = mb_ereg_replace('{gkname}', $rGK['name'], $thiskrety);
+			$thiskrety = mb_ereg_replace('{gkname}', xmlentities($rGK['name']), $thiskrety);
 			
 			$gkentries .= $thiskrety . "\n";
 		}

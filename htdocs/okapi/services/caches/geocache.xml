@@ -170,9 +170,7 @@
 				<ul>
 					<li><b>uuid</b> - UUID of the image,</li>
 					<li><b>url</b> - URL of the image,</li>
-					<li><b>thumb_url</b> - URL of a small (thumb) version of the image
-						<b>or null</b> when no thumb is available (e.g. there are no thumbs
-						for spoiler images),</li>
+					<li><b>thumb_url</b> - URL of a small (thumb) version of the image,</li>
 					<li><b>caption</b> - plain-text string, caption of the image,</li>
 					<li><b>unique_caption</b> - plain-text string, to be used as a filename
 						for Garmin's crappy images implementation (currently, they get image

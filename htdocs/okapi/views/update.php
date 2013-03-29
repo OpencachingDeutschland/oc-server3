@@ -650,4 +650,5 @@ class View
 	private static function ver80() { Db::execute("alter table okapi_search_sets add column date_created datetime not null"); }
 	private static function ver81() { Db::execute("alter table okapi_search_sets add column expires datetime not null"); }
 	private static function ver82() { CronJobController::reset_job_schedule("FulldumpGeneratorJob"); }
+	private static function ver83() { Db::execute("alter table okapi_stats_temp engine=InnoDB"); }
 }

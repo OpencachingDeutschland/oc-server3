@@ -450,7 +450,7 @@ class WebService
 			foreach ($results as &$result_ref)
 				$result_ref['images'] = array();
 			$rs = Db::query("
-				select object_id, uuid, url, thumb_url, title, spoiler
+				select object_id, uuid, url, title, spoiler
 				from pictures
 				where
 					object_id in ('".implode("','", array_map('mysql_real_escape_string', array_keys($cacheid2wptcode)))."')
@@ -472,7 +472,7 @@ class WebService
 				$results[$cache_code]['images'][] = array(
 					'uuid' => $row['uuid'],
 					'url' => $row['url'],
-					'thumb_url' => $row['thumb_url'] ? $row['thumb_url'] : null,
+					'thumb_url' => Settings::get('SITE_URL') . 'thumbs.php?uuid=' . $row['uuid'],
 					'caption' => $row['title'],
 					'unique_caption' => self::get_unique_caption($row['title']),
 					'is_spoiler' => ($row['spoiler'] ? true : false),

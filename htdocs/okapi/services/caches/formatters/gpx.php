@@ -13,6 +13,7 @@ use okapi\OkapiAccessToken;
 use okapi\InvalidParam;
 use okapi\services\caches\search\SearchAssistant;
 use okapi\OkapiInternalConsumer;
+use okapi\Db;
 
 class WebService
 {
@@ -137,11 +138,40 @@ class WebService
 
 		$vars['caches'] = OkapiServiceRunner::call('services/caches/geocaches', new OkapiInternalRequest(
 			$request->consumer, $request->token, array('cache_codes' => $cache_codes,
-			'langpref' => $langpref, 'fields' => $fields, 'lpc' => $lpc, 'user_uuid' => $user_uuid)));
+			'langpref' => $langpref, 'fields' => $fields, 'lpc' => $lpc, 'user_uuid' => $user_uuid,
+			'log_fields' => 'uuid|date|user|type|comment|internal_id|was_recommended')));
 		$vars['installation'] = OkapiServiceRunner::call('services/apisrv/installation', new OkapiInternalRequest(
 			new OkapiInternalConsumer(), null, array()));
 		$vars['cache_GPX_types'] = self::$cache_GPX_types;
 		$vars['cache_GPX_sizes'] = self::$cache_GPX_sizes;
+
+		/* OC sites always used internal user_ids in their generated GPX files.
+		 * This might be considered an error in itself (groundspeak's XML namespace
+		 * doesn't allow that), but it very common (Garmin's OpenCaching.COM
+		 * also does that). Therefore, for backward-compatibility reasons, OKAPI
+		 * will do it the same way. See issue 174.
+		 *
+		 * Currently, the caches method does not expose "owner.internal_id" and
+		 * "latest_logs.user.internal_id" fields, we will read them manually
+		 * from the database here. */
+
+		$dict = array();
+		foreach ($vars['caches'] as &$cache_ref)
+		{
+			$dict[$cache_ref['owner']['uuid']] = true;
+			if (isset($cache_ref['latest_logs']))
+				foreach ($cache_ref['latest_logs'] as &$log_ref)
+					$dict[$log_ref['user']['uuid']] = true;
+		}
+		$rs = Db::query("
+			select uuid, user_id
+			from user
+			where uuid in ('".implode("','", array_map('mysql_real_escape_string', array_keys($dict)))."')
+		");
+		while ($row = mysql_fetch_assoc($rs))
+			$dict[$row['uuid']] = $row['user_id'];
+		$vars['user_uuid_to_internal_id'] = &$dict;
+		unset($dict);
 
 		$response = new OkapiHttpResponse();
 		$response->content_type = "text/xml; charset=utf-8";

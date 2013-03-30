@@ -37,7 +37,7 @@ http://www.gsak.net/xmlv1/5 http://www.gsak.net/xmlv1/5/gsak.xsd
 				<groundspeak:cache archived="<?= ($c['status'] == 'Archived') ? "True" : "False" ?>" available="<?= ($c['status'] == 'Available') ? "True" : "False" ?>" id="<?= $c['internal_id'] ?>" xmlns:groundspeak="http://www.groundspeak.com/cache/1/0/1">
 					<groundspeak:name><?= Okapi::xmlescape($c['name']) ?></groundspeak:name>
 					<groundspeak:placed_by><?= Okapi::xmlescape($c['owner']['username']) ?></groundspeak:placed_by>
-					<groundspeak:owner id="<?= $c['owner']['uuid'] ?>"><?= Okapi::xmlescape($c['owner']['username']) ?></groundspeak:owner>
+					<groundspeak:owner id="<?= $vars['user_uuid_to_internal_id'][$c['owner']['uuid']] ?>"><?= Okapi::xmlescape($c['owner']['username']) ?></groundspeak:owner>
 					<groundspeak:type><?= $vars['cache_GPX_types'][$c['type']] ?></groundspeak:type>
 					<groundspeak:container><?= $vars['cache_GPX_sizes'][$c['size2']] ?></groundspeak:container>
 					<groundspeak:difficulty><?= $c['difficulty'] ?></groundspeak:difficulty>
@@ -108,11 +108,11 @@ http://www.gsak.net/xmlv1/5 http://www.gsak.net/xmlv1/5/gsak.xsd
 					<? if ($vars['latest_logs']) { /* Does user want us to include latest log entries? */ ?>
 						<groundspeak:logs>
 							<? foreach ($c['latest_logs'] as $log) { ?>
-								<groundspeak:log id="<?= $log['uuid'] ?>">
+								<groundspeak:log id="<?= $log['internal_id'] ?>">
 									<groundspeak:date><?= $log['date'] ?></groundspeak:date>
 									<groundspeak:type><?= $log['type'] ?></groundspeak:type>
-									<groundspeak:finder id="<?= $log['user']['uuid'] ?>"><?= Okapi::xmlescape($log['user']['username']) ?></groundspeak:finder>
-									<groundspeak:text encoded="False"><?= Okapi::xmlescape($log['comment']) ?></groundspeak:text>
+									<groundspeak:finder id="<?= $vars['user_uuid_to_internal_id'][$log['user']['uuid']] ?>"><?= Okapi::xmlescape($log['user']['username']) ?></groundspeak:finder>
+									<groundspeak:text encoded="False"><?= $log['was_recommended'] ? "(*) ": "" ?><?= Okapi::xmlescape($log['comment']) ?></groundspeak:text>
 								</groundspeak:log>
 							<? } ?>
 						</groundspeak:logs>

@@ -46,12 +46,22 @@ class WebService
 
 		$cache_code = $request->get_parameter('cache_code');
 		if (!$cache_code) throw new ParamMissing('cache_code');
+
 		$logtype = $request->get_parameter('logtype');
 		if (!$logtype) throw new ParamMissing('logtype');
 		if (!in_array($logtype, array('Found it', "Didn't find it", 'Comment')))
 			throw new InvalidParam('logtype', "'$logtype' in not a valid logtype code.");
+
 		$comment = $request->get_parameter('comment');
 		if (!$comment) $comment = "";
+
+		$comment_format = $request->get_parameter('comment_format');
+		if ($comment_format)
+		{
+			if (!in_array($comment_format, array('html', 'plaintext')))
+				throw new InvalidParam('comment_format', $comment_format);
+		}
+
 		$tmp = $request->get_parameter('when');
 		if ($tmp)
 		{
@@ -64,10 +74,12 @@ class WebService
 		}
 		else
 			$when = time();
+
 		$on_duplicate = $request->get_parameter('on_duplicate');
 		if (!$on_duplicate) $on_duplicate = "silent_success";
 		if (!in_array($on_duplicate, array('silent_success', 'user_error', 'continue')))
 			throw new InvalidParam('on_duplicate', "Unknown option: '$on_duplicate'.");
+
 		$rating = $request->get_parameter('rating');
 		if ($rating !== null && (!in_array($rating, array(1,2,3,4,5))))
 			throw new InvalidParam('rating', "If present, it must be an integer in the 1..5 scale.");
@@ -83,6 +95,7 @@ class WebService
 				Okapi::get_normalized_site_name());
 			$rating = null;
 		}
+
 		$recommend = $request->get_parameter('recommend');
 		if (!$recommend) $recommend = 'false';
 		if (!in_array($recommend, array('true', 'false')))
@@ -90,6 +103,7 @@ class WebService
 		$recommend = ($recommend == 'true');
 		if ($recommend && $logtype != 'Found it')
 			throw new BadRequest(_("Recommending is allowed only for 'Found it' logtypes."));
+
 		$needs_maintenance = $request->get_parameter('needs_maintenance');
 		if (!$needs_maintenance) $needs_maintenance = 'false';
 		if (!in_array($needs_maintenance, array('true', 'false')))

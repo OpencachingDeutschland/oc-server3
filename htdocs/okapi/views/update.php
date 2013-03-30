@@ -61,6 +61,29 @@ class View
 
 	public static function call()
 	{
+		# First, let's acquire a lock to make sure the update isn't already running.
+		# We will use one of the existing lock handles, because we don't want to use
+		# to many of them. See issue 141.
+
+		$lock = OkapiLock::get('cronjobs-cron-5');
+		$lock->acquire();
+
+		try
+		{
+			self::_call();
+			$lock->release();
+		}
+		catch (Exception $e)
+		{
+			# Error occured. Make sure the lock is released and rethrow.
+
+			$lock->release();
+			throw $e;
+		}
+	}
+
+	private static function _call()
+	{
 		ignore_user_abort(true);
 		set_time_limit(0);
 

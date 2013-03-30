@@ -63,6 +63,11 @@ class WebService
 			if (!in_array($field, self::$valid_field_names))
 				throw new InvalidParam('fields', "'$field' is not a valid field code.");
 
+		# Currently, the "owner" field needs to be included whenever the "description" field is.
+		# That's a little ugly. Grep for "issue 178" below for more insight on this.
+		if ((in_array('description', $fields) || in_array('descriptions', $fields)) && !in_array('owner', $fields))
+			$fields[] = "owner";
+
 		$log_fields = $request->get_parameter('log_fields');
 		if (!$log_fields) $log_fields = "uuid|date|user|type|comment";  // validation is done on call
 
@@ -424,8 +429,19 @@ class WebService
 				$cache_code = $cacheid2wptcode[$row['cache_id']];
 				// strtolower - ISO 639-1 codes are lowercase
 				if ($row['desc'])
-					$results[$cache_code]['descriptions'][strtolower($row['language'])] = $row['desc'].
-						"\n".self::get_cache_attribution_note($row['cache_id'], strtolower($row['language']), $langpref);
+				{
+					/* Regarding the attribution note - please note, that the "owner" field
+					 * is automatically included, whenever the cache description is included.
+					 * This is because we may need it for the attribution note - see issue 178. */
+
+					$results[$cache_code]['descriptions'][strtolower($row['language'])] = (
+						$row['desc']."\n".
+						self::get_cache_attribution_note(
+							$row['cache_id'], strtolower($row['language']), $langpref,
+							$results[$cache_code]['owner']
+						)
+					);
+				}
 				if ($row['hint'])
 					$results[$cache_code]['hints'][strtolower($row['language'])] = $row['hint'];
 			}
@@ -738,7 +754,7 @@ class WebService
 			{
 				# OCDE uses 'coordinates' table (with type=1) to store additional waypoints.
 				# All waypoints are are public.
-				
+
 				$waypoints = Db::select_all("
 					select
 						cache_id,
@@ -871,14 +887,24 @@ class WebService
 
 	/**
 	 * Return attribution note to be included in the cache description.
+	 *
 	 * The $lang parameter identifies the language of the cache description
-	 * (one cache may have descriptions in multiple languages!). Whereas
-	 * the $langpref parameter is *an array* of language preferences
-	 * extracted from the langpref parameter passed to the method. Both
-	 * values ($lang and $langpref) will be taken into account ($lang
-	 * has the higher priority).
+	 * to which the attribution note will be appended to (one cache may
+	 * have descriptions in multiple languages!).
+	 *
+	 * The $langpref parameter is *an array* of language preferences
+	 * extracted from the langpref parameter passed to the method by the
+	 * OKAPI Consumer.
+	 *
+	 * Both values ($lang and $langpref) will be taken into account when
+	 * generating the attribution note, but $lang will have a higher
+	 * priority than $langpref (we don't want to mix the languages in the
+	 * descriptions if we don't have to).
+	 *
+	 * $owner is in object describing the user, it has the same format as
+	 * defined in "geocache" method specs (see the "owner" field).
 	 */
-	public static function get_cache_attribution_note($cache_id, $lang, array $langpref)
+	public static function get_cache_attribution_note($cache_id, $lang, array $langpref, $owner)
 	{
 		$site_url = Settings::get('SITE_URL');
 		$site_name = Okapi::get_normalized_site_name();
@@ -886,10 +912,24 @@ class WebService
 
 		Okapi::gettext_domain_init(array_merge(array($lang), $langpref));
 		$note = "<p>";
-		$note .= sprintf(
-			_("This <a href='%s'>geocache</a> description comes from the <a href='%s'>%s</a> site."),
-			$cache_url, $site_url, $site_name
-		);
+		if (Settings::get('OC_BRANCH') == 'oc.de')
+		{
+			$note .= sprintf(
+				_(
+					"<em>&copy; <a href='%s'>%s</a>, <a href='%s'>%s</a>, ".
+					"<a href='http://creativecommons.org/licenses/by-nc-nd/3.0/en/'>CC-BY-NC-ND</a>, ".
+					"as of Jan 15, 2013; all log entries &copy; their authors</em>"
+				),
+				$owner['profile_url'], $owner['username'], $site_url, $site_name
+			);
+		}
+		else
+		{
+			$note .= sprintf(
+				_("This <a href='%s'>geocache</a> description comes from the <a href='%s'>%s</a> site."),
+				$cache_url, $site_url, $site_name
+			);
+		}
 		$note .= "</p>";
 		Okapi::gettext_domain_restore();
 

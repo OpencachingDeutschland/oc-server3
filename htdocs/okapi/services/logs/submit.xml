@@ -14,10 +14,13 @@
 		log types which are used for Event Caches (we are planning to add this).</p>
 	</req>
 	<opt name='comment'>
-		<p>Text to be submitted with the log entry. Plain-text (no HTML).</p>
-		<p><b>Note:</b> Due to <a href='http://code.google.com/p/opencaching-api/issues/detail?id=124'>some issues</a>
-		(which we cannot currently fix), you MAY be allowed to use some basic HTML tags (on some OC installations).
-		However, you should not (this may stop working at any time).</p>
+		<p>Text to be submitted with the log entry.</p>
+	</opt>
+	<opt name='comment_format' default='(unspecified!)'>
+		<p>Indicates the format of your <b>comment</b>. Two values allowed: <b>html</b> or <b>plaintext</b>.</p>
+		<p><b>Important note:</b> Due to <a href='http://code.google.com/p/opencaching-api/issues/detail?id=124'>some issues</a>,
+		this switch is currently completelly ignored (!). However, we still advise you to use it,
+		for future-compatibility.</p>
 	</opt>
 	<opt name='when'>
 		<p>A date and time string. This should be in ISO 8601 format (currently any

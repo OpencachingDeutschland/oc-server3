@@ -121,7 +121,7 @@ class View
 				if ($_POST['authorization_result'] == 'granted')
 				{
 					Db::execute("
-						insert into okapi_authorizations (consumer_key, user_id)
+						insert ignore into okapi_authorizations (consumer_key, user_id)
 						values (
 							'".mysql_real_escape_string($token['consumer_key'])."',
 							'".mysql_real_escape_string($OC_user_id)."'

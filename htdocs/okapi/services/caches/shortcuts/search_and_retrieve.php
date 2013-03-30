@@ -9,6 +9,7 @@ use okapi\OkapiServiceRunner;
 use okapi\OkapiRequest;
 use okapi\ParamMissing;
 use okapi\InvalidParam;
+use okapi\BadRequest;
 
 class WebService
 {
@@ -48,6 +49,9 @@ class WebService
 		$retr_params = json_decode($retr_params, true);
 		if (!is_array($retr_params))
 			throw new InvalidParam('retr_params', "Should be a JSON-encoded dictionary");
+
+		self::map_values_to_strings($search_params);
+		self::map_values_to_strings($retr_params);
 
 		# Wrapped?
 		$wrap = $request->get_parameter('wrap');
@@ -100,6 +104,18 @@ class WebService
 				return $retr_result;
 			else
 				return Okapi::formatted_response($request, $retr_result);
+		}
+	}
+
+	private static function map_values_to_strings(&$dict)
+	{
+		foreach (array_keys($dict) as $key)
+		{
+			$val = $dict[$key];
+			if (is_numeric($val) || is_string($val))
+				$dict[$key] = (string)$val;
+			else
+				throw new BadRequest("Invalid value format for key: ".$key);
 		}
 	}
 }

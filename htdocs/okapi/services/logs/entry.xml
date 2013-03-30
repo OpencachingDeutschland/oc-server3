@@ -41,6 +41,20 @@
 			</li>
 			<li><b>comment</b> - HTML string, text entered with the log entry,</li>
 			<li>
+				<p><b>images</b> - list of dictionaries, each dictionary represents one
+				image saved along with the log; each dictionary has the following
+				structure:</p>
+				<ul>
+					<li><b>uuid</b> - UUID of the image,</li>
+					<li><b>url</b> - URL of the image,</li>
+					<li><b>thumb_url</b> - URL of a small (thumb) version of the image,</li>
+					<li><b>caption</b> - plain-text string, caption of the image,</li>
+					<li><b>is_spoiler</b> - boolean, if <b>true</b> then the image is
+						a spoiler image and should not be displayed to the user unless
+						the user explicitly asks for it.</li>
+				</ul>
+			</li>
+			<li>
 				<p><b>internal_id</b> - undocumented, you <u>should not</u> use
 				this unless you really know you need to. Internal IDs are
 				<b>not</b> unique across various OKAPI installations.

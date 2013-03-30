@@ -65,7 +65,13 @@ class WebService
 
 		# Currently, the "owner" field needs to be included whenever the "description" field is.
 		# That's a little ugly. Grep for "issue 178" below for more insight on this.
-		if ((in_array('description', $fields) || in_array('descriptions', $fields)) && !in_array('owner', $fields))
+		if (
+			(
+				in_array('description', $fields) || in_array('descriptions', $fields)
+				|| in_array('hint', $fields) || in_array('hints', $fields)
+			)
+			&& !in_array('owner', $fields)
+		)
 			$fields[] = "owner";
 
 		$log_fields = $request->get_parameter('log_fields');
@@ -465,15 +471,20 @@ class WebService
 		{
 			foreach ($results as &$result_ref)
 				$result_ref['images'] = array();
+
+			if (Db::field_exists('pictures', 'mappreview'))
+				$preview_field = "mappreview";
+			else
+				$preview_field = "null";
 			$rs = Db::query("
-				select object_id, uuid, url, title, spoiler
+				select object_id, uuid, url, title, spoiler, ".$preview_field." as preview
 				from pictures
 				where
 					object_id in ('".implode("','", array_map('mysql_real_escape_string', array_keys($cacheid2wptcode)))."')
 					and display = 1
 					and object_type = 2
 					and unknown_format = 0
-				order by object_id, last_modified
+				order by object_id, date_created
 			");
 			$prev_cache_code = null;
 			while ($row = mysql_fetch_assoc($rs))
@@ -492,6 +503,7 @@ class WebService
 					'caption' => $row['title'],
 					'unique_caption' => self::get_unique_caption($row['title']),
 					'is_spoiler' => ($row['spoiler'] ? true : false),
+					'is_preview' => is_null($row['preview']) ? null : ($row['preview'] != 0),
 				);
 			}
 		}
@@ -917,10 +929,10 @@ class WebService
 			$note .= sprintf(
 				_(
 					"<em>&copy; <a href='%s'>%s</a>, <a href='%s'>%s</a>, ".
-					"<a href='http://creativecommons.org/licenses/by-nc-nd/3.0/en/'>CC-BY-NC-ND</a>, ".
-					"as of Jan 15, 2013; all log entries &copy; their authors</em>"
+					"<a href='http://creativecommons.org/licenses/by-nc-nd/3.0/de/deed.en'>CC-BY-NC-ND</a>, ".
+					"as of %s; all log entries &copy; their authors</em>"
 				),
-				$owner['profile_url'], $owner['username'], $site_url, $site_name
+				$owner['profile_url'], $owner['username'], $cache_url, $site_name, strftime('%x')
 			);
 		}
 		else

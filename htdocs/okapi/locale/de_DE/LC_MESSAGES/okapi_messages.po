@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OKAPI\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-03-26 16:20+0100\n"
-"PO-Revision-Date: 2013-03-26 16:21+0100\n"
+"POT-Creation-Date: 2013-03-30 23:41+0100\n"
+"PO-Revision-Date: 2013-03-30 23:42+0100\n"
 "Last-Translator: following <following@online.de>\n"
 "Language-Team: following <following@online.de>\n"
 "Language: German\n"
@@ -11,17 +11,28 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-KeywordsList: _;gettext;gettext_noop\n"
-"X-Poedit-Basepath: c:\\source\\okapi\\following2\n"
+"X-Poedit-Basepath: c:\\source\\oc\\okapi\\following2\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Generator: Poedit 1.5.5\n"
-"X-Poedit-SearchPath-0: c:\\source\\okapi\\following2\n"
+"X-Poedit-SearchPath-0: c:\\source\\oc\\okapi\\following2\n"
 
-#: c:\source\okapi\following2/okapi/services/caches/geocaches.php:777
+#: c:\source\oc\okapi\following2/okapi/services/caches/geocaches.php:817
 msgid "Stage"
 msgstr "Station"
 
-#: c:\source\okapi\following2/okapi/services/caches/geocaches.php:897
+#: c:\source\oc\okapi\following2/okapi/services/caches/geocaches.php:950
+#, php-format
+msgid ""
+"<em>&copy; <a href='%s'>%s</a>, <a href='%s'>%s</a>, <a href='http://"
+"creativecommons.org/licenses/by-nc-nd/3.0/de/deed.en'>CC-BY-NC-ND</a>, as of "
+"%s; all log entries &copy; their authors</em>"
+msgstr ""
+"<em>&copy; <a href='%s'>%s</a>, <a href='%s'>%s</a>, <a href='http://"
+"creativecommons.org/licenses/by-nc-nd/3.0/de/'>CC-BY-NC-ND</a>, Stand: %s; "
+"alle Logeinträge &copy; jeweiliger Autor</em>"
+
+#: c:\source\oc\okapi\following2/okapi/services/caches/geocaches.php:960
 #, php-format
 msgid ""
 "This <a href='%s'>geocache</a> description comes from the <a href='%s'>%s</"
@@ -29,57 +40,57 @@ msgid ""
 msgstr ""
 "Diese <a href='%s'>Cache</a>-Beschreibung stammt von <a href='%s'>%s</a>."
 
-#: c:\source\okapi\following2/okapi/services/caches/formatters/gpxfile.tpl.php:31
-#: c:\source\okapi\following2/okapi/services/caches/formatters/gpxfile.tpl.php:48
+#: c:\source\oc\okapi\following2/okapi/services/caches/formatters/gpxfile.tpl.php:31
+#: c:\source\oc\okapi\following2/okapi/services/caches/formatters/gpxfile.tpl.php:48
 msgid "hidden by"
 msgstr "versteckt von"
 
-#: c:\source\okapi\following2/okapi/services/caches/formatters/gpxfile.tpl.php:50
+#: c:\source\oc\okapi\following2/okapi/services/caches/formatters/gpxfile.tpl.php:50
 #, php-format
 msgid "%d recommendation"
 msgid_plural "%d recommendations"
 msgstr[0] "%d Empfehlung"
 msgstr[1] "%d Empfehlungen"
 
-#: c:\source\okapi\following2/okapi/services/caches/formatters/gpxfile.tpl.php:51
+#: c:\source\oc\okapi\following2/okapi/services/caches/formatters/gpxfile.tpl.php:51
 #, php-format
 msgid "found %d time"
 msgid_plural "found %d times"
 msgstr[0] "%d mal gefunden"
 msgstr[1] "%d mal gefunden"
 
-#: c:\source\okapi\following2/okapi/services/caches/formatters/gpxfile.tpl.php:54
+#: c:\source\oc\okapi\following2/okapi/services/caches/formatters/gpxfile.tpl.php:54
 #, php-format
 msgid "%d trackable"
 msgid_plural "%d trackables"
 msgstr[0] "%d Geokret"
 msgstr[1] "%d Geokrets"
 
-#: c:\source\okapi\following2/okapi/services/caches/formatters/gpxfile.tpl.php:58
+#: c:\source\oc\okapi\following2/okapi/services/caches/formatters/gpxfile.tpl.php:58
 msgid "Personal notes"
 msgstr "Persönliche Notizen"
 
-#: c:\source\okapi\following2/okapi/services/caches/formatters/gpxfile.tpl.php:62
+#: c:\source\oc\okapi\following2/okapi/services/caches/formatters/gpxfile.tpl.php:62
 msgid "Attributes"
 msgstr "Attribute"
 
-#: c:\source\okapi\following2/okapi/services/caches/formatters/gpxfile.tpl.php:66
+#: c:\source\oc\okapi\following2/okapi/services/caches/formatters/gpxfile.tpl.php:66
 msgid "Trackables"
 msgstr "Geokrets"
 
-#: c:\source\okapi\following2/okapi/services/caches/formatters/gpxfile.tpl.php:84
+#: c:\source\oc\okapi\following2/okapi/services/caches/formatters/gpxfile.tpl.php:84
 msgid "Images"
 msgstr "Bilder"
 
-#: c:\source\okapi\following2/okapi/services/caches/formatters/gpxfile.tpl.php:91
+#: c:\source\oc\okapi\following2/okapi/services/caches/formatters/gpxfile.tpl.php:91
 msgid "Spoilers"
 msgstr "Spoiler"
 
-#: c:\source\okapi\following2/okapi/services/caches/formatters/gpxfile.tpl.php:99
+#: c:\source\oc\okapi\following2/okapi/services/caches/formatters/gpxfile.tpl.php:99
 msgid "Image descriptions"
 msgstr "Bildbeschreibungen"
 
-#: c:\source\okapi\following2/okapi/services/logs/submit.php:62
+#: c:\source\oc\okapi\following2/okapi/services/logs/submit.php:75
 msgid ""
 "You are trying to publish a log entry with a date in future. Cache log "
 "entries are allowed to be published in the past, but NOT in the future."
@@ -87,7 +98,7 @@ msgstr ""
 "Das Datum deines Logeintrags liegt in der Zukunft. Cache-Logs können nur für "
 "die Vergangenheit oder für heute eingetragen werden."
 
-#: c:\source\okapi\following2/okapi/services/logs/submit.php:82
+#: c:\source\oc\okapi\following2/okapi/services/logs/submit.php:97
 #, php-format
 msgid ""
 "However, your cache rating was ignored, because %s does not have a rating "
@@ -95,11 +106,11 @@ msgid ""
 msgstr ""
 "Deine Cachewertung wurde jedoch ignoriert, weil %s kein Bewertungssystem hat."
 
-#: c:\source\okapi\following2/okapi/services/logs/submit.php:92
+#: c:\source\oc\okapi\following2/okapi/services/logs/submit.php:108
 msgid "Recommending is allowed only for 'Found it' logtypes."
 msgstr "Empfehlungen sind nur bei 'Gefunden'-Logs erlaubt."
 
-#: c:\source\okapi\following2/okapi/services/logs/submit.php:101
+#: c:\source\oc\okapi\following2/okapi/services/logs/submit.php:118
 #, php-format
 msgid ""
 "However, your \"needs maintenance\" flag was ignored, because %s does not "
@@ -108,7 +119,7 @@ msgstr ""
 "Deine Angabe \"benötigt Wartung\" wurde jedoch ignoriert, weil es diese "
 "Funktion bei %s nicht gibt."
 
-#: c:\source\okapi\following2/okapi/services/logs/submit.php:119
+#: c:\source\oc\okapi\following2/okapi/services/logs/submit.php:136
 msgid ""
 "This cache is an Event cache. You cannot \"Find it\"! (But - you may "
 "\"Comment\" on it.)"
@@ -116,26 +127,26 @@ msgstr ""
 "Dies ist ein Event-Cache. Du kannst ihn nicht \"finden\" (aber du kannst "
 "einen Hinweis loggen)."
 
-#: c:\source\okapi\following2/okapi/services/logs/submit.php:121
+#: c:\source\oc\okapi\following2/okapi/services/logs/submit.php:138
 msgid "Your have to supply some text for your comment."
 msgstr "Du musst einen Text für dein Hinweislog eingeben!"
 
-#: c:\source\okapi\following2/okapi/services/logs/submit.php:134
+#: c:\source\oc\okapi\following2/okapi/services/logs/submit.php:151
 msgid "This cache requires a password. You didn't provide one!"
 msgstr ""
 "Dieser Cache kann nur mit Kennwort geloggt werden, aber du hast keines "
 "angegeben."
 
-#: c:\source\okapi\following2/okapi/services/logs/submit.php:136
+#: c:\source\oc\okapi\following2/okapi/services/logs/submit.php:153
 msgid "Invalid password!"
 msgstr "Ungültiges Kennwort!"
 
-#: c:\source\okapi\following2/okapi/services/logs/submit.php:186
+#: c:\source\oc\okapi\following2/okapi/services/logs/submit.php:203
 msgid "You have already submitted a log entry with exactly the same contents."
 msgstr ""
 "Du hast bereits einen Logeintrag mit genau dem gleichen Inhalt gemacht."
 
-#: c:\source\okapi\following2/okapi/services/logs/submit.php:205
+#: c:\source\oc\okapi\following2/okapi/services/logs/submit.php:222
 msgid ""
 "You have already submitted a \"Found it\" log entry once. Now you may submit "
 "\"Comments\" only!"
@@ -143,49 +154,49 @@ msgstr ""
 "Du hast diesen Cache bereits als gefunden geloggt. Ein zweites Fundlog ist "
 "nicht möglich, aber du kannst stattdessen einen Hinweis loggen."
 
-#: c:\source\okapi\following2/okapi/services/logs/submit.php:207
+#: c:\source\oc\okapi\following2/okapi/services/logs/submit.php:224
 msgid "You are the owner of this cache. You may submit \"Comments\" only!"
 msgstr ""
 "Als Besitzer des Caches kannst du nur Hinweise loggen, keine Funde oder "
 "Nichtfunde."
 
-#: c:\source\okapi\following2/okapi/services/logs/submit.php:225
+#: c:\source\oc\okapi\following2/okapi/services/logs/submit.php:242
 msgid "You have already rated this cache once. Your rating cannot be changed."
 msgstr ""
 "Du hast diesen Cache bereits bewertet. Deine Bewertung ist nicht änderbar."
 
-#: c:\source\okapi\following2/okapi/services/logs/submit.php:242
+#: c:\source\oc\okapi\following2/okapi/services/logs/submit.php:259
 msgid "You have already recommended this cache once."
 msgstr "Du hast diesen Cache bereits empfohlen."
 
-#: c:\source\okapi\following2/okapi/services/logs/submit.php:249
+#: c:\source\oc\okapi\following2/okapi/services/logs/submit.php:266
 msgid "You don't have any recommendations to give. Find more caches first!"
 msgstr ""
 "Du musst mehr Caches finden, um eine weitere Bewertung abgeben zu können!"
 
-#: c:\source\okapi\following2/okapi/services/logs/submit.php:413
+#: c:\source\oc\okapi\following2/okapi/services/logs/submit.php:430
 msgid "Your cache log entry was posted successfully."
 msgstr "Dein Log wurde veröffentlicht."
 
-#: c:\source\okapi\following2/okapi/views/apps/authorize.tpl.php:5
+#: c:\source\oc\okapi\following2/okapi/views/apps/authorize.tpl.php:5
 msgid "Authorization Form"
 msgstr "Authorisierungs-Formular"
 
-#: c:\source\okapi\following2/okapi/views/apps/authorize.tpl.php:46
+#: c:\source\oc\okapi\following2/okapi/views/apps/authorize.tpl.php:46
 msgid "Expired request"
 msgstr "Anfrage abgelaufen"
 
-#: c:\source\okapi\following2/okapi/views/apps/authorize.tpl.php:47
+#: c:\source\oc\okapi\following2/okapi/views/apps/authorize.tpl.php:47
 msgid "Unfortunately, the request has expired. Please try again."
 msgstr ""
 "Die Anfrage ist wegen Zeitüberschreitung abgelaufen. Bitte versuche es noch "
 "einmal."
 
-#: c:\source\okapi\following2/okapi/views/apps/authorize.tpl.php:49
+#: c:\source\oc\okapi\following2/okapi/views/apps/authorize.tpl.php:49
 msgid "External application is requesting access..."
 msgstr "Eine externe Anwendung wünscht Zugriff ..."
 
-#: c:\source\okapi\following2/okapi/views/apps/authorize.tpl.php:50
+#: c:\source\oc\okapi\following2/okapi/views/apps/authorize.tpl.php:50
 #, php-format
 msgid ""
 "<b>%s</b> wants to access your <b>%s</b> account. Do you agree to grant "
@@ -194,15 +205,15 @@ msgstr ""
 "<b>%s</b> möchte auf dein <b>%s</b>-Benutzerkonto zugreifen. Möchtest du "
 "dieser Anwendung Zugriff gewähren?"
 
-#: c:\source\okapi\following2/okapi/views/apps/authorize.tpl.php:53
+#: c:\source\oc\okapi\following2/okapi/views/apps/authorize.tpl.php:53
 msgid "I agree"
 msgstr "Ja"
 
-#: c:\source\okapi\following2/okapi/views/apps/authorize.tpl.php:54
+#: c:\source\oc\okapi\following2/okapi/views/apps/authorize.tpl.php:54
 msgid "Decline"
 msgstr "Nein"
 
-#: c:\source\okapi\following2/okapi/views/apps/authorize.tpl.php:56
+#: c:\source\oc\okapi\following2/okapi/views/apps/authorize.tpl.php:56
 #, php-format
 msgid ""
 "\n"
@@ -230,15 +241,15 @@ msgstr ""
 "\t\t\t\t\tDu kannst diese Erlaubnis jederzeit widerrufen.</p>\n"
 "\t\t\t\t"
 
-#: c:\source\okapi\following2/okapi/views/apps/authorized.tpl.php:5
+#: c:\source\oc\okapi\following2/okapi/views/apps/authorized.tpl.php:5
 msgid "Authorization Succeeded"
 msgstr "Authorisierung erfolgreich"
 
-#: c:\source\okapi\following2/okapi/views/apps/authorized.tpl.php:28
+#: c:\source\oc\okapi\following2/okapi/views/apps/authorized.tpl.php:28
 msgid "Access successfully granted"
 msgstr "Zugang wurde gewährt"
 
-#: c:\source\okapi\following2/okapi/views/apps/authorized.tpl.php:29
+#: c:\source\oc\okapi\following2/okapi/views/apps/authorized.tpl.php:29
 #, php-format
 msgid ""
 "\n"
@@ -255,15 +266,15 @@ msgstr ""
 "PIN-Code ein:</p>\n"
 "\t\t\t"
 
-#: c:\source\okapi\following2/okapi/views/apps/index.tpl.php:5
+#: c:\source\oc\okapi\following2/okapi/views/apps/index.tpl.php:5
 msgid "My Apps"
 msgstr "Meine Apps"
 
-#: c:\source\okapi\following2/okapi/views/apps/index.tpl.php:29
+#: c:\source\oc\okapi\following2/okapi/views/apps/index.tpl.php:29
 msgid "Your external applications"
 msgstr "Deine externe Anwendung"
 
-#: c:\source\okapi\following2/okapi/views/apps/index.tpl.php:31
+#: c:\source\oc\okapi\following2/okapi/views/apps/index.tpl.php:31
 #, php-format
 msgid ""
 "\n"
@@ -285,11 +296,11 @@ msgstr ""
 "Aktionen mehr unter deinem \t\t\t\t\tBenutzername ausführen können.</p>\n"
 "\t\t\t\t"
 
-#: c:\source\okapi\following2/okapi/views/apps/index.tpl.php:45
+#: c:\source\oc\okapi\following2/okapi/views/apps/index.tpl.php:45
 msgid "remove"
 msgstr "entfernen"
 
-#: c:\source\okapi\following2/okapi/views/apps/index.tpl.php:50
+#: c:\source\oc\okapi\following2/okapi/views/apps/index.tpl.php:50
 #, php-format
 msgid ""
 "\n"

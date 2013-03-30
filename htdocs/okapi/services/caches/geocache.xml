@@ -177,7 +177,11 @@
 						caption from the image's filename itself),</li>
 					<li><b>is_spoiler</b> - boolean, if <b>true</b> then the image is
 						a spoiler image and should not be displayed to the user unless
-						the user explicitly asks for it.</li>
+						the user explicitly asks for it,</li>
+					<li><b>is_preview</b> - boolean, if <b>true</b>, the cache owner has marked
+						the image as <em>preview image</em>, and you are encouraged to display
+						it as a 'teaser' for the cache. Some installations do not support this
+						feature and will return <b>null</b>.</li>
 				</ul>
 			</li>
 			<li>

@@ -24,7 +24,7 @@ class WebService
 
 	private static $valid_field_names = array(
 		'uuid', 'cache_code', 'date', 'user', 'type', 'was_recommended', 'comment',
-		'internal_id',
+		'images', 'internal_id',
 	);
 
 	public static function call(OkapiRequest $request)
@@ -71,6 +71,7 @@ class WebService
 				and c.status in (1,2,3)
 		");
 		$results = array();
+		$log_id2uuid = array(); /* Maps logs' internal_ids to uuids */
 		while ($row = mysql_fetch_assoc($rs))
 		{
 			$results[$row['uuid']] = array(
@@ -85,10 +86,40 @@ class WebService
 				'type' => Okapi::logtypeid2name($row['type']),
 				'was_recommended' => $row['was_recommended'] ? true : false,
 				'comment' => $row['text'],
+				'images' => array(),
 				'internal_id' => $row['id'],
 			);
+			$log_id2uuid[$row['id']] = $row['uuid'];
 		}
 		mysql_free_result($rs);
+
+		# fetch images
+
+		if (in_array('images', $fields))
+		{
+			$rs = Db::query("
+				select object_id, uuid, url, title, spoiler
+				from pictures
+				where
+					object_type = 1
+					and object_id in ('".implode("','", array_map('mysql_real_escape_string', array_keys($log_id2uuid)))."')
+					and display = 1   /* currently is always 1 for logpix */
+					and unknown_format = 0
+				order by date_created
+			");
+			while ($row = mysql_fetch_assoc($rs))
+			{
+				$results[$log_id2uuid[$row['object_id']]]['images'][] =
+					array(
+						'uuid' => $row['uuid'],
+						'url' => $row['url'],
+						'thumb_url' => Settings::get('SITE_URL') . 'thumbs.php?uuid=' . $row['uuid'],
+						'caption' => $row['title'],
+						'is_spoiler' => ($row['spoiler'] ? true : false),
+					);
+			}
+			mysql_free_result($rs);
+		}
 
 		# Check which UUIDs were not found and mark them with null.
 

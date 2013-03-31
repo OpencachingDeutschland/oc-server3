@@ -165,21 +165,33 @@ class WebService
 
 			if ($comment_format == 'plaintext')
 			{
+				# If we would like to be compatible with old OCDE/OC.nl installation,
+				# "$comment_format == 'auto'" should go here, too. But we must choose
+				# to resemble either old OCDE or OCPL behaviour and opt for OCPL compatibility.
+
 				$formatted_comment = htmlspecialchars($comment, ENT_QUOTES);
 				$formatted_comment = nl2br($formatted_comment);
 				$value_for_text_html_field = 0;
 			}
 			else
 			{
+				if ($comment_format == 'auto')
+				{
+					# This does not make sense on HTML comments, but it resembles the
+					# OCPL implementation and is needed for full compatibility with existing
+					# OKAPI clients.
+
+					$formatted_comment = nl2br($comment);
+				}
+				else
+					$formatted_comment = $comment;
+
 				# NOTICE: We are including EXTERNAL OCDE library here! This
 				# code does not belong to OKAPI!
 
 				require_once $GLOBALS['rootpath'] . '../lib/htmlpurifier-4.2.0/library/HTMLPurifier.auto.php';
-				$config = \HTMLPurifier_Config::createDefault();
-				if ($comment_format == 'auto')
-					$config->set('AutoFormat', 'AutoParagraph', true);
-				$purifier = new \HTMLPurifier($config);
-				$formatted_comment = $purifier->purify($comment);
+				$purifier = new \HTMLPurifier();
+				$formatted_comment = $purifier->purify($formatted_comment);
 				$value_for_text_html_field = 1;
 			}
 		}

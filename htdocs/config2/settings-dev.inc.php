@@ -34,6 +34,7 @@
 	 *    mysql.trace_mode = On
 	 */
 	$opt['php']['debug'] = PHP_DEBUG_ON;
+	$opt['php']['semaphores'] = false;
 
 	/* settings for the template engine
 	 *
@@ -75,7 +76,7 @@
 	/* other template options
 	 *
 	 */
-	$opt['page']['absolute_url'] = $dev_baseurl;
+	$opt['page']['absolute_url'] = $dev_baseurl . "/";
 	$opt['page']['develsystem'] = true;
 	$opt['mail']['from'] = 'root';
 	$opt['mail']['subject'] = '[local.opencaching.de] ';
@@ -83,7 +84,7 @@
 	/* location of uploaded images
 	 */
 	$opt['logic']['pictures']['dir'] = $dev_basepath . $dev_codepath . 'htdocs/images/uploads';
-	$opt['logic']['pictures']['url'] = $opt['page']['absolute_url'] . '/images/uploads';
+	$opt['logic']['pictures']['url'] = $opt['page']['absolute_url'] . 'images/uploads';
 	$opt['logic']['pictures']['thumb_url'] = $opt['logic']['pictures']['url'] . '/thumbs';
 
  	/* E-Mail for notification about news (newstopic.php)
@@ -116,8 +117,4 @@
 	$opt['template']['locales']['DA']['show'] = false;
 	$opt['template']['locales']['PT']['show'] = false;
 	$opt['template']['locales']['JA']['show'] = false;
-
-	function post_config()
-	{
-	}
 ?>

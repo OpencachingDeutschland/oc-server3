@@ -197,7 +197,7 @@ final class Settings
 			throw new Exception("IMAGES_DIR cannot be null. Please provide a valid directory.");
 		foreach ($dict as $k => $v)
 			if ((strpos($k, '_DIR') !== false) && ($k[strlen($k) - 1] == '/'))
-				throw new Exception("All *_DIR settings may not end with a slash. Check $k.");
+				throw new Exception("None of the *_DIR settings may end with a slash. Check $k.");
 		$notnull = array('OC_COOKIE_NAME', 'DB_SERVER', 'DB_NAME', 'DB_USERNAME', 'SITE_URL', 'OC_NODE_ID');
 		foreach ($notnull as $k)
 			if ($dict[$k] === null)

@@ -778,7 +778,7 @@ class Okapi
 {
 	public static $data_store;
 	public static $server;
-	public static $revision = 618; # This gets replaced in automatically deployed packages
+	public static $revision = 641; # This gets replaced in automatically deployed packages
 	private static $okapi_vars = null;
 
 	/** Get a variable stored in okapi_vars. If variable not found, return $default. */
@@ -1976,7 +1976,7 @@ class OkapiHttpRequest extends OkapiRequest
 
 			if (!Settings::get('DEBUG'))
 			{
-				throw new Exception("Attempted to set DEBUG_AS_USERNAME set in ".
+				throw new Exception("Attempted to use DEBUG_AS_USERNAME in ".
 					"non-debug environment. Accidental commit?");
 			}
 

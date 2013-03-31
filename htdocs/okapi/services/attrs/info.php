@@ -27,8 +27,8 @@ class WebService
 	public static function call(OkapiRequest $request)
 	{
 		# The list of attributes is periodically refreshed by contacting OKAPI
-		# repository (the refreshing is done via a cronjob). This method displays
-		# the cached version of the list.
+		# repository (the refreshing is done via a cronjob). This method
+		# displays the cached version of the list.
 
 		require_once 'attr_helper.inc.php';
 		AttrHelper::refresh_if_stale();

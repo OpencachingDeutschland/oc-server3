@@ -2,8 +2,8 @@
 	<brief>ALPHA: Get the list of all cache attributes</brief>
 	<issue-id>194</issue-id>
 	<desc>
-		This method is in its ALPHA stage. It's signature will most probably change, or
-		it might be removed altogether. You should not use it!
+		This method is in its ALPHA stage. It's signature will most probably
+		change, or it might be removed altogether. You should not use it!
 	</desc>
 	<common-format-params/>
 	<returns>

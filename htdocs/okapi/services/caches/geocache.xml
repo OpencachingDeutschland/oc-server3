@@ -178,11 +178,15 @@
 					<li><b>is_spoiler</b> - boolean, if <b>true</b> then the image is
 						a spoiler image and should not be displayed to the user unless
 						the user explicitly asks for it,</li>
-					<li><b>is_preview</b> - boolean, if <b>true</b>, the cache owner has marked
-						the image as <em>preview image</em>, and you are encouraged to display
-						it as a 'teaser' for the cache. Some installations do not support this
-						feature and will return <b>null</b>.</li>
 				</ul>
+			</li>
+			<li>
+				<p><b>preview_image</b> - This is either <b>null</b> or a dictionary describing
+				an image, which has been marked by the owner as <em>preview image</em>. You are
+				encouraged to display it as a 'teaser' for this cache.
+				The structure of the dictionary is the same as in the <b>images</b> field above.</p>
+				<p>The preview image is no additional image but one of those which
+				are included in the <b>images</b> list.</p>
 			</li>
 			<li>
 				<p><b>attrnames</b> - list of names of attributes of the cache; the language will

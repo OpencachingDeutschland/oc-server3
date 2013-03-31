@@ -149,7 +149,7 @@ class ReplicateCommon
 	/**
 	 * Scan the database and compare the current values of old entries to
 	 * the cached values of the same entries. If differences found, update
-	 * okapi_syncbase accordingly, and email the admins.
+	 * okapi_syncbase accordingly, and email the OKAPI developers.
 	 *
 	 * Currently, only caches are checked (log entries are not).
 	 */
@@ -175,6 +175,7 @@ class ReplicateCommon
 		# (the "fulldump" mode). Instead, just update the okapi_syncbase column.
 
 		$sum = 0;
+		$two_examples = array();
 		foreach ($cache_code_groups as $cache_codes)
 		{
 			$entries = self::generate_changelog_entries(
@@ -186,6 +187,14 @@ class ReplicateCommon
 				if ($entry['object_type'] != 'geocache')
 					continue;
 				$cache_code = $entry['object_key']['code'];
+
+				# We will story the first and the last entry in the $two_examples
+				# vars which is to be emailed to OKAPI developers.
+
+				if (count($two_examples) == 0)
+					$two_examples[0] = $entry;  /* The first entry */
+				$two_examples[1] = $entry;  /* The last entry */
+
 				Db::execute("
 					update caches
 					set okapi_syncbase = now()
@@ -196,11 +205,15 @@ class ReplicateCommon
 		}
 		if ($sum > 0)
 		{
+			$message = (
+				"Number of invalid entries scheduled to be fixed: $sum\n".
+				"Approx revision of the first one: ".Okapi::get_var('clog_revision')."\n\n".
+				"Two examples:\n\n".print_r($two_examples, true)
+			);
 			Okapi::mail_from_okapi(
 				"rygielski@mimuw.edu.pl",
-				"verify_clog_consistency",
-				"Number of invalid entries fixed: $sum\n\n".
-				print_r(Db::select_all("select * from okapi_vars"), true)
+				"verify_clog_consistency - ".Okapi::get_normalized_site_name(),
+				$message, true
 			);
 		}
 	}

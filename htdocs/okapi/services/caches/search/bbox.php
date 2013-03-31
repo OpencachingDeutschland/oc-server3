@@ -18,7 +18,7 @@ class WebService
 			'min_auth_level' => 1
 		);
 	}
-	
+
 	public static function call(OkapiRequest $request)
 	{
 		# You may wonder, why there are no parameters like "bbox" or "center" in the
@@ -27,7 +27,7 @@ class WebService
 		# make the documentation very fuzzy. That's why they were intentionally
 		# left out of the "search/all" method, and put in separate (individual) ones.
 		# It's much easier to grasp their meaning this way.
-		
+
 		$tmp = $request->get_parameter('bbox');
 		if (!$tmp)
 			throw new ParamMissing('bbox');
@@ -49,9 +49,9 @@ class WebService
 			throw new InvalidParam('bbox', "Latitudes have to be within -90..90 range.");
 		if ($bbeast > 180 || $bbeast < -180 || $bbwest > 180 || $bbwest < -180)
 			throw new InvalidParam('bbox', "Longitudes have to be within -180..180 range.");
-		
+
 		# Construct SQL conditions for the specified bounding box.
-		
+
 		$where_conds = array();
 		$where_conds[] = "caches.latitude between '".mysql_real_escape_string($bbsouth)."' and '".mysql_real_escape_string($bbnorth)."'";
 		if ($bbeast > $bbwest)
@@ -65,23 +65,23 @@ class WebService
 			# For example, $bbwest = 179 and $bbeast = -179.
 			$where_conds[] = "(caches.longitude > '".mysql_real_escape_string($bbwest)."' or caches.longitude < '".mysql_real_escape_string($bbeast)."')";
 		}
-		
+
 		#
 		# In the method description, we promised to return caches ordered by the *rough*
 		# distance from the center of the bounding box. We'll use ORDER BY with a simplified
 		# distance formula and combine it with the LIMIT clause to get the best results.
 		#
-		
+
 		$center_lat = ($bbsouth + $bbnorth) / 2.0;
-		$center_lon = ($bbwest + $bbeast) / 2.0; 
-		
+		$center_lon = ($bbwest + $bbeast) / 2.0;
+
 		$search_params = SearchAssistant::get_common_search_params($request);
 		$search_params['where_conds'] = array_merge($where_conds, $search_params['where_conds']);
 		$search_params['order_by'][] = Okapi::get_distance_sql($center_lat, $center_lon,
 			"caches.latitude", "caches.longitude"); # not replaced; added to the end!
-		
+
 		$result = SearchAssistant::get_common_search_result($search_params);
-		
+
 		return Okapi::formatted_response($request, $result);
 	}
 }

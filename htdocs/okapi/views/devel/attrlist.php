@@ -21,17 +21,17 @@ class View
 	{
 		# This is a hidden page for OKAPI developers. It will list all
 		# attributes defined in this OC installation (and some other stuff).
-		
+
 		ob_start();
-		
+
 		print "Cache Types:\n\n";
 		foreach (self::get_all_cachetypes() as $id => $name)
 			print "$id: $name\n";
-			
+
 		print "\nLog Types:\n\n";
 		foreach (self::get_all_logtypes() as $id => $name)
 			print "$id: $name\n";
-			
+
 		print "\nAttributes:\n\n";
 		$dict = Okapi::get_all_atribute_names();
 		foreach ($dict as $internal_id => $langs)
@@ -45,6 +45,19 @@ class View
 				print ">>>> ENGLISH NAME UNSET! <<<<\n";
 			foreach ($langkeys as $langkey)
 				print "        $langkey: ".$langs[$langkey]."\n";
+		}
+		foreach ($dict as $internal_id => $langs)
+		{
+			print "<attr okapi_attr_id=\"TODO\">\n";
+			print "\t<groundspeak id=\"TODO\" inc=\"TODO\" name=\"TODO\" />\n";
+			print "\t<opencaching site_url=\"SITEURLTODO\" id=\"$internal_id\" />\n";
+			$langkeys = array_keys($langs);
+			usort($langkeys, function($a, $b) {
+				return ($a == "en") ? -1 : (($a == $b) ? 0 : (($a < $b) ? -1 : 1));
+			});
+			foreach ($langkeys as $langkey)
+				print "\t<name lang=\"$langkey\">".$langs[$langkey]."</name>\n";
+			print "</attr>\n";
 		}
 
 		$response = new OkapiHttpResponse();
@@ -61,13 +74,13 @@ class View
 		if (Settings::get('OC_BRANCH') == 'oc.pl')
 		{
 			# OCPL branch does not store cache types in many languages (just two).
-			
+
 			$rs = Db::query("select id, en from cache_type order by id");
 		}
 		else
 		{
 			# OCDE branch uses translation tables.
-			
+
 			$rs = Db::query("
 				select
 					ct.id,
@@ -80,14 +93,14 @@ class View
 				order by ct.id
 			");
 		}
-			
+
 		$dict = array();
 		while ($row = mysql_fetch_assoc($rs)) {
 			$dict[$row['id']] = $row['en'];
 		}
 		return $dict;
 	}
-	
+
 	/**
 	 * Get an array of all site-specific log-types (id => name in English).
 	 */
@@ -96,13 +109,13 @@ class View
 		if (Settings::get('OC_BRANCH') == 'oc.pl')
 		{
 			# OCPL branch does not store cache types in many languages (just two).
-			
+
 			$rs = Db::query("select id, en from log_types order by id");
 		}
 		else
 		{
 			# OCDE branch uses translation tables.
-			
+
 			$rs = Db::query("
 				select
 					lt.id,
@@ -115,7 +128,7 @@ class View
 				order by lt.id
 			");
 		}
-			
+
 		$dict = array();
 		while ($row = mysql_fetch_assoc($rs)) {
 			$dict[$row['id']] = $row['en'];

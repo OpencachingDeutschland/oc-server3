@@ -127,7 +127,7 @@
 				<b>null</b> if geocache does not have a container,
 			</li>
 			<li>
-				<p><b>size2</b> - string indicating the size od the container, so called 
+				<p><b>size2</b> - string indicating the size of the container, so called 
 				"size2 code". One of the following values:
 				'none', 'nano', 'micro', 'small', 'regular', 'large', 'xlarge', 'other'.</p>
 			</li>
@@ -170,17 +170,23 @@
 				<ul>
 					<li><b>uuid</b> - UUID of the image,</li>
 					<li><b>url</b> - URL of the image,</li>
-					<li><b>thumb_url</b> - URL of a small (thumb) version of the image
-						<b>or null</b> when no thumb is available (e.g. there are no thumbs
-						for spoiler images),</li>
+					<li><b>thumb_url</b> - URL of a small (thumb) version of the image,</li>
 					<li><b>caption</b> - plain-text string, caption of the image,</li>
 					<li><b>unique_caption</b> - plain-text string, to be used as a filename
 						for Garmin's crappy images implementation (currently, they get image
 						caption from the image's filename itself),</li>
 					<li><b>is_spoiler</b> - boolean, if <b>true</b> then the image is
 						a spoiler image and should not be displayed to the user unless
-						the user explicitly asks for it.</li>
+						the user explicitly asks for it,</li>
 				</ul>
+			</li>
+			<li>
+				<p><b>preview_image</b> - This is either <b>null</b> or a dictionary describing
+				an image, which has been marked by the owner as <em>preview image</em>. You are
+				encouraged to display it as a 'teaser' for this cache.
+				The structure of the dictionary is the same as in the <b>images</b> field above.</p>
+				<p>The preview image is no additional image but one of those which
+				are included in the <b>images</b> list.</p>
 			</li>
 			<li>
 				<p><b>attrnames</b> - list of names of attributes of the cache; the language will
@@ -216,7 +222,7 @@
 				<p><b>alt_wpts</b> - list of alternate/additional waypoints associated
 				with this geocache. Each item is a dictionary of the following structure:</p>
 				<ul>
-					<li><b>name</b> - plain-text "codename" for the waypoint (not unique),</li>
+					<li><b>name</b> - plain-text, short, unique "codename" for the waypoint,</li>
 					<li><b>location</b> - location of the waypoint in the "lat|lon" format
 						(<i>lat</i> and <i>lon</i> are in full degrees with a dot as a decimal point),</li>
 					<li>
@@ -266,6 +272,10 @@
 		Log-entries per cache - the number of logs returned in the <b>latest_logs</b> field.
 		This should be an integer or a special "all" value. Please note, that you must include
 		the <b>latest_logs</b> field in <b>fields</b> in order to see the log entries.
+	</opt>
+	<opt name='log_fields' default='uuid|date|user|type|comment'>
+		Pipe-separated list of log fields to include in the <b>latest_logs</b> field.
+		For valid field names, see <b>logs/entry</b> method.
 	</opt>
 	<opt name='my_location'>
 		<p>The reference point for cache distance and bearing calculation (typically - the user's location),

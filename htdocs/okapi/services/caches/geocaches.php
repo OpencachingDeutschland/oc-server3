@@ -31,7 +31,7 @@ class WebService
 		'descriptions', 'hint', 'hints', 'images', 'attrnames', 'latest_logs',
 		'my_notes', 'trackables_count', 'trackables', 'alt_wpts', 'last_found',
 		'last_modified', 'date_created', 'date_hidden', 'internal_id', 'is_watched',
-		'is_ignored', 'willattends', 'country', 'state');
+		'is_ignored', 'willattends', 'country', 'state', 'preview_image');
 
 	public static function call(OkapiRequest $request)
 	{
@@ -62,6 +62,20 @@ class WebService
 		foreach ($fields as $field)
 			if (!in_array($field, self::$valid_field_names))
 				throw new InvalidParam('fields', "'$field' is not a valid field code.");
+
+		# Currently, the "owner" field needs to be included whenever the "description" field is.
+		# That's a little ugly. Grep for "issue 178" below for more insight on this.
+		if (
+			(
+				in_array('description', $fields) || in_array('descriptions', $fields)
+				|| in_array('hint', $fields) || in_array('hints', $fields)
+			)
+			&& !in_array('owner', $fields)
+		)
+			$fields[] = "owner";
+
+		$log_fields = $request->get_parameter('log_fields');
+		if (!$log_fields) $log_fields = "uuid|date|user|type|comment";  // validation is done on call
 
 		$user_uuid = $request->get_parameter('user_uuid');
 		if ($user_uuid != null)
@@ -120,7 +134,7 @@ class WebService
 
 			$rs = Db::query("
 				select
-					c.cache_id, c.name, c.longitude, c.latitude, c.last_modified,
+					c.cache_id, c.name, c.longitude, c.latitude, c.listing_last_modified as last_modified,
 					c.date_created, c.type, c.status, c.date_hidden, c.size, c.difficulty,
 					c.terrain, c.wp_oc, c.logpw, c.user_id,
 
@@ -258,6 +272,7 @@ class WebService
 					case 'hint': /* handled separately */ break;
 					case 'hints': /* handled separately */ break;
 					case 'images': /* handled separately */ break;
+					case 'preview_image': /* handled separately */ break;
 					case 'attrnames': /* handled separately */ break;
 					case 'latest_logs': /* handled separately */ break;
 					case 'my_notes': /* handles separately */ break;
@@ -421,8 +436,19 @@ class WebService
 				$cache_code = $cacheid2wptcode[$row['cache_id']];
 				// strtolower - ISO 639-1 codes are lowercase
 				if ($row['desc'])
-					$results[$cache_code]['descriptions'][strtolower($row['language'])] = $row['desc'].
-						"\n".self::get_cache_attribution_note($row['cache_id'], strtolower($row['language']));
+				{
+					/* Regarding the attribution note - please note, that the "owner" field
+					 * is automatically included, whenever the cache description is included.
+					 * This is because we may need it for the attribution note - see issue 178. */
+
+					$results[$cache_code]['descriptions'][strtolower($row['language'])] = (
+						$row['desc']."\n".
+						self::get_cache_attribution_note(
+							$row['cache_id'], strtolower($row['language']), $langpref,
+							$results[$cache_code]['owner']
+						)
+					);
+				}
 				if ($row['hint'])
 					$results[$cache_code]['hints'][strtolower($row['language'])] = $row['hint'];
 			}
@@ -442,19 +468,28 @@ class WebService
 
 		# Images.
 
-		if (in_array('images', $fields))
+		if (in_array('images', $fields) || in_array('preview_image', $fields))
 		{
-			foreach ($results as &$result_ref)
-				$result_ref['images'] = array();
+			if (in_array('images', $fields))
+				foreach ($results as &$result_ref)
+					$result_ref['images'] = array();
+			if (in_array('preview_image', $fields))
+				foreach ($results as &$result_ref)
+					$result_ref['preview_image'] = null;
+
+			if (Db::field_exists('pictures', 'mappreview'))
+				$preview_field = "mappreview";
+			else
+				$preview_field = "0";
 			$rs = Db::query("
-				select object_id, uuid, url, thumb_url, title, spoiler
+				select object_id, uuid, url, title, spoiler, ".$preview_field." as preview
 				from pictures
 				where
 					object_id in ('".implode("','", array_map('mysql_real_escape_string', array_keys($cacheid2wptcode)))."')
 					and display = 1
 					and object_type = 2
 					and unknown_format = 0
-				order by object_id, last_modified
+				order by object_id, date_created
 			");
 			$prev_cache_code = null;
 			while ($row = mysql_fetch_assoc($rs))
@@ -466,14 +501,18 @@ class WebService
 					self::reset_unique_captions();
 					$prev_cache_code = $cache_code;
 				}
-				$results[$cache_code]['images'][] = array(
+				$image = array(
 					'uuid' => $row['uuid'],
 					'url' => $row['url'],
-					'thumb_url' => $row['thumb_url'] ? $row['thumb_url'] : null,
+					'thumb_url' => Settings::get('SITE_URL') . 'thumbs.php?uuid=' . $row['uuid'],
 					'caption' => $row['title'],
 					'unique_caption' => self::get_unique_caption($row['title']),
 					'is_spoiler' => ($row['spoiler'] ? true : false),
 				);
+				if (in_array('images', $fields))
+					$results[$cache_code]['images'][] = $image;
+				if ($row['preview'] != 0 && in_array('preview_image', $fields))
+					$results[$cache_code]['preview_image'] = $image;
 			}
 		}
 
@@ -517,13 +556,15 @@ class WebService
 			# technique I could think of...
 
 			$rs = Db::query("
-				select cache_id, id, date
+				select cache_id, uuid, date
 				from cache_logs
 				where
 					cache_id in ('".implode("','", array_map('mysql_real_escape_string', array_keys($cacheid2wptcode)))."')
 					and ".((Settings::get('OC_BRANCH') == 'oc.pl') ? "deleted = 0" : "true")."
+				order by cache_id, date desc
 			");
-			$logids = array();
+			$loguuids = array();
+			$log2cache_map = array();
 			if ($lpc !== null)
 			{
 				# User wants some of the latest logs.
@@ -538,7 +579,8 @@ class WebService
 					});
 					for ($i = 0; $i < min(count($rowslist_ref), $lpc); $i++)
 					{
-						$logids[] = $rowslist_ref[$i]['id'];
+						$loguuids[] = $rowslist_ref[$i]['uuid'];
+						$log2cache_map[$rowslist_ref[$i]['uuid']] = $cacheid2wptcode[$rowslist_ref[$i]['cache_id']];
 					}
 				}
 			}
@@ -546,35 +588,46 @@ class WebService
 			{
 				# User wants ALL logs.
 				while ($row = mysql_fetch_assoc($rs))
-					$logids[] = $row['id'];
+				{
+					$loguuids[] = $row['uuid'];
+					$log2cache_map[$row['uuid']] = $cacheid2wptcode[$row['cache_id']];
+				}
 			}
 
-			# Now retrieve text and join.
+			# We need to retrieve logs/entry for each of the $logids. We do this in groups
+			# (there is a limit for log uuids passed to logs/entries method).
 
-			$rs = Db::query("
-				select cl.cache_id, cl.id, cl.uuid, cl.type, unix_timestamp(cl.date) as date, cl.text,
-					u.uuid as user_uuid, u.username, u.user_id
-				from cache_logs cl, user u
-				where
-					cl.id in ('".implode("','", array_map('mysql_real_escape_string', $logids))."')
-					and ".((Settings::get('OC_BRANCH') == 'oc.pl') ? "cl.deleted = 0" : "true")."
-					and cl.user_id = u.user_id
-				order by cl.cache_id, cl.date desc
-			");
-			$cachelogs = array();
-			while ($row = mysql_fetch_assoc($rs))
+			try
 			{
-				$results[$cacheid2wptcode[$row['cache_id']]]['latest_logs'][] = array(
-					'uuid' => $row['uuid'],
-					'date' => date('c', $row['date']),
-					'user' => array(
-						'uuid' => $row['user_uuid'],
-						'username' => $row['username'],
-						'profile_url' => Settings::get('SITE_URL')."viewprofile.php?userid=".$row['user_id'],
-					),
-					'type' => Okapi::logtypeid2name($row['type']),
-					'comment' => $row['text']
-				);
+				foreach (Okapi::make_groups($loguuids, 500) as $subset)
+				{
+					$entries = OkapiServiceRunner::call(
+						"services/logs/entries",
+						new OkapiInternalRequest(
+							$request->consumer, $request->token, array(
+								'log_uuids' => implode("|", $subset),
+								'fields' => $log_fields
+							)
+						)
+					);
+					foreach ($subset as $log_uuid)
+					{
+						if ($entries[$log_uuid])
+							$results[$log2cache_map[$log_uuid]]['latest_logs'][] = $entries[$log_uuid];
+					}
+				}
+			}
+			catch (Exception $e)
+			{
+				if (($e instanceof InvalidParam) && ($e->paramName == 'fields'))
+				{
+					throw new InvalidParam('log_fields', $e->whats_wrong_about_it);
+				}
+				else
+				{
+					/* Something is wrong with OUR code. */
+					throw new Exception($e);
+				}
 			}
 		}
 
@@ -692,6 +745,8 @@ class WebService
 		{
 			foreach ($results as &$result_ref)
 				$result_ref['alt_wpts'] = array();
+			$cache_codes_escaped_and_imploded = "'".implode("','", array_map('mysql_real_escape_string', array_keys($cacheid2wptcode)))."'";
+
 			if (Settings::get('OC_BRANCH') == 'oc.pl')
 			{
 				# OCPL uses 'waypoints' table to store additional waypoints. OCPL also have
@@ -699,7 +754,7 @@ class WebService
 				# of a multicache). Such hidden waypoints are not exposed by OKAPI. A stage
 				# fields is used for ordering and naming.
 
-				$rs = Db::query("
+				$waypoints = Db::select_all("
 					select
 						cache_id, stage, latitude, longitude, `desc`,
 						case type
@@ -710,7 +765,7 @@ class WebService
 						end as sym
 					from waypoints
 					where
-						cache_id in ('".implode("','", array_map('mysql_real_escape_string', array_keys($cacheid2wptcode)))."')
+						cache_id in (".$cache_codes_escaped_and_imploded.")
 						and status = 1
 					order by cache_id, stage, `desc`
 				");
@@ -720,27 +775,32 @@ class WebService
 				# OCDE uses 'coordinates' table (with type=1) to store additional waypoints.
 				# All waypoints are are public.
 
-				$rs = Db::query("
+				$waypoints = Db::select_all("
 					select
 						cache_id,
-						null as stage,
+						@stage := @stage + 1 as stage,
 						latitude, longitude,
 						description as `desc`,
 						case subtype
 							when 1 then 'Parking Area'
+							when 3 then 'Flag, Blue'
+							when 4 then 'Circle with X'
+							when 5 then 'Diamond, Green'
 							else 'Flag, Green'
 						end as sym
 					from coordinates
+					join (select @stage := 0) s
 					where
 						type = 1
-						and cache_id in ('".implode("','", array_map('mysql_real_escape_string', array_keys($cacheid2wptcode)))."')
-					order by cache_id, `desc`
+						and cache_id in (".$cache_codes_escaped_and_imploded.")
+					order by cache_id, id, `desc`
 				");
 			}
-			while ($row = mysql_fetch_assoc($rs))
+			$wpt_format = "%s-%0".strlen(count($waypoints))."d";
+			foreach ($waypoints as $index => $row)
 			{
 				$results[$cacheid2wptcode[$row['cache_id']]]['alt_wpts'][] = array(
-					'name' => $cacheid2wptcode[$row['cache_id']]."-".($row['stage'] ? $row['stage'] : "wpt"),
+					'name' => sprintf($wpt_format, $cacheid2wptcode[$row['cache_id']], $index + 1),
 					'location' => round($row['latitude'], 6)."|".round($row['longitude'], 6),
 					'sym' => $row['sym'],
 					'description' => ($row['stage'] ? _("Stage")." ".$row['stage'].": " : "").$row['desc'],
@@ -750,13 +810,17 @@ class WebService
 
 		# Country and/or state.
 
+		if (Settings::get('OC_BRANCH') == 'oc.de')
+			$cache_location_state = 'adm2';
+		else
+			$cache_location_state = 'adm3';
 		if (in_array('country', $fields) || in_array('state', $fields))
 		{
 			$rs = Db::query("
 				select
 					c.wp_oc as cache_code,
 					cl.adm1 as country,
-					cl.adm3 as state
+					cl.".$cache_location_state." as state
 				from
 					caches c,
 					cache_location cl
@@ -845,22 +909,54 @@ class WebService
 		self::$caption_no = 1;
 	}
 
-	public static function get_cache_attribution_note($cache_id, $lang)
+	/**
+	 * Return attribution note to be included in the cache description.
+	 *
+	 * The $lang parameter identifies the language of the cache description
+	 * to which the attribution note will be appended to (one cache may
+	 * have descriptions in multiple languages!).
+	 *
+	 * The $langpref parameter is *an array* of language preferences
+	 * extracted from the langpref parameter passed to the method by the
+	 * OKAPI Consumer.
+	 *
+	 * Both values ($lang and $langpref) will be taken into account when
+	 * generating the attribution note, but $lang will have a higher
+	 * priority than $langpref (we don't want to mix the languages in the
+	 * descriptions if we don't have to).
+	 *
+	 * $owner is in object describing the user, it has the same format as
+	 * defined in "geocache" method specs (see the "owner" field).
+	 */
+	public static function get_cache_attribution_note($cache_id, $lang, array $langpref, $owner)
 	{
 		$site_url = Settings::get('SITE_URL');
 		$site_name = Okapi::get_normalized_site_name();
 		$cache_url = $site_url."viewcache.php?cacheid=$cache_id";
 
-		# This list if to be extended (opencaching.de, etc.). (_)
-
-		switch ($lang)
+		Okapi::gettext_domain_init(array_merge(array($lang), $langpref));
+		$note = "<p>";
+		if (Settings::get('OC_BRANCH') == 'oc.de')
 		{
-			case 'pl':
-				return "<p>Opis <a href='$cache_url'>skrzynki</a> pochodzi z serwisu <a href='$site_url'>$site_name</a>.</p>";
-				break;
-			default:
-				return "<p>This <a href='$cache_url'>geocache</a> description comes from the <a href='$site_url'>$site_name</a> site.</p>";
-				break;
+			$note .= sprintf(
+				_(
+					"<em>&copy; <a href='%s'>%s</a>, <a href='%s'>%s</a>, ".
+					"<a href='http://creativecommons.org/licenses/by-nc-nd/3.0/de/deed.en'>CC-BY-NC-ND</a>, ".
+					"as of %s; all log entries &copy; their authors</em>"
+				),
+				$owner['profile_url'], $owner['username'], $cache_url, $site_name, strftime('%x')
+			);
 		}
+		else
+		{
+			$note .= sprintf(
+				_("This <a href='%s'>geocache</a> description comes from the <a href='%s'>%s</a> site."),
+				$cache_url, $site_url, $site_name
+			);
+		}
+		$note .= "</p>";
+		Okapi::gettext_domain_restore();
+
+		return $note;
 	}
 }

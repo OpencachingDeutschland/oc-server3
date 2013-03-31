@@ -3,7 +3,7 @@
 	<issue-id>166</issue-id>
 	<desc>
 		<p>This method allows your users to mark the geocache as <b>watched</b> or
-		<b>ignored</b>, or to do modify user's personal <b>notes</b> saved along the geocache.
+		<b>ignored</b>.
 		Read the docs on separate parameters for details.</p>
 	</desc>
 	<req name='cache_code'>

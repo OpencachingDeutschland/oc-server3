@@ -17,9 +17,9 @@ class View
 	{
 		$langpref = isset($_GET['langpref']) ? $_GET['langpref'] : Settings::get('SITELANG');
 		$langprefs = explode("|", $langpref);
-		
+
 		# Determine which user is logged in to OC.
-		
+
 		require_once($GLOBALS['rootpath']."okapi/lib/oc_session.php");
 		$OC_user_id = OCSession::get_user_id();
 
@@ -29,9 +29,9 @@ class View
 			$login_url = Settings::get('SITE_URL')."login.php?target=".urlencode($after_login);
 			return new OkapiRedirectResponse($login_url);
 		}
-		
+
 		# Get the list of authorized apps.
-		
+
 		$rs = Db::query("
 			select c.`key`, c.name, c.url
 			from
@@ -49,7 +49,7 @@ class View
 		while ($row = mysql_fetch_assoc($rs))
 			$vars['apps'][] = $row;
 		mysql_free_result($rs);
-		
+
 		$response = new OkapiHttpResponse();
 		$response->content_type = "text/html; charset=utf-8";
 		ob_start();

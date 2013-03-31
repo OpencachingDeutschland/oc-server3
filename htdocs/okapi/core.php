@@ -291,9 +291,11 @@ class ParamMissing extends BadRequest
 /** Common type of BadRequest: Parameter has invalid value. */
 class InvalidParam extends BadRequest
 {
-	private $paramName;
+	public $paramName;
+
 	/** What was wrong about the param? */
 	public $whats_wrong_about_it;
+
 	protected function provideExtras(&$extras) {
 		parent::provideExtras($extras);
 		$extras['reason_stack'][] = 'invalid_parameter';
@@ -418,6 +420,23 @@ class Db
 			throw new DbException("SQL Error ".mysql_errno().": ".mysql_error()."\n\nThe query was:\n".$query."\n");
 		}
 		return $rs;
+	}
+
+	public static function field_exists($table, $field)
+	{
+		if (!preg_match("/[a-z0-9_]+/", $table.$field))
+			return false;
+		try {
+			$spec = self::select_all("desc ".$table.";");
+		} catch (Exception $e) {
+			/* Table doesn't exist, probably. */
+			return false;
+		}
+		foreach ($spec as &$row_ref) {
+			if (strtoupper($row_ref['Field']) == strtoupper($field))
+				return true;
+		}
+		return false;
 	}
 }
 
@@ -670,7 +689,7 @@ class OkapiHttpResponse
 		if ($try_gzip && is_string($this->body))
 		{
 			header("Content-Encoding: gzip");
-			$gzipped = gzencode($this->body, 5, true);
+			$gzipped = gzencode($this->body, 5);
 			header("Content-Length: ".strlen($gzipped));
 			print $gzipped;
 		}
@@ -759,7 +778,7 @@ class Okapi
 {
 	public static $data_store;
 	public static $server;
-	public static $revision = 556; # This gets replaced in automatically deployed packages
+	public static $revision = 651; # This gets replaced in automatically deployed packages
 	private static $okapi_vars = null;
 
 	/** Get a variable stored in okapi_vars. If variable not found, return $default. */
@@ -1957,7 +1976,7 @@ class OkapiHttpRequest extends OkapiRequest
 
 			if (!Settings::get('DEBUG'))
 			{
-				throw new Exception("Attempted to set DEBUG_AS_USERNAME set in ".
+				throw new Exception("Attempted to use DEBUG_AS_USERNAME in ".
 					"non-debug environment. Accidental commit?");
 			}
 

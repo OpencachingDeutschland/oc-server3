@@ -20,7 +20,7 @@ class View
 	{
 		require_once($GLOBALS['rootpath'].'okapi/service_runner.php');
 		require_once($GLOBALS['rootpath'].'okapi/views/menu.inc.php');
-		
+
 		$vars = array(
 			'menu' => OkapiMenu::get_menu_html("introduction.html"),
 			'okapi_base_url' => Settings::get('SITE_URL')."okapi/",
@@ -30,7 +30,7 @@ class View
 			'installations' => OkapiMenu::get_installations(),
 			'okapi_rev' => Okapi::$revision,
 		);
-		
+
 		$response = new OkapiHttpResponse();
 		$response->content_type = "text/html; charset=utf-8";
 		ob_start();

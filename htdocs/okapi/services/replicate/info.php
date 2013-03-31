@@ -24,7 +24,7 @@ class WebService
 			'min_auth_level' => 1
 		);
 	}
-	
+
 	public static function call(OkapiRequest $request)
 	{
 		require_once('replicate_common.inc.php');
@@ -46,7 +46,7 @@ class WebService
 		} else {
 			$result['latest_fulldump'] = null;
 		}
-		
+
 		return Okapi::formatted_response($request, $result);
 	}
 }

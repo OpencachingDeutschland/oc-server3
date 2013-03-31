@@ -19,7 +19,7 @@ class SearchAssistant
 	 * given OKAPI request. Most cache search methods share a common set
 	 * of filtering parameters recognized by this method. It returns
 	 * a dictionary of the following structure:
-	 * 
+	 *
 	 *  - "where_conds" - list of additional WHERE conditions to be ANDed
 	 *    to the rest of your SQL query,
 	 *  - "offset" - value of the offset parameter to be used in the LIMIT clause,
@@ -32,16 +32,16 @@ class SearchAssistant
 	{
 		$where_conds = array('true');
 		$extra_tables = array();
-		
+
 		# At the beginning we have to set up some "magic e$Xpressions".
 		# We will use them to make our query run on both OCPL and OCDE databases.
-		
+
 		if (Settings::get('OC_BRANCH') == 'oc.pl')
 		{
 			# OCPL's 'caches' table contains some fields which OCDE's does not
 			# (topratings, founds, notfounds, last_found, votes, score). If
 			# we're being run on OCPL installation, we will simply use them.
-			
+
 			$X_TOPRATINGS = 'caches.topratings';
 			$X_FOUNDS = 'caches.founds';
 			$X_NOTFOUNDS = 'caches.notfounds';
@@ -57,22 +57,22 @@ class SearchAssistant
 			# additional table in our query (along with a proper WHERE
 			# condition) and we will map the field expressions to
 			# approriate places.
-			
+
 			$extra_tables[] = 'stat_caches';
 			$where_conds[] = 'stat_caches.cache_id = caches.cache_id';
-			
+
 			$X_TOPRATINGS = 'stat_caches.toprating';
 			$X_FOUNDS = 'stat_caches.found';
 			$X_NOTFOUNDS = 'stat_caches.notfound';
 			$X_LAST_FOUND = 'stat_caches.last_found';
-			$X_VOTES = '0'; // no support for ratings 
+			$X_VOTES = '0'; // no support for ratings
 			$X_SCORE = '0'; // no support for ratings
 		}
-		
+
 		#
 		# type
 		#
-		
+
 		if ($tmp = $request->get_parameter('type'))
 		{
 			$operator = "in";
@@ -96,11 +96,11 @@ class SearchAssistant
 			}
 			$where_conds[] = "caches.type $operator ('".implode("','", array_map('mysql_real_escape_string', $types))."')";
 		}
-		
+
 		#
 		# size2
 		#
-		
+
 		if ($tmp = $request->get_parameter('size2'))
 		{
 			$operator = "in";
@@ -128,7 +128,7 @@ class SearchAssistant
 		#
 		# status - filter by status codes
 		#
-		
+
 		$tmp = $request->get_parameter('status');
 		if ($tmp == null) $tmp = "Available";
 		$codes = array();
@@ -144,11 +144,11 @@ class SearchAssistant
 			}
 		}
 		$where_conds[] = "caches.status in ('".implode("','", array_map('mysql_real_escape_string', $codes))."')";
-		
+
 		#
 		# owner_uuid
 		#
-		
+
 		if ($tmp = $request->get_parameter('owner_uuid'))
 		{
 			$operator = "in";
@@ -171,11 +171,11 @@ class SearchAssistant
 				$user_ids[] = $user['internal_id'];
 			$where_conds[] = "caches.user_id $operator ('".implode("','", array_map('mysql_real_escape_string', $user_ids))."')";
 		}
-		
+
 		#
 		# terrain, difficulty, size, rating - these are similar, we'll do them in a loop
 		#
-		
+
 		foreach (array('terrain', 'difficulty', 'size', 'rating') as $param_name)
 		{
 			if ($tmp = $request->get_parameter($param_name))
@@ -247,11 +247,11 @@ class SearchAssistant
 				}
 			}
 		}
-		
+
 		#
 		# min_rcmds
 		#
-		
+
 		if ($tmp = $request->get_parameter('min_rcmds'))
 		{
 			if ($tmp[strlen($tmp) - 1] == '%')
@@ -270,33 +270,33 @@ class SearchAssistant
 				throw new InvalidParam('min_rcmds', "'$tmp'");
 			$where_conds[] = "$X_TOPRATINGS >= '".mysql_real_escape_string($tmp)."'";
 		}
-		
+
 		#
 		# min_founds
 		#
-		
+
 		if ($tmp = $request->get_parameter('min_founds'))
 		{
 			if (!is_numeric($tmp))
 				throw new InvalidParam('min_founds', "'$tmp'");
 			$where_conds[] = "$X_FOUNDS >= '".mysql_real_escape_string($tmp)."'";
 		}
-		
+
 		#
 		# max_founds
 		#
-		
+
 		if ($tmp = $request->get_parameter('max_founds'))
 		{
 			if (!is_numeric($tmp))
 				throw new InvalidParam('max_founds', "'$tmp'");
 			$where_conds[] = "$X_FOUNDS <= '".mysql_real_escape_string($tmp)."'";
 		}
-		
+
 		#
 		# modified_since
 		#
-		
+
 		if ($tmp = $request->get_parameter('modified_since'))
 		{
 			$timestamp = strtotime($tmp);
@@ -305,11 +305,11 @@ class SearchAssistant
 			else
 				throw new InvalidParam('modified_since', "'$tmp' is not in a valid format or is not a valid date.");
 		}
-		
+
 		#
 		# found_status
 		#
-		
+
 		if ($tmp = $request->get_parameter('found_status'))
 		{
 			if ($request->token == null)
@@ -323,11 +323,11 @@ class SearchAssistant
 				$where_conds[] = "caches.cache_id $operator ('".implode("','", array_map('mysql_real_escape_string', $found_cache_ids))."')";
 			}
 		}
-		
+
 		#
 		# found_by
 		#
-		
+
 		if ($tmp = $request->get_parameter('found_by'))
 		{
 			try {
@@ -339,11 +339,11 @@ class SearchAssistant
 			$found_cache_ids = self::get_found_cache_ids($user['internal_id']);
 			$where_conds[] = "caches.cache_id in ('".implode("','", array_map('mysql_real_escape_string', $found_cache_ids))."')";
 		}
-		
+
 		#
 		# not_found_by
 		#
-		
+
 		if ($tmp = $request->get_parameter('not_found_by'))
 		{
 			try {
@@ -355,11 +355,11 @@ class SearchAssistant
 			$found_cache_ids = self::get_found_cache_ids($user['internal_id']);
 			$where_conds[] = "caches.cache_id not in ('".implode("','", array_map('mysql_real_escape_string', $found_cache_ids))."')";
 		}
-		
+
 		#
 		# watched_only
 		#
-		
+
 		if ($tmp = $request->get_parameter('watched_only'))
 		{
 			if ($request->token == null)
@@ -380,7 +380,7 @@ class SearchAssistant
 		#
 		# exclude_ignored
 		#
-		
+
 		if ($tmp = $request->get_parameter('exclude_ignored'))
 		{
 			if ($request->token == null)
@@ -396,11 +396,11 @@ class SearchAssistant
 				$where_conds[] = "cache_id not in ('".implode("','", array_map('mysql_real_escape_string', $ignored_cache_ids))."')";
 			}
 		}
-		
+
 		#
 		# exclude_my_own
 		#
-		
+
 		if ($tmp = $request->get_parameter('exclude_my_own'))
 		{
 			if ($request->token == null)
@@ -410,26 +410,26 @@ class SearchAssistant
 			if ($tmp == 'true')
 				$where_conds[] = "caches.user_id != '".mysql_real_escape_string($request->token->user_id)."'";
 		}
-		
+
 		#
 		# name
 		#
-		
+
 		if ($tmp = $request->get_parameter('name'))
 		{
 			# WRTODO: Make this more user-friendly. See:
 			# http://code.google.com/p/opencaching-api/issues/detail?id=121
-			
+
 			if (strlen($tmp) > 100)
 				throw new InvalidParam('name', "Maximum length of 'name' parameter is 100 characters");
-			$tmp = str_replace("*", "%", str_replace("%", "%%", $tmp));	
+			$tmp = str_replace("*", "%", str_replace("%", "%%", $tmp));
 			$where_conds[] = "caches.name LIKE '".mysql_real_escape_string($tmp)."'";
 		}
-		
+
 		#
 		# with_trackables_only
 		#
-		
+
 		if ($tmp = $request->get_parameter('with_trackables_only'))
 		{
 			if (!in_array($tmp, array('true', 'false'), 1))
@@ -444,11 +444,11 @@ class SearchAssistant
 				";
 			}
 		}
-		
+
 		#
 		# ftf_hunter
 		#
-		
+
 		if ($tmp = $request->get_parameter('ftf_hunter'))
 		{
 			if (!in_array($tmp, array('true', 'false'), 1))
@@ -458,15 +458,15 @@ class SearchAssistant
 				$where_conds[] = "caches.founds = 0";
 			}
 		}
-		
+
 		#
 		# set_and
 		#
-		
+
 		if ($tmp = $request->get_parameter('set_and'))
 		{
 			# Check if the set exists.
-			
+
 			$exists = Db::select_value("
 				select 1
 				from okapi_search_sets
@@ -478,22 +478,22 @@ class SearchAssistant
 			$where_conds[] = "osr_and.cache_id = caches.cache_id";
 			$where_conds[] = "osr_and.set_id = '".mysql_real_escape_string($tmp)."'";
 		}
-		
+
 		#
 		# limit
 		#
-		
+
 		$limit = $request->get_parameter('limit');
 		if ($limit == null) $limit = "100";
 		if (!is_numeric($limit))
 			throw new InvalidParam('limit', "'$limit'");
 		if ($limit < 1 || (($limit > 500) && (!$request->skip_limits)))
 			throw new InvalidParam('limit', "Has to be between 1 and 500.");
-		
+
 		#
 		# offset
 		#
-		
+
 		$offset = $request->get_parameter('offset');
 		if ($offset == null) $offset = "0";
 		if (!is_numeric($offset))
@@ -502,17 +502,17 @@ class SearchAssistant
 			throw new BadRequest("The sum of offset and limit may not exceed 500.");
 		if ($offset < 0 || $offset > 499)
 			throw new InvalidParam('offset', "Has to be between 0 and 499.");
-		
+
 		#
 		# order_by
 		#
-		
+
 		$order_clauses = array();
 		$order_by = $request->get_parameter('order_by');
 		if ($order_by != null)
 		{
 			$order_by = explode('|', $order_by);
-			foreach ($order_by as $field) 
+			foreach ($order_by as $field)
 			{
 				$dir = 'asc';
 				if ($field[0] == '-')
@@ -537,15 +537,15 @@ class SearchAssistant
 				$order_clauses[] = "($cl) $dir";
 			}
 		}
-		
+
 		# To avoid join errors, put each of the $where_conds in extra paranthesis.
-		
+
 		$tmp = array();
 		foreach($where_conds as $cond)
 			$tmp[] = "(".$cond.")";
 		$where_conds = $tmp;
 		unset($tmp);
-		
+
 		$ret_array = array(
 			'where_conds' => $where_conds,
 			'offset' => (int)$offset,
@@ -556,13 +556,13 @@ class SearchAssistant
 
 		return $ret_array;
 	}
-	
+
 	/**
 	 * Search for caches using given conditions and options. Return
 	 * an array in a "standard" format of array('results' => list of
 	 * cache codes, 'more' => boolean). This method takes care of the
 	 * 'more' variable in an appropriate way.
-	 * 
+	 *
 	 * The $options parameter include:
 	 *  - where_conds - list of additional WHERE conditions to be ANDed
 	 *    to the rest of your SQL query,
@@ -581,10 +581,10 @@ class SearchAssistant
 			array('caches.wp_oc is not null'),
 			$options['where_conds']
 		);
-		
+
 		# We need to pull limit+1 items, in order to properly determine the
 		# value of "more" variable.
-		
+
 		$cache_codes = Db::select_column("
 			select caches.wp_oc
 			from ".implode(", ", $tables)."
@@ -592,7 +592,7 @@ class SearchAssistant
 			".((count($options['order_by']) > 0) ? "order by ".implode(", ", $options['order_by']) : "")."
 			limit ".($options['offset']).", ".($options['limit'] + 1).";
 		");
-		
+
 		if (count($cache_codes) > $options['limit'])
 		{
 			$more = true;
@@ -600,16 +600,16 @@ class SearchAssistant
 		} else {
 			$more = false;
 		}
-		
+
 		$result = array(
 			'results' => $cache_codes,
 			'more' => $more,
 		);
 		return $result;
 	}
-	
-	/** 
-	 * Get the list of cache IDs which were found by given user. 
+
+	/**
+	 * Get the list of cache IDs which were found by given user.
 	 * Parameter needs to be *internal* user id, not uuid.
 	 */
 	private static function get_found_cache_ids($internal_user_id)

@@ -21,19 +21,19 @@ class WebService
 			'min_auth_level' => 0
 		);
 	}
-	
+
 	public static function call(OkapiRequest $request)
 	{
 		# The list of installations is periodically refreshed by contacting OKAPI
 		# repository. This method usually displays the cached version of it.
-		
+
 		$cachekey = 'apisrv/installations';
 		$backupkey = 'apisrv/installations-backup';
 		$results = Cache::get($cachekey);
 		if (!$results)
 		{
 			# Download the current list of OKAPI servers.
-			
+
 			try
 			{
 				$opts = array(
@@ -49,17 +49,17 @@ class WebService
 			catch (ErrorException $e)
 			{
 				# Google failed on us. Try to respond with a backup list.
-				
+
 				$results = Cache::get($backupkey);
 				if ($results)
 				{
 					Cache::set($cachekey, $results, 12 * 3600); # so to retry no earlier than after 12 hours
 					return Okapi::formatted_response($request, $results);
 				}
-				
+
 				# Backup has expired (or have never been cached). If we're on a development
 				# server then probably it's okay. In production this SHOULD NOT happen.
-				
+
 				$results = array(
 					array(
 						'site_url' => Settings::get('SITE_URL'),
@@ -70,7 +70,7 @@ class WebService
 				Cache::set($cachekey, $results, 12 * 3600); # so to retry no earlier than after 12 hours
 				return Okapi::formatted_response($request, $results);
 			}
-			
+
 			$doc = simplexml_load_string($xml);
 			$results = array();
 			$i_was_included = false;
@@ -93,10 +93,10 @@ class WebService
 				if ($site_url == Settings::get('SITE_URL'))
 					$i_was_included = true;
 			}
-			
+
 			# If running on a local development installation, then include the local
 			# installation URL.
-			
+
 			if (!$i_was_included)
 			{
 				$results[] = array(
@@ -106,9 +106,9 @@ class WebService
 				);
 				# Contact OKAPI developers in order to get added to the official sites list!
 			}
-			
+
 			# Cache it for one day. Also, save a backup (valid for 30 days).
-			
+
 			Cache::set($cachekey, $results, 86400);
 			Cache::set($backupkey, $results, 86400*30);
 		}

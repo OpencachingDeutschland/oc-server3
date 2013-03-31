@@ -20,7 +20,7 @@ class WebService
 			'min_auth_level' => 0
 		);
 	}
-	
+
 	private static function arg_desc($arg_node)
 	{
 		$attrs = $arg_node->attributes();
@@ -32,10 +32,10 @@ class WebService
 			'description' =>
 				(isset($attrs['default']) ? ("<p>Default value: <b>".$attrs['default']."</b></p>") : "").
 				self::get_inner_xml($arg_node),
-			
+
 		);
 	}
-	
+
 	private static function get_inner_xml($node)
 	{
 		$s = $node->asXML();
@@ -43,7 +43,7 @@ class WebService
 		$length = strlen($s) - $start - (3 + strlen($node->getName()));
 		return substr($s, $start, $length);
 	}
-	
+
 	public static function call(OkapiRequest $request)
 	{
 		$methodname = $request->get_parameter('name');

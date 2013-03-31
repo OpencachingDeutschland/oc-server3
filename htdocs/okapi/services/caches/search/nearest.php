@@ -18,7 +18,7 @@ class WebService
 			'min_auth_level' => 1
 		);
 	}
-	
+
 	public static function call(OkapiRequest $request)
 	{
 		# You may wonder, why there are no parameters like "bbox" or "center" in the
@@ -27,7 +27,7 @@ class WebService
 		# make the documentation very fuzzy. That's why they were intentionally
 		# left out of the "search/all" method, and put in separate (individual) ones.
 		# It's much easier to grasp their meaning this way.
-		
+
 		$tmp = $request->get_parameter('center');
 		if (!$tmp)
 			throw new ParamMissing('center');
@@ -45,18 +45,18 @@ class WebService
 			throw new InvalidParam('center', "Latitudes have to be within -90..90 range.");
 		if ($center_lon > 180 || $center_lon < -180)
 			throw new InvalidParam('center', "Longitudes have to be within -180..180 range.");
-		
+
 		#
 		# In the method description, we promised to return caches ordered by the *rough*
 		# distance from the center point. We'll use ORDER BY with a simplified distance
 		# formula and combine it with the LIMIT clause to get the best results.
 		#
-		
+
 		$distance_formula = Okapi::get_distance_sql($center_lat, $center_lon, "caches.latitude", "caches.longitude");
-		
+
 		# 'radius' parameter is optional. If not given, we'll have to calculate the
 		# distance for every cache in the database.
-			
+
 		$where_conds = array();
 		$radius = null;
 		if ($tmp = $request->get_parameter('radius'))
@@ -69,18 +69,18 @@ class WebService
 			$radius *= 1000; # this one is given in kilemeters, converting to meters!
 			$where_conds[] = "$distance_formula <= '".mysql_real_escape_string($radius)."'";
 		}
-		
+
 		$search_params = SearchAssistant::get_common_search_params($request);
 		$search_params['where_conds'] = array_merge($where_conds, $search_params['where_conds']);
 		$search_params['order_by'][] = $distance_formula; # not replaced; added to the end!
-		
+
 		$result = SearchAssistant::get_common_search_result($search_params);
 		if ($radius == null)
 		{
 			# 'more' is meaningless in this case, we'll remove it.
-			unset($result['more']); 
+			unset($result['more']);
 		}
-		
+
 		return Okapi::formatted_response($request, $result);
 	}
 }

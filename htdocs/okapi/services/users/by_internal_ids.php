@@ -31,10 +31,10 @@ class WebService
 		$fields = $request->get_parameter('fields');
 		if (!$fields)
 			throw new ParamMissing('fields');
-		
+
 		# There's no need to validate the fields parameter as the 'users'
 		# method does this (it will raise a proper exception on invalid values).
-		
+
 		$rs = Db::query("
 			select user_id, uuid
 			from user
@@ -46,12 +46,12 @@ class WebService
 			$internalid2useruuid[$row['user_id']] = $row['uuid'];
 		}
 		mysql_free_result($rs);
-		
+
 		# Retrieve data on given user_uuids.
 		$id_results = OkapiServiceRunner::call('services/users/users', new OkapiInternalRequest(
 			$request->consumer, $request->token, array('user_uuids' => implode("|", array_values($internalid2useruuid)),
 			'fields' => $fields)));
-		
+
 		# Map user_uuids to internal_ids. Also check which internal_ids were not found
 		# and mark them with null.
 		$results = array();
@@ -62,7 +62,7 @@ class WebService
 			else
 				$results[$internal_id] = $id_results[$internalid2useruuid[$internal_id]];
 		}
-		
+
 		return Okapi::formatted_response($request, $results);
 	}
 }

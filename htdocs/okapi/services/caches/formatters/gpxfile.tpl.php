@@ -12,12 +12,12 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 xsi:schemaLocation="
 http://www.topografix.com/GPX/1/0 http://www.topografix.com/GPX/1/0/gpx.xsd
 http://www.opencaching.com/xmlschemas/opencaching/1/0 http://www.opencaching.com/xmlschemas/opencaching/1/0/opencaching.xsd
-http://www.groundspeak.com/cache/1/0 http://www.groundspeak.com/cache/1/0/cache.xsd
+http://www.groundspeak.com/cache/1/0/1 http://www.groundspeak.com/cache/1/0/1/cache.xsd
 http://geocaching.com.au/geocache/1 http://geocaching.com.au/geocache/1/geocache.xsd
 http://www.gsak.net/xmlv1/5 http://www.gsak.net/xmlv1/5/gsak.xsd
 ">
 	<name><?= $vars['installation']['site_name'] ?> Geocache Search Results</name>
-	<desc><?= $vars['installation']['site_name'] ?> Geocache Search Results, downloaded via OKAPI - <?= $vars['installation']['okapi_base_url'] ?></desc>
+	<desc><?= $vars['installation']['site_name'] ?> Geocache Search Results, downloaded via OKAPI - <?= $vars['installation']['okapi_base_url'] . ($vars['alt_wpts'] && $vars['ns_gsak'] ? ' (HasChildren)' : '') ?></desc>
 	<author><?= $vars['installation']['site_name'] ?></author>
 	<url><?= $vars['installation']['site_url'] ?></url>
 	<urlname><?= $vars['installation']['site_name'] ?></urlname>
@@ -37,7 +37,7 @@ http://www.gsak.net/xmlv1/5 http://www.gsak.net/xmlv1/5/gsak.xsd
 				<groundspeak:cache archived="<?= ($c['status'] == 'Archived') ? "True" : "False" ?>" available="<?= ($c['status'] == 'Available') ? "True" : "False" ?>" id="<?= $c['internal_id'] ?>" xmlns:groundspeak="http://www.groundspeak.com/cache/1/0/1">
 					<groundspeak:name><?= Okapi::xmlescape($c['name']) ?></groundspeak:name>
 					<groundspeak:placed_by><?= Okapi::xmlescape($c['owner']['username']) ?></groundspeak:placed_by>
-					<groundspeak:owner id="<?= $c['owner']['uuid'] ?>"><?= Okapi::xmlescape($c['owner']['username']) ?></groundspeak:owner>
+					<groundspeak:owner id="<?= $vars['user_uuid_to_internal_id'][$c['owner']['uuid']] ?>"><?= Okapi::xmlescape($c['owner']['username']) ?></groundspeak:owner>
 					<groundspeak:type><?= $vars['cache_GPX_types'][$c['type']] ?></groundspeak:type>
 					<groundspeak:container><?= $vars['cache_GPX_sizes'][$c['size2']] ?></groundspeak:container>
 					<groundspeak:difficulty><?= $c['difficulty'] ?></groundspeak:difficulty>
@@ -57,7 +57,7 @@ http://www.gsak.net/xmlv1/5 http://www.gsak.net/xmlv1/5/gsak.xsd
 						<? if (($vars['my_notes'] == 'desc:text') && ($c['my_notes'] != null)) { /* Does user want us to include personal notes? */ ?>
 							&lt;p&gt;&lt;b&gt;<?= _("Personal notes") ?>:&lt;/b&gt; <?= Okapi::xmlescape($c['my_notes']) ?>&lt;/p&gt;
 						<? } ?>
-						
+
 						<? if ($vars['attrs'] == 'desc:text' && count($c['attrnames']) > 0) { /* Does user want us to include attributes? */ ?>
 							&lt;p&gt;<?= _("Attributes") ?>:&lt;/p&gt;
 							&lt;ul&gt;&lt;li&gt;<?= implode("&lt;/li&gt;&lt;li&gt;", $c['attrnames']) ?>&lt;/li&gt;&lt;/ul&gt;
@@ -108,11 +108,11 @@ http://www.gsak.net/xmlv1/5 http://www.gsak.net/xmlv1/5/gsak.xsd
 					<? if ($vars['latest_logs']) { /* Does user want us to include latest log entries? */ ?>
 						<groundspeak:logs>
 							<? foreach ($c['latest_logs'] as $log) { ?>
-								<groundspeak:log id="<?= $log['uuid'] ?>">
+								<groundspeak:log id="<?= $log['internal_id'] ?>">
 									<groundspeak:date><?= $log['date'] ?></groundspeak:date>
 									<groundspeak:type><?= $log['type'] ?></groundspeak:type>
-									<groundspeak:finder id="<?= $log['user']['uuid'] ?>"><?= Okapi::xmlescape($log['user']['username']) ?></groundspeak:finder>
-									<groundspeak:text encoded="False"><?= Okapi::xmlescape($log['comment']) ?></groundspeak:text>
+									<groundspeak:finder id="<?= $vars['user_uuid_to_internal_id'][$log['user']['uuid']] ?>"><?= Okapi::xmlescape($log['user']['username']) ?></groundspeak:finder>
+									<groundspeak:text encoded="False"><?= $log['was_recommended'] ? "(*) ": "" ?><?= Okapi::xmlescape($log['comment']) ?></groundspeak:text>
 								</groundspeak:log>
 							<? } ?>
 						</groundspeak:logs>
@@ -162,9 +162,9 @@ http://www.gsak.net/xmlv1/5 http://www.gsak.net/xmlv1/5/gsak.xsd
 					<sym><?= $wpt['sym'] ?></sym>
 					<type>Waypoint|<?= $wpt['sym'] ?></type>
 					<? if ($vars['ns_gsak']) { ?>
-						<wptExtension xmlns="http://www.gsak.net/xmlv1/5">
-							<Parent><?= $c['code'] ?></Parent>
-						</wptExtension>
+						<gsak:wptExtension xmlns:gsak="http://www.gsak.net/xmlv1/5">
+							<gsak:Parent><?= $c['code'] ?></gsak:Parent>
+						</gsak:wptExtension>
 					<? } ?>
 				</wpt>
 			<? } ?>

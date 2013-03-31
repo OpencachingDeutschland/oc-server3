@@ -19,20 +19,20 @@
 		.okapi .pin { margin: 20px 20px 20px 0; background: #eee; border: 1px solid #ccc; padding: 20px 40px; text-align: center; font-size: 24px; }
 	</style>
 	<body>
-	
+
 		<div class='okapi'>
 			<a href='<?= $vars['okapi_base_url'] ?>'><img src='<?= $vars['okapi_base_url'] ?>static/logo-xsmall.gif' alt='OKAPI' style='float: right; margin-left: 10px;'></a>
 			<a href='/'><img src="/images/oc_logo.png" alt='OpenCaching' style='float: left; margin-right: 10px'></a>
 			<a class='opencaching'><?= $vars['site_name'] ?></a>
-			
+
 			<h1 style='clear: both'><?= _("Access successfully granted") ?></h1>
 			<?= sprintf(_("
 				<p><b>You've just granted %s application access to your %s account.</b>
 				To complete the operation, go back to %s and enter the following PIN code:</p>
 			"), $vars['token']['consumer_name'], $vars['site_name'], $vars['token']['consumer_name']) ?>
-			
+
 			<div class='pin'><?= $vars['verifier'] ?></div>
-			
+
 			<p><a href='/'><?= $vars['site_name'] ?></a></p>
 		</div>
 

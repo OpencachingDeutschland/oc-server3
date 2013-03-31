@@ -17,7 +17,7 @@ class WebService
 			'token_type' => 'request'
 		);
 	}
-	
+
 	public static function call(OkapiRequest $request)
 	{
 		$verifier = $request->get_parameter('oauth_verifier');
@@ -26,9 +26,9 @@ class WebService
 			# We require the 1.0a flow (throw an error when there is no oauth_verifier).
 			throw new ParamMissing("oauth_verifier");
 		}
-		
+
 		$new_token = Okapi::$data_store->new_access_token($request->token, $request->consumer, $verifier);
-		
+
 		$response = new OkapiHttpResponse();
 		$response->content_type = "text/plain; charset=utf-8";
 		$response->body = $new_token;

@@ -181,13 +181,13 @@ class dbStructUpdater
 		}
 		return $result;
 	}
-	
+
 	/**
 	* Gets structured general info about the databases diff :
 	* array(sourceOrphans=>array(...), destOrphans=>array(...), different=>array(...))
 	*/
 	function getDiffInfo($compRes)
-	{		
+	{
 		if (!is_array($compRes))
 		{
 			return false;
@@ -251,10 +251,10 @@ class dbStructUpdater
 				$info['sourceOrphan'] = true;
 			}
 			else
-			{				
+			{
 				$destSql = $this->getTabSql($this->destStruct, $tab, true);
 				$sourceSql = $this->getTabSql($this->sourceStruct, $tab, true);
-				$diffs = $this->compareSql($sourceSql, $destSql);				
+				$diffs = $this->compareSql($sourceSql, $destSql);
 				if ($diffs===false)
 				{
 					trigger_error('[WARNING] error parsing definition of table "'.$tab.'" - skipped');
@@ -262,8 +262,8 @@ class dbStructUpdater
 				}
 				elseif (!empty($diffs))//not empty array
 				{
-					$info['differs'] = $diffs;					
-				}				
+					$info['differs'] = $diffs;
+				}
 				else continue;//empty array
 			}
 			$result[$tab] = $info;
@@ -302,7 +302,7 @@ class dbStructUpdater
 		$result = '';
 		/* create table should be single line in this case*/
 		//1 - part before database, 2-database name, 3 - part after database
-		if (preg_match('/(CREATE(?:\s*TEMPORARY)?\s*TABLE\s*(?:IF NOT EXISTS\s*)?)(?:`?(\w+)`?\.)?(`?('.$tab.')`?(\W|$))/i', $struct, $m, PREG_OFFSET_CAPTURE))		
+		if (preg_match('/(CREATE(?:\s*TEMPORARY)?\s*TABLE\s*(?:IF NOT EXISTS\s*)?)(?:`?(\w+)`?\.)?(`?('.$tab.')`?(\W|$))/i', $struct, $m, PREG_OFFSET_CAPTURE))
 		{
 			$tableDef = $m[0][0];
 			$start = $m[0][1];
@@ -322,13 +322,13 @@ class dbStructUpdater
 		if ($database && $removeDatabase)
 		{
 			$result = str_replace($tableDef, $m[1][0].$m[3][0], $result);
-		}		
+		}
 		return $result;
 	}
-	
+
 	/**
 	* Splits table sql into indexed array
-	* 
+	*
 	*/
 	function splitTabSql($sql)
 	{
@@ -387,7 +387,7 @@ class dbStructUpdater
 	*/
 	function compareSql($sourceSql, $destSql)//$sourceSql, $destSql
 	{
-		$result = array();		
+		$result = array();
 		//split with comma delimiter, not line breaks
 		$sourceParts =  $this->splitTabSql($sourceSql);
 		if ($sourceParts===false)//error parsing sql
@@ -404,13 +404,13 @@ class dbStructUpdater
 		$sourcePartsIndexed = array();
 		$destPartsIndexed = array();
 		foreach($sourceParts as $line)
-		{			
+		{
 			$lineInfo = $this->processLine($line);
 			if (!$lineInfo) continue;
 			$sourcePartsIndexed[$lineInfo['key']] = $lineInfo['line'];
 		}
 		foreach($destParts as $line)
-		{			
+		{
 			$lineInfo = $this->processLine($line);
 			if (!$lineInfo) continue;
 			$destPartsIndexed[$lineInfo['key']] = $lineInfo['line'];
@@ -427,7 +427,7 @@ class dbStructUpdater
 			$inDest= in_array($key, $destKeys);
 			$sourceOrphan = $inSource && !$inDest;
 			$destOrphan = $inDest && !$inSource;
-			$different =  $inSource && $inDest && 
+			$different =  $inSource && $inDest &&
 			strcasecmp($this->normalizeString($destPartsIndexed[$key]), $this->normalizeString($sourcePartsIndexed[$key]));
 			if ($sourceOrphan)
 			{
@@ -657,11 +657,11 @@ class dbStructUpdater
 		$rbs = '\\\\';	//reg - escaped backslash
 		$regPrefix = "(?<!$rbs)(?:$rbs{2})*";
 		$reg = $regPrefix.'("|\')|(/\\*)|(\\*/)|(-- )|(\r\n|\r|\n)|';
-		if ($skipInBrackets) 
+		if ($skipInBrackets)
 		{
 			$reg.='(\(|\))|';
 		}
-		else 
+		else
 		{
 			$reg.='()';
 		}
@@ -730,7 +730,7 @@ class dbStructUpdater
 		}
 		return false;
 	}
-	
+
 	/**
 	* works the same as getDelimPos except returns position of the first occurence of the delimiter starting from
 	* the end of the string

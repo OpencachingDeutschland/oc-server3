@@ -25,9 +25,9 @@ class WebService
 		$internal_id = $request->get_parameter('internal_id');
 		if (!$internal_id) throw new ParamMissing('internal_id');
 		$fields = $request->get_parameter('fields');
-		
+
 		# There's no need to validate the fields parameter.
-		
+
 		$results = OkapiServiceRunner::call('services/users/by_internal_ids', new OkapiInternalRequest(
 			$request->consumer, $request->token, array('internal_ids' => $internal_id,
 			'fields' => $fields)));

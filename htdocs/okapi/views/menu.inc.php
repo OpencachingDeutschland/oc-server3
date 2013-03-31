@@ -18,7 +18,7 @@ class OkapiMenu
 		return "<a href='".Settings::get('SITE_URL')."okapi/$link_path'".(($current_path == $link_path)
 			? " class='selected'" : "").">$link_name</a><br>";
 	}
-	
+
 	/** Get HTML-formatted side menu representation. */
 	public static function get_menu_html($current_path = null)
 	{
@@ -30,16 +30,16 @@ class OkapiMenu
 		$chunks[] = self::link($current_path, "signup.html", "Sign up");
 		$chunks[] = self::link($current_path, "examples.html", "Examples");
 		$chunks[] = "</div>";
-		
+
 		# We need a list of all methods. We do not need their descriptions, so
 		# we won't use the apiref/method_index method to get it, the static list
 		# within OkapiServiceRunner will do.
-		
+
 		$methodnames = OkapiServiceRunner::$all_names;
 		sort($methodnames);
-		
+
 		# We'll break them up into modules, for readability.
-		
+
 		$module_methods = array();
 		foreach ($methodnames as $methodname)
 		{
@@ -52,7 +52,7 @@ class OkapiMenu
 		}
 		$modulenames = array_keys($module_methods);
 		sort($modulenames);
-		
+
 		foreach ($modulenames as $modulename)
 		{
 			$chunks[] = "<div class='module'>$modulename</div>";
@@ -63,7 +63,7 @@ class OkapiMenu
 		}
 		return implode("", $chunks);
 	}
-	
+
 	public static function get_installations()
 	{
 		$installations = OkapiServiceRunner::call("services/apisrv/installations",

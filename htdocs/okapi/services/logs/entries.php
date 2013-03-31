@@ -21,10 +21,10 @@ class WebService
 			'min_auth_level' => 1
 		);
 	}
-	
+
 	private static $valid_field_names = array(
 		'uuid', 'cache_code', 'date', 'user', 'type', 'was_recommended', 'comment',
-		'internal_id',
+		'images', 'internal_id',
 	);
 
 	public static function call(OkapiRequest $request)
@@ -37,7 +37,7 @@ class WebService
 		}
 		else
 			$log_uuids = explode("|", $log_uuids);
-		
+
 		if ((count($log_uuids) > 500) && (!$request->skip_limits))
 			throw new InvalidParam('log_uuids', "Maximum allowed number of referenced ".
 				"log entries is 500. You provided ".count($log_uuids)." UUIDs.");
@@ -49,7 +49,7 @@ class WebService
 		foreach ($fields as $field)
 			if (!in_array($field, self::$valid_field_names))
 				throw new InvalidParam('fields', "'$field' is not a valid field code.");
-		
+
 		$rs = Db::query("
 			select
 				cl.id, c.wp_oc as cache_code, cl.uuid, cl.type,
@@ -71,6 +71,7 @@ class WebService
 				and c.status in (1,2,3)
 		");
 		$results = array();
+		$log_id2uuid = array(); /* Maps logs' internal_ids to uuids */
 		while ($row = mysql_fetch_assoc($rs))
 		{
 			$results[$row['uuid']] = array(
@@ -85,30 +86,60 @@ class WebService
 				'type' => Okapi::logtypeid2name($row['type']),
 				'was_recommended' => $row['was_recommended'] ? true : false,
 				'comment' => $row['text'],
+				'images' => array(),
 				'internal_id' => $row['id'],
 			);
+			$log_id2uuid[$row['id']] = $row['uuid'];
 		}
 		mysql_free_result($rs);
-		
+
+		# fetch images
+
+		if (in_array('images', $fields))
+		{
+			$rs = Db::query("
+				select object_id, uuid, url, title, spoiler
+				from pictures
+				where
+					object_type = 1
+					and object_id in ('".implode("','", array_map('mysql_real_escape_string', array_keys($log_id2uuid)))."')
+					and display = 1   /* currently is always 1 for logpix */
+					and unknown_format = 0
+				order by date_created
+			");
+			while ($row = mysql_fetch_assoc($rs))
+			{
+				$results[$log_id2uuid[$row['object_id']]]['images'][] =
+					array(
+						'uuid' => $row['uuid'],
+						'url' => $row['url'],
+						'thumb_url' => Settings::get('SITE_URL') . 'thumbs.php?uuid=' . $row['uuid'],
+						'caption' => $row['title'],
+						'is_spoiler' => ($row['spoiler'] ? true : false),
+					);
+			}
+			mysql_free_result($rs);
+		}
+
 		# Check which UUIDs were not found and mark them with null.
-		
+
 		foreach ($log_uuids as $log_uuid)
 			if (!isset($results[$log_uuid]))
 				$results[$log_uuid] = null;
-		
+
 		# Remove unwanted fields.
-		
+
 		foreach (self::$valid_field_names as $field)
 			if (!in_array($field, $fields))
 				foreach ($results as &$result_ref)
 					unset($result_ref[$field]);
-		
+
 		# Order the results in the same order as the input codes were given.
-		
+
 		$ordered_results = array();
 		foreach ($log_uuids as $log_uuid)
 			$ordered_results[$log_uuid] = $results[$log_uuid];
-		
+
 		return Okapi::formatted_response($request, $ordered_results);
 	}
 }

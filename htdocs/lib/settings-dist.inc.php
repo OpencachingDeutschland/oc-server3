@@ -11,8 +11,9 @@
 
 		Unicode Reminder メモ
 	                                         				                                
-	server specific settings
+		server specific settings
 	
+		this file may be outdated and should be reviewed
  ****************************************************************************/
  
  	//relative path to the root directory

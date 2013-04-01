@@ -62,10 +62,8 @@ class View
 	public static function call()
 	{
 		# First, let's acquire a lock to make sure the update isn't already running.
-		# We will use one of the existing lock handles, because we don't want to use
-		# to many of them. See issue 141.
 
-		$lock = OkapiLock::get('cronjobs-cron-5');
+		$lock = OkapiLock::get('db-update');
 		$lock->acquire();
 
 		try

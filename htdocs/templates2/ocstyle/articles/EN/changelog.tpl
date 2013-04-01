@@ -31,7 +31,7 @@
 			</ul>
 		</li>
 		<li>nicer popup windows with OConly, difficulty and terrain symbols and larger cache type symbols</li>
-		<li>OConly are shown in topm inactive and (not) found caches caches below</li>
+		<li>OConly are shown in top, inactive and (not) found caches below</li>
 		<li>better readable coordinate display</li>
 		<li>improved search function handling</li>
 		<li>faster retreival of cache data</li>
@@ -42,12 +42,12 @@
 	<p>Other new features and changes:</p>
 	<ul>
 		<li>Log picture galleries on the start page, the new <a href="newlogpics.php">gallery page</a>, in cache listings (via link "log pictures") and in user profiles. The profile galleries can be disabled via <a href="mydetails.php">profile settings.</a></li>
-		<li>re-added spoiler option for log pics (see rev. 3.0.2)disab
-		<li>title and spoiler settings of log pictures can be changed</li>
-		<li>pictures are displayed within a nice popup window instead of a separate pagewill be disp</li>				led spoiler</li>		via the us		
+		<li>re-added spoiler option for log pics (see rev. 3.0.2)
+		<li>Title and spoiler settings of log pictures can be changed.</li>
+		<li>Pictures are displayed within a nice popup window instead of a separate page.</li>
 		<li>new waypoint types <em>path</em>, <em>final</em> and <em>point of interest</em></li>
-		<li>After emails could not be delivert, users may be prompted to confirm or change their email address.</li>
-		<li>inactive caches are striked out in the <a href="mywatches.php">"watch list</a>, like it was already the case in the ignore list.</li>
+		<li>After emails could not be delivered, users may be prompted to confirm or change their email address.</li>
+		<li>Inactive caches are <s>striked out</s> in the <a href="mywatches.php">watch list</a> like in the ignore list.</li>
 		<li>improved picture embedding in GPX files, should be identical now with listing display</li>
 		<li>many detail improvements of form layouts</li>
 		<li>admin list (internal)</li>
@@ -59,7 +59,6 @@
 		<li>fixed handling of nano caches with saved searches</li>
 		<li>removed JavaScript warning when logging on the Italien page</li>
 		<li>show Danish flag with Danish cache descriptions</li>
-		<li>fixed search problems after logging out</li>
 		<li>fixed nano size selection in search form</li>
 	</ul>
 

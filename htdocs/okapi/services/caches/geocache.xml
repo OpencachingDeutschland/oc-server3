@@ -243,8 +243,10 @@
 			</li>
 			<li>
 				<p><b>state</b> - name of the state the cache is placed in.</p>
-				<p><b>Note:</b> This data is user-supplied and is not validated in
-				any way. Consider using external geocoding services instead. Also,
+				<p><b>Note:</b> On some installations this data is user-supplied and
+				is not validated in any way. Other installations calculate it from
+				cache coordinates but may have problems in border regions.
+				Consider using external geocoding services instead. Also,
 				currently you have no way of knowing in which language it will appear
 				in (but it *may* start to vary on the value of your <b>langpref</b>
 				parameter in the future).</p>

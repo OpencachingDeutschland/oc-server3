@@ -3,8 +3,9 @@ Opencaching.de Code Repository
 
 [Opencaching.de](http://www.opencaching.de) is a major Geocaching website in Germany.
 This repository contains the website's code, including all third-party libraries
-needed to run it. It is one of two major Opencaching code forks; the other one is
-[Opencaching.pl](http://code.google.com/p/opencaching-pl/).
+needed to run it. It is one of two major
+[Opencaching code forks](http://wiki.opencaching.de/index.php/Datei:Codegenerationen.png); 
+the other one is [Opencaching.pl](http://code.google.com/p/opencaching-pl/) 
 
 Feel free to use it under the provided
 [license terms](https://github.com/OpencachingDeutschland/oc-server3/blob/master/doc/license.txt)
@@ -26,6 +27,8 @@ so do not derive any working-branches from it. Use master instead.
 Major OC.de site updates are version-tagged. See the [changelog](http://www.opencaching.de/articles.php?page=changelog&locale=EN)
 for a detailed list.
 
+Contributions
+-------------
 Contributing code to Opencaching.de is easy:
 * Sign up to Github and [install Git](https://help.github.com/articles/set-up-git),
 * create a personal fork of this repository using the Fork button above,

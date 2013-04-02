@@ -5,7 +5,7 @@ Opencaching.de Code Repository
 This repository contains the website's code, including all third-party libraries
 needed to run it. It is one of two major
 [Opencaching code forks](http://wiki.opencaching.de/index.php/Datei:Codegenerationen.png); 
-the other one is [Opencaching.pl](http://code.google.com/p/opencaching-pl/) 
+the other one is [Opencaching.pl](http://code.google.com/p/opencaching-pl/).
 
 Feel free to use it under the provided
 [license terms](https://github.com/OpencachingDeutschland/oc-server3/blob/master/doc/license.txt)
@@ -47,7 +47,8 @@ To update your working copy, add this repo as upstream ...
 * git checkout master
 * git pull upstream
 
-NEVER use pull on a feature branch, but rebase it to master if you want to update it:
+NEVER use pull on a feature branch, but pull to master and then rebase the feature branch
+on master:
 * git checkout feature-branch
 * git rebase master
 
@@ -55,6 +56,7 @@ Related Websites
 ----------------
 * [Opencaching.de Team Blog](http://blog.opencaching.de/) (German)
 * [Opencaching.de Wiki](http://wiki.opencaching.de/index.php/Hauptseite) (German) -> [Development](http://wiki.opencaching.de/index.php/Entwicklung)
+* [Opencaching Network Forum](http://forum.opencaching-network.org/) (German and English)
+* [Opencaching API project](http://code.google.com/p/opencaching-api/)
 * [Opencaching.pl project](http://code.google.com/p/opencaching-pl/)
-* [Opencaching-API project](http://code.google.com/p/opencaching-api/)
 * [Git explained](http://gitref.org/index.html)

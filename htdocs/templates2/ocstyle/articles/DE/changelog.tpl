@@ -49,7 +49,7 @@
 		<li>Bilder werden in einem schicken Popup-Fenster dargestellt statt auf einer separaten Seite.</li>
 		<li>neue Wegpunkttypen <em>Pfad</em>, <em>Ziel</em> und <em>interessanter Ort</em></li>
 		<li>Bei unzustellbaren Emails erhalten Benutzer ggf. eine Aufforderung, ihre Mailadresse zu ändern oder zu bestätigen.</li>
-		<li>Inaktive Caches werden in der Beobachtungsliste durchgestrichen, wie bereits in der Ignorierliste.</li>
+		<li>Inaktive Caches werden in der Beobachtungsliste <s>durchgestrichen</s>, wie bereits in der Ignorierliste.</li>
 		<li>verbesserte Bildeinbettung in GPX-Dateien, nun alles wie im Originallisting</li>
 		<li>viele Detailverbesserungen bei Formuarlayouts</li>
 		<li>Adminliste (intern)</li>
@@ -61,7 +61,6 @@
 		<li>Handhabung von Nano-Caches bei gespeicherten Suchen korrigiert</li>
 		<li>Javascript-Warnung beim Loggen auf der italenischen Seite beseitigt</li>
 		<li>dänische Flagge bei dänischen Cachebeschreibungen</li>
-		<li>Suchprobleme nach Logout behoben</li>
 		<li>Auswahl der Nano-Größe im Suchforumlar korrigiert</li>
 	</ul>
 

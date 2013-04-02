@@ -11,19 +11,42 @@ Feel free to use it under the provided
 for setting up your own open and free Geocaching listing service! Your contributions
 to this project are welcome - you may contact the team in the
 [Opencaching network forum](http://forum.opencaching-network.org/) if you like to
-join us. Development is done on a VirtualBox Linux system that you can run on your
-Linux, Windows or Mac workstation.
+join us. Development is usually done on a VirtualBox Linux system that you can run on your
+Linux, Windows or Mac workstation, but you may also try to set up the code directly
+on your Linux machine.
 
-This repo contains three major branches:
+This repo contains three branches:
 * the *stable* branch with current Opencaching.de production code
 * the *master* branch, basis of all development, which contains code that will be released with the next site update
 * the *next* branch with experimental features to be tested.
 
-The *next* branch is now and then hard-resetted to the master branch and rebuilt from there,
+The *next* branch is now and then resetted to master state and rebuilt from there,
 so do not derive any working-branches from it. Use master instead.
 
 Major OC.de site updates are version-tagged. See the [changelog](http://www.opencaching.de/articles.php?page=changelog&locale=EN)
 for a detailed list.
+
+Contributing code to Opencaching.de is easy:
+* Sign up to Github and [install Git](https://help.github.com/articles/set-up-git),
+* create a personal fork of this repository using the Fork button above,
+* clone the fork to your development machine,
+* create a feature branch based on master,
+* edit and commit code,
+* push your feature branch to your fork and issue a pull request.
+
+Your code will be reviewed, eventually merged to master and put online with the next site update.
+Small changes may be directly released via stable branch.
+
+To update your working copy, add this repo as upstream ...
+* git remote add upstream https://github.com/OpencachingDeutschland/oc-server3.git
+
+... and regularly update your clone:
+* git checkout master
+* git pull upstream
+
+NEVER use pull on a feature branch, but rebase it to master if you want to update it:
+* git checkout feature-branch
+* git rebase master
 
 Related Websites
 ----------------
@@ -31,3 +54,4 @@ Related Websites
 * [Opencaching.de Wiki](http://wiki.opencaching.de/index.php/Hauptseite) (German) -> [Development](http://wiki.opencaching.de/index.php/Entwicklung)
 * [Opencaching.pl project](http://code.google.com/p/opencaching-pl/)
 * [Opencaching-API project](http://code.google.com/p/opencaching-api/)
+* [Git explained](http://gitref.org/index.html)

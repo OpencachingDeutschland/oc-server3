@@ -31,7 +31,8 @@ class WebService
 		'descriptions', 'hint', 'hints', 'images', 'attrnames', 'latest_logs',
 		'my_notes', 'trackables_count', 'trackables', 'alt_wpts', 'last_found',
 		'last_modified', 'date_created', 'date_hidden', 'internal_id', 'is_watched',
-		'is_ignored', 'willattends', 'country', 'state', 'preview_image', 'searchtime', 'waylength');
+		'is_ignored', 'willattends', 'country', 'state', 'preview_image',
+		'trip_time', 'trip_distance');
 
 	public static function call(OkapiRequest $request)
 	{
@@ -131,15 +132,16 @@ class WebService
 			# DE branch:
 			# - Caches do not have ratings.
 			# - Total numbers of founds and notfounds are kept in the "stat_caches" table.
-			# - search_time and way_length cannot be null, 0 = not specified
+			# - search_time and way_length are both round trip values and cannot be null;
+			#     0 = not specified
 
 			$rs = Db::query("
 				select
 					c.cache_id, c.name, c.longitude, c.latitude, c.listing_last_modified as last_modified,
 					c.date_created, c.type, c.status, c.date_hidden, c.size, c.difficulty,
 					c.terrain, c.wp_oc, c.logpw, c.user_id,
-					if(c.search_time=0, null, c.search_time) as searchtime,
-					if(c.way_length=0, null, c.way_length) as waylength,
+					if(c.search_time=0, null, c.search_time) as trip_time,
+					if(c.way_length=0, null, c.way_length) as trip_distance,
 
 					ifnull(sc.toprating, 0) as topratings,
 					ifnull(sc.found, 0) as founds,
@@ -160,15 +162,16 @@ class WebService
 			# PL branch:
 			# - Caches have ratings.
 			# - Total numbers of found and notfounds are kept in the "caches" table.
-			# - search_time and way_length can be null, 0 or null = not specified
+			# - search_time is round trip and way_length one way; both can be null;
+			#     0 or null = not specified
 
 			$rs = Db::query("
 				select
 					c.cache_id, c.name, c.longitude, c.latitude, c.last_modified,
 					c.date_created, c.type, c.status, c.date_hidden, c.size, c.difficulty,
 					c.terrain, c.wp_oc, c.logpw, c.user_id,
-					if(c.search_time=0, null, c.search_time) as searchtime,
-					if(c.way_length=0, null, c.way_length) as waylength,
+					if(c.search_time=0, null, c.search_time) as trip_time,
+					if(c.way_length=0, null, 2*c.way_length) as trip_distance,
 
 					c.topratings,
 					c.founds,
@@ -262,15 +265,15 @@ class WebService
 					case 'oxsize': $entry['oxsize'] = Okapi::cache_size2_to_oxsize(Okapi::cache_sizeid_to_size2($row['size'])); break;
 					case 'difficulty': $entry['difficulty'] = round($row['difficulty'] / 2.0, 1); break;
 					case 'terrain': $entry['terrain'] = round($row['terrain'] / 2.0, 1); break;
-					case 'searchtime':
+					case 'trip_time':
 						# search time is entered in hours:minutes and converted to decimal hours,
 						# which can produce lots of unneeded decimal places; 2 of them are sufficient here
-						$entry['searchtime'] = $row['searchtime'] === null ? null : round($row['searchtime'],2); break;
+						$entry['trip_time'] = $row['trip_time'] === null ? null : round($row['trip_time'],2); break;
 						break;
-					case 'waylength':
+					case 'trip_distance':
 						# way length is entered in km as decimal fraction, but number conversions can
 						# create fake digits which should be stripped; meter precision is sufficient here
-						$entry['waylength'] = $row['waylength'] === null ? null : round($row['waylength'],3); break;
+						$entry['trip_distance'] = $row['trip_distance'] === null ? null : round($row['trip_distance'],3); break;
 						break;
 					case 'rating':
 						if ($row['votes'] < 3) $entry['rating'] = null;

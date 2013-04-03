@@ -142,13 +142,15 @@
 			<li><b>difficulty</b> - float (between 1 and 5), difficulty rating of the cache,</li>
 			<li><b>terrain</b> - float (between 1 and 5), terrain rating of the cache,</li>
 			<li>
-				<b>searchtime</b> - float, the estimated time in hours to do the cache, roundtrip
-				from nearest parking area or specified starting point to the cache and back,
-				or <b>null</b> if unknown,
+				<b>trip_time</b> - float, approximate total amount of time needed to
+				find the cache, in hours; this will usually include the time to reach the
+				cache location <em>and</em> go back (from/to a parking spot, etc.);
+				<b>null</b> if unknown,
 			</li>
-			<li><b>waylength</b> - float, the estimated way to go for doing the cache in kilometers,
-				roundtrip from nearest parking area or specified starting point to the cache and back,
-				or <b>null</b> if unknown,
+			<li><b>trip_distance</b> - float, approximate total distance needed to
+				find the cache, in kilometers; this will usually include the time to reach the
+				cache location <em>and</em> go back (from/to a parking spot, etc.);
+				<b>null</b> if unknown,
 			</li>
 			<li>
 				<p><b>rating</b> - float (between 1 and 5), an overall rating of the cache,

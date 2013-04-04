@@ -261,8 +261,11 @@ class ReplicateCommon
 
 		require_once($GLOBALS['rootpath'].'okapi/service_runner.php');
 		$current_values = OkapiServiceRunner::call($feeder_method, new OkapiInternalRequest(
-			new OkapiInternalConsumer(), null, array($feeder_keys_param => implode("|", $key_values),
-			'fields' => $fields)));
+			new OkapiInternalConsumer(), null, array(
+				$feeder_keys_param => implode("|", $key_values),
+				'fields' => $fields,
+				'attribution_append' => 'static'  # currently, this is for the "geocaches" method only
+			)));
 		$entries = array();
 		foreach ($current_values as $key => $object)
 		{

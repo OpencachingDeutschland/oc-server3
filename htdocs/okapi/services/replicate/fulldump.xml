@@ -2,17 +2,25 @@
 	<brief>Download OKAPI database snapshot</brief>
 	<issue-id>110</issue-id>
 	<desc>
-		<p><b>Beta status.</b> Download the latest snapshot of OKAPI database. You should call this method
-		only once in your lifetime.</p>
+		<p>Download the latest snapshot of OKAPI database. You should call this method
+		only once.</p>
 		
 		<p>For some applications it might be desireable to have a quick access to the entire
 		OpenCaching database (instead of querying for specific portions of it). You may use
-		OKAPI's <b>replicate</b> module to achive this effect. The <b>changelog</b> method
+		OKAPI's <b>replicate</b> module to achive this condition. The <b>changelog</b> method
 		is the primary replication service which you will use. However, to correctly set up
 		your first database copy, you will need to use the <b>fulldump</b> method.</p>
 
-		<p><b>Important:</b> This method MAY change substantially or it might even get removed.
-		We don't plan on doing this, but we may be forced to (i.e. to prevent abuse).</p>
+		<p><b>Important:</b> There is a remote possibility that this method MAY change in
+		a non-backward-compatible way or it might even get removed. We don't plan on doing
+		this, but we might be forced to (i.e. to prevent abuse).</p>
+		
+		<p><b>Note:</b> The cache descriptions will be generated using the <b>attribution_append=static</b>
+		parameter (see the geocache method). Full attributions are not always suitable for replication,
+		since they may contain dates on some installations
+		(<a href='https://code.google.com/p/opencaching-api/issues/detail?id=178'>why?</a>).
+		To make sure that static attributions are enough, consult the local Data
+		Licence (the Sign Up page).</p>
 		
 		<p>A couple of things for you to remember:</p>
 		

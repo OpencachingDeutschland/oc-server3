@@ -778,7 +778,7 @@ class Okapi
 {
 	public static $data_store;
 	public static $server;
-	public static $revision = 651; # This gets replaced in automatically deployed packages
+	public static $revision = 669; # This gets replaced in automatically deployed packages
 	private static $okapi_vars = null;
 
 	/** Get a variable stored in okapi_vars. If variable not found, return $default. */
@@ -1097,7 +1097,7 @@ class Okapi
 		static $init_made = false;
 		if ($init_made)
 			return;
-		ini_set('memory_limit', '128M');
+		ini_set('memory_limit', '256M');
 		Db::connect();
 		if (Settings::get('TIMEZONE') !== null)
 			date_default_timezone_set(Settings::get('TIMEZONE'));

@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OKAPI\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-02-19 10:36+0100\n"
-"PO-Revision-Date: 2013-02-19 10:37+0100\n"
+"POT-Creation-Date: 2013-04-04 16:09+0100\n"
+"PO-Revision-Date: 2013-04-04 16:13+0100\n"
 "Last-Translator: Wojciech Rygielski <rygielski@mimuw.edu.pl>\n"
 "Language-Team: \n"
 "Language: pl_PL\n"
@@ -19,16 +19,38 @@ msgstr ""
 "X-Generator: Poedit 1.5.5\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: services/caches/geocaches.php:746
+#: services/caches/geocaches.php:847
 msgid "Stage"
 msgstr "Etap"
 
-#: services/caches/geocaches.php:866
+#: services/caches/geocaches.php:1014
 #, php-format
 msgid ""
 "This <a href='%s'>geocache</a> description comes from the <a href='%s'>%s</"
 "a> site."
 msgstr "Opis <a href='%s'>skrzynki</a> pochodzi z serwisu <a href='%s'>%s</a>."
+
+#: services/caches/geocaches.php:1024
+#, php-format
+msgid ""
+"&copy; <a href='%s'>%s</a>, <a href='%s'>%s</a>, <a href='http://"
+"creativecommons.org/licenses/by-nc-nd/3.0/de/deed.en'>CC-BY-NC-ND</a>, as of "
+"%s; all log entries &copy; their authors"
+msgstr ""
+"Prawa autorskie: <a href='%s'>%s</a>, <a href='%s'>%s</a>, <a href='http://"
+"creativecommons.org/licenses/by-nc-nd/3.0/de/deed.pl'>CC-BY-NC-ND</a>, w "
+"dniu %s. Prawa autorskie wpisów do logów należą do ich autorów."
+
+#: services/caches/geocaches.php:1035
+#, php-format
+msgid ""
+"&copy; <a href='%s'>%s</a>, <a href='%s'>%s</a>, <a href='http://"
+"creativecommons.org/licenses/by-nc-nd/3.0/de/deed.en'>CC-BY-NC-ND</a>; all "
+"log entries &copy; their authors"
+msgstr ""
+"Prawa autorskie: <a href='%s'>%s</a>, <a href='%s'>%s</a>, <a href='http://"
+"creativecommons.org/licenses/by-nc-nd/3.0/de/deed.pl'>CC-BY-NC-ND</a>. Prawa "
+"autorskie wpisów do logów należą do ich autorów."
 
 #: services/caches/formatters/gpxfile.tpl.php:31
 #: services/caches/formatters/gpxfile.tpl.php:48
@@ -83,7 +105,7 @@ msgstr "Spoilery"
 msgid "Image descriptions"
 msgstr "Opisy obrazków"
 
-#: services/logs/submit.php:62
+#: services/logs/submit.php:70
 msgid ""
 "You are trying to publish a log entry with a date in future. Cache log "
 "entries are allowed to be published in the past, but NOT in the future."
@@ -91,7 +113,7 @@ msgstr ""
 "Próbujesz opublikować wpis do logbooka używając daty w przyszłości. Wpisy "
 "mogą być publikowane z datą w przeszłości, ale NIE w przyszłości."
 
-#: services/logs/submit.php:82
+#: services/logs/submit.php:92
 #, php-format
 msgid ""
 "However, your cache rating was ignored, because %s does not have a rating "
@@ -100,11 +122,11 @@ msgstr ""
 "Niestety Twoja ocena skrzynki nie została zapisana, ponieważ %s nie prowadzi "
 "oceny skrzynek."
 
-#: services/logs/submit.php:92
+#: services/logs/submit.php:103
 msgid "Recommending is allowed only for 'Found it' logtypes."
 msgstr "Rekomendacje są dozwolone jedynie z wpisem \"Znaleziona\"."
 
-#: services/logs/submit.php:101
+#: services/logs/submit.php:113
 #, php-format
 msgid ""
 "However, your \"needs maintenance\" flag was ignored, because %s does not "
@@ -113,7 +135,7 @@ msgstr ""
 "Niestety, wpis \"potrzebny serwis\" został zignorowany, ponieważ %s nie "
 "wspiera tej funkcjonalności."
 
-#: services/logs/submit.php:119
+#: services/logs/submit.php:131
 msgid ""
 "This cache is an Event cache. You cannot \"Find it\"! (But - you may "
 "\"Comment\" on it.)"
@@ -121,23 +143,23 @@ msgstr ""
 "Ta skrzynka jest typu Wydarzenie. Nie możesz jej \"znaleźć\"! (Ale - możesz "
 "dodać wpis typu \"Komentarz\".)"
 
-#: services/logs/submit.php:121
+#: services/logs/submit.php:133
 msgid "Your have to supply some text for your comment."
 msgstr "Wpis typu \"Komentarz\" wymaga wpisania komentarza."
 
-#: services/logs/submit.php:134
+#: services/logs/submit.php:146
 msgid "This cache requires a password. You didn't provide one!"
 msgstr "Ta skrzynka wymaga podania hasła. Nie wpisałeś go."
 
-#: services/logs/submit.php:136
+#: services/logs/submit.php:148
 msgid "Invalid password!"
 msgstr "Niepoprawne hasło!"
 
-#: services/logs/submit.php:186
+#: services/logs/submit.php:264
 msgid "You have already submitted a log entry with exactly the same contents."
 msgstr "Już opublikowałeś wcześniej wpis z dokładnie taką samą treścią."
 
-#: services/logs/submit.php:205
+#: services/logs/submit.php:283
 msgid ""
 "You have already submitted a \"Found it\" log entry once. Now you may submit "
 "\"Comments\" only!"
@@ -145,26 +167,26 @@ msgstr ""
 "Już opublikowałeś jeden wpis typu \"Znaleziona\" dla tej skrzynki. Teraz "
 "możesz dodawać jedynie \"Komentarze\"!"
 
-#: services/logs/submit.php:207
+#: services/logs/submit.php:285
 msgid "You are the owner of this cache. You may submit \"Comments\" only!"
 msgstr ""
 "Jesteś właścicielem tej skrzynki. Możesz przesyłać jedynie \"Komentarze\"."
 
-#: services/logs/submit.php:225
+#: services/logs/submit.php:303
 msgid "You have already rated this cache once. Your rating cannot be changed."
 msgstr "Już oceniłeś tę skrzynkę. Ocena nie może być zmieniona."
 
-#: services/logs/submit.php:242
+#: services/logs/submit.php:320
 msgid "You have already recommended this cache once."
 msgstr "Już raz zarekomendowałeś tę skrzynkę."
 
-#: services/logs/submit.php:249
+#: services/logs/submit.php:327
 msgid "You don't have any recommendations to give. Find more caches first!"
 msgstr ""
 "Aktualnie nie możesz wystawić kolejnej rekomendacji. Znajdź najpierw więcej "
 "skrzynek!"
 
-#: services/logs/submit.php:413
+#: services/logs/submit.php:495
 msgid "Your cache log entry was posted successfully."
 msgstr "Twój wpis do logbooka został opublikowany pomyślnie."
 

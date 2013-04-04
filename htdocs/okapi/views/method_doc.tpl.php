@@ -50,7 +50,7 @@ $m = $vars['method'];
 								</td>
 							</tr>
 							<? foreach ($m['arguments'] as $arg) { ?>
-								<tr class='<?= $arg['class'] ?>'>
+								<tr class='<?= $arg['class'] ?>' id='<?= 'arg_'.$arg['name'] ?>'>
 									<td class='argname'><?= $arg['name'] ?></td>
 									<td class='<? echo $arg['is_required'] ? 'required' : 'optional'; ?>'><? echo $arg['is_required'] ? 'required' : 'optional'; ?></td>
 									<td class='argdesc'>

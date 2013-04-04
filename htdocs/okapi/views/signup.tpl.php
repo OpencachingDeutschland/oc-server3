@@ -87,14 +87,15 @@
 
 						<h2>Terms of Use</h2>
 
-						<p>When using data from <b><?= $vars['site_name'] ?></b> you <b>must</b> attribute the
-						data back to <?= $vars['site_name'] ?>.</p>
-						<ul>
-							<li>This means, at a minimum, you may not remove the reference to
-							<b><?= $vars['site_name'] ?></b> from the end of any geocache descriptions.</li>
-							<li>If you are not showing geocache descriptions, you <b>must</b>
-							find some other way to attribute the data back to <b><?= $vars['site_name'] ?></b>.</li>
-						</ul>
+						<p>When using data from <b><?= $vars['site_name'] ?></b> you <b>must</b>
+						attribute it to the author and to <?= $vars['site_name'] ?> in the form
+						specifyed in the <?= $vars['site_name'] ?> <?= $vars['data_license_html'] ?>.
+						OKAPI supports you in doing so by either appending the proper attribution to
+						geocache descriptions or providing it in a separate data field (if you are not
+						showing cache descriptions you must attribute the data using this separate field).
+						Refer to <a href="<?= $vars['site_url'].'okapi/services/caches/geocache.html#arg_attribution_append' ?>">the geocache method</a>
+						for further advice.</p>
+
 						<p>You <b>must</b> comply with the requirements of the <?= $vars['site_name'] ?>
 						<?= $vars['data_license_html'] ?> when reproducing, displaying, copying,
 						formatting, compiling, or otherwise using Geocaching Data acquired through OKAPI.</p>

@@ -32,10 +32,13 @@ class WebService
 		if (!$log_fields) $log_fields = "uuid|date|user|type|comment";
 		$lpc = $request->get_parameter('lpc');
 		if (!$lpc) $lpc = 10;
+		$attribution_append = $request->get_parameter('attribution_append');
+		if (!$attribution_append) $attribution_append = 'full';
 		$params = array(
 			'cache_codes' => $cache_code,
 			'langpref' => $langpref,
 			'fields' => $fields,
+			'attribution_append' => $attribution_append,
 			'lpc' => $lpc,
 			'log_fields' => $log_fields
 		);

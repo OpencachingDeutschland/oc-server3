@@ -208,6 +208,11 @@
 				between all installations.</p>
 			</li>
 			<li>
+				<p><b>attribution_note</b> - the proper attribution note for the cache listing according
+				to the local OC site's Data License. By default, this note is also appended to geocache
+				descriptions (see the <b>attribution_append</b> parameter).</p>
+			</li>
+			<li>
 				<p><b>latest_logs</b> - a couple of latest log entries in the cache.
 				The format is the same as the one returned by the services/logs/logs method.</p>
 				<p>Notice: The number of logs returned can be set with the <b>lpc</b> option.</p>
@@ -279,6 +284,37 @@
 			to have multiple universally unique keys. -->
 			<li><b>internal_id</b> - internal ID of the cache (<b>do not</b> use
 				this, unless you know what you're doing; use the "code" as an identifier).</li>
+		</ul>
+	</opt>
+	<opt name='attribution_append' default='full'>
+		<p>By default, OKAPI appends the value of <b>attribution_note</b> field to all the
+		cache descriptions. If you would like to display the attribution note separately,
+		you may use this parameter. Use one of the following values:</p>
+		<ul>
+			<li>
+				<b>full</b> - OKAPI will append the attribution note to the descriptions of the
+				geocache. The language of the note will match the language of the description
+				(i.e. each value in <b>descriptions</b> may contain attribution notes in
+				a different language).
+			</li>
+			<li>
+				<p><b>none</b> - OKAPI will not append the attribution note to geocache
+				descriptions. You will use the <b>attribution_note</b> instead (which depends
+				on the <b>langpref</b> parameter).</p>
+				
+				<p><b>Important note:</b> You are still <b>required</b> to display the
+				<b>attribution_note</b> field in some other way.</p>
+			</li>
+			<li>
+				<b>static</b> - OKAPI will append a "static" attribution note to the descriptions
+				of the geocache. This might equal the "full" attribution note, but not necessarilly,
+				since the "full" note may contain a current date
+				(<a href='https://code.google.com/p/opencaching-api/issues/detail?id=178'>why?</a>),
+				and the "static" note will not. This is implemented primarily for internal use
+				(i.e. the replicate module). Usually you should not use it, because on some
+				installations the static note will not be sufficient to meet the data license
+				requirements. 
+			</li>
 		</ul>
 	</opt>
 	<opt name='lpc' default='10'>

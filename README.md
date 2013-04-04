@@ -60,3 +60,4 @@ Related Websites
 * [Opencaching API project](http://code.google.com/p/opencaching-api/)
 * [Opencaching.pl project](http://code.google.com/p/opencaching-pl/)
 * [Git explained](http://gitref.org/index.html)
+* [Detailed Opencaching.de Git tutorial](http://wiki.opencaching.de/index.php/Entwicklung/Git) (German)

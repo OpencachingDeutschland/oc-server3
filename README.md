@@ -9,8 +9,13 @@ the other one is [Opencaching.pl](http://code.google.com/p/opencaching-pl/).
 
 Feel free to use it under the provided
 [license terms](https://github.com/OpencachingDeutschland/oc-server3/blob/master/doc/license.txt)
-for setting up your own open and free Geocaching listing service! Your contributions
-to this project are welcome - you may contact the team in the
+for setting up your own open and free Geocaching listing service! The code can easily be
+translalted to other languages, as all translations are kept at
+[two](https://raw.github.com/OpencachingDeutschland/oc-server3/master/htdocs/doc/sql/static-data/data.sql)
+[places](https://github.com/OpencachingDeutschland/oc-server3/tree/master/htdocs/templates2/ocstyle/articles)
+and all locale settings in [one file](https://github.com/OpencachingDeutschland/oc-server3/blob/master/htdocs/config2/locale.inc.php).
+
+Your contributions to this project are welcome - you may contact the team in the
 [Opencaching network forum](http://forum.opencaching-network.org/) if you like to
 join us. Development is usually done on a VirtualBox Linux system that you can run on your
 Linux, Windows or Mac workstation, but you may also try to set up the code directly

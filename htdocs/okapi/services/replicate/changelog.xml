@@ -3,11 +3,11 @@
 	<issue-id>109</issue-id>
 	<desc>
 		<p><b>Beta status.</b> Get the list of changes to be replayed on your own copy
-		of OpenCaching database. Use this method periodically (ex. once per hour) to
+		of Opencaching database. Use this method periodically (ex. once per hour) to
 		keep your database in sync with ours.</p>
 		
 		<p>For some applications it might be desireable to have a quick access to the entire
-		OpenCaching database (instead of querying for specific portions of it). You may use
+		Opencaching database (instead of querying for specific portions of it). You may use
 		OKAPI's <b>replicate</b> module to achive this effect. The <b>changelog</b> method
 		is the primary replication service which you will use. However, to correctly set up
 		your first database copy, you will need to use the <b>fulldump</b> method.</p>

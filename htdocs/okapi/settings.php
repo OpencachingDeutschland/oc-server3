@@ -32,7 +32,7 @@ final class Settings
 		'DEBUG' => false,
 
 		/**
-		 * Currently there are two mainstream branches of OpenCaching code.
+		 * Currently there are two mainstream branches of Opencaching code.
 		 * Which branch is you installation using?
 		 *
 		 * Possible values: "oc.pl" or "oc.de". (As far as we know, oc.us and
@@ -41,7 +41,7 @@ final class Settings
 		'OC_BRANCH' => "oc.pl",
 
 		/**
-		 * Each OpenCaching site has a default language. I.e. the language in
+		 * Each Opencaching site has a default language. I.e. the language in
 		 * which all the names of caches are entered. What is the ISO 639-1 code
 		 * of this language? Note: ISO 639-1 codes are always lowercase.
 		 *

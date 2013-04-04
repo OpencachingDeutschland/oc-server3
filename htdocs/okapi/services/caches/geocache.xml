@@ -270,7 +270,7 @@
 			<li>
 				<p><b>last_found</b> - date and time (ISO 8601) when the
 				geocache was last found <b>or null</b> when it hasn't been yet found.</p>
-				<p>Note, that some OpenCaching servers don't store the exact times along
+				<p>Note, that some Opencaching servers don't store the exact times along
 				with the log entries.</p>
 			</li>
 			<li><b>last_modified</b> - date and time (ISO 8601) when the

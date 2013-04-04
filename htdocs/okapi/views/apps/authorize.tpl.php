@@ -30,7 +30,7 @@
 
 		<div class='okapi'>
 			<a href='<?= $vars['okapi_base_url'] ?>'><img src='<?= $vars['okapi_base_url'] ?>static/logo-xsmall.gif' alt='OKAPI' style='float: right; margin-left: 10px;'></a>
-			<a href='/'><img src="/images/oc_logo.png" alt='OpenCaching' style='float: left; margin-right: 10px'></a>
+			<a href='/'><img src="/images/oc_logo.png" alt='Opencaching' style='float: left; margin-right: 10px'></a>
 			<a class='opencaching'><?= $vars['site_name'] ?></a>
 
 			<div style='float: right; clear: right; margin: 10px 0 10px 30px'>

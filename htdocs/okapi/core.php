@@ -778,7 +778,7 @@ class Okapi
 {
 	public static $data_store;
 	public static $server;
-	public static $revision = 669; # This gets replaced in automatically deployed packages
+	public static $revision = 672; # This gets replaced in automatically deployed packages
 	private static $okapi_vars = null;
 
 	/** Get a variable stored in okapi_vars. If variable not found, return $default. */
@@ -933,14 +933,14 @@ class Okapi
 		return $dict;
 	}
 
-	/** Returns something like "OpenCaching.PL" or "OpenCaching.DE". */
+	/** Returns something like "Opencaching.PL" or "Opencaching.DE". */
 	public static function get_normalized_site_name($site_url = null)
 	{
 		if ($site_url == null)
 			$site_url = Settings::get('SITE_URL');
 		$matches = null;
 		if (preg_match("#^https?://(www.)?opencaching.([a-z.]+)/$#", $site_url, $matches)) {
-			return "OpenCaching.".strtoupper($matches[2]);
+			return "Opencaching.".strtoupper($matches[2]);
 		} else {
 			return "DEVELSITE";
 		}

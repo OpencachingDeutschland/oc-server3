@@ -13,7 +13,7 @@
 		<p>A dictionary of the following structure:</p>
 		<ul>
 			<li>
-				<b>site_url</b> - URL of the OpenCaching site which is running
+				<b>site_url</b> - URL of the Opencaching site which is running
 				the OKAPI installation (usually this looks like
 				"http://www.opencaching.<i>xx</i>/", where <b>xx</b> is a top
 				level domain of a country).

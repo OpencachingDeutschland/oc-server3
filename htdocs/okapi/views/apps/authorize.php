@@ -138,7 +138,7 @@ class View
 						return new OkapiRedirectResponse($token['callback'].$callback_concat_char."error=access_denied");
 					} else {
 						# Consumer did not provide a callback URL (oauth_callback=oob).
-						# We'll have to redirect to the OpenCaching main page then...
+						# We'll have to redirect to the Opencaching main page then...
 						return new OkapiRedirectResponse(Settings::get('SITE_URL')."index.php");
 					}
 				}

@@ -46,7 +46,7 @@
 
 						<h1>
 							Sign up for an API Key
-							<div class='subh1'>:: <b>OpenCaching API</b> Reference</div>
+							<div class='subh1'>:: <b>Opencaching API</b> Reference</div>
 						</h1>
 
 						<form id='signup'>

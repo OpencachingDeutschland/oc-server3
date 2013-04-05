@@ -430,7 +430,7 @@ class View
 		print "prefix), but it won't usually alter other tables in your\n";
 		print "database. Still, sometimes we may change something\n";
 		print "slightly (either to make OKAPI work properly OR as a part of\n";
-		print "bigger \"international OpenCaching unification\" ideas).\n\n";
+		print "bigger \"international Opencaching unification\" ideas).\n\n";
 		print "We will let you know every time OKAPI alters database structure\n";
 		print "(outside of the \"okapi_\" table-scope). If you have any comments\n";
 		print "on this procedure, please submit them to our issue tracker.\n\n";

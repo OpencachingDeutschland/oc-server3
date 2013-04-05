@@ -14,7 +14,7 @@
 		<ul>
 			<li><b>uuid</b> - ID of the user,</li>
 			<li><b>username</b> - username (login) of the user,</li>
-			<li><b>profile_url</b> - URL of the user's OpenCaching profile page,</li>
+			<li><b>profile_url</b> - URL of the user's Opencaching profile page,</li>
 			<li>
 				<p><b>is_admin</b> - boolean; true is user has admin privileges.</p>
 				<p>This value can be accessed only with <b>Level 3</b> Authentication

@@ -36,7 +36,7 @@ class View
 		if (!$token)
 		{
 			# Probably Request Token has expired or it was already used. We'll
-			# just redirect to the OpenCaching main page.
+			# just redirect to the Opencaching main page.
 			return new OkapiRedirectResponse(Settings::get('SITE_URL'));
 		}
 

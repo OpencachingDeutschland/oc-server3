@@ -2,7 +2,7 @@
 <html lang='en'>
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-		<title>OKAPI - OpenCaching API</title>
+		<title>OKAPI - Opencaching API</title>
 		<link rel="stylesheet" href="<?= $vars['okapi_base_url'] ?>static/common.css?<?= $vars['okapi_rev'] ?>">
 		<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js'></script>
 		<script>
@@ -22,17 +22,17 @@
 
 <h1>
 	The OKAPI Project
-	<div class='subh1'>:: <b>OpenCaching API</b> Reference</div>
+	<div class='subh1'>:: <b>Opencaching API</b> Reference</div>
 </h1>
 
-<p><b>OKAPI</b> is a <b>public API</b> project for National OpenCaching sites (also known as
-OpenCaching Nodes).</p>
+<p><b>OKAPI</b> is a <b>public API</b> project for National Opencaching sites (also known as
+Opencaching Nodes).</p>
 <ul>
 	<li>It provides OC site with a set of useful well-documented API methods,</li>
-	<li>Allows external developers to easily <b>read public</b> OpenCaching data,</li>
+	<li>Allows external developers to easily <b>read public</b> Opencaching data,</li>
 	<li>Allows <b>read and write private</b> (user-related) data with OAuth 3-legged authentication.</li>
 </ul>
-<p>The project is aiming to become a standard API for all National OpenCaching.<i>xx</i> sites.
+<p>The project is aiming to become a standard API for all National Opencaching.<i>xx</i> sites.
 This OKAPI installation provides API for the
 <a href='<?= $vars['site_url']; ?>'><?= $vars['site_url']; ?></a> site.
 Check out other OKAPI installations:</p>

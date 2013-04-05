@@ -23,7 +23,7 @@
 
 		<div class='okapi'>
 			<a href='<?= $vars['okapi_base_url'] ?>'><img src='<?= $vars['okapi_base_url'] ?>static/logo-xsmall.gif' alt='OKAPI' style='float: right; margin-left: 10px;'></a>
-			<a href='/'><img src="<?= $vars['okapi_base_url'] ?>static/oc_logo.png" alt='OpenCaching' style='float: left; margin-right: 10px'></a>
+			<a href='/'><img src="<?= $vars['okapi_base_url'] ?>static/oc_logo.png" alt='Opencaching' style='float: left; margin-right: 10px'></a>
 			<a class='opencaching'><?= $vars['site_name'] ?></a>
 
 			<h1 style='clear: both'><?= _("Your external applications") ?></h1>
@@ -50,7 +50,7 @@
 				<?= sprintf(_("
 					<p>Thanks to the <a href='%s'>OKAPI Framework</a> you can grant external applications
 					access to your <b>%s</b> account. Currently no applications are authorized to act
-					on your behalf. Once you start using external OpenCaching applications, they will appear here.</p>
+					on your behalf. Once you start using external Opencaching applications, they will appear here.</p>
 				"), $vars['okapi_base_url'], $vars['site_name']) ?>
 			<? } ?>
 		</div>

@@ -9,7 +9,7 @@
 		<p>A dictionary of the following structure:</p>
 		<ul>
 			<li>
-				<b>site_url</b> - URL of the OpenCaching site which is running
+				<b>site_url</b> - URL of the Opencaching site which is running
 				the OKAPI installation (usually this looks like
 				"http://www.opencaching.<i>xx</i>/", where <b>xx</b> is a top
 				level domain of a country).
@@ -21,10 +21,10 @@
 				method URLs,
 			</li>
 			<li>
-				<b>site_name</b> - international name of the OpenCaching site,
+				<b>site_name</b> - international name of the Opencaching site,
 			</li>
 			<li><b>okapi_revision</b> - integer, an SVN revision of the OKAPI project
-				installed on this OpenCaching site, <b>or null</b>, when could not
+				installed on this Opencaching site, <b>or null</b>, when could not
 				determine revision number.</li>
 		</ul>
 	</returns>

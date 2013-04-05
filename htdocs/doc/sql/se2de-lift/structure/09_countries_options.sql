@@ -1,1 +1,0 @@
-ALTER TABLE `countries_options` DROP COLUMN `group`;

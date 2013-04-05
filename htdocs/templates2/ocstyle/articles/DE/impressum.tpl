@@ -81,7 +81,7 @@
 	<p>
 		Der gesch&auml;ftsf&uuml;hrende Vorstand besteht aus (Stand 31.08.2012):
 	</p>
-	<ul class="indent" style="font-size: 12px;">
+	<ul class="indent">
 		<li>Michael Vaahsen, Vorsitzender</li>
 		<li>Gerald Halbig, stellv. Vorsitzender</li>
 		<li>Maik Bischoff, Kassenwart</li>
@@ -175,7 +175,7 @@
 		<b>F&uuml;r das Verstecken von Geocaches, die auf Opencaching.de ver&ouml;ffentlicht 
 		werden sollen, gilt grunds&auml;tzlich:</b>
 	</p>
-	<ul class="indent" style="font-size: 12px;">
+	<ul class="indent">
 		<li>
 			Das Verstecken eines Geocaches geschieht in eigenem Interesse und auf 
 			eigene Gefahr - Opencaching.de &uuml;bernimmt in keinem Fall irgendeine 
@@ -244,7 +244,7 @@
 	<p>
 		<b>F&uuml;r das Suchen eines Geocaches gilt grunds&auml;tzlich:</b>
 	</p>
-	<ul class="indent" style="font-size: 12px;">
+	<ul class="indent">
 		<li>
 			Das Suchen eines Geocaches geschieht in eigenem Interesse und auf 
 			eigene Gefahr - Opencaching.de &uuml;bernimmt in keinem Fall irgendeine 
@@ -279,11 +279,11 @@
 	<p>
 		<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/3.0/de/">
 		<img alt="Creative Commons Lizenzvertrag" style="border: 0; padding-right: 15px; padding-bottom: 15px; float: left;" src="http://i.creativecommons.org/l/by-nc-nd/3.0/de/88x31.png" /></a>
-		Ab dem 7.&nbsp;April 2013 stehen alle durch die Benutzer auf Opencaching.de eingebrachten Inhalte unter 
+		Alle durch die Benutzer auf Opencaching.de eingebrachten Inhalte stehen unter 
 		der Lizenz "Creative Commons Attribution-NonCommercial-NoDerivs 3.0", auf Deutsch 
 		"Namensnennung-NichtKommerziell-KeineBearbeitung 3.0" (CC BY-NC-ND 3.0), das hei&szlig;t, 
-		Sie d&uuml;rfen die Inhalte vervielf&auml;ltigen, verbreiten und &ouml;ffentlich 
-		zug&auml;nglich machen. Dabei ist die Namensnennung des Autors/Rechteinhabers in der 
+		sie d&uuml;rfen vervielf&auml;ltigt, verbreitet und &ouml;ffentlich zug&auml;nglich 
+		gemacht werden. Dabei ist die Namensnennung des Autors/Rechteinhabers in der
 		unten angegebenen Form zu wahren. Eine kommerzielle Nutzung der Inhalte ist in 
 		jeglicher Form ausgeschlossen, ebenso d&uuml;rfen keine Ver&auml;nderungen/Abwandlungen 
 		der Inhalte vorgenommen werden.

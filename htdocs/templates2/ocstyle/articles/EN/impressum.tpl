@@ -64,7 +64,7 @@
 	<p>
 		The managing comittee are (as of August 31, 2012):
 	</p>
-	<ul class="indent" style="font-size: 12px;">
+	<ul class="indent">
 		<li>Michael Vaahsen, chairman</li>
 		<li>Gerald Halbig, vice chairman</li>
 		<li>Maik Bischoff, treasurer</li>
@@ -152,7 +152,7 @@
 		<b>Terms for hiding a geocache and publishing it at Opencaching.de website</b>
 	</p>
 			
-	<ul class="indent" style="font-size: 12px;">
+	<ul class="indent">
 		<li>
 			You will hide the geocache at your own intention and risk &ndash; Opencaching.de 
 			will not be liably for any damages which may be caused by the cache. The cache 
@@ -207,7 +207,7 @@
 		<b>Terms for seeking a geocache</b>
 	</p>
 	
-	<ul class="indent" style="font-size: 12px;">
+	<ul class="indent">
 		<li>
 			You will seek geocaches at your own risk. Opencaching.de will not be liable 
 			for any damages caused by seeking a geocache.
@@ -240,7 +240,7 @@
 	<p>
 		<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/3.0/de/deed.en">
 		<img alt="Creative Commons License Terms" style="border: 0; padding-right: 15px; padding-bottom: 15px; float: left;" src="http://i.creativecommons.org/l/by-nc-nd/3.0/de/88x31.png" /></a>
-		Starting April&nbsp;7, 2013, all Opencaching.de content which has been contributed by users is licensed under 
+		All Opencaching.de content which has been contributed by users is licensed under 
 		the terms of "Creative Commons Attribution-NonCommercial-NoDerivs 3.0 Germany", which means 
 		that you may reproduce, distribute and publish it. When doing this, the author has to 
 		be named in the form given below. The content  must not be used for any commercial 

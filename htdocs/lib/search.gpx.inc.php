@@ -602,7 +602,7 @@
 			$thiswp = mb_ereg_replace('{name}', $r['waypoint'].'-'.sprintf($digits,$n) , $thiswp);
 			$thiswp = mb_ereg_replace('{cachename}', xmlentities($r['name']), $thiswp);
 			$thiswp = mb_ereg_replace('{comment}',xmlentities($childWaypoint['description']), $thiswp);
-			$thiswp = mb_ereg_replace('{desc}', $translate->t('Waypoint','','',0).' '.$n, $thiswp);
+			$thiswp = mb_ereg_replace('{desc}', xmlentities($childWaypoint['name']), $thiswp);
 			switch ($childWaypoint['type'])
 			{
 				case 1: $wp_typename = "Parking Area"; break;  // well-known garmin symbols

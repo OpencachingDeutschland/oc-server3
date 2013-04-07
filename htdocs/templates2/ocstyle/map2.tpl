@@ -460,7 +460,7 @@ function map_clicked()
 		dataload_on_filterchange();
 	mapselectlist_hide();		// firefox needs this
 	moWpInfoWindow.close();
-	close_infowindow(false);
+	close_infowindow(true);
 	permalinkbox_hide();
 }
 

@@ -48,7 +48,7 @@
 	$opt['template']['locales']['SV']['flag'] = 'images/flag/SE.png';
 	$opt['template']['locales']['SV']['name'] = 'Svenska';
 	$opt['template']['locales']['NO']['show'] = true; // no_NO
-	$opt['template']['locales']['NO']['flag'] = 'images/flags/no.png';
+	$opt['template']['locales']['NO']['flag'] = 'images/flag/NO.png';
 	$opt['template']['locales']['NO']['name'] = 'Norsk';
 	$opt['template']['locales']['DA']['show'] = true; // da_DK
 	$opt['template']['locales']['DA']['flag'] = 'images/flags/dk.png';

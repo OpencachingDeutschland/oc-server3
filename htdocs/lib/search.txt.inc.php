@@ -15,7 +15,7 @@
 		
 	****************************************************************************/
 
-	global $content, $bUseZip, $sqldebug;
+	global $content, $bUseZip, $sqldebug, $locale;
 
 	$txtLine = "Name: {cachename} von {owner}
 Koordinaten: {lon} {lat}
@@ -198,7 +198,7 @@ Logeinträge:
 
 	// ok, ausgabe ...
 	
-	$rs = sql_slave('SELECT SQL_BUFFER_RESULT `txtcontent`.`cache_id` `cacheid`, `txtcontent`.`longitude` `longitude`, `txtcontent`.`latitude` `latitude`, `caches`.`wp_oc` `waypoint`, `caches`.`date_hidden` `date_hidden`, `caches`.`name` `name`, `caches`.`country` `country`, `caches`.`terrain` `terrain`, `caches`.`difficulty` `difficulty`, `caches`.`desc_languages` `desc_languages`, `cache_size`.`de` `size`, `cache_type`.`de` `type`, `cache_status`.`de` `status`, `user`.`username` `username`, `cache_desc`.`desc` `desc`, `cache_desc`.`short_desc` `short_desc`, `cache_desc`.`hint` `hint`, `cache_desc`.`desc_html` `html` FROM `txtcontent`, `caches`, `user`, `cache_desc`, `cache_type`, `cache_status`, `cache_size` WHERE `txtcontent`.`cache_id`=`caches`.`cache_id` AND `caches`.`cache_id`=`cache_desc`.`cache_id` AND `caches`.`default_desclang`=`cache_desc`.`language` AND `txtcontent`.`user_id`=`user`.`user_id` AND `caches`.`type`=`cache_type`.`id` AND `caches`.`status`=`cache_status`.`id` AND `caches`.`size`=`cache_size`.`id`');
+	$rs = sql_slave('SELECT SQL_BUFFER_RESULT `txtcontent`.`cache_id` `cacheid`, `txtcontent`.`longitude` `longitude`, `txtcontent`.`latitude` `latitude`, `caches`.`wp_oc` `waypoint`, `caches`.`date_hidden` `date_hidden`, `caches`.`name` `name`, `caches`.`country` `country`, `caches`.`terrain` `terrain`, `caches`.`difficulty` `difficulty`, `caches`.`desc_languages` `desc_languages`, `cache_size`.`de` `size`, `cache_type`.`de` `type`, `cache_status`.`de` `status`, `user`.`username` `username`, `cache_desc`.`desc` `desc`, `cache_desc`.`short_desc` `short_desc`, `cache_desc`.`hint` `hint`, `cache_desc`.`desc_html` `html`, `user`.`user_id`, `user`.`username`, `user`.`data_license` FROM `txtcontent`, `caches`, `user`, `cache_desc`, `cache_type`, `cache_status`, `cache_size` WHERE `txtcontent`.`cache_id`=`caches`.`cache_id` AND `caches`.`cache_id`=`cache_desc`.`cache_id` AND `caches`.`default_desclang`=`cache_desc`.`language` AND `txtcontent`.`user_id`=`user`.`user_id` AND `caches`.`type`=`cache_type`.`id` AND `caches`.`status`=`cache_status`.`id` AND `caches`.`size`=`cache_size`.`id`');
 	while($r = sql_fetch_array($rs))
 	{
 		$thisline = $txtLine;
@@ -223,15 +223,20 @@ Logeinträge:
 		
 		$thisline = mb_ereg_replace('{shortdesc}', $r['short_desc'], $thisline);
 		
+		$license = getLicenseDisclaimer(
+			$r['user_id'], $r['username'], $r['data_license'], $r['cacheid'], $locale, true, false, true);
+		if ($license != "")
+			$license = "\r\n\r\n$license";
+
 		if ($r['html'] == 0)
 		{
 			$thisline = mb_ereg_replace('{htmlwarn}', '', $thisline);
-			$thisline = mb_ereg_replace('{desc}', strip_tags($r['desc']), $thisline);
+			$thisline = mb_ereg_replace('{desc}', strip_tags($r['desc']) . $license, $thisline);
 		}
 		else
 		{
 			$thisline = mb_ereg_replace('{htmlwarn}', ' (Vorsicht, aus HTML konvertiert)', $thisline);
-			$thisline = mb_ereg_replace('{desc}', html2txt($r['desc']), $thisline);
+			$thisline = mb_ereg_replace('{desc}', html2txt($r['desc']) . $license, $thisline);
 		}
 		
 		$thisline = mb_ereg_replace('{type}', $r['type'], $thisline);

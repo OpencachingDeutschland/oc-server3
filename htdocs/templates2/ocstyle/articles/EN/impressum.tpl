@@ -253,7 +253,7 @@
 		The form of attribution is:
 	</p>
 	<p style="font-weight: 800;">
-		&copy; $USERNAME, www.opencaching.de, CC-BY-NC-ND, as of $DATUM
+		&copy; $USERNAME, Opencaching.de, CC BY-NC-ND, as of $DATUM
 	</p>
 	<p>
 		The date refers to the day when the data was downloaded from www.opencaching.de, and it may be omitted for photos and log entries.

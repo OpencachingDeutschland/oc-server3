@@ -292,7 +292,7 @@
 		Für die Namensnennung ist die Form
 	</p>
 	<p style="font-weight: 800;">
-		&copy; $USERNAME, www.opencaching.de, CC-BY-NC-ND, Stand: $DATUM
+		&copy; $USERNAME, Opencaching.de, CC BY-NC-ND, Stand: $DATUM
 	</p>
 	<p>
 		zu verwenden, wobei das Datum sich auf den Abrufzeitpunkt von www.opencaching.de bezieht. Bei Fotos und Logeintr&auml;gen kann vom Datum abgesehen werden.

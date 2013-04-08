@@ -15,6 +15,8 @@
 
  ****************************************************************************/
 
+require_once($opt['rootpath'] . 'lib/data-license.inc.php');
+
 /* begin conversion rules */
 
 	$search_simplerules[] = array('qu', 'k');

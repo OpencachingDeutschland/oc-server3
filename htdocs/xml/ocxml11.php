@@ -13,15 +13,14 @@
 /* begin configuration */
 
 	if (!isset($ocxmlversion))
-	{
 	  $ocxmlversion = 11;
-	  $doctype = "oc11xml";
-	}
 	
 	$opt['rootpath'] = '../';
-  require($opt['rootpath'] . 'lib/common.inc.php');
-  require($opt['rootpath'] . 'lib/charset.inc.php');
-  require($opt['rootpath'] . 'lib2/const.inc.php');
+  require_once($opt['rootpath'] . 'lib/common.inc.php');
+  require_once($opt['rootpath'] . 'lib/charset.inc.php');
+  require_once($opt['rootpath'] . 'lib2/const.inc.php');
+  require_once($opt['rootpath'] . 'lib/data-license.inc.php');
+
   if ($error == true)
 	{
 		echo 'Unable to connect to database';
@@ -55,6 +54,7 @@
 	$bXmlCData = isset($_REQUEST['cdata']) ? $_REQUEST['cdata'] : '1';
 	$bAttrlist = isset($_REQUEST['attrlist']) ? $_REQUEST['attrlist'] : '0';
 	$bLicense = isset($_REQUEST['license']) ? $_REQUEST['license'] : '0';
+	$sLanguage = isset($_REQUEST['language']) ? strtoupper($_REQUEST['language']) : '';
 	
 	if ((($bOcXmlTag != '0') && ($bOcXmlTag != '1')) || 
 			(($bDocType != '0') && ($bDocType != '1')) || 
@@ -302,55 +302,10 @@
 /* end parameter reading */
 
 
-function getLicenseDisclaimer($userid, $username, $userlicense, $cacheid, $language, $logdisclaimer)
-{
-	global $opt, $translate, $absolute_server_URI;
-
-	$ltext = "";
-
-	if ($opt['logic']['license']['disclaimer'])
-	{
-		if ($userlicense != NEW_DATA_LICENSE_ACTIVELY_DECLINED &&
-	      $userlicense != NEW_DATA_LICENSE_PASSIVELY_DECLINED)
-		{
-			// © $USERNAME, www.opencaching.de, CC-BY-NC-ND, as of $DATUM 
-			$asof = $translate->t('as of', '', '', 0, '', 1, $language);
-
-			if (isset($opt['locale'][$language]['page']['license_url']))
-				$lurl = $opt['locale'][$language]['page']['license_url'];
-			else
-				$lurl = $opt['locale']['EN']['page']['license_url'];
-			if (isset($opt['locale'][$language]['format']['phpdate']))
-				$df = $opt['locale'][$language]['format']['phpdate'];
-			else
-				$df = $opt['locale']['DE']['format']['phpdate'];
-
-			$purl = parse_url($absolute_server_URI);
-
-			$ltext =
-			  "&copy; " .
-			  "<a href='" . $absolute_server_URI . "viewprofile.php?userid=" . $userid . "' target='_blank'>" . $username . "</a>, " .
-				"<a href='" . $absolute_server_URI . "viewcache.php?cacheid=" . $cacheid . "' target='_blank'>" . $purl['host'] . "</a>, " .
-			  "<a href='" . $lurl . "' target='_blank'>CC BY-NC-ND</a>, " . 
-				$asof . " " . date($df);
-		}
-
-		if ($logdisclaimer)
-		{
-			if ($ltext != "")
-				$ltext .= "; ";
-			$ltext .= $translate->t('all log entries &copy; their authors', '', '', 0, '', 1, $language);
-		}
-	}
-
-	return $ltext;
-}
-
-
 function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $ziptype)
 {
 	global $zip_basedir, $zip_wwwdir, $sDateformat, $sDateshort, $t1, $t2, $t3, $safemode_zip, $safemode_zip, $sCharset, $bAttrlist;
-	global $absolute_server_URI, $bLicense;
+	global $absolute_server_URI, $bLicense, $sLanguage;
 	global $ocxmlversion;
 	// alle records aus tmpxml_* übertragen
 	
@@ -571,7 +526,8 @@ function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $z
 			$desc = html_entity_decode($desc, ENT_COMPAT, 'UTF-8');
 		}
 
-		$disclaimer = getLicenseDisclaimer($r['user_id'], $r['username'], $r['data_license'], $r['cache_id'], $r['language'], true);
+		$lang = ($sLanguage != "" ? $sLanguage : $r['language']);
+		$disclaimer = getLicenseDisclaimer($r['user_id'], $r['username'], $r['data_license'], $r['cache_id'], $lang, true, true);
 		if ($bLicense)
 			fwrite($f, $t2 . '<license>' . xmlcdata($disclaimer) . '</license>' . "\n");
 		else if ($disclaimer != "")
@@ -622,7 +578,8 @@ function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $z
 
 		if ($bLicense)
 		{
-			$disclaimer = getLicenseDisclaimer($r['user_id'], $r['username'], $r['data_license'], $r['cache_id'], $r['language'], false);
+			$lang = ($sLanguage != "" ? $sLanguage : $r['language']);
+			$disclaimer = getLicenseDisclaimer($r['user_id'], $r['username'], $r['data_license'], $r['cache_id'], $lang, false, true);
 			fwrite($f, $t2 . '<license>' . xmlcdata($disclaimer) . '</license>' . "\n");
 		}
 
@@ -634,15 +591,22 @@ function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $z
 	                                    `pictures`.`object_id` `object_id`, `pictures`.`object_type` `object_type`, 
 	                                    `pictures`.`date_created` `date_created`, `pictures`.`uuid` `uuid`, 
 	                                    `pictures`.`last_modified` `last_modified`, `pictures`.`display` `display`, 
-	                                    `pictures`.`spoiler` `spoiler`, `pictures`.`node` `node`, 
-	                                    IFNULL(`cs1`.`allow_user_view`, `cs2`.`allow_user_view`) AS `auv` 
+	                                    `pictures`.`spoiler` `spoiler`, `pictures`.`node` `node`,
+	                                    IFNULL(`c1`.`cache_id`,`c2`.`cache_id`) AS `cache_id`,
+	                                    IFNULL(`c1`.`country`,`c2`.`country`) AS `language`,  /* hack */
+	                                    IFNULL(`cs1`.`allow_user_view`, `cs2`.`allow_user_view`) AS `auv`,
+	                                    IFNULL(`u1`.`user_id`,`u2`.`user_id`) AS `user_id`,
+	                                    IFNULL(`u1`.`username`,`u2`.`username`) AS `username`,
+	                                    IFNULL(`u1`.`data_license`,`u2`.`data_license`) AS `data_license`
 	                               FROM `tmpxml_pictures` 
 	                         INNER JOIN `pictures` ON `tmpxml_pictures`.`id`=`pictures`.`id` 
 	                          LEFT JOIN `caches` AS `c1` ON `pictures`.`object_type`=2 AND `pictures`.`object_id`=`c1`.`cache_id` 
 	                          LEFT JOIN `cache_logs` ON `pictures`.`object_type`=1 AND `pictures`.`object_id`=`cache_logs`.`id` 
 	                          LEFT JOIN `caches` AS `c2` ON `cache_logs`.`cache_id`=`c2`.`cache_id` 
 	                          LEFT JOIN `cache_status` AS `cs1` ON `c1`.`status`=`cs1`.`id` 
-	                          LEFT JOIN `cache_status` AS `cs2` ON `c2`.`status`=`cs2`.`id`');
+	                          LEFT JOIN `cache_status` AS `cs2` ON `c2`.`status`=`cs2`.`id`
+	                          LEFT JOIN `user` `u1` ON `u1`.`user_id`=`cache_logs`.`user_id`
+	                          LEFT JOIN `user` `u2` ON `u2`.`user_id`=`c1`.`user_id`');
 	while ($r = sql_fetch_array($rs))
 	{
 		$bAllowView = ($r['auv'] == 1);
@@ -655,6 +619,14 @@ function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $z
 		fwrite($f, $t2 . '<attributes spoiler="' . $r['spoiler'] . '" display="' . $r['display'] . '" />' . "\n");
 		fwrite($f, $t2 . '<datecreated>' . date($sDateformat, strtotime($r['date_created'])) . '</datecreated>' . "\n");
 		fwrite($f, $t2 . '<lastmodified>' . date($sDateformat, strtotime($r['last_modified'])) . '</lastmodified>' . "\n");
+
+		if ($bLicense)
+		{
+			$lang = ($sLanguage != "" ? $sLanguage : $r['language']);
+			$disclaimer = getLicenseDisclaimer($r['user_id'], $r['username'], $r['data_license'], $r['cache_id'], $lang, false, true);
+			fwrite($f, $t2 . '<license>' . xmlcdata($disclaimer) . '</license>' . "\n");
+		}
+
 		fwrite($f, $t1 . '</picture>' . "\n");
 	}
 	mysql_free_result($rs);

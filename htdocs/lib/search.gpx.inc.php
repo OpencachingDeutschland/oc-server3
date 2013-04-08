@@ -8,7 +8,7 @@
 		
 	****************************************************************************/
 
-	global $content, $bUseZip, $sqldebug;
+	global $content, $bUseZip, $sqldebug, $locale;
 
 	$gpxHead = 
 '<?xml version="1.0" encoding="utf-8"?>
@@ -312,7 +312,7 @@
 	$rs = sql_slave("SELECT SQL_BUFFER_RESULT `gpxcontent`.`cache_id` `cacheid`, `gpxcontent`.`longitude` `longitude`, `gpxcontent`.`latitude` `latitude`, 
 							`gpxcontent`.`state` `state`, `caches`.`wp_oc` `waypoint`, `caches`.`date_hidden` `date_hidden`, `caches`.`name` `name`, 
 							`caches`.`country` `country`, `countries`.`name` AS `country_name`, `caches`.`terrain` `terrain`, `caches`.`difficulty` `difficulty`, `caches`.`desc_languages` `desc_languages`, 
-							`caches`.`size` `size`, `caches`.`type` `type`, `caches`.`status` `status`, `user`.`username` `username`, `caches`.`user_id` `userid`, 
+							`caches`.`size` `size`, `caches`.`type` `type`, `caches`.`status` `status`, `user`.`username` `username`, `caches`.`user_id` `userid`, `user`.`data_license`,
 							`cache_desc`.`desc` `desc`, `cache_desc`.`short_desc` `short_desc`, `cache_desc`.`hint` `hint`,
 							IFNULL(`stat_cache_logs`.`found`, 0) AS `found`
 						FROM `gpxcontent` 
@@ -349,7 +349,14 @@
 ', $thisline);
 
 		$thisline = mb_ereg_replace('{shortdesc}', xmlentities($r['short_desc']), $thisline);
-		$thisline = mb_ereg_replace('{desc}', xmlentities(str_replace('<img src="images/uploads/','<img src="' . $absolute_server_URI . 'images/uploads/', $r['desc'])), $thisline);
+
+		$desc = str_replace('<img src="images/uploads/','<img src="' . $absolute_server_URI . 'images/uploads/', $r['desc']);		
+		$license = getLicenseDisclaimer(
+			$r['userid'], $r['username'], $r['data_license'], $r['cacheid'], $locale, true, true);
+		if ($license != "")
+			$desc .= "<p><em>$license</em></p>";
+		$thisline = mb_ereg_replace('{desc}', xmlentities($desc), $thisline);
+
 		$thisline = mb_ereg_replace('{images}', xmlentities(getPictures($r['cacheid'])), $thisline);
 
 		if (isset($gpxType[$r['type']]))

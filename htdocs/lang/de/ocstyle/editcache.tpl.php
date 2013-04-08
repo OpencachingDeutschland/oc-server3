@@ -329,6 +329,9 @@ function toggleAttr(id)
 			<input class="input20" type="text" name="hidden_month" maxlength="2" value="{date_month}"/>.
 			<input class="input40" type="text" name="hidden_year" maxlength="4" value="{date_year}"/>&nbsp;
 			{date_message}
+			&nbsp;
+			<img src="lang/de/ocstyle/images/misc/hint.gif" border="0" width="15" height="11" alt="{t}Notice{/t}" title="{t}Notice{/t}" />
+			{t}For Events: The date of event!{/t}
 		</td>
 	</tr>
 
@@ -336,8 +339,8 @@ function toggleAttr(id)
 
 	<tr><td class="spacer" colspan="2"></td></tr>
 	<tr>
-		<td nowrap="nowrap">{t}passwort to log:{/t}</td>
-		<td><input class="input100" type="text" name="log_pw" value="{log_pw}" maxlength="20"/> {t}(leave blank for no password){/t}</td>
+		<td nowrap="nowrap">{t}password for 'found' logs{/t}:</td>
+		<td><input class="input100" type="text" name="log_pw" value="{log_pw}" maxlength="20"/> &nbsp; {t}(leave blank for no password){/t}</td>
 	</tr>
 	<tr>
 		<td class="help" colspan="2">

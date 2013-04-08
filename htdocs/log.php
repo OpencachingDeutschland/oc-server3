@@ -187,7 +187,7 @@
 				{
 					$all_ok = $date_ok && $logtype_ok;
 
-					if ($all_ok && $use_log_pw && $log_type == 1)
+					if ($all_ok && $use_log_pw && ($log_type == 1 || $log_type == 7))
 						if (!isset($_POST['log_pw']) ||
 								mb_strtolower($log_pw) != mb_strtolower($_POST['log_pw']))
 						{
@@ -334,10 +334,14 @@
 					}
 					
 					if ($use_log_pw == true)
+					{
 						if (!$pw_ok == true)
 							tpl_set_var('log_pw_field', $log_pw_field_pw_not_ok);
+						else if ($cache_type == 6)
+							tpl_set_var('log_pw_field', $event_log_pw_field);
 						else
-							tpl_set_var('log_pw_field', $log_pw_field);
+							tpl_set_var('log_pw_field', $other_log_pw_field);
+					}
 					else
 						tpl_set_var('log_pw_field', '');
 

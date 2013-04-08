@@ -49,8 +49,8 @@
 			tpl_set_var('reset', $reset);
 			tpl_set_var('submit', $submit);
 			tpl_set_var('general_message', '');
-			tpl_set_var('hidden_since_message', $date_time_format_message);
-			tpl_set_var('activate_on_message', $date_time_format_message);
+			tpl_set_var('hidden_since_message', '');
+			tpl_set_var('activate_on_message', '');
 			tpl_set_var('lon_message', '');
 			tpl_set_var('lat_message', '');
 			tpl_set_var('tos_message', '');

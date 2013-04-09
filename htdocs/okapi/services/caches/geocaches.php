@@ -1012,6 +1012,8 @@ class WebService
 		}
 		else
 		{
+			# OC.de wants the tld in lowercase here
+			$site_name = ucfirst(strtolower($site_name));
 			if ($type == 'full')
 			{
 				$note = sprintf(

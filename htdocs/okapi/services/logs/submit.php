@@ -100,7 +100,7 @@ class WebService
 			throw new InvalidParam('recommend', "Unknown option: '$recommend'.");
 		$recommend = ($recommend == 'true');
 		if ($recommend && $logtype != 'Found it')
-			throw new BadRequest(_("Recommending is allowed only for 'Found it' logtypes."));
+			throw new BadRequest("Recommending is allowed only for 'Found it' logtypes.");
 
 		$needs_maintenance = $request->get_parameter('needs_maintenance');
 		if (!$needs_maintenance) $needs_maintenance = 'false';

@@ -27,7 +27,8 @@ class View
 		$user = Settings::get('DB_USERNAME');
 		$password = Settings::get('DB_PASSWORD');
 		$dbname = Settings::get('DB_NAME');
-		$struct = shell_exec("mysqldump --no-data -u$user -p$password $dbname");
+		$dbserver = Settings::get('DB_SERVER');
+		$struct = shell_exec("mysqldump --no-data -h$dbserver -u$user -p$password $dbname");
 
 		# Remove the "AUTO_INCREMENT=..." values. They break the diffs.
 

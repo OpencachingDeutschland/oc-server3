@@ -14,8 +14,10 @@
 			<li><b>cache_code</b> - code of the cache which the log entry refers to,</li>
 			<li>
 				<p><b>date</b> - date and time (ISO 8601) when the log entry was submitted.</p>
-				<p>Note, that some Opencaching servers don't store the exact times along
-				with the log entries.</p>
+				<p>Please note that log entries often contain dates only (with the times
+				truncated to midnight, as in the local timezone). In such cases, you may
+				want to avoid displaying the time. You may assume that if the <b>date</b>
+				value contains the "00:00:00" string, then it is date-only.</p>
 			</li>
 			<li>
 				<p><b>user</b> - a dictionary:</p>

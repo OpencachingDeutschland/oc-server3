@@ -2,38 +2,61 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OKAPI\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-06-14 23:42+0100\n"
-"PO-Revision-Date: 2012-06-14 23:44+0100\n"
+"POT-Creation-Date: 2013-04-10 01:08+0100\n"
+"PO-Revision-Date: 2013-04-10 01:12+0100\n"
 "Last-Translator: Wojciech Rygielski <rygielski@mimuw.edu.pl>\n"
 "Language-Team: \n"
+"Language: nl_NL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-KeywordsList: _;gettext;gettext_noop\n"
 "X-Poedit-Basepath: D:\\PRIV\\Projekty\\EclipseWorkspace\\opencaching-api\\\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"X-Poedit-Language: Dutch\n"
-"X-Poedit-Country: NETHERLANDS\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.5.5\n"
 "X-Poedit-SearchPath-0: .\n"
 
 # For additional waypoints. As in "Stage 1: Parking".
-#: okapi/services/caches/geocaches.php:634
+#: okapi/services/caches/geocaches.php:846
 msgid "Stage"
 msgstr "Etappe"
 
-#: okapi/services/caches/formatters/gpxfile.tpl.php:27
-#: okapi/services/caches/formatters/gpxfile.tpl.php:44
+#: okapi/services/caches/geocaches.php:1009
+#, php-format
+msgid ""
+"This <a href='%s'>geocache</a> description comes from the <a href='%s'>%s</"
+"a> site."
+msgstr ""
+
+#: okapi/services/caches/geocaches.php:1021
+#, php-format
+msgid ""
+"&copy; <a href='%s'>%s</a>, <a href='%s'>%s</a>, <a href='http://"
+"creativecommons.org/licenses/by-nc-nd/3.0/de/deed.en'>CC-BY-NC-ND</a>, as of "
+"%s; all log entries &copy; their authors"
+msgstr ""
+
+#: okapi/services/caches/geocaches.php:1032
+#, php-format
+msgid ""
+"&copy; <a href='%s'>%s</a>, <a href='%s'>%s</a>, <a href='http://"
+"creativecommons.org/licenses/by-nc-nd/3.0/de/deed.en'>CC-BY-NC-ND</a>; all "
+"log entries &copy; their authors"
+msgstr ""
+
+#: okapi/services/caches/formatters/gpxfile.tpl.php:31
+#: okapi/services/caches/formatters/gpxfile.tpl.php:48
 msgid "hidden by"
 msgstr "geplaatst door"
 
-#: okapi/services/caches/formatters/gpxfile.tpl.php:46
+#: okapi/services/caches/formatters/gpxfile.tpl.php:50
 #, php-format
 msgid "%d recommendation"
 msgid_plural "%d recommendations"
 msgstr[0] "%d aanbeveling"
 msgstr[1] "%d aanbevelingen"
 
-#: okapi/services/caches/formatters/gpxfile.tpl.php:47
+#: okapi/services/caches/formatters/gpxfile.tpl.php:51
 #, php-format
 msgid "found %d time"
 msgid_plural "found %d times"
@@ -41,90 +64,116 @@ msgstr[0] "%d keer gevonden"
 msgstr[1] "%d keren gevonden"
 
 # Generic term for trackable items (like geocoins and travelbugs).
-#: okapi/services/caches/formatters/gpxfile.tpl.php:50
+#: okapi/services/caches/formatters/gpxfile.tpl.php:54
 #, php-format
 msgid "%d trackable"
 msgid_plural "%d trackables"
 msgstr[0] "%d trackable"
 msgstr[1] "%d trackables"
 
-#: okapi/services/caches/formatters/gpxfile.tpl.php:54
+#: okapi/services/caches/formatters/gpxfile.tpl.php:58
 msgid "Personal notes"
 msgstr "Persoonlijke notities"
 
-#: okapi/services/caches/formatters/gpxfile.tpl.php:58
+#: okapi/services/caches/formatters/gpxfile.tpl.php:62
 msgid "Attributes"
 msgstr "Attributen"
 
-#: okapi/services/caches/formatters/gpxfile.tpl.php:62
+#: okapi/services/caches/formatters/gpxfile.tpl.php:66
 msgid "Trackables"
 msgstr "Trackables"
 
-#: okapi/services/caches/formatters/gpxfile.tpl.php:80
+#: okapi/services/caches/formatters/gpxfile.tpl.php:84
 msgid "Images"
 msgstr "Afbeeldingen"
 
-#: okapi/services/caches/formatters/gpxfile.tpl.php:87
+#: okapi/services/caches/formatters/gpxfile.tpl.php:91
 msgid "Spoilers"
 msgstr "Spoilers"
 
-#: okapi/services/caches/formatters/gpxfile.tpl.php:95
+#: okapi/services/caches/formatters/gpxfile.tpl.php:99
 msgid "Image descriptions"
 msgstr "Afbeelding omschrijving"
 
-#: okapi/services/logs/submit.php:63
-msgid "You are trying to publish a log entry with a date in future. Cache log entries are allowed to be published in the past, but NOT in the future."
-msgstr "De datum van de log staat ingesteld op een toekomstige datum. Cache logs kunnen alleen in het verleden zijn, maar NIET in de toekomst."
+#: okapi/services/logs/submit.php:70
+msgid ""
+"You are trying to publish a log entry with a date in future. Cache log "
+"entries are allowed to be published in the past, but NOT in the future."
+msgstr ""
+"De datum van de log staat ingesteld op een toekomstige datum. Cache logs "
+"kunnen alleen in het verleden zijn, maar NIET in de toekomst."
 
-#: okapi/services/logs/submit.php:83
-#: okapi/services/logs/submit.php:377
-msgid "Your cache log entry was posted successfully."
-msgstr "De log is succesvol verzonden."
-
-#: okapi/services/logs/submit.php:84
+#: okapi/services/logs/submit.php:92
 #, php-format
-msgid "However, your cache rating was ignored, because %s does not have a rating system."
-msgstr "De cachewaardering is genegeerd, omdat %s geen waarderingen in het systeem heeft."
-
-#: okapi/services/logs/submit.php:107
-msgid "This cache is archived. Only admins and the owner are allowed to add a log entry."
-msgstr "Deze cache is gearchiveerd. Alleen admins en de eigenaar kunnen een log toevoegen."
-
-# The user will see this error when he is trying to submit a "Fount it" entry on an event cache. "Attended" or "Will attend" log entries are not the same as "Found it". Currently OKAPI does not allow to submit "Attended" nor "Will attend" log entries, that's why user can only "Comment" on it.
-#: okapi/services/logs/submit.php:111
-msgid "This cache is an Event cache. You cannot \"Find it\"! (But - you may \"Comment\" on it.)"
-msgstr "Dit is een eventcache. Deze kan niet als \"Gevonden\" gelogd worden.  Maar wel als \"Notitie\"."
+msgid ""
+"However, your cache rating was ignored, because %s does not have a rating "
+"system."
+msgstr ""
+"De cachewaardering is genegeerd, omdat %s geen waarderingen in het systeem "
+"heeft."
 
 #: okapi/services/logs/submit.php:113
+#, php-format
+msgid ""
+"However, your \"needs maintenance\" flag was ignored, because %s does not "
+"support this feature."
+msgstr ""
+
+# The user will see this error when he is trying to submit a "Fount it" entry on an event cache. "Attended" or "Will attend" log entries are not the same as "Found it". Currently OKAPI does not allow to submit "Attended" nor "Will attend" log entries, that's why user can only "Comment" on it.
+#: okapi/services/logs/submit.php:131
+msgid ""
+"This cache is an Event cache. You cannot \"Find it\"! (But - you may "
+"\"Comment\" on it.)"
+msgstr ""
+"Dit is een eventcache. Deze kan niet als \"Gevonden\" gelogd worden.  Maar "
+"wel als \"Notitie\"."
+
+#: okapi/services/logs/submit.php:133
 msgid "Your have to supply some text for your comment."
 msgstr "Er dient enige tekst ingevuld te worden."
 
-#: okapi/services/logs/submit.php:126
+#: okapi/services/logs/submit.php:146
 msgid "This cache requires a password. You didn't provide one!"
 msgstr "Deze cache vraagt om een wachtwoord. Deze is niet opgegeven!"
 
-#: okapi/services/logs/submit.php:128
+#: okapi/services/logs/submit.php:148
 msgid "Invalid password!"
 msgstr "Verkeerd wachtwoord!"
 
 # This error will be shown to the user when he tries to submit a log entry which is EXACTLY the same as one he had submitted before.
-#: okapi/services/logs/submit.php:172
+#: okapi/services/logs/submit.php:260
 msgid "You have already submitted a log entry with exactly the same contents."
 msgstr "Deze log is reeds met dezelfde tekst verzonden."
 
-#: okapi/services/logs/submit.php:191
-msgid "You have already submitted a \"Found it\" log entry once. Now you may submit \"Comments\" only!"
-msgstr "Je hebt deze cache al als \"Gevonden\" gelogd.  Je kunt nu wel een \"Notitie\" plaatsen."
+#: okapi/services/logs/submit.php:279
+msgid ""
+"You have already submitted a \"Found it\" log entry once. Now you may submit "
+"\"Comments\" only!"
+msgstr ""
+"Je hebt deze cache al als \"Gevonden\" gelogd.  Je kunt nu wel een \"Notitie"
+"\" plaatsen."
 
 # The English text was changed from "you cannot rate it" to "you cannot find it". The translation remained.
-#: okapi/services/logs/submit.php:193
-#, fuzzy
-msgid "You are the owner of this cache. You cannot \"Find it\"."
-msgstr "Als eigenaar van deze cache. Kan deze cache niet gewaardeerd worden."
+#: okapi/services/logs/submit.php:281
+msgid "You are the owner of this cache. You may submit \"Comments\" only!"
+msgstr ""
 
-#: okapi/services/logs/submit.php:211
+#: okapi/services/logs/submit.php:299
 msgid "You have already rated this cache once. Your rating cannot be changed."
-msgstr "Je hebt deze cache al gewaardeerd. De waardering kan niet veranderd worden."
+msgstr ""
+"Je hebt deze cache al gewaardeerd. De waardering kan niet veranderd worden."
+
+#: okapi/services/logs/submit.php:316
+msgid "You have already recommended this cache once."
+msgstr ""
+
+#: okapi/services/logs/submit.php:323
+msgid "You don't have any recommendations to give. Find more caches first!"
+msgstr ""
+
+#: okapi/services/logs/submit.php:491
+msgid "Your cache log entry was posted successfully."
+msgstr "De log is succesvol verzonden."
 
 #: okapi/views/apps/authorize.tpl.php:5
 msgid "Authorization Form"
@@ -144,8 +193,12 @@ msgstr "Een externe toepassing verzoekt om toegang..."
 
 #: okapi/views/apps/authorize.tpl.php:50
 #, php-format
-msgid "<b>%s</b> wants to access your <b>%s</b> account. Do you agree to grant access to this application?"
-msgstr "<b>%s</b> vraagt toegang tot jouw <b>%s</b> account. Toestemming verlenen voor deze toepassing?"
+msgid ""
+"<b>%s</b> wants to access your <b>%s</b> account. Do you agree to grant "
+"access to this application?"
+msgstr ""
+"<b>%s</b> vraagt toegang tot jouw <b>%s</b> account. Toestemming verlenen "
+"voor deze toepassing?"
 
 #: okapi/views/apps/authorize.tpl.php:53
 msgid "I agree"
@@ -164,18 +217,24 @@ msgid ""
 "\n"
 "\t\t\t\t\t<p>Once permission is granted it is valid until its withdrawal on\n"
 "\t\t\t\t\tthe <a href='%s'>applications management</a> page.</p>\n"
-"\t\t\t\t\t<p>The application will access your acount via <a href='%s'>the OKAPI Framework</a>.\n"
-"\t\t\t\t\tIf you allow this request application will be able to access all methods delivered\n"
-"\t\t\t\t\tby the OKAPI Framework, i.e. post log entries on geocaches in your name.\n"
+"\t\t\t\t\t<p>The application will access your acount via <a href='%s'>the "
+"OKAPI Framework</a>.\n"
+"\t\t\t\t\tIf you allow this request application will be able to access all "
+"methods delivered\n"
+"\t\t\t\t\tby the OKAPI Framework, i.e. post log entries on geocaches in your "
+"name.\n"
 "\t\t\t\t\tYou can revoke this permission at any moment.</p>\n"
 "\t\t\t\t"
 msgstr ""
 "\n"
 "\t\t\t\t\t<p>Wanneer toegestemd is blijft deze geldig tot intrekking op\n"
 "\t\t\t\t\tde <a href='%s'>toepassingsbeheer</a> pagina.</p>\n"
-"\t\t\t\t\t<p>De toepassing zal toegang krijgen via jouw account op <a href='%s'>the OKAPI Framework</a>.\n"
-"\t\t\t\t\tWanneer je toestemming geeft voor deze toepassing zullen de mogelijkheden\n"
-"\t\t\t\t\tvan OKAPI Framework toegepast worden, b.v. het loggen van een cache.\n"
+"\t\t\t\t\t<p>De toepassing zal toegang krijgen via jouw account op <a "
+"href='%s'>the OKAPI Framework</a>.\n"
+"\t\t\t\t\tWanneer je toestemming geeft voor deze toepassing zullen de "
+"mogelijkheden\n"
+"\t\t\t\t\tvan OKAPI Framework toegepast worden, b.v. het loggen van een "
+"cache.\n"
 "\t\t\t\t\tDe toestemming kan elk moment ingetrokken worden.</p>\n"
 "\t\t\t\t"
 
@@ -192,13 +251,17 @@ msgstr "Met succes toegang verleend"
 #, php-format
 msgid ""
 "\n"
-"\t\t\t\t<p><b>You've just granted %s application access to your %s account.</b>\n"
-"\t\t\t\tTo complete the operation, go back to %s and enter the following PIN code:</p>\n"
+"\t\t\t\t<p><b>You've just granted %s application access to your %s account.</"
+"b>\n"
+"\t\t\t\tTo complete the operation, go back to %s and enter the following PIN "
+"code:</p>\n"
 "\t\t\t"
 msgstr ""
 "\n"
-"\t\t\t\t<p><b>Je hebt toegang verleent voor %s toepassing op jouw %s account.</b>\n"
-"\t\t\t\tOm de aktie te voltooien, ga terug naar %s en gebruik de volgende PIN code:</p>\n"
+"\t\t\t\t<p><b>Je hebt toegang verleent voor %s toepassing op jouw %s account."
+"</b>\n"
+"\t\t\t\tOm de aktie te voltooien, ga terug naar %s en gebruik de volgende "
+"PIN code:</p>\n"
 "\t\t\t"
 
 #: okapi/views/apps/index.tpl.php:5
@@ -215,16 +278,22 @@ msgstr "Jouw externe toepassingen"
 #, php-format
 msgid ""
 "\n"
-"\t\t\t\t\t<p>This is the list of applications which you granted access to your <b>%s</b> account.\n"
-"\t\t\t\t\tThis page gives you the abbility to revoke all previously granted privileges.\n"
-"\t\t\t\t\tOnce you click \"remove\" the application will no longer be able to perform any\n"
+"\t\t\t\t\t<p>This is the list of applications which you granted access to "
+"your <b>%s</b> account.\n"
+"\t\t\t\t\tThis page gives you the abbility to revoke all previously granted "
+"privileges.\n"
+"\t\t\t\t\tOnce you click \"remove\" the application will no longer be able "
+"to perform any\n"
 "\t\t\t\t\tactions on your behalf.</p>\n"
 "\t\t\t\t"
 msgstr ""
 "\n"
-"\t\t\t\t\t<p>Dit is een lijst met toegestane toepassingen op jouw <b>%s</b> account.\n"
-"\t\t\t\t\tOp deze pagina kun je alle toestemmingen intrekken die gegeven zijn.\n"
-"\t\t\t\t\tMet een klik op \"verwijderen\" zal de toepassing verwijderen en is dan ook niet meer beschikbaar\n"
+"\t\t\t\t\t<p>Dit is een lijst met toegestane toepassingen op jouw <b>%s</b> "
+"account.\n"
+"\t\t\t\t\tOp deze pagina kun je alle toestemmingen intrekken die gegeven "
+"zijn.\n"
+"\t\t\t\t\tMet een klik op \"verwijderen\" zal de toepassing verwijderen en "
+"is dan ook niet meer beschikbaar\n"
 "\t\t\t\t\voor anderen.</p>\n"
 "\t\t\t\t"
 
@@ -236,14 +305,26 @@ msgstr "verwijderen"
 #, php-format
 msgid ""
 "\n"
-"\t\t\t\t\t<p>Thanks to the <a href='%s'>OKAPI Framework</a> you can grant external applications\n"
-"\t\t\t\t\taccess to your <b>%s</b> account. Currently no applications are authorized to act\n"
-"\t\t\t\t\ton your behalf. Once you start using external OpenCaching applications, they will appear here.</p>\n"
+"\t\t\t\t\t<p>Thanks to the <a href='%s'>OKAPI Framework</a> you can grant "
+"external applications\n"
+"\t\t\t\t\taccess to your <b>%s</b> account. Currently no applications are "
+"authorized to act\n"
+"\t\t\t\t\ton your behalf. Once you start using external Opencaching "
+"applications, they will appear here.</p>\n"
 "\t\t\t\t"
 msgstr ""
 "\n"
-"\t\t\t\t\t<p>Dankzij het <a href='%s'>OKAPI Framework</a> kun je toegang verlenen via externe\n"
-"\t\t\t\t\ttoepassingen op een <b>%s</b> account. Momenteel zijn op dit account nog geen externe\n"
-"\t\t\t\t\ttoepassingen actief.  Geactiveerde  OpenCaching toepassingen zullen hier getoond worden.</p>\n"
+"\t\t\t\t\t<p>Dankzij het <a href='%s'>OKAPI Framework</a> kun je toegang "
+"verlenen via externe\n"
+"\t\t\t\t\ttoepassingen op een <b>%s</b> account. Momenteel zijn op dit "
+"account nog geen externe\n"
+"\t\t\t\t\ttoepassingen actief.  Geactiveerde  Opencaching toepassingen "
+"zullen hier getoond worden.</p>\n"
 "\t\t\t\t"
 
+#~ msgid ""
+#~ "This cache is archived. Only admins and the owner are allowed to add a "
+#~ "log entry."
+#~ msgstr ""
+#~ "Deze cache is gearchiveerd. Alleen admins en de eigenaar kunnen een log "
+#~ "toevoegen."

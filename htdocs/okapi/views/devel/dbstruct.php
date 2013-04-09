@@ -28,7 +28,23 @@ class View
 		$password = Settings::get('DB_PASSWORD');
 		$dbname = Settings::get('DB_NAME');
 		$dbserver = Settings::get('DB_SERVER');
-		$struct = shell_exec("mysqldump --no-data -h$dbserver -u$user -p$password $dbname");
+
+		# Some security measures are taken to hinder us from accidentally dumping
+		# database contents:
+		#  - try to set memory limit so that no big data chunk can be stored
+		#  - reassure that we use the --no-data option
+		#  - plausibility test for data amount
+		#  - verify that the output does not contain table contents
+		
+		ini_set('memory_limit', '16M');  
+		$shell_arguments = "mysqldump --no-data -h$dbserver -u$user -p$password $dbname";
+		if (!strpos($shell_arguments,"--no-data"))
+			throw new Exception("wrong database dump arguments"); 
+		$struct = shell_exec($shell_arguments);
+		if (strlen($struct) > 1000000)
+			throw new Exception("something went terribly wrong while dumping table structures");
+		if (stripos($struct,"dumping data") !== FALSE)
+			throw new Exception("something went terribly wrong while dumping table structures");
 
 		# Remove the "AUTO_INCREMENT=..." values. They break the diffs.
 

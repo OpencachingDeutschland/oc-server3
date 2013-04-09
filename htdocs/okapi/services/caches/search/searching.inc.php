@@ -570,6 +570,9 @@ class SearchAssistant
 	 *    the query,
 	 *  - order_by - list or SQL clauses to be used with ORDER BY,
 	 *  - limit - maximum number of cache codes to be returned.
+	 *
+	 * Important: YOU HAVE TO make sure that all options are properly sanitized
+	 * for SQL queries! I.e. they cannot contain unescaped user-supplied data.
 	 */
 	public static function get_common_search_result($options)
 	{

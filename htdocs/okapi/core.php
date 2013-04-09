@@ -778,7 +778,7 @@ class Okapi
 {
 	public static $data_store;
 	public static $server;
-	public static $revision = 672; # This gets replaced in automatically deployed packages
+	public static $revision = 694; # This gets replaced in automatically deployed packages
 	private static $okapi_vars = null;
 
 	/** Get a variable stored in okapi_vars. If variable not found, return $default. */
@@ -1716,10 +1716,10 @@ class Cache
 			# just replace it with a big value.
 			$timeout = 100*365*86400;
 		}
-		$entries = array();
+		$entries_escaped = array();
 		foreach ($dict as $key => $value)
 		{
-			$entries[] = "(
+			$entries_escaped[] = "(
 				'".mysql_real_escape_string($key)."',
 				'".mysql_real_escape_string(gzdeflate(serialize($value)))."',
 				date_add(now(), interval '".mysql_real_escape_string($timeout)."' second)
@@ -1727,7 +1727,7 @@ class Cache
 		}
 		Db::execute("
 			replace into okapi_cache (`key`, value, expires)
-			values ".implode(", ", $entries)."
+			values ".implode(", ", $entries_escaped)."
 		");
 	}
 

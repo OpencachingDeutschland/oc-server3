@@ -192,12 +192,14 @@
 				</ul>
 			</li>
 			<li>
-				<p><b>preview_image</b> - This is either <b>null</b> or a dictionary describing
-				an image, which has been marked by the owner as <em>preview image</em>. You are
-				encouraged to display it as a 'teaser' for this cache.
-				The structure of the dictionary is the same as in the <b>images</b> field above.</p>
-				<p>The preview image is no additional image but one of those which
-				are included in the <b>images</b> list.</p>
+				<p><b>preview_image</b> - On some installations, owners may select one of the <b>images</b>
+				(see above) as a preview image. You are encouraged to display it as a 'teaser'
+				for this cache. On other installations this functionality is disabled and you
+				will always get the <b>null</b> value here.</p>
+
+				<p>The value of <b>preview_image</b> is either <b>null</b> or a dictionary describing
+				an image. The structure of this dictionary is the same as of a single entry on
+				the <b>images</b> list described above.</p>
 			</li>
 			<li>
 				<p><b>attrnames</b> - list of names of attributes of the cache; the language will

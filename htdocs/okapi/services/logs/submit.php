@@ -100,7 +100,7 @@ class WebService
 			throw new InvalidParam('recommend', "Unknown option: '$recommend'.");
 		$recommend = ($recommend == 'true');
 		if ($recommend && $logtype != 'Found it')
-			throw new BadRequest(_("Recommending is allowed only for 'Found it' logtypes."));
+			throw new BadRequest("Recommending is allowed only for 'Found it' logtypes.");
 
 		$needs_maintenance = $request->get_parameter('needs_maintenance');
 		if (!$needs_maintenance) $needs_maintenance = 'false';
@@ -165,10 +165,6 @@ class WebService
 
 			if ($comment_format == 'plaintext')
 			{
-				# If we would like to be compatible with old OCDE/OC.nl installation,
-				# "$comment_format == 'auto'" should go here, too. But we must choose
-				# to resemble either old OCDE or OCPL behaviour and opt for OCPL compatibility.
-
 				$formatted_comment = htmlspecialchars($comment, ENT_QUOTES);
 				$formatted_comment = nl2br($formatted_comment);
 				$value_for_text_html_field = 0;
@@ -177,9 +173,9 @@ class WebService
 			{
 				if ($comment_format == 'auto')
 				{
-					# This does not make sense on HTML comments, but it resembles the
-					# OCPL implementation and is needed for full compatibility with existing
-					# OKAPI clients.
+					# 'Auto' is for backward compatibility. Before the "comment_format"
+					# was introduced, OKAPI used a weird format in between (it allowed
+					# HTML, but applied nl2br too).
 
 					$formatted_comment = nl2br($comment);
 				}

@@ -174,17 +174,17 @@ class ReplicateListener
 		# Most of these tiles aren't cached at all. We need to update
 		# only the cached ones.
 
-		$alternatives = array();
+		$alternatives_escaped = array();
 		foreach ($tiles_to_update as $coords)
 		{
 			list($z, $x, $y) = $coords;
-			$alternatives[] = "(
+			$alternatives_escaped[] = "(
 				z = '".mysql_real_escape_string($z)."'
 				and x = '".mysql_real_escape_string($x)."'
 				and y = '".mysql_real_escape_string($y)."'
 			)";
 		}
-		if (count($alternatives) > 0)
+		if (count($alternatives_escaped) > 0)
 		{
 			Db::execute("
 				replace into okapi_tile_caches (
@@ -197,11 +197,11 @@ class ReplicateListener
 					'".mysql_real_escape_string($row[2])."',
 					'".mysql_real_escape_string($row[3])."',
 					'".mysql_real_escape_string($row[4])."',
-					".(($row[5] === null) ? "null" : $row[5]).",
+					".(($row[5] === null) ? "null" : "'".mysql_real_escape_string($row[5])."'").",
 					'".mysql_real_escape_string($row[6])."'
 				from okapi_tile_status
 				where
-					(".implode(" or ", $alternatives).")
+					(".implode(" or ", $alternatives_escaped).")
 					and status in (1,2)
 			");
 
@@ -212,7 +212,7 @@ class ReplicateListener
 				update okapi_tile_status
 				set status=2
 				where
-					(".implode(" or ", $alternatives).")
+					(".implode(" or ", $alternatives_escaped).")
 					and status=1
 			");
 		}
@@ -231,7 +231,7 @@ class ReplicateListener
 			set
 				status = '".mysql_real_escape_string($row[3])."',
 				type = '".mysql_real_escape_string($row[4])."',
-				rating = ".(($row[5] === null) ? "null" : $row[5]).",
+				rating = ".(($row[5] === null) ? "null" : "'".mysql_real_escape_string($row[5])."'").",
 				flags = '".mysql_real_escape_string($row[6])."'
 			where
 				cache_id = '".mysql_real_escape_string($row[0])."'

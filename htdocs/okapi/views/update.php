@@ -146,7 +146,7 @@ class View
 			where
 				sh.consumer_key = c.`key`
 				and sh.service_name in ('".implode("','", array_map('mysql_real_escape_string', $service_names))."')
-				".(($days != null) ? "and sh.period_start > date_add(now(), interval -".$days." day)" : "")."
+				".(($days != null) ? "and sh.period_start > date_add(now(), interval '".mysql_real_escape_string(-$days)."' day)" : "")."
 		");
 	}
 

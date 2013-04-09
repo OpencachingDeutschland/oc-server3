@@ -83,27 +83,30 @@ class TileTree
 		$tile_upper_x = $x << 8;
 		$tile_leftmost_y = $y << 8;
 
+		$zoom_escaped = "'".mysql_real_escape_string($zoom)."'";
+		$tile_upper_x_escaped = "'".mysql_real_escape_string($tile_upper_x)."'";
+		$tile_leftmost_y_escaped = "'".mysql_real_escape_string($tile_leftmost_y)."'";
 		return Db::query("
 			select
 				otc.cache_id,
-				cast(otc.z21x >> (21 - $zoom) as signed) - $tile_upper_x as px,
-				cast(otc.z21y >> (21 - $zoom) as signed) - $tile_leftmost_y as py,
+				cast(otc.z21x >> (21 - $zoom_escaped) as signed) - $tile_upper_x_escaped as px,
+				cast(otc.z21y >> (21 - $zoom_escaped) as signed) - $tile_leftmost_y_escaped as py,
 				otc.status, otc.type, otc.rating, otc.flags, count(*)
 			from
 				okapi_tile_caches otc,
 				okapi_search_results osr
 			where
-				z = '".mysql_real_escape_string($zoom)."'
+				z = $zoom_escaped
 				and x = '".mysql_real_escape_string($x)."'
 				and y = '".mysql_real_escape_string($y)."'
 				and otc.cache_id = osr.cache_id
 				and osr.set_id = '".mysql_real_escape_string($set_id)."'
 			group by
-				z21x >> (3 + (21 - $zoom)),
-				z21y >> (3 + (21 - $zoom))
+				z21x >> (3 + (21 - $zoom_escaped)),
+				z21y >> (3 + (21 - $zoom_escaped))
 			order by
-				z21y >> (3 + (21 - $zoom)),
-				z21x >> (3 + (21 - $zoom))
+				z21y >> (3 + (21 - $zoom_escaped)),
+				z21x >> (3 + (21 - $zoom_escaped))
 		");
 	}
 
@@ -161,7 +164,7 @@ class TileTree
 						'".mysql_real_escape_string($row[2])."',
 						'".mysql_real_escape_string($row[3])."',
 						'".mysql_real_escape_string($row[4])."',
-						".(($row[5] === null) ? "null" : $row[5]).",
+						".(($row[5] === null) ? "null" : "'".mysql_real_escape_string($row[5])."'").",
 						'".mysql_real_escape_string($row[6])."'
 					);
 				");

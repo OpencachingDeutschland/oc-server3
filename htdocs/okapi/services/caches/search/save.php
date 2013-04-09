@@ -80,6 +80,10 @@ class WebService
 		return Okapi::formatted_response($request, $result);
 	}
 
+	/**
+	 * Important: YOU HAVE TO make sure $tables and $where_conds don't contain
+	 * unescaped user-supplied data!
+	 */
 	public static function get_set($tables, $where_conds, $min_store, $ref_max_age)
 	{
 		# Compute the "params hash".

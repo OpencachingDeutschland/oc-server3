@@ -308,7 +308,7 @@ class CacheCleanupCronJob extends Cron5Job
 
 		Db::execute("
 			update okapi_cache
-			set score = score * $multiplier
+			set score = score * '".mysql_real_escape_string($multiplier)."'
 			where score is not null
 		");
 		Db::execute("
@@ -333,7 +333,7 @@ class CacheCleanupCronJob extends Cron5Job
 			delete from okapi_cache
 			where
 				score is not null
-				and score < $limit
+				and score < '".mysql_real_escape_string($limit)."'
 		");
 		Db::query("optimize table okapi_cache");
 
@@ -385,18 +385,18 @@ class StatsWriterCronJob extends PrerequestCronJob
 					'".mysql_real_escape_string($row['user_id'])."',
 					'".mysql_real_escape_string($row['period_start'])."',
 					'".mysql_real_escape_string($row['service_name'])."',
-					".$row['calls'].",
-					".(($row['calltype'] == 'http') ? $row['calls'] : 0).",
-					".$row['runtime'].",
-					".(($row['calltype'] == 'http') ? $row['runtime'] : 0)."
+					'".mysql_real_escape_string($row['calls'])."',
+					'".mysql_real_escape_string(($row['calltype'] == 'http') ? $row['calls'] : 0)."',
+					'".mysql_real_escape_string($row['runtime'])."',
+					'".mysql_real_escape_string(($row['calltype'] == 'http') ? $row['runtime'] : 0)."'
 				)
 				on duplicate key update
 					".(($row['calltype'] == 'http') ? "
-						http_calls = http_calls + ".$row['calls'].",
-						http_runtime = http_runtime + ".$row['runtime'].",
+						http_calls = http_calls + '".mysql_real_escape_string($row['calls'])."',
+						http_runtime = http_runtime + '".mysql_real_escape_string($row['runtime'])."',
 					" : "")."
-					total_calls = total_calls + ".$row['calls'].",
-					total_runtime = total_runtime + ".$row['runtime']."
+					total_calls = total_calls + '".mysql_real_escape_string($row['calls'])."',
+					total_runtime = total_runtime + '".mysql_real_escape_string($row['runtime'])."'
 			");
 		}
 		Db::execute("delete from okapi_stats_temp;");

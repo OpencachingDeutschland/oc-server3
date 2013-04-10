@@ -6,7 +6,7 @@
 {* OCSTYLE *}
 <div class="content2-pagetitle">
 	<img src="resource2/{$opt.template.style}/images/cacheicon/traditional.gif" style="align: left; margin-right: 10px;" width="32" height="32" alt="" />
-	{t}Latest logs entries{/t}
+	{t}Latest logs entries{/t} {if $rest}{t}Without Germany{/t}{/if}
 </div>
 
 <table width="100%" class="table">

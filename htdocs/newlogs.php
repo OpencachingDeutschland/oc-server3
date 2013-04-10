@@ -6,8 +6,18 @@
  ***************************************************************************/
 
 	require('./lib2/web.inc.php');
-	$tpl->name = 'newlogs';
-	$tpl->menuitem = MNU_START_NEWLOGS;
+	if (@$newlogs_rest)
+	{
+		$tpl->name = 'newlogsrest';
+		$tpl->menuitem = MNU_START_NEWLOGSREST;
+		$exclude_country = 'DE';
+	}
+	else
+	{
+		$tpl->name = 'newlogs';
+		$tpl->menuitem = MNU_START_NEWLOGS;
+		$exclude_country = '*';
+	}
 
 	$tpl->caching = true;
 	$tpl->cache_lifetime = 300;
@@ -15,7 +25,7 @@
 	if (!$tpl->is_cached())
 	{
 		sql_temp_table_slave('loglist');
-		sql_slave("CREATE TEMPORARY TABLE &loglist (`id` INT(11) PRIMARY KEY) SELECT `cache_logs`.`id` FROM `cache_logs` INNER JOIN `caches` ON `cache_logs`.`cache_id`=`caches`.`cache_id` INNER JOIN `cache_status` ON `caches`.`status`=`cache_status`.`id` WHERE `cache_status`.`allow_user_view`=1 ORDER BY `cache_logs`.`date_created` DESC LIMIT 200");
+		sql_slave("CREATE TEMPORARY TABLE &loglist (`id` INT(11) PRIMARY KEY) SELECT `cache_logs`.`id` FROM `cache_logs` INNER JOIN `caches` ON `cache_logs`.`cache_id`=`caches`.`cache_id` INNER JOIN `cache_status` ON `caches`.`status`=`cache_status`.`id` WHERE `cache_status`.`allow_user_view`=1 AND `caches`.`country`<>'&1' ORDER BY `cache_logs`.`date_created` DESC LIMIT 200", $exclude_country);
 
 		if ($opt['logic']['new_logs_per_country'])
 			$sqlOrderBy = '`countries`.`de` ASC, ';

@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OKAPI\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-04 16:09+0100\n"
-"PO-Revision-Date: 2013-04-04 16:13+0100\n"
+"POT-Creation-Date: 2013-04-10 01:12+0100\n"
+"PO-Revision-Date: 2013-04-10 01:14+0100\n"
 "Last-Translator: Wojciech Rygielski <rygielski@mimuw.edu.pl>\n"
 "Language-Team: \n"
 "Language: pl_PL\n"
@@ -19,18 +19,18 @@ msgstr ""
 "X-Generator: Poedit 1.5.5\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: services/caches/geocaches.php:847
+#: services/caches/geocaches.php:846
 msgid "Stage"
 msgstr "Etap"
 
-#: services/caches/geocaches.php:1014
+#: services/caches/geocaches.php:1009
 #, php-format
 msgid ""
 "This <a href='%s'>geocache</a> description comes from the <a href='%s'>%s</"
 "a> site."
 msgstr "Opis <a href='%s'>skrzynki</a> pochodzi z serwisu <a href='%s'>%s</a>."
 
-#: services/caches/geocaches.php:1024
+#: services/caches/geocaches.php:1021
 #, php-format
 msgid ""
 "&copy; <a href='%s'>%s</a>, <a href='%s'>%s</a>, <a href='http://"
@@ -41,7 +41,7 @@ msgstr ""
 "creativecommons.org/licenses/by-nc-nd/3.0/de/deed.pl'>CC-BY-NC-ND</a>, w "
 "dniu %s. Prawa autorskie wpisów do logów należą do ich autorów."
 
-#: services/caches/geocaches.php:1035
+#: services/caches/geocaches.php:1032
 #, php-format
 msgid ""
 "&copy; <a href='%s'>%s</a>, <a href='%s'>%s</a>, <a href='http://"
@@ -122,10 +122,6 @@ msgstr ""
 "Niestety Twoja ocena skrzynki nie została zapisana, ponieważ %s nie prowadzi "
 "oceny skrzynek."
 
-#: services/logs/submit.php:103
-msgid "Recommending is allowed only for 'Found it' logtypes."
-msgstr "Rekomendacje są dozwolone jedynie z wpisem \"Znaleziona\"."
-
 #: services/logs/submit.php:113
 #, php-format
 msgid ""
@@ -155,11 +151,11 @@ msgstr "Ta skrzynka wymaga podania hasła. Nie wpisałeś go."
 msgid "Invalid password!"
 msgstr "Niepoprawne hasło!"
 
-#: services/logs/submit.php:264
+#: services/logs/submit.php:260
 msgid "You have already submitted a log entry with exactly the same contents."
 msgstr "Już opublikowałeś wcześniej wpis z dokładnie taką samą treścią."
 
-#: services/logs/submit.php:283
+#: services/logs/submit.php:279
 msgid ""
 "You have already submitted a \"Found it\" log entry once. Now you may submit "
 "\"Comments\" only!"
@@ -167,26 +163,26 @@ msgstr ""
 "Już opublikowałeś jeden wpis typu \"Znaleziona\" dla tej skrzynki. Teraz "
 "możesz dodawać jedynie \"Komentarze\"!"
 
-#: services/logs/submit.php:285
+#: services/logs/submit.php:281
 msgid "You are the owner of this cache. You may submit \"Comments\" only!"
 msgstr ""
 "Jesteś właścicielem tej skrzynki. Możesz przesyłać jedynie \"Komentarze\"."
 
-#: services/logs/submit.php:303
+#: services/logs/submit.php:299
 msgid "You have already rated this cache once. Your rating cannot be changed."
 msgstr "Już oceniłeś tę skrzynkę. Ocena nie może być zmieniona."
 
-#: services/logs/submit.php:320
+#: services/logs/submit.php:316
 msgid "You have already recommended this cache once."
 msgstr "Już raz zarekomendowałeś tę skrzynkę."
 
-#: services/logs/submit.php:327
+#: services/logs/submit.php:323
 msgid "You don't have any recommendations to give. Find more caches first!"
 msgstr ""
 "Aktualnie nie możesz wystawić kolejnej rekomendacji. Znajdź najpierw więcej "
 "skrzynek!"
 
-#: services/logs/submit.php:495
+#: services/logs/submit.php:491
 msgid "Your cache log entry was posted successfully."
 msgstr "Twój wpis do logbooka został opublikowany pomyślnie."
 
@@ -310,7 +306,7 @@ msgid ""
 "external applications\n"
 "\t\t\t\t\taccess to your <b>%s</b> account. Currently no applications are "
 "authorized to act\n"
-"\t\t\t\t\ton your behalf. Once you start using external OpenCaching "
+"\t\t\t\t\ton your behalf. Once you start using external Opencaching "
 "applications, they will appear here.</p>\n"
 "\t\t\t\t"
 msgstr ""
@@ -319,8 +315,11 @@ msgstr ""
 "aplikacjom\n"
 "dostęp do Twojego konta <b>%s</b>. Aktualnie nie pozwalasz żadnej aplikacji "
 "na działania\n"
-"w Twoim imieniu. Jeśli kiedyś dodasz jakieś aplikacje, to ich lista pojawi "
-"się tutaj.</p>"
+"w Twoim imieniu. Gdy zaczniesz korzystać z zewnętrznych aplikacji, ich lista "
+"pojawi się tutaj.</p>"
+
+#~ msgid "Recommending is allowed only for 'Found it' logtypes."
+#~ msgstr "Rekomendacje są dozwolone jedynie z wpisem \"Znaleziona\"."
 
 #~ msgid ""
 #~ "This cache is archived. Only admins and the owner are allowed to add a "

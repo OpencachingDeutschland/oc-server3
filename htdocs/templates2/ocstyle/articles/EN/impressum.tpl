@@ -245,11 +245,8 @@
 		that you may reproduce, distribute and publish it. When doing this, the author has to 
 		be named in the form given below. The content  must not be used for any commercial 
 		purpose, and you must not alter, transform, or build upon it.
-	</p>
-
-	<p>&nbsp;</p>
-
-	<p>
+		<br />
+		<br />
 		The form of attribution is:
 	</p>
 	<p style="font-weight: 800;">
@@ -257,8 +254,13 @@
 	</p>
 	<p>
 		The date refers to the day when the data was downloaded from www.opencaching.de, and it may be omitted for photos and log entries.
-	</p>
-	
+		<br />
+		<br />
+		Due to some questions from users, we would like to point out that the Opencaching.de
+		data license is, of course, no "exclusive" license. This means that every user may
+		publish her contents &ndash; on the Opencaching.de website or somewhere else &ndash; under
+		additional licenses (<em>multiple licensing</em>). This may be noted in the geocache
+		descriptions and logs.</p>
 	<p>&nbsp;</p>
 </div>
 

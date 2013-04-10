@@ -94,11 +94,15 @@
 		exit;
 	}
 
-	// aufräumen ... 24h nach letztem Abruf
+	// cleanup ... 24h after last call
 	$cleanerdate = date($sDateformat, time() - 86400);
 	$rs = sql("SELECT `id` FROM `xmlsession` WHERE `last_use`<'&1' AND `cleaned`=0", $cleanerdate);
 	while ($r = sql_fetch_array($rs))
 	{
+		// This loop can be started simultaneously by multiple synchronous XML
+		// requests, which both try to delete entries, files and directories.
+		// Therefore errors must be gracefully ignored.
+
 		// xmlsession_data löschen
 		sql('DELETE FROM `xmlsession_data` WHERE `session_id`=&1', $r['id']);
 
@@ -1080,6 +1084,10 @@ function user_id2uuid($id)
 
 function unlinkrecursiv($path)
 {
+	// This loop can be started simultaneously by multiple synchronous XML
+	// requests, which both try to delete entries, files and directories.
+	// Therefore errors must be gracefully ignored.
+
 	if (mb_substr($path, -1) != '/') $path .= '/';
 
 	$notunlinked = 0;
@@ -1104,7 +1112,7 @@ function unlinkrecursiv($path)
 					    (mb_substr($file, -3) == '.gz') || 
 					    (mb_substr($file, -4) == '.bz2') || 
 					    (mb_substr($file, -4) == '.xml'))
-						unlink($path . $file);
+						@unlink($path . $file);
 					else
 						$notunlinked++;
 				}
@@ -1115,7 +1123,7 @@ function unlinkrecursiv($path)
 	
 	if ($notunlinked == 0)
 	{
-		rmdir($path);
+		@rmdir($path);
 		return true;
 	}
 	else

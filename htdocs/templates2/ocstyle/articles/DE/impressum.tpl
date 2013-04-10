@@ -300,7 +300,7 @@
 		<br />
 		Weitere Erläuterungen zur Datenlizenz gibt es im <a href="http://wiki.opencaching.de/index.php/Datenlizenz" target="_blank">Wiki</a>.</p>
 		<p>Aufgrund einiger Rückfragen weisen wir darauf hin, dass die Opencaching.de-Datenlizenz
-		selbstverstänlich keine &bdquo;Exklusivlizenz&ldquo; ist. Das heißt, es steht jedem Nutzer frei,
+		selbstverständlich keine &bdquo;Exklusivlizenz&ldquo; ist. Das heißt, es steht jedem Nutzer frei,
 		seine Inhalte auf Opencaching.de oder an anderer Stelle auch unter weiteren Lizenzen zu
 		veröffentlichen (<em>Mehrfachlizenzierung</em>) und dies auch in den Cachelistings oder Logs zu vermerken.</p>
 	

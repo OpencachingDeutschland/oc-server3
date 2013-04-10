@@ -52,7 +52,7 @@
 				$url = str_replace('{style}', $opt['template']['style'], $url);
 				$newscontent = read_file($url, $opt['news']['maxsize']);
 			*/
-			$newscontent = RSSParser::parse($opt['news']['count'],$opt['news']['include']);
+			$newscontent = RSSParser::parse($opt['news']['count'],$opt['news']['include'], false);
 
 			$tpl->assign('news', $newscontent);
 			$tpl->assign('extern_news', true);
@@ -72,7 +72,7 @@
 		   * requires $opt['forum']['url'] in settings: RSS-feed-URL of the forum
 		   */
 		  $tpl->assign('phpbb_enabled', true);
-		  $forumcontent = RSSParser::parse($opt['forum']['count'], $opt['forum']['url']);
+		  $forumcontent = RSSParser::parse($opt['forum']['count'], $opt['forum']['url'], false);
 		  $tpl->assign('forum',$forumcontent);
     }
     else

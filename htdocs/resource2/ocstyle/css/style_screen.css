@@ -1399,8 +1399,9 @@ div#havefound {
 }
 
 /* RSS feeds */
-#blog div.newsblock { margin-left:00px }
+#blog div.newsblock { margin-left:20px }
 #forum div.newsblock { margin-left:20px }
+
 #blog div.rsstext {margin: 0px 30px 0.5em 0; padding: 0px; line-height: 1.3em; font-family: arial, sans serif; font-size: 12px; }
 .quoteheader, .topslice_quote, .bbc_standard_quote  { display:none; }
 #forum div.rsstext {margin: 0px 30px 0.5em 0px; padding: 0px; line-height: 1.3em; font-family: arial, sans serif; font-size: 12px; }

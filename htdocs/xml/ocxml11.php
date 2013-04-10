@@ -1085,28 +1085,33 @@ function unlinkrecursiv($path)
 	$notunlinked = 0;
 
 	$hDir = opendir($path);
-	while (false !== ($file = readdir($hDir)))
+	if ($hDir === FALSE)
+		++$notunlinked;
+	else
 	{
-		if (($file != '.') && ($file != '..'))
+		while (false !== ($file = readdir($hDir)))
 		{
-			if (is_dir($path . $file))
+			if (($file != '.') && ($file != '..'))
 			{
-				if (unlinkrecursiv($path . $file . '/') == false)
-					$notunlinked++;
-			}
-			else
-			{
-				if ((mb_substr($file, -4) == '.zip') || 
-				    (mb_substr($file, -3) == '.gz') || 
-				    (mb_substr($file, -4) == '.bz2') || 
-				    (mb_substr($file, -4) == '.xml'))
-					unlink($path . $file);
+				if (is_dir($path . $file))
+				{
+					if (unlinkrecursiv($path . $file . '/') == false)
+						$notunlinked++;
+				}
 				else
-					$notunlinked++;
+				{
+					if ((mb_substr($file, -4) == '.zip') || 
+					    (mb_substr($file, -3) == '.gz') || 
+					    (mb_substr($file, -4) == '.bz2') || 
+					    (mb_substr($file, -4) == '.xml'))
+						unlink($path . $file);
+					else
+						$notunlinked++;
+				}
 			}
 		}
+		closedir($hDir);
 	}
-	closedir($hDir);
 	
 	if ($notunlinked == 0)
 	{

@@ -10,7 +10,7 @@ class RSSParser {
 	 * @param string $url url of the feed to parse
 	 * @return string $item feeditems as HTML-string
 	 */
-	public static function parse($items,$url) {
+	public static function parse($items,$url,$includetext) {
 		global $translate;
 		
     if ($items <= 0)
@@ -27,6 +27,8 @@ class RSSParser {
 			// output
 			$html = '<div class="buffer" style="width: 500px;height: 2px;">&nbsp;</div>'."\n";
 			$html .= '<div class="newsblock">';
+			if (!$includetext)
+				$html .= "<table class='narrowtable' style='margin-top:0'>\n";
 			
 			// get xml-data
 			$data = @file_get_contents($url);
@@ -52,10 +54,20 @@ class RSSParser {
 						} else {
 							
 							// add html
-							$html .= '<p class="content-title-noshade-size15" style="display: inline;">'."\n";
-							$html .= strftime('%e. %B %Y',strtotime($item->pubDate)).' - '. $item->title;
-							$html .= '</p> <p style="line-height: 1.6em;display: inline;">&emsp;[<b><a class="link" href="'.$item->link.'">mehr...</a></b>]</p>'."\n";
-							$html .= '<div class="rsstext">'.$item->description.'</div>'."\n";
+							if ($includetext)
+							{
+								$html .= '<p class="content-title-noshade-size15" style="display: inline;">'."\n";
+								$html .= strftime('%e. %B %Y',strtotime($item->pubDate)).' - '. $item->title;
+								$html .= '</p> <p style="line-height: 1.6em;display: inline;">&emsp;[<b><a class="link" href="'.$item->link.'">mehr...</a></b>]</p>'."\n";
+								$html .= '<div class="rsstext">'.$item->description.'</div>'."\n";
+							}
+							else
+							{
+								$html .= '<tr><td style="text-align:right">' . strftime('%e. %B %Y',strtotime($item->pubDate)).'</td>'; 
+								$html .= '<td><a class="links" href="'.$item->link.'">';
+								$html .= $item->title;
+								$html .= '</td></tr>';
+							}
 						}
 						
 						// increment counter
@@ -63,6 +75,8 @@ class RSSParser {
 					}
 				
 					// finish html
+					if (!$includetext)
+						$html .= "</table>";
 					$html .= "</div>";
 					$html .= '<div class="buffer" style="width: 500px;">&nbsp;</div>'."\n";
 				}

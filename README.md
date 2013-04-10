@@ -5,15 +5,10 @@ Opencaching.de Code Repository
 This repository contains the website's code, including all third-party libraries
 needed to run it. It is one of two major
 [Opencaching code forks](http://wiki.opencaching.de/index.php/Datei:Codegenerationen.png); 
-the other one is [Opencaching.pl](http://code.google.com/p/opencaching-pl/).
-
-Feel free to use it under the provided
+the other one is [Opencaching.pl](http://code.google.com/p/opencaching-pl/). Feel free to use it under the provided
 [license terms](https://github.com/OpencachingDeutschland/oc-server3/blob/master/doc/license.txt)
 for setting up your own open and free Geocaching listing service! The code can easily be
-translalted to other languages, as all translations are kept at
-[two](https://raw.github.com/OpencachingDeutschland/oc-server3/master/htdocs/doc/sql/static-data/data.sql)
-[places](https://github.com/OpencachingDeutschland/oc-server3/tree/master/htdocs/templates2/ocstyle/articles)
-and all locale settings in [one file](https://github.com/OpencachingDeutschland/oc-server3/blob/master/htdocs/config2/locale.inc.php).
+translated to other languages.
 
 Your contributions to this project are welcome - you may contact the team in the
 [Opencaching network forum](http://forum.opencaching-network.org/) if you like to

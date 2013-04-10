@@ -279,26 +279,30 @@
 	<p>
 		<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/3.0/de/">
 		<img alt="Creative Commons Lizenzvertrag" style="border: 0; padding-right: 15px; padding-bottom: 15px; float: left;" src="http://i.creativecommons.org/l/by-nc-nd/3.0/de/88x31.png" /></a>
-		Ab dem 7.&nbsp;April 2013 stehen alle durch die Benutzer auf Opencaching.de eingebrachten Inhalte unter 
-		der Lizenz "Creative Commons Attribution-NonCommercial-NoDerivs 3.0", auf Deutsch 
-		"Namensnennung-NichtKommerziell-KeineBearbeitung 3.0" (CC BY-NC-ND 3.0), das hei&szlig;t, 
-		Sie d&uuml;rfen die Inhalte vervielf&auml;ltigen, verbreiten und &ouml;ffentlich 
-		zug&auml;nglich machen. Dabei ist die Namensnennung des Autors/Rechteinhabers in der 
+		Alle durch die Benutzer auf Opencaching.de eingebrachten Inhalte stehen unter 
+		der Lizenz &bdquo;Creative Commons Attribution-NonCommercial-NoDerivs 3.0&ldquo;, auf Deutsch: 
+		&bdquo;Namensnennung-NichtKommerziell-KeineBearbeitung 3.0&ldquo; (CC BY-NC-ND 3.0).
+		Das heißt, die Inhalte dürfen vervielf&auml;ltigt, verbreitet und &ouml;ffentlich 
+		zug&auml;nglich gemacht werden. Dabei ist die Namensnennung des Autors/Rechteinhabers in der 
 		unten angegebenen Form zu wahren. Eine kommerzielle Nutzung der Inhalte ist in 
-		jeglicher Form ausgeschlossen, ebenso d&uuml;rfen keine Ver&auml;nderungen/Abwandlungen 
+		jeglicher Form ausgeschlossen; ebenso d&uuml;rfen keine Ver&auml;nderungen/Abwandlungen 
 		der Inhalte vorgenommen werden.
 		<br />
 		<br />
 		Für die Namensnennung ist die Form
 	</p>
 	<p style="font-weight: 800;">
-		&copy; $USERNAME, www.opencaching.de, CC-BY-NC-ND, Stand: $DATUM
+		&copy; $USERNAME, Opencaching.de, CC-BY-NC-ND, Stand: $DATUM
 	</p>
 	<p>
 		zu verwenden, wobei das Datum sich auf den Abrufzeitpunkt von www.opencaching.de bezieht. Bei Fotos und Logeintr&auml;gen kann vom Datum abgesehen werden.
 		<br />
 		<br />
 		Weitere Erläuterungen zur Datenlizenz gibt es im <a href="http://wiki.opencaching.de/index.php/Datenlizenz" target="_blank">Wiki</a>.</p>
+		<p>Aufgrund einiger Rückfragen weisen wir darauf hin, dass die Opencaching.de-Datenlizenz
+		selbstverstänlich keine &bdquo;Exklusivlizenz&ldquo; ist. Das heißt, es steht jedem Nutzer frei,
+		seine Inhalte auf Opencaching.de oder an anderer Stelle auch unter weiteren Lizenzen zu
+		veröffentlichen (<em>Mehrfachlizenzierung</em>) und dies auch in den Cachelistings oder Logs zu vermerken.</p>
 	
 	<p>&nbsp;</p>
 </div>

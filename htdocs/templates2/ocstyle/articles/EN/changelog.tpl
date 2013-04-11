@@ -10,7 +10,48 @@
 
 	<p>Opencaching.de Version 1.0 went online in August 2005 und was steadily enhanced in the following years, switching to Version 2. In the beginning of 2011, development was halted, until the new Opencaching Deutschland association restarted it in July 2012 at Version&nbsp;3.0.</p>
 
-	<p>This page lists all changes since version 3.0.</p>
+	<p>This page lists all changes since version 3.0. Some small items have been omitted here.</p>
+	<br />
+
+	<p><strong>Release  3.0.6</strong> &ndash; April 13, 2013</p>
+	<p>New:</p>
+	<ul>
+		<li>logging with time</li>
+		<li>new menu option "About Opencaching" on the start page</li>
+		<li>new menu option "New Logs / without Germany" on the start page</li>
+		<li>new menu option "Public profile" on the profile page</li>
+		<li>logout button in full screen map</li>
+		<li>Data license is displayed on the left hand of all pages and is deliverd through GPX and TXT download and "XML interface".</li>
+		<li>symbols for locked and unpublished caches on profile pages</li>
+		<li>RSS news feed link on the start page</li>
+		<li>"Listing vandalism" can be reverted by the Opencaching.de support team.</li>
+	</ul>
+
+	<p>Changed / improved:</p>
+	<ul>
+		<li>design improvements in the new caches and logs lists</li>
+		<li>OC-Code short-links (see r3.0.1) are included in notification emails.</li>
+		<li>publishing of duplicate logs is prevented</li>
+		<li>better assignment of attributes to GC attributes in GPX files</li>
+		<li>changed tides attribute in "not at high water level"</li>
+		<li>new Opencaching.de logo in listing printouts</li>
+		<li>reduced news and forum post display on the start page to headlines-only; double number of display posts</li>
+		<li>updated team list</li>
+		<li>The sent-email-counter in the user profile has been discarded for technical reasons.</li>
+  </ul>
+
+	<p>Fixed:</p>
+	<ul>
+		<li>Enabling ignored caches on the map works (for the first time).</li>
+		<li>Log passwords now also work with event caches.</li>
+		<li>Changes of additional waypoints and pictures update the listing last-modification date.</li>
+		<li>Cache search sometimes did not work after logout.</li>
+		<li>Additional waypoint type (e.g. "Parking area") is delivered in GPX files.</li>
+		<li>When deleting logs, pictures will be deleted, too, instead of remaining somwhere in the system.</li>
+		<li>fixed Ocprop duplicate logs problem</li>
+		<li>fixed log editor language on the English, Italian and Spanish site</li>
+		<li>translated cache-location country names on the English, Italian and Spanish site</li>
+  </ul>
 	<br />
 
 	<p><strong>Releaas 3.0.5</strong> &ndash; March 16, 2013</p>
@@ -62,10 +103,10 @@
 		<li>fixed nano size selection in search form</li>
 	</ul>
 
-	 <p><strong>Release  3.0.4</strong> &ndash; February 17, 2013
+	 <p><strong>Release 3.0.4</strong> &ndash; February 17, 2013
    <p>New:</p>
 	 <ul>
-     <li>new cache size &bdquo;nano&ldquo;</li>
+     <li>new cache size "nano"</li>
      <li>GPX files downloaded from Opencaching.de or sent to GPS devices contain additional waypoints</li>
      <li>Picturs (including spoilers) from cache listings are embedded in GPX files. You will need internet connection to view them in field.</li>
      <li><a href="articles.php?page=impressum#datalicense">data license CC-BY-NC-ND</a></li>
@@ -95,7 +136,7 @@
 	 <p><strong>Release  3.0.3</strong> &ndash; November 18, 2012</p>
    <p>New:</p>
 	 <ul>
-     <li>attribute &bdquo;only at certain seasons&ldquo;</li>
+     <li>attribute "only at certain seasons"</li>
      <li>new forum posts are listed on start page</li>
    </ul>
 
@@ -161,7 +202,7 @@
 	 <ul>
 	   <li>URL shortener for direct cache listing access, e.g. <a href="http://www.opencaching.de/OCD93B">http://www.opencaching.de/OCD93B</a></li>
 	   <li>englisch translation of <a href="./articles.php?page=geocaching">About Geocaching</a>, <a href="./articles.php?page=cacheinfo">Cache descriptions</a>, <a href="./articles.php?page=impressum">Legal information</a>, <a href="./articles.php?page=dsb">Privacy statement</a>, <a href="./articles.php?page=donations">Donations</a>, <a href="./articles.php?page=contact">Contact</a> and <a href="./articles.php?page=team">Team members' list</a> pages; team list, legal information and donations pages have been updated</li>
-	   <li>display of &bdquo;You have attended this event&ldquo; in map popups</li>
+	   <li>display of "You have attended this event" in map popups</li>
 	   <li>changelog</li>
 	 </ul>
 	 <p>Changed / improved:</p>
@@ -177,7 +218,7 @@
 	 <p>Fixed:</p>
 	 <ul>
 	   <li>cache icon scaling in exported KML files</li>
-	   <li>correct default country for new caches, fixed &bdquo;Belgium/Afghanistan problem&ldquo;</li>
+	   <li>correct default country for new caches, fixed "Belgium/Afghanistan problem"</li>
 	   <li>first log was missing in print view</li>
 	   <li>display of event attenders' count</li>
 	   <li>display of cache type icon for unpublished caches at <a href="./myhome.php">user profile</a> &rarr; Show all</li>

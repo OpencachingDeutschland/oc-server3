@@ -10,7 +10,48 @@
 
 	<p>Opencaching Version 1.0 ging im August 2005 online. In den nachfolgenden Jahren wurde die Website stetig verbessert und zur Version 2 weiterentwickelt. Anfang 2011 wurde die Entwicklung vorübergehend eingestellt, bis der neue Verein Opencaching Deutschland sie Mitte 2012 unter der Versionsnummer&nbsp;3.0 wieder aufnahm.</p>
 
-	<p>Im Folgenden sind alle Veränderungen ab OC Version&nbsp;3.0 aufgelistet.</p>
+	<p>Im Folgenden sind alle Veränderungen ab OC Version&nbsp;3.0 aufgelistet. Manche Kleinigkeiten wurden zur besseren Übersicht weggelassen und sind im <a href="http://forum.opencaching-network.org/index.php?board=43.0">Entwicklerforum</a> nachlesbar.</p>
+	<br />
+
+	<p><strong>Version 3.0.6</strong> &ndash; 13. April 2013</p>
+	<p>Neu:</p>
+	<ul>
+		<li>Loggen mit Uhrzeit</li>
+		<li>neuer Menüpunkt &bdquo;Über Opencaching&ldquo; auf der Startseite</li>
+		<li>neuer Menüpunkt &bdquo;Neue Logs / ohne Deutschland&ldquo; auf der Startseite</li>
+		<li>neuer Menüpunkt &bdquo;Öffentliches Profil&ldquo; auf der Profilseite</li>
+		<li>Logout-Knopf in der Vollbildkarte</li>
+		<li>Datenlizenz-Anzeige links auf jeder Seite; Datenlizenz-Disclaimer wird in GPX-Dateien, TXT-Dateien und via <a href="http://wiki.opencaching.de/index.php/XML-Schnittstelle">XML-Schnittstelle</a> mitgeliefert.</li>
+		<li>Symbole für gesperrte und unveröffentlichte Caches auf Benutzerprofil-Seiten</li>
+		<li>RSS-Newsfeed-Link auf der Startseite</li>
+		<li><a href="http://wiki.opencaching.de/index.php/Listingvandalismus">Listingvandalismus</a> kann vom Opencaching-Supportteam rückgängig gemacht werden</li>
+	</ul>
+
+	<p>Geändert / verbessert:</p>
+	<ul>
+		<li>Designverbesserungen bei den Listen neuer Caches und Logs</li>
+		<li>In Benachrichtigungsmails werden die neuen Opencaching-Kurzlinks verwendet (siehe Version 3.0.1).</li>
+		<li>doppeltes Einstellen identischer Logs wird verhindert</li>
+		<li>genauere Zuordnung der Attribute zu GC-Attributen in GPX-Dateien</li>
+		<li>Gezeiten-Attribut umdefiniert in &bdquo;nicht bei hohem Wasserstand&ldquo;</li>
+		<li>neues Opencaching.de-Logo auf Listing-Ausdrucken</li>
+		<li>News- und Forentexte auf der Startseite ausgeblendet, dafür doppelt so viele Einträge</li>
+		<li>Teamliste aktualisiert</li>
+		<li>Der Zähler für versandte Emails im Benutzerprofil entfällt aus technischen Gründen.</li>
+  </ul>
+
+	<p>Korrigiert (Bugfixes):</p>
+	<ul>
+		<li>Einblenden ignorierter Caches auf der Karte funktioniert jetzt (erstmals)</li>
+		<li>Logpasswörter funktionieren jetzt auch bei Event-Caches</li>
+		<li>Änderungen von zusätzlichen Wegpunkten und Bildern werden beim Änderungsdatum des Listings berücksichtigt.</li>
+		<li>Cachesuche funktionierte manchmal unmittelbar nach dem Ausloggen nicht</li>
+		<li>Typbezeichung zusätzlicher Wegpunkte (z.B. &bdquo;Parkplatz&ldquo;) wird in GPX-Dateien mitgeliefert</li>
+		<li>Beim Löschen von Logs werden auch die Bilder mitgelöscht; bisher blieben sie irgendwo im System stehen.</li>
+		<li>Problem mit <a href="http://wiki.opencaching.de/index.php/Ocprop">Ocprop</a>-Logduplikate behoben</li>
+		<li>Logeditor auf der englischen, italienischen und spanischen Seite in korrekter Sprache</li>
+		<li>Übersetzung von Ländernamen (in denen die Caches liegen) auf der englischen, italienischen und spanischen Seite</li>
+  </ul>
 	<br />
 
 	<p><strong>Version 3.0.5</strong> &ndash; 16. März 2013</p>
@@ -52,7 +93,6 @@
 		<li>Inaktive Caches werden in der Beobachtungsliste <s>durchgestrichen</s>, wie bereits in der Ignorierliste.</li>
 		<li>verbesserte Bildeinbettung in GPX-Dateien, nun alles wie im Originallisting</li>
 		<li>viele Detailverbesserungen bei Formuarlayouts</li>
-		<li>Adminliste (intern)</li>
 		<li>alte HTML-Vorschaufunktion entsorgt</li>
 	</ul>
 
@@ -165,7 +205,7 @@
 	 <p><strong>Version 3.0.1</strong> &ndash; 8. August 2012</p>
    <p>Neu:</p>
 	 <ul>	   
-	   <li>Kurzadressen für Direktzugriff auf Cachelistings, z.B. <a href="http://www.opencaching.de/OCD93B">http://www.opencaching.de/OCD93B</a></li>
+	   <li>Kurzadressen für Direktzugriff auf Cachelistings, z.B. <a href="http://www.opencaching.de/OCD93B">http://opencaching.de/OCD93B</a></li>
 	   <li>Anzeige &bdquo;Du hast dieses Event besucht&ldquo; in Karten-Popup-Fenstern
 	   <li>englische Übersetzung der Seiten <a href="./articles.php?page=geocaching">Über Geocaching</a>, <a href="./articles.php?page=cacheinfo">Cachebeschreibung</a>, <a href="./articles.php?page=impressum">Impressum &amp; Nutzungsbedingungen</a>, <a href="./articles.php?page=dsb">Datenschutzbelehrung</a>, <a href="./articles.php?page=donations">Spenden</a>, <a href="./articles.php?page=contact">Kontakt</a> und <a href="./articles.php?page=team">Teamliste</a> (umschalten auf englischsprachige Seite oben mit <img src="images/flag/EN.gif">)
      <li>Versionsgeschichte</li>

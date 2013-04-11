@@ -7,7 +7,7 @@ Entfernung: {distance} {unit} Richtung {bearing}
 Typ: {cachetype}
 Größe: {cachesize}
 
-Link: http://www.opencaching.de/viewcache.php?wp={wp_oc}
+Link: http://opencaching.de/{wp_oc}
 ---
 
 

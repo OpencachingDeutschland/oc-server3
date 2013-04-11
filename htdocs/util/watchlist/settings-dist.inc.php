@@ -11,8 +11,8 @@
 	
 	$nologs = 'Keine neuen Logeinträge';
 	
-	$logowner_text = '{date} {user} hat einen Logeintrag für deinen Cache "{cachename}" gemacht.' . "\n" . 'http://www.opencaching.de/viewcache.php?cacheid={cacheid}' . "\n\n" . '{text}' . "\n\n\n\n";
-	$logwatch_text = '{date} {user} hat einen Logeintrag für den Cache "{cachename}" gemacht.' . "\n" . 'http://www.opencaching.de/viewcache.php?cacheid={cacheid}' . "\n\n" . '{text}' . "\n\n\n\n";
+	$logowner_text = '{date} {user} hat einen Logeintrag für deinen Cache "{cachename}" gemacht.' . "\n" . 'http://opencaching.de/{wp_oc}' . "\n\n" . '{text}' . "\n\n\n\n";
+	$logwatch_text = '{date} {user} hat einen Logeintrag für den Cache "{cachename}" gemacht.' . "\n" . 'http://opencaching.de/{wp_oc}' . "\n\n" . '{text}' . "\n\n\n\n";
 
 	$watchpid = $rootpath . 'cache/watch.pid';
 ?>

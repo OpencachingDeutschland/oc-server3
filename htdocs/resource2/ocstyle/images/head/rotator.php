@@ -164,19 +164,21 @@ if (substr($folder,-1) != '/')
 }
 
 $fileList = array();
-$handle = opendir($folder);
-while (false !== ($file = readdir($handle)))
+if ($handle = opendir($folder))
 {
-	if (is_file($file))
+	while (false !== ($file = readdir($handle)))
 	{
-		$file_info = pathinfo($file);
-		if (isset($extList[strtolower($file_info['extension'])]))
+		if (is_file($file))
 		{
-			$fileList[] = $file;
+			$file_info = pathinfo($file);
+			if (isset($extList[strtolower($file_info['extension'])]))
+			{
+				$fileList[] = $file;
+			}
 		}
 	}
+	closedir($handle);
 }
-closedir($handle);
 
 if (count($fileList) > 0)
 {

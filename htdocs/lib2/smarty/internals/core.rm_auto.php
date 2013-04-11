@@ -51,14 +51,17 @@ function smarty_core_rm_auto($params, &$smarty)
             $_res = smarty_core_rmdir($_params, $smarty);
         } else {
             // remove matching file names
-            $_handle = opendir($params['auto_base']);
-            $_res = true;
-            while (false !== ($_filename = readdir($_handle))) {
-                if($_filename == '.' || $_filename == '..') {
-                    continue;
-                } elseif (substr($params['auto_base'] . DIRECTORY_SEPARATOR . $_filename, 0, strlen($_tname)) == $_tname) {
-                    $_res &= (bool)$smarty->_unlink($params['auto_base'] . DIRECTORY_SEPARATOR . $_filename, $params['exp_time']);
-                }
+            $_res = false;
+            if ($_handle = opendir($params['auto_base']))
+            {
+              $_res = true;
+	            while (false !== ($_filename = readdir($_handle))) {
+	                if($_filename == '.' || $_filename == '..') {
+	                    continue;
+	                } elseif (substr($params['auto_base'] . DIRECTORY_SEPARATOR . $_filename, 0, strlen($_tname)) == $_tname) {
+	                    $_res &= (bool)$smarty->_unlink($params['auto_base'] . DIRECTORY_SEPARATOR . $_filename, $params['exp_time']);
+	                }
+	            }
             }
         }
     }

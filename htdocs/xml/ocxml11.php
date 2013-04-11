@@ -1093,7 +1093,7 @@ function unlinkrecursiv($path)
 	$notunlinked = 0;
 
 	$hDir = opendir($path);
-	if ($hDir === FALSE)
+	if ($hDir === false)
 		++$notunlinked;
 	else
 	{

@@ -46,6 +46,7 @@ class RSSParser {
 					
 					// walk through items
 					$i=0;
+					$headlines = array();
 					foreach($xml->channel->item as $item) {
 						
 						// check length
@@ -60,18 +61,20 @@ class RSSParser {
 								$html .= strftime('%e. %B %Y',strtotime($item->pubDate)).' - '. $item->title;
 								$html .= '</p> <p style="line-height: 1.6em;display: inline;">&emsp;[<b><a class="link" href="'.$item->link.'">mehr...</a></b>]</p>'."\n";
 								$html .= '<div class="rsstext">'.$item->description.'</div>'."\n";
+								// increment counter
+								$i++;
 							}
-							else
+							else if (!in_array($item->title,$headlines))
 							{
 								$html .= '<tr><td style="text-align:right">' . strftime('%e. %B %Y',strtotime($item->pubDate)).'</td>'; 
 								$html .= '<td><a class="links" href="'.$item->link.'">';
 								$html .= $item->title;
 								$html .= '</td></tr>';
+								$headlines[] = "" . $item->title;
+								// increment counter
+								$i++;
 							}
 						}
-						
-						// increment counter
-						$i++;
 					}
 				
 					// finish html

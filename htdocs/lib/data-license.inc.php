@@ -13,13 +13,13 @@
  * userlicense:   user.date_license of the copyright holder
  * cacheid:       cache to which the licensed content is attached
  * language:      language code for translation of the license disclaimer
- * logdisclaimer: append "all logs entries &copy; their authors"
+ * for_cachedesc: include date and append "all logs entries &copy; their authors"
  *
  * username and userlicense are not queried *here* for performance reasons.
  */
 
 function getLicenseDisclaimer($userid, $username, $userlicense, $cacheid, $language,
-                              $logdisclaimer, $html, $twolines=false)
+                              $for_cachedesc, $html, $twolines=false)
 {
 	global $opt, $translate, $absolute_server_URI;
 
@@ -31,7 +31,7 @@ function getLicenseDisclaimer($userid, $username, $userlicense, $cacheid, $langu
 		if ($userlicense == NEW_DATA_LICENSE_ACTIVELY_ACCEPTED ||
 		    $userlicense == NEW_DATA_LICENSE_PASSIVELY_ACCEPTED)
 		{
-			// © $USERNAME, Opencaching.de, CC BY-NC-ND, as of $DATUM
+			// © $USERNAME, Opencaching.de, CC BY-NC-ND[, as of $DATUM]
 			$asof = $translate->t('as of', '', '', 0, '', 1, $language);
 
 			if (isset($opt['locale'][$language]['page']['license_url']))
@@ -60,11 +60,11 @@ function getLicenseDisclaimer($userid, $username, $userlicense, $cacheid, $langu
 			if ($html) $ltext .= "<a href='" . $lurl . "' target='_blank'>";
 			$ltext .= "CC BY-NC-ND";
 			if ($html) $ltext .= "</a>";
-			$ltext .= ", ";
-			$ltext .= $asof . " " . date($df);
+			if ($for_cachedesc)
+				$ltext .= ", " . $asof . " " . date($df);
 		}
 
-		if ($logdisclaimer)
+		if ($for_cachedesc)
 		{
 			if ($ltext != "")
 				if ($twolines) $ltext .= ";\r\n";

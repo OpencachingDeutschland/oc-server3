@@ -46,7 +46,7 @@
 		<li>Logpasswörter funktionieren jetzt auch bei Event-Caches</li>
 		<li>Änderungen von zusätzlichen Wegpunkten und Bildern werden beim Änderungsdatum des Listings berücksichtigt.</li>
 		<li>Cachesuche funktionierte manchmal unmittelbar nach dem Ausloggen nicht</li>
-		<li>Typbezeichung zusätzlicher Wegpunkte (z.B. &bdquo;Parkplatz&ldquo;) wird in GPX-Dateien mitgeliefert</li>
+		<li>korrekte Typbezeichung zusätzlicher Wegpunkte (z.B. &bdquo;Parkplatz&ldquo;) in GPX-Dateien [Bug von v3.0.4]</li>
 		<li>Beim Löschen von Logs werden auch die Bilder mitgelöscht; bisher blieben sie irgendwo im System stehen.</li>
 		<li>Problem mit <a href="http://wiki.opencaching.de/index.php/Ocprop">Ocprop</a>-Logduplikate behoben</li>
 		<li>Logeditor auf der englischen, italienischen und spanischen Seite in korrekter Sprache</li>
@@ -98,10 +98,10 @@
 
 	<p>Korrigiert (Bugfixes):</p>
 	<ul>
-		<li>Handhabung von Nano-Caches bei gespeicherten Suchen korrigiert</li>
+		<li>Handhabung von Nano-Caches bei gespeicherten Suchen korrigiert [Bug von v3.0.4]</li>
+		<li>Auswahl der Nano-Größe im Suchforumlar korrigiert [Bug von v3.0.4]</li>
 		<li>Javascript-Warnung beim Loggen auf der italenischen Seite beseitigt</li>
 		<li>dänische Flagge bei dänischen Cachebeschreibungen</li>
-		<li>Auswahl der Nano-Größe im Suchforumlar korrigiert</li>
 	</ul>
 
 	 <p><strong>Version 3.0.4</strong> &ndash; 17. Februar 2013</p>
@@ -198,7 +198,7 @@
 	   <li>Hinweis-Entschlüsselung bei abgeschaltetem JavaScript</li>
 	   <li>nicht funktionierenden Log-Bild-Löschlink für Cachebesitzer entfernt</li>
 	   <li>Logbearbeitungsberechtigungen für gesperrte Caches korrigiert</li>
-	   <li>wirkungslose Spoileroption beim Hochladen von Logbildern entfernt</li>
+	   <li>wirkungslose Spoileroption beim Hochladen von Logbildern entfernt [&rarr; wieder eingebaut in v3.0.5]</li>
    </ul>
 	<br />
 

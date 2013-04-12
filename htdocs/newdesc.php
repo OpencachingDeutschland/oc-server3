@@ -57,12 +57,12 @@
 					
 					//get the posted data
 					$show_all_langs = isset($_POST['show_all_langs']) ? $_POST['show_all_langs'] : 0;
-					$short_desc  = isset($_POST['short_desc']) ? $_POST['short_desc'] : '';
+					$short_desc  = isset($_POST['short_desc']) ? $_POST['short_desc'] : '';  // Ocprop
 
-					$hints = isset($_POST['hints']) ? $_POST['hints'] : '';
-					$sel_lang = isset($_POST['desc_lang']) ? $_POST['desc_lang'] : $default_lang;
-					$desc = isset($_POST['desc']) ? $_POST['desc'] : '';
-					$descMode = isset($_POST['descMode']) ? ($_POST['descMode']+0) : 3;
+					$hints = isset($_POST['hints']) ? $_POST['hints'] : '';  // Ocprop
+					$sel_lang = isset($_POST['desc_lang']) ? $_POST['desc_lang'] : $default_lang;  // Ocprop
+					$desc = isset($_POST['desc']) ? $_POST['desc'] : '';  // Ocprop
+					$descMode = isset($_POST['descMode']) ? ($_POST['descMode']+0) : 3;  // Ocprop
 					if (($descMode < 1) || ($descMode > 3)) $descMode = 3;
 
 					// fuer alte Versionen von OCProp
@@ -87,7 +87,7 @@
 					$desc_lang_exists = false;
 
 					//save to db?
-					if (isset($_POST['submitform']))
+					if (isset($_POST['submitform']))  // Ocprop
 					{
 						//check if the entered language already exists
 						$desc_rs = sql("SELECT `id` FROM `cache_desc` WHERE `cache_id`='&1' AND `language`='&2'", $cache_id, $sel_lang);

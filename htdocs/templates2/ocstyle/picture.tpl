@@ -88,8 +88,18 @@
 
 		<tr>
 			<td align="right"><input class="checkbox" type="checkbox" name="spoiler" value="1" {if $spoilerchecked==true}checked="checked"{/if} /></td>
-			<td>{t}This picture is a spoiler - dont show a thumbnail.{/t} {if $objecttype==OBJECT_CACHELOG}{t}Please use the spoiler mark also for log pictures, to prevent that they appear on log gallery pages.{/t}{/if}</td>
+			<td>{t}This picture is a spoiler - dont show a thumbnail.{/t}</td>
 		</tr>
+
+		{if $objecttype==OBJECT_CACHELOG}
+			<tr><td class="spacer" colspan="2"></td></tr>
+			<tr>
+				<td colspan="2">
+					<img src="resource2/{$opt.template.style}/images/misc/hint.gif" border="0" width="15" height="11" alt="{t}Note{/t}" title="{t}Note{/t}">
+					{t}Generally, spoiler pictures should not be logged. In the case that en exception from this rule makes sense, e.g. to document your finding or problems with the stash, please mark the picture als spoiler so that it won't appear in galleries.{/t}
+				 </td>
+			 </tr>
+		{/if}
 
 		{if $objecttype==OBJECT_CACHE}
 			<tr>

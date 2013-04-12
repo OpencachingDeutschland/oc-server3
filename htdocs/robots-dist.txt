@@ -2,6 +2,7 @@ Sitemap: http://www.domain.org/sitemap.xml
 
 User-agent: *
 Disallow: /search.php?*output=gpx*
+Disallow: /search.php?*output=GPX*
 Disallow: /search.php?*output=gpx1*
 Disallow: /search.php?*output=gpx2*
 Disallow: /search.php?*output=garmin*

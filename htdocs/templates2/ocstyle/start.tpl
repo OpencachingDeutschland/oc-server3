@@ -12,12 +12,26 @@
 </div>
 
 {* news or blog *}
-<div class="content2-container bg-blue02">
-	<p class="content-title-noshade-size3">
-		<img src="resource2/{$opt.template.style}/images/misc/32x32-news.png" style="align: left; margin-right: 10px;" width="24" height="24" alt="{t}News{/t}" />
-		<a href="http://blog.opencaching.de/" style="color:rgb(88,144,168); text-decoration: none;">{t}News{/t}</a>
-	&nbsp; <span style="color:black; font-size:0.8em; font-weight:normal">[<a href="http://blog.opencaching.de/">{t}more{/t}...</a>]</span>
-	</p>
+<div>
+	<div class="content2-container bg-blue02">
+		<table class="none" cellspacing="0" cellpadding="0" width="100%">
+			<tr>
+				<td>
+					<p class="content-title-noshade-size3">
+						<img src="resource2/{$opt.template.style}/images/misc/32x32-news.png" style="align: left; margin-right: 10px;" width="24" height="24" alt="{t}News{/t}" />
+						<a href="http://blog.opencaching.de/" style="color:rgb(88,144,168); text-decoration: none;">{t}News{/t}</a>
+						&nbsp; <span style="color:black; font-size:0.8em; font-weight:normal">[<a href="http://blog.opencaching.de/">{t}more{/t}...</a>]</span>
+					</p>
+				</td>
+				{if "$newsfeed" != ""}
+					<td style="text-align:right">
+						<a href="{$newsfeed}"><img src="resource2/ocstyle/images/misc/22x22-feed-icon.png"></a>
+					</td>
+					<td width="4px"></td>
+				{/if}
+			</tr>
+		</table>
+	</div>
 </div>
 {if !$extern_news}
 	<table border="0" cellspacing="0" cellpadding="0">
@@ -69,7 +83,7 @@
 {* new logpix *}
 <div class="content2-container bg-blue02" style="margin-bottom:6px">
 	<p class="content-title-noshade-size3">
-		<img src="resource2/{$opt.template.style}/images/misc/32x32-news.png" style="align: left; margin-right: 10px;" width="24" height="24" alt="{t}News{/t}" />
+		<img src="resource2/{$opt.template.style}/images/cacheicon/webcam.gif" style="align: left; margin-right: 10px;" width="24" height="24" alt="{t}News{/t}" />
 		<a href="newlogpics.php" style="color:rgb(88,144,168); text-decoration: none;">{t}New log pictures{/t}</a>
 	&nbsp; <span style="color:black; font-size:0.8em; font-weight:normal">[<a href="newlogpics.php">{t}more{/t}...</a>]</span>
 	</p>

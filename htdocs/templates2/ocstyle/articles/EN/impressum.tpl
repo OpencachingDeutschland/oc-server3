@@ -64,7 +64,7 @@
 	<p>
 		The managing comittee are (as of August 31, 2012):
 	</p>
-	<ul class="indent" style="font-size: 12px;">
+	<ul class="indent">
 		<li>Michael Vaahsen, chairman</li>
 		<li>Gerald Halbig, vice chairman</li>
 		<li>Maik Bischoff, treasurer</li>
@@ -152,7 +152,7 @@
 		<b>Terms for hiding a geocache and publishing it at Opencaching.de website</b>
 	</p>
 			
-	<ul class="indent" style="font-size: 12px;">
+	<ul class="indent">
 		<li>
 			You will hide the geocache at your own intention and risk &ndash; Opencaching.de 
 			will not be liably for any damages which may be caused by the cache. The cache 
@@ -207,7 +207,7 @@
 		<b>Terms for seeking a geocache</b>
 	</p>
 	
-	<ul class="indent" style="font-size: 12px;">
+	<ul class="indent">
 		<li>
 			You will seek geocaches at your own risk. Opencaching.de will not be liable 
 			for any damages caused by seeking a geocache.
@@ -250,7 +250,7 @@
 		The form of attribution is:
 	</p>
 	<p style="font-weight: 800;">
-		&copy; $USERNAME, Opencaching.de, CC-BY-NC-ND, as of $DATUM
+		&copy; $USERNAME, Opencaching.de, CC BY-NC-ND, as of $DATUM
 	</p>
 	<p>
 		The date refers to the day when the data was downloaded from www.opencaching.de, and it may be omitted for photos and log entries.

@@ -54,8 +54,6 @@ body {font-size: 62.5%; margin: 0px auto; padding: 0px; background-color: #fffff
 	border: 0px none;
 }
 
-.mapa {background-image: url(../../../images/celownik.png); height:180px; width:180px;}
-
 .site-name {width: 300px; height: 45px; top: 12px; position: absolute; z-index: 4; overflow: hidden; margin: 0px; padding-left: 80px;}
 .site-name p.title  {margin: 0px; padding: 0px; font-family: "trebuchet ms", arial, sans serif; font-weight: bold; font-size: 24px;}
 .site-name p.subtitle  {clear: both; width: 300px; margin: -6px 0px 0px 0px; padding: 0px; background-color: transparent; font-family: "trebuchet ms", arial, sans serif; font-size: 12px;}
@@ -140,7 +138,7 @@ ul#statmenu { padding: 0px; margin: 0px;}
 /******************************************************/
 /* SECTION 4 - SPECIFIC CLASSES FOR LAYOUTS #2 and #3 */
 /******************************************************/
-.notice {overflow: hidden; width: 735px; height: 24px; margin: 0px 0px 0px 0px; padding: 0px 16px 12px 20px; color: rgb(88,144,168); font-style: italic; font-size: 11px; background-image: url(../images/misc/16x16-info.png); background-position: top left; background-repeat:no-repeat;}
+.notice {overflow: hidden; width: 735px; height: 24px; margin: 0px 0px 0px 0px; padding: 0px 16px 12px 20px; color: rgb(88,144,168); font-style: italic; font-size: 11px; background-image: url(../images/viewcache/16x16-info.png); background-position: top left; background-repeat:no-repeat;}
 .warning {overflow: hidden;  width: 735px; height: 24px; border: 1px solid black; background-color: rgb(240,100,100); margin: 0px 0px 0px 0px; padding: 8px 0px 0px 32px; color: rgb(50,50,50); font-weight: bold; font-size: 12px; background-image: url(../images/misc/32x32-impressum.png); background-position: top left; background-repeat:no-repeat;}
 
 .errormsg {color: rgb(240,100,100); font-weight: bold;}
@@ -620,8 +618,6 @@ p.main-totalstats { font-weight: bold; }
 .img-shadow {
   float:left;
   background: url(shadowAlpha.png) no-repeat bottom right !important;
-/*  background: url(shadow.gif) no-repeat bottom right;*/
-/*	background-color: red;*/
   margin: 10px 0 0 10px !important;
   margin: 10px 0 0 5px;
   }
@@ -674,3 +670,5 @@ div.gsc-resultsRoot, div.gsc-branding-text, img.gsc-branding-img {
 .garmintext {
 	font-size: 1.1em;
 }
+
+p.editlog { display:none; }

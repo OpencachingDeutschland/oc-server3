@@ -20,7 +20,7 @@
 	if (mb_strtolower(mb_substr($target, 0, 9)) == 'login.php')
 		$target = 'myhome.php';
 
-	$action = isset($_REQUEST['action']) ? $_REQUEST['action'] : '';
+	$action = isset($_REQUEST['action']) ? $_REQUEST['action'] : '';   // Ocprop
 
 	if ($action == 'cookieverify')
 	{
@@ -50,8 +50,8 @@
 		if ($login->userid != 0)
 			$tpl->error(ERROR_ALREADY_LOGGEDIN);
 
-		$username = isset($_POST['email']) ? $_POST['email'] : '';
-		$password = isset($_POST['password']) ? $_POST['password'] : '';
+		$username = isset($_POST['email']) ? $_POST['email'] : '';  // Ocprop
+		$password = isset($_POST['password']) ? $_POST['password'] : '';  // Ocprop
 
 		$retval = $login->try_login($username, $password, null);
 		$password = '';

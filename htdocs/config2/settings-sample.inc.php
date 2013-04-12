@@ -14,6 +14,8 @@
  *    util/publish_caches
  *    util/watchlist
  *
+ *  This file may be outdated and should be reviewed.
+ *
  ***************************************************************************/
 
 	/* PHP settings

@@ -5,7 +5,7 @@
 		<table width="100%" cellspacing="0" cellpadding="0">
 			<tr>
 				<td><font size="2">{$subtitle}</font></td>
-				<td class="picpaging">{t}Page{/t} {$pagelinks}</td>
+				<td class="picpaging">{$pagelinks}</td>
 			</tr>
 		</table>
 	</div>

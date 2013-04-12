@@ -65,7 +65,7 @@ function getWaypoints($cacheid)
 	{
 		//cacheid
 		$cache_id = 0;
-		if (isset($_REQUEST['cacheid']))
+		if (isset($_REQUEST['cacheid']))  // Ocprop
 		{
 			$cache_id = $_REQUEST['cacheid'];
 		}
@@ -101,7 +101,7 @@ function getWaypoints($cacheid)
 					}
 
 					//here we read all used information from the form if submitted, otherwise from DB
-					$cache_name = isset($_POST['name']) ? $_POST['name'] : $cache_record['name'];
+					$cache_name = isset($_POST['name']) ? $_POST['name'] : $cache_record['name'];  // Ocprop
 					$cache_type = isset($_POST['type']) ? $_POST['type'] : $cache_record['type'];
 					if (!isset($_POST['size']))
 					{
@@ -118,9 +118,9 @@ function getWaypoints($cacheid)
 					{
 						$sel_size = isset($_POST['size']) ? $_POST['size'] : $cache_record['size'];
 					}
-					$cache_hidden_day = isset($_POST['hidden_day']) ? $_POST['hidden_day'] : date('d', strtotime($cache_record['date_hidden']));
-					$cache_hidden_month = isset($_POST['hidden_month']) ? $_POST['hidden_month'] : date('m', strtotime($cache_record['date_hidden']));
-					$cache_hidden_year = isset($_POST['hidden_year']) ? $_POST['hidden_year'] : date('Y', strtotime($cache_record['date_hidden']));
+					$cache_hidden_day = isset($_POST['hidden_day']) ? $_POST['hidden_day'] : date('d', strtotime($cache_record['date_hidden']));  // Ocprop
+					$cache_hidden_month = isset($_POST['hidden_month']) ? $_POST['hidden_month'] : date('m', strtotime($cache_record['date_hidden']));  // Ocprop
+					$cache_hidden_year = isset($_POST['hidden_year']) ? $_POST['hidden_year'] : date('Y', strtotime($cache_record['date_hidden']));  // Ocprop
 
 					if(is_null($cache_record['date_activate']))
 					{
@@ -137,18 +137,18 @@ function getWaypoints($cacheid)
 						$cache_activate_hour = isset($_POST['activate_hour']) ? $_POST['activate_hour'] : date('H', strtotime($cache_record['date_activate']));
 					}
 
-					$cache_difficulty = isset($_POST['difficulty']) ? $_POST['difficulty'] : $cache_record['difficulty'];
-					$cache_terrain = isset($_POST['terrain']) ? $_POST['terrain'] : $cache_record['terrain'];
-					$cache_country = isset($_POST['country']) ? $_POST['country'] : $cache_record['country'];
+					$cache_difficulty = isset($_POST['difficulty']) ? $_POST['difficulty'] : $cache_record['difficulty'];  // Ocprop
+					$cache_terrain = isset($_POST['terrain']) ? $_POST['terrain'] : $cache_record['terrain'];  // Ocprop
+					$cache_country = isset($_POST['country']) ? $_POST['country'] : $cache_record['country'];  // Ocprop
 					$show_all_countries = isset($_POST['show_all_countries']) ? $_POST['show_all_countries'] : 0;
-					$status = isset($_POST['status']) ? $_POST['status'] : $cache_record['status'];
+					$status = isset($_POST['status']) ? $_POST['status'] : $cache_record['status'];  // Ocprop
 					$status_old = $cache_record['status'];
 					$search_time = isset($_POST['search_time']) ? $_POST['search_time'] : $cache_record['search_time'];
 					$way_length = isset($_POST['way_length']) ? $_POST['way_length'] : $cache_record['way_length'];
 
 					if($status_old == 5 && $status == 5)
 					{
-						if(isset($_POST['publish']))
+						if(isset($_POST['publish']))  // Ocprop
 						{
 							$publish = $_POST['publish'];
 							if(!($publish == 'now' || $publish == 'later' || $publish == 'notnow'))
@@ -215,7 +215,7 @@ function getWaypoints($cacheid)
 
 					$log_pw = isset($_POST['log_pw']) ? mb_substr($_POST['log_pw'], 0, 20) : $cache_record['logpw'];
 					// fix #4356: gc waypoints are frequently copy&pasted with leading spaces
-					$wp_gc = isset($_POST['wp_gc']) ? trim($_POST['wp_gc']) : $cache_record['wp_gc'];
+					$wp_gc = isset($_POST['wp_gc']) ? trim($_POST['wp_gc']) : $cache_record['wp_gc'];  // Ocprop
 					$wp_nc = isset($_POST['wp_nc']) ? trim($_POST['wp_nc']) : $cache_record['wp_nc'];
 
 					// name
@@ -229,12 +229,12 @@ function getWaypoints($cacheid)
 					if (isset($_POST['latNS']))
 					{
 						//get coords from post-form
-						$coords_latNS = $_POST['latNS'];
-						$coords_lonEW = $_POST['lonEW'];
-						$coords_lat_h = $_POST['lat_h'];
-						$coords_lon_h = $_POST['lon_h'];
-						$coords_lat_min = $_POST['lat_min'];
-						$coords_lon_min = $_POST['lon_min'];
+						$coords_latNS = $_POST['latNS'];  // Ocprop
+						$coords_lonEW = $_POST['lonEW'];  // Ocprop
+						$coords_lat_h = $_POST['lat_h'];  // Ocprop
+						$coords_lon_h = $_POST['lon_h'];  // Ocprop
+						$coords_lat_min = $_POST['lat_min'];  // Ocprop
+						$coords_lon_min = $_POST['lon_min'];  // Ocprop
 					}
 					else
 					{
@@ -416,7 +416,7 @@ function getWaypoints($cacheid)
 					}
 
 					//try to save to DB?
-					if (isset($_POST['submit']))
+					if (isset($_POST['submit']))  // Ocprop
 					{
 						//all validations ok?
 						if (!($hidden_date_not_ok || $lat_not_ok || $lon_not_ok || $name_not_ok || $time_not_ok || $way_length_not_ok || $size_not_ok || $activate_date_not_ok || $status_not_ok || $diff_not_ok))
@@ -445,6 +445,22 @@ function getWaypoints($cacheid)
 							{
 								// should never happen
 								$activation_date = 'NULL';
+							}
+
+							// check for Ocprop data to ignore
+							if ($ocpropping)
+							{
+								$rs = sql("SELECT `type`, `size` FROM `caches` WHERE `cache_id`='&1'", $cache_id);
+								if ($r = sql_fetch_assoc($rs))
+								{
+									if ($r['type'] == 8 && $cache_type == 7)
+										$cache_type = 8;
+									if ($r['type'] == 10 && $cache_type == 2)
+										$cache_type = 10;
+									if ($r['size'] == 8 && ($sel_size == 1 || $sel_size == 2))
+										$sel_size = 8;
+								}
+								sql_free_result($rs);
 							}
 
 							// save to DB
@@ -481,6 +497,8 @@ function getWaypoints($cacheid)
 
 							//display cache-page
 							tpl_redirect('viewcache.php?cacheid=' . urlencode($cache_id));
+							  // Ocprop: Location:\s*$viewcacheUrl\?cacheid=([0-9]+)
+							  // (s.a. tpl_redirect() in common.inc.php
 							exit;
 						}
 					}

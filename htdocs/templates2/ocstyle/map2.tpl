@@ -1119,7 +1119,7 @@ function parseXML_GetHTML(xmlobject)
 	// When changing any of the following HTML code, test the map popups carefully
 	// on many different browsers and zoom levels! Even trivial changes can cause
 	// inernal rendering errors which create annoying scrollbars within the info window.
-	*}{literal}
+	*}
 
 	var sHtml = "<div id='mapinfowindow' class='mappopup' style='z-index:800'><table class='mappopup'>";
 	if (bStatusTNA == 1)
@@ -1130,33 +1130,34 @@ function parseXML_GetHTML(xmlobject)
 	if (sName.length > 60)
 		sHtml += "; white-space:normal";
 	sHtml += "'><a href='viewcache.php?wp=" + encodeURI(sWPOC) + "' target='_blank'><font size='2'>" + xmlentities(sName) + "</font></a></td><td align='right' vertical-align:'top'><font size='2'><b>&nbsp;" + xmlentities(sWPOC) + "</b></font></td></tr>";
-	sHtml += "<tr><td colspan='2' style='vertical-align:top;'>{/literal}{t escape=js}by{/t}{literal} <a href='viewprofile.php?userid=" + encodeURI(nUserId) + "' target='_blank'>" + xmlentities(sUsername) + "</a></td><td align='right'><a class='nooutline' href='articles.php?page=cacheinfo#difficulty' target='_blank'><img src='resource2/{/literal}{$opt.template.style}/images/difficulty/diff-" + String(nDifficulty*10) + ".gif' border='0' width='19' height='16' hspace='2' alt='{t escape=js}D{/t} " + nDifficulty + "' title='{t escape=js}Difficulty{/t} " + nDifficulty + "/5'{literal} /><img src='resource2/{/literal}{$opt.template.style}/images/difficulty/terr-" + String(nTerrain*10) + ".gif' border='0' width='19' height='16' hspace='2' alt='{t escape=js}T{/t} " + nTerrain + "' title='{t escape=js}Terrain{/t} " + nTerrain + "/5'{literal} /></a></td></tr>";
+	sHtml += "<tr><td colspan='2' style='vertical-align:top;'>{t escape=js}by{/t} <a href='viewprofile.php?userid=" + encodeURI(nUserId) + "' target='_blank'>" + xmlentities(sUsername) + "</a></td><td align='right'><a class='nooutline' href='articles.php?page=cacheinfo#difficulty' target='_blank'><img src='resource2/{$opt.template.style}/images/difficulty/diff-" + String(nDifficulty*10) + ".gif' border='0' width='19' height='16' hspace='2' onmouseover='Tip(\"{t}Difficulty{/t}: " + String(nDifficulty) + " {t}of{/t} 5\", DELAY, 0, FADEIN, false, FADEOUT, false, BGCOLOR, \"#fffedf\", BORDERCOLOR, \"grey\")' onmouseout='UnTip()' /><img src='resource2/{$opt.template.style}/images/difficulty/terr-" + String(nTerrain*10) + ".gif' border='0' width='19' height='16' hspace='2' onmouseover='Tip(\"{t}Terrain{/t}: " + String(nTerrain) + " {t}of{/t} 5\", DELAY, 0, FADEIN, false, FADEOUT, false, BGCOLOR, \"#fffedf\", BORDERCOLOR, \"grey\")' onmouseout='UnTip()' /></a></td></tr>";
 	sHtml += "<tr><td colspan='3' height='3px'></td></tr>";
 
-	sHtml += "<tr><td colspan='2'>" + xmlentities(sTypeText) + " (" + xmlentities(sSizeText) + ")</td><td align='right' rowspan='2'>" + (bOconly==1 ? "{/literal}{$help_oconly}{literal}<img src='resource2/ocstyle/images/misc/is_oconly_small.png' alt='OConly' title='OConly' /></a>" : "") + "</td></tr>";
-	sHtml += "<tr><td colspan='2'>" + {/literal}(bIsPublishdate == true ? "{t escape=js}Published on{/t}:" : "{t escape=js}Listed since:{/t}"){literal} + " " + xmlentities(sListedSince) + "</td></tr>";
+	sHtml += "<tr><td colspan='2'>" + xmlentities(sTypeText) + " (" + xmlentities(sSizeText) + ")</td><td align='right' rowspan='2'>" + (bOconly==1 ? "{$help_oconly}<img src='resource2/ocstyle/images/misc/is_oconly_small.png' alt='OConly' title='OConly' /></a>" : "") + "</td></tr>";
+	sHtml += "<tr><td colspan='2'>" + (bIsPublishdate == true ? "{t escape=js}Published on{/t}:" : "{t escape=js}Listed since:{/t}") + " " + xmlentities(sListedSince) + "</td></tr>";
 
 	sAddHtml = "";
 	if (bOwner==1)
-		sAddHtml += "<tr><td colspan='3'><img src='resource2/ocstyle/images/misc/16x16-home.png' alt='' /> {/literal}{t escape=js}This cache is yours{/t}{literal}</td></tr>";
+		sAddHtml += "<tr><td colspan='3'><img src='resource2/ocstyle/images/misc/16x16-home.png' alt='' /> {t escape=js}This cache is yours{/t}</td></tr>";
 
 	if (bFound==1)
-		sAddHtml += "<tr><td colspan='3'><img src='resource2/ocstyle/images/viewcache/16x16-found.png' alt='' /> {/literal}{t escape=js}You found this cache{/t}{literal}</td></tr>";
+		sAddHtml += "<tr><td colspan='3'><img src='resource2/ocstyle/images/viewcache/16x16-found.png' alt='' /> {t escape=js}You found this cache{/t}</td></tr>";
 
 	if (bNotFound==1)
-		sAddHtml += "<tr><td colspan='3'><img src='resource2/ocstyle/images/viewcache/16x16-dnf.png' alt='' /> {/literal}{t escape=js}You havn't found this cache, yet{/t}{literal}</td></tr>";
+		sAddHtml += "<tr><td colspan='3'><img src='resource2/ocstyle/images/viewcache/16x16-dnf.png' alt='' /> {t escape=js}You havn't found this cache, yet{/t}</td></tr>";
 
 	if (bAttended==1)
-		sAddHtml += "<tr><td colspan='3'><img src='resource2/ocstyle/images/log/16x16-attended.png' alt='' /> {/literal}{t escape=js}You have attended this event!{/t}{literal}</td></tr>";
+		sAddHtml += "<tr><td colspan='3'><img src='resource2/ocstyle/images/log/16x16-attended.png' alt='' /> {t escape=js}You have attended this event!{/t}</td></tr>";
 
 	if (nGeoKreties>0)
-		sAddHtml += "<tr><td colspan='3'><img src='resource2/ocstyle/images/viewcache/gk.png' alt='' /> {/literal}{t escape=js}This cache stores a GeoKrety{/t}{literal}</td></tr>";
+		sAddHtml += "<tr><td colspan='3'><img src='resource2/ocstyle/images/viewcache/gk.png' alt='' /> {t escape=js}This cache stores a GeoKrety{/t}</td></tr>";
 
 	if (nTopRating>0)
-		sAddHtml += "<tr><td colspan='3'><img src='resource2/ocstyle/images/viewcache/rating-star.gif' alt='' /> {/literal}{t escape=js}This cache has %1 recommandations{/t}{literal}</td></tr>".replace(/%1/, nTopRating);
+		sAddHtml += "<tr><td colspan='3'><img src='resource2/ocstyle/images/viewcache/rating-star.gif' alt='' /> {t escape=js}This cache has %1 recommandations{/t}</td></tr>".replace(/%1/, nTopRating);
 
 	if (sAddHtml != "")
 		sHtml += 	"<tr><td colspan='3' height='3px'></td></tr>" + sAddHtml;
+	{literal}
 
 	if (oWaypoints.length)
 	{
@@ -1462,7 +1463,8 @@ function showPermlinkBox_click()
 	{
 		var oCenterPos = moMap.getCenter();
 		var nZoomLevel = moMap.getZoom();
-		var msPermalink = msURLMapPHP + "?lat=" + Math.round(oCenterPos.lat()*1000000)/1000000 + "&lon=" + Math.round(oCenterPos.lng()*1000000)/1000000 + "&zoom=" + nZoomLevel + "&map=" + encodeURI(moMap.getMapTypeId()) + "&mode={/literal}{if $bFullscreen}full{else}normal{/if}screen"{literal};
+		var msPermalink = msURLMapPHP + "?lat=" + Math.round(oCenterPos.lat()*1000000)/1000000 + "&lon=" + Math.round(oCenterPos.lng()*1000000)/1000000 + "&zoom=" + nZoomLevel + /* "&map=" + encodeURI(moMap.getMapTypeId()) + */ "&mode={/literal}{if $bFullscreen}full{else}normal{/if}screen"{literal};
+		// "map" currently is not evaluated anywhere
 
 		var oPermalinkTextBox = document.getElementById('permalink_text');
 		if (oPermalinkTextBox)
@@ -1943,11 +1945,11 @@ function get_searchfilter_params(output, skipqueryid, zip)
 
 	/* hide options
 	 */
-	sPostBody += document.getElementById('f_userowner').checked ? '&f_userowner=1' : '';
-	sPostBody += document.getElementById('f_userfound').checked ? '&f_userfound=1' : '';
-	sPostBody += document.getElementById('f_ignored').checked ? '&f_ignored=1' : '';
+	sPostBody += document.getElementById('f_userowner').checked ? '&f_userowner=1' : '&f_userowner=0';
+	sPostBody += document.getElementById('f_userfound').checked ? '&f_userfound=1' : '&f_userfound=0';
+	sPostBody += document.getElementById('f_ignored').checked ? '&f_ignored=1' : '&f_ignored=0';
 	sPostBody += document.getElementById('f_inactive').checked ? '&f_inactive=1' : '&f_inactive=0';
-	sPostBody += document.getElementById('f_otherPlatforms').checked ? '&f_otherPlatforms=1' : '';
+	sPostBody += document.getElementById('f_otherPlatforms').checked ? '&f_otherPlatforms=1' : '&f_otherPlatforms=0';
 
 	/* rating options
 	 */
@@ -2141,7 +2143,7 @@ function toggle_attribselection(bSaveCookies)
 	{* popup box for permalink *}
 	<div id="permalink_box" class="mappermalink mapboxframe mapboxshadow" style="display:none">
 		<table>
-			<tr><td><img src="resource2/ocstyle/images/viewcache/link.png" alt="" height="16" width="16" /> {t}Link to this map view{/t}:</td><td align="right"><a href="javascript:permalinkbox_hide()"><img src="resource2/ocstyle/images/misc/close-medium.png" style="opacity:0.7" ></a></td></tr>
+			<tr><td><img src="resource2/ocstyle/images/viewcache/link.png" alt="" height="16" width="16" /> {t}Link to this map view{/t}:</td><td align="right"><a href="javascript:permalinkbox_hide()"><img src="resource2/ocstyle/images/navigation/19x19-close.png" style="opacity:0.7" ></a></td></tr>
 			<tr><td><input id="permalink_text" type="text" value="" size="55"/></td></tr>
 			<tr id="permalink_addFavorites"><td align="right"><input type="button" value="{t}Add to favorites...{/t}" onclick="addFavorites_click()" /></td></tr>
 		</table>
@@ -2171,7 +2173,7 @@ function toggle_attribselection(bSaveCookies)
 				<form action="map2.php?mode={if $bFullscreen}full{else}normal{/if}screen" method="post" style="display:inline;">
 					<input type="hidden" name="submit" value="1" />
 					<table>
-						<tr><td><span style="font-size:1.2em; font-weight:bold">{t}Settings{/t}</strong></td><td style="text-align:right"><a href="javascript:toggle_settings()"><img src="resource2/ocstyle/images/misc/close-medium.png" style="opacity:0.7" /></a></tr>
+						<tr><td><span style="font-size:1.2em; font-weight:bold">{t}Settings{/t}</strong></td><td style="text-align:right"><a href="javascript:toggle_settings()"><img src="resource2/ocstyle/images/navigation/19x19-close.png" style="opacity:0.7" /></a></tr>
 						<tr><td>{t}Menu option 'Map' shows{/t}:</td><td><select name="opt_menumap"><option id="opt_menumap0" value="0">{t}small map{/t}</option><option id="opt_menumap1" value="1">{t}fullscreen map{/t}</option></select></td></tr>
 						<tr><td>{t}Show overview map{/t}:</td><td><input type="checkbox" id="opt_overview" name="opt_overview" value="1" /></td></tr>
 						<tr><td>{t 1=$min_maxrecords 2=$max_maxrecords}Maximum caches on map<br />(%1-%2, 0=automatic){/t}:</td><td><input type="text" id="opt_maxcaches" name="opt_maxcaches" size="6" /></td></tr>
@@ -2190,7 +2192,7 @@ function toggle_attribselection(bSaveCookies)
 
 			<div id="cachepicbox" class="default mapboxframe mapboxshadow" style="position:absolute; {if $bFullscreen}left:4px; top:7px;{else}left:0; top:0;{/if} background:#fdfdfd; display:none; z-index:60">
 				<div style="position:absolute; right:-19px; top:2px; opacity:0.7">
-					<img src="resource2/ocstyle/images/misc/close-smaller.png" onclick="hide_picture()" style="cursor:pointer"/>
+					<img src="resource2/ocstyle/images/navigation/15x15-smallclose.png" onclick="hide_picture()" style="cursor:pointer"/>
 				</div>
 				<div>
 					<a id="cachepiccontainer" class="nooutline"><img id="cachepic"/></a>

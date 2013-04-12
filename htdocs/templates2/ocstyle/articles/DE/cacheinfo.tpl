@@ -139,7 +139,7 @@
 
 		<p><a name="time"></a><b>Aufwand:</b> Wieviel Zeit und welche Wegstrecke sollte man ab dem Parkplatz/Startpunkt einplanen, um den Cache zu finden und wieder an den Parkplatz/Startpunkt zur&uuml;ck zu kommen? 
 		Gehe davon aus, dass der Cacher erfahren ist, aber bei zweideutigen Aufgaben gerne mal auf dem Schlauch steht. Solltest du der Meinung sein, dass man f&uuml;r diesen Cache keine 
-		eindeutige Aussage &uuml;ber den Zeitaufwand machen, lasse einfach 0&nbsp;h / 0&nbsp;min stehen und 
+		eindeutige Aussage &uuml;ber den Aufwand machen kann, lasse einfach 0:00&nbsp;h bzw. 0&nbsp;km stehen und 
 		erl&auml;utere den Aufwand in der Cachebeschreibung. Wenn du bei der 
 		Sch&auml;tzung davon ausgehst, dass eine Teilstrecke mit Inline-Skates, dem Fahrrad oder dem Auto zur&uuml;ckgelegt wird, weise ebenfalls in der Beschreibung darauf hin.</p>
 

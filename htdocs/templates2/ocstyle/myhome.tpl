@@ -20,6 +20,7 @@
 		</p>
 	</div>
 
+	{* Ocprop: (find|us|own)erid=([0-9]+) *}
 	<p style="line-height: 1.6em;">[<a href="search.php?showresult=1&amp;expert=0&amp;output=HTML&amp	;sort=byname&amp;finderid={$login.userid}&amp;searchbyfinder=&amp;f_inactive=0&amp;logtype=1,7">{t}Show all{/t}</a>] - <b>{t}Your latest log entries:{/t}</b></p>
 
 	<table class="table">
@@ -73,6 +74,7 @@
 	</div>
 
 	<p style="line-height: 1.6em;">
+	{* Ocprop: (find|us|own)erid=([0-9]+) *}
 	[<a href="search.php?showresult=1&amp;expert=0&amp;output=HTML&amp;sort=byname&amp;ownerid={$login.userid}&amp;searchbyowner=&amp;f_inactive=0"">{t}Show all{/t}</a>] - 
 		<b>{t}Your latest Geocaches hidden:{/t}</b>
 	</p>

@@ -50,9 +50,12 @@
 	require_once($opt['rootpath'] . 'lib/settings.inc.php');
 	require_once($opt['rootpath'] . 'lib/calculation.inc.php');
 	require_once($opt['rootpath'] . 'lib/consts.inc.php');
+	require_once($opt['rootpath'] . 'lib2/errorhandler.inc.php');
 
-	// timezone
+	// basic PHP settings
 	date_default_timezone_set($timezone);
+	if ($debug_page)
+		register_errorhandlers();  // not for production use yet, must be tested
 
 	$dblink_slave = false;
 	$db_error = 0;
@@ -68,18 +71,6 @@
 		sql("INSERT INTO logentries (`module`, `eventid`, `userid`, `objectid1`, `objectid2`, `logtext`, `details`) VALUES (
 																 '&1', '&2', '&3', '&4', '&5', '&6', '&7')",
 																 $module, $eventid, $userid, $objectid1, $objectid2, $logtext, serialize($details));
-	}
-
-	function setLastFound($cacheid)
-	{
-		$rs = sql("SELECT MAX(`date`) `date` FROM `cache_logs` WHERE `cache_id`=&1 AND `type`=1", $cacheid);
-		$r = sql_fetch_array($rs);
-		mysql_free_result($rs);
-
-		if ($r['date'] == null)
-			sql("UPDATE `caches` SET `last_found`=null WHERE `cache_id`=&1", $cacheid);
-		else
-			sql("UPDATE `caches` SET `last_found`='&1' WHERE `cache_id`=&2", $r['date'], $cacheid);
 	}
 
 	// read a file and return it as a string
@@ -460,10 +451,10 @@
 		if ($interface_output == 'html')
 		{
 			// display errorpage
-			$dberrmsg = $dberrormsg . ($debug_page ? "<br />" . $msql_error : "");
+			$errmsg = $dberrormsg . ($debug_page ? "<br />" . $msql_error : "");
 			if ($db_error <= 1)
 			{
-				tpl_errorMsg('sql_error', $dberrmsg);
+				tpl_errorMsg('sql_error', $errmsg);
 			}
 			else
 			{
@@ -471,7 +462,8 @@
 				// build the error template (e.g. because connection was lost, or an error mail
 				// could not load translations from database)
 
-				require("html/dberror.php");
+				$errtitle = "Datenbankfehler";
+				require("html/error.php");
 			}
 			exit;
 		}

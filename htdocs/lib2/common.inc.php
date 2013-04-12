@@ -29,6 +29,7 @@ function __autoload($class_name)
 	}
 }
 
+
 	// yepp, we will use UTF-8
 	mb_internal_encoding('UTF-8');
 	mb_regex_encoding('UTF-8');
@@ -53,6 +54,7 @@ function __autoload($class_name)
 			$opt['debug'] = $opt['debug'] & ~DEBUG_TRANSLATE;
 	}
 
+	require_once($opt['rootpath'] . 'lib2/errorhandler.inc.php');
 	configure_php();
 
 	require($opt['rootpath'] . 'lib2/cookie.class.php');
@@ -73,6 +75,8 @@ function __autoload($class_name)
 	else
 		$opt['template']['style'] = $opt['template']['default']['style'];
 	$opt['stylepath'] = $opt['rootpath'] . 'templates2/' . $opt['template']['style'] . '/';
+
+	check_useragent();
 
 	/* setup smarty
 	 *
@@ -136,6 +140,9 @@ function configure_php()
 		ini_set('display_errors', true);
 		ini_set('error_reporting', E_ALL);
 		ini_set('mysql.trace_mode', true);
+
+		// not for production use yet (has to be tested thoroughly)
+		register_errorhandlers();
 	}
 	else
 	{
@@ -226,6 +233,14 @@ function set_timezone()
 	global $opt;
 	
 	date_default_timezone_set($opt['php']['timezone']);
+}
+
+function check_useragent()
+{
+	global $_SERVER, $ocpropping;
+
+	// are we Ocprop?
+	$ocpropping = isset($_SERVER['HTTP_USER_AGENT']) && strpos($_SERVER['HTTP_USER_AGENT'],"Ocprop/");
 }
 
 function fix_magic_quotes_gpc()

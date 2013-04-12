@@ -146,7 +146,7 @@ div#bg2 {display: none;}
 
 /* site-slogan - width bei Searchbox auf 355 */
 .site-slogan {float: right; width: 225px; margin: 0px; padding: 5px; background-repeat: repeat; font-size: 10px; border-left:1px solid rgb(100,100,100); border-top:1px solid rgb(100,100,100); border-bottom:1px solid rgb(100,100,100); padding-bottom: 0; font-family:Verdana,Arial,Helvetica,sans-serif;}
-.site-slogan input { background-image: url(../../../images/blank.gif);
+.site-slogan input { background-image: url(blank.gif);
   font-family:Verdana,Arial,Helvetica,sans-serif; }
 
 .site-slogan form { background-color: transparent; }
@@ -223,7 +223,7 @@ ul#statmenu { padding: 0px; margin: 0px;}
 /******************************************************/
 /* SECTION 4 - SPECIFIC CLASSES FOR LAYOUTS #2 and #3 */
 /******************************************************/
-.notice {overflow: hidden; width: 735px; height: 24px; margin: 0px 0px 0px 0px; padding: 0px 16px 12px 20px; color: rgb(88,144,168); font-style: italic; font-size: 11px; background-image: url(../images/misc/16x16-info.png); background-position: top left; background-repeat:no-repeat;behavior: url(resource2/ocstyle/css/iepngfix.htc);}
+.notice {overflow: hidden; width: 735px; height: 24px; margin: 0px 0px 0px 0px; padding: 0px 16px 12px 20px; color: rgb(88,144,168); font-style: italic; font-size: 11px; background-image: url(../images/viewcache/16x16-info.png); background-position: top left; background-repeat:no-repeat;behavior: url(resource2/ocstyle/css/iepngfix.htc);}
 .warning {overflow: hidden;  width: 735px; height: 24px; border: 1px solid black; background-color: rgb(240,100,100); margin: 0px 0px 0px 0px; padding: 8px 0px 0px 32px; color: rgb(50,50,50); font-weight: bold; font-size: 12px; background-image: url(../images/misc/32x32-impressum.png); background-position: top left; background-repeat:no-repeat;behavior: url(resource2/ocstyle/css/iepngfix.htc);}
 
 .errormsg {color: rgb(240,100,100); font-weight: bold;}
@@ -255,6 +255,7 @@ ul#statmenu { padding: 0px; margin: 0px;}
 .content-title-noshade {margin: 0px; padding: 0px; color: rgb(88,144,168); font-weight: bold; font-size: 100%;}
 .content-title-noshade-size0 {margin: 0px; padding: 0px; color: rgb(88,144,168); font-weight: bold; font-size: 70%;}
 .content-title-noshade-size05 {margin: 0px; padding: 0px; color: rgb(88,144,168); font-weight: bold; font-size: 80%;}
+.content-title-noshade-size08 {margin: 0px; padding: 0px; color: rgb(88,144,168); font-weight: bold; font-size: 110%;}
 .content-title-noshade-size1 {margin: 0px; padding: 0px; color: rgb(88,144,168); font-weight: bold; font-size: 130%;}
 .content-title-noshade-size15 {margin: 0px; padding: 0px; color: rgb(88,144,168); font-weight: bold; font-size: 136%;}
 .content-title-noshade-size2 {margin: 0px; padding: 0px; color: rgb(88,144,168); font-weight: bold; font-size: 150%;}
@@ -266,6 +267,13 @@ ul#statmenu { padding: 0px; margin: 0px;}
 	font-size: 160%;
 }
 .content-title-noshade-size5 {margin: 0px; padding: 0px; color: rgb(88,144,168); font-weight: bold; font-size: 200%;}
+
+td.content-title-flag {
+	margin-left:0 !important;
+	padding-left:0 !important;
+	margin-right:3px !important;
+	padding-right:3px !important;
+}
 
 .content-txtbox-noshade {margin: 0px; padding: 7px 0px 0px 0px; background-color: rgb(255,255,255);}
 .content-score {margin: 0px; margin-top: 3px; padding: 4px 0px 0px 0px; background-color: rgb(255,255,255); border-style:dotted; border-width:1px; width:75px; height:20px;vertical-align:middle;}
@@ -297,7 +305,8 @@ p.quote {clear: left; margin: 0em 30px 0.6em 30px;	line-height: 120%; font-size:
 
 /* Lists */
 ul.noindent {margin: 0px 0px 7px 15px; padding: 0px; list-style-type: disc; list-style-position: outside; font-size: 120%;}
-ul.indent {margin: 0px 0px 7px 15px; padding: 0px 0px 0px 15px; list-style-type: disc; font-family: arial; font-size: 120%;}
+ul.indent {margin: 0px 0px 7px 15px; padding: 0px 0px 0px 15px; list-style-type: disc; font-family: arial; font-size: 11px;}
+ul.indent li {margin-bottom:4px}
 ol {margin: 0px 0px 0px 9px; padding: 0px 0px 0px 25px; list-style-type: decimal; list-style-position: outside; font-size: 120%;}
 ul.linklist-noindent {margin: -0.3em 0px 0.5em 0px; padding: 0px; list-style-type: none; line-height: 1.2em; font-size: 120%; }
 ul.linklist-indent {margin: -0.3em 0px 0.5em 0px; padding: 0px 0px 0px 10px; list-style-type: none; line-height: 1.2em; font-size: 120%; }
@@ -317,6 +326,13 @@ div.changelog ul li ul {font-size: 90%; margin:0}
 .narrowtable td {padding: 0 7px 0 7px; border: solid 0px rgb(150,150,150); text-align: left; font-size: 120%;}
 .narrowtable th {margin: 0px; background-color: rgb(127,162,202); padding: 0 7px 0 7px; border: solid 0px rgb(150,150,150); empty-cells: show; text-align: left; font-size: 120%; color: rgb(255,255,255);	}
 .narrowtable-caption {margin: 0.5em 0px 1.0em 30px; padding: 0px; clear: both; text-align: left; font-size: 120%;}
+
+td.listicon {
+	width:1%;
+	margin-right:0 !important;
+	padding-right:1px !important;
+	vertical-align:center;
+}
 
 /* Images */
 .img-left-noborder-notopmargin {float: left; margin: 0px 10px 0px 0px;}
@@ -727,8 +743,6 @@ p.main-totalstats {
 .img-shadow {
 	float:left;
 	background: url(shadowAlpha.png) no-repeat bottom right !important;
-/*	background: url(shadow.gif) no-repeat bottom right;*/
-/*	background-color: red;*/
 	margin: 10px 0 0 10px !important;
 	margin: 10px 0 0 5px;
 }
@@ -1407,3 +1421,5 @@ div#havefound {
 #forum div.rsstext {margin: 0px 30px 0.5em 0px; padding: 0px; line-height: 1.3em; font-family: arial, sans serif; font-size: 12px; }
 .quoteheader, .topslice_quote, .bbc_standard_quote  { display:none; }
 #forum div.rsstext img {max-width:200px; max-height:120px;}
+
+p.editlog { font-weight: 400; display:inline; }

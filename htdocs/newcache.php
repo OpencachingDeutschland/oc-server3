@@ -49,8 +49,8 @@
 			tpl_set_var('reset', $reset);
 			tpl_set_var('submit', $submit);
 			tpl_set_var('general_message', '');
-			tpl_set_var('hidden_since_message', $date_time_format_message);
-			tpl_set_var('activate_on_message', $date_time_format_message);
+			tpl_set_var('hidden_since_message', '');
+			tpl_set_var('activate_on_message', '');
 			tpl_set_var('lon_message', '');
 			tpl_set_var('lat_message', '');
 			tpl_set_var('tos_message', '');
@@ -61,7 +61,7 @@
 			tpl_set_var('type_message', '');
 			tpl_set_var('diff_message', '');
 
-			$sel_type = isset($_POST['type']) ? $_POST['type'] : 0;
+			$sel_type = isset($_POST['type']) ? $_POST['type'] : 0;  // Ocprop
 			if (!isset($_POST['size']))
 			{
 				if ($sel_type == 4 || $sel_type == 5)
@@ -75,15 +75,15 @@
 			}
 			else
 			{
-				$sel_size = isset($_POST['size']) ? $_POST['size'] : -1;
+				$sel_size = isset($_POST['size']) ? $_POST['size'] : -1;  // Ocprop
 			}
 			$sel_lang = isset($_POST['desc_lang']) ? $_POST['desc_lang'] : $default_lang;
-			$sel_country = isset($_POST['country']) ? $_POST['country'] : getUserCountry();
+			$sel_country = isset($_POST['country']) ? $_POST['country'] : getUserCountry();  // Ocprop
 			$show_all_countries = isset($_POST['show_all_countries']) ? $_POST['show_all_countries'] : 0;
 			$show_all_langs = isset($_POST['show_all_langs']) ? $_POST['show_all_langs'] : 0;
 
 			//coords
-			$lonEW = isset($_POST['lonEW']) ? $_POST['lonEW'] : $default_EW;
+			$lonEW = isset($_POST['lonEW']) ? $_POST['lonEW'] : $default_EW;  // Ocprop
 			if ($lonEW == 'E')
 			{
 				tpl_set_var('lonEsel', ' selected="selected"');
@@ -94,13 +94,13 @@
 				tpl_set_var('lonEsel', '');
 				tpl_set_var('lonWsel', ' selected="selected"');
 			}
-			$lon_h = isset($_POST['lon_h']) ? $_POST['lon_h'] : '0';
+			$lon_h = isset($_POST['lon_h']) ? $_POST['lon_h'] : '0';  // Ocprop
 			tpl_set_var('lon_h', htmlspecialchars($lon_h, ENT_COMPAT, 'UTF-8'));
 
-			$lon_min = isset($_POST['lon_min']) ? $_POST['lon_min'] : '00.000';
+			$lon_min = isset($_POST['lon_min']) ? $_POST['lon_min'] : '00.000';  // Ocprop
 			tpl_set_var('lon_min', htmlspecialchars($lon_min, ENT_COMPAT, 'UTF-8'));
 
-			$latNS = isset($_POST['latNS']) ? $_POST['latNS'] : $default_NS;
+			$latNS = isset($_POST['latNS']) ? $_POST['latNS'] : $default_NS;  // Ocprop
 			if ($latNS == 'N')
 			{
 				tpl_set_var('latNsel', ' selected="selected"');
@@ -111,14 +111,14 @@
 				tpl_set_var('latNsel', '');
 				tpl_set_var('latSsel', ' selected="selected"');
 			}
-			$lat_h = isset($_POST['lat_h']) ? $_POST['lat_h'] : '0';
+			$lat_h = isset($_POST['lat_h']) ? $_POST['lat_h'] : '0';  // Ocprop
 			tpl_set_var('lat_h', htmlspecialchars($lat_h, ENT_COMPAT, 'UTF-8'));
 
-			$lat_min = isset($_POST['lat_min']) ? $_POST['lat_min'] : '00.000';
+			$lat_min = isset($_POST['lat_min']) ? $_POST['lat_min'] : '00.000';  // Ocprop
 			tpl_set_var('lat_min', htmlspecialchars($lat_min, ENT_COMPAT, 'UTF-8'));
 
 			//name
-			$name = isset($_POST['name']) ? $_POST['name'] : '';
+			$name = isset($_POST['name']) ? $_POST['name'] : '';  // Ocprop
 			tpl_set_var('name', htmlspecialchars($name, ENT_COMPAT, 'UTF-8'));
 
 			//shortdesc
@@ -130,7 +130,7 @@
 			tpl_set_var('desc', htmlspecialchars($desc, ENT_COMPAT, 'UTF-8'));
 
 			// descMode auslesen, falls nicht gesetzt aus dem Profil laden
-			if (isset($_POST['descMode']))
+			if (isset($_POST['descMode']))  // Ocprop
 				$descMode = $_POST['descMode']+0;
 			else
 			{
@@ -144,7 +144,7 @@
 			// fuer alte Versionen von OCProp
 			if (isset($_POST['submit']) && !isset($_POST['version2']))
 			{
-					$descMode = (isset($_POST['desc_html']) && ($_POST['desc_html']==1)) ? 2 : 1;
+					$descMode = (isset($_POST['desc_html']) && ($_POST['desc_html']==1)) ? 2 : 1;  // Ocprop
 					$_POST['submitform'] = $_POST['submit'];
 
 					$short_desc = iconv("ISO-8859-1", "UTF-8", $short_desc);
@@ -209,16 +209,16 @@
 			}
 
 			//tos
-			$tos = isset($_POST['TOS']) ? 1 : 0;
+			$tos = isset($_POST['TOS']) ? 1 : 0;  // Ocprop
 			if ($tos == 1)
 				tpl_set_var('toschecked', ' checked="checked"');
 			else
 				tpl_set_var('toschecked', '');
 
 			//hidden_since
-			$hidden_day = isset($_POST['hidden_day']) ? $_POST['hidden_day'] : date('d');
-			$hidden_month = isset($_POST['hidden_month']) ? $_POST['hidden_month'] : date('m');
-			$hidden_year = isset($_POST['hidden_year']) ? $_POST['hidden_year'] : date('Y');
+			$hidden_day = isset($_POST['hidden_day']) ? $_POST['hidden_day'] : date('d');  // Ocprop
+			$hidden_month = isset($_POST['hidden_month']) ? $_POST['hidden_month'] : date('m');  // Ocprop
+			$hidden_year = isset($_POST['hidden_year']) ? $_POST['hidden_year'] : date('Y');  // Ocprop
 			tpl_set_var('hidden_day', htmlspecialchars($hidden_day, ENT_COMPAT, 'UTF-8'));
 			tpl_set_var('hidden_month', htmlspecialchars($hidden_month, ENT_COMPAT, 'UTF-8'));
 			tpl_set_var('hidden_year', htmlspecialchars($hidden_year, ENT_COMPAT, 'UTF-8'));
@@ -235,7 +235,7 @@
 			tpl_set_var('publish_later_checked', '');
 			tpl_set_var('publish_notnow_checked', '');
 
-			$publish = isset($_POST['publish']) ? $_POST['publish'] : 'now2';
+			$publish = isset($_POST['publish']) ? $_POST['publish'] : 'now2';  // Ocprop
 			if($publish == 'now2')
 			{
 				tpl_set_var('publish_now_checked', 'checked');
@@ -273,14 +273,14 @@
 
 			// gc- and nc-waypoints
 			// fix #4356: gc waypoints are frequently copy&pasted with leading spaces
-			$wp_gc = isset($_POST['wp_gc']) ? trim($_POST['wp_gc']) : '';
+			$wp_gc = isset($_POST['wp_gc']) ? trim($_POST['wp_gc']) : '';  // Ocprop
 			tpl_set_var('wp_gc', htmlspecialchars($wp_gc, ENT_COMPAT, 'UTF-8'));
 
 			$wp_nc = isset($_POST['wp_nc']) ? trim($_POST['wp_nc']) : '';
 			tpl_set_var('wp_nc', htmlspecialchars($wp_nc, ENT_COMPAT, 'UTF-8'));
 
 			//difficulty
-			$difficulty = isset($_POST['difficulty']) ? $_POST['difficulty'] : 1;
+			$difficulty = isset($_POST['difficulty']) ? $_POST['difficulty'] : 1;  // Ocprop
 			$difficulty_options = '<option value="1">'.$sel_message.'</option>';
 			for ($i = 2; $i <= 10; $i++)
 			{
@@ -297,7 +297,7 @@
 			tpl_set_var('difficulty_options', $difficulty_options);
 
 			//terrain
-			$terrain = isset($_POST['terrain']) ? $_POST['terrain'] : 1;
+			$terrain = isset($_POST['terrain']) ? $_POST['terrain'] : 1;  // Ocprop
 			$terrain_options = '<option value="1">'.$sel_message.'</option>';;
 			for ($i = 2; $i <= 10; $i++)
 			{
@@ -520,7 +520,7 @@
 			tpl_set_var('jsattributes_array', $cache_attrib_array);
 			tpl_set_var('cache_attribs', $cache_attribs_string);
 
-			if (isset($_POST['submitform']))
+			if (isset($_POST['submitform']))  // Ocprop
 			{
 				//check the entered data
 

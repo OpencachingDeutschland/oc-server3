@@ -896,13 +896,13 @@
 			// could not load translations from database)
 
 			if ($opt['db']['error']['display'] == true)
-				$dberrmsg = 'MySQL error (' . $errno . '): ' . $error;
+				$errmsg = 'MySQL error recursion (' . $errno . '): ' . $error;
 			else
-				$dberrmsg = "";
-			require("html/dberror.php");
+				$errmsg = "";
+			$errtitle = "Datenbankfehler";
+			require("html/error.php");
 			exit;
 		}
-
 		$db['error'] = true;
 
 		if ($db['connected'] == false)

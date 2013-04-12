@@ -368,7 +368,7 @@ function toggleAttr(id)
 			<input class="input20" type="text" name="activate_day" maxlength="2" value="{activate_day}"/>.
 			<input class="input20" type="text" name="activate_month" maxlength="2" value="{activate_month}"/>.
 			<input class="input40" type="text" name="activate_year" maxlength="4" value="{activate_year}"/>&nbsp;
-			<select name="activate_hour" class="input40">
+			<select name="activate_hour" class="input60">
 				{activation_hours}
 			</select>&nbsp;{t}#time_suffix_label#{/t}&nbsp;{activate_on_message}<br />
 			<input type="radio" class="radio" name="publish" id="publish_notnow" value="notnow" {publish_notnow_checked}>&nbsp;<label for="publish_notnow">{t}Do not publish now.{/t}</label>
@@ -377,8 +377,8 @@ function toggleAttr(id)
 
 	<tr><td class="spacer" colspan="2"></td></tr>
 	<tr>
-		<td><nobr>{t}passwort to log:{/t}</nobr></td>
-		<td><input class="input100" type="text" name="log_pw" value="{log_pw}" maxlength="20"/> {t}(leave blank for no password){/t}</td>
+		<td><nobr>{t}password for 'found' logs{/t}:</nobr></td>
+		<td><input class="input100" type="text" name="log_pw" value="{log_pw}" maxlength="20"/> &nbsp; {t}(leave blank for no password){/t}</td>
 	</tr>
 	<tr>
 		<td class="help" colspan="2">
@@ -403,6 +403,7 @@ function toggleAttr(id)
 		<input type="submit" name="submitform" value="{submit}" class="formbutton" onclick="submitbutton('submitform') "/>
 		</td>
 	</tr>
+	<tr><td class="spacer"></td></tr>
 </table>
 </form>
 <script language="javascript" type="text/javascript">

@@ -8,7 +8,7 @@
 		
 	****************************************************************************/
 
-	global $content, $bUseZip, $sqldebug;
+	global $content, $bUseZip, $sqldebug, $locale;
 
 	$gpxHead = 
 '<?xml version="1.0" encoding="utf-8"?>
@@ -54,8 +54,29 @@
     </groundspeak:cache>
   </wpt>
 {cache_waypoints}';
+  /* Ocprop:
+   *    <wpt\s+lat=\"([0-9\-\+\.]+)\"\s+lon=\"([0-9\-\+\.]+)\">
+   *    <time>(.*?)<\/time>
+   *      (Date: ^([0-9]{4})\-([0-9]{2})\-([0-9]{2})T[0-9\:\-\.]+(Z)?$/s)
+   *    <name>(.*?)<\/name>
+   *    <url>http:\/\/www\.opencaching\.de\/viewcache\.php\?cacheid=([0-9]+)<\/url>
+   *    <sym>(.*?)<\/sym>
+   *    <groundspeak:cache\s+id=\"[0-9]+\"\s+available=\"(True|False)\"\s+archived=\"(True|False)\"
+   *    <groundspeak:name>(.*?)<\/groundspeak:name>
+   *    <groundspeak:placed_by>(.*?)<\/groundspeak:placed_by>
+   *    <groundspeak:owner id="([0-9])+">(.*?)<\/groundspeak:owner>
+   *    <groundspeak:type>(.*?)<\/groundspeak:type>
+   *    <groundspeak:container>(.*?)<\/groundspeak:container>
+   *    <groundspeak:difficulty>(.*?)<\/groundspeak:difficulty>
+   *    <groundspeak:terrain>(.*?)<\/groundspeak:terrain>
+   *    <groundspeak:country>(.*?)<\/groundspeak:country>
+   *    <groundspeak:state>(.*?)<\/groundspeak:state>
+	 *    <groundspeak:short_description html="(.*?)".*?>(.*?)<\/groundspeak:short_description>
+   *    <groundspeak:long_description html="(.*?)".*?>(.*?)<\/groundspeak:long_description>
+   *    <groundspeak:encoded_hints>(.*?)<\/groundspeak:encoded_hints>
+   */
 
-	$gpxAttributes = ' 	      <groundspeak:attribute id="{attrib_id}" inc="1">{attrib_name}</groundspeak:attribute>';
+	$gpxAttributes = ' 	      <groundspeak:attribute id="{attrib_id}" inc="{attrib_inc}">{attrib_name}</groundspeak:attribute>';
 
 	$gpxLog = '      <groundspeak:log id="{id}">
         <groundspeak:date>{date}</groundspeak:date>
@@ -124,124 +145,6 @@
 
 	$gpxSymNormal = 'Geocache';
 	$gpxSymFound = 'Geocache Found';
-
-	// 1st set of attributes - attributes that correlate to GC attributes
-		// conditions
-		$gpxAttribID[59] = '6';
-		$gpxAttribName[59] = 'Recommended for kids';
-		$gpxAttribID[28] = '10';
-		$gpxAttribName[28] = 'Difficult climbing';
-		$gpxAttribID[26] = '11';
-		$gpxAttribName[26] = 'May require wading';
-		$gpxAttribID[29] = '12';
-		$gpxAttribName[29] = 'May require swimming';
-		$gpxAttribID[38] = '13';
-		$gpxAttribName[38] = 'Available at all times';
-		$gpxAttribID[1] = '14';
-		$gpxAttribName[1] = 'Recommended at night';
-		$gpxAttribID[44] = '15';
-		$gpxAttribName[44] = 'Available during winter';
-		$gpxAttribID[55] = '47';
-		$gpxAttribName[55] = 'Field puzzle';
-		$gpxAttribID[24] = '53';
-		$gpxAttribName[24] = 'Park and grab';
-		$gpxAttribID[60] = '162';
-		$gpxAttribName[60] = 'Seasonal access';
-		// facilities
-		$gpxAttribID[18] = '25';
-		$gpxAttribName[18] = 'Parking available';
-		$gpxAttribID[19] = '26';
-		$gpxAttribName[19] = 'Public transportation';
-		$gpxAttribID[20] = '27';
-		$gpxAttribName[20] = 'Drinking water nearby';
-		$gpxAttribID[21] = '28';
-		$gpxAttribName[21] = 'Public restrooms nearby';
-		$gpxAttribID[22] = '29';
-		$gpxAttribName[22] = 'Telephone nearby';
-		// hazards
-		$gpxAttribID[11] = '21';
-		$gpxAttribName[11] = 'Cliff / falling rocks';
-		$gpxAttribID[12] = '12';
-		$gpxAttribName[12] = 'Hunting';
-		$gpxAttribID[9] = '23';
-		$gpxAttribName[9] = 'Dangerous area';
-		$gpxAttribID[16] = '17';
-		$gpxAttribName[16] = 'Poisonous plants';
-		$gpxAttribID[13] = '39';
-		$gpxAttribName[13] = 'Thorns';
-		$gpxAttribID[17] = '18';
-		$gpxAttribName[17] = 'Dangerous animals';
-		$gpxAttribID[14] = '19';
-		$gpxAttribName[14] = 'Ticks';
-		$gpxAttribID[15] = '20';
-		$gpxAttribName[15] = 'Abandoned mines';
-		// equipment
-		$gpxAttribID[36] = '2';
-		$gpxAttribName[36] = 'Access or parking fee';
-		$gpxAttribID[49] = '3';
-		$gpxAttribName[49] = 'Climbing gear';
-		$gpxAttribID[48] = '44';
-		$gpxAttribName[48] = 'Flashlight required';
-		$gpxAttribID[52] = '4';
-		$gpxAttribName[52] = 'Boat';
-		$gpxAttribID[51] = '5';
-		$gpxAttribName[51] = 'Scuba gear';
-		$gpxAttribID[46] = '51';
-		$gpxAttribName[46] = 'Special tool required';
-
-	// 2nd set of attributes - OC only attributes, changed ID (+100) to be save in oc-gc-mixed environments
-		$gpxAttribID[6] = '106';
-		$gpxAttribName[6] = 'Only loggable at Opencaching';
-		$gpxAttribID[7] = '107';
-		$gpxAttribName[7] = 'Hyperlink to another caching portal only';
-		$gpxAttribID[8] = '108';
-		$gpxAttribName[8] = 'Letterbox (needs stamp)';
-		$gpxAttribID[10] = '110';
-		$gpxAttribName[10] = 'Active railway nearby';
-		$gpxAttribID[23] = '123';
-		$gpxAttribName[23] = 'First aid available';
-		$gpxAttribID[25] = '125';
-		$gpxAttribName[25] = 'Long walk';
-		$gpxAttribID[27] = '127';
-		$gpxAttribName[27] = 'Hilly area';
-		$gpxAttribID[30] = '130';
-		$gpxAttribName[30] = 'Point of interest';
-		$gpxAttribID[31] = '131';
-		$gpxAttribName[31] = 'Moving target';
-		$gpxAttribID[32] = '132';
-		$gpxAttribName[32] = 'Webcam';
-		$gpxAttribID[33] = '133';
-		$gpxAttribName[33] = 'Within enclosed rooms (caves, buildings etc.)';
-		$gpxAttribID[34] = '134';
-		$gpxAttribName[34] = 'In the water';
-		$gpxAttribID[35] = '135';
-		$gpxAttribName[35] = 'Without GPS (letterboxes, cistes, compass juggling ...)';
-		$gpxAttribID[37] = '137';
-		$gpxAttribName[37] = 'Overnight stay necessary';
-		$gpxAttribID[39] = '139';
-		$gpxAttribName[39] = 'Only available at specified times';
-		$gpxAttribID[40] = '140';
-		$gpxAttribName[40] = 'by day only';
-		$gpxAttribID[41] = '141';
-		$gpxAttribName[41] = 'Tide';
-		$gpxAttribID[42] = '142';
-		$gpxAttribName[42] = 'All seasons';
-		$gpxAttribID[43] = '143';
-		$gpxAttribName[43] = 'Breeding season / protected nature';
-		$gpxAttribID[47] = '147';
-		$gpxAttribName[47] = 'Compass';
-		$gpxAttribID[50] = '150';
-		$gpxAttribName[50] = 'Cave equipment';
-		$gpxAttribID[53] = '153';
-		$gpxAttribName[53] = 'Aircraft';
-		$gpxAttribID[54] = '154';
-		$gpxAttribName[54] = 'Investigation';
-		$gpxAttribID[56] = '156';
-		$gpxAttribName[56] = 'Arithmetical problem';
-		$gpxAttribID[57] = '157';
-		$gpxAttribName[57] = 'Other cache type';
-		$gpxAttribID[58] = '158';
-		$gpxAttribName[58] = 'Ask owner for start conditions';
 
 	//prepare the output
 	$caches_per_page = 20;
@@ -327,10 +230,10 @@
 	}
 
 	//startat?
-	$startat = isset($_REQUEST['startat']) ? $_REQUEST['startat'] : 0;
+	$startat = isset($_REQUEST['startat']) ? $_REQUEST['startat'] : 0;  // Ocprop
 	if (!is_numeric($startat)) $startat = 0;
 	
-	if (isset($_REQUEST['count']))
+	if (isset($_REQUEST['count']))  // Ocprop
 		$count = $_REQUEST['count'];
 	else
 		$count = $caches_per_page;
@@ -361,7 +264,7 @@
 		$sFilebasename = 'ocde' . $options['queryid'];
 		
 	$bUseZip = ($rCount['count'] > 20);
-	$bUseZip = $bUseZip || (isset($_REQUEST['zip']) && ($_REQUEST['zip'] == '1'));
+	$bUseZip = $bUseZip || (isset($_REQUEST['zip']) && ($_REQUEST['zip'] == '1'));  // Ocprop
 	
 	if ($bUseZip == true)
 	{
@@ -409,7 +312,7 @@
 	$rs = sql_slave("SELECT SQL_BUFFER_RESULT `gpxcontent`.`cache_id` `cacheid`, `gpxcontent`.`longitude` `longitude`, `gpxcontent`.`latitude` `latitude`, 
 							`gpxcontent`.`state` `state`, `caches`.`wp_oc` `waypoint`, `caches`.`date_hidden` `date_hidden`, `caches`.`name` `name`, 
 							`caches`.`country` `country`, `countries`.`name` AS `country_name`, `caches`.`terrain` `terrain`, `caches`.`difficulty` `difficulty`, `caches`.`desc_languages` `desc_languages`, 
-							`caches`.`size` `size`, `caches`.`type` `type`, `caches`.`status` `status`, `user`.`username` `username`, `caches`.`user_id` `userid`, 
+							`caches`.`size` `size`, `caches`.`type` `type`, `caches`.`status` `status`, `user`.`username` `username`, `caches`.`user_id` `userid`, `user`.`data_license`,
 							`cache_desc`.`desc` `desc`, `cache_desc`.`short_desc` `short_desc`, `cache_desc`.`hint` `hint`,
 							IFNULL(`stat_cache_logs`.`found`, 0) AS `found`
 						FROM `gpxcontent` 
@@ -441,11 +344,19 @@
 		if ($r['hint'] == '')
 			$thisline = mb_ereg_replace('{hints}', '', $thisline);
 		else
+		  // Ocprop:  <groundspeak:encoded_hints>(.*?)<\/groundspeak:encoded_hints>
 			$thisline = mb_ereg_replace('{hints}', '      <groundspeak:encoded_hints>' . xmlentities(strip_tags($r['hint'])) . '</groundspeak:encoded_hints>
 ', $thisline);
 
 		$thisline = mb_ereg_replace('{shortdesc}', xmlentities($r['short_desc']), $thisline);
-		$thisline = mb_ereg_replace('{desc}', xmlentities(str_replace('<img src="images/uploads/','<img src="' . $absolute_server_URI . 'images/uploads/', $r['desc'])), $thisline);
+
+		$desc = str_replace('<img src="images/uploads/','<img src="' . $absolute_server_URI . 'images/uploads/', $r['desc']);		
+		$license = getLicenseDisclaimer(
+			$r['userid'], $r['username'], $r['data_license'], $r['cacheid'], $locale, true, true);
+		if ($license != "")
+			$desc .= "<p><em>$license</em></p>";
+		$thisline = mb_ereg_replace('{desc}', xmlentities($desc), $thisline);
+
 		$thisline = mb_ereg_replace('{images}', xmlentities(getPictures($r['cacheid'])), $thisline);
 
 		if (isset($gpxType[$r['type']]))
@@ -557,17 +468,15 @@
 		$thisline = mb_ereg_replace('{logs}', $logentries, $thisline);
 
 		// attributes
-		$rsAttributes = sql_slave("SELECT `caches_attributes`.`attrib_id` FROM `caches_attributes` WHERE `caches_attributes`.`cache_id`=&1", $r['cacheid']);
+		$rsAttributes = sql_slave("SELECT `gc_id`, `gc_inc`, `gc_name`
+		                             FROM `caches_attributes`
+		                       INNER JOIN `cache_attrib` ON `cache_attrib`.`id`=`caches_attributes`.`attrib_id`
+		                            WHERE `caches_attributes`.`cache_id`=&1", $r['cacheid']);
 		while ($rAttrib = sql_fetch_array($rsAttributes))
 		{
-			$thisattribute = $gpxAttributes;
-
-			$thisattribute_id = $gpxAttribID[$rAttrib['attrib_id']];
-			$thisattribute_name = $gpxAttribName[$rAttrib['attrib_id']];
-			
-			$thisattribute = mb_ereg_replace('{attrib_id}', $thisattribute_id, $thisattribute);
-			$thisattribute = mb_ereg_replace('{attrib_name}', $thisattribute_name, $thisattribute);
-			
+			$thisattribute = mb_ereg_replace('{attrib_id}', $rAttrib['gc_id'], $gpxAttributes);
+			$thisattribute = mb_ereg_replace('{attrib_inc}', $rAttrib['gc_inc'], $thisattribute);
+			$thisattribute = mb_ereg_replace('{attrib_name}', xmlentities($rAttrib['gc_name']), $thisattribute);
 			$attribentries .= $thisattribute . "\n";
 		}
 		mysql_free_result($rsAttributes);
@@ -591,7 +500,7 @@
 		// additional waypoints, including personal cache note
 		$childWaypoints = $childwphandler->getChildWps($r['cacheid']);
 		$n = 1;
-		$digits = "%0" . (floor(log10(count($childWaypoints))) + 1) . "d";
+		$digits = "%0" . strlen(count($childWaypoints)) . "d";
 
 		foreach ($childWaypoints as $childWaypoint)
 		{

@@ -96,9 +96,11 @@
 				$all_ok = false;
 				$log_text  = isset($_POST['logtext']) ? ($_POST['logtext']) : '';
 				$log_type = isset($_POST['logtype']) ? ($_POST['logtype']+0) : 1;
-				$log_date_day = isset($_POST['logday']) ? ($_POST['logday']+0) : date('d');
-				$log_date_month = isset($_POST['logmonth']) ? ($_POST['logmonth']+0) : date('m');
-				$log_date_year = isset($_POST['logyear']) ? ($_POST['logyear']+0) : date('Y');
+				$log_date_day = isset($_POST['logday']) ? trim($_POST['logday']) : date('d');
+				$log_date_month = isset($_POST['logmonth']) ? trim($_POST['logmonth']) : date('m');
+				$log_date_year = isset($_POST['logyear']) ? trim($_POST['logyear']) : date('Y');
+				$log_time_hour = isset($_POST['loghour']) ? trim($_POST['loghour']) : "";
+				$log_time_minute = isset($_POST['logminute']) ? trim($_POST['logminute']) : "";
 				$top_option = isset($_POST['ratingoption']) ? $_POST['ratingoption']+0 : 0;
 				$top_cache = isset($_POST['rating']) ? $_POST['rating']+0 : 0;
 
@@ -156,14 +158,19 @@
 					$log_text = nl2br(htmlspecialchars($log_text, ENT_COMPAT, 'UTF-8'));
 				}
 
-				//validate data
-				if (is_numeric($log_date_month) && is_numeric($log_date_day) && is_numeric($log_date_year))
+				// validate data
+				if (is_numeric($log_date_month) && is_numeric($log_date_day) && is_numeric($log_date_year) &&
+				    ("$log_time_hour$log_time_minute"=="" || is_numeric($log_time_hour)) &&
+						($log_time_minute=="" || is_numeric($log_time_minute)))
 				{
 					$date_ok = checkdate($log_date_month, $log_date_day, $log_date_year)
-											&& ($log_date_year >= 2000); 
+											&& ($log_date_year >= 2000) 
+											&& ($log_time_hour>=0) && ($log_time_hour<=23)
+											&& ($log_time_minute>=0) && ($log_time_minute<=59);
 					if ($date_ok)
 						if (isset($_POST['submitform']))
-							if (mktime(0, 0, 0, $log_date_month, $log_date_day, $log_date_year) >= mktime())
+							if (mktime($log_time_hour+0, $log_time_minute+0, 0,
+							           $log_date_month, $log_date_day, $log_date_year) >= mktime())
 							  $date_ok = false;
 				}
 				else
@@ -180,7 +187,7 @@
 				{
 					$all_ok = $date_ok && $logtype_ok;
 
-					if ($all_ok && $use_log_pw && $log_type == 1)
+					if ($all_ok && $use_log_pw && ($log_type == 1 || $log_type == 7))
 						if (!isset($_POST['log_pw']) ||
 								mb_strtolower($log_pw) != mb_strtolower($_POST['log_pw']))
 						{
@@ -191,41 +198,57 @@
 
 				if (isset($_POST['submitform']) && ($all_ok == true))
 				{
-					$log_date = date('Y-m-d', mktime(0, 0, 0, $log_date_month, $log_date_day, $log_date_year));
-
-					//add logentry to db
-					sql("INSERT INTO `cache_logs` (`id`, `cache_id`, `user_id`, `type`, `date`, `text`, `text_html`, `text_htmledit`, `node`)
-					         VALUES ('', '&1', '&2', '&3', '&4', '&5', '&6', '&7', '&8')",
-					         $cache_id, $usr['userid'], $log_type, $log_date, $log_text, (($descMode != 1) ? 1 : 0), (($descMode == 3) ? 1 : 0), $oc_nodeid);
-
-					// do not use slave server for the next time ...
-					db_slave_exclude();
-
-					// update cache_status
-					$rs = sql("SELECT `log_types`.`cache_status` FROM `log_types` WHERE `id`='&1'", $log_type);
-					if ($record = sql_fetch_array($rs))
-					{
-						$cache_status = $record['cache_status'];
-						if ($cache_status != 0)
-						{
-							$rs = sql("UPDATE `caches` SET `status`='&1' WHERE `cache_id`='&2'", $cache_status, $cache_id);
-						}
-					}
+					// 00:00:01 = "00:00 was logged"
+					// 00:00:00 = "no time was logged"
+					if ("$log_time_hour$log_time_minute" != "" &&
+					    $log_time_hour == 0 && $log_time_minute == 0)
+						$log_time_second = 1;
 					else
+						$log_time_second = 0;
+
+					$log_date = date('Y-m-d H:i:s', mktime($log_time_hour+0, $log_time_minute+0, $log_time_second, $log_date_month, $log_date_day, $log_date_year));
+
+					// add logentry to db if not already exists (e.g. by multiple sending the form
+					// or by ocprop errors)
+					$rs = sql("SELECT `id` FROM `cache_logs`
+					            WHERE `cache_id`='&1' AND `user_id`='&2' AND `type`='&3' AND `date`='&4' AND `text`='&5'",
+					           $cache_id, $usr['userid'], $log_type, $log_date, $log_text);
+					$already_exists = sql_fetch_row($rs) != null;
+					sql_free_result($rs);
+
+					if (!$already_exists)
 					{
-						die("OPS!");
-					}
+						sql("INSERT INTO `cache_logs` (`id`, `cache_id`, `user_id`, `type`, `date`, `text`, `text_html`, `text_htmledit`, `node`)
+						         VALUES ('', '&1', '&2', '&3', '&4', '&5', '&6', '&7', '&8')",
+						         $cache_id, $usr['userid'], $log_type, $log_date, $log_text, (($descMode != 1) ? 1 : 0), (($descMode == 3) ? 1 : 0), $oc_nodeid);
 
-					// update top-list
-					if ($top_option)
-						if ($top_cache)
-							sql("INSERT IGNORE INTO `cache_rating` (`user_id`, `cache_id`, `rating_date`) VALUES('&1', '&2', '&3')", $usr['userid'], $cache_id, $log_date);
+						// do not use slave server for the next time ...
+						db_slave_exclude();
+
+						// update cache_status
+						$rs = sql("SELECT `log_types`.`cache_status` FROM `log_types` WHERE `id`='&1'", $log_type);
+						if ($record = sql_fetch_array($rs))
+						{
+							$cache_status = $record['cache_status'];
+							if ($cache_status != 0)
+								$rs = sql("UPDATE `caches` SET `status`='&1' WHERE `cache_id`='&2'", $cache_status, $cache_id);
+						}
 						else
-							sql("DELETE FROM `cache_rating` WHERE `user_id`='&1' AND `cache_id`='&2'", $usr['userid'], $cache_id);
+						{
+							die("OPS!");
+						}
 
-					//call eventhandler
-					require_once($rootpath . 'lib/eventhandler.inc.php');
-					event_new_log($cache_id, $usr['userid']+0);
+						// update top-list
+						if ($top_option)
+							if ($top_cache)
+								sql("INSERT IGNORE INTO `cache_rating` (`user_id`, `cache_id`, `rating_date`) VALUES('&1', '&2', '&3')", $usr['userid'], $cache_id, $log_date);
+							else
+								sql("DELETE FROM `cache_rating` WHERE `user_id`='&1' AND `cache_id`='&2'", $usr['userid'], $cache_id);
+
+						//call eventhandler
+						require_once($rootpath . 'lib/eventhandler.inc.php');
+						event_new_log($cache_id, $usr['userid']+0);
+					}
 
 					//redirect to viewcache
 					$no_tpl_build = true;
@@ -262,6 +285,8 @@
 					tpl_set_var('logday', htmlspecialchars($log_date_day, ENT_COMPAT, 'UTF-8'));
 					tpl_set_var('logmonth', htmlspecialchars($log_date_month, ENT_COMPAT, 'UTF-8'));
 					tpl_set_var('logyear', htmlspecialchars($log_date_year, ENT_COMPAT, 'UTF-8'));
+					tpl_set_var('loghour', htmlspecialchars($log_time_hour, ENT_COMPAT, 'UTF-8'));
+					tpl_set_var('logminute', htmlspecialchars($log_time_minute, ENT_COMPAT, 'UTF-8'));
 					tpl_set_var('logtypeoptions', $logtypeoptions);
 					tpl_set_var('reset', $reset);
 					tpl_set_var('submit', $submit);
@@ -279,7 +304,7 @@
 						// TinyMCE
 						$headers = tpl_get_var('htmlheaders') . "\n";
 						$headers .= '<script language="javascript" type="text/javascript" src="resource2/tinymce/tiny_mce_gzip.js"></script>' . "\n";
-						$headers .= '<script language="javascript" type="text/javascript" src="resource2/tinymce/config/log.js.php?logid=0"></script>' . "\n";
+						$headers .= '<script language="javascript" type="text/javascript" src="resource2/tinymce/config/log.js.php?logid=0&lang='.strtolower($locale).'"></script>' . "\n";
 						tpl_set_var('htmlheaders', $headers);
 
 						tpl_set_var('descMode', 3);
@@ -309,10 +334,14 @@
 					}
 					
 					if ($use_log_pw == true)
+					{
 						if (!$pw_ok == true)
 							tpl_set_var('log_pw_field', $log_pw_field_pw_not_ok);
+						else if ($cache_type == 6)
+							tpl_set_var('log_pw_field', $event_log_pw_field);
 						else
-							tpl_set_var('log_pw_field', $log_pw_field);
+							tpl_set_var('log_pw_field', $other_log_pw_field);
+					}
 					else
 						tpl_set_var('log_pw_field', '');
 

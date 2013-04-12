@@ -10,7 +10,7 @@
 	<img src="resource2/{$opt.template.style}/images/cacheicon/unknown.gif" alt="{t}Unknown Geocache{/t}" title="{t}Unknown Geocache{/t}" border="0" width="32" height="32" class="icon32" id="viewcache-cacheicon" />
 {elseif $cachetype==2}
 	<img src="resource2/{$opt.template.style}/images/cacheicon/traditional.gif" alt="{t}Traditional Geocache{/t}" title="{t}Traditional Geocache{/t}" border="0" width="32" height="32" class="icon32" id="viewcache-cacheicon" />
-{elseif $cachetype==3}
+{elseif $cachetype==3}  {* Ocprop: \/cacheicon\/multi\.gif"\s+alt="Multicache" *}
 	<img src="resource2/{$opt.template.style}/images/cacheicon/multi.gif" alt="{t}Multicache{/t}" title="{t}Multicache{/t}" border="0" width="32" height="32" class="icon32" id="viewcache-cacheicon" />
 {elseif $cachetype==4}
 	<img src="resource2/{$opt.template.style}/images/cacheicon/virtual.gif" alt="{t}Virtual Geocache{/t}" title="{t}Virtual Geocache{/t}" border="0" width="32" height="32" class="icon32" id="viewcache-cacheicon" />

@@ -32,7 +32,7 @@
 	<tr>
 		<td>&nbsp;&nbsp;&nbsp;</td>
 		<td>
-			{logimage} {date} {typetext}
+			{logimage} {date}{time} &nbsp; {typetext}
 		</td>
 	</tr>
 	<tr><td class="spacer"></td></tr>

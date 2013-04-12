@@ -4,7 +4,7 @@
  *
  *  Unicode Reminder メモ
  *
- *  Display some status information about the server and Opencaching
+ *  Create / redirect to statpic
  ***************************************************************************/
 
 	require('./lib2/web.inc.php');

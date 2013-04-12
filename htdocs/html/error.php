@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<!-- Unicode Reminder メモ -->
 	<head>
-		<title>Opencaching.de - Datenbankproblem</title>
+		<title>Opencaching.de - Interner Fehler</title>
 		<meta http-equiv="content-type" content="text/xhtml; charset=UTF-8" />
 		<meta http-equiv="Content-Language" content="de" />
 		<meta http-equiv="gallerimg" content="no" />
@@ -13,7 +13,7 @@
 		<table border="0" cellspacing="0" cellpadding="2" width="100%">
 			<tr>
 				<td width="80px">
-					<a href="/index.php"><img src="images/newlogo.png" alt="oc-Logo" style="border:0px;"/></a>
+					<a href="index.php"><img src="images/newlogo.png" alt="oc-Logo" style="border:0px;"/></a>
 				</td>
 				<td width="100%">
 					&nbsp;
@@ -24,12 +24,15 @@
 			</tr>
 		</table>
   <div id="content">
-		<h1>Fehler beim Datenbankzugriff</h1>
 		<?php
-			echo '<p>Entschuldigung, bei der Darstellung der Seite ist ein interner Fehler aufgetreten.
+			// no references to any other PHP code here except $errtitle and $errmsg, to minimize 
+			// possibilities of error recursions
+
+			echo "<h1>" . $errtitle . "</h1>";
+			echo '<p>Entschuldigung, bei der Darstellung der Seite ist ein intener Fehler aufgetreten.
 			      Falls dieses Problem für längere Zeit bestehen sollte, informiere uns bitte per
 			      <a href="mailto:contact@opencaching.de">Email</a>.</p>
-			      <p>' . $dberrmsg  . '</p>
+			      <p class="errormsg">' . $errmsg  . '</p>
 			      <p><a href="index.php">Zurück zur Startseite</a></p>
 
 			      <p><br /><br /><em>An error occured while displaying the requested page.

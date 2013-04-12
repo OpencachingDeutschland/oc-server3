@@ -42,8 +42,6 @@
 	</cache>
 ";
 
-	$txtLogs = "";
-
 	//prepare the output
 	$caches_per_page = 20;
 	

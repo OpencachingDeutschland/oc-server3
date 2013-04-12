@@ -149,7 +149,8 @@
 				              IFNULL(`cr`.`adminid`, 0) AS `adminid`,
 				              IFNULL(`u2`.`username`, '') AS `adminnick`,
 				              IFNULL(`tt2`.`text`, `crr`.`name`) AS `reason`, `cr`.`note`, IFNULL(tt.text, crs.name) AS `status`,
-				              `cr`.`lastmodified`, `c`.`name` AS `cachename`,
+				              `cr`.`date_created`, `cr`.`lastmodified`,
+				              `c`.`name` AS `cachename`,
 				              `c`.`user_id` AS `ownerid`
 				         FROM `cache_reports` AS `cr`
 				    LEFT JOIN `cache_report_reasons` AS `crr` ON `cr`.`reason`=`crr`.`id`
@@ -173,6 +174,7 @@
 			$tpl->assign('reason', $record['reason']);
 			$tpl->assign('note', $record['note']);
 			$tpl->assign('status', $record['status']);
+			$tpl->assign('created', $record['date_created']);
 			$tpl->assign('lastmodified', $record['lastmodified']);
 			$tpl->assign('cachename', $record['cachename']);
 			$tpl->assign('ownerid', $record['ownerid']);

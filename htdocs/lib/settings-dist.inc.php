@@ -11,8 +11,9 @@
 
 		Unicode Reminder メモ
 	                                         				                                
-	server specific settings
+		server specific settings
 	
+		this file may be outdated and should be reviewed
  ****************************************************************************/
  
  	//relative path to the root directory
@@ -53,7 +54,7 @@
 	if (!isset($emailaddr)) $emailaddr = 'contact@opencaching.de';
 	
 	// location of cache images
-	if (!isset($picdir)) $picdir = $rootpath . 'images/uploads';
+	if (!isset($picdir)) $picdir = $rootpath . 'images/uploads';  // Ocprop
 	if (!isset($picurl)) $picurl = 'http://www.opencaching.de/images/uploads';
 
 	// Thumbsize
@@ -225,11 +226,5 @@ function post_config()
 		'filename' => 'http://geokrety.org/index.php?lang=de_DE.UTF-8'
 	);
 }
-
-$OKAPI_SETTINGS = array(
-	'OC_BRANCH' => 'oc.de',
-	'SITELANG' => 'de',
-	'VAR_DIR' => $rootpath.'var',
-);
 
 ?>

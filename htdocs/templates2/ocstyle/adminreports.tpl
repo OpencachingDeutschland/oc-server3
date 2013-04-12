@@ -54,7 +54,12 @@
 		{/if}
 	{else}
 		<p style="line-height: 1.6em;">{t}Details for report of {/t} <a href="viewcache.php?cacheid={$cacheid}" target="_blank">{$cachename|escape}</a> {t} by {/t} <a href="viewprofile.php?userid={$userid}" target="_blank">{$usernick|escape}</a></p>
-		<p style="line-height: 1.6em;"><b>{t}Last modified{/t}:</b>&nbsp;{$lastmodified|date_format:$opt.format.datelong}</p>
+		{if $created != null}
+			<p style="line-height: 1.6em;"><b>{t}Created at{/t}:</b>&nbsp;{$created|date_format:$opt.format.datelong}</p>
+		{/if}
+		{if $lastmodified != $created}
+			<p style="line-height: 1.6em;"><b>{t}Last modified{/t}:</b>&nbsp;{$lastmodified|date_format:$opt.format.datelong}</p>
+		{/if}
 		<p style="line-height: 1.6em;"><b>{t}State:{/t}</b>&nbsp;{$status}&nbsp;&nbsp;<b>Admin:</b>&nbsp;{if $adminnick==''}{t}not assigned{/t}{else}{if $otheradmin}<font color="red"><b>{/if}{$adminnick|escape}{if $otheradmin}</b></font>{/if}{/if}</p>
 		<p style="line-height: 1.6em;"><b>{t}Reason:{/t}</b>&nbsp;{$reason|escape|nl2br}</p>
 		<p style="line-height: 1.6em;"><b>{t}Comment:{/t}</b>&nbsp;{$note|escape|nl2br}</p>

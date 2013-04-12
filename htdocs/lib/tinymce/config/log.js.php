@@ -24,6 +24,7 @@ tinyMCE.init({
 	oninit : "postInit",
 	
 	content_css : "lib/tinymce/config/content.css"
+	// Ocprop: lib\/tinymce
 });
 
 var fileBrowserReturnURL = "";

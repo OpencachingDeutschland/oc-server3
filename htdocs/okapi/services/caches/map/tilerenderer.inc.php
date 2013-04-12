@@ -34,7 +34,7 @@ class DefaultTileRenderer implements TileRenderer
 	 * Changing this will affect all generated hashes. You should increment it
 	 * whenever you alter anything in the drawing algorithm.
 	 */
-	private static $VERSION = 56;
+	private static $VERSION = 59;
 
 	/**
 	 * Should be always true. You may temporarily set it to false, when you're
@@ -191,7 +191,7 @@ class DefaultTileRenderer implements TileRenderer
 		$capt = ($cache_struct[6] & TileTree::$FLAG_DRAW_CAPTION);
 		if (($this->zoom <= 8) && (!$capt))
 			$this->draw_cache_tiny($cache_struct);
-		elseif (($this->zoom <= 12) && (!$capt))
+		elseif (($this->zoom <= 13) && (!$capt))
 			$this->draw_cache_medium($cache_struct);
 		else
 			$this->draw_cache_large($cache_struct);

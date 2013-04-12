@@ -81,7 +81,7 @@
 	<p>
 		Der gesch&auml;ftsf&uuml;hrende Vorstand besteht aus (Stand 31.08.2012):
 	</p>
-	<ul class="indent" style="font-size: 12px;">
+	<ul class="indent">
 		<li>Michael Vaahsen, Vorsitzender</li>
 		<li>Gerald Halbig, stellv. Vorsitzender</li>
 		<li>Maik Bischoff, Kassenwart</li>
@@ -175,7 +175,7 @@
 		<b>F&uuml;r das Verstecken von Geocaches, die auf Opencaching.de ver&ouml;ffentlicht 
 		werden sollen, gilt grunds&auml;tzlich:</b>
 	</p>
-	<ul class="indent" style="font-size: 12px;">
+	<ul class="indent">
 		<li>
 			Das Verstecken eines Geocaches geschieht in eigenem Interesse und auf 
 			eigene Gefahr - Opencaching.de &uuml;bernimmt in keinem Fall irgendeine 
@@ -244,7 +244,7 @@
 	<p>
 		<b>F&uuml;r das Suchen eines Geocaches gilt grunds&auml;tzlich:</b>
 	</p>
-	<ul class="indent" style="font-size: 12px;">
+	<ul class="indent">
 		<li>
 			Das Suchen eines Geocaches geschieht in eigenem Interesse und auf 
 			eigene Gefahr - Opencaching.de &uuml;bernimmt in keinem Fall irgendeine 
@@ -292,7 +292,7 @@
 		Für die Namensnennung ist die Form
 	</p>
 	<p style="font-weight: 800;">
-		&copy; $USERNAME, Opencaching.de, CC-BY-NC-ND, Stand: $DATUM
+		&copy; $USERNAME, Opencaching.de, CC BY-NC-ND, Stand: $DATUM
 	</p>
 	<p>
 		zu verwenden, wobei das Datum sich auf den Abrufzeitpunkt von www.opencaching.de bezieht. Bei Fotos und Logeintr&auml;gen kann vom Datum abgesehen werden.

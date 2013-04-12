@@ -2,6 +2,7 @@ SET NAMES 'utf8';
 DROP TABLE IF EXISTS `cache_reports`;
 CREATE TABLE `cache_reports` (
   `id` int(11) unsigned NOT NULL auto_increment,
+  `date_created` datetime default NULL,
   `cacheid` int(11) unsigned NOT NULL,
   `userid` int(11) unsigned NOT NULL,
   `reason` tinyint(3) unsigned NOT NULL,

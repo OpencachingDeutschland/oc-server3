@@ -742,32 +742,31 @@ class OkapiLock
 		else
 		{
 			$this->lockfile = Okapi::get_var_dir()."/okapi-lock-".$name;
-			if (!file_exists($this->lockfile))
-			{
-				$fp = fopen($this->lockfile, "wb");
-				fclose($fp);
-			}
-			$this->lock = sem_get(fileinode($this->lockfile));
+			$this->lock = fopen($this->lockfile, "wb");
 		}
 	}
 
 	public function acquire()
 	{
 		if ($this->lock !== null)
-			sem_acquire($this->lock);
+			flock($this->lock, LOCK_EX);
 	}
 
 	public function release()
 	{
 		if ($this->lock !== null)
-			sem_release($this->lock);
+			flock($this->lock, LOCK_UN);
 	}
 
+	/**
+	 * Use this method clean up obsolete and *unused* lock names (usually there
+	 * is no point in removing locks that can be reused.
+	 */
 	public function remove()
 	{
 		if ($this->lock !== null)
 		{
-			sem_remove($this->lock);
+			fclose($this->lock);
 			unlink($this->lockfile);
 		}
 	}
@@ -778,7 +777,7 @@ class Okapi
 {
 	public static $data_store;
 	public static $server;
-	public static $revision = 701; # This gets replaced in automatically deployed packages
+	public static $revision = 713; # This gets replaced in automatically deployed packages
 	private static $okapi_vars = null;
 
 	/** Get a variable stored in okapi_vars. If variable not found, return $default. */

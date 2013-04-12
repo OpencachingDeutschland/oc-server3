@@ -31,7 +31,7 @@
 	if (!isset($style)) $style = 'ocstyle';
 
 	//pagetitle
-	if (!isset($pagetitle)) $pagetitle = 'www.opencaching.de';
+	$pagetitle = 'local.opencaching.de';
 	$opt['page']['title'] = 'OPENCACHING';
 	$opt['page']['subtitle1'] = 'Geocaching with Opencaching';
 	$opt['page']['subtitle2'] = '';
@@ -58,7 +58,7 @@
 	$absolute_server_URI = $dev_baseurl . '/';
 	
 	// EMail address of the sender
-	if (!isset($emailaddr)) $emailaddr = 'contact@opencaching.de';
+	if (!isset($emailaddr)) $emailaddr = 'root@local.opencaching.de';
 	
 	// location of cache images
 	if (!isset($picdir)) $picdir = $rootpath . 'images/uploads';
@@ -142,7 +142,7 @@
   
   // data license
 	$opt['logic']['license']['disclaimer'] = true;   // also in lib2/settings-dist.inc.php
-	$opt['logic']['license']['terms'] = 'http://www.opencaching.de/articles.php?page=impressum#datalicense';
+	$opt['logic']['license']['terms'] = $absolute_server_URI . 'articles.php?page=impressum#datalicense';
 
   // see config2/settings-dist.inc.php
 	$opt['template']['default']['locale'] = 'DE';      // may be overwritten by $opt['domain'][...]['locale']
@@ -169,13 +169,11 @@
 	// you can use -1 to use the master (not recommended, because replicated to slaves)
 	$opt['db']['slave']['primary'] = -1;
 
-	$opt['template']['locales']['SV']['show'] = false;
-	$opt['template']['locales']['NO']['show'] = false;
 	$opt['template']['locales']['DA']['show'] = false;
-	$opt['template']['locales']['PT']['show'] = false;
+	$opt['template']['locales']['FR']['show'] = false;
 	$opt['template']['locales']['JA']['show'] = false;
-
-	function post_config()
-	{
-	}
+	$opt['template']['locales']['NL']['show'] = false;
+	$opt['template']['locales']['PL']['show'] = false;
+	$opt['template']['locales']['PT']['show'] = false;
+	$opt['template']['locales']['RU']['show'] = false;
 ?>

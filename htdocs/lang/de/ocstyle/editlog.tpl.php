@@ -94,12 +94,15 @@ function _chkFound () {
 	<tr><td class="spacer" colspan="2"></td></tr>
 
 	<tr>
-		<td width="180px">{t}Date:{/t}</td>
+		<td width="180px">{t}Date / time:{/t}</td>
 		<td align="left">
 			<input class="input20" type="text" name="logday" maxlength="2" value="{logday}"/>.
 			<input class="input20" type="text" name="logmonth" maxlength="2" value="{logmonth}"/>.
 			<input class="input40" type="text" name="logyear" maxlength="4" value="{logyear}"/>
-			{date_message}
+			&nbsp;&nbsp;&nbsp;
+			<input class="input20" type="text" name="loghour" maxlength="2" value="{loghour}" /> :
+			<input class="input20" type="text" name="logminute" maxlength="2" value="{logminute}" />
+			&nbsp;&nbsp;{date_message}
 		</td>
 	</tr>
 	<tr><td class="spacer" colspan="2"></td></tr>
@@ -128,7 +131,7 @@ function _chkFound () {
 	</tr>
 	<tr>
 		<td>
-			<textarea name="logtext" id="logtext" cols="68" rows="25" >{logtext}</textarea>
+			<textarea name="logtext" id="logtext" cols="68" rows="25" class="logs" >{logtext}</textarea>
     </td>
 	</tr>
 	<tr>

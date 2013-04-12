@@ -54,7 +54,7 @@
 		$multiplier['nm'] = 0.53996;
 
 		if (isset($_REQUEST['queryid']) || isset($_REQUEST['showresult']))
-		{
+		{  // Ocprop: showresult, queryid
 			$bCookieQueryid = false;
 			$queryid = isset($_REQUEST['queryid']) ? $_REQUEST['queryid'] : 0;
 		}
@@ -132,7 +132,7 @@
 				if (isset($_REQUEST['output']))
 					$options['output'] =  $_REQUEST['output'];
 
-				if (isset($_REQUEST['showresult']))
+				if (isset($_REQUEST['showresult']))  // Ocprop
 				{
 					$options['showresult'] = $_REQUEST['showresult'];
 				}
@@ -145,7 +145,7 @@
 				}
 
 				// finderid in finder umsetzen
-				$options['finderid'] = isset($options['finderid']) ? $options['finderid'] + 0 : 0;
+				$options['finderid'] = isset($options['finderid']) ? $options['finderid'] + 0 : 0;  // Ocprop
 				if(isset($options['finder']) && $options['finderid'] > 0)
 				{
 					$rs_name = sql("SELECT `username` FROM `user` WHERE `user_id`='&1'", $options['finderid']);
@@ -159,7 +159,7 @@
 				}
 
 				// ownerid in owner umsetzen
-				$options['ownerid'] = isset($options['ownerid']) ? $options['ownerid'] + 0 : 0;
+				$options['ownerid'] = isset($options['ownerid']) ? $options['ownerid'] + 0 : 0;  // Ocprop
 				if(isset($options['owner']) && $options['ownerid'] > 0)
 				{
 					$rs_name = sql("SELECT `username` FROM `user` WHERE `user_id`='&1'", $options['ownerid']);
@@ -195,9 +195,9 @@
 			$options['f_inactive'] = isset($_REQUEST['f_inactive']) ? $_REQUEST['f_inactive'] : 1;
 			$options['f_ignored'] = isset($_REQUEST['f_ignored']) ? $_REQUEST['f_ignored'] : 1;
 			$options['f_otherPlatforms'] = isset($_REQUEST['f_otherPlatforms']) ? $_REQUEST['f_otherPlatforms'] : 0;
-			$options['expert'] = isset($_REQUEST['expert']) ? $_REQUEST['expert'] : 0;
+			$options['expert'] = isset($_REQUEST['expert']) ? $_REQUEST['expert'] : 0;  // Ocprop: 0
 			$options['showresult'] = isset($_REQUEST['showresult']) ? $_REQUEST['showresult'] : 0;
-			$options['output'] = isset($_REQUEST['output']) ? $_REQUEST['output'] : 'HTML';
+			$options['output'] = isset($_REQUEST['output']) ? $_REQUEST['output'] : 'HTML';  // Ocprop: HTML
 			$options['bbox'] = isset($_REQUEST['bbox']) ? $_REQUEST['bbox'] : false;
 
 			if (isset($_REQUEST['cache_attribs']))
@@ -254,20 +254,20 @@
         if (!isset($_REQUEST['utf8']))
           $options['cachename'] = iconv("ISO-8859-1", "UTF-8", $options['cachename']);
 			}
-			elseif (isset($_REQUEST['searchbyowner']))
+			elseif (isset($_REQUEST['searchbyowner']))  // Ocprop
 			{
 				$options['searchtype'] = 'byowner';
 
 				$options['ownerid'] = isset($_REQUEST['ownerid']) ? $_REQUEST['ownerid'] : 0;
 				$options['owner'] = isset($_REQUEST['owner']) ? stripslashes($_REQUEST['owner']) : '';
 			}
-			elseif (isset($_REQUEST['searchbyfinder']))
+			elseif (isset($_REQUEST['searchbyfinder']))  // Ocprop
 			{
 				$options['searchtype'] = 'byfinder';
 
 				$options['finderid'] = isset($_REQUEST['finderid']) ? $_REQUEST['finderid'] : 0;
 				$options['finder'] = isset($_REQUEST['finder']) ? stripslashes($_REQUEST['finder']) : '';
-				$options['logtype'] = isset($_REQUEST['logtype']) ? $_REQUEST['logtype'] : '1,7';
+				$options['logtype'] = isset($_REQUEST['logtype']) ? $_REQUEST['logtype'] : '1,7';  // Ocprop
 			}
 			elseif (isset($_REQUEST['searchbyort']))
 			{
@@ -289,6 +289,7 @@
 			{
 				$options['searchtype'] = 'bydistance';
 
+				// Ocprop: all of the following options
 				if (isset($_REQUEST['lat']) && isset($_REQUEST['lon']))
 				{
 					$options['lat'] = $_REQUEST['lat']+0;
@@ -428,7 +429,7 @@
 
 			//make a list of cache-ids that are in the result
 			if(!isset($options['expert'])) $options['expert']='';
-			if ($options['expert'] == 0)
+			if ($options['expert'] == 0)  // Ocprop
 			{
 				$sql_select = array();
 				$sql_from = '';
@@ -714,7 +715,7 @@
 					}
 					$sql_where[] = '`cache_logs`.`type` IN (' . $idNumbers . ')';
 				}
-				elseif ($options['searchtype'] == 'bydistance')
+				elseif ($options['searchtype'] == 'bydistance')   // Ocprop
 				{
 					//check the entered data
 					if (isset($options['lat']) && isset($options['lon']))
@@ -875,15 +876,15 @@
 				}
 
 				// additional options
-				if(!isset($options['f_userowner'])) $options['f_userowner']='0';
+				if(!isset($options['f_userowner'])) $options['f_userowner']='0';   // Ocprop
 				if($options['f_userowner'] != 0) { $sql_where[] = '`caches`.`user_id`!=\'' . $usr['userid'] .'\''; }
 
-				if(!isset($options['f_userfound'])) $options['f_userfound']='0';
+				if(!isset($options['f_userfound'])) $options['f_userfound']='0';  // Ocprop
 				if($options['f_userfound'] != 0)
 				{
 					$sql_where[] = '`caches`.`cache_id` NOT IN (SELECT `cache_logs`.`cache_id` FROM `cache_logs` WHERE `cache_logs`.`user_id`=\'' . sql_escape($usr['userid']) . '\' AND `cache_logs`.`type` IN (1, 7))';
 				}
-				if(!isset($options['f_inactive'])) $options['f_inactive']='0';
+				if(!isset($options['f_inactive'])) $options['f_inactive']='0';  // Ocprop
 				if($options['f_inactive'] != 0)  $sql_where[] = '`caches`.`status`=1';
 
 				if(isset($usr))
@@ -1008,6 +1009,7 @@
 			}
 
 			//go to final output preparation
+			// Ocprop: HTML, gpx
 			if (!file_exists($opt['rootpath'] . 'lib/search.' . mb_strtolower($options['output']) . '.inc.php'))
 			{
 				tpl_set_var('tplname', $tplname);
@@ -1065,7 +1067,7 @@ function outputSearchForm($options)
 	tpl_set_var('bydistance_enabled', ($homecoords ? "" : 'disabled="disabled"'));
 
 	if (isset($options['sort']))
-		$bBynameChecked = ($options['sort'] == 'byname');
+		$bBynameChecked = ($options['sort'] == 'byname');  // Ocprop
 	else
 		$bBynameChecked = ($usr['userid'] == 0);
 	tpl_set_var('byname_checked', ($bBynameChecked == true) ? ' checked="checked"' : '');

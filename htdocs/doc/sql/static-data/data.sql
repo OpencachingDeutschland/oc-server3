@@ -2440,6 +2440,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1976', 'current
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1977', 'password for \'found\' logs', '2013-02-23 19:00:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1978', 'only for attended-logs', '2013-02-23 19:00:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1979', 'Contact reporter', '2013-02-23 19:00:04');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1980', 'For \'Found\' and \'Not found\' logs: Date and (optional) time of the cache search.', '2013-02-23 19:00:04');
 
 -- Table sys_trans_ref
 SET NAMES 'utf8';
@@ -6156,6 +6157,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1977', 'DE', 'Passwort für Fund-Logs', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1978', 'DE', 'nur für Teilgenommen-Logs', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1979', 'DE', 'Email an Melder', '2013-02-19 05:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1980', 'DE', 'Zeitpunkt des Funds, der erfolglosen Suche oder eines Hinweislogs', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'EN', 'Reorder IDs \r', '2010-09-02 00:15:30');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'EN', 'The database could not be reconnected.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'EN', 'Testing – please do not login', '2010-08-28 11:48:07');

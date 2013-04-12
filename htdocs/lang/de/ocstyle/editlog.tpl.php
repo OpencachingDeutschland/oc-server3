@@ -105,14 +105,17 @@ function _chkFound () {
 			&nbsp;&nbsp;{date_message}
 		</td>
 	</tr>
+	<tr>
+		<td></td>
+		<td>
+			<img src="lang/de/ocstyle/images/misc/hint.gif" border="0" width="15" height="11">
+			{t}For 'Found' and 'Not found' logs: Date and (optional) time of the cache search.{/t}
+		</td>
+	</tr>
 	<tr><td class="spacer" colspan="2"></td></tr>
 	{rating_message}
 </table>
 <table class="table">
-	<tr>
-		<td colspan="2">{t}Log-entry:{/t}</td>
-		</td>
-	</tr>
 	<tr>
 		<td colspan="2">
 			<div class="menuBar">

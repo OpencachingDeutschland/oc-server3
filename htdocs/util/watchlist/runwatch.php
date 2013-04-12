@@ -244,7 +244,7 @@ function process_log_watch($user_id, $log_id)
 
 //	echo "process_log_watch($user_id, $log_id)\n";
 	
-	$rsLog = sql("SELECT cache_logs.cache_id cache_id, cache_logs.text text, cache_logs.text_html text_html, cache_logs.date logdate, user.username username, caches.name cachename FROM `cache_logs`, `user`, `caches` WHERE (cache_logs.user_id = user.user_id) AND (cache_logs.cache_id = caches.cache_id) AND (cache_logs.id = '&1')", $log_id);
+	$rsLog = sql("SELECT cache_logs.cache_id cache_id, cache_logs.text text, cache_logs.text_html text_html, cache_logs.date logdate, user.username username, caches.name cachename, caches.wp_oc wp_oc FROM `cache_logs`, `user`, `caches` WHERE (cache_logs.user_id = user.user_id) AND (cache_logs.cache_id = caches.cache_id) AND (cache_logs.id = '&1')", $log_id);
 	$rLog = sql_fetch_array($rsLog);
 	mysql_free_result($rsLog);
 	
@@ -268,7 +268,7 @@ function process_log_watch($user_id, $log_id)
 	}
 	
 	$watchtext = mb_ereg_replace('{date}', date('d.m.Y', strtotime($rLog['logdate'])), $watchtext);
-	$watchtext = mb_ereg_replace('{cacheid}', $rLog['cache_id'], $watchtext);
+	$watchtext = mb_ereg_replace('{wp_oc}', $rLog['wp_oc'], $watchtext);
 	$watchtext = mb_ereg_replace('{text}', $logtext, $watchtext);
 	$watchtext = mb_ereg_replace('{user}', $rLog['username'], $watchtext);
 	$watchtext = mb_ereg_replace('{cachename}', $rLog['cachename'], $watchtext);

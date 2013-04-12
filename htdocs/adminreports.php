@@ -178,6 +178,10 @@
 			$tpl->assign('lastmodified', $record['lastmodified']);
 			$tpl->assign('cachename', $record['cachename']);
 			$tpl->assign('ownerid', $record['ownerid']);
+			if (isset($opt['logic']['adminreports']['cachexternal']))
+				$tpl->assign('cachexternal', $opt['logic']['adminreports']['cachexternal']);
+			else
+				$tpl->assign('cachexternal', array());
 		}
 		sql_free_result($rs);
 

@@ -53,7 +53,12 @@
 			<p style="line-height: 2.5m;">{t}(*) New reports{/t}</p>
 		{/if}
 	{else}
-		<p style="line-height: 1.6em;">{t}Details for report of {/t} <a href="viewcache.php?cacheid={$cacheid}" target="_blank">{$cachename|escape}</a> {t} by {/t} <a href="viewprofile.php?userid={$userid}" target="_blank">{$usernick|escape}</a></p>
+		<p style="line-height: 1.6em;">{t}Details for report of {/t} <a href="viewcache.php?cacheid={$cacheid}" target="_blank">{$cachename|escape}</a> {t} by {/t} <a href="viewprofile.php?userid={$userid}" target="_blank">{$usernick|escape}</a>
+		&nbsp; &nbsp; &nbsp;
+		{foreach from=$cachexternal key=extname item=exturl}
+			[<a href="{$exturl|replace:_cache_id_:$cacheid}" target="_blank">{$extname}</a>] &nbsp;
+		{/foreach}
+		</p>
 		{if $created != null}
 			<p style="line-height: 1.6em;"><b>{t}Created at{/t}:</b>&nbsp;{$created|date_format:$opt.format.datelong}</p>
 		{/if}

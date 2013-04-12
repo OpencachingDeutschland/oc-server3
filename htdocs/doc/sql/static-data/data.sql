@@ -2434,6 +2434,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1973', 'General
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1974', 'If you do not see any E-Mail, please check the spam folder of your mailbox.', '2013-02-23 19:00:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1975', 'Do not use easy-to-guess number and letter sequences like \'123456\' or \'qwerty\'', '2013-02-23 19:00:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1976', 'currently not available', '2013-02-23 19:00:04');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1977', 'Contact reporter', '2013-02-23 19:00:04');
 
 -- Table sys_trans_ref
 SET NAMES 'utf8';
@@ -6145,6 +6146,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1974', 'DE', 'Falls du keine E-Mail sehen solltest, prüfe bitte ob sie im Spam-Ordner deines Postfachs einsortiert wurde.', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1975', 'DE', 'Verwende keine einfach erratbaren Ziffern- oder Buchstabenkombinationen wie &bdquo;123456&ldquo; oder &bdquo;qwertz&ldquo;.', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1976', 'DE', 'zurzeit nicht verfügbar', '2013-02-19 05:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1977', 'DE', 'Email an Melder', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'EN', 'Reorder IDs \r', '2010-09-02 00:15:30');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'EN', 'The database could not be reconnected.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'EN', 'Testing – please do not login', '2010-08-28 11:48:07');

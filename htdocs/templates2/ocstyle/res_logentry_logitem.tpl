@@ -34,7 +34,7 @@
 	{* Ocprop: /\?logid=([0-9a-f\-]+)" *}
 	{if $cache.userid==$login.userid || $logItem.userid==$login.userid}
 		<p class="editlog"><img src="images/trans.gif" border="0" width="16" height="16" alt="" title="" />
-			{if $logItem.userid==$login.userid && ($cache.userid==$login.userid || $cache.status!=6)}
+			{if $logItem.userid==$login.userid && ($cache.userid==$login.userid || $cache.status!=6 || $cache.adminlog)}
 				<a href="editlog.php?logid={$logItem.id|urlencode}"><img src="resource2/{$opt.template.style}/images/action/16x16-properties.png" border="0" align="middle" border="0" width="16" height="16" alt="" /></a>
 				[<a href="editlog.php?logid={$logItem.id|urlencode}">{t}Edit{/t}</a>]
 			{/if}

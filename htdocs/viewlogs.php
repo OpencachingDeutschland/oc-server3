@@ -64,6 +64,7 @@
 	else
 		$tpl->error(ERROR_CACHE_NOT_EXISTS);
 
+	$rCache['adminlog'] = ($login->admin & ADMIN_USER);
 	$tpl->assign('cache', $rCache);
 
 	$tpl->assign('logs', cache::getLogsArray($cache_id, $start, $count));

@@ -204,6 +204,9 @@ div#bg2 {display: none;}
 /*.nav4 {overflow: hidden; clear: both; margin: 0px; padding: 0px; color: rgb(75,75,75); font-size: 1.0em;margin: 0;}
 */
 /*.nav4 ul {width: 160px; margin: 0px 0px 0px 0px; padding: 0px; border-bottom: solid 1px rgb(216,206,159); background-color: rgb(219,230,241);}*/
+
+.nav4 li.hilite a { background-color:#ffb9b5 !important; }
+
 .nav4 li {float: left; list-style: none; margin: 0px; padding: 0px;padding-bottom: 5px;}
 .nav4 li.title {display: none; margin: 0px 0px 0px 0px; padding: 3px 5px 2px 5px; background-color: rgb(156,186,214); color: rgb(255,255,255); text-transform: uppercase; font-weight: bold; font-size: 120%;}
 .nav4 li.group a {background-color: rgb(219,230,241);display: block; min-height: 1.7em; height: auto !important; height: 1.7em; line-height: 1.7em; margin: 0px; margin-right: 3px; padding: 0px 7px 0px 20px; border-top: solid 1px rgb(200,200,200); border-left: solid 7px rgb(219,230,241); color: rgb(75,75,75); font-weight: bold; font-size: 120%;}

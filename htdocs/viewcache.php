@@ -155,6 +155,8 @@ function getChildWaypoints($cacheid)
 			$tpl->error(ERROR_CACHE_NOT_PUBLISHED);
 	}
 
+	$rCache['adminlog'] = !$rCache['log_allowed'] && ($login->admin & ADMIN_USER);
+
 	$rCache['desclanguages'] = explode(',', $rCache['desclanguages']);
 
 	$rCache['sizeName'] = labels::getLabelValue('cache_size', $rCache['size']);

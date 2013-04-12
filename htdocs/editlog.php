@@ -49,6 +49,8 @@
 		}
 		else
 		{
+			$useradmin = ($login->admin & ADMIN_USER) ? 1 : 0;
+
 			//does log with this logid exist?
 			$log_rs = sql("SELECT `cache_logs`.`cache_id` AS `cache_id`, 
 														`cache_logs`.`node` AS `node`, 
@@ -69,8 +71,8 @@
 			$log_record = sql_fetch_array($log_rs);
 			sql_free_result($log_rs);
 			if ($log_record !== false && 
-					($log_record['status'] != 6 || ($log_record['cache_user_id'] == $login->userid && $log_record['user_id'] == $login->userid)) &&   
-					$log_record['status'] != 7)
+					(($log_record['status'] != 6 || ($log_record['cache_user_id'] == $login->userid && $log_record['user_id'] == $login->userid)) &&   
+					 $log_record['status'] != 7) || $useradmin)
 			{
 				require($stylepath . '/editlog.inc.php');
 				require($stylepath.'/rating.inc.php');

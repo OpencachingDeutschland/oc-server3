@@ -57,11 +57,21 @@
 			require($stylepath . '/log_cache.inc.php');
 			require($stylepath.'/rating.inc.php');
 
+			$useradmin = ($login->admin & ADMIN_USER) ? 1 : 0;
+
 			$cachename = '';
 			if ($cache_id != 0)
 			{
 				//get cachename
-				$rs = sql("SELECT `caches`.`name`, `caches`.`user_id`, `caches`.`logpw`, `caches`.`wp_gc`, `caches`.`wp_nc`, `caches`.`type`, `caches`.`status` FROM `caches` INNER JOIN `cache_status` ON `caches`.`status`=`cache_status`.`id` WHERE (`cache_status`.`allow_user_log`=1 OR `caches`.`user_id`='&1') AND `caches`.`cache_id`='&2'", $usr['userid'], $cache_id);
+				$rs = sql("SELECT `caches`.`name`, `caches`.`user_id`, `caches`.`logpw`,
+				                  `caches`.`wp_gc`, `caches`.`wp_nc`, `caches`.`type`,
+				                  `caches`.`status`,
+				                  `cache_status`.`allow_user_log`=1 OR `caches`.`user_id`='&1' AS `log_allowed`
+				             FROM `caches`
+				       INNER JOIN `cache_status` ON `caches`.`status`=`cache_status`.`id`
+							      WHERE (`cache_status`.`allow_user_log`=1 OR `caches`.`user_id`='&1' OR '&3')
+										      AND `caches`.`cache_id`='&2'",
+							    $usr['userid'], $cache_id, $useradmin);
 
 				if (mysql_num_rows($rs) == 0)
 				{
@@ -70,9 +80,10 @@
 				else
 				{
 					$record = sql_fetch_array($rs);
+					$adminlog = !($record['log_allowed']) && $useradmin;
 
-					// only the owner is allowed to make logs to not published caches
-					if ($record['user_id'] == $usr['userid'] || $record['status'] != 5)
+					// only the owner and admins are allowed to make logs to not published caches
+					if ($record['user_id'] == $usr['userid'] || $record['status'] != 5 || $useradmin)
 					{
 						$cachename = $record['name'];
 						$cache_user_id = $record['user_id'];
@@ -95,7 +106,7 @@
 			{
 				$all_ok = false;
 				$log_text  = isset($_POST['logtext']) ? ($_POST['logtext']) : '';
-				$log_type = isset($_POST['logtype']) ? ($_POST['logtype']+0) : 1;
+				$log_type = isset($_POST['logtype']) ? ($_POST['logtype']+0) : null;
 				$log_date_day = isset($_POST['logday']) ? trim($_POST['logday']) : date('d');
 				$log_date_month = isset($_POST['logmonth']) ? trim($_POST['logmonth']) : date('m');
 				$log_date_year = isset($_POST['logyear']) ? trim($_POST['logyear']) : date('Y');
@@ -272,11 +283,13 @@
 									        LEFT JOIN `sys_trans_text` ON `sys_trans`.`id`=`sys_trans_text`.`trans_id` AND `sys_trans_text`.`lang`='" . sql_escape($locale) . "' 
 											        WHERE `caches`.`cache_id`='" . ($cache_id+0) . "'
 											     ORDER BY `log_types`.`id` " . $logtypeorder);
+					$log_type = ($record['user_id'] == $usr['userid'] ? 3 : 1);
 					while ($rLogTypes = sql_fetch_assoc($rsLogTypes))
-					{
-						$sSelected = ($rLogTypes['id'] == $log_type) ? ' selected="selected"' : '';
-						$logtypeoptions .= '<option value="' . $rLogTypes['id'] . '"' . $sSelected . '>' . htmlspecialchars($rLogTypes['name'], ENT_COMPAT, 'UTF-8') . '</option>' . "\n";
-					}
+						if (!$adminlog || $rLogTypes['id'] == 3)
+						{
+							$sSelected = ($rLogTypes['id'] == $log_type) ? ' selected="selected"' : '';
+							$logtypeoptions .= '<option value="' . $rLogTypes['id'] . '"' . $sSelected . '>' . htmlspecialchars($rLogTypes['name'], ENT_COMPAT, 'UTF-8') . '</option>' . "\n";
+						}
 					sql_free_result($rsLogTypes);
 
 					//set tpl vars

@@ -850,7 +850,6 @@ class WebService
 					where
 						cache_id in (".$cache_codes_escaped_and_imploded.")
 						and status = 1
-						and type > 0
 					order by cache_id, stage, `desc`
 				");
 			}
@@ -896,14 +895,17 @@ class WebService
 			foreach ($waypoints as $row)
 			{
 				$index++;
-				$results[$cacheid2wptcode[$row['cache_id']]]['alt_wpts'][] = array(
-					'name' => sprintf($wpt_format, $cacheid2wptcode[$row['cache_id']], $index),
-					'location' => round($row['latitude'], 6)."|".round($row['longitude'], 6),
-					'type' => $row['okapi_type'],
-					'type_name' => Okapi::pick_best_language($internal_wpt_type_id2names[$row['internal_type_id']], $langpref),
-					'sym' => $row['sym'],
-					'description' => ($row['stage'] ? _("Stage")." ".$row['stage'].": " : "").$row['desc'],
-				);
+				if (in_array($row['internal_type_id'], array_keys($internal_wpt_type_id2names)))  # waypoint-type sanity check
+				{
+					$results[$cacheid2wptcode[$row['cache_id']]]['alt_wpts'][] = array(
+						'name' => sprintf($wpt_format, $cacheid2wptcode[$row['cache_id']], $index),
+						'location' => round($row['latitude'], 6)."|".round($row['longitude'], 6),
+						'type' => $row['okapi_type'],
+						'type_name' => Okapi::pick_best_language($internal_wpt_type_id2names[$row['internal_type_id']], $langpref),
+						'sym' => $row['sym'],
+						'description' => ($row['stage'] ? _("Stage")." ".$row['stage'].": " : "").$row['desc'],
+					);
+				}
 			}
 		}
 

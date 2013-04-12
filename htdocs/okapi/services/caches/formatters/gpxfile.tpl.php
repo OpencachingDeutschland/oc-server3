@@ -156,7 +156,7 @@ http://www.gsak.net/xmlv1/5 http://www.gsak.net/xmlv1/5/gsak.xsd
 					<time><?= $c['date_created'] ?></time>
 					<name><?= Okapi::xmlescape($wpt['name']) ?></name>
 					<cmt><?= Okapi::xmlescape($wpt['description']) ?></cmt>
-					<desc><?= Okapi::xmlescape($wpt['description']) ?></desc>
+					<desc><?= Okapi::xmlescape($wpt['type_name']) ?></desc>
 					<url><?= $c['url'] ?></url>
 					<urlname><?= Okapi::xmlescape($c['name']) ?></urlname>
 					<sym><?= $wpt['sym'] ?></sym>

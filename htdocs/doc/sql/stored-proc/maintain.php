@@ -282,7 +282,7 @@
 	       END IF;
 
 	       IF nFound!=0 THEN
-           SELECT `date` INTO nDate FROM `cache_logs` WHERE `cache_id`=nCacheId AND `type` IN (1, 7) ORDER BY `date` DESC LIMIT 1;
+           SELECT LEFT(`date`,10) INTO nDate FROM `cache_logs` WHERE `cache_id`=nCacheId AND `type` IN (1, 7) ORDER BY `date` DESC LIMIT 1;
            UPDATE `stat_caches` SET `last_found`=nDate WHERE `cache_id`=nCacheId;
 	       END IF;
 

@@ -894,18 +894,21 @@ class WebService
 			$index = 0;
 			foreach ($waypoints as $row)
 			{
-				$index++;
-				if (in_array($row['internal_type_id'], array_keys($internal_wpt_type_id2names)))  # waypoint-type sanity check
+				if (!isset($internal_wpt_type_id2names[$row['internal_type_id']]))
 				{
-					$results[$cacheid2wptcode[$row['cache_id']]]['alt_wpts'][] = array(
-						'name' => sprintf($wpt_format, $cacheid2wptcode[$row['cache_id']], $index),
-						'location' => round($row['latitude'], 6)."|".round($row['longitude'], 6),
-						'type' => $row['okapi_type'],
-						'type_name' => Okapi::pick_best_language($internal_wpt_type_id2names[$row['internal_type_id']], $langpref),
-						'sym' => $row['sym'],
-						'description' => ($row['stage'] ? _("Stage")." ".$row['stage'].": " : "").$row['desc'],
-					);
+					# Sanity check. Waypoints of undefined type won't be accessible via OKAPI.
+					# See issue 219.
+					continue;
 				}
+				$index++;
+				$results[$cacheid2wptcode[$row['cache_id']]]['alt_wpts'][] = array(
+					'name' => sprintf($wpt_format, $cacheid2wptcode[$row['cache_id']], $index),
+					'location' => round($row['latitude'], 6)."|".round($row['longitude'], 6),
+					'type' => $row['okapi_type'],
+					'type_name' => Okapi::pick_best_language($internal_wpt_type_id2names[$row['internal_type_id']], $langpref),
+					'sym' => $row['sym'],
+					'description' => ($row['stage'] ? _("Stage")." ".$row['stage'].": " : "").$row['desc'],
+				);
 			}
 		}
 

@@ -15,7 +15,7 @@
 		// As nearly all logs are from Germany, retrieving non-German logs is
 		// expensive -> longer cache lifetime and smaller count:
 		$tpl->cache_lifetime = 900;
-		$logcount = 150;
+		$logcount = 250;
 	}
 	else
 	{

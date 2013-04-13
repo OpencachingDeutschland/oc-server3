@@ -13,7 +13,7 @@
 	<p>This page lists all changes since version 3.0. Some small items have been omitted here.</p>
 	<br />
 
-	<p><strong>Release  3.0.6</strong> &ndash; April 13, 2013</p>
+	<p><strong>Release  3.0.6</strong> &ndash; April 12, 2013</p>
 	<p>New:</p>
 	<ul>
 		<li>logging with time</li>

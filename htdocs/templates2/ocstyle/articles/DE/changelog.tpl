@@ -13,7 +13,7 @@
 	<p>Im Folgenden sind alle Veränderungen ab OC Version&nbsp;3.0 aufgelistet. Manche Kleinigkeiten wurden zur besseren Übersicht weggelassen und sind im <a href="http://forum.opencaching-network.org/index.php?board=43.0">Entwicklerforum</a> nachlesbar.</p>
 	<br />
 
-	<p><strong>Version 3.0.6</strong> &ndash; 13. April 2013</p>
+	<p><strong>Version 3.0.6</strong> &ndash; 12. April 2013</p>
 	<p>Neu:</p>
 	<ul>
 		<li>Loggen mit Uhrzeit</li>
@@ -48,7 +48,7 @@
 		<li>Cachesuche funktionierte manchmal unmittelbar nach dem Ausloggen nicht</li>
 		<li>korrekte Typbezeichung zusätzlicher Wegpunkte (z.B. &bdquo;Parkplatz&ldquo;) in GPX-Dateien [Bug von v3.0.4]</li>
 		<li>Beim Löschen von Logs werden auch die Bilder mitgelöscht; bisher blieben sie irgendwo im System stehen.</li>
-		<li>Problem mit <a href="http://wiki.opencaching.de/index.php/Ocprop">Ocprop</a>-Logduplikate behoben</li>
+		<li>Problem mit <a href="http://wiki.opencaching.de/index.php/Ocprop">Ocprop</a>-Logduplikate behoben [entstanden durch v3.0.5]</li>
 		<li>Logeditor auf der englischen, italienischen und spanischen Seite in korrekter Sprache</li>
 		<li>Übersetzung von Ländernamen (in denen die Caches liegen) auf der englischen, italienischen und spanischen Seite</li>
   </ul>

@@ -803,7 +803,7 @@ class user
 
 				if ($desc['desc'] != "")
 					if ($old_disabled)
-						$descmsg = $translate->t('cache description was removed because the owner\'s account was inactive when the <a href="articles.php?page=impressum#datalicense">new content license</a> was launched', '',  basename(__FILE__), __LINE__, '', 1, $desc['language']);
+						$descmsg = $translate->t("cache description was removed because the owner's account was inactive when the <a href='articles.php?page=impressum#datalicense'>new content license</a> was launched", '',  basename(__FILE__), __LINE__, '', 1, $desc['language']);
 					else
 						$descmsg = $translate->t('cache description was removed because owner declined content license', '',  basename(__FILE__), __LINE__, '', 1, $desc['language']);
 				else

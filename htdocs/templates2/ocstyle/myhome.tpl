@@ -123,10 +123,6 @@
 		<strong>{t 1=$emails}E-Mails sent: %1{/t}</strong>
 	</p>
 	*}
-	{* link to public profile *}
-	{* now in menu
-	<p>{t}This is what your profile looks like to other users:{/t} <a href="viewprofile.php?userid={$login.userid}">{t}Your public profile{/t}</a></p>
-	*}
 {/if}
 
 <div class="buffer">&nbsp;</div>

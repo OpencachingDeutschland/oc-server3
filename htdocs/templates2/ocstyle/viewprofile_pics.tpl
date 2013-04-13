@@ -11,6 +11,6 @@
 
 {include file="res_logpictures.tpl" logdate=true loguser=false fullyear=true}
 
-<p><br />{t}All pictures are copyrighted. If you want to use them, ask the picture author for permission. From April 7, 2013, the logs including pictures may be used in unchanged form under the terms of the new <a href="articles.php?page=impressum#datalicense">data license</a>.{/t}</p>
+<p><br />{t}All pictures are copyrighted and subject to the <a href="articles.php?page=impressum#datalicense">Opencaching.de data license</a>.{/t}</p>
 <p>{t}In your <a href="mydetails.php">profile settings</a> you can choose if your log pictures stat and gallery is visible for other users.{/t} {t}Pictures marked as spoiler are not shown; therefore the number of pictures on this page can be smaller than in the profile statistics.{/t}</a></p>
 <p>&nbsp;</p>

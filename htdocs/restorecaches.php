@@ -250,12 +250,10 @@ x                    cache_logs_restored   I*     here          datetime     no 
 		$simulate = isset($_REQUEST['simulate']) && $_REQUEST['simulate'];
 		$tpl->assign('simulate', $simulate);
 
-		$restore_date = "";
+		$restore_date = isset($_REQUEST['dateselect']) ? $_REQUEST['dateselect'] : "";
 		$restore_options = array();
 		foreach ($_REQUEST as $param => $value)
-			if (substr($param,0,5) == "date_")
-				$restore_date = substr($param,5);
-			else if (substr($param,0,8) == "restore_")
+			if (substr($param,0,8) == "restore_")
 				$restore_options[] = substr($param,8);
 
 		if ($restore_date == "")

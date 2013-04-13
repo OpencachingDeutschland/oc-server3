@@ -135,7 +135,7 @@
 
 				{foreach from=$dates key=date item=caches}
 					<tr>
-						<td>{if ($disabled && !$today) || $rootadmin}<input type="radio" name="date_{$date}" value="1" />{/if}</td>
+						<td>{if ($disabled && !$today) || $rootadmin}<input type="radio" name="dateselect" value="{$date}" />{/if}</td>
 						<td>{$date|date_format:$opt.format.date}</td>
 					</tr>
 			 		{foreach from=$caches key=wp item=text}

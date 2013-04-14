@@ -1,0 +1,3 @@
+The new Opencachig.de logo (compass-dial style) can be freely distributed,
+but is not licensed under GNU GPL. Please contact Opencaching Deutschland for
+license conditions.

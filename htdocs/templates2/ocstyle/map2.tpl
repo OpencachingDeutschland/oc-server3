@@ -2206,7 +2206,7 @@ function toggle_attribselection(bSaveCookies)
 
 	{if $bFullscreen}
 		{* the logo *}
-		<a href="index.php"><img id="oclogo" src="resource2/ocstyle/images/head/overlay/oc_logo_alpha3.png" style="position:absolute; left:32px; top:50px; z-index:2; border:0;"></a>
+		<a href="index.php"><img id="oclogo" src="resource2/ocstyle/images/oclogo/oc_logo_alpha3.png" style="position:absolute; left:32px; top:50px; z-index:2; border:0;"></a>
 
 		{literal}
 		<script language="javascript">

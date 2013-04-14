@@ -62,6 +62,10 @@
 		<meta http-equiv="gallerimg" content="no" />
 		<meta http-equiv="cache-control" content="no-cache" />
 		<link rel="SHORTCUT ICON" href="favicon.ico">
+		<link rel="apple-touch-icon" href="resource2/{style}/images/oclogo/apple-touch-icon-iphone.png" />
+		<link rel="apple-touch-icon" sizes="72x72" href="resource2/{style}/images/oclogo/apple-touch-icon-ipad.png" />
+		<link rel="apple-touch-icon" sizes="114x114" href="resource2/{style}/images/oclogo/apple-touch-icon-iphone-retina.png" />
+		<link rel="apple-touch-icon" sizes="144x144" href="resource2/{style}/images/oclogo/apple-touch-icon-ipad-retina.png" />
 		<link rel="stylesheet" type="text/css" media="screen,projection" href="resource2/{style}/css/style_screen.css?ft={screen_css_time}">
       <script type="text/javascript">
 				<!--
@@ -181,7 +185,7 @@
 						<img src="resource2/{style}/images/head/rotator.php?path=<?php echo $opt['page']['headimagepath']; ?>" class="headerimagecontent" />
 					</div>
 					<div class="headerlogo">
-						<img src="resource2/{style}/images/head/overlay/oc_head_alpha3.png" class="headerimagecontent" />
+						<img src="resource2/{style}/images/oclogo/oc_head_alpha3.png" class="headerimagecontent" />
 					</div>
 				</div>
 

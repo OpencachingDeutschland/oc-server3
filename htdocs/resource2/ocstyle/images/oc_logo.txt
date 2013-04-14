@@ -1,0 +1,5 @@
+The logo is included in this directory because it is referenced
+from some external websites. Within the OC software, only the logos
+in the 'oclogo' subdirectory should be used.
+
+For logo license terms, see ocologo/license.txt.

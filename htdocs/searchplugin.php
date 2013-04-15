@@ -4,7 +4,7 @@
  *
  *  Unicode Reminder メモ
  *
- *  Display some status information about the server and Opencaching
+ *  Server part of Mozilla search plugin for OC
  ***************************************************************************/
 
 	require('./lib2/web.inc.php');

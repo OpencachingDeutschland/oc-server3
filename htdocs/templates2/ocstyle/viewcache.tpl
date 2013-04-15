@@ -178,7 +178,7 @@
 			<img src="resource2/{$opt.template.style}/images/viewcache/time.png" class="icon16" alt="" title="" align="middle" />&nbsp;{t}Time required{/t}: {$cache.searchtime|format_hour} h
 			{/if}
 			{if $cache.waylength>0}
-				<img src="resource2/{$opt.template.style}/images/viewcache/arrow_switch.png" class="icon16" alt="" title="" align="middle" />&nbsp;{t}Waylength{/t}: {$cache.waylength|sprintf:'%01.2f'} km
+				<img src="resource2/{$opt.template.style}/images/viewcache/arrow_roundtrip.png" class="icon16" alt="" title="" align="middle" />&nbsp;{t}Waylength{/t}: {$cache.waylength|sprintf:'%01.2f'} km
 			{/if}
 			{if $cache.searchtime>0 || $cache.waylength>0}<br />{/if}
 			<img src="resource2/{$opt.template.style}/images/viewcache/date.png" class="icon16" alt="" title="" align="middle" />&nbsp;{if $cache.type==6}{t}Event date{/t}{else}{t}Hidden at{/t}{/if}: {$cache.datehidden|date_format:$opt.format.datelong}<br />

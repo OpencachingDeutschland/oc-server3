@@ -56,70 +56,70 @@
 		<Style id="tradi">
 			<IconStyle>
 				<Icon>
-					<href>{urlbase}resource2/stdstyle/images/google-earth/tradi.png</href>
+					<href>{urlbase}resource2/misc/google-earth/tradi.png</href>
 				</Icon>
 			</IconStyle>
 		</Style>
 		<Style id="multi">
 			<IconStyle>
 				<Icon>
-					<href>{urlbase}resource2/stdstyle/images/google-earth/multi.png</href>
+					<href>{urlbase}resource2/misc/google-earth/multi.png</href>
 				</Icon>
 			</IconStyle>
 		</Style>
 		<Style id="myst">
 			<IconStyle>
 				<Icon>
-					<href>{urlbase}resource2/stdstyle/images/google-earth/myst.png</href>
+					<href>{urlbase}resource2/misc/google-earth/myst.png</href>
 				</Icon>
 			</IconStyle>
 		</Style>
 		<Style id="math">
 			<IconStyle>
 				<Icon>
-					<href>{urlbase}resource2/stdstyle/images/google-earth/math.png</href>
+					<href>{urlbase}resource2/misc/google-earth/math.png</href>
 				</Icon>
 			</IconStyle>
 		</Style>
 		<Style id="drivein">
 			<IconStyle>
 				<Icon>
-					<href>{urlbase}resource2/stdstyle/images/google-earth/drivein.png</href>
+					<href>{urlbase}resource2/misc/google-earth/drivein.png</href>
 				</Icon>
 			</IconStyle>
 		</Style>
 		<Style id="virtual">
 			<IconStyle>
 				<Icon>
-					<href>{urlbase}resource2/stdstyle/images/google-earth/virtual.png</href>
+					<href>{urlbase}resource2/misc/google-earth/virtual.png</href>
 				</Icon>
 			</IconStyle>
 		</Style>
 		<Style id="webcam">
 			<IconStyle>
 				<Icon>
-					<href>{urlbase}resource2/stdstyle/images/google-earth/webcam.png</href>
+					<href>{urlbase}resource2/misc/google-earth/webcam.png</href>
 				</Icon>
 			</IconStyle>
 		</Style>
 		<Style id="event">
 			<IconStyle>
 				<Icon>
-					<href>{urlbase}resource2/stdstyle/images/google-earth/event.png</href>
+					<href>{urlbase}resource2/misc/google-earth/event.png</href>
 				</Icon>
 			</IconStyle>
 		</Style>
 		<Style id="moving">
 			<IconStyle>
 				<Icon>
-					<href>{urlbase}resource2/stdstyle/images/google-earth/moving.png</href>
+					<href>{urlbase}resource2/misc/google-earth/moving.png</href>
 				</Icon>
 			</IconStyle>
 		</Style>
 		<Style id="unknown">
 			<IconStyle>
 				<Icon>
-					<href>{urlbase}resource2/stdstyle/images/google-earth/unknown.png</href>
+					<href>{urlbase}resource2/misc/google-earth/unknown.png</href>
 				</Icon>
 			</IconStyle>
 		</Style>

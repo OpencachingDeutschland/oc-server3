@@ -1,0 +1,34 @@
+# Mozilla/Opencaching plug-in by Carsten77
+
+<search
+   version="7.1"
+   name="Opencaching.de"
+   description="Opencaching Keywordsuche"
+   method="GET"
+   action="http://www.opencaching.de/searchplugin.php"
+   update=""
+   updateCheckDays=0
+   queryEncoding="ISO-8859-1"
+   queryCharset="ISO-8859-1"
+   searchForm="http://www.opencaching.de/search.php"
+>
+
+<input name="userinput" user>
+<input name="sourceid" value="mozilla-search">
+<inputnext name="startat" factor="20">
+<inputprev name="startat" factor="20">
+
+<interpret
+    browserResultType="result"
+    charset = "ISO-8859-1"
+    resultListStart="<!--a-->"
+    resultListEnd="<!--z-->"
+    resultItemStart="<!--m-->"
+    resultItemEnd="<!--n-->"
+>
+<browser
+ update="http://www.opencaching.de/fileadmin/files/search/OpencachingDE.src"
+ updateicon="http://www.opencaching.de/fileadmin/files/search/OpencachingDE.png"
+ updatecheckdays="7"
+>
+</search>

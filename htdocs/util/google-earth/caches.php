@@ -169,43 +169,43 @@
 			{
 				case 2:
 					$icon = 'tradi';
-					$typeimgurl = '<img src="{urlbase}lang/de/stdstyle/images/cache/traditional.gif" alt="Normaler Cache" title="Normaler Cache" />';
+					$typeimgurl = '<img src="{urlbase}lang/de/ocstyle/images/cache/traditional.gif" alt="Normaler Cache" title="Normaler Cache" />';
 					break;
 				case 3:
 					$icon = 'multi';
-					$typeimgurl = '<img src="{urlbase}lang/de/stdstyle/images/cache/multi.gif" alt="Multicache" title="Multicache" />';
+					$typeimgurl = '<img src="{urlbase}lang/de/ocstyle/images/cache/multi.gif" alt="Multicache" title="Multicache" />';
 					break;
 				case 4:
 					$icon = 'virtual';
-					$typeimgurl = '<img src="{urlbase}lang/de/stdstyle/images/cache/virtual.gif" alt="virtueller Cache" title="virtueller Cache" />';
+					$typeimgurl = '<img src="{urlbase}lang/de/ocstyle/images/cache/virtual.gif" alt="virtueller Cache" title="virtueller Cache" />';
 					break;
 				case 5:
 					$icon = 'webcam';
-					$typeimgurl = '<img src="{urlbase}lang/de/stdstyle/images/cache/webcam.gif" alt="Webcam Cache" title="Webcam Cache" />';
+					$typeimgurl = '<img src="{urlbase}lang/de/ocstyle/images/cache/webcam.gif" alt="Webcam Cache" title="Webcam Cache" />';
 					break;
 				case 6:
 					$icon = 'event';
-					$typeimgurl = '<img src="{urlbase}lang/de/stdstyle/images/cache/event.gif" alt="Event Cache" title="Event Cache" />';
+					$typeimgurl = '<img src="{urlbase}lang/de/ocstyle/images/cache/event.gif" alt="Event Cache" title="Event Cache" />';
 					break;
 				case 7:
 					$icon = 'myst';
-					$typeimgurl = '<img src="{urlbase}lang/de/stdstyle/images/cache/mystery.gif" alt="Event Cache" title="Event Cache" />';
+					$typeimgurl = '<img src="{urlbase}lang/de/ocstyle/images/cache/mystery.gif" alt="Event Cache" title="Event Cache" />';
 					break;
 				case 8:
 					$icon = 'math';
-					$typeimgurl = '<img src="{urlbase}lang/de/stdstyle/images/cache/mathe.gif" alt="Event Cache" title="Event Cache" />';
+					$typeimgurl = '<img src="{urlbase}lang/de/ocstyle/images/cache/mathe.gif" alt="Event Cache" title="Event Cache" />';
 					break;
 				case 9:
 					$icon = 'moving';
-					$typeimgurl = '<img src="{urlbase}lang/de/stdstyle/images/cache/moving.gif" alt="Event Cache" title="Event Cache" />';
+					$typeimgurl = '<img src="{urlbase}lang/de/ocstyle/images/cache/moving.gif" alt="Event Cache" title="Event Cache" />';
 					break;
 				case 10:
 					$icon = 'drivein';
-					$typeimgurl = '<img src="{urlbase}lang/de/stdstyle/images/cache/drivein.gif" alt="Event Cache" title="Event Cache" />';
+					$typeimgurl = '<img src="{urlbase}lang/de/ocstyle/images/cache/drivein.gif" alt="Event Cache" title="Event Cache" />';
 					break;
 				default:
 					$icon = 'unknown';
-					$typeimgurl = '<img src="{urlbase}lang/de/stdstyle/images/cache/unknown.gif" alt="unbekannter Cachetyp" title="unbekannter Cachetyp" />';
+					$typeimgurl = '<img src="{urlbase}lang/de/ocstyle/images/cache/unknown.gif" alt="unbekannter Cachetyp" title="unbekannter Cachetyp" />';
 					break;
 			}
 			$thisline = mb_ereg_replace('{icon}', $icon, $thisline);

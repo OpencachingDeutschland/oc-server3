@@ -9707,7 +9707,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('493', 'IT', 'Indirizzo email', '2010-08-31 20:06:23');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('494', 'IT', 'Disponibile', '2010-09-01 23:48:28');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('495', 'IT', 'Temporaneamente disabilitata', '2010-08-31 20:06:23');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('496', 'IT', 'Archiviata', '2010-09-01 23:48:28');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('496', 'IT', 'archiviata', '2013-04-16 16:45:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('497', 'IT', 'Non trovata', '2010-08-31 20:06:23');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('498', 'IT', 'Partecipato', '2010-09-01 23:48:28');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('499', 'IT', 'Parteciperò', '2010-08-31 20:06:23');
@@ -10392,6 +10392,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1578', 'IT', 'Disponibile 24 ore', '2010-09-12 23:15:05');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1579', 'IT', 'Disponibile solo in certi orari', '2010-09-12 23:16:10');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1580', 'IT', 'solo di giorno', '2010-09-12 23:15:41');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1581', 'IT', 'Non disponibile con alto livello di acqua', '2013-04-16 16:45:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1582', 'IT', 'Tutte le stagioni', '2010-09-12 23:14:41');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1583', 'IT', 'Stagione di riproduzione / natura protetta', '2010-09-12 23:15:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1584', 'IT', 'Luogo a prova di neve', '2010-09-12 23:14:55');
@@ -10418,6 +10419,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1605', 'IT', 'Questa cache può essere trovata sia di giorno che di notte.', '2010-09-12 23:30:34');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1606', 'IT', 'Questa cache può essere cercata solo a certe ore del giorno - vedi la descrizione per ulteriori informazioni. Per esempio, la cache può essere in un\'area soggetta ad un orario di apertura.', '2013-02-20 01:27:31');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1607', 'IT', 'Si dovrebbe cercare questa cache solamente durante il giorno. Ad esempio, l\'area può essere pericolosa e contenere scogliere o abissi. Oppure, l\'utilizzo di torce elettriche potrebbe essere impossibile perché risulterebbe sospetto all\'interno di una zona residenziale.', '2010-09-12 23:30:29');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1608', 'IT', 'Questa cache pu', '2013-04-16 16:45:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1609', 'IT', 'Questa cache si trova tutto l\'anno, mentre la difficoltà può dipendere dalle stagioni. Specificare difficoltà per le <i>buone</i> condizioni.', '2010-09-12 23:30:47');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1610', 'IT', 'Non cercare questa cache durante il periodo riproduttivo degli animali! Per favore indicate nella descrizione della cache quale periodo dell\'anno debba essere evitato. Prestate anche attenzione alle condizioni o ai cartelli riguardo il rispetto della natura.', '2010-09-13 15:09:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1611', 'IT', 'Questa cache può essere trovata anche dopo forti nevicate. Tutte le fasi e la geocache sono nascosti in luoghi sicuri per la neve: non saranno coperti da neve caduta né da cumuli di neve creati ad esempio da veicoli spalaneve.', '2010-10-27 18:49:19');
@@ -10662,6 +10664,8 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1876', 'IT', 'Dati mappa \&copy; <a href=\"http://www.openstreetmap.org/copyright\" target=\"_blank\">OpenStreetMap</a> contributori', '2013-03-14 10:49:58');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1877', 'IT', 'quadri forniti da <a href=\"http://www.mapquest.com/\" target=\"_blank\">MapQuest</a>', '2013-03-14 10:49:58');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1878', 'IT', 'Dati mappa \&copy; <a href=\"http://www.openstreetmap.org/copyright\" target=\"_blank\">OpenStreetMap</a> e <a href=\"http://www.thunderforest.com/opencyclemap/\" target=\"_blank\">OpenCycleMap</a> contributori', '2013-03-14 10:49:58');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1879', 'IT', 'Segnalazioni cache', '2013-04-16 16:45:19');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1915', 'IT', 'cancellata', '2013-04-16 16:45:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1919', 'IT', 'Nuovi log immagini', '2013-03-14 10:49:58');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1920', 'IT', 'D', '2013-03-14 10:51:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1921', 'IT', 'T', '2013-03-14 10:51:59');
@@ -10700,6 +10704,17 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1966', 'IT', 'di', '2013-03-19 15:12:21');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1967', 'IT', 'tutti i logo sono \&copy; dei rispettivi autori', '2013-03-19 15:12:21');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1968', 'IT', 'altre', '2013-02-19 05:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1969', 'IT', 'Solo le <span class=\"public-setting\">voci verdi</span> sono visibili agli altri utenti', '2013-04-16 16:45:19');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1970', 'IT', 'Data / ora:', '2013-04-16 16:45:19');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1971', 'IT', 'la data o l\'ora non sono valide', '2013-04-16 16:45:19');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1973', 'IT', 'Generalmente le immagini spiler non possono essere loggate. Nel caso in cui abbia senso un\'eccezione a questa regola, per es. per documentare un ritrovamento  o problemi con il nascondiglio, per favore segnala l\'immagine come spoiler in modo che non appaia nelle gallerie.', '2013-04-16 16:45:19');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1974', 'IT', 'Se non ricevi nessuna email per favore verifica la casella spam della tua posta elettronica.', '2013-04-16 16:45:19');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1975', 'IT', 'Non utilizzare una sequenza di numeri e lettere facilmente  intuibile, come \'123456\' o \'qwerty\'', '2013-04-16 16:45:19');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1976', 'IT', 'attualmente non disponibile', '2013-04-16 16:45:19');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1977', 'IT', 'password per  i log \'trovata\'', '2013-04-16 16:45:19');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1978', 'IT', 'solo per i log \'parteciper', '2013-04-16 16:45:19');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1979', 'IT', 'Contatta chi ha segnalato la cache', '2013-04-16 16:45:19');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1980', 'IT', 'Per i log \'trovata\' e \'non trovata\': data e (opzionalmente) ora della ricerca.', '2013-04-16 16:45:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('922', 'JA', 'JA', '2011-05-15 16:04:51');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'NL', 'ID\'s opnieuw sorteren', '2011-02-04 19:49:56');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'NL', 'De verbinding met de database kon niet hersteld worden.', '2011-02-04 19:49:56');
@@ -12228,4 +12243,4 @@ TRUNCATE TABLE `watches_waitingtypes`;
 INSERT INTO `watches_waitingtypes` (`id`, `watchtype`) VALUES ('1', 'ownerlog');
 INSERT INTO `watches_waitingtypes` (`id`, `watchtype`) VALUES ('2', 'cache_watches');
 
-INSERT INTO `sysconfig` (`name`, `value`) VALUES ('datasql_checksum', 'df090b56d1b493efb6346413a491c6ed') ON DUPLICATE KEY UPDATE `value`='df090b56d1b493efb6346413a491c6ed';
+INSERT INTO `sysconfig` (`name`, `value`) VALUES ('datasql_checksum', 'feeed3f7d3f1d9b890f41e170b2593e4') ON DUPLICATE KEY UPDATE `value`='feeed3f7d3f1d9b890f41e170b2593e4';

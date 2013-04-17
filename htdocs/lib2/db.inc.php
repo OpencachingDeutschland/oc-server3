@@ -910,20 +910,26 @@
 
 		if ($opt['db']['error']['mail'] != '')
 		{
-			require_once($opt['rootpath'] . 'lib2/mail.class.php');
-			$mail = new mail();
-			$mail->subject = $opt['db']['error']['subject'];
-			$mail->to = $opt['db']['error']['mail'];
+			if (admin_errormail($opt['db']['error']['mail'],
+			                    $opt['db']['error']['subject'],
+			                    str_replace("\n","\r\n",$error) . "\n" . print_r(debug_backtrace(), true),
+			                    "From: ".$opt['mail']['from']))
+			{
+				require_once($opt['rootpath'] . 'lib2/mail.class.php');
+				$mail = new mail();
+				$mail->subject = $opt['db']['error']['subject'];
+				$mail->to = $opt['db']['error']['mail'];
 
-			$mail->name = 'sql_error';
+				$mail->name = 'sql_error';
 
-			$mail->assign('errno', $errno);
-			$mail->assign('error', str_replace("\n","\r\n",$error));
-			$mail->assign('trace', print_r(debug_backtrace(), true));
+				$mail->assign('errno', $errno);
+				$mail->assign('error', str_replace("\n","\r\n",$error));
+				$mail->assign('trace', print_r(debug_backtrace(), true));
 
-			$mail->send();
-			$mail = null;
-		}
+				$mail->send();
+				$mail = null;
+			}
+}
 
 		if ($opt['gui'] == GUI_HTML)
 		{
@@ -958,18 +964,24 @@
 
 		if ($opt['db']['error']['mail'] != '')
 		{
-			require_once($opt['rootpath'] . 'lib2/mail.class.php');
-			$mail = new mail();
-			$mail->name = 'sql_warn';
-			$mail->subject = $opt['db']['warn']['subject'];
-			$mail->to = $opt['db']['warn']['mail'];
+			if (admin_errormail($opt['db']['error']['mail'],
+			                    $opt['db']['warn']['subject'],
+			                    $warnmessage . "\n" . print_r(debug_backtrace(), true),
+			                    "From: ".$opt['mail']['from']))
+			{
+				require_once($opt['rootpath'] . 'lib2/mail.class.php');
+				$mail = new mail();
+				$mail->name = 'sql_warn';
+				$mail->subject = $opt['db']['warn']['subject'];
+				$mail->to = $opt['db']['warn']['mail'];
 
-			$mail->assign('warnmessage', $warnmessage);
-			$mail->assign('trace', print_r(debug_backtrace(), true));
+				$mail->assign('warnmessage', $warnmessage);
+				$mail->assign('trace', print_r(debug_backtrace(), true));
 
-			$mail->send();
-			$mail = null;
-		}
+				$mail->send();
+				$mail = null;
+			}
+}
 	}
 
 	function sql_export_recordset($f, $rs, $table, $truncate=true)

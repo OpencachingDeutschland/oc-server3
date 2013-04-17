@@ -54,7 +54,7 @@ function shutdownhandler()
 	{
 		$error_handled = true;
 
-		$error = "(" . $error['type'] . ") " . $error['message'] . 
+		$error = "(" . $error['type'] . ") " . $error['message'] .
 			          " at line " . $error['line'] . " of " . $error['file'];
 		send_errormail($error);
 
@@ -88,6 +88,45 @@ function send_errormail($errmsg)
 		$url = parse_url($absolute_server_URI);
 		@mb_send_mail($sql_errormail, "[" . $url['host'] . "] PHP error", $errmsg);
 	}
+}
+
+
+// throttle admin error mails;
+// currently used only for SQL errors and warnings
+
+function admin_errormail($to, $errortype, $message, $headers)
+{
+	global $opt;
+	$errorlog_dir = $opt['rootpath'] . 'cache2/errorlog';
+	$errorlog_path = $errorlog_dir . "/errorlog-" . date("Y-m-d");
+
+	$error_mail_limit = 65536;    // send max 64 KB = ca. 10-30 errors per day/logfile
+
+	// All errors which may happen here are ignored, to avoid error recursions.
+
+	if (!is_dir($errorlog_dir))
+		@mkdir($errorlog_dir);
+	$old_logsize = @filesize($errorlog_path) + 0;
+	$msg = date("Y-m-d H:i:s.u")." ".$errortype."\n" . $message."\n" .
+	       "-------------------------------------------------------------------------\n\n";
+	@error_log($msg,
+	           3,  // log to file
+	           $errorlog_path);
+	// @filesize() may still return the old size here, because logging takes place
+	// asynchronously. Instead we calculate the new size:
+	$new_logsize = $old_logsize + strlen($msg);
+
+	if ($old_logsize < $error_mail_limit && $new_logsize >= $error_mail_limit)
+	{
+		mb_send_mail($to, "too many ".$errortype,
+		             "Errors/Warnings are recorded in ".$errorlog_path.".\n" .
+		             "Email Reporting is DISABLED for today now. Please check the logfile\n" .
+		             "and RENAME or delete it when done, so that logging is re-enabled.",
+		             $headers);
+		return false;
+	}
+	else
+		return ($old_logsize < $error_mail_limit);
 }
 
 ?>

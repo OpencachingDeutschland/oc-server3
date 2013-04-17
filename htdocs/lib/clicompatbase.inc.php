@@ -445,7 +445,8 @@
 			$email_content = $msql_error;
 			$email_content .= "\n--------------------\n";
 			$email_content .= print_r(debug_backtrace(), true);
-			mb_send_mail($sql_errormail, 'sql_error: ' . $absolute_server_URI, $email_content, $emailheaders);
+			if (admin_errormail($sql_errormail, 'sql_error', $email_content, $emailheaders))
+				mb_send_mail($sql_errormail, 'sql_error: ' . $absolute_server_URI, $email_content, $emailheaders);
 		}
 
 		if ($interface_output == 'html')
@@ -490,7 +491,8 @@
 		$email_content .= "\n--------------------\n";
 		$email_content .= print_r(debug_backtrace(), true);
 
-		@mb_send_mail($sql_errormail, 'sql_warn: ' . $absolute_server_URI, $email_content, $emailheaders);
+		if (admin_errormail($sql_errormail, 'sql_warn', $email_content, $emailheaders))
+			@mb_send_mail($sql_errormail, 'sql_warn: ' . $absolute_server_URI, $email_content, $emailheaders);
 	}
 
 	/*

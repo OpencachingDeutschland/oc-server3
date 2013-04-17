@@ -2,6 +2,6 @@ The Firefox seach plugin has been traditionally provided at
 http://cms.opencaching.de/fileadmin/files/search. This domain is now
 redirected to www.opencaching.de. We try to migrate the search plugin
 to http://www.opencaching.de/resource2/misc/mozilla, but as there is
-an unknown number of old copues of the .src file out there, the old
+an unknown number of old copies of the .src file out there, the old
 path is still needed for a while. (Analyze webserver accesslog to
 find out wenn it can be discarded!)

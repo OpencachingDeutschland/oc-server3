@@ -64,7 +64,8 @@ class RSSParser {
 								// increment counter
 								$i++;
 							}
-							else if (!in_array($item->title,$headlines))
+							else if (!in_array($item->title,$headlines) &&
+							         strpos($item->title,'VERSCHOBEN') === FALSE)  // hack to exclude forum thread-move messages
 							{
 								$html .= '<tr><td style="text-align:right">' . strftime('%e. %B %Y',strtotime($item->pubDate)).'</td>'; 
 								$html .= '<td><a class="links" href="'.$item->link.'">';

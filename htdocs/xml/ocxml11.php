@@ -101,18 +101,21 @@
 	{
 		// This loop can be started simultaneously by multiple synchronous XML
 		// requests, which both try to delete entries, files and directories.
-		// Therefore errors must be gracefully ignored.
+		// This must not lead to errors.
 
-		// xmlsession_data löschen
+		// delete xmlsession_data
 		sql('DELETE FROM `xmlsession_data` WHERE `session_id`=&1', $r['id']);
 
-		// dateien löschen
+		// delete files
 		$path = $zip_basedir . 'ocxml11/' . $r['id'];
 		if (is_dir($path))
 			unlinkrecursiv($path);
 		
-		// cleaned speichern
-		sql('UPDATE `xmlsession` SET `cleaned`=1 WHERE `id`=&1', $r['id']);
+		// All code versions up to 3.0.6 archived xmlsession records and just marked
+		// them as "cleaned":
+		//   sql('UPDATE `xmlsession` SET `cleaned`=1 WHERE `id`=&1', $r['id']);
+		// Due to the high usage of XML interface this is no longer feaseable.
+		sql('DELETE FROM `xmlsession` WHERE `id`=&1', $r['id']);
 	}
 
 	if (isset($_REQUEST['sessionid']))

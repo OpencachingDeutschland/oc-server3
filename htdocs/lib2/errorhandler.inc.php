@@ -97,7 +97,7 @@ function send_errormail($errmsg)
 function admin_errormail($to, $errortype, $message, $headers)
 {
 	global $opt;
-	$errorlog_dir = $opt['rootpath'] . 'cache2/errorlog';
+	$errorlog_dir = $opt['rootpath'] . 'var/errorlog';
 	$errorlog_path = $errorlog_dir . "/errorlog-" . date("Y-m-d");
 
 	$error_mail_limit = 65536;    // send max 64 KB = ca. 10-30 errors per day/logfile

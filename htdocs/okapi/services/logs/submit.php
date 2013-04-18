@@ -49,7 +49,7 @@ class WebService
 
 		$logtype = $request->get_parameter('logtype');
 		if (!$logtype) throw new ParamMissing('logtype');
-		if (!in_array($logtype, array('Found it', "Didn't find it", 'Comment')))
+		if (!in_array($logtype, array('Found it', "Didn't find it", 'Comment', 'Will attend', 'Attended')))
 			throw new InvalidParam('logtype', "'$logtype' in not a valid logtype code.");
 
 		$comment = $request->get_parameter('comment');
@@ -81,8 +81,8 @@ class WebService
 		$rating = $request->get_parameter('rating');
 		if ($rating !== null && (!in_array($rating, array(1,2,3,4,5))))
 			throw new InvalidParam('rating', "If present, it must be an integer in the 1..5 scale.");
-		if ($rating && $logtype != 'Found it')
-			throw new BadRequest("Rating is allowed only for 'Found it' logtypes.");
+		if ($rating && $logtype != 'Found it' && $logtype != 'Attended')
+			throw new BadRequest("Rating is allowed only for 'Found it' and 'Attended' logtypes.");
 		if ($rating !== null && (Settings::get('OC_BRANCH') == 'oc.de'))
 		{
 			# We will remove the rating request and change the success message
@@ -100,7 +100,19 @@ class WebService
 			throw new InvalidParam('recommend', "Unknown option: '$recommend'.");
 		$recommend = ($recommend == 'true');
 		if ($recommend && $logtype != 'Found it')
-			throw new BadRequest("Recommending is allowed only for 'Found it' logtypes.");
+		{
+			if ($logtype != 'Attended')
+				throw new BadRequest("Recommending is allowed only for 'Found it' and 'Attended' logs.");
+			else if (Settings::get('OC_BRANCH') == 'oc.pl')
+			{
+				# We will remove the recommendation request and change the success message
+				# (which will be returned IF the rest of the query will meet all the
+				# requirements).
+				self::$success_message .= " ".sprintf(_("However, your cache recommendation was ignored, because %s does not allow recommending event caches."),
+					Okapi::get_normalized_site_name());
+				$recommend = null;
+			}
+		}
 
 		$needs_maintenance = $request->get_parameter('needs_maintenance');
 		if (!$needs_maintenance) $needs_maintenance = 'false';
@@ -127,14 +139,24 @@ class WebService
 
 		# Various integrity checks.
 
-		if ($cache['type'] == 'Event' && $logtype != 'Comment')
-			throw new CannotPublishException(_('This cache is an Event cache. You cannot "Find it"! (But - you may "Comment" on it.)'));
+		if ($cache['type'] == 'Event')
+		{
+			if (!in_array($logtype, array('Will attend', 'Attended', 'Comment')))
+				throw new CannotPublishException(_('This cache is an Event cache. You cannot "Find" it (but you can attend it, or comment on it)!'));
+		}
+		else  # type != event
+		{
+			if (in_array($logtype, array('Will attend', 'Attended')))
+				throw new CannotPublishException(_('This cache is NOT an Event cache. You cannot "Attend" it (but you can find it, or comment on it)!'));
+			else if (!in_array($logtype, array('Found it', "Didn't find it", 'Comment')))
+				throw new Exception("Unknown log entry - should be documented here.");
+		}
 		if ($logtype == 'Comment' && strlen(trim($comment)) == 0)
 			throw new CannotPublishException(_("Your have to supply some text for your comment."));
 
 		# Password check.
 
-		if ($logtype == 'Found it' && $cache['req_passwd'])
+		if (($logtype == 'Found it' || $logtype == 'Attended') && $cache['req_passwd'])
 		{
 			$valid_password = Db::select_value("
 				select logpw
@@ -154,8 +176,8 @@ class WebService
 		if (Settings::get('OC_BRANCH') == 'oc.de')
 		{
 			# OCDE stores all comments in HTML format, while the 'text_html' field
-			# indicates their *original* format as delivered by the user. This 
-			# allows processing the 'text' field contents without caring about the 
+			# indicates their *original* format as delivered by the user. This
+			# allows processing the 'text' field contents without caring about the
 			# original format, while still being able to re-create the comment in
 			# its original form. It requires us to HTML-encode plaintext comments
 			# and to indicate this by setting 'html_text' to FALSE.
@@ -263,8 +285,12 @@ class WebService
 		}
 
 		# Check if already found it (and make sure the user is not the owner).
+		#
+		# OCPL forbids logging 'Found it' or "Didn't find" for an already found cache,
+		# while OCDE allows all kinds of duplicate logs.
 
-		if (($logtype == 'Found it') || ($logtype == "Didn't find it"))
+		if (Settings::get('OC_BRANCH') == 'oc.pl'
+			&& (($logtype == 'Found it') || ($logtype == "Didn't find it")))
 		{
 			$has_already_found_it = Db::select_value("
 				select 1
@@ -318,6 +344,9 @@ class WebService
 			# Check the number of recommendations.
 
 			$founds = $user['caches_found'] + 1;  // +1, because he'll find THIS ONE in a moment, right?
+				# Note: caches_found includes event attendance on both, OCDE and OCPL.
+				# Though OCPL does not allow recommending events, for each 10 event
+				# attendances the user may recommend a non-event cache.
 			$rcmds_left = floor($founds / 10.0) - $user['rcmds_given'];
 			if ($rcmds_left <= 0)
 				throw new CannotPublishException(_("You don't have any recommendations to give. Find more caches first!"));
@@ -359,6 +388,11 @@ class WebService
 				$second_logtype = 'Needs maintenance';
 				$second_formatted_comment = $formatted_comment;
 				$formatted_comment = "";
+			}
+			else if ($logtype == 'Will attend' || $logtype == 'Attended')
+			{
+				# OC branches which know maintenance logs do not allow them on event caches.
+				throw new CannotPublishException(_("Event caches cannot \"need maintenance\"."));
 			}
 			else
 				throw new Exception();

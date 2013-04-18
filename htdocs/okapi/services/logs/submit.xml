@@ -9,9 +9,16 @@
 		<p>Code of the geocache.</p>
 	</req>
 	<req name='logtype'>
-		<p>Type of an entry. This should be one of: <i>Found it</i>, <i>Didn't find it</i>
-		or <i>Comment</i>. Currently this method does not support "Will attend" nor "Attended"
-		log types which are used for Event Caches (we are planning to add this).</p>
+		<p>Type of an entry. This should be one of:</p>
+		<ul>
+			<li>
+				<i>Will attend</i>, <i>Attended</i> or <i>Comment</i> for Event caches;
+			</li>
+			<li>
+				<i>Found it</i>, <i>Didn't find it</i> or <i>Comment</i> for all other
+				cache types.
+			</li>
+		</ul>
 	</req>
 	<opt name='comment'>
 		<p>Text to be submitted with the log entry.</p>
@@ -70,7 +77,10 @@
 	</opt>
 	<opt name='recommend' default='false'>
 		<p>Set to <b>true</b> if the user wants to recommend this cache.</p>
-		<p>Important: <b>logtype</b> has to be "Found it" in order to use this argument.</p>
+		<p>Important: <b>logtype</b> has to be "Found it" or "Attended" in order to
+		use this argument. However, some installations do not support recommending
+		event caches (if you include a recommendation, the log entry will be posted
+		successfully, but the recommendation will be <b>ignored</b>).</p>
 		<p>Recommending may only succeed when the user meets certain criteria
 		set on him by the OC site. If criteria are not met, the request will
 		end with user error (HTTP 200, success=false).</p>
@@ -83,6 +93,8 @@
 		comment). Even then, you will still receive only one UUID reference (pointing to
 		only one of those entries). Moreover, on some OC servers this flag might be
 		<b>completely ignored</b> (not all OC servers support this feature).</p>
+		<p>Note: Currently, this is not allowed for Event Caches (you will get a HTTP 200
+		"user friendly" response).</p>
 	</opt>
 	<common-format-params/>
 	<returns>

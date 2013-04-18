@@ -33,6 +33,8 @@ class WebService
 		'Virtual' => 'Virtual Cache',
 		'Webcam' => 'Webcam Cache',
 		'Moving' => 'Unknown Cache',
+		'Math/Physics' => 'Unknown Cache',
+		'Drive-In' => 'Traditional Cache',
 		'Own' => 'Unknown Cache',
 		'Other' => 'Unknown Cache'
 	);

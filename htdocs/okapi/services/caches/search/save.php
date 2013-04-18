@@ -75,6 +75,7 @@ class WebService
 		unset($search_params);
 
 		# Generate, or retrieve an existing set, and return the result.
+		# All user-supplied data in $tables and $where_conds MUST be escaped!
 
 		$result = self::get_set($tables, $where_conds, $min_store, $ref_max_age);
 		return Okapi::formatted_response($request, $result);

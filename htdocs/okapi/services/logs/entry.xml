@@ -28,14 +28,42 @@
 				</ul>
 			</li>
 			<li>
-				<p><b>type</b> - string; log type. This could be <b>pretty much everything</b>, but
-				there are five primary types:</p>
+				<p><b>type</b> - string; log type. One of the values documented
+				below.</p>
+				
+				<p>Primary types, commonly used by all Opencaching installations:</p>
+				
 				<ul>
-					<li>"Found it" and "Didn't find it" - for all Non-Event Caches,</li>
-					<li>"Will attend" and "Attended" - for Event Caches,</li>
-					<li>"Comment" - for all cache types.</li>
+					<li>"Found it" - a user found the cache (Non-Event caches).</li>
+					<li>"Didn't find it" - a user searched for, but couldn't find the cache (Non-Event caches).</li>
+					<li>"Comment".</li>
+					<li>"Will attend" - a user is planning to attend the event (for Event caches only).</li>
+					<li>"Attended" - a user has attended the event (for Event caches only).</li>
 				</ul>
-				<p>You may treat every other string as "Comment".</p>
+				
+				<p>Types which indicate a change of state of the geocache or confirm the
+				current state (used only by some Opencaching installations):</p>
+				
+				<ul>
+					<li>"Temporarily unavailable" - probably the cache cannot be found,
+						but it may be repaired (then, "Ready to search" will be submitted).</li>
+					<li>"Ready to search" - the cache can be found again.</li>
+					<li>"Archived" - the cache cannot be found and probably won't be
+						repaired.</li>
+				</ul>
+				
+				<p>Other types (used only by some Opencaching installations):</p>
+				
+				<ul>
+					<li>"Needs maintenance" - a user states that the cache is
+						in need of maintenance.</li>
+					<li>"Moved" - the cache has been moved to a different location.</li>
+					<li>"OC Team comment" - a comment made by the official OC Team
+						member.</li>
+					<li><i>(to be continued)</i> - this list MAY expand in time!
+						Your application should accept unknown log types (you may
+						treat them as "Comment"s).</li>
+				</ul>
 			</li>
 			<li>
 				<p><b>was_recommended</b> - true, if the author included his recommendation

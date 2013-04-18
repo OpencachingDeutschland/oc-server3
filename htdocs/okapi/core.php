@@ -337,6 +337,7 @@ class Db
 			throw new Exception("Could not connect to MySQL: ".mysql_error());
 	}
 
+	/** Fetch [{row}], return {row}. */
 	public static function select_row($query)
 	{
 		$rows = self::select_all($query);
@@ -349,6 +350,7 @@ class Db
 		}
 	}
 
+	/** Fetch all [{row}, {row}], return [{row}, {row}]. */
 	public static function select_all($query)
 	{
 		$rows = array();
@@ -356,7 +358,8 @@ class Db
 		return $rows;
 	}
 
-	public static function select_and_push($query, & $arr, $keyField = null)
+	/** Private. */
+	private static function select_and_push($query, & $arr, $keyField = null)
 	{
 		$rs = self::query($query);
 		while (true)
@@ -372,6 +375,23 @@ class Db
 		mysql_free_result($rs);
 	}
 
+	/** Fetch all [(A,A), (A,B), (B,A)], return {A: [{row}, {row}], B: [{row}]}. */
+	public static function select_group_by($keyField, $query)
+	{
+		$groups = array();
+		$rs = self::query($query);
+		while (true)
+		{
+			$row = mysql_fetch_assoc($rs);
+			if ($row === false)
+				break;
+			$groups[$row[$keyField]][] = $row;
+		}
+		mysql_free_result($rs);
+		return $groups;
+	}
+
+	/** Fetch [(A)], return A. */
 	public static function select_value($query)
 	{
 		$column = self::select_column($query);
@@ -382,6 +402,7 @@ class Db
 		throw new DbException("Invalid query. Db::select_value returned more than one row for:\n\n".$query."\n");
 	}
 
+	/** Fetch all [(A), (B), (C)], return [A, B, C]. */
 	public static function select_column($query)
 	{
 		$column = array();
@@ -777,7 +798,7 @@ class Okapi
 {
 	public static $data_store;
 	public static $server;
-	public static $revision = 722; # This gets replaced in automatically deployed packages
+	public static $revision = 749; # This gets replaced in automatically deployed packages
 	private static $okapi_vars = null;
 
 	/** Get a variable stored in okapi_vars. If variable not found, return $default. */
@@ -1197,7 +1218,7 @@ class Okapi
 	 * Return an SQL formula for calculating distance between two geopoints.
 	 * Parameters should be either numberals or strings (SQL field references).
 	 */
-	public function get_distance_sql($lat1, $lon1, $lat2, $lon2)
+	public static function get_distance_sql($lat1, $lon1, $lat2, $lon2)
 	{
 		$x1 = "(90-$lat1) * 3.14159 / 180";
 		$x2 = "(90-$lat2) * 3.14159 / 180";
@@ -1206,7 +1227,7 @@ class Okapi
 	}
 
 	/** Return bearing (float 0..360) from geopoint 1 to 2. */
-	public function get_bearing($lat1, $lon1, $lat2, $lon2)
+	public static function get_bearing($lat1, $lon1, $lat2, $lon2)
 	{
 		if ($lat1 == $lat2 && $lon1 == $lon2)
 			return null;
@@ -1228,7 +1249,7 @@ class Okapi
 	}
 
 	/** Transform bearing (float 0..360) to simple 2-letter string (N, NE, E, SE, etc.) */
-	function bearing_as_two_letters($b)
+	public static function bearing_as_two_letters($b)
 	{
 		static $names = array('N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW');
 		if ($b === null) return 'n/a';
@@ -1236,7 +1257,7 @@ class Okapi
 	}
 
 	/** Transform bearing (float 0..360) to simple 3-letter string (N, NNE, NE, ESE, etc.) */
-	function bearing_as_three_letters($b)
+	public static function bearing_as_three_letters($b)
 	{
 		static $names = array('N', 'NNE', 'NE', 'ENE', 'E', 'ESE', 'SE', 'SSE',
 			'S', 'SSW', 'SW', 'WSW', 'W', 'WNW', 'NW', 'NNW');
@@ -1605,54 +1626,27 @@ class Okapi
 	{
 		# Various OC nodes use different English names, even for primary
 		# log types. OKAPI needs to have them the same across *all* OKAPI
-		# installations. That's why these 3 are hardcoded (and should
-		# NEVER be changed).
+		# installations. That's why all known types are hardcoded here.
+		# These names are officially documented and may never change!
 
+		# Primary.
 		if ($id == 1) return "Found it";
 		if ($id == 2) return "Didn't find it";
 		if ($id == 3) return "Comment";
 		if ($id == 7) return "Attended";
 		if ($id == 8) return "Will attend";
 
-		static $other_types = null;
-		if ($other_types === null)
-		{
-			# All the other log types are non-standard ones. Their names have to
-			# be delivered from database tables. In general, OKAPI threat such
-			# non-standard log entries as comments, but - perhaps - external
-			# applications can use it in some other way. We decided to expose
-			# ENGLISH (and ONLY English) names of such log entry types. We also
-			# advise external developers to treat unknown log entry types as
-			# comments inside their application.
+		# Other.
+		if ($id == 4) return "Moved";
+		if ($id == 5) return "Needs maintenance";
+		if ($id == 9) return "Archived";
+		if ($id == 10) return "Ready to search";
+		if ($id == 11) return "Temporarily unavailable";
+		if ($id == 12) return "OC Team comment";
 
-			if (Settings::get('OC_BRANCH') == 'oc.pl')
-			{
-				# OCPL uses log_types table to store log type names.
-				$rs = Db::query("select id, en from log_types");
-			}
-			else
-			{
-				# OCDE uses log_types with translation tables.
-
-				$rs = Db::query("
-					select
-						lt.id,
-						stt.text as en
-					from
-						log_types lt,
-						sys_trans_text stt
-					where
-						lt.trans_id = stt.trans_id
-						and stt.lang = 'en'
-				");
-			}
-			$other_types = array();
-			while ($row = mysql_fetch_assoc($rs))
-				$other_types[$row['id']] = $row['en'];
-		}
-
-		if (isset($other_types[$id]))
-			return $other_types[$id];
+		# Important: This set is not closed. Other types may be introduced
+		# in the future. This has to be documented in the public method
+		# description.
 
 		return "Comment";
 	}

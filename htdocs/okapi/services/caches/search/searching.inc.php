@@ -27,6 +27,11 @@ class SearchAssistant
 	 *  - "order_by" - list of order by clauses to be included in the "order by"
 	 *    SQL clause,
 	 *  - "extra_tables" - extra tables to be included in the FROM clause.
+	 *
+	 * Important: YOU HAVE TO make sure that all data returned by this function
+	 * are properly sanitized for SQL queries! I.e. they cannot contain unescaped
+	 * user-supplied data. All user-suppied data which is returned by this function
+	 * MUST be escaped!
 	 */
 	public static function get_common_search_params(OkapiRequest $request)
 	{

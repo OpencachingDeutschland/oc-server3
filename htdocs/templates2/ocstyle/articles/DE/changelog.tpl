@@ -13,6 +13,14 @@
 	<p>Im Folgenden sind alle Veränderungen ab OC Version&nbsp;3.0 aufgelistet. Manche Kleinigkeiten wurden zur besseren Übersicht weggelassen und sind im <a href="http://forum.opencaching-network.org/index.php?board=43.0">Entwicklerforum</a> nachlesbar.</p>
 	<br />
 
+	<p><strong>Version 3.0.7</strong> &ndash; 19. April 2013</p>
+	<ul>
+		<li>Neu: <a href="okapi">OKAPI</a></li>
+		<li>&bdquo;Apple-Touch-Icons&ldquo; für Smartphones</li>
+		<li>Beim Loggen eigener Caches wird &bdquo;Hinweis&ldquo; als Logtyp vorgeschlagen statt wie bisher &bdquo;gefunden&ldquo;.</li>
+	</ul>
+	<br />
+
 	<p><strong>Version 3.0.6</strong> &ndash; 12. April 2013</p>
 	<p>Neu:</p>
 	<ul>

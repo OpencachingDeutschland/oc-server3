@@ -13,6 +13,14 @@
 	<p>This page lists all changes since version 3.0. Some small items have been omitted here.</p>
 	<br />
 
+	<p><strong>Release 3.0.7</strong> &ndash; April 19, 2013</p>
+	<ul>
+		<li>New: <a href="okapi">OKAPI</a></li>
+		<li>"Apple Touch Icons" for Smartphones</li>
+		<li>When logging own caches, the log type "Note" is preselected instead of "Found it".</li>
+	</ul>
+	<br />
+
 	<p><strong>Release  3.0.6</strong> &ndash; April 12, 2013</p>
 	<p>New:</p>
 	<ul>

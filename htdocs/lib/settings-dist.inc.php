@@ -225,6 +225,14 @@ function post_config()
 		'visible' => true,
 		'filename' => 'http://geokrety.org/index.php?lang=de_DE.UTF-8'
 	);
+
+	$menu[] = array(
+		'title' => 'API',
+		'menustring' => 'API',
+		'siteid' => 'API',
+		'visible' => true,
+		'filename' => 'okapi'
+	);
 }
 
 ?>

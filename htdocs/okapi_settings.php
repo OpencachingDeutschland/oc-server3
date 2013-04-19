@@ -37,7 +37,7 @@ function get_okapi_settings()
 		'SITELANG'         => strtolower($opt['template']['default']['locale']),
 		'TIMEZONE'         => $opt['php']['timezone'],  # BTW, OCPL doesn't have it in settings.inc.php
 		'SITE_URL'         => $opt['page']['absolute_url'],
-		'VAR_DIR'          => $GLOBALS['rootpath'].'var',
+		'VAR_DIR'          => $GLOBALS['rootpath'].'var/okapi',
 		'IMAGES_DIR'       => rtrim($opt['logic']['pictures']['dir'], '/'),
 		'OC_NODE_ID'       => $opt['logic']['node']['id'],
 		'OC_COOKIE_NAME'   => $opt['session']['cookiename'].'data',

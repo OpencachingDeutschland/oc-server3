@@ -19,8 +19,9 @@ class OCSession
 		if (!isset($_COOKIE[$cookie_name]))
 			return null;
 		$OC_data = unserialize(base64_decode($_COOKIE[$cookie_name]));
+		if (!isset($OC_data['sessionid']))
+			return null;
 		$OC_sessionid = $OC_data['sessionid'];
-
 		if (!$OC_sessionid)
 			return null;
 

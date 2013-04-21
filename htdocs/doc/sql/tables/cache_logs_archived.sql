@@ -6,6 +6,7 @@ CREATE TABLE `cache_logs_archived` (
   `node` tinyint(3) unsigned NOT NULL,
   `date_created` datetime NOT NULL,
   `last_modified` datetime NOT NULL,
+  `log_last_modified` datetime NOT NULL,
   `cache_id` int(10) unsigned NOT NULL,
   `user_id` int(10) unsigned NOT NULL,
   `type` tinyint(3) unsigned NOT NULL,

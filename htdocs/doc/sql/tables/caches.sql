@@ -8,6 +8,7 @@ CREATE TABLE `caches` (
   `is_publishdate` tinyint(1) NOT NULL default '0' COMMENT '1 = date_created is publication date',
   `last_modified` datetime NOT NULL COMMENT 'via Trigger (caches)',
   `listing_last_modified` datetime NOT NULL COMMENT 'via Trigger (caches, cache_desc, coordinates, pictures)',
+  `meta_last_modified` datetime NOT NULL COMMENT 'via Trigger (stat_caches, gk_item_waypoint)',
   `user_id` int(10) unsigned NOT NULL,
   `name` varchar(255) NOT NULL,
   `longitude` double NOT NULL,

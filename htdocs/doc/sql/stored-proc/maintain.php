@@ -230,6 +230,19 @@
 	       SET nModified = ROW_COUNT();
 	     END;");
 
+	sql_dropProcedure('sp_updateall_cachelog_logdates');
+	sql("CREATE PROCEDURE sp_updateall_cachelog_logdates (OUT nModified INT)
+	     BEGIN
+			   UPDATE `cache_logs` SET `log_last_modified` =
+						GREATEST(`last_modified`,
+						         IFNULL((SELECT MAX(`last_modified`) FROM `pictures` WHERE `pictures`.`object_type`=1 AND `pictures`.`object_id` = `cache_logs`.`id`),'0')
+						        );
+	       SET nModified = ROW_COUNT();
+	       UPDATE `cache_logs_archived` SET `log_last_modified` =
+	           GREATEST(`last_modified`,`log_last_modified`);
+	       SET nModified = nModified + ROW_COUNT();
+	     END;");
+
 	// set caches.desc_languages of given cacheid and fill cache_desc_prefered
 	sql_dropProcedure('sp_update_caches_descLanguages');
 	sql("CREATE PROCEDURE sp_update_caches_descLanguages (IN nCacheId INT(10) UNSIGNED)
@@ -849,6 +862,7 @@
 						IF ISNULL(@XMLSYNC) OR @XMLSYNC!=1 THEN
 							SET NEW.`date_created`=NOW();
 							SET NEW.`last_modified`=NOW();
+							SET NEW.`log_last_modified`=NOW();
 						END IF;
 
 						IF ISNULL(NEW.`uuid`) OR NEW.`uuid`='' THEN
@@ -893,8 +907,11 @@
 							   NEW.`date`!=OLD.`date` OR
 							   NEW.`text`!=OLD.`text` OR
 							   NEW.`text_html`!=OLD.`text_html` THEN
-						
 								SET NEW.`last_modified`=NOW();
+								SET NEW.`log_last_modified`=NOW();
+							END IF;
+							IF NEW.`picture`!=OLD.`picture` THEN
+								SET NEW.`log_last_modified`=NOW();
 							END IF;
 						END IF;
 					END;");
@@ -903,7 +920,7 @@
 	sql("CREATE TRIGGER `cacheLogsAfterUpdate` AFTER UPDATE ON `cache_logs` 
 				FOR EACH ROW 
 					BEGIN 
-						IF OLD.`cache_id`!=NEW.`cache_id` OR OLD.`user_id`!=NEW.`user_id` OR OLD.`type`!=NEW.`type` THEN
+						IF OLD.`cache_id`!=NEW.`cache_id` OR OLD.`user_id`!=NEW.`user_id` OR OLD.`type`!=NEW.`type` OR OLD.`date`!=NEW.`date` THEN
 							CALL sp_update_logstat(OLD.`cache_id`, OLD.`user_id`, OLD.`type`, TRUE);
 							CALL sp_update_logstat(NEW.`cache_id`, NEW.`user_id`, NEW.`type`, FALSE);
 						END IF;
@@ -1430,4 +1447,49 @@
 							SET NEW.`date_created`=NOW();
 						END IF;
 					END;");
+
+	sql_dropTrigger('statCachesAfterInsert');
+	sql("CREATE TRIGGER `statCachesAfterInsert` AFTER INSERT ON `stat_caches`
+				FOR EACH ROW
+					BEGIN
+						/* meta_last_modified=NOW() is used to trigger an update of okapi_syncbase,
+						   if OKAPI is installed. */
+						UPDATE caches SET meta_last_modified=NOW() WHERE caches.cache_id=NEW.cache_id;
+					END;");
+
+	sql_dropTrigger('statCachesAfterUpdate');
+	sql("CREATE TRIGGER `statCachesAfterUpdate` AFTER UPDATE ON `stat_caches`
+				FOR EACH ROW
+					BEGIN
+						IF NEW.found<>OLD.found OR NEW.notfound<>OLD.notfound OR NEW.note<>OLD.note OR
+						   NEW.will_attend<>OLD.will_attend OR NEW.last_found<>OLD.last_found OR
+						   NEW.watch<>OLD.watch OR NEW.ignore<>OLD.ignore OR NEW.toprating<>OLD.toprating THEN
+							/* meta_last_modified=NOW() is used to trigger an update of okapi_syncbase,
+							   if OKAPI is installed. */
+							UPDATE caches SET meta_last_modified=NOW() WHERE caches.cache_id=NEW.cache_id;
+						END IF;
+					END;");
+
+	sql_dropTrigger('gkItemWaypointAfterInsert');
+	sql("CREATE TRIGGER `gkItemWaypointAfterInsert` AFTER INSERT ON `gk_item_waypoint`
+				FOR EACH ROW
+					BEGIN
+						UPDATE caches SET meta_last_modified=NOW() WHERE caches.wp_oc=NEW.wp;
+					END;");
+
+	sql_dropTrigger('gkItemWaypointAfterUpdate');
+	sql("CREATE TRIGGER `gkItemWaypointAfterUpdate` AFTER UPDATE ON `gk_item_waypoint`
+				FOR EACH ROW
+					BEGIN
+						UPDATE caches SET meta_last_modified=NOW() WHERE caches.wp_oc=OLD.wp;
+						UPDATE caches SET meta_last_modified=NOW() WHERE caches.wp_oc=NEW.wp;
+					END;");
+
+	sql_dropTrigger('gkItemWaypointAfterDelete');
+	sql("CREATE TRIGGER `gkItemWaypointAfterDelete` AFTER DELETE ON `gk_item_waypoint`
+				FOR EACH ROW
+					BEGIN
+						UPDATE caches SET meta_last_modified=NOW() WHERE caches.wp_oc=OLD.wp;
+					END;");
+
 ?>

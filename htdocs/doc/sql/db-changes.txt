@@ -60,4 +60,8 @@ date         commit ID   change
 2013-03-24   9644465     added table 'pw_dict'
 2013-03-25   21d92fe     added field cache_reports.date_created + trigger
 2013-03-27   467aae4     added fields cache_attrib.gc_id, .gc_inc and .gc_name
-2013-04-06   e281cfa     changed cach_logs.date and cach_logs_archived.date type to datetime 
+2013-04-06   e281cfa     changed cach_logs.date and cach_logs_archived.date type to datetime
+
+2013-04-22               added fields caches.meta_last_modified, cache_logs.log_last_modified,
+                           cache_logs_archived.log_last_modified, and triggers
+                         initialize with dbmaint.php / sp_updateall_logdates

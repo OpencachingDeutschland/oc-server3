@@ -289,9 +289,14 @@
 			<li><b>last_modified</b> - date and time (ISO 8601) when the
 				geocache was last modified (changed status, attributes, etc.),</li>
 			<li><b>date_created</b> - date and time (ISO 8601) when the
-				geocache was initially created,</li>
-			<li><b>date_hidden</b> - date and time (ISO 8601) when the
-				geocache was first hidden,</li>
+				geocache was listed at the Opencaching site,</li>
+			<li><b>date_hidden</b> - date and time (ISO 8601) when
+				<ul>
+					<li>the geocache was first hidden (for physical caches), or </li>
+					<li>the geocache was first published (for virtual caches), or</li>
+					<li>the event takes place (for event caches),</li>
+				</ul>
+			</li>
 			<!-- Note: I think cache uuids should not be ever revealed to the public.
 			We have already one universally unique key - the cache code. It is uncommon
 			to have multiple universally unique keys. -->

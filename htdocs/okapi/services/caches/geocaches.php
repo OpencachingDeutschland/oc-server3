@@ -151,6 +151,7 @@ class WebService
 			# - Total numbers of founds and notfounds are kept in the "stat_caches" table.
 			# - search_time and way_length are both round trip values and cannot be null;
 			#     0 = not specified
+			# - will-attend-count is stored in separate field
 
 			$rs = Db::query("
 				select
@@ -163,6 +164,7 @@ class WebService
 					ifnull(sc.toprating, 0) as topratings,
 					ifnull(sc.found, 0) as founds,
 					ifnull(sc.notfound, 0) as notfounds,
+					ifnull(sc.will_attend, 0) as willattends,
 					sc.last_found,
 					0 as votes, 0 as score
 					-- SEE ALSO OC.PL BRANCH BELOW
@@ -181,6 +183,7 @@ class WebService
 			# - Total numbers of found and notfounds are kept in the "caches" table.
 			# - search_time is round trip and way_length one way or both ways (this is different on OCDE!);
 			#   both can be null; 0 or null = not specified
+			# - will-attend-count is stored in caches.notfounds
 
 			$rs = Db::query("
 				select
@@ -193,6 +196,7 @@ class WebService
 					c.topratings,
 					c.founds,
 					c.notfounds,
+					c.notfounds as willattends,
 					c.last_found,
 					c.votes, c.score
 					-- SEE ALSO OC.DE BRANCH ABOVE
@@ -254,11 +258,8 @@ class WebService
 						}
 						break;
 					case 'willattends':
-						# OCPL stats count "Will attend" log entries as "notfounds"
-						# (just another pecularity regarding "event caches").
-						# I am not sure about OCDE branch though...
 						if ($row['type'] == 6) {  # event
-							$entry['willattends'] = $row['notfounds'] + 0;
+							$entry['willattends'] = $row['willattends'] + 0;
 						} else {  # non-event
 							$entry['willattends'] = 0;
 						}

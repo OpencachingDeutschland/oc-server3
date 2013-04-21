@@ -201,6 +201,7 @@ class OkapiExceptionHandler
 
 		$exception_info .= (isset($_SERVER['REQUEST_URI']) ? "--- OKAPI method called ---\n".
 			preg_replace("/([?&])/", "\n$1", $_SERVER['REQUEST_URI'])."\n\n" : "");
+		$exception_info .= "--- OKAPI revision ---\n".Okapi::$revision."\n\n";
 		$exception_info .= "--- Request headers ---\n".implode("\n", array_map(
 			function($k, $v) { return "$k: $v"; },
 			array_keys(getallheaders()), array_values(getallheaders())
@@ -798,7 +799,7 @@ class Okapi
 {
 	public static $data_store;
 	public static $server;
-	public static $revision = 764; # This gets replaced in automatically deployed packages
+	public static $revision = 768; # This gets replaced in automatically deployed packages
 	private static $okapi_vars = null;
 
 	/** Get a variable stored in okapi_vars. If variable not found, return $default. */

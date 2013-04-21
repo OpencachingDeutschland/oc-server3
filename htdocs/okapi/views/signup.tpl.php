@@ -69,7 +69,8 @@
 										<input type='checkbox' id='terms' name='terms'>
 										<label for='terms'>I read and agree to both:</label>
 										<ul>
-											<li><?= $vars['site_name'] ?> <?= $vars['data_license_html'] ?>, and</li>
+											<li><?= $vars['site_name'] ?> <?= $vars['data_license_html'] ?>
+											(these differ across various OC nodes!), and</li>
 											<li>OKAPI Terms of Use (see below)</li>
 										</ul>
 										<input type='button' class='button' id='submit' value='Send me my API Key!'>

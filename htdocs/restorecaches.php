@@ -731,11 +731,14 @@ function restore_listings($cacheids, $rdate, $roptions, $simulate)
 							if (!$simulate)
 							{
 								sql("INSERT INTO `cache_logs_archived`
-								       SELECT *, NOW(), '&2', '&3' FROM `cache_logs` WHERE `id`='&1'",
+								       SELECT *, '0', '&2', '&3' FROM `cache_logs` WHERE `id`='&1'",
 										 $revert_logid,
 										 $user_id,   // original deletor's ID and not restoring admin's ID!
 										 $login->userid);
 								sql("DELETE FROM `cache_logs` WHERE `id`='&1'", $revert_logid);
+								// This triggers an okapi_syncbase update, if OKAPI is installed:
+								sql("UPDATE `cache_logs_archived` SET `deletion_date`=NOW() WHERE `id`='&1'",
+								    $revert_logid);
 							}
 							$logs_restored = true;
 						}

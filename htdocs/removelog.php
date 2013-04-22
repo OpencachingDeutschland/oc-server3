@@ -166,7 +166,7 @@
 						sql_free_result($rs);
 
 						// move to archive, even if own log (uuids are used for OKAPI replication)
-						sql("INSERT IGNORE INTO `cache_logs_archived` SELECT *, NOW() AS `deletion_date`, '&2' AS `deleted_by`, 0 AS `restored_by` FROM `cache_logs` WHERE `cache_logs`.`id`='&1' LIMIT 1", $log_id, $usr['userid']);
+						sql("INSERT IGNORE INTO `cache_logs_archived` SELECT *, '0' AS `deletion_date`, '&2' AS `deleted_by`, 0 AS `restored_by` FROM `cache_logs` WHERE `cache_logs`.`id`='&1' LIMIT 1", $log_id, $usr['userid']);
 
 						// remove log entry
 						sql("DELETE FROM `cache_logs` WHERE `cache_logs`.`id`='&1' LIMIT 1", $log_id);
@@ -176,6 +176,10 @@
 						sql("DELETE FROM `cache_rating` WHERE `user_id` = '&1' AND `cache_id` = '&2' AND
 									0 = (SELECT COUNT(*) FROM `cache_logs` WHERE `user_id` = '&1' AND `cache_id` = '&2' AND `type` IN (1,7))", 
 							$log_record['log_user_id'], $log_record['cache_id']);
+
+						// now tell OKAPI about the deletion;
+						// this will trigger an okapi_syncbase update, if OKAPI is installed:
+						sql("UPDATE `cache_logs_archived` SET `deletion_date`=NOW() WHERE `id`='&1'", $log_id);
 
 						// do not use slave server for the next time ...
 						db_slave_exclude();

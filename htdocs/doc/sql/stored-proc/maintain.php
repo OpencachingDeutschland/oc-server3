@@ -1474,6 +1474,7 @@
 	sql("CREATE TRIGGER `gkItemWaypointAfterInsert` AFTER INSERT ON `gk_item_waypoint`
 				FOR EACH ROW
 					BEGIN
+						/* this triggers an update of okapi_syncbase, if OKAPI is installed */
 						UPDATE caches SET meta_last_modified=NOW() WHERE caches.wp_oc=NEW.wp;
 					END;");
 
@@ -1481,6 +1482,7 @@
 	sql("CREATE TRIGGER `gkItemWaypointAfterUpdate` AFTER UPDATE ON `gk_item_waypoint`
 				FOR EACH ROW
 					BEGIN
+						/* this triggers an update of okapi_syncbase, if OKAPI is installed */
 						UPDATE caches SET meta_last_modified=NOW() WHERE caches.wp_oc=OLD.wp;
 						UPDATE caches SET meta_last_modified=NOW() WHERE caches.wp_oc=NEW.wp;
 					END;");
@@ -1489,6 +1491,7 @@
 	sql("CREATE TRIGGER `gkItemWaypointAfterDelete` AFTER DELETE ON `gk_item_waypoint`
 				FOR EACH ROW
 					BEGIN
+						/* this triggers an update of okapi_syncbase, if OKAPI is installed */
 						UPDATE caches SET meta_last_modified=NOW() WHERE caches.wp_oc=OLD.wp;
 					END;");
 

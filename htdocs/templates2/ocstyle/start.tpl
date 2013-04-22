@@ -65,24 +65,7 @@
 		{t 1=$usercountry|escape}The next events in %1{/t}
 	</p>
 </div>
-<ul class="nodot">
-	{foreach name=events from=$events item=eventitem}
-		<li class="newcache_list_multi" style="margin-bottom: 8px;">
-			<img src="resource2/{$opt.template.style}/images/cacheicon/event-rand{rand min=1 max=4}.gif" alt="{t}Event Geocache{/t}" border="0" width="22" height="22" align="left" style="margin-right: 5px;" />
-			{$eventitem.date_hidden|date_format:$opt.format.date}&nbsp;
-			<b><a class="links" href="viewcache.php?cacheid={$eventitem.cache_id}">{$eventitem.name|escape}</a></b> 
-			{t}by{/t} 
-			<b><a class="links" href="viewprofile.php?userid={$eventitem.user_id}">{$eventitem.username|escape}</a></b><br />
-			<strong>
-				<p class="content-title-noshade">
-					{$eventitem.adm1|escape} {if $eventitem.adm1!=null & $eventitem.adm2!=null} &gt; {/if}
-					{$eventitem.adm2|escape} {if ($eventitem.adm2!=null & $eventitem.adm4!=null) | ($eventitem.adm1!=null & $eventitem.adm4!=null)} &gt; {/if}
-					{$eventitem.adm4|escape}
-				</p>
-			</strong>
-		</li>
-	{/foreach}	
-</ul>
+{include file="res_newevents.tpl" events=$events}
 
 {* new logpix *}
 <div class="content2-container bg-blue02" style="margin-bottom:6px">
@@ -102,29 +85,7 @@
 	</p>
 </div>
 <p style="line-height: 1.6em;">{t 1=$usercountry|escape}Geocaches with most ratings in the last 30 days in %1.{/t}</p>
-<ul class="nodot">			
-	{foreach name=topratings from=$topratings item=cacheitem}
-		<li class="newcache_list_multi" style="margin-bottom: 8px;">
-			{include file="res_cacheicon_22.tpl" cachetype=$cacheitem.type}
-			{if $cacheitem.cRatings>=1}<img src="images/rating-star.gif" border="0" alt="{t 1=$cacheitem.cRatings}%1 Recommendations in the last 30 days{/t}">{/if}
-			{if $cacheitem.cRatings>=2}<img src="images/rating-star.gif" border="0" alt="{t 1=$cacheitem.cRatings}%1 Recommendations in the last 30 days{/t}">{/if}
-			{if $cacheitem.cRatings==3}<img src="images/rating-star.gif" border="0" alt="{t 1=$cacheitem.cRatings}%1 Recommendations in the last 30 days{/t}">{/if}
-			{if $cacheitem.cRatings>3}<img src="images/rating-plus.gif" border="0" alt="{t 1=$cacheitem.cRatings}%1 Recommendations in the last 30 days{/t}">{/if}
-			&nbsp;
-			<b><a class="links" href="viewcache.php?cacheid={$cacheitem.cache_id}">{$cacheitem.name|escape}</a></b>
-			{t}by{/t}
-			<b><a class="links" href="viewprofile.php?userid={$cacheitem.user_id}">{$cacheitem.username|escape}</a></b><br />
-			<strong>
-				<p class="content-title-noshade">
-					{$cacheitem.adm1|escape} {if $cacheitem.adm1!=null & $cacheitem.adm2!=null} &gt; {/if}
-					{$cacheitem.adm2|escape} {if ($cacheitem.adm2!=null & $cacheitem.adm4!=null) | ($cacheitem.adm1!=null & $cacheitem.adm4!=null)} &gt; {/if}
-					{$cacheitem.adm4|escape}
-				</p>
-			</strong>
-		</li>
-	{/foreach}	
-</ul>
-<p style="line-height: 1.6em;">{t}You can find more recommendations &gt;<a href="tops.php">here</a>&lt;.{/t}</p>
+{include file="res_newratings.tpl" topratings=$topratings}
 
 {* forum news *}
 {if $phpbb_enabled==true}
@@ -171,22 +132,5 @@
 	</p>
 </div>
 <p style="line-height: 1.6em;">({t 1=$count_hiddens 2=$count_founds 3=$count_users}Total of %1 active Caches and %2 founds by %3 users{/t})</p>
-<ul class="nodot">			
-	{foreach name=newcaches from=$newcaches item=cacheitem}
-		<li class="newcache_list_multi" style="margin-bottom: 8px;">
-			{include file="res_cacheicon_22.tpl" cachetype=$cacheitem.type}
-			{$cacheitem.date_created|date_format:$opt.format.date}&nbsp;
-			<b><a class="links" href="viewcache.php?cacheid={$cacheitem.cache_id}">{$cacheitem.name|escape}</a></b>
-			{t}by{/t}
-			<b><a class="links" href="viewprofile.php?userid={$cacheitem.user_id}">{$cacheitem.username|escape}</a></b><br />
-			<strong>
-				<p class="content-title-noshade">
-					{$cacheitem.adm1|escape} {if $cacheitem.adm1!=null & $cacheitem.adm2!=null} &gt; {/if}
-					{$cacheitem.adm2|escape} {if ($cacheitem.adm2!=null & $cacheitem.adm4!=null) | ($cacheitem.adm1!=null & $cacheitem.adm4!=null)} &gt; {/if}
-					{$cacheitem.adm4|escape}
-				</p>
-			</strong>
-		</li>
-	{/foreach}	
-</ul>		
+{include file="res_newcaches.tpl" newcaches=$newcaches}		
 

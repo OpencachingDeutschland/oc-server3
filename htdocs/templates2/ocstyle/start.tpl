@@ -50,7 +50,11 @@
 	</table>
 {else}
 	<div id="blog">
-		{$news}
+{if !$rsserror}
+		{include file="res_rssparser.tpl" rss=$rssdata}
+{else}
+		<p><em>{t}currently not available{/t}</em></p>
+{/if}
 	</div>
 {/if}
 
@@ -138,7 +142,11 @@
         </div>
 *}
 <div id="forum">
-	{$forum}
+{if !$rsserror}
+	{include file="res_rssparser.tpl" rss=$rssdata}
+{else}
+	<p><em>{t}currently not available{/t}</em></p>
+{/if}
 </div>
 {*
 	<ul class="nodot">

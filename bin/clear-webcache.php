@@ -14,8 +14,9 @@
 	 *  TODO: quick&dirty to test functionality
 	 */
 
-	$opt['rootpath'] = '../htdocs/';
-	require($opt['rootpath'] . 'lib2/web.inc.php');
+	if (!isset($opt['rootpath']))
+		$opt['rootpath'] = '../htdocs/';
+	require_once($opt['rootpath'] . 'lib2/cli.inc.php');
 
 	// stop apache
 	system($opt['httpd']['stop']);

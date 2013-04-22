@@ -3,13 +3,11 @@
 /***************************************************************************
  *  For license information see doc/license.txt
  *
-  *  Unicode Reminder メモ
-***************************************************************************/
+ *  Unicode Reminder メモ
+ ***************************************************************************/
 
 	/*
-	 * update of static data and triggers in developer system
-	 *
-	 * Tables must be updated manually, see htdocs/doc/sql/db-changes.txt
+	 * update of tables, indexes, triggers/storedprocs and static data in developer system
 	 */
  
   $rootpath = $opt['rootpath'] = dirname(__FILE__) . '/../htdocs/';

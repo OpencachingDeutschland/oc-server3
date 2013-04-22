@@ -2,11 +2,12 @@
 /***************************************************************************
  *  For license information see doc/license.txt
  *
-  *  Unicode Reminder メモ
-***************************************************************************/
+ *  Unicode Reminder メモ
+ ***************************************************************************/
 
 	/*
-	 * Database Structure Versioning
+	 * Database Structure Versioning - update DB structure to current version;
+	 * used for developer & production system
 	 */
 
 	if (!isset($opt['rootpath']))
@@ -15,8 +16,9 @@
 
 	if (!field_exists('cache_attrib','gc_id'))
 		die("\n
-	       ERROR: Database structure too old. You must first do a manual update to commit 467aae4
-				 (March 27, 2013) to enable automatic updates. See htdocs/doc/sql/db-changes.txt.\n");
+	       ERROR: Database structure too old. You must first do a manual update
+				 up to commit 467aae4 (March 27, 2013) to enable automatic updates.
+				 See htdocs/doc/sql/db-changes.txt.\n");
 
 	$db_version = max(99, sql_value("SELECT `value` FROM `sysconfig` WHERE `name`='db_version'",99));
 
@@ -38,7 +40,7 @@
 	} while ($db_version > 0);
 
 
-  // Test if a certain database field exists
+  // test if a certain database field exists
 	function field_exists($table, $field)
 	{
 		global $opt;

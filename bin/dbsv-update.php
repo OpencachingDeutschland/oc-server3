@@ -10,7 +10,7 @@
 	 */
 
 	if (!isset($opt['rootpath']))
-		$opt['rootpath'] = '../htdocs/';
+		$opt['rootpath'] = dirname(__FILE__) . '/../htdocs/';
 	require_once($opt['rootpath'] . 'lib2/cli.inc.php');
 
 	if (!field_exists('cache_attrib','gc_id'))

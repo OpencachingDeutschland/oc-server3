@@ -16,12 +16,12 @@
   chdir($rootpath);
   require_once('lib2/cli.inc.php');
 
+  echo "updating db structure  ...\n";
+  require('dbsv-update.php');
+
   echo "importing data.sql ...\n";
   system('cat ' . $rootpath . 'doc/sql/static-data/data.sql |' .
 	       ' mysql -h' . $opt['db']['servername'] . ' -u' . $opt['db']['username'] . ' --password=' . $opt['db']['password'] . ' ' . $opt['db']['placeholder']['db']);
-
-  echo "updating db structure  ...\n";
-  require('dbsv-update.php');
 
   echo "importing triggers ...\n";
   chdir ($rootpath . 'doc/sql/stored-proc');

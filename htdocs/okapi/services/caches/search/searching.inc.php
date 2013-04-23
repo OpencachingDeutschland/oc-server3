@@ -27,6 +27,7 @@ class SearchAssistant
 	 *  - "order_by" - list of order by clauses to be included in the "order by"
 	 *    SQL clause,
 	 *  - "extra_tables" - extra tables to be included in the FROM clause.
+	 *  - "extra_joins" - extra join statements to be included
 	 *
 	 * Important: YOU HAVE TO make sure that all data returned by this function
 	 * are properly sanitized for SQL queries! I.e. they cannot contain unescaped
@@ -37,6 +38,7 @@ class SearchAssistant
 	{
 		$where_conds = array('true');
 		$extra_tables = array();
+		$extra_joins = array();
 
 		# At the beginning we have to set up some "magic e$Xpressions".
 		# We will use them to make our query run on both OCPL and OCDE databases.
@@ -59,17 +61,16 @@ class SearchAssistant
 			# OCDE holds this data in a separate table. Additionally, OCDE
 			# does not provide a rating system (votes and score fields).
 			# If we're being run on OCDE database, we will include this
-			# additional table in our query (along with a proper WHERE
-			# condition) and we will map the field expressions to
-			# approriate places.
+			# additional table in our query and we will map the field
+			# expressions to approriate places.
 
-			$extra_tables[] = 'stat_caches';
-			$where_conds[] = 'stat_caches.cache_id = caches.cache_id';
+			# stat_caches entries are optional, therefore we must do a left join:
+			$extra_joins[] = 'left join stat_caches on stat_caches.cache_id = caches.cache_id';
 
-			$X_TOPRATINGS = 'stat_caches.toprating';
-			$X_FOUNDS = 'stat_caches.found';
-			$X_NOTFOUNDS = 'stat_caches.notfound';
-			$X_LAST_FOUND = 'stat_caches.last_found';
+			$X_TOPRATINGS = 'ifnull(stat_caches.toprating,0)';
+			$X_FOUNDS = 'ifnull(stat_caches.found,0)';
+			$X_NOTFOUNDS = 'ifnull(stat_caches.notfound,0)';
+			$X_LAST_FOUND = 'ifnull(stat_caches.last_found,0)';
 			$X_VOTES = '0'; // no support for ratings
 			$X_SCORE = '0'; // no support for ratings
 		}
@@ -289,9 +290,10 @@ class SearchAssistant
 
 		#
 		# max_founds
+		# may be '0' for FTF hunts
 		#
 
-		if ($tmp = $request->get_parameter('max_founds'))
+		if (!is_null($tmp = $request->get_parameter('max_founds')))
 		{
 			if (!is_numeric($tmp))
 				throw new InvalidParam('max_founds', "'$tmp'");
@@ -460,7 +462,7 @@ class SearchAssistant
 				throw new InvalidParam('not_yet_found_only', "'$tmp'");
 			if ($tmp == 'true')
 			{
-				$where_conds[] = "caches.founds = 0";
+				$where_conds[] = "$X_FOUNDS = 0";
 			}
 		}
 
@@ -557,6 +559,7 @@ class SearchAssistant
 			'limit' => (int)$limit,
 			'order_by' => $order_clauses,
 			'extra_tables' => $extra_tables,
+			'extra_joins' => $extra_joins,
 		);
 
 		return $ret_array;
@@ -595,7 +598,8 @@ class SearchAssistant
 
 		$cache_codes = Db::select_column("
 			select caches.wp_oc
-			from ".implode(", ", $tables)."
+			from ".implode(", ", $tables)." ".
+			implode(" ", $options['extra_joins'])."
 			where ".implode(" and ", $where_conds)."
 			".((count($options['order_by']) > 0) ? "order by ".implode(", ", $options['order_by']) : "")."
 			limit ".($options['offset']).", ".($options['limit'] + 1).";

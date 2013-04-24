@@ -534,8 +534,8 @@
   /* commands to start and stop apache process
    * required to clear the webcache
    */
-  $opt['httpd']['stop'] = '/etc/rc.d/init.d/httpd stop';
-  $opt['httpd']['start'] = '/etc/rc.d/init.d/httpd start';
+  $opt['httpd']['stop'] = 'service httpd stop';
+  $opt['httpd']['start'] = 'service httpd start';
 
   /* owner and group of files created by apache daemon
    * (used to change ownership in shell scripts)

@@ -51,14 +51,20 @@
 		<p>Which images to include (and how to include them). One of the following values:</p>
 		<ul>
 			<li><b>none</b> - no images will be included,</li>
+			<li><b>descrefs:thumblinks</b> - all images will be included as "thumbnail"
+				&lt;img&gt; references at the end of each cache description, with a
+				replacement image used for spoilers; the thumbnails are linked to the
+				large images,</li>
 			<li><b>descrefs:nonspoilers</b> - all non-spoiler images will be included
-			as &lt;img&gt; references at the end of each cache description,</li>
+				as &lt;img&gt; references at the end of each cache description,</li>
 			<li><b>descrefs:all</b> - all images will be included (including spoilers)
-			as &lt;img&gt; references at the end of each cache description,</li>
+				as &lt;img&gt; references at the end of each cache description,</li>
 			<li><b>ox:all</b> - all images will be included (including spoilers)
-			as Garmin's &lt;ox:image&gt; references.</li>
+				as Garmin's &lt;ox:image&gt; references.</li>
 		</ul>
-		<p>Note: When using "descrefs:" mode, remember to set <b>ns_ground</b> to <b>true</b>.</p>
+		<p>Note: When using "descrefs:" mode, remember to set <b>ns_ground</b> to <b>true</b>.
+		The default value is "descrefs:nonspoilers" for compatibilty reasons, but for
+		most applications "descrefs:thumblinks" will be the better choice.</p>
 		<p>Note: When using "ox:" mode, remember to set <b>ns_ox</b> to <b>true</b>. You must also
 		include JPEG files along the GPX for this to work properly - see
 		services/caches/formatters/garmin for more information.</p>

@@ -71,27 +71,36 @@ http://www.gsak.net/xmlv1/5 http://www.gsak.net/xmlv1/5/gsak.xsd
 							&lt;/ul&gt;
 						<? } ?>
 						<?= Okapi::xmlescape($c['description']) ?>
-						<? if ((strpos($vars['images'], "descrefs:") === 0) && count($c['images']) > 0) { /* Does user want us to include <img> references in cache descriptions? */ ?>
-							<?
+						<? if ((strpos($vars['images'], "descrefs:") === 0) && count($c['images']) > 0) { /* Does user want us to include <img> references in cache descriptions? */
+							if ($vars['images'] == "descrefs:thumblinks") { ?>
+								&lt;h2&gt;<?= _("Images") ?> (<?= count($c['images']) ?>)&lt;/h2&gt;
+								&lt;div&gt;
+								<? foreach ($c['images'] as $img) { ?>
+									&lt;div style='float:left; padding:6px'&gt;&lt;a href='<?= Okapi::xmlescape($img['url']) ?>'&gt;&lt;img src='<?= Okapi::xmlescape($img['thumb_url']) ?>'&gt;&lt;/a&gt;&lt;br&gt;
+									<?= Okapi::xmlescape($img['caption']) ?>&lt;/div&gt;
+								<? } ?>
+								&lt;/div&gt;
+							<? } else {
 								# We will split images into two subcategories: spoilers and nonspoilers.
 								$spoilers = array();
 								$nonspoilers = array();
 								foreach ($c['images'] as $img)
 									if ($img['is_spoiler']) $spoilers[] = $img;
 									else $nonspoilers[] = $img;
-							?>
-							<? if (count($nonspoilers) > 0) { ?>
-								&lt;h2&gt;<?= _("Images") ?> (<?= count($nonspoilers) ?>)&lt;/h2&gt;
-								<? foreach ($nonspoilers as $img) { ?>
-									&lt;p&gt;&lt;img src='<?= Okapi::xmlescape($img['url']) ?>'&gt;&lt;br&gt;
-									<?= Okapi::xmlescape($img['caption']) ?>&lt;/p&gt;
+								?>
+								<? if (count($nonspoilers) > 0) { ?>
+									&lt;h2&gt;<?= _("Images") ?> (<?= count($nonspoilers) ?>)&lt;/h2&gt;
+									<? foreach ($nonspoilers as $img) { ?>
+										&lt;p&gt;&lt;img src='<?= Okapi::xmlescape($img['url']) ?>'&gt;&lt;br&gt;
+										<?= Okapi::xmlescape($img['caption']) ?>&lt;/p&gt;
+									<? } ?>
 								<? } ?>
-							<? } ?>
-							<? if (count($spoilers) > 0 && $vars['images'] == 'descrefs:all') { ?>
-								&lt;h2&gt;<?= _("Spoilers") ?> (<?= count($spoilers) ?>)&lt;/h2&gt;
-								<? foreach ($spoilers as $img) { ?>
-									&lt;p&gt;&lt;img src='<?= Okapi::xmlescape($img['url']) ?>'&gt;&lt;br&gt;
-									<?= Okapi::xmlescape($img['caption']) ?>&lt;/p&gt;
+								<? if (count($spoilers) > 0 && $vars['images'] == 'descrefs:all') { ?>
+									&lt;h2&gt;<?= _("Spoilers") ?> (<?= count($spoilers) ?>)&lt;/h2&gt;
+									<? foreach ($spoilers as $img) { ?>
+										&lt;p&gt;&lt;img src='<?= Okapi::xmlescape($img['url']) ?>'&gt;&lt;br&gt;
+										<?= Okapi::xmlescape($img['caption']) ?>&lt;/p&gt;
+									<? } ?>
 								<? } ?>
 							<? } ?>
 						<? } ?>

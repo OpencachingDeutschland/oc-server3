@@ -246,7 +246,7 @@ class getNew {
     	if(is_null($includetext) || !is_bool($includetext)) {
     		$includetext = false;
     	}
-    	
+ 	
     	// execute RSSParser
     	return RSSParser::parse($items,$url,$includetext);
     	
@@ -276,6 +276,41 @@ class getNew {
     	// check $url and set defaults
     	if(is_null($url) || !is_string($url)) {
     		$url = $opt['forum']['url'];
+    	}
+    	// check $includetext and set defaults
+    	if(is_null($includetext) || !is_bool($includetext)) {
+    		$includetext = false;
+    	}
+    	
+    	// execute RSSParser
+    	return RSSParser::parse($items,$url,$includetext);
+    	
+    }
+    
+    
+    
+    
+    
+    /**
+     * wikiFeed executes the RSSParser for type "wiki"
+     * 
+     * @param int $items number of feeditems to parse from feed (RSSParser)
+     * @param string $url url of the feed to parse (RSSParser)
+     * @param boolean $includetext ???following??? add table-tag?
+     * @return string HTML string used for smarty assign method
+     */
+    private function wikiFeed($items=null,$url=null,$includetext=null) {
+    	
+    	// global
+    	global $opt;
+    	
+    	// check $items and set defaults
+    	if(is_null($items) || !is_numeric($items)) {
+    		$items = 10;
+    	}
+    	// check $url and set defaults
+    	if(is_null($url) || !is_string($url)) {
+    		$url = 'http://wiki.opencaching.de/index.php/Spezial:Neue_Seiten?feed=rss';
     	}
     	// check $includetext and set defaults
     	if(is_null($includetext) || !is_bool($includetext)) {

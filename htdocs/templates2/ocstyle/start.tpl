@@ -51,11 +51,12 @@
 {else}
 	<div id="blog">
 {if !$rsserror}
-		{include file="res_rssparser.tpl" rss=$rssdata}
+		{include file="res_rssparser.tpl" rss=$news}
 {else}
 		<p><em>{t}currently not available{/t}</em></p>
 {/if}
 	</div>
+	<div class="buffer" style="width: 500px;">&nbsp;</div>
 {/if}
 
 {* next events *}
@@ -104,11 +105,12 @@
 *}
 <div id="forum">
 {if !$rsserror}
-	{include file="res_rssparser.tpl" rss=$rssdata}
+	{include file="res_rssparser.tpl" rss=$forum}
 {else}
 	<p><em>{t}currently not available{/t}</em></p>
 {/if}
 </div>
+<div class="buffer" style="width: 500px;">&nbsp;</div>
 {*
 	<ul class="nodot">
 		{foreach from=$phpbb_topics item=phpbbItem}
@@ -132,5 +134,6 @@
 	</p>
 </div>
 <p style="line-height: 1.6em;">({t 1=$count_hiddens 2=$count_founds 3=$count_users}Total of %1 active Caches and %2 founds by %3 users{/t})</p>
-{include file="res_newcaches.tpl" newcaches=$newcaches}		
+{include file="res_newcaches.tpl" newcaches=$newcaches}
+	
 

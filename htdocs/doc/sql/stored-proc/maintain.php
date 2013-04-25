@@ -1398,7 +1398,9 @@
 	sql("CREATE TRIGGER `coordinatesAfterInsert` AFTER INSERT ON `coordinates`
 				FOR EACH ROW
 					BEGIN
-						CALL sp_update_cache_listingdate(NEW.`cache_id`);
+						IF NEW.`type`=1 THEN
+							CALL sp_update_cache_listingdate(NEW.`cache_id`);
+						END IF;
 					END;");
 
 	sql_dropTrigger('coordinatesBeforeUpdate');
@@ -1415,8 +1417,10 @@
 	sql("CREATE TRIGGER `coordinatesAfterUpdate` AFTER UPDATE ON `coordinates`
 				FOR EACH ROW
 					BEGIN
-						CALL sp_update_cache_listingdate(NEW.`cache_id`);
-						IF OLD.`cache_id`!=NEW.`cache_id` THEN
+						IF NEW.`type`=1 THEN
+							CALL sp_update_cache_listingdate(NEW.`cache_id`);
+						END IF;
+						IF OLD.`cache_id`!=NEW.`cache_id` AND OLD.`type`=1 THEN
 							CALL sp_update_cache_listingdate(OLD.`cache_id`);
 						END IF;
 					END;");
@@ -1425,7 +1429,9 @@
 	sql("CREATE TRIGGER `coordinatesAfterDelete` AFTER DELETE ON `coordinates`
 				FOR EACH ROW
 					BEGIN
-						CALL sp_update_cache_listingdate(OLD.`cache_id`);
+						IF OLD.`type`=1 THEN
+							CALL sp_update_cache_listingdate(OLD.`cache_id`);
+						END IF;
 					END;");
 
 	sql_dropTrigger('savedTextsBeforeInsert');

@@ -22,11 +22,13 @@ function __autoload($class_name)
 	
 	$file = $opt['rootpath'] . '../lib/classes/' . $class_name . '.php';
 	$file2 = $opt['rootpath'] . 'lib2/' . $class_name2 . '.class.php';
-	if (file_exists($file)) {
+	$file3 = $opt['rootpath'] . 'lib2/logic/' . $class_name2 . '.class.php';
+	if (file_exists($file)) 
 		require_once($file);
-	} elseif(file_exists($file2)) {
+	elseif (file_exists($file2)) 
 		require_once($file2);
-	}
+	elseif (file_exists($file3))
+		require_once($file3);
 }
 
 

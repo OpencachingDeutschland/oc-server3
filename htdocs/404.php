@@ -4,25 +4,24 @@
  *
  *  Unicode Reminder メモ
  ***************************************************************************/
-	
-	$opt['rootpath'] = '../';
+
 	require($opt['rootpath'].'lib2/web.inc.php');
 	require($opt['rootpath'].'lib2/logic/logpics.inc.php');
 	$sUserCountry = $login->getUserCountry();
-	
+
 	// create object for "newest" information
 	$getNew = new getNew($sUserCountry);
-	
+
 	$tpl->main_template = 'sys_oc404';
 	$tpl->name = 'sys_oc404';
 
 	$tpl->caching = false;
 	$tpl->cache_lifetime = 300;
 	$tpl->cache_id = $sUserCountry;
-	
+
 	// rootpath
 	$tpl->assign('rootpath',$opt['rootpath']);
-	
+
 	// website
 	// check length
 	$uril = 70;
@@ -36,7 +35,7 @@
 	// get newest blog entries
 	$tpl->assign('blog', $getNew->feedForSmarty('blog',3));
 
-  	// get newest forum posts
+	// get newest forum posts
 	$tpl->assign('forum',$getNew->feedForSmarty('forum',3));
 
 	// get newest wiki
@@ -44,6 +43,8 @@
 
 	// get newest caches
 	$tpl->assign_rs('newcaches', $getNew->rsForSmarty('cache',array($sUserCountry, $opt['template']['locale'],3)));
+
+	$tpl->assign('contact', $opt['mail']['contact']);
 
 	$tpl->display();
 ?>

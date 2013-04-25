@@ -10,10 +10,10 @@ class RSSParser {
 	 * @param string $url url of the feed to parse
 	 * @return string $item feeditems as HTML-string
 	 */
-	public static function parse($items,$url,$includetext) {
-	
+	public static function parse($items,$url,$includetext)
+	{
 		global $tpl;
-		
+
     if ($items <= 0)
       return '';
     
@@ -89,7 +89,7 @@ class RSSParser {
 		
 		// assign to template
 		$tpl->assign('rsserror',$error);
-		
+
 		// return
 		return $rss;
 	}

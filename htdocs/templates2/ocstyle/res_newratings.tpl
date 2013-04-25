@@ -3,7 +3,7 @@
 *
 *  Unicode Reminder メモ
 ***************************************************************************}
-<ul class="nodot">			
+<ul class="nodot">
 	{foreach name=topratings from=$topratings item=cacheitem}
 		<li class="newcache_list_multi" style="margin-bottom: 8px;">
 			{include file="res_cacheicon_22.tpl" cachetype=$cacheitem.type}
@@ -23,6 +23,6 @@
 				</p>
 			</strong>
 		</li>
-	{/foreach}	
+	{/foreach}
 </ul>
 <p style="line-height: 1.6em;">{t}You can find more recommendations &gt;<a href="tops.php">here</a>&lt;.{/t}</p>

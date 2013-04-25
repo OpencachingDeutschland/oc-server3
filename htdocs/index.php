@@ -13,7 +13,7 @@
 	
 	// create object for "newest" information
 	$getNew = new getNew($sUserCountry);
-	
+
 	$tpl->name = 'start';
 	$tpl->menuitem = MNU_START;
 

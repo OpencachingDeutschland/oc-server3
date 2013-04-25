@@ -1,0 +1,62 @@
+/***************************************************************************
+*  You can find the license in the docs directory
+*
+*  Unicode Reminder メモ
+***************************************************************************/
+/*
+ * opencaching.de - landingpage styles
+ */
+
+div#frame {
+	width: 970px;
+	margin: 0 auto 5px auto;
+	background-color: white;
+}
+
+a.links:visited {
+	color: black;
+}
+
+div#head {
+	margin-left: 10px;
+	text-align: center;
+}
+
+div#content {
+	margin-left: 10px;
+}
+
+div#foot {
+	margin-top: 20px;
+	margin-left: 10px;
+}
+
+div#head img#oc404 {
+	margin-right: 10px;
+}
+
+p.text {
+	font-size: 165%;
+}
+
+table.narrowtable {
+	margin-left: 30px;
+}
+
+div.sresult {
+	margin: 20px 0 0 50px;
+}
+
+span.dnf {
+	font-size: 300%;
+	font-weight: bold;
+	vertical-align: middle;
+}
+
+.center {
+	text-align: center;
+}
+
+ul.nodot li {
+	font-size: 110%;
+}

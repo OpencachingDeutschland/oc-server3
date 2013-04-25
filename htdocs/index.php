@@ -11,6 +11,9 @@
 	require('./lib2/logic/logpics.inc.php');
 	$sUserCountry = $login->getUserCountry();
 	
+	// create object for "newest" information
+	$getNew = new getNew($sUserCountry);
+	
 	$tpl->name = 'start';
 	$tpl->menuitem = MNU_START;
 
@@ -52,9 +55,8 @@
 				$url = str_replace('{style}', $opt['template']['style'], $url);
 				$newscontent = read_file($url, $opt['news']['maxsize']);
 			*/
-			$newscontent = RSSParser::parse($opt['news']['count'],$opt['news']['include'], false);
-
-			$tpl->assign('news', $newscontent);
+			// get newest blog entries
+			$tpl->assign('news', $getNew->feedForSmarty('blog'));
 			$tpl->assign('newsfeed', $opt['news']['include']);
 			$tpl->assign('extern_news', true);
 		}
@@ -72,9 +74,9 @@
 		   * requires $opt['forum']['count'] in settings for number of lastest forum-posts
 		   * requires $opt['forum']['url'] in settings: RSS-feed-URL of the forum
 		   */
-		  $tpl->assign('phpbb_enabled', true);
-		  $forumcontent = RSSParser::parse($opt['forum']['count'], $opt['forum']['url'], false);
-		  $tpl->assign('forum',$forumcontent);
+			// get newest forum posts
+			$tpl->assign('phpbb_enabled', true);
+			$tpl->assign('forum',$getNew->feedForSmarty('forum'));
     }
     else
     {
@@ -93,89 +95,14 @@
 		$tpl->assign('count_founds', sql_value_slave('SELECT COUNT(*) AS `founds` FROM `cache_logs` WHERE `type`=1', 0));
 		$tpl->assign('count_users', sql_value_slave('SELECT COUNT(*) AS `users` FROM (SELECT DISTINCT `user_id` FROM `cache_logs` UNION DISTINCT SELECT DISTINCT `user_id` FROM `caches`) AS `t`', 0));
 
-		// new events
-		$events = array();
-		$rs = sql_slave("SELECT `user`.`user_id` `user_id`,
-														`user`.`username` `username`,
-														`caches`.`cache_id` `cache_id`,
-														`caches`.`name` `name`,
-														`caches`.`date_hidden`,
-														IFNULL(`sys_trans_text`.`text`,`cache_location`.`adm1`) AS `adm1`,
-														`cache_location`.`adm2`,
-														`cache_location`.`adm3`,
-														`cache_location`.`adm4`
-											 FROM `caches`
-								 INNER JOIN `user` ON `user`.`user_id`=`caches`.`user_id`
-									LEFT JOIN `cache_location` ON `caches`.`cache_id`=`cache_location`.`cache_id`
-									LEFT JOIN `countries` ON `countries`.`short`=`cache_location`.`code1`
-									LEFT JOIN `sys_trans_text` ON `sys_trans_text`.`trans_id`=`countries`.`trans_id` AND `sys_trans_text`.`lang`='&2'
-											WHERE `caches`.`country`='&1' AND 
-											      `caches`.`date_hidden` >= curdate() AND 
-														`caches`.`type` = 6 AND 
-														`caches`.`status`=1
-									 ORDER BY `date_hidden` ASC LIMIT 0, 10",
-									          $sUserCountry, $opt['template']['locale']);
-		$tpl->assign_rs('events', $rs);
-		sql_free_result($rs);
+		// get newest events
+		$tpl->assign_rs('events', $getNew->rsForSmarty('event'));
 
-		// new caches
-		$rs = sql_slave("SELECT	`user`.`user_id` `user_id`,
-														`user`.`username` `username`,
-														`caches`.`cache_id` `cache_id`,
-														`caches`.`name` `name`,
-														`caches`.`date_created` `date_created`,
-														`caches`.`type`,
-														IFNULL(`sys_trans_text`.`text`,`cache_location`.`adm1`) AS `adm1`,
-														`cache_location`.`adm2`,
-														`cache_location`.`adm3`,
-														`cache_location`.`adm4`
-											 FROM `caches` 
-								 INNER JOIN `user` ON `user`.`user_id`=`caches`.`user_id` 
-									LEFT JOIN `cache_location` ON `caches`.`cache_id`=`cache_location`.`cache_id`
-									LEFT JOIN `countries` ON `countries`.`short`=`cache_location`.`code1`
-									LEFT JOIN `sys_trans_text` ON `sys_trans_text`.`trans_id`=`countries`.`trans_id` AND `sys_trans_text`.`lang`='&2'
-											WHERE `caches`.`country`='&1' AND 
-											      `caches`.`type` != 6 AND 
-														`caches`.`status` = 1
-									 ORDER BY `caches`.`date_created` DESC LIMIT 0, 10",
-									          $sUserCountry, $opt['template']['locale']);
-		$tpl->assign_rs('newcaches', $rs);
-		sql_free_result($rs);
+		// get newest caches
+		$tpl->assign_rs('newcaches', $getNew->rsForSmarty('cache'));
 
 		// last 30 days' top ratings
-		//
-		// 2012-08-24 following
-		//		optimized by adding rating_date field to cache_rating, so we don't need the log table. 
-
-		$rs = sql_slave("SELECT COUNT(`cache_rating`.`user_id`) AS `cRatings`, 
-																	MAX(`cache_rating`.`rating_date`) AS `dLastLog`, 
-																	`user`.`user_id` AS `user_id`,
-																	`user`.`username` AS `username`,
-																	`caches`.`cache_id` AS `cache_id`,
-																	`caches`.`name` AS `name`,
-																	`caches`.`type`,
-																	IFNULL(`sys_trans_text`.`text`,`cache_location`.`adm1`) AS `adm1`,
-																	`cache_location`.`adm2`,
-																	`cache_location`.`adm3`,
-																	`cache_location`.`adm4`
-														 FROM `cache_rating` 
-											 INNER JOIN `caches` ON `caches`.`cache_id`=`cache_rating`.`cache_id`
-											 INNER JOIN `user` ON `user`.`user_id`=`caches`.`user_id`
-												LEFT JOIN `cache_location` ON `cache_rating`.`cache_id`=`cache_location`.`cache_id`
-												LEFT JOIN `countries` ON `countries`.`short`=`cache_location`.`code1`
-												LEFT JOIN `sys_trans_text` ON `sys_trans_text`.`trans_id`=`countries`.`trans_id` AND `sys_trans_text`.`lang`='&2'
-														WHERE `caches`.`country`='&1' AND 
-																	`cache_rating`.`rating_date`>DATE_SUB(NOW(), INTERVAL 30 DAY) AND 
-																	`caches`.`type`!=6 AND 
-																	`caches`.`status`=1
-												 GROUP BY `cache_rating`.`cache_id` 
-												 ORDER BY `cRatings` DESC, 
-																	`dLastLog` DESC,
-																	`cache_id` DESC 
-														LIMIT 0, 10",
-									                $sUserCountry, $opt['template']['locale']);
-		$tpl->assign_rs('topratings', $rs);
-		sql_free_result($rs);
+		$tpl->assign_rs('topratings', $getNew->rsForSmarty('rating'));
 
 		$sUserCountryName = sql_value("SELECT IFNULL(`sys_trans_text`.`text`, `countries`.`name`) 
 		                                 FROM `countries` 

@@ -216,7 +216,7 @@
 						tpl_set_var('descMode', 3);
 					}
 
-					tpl_set_var('reset', $reset);
+					tpl_set_var('reset', $reset);  // obsolete
 					tpl_set_var('submit', $submit);
 				}
 				else

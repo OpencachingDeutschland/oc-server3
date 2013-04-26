@@ -103,8 +103,9 @@
 		<tr><td class="spacer" colspan="2"></td></tr>
 		<tr><td class="spacer" colspan="2"></td></tr>
 		<tr>
+			<td>&nbsp;</td>
 			<td class="header-small" colspan="2">
-				<input type="reset" name="clear" value="{t}Reset{/t}" class="formbutton" onclick="flashbutton('clear')" />&nbsp;&nbsp;
+				<!-- <input type="reset" name="clear" value="{t}Reset{/t}" class="formbutton" onclick="flashbutton('clear')" />&nbsp;&nbsp; -->
 				<input type="submit" name="confirm" value="{t}Change{/t}" class="formbutton" onclick="submitbutton('confirm	')" />
 			</td>
 		</tr>

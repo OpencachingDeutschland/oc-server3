@@ -135,7 +135,7 @@
 
 		<tr>
 			<td class="header-small" colspan="2">
-				<input type="reset" name="reset" value="{t}Reset{/t}" class="formbutton" onclick="flashbutton('reset')" />&nbsp;&nbsp;
+				<!-- <input type="reset" name="reset" value="{t}Reset{/t}" class="formbutton" onclick="flashbutton('reset')" />&nbsp;&nbsp; -->
 				<input type="submit" name="ok" value="{if $action=='add'}{t}Upload{/t}{else}{t}Submit{/t}{/if}" class="formbutton" onclick="submitbutton('ok')" />
 			</td>
 		</tr>

@@ -190,7 +190,7 @@
 
 			<tr>
 				<td class="header-small" colspan="2">
-					<input type="reset" name="reset" value="{t}Reset{/t}" class="formbutton" onclick="flashbutton('reset')"/>&nbsp;&nbsp;
+					<!-- <input type="reset" name="reset" value="{t}Reset{/t}" class="formbutton" onclick="flashbutton('reset')"/>&nbsp;&nbsp; -->
 					<input type="submit" name="submit" value="{t}Register{/t}" class="formbutton" onclick="submitbutton('submit')"/>
 				</td>
 			</tr>

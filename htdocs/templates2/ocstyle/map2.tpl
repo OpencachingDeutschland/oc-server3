@@ -2185,7 +2185,7 @@ function toggle_attribselection(bSaveCookies)
 						{/if} 
 						<tr><td>{t}Cache icons{/t}:</td><td><select name="opt_cacheicons"><option id="opt_cacheicons1" value="1">{t}classic OC{/t}<option id="opt_cacheicons2" value="2">{t}OKAPI style{/t}</option></select></td></tr>
 						<tr><td>{t 1=$help_previewpics}Show %1preview pictures</a><br />(% of map area, 0=off){/t}:</td><td><input type="text" id="opt_pictures" name="opt_pictures" size="2" maxlength="2" /></td></tr>
-						<tr><td colspan="2">{if $login.userid>0}<input type="button" class="formbutton" value="{t}Cancel{/t}" onclick="toggle_settings()"/>&nbsp; <input type="submit" name="submitsettings" class="formbutton" value="{t}Change{/t}" onclick="submitbutton('submitsettings')" />{else}<em>{t}You must be logged in to change map settings.{/t}</em>{/if}</td></tr>
+						<tr><td colspan="2">{if $login.userid>0}<input type="button" class="formbutton" value="{t}Cancel{/t}" onclick="toggle_settings()"/>&nbsp; <input type="submit" name="submitsettings" class="formbutton" value="{t}OK{/t}" onclick="submitbutton('submitsettings')" />{else}<em>{t}You must be logged in to change map settings.{/t}</em>{/if}</td></tr>
 					</table>
 				</form>
 			</div>

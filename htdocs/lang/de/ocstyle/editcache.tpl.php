@@ -359,7 +359,7 @@ function toggleAttr(id)
 	<tr><td class="spacer" colspan="2"></td></tr>
 	<tr>
 		<td class="header-small" colspan="2">
-			<input type="reset" name="reset" value="{reset}" class="formbutton" onclick="flashbutton('reset')" />&nbsp;&nbsp;
+			<!-- <input type="reset" name="reset" value="{reset}" class="formbutton" onclick="flashbutton('reset')" />&nbsp;&nbsp; -->
 			<input type="submit" name="submit" value="{submit}" class="formbutton" onclick="submitbutton('submit')" />
 		</td>
 	</tr>

@@ -26,5 +26,5 @@
 	$pictureline = '<td><a href="javascript:SelectFile(\'{link}\');">{title}<br/><img src="{link}" width="180"></a></td>';
 	$picturelines = '{lines}';
 
-	$submit = t('Change');
+	$submit = t('Save');
 ?>

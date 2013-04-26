@@ -46,7 +46,7 @@
 			require_once($stylepath . '/' . $tplname . '.inc.php');
 
 			//set template replacements
-			tpl_set_var('reset', $reset);
+			tpl_set_var('reset', $reset);  // obsolete
 			tpl_set_var('submit', $submit);
 			tpl_set_var('general_message', '');
 			tpl_set_var('hidden_since_message', '');

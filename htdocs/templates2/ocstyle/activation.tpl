@@ -66,7 +66,7 @@
 		{/if}
 
 		<p style="line-height: 1.6em;">
-			<input type="reset" name="reset" value="{t}Reset{/t}" class="formbutton" onclick="flashbutton('reset')" />&nbsp;&nbsp;
+			<!-- <input type="reset" name="reset" value="{t}Reset{/t}" class="formbutton" onclick="flashbutton('reset')" />&nbsp;&nbsp; -->
 			<input type="submit" name="submit" value="{t}Submit{/t}" class="formbutton" onclick="submitbutton('submit')" />
 		</p>
 	</form>

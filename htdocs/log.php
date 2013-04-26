@@ -301,7 +301,7 @@
 					tpl_set_var('loghour', htmlspecialchars($log_time_hour, ENT_COMPAT, 'UTF-8'));
 					tpl_set_var('logminute', htmlspecialchars($log_time_minute, ENT_COMPAT, 'UTF-8'));
 					tpl_set_var('logtypeoptions', $logtypeoptions);
-					tpl_set_var('reset', $reset);
+					tpl_set_var('reset', $reset);  // obsolete
 					tpl_set_var('submit', $submit);
 					tpl_set_var('date_message', '');
 

@@ -260,7 +260,7 @@
 					tpl_set_var('desclang', htmlspecialchars($desc_lang, ENT_COMPAT, 'UTF-8'));
 					tpl_set_var('desclang_name', htmlspecialchars(db_LanguageFromShort($desc_lang), ENT_COMPAT, 'UTF-8'));
 					tpl_set_var('cachename', htmlspecialchars($desc_record['name'], ENT_COMPAT, 'UTF-8'));
-					tpl_set_var('reset', $reset);
+					tpl_set_var('reset', $reset);  // obsolete
 					tpl_set_var('submit', $submit);
 
 					// Text / normal HTML / HTML editor

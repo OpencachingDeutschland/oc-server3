@@ -867,7 +867,7 @@ function getWaypoints($cacheid)
 					tpl_set_var('wp_gc', htmlspecialchars($wp_gc, ENT_COMPAT, 'UTF-8'));
 					tpl_set_var('wp_nc', htmlspecialchars($wp_nc, ENT_COMPAT, 'UTF-8'));
 
-					tpl_set_var('reset', $reset);
+					tpl_set_var('reset', $reset);  // obsolete
 					tpl_set_var('submit', $submit);
 				}
 				else

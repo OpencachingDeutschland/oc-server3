@@ -25,7 +25,7 @@
 
 	//common vars
 	$dateformat = $opt['locale'][$locale]['format']['date'];
-	$reset = t('Reset');
+	$reset = t('Reset');  // obsolete
 	$yes = t('Yes');
 	$no = t('No');
 

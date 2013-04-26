@@ -92,8 +92,8 @@
 
 			<tr>
 				<td class="header-small" colspan="2">
-					<input type="reset" name="cancel" value="{t}Reset{/t}" class="formbutton" onclick="flashbutton('cancel')" />&nbsp;&nbsp;
-					<input type="submit" name="ok" value="{t}Change{/t}" class="formbutton" onclick="submitbutton('ok')" />
+					<!-- <input type="reset" name="cancel" value="{t}Reset{/t}" class="formbutton" onclick="flashbutton('cancel')" />&nbsp;&nbsp; -->
+					<input type="submit" name="ok" value="{t}Save{/t}" class="formbutton" onclick="submitbutton('ok')" />
 				</td>
 			</tr>
 		</table>

@@ -283,8 +283,7 @@
 			&nbsp; &lt;records user="193" cache="211" cachedesc="235" cachelog="439" 
 			picture="108" removeobject="19" /&gt;<br/>
 			&lt;/ocxmlsession&gt;</p>
-		<p>Die Sessionid ist 12h gültig, danach muss eine neue sessionid angefordert 
-			werden. Die Anzahl der Datensätz muss nicht exakt mit den übertragenen 
+		<p>Die Anzahl der Datensätz muss nicht exakt mit den übertragenen 
 			übereinstimmen - mehr Datensätze werden jedoch auf keinen Fall übertragen. Die 
 			Summe der Datensätze ist in diesem Beispiel 1205 - es werden also 3 Aufrufe 
 			benötigt (500, 500, 205 Datensätze).</p>
@@ -292,6 +291,10 @@
 			<a>http://www.opencaching.de/xml/ocxml12.php?sessionid=12345&amp;file=1</a><br/>
 			<a>http://www.opencaching.de/xml/ocxml12.php?sessionid=12345&amp;file=2</a><br/>
 			<a>http://www.opencaching.de/xml/ocxml12.php?sessionid=12345&amp;file=3</a></p>
+		<p>Die Sessionid ist zwei Stunden lang gültig, wobei sich dieser Zeitraum mit jedem
+			einzelnen Dateiabruf verlängert &ndash; zwischen den Einzelabrufen dürften also
+			maximal zwei Stunden vergehen. Dauert es länger, müsste eine neue sessionid
+			angefordert werden.</p>
 		<h3>Alle Ergebnisse mit einem Aufruf abfragen</h3>
 		<p>Um alle Ergebnisse in einer Datei abzurufen muss bei dem Aufruf der Paramter 
 			session auf 0 gesetzt werden.</p>

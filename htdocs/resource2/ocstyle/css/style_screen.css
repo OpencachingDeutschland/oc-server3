@@ -337,6 +337,8 @@ td.listicon {
 	vertical-align:center;
 }
 
+.printwptable td { line-height:1.4em; font-size:12px; }
+
 /* Images */
 .img-left-noborder-notopmargin {float: left; margin: 0px 10px 0px 0px;}
 .img-left-noborder-topmargin {float: left; margin: 3px 10px 0px 0px;}

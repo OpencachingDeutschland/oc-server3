@@ -153,6 +153,7 @@
 		</td>
 	</tr>
 
+	{* Attributes *}
   {if count($attributes)>0}
 	  <tr>
 		{if $print==y}
@@ -187,6 +188,7 @@
 	  <tr><td class="spacer"><br /></td></tr>
 	{/if}
 
+	{* Description *}
 	<tr>
 		{if $print==y}
 		<td class="header-small-print">
@@ -231,7 +233,86 @@
 		</td>
 	</tr>
 
+	{* personal note *}
+	{if $enableCacheNote && ($note != "" || $inclCoord)}
+		{if $print==y}
+			<tr><td class="spacer-print"><br></td></tr>
+		{else}
+			<tr><td class="spacer"><br></td></tr>
+		{/if}
+
+		<tr>
+			{if $print==y}
+				<td class="header-small-print">
+			{else}
+				<td class="header-small">
+			{/if}
+				<img src="resource2/{$opt.template.style}/images/description/22x22-description.png" width="20" height="20" style="vertical-align:middle" border="0">
+				<b>{t}Personal cache note{/t}</b> &nbsp;&nbsp;
+				&nbsp;
+			</td>
+		</tr>
+		{if $inclCoord}
+			<tr><td>{$lat_hem} {$lat_deg}° {$lat_min}' &nbsp; {$lon_hem} {$lon_deg}° {$lon_min}'</td></tr>
+		{/if}
+		<tr><td>{$note|escape}</td></tr>
+	{/if}
+
+	{* Additional waypoints *}
+	{if count($childWaypoints)>0}
+		{if $print==y}
+			<tr><td class="spacer-print"><br></td></tr>
+		{else}
+			<tr><td class="spacer"><br></td></tr>
+		{/if}
+
+		<tr>
+			{if $print==y}
+				<td class="header-small-print">
+			{else}
+				<td class="header-small">
+			{/if}
+				<img src="resource2/{$opt.template.style}/images/description/20x20-compass.png" width="20" height="20" style="vertical-align:middle" border="0">
+				<b>{t}Additional waypoints{/t}</b> &nbsp;&nbsp;
+				&nbsp;
+			</td>
+		</tr>
+
+		<tr>
+			{if $print==y}
+			<td class="inner-print">
+			{else}
+			<td>
+			{/if}
+				<table class="table printwptable" width="95%">
+				{foreach from=$childWaypoints item=childWaypoint}
+					<tr>
+						<td width="1%">
+							<table class="table">
+								<tr>
+									<td style="margin:0; padding:0"><img src="{$childWaypoint.image}" /></td>
+									<td><nobr>{$childWaypoint.name|escape}</nobr></td>
+								</tr>
+							</table>
+						</td>
+						<td width="1%" style="white-space:norwap"><nobr>{$childWaypoint.coordinateHtml}</nobr></td>
+						<td width="1%"></td>
+						<td>{$childWaypoint.description|escape|replace:"\r\n":"<br />"}</td>
+					</tr>
+				{/foreach}
+				</table>
+			</td>
+		</tr>
+	{/if}
+
+	{* Hint *}
 	{if $cache.hint!=''}
+		{if $print==y}
+			<tr><td class="spacer-print"><br></td></tr>
+		{else}
+			<tr><td class="spacer"><br></td></tr>
+		{/if}
+
 		<tr>
 			{if $print==y}
 			<td class="header-small-print">
@@ -314,6 +395,7 @@
 		</tr>
 	{/if}
 
+	{* Pictures *}
 	{if count($pictures)>0}
 		<tr>
 			{if $print==y}
@@ -346,16 +428,19 @@
 		{/if}
 	{/if}
 
-	<tr>
-		{if $print==y}
-		<td class="header-small-print" valign="middle">
-		{else}
-		<td class="header-small" valign="middle">
-		{/if}
-			<img src="resource2/{$opt.template.style}/images/description/22x22-utility.png" width="22" height="22" style="vertical-align:middle" border="0" title="">
-			{t}Utilities{/t}
-		</td>
-	</tr>
+	{* Nature protection areas *}
+	{if count($npaareasWarning) + count($npaareasNoWarning) > 0}
+		<tr>
+			{if $print==y}
+			<td class="header-small-print" valign="middle">
+			{else}
+			<td class="header-small" valign="middle">
+			{/if}
+				<img src="resource2/{$opt.template.style}/images/description/22x22-utility.png" width="22" height="22" style="vertical-align:middle" border="0" title="">
+				<b>{t}Nature protection{/t}</b>
+			</td>
+		</tr>
+	{/if}
 
 	{if count($npaareasWarning) > 0}
 		{if $print==y}
@@ -400,6 +485,7 @@
 		</tr>
 	{/if}
 
+	{* Geokrets *}
 	{if $geokret_count!=0}
 		<tr>
 			{if $print==y}
@@ -426,11 +512,12 @@
 		</tr>
 	{/if}
 
-		{if $print==y}
-			<tr><td class="spacer-print"><br></td></tr>
-		{else}
-			<tr><td class="spacer"><br></td></tr>
-		{/if}
+	{* Logs *}
+	{if $print==y}
+		<tr><td class="spacer-print"><br></td></tr>
+	{else}
+		<tr><td class="spacer"><br></td></tr>
+	{/if}
 	<tr>
 			{if $print==y}
 			<td class="inner-print">

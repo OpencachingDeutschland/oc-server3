@@ -218,6 +218,8 @@ div.changelog ul li {margin: 0px 0px 0.1em 0px; }
 .narrowtable th {margin: 0px; background-color: rgb(127,162,202); padding: 0 7px 0 7px; border: solid 0px rgb(150,150,150); empty-cells: show; text-align: left; font-size: 120%; color: rgb(255,255,255);	}
 .narrowtable-caption {margin: 0.5em 0px 1.0em 30px; padding: 0px; clear: both; text-align: left; font-size: 120%;}
 
+.printwptable td { line-height:1.4em; font-size:12px; }
+
 /* Images */
 .img-left-noborder-notopmargin {float: left; margin: 0px 10px 0px 0px;}
 .img-left-noborder-topmargin {float: left; margin: 3px 10px 0px 0px;}

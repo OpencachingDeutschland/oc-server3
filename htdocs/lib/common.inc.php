@@ -437,7 +437,7 @@ function __autoload($class_name)
 	function tpl_BuildTemplate($dbdisconnect=true)
 	{
 		//template handling vars
-		global $style, $stylepath, $tplname, $vars, $langpath, $locale, $opt, $oc_nodeid, $translate;
+		global $style, $stylepath, $tplname, $vars, $langpath, $locale, $opt, $oc_nodeid, $translate, $usr;
 		//language specific expression
 		global $error_pagenotexist;
 		//only for debbuging
@@ -532,6 +532,17 @@ function __autoload($class_name)
 		include $langpath . '/expressions.inc.php';
 
 		//load main template
+		if ($usr['username'] == 'HWR-Info')
+		{
+			tpl_set_var('backgroundimage','<div style="color:grey; position:absolute; top:15px; right:-100px">HWR-Info-Grey<br />Edition</div>');
+			tpl_set_var('bodystyle','background:#ededed');
+		}
+		else
+		{
+			tpl_set_var('backgroundimage','<div id="bg1">&nbsp;</div><div id="bg2">&nbsp;</div>');
+			tpl_set_var('bodystyle','');
+		}
+
 		if (isset($_REQUEST['print']) && $_REQUEST['print'] == 'y')
 			$sCode = read_file($stylepath . '/main_print.tpl.php');
 		else if (isset($_REQUEST['popup']) && $_REQUEST['popup'] == 'y')

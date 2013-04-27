@@ -93,7 +93,7 @@
 {if $garmin==true} onload="load('{$cache.latitude}','{$cache.longitude}','{$cache.cacheid}','{$opt.lib.garmin.url}','{$opt.lib.garmin.key}','{$opt.template.locale}')"{/if}
 {foreach from=$opt.page.body_load item=loadItem name=bodyload}{if $smarty.foreach.bodyload.first} onload="{/if}{$loadItem};{if $smarty.foreach.bodyload.last}"{/if}{/foreach}
 {foreach from=$opt.page.body_unload item=unloadItem name=bodyunload}{if $smarty.foreach.bodyunload.first} onunload="{/if}{$unloadItem};{if $smarty.foreach.bodyunload.last}"{/if}{/foreach}
-{if $opt.template.popup!=false} class="popup"{/if}>
+{if $opt.template.popup!=false} class="popup"{/if} {if $greybg}style="background:#ededed"{/if}>
 	{if $opt.template.popup!=true}
 		<div id="overall">
 			<div id="langstripe">
@@ -153,8 +153,12 @@
 			</div>
 			<div class="page-container-1" style="position: relative;">
 
+			{if $greybg}
+				<div style="color:grey; position:absolute; top:15px; right:-100px">HWR-Info-Grey<br />Edition</div>
+			{else}
 				<div id="bg1">&nbsp;</div>
 				<div id="bg2">&nbsp;</div>
+			{/if}
 
 			{* <!-- HEADER --> *}
 			{* <!-- Debugschalter hier wieder einsetzen --> *}

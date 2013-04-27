@@ -123,7 +123,7 @@
 		{htmlheaders}
 	</head>
 
-	<body>
+	<body style="{bodystyle}">
 		<div id="overall">
 			<div id="langstripe">
 
@@ -173,8 +173,7 @@
 				</table>
 			</div>
 		  <div class="page-container-1" style="position: relative;">
-				<div id="bg1">&nbsp;</div>
-				<div id="bg2">&nbsp;</div>
+				{backgroundimage}
 
   			<!-- HEADER -->
 				<?php echo isset($develwarning) ? $develwarning : '' ?>

@@ -975,7 +975,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('80', 'Start', '
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('81', 'What do i find on this website?', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('82', '<p>You can find everything you need to go Geocaching ...</p>', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('83', 'The file was not uploaded correctly.', '2010-08-28 11:48:03');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('84', 'The file was too big. The maximum file size is 150 KB.', '2010-08-28 11:48:03');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('84', 'The file was too big. The maximum file size is 250 KB.', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('85', 'No picture file given.', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('86', 'same type', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('87', 'Opencaching.de', '2010-08-28 11:48:03');
@@ -1633,7 +1633,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('759', 'After cl
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('760', 'This picture is a spoiler - dont show a thumbnail.', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('761', 'Upload', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('762', 'Only the following picture formats are allowed: BMP, GIF, PNG and JPEG. We recommend JPEG for photos.', '2010-08-28 11:48:04');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('763', 'The file size of the pictures must not exeed 150 KB. We recommend 480x360 pixel of picture size.', '2010-08-28 11:48:04');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('763', 'The file size of the pictures must not exeed 250 KB. We recommend 640x480 pixel of picture size.', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('764', 'Report for %1 submitted', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('765', 'Reason:', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('766', 'Comment:', '2010-08-28 11:48:04');
@@ -4751,7 +4751,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('81', 'DE', 'Was finde ich auf dieser Website?', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('82', 'DE', 'Auf dieser Website findest du Geocaches aus der ganzen Welt, mit Schwerpunkt Deutschland, \&Ouml;sterreich, Schweiz, Italien und Spanien. Au\&szlig;erdem gibt es das <a href=\"http://wiki.opencaching.de\">Opencaching-Wiki</a> mit Anleitungen und Informationen rund um Opencaching und Geocaching, und ein Diskussionsforum.', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('83', 'DE', 'Bei der Dateiübertragung ist ein Fehler aufgetreten.', '2010-08-28 11:48:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('84', 'DE', 'Die Datei war zu groß. Es sind maximal 150 kB erlaubt.', '2010-08-28 11:48:06');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('84', 'DE', 'Die Datei war zu groß. Es sind maximal 250 KB erlaubt.', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('85', 'DE', 'Kein Bild angegeben.', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('86', 'DE', 'Gleiche Cacheart', '2010-09-04 21:39:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('87', 'DE', 'Opencaching.de', '2010-08-29 17:36:59');
@@ -5410,7 +5410,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('760', 'DE', 'Dieses Bild ist ein Spoiler - keine Vorschau anzeigen.', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('761', 'DE', 'Hinzufügen', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('762', 'DE', 'Es sind nur die Bildformate JPEG, GIF, PNG und BMP erlaubt; für Fotos wird JPEG empfohlen.', '2010-08-28 11:48:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('763', 'DE', 'Außerdem ist eine maximale Dateigröße von 150 KB zu beachten. Als Bildgröße sind 480 Pixel Breite und 360 Pixel Höhe empfohlen.', '2010-08-28 11:48:06');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('763', 'DE', 'Außerdem ist eine maximale Dateigröße von 250 KB zu beachten. Als Bildgröße sind 640 Pixel Breite und 480 Pixel Höhe empfohlen.', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('764', 'DE', 'Meldebericht für %1 eingetragen', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('765', 'DE', 'Ursache:', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('766', 'DE', 'Kommentar:', '2010-08-28 11:48:06');
@@ -6290,7 +6290,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('81', 'EN', 'Welcome to opencaching.de', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('82', 'EN', '<p>On this page you will find Geocaches from all over the world, with focus on Germany, Austria, Switzerland, Italy and Spain. We also offer information on miscellaneous geocaching topics, and a forum (message board) and chat for communicating with other cachers.</p><p>If you would like to propagate geocaching in your own country, you may run your own Opencaching site in your own language, using our <a href=\"https://github.com/OpencachingDeutschland/oc-server3\" target=\"_blank\">software</a> and known-how. The long-term plan is to form a global geocaching network out of all Opencaching sites. Please contact us in our <a href=\"http://forum.opencaching-network.org/index.php?board=24.0\" target=\"_blank\">international forum</a> for more information.</p>', '2013-02-11 14:25:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('83', 'EN', 'The file was not uploaded correctly.', '2010-08-28 11:48:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('84', 'EN', 'The file was too big. The maximum file size is 150 KB.', '2010-08-28 11:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('84', 'EN', 'The file was too big. The maximum file size is 250 KB.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('85', 'EN', 'No picture file given.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('86', 'EN', 'same type', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('87', 'EN', 'Opencaching.de', '2010-08-29 17:36:59');
@@ -6948,7 +6948,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('760', 'EN', 'This picture is a spoiler - don\'t show a thumbnail.', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('761', 'EN', 'Upload', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('762', 'EN', 'Only the following picture formats are allowed: BMP, GIF, PNG and JPEG. We recommend JPEG for photos.', '2010-08-28 11:48:08');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('763', 'EN', 'The file size of the picture must not exeed 150 KB. We recommend 480x360 pixels picture size.', '2010-08-28 11:48:08');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('763', 'EN', 'The file size of the picture must not exeed 250 KB. We recommend 640x480 pixels picture size.', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('764', 'EN', 'Report for %1 has been submitted.', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('765', 'EN', 'Reason:', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('766', 'EN', 'Comment:', '2010-08-28 11:48:08');
@@ -7806,7 +7806,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('81', 'ES', '¿Que me parece en este sitio?', '2010-12-09 00:17:56');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('82', 'ES', '<p>En esta página podrás encontrar geocaches en todo el mundo, con especial atención a Alemania, Austria, Suiza, Italia y España. También ofrecemos información sobre temas diversos geocaching, y un foro (tablón de anuncios) y chat para comunicarse con otros cachers.</p><p>Si desea propagar geocaching en su propio país, puede ejecutar su propio Opencaching sitio en su propio idioma, utilizando la <a href=\"https://github.com/OpencachingDeutschland/oc-server3\" target=\"_blank\">software</a> y sabe cómo. Por favor, póngase en contacto con nosotros en nuestro foro internacional para más información.</p>', '2010-12-09 00:17:56');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('83', 'ES', 'El archivo no se ha subido correctamente.', '2010-12-09 00:17:56');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('84', 'ES', 'El archivo era demasiado grande. Se permite un máximo de 150 kB.', '2010-12-09 00:17:56');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('84', 'ES', 'El archivo era demasiado grande. Se permite un máximo de 250 KB.', '2010-12-09 00:17:56');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('85', 'ES', 'No hay imagen de archivo determinado.', '2010-12-09 00:17:56');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('86', 'ES', 'mismo tipo', '2010-12-09 00:17:56');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('87', 'ES', 'Opencaching.de', '2010-12-09 00:17:56');
@@ -8464,7 +8464,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('760', 'ES', 'Esta imagen es un spoiler - No hay vista previa.', '2010-12-09 00:17:58');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('761', 'ES', 'Cargar', '2010-12-09 00:17:58');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('762', 'ES', 'Los siguientes formatos se permite sólo para imágenes: BMP, GIF, PNG y JPEG. Recomendamos JPEG para las fotos.', '2010-12-09 00:17:58');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('763', 'ES', 'El tamaño de la imagen no debe superar los 150KB. Se recomienda imágenes de 480 píxeles de ancho por 360 de alto.', '2010-12-09 00:17:58');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('763', 'ES', 'El tamaño de la imagen no debe superar los 250KB. Se recomienda imágenes de 640 píxeles de ancho por 480 de alto.', '2010-12-09 00:17:58');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('764', 'ES', 'El informe sobre %1 ha sido presentado', '2010-12-09 00:17:58');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('765', 'ES', 'Motivo:', '2010-12-09 00:17:58');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('766', 'ES', 'Comentario:', '2010-12-09 00:17:58');
@@ -9354,7 +9354,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('81', 'IT', 'Che cosa trovo in questo sito?', '2010-10-27 18:49:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('82', 'IT', '<p>In questa pagina trovi le Geocache di tutto il mondo, con particolare riguardo a Germania, Austria, Italia e Spagna. Offriamo anche informazioni su svariati argomenti, e un forum (scambio messaggi) con chat per comunicare con altrio cachers.</p><p>Se vuoi propagare il geocaching nella tua nazione, puoi creare un sito Opencaching nella tua lingua, usando il nostro <a href=\"https://github.com/OpencachingDeutschland/oc-server3\" target=\"_blank\">software</a> e le nostre conoscenze. Per favore contattaci sul forum internazionale per maggiori informazioni.</p>', '2010-12-19 00:27:25');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('83', 'IT', 'Il file non è stato caricato correttamente.', '2010-08-28 21:20:35');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('84', 'IT', 'Il file è troppo grande. La dimensione massima è 150 KB.', '2010-08-28 21:21:01');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('84', 'IT', 'Il file è troppo grande. La dimensione massima è 250 KB.', '2010-08-28 21:21:01');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('85', 'IT', 'File per l\'immagine non definito.', '2010-08-28 21:22:12');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('86', 'IT', 'stesso tipo', '2010-08-28 21:27:16');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('87', 'IT', 'Opencaching.de', '2010-08-28 21:22:19');
@@ -10012,7 +10012,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('760', 'IT', 'Questa immagine è uno spoiler - non visualizzare l\'anteprima.', '2010-09-10 23:15:35');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('761', 'IT', 'Carica', '2010-08-31 20:06:23');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('762', 'IT', 'Sono ammessi solo i seguenti formati per le immagini: BMP, GIF, PNG and JPEG. Raccomandiamo JPEG per le foto.', '2010-09-01 23:49:32');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('763', 'IT', 'La dimensione dell\'immagine non deve essere superiore a 150kB. Raccomandiamo immagini di 480 pixel di larghezza per 360 di altezza.', '2010-10-27 18:49:19');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('763', 'IT', 'La dimensione dell\'immagine non deve essere superiore a 250kB. Raccomandiamo immagini di 640 pixel di larghezza per 480 di altezza.', '2010-10-27 18:49:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('764', 'IT', 'Segnalazione per %1 inviata.', '2010-09-01 23:49:32');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('765', 'IT', 'Motivo:', '2010-08-31 20:06:24');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('766', 'IT', 'Commento:', '2010-09-01 23:49:32');
@@ -10834,7 +10834,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('81', 'NL', 'Welkom op opencaching.nl', '2011-02-04 19:49:56');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('82', 'NL', '<p>Hier kan alles gevonden worden wat met Geocaching te maken heeft, als beginner of iemand die veel ervaring heeft. van een eenvoudige wiki tot forum waar met andere cachers gediscussieerd kan worden.</p>', '2011-02-04 19:49:56');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('83', 'NL', 'Bij de dataoverdracht is een fout opgetreden.', '2011-02-04 19:49:56');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('84', 'NL', 'Het bestand is te groot, de maximale grootte is 150 KB.', '2011-02-04 19:49:56');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('84', 'NL', 'Het bestand is te groot, de maximale grootte is 250 KB.', '2011-02-04 19:49:56');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('85', 'NL', 'Geen afbeelding opgegeven.', '2011-02-04 19:49:56');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('86', 'NL', 'zelfde cache soort', '2011-02-04 19:49:56');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('87', 'NL', 'Opencaching.nl', '2011-02-04 19:49:56');

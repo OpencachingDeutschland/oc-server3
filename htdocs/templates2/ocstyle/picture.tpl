@@ -76,7 +76,7 @@
 			{if $errorfile==ERROR_UPLOAD_ERR_NO_FILE}
 				<tr><td>&nbsp;</td><td><span class="errormsg">{t}No picture file given.{/t}</span></td></tr>
 			{elseif $errorfile==ERROR_UPLOAD_ERR_SIZE}
-				<tr><td>&nbsp;</td><td><span class="errormsg">{t}The file was too big. The maximum file size is 150 KB.{/t}</span></td></tr>
+				<tr><td>&nbsp;</td><td><span class="errormsg">{t}The file was too big. The maximum file size is 250 KB.{/t}</span></td></tr>
 			{elseif $errorfile==ERROR_UPLOAD_UNKNOWN}
 				<tr><td>&nbsp;</td><td><span class="errormsg">{t}The file was not uploaded correctly.{/t}</span></td></tr>
 			{elseif $errorfile==ERROR_UPLOAD_ERR_TYPE}
@@ -87,8 +87,9 @@
 		<tr><td class="spacer" colspan="2"></td></tr>
 
 		<tr>
-			<td align="right"><input class="checkbox" type="checkbox" name="spoiler" value="1" {if $spoilerchecked==true}checked="checked"{/if} /></td>
-			<td>{t}This picture is a spoiler - dont show a thumbnail.{/t}</td>
+			<td></td>
+			<td align="right"><input class="checkbox" type="checkbox" name="spoiler" value="1" {if $spoilerchecked==true}checked="checked"{/if} />
+			{t}This picture is a spoiler - dont show a thumbnail.{/t}</td>
 		</tr>
 
 		{if $objecttype==OBJECT_CACHELOG}
@@ -117,7 +118,7 @@
 				<td class="help" colspan="2">
 					<img src="resource2/{$opt.template.style}/images/misc/hint.gif" border="0" width="15" height="11" alt="{t}Note{/t}" title="{t}Note{/t}">
 					{t}Only the following picture formats are allowed: BMP, GIF, PNG and JPEG. We recommend JPEG for photos.{/t}<br />
-					{t}The file size of the pictures must not exeed 150 KB. We recommend 480x360 pixel of picture size.{/t}<br />
+					{t}The file size of the pictures must not exeed 250 KB. We recommend 640x480 pixel of picture size.{/t}<br />
 					{t}After click to upload, it can take a while, until the next page is been shown.{/t}
 				</td>
 			</tr>

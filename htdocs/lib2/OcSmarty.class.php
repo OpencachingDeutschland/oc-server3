@@ -219,7 +219,7 @@ class OcSmarty extends Smarty
 		$this->assign('breadcrumb', $menu->getBreadcrumb());
 		$this->assign('menucolor', $menu->getMenuColor());
 		$this->assign('helplink', helppagelink($this->name));
-		$this->assign('greybg', $loginn['username'] == 'HWR-Info');
+		$this->assign('greybg', !$this->caching && $loginn['username'] == 'HWR-Info');
 
 		if ($this->title == '')
 			$optn['template']['title'] = $menu->GetMenuTitle();

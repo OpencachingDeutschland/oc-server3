@@ -22,6 +22,9 @@
 	$rUser = sql_fetch_array($rsUser);
 	sql_free_result($rsUser);
 	$tpl->assign('found', $rUser['found']);
+
+	// locked/hidden caches are visible for the user and must be added to public stats
+	$rUser['hidden'] += sql_value("SELECT COUNT(*) FROM `caches` WHERE `user_id`='&1' AND `status`=7", 0, $login->userid);
 	$tpl->assign('hidden', $rUser['hidden']);
 
 	//get last logs

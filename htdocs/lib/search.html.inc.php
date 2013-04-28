@@ -192,8 +192,9 @@
 
 		if ($row = sql_fetch_array($result))
 		{
+			$loglink = '<a href=\'viewlogs.php?cacheid='.htmlspecialchars($caches_record['cache_id'], ENT_COMPAT, 'UTF-8').'#log'.htmlspecialchars($row['id'], ENT_COMPAT, 'UTF-8').'\'>';
 			$tmpline = mb_ereg_replace('{logimage1}',
-				icon_log_type($row['icon_small'], ""). '<a href=\'viewlogs.php?cacheid='.htmlspecialchars($caches_record['cache_id'], ENT_COMPAT, 'UTF-8').'#log'.htmlspecialchars($row['id'], ENT_COMPAT, 'UTF-8').'\'>{gray_s}' .date($logdateformat, strtotime($row['date'])) . '{gray_e}</a>', $tmpline);
+				$loglink . icon_log_type($row['icon_small'], ""). '</a>{gray_s}' . $loglink. date($logdateformat, strtotime($row['date'])) . '{gray_e}</a>', $tmpline);
 			$tmpline = mb_ereg_replace('{logdate1}', "", $tmpline);
 		}
 		else

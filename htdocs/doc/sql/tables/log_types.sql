@@ -8,7 +8,7 @@ CREATE TABLE `log_types` (
   `cache_status` tinyint(1) NOT NULL default '0' COMMENT 'obsolete',
   `de` varchar(60) NOT NULL COMMENT 'obsolete',
   `en` varchar(60) NOT NULL COMMENT 'obsolete',
-  `icon_small` varchar(255) NOT NULL COMMENT 'obsolete',
+  `icon_small` varchar(255) NOT NULL
   `allow_rating` tinyint(1) NOT NULL,
   `require_password` tinyint(1) NOT NULL,
   PRIMARY KEY  (`id`),

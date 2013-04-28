@@ -623,8 +623,8 @@ TRUNCATE TABLE `log_types`;
 INSERT INTO `log_types` (`id`, `name`, `trans_id`, `permission`, `cache_status`, `de`, `en`, `icon_small`, `allow_rating`, `require_password`) VALUES ('1', 'Found', '56', 'C', '0', 'gefunden', 'Found', 'log/16x16-found.png', '1', '1');
 INSERT INTO `log_types` (`id`, `name`, `trans_id`, `permission`, `cache_status`, `de`, `en`, `icon_small`, `allow_rating`, `require_password`) VALUES ('2', 'Not found', '497', 'C', '0', 'nicht gefunden', 'Not found', 'log/16x16-dnf.png', '0', '0');
 INSERT INTO `log_types` (`id`, `name`, `trans_id`, `permission`, `cache_status`, `de`, `en`, `icon_small`, `allow_rating`, `require_password`) VALUES ('3', 'Note', '20', 'A', '0', 'Bemerkung', 'Note', 'log/16x16-note.png', '0', '0');
-INSERT INTO `log_types` (`id`, `name`, `trans_id`, `permission`, `cache_status`, `de`, `en`, `icon_small`, `allow_rating`, `require_password`) VALUES ('7', 'Attended', '498', 'C', '0', 'teilgenommen', 'Attended', 'log/16x16-go.png', '1', '1');
-INSERT INTO `log_types` (`id`, `name`, `trans_id`, `permission`, `cache_status`, `de`, `en`, `icon_small`, `allow_rating`, `require_password`) VALUES ('8', 'Will attend', '499', 'C', '0', 'will dabei sein', 'Will attend', 'log/16x16-trash.png', '0', '0');
+INSERT INTO `log_types` (`id`, `name`, `trans_id`, `permission`, `cache_status`, `de`, `en`, `icon_small`, `allow_rating`, `require_password`) VALUES ('7', 'Attended', '498', 'C', '0', 'teilgenommen', 'Attended', 'log/16x16-attended.png', '1', '1');
+INSERT INTO `log_types` (`id`, `name`, `trans_id`, `permission`, `cache_status`, `de`, `en`, `icon_small`, `allow_rating`, `require_password`) VALUES ('8', 'Will attend', '499', 'C', '0', 'will dabei sein', 'Will attend', 'log/16x16-will_attend.png', '0', '0');
 
 -- Table log_types_text
 SET NAMES 'utf8';
@@ -2436,6 +2436,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1994', 'Opencac
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1995', 'Opencaching at Twitter', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1996', 'The visited website <b>%1</b> does not exists, we found the following suitable pages:', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1998', 'OK', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1999', 'Show active', '2013-04-25 23:00:00');
 
 -- Table sys_trans_ref
 SET NAMES 'utf8';
@@ -6203,7 +6204,8 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1994', 'DE', 'Opencaching bei Google+', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1995', 'DE', 'Opencaching bei Twitter', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1996', 'DE', 'Die gesuchte Webseite <b>%1</b> existiert nicht, aber wir haben folgende Seiten gefunden:', '2013-04-25 23:00:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1997', 'DE', 'OK', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1998', 'DE', 'OK', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1999', 'DE', 'aktive anzeigen', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'EN', 'Reorder IDs \r', '2010-09-02 00:15:30');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'EN', 'The database could not be reconnected.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'EN', 'Testing – please do not login', '2010-08-28 11:48:07');

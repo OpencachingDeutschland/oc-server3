@@ -217,8 +217,19 @@
 			$desclangs .= '<a href="viewcache.php?cacheid=' . urlencode($caches_record['cache_id']) . '&desclang=' . urlencode($thislang) . '" style="text-decoration:none;"><b><font color="blue">' . htmlspecialchars($thislang, ENT_COMPAT, 'UTF-8') . '</font></b></a> ';
 		}
 
+		// strikeout inavtive caches
+		// see also res_cachestatus_span.tpl
+		switch ($caches_record['status'])
+		{
+			case 2: $status_style = "text-decoration: line-through;"; break;
+			case 3:
+			case 6:
+			case 7: $status_style = "text-decoration: line-through; color: #c00000;"; break;
+			default: $status_style = "";
+		}
+
 		$tmpline = mb_ereg_replace('{desclangs}', $desclangs, $tmpline);
-		$tmpline = mb_ereg_replace('{cachename}', htmlspecialchars($caches_record['name'], ENT_COMPAT, 'UTF-8'), $tmpline);
+		$tmpline = mb_ereg_replace('{cachename}', '<span style="'.$status_style.'">' . htmlspecialchars($caches_record['name'], ENT_COMPAT, 'UTF-8') . '</span>', $tmpline);
 		$tmpline = mb_ereg_replace('{urlencode_cacheid}', htmlspecialchars(urlencode($caches_record['cache_id']), ENT_COMPAT, 'UTF-8'), $tmpline);
 		$tmpline = mb_ereg_replace('{urlencode_userid}', htmlspecialchars(urlencode($caches_record['user_id']), ENT_COMPAT, 'UTF-8'), $tmpline);
 		$tmpline = mb_ereg_replace('{username}', htmlspecialchars($caches_record['username'], ENT_COMPAT, 'UTF-8'), $tmpline);

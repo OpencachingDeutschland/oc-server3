@@ -107,7 +107,7 @@
 		<td valign="middle" class="header-small" style="padding-top:5px;padding-bottom:5px">
 		<img src="resource2/{$opt.template.style}/images/cacheicon/22x22-traditional.gif" width="22" height="22" align="middle" border="0" alt="{t}Hidden caches{/t}" title="{t}Hidden caches{/t}">&nbsp;<b>{t}Hidden caches{/t}:</b></td>
 		<td class="header-small">{$hidden}
-			[<a href="search.php?showresult=1&amp;expert=0&amp;f_inactive=0&amp;output=HTML&amp;sort=byname&amp;ownerid={$userid}&amp;searchbyowner=">{t}Show all{/t}</a>]
+			[<a href="search.php?showresult=1&amp;expert=0&amp;f_inactive=0&amp;output=HTML&amp;sort=byname&amp;ownerid={$userid}&amp;searchbyowner=">{t}Show all{/t}</a>] [<a href="search.php?showresult=1&amp;expert=0&amp;f_inactive=1&amp;output=HTML&amp;sort=byname&amp;ownerid={$userid}&amp;searchbyowner=">{t}Show active{/t}</a>]
 		</td>
 	</tr>
 

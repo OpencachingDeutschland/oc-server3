@@ -226,15 +226,23 @@
 
 		// strikeout inavtive caches
 		// see also res_cachestatus_span.tpl
+		$line_style = "";
 		switch ($caches_record['status'])
 		{
-			case 2: $status_style = "text-decoration: line-through;"; break;
+			case 2: $status_style = "text-decoration: line-through;";
+			        break;
 			case 3:
 			case 6:
-			case 7: $status_style = "text-decoration: line-through; color: #c00000;"; break;
-			default: $status_style = "";
+			case 7: $status_style = "text-decoration: line-through; color: grey";
+			        $line_style = "color:grey";
+			        break;
+			case 5: $status_style = "color: #e00000";
+			        $line_style = "";
+			        break;
+			default: $status_style = $line_style = "";
 		}
 
+		$tmpline = mb_ereg_replace('{line_style}', $line_style, $tmpline);
 		$tmpline = mb_ereg_replace('{desclangs}', $desclangs, $tmpline);
 		$tmpline = mb_ereg_replace('{cachename}', '<span style="'.$status_style.'">' . htmlspecialchars($caches_record['name'], ENT_COMPAT, 'UTF-8') . '</span>', $tmpline);
 		$tmpline = mb_ereg_replace('{urlencode_cacheid}', htmlspecialchars(urlencode($caches_record['cache_id']), ENT_COMPAT, 'UTF-8'), $tmpline);

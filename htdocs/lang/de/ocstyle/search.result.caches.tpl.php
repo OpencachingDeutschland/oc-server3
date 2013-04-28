@@ -85,7 +85,7 @@
 					<td width="46" height="13" bgcolor="#E6E6E6"><b>{t}D/T{/t}</b></td>
 					<td width="448" height="13" bgcolor="#E6E6E6"><b>{t}Name{/t}</b></td>
 					<td width="48" height="13" bgcolor="#E6E6E6"><b>&nbsp;</b></td>
-					<td width="126" height="13" bgcolor="#E6E6E6"><b>{t}Last logs{/t}</b></td>
+					<td width="126" height="13" bgcolor="#E6E6E6"><b style="display:{displaylastlogs}">{t}Last logs{/t}</b><b style="display:{displayownlogs}">{t}Own logs{/t}</b></td>
 					</tr>
 					<!--a-->{results}<!--z-->
 				</table>

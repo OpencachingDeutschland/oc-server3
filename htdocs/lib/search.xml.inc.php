@@ -90,7 +90,7 @@
 	if ($options['orderRatingFirst'])
 		$sql .= '`ratingvalue` DESC, ';
 
-	if ($sortby == 'bylastlog')
+	if ($sortby == 'bylastlog' || $sortby == 'bymylastlog')
 	{
 		$sql .= '`lastLog` DESC, ';
 		$sortby = 'bydistance';

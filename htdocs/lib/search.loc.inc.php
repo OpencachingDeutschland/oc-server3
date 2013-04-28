@@ -73,11 +73,13 @@
 	$sAddGroupBy = '';
 	$sAddField = '';
 	$sGroupBy = '';
-	if ($options['sort'] == 'bylastlog')
+	if ($options['sort'] == 'bylastlog' || $options['sort'] == 'bymylastlog')
 	{
 		$sAddField = ', MAX(`cache_logs`.`date`) AS `lastLog`';
 		$sAddJoin = ' LEFT JOIN `cache_logs` ON `caches`.`cache_id`=`cache_logs`.`cache_id`';
-		$sGroupBy = ' GROUP BY `cache_logs`.`cache_id`';
+		if ($options['sort'] == 'bymylastlog')
+			$sAddJoin .= ' AND `cache_logs`.`user_id`=' . sql_escape($usr === false? 0 : $usr['userid']);
+		$sGroupBy = ' GROUP BY `caches`.`cache_id`';
 	}
 	$sql .= '`caches`.`cache_id` `cache_id`, `caches`.`status` `status`, `caches`.`type` `type`, `caches`.`size` `size`, `caches`.`longitude` `longitude`, `caches`.`latitude` `latitude`, `caches`.`user_id` `user_id`, 
 	            IF(IFNULL(`stat_caches`.`toprating`,0)>3, 4, IFNULL(`stat_caches`.`toprating`, 0)) `ratingvalue`' . 
@@ -93,7 +95,7 @@
 	if ($options['orderRatingFirst'])
 		$sql .= '`ratingvalue` DESC, ';
 
-	if ($sortby == 'bylastlog')
+	if ($sortby == 'bylastlog' || $options['sort'] == 'bymylastlog')
 	{
 		$sql .= '`lastLog` DESC, ';
 		$sortby = 'bydistance';

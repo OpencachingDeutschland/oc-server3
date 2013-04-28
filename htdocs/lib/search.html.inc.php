@@ -78,11 +78,14 @@
 	$sAddGroupBy = '';
 	$sAddField = '';
 	$sGroupBy = '';
-	if ($options['sort'] == 'bylastlog')
+
+	if ($options['sort'] == 'bylastlog' || $options['sort'] == 'bymylastlog')
 	{
 		$sAddField = ', MAX(`cache_logs`.`date`) AS `lastLog`';
 		$sAddJoin = ' LEFT JOIN `cache_logs` ON `caches`.`cache_id`=`cache_logs`.`cache_id`';
-		$sGroupBy = ' GROUP BY `cache_logs`.`cache_id`';
+		if ($options['sort'] == 'bymylastlog')
+			$sAddJoin .= ' AND `cache_logs`.`user_id`=' . sql_escape($usr === false? 0 : $usr['userid']);
+		$sGroupBy = ' GROUP BY `caches`.`cache_id`';
 	}
 	$sql .= '	`caches`.`name` `name`, `caches`.`status` `status`, `caches`.`longitude` `longitude`, `caches`.`latitude` `latitude`,
 				           `caches`.`difficulty` `difficulty`, `caches`.`terrain` `terrain`, `caches`.`desc_languages` `desc_languages`,
@@ -102,7 +105,7 @@
 				 LEFT JOIN `caches_attributes` AS `tbloconly` ON `caches`.`cache_id`=`tbloconly`.`cache_id` AND
 				                                                 `tbloconly`.`attrib_id`=6' .
 				           $sAddJoin 
-				 . ' WHERE `caches`.`cache_id` IN (' . $sqlFilter . ')' . 
+				 . ' WHERE `caches`.`cache_id` IN (' . $sqlFilter . ')' .
 				           $sGroupBy;
 	$sortby = $options['sort'];
 
@@ -110,7 +113,7 @@
 	if ($options['orderRatingFirst'])
 		$sql .= '`ratingvalue` DESC, ';
 
-	if ($sortby == 'bylastlog')
+	if ($sortby == 'bylastlog' || $options['sort'] == 'bymylastlog')
 	{
 		$sql .= '`lastLog` DESC, ';
 		$sortby = 'bydistance';
@@ -175,18 +178,22 @@
 		else
 			$tmpline = mb_ereg_replace('{oconly}', '', $tmpline);
 
-		// das letzte found suchen
+		// get last logs
+		if ($options['sort'] != 'bymylastlog' || $usr === false)
+			$ownlogs = "";
+		else
+			$ownlogs = " AND `cache_logs`.`user_id`='" . sql_escape($usr['userid']) . "'";
 		$sql = 'SELECT `cache_logs`.`id` `id`, `cache_logs`.`type` `type`, `cache_logs`.`date` `date`, `log_types`.`icon_small` `icon_small`
 				FROM `cache_logs`, `log_types`
 				WHERE `cache_logs`.`cache_id`=\'' . sql_escape($caches_record['cache_id']) . '\'
-				AND `log_types`.`id`=`cache_logs`.`type`
+				AND `log_types`.`id`=`cache_logs`.`type`' . $ownlogs . '
 				ORDER BY `cache_logs`.`date` DESC LIMIT 6';
 		$result = sql_slave($sql);
 
 		if ($row = sql_fetch_array($result))
 		{
 			$tmpline = mb_ereg_replace('{logimage1}',
-				icon_log_type($row['icon_small'], ""). '<a href=\'viewlogs.php?cacheid='.htmlspecialchars($caches_record['cache_id'], ENT_COMPAT, 'UTF-8').'#'.htmlspecialchars($row['id'], ENT_COMPAT, 'UTF-8').'\'>{gray_s}' .date($logdateformat, strtotime($row['date'])) . '{gray_e}</a>', $tmpline);
+				icon_log_type($row['icon_small'], ""). '<a href=\'viewlogs.php?cacheid='.htmlspecialchars($caches_record['cache_id'], ENT_COMPAT, 'UTF-8').'#log'.htmlspecialchars($row['id'], ENT_COMPAT, 'UTF-8').'\'>{gray_s}' .date($logdateformat, strtotime($row['date'])) . '{gray_e}</a>', $tmpline);
 			$tmpline = mb_ereg_replace('{logdate1}', "", $tmpline);
 		}
 		else
@@ -198,7 +205,7 @@
 		$lastlogs = "";
 		while ($row = sql_fetch_array($result))
 		{
-			$lastlogs .= '<a href=\'viewlogs.php?cacheid=' . urlencode($caches_record['cache_id']) . '#' . htmlspecialchars($row['id'], ENT_COMPAT, 'UTF-8') . '\'>' . icon_log_type($row['icon_small'], '') . '</a>&nbsp;';
+			$lastlogs .= '<a href=\'viewlogs.php?cacheid=' . urlencode($caches_record['cache_id']) . '#log' . htmlspecialchars($row['id'], ENT_COMPAT, 'UTF-8') . '\'>' . icon_log_type($row['icon_small'], '') . '</a>&nbsp;';
 		}
 		$tmpline = mb_ereg_replace('{lastlogs}', $lastlogs, $tmpline);
 
@@ -333,6 +340,9 @@
 		tpl_set_var('distanceunit', 'sm');
 	else
 		tpl_set_var('distanceunit', $distance_unit);
+
+	tpl_set_var('displaylastlogs', $options['sort'] == 'bymylastlog' ? 'none' : 'inline');
+	tpl_set_var('displayownlogs', $options['sort'] == 'bymylastlog' ? 'inline' : 'none');
 
 	if ($sqldebug == true)
 		sqldbg_end();

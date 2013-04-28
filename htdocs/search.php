@@ -1061,6 +1061,9 @@ function outputSearchForm($options)
 	tpl_set_var('formmethod', 'get');
 
 	// checkboxen
+	tpl_set_var('disable_nologin', $usr === false ? 'disabled' : '');
+	tpl_set_var('grey_nologin', $usr === false ? 'style="color:grey"' : '');
+
 	$homecoords = ($login->userid>0 && sql_value_slave("SELECT `latitude`+`longitude` FROM user WHERE `user_id`='&1'",  $login->userid) <> 0);
 	if (!$homecoords && isset($options['sort']) && $options['sort'] == 'bydistance')
 		$options['sort'] = 'byname';
@@ -1089,6 +1092,12 @@ function outputSearchForm($options)
 	else
 		$bBylastlogChecked = ($usr['userid'] != 0);
 	tpl_set_var('bylastlog_checked', ($bBylastlogChecked == true) ? ' checked="checked"' : '');
+
+	if (isset($options['sort']))
+		$bBymylastlogChecked = ($options['sort'] == 'bymylastlog');
+	else
+		$bBymylastlogChecked = ($usr['userid'] != 0);
+	tpl_set_var('bymylastlog_checked', ($bBymylastlogChecked == true) ? ' checked="checked"' : '');
 
 	tpl_set_var('hidopt_sort', $options['sort']);
 

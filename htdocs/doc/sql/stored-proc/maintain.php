@@ -370,16 +370,18 @@
 
 	// increment/decrement stat_user.hidden
 	sql_dropProcedure('sp_update_hiddenstat');
-	sql("CREATE PROCEDURE sp_update_hiddenstat (IN nUserId INT, IN bRemoved BOOLEAN)
+	sql("CREATE PROCEDURE sp_update_hiddenstat (IN nUserId INT, IN iStatus INT, IN bRemoved BOOLEAN)
 	     BEGIN
 			   DECLARE nHidden INT DEFAULT 1;
-			   IF bRemoved = TRUE THEN SET nHidden = -1; END IF;
-			   UPDATE `stat_user` SET `stat_user`.`hidden`=IF(`stat_user`.`hidden`+nHidden>0, `stat_user`.`hidden`+nHidden, 0) WHERE `stat_user`.`user_id`=nUserId;
-			   IF ROW_COUNT() = 0 THEN
-			     INSERT IGNORE INTO `stat_user` (`user_id`, `hidden`) VALUES (nUserId, IF(nHidden>0, nHidden, 0));
-			   END IF;
+				 IF (SELECT `allow_user_view` FROM `cache_status` WHERE `id`=iStatus) THEN
+				   IF bRemoved = TRUE THEN SET nHidden = -1; END IF;
+				   UPDATE `stat_user` SET `stat_user`.`hidden`=IF(`stat_user`.`hidden`+nHidden>0, `stat_user`.`hidden`+nHidden, 0) WHERE `stat_user`.`user_id`=nUserId;
+				   IF ROW_COUNT() = 0 THEN
+				     INSERT IGNORE INTO `stat_user` (`user_id`, `hidden`) VALUES (nUserId, IF(nHidden>0, nHidden, 0));
+				   END IF;
 
-	       CALL sp_refresh_statpic(nUserId);
+		       CALL sp_refresh_statpic(nUserId);
+				 END IF;
 	     END;");
 
 	// recalc hidden of stat_user for all entries
@@ -391,7 +393,7 @@
 	       INSERT IGNORE INTO `stat_user` (`user_id`) SELECT `user_id` FROM `caches` GROUP BY `user_id`;
 
 	       /* stat_caches.hidden */
-	       UPDATE `stat_user`, (SELECT `user_id`, COUNT(*) AS `count` FROM `caches` GROUP BY `user_id`) AS `tblHidden` SET `stat_user`.`hidden`=`tblHidden`.`count` WHERE `stat_user`.`user_id`=`tblHidden`.`user_id`;
+	       UPDATE `stat_user`, (SELECT `user_id`, COUNT(*) AS `count` FROM `caches` INNER JOIN `cache_status` ON `cache_status`.`id`=`caches`.`status` AND `allow_user_view`=1 GROUP BY `user_id`) AS `tblHidden` SET `stat_user`.`hidden`=`tblHidden`.`count` WHERE `stat_user`.`user_id`=`tblHidden`.`user_id`;
 	       SET nModified=nModified+ROW_COUNT();
 
 	       CALL sp_refreshall_statpic();
@@ -618,7 +620,7 @@
 						INSERT IGNORE INTO `cache_countries` (`cache_id`, `date_created`, `country`) 
 						                                VALUES (NEW.`cache_id`, NOW(), NEW.`country`);
 
-						CALL sp_update_hiddenstat(NEW.`user_id`, FALSE);
+						CALL sp_update_hiddenstat(NEW.`user_id`, NEW.`status`, FALSE);
 
 						IF NEW.`status`=1 THEN
 						  CALL sp_notify_new_cache(NEW.`cache_id`, NEW.`longitude`, NEW.`latitude`);
@@ -711,9 +713,9 @@
 							/* logpw needs not to be saved */
 							/* for further explanation see restorecaches.php */
 						END IF;
-						IF NEW.`user_id`!=OLD.`user_id` THEN
-							CALL sp_update_hiddenstat(OLD.`user_id`, TRUE);
-							CALL sp_update_hiddenstat(NEW.`user_id`, FALSE);
+						IF NEW.`user_id`!=OLD.`user_id` OR NEW.`status`!=OLD.`status` THEN
+							CALL sp_update_hiddenstat(OLD.`user_id`, OLD.`status`, TRUE);
+							CALL sp_update_hiddenstat(NEW.`user_id`, NEW.`status`, FALSE);
 						END IF;
             IF OLD.`status`=5 AND NEW.`status`=1 THEN
               CALL sp_notify_new_cache(NEW.`cache_id`, NEW.`longitude`, NEW.`latitude`);
@@ -735,7 +737,7 @@
 						DELETE FROM `cache_countries` WHERE `cache_id`=OLD.`cache_id`;
 						DELETE FROM `cache_npa_areas` WHERE `cache_id`=OLD.`cache_id`;
 						DELETE FROM `caches_modified` WHERE `cache_id`=OLD.`cache_id`;
-						CALL sp_update_hiddenstat(OLD.`user_id`, TRUE);
+						CALL sp_update_hiddenstat(OLD.`user_id`, OLD.`status`, TRUE);
 						INSERT IGNORE INTO `removed_objects` (`localId`, `uuid`, `type`, `node`) VALUES (OLD.`cache_id`, OLD.`uuid`, 2, OLD.`node`);
 
 						SET @dont_update_listingdate=0;

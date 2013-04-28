@@ -983,7 +983,7 @@
 
 				$sql_innerjoin[] = '`cache_status` ON `caches`.`status`=`cache_status`.`id`';
 				if (isset($usr['userid']))
-					$sql_where[] = '(`cache_status`.`allow_user_view`=1 OR `caches`.`user_id`=' . sql_escape($usr['userid']) . ')';
+					$sql_where[] = '(`cache_status`.`allow_user_view`=1 OR `caches`.`user_id`=' . sql_escape($usr['userid']) . ' OR (`caches`.`status`<>5 AND '. sql_escape($login->admin & ADMIN_USER) . '>0))';
 				else
 					$sql_where[] = '`cache_status`.`allow_user_view`=1';
 

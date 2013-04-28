@@ -55,7 +55,7 @@
 	if ($record === false)
 		$tpl->error(ERROR_USER_NOT_EXISTS);
 
-	$active = sql_value("SELECT COUNT(*) FROM `caches` WHERE `user_id`='&1' AND `status`=1", 0, $userid); 
+	$active = sql_value("SELECT COUNT(*) FROM `caches` WHERE `user_id`='&1' AND `status`=1", 0, $userid);
 
 	$rs = sql("SELECT IFNULL(`tt`.`text`, `p`.`name`) AS `name`, `u`.`option_value`, `u`.`option_id` AS `option_id`
 		           FROM `profile_options` AS `p`
@@ -76,7 +76,8 @@
 		      LEFT JOIN `cache_type` AS `t` ON `t`.`id`=`c`.`type`
 		      LEFT JOIN `sys_trans` AS `st` ON `st`.`id`=`t`.`trans_id` AND `t`.`name`=`st`.`text`
 		      LEFT JOIN `sys_trans_text` AS `tt` ON `st`.`id`=`tt`.`trans_id` AND `tt`.`lang`='&2'
-		          WHERE `c`.`user_id`='&1'
+		      LEFT JOIN `cache_status` ON `cache_status`.`id`=`c`.`status`
+		          WHERE `c`.`user_id`='&1' AND `allow_user_view`='1'
 		       GROUP BY `t`.`id`
 		       ORDER BY `anzahl` DESC", 
 		                $userid, 

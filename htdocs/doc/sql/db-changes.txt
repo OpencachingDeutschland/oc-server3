@@ -66,3 +66,4 @@ date         commit ID   change
 2013-04-06   e281cfa     changed cach_logs.date and cach_logs_archived.date type to datetime
 2013-04-22   c989c00     added fields caches.meta_last_modified, cache_logs.log_last_modified,
                            cache_logs_archived.log_last_modified, and triggers
+2013-04-28               updated triggers to calculate hidden stats

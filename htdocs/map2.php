@@ -441,6 +441,7 @@ function output_searchresult($nResultId, $compact, $nLon1, $nLon2, $nLat1, $nLat
                             `caches`.`wp_oc`, `caches`.`longitude`, `caches`.`latitude`,
                             `caches`.`type`, 
                             `caches`.`status`>1 AS `inactive`,
+                            `caches`.`type`=6 AND `caches`.`date_hidden`+INTERVAL 1 DAY < NOW() AS `oldevent`,
                             `user`.`user_id`='&6' AS `owned`,
                             IF(`found_logs`.`id` IS NULL, 0, 1) AS `found`,
                             IF(`found_logs`.`id` IS NULL AND `notfound_logs`.`id` IS NOT NULL, 1, 0) AS `notfound`,
@@ -467,7 +468,7 @@ function output_searchresult($nResultId, $compact, $nLon1, $nLon2, $nLat1, $nLat
 			if ($r['owned']) $flags |= 1;
 			if ($r['found']) $flags |= 2;
 			if ($r['notfound']) $flags |= 4;
-			if ($r['inactive']) $flags |= 8;
+			if ($r['inactive'] || $r['oldevent']) $flags |= 8;
 			if ($r['oconly']) $flags |= 16;
 
 			if ($compact)

@@ -55,6 +55,8 @@
 	if ($record === false)
 		$tpl->error(ERROR_USER_NOT_EXISTS);
 
+	$active = sql_value("SELECT COUNT(*) FROM `caches` WHERE `user_id`='&1' AND `status`=1", 0, $userid); 
+
 	$rs = sql("SELECT IFNULL(`tt`.`text`, `p`.`name`) AS `name`, `u`.`option_value`, `u`.`option_id` AS `option_id`
 		           FROM `profile_options` AS `p`
 		      LEFT JOIN `user_options` AS `u` ON `p`.`id`=`u`.`option_id`
@@ -106,6 +108,7 @@
 	$tpl->assign('notfound', $record['notfound'] <= 0 ? '0' : $record['notfound']);
 	$tpl->assign('note', $record['note'] <= 0 ? '0' : $record['note']);
 	$tpl->assign('hidden', $record['hidden'] <= 0 ? '0' : $record['hidden']);
+	$tpl->assign('active', $active);
 	$tpl->assign('recommended', sql_value("SELECT COUNT(*) FROM `cache_rating` WHERE `user_id`='&1'", 0, $userid));
 	$tpl->assign('maxrecommended', floor($record['found'] * $opt['logic']['rating']['percentageOfFounds'] / 100));
 

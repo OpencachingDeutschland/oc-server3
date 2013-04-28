@@ -107,7 +107,7 @@
 		<td valign="middle" class="header-small" style="padding-top:5px;padding-bottom:5px">
 		<img src="resource2/{$opt.template.style}/images/cacheicon/22x22-traditional.gif" width="22" height="22" align="middle" border="0" alt="{t}Hidden caches{/t}" title="{t}Hidden caches{/t}">&nbsp;<b>{t}Hidden caches{/t}:</b></td>
 		<td class="header-small">{$hidden}
-			[<a href="search.php?showresult=1&amp;expert=0&amp;f_inactive=0&amp;output=HTML&amp;sort=byname&amp;ownerid={$userid}&amp;searchbyowner=">{t}Show all{/t}</a>] [<a href="search.php?showresult=1&amp;expert=0&amp;f_inactive=1&amp;output=HTML&amp;sort=byname&amp;ownerid={$userid}&amp;searchbyowner=">{t}Show active{/t}</a>]
+			{if $hidden>0}[<a href="search.php?showresult=1&amp;expert=0&amp;f_inactive=0&amp;output=HTML&amp;sort=byname&amp;ownerid={$userid}&amp;searchbyowner=">{t}Show all{/t}</a>]{if $active<$hidden} &nbsp; &ndash; &nbsp; {$active} {t}active caches{/t} {if $active>0}[<a href="search.php?showresult=1&amp;expert=0&amp;f_inactive=1&amp;output=HTML&amp;sort=byname&amp;ownerid={$userid}&amp;searchbyowner=">{t}Show{/t}</a>]{/if}{/if}{/if}
 		</td>
 	</tr>
 
@@ -121,10 +121,6 @@
 				  </span>
 				</td>
 			</tr>
-		{foreachelse}
-			<tr>
-				<td colspan="2">{t}The user has not hidden any caches yet.{/t}</td>
-			</tr>
 		{/foreach}
 		<tr><td class="spacer" colspan="2"></td></tr>
 	{/if}
@@ -136,7 +132,7 @@
 		</td>
 		<td class="header-small">
 			{$founds}
-			[<a href="search.php?showresult=1&amp;expert=0&amp;f_inactive=0&amp;output=HTML&amp;sort=byname&amp;finderid={$userid}&amp;searchbyfinder=&amp;logtype=1,7">{t}Show all{/t}</a>]
+			{if $founds>0}[<a href="search.php?showresult=1&amp;expert=0&amp;f_inactive=0&amp;output=HTML&amp;sort=byname&amp;finderid={$userid}&amp;searchbyfinder=&amp;logtype=1,7">{t}Show all{/t}</a>]{/if}
 		</td>
 	</tr>
 
@@ -150,10 +146,6 @@
 				  </span>
 				</td>
 			</tr>
-		{foreachelse}
-			<tr>
-				<td colspan="2">{t}The user has not found any caches yet.{/t}</td>
-			</tr>
 		{/foreach}
 		<tr><td class="spacer" colspan="2"></td></tr>
 
@@ -161,14 +153,14 @@
 			<td valign="middle" class="header-small" style="padding-top:5px;padding-bottom:5px">
 			<img src="resource2/ocstyle/images/logtype/16x16-dnf.png" alt="{t}Caches not found{/t}" title="{t}Caches not found{/t}">&nbsp;&nbsp;&nbsp;<b>{t}Not found{/t}:</b></td>
 			<td class="header-small" >{$notfound}
-				[<a href="search.php?showresult=1&amp;expert=0&amp;f_inactive=0&amp;output=HTML&amp;sort=byname&amp;finderid={$userid}&amp;searchbyfinder=&amp;logtype=2">{t}Show all{/t}</a>]
+				{if $notfound > 0}[<a href="search.php?showresult=1&amp;expert=0&amp;f_inactive=0&amp;output=HTML&amp;sort=byname&amp;finderid={$userid}&amp;searchbyfinder=&amp;logtype=2">{t}Show all{/t}</a>]{/if}
 			</td>
 		</tr>
 		<tr>
 			<td valign="middle" class="header-small" style="padding-bottom:5px">
 			<img src="resource2/ocstyle/images/logtype/16x16-note.png" alt="{t}Notes{/t}" title="{t}Notes{/t}">&nbsp;&nbsp;&nbsp;<b>{t}Notes{/t}:</b></td>
 			<td class="header-small" >{$note}
-				[<a href="search.php?showresult=1&amp;expert=0&amp;f_inactive=0&amp;output=HTML&amp;sort=byname&amp;finderid={$userid}&amp;searchbyfinder=&amp;logtype=3">{t}Show all{/t}</a>]
+				{if $note>0}[<a href="search.php?showresult=1&amp;expert=0&amp;f_inactive=0&amp;output=HTML&amp;sort=byname&amp;finderid={$userid}&amp;searchbyfinder=&amp;logtype=3">{t}Show all{/t}</a>]{/if}
 			</td>
 		</tr>
 	{/if}
@@ -176,7 +168,7 @@
 	<tr>
 		<td class="header-small">
 		<img src="resource2/{$opt.template.style}/images/viewcache/cache-rate.png" align="middle" border="0" alt="{t}Recommendations{/t}" title="{t}Recommendations{/t}">&nbsp;&nbsp;&nbsp;<b>{t}Recommendations{/t}:</b></td>
-		<td class="header-small" >{t 1=$recommended 2=$maxrecommended}%1 of %2 possibles{/t} [<a href="usertops.php?userid={$userid}">{t}Show all{/t}</a>]
+		<td class="header-small" >{t 1=$recommended 2=$maxrecommended}%1 of %2 possibles{/t} {if $recommended>0}[<a href="usertops.php?userid={$userid}">{t}Show all{/t}</a>]{/if}
 		</td>
 	</tr>
 
@@ -184,7 +176,7 @@
 		<tr>
 			<td class="header-small">
 			<img src="resource2/{$opt.template.style}/images/action/16x16-addimage.png" align="middle" border="0" alt="{t}Log pictures{/t}" title="{t}Log pictures{/t}">&nbsp;&nbsp;&nbsp;<b>{t}Log pictures{/t}:</b></td> 
-			<td class="header-small" >{$logpics} [<a href="viewprofile.php?userid={$userid}&allpics=1">{t}Show all{/t}</a>]
+			<td class="header-small" >{$logpics} {if $logpics>0}[<a href="viewprofile.php?userid={$userid}&allpics=1">{t}Show all{/t}</a>]{/if}
 			</td>
 		</tr>
 	{/if}

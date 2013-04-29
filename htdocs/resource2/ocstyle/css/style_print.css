@@ -171,6 +171,8 @@ ul#statmenu { padding: 0px; margin: 0px;}
 .content-title-noshade-size3 {margin: 0px; padding: 0px; color: rgb(88,144,168); font-weight: bold; font-size: 160%;}
 .content-title-noshade-size5 {margin: 0px; padding: 0px; color: rgb(88,144,168); font-weight: bold; font-size: 200%;}
 
+.content-title-link { font-weight:normal; font-size:85%; }
+
 .content-txtbox-noshade {margin: 0px; padding: 7px 0px 0px 0px; background-color: rgb(255,255,255);}
 .content-score {margin: 0px; margin-top: 3px; padding: 4px 0px 0px 0px; background-color: rgb(255,255,255); border-style:dotted; border-width:1px; width:75px; height:20px;vertical-align:middle;}
 

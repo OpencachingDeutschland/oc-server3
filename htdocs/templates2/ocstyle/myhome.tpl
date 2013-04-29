@@ -15,13 +15,14 @@
 	{* Geocaches found *}
 	<div class="content2-container bg-blue02" style="margin-top:20px;">
 		<p class="content-title-noshade-size3">
-			<img src="resource2/{$opt.template.style}/images/description/22x22-logs.png" width="22" height="22"  style="align: left; margin-right: 10px;" alt="{t}Logs{/t}"" />&nbsp;
-			{t 1=$found}Geocaches found: %1{/t}
+			<img src="resource2/{$opt.template.style}/images/description/22x22-logs.png" width="22" height="22"  style="align: left; margin-right: 10px;" alt="{t}Logs{/t}" />&nbsp;
+			{t 1=$found}Geocaches found: %1{/t} &nbsp;
+			<span class="content-title-link">[<a href="search.php?showresult=1&amp;expert=0&amp;output=HTML&amp;sort=bymylastlog&amp;finderid={$login.userid}&amp;searchbyfinder=&amp;f_inactive=0&amp;logtype=1">{t}Show all finds{/t}</a>]&nbsp; [<a href="search.php?showresult=1&amp;expert=0&amp;output=HTML&amp;sort=bymylastlog&amp;finderid={$login.userid}&amp;searchbyfinder=&amp;f_inactive=0&amp;logtype=1,2,3,6,7,8">{t}Show all logs{/t}</a>]</span>
 		</p>
 	</div>
 
 	{* Ocprop: (find|us|own)erid=([0-9]+) *}
-	<p style="line-height: 1.6em;">[<a href="search.php?showresult=1&amp;expert=0&amp;output=HTML&amp;sort=bymylastlog&amp;finderid={$login.userid}&amp;searchbyfinder=&amp;f_inactive=0&amp;logtype=1">{t}Show all finds{/t}</a>] [<a href="search.php?showresult=1&amp;expert=0&amp;output=HTML&amp;sort=bymylastlog&amp;finderid={$login.userid}&amp;searchbyfinder=&amp;f_inactive=0&amp;logtype=1,2,3,6,7,8">{t}Show all logs{/t}</a>] &ndash; <b>{t}Your latest log entries:{/t}</b></p>
+	<p style="line-height: 1.6em;"><b>{t}Your latest log entries:{/t}</b></p>
 
 	<table class="table">
 		{foreach from=$logs item=logItem}
@@ -40,7 +41,8 @@
 <div class="content2-container bg-blue02" style="margin-top:20px;">
 	<p class="content-title-noshade-size3">
 		<img src="resource2/{$opt.template.style}/images/description/22x22-image.png" width="22" height="22"  style="align: left; margin-right: 10px;" alt="{t}Logs{/t}"" />&nbsp;
-		{t 1=$pictures|@count}Log pictures: %1{/t}
+		{t 1=$pictures|@count}Log pictures: %1{/t} &nbsp;
+		<span class="content-title-link">[<a href="myhome.php?allpics=1">{t}Show all{/t}</a>]</span>
 	</p>
 </div>
 
@@ -49,7 +51,7 @@
 {else}
 	<p style="line-height: 1.6em;">
 		{if !$allpics}
-			[<a href="myhome.php?allpics=1">{t}Show all{/t}</a>] &ndash; <b>{t}Your latest log pictures{/t}:</b></p>
+			 <b>{t}Your latest log pictures{/t}:</b></p>
 			{assign var=maxlines value=1}
 		{else}
 			{assign var=subtitle value="{t}Your log pictures{/t}:"}
@@ -69,13 +71,13 @@
 	<div class="content2-container bg-blue02" style="margin-top:5px;">
 		<p class="content-title-noshade-size3">
 			<img src="resource2/{$opt.template.style}/images/misc/22x22-traditional.gif" width="22" height="22"  style="align: left; margin-right: 10px;" alt="{t}Caches{/t}" />&nbsp;
-			{t 1=$hidden}Geocaches hidden: %1{/t}
+			{t 1=$hidden}Geocaches hidden: %1{/t} &nbsp;
+			<span class="content-title-link">[<a href="search.php?showresult=1&amp;expert=0&amp;output=HTML&amp;sort=byname&amp;ownerid={$login.userid}&amp;searchbyowner=&amp;f_inactive=0">{t}Show all{/t}</a>]&nbsp; [<a href="search.php?showresult=1&amp;expert=0&amp;output=HTML&amp;sort=byname&amp;ownerid={$login.userid}&amp;searchbyowner=&amp;f_inactive=1">{t}Show active{/t}</a>]</span>
 		</p>
 	</div>
 
 	<p style="line-height: 1.6em;">
 	{* Ocprop: (find|us|own)erid=([0-9]+) *}
-	[<a href="search.php?showresult=1&amp;expert=0&amp;output=HTML&amp;sort=byname&amp;ownerid={$login.userid}&amp;searchbyowner=&amp;f_inactive=0">{t}Show all{/t}</a>] [<a href="search.php?showresult=1&amp;expert=0&amp;output=HTML&amp;sort=byname&amp;ownerid={$login.userid}&amp;searchbyowner=&amp;f_inactive=1">{t}Show active{/t}</a>] &ndash; 
 		<b>{t}Your latest Geocaches hidden:{/t}</b>
 	</p>
 

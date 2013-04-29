@@ -75,6 +75,12 @@
 			{/if}
 			<br />
 		{/foreach}
+
+		{if $logItem.deleted_by_name != ""}
+			<span style="color:red">{t}Deleted by{/t} {$logItem.deleted_by_name},
+			{$logItem.deletion_date|date_format:$opt.format.date}</span>
+		{/if}
+
 	</div>
 	</div>
 </div>

@@ -19,6 +19,10 @@
 	{
 		$cache_id = $_REQUEST['cacheid'];
 	}
+	else if (isset($_REQUEST['wp']))
+	{
+		$cache_id = sql_value("SELECT `cache_id` FROM `caches` WHERE `wp_oc`='&1'", "", $_REQUEST['wp']);
+	}
 	$start = 0;
 	if (isset($_REQUEST['start']))
 	{
@@ -31,6 +35,7 @@
 		$count = $_REQUEST['count'];
 		if (!is_numeric($count)) $count = 5000;
 	}
+	$deleted = @$_REQUEST['deleted'] > 0 && ($login->admin && ADMIN_USER) > 0;
 
 	//$tpl->caching = true;
 	//$tpl->cache_lifetime = 31*24*60*60;
@@ -67,7 +72,7 @@
 	$rCache['adminlog'] = ($login->admin & ADMIN_USER);
 	$tpl->assign('cache', $rCache);
 
-	$tpl->assign('logs', cache::getLogsArray($cache_id, $start, $count));
+	$tpl->assign('logs', cache::getLogsArray($cache_id, $start, $count, $deleted));
 	
 
 	$tpl->display();

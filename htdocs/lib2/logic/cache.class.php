@@ -287,9 +287,25 @@ class cache
 	}
 
 
-	static function getLogsArray($cacheid, $start, $count)
+	static function getLogsArray($cacheid, $start, $count, $deleted=false)
 	{
+		global $login;
+
 		//prepare the logs
+		if ($deleted && ($login->admin && ADMIN_USER)>0)
+		{
+			// admins may view owner-deleted logs
+			$table = 'cache_logs_archived';
+			$delfields = 'IFNULL(`u2`.`username`,"") AS `deleted_by_name`, `deletion_date`';
+			$addjoin = 'LEFT JOIN `user` `u2` ON `u2`.`user_id`=`cache_logs`.`deleted_by`';
+		}
+		else
+		{
+			$table = 'cache_logs';
+			$delfields = '"" AS `deleted_by_name`, NULL AS `deletion_date`';
+			$addjoin = '';
+		}
+
 		$rsLogs = sql("
 			SELECT `cache_logs`.`user_id` AS `userid`,
 				`cache_logs`.`id` AS `id`,
@@ -300,12 +316,14 @@ class cache
 				`cache_logs`.`text` AS `text`,
 				`cache_logs`.`text_html` AS `texthtml`,
 				`cache_logs`.`picture`,
+				".$delfields.",
 				`user`.`username` AS `username`,
 				IF(ISNULL(`cache_rating`.`cache_id`), 0, `cache_logs`.`type` IN (1,7)) AS `recommended`
-			FROM `cache_logs`
+			FROM $table AS `cache_logs`
 			INNER JOIN `user` ON `user`.`user_id` = `cache_logs`.`user_id`
 			LEFT JOIN `cache_rating` ON `cache_logs`.`cache_id`=`cache_rating`.`cache_id` AND `cache_logs`.`user_id`=`cache_rating`.`user_id`
-			WHERE `cache_logs`.`cache_id`='&1'
+			".$addjoin."
+			WHERE `cache_logs`.`cache_id`='&1'".$addwhere."
 			ORDER BY `cache_logs`.`date` DESC, `cache_logs`.`Id` DESC LIMIT &2, &3", $cacheid, $start+0, $count+0);
 
 		$logs = array();

@@ -17,7 +17,7 @@
 		<p class="content-title-noshade-size3">
 			<img src="resource2/{$opt.template.style}/images/description/22x22-logs.png" width="22" height="22"  style="align: left; margin-right: 10px;" alt="{t}Logs{/t}" />&nbsp;
 			{t 1=$found}Geocaches found: %1{/t} &nbsp;
-			<span class="content-title-link">[<a href="search.php?showresult=1&amp;expert=0&amp;output=HTML&amp;sort=bymylastlog&amp;finderid={$login.userid}&amp;searchbyfinder=&amp;f_inactive=0&amp;logtype=1">{t}Show all finds{/t}</a>]&nbsp; [<a href="search.php?showresult=1&amp;expert=0&amp;output=HTML&amp;sort=bymylastlog&amp;finderid={$login.userid}&amp;searchbyfinder=&amp;f_inactive=0&amp;logtype=1,2,3,6,7,8">{t}Show all logs{/t}</a>]</span>
+			<span class="content-title-link">[<a href="search.php?showresult=1&amp;expert=0&amp;output=HTML&amp;sort=bymylastlog&amp;finderid={$login.userid}&amp;searchbyfinder=&amp;f_inactive=0&amp;logtype=1,7">{t}Show all finds{/t}</a>]&nbsp; [<a href="search.php?showresult=1&amp;expert=0&amp;output=HTML&amp;sort=bymylastlog&amp;finderid={$login.userid}&amp;searchbyfinder=&amp;f_inactive=0&amp;logtype=1,2,3,6,7,8">{t}Show all logs{/t}</a>]</span>
 		</p>
 	</div>
 

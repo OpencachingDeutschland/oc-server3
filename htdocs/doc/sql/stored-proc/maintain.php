@@ -915,6 +915,9 @@
 							IF NEW.`picture`!=OLD.`picture` THEN
 								SET NEW.`log_last_modified`=NOW();
 							END IF;
+							IF NEW.`last_modified` > NEW.`log_last_modified` THEN
+								SET NEW.`log_last_modified`=NEW.`last_modified`;
+							END IF;
 						END IF;
 					END;");
 

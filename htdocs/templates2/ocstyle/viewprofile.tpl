@@ -19,7 +19,7 @@
 <div class="content2-container bg-blue02">
 	<p class="content-title-noshade-size2">
 		<img src="resource2/{$opt.template.style}/images/profile/32x32-profile.png" style="align: left; margin-right: 10px;" width="32" height="32" alt="{t}Userprofile{/t}" /> 
-		{t}Userprofile{/t}
+		{t}User data{/t}
 	</p>
 </div>
 
@@ -75,17 +75,28 @@
 
 	{foreach from=$useroptions item=optionItem}
 		<tr>
-			<td style="vertical-align:top;"><b>{$optionItem.name|escape}:</b></td>
 				{if $optionItem.option_id==3}
-					</tr></table>
-				{/if}
-			{if $siteSettings.logic.enableHTMLInUserDescription == true}
-				<td style="vertical-align:top;">{$optionItem.option_value}</td>
-			{else}
-				<td style="vertical-align:top;">{$optionItem.option_value|escape|nl2br}</td>
-			{/if}
-				{if $optionItem.option_id==3}
-					<table class="table"><tr>
+					</tr>
+					<td><td class="spacer"> </td></tr></table>
+					<div class="content2-container bg-blue02">
+						<p class="content-title-noshade-size2">
+							<img src="resource2/{$opt.template.style}/images/profile/32x32-profile.png" style="align: left; margin-right: 10px;" width="32" height="32" alt="{t}Userprofile{/t}" /> 
+							{t}Description{/t}
+						</p>
+					</div>
+					<div class="table-like-font" style="margin-left:6px">
+						{if $siteSettings.logic.enableHTMLInUserDescription == true}
+							{$optionItem.option_value}
+						{else}
+							{$optionItem.option_value|escape|nl2br}
+						{/if}
+					</div>
+					<table class="table">
+						<tr><td><td class="spacer"></td></tr>
+						<tr>
+				{else}
+					<td style="vertical-align:top;"><b>{$optionItem.name|escape}:</b></td>
+					<td style="vertical-align:top;">{$optionItem.option_value|escape|nl2br}</td>
 				{/if}
 		</tr>
 	{/foreach}
@@ -107,7 +118,7 @@
 		<td valign="middle" class="header-small" style="padding-top:5px;padding-bottom:5px">
 		<img src="resource2/{$opt.template.style}/images/cacheicon/22x22-traditional.gif" width="22" height="22" align="middle" border="0" alt="{t}Hidden caches{/t}" title="{t}Hidden caches{/t}">&nbsp;<b>{t}Hidden caches{/t}:</b></td>
 		<td class="header-small">{$hidden}
-			{if $hidden>0}[<a href="search.php?showresult=1&amp;expert=0&amp;f_inactive=0&amp;output=HTML&amp;sort=byname&amp;ownerid={$userid}&amp;searchbyowner=">{t}Show all{/t}</a>]{if $active<$hidden} &nbsp; &ndash; &nbsp; {$active} {t}active caches{/t} {if $active>0}[<a href="search.php?showresult=1&amp;expert=0&amp;f_inactive=1&amp;output=HTML&amp;sort=byname&amp;ownerid={$userid}&amp;searchbyowner=">{t}Show{/t}</a>]{/if}{/if}{/if}
+			{if $hidden>0}[<a href="search.php?showresult=1&amp;expert=0&amp;f_inactive=0&amp;output=HTML&amp;sort=byname&amp;ownerid={$userid}&amp;searchbyowner=">{t}Show all{/t}</a>]{if $active<$hidden}, {$active} {t}active caches{/t} {if $active>0}[<a href="search.php?showresult=1&amp;expert=0&amp;f_inactive=1&amp;output=HTML&amp;sort=byname&amp;ownerid={$userid}&amp;searchbyowner=">{t}Show{/t}</a>]{/if}{/if}{/if}
 		</td>
 	</tr>
 

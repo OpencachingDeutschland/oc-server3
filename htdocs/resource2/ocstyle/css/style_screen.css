@@ -278,7 +278,7 @@ td.content-title-flag {
 	padding-right:3px !important;
 }
 
-.content-title-link { font-weight:normal; font-size:85%; }
+.content-title-link { font-weight:normal; font-size:80%; }
 
 .content-txtbox-noshade {margin: 0px; padding: 7px 0px 0px 0px; background-color: rgb(255,255,255);}
 .content-score {margin: 0px; margin-top: 3px; padding: 4px 0px 0px 0px; background-color: rgb(255,255,255); border-style:dotted; border-width:1px; width:75px; height:20px;vertical-align:middle;}
@@ -338,6 +338,8 @@ td.listicon {
 	padding-right:1px !important;
 	vertical-align:center;
 }
+
+.table-like-font { font-size:120%; }
 
 .printwptable td { line-height:1.4em; font-size:12px; }
 

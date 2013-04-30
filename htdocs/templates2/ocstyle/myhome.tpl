@@ -7,7 +7,7 @@
 
 {* Welcome *}
 <div class="content2-pagetitle">
-	<img src="resource2/{$opt.template.style}/images/misc/32x32-home.png" border="0" width="32px" height="32px" style="align: left; margin-right: 10px;" alt="Mein Profil" />
+	<img src="resource2/{$opt.template.style}/images/misc/32x32-home.png" border="0" width="32px" height="32px" style="align: left; margin-right: 10px;" />
 	{t 1=$login.username}Hello %1{/t}
 </div>
 
@@ -15,7 +15,7 @@
 	{* Geocaches found *}
 	<div class="content2-container bg-blue02" style="margin-top:20px;">
 		<p class="content-title-noshade-size3">
-			<img src="resource2/{$opt.template.style}/images/description/22x22-logs.png" width="22" height="22"  style="align: left; margin-right: 10px;" alt="{t}Logs{/t}" />&nbsp;
+			<img src="resource2/{$opt.template.style}/images/description/22x22-logs.png" width="22" height="22"  style="align: left; margin-right: 10px;" />&nbsp;
 			{t 1=$found}Geocaches found: %1{/t} &nbsp;
 			<span class="content-title-link">[<a href="search.php?showresult=1&amp;expert=0&amp;output=HTML&amp;sort=bymylastlog&amp;finderid={$login.userid}&amp;searchbyfinder=&amp;f_inactive=0&amp;logtype=1,7">{t}Show all finds{/t}</a>]&nbsp; [<a href="search.php?showresult=1&amp;expert=0&amp;output=HTML&amp;sort=bymylastlog&amp;finderid={$login.userid}&amp;searchbyfinder=&amp;f_inactive=0&amp;logtype=1,2,3,6,7,8">{t}Show all logs{/t}</a>]</span>
 		</p>
@@ -40,7 +40,7 @@
 {* Log pictures *}
 <div class="content2-container bg-blue02" style="margin-top:20px;">
 	<p class="content-title-noshade-size3">
-		<img src="resource2/{$opt.template.style}/images/description/22x22-image.png" width="22" height="22"  style="align: left; margin-right: 10px;" alt="{t}Logs{/t}"" />&nbsp;
+		<img src="resource2/{$opt.template.style}/images/misc/32x32-pictures.gif" width="24" height="24"  style="align: left; margin-right: 10px;" />&nbsp;
 		{t 1=$pictures|@count}Log pictures: %1{/t} &nbsp;
 		<span class="content-title-link">[<a href="myhome.php?allpics=1">{t}Show all{/t}</a>]</span>
 	</p>
@@ -70,7 +70,7 @@
 	{* Geocaches hidden *}
 	<div class="content2-container bg-blue02" style="margin-top:5px;">
 		<p class="content-title-noshade-size3">
-			<img src="resource2/{$opt.template.style}/images/misc/22x22-traditional.gif" width="22" height="22"  style="align: left; margin-right: 10px;" alt="{t}Caches{/t}" />&nbsp;
+			<img src="resource2/{$opt.template.style}/images/misc/22x22-traditional.gif" width="22" height="22"  style="align: left; margin-right: 10px;" />&nbsp;
 			{t 1=$hidden}Geocaches hidden: %1{/t} &nbsp;
 			<span class="content-title-link">[<a href="search.php?showresult=1&amp;expert=0&amp;output=HTML&amp;sort=byname&amp;ownerid={$login.userid}&amp;searchbyowner=&amp;f_inactive=0">{t}Show all{/t}</a>]&nbsp; [<a href="search.php?showresult=1&amp;expert=0&amp;output=HTML&amp;sort=byname&amp;ownerid={$login.userid}&amp;searchbyowner=&amp;f_inactive=1">{t}Show active{/t}</a>]</span>
 		</p>
@@ -112,7 +112,7 @@
 	{*
 	<div class="content2-container bg-blue02" style="margin-top:20px;">
 		<p class="content-title-noshade-size3">
-			<img src="resource2/{$opt.template.style}/images/misc/25x25-world.png" width="25" height="25" style="align: left; margin-right: 10px;" alt="{t}Other information{/t}" />&nbsp;
+			<img src="resource2/{$opt.template.style}/images/misc/25x25-world.png" width="25" height="25" style="align: left; margin-right: 10px;" />&nbsp;
 			{t}Other information{/t}
 		</p>
 	</div>
@@ -121,7 +121,7 @@
 	{* Emails sent *}
 	{* useless information when email protocol is regularly cleand-up
 	<p>
-		<img src="resource2/{$opt.template.style}/images/misc/22x22-email.png" width="22" height="22" style="align: left; margin-right: 10px;" alt="{t}E-Mails sent{/t}" />&nbsp;
+		<img src="resource2/{$opt.template.style}/images/misc/22x22-email.png" width="22" height="22" style="align: left; margin-right: 10px;" />&nbsp;
 		<strong>{t 1=$emails}E-Mails sent: %1{/t}</strong>
 	</p>
 	*}

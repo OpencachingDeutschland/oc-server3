@@ -18,7 +18,7 @@
 			<tr>
 				<td>
 					<p class="content-title-noshade-size3">
-						<img src="resource2/{$opt.template.style}/images/misc/32x32-news.png" style="align: left; margin-right: 10px;" width="24" height="24" alt="{t}News{/t}" />
+						<img src="resource2/{$opt.template.style}/images/misc/32x32-news.png" style="align: left; margin-right: 10px;" width="24" height="24" alt="" />
 						<a href="http://blog.opencaching.de/" style="color:rgb(88,144,168); text-decoration: none;">{t}News{/t}</a>
 						&nbsp; <span style="color:black; font-size:0.8em; font-weight:normal">[<a href="http://blog.opencaching.de/">{t}more{/t}...</a>]</span>
 					</p>
@@ -71,7 +71,7 @@
 {* new logpix *}
 <div class="content2-container bg-blue02" style="margin-bottom:6px">
 	<p class="content-title-noshade-size3">
-		<img src="resource2/{$opt.template.style}/images/cacheicon/webcam.gif" style="align: left; margin-right: 10px;" width="24" height="24" alt="{t}News{/t}" />
+		<img src="resource2/{$opt.template.style}/images/misc/32x32-pictures.gif" style="align: left; margin-right: 10px;" width="24" height="24" />
 		<a href="newlogpics.php" style="color:rgb(88,144,168); text-decoration: none;">{t}New log pictures{/t}</a>
 	&nbsp; <span style="color:black; font-size:0.8em; font-weight:normal">[<a href="newlogpics.php">{t}more{/t}...</a>]</span>
 	</p>

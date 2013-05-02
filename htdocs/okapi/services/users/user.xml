@@ -23,7 +23,7 @@
 			</li>
 			<li><b>internal_id</b> - internal ID of the user (<b>DO NOT</b> use this!
 				use the <b>uuid</b> as the user identifier),</li>
-			<li><b>caches_found</b> - number of "Found it" log entries,</li>
+			<li><b>caches_found</b> - number of "Found it" and "Attended" log entries,</li>
 			<li><b>caches_notfound</b> - number of "Didn't find it" log entries,</li>
 			<li><b>caches_hidden</b> - number of caches owned,</li>
 			<li><b>rcmds_given</b> - number of recommendations given.</li>

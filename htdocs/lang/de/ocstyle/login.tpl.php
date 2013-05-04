@@ -18,7 +18,9 @@
 	   username      default username
 	   message       message to display the user
 	   target        page to display after login
-	
+
+	 Is called from lib1 pages when login is required, e.g. newcache.php.
+
  ****************************************************************************/
 ?>
 

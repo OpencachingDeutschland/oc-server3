@@ -192,7 +192,11 @@
 				<div class="nav2">
 					<ul>
 <?php 
-						mnu_EchoMainMenu($menu[$pageidx]['siteid']);
+						// $pageidx is -1 e.g. when calling newcache.php as logged-off-user (-> login.tpl.php)
+						if ($pageidx >= 0)
+							mnu_EchoMainMenu($menu[$pageidx]['siteid']);
+						else
+							mnu_EchoMainMenu(-1);
 ?>
 					</ul>
 				</div>

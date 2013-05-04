@@ -415,12 +415,16 @@ function mnu_EchoBreadCrumb($pageid, $mainmenuindex)
 {
 	global $menu;
 
-	echo htmlspecialchars(t($menu[$mainmenuindex]['menustring']), ENT_COMPAT, 'UTF-8');
+	if ($mainmenuindex >= 0)
+	{ // is -1 e.g. when calling newcache.php as logged-off-user (-> login.tpl.php)
+		echo htmlspecialchars(t($menu[$mainmenuindex]['menustring']), ENT_COMPAT, 'UTF-8');
 
-	if (isset($menu[$mainmenuindex]['submenu']) && ($menu[$mainmenuindex]['siteid'] != $pageid))
-	{
-		mnu_prv_EchoBreadCrumbSubItem($pageid, $menu[$mainmenuindex]['submenu']);
+		if (isset($menu[$mainmenuindex]['submenu']) && ($menu[$mainmenuindex]['siteid'] != $pageid))
+		{
+			mnu_prv_EchoBreadCrumbSubItem($pageid, $menu[$mainmenuindex]['submenu']);
+		}
 	}
+
 }
 
 /*

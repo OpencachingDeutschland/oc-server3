@@ -4778,7 +4778,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('107', 'DE', 'Entschuldigung, aber diese Seite darfst du nicht sehen.', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('108', 'DE', 'Entschuldigung, aber der angeforderte Cache existiert nicht.', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('109', 'DE', 'Entschuldigung, aber der angeforderte Vorgang konnte nicht ausgeführt werden.', '2010-08-28 11:48:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('110', 'DE', 'Entschuldigung, aber der angeforderte Vorgang konnte nicht ausgeführt werden, weil du nicht angemeldet bist.', '2010-08-28 11:48:06');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('110', 'DE', 'Melde dich an, um fortzufahren:', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('111', 'DE', 'Entschuldigung, aber der angeforderte Benutzer existiert nicht.', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('112', 'DE', 'Das E-Mail Template existiert nicht.', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('113', 'DE', 'Erlaubte HTML-Tags', '2010-08-28 11:48:06');
@@ -6321,7 +6321,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('107', 'EN', 'Sorry, you are not allowed to view this page.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('108', 'EN', 'Sorry, the requested cache does not exist.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('109', 'EN', 'Sorry, the requested operation cannot be performed.', '2010-08-28 11:48:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('110', 'EN', 'Sorry, the requested operation cannot be performed because you are not logged in with an user account.', '2010-08-28 11:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('110', 'EN', 'Please login to continue:', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('111', 'EN', 'Sorry, the requested user does not exist.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('112', 'EN', 'Mail template does not exist.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('113', 'EN', 'HTML Tags', '2010-08-28 11:48:07');

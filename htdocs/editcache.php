@@ -391,6 +391,7 @@ function getWaypoints($cacheid)
 					}
 
 					// cache-attributes
+					$attribs_not_ok = false;
 					if (isset($_POST['cache_attribs']))
 					{
 						$cache_attribs = mb_split(';', $_POST['cache_attribs']);
@@ -415,11 +416,20 @@ function getWaypoints($cacheid)
 						sql_free_result($rs);
 					}
 
+					if (in_array(ATTRIB_ID_SAFARI,$cache_attribs) && $cache_type != 4)
+					{
+						tpl_set_var('safari_message', $safari_not_allowed_message);
+						$error = true;
+						$attribs_not_ok = true;
+					}
+					else
+						tpl_set_var('safari_message', '');
+
 					//try to save to DB?
 					if (isset($_POST['submit']))  // Ocprop
 					{
 						//all validations ok?
-						if (!($hidden_date_not_ok || $lat_not_ok || $lon_not_ok || $name_not_ok || $time_not_ok || $way_length_not_ok || $size_not_ok || $activate_date_not_ok || $status_not_ok || $diff_not_ok))
+						if (!($hidden_date_not_ok || $lat_not_ok || $lon_not_ok || $name_not_ok || $time_not_ok || $way_length_not_ok || $size_not_ok || $activate_date_not_ok || $status_not_ok || $diff_not_ok || $attribs_not_ok))
 						{
 							$cache_lat = $coords_lat_h + $coords_lat_min / 60;
 							if ($coords_latNS == 'S') $cache_lat = -$cache_lat;

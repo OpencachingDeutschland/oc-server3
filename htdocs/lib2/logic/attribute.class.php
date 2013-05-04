@@ -49,7 +49,7 @@ class attribute
 			{
 				$sAddWhereSql = '';
 				if ($bOnlySelectable == true)
-					$sAddWhereSql = ' AND `cache_attrib`.`selectable`=1';
+					$sAddWhereSql .= ' AND `cache_attrib`.`selectable`=1';
 
 				$rsAttr = sql("SELECT `cache_attrib`.`id`, IFNULL(`tt1`.`text`, `cache_attrib`.`name`) AS `name`,
 															IFNULL(`tt2`.`text`, `cache_attrib`.`html_desc`) AS `html_desc`,

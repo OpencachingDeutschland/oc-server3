@@ -36,5 +36,15 @@
 			break;
 	}
 
+	// clear cached map result, so that the change directly appears on the map
+	$map_result_id = sql_value("SELECT `result_id` FROM `map2_result`
+	                             WHERE INSTR(sqlquery,\"`user_id`='" . sql_escape($login->userid) . "'\")
+															 LIMIT 1", 0);
+	if ($map_result_id)
+	{
+		sql("DELETE FROM `map2_result` WHERE `result_id`='&1'", $map_result_id);
+		sql("DELETE FROM `map2_data` WHERE `result_id`='&1'", $map_result_id);
+	}
+
 	$tpl->redirect('viewcache.php?cacheid=' . ($cache_id+0));
 ?>

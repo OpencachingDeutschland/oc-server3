@@ -75,7 +75,7 @@
 	</tr>
 	<tr>
 		<td colspan="2">
-			<textarea id="desc" name="desc" cols="80" rows="25">{desc}</textarea>
+			<textarea id="desc" class="cachedesc" name="desc" cols="90" rows="25">{desc}</textarea>
     </td>	
 	</tr>
 	<tr><td class="spacer" colspan="2"></td></tr>
@@ -94,7 +94,7 @@
 	</tr>
 	<tr>
 		<td colspan="2">
-			<textarea name="hints" class="mceNoEditor" cols="80" rows="15">{hints}</textarea>
+			<textarea name="hints" class="mceNoEditor hint" cols="90" rows="10">{hints}</textarea>
 		</td>
 	</tr>
 	<tr><td class="spacer" colspan="2"></td></tr>

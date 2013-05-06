@@ -230,15 +230,20 @@
 		$line_style = "";
 		switch ($caches_record['status'])
 		{
-			case 2: $status_style = "text-decoration: line-through;";
+			case 2: // disabled
+			        $status_style = "text-decoration: line-through;";
 			        break;
-			case 3:
-			case 6:
-			case 7: $status_style = "text-decoration: line-through; color: grey";
+			case 3: // archived
+			case 6: // locked
+			        $status_style = "text-decoration: line-through; color: grey";
 			        $line_style = "color:grey";
 			        break;
-			case 5: $status_style = "color: #e00000";
-			        $line_style = "";
+			case 7: // locked, invisible
+			        $status_style = "text-decoration: line-through; color: #e00000";
+			        $line_style = "color:grey";
+			        break;
+			case 5: // not published yet
+			        $status_style = "color: #e00000";
 			        break;
 			default: $status_style = $line_style = "";
 		}

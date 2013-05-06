@@ -864,7 +864,7 @@
 						IF ISNULL(@XMLSYNC) OR @XMLSYNC!=1 THEN
 							SET NEW.`date_created`=NOW();
 							SET NEW.`last_modified`=NOW();
-							SET NEW.`log_last_modified`=NOW();
+							SET NEW.`log_last_modified`=NEW.`last_modified`;
 						END IF;
 
 						IF ISNULL(NEW.`uuid`) OR NEW.`uuid`='' THEN
@@ -910,7 +910,6 @@
 							   NEW.`text`!=OLD.`text` OR
 							   NEW.`text_html`!=OLD.`text_html` THEN
 								SET NEW.`last_modified`=NOW();
-								SET NEW.`log_last_modified`=NOW();
 							END IF;
 							IF NEW.`picture`!=OLD.`picture` THEN
 								SET NEW.`log_last_modified`=NOW();

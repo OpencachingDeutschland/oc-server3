@@ -314,6 +314,8 @@ function getChildWaypoints($cacheid)
 	$cachemap['url'] = $url;
 	$tpl->assign('cachemap', $cachemap);
 
+	$tpl->assign('shortlink_domain', $opt['logic']['shortlink_domain']);
+
 	// display the page
 	$tpl->display();
 ?>

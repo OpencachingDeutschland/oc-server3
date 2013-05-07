@@ -2448,6 +2448,11 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2006', 'Deleted
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2007', 'User data', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2008', 'OKAPI Applications', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2009', 'OKAPI Apps', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2010', 'Large map', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2011', 'without logs', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2012', 'with 5 logs', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2013', 'with 10 logs', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2014', 'with all logs', '2013-04-25 23:00:00');
 
 -- Table sys_trans_ref
 SET NAMES 'utf8';
@@ -6227,6 +6232,11 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2007', 'DE', 'Benutzerdaten', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2008', 'DE', 'API-Anwendungen', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2009', 'DE', 'API-Anwendungen', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2010', 'DE', 'große Karte', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2011', 'DE', 'ohne Logs', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2012', 'DE', 'mit 5 Logs', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2013', 'DE', 'mit 10 Logs', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2014', 'DE', 'mit allen Logs', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'EN', 'Reorder IDs \r', '2010-09-02 00:15:30');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'EN', 'The database could not be reconnected.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'EN', 'Testing – please do not login', '2010-08-28 11:48:07');
@@ -7743,6 +7753,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1979', 'EN', 'Contact reporter', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1980', 'EN', 'For \'Found\' and \'Not found\' logs: Date and (optional) time of the cache search.', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1981', 'EN', 'The following cache listings have been reset to the state before %1', '2013-02-19 05:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2010', 'EN', 'Large Map', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'ES', 'Reordenar ID', '2010-12-09 00:17:55');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'ES', 'La base de datos no se pudo conectar.', '2010-12-09 00:17:55');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'ES', 'En pruebas - por favor, no entre.', '2010-12-09 00:17:55');
@@ -10772,6 +10783,11 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1979', 'IT', 'Contatta chi ha segnalato la cache', '2013-04-16 16:45:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1980', 'IT', 'Per i log \'trovata\' e \'non trovata\': data e (opzionalmente) ora della ricerca.', '2013-04-16 16:45:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2002', 'IT', 'Geocaches trovate', '2010-09-01 23:48:28');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2010', 'IT', 'Mappa grande', '2010-09-01 23:48:28');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2011', 'IT', 'senza log', '2010-09-01 23:48:28');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2012', 'IT', 'con 5 log', '2010-09-01 23:48:28');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2013', 'IT', 'con 10 log', '2010-09-01 23:48:28');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2014', 'IT', 'con tutti i log', '2010-09-01 23:48:28');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('922', 'JA', 'JA', '2011-05-15 16:04:51');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'NL', 'ID\'s opnieuw sorteren', '2011-02-04 19:49:56');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'NL', 'De verbinding met de database kon niet hersteld worden.', '2011-02-04 19:49:56');

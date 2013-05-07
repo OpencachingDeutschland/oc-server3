@@ -337,6 +337,7 @@
 	/* opencaching prefixes in database available to search for
 	 */
 	$opt['logic']['ocprefixes'] = 'oc';
+	$opt['logic']['shortlink_domain'] = false;
 
   /* pregenerated waypoint list for new caches
    * - Waypoint prefix (OC, OP, OZ ... AA=local development)

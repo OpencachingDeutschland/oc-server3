@@ -160,11 +160,17 @@
 
 <!-- Cachedetails -->
 <div class="content2-container">
-	<div class="content2-container-2col-left" id="viewcache-baseinfo">
-		<p class="content-title-noshade-size2">
-			<img src="resource2/{$opt.template.style}/images/viewcache/kompass.png" class="icon32" alt="" title="" />
-			<b><nobr>{$coordinates.lat|escape}</nobr> <nobr>{$coordinates.lon|escape}</nobr></b> <span class="content-title-noshade-size0">(WGS84)</span><br />  {* Ocprop: <b><nobr>([N|S].*?)&#039;<\/nobr> <nobr>([E|W].*?)&#039;<\/nobr><\/b>.*?WGS84 *}
-		</p>
+	<table cellspacing="0" cellpadding="0" width="100%">
+		<tr>
+			<td style="vertical-align:top">
+				<table>
+					<tr><td colspan="2">
+						<p class="content-title-noshade-size2">
+							<img src="resource2/{$opt.template.style}/images/viewcache/kompass.png" class="icon32" alt="" title="" />
+							<b><nobr>{$coordinates.lat|escape}</nobr> <nobr>{$coordinates.lon|escape}</nobr></b> <span class="content-title-noshade-size0">(WGS84)</span><br />  {* Ocprop: <b><nobr>([N|S].*?)&#039;<\/nobr> <nobr>([E|W].*?)&#039;<\/nobr><\/b>.*?WGS84 *}
+						</p>
+					</td></tr>
+					<tr><td style="vertical-align:top; width:70%">
 		<p style="line-height: 1.6em;">
 			<img src="resource2/{$opt.template.style}/images/viewcache/map.png" class="icon16" alt="" title="" align="middle" />&nbsp;<a href="#" onclick="window.open('coordinates.php?lat={$cache.latitude}&lon={$cache.longitude}&popup=y&wp={$cache.wpoc}','{t escape=js}Coordinates{/t}','width=280,height=430,resizable=no,scrollbars=0')">{t}Convert coordinates{/t}</a><br />
 			<!-- <img src="resource2/{$opt.template.style}/images/viewcache/box.png" class="icon16" alt="" title="" align="middle" />&nbsp;Cache type: <b>Traditional</b><br /> -->
@@ -185,7 +191,8 @@
 			<img src="resource2/{$opt.template.style}/images/viewcache/date.png" class="icon16" alt="" title="" align="middle" />&nbsp;{if $cache.type==6}{t}Event date{/t}{else}{t}Hidden at{/t}{/if}: {$cache.datehidden|date_format:$opt.format.datelong}<br />
 			<img src="resource2/{$opt.template.style}/images/viewcache/date.png" class="icon16" alt="" title="" align="middle" />&nbsp;{if $cache.is_publishdate==0}{t}Listed since{/t}{else}{t}Published on{/t}{/if}: {$cache.datecreated|date_format:$opt.format.datelong}<br />
 			<img src="resource2/{$opt.template.style}/images/viewcache/date.png" class="icon16" alt="" title="" align="middle" />&nbsp;{t}Last update{/t}: {$cache.lastmodified|date_format:$opt.format.datelong}<br />  {* Ocprop: <br />\s*Wegpunkt: (OC[A-Z0-9]+)\s*<br /> -- Waypoint: <b>(OC[A-Z0-9]+)<\/b><br \/> *}
-			<img src="resource2/{$opt.template.style}/images/viewcache/arrow_in.png" class="icon16" alt="" title="" align="middle" />&nbsp;{t}Waypoint{/t}: <b>{$cache.wpoc}</b><br />
+			<!-- Ocprop: <br /> Wegpunkt: <b>OC0000</b><br /> -->
+			<img src="resource2/{$opt.template.style}/images/viewcache/arrow_in.png" class="icon16" alt="" title="" align="middle" />&nbsp;{if $shortlink_domain !== false}{$shortlink_domain}/{else}{t}Waypoint{/t}: {/if}<b>{$cache.wpoc}</b><br />
 			{if $cache.wpgc!='' || $cache.wpnc!=''}<img src="resource2/{$opt.template.style}/images/viewcache/link.png" class="icon16" alt="" title="" align="middle" />
 				{t}Also listed at{/t}:  {* Ocprop: Auch gelistet auf: <a href=\"http://www\.geocaching\.com/seek/cache_details\.aspx\?wp=(GC[0-9A-Z]{1,5})\" target=\"_blank\">geocaching.com</a> *}
 				{if $cache.wpgc!=''}
@@ -196,65 +203,72 @@
 				{/if}
 			{/if}
 		</p>
-		<p>
-			<a style="background-image: url(resource2/{$opt.template.style}/images/viewcache/print-18.png);background-repeat:no-repeat;" onclick="window.location='viewcache.php?cacheid={$cache.cacheid}&print=y&log=A&nocrypt=' + bNoCrypt"><input name="PrintA" id="PrintA" value="{t}Print{/t}" type="button" /></a>
-			<a style="background-image: url(resource2/{$opt.template.style}/images/viewcache/print-18.png);background-repeat:no-repeat;" onclick="window.location='viewcache.php?cacheid={$cache.cacheid}&print=y&log=N&nocrypt=' + bNoCrypt"><input name="PrintN" id="PrintN" value="{t}Print no logs{/t}" type="button" /></a>
-			<a style="background-image: url(resource2/{$opt.template.style}/images/viewcache/print-18.png);background-repeat:no-repeat;" onclick="window.location='viewcache.php?cacheid={$cache.cacheid}&print=y&log=5&nocrypt=' + bNoCrypt"><input name="Print5" id="Print5" value="{t}Print last logs{/t}" type="button" /></a>
-		</p>
-		<p>
-			<a class="send-to-gps" href="#" onclick="window.open('garmin.php?lat={$cache.latitude}&lon={$cache.longitude}&wp={$cache.wpoc}','{t escape=js}Send{/t}','width=640,height=320,resizable=no,scrollbars=1')"><input name="SendToGPS" value="{t}Send to GPS device{/t}" id="SendToGPS" type="button" /></a>
-
-			&nbsp;&nbsp;<img src="resource2/{$opt.template.style}/images/viewcache/16x16-save.png" class="icon16" alt="" />
-
-			<select name="wpdownload" class="wpdownload" onchange="location.href=this.options[this.selectedIndex].value"> 
-				<option value="#">{t}Download as...{/t}</option>
-				<option value="search.php?searchto=searchbycacheid&showresult=1&f_inactive=0&f_ignored=0&startat=0&cacheid={$cache.cacheid}&output=gpx">GPX</option>
-				<option value="search.php?searchto=searchbycacheid&showresult=1&f_inactive=0&f_ignored=0&startat=0&cacheid={$cache.cacheid}&output=loc">LOC</option>
-				<option value="search.php?searchto=searchbycacheid&showresult=1&f_inactive=0&f_ignored=0&startat=0&cacheid={$cache.cacheid}&output=kml">KML</option>
-				<option value="search.php?searchto=searchbycacheid&showresult=1&f_inactive=0&f_ignored=0&startat=0&cacheid={$cache.cacheid}&output=ov2">OV2</option>
-				<option value="search.php?searchto=searchbycacheid&showresult=1&f_inactive=0&f_ignored=0&startat=0&cacheid={$cache.cacheid}&output=ovl">OVL</option>
-				<option value="search.php?searchto=searchbycacheid&showresult=1&f_inactive=0&f_ignored=0&startat=0&cacheid={$cache.cacheid}&output=txt">TXT</option>
-			</select>
-		</p>
-		<p>&nbsp;</p>
-	</div>
-
-	<div class="content2-container-2col-right" id="viewcache-maptypes">
-		<div class="content2-container-2col-left" id="viewcache-numstats">
-			<p style="line-height: 1.4em;"><br /><br />
-				<img src="resource2/{$opt.template.style}/images/{if $cache.type==6}log{else}viewcache{/if}/16x16-{if $cache.type==6}attended{else}found{/if}.png" class="icon16" alt="" /> {$cache.found} {if $cache.type==6} {t}Attended{/t}{else}{t}Found{/t}{/if}<br />
-				<img src="resource2/{$opt.template.style}/images/{if $cache.type==6}log{else}viewcache{/if}/16x16-{if $cache.type==6}will_attend{else}dnf{/if}.png" class="icon16" alt="" /> {if $cache.type==6} {$cache.willattend} {t}Will attend{/t}{else} {$cache.notfound} {t}Not found{/t}{/if}<br />
-				<img src="resource2/{$opt.template.style}/images/viewcache/16x16-note.png" class="icon16" alt="" /> {$cache.note} {t}Notes{/t}<br />
-				<img src="resource2/{$opt.template.style}/images/viewcache/16x16-watch.png" class="icon16" alt="" /> {$cache.watcher} {t}Watched{/t}<br />
-				<img src="resource2/{$opt.template.style}/images/viewcache/ignore-16.png" class="icon16" alt="" /> {$cache.ignorercount} {t}Ignored{/t}<br />
-				<img src="resource2/{$opt.template.style}/images/viewcache/16x16-visitors.png" class="icon16" alt="" /> {$cache.visits} {t}Page visits{/t}<br />
-				<span style="white-space:nowrap;"><img src="resource2/{$opt.template.style}/images/viewcache/16x16-pictures.png" class="icon16" alt="" /> {$logpics} {if $logpics>0}<a class="link" href="viewcache.php?cacheid={$cache.cacheid|urlencode}&logpics=1">{/if}{if $logpics==1}{t}Log picture{/t}{else}{t}Log pictures{/t}{/if}{if $logpics>0}</a>{/if}</span><br />
-				<span style="white-space:nowrap;"><img src="resource2/{$opt.template.style}/images/viewcache/gk.png" class="icon16" alt="" title="GeoKrety visited" /> <a class="links" href="http://geokrety.org/szukaj.php?lang=de_DE.UTF-8&wpt={$cache.wpoc}" target="_blank">{t}Geokrety history{/t}</a></span><br />
-				{if $cache.topratings>0}
-					<img src="resource2/{$opt.template.style}/images/viewcache/rating-star.gif" class="icon16" alt="" /> {$cache.topratings} {t}Recommendations{/t}<br />
+					</td>
+					<td style="vertical-align:top">
+						<p style="line-height: 1.4em;">
+							<img src="resource2/{$opt.template.style}/images/{if $cache.type==6}log{else}viewcache{/if}/16x16-{if $cache.type==6}attended{else}found{/if}.png" class="icon16" alt="" /> {$cache.found} {if $cache.type==6} {t}Attended{/t}{else}{t}Found{/t}{/if}<br />
+							<img src="resource2/{$opt.template.style}/images/{if $cache.type==6}log{else}viewcache{/if}/16x16-{if $cache.type==6}will_attend{else}dnf{/if}.png" class="icon16" alt="" /> {if $cache.type==6} {$cache.willattend} {t}Will attend{/t}{else} {$cache.notfound} {t}Not found{/t}{/if}<br />
+							<img src="resource2/{$opt.template.style}/images/viewcache/16x16-note.png" class="icon16" alt="" /> {$cache.note} {t}Notes{/t}<br />
+							<img src="resource2/{$opt.template.style}/images/viewcache/16x16-watch.png" class="icon16" alt="" /> {$cache.watcher} {t}Watched{/t}<br />
+							<img src="resource2/{$opt.template.style}/images/viewcache/ignore-16.png" class="icon16" alt="" /> {$cache.ignorercount} {t}Ignored{/t}<br />
+							<img src="resource2/{$opt.template.style}/images/viewcache/16x16-visitors.png" class="icon16" alt="" /> {$cache.visits} {t}Page visits{/t}<br />
+							<span style="white-space:nowrap;"><img src="resource2/{$opt.template.style}/images/viewcache/16x16-pictures.png" class="icon16" alt="" /> {$logpics} {if $logpics>0}<a class="link" href="viewcache.php?cacheid={$cache.cacheid|urlencode}&logpics=1">{/if}{if $logpics==1}{t}Log picture{/t}{else}{t}Log pictures{/t}{/if}{if $logpics>0}</a>{/if}</span><br />
+							<span style="white-space:nowrap;"><img src="resource2/{$opt.template.style}/images/viewcache/gk.png" class="icon16" alt="" title="GeoKrety visited" /> <a class="links" href="http://geokrety.org/szukaj.php?lang=de_DE.UTF-8&wpt={$cache.wpoc}" target="_blank">{t}Geokrety history{/t}</a></span><br />
+							{if $cache.topratings>0}
+								<img src="resource2/{$opt.template.style}/images/viewcache/rating-star.gif" class="icon16" alt="" /> {$cache.topratings} {t}Recommendations{/t}<br />
+							{/if}
+						</p>
+					</td>
+					</tr>
+				</table>
+			</td>
+			
+			<td style="text-align:right">
+				<a href="map2.php?wp={$cache.wpoc}" target="_blank">
+				{if $cachemap.iframe}
+					<div class="img-shadow">
+						<iframe src="{$cachemap.url}" width="185px" height="185px" frameborder="0">
+						</iframe>
+					</div>
+				{else}
+					<img src="{$cachemap.url}" height="185px" width="185px" />
 				{/if}
-			</p>
-		</div>
-		<div id="viewcache-map" class="content2-container-2col-right" style="overflow:hidden">
-			{if $cachemap.iframe}
-				<div class="img-shadow">
-					<iframe src="{$cachemap.url}" width="200px" height="200px" frameborder="0">
-					</iframe>
-				</div>
-			{else}
-				<img src="{$cachemap.url}" height="200px" width="200px" />
-			{/if}
-		</div>
+				</a>
+				<p style="margin-right:0"><a href="map2.php?wp={$cache.wpoc}" target="_blank"><span style="line-height:1.5em">{t}Large map{/t}</span></a></p>
+			</td>
+		</tr>
+		
+		<tr>
+			<td colspan="2"><p>
+				<img src="resource2/{$opt.template.style}/images/viewcache/print-18.png" class="icon16" alt="" />
+				<select class="wpdownload" onchange="location.href=this.options[this.selectedIndex].value+'&nocrypt='+bNoCrypt" class="formselect">
+					<option value="#">{t}Print{/t} …</option>
+					<option value="viewcache.php?cacheid={$cache.cacheid}&print=y&log=N">{t}without logs{/t}</option>
+					<option value="viewcache.php?cacheid={$cache.cacheid}&print=y&log=5">{t}with 5 logs{/t}</option>
+					<option value="viewcache.php?cacheid={$cache.cacheid}&print=y&log=10">{t}with 10 logs{/t}</option>
+					<option value="viewcache.php?cacheid={$cache.cacheid}&print=y&log=A">{t}with all logs{/t}</option>
+				</select>&nbsp;
+				<img src="resource2/{$opt.template.style}/images/viewcache/16x16-save.png" class="icon16" alt="" />
+				<select name="wpdownload" class="wpdownload" onchange="location.href=this.options[this.selectedIndex].value"> 
+					<option value="#">{t}Download as...{/t}</option>
+					<option value="search.php?searchto=searchbycacheid&showresult=1&f_inactive=0&f_ignored=0&startat=0&cacheid={$cache.cacheid}&output=gpx">GPX</option>
+					<option value="search.php?searchto=searchbycacheid&showresult=1&f_inactive=0&f_ignored=0&startat=0&cacheid={$cache.cacheid}&output=loc">LOC</option>
+					<option value="search.php?searchto=searchbycacheid&showresult=1&f_inactive=0&f_ignored=0&startat=0&cacheid={$cache.cacheid}&output=kml">KML</option>
+					<option value="search.php?searchto=searchbycacheid&showresult=1&f_inactive=0&f_ignored=0&startat=0&cacheid={$cache.cacheid}&output=ov2">OV2</option>
+					<option value="search.php?searchto=searchbycacheid&showresult=1&f_inactive=0&f_ignored=0&startat=0&cacheid={$cache.cacheid}&output=ovl">OVL</option>
+					<option value="search.php?searchto=searchbycacheid&showresult=1&f_inactive=0&f_ignored=0&startat=0&cacheid={$cache.cacheid}&output=txt">TXT</option>
+				</select>&nbsp;
+				<img src="resource2/{$opt.template.style}/images/viewcache/14x19-gps-device.png" class="icon16" alt="" />
+				<a class="send-to-gps" href="#" onclick="window.open('garmin.php?lat={$cache.latitude}&lon={$cache.longitude}&wp={$cache.wpoc}','{t escape=js}Send{/t}','width=640,height=320,resizable=no,scrollbars=1')"><input name="SendToGPS" value="{t}Send to GPS device{/t}" id="SendToGPS" type="button" /></a>
+				<br /><br />
+			</p></td>	
+		</tr>
+	</table>
 
-		<b>{t}Maps:{/t}</b> 
-		<a href="map2.php?wp={$cache.wpoc}" target="_blank">{t}Opencaching.de{/t}</a>,<br /><a href="http://www.mapquest.com/maps/map.adp?latlongtype=decimal&latitude={$cache.latitude}&longitude={$cache.longitude}" target="_blank">Mapquest</a>,<br />
-		<a href="http://maps.google.de/maps?q={$cache.latitude},{$cache.longitude}+({$cache.wpoc}%20-%20{$cache.name|replace:'(':''|replace:')':''|escape:'url'})&z=15" target="_blank">{t}Google Maps{/t}</a>			
-	</div>
 </div>
 <!-- End Cachedetails -->
 
 <!-- Attribute -->
-
 {if count($attributes)>0}
 	<div class="content2-container bg-blue02">
 		<p class="content-title-noshade-size2"><img src="resource2/{$opt.template.style}/images/description/22x22-encrypted.png" style="align: left; margin-right: 10px;" width="22" height="22" alt="{t}Cache attributes{/t}" /> {t}Cache attributes{/t}</p>

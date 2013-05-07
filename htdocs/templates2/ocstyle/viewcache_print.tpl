@@ -18,7 +18,7 @@
 						<img src="images/newlogo.png" height="66" border="0" alt="" align="left" />
 					</td>
 					<td align="center">
-						<font size="4">{t}Waypoint{/t}: {$cache.wpoc}</font>
+						<font size="4">{if $shortlink_domain !== false}{$shortlink_domain}/{else}{t}Waypoint{/t}: {/if}{$cache.wpoc}</font>
 					</td>
 					<td class="null" border="0">
 						{if $opt.page.sponsor.popup!=''}

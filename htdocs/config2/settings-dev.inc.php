@@ -68,6 +68,7 @@
 	// see settings-dist.inc.php for known node IDs
 	$opt['logic']['node']['id'] = 4;
   $opt['logic']['waypoint_pool']['prefix'] = 'OC';
+	$opt['logic']['shortlink_domain'] = 'opencaching.de';
   
 	/* cachemaps
 	*/

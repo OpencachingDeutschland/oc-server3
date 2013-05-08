@@ -32,6 +32,7 @@ License: GNU Free Documentation License
 There are more geodb_ tables present in OC developer and production systems,
 which are undocumented, mostly empty and not in use anywhere.
 Probably some unfinished experiment.
+(see bin/dbsv-update.php, mutation #103)
 
 
 Tables:  gns_locations

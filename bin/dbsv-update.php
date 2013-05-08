@@ -40,7 +40,18 @@
 	} while ($db_version > 0);
 
 
-  // test if a certain database field exists
+	// test if a database table exists
+	function table_exists($table)
+	{
+		global $opt;
+
+		return sql_value("SELECT COUNT(*)
+		                    FROM `information_schema`.`tables`
+		                   WHERE `table_schema`='&1' AND `table_name`='&2'",
+										 0, $opt['db']['placeholder']['db'], $table) > 0;
+	}
+
+	// test if a database field exists
 	function field_exists($table, $field)
 	{
 		global $opt;
@@ -111,6 +122,26 @@
 		sql("INSERT IGNORE INTO `stat_user` (`user_id`) SELECT `user_id` FROM `caches` GROUP BY `user_id`");
 		sql("UPDATE `stat_user`, (SELECT `user_id`, COUNT(*) AS `count` FROM `caches` INNER JOIN `cache_status` ON `cache_status`.`id`=`caches`.`status` AND `allow_user_view`=1 GROUP BY `user_id`) AS `tblHidden` SET `stat_user`.`hidden`=`tblHidden`.`count` WHERE `stat_user`.`user_id`=`tblHidden`.`user_id`");
 		sql("CALL sp_refreshall_statpic()");
+	}
+
+	function dbv_103()  // update comments on static tables
+	{
+		if (table_exists('geodb_areas'))       sql("ALTER TABLE `geodb_areas`       COMMENT = 'not in use'");
+		if (table_exists('geodb_changelog'))   sql("ALTER TABLE `geodb_changelog`   COMMENT = 'not in use'");
+		if (table_exists('geodb_coordinates')) sql("ALTER TABLE `geodb_coordinates` COMMENT = 'static content'");
+		if (table_exists('geodb_floatdata'))   sql("ALTER TABLE `geodb_floatdata`   COMMENT = 'not in use'");
+		if (table_exists('geodb_hierarchies')) sql("ALTER TABLE `geodb_hierarchies` COMMENT = 'static content'");
+		if (table_exists('geodb_intdata'))     sql("ALTER TABLE `geodb_intdata`     COMMENT = 'not in use'");
+		if (table_exists('geodb_locations'))   sql("ALTER TABLE `geodb_locations`   COMMENT = 'static content'");
+		if (table_exists('geodb_polygons'))    sql("ALTER TABLE `geodb_polygons`    COMMENT = 'not in use'");
+		if (table_exists('geodb_search'))      sql("ALTER TABLE `geodb_search`      COMMENT = 'static content, not in use'");
+		if (table_exists('geodb_textdata'))    sql("ALTER TABLE `geodb_textdata`    COMMENT = 'static content'");
+		if (table_exists('geodb_type_names'))  sql("ALTER TABLE `geodb_type_names`  COMMENT = 'not in use'");
+		if (table_exists('pw_dict'))           sql("ALTER TABLE `pw_dict`           COMMENT = 'static content'");
+		sql("ALTER TABLE `npa_areas`  COMMENT = 'static content'");
+		sql("ALTER TABLE `npa_types`  COMMENT = 'static content'");
+		sql("ALTER TABLE `nuts_codes` COMMENT = 'static content'");
+		sql("ALTER TABLE `nuts_layer` COMMENT = 'static content'");
 	}
 
 ?>

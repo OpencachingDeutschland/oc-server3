@@ -52,7 +52,16 @@ function pAppendSites($parentId, $viewall, $sublevel, &$aItems)
 	{
 		$r['sublevel'] = $sublevel;
 		$aItems[] = $r;
-		pAppendSites($r['id'], $viewall, $sublevel+1, &$aItems);
+		
+		/*
+		 * pAppendSites($r['id'], $viewall, $sublevel+1, &$aItems);
+		 *  
+		 * http://www.php.net/manual/en/language.references.pass.php
+		 * As of PHP 5.3.0, you will get a warning saying that "call-time pass-by-reference" is deprecated when you use & in foo(&$a);.
+		 * And as of PHP 5.4.0, call-time pass-by-reference was removed, so using it will raise a fatal error.
+		 * 
+		 */
+		pAppendSites($r['id'], $viewall, $sublevel+1, $aItems);
 	}
 	sql_free_result($rs);
 }

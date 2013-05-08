@@ -146,6 +146,21 @@ function getChildWaypoints($cacheid)
 	if ($rCache === false)
 		$tpl->error(ERROR_CACHE_NOT_EXISTS);
 
+	// format waylength
+	if ($rCache['waylength'] < 5)
+		if (round($rCache['waylength'],2) != round($rCache['waylength'],1))
+			$digits = 2;
+		else
+			$digits = 1;
+	else if ($rCache['waylength'] < 50)
+		if (round($rCache['waylength'],1) != round($rCache['waylength'],0))
+			$digits = 1;
+		else
+			$digits = 0;
+	else
+		$digits = 0;
+	$rCache['waylength'] = sprintf('%.'.$digits.'f', $rCache['waylength']);
+
 	// not published?
 	if ($rCache['status'] == 5)
 	{

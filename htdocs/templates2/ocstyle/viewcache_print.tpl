@@ -84,7 +84,7 @@
 							<nobr>{t}Time required{/t}: {$cache.searchtime|format_hour} h</nobr>
 						{/if}
 						{if $cache.waylength>0}
-							<nobr>{t}Distance{/t}: {$cache.waylength|sprintf:'%01.2f'} km</nobr>
+							<nobr>{t}Distance{/t}: {$cache.waylength} km</nobr>
 						{/if}
 						{if $cache.searchtime>0 || $cache.waylength>0}<br />{/if}
 						{if $cache.status!=1}

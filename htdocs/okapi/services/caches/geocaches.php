@@ -32,7 +32,7 @@ class WebService
 		'my_notes', 'trackables_count', 'trackables', 'alt_wpts', 'last_found',
 		'last_modified', 'date_created', 'date_hidden', 'internal_id', 'is_watched',
 		'is_ignored', 'willattends', 'country', 'state', 'preview_image',
-		'trip_time', 'trip_distance', 'attribution_note');
+		'trip_time', 'trip_distance', 'attribution_note','gc_code');
 
 	public static function call(OkapiRequest $request)
 	{
@@ -157,7 +157,7 @@ class WebService
 				select
 					c.cache_id, c.name, c.longitude, c.latitude, c.listing_last_modified as last_modified,
 					c.date_created, c.type, c.status, c.date_hidden, c.size, c.difficulty,
-					c.terrain, c.wp_oc, c.logpw, c.user_id,
+					c.terrain, c.wp_oc, c.wp_gc, c.logpw, c.user_id,
 					if(c.search_time=0, null, c.search_time) as trip_time,
 					if(c.way_length=0, null, c.way_length) as trip_distance,
 
@@ -189,7 +189,7 @@ class WebService
 				select
 					c.cache_id, c.name, c.longitude, c.latitude, c.last_modified,
 					c.date_created, c.type, c.status, c.date_hidden, c.size, c.difficulty,
-					c.terrain, c.wp_oc, c.logpw, c.user_id,
+					c.terrain, c.wp_oc, c.wp_gc, c.logpw, c.user_id,
 					if(c.search_time=0, null, c.search_time) as trip_time,
 					if(c.way_length=0, null, c.way_length) as trip_distance,
 
@@ -220,6 +220,14 @@ class WebService
 				switch ($field)
 				{
 					case 'code': $entry['code'] = $row['wp_oc']; break;
+					case 'gc_code':
+						// OC software allows entering anything here, and that's what users do.
+						// We do a formal verification so that only a valid GC code is returned:
+						if (preg_match('/^\s*[Gg][Cc][A-Za-z0-9]+\s*$/', $row['wp_gc']))
+							$entry['gc_code'] = strtoupper(trim($row['wp_gc']));
+						else
+							$entry['gc_code'] = null;
+						break;
 					case 'name': $entry['name'] = $row['name']; break;
 					case 'names': $entry['names'] = array(Settings::get('SITELANG') => $row['name']); break; // for the future
 					case 'location': $entry['location'] = round($row['latitude'], 6)."|".round($row['longitude'], 6); break;

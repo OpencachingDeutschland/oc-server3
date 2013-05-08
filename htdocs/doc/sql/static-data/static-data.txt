@@ -1,0 +1,82 @@
+Unicode Reminder: メモ
+
+The following static data is used by the OC code. Only some of this data is
+included in the Git repo distribution, but it is all included in Opencaching.de
+developer VMs and databases (see http://wiki.opencaching.de/index.php/Entwicklung/Entwicklersystem).
+
+
+Tables:  geodb_coordinates
+         geodb_hierarchies
+         geodb_locations
+         geodb_textdata
+Content: political geographic data
+Purpose: searching for caches by city (Ortschaften)
+Used by: lang/de/ocstyle/selectlocid.inc.php
+         lib2/logic/geodb.inc.php  (not in use)
+				 search.php
+         util/gns/mkadmtxt.php
+Source:  OpenGeoDb ?
+Import:  ?
+License: GNU Free Documentation License ?
+
+geodb_locations is only referenced by lib2/logic/geodb.inc.php i.e. it is
+not used (yet) by OC production code.
+
+Tables:  geodb_search
+Content: searching for caches by city
+Used by: (not in use)
+Source:  OpenGeoDb
+Import:  util/geodb_searchindex/index.php
+License: GNU Free Documentation License
+
+There are more geodb_ tables present in OC developer and production systems,
+which are undocumented, mostly empty and not in use anywhere.
+Probably some unfinished experiment.
+
+
+Tables:  gns_locations
+         gns_search
+Content: political geographical data
+Purpose: searching for caches by city (Ortschaften)
+Used by: search.php
+Source:  http://earth-info.nga.mil/gns/html/
+Impport: util/gns/mksearchindex.php
+License: Public Domain
+
+
+Tables:  npa_areas
+         npa_types
+Content: German nature protection areas, as of 2009
+Purpose: display NPA information for cache listings
+Used by: util2/cron/modules/cache_npa_areas.class.php
+Source:  Bundesamt für Naturschutz
+Import:  ?
+License: probably free to use with attribution
+Docs:    http://wiki.opencaching.de/index.php/Schutzgebiete
+
+
+Tables:  nuts_codes
+         nuts_layers
+Content: NUTS data for adm1..adm4 levels
+Purpose: assigning country, state, district, city to cache listings
+Used by: util2/cron/modules/cache_location.class.php
+Source:  ?
+Import:  ?
+License: probably Public Domain
+
+
+Tabels:  pw_dict
+Content: list of common passwords
+Purpose: password security tests
+Used by: lib2/logic/cracklib.inc.php
+Source:  http://pecl.php.net/package/crack -> doc/sql/static-data/pw_dict.bz2
+Import:  doc/sql/static-data/pwlist.php
+License: PHP License
+
+
+Tables:  miscellaneous, see header of data.sql
+Content: all other static data
+Purpose: misc
+Source:  doc/sql/static-data/data.sql
+Import:  SQL import, or bin/dbupdate.php
+License: see doc/license.txt

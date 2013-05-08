@@ -357,12 +357,12 @@ function export()
 	$stab[] = 'attribute_categories';
 	$stab[] = 'attribute_groups';
 	$stab[] = 'cache_attrib';
+	$stab[] = 'cache_logtype';
 	$stab[] = 'cache_report_reasons';
 	$stab[] = 'cache_report_status';
 	$stab[] = 'cache_size';
 	$stab[] = 'cache_status';
 	$stab[] = 'cache_type';
-	$stab[] = 'cache_logtype';
 	$stab[] = 'coordinates_type';
 	$stab[] = 'countries';
 	$stab[] = 'countries_list_default';
@@ -370,9 +370,9 @@ function export()
 	$stab[] = 'helppages';
 	$stab[] = 'languages';
 	$stab[] = 'languages_list_default';
+	$stab[] = 'logentries_types';
 	$stab[] = 'log_types';
 	$stab[] = 'log_types_text';
-	$stab[] = 'logentries_types';
 	$stab[] = 'news_topics';
 	$stab[] = 'nodes';
 	$stab[] = 'object_types';

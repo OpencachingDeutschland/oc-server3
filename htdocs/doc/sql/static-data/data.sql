@@ -2,12 +2,12 @@
 -- attribute_categories
 -- attribute_groups
 -- cache_attrib
+-- cache_logtype
 -- cache_report_reasons
 -- cache_report_status
 -- cache_size
 -- cache_status
 -- cache_type
--- cache_logtype
 -- coordinates_type
 -- countries
 -- countries_list_default
@@ -15,9 +15,9 @@
 -- helppages
 -- languages
 -- languages_list_default
+-- logentries_types
 -- log_types
 -- log_types_text
--- logentries_types
 -- news_topics
 -- nodes
 -- object_types

@@ -8,6 +8,10 @@
 	/*
 	 * Database Structure Versioning - update DB structure to current version;
 	 * used for developer & production system
+	 *
+	 * You should normally NOT call this script directly, but via dbupdate.php
+	 * (or something similar on a production system). This ensures that
+	 * everything takes place in the right order.
 	 */
 
 	if (!isset($opt['rootpath']))

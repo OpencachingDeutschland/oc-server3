@@ -27,7 +27,20 @@
 
 		$newCaches = array();
 
-		$rsNewCaches = sql_slave('SELECT `caches`.`cache_id` `cacheid`, `caches`.`wp_oc` `wpoc`, `user`.`user_id` `userid`, `caches`.`country` `country`, `caches`.`name` `cachename`, `caches`.`type`, `user`.`username` `username`, `caches`.`date_created` `date_created` FROM `caches` INNER JOIN `user` ON `caches`.`user_id`=`user`.`user_id` WHERE `caches`.`status` = 1 ORDER BY `caches`.`date_created` DESC LIMIT ' . ($startat+0) . ', ' . ($perpage+0));
+		$rsNewCaches = sql_slave(
+					"SELECT `caches`.`cache_id` `cacheid`, `caches`.`wp_oc` `wpoc`,
+					        `caches`.`name` `cachename`, `caches`.`type`, `caches`.`country` `country`,
+					        `caches`.`date_created` `date_created`,
+					        IFNULL(`sys_trans_text`.`text`,`countries`.`en`) AS `country_name`,
+					        `user`.`user_id` `userid`, `user`.`username` `username`
+					  FROM `caches`
+			INNER JOIN `user` ON `caches`.`user_id`=`user`.`user_id`
+			 LEFT JOIN `countries` ON `countries`.`short` = `caches`.`country`
+			 LEFT JOIN `sys_trans_text` ON `sys_trans_text`.`trans_id` = `countries`.`trans_id`
+			           AND `sys_trans_text`.`lang` = '" . sql_escape($opt['template']['locale']) . "'
+			     WHERE `caches`.`status` = 1
+			  ORDER BY `caches`.`date_created` DESC
+				   LIMIT " . ($startat+0) . ', ' . ($perpage+0));
 			// see also write_newcaches_urls() in sitemap.class.php
 		while ($rNewCache = sql_fetch_assoc($rsNewCaches))
 			$newCaches[] = $rNewCache;

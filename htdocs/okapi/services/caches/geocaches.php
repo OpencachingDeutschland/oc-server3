@@ -832,7 +832,7 @@ class WebService
 				# waypoint types in 'waypoint_type' table.
 				# OCPL also have a special 'status' field to denote a hidden waypoint
 				# (i.e. final location of a multicache). Such hidden waypoints are not
-				# exposed by OKAPI. A stage fields is used for ordering and naming.
+				# exposed by OKAPI.
 
 				$cacheid2waypoints = Db::select_group_by("cache_id", "
 					select
@@ -863,7 +863,7 @@ class WebService
 			{
 				# OCDE uses 'coordinates' table (with type=1) to store additional waypoints
 				# and defines waypoint types in 'coordinates_type' table.
-				# All additional waypoints are are public.
+				# All additional waypoints are public.
 
 				$cacheid2waypoints = Db::select_group_by("cache_id", "
 					select

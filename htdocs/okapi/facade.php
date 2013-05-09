@@ -20,7 +20,7 @@ namespace okapi;
 # exception and error handlers. OKAPI is strict about PHP warnings and
 # notices, so you might need to temporarily disable the error handler in
 # order to get it to work with your code. Just call this after you
-# include the Facade file: OkapiErrorHandler::disable().
+# include the Facade file: Facade::disable_error_handling().
 
 
 use Exception;
@@ -117,6 +117,17 @@ class Facade
 			set okapi_syncbase = now()
 			where wp_oc in ('".implode("','", array_map('mysql_real_escape_string', $cache_codes))."')
 		");
+	}
+
+	/**
+	 * Run OKAPI database update.
+	 * Will output messages to stdout.
+	 */
+	public static function database_update()
+	{
+		require_once($GLOBALS['rootpath']."okapi/views/update.php");
+		$update = new views\update\View;
+		$update->call();
 	}
 
 	/**

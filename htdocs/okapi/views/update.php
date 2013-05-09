@@ -128,7 +128,7 @@ class View
 		Okapi::set_var("cron_nearest_event", 0);
 		Okapi::execute_prerequest_cronjobs();
 
-		self::out("\nUpdate complete.");
+		self::out("\nUpdate complete.\n");
 	}
 
 	/**

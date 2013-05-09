@@ -20,12 +20,6 @@
 		<p>Currently available fields:</p>
 		<ul>
 			<li><b>code</b> - unique Opencaching code of the geocache,</li>
-			<li><p><b>gc_code</b> - geocaching.com code (GC code) of the geocache;
-				<b>null</b> if not crosslisted or unknown.</p>
-				<p>Please note that many cache owners do not provide this information.
-				It may be missing or wrong, or the GC listing may be inactive
-				(<a href='https://code.google.com/p/opencaching-api/issues/detail?id=195'>Discussion</a>).</p>
-			</li>
 			<li><b>name</b> - name of the geocache,</li>
 			<li><b>names</b> - a dictionary (language code => plain-text string) of
 				names of the geocache (at this time, there will be only one language,
@@ -66,6 +60,14 @@
 					<li><b>username</b> - name of the user,</li>
 					<li><b>profile_url</b> - URL of the user profile page,</li>
 				</ul>
+			</li>
+			<li>
+				<p><b>gc_code</b> - Geocaching.com code (GC code) of the geocache
+				<b>or null</b> if the cache is not listed on GC or the GC code is
+				unknown.</p>
+				
+				<p>Please note that this information is supplied by cache owners
+				and it is often missing, obsolete or otherwise incorrect.</p>
 			</li>
 			<li>
 				<p><b>distance</b> - float, the distance to a cache, in meters.

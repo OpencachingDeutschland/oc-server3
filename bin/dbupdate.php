@@ -14,19 +14,22 @@
   chdir($rootpath);
   require_once('lib2/cli.inc.php');
 
-  echo "updating db structure  ...\n";
+  echo "updating db structure\n";
   require('dbsv-update.php');
 
-  echo "importing data.sql ...\n";
+  echo "importing data.sql\n";
   system('cat ' . $rootpath . 'doc/sql/static-data/data.sql |' .
 	       ' mysql -h' . $opt['db']['servername'] . ' -u' . $opt['db']['username'] . ' --password=' . $opt['db']['password'] . ' ' . $opt['db']['placeholder']['db']);
 
-  echo "importing triggers ...\n";
+  echo "importing triggers\n";
   chdir ($rootpath . 'doc/sql/stored-proc');
   system('php maintain.php');
 
-  echo "resettings webcache ...\n";
+  echo "updating OKAPI database\n";
   chdir ($rootpath . '../bin');
+  system('php okapi-update.php | grep -i -e mutation');
+
+  echo "resetting webcache:\n";
   system('php clear-webcache.php');
 
 ?>

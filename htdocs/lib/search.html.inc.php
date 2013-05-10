@@ -249,8 +249,9 @@
 		}
 
 		$tmpline = mb_ereg_replace('{line_style}', $line_style, $tmpline);
+		$tmpline = mb_ereg_replace('{status_style}', $status_style, $tmpline);
 		$tmpline = mb_ereg_replace('{desclangs}', $desclangs, $tmpline);
-		$tmpline = mb_ereg_replace('{cachename}', '<span style="'.$status_style.'">' . htmlspecialchars($caches_record['name'], ENT_COMPAT, 'UTF-8') . '</span>', $tmpline);
+		$tmpline = mb_ereg_replace('{cachename}', htmlspecialchars($caches_record['name'], ENT_COMPAT, 'UTF-8'), $tmpline);
 		$tmpline = mb_ereg_replace('{urlencode_cacheid}', htmlspecialchars(urlencode($caches_record['cache_id']), ENT_COMPAT, 'UTF-8'), $tmpline);
 		$tmpline = mb_ereg_replace('{urlencode_userid}', htmlspecialchars(urlencode($caches_record['user_id']), ENT_COMPAT, 'UTF-8'), $tmpline);
 		$tmpline = mb_ereg_replace('{username}', htmlspecialchars($caches_record['username'], ENT_COMPAT, 'UTF-8'), $tmpline);

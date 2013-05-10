@@ -1403,6 +1403,10 @@
 				FOR EACH ROW
 					BEGIN
 						IF NEW.`type`=1 THEN
+							IF (ISNULL(@XMLSYNC) OR @XMLSYNC!=1) THEN
+							  /* update caches modification date for XML interface handling */
+								UPDATE `caches` SET `last_modified`=NEW.`last_modified` WHERE `cache_id`=NEW.`cache_id`;
+							END IF;
 							CALL sp_update_cache_listingdate(NEW.`cache_id`);
 						END IF;
 					END;");
@@ -1422,6 +1426,10 @@
 				FOR EACH ROW
 					BEGIN
 						IF NEW.`type`=1 THEN
+							IF (ISNULL(@XMLSYNC) OR @XMLSYNC!=1) THEN
+							  /* update caches modification date for XML interface handling */
+								UPDATE `caches` SET `last_modified`=NEW.`last_modified` WHERE `cache_id`=NEW.`cache_id`;
+							END IF;
 							CALL sp_update_cache_listingdate(NEW.`cache_id`);
 						END IF;
 						IF OLD.`cache_id`!=NEW.`cache_id` AND OLD.`type`=1 THEN
@@ -1434,6 +1442,10 @@
 				FOR EACH ROW
 					BEGIN
 						IF OLD.`type`=1 THEN
+							IF (ISNULL(@XMLSYNC) OR @XMLSYNC!=1) THEN
+							  /* update caches modification date for XML interface handling */
+								UPDATE `caches` SET `last_modified`=NOW() WHERE `cache_id`=OLD.`cache_id`;
+							END IF;
 							CALL sp_update_cache_listingdate(OLD.`cache_id`);
 						END IF;
 					END;");

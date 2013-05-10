@@ -7,10 +7,10 @@
 
 <!ELEMENT attrlist (attr*)>
 <!ELEMENT user (id, username, pmr, datecreated, lastmodified)>
-<!ELEMENT cache (id, userid, name, longitude, latitude, type, status, country, size, desclanguages, difficulty, terrain, rating, waypoints, datehidden, datecreated, lastmodified)>
+<!ELEMENT cache (id, userid, name, longitude, latitude, type, status, country, size, desclanguages, difficulty, terrain, rating, waypoints, datehidden, datecreated, lastmodified, attributes, wpts)>
 <!ELEMENT cachedesc (id, cacheid, language, shortdesc, desc, hint, license?, lastmodified)>
 <!ELEMENT cachelog (id, cacheid, userid, logtype, date, text, license?, datecreated, lastmodified)>
-<!ELEMENT picture (id, url, title, object, attributes, license?, datecreated, lastmodified)>
+<!ELEMENT picture (id, url, title, object, picattr, license?, datecreated, lastmodified)>
 <!ELEMENT removedobject (id, object, removeddate)>
 
 <!-- common elements -->
@@ -80,6 +80,20 @@
 	oc CDATA #REQUIRED
 >
 <!ELEMENT datehidden (#PCDATA)>
+<!ELEMENT attributes (attribute*)>
+<!ELEMENT attribute (#PCDATA)>
+<!ATTLIST attribute
+	id CDATA #REQUIRED
+>
+<!ELEMENT wpts (wpt*)>
+<!ELEMENT wpt (#PCDATA)>
+<!ATTLIST wpt
+	id CDATA #REQUIRED
+	type CDATA #REQUIRED
+	typename CDATA #IMPLIED
+	longitude CDATA #REQUIRED
+	latitude CDATA #REQUIRED
+>
 
 <!-- cachedesc -->
 <!ELEMENT cacheid (#PCDATA)>
@@ -98,7 +112,6 @@
 <!ELEMENT hint (#PCDATA)>
 
 <!-- cachelog -->
-
 <!-- cacheid see cachedesc -->
 <!-- userid see cache -->
 <!ELEMENT logtype (#PCDATA)>
@@ -108,6 +121,9 @@
 >
 <!ELEMENT date (#PCDATA)>
 <!ELEMENT text (#PCDATA)>
+<!ATTLIST text
+	html CDATA #REQUIRED
+>
 
 <!-- picture -->
 <!ELEMENT url (#PCDATA)>
@@ -118,10 +134,11 @@
 	type CDATA #REQUIRED
 	typename CDATA #IMPLIED
 >
-<!ELEMENT attributes (#PCDATA)>
-<!ATTLIST attributes
+<!ELEMENT picattr (#PCDATA)>
+<!ATTLIST picattr
 	spoiler CDATA #IMPLIED
 	display CDATA #REQUIRED
+	preview CDATA #IMPLIED
 >
 
 <!-- removedobject -->

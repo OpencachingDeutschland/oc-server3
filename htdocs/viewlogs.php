@@ -35,7 +35,8 @@
 		$count = $_REQUEST['count'];
 		if (!is_numeric($count)) $count = 5000;
 	}
-	$deleted = @$_REQUEST['deleted'] > 0 && ($login->admin && ADMIN_USER) > 0;
+	$admin_access = ($login->admin && ADMIN_USER) > 0;
+	$deleted = @$_REQUEST['deleted'] > 0 && $admin_access;
 
 	//$tpl->caching = true;
 	//$tpl->cache_lifetime = 31*24*60*60;
@@ -62,7 +63,7 @@
 			$tpl->error(ERROR_CACHE_NOT_EXISTS);
 		else
 		{
-			if($rCache['allow_user_view'] != 1 && $rCache['userid'] != $login->userid)
+			if ($rCache['allow_user_view'] != 1 && $rCache['userid'] != $login->userid && !$admin_access)
 				$tpl->error(ERROR_NO_ACCESS);
 		}
 	}

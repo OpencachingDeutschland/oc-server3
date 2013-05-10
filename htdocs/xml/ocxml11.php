@@ -501,13 +501,14 @@ function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $z
 
 		if ($ocxmlversion >= 13)
 		{
-			$rsWaypoints = sql("SELECT `co`.`id`, `co`.`subtype` AS `type`,
-			                           `co`.`latitude`, `co`.`longitude`, `co`.`description`,
-			                           `ct`.`name` AS `type_name`
-			                      FROM `coordinates` `co`
-			                INNER JOIN `coordinates_type` `ct` ON `ct`.`id`=`co`.`subtype`
+			$rsWaypoints = sql("SELECT `coordinates`.`id`, `coordinates`.`subtype` AS `type`,
+			                           `coordinates`.`latitude`, `coordinates`.`longitude`,
+																 `coordinates`.`description`,
+			                           `coordinates_type`.`name` AS `type_name`
+			                      FROM `coordinates`
+			                INNER JOIN `coordinates_type` ON `coordinates_type`.`id`=`coordinates`.`subtype`
 			                     WHERE `cache_id`='&1' AND `type`=1
-			                  ORDER BY `co`.`id` ASC", $r['id']);
+			                  ORDER BY `coordinates`.`id` ASC", $r['id']);
 			fwrite($f, $t2 . '<wpts>' . "\n");
 			while ($rWaypoint = sql_fetch_assoc($rsWaypoints))
 			{

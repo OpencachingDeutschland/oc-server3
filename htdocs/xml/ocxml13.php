@@ -1,6 +1,6 @@
 <?php
 /***************************************************************************
-															 ./xml/ocxml12.php
+															 ./xml/ocxml13.php
 
 		For license information see doc/license.txt
 

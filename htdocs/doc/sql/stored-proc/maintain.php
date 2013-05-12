@@ -1403,7 +1403,7 @@
 				FOR EACH ROW
 					BEGIN
 						IF NEW.`type`=1 THEN
-							IF (ISNULL(@XMLSYNC) OR @XMLSYNC!=1) THEN
+							IF ((ISNULL(@XMLSYNC) OR @XMLSYNC!=1) AND IFNULL(@dont_update_listingdate,0)=0) THEN
 							  /* update caches modification date for XML interface handling */
 								UPDATE `caches` SET `last_modified`=NEW.`last_modified` WHERE `cache_id`=NEW.`cache_id`;
 							END IF;
@@ -1426,7 +1426,7 @@
 				FOR EACH ROW
 					BEGIN
 						IF NEW.`type`=1 THEN
-							IF (ISNULL(@XMLSYNC) OR @XMLSYNC!=1) THEN
+							IF ((ISNULL(@XMLSYNC) OR @XMLSYNC!=1) AND IFNULL(@dont_update_listingdate,0)=0) THEN
 							  /* update caches modification date for XML interface handling */
 								UPDATE `caches` SET `last_modified`=NEW.`last_modified` WHERE `cache_id`=NEW.`cache_id`;
 							END IF;

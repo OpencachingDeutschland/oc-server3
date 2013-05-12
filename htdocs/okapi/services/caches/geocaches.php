@@ -868,7 +868,7 @@ class WebService
 				$cacheid2waypoints = Db::select_group_by("cache_id", "
 					select
 						cache_id,
-						@stage := @stage + 1 as stage,
+						false as stage,
 						latitude, longitude,
 						description as `desc`,
 						subtype as internal_type_id,
@@ -888,7 +888,6 @@ class WebService
 							else 'other'
 						end as okapi_type
 					from coordinates
-					join (select @stage := 0) s
 					where
 						type = 1
 						and cache_id in (".$cache_codes_escaped_and_imploded.")

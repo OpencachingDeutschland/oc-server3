@@ -118,6 +118,7 @@
 <!ATTLIST logtype
 	id CDATA #REQUIRED
 	recommended CDATA #IMPLIED
+	teamcomment CDATA #IMPLIED
 >
 <!ELEMENT date (#PCDATA)>
 <!ELEMENT text (#PCDATA)>

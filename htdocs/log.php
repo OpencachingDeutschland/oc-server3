@@ -21,6 +21,7 @@
 
 	//prepare the templates and include all neccessary
 	require_once('./lib/common.inc.php');
+	require_once('./lib/logtypes.inc.php');
 	require($stylepath.'/smilies.inc.php');
   require_once($opt['rootpath'] . '../lib/htmlpurifier-4.2.0/library/HTMLPurifier.auto.php');
 
@@ -114,6 +115,7 @@
 				$log_time_minute = isset($_POST['logminute']) ? trim($_POST['logminute']) : "";
 				$top_option = isset($_POST['ratingoption']) ? $_POST['ratingoption']+0 : 0;
 				$top_cache = isset($_POST['rating']) ? $_POST['rating']+0 : 0;
+				$oc_team_comment = isset($_POST['teamcomment']) ? ($_POST['teamcomment'] != 0) : 0;
 
 				// check if user has exceeded his top5% limit
 				$user_founds = sqlValue("SELECT IFNULL(`stat_user`.`found`, 0) FROM `user` LEFT JOIN `stat_user` ON `user`.`user_id`=`stat_user`.`user_id` WHERE `user`.`user_id`='" .  sql_escape($usr['userid']) . "'", 0);
@@ -169,6 +171,10 @@
 					$log_text = nl2br(htmlspecialchars($log_text, ENT_COMPAT, 'UTF-8'));
 				}
 
+				// ignore unauthorized team comments
+				if (!teamcomment_allowed($cache_id, $log_type))
+					$oc_team_comment = 0;
+
 				// validate data
 				if (is_numeric($log_date_month) && is_numeric($log_date_day) && is_numeric($log_date_year) &&
 				    ("$log_time_hour$log_time_minute"=="" || is_numeric($log_time_hour)) &&
@@ -187,7 +193,7 @@
 				else
 					$date_ok = false;
 					
-				$logtype_ok = sqlValue("SELECT COUNT(*) FROM cache_logtype WHERE cache_type_id='" . sql_escape($cache_type) . "' AND log_type_id='" . sql_escape($log_type) . "'", 0) > 0; 
+				$logtype_ok = logtype_ok($cache_id, $log_type, 0);  // depends on userid
 
 				// not a found log? then ignore the rating
 				if ($log_type != 1 && $log_type != 7)
@@ -229,25 +235,18 @@
 
 					if (!$already_exists)
 					{
-						sql("INSERT INTO `cache_logs` (`id`, `cache_id`, `user_id`, `type`, `date`, `text`, `text_html`, `text_htmledit`, `node`)
-						         VALUES ('', '&1', '&2', '&3', '&4', '&5', '&6', '&7', '&8')",
-						         $cache_id, $usr['userid'], $log_type, $log_date, $log_text, (($descMode != 1) ? 1 : 0), (($descMode == 3) ? 1 : 0), $oc_nodeid);
+						// update cache_status
+						$new_cache_status = sqlValue("SELECT `cache_status` FROM `log_types` WHERE `id`='" . sql_escape($log_type) . "'", 0);
+						if ($new_cache_status > 0)
+							$rs = sql("UPDATE `caches` SET `status`='&1' WHERE `cache_id`='&2'", $new_cache_status, $cache_id);
+
+						// insert log
+						sql("INSERT INTO `cache_logs` (`id`, `cache_id`, `user_id`, `type`, `oc_team_comment`, `date`, `text`, `text_html`, `text_htmledit`, `node`)
+						         VALUES ('', '&1', '&2', '&3', '&4', '&5', '&6', '&7', '&8', '&9')",
+						         $cache_id, $usr['userid'], $log_type, $oc_team_comment, $log_date, $log_text, (($descMode != 1) ? 1 : 0), (($descMode == 3) ? 1 : 0), $oc_nodeid);
 
 						// do not use slave server for the next time ...
 						db_slave_exclude();
-
-						// update cache_status
-						$rs = sql("SELECT `log_types`.`cache_status` FROM `log_types` WHERE `id`='&1'", $log_type);
-						if ($record = sql_fetch_array($rs))
-						{
-							$cache_status = $record['cache_status'];
-							if ($cache_status != 0)
-								$rs = sql("UPDATE `caches` SET `status`='&1' WHERE `cache_id`='&2'", $cache_status, $cache_id);
-						}
-						else
-						{
-							die("OPS!");
-						}
 
 						// update top-list
 						if ($top_option)
@@ -268,29 +267,19 @@
 				}
 				else
 				{
-					//build logtypeoptions
+					// build logtype options
+					$logtype_names = get_logtype_names();
+					$allowed_logtypes = get_cache_log_types($cache_id, 0);
+					$default_log_type = isset($_REQUEST['logtype']) ? $_REQUEST['logtype']+0 : 0; 
+					if (!logtype_ok($cache_id, $default_log_type, 0))
+						$default_log_type = $allowed_logtypes[0];
+
 					$logtypeoptions = '';
-					if ($cache_type == 6)  // event
-						$logtypeorder = 'DESC';
-					else
-						$logtypeorder = 'ASC';
-					$rsLogTypes = sql("SELECT `log_types`.`id`, IFNULL(`sys_trans_text`.`text`, `log_types`.`name`) AS `name`
-											         FROM `caches` 
-								         INNER JOIN `cache_type` ON `caches`.`type`=`cache_type`.`id` 
-								         INNER JOIN `cache_logtype` ON `cache_type`.`id`=`cache_logtype`.`cache_type_id` 
-								         INNER JOIN `log_types` ON `cache_logtype`.`log_type_id`=`log_types`.`id` 
-									        LEFT JOIN `sys_trans` ON `log_types`.`trans_id`=`sys_trans`.`id` 
-									        LEFT JOIN `sys_trans_text` ON `sys_trans`.`id`=`sys_trans_text`.`trans_id` AND `sys_trans_text`.`lang`='" . sql_escape($locale) . "' 
-											        WHERE `caches`.`cache_id`='" . ($cache_id+0) . "'
-											     ORDER BY `log_types`.`id` " . $logtypeorder);
-					$log_type = ($record['user_id'] == $usr['userid'] ? 3 : 1);
-					while ($rLogTypes = sql_fetch_assoc($rsLogTypes))
-						if (!$adminlog || $rLogTypes['id'] == 3)
-						{
-							$sSelected = ($rLogTypes['id'] == $log_type) ? ' selected="selected"' : '';
-							$logtypeoptions .= '<option value="' . $rLogTypes['id'] . '"' . $sSelected . '>' . htmlspecialchars($rLogTypes['name'], ENT_COMPAT, 'UTF-8') . '</option>' . "\n";
-						}
-					sql_free_result($rsLogTypes);
+					foreach ($allowed_logtypes as $logtype)
+					{
+						$selected = ($logtype == $default_log_type ? ' selected="selected"' : '');
+						$logtypeoptions .= '<option value="' . $logtype . '"' . $selected . '>' . htmlspecialchars($logtype_names[$logtype], ENT_COMPAT, 'UTF-8') . '</option>' . "\n";
+					}
 
 					//set tpl vars
 					tpl_set_var('cachename', htmlspecialchars($cachename, ENT_COMPAT, 'UTF-8'));
@@ -304,6 +293,13 @@
 					tpl_set_var('reset', $reset);  // obsolete
 					tpl_set_var('submit', $submit);
 					tpl_set_var('date_message', '');
+
+					$oc_team_comment = isset($_REQUEST['teamcomment']) ? ($_REQUEST['teamcomment'] != 0) : 0;
+					if (teamcomment_allowed($cache_id,3))
+						tpl_set_var('teamcommentoption',
+							mb_ereg_replace('{chk_sel}', ($oc_team_comment ? 'checked' : ''), $teamcomment_field));
+					else
+						tpl_set_var('teamcommentoption', '');
 
 					// Text / normal HTML / HTML editor
 					tpl_set_var('use_tinymce', (($descMode == 3) ? 1 : 0));

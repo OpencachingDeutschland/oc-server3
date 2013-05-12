@@ -1644,6 +1644,7 @@ class Okapi
 		if ($id == 10) return "Ready to search";
 		if ($id == 11) return "Temporarily unavailable";
 		if ($id == 12) return "OC Team comment";
+		if ($id == 13 || $id == 14) return "Locked";
 
 		# Important: This set is not closed. Other types may be introduced
 		# in the future. This has to be documented in the public method

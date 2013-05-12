@@ -7,5 +7,6 @@ CREATE TABLE `stat_cache_logs` (
   `notfound` smallint(5) unsigned NOT NULL,
   `note` smallint(5) unsigned NOT NULL,
   `will_attend` smallint(5) unsigned NOT NULL,
+  `maintenance` smallint(5) unsigned NOT NULL,
   PRIMARY KEY  (`cache_id`,`user_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='via trigger (cache_logs)' ;

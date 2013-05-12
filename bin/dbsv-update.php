@@ -148,4 +148,24 @@
 		sql("ALTER TABLE `nuts_layer` COMMENT = 'static content'");
 	}
 
+	function dbv_104()  // added maintenance logs and OC team comments
+	{
+		sql("ALTER TABLE `log_types_text` COMMENT = 'obsolete'");
+		sql("ALTER TABLE `cache_logtype` COMMENT = 'obsolete'");
+		sql("ALTER TABLE `log_types` CHANGE COLUMN `cache_status` `cache_status` tinyint(1) NOT NULL default '0'");
+		sql("ALTER TABLE `log_types` CHANGE COLUMN `en` `en` varchar(60) NOT NULL");
+		if (!field_exists('stat_caches','maintenance'))
+			sql("ALTER TABLE `stat_caches` ADD COLUMN `maintenance` smallint(5) unsigned NOT NULL AFTER `will_attend`");
+		if (!field_exists('stat_cache_logs','maintenance'))
+			sql("ALTER TABLE `stat_cache_logs` ADD COLUMN `maintenance` smallint(5) unsigned NOT NULL AFTER `will_attend`");
+		if (!field_exists('stat_user','maintenance'))
+			sql("ALTER TABLE `stat_user` ADD COLUMN `maintenance` smallint(5) unsigned NOT NULL AFTER `will_attend`");
+		if (!field_exists('cache_logs','oc_team_comment'))
+			sql("ALTER TABLE `cache_logs` ADD COLUMN `oc_team_comment` tinyint(1) NOT NULL default '0' AFTER `type`");
+		if (!field_exists('cache_logs_archived','oc_team_comment'))
+			sql("ALTER TABLE `cache_logs_archived` ADD COLUMN `oc_team_comment` tinyint(1) NOT NULL default '0' AFTER `type`");
+		// The new fields need not to be initialized, as these are new features and all
+		// values are initally zero.
+	}
+
 ?>

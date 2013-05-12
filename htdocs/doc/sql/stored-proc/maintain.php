@@ -269,6 +269,7 @@
 	       DECLARE nNotFound INT DEFAULT 0;
 	       DECLARE nNote INT DEFAULT 0;
 	       DECLARE nWillAttend INT DEFAULT 0;
+	       DECLARE nMaintenance INT DEFAULT 0;
 	       DECLARE nDate DATE DEFAULT NULL;
 
 	       IF nLogType = 1 THEN SET nFound=1; END IF;
@@ -276,22 +277,24 @@
 	       IF nLogType = 3 THEN SET nNote=1; END IF;
 	       IF nLogType = 7 THEN SET nFound=1; END IF;
 	       IF nLogType = 8 THEN SET nWillAttend=1; END IF;
+	       IF nLogType IN (9,10,11,13,14) THEN SET nMaintenance=1; END IF;
 
 	       IF bLogRemoved = TRUE THEN
 				   SET nFound = -nFound;
 				   SET nNotFound = -nNotFound;
 				   SET nNote = -nNote;
 				   SET nWillAttend = -nWillAttend;
+				   SET nMaintenance = -nMaintenance;
 	       END IF;
 
-	       UPDATE `stat_cache_logs` SET `found`=IF(`found`+nFound>0, `found`+nFound, 0), `notfound`=IF(`notfound`+nNotFound>0, `notfound`+nNotFound, 0), `note`=IF(`note`+nNote>0, `note`+nNote, 0), `will_attend`=IF(`will_attend`+nWillAttend>0, `will_attend`+nWillAttend, 0) WHERE `cache_id`=nCacheId AND `user_id`=nUserId;
+	       UPDATE `stat_cache_logs` SET `found`=IF(`found`+nFound>0, `found`+nFound, 0), `notfound`=IF(`notfound`+nNotFound>0, `notfound`+nNotFound, 0), `note`=IF(`note`+nNote>0, `note`+nNote, 0), `will_attend`=IF(`will_attend`+nWillAttend>0, `will_attend`+nWillAttend, 0), `maintenance`=IF(`maintenance`+nMaintenance>0, `maintenance`+nMaintenance, 0) WHERE `cache_id`=nCacheId AND `user_id`=nUserId;
 	       IF ROW_COUNT() = 0 THEN
-				   INSERT IGNORE INTO `stat_cache_logs` (`cache_id`, `user_id`, `found`, `notfound`, `note`, `will_attend`) VALUES (nCacheId, nUserId, IF(nFound>0, nFound, 0), IF(nNotFound>0, nNotFound, 0), IF(nNote>0, nNote, 0), IF(nWillAttend>0, nWillAttend, 0));
+				   INSERT IGNORE INTO `stat_cache_logs` (`cache_id`, `user_id`, `found`, `notfound`, `note`, `will_attend`, `maintenance`) VALUES (nCacheId, nUserId, IF(nFound>0, nFound, 0), IF(nNotFound>0, nNotFound, 0), IF(nNote>0, nNote, 0), IF(nWillAttend>0, nWillAttend, 0), IF(nMaintenance>0, nMaintenance, 0));
 	       END IF;
 
-	       UPDATE `stat_caches` SET `found`=IF(`found`+nFound>0, `found`+nFound, 0), `notfound`=IF(`notfound`+nNotFound>0, `notfound`+nNotFound, 0), `note`=IF(`note`+nNote>0, `note`+nNote, 0), `will_attend`=IF(`will_attend`+nWillAttend>0, `will_attend`+nWillAttend, 0) WHERE `cache_id`=nCacheId;
+	       UPDATE `stat_caches` SET `found`=IF(`found`+nFound>0, `found`+nFound, 0), `notfound`=IF(`notfound`+nNotFound>0, `notfound`+nNotFound, 0), `note`=IF(`note`+nNote>0, `note`+nNote, 0), `will_attend`=IF(`will_attend`+nWillAttend>0, `will_attend`+nWillAttend, 0), `maintenance`=IF(`maintenance`+nMaintenance>0, `maintenance`+nMaintenance, 0) WHERE `cache_id`=nCacheId;
 	       IF ROW_COUNT() = 0 THEN
-				   INSERT IGNORE INTO `stat_caches` (`cache_id`, `found`, `notfound`, `note`, `will_attend`) VALUES (nCacheId, IF(nFound>0, nFound, 0), IF(nNotFound>0, nNotFound, 0), IF(nNote>0, nNote, 0), IF(nWillAttend>0, nWillAttend, 0));
+				   INSERT IGNORE INTO `stat_caches` (`cache_id`, `found`, `notfound`, `note`, `will_attend`, `maintenance`) VALUES (nCacheId, IF(nFound>0, nFound, 0), IF(nNotFound>0, nNotFound, 0), IF(nNote>0, nNote, 0), IF(nWillAttend>0, nWillAttend, 0), IF(nMaintenance>0, nMaintenance, 0));
 	       END IF;
 
 	       IF nFound!=0 THEN
@@ -299,9 +302,9 @@
            UPDATE `stat_caches` SET `last_found`=nDate WHERE `cache_id`=nCacheId;
 	       END IF;
 
-	       UPDATE `stat_user` SET `found`=IF(`found`+nFound>0, `found`+nFound, 0), `notfound`=IF(`notfound`+nNotFound>0, `notfound`+nNotFound, 0), `note`=IF(`note`+nNote>0, `note`+nNote, 0), `will_attend`=IF(`will_attend`+nWillAttend>0, `will_attend`+nWillAttend, 0) WHERE `user_id`=nUserId;
+	       UPDATE `stat_user` SET `found`=IF(`found`+nFound>0, `found`+nFound, 0), `notfound`=IF(`notfound`+nNotFound>0, `notfound`+nNotFound, 0), `note`=IF(`note`+nNote>0, `note`+nNote, 0), `will_attend`=IF(`will_attend`+nWillAttend>0, `will_attend`+nWillAttend, 0), `maintenance`=IF(`maintenance`+nMaintenance>0, `maintenance`+nMaintenance, 0) WHERE `user_id`=nUserId;
 	       IF ROW_COUNT() = 0 THEN
-				   INSERT IGNORE INTO `stat_user` (`user_id`, `found`, `notfound`, `note`, `will_attend`) VALUES (nUserId, IF(nFound>0, nFound, 0), IF(nNotFound>0, nNotFound, 0), IF(nNote>0, nNote, 0), IF(nWillAttend>0, nWillAttend, 0));
+				   INSERT IGNORE INTO `stat_user` (`user_id`, `found`, `notfound`, `note`, `will_attend`, `maintenance`) VALUES (nUserId, IF(nFound>0, nFound, 0), IF(nNotFound>0, nNotFound, 0), IF(nNote>0, nNote, 0), IF(nWillAttend>0, nWillAttend, 0), IF(nMaintenance>0, nMaintenance, 0));
 	       END IF;
 
 	       CALL sp_refresh_statpic(nUserId);
@@ -317,52 +320,35 @@
 	       INSERT IGNORE INTO `stat_caches` (`cache_id`) SELECT `cache_id` FROM `cache_logs` GROUP BY `cache_id`;
 	       INSERT IGNORE INTO `stat_cache_logs` (`cache_id`, `user_id`) SELECT `cache_id`, `user_id` FROM `cache_logs`;
 
-	       /* stat_user.found */
-	       UPDATE `stat_user`, (SELECT `user_id`, COUNT(*) AS `count` FROM `cache_logs` WHERE `type` IN (1, 7) GROUP BY `user_id`) AS `tblFound` SET `stat_user`.`found`=`tblFound`.`count` WHERE `stat_user`.`user_id`=`tblFound`.`user_id`;
+         /* This implementation is less performant than the previouse code (up to ~ commit 4ed7ee0),
+            but the old did not update any values to zero - these entries were ignored!
+						-- following 2013-05-12 */
+
+	       /* stat_caches */
+	       UPDATE `stat_caches` SET 
+				   `found` = (SELECT COUNT(*) FROM `cache_logs` WHERE `type` IN (1, 7) AND `cache_logs`.`cache_id` = `stat_caches`.`cache_id`),
+					 `last_found` = (SELECT MAX(`date`) FROM `cache_logs` WHERE `type` IN (1, 7) AND `cache_logs`.`cache_id` = `stat_caches`.`cache_id`),
+					 `notfound`= (SELECT COUNT(*) FROM `cache_logs` WHERE `type` IN (2) AND `cache_logs`.`cache_id` = `stat_caches`.`cache_id`),
+					 `note`= (SELECT COUNT(*) FROM `cache_logs` WHERE `type` IN (3) AND `cache_logs`.`cache_id` = `stat_caches`.`cache_id`),
+					 `will_attend`= (SELECT COUNT(*) FROM `cache_logs` WHERE `type` IN (8) AND `cache_logs`.`cache_id` = `stat_caches`.`cache_id`),
+					 `maintenance`= (SELECT COUNT(*) FROM `cache_logs` WHERE `type` IN (9,10,11,13,14) AND `cache_logs`.`cache_id` = `stat_caches`.`cache_id`);
+
+	       /* stat_cache_logs */
+	       UPDATE `stat_cache_logs` SET
+				   `found` = (SELECT COUNT(*) FROM `cache_logs` WHERE `type` IN (1, 7) AND `cache_logs`.`cache_id` = `stat_cache_logs`.`cache_id` AND `cache_logs`.`user_id` = `stat_cache_logs`.`user_id`),
+					 `notfound`= (SELECT COUNT(*) FROM `cache_logs` WHERE `type` IN (2) AND `cache_logs`.`cache_id` = `stat_cache_logs`.`cache_id` AND `cache_logs`.`user_id` = `stat_cache_logs`.`user_id`),
+					 `note`= (SELECT COUNT(*) FROM `cache_logs` WHERE `type` IN (3) AND `cache_logs`.`cache_id` = `stat_cache_logs`.`cache_id` AND `cache_logs`.`user_id` = `stat_cache_logs`.`user_id`),
+					 `will_attend`= (SELECT COUNT(*) FROM `cache_logs` WHERE `type` IN (8) AND `cache_logs`.`cache_id` = `stat_cache_logs`.`cache_id` AND `cache_logs`.`user_id` = `stat_cache_logs`.`user_id`),
+					 `maintenance`= (SELECT COUNT(*) FROM `cache_logs` WHERE `type` IN (9,10,11,13,14) AND `cache_logs`.`cache_id` = `stat_cache_logs`.`cache_id` AND `cache_logs`.`user_id` = `stat_cache_logs`.`user_id`);
 	       SET nModified=nModified+ROW_COUNT();
 
-	       /* stat_cache_logs.notfound */
-	       UPDATE `stat_user`, (SELECT `user_id`, COUNT(*) AS `count` FROM `cache_logs` WHERE `type` IN (2) GROUP BY `user_id`) AS `tblNotFound` SET `stat_user`.`notfound`=`tblNotFound`.`count` WHERE `stat_user`.`user_id`=`tblNotFound`.`user_id`;
-	       SET nModified=nModified+ROW_COUNT();
-
-	       /* stat_cache_logs.note */
-	       UPDATE `stat_user`, (SELECT `user_id`, COUNT(*) AS `count` FROM `cache_logs` WHERE `type` IN (3) GROUP BY `user_id`) AS `tblNote` SET `stat_user`.`note`=`tblNote`.`count` WHERE `stat_user`.`user_id`=`tblNote`.`user_id`;
-	       SET nModified=nModified+ROW_COUNT();
-
-	       /* stat_cache_logs.will_attend */
-	       UPDATE `stat_user`, (SELECT `user_id`, COUNT(*) AS `count` FROM `cache_logs` WHERE `type` IN (8) GROUP BY `user_id`) AS `tblWillAttend` SET `stat_user`.`will_attend`=`tblWillAttend`.`count` WHERE `stat_user`.`user_id`=`tblWillAttend`.`user_id`;
-	       SET nModified=nModified+ROW_COUNT();
-
-	       /* stat_caches.found and stat_caches.last_found */
-	       UPDATE `stat_caches`, (SELECT `cache_id`, COUNT(*) AS `count`, MAX(`date`) AS `last_found` FROM `cache_logs` WHERE `type` IN (1, 7) GROUP BY `cache_id`) AS `tblFound` SET `stat_caches`.`found`=`tblFound`.`count`, `stat_caches`.`last_found`=`tblFound`.`last_found` WHERE `stat_caches`.`cache_id`=`tblFound`.`cache_id`;
-	       SET nModified=nModified+ROW_COUNT();
-
-	       /* stat_caches.notfound */
-	       UPDATE `stat_caches`, (SELECT `cache_id`, COUNT(*) AS `count` FROM `cache_logs` WHERE `type` IN (2) GROUP BY `cache_id`) AS `tblNotFound` SET `stat_caches`.`notfound`=`tblNotFound`.`count` WHERE `stat_caches`.`cache_id`=`tblNotFound`.`cache_id`;
-	       SET nModified=nModified+ROW_COUNT();
-
-	       /* stat_caches.note */
-	       UPDATE `stat_caches`, (SELECT `cache_id`, COUNT(*) AS `count` FROM `cache_logs` WHERE `type` IN (3) GROUP BY `cache_id`) AS `tblNote` SET `stat_caches`.`note`=`tblNote`.`count` WHERE `stat_caches`.`cache_id`=`tblNote`.`cache_id`;
-	       SET nModified=nModified+ROW_COUNT();
-
-	       /* stat_caches.will_attend */
-	       UPDATE `stat_caches`, (SELECT `cache_id`, COUNT(*) AS `count` FROM `cache_logs` WHERE `type` IN (8) GROUP BY `cache_id`) AS `tblWillAttend` SET `stat_caches`.`will_attend`=`tblWillAttend`.`count` WHERE `stat_caches`.`cache_id`=`tblWillAttend`.`cache_id`;
-	       SET nModified=nModified+ROW_COUNT();
-
-	       /* stat_cache_logs.found */
-	       UPDATE `stat_cache_logs`, (SELECT `cache_id`, `user_id`, COUNT(*) AS `count` FROM `cache_logs` WHERE `type` IN (1, 7) GROUP BY `user_id`, `cache_id`) AS `tblFound` SET `stat_cache_logs`.`found`=`tblFound`.`count` WHERE `stat_cache_logs`.`cache_id`=`tblFound`.`cache_id` AND `stat_cache_logs`.`user_id`=`tblFound`.`user_id`;
-	       SET nModified=nModified+ROW_COUNT();
-
-	       /* stat_cache_logs.notfound */
-	       UPDATE `stat_cache_logs`, (SELECT `cache_id`, `user_id`, COUNT(*) AS `count` FROM `cache_logs` WHERE `type` IN (2) GROUP BY `user_id`, `cache_id`) AS `tblNotFound` SET `stat_cache_logs`.`notfound`=`tblNotFound`.`count` WHERE `stat_cache_logs`.`cache_id`=`tblNotFound`.`cache_id` AND `stat_cache_logs`.`user_id`=`tblNotFound`.`user_id`;
-	       SET nModified=nModified+ROW_COUNT();
-
-	       /* stat_cache_logs.note */
-	       UPDATE `stat_cache_logs`, (SELECT `cache_id`, `user_id`, COUNT(*) AS `count` FROM `cache_logs` WHERE `type` IN (3) GROUP BY `user_id`, `cache_id`) AS `tblNote` SET `stat_cache_logs`.`note`=`tblNote`.`count` WHERE `stat_cache_logs`.`cache_id`=`tblNote`.`cache_id` AND `stat_cache_logs`.`user_id`=`tblNote`.`user_id`;
-	       SET nModified=nModified+ROW_COUNT();
-
-	       /* stat_cache_logs.will_attend */
-	       UPDATE `stat_cache_logs`, (SELECT `cache_id`, `user_id`, COUNT(*) AS `count` FROM `cache_logs` WHERE `type` IN (8) GROUP BY `user_id`, `cache_id`) AS `tblWillAttend` SET `stat_cache_logs`.`will_attend`=`tblWillAttend`.`count` WHERE `stat_cache_logs`.`cache_id`=`tblWillAttend`.`cache_id` AND `stat_cache_logs`.`user_id`=`tblWillAttend`.`user_id`;
+	       /* stat_user */
+	       UPDATE `stat_user` SET
+				   `found` = (SELECT COUNT(*) FROM `cache_logs` WHERE `type` IN (1, 7) AND `cache_logs`.`user_id` = `stat_user`.`user_id`),
+					 `notfound`= (SELECT COUNT(*) FROM `cache_logs` WHERE `type` IN (2) AND `cache_logs`.`user_id` = `stat_user`.`user_id`),
+					 `note`= (SELECT COUNT(*) FROM `cache_logs` WHERE `type` IN (3) AND `cache_logs`.`user_id` = `stat_user`.`user_id`),
+					 `will_attend`= (SELECT COUNT(*) FROM `cache_logs` WHERE `type` IN (8) AND `cache_logs`.`user_id` = `stat_user`.`user_id`),
+					 `maintenance`= (SELECT COUNT(*) FROM `cache_logs` WHERE `type` IN (9,10,11,13,14) AND `cache_logs`.`user_id` = `stat_user`.`user_id`);
 	       SET nModified=nModified+ROW_COUNT();
 
 	       CALL sp_refreshall_statpic();
@@ -906,6 +892,7 @@
 							   NEW.`cache_id`!=OLD.`cache_id` OR
 							   NEW.`user_id`!=OLD.`user_id` OR
 							   NEW.`type`!=OLD.`type` OR
+							   NEW.`oc_team_comment`!=OLD.`oc_team_comment` OR
 							   NEW.`date`!=OLD.`date` OR
 							   NEW.`text`!=OLD.`text` OR
 							   NEW.`text_html`!=OLD.`text_html` THEN

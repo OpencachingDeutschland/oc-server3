@@ -39,9 +39,20 @@
 					<img src="resource2/{$opt.template.style}/images/log/16x16-attended.png" width="16" height="16" border="0" alt="" style="margin-top:4px;" /> 
 				{elseif $newLog.type==8}
 					<img src="resource2/{$opt.template.style}/images/log/16x16-will_attend.png" width="16" height="16" border="0" alt="" style="margin-top:4px;" /> 
+				{elseif $newLog.type==9}
+					<img src="resource2/{$opt.template.style}/images/log/16x16-archived.png" width="16" height="16" border="0" alt="" style="margin-top:4px;" /> 
+				{elseif $newLog.type==10}
+					<img src="resource2/{$opt.template.style}/images/log/16x16-active.png" width="16" height="16" border="0" alt="" style="margin-top:4px;" /> 
+				{elseif $newLog.type==11}
+					<img src="resource2/{$opt.template.style}/images/log/16x16-disabled.png" width="16" height="16" border="0" alt="" style="margin-top:4px;" /> 
+				{elseif $newLog.type==13}
+					<img src="resource2/{$opt.template.style}/images/log/16x16-locked.png" width="16" height="16" border="0" alt="" style="margin-top:4px;" /> 
+				{elseif $newLog.type==14}
+					<img src="resource2/{$opt.template.style}/images/log/16x16-locked-invisible.png" width="16" height="16" border="0" alt="" style="margin-top:4px;" /> 
 				{/if}
 			</td>
 			<td>
+				{if $newLog.oc_team_comment}<img src="resource2/{$opt.template.style}/images/oclogo/oc-team-comment.png" alt="OC-Team" title="{t}OC team comment{/t}"/>{/if}
 				{capture name=cachename}
 					<a href="viewcache.php?wp={$newLog.wp_oc}">{$newLog.cachename|escape}</a>
 				{/capture}
@@ -59,6 +70,14 @@
 					{t 1=$smarty.capture.cachename 2=$smarty.capture.username}%2 visited %1{/t}
 				{elseif $newLog.type==8}
 					{t 1=$smarty.capture.cachename 2=$smarty.capture.username}%2 want's to visit %1{/t}
+				{elseif $newLog.type==9}
+					{t 1=$smarty.capture.cachename 2=$smarty.capture.username}%2 has archived %1{/t}
+				{elseif $newLog.type==10}
+					{t 1=$smarty.capture.cachename 2=$smarty.capture.username}%2 has maintainted %1{/t}
+				{elseif $newLog.type==11}
+					{t 1=$smarty.capture.cachename 2=$smarty.capture.username}%2 has disabled %1{/t}
+				{elseif $newLog.type==13 || $newLog.type==14}
+					{t 1=$smarty.capture.cachename 2=$smarty.capture.username}%2 has locked %1{/t}
 				{/if}
 
 				{if $newLog.pics}

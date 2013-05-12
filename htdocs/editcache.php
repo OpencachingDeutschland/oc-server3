@@ -754,7 +754,8 @@ function getWaypoints($cacheid)
 						while ($rStatus = sql_fetch_assoc($rsStatus))
 						{
 							$sSelected = ($rStatus['id'] == $status) ? ' selected="selected"' : '';
-							$statusoptions .= '<option value="' . htmlspecialchars($rStatus['id'], ENT_COMPAT, 'UTF-8') . '"' . $sSelected . '>' . htmlspecialchars($rStatus['name'], ENT_COMPAT, 'UTF-8') . '</option>';
+							if ($sSelected != '' || $status_old == 5)
+								$statusoptions .= '<option value="' . htmlspecialchars($rStatus['id'], ENT_COMPAT, 'UTF-8') . '"' . $sSelected . '>' . htmlspecialchars($rStatus['name'], ENT_COMPAT, 'UTF-8') . '</option>';
 						}
 						sql_free_result($rsStatus);
 					}
@@ -763,6 +764,7 @@ function getWaypoints($cacheid)
 						$statusoptions .= '<option value="7" selected="selected">' . htmlspecialchars(t("Locked, invisible"), ENT_COMPAT, 'UTF-8') . '</option>';
 					}
 					tpl_set_var('statusoptions', $statusoptions);
+					tpl_set_var('statuschange', $status_old == 5 ? '' : mb_ereg_replace('%1',$cache_id,$status_change));
 
 					// show activation form?
 					if($status_old == 5) // status = not yet published

@@ -5,4 +5,4 @@ CREATE TABLE `cache_logtype` (
   `log_type_id` tinyint(3) unsigned NOT NULL,
   PRIMARY KEY  (`cache_type_id`,`log_type_id`),
   KEY `log_type_id` (`log_type_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='obsolete' ;

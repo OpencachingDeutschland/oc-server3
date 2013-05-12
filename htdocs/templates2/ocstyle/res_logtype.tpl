@@ -14,6 +14,16 @@
 	<img src="resource2/{$opt.template.style}/images/log/16x16-attended.png" alt="{t}Attended{/t}" />
 {elseif $type==8}
 	<img src="resource2/{$opt.template.style}/images/log/16x16-will_attend.png" alt="{t}Will attend{/t}" />
+{elseif $type==9}
+	<img src="resource2/{$opt.template.style}/images/log/16x16-archived.png" alt="{t}Archived{/t}" />
+{elseif $type==10}
+	<img src="resource2/{$opt.template.style}/images/log/16x16-active.png" alt="{t}Ready for search{/t}" />
+{elseif $type==11}
+	<img src="resource2/{$opt.template.style}/images/log/16x16-disabled.png" alt="{t}Temporary not available{/t}" />
+{elseif $type==13}
+	<img src="resource2/{$opt.template.style}/images/log/16x16-locked.png" alt="{t}Locked{/t}" />
+{elseif $type==14}
+	<img src="resource2/{$opt.template.style}/images/log/16x16-locked-invisible.png" alt="{t}Locked, invisible{/t}" />
 {else}
 	&nbsp;
 {/if}

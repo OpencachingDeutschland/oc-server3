@@ -128,10 +128,11 @@
 
 						<img src="resource2/{$opt.template.style}/images/log/16x16-found.png" width="16" height="16" border="0"> {$cache.found} {if $cache.type==6}{t}Attended{/t}{else}{t}Found{/t}{/if}<br />
 						<nobr><img src="resource2/{$opt.template.style}/images/log/16x16-dnf.png" width="16" height="16" border="0">{if $cache.type==6} {$cache.willattend} {t}Will attend{/t}{else} {$cache.notfound} {t}Not found{/t}{/if}</nobr><br />
-						<img src="resource2/{$opt.template.style}/images/log/16x16-note.png" width="16" height="16" border="0"> {$cache.note} {t}Notes{/t}<br />
-						<img src="resource2/{$opt.template.style}/images/action/16x16-watch.png" width="16" height="16" border="0"> {$cache.watcher} {t}Watched{/t}<br />
-						<img src="resource2/{$opt.template.style}/images/action/16x16-ignore.png" width="16" height="16" border="0"> {$cache.ignorercount} {t}Ignored{/t}<br />
-						<img src="resource2/{$opt.template.style}/images/description/16x16-visitors.png" width="16" height="16" border="0"> {$cache.visits} {t}Page visits{/t}<br />
+						<img src="resource2/{$opt.template.style}/images/viewcache/16x16-note.png" class="icon16" alt="" /> {$cache.note} {if $cache.note==1}{t}Note{/t}{else}{t}Notes{/t}{/if}<br />
+						{if $cache.maintenance}<img src="resource2/{$opt.template.style}/images/viewcache/16x16-maintenance.png" class="icon16" alt="" /> {$cache.maintenance} {if $cache.maintenance==1}{t}Maintenance log{/t}{else}{t}Maintenance logs{/t}{/if}<br />{/if}
+						<img src="resource2/{$opt.template.style}/images/viewcache/16x16-watch.png" class="icon16" alt="" /> {$cache.watcher} {if $cache.watcher==1}{t}Watcher{/t}{else}{t}Watchers{/t}{/if}<br />
+						<img src="resource2/{$opt.template.style}/images/viewcache/ignore-16.png" class="icon16" alt="" /> {$cache.ignorercount} {if $cache.ignorecount==1}{t}Ignorer{/t}{else}{t}Ignorers{/t}{/if}<br />
+						<img src="resource2/{$opt.template.style}/images/viewcache/16x16-visitors.png" class="icon16" alt="" /> {$cache.visits} {if $cache.visits==1}{t}Page visit{/t}{else}{t}Page visits{/t}{/if}<br />
 						{if $cache.topratings>0}
 							<img src="images/rating-star.gif" border="0"> {$cache.topratings} {t}Recommendations{/t}<br />
 						{/if}

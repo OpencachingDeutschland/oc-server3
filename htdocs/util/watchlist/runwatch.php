@@ -202,7 +202,7 @@ function process_owner_log($user_id, $log_id)
 
 //	echo "process_owner_log($user_id, $log_id)\n";
 	
-	$rsLog = sql("SELECT cache_logs.cache_id cache_id, cache_logs.text text, cache_logs.text_html text_html, cache_logs.date logdate, user.username username, caches.name cachename, caches.wp_oc wp_oc FROM `cache_logs`, `user`, `caches` WHERE (cache_logs.user_id = user.user_id) AND (cache_logs.cache_id = caches.cache_id) AND (cache_logs.id ='&1')", $log_id);
+	$rsLog = sql("SELECT cache_logs.cache_id cache_id, cache_logs.type, cache_logs.text text, cache_logs.text_html text_html, cache_logs.date logdate, user.username username, caches.name cachename, caches.wp_oc wp_oc FROM `cache_logs`, `user`, `caches` WHERE (cache_logs.user_id = user.user_id) AND (cache_logs.cache_id = caches.cache_id) AND (cache_logs.id ='&1')", $log_id);
 	$rLog = sql_fetch_array($rsLog);
 	mysql_free_result($rsLog);
 	
@@ -234,6 +234,7 @@ function process_owner_log($user_id, $log_id)
 	$watchtext = mb_ereg_replace('{text}', $logtext, $watchtext);
 	$watchtext = mb_ereg_replace('{user}', $rLog['username'], $watchtext);
 	$watchtext = mb_ereg_replace('{cachename}', $rLog['cachename'], $watchtext);
+	$watchtext = mb_ereg_replace('{action}', get_log_action($rLog['type']), $watchtext);
 	
 	sql("INSERT IGNORE INTO watches_waiting (`user_id`, `object_id`, `object_type`, `date_created`, `watchtext`, `watchtype`) VALUES (
 																		'&1', '&2', 1, NOW(), '&3', 1)", $user_id, $log_id, $watchtext);
@@ -248,7 +249,7 @@ function process_log_watch($user_id, $log_id)
 
 //	echo "process_log_watch($user_id, $log_id)\n";
 	
-	$rsLog = sql("SELECT cache_logs.cache_id cache_id, cache_logs.text text, cache_logs.text_html text_html, cache_logs.date logdate, user.username username, caches.name cachename, caches.wp_oc wp_oc FROM `cache_logs`, `user`, `caches` WHERE (cache_logs.user_id = user.user_id) AND (cache_logs.cache_id = caches.cache_id) AND (cache_logs.id = '&1')", $log_id);
+	$rsLog = sql("SELECT cache_logs.cache_id cache_id, cache_logs.type, cache_logs.text text, cache_logs.text_html text_html, cache_logs.date logdate, user.username username, caches.name cachename, caches.wp_oc wp_oc FROM `cache_logs`, `user`, `caches` WHERE (cache_logs.user_id = user.user_id) AND (cache_logs.cache_id = caches.cache_id) AND (cache_logs.id = '&1')", $log_id);
 	$rLog = sql_fetch_array($rsLog);
 	mysql_free_result($rsLog);
 	
@@ -280,10 +281,31 @@ function process_log_watch($user_id, $log_id)
 	$watchtext = mb_ereg_replace('{text}', $logtext, $watchtext);
 	$watchtext = mb_ereg_replace('{user}', $rLog['username'], $watchtext);
 	$watchtext = mb_ereg_replace('{cachename}', $rLog['cachename'], $watchtext);
+	$watchtext = mb_ereg_replace('{action}', get_log_action($rLog['type']), $watchtext);
 	
 	sql("INSERT IGNORE INTO watches_waiting (`user_id`, `object_id`, `object_type`, `date_created`, `watchtext`, `watchtype`) VALUES (
 																		'&1', '&2', 1, NOW(), '&3', 2)", $user_id, $log_id, $watchtext);
 }
+
+
+function get_log_action($logtype)
+{
+	switch ($logtype)
+	{
+		case 1: return "gefunden";
+		case 2: return "nicht gefunden";
+		case 3: return "Hinweis";
+		case 7: return "teilgenommen";
+		case 8: return "möchte teilnehmen";
+		case 9: return "archiviert";
+		case 10: return "kann gesucht werden";
+		case 11: return "momentan nicht verfügbar";
+		case 13: return "gesperrt";
+		case 14: return "gesperrt, versteckt";
+		default: return "";
+	}
+}
+
 
 function is_existent_maildomain($domain)
 {
@@ -301,6 +323,7 @@ function is_existent_maildomain($domain)
 
 	return false;
 }
+
 
 function getToMailDomain($mail)
 {

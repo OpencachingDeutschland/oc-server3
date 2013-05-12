@@ -30,6 +30,7 @@
 	$way_length_not_ok_message = '<span class="errormsg">' . t('The distance you have entered is invalid. Format aa.aaa') . '</span>';
 	$sizemismatch_message = '&nbsp;<span class="errormsg">' . t('For virtual and webcam caches, the cache size has to be -no container-!') . '</span>';
 	$status_message = '&nbsp;<span class="errormsg">' . t('The cache-status does not fit to your publishing options') . '</span>';
+	$status_change = '<br /><div style="margin-top:6px"><img src="lang/de/ocstyle/images/misc/hint.gif" border="0" width="15" height="11" >' . t('To change the state, you need to <a href="log.php?cacheid=%1">log</a> the new state.') . '</div>';
 	$diff_not_ok_message = '&nbsp;<span class="errormsg">' . t('Choose both valuations!') . '</span>';
 	$safari_not_allowed_message = '<span class="errormsg">' . t('Only virtual caches can be safari caches.') . '</span>';
 	$nopictures = '<tr><td colspan="2">' . t('No pictures available') . '</td></tr>';

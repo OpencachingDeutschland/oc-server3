@@ -24,9 +24,9 @@
 	$event_log_pw_field = '<tr><td colspan="2">' . t('passwort to log:') . ' <input class="input100" type="text" name="log_pw" maxlength="20" value="" /> (' . t('only for attended-logs') . ')</td></tr><tr><td class="spacer" colspan="2"></td></tr>';
 	$other_log_pw_field = '<tr><td colspan="2">' . t('passwort to log:') . ' <input class="input100" type="text" name="log_pw" maxlength="20" value="" /> ' . t('(only for found-logs)') . '</td></tr><tr><td class="spacer" colspan="2"></td></tr>';
 	$log_pw_field_pw_not_ok = '<tr><td colspan="2">' . t('passwort to log:') . ' <input type="text" name="log_pw" maxlength="20" size="20" value=""/><span class="errormsg"> ' . t('Invalid password!') . '</span></td></tr><tr><td class="spacer" colspan="2"></td></tr>';
+	$teamcomment_field = '&nbsp; <input type="checkbox" name="teamcomment" value="1" class="checkbox" {chk_sel} id="teamcomment" /> <label for="teamcomment">' . t('OC team comment') . '</label>';
 
 	$listed_only_oc = t('only listed here!');
 
 	$smiley_link = '<a href="javascript:insertSmiley(\'{smiley_text}\')">{smiley_image}</a>';
-
 ?>

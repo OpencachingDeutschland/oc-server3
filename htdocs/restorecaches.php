@@ -700,9 +700,9 @@ function restore_listings($cacheids, $rdate, $roptions, $simulate)
 		if (in_array('logs',$roptions))
 		{
 			$rs = sql("SELECT * FROM (
-		               SELECT `id`, -1 AS `node`, `date_modified`, `cache_id`, 0 AS `user_id`, 0 AS `type`, '0' as `date`, '' AS `text`, 0 AS `text_html`, 0 AS `text_htmledit`, `original_id` FROM `cache_logs_restored`
+		               SELECT `id`, -1 AS `node`, `date_modified`, `cache_id`, 0 AS `user_id`, 0 AS `type`, '0' as `oc_team_comment`, '0' as `date`, '' AS `text`, 0 AS `text_html`, 0 AS `text_htmledit`, `original_id` FROM `cache_logs_restored`
 								    WHERE `cache_id`='&1' AND `date_modified` >= '&2'
-								   UNION SELECT `id`, `node`, `deletion_date`, `cache_id`, `user_id`, `type`, `date`, `text`, `text_html`, `text_htmledit`, 0 AS `original_id` FROM `cache_logs_archived`
+								   UNION SELECT `id`, `node`, `deletion_date`, `cache_id`, `user_id`, `type`, `oc_team_comment`, `date`, `text`, `text_html`, `text_htmledit`, 0 AS `original_id` FROM `cache_logs_archived`
 			              WHERE `cache_id`='&1' AND `deletion_date` >= '&2' AND `deleted_by`='&3' AND `user_id` != '&3'
 			             ) `logs`
 								 ORDER BY `date_modified` ASC",
@@ -752,7 +752,8 @@ function restore_listings($cacheids, $rdate, $roptions, $simulate)
 						$log->setNode($r['node']);  // cachelog class currently does not initialize node field
 						$log->setCacheId($r['cache_id']);
 						$log->setUserId($r['user_id']);
-						$log->setType($r['type']);
+						$log->setType($r['type'],true);
+						$log->setOcTeamComment($r['oc_team_comment']);
 						$log->setDate($r['date']);
 						$log->setText($r['text']);
 						$log->setTextHtml($r['text_html']);

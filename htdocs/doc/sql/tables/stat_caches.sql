@@ -6,6 +6,7 @@ CREATE TABLE `stat_caches` (
   `notfound` smallint(5) unsigned NOT NULL,
   `note` smallint(5) unsigned NOT NULL,
   `will_attend` smallint(5) unsigned NOT NULL,
+  `maintenance` smallint(5) unsigned NOT NULL,
   `last_found` date default NULL,
   `watch` smallint(5) unsigned NOT NULL,
   `ignore` smallint(5) unsigned NOT NULL,

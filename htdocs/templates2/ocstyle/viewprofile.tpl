@@ -138,7 +138,7 @@
 
 	<tr>
 		<td valign="middle" class="header-small" style="padding-top:5px;padding-bottom:5px">
-			<img src="resource2/ocstyle/images/logtype/16x16-found.png" />
+			<img src="resource2/ocstyle/images/log/16x16-found.png" />
 			&nbsp;<b>{t}Caches found{/t}:</b>
 		</td>
 		<td class="header-small">
@@ -162,18 +162,27 @@
 
 		<tr>
 			<td valign="middle" class="header-small" style="padding-top:5px;padding-bottom:5px">
-			<img src="resource2/ocstyle/images/logtype/16x16-dnf.png" />&nbsp;&nbsp;&nbsp;<b>{t}Not found{/t}:</b></td>
+			<img src="resource2/ocstyle/images/log/16x16-dnf.png" />&nbsp;&nbsp;&nbsp;<b>{t}Not found{/t}:</b></td>
 			<td class="header-small" >{$notfound}
 				{if $notfound > 0}[<a href="search.php?showresult=1&amp;expert=0&amp;f_inactive=0&amp;output=HTML&amp;sort=byname&amp;finderid={$userid}&amp;searchbyfinder=&amp;logtype=2">{t}Show all{/t}</a>]{/if}
 			</td>
 		</tr>
 		<tr>
 			<td valign="middle" class="header-small" style="padding-bottom:5px">
-			<img src="resource2/ocstyle/images/logtype/16x16-note.png" />&nbsp;&nbsp;&nbsp;<b>{t}Notes{/t}:</b></td>
+			<img src="resource2/ocstyle/images/log/16x16-note.png" />&nbsp;&nbsp;&nbsp;<b>{t}Notes{/t}:</b></td>
 			<td class="header-small" >{$note}
 				{if $note>0}[<a href="search.php?showresult=1&amp;expert=0&amp;f_inactive=0&amp;output=HTML&amp;sort=byname&amp;finderid={$userid}&amp;searchbyfinder=&amp;logtype=3">{t}Show all{/t}</a>]{/if}
 			</td>
 		</tr>
+		{if $maintenance > 0}
+		<tr>
+			<td valign="middle" class="header-small" style="padding-bottom:5px">
+			<img src="resource2/ocstyle/images/viewcache/16x16-maintenance.png" />&nbsp;&nbsp;&nbsp;<b>{t}Maintenance logs{/t}:</b></td>
+			<td class="header-small" >{$maintenance}
+				[<a href="search.php?showresult=1&amp;expert=0&amp;f_inactive=0&amp;output=HTML&amp;sort=byname&amp;finderid={$userid}&amp;searchbyfinder=&amp;logtype=9,10,11,13,14">{t}Show all{/t}</a>]
+			</td>
+		</tr>
+		{/if}
 	{/if}
 
 	<tr>

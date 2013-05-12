@@ -50,6 +50,7 @@
 					<li>"Ready to search" - the cache can be found again.</li>
 					<li>"Archived" - the cache cannot be found and probably won't be
 						repaired.</li>
+					<li>"Locked" - the cache has been archived and can no longer be logged.</li>
 				</ul>
 				
 				<p>Other types (used only by some Opencaching installations):</p>

@@ -10,6 +10,7 @@ CREATE TABLE `cache_logs_archived` (
   `cache_id` int(10) unsigned NOT NULL,
   `user_id` int(10) unsigned NOT NULL,
   `type` tinyint(3) unsigned NOT NULL,
+  `oc_team_comment` tinyint(1) NOT NULL default '0',
   `date` datetime NOT NULL,
   `text` mediumtext NOT NULL,
   `text_html` tinyint(1) NOT NULL,

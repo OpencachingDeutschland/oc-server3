@@ -24,6 +24,7 @@
 
   //prepare the templates and include all neccessary
 	require_once('./lib/common.inc.php');
+	require_once('./lib/logtypes.inc.php');
 	require($stylepath.'/smilies.inc.php');
   require_once($opt['rootpath'] . '../lib/htmlpurifier-4.2.0/library/HTMLPurifier.auto.php');
 
@@ -57,7 +58,8 @@
 														`cache_logs`.`text` AS `text`, 
 														`cache_logs`.`date` AS `date`, 
 														`cache_logs`.`user_id` AS `user_id`, 
-														`cache_logs`.`type` AS `logtype`, 
+														`cache_logs`.`type` AS `logtype`,
+														`cache_logs`.`oc_team_comment` AS `oc_team_comment`,
 														`cache_logs`.`text_html` AS `text_html`, 
 														`cache_logs`.`text_htmledit` AS `text_htmledit`, 
 														`caches`.`name` AS `cachename`, 
@@ -70,6 +72,7 @@
 											$log_id);
 			$log_record = sql_fetch_array($log_rs);
 			sql_free_result($log_rs);
+
 			if ($log_record !== false && 
 					(($log_record['status'] != 6 || ($log_record['cache_user_id'] == $login->userid && $log_record['user_id'] == $login->userid)) &&   
 					 $log_record['status'] != 7) || $useradmin)
@@ -101,6 +104,7 @@
 					$log_time_minute = isset($_POST['logminute']) ? trim($_POST['logminute']) : (substr($log_record['date'],11) == "00:00:00" ? "" : date('i', strtotime($log_record['date'])));
 					$top_option = isset($_POST['ratingoption']) ? $_POST['ratingoption']+0 : 0;
 					$top_cache = isset($_POST['rating']) ? $_POST['rating']+0 : 0;
+					$oc_team_comment = isset($_POST['teamcomment']) ? ($_POST['teamcomment'] != 0) : 0;
 
 					$log_pw = '';
 					$use_log_pw = (($log_record['logpw'] == NULL) || ($log_record['logpw'] == '')) ? false : true;
@@ -202,7 +206,7 @@
 								  $date_ok = false;
 					}
 
-					$logtype_ok = sqlValue("SELECT COUNT(*) FROM cache_logtype WHERE cache_type_id='" . sql_escape($cache_type) . "' AND log_type_id='" . sql_escape($log_type) . "'", 0) > 0; 
+					$logtype_ok = logtype_ok($log_record['cache_id'], $log_type, $log_record['logtype']);
 
 					// not a found log? then ignore the rating
 					if ($log_type != 1 && $log_type != 7)
@@ -216,6 +220,10 @@
 							$pw_ok = false;
 							$all_ok = false;
 						}
+
+					// ignore unauthorized team comments
+					if (!teamcomment_allowed($log_record['cache_id'], $log_type))
+						$oc_team_comment = 0;
 
 					//store?
 					if (isset($_POST['submitform']) && $date_ok && $logtype_ok && $pw_ok)
@@ -232,12 +240,14 @@
 
 						//store changed data
 						sql("UPDATE `cache_logs` SET `type`='&1',
-						                             `date`='&2',
-						                             `text`='&3',
-						                             `text_html`='&4',
-						                             `text_htmledit`='&5'
-						                       WHERE `id`='&6'",
+						                             `oc_team_comment`='&2',
+						                             `date`='&3',
+						                             `text`='&4',
+						                             `text_html`='&5',
+						                             `text_htmledit`='&6'
+						                       WHERE `id`='&7'",
 						                             $log_type,
+						                             $oc_team_comment,
 						                             $log_date,
 						                             (($descMode != 1) ? $log_text : nl2br($log_text)),
 						                             (($descMode != 1) ? 1 : 0),
@@ -270,23 +280,21 @@
 						exit;
 					}
 
-					//build logtypeoptions
+					// build logtype options
+					$logtype_names = get_logtype_names();
+					$allowed_logtypes = get_cache_log_types($log_record['cache_id'], $log_record['logtype']);
 					$logtypeoptions = '';
-					$rsLogTypes = sql("SELECT `log_types`.`id`, IFNULL(`sys_trans_text`.`text`, `log_types`.`name`) AS `name`
-											         FROM `caches` 
-								         INNER JOIN `cache_type` ON `caches`.`type`=`cache_type`.`id` 
-								         INNER JOIN `cache_logtype` ON `cache_type`.`id`=`cache_logtype`.`cache_type_id` 
-								         INNER JOIN `log_types` ON `cache_logtype`.`log_type_id`=`log_types`.`id` 
-									        LEFT JOIN `sys_trans` ON `log_types`.`trans_id`=`sys_trans`.`id` 
-									        LEFT JOIN `sys_trans_text` ON `sys_trans`.`id`=`sys_trans_text`.`trans_id` AND `sys_trans_text`.`lang`='" . sql_escape($locale) . "' 
-											        WHERE `caches`.`cache_id`='" . ($log_record['cache_id']+0) . "'
-											     ORDER BY `log_types`.`id` ASC");
-					while ($rLogTypes = sql_fetch_assoc($rsLogTypes))
+					foreach ($allowed_logtypes as $logtype)
 					{
-						$sSelected = ($rLogTypes['id'] == $log_type) ? ' selected="selected"' : '';
-						$logtypeoptions .= '<option value="' . $rLogTypes['id'] . '"' . $sSelected . '>' . htmlspecialchars($rLogTypes['name'], ENT_COMPAT, 'UTF-8') . '</option>' . "\n";
+						$selected = ($log_record['logtype'] == $logtype ? ' selected="selected"' : '');
+						$logtypeoptions .= '<option value="' . $logtype . '"' . $selected . '>' . htmlspecialchars($logtype_names[$logtype], ENT_COMPAT, 'UTF-8') . '</option>' . "\n";
 					}
-					sql_free_result($rsLogTypes);
+
+					if (teamcomment_allowed($log_record['cache_id'],3))
+						tpl_set_var('teamcommentoption',
+							mb_ereg_replace('{chk_sel}', ($oc_team_comment ? 'checked' : ''), $teamcomment_field));
+					else
+						tpl_set_var('teamcommentoption', '');
 
 					//set template vars
 					tpl_set_var('cachename', htmlspecialchars($cache_name, ENT_COMPAT, 'UTF-8'));

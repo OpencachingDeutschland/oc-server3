@@ -137,7 +137,7 @@ function toggleAttr(id)
 		<td>
 			<select name="status" class="input200">
 				{statusoptions}
-			</select>{status_message}
+			</select>{status_message}{statuschange}
 		</td>
 	</tr>
 	<tr><td class="spacer" colspan="2"></td></tr>

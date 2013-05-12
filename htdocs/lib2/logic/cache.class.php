@@ -313,6 +313,7 @@ class cache
 				`cache_logs`.`date` AS `date`,
 				substr(`cache_logs`.`date`,12) AS `time`,  /* 00:00:01 = 00:00 logged, 00:00:00 = no time */
 				`cache_logs`.`type` AS `type`,
+				`cache_logs`.`oc_team_comment` AS `oc_team_comment`,
 				`cache_logs`.`text` AS `text`,
 				`cache_logs`.`text_html` AS `texthtml`,
 				`cache_logs`.`picture`,

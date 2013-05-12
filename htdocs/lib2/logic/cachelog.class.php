@@ -10,6 +10,7 @@
 
 require_once($opt['rootpath'] . 'lib2/logic/rowEditor.class.php');
 require_once($opt['rootpath'] . 'lib2/logic/cache.class.php');
+require_once($opt['rootpath'] . 'lib/logtypes.inc.php');
 
 class cachelog
 {
@@ -58,6 +59,7 @@ class cachelog
 		$this->reCacheLog->addInt('cache_id', 0, false);
 		$this->reCacheLog->addInt('user_id', 0, false);
 		$this->reCacheLog->addInt('type', 0, false);
+		$this->reCacheLog->addInt('oc_team_comment', 0, false);
 		$this->reCacheLog->addDate('date', time(), false);
 		$this->reCacheLog->addString('text', '', false);
 		$this->reCacheLog->addInt('text_html', 0, false);
@@ -106,13 +108,23 @@ class cachelog
 	{
 		return $this->reCacheLog->getValue('type');
 	}
-	function setType($value)
+	function setType($value,$force=false)
 	{
-		$nValidLogTypes = $this->getValidLogTypes();
-		if (array_search($value, $nValidLogTypes) === false)
-			return false;
-
+		if (!$force)
+		{
+			$nValidLogTypes = $this->getValidLogTypes();
+			if (array_search($value, $nValidLogTypes) === false)
+				return false;
+		}
 		return $this->reCacheLog->setValue('type', $value);
+	}
+	function getOcTeamComment()
+	{
+		return $this->reCacheLog->getValue('oc_team_comment');
+	}
+	function setOcTeamComment($value)
+	{
+		return $this->reCacheLog->setValue('oc_team_comment', $value);
 	}
 	function getDate()
 	{
@@ -223,7 +235,6 @@ class cachelog
 		return false;
 	}
 
-	/* will depend on userid in future e.g. maintainance-logs etc. */
 	function getValidLogTypes()
 	{
 		$cache = new cache($this->getCacheId());
@@ -231,14 +242,7 @@ class cachelog
 			return array();
 		if ($cache->allowLog() == false)
 			return array();
-
-		$nTypes = array();
-		$rs = sql("SELECT `log_type_id` FROM `cache_logtype` WHERE `cache_type_id`='&1'", $cache->getType());
-		while ($r = sql_fetch_assoc($rs))
-			$nTypes[] = $r['log_type_id'];
-		sql_free_result($rs);
-
-		return $nTypes;
+		return get_cache_log_types($this->getCacheId(),$this->getType());  // depends on userid 
 	}
 }
 ?>

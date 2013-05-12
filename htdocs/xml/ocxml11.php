@@ -573,6 +573,7 @@ function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $z
 
 	$rs = sql('SELECT SQL_BUFFER_RESULT `cache_logs`.`id` `id`, `cache_logs`.`cache_id` `cache_id`, `cache_logs`.`user_id` `user_id`, 
 	                                    `cache_logs`.`type` `type`, `cache_logs`.`date` `date`, `cache_logs`.`text` `text`, `cache_logs`.`text_html` `text_html`,
+	                                    `cache_logs`.`oc_team_comment`,
 	                                    `cache_logs`.`date_created` `date_created`, `cache_logs`.`last_modified` `last_modified`, 
 	                                    `cache_logs`.`uuid` `uuid`, `user`.`username` `username`, `caches`.`uuid` `cacheuuid`, 
 	                                    `user`.`uuid` `useruuid`, `cache_logs`.`node` `node`, IF(NOT ISNULL(`cache_rating`.`cache_id`) AND `cache_logs`.`type`=1, 1, 0) AS `recommended`,
@@ -591,12 +592,20 @@ function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $z
 	
 		$r['text'] = mb_ereg_replace('<br />', '', $r['text']);
 		$r['text'] = html_entity_decode($r['text'], ENT_COMPAT, 'UTF-8');
-	
+
+		// locked/invisible should never be returned here - these logs are deleted before
+		// reactivating the cache. Just for the case ... it is safe to return them as 'locked'.
+		if ($r['type'] == 14) $r['type'] = 13;
+
+		if ($ocxmlversion >= 13)
+			$teamcomment = ' teamcomment="' . $r['oc_team_comment'] . '"';
+		else
+			$teamcomment = '';
 		fwrite($f, $t1 . '<cachelog>' . "\n");
 		fwrite($f, $t2 . '<id id="' . $r['id'] . '" node="' . $r['node'] . '">' . $r['uuid'] . '</id>' . "\n");
 		fwrite($f, $t2 . '<cacheid id="' . $r['cache_id'] . '">' . $r['cacheuuid'] . '</cacheid>' . "\n");
 		fwrite($f, $t2 . '<userid id="' . $r['user_id'] . '" uuid="' . $r['useruuid'] . '">' . xmlcdata($r['username']) . '</userid>' . "\n");
-		fwrite($f, $t2 . '<logtype id="' . $r['type'] . '" recommended="' . $r['recommended'] . '">' . xmlcdata($logtypes[$r['type']]) . '</logtype>' . "\n");
+		fwrite($f, $t2 . '<logtype id="' . $r['type'] . '" recommended="' . $r['recommended'] . '"' . $teamcomment . '>' . xmlcdata($logtypes[$r['type']]) . '</logtype>' . "\n");
 		fwrite($f, $t2 . '<date>' . date($ocxmlversion >= 13 ? $sDateformat : $sDateshort, strtotime($r['date'])) . '</date>' . "\n");
 		fwrite($f, $t2 . '<text html="' . $r['text_html'] . '">' . xmlcdata(($bAllowView ? $r['text'] : '')) . '</text>' . "\n");
 		fwrite($f, $t2 . '<datecreated>' . date($sDateformat, strtotime($r['date_created'])) . '</datecreated>' . "\n");

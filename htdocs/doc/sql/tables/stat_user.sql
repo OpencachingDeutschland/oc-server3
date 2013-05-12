@@ -7,5 +7,6 @@ CREATE TABLE `stat_user` (
   `note` smallint(5) unsigned NOT NULL,
   `hidden` smallint(5) unsigned NOT NULL,
   `will_attend` smallint(5) unsigned NOT NULL,
+  `maintenance` smallint(5) unsigned NOT NULL,
   PRIMARY KEY  (`user_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='via trigger (user)' ;

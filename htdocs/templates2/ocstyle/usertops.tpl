@@ -12,7 +12,7 @@
 <table class="table">
 	<tr>
 		<td colspan="2">
-			<table class="null" border="0" cellspacing="0" width="100%">
+			<table class="table" border="0" cellspacing="0" width="100%">
 				<tr class="searchresult">
 					<td width="30px"><b>{t}Type{/t}</b></td>
 					<td width="620px"><b>{t}Name{/t}</b></td>

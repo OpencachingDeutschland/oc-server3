@@ -50,8 +50,8 @@
 	//this in private_db.inc.php, but don't forget the ending /
 	$absolute_server_URI = 'http://www.opencaching.de/';
 	
-	// EMail address of the sender
-	if (!isset($emailaddr)) $emailaddr = 'contact@opencaching.de';
+	// 'From' EMail address for admin error messages and log removals
+	if (!isset($emailaddr)) $emailaddr = 'noreply@opencaching.de';
 	
 	// location of cache images
 	if (!isset($picdir)) $picdir = $rootpath . 'images/uploads';  // Ocprop

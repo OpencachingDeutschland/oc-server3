@@ -103,6 +103,8 @@ class getNew
 									`caches`.`name` `name`,
 									`caches`.`date_created` `date_created`,
 									`caches`.`type`,
+									`caches`.`longitude` `longitude`, 
+									`caches`.`latitude` `latitude`, 
 									IFNULL(`sys_trans_text`.`text`,`cache_location`.`adm1`) AS `adm1`,
 									`cache_location`.`adm2`,
 									`cache_location`.`adm3`,

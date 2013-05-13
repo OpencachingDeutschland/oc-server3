@@ -3,6 +3,8 @@
 *
 *  Unicode Reminder メモ
 ***************************************************************************}
+<div style="overflow: hidden;">
+<div style="float: left; width: 535px">
 <ul class="nodot">
 	{foreach name=newcaches from=$newcaches item=cacheitem}
 		<li class="newcache_list_multi" style="margin-bottom: 8px;">
@@ -21,3 +23,11 @@
 		</li>
 	{/foreach}
 </ul>
+</div>
+<div style="margin-left: 535px; margin-top: 11px; width: 220px; text-align: right">
+<a href="map2.php">
+<img src="http://maps.googleapis.com/maps/api/staticmap?sensor=false&size=220x220&maptype=roadmap&markers=color:blue|size:small{foreach name=newcaches from=$newcaches item=cacheitem}|{$cacheitem.latitude},{$cacheitem.longitude}{/foreach}"><br />
+{t}Large map{/t}
+</a>
+</div>
+</div>

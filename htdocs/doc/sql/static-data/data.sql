@@ -2457,6 +2457,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2014', 'with al
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2015', 'Safari Cache', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2016', 'This geocache can be found at different places. The places to look for are explained in the cache description. They must be located \"away from home\" and exist for a considerable period of time, so that they can be re-visited later. There is no container and no logbook; instead the find must be documented by a photo and noting the coordinates.', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2017', 'Only virtual caches can be safari caches.', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2040', 'Deleted text:', '2013-04-25 23:00:00');
 
 -- Table sys_trans_ref
 SET NAMES 'utf8';
@@ -6244,6 +6245,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2015', 'DE', 'Safari-Cache', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2016', 'DE', 'Dieser Geocache kann an verschiedenen Orten gefunden werden. Die gesuchten Orte sind in der Cachebeschreibung erläutert. Sie müssen sich „außer Haus“ befinden und über längere Zeit Bestand haben, sodass man sie nach einiger Zeit wieder besuchen kann. Es gibt keinen Behälter und kein Logbuch, sondern der Fund ist mit einem Foto und den Koordinaten des Ortes zu dokumentieren.', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2017', 'DE', 'Das Safari-Attribut kann nur bei virtuellen Caches gesetzt werden.', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2040', 'DE', 'Gelöschter Text:', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'EN', 'Reorder IDs \r', '2010-09-02 00:15:30');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'EN', 'The database could not be reconnected.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'EN', 'Testing – please do not login', '2010-08-28 11:48:07');

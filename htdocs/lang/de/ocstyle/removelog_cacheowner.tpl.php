@@ -20,7 +20,6 @@
 <input type="hidden" name="logid" value="{logid}"/>
 <table class="table">
 	<tr><td class="header" colspan="2"><img src="lang/de/ocstyle/images/description/22x22-logs.png" border="0" width="32" height="32" alt="" title="" align="middle"> <b>{t}remove log entry for <a href="viewcache.php?cacheid={cacheid}">{cachename}</a>{/t}</b></td></tr>
-	<tr><td class="spacer"></td></tr>
 
 	<tr><td colspan="2">{t}are you sure that this log entry shall be removed?{/t}</td></tr>
 	<tr><td class="spacer"></td></tr>
@@ -28,22 +27,19 @@
 	<tr>
 		<td>&nbsp;&nbsp;&nbsp;</td>
 		<td>
-			{logimage} {date}{time} &nbsp; {typetext}
+			<div class="textblock">
+				<p>{logimage} {date}{time} &nbsp; {typetext}</p>
+				<p>{logtext}</p>
+			</div>
 		</td>
 	</tr>
-	<tr><td class="spacer"></td></tr>
-	<tr>
-		<td></td>
-		<td>
-			{logtext}
-		</td>
-	</tr>
-	<tr><td class="spacer"></td></tr>
+	<tr><td class="spacer">&nbsp;</td></tr>
 
 	<tr><td class="header-small" colspan="2">{t}do you want to send {log_user_name} a note?{/t}</td></tr>
 	<tr>
-		<td colspan="2">
-		<textarea class="logs" name="logowner_message"></textarea>
+		<td>&nbsp;&nbsp;&nbsp;</td>
+		<td>
+		<textarea class="removelogs" name="logowner_message"></textarea>
 		</td>
 	</tr>
 	<tr><td class="spacer"></td></tr>

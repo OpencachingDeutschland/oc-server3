@@ -5,8 +5,8 @@
  *  Unicode Reminder メモ
  ***************************************************************************/
 
-	require($opt['rootpath'].'lib2/web.inc.php');
-	require($opt['rootpath'].'lib2/logic/logpics.inc.php');
+	require('lib2/web.inc.php');
+	require('lib2/logic/logpics.inc.php');
 	$sUserCountry = $login->getUserCountry();
 
 	// create object for "newest" information
@@ -30,7 +30,8 @@
 	if(strlen($uri) > $uril) {
 		$uri = substr($uri,0,$uril-3).'...';
 	}
-	$tpl->assign('website',$uri);
+	// $tpl->assign('website',$uri);
+	$tpl->assign('website','');
 
 	// get newest blog entries
 	$tpl->assign('blog', $getNew->feedForSmarty('blog',3));

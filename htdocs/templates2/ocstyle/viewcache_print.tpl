@@ -114,12 +114,9 @@
 						{else}
 							<img src="images/flags/{$cache.code1|lower}.gif" style="vertical-align:middle" />&nbsp;
 							<b>{$cache.adm1}</b><br />
-							{if $cache.adm2!=""}
+							{if ($cache.adm2!=null | $cache.adm4!=null)}
 								<font size="1">
-								{$cache.adm2}
-								{if $cache.adm4!=""}
-									&nbsp;=>&nbsp;{$cache.adm4}
-								{/if}
+								{$cache.adm2|escape} {if ($cache.adm2!=null & $cache.adm4!=null)} &gt; {/if} {$cache.adm4|escape}
 								</font>
 								<br />
 							{/if}

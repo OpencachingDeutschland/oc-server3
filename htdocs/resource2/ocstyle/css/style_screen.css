@@ -699,6 +699,7 @@ input.formbutton_active {
 textarea.cachedesc { width:750px; height:500px; }  /* only cacheeditor */
 textarea.hint {	width:750px; height:100px; }  /* only cacheditor */
 textarea.logs {	width:640px; height:300px; }  /* only logeditor */
+textarea.removelogs {	width:620px; height:200px; }  /* log removal */
 
 .show_deleted { text-decoration: line-through; }
 
@@ -1420,6 +1421,17 @@ div#havefound {
 .public-setting {
 	color: #428d1d;
 }
+
+.textblock {
+	border: solid 2px #d6e4f0;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	margin: 3px;
+	padding: 6px 6px 6px 8px;
+	min-width: 600px;
+}
+
 
 /* RSS feeds */
 #blog div.newsblock { margin-left:20px }

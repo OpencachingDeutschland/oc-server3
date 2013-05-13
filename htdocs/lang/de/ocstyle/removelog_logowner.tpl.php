@@ -32,17 +32,13 @@
 	<tr>
 		<td>&nbsp;&nbsp;&nbsp;</td>
 		<td>
-			{logimage} {date}{time} &nbsp; {typetext}
+			<div class="textblock">
+				<p>{logimage} {date}{time} &nbsp; {typetext}</p>
+				<p>{logtext}</p>
+			</div>
 		</td>
 	</tr>
-	<tr><td class="spacer"></td></tr>
-	<tr>
-		<td></td>
-		<td>
-			{logtext}
-		</td>
-	</tr>
-	<tr><td class="spacer"></td></tr>
+	<tr><td class="spacer">&nbsp;</td></tr>
 
 	<tr>
 		<td class="header-small" colspan="2">

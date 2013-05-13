@@ -20,6 +20,7 @@
    //prepare the templates and include all neccessary
 	require_once('./lib/common.inc.php');
 	require_once($stylepath . '/lib/icons.inc.php');
+	require_once($rootpath . 'lib2/html2text.class.php');
 
 	//Preprocessing
 	if ($error == false)
@@ -38,21 +39,24 @@
 			tpl_set_var('username', '');
 			tpl_set_var('target', htmlspecialchars('removelog.php?logid=' . urlencode($log_id), ENT_COMPAT, 'UTF-8'));
 			tpl_set_var('message', $login_required);
+			tpl_set_var('message_start', '');
+			tpl_set_var('message_end', '');
 		}
 		else
 		{
 			$log_rs = sql("SELECT	`cache_logs`.`node` AS `node`, `cache_logs`.`uuid` AS `uuid`, `cache_logs`.`cache_id` AS `cache_id`, `caches`.`user_id` AS `cache_owner_id`,
-						`caches`.`name` AS `cache_name`, `cache_logs`.`text` AS `log_text`, `cache_logs`.`type` AS `log_type`,
+						`caches`.`name` AS `cache_name`, `cache_logs`.`text` AS `log_text`, `cache_logs`.`text_html`, `cache_logs`.`type` AS `log_type`,
 						`cache_logs`.`user_id` AS `log_user_id`, `cache_logs`.`date` AS `log_date`,
 						`log_types`.`icon_small` AS `icon_small`,
 						`user`.`username` as `log_username`,
+						`caches`.`wp_oc`,
 						`cache_status`.`allow_user_view`
 					 FROM `log_types`, `cache_logs`, `caches`, `user`, `cache_status`
 					WHERE `cache_logs`.`id`='&1'
 					  AND `cache_logs`.`user_id`=`user`.`user_id`
 					  AND `caches`.`cache_id`=`cache_logs`.`cache_id`
 					  AND `caches`.`status`=`cache_status`.`id`
-					  AND `log_types`.`id`=`cache_logs`.`type`", $log_id, $locale);
+					  AND `log_types`.`id`=`cache_logs`.`type`", $log_id);
 
 			//log exists?
 			if (mysql_num_rows($log_rs) == 1)
@@ -96,8 +100,18 @@
 							if ($message != '')
 							{
 								//message to logowner
-								$message = $removed_message_titel . "\n" . $message . "\n" . $removed_message_end;
+								$message = $removed_message_title . "\n" . $message . "\n" . $removed_message_end;
 							}
+
+							$logtext = $log_record['log_text'];
+							if ($log_record['text_html'] != 0)
+							{
+								$logtext = html_entity_decode($logtext, ENT_COMPAT, 'UTF-8');
+								$h2t = new html2text($logtext);
+								$h2t->set_base_url($absolute_server_URI);
+								$logtext = $h2t->get_text();
+							}
+							$logtext = $removed_text_title . "\n" . trim($logtext) . "\n" . $removed_text_end;
 
 							//get cache owner name
 							$cache_owner_rs = sql("SELECT `username` FROM `user` WHERE `user_id`='&1'", $log_record['cache_owner_id']);
@@ -109,9 +123,12 @@
 							$log_user_record = sql_fetch_array($log_user_rs);
 							mysql_free_result($log_user_rs);
 
+							// insert log data
 							$email_content = mb_ereg_replace('%log_owner%', $log_user_record['username'], $email_content);
 							$email_content = mb_ereg_replace('%cache_owner%', $cache_owner_record['username'], $email_content);
 							$email_content = mb_ereg_replace('%cache_name%', $log_record['cache_name'], $email_content);
+							$email_content = mb_ereg_replace('%cache_wp%', $log_record['wp_oc'], $email_content);
+							$email_content = mb_ereg_replace('%log_text%', $logtext, $email_content);
 							$email_content = mb_ereg_replace('%comment%', $message, $email_content);
 
 							//send email

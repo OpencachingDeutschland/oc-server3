@@ -125,11 +125,9 @@
 						<img src="images/flags/{$cache.countryCode|lower}.gif" style="vertical-align:middle" />&nbsp; {$cache.country|escape}
 					{else}
 						<img src="images/flags/{$cache.code1|lower}.gif" style="vertical-align:middle" />&nbsp;
-						{$cache.adm1}{if $cache.adm2!=""},
-							{$cache.adm2}{if $cache.adm4!=""}
-								&nbsp;=>&nbsp;{$cache.adm4}
-							{/if}
-						{/if}
+						{$cache.adm1|escape} {if $cache.adm1!=null & $cache.adm2!=null} &gt; {/if}
+						{$cache.adm2|escape} {if ($cache.adm2!=null & $cache.adm4!=null) | ($cache.adm1!=null & $cache.adm4!=null)} &gt; {/if}
+						{$cache.adm4|escape}
 					{/if}
 				</span>
 			</p>

@@ -12,6 +12,7 @@
 <form action="login.php" method="post" enctype="application/x-www-form-urlencoded" style="display: inline;">
 	<input type="hidden" name="target" value="{$target|escape}" />
 	<input type="hidden" name="action" value="login" />
+	<input type="hidden" name="source" value="loginpage" />
 	{if $error!=LOGIN_OK}
 		<div class="content-txtbox-noshade">
 			<p style="line-height: 1.6em;">

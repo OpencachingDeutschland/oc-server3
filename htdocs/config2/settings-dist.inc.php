@@ -147,6 +147,8 @@
 	 */
 	$opt['session']['check_referer'] = true;
 
+	$opt['session']['login_statistics'] = false;
+
 	/* Debug level (combine with OR | )
 	 *  DEBUG_NO              = productive use
 	 *  DEBUG_DEVELOPER       = developer system

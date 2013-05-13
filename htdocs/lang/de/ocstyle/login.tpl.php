@@ -29,6 +29,7 @@
 <form action="login.php" method="post" enctype="application/x-www-form-urlencoded" name="login_form" dir="ltr" style="display: inline;">
 <input type="hidden" name="target" value="{target}" />
 <input type="hidden" name="action" value="login" />
+<input type="hidden" name="source" value="loginpage" />
 <table class="table">
 	<tr><td class="spacer" colspan="2"></td></tr>
 	{message_start}<tr><td colspan="2" class="message">{message}</td></tr><tr><td class="spacer" colspan="2"></td></tr>{message_end}
@@ -44,8 +45,8 @@
 
 	<tr>
 		<td class="header-small" colspan="2">
-			<input type="reset" name="reset" value="{t}Reset{/t}" class="formbuttons" />&nbsp;&nbsp;
-			<input type="submit" name="LogMeIn" value="{t}Login{/t}" class="formbuttons" />
+			<input type="reset" name="reset" value="{t}Reset{/t}" class="formbutton" />&nbsp;&nbsp;
+			<input type="submit" name="LogMeIn" value="{t}Login{/t}" class="formbutton" />
 		</td>
 	</tr>
 

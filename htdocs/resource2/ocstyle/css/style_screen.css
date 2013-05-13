@@ -163,6 +163,8 @@ div#bg2 {display: none;}
 /* 2.3 - Navigation - Level 1 */
 /*----------------------------*/
 .nav1 {
+	width: 970px;
+	margin: auto;
 	height:29px;
 	}
 

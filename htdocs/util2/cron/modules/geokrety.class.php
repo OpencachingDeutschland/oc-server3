@@ -14,11 +14,16 @@ class geokrety
 
 	function run()
 	{
-		$xmlfile = $this->loadXML();
-		if ($xmlfile == false) return;
+		global $opt;
 
-		$this->importXML($xmlfile);
-		$this->removeXML($xmlfile);
+		if ($opt['cron']['geokrety']['run'])
+		{
+			$xmlfile = $this->loadXML();
+			if ($xmlfile == false) return;
+
+			$this->importXML($xmlfile);
+			$this->removeXML($xmlfile);
+		}
 	}
 
 	/* get file from XML interface 

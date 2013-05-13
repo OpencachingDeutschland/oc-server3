@@ -88,6 +88,12 @@
 	$opt['logic']['pictures']['url'] = $opt['page']['absolute_url'] . 'images/uploads';
 	$opt['logic']['pictures']['thumb_url'] = $opt['logic']['pictures']['url'] . '/thumbs';
 
+	/* disable cronjobs which are not needed on devel site
+	 */
+
+	$opt['cron']['sitemaps']['generate'] = false;
+	$opt['cron']['geokrety']['run'] = false;
+
  	/* E-Mail for notification about news (newstopic.php)
  	 */
 	$opt['news']['mail'] = 'root';

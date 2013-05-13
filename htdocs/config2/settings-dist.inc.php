@@ -415,6 +415,11 @@
 	$opt['cron']['sitemaps']['generate'] = true;
 	$opt['cron']['sitemaps']['submit'] = false;
 
+	/* Geokret cronjob
+	 */
+
+	$opt['cron']['geokrety']['run'] = true;
+
 	/* E-Mail settings
 	 *
 	 */

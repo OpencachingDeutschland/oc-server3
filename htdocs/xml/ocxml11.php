@@ -486,7 +486,11 @@ function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $z
 		fwrite($f, $t2 . '<datecreated' . $pd . '>' . date($sDateformat, strtotime($r['date_created'])) . '</datecreated>' . "\n");
 		fwrite($f, $t2 . '<lastmodified>' . date($sDateformat, strtotime($r['last_modified'])) . '</lastmodified>' . "\n");
 
-		$rsAttributes = sql("SELECT `cache_attrib`.`id`, `cache_attrib`.`name` FROM `caches_attributes` INNER JOIN `cache_attrib` ON `caches_attributes`.`attrib_id`=`cache_attrib`.`id` WHERE `caches_attributes`.`cache_id`='&1'", $r['id']);
+		$rsAttributes = sql("SELECT `cache_attrib`.`id`, `cache_attrib`.`name`
+		                       FROM `caches_attributes`
+		                 INNER JOIN `cache_attrib` ON `caches_attributes`.`attrib_id`=`cache_attrib`.`id`
+		                      WHERE `caches_attributes`.`cache_id`='&1'",
+		                    $r['id']);
 		fwrite($f, $t2 . '<attributes>' . "\n");
 		while ($rAttribute = sql_fetch_assoc($rsAttributes))
 		{
@@ -495,10 +499,24 @@ function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $z
 		fwrite($f, $t2 . '</attributes>' . "\n");
 		sql_free_result($rsAttributes);
 
-		// If additional waypoints are added here, last_modified date handling must be changed
-		// to include also max(last_modified) of all waypoints: either set caches.last_modified via
-		// coordinates trigger, or - better - check coordinates.last_modified when constructing
-		// xml session data.
+		if ($ocxmlversion >= 13)
+		{
+			$rsWaypoints = sql("SELECT `coordinates`.`id`, `coordinates`.`subtype` AS `type`,
+			                           `coordinates`.`latitude`, `coordinates`.`longitude`,
+																 `coordinates`.`description`,
+			                           `coordinates_type`.`name` AS `type_name`
+			                      FROM `coordinates`
+			                INNER JOIN `coordinates_type` ON `coordinates_type`.`id`=`coordinates`.`subtype`
+			                     WHERE `cache_id`='&1' AND `type`=1
+			                  ORDER BY `coordinates`.`id` ASC", $r['id']);
+			fwrite($f, $t2 . '<wpts>' . "\n");
+			while ($rWaypoint = sql_fetch_assoc($rsWaypoints))
+			{
+				fwrite($f, $t3 . '<wpt id="' . ($rWaypoint['id']+0) . '" type="' . ($rWaypoint['type']+0) . '" typename="' . xmlentities($rWaypoint['type_name']) . '" longitude="' . sprintf('%01.5f',$rWaypoint['longitude']) . '" latitude="' . sprintf('%01.5f',$rWaypoint['latitude']) . '">' . xmlcdata($rWaypoint['description']) . '</wpt>' . "\n");
+			}
+			fwrite($f, $t2 . '</wpts>' . "\n");
+			sql_free_result($rsAttributes);
+		}
 
 		fwrite($f, $t1 . '</cache>' . "\n");
 	}
@@ -579,7 +597,7 @@ function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $z
 		fwrite($f, $t2 . '<cacheid id="' . $r['cache_id'] . '">' . $r['cacheuuid'] . '</cacheid>' . "\n");
 		fwrite($f, $t2 . '<userid id="' . $r['user_id'] . '" uuid="' . $r['useruuid'] . '">' . xmlcdata($r['username']) . '</userid>' . "\n");
 		fwrite($f, $t2 . '<logtype id="' . $r['type'] . '" recommended="' . $r['recommended'] . '">' . xmlcdata($logtypes[$r['type']]) . '</logtype>' . "\n");
-		fwrite($f, $t2 . '<date>' . date($sDateshort, strtotime($r['date'])) . '</date>' . "\n");
+		fwrite($f, $t2 . '<date>' . date($ocxmlversion >= 13 ? $sDateformat : $sDateshort, strtotime($r['date'])) . '</date>' . "\n");
 		fwrite($f, $t2 . '<text html="' . $r['text_html'] . '">' . xmlcdata(($bAllowView ? $r['text'] : '')) . '</text>' . "\n");
 		fwrite($f, $t2 . '<datecreated>' . date($sDateformat, strtotime($r['date_created'])) . '</datecreated>' . "\n");
 		fwrite($f, $t2 . '<lastmodified>' . date($sDateformat, strtotime($r['last_modified'])) . '</lastmodified>' . "\n");
@@ -600,6 +618,7 @@ function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $z
 	                                    `pictures`.`date_created` `date_created`, `pictures`.`uuid` `uuid`, 
 	                                    `pictures`.`last_modified` `last_modified`, `pictures`.`display` `display`, 
 	                                    `pictures`.`spoiler` `spoiler`, `pictures`.`node` `node`,
+	                                    `pictures`.`mappreview`,
 	                                    IFNULL(`c1`.`cache_id`,`c2`.`cache_id`) AS `cache_id`,
 	                                    IFNULL(`c1`.`country`,`c2`.`country`) AS `language`,  /* hack */
 	                                    IFNULL(`cs1`.`allow_user_view`, `cs2`.`allow_user_view`) AS `auv`,
@@ -624,7 +643,10 @@ function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $z
 		fwrite($f, $t2 . '<url>' . xmlcdata(($bAllowView ? $r['url'] : '')) . '</url>' . "\n");
 		fwrite($f, $t2 . '<title>' . xmlcdata(($bAllowView ? $r['title'] : '')) . '</title>' . "\n");
 		fwrite($f, $t2 . '<object id="' . $r['object_id'] . '" type="' . $r['object_type'] . '" typename="' . xmlentities($objecttypes[$r['object_type']]) . '">' . object_id2uuid($r['object_id'], $r['object_type']) . '</object>' . "\n");
-		fwrite($f, $t2 . '<attributes spoiler="' . $r['spoiler'] . '" display="' . $r['display'] . '" />' . "\n");
+		if ($ocxmlversion >= 13)
+			fwrite($f, $t2 . '<picattr spoiler="' . $r['spoiler'] . '" display="' . $r['display'] . '" preview="' . $r['mappreview'] . '" />' . "\n");
+		else
+			fwrite($f, $t2 . '<attributes spoiler="' . $r['spoiler'] . '" display="' . $r['display'] . '" />' . "\n");
 		fwrite($f, $t2 . '<datecreated>' . date($sDateformat, strtotime($r['date_created'])) . '</datecreated>' . "\n");
 		fwrite($f, $t2 . '<lastmodified>' . date($sDateformat, strtotime($r['last_modified'])) . '</lastmodified>' . "\n");
 

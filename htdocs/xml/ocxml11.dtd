@@ -104,6 +104,9 @@
 >
 <!ELEMENT date (#PCDATA)>
 <!ELEMENT text (#PCDATA)>
+<!ATTLIST text
+	html CDATA #REQUIRED
+>
 
 <!-- picture -->
 <!ELEMENT url (#PCDATA)>

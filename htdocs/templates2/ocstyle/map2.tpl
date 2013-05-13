@@ -1977,7 +1977,7 @@ function get_attrib_filter_params(no)
 	var state = (no ? '2' : '1');
 	var sAttribs = '';
 
-	for (var nCacheAttribId=1; nCacheAttribId<nMaxAttributeId; nCacheAttribId++)
+	for (var nCacheAttribId=1; nCacheAttribId<=nMaxAttributeId; nCacheAttribId++)
 		if (document.getElementById('attribute' + nCacheAttribId))
 			if (document.getElementById('imgattribute' + nCacheAttribId).style.display != 'none')
 				if (document.getElementById('attribute' + nCacheAttribId).value == state)

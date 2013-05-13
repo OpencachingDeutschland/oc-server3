@@ -28,7 +28,11 @@
 		sql_free_result($rs);
 
 		$rs = sql("SELECT DISTINCT `user`.`username` FROM `cache_logs` INNER JOIN `caches` ON `cache_logs`.`cache_id`=`caches`.`cache_id` INNER JOIN `cache_status` ON `caches`.`status`=`cache_status`.`id` INNER JOIN `user` ON `user`.`user_id`=`cache_logs`.`user_id` WHERE `cache_status`.`allow_user_view`=1 AND `cache_logs`.`type`=8 AND `cache_logs`.`cache_id`='&1' ORDER BY `user`.`username`", $cache_id);
-		$tpl->assign_rs('attendants', $rs);
+		$tpl->assign_rs('willattend', $rs);
+		sql_free_result($rs);
+
+		$rs = sql("SELECT DISTINCT `user`.`username` FROM `cache_logs` INNER JOIN `caches` ON `cache_logs`.`cache_id`=`caches`.`cache_id` INNER JOIN `cache_status` ON `caches`.`status`=`cache_status`.`id` INNER JOIN `user` ON `user`.`user_id`=`cache_logs`.`user_id` WHERE `cache_status`.`allow_user_view`=1 AND `cache_logs`.`type`=7 AND `cache_logs`.`cache_id`='&1' ORDER BY `user`.`username`", $cache_id);
+		$tpl->assign_rs('attended', $rs);
 		sql_free_result($rs);
 	}
 

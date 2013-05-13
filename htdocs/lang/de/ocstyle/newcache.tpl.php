@@ -244,7 +244,7 @@ function toggleAttr(id)
 		</td>
 	</tr>
 	<tr>
-		<td colspan="2">{cache_attrib_list}</td>
+		<td colspan="2">{cache_attrib_list}{safari_message}</td>
 	</tr>
 	<tr><td class="spacer" colspan="2">&nbsp;</td></tr>
 	<tr>

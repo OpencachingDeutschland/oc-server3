@@ -31,6 +31,7 @@
 	$sizemismatch_message = '&nbsp;<span class="errormsg">' . t('For virtual and webcam caches, the cache size has to be -no container-!') . '</span>';
 	$status_message = '&nbsp;<span class="errormsg">' . t('The cache-status does not fit to your publishing options') . '</span>';
 	$diff_not_ok_message = '&nbsp;<span class="errormsg">' . t('Choose both valuations!') . '</span>';
+	$safari_not_allowed_message = '<span class="errormsg">' . t('Only virtual caches can be safari caches.') . '</span>';
 	$nopictures = '<tr><td colspan="2">' . t('No pictures available') . '</td></tr>';
 	$pictureline = '<tr><td colspan="2"><a href="{link}">{title}</a> [<a href="picture.php?action=edit&uuid={uuid}">' . t('Edit') . '</a>] [<a href="picture.php?action=delete&uuid={uuid}">' . t('Delete') . '</a>]</td></tr>';
 	  // Ocprop: <a href=\"http://.*?\.opencaching\.de/images/uploads/.*?\">(.*?)<\/a>.*?\[<a href=\"picture\.php\?action=[a-z]*?\&uuid=(.*?)\">

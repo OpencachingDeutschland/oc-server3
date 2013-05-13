@@ -40,6 +40,8 @@
 	define('ATTRIB_UNSELECTED', 2);
 	define('ATTRIB_UNDEF', 3);
 
+	define('ATTRIB_ID_SAFARI', 61);
+
 	define('OBJECT_CACHELOG', 1);
 	define('OBJECT_CACHE', 2);
 	define('OBJECT_CACHEDESC', 3);

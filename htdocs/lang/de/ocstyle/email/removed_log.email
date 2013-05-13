@@ -1,6 +1,6 @@
 Hallo %log_owner%,
 
-%cache_owner% hat deinen Logeintrag für seinen Cache "%cache_name%" gelöscht
+%cache_owner% hat deinen Logeintrag für den Cache "%cache_name%" gelöscht
 (http://opencaching.de/%cache_wp%).
 
 %log_text%

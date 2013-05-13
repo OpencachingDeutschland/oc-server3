@@ -168,4 +168,22 @@
 		// values are initally zero.
 	}
 
+	function dbv_105()  // HTML user profile texts
+	{
+		if (!field_exists('user','desc_htmledit'))
+			sql("ALTER TABLE `user` ADD COLUMN `desc_htmledit` tinyint(1) unsigned NOT NULL DEFAULT '1' AFTER `data_license`");
+		if (!field_exists('user','description'))
+		{
+			sql("ALTER TABLE `user` ADD COLUMN `description` mediumtext NOT NULL AFTER `data_license`");
+			$rs = sql("SELECT `user`.`user_id`,`user_options`.`option_value` FROM `user`,`user_options` WHERE `user_options`.`user_id`=`user`.`user_id` AND `user_options`.`option_id`=3");
+			while ($r = sql_fetch_array($rs))
+			{
+				$text = nl2br(htmlspecialchars($r['option_value'], ENT_COMPAT, 'UTF-8'));
+				sql("UPDATE `user` SET `description`='&2' WHERE `user_id`='&1'", $r['user_id'], $text);
+			}
+			sql_free_result($rs);
+			// we keep the old entries in user_options for the case something went wrong here.
+		}
+	}
+
 ?>

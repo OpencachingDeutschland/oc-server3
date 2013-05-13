@@ -1225,7 +1225,8 @@
 							   NEW.`node`!=OLD.`node` OR 
 							   NEW.`date_created`!=OLD.`date_created` OR 
 							   NEW.`username`!=OLD.`username` OR 
-							   NEW.`pmr_flag`!=OLD.`pmr_flag` THEN
+							   NEW.`pmr_flag`!=OLD.`pmr_flag` OR
+							   NEW.`description`!=OLD.`description` THEN
 							   
 								SET NEW.`last_modified`=NOW();
 							END IF;

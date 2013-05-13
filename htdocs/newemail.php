@@ -11,7 +11,7 @@
 	require('./lib2/web.inc.php');
 	require_once('./lib2/logic/user.class.php');
 	$tpl->name = 'newemail';
-	$tpl->menuitem = MNU_MYPROFILE_DATA_EMAIL;
+	$tpl->menuitem = MNU_MYPROFILE_DATA;
 
 	$login->verify();
 

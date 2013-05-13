@@ -321,11 +321,6 @@
 	 */
 	$opt['logic']['password_hash'] = false;
 
-	/* If the user entered HTML in his description do we
-   * display it as HTML or escape it and make it non-functional?
-	 */
-  $opt['logic']['enableHTMLInUserDescription'] = true;
-
 	/* new lows style
 	 */
 	$opt['logic']['new_logs_per_country'] = true;

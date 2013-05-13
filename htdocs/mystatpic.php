@@ -10,30 +10,34 @@
 	require_once('./lib2/logic/coordinate.class.php');
 	require_once('./lib2/logic/countriesList.class.php');
 
-	$tpl->name = 'myprofile';
-	$tpl->menuitem = MNU_MYPROFILE_DATA;
+	$tpl->name = 'mystatpic';
+	$tpl->menuitem = MNU_MYPROFILE_DATA_STATPIC;
 
 	$login->verify();
 
 	$action = isset($_REQUEST['action']) ? mb_strtolower($_REQUEST['action']) : 'view';
-	if ($action != 'change' &&  $action != 'changeemail' && $action != 'view')
+	if ($action != 'change' &&  $action != 'view')
 		$action = 'view';
+
+	if ($action == 'change')
+		$tpl->menuitem = MNU_MYPROFILE_DATA_EDIT;
 
 	if ($login->userid == 0)
 	{
-		if ($action == 'change' || $action == 'changeemail')
+		if ($action == 'change')
 			$tpl->redirect('login.php?target=' . urlencode('myprofile.php?action=change'));
 		else
 			$tpl->redirect('login.php?target=myprofile.php');
 	}
 
-	if ($action == 'changeemail')
-		$tpl->redirect('newemail.php');
-	else if ($action == 'change')
+	if ($action == 'change')
+	{
 		change();
+	}
 	else
+	{
 		display();
-
+	}
 exit;
 
 function change()

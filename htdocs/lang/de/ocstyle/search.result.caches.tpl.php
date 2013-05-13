@@ -28,10 +28,10 @@
 
 <div class="content2-container bg-blue02" style="margin-top:20px;">
 	<p class="content-title-noshade-size3">
-		<img src="resource2/ocstyle/images/cacheicon/traditional.gif" width="32" height="32" style="align:left;margin-right:10px;" alt="{t}Search{/t}" />&nbsp;
-		<b>{t}Search result{/t}:</b> {t}{results_count} caches matched.{/t}
+		<img src="resource2/ocstyle/images/cacheicon/traditional.gif" width="32" height="32" style="align:left;" alt="{t}Search{/t}" />&nbsp;
+		{t}{results_count} caches matched{/t}
 		<span style="font-weight:normal;float:right;font-size:80%;" >
-			[<a href="query.php?action=save&queryid={queryid}">{t}Save options{/t}</a>]<br />
+			[<a href="query.php?action=save&queryid={queryid}">{t}Save options{/t}</a>]&nbsp;
 			[<a href="search.php?queryid={queryid}&showresult=0">{t}Edit options{/t}</a>]
 		</span>
 	</p>
@@ -44,11 +44,9 @@
 			<td class="header-small" colspan="2">
 				<table width="98.5%">
 					<tr>
-						<td>{pages}</td>
-						<td style="width:80px">
-							<b>{t}Downloads{/t}:</b>
-						</td>
-						<td style="width:120px">
+						<td width="100%">{pages}</td>
+						<td>{t}Download{/t}:</td>
+						<td>
 							<select name="wpdownload-page" class="wpdownload" onChange="location.href=this.options[this.selectedIndex].value"> 
 								<option value="#">{t}Results on this page{/t}</option>
 								<option value="search.php?queryid={queryid}&output=gpx&startat={startat}">GPX</option>
@@ -77,16 +75,17 @@
 		<tr><td class="spacer" colspan="2">&nbsp;</td></tr>
 		<tr>
 			<td colspan="2" style="padding-left: 0px; padding-right: 0px;">
-				<table border="0" cellspacing="0px" cellpadding="0px" class="null">
-					<tr class="searchresult">
-					<td width="18" height="13" bgcolor="#E6E6E6">&nbsp;#&nbsp;</td>
-					<td width="45" height="13" bgcolor="#E6E6E6"><b>{distanceunit}</b></td>
-					<td width="32" height="13" bgcolor="#E6E6E6"><b>{t}Type{/t}</b></td>
-					<td width="46" height="13" bgcolor="#E6E6E6"><b>{t}D/T{/t}</b></td>
-					<td width="448" height="13" bgcolor="#E6E6E6"><b>{t}Name{/t}</b></td>
-					<td width="48" height="13" bgcolor="#E6E6E6"><b>&nbsp;</b></td>
-					<td width="126" height="13" bgcolor="#E6E6E6"><b style="display:{displaylastlogs}">{t}Last logs{/t}</b><b style="display:{displayownlogs}">{t}Own logs{/t}</b></td>
+				<table border="0" cellspacing="0px" cellpadding="0px" class="searchtable">
+					<tr>
+					<th width="18" height="13" >&nbsp;#&nbsp;</th>
+					<th width="45" height="13">{distanceunit}</th>
+					<th width="32" height="13">{t}Type{/t}</th>
+					<th width="46" height="13">{t}D/T{/t}</th>
+					<th width="448" height="13">{t}Name{/t}</th>
+					<th width="48" height="13">&nbsp;</th>
+					<th width="126" height="13"><span style="display:{displaylastlogs}">{t}Last logs{/t}<span style="display:{displayownlogs}">{t}Own logs{/t}</th>
 					</tr>
+					<tr><td></td></tr>
 					<!--a-->{results}<!--z-->
 				</table>
 			</td>
@@ -97,26 +96,25 @@
 		</tr>
 		<tr><td class="spacer" colspan="2">&nbsp;</td></tr>
 	</table>
-	<table class="content">
+	<table class="content" width="100%">
 		<tr>
-			<td><b>{t}Downloads{/t}</b></td>
+			<td><b>{t}Download{/t}:</b></td>
 			<td align="right" style="padding-right:20px;">
-				{t}Results on this page:{/t}
+				<b>{t}Results on this page:{/t}</b>
 				<a href="search.php?queryid={queryid}&output=gpx&startat={startat}" title="{t}GPS Exchange Format .gpx{/t}">GPX</a>
 				<a href="search.php?queryid={queryid}&output=loc&startat={startat}" title="{t}Waypointfile .loc{/t}">LOC</a>
 				<a href="search.php?queryid={queryid}&output=kml&startat={startat}" title="{t}Google Earth .kml{/t}">KML</a>
 				<a href="http://maps.google.de/maps?f=q&hl=de&q=<?php echo urlencode("http://".$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI']."&output=kml"); ?>" title="{t}Show in Google Maps{/t}">{t}(in GM){/t}</a>
 				<a href="search.php?queryid={queryid}&output=ov2&startat={startat}" title="{t}TomTom POI .ov2{/t}">OV2</a>
 				<a href="search.php?queryid={queryid}&output=ovl&startat={startat}" title="{t}TOP50-Overlay .ovl{/t}">OVL</a>
-				<a href="search.php?queryid={queryid}&output=txt&startat={startat}" title="{t}Textfile .txt{/t}">TXT*</a>
+				<a href="search.php?queryid={queryid}&output=txt&startat={startat}" title="{t}Textfile .txt{/t}">TXT</a>
 			</td>
 		</tr>
 		<tr>
 			<td class="help">
-				{t}Download for local application{/t}
 			</td>
 			<td align="right" style="padding-right:20px;">
-				{t}Result {startatp1} to {endat} (as zip):{/t}
+				<b>{t}Result {startatp1} to {endat} (as zip):{/t}</b>
 				<a href="search.php?queryid={queryid}&output=gpx&startat={startat}&count=max&zip=1" title="{t}GPS Exchange Format .gpx{/t}">GPX</a>
 				<a href="search.php?queryid={queryid}&output=loc&startat={startat}&count=max&zip=1" title="{t}Waypointfile .loc{/t}">LOC</a>
 				<a href="search.php?queryid={queryid}&output=kml&startat={startat}&count=max&zip=1" title="{t}Google Earth .kml{/t}">KML</a>
@@ -127,7 +125,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td class="help" colspan="2" align="right">
+			<td class="help" colspan="2" align="right" style="line-height:2em;">
 				{t}With the download you accept the <a href="articles.php?page=impressum#tos">terms of use</a> from opencaching.de.&nbsp;&nbsp;{/t}
 			</td>
 		</tr>

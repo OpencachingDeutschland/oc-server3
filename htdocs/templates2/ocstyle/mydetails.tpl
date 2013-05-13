@@ -3,28 +3,19 @@
  *
  *  Unicode Reminder メモ
  ***************************************************************************}
-{* OCSTYLE - minimale Änderungen *}
-{if $edit==true}
-	<form action="mydetails.php" method="post" style="display:inline;">
-		<input type="hidden" name="action" value="change" />
-{/if}
-
+{* OCSTYLE *}
 <div class="content2-pagetitle">
-	<img src="resource2/{$opt.template.style}/images/profile/32x32-profile.png" border="0" align="middle" width="32" height="32" alt="" />
-	<b>{t}My profile details{/t}</b>
+	<img src="resource2/{$opt.template.style}/images/profile/32x32-profile.png" style="align: left; margin-right: 10px;" width="32" height="32" alt="" />
+	{t}My profile details{/t}
 </div>
+
+<form action="mydetails.php" method="post" style="display:inline;">
+	<input type="hidden" name="action" value="change" />
 
 <table class="table">
 	<tr>
 		<td colspan="3">
-			{t}The following detailed information is stored in your userprofile:{/t}<br />
-			{if $edit==true}
-				<img src="resource2/{$opt.template.style}/images/misc/hint.gif" border="0" width="15" height="11" alt="" align="middle" />
-				<span style="color:#666666; font-size:10px;">
-					{t}Unchecked entries are not visible for other users.<br />
- 						 Entries without checkbox are only needed for internal purposes and will never show up in your public profile.{/t}
- 				</span>
-			{/if}
+			<span class="boldtext">{t}The following additional information is stored in your userprofile:{/t}</span>
 		</td>
 	</tr>
 
@@ -43,24 +34,7 @@
 
 	{foreach from=$useroptions item=useropt}
 		<tr>
-			<td style="vertical-align:top;">{$useropt.name|escape}:</td>
-			<td style="vertical-align:top;">
-				{if $edit==true}
-					{if $useropt.internal_use!=1}
-						<input type="checkbox" name="chk{$useropt.id}" value="1"{if $useropt.option_visible==1} checked="checked"{/if} class="checkbox" />
-					{/if}
-				{else}
-					{if $useropt.internal_use!=1}
-						{if $useropt.option_visible==1}
-							<span style="color:#666666;">{t}visible{/t}</span>
-						{else}
-							<span style="color:#666666;">{t}invisible{/t}</span>
-						{/if}
-					{else}
-						<span style="color:#666666;">{t}internal{/t}</span>
-					{/if}
-				{/if}
-			</td>
+			<td style="vertical-align:top; width:10px"><nobr>{$useropt.name|escape}:</nobr></td>
 			<td>
 				{if $edit==true}
 					{if $useropt.option_input=="text"}
@@ -84,6 +58,23 @@
 					{/if}
 				{/if}
 			</td>
+			<td style="vertical-align:top;">
+				{if $edit==true}
+					{if $useropt.internal_use!=1}
+						<input type="checkbox" name="chk{$useropt.id}" value="1"{if $useropt.option_visible==1} checked="checked"{/if} class="checkbox" /> {t}show{/t}
+					{/if}
+				{else}
+					{if $useropt.internal_use!=1}
+						{if $useropt.option_visible==1}
+							<span style="color:#666666;">{t}visible{/t}</span>
+						{else}
+							<span style="color:#666666;">{t}invisible{/t}</span>
+						{/if}
+					{else}
+						<!-- <span style="color:#666666;">{t}internal{/t}</span> -->
+					{/if}
+				{/if}
+			</td>
 		</tr>
 	{foreachelse}
 		<tr>
@@ -93,17 +84,42 @@
 
 	<tr><td class="spacer" colspan="3"></td></tr>
 
-	{if $edit==true}
-		<tr>
-			<td class="header-small" colspan="3">
+	<tr>
+		<td class="header-small" colspan="3">
+			{if $edit==true}
 				<input type="submit" name="cancel" value="{t}Cancel{/t}" class="formbutton" onclick="submitbutton('cancel')" />&nbsp;&nbsp;
 				<input type="submit" name="save" value="{t}Submit{/t}" class="formbutton" onclick="submitbutton('save')"(/>
-			</td>
-		</tr>
-		<tr><td class="spacer" colspan="3"></td></tr>
-	{/if}
+			{else}
+				<input type="submit" name="change" value="{t}Change{/t}" class="formbutton" onclick="flashbutton('change')" />
+			{/if}
+		</td>
+	</tr>
+	<tr><td class="spacer">&nbsp;</td></tr>
 </table>
 
-{if $edit==true}
+</form>
+
+{if $edit==false}
+	<form action="mydetails.php" method="post" style="display:inline;">
+		<input type="hidden" name="action" value="changetext" />
+
+		<table class="table">
+			<tr>
+				<td colspan="3">
+					<span class="boldtext">{t}The following text is displayed in your <a href="viewprofile.php">public profile</a>:{/t}</span>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					{if $desctext==""}<em>({t}no text entered yet{/t})</em>{else}<div class="textblock wide_textblock">{$desctext} &nbsp;</div>{/if}
+				</td>
+			</tr>
+			<tr><td class="spacer" colspan="3"></td></tr>
+			<tr>
+				<td class="header-small" colspan="3">
+					<input type="submit" name="changetext" value="{t}Change{/t}" class="formbutton" onclick="flashbutton('changetext')" />
+				</td>
+			</tr>
+		</table>
 	</form>
 {/if}

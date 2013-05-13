@@ -683,7 +683,7 @@ SET NAMES 'utf8';
 TRUNCATE TABLE `profile_options`;
 INSERT INTO `profile_options` (`id`, `name`, `trans_id`, `internal_use`, `default_value`, `check_regex`, `option_order`, `option_input`, `optionset`) VALUES ('1', 'MiniMap-Zoom', '748', '1', '11', '^[1-9][0-9]{0,1}$', '0', 'text', '1');
 INSERT INTO `profile_options` (`id`, `name`, `trans_id`, `internal_use`, `default_value`, `check_regex`, `option_order`, `option_input`, `optionset`) VALUES ('2', 'Hometown', '747', '0', '', '^.*$', '10', 'text', '1');
-INSERT INTO `profile_options` (`id`, `name`, `trans_id`, `internal_use`, `default_value`, `check_regex`, `option_order`, `option_input`, `optionset`) VALUES ('3', 'Free text', '746', '0', '', NULL, '100', 'textarea', '1');
+INSERT INTO `profile_options` (`id`, `name`, `trans_id`, `internal_use`, `default_value`, `check_regex`, `option_order`, `option_input`, `optionset`) VALUES ('3', 'Free text', '746', '0', '', NULL, '100', 'textarea', '3');
 INSERT INTO `profile_options` (`id`, `name`, `trans_id`, `internal_use`, `default_value`, `check_regex`, `option_order`, `option_input`, `optionset`) VALUES ('4', 'Age', '745', '0', '', '^[[0-9]+$', '80', 'text', '1');
 INSERT INTO `profile_options` (`id`, `name`, `trans_id`, `internal_use`, `default_value`, `check_regex`, `option_order`, `option_input`, `optionset`) VALUES ('5', 'Show statistics', '744', '1', '1', '^[0-1]$', '50', 'checkbox', '1');
 INSERT INTO `profile_options` (`id`, `name`, `trans_id`, `internal_use`, `default_value`, `check_regex`, `option_order`, `option_input`, `optionset`) VALUES ('6', 'Menu option \'Map\' shows', '1867', '1', '1', '^[0-1]$', '110', 'select:0=small map,1', '2');
@@ -853,10 +853,8 @@ INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustrin
 INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('40', 'MNU_MYPROFILE_IGNORES', 'Ignored caches', '487', 'Ignored caches', '487', '0', 'myignores.php', '1', '9', '6', '', '1', NULL);
 INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('41', 'MNU_MYPROFILE_RECOMMENDATIONS', 'Recommendations', '55', 'Recommendations', '55', '0', 'mytop5.php', '1', '9', '7', '', '1', NULL);
 INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('42', 'MNU_MYPROFILE_WATCHES_EDIT', 'Settings', '488', 'Settings', '488', '0', 'mywatches.php?action=edit', '1', '39', '1', '', '1', NULL);
-INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('43', 'MNU_MYPROFILE_DATA_EDIT', 'Edit profile', '489', 'Edit profile', '489', '0', 'myprofile.php?action=change', '1', '37', '1', '', '1', NULL);
-INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('44', 'MNU_MYPROFILE_DATA_EMAIL', 'E-Mail Address', '493', 'E-Mail Address', '493', '0', 'newemail.php', '1', '37', '2', '', '1', NULL);
-INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('45', 'MNU_MYPROFILE_DATA_PASSWORD', 'Change password', '491', 'Change password', '491', '0', 'newpw.php', '1', '37', '3', '', '1', NULL);
-INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('46', 'MNU_MYPROFILE_DATA_STATPIC', 'Change statpic', '492', 'Change statpic', '492', '0', 'change_statpic.php', '1', '37', '4', '', '1', NULL);
+INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('45', 'MNU_MYPROFILE_DATA_PASSWORD', 'Change password', '491', 'Change password', '491', '0', 'newpw.php', '1', '37', '5', '', '1', NULL);
+INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('46', 'MNU_MYPROFILE_DATA_STATPIC', 'Statistic picture', '556', 'Statistic picture', '556', '0', 'mystatpic.php', '1', '37', '3', '', '1', NULL);
 INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('47', 'MNU_CACHES_VIEWLOGS', 'Show logentries', '555', 'Show logentries', '555', '0', 'viewlogs.php', '0', '10', '6', '', '0', NULL);
 INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('48', 'MNU_LOGIN_NEWPW', 'Change password', '491', 'Change password', '491', '0', 'newpw.php', '0', '32', '1', '', '1', NULL);
 INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('49', 'MNU_LOGIN_REMINDEMAIL', 'Remind E-Mail', '659', 'Remind E-Mail', '659', '0', 'remindemail.php', '0', '32', '3', '', '1', NULL);
@@ -869,8 +867,7 @@ INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustrin
 INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('56', 'MNU_CACHES_PICTURE', 'Edit picture', '741', 'Edit picture', '741', '0', 'picture.php', '0', '10', '7', '', '0', NULL);
 INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('58', 'MNU_ADMIN_REPORTS', 'Reported caches', '750', 'Reported caches', '750', '1', 'adminreports.php', '1', '12', '3', '', '0', NULL);
 INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('59', 'MNU_CACHES_REPORT', 'Report cache', '772', 'Report cache', '772', '0', 'reportcache.php', '0', '10', '8', '', '0', NULL);
-INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('60', 'MNU_MYPROFILE_DETAILS', 'My details', '799', 'My details', '799', '0', 'mydetails.php', '1', '37', '1', '', '1', NULL);
-INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('61', 'MNU_MYPROFILE_DETAILS_EDIT', 'Edit details', '800', 'Edit details', '800', '0', 'mydetails.php?action=change', '1', '37', '1', '', '1', NULL);
+INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('60', 'MNU_MYPROFILE_DETAILS', 'Details', '799', 'Details', '799', '0', 'mydetails.php', '1', '37', '1', '', '1', NULL);
 INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('62', 'MNU_CACHES_USERDETAILS', 'User details', '801', 'User details', '801', '0', 'viewuserdetails.php', '0', '10', '4', '', '0', NULL);
 INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('63', 'MNU_MYPROFILE_ADOPT', 'Adoptions', '827', 'Adoptions', '827', '0', 'adoptcache.php', '1', '9', '8', '', '1', NULL);
 INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('64', 'MNU_CACHES_ADOPT', 'Adoptions', '827', 'Adoptions', '827', '0', 'adoptcache.php', '0', '10', '9', '', '0', NULL);
@@ -1117,7 +1114,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('241', 'Name', '
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('242', 'Swaziland', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('243', 'Syrian Arab Republic', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('244', 'Recommendations of <a href=\"viewprofile.php?userid=%1\">%2</a>', '2010-08-28 11:48:03');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('245', '<a href=\"viewcache.php?cacheid=%1\">%2</a> by %3', '2010-08-28 11:48:03');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('245', 'by %1', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('246', '%1 has not recommended any geocache.', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('248', 'Show recommendations', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('249', 'El Salvador', '2010-08-28 11:48:03');
@@ -1423,7 +1420,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('552', 'Cancel',
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('553', 'Save', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('554', 'The following settings are stored for your logo:', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('555', 'Show logentries', '2010-08-28 11:48:04');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('556', 'Statistic picture:', '2010-08-28 11:48:04');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('556', 'Statistic picture', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('558', 'Don\'t use an HTML editor by default.', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('559', 'Don\'t log me out after 15 minutes inaktivity.', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('560', 'I\'m taking an PMR walkie talkie on channel 2 with me.', '2010-08-28 11:48:04');
@@ -1509,7 +1506,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('640', 'Remove r
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('641', 'You haven\'t recommended a Geocache.', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('642', 'Ignored Geocaches', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('643', 'remove', '2010-08-28 11:48:04');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('644', 'No ignored Geocaches found.', '2010-08-28 11:48:04');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('644', 'You do not ignore any geocaches now.', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('645', 'Watched Geocaches - Settings', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('646', 'Delivery:', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('647', 'Immediate', '2010-08-28 11:48:04');
@@ -1659,11 +1656,11 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('795', 'Do not s
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('796', 'No information on user details found.', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('797', 'Coordinates', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('798', 'Geokrets', '2010-08-28 11:48:04');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('799', 'My details', '2010-08-28 11:48:04');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('799', 'Details', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('800', 'Edit details', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('801', 'User details', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('802', 'My profile details', '2010-08-28 11:48:04');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('803', 'The following detailed information is stored in your userprofile:', '2010-08-28 11:48:04');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('803', 'The following additional information is stored in your userprofile:', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('804', 'Unchecked entries are not visible for other users.<br /> Entries without checkbox are only needed for internal purposes and will never show up in your public profile.', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('805', 'Error while saving.', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('806', 'Illegal characters found in', '2010-08-28 11:48:04');
@@ -1934,7 +1931,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1440', 'The dis
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1441', 'The cache-status does not fit to your publishing options', '2010-09-07 20:19:06');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1442', 'Choose both valuations!', '2010-09-07 20:19:06');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1443', 'No pictures available', '2010-09-07 20:19:06');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1444', '{results_count} caches matched.', '2010-09-07 20:19:07');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1444', '{results_count} caches matched', '2010-09-07 20:19:07');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1445', 'Result {startatp1} to {endat} (as zip):', '2010-09-07 20:19:07');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1446', 'this description was created on another Opencaching-webserver and can only be deleted there.', '2010-09-07 20:19:07');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1447', 'the cache description has been deleted', '2010-09-07 20:19:07');
@@ -2400,7 +2397,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1965', 'cache d
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1966', 'as of', '2013-02-23 19:00:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1967', 'all log entries \&copy; their authors', '2013-02-23 19:00:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1968', 'more', '2013-02-23 19:00:04');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1969', 'Only the <span class=\"public-setting\">green entries</span> are visible to other users.', '2013-02-23 19:00:04');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1969', 'Only the <span class=\"public-setting\">green entries</span> are visible in your <a href=\"viewprofile.php\">public profile</a>.', '2013-02-23 19:00:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1970', 'Date / time:', '2013-02-23 19:00:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1971', 'date or time is invalid', '2013-02-23 19:00:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1973', 'Generally, spoiler pictures should not be logged. In the case that en exception from this rule makes sense, e.g. to document your finding or problems with the stash, please mark the picture als spoiler so that it won\'t appear in galleries.', '2013-02-23 19:00:04');
@@ -2465,11 +2462,14 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2038', '%1 has 
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2039', '%1 has locked and hidden the cache', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2040', 'Deleted text:', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2041', 'total', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2042', 'The following text is displayed in your <a href=\"viewprofile.php\">public profile</a>:', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2043', 'no text entered yet', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2045', 'The current filter settings have been permamently saved.', '2013-05-14 19:00:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2046', 'Watcher', '2013-05-14 13:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2047', 'Ignorer', '2013-05-14 13:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2048', 'Maintenance log', '2013-05-14 13:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2049', 'Page visit', '2013-05-14 13:48:04');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2050', 'JavaScript is disabled in your browser, you can enter (HTML) text only. To use the editor, please enable JavaScript.', '2013-05-14 13:48:04');
 
 -- Table sys_trans_ref
 SET NAMES 'utf8';
@@ -4929,7 +4929,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('242', 'DE', 'Swasiland', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('243', 'DE', 'Syrien', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('244', 'DE', 'Empfehlungen von <a href=\"viewprofile.php?userid=%1\">%2</a>', '2010-08-28 11:48:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('245', 'DE', '<a href=\"viewcache.php?cacheid=%1\">%2</a> von %3', '2010-08-28 11:48:06');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('245', 'DE', 'von %1', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('246', 'DE', '%1 hat noch keinen Geocache empfohlen.', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('248', 'DE', 'Empfehlungen anzeigen', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('249', 'DE', 'El Salvador', '2010-08-28 11:48:06');
@@ -5235,7 +5235,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('553', 'DE', 'Speichern', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('554', 'DE', 'Folgende Einstellungen sind für dein Statistikbild gespeichert:', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('555', 'DE', 'Logeinträge anzeigen', '2010-08-28 11:48:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('556', 'DE', 'Statistikbild:', '2010-08-28 11:48:06');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('556', 'DE', 'Statistikbild', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('558', 'DE', 'Als Vorgabe kein HTML-Editor verwenden.', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('559', 'DE', 'Der automatische Logout 15 Minuten nach Verlassen der Webseite ist deaktiviert.', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('560', 'DE', 'Ich nehme ein PMR-Funkgerät auf Kanal 2 mit zum Cachen', '2010-08-28 11:48:06');
@@ -5266,7 +5266,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('585', 'DE', 'Für diesen Cache wurden noch keine Bilder hochgeladen.', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('586', 'DE', 'Vorschaubild einfügen', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('587', 'DE', 'Profildaten', '2010-08-28 11:48:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('588', 'DE', 'Folgende Daten sind in meinem Benutzerprofil gespeichert:', '2010-08-28 11:48:06');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('588', 'DE', 'Folgende Daten sind in deinem Benutzerprofil gespeichert:', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('590', 'DE', 'Benutzername:', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('591', 'DE', 'Das Land ist nicht gültig.', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('592', 'DE', 'Der eingegebene Radius ist nicht gültig.', '2010-08-28 11:48:06');
@@ -5304,7 +5304,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('624', 'DE', 'Es wurde noch keine neue E-Mail-Adresse hinterlegt. Fordere zuerst einen Sicherheitscode an.', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('625', 'DE', 'Die E-Mail-Adresse wurde geändert.', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('626', 'DE', 'Download', '2010-08-28 11:48:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('627', 'DE', 'Es sind keine gespeicherten Suchen vorhanden', '2010-08-28 11:48:06');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('627', 'DE', 'Es sind keine gespeicherten Suchen vorhanden.', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('628', 'DE', 'Mit dem Download werden die <a href=\"articles.php?page=impressum#tos\">Nutzungsbedingungen</a> von Opencaching.de akzeptiert.', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('629', 'DE', 'Suche speichern', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('630', 'DE', 'Suchoptionen als neue Suche abspeichern', '2010-08-28 11:48:06');
@@ -5321,13 +5321,13 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('641', 'DE', 'Du hast noch keine Geocaches empfohlen.', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('642', 'DE', 'Ignorierte Geocaches', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('643', 'DE', 'entfernen', '2010-08-28 11:48:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('644', 'DE', 'Keine ignorierten Caches gefunden', '2010-08-28 11:48:06');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('644', 'DE', 'Du ignorierst zurzeit keine Geocaches.', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('645', 'DE', 'Beobachtete Caches - Einstellungen', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('646', 'DE', 'Versandart:', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('647', 'DE', 'sofort', '2012-07-24 21:30:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('648', 'DE', 'täglich', '2012-07-24 21:30:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('649', 'DE', 'wöchentlich', '2012-07-24 21:30:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('650', 'DE', 'versenden um:', '2012-07-24 21:30:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('650', 'DE', 'Versenden um:', '2012-07-24 21:30:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('651', 'DE', 'Uhr', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('652', 'DE', 'Versenden am:', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('653', 'DE', 'Versandstunde und -tag werden nur bei täglichem/wöchentlichem Versand berücksichtigt.', '2010-08-28 11:48:06');
@@ -5471,11 +5471,11 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('796', 'DE', 'Es wurden keine Benutzerdetails eingegeben.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('797', 'DE', 'Koordinaten', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('798', 'DE', 'Geokrets', '2010-08-28 11:48:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('799', 'DE', 'Meine Details', '2010-08-28 11:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('799', 'DE', 'Details', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('800', 'DE', 'Details bearbeiten', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('801', 'DE', 'Benutzerdetails', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('802', 'DE', 'Meine Details', '2010-08-28 11:48:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('803', 'DE', 'Die folgenden Informationen sind in deinem Benutzerprofil gespeichert:', '2010-08-28 11:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('803', 'DE', 'Folgende weitere Informationen sind in deinem Benutzerprofil gespeichert:', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('804', 'DE', 'Markierte Einträge werden anderen Benutzern angezeigt.<br />\r\nEinträge, die nicht markiert werden können, werden nur für interne Zwecke verwendet und anderen Benutzern nicht angezeigt.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('805', 'DE', 'Fehler beim Speichern.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('806', 'DE', 'Ungültige Zeichen gefunden', '2010-08-28 11:48:07');
@@ -5746,7 +5746,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1441', 'DE', 'Der Cachestatus paßt nicht zu den Veröffentlichungsoptionen.', '2010-09-10 23:34:16');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1442', 'DE', 'Wähle beide Bewertungsangaben aus!', '2010-09-10 23:33:56');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1443', 'DE', 'Keine Bilder vorhanden', '2010-09-10 23:32:13');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1444', 'DE', '{results_count} Caches gefunden.', '2010-09-10 23:33:47');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1444', 'DE', '{results_count} Caches gefunden', '2010-09-10 23:33:47');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1445', 'DE', 'Einträge {startatp1} bis {endat} (als zip):', '2010-09-10 23:33:33');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1446', 'DE', 'Diese Beschreibung wurde auf einem anderen Opencaching-Webserver erstellt und kann nur auf diesem gelöscht werden.', '2010-09-10 23:31:28');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1447', 'DE', 'Die Cache Beschreibung wurde gel\&ouml;scht.', '2010-09-10 23:31:10');
@@ -6210,7 +6210,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1966', 'DE', 'Stand:', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1967', 'DE', 'alle Logeinträge \&copy; jeweiliger Autor', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1968', 'DE', 'mehr', '2013-02-19 05:48:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1969', 'DE', 'Nur die <span class=\"public-setting\">grünen Einträge</span> sind für andere Benutzer sichtbar.', '2013-02-19 05:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1969', 'DE', 'Nur die <span class=\"public-setting\">grünen Einträge</span> sind in deinem <a href=\"viewprofile.php\">öffentlichen Profil</a> sichtbar.', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1970', 'DE', 'Datum / Uhrzeit:', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1971', 'DE', 'Datum oder Uhrzeit ist ungültig', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1973', 'DE', 'Es sollten möglichst keine Spoilerbilder geloggt werden. In Ausnahmefällen, wo es sinnvoll erscheint \&ndash; z.B. um den Fund nachzuweisen oder Probleme mit dem Versteck zu dokumentieren \&ndash; kennzeichne sie bitte als Spoiler, damit sie nicht in Bildgalerien erscheinen.', '2013-02-19 05:48:07');
@@ -6275,11 +6275,14 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2039', 'DE', '%1 hat den Cache gesperrt und versteckt', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2040', 'DE', 'Gelöschter Text:', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2041', 'DE', 'insgesamt', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2042', 'DE', 'Der folgende Text wird in deinem <a href=\"viewprofile.php\">öffentlichen Profil</a> angezeigt:', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2043', 'DE', 'noch kein Text eingegeben', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2045', 'DE', 'Die aktuellen Filtereinstellungen wurden dauerhaft gespeichert.', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2046', 'DE', 'Beobachter', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2047', 'DE', 'Ignorierer', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2048', 'DE', 'Wartungslog', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2049', 'DE', 'Aufruf', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2050', 'DE', 'JavaScript ist bei deinem Browser deaktiviert, du kannst nur (HTML-)Text eingeben. Um den Editor zu verwenden, aktiviere bitte JavaScript.', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'EN', 'Reorder IDs \r', '2010-09-02 00:15:30');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'EN', 'The database could not be reconnected.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'EN', 'Testing – please do not login', '2010-08-28 11:48:07');
@@ -6502,7 +6505,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('242', 'EN', 'Swaziland', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('243', 'EN', 'Syrian Arab Republic', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('244', 'EN', 'Recommendations of <a href=\"viewprofile.php?userid=%1\">%2</a>', '2010-08-28 11:48:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('245', 'EN', '<a href=\"viewcache.php?cacheid=%1\">%2</a> by %3', '2010-08-28 11:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('245', 'EN', 'by %1', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('246', 'EN', '%1 has not recommended any geocache.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('248', 'EN', 'Show recommendations', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('249', 'EN', 'El Salvador', '2010-08-28 11:48:07');
@@ -6808,7 +6811,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('553', 'EN', 'Save', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('554', 'EN', 'The following settings are stored for your logo:', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('555', 'EN', 'Show log entries', '2010-08-28 11:48:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('556', 'EN', 'Statistics picture:', '2010-08-28 11:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('556', 'EN', 'Statistics picture', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('558', 'EN', 'Don\'t use the HTML editor by default.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('559', 'EN', 'Don\'t log me out after 15 minutes of inactivity.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('560', 'EN', 'I\'m taking a PMR walkie talkie on channel 2 with me.', '2010-08-28 11:48:07');
@@ -6894,7 +6897,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('641', 'EN', 'You haven\'t recommended a geocache. ', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('642', 'EN', 'Ignored geocaches', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('643', 'EN', 'remove', '2010-08-28 11:48:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('644', 'EN', 'No ignored geocaches found.', '2010-08-28 11:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('644', 'EN', 'You do not ignore any geocaches now.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('645', 'EN', 'Watched geocaches - settings', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('646', 'EN', 'Delivery:', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('647', 'EN', 'Immediate', '2010-08-28 11:48:07');
@@ -7044,11 +7047,11 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('796', 'EN', 'No information on user details found.', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('797', 'EN', 'Coordinates', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('798', 'EN', 'Geokrets', '2010-08-28 11:48:08');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('799', 'EN', 'My details', '2010-08-28 11:48:08');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('799', 'EN', 'Details', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('800', 'EN', 'Edit details', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('801', 'EN', 'User details', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('802', 'EN', 'My profile details', '2010-08-28 11:48:08');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('803', 'EN', 'The following detailed information is stored in your user profile:', '2010-08-28 11:48:08');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('803', 'EN', 'The following additional information is stored in your user profile:', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('804', 'EN', 'Unchecked entries are not visible to other users.<br /> Entries without checkbox are only used for internal purposes and will never show up in your public profile.', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('805', 'EN', 'Error while saving.', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('806', 'EN', 'Illegal characters found in', '2010-08-28 11:48:08');
@@ -7319,7 +7322,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1441', 'EN', 'The cache-status does not fit to your publishing options', '2010-09-10 23:34:23');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1442', 'EN', 'Choose both valuations!', '2010-09-10 23:33:56');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1443', 'EN', 'No pictures available', '2010-09-10 23:32:19');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1444', 'EN', '{results_count} caches matched.', '2010-09-10 23:33:47');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1444', 'EN', '{results_count} caches matched', '2010-09-10 23:33:47');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1445', 'EN', 'Result {startatp1} to {endat} (as zip):', '2010-09-10 23:33:37');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1446', 'EN', 'This description was created on another Opencaching-webserver and can only be deleted there.', '2010-09-10 23:31:36');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1447', 'EN', 'The cache description has been deleted', '2010-09-10 23:31:16');
@@ -8030,7 +8033,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('242', 'ES', 'Swasiland', '2010-12-09 00:17:57');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('243', 'ES', 'Siria, República Arabe de', '2010-12-09 00:17:57');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('244', 'ES', 'Recomendación de <a href=\"viewprofile.php?userid=%1\">%2</a>', '2010-12-09 00:17:57');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('245', 'ES', '<a href=\"viewcache.php?cacheid=%1\">%2</a> por %3', '2010-12-09 00:17:57');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('245', 'ES', 'por 1', '2010-12-09 00:17:57');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('246', 'ES', '%1 no ha recomendado ningún geocache', '2010-12-09 00:17:57');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('248', 'ES', 'Mostrar recomendaciones', '2010-12-09 00:17:57');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('249', 'ES', 'El Salvador', '2010-12-09 00:17:57');
@@ -8336,7 +8339,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('553', 'ES', 'Guardar', '2010-12-09 00:17:57');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('554', 'ES', 'Las siguientes configuraciones se almacenan para su logo:', '2010-12-09 00:17:57');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('555', 'ES', 'Mostrar log de entrada', '2010-12-09 00:17:57');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('556', 'ES', 'Statistics imagen:', '2010-12-09 00:17:57');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('556', 'ES', 'Statistics imagen', '2010-12-09 00:17:57');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('558', 'ES', 'No utilice el editor HTML de forma predeterminada.', '2010-12-09 00:17:57');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('559', 'ES', 'No me registro después de 15 minutos de inactividad.', '2010-12-09 00:17:57');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('560', 'ES', 'Llevaré un  walkie talkie PMR en el canal 2 conmigo.', '2010-12-09 00:17:57');
@@ -8572,7 +8575,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('796', 'ES', 'No se encontró información en los detalles del usuario.', '2010-12-09 00:17:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('797', 'ES', 'Coordenadas', '2010-12-09 00:17:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('798', 'ES', 'GeoKrets', '2010-12-09 00:17:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('799', 'ES', 'Mis datos', '2010-12-09 00:17:59');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('799', 'ES', 'Datos', '2010-12-09 00:17:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('800', 'ES', 'Editar datos', '2010-12-09 00:17:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('801', 'ES', 'Datos del usuario', '2010-12-09 00:17:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('802', 'ES', 'Los datos de mi perfil', '2010-12-09 00:17:59');
@@ -8846,7 +8849,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1441', 'ES', 'El estado del cache no se corresponde a las opciones para su publicación.', '2010-12-09 00:18:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1442', 'ES', '¡Seleccione la revisión de los datos de ambos!', '2010-12-09 00:18:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1443', 'ES', 'No hay fotos disponibles', '2010-12-09 00:18:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1444', 'ES', ' {results_count} caches encontrados.', '2010-12-09 00:18:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1444', 'ES', ' {results_count} caches encontrados', '2010-12-09 00:18:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1445', 'ES', 'Resultado {startatp1} a {endat} (como zip):', '2010-12-09 00:18:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1446', 'ES', 'su descripción fue creado en otro Opencaching-servidor web y sólo puede ser eliminado allí.', '2010-12-09 00:18:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1447', 'ES', 'La descripción del caché ha sido eliminada.', '2010-12-09 00:18:00');
@@ -9583,7 +9586,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('242', 'IT', 'Swaziland', '2010-08-30 09:48:36');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('243', 'IT', 'Siria, Repubblica Araba di', '2010-08-30 09:49:01');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('244', 'IT', 'Raccomandazioni di <a href=\"viewprofile.php?userid=%1\">%2</a>', '2010-08-30 09:49:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('245', 'IT', '<a href=\"viewcache.php?cacheid=%1\">%2</a> di %3', '2010-08-30 09:49:50');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('245', 'IT', 'di %1', '2010-08-30 09:49:50');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('246', 'IT', '%1 non ha raccomandato nessuna geocache.', '2010-08-30 09:50:12');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('248', 'IT', 'Visualizza raccomandazioni', '2010-08-30 09:50:24');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('249', 'IT', 'El Salvador', '2010-08-30 09:50:52');
@@ -9889,7 +9892,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('553', 'IT', 'Salva', '2010-08-31 20:06:23');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('554', 'IT', 'Le seguenti impostazioni sono state salvate per il tuo logo:', '2010-10-27 18:49:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('555', 'IT', 'Visualizza i log', '2010-08-31 20:06:23');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('556', 'IT', 'Statistiche:', '2010-09-10 23:15:35');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('556', 'IT', 'Statistiche', '2010-09-10 23:15:35');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('558', 'IT', 'Non usare l\'editor HTML di default.', '2010-08-31 20:06:23');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('559', 'IT', 'Non disconnettermi dopo 15 minuti di inattività.', '2010-09-01 23:49:02');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('560', 'IT', 'Ho con me una radio PMR sul canale 2.', '2010-08-31 20:06:23');
@@ -10125,7 +10128,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('796', 'IT', 'Nessuna informazione trovata nei dettagli dell\'utente.', '2010-08-31 20:06:24');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('797', 'IT', 'Coordinate', '2010-09-01 23:49:32');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('798', 'IT', 'Geokrets', '2010-08-31 20:06:24');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('799', 'IT', 'Miei dettagli', '2010-09-01 23:49:32');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('799', 'IT', 'Dettagli', '2010-09-01 23:49:32');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('800', 'IT', 'Modifica dettagli', '2010-08-31 20:06:24');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('801', 'IT', 'Dettagli utente', '2010-09-01 23:49:32');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('802', 'IT', 'Dettagli mio profilo', '2010-08-31 20:06:24');
@@ -10400,7 +10403,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1441', 'IT', 'Lo stato della cache non corrisponde alle opzioni di pubblicazione.', '2010-09-10 23:34:16');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1442', 'IT', 'Seleziona la revisione dei dati di entrambi!', '2010-09-10 23:33:56');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1443', 'IT', 'Nessuna foto disponibile', '2010-09-10 23:32:13');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1444', 'IT', '{results_count} cache trovate.', '2010-09-10 23:33:47');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1444', 'IT', '{results_count} cache trovate', '2010-09-10 23:33:47');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1445', 'IT', 'Risultati {startatp1} a {endat} (come zip):', '2010-09-10 23:33:33');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1446', 'IT', 'Questa descrizione è stata creata su un server Web Opencaching diverso e può essere cancellata solo su quello.', '2010-10-27 18:49:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1447', 'IT', 'La descrizione della cache è stata eliminata.', '2010-09-10 23:31:10');
@@ -11072,7 +11075,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('242', 'NL', 'Swaziland', '2011-02-04 19:50:02');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('243', 'NL', 'Syrië', '2011-02-04 19:50:02');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('244', 'NL', 'Aanbevelingen van <a href=\"viewprofile.php?userid=%1\">%2</a>', '2011-02-04 19:50:02');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('245', 'NL', '<a href=\"viewcache.php?cacheid=%1\">%2</a> van %3', '2011-02-04 19:50:02');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('245', 'NL', 'van %1', '2011-02-04 19:50:02');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('246', 'NL', '%1 heeft nog geen cache aanbevolen.', '2011-02-04 19:50:02');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('248', 'NL', 'Aanbevelingen tonen', '2011-02-04 19:50:02');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('249', 'NL', 'El Salvador', '2011-02-04 19:50:02');
@@ -11377,7 +11380,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('553', 'NL', 'Opslaan', '2011-02-04 19:50:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('554', 'NL', 'De volgende instellingen voor uw statistiekenweergave zijn opgeslagen:', '2011-02-04 19:50:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('555', 'NL', 'Laat logs zien', '2011-02-04 19:50:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('556', 'NL', 'Statistieklogo:', '2011-02-04 19:50:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('556', 'NL', 'Statistieklogo', '2011-02-04 19:50:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('558', 'NL', 'Als standaard geen HTML gebruiken.', '2011-02-04 19:50:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('559', 'NL', 'Het automatisch uitloggen na 15 minuten na het verlaten van de website is uitgeschakeld.', '2011-02-04 19:50:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('560', 'NL', 'Ik neem een PMR zender mee op kanaal 2 met het cachen.', '2011-02-04 19:50:07');

@@ -75,34 +75,24 @@
 
 	{foreach from=$useroptions item=optionItem}
 		<tr>
-				{if $optionItem.option_id==3}
-					</tr>
-					<td><td class="spacer"> </td></tr></table>
-					<div class="content2-container bg-blue02">
-						<p class="content-title-noshade-size2">
-							<img src="resource2/{$opt.template.style}/images/description/22x22-description.png" style="align: left; margin-right: 10px;" width="22" height="22" />
-							{t}Description{/t}
-						</p>
-					</div>
-					<div class="table-like-font" style="margin-left:6px">
-						{if $siteSettings.logic.enableHTMLInUserDescription == true}
-							{$optionItem.option_value}
-						{else}
-							{$optionItem.option_value|escape|nl2br}
-						{/if}
-					</div>
-					<table class="table">
-						<tr><td><td class="spacer"></td></tr>
-						<tr>
-				{else}
-					<td style="vertical-align:top;"><b>{$optionItem.name|escape}:</b></td>
-					<td style="vertical-align:top;">{$optionItem.option_value|escape|nl2br}</td>
-				{/if}
+			{if $optionItem.option_id != 3}
+				<td style="vertical-align:top;"><b>{$optionItem.name|escape}:</b></td>
+				<td style="vertical-align:top;">{$optionItem.option_value|escape|nl2br}</td>
+			{/if}
 		</tr>
 	{/foreach}
 
-	<tr><td class="spacer" colspan="2"></td></tr>
+	<tr><td><td class="spacer"> </td></tr>
 </table>
+
+{if $description != ""}
+	<div class="content2-container bg-blue02" >
+	</div>
+	<div class="table-like-font" style="margin-left:6px">
+		{$description}
+	</div>
+	<div>&nbsp;</div>
+{/if}
 
 <div class="content2-container bg-blue02">
 	<p class="content-title-noshade-size2">

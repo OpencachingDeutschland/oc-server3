@@ -72,6 +72,9 @@
 	$tpl->assign_rs('useroptions', $rs);
 	sql_free_result($rs);
 
+	$tpl->assign('description',
+		sql_value("SELECT `description` FROM `user` WHERE `user_id`='&1'", "", $userid));
+
 	$rs = sql("SELECT COUNT(*) AS `anzahl`, `t`.`id`, IFNULL(`tt`.`text`, `t`.`name`) AS `cachetype`
 		           FROM `caches` AS `c`
 		      LEFT JOIN `cache_type` AS `t` ON `t`.`id`=`c`.`type`

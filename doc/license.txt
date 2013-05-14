@@ -178,3 +178,9 @@ List of third party components:
 			            http://www.softicons.com/free-icons/web-icons/fatcow-hosting-additional-icons-by-fatcow/gps-handheld-icon
 			  License : Creative Commons BY 3.0
 			  Author  : FatCow
+
+		28. checkmark icon
+				Path    : htdocs/resource2/ocstyle/images/misc/
+				URI     : http://www.softicons.com/free-icons/web-icons/bremen-icons-by-pc.de/check-icon
+				License : Creative Commons BY 3.0
+				Author  : PC.DE

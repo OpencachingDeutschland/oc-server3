@@ -50,7 +50,7 @@
 	</table>
 {else}
 	<div id="blog">
-{if !$rsserror}
+{if $news|@count}
 		{include file="res_rssparser.tpl" rss=$news}
 {else}
 		<p><em>{t}currently not available{/t}</em></p>
@@ -104,7 +104,7 @@
         </div>
 *}
 <div id="forum">
-{if !$rsserror}
+{if $forum|@count}
 	{include file="res_rssparser.tpl" rss=$forum}
 {else}
 	<p><em>{t}currently not available{/t}</em></p>

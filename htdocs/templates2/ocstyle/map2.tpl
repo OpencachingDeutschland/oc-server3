@@ -197,7 +197,7 @@ function eval_filtercookies(aValues)
 		}
 		else if (fs[0] == 'hide')
 		{
-			document.getElementById('f_userowner').checked = fs[1].indexOf('0') >= 0;
+			document.getElementById('f_userowner').checked = fs[1].indexOf('O') >= 0;
 			document.getElementById('f_userfound').checked = fs[1].indexOf('F') >= 0;
 			document.getElementById('f_ignored').checked   = fs[1].indexOf('I') >= 0;
 			document.getElementById('f_inactive').checked  = fs[1].indexOf('D') >= 0;

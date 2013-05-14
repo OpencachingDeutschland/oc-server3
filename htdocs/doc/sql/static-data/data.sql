@@ -2465,6 +2465,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2038', '%1 has 
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2039', '%1 has locked and hidden the cache', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2040', 'Deleted text:', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2041', 'total', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2045', 'The current filter settings have been permamently saved.', '2013-05-14 19:00:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2046', 'Watcher', '2013-05-14 13:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2047', 'Ignorer', '2013-05-14 13:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2048', 'Maintenance log', '2013-05-14 13:48:04');
@@ -6274,6 +6275,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2039', 'DE', '%1 hat den Cache gesperrt und versteckt', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2040', 'DE', 'Gelöschter Text:', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2041', 'DE', 'insgesamt', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2045', 'DE', 'Die aktuellen Filtereinstellungen wurden dauerhaft gespeichert.', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2046', 'DE', 'Beobachter', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2047', 'DE', 'Ignorierer', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2048', 'DE', 'Wartungslog', '2013-04-25 23:00:00');

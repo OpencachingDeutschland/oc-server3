@@ -5318,7 +5318,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('637', 'DE', '-- noch keine Suchoptionen vorhanden --', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('638', 'DE', 'Meine Empfehlungen', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('639', 'DE', 'Deine Empfehlung für \"<a href=\"viewcache.php?wp=%1\">%2</a>\" wurde zurückgezogen.', '2010-08-28 11:48:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('640', 'DE', 'Bewertung zurückziehen', '2010-08-28 11:48:06');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('640', 'DE', 'Empfehlung zurückziehen', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('641', 'DE', 'Du hast noch keine Geocaches empfohlen.', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('642', 'DE', 'Ignorierte Geocaches', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('643', 'DE', 'entfernen', '2010-08-28 11:48:06');

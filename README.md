@@ -54,10 +54,11 @@ on master:
 
 Related Websites
 ----------------
-* [Opencaching.de Team Blog](http://blog.opencaching.de/) (German)
+* [Opencaching.de development todo list](http://redmine.opencaching.de/projects/oc-dev)
+* [Opencaching.de Git tutorial](http://wiki.opencaching.de/index.php/Entwicklung/Git) (German)
 * [Opencaching.de Wiki](http://wiki.opencaching.de/index.php/Hauptseite) (German) -> [Development](http://wiki.opencaching.de/index.php/Entwicklung)
+* [Opencaching.de Team Blog](http://blog.opencaching.de/) (German)
 * [Opencaching Network Forum](http://forum.opencaching-network.org/) (German and English) -> [Development](http://forum.opencaching-network.org/index.php?board=43.0)
 * [Opencaching API project](http://code.google.com/p/opencaching-api/)
 * [Opencaching.pl project](http://code.google.com/p/opencaching-pl/)
 * [Git explained](http://gitref.org/index.html)
-* [Detailed Opencaching.de Git tutorial](http://wiki.opencaching.de/index.php/Entwicklung/Git) (German)

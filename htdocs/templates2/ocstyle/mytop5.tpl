@@ -22,17 +22,19 @@
 		<td colspan="2">
 			<table class="table">
 				<tr class="searchresult">
-					<th width="50px">{t}Type{/t}</td>
-					<th width="50px">{t}State{/t}</td>
-					<th width="500px" colspan="2">{t}Name{/t}</td>
+					<th width="50px">{t}Type{/t}</th>
+					<th width="50px">{t}State{/t}</th>
+					<th width="340px">{t}Name{/t}</th>
+					<th width="105px" colspan="2">{t}Recommended on{/t}</th>
 				</tr>
 				{foreach from=$ratings item=ratingItem}
 					{cycle assign=listcolor values="listcolor1,listcolor2"}
 					<tr>
-						<td class="{$listcolor}">{include file="res_cacheicon_22.tpl" cachetype=$ratingItem.type|escape}</th>
-						<td class="{$listcolor}">{include file="res_cachestatus.tpl" status=$ratingItem.status}</th>
-						<td class="{$listcolor}"><span style="{include file="res_cachestatus_span.tpl" status=$ratingItem.status}"><a href="viewcache.php?wp={$ratingItem.wp}">{$ratingItem.cachename|escape}</a></span></th>
-						<td class="{$listcolor}">[<a href="javascript:if(confirm('{t escape=js}Do you really want to remove this recommendation?{/t}'))location.href='mytop5.php?action=delete&amp;cacheid={$ratingItem.cacheid}'">{t}Remove recommendation{/t}</a>]</th>
+						<td class="{$listcolor}">{include file="res_cacheicon_22.tpl" cachetype=$ratingItem.type|escape}</td>
+						<td class="{$listcolor}">{include file="res_cachestatus.tpl" status=$ratingItem.status}</td>
+						<td class="{$listcolor}"><span style="{include file="res_cachestatus_span.tpl" status=$ratingItem.status}"><a href="viewcache.php?wp={$ratingItem.wp}">{$ratingItem.cachename|escape}</a></span></td>
+						<td class="{$listcolor}">{$ratingItem.rating_date|date_format:$opt.format.date}</td>
+						<td class="{$listcolor}">[<a href="javascript:if(confirm('{t escape=js}Do you really want to remove this recommendation?{/t}'))location.href='mytop5.php?action=delete&amp;cacheid={$ratingItem.cacheid}'">{t}Remove recommendation{/t}</a>]</td>
 					</tr>
 				{foreachelse}
 					<tr><td colspan="3"><br />{t}You haven't recommended a Geocache.{/t}</td></tr>

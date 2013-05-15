@@ -2470,6 +2470,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2047', 'Ignorer
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2048', 'Maintenance log', '2013-05-14 13:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2049', 'Page visit', '2013-05-14 13:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2050', 'JavaScript is disabled in your browser, you can enter (HTML) text only. To use the editor, please enable JavaScript.', '2013-05-14 13:48:04');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2051', 'Recommended on', '2013-05-14 13:48:04');
 
 -- Table sys_trans_ref
 SET NAMES 'utf8';
@@ -5334,7 +5335,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('654', 'DE', 'Fehler beim Speichern!', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('655', 'DE', 'Die Einstellungen wurden erfolgreich gespeichert.', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('656', 'DE', 'Beobachtete Geocaches', '2010-08-28 11:48:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('657', 'DE', 'Zuletzt gefunden', '2010-08-28 11:48:06');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('657', 'DE', 'zuletzt gefunden', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('658', 'DE', 'Keine beobachteten Geocaches gefunden.', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('659', 'DE', 'E-Mail-Addresse erinnern', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('660', 'DE', 'E-Mail Erinnerung', '2010-08-28 11:48:06');
@@ -6283,6 +6284,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2048', 'DE', 'Wartungslog', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2049', 'DE', 'Aufruf', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2050', 'DE', 'JavaScript ist bei deinem Browser deaktiviert, du kannst nur (HTML-)Text eingeben. Um den Editor zu verwenden, aktiviere bitte JavaScript.', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2051', 'DE', 'empfohlen am', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'EN', 'Reorder IDs \r', '2010-09-02 00:15:30');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'EN', 'The database could not be reconnected.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'EN', 'Testing – please do not login', '2010-08-28 11:48:07');
@@ -7826,6 +7828,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2048', 'EN', 'Maintenance log', '2013-05-12 22:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2049', 'EN', 'Page visit', '2013-05-12 22:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2050', 'EN', 'JavaScript is disabled in your browser, you can enter (HTML) text only. To use the editor, please enable JavaScript.', '2013-05-12 22:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2051', 'EN', 'Recommended on', '2013-05-12 22:00:00');
 
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'ES', 'Reordenar ID', '2010-12-09 00:17:55');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'ES', 'La base de datos no se pudo conectar.', '2010-12-09 00:17:55');

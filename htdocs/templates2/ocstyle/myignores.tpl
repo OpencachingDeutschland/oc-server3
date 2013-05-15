@@ -17,7 +17,7 @@
 				<tr class="searchresult">
 					<th width="50px">{t}Type{/t}</td>
 					<th width="50px">{t}State{/t}</td>
-					<th width="500px" colspan="2">{t}Name{/t}</td>
+					<th width="630px" colspan="2">{t}Name{/t}</td>
 				</tr>
 				{foreach from=$ignores item=ignoreItem}
 					{cycle values="listcolor1,listcolor2" assign=listcolor}

@@ -39,7 +39,7 @@
 			}
 	}
 
-	$rs = sql("SELECT `cache_rating`.`cache_id` AS `cacheid`, `caches`.`wp_oc` AS `wp`, `caches`.`name` AS `cachename`, `caches`.`type` AS `type`, `caches`.`status` AS `status`
+	$rs = sql("SELECT `cache_rating`.`cache_id` AS `cacheid`, `cache_rating`.`rating_date`, `caches`.`wp_oc` AS `wp`, `caches`.`name` AS `cachename`, `caches`.`type` AS `type`, `caches`.`status` AS `status`
 	             FROM `cache_rating`, `caches`
 	            WHERE `cache_rating`.`cache_id`=`caches`.`cache_id`
 	              AND `cache_rating`.`user_id`='&1'

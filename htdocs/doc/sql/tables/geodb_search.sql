@@ -10,4 +10,4 @@ CREATE TABLE `geodb_search` (
   KEY `sort` (`sort`),
   KEY `simple` (`simple`),
   KEY `simplehash` (`simplehash`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='static content' ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='static content, not in use' ;

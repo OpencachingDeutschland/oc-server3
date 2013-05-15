@@ -36,7 +36,7 @@ CREATE TABLE `user` (
   `admin` tinyint(3) unsigned NOT NULL default '0',
   `data_license` tinyint(1) NOT NULL default '0',
   `description` mediumtext NOT NULL,
-  `desc_htmledit` tinyint(1) unsigned NUT NULL default '1',
+  `desc_htmledit` tinyint(1) unsigned NOT NULL default '1',
   PRIMARY KEY  (`user_id`),
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `uuid` (`uuid`),

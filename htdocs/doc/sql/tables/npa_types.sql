@@ -7,4 +7,4 @@ CREATE TABLE `npa_types` (
   `no_warning` tinyint(1) NOT NULL,
   PRIMARY KEY  (`id`),
   KEY `ordinal` (`ordinal`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='static content' ;

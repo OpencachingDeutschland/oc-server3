@@ -114,6 +114,40 @@ INSERT INTO `cache_attrib` (`id`, `name`, `icon`, `trans_id`, `group_id`, `selec
 INSERT INTO `cache_attrib` (`id`, `name`, `icon`, `trans_id`, `group_id`, `selectable`, `category`, `search_default`, `default`, `icon_large`, `icon_no`, `icon_undef`, `html_desc`, `html_desc_trans_id`, `hidden`, `gc_id`, `gc_inc`, `gc_name`) VALUES ('60', 'Only available during specified seasons', 'calendar', '1799', '7', '1', '0', '0', '0', 'resource2/ocstyle/images/attributes/calendar.png', 'resource2/ocstyle/images/attributes/calendar-no.png', 'resource2/ocstyle/images/attributes/calendar-disabled.png', 'This cache can be done at certain seasons only - see the cache description for more details. For example, the cache may be placed in a corn labyrinth, which only exists from bloom to harvest season.', '1800', '0', '62', '1', 'Seasonal access');
 INSERT INTO `cache_attrib` (`id`, `name`, `icon`, `trans_id`, `group_id`, `selectable`, `category`, `search_default`, `default`, `icon_large`, `icon_no`, `icon_undef`, `html_desc`, `html_desc_trans_id`, `hidden`, `gc_id`, `gc_inc`, `gc_name`) VALUES ('61', 'Safari Cache', 'safari', '2015', '4', '1', '0', '1', '0', 'resource2/ocstyle/images/attributes/safari.png', 'resource2/ocstyle/images/attributes/safari-no.png', 'resource2/ocstyle/images/attributes/safari-disabled.png', 'This geocache can be found at different places. The places to look for are explained in the cache description. They must be located \"away from home\" and exist for a considerable period of time, so that they can be re-visited later. There is no container and no logbook; instead the find must be documented by a photo and noting the coordinates.', '2016', '0', '161', '1', 'Safari Cache');
 
+-- Table cache_logtype
+SET NAMES 'utf8';
+TRUNCATE TABLE `cache_logtype`;
+INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('1', '1');
+INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('1', '2');
+INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('1', '3');
+INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('2', '1');
+INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('2', '2');
+INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('2', '3');
+INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('3', '1');
+INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('3', '2');
+INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('3', '3');
+INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('4', '1');
+INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('4', '2');
+INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('4', '3');
+INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('5', '1');
+INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('5', '2');
+INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('5', '3');
+INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('6', '3');
+INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('6', '7');
+INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('6', '8');
+INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('7', '1');
+INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('7', '2');
+INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('7', '3');
+INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('8', '1');
+INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('8', '2');
+INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('8', '3');
+INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('9', '1');
+INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('9', '2');
+INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('9', '3');
+INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('10', '1');
+INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('10', '2');
+INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('10', '3');
+
 -- Table cache_report_reasons
 SET NAMES 'utf8';
 TRUNCATE TABLE `cache_report_reasons`;
@@ -165,40 +199,6 @@ INSERT INTO `cache_type` (`id`, `name`, `trans_id`, `ordinal`, `short`, `de`, `e
 INSERT INTO `cache_type` (`id`, `name`, `trans_id`, `ordinal`, `short`, `de`, `en`, `icon_large`, `short2`, `short2_trans_id`) VALUES ('8', 'Math/Physics-Cache', '540', '9', 'Math', 'Mathe-/Physikcache', 'Math/Physics Cache', 'cache/mathe.gif', 'Math/Physics', '1861');
 INSERT INTO `cache_type` (`id`, `name`, `trans_id`, `ordinal`, `short`, `de`, `en`, `icon_large`, `short2`, `short2_trans_id`) VALUES ('9', 'Moving Cache', '541', '4', 'Moving', 'beweglicher Cache', 'Moving Cache', 'cache/moving.gif', 'Moving', '1862');
 INSERT INTO `cache_type` (`id`, `name`, `trans_id`, `ordinal`, `short`, `de`, `en`, `icon_large`, `short2`, `short2_trans_id`) VALUES ('10', 'Drive-In', '542', '5', 'Driv.', 'Drive-In', 'Drive-In', 'cache/drivein.gif', 'Drive-in', '1863');
-
--- Table cache_logtype
-SET NAMES 'utf8';
-TRUNCATE TABLE `cache_logtype`;
-INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('1', '1');
-INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('1', '2');
-INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('1', '3');
-INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('2', '1');
-INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('2', '2');
-INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('2', '3');
-INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('3', '1');
-INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('3', '2');
-INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('3', '3');
-INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('4', '1');
-INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('4', '2');
-INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('4', '3');
-INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('5', '1');
-INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('5', '2');
-INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('5', '3');
-INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('6', '3');
-INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('6', '7');
-INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('6', '8');
-INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('7', '1');
-INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('7', '2');
-INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('7', '3');
-INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('8', '1');
-INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('8', '2');
-INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('8', '3');
-INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('9', '1');
-INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('9', '2');
-INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('9', '3');
-INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('10', '1');
-INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('10', '2');
-INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('10', '3');
 
 -- Table coordinates_type
 SET NAMES 'utf8';
@@ -617,6 +617,18 @@ INSERT INTO `languages_list_default` (`lang`, `show`) VALUES ('IT', 'FR');
 INSERT INTO `languages_list_default` (`lang`, `show`) VALUES ('IT', 'IT');
 INSERT INTO `languages_list_default` (`lang`, `show`) VALUES ('IT', 'SK');
 
+-- Table logentries_types
+SET NAMES 'utf8';
+TRUNCATE TABLE `logentries_types`;
+INSERT INTO `logentries_types` (`id`, `module`, `eventname`) VALUES ('1', 'watchlist', 'owner_notify');
+INSERT INTO `logentries_types` (`id`, `module`, `eventname`) VALUES ('2', 'watchlist', 'sendmail');
+INSERT INTO `logentries_types` (`id`, `module`, `eventname`) VALUES ('3', 'remindemail', 'sendmail');
+INSERT INTO `logentries_types` (`id`, `module`, `eventname`) VALUES ('4', 'approving', 'deletecache');
+INSERT INTO `logentries_types` (`id`, `module`, `eventname`) VALUES ('5', 'cache', 'changeowner');
+INSERT INTO `logentries_types` (`id`, `module`, `eventname`) VALUES ('6', 'user', 'disable');
+INSERT INTO `logentries_types` (`id`, `module`, `eventname`) VALUES ('7', 'user', 'delete');
+INSERT INTO `logentries_types` (`id`, `module`, `eventname`) VALUES ('8', 'notification', 'sendmail');
+
 -- Table log_types
 SET NAMES 'utf8';
 TRUNCATE TABLE `log_types`;
@@ -630,18 +642,6 @@ INSERT INTO `log_types` (`id`, `name`, `trans_id`, `permission`, `cache_status`,
 INSERT INTO `log_types` (`id`, `name`, `trans_id`, `permission`, `cache_status`, `de`, `en`, `icon_small`, `allow_rating`, `require_password`) VALUES ('11', 'Temporary not available', '2021', 'C', '2', 'momentan nicht verfügbar', 'temporarily not available', 'log/16x16-disabled.png', '0', '0');
 INSERT INTO `log_types` (`id`, `name`, `trans_id`, `permission`, `cache_status`, `de`, `en`, `icon_small`, `allow_rating`, `require_password`) VALUES ('13', 'Locked', '2023', 'C', '6', 'gesperrt', 'locked', 'log/16x16-locked.png', '0', '0');
 INSERT INTO `log_types` (`id`, `name`, `trans_id`, `permission`, `cache_status`, `de`, `en`, `icon_small`, `allow_rating`, `require_password`) VALUES ('14', 'Locked, invisible', '2024', 'C', '7', 'gesperrt, versteckt', 'locked, invisible', 'log/16x16-locked-invisible.png', '0', '0');
-
--- Table logentries_types
-SET NAMES 'utf8';
-TRUNCATE TABLE `logentries_types`;
-INSERT INTO `logentries_types` (`id`, `module`, `eventname`) VALUES ('1', 'watchlist', 'owner_notify');
-INSERT INTO `logentries_types` (`id`, `module`, `eventname`) VALUES ('2', 'watchlist', 'sendmail');
-INSERT INTO `logentries_types` (`id`, `module`, `eventname`) VALUES ('3', 'remindemail', 'sendmail');
-INSERT INTO `logentries_types` (`id`, `module`, `eventname`) VALUES ('4', 'approving', 'deletecache');
-INSERT INTO `logentries_types` (`id`, `module`, `eventname`) VALUES ('5', 'cache', 'changeowner');
-INSERT INTO `logentries_types` (`id`, `module`, `eventname`) VALUES ('6', 'user', 'disable');
-INSERT INTO `logentries_types` (`id`, `module`, `eventname`) VALUES ('7', 'user', 'delete');
-INSERT INTO `logentries_types` (`id`, `module`, `eventname`) VALUES ('8', 'notification', 'sendmail');
 
 -- Table news_topics
 SET NAMES 'utf8';
@@ -6228,7 +6228,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1985', 'DE', 'Die neuesten Caches:', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1986', 'DE', 'Hier kannst du diskutieren, mitmachen oder Fragen stellen.', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1987', 'DE', 'Die neuesten Forenbeiträge:', '2013-04-25 23:00:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1988', 'DE', 'Es gibt immer wieder Neuigkeiten &ndash; hier findest du sie.', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1988', 'DE', 'Es gibt immer wieder Neuigkeiten \&ndash; hier findest du sie.', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1989', 'DE', 'Die neuesten Blog-Artikel:', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1990', 'DE', 'Hier findest du Anleitungen und Informationen über Geocaching und Opencaching.', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1991', 'DE', 'Die neuesten Wiki-Artikel:', '2013-04-25 23:00:00');
@@ -7810,7 +7810,23 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2028', 'EN', '%2 has locked %1', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2029', 'EN', 'OC team comment', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2030', 'EN', 'Maintenance logs', '2013-02-19 05:48:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2031', 'EN', 'To change the state, you need to <a href="log.php?cacheid=%1">log</a> the new state.', '2013-05-12 22:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2031', 'EN', 'To change the state, you need to <a href=\"log.php?cacheid=%1\">log</a> the new state.', '2013-05-12 22:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2035', 'EN', '%1 has archived the cache', '2013-05-12 22:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2036', 'EN', '%1 has maintained the cache', '2013-05-12 22:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2037', 'EN', '%1 has disabled the cache', '2013-05-12 22:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2038', 'EN', '%1 has locked the cache', '2013-05-12 22:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2039', 'EN', '%1 has locked and hidden the cache', '2013-05-12 22:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2040', 'EN', 'Deleted text:', '2013-05-12 22:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2041', 'EN', 'total', '2013-05-12 22:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2042', 'EN', 'The following text is displayed in your <a href=\"viewprofile.php\">public profile</a>:', '2013-05-12 22:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2043', 'EN', 'no text entered yet', '2013-05-12 22:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2045', 'EN', 'The current filter settings have been permamently saved.', '2013-05-12 22:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2046', 'EN', 'Watcher', '2013-05-12 22:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2047', 'EN', 'Ignorer', '2013-05-12 22:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2048', 'EN', 'Maintenance log', '2013-05-12 22:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2049', 'EN', 'Page visit', '2013-05-12 22:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2050', 'EN', 'JavaScript is disabled in your browser, you can enter (HTML) text only. To use the editor, please enable JavaScript.', '2013-05-12 22:00:00');
+
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'ES', 'Reordenar ID', '2010-12-09 00:17:55');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'ES', 'La base de datos no se pudo conectar.', '2010-12-09 00:17:55');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'ES', 'En pruebas - por favor, no entre.', '2010-12-09 00:17:55');
@@ -12381,4 +12397,4 @@ TRUNCATE TABLE `watches_waitingtypes`;
 INSERT INTO `watches_waitingtypes` (`id`, `watchtype`) VALUES ('1', 'ownerlog');
 INSERT INTO `watches_waitingtypes` (`id`, `watchtype`) VALUES ('2', 'cache_watches');
 
-INSERT INTO `sysconfig` (`name`, `value`) VALUES ('datasql_checksum', 'feeed3f7d3f1d9b890f41e170b2593e4') ON DUPLICATE KEY UPDATE `value`='feeed3f7d3f1d9b890f41e170b2593e4';
+INSERT INTO `sysconfig` (`name`, `value`) VALUES ('datasql_checksum', '0f255f59d129ae72fa0179cad8896023') ON DUPLICATE KEY UPDATE `value`='0f255f59d129ae72fa0179cad8896023';

@@ -5,4 +5,4 @@ CREATE TABLE `nuts_codes` (
   `name` varchar(120) NOT NULL,
   PRIMARY KEY  (`code`),
   KEY `code` (`code`,`name`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='static content' ;

@@ -5,7 +5,7 @@ CREATE TABLE `countries` (
   `name` varchar(80) NOT NULL,
   `trans_id` int(10) NOT NULL,
   `de` varchar(128) NOT NULL COMMENT 'obsolete',
-  `en` varchar(128) NOT NULL COMMENT 'obsolete',
+  `en` varchar(128) NOT NULL,
   `list_default_de` int(1) NOT NULL default '0' COMMENT 'obsolete',
   `sort_de` varchar(128) NOT NULL COMMENT 'obsolete',
   `list_default_en` int(1) NOT NULL default '0' COMMENT 'obsolete',

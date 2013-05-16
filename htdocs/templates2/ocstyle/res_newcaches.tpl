@@ -10,12 +10,14 @@
 <ul class="nodot">
 	{foreach name=newcaches from=$newcaches item=cacheitem}
 		<li class="newcache_list_multi" style="margin-bottom: 8px;">
-			{include file="res_cacheicon_22.tpl" cachetype=$cacheitem.type}
-			<div style="margin-left: 29px;">
-			{$cacheitem.date_created|date_format:$opt.format.date}&nbsp;
-			<b><a class="links" href="viewcache.php?cacheid={$cacheitem.cache_id}">{$cacheitem.name|escape}</a></b>
+			<table class="null" cellspacing="0" cellpadding="0"><tr>
+			<td style="vertical-align:top; padding-right:2px; padding-top:2px" rowspan="2">{include file="res_cacheicon_22.tpl" cachetype=$cacheitem.type}</td>
+			<td style="vertical-align:top; ">{$cacheitem.date_created|date_format:$opt.format.date}&nbsp;&nbsp;</td>
+			<td style="text-align:left; width:100%"><b><a class="links" href="viewcache.php?cacheid={$cacheitem.cache_id}">{$cacheitem.name|escape}</a></b>
 			{t}by{/t}
-			<b><a class="links" href="viewprofile.php?userid={$cacheitem.user_id}">{$cacheitem.username|escape}</a></b><br />
+			<b><a class="links" href="viewprofile.php?userid={$cacheitem.user_id}">{$cacheitem.username|escape}</a></b></td>
+			</tr>
+			<tr><td colspan="2">
 			<strong>
 				<p class="content-title-noshade">
 					{$cacheitem.adm1|escape} {if $cacheitem.adm1!=null & $cacheitem.adm2!=null} &gt; {/if}
@@ -23,7 +25,8 @@
 					{$cacheitem.adm4|escape}
 				</p>
 			</strong>
-			</div>
+			</td>
+			</tr></table>
 		</li>
 	{/foreach}
 </ul>

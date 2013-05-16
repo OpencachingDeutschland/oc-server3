@@ -100,7 +100,17 @@
 
 		// get newest caches
 		$tpl->assign_rs('newcaches', $getNew->rsForSmarty('cache'));
-
+		// enable minimap for new caches if url is set
+		if ($opt['logic']['minimapurl'] != '')
+		{
+			$tpl->assign('minimap_url', $opt['logic']['minimapurl']);
+			$tpl->assign('minimap_enabled', true);
+		}
+		else
+		{
+			$tpl->assign('minimap_enabled', false);
+		}
+		
 		// last 30 days' top ratings
 		$tpl->assign_rs('topratings', $getNew->rsForSmarty('rating'));
 

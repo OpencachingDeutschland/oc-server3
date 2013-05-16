@@ -305,7 +305,14 @@
 	 */
 	$opt['logic']['cachemaps']['url'] = 'http://maps.google.com/maps/api/staticmap?center={latitude},{longitude}&zoom={userzoom}&size=200x200&maptype=hybrid&markers=color:blue|label:|{latitude},{longitude}&sensor=false&key={gmkey}';
 	$opt['logic']['cachemaps']['iframe'] = false;
- 
+	
+	/* Minimap for the new-caches list on the front page.
+	 * If the url string is empty, no minimap is displayed on the front page. 
+	 * 
+	 * Coordinates of new caches are appended to the url.
+	 */ 
+	$opt['logic']['minimapurl'] = 'http://maps.googleapis.com/maps/api/staticmap?sensor=false&size=220x220&maptype=roadmap&markers=color:blue|size:small';
+	
 	/* target vars
 	 * all _REQUEST-vars that identifiy the current page for target redirection after login
 	 */

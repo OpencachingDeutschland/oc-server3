@@ -56,11 +56,13 @@
 	
 	// get log pictures
 	$allpics = isset($_REQUEST['allpics']) && $_REQUEST['allpics'];
+	$all_pictures = get_logpics(LOGPICS_FOR_MYHOME_GALLERY);
 	if ($allpics)
 		set_paged_pics(LOGPICS_FOR_MYHOME_GALLERY, 0, 0, $tpl, "myhome.php?allpics=1");
 	else
-		$tpl->assign('pictures',get_logpics(LOGPICS_FOR_MYHOME_GALLERY));
-	$tpl->assign('allpics', $allpics ? 1 : 0); 
+		$tpl->assign('pictures',$all_pictures);
+	$tpl->assign('allpics', $allpics ? 1 : 0);
+	$tpl->assign('total_pictures', count($all_pictures));
 
 	// display
 	$tpl->display();

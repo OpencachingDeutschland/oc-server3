@@ -41,8 +41,8 @@
 <div class="content2-container bg-blue02" style="margin-top:20px;">
 	<p class="content-title-noshade-size3">
 		<img src="resource2/{$opt.template.style}/images/misc/32x32-pictures.gif" width="24" height="24"  style="align: left; margin-right: 10px;" />&nbsp;
-		{t 1=$pictures|@count}Log pictures: %1{/t} &nbsp;
-		<span class="content-title-link">[<a href="myhome.php?allpics=1">{t}Show all{/t}</a>]</span>
+		{t 1=$total_pictures}Log pictures: %1{/t} &nbsp;
+		{if !$allpics}<span class="content-title-link">[<a href="myhome.php?allpics=1">{t}Show all{/t}</a>]</span>{/if}
 	</p>
 </div>
 

@@ -10,6 +10,15 @@
 /htdocs/util/publish_caches/settings.inc.php
 /htdocs/util/watchlist/settings.inc.php
 
+# directory permissions
+# these files are contained in the repo, but can be overriden locally
+/htdocs/util/archive/.htaccess
+/htdocs/util/attributes/.htaccess
+/htdocs/util/change_owner/.htaccess
+/htdocs/util/delete/.htaccess
+/htdocs/util/mysql_root/.htaccess
+/htdocs/util/search_index/.htaccess
+
 # other data
 /htdocs/cache/*
 /htdocs/cache2/*

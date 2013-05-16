@@ -123,7 +123,8 @@
 						<th width="50px">{t}Type{/t}</th>
 						<th width="50px">{t}State{/t}</th>
 						<th width="500px">{t}Name{/t}</th>
-						<th width="100px" colspan="2">{t}Last found{/t}</th>
+						<th width="100px"><nobr>{t}Last found{/t}</nobr></th>
+						<th></th>
 					</tr>
 					{foreach from=$watches item=watchItem}
 						{cycle assign=listcolor values="listcolor1,listcolor2"}
@@ -131,7 +132,7 @@
 							<td class="{$listcolor}">{include file="res_cacheicon_22.tpl" cachetype=$watchItem.type|escape}</td>
 							<td class="{$listcolor}">{include file="res_cachestatus.tpl" status=$watchItem.status}</td>
 							<td class="{$listcolor}"><span style="{include file="res_cachestatus_span.tpl" status=$watchItem.status}"><a href="viewcache.php?wp={$watchItem.wp}">{$watchItem.name|escape}</a></span></td>
-							<td class="{$listcolor}">
+							<td class="{$listcolor}" style="text-align:center">
 								{if $watchItem.lastfound==null}
 									---
 								{else}

@@ -311,7 +311,7 @@
 	 * 
 	 * Coordinates of new caches are appended to the url.
 	 */ 
-	$opt['logic']['minimapurl'] = 'http://maps.googleapis.com/maps/api/staticmap?sensor=false&size=220x220&maptype=roadmap&markers=color:blue|size:small';
+	$opt['logic']['minimapurl'] = 'http://maps.googleapis.com/maps/api/staticmap?sensor=false&key={gmkey}&size=220x220&maptype=roadmap&markers=color:blue|size:small';
 	
 	/* target vars
 	 * all _REQUEST-vars that identifiy the current page for target redirection after login

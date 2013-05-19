@@ -46,7 +46,7 @@ class ChildWp_Controller
     if ($childId || $deleteId)
       $presenter = $this->createEditDeletePresenter($template, $childWpHandler, $cacheId, $childId, $deleteId);
     else
-      $presenter = new ChildWp_AddPresenter($this->request, $this->translator);
+      $presenter = $this->createAddPresenter($template, $childWpHandler, $cacheId);
 
     $presenter->init($childWpHandler, $cacheId);
 
@@ -71,6 +71,15 @@ class ChildWp_Controller
     return $presenter;
   }
 
+  private function createAddPresenter($template, $childWpHandler, $cacheId)
+  {
+    $presenter = new ChildWp_AddPresenter($this->request, $this->translator);
+    /* set default waypoint coordinates to cache coordinates */
+    $presenter->initCoordinates( $childWpHandler->getCacheCoordinates( $cacheId ) );
+  
+    return $presenter;
+  }
+  
   private function verifyCacheId($template, $cacheId, $cacheManager)
   {
     if (!$cacheManager->exists($cacheId) || !$cacheManager->userMayModify($cacheId))

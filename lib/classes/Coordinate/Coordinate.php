@@ -34,6 +34,15 @@ class Coordinate_Coordinate
     return $hem ? $retval : -$retval;
   }
 
+  static public function getFromCache($cacheid)
+  {
+    $rs = sql("SELECT latitude, longitude FROM caches WHERE cache_id = &1", $cacheid);
+    $r = sql_fetch_array($rs);
+    mysql_free_result($rs);
+
+    return new Coordinate_Coordinate($r['latitude'], $r['longitude']);
+  }
+
   public function latitude()
   {
     return $this->latitude;

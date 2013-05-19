@@ -75,7 +75,7 @@ class ChildWp_Controller
   {
     $presenter = new ChildWp_AddPresenter($this->request, $this->translator);
     /* set default waypoint coordinates to cache coordinates */
-    $presenter->initCoordinates( $childWpHandler->getCacheCoordinates( $cacheId ) );
+    $presenter->initCoordinate( Coordinate_Coordinate::getFromCache( $cacheId ) );
   
     return $presenter;
   }

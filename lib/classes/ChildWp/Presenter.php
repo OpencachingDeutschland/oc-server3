@@ -63,9 +63,9 @@ abstract class ChildWp_Presenter
     $this->typeImages = $childWpHandler->getChildNamesAndImages();
   }
   
-  public function initCoordinates( $coords )
+  public function initCoordinate( $coords )
   {
-    $this->coordinate->init( $coords['latitude'], $coords['longitude'] );
+    $this->coordinate->init( $coords->latitude(), $coords->longitude() );
   }
 
   public function initChildWp($childId, $childWp)

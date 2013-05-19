@@ -84,6 +84,20 @@ class ChildWp_Handler
 
     return $nameAndTypes;
   }
+  
+  public function getCacheCoordinates( $cacheid )
+  {
+    $rs = sql("SELECT latitude, longitude FROM caches WHERE cache_id = &1", $cacheid);
+    $r = sql_fetch_array($rs);
+    
+    $ret = array();
+    $ret['latitude'] = $r['latitude'];
+    $ret['longitude'] = $r['longitude'];
+    
+    mysql_free_result($rs);
+
+    return $ret;
+  }
 
   private function recordToArray($r)
   {

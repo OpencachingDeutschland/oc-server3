@@ -60,7 +60,12 @@ abstract class ChildWp_Presenter
     $this->childWpHandler = $childWpHandler;
     $this->cacheId = $cacheId;
     $this->waypointTypes = $childWpHandler->getChildWpIdAndNames();
-		$this->typeImages = $childWpHandler->getChildNamesAndImages();
+    $this->typeImages = $childWpHandler->getChildNamesAndImages();
+  }
+  
+  public function initCoordinates( $coords )
+  {
+    $this->coordinate->init( $coords['latitude'], $coords['longitude'] );
   }
 
   public function initChildWp($childId, $childWp)

@@ -17,10 +17,10 @@ The association's registered address is at Bad Homburg vor der Höhe near Frankf
 Membership is free for active members (<em>ordentliche Mitglieder</em>) who directly contribute time and work to the Opencaching.de project. We are always looking for software developers and testes, graphic designers, photographers, lectors, support people, documenters etc.! If you don't have the time for this, you may become passive member (<em>Fördermitglied</em>). The membership fee is still to be determined.<br /><br />
 
 <em>Where do I find the association's statutes?</em><br />
-You cand download the current statutes <a href="http://www.opencaching.de/verein/OC_Satzung_aktuell.pdf">here</a> (in German).<br /><br />
+You cand download the current statutes <a href="http://wiki.opencaching.de/OCeV_Satzung_aktuell.pdf">here</a> (in German).<br /><br />
 
 <em>Where do I find the membership application form?</em><br />
-You can download the application form <a href="http://www.opencaching.de/verein/OC_Antrag_aktuell.pdf">here</a> (in German).<br /><br />
+You can download the application form <a href="http://wiki.opencaching.de/Beitritt_OCeV_aktuell.pdf">here</a> (in German).<br /><br />
 
 <em>I would like to support Opencaching, but I don't want do join the association. What else can I do?</em><br />
 We depend on your donations to finance the technical operation of the website. We will be glad to recieve you support via our <a href="./articles.php?page=donations" target="_blank">donations page</a>; a few Euros will already help us.<br /><br />
@@ -28,6 +28,4 @@ We depend on your donations to finance the technical operation of the website. W
 <em>Where can I ask further questions on the association?</em><br />
 You are welcome to contact the chairman at <a href="mailto:verein@opencaching.de">verein@opencaching.de</a>.<br /><br />
 
-<em>I would like to provide program code, picturs, texts etc. to the association; what requirements must I meet?</em><br />
-To ensure that we can use your contribution at Opencaching.de, there is a declaration of consent and assignment (<em>Einverständnis- und Abtretungserklärung</em>)  which you can download <a href="http://www.opencaching.de/verein/OC_AE_aktuell.pdf">here</a> (in German). Follow the steps as described in the document.<br /><br />
 </div>

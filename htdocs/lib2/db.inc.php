@@ -32,6 +32,10 @@
 		sql_export_table($f, $table)    ... export table to file
 		sql_export_table_to_file($filename, $table)
 
+		sql_table_exists                ... tests if a table exists
+		sql_field_exists                ... tests if a table and a field in this table exist
+		sql_field_type                  ... queries the type of a field (uppercase letters)
+
 		// slave query functions
 		sql_slave_exclude()             ... do not use slave servers for the current user
 		                                    until the slaves have replicated to this point
@@ -1081,4 +1085,39 @@
 		sql_export_structure($f, $table);
 		fclose($f);
 	}
+
+	// test if a database table exists
+	function sql_table_exists($table)
+	{
+		global $opt;
+
+		return sql_value("SELECT COUNT(*)
+		                    FROM `information_schema`.`tables`
+		                   WHERE `table_schema`='&1' AND `table_name`='&2'",
+										 0, $opt['db']['placeholder']['db'], $table) > 0;
+	}
+
+	// test if a database field exists
+	function sql_field_exists($table, $field)
+	{
+		global $opt;
+
+		return sql_value("SELECT COUNT(*)
+		                    FROM `information_schema`.`columns`
+		                   WHERE `table_schema`='&1' AND `table_name`='&2' AND `column_name`='&3'",
+										 0, $opt['db']['placeholder']['db'], $table, $field) > 0;
+	}
+
+	// get type of a database field
+	function sql_field_type($table, $field)
+	{
+		global $opt;
+
+		return strtoupper(
+						sql_value("SELECT `data_type`
+		                    FROM `information_schema`.`columns`
+		                   WHERE `table_schema`='&1' AND `table_name`='&2' AND `column_name`='&3'",
+										 '', $opt['db']['placeholder']['db'], $table, $field) );
+	}
+
 ?>

@@ -14,7 +14,7 @@
 The association's registered address is at Bad Homburg vor der Höhe near Frankfurt/Main. We chose this place because it is a central location in Germany. Eventually, the location is not important as the association nearly solely acts online. General meetings, board sessions and conferences on further development of Opencaching.de take place via TeamSpeak. We use E-Mail and &ndash; of course &ndash; our <a href="http://forum.opencaching-network.org" target="_blank">Forum</a>.<br /><br />
 
 <em>What do I pay as Opencaching Deutschland member?</em><br />
-Membership is free for active members (<em>ordentliche Mitglieder</em>) who directly contribute time and work to the Opencaching.de project. We are always looking for software developers and testes, graphic designers, photographers, lectors, support people, documenters etc.! If you don't have the time for this, you may become passive member (<em>Fördermitglied</em>). The membership fee is still to be determined.<br /><br />
+Membership is free for active members (<em>ordentliche Mitglieder</em>) who directly contribute time and work to the Opencaching.de project. We are always looking for software developers and testes, graphic designers, photographers, lectors, support people, documenters etc.! If you don't have the time for this, you may become passive member (<em>Fördermitglied</em>). The minimum fee for passive members is 1 Euro per month.<br /><br />
 
 <em>Where do I find the association's statutes?</em><br />
 You cand download the current statutes <a href="http://wiki.opencaching.de/OCeV_Satzung_aktuell.pdf">here</a> (in German).<br /><br />

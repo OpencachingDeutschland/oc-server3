@@ -17,7 +17,7 @@ Der Sitz des Vereins ist Bad Homburg vor der Höhe. Wir haben diesen Sitz gewäh
 Für ordentliche Mitglieder, die Opencaching.de mitgestalten, ist die Mitgliedschaft kostenfrei. Wir sind immer auf der Suche nach Entwicklern, Grafikern, Fotografen, Lektoren, Supportlern, Dokumentatoren etc.! Wer nicht die Zeit hat, um sich bei Opencaching einzubringen, kann stattdessen Fördermitglied werden. Der Fördermitgliedsbeitrag beträgt derzeit 1 Euro / Monat.<br /><br />
 
 <em>Wo finde ich die aktuelle Satzung?</em><br />
-Die <a href="http://wiki.opencaching.de/OC_Satzung_aktuell.pdf">aktuelle Satzung</a> kannst Du <a href="http://wiki.opencaching.de/OC_Satzung_aktuell.pdf">hier</a> herunterladen.<br /><br />
+Die <a href="http://wiki.opencaching.de/OCeV_Satzung_aktuell.pdf">aktuelle Satzung</a> kannst Du <a href="http://wiki.opencaching.de/OC_Satzung_aktuell.pdf">hier</a> herunterladen.<br /><br />
 
 <em>Wo finde ich den Mitgliedsantrag?</em><br />
 Den <a href="http://www.opencaching.de/verein/OC_Antrag_aktuell.pdf">Mitgliedsantrag</a> kannst Du <a href="http://www.opencaching.de/verein/OC_Antrag_aktuell.pdf">hier</a> herunterladen.<br /><br />

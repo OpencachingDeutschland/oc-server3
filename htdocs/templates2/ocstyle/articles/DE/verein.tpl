@@ -20,7 +20,7 @@ Für ordentliche Mitglieder, die Opencaching.de mitgestalten, ist die Mitgliedsc
 Die <a href="http://wiki.opencaching.de/OCeV_Satzung_aktuell.pdf">aktuelle Satzung</a> kannst Du <a href="http://wiki.opencaching.de/OC_Satzung_aktuell.pdf">hier</a> herunterladen.<br /><br />
 
 <em>Wo finde ich den Mitgliedsantrag?</em><br />
-Den <a href="http://www.opencaching.de/verein/OC_Antrag_aktuell.pdf">Mitgliedsantrag</a> kannst Du <a href="http://www.opencaching.de/verein/OC_Antrag_aktuell.pdf">hier</a> herunterladen.<br /><br />
+Den <a href="http://wiki.opencaching.de/Beitritt_OCeV_aktuell.pdf">Mitgliedsantrag</a> kannst Du <a href="http://www.opencaching.de/Beitritt_OCeV_aktuell.pdf">hier</a> herunterladen.<br /><br />
 
 <em>Ich m&ouml;chte Opencaching unterst&uuml;tzen, habe aber kein Interesse an einem Vereinsbeitritt. Was kann ich noch tun?</em><br />
 Da der technische Betrieb der Website laufende Kosten verursacht, sind wir auf Spenden angewiesen. Über unsere <a href="./articles.php?page=donations" target="_blank">Spendenseite</a> kannst du uns jederzeit einen kleinen Obolus zukommen lassen, auch wenige Euro helfen uns weiter.<br /><br />

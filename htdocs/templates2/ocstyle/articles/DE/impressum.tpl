@@ -75,7 +75,7 @@
 	</p>
 	
 	<p>
-		Laut &sect;10 der Vereinssatzung sind je zwei Mitglieder des gesch&auml;ftsf&uuml;hrende 
+		Laut &sect;10 der Vereinssatzung sind je zwei Mitglieder des gesch&auml;ftsf&uuml;hrenden
 		Vorstandes gemeinsam vertretungsberechtigt.
 	</p>
 	<p>

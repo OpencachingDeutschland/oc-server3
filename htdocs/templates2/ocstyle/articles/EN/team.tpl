@@ -22,7 +22,6 @@
     <tr><td><img src="http://www.opencaching.de/images/team/dl8ndm.jpg" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=102263">dl8ndm</a></td><td>vice chairman</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/schrottie.jpg" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=140946">Schrottie</a></td><td>treasurer; user support, data maintenance</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/danlex.png" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=222261">Danlex</a></td><td>press spokesman; user support, data maintenance</td></tr>
-    <tr><td><img src="http://www.opencaching.de/images/team/following.png" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=150360">following</a></td><td>development commissioner; data maintenance, message board moderation, wiki</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/dummy.jpg" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=137473">bohrsty</a></td><td>head of system administration</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/pirate77.jpg" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=152708">pirate77</a></td><td>head of user support and data maintenance, wiki</td></tr>
     <tr><td></td><td></td><td></td></tr>
@@ -34,6 +33,7 @@
     <tr><td><img src="http://www.opencaching.de/images/team/dl6hbo.jpg" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=148310">dl6hbo</a></td><td>server operation, documentation</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/doglobe.jpg" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=193414">doglobe</a></td><td>project &bdquo;cache maintenance&ldquo;</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/flopp.png" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=126329">Flopp</a></td><td>software development, user support, data maintenance</td></tr>
+    <tr><td><img src="http://www.opencaching.de/images/team/following.png" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=150360">following</a></td><td>data maintenance, software development, message board moderation, wiki</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/friedrichfroebel.jpg" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=234947">FriedrichFröbel</a></td><td>wiki, message board moderation</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/dummy.jpg" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=205779">Hanekju</a></td><td>data maintenance</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/hellstormde.jpg" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=246033">HellstormDe</a></td><td>software development</td></tr>

@@ -222,11 +222,15 @@
 	sql("CREATE PROCEDURE sp_updateall_cache_listingdates (OUT nModified INT)
 	     BEGIN
 			   UPDATE `caches` SET `listing_last_modified` =
+			      /* listing_last_modified can be greater then all the other dates, if a description,
+			   	     a coordinate or a picture was deleted. Therefore it should generally not be
+			   	     set back to an earlier datetime! */
+			   		GREATEST(`listing_last_modified`,
 						GREATEST(`last_modified`,
 						GREATEST(IFNULL((SELECT MAX(`last_modified`) FROM `cache_desc` WHERE `cache_desc`.`cache_id`=`caches`.`cache_id`),'0'),
 						GREATEST(IFNULL((SELECT MAX(`last_modified`) FROM `coordinates` WHERE `coordinates`.`type`=1 AND `coordinates`.`cache_id`=`caches`.`cache_id`),'0'),
 						         IFNULL((SELECT MAX(`last_modified`) FROM `pictures` WHERE `pictures`.`object_type`=2 AND `pictures`.`object_id` = `caches`.`cache_id`),'0')
-						        )));
+						        ))));
 	       SET nModified = ROW_COUNT();
 	     END;");
 
@@ -234,9 +238,12 @@
 	sql("CREATE PROCEDURE sp_updateall_cachelog_logdates (OUT nModified INT)
 	     BEGIN
 			   UPDATE `cache_logs` SET `log_last_modified` =
+			      /* log_last_modified can be greater then all the other dates, if a picture was deleted.
+						Therefore it should generally not be set back to an earlier datetime! */
+						GREATEST(`log_last_modified`,
 						GREATEST(`last_modified`,
 						         IFNULL((SELECT MAX(`last_modified`) FROM `pictures` WHERE `pictures`.`object_type`=1 AND `pictures`.`object_id` = `cache_logs`.`id`),'0')
-						        );
+						        ));
 	       SET nModified = ROW_COUNT();
 	       UPDATE `cache_logs_archived` SET `log_last_modified` =
 	           GREATEST(`last_modified`,`log_last_modified`);
@@ -1083,8 +1090,12 @@
 								CALL sp_update_cache_listingdate(NEW.`object_id`);
 							END IF;
 						ELSE
-							IF NEW.`object_type`=2 AND NEW.`last_modified` != OLD.`last_modified` THEN
-								CALL sp_update_cache_listingdate(NEW.`object_id`);
+							IF NEW.`last_modified` != OLD.`last_modified` THEN
+								IF NEW.`object_type`=1 THEN
+									UPDATE `cache_logs` SET `log_last_modified`=NEW.`last_modified` WHERE `id`=NEW.`object_id`;
+								ELSE
+									CALL sp_update_cache_listingdate(NEW.`object_id`);
+								END IF;
 							END IF;
 							IF @archive_picop AND
 						       ( ( NEW.`object_type`=2 AND

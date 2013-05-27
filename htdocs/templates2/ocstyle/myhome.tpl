@@ -28,7 +28,7 @@
 		{foreach from=$logs item=logItem}
 			<tr>
 				<td>{include file="res_logtype.tpl" type=$logItem.type}</td>
-				<td>{$logItem.date|date_format:$opt.format.datelong}</td>
+				<td style="white-space:nowrap">{$logItem.date|date_format:$opt.format.datelong}</td>
 				<td><a href="viewcache.php?wp={$logItem.wp_oc}">{$logItem.name|escape}</a> {t}by{/t} <a href="viewprofile.php?userid={$logItem.userid}">{$logItem.username|escape}</a></td>
 			</tr>
 		{foreachelse}
@@ -85,7 +85,7 @@
 		{foreach from=$caches item=cacheItem}
 			<tr>
 				<td>{include file="res_cachestatus.tpl" status=$cacheItem.status}</td>
-				<td nowrap="nowrap">{$cacheItem.date_hidden|date_format:$opt.format.datelong}</td>
+				<td style="white-space:nowrap">{$cacheItem.date_hidden|date_format:$opt.format.datelong}</td>
 				<td><a href="viewcache.php?wp={$cacheItem.wp_oc}">{$cacheItem.name|escape}</a></td>
 			</tr>
 		{foreachelse}

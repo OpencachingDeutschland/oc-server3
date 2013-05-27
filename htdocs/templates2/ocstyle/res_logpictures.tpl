@@ -1,4 +1,5 @@
 {* see lib2/logic/logpics.inc.php for data retreival *}
+{* Unicode Reminder メモ *}
 
 {if $paging}
 	<div class="content2-container">

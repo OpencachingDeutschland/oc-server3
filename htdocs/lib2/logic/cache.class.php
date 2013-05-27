@@ -196,8 +196,10 @@ class cache
 	}
 	function setStatus($value)
 	{
+		$login;
 		if (sql_value("SELECT COUNT(*) FROM `cache_status` WHERE `id`='&1'", 0, $value) == 1)
 		{
+			sql("SET @STATUS_CHANGE_USER_ID='&1'", $login->user_id);
 			return $this->reCache->setValue('status', $value);
 		}
 		else
@@ -296,13 +298,13 @@ class cache
 		{
 			// admins may view owner-deleted logs
 			$table = 'cache_logs_archived';
-			$delfields = 'IFNULL(`u2`.`username`,"") AS `deleted_by_name`, `deletion_date`';
+			$delfields = 'IFNULL(`u2`.`username`,"") AS `deleted_by_name`, `deletion_date`, "1" AS `deleted`';
 			$addjoin = 'LEFT JOIN `user` `u2` ON `u2`.`user_id`=`cache_logs`.`deleted_by`';
 		}
 		else
 		{
 			$table = 'cache_logs';
-			$delfields = '"" AS `deleted_by_name`, NULL AS `deletion_date`';
+			$delfields = '"" AS `deleted_by_name`, NULL AS `deletion_date`, "0" AS `deleted`';
 			$addjoin = '';
 		}
 
@@ -461,5 +463,59 @@ class cache
 	{
 		sql("DELETE FROM `cache_rating` WHERE `cache_id`='&1' AND `user_id`='&2'", $this->nCacheId, $nUserId);
 	}
+
+	// retrieves admin cache history data and stores it to template variables
+	// for display by adminhistory.tpl and adminreports.tpl
+	function setTplHistoryData($exclude_report_id)
+	{
+		global $opt, $tpl;
+
+		// (other) reports for this cache
+		$rs = sql("SELECT `cr`.`id`, `cr`.`date_created`, `cr`.`lastmodified`,
+		                  `cr`.`userid`, `cr`.`adminid`,
+				              `users`.`username` AS `usernick`,
+				              `admins`.`username` AS `adminnick`,
+											IFNULL(`tt`.`text`, `crs`.`name`) AS `status`,
+				              IFNULL(`tt2`.`text`, `crr`.`name`) AS `reason`
+				         FROM `cache_reports` AS `cr`
+				    LEFT JOIN `cache_report_reasons` AS `crr` ON `cr`.`reason`=`crr`.`id`
+			      LEFT JOIN `user` AS `users` ON `users`.`user_id`=`cr`.`userid`
+			      LEFT JOIN `user` AS `admins` ON `admins`.`user_id`=`cr`.`adminid`
+			      LEFT JOIN `cache_report_status` AS `crs` ON `cr`.`status`=`crs`.`id`
+			      LEFT JOIN `sys_trans_text` AS `tt` ON `crs`.`trans_id`=`tt`.`trans_id` AND `tt`.`lang`='&2'
+			      LEFT JOIN `sys_trans_text` AS `tt2` ON `crr`.`trans_id`=`tt2`.`trans_id` AND `tt2`.`lang`='&2'
+			          WHERE `cr`.`cacheid`='&1' AND `cr`.`id`<>'&3'
+			       ORDER BY `cr`.`status`,`cr`.`id` DESC", $this->getCacheId(), $opt['template']['locale'], $exclude_report_id);
+		$tpl->assign_rs('reports',$rs);
+		sql_free_result($rs);
+
+		// user; deleted logs
+		$rs = sql("SELECT * FROM `caches` WHERE `cache_id`='&1'", $this->getCacheId());
+		$rCache = sql_fetch_array($rs);
+		$tpl->assign('cache', $rCache);
+		sql_free_result($rs);
+		$tpl->assign('ownername', sql_value("SELECT `username` FROM `user` WHERE `user_id`='&1'", "", $rCache['user_id']));
+
+		$tpl->assign('deleted_logs', $this->getLogsArray($this->getCacheId(), 0, 1000, true));
+
+		// status changes
+		$rs = sql("SELECT `csm`.`date_modified`,
+		                  `csm`.`old_state` AS `old_status_id`,
+		                  `csm`.`new_state` AS `new_status_id`,
+		                  `user`.`username`,
+		                  IFNULL(`stt_old`.`text`,`cs_old`.`name`) AS `old_status`,
+		                  IFNULL(`stt_new`.`text`,`cs_new`.`name`) AS `new_status`
+		             FROM `cache_status_modified` `csm`
+	           LEFT JOIN `cache_status` `cs_old` ON `cs_old`.`id`=`csm`.`old_state`
+						LEFT JOIN `sys_trans_text` `stt_old` ON `stt_old`.`trans_id`=`cs_old`.`trans_id` AND `stt_old`.`lang`='&2'
+	           LEFT JOIN `cache_status` `cs_new` ON `cs_new`.`id`=`csm`.`new_state`
+						LEFT JOIN `sys_trans_text` `stt_new` ON `stt_new`.`trans_id`=`cs_new`.`trans_id` AND `stt_new`.`lang`='&2'
+						LEFT JOIN `user` ON `user`.`user_id`=`csm`.`user_id`
+		            WHERE `cache_id`='&1'
+		         ORDER BY `date_modified` DESC", $this->getCacheId(), $opt['template']['locale']);
+		$tpl->assign_rs('status_changes',$rs);
+		sql_free_result($rs);
+	}
+
 }
 ?>

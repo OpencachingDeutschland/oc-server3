@@ -715,7 +715,9 @@
             IF OLD.`status`=5 AND NEW.`status`=1 THEN
               CALL sp_notify_new_cache(NEW.`cache_id`, NEW.`longitude`, NEW.`latitude`);
             END IF;
-
+            IF NEW.`status`<>OLD.`status` THEN
+            	INSERT INTO `cache_status_modified` (`cache_id`, `date_modified`, `old_state`, `new_state`, `user_id`) VALUES (NEW.`cache_id`, NOW(), OLD.`status`, NEW.`status`, IFNULL(@STATUS_CHANGE_USER_ID,0));
+						END IF; 
 						SET @dont_update_listingdate=0;
 					END;");
 

@@ -238,7 +238,10 @@
 						// update cache_status
 						$new_cache_status = sqlValue("SELECT `cache_status` FROM `log_types` WHERE `id`='" . sql_escape($log_type) . "'", 0);
 						if ($new_cache_status > 0)
+						{
+							sql("SET @STATUS_CHANGE_USER_ID='&1'", $usr['userid']);
 							$rs = sql("UPDATE `caches` SET `status`='&1' WHERE `cache_id`='&2'", $new_cache_status, $cache_id);
+						}
 
 						// insert log
 						sql("INSERT INTO `cache_logs` (`id`, `cache_id`, `user_id`, `type`, `oc_team_comment`, `date`, `text`, `text_html`, `text_htmledit`, `node`)

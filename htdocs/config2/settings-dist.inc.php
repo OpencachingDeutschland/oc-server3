@@ -373,6 +373,12 @@
 	$opt['logic']['license']['terms'] = 'articles.php?page=impressum#datalicense';
 	   // 'disclaimer' and 'terms' also in lib/settings.inc.php
 
+	/* admin functions
+	 */
+	// admin may use OC-team-comment log flag only when processing a cache report 
+	// see also setting in lib/settings.inc.php!
+	$opt['logic']['admin']['team_comments_only_for_reports'] = true;
+
   /* Database charset
 	 *   frontend and php charsets are UTF-8
 	 *   here you can set a different charset for the MySQL-Engine

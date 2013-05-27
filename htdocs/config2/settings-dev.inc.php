@@ -104,6 +104,9 @@
 	$opt['logic']['logs']['purge_email'] = 0;
 	$opt['logic']['logs']['purge_userdata'] = 0;
 
+	// admin may use OC-team-comment log flag only when processing a cache report 
+	$opt['logic']['admin']['team_comments_only_for_reports'] = false;
+
  	/* 3rd party library options
  	 * see https://my.garmin.com/api/communicator/key-generator.jsp
  	 */

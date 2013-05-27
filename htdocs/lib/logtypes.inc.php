@@ -32,6 +32,28 @@
 	}
 
 
+	// test if the logged in user is working on a report for a certain cache
+
+	function admin_has_open_report($cache_id)
+	{
+		global $login;
+
+		$hasreport = false;
+
+		if ($login->hasAdminPriv(ADMIN_USER))
+		{
+			$rs = sql("SELECT `id` FROM `cache_reports`
+			            WHERE `cacheid`='&1' AND `adminid`='&2' AND `status`=2",
+								$cache_id, $login->userid);
+			if ($r = sql_fetch_array($rs))
+				$hasreport = $r['id'] != 0;
+			sql_free_result($rs);
+		}
+
+		return $hasreport;
+	}
+
+
 	// returns ordered array of allowed log types for a cache and the active user:
 	//   type_id => translated type name
 	// first entry is default for new logs
@@ -48,18 +70,7 @@
 		$cache_type = $rCache['type'];
 		$cache_status = $rCache['status'];
 		$owner = $login->userid == ($rCache['user_id']);
-
-		if ($login->hasAdminPriv(ADMIN_USER))
-		{
-			$rs = sql("SELECT `id` FROM `cache_reports`
-			            WHERE `cacheid`='&1' AND `adminid`='&2' AND `status`=2",
-								$cache_id, $login->userid);
-			if ($r = sql_fetch_array($rs))
-				$admin = $r['id'] != 0;
-			else
-				$admin = false;
-			sql_free_result($rs);
-		}
+		$admin = admin_has_open_report($cache_id);
 
 		// build result list
 		//
@@ -106,7 +117,7 @@
 
 	function teamcomment_allowed($cache_id, $logtype_id)
 	{
-		global $login;
+		global $login, $opt;
 
 		if (!$login->hasAdminPriv(ADMIN_USER))
 			return false;
@@ -116,7 +127,10 @@
 		{
 			$rs = sql("SELECT `user_id` FROM `caches` WHERE `cache_id`='&1'", $cache_id);			
 			if ($r = sql_fetch_array($rs))
-				$allowed = $login->userid != $r['user_id'];
+			{
+				$allowed = $login->userid != $r['user_id'] &&
+				           (!$opt['logic']['admin']['team_comments_only_for_reports'] || admin_has_open_report($cache_id));
+			}
 			else
 				$allowed = false;
 			sql_free_result($rs);

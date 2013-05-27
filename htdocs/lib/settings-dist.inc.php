@@ -142,6 +142,10 @@
   // fill_gaps = false: continue with the last waypoint
   $opt['logic']['waypoint_pool']['fill_gaps'] = false;
 
+	// admin may use OC-team-comment log flag only when processing a cache report
+	// see also setting in config2/settings.inc.php!
+	$opt['logic']['admin']['team_comments_only_for_reports'] = true;
+
   // see config2/settings-dist.inc.php
 	$opt['template']['default']['locale'] = 'DE';      // may be overwritten by $opt['domain'][...]['locale']
 	$opt['template']['default']['country'] = 'DE';     // may be overwritten by $opt['domain'][...]['country']

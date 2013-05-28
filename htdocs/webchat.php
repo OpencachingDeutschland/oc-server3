@@ -17,7 +17,7 @@
 	$tpl->cache_id = $sUserCountry;
 
 	// check loggedin and set username for chat
-	$chatusername = $translate->t('Guest', '', basename(__FILE__), __LINE__);
+	$chatusername = $translate->t('Guest', '', basename(__FILE__), __LINE__) . rand(100,999);
 	if ($login->userid != 0)
 		$chatusername = urlencode($login->username);
 	

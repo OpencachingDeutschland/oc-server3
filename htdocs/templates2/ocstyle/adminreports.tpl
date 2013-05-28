@@ -32,7 +32,7 @@
 		{foreach from=$reportedcaches item=rc}
 			<tr>
 			{if $rc.otheradmin > $otheradmins}
-				<td colspan=5"><p style="line-height: 2.5em;">{t}(*) New reports{/t}</p>
+				<td colspan="5"><p style="line-height: 2.5em;">{t}(*) New reports{/t}</p>
 				</td></tr>
 				<tr><th>{t}ID{/t}</th><th>{t}Name{/t}</th><th>{t}Owner{/t}</th><th>{t}Reporter{/t}</th><th>{t}Admin{/t}</th><th>{t}Date{/t}</th></tr>
 				{assign var="otheradmins" value=$rc.otheradmin}
@@ -105,6 +105,34 @@
 				</p><br />{t}Warning: This report is already assigned to another admin. Consult him first before you assume the report!{/t}
 			{/if}
 		{/if}
+		<br />
+
+		{if $reports|@count}
+			<div class="content2-container bg-blue02">
+				<p class="content-title-noshade-size2">
+					<img src="resource2/{$opt.template.style}/images/misc/32x32-tools.png" style="align: left; margin-right: 10px;" width="22" height="22" alt="" /> 
+					{t}Other reports for this cache{/t}
+				</p>
+			</div>
+			{include file="adminreport_history.tpl"}
+		{/if}
+
+		{if $deleted_logs|@count}
+			<div class="content2-container bg-blue02">
+				<p class="content-title-noshade-size2">
+					<img src="resource2/{$opt.template.style}/images/description/22x22-logs.png" style="align: left; margin-right: 10px;" width="22" height="22" alt="" /> 
+					{t}Deleted logs{/t}
+				</p>
+			</div>
+			<div class="content2-container">
+				{include file="res_logentry.tpl" header=false footer=false footbacklink=false cache=$cache logs=$deleted_logs}
+			</div>
+		{/if}
+
+		{if $status_changes|@count}
+			{include file="res_status_changes.tpl"}
+		{/if}
+
 	{/if}
 
 </form>

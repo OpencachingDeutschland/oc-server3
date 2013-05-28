@@ -118,7 +118,9 @@
 				              `u1`.`username` AS `usernick`,
 				              IFNULL(`cr`.`adminid`, 0) AS `adminid`,
 				              IFNULL(`u2`.`username`, '') AS `adminnick`,
-				              IFNULL(`tt2`.`text`, `crr`.`name`) AS `reason`, `cr`.`note`, IFNULL(tt.text, crs.name) AS `status`,
+				              IFNULL(`tt2`.`text`, `crr`.`name`) AS `reason`,
+				              `cr`.`note`,
+				              IFNULL(tt.text, crs.name) AS `status`,
 				              `cr`.`date_created`, `cr`.`lastmodified`,
 				              `c`.`name` AS `cachename`,
 				              `c`.`user_id` AS `ownerid`
@@ -158,6 +160,9 @@
 		$tpl->assign('list', false);
 		$tpl->assign('otheradmin',$record['adminid']>0 && $record['adminid'] != $login->userid);
 		$tpl->assign('ownreport',$record['adminid'] == $login->userid);
+
+		$cache = new cache($record['cacheid']);
+		$cache->setTplHistoryData($id);
 	}
 
 	$tpl->assign('error', $error);	

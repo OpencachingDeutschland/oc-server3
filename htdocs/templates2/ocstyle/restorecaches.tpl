@@ -50,7 +50,7 @@
 		{elseif $error == "nodate"}
 			{t}You must select a date.{/t} {t}Use your browser's 'back' button to try again.{/t}
 		{elseif $error == "nochecks"}
-			{t}You must choosse the listing elements to be restored.{/t} {t}Use your browser's 'back' button to try again.{/t}
+			{t}You must choose the listing elements to be restored.{/t} {t}Use your browser's 'back' button to try again.{/t}
 		{elseif $error == "notsure"}
 			{t}You did not say that you are sure.{/t} {t}Use your browser's 'back' button to try again.{/t}
 		{/if}

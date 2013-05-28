@@ -1120,4 +1120,15 @@
 										 '', $opt['db']['placeholder']['db'], $table, $field) );
 	}
 
+	// test if a database index exists
+	function sql_index_exists($table, $index)
+	{
+		global $opt;
+
+		return sql_value("SELECT COUNT(*)
+		                    FROM `information_schema`.`statistics`
+		                   WHERE `table_schema`='&1' AND `table_name`='&2' AND `index_name`='&3'",
+										 0, $opt['db']['placeholder']['db'], $table, $index) > 0;
+	}
+
 ?>

@@ -165,4 +165,12 @@
 				) ENGINE=MyISAM DEFAULT CHARSET=utf8");
 	}
 
+	function dbv_107()  // sync of table definitions, developer and production system	
+	{
+		sql("ALTER TABLE `caches` MODIFY `meta_last_modified` datetime NOT NULL COMMENT 'via Trigger (stat_caches, gk_item_waypoint)'");
+		sql("ALTER TABLE `countries` MODIFY `en` varchar(128) NOT NULL");
+		if (!sql_index_exists('cache_reports', 'userid'))
+			sql("ALTER TABLE `cache_reports` ADD INDEX `userid` (`userid`)");
+	}
+
 ?>

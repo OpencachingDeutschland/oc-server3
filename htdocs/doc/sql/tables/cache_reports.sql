@@ -12,5 +12,6 @@ CREATE TABLE `cache_reports` (
   `lastmodified` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
   PRIMARY KEY  (`id`),
   KEY `status` (`status`,`adminid`),
-  KEY `status_2` (`adminid`,`status`)
+  KEY `status_2` (`adminid`,`status`),
+  KEY `userid` (`userid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='submitted reports on caches' ;

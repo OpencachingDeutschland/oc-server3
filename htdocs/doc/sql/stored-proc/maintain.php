@@ -202,7 +202,9 @@
 				 UPDATE `cache_logs` SET `last_modified`=NOW() WHERE `cache_id`=nCacheId;
 				 UPDATE `coordinates` SET `last_modified`=NOW() WHERE `cache_id`=nCacheId AND `type`=1;
 				 UPDATE `pictures` SET `last_modified`=NOW() WHERE `object_type`=2 AND `object_id`=nCacheId;
+				 SET @dont_update_logdate=TRUE;  /* avoid access collision to cache_logs table */
 				 UPDATE `pictures`, `cache_logs` SET `pictures`.`last_modified`=NOW() WHERE `pictures`.`object_type`=1 AND `pictures`.`object_id`=`cache_logs`.`id` AND `cache_logs`.`cache_id`=nCacheId;
+				 SET @dont_update_logdate=FALSE;
 				 UPDATE `mp3` SET `last_modified`=NOW() WHERE `object_id`=nCacheId;
 	     END;");
 
@@ -1105,7 +1107,9 @@
 						ELSE
 							IF NEW.`last_modified` != OLD.`last_modified` THEN
 								IF NEW.`object_type`=1 THEN
-									UPDATE `cache_logs` SET `log_last_modified`=NEW.`last_modified` WHERE `id`=NEW.`object_id`;
+									IF NOT IFNULL(@dont_update_logdate,FALSE) THEN
+										UPDATE `cache_logs` SET `log_last_modified`=NEW.`last_modified` WHERE `id`=NEW.`object_id`;
+									END IF;
 								ELSE
 									CALL sp_update_cache_listingdate(NEW.`object_id`);
 								END IF;

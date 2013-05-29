@@ -22,6 +22,12 @@
 		$GLOBALS['rootpath'] = dirname(__FILE__) . '/../htdocs/';
 		require_once($GLOBALS['rootpath']."okapi/facade.php");
 		okapi\Facade::database_update();
+			// This may not work properly if an OKAPI update mutation function relies
+			// on catching exceptions. The cryptic error message
+			//   "exception thrown without a stack frame in Unknown on line 0"
+			// may appear (see http://code.google.com/p/opencaching-api/issues/detail?id=243).
+			// Then, you must call OKAPI update manually via
+			//   http://site-address/okapi/update
 	}
 
 ?>

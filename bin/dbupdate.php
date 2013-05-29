@@ -26,7 +26,10 @@
   system('php maintain.php');
 
   // We do *two* tests for OKAPI presence to get some robustness agains internal OKAPI changes.
-  // This should be replaced by a facade function call.
+  //
+  // This should be replaced by a facade function call, but current OKAPI implementation
+  // does not work well when called from the command line, due to exception handling problems
+  // (see http://code.google.com/p/opencaching-api/issues/detail?id=243).
   $okapi_vars = sql_table_exists('okapi_vars');
   $okapi_syncbase = sql_field_exists('caches','okapi_syncbase');
   if ($okapi_vars != $okapi_syncbase)

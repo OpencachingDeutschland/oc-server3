@@ -59,7 +59,7 @@ function get_logpics($purpose, $userid=0, $cacheid=0)
   		               WHERE `local`=1 AND `display`=1 AND `spoiler`=0 AND `unknown_format`=0
 	                	       AND `object_type`=1
 	                   ORDER BY `date_created` DESC
-		                 LIMIT 120) `piics`  
+		                 LIMIT 240) `piics`
 				  			     /* 20 times reserve for filtering out user dups, cache dups and invisibles */
                     GROUP BY `object_id`, LEFT(`date_created`,10)) `pics`   /* max. 1 pic per cache and day */
            $join_logs
@@ -81,7 +81,7 @@ function get_logpics($purpose, $userid=0, $cacheid=0)
 								        WHERE `local`=1 AND `display`=1 AND `spoiler`=0 AND `unknown_format`=0
 			                        AND `object_type`=1
 		  	             ORDER BY `date_created` DESC
-			                  LIMIT 480) `pics`
+			                  LIMIT 600) `pics`
 			                  /* 10 times reserve for filtering out user dups and invisibles */
     	       $join_logs
     	       $join_caches

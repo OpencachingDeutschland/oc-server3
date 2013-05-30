@@ -48,7 +48,6 @@
 
 			<tr>
 				<td colspan="2">{t}Content:{/t}</td>
-				</td>
 			</tr>
 			<tr>
 				<td colspan="2">

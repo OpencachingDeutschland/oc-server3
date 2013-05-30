@@ -3,6 +3,7 @@
 namespace okapi\services\caches\geocaches;
 
 use Exception;
+use ArrayObject;
 use okapi\Okapi;
 use okapi\Db;
 use okapi\Settings;
@@ -208,7 +209,7 @@ class WebService
 			");
 		}
 
-		$results = array();
+		$results = new ArrayObject();
 		$cacheid2wptcode = array();
 		$owner_ids = array();
 		while ($row = mysql_fetch_assoc($rs))
@@ -1058,7 +1059,7 @@ class WebService
 		# See issue#97. PHP dictionaries (assoc arrays) are ordered structures,
 		# so we just have to rewrite it (sequentially).
 
-		$ordered_results = array();
+		$ordered_results = new ArrayObject();
 		foreach ($cache_codes as $cache_code)
 			$ordered_results[$cache_code] = $results[$cache_code];
 

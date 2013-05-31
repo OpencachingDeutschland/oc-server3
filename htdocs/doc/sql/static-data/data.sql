@@ -2368,7 +2368,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1925', 'The cac
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1926', 'Path', '2013-03-03 00:00:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1927', 'Final', '2013-03-03 00:00:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1928', 'Show %1preview pictures</a><br />(% of map area, 0=off)', '2013-03-03 00:00:00');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1929', 'Preview picture for map \&ndash; is shown when this cache is selected on the map. You can have only <em>one</em> preview picture per cache.', '2013-03-03 00:00:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1929', 'Preview picture for map \&ndash; is shown when this cache is selected on the map.<br />You can have only <em>one</em> preview picture per cache.', '2013-03-03 00:00:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1930', 'Max. %1 caches can be displayed with Microsoft Internet Explorer.', '2013-03-03 00:00:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1940', 'Picture gallery', '2013-02-23 19:00:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1941', 'Dates show the date of picture upload, wich can differ from the log date.', '2013-02-23 19:00:04');
@@ -6306,7 +6306,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1926', 'DE', 'Pfad', '2012-10-11 00:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1927', 'DE', 'Ziel', '2012-10-11 00:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1928', 'DE', '%1Vorschaubilder</a> anzeigen<br />(% der Kartenfläche, 0=aus)', '2012-10-11 00:00:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1929', 'DE', 'Kartenvorschaubild \&ndash; wird angezeigt, wenn dieser Cache auf der Karte angeklickt wird. Es ist maximal <em>ein</em> Vorschaubild pro Cache wählbar.', '2012-10-11 00:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1929', 'DE', 'Kartenvorschaubild \&ndash; wird angezeigt, wenn dieser Cache auf der Karte angeklickt wird.<br />Es ist maximal <em>ein</em> Vorschaubild pro Cache wählbar.', '2012-10-11 00:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1930', 'DE', 'Mit dem Microsoft Internet Explorer werden<br />maximal %1 Caches angezeigt.', '2012-10-11 00:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1940', 'DE', 'Logbildgalerie', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1941', 'DE', 'Es wird jeweils das Datum angezeigt, an dem das Bild hochgeladen wurde, das heißt es kann vom Logdatum abweichen.', '2013-02-19 05:48:07');
@@ -7897,7 +7897,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1926', 'EN', 'Path', '2012-10-11 00:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1927', 'EN', 'Final', '2012-10-11 00:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1928', 'EN', 'Show %1preview pictures</a><br />(% of map area, 0=off)', '2012-10-11 00:00:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1929', 'EN', 'Preview picture for map \&ndash; is shown when this cache is selected on the map. You can have only <em>one</em> preview picture per cache.', '2012-10-11 00:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1929', 'EN', 'Preview picture for map \&ndash; is shown when this cache is selected on the map.<br />You can have only <em>one</em> preview picture per cache.', '2012-10-11 00:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1930', 'EN', 'Max. %1 caches can be displayed with Microsoft Internet Explorer.', '2012-10-11 00:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1940', 'EN', 'Picture gallery', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1941', 'EN', 'Dates show the date of picture upload, wich can differ from the log date. Therefore old dates can appear in the list.', '2013-02-19 05:48:07');
@@ -9415,7 +9415,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1926', 'ES', 'Path', '2013-03-16 17:23:42');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1927', 'ES', 'Final', '2013-03-16 17:23:42');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1928', 'ES', 'Mostrar %1preview de la imagen</a><br />(% of map area, 0=off)', '2013-03-16 17:23:42');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1929', 'ES', 'Imagen de vista previa para ver el mapa - se muestra cuando se selecciona esta cache en el mapa. Sólo puede tener <em>una</em> imagen de vista previa por cache.', '2013-03-16 17:23:42');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1929', 'ES', 'Imagen de vista previa para ver el mapa - se muestra cuando se selecciona esta cache en el mapa.<br />Sólo puede tener <em>una</em> imagen de vista previa por cache.', '2013-03-16 17:23:42');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1930', 'ES', 'Max. %1 caches se pueden visualizar con Microsoft Internet Explorer.', '2013-03-16 17:23:42');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1940', 'ES', 'Galeria de imagenes', '2013-03-16 17:23:42');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1941', 'ES', 'Calendario de exposiciones de la fecha de la subida de imágenes, cosa que puede diferir de la fecha de registro.', '2013-03-16 17:23:42');
@@ -11007,7 +11007,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1926', 'IT', 'Percorso', '2013-03-14 10:49:58');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1927', 'IT', 'Finale', '2013-03-14 10:49:58');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1928', 'IT', 'Visualizza %1anteprima immagini</a><br />(% dell\'area della mappa, 0=off)', '2013-03-14 10:49:58');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1929', 'IT', 'Anteprima immagine per la mappa \&ndash; è visualizzata quando queta cache è selezionata sulla mappa. Puoi avere solo <em>una</em> immagine di anteprima per cache', '2013-03-14 10:49:58');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1929', 'IT', 'Anteprima immagine per la mappa \&ndash; è visualizzata quando queta cache è selezionata sulla mappa.<br />Puoi avere solo <em>una</em> immagine di anteprima per cache', '2013-03-14 10:49:58');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1930', 'IT', 'Al massimo %1 cache possono essere visualizzate con Microsoft Internet Explorer.', '2013-03-14 10:49:58');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1940', 'IT', 'Galleria di immagini', '2013-03-14 10:49:58');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1941', 'IT', 'La data visualizza la data del caricamento dell\\\'immagine, che può essere diversa dalla data del log.', '2013-03-19 15:12:21');

@@ -63,11 +63,13 @@
 		<li>Event-Log-Icons (<img src="resource2/ocstyle/images/log/16x16-will_attend.png" /> <img src="resource2/ocstyle/images/log/16x16-attended.png" />) in Suchlisten</li>
 		<li>Bei Suchsortierung nach letzten Log fehlten alle ungeloggten Caches außer einem.</li>
 		<li>Bildanzeigeproblem bei ' im Bildtitel behoben [Bug von Version 5]</li>
-		<li>Persönliche Notizen verändern nicht mehr das Listing-Änderungsdatum; Datum der betroffenen Caches korrigiert. [Bug von Version 6]</li>
-		<li>&bdquo;Cache verstecken&ldquo; führt nicht angemeldete User wieder auf die Loginseite. [Bug von Version 5]</li>
+		<li>nicht funktionierenden in-GM-Link (Anzeige in Google Maps) beim Abruf gespeicherter Suchen entfernt</li>
 		<li>seltene Fehlermeldungen nach dem Zurückziehen von Bewertungen beseitigt</li>
+		<li>Datumsangabe in Email-Adress-Erinnerungsmails korrigiert</li>
 		<li>Layoutkorrektur bei der Hint-Decodiertabelle</li>
 		<li>Layout der Startseiten-Cachelisten im Internet Explorer korrigiert</li>
+		<li>Persönliche Notizen verändern nicht mehr das Listing-Änderungsdatum; Datum der betroffenen Caches korrigiert. [Bug von Version 6]</li>
+		<li>&bdquo;Cache verstecken&ldquo; führt nicht angemeldete User wieder auf die Loginseite. [Bug von Version 5]</li>
 		<li>XML-Interface-DTDs korrigiert</li>
 		<li>diverse OKAPI-Korrekturen</li>
 		<li><a href="http://wiki.opencaching.de/index.php/Ocprop">Ocprop</a>-Problem beim Abgleich von Logs behoben [entstanden kurz nach Freigabe von Version 7]</li>

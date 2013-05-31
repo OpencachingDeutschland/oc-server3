@@ -62,11 +62,13 @@
 		<li>event log icons (<img src="resource2/ocstyle/images/log/16x16-will_attend.png" /> <img src="resource2/ocstyle/images/log/16x16-attended.png" />) in search result lists</li>
 		<li>show <em>all</em> matching unlogged caches when sorting search results by last log date</li>
 		<li>solved picture display problem when the title contains ' [bug of release 5]</li>
-		<li>personal notes will not change the listing modification date; fixed date of the affected listings [bug of release 6]</li>
-		<li>"hide cache" will redirect not-logged-in users to the login page [bug of release 5]</li>
+		<li>removed dysfunctional "in GM" link (show in Google Maps) when executing stored queries</li>
 		<li>fixed rare error message after retracting recommendations</li>
+		<li>fixed date/time in email address reminder emails</li>
 		<li>layout fix in hint decoder table</li>
 		<li>fixed start page cache lists layout in Internet Explorer</li>
+		<li>personal notes will not change the listing modification date; fixed date of the affected listings [bug of release 6]</li>
+		<li>"hide cache" will redirect not-logged-in users to the login page [bug of release 5]</li>
 		<li>fixed "XML interface" DTDs</li>
 		<li>several OKAPI fixes</li>
   </ul>

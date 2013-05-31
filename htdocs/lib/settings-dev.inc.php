@@ -145,7 +145,7 @@
 	$opt['logic']['license']['terms'] = $absolute_server_URI . 'articles.php?page=impressum#datalicense';
 
 	// admin may use OC-team-comment log flag only when processing a cache report 
-	$opt['logic']['admin']['team_comments_only_for_reports'] = false;
+	$opt['logic']['admin']['team_comments_only_for_reports'] = true;
 
   // see config2/settings-dist.inc.php
 	$opt['template']['default']['locale'] = 'DE';      // may be overwritten by $opt['domain'][...]['locale']

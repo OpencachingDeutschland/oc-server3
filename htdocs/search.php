@@ -53,10 +53,19 @@
 		$multiplier['sm'] = 0.62137;
 		$multiplier['nm'] = 0.53996;
 
+		// default template variables
+		tpl_set_var('search_in_gm', $search_in_gm);
+		tpl_set_var('search_in_gm_zip', $search_in_gm_zip);
+
 		if (isset($_REQUEST['queryid']) || isset($_REQUEST['showresult']))
 		{  // Ocprop: showresult, queryid
 			$bCookieQueryid = false;
 			$queryid = isset($_REQUEST['queryid']) ? $_REQUEST['queryid'] : 0;
+			if ($queryid)
+			{
+				tpl_set_var('search_in_gm', '');
+				tpl_set_var('search_in_gm_zip', '');
+			}
 		}
 		else
 		{
@@ -107,14 +116,16 @@
 
 			if (mysql_num_rows($query_rs) == 0)
 			{
-				// can happen if logged out after query was created (fix for #3915)
+				// can happen if logged out after query was created (fix for RT #3915)
 				$queryid = 0;
 				goto newquery;  // goto needs PHP 5.3
+				/*
 				$tplname = 'error';
 				tpl_set_var('tplname', 'search.php');
 				tpl_set_var('error_msg', $error_query_not_found);
 				tpl_BuildTemplate();
 				exit;
+				*/
 			}
 			else
 			{

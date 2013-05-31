@@ -5470,7 +5470,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('664', 'DE', 'Die Erinnerungsmail wurde gesendet.', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('665', 'DE', 'Erinnerung an deine E-Mail-Adresse', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('666', 'DE', 'Deine E-Mail-Adresse, mit der du dich einloggen kannst, ist:', '2010-08-28 11:48:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('667', 'DE', 'du hast am %date% eine Erinnerung an deine E-Mail-Adresse angefordert.', '2010-08-28 11:48:06');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('667', 'DE', 'du hast am %1 eine Erinnerung an deine E-Mail-Adresse angefordert.', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('668', 'DE', 'Cache-Empfehlungen', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('669', 'DE', 'Benutzer, die %1 von %2 empfahlen, haben auch folgende Geocaches empfohlen:', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('670', 'DE', 'Trefferquote', '2010-08-28 11:48:06');
@@ -11746,7 +11746,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('664', 'NL', 'De herinneringsmail is verzonden.', '2011-02-04 19:50:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('665', 'NL', 'Herinnering naar jouw E-Mail adres', '2011-02-04 19:50:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('666', 'NL', 'Het E-Mail adres waarmee je in kunt loggen:', '2011-02-04 19:50:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('667', 'NL', 'je had op %date% een herinnering op jouw E-Mail adres opgevraagt.', '2011-02-04 19:50:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('667', 'NL', 'je had op %1 een herinnering op jouw E-Mail adres opgevraagt.', '2011-02-04 19:50:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('668', 'NL', 'Cache aanbevelingen', '2011-02-04 19:50:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('669', 'NL', 'Gebruikers die %1 van %2 aanbevelen hebben ook de volgende caches aanbevolen:', '2011-02-04 19:50:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('671', 'NL', 'Geen aanbevelingen gevonden.', '2011-02-04 19:50:07');

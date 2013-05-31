@@ -35,6 +35,7 @@
 		sql_table_exists                ... tests if a table exists
 		sql_field_exists                ... tests if a table and a field in this table exist
 		sql_field_type                  ... queries the type of a field (uppercase letters)
+		sql_index_exists                ... tests if a table and an index of this table exist
 
 		// slave query functions
 		sql_slave_exclude()             ... do not use slave servers for the current user

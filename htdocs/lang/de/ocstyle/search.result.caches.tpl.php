@@ -105,7 +105,7 @@
 				<a href="search.php?queryid={queryid}&output=gpx&startat={startat}" title="{t}GPS Exchange Format .gpx{/t}">GPX</a>
 				<a href="search.php?queryid={queryid}&output=loc&startat={startat}" title="{t}Waypointfile .loc{/t}">LOC</a>
 				<a href="search.php?queryid={queryid}&output=kml&startat={startat}" title="{t}Google Earth .kml{/t}">KML</a>
-				<a href="http://maps.google.de/maps?f=q&hl=de&q=<?php echo urlencode("http://".$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI']."&output=kml"); ?>" title="{t}Show in Google Maps{/t}">{t}(in GM){/t}</a>
+				{search_in_gm}
 				<a href="search.php?queryid={queryid}&output=ov2&startat={startat}" title="{t}TomTom POI .ov2{/t}">OV2</a>
 				<a href="search.php?queryid={queryid}&output=ovl&startat={startat}" title="{t}TOP50-Overlay .ovl{/t}">OVL</a>
 				<a href="search.php?queryid={queryid}&output=txt&startat={startat}" title="{t}Textfile .txt{/t}">TXT*</a>
@@ -120,7 +120,7 @@
 				<a href="search.php?queryid={queryid}&output=gpx&startat={startat}&count=max&zip=1" title="{t}GPS Exchange Format .gpx{/t}">GPX</a>
 				<a href="search.php?queryid={queryid}&output=loc&startat={startat}&count=max&zip=1" title="{t}Waypointfile .loc{/t}">LOC</a>
 				<a href="search.php?queryid={queryid}&output=kml&startat={startat}&count=max&zip=1" title="{t}Google Earth .kml{/t}">KML</a>
-				<a href="http://maps.google.de/maps?f=q&hl=de&q=<?php echo urlencode("http://".$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI']."&output=kml&zip=1&count=max"); ?>" title="{t}Show in Google Maps{/t}">{t}(in GM){/t}</a>
+				{search_in_gm_zip}
 				<a href="search.php?queryid={queryid}&output=ov2&startat={startat}&count=max&zip=1" title="{t}TomTom POI .ov2{/t}">OV2</a>
 				<a href="search.php?queryid={queryid}&output=ovl&startat={startat}&count=max&zip=1" title="{t}TOP50-Overlay .ovl{/t}">OVL</a>
 				<a href="search.php?queryid={queryid}&output=txt&startat={startat}&count=max&zip=1" title="{t}Textfile .txt{/t}">TXT</a>

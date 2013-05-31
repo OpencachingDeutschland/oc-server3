@@ -22,25 +22,25 @@
 		<li><a href="http://wiki.opencaching.de/index.php/Reverse_%28%E2%80%9ELocationless%E2%80%9C%29_Caches">Safari-Caches</a></li>
 		<li>Karte der neuesten Caches unten auf der Startseite</li>
 		<li>zusätzliche Wegpunkte und persönliche Notiz in Listing-Ausdrucken</li>
-		<li>Link &bdquo;geloggte Caches&ldquo; im Benutzerprofil</li>
+		<li>Link &bdquo;geloggte Caches&ldquo; im Benutzerprofil; Auflistung der eigenen Logs sortiert nach Logdatum</li>
 		<li>Zahl der aktiven Caches im Benutzerprofil, + Link &bdquo;anzeigen&ldquo;</li>
 		<li>Suchergebnisse sind nach Datum des letzten eigenen Logs sortierbar; in der Suchergebnisliste erscheinen dann rechts nur die eigenen Logs</li>
 		<li>Kartenfilter-Einstellungen sind nun permanent speicherbar</li>
 		<li>OC-Supportmitarbeiter können ihr Logs als &bdquo;OC-Team-Log&ldquo; (<img src="resource2/ocstyle/images/oclogo/oc-team-comment.png" />) markieren.</li>
-		<li>zusätzliche Wegpunkte, Loguhrzeit und Vorschaubild-Flag im <a href="http://wiki.opencaching.de/index.php/XML-Schnittstelle">XML-Interface</a></li>
-		<li>neuer Menüpunkt <a href="okapi/apps/">API-Anwendungen</a> im Benutzerprofil, zur Kontrolle von OKAPI-Anwendungsrechten</li>
-		<li><a href="okapi">OKAPI</a>: GC-Codes von Caches sind abfragbar</li>
-		<li><a href="okapi">OKAPI</a>: Bilder in GPX-Dateien sind als &bdquo;Thumbnail&ldquo; einbettbar</li>
+		<li>zusätzliche Wegpunkte, Loguhrzeit, OC-Team-Log-Flag und Vorschaubild-Flag im <a href="http://wiki.opencaching.de/index.php/XML-Schnittstelle">XML-Interface</a></li>
+		<li>neuer Menüpunkt <a href="okapi/apps/">API-Anwendungen</a> im Benutzerprofil, zur Kontrolle von <a href="okapi">OKAPI</a>-Anwendungsrechten</li>
+		<li>OKAPI: GC-Codes von Caches und OC-Team-Log-Flag sind abfragbar</li>
+		<li>OKAPI: Bilder in GPX-Dateien sind als &bdquo;Thumbnail&ldquo; einbettbar</li>
 		<li>neue <a href="404.php">Fehlerseite</a> für ungültige Seitenabrufe</li>
 	</ul>
 
 	<p>Geändert / verbessert:</p>
 	<ul>
 		<li>Benutzerprofileinstellungen überarbeitet/vereinfacht</li>
-		<li>Layout von Cachelisten im Benutzerprofil und bei Suchergebnissen überarbeitet</li>
+		<li>Layout von Cachelisten im Benutzerprofil und von  Suchergebnislisten überarbeitet</li>
 		<li>Beim Anlegen zusätzlicher Wegpunkte werden die Cachekoordinaten vorgeschlagen.</li> 
 		<li>Bei Loglöschungen wird auch der gelöschte Text und die Cache-URL mitgeschickt.</li>
-		<li>Inaktive Caches werden in Suchlisten durchgestrichen</li>
+		<li>Inaktive Caches werden in Suchlisten durchgestrichen.</li>
 		<li>Layout/Design des Cachelisting-Kopfes überarbeitet, u.a. mit Anzeige der Kurz-URL, übersichtlicheren Druckbuttons und schönerer Wegstreckenanzeige</li>
 		<li>Abgelaufene Events werden auf der Karte grau dargestellt, wie inaktive Caches.</li>
 		<li>Zurücksetzen-Buttons aus allen Dialogen rausgeworfen; Ändern-Buttons in &bdquo;Speichern&ldquo; umbenannt</li>
@@ -55,11 +55,12 @@
 		<li>Update der <a href="articles.php?page=verein">Vereinsseite</a> und des Mitgliedsantrags</li>
 		<li>Owner und OC-Supportmitarbeiter sehen gesperrt/versteckte Caches in Suchlisten.</li>
 		<li>Verbesserungen für das Supportteam, insbesondere beim Abarbeiten von Cachemeldungen</li>
+		<li>Suchmaschinenoptimierung (HTML Meta keywords &amp; description)</li>
 	</ul>
 
 	<p>Korrigiert (Bugfixes):</p>
 	<ul>
-		<li>Event-Log-Icons in Suchlisten</li>
+		<li>Event-Log-Icons (<img src="resource2/ocstyle/images/log/16x16-will_attend.png" /> <img src="resource2/ocstyle/images/log/16x16-attended.png" />) in Suchlisten</li>
 		<li>Bei Suchsortierung nach letzten Log fehlten alle ungeloggten Caches außer einem.</li>
 		<li>Bildanzeigeproblem bei ' im Bildtitel behoben [Bug von Version 5]</li>
 		<li>Persönliche Notizen verändern nicht mehr das Listing-Änderungsdatum; Datum der betroffenen Caches korrigiert. [Bug von Version 6]</li>

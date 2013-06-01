@@ -229,8 +229,10 @@ class cachelog
 		$cache = new cache($this->getCacheId());
 		if ($cache->exist() == false)
 			return array();
-		if ($cache->allowLog() == false)
-			return array();
+		// if ($cache->allowLog() == false)
+		//	 return array();
+		// Logic Error - log types are still valid when no NEW logs are allowed for the cache.
+		// (Would e.g. block admin logs and log-type restoring for locked caches.)
 
 		$nTypes = array();
 		$rs = sql("SELECT `log_type_id` FROM `cache_logtype` WHERE `cache_type_id`='&1'", $cache->getType());

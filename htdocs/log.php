@@ -59,6 +59,7 @@
 			require($stylepath.'/rating.inc.php');
 
 			$useradmin = ($login->admin & ADMIN_USER) ? 1 : 0;
+			$adminlog = false;
 
 			$cachename = '';
 			if ($cache_id != 0)
@@ -297,10 +298,15 @@
 					tpl_set_var('submit', $submit);
 					tpl_set_var('date_message', '');
 
+					tpl_set_var('adminlog',$adminlog);
+
 					$oc_team_comment = isset($_REQUEST['teamcomment']) ? ($_REQUEST['teamcomment'] != 0) : 0;
 					if (teamcomment_allowed($cache_id,3))
-						tpl_set_var('teamcommentoption',
-							mb_ereg_replace('{chk_sel}', ($oc_team_comment ? 'checked' : ''), $teamcomment_field));
+					{
+						$tco = mb_ereg_replace('{chk_sel}', ($oc_team_comment || $adminlog ? 'checked' : ''), $teamcomment_field);
+						$tco =  mb_ereg_replace('{textclass}', ($adminlog ? 'redtext' : ''), $tco);
+						tpl_set_var('teamcommentoption', $tco);
+					}
 					else
 						tpl_set_var('teamcommentoption', '');
 

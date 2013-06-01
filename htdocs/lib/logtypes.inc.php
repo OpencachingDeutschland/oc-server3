@@ -70,24 +70,28 @@
 		$cache_type = $rCache['type'];
 		$cache_status = $rCache['status'];
 		$owner = $login->userid == ($rCache['user_id']);
-		$admin = admin_has_open_report($cache_id);
+		$admin_report = admin_has_open_report($cache_id);
+		$admin_locked = $login->hasAdminPriv(ADMIN_USER) && in_array($rCache['status'], array(6,7));
 
 		// build result list
 		//
 		// Pay attention to okapi/services/logs/submit.php when changing this!
 
 		$allowed_logtypes = array();
-		if ($owner || $admin)
+		if ($owner || $admin_report || $admin_locked)
 		{
 			$allowed_logtypes[] = 3;   // note
-			if ($cache_status != 5 && (($cache_status != 4 && $cache_status != 7) || $admin))
+		}
+		if ($owner || $admin_report)
+		{
+			if ($cache_status != 5 && (($cache_status != 4 && $cache_status != 7) || $admin_report))
 			{
 				$allowed_logtypes[] = 10;  // ready for search
 				$allowed_logtypes[] = 11;  // temporarily not available
 				$allowed_logtypes[] = 9;   // archived
 				$allowed_logtypes[] = 13;  // locked
 			}
-			if ($admin || $old_logtype == 14)
+			if ($admin_report || $old_logtype == 14)
 				$allowed_logtypes[] = 14;  // locked, invisible
 		}
 		if ($cache_type == 6)  // event
@@ -100,7 +104,7 @@
 			$allowed_logtypes[] = 1;   // found
 			$allowed_logtypes[] = 2;   // not found
 		}
-		if (!($owner || $admin))
+		if (!($owner || $admin_report || $admin_locked))
 		{
 			$allowed_logtypes[] = 3;   // note
 		}
@@ -125,11 +129,26 @@
 			return false;
 		else
 		{
-			$rs = sql("SELECT `user_id` FROM `caches` WHERE `cache_id`='&1'", $cache_id);			
-			if ($r = sql_fetch_array($rs))
+			$rs = sql("SELECT `user_id`,`status` FROM `caches` WHERE `cache_id`='&1'", $cache_id);
+			if ($rCache = sql_fetch_array($rs))
 			{
-				$allowed = $login->userid != $r['user_id'] &&
-				           (!$opt['logic']['admin']['team_comments_only_for_reports'] || admin_has_open_report($cache_id));
+				if ($login->userid == $rCache['user_id'])
+				{
+					// not allowed for own caches
+					$allowed = false;
+				}
+				else if (!$opt['logic']['admin']['team_comments_only_for_reports'] || admin_has_open_report($cache_id))
+				{
+					// allowed for report processing by admins
+					$allowed = true;
+				}
+				else if ($login->hasAdminPriv(ADMIN_USER) && in_array($rCache['status'], array(6,7)))
+				{
+					// allowed for admins && locked caches, see http://forum.opencaching-network.org/index.php?topic=3102.msg39517#msg39517
+					$allowed = true;
+				}
+				else
+					$allowed = false;
 			}
 			else
 				$allowed = false;

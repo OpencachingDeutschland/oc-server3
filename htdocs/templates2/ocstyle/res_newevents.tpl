@@ -3,9 +3,9 @@
 *
 *  Unicode Reminder メモ
 ***************************************************************************}
-<ul class="nodot">
+<ul class="nodot" style="clear:both">  {* 'clear' is needed because the content2-container above is float:left *}
 	{foreach name=events from=$events item=eventitem}
-		<li class="newcache_list_multi" style="margin-bottom: 8px;"><br /> {* Firefox needs this <br> - why?? *}
+		<li class="newcache_list_multi" style="margin-bottom: 8px;">
 			<table class="null" cellspacing="0" cellpadding="0"><tr>
 			<td style="vertical-align:top; padding-right:2px; padding-top:2px" rowspan="2"><img src="resource2/{$opt.template.style}/images/cacheicon/event-rand{rand min=1 max=4}.gif" alt="{t}Event Geocache{/t}" border="0" width="22" height="22" align="left" style="margin-right: 5px;" /></td>
 			<td style="vertical-align:top; ">{$eventitem.date_hidden|date_format:$opt.format.date}&nbsp;&nbsp;</td>

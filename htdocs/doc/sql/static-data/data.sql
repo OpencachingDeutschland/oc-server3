@@ -6387,10 +6387,10 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2021', 'DE', 'momentan nicht verfügbar', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2023', 'DE', 'gesperrt', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2024', 'DE', 'gesperrt, versteckt', '2013-02-19 05:48:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2025', 'DE', '%2 has %1 archiviert', '2013-02-19 05:48:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2026', 'DE', '%2 has %1 gewartet', '2013-02-19 05:48:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2027', 'DE', '%2 has %1 deaktiviert', '2013-02-19 05:48:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2028', 'DE', '%2 has %1 gesperrt', '2013-02-19 05:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2025', 'DE', '%2 hat %1 archiviert', '2013-02-19 05:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2026', 'DE', '%2 hat %1 gewartet', '2013-02-19 05:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2027', 'DE', '%2 hat %1 deaktiviert', '2013-02-19 05:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2028', 'DE', '%2 hat %1 gesperrt', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2029', 'DE', 'OC-Team-Kommentar', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2030', 'DE', 'Wartungslogs', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2031', 'DE', 'Um den Status zu ändern, mussst du den neuen Status <a href=\"log.php?cacheid=%1\">loggen</a>.', '2013-02-19 05:48:07');

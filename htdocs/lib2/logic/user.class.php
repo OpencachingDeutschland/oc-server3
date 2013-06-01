@@ -712,6 +712,7 @@ class user
 		                       'User ' . sql_escape($this->getUsername()) . ' disabled',
 		                       serialize($backup));
 
+		sql("SET @STATUS_CHANGE_USER_ID='&1'", $login->userid);
 		sql("UPDATE `caches` SET `status`=6 WHERE `user_id`='&1' AND `status` IN (1, 2, 3)", $this->nUserId);
 		sql("UPDATE `user` SET `password`=NULL, `email`=NULL, 
 		                       `is_active_flag`=0, 

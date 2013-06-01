@@ -717,7 +717,7 @@
 					$sql_innerjoin[] = '`cache_logs` ON `caches`.`cache_id`=`cache_logs`.`cache_id`';
 					$sql_where[] = '`cache_logs`.`user_id`=\'' . sql_escape($finder_id) . '\'';
 					
-					$ids = split(',', $options['logtype']);
+					$ids = explode(',', $options['logtype']);
 					$idNumbers = '0';
 					foreach ($ids AS $id)
 					{

@@ -6,6 +6,7 @@
 <div class="content-txtbox-noshade">  {* Ocprop: <div class="content-txtbox-noshade">(.*?)<\/div> *}
 	<div class="logs" id="log{$logItem.id}">
 	<p class="content-title-noshade-size1" style="display:inline; margin-right:0">
+		{if $logItem.oc_team_comment}<img src="resource2/{$opt.template.style}/images/oclogo/oc-team-comment.png" alt="OC-Team" title="{t}OC team comment{/t}"/>{/if}
 		{include file="res_logtype.tpl" type=$logItem.type} 
 		{if $logItem.recommended==1}  {* Ocprop: rating-star\.gif *}
 			<img src="images/rating-star.gif" border="0" alt="{t}Recommended{/t}" width="17px" height="16px" />
@@ -26,13 +27,23 @@
 			{t 1=$smarty.capture.username}%1 has visited the event{/t}
 		{elseif $logItem.type==8}
 			{t 1=$smarty.capture.username}%1 wants to visit the event{/t}
+		{elseif $logItem.type==9}
+			{t 1=$smarty.capture.username}%1 has archived the cache{/t}
+		{elseif $logItem.type==10}
+			{t 1=$smarty.capture.username}%1 has maintained the cache{/t}
+		{elseif $logItem.type==11}
+			{t 1=$smarty.capture.username}%1 has disabled the cache{/t}
+		{elseif $logItem.type==13}
+			{t 1=$smarty.capture.username}%1 has locked the cache{/t}
+		{elseif $logItem.type==14}
+			{t 1=$smarty.capture.username}%1 has locked and hidden the cache{/t}
 		{else}
 			{t 1=$smarty.capture.username}%1{/t}
 		{/if}
 	</p>
 
 	{* Ocprop: /\?logid=([0-9a-f\-]+)" *}
-	{if $cache.userid==$login.userid || $logItem.userid==$login.userid}
+	{if $logItem.deleted !== "1" && ($cache.userid==$login.userid || $logItem.userid==$login.userid)}
 		<p class="editlog"><img src="images/trans.gif" border="0" width="16" height="16" alt="" title="" />
 			{if $logItem.userid==$login.userid && ($cache.userid==$login.userid || $cache.status!=6 || $cache.adminlog)}
 				<a href="editlog.php?logid={$logItem.id|urlencode}"><img src="resource2/{$opt.template.style}/images/action/16x16-properties.png" border="0" align="middle" border="0" width="16" height="16" alt="" /></a>
@@ -40,7 +51,7 @@
 			{/if}
 
 			{if $cache.userid==$login.userid || $logItem.userid==$login.userid}
-				<a href="removelog.php?logid={$logItem.id|urlencode}"><img src="resource2/{$opt.template.style}/images/log/16x16-trash.png" border="0" align="middle" border="0" width="16" height="16" alt="" /></a>
+				<a href="removelog.php?logid={$logItem.id|urlencode}"><img src="resource2/{$opt.template.style}/images/action/16x16-delete.png" border="0" align="middle" border="0" width="16" height="16" alt="" /></a>
 				[<a href="removelog.php?logid={$logItem.id|urlencode}">{t}Delete{/t}</a>]
 			{/if}
 

@@ -16,28 +16,24 @@
 	$login->verify();
 
 	$action = isset($_REQUEST['action']) ? mb_strtolower($_REQUEST['action']) : 'view';
-	if ($action != 'change' &&  $action != 'view')
+	if ($action != 'change' &&  $action != 'changeemail' && $action != 'view')
 		$action = 'view';
-
-	if ($action == 'change')
-		$tpl->menuitem = MNU_MYPROFILE_DATA_EDIT;
 
 	if ($login->userid == 0)
 	{
-		if ($action == 'change')
+		if ($action == 'change' || $action == 'changeemail')
 			$tpl->redirect('login.php?target=' . urlencode('myprofile.php?action=change'));
 		else
 			$tpl->redirect('login.php?target=myprofile.php');
 	}
 
-	if ($action == 'change')
-	{
+	if ($action == 'changeemail')
+		$tpl->redirect('newemail.php');
+	else if ($action == 'change')
 		change();
-	}
 	else
-	{
 		display();
-	}
+
 exit;
 
 function change()

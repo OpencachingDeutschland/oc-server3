@@ -45,7 +45,7 @@
 		else
 		{
 			$log_rs = sql("SELECT	`cache_logs`.`node` AS `node`, `cache_logs`.`uuid` AS `uuid`, `cache_logs`.`cache_id` AS `cache_id`, `caches`.`user_id` AS `cache_owner_id`,
-						`caches`.`name` AS `cache_name`, `cache_logs`.`text` AS `log_text`, `cache_logs`.`text_html`, `cache_logs`.`type` AS `log_type`,
+						`caches`.`name` AS `cache_name`, `cache_logs`.`text` AS `log_text`, `cache_logs`.`text_html`, `cache_logs`.`type` AS `log_type`, `cache_logs`.`oc_team_comment` AS `oc_team_comment`,
 						`cache_logs`.`user_id` AS `log_user_id`, `cache_logs`.`date` AS `log_date`,
 						`log_types`.`icon_small` AS `icon_small`,
 						`user`.`username` as `log_username`,
@@ -238,7 +238,12 @@
 					tpl_set_var('logid_urlencode', htmlspecialchars(urlencode($log_id), ENT_COMPAT, 'UTF-8'));
 					tpl_set_var('logid', htmlspecialchars($log_id, ENT_COMPAT, 'UTF-8'));
 
-					tpl_set_var('logimage', icon_log_type($log_record['icon_small'], ""));
+					if ($log_record['oc_team_comment'])
+						$teamimg = '<img src="resource2/ocstyle/images/oclogo/oc-team-comment.png" title="' . t('OC team comment') . '" /> ';
+					else
+						$teamimg = "";
+					tpl_set_var('logimage', $teamimg . icon_log_type($log_record['icon_small'], ""));
+
 					tpl_set_var('date', htmlspecialchars(strftime($dateformat, strtotime($log_record['log_date'])), ENT_COMPAT, 'UTF-8'));
 					tpl_set_var('time', substr($log_record['log_date'],11)=="00:00:00" ? "" : ", " . substr($log_record['log_date'],11,5)); 
 					tpl_set_var('userid', htmlspecialchars($log_record['log_user_id'] + 0, ENT_COMPAT, 'UTF-8'));

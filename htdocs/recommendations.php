@@ -24,7 +24,7 @@
 	if ($rCache === false)
 		$tpl->error(ERROR_CACHE_NOT_EXISTS);
 
-	$rs = sql("SELECT COUNT(`caches`.`cache_id`) / (SELECT `toprating` FROM `stat_caches` WHERE `cache_id`='&1')*100 AS `quote`, `caches`.`cache_id` AS `cacheid`, `caches`.`wp_oc` AS `wp`, `caches`.`name` AS `name`, `user`.`user_id` AS `cacheuserid`, `user`.`username` AS `cacheusername` 
+	$rs = sql("SELECT COUNT(`caches`.`cache_id`) / (SELECT `toprating` FROM `stat_caches` WHERE `cache_id`='&1')*100 AS `quote`, `caches`.`cache_id` AS `cacheid`, `caches`.`wp_oc` AS `wp`, `caches`.`name` AS `name`, `user`.`user_id` AS `cacheuserid`, `user`.`username` AS `cacheusername`, `caches`.`status` 
 	             FROM `cache_rating` AS `r1` 
 	       INNER JOIN `cache_rating` AS `r2` ON `r1`.`user_id`=`r2`.`user_id` 
 	       INNER JOIN `caches` ON `r2`.`cache_id`=`caches`.`cache_id` 

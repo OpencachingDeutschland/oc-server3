@@ -5,9 +5,11 @@
  *  Unicode Reminder メモ
  ***************************************************************************/
 
-	require_once('./lib2/web.inc.php');
-	require_once('./lib2/logic/user.class.php');
-	require_once('./lib2/logic/useroptions.class.php');
+	require_once('lib2/web.inc.php');
+	require_once('lib2/logic/user.class.php');
+	require_once('lib2/logic/useroptions.class.php');
+	require_once('lang/de/ocstyle/smilies.inc.php');
+	require_once('../lib/htmlpurifier-4.2.0/library/HTMLPurifier.auto.php');
 
 	$tpl->name = 'mydetails';
 	$tpl->menuitem = MNU_MYPROFILE_DETAILS;
@@ -16,27 +18,25 @@
 	if ($login->userid == 0)
 		$tpl->redirect_login();
 
+	if (isset($_REQUEST['cancel']))
+		$tpl->redirect('mydetails.php');
+
 	$action = isset($_REQUEST['action']) ? mb_strtolower($_REQUEST['action']) : 'view';
-	if ($action != 'change' &&  $action != 'view') $action = 'view';
+	if ($action != 'change' && $action != 'changetext' && $action != 'view') $action = 'view';
 
 	if ($action == 'change')
-	{
-		$tpl->menuitem = MNU_MYPROFILE_DETAILS_EDIT;
 		change();
-	}
+	else if ($action == 'changetext')
+		changetext();
 	else
-	{
 		display();
-	}
 
 exit;
+
 
 function change()
 {
 	global $tpl, $login, $opt;
-
-	if (isset($_REQUEST['cancel']))
-		$tpl->redirect('mydetails.php');
 
 	$useroptions = new useroptions($login->userid);
 
@@ -56,7 +56,7 @@ function change()
 			if ($vis != 1) $vis = 0;
 
 			$useroptions->setOptVisible($id, $vis);
-			if (strlen($value) > 2000 && $opt['logic']['enableHTMLInUserDescription'] != true)
+			if (strlen($value) > 2000)
 			{
 				$errorlen .= $useroptions->getOptName($id);
 				$bErrorlen = true;
@@ -89,21 +89,43 @@ function change()
 		  $tpl->redirect('mydetails.php');
 	}
 
-	assignFromDB($login->userid);
+	assignFromDB($login->userid,false);
 	$tpl->assign('edit', true);
 	$tpl->display();
 }
 
+
+function changetext()
+{
+	global $tpl, $login;
+
+	if (isset($_REQUEST['save']))
+	{
+		$purifier = new HTMLPurifier();
+		$desctext = isset($_REQUEST['desctext']) ? $purifier->purify($_REQUEST['desctext']) : "";
+		sql("UPDATE `user` SET `description`='&2' WHERE `user_id`='&1'", $login->userid, $desctext);
+	  $tpl->redirect('mydetails.php');
+	}
+	else
+	{
+		$tpl->name = 'mydescription';
+		assignFromDB($login->userid,true);
+		$tpl->display();
+	}
+}
+
+
 function display()
 {
 	global $tpl, $login;
-	assignFromDB($login->userid);
+	assignFromDB($login->userid,false);
 	$tpl->display();
 }
 
-function assignFromDB($userid)
+
+function assignFromDB($userid,$include_editor)
 {
-	global $tpl, $opt;
+	global $tpl, $opt, $smilies, $_REQUEST;
 
 	$rs = sql("SELECT `p`.`id`, IFNULL(`tt`.`text`, `p`.`name`) AS `name`, `p`.`default_value`, `p`.`check_regex`, `p`.`option_order`, `u`.`option_visible`, `p`.`internal_use`, `p`.`option_input`, IFNULL(`u`.`option_value`, `p`.`default_value`) AS `option_value`
 		           FROM `profile_options` AS `p`
@@ -116,5 +138,31 @@ function assignFromDB($userid)
 		                $opt['template']['locale']);
 	$tpl->assign_rs('useroptions', $rs);
 	sql_free_result($rs);
+
+	if (isset($_REQUEST['desctext']))
+		$tpl->assign('desctext', $_REQUEST['desctext']);
+	else
+		$tpl->assign('desctext',
+			sql_value("SELECT `description` FROM `user` WHERE `user_id`='&1'", '', $userid+0));
+
+	// Use the same descmode values here like in log and cachedesc editor:
+	if ($include_editor)
+	{
+		if (isset($_REQUEST['descMode']))
+			$descMode = min(3,max(2,$_REQUEST['descMode']+0));
+		else
+		{
+			if (sql_value("SELECT `desc_htmledit` FROM `user` WHERE `user_id`='&1'", 0, $userid+0))
+				$descMode = 3;
+			else
+				$descMode = 2;
+		}
+		if ($descMode == 3)
+		{
+			$tpl->add_header_javascript('resource2/tinymce/tiny_mce_gzip.js');
+			$tpl->add_header_javascript('resource2/tinymce/config/user.js.php?lang='.strtolower($opt['template']['locale']));
+		}
+		$tpl->assign('descMode',$descMode);
+	}
 }
 ?>

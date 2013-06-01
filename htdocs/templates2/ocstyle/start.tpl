@@ -66,7 +66,9 @@
 		{t 1=$usercountry|escape}The next events in %1{/t}
 	</p>
 </div>
-{include file="res_newevents.tpl" events=$events}
+<div style="padding:2px 0 6px 0">
+	{include file="res_newevents.tpl" events=$events}
+</div>
 
 {* new logpix *}
 <div class="content2-container bg-blue02" style="margin-bottom:6px">

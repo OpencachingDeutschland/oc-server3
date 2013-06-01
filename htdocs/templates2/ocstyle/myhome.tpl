@@ -17,7 +17,7 @@
 		<p class="content-title-noshade-size3">
 			<img src="resource2/{$opt.template.style}/images/description/22x22-logs.png" width="22" height="22"  style="align: left; margin-right: 10px;" />&nbsp;
 			{t 1=$found}Finds: %1{/t} &nbsp;
-			<span class="content-title-link">[<a href="search.php?showresult=1&amp;expert=0&amp;output=HTML&amp;sort=bymylastlog&amp;finderid={$login.userid}&amp;searchbyfinder=&amp;f_inactive=0&amp;logtype=1,7">{t}Geocaches found{/t}</a>]&nbsp; [<a href="search.php?showresult=1&amp;expert=0&amp;output=HTML&amp;sort=bymylastlog&amp;finderid={$login.userid}&amp;searchbyfinder=&amp;f_inactive=0&amp;logtype=1,2,3,6,7,8">{t}Geocaches logged{/t}</a>]</span>
+			<span class="content-title-link">[<a href="search.php?showresult=1&amp;expert=0&amp;output=HTML&amp;sort=bymylastlog&amp;finderid={$login.userid}&amp;searchbyfinder=&amp;f_inactive=0&amp;logtype=1,7">{t}Geocaches found{/t}</a>]&nbsp; [<a href="search.php?showresult=1&amp;expert=0&amp;output=HTML&amp;sort=bymylastlog&amp;finderid={$login.userid}&amp;searchbyfinder=&amp;f_inactive=0&amp;logtype=1,2,3,4,5,6,7,8,9,10,11,12,13,14">{t}Geocaches logged{/t}</a>]</span>
 		</p>
 	</div>
 
@@ -28,7 +28,7 @@
 		{foreach from=$logs item=logItem}
 			<tr>
 				<td>{include file="res_logtype.tpl" type=$logItem.type}</td>
-				<td>{$logItem.date|date_format:$opt.format.datelong}</td>
+				<td style="white-space:nowrap">{$logItem.date|date_format:$opt.format.datelong}</td>
 				<td><a href="viewcache.php?wp={$logItem.wp_oc}">{$logItem.name|escape}</a> {t}by{/t} <a href="viewprofile.php?userid={$logItem.userid}">{$logItem.username|escape}</a></td>
 			</tr>
 		{foreachelse}
@@ -85,7 +85,7 @@
 		{foreach from=$caches item=cacheItem}
 			<tr>
 				<td>{include file="res_cachestatus.tpl" status=$cacheItem.status}</td>
-				<td nowrap="nowrap">{$cacheItem.date_hidden|date_format:$opt.format.datelong}</td>
+				<td style="white-space:nowrap">{$cacheItem.date_hidden|date_format:$opt.format.datelong}</td>
 				<td><a href="viewcache.php?wp={$cacheItem.wp_oc}">{$cacheItem.name|escape}</a></td>
 			</tr>
 		{foreachelse}

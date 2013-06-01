@@ -60,6 +60,7 @@
 			tpl_set_var('size_message', '');
 			tpl_set_var('type_message', '');
 			tpl_set_var('diff_message', '');
+			tpl_set_var('safari_message', '');
 
 			$sel_type = isset($_POST['type']) ? $_POST['type'] : 0;  // Ocprop
 			if (!isset($_POST['size']))
@@ -768,8 +769,19 @@
 					$diff_not_ok = true;
 				}
 
+				// attributes
+				$attribs_not_ok = false;
+				if (in_array(ATTRIB_ID_SAFARI,$cache_attribs) && $sel_type != 4)
+				{
+					tpl_set_var('safari_message', $safari_not_allowed_message);
+					$error = true;
+					$attribs_not_ok = true;
+				}
+				else
+					tpl_set_var('safari_message', '');
+
 				//no errors?
-				if (!($tos_not_ok || $name_not_ok || $hidden_date_not_ok || $activation_date_not_ok || $lon_not_ok || $lat_not_ok || $time_not_ok || $way_length_not_ok || $size_not_ok || $type_not_ok || $diff_not_ok))
+				if (!($tos_not_ok || $name_not_ok || $hidden_date_not_ok || $activation_date_not_ok || $lon_not_ok || $lat_not_ok || $time_not_ok || $way_length_not_ok || $size_not_ok || $type_not_ok || $diff_not_ok || $attribs_not_ok))
 				{
 					//sel_status
 					$now = getdate();

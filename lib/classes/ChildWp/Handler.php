@@ -84,7 +84,7 @@ class ChildWp_Handler
 
     return $nameAndTypes;
   }
-
+  
   private function recordToArray($r)
   {
     $ret = array();

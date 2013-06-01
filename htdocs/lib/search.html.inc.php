@@ -227,7 +227,9 @@
 
 		// strikeout inavtive caches
 		// see also res_cachestatus_span.tpl
-		$line_style = "";
+		$status_style = "";  // (colored) strike-through for inactive caches
+		$line_style = "";    // color of the linked cache name
+		$name_style = "";    // color of "by <username>"
 		switch ($caches_record['status'])
 		{
 			case 2: // disabled
@@ -235,21 +237,23 @@
 			        break;
 			case 3: // archived
 			case 6: // locked
-			        $status_style = "text-decoration: line-through; color: grey";
-			        $line_style = "color:grey";
+			        $status_style = "text-decoration: line-through; color: #c00000;";
+			        // $line_style = "color:grey";
 			        break;
 			case 7: // locked, invisible
 			        $status_style = "text-decoration: line-through; color: #e00000";
-			        $line_style = "color:grey";
+			        $name_style = "color: #e00000";
+			        // $line_style = "color:grey";
 			        break;
 			case 5: // not published yet
-			        $status_style = "color: #e00000";
+			        $name_style = "color: #e00000";
 			        break;
 			default: $status_style = $line_style = "";
 		}
 
 		$tmpline = mb_ereg_replace('{line_style}', $line_style, $tmpline);
 		$tmpline = mb_ereg_replace('{status_style}', $status_style, $tmpline);
+		$tmpline = mb_ereg_replace('{name_style}', $name_style, $tmpline);
 		$tmpline = mb_ereg_replace('{desclangs}', $desclangs, $tmpline);
 		$tmpline = mb_ereg_replace('{cachename}', htmlspecialchars($caches_record['name'], ENT_COMPAT, 'UTF-8'), $tmpline);
 		$tmpline = mb_ereg_replace('{urlencode_cacheid}', htmlspecialchars(urlencode($caches_record['cache_id']), ENT_COMPAT, 'UTF-8'), $tmpline);
@@ -287,43 +291,34 @@
 
 	tpl_set_var('results', $caches_output);
 
-	//more than one page?
-	if ($startat > 0)
-	{  // Ocprop:  queryid=([0-9]+)
-		$pages = t('Seite:') . ' <a href="search.php?queryid=' . $options['queryid'] . '&startat=0">&lt;&lt;</a> <a href="search.php?queryid=' . $options['queryid'] . '&startat=' . ($startat - $caches_per_page) . '">&lt;</a> ';
-	}
+	// more than one page?
+	if ($resultcount <= $caches_per_page)
+		$pages = '';
 	else
 	{
-		$pages = t('Seite:') . ' &lt;&lt; &lt; ';
-	}
-
-	$frompage = ($startat / $caches_per_page) - 3;
-	if ($frompage < 1) $frompage = 1;
-
-	$maxpage = ceil($resultcount / $caches_per_page);
-
-	$topage = $frompage + 8;
-	if ($topage > $maxpage) $topage = $maxpage;
-
-	for ($i = $frompage; $i <= $topage; $i++)
-	{
-		if (($startat / $caches_per_page + 1) == $i)
-		{
-			$pages .= ' <b>' . $i . '</b>';
-		}
+		if ($startat > 0)  // Ocprop:  queryid=([0-9]+)
+			$pages = '<a href="search.php?queryid=' . $options['queryid'] . '&startat=0"><img src="resource2/ocstyle/images/navigation/16x16-browse-first.png" width="16" height="16"></a> <a href="search.php?queryid=' . $options['queryid'] . '&startat=' . ($startat - $caches_per_page) . '"><img src="resource2/ocstyle/images/navigation/16x16-browse-prev.png" width="16" height="16"></a></a> ';
 		else
-		{
-			$pages .= ' <a href="search.php?queryid=' . $options['queryid'] . '&startat=' . (($i - 1) * $caches_per_page) . '">' . $i . '</a>';
-		}
-	}
+			$pages = ' <img src="resource2/ocstyle/images/navigation/16x16-browse-first-inactive.png" width="16" height="16"></a> <img src="resource2/ocstyle/images/navigation/16x16-browse-prev-inactive.png" width="16" height="16"></a> ';
 
-	if ($startat / $caches_per_page < ($maxpage - 1))
-	{
-		$pages .= ' <a href="search.php?queryid=' . $options['queryid'] . '&startat=' . ($startat + $caches_per_page) . '">&gt;</a> <a href="search.php?queryid=' . $options['queryid'] . '&startat=' . (($maxpage - 1) * $caches_per_page) . '">&gt;&gt;</a> ';
-	}
-	else
-	{
-		$pages .= ' &gt; &gt;&gt;';
+		$frompage = ($startat / $caches_per_page) - 3;
+		if ($frompage < 1) $frompage = 1;
+		$maxpage = ceil($resultcount / $caches_per_page);
+		$topage = $frompage + 8;
+		if ($topage > $maxpage) $topage = $maxpage;
+
+		for ($i = $frompage; $i <= $topage; $i++)
+		{
+			if (($startat / $caches_per_page + 1) == $i)
+				$pages .= ' <b>' . $i . '</b>';
+			else
+				$pages .= ' <a href="search.php?queryid=' . $options['queryid'] . '&startat=' . (($i - 1) * $caches_per_page) . '">' . $i . '</a>';
+		}
+
+		if ($startat / $caches_per_page < ($maxpage - 1))
+			$pages .= ' <a href="search.php?queryid=' . $options['queryid'] . '&startat=' . ($startat + $caches_per_page) . '"><img src="resource2/ocstyle/images/navigation/16x16-browse-next.png" width="16" height="16"></a> <a href="search.php?queryid=' . $options['queryid'] . '&startat=' . (($maxpage - 1) * $caches_per_page) . '"><img src="resource2/ocstyle/images/navigation/16x16-browse-last.png" width="16" height="16"></a> ';
+		else
+			$pages .= ' <img src="resource2/ocstyle/images/navigation/16x16-browse-next-inactive.png" width="16" height="16"> <img src="resource2/ocstyle/images/navigation/16x16-browse-last-inactive.png" width="16" height="16"></a>';
 	}
 
 	//'<a href="search.php?queryid=' . $options['queryid'] . '&startat=20">20</a> 40 60 80 100';

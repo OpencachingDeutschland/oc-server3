@@ -100,7 +100,28 @@
 
 		// get newest caches
 		$tpl->assign_rs('newcaches', $getNew->rsForSmarty('cache'));
-
+		// enable minimap for new caches if url is set
+		if ($opt['logic']['minimapurl'] != '')
+		{
+			// get the correct api key for google maps
+			$gmkey = '';
+			$sHost = strtolower($_SERVER['HTTP_HOST']);
+			if (isset($opt['lib']['google']['mapkey'][$sHost]))
+				$gmkey = $opt['lib']['google']['mapkey'][$sHost];
+			
+			// build static maps url by inserting api key
+			$url = $opt['logic']['minimapurl'];
+			$url = mb_ereg_replace('{gmkey}', $gmkey, $url);
+			
+			// put into template
+			$tpl->assign('minimap_url', $url);
+			$tpl->assign('minimap_enabled', true);
+		}
+		else
+		{
+			$tpl->assign('minimap_enabled', false);
+		}
+		
 		// last 30 days' top ratings
 		$tpl->assign_rs('topratings', $getNew->rsForSmarty('rating'));
 

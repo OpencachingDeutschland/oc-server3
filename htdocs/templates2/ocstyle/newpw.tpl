@@ -17,7 +17,7 @@
 <form action="newpw.php" method="post" style="display: inline;">
 	<table class="table">
 		<tr>
-			<td><b>{t}Step 1{/t}</b></td>
+			<td class="boldtext">{t}Step 1{/t}</td>
 		</tr>
 		<tr>
 			<td class="help" colspan="2">
@@ -57,7 +57,7 @@
 			<col>
 		</colgroup>
 		<tr>
-			<td><b>{t}Step 2{/t}</b></td>
+			<td class="boldtext">{t}Step 2{/t}</td>
 		</tr>
 		<tr>
 			<td class="help" colspan="2">

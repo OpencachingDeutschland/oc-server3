@@ -54,7 +54,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<title><?php echo $tpl_subtitle; ?>{title}</title>
-		<meta name="KEYWORDS" content="geocaching, opencaching, geocashing, longitude, latitude, utm, coordinates, treasure hunting, treasure, GPS, global positioning system, garmin, magellan, mapping, geo, hiking, outdoors, sport, hunt, stash, cache, geocaching, geocache, cache, treasure, hunting, satellite, navigation, tracking, bugs, travel bugs" />
+		<meta name="keywords" content="Geocaching, Geocache, Cache, Geocashing, Schnitzeljagd, Schatzsuche, GPS, Openstreetmap, kostenlos, GPX, GPX download, Koordinaten, Hobby, Natur" />
+		<meta name="description" content="Geocaching ist ein GPS-Schatzsuche-Spiel: Es werden kleine Behälter versteckt, die anhand der GPS-Koordinaten zu finden sind. Opencaching.de ist das freie Portal, um diese Verstecke mit anderen zu teilen." />
 		<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 		<meta http-equiv="Content-Style-Type" content="text/css" />

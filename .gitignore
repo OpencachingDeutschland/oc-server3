@@ -3,6 +3,7 @@
 
 # settings files
 /htdocs/config2/settings.inc.php
+/htdocs/config2/sqlroot.inc.php
 /htdocs/lib/settings.inc.php
 /htdocs/statpics/.htaccess
 /htdocs/util/mysql_root/settings.inc.php

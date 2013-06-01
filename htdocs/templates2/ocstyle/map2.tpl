@@ -87,11 +87,13 @@ var mbResetSearchTextOnFocus = false;
 var msInitCookieLastPosName = 'ocgmlastpos';
 var msInitCookieConfigName = 'ocgmconfig';
 var msInitCookieFilterName = 'ocgmfilter';
+var msInitCookiePermFilterName = 'ocgmfilter_saved';
 if (!navigator.cookieEnabled)
 {
 	msInitCookieLastPosName = '';
 	msInitCookieConfigName = '';
 	msInitCookieFilterName = '';
+	msInitCookiePermFilterName = '';
 }
 
 var moGeocoder = new google.maps.Geocoder();
@@ -136,10 +138,12 @@ var nMaxAttributeId = {$maxAttributeId};
 {literal}
 
 
-function cookieLoad()
+function cookieLoad(saved_filter)
 {
 	if (msInitCookieConfigName == '')
 		return;
+
+	var mbCurrentFilterCookieLoaded = false;
 
 	var sCookieContent = document.cookie.split(";");
 	for (var nIndex = 0; nIndex < sCookieContent.length; nIndex++)
@@ -164,13 +168,20 @@ function cookieLoad()
 			if (sValues.length > 2)
 				msInitAttribSelection = (sValues[2] > 0);
 		}
-		else if (sCookieValue[0] == msInitCookieFilterName)
+		else if (sCookieValue[0] == msInitCookieFilterName && !saved_filter)
+		{
+			eval_filtercookies(sCookieValue[1].split('/'));
+			mbCurrentFilterCookieLoaded = true;
+		}
+		else if (sCookieValue[0] == msInitCookiePermFilterName && !mbCurrentFilterCookieLoaded)
 			eval_filtercookies(sCookieValue[1].split('/'));
 	}
 }
 
 function eval_filtercookies(aValues)
 {
+	reset_filter_values();
+
 	for (var iValue=0; iValue<aValues.length; iValue++)
 	{
 		fs = aValues[iValue].split(':');
@@ -225,6 +236,8 @@ function eval_filtercookies(aValues)
 			{/strip}{literal}
 		}
 	}
+
+	mbFilterCookieLoaded = true;
 }
 
 function eva(fa,id,icon)
@@ -241,7 +254,7 @@ function eva(fa,id,icon)
 	}
 }
 
-function cookieSave()
+function cookieSave(permanent_filter)
 {
 	if (msInitCookieConfigName == '')
 		return;
@@ -305,9 +318,9 @@ function cookieSave()
   if (sAttrFilter != "")
 		sFilter += '/attr:' + sAttrFilter.substring(1);
 
+	if (permanent_filter)
+		document.cookie = msInitCookiePermFilterName + "=" + sFilter.substring(1)  + ";expires=" + dCookieExp.toUTCString();
 	document.cookie = msInitCookieFilterName + "=" + sFilter.substring(1);
-		// "expires" not set, so that the cookie will expire when browser is closed,
-		// because the user can easily forget or overlook that filtering is acive.
 }
 
 
@@ -399,7 +412,7 @@ function mapLoad()
 		moMapSearch.value = msSearchHint;
 
 	updateCopyrights();
-	cookieSave();
+	cookieSave(false);
 	queue_dataload(500);
 }
 
@@ -418,7 +431,7 @@ function setMapType(shortname,longname,url,max_zoom)
 
 function mapUnload()
 {
-	cookieSave();
+	cookieSave(false);
 }
 
 
@@ -434,14 +447,14 @@ function map_movestart()
 
 function map_moveend()
 {
-	cookieSave();
+	cookieSave(false);
 	queue_dataload(400);
 }
 
 function map_maptypechanged()
 {
 	updateCopyrights();
-	cookieSave();
+	cookieSave(false);
 }
 
 function map_mousemove(event)
@@ -1803,7 +1816,7 @@ function filter_changed()
 	}
 
 	queue_dataload(2000);
-	cookieSave();
+	cookieSave(false);
 }
 
 function cachetype_all_set()
@@ -1859,9 +1872,8 @@ function reset_filter_heading()
 	heading.style.color = bFilterSaveColor;
 }
 
-function reset_filter()
+function reset_filter_values()
 {
-	flashbutton('resetfilter');
 	document.getElementById('cachename').value = "";
 
 	for (var i=1; i<=nCacheTypeCount; i++)
@@ -1892,8 +1904,22 @@ function reset_filter()
 		{/foreach}
 	{/foreach}
 	{literal}
+}
 
-	filter_changed();
+function reset_filter()
+{
+	flashbutton('resetfilter');
+	reset_filter_values();
+	cookieLoad(true);   // will reload permamently saved settings if present
+	filter_changed();   // will save temporary settings
+}
+
+function save_filter()
+{
+	cookieSave(true);
+	{/literal}
+	alert("{t}The current filter settings have been permamently saved.{/t}");
+	{literal}
 }
 
 // built query string for search.php
@@ -1977,7 +2003,7 @@ function get_attrib_filter_params(no)
 	var state = (no ? '2' : '1');
 	var sAttribs = '';
 
-	for (var nCacheAttribId=1; nCacheAttribId<nMaxAttributeId; nCacheAttribId++)
+	for (var nCacheAttribId=1; nCacheAttribId<=nMaxAttributeId; nCacheAttribId++)
 		if (document.getElementById('attribute' + nCacheAttribId))
 			if (document.getElementById('imgattribute' + nCacheAttribId).style.display != 'none')
 				if (document.getElementById('attribute' + nCacheAttribId).value == state)
@@ -2044,7 +2070,7 @@ function toggle_attribselection(bSaveCookies)
 	{
 		if (get_attrib_filter_params(false) + '/' + get_attrib_filter_params(true) != filterbefore)
 			filter_changed();
-		cookieSave();
+		cookieSave(false);
 	}
 }
 
@@ -2232,7 +2258,7 @@ function toggle_attribselection(bSaveCookies)
 					reset_filter_heading();
 			}
 			msInitSiderbarDisplay = ele.style.display;
-			if (savecookies) cookieSave();
+			if (savecookies) cookieSave(false);
 		}
 		</script>
 		{/literal}
@@ -2275,6 +2301,7 @@ function toggle_attribselection(bSaveCookies)
 						</td>
 						<td style="text-align:right">
 							<input type="button" name="resetfilter" class="formbutton" style="width:auto" value="&nbsp;&nbsp;{t}Reset{/t}&nbsp;&nbsp;" onclick="reset_filter()" />&nbsp;
+							<input type="button" name="savefilter" class="formbutton" style="width:auto" value="&nbsp;&nbsp;{t}Save{/t}&nbsp;&nbsp;" onclick="save_filter()" />&nbsp;
 						</td>
 					</tr>
 				</table>

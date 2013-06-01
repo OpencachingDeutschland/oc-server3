@@ -19,16 +19,16 @@
 				case 0: // sofort
 					hour.options[0].selected = true;
 					weekday.options[0].selected = true;
-					weekday.disabled=true;
-					hour.disabled=true;
+					weekday.disabled=true; weekday.style.color="grey";
+					hour.disabled=true; hour.style.color="grey";
 					break;
 				case 1:	// taeglich
-					weekday.disabled=true;
-					hour.disabled=false;
+					weekday.disabled=true; weekday.style.color="grey";
+					hour.disabled=false; hour.style.color="";
 					break;
 				case 2: // woechentlich
-					weekday.disabled=false;
-					hour.disabled=false;
+					weekday.disabled=false; weekday.style.color="";
+					hour.disabled=false; hour.style.color="";
 					break;
 			}
 		}
@@ -44,6 +44,7 @@
 		</div>
 
 		<table class="table">
+			<tr><td></td></tr>
 			<tr>
 				<td>{t}Delivery:{/t}</td>
 				<td>
@@ -110,7 +111,7 @@
 {else}
 
 	<div class="content2-pagetitle">
-		<img src="resource2/{$opt.template.style}/images/misc/32x32-searchresults.png" style="align: left; margin-right: 10px;" width="32" height="32" alt="Watched Caches" />
+		<img src="resource2/{$opt.template.style}/images/misc/32x32-searchresults.png" style="align: left; margin-right: 10px;" width="32" height="32" />
 		{t}Watched Geocaches{/t}
 	</div>
 
@@ -119,26 +120,26 @@
 			<td colspan="2">
 				<table class="table">
 					<tr class="searchresult">
-						<td width="50px"><b>{t}Type{/t}</b></td>
-						<td width="50px"><b>{t}State{/t}</b></td>
-						<td width="500px"><b>{t}Name{/t}</b></td>
-						<td width="100px"><b>{t}Last found{/t}</b></td>
-						<td width="100px">&nbsp;</td>
+						<th width="50px">{t}Type{/t}</th>
+						<th width="50px">{t}State{/t}</th>
+						<th width="500px">{t}Name{/t}</th>
+						<th width="100px"><nobr>{t}Last found{/t}</nobr></th>
+						<th></th>
 					</tr>
 					{foreach from=$watches item=watchItem}
-						{cycle values="#eeeeee,#e0e0e0" assign=bgcolor}
+						{cycle assign=listcolor values="listcolor1,listcolor2"}
 						<tr>
-							<td style="border-bottom: solid 1px grey;">{include file="res_cacheicon_22.tpl" cachetype=$watchItem.type|escape}</td>
-							<td style="border-bottom: solid 1px grey;">{include file="res_cachestatus.tpl" status=$watchItem.status}</td>
-							<td style="border-bottom: solid 1px grey;"><span style="{include file="res_cachestatus_span.tpl" status=$watchItem.status}"><a href="viewcache.php?wp={$watchItem.wp}">{$watchItem.name|escape}</a></span></td>
-							<td style="border-bottom: solid 1px grey;">
+							<td class="{$listcolor}">{include file="res_cacheicon_22.tpl" cachetype=$watchItem.type|escape}</td>
+							<td class="{$listcolor}">{include file="res_cachestatus.tpl" status=$watchItem.status}</td>
+							<td class="{$listcolor}"><span style="{include file="res_cachestatus_span.tpl" status=$watchItem.status}"><a href="viewcache.php?wp={$watchItem.wp}">{$watchItem.name|escape}</a></span></td>
+							<td class="{$listcolor}" style="text-align:center">
 								{if $watchItem.lastfound==null}
 									---
 								{else}
 									{$watchItem.lastfound|date_format:$opt.format.date}
 								{/if}
 							</td>
-							<td style="border-bottom: solid 1px grey;">[<a href="javascript:if(confirm('{t escape=js}Do you really want to delete this entry?{/t}'))location.href='mywatches.php?action=remove&cacheid={$watchItem.cacheid}&target=mywatches.php'">{t}remove{/t}</a>]</td>
+							<td class="{$listcolor}">[<a href="javascript:if(confirm('{t escape=js}Do you really want to delete this entry?{/t}'))location.href='mywatches.php?action=remove&cacheid={$watchItem.cacheid}&target=mywatches.php'">{t}remove{/t}</a>]</td>
 						</tr>
 					{foreachelse}
 						<tr><td colspan="5"><br />{t}No Geocaches watched.{/t}</td></tr>

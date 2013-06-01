@@ -75,34 +75,24 @@
 
 	{foreach from=$useroptions item=optionItem}
 		<tr>
-				{if $optionItem.option_id==3}
-					</tr>
-					<td><td class="spacer"> </td></tr></table>
-					<div class="content2-container bg-blue02">
-						<p class="content-title-noshade-size2">
-							<img src="resource2/{$opt.template.style}/images/description/22x22-description.png" style="align: left; margin-right: 10px;" width="22" height="22" />
-							{t}Description{/t}
-						</p>
-					</div>
-					<div class="table-like-font" style="margin-left:6px">
-						{if $siteSettings.logic.enableHTMLInUserDescription == true}
-							{$optionItem.option_value}
-						{else}
-							{$optionItem.option_value|escape|nl2br}
-						{/if}
-					</div>
-					<table class="table">
-						<tr><td><td class="spacer"></td></tr>
-						<tr>
-				{else}
-					<td style="vertical-align:top;"><b>{$optionItem.name|escape}:</b></td>
-					<td style="vertical-align:top;">{$optionItem.option_value|escape|nl2br}</td>
-				{/if}
+			{if $optionItem.option_id != 3}
+				<td style="vertical-align:top;"><b>{$optionItem.name|escape}:</b></td>
+				<td style="vertical-align:top;">{$optionItem.option_value|escape|nl2br}</td>
+			{/if}
 		</tr>
 	{/foreach}
 
-	<tr><td class="spacer" colspan="2"></td></tr>
+	<tr><td><td class="spacer"> </td></tr>
 </table>
+
+{if $description != ""}
+	<div class="content2-container bg-blue02" >
+	</div>
+	<div class="table-like-font" style="margin-left:6px">
+		{$description}
+	</div>
+	<div>&nbsp;</div>
+{/if}
 
 <div class="content2-container bg-blue02">
 	<p class="content-title-noshade-size2">
@@ -138,7 +128,7 @@
 
 	<tr>
 		<td valign="middle" class="header-small" style="padding-top:5px;padding-bottom:5px">
-			<img src="resource2/ocstyle/images/logtype/16x16-found.png" />
+			<img src="resource2/ocstyle/images/log/16x16-found.png" />
 			&nbsp;<b>{t}Caches found{/t}:</b>
 		</td>
 		<td class="header-small">
@@ -162,18 +152,27 @@
 
 		<tr>
 			<td valign="middle" class="header-small" style="padding-top:5px;padding-bottom:5px">
-			<img src="resource2/ocstyle/images/logtype/16x16-dnf.png" />&nbsp;&nbsp;&nbsp;<b>{t}Not found{/t}:</b></td>
+			<img src="resource2/ocstyle/images/log/16x16-dnf.png" />&nbsp;&nbsp;&nbsp;<b>{t}Not found{/t}:</b></td>
 			<td class="header-small" >{$notfound}
 				{if $notfound > 0}[<a href="search.php?showresult=1&amp;expert=0&amp;f_inactive=0&amp;output=HTML&amp;sort=byname&amp;finderid={$userid}&amp;searchbyfinder=&amp;logtype=2">{t}Show all{/t}</a>]{/if}
 			</td>
 		</tr>
 		<tr>
 			<td valign="middle" class="header-small" style="padding-bottom:5px">
-			<img src="resource2/ocstyle/images/logtype/16x16-note.png" />&nbsp;&nbsp;&nbsp;<b>{t}Notes{/t}:</b></td>
+			<img src="resource2/ocstyle/images/log/16x16-note.png" />&nbsp;&nbsp;&nbsp;<b>{t}Notes{/t}:</b></td>
 			<td class="header-small" >{$note}
 				{if $note>0}[<a href="search.php?showresult=1&amp;expert=0&amp;f_inactive=0&amp;output=HTML&amp;sort=byname&amp;finderid={$userid}&amp;searchbyfinder=&amp;logtype=3">{t}Show all{/t}</a>]{/if}
 			</td>
 		</tr>
+		{if $maintenance > 0}
+		<tr>
+			<td valign="middle" class="header-small" style="padding-bottom:5px">
+			<img src="resource2/ocstyle/images/viewcache/16x16-maintenance.png" />&nbsp;&nbsp;&nbsp;<b>{t}Maintenance logs{/t}:</b></td>
+			<td class="header-small" >{$maintenance}
+				[<a href="search.php?showresult=1&amp;expert=0&amp;f_inactive=0&amp;output=HTML&amp;sort=byname&amp;finderid={$userid}&amp;searchbyfinder=&amp;logtype=9,10,11,13,14">{t}Show all{/t}</a>]
+			</td>
+		</tr>
+		{/if}
 	{/if}
 
 	<tr>

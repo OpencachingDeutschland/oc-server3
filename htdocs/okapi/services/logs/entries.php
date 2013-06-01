@@ -24,7 +24,7 @@ class WebService
 
 	private static $valid_field_names = array(
 		'uuid', 'cache_code', 'date', 'user', 'type', 'was_recommended', 'comment',
-		'images', 'internal_id',
+		'images', 'internal_id', 'oc_team_entry',
 	);
 
 	public static function call(OkapiRequest $request)
@@ -50,9 +50,14 @@ class WebService
 			if (!in_array($field, self::$valid_field_names))
 				throw new InvalidParam('fields', "'$field' is not a valid field code.");
 
+		if (Settings::get('OC_BRANCH') == 'oc.de')
+			$teamentry_field = 'cl.oc_team_comment';
+		else
+			$teamentry_field = '(cl.type=12)';
 		$rs = Db::query("
 			select
 				cl.id, c.wp_oc as cache_code, cl.uuid, cl.type,
+				".$teamentry_field." as oc_team_entry,
 				unix_timestamp(cl.date) as date, cl.text,
 				u.uuid as user_uuid, u.username, u.user_id,
 				if(cr.user_id is null, 0, 1) as was_recommended
@@ -89,6 +94,8 @@ class WebService
 				'images' => array(),
 				'internal_id' => $row['id'],
 			);
+			if (in_array('oc_team_entry',$fields))
+				$results[$row['uuid']]['oc_team_entry'] = $row['oc_team_entry'] ? true : false;
 			$log_id2uuid[$row['id']] = $row['uuid'];
 		}
 		mysql_free_result($rs);

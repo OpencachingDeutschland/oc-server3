@@ -1,11 +1,11 @@
-﻿{***************************************************************************
+{***************************************************************************
 *  You can find the license in the docs directory
 *
 *  Unicode Reminder メモ
 ***************************************************************************}
 {* OCSTYLE *}
 {if $action=='listbycache'}
-	<form method="post" action"adoptcache.php">
+	<form method="post" action="adoptcache.php">
 		<input type="hidden" name="action" value="add" />
 		<input type="hidden" name="submit" value="1" />
 
@@ -15,6 +15,7 @@
 		</div>
 
 		<table class="table">
+			<tr><td class="spacer"></td></tr>
 			<tr>
 				<th align="left">{t}User{/t}</th>
 				<th align="left">{t}Date{/t}</th>
@@ -30,7 +31,7 @@
 						{$adoptItem.date_created|date_format:$opt.format.date}
 					</td>
 					<td>
-						<a href="adoptcache.php?action=cancel&cacheid={$adoptItem.id}&userid={$adoptItem.userid}">{t}Reject adoption{/t}</a><br />
+						<a href="adoptcache.php?action=cancel&cacheid={$adoptItem.id}&userid={$adoptItem.userid}">{t}Withdraw adoption offer{/t}</a><br />
 					</td>
 				</tr>
 			{foreachelse}
@@ -90,21 +91,27 @@
 	</form>
 
 {elseif $action=='listbyuser'}
-		
-	<div class="content2-pagetitle"><img src="resource2/{$opt.template.style}/images/profile/22x22-email.png" style="align: left; margin-right: 10px;" width="22" height="22" alt="" />{t}Geocaches the owner offers you for adoption{/t}</div>
 
-	<table class="table">
+	<div class="content2-pagetitle">
+		<img src="resource2/{$opt.template.style}/images/profile/22x22-email.png" style="align: left; margin-right: 10px;" width="22" height="22" alt="" />
+		{t}Geocaches the owner offers you for adoption{/t}
+	</div>
+
+	<table class="table" width="98%">
+		<tr><td class="spacer"></td></tr>
+		<tr>
+			<th>{t}Name{/t}</th>
+			<th>{t}Owner{/t}</th>
+			<th></th>
+		</tr>
+
 		{foreach from=$adoptions item=adoptItem}
 			<tr>
-				<td>
-					<a href="viewcache.php?cacheid={$adoptItem.id}">{$adoptItem.cachename|escape}</a>
-					{t}by{/t}
-					<a href="viewprofile.php?userid={$adoptItem.ownerid}">{$adoptItem.ownername|escape}</a>
-				</td>
-				<td>
-					<a href="adoptcache.php?action=commit&cacheid={$adoptItem.id}">{t}Adopt now{/t}</a><br />
-				</td>
-				<td>
+				<td><a href="viewcache.php?cacheid={$adoptItem.id}">{$adoptItem.cachename|escape}</a></td>
+				<td><a href="viewprofile.php?userid={$adoptItem.ownerid}">{$adoptItem.ownername|escape}</a></td>
+				<td style="white-space:nowrap">
+					<a href="adoptcache.php?action=commit&cacheid={$adoptItem.id}">{t}Adopt now{/t}</a>
+					&nbsp;
 					<a href="adoptcache.php?action=cancel&cacheid={$adoptItem.id}&userid={$login.userid}">{t}Reject adoption{/t}</a><br />
 				</td>
 			</tr>

@@ -32,7 +32,7 @@
 		{foreach from=$reportedcaches item=rc}
 			<tr>
 			{if $rc.otheradmin > $otheradmins}
-				<td colspan=5"><p style="line-height: 2.5em;">{t}(*) New reports{/t}</p>
+				<td colspan="5"><p style="line-height: 2.5em;">{t}(*) New reports{/t}</p>
 				</td></tr>
 				<tr><th>{t}ID{/t}</th><th>{t}Name{/t}</th><th>{t}Owner{/t}</th><th>{t}Reporter{/t}</th><th>{t}Admin{/t}</th><th>{t}Date{/t}</th></tr>
 				{assign var="otheradmins" value=$rc.otheradmin}
@@ -76,21 +76,63 @@
 	  	</p>
 	  </div>
 
-		<p style="line-height: 1.6em;"><input type="submit" name="assign" value="{t}Assign to me{/t}" class="formbutton" onclick="submitbutton('assign')" />
-		{if $ownreport}
-		&nbsp;<input type="submit" name="contact" value="{t}Contact owner{/t}" class="formbutton" onclick="submitbutton('contact')" />&nbsp;<input type="submit" name="contact_reporter" value="{t}Contact reporter{/t}" class="formbutton" onclick="submitbutton('contact_reporter')" />&nbsp;&nbsp;<input type="submit" name="done" value="{t}Mark as finished{/t}" class="formbutton" onclick="submitbutton('done')" /></p>
+		<p style="line-height: 1.6em; margin-bottom:16px">
+		{if !$ownreport}
+			<input type="submit" name="assign" value="{t}Assign to me{/t}" class="formbutton" onclick="submitbutton('assign')" />
+		{else}
+			&nbsp;<input type="submit" name="contact" value="{t}Contact owner{/t}" class="formbutton" onclick="submitbutton('contact')" />&nbsp;<input type="submit" name="contact_reporter" value="{t}Contact reporter{/t}" class="formbutton" onclick="submitbutton('contact_reporter')" />&nbsp;&nbsp;<input type="submit" name="done" value="{t}Mark as finished{/t}" class="formbutton" onclick="submitbutton('done')" />
+			</p>
 
-		<div class="content2-container bg-blue02">
-	  	<p class="content-title-noshade-size2">
-	  		<img src="resource2/{$opt.template.style}/images/description/22x22-utility.png" style="align: left; margin-right: 10px;" width="22" height="22" alt="" /> 
-	  		{t}Set state{/t}
-	  	</p>
-	  </div>
+			<div class="content2-container bg-blue02">
+				<p class="content-title-noshade-size2">
+					<img src="resource2/{$opt.template.style}/images/description/22x22-utility.png" style="align: left; margin-right: 10px;" width="22" height="22" alt="" /> 
+					{t}Set state{/t}
+				</p>
+			</div>
 
-		<p style="line-height: 1.6em;"><input type="submit" name="statusActive" value="{t}Ready for search{/t}" class="formbutton"  onclick="submitbutton('statusActive')" />&nbsp;&nbsp;<input type="submit" name="statusTNA" value="{t}Temporary not available{/t}" class="formbutton" onclick="submitbutton('statusTNA')" />&nbsp;&nbsp;<input type="submit" name="statusArchived" value="{t}Archived{/t}" class="formbutton" onclick="javasscript:submitbutton('statusArchived')" />&nbsp;&nbsp;<input type="submit" name="statusLockedVisible" value="{t}Locked, visible{/t}" class="formbutton" onclick="submitbutton('statusLockedVisible')" />&nbsp;&nbsp;<input type="submit" name="statusLockedInvisible" value="{t}Locked, invisible{/t}" class="formbutton" onclick="submitbutton('statusLockedInvisible')" /></p>
-		{elseif $otheradmin}
-			<br />{t}Warning: This report is already assigned to another admin. Consult him first before you assume the report!{/t}
+			<p style="line-height: 1.6em;">
+				<a href="log.php?cacheid={$cacheid}&logtype=10&teamcomment=1" target="_blank"><img src="resource2/{$opt.template.style}/images/log/16x16-active.png" />{t}Ready for search{/t}</a>
+				&nbsp; &nbsp;
+				<a href="log.php?cacheid={$cacheid}&logtype=11&teamcomment=1" target="_blank"><img src="resource2/{$opt.template.style}/images/log/16x16-disabled.png" />{t}Temporary not available{/t}</a>
+				&nbsp; &nbsp;
+				<a href="log.php?cacheid={$cacheid}&logtype=9&teamcomment=1" target="_blank"><img src="resource2/{$opt.template.style}/images/log/16x16-archived.png" />{t}Archived{/t}</a>
+				&nbsp; &nbsp;
+				<a href="log.php?cacheid={$cacheid}&logtype=13&teamcomment=1" target="_blank"><img src="resource2/{$opt.template.style}/images/log/16x16-locked.png" />{t}Locked, visible{/t}</a>
+				&nbsp; &nbsp;
+				<a href="log.php?cacheid={$cacheid}&logtype=14&teamcomment=1" target="_blank"><img src="resource2/{$opt.template.style}/images/log/16x16-locked-invisible.png" />{t}Locked, invisible{/t}</a>
+			</p>
+			{if $otheradmin}
+				</p><br />{t}Warning: This report is already assigned to another admin. Consult him first before you assume the report!{/t}
+			{/if}
 		{/if}
+		<br />
+
+		{if $reports|@count}
+			<div class="content2-container bg-blue02">
+				<p class="content-title-noshade-size2">
+					<img src="resource2/{$opt.template.style}/images/misc/32x32-tools.png" style="align: left; margin-right: 10px;" width="22" height="22" alt="" /> 
+					{t}Other reports for this cache{/t}
+				</p>
+			</div>
+			{include file="adminreport_history.tpl"}
+		{/if}
+
+		{if $deleted_logs|@count}
+			<div class="content2-container bg-blue02">
+				<p class="content-title-noshade-size2">
+					<img src="resource2/{$opt.template.style}/images/description/22x22-logs.png" style="align: left; margin-right: 10px;" width="22" height="22" alt="" /> 
+					{t}Deleted logs{/t}
+				</p>
+			</div>
+			<div class="content2-container">
+				{include file="res_logentry.tpl" header=false footer=false footbacklink=false cache=$cache logs=$deleted_logs}
+			</div>
+		{/if}
+
+		{if $status_changes|@count}
+			{include file="res_status_changes.tpl"}
+		{/if}
+
 	{/if}
 
 </form>

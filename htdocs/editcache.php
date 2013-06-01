@@ -391,6 +391,7 @@ function getWaypoints($cacheid)
 					}
 
 					// cache-attributes
+					$attribs_not_ok = false;
 					if (isset($_POST['cache_attribs']))
 					{
 						$cache_attribs = mb_split(';', $_POST['cache_attribs']);
@@ -415,11 +416,20 @@ function getWaypoints($cacheid)
 						sql_free_result($rs);
 					}
 
+					if (in_array(ATTRIB_ID_SAFARI,$cache_attribs) && $cache_type != 4)
+					{
+						tpl_set_var('safari_message', $safari_not_allowed_message);
+						$error = true;
+						$attribs_not_ok = true;
+					}
+					else
+						tpl_set_var('safari_message', '');
+
 					//try to save to DB?
 					if (isset($_POST['submit']))  // Ocprop
 					{
 						//all validations ok?
-						if (!($hidden_date_not_ok || $lat_not_ok || $lon_not_ok || $name_not_ok || $time_not_ok || $way_length_not_ok || $size_not_ok || $activate_date_not_ok || $status_not_ok || $diff_not_ok))
+						if (!($hidden_date_not_ok || $lat_not_ok || $lon_not_ok || $name_not_ok || $time_not_ok || $way_length_not_ok || $size_not_ok || $activate_date_not_ok || $status_not_ok || $diff_not_ok || $attribs_not_ok))
 						{
 							$cache_lat = $coords_lat_h + $coords_lat_min / 60;
 							if ($coords_latNS == 'S') $cache_lat = -$cache_lat;
@@ -465,6 +475,7 @@ function getWaypoints($cacheid)
 
 							// save to DB
 							// status update will trigger touching the last_modified date of all depending records					
+							sql("SET @STATUS_CHANGE_USER_ID='&1'", $usr['userid']);
 							sql("UPDATE `caches` SET `name`='&1', `longitude`='&2', `latitude`='&3', `type`='&4', `date_hidden`='&5', `country`='&6', `size`='&7', `difficulty`='&8', `terrain`='&9', `status`='&10', `search_time`='&11', `way_length`='&12', `logpw`='&13', `wp_gc`='&14', `wp_nc`='&15', `date_activate` = $activation_date WHERE `cache_id`='&16'", $cache_name, $cache_lon, $cache_lat, $cache_type, date('Y-m-d', mktime(0, 0, 0, $cache_hidden_month, $cache_hidden_day, $cache_hidden_year)), $cache_country, $sel_size, $cache_difficulty, $cache_terrain, $status, $search_time, $way_length, $log_pw, $wp_gc, $wp_nc, $cache_id);
 
 							// do not use slave server for the next time ...
@@ -744,7 +755,8 @@ function getWaypoints($cacheid)
 						while ($rStatus = sql_fetch_assoc($rsStatus))
 						{
 							$sSelected = ($rStatus['id'] == $status) ? ' selected="selected"' : '';
-							$statusoptions .= '<option value="' . htmlspecialchars($rStatus['id'], ENT_COMPAT, 'UTF-8') . '"' . $sSelected . '>' . htmlspecialchars($rStatus['name'], ENT_COMPAT, 'UTF-8') . '</option>';
+							if ($sSelected != '' || $status_old == 5)
+								$statusoptions .= '<option value="' . htmlspecialchars($rStatus['id'], ENT_COMPAT, 'UTF-8') . '"' . $sSelected . '>' . htmlspecialchars($rStatus['name'], ENT_COMPAT, 'UTF-8') . '</option>';
 						}
 						sql_free_result($rsStatus);
 					}
@@ -753,6 +765,7 @@ function getWaypoints($cacheid)
 						$statusoptions .= '<option value="7" selected="selected">' . htmlspecialchars(t("Locked, invisible"), ENT_COMPAT, 'UTF-8') . '</option>';
 					}
 					tpl_set_var('statusoptions', $statusoptions);
+					tpl_set_var('statuschange', $status_old == 5 ? '' : mb_ereg_replace('%1',$cache_id,$status_change));
 
 					// show activation form?
 					if($status_old == 5) // status = not yet published

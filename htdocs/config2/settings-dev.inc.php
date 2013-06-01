@@ -68,6 +68,7 @@
 	// see settings-dist.inc.php for known node IDs
 	$opt['logic']['node']['id'] = 4;
   $opt['logic']['waypoint_pool']['prefix'] = 'OC';
+	$opt['logic']['shortlink_domain'] = 'opencaching.de';
   
 	/* cachemaps
 	*/
@@ -86,6 +87,12 @@
 	$opt['logic']['pictures']['dir'] = $dev_basepath . $dev_codepath . 'htdocs/images/uploads';
 	$opt['logic']['pictures']['url'] = $opt['page']['absolute_url'] . 'images/uploads';
 	$opt['logic']['pictures']['thumb_url'] = $opt['logic']['pictures']['url'] . '/thumbs';
+
+	/* disable cronjobs which are not needed on devel site
+	 */
+
+	$opt['cron']['sitemaps']['generate'] = false;
+	$opt['cron']['geokrety']['run'] = false;
 
  	/* E-Mail for notification about news (newstopic.php)
  	 */
@@ -108,7 +115,6 @@
 	$opt['bin']['cs2cs'] = '/var/www/bin/cs2cs';
 	
 	// other settings
-	$opt['logic']['enableHTMLInUserDescription'] = false;
 	$opt['page']['showdonations'] = true;
 	$opt['logic']['pictures']['dummy']['replacepic'] = $dev_basepath . $dev_codepath . 'htdocs/images/no_image_license.png';
 	

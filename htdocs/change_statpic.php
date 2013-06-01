@@ -16,7 +16,7 @@
 		$tpl->redirect('login.php?target=change_statpic.php');
 
 	if (isset($_REQUEST['cancel']))
-		$tpl->redirect('myprofile.php');
+		$tpl->redirect('mystatpic.php');
 
 	$sp = new statpic($login->userid);
 
@@ -39,7 +39,7 @@
 		if (!$bError)
 		{
 			$sp->save();
-			$tpl->redirect('myprofile.php');
+			$tpl->redirect('mystatpic.php');
 		}
 	}
 

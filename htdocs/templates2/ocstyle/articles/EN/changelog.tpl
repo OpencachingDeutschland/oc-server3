@@ -13,7 +13,68 @@
 	<p>This page lists all changes since version 3.0. Some small items have been omitted here.</p>
 	<br />
 
-	<p><strong>Release 3.0.7</strong> &ndash; April 19, 2013</p>
+	<p><strong>OC 3.0 Release 8</strong> &ndash; June 1, 2013</p>
+	<p>New:</p>
+	<ul>
+		<li>The geocache listing status can now (only) be changed by logging the new state. New log types <em>temporarily unavailable</em>, <em>archived</em>, <em>locked </em> und <em>ready for search</em> have been added. Unchanged states may be logged, too, e.g. to confirm that the cache is still searchable. The type of old logs can be changed afterwards.</li>
+		<li>geocache status change notifications via state logging</li>
+		<li>HTML description in user profile, with comfortable editor</li>
+		<li>new attribute <em>Safari Cache</em> vor reverse ("locationless") caches</li>
+		<li>map of new caches at the bottom of the start page</li>
+		<li>additional waypoints and personal note are included in listing printouts</li>
+		<li>link "logged caches" in user profile; own logs are listed in the order of log dates</li>
+		<li>number of active caches in user profile + link to show them</li>
+		<li>search results are sortable by date of own log; only the own logs are shown then in the right column of the search results list</li>
+		<li>map filter settings now can be saved permanently</li>
+		<li>OC support team members can mark thir logs as "OC team log" (<img src="resource2/ocstyle/images/oclogo/oc-team-comment.png" />)</li>
+		<li>added additional waypoints, log time, OC team log flag and preview picture flag to the "XML interface"</li>
+		<li>additional user profile menu option <a href="okapi/apps/">API applications</a>, to control <a href="okapi">OKAPI</a> app access rights</li>
+		<li>OKAPI: GC codes of caches and OC team log flag can be queried</li>
+		<li>OKAPI: pictures in GPX files can be embedded as thumbnail links</li>
+		<li>new <a href="404.php">error page</a> für for invalid page requests</li>
+	</ul>
+
+	<p>Changed / improved:</p>
+	<ul>
+		<li>improved / simplified user profile settings</li>
+		<li>redesign of cache lists layout in user profile and search results</li>
+		<li>default coordinates for new additional waypoints are the geocache's coordinates</li> 
+		<li>When deleting logs, the original log text and the listing address are added to the notification email.</li>
+		<li>strike-trough of inactive caches in search result lists</li>
+		<li>redesign of listing header, e.g. display of short URLs, dropdown list for print view options and neater route length display</li>
+		<li>Past, but still active event listings are greyed on the map, like inactive caches.</li>
+		<li>removed reset button from all dialogs; renamed "change" buttons to "save"</li>
+		<li>Unpublished and locked/hidden caches no longer count in the user's hidden statistics.</li>
+		<li>Log, watch and report buttons in cache listings are visible if not logged in.</li>
+		<li>intergrated <a href="webchat.php">chat</a> directly into the OC website</li>
+		<li>increased maximum picture size from 150 to 250 KB</li>
+		<li>ignored geocaches will immediately disappear from the map; same for un-ignoring</li>
+		<li>wider editor window for cache descriptions</li>
+		<li>added recommendation date to <a href="mytop5.php">personal recommendation list</a></li>
+		<li>distinction between "will attend" and "attended" in event attendees lists</li>
+		<li>Cache owners and OC support team members can see locked/hidden caches in search lists.</li>
+		<li>improved cache report handling by the support team</li>
+		<li>updated <a href="articles.php?page=verein">Opencaching Deutschland e.V.</a> page and membership application form (German)</li>
+	</ul>
+
+	<p>Fixed:</p>
+	<ul>
+		<li>event log icons (<img src="resource2/ocstyle/images/log/16x16-will_attend.png" /> <img src="resource2/ocstyle/images/log/16x16-attended.png" />) in search result lists</li>
+		<li>show <em>all</em> matching unlogged caches when sorting search results by last log date</li>
+		<li>solved picture display problem when the title contains ' [bug of release 5]</li>
+		<li>removed dysfunctional "in GM" link (show in Google Maps) when executing stored queries</li>
+		<li>fixed rare error message after retracting recommendations</li>
+		<li>fixed date/time in email address reminder emails</li>
+		<li>layout fix in hint decoder table</li>
+		<li>fixed start page cache lists layout in Internet Explorer</li>
+		<li>personal notes will not change the listing modification date; fixed date of the affected listings [bug of release 6]</li>
+		<li>"hide cache" will redirect not-logged-in users to the login page [bug of release 5]</li>
+		<li>fixed "XML interface" DTDs</li>
+		<li>several OKAPI fixes</li>
+  </ul>
+	<br />
+
+	<p><strong>OC 3.0 Release 7</strong> &ndash; April 19, 2013</p>
 	<ul>
 		<li>New: <a href="okapi">OKAPI</a></li>
 		<li>"Apple Touch Icons" for Smartphones</li>
@@ -21,7 +82,7 @@
 	</ul>
 	<br />
 
-	<p><strong>Release  3.0.6</strong> &ndash; April 12, 2013</p>
+	<p><strong>OC 3.0 Release 6</strong> &ndash; April 12, 2013</p>
 	<p>New:</p>
 	<ul>
 		<li>logging with time</li>
@@ -54,7 +115,7 @@
 		<li>Log passwords now also work with event caches.</li>
 		<li>Changes of additional waypoints and pictures update the listing last-modification date.</li>
 		<li>Cache search sometimes did not work after logout.</li>
-		<li>Additional waypoint type (e.g. "Parking area") is delivered in GPX files.</li>
+		<li>Additional waypoint type (e.g. "Parking area") is delivered in GPX files. [bug of release 4]</li>
 		<li>When deleting logs, pictures will be deleted, too, instead of remaining somwhere in the system.</li>
 		<li>fixed Ocprop duplicate logs problem</li>
 		<li>fixed log editor language on the English, Italian and Spanish site</li>
@@ -62,7 +123,7 @@
   </ul>
 	<br />
 
-	<p><strong>Releaas 3.0.5</strong> &ndash; March 16, 2013</p>
+	<p><strong>OC 3.0 Release 5</strong> &ndash; March 16, 2013</p>
 	<p>Completely reworked map:</p>
 	<ul>
 		<li>Own, found, not found and <a href="http://wiki.opencaching.de/index.php/OConly" target="_blank">OConly</a> caches are marked</li>
@@ -105,13 +166,13 @@
 
 	<p>Fixed:</p>
 	<ul>
-		<li>fixed handling of nano caches with saved searches</li>
+		<li>fixed handling of nano caches with saved searches [bug of release 4]</li>
 		<li>removed JavaScript warning when logging on the Italien page</li>
 		<li>show Danish flag with Danish cache descriptions</li>
 		<li>fixed nano size selection in search form</li>
 	</ul>
 
-	 <p><strong>Release 3.0.4</strong> &ndash; February 17, 2013
+	 <p><strong>OC 3.0 Release 4</strong> &ndash; February 17, 2013
    <p>New:</p>
 	 <ul>
      <li>new cache size "nano"</li>
@@ -141,7 +202,7 @@
    </ul>
 	<br />
 
-	 <p><strong>Release  3.0.3</strong> &ndash; November 18, 2012</p>
+	 <p><strong>OC 3.0 Release 3</strong> &ndash; November 18, 2012</p>
    <p>New:</p>
 	 <ul>
      <li>attribute "only at certain seasons"</li>
@@ -166,7 +227,7 @@
    </ul>
 	<br />
 
-	 <p><strong>Release 3.0.2</strong> &ndash; August 26, 2012</p>
+	 <p><strong>OC 3.0 Release 2</strong> &ndash; August 26, 2012</p>
    <p>New:</p>
 	 <ul>
 	   <li><a href="./articles.php?page=cacheinfo#difficulty">Difficulty ratings</a> explained, including tooltips and links within the cache listings</li>
@@ -205,7 +266,7 @@
    </ul>
 	<br />
 
-	 <p><strong>Release 3.0.1</strong> &ndash; August 8, 2012</p>
+	 <p><strong>OC 3.0 Release 1</strong> &ndash; August 8, 2012</p>
    <p>New:</p>
 	 <ul>
 	   <li>URL shortener for direct cache listing access, e.g. <a href="http://www.opencaching.de/OCD93B">http://www.opencaching.de/OCD93B</a></li>

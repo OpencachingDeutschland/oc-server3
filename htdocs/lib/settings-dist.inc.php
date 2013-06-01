@@ -50,8 +50,8 @@
 	//this in private_db.inc.php, but don't forget the ending /
 	$absolute_server_URI = 'http://www.opencaching.de/';
 	
-	// EMail address of the sender
-	if (!isset($emailaddr)) $emailaddr = 'contact@opencaching.de';
+	// 'From' EMail address for admin error messages and log removals
+	if (!isset($emailaddr)) $emailaddr = 'noreply@opencaching.de';
 	
 	// location of cache images
 	if (!isset($picdir)) $picdir = $rootpath . 'images/uploads';  // Ocprop
@@ -141,6 +141,10 @@
   //                    without fill_gaps first)
   // fill_gaps = false: continue with the last waypoint
   $opt['logic']['waypoint_pool']['fill_gaps'] = false;
+
+	// admin may use OC-team-comment log flag only when processing a cache report
+	// see also setting in config2/settings.inc.php!
+	$opt['logic']['admin']['team_comments_only_for_reports'] = true;
 
   // see config2/settings-dist.inc.php
 	$opt['template']['default']['locale'] = 'DE';      // may be overwritten by $opt['domain'][...]['locale']

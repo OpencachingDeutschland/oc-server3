@@ -117,6 +117,7 @@ function getChildWaypoints($cacheid)
 				IFNULL(`stat_caches`.`notfound`, 0) AS `notfound`,
 				IFNULL(`stat_caches`.`note`, 0) AS `note`,
 				IFNULL(`stat_caches`.`will_attend`, 0) AS `willattend`,
+				IFNULL(`stat_caches`.`maintenance`, 0) AS `maintenance`,
 				IFNULL(`stat_caches`.`watch`, 0) AS `watcher`,
 				`caches`.`desc_languages` AS `desclanguages`,
 				IFNULL(`stat_caches`.`ignore`, 0) AS `ignorercount`,
@@ -145,6 +146,21 @@ function getChildWaypoints($cacheid)
 	sql_free_result($rs);
 	if ($rCache === false)
 		$tpl->error(ERROR_CACHE_NOT_EXISTS);
+
+	// format waylength
+	if ($rCache['waylength'] < 5)
+		if (round($rCache['waylength'],2) != round($rCache['waylength'],1))
+			$digits = 2;
+		else
+			$digits = 1;
+	else if ($rCache['waylength'] < 50)
+		if (round($rCache['waylength'],1) != round($rCache['waylength'],0))
+			$digits = 1;
+		else
+			$digits = 0;
+	else
+		$digits = 0;
+	$rCache['waylength'] = sprintf('%.'.$digits.'f', $rCache['waylength']);
 
 	// not published?
 	if ($rCache['status'] == 5)
@@ -313,6 +329,8 @@ function getChildWaypoints($cacheid)
 	$url = str_replace('{gmkey}', $sGMKey, $url);
 	$cachemap['url'] = $url;
 	$tpl->assign('cachemap', $cachemap);
+
+	$tpl->assign('shortlink_domain', $opt['logic']['shortlink_domain']);
 
 	// display the page
 	$tpl->display();

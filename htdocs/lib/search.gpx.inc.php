@@ -142,6 +142,11 @@
 	$gpxLogType[3] = 'Write note';
 	$gpxLogType[7] = 'Attended';
 	$gpxLogType[8] = 'Will attend';
+	$gpxLogType[9] = 'Archive';
+	$gpxLogType[10] = 'Owner Maintenance';
+	$gpxLogType[11] = 'Temporarily Disable Listing';
+	$gpxLogType[13] = 'Archive';
+	$gpxLogType[14] = 'Archive';
 
 	$gpxSymNormal = 'Geocache';
 	$gpxSymFound = 'Geocache Found';

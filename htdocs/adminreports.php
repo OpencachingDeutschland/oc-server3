@@ -43,36 +43,6 @@
 	{
 		$tpl->redirect('mailto.php?userid=' . urlencode($reporterid));
 	}
-	elseif ((isset($_REQUEST['statusActive']) || 
-	         isset($_REQUEST['statusTNA']) || 
-	         isset($_REQUEST['statusArchived']) || 
-	         isset($_REQUEST['statusLockedVisible']) || 
-	         isset($_REQUEST['statusLockedInvisible'])) 
-	         && $adminid == $login->userid)
-	{
-		$cache = new cache($cacheid);
-
-		if ($cache->exist() == false)
-			$tpl->error(ERROR_CACHE_NOT_EXISTS);
-
-		if ($cache->allowView() == false)
-			$tpl->error(ERROR_NO_ACCESS);
-
-		if (isset($_REQUEST['statusActive']))
-			$cache->setStatus(1);
-		else if (isset($_REQUEST['statusTNA']))
-			$cache->setStatus(2);
-		else if (isset($_REQUEST['statusArchived']))
-			$cache->setStatus(3);
-		else if (isset($_REQUEST['statusLockedVisible']))
-			$cache->setStatus(6);
-		else if (isset($_REQUEST['statusLockedInvisible']))
-			$cache->setStatus(7);
-
-		$cache->save();
-
-		$tpl->redirect('adminreports.php?id=' . urlencode($rid));
-	}
 	elseif (isset($_REQUEST['done']) && $adminid == $login->userid)
 	{
 		sql("UPDATE `cache_reports` SET `status`=3 WHERE `id`=&1", $rid);
@@ -148,7 +118,9 @@
 				              `u1`.`username` AS `usernick`,
 				              IFNULL(`cr`.`adminid`, 0) AS `adminid`,
 				              IFNULL(`u2`.`username`, '') AS `adminnick`,
-				              IFNULL(`tt2`.`text`, `crr`.`name`) AS `reason`, `cr`.`note`, IFNULL(tt.text, crs.name) AS `status`,
+				              IFNULL(`tt2`.`text`, `crr`.`name`) AS `reason`,
+				              `cr`.`note`,
+				              IFNULL(tt.text, crs.name) AS `status`,
 				              `cr`.`date_created`, `cr`.`lastmodified`,
 				              `c`.`name` AS `cachename`,
 				              `c`.`user_id` AS `ownerid`
@@ -188,6 +160,9 @@
 		$tpl->assign('list', false);
 		$tpl->assign('otheradmin',$record['adminid']>0 && $record['adminid'] != $login->userid);
 		$tpl->assign('ownreport',$record['adminid'] == $login->userid);
+
+		$cache = new cache($record['cacheid']);
+		$cache->setTplHistoryData($id);
 	}
 
 	$tpl->assign('error', $error);	

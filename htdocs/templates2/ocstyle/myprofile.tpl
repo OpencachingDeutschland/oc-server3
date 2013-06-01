@@ -9,21 +9,20 @@
 	{t}My profile data{/t}
 </div>
 
-{if $edit==true}
 	<form action="myprofile.php" method="post" style="display:inline;">
 		<input type="hidden" name="action" value="change" />
 		<input type="hidden" name="showAllCountries" value="{$showAllCountries}" />
-{/if}
-
-		<div class="content-txtbox-noshade">
-			<p style="line-height: 1.6em;">
-				{t}The following informations are stored in your userprofile:{/t}<br />
-				<img src="resource2/{$opt.template.style}/images/misc/hint.gif" border="0" width="15" height="11" alt="" align="middle" />
-				<span style="font-size:10px;">{t}Only the <span class="public-setting">green entries</span> are visible to other users.{/t}</span>
-			</p>
-		</div>
 
 		<table class="table">
+			<tr>
+				<td colspan="3">
+					<span class="boldtext ">{t}The following informations are stored in your userprofile:{/t}</span><br />
+				<img src="resource2/{$opt.template.style}/images/misc/hint.gif" border="0" width="15" height="11" alt="" align="middle" />
+				<span style="font-size:10px;">{t}Only the <span class="public-setting">green entries</span> are visible in your <a href="viewprofile.php">public profile</a>.{/t}</span>
+				</td>
+			</tr>
+			<tr><td class="spacer"></td></tr>
+
 			<tr>
 				<td class="public-setting">{t}Username:{/t}</td>
 				<td class="public-setting">
@@ -39,13 +38,6 @@
 					{/if}
 				</td>
 			</tr>
-			<tr><td class="spacer" colspan="2"></td></tr>
-
-			<tr>
-				<td>{t}E-Mail-Address:{/t}</td>
-				<td>{$email|escape}</td>
-			</tr>
-			<tr><td class="spacer" colspan="2"></td></tr>
 
 			<tr>
 				<td>{t}First name:{/t}</td>
@@ -74,7 +66,6 @@
 					{/if}
 				</td>
 			</tr>
-			<tr><td class="spacer" colspan="2"></td></tr>
 
 			<tr>
 				<td class="public-setting">{t}Country:{/t}</td>
@@ -188,37 +179,39 @@
 				</tr>
 			{/if}
 
-			{if $edit==false}
+			<tr><td class="spacer" colspan="2"></td></tr>
+			<tr>
+				<td class="header-small" colspan="2">
+					{if $edit==false}
+						<input type="submit" name="change" value="{t}Change{/t}" class="formbutton" onclick="flashbutton('change')" />
+					{else}
+						<input type="submit" name="cancel" value="{t}Cancel{/t}" class="formbutton" onclick="flashbutton('cancel')" />&nbsp;&nbsp;
+						<input type="submit" name="save" value="{t}Submit{/t}" class="formbutton" onclick="submitbutton('save')" />
+					{/if}
+				</td>
+			</tr>
+		</table>
+	</form>
+
+	{if $edit==false}
+		<form action="myprofile.php" method="post" style="display:inline;">
+			<input type="hidden" name="action" value="changeemail" />
+			<table class="table">
 				<tr><td class="spacer" colspan="2">&nbsp;</td></tr>
 				<tr>
-					<td style="vertical-align:top;"><strong>{t}Statistic picture:{/t}</strong></td>
-					<td><img src="statpics/{$opt.template.locale}/{$login.userid}.jpg" align="middle"></td>
+					<td>{t}E-Mail-Address:{/t}</td>
+					<td>{$email|escape}</td>
 				</tr>
-				<tr><td class="spacer" colspan="2"></td></tr>
-
-				<tr>
-					<td style="vertical-align:top;">{t}HTML-Code:{/t}</td>
-					<td class="help">&lt;img src="{$opt.page.absolute_url|escape|escape}statpics/{$opt.template.locale}/{$login.userid}.jpg" alt="{t 1=$login.username|escape|escape}Opencaching.de-statstic of %1{/t}" title="{t 1=$login.username|escape|escape}Opencaching.de-statstic of %1{/t}" /></td>
-				</tr>
-				<tr><td class="spacer" colspan="2"></td></tr>
-
-				<tr>
-					<td style="vertical-align:top;">{t}BBCode for webforums:{/t}</td>
-					<td class="help">[url={$opt.page.absolute_url|escape|escape}viewprofile.php?userid={$login.userid}][img]{$opt.page.absolute_url|escape|escape}statpics/{$opt.template.locale}/{$login.userid}.jpg[/img][/url]</td>
-				</tr>
-			{/if}
-
-			{if $edit==true}
 				<tr><td class="spacer" colspan="2"></td></tr>
 				<tr>
 					<td class="header-small" colspan="2">
-						<input type="submit" name="cancel" value="{t}Cancel{/t}" class="formbutton" onclick="flashbutton('cancel')" />&nbsp;&nbsp;
-						<input type="submit" name="save" value="{t}Submit{/t}" class="formbutton" onclick="submitbutton('save')" />
+						{if $edit==false}
+							<input type="submit" name="change" value="{t}Change{/t}" class="formbutton" onclick="flashbutton('change')" />
+						{/if}
 					</td>
 				</tr>
-			{/if}
-		</table>
+			</table>
+		</form>
+	{/if}
 
-{if $edit==true}
 	</form>
-{/if}

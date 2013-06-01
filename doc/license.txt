@@ -171,9 +171,11 @@ List of third party components:
 				License : Creative Commons BY 3.0
 				Author  : Yusuke Kamiyamane
 
-		27. gears icon
+		27. gears and gps-device icons
 			  Path    : htdocs/resource2/ocstyle/images/misc/
+			            htdocs/resource2/ocstyle/images/viewcache/
 			  URI     : http://www.softicons.com/free-icons/toolbar-icons/fatcow-hosting-icons-by-fatcow/gear-in-icon
+			            http://www.softicons.com/free-icons/web-icons/fatcow-hosting-additional-icons-by-fatcow/gps-handheld-icon
 			  License : Creative Commons BY 3.0
 			  Author  : FatCow
 

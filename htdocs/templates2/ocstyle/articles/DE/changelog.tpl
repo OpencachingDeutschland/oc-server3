@@ -13,7 +13,70 @@
 	<p>Im Folgenden sind alle Veränderungen ab OC Version&nbsp;3.0 aufgelistet. Manche Kleinigkeiten wurden zur besseren Übersicht weggelassen und sind im <a href="http://forum.opencaching-network.org/index.php?board=43.0">Entwicklerforum</a> nachlesbar.</p>
 	<br />
 
-	<p><strong>Version 3.0.7</strong> &ndash; 19. April 2013</p>
+	<p><strong>OC 3.0 Version 8</strong> &ndash; 1. Juni 2013</p>
+	<p>Neu:</p>
+	<ul>
+		<li>Der Cachestatus kann (nur noch) per Log geändert werden. Dazu gibt es die neuen Logtypen <em>momentan nicht verfügbar</em>, <em>archiviert</em>, <em>gesperrt</em> und <em>kann gesucht werden</em>. Der gleiche Status kann auch mehrmals geloggt werden, z.B. um zu signalieren dass mit dem Cache alles ok ist. Der Typ alter Logs kann nachträglich geändert werden.</li>
+		<li>Benachrichtungen über Statusänderungen durch die neuen Statuslogs</li>
+		<li>HTML-Beschreibung im Benutzerprofil, mit komfortablem Editor</li>
+		<li><a href="http://wiki.opencaching.de/index.php/Reverse_%28%E2%80%9ELocationless%E2%80%9C%29_Caches">Safari-Caches</a></li>
+		<li>Karte der neuesten Caches unten auf der Startseite</li>
+		<li>zusätzliche Wegpunkte und persönliche Notiz in Listing-Ausdrucken</li>
+		<li>Link &bdquo;geloggte Caches&ldquo; im Benutzerprofil; Auflistung der eigenen Logs sortiert nach Logdatum</li>
+		<li>Zahl der aktiven Caches im Benutzerprofil, + Link &bdquo;anzeigen&ldquo;</li>
+		<li>Suchergebnisse sind nach Datum des letzten eigenen Logs sortierbar; in der Suchergebnisliste erscheinen dann rechts nur die eigenen Logs</li>
+		<li>Kartenfilter-Einstellungen sind nun permanent speicherbar</li>
+		<li>OC-Supportmitarbeiter können ihr Logs als &bdquo;OC-Team-Log&ldquo; (<img src="resource2/ocstyle/images/oclogo/oc-team-comment.png" />) markieren.</li>
+		<li>zusätzliche Wegpunkte, Loguhrzeit, OC-Team-Log-Flag und Vorschaubild-Flag im <a href="http://wiki.opencaching.de/index.php/XML-Schnittstelle">XML-Interface</a></li>
+		<li>neuer Menüpunkt <a href="okapi/apps/">API-Anwendungen</a> im Benutzerprofil, zur Kontrolle von <a href="okapi">OKAPI</a>-Anwendungsrechten</li>
+		<li>OKAPI: GC-Codes von Caches und OC-Team-Log-Flag sind abfragbar</li>
+		<li>OKAPI: Bilder in GPX-Dateien sind als &bdquo;Thumbnail&ldquo; einbettbar</li>
+		<li>neue <a href="404.php">Fehlerseite</a> für ungültige Seitenabrufe</li>
+	</ul>
+
+	<p>Geändert / verbessert:</p>
+	<ul>
+		<li>Benutzerprofileinstellungen überarbeitet/vereinfacht</li>
+		<li>Layout von Cachelisten im Benutzerprofil und von  Suchergebnislisten überarbeitet</li>
+		<li>Beim Anlegen zusätzlicher Wegpunkte werden die Cachekoordinaten vorgeschlagen.</li> 
+		<li>Bei Loglöschungen wird auch der gelöschte Text und die Cache-URL mitgeschickt.</li>
+		<li>Inaktive Caches werden in Suchlisten durchgestrichen.</li>
+		<li>Layout/Design des Cachelisting-Kopfes überarbeitet, u.a. mit Anzeige der Kurz-URL, übersichtlicheren Druckbuttons und schönerer Wegstreckenanzeige</li>
+		<li>Abgelaufene Events werden auf der Karte grau dargestellt, wie inaktive Caches.</li>
+		<li>Zurücksetzen-Buttons aus allen Dialogen rausgeworfen; Ändern-Buttons in &bdquo;Speichern&ldquo; umbenannt</li>
+		<li>Unveröffentlichte und gesperrt/versteckte Caches zählen nicht mehr in der Versteckstatistik mit.</li>
+		<li>Log-, Beobachten- und Melde-Buttons sind auch für nicht angemeldete User sichtbar.</li>
+		<li><a href="webchat.php">Chat</a> direkt in die Opencaching.de-Seite integriert</li>
+		<li>maximale Größe für hochgeladene Bilder von 150 auf 250 KB erhöht</li>
+		<li>(Nicht-)Ignorieren von Caches wirkt sich sofort auf die Kartendarstellung aus, statt wie bisher zeitverzögert.</li>
+		<li>breiteres Editorfeld für Cachebeschreibungen</li>
+		<li>Anzeige des Empfehlungsdatums in der <a href="mytop5.php">Empfehlungsliste</a></li>
+		<li>Unterscheidung zwischen &bdquo;möchte teilnehmen&ldquo; und &bdquo;teilgenommen&ldquo; in Event-Teilnehmerlisten</li>
+		<li>Update der <a href="articles.php?page=verein">Vereinsseite</a> und des Mitgliedsantrags</li>
+		<li>Owner und OC-Supportmitarbeiter sehen gesperrt/versteckte Caches in Suchlisten.</li>
+		<li>Verbesserungen für das Supportteam, insbesondere beim Abarbeiten von Cachemeldungen</li>
+		<li>Suchmaschinenoptimierung (HTML Meta keywords &amp; description)</li>
+	</ul>
+
+	<p>Korrigiert (Bugfixes):</p>
+	<ul>
+		<li>Event-Log-Icons (<img src="resource2/ocstyle/images/log/16x16-will_attend.png" /> <img src="resource2/ocstyle/images/log/16x16-attended.png" />) in Suchlisten</li>
+		<li>Bei Suchsortierung nach letzten Log fehlten alle ungeloggten Caches außer einem.</li>
+		<li>Bildanzeigeproblem bei ' im Bildtitel behoben [Bug von Version 5]</li>
+		<li>nicht funktionierenden in-GM-Link (Anzeige in Google Maps) beim Abruf gespeicherter Suchen entfernt</li>
+		<li>seltene Fehlermeldungen nach dem Zurückziehen von Bewertungen beseitigt</li>
+		<li>Datumsangabe in Email-Adress-Erinnerungsmails korrigiert</li>
+		<li>Layoutkorrektur bei der Hint-Decodiertabelle</li>
+		<li>Layout der Startseiten-Cachelisten im Internet Explorer korrigiert</li>
+		<li>Persönliche Notizen verändern nicht mehr das Listing-Änderungsdatum; Datum der betroffenen Caches korrigiert. [Bug von Version 6]</li>
+		<li>&bdquo;Cache verstecken&ldquo; führt nicht angemeldete User wieder auf die Loginseite. [Bug von Version 5]</li>
+		<li>XML-Interface-DTDs korrigiert</li>
+		<li>diverse OKAPI-Korrekturen</li>
+		<li><a href="http://wiki.opencaching.de/index.php/Ocprop">Ocprop</a>-Problem beim Abgleich von Logs behoben [entstanden kurz nach Freigabe von Version 7]</li>
+  </ul>
+	<br />
+
+	<p><strong>OC 3.0 Version 7</strong> &ndash; 19. April 2013</p>
 	<ul>
 		<li>Neu: <a href="okapi">OKAPI</a></li>
 		<li>&bdquo;Apple-Touch-Icons&ldquo; für Smartphones</li>
@@ -21,7 +84,7 @@
 	</ul>
 	<br />
 
-	<p><strong>Version 3.0.6</strong> &ndash; 12. April 2013</p>
+	<p><strong>OC 3.0 Version 6</strong> &ndash; 12. April 2013</p>
 	<p>Neu:</p>
 	<ul>
 		<li>Loggen mit Uhrzeit</li>
@@ -38,7 +101,7 @@
 	<p>Geändert / verbessert:</p>
 	<ul>
 		<li>Designverbesserungen bei den Listen neuer Caches und Logs</li>
-		<li>In Benachrichtigungsmails werden die neuen Opencaching-Kurzlinks verwendet (siehe Version 3.0.1).</li>
+		<li>In Benachrichtigungsmails werden die neuen Opencaching-Kurzlinks verwendet (siehe Version 1).</li>
 		<li>doppeltes Einstellen identischer Logs wird verhindert</li>
 		<li>genauere Zuordnung der Attribute zu GC-Attributen in GPX-Dateien</li>
 		<li>Gezeiten-Attribut umdefiniert in &bdquo;nicht bei hohem Wasserstand&ldquo;</li>
@@ -54,15 +117,15 @@
 		<li>Logpasswörter funktionieren jetzt auch bei Event-Caches</li>
 		<li>Änderungen von zusätzlichen Wegpunkten und Bildern werden beim Änderungsdatum des Listings berücksichtigt.</li>
 		<li>Cachesuche funktionierte manchmal unmittelbar nach dem Ausloggen nicht</li>
-		<li>korrekte Typbezeichung zusätzlicher Wegpunkte (z.B. &bdquo;Parkplatz&ldquo;) in GPX-Dateien [Bug von v3.0.4]</li>
+		<li>korrekte Typbezeichung zusätzlicher Wegpunkte (z.B. &bdquo;Parkplatz&ldquo;) in GPX-Dateien [Bug von Version 4]</li>
 		<li>Beim Löschen von Logs werden auch die Bilder mitgelöscht; bisher blieben sie irgendwo im System stehen.</li>
-		<li>Problem mit <a href="http://wiki.opencaching.de/index.php/Ocprop">Ocprop</a>-Logduplikate behoben [entstanden durch v3.0.5]</li>
+		<li>Problem mit <a href="http://wiki.opencaching.de/index.php/Ocprop">Ocprop</a>-Logduplikate behoben [entstanden durch Version 5]</li>
 		<li>Logeditor auf der englischen, italienischen und spanischen Seite in korrekter Sprache</li>
 		<li>Übersetzung von Ländernamen (in denen die Caches liegen) auf der englischen, italienischen und spanischen Seite</li>
   </ul>
 	<br />
 
-	<p><strong>Version 3.0.5</strong> &ndash; 16. März 2013</p>
+	<p><strong>OC 3.0 Version 5</strong> &ndash; 16. März 2013</p>
 	<p>Karte komplett überarbeitet:</p>
 	<ul>
 		<li>Markierung von eigenen, gefundenen, nicht gefundenen und <a href="http://wiki.opencaching.de/index.php/OConly" target="_blank">OConly</a>-Caches</li>
@@ -93,7 +156,7 @@
 	<ul>
 		<li>Auf den meisten Seiten gibt es nun rechts oben einen Hilfe-Knopf, der auf eine passende Seite im <a href="http://wiki.opencaching.de/" target="_blank">Opencaching-Wiki</a> verweist.</li>
 		<li>Logbild-Galerien auf der Startseite, der neuen <a href="newlogpics.php">Galerieseite</a>, in den Cachelistings (erreichbar per Link &bdquo;Logbilder&ldquo;) und in den Benutzerprofilen. Die Profil-Bildgalerien sind per <a href="mydetails.php">Profileinstellungen</a> abschaltbar.</li>
-		<li>Spoileroption für Logbilder reaktiviert (vgl. Version 3.0.2)</li>
+		<li>Spoileroption für Logbilder reaktiviert (vgl. Version 2)</li>
 		<li>Titel und Spoilereinstellung von Logbildern ist nachträglich änderbar</li>
 		<li>Bilder werden in einem schicken Popup-Fenster dargestellt statt auf einer separaten Seite.</li>
 		<li>neue Wegpunkttypen <em>Pfad</em>, <em>Ziel</em> und <em>interessanter Ort</em></li>
@@ -106,13 +169,13 @@
 
 	<p>Korrigiert (Bugfixes):</p>
 	<ul>
-		<li>Handhabung von Nano-Caches bei gespeicherten Suchen korrigiert [Bug von v3.0.4]</li>
-		<li>Auswahl der Nano-Größe im Suchforumlar korrigiert [Bug von v3.0.4]</li>
+		<li>Handhabung von Nano-Caches bei gespeicherten Suchen korrigiert [Bug von Version 4]</li>
+		<li>Auswahl der Nano-Größe im Suchforumlar korrigiert [Bug von Version 4]</li>
 		<li>Javascript-Warnung beim Loggen auf der italenischen Seite beseitigt</li>
 		<li>dänische Flagge bei dänischen Cachebeschreibungen</li>
 	</ul>
 
-	 <p><strong>Version 3.0.4</strong> &ndash; 17. Februar 2013</p>
+	 <p><strong>OC 3.0 Version 4</strong> &ndash; 17. Februar 2013</p>
    <p>Neu:</p>
 	 <ul>
      <li>neue Cachegröße &bdquo;nano&ldquo;</li>
@@ -143,7 +206,7 @@
    </ul>
 	<br />
 
-	 <p><strong>Version 3.0.3</strong> &ndash; 18. November 2012</p>
+	 <p><strong>OC 3.0 Version 3</strong> &ndash; 18. November 2012</p>
    <p>Neu:</p>
 	 <ul>
      <li>Attribut &bdquo;nur zu bestimmten Jahreszeiten&ldquo;</li>
@@ -168,7 +231,7 @@
    </ul>
 	<br />
 
-	 <p><strong>Version 3.0.2</strong> &ndash; 26. August 2012</p>
+	 <p><strong>OC 3.0 Version 2</strong> &ndash; 26. August 2012</p>
    <p>Neu:</p>
 	 <ul>
 	   <li><a href="./articles.php?page=cacheinfo#difficulty">Schwierigkeitsgrade</a> erklärt, inklusive Tooltip und Link in den Cachelistings</li>
@@ -206,11 +269,11 @@
 	   <li>Hinweis-Entschlüsselung bei abgeschaltetem JavaScript</li>
 	   <li>nicht funktionierenden Log-Bild-Löschlink für Cachebesitzer entfernt</li>
 	   <li>Logbearbeitungsberechtigungen für gesperrte Caches korrigiert</li>
-	   <li>wirkungslose Spoileroption beim Hochladen von Logbildern entfernt [&rarr; wieder eingebaut in v3.0.5]</li>
+	   <li>wirkungslose Spoileroption beim Hochladen von Logbildern entfernt [&rarr; wieder eingebaut in Version 5]</li>
    </ul>
 	<br />
 
-	 <p><strong>Version 3.0.1</strong> &ndash; 8. August 2012</p>
+	 <p><strong>OC 3.0 Version 1</strong> &ndash; 8. August 2012</p>
    <p>Neu:</p>
 	 <ul>	   
 	   <li>Kurzadressen für Direktzugriff auf Cachelistings, z.B. <a href="http://www.opencaching.de/OCD93B">http://opencaching.de/OCD93B</a></li>

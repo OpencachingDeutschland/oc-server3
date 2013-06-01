@@ -24,23 +24,22 @@
 	<tr><td class="spacer" colspan="2"></td></tr>
 	<tr>
 		<td colspan="2">
-			<table class="null" border="0" cellspacing="0" width="100%">
+			<table class="table" border="0" cellspacing="0" width="100%">
 				<tr>
-					<td width="50px"><b>{t}Quota{/t}</b></td>
-					<td width="10px">&nbsp;</td>
-					<td><b>{t}Name{/t}</b></td>
+					<th width="50px">{t}Quota{/t}</th>
+					<th width="10px">&nbsp;</th>
+					<th>{t}Name{/t}</th>
 				</tr>
 				{foreach from=$cacheRatings item=cacheRatingsItem}
-					{cycle values="#eeeeee,#e0e0e0" assign=bgcolor}
+					{cycle values="listcolor1,listcolor2" assign=listcolor}
 					<tr>
-						<td bgcolor="{$bgcolor}">{$cacheRatingsItem.quote|sprintf:"%0d"}%</td>
-						<td bgcolor="{$bgcolor}">&nbsp;</td>
-						<td bgcolor="{$bgcolor}">
-							<a href="viewcache.php?wp={$cacheRatingsItem.wp}">{$cacheRatingsItem.name|escape}</a> {t}by{/t}
+						<td class="{$listcolor}">{$cacheRatingsItem.quote|sprintf:"%0d"}%</td>
+						<td class="{$listcolor}">&nbsp;</td>
+						<td class="{$listcolor}">
+							<span style="{include file="res_cachestatus_span.tpl" status=$cacheRatingsItem.status}"><a href="viewcache.php?wp={$cacheRatingsItem.wp}">{$cacheRatingsItem.name|escape}</a></span> {t}by{/t}
 							<a href="viewprofile.php?userid={$cacheRatingsItem.cacheuserid}">{$cacheRatingsItem.cacheusername|escape}</a>
 						</td>
 					</tr>
-					<tr><td class="spacer" colspan="3" bgcolor="{$bgcolor}"></td></tr>
 				{foreachelse}
 					<tr><td colspan="3">{t}No recommendations found.{/t}</td></tr>
 				{/foreach}

@@ -1,6 +1,8 @@
 Sitemap: http://www.domain.org/sitemap.xml
 
 User-agent: *
+Disallow: /okapi/services*
+Allow: /okapi/services*html
 Disallow: /search.php?*output=gpx*
 Disallow: /search.php?*output=GPX*
 Disallow: /search.php?*output=gpx1*

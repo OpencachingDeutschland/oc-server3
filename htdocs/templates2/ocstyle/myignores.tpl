@@ -6,7 +6,7 @@
  {* OCSTYLE *}
 
 <div class="content2-pagetitle">
-	<img src="resource2/{$opt.template.style}/images/misc/32x32-searchresults.png" style="align: left; margin-right: 10px;" width="32" height="32" alt="" />
+	<img src="resource2/{$opt.template.style}/images/misc/32x32-ignore.png" style="align: left; margin-right: 10px;" width="32" height="32" />
 	{t}Ignored Geocaches{/t}
 </div>
 
@@ -15,21 +15,20 @@
 		<td colspan="2">
 			<table class="table">
 				<tr class="searchresult">
-					<td width="50px"><b>{t}Type{/t}</b></td>
-					<td width="50px"><b>{t}State{/t}</b></td>
-					<td width="500px"><b>{t}Name{/t}</b></td>
-					<td width="200px">&nbsp;</td>
+					<th width="50px">{t}Type{/t}</td>
+					<th width="50px">{t}State{/t}</td>
+					<th width="630px" colspan="2">{t}Name{/t}</td>
 				</tr>
 				{foreach from=$ignores item=ignoreItem}
-					{cycle values="#eeeeee,#e0e0e0" assign=bgcolor}
+					{cycle values="listcolor1,listcolor2" assign=listcolor}
 					<tr>
-						<td style="border-bottom: solid 1px grey;">{include file="res_cacheicon_22.tpl" cachetype=$ignoreItem.type|escape}</td>
-						<td style="border-bottom: solid 1px grey;">{include file="res_cachestatus.tpl" status=$ignoreItem.status}</td>
-						<td style="border-bottom: solid 1px grey;"><span style="{include file="res_cachestatus_span.tpl" status=$ignoreItem.status}"><a href="viewcache.php?wp={$ignoreItem.wp}">{$ignoreItem.name|escape}</a></span></td>
-						<td style="border-bottom: solid 1px grey;">[<a href="javascript:if(confirm('{t escape=js}Do you really want to delete this entry?{/t}'))location.href='ignore.php?cacheid={$ignoreItem.cacheid}&action=removeignore'">{t}remove{/t}</a>]</td>
+						<td class="{$listcolor}">{include file="res_cacheicon_22.tpl" cachetype=$ignoreItem.type|escape}</th>
+						<td class="{$listcolor}">{include file="res_cachestatus.tpl" status=$ignoreItem.status}</th>
+						<td class="{$listcolor}"><span style="{include file="res_cachestatus_span.tpl" status=$ignoreItem.status}"><a href="viewcache.php?wp={$ignoreItem.wp}">{$ignoreItem.name|escape}</a></span></th>
+						<td class="{$listcolor}">[<a href="javascript:if(confirm('{t escape=js}Do you really want to delete this entry?{/t}'))location.href='ignore.php?cacheid={$ignoreItem.cacheid}&action=removeignore'">{t}remove{/t}</a>]</th>
 					</tr>
 				{foreachelse}
-					<tr><td colspan="4"><br />{t}No ignored Geocaches found.{/t}</td></tr>
+					<tr><td colspan="4"><br />{t}You do not ignore any geocaches now.{/t}</td></tr>
 				{/foreach}
 			</table>
 		</td>

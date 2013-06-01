@@ -84,6 +84,7 @@ function _chkFound () {
 			<select name="logtype" onChange="return _chkFound()">
 				{logtypeoptions}
 			</select>
+			{teamcommentoption}
 		</td>
 	</tr>
 	<tr><td class="spacer" colspan="2"></td></tr>

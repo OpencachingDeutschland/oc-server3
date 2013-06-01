@@ -44,6 +44,7 @@
 										`stat_user`.`found`, 
 										`stat_user`.`notfound`, 
 										`stat_user`.`note`, 
+										`stat_user`.`maintenance`,
 										`user`.`uuid` 
 							 FROM `user` 
 					LEFT JOIN `stat_user` ON `user`.`user_id`=`stat_user`.`user_id` 
@@ -70,6 +71,9 @@
 		                $opt['template']['locale']);
 	$tpl->assign_rs('useroptions', $rs);
 	sql_free_result($rs);
+
+	$tpl->assign('description',
+		sql_value("SELECT `description` FROM `user` WHERE `user_id`='&1'", "", $userid));
 
 	$rs = sql("SELECT COUNT(*) AS `anzahl`, `t`.`id`, IFNULL(`tt`.`text`, `t`.`name`) AS `cachetype`
 		           FROM `caches` AS `c`
@@ -108,6 +112,7 @@
 	$tpl->assign('founds', $record['found'] <= 0 ? '0' : $record['found']);
 	$tpl->assign('notfound', $record['notfound'] <= 0 ? '0' : $record['notfound']);
 	$tpl->assign('note', $record['note'] <= 0 ? '0' : $record['note']);
+	$tpl->assign('maintenance', $record['maintenance'] <= 0 ? '0' : $record['maintenance']);
 	$tpl->assign('hidden', $record['hidden'] <= 0 ? '0' : $record['hidden']);
 	$tpl->assign('active', $active);
 	$tpl->assign('recommended', sql_value("SELECT COUNT(*) FROM `cache_rating` WHERE `user_id`='&1'", 0, $userid));

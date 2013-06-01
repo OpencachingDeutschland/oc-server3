@@ -305,7 +305,14 @@
 	 */
 	$opt['logic']['cachemaps']['url'] = 'http://maps.google.com/maps/api/staticmap?center={latitude},{longitude}&zoom={userzoom}&size=200x200&maptype=hybrid&markers=color:blue|label:|{latitude},{longitude}&sensor=false&key={gmkey}';
 	$opt['logic']['cachemaps']['iframe'] = false;
- 
+	
+	/* Minimap for the new-caches list on the front page.
+	 * If the url string is empty, no minimap is displayed on the front page. 
+	 * 
+	 * Coordinates of new caches are appended to the url.
+	 */ 
+	$opt['logic']['minimapurl'] = 'http://maps.googleapis.com/maps/api/staticmap?sensor=false&key={gmkey}&size=220x220&maptype=roadmap&markers=color:blue|size:small';
+	
 	/* target vars
 	 * all _REQUEST-vars that identifiy the current page for target redirection after login
 	 */
@@ -321,11 +328,6 @@
 	 */
 	$opt['logic']['password_hash'] = false;
 
-	/* If the user entered HTML in his description do we
-   * display it as HTML or escape it and make it non-functional?
-	 */
-  $opt['logic']['enableHTMLInUserDescription'] = true;
-
 	/* new lows style
 	 */
 	$opt['logic']['new_logs_per_country'] = true;
@@ -339,6 +341,7 @@
 	/* opencaching prefixes in database available to search for
 	 */
 	$opt['logic']['ocprefixes'] = 'oc';
+	$opt['logic']['shortlink_domain'] = false;
 
   /* pregenerated waypoint list for new caches
    * - Waypoint prefix (OC, OP, OZ ... AA=local development)
@@ -369,6 +372,12 @@
 	$opt['logic']['license']['disclaimer'] = false;
 	$opt['logic']['license']['terms'] = 'articles.php?page=impressum#datalicense';
 	   // 'disclaimer' and 'terms' also in lib/settings.inc.php
+
+	/* admin functions
+	 */
+	// admin may use OC-team-comment log flag only when processing a cache report 
+	// see also setting in lib/settings.inc.php!
+	$opt['logic']['admin']['team_comments_only_for_reports'] = true;
 
   /* Database charset
 	 *   frontend and php charsets are UTF-8
@@ -415,6 +424,11 @@
 	 */
 	$opt['cron']['sitemaps']['generate'] = true;
 	$opt['cron']['sitemaps']['submit'] = false;
+
+	/* Geokret cronjob
+	 */
+
+	$opt['cron']['geokrety']['run'] = true;
 
 	/* E-Mail settings
 	 *

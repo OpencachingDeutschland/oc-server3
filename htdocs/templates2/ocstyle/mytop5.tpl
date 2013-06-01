@@ -4,8 +4,9 @@
  *  Unicode Reminder メモ
  ***************************************************************************}
 {* OCSTYLE *}
+
 <div class="content2-pagetitle">
-	<img src="resource2/{$opt.template.style}/images/misc/32x32-searchresults.png" style="align: left; margin-right: 10px;" width="32" height="32" alt="Recommendations" />
+	<img src="resource2/{$opt.template.style}/images/misc/32x32-winner.png" style="align: left; margin-right: 10px;" width="32" height="32" />
 	{t}My recommendations{/t}
 </div>
   
@@ -16,25 +17,26 @@
 	</div> 
 {/if}
 
-<table  class="null" border="0" cellspacing="0" width="98%">
+<table class="null" border="0" cellspacing="0" width="98%">
 	<tr>
-		<td>
+		<td colspan="2">
 			<table class="table">
 				<tr class="searchresult">
-					<td width="50px"><b>{t}Type{/t}</b></td>
-					<td width="50px"><b>{t}State{/t}</b></td>
-					<td width="500px"><b>{t}Name{/t}</b></td>
-					<td width="200px">&nbsp;</td>
+					<th width="50px">{t}Type{/t}</th>
+					<th width="50px">{t}State{/t}</th>
+					<th width="500px">{t}Name{/t}</th>
+					<th width="100px"><nobr>{t}Recommended on{/t}</nobr></th>
+					<th></th>
 				</tr>
 				{foreach from=$ratings item=ratingItem}
-					{cycle values="#eeeeee,#e0e0e0" assign=bgcolor}
+					{cycle assign=listcolor values="listcolor1,listcolor2"}
 					<tr>
-						<td style="border-bottom: solid 1px grey;">{include file="res_cacheicon_22.tpl" cachetype=$ratingItem.type|escape}</td>
-						<td style="border-bottom: solid 1px grey;">{include file="res_cachestatus.tpl" status=$ratingItem.status}</td>
-						<td style="border-bottom: solid 1px grey;"><span style="{include file="res_cachestatus_span.tpl" status=$ratingItem.status}"><a href="viewcache.php?wp={$ratingItem.wp}">{$ratingItem.cachename|escape}</a></span></td>
-						<td style="border-bottom: solid 1px grey;">[<a href="javascript:if(confirm('{t escape=js}Do you really want to remove this recommendation?{/t}'))location.href='mytop5.php?action=delete&amp;cacheid={$ratingItem.cacheid}'">{t}Remove recommendation{/t}</a>]</td>
+						<td class="{$listcolor}">{include file="res_cacheicon_22.tpl" cachetype=$ratingItem.type|escape}</td>
+						<td class="{$listcolor}">{include file="res_cachestatus.tpl" status=$ratingItem.status}</td>
+						<td class="{$listcolor}"><span style="{include file="res_cachestatus_span.tpl" status=$ratingItem.status}"><a href="viewcache.php?wp={$ratingItem.wp}">{$ratingItem.cachename|escape}</a></span></td>
+						<td class="{$listcolor}" style="text-align:center">{$ratingItem.rating_date|date_format:$opt.format.date}</td>
+						<td class="{$listcolor}"><nobr>[<a href="javascript:if(confirm('{t escape=js}Do you really want to remove this recommendation?{/t}'))location.href='mytop5.php?action=delete&amp;cacheid={$ratingItem.cacheid}'">{t}Remove recommendation{/t}</a>]</nobr></td>
 					</tr>
-					<tr><td class="spacer" colspan="4"></td></tr>
 				{foreachelse}
 					<tr><td colspan="3"><br />{t}You haven't recommended a Geocache.{/t}</td></tr>
 				{/foreach}

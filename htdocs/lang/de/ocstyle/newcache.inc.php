@@ -34,6 +34,7 @@
  $size_not_ok_message = '&nbsp;<span class="errormsg">' . t('No cache-size is chosen.') . '</span>';
  $diff_not_ok_message = '&nbsp;<span class="errormsg">' . t('Choose both valuations!') . '</span>';
  $sizemismatch_message = '&nbsp;<span class="errormsg">' . t('For virtual and webcam caches, the cache size has to be -no container-!') . '</span>';
+ $safari_not_allowed_message = '<span class="errormsg">' . t('Only virtual caches can be safari caches.') . '</span>';
 
  $cache_submitted = t('Your cache is successfully added to the database. You will be redirected to the cache page, now.');
 

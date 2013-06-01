@@ -676,7 +676,7 @@ function restore_listings($cacheids, $rdate, $roptions, $simulate)
 			{
 				if (!$simulate)
 				{
-					if ($r['desc'] == null)    // was newly created -> delete
+					if ($r['desc'] === null)    // was newly created -> delete
 						sql("DELETE FROM `cache_desc` WHERE `cache_id`='&1' AND `language`='&2'",
 						    $cacheid, $r['language']);
 					else

@@ -32,6 +32,7 @@
 		</p>
 	</div>
 	{include file="adminreport_history.tpl"}
+	<br />
 
 	<div class="content2-container bg-blue02">
 		<p class="content-title-noshade-size2">
@@ -42,6 +43,7 @@
 	<div class="content2-container">
 		{include file="res_logentry.tpl" header=false footer=false footbacklink=false cache=$cache logs=$deleted_logs}
 	</div>
+	<br />
 
 	{include file="res_status_changes.tpl"}
 

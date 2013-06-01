@@ -18,9 +18,9 @@
 		{/capture}
 
 		{if $logItem.type==1}  {* Ocprop: $htmluserid<\/a>\s*(hat das Event besucht|hat den Geocache gefunden|found the Geocache|has visited the event) *}
-			{t 1=$smarty.capture.username}%1 found the Geocache{/t}
+			{t 1=$smarty.capture.username}%1 found the geocache{/t}
 		{elseif $logItem.type==2}  {* Ocprop: $htmluserid<\/a>.\s*(hat den Geocache nicht gefunden|didn't find the Geocache|didn't find the Geoacache) *}
-			{t 1=$smarty.capture.username}%1 didn't find the Geoacache{/t}
+			{t 1=$smarty.capture.username}%1 didn't find the geoacache{/t}
 		{elseif $logItem.type==3}
 			{t 1=$smarty.capture.username}%1 wrote a note{/t}
 		{elseif $logItem.type==7}
@@ -28,15 +28,15 @@
 		{elseif $logItem.type==8}
 			{t 1=$smarty.capture.username}%1 wants to visit the event{/t}
 		{elseif $logItem.type==9}
-			{t 1=$smarty.capture.username}%1 has archived the cache{/t}
+			{t 1=$smarty.capture.username}%1 has archived the geocache{/t}
 		{elseif $logItem.type==10}
-			{t 1=$smarty.capture.username}%1 has maintained the cache{/t}
+			{t 1=$smarty.capture.username}%1 has maintained the geocache{/t}
 		{elseif $logItem.type==11}
-			{t 1=$smarty.capture.username}%1 has disabled the cache{/t}
+			{t 1=$smarty.capture.username}%1 has disabled the geocache{/t}
 		{elseif $logItem.type==13}
-			{t 1=$smarty.capture.username}%1 has locked the cache{/t}
+			{t 1=$smarty.capture.username}%1 has locked the geocache{/t}
 		{elseif $logItem.type==14}
-			{t 1=$smarty.capture.username}%1 has locked and hidden the cache{/t}
+			{t 1=$smarty.capture.username}%1 has locked and hidden the geocache{/t}
 		{else}
 			{t 1=$smarty.capture.username}%1{/t}
 		{/if}

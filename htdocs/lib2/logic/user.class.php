@@ -722,7 +722,7 @@ class user
 		                       `new_email`=NULL, `new_email_code`=NULL, `new_email_date`=NULL,
 		                       `email_problems`=0,
 		                       `permanent_login_flag`=0, `activation_code`='',
-		                       `notify_radius`=0, `statpic_text`=''
+		                       `notify_radius`=0, `statpic_text`='', `description`=''
 		                 WHERE `user_id`='&1'", $this->nUserId);
 		sql("DELETE FROM `user_options` WHERE `user_id`='&1'", $this->nUserId);
 		$this->reload();

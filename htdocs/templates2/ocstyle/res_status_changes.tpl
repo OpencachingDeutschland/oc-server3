@@ -8,7 +8,7 @@
 <div class="content2-container bg-blue02">
 	<p class="content-title-noshade-size2">
 		<img src="resource2/{$opt.template.style}/images/description/22x22-logs.png" style="align: left; margin-right: 10px;" width="22" height="22" alt="" /> 
-		{t}Status changes{/t}
+		{t}Status changes{/t} <small>{t}since June 2013{/t}</small>
 	</p>
 </div>
 

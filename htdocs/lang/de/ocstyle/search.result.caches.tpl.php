@@ -29,7 +29,7 @@
 <div class="content2-container bg-blue02" style="margin-top:20px;">
 	<p class="content-title-noshade-size3">
 		<img src="resource2/ocstyle/images/cacheicon/traditional.gif" width="32" height="32" style="align:left;" alt="{t}Search{/t}" />&nbsp;
-		{t}{results_count} caches matched{/t}
+		{t}{results_count} caches<span style="{search_headline_caches}"> matched</span>{/t}
 		<span style="font-weight:normal;float:right;font-size:80%;" >
 			[<a href="query.php?action=save&queryid={queryid}">{t}Save options{/t}</a>]&nbsp;
 			[<a href="search.php?queryid={queryid}&showresult=0">{t}Edit options{/t}</a>]

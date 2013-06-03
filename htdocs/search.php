@@ -53,6 +53,13 @@
 		$multiplier['sm'] = 0.62137;
 		$multiplier['nm'] = 0.53996;
 
+		// Determine if search.php was called by a search function ('Caches' menu,
+		// stored query etc.) or for other purpose (e.g. user profile cache lists):
+		if (isset($_REQUEST['calledbysearch']) && !$_REQUEST['calledbysearch'])
+			tpl_set_var('search_headline_caches', 'display:none');
+		else
+			tpl_set_var('search_headline_caches','');
+
 		// default template variables
 		tpl_set_var('search_in_gm', $search_in_gm);
 		tpl_set_var('search_in_gm_zip', $search_in_gm_zip);

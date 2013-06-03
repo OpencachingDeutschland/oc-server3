@@ -17,7 +17,7 @@
 		<p class="content-title-noshade-size3">
 			<img src="resource2/{$opt.template.style}/images/description/22x22-logs.png" width="22" height="22"  style="align: left; margin-right: 10px;" />&nbsp;
 			{t 1=$found}Finds: %1{/t} &nbsp;
-			<span class="content-title-link">[<a href="search.php?showresult=1&amp;expert=0&amp;output=HTML&amp;sort=bymylastlog&amp;finderid={$login.userid}&amp;searchbyfinder=&amp;f_inactive=0&amp;logtype=1,7">{t}Geocaches found{/t}</a>]&nbsp; [<a href="search.php?showresult=1&amp;expert=0&amp;output=HTML&amp;sort=bymylastlog&amp;finderid={$login.userid}&amp;searchbyfinder=&amp;f_inactive=0&amp;logtype=1,2,3,4,5,6,7,8,9,10,11,12,13,14">{t}Geocaches logged{/t}</a>]</span>
+			<span class="content-title-link">[<a href="search.php?showresult=1&amp;expert=0&amp;output=HTML&amp;sort=bymylastlog&amp;finderid={$login.userid}&amp;searchbyfinder=&amp;f_inactive=0&amp;logtype=1,7&amp;calledbysearch=0">{t}Geocaches found{/t}</a>]&nbsp; [<a href="search.php?showresult=1&amp;expert=0&amp;output=HTML&amp;sort=bymylastlog&amp;finderid={$login.userid}&amp;searchbyfinder=&amp;f_inactive=0&amp;logtype=1,2,3,4,5,6,7,8,9,10,11,12,13,14&amp;calledbysearch=0">{t}Geocaches logged{/t}</a>]</span>
 		</p>
 	</div>
 
@@ -72,7 +72,7 @@
 		<p class="content-title-noshade-size3">
 			<img src="resource2/{$opt.template.style}/images/misc/22x22-traditional.gif" width="22" height="22"  style="align: left; margin-right: 10px;" />&nbsp;
 			{t 1=$hidden}Geocaches hidden: %1{/t} &nbsp;
-			<span class="content-title-link">[<a href="search.php?showresult=1&amp;expert=0&amp;output=HTML&amp;sort=byname&amp;ownerid={$login.userid}&amp;searchbyowner=&amp;f_inactive=0">{t}Show all{/t}</a>]&nbsp; [<a href="search.php?showresult=1&amp;expert=0&amp;output=HTML&amp;sort=byname&amp;ownerid={$login.userid}&amp;searchbyowner=&amp;f_inactive=1">{t}Show active{/t}</a>]</span>
+			<span class="content-title-link">[<a href="search.php?showresult=1&amp;expert=0&amp;output=HTML&amp;sort=byname&amp;ownerid={$login.userid}&amp;searchbyowner=&amp;f_inactive=0&calledbysearch=0">{t}Show all{/t}</a>]&nbsp; [<a href="search.php?showresult=1&amp;expert=0&amp;output=HTML&amp;sort=byname&amp;ownerid={$login.userid}&amp;searchbyowner=&amp;f_inactive=1&calledbysearch=0">{t}Show active{/t}</a>]</span>
 		</p>
 	</div>
 

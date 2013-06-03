@@ -108,7 +108,7 @@
 		<td valign="middle" class="header-small" style="padding-top:5px;padding-bottom:5px">
 		<img src="resource2/{$opt.template.style}/images/cacheicon/22x22-traditional.gif" width="22" height="22" align="middle" border="0" />&nbsp;<b>{t}Hidden caches{/t}:</b></td>
 		<td class="header-small">{$hidden}
-			{if $hidden>0}[<a href="search.php?showresult=1&amp;expert=0&amp;f_inactive=0&amp;output=HTML&amp;sort=byname&amp;ownerid={$userid}&amp;searchbyowner=">{t}Show all{/t}</a>]{if $active<$hidden}, {$active} {t}active caches{/t} {if $active>0}[<a href="search.php?showresult=1&amp;expert=0&amp;f_inactive=1&amp;output=HTML&amp;sort=byname&amp;ownerid={$userid}&amp;searchbyowner=">{t}Show{/t}</a>]{/if}{/if}{/if}
+			{if $hidden>0}[<a href="search.php?showresult=1&amp;expert=0&amp;f_inactive=0&amp;output=HTML&amp;sort=byname&amp;ownerid={$userid}&amp;searchbyowner=&amp;calledbysearch=0">{t}Show all{/t}</a>]{if $active<$hidden}, {$active} {t}active caches{/t} {if $active>0}[<a href="search.php?showresult=1&amp;expert=0&amp;f_inactive=1&amp;output=HTML&amp;sort=byname&amp;ownerid={$userid}&amp;searchbyowner=&amp;calledbysearch=0">{t}Show{/t}</a>]{/if}{/if}{/if}
 		</td>
 	</tr>
 
@@ -118,7 +118,7 @@
 				<td>{include file="res_cacheicon_15.tpl" cachetype=$stats.id}{$stats.cachetype|escape}:</td>
 				<td>{$stats.anzahl}&nbsp;
 				  <span style="color:#666666; font-size:10px;">
-				  (<a href="search.php?showresult=1&expert=0&output=HTML&sort=byname&ownerid={$userid}&searchbyowner=&f_inactive=0&cachetype={$stats.id}">{t}show{/t}</a>)
+				  (<a href="search.php?showresult=1&expert=0&output=HTML&sort=byname&ownerid={$userid}&searchbyowner=&f_inactive=0&cachetype={$stats.id}&amp;calledbysearch=0">{t}show{/t}</a>)
 				  </span>
 				</td>
 			</tr>
@@ -133,7 +133,7 @@
 		</td>
 		<td class="header-small">
 			{$founds}
-			{if $founds>0}[<a href="search.php?showresult=1&amp;expert=0&amp;f_inactive=0&amp;output=HTML&amp;sort=byname&amp;finderid={$userid}&amp;searchbyfinder=&amp;logtype=1,7">{t}Show all{/t}</a>]{/if}
+			{if $founds>0}[<a href="search.php?showresult=1&amp;expert=0&amp;f_inactive=0&amp;output=HTML&amp;sort=byname&amp;finderid={$userid}&amp;searchbyfinder=&amp;logtype=1,7&amp;calledbysearch=0">{t}Show all{/t}</a>]{/if}
 		</td>
 	</tr>
 
@@ -143,7 +143,7 @@
 				<td>{include file="res_cacheicon_15.tpl" cachetype=$stats.id}{$stats.cachetype|escape}:</td>
 				<td>{$stats.anzahl}&nbsp;
 				  <span style="color:#666666; font-size:10px;">
-				  (<a href="search.php?showresult=1&expert=0&output=HTML&sort=byname&finderid={$userid}&searchbyfinder=&f_inactive=0&cachetype={$stats.id}&amp;logtype=1,7">{t}show{/t}</a>)
+				  (<a href="search.php?showresult=1&expert=0&output=HTML&sort=byname&finderid={$userid}&searchbyfinder=&f_inactive=0&cachetype={$stats.id}&amp;logtype=1,7&amp;calledbysearch=0">{t}show{/t}</a>)
 				  </span>
 				</td>
 			</tr>
@@ -154,14 +154,14 @@
 			<td valign="middle" class="header-small" style="padding-top:5px;padding-bottom:5px">
 			<img src="resource2/ocstyle/images/log/16x16-dnf.png" />&nbsp;&nbsp;&nbsp;<b>{t}Not found{/t}:</b></td>
 			<td class="header-small" >{$notfound}
-				{if $notfound > 0}[<a href="search.php?showresult=1&amp;expert=0&amp;f_inactive=0&amp;output=HTML&amp;sort=byname&amp;finderid={$userid}&amp;searchbyfinder=&amp;logtype=2">{t}Show all{/t}</a>]{/if}
+				{if $notfound > 0}[<a href="search.php?showresult=1&amp;expert=0&amp;f_inactive=0&amp;output=HTML&amp;sort=byname&amp;finderid={$userid}&amp;searchbyfinder=&amp;logtype=2&amp;calledbysearch=0">{t}Show all{/t}</a>]{/if}
 			</td>
 		</tr>
 		<tr>
 			<td valign="middle" class="header-small" style="padding-bottom:5px">
 			<img src="resource2/ocstyle/images/log/16x16-note.png" />&nbsp;&nbsp;&nbsp;<b>{t}Notes{/t}:</b></td>
 			<td class="header-small" >{$note}
-				{if $note>0}[<a href="search.php?showresult=1&amp;expert=0&amp;f_inactive=0&amp;output=HTML&amp;sort=byname&amp;finderid={$userid}&amp;searchbyfinder=&amp;logtype=3">{t}Show all{/t}</a>]{/if}
+				{if $note>0}[<a href="search.php?showresult=1&amp;expert=0&amp;f_inactive=0&amp;output=HTML&amp;sort=byname&amp;finderid={$userid}&amp;searchbyfinder=&amp;logtype=3&amp;calledbysearch=0">{t}Show all{/t}</a>]{/if}
 			</td>
 		</tr>
 		{if $maintenance > 0}
@@ -169,7 +169,7 @@
 			<td valign="middle" class="header-small" style="padding-bottom:5px">
 			<img src="resource2/ocstyle/images/viewcache/16x16-maintenance.png" />&nbsp;&nbsp;&nbsp;<b>{t}Maintenance logs{/t}:</b></td>
 			<td class="header-small" >{$maintenance}
-				[<a href="search.php?showresult=1&amp;expert=0&amp;f_inactive=0&amp;output=HTML&amp;sort=byname&amp;finderid={$userid}&amp;searchbyfinder=&amp;logtype=9,10,11,13,14">{t}Show all{/t}</a>]
+				[<a href="search.php?showresult=1&amp;expert=0&amp;f_inactive=0&amp;output=HTML&amp;sort=byname&amp;finderid={$userid}&amp;searchbyfinder=&amp;logtype=9,10,11,13,14&amp;calledbysearch=0">{t}Show all{/t}</a>]
 			</td>
 		</tr>
 		{/if}

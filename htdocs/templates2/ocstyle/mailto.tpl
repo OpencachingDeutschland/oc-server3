@@ -10,7 +10,7 @@
 {if $success==true}
 	<div class="content2-pagetitle">
 		<img src="resource2/{$opt.template.style}/images/misc/22x22-email.png" style="align: left; margin-right: 10px;" width="32" height="32" alt="" />
-		<b>{t 1=$smarty.capture.userlink}E-Mail to %1 was sent{/t}</b>
+		{t 1=$smarty.capture.userlink}E-Mail to %1 was sent{/t}
 	</div>
 
 	<table class="table">
@@ -33,10 +33,18 @@
 		<input type="hidden" name="userid" value="{$userid}"/>
 		<div class="content2-pagetitle">
 			<img src="resource2/{$opt.template.style}/images/misc/22x22-email.png" style="align: left; margin-right: 10px;" width="32" height="32" alt="" />
-			<b>{t 1=$smarty.capture.userlink}Send E-Mail to %1{/t}</b>
+			{t 1=$smarty.capture.userlink}Send E-Mail to %1{/t}
 		</div>
 
 		<table class="table">
+			{if $email_problems > 0}
+			<tr>
+				<td colspan="2" class="errormsg">
+					<p>{t}One ore more emails to this user could not be delivered. It might be a good idea to additionally log comments on the user's geocaches, and/or trying to contact him/her through other channels like a message board account or another geocaching platform.{/t}</p>
+				</td>
+			</tr>
+			{/if}
+
 			<tr>
 				<td colspan="2">{t}Subject:{/t} <input type="text" name="subject" value="{$subject|escape}" class="input400"></td>
 			</tr>

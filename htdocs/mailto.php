@@ -56,6 +56,7 @@
 	$tpl->assign('subject', $subject);
 	$tpl->assign('text', $text);
 	$tpl->assign('emailaddress', $bEmailaddress);
+	$tpl->assign('email_problems', $user->getEmailProblems());
 
 	$tpl->assign('userid', $user->getUserId());
 	$tpl->assign('username', $user->getUsername());

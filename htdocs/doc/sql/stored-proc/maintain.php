@@ -522,7 +522,13 @@
 	       INSERT IGNORE INTO `notify_waiting` (`id`, `cache_id`, `user_id`, `type`)
 	       SELECT NULL, nCacheId, `user`.`user_id`, 1 /* notify_new_cache */
 	         FROM `user`
-	        WHERE NOT ISNULL(`user`.`latitude`)
+          /* After reaching the 5-bounces limit, we try to send new cache notifications
+             in larger intervals for some more time, and at least on per year.
+						 See also runwatch.php. */
+	        WHERE (`email_problems` < 5
+					       OR (`email_problems` < 10 AND NOW() > IFNULL(`last_email_problem`,'2013-03-01') + INTERVAL 30 DAY)
+							   OR NOW() > IFNULL(`last_email_problem`,'2013-03-01') + INTERVAL 365 DAY)
+	          AND NOT ISNULL(`user`.`latitude`)
 	          AND NOT ISNULL(`user`.`longitude`)
 	          AND `user`.`notify_radius`>0
 	          AND (acos(cos((90-nLatitude) * 3.14159 / 180) * cos((90-`user`.`latitude`) * 3.14159 / 180) + sin((90-nLatitude) * 3.14159 / 180) * sin((90-`user`.`latitude`) * 3.14159 / 180) * cos((nLongitude-`user`.`longitude`) * 3.14159 / 180)) * 6370) <= `user`.`notify_radius`;

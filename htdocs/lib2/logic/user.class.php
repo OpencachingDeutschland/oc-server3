@@ -51,6 +51,8 @@ class user
 		$this->reUser->addString('password', null, true);
 		$this->reUser->addString('email', null, true);
 		$this->reUser->addString('email_problems', 0, false);
+		$this->reUser->addDate('last_email_problem', null, true);
+		$this->reUser->addInt('mailing_problems', 0, false);
 		$this->reUser->addFloat('latitude', 0, false);
 		$this->reUser->addFloat('longitude', 0, false);
 		$this->reUser->addDate('last_modified', time(), true, RE_INSERT_IGNORE);
@@ -1173,16 +1175,20 @@ class user
 	// email bounce processing
 	function addEmailProblem($licensemail=false)
 	{
+		// mailing_problems is a bit-flag field to remember nondelivered, important mailings
 		if ($licensemail)
-			return $this->reUser->setValue('email_problems', 1000001) && $this->save();
-		else
-			return $this->reUser->setValue('email_problems', $this->getEmailProblems() + 1) && $this->save();
+			if (!$this->reUser->setValue('mailing_problems', $this->reUser->getValue('mailing_problems') | 1))
+				return false;
+
+		return $this->reUser->setValue('email_problems', $this->getEmailProblems() + 1) &&
+		       $this->reUser->setValue('last_email_problem', date('Y-m-d H:i:s')) &&
+					 $this->save();
 	}
 
 	function getEmailProblems()
 	{
 		// see also common.inc.php "SELECT `email_problems`"
-		return $this->reUser->getValue('email_problems') % 1000000;
+		return $this->reUser->getValue('email_problems');
 	}
 
 	function getDataLicense()
@@ -1198,7 +1204,7 @@ class user
 
 	function missedDataLicenseMail()
 	{
-		return $this->reUser->getValue('email_problems') > 1000000;
+		return $this->reUser->getValue('mailing_problems') & 1;
 	}
 
 	function confirmEmailAddress()

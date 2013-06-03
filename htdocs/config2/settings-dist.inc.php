@@ -111,6 +111,14 @@
 	// date format
 	$opt['db']['dateformat'] = 'Y-m-d H:i:s';
 
+	// email delivery processing from syslog-ng eventlog DB
+	$opt['system']['maillog']['syslog_db_host'] = '';
+	$opt['system']['maillog']['syslog_db_name'] = '';
+	$opt['system']['maillog']['syslog_db_user'] = '';
+	$opt['system']['maillog']['syslog_db_password'] = '';
+	$opt['system']['maillog']['syslog_oc_host'] = '';  // 'host_name' column in syslog DB
+	$opt['system']['maillog']['syslog_mta'] = 'postfix/smtp';  // 'program' column in syslog DB 
+
 	/* cookie or session
 	 *
 	 * SAVE_COOKIE            = only use cookies

@@ -2488,6 +2488,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2066', 'Open ch
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2067', 'Status', '2013-05-28 16:51:40');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2068', 'since June 2013', '2013-05-28 16:51:40');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2069', 'since February 2012', '2013-05-28 16:51:40');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2070', 'One ore more emails to this user could not be delivered. It might be a good idea to additionally log comments on the user\'s geocaches, and/or trying to contact him/her through other channels like a message board account or another geocaching platform.', '2013-05-28 16:51:40');
 
 -- Table sys_trans_ref
 SET NAMES 'utf8';
@@ -6428,6 +6429,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2067', 'DE', 'Status', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2068', 'DE', 'seit Juni 2013', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2069', 'DE', 'seit Februar 2012', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2070', 'DE', 'Eine oder mehrere Emails an diesen Benutzer konnten nicht zugestellt werden. Es könnte ratsam sein, Hinweise zu seinen Caches zusätzlich zu loggen, und ihn ggf. über weitere Adressen wie z.B. Forenaccounts oder andere Geocaching-Plattformen zu kontaktieren.', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'EN', 'Reorder IDs \r', '2010-09-02 00:15:30');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'EN', 'The database could not be reconnected.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'EN', 'Testing – please do not login', '2010-08-28 11:48:07');
@@ -7988,6 +7990,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2067', 'EN', 'Status', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2068', 'EN', 'since June 2013', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2069', 'EN', 'since February 2012', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2070', 'EN', 'One ore more emails to this user could not be delivered. It might be a good idea to additionally log comments on the user\'s geocaches, and/or trying to contact him/her through other channels like a message board account or another geocaching platform.', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'ES', 'Reordenar ID', '2010-12-09 00:17:55');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'ES', 'La base de datos no se pudo conectar.', '2010-12-09 00:17:55');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'ES', 'En pruebas - por favor, no entre.', '2010-12-09 00:17:55');

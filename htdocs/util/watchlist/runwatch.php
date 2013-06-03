@@ -60,6 +60,7 @@
 			// Benachrichtigung speichern
 			sql("INSERT IGNORE INTO `watches_notified` (`user_id`, `object_id`, `object_type`, `date_created`) VALUES ('&1', '&2', 1, NOW())", $rNewLog['user_id'], $rNewLog['log_id']);
 		
+			// Owner notifications are always sent, independent of user.email_problems counter.
 			process_owner_log($rNewLog['user_id'], $rNewLog['log_id']);
 		}
 		mysql_free_result($rsNotified);
@@ -77,7 +78,11 @@
   {
     // Benachrichtigung speichern
     sql("INSERT IGNORE INTO `watches_notified` (`user_id`, `object_id`, `object_type`, `date_created`) VALUES ('&1', '&2', 1, NOW())", $rcw['user_id'], $rcw['log_id']);
-    process_log_watch($rcw['user_id'], $rcw['log_id']);
+
+    // Watch notifications are discarded if the user had some undeliverable emails.
+    // See also stored procedure sp_notify_new_cache().
+    if (sqlValue("SELECT `email_problems` FROM `user` WHERE `user_id`='" . sql_escape($rcw['user_id']) . "'", 0) < 5)
+      process_log_watch($rcw['user_id'], $rcw['log_id']);
 
     sql("DELETE FROM `watches_logqueue` WHERE `log_id`='&1' AND `user_id`='&2'", $rcw['log_id'], $rcw['user_id']);
   }

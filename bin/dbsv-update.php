@@ -181,4 +181,10 @@
 			sql("ALTER TABLE `user` ADD COLUMN `mailing_problems` int(10) unsigned NOT NULL default '0' AFTER `last_email_problem`");
 	}
 
+	function dbv_109()  // improved email-bounce processiong
+	{
+		if (!sql_field_exists('user','first_email_problem'))
+			sql("ALTER TABLE `user` ADD COLUMN `first_email_problem` date default NULL AFTER `email_problems`");
+	}
+
 ?>

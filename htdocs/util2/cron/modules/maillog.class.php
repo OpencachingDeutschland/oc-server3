@@ -42,7 +42,7 @@ class maillog
 			echo $this->name.": could not connect to syslog database\n";
 			return;
 		}
-		if (@mysql_query("USE ".$opt['system']['maillog']['syslog_db_name']) === FALSE)
+		if (@mysql_query("USE ".$opt['system']['maillog']['syslog_db_name'], $dbc) === FALSE)
 		{
 			echo $this->name.": could not open syslog database: ".mysql_error()."\n";
 			return;
@@ -59,7 +59,7 @@ class maillog
 			    WHERE  (`id`>'" . mysql_real_escape_string($last_id) . "' OR `created`>'" . mysql_real_escape_string($last_date) . "')  
 			      AND `host_name`='" . mysql_real_escape_string($opt['system']['maillog']['syslog_oc_host']) . "'
 			      AND `program`='" . mysql_real_escape_string($opt['system']['maillog']['syslog_mta']) . "'
-			 ORDER BY `id`");
+			 ORDER BY `id`", $dbc);
 		if ($rs === FALSE)
 		{
 			echo $this->name.": syslog query error (".mysql_errno()."): ".mysql_error()."\n";

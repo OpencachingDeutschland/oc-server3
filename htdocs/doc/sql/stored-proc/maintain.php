@@ -525,9 +525,8 @@
           /* After reaching the 5-bounces limit, we try to send new cache notifications
              in larger intervals for some more time, and at least on per year.
 						 See also runwatch.php. */
-	        WHERE (`email_problems` < 5
-					       OR (`email_problems` < 10 AND NOW() > IFNULL(`last_email_problem`,'2013-03-01') + INTERVAL 30 DAY)
-							   OR NOW() > IFNULL(`last_email_problem`,'2013-03-01') + INTERVAL 365 DAY)
+	        WHERE (`email_problems` = 0 OR NOT `email` LIKE '%@aol.%') AND
+					       (`email_problems` < 5 OR (`last_email_problem`-`first_email_problem` <= 90 AND NOW() > `last_email_problem` + INTERVAL 30 DAY))
 	          AND NOT ISNULL(`user`.`latitude`)
 	          AND NOT ISNULL(`user`.`longitude`)
 	          AND `user`.`notify_radius`>0
@@ -1253,6 +1252,11 @@
 							   
 								SET NEW.`last_modified`=NOW();
 							END IF;
+						END IF;
+						IF NEW.`email_problems`>0 AND NEW.`first_email_problem` IS NULL THEN
+							SET NEW.`first_email_problem` = NEW.`last_email_problem`;
+						ELSEIF NEW.`email_problems`=0 THEN
+							SET NEW.`first_email_problem` = NULL;
 						END IF;
 					END;");
 

@@ -11,6 +11,7 @@ CREATE TABLE `user` (
   `password` varchar(32) default NULL,
   `email` varchar(60) default NULL,
   `email_problems` int(10) NOT NULL default '0',
+  `first_email_problem` date default NULL,
   `last_email_problem` datetime default NULL,
   `mailing_problems` int(10) unsigned NOT NULL default '0',
   `latitude` double NOT NULL,

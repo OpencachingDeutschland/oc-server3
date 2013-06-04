@@ -102,6 +102,7 @@ class autoarchive
 				// create log text in appropriate language
 				$translated_comment = $translate->t($comment, '','',0,'',1, $cache->getDefaultDescLanguage());
 				$log->setText('<p>'.$translated_comment.'</p>');
+				$log->setTextHtml(1);
 
 				if (!$log->save())
 					echo $this->name . ": could not save archive log for cache $cache_id\n";

@@ -522,11 +522,8 @@
 	       INSERT IGNORE INTO `notify_waiting` (`id`, `cache_id`, `user_id`, `type`)
 	       SELECT NULL, nCacheId, `user`.`user_id`, 1 /* notify_new_cache */
 	         FROM `user`
-          /* After reaching the 5-bounces limit, we try to send new cache notifications
-             in larger intervals for some more time, and at least on per year.
-						 See also runwatch.php. */
-	        WHERE (`email_problems` = 0 OR NOT `email` LIKE '%@aol.%') AND
-					       (`email_problems` < 5 OR (`last_email_problem`-`first_email_problem` <= 90 AND NOW() > `last_email_problem` + INTERVAL 30 DAY))
+          /* Throttle email sending after undeliverable mails. See also runwatch.php. */
+	        WHERE (`email_problems` = 0 OR DATEDIFF(NOW(),`last_email_problem`) > 1+DATEDIFF(`last_email_problem`,`first_email_problem`))
 	          AND NOT ISNULL(`user`.`latitude`)
 	          AND NOT ISNULL(`user`.`longitude`)
 	          AND `user`.`notify_radius`>0

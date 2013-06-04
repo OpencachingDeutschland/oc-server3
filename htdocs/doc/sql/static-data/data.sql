@@ -520,6 +520,7 @@ INSERT INTO `countries_options` (`country`, `display`, `gmLat`, `gmLon`, `gmZoom
 SET NAMES 'utf8';
 TRUNCATE TABLE `helppages`;
 INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('activation', 'DE', 'Aktivierung');
+INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('additional_waypoints', 'DE', 'Zusätzliche Wegpunkte');
 INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('adoptcache', 'DE', 'Adoption');
 INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('change_statpic', 'DE', 'Statistikbild');
 INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('editcache', '*', '!articles.php?page=cacheinfo');
@@ -538,8 +539,10 @@ INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('myprofile', 
 INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('mywatches', 'DE', 'Benachrichtigungen');
 INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('newcache', '*', '!articles.php?page=cacheinfo');
 INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('newdesc', 'DE', 'Beschreibungstext');
+INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('newlogpics', 'DE', 'Logbild-Galerien');
 INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('newpw', 'DE', 'Passwort');
 INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('picture', 'DE', 'Bilder');
+INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('previewpics', 'DE', 'Vorschaubilder');
 INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('query', 'DE', 'Gespeicherte Suchen');
 INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('register', 'DE', 'Registrierung');
 INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('removelog_logowner', 'DE', 'Logeintrag löschen');
@@ -547,14 +550,11 @@ INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('removelog_ca
 INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('reportcache', 'DE', 'Cache melden');
 INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('search', 'DE', 'Suchformular');
 INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('tops', 'DE', 'Empfehlungen');
+INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('usernote', 'DE', 'Persönliche Notiz');
 INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('usertops', 'DE', 'Empfehlungen');
 INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('viewcache', 'DE', 'Listing');
 INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('viewlogs', 'DE', 'Das Onlinelog');
 INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('viewprofile', 'DE', 'Benutzerprofil');
-INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('additional_waypoints', 'DE', 'Zusätzliche Wegpunkte');
-INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('usernote', 'DE', 'Persönliche Notiz');
-INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('previewpics', 'DE', 'Vorschaubilder');
-INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('newlogpics', 'DE', 'Logbild-Galerien');
 INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('viewprofile_pics', 'DE', 'Logbild-Galerien');
 
 -- Table languages

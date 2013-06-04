@@ -572,17 +572,9 @@
 	
 	function xmlentities($str)
 	{
-		$from[0] = '&'; $to[0] = '&amp;';
-		$from[1] = '<'; $to[1] = '&lt;';
-		$from[2] = '>'; $to[2] = '&gt;';
-		$from[3] = '"'; $to[3] = '&quot;';
-		$from[4] = '\''; $to[4] = '&apos;';
-		$from[5] = ']]>'; $to[5] = ']] >';
-
-		for ($i = 0; $i <= 4; $i++)
-			$str = mb_ereg_replace($from[$i], $to[$i], $str);
-
-		return filterevilchars($str);
+        $str = html_entity_decode($str, ENT_COMPAT, "UTF-8");
+        $str = htmlspecialchars($str, ENT_COMPAT, "UTF-8");
+ 		return filterevilchars($str);
 	}
 	
 	function filterevilchars($str)

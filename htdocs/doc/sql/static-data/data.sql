@@ -2489,6 +2489,8 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2067', 'Status'
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2068', 'since June 2013', '2013-05-28 16:51:40');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2069', 'since February 2012', '2013-05-28 16:51:40');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2070', 'One ore more emails to this user could not be delivered. It might be a good idea to additionally log comments on the user\'s geocaches, and/or trying to contact him/her through other channels like a message board account or another geocaching platform.', '2013-05-28 16:51:40');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2071', 'This cache has been \"temporarily unavailable\" for more than one year now; therefore it is being archived automatically. The owner may decide to maintain the cache and re-enable the listing.', '2013-05-28 16:51:40');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2072', 'This event took place more than five weeks ago; therefore it is being archived automatically. The owner may re-enable the listing if it should stay active for some exceptional reason.', '2013-05-28 16:51:40');
 
 -- Table sys_trans_ref
 SET NAMES 'utf8';
@@ -6430,6 +6432,8 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2068', 'DE', 'seit Juni 2013', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2069', 'DE', 'seit Februar 2012', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2070', 'DE', 'Eine oder mehrere Emails an diesen Benutzer konnten nicht zugestellt werden. Es könnte ratsam sein, Hinweise zu seinen Caches zusätzlich zu loggen, und ihn ggf. über weitere Adressen wie z.B. Forenaccounts oder andere Geocaching-Plattformen zu kontaktieren.', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2071', 'DE', 'Dieser Cache ist seit mehr als einem Jahr &bdquo;momentan nicht verfügbar&ldquo;; daher wird er automatisch archiviert. Er kann vom Besitzer jederzeit instand gesetzt und reaktiviert werden.', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2072', 'DE', 'Dieses Event fand vor über fünf Wochen statt; daher wird es automatisch archiviert. Das Listing kann vom Owner selbst reaktiviert werden, falls es aus besonderen Gründen weiter aktiv bleiben soll.', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'EN', 'Reorder IDs \r', '2010-09-02 00:15:30');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'EN', 'The database could not be reconnected.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'EN', 'Testing – please do not login', '2010-08-28 11:48:07');
@@ -7991,6 +7995,8 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2068', 'EN', 'since June 2013', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2069', 'EN', 'since February 2012', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2070', 'EN', 'One ore more emails to this user could not be delivered. It might be a good idea to additionally log comments on the user\'s geocaches, and/or trying to contact him/her through other channels like a message board account or another geocaching platform.', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2071', 'EN', 'This cache has been \"temporarily unavailable\" for more than one year now; therefore it is being archived automatically. The owner may decide to maintain the cache and re-enable the listing.', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2072', 'EN', 'This event took place more than five weeks ago; therefore it is being archived automatically. The owner may re-enable the listing if it should stay active for some exceptional reason.', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'ES', 'Reordenar ID', '2010-12-09 00:17:55');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'ES', 'La base de datos no se pudo conectar.', '2010-12-09 00:17:55');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'ES', 'En pruebas - por favor, no entre.', '2010-12-09 00:17:55');

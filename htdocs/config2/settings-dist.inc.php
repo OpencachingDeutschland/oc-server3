@@ -368,6 +368,10 @@
   // fill_gaps = false: continue with the last waypoint
   $opt['logic']['waypoint_pool']['fill_gaps'] = false;
 
+  /* Automatic system user actions
+   */
+	$opt['logic']['systemuser']['user'] = '';  // enter an active username to enable auto archiving
+
 	/* Purge log files - age in days (0 = keep infinite)
 	 */
 	$opt['logic']['logs']['purge_email'] = 30;

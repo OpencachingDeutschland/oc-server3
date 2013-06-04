@@ -196,16 +196,26 @@ class cache
 	}
 	function setStatus($value)
 	{
-		$login;
+		global $login;
 		if (sql_value("SELECT COUNT(*) FROM `cache_status` WHERE `id`='&1'", 0, $value) == 1)
 		{
-			sql("SET @STATUS_CHANGE_USER_ID='&1'", $login->user_id);
+			sql("SET @STATUS_CHANGE_USER_ID='&1'", $login->userid);
 			return $this->reCache->setValue('status', $value);
 		}
 		else
 		{
 			return false;
 		}
+	}
+
+	function getDescLanguages()
+	{
+		return explode($this->reCache->getValue('desc_languages'),',');
+	}
+
+	function getDefaultDescLanguage()
+	{
+		return $this->reCache->getValue('default_desclang');
 	}
 
 	function getAnyChanged()

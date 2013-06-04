@@ -266,6 +266,27 @@ class login
 		return $retval;
 	}
 
+	// login for cronjobs, command line tools ...
+	function system_login($username)
+	{
+		$this->pClear();
+		if ($username != "")
+		{
+			$rs = sql("SELECT `user_id`,`username`,`admin` FROM `user`
+			            WHERE `username`='&1' AND `is_active_flag`", $username);
+			if ($rUser = sql_fetch_assoc($rs))
+			{
+				$this->username = $rUser['username'];
+				$this->userid = $rUser['user_id'];
+				$this->admin = $rUser['admin'];
+				$this->verified = true;
+				sqlf("UPDATE `user` SET `user`.`last_login`=NOW() WHERE `user`.`user_id`='&1'", $this->userid);
+			}
+			sql_free_result($rs);
+		}
+		return ($this->userid > 0);
+	}
+
 	private static function create_sessionid()
 	{
 		return sprintf('%04x%04x-%04x-%04x-%04x-%04x%04x%04x',

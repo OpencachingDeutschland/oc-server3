@@ -14,6 +14,17 @@ require_once($opt['rootpath'] . 'lib/logtypes.inc.php');
 
 class cachelog
 {
+	const LOGTYPE_FOUND      = 1;
+	const LOGTYPE_NOTFOUND   = 2;
+	const LOGTYPE_NOTE       = 3;
+	const LOGTYPE_ATTENDED   = 7;
+	const LOGTYPE_WILLATTEND = 8;
+	const LOGTYPE_ARCHIVED   = 9;
+	const LOGTYPE_ACTIVE     = 10;
+	const LOGTYPE_DISABLED   = 11;
+	const LOGTYPE_LOCKED     = 13;
+	const LOGTYPE_LOCKED_INVISIBLE = 14;
+
 	var $nLogId = 0;
 
 	var $reCacheLog;
@@ -35,6 +46,8 @@ class cachelog
 
 	static function createNew($nCacheId, $nUserId)
 	{
+		global $opt;
+
 		// check if user is allowed to log this cache!
 		$cache = new cache($nCacheId);
 		if ($cache->exist() == false)
@@ -45,6 +58,7 @@ class cachelog
 		$oCacheLog = new cachelog(ID_NEW);
 		$oCacheLog->setUserId($nUserId);
 		$oCacheLog->setCacheId($nCacheId);
+		$oCacheLog->setNode($opt['logic']['node']['id']);
 		return $oCacheLog;
 	}
 

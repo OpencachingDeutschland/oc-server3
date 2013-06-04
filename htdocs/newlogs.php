@@ -58,8 +58,10 @@
 										 INNER JOIN `user` AS `cacheloguser` ON `cache_logs`.`user_id`=`cacheloguser`.`user_id` 
 										 INNER JOIN `countries` ON `caches`.`country`=`countries`.`short` 
 										  LEFT JOIN `sys_trans_text` ON `countries`.`trans_id`=`sys_trans_text`.`trans_id` AND `sys_trans_text`.`lang`='&1'
+										      WHERE `username`<>'&2'
 										   ORDER BY " . $sqlOrderBy . "`cache_logs`.`date_created` DESC",
-											          $opt['template']['locale']);
+											          $opt['template']['locale'],
+											          isset($_GET['showsyslogs']) ? '' : $opt['logic']['systemuser']['user']);
 
 		$newLogs = array();
 

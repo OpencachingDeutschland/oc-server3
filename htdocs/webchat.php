@@ -4,7 +4,7 @@
  *
  *  Unicode Reminder メモ
  *
- *  Displays the Chat/IRC using iframe of freenode.net escaping usernames
+ *  Displays the Chat/IRC using iframe of freenode.net, escaping usernames
  ***************************************************************************/
 
 	require('./lib2/web.inc.php');
@@ -17,16 +17,6 @@
 	$tpl->cache_id = $sUserCountry;
 
 	// check loggedin and set username for chat
-	/*
-	 * OC allows alphanumeric chars in username and:
-	 * ". - _ @ ä ü ö Ä Ü Ö = ) ( / \ & * + ~ #"
-	 * 
-	 * IRC allows alphanumeric chars in nick and:
-	 * "_ - \ [ ] { } ^ ` |"
-	 * 
-	 * so we have to convert the folloing chars before urlencoding it:
-	 * ". @ ä ü ö Ä Ü Ö = ) ( / & * + ~ #"
-	 */
 	$chatusername = $translate->t('Guest', '', basename(__FILE__), __LINE__) . rand(100,999);
 	if ($login->userid != 0)
 		$chatusername = urlEncodeString(ircConvertString($login->username));
@@ -40,88 +30,96 @@
 	$tpl->assign('chatiframeheight',$opt['chat']['height']);
 
 	$tpl->display();
+
 	
+	/*
+	 * OC allows alphanumeric chars in username and
+	 *   . - _ @ ä ü ö Ä Ü Ö = ) ( / \ & * + ~ #
+	 *
+	 * IRC allows alphanumeric chars in nick and:
+	 *   _ - \ [ ] { } ^ ` |
+	 *
+	 * so we have to convert the following chars before urlencoding it:
+	 *   . @ ä ü ö Ä Ü Ö = ) ( / & * + ~ #
+	 */
+
 	/*
 	 * functions
 	 */
+
 	function urlEncodeString($string)
 	{
-		// set arrays with chars/encodings allowed in username see const REGEX_USERNAME
-		// ". - _ @ ä ü ö Ä Ü Ö = ) ( / \ & * + ~ #" (ajust if regex is changed)
-		$k[] = '.';  $v[] = '%2E';
-		$k[] = '-';  $v[] = '%2D';
-		$k[] = '_';  $v[] = '%5F';
-		$k[] = '@';  $v[] = '%40';
-		$k[] = 'ä';  $v[] = '%E4';
-		$k[] = 'ü';  $v[] = '%FC';
-		$k[] = 'ö';  $v[] = '%F5';
-		$k[] = 'Ä';  $v[] = '%C4';
-		$k[] = 'Ü';  $v[] = '%DC';
-		$k[] = 'Ö';  $v[] = '%D6';
-		$k[] = '=';  $v[] = '%3D';
-		$k[] = ')';  $v[] = '%29';
-		$k[] = '(';  $v[] = '%28';
-		$k[] = '/';  $v[] = '%2F';
-		$k[] = '\\'; $v[] = '%5C';
-		$k[] = '&';  $v[] = '%26';
-		$k[] = '*';  $v[] = '%2A';
-		$k[] = '+';  $v[] = '%2B';
-		$k[] = '~';  $v[] = '%7E';
-		$k[] = '#';  $v[] = '%23';
-		// used in converting to IRC compatible nicks
-		$k[] = '}';  $v[] = '%7D';
-		$k[] = '{';  $v[] = '%7B';
-		
-		// walk through $string and encode string
-		$outstring = '';
-		for ($i=0;$i<mb_strlen($string);$i++)
-		{
-			$char = mb_substr($string,$i,1);
-			
-			// find replacement
-			$id = array_search($char,$k);
-			if ($id !== false)
-				$outstring .= $v[$id];
-			else
-				$outstring .= $char;
-		}
-		
-		// return
-		return $outstring;
+		return translateString(
+			$string,
+			// chars/encodings allowed in username see const REGEX_USERNAME
+			//   . - _ @ ä ü ö Ä Ü Ö = ) ( / \ & * + ~ #
+			// (ajust if regex is changed)
+			array(
+				'.' => '%2E',
+				'-' => '%2D',
+				'_' => '%5F',
+				'@' => '%40',
+				'ä' => '%E4',
+				'ü' => '%FC',
+				'ö' => '%F6',
+				'Ä' => '%C4',
+				'Ü' => '%DC',
+				'Ö' => '%D6',
+				'=' => '%3D',
+				')' => '%29',
+				'(' => '%28',
+				'/' => '%2F',
+				'\\'=> '%5C',
+				'&' => '%26',
+				'*' => '%2A',
+				'+' => '%2B',
+				'~' => '%7E',
+				'#' => '%23',
+				// used in converting to IRC compatible nicks:
+				'}' => '%7D',
+				'{' => '%7B',
+			));
 	}
-	
+
 	function ircConvertString($string)
 	{
-		// set arrays with chars/replacement allowed OC usernames and not in IRC nickname
-		// ". @ ä ü ö Ä Ü Ö = ) ( / & * + ~ #"
-		$k[] = '.';  $v[] = '';
-		$k[] = '@';  $v[] = '{at}';
-		$k[] = 'ä';  $v[] = 'ae';
-		$k[] = 'ü';  $v[] = 'ue';
-		$k[] = 'ö';  $v[] = 'oe';
-		$k[] = 'Ä';  $v[] = 'Ae';
-		$k[] = 'Ü';  $v[] = 'Ue';
-		$k[] = 'Ö';  $v[] = 'Oe';
-		$k[] = '=';  $v[] = '-';
-		$k[] = ')';  $v[] = '}';
-		$k[] = '(';  $v[] = '{';
-		$k[] = '/';  $v[] = '\\';
-		$k[] = '&';  $v[] = '';
-		$k[] = '*';  $v[] = '';
-		$k[] = '+';  $v[] = '';
-		$k[] = '~';  $v[] = '-';
-		$k[] = '#';  $v[] = '';
-		
+		return translateString(
+			$string,
+			// chars/replacement allowed OC usernames and not in IRC nickname
+			//   . @ ä ü ö Ä Ü Ö = ) ( / & * + ~ #
+			// (adjust if additional username chars are allowed)
+			array(
+				'.' => '',
+				'@' => '{at}',
+				'ä' => 'ae',
+				'ü' => 'ue',
+				'ö' => 'oe',
+				'Ä' => 'Ae',
+				'Ü' => 'Ue',
+				'Ö' => 'Oe',
+				'=' => '-',
+				')' => '}',
+				'(' => '{',
+				'/' => '\\',
+				'&' => '',
+				'*' => '',
+				'+' => '',
+				'~' => '-',
+				'#' => '',
+				));
+	}
+
+	function translateString($string, $translation_table)
+	{
 		// walk through $string and encode string
 		$outstring = '';
-		for ($i=0;$i<mb_strlen($string);$i++)
+		for ($i=0; $i<mb_strlen($string); $i++)
 		{
 			$char = mb_substr($string,$i,1);
 			
 			// find replacement
-			$id = array_search($char,$k);
-			if ($id !== false)
-				$outstring .= $v[$id];
+			if (isset($translation_table[$char]))
+				$outstring .= $translation_table[$char];
 			else
 				$outstring .= $char;
 		}
@@ -129,4 +127,5 @@
 		// return
 		return $outstring;
 	}
+
 ?>

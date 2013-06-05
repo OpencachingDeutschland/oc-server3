@@ -457,7 +457,7 @@ class cache
 		global $login;
 
 		$login->verify();
-		if ($this->getUserId() == $login->userid)
+		if ($this->getUserId() == $login->userid || $login->hasAdminPriv(ADMIN_USER))
 			return true;
 
 		return (sql_value("SELECT `allow_user_log` FROM `cache_status` WHERE `id`='&1'", 0, $this->getStatus()) == 1);

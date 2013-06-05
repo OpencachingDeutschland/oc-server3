@@ -85,7 +85,7 @@ class autoarchive
 		global $opt, $login, $translate;
 
 		$log = cachelog::createNew($cache_id,$login->userid);
-		if (!$log)
+		if ($log === false)
 			echo $this->name . ": cannot create log for cache $cache_id\n";
 		else
 		{

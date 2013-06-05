@@ -13,6 +13,7 @@ require_once($opt['rootpath'] . 'lib2/logic/rowEditor.class.php');
 require_once($opt['rootpath'] . 'lib2/logic/statpic.class.php');
 require_once($opt['rootpath'] . 'lib2/logic/countriesList.class.php');
 require_once($opt['rootpath'] . 'lib2/logic/picture.class.php');
+require_once($opt['rootpath'] . 'lib2/logic/cache.class.php');
 require_once($opt['rootpath'] . 'lib2/logic/cracklib.inc.php');
 require_once($opt['rootpath'] . 'lib2/translate.class.php');
 
@@ -696,7 +697,7 @@ class user
 
 	function disable()
 	{
-		global $login;
+		global $login, $translate;
 
 		if ($this->canDisable() == false)
 			return false;
@@ -714,8 +715,7 @@ class user
 		                       'User ' . sql_escape($this->getUsername()) . ' disabled',
 		                       serialize($backup));
 
-		sql("SET @STATUS_CHANGE_USER_ID='&1'", $login->userid);
-		sql("UPDATE `caches` SET `status`=6 WHERE `user_id`='&1' AND `status` IN (1, 2, 3)", $this->nUserId);
+		// delete private data
 		sql("UPDATE `user` SET `password`=NULL, `email`=NULL, 
 		                       `is_active_flag`=0, 
 		                       `latitude`=0, `longitude`=0, 
@@ -729,7 +729,32 @@ class user
 		sql("DELETE FROM `user_options` WHERE `user_id`='&1'", $this->nUserId);
 		$this->reload();
 
-		return true;
+		// lock the user's caches
+		$error = false;
+		$rs = sql("SELECT `cache_id` FROM `caches` WHERE `user_id`='&1' AND `status` IN (1,2,3)", $this->nUserId);
+		while (($rCache = sql_fetch_assoc($rs)) && !$error)
+		{
+			$error = true;
+			$cache = new cache($rCache['cache_id']);
+			if ($cache->setStatus(6) && $cache->save())
+			{
+				$log = cachelog::createNew($rCache['cache_id'],$login->userid,true);
+				if ($log !== false)
+				{
+					$log->setType(cachelog::LOGTYPE_LOCKED);
+					$log->setOcTeamComment(true);
+					$log->setDate(date('Y-m-d'));
+					$log->setText($translate->t('The user account has been disabled.', '','',0,'',1, $cache->getDefaultDescLanguage()));
+					$log->setTextHtml(false);
+					if ($log->save())
+						$error = false;
+				}
+			}
+			echo "\n";
+		}
+		sql_free_result($rs);
+
+		return !$error;
 	}
 	
 	

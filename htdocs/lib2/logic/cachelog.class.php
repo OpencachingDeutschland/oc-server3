@@ -162,7 +162,7 @@ class cachelog
 	}
 	function setTextHtml($value)
 	{
-		return $this->reCacheLog->setValue('text_html', $value);
+		return $this->reCacheLog->setValue('text_html', $value ? 1 : 0);
 	}
 	function getTextHtmlEdit()
 	{
@@ -170,7 +170,7 @@ class cachelog
 	}
 	function setTextHtmlEdit($value)
 	{
-		return $this->reCacheLog->setValue('text_htmledit', $value);
+		return $this->reCacheLog->setValue('text_htmledit', $value ? 1 : 0);
 	}
 	function getUUID()
 	{

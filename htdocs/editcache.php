@@ -474,9 +474,31 @@ function getWaypoints($cacheid)
 							}
 
 							// save to DB
-							// status update will trigger touching the last_modified date of all depending records					
+							// Status update will trigger touching the last_modified date of all depending records.
+							// Status change via editcache.php is no longer available via the user interface,
+							// but still used by Ocprop and maybe other tools.
 							sql("SET @STATUS_CHANGE_USER_ID='&1'", $usr['userid']);
 							sql("UPDATE `caches` SET `name`='&1', `longitude`='&2', `latitude`='&3', `type`='&4', `date_hidden`='&5', `country`='&6', `size`='&7', `difficulty`='&8', `terrain`='&9', `status`='&10', `search_time`='&11', `way_length`='&12', `logpw`='&13', `wp_gc`='&14', `wp_nc`='&15', `date_activate` = $activation_date WHERE `cache_id`='&16'", $cache_name, $cache_lon, $cache_lat, $cache_type, date('Y-m-d', mktime(0, 0, 0, $cache_hidden_month, $cache_hidden_day, $cache_hidden_year)), $cache_country, $sel_size, $cache_difficulty, $cache_terrain, $status, $search_time, $way_length, $log_pw, $wp_gc, $wp_nc, $cache_id);
+
+							// generate status-change log
+							if ($status != $status_old && $status_old != 5)
+							{
+								switch ($status)
+								{
+									case 1: $logtype = 10; break;
+									case 2: $logtype = 11; break;
+									case 3: $logtype = 9; break;
+									case 6: $logtype = 13; break;
+									default: $logtype = 0;  // ???
+								}
+								if ($logtype > 0)
+								{
+									sql("INSERT INTO `cache_logs` (`node`, `cache_id`, `user_id`, `type`, `date`)
+									     VALUES ('&1','&2','&3','&4','&5')",
+									    $oc_nodeid, $cache_id, $usr['userid'], $logtype, date('Y-m-d'));
+									// notifications will be automatically generated
+								}
+							}
 
 							// do not use slave server for the next time ...
 							db_slave_exclude();

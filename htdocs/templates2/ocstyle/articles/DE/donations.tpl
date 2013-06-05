@@ -41,7 +41,9 @@
 			
 			<h1>Per Flattr spenden:</h1>
 			
-			<p><a href="http://flattr.com/thing/1429393/Opencaching-de" target="_blank"><img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0" /></a></p>
+			<div style="margin-left:50px;">
+				<p><a href="http://flattr.com/thing/1429393/Opencaching-de" target="_blank"><img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0" /></a></p>
+			</div>
 			<br />
 			<div class="content2-container bg-blue02">
 			<p class="content-title-noshade-size3">

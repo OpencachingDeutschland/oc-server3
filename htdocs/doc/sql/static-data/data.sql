@@ -1685,8 +1685,8 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('827', 'Adoption
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('828', 'Date', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('829', 'Yes, i\'ve read and understand the <a href=\"articles.php?page=impressum#tos\">terms of use</a> of Opencaching.de', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('830', 'To complete the adoption, you have to submit this form.<br /> With submitting this form you are the responsible owner of this Geocache.', '2010-08-28 11:48:04');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('831', '%1 offered you this Geocache for adoption at %2', '2010-08-28 11:48:04');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('832', 'Thank you for adopting %1', '2010-08-28 11:48:04');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('831', '<strong>%1</strong> offered you this Geocache for adoption at %2.', '2010-08-28 11:48:04');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('832', 'Thank you for adopting <strong>%1</strong>.', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('833', 'Commit the adoption of %1', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('834', 'There are no caches that can be adopted by you at the moment.', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('835', 'Adopt now', '2010-08-28 11:48:04');
@@ -2491,6 +2491,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2069', 'since F
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2070', 'One ore more emails to this user could not be delivered. It might be a good idea to additionally log comments on the user\'s geocaches, and/or trying to contact him/her through other channels like a message board account or another geocaching platform.', '2013-05-28 16:51:40');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2071', 'This cache has been \"temporarily unavailable\" for more than one year now; therefore it is being archived automatically. The owner may decide to maintain the cache and re-enable the listing.', '2013-05-28 16:51:40');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2072', 'This event took place more than five weeks ago; therefore it is being archived automatically. The owner may re-enable the listing if it should stay active for some exceptional reason.', '2013-05-28 16:51:40');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2073', 'This user account is disabled.', '2013-05-28 16:51:40');
 
 -- Table sys_trans_ref
 SET NAMES 'utf8';
@@ -5630,8 +5631,8 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('828', 'DE', 'Datum', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('829', 'DE', 'Ja, ich habe die <a href=\"articles.php?page=impressum#tos\">Nutzungsbedingungen</a> von Opencaching.de gelesen und werde sie befolgen.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('830', 'DE', 'Um die Adoption abzuschließen, musst du diese Seite bestätigen.<br />\r\nNachdem du die Seite bestätigt hast, bist du für diesen Geocache als Besitzer verantwortlich.', '2010-08-28 11:48:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('831', 'DE', '%1 hat dir diesen Geocache am %2 zur Adoption angeboten', '2010-08-28 11:48:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('832', 'DE', 'Vielen Dank für die Adoption von %1', '2010-08-28 11:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('831', 'DE', '<strong>%1</strong> hat dir diesen Geocache am %2 zur Adoption angeboten.', '2010-08-28 11:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('832', 'DE', 'Vielen Dank für die Adoption von <strong>%1</strong>.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('833', 'DE', 'Die Adoption von %1 bestätigen', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('834', 'DE', 'Es werden dir derzeit keine Geocaches zur Adoption angeboten.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('835', 'DE', 'Adoptieren', '2010-08-28 11:48:07');
@@ -6434,6 +6435,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2070', 'DE', 'Eine oder mehrere Emails an diesen Benutzer konnten nicht zugestellt werden. Es könnte ratsam sein, Hinweise zu seinen Caches zusätzlich zu loggen, und ihn ggf. über weitere Adressen wie z.B. Forenaccounts oder andere Geocaching-Plattformen zu kontaktieren.', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2071', 'DE', 'Dieser Cache ist seit mehr als einem Jahr &bdquo;momentan nicht verfügbar&ldquo;; daher wird er automatisch archiviert. Er kann vom Besitzer jederzeit instand gesetzt und reaktiviert werden.', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2072', 'DE', 'Dieses Event fand vor über fünf Wochen statt; daher wird es automatisch archiviert. Das Listing kann vom Owner selbst reaktiviert werden, falls es aus besonderen Gründen weiter aktiv bleiben soll.', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2073', 'DE', 'Dieser Benutzer ist deaktiviert.', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'EN', 'Reorder IDs \r', '2010-09-02 00:15:30');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'EN', 'The database could not be reconnected.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'EN', 'Testing – please do not login', '2010-08-28 11:48:07');
@@ -7226,8 +7228,8 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('828', 'EN', 'Date', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('829', 'EN', 'Yes, I have read and will comply with the Opencaching.de <a href=\"articles.php?page=impressum#tos\">terms of use</a>.', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('830', 'EN', 'To complete the adoption, you have to submit this form.<br /> By submitting this form, you will become the responsible owner of this geocache.', '2010-08-28 11:48:08');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('831', 'EN', 'on %2, %1 offered this geocache to you for adoption ', '2010-08-28 11:48:08');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('832', 'EN', 'Thank you for adopting %1', '2010-08-28 11:48:08');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('831', 'EN', 'on %2, <strong>%1</strong> offered this geocache to you for adoption.', '2010-08-28 11:48:08');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('832', 'EN', 'Thank you for adopting <strong>%1</strong>.', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('833', 'EN', 'Commit the adoption of %1', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('834', 'EN', 'There are no caches that can be adopted by you at the moment.', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('835', 'EN', 'Adopt now', '2010-08-28 11:48:08');
@@ -7997,6 +7999,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2070', 'EN', 'One ore more emails to this user could not be delivered. It might be a good idea to additionally log comments on the user\'s geocaches, and/or trying to contact him/her through other channels like a message board account or another geocaching platform.', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2071', 'EN', 'This cache has been \"temporarily unavailable\" for more than one year now; therefore it is being archived automatically. The owner may decide to maintain the cache and re-enable the listing.', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2072', 'EN', 'This event took place more than five weeks ago; therefore it is being archived automatically. The owner may re-enable the listing if it should stay active for some exceptional reason.', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2073', 'EN', 'This user account is disabled.', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'ES', 'Reordenar ID', '2010-12-09 00:17:55');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'ES', 'La base de datos no se pudo conectar.', '2010-12-09 00:17:55');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'ES', 'En pruebas - por favor, no entre.', '2010-12-09 00:17:55');
@@ -8789,8 +8792,8 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('828', 'ES', 'Data', '2010-12-09 00:17:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('829', 'ES', 'Sí, lo he leído y aprobado las <a href=\"articles.php?page=impressum#tos\">condiciones de uso</a> de Opencaching.de.', '2010-12-09 00:17:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('830', 'ES', 'Para completar la adopción, debe enviar este form.<br /> Al enviar este formulario, usted se convierte en el propietario responsable de esta geocache.', '2010-12-09 00:17:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('831', 'ES', 'el %2, %1 me dio en adopción este geocache', '2010-12-09 00:17:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('832', 'ES', 'Gracias por haber adoptado %1', '2010-12-09 00:17:59');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('831', 'ES', 'el %2, <strong>%1</strong> me dio en adopción este geocache.', '2010-12-09 00:17:59');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('832', 'ES', 'Gracias por haber adoptado <strong>%1</strong>.', '2010-12-09 00:17:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('833', 'ES', 'Confirma la adopción de %1', '2010-12-09 00:17:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('834', 'ES', 'En este momento hay caches que pueden ser adoptados.', '2010-12-09 00:17:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('835', 'ES', 'Adoptar ahora', '2010-12-09 00:17:59');
@@ -10342,8 +10345,8 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('828', 'IT', 'Data', '2010-08-31 20:06:24');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('829', 'IT', 'Si, ho letto e approvato le <a href=\"articles.php?page=impressum#tos\">condizioni d\'uso</a> di Opencaching.de.', '2010-09-01 23:49:32');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('830', 'IT', 'Per completare l\'adozione, devi inviare questa form.<br /> Inviando questa form, diventi il proprietario responsabile per questa geocache.', '2010-08-31 20:06:24');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('831', 'IT', 'il %2, %1 ti ha offerto questa geocache in adozione', '2010-09-01 23:49:32');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('832', 'IT', 'Grazie per avere adottato %1', '2010-10-27 18:49:19');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('831', 'IT', 'il %2, <strong>%1</strong> ti ha offerto questa geocache in adozione.', '2010-09-01 23:49:32');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('832', 'IT', 'Grazie per avere adottato <strong>%1</strong>.', '2010-10-27 18:49:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('833', 'IT', 'Conferma l\'adozione di %1', '2010-09-01 23:49:32');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('834', 'IT', 'Non ci sono al momento attuale cache che possano essere adottate.', '2010-08-31 20:06:24');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('835', 'IT', 'Adotta adesso', '2010-09-01 23:49:32');

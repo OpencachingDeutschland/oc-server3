@@ -58,7 +58,8 @@
 										 INNER JOIN `user` AS `cacheloguser` ON `cache_logs`.`user_id`=`cacheloguser`.`user_id` 
 										 INNER JOIN `countries` ON `caches`.`country`=`countries`.`short` 
 										  LEFT JOIN `sys_trans_text` ON `countries`.`trans_id`=`sys_trans_text`.`trans_id` AND `sys_trans_text`.`lang`='&1'
-										      WHERE `username`<>'&2'
+										  LEFT JOIN `cache_logs_restored` ON `cache_logs_restored`.`id`=`cache_logs`.`id`
+										      WHERE `username`<>'&2' AND IFNULL(`cache_logs_restored`.`restored_by`,0)=0
 										   ORDER BY " . $sqlOrderBy . "`cache_logs`.`date_created` DESC",
 											          $opt['template']['locale'],
 											          isset($_GET['showsyslogs']) ? '' : $opt['logic']['systemuser']['user']);
@@ -80,20 +81,28 @@
 				                     LIMIT 1", $rLog['id']);
 				if ($rPic = sql_fetch_assoc($rsPic))
 				{
-					if (count($newLogs))
+					if (count($newLogs) >= 2)
+					{
+						$newLogs[count($newLogs)-2]['pic_uuid'] = $rPic['uuid'];
+						$newLogs[count($newLogs)-2]['pic_url'] = $rPic['url'];
+						$newLogs[count($newLogs)-2]['title'] = $rPic['title'];
+						$pics = $lines_per_pic;
+					}
+					else if (count($newLogs) == 1)
 					{
 						$newLogs[count($newLogs)-1]['pic_uuid'] = $rPic['uuid'];
 						$newLogs[count($newLogs)-1]['pic_url'] = $rPic['url'];
 						$newLogs[count($newLogs)-1]['title'] = $rPic['title'];
+						$pics = $lines_per_pic+1;
 					}
 					else
 					{
 						$rLog['pic_uuid'] = $rPic['uuid'];
 						$rLog['pic_url'] = $rPic['url'];
 						$rLog['title'] = $rPic['title'];
+						$pics = $lines_per_pic+2;
 					}
 					$rLog['picshown'] = true;
-					$pics = $lines_per_pic;
 				}
 				sql_free_result($rsPic);
 			}

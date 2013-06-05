@@ -17,6 +17,8 @@
 	$action = isset($_REQUEST['action']) ? $_REQUEST['action'] : 'listbyuser';
 	$tpl->assign('action', $action);
 	$tpl->assign('error', '');
+	if (isset($_REQUEST['cacheid']))
+		$tpl->assign('cacheid', $_REQUEST['cacheid']+0);
 
 	if ($action == 'listbycache')
 	{
@@ -150,20 +152,13 @@ function addRequest($cacheid, $userid)
 	if ($cache->exist() == false)
 		$tpl->error(ERROR_CACHE_NOT_EXISTS);
 
-	if ($cache->allowEdit() == false)
-		$tpl->error(ERROR_NO_ACCESS);
-
-	if ($cache->getUserId() == $userid)
-	{
-		$tpl->assign('error', 'sameuser');
-		$tpl->display();
-	}
+	$adopt_result = $cache->addAdoption($userid);
+	if ($adopt_result === true)
+		$tpl->redirect('adoptcache.php?action=listbycache&cacheid=' . $cacheid);
 	else
 	{
-		if ($cache->addAdoption($userid) == false)
-			$tpl->error(ERROR_UNKNOWN);
-
-		$tpl->redirect('adoptcache.php?action=listbycache&cacheid=' . $cacheid);
+		$tpl->assign('error',$adopt_result);
+		listRequestsByCacheId($cacheid);
 	}
 }
 
@@ -197,6 +192,10 @@ function cancelRequest($cacheid, $userid)
 	if ($cache->cancelAdoption($userid) == false)
 		$tpl->error(ERROR_UNKNOWN);
 
-	$tpl->redirect('adoptcache.php');
+	if ($userid == $login->userid)
+		$tpl->redirect('adoptcache.php');
+	else
+		$tpl->redirect('adoptcache.php?action=listbycache&cacheid=' . $cacheid);
 }
+
 ?>

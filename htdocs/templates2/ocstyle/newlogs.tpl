@@ -9,7 +9,7 @@
 	{t}Latest logs entries{/t} {if $rest}{t}Without Germany{/t}{/if}
 </div>
 
-<table width="100%" class="table">
+<table width="100%" class="table"> 
 	{assign var='lastCountry' value=''}
 
 	{foreach name=newLogs from=$newLogs item=newLog}

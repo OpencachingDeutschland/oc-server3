@@ -81,20 +81,28 @@
 				                     LIMIT 1", $rLog['id']);
 				if ($rPic = sql_fetch_assoc($rsPic))
 				{
-					if (count($newLogs))
+					if (count($newLogs) >= 2)
+					{
+						$newLogs[count($newLogs)-2]['pic_uuid'] = $rPic['uuid'];
+						$newLogs[count($newLogs)-2]['pic_url'] = $rPic['url'];
+						$newLogs[count($newLogs)-2]['title'] = $rPic['title'];
+						$pics = $lines_per_pic;
+					}
+					else if (count($newLogs) == 1)
 					{
 						$newLogs[count($newLogs)-1]['pic_uuid'] = $rPic['uuid'];
 						$newLogs[count($newLogs)-1]['pic_url'] = $rPic['url'];
 						$newLogs[count($newLogs)-1]['title'] = $rPic['title'];
+						$pics = $lines_per_pic+1;
 					}
 					else
 					{
 						$rLog['pic_uuid'] = $rPic['uuid'];
 						$rLog['pic_url'] = $rPic['url'];
 						$rLog['title'] = $rPic['title'];
+						$pics = $lines_per_pic+2;
 					}
 					$rLog['picshown'] = true;
-					$pics = $lines_per_pic;
 				}
 				sql_free_result($rsPic);
 			}

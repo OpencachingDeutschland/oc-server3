@@ -71,7 +71,7 @@
    *    <groundspeak:terrain>(.*?)<\/groundspeak:terrain>
    *    <groundspeak:country>(.*?)<\/groundspeak:country>
    *    <groundspeak:state>(.*?)<\/groundspeak:state>
-	 *    <groundspeak:short_description html="(.*?)".*?>(.*?)<\/groundspeak:short_description>
+   *    <groundspeak:short_description html="(.*?)".*?>(.*?)<\/groundspeak:short_description>
    *    <groundspeak:long_description html="(.*?)".*?>(.*?)<\/groundspeak:long_description>
    *    <groundspeak:encoded_hints>(.*?)<\/groundspeak:encoded_hints>
    */
@@ -362,7 +362,7 @@
 			$r['userid'], $r['username'], $r['data_license'], $r['cacheid'], $locale, true, true);
 		if ($license != "")
 			$desc .= "<p><em>$license</em></p>";
-		$thisline = mb_ereg_replace('{desc}', xmlentities($desc), $thisline);
+		$thisline = mb_ereg_replace('{desc}', xmlentities($desc, true), $thisline);
 
 		$thisline = mb_ereg_replace('{images}', xmlentities(getPictures($r['cacheid'])), $thisline);
 
@@ -443,7 +443,7 @@
 					$logtype = $gpxLogType[0];
 					
 				$thislog = mb_ereg_replace('{type}', $logtype, $thislog);
-				$thislog = mb_ereg_replace('{text}', xmlentities($rLog['text']), $thislog);
+				$thislog = mb_ereg_replace('{text}', xmlentities($rLog['text'], true), $thislog);
 				
 				$logentries .= $thislog . "\n";
 			}
@@ -467,7 +467,7 @@
 				$logtype = $gpxLogType[0];
 				
 			$thislog = mb_ereg_replace('{type}', $logtype, $thislog);
-			$thislog = mb_ereg_replace('{text}', xmlentities($rLog['text']), $thislog);
+			$thislog = mb_ereg_replace('{text}', xmlentities($rLog['text'], true), $thislog);
 			
 			$logentries .= $thislog . "\n";
 		}
@@ -570,11 +570,14 @@
 
 	exit;
 	
-	function xmlentities($str)
+	function xmlentities($str, $decodeFirst = false)
 	{
-        $str = html_entity_decode($str, ENT_COMPAT, "UTF-8");
-        $str = htmlspecialchars($str, ENT_COMPAT, "UTF-8");
- 		return filterevilchars($str);
+		if ($decodeFirst)
+		{
+			$str = html_entity_decode($str, ENT_COMPAT, "UTF-8");
+		}
+		$str = htmlspecialchars($str, ENT_COMPAT, "UTF-8");
+		return filterevilchars($str);
 	}
 	
 	function filterevilchars($str)
@@ -604,8 +607,8 @@
 		return null;
 	}
 
-  // based on oc.pl code, but embedded thumbs instead of full pictures
-  // (also to hide spoilers first)
+	// based on oc.pl code, but embedded thumbs instead of full pictures
+	// (also to hide spoilers first)
 	function getPictures($cacheid)
 	{
 		global $translate, $absolute_server_URI;

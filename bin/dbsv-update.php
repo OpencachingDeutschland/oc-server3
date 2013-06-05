@@ -173,7 +173,7 @@
 			sql("ALTER TABLE `cache_reports` ADD INDEX `userid` (`userid`)");
 	}
 
-	function dbv_108()  // automatic email-bounce processiong
+	function dbv_108()  // automatic email-bounce processing
 	{
 		if (!sql_field_exists('user','last_email_problem'))
 			sql("ALTER TABLE `user` ADD COLUMN `last_email_problem` datetime default NULL AFTER `email_problems`");
@@ -181,7 +181,7 @@
 			sql("ALTER TABLE `user` ADD COLUMN `mailing_problems` int(10) unsigned NOT NULL default '0' AFTER `last_email_problem`");
 	}
 
-	function dbv_109()  // improved email-bounce processiong
+	function dbv_109()  // improved email-bounce processing
 	{
 		if (!sql_field_exists('user','first_email_problem'))
 			sql("ALTER TABLE `user` ADD COLUMN `first_email_problem` date default NULL AFTER `email_problems`");

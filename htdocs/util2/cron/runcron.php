@@ -25,6 +25,12 @@
       exit;
 	}
 
+	// Run as system user, if possible.
+	// This is relevant e.g. for publishing and for auto-archiving caches.
+	if ($opt['logic']['systemuser']['user'] != '')
+		if (!$login->system_login($opt['logic']['systemuser']['user']))
+		  die("runcron: system user login failed");
+
 	$modules_dir = $opt['rootpath'] . 'util2/cron/modules/';
 
 	$hDir = opendir($modules_dir);

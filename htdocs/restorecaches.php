@@ -772,6 +772,8 @@ function restore_listings($cacheids, $rdate, $roptions, $simulate)
 								      (`id`, `date_modified`, `cache_id`, `original_id`, `restored_by`)
 							        VALUES ('&1', NOW(), '&2', '&3', '&4')",
 								    $log->getLogId(), $log->getCacheId(), $revert_logid, $login->userid);
+								sql("DELETE FROM `watches_logqueue` WHERE `log_id`='&1'", $log->getLogId());
+								  // watches_logqueue entry was created by trigger
 								$logs_processed[] = $log->getLogId();
 
 								/* no longer needed after implementing picture deletion in removelog.php

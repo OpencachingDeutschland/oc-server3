@@ -58,7 +58,8 @@
 										 INNER JOIN `user` AS `cacheloguser` ON `cache_logs`.`user_id`=`cacheloguser`.`user_id` 
 										 INNER JOIN `countries` ON `caches`.`country`=`countries`.`short` 
 										  LEFT JOIN `sys_trans_text` ON `countries`.`trans_id`=`sys_trans_text`.`trans_id` AND `sys_trans_text`.`lang`='&1'
-										      WHERE `username`<>'&2'
+										  LEFT JOIN `cache_logs_restored` ON `cache_logs_restored`.`id`=`cache_logs`.`id`
+										      WHERE `username`<>'&2' AND IFNULL(`cache_logs_restored`.`restored_by`,0)=0
 										   ORDER BY " . $sqlOrderBy . "`cache_logs`.`date_created` DESC",
 											          $opt['template']['locale'],
 											          isset($_GET['showsyslogs']) ? '' : $opt['logic']['systemuser']['user']);

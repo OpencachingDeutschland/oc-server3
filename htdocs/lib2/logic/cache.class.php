@@ -368,14 +368,17 @@ class cache
 	function addAdoption($userid)
 	{
 		if ($this->allowEdit() == false)
-			return false;
+			return "noaccess";
+
+		if (sql_value("SELECT COUNT(*) FROM `user` WHERE `user_id`='&1'", 0, $userid) == 0)
+			return "userunknown";
 
 		if (sql_value("SELECT COUNT(*) FROM `user` WHERE `user_id`='&1' AND `is_active_flag`=1", 0, $userid) == 0)
-			return false;
+			return "userdisabled";
 
 		// same user?
 		if ($this->getUserId() == $userid)
-			return false;
+			return "self";
 
 		sql("INSERT IGNORE INTO `cache_adoption` (`cache_id`, `user_id`) VALUES ('&1', '&2')", $this->nCacheId, $userid);
 

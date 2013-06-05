@@ -8,6 +8,7 @@
 	<form method="post" action="adoptcache.php">
 		<input type="hidden" name="action" value="add" />
 		<input type="hidden" name="submit" value="1" />
+		<input type="hidden" name="cacheid" value="{$cacheid}" />
 
 		<div class="content2-pagetitle">
 			<img src="resource2/{$opt.template.style}/images/profile/22x22-email.png" style="align: left; margin-right: 10px;" width="22" height="22" alt="" />
@@ -61,12 +62,14 @@
 			</tr>
 			<tr><td colspan="3">&nbsp;</td></tr>
 			<tr>
-				<td>{t}Username:{/t}</td>
+				<td width="22%">{t}Username:{/t}</td>
 				<td colspan="2"><input type="text" name="username" value="{$adoptusername|escape}" size="40" /></td>
 			</tr>
 			{if $error=='userunknown'}
 				<tr><td>&nbsp;</td><td colspan="2"><span class="errormsg">{t}Username unknown{/t}</span></td></tr>
-			{elseif $error=='sameuser'}
+			{elseif $error=='userdisabled'}
+				<tr><td>&nbsp;</td><td colspan="2"><span class="errormsg">{t}This user account is disabled.{/t}</span></td></tr>
+			{elseif $error=='self'}
 				<tr><td>&nbsp;</td><td colspan="2"><span class="errormsg">{t}You cannot adopt your own cache!{/t}</span></td></tr>
 			{/if}
 			<tr>
@@ -126,15 +129,16 @@
 	</table>
 
 {elseif $action=='commit'}
-	<form method="post" action"adoptcache.php">
+	<form method="post" action="adoptcache.php">
 		<input type="hidden" name="action" value="commit" />
 		<input type="hidden" name="submit" value="1" />
+		<input type="hidden" name="cacheid" value="{$cacheid}" />
 
 		<div class="content2-pagetitle"><img src="resource2/{$opt.template.style}/images/profile/22x22-email.png" style="align: left; margin-right: 10px;" width="22" height="22" alt="" />{t 1=$cache.name|escape}Commit the adoption of %1{/t}</div>
 
 		<p style="line-height: 1.6em;">
-			{t 1=$cache.name|escape}Thank you for adopting %1{/t}<br />
-			{t 1=$cache.username|escape 2=$cache.date_created|date_format:$opt.format.date}%1 offered you this Geocache for adoption at %2{/t}
+			{t 1=$cache.name|escape}Thank you for adopting <strong>%1</strong>.{/t}<br />
+			{t 1=$cache.username|escape 2=$cache.date_created|date_format:$opt.format.date}<strong>%1</strong> offered you this Geocache for adoption at %2.{/t}
 		</p>
 
 		<p style="line-height: 1.6em;">
@@ -143,6 +147,7 @@
 		</p>
 
 		<p style="line-height: 1.6em;">
+			<br />
 			<input type="checkbox" name="tou" value="1" />
 			<label for="tou">{t}Yes, i've read and understand the <a href="articles.php?page=impressum#tos">terms of use</a> of Opencaching.de{/t}</label>
 		</p>
@@ -152,6 +157,6 @@
 				{t}Sorry, you have to read and accept the terms of use to proceed!{/t}
 			</p>
 		{/if}
-		<p style="line-height: 1.6em;"><input type="submit" value="{t}Submit{/t}" /></p>
+		<p style="line-height: 1.6em;"><input type="submit" value="{t}Submit{/t}" class="formbutton" onclick="submitbutton('submit')" /></p>
 	</form>
 {/if}

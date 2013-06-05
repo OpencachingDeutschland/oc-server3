@@ -231,7 +231,7 @@
 					$rs = sql("SELECT `id` FROM `cache_logs`
 					            WHERE `cache_id`='&1' AND `user_id`='&2' AND `type`='&3' AND `date`='&4' AND `text`='&5'",
 					           $cache_id, $usr['userid'], $log_type, $log_date, $log_text);
-					$already_exists = sql_fetch_row($rs) != null;
+					$already_exists = (sql_fetch_row($rs) !== false);
 					sql_free_result($rs);
 
 					if (!$already_exists)

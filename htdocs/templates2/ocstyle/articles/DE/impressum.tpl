@@ -79,11 +79,11 @@
 		Vorstandes gemeinsam vertretungsberechtigt.
 	</p>
 	<p>
-		Der gesch&auml;ftsf&uuml;hrende Vorstand besteht aus (Stand 31.08.2012):
+		Der gesch&auml;ftsf&uuml;hrende Vorstand besteht aus (Stand 06.06.2013):
 	</p>
 	<ul class="indent">
 		<li>Michael Vaahsen, Vorsitzender</li>
-		<li>Gerald Halbig, stellv. Vorsitzender</li>
+		<li>unbesetzt, stellv. Vorsitzender</li>
 		<li>Maik Bischoff, Kassenwart</li>
 	</ul>
 	

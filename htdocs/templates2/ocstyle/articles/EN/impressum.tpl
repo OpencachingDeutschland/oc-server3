@@ -62,11 +62,11 @@
 	</p>
 	
 	<p>
-		The managing comittee are (as of August 31, 2012):
+		The managing comittee are (as of July 06, 2013):
 	</p>
 	<ul class="indent">
 		<li>Michael Vaahsen, chairman</li>
-		<li>Gerald Halbig, vice chairman</li>
+		<li>n.n., vice chairman</li>
 		<li>Maik Bischoff, treasurer</li>
 	</ul>
 

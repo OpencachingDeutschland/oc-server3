@@ -43,7 +43,7 @@
 	<div class="content2-container">
 		{include file="res_logentry.tpl" header=false footer=false footbacklink=false cache=$cache logs=$deleted_logs}
 	</div>
-	<br />
+	<p>&nbsp;</p>
 
 	{include file="res_status_changes.tpl"}
 

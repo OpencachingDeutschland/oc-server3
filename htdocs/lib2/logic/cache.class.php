@@ -487,6 +487,7 @@ class cache
 		$rs = sql("SELECT `cr`.`id`, `cr`.`date_created`, `cr`.`lastmodified`,
 		                  `cr`.`userid`, `cr`.`adminid`,
 				              `users`.`username` AS `usernick`,
+				              `users`.`user_id`,
 				              `admins`.`username` AS `adminnick`,
 											IFNULL(`tt`.`text`, `crs`.`name`) AS `status`,
 				              IFNULL(`tt2`.`text`, `crr`.`name`) AS `reason`

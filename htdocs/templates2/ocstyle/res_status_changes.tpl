@@ -23,7 +23,7 @@
 		<tr>
 			<td>{$change.date_modified|date_format:$opt.format.date}</td>
 			<td>{$change.old_status} &rarr; {$change.new_status} {include file="res_cachestatus.tpl" status=$change.new_status_id}</td>
-			<td>{$change.username}</td>
+			<td><a href="viewprofile.php?userid={$change.userid}">{$change.username}</a></td>
 		</tr>
 	{/foreach}
 	{else}

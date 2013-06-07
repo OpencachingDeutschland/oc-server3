@@ -13,7 +13,7 @@
 	<p>Im Folgenden sind alle Veränderungen ab OC Version&nbsp;3.0 aufgelistet. Manche Kleinigkeiten wurden zur besseren Übersicht weggelassen und sind im <a href="http://forum.opencaching-network.org/index.php?board=43.0">Entwicklerforum</a> nachlesbar.</p>
 	<br />
 
-	<p><strong>OC 3.0 Version 8</strong> &ndash; 1. Juni 2013</p>
+	<p id="v3.0.8"><strong>OC 3.0 Version 8</strong> &ndash; 1. Juni 2013</p>
 	<p>Neu:</p>
 	<ul>
 		<li>Der Cachestatus kann (nur noch) per Log geändert werden. Dazu gibt es die neuen Logtypen <em>momentan nicht verfügbar</em>, <em>archiviert</em>, <em>gesperrt</em> und <em>kann gesucht werden</em>. Der gleiche Status kann auch mehrmals geloggt werden, z.B. um zu signalieren dass mit dem Cache alles ok ist. Der Typ alter Logs kann nachträglich geändert werden.</li>
@@ -76,7 +76,7 @@
   </ul>
 	<br />
 
-	<p><strong>OC 3.0 Version 7</strong> &ndash; 19. April 2013</p>
+	<p id="v3.0.7"><strong>OC 3.0 Version 7</strong> &ndash; 19. April 2013</p>
 	<ul>
 		<li>Neu: <a href="okapi">OKAPI</a></li>
 		<li>&bdquo;Apple-Touch-Icons&ldquo; für Smartphones</li>
@@ -84,7 +84,7 @@
 	</ul>
 	<br />
 
-	<p><strong>OC 3.0 Version 6</strong> &ndash; 12. April 2013</p>
+	<p id="v3.0.6"><strong>OC 3.0 Version 6</strong> &ndash; 12. April 2013</p>
 	<p>Neu:</p>
 	<ul>
 		<li>Loggen mit Uhrzeit</li>
@@ -125,7 +125,7 @@
   </ul>
 	<br />
 
-	<p><strong>OC 3.0 Version 5</strong> &ndash; 16. März 2013</p>
+	<p id="v3.0.5"><strong>OC 3.0 Version 5</strong> &ndash; 16. März 2013</p>
 	<p>Karte komplett überarbeitet:</p>
 	<ul>
 		<li>Markierung von eigenen, gefundenen, nicht gefundenen und <a href="http://wiki.opencaching.de/index.php/OConly" target="_blank">OConly</a>-Caches</li>
@@ -175,7 +175,7 @@
 		<li>dänische Flagge bei dänischen Cachebeschreibungen</li>
 	</ul>
 
-	 <p><strong>OC 3.0 Version 4</strong> &ndash; 17. Februar 2013</p>
+	 <p id="v3.0.4"><strong>OC 3.0 Version 4</strong> &ndash; 17. Februar 2013</p>
    <p>Neu:</p>
 	 <ul>
      <li>neue Cachegröße &bdquo;nano&ldquo;</li>
@@ -206,7 +206,7 @@
    </ul>
 	<br />
 
-	 <p><strong>OC 3.0 Version 3</strong> &ndash; 18. November 2012</p>
+	 <p id="v3.0.3"><strong>OC 3.0 Version 3</strong> &ndash; 18. November 2012</p>
    <p>Neu:</p>
 	 <ul>
      <li>Attribut &bdquo;nur zu bestimmten Jahreszeiten&ldquo;</li>
@@ -231,7 +231,7 @@
    </ul>
 	<br />
 
-	 <p><strong>OC 3.0 Version 2</strong> &ndash; 26. August 2012</p>
+	 <p id="v3.0.2"><strong>OC 3.0 Version 2</strong> &ndash; 26. August 2012</p>
    <p>Neu:</p>
 	 <ul>
 	   <li><a href="./articles.php?page=cacheinfo#difficulty">Schwierigkeitsgrade</a> erklärt, inklusive Tooltip und Link in den Cachelistings</li>
@@ -271,9 +271,9 @@
 	   <li>Logbearbeitungsberechtigungen für gesperrte Caches korrigiert</li>
 	   <li>wirkungslose Spoileroption beim Hochladen von Logbildern entfernt [&rarr; wieder eingebaut in Version 5]</li>
    </ul>
-	<br />
+   <br />
 
-	 <p><strong>OC 3.0 Version 1</strong> &ndash; 8. August 2012</p>
+	 <p id="v3.0.1"><strong>OC 3.0 Version 1</strong> &ndash; 8. August 2012</p>
    <p>Neu:</p>
 	 <ul>	   
 	   <li>Kurzadressen für Direktzugriff auf Cachelistings, z.B. <a href="http://www.opencaching.de/OCD93B">http://opencaching.de/OCD93B</a></li>

@@ -4983,7 +4983,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('158', 'DE', 'Französisch', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('159', 'DE', 'Englisch', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('160', 'DE', 'Deutsch', '2010-08-28 11:48:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('161', 'DE', 'Vorsicht: Wenn Du diese Option verwenden, vergiss niemals auf Logout zu klicken, wenn Du dich von einem PC aus angemeldet hast der auch Fremden zugänglich ist. Ansonsten könnte ein Fremder Deine persönlichen Account-Daten auslesen und ändern.', '2010-08-28 11:48:06');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('161', 'DE', 'Vorsicht: Wenn du diese Option verwenden, vergiss niemals auf Logout zu klicken, wenn du dich von einem PC aus angemeldet hast der auch Fremden zugänglich ist. Ansonsten könnte ein Fremder deine persönlichen Account-Daten auslesen und ändern.', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('162', 'DE', 'Simbabwe', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('163', 'DE', 'Sambia', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('164', 'DE', 'Südafrika', '2010-08-28 11:48:06');
@@ -5413,11 +5413,11 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('601', 'DE', 'Folgender Sicherheits-Code wurde generiert: %1', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('602', 'DE', 'Der Sicherheits-Code bleibt drei Tage gültig.', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('603', 'DE', 'Dein neues Passwort kannst du unter %1newpw.php eingeben.', '2010-08-28 11:48:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('604', 'DE', 'Um ein neues Passwort einzugeben, musst Du zunächst einen Sicherheits-Code anfordern. Dieser wird per E-Mail an Dich gesendet.', '2010-08-28 11:48:06');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('604', 'DE', 'Um ein neues Passwort einzugeben, musst du zunächst einen Sicherheits-Code anfordern. Dieser wird per E-Mail an dich gesendet.', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('605', 'DE', 'Die E-Mail-Adresse gehört zu keinem gültigen Benutzer.', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('606', 'DE', 'Dir wurde eine E-Mail mit dem Sicherheits-Code zugesandt.', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('607', 'DE', 'Der Sicherheitscode konnte wegen eines Fehlers nicht gesendet werden.', '2010-08-28 11:48:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('608', 'DE', 'Gib bitte deine E-Mail-Adresse, den Sicherheitscode und das neue Passwort ein. Der Sicherheitscode bleibt drei Tage gültig; danach musst Du ihn ggf. erneut anfordern.', '2010-08-28 11:48:06');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('608', 'DE', 'Gib bitte deine E-Mail-Adresse, den Sicherheitscode und das neue Passwort ein. Der Sicherheitscode bleibt drei Tage gültig; danach musst du ihn ggf. erneut anfordern.', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('609', 'DE', 'Der angegebene Benutzer ist noch nicht aktiviert.', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('610', 'DE', 'Sicherheitscode:', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('611', 'DE', 'Der Sicherheitscode ist abgelaufen. Fordere bitte einen neuen an.', '2010-08-28 11:48:06');

@@ -144,7 +144,7 @@
 			$tpl->assign('adminid', $record['adminid']);
 			$tpl->assign('adminnick', $record['adminnick']);
 			$tpl->assign('reason', $record['reason']);
-			$tpl->assign('note', $record['note']);
+			$tpl->assign('note', trim($record['note']));
 			$tpl->assign('status', $record['status']);
 			$tpl->assign('created', $record['date_created']);
 			$tpl->assign('lastmodified', $record['lastmodified']);

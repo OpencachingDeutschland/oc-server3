@@ -60,7 +60,9 @@ class RSSParser {
 								// increment counter
 								$i++;
 							}
-							else if (!in_array($item->title,$headlines) &&
+							// htmlspecialchars_decode() works around inconsistent HTML encoding
+							// e.g. in SMF Forum Threads
+							else if (!in_array(htmlspecialchars_decode($item->title),$headlines) &&
 							         strpos($item->title,'VERSCHOBEN') === FALSE)  // hack to exclude forum thread-move messages
 							{
 								// fill array
@@ -69,7 +71,7 @@ class RSSParser {
 										'title' => $item->title,
 										'link' => $item->link
 									);
-								$headlines[] = "" . $item->title;
+								$headlines[] = "" . htmlspecialchars_decode($item->title);
 								// increment counter
 								$i++;
 							}

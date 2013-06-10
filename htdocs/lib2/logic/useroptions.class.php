@@ -9,7 +9,10 @@
  ***************************************************************************/
 global $opt;
 
-require_once($opt['rootpath'] . '../lib/htmlpurifier-4.2.0/library/HTMLPurifier.auto.php');
+// check for lib2
+if (!defined('PURIFIERLIB2'))
+	require_once($opt['rootpath'] . '../lib/htmlpurifier-4.2.0/library/HTMLPurifier.auto.php');
+
 require_once($opt['rootpath'] . 'lib2/logic/const.inc.php');
 
 class useroptions

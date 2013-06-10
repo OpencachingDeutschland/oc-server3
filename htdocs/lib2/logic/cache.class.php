@@ -9,6 +9,7 @@
  ***************************************************************************/
 
 require_once($opt['rootpath'] . 'lib2/logic/rowEditor.class.php');
+require_once($opt['rootpath'] . 'lib/logtypes.inc.php'); // lib1 ???
 
 class cache
 {
@@ -481,6 +482,7 @@ class cache
 		sql("DELETE FROM `cache_rating` WHERE `cache_id`='&1' AND `user_id`='&2'", $this->nCacheId, $nUserId);
 	}
 
+
 	// retrieves admin cache history data and stores it to template variables
 	// for display by adminhistory.tpl and adminreports.tpl
 	function setTplHistoryData($exclude_report_id)
@@ -550,5 +552,63 @@ class cache
 		sql_free_result($rs);
 	}
 
+	
+	function logTypeAllowed($logType)
+	{
+		// check if given logType is valid for this cache type
+		return (sql_value("	SELECT COUNT(*)
+							FROM cache_logtype
+							WHERE cache_type_id='&1'
+								AND log_type_id='&2'",
+					0,
+					$this->getType(), $logType) > 0);
+	}
+	
+	
+	function updateCacheStatus($logType)
+	{
+		// get cache status
+		$cacheStatus = sql_value("	SELECT `cache_status`
+									FROM `log_types`
+									WHERE `id`='&1'",
+							0,
+							$logType);
+		// set status, if not 0
+		if ($cacheStatus != 0)
+			$this->setStatus($cacheStatus);
+	}
+	
+	
+	function getUserLogTypes($userId, $userLogType)
+	{
+		global $translate, $login;
+		
+		$logTypes = array();
+		
+		$logtypeNames = get_logtype_names();
+		$allowedLogtypes = get_cache_log_types($this->getCacheId(), 0);
+		$defaultLogType = $userLogType; 
+		if (!logtype_ok($this->getCacheId(), $defaultLogType, 0))
+			$defaultLogType = $allowedLogtypes[0];
+		
+		// prepare array
+		$i = 0;
+		foreach ($allowedLogtypes as $logtype)
+		{
+			$logTypes[$i]['selected'] = ($logtype == $defaultLogType) ? true : false;
+			$logTypes[$i]['name'] = $logtypeNames[$logtype];
+			$logTypes[$i]['id'] = $logtype;
+			$i++;
+		}
+		
+		// return
+		return $logTypes;
+	}
+	
+	function teamcommentAllowed($logType)
+	{
+		// checks if teamcomment is allowed
+		return teamcomment_allowed($this->getCacheId(),$logType);
+	}
 }
 ?>

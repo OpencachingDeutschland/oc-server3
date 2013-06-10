@@ -88,7 +88,7 @@
 			</p>
 		</div>
 
-		<table class="table" width="80%">
+		<table class="table" width="90%">
 		{if $status_changes|@count}
 			<tr>
 				<th>{t}Date{/t}</th>
@@ -100,6 +100,37 @@
 					<td>{$change.date_modified|date_format:$opt.format.date}</td>
 					<td>{$change.old_status} &rarr; {$change.new_status} {include file="res_cachestatus.tpl" status=$change.new_status_id}</td>
 					<td><a href="viewprofile.php?userid={$change.user_id}">{$change.username}</a></td>
+				</tr>
+			{/foreach}
+		{else}
+			<tr><td></td></tr>
+		{/if}
+		</table>
+		<p>&nbsp;</p>
+	{/if}
+
+	{if !$reportdisplay || $adoptions|@count}
+		<div class="content2-container bg-blue02">
+			<p class="content-title-noshade-size2">
+				<img src="resource2/{$opt.template.style}/images/description/22x22-logs.png" style="align: left; margin-right: 10px;" width="22" height="22" alt="" /> 
+				{t}Adoptions_{/t} <small>{t}since September 2012{/t}</small>
+			</p>
+		</div>
+
+		<table class="table" width="90%">
+		{if $adoptions|@count}
+			<tr>
+				<th>{t}Date{/t}</th>
+				<th>{t}From Owner{/t}</th>
+				<th></th>
+				<th>{t}To Owner{/t}</th>
+			</tr>
+			{foreach from=$adoptions item=adoption}
+				<tr>
+					<td>{$adoption.date|date_format:$opt.format.date}</td>
+					<td><a href="viewprofile.php?userid={$adoption.from_user_id}">{$adoption.from_username}</a></th>
+					<td>&rarr;</td>
+					<td><a href="viewprofile.php?userid={$adoption.to_user_id}">{$adoption.to_username}</a></th>
 				</tr>
 			{/foreach}
 		{else}

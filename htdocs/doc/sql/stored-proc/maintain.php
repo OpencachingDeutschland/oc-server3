@@ -710,6 +710,10 @@
 							/* logpw needs not to be saved */
 							/* for further explanation see restorecaches.php */
 						END IF;
+						IF NEW.`user_id`!=OLD.`user_id` THEN
+							INSERT INTO `cache_adoptions` (`cache_id`,`date`,`from_user_id`,`to_user_id`)
+								VALUES (NEW.`cache_id`, NEW.`last_modified`, OLD.`user_id`, NEW.`user_id`);
+						END IF;
 						IF NEW.`user_id`!=OLD.`user_id` OR NEW.`status`!=OLD.`status` THEN
 							CALL sp_update_hiddenstat(OLD.`user_id`, OLD.`status`, TRUE);
 							CALL sp_update_hiddenstat(NEW.`user_id`, NEW.`status`, FALSE);

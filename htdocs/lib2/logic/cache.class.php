@@ -413,6 +413,9 @@ class cache
 		                       VALUES ('cache', 5, '&1', '&2', '&3', '&4')",
 		                       $login->userid, $this->nCacheId, 0, 
 		                       'Cache ' . sql_escape($this->nCacheId) . ' has changed the owner from userid ' . sql_escape($this->getUserId()) . ' to ' . sql_escape($userid) . ' by ' . sql_escape($login->userid));
+			// Adoptions now are recorded by trigger in cache_adoptions table.
+			// Recording adoptions in 'logentries' may be discarded after ensuring that the
+			// log entries are not used anywhere.
 		sql("UPDATE `caches` SET `user_id`='&1' WHERE `cache_id`='&2'", $userid, $this->nCacheId);
 		sql("DELETE FROM `cache_adoption` WHERE `cache_id`='&1'", $this->nCacheId);
 
@@ -528,6 +531,21 @@ class cache
 		            WHERE `cache_id`='&1'
 		         ORDER BY `date_modified` DESC", $this->getCacheId(), $opt['template']['locale']);
 		$tpl->assign_rs('status_changes',$rs);
+		sql_free_result($rs);
+
+		// Adoptions
+		$rs = sql("SELECT `cache_adoptions`.`date`,
+		                  `cache_adoptions`.`from_user_id`,
+		                  `cache_adoptions`.`to_user_id`,
+		                  `from_user`.`username` AS `from_username`,
+		                  `to_user`.`username` AS `to_username`
+		             FROM `cache_adoptions`
+		        LEFT JOIN `user` `from_user` ON `from_user`.`user_id`=`from_user_id`
+		        LEFT JOIN `user` `to_user` ON `to_user`.`user_id`=`to_user_id`
+		            WHERE `cache_id`='&1'
+		         ORDER BY `cache_adoptions`.`date`, `cache_adoptions`.`id`",
+						          $this->getCacheId());
+		$tpl->assign_rs('adoptions',$rs);
 		sql_free_result($rs);
 	}
 

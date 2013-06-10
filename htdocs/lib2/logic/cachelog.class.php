@@ -62,6 +62,20 @@ class cachelog
 		return $oCacheLog;
 	}
 
+	static function createNewFromCache($oCache, $nUserId)
+	{
+		// check if user is allowed to log this cache!
+		if ($oCache->exist() == false)
+			return false;
+		if ($oCache->allowLog() == false)
+			return false;
+
+		$oCacheLog = new cachelog(ID_NEW);
+		$oCacheLog->setUserId($nUserId);
+		$oCacheLog->setCacheId($oCache->getCacheId());
+		return $oCacheLog;
+	}
+
 	function __construct($nNewLogId=ID_NEW)
 	{
 		$this->reCacheLog = new rowEditor('cache_logs');
@@ -259,6 +273,20 @@ class cachelog
 		// Logic Error - log types are still valid when no NEW logs are allowed for the cache.
 		// (Would e.g. block admin logs and log-type restoring for locked caches.)
 		return get_cache_log_types($this->getCacheId(),$this->getType());  // depends on userid 
+	}
+	
+	static function isDuplicate($cacheId, $userId, $logType, $logDate, $logText)
+	{
+		// get info if exact the same values are already in database
+		return (sql_value("	SELECT COUNT(`id`)
+							FROM `cache_logs`
+							WHERE `cache_id`='&1'
+								AND `user_id`='&2'
+								AND `type`='&3'
+								AND `date`='&4'
+								AND `text`='&5'",
+						0,
+						$cacheId, $userId, $logType, $logDate, $logText) != 0);
 	}
 }
 ?>

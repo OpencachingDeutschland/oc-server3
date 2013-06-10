@@ -39,7 +39,8 @@ class geokrety
 
 		$this->removeXML($path);
 
-		$modifiedsince = strtotime(getSysConfig('geokrety_lastupdate', '2005-01-01 00:00:00'));
+		// changed default-value for getSysConfig() from '2005-01-01 00:00:00' to 'NOW - 9d 23:59:59' to stay in api-limit
+		$modifiedsince = strtotime(getSysConfig('geokrety_lastupdate', date($opt['db']['dateformat'], time()-(60*60*24*10)+1)));
 		if (!@copy('http://geokrety.org/export.php?modifiedsince=' . date('YmdHis', $modifiedsince - 1), $path))
 			return false;
 
@@ -129,7 +130,7 @@ class geokrety
 		$typeid = $this->GetNodeAttribute($element, 'type', 'id')+0;
 		$typename = $this->GetNodeValue($element, 'type');
 		$this->checkGeoKretType($typeid, $typename);
-
+				
 		$description = html_entity_decode($this->GetNodeValue($element, 'description'));
 		$datecreated = strtotime($this->GetNodeValue($element, 'datecreated'));
 		
@@ -139,19 +140,16 @@ class geokrety
 		$longitude = $this->GetNodeAttribute($element, 'position', 'longitude')+0;
 		$latitude = $this->GetNodeAttribute($element, 'position', 'latitude')+0;
 
-		sql("INSERT INTO `gk_item` (`id`, `name`, `description`, `userid`, `datecreated`, `distancetravelled`,
-                              `latitude`, `longitude`, `typeid`, `stateid`)
-                      VALUES ('&1', '&2', '&3', '&4', '&5', '&6', 
-                              '&7', '&8', '&9', '&10')
-      ON DUPLICATE KEY UPDATE `name`='&2', `description`='&3', `userid`='&4', `datecreated`='&5', 
-                              `distancetravelled`='&6', `latitude`='&7', `longitude`='&8', `typeid`='&9', `stateid`='&10'",
-                              $id, $name, $description, $userid, date($opt['db']['dateformat'], $datecreated), $distancetravelled,
-                              $latitude, $longitude, $typeid, $state);
+		sql("INSERT INTO `gk_item`
+					(`id`, `name`, `description`, `userid`, `datecreated`, `distancetravelled`, `latitude`, `longitude`, `typeid`, `stateid`)
+				VALUES
+					('&1', '&2', '&3', '&4', '&5', '&6', '&7', '&8', '&9', '&10')
+			ON DUPLICATE KEY UPDATE
+					`name`='&2', `description`='&3', `userid`='&4', `datecreated`='&5', `distancetravelled`='&6', `latitude`='&7', `longitude`='&8', `typeid`='&9', `stateid`='&10'",
+		$id, $name, $description, $userid, date($opt['db']['dateformat'], $datecreated), $distancetravelled, $latitude, $longitude, $typeid, $state);
 
-/* we are using now the moves to update waypoints */
-/*
-    sql("DELETE FROM `gk_item_waypoint` WHERE id='&1'", $id);
-
+		// remove waypoints for this krety
+		sql("DELETE FROM `gk_item_waypoint` WHERE id='&1'", $id);
 		// update associated waypoints
 		$waypoints = $element->getElementsByTagName('waypoints');
 		if ($waypoints->length == 1)
@@ -161,10 +159,14 @@ class geokrety
 			{
 				$wp = $wpItems->item($i)->nodeValue;
 				if ($wp != '')
-					sql("INSERT INTO `gk_item_waypoint` (`id`, `wp`) VALUES ('&1', '&2')", $id, $wp);
+					sql("INSERT INTO `gk_item_waypoint`
+								(`id`, `wp`)
+							VALUES
+								('&1', '&2')",
+					$id, $wp);
 			}
 		}
-*/
+
 	}
 
 	function importMove($element)
@@ -190,15 +192,15 @@ class geokrety
 		$logtypename = $this->GetNodeValue($element, 'logtype');
 		$this->checkMoveType($logtypeid, $logtypename);
 
-		sql("INSERT INTO `gk_move` (`id`, `itemid`, `latitude`, `longitude`, `datemoved`, `datelogged`,
-                              `userid`, `comment`, `logtypeid`)
-                      VALUES ('&1', '&2', '&3', '&4', '&5', '&6', 
-                              '&7', '&8', '&9')
-      ON DUPLICATE KEY UPDATE `itemid`='&2', `latitude`='&3', `longitude`='&4', `datemoved`='&5', 
-                              `datelogged`='&6', `userid`='&7', `comment`='&8', `logtypeid`='&9'",
-                              $id, $gkid, $latitude, $longitude, date($opt['db']['dateformat'], $datemoved), date($opt['db']['dateformat'], $datelogged),
-                              $userid, $comment, $logtypeid);
-    sql("DELETE FROM `gk_move_waypoint` WHERE id='&1'", $id);
+		sql("INSERT INTO `gk_move`
+					(`id`, `itemid`, `latitude`, `longitude`, `datemoved`, `datelogged`, `userid`, `comment`, `logtypeid`)
+				VALUES
+					('&1', '&2', '&3', '&4', '&5', '&6', '&7', '&8', '&9')
+			ON DUPLICATE KEY UPDATE
+					`itemid`='&2', `latitude`='&3', `longitude`='&4', `datemoved`='&5', `datelogged`='&6', `userid`='&7', `comment`='&8', `logtypeid`='&9'",
+		$id, $gkid, $latitude, $longitude, date($opt['db']['dateformat'], $datemoved), date($opt['db']['dateformat'], $datelogged), $userid, $comment, $logtypeid);
+		
+		sql("DELETE FROM `gk_move_waypoint` WHERE id='&1'", $id);
 
 		// update associated waypoints
 		$waypoints = $element->getElementsByTagName('waypoints');
@@ -211,22 +213,6 @@ class geokrety
 				if ($wp != '')
 					sql("INSERT INTO `gk_move_waypoint` (`id`, `wp`) VALUES ('&1', '&2')", $id, $wp);
 			}
-		}
-
-		// now update the current gk-waypoints based on the last move
-    sql("DELETE FROM `gk_item_waypoint` WHERE `id`='&1'", $gkid);
-		$rs = sql("SELECT * FROM `gk_move` WHERE `itemid`='&1' AND `logtypeid`!=2 ORDER BY `datemoved` DESC LIMIT 1", $gkid);
-		$r = sql_fetch_assoc($rs);
-		sql_free_result($rs);
-		if ($r === false) return;
-
-		if ($r['logtypeid'] == 0 || $r['logtypeid'] == 3)
-		{
-			sql("INSERT INTO `gk_item_waypoint` (`id`, `wp`) SELECT '&1' AS `id`, `wp` FROM `gk_move_waypoint` WHERE `id`='&2' AND `wp`!=''", $gkid, $id);
-		}
-		else
-		{
-			// do nothing
 		}
 	}
 

@@ -5,7 +5,7 @@
  *  Unicode Reminder メモ
  *
  *  Tests for consistency of gk_item_waypoint und gk_move_waypoint tables.
- *
+ *  See http://redmine.opencaching.de/issues/18.
  ***************************************************************************/
 
 	$opt['rootpath'] = '../../';
@@ -25,7 +25,7 @@
 	{
 		$lastmove = sql_value("
 				SELECT `id` FROM `gk_move`
-				WHERE `itemid`='&1'
+				WHERE `itemid`='&1' AND `logtypeid`<>2
 				ORDER BY `datemoved` DESC, `id` DESC
 				LIMIT 1",
 				0, $rItem['id']);
@@ -46,8 +46,16 @@
 	foreach ($itemwps as $itemid => $wps)
 		foreach ($wps as $wp => $flags)
 			if (isset($flags['itemwp']) && !isset($flags['movewp']))
-				echo "item ".$itemid.": ".$wp." is not the current wp in gk_move_waypoint\n";
+				if (sql_value("SELECT COUNT(*) FROM `gk_move`, `gk_move_waypoint`
+				                WHERE `gk_move`.`itemid`='&1'
+				                  AND `gk_move`.`logtypeid`<>2
+				                  AND `gk_move_waypoint`.`id`=`gk_move`.`id`
+				                  AND `gk_move_waypoint`.`wp`='&2'",
+				              0, $itemid, $wp) == 0)
+					echo "item ".$itemid.": ".$wp." is missing in gk_move_waypoint\n";
+				else
+					echo "item ".$itemid.": ".$wp." is not the current wp in gk_move_waypoint\n";
 			else if (isset($flags['movewp']) && !isset($flags['itemwp']))
-				echo "item ".$itemid.": current wp ".$wp." is missing in gk_item_waypoint\n";
+				echo "item ".$itemid.": ".$wp." is missing in gk_item_waypoint\n";
 
 ?>

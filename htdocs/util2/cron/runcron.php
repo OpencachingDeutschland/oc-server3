@@ -21,7 +21,8 @@
 	// test for user who runs the cronjob
 	$processUser = posix_getpwuid(posix_geteuid());
 	if ($processUser['name'] != $opt['cron']['username'])
-		die("ERROR: runcron must be run by '" . $opt['cron']['username'] . "' but was called by '" . $processUser['name'] . "'\n");
+		die("ERROR: runcron must be run by '" . $opt['cron']['username'] . "' but was called by '" . $processUser['name'] . "'\n".
+		    "Try something like 'sudo -u ".$opt['cron']['username']." php runcron.php'.\n");
 
 	// use posix pid-files to lock process 
 	if (!CreatePidFile($opt['cron']['pidfile']))

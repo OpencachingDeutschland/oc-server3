@@ -202,16 +202,22 @@
 					KEY `cache_id` (`cache_id`,`date`)
 				) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1");
 
+			// Up to commit d15ee5f9, new cache notification logs were erronously stored with
+			// event ID 5 (instead of 8). Therefore we need to check for the module, too:
 			$rs = sql("SELECT `id`, `date_created`, `objectid1`, `logtext`
 			             FROM `logentries`
-			            WHERE `eventid`=5
+			            WHERE `eventid`=5 AND `module`='cache'
 			         ORDER BY `date_created`, `id`");
 			while ($rLog = sql_fetch_assoc($rs))
 			{
 				preg_match('/Cache (\d+) has changed the owner from userid (\d+) to (\d+) by (\d+)/',
 				           $rLog['logtext'], $matches);
 				if (count($matches) != 5)
-					die("unknown adoption log entry format for ID " . $rLog['id'] . "\n");
+				{
+					sql_free_result($rs);
+					sql("DROP TABLE `cache_adoptions`");
+					die("\nunknown adoption log entry format for ID " . $rLog['id'] . "\n");
+				}
 				sql("INSERT INTO `cache_adoptions`
 				                 (`cache_id`,`date`,`from_user_id`,`to_user_id`)
 						      VALUES ('&1','&2','&3','&4')",
@@ -221,6 +227,12 @@
 
 			// We keep the old entries in 'logentries' for the case something went wrong here.
 		}
+	}
+
+	function dbv_111()  // fix event ID of old publishing notifications
+	{
+		sql("UPDATE `logentries` SET `eventid`=8
+		      WHERE `eventid`=5 AND `module`='notify_newcache'");
 	}
 
 ?>

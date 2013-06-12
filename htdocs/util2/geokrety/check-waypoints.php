@@ -6,6 +6,8 @@
  *
  *  Tests for consistency of gk_item_waypoint und gk_move_waypoint tables.
  *  See http://redmine.opencaching.de/issues/18.
+ *
+ *  Data import functions are in util2/cron/modules/geokrety.class.php.
  ***************************************************************************/
 
 	$opt['rootpath'] = '../../';

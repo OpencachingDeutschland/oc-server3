@@ -3,9 +3,15 @@
  *  For license information see doc/license.txt
  *
  *  Unicode Reminder メモ
+ *
+ *  Import new data from geokrety.org.
+ *
+ *  See util2/geokrety for check and repair functions.
+ *  See discussion in http://redmine.opencaching.de/issues/18.
  ***************************************************************************/
 
 checkJob(new geokrety());
+
 
 class geokrety
 {
@@ -39,8 +45,9 @@ class geokrety
 
 		$this->removeXML($path);
 
-		// changed default-value for getSysConfig() from '2005-01-01 00:00:00' to 'NOW - 9d 23:59:59' to stay in api-limit
-		$modifiedsince = strtotime(getSysConfig('geokrety_lastupdate', date($opt['db']['dateformat'], time()-(60*60*24*10)+1)));
+		// Changed default-value for getSysConfig() from '2005-01-01 00:00:00' to 'NOW - 9d 12h'
+		// to safely stay in api-limit, even when client and server are in different time zones.
+		$modifiedsince = strtotime(getSysConfig('geokrety_lastupdate', date($opt['db']['dateformat'], time() - 60*60*24*9.5)));
 		if (!@copy('http://geokrety.org/export.php?modifiedsince=' . date('YmdHis', $modifiedsince - 1), $path))
 			return false;
 
@@ -146,13 +153,18 @@ class geokrety
 					('&1', '&2', '&3', '&4', '&5', '&6', '&7', '&8', '&9', '&10')
 			ON DUPLICATE KEY UPDATE
 					`name`='&2', `description`='&3', `userid`='&4', `datecreated`='&5', `distancetravelled`='&6', `latitude`='&7', `longitude`='&8', `typeid`='&9', `stateid`='&10'",
-		$id, $name, $description, $userid, date($opt['db']['dateformat'], $datecreated), $distancetravelled, $latitude, $longitude, $typeid, $state);
+			$id, $name, $description, $userid, date($opt['db']['dateformat'], $datecreated), $distancetravelled, $latitude, $longitude, $typeid, $state);
+
+		// Deleting and inserting item-waypoints if they have not changed will
+		// update caches.meta_last_modified -> caches.okapi_syncbase and thus trigger
+		// OKAPI changelog actions. This probably can be ignored as OKAPI will verify
+		// if data has really changed.
 
 		// remove waypoints for this krety
 		sql("DELETE FROM `gk_item_waypoint` WHERE id='&1'", $id);
 		// update associated waypoints
 		$waypoints = $element->getElementsByTagName('waypoints');
-		if ($waypoints->length == 1)
+		if ($waypoints->length > 0)
 		{
 			$wpItems = $waypoints->item(0)->getElementsByTagName('waypoint');
 			for ($i = 0; $i < $wpItems->length; $i++)
@@ -166,8 +178,8 @@ class geokrety
 					$id, $wp);
 			}
 		}
-
 	}
+
 
 	function importMove($element)
 	{
@@ -204,7 +216,7 @@ class geokrety
 
 		// update associated waypoints
 		$waypoints = $element->getElementsByTagName('waypoints');
-		if ($waypoints->length == 1)
+		if ($waypoints->length > 0)
 		{
 			$wpItems = $waypoints->item(0)->getElementsByTagName('waypoint');
 			for ($i = 0; $i < $wpItems->length; $i++)
@@ -214,12 +226,39 @@ class geokrety
 					sql("INSERT INTO `gk_move_waypoint` (`id`, `wp`) VALUES ('&1', '&2')", $id, $wp);
 			}
 		}
+
+		/**
+		 * This Code is buggy; it produces wrong gk_item_waypoint entries (why?).
+		 * See http://redmine.opencaching.de/issues/18.
+		 * We use geokret.waypoints information instead, see importGeoKret().
+		 * That's preferrable anyway, because it does not mage assumptions on internal
+		 * Geokrety.org behaviour (e.g. the order of moves with identical datetime). 
+
+		// now update the current gk-waypoints based on the last move
+		sql("DELETE FROM `gk_item_waypoint` WHERE `id`='&1'", $gkid);
+		$rs = sql("SELECT * FROM `gk_move` WHERE `itemid`='&1' AND `logtypeid`!=2 ORDER BY `datemoved` DESC LIMIT 1", $gkid);
+		$r = sql_fetch_assoc($rs);
+		sql_free_result($rs);
+		if ($r === false) return;
+
+		if ($r['logtypeid'] == 0 || $r['logtypeid'] == 3)
+		{
+			sql("INSERT INTO `gk_item_waypoint` (`id`, `wp`) SELECT '&1' AS `id`, `wp` FROM `gk_move_waypoint` WHERE `id`='&2' AND `wp`!=''", $gkid, $id);
+		}
+		else
+		{
+			// do nothing
+		}
+
+		*/
 	}
+
 
 	function checkGeoKretType($id, $name)
 	{
 		sql("INSERT INTO `gk_item_type` (`id`, `name`) VALUES ('&1', '&2') ON DUPLICATE KEY UPDATE `name`='&2'", $id, $name);
 	}
+
 
 	function checkUser($id, $name)
 	{
@@ -228,10 +267,12 @@ class geokrety
 		sql("INSERT INTO `gk_user` (`id`, `name`) VALUES ('&1', '&2') ON DUPLICATE KEY UPDATE `name`='&2'", $id, $name);
 	}
 
+
 	function checkMoveType($id, $name)
 	{
 		sql("INSERT INTO `gk_move_type` (`id`, `name`) VALUES ('&1', '&2') ON DUPLICATE KEY UPDATE `name`='&2'", $id, $name);
 	}
+
 
 	function GetNodeValue(&$domnode, $element)
 	{
@@ -241,6 +282,7 @@ class geokrety
 		else
 			return $subnode->item(0)->nodeValue;
 	}
+
 
 	function GetNodeAttribute(&$domnode, $element, $attr)
 	{

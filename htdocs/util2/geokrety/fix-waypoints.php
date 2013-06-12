@@ -6,6 +6,8 @@
  *
  *  Regenerates gk_item_waypoint from gk_move_waypoint.
  *  See http://redmine.opencaching.de/issues/18.
+ *
+ *  Data import functions are in util2/cron/modules/geokrety.class.php.
  ***************************************************************************/
 
 	$opt['rootpath'] = '../../';

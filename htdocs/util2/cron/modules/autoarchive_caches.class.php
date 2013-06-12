@@ -99,7 +99,9 @@ class autoarchive
 				// create log
 				$log->setType(cachelog::LOGTYPE_ARCHIVED, true);
 				$log->setOcTeamComment(true);
-				$log->setDate(date('Y-m-d H:i'));
+				$log->setDate(date('Y-m-d'));
+					// Log without time, so that owner reactions will always appear AFTER
+					// the system log, no matter if logged with or without date.
 
 				// create log text in appropriate language
 				$translated_comment = $translate->t($comment, '','',0,'',1, $cache->getDefaultDescLanguage());

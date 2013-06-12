@@ -10,7 +10,7 @@
  *  Data import functions are in util2/cron/modules/geokrety.class.php.
  ***************************************************************************/
 
-	$opt['rootpath'] = '../../';
+	$opt['rootpath'] = dirname(__FILE__) . '/../../';
 	require_once($opt['rootpath'] . 'lib2/cli.inc.php');
 
 	if (count($argv) != 2 || $argv[1] != 'run')

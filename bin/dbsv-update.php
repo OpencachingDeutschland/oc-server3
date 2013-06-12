@@ -173,7 +173,7 @@
 			sql("ALTER TABLE `cache_reports` ADD INDEX `userid` (`userid`)");
 	}
 
-	function dbv_108()  // automatic email-bounce processiong
+	function dbv_108()  // automatic email-bounce processing
 	{
 		if (!sql_field_exists('user','last_email_problem'))
 			sql("ALTER TABLE `user` ADD COLUMN `last_email_problem` datetime default NULL AFTER `email_problems`");
@@ -181,10 +181,46 @@
 			sql("ALTER TABLE `user` ADD COLUMN `mailing_problems` int(10) unsigned NOT NULL default '0' AFTER `last_email_problem`");
 	}
 
-	function dbv_109()  // improved email-bounce processiong
+	function dbv_109()  // improved email-bounce processing
 	{
 		if (!sql_field_exists('user','first_email_problem'))
 			sql("ALTER TABLE `user` ADD COLUMN `first_email_problem` date default NULL AFTER `email_problems`");
+	}
+
+	function dbv_110()  // move adoption history to separate table
+	{
+		if (!sql_table_exists('cache_adoptions'))
+		{
+			sql(
+				"CREATE TABLE `cache_adoptions` (
+					`id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+					`cache_id` int(10) unsigned NOT NULL,
+					`date` datetime NOT NULL,
+					`from_user_id` int(10) unsigned NOT NULL,
+					`to_user_id` int(10) unsigned NOT NULL,
+					PRIMARY KEY (`id`),
+					KEY `cache_id` (`cache_id`,`date`)
+				) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1");
+
+			$rs = sql("SELECT `id`, `date_created`, `objectid1`, `logtext`
+			             FROM `logentries`
+			            WHERE `eventid`=5
+			         ORDER BY `date_created`, `id`");
+			while ($rLog = sql_fetch_assoc($rs))
+			{
+				preg_match('/Cache (\d+) has changed the owner from userid (\d+) to (\d+) by (\d+)/',
+				           $rLog['logtext'], $matches);
+				if (count($matches) != 5)
+					die("unknown adoption log entry format for ID " . $rLog['id'] . "\n");
+				sql("INSERT INTO `cache_adoptions`
+				                 (`cache_id`,`date`,`from_user_id`,`to_user_id`)
+						      VALUES ('&1','&2','&3','&4')",
+						$rLog['objectid1'], $rLog['date_created'], $matches[2], $matches[3]);
+			}
+			sql_free_result($rs);
+
+			// We keep the old entries in 'logentries' for the case something went wrong here.
+		}
 	}
 
 ?>

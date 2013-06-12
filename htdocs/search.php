@@ -1332,7 +1332,12 @@ function outputSearchForm($options)
 
 	// logtypen
 	$logtype_options = '';
-	$rs = sql("SELECT `log_types`.`id`, IFNULL(`sys_trans_text`.`text`, `log_types`.`name`) AS `name` FROM `log_types` LEFT JOIN `sys_trans` ON `log_types`.`trans_id`=`sys_trans`.`id` AND `sys_trans`.`text`=`log_types`.`name` LEFT JOIN `sys_trans_text` ON `sys_trans`.`id`=`sys_trans_text`.`trans_id` AND `sys_trans_text`.`lang`='&1' ORDER BY `id` ASC", $locale);
+	$rs = sql("SELECT `log_types`.`id`,
+	                  IFNULL(`sys_trans_text`.`text`, `log_types`.`name`) AS `name`
+	             FROM `log_types`
+	        LEFT JOIN `sys_trans_text` ON `sys_trans_text`.`trans_id`=`log_types`.`trans_id` AND `sys_trans_text`.`lang`='&1'
+	         ORDER BY `log_types`.`id` ASC", $locale);
+
 	for ($i = 0; $i < mysql_num_rows($rs); $i++)
 	{
 		$record = sql_fetch_array($rs);

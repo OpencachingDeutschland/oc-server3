@@ -31,7 +31,20 @@
 	if (!$tpl->is_cached())
 	{
 		sql_temp_table_slave('loglist');
-		sql_slave("CREATE TEMPORARY TABLE &loglist (`id` INT(11) PRIMARY KEY) SELECT `cache_logs`.`id` FROM `cache_logs` INNER JOIN `caches` ON `cache_logs`.`cache_id`=`caches`.`cache_id` INNER JOIN `cache_status` ON `caches`.`status`=`cache_status`.`id` WHERE `cache_status`.`allow_user_view`=1 AND `caches`.`country`<>'&1' ORDER BY `cache_logs`.`date_created` DESC LIMIT &2", $exclude_country, $logcount);
+		sql_slave("CREATE TEMPORARY TABLE &loglist (`id` INT(11) PRIMARY KEY)
+			         SELECT `cache_logs`.`id`
+			           FROM `cache_logs`
+			     INNER JOIN `caches` ON `cache_logs`.`cache_id`=`caches`.`cache_id`
+			     INNER JOIN `cache_status` ON `caches`.`status`=`cache_status`.`id`
+			     INNER JOIN `user` ON `cache_logs`.`user_id`=`user`.`user_id`
+			          WHERE `cache_status`.`allow_user_view`=1
+			                AND `caches`.`country`<>'&1'
+			                AND `username`<>'&2'
+			       ORDER BY `cache_logs`.`date_created` DESC
+			          LIMIT &3",
+			                $exclude_country,
+			                isset($_GET['showsyslogs']) ? '' : $opt['logic']['systemuser']['user'],
+			                $logcount);
 
 		if ($opt['logic']['new_logs_per_country'])
 			$sqlOrderBy = '`countries`.`de` ASC, ';
@@ -59,10 +72,9 @@
 										 INNER JOIN `countries` ON `caches`.`country`=`countries`.`short` 
 										  LEFT JOIN `sys_trans_text` ON `countries`.`trans_id`=`sys_trans_text`.`trans_id` AND `sys_trans_text`.`lang`='&1'
 										  LEFT JOIN `cache_logs_restored` ON `cache_logs_restored`.`id`=`cache_logs`.`id`
-										      WHERE `username`<>'&2' AND IFNULL(`cache_logs_restored`.`restored_by`,0)=0
+										      WHERE IFNULL(`cache_logs_restored`.`restored_by`,0)=0
 										   ORDER BY " . $sqlOrderBy . "`cache_logs`.`date_created` DESC",
-											          $opt['template']['locale'],
-											          isset($_GET['showsyslogs']) ? '' : $opt['logic']['systemuser']['user']);
+											          $opt['template']['locale']);
 
 		$newLogs = array();
 

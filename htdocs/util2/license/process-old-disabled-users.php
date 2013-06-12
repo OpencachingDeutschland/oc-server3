@@ -12,7 +12,7 @@
  ***************************************************************************/
 
 	$opt['rootpath'] = '../../';
-	require_once($opt['rootpath'] . 'lib2/web.inc.php');
+	require_once($opt['rootpath'] . 'lib2/cli.inc.php');
 	require_once($opt['rootpath'] . 'lib2/logic/user.class.php');
 
 	$login->admin = ADMIN_USER;

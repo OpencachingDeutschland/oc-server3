@@ -109,6 +109,11 @@
 			$allowed_logtypes[] = 3;   // note
 		}
 
+		// always allow to keep the existing logtype when the log is edited by an admin
+		if ($login->hasAdminPriv(ADMIN_USER) &&
+		    $old_logtype > 0 && !in_array($old_logtype+0,$allowed_logtypes))
+			$allowed_logtypes[] = $old_logtype;
+
 		return $allowed_logtypes;
 	}
 
@@ -119,7 +124,7 @@
 	}
 
 
-	function teamcomment_allowed($cache_id, $logtype_id)
+	function teamcomment_allowed($cache_id, $logtype_id, $old_teamcomment=false)
 	{
 		global $login, $opt;
 
@@ -127,6 +132,8 @@
 			return false;
 		elseif ($logtype_id != 3 && ($logtype_id < 9 || $logtype_id > 14))
 			return false;
+		elseif ($old_teamcomment)
+			return true;
 		else
 		{
 			$rs = sql("SELECT `user_id`,`status` FROM `caches` WHERE `cache_id`='&1'", $cache_id);

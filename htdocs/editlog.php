@@ -104,7 +104,7 @@
 					$log_time_minute = isset($_POST['logminute']) ? trim($_POST['logminute']) : (substr($log_record['date'],11) == "00:00:00" ? "" : date('i', strtotime($log_record['date'])));
 					$top_option = isset($_POST['ratingoption']) ? $_POST['ratingoption']+0 : 0;
 					$top_cache = isset($_POST['rating']) ? $_POST['rating']+0 : 0;
-					$oc_team_comment = isset($_POST['teamcomment']) ? ($_POST['teamcomment'] != 0) : ($log_record['oc_team_comment'] == '1');
+					$oc_team_comment = isset($_POST['submitform']) ? @$_POST['teamcomment']+0 : ($log_record['oc_team_comment'] == 1);
 
 					$log_pw = '';
 					$use_log_pw = (($log_record['logpw'] == NULL) || ($log_record['logpw'] == '')) ? false : true;
@@ -222,7 +222,7 @@
 						}
 
 					// ignore unauthorized team comments
-					if (!teamcomment_allowed($log_record['cache_id'], $log_type))
+					if (!teamcomment_allowed($log_record['cache_id'], $log_type, $log_record['oc_team_comment']))
 						$oc_team_comment = 0;
 
 					//store?
@@ -289,8 +289,7 @@
 						$selected = ($log_record['logtype'] == $logtype ? ' selected="selected"' : '');
 						$logtypeoptions .= '<option value="' . $logtype . '"' . $selected . '>' . htmlspecialchars($logtype_names[$logtype], ENT_COMPAT, 'UTF-8') . '</option>' . "\n";
 					}
-
-					if (teamcomment_allowed($log_record['cache_id'],3))
+					if (teamcomment_allowed($log_record['cache_id'], 3, $log_record['oc_team_comment']))
 						tpl_set_var('teamcommentoption',
 							mb_ereg_replace('{chk_sel}', ($oc_team_comment ? 'checked' : ''), $teamcomment_field));
 					else

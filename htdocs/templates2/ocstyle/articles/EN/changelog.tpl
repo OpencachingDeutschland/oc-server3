@@ -13,7 +13,7 @@
 	<p>This page lists all changes since version 3.0. Some small items have been omitted here.</p>
 	<br />
 
-	<p><strong>OC 3.0 Release 8</strong> &ndash; June 1, 2013</p>
+	<p id="v3.0.8"><strong>OC 3.0 Release 8</strong> &ndash; June 1, 2013</p>
 	<p>New:</p>
 	<ul>
 		<li>The geocache listing status can now (only) be changed by logging the new state. New log types <em>temporarily unavailable</em>, <em>archived</em>, <em>locked </em> und <em>ready for search</em> have been added. Unchanged states may be logged, too, e.g. to confirm that the cache is still searchable. The type of old logs can be changed afterwards.</li>
@@ -74,7 +74,7 @@
   </ul>
 	<br />
 
-	<p><strong>OC 3.0 Release 7</strong> &ndash; April 19, 2013</p>
+	<p id="v3.0.7"><strong>OC 3.0 Release 7</strong> &ndash; April 19, 2013</p>
 	<ul>
 		<li>New: <a href="okapi">OKAPI</a></li>
 		<li>"Apple Touch Icons" for Smartphones</li>
@@ -82,7 +82,7 @@
 	</ul>
 	<br />
 
-	<p><strong>OC 3.0 Release 6</strong> &ndash; April 12, 2013</p>
+	<p id="v3.0.6"><strong>OC 3.0 Release 6</strong> &ndash; April 12, 2013</p>
 	<p>New:</p>
 	<ul>
 		<li>logging with time</li>
@@ -123,7 +123,7 @@
   </ul>
 	<br />
 
-	<p><strong>OC 3.0 Release 5</strong> &ndash; March 16, 2013</p>
+	<p id="v3.0.5"><strong>OC 3.0 Release 5</strong> &ndash; March 16, 2013</p>
 	<p>Completely reworked map:</p>
 	<ul>
 		<li>Own, found, not found and <a href="http://wiki.opencaching.de/index.php/OConly" target="_blank">OConly</a> caches are marked</li>
@@ -172,7 +172,7 @@
 		<li>fixed nano size selection in search form</li>
 	</ul>
 
-	 <p><strong>OC 3.0 Release 4</strong> &ndash; February 17, 2013
+	 <p id="v3.0.4"><strong>OC 3.0 Release 4</strong> &ndash; February 17, 2013
    <p>New:</p>
 	 <ul>
      <li>new cache size "nano"</li>
@@ -202,7 +202,7 @@
    </ul>
 	<br />
 
-	 <p><strong>OC 3.0 Release 3</strong> &ndash; November 18, 2012</p>
+	 <p id="v3.0.3"><strong>OC 3.0 Release 3</strong> &ndash; November 18, 2012</p>
    <p>New:</p>
 	 <ul>
      <li>attribute "only at certain seasons"</li>
@@ -227,7 +227,7 @@
    </ul>
 	<br />
 
-	 <p><strong>OC 3.0 Release 2</strong> &ndash; August 26, 2012</p>
+	 <p id="v3.0.2"><strong>OC 3.0 Release 2</strong> &ndash; August 26, 2012</p>
    <p>New:</p>
 	 <ul>
 	   <li><a href="./articles.php?page=cacheinfo#difficulty">Difficulty ratings</a> explained, including tooltips and links within the cache listings</li>
@@ -264,9 +264,9 @@
 	   <li>fixed log edit permissions for locked caches</li>
 	   <li>removed dummy spoiler option when uploading log pictures</li>
    </ul>
-	<br />
+	 <br />
 
-	 <p><strong>OC 3.0 Release 1</strong> &ndash; August 8, 2012</p>
+	 <p id="v3.0.1"><strong>OC 3.0 Release 1</strong> &ndash; August 8, 2012</p>
    <p>New:</p>
 	 <ul>
 	   <li>URL shortener for direct cache listing access, e.g. <a href="http://www.opencaching.de/OCD93B">http://www.opencaching.de/OCD93B</a></li>

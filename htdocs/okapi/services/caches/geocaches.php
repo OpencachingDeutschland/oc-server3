@@ -33,7 +33,7 @@ class WebService
 		'my_notes', 'trackables_count', 'trackables', 'alt_wpts', 'last_found',
 		'last_modified', 'date_created', 'date_hidden', 'internal_id', 'is_watched',
 		'is_ignored', 'willattends', 'country', 'state', 'preview_image',
-		'trip_time', 'trip_distance', 'attribution_note','gc_code');
+		'trip_time', 'trip_distance', 'attribution_note','gc_code', 'hint2', 'hints2');
 
 	public static function call(OkapiRequest $request)
 	{
@@ -73,6 +73,7 @@ class WebService
 		if (
 			in_array('description', $fields) || in_array('descriptions', $fields)
 			|| in_array('hint', $fields) || in_array('hints', $fields)
+			|| in_array('hint2', $fields) || in_array('hints2', $fields)
 			|| in_array('attribution_note', $fields)
 		)
 		{
@@ -317,6 +318,8 @@ class WebService
 					case 'descriptions': /* handled separately */ break;
 					case 'hint': /* handled separately */ break;
 					case 'hints': /* handled separately */ break;
+					case 'hint2': /* handled separately */ break;
+					case 'hints2': /* handled separately */ break;
 					case 'images': /* handled separately */ break;
 					case 'preview_image': /* handled separately */ break;
 					case 'attrnames': /* handled separately */ break;
@@ -461,15 +464,18 @@ class WebService
 		# Descriptions and hints.
 
 		if (in_array('description', $fields) || in_array('descriptions', $fields)
-			|| in_array('hint', $fields) || in_array('hints', $fields))
+			|| in_array('hint', $fields) || in_array('hints', $fields)
+			|| in_array('hint2', $fields) || in_array('hints2', $fields))
 		{
 			# At first, we will fill all those 4 fields, even if user requested just one
 			# of them. We will chop off the remaining three at the end.
 
 			foreach ($results as &$result_ref)
+			{
 				$result_ref['descriptions'] = array();
-			foreach ($results as &$result_ref)
 				$result_ref['hints'] = array();
+				$result_ref['hints2'] = array();
+			}
 
 			# Get cache descriptions and hints.
 
@@ -500,17 +506,22 @@ class WebService
 					$results[$cache_code]['descriptions'][strtolower($row['language'])] = $tmp;
 				}
 				if ($row['hint'])
+				{
 					$results[$cache_code]['hints'][strtolower($row['language'])] = $row['hint'];
+					$results[$cache_code]['hints2'][strtolower($row['language'])]
+						= htmlspecialchars_decode(mb_ereg_replace("<br />", "" , $row['hint']), ENT_COMPAT);
+				}
 			}
 			foreach ($results as &$result_ref)
 			{
 				$result_ref['description'] = Okapi::pick_best_language($result_ref['descriptions'], $langpref);
 				$result_ref['hint'] = Okapi::pick_best_language($result_ref['hints'], $langpref);
+				$result_ref['hint2'] = Okapi::pick_best_language($result_ref['hints2'], $langpref);
 			}
 
 			# Remove unwanted fields.
 
-			foreach (array('description', 'descriptions', 'hint', 'hints') as $field)
+			foreach (array('description', 'descriptions', 'hint', 'hints', 'hint2', 'hints2') as $field)
 				if (!in_array($field, $fields))
 					foreach ($results as &$result_ref)
 						unset($result_ref[$field]);

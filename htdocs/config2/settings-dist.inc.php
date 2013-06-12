@@ -368,9 +368,10 @@
   // fill_gaps = false: continue with the last waypoint
   $opt['logic']['waypoint_pool']['fill_gaps'] = false;
 
-  /* Automatic system user actions
+  /* Username for cronjobs or CLI tools
+   * is used e.g. for cache auto-archiving and auto-publishing
    */
-	$opt['logic']['systemuser']['user'] = '';  // enter an active username to enable auto archiving
+	$opt['logic']['systemuser']['user'] = '';
 
 	/* Purge log files - age in days (0 = keep infinite)
 	 */
@@ -405,6 +406,7 @@
 	/* cronjob
 	 */
 	$opt['cron']['pidfile'] = $opt['rootpath'] . 'cache2/runcron.pid';
+	$opt['cron']['username'] = 'apache';   // system username for cronjobs
 
 	/* phpbb news integration (index.php)
 	 *
@@ -437,10 +439,11 @@
 	$opt['cron']['sitemaps']['generate'] = true;
 	$opt['cron']['sitemaps']['submit'] = false;
 
-	/* Geokret cronjob
+	/* other cronjobs
 	 */
 
 	$opt['cron']['geokrety']['run'] = true;
+	$opt['cron']['autoarchive']['run'] = false;
 
 	/* E-Mail settings
 	 *

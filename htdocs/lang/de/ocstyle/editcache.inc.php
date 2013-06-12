@@ -63,7 +63,7 @@
 				<input class="input20" type="text" name="activate_day" maxlength="2" value="{activate_day}"/>.
 				<input class="input20" type="text" name="activate_month" maxlength="2" value="{activate_month}"/>.
 				<input class="input40" type="text" name="activate_year" maxlength="4" value="{activate_year}"/>&nbsp;
-				<select name="activate_hour" class="input40">
+				<select name="activate_hour" class="input60">
 					{activation_hours}
 				</select>&nbsp;' . t('#time_suffix_label#') . '&nbsp;{activate_on_message}<br />
 				<input type="radio" class="radio" name="publish" id="publish_notnow" value="notnow" {publish_notnow_checked}>&nbsp;<label for="publish_notnow">' . t('Do not publish now.') . '</label>

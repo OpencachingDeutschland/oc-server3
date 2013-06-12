@@ -67,7 +67,7 @@
 		{/if}
 		<p style="line-height: 1.6em;"><b>{t}State:{/t}</b>&nbsp;{$status}&nbsp;&nbsp;<b>Admin:</b>&nbsp;{if $adminnick==''}{t}not assigned{/t}{else}{if $otheradmin}<font color="red"><b>{/if}{$adminnick|escape}{if $otheradmin}</b></font>{/if}{/if}</p>
 		<p style="line-height: 1.6em;"><b>{t}Reason:{/t}</b>&nbsp;{$reason|escape|nl2br}</p>
-		<p style="line-height: 1.6em;"><b>{t}Comment:{/t}</b>&nbsp;{$note|escape|nl2br}</p>
+		<p style="line-height: 1.6em; margin-bottom:16px"><b>{t}Comment:{/t}</b>&nbsp;{$note|escape|nl2br}</p>
 
 		<div class="content2-container bg-blue02">
   		<p class="content-title-noshade-size2">
@@ -76,7 +76,7 @@
 	  	</p>
 	  </div>
 
-		<p style="line-height: 1.6em; margin-bottom:16px">
+		<p style="line-height: 1.6em; margin-bottom:24px">
 		{if !$ownreport}
 			<input type="submit" name="assign" value="{t}Assign to me{/t}" class="formbutton" onclick="submitbutton('assign')" />
 		{else}
@@ -107,32 +107,7 @@
 		{/if}
 		<br />
 
-		{if $reports|@count}
-			<div class="content2-container bg-blue02">
-				<p class="content-title-noshade-size2">
-					<img src="resource2/{$opt.template.style}/images/misc/32x32-tools.png" style="align: left; margin-right: 10px;" width="22" height="22" alt="" /> 
-					{t}Other reports for this cache{/t}
-				</p>
-			</div>
-			{include file="adminreport_history.tpl"}
-		{/if}
-
-		{if $deleted_logs|@count}
-			<div class="content2-container bg-blue02">
-				<p class="content-title-noshade-size2">
-					<img src="resource2/{$opt.template.style}/images/description/22x22-logs.png" style="align: left; margin-right: 10px;" width="22" height="22" alt="" /> 
-					{t}Deleted logs{/t} <small>{t}since February 2012{/t}</small>
-				</p>
-			</div>
-			<div class="content2-container">
-				{include file="res_logentry.tpl" header=false footer=false footbacklink=false cache=$cache logs=$deleted_logs}
-			</div>
-		{/if}
-
-		{if $status_changes|@count}
-			{include file="res_status_changes.tpl"}
-		{/if}
-
+		{include file=adminhistory.tpl reportdisplay=true showhistory=true}
 	{/if}
 
 </form>

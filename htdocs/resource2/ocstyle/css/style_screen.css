@@ -327,15 +327,15 @@ div.changelog ul li ul {font-size: 90%; margin:0}
 .table td {padding: 2px 7px 5px 7px; border: solid 0px rgb(150,150,150); text-align: left; font-size: 120%;}
 /* .table th {margin: 0px; background-color: #e6e6e6;color: #404040; padding: 2px 7px 2px 7px; border-top: solid 1px #404040; border-bottom: solid 1px #404040; empty-cells: show; text-align: left; font-size: 120%; } */
 /* .table th {margin: 0px; background-color: #7fa2ca;color: #f8f8f8; padding: 2px 7px 2px 7px; border: solid 0px rgb(150,150,150); empty-cells: show; text-align: left; font-size: 120%; } */
-.table th, .searchtable th {margin: 0px; background-color: #d8e5c9;color: #404040; padding: 2px 7px 2px 7px; border-top: solid 1px #404040; border-bottom: solid 1px #404040; empty-cells: show; text-align: left; font-size: 120%; }
-.searchtable th {margin: 0px; background-color: #d8e5c9;color: #404040; padding: 4px 0px 4px 0px; border-top: solid 1px #404040; border-bottom: solid 1px #404040; empty-cells: show; text-align: left; font-size: 12px; }
+.table th, .searchtable th {margin: 0px; background-color: #deebcd; color: #404040; padding: 2px 7px 2px 7px; border-top: solid 1px #404040; border-bottom: solid 1px #404040; empty-cells: show; text-align: left; font-size: 120%; }
+.searchtable th {margin: 0px; background-color: #deebcd; color: #404040; padding: 4px 0px 4px 0px; border-top: solid 1px #404040; border-bottom: solid 1px #404040; empty-cells: show; text-align: left; font-size: 12px; }
 .searchtable td { padding-top:2px; }
 .table-caption {margin: 0.5em 0px 1.0em 30px; padding: 0px; clear: both; text-align: left; font-size: 120%;}
 
 .narrowtable {font-size: 10px; line-height: 2.0em; clear: left; padding: 0px; margin: 0.5em 0px 0.2em 0px; border: solid 0px rgb(150,150,150); empty-cells: show; border-collapse: collapse; background-color: rgb(255,255,255);}
 .narrowtable tr {margin: 0px; padding: 0px;}
 .narrowtable td {padding: 0 7px 0 7px; border: solid 0px rgb(150,150,150); text-align: left; font-size: 120%;}
-.narrowtable th {margin: 0px; background-color: #d8e5c9;color: #404040; padding: 2px 7px 2px 7px; border-top: solid 1px #404040; border-bottom: solid 1px #404040; empty-cells: show; text-align: left; font-size: 120%; }
+.narrowtable th {margin: 0px; background-color: #deebcd; color: #404040; padding: 2px 7px 2px 7px; border-top: solid 1px #404040; border-bottom: solid 1px #404040; empty-cells: show; text-align: left; font-size: 120%; }
 .narrowtable-caption {margin: 0.5em 0px 1.0em 30px; padding: 0px; clear: both; text-align: left; font-size: 120%;}
 
 td.listicon {

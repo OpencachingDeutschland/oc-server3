@@ -542,6 +542,7 @@
 		return $result;
 	}
 
+	// returns false if no more matching rows exist
 	function sql_fetch_row($rs)
 	{
 		global $opt;

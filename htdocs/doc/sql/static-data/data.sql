@@ -2487,11 +2487,16 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2065', 'Guest',
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2066', 'Open chat in a new tab/window', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2067', 'Status', '2013-05-28 16:51:40');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2068', 'since June 2013', '2013-05-28 16:51:40');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2069', 'since February 2012', '2013-05-28 16:51:40');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2069', 'since deletion date February 2012', '2013-05-28 16:51:40');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2070', 'One ore more emails to this user could not be delivered. It might be a good idea to additionally log comments on the user\'s geocaches, and/or trying to contact him/her through other channels like a message board account or another geocaching platform.', '2013-05-28 16:51:40');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2071', 'This cache has been \"temporarily unavailable\" for more than one year now; therefore it is being archived automatically. The owner may decide to maintain the cache and re-enable the listing.', '2013-05-28 16:51:40');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2072', 'This event took place more than five weeks ago; therefore it is being archived automatically. The owner may re-enable the listing if it should stay active for some exceptional reason.', '2013-05-28 16:51:40');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2073', 'This user account is disabled.', '2013-05-28 16:51:40');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2074', 'Adoptions_', '2013-05-28 16:51:40');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2075', 'since September 2012', '2013-05-28 16:51:40');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2076', 'From Owner', '2013-05-28 16:51:40');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2077', 'To Owner', '2013-05-28 16:51:40');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2078', 'Maintenance', '2013-05-28 16:51:40');
 
 -- Table sys_trans_ref
 SET NAMES 'utf8';
@@ -4983,7 +4988,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('158', 'DE', 'Französisch', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('159', 'DE', 'Englisch', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('160', 'DE', 'Deutsch', '2010-08-28 11:48:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('161', 'DE', 'Vorsicht: Wenn Du diese Option verwenden, vergiss niemals auf Logout zu klicken, wenn Du dich von einem PC aus angemeldet hast der auch Fremden zugänglich ist. Ansonsten könnte ein Fremder Deine persönlichen Account-Daten auslesen und ändern.', '2010-08-28 11:48:06');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('161', 'DE', 'Vorsicht: Wenn du diese Option verwenden, vergiss niemals auf Logout zu klicken, wenn du dich von einem PC aus angemeldet hast der auch Fremden zugänglich ist. Ansonsten könnte ein Fremder deine persönlichen Account-Daten auslesen und ändern.', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('162', 'DE', 'Simbabwe', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('163', 'DE', 'Sambia', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('164', 'DE', 'Südafrika', '2010-08-28 11:48:06');
@@ -5413,11 +5418,11 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('601', 'DE', 'Folgender Sicherheits-Code wurde generiert: %1', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('602', 'DE', 'Der Sicherheits-Code bleibt drei Tage gültig.', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('603', 'DE', 'Dein neues Passwort kannst du unter %1newpw.php eingeben.', '2010-08-28 11:48:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('604', 'DE', 'Um ein neues Passwort einzugeben, musst Du zunächst einen Sicherheits-Code anfordern. Dieser wird per E-Mail an Dich gesendet.', '2010-08-28 11:48:06');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('604', 'DE', 'Um ein neues Passwort einzugeben, musst du zunächst einen Sicherheits-Code anfordern. Dieser wird per E-Mail an dich gesendet.', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('605', 'DE', 'Die E-Mail-Adresse gehört zu keinem gültigen Benutzer.', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('606', 'DE', 'Dir wurde eine E-Mail mit dem Sicherheits-Code zugesandt.', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('607', 'DE', 'Der Sicherheitscode konnte wegen eines Fehlers nicht gesendet werden.', '2010-08-28 11:48:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('608', 'DE', 'Gib bitten deine E-Mail-Adresse, den Sicherheitscode und das neue Passwort ein. Der Sicherheitscode bleibt drei Tage gültig; danach musst Du ihn ggf. erneut anfordern.', '2010-08-28 11:48:06');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('608', 'DE', 'Gib bitte deine E-Mail-Adresse, den Sicherheitscode und das neue Passwort ein. Der Sicherheitscode bleibt drei Tage gültig; danach musst du ihn ggf. erneut anfordern.', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('609', 'DE', 'Der angegebene Benutzer ist noch nicht aktiviert.', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('610', 'DE', 'Sicherheitscode:', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('611', 'DE', 'Der Sicherheitscode ist abgelaufen. Fordere bitte einen neuen an.', '2010-08-28 11:48:06');
@@ -6431,11 +6436,16 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2066', 'DE', 'Chat in neuem Tab/Fenster öffnen', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2067', 'DE', 'Status', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2068', 'DE', 'seit Juni 2013', '2013-04-25 23:00:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2069', 'DE', 'seit Februar 2012', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2069', 'DE', 'seit Löschdatum Februar 2012', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2070', 'DE', 'Eine oder mehrere Emails an diesen Benutzer konnten nicht zugestellt werden. Es könnte ratsam sein, Hinweise zu seinen Caches zusätzlich zu loggen, und ihn ggf. über weitere Adressen wie z.B. Forenaccounts oder andere Geocaching-Plattformen zu kontaktieren.', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2071', 'DE', 'Dieser Cache ist seit mehr als einem Jahr &bdquo;momentan nicht verfügbar&ldquo;; daher wird er automatisch archiviert. Er kann vom Besitzer jederzeit instand gesetzt und reaktiviert werden.', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2072', 'DE', 'Dieses Event fand vor über fünf Wochen statt; daher wird es automatisch archiviert. Das Listing kann vom Owner selbst reaktiviert werden, falls es aus besonderen Gründen weiter aktiv bleiben soll.', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2073', 'DE', 'Dieser Benutzer ist deaktiviert.', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2074', 'DE', 'Adoptionen', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2075', 'DE', 'seit September 2012', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2076', 'DE', 'Alter Besitzer', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2077', 'DE', 'Neuer Besitzer', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2078', 'DE', 'Wartung', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'EN', 'Reorder IDs \r', '2010-09-02 00:15:30');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'EN', 'The database could not be reconnected.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'EN', 'Testing – please do not login', '2010-08-28 11:48:07');
@@ -7995,11 +8005,16 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2066', 'EN', 'Open chat in a new tab/window', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2067', 'EN', 'Status', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2068', 'EN', 'since June 2013', '2013-04-25 23:00:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2069', 'EN', 'since February 2012', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2069', 'EN', 'since deletion date February 2012', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2070', 'EN', 'One ore more emails to this user could not be delivered. It might be a good idea to additionally log comments on the user\'s geocaches, and/or trying to contact him/her through other channels like a message board account or another geocaching platform.', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2071', 'EN', 'This cache has been \"temporarily unavailable\" for more than one year now; therefore it is being archived automatically. The owner may decide to maintain the cache and re-enable the listing.', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2072', 'EN', 'This event took place more than five weeks ago; therefore it is being archived automatically. The owner may re-enable the listing if it should stay active for some exceptional reason.', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2073', 'EN', 'This user account is disabled.', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2074', 'EN', 'Adoptions', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2075', 'EN', 'since September 2012', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2076', 'EN', 'From Owner', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2077', 'EN', 'To Owner', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2078', 'EN', 'Maintenance', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'ES', 'Reordenar ID', '2010-12-09 00:17:55');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'ES', 'La base de datos no se pudo conectar.', '2010-12-09 00:17:55');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'ES', 'En pruebas - por favor, no entre.', '2010-12-09 00:17:55');

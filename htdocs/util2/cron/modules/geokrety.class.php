@@ -160,9 +160,14 @@ class geokrety
 		// OKAPI changelog actions. This probably can be ignored as OKAPI will verify
 		// if data has really changed.
 
-		// remove waypoints for this krety
-		sql("DELETE FROM `gk_item_waypoint` WHERE id='&1'", $id);
 		// update associated waypoints
+		/**
+		 * This does not work properly, because geokret.waypoints does NOT contain the
+		 * current location of the Kret but something like the last cache where it was logged.
+		 * Evaluating the 'state' fielt might help, but for now, we import waypoint data
+		 * from the moves instead.
+
+		sql("DELETE FROM `gk_item_waypoint` WHERE id='&1'", $id);
 		$waypoints = $element->getElementsByTagName('waypoints');
 		if ($waypoints->length > 0)
 		{
@@ -178,6 +183,7 @@ class geokrety
 					$id, $wp);
 			}
 		}
+		*/
 	}
 
 
@@ -227,30 +233,30 @@ class geokrety
 			}
 		}
 
-		/**
-		 * This Code is buggy; it produces wrong gk_item_waypoint entries (why?).
-		 * See http://redmine.opencaching.de/issues/18.
-		 * We use geokret.waypoints information instead, see importGeoKret().
-		 * That's preferrable anyway, because it does not mage assumptions on internal
-		 * Geokrety.org behaviour (e.g. the order of moves with identical datetime). 
-
-		// now update the current gk-waypoints based on the last move
+		// update the current gk-waypoints based on the last move
 		sql("DELETE FROM `gk_item_waypoint` WHERE `id`='&1'", $gkid);
-		$rs = sql("SELECT * FROM `gk_move` WHERE `itemid`='&1' AND `logtypeid`!=2 ORDER BY `datemoved` DESC LIMIT 1", $gkid);
+		$rs = sql("
+				SELECT `id`,`logtypeid` FROM `gk_move`
+				WHERE `itemid`='&1' AND `logtypeid`!=2
+				ORDER BY `datemoved` DESC LIMIT 1",
+			$gkid);
 		$r = sql_fetch_assoc($rs);
 		sql_free_result($rs);
 		if ($r === false) return;
 
-		if ($r['logtypeid'] == 0 || $r['logtypeid'] == 3)
+		if ($r['logtypeid'] == 0 /* dropped */ || $r['logtypeid'] == 3 /* seen in */)
 		{
-			sql("INSERT INTO `gk_item_waypoint` (`id`, `wp`) SELECT '&1' AS `id`, `wp` FROM `gk_move_waypoint` WHERE `id`='&2' AND `wp`!=''", $gkid, $id);
+			sql("
+				INSERT INTO `gk_item_waypoint` (`id`, `wp`)
+				SELECT '&1' AS `id`, `wp`
+				FROM `gk_move_waypoint`
+				WHERE `id`='&2' AND `wp`!=''",
+				$gkid, $r['id']);  // "late log" bugfix: replaced $id paramter by $r['id']
 		}
 		else
 		{
 			// do nothing
 		}
-
-		*/
 	}
 
 

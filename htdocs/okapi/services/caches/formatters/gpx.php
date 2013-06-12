@@ -118,7 +118,7 @@ class WebService
 		# We don't need to do any additional queries here.
 
 		$fields = 'code|name|location|date_created|url|type|status|size|size2|oxsize'.
-			'|difficulty|terrain|description|hint|rating|owner|url|internal_id';
+			'|difficulty|terrain|description|hint2|rating|owner|url|internal_id';
 		if ($vars['images'] != 'none')
 			$fields .= "|images";
 		if ($vars['attrs'] != 'none')

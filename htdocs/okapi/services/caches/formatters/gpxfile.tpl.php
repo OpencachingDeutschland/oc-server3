@@ -113,7 +113,7 @@ http://www.gsak.net/xmlv1/5 http://www.gsak.net/xmlv1/5/gsak.xsd
 							&lt;/ul&gt;
 						<? } ?>
 					</groundspeak:long_description>
-					<groundspeak:encoded_hints><?= Okapi::xmlescape($c['hint']) ?></groundspeak:encoded_hints>
+					<groundspeak:encoded_hints><?= Okapi::xmlescape($c['hint2']) ?></groundspeak:encoded_hints>
 					<? if ($vars['latest_logs']) { /* Does user want us to include latest log entries? */ ?>
 						<groundspeak:logs>
 							<? foreach ($c['latest_logs'] as $log) { ?>

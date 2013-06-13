@@ -352,7 +352,7 @@
 			$thisline = mb_ereg_replace('{hints}', '', $thisline);
 		else
 		  // Ocprop:  <groundspeak:encoded_hints>(.*?)<\/groundspeak:encoded_hints>
-			$thisline = mb_ereg_replace('{hints}', '      <groundspeak:encoded_hints>' . xmlentities(strip_tags($r['hint'])) . '</groundspeak:encoded_hints>
+			$thisline = mb_ereg_replace('{hints}', '      <groundspeak:encoded_hints><![CDATA[' . decodeEntities(strip_tags($r['hint'])) . ']]></groundspeak:encoded_hints>
 ', $thisline);
 
 		$thisline = mb_ereg_replace('{shortdesc}', decodeEntities($r['short_desc']), $thisline);

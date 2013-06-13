@@ -221,7 +221,7 @@ Logeinträge:
 		if ($r['hint'] == '')
 			$thisline = mb_ereg_replace('{hints}', '', $thisline);
 		else
-			$thisline = mb_ereg_replace('{hints}', str_rot13_html(strip_tags($r['hint'])), $thisline);
+			$thisline = mb_ereg_replace('{hints}', str_rot13_html(decodeEntities(strip_tags($r['hint']))), $thisline);
 		
 		$thisline = mb_ereg_replace('{shortdesc}', $r['short_desc'], $thisline);
 		
@@ -300,7 +300,13 @@ Logeinträge:
 	}
 
 	exit;
-	
+
+	function decodeEntities($str)
+	{
+		$str = html_entity_decode($str, ENT_COMPAT, "UTF-8");
+		return $str;
+	}
+
 	function html2txt($html)
 	{
 		$str = mb_ereg_replace("\r\n", '', $html);

@@ -45,8 +45,8 @@
       <groundspeak:terrain>{terrain}</groundspeak:terrain>
       <groundspeak:country>{country}</groundspeak:country>
       <groundspeak:state>{state}</groundspeak:state>
-      <groundspeak:short_description html="True">{shortdesc}</groundspeak:short_description>
-      <groundspeak:long_description html="True">{desc}&lt;br /&gt;{images}</groundspeak:long_description>
+      <groundspeak:short_description html="True"><![CDATA[{shortdesc}]]></groundspeak:short_description>
+      <groundspeak:long_description html="True"><![CDATA[{desc}<br />{images}]]></groundspeak:long_description>
 {hints}      <groundspeak:logs>
 {logs}      </groundspeak:logs>
       <groundspeak:travelbugs>
@@ -71,7 +71,7 @@
    *    <groundspeak:terrain>(.*?)<\/groundspeak:terrain>
    *    <groundspeak:country>(.*?)<\/groundspeak:country>
    *    <groundspeak:state>(.*?)<\/groundspeak:state>
-	 *    <groundspeak:short_description html="(.*?)".*?>(.*?)<\/groundspeak:short_description>
+   *    <groundspeak:short_description html="(.*?)".*?>(.*?)<\/groundspeak:short_description>
    *    <groundspeak:long_description html="(.*?)".*?>(.*?)<\/groundspeak:long_description>
    *    <groundspeak:encoded_hints>(.*?)<\/groundspeak:encoded_hints>
    */
@@ -82,7 +82,7 @@
         <groundspeak:date>{date}</groundspeak:date>
         <groundspeak:type>{type}</groundspeak:type>
         <groundspeak:finder id="{userid}">{username}</groundspeak:finder>
-        <groundspeak:text encoded="False">{text}</groundspeak:text>
+        <groundspeak:text encoded="False"><![CDATA[{text}]]></groundspeak:text>
       </groundspeak:log>';
 
 	$gpxGeokrety = '		<groundspeak:travelbug id="{gkid}" ref="{gkref}">
@@ -352,19 +352,19 @@
 			$thisline = mb_ereg_replace('{hints}', '', $thisline);
 		else
 		  // Ocprop:  <groundspeak:encoded_hints>(.*?)<\/groundspeak:encoded_hints>
-			$thisline = mb_ereg_replace('{hints}', '      <groundspeak:encoded_hints>' . xmlentities(strip_tags($r['hint'])) . '</groundspeak:encoded_hints>
+			$thisline = mb_ereg_replace('{hints}', '      <groundspeak:encoded_hints><![CDATA[' . decodeEntities(strip_tags($r['hint'])) . ']]></groundspeak:encoded_hints>
 ', $thisline);
 
-		$thisline = mb_ereg_replace('{shortdesc}', xmlentities($r['short_desc']), $thisline);
+		$thisline = mb_ereg_replace('{shortdesc}', decodeEntities($r['short_desc']), $thisline);
 
 		$desc = str_replace('<img src="images/uploads/','<img src="' . $absolute_server_URI . 'images/uploads/', $r['desc']);		
 		$license = getLicenseDisclaimer(
 			$r['userid'], $r['username'], $r['data_license'], $r['cacheid'], $locale, true, true);
 		if ($license != "")
 			$desc .= "<p><em>$license</em></p>";
-		$thisline = mb_ereg_replace('{desc}', xmlentities($desc), $thisline);
+		$thisline = mb_ereg_replace('{desc}', decodeEntities($desc), $thisline);
 
-		$thisline = mb_ereg_replace('{images}', xmlentities(getPictures($r['cacheid'])), $thisline);
+		$thisline = mb_ereg_replace('{images}', getPictures($r['cacheid']), $thisline);
 
 		if (isset($gpxType[$r['type']]))
 		$thisline = mb_ereg_replace('{type}', $gpxType[$r['type']], $thisline);
@@ -443,7 +443,7 @@
 					$logtype = $gpxLogType[0];
 					
 				$thislog = mb_ereg_replace('{type}', $logtype, $thislog);
-				$thislog = mb_ereg_replace('{text}', xmlentities($rLog['text']), $thislog);
+				$thislog = mb_ereg_replace('{text}', decodeEntities($rLog['text']), $thislog);
 				
 				$logentries .= $thislog . "\n";
 			}
@@ -467,7 +467,7 @@
 				$logtype = $gpxLogType[0];
 				
 			$thislog = mb_ereg_replace('{type}', $logtype, $thislog);
-			$thislog = mb_ereg_replace('{text}', xmlentities($rLog['text']), $thislog);
+			$thislog = mb_ereg_replace('{text}', decodeEntities($rLog['text']), $thislog);
 			
 			$logentries .= $thislog . "\n";
 		}
@@ -570,18 +570,35 @@
 
 	exit;
 	
+	function decodeEntities($str)
+	{
+		$str = changePlaceholder($str);
+		$str = html_entity_decode($str, ENT_COMPAT, "UTF-8");
+		$str = changePlaceholder($str, true);
+		return $str;
+	}
+
+	function changePlaceholder($str, $inverse = true)
+	{
+		$placeholter[0] = '{oc-placeholder-lt}'; $entity[0] = '&lt;';
+		$placeholder[1] = '{oc-placeholder-gt}'; $entity[1] = '&gt;';
+		for ($i=0;$i<=1;$i++)
+		{
+			if (!$inverse)
+			{
+				$str = mb_ereg_replace($entity[$i], $placeholder[$i], $str);
+			}
+			else
+			{
+				$str = mb_ereg_replace($placeholder[$i], $entity[$i], $str);
+			}
+		}
+		return $str;
+	}
+
 	function xmlentities($str)
 	{
-		$from[0] = '&'; $to[0] = '&amp;';
-		$from[1] = '<'; $to[1] = '&lt;';
-		$from[2] = '>'; $to[2] = '&gt;';
-		$from[3] = '"'; $to[3] = '&quot;';
-		$from[4] = '\''; $to[4] = '&apos;';
-		$from[5] = ']]>'; $to[5] = ']] >';
-
-		for ($i = 0; $i <= 4; $i++)
-			$str = mb_ereg_replace($from[$i], $to[$i], $str);
-
+		$str = htmlspecialchars($str, ENT_COMPAT, "UTF-8");
 		return filterevilchars($str);
 	}
 	
@@ -612,8 +629,8 @@
 		return null;
 	}
 
-  // based on oc.pl code, but embedded thumbs instead of full pictures
-  // (also to hide spoilers first)
+	// based on oc.pl code, but embedded thumbs instead of full pictures
+	// (also to hide spoilers first)
 	function getPictures($cacheid)
 	{
 		global $translate, $absolute_server_URI;

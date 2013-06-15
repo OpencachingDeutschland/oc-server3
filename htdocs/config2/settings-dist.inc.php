@@ -444,6 +444,7 @@
 
 	$opt['cron']['geokrety']['run'] = true;
 	$opt['cron']['autoarchive']['run'] = false;
+	$opt['cron']['gcwp']['sources'] = array();
 
 	/* E-Mail settings
 	 *

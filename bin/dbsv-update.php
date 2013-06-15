@@ -235,4 +235,15 @@
 		      WHERE `eventid`=5 AND `module`='notify_newcache'");
 	}
 
+	function dbv_112()  // added maintained GC waypoints
+	{
+		if (!sql_field_exists('caches','wp_gc_maintained'))
+		{
+			sql("ALTER TABLE `caches` ADD COLUMN `wp_gc_maintained` varchar(7) NOT NULL AFTER `wp_gc`");
+			sql("UPDATE `caches` SET `wp_gc_maintained`=UCASE(TRIM(`wp_gc`)) WHERE SUBSTR(TRIM(`wp_gc`),1,2)='GC'");
+		}
+		if (!sql_index_exists('caches', 'wp_gc_maintained'))
+			sql("ALTER TABLE `caches` ADD INDEX `wp_gc_maintained` (`wp_gc_maintained`)");
+	}
+
 ?>

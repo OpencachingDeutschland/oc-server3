@@ -310,7 +310,7 @@ function switchAttributeCat2()
 			<td>&nbsp;</td>
 			<td colspan="2">
 				<input type="checkbox" name="f_inactive" value="1" id="l_inactive" class="checkbox" onclick="sync_options(this)" {f_inactive_checked} > <label for="l_inactive">{t}Inactive{/t}</label>
-				<input type="checkbox" name="f_otherPlatforms" value="1" id="l_otherPlatforms" class="checkbox" onclick="sync_options(this)" {f_otherPlatforms_checked} > <label for="l_otherPlatforms">{t}Multiple listings (waypoint is also set on gc.com or nc.com){/t}</label>
+				<input type="checkbox" name="f_otherPlatforms" value="1" id="l_otherPlatforms" class="checkbox" onclick="sync_options(this)" {f_otherPlatforms_checked} > <label for="l_otherPlatforms">{t}GC listings (also listed at gc.com){/t}</label>
 			</td>
 		</tr>
 	</table>

@@ -4,7 +4,9 @@
  *
  *  Unicode Reminder メモ
  *
- *  Server part of Mozilla search plugin for OC
+ *  Search cache listing by waypoint
+ *  Server part of Mozilla search plugin for OC;
+ *  also used for waypoint search field.
  ***************************************************************************/
 
 	require('./lib2/web.inc.php');
@@ -91,9 +93,15 @@
 					
 					if ((($target == 'oc') || ($target == 'nc') || ($target == 'gc')) && mb_ereg_match('(('.$opt['logic']['ocprefixes'].'|gc)([a-z0-9]){4,5}|n([a-f0-9]){5,5})$', mb_strtolower($searchfor)))
 					{
+						if ($target == 'gc')
+							$wpfield = "IF(`wp_gc_maintained`='',`wp_gc`,`wp_gc_maintained`)";
+						else if ($target == 'nc')
+							$wpfield = "`wp_nc`";
+						else
+							$wpfield = "`wp_oc`";
 						// get cache_id from DB
 						// GC/NC waypoints can be duplicates -> return first match with least status number
-						$rs = sql("SELECT `cache_id` FROM `caches` INNER JOIN `cache_status` ON `caches`.`status`=`cache_status`.`id` WHERE (`cache_status`.`allow_user_view`=1 OR `caches`.`user_id`='&1') AND `wp_" . sql_escape($target) . "`='&2' ORDER BY `caches`.`status`,`caches`.`cache_id` LIMIT 0,1", $login->userid, $searchfor);
+						$rs = sql("SELECT `cache_id` FROM `caches` INNER JOIN `cache_status` ON `caches`.`status`=`cache_status`.`id` WHERE (`cache_status`.`allow_user_view`=1 OR `caches`.`user_id`='&1') AND " . $wpfield . "='&2' ORDER BY `caches`.`status`,`caches`.`cache_id` LIMIT 0,1", $login->userid, $searchfor);
 						if (sql_num_rows($rs))
 						{
 							$record = sql_fetch_array($rs);

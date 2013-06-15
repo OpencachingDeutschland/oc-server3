@@ -561,6 +561,9 @@
 						IF NEW.`status` <> 5 THEN
 							SET NEW.`is_publishdate`=1;
 						END IF;
+						IF SUBSTR(TRIM(NEW.`wp_gc`),1,2)='GC' THEN
+							SET NEW.`wp_gc_maintained`=UCASE(TRIM(NEW.`wp_gc`));
+						END IF;
 						SET NEW.`need_npa_recalc`=1;
 
 						IF ISNULL(NEW.`uuid`) OR NEW.`uuid`='' THEN
@@ -672,6 +675,11 @@
 							IF OLD.`status`!=NEW.`status` THEN
 								CALL sp_touch_cache(OLD.`cache_id`, FALSE);
 							END IF;
+						END IF;
+
+						IF NEW.`wp_gc`<>OLD.`wp_gc` AND
+						   (SUBSTR(TRIM(NEW.`wp_gc`),1,2)='GC' OR TRIM(NEW.`wp_gc`)='') THEN
+							SET NEW.`wp_gc_maintained`=UCASE(TRIM(NEW.`wp_gc`));
 						END IF;
 
 						IF OLD.`longitude`!=NEW.`longitude` OR 

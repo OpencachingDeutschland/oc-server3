@@ -205,7 +205,7 @@
 				<div class="buffer" style="height: 30px;"></div>
 
 				<!-- Suchbox -->
-				<div id="suchbox"><form action="searchplugin.php" method="post" style="display:inline;"><b>{t}Waypoint search:{/t}</b><input type="hidden" name="source" value="waypoint-suche" /> <input type="text" name="userinput" size="10" /> <input type="submit" value="Go" /></form></div>
+				<div id="suchbox"><form action="searchplugin.php" method="post" style="display:inline;"><b>{t}Waypoint search:{/t}</b><input type="hidden" name="sourceid" value="waypoint-search" /> <input type="text" name="userinput" size="10" /> <input type="submit" value="Go" /></form></div>
 			
 				<!-- NAVIGATION -->
 				<!-- Navigation Level 3 -->

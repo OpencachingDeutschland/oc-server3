@@ -2374,7 +2374,9 @@ function toggle_attribselection(bSaveCookies)
 					<tr>
 						<td style="white-space:nowrap">
 							<input type="checkbox" id="f_otherPlatforms" name="f_otherPlatforms" value="1" onchange="filter_changed()" class="checkbox" />
-							<label for="f_otherPlatforms">{t}Double listings{/t}</label>
+							<label for="f_otherPlatforms">{t}GC listings{/t}</label>
+							{* the id is still "f_otherPlatforms" though it only applies to GC
+							   for compatiblity with old stored or external queries *}
 						</td>
 					</tr>
 				</table>

@@ -449,7 +449,8 @@ function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $z
 	                                    `caches`.`longitude` `longitude`, `caches`.`latitude` `latitude`, `caches`.`type` `type`, 
 	                                    `caches`.`country` `country`, `caches`.`size` `size`, `caches`.`desc_languages` `desclanguages`,
 	                                    `caches`.`difficulty` `difficulty`, `caches`.`terrain` `terrain`, `caches`.`way_length` `way_length`, 
-	                                    `caches`.`search_time` `search_time`, `caches`.`wp_gc` `wp_gc`, `caches`.`wp_nc` `wp_nc`, 
+	                                    `caches`.`search_time` `search_time`, `caches`.`wp_gc` `wp_gc`, `caches`.`wp_nc` `wp_nc`,
+	                                    /* we deliberatly do not use gc_wp_maintained here */
 	                                    `caches`.`wp_oc` `wp_oc`, `caches`.`date_hidden` `date_hidden`, `caches`.`date_created` `date_created`, `caches`.`is_publishdate` `is_publishdate`, 
 	                                    `caches`.`last_modified` `last_modified`, `caches`.`status` `status`, `caches`.`node` `node`,
 	                                    `cache_status`.`allow_user_view`

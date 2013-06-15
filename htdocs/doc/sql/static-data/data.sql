@@ -1981,7 +1981,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1502', 'Enter t
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1503', 'Enter the city, please!', '2010-09-11 02:13:32');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1504', 'Enter the owner, please!', '2010-09-11 02:13:32');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1505', 'Enter the username, please!', '2010-09-11 02:13:32');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1506', 'Multiple listings (waypoint is also set on gc.com or nc.com)', '2010-09-11 02:13:32');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1506', 'GC listings (also listed at gc.com)', '2010-09-11 02:13:32');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1507', 'The selected output format is unknown!', '2010-09-11 02:13:33');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1508', 'The search operation could not be executed, please reenter the search data.', '2010-09-11 02:13:33');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1509', 'Find', '2010-09-11 02:13:33');
@@ -2140,7 +2140,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1668', 'Contain
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1669', 'Hide', '2010-09-19 00:23:51');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1670', 'My owns', '2010-09-19 00:23:51');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1671', 'Not active', '2010-09-19 00:23:51');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1672', 'Double listings', '2010-09-19 00:23:51');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1672', 'GC listings', '2010-09-19 00:23:51');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1673', 'Rating', '2010-09-19 00:23:51');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1674', 'Min. recommendations', '2010-09-19 00:23:51');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1675', 'Drag Zoom', '2010-09-19 00:23:51');
@@ -5932,7 +5932,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1503', 'DE', 'Bitte im Feld für Ortsname etwas eingeben!', '2010-09-11 02:32:01');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1504', 'DE', 'Bitte im Feld für Besitzer etwas eingeben!', '2010-09-11 02:31:54');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1505', 'DE', 'Bitte im Feld für Finder etwas eingeben!', '2010-09-11 02:31:49');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1506', 'DE', 'Mehrfach-Listings (Wegpunkt bei gc.com oder nc.com gesetzt)', '2010-09-11 02:31:44');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1506', 'DE', 'GC-Listings (auch bei gc.com veröffentlicht)', '2010-09-11 02:31:44');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1507', 'DE', 'Das ausgewählte Ausgabeformat existiert nicht!', '2010-09-11 02:31:38');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1508', 'DE', 'Die Suchanfrage konnte nicht ausgeführt werden; bitte gib die Suchdaten erneut ein.', '2010-09-11 02:31:33');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1509', 'DE', 'Gefunden', '2010-09-11 02:31:18');
@@ -6091,7 +6091,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1669', 'DE', 'Ausblenden', '2010-09-27 00:32:12');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1670', 'DE', 'meine eigenen', '2010-09-27 00:30:55');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1671', 'DE', 'inaktiv', '2010-09-27 00:30:39');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1672', 'DE', 'mehrfach gelistet', '2010-09-27 00:30:26');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1672', 'DE', 'auf GC gelistet', '2010-09-27 00:30:26');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1673', 'DE', 'Bewertung', '2010-09-27 00:30:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1674', 'DE', 'min. Empfehlungen', '2010-09-27 00:29:32');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1675', 'DE', 'Drag Zoom', '2010-09-27 00:29:22');
@@ -7534,7 +7534,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1503', 'EN', 'Enter the city, please!', '2010-09-11 02:32:01');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1504', 'EN', 'Enter the owner, please!', '2010-09-11 02:31:54');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1505', 'EN', 'Enter the username, please!', '2010-09-11 02:31:49');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1506', 'EN', 'multiple listings (waypoint is also set on gc.com or nc.com)', '2010-09-11 02:31:44');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1506', 'EN', 'GC listings (also listed at gc.com)', '2010-09-11 02:31:44');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1507', 'EN', 'The selected output format is unknown!', '2010-09-11 02:31:38');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1508', 'EN', 'The search operation could not be executed, please reenter the search data.', '2010-09-11 02:31:33');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1509', 'EN', 'Find', '2010-09-11 02:31:18');
@@ -7693,7 +7693,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1669', 'EN', 'Hide', '2010-09-27 00:22:55');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1670', 'EN', 'My owns', '2010-09-27 00:22:49');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1671', 'EN', 'Not active', '2010-09-27 00:22:44');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1672', 'EN', 'Double listings', '2010-09-27 00:22:37');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1672', 'EN', 'GC listings', '2010-09-27 00:22:37');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1673', 'EN', 'Rating', '2010-09-27 00:22:31');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1674', 'EN', 'Min. recommendations', '2010-09-27 00:22:25');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1675', 'EN', 'Drag Zoom', '2010-09-27 00:22:19');
@@ -9102,7 +9102,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1503', 'ES', '¡Insertar una ciudad, por favor!', '2010-12-09 00:18:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1504', 'ES', '¡Insertar un propietario, por favor!', '2010-12-09 00:18:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1505', 'ES', '¡Insertar un usuario, por favor!', '2010-12-09 00:18:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1506', 'ES', 'Registro multiple(waypoint presente en gc.com o nc.com)', '2010-12-09 00:18:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1506', 'ES', 'Registro multiple (waypoint presente en gc.com)', '2010-12-09 00:18:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1507', 'ES', '¡El formato de salida seleccionado es desconocido!', '2010-12-09 00:18:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1508', 'ES', 'La operación de búsqueda no se pudo ejecutar, por favor, vuelva a introducir los datos de búsqueda.', '2010-12-09 00:18:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1509', 'ES', 'Encontrar', '2010-12-09 00:18:00');
@@ -9259,7 +9259,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1669', 'ES', 'Escondidos', '2010-12-09 00:18:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1670', 'ES', 'Mio', '2010-12-09 00:18:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1671', 'ES', 'No activo', '2010-12-09 00:18:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1672', 'ES', 'listado doble', '2010-12-09 00:18:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1672', 'ES', 'listado GC', '2010-12-09 00:18:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1673', 'ES', 'Valoración', '2010-12-09 00:18:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1674', 'ES', 'Recomendaciones min.', '2010-12-09 00:18:01');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1675', 'ES', 'Mover el zoom', '2010-12-09 00:18:01');
@@ -10656,7 +10656,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1503', 'IT', 'Inserisci la città, per favore!', '2010-10-27 18:49:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1504', 'IT', 'Inserisci il proprietario, per favore!', '2010-10-27 18:49:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1505', 'IT', 'Inserisci l\'utente, per favore!', '2010-10-27 18:49:19');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1506', 'IT', 'Registrate su più siti (waypoint presente in gc.com o nc.com)', '2010-10-27 18:49:19');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1506', 'IT', 'Registrate su più siti (waypoint presente in gc.com)', '2010-10-27 18:49:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1507', 'IT', 'Il formato di uscita selezionato è sconosciuto!', '2010-09-11 02:31:38');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1508', 'IT', 'La ricerca non può essere eseguita, per favore reinserisci i dati di ricerca.', '2010-09-11 02:31:33');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1509', 'IT', 'Trovata', '2010-09-11 02:31:18');
@@ -10815,7 +10815,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1669', 'IT', 'Nascosta', '2010-10-27 18:49:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1670', 'IT', 'Mie', '2010-10-27 18:49:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1671', 'IT', 'Non attiva', '2010-10-27 18:49:19');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1672', 'IT', 'Doppio listing', '2010-10-27 18:49:19');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1672', 'IT', 'GC listing', '2010-10-27 18:49:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1673', 'IT', 'Valutazione', '2010-10-27 18:49:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1674', 'IT', 'Raccomandazioni min.', '2010-10-27 18:49:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1675', 'IT', 'Sposta zoom', '2010-10-27 18:49:19');
@@ -12048,7 +12048,6 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1669', 'NL', 'Verbergen', '2011-02-04 19:50:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1670', 'NL', 'Mijn eigen', '2011-02-04 19:50:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1671', 'NL', 'Niet actief', '2011-02-04 19:50:08');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1672', 'NL', 'Meerdere lijsten', '2011-02-04 19:50:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1673', 'NL', 'Waardering', '2011-02-04 19:50:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1674', 'NL', 'Min. aanbevelingen', '2011-02-04 19:50:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1675', 'NL', 'Drag Zoom', '2011-02-04 19:50:08');

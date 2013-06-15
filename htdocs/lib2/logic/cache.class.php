@@ -21,7 +21,7 @@ class cache
 		$cacheid = 0;
 		if (mb_strtoupper(mb_substr($wp, 0, 2)) == 'GC')
 		{
-			$rs = sql("SELECT `cache_id` FROM `caches` WHERE `wp_gc`='&1'", $wp);
+			$rs = sql("SELECT `cache_id` FROM `caches` WHERE `wp_gc_maintained`='&1'", $wp);
 			if (sql_num_rows($rs) != 1)
 			{
 				sql_free_result($rs);

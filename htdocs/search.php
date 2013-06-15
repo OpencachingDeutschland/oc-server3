@@ -922,7 +922,9 @@
 				if(!isset($options['f_otherPlatforms'])) $options['f_otherPlatforms']='0';
 				if($options['f_otherPlatforms'] != 0)
 				{
-					$sql_where[] = '`caches`.`wp_nc`=\'\' AND `caches`.`wp_gc`=\'\'';
+					// $sql_where[] = '`caches`.`wp_nc`=\'\' AND `caches`.`wp_gc`=\'\'';
+					// ignore NC listings, which are mostly unmaintained or dead
+					$sql_where[] = "`caches`.`wp_gc_maintained`=''";
 				}
 				if(!isset($options['country'])) $options['country']='';
 				if($options['country'] != '')

@@ -56,7 +56,7 @@
 	if ($useragent_msie && $useragent_msie_version < 9)
 		$tpl->assign('dotfill','');
 	else
-		$tpl->assign('dotfill','....................................................................................................................................................................................................................');
+		$tpl->assign('dotfill','...........................................................................................................');
 
 	//get not published caches
 	$tpl->assign_rs('notpublished', sql("SELECT `caches`.`cache_id`, `caches`.`name`, `caches`.`date_hidden`, `caches`.`date_activate`, `caches`.`status`, `caches`.`wp_oc`, `caches`.`type`

@@ -72,29 +72,20 @@
 		<p class="content-title-noshade-size3">
 			<img src="resource2/{$opt.template.style}/images/misc/22x22-traditional.gif" width="22" height="22"  style="align: left; margin-right: 10px;" />&nbsp;
 			{t 1=$hidden}Geocaches hidden: %1{/t} &nbsp;
+			{* Ocprop: (find|us|own)erid=([0-9]+) *}
 			<span class="content-title-link">[<a href="search.php?showresult=1&amp;expert=0&amp;output=HTML&amp;sort=byname&amp;ownerid={$login.userid}&amp;searchbyowner=&amp;f_inactive=0&calledbysearch=0">{t}Show details{/t}</a>]&nbsp; [<a href="search.php?showresult=1&amp;expert=0&amp;output=HTML&amp;sort=byname&amp;ownerid={$login.userid}&amp;searchbyowner=&amp;f_inactive=1&calledbysearch=0">... {t}only active caches{/t}</a>]</span>
 		</p>
 	</div>
 
-	{if $caches|@count == 0}
-		<p style="margin-bottom:24px">{t}No Geocaches hidden{/t}</p>
-	{else}
-
-	<table class="null" cellspacing="0" cellpadding="0" width="98%">
+	<table class="table" style="max-width:97%">
 		<tr>
-			<td>
-	<p style="line-height: 1.6em;">
-	{* Ocprop: (find|us|own)erid=([0-9]+) *}
-		<b>{t}Your geocaches hidden:{/t}</b>
-	</p>
-			</td>
-			<td>
-				<p style="text-align:right"><b>{t}Finds{/t} / {t}Last log{/t}</b></p>
-			</td>
+			{if $caches|@count == 0}
+				<td colspan="4"><p style="margin-bottom:24px">{t}No Geocaches hidden{/t}</p></td>
+			{else}
+				<td colspan="4"><b><span style="line-height:2em">{t}Your geocaches hidden:{/t}</b></span></td>
+				<td colspan="2" style="text-align:right"><span style="line-height:2em"><b>{t}Finds{/t} / {t}Last log{/t}</b></span></td>
+			{/if}
 		</tr>
-	</table>
-
-	<table class="table" width="97%">
 		{foreach from=$caches item=cacheItem}
 			{if $dotfill == ''}
 				{cycle values="listcolor1,listcolor2" assign=listcolor}
@@ -102,32 +93,32 @@
 				{assign var="listcolor" value=""}
 			{/if}
 			<tr>
-				<td style="width:1%">{include file="res_cacheicon_22.tpl" cachetype=$cacheItem.type}</td>
-				<td class="{$listcolor}" style="white-space:nowrap; width:1%">{$cacheItem.date_hidden|date_format:$opt.format.datelong}&nbsp;</td>
-				<td class="{$listcolor}" style="width:1%">{include file="res_cachestatus.tpl" status=$cacheItem.status}</td>
-				<td class="{$listcolor}" style="white-space:nowrap;min-width:300px;max-width:300px;overflow:hidden;"><a href="viewcache.php?wp={$cacheItem.wp_oc}">{$cacheItem.name|escape}</a> &nbsp;&nbsp; <span style="color:#a0a0a0">{$dotfill}</span></td>
-				<td class="{$listcolor}" style="text-align:right; width:1%; white-space:nowrap">&nbsp;&nbsp;{if $cacheItem.found>0}{$cacheItem.found}{/if} &nbsp;&nbsp; <a href="viewcache.php?cacheid={$cacheItem.cache_id}#logentries">{$cacheItem.lastlog|date_format:$opt.format.date}</a>&nbsp; {include file="res_logtype.tpl" type=$cacheItem.lastlog_type}</td>
+				<td>{include file="res_cacheicon_22.tpl" cachetype=$cacheItem.type}</td>
+				<td class="{$listcolor}"><nobr>{$cacheItem.date_hidden|date_format:$opt.format.datelong}&nbsp;</nobr></td>
+				<td class="{$listcolor}">{include file="res_cachestatus.tpl" status=$cacheItem.status}</td>
+				<td class="{$listcolor}" style="{if strlen($cacheItem.name) < 45}white-space:nowrap;{/if}min-width:300px;max-width:{if $dotfill==''}400{else}300{/if}px;overflow:hidden;"><a href="viewcache.php?wp={$cacheItem.wp_oc}">{$cacheItem.name|escape}</a>{if strlen($cacheItem.name) < 45} &nbsp;&nbsp; <span style="color:#b0b0b0">{$dotfill}</span>{/if}</td>
+				<td class="{$listcolor}" style="text-align:right;" align="right"><nobr>&nbsp;&nbsp;{if $cacheItem.found>0}{$cacheItem.found}{/if} &nbsp;&nbsp; <a href="viewcache.php?cacheid={$cacheItem.cache_id}#logentries">{$cacheItem.lastlog|date_format:$opt.format.date}</a>&nbsp; {include file="res_logtype.tpl" type=$cacheItem.lastlog_type}</nobr></td>
 			</tr>
 		{/foreach}
-	</table>
-	{/if}
 
-	{* ... not published caches *}
-	{if $notpublished|@count}
-		<p style="line-height: 1.4em; margin-top:16px;margin-bottom:12px"><b>{t}Unpublished Geocaches{/t}</b></p>
-
-		<table class="table">
+		{if $notpublished|@count}
+			<tr>
+				<td colspan="4">
+					<p style="margin-top:16px"><b>{t}Unpublished Geocaches{/t}</b></p>
+				</td>
+			</tr>
 			{foreach from=$notpublished item=notpublishedItem}
 				<tr>
 					<td>{include file="res_cacheicon_22.tpl" cachetype=$notpublishedItem.type}</td>
 					<td>{$notpublishedItem.date_activate|date_format:$opt.format.datelong}</td>
+					<td>{include file="res_cachestatus.tpl" status=$notpublishedItem.status}</td>
 					<td><a href="viewcache.php?wp={$notpublishedItem.wp_oc}">{$notpublishedItem.name|escape}</a></td>
 				</tr>
-			{foreachelse}
-				<tr><td>{t}All Geocaches are published{/t}</td></tr>
 			{/foreach}
-		</table>
-	{/if}
+		{/if}
+	</table>
+
+	{* ... not published caches *}
 
 	{* Other information *}
 	{*

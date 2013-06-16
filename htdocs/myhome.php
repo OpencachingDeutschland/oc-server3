@@ -51,8 +51,8 @@
 	                                WHERE `caches`.`user_id`='&1'
 	                                  AND `caches`.`status` != 5
 	                             GROUP BY `caches`.`cache_id`
-	                             ORDER BY `caches`.`date_hidden` DESC, `caches`.`date_created` DESC
-															    LIMIT 50", $login->userid));
+	                             ORDER BY `caches`.`date_hidden` DESC, `caches`.`date_created` DESC",
+															   $login->userid));
 	if ($useragent_msie && $useragent_msie_version < 9)
 		$tpl->assign('dotfill','');
 	else

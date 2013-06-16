@@ -25,5 +25,5 @@
 {elseif $type==14}
 	<img src="resource2/{$opt.template.style}/images/log/16x16-locked-invisible.png" alt="{t}Locked, invisible{/t}" title="{t}Locked, invisible{/t}" />
 {else}
-	{$type}
+	&nbsp;
 {/if}

@@ -19,11 +19,6 @@
 	else
 		$login->verify();
 
-	// check for peculiar browsers
-	$ua = isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : "";
-	$msie = preg_match('/MSIE [1-9]+.[0-9]+/',$ua) && !strpos($ua,"Opera");
-	$old_msie = $msie && preg_match('/MSIE [1-6].[0-9]+/',$ua);
-
 	$sMode = isset($_REQUEST['mode']) ? $_REQUEST['mode'] : '';
 	if ($sMode == 'locate')
 	{
@@ -217,8 +212,8 @@
 	$tpl->assign('min_maxrecords', $opt['map']['min_maxrecords']);
 	$tpl->assign('max_maxrecords', $opt['map']['max_maxrecords']);
 
-	$tpl->assign('msie',$msie);
-	$tpl->assign('old_msie',$old_msie);
+	$tpl->assign('msie',$useragent_msie);
+	$tpl->assign('old_msie',$useragent_msie && ($useragent_msie_version <= 6));
 
 	$tpl->assign('help_oconly', helppagelink("OConly"));
 	$tpl->assign('help_map', helppagelink("*map2"));
@@ -393,7 +388,7 @@ function output_namesearch($sName, $nLat, $nLon, $nResultId)
 function output_searchresult($nResultId, $compact, $nLon1, $nLon2, $nLat1, $nLat2,
                              $cachenames, $smallmap)
 {
-	global $login, $opt, $msie;
+	global $login, $opt, $useragent_msie;
 
 	// check if data is available and connect the right slave server
 	$nSlaveId = sql_value("SELECT `slave_id` FROM `map2_result` WHERE `result_id`='&1' AND DATE_ADD(`date_created`, INTERVAL '&2' SECOND)>NOW()", -2, $nResultId, $opt['map']['maxcacheage']);
@@ -418,7 +413,7 @@ function output_searchresult($nResultId, $compact, $nLon1, $nLon2, $nLat1, $nLat
 		$user_maxrecords =
 			sql_value("SELECT option_value FROM user_options WHERE user_id='&1' AND option_id=8",
 	               $opt['map']['maxrecords'] + 0, $login->userid);
-		if ($user_maxrecords > 0 && (!$msie || $user_maxrecords < $maxrecords))
+		if ($user_maxrecords > 0 && (!$useragent_msie || $user_maxrecords < $maxrecords))
 			$maxrecords = min(max($user_maxrecords, $opt['map']['min_maxrecords']), 
 			                  $opt['map']['max_maxrecords']);
 	}

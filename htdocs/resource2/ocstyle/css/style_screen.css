@@ -350,7 +350,7 @@ td.listicon {
 .printwptable td { line-height:1.4em; font-size:12px; }
 
 td.listcolor1 { background:#fff; line-height:1.7em; }
-td.listcolor2 { background:#eee; line-height:1.7em; }
+td.listcolor2 { background:#f0f0f0; line-height:1.7em; }
 
 /* Images */
 .img-left-noborder-notopmargin {float: left; margin: 0px 10px 0px 0px;}

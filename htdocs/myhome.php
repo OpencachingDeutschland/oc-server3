@@ -37,14 +37,29 @@
 	                           ORDER BY `cache_logs`.`date` DESC, `cache_logs`.`date_created` DESC LIMIT 10", $login->userid));
 
 	//get last hidden caches
-	$tpl->assign_rs('caches', sql("SELECT `cache_id`, `name`, `date_hidden`, `status`, `wp_oc`
+	$tpl->assign_rs('caches', sql("SELECT `caches`.`cache_id`, `caches`.`name`, `caches`.`type`,
+		                                    `caches`.`date_hidden`, `caches`.`status`, `caches`.`wp_oc`,
+		                                    `found`,
+		                                    COUNT(*) as `logcount`,
+		                                    MAX(`cache_logs`.`date`) AS `lastlog`,
+		                                    (SELECT `type` FROM `cache_logs` `cl2`
+																				 WHERE `cl2`.`cache_id`=`caches`.`cache_id`
+																			   ORDER BY `date` DESC,`id` DESC LIMIT 1) AS `lastlog_type` 
 	                                 FROM `caches`
-	                                WHERE `user_id`='&1'
+	                            LEFT JOIN `stat_caches` ON `stat_caches`.`cache_id`=`caches`.`cache_id`
+	                            LEFT JOIN `cache_logs` ON `cache_logs`.`cache_id`=`caches`.`cache_id`
+	                                WHERE `caches`.`user_id`='&1'
 	                                  AND `caches`.`status` != 5
-	                             ORDER BY `date_hidden` DESC, `caches`.`date_created` DESC LIMIT 20", $login->userid));
+	                             GROUP BY `caches`.`cache_id`
+	                             ORDER BY `caches`.`date_hidden` DESC, `caches`.`date_created` DESC
+															    LIMIT 50", $login->userid));
+	if ($useragent_msie && $useragent_msie_version < 9)
+		$tpl->assign('dotfill','');
+	else
+		$tpl->assign('dotfill','....................................................................................................................................................................................................................');
 
 	//get not published caches
-	$tpl->assign_rs('notpublished', sql("SELECT `caches`.`cache_id`, `caches`.`name`, `caches`.`date_hidden`, `caches`.`date_activate`, `caches`.`status`, `caches`.`wp_oc`
+	$tpl->assign_rs('notpublished', sql("SELECT `caches`.`cache_id`, `caches`.`name`, `caches`.`date_hidden`, `caches`.`date_activate`, `caches`.`status`, `caches`.`wp_oc`, `caches`.`type`
 	                                       FROM `caches`
 	                                      WHERE `user_id`='&1'
 	                                        AND `caches`.`status` = 5

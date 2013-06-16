@@ -32,6 +32,12 @@ function __autoload($class_name)
 }
 
 
+	// check for broken browsers
+	$useragent = isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : "";
+	$useragent_msie = preg_match('/MSIE ([1-9]+).[0-9]+/',$useragent,$ua_matches) && !strpos($useragent,"Opera");
+	if (count($ua_matches)>1) $useragent_msie_version = $ua_matches[1];
+	else $useragent_msie_version = null;
+
 	// yepp, we will use UTF-8
 	mb_internal_encoding('UTF-8');
 	mb_regex_encoding('UTF-8');

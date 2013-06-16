@@ -40,7 +40,7 @@
 	$tpl->assign_rs('caches', sql("SELECT `caches`.`cache_id`, `caches`.`name`, `caches`.`type`,
 		                                    `caches`.`date_hidden`, `caches`.`status`, `caches`.`wp_oc`,
 		                                    `found`,
-		                                    COUNT(*) as `logcount`,
+		                                    /* COUNT(*) as `logcount`, */
 		                                    MAX(`cache_logs`.`date`) AS `lastlog`,
 		                                    (SELECT `type` FROM `cache_logs` `cl2`
 																				 WHERE `cl2`.`cache_id`=`caches`.`cache_id`

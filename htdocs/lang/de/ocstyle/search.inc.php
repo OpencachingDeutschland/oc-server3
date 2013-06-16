@@ -19,8 +19,8 @@
  	$error_query_not_found = t('The search operation could not be executed, please reenter the search data.');
  	$safelink = '&nbsp;[<a href="query.php?action=save&queryid={queryid}">' . t('Save') . '</a>]';
 
- 	$caches_newstring = '<b>' . t('NEW') . '</b>&nbsp;';
- 	$caches_olddays = 7;
+	$caches_newstring = '<b class="newsymbol">&nbsp;' . t('NEW') . '&nbsp;</b>&nbsp;';
+	$caches_olddays = 14;  // changed from 7 to 14  -- following 2013/6/17
 
 	$caches_oconlystring = '<img src="resource2/ocstyle/images/misc/is_oconly.png" alt="OConly" title="OConly" style="margin:0px; padding:0px" width="64" height="35" />';
 

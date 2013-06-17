@@ -57,6 +57,7 @@
 		$tpl->assign('dotfill','');
 	else
 		$tpl->assign('dotfill','...........................................................................................................');
+	$tpl->add_body_load('myHomeLoad()');
 
 	//get not published caches
 	$tpl->assign_rs('notpublished', sql("SELECT `caches`.`cache_id`, `caches`.`name`, `caches`.`date_hidden`, `caches`.`date_activate`, `caches`.`status`, `caches`.`wp_oc`, `caches`.`type`

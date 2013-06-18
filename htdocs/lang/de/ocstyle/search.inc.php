@@ -95,6 +95,7 @@
 	$search_in_gm_zip = '<a href="http://maps.google.de/maps?f=q&hl=de&q=' . urlencode("http://".$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI']."&output=kml&zip=1&count=max") . '" title="' . $translate->t('Show in Google Maps','','',0) . '">' . $translate->t('(in GM)','','',0) . '</a>';
 
 	$unknown_searchtype = t('unknown search type');
+	$showonmap = t('Show on map');
 
 
 function dateDiff($interval, $dateTimeBegin, $dateTimeEnd)

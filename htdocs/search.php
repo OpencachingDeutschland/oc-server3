@@ -445,9 +445,12 @@
 		if (!isset($options['showresult'])) $options['showresult']='0';
 		if ($options['showresult'] == 1)
 		{
+
 			//===============================================================
 			//  X6. build SQL statement from search options
 			//===============================================================
+
+			$cachesFilter = '';
 
 			if(!isset($options['output'])) $options['output']='';
 			if ((mb_strpos($options['output'], '.') !== false) ||
@@ -551,7 +554,8 @@
 							$lon_rad = $lon * 3.14159 / 180;
 							$lat_rad = $lat * 3.14159 / 180;
 
-							sql_slave('CREATE TEMPORARY TABLE result_caches ENGINE=MEMORY
+							$cachesFilter =
+												 'CREATE TEMPORARY TABLE result_caches ENGINE=MEMORY
 													SELECT
 														(' . getSqlDistanceFormula($lon, $lat, $distance, $multiplier[$distance_unit]) . ') `distance`,
 														`caches`.`cache_id` `cache_id`
@@ -560,7 +564,8 @@
 														AND `longitude` < ' . ($lon + $max_lon_diff) . '
 														AND `latitude` > ' . ($lat - $max_lat_diff) . '
 														AND `latitude` < ' . ($lat + $max_lat_diff) . '
-													HAVING `distance` < ' . ($distance+0));
+													HAVING `distance` < ' . ($distance+0);
+							sql_slave($cachesFilter);
 							sql_slave('ALTER TABLE result_caches ADD PRIMARY KEY ( `cache_id` )');
 
 							$sql_select[] = '`result_caches`.`cache_id`';
@@ -691,7 +696,8 @@
 							//TODO: check!!!
 							$max_lon_diff = $distance * 180 / (abs(sin((90 - $lat) * 3.14159 / 180 )) * 6378 * $multiplier[$distance_unit] * 3.14159);
 
-							sql_slave('CREATE TEMPORARY TABLE result_caches ENGINE=MEMORY
+							$cachesFilter =
+												 'CREATE TEMPORARY TABLE result_caches ENGINE=MEMORY
 													SELECT
 														(' . getSqlDistanceFormula($lon, $lat, $distance, $multiplier[$distance_unit]) . ') `distance`,
 														`caches`.`cache_id` `cache_id`
@@ -700,7 +706,8 @@
 														AND `longitude` < ' . ($lon + $max_lon_diff) . '
 														AND `latitude` > ' . ($lat - $max_lat_diff) . '
 														AND `latitude` < ' . ($lat + $max_lat_diff) . '
-													HAVING `distance` < ' . ($distance+0));
+													HAVING `distance` < ' . ($distance+0);
+							sql_slave($cachesFilter);
 							sql_slave('ALTER TABLE result_caches ADD PRIMARY KEY ( `cache_id` )');
 
 							$sql_select[] = '`result_caches`.`cache_id`';
@@ -805,7 +812,8 @@
 					$lon_rad = $lon * 3.14159 / 180;
 					$lat_rad = $lat * 3.14159 / 180;
 
-					sql_slave('CREATE TEMPORARY TABLE result_caches ENGINE=MEMORY
+					$cachesFilter =
+										 'CREATE TEMPORARY TABLE result_caches ENGINE=MEMORY
 											SELECT
 												(' . getSqlDistanceFormula($lon, $lat, $distance, $multiplier[$distance_unit]) . ') `distance`,
 												`caches`.`cache_id` `cache_id`
@@ -814,7 +822,8 @@
 												AND `longitude` < ' . ($lon + $max_lon_diff) . '
 												AND `latitude` > ' . ($lat - $max_lat_diff) . '
 												AND `latitude` < ' . ($lat + $max_lat_diff) . '
-											HAVING `distance` < ' . ($distance+0));
+											HAVING `distance` < ' . ($distance+0);
+					sql_slave($cachesFilter);
 					sql_slave('ALTER TABLE result_caches ADD PRIMARY KEY ( `cache_id` )');
 
 					$sql_select[] = '`result_caches`.`cache_id`';
@@ -1054,11 +1063,22 @@
 			//    $options['sortby']
 			//    $options['orderRatingFirst']
 			//    $options['queryid']
-			//    $sqlFilter
+			//    $cachesFilter, $sqlFilter
+			//    $map2_bounds
 			//=================================================================
 
+			$map2_bounds = ($options['output'] == 'map2bounds');
+			if ($map2_bounds)
+				$options['output'] = 'map2';
+
 			// Ocprop: HTML, gpx
-			if (!file_exists($opt['rootpath'] . 'lib/search.' . mb_strtolower($options['output']) . '.inc.php'))
+			if ($map2_bounds && $options['queryid'] == 0)
+			{
+				tpl_set_var('tplname', $tplname);
+				$tplname = 'error';
+				tpl_set_var('error_msg', 'map2bounds requires queryid');
+			}
+			elseif (!file_exists($opt['rootpath'] . 'lib/search.' . mb_strtolower($options['output']) . '.inc.php'))
 			{
 				tpl_set_var('tplname', $tplname);
 				$tplname = 'error';

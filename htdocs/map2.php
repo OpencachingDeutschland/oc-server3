@@ -52,9 +52,10 @@
 		$nLat2 = isset($_REQUEST['lat2']) ? $_REQUEST['lat2']+0 : 0;
 		$cachenames = isset($_REQUEST['cachenames']) ? $_REQUEST['cachenames']+0 : 0;
 		$smallmap = isset($_REQUEST['smallmap']) ? $_REQUEST['smallmap']+0 : 0;
+		$showlockedcaches = isset($_REQUEST['locked']) ? $_REQUEST['locked']<>0 : true;
 		
 		output_searchresult($nResultId, $compact, $nLon1, $nLon2, $nLat1, $nLat2,
-		                    $cachenames, $smallmap);
+		                    $cachenames, $smallmap, $showlockedcaches);
 	}
 	else if ($sMode == 'fullscreen' ||
 	         ($sMode == '' &&
@@ -68,6 +69,21 @@
 	else
 	{
 		$fullscreen = false;
+	}
+
+	// set queryid data for displaying search results on map
+	$nQueryId = isset($_REQUEST['queryid']) ? $_REQUEST['queryid']+0 : 0;
+	$nResultId = isset($_REQUEST['resultid']) ? $_REQUEST['resultid']+0 : 0;
+	$tpl->assign('queryid',$nQueryId);
+
+	if (!isset($_REQUEST['lat_min']))
+		$tpl->assign('lat_min',null);
+	else
+	{
+		$tpl->assign('lat_min',$_REQUEST['lat_min']);
+		$tpl->assign('lat_max',$_REQUEST['lat_max']);
+		$tpl->assign('lon_min',$_REQUEST['lon_min']);
+		$tpl->assign('lon_max',$_REQUEST['lon_max']);
 	}
 
 	// save options
@@ -386,7 +402,7 @@ function output_namesearch($sName, $nLat, $nLon, $nResultId)
 }
 
 function output_searchresult($nResultId, $compact, $nLon1, $nLon2, $nLat1, $nLat2,
-                             $cachenames, $smallmap)
+                             $cachenames, $smallmap, $showlockedcaches)
 {
 	global $login, $opt, $useragent_msie;
 
@@ -433,7 +449,8 @@ function output_searchresult($nResultId, $compact, $nLon1, $nLon2, $nLat1, $nLat
 	{
 		$namequery = ($cachenames ? ", `caches`.`name` AS `cachename`" : "");
 		$rs = sql_slave("SELECT SQL_BUFFER_RESULT 
-                            `caches`.`wp_oc`, `caches`.`longitude`, `caches`.`latitude`,
+                            distinct `caches`.`wp_oc`,
+                            `caches`.`longitude`, `caches`.`latitude`,
                             `caches`.`type`, 
                             `caches`.`status`>1 AS `inactive`,
                             `caches`.`type`=6 AND `caches`.`date_hidden`+INTERVAL 1 DAY < NOW() AS `oldevent`,
@@ -444,19 +461,21 @@ function output_searchresult($nResultId, $compact, $nLon1, $nLon2, $nLat1, $nLat
                             $namequery . "
                        FROM `map2_data`
                  INNER JOIN `caches` ON `map2_data`.`cache_id`=`caches`.`cache_id`
-                  LEFT JOIN `user` ON `user`.`user_id`=`caches`.`user_id`
+                 INNER JOIN `user` ON `user`.`user_id`=`caches`.`user_id`
                   LEFT JOIN `cache_logs` `found_logs` ON `found_logs`.`cache_id`=`caches`.`cache_id` AND `found_logs`.`user_id`='&6' AND `found_logs`.`type` IN (1,7)
                   LEFT JOIN `cache_logs` `notfound_logs` ON `notfound_logs`.`cache_id`=`caches`.`cache_id` AND `notfound_logs`.`user_id`='&6' AND `notfound_logs`.`type`=2
                   LEFT JOIN `caches_attributes` ON `caches_attributes`.`cache_id`=`caches`.`cache_id` AND `caches_attributes`.`attrib_id`=6
                       WHERE `map2_data`.`result_id`='&1' AND `caches`.`longitude`>'&2' AND `caches`.`longitude`<'&3' AND `caches`.`latitude`>'&4' AND `caches`.`latitude`<'&5'
-	                      AND `caches`.`status`<>6   /* hide vandalized listings, locked duplicates etc. */
-	                      AND `caches`.`status`<>7   /* ... and locked/invisible caches */
+	                      AND `caches`.`status`<>'&7'  /* hide vandalized listings, locked duplicates etc. */
+	                      AND `caches`.`status`<>7     /* ... and locked/invisible caches */
 									 ORDER BY `caches`.`status` DESC, `oconly` AND NOT (`found` OR `notfound`), NOT (`found` OR `notfound`), `caches`.`type`<>4, MD5(`caches`.`name`)
-									 LIMIT &7",
+									 LIMIT &8",
 									    // sort in reverse order, because last are on top of map;
 									    // fixed order avoids oscillations when panning;
 									    // MD5 pseudo-randomness gives equal changes for all kinds of caches to be on top
-									    $nResultId, $nLon1, $nLon2, $nLat1, $nLat2, $login->userid, $maxrecords);
+									    $nResultId, $nLon1, $nLon2, $nLat1, $nLat2, $login->userid,
+											$showlockedcaches ? 0 : 6,
+											$maxrecords);
 
 		while ($r = sql_fetch_assoc($rs))
 		{
@@ -466,7 +485,6 @@ function output_searchresult($nResultId, $compact, $nLon1, $nLon2, $nLat1, $nLat
 			if ($r['notfound']) $flags |= 4;
 			if ($r['inactive'] || $r['oldevent']) $flags |= 8;
 			if ($r['oconly']) $flags |= 16;
-
 			if ($compact)
 				echo '<c d="' .
 				       xmlentities(

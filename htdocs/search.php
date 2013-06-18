@@ -732,7 +732,8 @@
 
 					if (!isset($options['logtype'])) $options['logtype'] = '1,7';
 
-					$sql_select[] = '`caches`.`cache_id` `cache_id`';
+					$sql_select[] = 'distinct `caches`.`cache_id` `cache_id`';
+						// needs distinct because there can be multiple matching logs per cache
 					$sql_from = '`caches`';
 					$sql_innerjoin[] = '`cache_logs` ON `caches`.`cache_id`=`cache_logs`.`cache_id`';
 					$sql_where[] = '`cache_logs`.`user_id`=\'' . sql_escape($finder_id) . '\'';

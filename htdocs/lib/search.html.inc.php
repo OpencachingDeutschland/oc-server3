@@ -326,12 +326,6 @@
 	//count($caches) - 1
 	tpl_set_var('pages', $pages);
 
-	// speichern-link
-	if ($usr === false)
-		tpl_set_var('safelink', '');
-	else
-		tpl_set_var('safelink', mb_ereg_replace('{queryid}', $options['queryid'], $safelink));
-
 	// downloads
 	tpl_set_var('queryid', $options['queryid']);
 	tpl_set_var('startat', $startat);

@@ -2403,14 +2403,14 @@ function toggle_attribselection(bSaveCookies)
 					</tr>
 					<tr>
 						<td style="white-space:nowrap">
-							<input type="checkbox" id="f_disabled" name="f_disabled" value="1" checked="checked" onchange="filter_changed()" class="checkbox" />
-							<label for="f_disabled">{t}disabled[pl]{/t}</label>
+							<input type="checkbox" id="f_inactive" name="f_inactive" value="1" checked="checked" onchange="filter_changed()" class="checkbox" />
+							<label for="f_inactive">{t}archived[pl]{/t}</label>
 						</td>
 					</tr>
 					<tr>
 						<td style="white-space:nowrap">
-							<input type="checkbox" id="f_inactive" name="f_inactive" value="1" checked="checked" onchange="filter_changed()" class="checkbox" />
-							<label for="f_inactive">{t}archived[pl]{/t}</label>
+							<input type="checkbox" id="f_disabled" name="f_disabled" value="1" checked="checked" onchange="filter_changed()" class="checkbox" />
+							<label for="f_disabled">{t}disabled[pl]{/t}</label>
 						</td>
 					</tr>
 					<tr>

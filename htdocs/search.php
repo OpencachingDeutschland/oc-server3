@@ -207,10 +207,15 @@
 				$_REQUEST[$_REQUEST['searchto']] = "hoho";
 			}
 
-			//get the taken search options and backup them in the queries table (to view "the next page")
-			$options['f_userowner'] = isset($_REQUEST['f_userowner']) ? $_REQUEST['f_userowner'] : 0;
-			$options['f_userfound'] = isset($_REQUEST['f_userfound']) ? $_REQUEST['f_userfound'] : 0;
-			$options['f_inactive'] = isset($_REQUEST['f_inactive']) ? $_REQUEST['f_inactive'] : 1;
+			// get the search options parameters and store them in the queries table (to view "the next page")
+			$options['f_userowner'] = isset($_REQUEST['f_userowner']) ? $_REQUEST['f_userowner'] : 0;  // Ocprop
+			$options['f_userfound'] = isset($_REQUEST['f_userfound']) ? $_REQUEST['f_userfound'] : 0;  // Ocprop
+			$options['f_disabled'] = isset($_REQUEST['f_disabled']) ? $_REQUEST['f_disabled'] : 0;
+			$options['f_inactive'] = isset($_REQUEST['f_inactive']) ? $_REQUEST['f_inactive'] : 1;  // Ocprop
+				// f_inactive formerly was used for both, archived and disabled caches.
+				// After adding the separate f_disabled option, it is used only for archived
+				// caches, but keeps its name for compatibility with existing stored or
+				// external searches.
 			$options['f_ignored'] = isset($_REQUEST['f_ignored']) ? $_REQUEST['f_ignored'] : 1;
 			$options['f_otherPlatforms'] = isset($_REQUEST['f_otherPlatforms']) ? $_REQUEST['f_otherPlatforms'] : 0;
 			$options['expert'] = isset($_REQUEST['expert']) ? $_REQUEST['expert'] : 0;  // Ocprop: 0
@@ -431,9 +436,9 @@
 		if (!isset($options['cachetype'])) $options['cachetype'] = '';
 		if (!isset($options['cachesize'])) $options['cachesize'] = '';
 		if (!isset($options['bbox'])) $options['bbox'] = false;
+		if (!isset($options['f_disabled'])) $options['f_disabled'] = 0;
 
-		//prepare output
-		if(!isset($options['showresult'])) $options['showresult']='0';
+		if (!isset($options['showresult'])) $options['showresult'] = 0;
 		if ($options['showresult'] == 1)
 		{
 			if(!isset($options['output'])) $options['output']='';
@@ -903,8 +908,14 @@
 				{
 					$sql_where[] = '`caches`.`cache_id` NOT IN (SELECT `cache_logs`.`cache_id` FROM `cache_logs` WHERE `cache_logs`.`user_id`=\'' . sql_escape($usr['userid']) . '\' AND `cache_logs`.`type` IN (1, 7))';
 				}
-				if(!isset($options['f_inactive'])) $options['f_inactive']='0';  // Ocprop
-				if($options['f_inactive'] != 0)  $sql_where[] = '`caches`.`status`=1';
+				if (!isset($options['f_inactive'])) $options['f_inactive']='0';
+				if ($options['f_inactive'] != 0)  $sql_where[] = '`caches`.`status` NOT IN (3,6,7)';
+					// f_inactive formerly was used for both, archived and disabled caches.
+					// After adding the separate f_disabled option, it is used only for archived
+					// caches, but keeps its name for compatibility with existing stored or
+					// external searches.
+				if (!isset($options['f_disabled'])) $options['f_disabled']='0';  // Ocprop
+				if ($options['f_disabled'] != 0)  $sql_where[] = '`caches`.`status`<>2';
 
 				if(isset($usr))
 				{
@@ -1137,6 +1148,9 @@ function outputSearchForm($options)
 
 	tpl_set_var('f_inactive_checked', ($options['f_inactive'] == 1) ? ' checked="checked"' : '');
 	tpl_set_var('hidopt_inactive', ($options['f_inactive'] == 1) ? '1' : '0');
+
+	tpl_set_var('f_disabled_checked', ($options['f_disabled'] == 1) ? ' checked="checked"' : '');
+	tpl_set_var('hidopt_disabled', ($options['f_disabled'] == 1) ? '1' : '0');
 
 	tpl_set_var('f_ignored_disabled', ($usr['userid'] == 0) ? ' disabled="disabled"' : '');
 	if ($usr['userid'] != 0)

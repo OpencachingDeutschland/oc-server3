@@ -2503,6 +2503,8 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2082', 'Locked'
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2083', 'NEW', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2084', 'show archived', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2085', 'hide archived', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2089', 'disabled[pl]', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2090', 'archived[pl]', '2013-04-25 23:00:00');
 
 -- Table sys_trans_ref
 SET NAMES 'utf8';
@@ -6457,6 +6459,8 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2083', 'DE', 'NEU', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2084', 'DE', 'archivierte einblenden', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2085', 'DE', 'archivierte ausblenden', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2089', 'DE', 'deaktivierte', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2090', 'DE', 'archivierte', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'EN', 'Reorder IDs \r', '2010-09-02 00:15:30');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'EN', 'The database could not be reconnected.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'EN', 'Testing – please do not login', '2010-08-28 11:48:07');
@@ -8025,6 +8029,8 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2076', 'EN', 'From Owner', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2077', 'EN', 'To Owner', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2078', 'EN', 'Maintenance', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2089', 'EN', 'disabled', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2090', 'EN', 'arcbived', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'ES', 'Reordenar ID', '2010-12-09 00:17:55');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'ES', 'La base de datos no se pudo conectar.', '2010-12-09 00:17:55');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'ES', 'En pruebas - por favor, no entre.', '2010-12-09 00:17:55');

@@ -194,6 +194,7 @@ function sync_options(element)
 		document.forms[formnames[i]].f_userowner.value = document.optionsform.f_userowner.checked ? 1 : 0;
 		document.forms[formnames[i]].f_userfound.value = document.optionsform.f_userfound.checked ? 1 : 0;
 		document.forms[formnames[i]].f_inactive.value = document.optionsform.f_inactive.checked ? 1 : 0;
+		document.forms[formnames[i]].f_disabled.value = document.optionsform.f_disabled.checked ? 1 : 0;
 		document.forms[formnames[i]].f_ignored.value = document.optionsform.f_ignored.checked ? 1 : 0;
 		document.forms[formnames[i]].f_otherPlatforms.value = document.optionsform.f_otherPlatforms.checked ? 1 : 0;
 		document.forms[formnames[i]].country.value = document.optionsform.country.value;
@@ -309,7 +310,8 @@ function switchAttributeCat2()
 		<tr>
 			<td>&nbsp;</td>
 			<td colspan="2">
-				<input type="checkbox" name="f_inactive" value="1" id="l_inactive" class="checkbox" onclick="sync_options(this)" {f_inactive_checked} > <label for="l_inactive">{t}Inactive{/t}</label>
+				<input type="checkbox" name="f_disabled" value="1" id="l_disabled" class="checkbox" onclick="sync_options(this)" {f_disabled_checked} > <label for="l_disabled">{t}disabled[pl]{/t}</label>&nbsp;
+				<input type="checkbox" name="f_inactive" value="1" id="l_inactive" class="checkbox" onclick="sync_options(this)" {f_inactive_checked} > <label for="l_inactive">{t}archived[pl]{/t}</label>&nbsp;
 				<input type="checkbox" name="f_otherPlatforms" value="1" id="l_otherPlatforms" class="checkbox" onclick="sync_options(this)" {f_otherPlatforms_checked} > <label for="l_otherPlatforms">{t}GC listings (also listed at gc.com){/t}</label>
 			</td>
 		</tr>
@@ -449,6 +451,7 @@ function switchAttributeCat2()
 	<input type="hidden" name="f_userowner" value="{hidopt_userowner}" />
 	<input type="hidden" name="f_userfound" value="{hidopt_userfound}" />
 	<input type="hidden" name="f_inactive" value="{hidopt_inactive}" />
+	<input type="hidden" name="f_disabled" value="{hidopt_disabled}" />
 	<input type="hidden" name="f_ignored" value="{hidopt_ignored}" />
 	<input type="hidden" name="f_otherPlatforms" value="{hidopt_otherPlatforms}" />
 	<input type="hidden" name="country" value="{country}" />
@@ -497,6 +500,7 @@ function switchAttributeCat2()
 	<input type="hidden" name="f_userowner" value="{hidopt_userowner}" />
 	<input type="hidden" name="f_userfound" value="{hidopt_userfound}" />
 	<input type="hidden" name="f_inactive" value="{hidopt_inactive}" />
+	<input type="hidden" name="f_disabled" value="{hidopt_disabled}" />
 	<input type="hidden" name="f_ignored" value="{hidopt_ignored}" />
 	<input type="hidden" name="f_otherPlatforms" value="{hidopt_otherPlatforms}" />
 	<input type="hidden" name="country" value="{country}" />
@@ -589,6 +593,7 @@ function switchAttributeCat2()
 	<input type="hidden" name="f_userowner" value="{hidopt_userowner}" />
 	<input type="hidden" name="f_userfound" value="{hidopt_userfound}" />
 	<input type="hidden" name="f_inactive" value="{hidopt_inactive}" />
+	<input type="hidden" name="f_disabled" value="{hidopt_disabled}" />
 	<input type="hidden" name="f_ignored" value="{hidopt_ignored}" />
 	<input type="hidden" name="f_otherPlatforms" value="{hidopt_otherPlatforms}" />
 	<input type="hidden" name="country" value="{country}" />
@@ -627,6 +632,7 @@ function switchAttributeCat2()
 	<input type="hidden" name="f_userowner" value="{hidopt_userowner}" />
 	<input type="hidden" name="f_userfound" value="{hidopt_userfound}" />
 	<input type="hidden" name="f_inactive" value="{hidopt_inactive}" />
+	<input type="hidden" name="f_disabled" value="{hidopt_disabled}" />
 	<input type="hidden" name="f_ignored" value="{hidopt_ignored}" />
 	<input type="hidden" name="f_otherPlatforms" value="{hidopt_otherPlatforms}" />
 	<input type="hidden" name="country" value="{country}" />
@@ -674,6 +680,7 @@ function switchAttributeCat2()
 	<input type="hidden" name="f_userowner" value="{hidopt_userowner}" />
 	<input type="hidden" name="f_userfound" value="{hidopt_userfound}" />
 	<input type="hidden" name="f_inactive" value="{hidopt_inactive}" />
+	<input type="hidden" name="f_disabled" value="{hidopt_disabled}" />
 	<input type="hidden" name="f_ignored" value="{hidopt_ignored}" />
 	<input type="hidden" name="f_otherPlatforms" value="{hidopt_otherPlatforms}" />
 	<input type="hidden" name="country" value="{country}" />
@@ -738,6 +745,7 @@ function switchAttributeCat2()
 	<input type="hidden" name="f_userowner" value="{hidopt_userowner}" />
 	<input type="hidden" name="f_userfound" value="{hidopt_userfound}" />
 	<input type="hidden" name="f_inactive" value="{hidopt_inactive}" />
+	<input type="hidden" name="f_disabled" value="{hidopt_disabled}" />
 	<input type="hidden" name="f_ignored" value="{hidopt_ignored}" />
 	<input type="hidden" name="f_otherPlatforms" value="{hidopt_otherPlatforms}" />
 	<input type="hidden" name="country" value="{country}" />
@@ -786,6 +794,7 @@ function switchAttributeCat2()
 	<input type="hidden" name="f_userowner" value="{hidopt_userowner}" />
 	<input type="hidden" name="f_userfound" value="{hidopt_userfound}" />
 	<input type="hidden" name="f_inactive" value="{hidopt_inactive}" />
+	<input type="hidden" name="f_disabled" value="{hidopt_disabled}" />
 	<input type="hidden" name="f_ignored" value="{hidopt_ignored}" />
 	<input type="hidden" name="f_otherPlatforms" value="{hidopt_otherPlatforms}" />
 	<input type="hidden" name="country" value="{country}" />

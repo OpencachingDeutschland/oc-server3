@@ -2431,7 +2431,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2000', 'My last
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2001', 'Own logs', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2002', 'Geocaches found', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2003', 'Geocaches logged', '2013-04-25 23:00:00');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2004', 'active caches', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2004', '%1 of these are active', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2005', 'Show active', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2006', 'Deleted by', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2007', 'User data', '2013-04-25 23:00:00');
@@ -6387,7 +6387,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2001', 'DE', 'Eigene Logs', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2002', 'DE', 'gefundene Caches', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2003', 'DE', 'geloggte Caches', '2013-04-25 23:00:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2004', 'DE', 'aktive Caches', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2004', 'DE', 'davon %1 aktiv', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2005', 'DE', 'aktive anzeigen', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2006', 'DE', 'gelöscht von', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2007', 'DE', 'Benutzerdaten', '2013-04-25 23:00:00');
@@ -11118,7 +11118,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2001', 'IT', 'Logs propri', '2013-05-28 16:52:39');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2002', 'IT', 'Geocaches trovate', '2010-09-01 23:48:28');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2003', 'IT', 'Geocaches loggate', '2013-05-28 16:52:39');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2004', 'IT', 'cache attive', '2013-05-28 16:52:39');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2004', 'IT', '%1 cache attive', '2013-05-28 16:52:39');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2005', 'IT', 'Visualizza attive', '2013-05-28 16:52:39');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2006', 'IT', 'Cancellata da', '2013-05-28 16:52:39');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2007', 'IT', 'Dati utente', '2013-05-28 16:52:39');

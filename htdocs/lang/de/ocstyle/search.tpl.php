@@ -268,7 +268,7 @@ function switchAttributeCat2()
 //-->
 </script>
 
-		  <div class="content2-pagetitle"><img src="resource2/ocstyle/images/cacheicon/traditional.gif" style="align: left; margin-right: 10px;" width="32" height="32" alt="{t}Search for caches{/t}" />{t}Search for caches{/t}</div>
+<div class="content2-pagetitle"><img src="resource2/ocstyle/images/misc/32x32-search.png" style="align: left; margin-right: 10px;" width="32" height="32" alt="{t}Search for caches{/t}" />{t}Search for caches{/t}</div>
 
 <form name="optionsform" style="display:inline;">
 
@@ -464,7 +464,7 @@ function switchAttributeCat2()
 	<div class="buffer" style="width: 500px;">&nbsp;</div>
 	<div class="content2-container bg-blue02">
 		<p class="content-title-noshade-size2">
-			<img src="resource2/ocstyle/images/misc/32x32-searchresults.png" style="align: left; margin-right: 10px;" width="22" height="22" alt="" /> 
+			<img src="resource2/ocstyle/images/misc/32x32-search.png" style="align: left; margin-right: 10px;" width="22" height="22" alt="" /> 
 			{t}Search by cachename{/t}
 		</p>
 	</div>
@@ -512,7 +512,7 @@ function switchAttributeCat2()
 	<div class="buffer" style="width: 500px;">&nbsp;</div>
 	<div class="content2-container bg-blue02">
 		<p class="content-title-noshade-size2">
-			<img src="resource2/ocstyle/images/misc/32x32-searchresults.png" style="align: left; margin-right: 10px;" width="22" height="22" alt="" /> 
+			<img src="resource2/ocstyle/images/misc/32x32-search.png" style="align: left; margin-right: 10px;" width="22" height="22" alt="" /> 
 			{t}Search by distance{/t}
 		</p>
 	</div>
@@ -561,7 +561,7 @@ function switchAttributeCat2()
 <div class="buffer" style="width: 500px;">&nbsp;</div>
 <div class="content2-container bg-blue02">
 	<p class="content-title-noshade-size2">
-		<img src="resource2/ocstyle/images/misc/32x32-searchresults.png" style="align: left; margin-right: 10px;" width="22" height="22" alt="" /> 
+		<img src="resource2/ocstyle/images/misc/32x32-search.png" style="align: left; margin-right: 10px;" width="22" height="22" alt="" /> 
 		{t}Search for city{/t}
 	</p>
 </div>
@@ -689,7 +689,7 @@ function switchAttributeCat2()
 	<div class="buffer" style="width: 500px;">&nbsp;</div>
 	<div class="content2-container bg-blue02">
   	<p class="content-title-noshade-size2">
-			<img src="resource2/ocstyle/images/misc/32x32-searchresults.png" style="align: left; margin-right: 10px;" width="22" height="22" alt="" /> 
+			<img src="resource2/ocstyle/images/misc/32x32-search.png" style="align: left; margin-right: 10px;" width="22" height="22" alt="" /> 
 			{t}Search for text{/t}
 		</p>
 	</div>
@@ -753,7 +753,7 @@ function switchAttributeCat2()
 	<div class="buffer" style="width: 500px;">&nbsp;</div>
 	<div class="content2-container bg-blue02">
 		<p class="content-title-noshade-size2">
-			<img src="resource2/ocstyle/images/misc/32x32-searchresults.png" style="align: left; margin-right: 10px;" width="22" height="22" alt="" /> 
+			<img src="resource2/ocstyle/images/misc/32x32-search.png" style="align: left; margin-right: 10px;" width="22" height="22" alt="" /> 
 			{t}Search for Owner{/t}
 		</p>
 	</div>
@@ -801,7 +801,7 @@ function switchAttributeCat2()
 	<div class="buffer" style="width: 500px;">&nbsp;</div>
 	<div class="content2-container bg-blue02">
 		<p class="content-title-noshade-size2">
-			<img src="resource2/ocstyle/images/misc/32x32-searchresults.png" style="align: left; margin-right: 10px;" width="22" height="22" alt="" /> 
+			<img src="resource2/ocstyle/images/misc/32x32-search.png" style="align: left; margin-right: 10px;" width="22" height="22" alt="" /> 
 			{t}Search for Logs{/t}
 		</p>
 	</div>

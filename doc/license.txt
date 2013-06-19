@@ -171,7 +171,7 @@ List of third party components:
 				License : Creative Commons BY 3.0
 				Author  : Yusuke Kamiyamane
 
-		27. gears and gps-device icons
+		27. gears and gps-device icons, watched icon
 			  Path    : htdocs/resource2/ocstyle/images/misc/
 			            htdocs/resource2/ocstyle/images/viewcache/
 			  URI     : http://www.softicons.com/free-icons/toolbar-icons/fatcow-hosting-icons-by-fatcow/gear-in-icon
@@ -184,3 +184,9 @@ List of third party components:
 				URI     : http://www.softicons.com/free-icons/web-icons/bremen-icons-by-pc.de/check-icon
 				License : Creative Commons BY 3.0
 				Author  : PC.DE
+
+		29. search icon
+				Path    : htdocs/resource2/ocstyle/images/misc/
+				URI     : http://www.softicons.com/free-icons/toolbar-icons/24x24-free-pixel-icons-by-aha-soft/search-icon
+				License : Creative Commons BY-SA 3.0
+				Author  : Aha-Soft

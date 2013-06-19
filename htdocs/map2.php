@@ -449,7 +449,8 @@ function output_searchresult($nResultId, $compact, $nLon1, $nLon2, $nLat1, $nLat
                   LEFT JOIN `cache_logs` `notfound_logs` ON `notfound_logs`.`cache_id`=`caches`.`cache_id` AND `notfound_logs`.`user_id`='&6' AND `notfound_logs`.`type`=2
                   LEFT JOIN `caches_attributes` ON `caches_attributes`.`cache_id`=`caches`.`cache_id` AND `caches_attributes`.`attrib_id`=6
                       WHERE `map2_data`.`result_id`='&1' AND `caches`.`longitude`>'&2' AND `caches`.`longitude`<'&3' AND `caches`.`latitude`>'&4' AND `caches`.`latitude`<'&5'
-	                      AND `caches`.`status`<>6   /* hide vandalized listings, locked duplicates etc. */
+	                      AND `caches`.`status`<>5   /* hide unpublished caches */
+	                      AND `caches`.`status`<>6   /* ... and vandalized listings, locked duplicates etc. */
 	                      AND `caches`.`status`<>7   /* ... and locked/invisible caches */
 									 ORDER BY `caches`.`status` DESC, `oconly` AND NOT (`found` OR `notfound`), NOT (`found` OR `notfound`), `caches`.`type`<>4, MD5(`caches`.`name`)
 									 LIMIT &7",

@@ -212,7 +212,9 @@ function eval_filtercookies(aValues)
 			document.getElementById('f_userowner').checked = fs[1].indexOf('O') >= 0;
 			document.getElementById('f_userfound').checked = fs[1].indexOf('F') >= 0;
 			document.getElementById('f_ignored').checked   = fs[1].indexOf('I') >= 0;
+			document.getElementById('f_disabled').checked  = fs[1].indexOf('T') >= 0;
 			document.getElementById('f_inactive').checked  = fs[1].indexOf('D') >= 0;
+				// disabled and archived options have strange names and IDs for backward compatibility
 			document.getElementById('f_otherPlatforms').checked = fs[1].indexOf('M') >= 0;
 		}
 		else if (fs[0] == 'rated')
@@ -298,6 +300,7 @@ function cookieSave(permanent_filter)
 	if (document.getElementById('f_userowner').checked) sFilter += 'O';
 	if (document.getElementById('f_userfound').checked) sFilter += 'F';
 	if (document.getElementById('f_ignored').checked)   sFilter += 'I';
+	if (document.getElementById('f_disabled').checked)  sFilter += 'T';
 	if (document.getElementById('f_inactive').checked)  sFilter += 'D';
 	if (document.getElementById('f_otherPlatforms').checked) sFilter += 'M';
 
@@ -1907,6 +1910,7 @@ function reset_filter_values()
 	document.getElementById('f_userowner').checked = "";
 	document.getElementById('f_userfound').checked = "";
 	document.getElementById('f_ignored').checked = "checked";
+	document.getElementById('f_disabled').checked = "";
 	document.getElementById('f_inactive').checked = "checked";
 	document.getElementById('f_otherPlatforms').checked = "";
 
@@ -1997,6 +2001,7 @@ function get_searchfilter_params(output, skipqueryid, zip)
 	sPostBody += document.getElementById('f_userowner').checked ? '&f_userowner=1' : '&f_userowner=0';
 	sPostBody += document.getElementById('f_userfound').checked ? '&f_userfound=1' : '&f_userfound=0';
 	sPostBody += document.getElementById('f_ignored').checked ? '&f_ignored=1' : '&f_ignored=0';
+	sPostBody += document.getElementById('f_disabled').checked ? '&f_disabled=1' : '&f_disabled=0';
 	sPostBody += document.getElementById('f_inactive').checked ? '&f_inactive=1' : '&f_inactive=0';
 	sPostBody += document.getElementById('f_otherPlatforms').checked ? '&f_otherPlatforms=1' : '&f_otherPlatforms=0';
 
@@ -2398,8 +2403,14 @@ function toggle_attribselection(bSaveCookies)
 					</tr>
 					<tr>
 						<td style="white-space:nowrap">
+							<input type="checkbox" id="f_disabled" name="f_disabled" value="1" checked="checked" onchange="filter_changed()" class="checkbox" />
+							<label for="f_disabled">{t}disabled[pl]{/t}</label>
+						</td>
+					</tr>
+					<tr>
+						<td style="white-space:nowrap">
 							<input type="checkbox" id="f_inactive" name="f_inactive" value="1" checked="checked" onchange="filter_changed()" class="checkbox" />
-							<label for="f_inactive">{t}Not active{/t}</label>
+							<label for="f_inactive">{t}archived[pl]{/t}</label>
 						</td>
 					</tr>
 					<tr>

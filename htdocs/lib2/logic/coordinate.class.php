@@ -5,9 +5,6 @@
  *  Unicode Reminder メモ
  ***************************************************************************/
 
-/* $opt['bin']['cs2cs'] must be set!
- */
-
 class coordinate
 {
 	var $nLat = 0;
@@ -17,26 +14,6 @@ class coordinate
 	{
 		$this->nLat = $nNewLat;
 		$this->nLon = $nNewLon;
-	}
-
-	static function fromGK($rechts, $hoch)
-	{
-		//$zone = round($this->nLon/3);
-		//$falseeasting = $zone * 1000000 + 500000;
-
-		$zone = round(($rechts - 500000) / 1000000);
-		$falseeasting = $zone * 1000000 + 500000;
-
-		$cs2csresult = self::getCoreCommand($rechts, $hoch, "+proj=tmerc +lat_0=0 +lon_0=" . ($zone*3) . " +k=1.000000 +x_0=" . $falseeasting . " +y_0=0 +ellps=bessel +towgs84=606,23,413 +units=m +no_defs +to +proj=latlong +datum=WGS84");
-		//$cs2csresult = self::getCoreCommand($rechts, $hoch, "+proj=tmerc +lat_0=0 +lon_0=9 +k=1.000000 +x_0=3500000 +y_0=0 +ellps=bessel +towgs84=591.28,81.35,396.39,1.477,-0.0736,-1.458,9.82 +units=m +no_defs +to +proj=latlong +datum=WGS84");
-
-		preg_match('/^(\d+)d(\d+)\'(\d+\.\d+)"E$/', $cs2csresult[0], $aLon);
-		$lon = $aLon[1] + ($aLon[2]/60) + ($aLon[3]/3600);
-
-		preg_match('/^(\d+)d(\d+)\'(\d+\.\d+)"N$/', $cs2csresult[1], $aLat);
-		$lat = $aLat[1] + ($aLat[2]/60) + ($aLat[3]/3600);
-
-		return new coordinate($lat, $lon);
 	}
 
 	/* get-Functions return array([lat] => string, [lon] => string)
@@ -126,88 +103,372 @@ class coordinate
 	// array(zone, letter, north, east)
 	function getUTM()
 	{
-		// get UTM letter
-		if ( $this->nLat <= 84.0 && $this->nLat >= 72.0 )
-			$utmLetter = 'X';
-		else if ( $this->nLat < 72.0 && $this->nLat >= 64.0 )
-			$utmLetter = 'W';
-		else if ( $this->nLat < 64.0 && $this->nLat >= 56.0 )
-			$utmLetter = 'V';
-		else if ( $this->nLat < 56.0 && $this->nLat >= 48.0 )
-			$utmLetter = 'U';
-		else if ( $this->nLat < 48.0 && $this->nLat >= 40.0 )
-			$utmLetter = 'T';
-		else if ( $this->nLat < 40.0 && $this->nLat >= 32.0 )
-			$utmLetter = 'S';
-		else if ( $this->nLat < 32.0 && $this->nLat >= 24.0 )
-			$utmLetter = 'R';
-		else if ( $this->nLat < 24.0 && $this->nLat >= 16.0 )
-			$utmLetter = 'Q';
-		else if ( $this->nLat < 16.0 && $this->nLat >= 8.0 )
-			$utmLetter = 'P';
-		else if ( $this->nLat < 8.0 && $this->nLat >= 0.0 )
-			$utmLetter = 'N';
-		else if ( $this->nLat < 0.0 && $this->nLat >= -8.0 )
-			$utmLetter = 'M';
-		else if ( $this->nLat < -8.0 && $this->nLat >= -16.0 )
-			$utmLetter = 'L';
-		else if ( $this->nLat < -16.0 && $this->nLat >= -24.0 )
-			$utmLetter = 'K';
-		else if ( $this->nLat < -24.0 && $this->nLat >= -32.0 )
-			$utmLetter = 'J';
-		else if ( $this->nLat < -32.0 && $this->nLat >= -40.0 )
-			$utmLetter = 'H';
-		else if ( $this->nLat < -40.0 && $this->nLat >= -48.0 )
-			$utmLetter = 'G';
-		else if ( $this->nLat < -48.0 && $this->nLat >= -56.0 )
-			$utmLetter = 'F';
-		else if ( $this->nLat < -56.0 && $this->nLat >= -64.0 )
-			$utmLetter = 'E';
-		else if ( $this->nLat < -64.0 && $this->nLat >= -72.0 )
-			$utmLetter = 'D';
-		else if ( $this->nLat < -72.0 && $this->nLat >= -80.0 )
-			$utmLetter = 'C';
-		else
-			$utmLetter = 'Z'; //returns 'Z' if the lat is outside the UTM limits of 84N to 80S
+		/* Copyright (c) 2006, HELMUT H. HEIMEIER
+		   Permission is hereby granted, free of charge, to any person obtaining a
+		   copy of this software and associated documentation files (the "Software"),
+		   to deal in the Software without restriction, including without limitation
+		   the rights to use, copy, modify, merge, publish, distribute, sublicense,
+		   and/or sell copies of the Software, and to permit persons to whom the
+		   Software is furnished to do so, subject to the following conditions:
+		   The above copyright notice and this permission notice shall be included
+		   in all copies or substantial portions of the Software.*/
 
-		$zone = (int) ( ( $this->nLon + 180 ) / 6 ) + 1;
+		/* Die Funktion wandelt geographische Koordinaten in UTM Koordinaten
+		   um. Geographische Länge lw und Breite bw müssen im WGS84 Datum
+		   gegeben sein. Berechnet werden UTM Zone, Ostwert ew und Nordwert nw.*/
 
-		if ( $this->nLat >= 56.0 && $this->nLat < 64.0 && $this->nLon >= 3.0 && $this->nLon < 12.0 ) $zone = 32;
+		//Geographische Länge lw und Breite bw im WGS84 Datum
+		if ($this->nLon == 0 || $this->nLat == 0) {
+			return Array('zone' => "", 'letter' => "", 'north' => 'N ' . 0, 'east' => 'E ' . 0);
+		}
+		if ($this->nLon <= -180 || $this->nLon > 180 || $this->nLat <= -80 || $this->nLat >= 84) {
+			// Werte nicht im Bereich des UTM Systems -180° <= nLon < +180°, -80° < nLat < 84° N
+			return array("", "", 0, 0);
+		}
+		$lw = doubleval($this->nLon);
+		$bw = doubleval($this->nLat);
+
+		//WGS84 Datum
+		//Große Halbachse a und Abplattung f
+		$a = 6378137.000;
+		$f = 3.35281068e-3;
+		$b_sel = 'CDEFGHJKLMNPQRSTUVWXX';
+
+		//Polkrümmungshalbmesser c
+		$c = $a / (1 - $f);
+
+		//Quadrat der zweiten numerischen Exzentrizität
+		$ex2 = (2 * $f - $f * $f) / ((1 - $f) * (1 - $f));
+		$ex4 = $ex2 * $ex2;
+		$ex6 = $ex4 * $ex2;
+		$ex8 = $ex4 * $ex4;
+
+		//Koeffizienten zur Berechnung der Meridianbogenlänge
+		$e0 = $c * (pi() / 180) * (1 - 3 * $ex2 / 4 + 45 * $ex4 / 64 - 175 * $ex6 / 256 + 11025 * $ex8 / 16384);
+		$e2 = $c * (-3 * $ex2 / 8 + 15 * $ex4 / 32 - 525 * $ex6 / 1024 + 2205 * $ex8 / 4096);
+		$e4 = $c * (15 * $ex4 / 256 - 105 * $ex6 / 1024 + 2205 * $ex8 / 16384);
+		$e6 = $c * (-35 * $ex6 / 3072 + 315 * $ex8 / 12288);
+
+		//Längenzone lz und Breitenzone (Band) bz
+		$lzn = intval(($lw + 180) / 6) + 1;
+
+		if ($bw >= 56.0 && $bw < 64.0 && $lw >= 3.0 && $lw < 12.0) $lzn = 32;
 
 		// Special zones for Svalbard.
-		if ($this->nLat >= 72.0 && $this->nLat < 84.0 )
-		{
-			if ( $this->nLon >= 0.0 && $this->nLon < 9.0 )
-				$zone = 31;
-			else if ( $this->nLon >= 9.0 && $this->nLon < 21.0 )
-				$zone = 33;
-			else if ( $this->nLon >= 21.0 && $this->nLon < 33.0 )
-				$zone = 35;
-			else if ( $this->nLon >= 33.0 && $this->nLon < 42.0 )
-				$zone = 37;
+		if ($bw >= 72.0 && $bw < 84.0) {
+			if ($lw >= 0.0 && $lw < 9.0)
+				$lzn = 31;
+			else if ($lw >= 9.0 && $lw < 21.0)
+				$lzn = 33;
+			else if ($lw >= 21.0 && $lw < 33.0)
+				$lzn = 35;
+			else if ($lw >= 33.0 && $lw < 42.0)
+				$lzn = 37;
 		}
 
-		$cs2csresult = $this->getCore("+proj=utm +datum=WGS84 +zone=$zone");
+		$lz = "$lzn";
+		if ($lzn < 10) $lz = "0".$lzn;
+		$bd = intval(1 + ($bw + 80) / 8);
+		$bz = substr($b_sel, $bd - 1, 1);
 
-		return Array('zone' => $zone, 'letter' => $utmLetter, 'north' => 'N ' . floor($cs2csresult[1]), 'east' => 'E ' . floor($cs2csresult[0]));
+		//Geographische Breite in Radianten br
+		$br = $bw * pi() / 180;
+
+		$tan1 = tan($br);
+		$tan2 = $tan1 * $tan1;
+		$tan4 = $tan2 * $tan2;
+
+		$cos1 = cos($br);
+		$cos2 = $cos1 * $cos1;
+		$cos4 = $cos2 * $cos2;
+		$cos3 = $cos2 * $cos1;
+		$cos5 = $cos4 * $cos1;
+
+		$etasq = $ex2 * $cos2;
+
+		//Querkrümmungshalbmesser nd
+		$nd = $c / sqrt(1 + $etasq);
+
+		//Meridianbogenlänge g aus gegebener geographischer Breite bw
+		$g = ($e0 * $bw) + ($e2 * sin(2 * $br)) + ($e4 * sin(4 * $br)) + ($e6 * sin(6 * $br));
+
+		//Längendifferenz dl zum Bezugsmeridian lh
+		$lh = ($lzn - 30) * 6 - 3;
+		$dl = ($lw - $lh) * pi() / 180;
+		$dl2 = $dl * $dl;
+		$dl4 = $dl2 * $dl2;
+		$dl3 = $dl2 * $dl;
+		$dl5 = $dl4 * $dl;
+
+		//Maßstabsfaktor auf dem Bezugsmeridian bei UTM Koordinaten m = 0.9996
+		//Nordwert nw und Ostwert ew als Funktion von geographischer Breite und Länge
+
+		if ($bw < 0) {
+			$nw = 10e6 + 0.9996 * ($g + $nd * $cos2 * $tan1 * $dl2 / 2 +
+					$nd * $cos4 * $tan1 * (5 - $tan2 + 9 * $etasq) * $dl4 / 24);
+		} else {
+			$nw = 0.9996 * ($g + $nd * $cos2 * $tan1 * $dl2 / 2 +
+					$nd * $cos4 * $tan1 * (5 - $tan2 + 9 * $etasq) * $dl4 / 24);
+		}
+		$ew = 0.9996 * ($nd * $cos1 * $dl + $nd * $cos3 * (1 - $tan2 + $etasq) * $dl3 / 6 +
+				$nd * $cos5 * (5 - 18 * $tan2 + $tan4) * $dl5 / 120) + 500000;
+
+		$nk = $nw - intval($nw);
+		if ($nk < 0.5) $nw = "" . intval($nw);
+		else $nw = "" . (intval($nw) + 1);
+
+		while (strlen($nw) < 7) {
+			$nw = "0" . $nw;
+		}
+
+		$nk = $ew - intval($ew);
+		if ($nk < 0.5) $ew = "0" . intval($ew);
+		else $ew = "0" . intval($ew + 1);
+
+		return Array('zone' => $lz, 'letter' => $bz, 'north' => 'N ' . floor($nw), 'east' => 'E ' . floor($ew));
 	}
 
 	// return string
 	function getGK()
 	{
-		$zone = round($this->nLon/3);
-		$falseeasting = $zone * 1000000 + 500000;
+		$pdResult = $this->wgs2pot($this->nLat, $this->nLon);
+		$result = $this->geo2gk($pdResult[1], $pdResult[0]);
+		return 'R ' . floor($result[0]) . ' H ' . floor($result[1]);
+	}
 
-		$cs2csresult = $this->getCore("+proj=tmerc +ellps=bessel +lat_0=0 +lon_0=".($zone*3)." +x_0=".$falseeasting." +towgs84=606,23,413 ");
+	function wgs2pot($bw, $lw)
+	{
+		/* Copyright (c) 2006, HELMUT H. HEIMEIER
+		   Permission is hereby granted, free of charge, to any person obtaining a
+		   copy of this software and associated documentation files (the "Software"),
+		   to deal in the Software without restriction, including without limitation
+		   the rights to use, copy, modify, merge, publish, distribute, sublicense,
+		   and/or sell copies of the Software, and to permit persons to whom the
+		   Software is furnished to do so, subject to the following conditions:
+		   The above copyright notice and this permission notice shall be included
+		   in all copies or substantial portions of the Software.*/
 
-		return 'R ' . floor($cs2csresult[0]) . ' H ' . floor($cs2csresult[1]);
+		/* Die Funktion verschiebt das Kartenbezugssystem (map datum) vom
+		   WGS84 Datum (World Geodetic System 84) zum in Deutschland
+		   gebräuchlichen Potsdam-Datum. Geographische Länge lw und Breite
+		   bw gemessen in grad auf dem WGS84 Ellipsoid müssen
+		   gegeben sein. Ausgegeben werden geographische Länge lp
+		   und Breite bp (in grad) auf dem Bessel-Ellipsoid.
+		   Bei der Transformation werden die Ellipsoidachsen parallel
+		   verschoben um dx = -606 m, dy = -23 m und dz = -413 m.*/
+
+		// Geographische Länge lw und Breite bw im WGS84 Datum
+		if ($lw == "" || $bw == "") {
+			return array(0, 0);
+		}
+		$lw = doubleval($lw);
+		$bw = doubleval($bw);
+
+		// Quellsystem WGS 84 Datum
+		// Große Halbachse a und Abplattung fq
+		$a = 6378137.000;
+		$fq = 3.35281066e-3;
+
+		// Zielsystem Potsdam Datum
+		// Abplattung f
+		$f = $fq - 1.003748e-5;
+
+		// Parameter für datum shift
+		$dx = -606;
+		$dy = -23;
+		$dz = -413;
+
+		// Quadrat der ersten numerischen Exzentrizität in Quell- und Zielsystem
+		$e2q = (2 * $fq - $fq * $fq);
+		$e2 = (2 * $f - $f * $f);
+
+		// Breite und Länge in Radianten
+		$b1 = $bw * (pi() / 180);
+		$l1 = $lw * (pi() / 180);
+
+		// Querkrümmungshalbmesser nd
+		$nd = $a / sqrt(1 - $e2q * sin($b1) * sin($b1));
+
+		// Kartesische Koordinaten des Quellsystems WGS84
+		$xw = $nd * cos($b1) * cos($l1);
+		$yw = $nd * cos($b1) * sin($l1);
+		$zw = (1 - $e2q) * $nd * sin($b1);
+
+		// Kartesische Koordinaten des Zielsystems (datum shift) Potsdam
+		$x = $xw + $dx;
+		$y = $yw + $dy;
+		$z = $zw + $dz;
+
+		// Berechnung von Breite und Länge im Zielsystem
+		$rb = sqrt($x * $x + $y * $y);
+		$b2 = (180 / pi()) * atan(($z / $rb) / (1 - $e2));
+
+		if ($x > 0)
+		{
+			$l2 = (180 / pi()) * atan($y / $x);
+		}
+		else if ($x < 0 && $y > 0)
+		{
+			$l2 = (180 / pi()) * atan($y / $x) + 180;
+		}
+		else
+		{
+			$l2 = (180 / pi()) * atan($y / $x) - 180;
+		}
+
+		return array($l2, $b2);
+	}
+
+	function geo2gk($bp, $lp)
+	{
+		/* Copyright (c) 2006, HELMUT H. HEIMEIER
+		   Permission is hereby granted, free of charge, to any person obtaining a
+		   copy of this software and associated documentation files (the "Software"),
+		   to deal in the Software without restriction, including without limitation
+		   the rights to use, copy, modify, merge, publish, distribute, sublicense,
+		   and/or sell copies of the Software, and to permit persons to whom the
+		   Software is furnished to do so, subject to the following conditions:
+		   The above copyright notice and this permission notice shall be included
+		   in all copies or substantial portions of the Software.*/
+
+		/* Die Funktion wandelt geographische Koordinaten in GK Koordinaten
+		   um. Geographische Länge lp und Breite bp müssen im Potsdam Datum
+		   gegeben sein. Berechnet werden Rechtswert rw und Hochwert hw.*/
+
+		//Geographische Länge lp und Breite bp im Potsdam Datum
+		if ($lp == "" || $bp == "") {
+			return array(0, 0);
+		}
+		$lp = doubleval($lp);
+		$bp = doubleval($bp);
+
+		// Potsdam Datum
+		// Große Halbachse a und Abplattung f
+		$a = 6377397.155; // + $falseeasting;
+		$f = 3.34277321e-3;
+
+		// Polkrümmungshalbmesser c
+		$c = $a / (1 - $f);
+
+		// Quadrat der zweiten numerischen Exzentrizität
+		$ex2 = (2 * $f - $f * $f) / ((1 - $f) * (1 - $f));
+		$ex4 = $ex2 * $ex2;
+		$ex6 = $ex4 * $ex2;
+		$ex8 = $ex4 * $ex4;
+
+		// Koeffizienten zur Berechnung der Meridianbogenlänge
+		$e0 = $c * (pi() / 180) * (1 - 3 * $ex2 / 4 + 45 * $ex4 / 64 - 175 * $ex6 / 256 + 11025 * $ex8 / 16384);
+		$e2 = $c * (-3 * $ex2 / 8 + 15 * $ex4 / 32 - 525 * $ex6 / 1024 + 2205 * $ex8 / 4096);
+		$e4 = $c * (15 * $ex4 / 256 - 105 * $ex6 / 1024 + 2205 * $ex8 / 16384);
+		$e6 = $c * (-35 * $ex6 / 3072 + 315 * $ex8 / 12288);
+
+		// Breite in Radianten
+		$br = $bp * pi() / 180;
+
+		$tan1 = tan($br);
+		$tan2 = $tan1 * $tan1;
+		$tan4 = $tan2 * $tan2;
+
+		$cos1 = cos($br);
+		$cos2 = $cos1 * $cos1;
+		$cos4 = $cos2 * $cos2;
+		$cos3 = $cos2 * $cos1;
+		$cos5 = $cos4 * $cos1;
+
+		$etasq = $ex2 * $cos2;
+
+		// Querkrümmungshalbmesser nd
+		$nd = $c / sqrt(1 + $etasq);
+
+		// Meridianbogenlänge g aus gegebener geographischer Breite bp
+		$g = $e0 * $bp + $e2 * sin(2 * $br) + $e4 * sin(4 * $br) + $e6 * sin(6 * $br);
+
+		// Längendifferenz dl zum Bezugsmeridian lh
+		$kz = round($lp / 3);
+		$lh = $kz * 3;
+		$dl = ($lp - $lh) * pi() / 180;
+		$dl2 = $dl * $dl;
+		$dl4 = $dl2 * $dl2;
+		$dl3 = $dl2 * $dl;
+		$dl5 = $dl4 * $dl;
+
+		// Hochwert hw und Rechtswert rw als Funktion von geographischer Breite und Länge
+		$hw = ($g + $nd * $cos2 * $tan1 * $dl2 / 2 + $nd * $cos4 * $tan1 * (5 - $tan2 + 9 * $etasq)
+			* $dl4 / 24);
+		$rw = ($nd * $cos1 * $dl + $nd * $cos3 * (1 - $tan2 + $etasq) * $dl3 / 6 +
+			$nd * $cos5 * (5 - 18 * $tan2 + $tan4) * $dl5 / 120 + $kz * 1e6 + 500000);
+
+		$nk = $hw - intval($hw);
+		if ($nk < 0.5) $hw = intval($hw);
+		else $hw = intval($hw) + 1;
+
+		$nk = $rw - intval($rw);
+		if ($nk < 0.5) $rw = intval($rw);
+		else $rw = intval($rw + 1);
+
+		return array($rw, $hw);
 	}
 
 	// return string
 	function getRD()
 	{
-		$cs2csresult = $this->getCore("+proj=sterea +lat_0=52.15616055555555 +lon_0=5.38763888888889 +k=0.9999079 +x_0=155000 +y_0=463000 +towgs84=565.040,49.910,465.840,-0.40939,0.35971,-1.86849,4.0772 +ellps=bessel ");
-		return 'X ' . floor($cs2csresult[0]) . ' Y ' . floor($cs2csresult[1]);
+		// X0,Y0             Base RD coordinates Amersfoort
+		$rdx_base = 155000;
+		$rdy_base = 463000;
+		// ?0, ?0            Same base, but as wgs84 coordinates
+		$lat_base = 52.15517440;
+		$lon_base = 5.38720621;
+
+		for ($i = 0; $i <= 6; $i++)
+		{
+			for ($j = 0; $j <= 5; $j++)
+			{
+				$rpq[$i][$j] = 0;
+				$spq[$i][$j] = 0;
+			}
+		}
+		//#coefficients
+		$rpq[0][1] = 190094.945;
+		$rpq[1][1] = -11832.228;
+		$rpq[2][1] = -114.221;
+		$rpq[0][3] = -32.391;
+		$rpq[1][0] = -0.705;
+		$rpq[3][1] = -2.340;
+		$rpq[1][3] = -0.608;
+		$rpq[0][2] = -0.008;
+		$rpq[2][3] = 0.148;
+
+		$spq[1][0] = 309056.544;
+		$spq[0][2] = 3638.893;
+		$spq[2][0] = 73.077;
+		$spq[1][2] = -157.984;
+		$spq[3][0] = 59.788;
+		$spq[0][1] = 0.433;
+		$spq[2][2] = -6.439;
+		$spq[1][1] = -0.032;
+		$spq[0][4] = 0.092;
+		$spq[1][4] = -0.054;
+
+		// Calculate X, Y of origin
+		$latDiff = $this->nLat - $lat_base;
+		$dlat = 0.36 * $latDiff;
+		$lonDiff = $this->nLon - $lon_base;
+		$dlon = 0.36 * $lonDiff;
+		$xOrigin = 0;
+		$yOrigin = 0;
+
+		for ($q = 0; $q <= 5; $q++)
+		{
+			for ($p = 0; $p <= 6; $p++)
+			{
+				$xOrigin = $xOrigin + ($rpq[$p][$q] * ((pow($dlat, $p)) * (pow($dlon, $q))));
+				$yOrigin = $yOrigin + ($spq[$p][$q] * ((pow($dlat, $p)) * (pow($dlon, $q))));
+			}
+		}
+		$xOrigin = $xOrigin + $rdx_base;
+		$yOrigin = $yOrigin + $rdy_base;
+
+		return 'X ' . floor($xOrigin) . ' Y ' . floor($yOrigin);
 	}
 
 	// returns string
@@ -259,59 +520,6 @@ class coordinate
 		$mapsearch = "<a href=\"http://map.search.ch/$y,$x\" target=\"_blank\">map.search.ch</a>";
 		
 		return array('coord' => $swissgrid, $mapplus, $mapsearch);
-	}
-
-	function getCore($to)
-	{
-		return $this->getCoreCommand($this->nLon, $this->nLat, " +proj=latlong +datum=WGS84 +to " . $to);
-	}
-
-	static function getCoreCommand($x, $y, $command)
-	{
-		global $opt;
-
-		$descriptorspec = array(
-					0 => array("pipe", "r"),     // stdin is a pipe that the child will read from
-					1 => array("pipe", "w"),     // stdout is a pipe that the child will write to
-					2 => array("pipe", "w")      // stderr is a pipe that the child will write to
-					);
-
-		if (mb_eregi('^[a-z0-9_ ,\+\-=\.]*$', $command) == 0)
-			die("invalid arguments in command: " . $command ."\n");
-
-		$command = $opt['bin']['cs2cs'] . " " . $command; 
-
-		$process = proc_open($command, $descriptorspec, $pipes);
-
-		if (is_resource($process))
-		{
-			fwrite($pipes[0], $x . " " . $y);
-			fclose($pipes[0]);
-
-			$stdout = stream_get_contents($pipes[1]);
-			fclose($pipes[1]);
-
-			$stderr = stream_get_contents($pipes[2]);
-			fclose($pipes[2]);
-	 
-			// 
-			// $procstat = proc_get_status($process);
-			// 
-			// neither proc_close nor proc_get_status return reasonable results with PHP5 and linux 2.6.11,
-			// see http://bugs.php.net/bug.php?id=32533
-			//
-			// as temporary (?) workaround, check stderr output.
-			// (Vinnie, 2006-02-09)
-
-			if ($stderr)
-    		die("proc_open() failed:<br>command='$command'<br>stderr='" . $stderr . "'");
-
-			proc_close($process);
-
-			return explode_multi(mb_trim($stdout), "\t\n ");
-		}
-		else
-			die("proc_open() failed, command=$command\n");
 	}
 
 	static function parseRequestLat($name)

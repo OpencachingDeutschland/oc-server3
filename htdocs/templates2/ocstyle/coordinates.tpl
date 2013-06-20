@@ -39,7 +39,9 @@
 		<p style="color: 5890a8"><b>Swissgrid</b> <small>(CH1903)</small><br />
 		{$coordSwissGrid.coord|escape}</p>
 	</div>
+    {if $showRD}
 	<div style="margin-top:4px;">
 		<p style="color: 5890a8"><b>RD</b> <small>(Dutch Grid)</small><br />
 		{$coordRD|escape}</p>
 	</div>
+    {/if}

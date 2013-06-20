@@ -97,6 +97,7 @@ class user
 		else
 		{
 			$this->reUser->load($this->nUserId);
+			$this->reUserStat->load($this->nUserId);
 		}
 	}
 
@@ -1243,6 +1244,38 @@ class user
 	{
 		$this->reUser->reload();
 		$this->reUserStat->reload();
+	}
+	
+	function getGivenRatings()
+	{
+		// get number of cache ratings for this user
+		return sql_value("
+							SELECT COUNT(`user_id`)
+							FROM `cache_rating`
+							WHERE `user_id`='&1'",
+						0,
+						$this->getUserId());
+	}
+	
+	function getMaxRatings()
+	{
+		global $opt;
+		
+		// get number of possible rates
+		return floor($this->getStatFound() * $opt['logic']['rating']['percentageOfFounds'] / 100);
+	}
+	
+	function allowRatings()
+	{
+		// new ratings allowed, if "given ratings" < "max ratings"
+		return ($this->getGivenRatings() < $this->getMaxRatings());
+	}
+	
+	function foundsUntilNextRating()
+	{
+		global $opt;
+		
+		return ($opt['logic']['rating']['percentageOfFounds'] - ($this->getStatFound() % $opt['logic']['rating']['percentageOfFounds']));
 	}
 }
 ?>

@@ -49,8 +49,8 @@
 		// get cache object
 		$cache = new cache($cacheId);
 		
-		// check log allowed (owner, admin, already published, not disabled)
-		$validate['logAllowed'] = ($cache->allowLog() || $useradmin || ($cache->getStatus() != 5 && $cache->getStatus() != 6 && $cache->getStatus() != 7));
+		// check log allowed, depending on cache state and logged in user
+		$validate['logAllowed'] = $cache->allowLog();
 				
 		// get user object
 		$user = new user($login->userid);
@@ -141,16 +141,8 @@
 		if (isset($_POST['submitform']) && $cache->requireLogPW())
 			$validate['logPw'] = $cache->validateLogPW($logType, $_POST['log_pw']);
 		
-		// check error
-		$loggable = true;
-		foreach ($validate as $test)
-		{
-			$loggable &= $test;
-			
-			// break on error
-			if ($loggable === false)
-				break;
-		}
+		// check for errors
+		$loggable = array_product($validate);
 		
 		// prepare duplicate log error
 		$validate['duplicateLog'] = true;
@@ -186,8 +178,8 @@
 				$cacheLog->setType($logType);
 				$cacheLog->setDate($logDate);
 				$cacheLog->setText($logText);
-				$cacheLog->setTextHtml((($descMode != 1) ? 1 : 0));
-				$cacheLog->setTextHtmlEdit((($descMode == 3) ? 1 : 0));
+				$cacheLog->setTextHtml(($descMode != 1) ? 1 : 0);
+				$cacheLog->setTextHtmlEdit(($descMode == 3) ? 1 : 0);
 				
 				// save log values
 				$cacheLog->save();

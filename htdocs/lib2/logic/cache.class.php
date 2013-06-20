@@ -9,7 +9,7 @@
  ***************************************************************************/
 
 require_once($opt['rootpath'] . 'lib2/logic/rowEditor.class.php');
-require_once($opt['rootpath'] . 'lib/logtypes.inc.php'); // lib1 ???
+require_once($opt['rootpath'] . 'lib2/logic/logtypes.inc.php');
 
 class cache
 {
@@ -575,6 +575,9 @@ class cache
 	}
 	
 	
+	// $userLogType:
+	//   Logtype selected by the user, or null if not applicable
+
 	function getUserLogTypes($userLogType, $oldLogType = 0)
 	{
 		global $translate, $login;
@@ -582,7 +585,7 @@ class cache
 		$logTypes = array();
 		
 		$logtypeNames = get_logtype_names();
-		$allowedLogtypes = get_cache_log_types($this->getCacheId(), 0);
+		$allowedLogtypes = get_cache_log_types($this->getCacheId(), $oldLogType);
 		$defaultLogType = $userLogType; 
 		if (!logtype_ok($this->getCacheId(), $defaultLogType, $oldLogType))
 			$defaultLogType = $allowedLogtypes[0];

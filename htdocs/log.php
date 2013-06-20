@@ -243,7 +243,8 @@
 		$tpl->assign('octeamcommentallowed', $cache->teamcommentAllowed(3));
 		$tpl->assign('octeamcomment', ($ocTeamComment || (!$cache->allowLog() && $useradmin)) ? true : false);
 		$tpl->assign('octeamcommentclass', (!$cache->allowLog() && $useradmin) ? 'redtext' : '');
-		
+		// masslogs
+		$tpl->assign('masslog', cachelog::isMasslogging($user->getUserId()));
 		
 	}
 	else

@@ -292,5 +292,45 @@ class cachelog
 						0,
 						$cacheId, $userId, $logType, $logDate, $logText) != 0);
 	}
+	
+	static function isMasslogging($userId)
+	{
+		// check for wrong-dated mass logs 
+		$rs = sql("
+					SELECT `date`, `text`
+					FROM `cache_logs`
+					WHERE `id`= (
+						SELECT `id`
+						FROM `cache_logs`
+						WHERE `user_id`='&1'
+						ORDER BY `date_created` DESC,
+								 `id` DESC
+						LIMIT 1)",
+				$userId); 
+				
+		$rLastLog = sql_fetch_array($rs); 
+		sql_free_result($rs); 
+		
+		if ($rLastLog) 
+		{ 
+			$rs = sql("
+						SELECT COUNT(*) as `masslogs`
+						FROM `cache_logs`
+						WHERE `user_id`='&1'
+							AND `date`='&2'
+							AND `text`='&3'",
+			$userId,
+			$rLastLog['date'],
+			$rLastLog['text']);
+			 
+			$r = sql_fetch_array($rs); 
+			$masslogs = $r['masslogs']; 
+			sql_free_result($rs); 
+		} 
+		else 
+			$masslogs = 0;
+		 
+		return ($masslogs > 20);
+	}
 }
 ?>

@@ -39,8 +39,8 @@
 		<table class="table">
 			{if $email_problems > 0}
 			<tr>
-				<td colspan="2" class="errormsg">
-					<p>{t}One ore more emails to this user could not be delivered. It might be a good idea to additionally log comments on the user's geocaches, and/or trying to contact him/her through other channels like a message board account or another geocaching platform.{/t}</p>
+				<td colspan="2" class="redtext">
+					<p>{t}One ore more emails to this user could not be delivered. It might be a good idea to additionally log comments on the user's geocaches, and/or use alternative contact addresses like a message board account or another geocaching platform.{/t}</p>
 				</td>
 			</tr>
 			{/if}

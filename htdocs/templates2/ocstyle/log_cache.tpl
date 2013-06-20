@@ -66,7 +66,7 @@ function _chkFound () {
 		<td colspan="2" style="text-align: right;"><b>{t 1=$userFound}You found %1 caches until now.{/t}</b></td>
 	</tr>
 	<tr><td class="spacer" colspan="2"></td></tr>
-	{if $error.duplicateLog==false}
+	{if $validate.duplicateLog==false}
 	<tr>
 		<td colspan="2"><span class="errormsg">{t}This log has already been saved, you maybe send it twice!{/t}</span></td>
 	</tr>
@@ -96,7 +96,7 @@ function _chkFound () {
 		  &nbsp;&nbsp;&nbsp;
 			<input class="input20" type="text" name="loghour" maxlength="2" value="{$loghour}" /> :
 			<input class="input20" type="text" name="logminute" maxlength="2" value="{$logminute}" />
-			&nbsp;&nbsp;{if $error.dateOk==false}<span class="errormsg">{t}date or time is invalid{/t}</span>{/if}
+			&nbsp;&nbsp;{if $validate.dateOk==false}<span class="errormsg">{t}date or time is invalid{/t}</span>{/if}
 		</td>
 	</tr>
 	<tr>
@@ -107,6 +107,7 @@ function _chkFound () {
 		</td>
 	</tr>
 	<tr><td class="spacer" colspan="2"></td></tr>
+	{if $isowner==false}
 	<tr>
 		<td valign="top">{t}Recommendations:{/t}</td>
 		<td valign="top">
@@ -114,12 +115,13 @@ function _chkFound () {
 				{t 1=$givenratings 2=$maxratings}You have given %1 of %2 possible recommendations.{/t}
 			{else}
 				{t 1=$foundsuntilnextrating}You need additional %1 finds, to make another recommendation.{/t}
-				{if ($givenratings==$maxratings && $israted==false)}<br />{t}Alternatively, you can withdraw a <a href="mytop5.php">existing recommendation</a>.{/t}{/if}
+				{if ($givenratings > 0 && $givenratings==$maxratings && $israted==false)}<br />{t}Alternatively, you can withdraw a <a href="mytop5.php">existing recommendation</a>.{/t}{/if}
 			{/if}
 			<noscript><br />{t}A recommendation can only be made within a "found"-log!{/t}</noscript>
 		</td>
 	</tr>
 	<tr><td class="spacer" colspan="2"></td></tr>
+	{/if}
 </table>
 
 <table class="table">
@@ -167,7 +169,7 @@ function _chkFound () {
 	{if $logpw}
 	<tr>
 		<td colspan="2">{t}passwort to log:{/t}
-			<input class="input100" type="text" name="log_pw" maxlength="20" value="" /> {if $error.pwOk==false}<span class="errormsg">{t}Invalid password!{/t}</span>{else}({if $cachetype==6}{t}only for attended-logs{/t}{else}{t}only for found-logs{/t}{/if}){/if}
+			<input class="input100" type="text" name="log_pw" maxlength="20" value="" /> {if $validate.pwOk==false}<span class="errormsg">{t}Invalid password!{/t}</span>{else}({if $cachetype==6}{t}only for attended-logs{/t}{else}{t}only for found-logs{/t}{/if}){/if}
 		</td>
 	</tr>
 	<tr><td class="spacer" colspan="2"></td></tr>

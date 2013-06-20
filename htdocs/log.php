@@ -40,20 +40,22 @@
 	$useradmin = ($login->hasAdminPriv()) ? 1 : 0;
 	
 	// prepare array to indicate errors in template
-	$error = array();
+	$validate = array();
 	
 	// proceed loggable, if valid cache_id
-	$error['logAllowed'] = true;
+	$validate['logAllowed'] = true;
 	if ($cacheId != 0)
 	{
 		// get cache object
 		$cache = new cache($cacheId);
 		
-		// check log allowed (owner, admin, already published)
-		$error['logAllowed'] = ($cache->allowLog() || $useradmin || $cache->getStatus() != 5);
+		// check log allowed (owner, admin, already published, not disabled)
+		$validate['logAllowed'] = ($cache->allowLog() || $useradmin || ($cache->getStatus() != 5 && $cache->getStatus() != 6 && $cache->getStatus() != 7));
 				
 		// get user object
 		$user = new user($login->userid);
+		// is user cache owner
+		$isOwner = ($user->getUserId() == $cache->getUserId());
 		
 		// assing ratings to template
 		$tpl->assign('ratingallowed', $user->allowRatings());
@@ -61,6 +63,7 @@
 		$tpl->assign('maxratings', $user->getMaxRatings());
 		$tpl->assign('israted', $cache->isRecommendedByUser($user->getUserId()));
 		$tpl->assign('foundsuntilnextrating', $user->foundsUntilNextRating());
+		$tpl->assign('isowner', $isOwner);
 		
 		// check and prepare form values
 		$logText        = (isset($_POST['logtext']))        ? ($_POST['logtext'])           : '';
@@ -113,14 +116,14 @@
 			&& ($logTimeHour . $logTimeMinute == "" || is_numeric($logTimeHour))
 			&& ($logTimeMinute == "" || is_numeric($logTimeMinute)))
 		{
-			$error['dateOk'] = checkdate(	$logDateMonth, $logDateDay, $logDateYear)
+			$validate['dateOk'] = checkdate(	$logDateMonth, $logDateDay, $logDateYear)
 											&& ($logDateYear >= 2000) 
 											&& ($logTimeHour>=0)
 											&& ($logTimeHour<=23)
 											&& ($logTimeMinute>=0)
 											&& ($logTimeMinute<=59);
-			if ($error['dateOk'] && isset($_POST['submitform']))
-				$error['dateOk'] = (mktime(	$logTimeHour+0,
+			if ($validate['dateOk'] && isset($_POST['submitform']))
+				$validate['dateOk'] = (mktime(	$logTimeHour+0,
 											$logTimeMinute+0,
 											0,
 											$logDateMonth,
@@ -128,19 +131,19 @@
 											$logDateYear) < time());
 		}
 		else
-			$error['dateOk'] = false;
+			$validate['dateOk'] = false;
 		
 		// check log type
-		$error['logType'] = $cache->logTypeAllowed($logType);
+		$validate['logType'] = $cache->logTypeAllowed($logType);
 		
 		// check log password
-		$error['logPw'] = true;
+		$validate['logPw'] = true;
 		if (isset($_POST['submitform']) && $cache->requireLogPW())
-			$error['logPw'] = $cache->validateLogPW($logType, $_POST['log_pw']);
+			$validate['logPw'] = $cache->validateLogPW($logType, $_POST['log_pw']);
 		
 		// check error
 		$loggable = true;
-		foreach ($error as $test)
+		foreach ($validate as $test)
 		{
 			$loggable &= $test;
 			
@@ -150,7 +153,7 @@
 		}
 		
 		// prepare duplicate log error
-		$error['duplicateLog'] = true;
+		$validate['duplicateLog'] = true;
 		
 		// all checks done, no error => log
 		if (isset($_POST['submitform']) && $loggable)
@@ -185,7 +188,6 @@
 				$cacheLog->setText($logText);
 				$cacheLog->setTextHtml((($descMode != 1) ? 1 : 0));
 				$cacheLog->setTextHtmlEdit((($descMode == 3) ? 1 : 0));
-				$cacheLog->setNode($opt['logic']['node']['id']);
 				
 				// save log values
 				$cacheLog->save();
@@ -193,8 +195,8 @@
 				// update cache status
 				$cache->updateCacheStatus($logType);
 				
-				// update rating
-				if ($rateOption)
+				// update rating (if correct logtype, user has ratings to give and is not owner)
+				if ($rateOption && $user->allowRatings() && !$isOwner)
 					if ($rateCache)
 						$cache->addRecommendation($user->getUserId());
 					else
@@ -212,13 +214,13 @@
 			}
 			else
 			{
-				$error['duplicateLog'] = false;
+				$validate['duplicateLog'] = false;
 			}
 		}
 		
 		// assign values to template
 		// error
-		$tpl->assign('error', $error);
+		$tpl->assign('validate', $validate);
 		// user info
 		$tpl->assign('userFound', $user->getStatFound());
 		// cache infos
@@ -236,21 +238,21 @@
 		// text, <html> or editor
 		$tpl->assign('descMode', $descMode);
 		// logtypes
-		$tpl->assign('logtypes', $cache->getUserLogTypes($user->getUserId(),$logType));
+		$tpl->assign('logtypes', $cache->getUserLogTypes($logType));
 		// teamcomment
 		$tpl->assign('octeamcommentallowed', $cache->teamcommentAllowed(3));
-		$tpl->assign('octeamcomment', ($ocTeamComment || ($cache->allowLog() && $useradmin)) ? true : false);
-		$tpl->assign('octeamcommentclass', ($cache->allowLog() && $useradmin) ? 'redtext' : '');
+		$tpl->assign('octeamcomment', ($ocTeamComment || (!$cache->allowLog() && $useradmin)) ? true : false);
+		$tpl->assign('octeamcommentclass', (!$cache->allowLog() && $useradmin) ? 'redtext' : '');
 		
 		
 	}
 	else
 	{
 		// not loggable
-		$error['logAllowed'] = false;
+		$validate['logAllowed'] = false;
 	}
 	
 	// prepare template and display
-	$tpl->assign('error', $error);
+	$tpl->assign('validate', $validate);
 	$tpl->display();
 ?>

@@ -8,7 +8,7 @@
  *  Unicode Reminder メモ
  ***************************************************************************/
 
-	$opt['rootpath'] = '../../';
+	$opt['rootpath'] = '../htdocs/';
   require($opt['rootpath'] . 'lib2/web.inc.php');
 
 	$rs = sql("SELECT * FROM queries");

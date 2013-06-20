@@ -544,10 +544,6 @@
 	$opt['map']['min_maxrecords'] = 100;
 	$opt['map']['max_maxrecords'] = 4000;
 
- 	/* external binaries
- 	 */
- 	$opt['bin']['cs2cs'] = 'cs2cs';
-
 	/* Opencaching Node Daemon
 	 *
 	 */

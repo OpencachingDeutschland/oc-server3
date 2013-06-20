@@ -10,7 +10,7 @@
 
 require_once($opt['rootpath'] . 'lib2/logic/rowEditor.class.php');
 require_once($opt['rootpath'] . 'lib2/logic/cache.class.php');
-require_once($opt['rootpath'] . 'lib/logtypes.inc.php');
+require_once($opt['rootpath'] . 'lib2/logic/logtypes.inc.php');
 
 class cachelog
 {

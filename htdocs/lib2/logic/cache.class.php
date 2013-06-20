@@ -553,22 +553,18 @@ class cache
 	}
 
 	
-	function logTypeAllowed($logType)
+	function logTypeAllowed($logType, $oldLogType = 0)
 	{
 		// check if given logType is valid for this cache type
-		return (sql_value("	SELECT COUNT(*)
-							FROM cache_logtype
-							WHERE cache_type_id='&1'
-								AND log_type_id='&2'",
-					0,
-					$this->getType(), $logType) > 0);
+		return logtype_ok($this->getCacheId(), $logType, $oldLogType);
 	}
 	
 	
 	function updateCacheStatus($logType)
 	{
 		// get cache status
-		$cacheStatus = sql_value("	SELECT `cache_status`
+		$cacheStatus = sql_value("
+									SELECT `cache_status`
 									FROM `log_types`
 									WHERE `id`='&1'",
 							0,
@@ -579,7 +575,7 @@ class cache
 	}
 	
 	
-	function getUserLogTypes($userId, $userLogType)
+	function getUserLogTypes($userLogType, $oldLogType = 0)
 	{
 		global $translate, $login;
 		
@@ -588,7 +584,7 @@ class cache
 		$logtypeNames = get_logtype_names();
 		$allowedLogtypes = get_cache_log_types($this->getCacheId(), 0);
 		$defaultLogType = $userLogType; 
-		if (!logtype_ok($this->getCacheId(), $defaultLogType, 0))
+		if (!logtype_ok($this->getCacheId(), $defaultLogType, $oldLogType))
 			$defaultLogType = $allowedLogtypes[0];
 		
 		// prepare array
@@ -605,10 +601,10 @@ class cache
 		return $logTypes;
 	}
 	
-	function teamcommentAllowed($logType)
+	function teamcommentAllowed($logType, $oldTeamComment = false)
 	{
 		// checks if teamcomment is allowed
-		return teamcomment_allowed($this->getCacheId(),$logType);
+		return teamcomment_allowed($this->getCacheId(), $logType, $oldTeamComment);
 	}
 }
 ?>

@@ -64,6 +64,8 @@ class cachelog
 
 	static function createNewFromCache($oCache, $nUserId)
 	{
+		global $opt;
+		
 		// check if user is allowed to log this cache!
 		if ($oCache->exist() == false)
 			return false;
@@ -73,6 +75,7 @@ class cachelog
 		$oCacheLog = new cachelog(ID_NEW);
 		$oCacheLog->setUserId($nUserId);
 		$oCacheLog->setCacheId($oCache->getCacheId());
+		$oCacheLog->setNode($opt['logic']['node']['id']);
 		return $oCacheLog;
 	}
 
@@ -278,7 +281,8 @@ class cachelog
 	static function isDuplicate($cacheId, $userId, $logType, $logDate, $logText)
 	{
 		// get info if exact the same values are already in database
-		return (sql_value("	SELECT COUNT(`id`)
+		return (sql_value("
+							SELECT COUNT(`id`)
 							FROM `cache_logs`
 							WHERE `cache_id`='&1'
 								AND `user_id`='&2'

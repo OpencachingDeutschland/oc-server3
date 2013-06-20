@@ -1254,7 +1254,8 @@ class user
 	function getGivenRatings()
 	{
 		// get number of cache ratings for this user
-		return sql_value("	SELECT COUNT(`user_id`)
+		return sql_value("
+							SELECT COUNT(`user_id`)
 							FROM `cache_rating`
 							WHERE `user_id`='&1'",
 						0,

@@ -545,6 +545,11 @@
 	$opt['map']['min_maxrecords'] = 100;
 	$opt['map']['max_maxrecords'] = 4000;
 
+ 	/*
+	 * html purifier
+	 */
+	$opt['html_purifier']['cache_path'] = dirname(__FILE__).'/../cache2/html_purifier/';
+
 	/* Opencaching Node Daemon
 	 *
 	 */

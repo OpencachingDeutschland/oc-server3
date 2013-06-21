@@ -352,7 +352,7 @@
 			$thisline = mb_ereg_replace('{hints}', '', $thisline);
 		else
 		  // Ocprop:  <groundspeak:encoded_hints>(.*?)<\/groundspeak:encoded_hints>
-			$thisline = mb_ereg_replace('{hints}', '      <groundspeak:encoded_hints>' . decodeEntities(strip_tags($r['hint'])) . '</groundspeak:encoded_hints>
+			$thisline = mb_ereg_replace('{hints}', '      <groundspeak:encoded_hints>' . xmlentities(decodeEntities(strip_tags($r['hint']))) . '</groundspeak:encoded_hints>
 ', $thisline);
 
 		$thisline = mb_ereg_replace('{shortdesc}', xmlentities($r['short_desc']), $thisline);
@@ -578,9 +578,9 @@
 		return $str;
 	}
 
-	function changePlaceholder($str, $inverse = true)
+	function changePlaceholder($str, $inverse = false)
 	{
-		$placeholter[0] = '{oc-placeholder-lt}'; $entity[0] = '&lt;';
+		$placeholder[0] = '{oc-placeholder-lt}'; $entity[0] = '&lt;';
 		$placeholder[1] = '{oc-placeholder-gt}'; $entity[1] = '&gt;';
 		for ($i=0;$i<=1;$i++)
 		{

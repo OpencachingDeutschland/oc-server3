@@ -272,7 +272,7 @@ Logeinträge:
 			
 			$thislog = mb_ereg_replace('{type}', $logtype, $thislog);
 			if ($rLog['text_html'] == 0)
-				$thislog = mb_ereg_replace('{text}', strip_tags($rLog['text']), $thislog);
+				$thislog = mb_ereg_replace('{text}', decodeEntities(strip_tags($rLog['text'])), $thislog);
 			else
 				$thislog = mb_ereg_replace('{text}', html2txt($rLog['text']), $thislog);
 

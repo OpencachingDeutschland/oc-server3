@@ -30,7 +30,7 @@ function insertSmiley(parSmiley) {
   /* other Browser */
   else
   {
-    alert(navigator.appName + ": {t}Setting smilies is not supported{/t}");
+    alert(navigator.appName + ": {/literal}{t}Setting smilies is not supported{/t}{literal}");
   }
 }
 
@@ -69,7 +69,7 @@ function _chkFound () {
 	{t}Wrong log dates can adversly affect several OC functions like searching by last log date. Also, the owner and other caches may think that the cache has been currently found date and type of the last log are shown in the owner's caches list!), which can adversely affect cache maintenance and lead to more DNFs.{/t}
 </p>
 {/if}
-{if showstatfounds==true}
+{if $showstatfounds==true}
 <p class="align-right">
 	<b>{t 1=$userFound}You found %1 caches until now.{/t}</b>
 </p>
@@ -82,7 +82,7 @@ function _chkFound () {
 	<tr><td class="spacer" colspan="2"></td></tr>
 	{if $validate.duplicateLog==false}
 	<tr>
-		<td colspan="2"><span class="errormsg">{t}This log has already been saved, you maybe send it twice!{/t}</span></td>
+		<td colspan="2"><span class="errormsg">{t}This log already exists - you tried to submit it twice!{/t}</span></td>
 	</tr>
 	<tr><td class="spacer" colspan="2"></td></tr>
 	{/if}
@@ -131,7 +131,7 @@ function _chkFound () {
 				{t 1=$foundsuntilnextrating}You need additional %1 finds, to make another recommendation.{/t}
 				{if ($givenratings > 0 && $givenratings==$maxratings && $israted==false)}<br />{t}Alternatively, you can withdraw a <a href="mytop5.php">existing recommendation</a>.{/t}{/if}
 			{/if}
-			<noscript><br />{t}A recommendation can only be made within a "found"-log!{/t}</noscript>
+			<noscript><br />{t}A recommendation can only be made with a "found" or "attended" log!{/t}</noscript>
 		</td>
 	</tr>
 	<tr><td class="spacer" colspan="2"></td></tr>

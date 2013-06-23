@@ -659,7 +659,8 @@
 							   OLD.`logpw`!=NEW.`logpw` OR 
 							   OLD.`search_time`!=NEW.`search_time` OR 
 							   OLD.`way_length`!=NEW.`way_length` OR 
-							   OLD.`wp_gc`!=NEW.`wp_gc` OR 
+							   OLD.`wp_gc`!=NEW.`wp_gc` OR
+								 /* See notes on wp_gc_maintained in modification-dates.txt. */
 							   OLD.`wp_nc`!=NEW.`wp_nc` OR 
 							   OLD.`wp_oc`!=NEW.`wp_oc` OR 
 							   OLD.`default_desclang`!=NEW.`default_desclang` OR 
@@ -1163,6 +1164,10 @@
 							SET NEW.`last_modified`=NOW();
 						END IF;
 					END;");
+
+	// Triggers for updating listing date (sp_update_cache_listingdate) on mp3 changes
+	// are missing. We can't add them because there is only an object_id field and no
+	// object_type, so we don't know which mp3 belongs to a cache.
 
 	sql_dropTrigger('mp3BeforeUpdate');
 	sql("CREATE TRIGGER `mp3BeforeUpdate` BEFORE UPDATE ON `mp3` 

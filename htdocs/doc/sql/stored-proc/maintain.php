@@ -18,7 +18,8 @@
 
   if ($db_root_password == '')
   {
-		echo "enter DB $db_root_username password: ";
+		echo "enter DB $db_root_username password:\n";
+		flush();
 		$fh = fopen('php://stdin', 'r');
 		$db_root_password = trim(fgets($fh, 1024));
 		fclose($fh);

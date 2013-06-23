@@ -54,6 +54,7 @@
 	function update_triggers()
 	{
 		global $opt;
+		echo " ";  // space for the case of a DB password prompt
 		system('php ' . $opt['rootpath'] . 'doc/sql/stored-proc/maintain.php');
 	}
 

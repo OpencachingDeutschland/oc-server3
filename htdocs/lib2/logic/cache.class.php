@@ -425,6 +425,20 @@ class cache
 
 		return true;
 	}
+	
+	// checks if $userId has adopted this cache
+	function hasAdopted($userId)
+	{
+		// cache_adoption exists?
+		return (sql_value("
+						SELECT COUNT(*)
+						FROM `cache_adoption`
+						WHERE `cache_id`='&1'
+							AND `user_id`='&2'",
+					0,
+					$this->nCacheId,
+					$userId) != 0);
+	}
 
 	// true if anyone can view the cache
 	function isPublic()
@@ -608,6 +622,17 @@ class cache
 	{
 		// checks if teamcomment is allowed
 		return teamcomment_allowed($this->getCacheId(), $logType, $oldTeamComment);
+	}
+	
+	function statusUserLogAllowed()
+	{
+		return (sql_value("
+							SELECT `cache_status`.`allow_user_log`
+							FROM `cache_status`,`caches`
+							WHERE `caches`.`status`=`cache_status`.`id`
+								AND `caches`.`cache_id`='&1'",
+						0,
+						$this->getCacheId()) == 1);
 	}
 }
 ?>

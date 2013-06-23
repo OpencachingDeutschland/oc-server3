@@ -10,7 +10,7 @@
 
 require_once($opt['rootpath'] . 'lib2/logic/rowEditor.class.php');
 require_once($opt['rootpath'] . 'lib2/logic/cache.class.php');
-require_once($opt['rootpath'] . 'lib/logtypes.inc.php');
+require_once($opt['rootpath'] . 'lib2/logic/logtypes.inc.php');
 
 class cachelog
 {
@@ -58,6 +58,23 @@ class cachelog
 		$oCacheLog = new cachelog(ID_NEW);
 		$oCacheLog->setUserId($nUserId);
 		$oCacheLog->setCacheId($nCacheId);
+		$oCacheLog->setNode($opt['logic']['node']['id']);
+		return $oCacheLog;
+	}
+
+	static function createNewFromCache($oCache, $nUserId)
+	{
+		global $opt;
+		
+		// check if user is allowed to log this cache!
+		if ($oCache->exist() == false)
+			return false;
+		if ($oCache->allowLog() == false)
+			return false;
+
+		$oCacheLog = new cachelog(ID_NEW);
+		$oCacheLog->setUserId($nUserId);
+		$oCacheLog->setCacheId($oCache->getCacheId());
 		$oCacheLog->setNode($opt['logic']['node']['id']);
 		return $oCacheLog;
 	}
@@ -259,6 +276,61 @@ class cachelog
 		// Logic Error - log types are still valid when no NEW logs are allowed for the cache.
 		// (Would e.g. block admin logs and log-type restoring for locked caches.)
 		return get_cache_log_types($this->getCacheId(),$this->getType());  // depends on userid 
+	}
+	
+	static function isDuplicate($cacheId, $userId, $logType, $logDate, $logText)
+	{
+		// get info if exact the same values are already in database
+		return (sql_value("
+							SELECT COUNT(`id`)
+							FROM `cache_logs`
+							WHERE `cache_id`='&1'
+								AND `user_id`='&2'
+								AND `type`='&3'
+								AND `date`='&4'
+								AND `text`='&5'",
+						0,
+						$cacheId, $userId, $logType, $logDate, $logText) != 0);
+	}
+	
+	static function isMasslogging($userId)
+	{
+		// check for wrong-dated mass logs 
+		$rs = sql("
+					SELECT `date`, `text`
+					FROM `cache_logs`
+					WHERE `id`= (
+						SELECT `id`
+						FROM `cache_logs`
+						WHERE `user_id`='&1'
+						ORDER BY `date_created` DESC,
+								 `id` DESC
+						LIMIT 1)",
+				$userId); 
+				
+		$rLastLog = sql_fetch_array($rs); 
+		sql_free_result($rs); 
+		
+		if ($rLastLog) 
+		{ 
+			$rs = sql("
+						SELECT COUNT(*) as `masslogs`
+						FROM `cache_logs`
+						WHERE `user_id`='&1'
+							AND `date`='&2'
+							AND `text`='&3'",
+			$userId,
+			$rLastLog['date'],
+			$rLastLog['text']);
+			 
+			$r = sql_fetch_array($rs); 
+			$masslogs = $r['masslogs']; 
+			sql_free_result($rs); 
+		} 
+		else 
+			$masslogs = 0;
+		 
+		return ($masslogs > 20);
 	}
 }
 ?>

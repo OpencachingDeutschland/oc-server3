@@ -547,6 +547,11 @@
  	/* external binaries
  	 */
  	$opt['bin']['cs2cs'] = 'cs2cs';
+ 	
+ 	/*
+	 * html purifier
+	 */
+	$opt['html_purifier']['cache_path'] = dirname(__FILE__).'/../cache2/html_purifier/';
 
 	/* Opencaching Node Daemon
 	 *

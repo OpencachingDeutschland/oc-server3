@@ -67,7 +67,7 @@
 		
 		// check and prepare form values
 		$logText        = (isset($_POST['logtext']))        ? ($_POST['logtext'])           : '';
-		$logType        = (isset($_POST['logtype']))        ? ($_POST['logtype']+0)         : null;
+		$logType        = (isset($_REQUEST['logtype']))     ? ($_REQUEST['logtype']+0)      : null;
 		$logDateDay     = (isset($_POST['logday']))         ? trim($_POST['logday'])        : date('d');
 		$logDateMonth   = (isset($_POST['logmonth']))       ? trim($_POST['logmonth'])      : date('m');
 		$logDateYear    = (isset($_POST['logyear']))        ? trim($_POST['logyear'])       : date('Y');
@@ -187,8 +187,8 @@
 				// update cache status
 				$cache->updateCacheStatus($logType);
 				
-				// update rating (if correct logtype, user has ratings to give and is not owner)
-				if ($rateOption && $user->allowRatings() && !$isOwner)
+				// update rating (if correct logtype, user has ratings to give and is not owner (exept owner adopted cache))
+				if ($rateOption && $user->allowRatings() && (!$isOwner || ($isOwner && $cache->hasAdopted($user->getUserId()))))
 					if ($rateCache)
 						$cache->addRecommendation($user->getUserId());
 					else
@@ -233,10 +233,12 @@
 		$tpl->assign('logtypes', $cache->getUserLogTypes($logType));
 		// teamcomment
 		$tpl->assign('octeamcommentallowed', $cache->teamcommentAllowed(3));
-		$tpl->assign('octeamcomment', ($ocTeamComment || (!$cache->allowLog() && $useradmin)) ? true : false);
-		$tpl->assign('octeamcommentclass', (!$cache->allowLog() && $useradmin) ? 'redtext' : '');
+		$tpl->assign('octeamcomment', ($ocTeamComment || (!$cache->statusUserLogAllowed() && $useradmin)) ? true : false);
+		$tpl->assign('octeamcommentclass', (!$cache->statusUserLogAllowed() && $useradmin) ? 'redtext' : '');
 		// masslogs
 		$tpl->assign('masslog', cachelog::isMasslogging($user->getUserId()));
+		// show number of found on log page
+		$tpl->assign('showstatfounds', $user->showStatFounds());
 		
 	}
 	else

@@ -1,4 +1,4 @@
-﻿{***************************************************************************
+{***************************************************************************
 *  You can find the license in the docs directory
 *
 *  Unicode Reminder メモ
@@ -50,11 +50,16 @@ function _chkFound () {
 
 //-->
 {/literal}
+{* 
+ * capture allows us to "eval" the link tag with the variable values
+ * and save the complete link in the variable "cachelink" to use it in translation
+ *}
+{capture name=cachelink assign=cachelink}<a href="viewcache.php?cacheid={$cacheid}">{$cachename|escape}</a>{/capture}
 </script>
 
 <div class="content2-pagetitle">
 	<img src="resource2/{$opt.template.style}/images/description/22x22-logs.png" style="align: left; margin-right: 10px;" width="22" height="22" alt="{t}New log-entry{/t}" />
-	{t}Add log-entry for the cache{/t} <a href="viewcache.php?cacheid={$cacheid}">{$cachename|escape}</a>
+	{t 1=$cachelink}Add log-entry for the cache %1{/t}
 </div>
 {if $masslog==true}
 <p class="redtext"> 
@@ -64,14 +69,16 @@ function _chkFound () {
 	{t}Wrong log dates can adversly affect several OC functions like searching by last log date. Also, the owner and other caches may think that the cache has been currently found date and type of the last log are shown in the owner's caches list!), which can adversely affect cache maintenance and lead to more DNFs.{/t}
 </p>
 {/if}
+{if showstatfounds==true}
+<p class="align-right">
+	<b>{t 1=$userFound}You found %1 caches until now.{/t}</b>
+</p>
+{/if}
 <form action="log.php" method="post" enctype="application/x-www-form-urlencoded" name="logform" dir="ltr">
 <input type="hidden" name="cacheid" value="{$cacheid}"/>
 <input type="hidden" name="version3" value="1"/>
 <input id="descMode" type="hidden" name="descMode" value="1" />
 <table class="table">
-	<tr>
-		<td colspan="2" style="text-align: right;"><b>{t 1=$userFound}You found %1 caches until now.{/t}</b></td>
-	</tr>
 	<tr><td class="spacer" colspan="2"></td></tr>
 	{if $validate.duplicateLog==false}
 	<tr>

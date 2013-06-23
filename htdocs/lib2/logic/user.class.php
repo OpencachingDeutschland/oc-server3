@@ -1277,5 +1277,12 @@ class user
 		
 		return ($opt['logic']['rating']['percentageOfFounds'] - ($this->getStatFound() % $opt['logic']['rating']['percentageOfFounds']));
 	}
+	
+	function showStatFounds()
+	{
+		// wether to show the number of founds on log page
+		// TODO: make customisable in user profile, see #241
+		return false;
+	}
 }
 ?>

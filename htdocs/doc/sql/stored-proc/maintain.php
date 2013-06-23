@@ -8,7 +8,7 @@
 		
 	***************************************************************************/
 
-	$opt['rootpath'] = '../../../';
+	$opt['rootpath'] = dirname(__FILE__) . '/../../../';
   require_once($opt['rootpath'] . 'lib/clicompatbase.inc.php');
 
   if (!file_exists($opt['rootpath'] . 'util/mysql_root/sql_root.inc.php'))
@@ -250,6 +250,17 @@
 	       UPDATE `cache_logs_archived` SET `log_last_modified` =
 	           GREATEST(`last_modified`,`log_last_modified`);
 	       SET nModified = nModified + ROW_COUNT();
+	     END;");
+
+	/* update log modification date when rating changed, so that it is resent via
+	   XML interface; see issue #244 */
+	sql_dropProcedure('sp_update_cachelog_rating');
+	sql("CREATE PROCEDURE sp_update_cachelog_rating (IN nCacheId INT, IN nUserID INT, IN dRatingDate DATETIME)
+	     BEGIN
+	       IF (ISNULL(@XMLSYNC) OR @XMLSYNC!=1) THEN
+	         UPDATE `cache_logs` SET `last_modified`=NOW()
+	          WHERE `cache_logs`.`cache_id`=nCacheId AND `cache_logs`.`user_id`=nUserID AND `cache_logs`.`date`=dRatingDate;
+	       END IF;
 	     END;");
 
 	// set caches.desc_languages of given cacheid and fill cache_desc_prefered
@@ -513,6 +524,19 @@
 	       /* cache_logs.picture */
 	       UPDATE `cache_logs`, (SELECT `object_id` AS `log_id`, COUNT(*) AS `count` FROM `pictures` WHERE `object_type`=1 GROUP BY `object_type`, `object_id`) AS `tblPictures` SET `cache_logs`.`picture`=`tblPictures`.`count` WHERE `cache_logs`.`id`=`tblPictures`.`log_id`;
 	       SET nModified=nModified+ROW_COUNT();
+	     END;");
+
+	// Update out-of-sync rating dates. These probably were caused by rating-related
+	// bugs when deleting one of multiple found logs and when changing the log type
+	// (9 mismatches within ~9 months up to June 2013).
+	sql_dropProcedure('sp_updateall_rating_dates');
+	sql("CREATE PROCEDURE sp_updateall_rating_dates (OUT nModified INT)
+	     BEGIN
+	       UPDATE `cache_rating` SET `rating_date` =
+	        (SELECT `date` FROM `cache_logs` WHERE `cache_logs`.`cache_id`=`cache_rating`.`cache_id` AND `cache_logs`.`user_id`=`cache_rating`.`user_id` AND `cache_logs`.`type` IN (1,7) ORDER BY `date` LIMIT 1)
+	       WHERE (SELECT COUNT(*) FROM `cache_logs` WHERE `cache_logs`.`cache_id`=`cache_rating`.`cache_id` AND `cache_logs`.`user_id`=`cache_rating`.`user_id` AND `cache_logs`.`date`=`cache_rating`.`rating_date` AND `type` IN (1,7))=0;
+	       /* will set rating_date to 0000-00...:00 for orphan records */
+	       SET nModified=ROW_COUNT();
 	     END;");
 
 	// notify users with matching watch radius about this cache
@@ -966,6 +990,7 @@
 				FOR EACH ROW 
 					BEGIN 
 						CALL sp_update_topratingstat(NEW.`cache_id`, FALSE);
+						CALL sp_update_cachelog_rating(NEW.`cache_id`, NEW.`user_id`, NEW.`rating_date`);
 					END;");
 
 	sql_dropTrigger('cacheRatingAfterUpdate');
@@ -975,6 +1000,8 @@
 						IF NEW.`cache_id`!=OLD.`cache_id` THEN
 							CALL sp_update_topratingstat(OLD.`cache_id`, TRUE);
 							CALL sp_update_topratingstat(NEW.`cache_id`, FALSE);
+							CALL sp_update_cachelog_rating(OLD.`cache_id`, OLD.`user_id`, OLD.`rating_date`);
+							CALL sp_update_cachelog_rating(NEW.`cache_id`, NEW.`user_id`, NEW.`rating_date`);
 						END IF;
 					END;");
 
@@ -983,6 +1010,7 @@
 				FOR EACH ROW 
 					BEGIN 
 						CALL sp_update_topratingstat(OLD.`cache_id`, TRUE);
+						CALL sp_update_cachelog_rating(OLD.`cache_id`, OLD.`user_id`, OLD.`rating_date`);
 					END;");
 
 	sql_dropTrigger('cacheVisitsBeforeInsert');

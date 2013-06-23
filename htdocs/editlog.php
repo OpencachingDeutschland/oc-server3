@@ -27,6 +27,7 @@
 	require_once('./lib/logtypes.inc.php');
 	require($stylepath.'/smilies.inc.php');
   require_once($opt['rootpath'] . '../lib/htmlpurifier-4.2.0/library/HTMLPurifier.auto.php');
+	require_once('./lib/recommendation.inc.php');
 
 	//Preprocessing
 	if ($error == false)
@@ -238,7 +239,14 @@
 
 						$log_date = date('Y-m-d H:i:s', mktime($log_time_hour+0, $log_time_minute+0,  $log_time_second, $log_date_month, $log_date_day, $log_date_year));
 
-						//store changed data
+						// evtl. discard cache recommendation if the log type was changed from
+						// 'found' or 'attended' to something else
+						if (!$top_option)
+						{
+							discard_recommendation($log_id);
+						}
+
+						// store changed data
 						sql("UPDATE `cache_logs` SET `type`='&1',
 						                             `oc_team_comment`='&2',
 						                             `date`='&3',
@@ -264,13 +272,29 @@
 
 						// update top-list
 						if ($top_option)
+						{
 							if ($top_cache)
+							{
 								sql("INSERT INTO `cache_rating` (`user_id`, `cache_id`, `rating_date`)
-					 					 VALUES('&1', '&2','&3')
+										 VALUES('&1','&2','&3')
 										 ON DUPLICATE KEY UPDATE `rating_date`='&3'",
 										 $usr['userid'], $log_record['cache_id'], $log_date);
+								// cache_rating.rating_date is updated when it already exists, so that
+								// it stays consistent with cache_logs.date when editing a log date.
+
+								// When editing one of multiple found logs, this will move rating_date
+								// to the last edited record. While this may not always be what the user
+								// expects, it makes sense for two reasons:
+								//   1. It is a safeguard for the case that the log date and rating_date
+								//      have gotten out of sync for some reason (which has happend in the
+								//      past, probably due to a log-deletion related bug).
+								//   2. It can be used as a tweak to control which log's date is relevant
+								//      for the rating, e.g. when logging a second found on a recycled or
+								//      renewed cache [listing].
+							}
 							else
 								sql("DELETE FROM `cache_rating` WHERE `user_id`='&1' AND `cache_id`='&2'", $usr['userid'], $log_record['cache_id']);
+						}
 
 						// do not use slave server for the next time ...
 						db_slave_exclude();

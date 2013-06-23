@@ -10,8 +10,9 @@
 			<col width="150">
 			<col>
 		</colgroup>
-		<tr><td class="header" colspan="2"><img src="resource2/{$opt.template.style}/images/misc/32x32-tools.png" border="0" width="32" height="32" align="middle" /><font size="4">  <b>{t}Database Maintainance{/t}</b></font></td></tr>
-		<tr><td class="spacer" colspan="2"></td></tr>
+		<tr><td class="header" colspan="2"><img src="resource2/{$opt.template.style}/images/misc/32x32-tools.png" border="0" width="32" height="32" align="middle" /><font size="4">  <b>{t}Database maintainance{/t}</b></font></td></tr>
+		<tr><td colspan="2">{t}Test for and fix inconsistencies in database tables{/t}</td></tr>
+		<tr><td class="spacer" colspan="2">&nbsp;</td></tr>
 
 		{foreach from=$procedures item=procItem}
 			<tr><td colspan="2"><input id="{$procItem|escape}" type="radio" name="action" value="{$procItem|escape}"> <label for="{$procItem|escape}">{$procItem|escape}</label></td></tr>

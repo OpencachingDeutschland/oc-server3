@@ -44,6 +44,20 @@
 	} while ($db_version > 0);
 
 
+	// Now and then a maintain.php update should be inserted, because multiple
+	// mutations may be run in one batch, and future mutations may depend on
+	// changed triggers, which may not be obvious.
+	// Of course, a trigger update mutation can also be inserted directly before a
+	// mutation which needs it. (But take care that maintain.php at that point does
+	// not depend on database changes which will be done by that mutation ...)
+
+	function update_triggers()
+	{
+		global $opt;
+		system('php ' . $opt['rootpath'] . 'doc/sql/stored-proc/maintain.php');
+	}
+
+
 	// Database mutations
 	// - must be consecutively numbered
 	// - should behave well if run multiple times
@@ -244,6 +258,11 @@
 		}
 		if (!sql_index_exists('caches', 'wp_gc_maintained'))
 			sql("ALTER TABLE `caches` ADD INDEX `wp_gc_maintained` (`wp_gc_maintained`)");
+	}
+
+	function dbv_113()  // preventive trigger update
+	{
+		update_triggers();
 	}
 
 ?>

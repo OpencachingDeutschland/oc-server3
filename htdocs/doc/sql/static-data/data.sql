@@ -2176,7 +2176,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1707', 'Other O
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1708', 'The next events in %1', '2010-10-21 22:54:23');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1709', 'Geocaches with most ratings in the last 30 days in %1.', '2010-10-21 22:54:23');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1710', 'Newest caches in %1', '2010-10-21 22:54:23');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1711', 'You need additional %1 finds, to make another recommandation.', '2010-11-29 21:04:17');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1711', 'You need additional %1 finds, to make another recommendation.', '2010-11-29 21:04:17');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1713', 'You have recommended this cache.', '2010-11-29 21:04:55');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1714', 'Revoke the recommendation', '2010-11-29 21:04:55');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1717', 'Please select!', '2010-12-05 00:00:40');

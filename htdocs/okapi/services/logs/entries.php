@@ -51,9 +51,15 @@ class WebService
 				throw new InvalidParam('fields', "'$field' is not a valid field code.");
 
 		if (Settings::get('OC_BRANCH') == 'oc.de')
+		{
 			$teamentry_field = 'cl.oc_team_comment';
+			$ratingdate_condition = 'and cr.rating_date=cl.date';
+		}
 		else
+		{
 			$teamentry_field = '(cl.type=12)';
+			$ratingdate_condition = '';
+		}
 		$rs = Db::query("
 			select
 				cl.id, c.wp_oc as cache_code, cl.uuid, cl.type,
@@ -68,6 +74,8 @@ class WebService
 				left join cache_rating cr
 					on cr.user_id = u.user_id
 					and cr.cache_id = c.cache_id
+					".$ratingdate_condition."
+					and cl.type in (1,7)
 			where
 				cl.uuid in ('".implode("','", array_map('mysql_real_escape_string', $log_uuids))."')
 				and ".((Settings::get('OC_BRANCH') == 'oc.pl') ? "cl.deleted = 0" : "true")."

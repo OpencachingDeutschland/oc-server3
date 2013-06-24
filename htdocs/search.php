@@ -1,31 +1,29 @@
 <?php
 /***************************************************************************
-																./search.php
-															-------------------
-		begin                : July 25 2004
+	For license information see doc/license.txt
 
- 		For license information see doc/license.txt
- ****************************************************************************/
+	Unicode Reminder メモ
 
-/****************************************************************************
+	Search options will be loaded from
+		- a saved or caches query in queries table, if either 'queryid' parameter
+				or 'lastqueryid' cookie is present and the query exists; otherwise from
+		- supplied HTTP parameters or
+		- hard-coded default values
 
-   Unicode Reminder メモ
-
-  search and export page for caches, users, logs and pictures possible output
-  formats are currently XHTML and XML. The search options can be loaded from
-  stored query in the database, dump of the options in HTTP-POST/GET variable
-  or HTML form fields
-
-	TODO:
-	- fehlermeldungen bei falschen koordinaten
-	- entfernungsberechnung "auslagern" (getSqlDistanceFormula überall verwenden)
-	- nochmals alles testen
+	'showresult' parameter triggers building the SQL query from search options
+		and calling the module specified by the 'output' parameter, which will
+		execute the SQL and process the results.
+		If 'showresult' != 1, the query options form is presented to the user.
 
  ****************************************************************************/
 
-	//prepare the templates and include all neccessary
 	require_once('./lib/common.inc.php');
 	require_once('./lib/search.inc.php');
+
+
+	//=========================================================
+	//  1. Database initialization
+	//=========================================================
 
 	// SQL-Debug?
 	$sqldebug = false;
@@ -33,6 +31,7 @@
 	$sql_debug = $sqldebug;
 
 	// output for map-server must be sent to the master!
+	// (obsolete code for old map.php)
 	if (isset($_REQUEST['output']) && ($_REQUEST['output'] == 'map'))
 		db_connect_primary_slave();
 
@@ -42,13 +41,17 @@
 		sqldbg_begin();
 	}
 
-	//Preprocessing
-	if ($error == false)
+	if ($error == false)   // what is $error ?
 	{
+
+		//=========================================================
+		//  2. initialize searching and template variables
+		//=========================================================
+
 		$tplname = 'search';
 		require($stylepath . '/search.inc.php');
 
-		//km => target-unit
+		// km => target-unit
 		$multiplier['km'] = 1;
 		$multiplier['sm'] = 0.62137;
 		$multiplier['nm'] = 0.53996;
@@ -94,7 +97,9 @@
 		newquery:
 			if ($queryid == 0)
 			{
-				// das Suchformular wird initialisiert (keine Vorbelegungen vorhanden)
+				// initialize search form with defaults, as we have no parameters
+				// or saved query to start from
+
 				$_REQUEST['cache_attribs'] = '';
 				$rs = sql('SELECT `id` FROM `cache_attrib` WHERE `default`=1 AND NOT IFNULL(`hidden`, 0)=1');
 				while ($r = sql_fetch_assoc($rs))
@@ -116,10 +121,20 @@
 		}
 		$queryid = $queryid + 0;
 
+
+		//=========================================================
+		//  3. Build search options ($options) array
+		//=========================================================
+
 		if ($queryid != 0)
 		{
-			//load options from db
-			$query_rs = sql("SELECT `user_id`, `options` FROM `queries` WHERE id='&1' AND (`user_id`=0 OR `user_id`='&2')", $queryid, $usr['userid']+0);
+			// load search options from saved/cached query
+
+			$query_rs = sql("
+				SELECT `user_id`, `options`
+				FROM `queries`
+				WHERE id='&1' AND (`user_id`=0 OR `user_id`='&2')",
+				$queryid, $usr['userid']+0);
 
 			if (mysql_num_rows($query_rs) == 0)
 			{
@@ -146,11 +161,11 @@
 
 				sql("UPDATE `queries` SET `last_queried`=NOW() WHERE `id`='&1'", $queryid);
 
-				// änderbare werte überschreiben
+				// overwrite variable options
 				if (isset($_REQUEST['output']))
 					$options['output'] =  $_REQUEST['output'];
 
-				if (isset($_REQUEST['showresult']))  // Ocprop
+				if (isset($_REQUEST['showresult']))
 				{
 					$options['showresult'] = $_REQUEST['showresult'];
 				}
@@ -162,7 +177,7 @@
 					}
 				}
 
-				// finderid in finder umsetzen
+				// get findername from finderid
 				$options['finderid'] = isset($options['finderid']) ? $options['finderid'] + 0 : 0;  // Ocprop
 				if(isset($options['finder']) && $options['finderid'] > 0)
 				{
@@ -176,7 +191,7 @@
 					mysql_free_result($rs_name);
 				}
 
-				// ownerid in owner umsetzen
+				// get ownername from ownerid
 				$options['ownerid'] = isset($options['ownerid']) ? $options['ownerid'] + 0 : 0;  // Ocprop
 				if(isset($options['owner']) && $options['ownerid'] > 0)
 				{
@@ -191,8 +206,10 @@
 				}
 			}
 		}
-		else
+		else  // $queryid == 0
 		{
+			// build search options from GET/POST parameters or default values
+
 			// hack
 			if(isset($_REQUEST['searchto']) && ($_REQUEST['searchto'] != ''))
 			{
@@ -363,6 +380,8 @@
 					tpl_errorMsg('search', 'Unknown search option');
 				else
 				{
+					// Set default search type; this prevents errors in outputSearchForm()
+					// when initializing searchtype-dependent options:
 					$options['searchtype'] = 'byname';
 					$options['cachename'] = '';
 				}
@@ -383,49 +402,39 @@
 			$options['terrainmax'] = isset($_REQUEST['terrainmax']) ? $_REQUEST['terrainmax']+0 : 0;
 			$options['recommendationmin'] = isset($_REQUEST['recommendationmin']) ? $_REQUEST['recommendationmin']+0 : 0;
 
-			if ($options['showresult'] != 0)
-			{
-				//save the search-options in the database
-				if (isset($options['queryid']) && (isset($options['userid'])))
-				{
-					if ($options['userid'] != 0)
-						sql("UPDATE `queries` SET `options`='&1', `last_queried`=NOW() WHERE `id`='&2' AND `user_id`='&3'", serialize($options), $options['queryid'], $options['userid']);
-				}
-				else
-				{
-					$bSkipQueryId = isset($_REQUEST['skipqueryid']) ? $_REQUEST['skipqueryid']+0 : 0;
-					if ($bSkipQueryId == 0)
-					{
-						sql('INSERT INTO `queries` (`user_id`, `options`, `last_queried`) VALUES (0, \'&1\', NOW())', serialize($options));
-						$options['queryid'] = mysql_insert_id();
-					}
-					else
-					{
-						$options['queryid'] = 0;
-					}
-				}
-			}
-			else
-			{
-				$options['queryid'] = 0;
-			}
-		}
+			$options['queryid'] = 0;
+		}  // $queryid == 0
 
-		$bSkipQueryId = isset($_REQUEST['skipqueryid']) ? $_REQUEST['skipqueryid']+0 : 0;
-		if ($bSkipQueryId == 0)
+
+		//=========================================================
+		//  4. query caching
+		//=========================================================
+
+		$bRememberQuery = isset($_REQUEST['skipqueryid']) ? !$_REQUEST['skipqueryid'] : true;
+			// This is used by the map, which implements its own query-caching.
+		if ($bRememberQuery)
 		{
+			if ($options['showresult'] != 0)  // 'showresult' = "execute query"
+			{
+				sql("INSERT INTO `queries` (`user_id`, `options`, `last_queried`) VALUES (0, '&1', NOW())", serialize($options));
+				$options['queryid'] = mysql_insert_id();
+			}
 			set_cookie_setting('lastqueryid', $options['queryid']);
 		}
 
-		// remove old queries (after 1 hour without use)
-		// (execute only every 50 search calls)
+		// remove old queries (after 1 hour without use);
+		// execute only every 50 search calls
 		if (rand(1, 50) == 1)
 		{
-			$removedate = date('Y-m-d H:i:s', time() - 3600);
-			sql('DELETE FROM `queries` WHERE `last_queried` < \'&1\' AND `user_id`=0', $removedate);
+			sql("DELETE FROM `queries` WHERE `last_queried` < NOW() - INTERVAL 1 HOUR AND `user_id`=0");
 		}
 
-		// set new values to default if they are not stored in the DB
+
+		//=========================================================
+		//  5. set defaults for new search options
+		//     which may not be present in a stored/cached query
+		//=========================================================
+
 		if (!isset($options['orderRatingFirst'])) $options['orderRatingFirst'] = false;
 		if (!isset($options['f_otherPlatforms'])) $options['f_otherPlatforms'] = 0;
 		if (!isset($options['difficultymin'])) $options['difficultymin'] = 0;
@@ -441,6 +450,13 @@
 		if (!isset($options['showresult'])) $options['showresult'] = 0;
 		if ($options['showresult'] == 1)
 		{
+
+			//===============================================================
+			//  X6. build SQL statement from search options
+			//===============================================================
+
+			$cachesFilter = '';
+
 			if(!isset($options['output'])) $options['output']='';
 			if ((mb_strpos($options['output'], '.') !== false) ||
 			    (mb_strpos($options['output'], '/') !== false) ||
@@ -450,7 +466,7 @@
 				$options['output'] = 'HTML';
 			}
 
-			//make a list of cache-ids that are in the result
+			// make a list of cache-ids that are in the result
 			if(!isset($options['expert'])) $options['expert']='';
 			if ($options['expert'] == 0)  // Ocprop
 			{
@@ -543,7 +559,8 @@
 							$lon_rad = $lon * 3.14159 / 180;
 							$lat_rad = $lat * 3.14159 / 180;
 
-							sql_slave('CREATE TEMPORARY TABLE result_caches ENGINE=MEMORY
+							$cachesFilter =
+												 'CREATE TEMPORARY TABLE result_caches ENGINE=MEMORY
 													SELECT
 														(' . getSqlDistanceFormula($lon, $lat, $distance, $multiplier[$distance_unit]) . ') `distance`,
 														`caches`.`cache_id` `cache_id`
@@ -552,7 +569,8 @@
 														AND `longitude` < ' . ($lon + $max_lon_diff) . '
 														AND `latitude` > ' . ($lat - $max_lat_diff) . '
 														AND `latitude` < ' . ($lat + $max_lat_diff) . '
-													HAVING `distance` < ' . $distance);
+													HAVING `distance` < ' . ($distance+0);
+							sql_slave($cachesFilter);
 							sql_slave('ALTER TABLE result_caches ADD PRIMARY KEY ( `cache_id` )');
 
 							$sql_select[] = '`result_caches`.`cache_id`';
@@ -683,7 +701,8 @@
 							//TODO: check!!!
 							$max_lon_diff = $distance * 180 / (abs(sin((90 - $lat) * 3.14159 / 180 )) * 6378 * $multiplier[$distance_unit] * 3.14159);
 
-							sql_slave('CREATE TEMPORARY TABLE result_caches ENGINE=MEMORY
+							$cachesFilter =
+												 'CREATE TEMPORARY TABLE result_caches ENGINE=MEMORY
 													SELECT
 														(' . getSqlDistanceFormula($lon, $lat, $distance, $multiplier[$distance_unit]) . ') `distance`,
 														`caches`.`cache_id` `cache_id`
@@ -692,7 +711,8 @@
 														AND `longitude` < ' . ($lon + $max_lon_diff) . '
 														AND `latitude` > ' . ($lat - $max_lat_diff) . '
 														AND `latitude` < ' . ($lat + $max_lat_diff) . '
-													HAVING `distance` < ' . $distance);
+													HAVING `distance` < ' . ($distance+0);
+							sql_slave($cachesFilter);
 							sql_slave('ALTER TABLE result_caches ADD PRIMARY KEY ( `cache_id` )');
 
 							$sql_select[] = '`result_caches`.`cache_id`';
@@ -797,7 +817,8 @@
 					$lon_rad = $lon * 3.14159 / 180;
 					$lat_rad = $lat * 3.14159 / 180;
 
-					sql_slave('CREATE TEMPORARY TABLE result_caches ENGINE=MEMORY
+					$cachesFilter =
+										 'CREATE TEMPORARY TABLE result_caches ENGINE=MEMORY
 											SELECT
 												(' . getSqlDistanceFormula($lon, $lat, $distance, $multiplier[$distance_unit]) . ') `distance`,
 												`caches`.`cache_id` `cache_id`
@@ -806,7 +827,8 @@
 												AND `longitude` < ' . ($lon + $max_lon_diff) . '
 												AND `latitude` > ' . ($lat - $max_lat_diff) . '
 												AND `latitude` < ' . ($lat + $max_lat_diff) . '
-											HAVING `distance` < ' . $distance);
+											HAVING `distance` < ' . ($distance+0);
+					sql_slave($cachesFilter);
 					sql_slave('ALTER TABLE result_caches ADD PRIMARY KEY ( `cache_id` )');
 
 					$sql_select[] = '`result_caches`.`cache_id`';
@@ -896,30 +918,30 @@
 				}
 				else
 				{
-					tpl_errorMsg('search', 'Unbekannter Suchtyp');
+					tpl_errorMsg('search', $unknown_searchtype);
 				}
 
 				// additional options
-				if(!isset($options['f_userowner'])) $options['f_userowner']='0';   // Ocprop
-				if($options['f_userowner'] != 0) { $sql_where[] = '`caches`.`user_id`!=\'' . $usr['userid'] .'\''; }
+				if (!isset($options['f_userowner'])) $options['f_userowner']='0';   // Ocprop
+				if ($options['f_userowner'] != 0) { $sql_where[] = '`caches`.`user_id`!=\'' . $usr['userid'] .'\''; }
 
-				if(!isset($options['f_userfound'])) $options['f_userfound']='0';  // Ocprop
-				if($options['f_userfound'] != 0)
+				if (!isset($options['f_userfound'])) $options['f_userfound']='0';  // Ocprop
+				if ($options['f_userfound'] != 0)
 				{
 					$sql_where[] = '`caches`.`cache_id` NOT IN (SELECT `cache_logs`.`cache_id` FROM `cache_logs` WHERE `cache_logs`.`user_id`=\'' . sql_escape($usr['userid']) . '\' AND `cache_logs`.`type` IN (1, 7))';
 				}
-				if (!isset($options['f_inactive'])) $options['f_inactive']='0';
+				if (!isset($options['f_inactive'])) $options['f_inactive']='0';  // Ocprop
 				if ($options['f_inactive'] != 0)  $sql_where[] = '`caches`.`status` NOT IN (3,6,7)';
 					// f_inactive formerly was used for both, archived and disabled caches.
 					// After adding the separate f_disabled option, it is used only for archived
 					// caches, but keeps its name for compatibility with existing stored or
 					// external searches.
-				if (!isset($options['f_disabled'])) $options['f_disabled']='0';  // Ocprop
+				if (!isset($options['f_disabled'])) $options['f_disabled']='0';
 				if ($options['f_disabled'] != 0)  $sql_where[] = '`caches`.`status`<>2';
 
-				if(isset($usr))
+				if (isset($usr))
 				{
-					if(!isset($options['f_ignored'])) $options['f_ignored']='0';
+					if (!isset($options['f_ignored'])) $options['f_ignored']='0';
 					if($options['f_ignored'] != 0)
 					{
 						// only use this filter, if it is realy needed - this enables better caching in map2.php with ignored-filter
@@ -931,20 +953,20 @@
 						}
 					}
 				}
-				if(!isset($options['f_otherPlatforms'])) $options['f_otherPlatforms']='0';
-				if($options['f_otherPlatforms'] != 0)
+				if (!isset($options['f_otherPlatforms'])) $options['f_otherPlatforms']='0';
+				if ($options['f_otherPlatforms'] != 0)
 				{
 					// $sql_where[] = '`caches`.`wp_nc`=\'\' AND `caches`.`wp_gc`=\'\'';
 					// ignore NC listings, which are mostly unmaintained or dead
 					$sql_where[] = "`caches`.`wp_gc_maintained`=''";
 				}
-				if(!isset($options['country'])) $options['country']='';
-				if($options['country'] != '')
+				if (!isset($options['country'])) $options['country']='';
+				if ($options['country'] != '')
 				{
 					$sql_where[] = '`caches`.`country`=\'' . sql_escape($options['country']) . '\'';
 				}
 
-				if($options['cachetype'] != '')
+				if ($options['cachetype'] != '')
 				{
 					$types = explode(';', $options['cachetype']);
 					if (count($types) < sql_value_slave("SELECT COUNT(*) FROM `cache_type`", 0))
@@ -954,7 +976,7 @@
 					}
 				}
 
-				if($options['cachesize'] != '')
+				if ($options['cachesize'] != '')
 				{
 					$sizes = explode(';', $options['cachesize']);
 					if (count($sizes) < sql_value_slave("SELECT COUNT(*) FROM `cache_size`", 0))
@@ -986,7 +1008,7 @@
 					$sql_where[] = '`stat_caches`.`toprating`>=\'' . sql_escape($options['recommendationmin']) . '\'';
 				}
 
-				if(isset($options['cache_attribs']) && count($options['cache_attribs']) > 0)
+				if (isset($options['cache_attribs']) && count($options['cache_attribs']) > 0)
 				{
 					foreach ($options['cache_attribs'] AS $attr)
 					{
@@ -995,7 +1017,7 @@
 					}
 				}
 
-				if(isset($options['cache_attribs_not']) && count($options['cache_attribs_not']) > 0)
+				if (isset($options['cache_attribs_not']) && count($options['cache_attribs_not']) > 0)
 				{
 					foreach ($options['cache_attribs_not'] AS $attr)
 					{
@@ -1033,16 +1055,41 @@
 						$group .
 						$having;
 
-//echo "DEBUG ".$sqlFilter." DEBUG<br>";
+				// echo "DEBUG ".$sqlFilter." DEBUG<br>";
 			}
 			else
 			{
 				tpl_errorMsg('search', 'Unbekannter Suchtyp');
 			}
 
-			//go to final output preparation
+			//=================================================================
+			//  X7. run postprocessing module depending on 'output' option
+			//
+			//  The following variables (list may be incomplete) are used
+			//  by the postprocessing modules:
+			//
+			//    $_REQUEST['startat']
+			//    $_REQUEST['count']
+			//    $lat_rad, $lon_rad
+			//    $options['sortby']
+			//    $options['orderRatingFirst']
+			//    $options['queryid']
+			//    $cachesFilter, $sqlFilter
+			//    $map2_bounds
+			//=================================================================
+
+			$map2_bounds = ($options['output'] == 'map2bounds');
+			if ($map2_bounds)
+				$options['output'] = 'map2';
+
 			// Ocprop: HTML, gpx
-			if (!file_exists($opt['rootpath'] . 'lib/search.' . mb_strtolower($options['output']) . '.inc.php'))
+			if ($map2_bounds && $options['queryid'] == 0)
+			{
+				tpl_set_var('tplname', $tplname);
+				$tplname = 'error';
+				tpl_set_var('error_msg', 'map2bounds requires queryid');
+			}
+			elseif (!file_exists($opt['rootpath'] . 'lib/search.' . mb_strtolower($options['output']) . '.inc.php'))
 			{
 				tpl_set_var('tplname', $tplname);
 				$tplname = 'error';
@@ -1050,13 +1097,17 @@
 			}
 			else
 			{
-				//process and output the search result
+				// run search query and output the results
 				require($opt['rootpath'] . 'lib/search.' . mb_strtolower($options['output']) . '.inc.php');
 				exit;
 			}
 		}
-		else
+		else  // $options['showresult'] == 0
 		{
+			//=============================================================
+			//  F6. present search options form to the user
+			//=============================================================
+
 			$options['show_all_countries'] = isset($_REQUEST['show_all_countries']) ? $_REQUEST['show_all_countries'] : 0;
 
 			if (isset($_REQUEST['show_all_countries_submit']))
@@ -1076,9 +1127,19 @@
 				exit;
 			}
 		}
-	}
+	}  // $error != false
+
+
+	//=============================================================
+	//  F8. show search options form or error message
+	//=============================================================
 
 	tpl_BuildTemplate();
+
+
+//=============================================================
+//  F7. prepare search options form
+//=============================================================
 
 function outputSearchForm($options)
 {
@@ -1600,6 +1661,12 @@ function outputSearchForm($options)
 	exit;
 }
 
+
+//=============================================================
+//  Prompt the user with a list of locations when the entered
+//  'ort' or 'plz' is not unique.
+//=============================================================
+
 function outputUniidSelectionForm($uniSql, $urlparams)
 {
 	global $tplname, $locline, $stylepath, $bgcolor1, $bgcolor2, $gns_countries;
@@ -1759,6 +1826,7 @@ function outputUniidSelectionForm($uniSql, $urlparams)
 	exit;
 }
 
+
 function outputLocidSelectionForm($locSql, $urlparams)
 {
 	global $tplname, $locline, $stylepath, $bgcolor1, $bgcolor2;
@@ -1851,4 +1919,5 @@ function outputLocidSelectionForm($locSql, $urlparams)
 	tpl_BuildTemplate();
 	exit;
 }
+
 ?>

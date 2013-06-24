@@ -44,8 +44,16 @@
 			<li>Das &lt;date&gt;-Element von Logs enthält nun auch die Uhrzeit. 00:00:00 bedeutet, dass keine Uhrzeit geloggt wurde; alles andere bedeutet, dass mit Stunde und Minute geloggt wurde.</li>
 			<li>Element für Bildeigenschaften von &lt;attributes&gt; in &lt;picattr&gt; umbenannt, um Kollisionen mit dem Cache-Attribut-Element zu vermeiden.</li>
 			<li>Vorschaubild-Flag (<em>preview</em>) zu &lt;picattr&gt; hinzugefügt.</li>
-			<li>zusätzliche Logtypen 9 (archiviert), 10 (kann gesucht werden), 11 (momentan nicht verfügbar) und 13 (gesperrt)</li>
+			<li>zusätzliche Logtypen 9 (archiviert), 10 (kann gesucht werden), 11 (momentan nicht verfügbar) und 13 (gesperrt); Ausgabe als Typ 3 (Hinweis) in älteren XML-Versionen</li>
 			<li><em>teamcomment</em>-Flag zum &lt;logtype&gt; hinzugefügt</li>
+		</ul>
+		<h2>Änderungen in Version 1.4 (Juni 2013)</h2>
+		<ul>
+			<li>Bei Caches wird zusätzlich das Feld <em>listing_lastmodified</em> ausgegeben, das das Gesamt-Änderungsdatum des Listings inklusive hinzugefügten/geänderten/gelöschten Beschreibungen und Bildern enthält. Bei Logs gibt es entsprechend das zusätzliche Feld <em>log_last_modified</em>, das Bilder mit einschließt.</li>
+			<li>Wenn ein User einen Cache empfohlen und diesen mehrfach als "Fund" geloggt hat, wurde bislang bei allen Fundlogs <em>recommended="1"</em> mitgeliefert (allerdings nicht rückwirkend - das war ein Bug. Auch zurückgezogene Empfehlungen wurden nicht immer sofort ausgeliefert).<br>
+			Dieses Verhalten wurde so geändert, dass <em>recommended="1"</em> nur noch bei genau dem Log mitgeliefert wird, mit dem die Empfehlung für den Cache gegeben wurde. Mehrfachempfehlungen sind nicht möglich (und waren es noch nie).<br />
+			Gleichzeitig wurde auch die Darstellung auf opencaching.de geändert: Bei Mehrfach-Fundlogs erscheint der grüne Stern nur noch an einem der Logs.<br /> 
+			Bei Anwendungen, die das <em>recommended</em>-Flag verwenden wird ein kompletter Neuabruf aller Logs per Version 1.4 empfohlen, weil die alten Daten fehlerhaft sein können. Außerdem sollte die Handhabung von Mehrfachlogs geprüft werden.</li>
 		</ul>
 
 		<p>Der XML-Doctype lautet in allen Versionen "oc11xml".</p>
@@ -74,8 +82,9 @@
 		<h3>Allgemeine XML-Elemente</h3>
 		<h4>lastmodified</h4>
 		<p>Datum an dem dieser Datensatz zuletzt geändert wurde. Es werden keine
-			Abhängigkeiten berücksichtigt. D.h. Wenn eine Cachebeschreibung geändert wird,
-			ändert sich nur deren lastmodified, nicht jedoch das des Caches. Datumsangaben
+			Abhängigkeiten berücksichtigt. D.h. Wenn z.B. eine Cachebeschreibung geändert wird,
+			ändert sich nur deren lastmodified, nicht jedoch das des Caches (hierfür gibt es
+			das separate Feld <em>listing_last_modified</em>.) Datumsangaben
 			sind immer in der Form "yyyy-mm-dd hh:mm:ss" oder "yyyy-mm-dd"</p>
 		<h4>datecreated</h4>
 		<p>Datum an dem dieser Datensatz angelegt wurde.</p>
@@ -146,6 +155,7 @@
 			&nbsp; &lt;datehidden&gt;2005-08-01&lt;/datehidden&gt;<br>
 			&nbsp; &lt;datecreated ispublishdate="0"&gt;2005-09-08 15:45:02&lt;/datecreated&gt;<br>
 			&nbsp; &lt;lastmodified&gt;2005-12-20 20:58:41&lt;/lastmodified&gt;<br>
+			&nbsp; &lt;listing_lastmodified&gt;2006-04-13 16:31:58&lt;/listing_lastmodified&gt;<br>
 			&nbsp; &lt;attributes&gt;<br>
 			&nbsp;&nbsp;&nbsp;&nbsp;&lt;attribute id="6"&gt;&lt;![CDATA[Nur bei Opencaching]]&gt;&lt;/attribute&gt;<br>
 			&nbsp; &lt;/attributes&gt;<br>
@@ -154,7 +164,7 @@
 			&nbsp;&nbsp;&nbsp;&nbsp;&lt;wpt id="26" type="2" typename="Stage or reference point" longitude="8.02333" latitude="50.01544"&gt;&lt;![CDATA[Station 1]]&gt;&lt;/wpt&gt;<br />
 			&nbsp; &lt;/wpts&gt;<br />
 			&lt;/cache&gt;</p>
-		<p><em>lastmodified</em> ist das letzte Änderungsdatum des cache-Datensatzes, ohne Änderungen an Cachebeschreibungen oder Bildern. Für das Gesamt-Änderungsdatum des Listings müssen Letztere also mit "eingerechnet" werden. Ein Gesamt-Änderungsdatum des Listings kann bei Bedarf eingebaut werden.</p>
+		<p><em>lastmodified</em> ist das letzte Änderungsdatum des cache-Datensatzes, ohne Änderungen an Cachebeschreibungen oder Bildern. Das Gesamt-Änderungsdatum steht im Feld <em>listing_lastmodified</em>.</p>
 		<p><em>datecreated</em> ist bei mit OC Version 1 und 2 angelegten Caches das Datum, an dem das Listing angelegt wurde, bei mit Version 3 angelegten Caches das Veröffentlichungsdatum. Ab Interface Version 1.2 zeigt das Attribut <em>ispublishdate="1"</em> an, dass es sich um das Veröffentlichungsdatum handelt.</p>
 		<p>Ab XML-Version 1.2 werden im <em>size</em>-Feld auch Nano-Größen zurückgeliefert. In älteren Interface-Versionen wird stattdessen "micro" ausgegeben.</p>
 		<p>Es fehlen noch Empfehlungen und zusätzliche Wegpunkte; wird bei Bedarf eingebaut.</p>
@@ -196,8 +206,10 @@
 			Volker]]&gt;&lt;/text&gt;<br>
 			&nbsp; &lt;datecreated&gt;2005-12-24 06:24:07&lt;/datecreated&gt;<br>
 			&nbsp; &lt;lastmodified&gt;2005-12-24 06:24:07&lt;/lastmodified&gt;<br>
+			&nbsp; &lt;log_lastmodified&gt;2005-12-24 06:41:30&lt;/log_lastmodified&gt;<br>
 			&lt;/cachelog&gt;
 		</p>
+		<p><em>lastmodified</em> ist das letzte Änderungsdatum des Log-Datensatzes, ohne Änderungen an Bildern. Das Gesamt-Änderungsdatum steht im Feld <em>log_lastmodified</em>.</p>
 		<h3>picture (Bilder)</h3>
 		<p>
 			&lt;picture&gt;<br>
@@ -271,20 +283,20 @@
 		<p>Paramter uuid ... wie cacheid, ausser dass statt der cacheid die UUID des Caches verwendet wird.</p>
 		<h3>Beispiele</h3>
 		<p>1. Alle Daten inkrementell abrufen<br/>
-			<a>http://www.opencaching.de/xml/ocxml13.php?modifiedsince=&lt;date&gt;&amp;user=1&amp;cache=1&amp;cachedesc=1&amp;cachelog=1&amp;picture=1&amp;removedobject=1</a></p>
+			<a>http://www.opencaching.de/xml/ocxml14.php?modifiedsince=&lt;date&gt;&amp;user=1&amp;cache=1&amp;cachedesc=1&amp;cachelog=1&amp;picture=1&amp;removedobject=1</a></p>
 		<p>2. Alle Daten von Deutschland inkrementell abrufen<br/>
-			<A>http://www.opencaching.de/xml/ocxml13.php?modifiedsince=&lt;date&gt;&amp;cache=1&amp;cachedesc=1&amp;cachelog=1&amp;picture=1&amp;removedobject=0&amp;country=DE&amp;picturefromcachelog=1</a></p>
+			<A>http://www.opencaching.de/xml/ocxml14.php?modifiedsince=&lt;date&gt;&amp;cache=1&amp;cachedesc=1&amp;cachelog=1&amp;picture=1&amp;removedobject=0&amp;country=DE&amp;picturefromcachelog=1</a></p>
 		<p>3. Alle Caches ohne Logs von Deutschland inkrementell abrufen<br/>
-			<a>http://www.opencaching.de/xml/ocxml13.php?modifiedsince=&lt;date&gt;&amp;cache=1&amp;cachedesc=1&amp;picture=1&amp;removedobject=0&amp;country=DE</a></p>
+			<a>http://www.opencaching.de/xml/ocxml14.php?modifiedsince=&lt;date&gt;&amp;cache=1&amp;cachedesc=1&amp;picture=1&amp;removedobject=0&amp;country=DE</a></p>
 		<p>4. Alle Daten im Umkreis von 15 km abrufen<br/>
-			<a>http://www.opencaching.de/xml/ocxml13.php?modifiedsince=&lt;date&gt;&amp;cache=1&amp;cachedesc=1&amp;cachelog=1&amp;picture=1&amp;removedobject=0&amp;lat=48&amp;lon=9&amp;distance=15&amp;picturefromcachelog=1</a></p>
+			<a>http://www.opencaching.de/xml/ocxml14.php?modifiedsince=&lt;date&gt;&amp;cache=1&amp;cachedesc=1&amp;cachelog=1&amp;picture=1&amp;removedobject=0&amp;lat=48&amp;lon=9&amp;distance=15&amp;picturefromcachelog=1</a></p>
 		<p>5. Alle Bilder abrufen<br/>
-			<a>http://www.opencaching.de/xml/ocxml13.php?modifiedsince=&lt;date&gt;&amp;picture=1</a></p>
+			<a>http://www.opencaching.de/xml/ocxml14.php?modifiedsince=&lt;date&gt;&amp;picture=1</a></p>
 		<p>6. Alle Bilder von Caches abrufen die in Deutschland versteckt sind<br/>
 			<a>http://www.opencaching.de/xml/ocxml2.php?modifiedsince=&lt;date&gt;&amp;picture=1&amp;country=DE</a></p>
 		<p>7. Alle Bilder von Caches und deren Logs abrufen die in Deutschland versteckt 
 			sind<br/>
-			<a>http://www.opencaching.de/xml/ocxml13.php?modifiedsince=&lt;date&gt;&amp;picture=1&amp;country=DE</a>&amp;picturefromcachelog=1</p>
+			<a>http://www.opencaching.de/xml/ocxml14.php?modifiedsince=&lt;date&gt;&amp;picture=1&amp;country=DE</a>&amp;picturefromcachelog=1</p>
 		<p>Mit ocxml11.php kann stattdessen die Interface-Version 1.1 verwendet werden.</p>
 		<p>Diese Anfragen werden mit einem kurzen XML-Stream beantwortet, der die 
 			XML-Session-Id zurückgibt. Mit dieser Id können dann die Daten abgerufen 
@@ -300,9 +312,9 @@
 			Summe der Datensätze ist in diesem Beispiel 1205 - es werden also 3 Aufrufe 
 			benötigt (500, 500, 205 Datensätze).</p>
 		<p>Die Daten können dann mit folgender Anfrage abgerufen werden:<br/>
-			<a>http://www.opencaching.de/xml/ocxml13.php?sessionid=12345&amp;file=1</a><br/>
-			<a>http://www.opencaching.de/xml/ocxml13.php?sessionid=12345&amp;file=2</a><br/>
-			<a>http://www.opencaching.de/xml/ocxml13.php?sessionid=12345&amp;file=3</a></p>
+			<a>http://www.opencaching.de/xml/ocxml14.php?sessionid=12345&amp;file=1</a><br/>
+			<a>http://www.opencaching.de/xml/ocxml14.php?sessionid=12345&amp;file=2</a><br/>
+			<a>http://www.opencaching.de/xml/ocxml14.php?sessionid=12345&amp;file=3</a></p>
 		<p>Die Sessionid ist zwei Stunden lang gültig, wobei sich dieser Zeitraum mit jedem
 			einzelnen Dateiabruf verlängert &ndash; zwischen den Einzelabrufen dürfen also
 			maximal zwei Stunden vergehen. Dauert es länger, müsste eine neue sessionid
@@ -311,14 +323,14 @@
 		<p>Um alle Ergebnisse in einer Datei abzurufen muss bei dem Aufruf der Paramter 
 			session auf 0 gesetzt werden.</p>
 		<p>Beispeil:<br/>
-			<a>http://www.opencaching.de/xml/ocxml13.php?modifiedsince=&lt;date&gt;&amp;user=1&amp;cache=1&amp;cachedesc=1&amp;cachelog=1&amp;picture=1&amp;removedobject=1&amp;session=0</a></p>
+			<a>http://www.opencaching.de/xml/ocxml14.php?modifiedsince=&lt;date&gt;&amp;user=1&amp;cache=1&amp;cachedesc=1&amp;cachelog=1&amp;picture=1&amp;removedobject=1&amp;session=0</a></p>
 		<h3>Dateikomprimierung einstellen</h3>
 		<p>Dei Dateikomprimierung kann mit dem Paramter zip eingestellt weren. Mögliche 
 			Werte sind 0, zip, bzip2, gzip. Null bedeutet hier keine Kompression. Wird 
 			keine Kompression angegeben, wird zip verwendet.</p>
 		<p>Beispeil:<br/>
-			<a>http://www.opencaching.de/xml/ocxml13.php?modifiedsince=&lt;date&gt;&amp;user=1&amp;cache=1&amp;cachedesc=1&amp;cachelog=1&amp;picture=1&amp;removedobject=1&amp;session=0&amp;zip=bzip2</a><br/>
-			<a>http://www.opencaching.de/xml/ocxml13.php?sessionid=12345&amp;file=1&amp;zip=gzip</a></p>
+			<a>http://www.opencaching.de/xml/ocxml14.php?modifiedsince=&lt;date&gt;&amp;user=1&amp;cache=1&amp;cachedesc=1&amp;cachelog=1&amp;picture=1&amp;removedobject=1&amp;session=0&amp;zip=bzip2</a><br/>
+			<a>http://www.opencaching.de/xml/ocxml14.php?sessionid=12345&amp;file=1&amp;zip=gzip</a></p>
             <h3>XML-Optionen</h3>
             <p>Die folgenden XML-Optionen müssen bei jedem Aufruf übergeben
             werden.</p>
@@ -332,8 +344,8 @@
             charset ... (Default) iso-8859-1 / utf-8<br />
             attrlist ... (Default) 0 = keine Attributliste &uuml;bertragen / 1 = Attributliste &uuml;bertragen</p>
             <h4><a>Beispiele</a></h4>
-            <p>http://www.opencaching.de/xml/ocxml13.php?modifiedsince=20060320000000&amp;user=1&amp;cache=1&amp;cachelog=1&amp;cachedesc=1&amp;picture=1&amp;removedobject=1&amp;session=1&amp;charset=utf-8&amp;cdata=1&amp;xmldecl=0&amp;ocxmltag=0&amp;doctype=0<br/>
-            http://www.opencaching.de/xml/ocxml13.php?sessionid=4711&amp;file=1&amp;charset=utf-8&amp;cdata=1&amp;xmldecl=0&amp;ocxmltag=0&amp;doctype=0</p>
+            <p>http://www.opencaching.de/xml/ocxml14.php?modifiedsince=20060320000000&amp;user=1&amp;cache=1&amp;cachelog=1&amp;cachedesc=1&amp;picture=1&amp;removedobject=1&amp;session=1&amp;charset=utf-8&amp;cdata=1&amp;xmldecl=0&amp;ocxmltag=0&amp;doctype=0<br/>
+            http://www.opencaching.de/xml/ocxml14.php?sessionid=4711&amp;file=1&amp;charset=utf-8&amp;cdata=1&amp;xmldecl=0&amp;ocxmltag=0&amp;doctype=0</p>
 		<h3>Sonstige Anmerkungen</h3>
 		<ul>
 			<li>

@@ -325,18 +325,13 @@
 	//$caches_per_page
 	//count($caches) - 1
 	tpl_set_var('pages', $pages);
-
-	// speichern-link
-	if ($usr === false)
-		tpl_set_var('safelink', '');
-	else
-		tpl_set_var('safelink', mb_ereg_replace('{queryid}', $options['queryid'], $safelink));
+	tpl_set_var('showonmap', $showonmap);
 
 	// downloads
 	tpl_set_var('queryid', $options['queryid']);
 	tpl_set_var('startat', $startat);
 
-	tpl_set_var('startatp1', $startat + 1);
+	tpl_set_var('startatp1', min($resultcount,$startat + 1));
 
 	if (($resultcount - $startat) < 500)
 		tpl_set_var('endat', $startat + $resultcount - $startat);

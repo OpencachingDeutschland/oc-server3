@@ -8,7 +8,7 @@
 		
 	***************************************************************************/
 
-	$opt['rootpath'] = '../../../';
+	$opt['rootpath'] = dirname(__FILE__) . '/../../../';
   require_once($opt['rootpath'] . 'lib/clicompatbase.inc.php');
 
   if (!file_exists($opt['rootpath'] . 'util/mysql_root/sql_root.inc.php'))
@@ -18,7 +18,8 @@
 
   if ($db_root_password == '')
   {
-		echo "enter DB $db_root_username password: ";
+		echo "enter DB $db_root_username password:\n";
+		flush();
 		$fh = fopen('php://stdin', 'r');
 		$db_root_password = trim(fgets($fh, 1024));
 		fclose($fh);
@@ -250,6 +251,17 @@
 	       UPDATE `cache_logs_archived` SET `log_last_modified` =
 	           GREATEST(`last_modified`,`log_last_modified`);
 	       SET nModified = nModified + ROW_COUNT();
+	     END;");
+
+	/* update log modification date when rating changed, so that it is resent via
+	   XML interface; see issue #244 */
+	sql_dropProcedure('sp_update_cachelog_rating');
+	sql("CREATE PROCEDURE sp_update_cachelog_rating (IN nCacheId INT, IN nUserID INT, IN dRatingDate DATETIME)
+	     BEGIN
+	       IF (ISNULL(@XMLSYNC) OR @XMLSYNC!=1) THEN
+	         UPDATE `cache_logs` SET `last_modified`=NOW()
+	          WHERE `cache_logs`.`cache_id`=nCacheId AND `cache_logs`.`user_id`=nUserID AND `cache_logs`.`date`=dRatingDate;
+	       END IF;
 	     END;");
 
 	// set caches.desc_languages of given cacheid and fill cache_desc_prefered
@@ -515,6 +527,19 @@
 	       SET nModified=nModified+ROW_COUNT();
 	     END;");
 
+	// Update out-of-sync rating dates. These probably were caused by rating-related
+	// bugs when deleting one of multiple found logs and when changing the log type
+	// (9 mismatches within ~9 months up to June 2013).
+	sql_dropProcedure('sp_updateall_rating_dates');
+	sql("CREATE PROCEDURE sp_updateall_rating_dates (OUT nModified INT)
+	     BEGIN
+	       UPDATE `cache_rating` SET `rating_date` =
+	        (SELECT `date` FROM `cache_logs` WHERE `cache_logs`.`cache_id`=`cache_rating`.`cache_id` AND `cache_logs`.`user_id`=`cache_rating`.`user_id` AND `cache_logs`.`type` IN (1,7) ORDER BY `date` LIMIT 1)
+	       WHERE (SELECT COUNT(*) FROM `cache_logs` WHERE `cache_logs`.`cache_id`=`cache_rating`.`cache_id` AND `cache_logs`.`user_id`=`cache_rating`.`user_id` AND `cache_logs`.`date`=`cache_rating`.`rating_date` AND `type` IN (1,7))=0;
+	       /* will set rating_date to 0000-00...:00 for orphan records */
+	       SET nModified=ROW_COUNT();
+	     END;");
+
 	// notify users with matching watch radius about this cache
 	sql_dropProcedure('sp_notify_new_cache');
 	sql("CREATE PROCEDURE sp_notify_new_cache (IN nCacheId INT(10) UNSIGNED, IN nLongitude DOUBLE, IN nLatitude DOUBLE)
@@ -659,7 +684,8 @@
 							   OLD.`logpw`!=NEW.`logpw` OR 
 							   OLD.`search_time`!=NEW.`search_time` OR 
 							   OLD.`way_length`!=NEW.`way_length` OR 
-							   OLD.`wp_gc`!=NEW.`wp_gc` OR 
+							   OLD.`wp_gc`!=NEW.`wp_gc` OR
+								 /* See notes on wp_gc_maintained in modification-dates.txt. */
 							   OLD.`wp_nc`!=NEW.`wp_nc` OR 
 							   OLD.`wp_oc`!=NEW.`wp_oc` OR 
 							   OLD.`default_desclang`!=NEW.`default_desclang` OR 
@@ -965,6 +991,7 @@
 				FOR EACH ROW 
 					BEGIN 
 						CALL sp_update_topratingstat(NEW.`cache_id`, FALSE);
+						CALL sp_update_cachelog_rating(NEW.`cache_id`, NEW.`user_id`, NEW.`rating_date`);
 					END;");
 
 	sql_dropTrigger('cacheRatingAfterUpdate');
@@ -974,6 +1001,8 @@
 						IF NEW.`cache_id`!=OLD.`cache_id` THEN
 							CALL sp_update_topratingstat(OLD.`cache_id`, TRUE);
 							CALL sp_update_topratingstat(NEW.`cache_id`, FALSE);
+							CALL sp_update_cachelog_rating(OLD.`cache_id`, OLD.`user_id`, OLD.`rating_date`);
+							CALL sp_update_cachelog_rating(NEW.`cache_id`, NEW.`user_id`, NEW.`rating_date`);
 						END IF;
 					END;");
 
@@ -982,6 +1011,7 @@
 				FOR EACH ROW 
 					BEGIN 
 						CALL sp_update_topratingstat(OLD.`cache_id`, TRUE);
+						CALL sp_update_cachelog_rating(OLD.`cache_id`, OLD.`user_id`, OLD.`rating_date`);
 					END;");
 
 	sql_dropTrigger('cacheVisitsBeforeInsert');
@@ -1163,6 +1193,10 @@
 							SET NEW.`last_modified`=NOW();
 						END IF;
 					END;");
+
+	// Triggers for updating listing date (sp_update_cache_listingdate) on mp3 changes
+	// are missing. We can't add them because there is only an object_id field and no
+	// object_type, so we don't know which mp3 belongs to a cache.
 
 	sql_dropTrigger('mp3BeforeUpdate');
 	sql("CREATE TRIGGER `mp3BeforeUpdate` BEFORE UPDATE ON `mp3` 

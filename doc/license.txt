@@ -87,8 +87,9 @@ List of third party components:
     9.  ImageCreateFromBMP & ImageBMP
         URI:    : http://www.jpexs.com/eng/default/php.html   *** DEAD LINK ***
 
-    10. PROJ.4: Cartographic Projections Library
-        URI     : http://proj.maptools.org/
+    10. Coordinate system translations
+        Path    : htdocs/lib2/logic/coordinate.class.php
+        URI     : http://www.helmutheimeier.privat.t-online.de/kt/phpscripts.html
         License : MIT
 
     11. NUTS boundaries from Eurostat

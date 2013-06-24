@@ -21,6 +21,7 @@
 	require_once('./lib/common.inc.php');
 	require_once($stylepath . '/lib/icons.inc.php');
 	require_once($rootpath . 'lib2/html2text.class.php');
+	require_once('./lib/recommendation.inc.php');
 
 	//Preprocessing
 	if ($error == false)
@@ -182,17 +183,14 @@
 						}
 						sql_free_result($rs);
 
+						// evtl. discard cache recommendation
+						discard_recommendation($log_id);
+
 						// move to archive, even if own log (uuids are used for OKAPI replication)
 						sql("INSERT IGNORE INTO `cache_logs_archived` SELECT *, '0' AS `deletion_date`, '&2' AS `deleted_by`, 0 AS `restored_by` FROM `cache_logs` WHERE `cache_logs`.`id`='&1' LIMIT 1", $log_id, $usr['userid']);
 
 						// remove log entry
 						sql("DELETE FROM `cache_logs` WHERE `cache_logs`.`id`='&1' LIMIT 1", $log_id);
-
-						// remove cache from users top caches, if the only found or attended log  
-						// of this user was deleted
-						sql("DELETE FROM `cache_rating` WHERE `user_id` = '&1' AND `cache_id` = '&2' AND
-									0 = (SELECT COUNT(*) FROM `cache_logs` WHERE `user_id` = '&1' AND `cache_id` = '&2' AND `type` IN (1,7))", 
-							$log_record['log_user_id'], $log_record['cache_id']);
 
 						// now tell OKAPI about the deletion;
 						// this will trigger an okapi_syncbase update, if OKAPI is installed:

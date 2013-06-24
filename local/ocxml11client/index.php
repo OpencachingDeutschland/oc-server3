@@ -28,7 +28,7 @@
 		
 	***************************************************************************/
 
-	$rootpath = '../../';
+	$rootpath = '../htdocs/';
 
 	// chdir to proper directory (needed for cronjobs)
 	chdir(substr(realpath($_SERVER['PHP_SELF']), 0, strrpos(realpath($_SERVER['PHP_SELF']), '/')));

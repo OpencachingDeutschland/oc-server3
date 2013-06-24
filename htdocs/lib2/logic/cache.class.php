@@ -334,7 +334,7 @@ class cache
 				IF(ISNULL(`cache_rating`.`cache_id`), 0, `cache_logs`.`type` IN (1,7)) AS `recommended`
 			FROM $table AS `cache_logs`
 			INNER JOIN `user` ON `user`.`user_id` = `cache_logs`.`user_id`
-			LEFT JOIN `cache_rating` ON `cache_logs`.`cache_id`=`cache_rating`.`cache_id` AND `cache_logs`.`user_id`=`cache_rating`.`user_id`
+			LEFT JOIN `cache_rating` ON `cache_logs`.`cache_id`=`cache_rating`.`cache_id` AND `cache_logs`.`user_id`=`cache_rating`.`user_id` AND `cache_logs`.`date`=`cache_rating`.`rating_date`
 			".$addjoin."
 			WHERE `cache_logs`.`cache_id`='&1'
 			ORDER BY `cache_logs`.`date` DESC, `cache_logs`.`Id` DESC LIMIT &2, &3", $cacheid, $start+0, $count+0);

@@ -2265,7 +2265,7 @@ function toggle_attribselection(bSaveCookies)
 		{* back-to-searchoptions link *}
 		{if $queryid>0}
 			<div class="mapboxframe mapboxshadow" style="position:absolute; top:80px; right:5px; background:#fff; z-index:2">
-				<a class="nooutline" href="search.php?queryid={$queryid}&showresult=0"><img src="resource2/{$opt.template.style}/images/misc/32x32-search.png" style="padding:2px" /></a>
+				<a class="nooutline" href="search.php?queryid={$queryid}&showresult=0"><img src="resource2/{$opt.template.style}/images/misc/32x32-search.png" style="padding:2px" alt="{t}Search options{/t}" title="{t}Search options{/t}"/></a>
 			</div>
 		{/if}
 

@@ -5,6 +5,12 @@
 
 		trigger and stored procedure definitions for DB version 113
 
+		This update includes ALL triggers and procedures, to make sure that we
+		have a defined starting point. Further updates need not to include
+		everything but may be restriced to functions which have actually changed.
+		However, it may be easier and safer to do a complete update. Hard disk
+		and repository space is cheap, and performance is no issue here.
+
 	***************************************************************************/
 
 	sql_dropFunction('distance');

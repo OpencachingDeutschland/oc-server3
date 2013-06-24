@@ -12,6 +12,9 @@
 	 * You should normally NOT call this script directly, but via dbupdate.php
 	 * (or something similar on a production system). This ensures that
 	 * everything takes place in the right order.
+	 *
+	 * See http://wiki.opencaching.de/index.php/Entwicklung/Datenbankversionierung
+	 * (German) and the comments in this file for further documentation.
 	 */
 
 	if (!isset($opt['rootpath']))
@@ -275,5 +278,18 @@
 	{
 		update_triggers();
 	}
+
+
+	// When adding new mutations, take care that they behave well if run multiple
+	// times. This improves robustness of database versioning.
+	//
+	// Please carefully decide if a new mutation relies on any triggers.
+	// If so, check if triggers need to be updated first - they may have changed
+	// since the last trigger update mutation (like #113) - or emulate the trigger
+	// behaviour by additional SQL statements which restore table consistency.
+	//
+	// Trigger updates can be directly included in a mutation, or can be done via
+	// a separate trigger update mutation (see #113 and maintain-113.inc.php).
+	// See also http://wiki.opencaching.de/index.php/Entwicklung/Datenbankversionierung.
 
 ?>

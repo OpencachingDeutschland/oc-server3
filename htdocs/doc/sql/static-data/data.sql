@@ -2510,7 +2510,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2089', 'disable
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2090', 'archived[pl]', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2091', 'Test for and fix inconsistencies in database tables', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2092', 'You submitted more than 20 identical logs. Please make sure that you are entering the date of your cache visit, not the current date - also when "late logging" old finds.', '2013-04-25 23:00:00');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2093', 'Wrong log dates can adversly affect several OC functions like searching by last log date. Also, the owner and other caches may think that the cache has been currently found, which can adversely affect cache maintenance and lead to unexpected DNFs.', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2093', 'Wrong log dates can impair several OC functions like searching by last log date. Also, the owner and other caches may think that the cache has been currently found (date and type of the last log are shown in the owner\'s caches list!), which can adversely affect cache maintenance and lead to more DNFs.', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2094', 'You found %1 caches until now.', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2095', 'This log already exists - you tried to submit it twice!', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2096', '%2 has activated %1', '2013-04-25 23:00:00');

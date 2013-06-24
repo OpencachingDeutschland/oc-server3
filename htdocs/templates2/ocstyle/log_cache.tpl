@@ -66,7 +66,7 @@ function _chkFound () {
 	{t}You submitted more than 20 identical logs. Please make sure that you are entering the date of your cache visit, not the current date - also when "late logging" old finds.{/t} 
 </p>
 <p>
-	{t}Wrong log dates can adversly affect several OC functions like searching by last log date. Also, the owner and other caches may think that the cache has been currently found date and type of the last log are shown in the owner's caches list!), which can adversely affect cache maintenance and lead to more DNFs.{/t}
+	{t}Wrong log dates can impair several OC functions like searching by last log date. Also, the owner and other caches may think that the cache has been currently found (date and type of the last log are shown in the owner's caches list!), which can adversely affect cache maintenance and lead to more DNFs.{/t}
 </p>
 {/if}
 {if $showstatfounds==true}

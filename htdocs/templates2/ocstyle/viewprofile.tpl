@@ -9,6 +9,7 @@
 	{t 1=$username}Userprofile of %1{/t}
 </div>
 
+{* send email *}
 <div class="default" style="text-align: right;padding-right: 22px;">
 	<a href="mailto.php?userid={$userid}"><img src="resource2/{$opt.template.style}/images/misc/16x16-email.png" width="16" height="16" border="0" alt="{t}Send E-Mail{/t}" align="middle" /></a>&nbsp;
 	[<a href="mailto.php?userid={$userid}">{t}Send E-Mail{/t}</a>]
@@ -16,6 +17,7 @@
 
 <div class="buffer" style="width: 500px;">&nbsp;</div>
 
+{* profile data *}
 <div class="content2-container bg-blue02">
 	<p class="content-title-noshade-size2">
 		<img src="resource2/{$opt.template.style}/images/profile/32x32-profile.png" style="align: left; margin-right: 10px;" width="32" height="32"  /> 
@@ -85,6 +87,7 @@
 	<tr><td><td class="spacer"> </td></tr>
 </table>
 
+{* description *}
 {if $description != ""}
 	<div class="content2-container bg-blue02" >
 	</div>
@@ -94,6 +97,7 @@
 	<div>&nbsp;</div>
 {/if}
 
+{* statistics *}
 <div class="content2-container bg-blue02">
 	<p class="content-title-noshade-size2">
 		<img src="resource2/{$opt.template.style}/images/cacheicon/20x20-3.png" style="align: left; margin-right: 10px;" />
@@ -108,7 +112,7 @@
 		<td valign="middle" class="header-small" style="padding-top:5px;padding-bottom:5px">
 		<img src="resource2/{$opt.template.style}/images/cacheicon/22x22-traditional.gif" width="22" height="22" align="middle" border="0" />&nbsp;<b>{t}Hidden caches{/t}:</b></td>
 		<td class="header-small">{$hidden}
-			{if $hidden>0}[<a href="search.php?showresult=1&amp;expert=0&amp;f_inactive=0&amp;output=HTML&amp;sort=byname&amp;ownerid={$userid}&amp;searchbyowner=&amp;calledbysearch=0">{t}Show all{/t}</a>]{if $active<$hidden}, {$active} {t}active caches{/t} {if $active>0}[<a href="search.php?showresult=1&amp;expert=0&amp;f_inactive=1&amp;output=HTML&amp;sort=byname&amp;ownerid={$userid}&amp;searchbyowner=&amp;calledbysearch=0">{t}Show{/t}</a>]{/if}{/if}{/if}
+			{if $hidden>0}[<a href="search.php?showresult=1&amp;expert=0&amp;f_inactive=0&amp;output=HTML&amp;sort=byname&amp;ownerid={$userid}&amp;searchbyowner=&amp;calledbysearch=0">{t}Show all{/t}</a>]{if $active<$hidden}, {t 1=$active}%1 of these are active{/t} {if $active>0}[<a href="search.php?showresult=1&amp;expert=0&amp;f_inactive=1&amp;output=HTML&amp;sort=byname&amp;ownerid={$userid}&amp;searchbyowner=&amp;calledbysearch=0">{t}Show{/t}</a>]{/if}{/if}{/if}
 		</td>
 	</tr>
 

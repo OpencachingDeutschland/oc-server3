@@ -29,6 +29,10 @@ class purge_logs
 		if ($opt['logic']['logs']['purge_userdata'] > 0)
 			sql("DELETE FROM `logentries` WHERE date_created < NOW() - INTERVAL &1 DAY AND eventid IN (6,7)", 
 					$opt['logic']['logs']['purge_userdata']);
+
+		// Type 5 events = adoptions are still recorded here and preliminary archived,
+		// but may be discarded after verifying that they are not used anywhere.
+		// Adoptions are now in cache_adoptions table.
 	}
 }
 

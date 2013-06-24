@@ -76,6 +76,7 @@ var msInitWaypoint = "{/literal}{$sGMInitWaypoint}{literal}";
 var msInitType = 'roadmap';
 var msInitSiderbarDisplay = 'none';
 var msInitAttribSelection = false;
+var miQueryID = {/literal}{$queryid}{literal};
 
 /* home coordinates */
 var mnUserLat = {/literal}{$nUserLat}{literal};
@@ -211,7 +212,9 @@ function eval_filtercookies(aValues)
 			document.getElementById('f_userowner').checked = fs[1].indexOf('O') >= 0;
 			document.getElementById('f_userfound').checked = fs[1].indexOf('F') >= 0;
 			document.getElementById('f_ignored').checked   = fs[1].indexOf('I') >= 0;
+			document.getElementById('f_disabled').checked  = fs[1].indexOf('T') >= 0;
 			document.getElementById('f_inactive').checked  = fs[1].indexOf('D') >= 0;
+				// disabled and archived options have strange names and IDs for backward compatibility
 			document.getElementById('f_otherPlatforms').checked = fs[1].indexOf('M') >= 0;
 		}
 		else if (fs[0] == 'rated')
@@ -297,6 +300,7 @@ function cookieSave(permanent_filter)
 	if (document.getElementById('f_userowner').checked) sFilter += 'O';
 	if (document.getElementById('f_userfound').checked) sFilter += 'F';
 	if (document.getElementById('f_ignored').checked)   sFilter += 'I';
+	if (document.getElementById('f_disabled').checked)  sFilter += 'T';
 	if (document.getElementById('f_inactive').checked)  sFilter += 'D';
 	if (document.getElementById('f_otherPlatforms').checked) sFilter += 'M';
 
@@ -370,6 +374,19 @@ function mapLoad()
 
 	moMap = new google.maps.Map(document.getElementById("googlemap"), myOptions);
 	moMap.enableKeyDragZoom();
+
+	{/literal}
+	{if $lat_min !== null}
+		var lat_margin = ({$lat_max} - {$lat_min}) / 50;
+		var lon_margin = ({$lon_max} - {$lon_min}) / 50;
+		moMap.fitBounds(
+			new google.maps.LatLngBounds(
+				new google.maps.LatLng({$lat_min}-lat_margin ,{$lon_min}-lon_margin),
+				new google.maps.LatLng({$lat_max}+lat_margin, {$lon_max}+lon_margin)
+			)
+		);
+	{/if}
+	{literal}
 
 	setMapType("OSM", "OpenStreetMap", "http://tile.openstreetmap.org/", 18);
 	setMapType("MQ"," MapQuest", "http://otile1.mqcdn.com/tiles/1.0.0/osm/", 19);
@@ -843,7 +860,13 @@ function data_clear_except(wpset)
 
 function show_cachepopup_wp(sWaypoint, bAllowZoomChange)
 {
-	show_cachepopup_url(msURLMapPHP + "?mode=wpsearch&wp=" + sWaypoint, sWaypoint, bAllowZoomChange);
+	var $url = msURLMapPHP + "?mode=wpsearch&wp=" + sWaypoint;
+
+	// Locked caches normally are hidden on the map. As they are shown when searching,
+	// we enable them on the map when displaying search results to avoid confusions:
+	if (miQueryID > 0) $url += "&locked=1";
+
+	show_cachepopup_url($url, sWaypoint, bAllowZoomChange);
 }
 
 function show_cachepopup_latlon(nLat, nLon, bAllowZoomChange)
@@ -1887,6 +1910,7 @@ function reset_filter_values()
 	document.getElementById('f_userowner').checked = "";
 	document.getElementById('f_userfound').checked = "";
 	document.getElementById('f_ignored').checked = "checked";
+	document.getElementById('f_disabled').checked = "";
 	document.getElementById('f_inactive').checked = "checked";
 	document.getElementById('f_otherPlatforms').checked = "";
 
@@ -1934,6 +1958,9 @@ function get_searchfilter_params(output, skipqueryid, zip)
 	if (zip)
 		sPostBody += '&zip=1';
 
+	if (miQueryID > 0)
+		return sPostBody + "&queryid=" + String(miQueryID);
+
 	if (sCacheName!='')
 		sPostBody += '&searchto=searchbyname&cachename=' + encodeURIComponent(sCacheName);
 	else
@@ -1974,6 +2001,7 @@ function get_searchfilter_params(output, skipqueryid, zip)
 	sPostBody += document.getElementById('f_userowner').checked ? '&f_userowner=1' : '&f_userowner=0';
 	sPostBody += document.getElementById('f_userfound').checked ? '&f_userfound=1' : '&f_userfound=0';
 	sPostBody += document.getElementById('f_ignored').checked ? '&f_ignored=1' : '&f_ignored=0';
+	sPostBody += document.getElementById('f_disabled').checked ? '&f_disabled=1' : '&f_disabled=0';
 	sPostBody += document.getElementById('f_inactive').checked ? '&f_inactive=1' : '&f_inactive=0';
 	sPostBody += document.getElementById('f_otherPlatforms').checked ? '&f_otherPlatforms=1' : '&f_otherPlatforms=0';
 
@@ -2113,7 +2141,7 @@ function toggle_attribselection(bSaveCookies)
 					{* login status *}
 					<td rowspan="2">&nbsp;&nbsp;</td>
 					<td rowspan="2" class="maplogin">
-						{if $username != ""}{t}Logged in as{/t}<br /><a href="myhome.php"><b>{$username}</b></a> &nbsp;<a href="map2.php?action=logout&mode=fullscreen"><img src="resource2/ocstyle/images/action/15x13-logout.png" style="margin-bottom:2px" alt="{t}Logout{/t}" title="{t}Logout{/t}"></a>{else}<a href="login.php?target=map2.php%3Fmode%3Dfullscreen">{t}Login{/t}...</a>{/if}
+						{if $username != ""}{t}Logged in as{/t}<br /><a href="myhome.php"><b>{$username}</b></a> &nbsp;<a href="map2.php?action=logout&mode=fullscreen{if $queryid>0}&queryid={$queryid}{/if}"><img src="resource2/ocstyle/images/action/15x13-logout.png" style="margin-bottom:2px" alt="{t}Logout{/t}" title="{t}Logout{/t}"></a>{else}<a href="login.php?target=map2.php%3Fmode%3Dfullscreen{if $queryid>0}%26queryid%3D{$queryid}{/if}">{t}Login{/t}...</a>{/if}
 					</td>
 					<td rowspan="2">&nbsp;&nbsp;</td>
 				{/if}
@@ -2146,9 +2174,9 @@ function toggle_attribselection(bSaveCookies)
 				{* normal / full screen button *}
 				<td rowspan="2">
 					{if $bFullscreen}
-						<a class="nooutline" href="map2.php?mode=normalscreen"><img src="resource2/{$opt.template.style}/images/map/35x35-normalscreen.png" align="right" style="margin-left:4px; margin-right:4px" height="35" width="35" alt="{t}Switch to small map{/t}" title="{t}Switch to small map{/t}" /></a>
+						<a class="nooutline" href="map2.php?mode=normalscreen{if $queryid>0}&queryid={$queryid}{/if}"><img src="resource2/{$opt.template.style}/images/map/35x35-normalscreen.png" align="right" style="margin-left:4px; margin-right:4px" height="35" width="35" alt="{t}Switch to small map{/t}" title="{t}Switch to small map{/t}" /></a>
 					{else}
-						<a class="nooutline" href="map2.php?mode=fullscreen"><img src="resource2/{$opt.template.style}/images/map/35x35-fullscreen.png" align="right" style="margin-left:4px; margin-right:4px" height="35" width="35" alt="{t}Switch to full screen{/t}" title="{t}Switch to full screen{/t}" /></a>
+						<a class="nooutline" href="map2.php?mode=fullscreen{if $queryid>0}&queryid={$queryid}{/if}"><img src="resource2/{$opt.template.style}/images/map/35x35-fullscreen.png" align="right" style="margin-left:4px; margin-right:4px" height="35" width="35" alt="{t}Switch to full screen{/t}" title="{t}Switch to full screen{/t}" /></a>
 					{/if}
 				</td>
 
@@ -2196,7 +2224,7 @@ function toggle_attribselection(bSaveCookies)
 			<div class="mapversion">GM Version <script type="text/javascript">document.write(google.maps.version);</script></div>
 
 			<div id="mapoptions" class="mapoptions mapboxframe mapboxshadow" style="z-index:999; display:none">
-				<form action="map2.php?mode={if $bFullscreen}full{else}normal{/if}screen" method="post" style="display:inline;">
+				<form action="map2.php?mode={if $bFullscreen}full{else}normal{/if}screen{if $queryid>0}&queryid={$queryid}{/if}" method="post" style="display:inline;">
 					<input type="hidden" name="submit" value="1" />
 					<table>
 						<tr><td><span style="font-size:1.2em; font-weight:bold">{t}Settings{/t}</strong></td><td style="text-align:right"><a href="javascript:toggle_settings()"><img src="resource2/ocstyle/images/navigation/19x19-close.png" style="opacity:0.7" /></a></tr>
@@ -2232,7 +2260,14 @@ function toggle_attribselection(bSaveCookies)
 
 	{if $bFullscreen}
 		{* the logo *}
-		<a href="index.php"><img id="oclogo" src="resource2/ocstyle/images/oclogo/oc_logo_alpha3.png" style="position:absolute; left:32px; top:50px; z-index:2; border:0;"></a>
+		<a href="index.php"><img id="oclogo" src="resource2/ocstyle/images/oclogo/oc_logo_alpha3.png" style="position:absolute; left:32px; top:50px; z-index:2; border:0"/></a>
+
+		{* back-to-searchoptions link *}
+		{if $queryid>0}
+			<div class="mapboxframe mapboxshadow" style="position:absolute; top:80px; right:5px; background:#fff; z-index:2">
+				<a class="nooutline" href="search.php?queryid={$queryid}&showresult=0"><img src="resource2/{$opt.template.style}/images/misc/32x32-search.png" style="padding:2px" /></a>
+			</div>
+		{/if}
 
 		{literal}
 		<script language="javascript">
@@ -2264,7 +2299,7 @@ function toggle_attribselection(bSaveCookies)
 		{/literal}
 
 		{* frame for all sidebare contents: *}
-		<div class="mapboxframe mapboxshadow" style="position:absolute; top: 80px; right:0px; margin: 0px; padding: 4px; background:#fff; opacity: .9; z-index:2">
+		<div class="mapboxframe mapboxshadow" style="position:absolute; top: 80px; right:0px; margin: 0px; padding: 4px; background:#fff; opacity: .9; z-index:2; {if $queryid > 0}display:none;{/if}">
 			{* sidebar hidden: '<' icon to open *}
 			<a class="jslink nofocus" onclick="toggle_sidebar(true);" id='sidebar-toggle' style="width: 32px; height: 32px"><img id="sidbar-toggle-img" src="resource2/{$opt.template.style}/images/map/32x32-left.png"></a>
 			{* sidebar visible: filter options table & '>' icon to close *}
@@ -2273,17 +2308,18 @@ function toggle_attribselection(bSaveCookies)
 	{* filter options header *}
 	{* outer table es needed to use "width=100%" for inner table (to position the close
      icon right) without consuming whole screen width in MSIE *}
-	<table cellspacing=0 cellpadding=0><tr><td>
+	<table cellspacing="0" cellpadding="0"><tr><td>
 		<table style="width:100%">
 			<tr>
 				<td style="width:3px"></td>
 				<td id="filterboxtitle" class="content-title-noshade-size1">{t}Only show Geocaches with the following properties:{/t}</td>
-				<td align="right""><a class="jslink" onclick="toggle_sidebar(true);"><img src="resource2/ocstyle/images/map/32x32-right.png"></a></td>
+				<td align="right"><a class="jslink" onclick="toggle_sidebar(true);"><img src="resource2/ocstyle/images/map/32x32-right.png"></a></td>
 			</tr>
 		</table>
 	{else}
 		<div class="buffer" style="width: 500px; height: 2px;">&nbsp;</div>
 		<div style="width:770px;text-align:right;"><span id="mapstat_caches">{t}Caches displayed{/t} <span id="statCachesCount">0</span></span>, {t}Time to load{/t} <span id="statLoadTime">0</span> {t}Sec.{/t}</div>
+		<div style="{if $queryid > 0}display:none{/if}">
 		<p id="filterboxtitle" class="content-title-noshade-size1">{t}Only show Geocaches with the following properties:{/t}</p>
 		<div class="buffer" style="width: 500px; height: 5px;">&nbsp;</div>
 	{/if}
@@ -2368,13 +2404,21 @@ function toggle_attribselection(bSaveCookies)
 					<tr>
 						<td style="white-space:nowrap">
 							<input type="checkbox" id="f_inactive" name="f_inactive" value="1" checked="checked" onchange="filter_changed()" class="checkbox" />
-							<label for="f_inactive">{t}Not active{/t}</label>
+							<label for="f_inactive">{t}archived[pl]{/t}</label>
+						</td>
+					</tr>
+					<tr>
+						<td style="white-space:nowrap">
+							<input type="checkbox" id="f_disabled" name="f_disabled" value="1" checked="checked" onchange="filter_changed()" class="checkbox" />
+							<label for="f_disabled">{t}disabled[pl]{/t}</label>
 						</td>
 					</tr>
 					<tr>
 						<td style="white-space:nowrap">
 							<input type="checkbox" id="f_otherPlatforms" name="f_otherPlatforms" value="1" onchange="filter_changed()" class="checkbox" />
-							<label for="f_otherPlatforms">{t}Double listings{/t}</label>
+							<label for="f_otherPlatforms">{t}GC listings{/t}</label>
+							{* the id is still "f_otherPlatforms" though it only applies to GC
+							   for compatiblity with old stored or external queries *}
 						</td>
 					</tr>
 				</table>
@@ -2502,6 +2546,8 @@ function toggle_attribselection(bSaveCookies)
 	{if $bFullscreen}
 		</td></tr></td></table>
 		</div>
+		</div>
+	{else}
 		</div>
 	{/if}
 

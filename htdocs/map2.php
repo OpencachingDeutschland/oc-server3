@@ -19,11 +19,6 @@
 	else
 		$login->verify();
 
-	// check for peculiar browsers
-	$ua = isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : "";
-	$msie = preg_match('/MSIE [1-9]+.[0-9]+/',$ua) && !strpos($ua,"Opera");
-	$old_msie = $msie && preg_match('/MSIE [1-6].[0-9]+/',$ua);
-
 	$sMode = isset($_REQUEST['mode']) ? $_REQUEST['mode'] : '';
 	if ($sMode == 'locate')
 	{
@@ -57,9 +52,10 @@
 		$nLat2 = isset($_REQUEST['lat2']) ? $_REQUEST['lat2']+0 : 0;
 		$cachenames = isset($_REQUEST['cachenames']) ? $_REQUEST['cachenames']+0 : 0;
 		$smallmap = isset($_REQUEST['smallmap']) ? $_REQUEST['smallmap']+0 : 0;
+		$showlockedcaches = isset($_REQUEST['locked']) ? $_REQUEST['locked']<>0 : true;
 		
 		output_searchresult($nResultId, $compact, $nLon1, $nLon2, $nLat1, $nLat2,
-		                    $cachenames, $smallmap);
+		                    $cachenames, $smallmap, $showlockedcaches);
 	}
 	else if ($sMode == 'fullscreen' ||
 	         ($sMode == '' &&
@@ -73,6 +69,21 @@
 	else
 	{
 		$fullscreen = false;
+	}
+
+	// set queryid data for displaying search results on map
+	$nQueryId = isset($_REQUEST['queryid']) ? $_REQUEST['queryid']+0 : 0;
+	$nResultId = isset($_REQUEST['resultid']) ? $_REQUEST['resultid']+0 : 0;
+	$tpl->assign('queryid',$nQueryId);
+
+	if (!isset($_REQUEST['lat_min']))
+		$tpl->assign('lat_min',null);
+	else
+	{
+		$tpl->assign('lat_min',$_REQUEST['lat_min']);
+		$tpl->assign('lat_max',$_REQUEST['lat_max']);
+		$tpl->assign('lon_min',$_REQUEST['lon_min']);
+		$tpl->assign('lon_max',$_REQUEST['lon_max']);
 	}
 
 	// save options
@@ -217,8 +228,8 @@
 	$tpl->assign('min_maxrecords', $opt['map']['min_maxrecords']);
 	$tpl->assign('max_maxrecords', $opt['map']['max_maxrecords']);
 
-	$tpl->assign('msie',$msie);
-	$tpl->assign('old_msie',$old_msie);
+	$tpl->assign('msie',$useragent_msie);
+	$tpl->assign('old_msie',$useragent_msie && ($useragent_msie_version <= 6));
 
 	$tpl->assign('help_oconly', helppagelink("OConly"));
 	$tpl->assign('help_map', helppagelink("*map2"));
@@ -291,7 +302,7 @@ function output_cachexml($sWaypoint)
 	                   LEFT JOIN `sys_trans_text` AS `trans_size_text` ON `trans_size`.`id`=`trans_size_text`.`trans_id` AND `trans_size_text`.`lang`='&2'
 	                   LEFT JOIN `caches_attributes` ON `caches_attributes`.`cache_id`=`caches`.`cache_id` AND `caches_attributes`.`attrib_id`=6
 	                   LEFT JOIN `pictures` ON `pictures`.`object_id`=`caches`.`cache_id` AND `pictures`.`object_type`='&4' AND `pictures`.`mappreview`=1
-	                       WHERE (`caches`.`wp_oc`='&3' OR (`caches`.`wp_oc`!='&3' AND `caches`.`wp_gc`='&3') OR (`caches`.`wp_oc`!='&3' AND `caches`.`wp_nc`='&3')) AND 
+	                       WHERE (`caches`.`wp_oc`='&3' OR (`caches`.`wp_oc`!='&3' AND `caches`.`wp_gc_maintained`='&3') OR (`caches`.`wp_oc`!='&3' AND `caches`.`wp_nc`='&3')) AND 
 	                             (`cache_status`.`allow_user_view`=1 OR `caches`.`user_id`='&1')
 	                       LIMIT 1",  // for the case of illegal duplicates in pictures.mappreview etc.
 	                              $login->userid, $opt['template']['locale'], $sWaypoint, OBJECT_CACHE);
@@ -391,9 +402,9 @@ function output_namesearch($sName, $nLat, $nLon, $nResultId)
 }
 
 function output_searchresult($nResultId, $compact, $nLon1, $nLon2, $nLat1, $nLat2,
-                             $cachenames, $smallmap)
+                             $cachenames, $smallmap, $showlockedcaches)
 {
-	global $login, $opt, $msie;
+	global $login, $opt, $useragent_msie;
 
 	// check if data is available and connect the right slave server
 	$nSlaveId = sql_value("SELECT `slave_id` FROM `map2_result` WHERE `result_id`='&1' AND DATE_ADD(`date_created`, INTERVAL '&2' SECOND)>NOW()", -2, $nResultId, $opt['map']['maxcacheage']);
@@ -418,7 +429,7 @@ function output_searchresult($nResultId, $compact, $nLon1, $nLon2, $nLat1, $nLat
 		$user_maxrecords =
 			sql_value("SELECT option_value FROM user_options WHERE user_id='&1' AND option_id=8",
 	               $opt['map']['maxrecords'] + 0, $login->userid);
-		if ($user_maxrecords > 0 && (!$msie || $user_maxrecords < $maxrecords))
+		if ($user_maxrecords > 0 && (!$useragent_msie || $user_maxrecords < $maxrecords))
 			$maxrecords = min(max($user_maxrecords, $opt['map']['min_maxrecords']), 
 			                  $opt['map']['max_maxrecords']);
 	}
@@ -438,7 +449,8 @@ function output_searchresult($nResultId, $compact, $nLon1, $nLon2, $nLat1, $nLat
 	{
 		$namequery = ($cachenames ? ", `caches`.`name` AS `cachename`" : "");
 		$rs = sql_slave("SELECT SQL_BUFFER_RESULT 
-                            `caches`.`wp_oc`, `caches`.`longitude`, `caches`.`latitude`,
+                            distinct `caches`.`wp_oc`,
+                            `caches`.`longitude`, `caches`.`latitude`,
                             `caches`.`type`, 
                             `caches`.`status`>1 AS `inactive`,
                             `caches`.`type`=6 AND `caches`.`date_hidden`+INTERVAL 1 DAY < NOW() AS `oldevent`,
@@ -449,19 +461,22 @@ function output_searchresult($nResultId, $compact, $nLon1, $nLon2, $nLat1, $nLat
                             $namequery . "
                        FROM `map2_data`
                  INNER JOIN `caches` ON `map2_data`.`cache_id`=`caches`.`cache_id`
-                  LEFT JOIN `user` ON `user`.`user_id`=`caches`.`user_id`
+                 INNER JOIN `user` ON `user`.`user_id`=`caches`.`user_id`
                   LEFT JOIN `cache_logs` `found_logs` ON `found_logs`.`cache_id`=`caches`.`cache_id` AND `found_logs`.`user_id`='&6' AND `found_logs`.`type` IN (1,7)
                   LEFT JOIN `cache_logs` `notfound_logs` ON `notfound_logs`.`cache_id`=`caches`.`cache_id` AND `notfound_logs`.`user_id`='&6' AND `notfound_logs`.`type`=2
                   LEFT JOIN `caches_attributes` ON `caches_attributes`.`cache_id`=`caches`.`cache_id` AND `caches_attributes`.`attrib_id`=6
                       WHERE `map2_data`.`result_id`='&1' AND `caches`.`longitude`>'&2' AND `caches`.`longitude`<'&3' AND `caches`.`latitude`>'&4' AND `caches`.`latitude`<'&5'
-	                      AND `caches`.`status`<>6   /* hide vandalized listings, locked duplicates etc. */
-	                      AND `caches`.`status`<>7   /* ... and locked/invisible caches */
+	                      AND `caches`.`status`<>5    /* hide unpublished caches */
+	                      AND `caches`.`status`<>'&7' /* ... and vandalized listings, locked duplicates etc. */
+	                      AND `caches`.`status`<>7    /* ... and locked/invisible caches */
 									 ORDER BY `caches`.`status` DESC, `oconly` AND NOT (`found` OR `notfound`), NOT (`found` OR `notfound`), `caches`.`type`<>4, MD5(`caches`.`name`)
-									 LIMIT &7",
+									 LIMIT &8",
 									    // sort in reverse order, because last are on top of map;
 									    // fixed order avoids oscillations when panning;
 									    // MD5 pseudo-randomness gives equal changes for all kinds of caches to be on top
-									    $nResultId, $nLon1, $nLon2, $nLat1, $nLat2, $login->userid, $maxrecords);
+									    $nResultId, $nLon1, $nLon2, $nLat1, $nLat2, $login->userid,
+											$showlockedcaches ? 0 : 6,
+											$maxrecords);
 
 		while ($r = sql_fetch_assoc($rs))
 		{
@@ -471,7 +486,6 @@ function output_searchresult($nResultId, $compact, $nLon1, $nLon2, $nLat1, $nLat
 			if ($r['notfound']) $flags |= 4;
 			if ($r['inactive'] || $r['oldevent']) $flags |= 8;
 			if ($r['oconly']) $flags |= 16;
-
 			if ($compact)
 				echo '<c d="' .
 				       xmlentities(

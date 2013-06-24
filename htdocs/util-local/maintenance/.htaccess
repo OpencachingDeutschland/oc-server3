@@ -1,4 +1,0 @@
-<FilesMatch "*">
-Order Deny,Allow
-Deny from All
-</FilesMatch>

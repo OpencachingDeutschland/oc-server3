@@ -44,6 +44,21 @@
 	} while ($db_version > 0);
 
 
+	// Now and then a maintain.php update should be inserted, because multiple
+	// mutations may be run in one batch, and future mutations may depend on
+	// changed triggers, which may not be obvious.
+	// Of course, a trigger update mutation can also be inserted directly before a
+	// mutation which needs it. (But take care that maintain.php at that point does
+	// not depend on database changes which will be done by that mutation ...)
+
+	function update_triggers()
+	{
+		global $opt;
+		echo " ";  // space for the case of a DB password prompt
+		system('php ' . $opt['rootpath'] . 'doc/sql/stored-proc/maintain.php');
+	}
+
+
 	// Database mutations
 	// - must be consecutively numbered
 	// - should behave well if run multiple times
@@ -173,7 +188,7 @@
 			sql("ALTER TABLE `cache_reports` ADD INDEX `userid` (`userid`)");
 	}
 
-	function dbv_108()  // automatic email-bounce processiong
+	function dbv_108()  // automatic email-bounce processing
 	{
 		if (!sql_field_exists('user','last_email_problem'))
 			sql("ALTER TABLE `user` ADD COLUMN `last_email_problem` datetime default NULL AFTER `email_problems`");
@@ -181,10 +196,74 @@
 			sql("ALTER TABLE `user` ADD COLUMN `mailing_problems` int(10) unsigned NOT NULL default '0' AFTER `last_email_problem`");
 	}
 
-	function dbv_109()  // improved email-bounce processiong
+	function dbv_109()  // improved email-bounce processing
 	{
 		if (!sql_field_exists('user','first_email_problem'))
 			sql("ALTER TABLE `user` ADD COLUMN `first_email_problem` date default NULL AFTER `email_problems`");
+	}
+
+	function dbv_110()  // move adoption history to separate table
+	{
+		if (!sql_table_exists('cache_adoptions'))
+		{
+			sql(
+				"CREATE TABLE `cache_adoptions` (
+					`id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+					`cache_id` int(10) unsigned NOT NULL,
+					`date` datetime NOT NULL,
+					`from_user_id` int(10) unsigned NOT NULL,
+					`to_user_id` int(10) unsigned NOT NULL,
+					PRIMARY KEY (`id`),
+					KEY `cache_id` (`cache_id`,`date`)
+				) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1");
+
+			// Up to commit d15ee5f9, new cache notification logs were erronously stored with
+			// event ID 5 (instead of 8). Therefore we need to check for the module, too:
+			$rs = sql("SELECT `id`, `date_created`, `objectid1`, `logtext`
+			             FROM `logentries`
+			            WHERE `eventid`=5 AND `module`='cache'
+			         ORDER BY `date_created`, `id`");
+			while ($rLog = sql_fetch_assoc($rs))
+			{
+				preg_match('/Cache (\d+) has changed the owner from userid (\d+) to (\d+) by (\d+)/',
+				           $rLog['logtext'], $matches);
+				if (count($matches) != 5)
+				{
+					sql_free_result($rs);
+					sql("DROP TABLE `cache_adoptions`");
+					die("\nunknown adoption log entry format for ID " . $rLog['id'] . "\n");
+				}
+				sql("INSERT INTO `cache_adoptions`
+				                 (`cache_id`,`date`,`from_user_id`,`to_user_id`)
+						      VALUES ('&1','&2','&3','&4')",
+						$rLog['objectid1'], $rLog['date_created'], $matches[2], $matches[3]);
+			}
+			sql_free_result($rs);
+
+			// We keep the old entries in 'logentries' for the case something went wrong here.
+		}
+	}
+
+	function dbv_111()  // fix event ID of old publishing notifications
+	{
+		sql("UPDATE `logentries` SET `eventid`=8
+		      WHERE `eventid`=5 AND `module`='notify_newcache'");
+	}
+
+	function dbv_112()  // added maintained GC waypoints
+	{
+		if (!sql_field_exists('caches','wp_gc_maintained'))
+		{
+			sql("ALTER TABLE `caches` ADD COLUMN `wp_gc_maintained` varchar(7) NOT NULL AFTER `wp_gc`");
+			sql("UPDATE `caches` SET `wp_gc_maintained`=UCASE(TRIM(`wp_gc`)) WHERE SUBSTR(TRIM(`wp_gc`),1,2)='GC'");
+		}
+		if (!sql_index_exists('caches', 'wp_gc_maintained'))
+			sql("ALTER TABLE `caches` ADD INDEX `wp_gc_maintained` (`wp_gc_maintained`)");
+	}
+
+	function dbv_113()  // preventive trigger update
+	{
+		update_triggers();
 	}
 
 ?>

@@ -27,14 +27,21 @@
 ?>
 
 <div class="content2-container bg-blue02" style="margin-top:20px;">
-	<p class="content-title-noshade-size3">
-		<img src="resource2/ocstyle/images/cacheicon/traditional.gif" width="32" height="32" style="align:left;" alt="{t}Search{/t}" />&nbsp;
-		{t}{results_count} caches<span style="{search_headline_caches}"> matched</span>{/t}
-		<span style="font-weight:normal;float:right;font-size:80%;" >
-			[<a href="query.php?action=save&queryid={queryid}">{t}Save options{/t}</a>]&nbsp;
-			[<a href="search.php?queryid={queryid}&showresult=0">{t}Edit options{/t}</a>]
-		</span>
-	</p>
+	<table cellspacing="0" cellpadding="0" width="100%" border="0"><tr>
+		<td style="white-space:nowrap">
+			<p class="content-title-noshade-size15" style="padding:0; margin:4px;">&nbsp;{t}{results_count} caches<span style="{search_headline_caches}"> matched</span>{/t}&nbsp;</p>
+		</td>
+		<td style="text-align:right; width:1px">
+			<a href="search.php?queryid={queryid}&output=map2bounds&showresult=1&skipqueryid=1&expert=0&utf8=1" class="nooutline"><img src="resource2/ocstyle/images/misc/32x32-world.png"/></a>
+		</td>
+		<td style="white-space:nowrap; text-align:left; padding-bottom:2px">
+			<p class="inheader"><a href="search.php?queryid={queryid}&output=map2bounds&showresult=1&skipqueryid=1&expert=0&utf8=1">{showonmap}</a></p>
+		</td>
+		<td style="text-align:right; padding-bottom:2px"><p class="inheader">
+			<span style="white-space:nowrap">[<a href="query.php?action=save&queryid={queryid}">{t}Save options{/t}</a>]</span>
+			&nbsp;<span style="white-space:nowrap">[<a href="search.php?queryid={queryid}&showresult=0">{t}Edit options{/t}</a>]</span></p>
+		</td>
+	</tr></table>
 </div>
 <div class="buffer" style="height:5px;"></div>
 
@@ -44,9 +51,9 @@
 			<td class="header-small" colspan="2">
 				<table width="98.5%">
 					<tr>
-						<td width="100%">{pages}</td>
-						<td>{t}Download{/t}:</td>
-						<td>
+						<td rowspan="1" style="vertical-align:top; width:300px">{pages}</td>
+						<td style="text-align:right;">{t}Download{/t}:&nbsp;</td>
+						<td><nobr>
 							<select name="wpdownload-page" class="wpdownload" onChange="location.href=this.options[this.selectedIndex].value"> 
 								<option value="#">{t}Results on this page{/t}</option>
 								<option value="search.php?queryid={queryid}&output=gpx&startat={startat}">GPX</option>
@@ -56,8 +63,6 @@
 								<option value="search.php?queryid={queryid}&output=ovl&startat={startat}">OVL</option>
 								<option value="search.php?queryid={queryid}&output=txt&startat={startat}">TXT</option>
 							</select>
-						</td>
-						<td style="width:120px">
 							<select name="wpdownload-all" class="wpdownload" onChange="location.href=this.options[this.selectedIndex].value"> 
 								<option value="#">{t}Result {startatp1} to {endat} (as zip){/t}</option>
 								<option value="search.php?queryid={queryid}&output=gpx&startat={startat}&count=max&zip=1">GPX</option>
@@ -66,7 +71,7 @@
 								<option value="search.php?queryid={queryid}&output=ov2&startat={startat}&count=max&zip=1">OV2</option>
 								<option value="search.php?queryid={queryid}&output=ovl&startat={startat}&count=max&zip=1">OVL</option>
 								<option value="search.php?queryid={queryid}&output=txt&startat={startat}&count=max&zip=1">TXT</option>
-							</select>
+							</select></nobr>
 						</td>
 					</tr>
 				</table> 
@@ -94,12 +99,12 @@
 		<tr>
 			<td colspan="2" class="header-small">{pages}</td>
 		</tr>
-		<tr><td class="spacer" colspan="2">&nbsp;</td></tr>
+		<tr><td style="height:0.6em"></td></tr>
 	</table>
-	<table class="content" width="100%">
+	<table width="100%">
 		<tr>
-			<td><b>{t}Download{/t}:</b></td>
-			<td align="right" style="padding-right:20px;">
+			<td style="text-align:right; width:50%">{t}Download{/t}:&nbsp;&nbsp;</td>
+			<td align="right" style="padding-right:20px; white-space:nowrap">
 				<b>{t}Results on this page:{/t}</b>
 				<a href="search.php?queryid={queryid}&output=gpx&startat={startat}" title="{t}GPS Exchange Format .gpx{/t}">GPX</a>
 				<a href="search.php?queryid={queryid}&output=loc&startat={startat}" title="{t}Waypointfile .loc{/t}">LOC</a>
@@ -108,12 +113,7 @@
 				<a href="search.php?queryid={queryid}&output=ov2&startat={startat}" title="{t}TomTom POI .ov2{/t}">OV2</a>
 				<a href="search.php?queryid={queryid}&output=ovl&startat={startat}" title="{t}TOP50-Overlay .ovl{/t}">OVL</a>
 				<a href="search.php?queryid={queryid}&output=txt&startat={startat}" title="{t}Textfile .txt{/t}">TXT</a>
-			</td>
-		</tr>
-		<tr>
-			<td class="help">
-			</td>
-			<td align="right" style="padding-right:20px;">
+				<br />
 				<b>{t}Result {startatp1} to {endat} (as zip):{/t}</b>
 				<a href="search.php?queryid={queryid}&output=gpx&startat={startat}&count=max&zip=1" title="{t}GPS Exchange Format .gpx{/t}">GPX</a>
 				<a href="search.php?queryid={queryid}&output=loc&startat={startat}&count=max&zip=1" title="{t}Waypointfile .loc{/t}">LOC</a>

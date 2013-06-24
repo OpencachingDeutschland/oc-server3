@@ -24,6 +24,7 @@ CREATE TABLE `caches` (
   `search_time` float unsigned NOT NULL default '0',
   `way_length` float unsigned NOT NULL default '0',
   `wp_gc` varchar(7) NOT NULL,
+  `wp_gc_maintained` varchar(7) NOT NULL,
   `wp_nc` varchar(6) NOT NULL,
   `wp_oc` varchar(7) NOT NULL,
   `desc_languages` varchar(60) NOT NULL COMMENT 'via Trigger (cache_desc)',
@@ -46,5 +47,6 @@ CREATE TABLE `caches` (
   KEY `type` (`type`),
   KEY `size` (`size`),
   KEY `difficulty` (`difficulty`),
-  KEY `terrain` (`terrain`)
+  KEY `terrain` (`terrain`),
+  KEY `wp_gc_maintained` (`wp_gc_maintained`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ;

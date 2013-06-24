@@ -196,7 +196,7 @@
 			{* <!-- Suchbox --> *}
 			{if !$opt.page.nowpsearch}
 				<div id="breadcrumb">{include file="sys_breadcrumb.tpl" items="$breadcrumb"}</div>
-				<div id="suchbox"><form action="searchplugin.php" method="post" style="display:inline;"><b>{t}Waypoint-Search{/t}:</b><input type="hidden" name="source" value="waypoint-suche" /> <input type="text" name="userinput" size="10" /> <input type="submit" value="{t}Go{/t}" /></form></div>
+				<div id="suchbox"><form action="searchplugin.php" method="post" style="display:inline;"><b>{t}Waypoint-Search{/t}:</b><input type="hidden" name="sourceid" value="waypoint-search" /> <input type="text" name="userinput" size="10" /> <input type="submit" value="{t}Go{/t}" /></form></div>
 			{else}
 				<div id="breadcrumb_fullsize">{include file="sys_breadcrumb.tpl" items="$breadcrumb"}</div>
 			{/if}
@@ -215,7 +215,7 @@
 					{/nocache}
 				</ul>
 
-				<p class="sidebar-maintitle">{t}Country (nodes){/t}</p>
+				<p class="sidebar-maintitle">{t}Country sites{/t}</p>
 				<div style="text-align: center;" class="nodeflags">
 					<a href="http://www.opencaching.cz" target="_blank"><img src="resource2/{$opt.template.style}/images/nodes/oc-cz.png" width="100" height="22" /></a><br />
 					<a href="http://www.opencaching.de" target="_blank"><img src="resource2/{$opt.template.style}/images/nodes/oc-de.png" width="100" height="22" /></a><br />

@@ -33,7 +33,7 @@
     <urlname>{cachename}</urlname>
     <sym>{sym}</sym>
     <type>Geocache|{type}</type>
-    <groundspeak:cache id="{cacheid}" {status} xmlns:groundspeak="http://www.groundspeak.com/cache/1/0">
+    <groundspeak:cache id="{cacheid}" {status} xmlns:groundspeak="http://www.groundspeak.com/cache/1/0/1">
       <groundspeak:name>{cachename}</groundspeak:name>
       <groundspeak:placed_by>{owner}</groundspeak:placed_by>
       <groundspeak:owner id="{userid}">{owner}</groundspeak:owner>

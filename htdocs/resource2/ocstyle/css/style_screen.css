@@ -233,7 +233,7 @@ ul#statmenu { padding: 0px; margin: 0px;}
 
 .errormsg {color: rgb(240,100,100); font-weight: bold;}
 .okmsg {color: rgb(0,191,0); font-weight: bold;}
-.redtext {color: rgb(191,0,0);}
+.redtext {color: rgb(198,0,0);}
 
 #cache_name_block { width: 670px; padding-left: 5px; padding-top: 5px;}
 
@@ -302,6 +302,7 @@ p.embed-caption {float: left; margin: 5px 0px 0px 0px; padding: 0px; font-style:
 div.cachedesc {font-size: 120%;}
 div.cachedesc p {font-size: 100%;}
 div.welcome p {line-height: 1.6em;}
+p.inheader {margin:4px; font-size:125%;}
 
 /* Quote */
 p.quote {clear: left; margin: 0em 30px 0.6em 30px;	line-height: 120%; font-size: 110%;}
@@ -350,7 +351,7 @@ td.listicon {
 .printwptable td { line-height:1.4em; font-size:12px; }
 
 td.listcolor1 { background:#fff; line-height:1.7em; }
-td.listcolor2 { background:#eee; line-height:1.7em; }
+td.listcolor2 { background:#f0f0f0; line-height:1.7em; }
 
 /* Images */
 .img-left-noborder-notopmargin {float: left; margin: 0px 10px 0px 0px;}
@@ -1468,3 +1469,4 @@ div#havefound {
 #forum div.rsstext img {max-width:200px; max-height:120px;}
 
 p.editlog { font-weight: 400; display:inline; }
+.newsymbol { background:#ff9d11; color:#fff; }

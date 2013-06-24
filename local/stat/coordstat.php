@@ -7,7 +7,7 @@
 
 // statistical data for cache and log activity map
 
-chdir ("../..");
+chdir ("../htdocs");
 require('lib2/web.inc.php');
 
 error_reporting(error_reporting() & ~E_NOTICE);

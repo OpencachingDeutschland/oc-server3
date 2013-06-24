@@ -112,8 +112,6 @@
 	$opt['lib']['garmin']['url'] = 'http://local.opencaching.de/';
 	$opt['lib']['garmin']['redirect'] = $opt['lib']['garmin']['url'] . 'garmin.php?redirect=1&cacheid={cacheid}';
 
-	$opt['bin']['cs2cs'] = '/var/www/bin/cs2cs';
-	
 	// other settings
 	$opt['page']['showdonations'] = true;
 	$opt['logic']['pictures']['dummy']['replacepic'] = $dev_basepath . $dev_codepath . 'htdocs/images/no_image_license.png';

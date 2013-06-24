@@ -722,10 +722,12 @@ class user
 		                       `last_name`='', `first_name`='', `country`=NULL, `pmr_flag`=0,
 		                       `new_pw_code`=NULL, `new_pw_date`=NULL,
 		                       `new_email`=NULL, `new_email_code`=NULL, `new_email_date`=NULL,
-		                       `email_problems`=0,
+		                       `email_problems`=0, `first_email_problem`=NULL, `last_email_problem`=NULL,
 		                       `permanent_login_flag`=0, `activation_code`='',
-		                       `notify_radius`=0, `statpic_text`='', `description`=''
+		                       `notify_radius`=0
 		                 WHERE `user_id`='&1'", $this->nUserId);
+			// Statpic and profile description texts are published under the data license
+			// terms and therefore need not to be deleted.
 		sql("DELETE FROM `user_options` WHERE `user_id`='&1'", $this->nUserId);
 		$this->reload();
 
@@ -741,7 +743,7 @@ class user
 				$log = cachelog::createNew($rCache['cache_id'],$login->userid,true);
 				if ($log !== false)
 				{
-					$log->setType(cachelog::LOGTYPE_LOCKED);
+					$log->setType(cachelog::LOGTYPE_LOCKED,true);
 					$log->setOcTeamComment(true);
 					$log->setDate(date('Y-m-d'));
 					$log->setText($translate->t('The user account has been disabled.', '','',0,'',1, $cache->getDefaultDescLanguage()));

@@ -1374,9 +1374,9 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('502', 'Finds: %
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('503', 'Your latest log entries:', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('504', 'No entries found', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('505', 'Geocaches hidden: %1', '2010-08-28 11:48:04');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('506', 'Your latest Geocaches hidden:', '2010-08-28 11:48:04');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('506', 'Your geocaches hidden', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('507', 'No Geocaches hidden', '2010-08-28 11:48:04');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('508', 'Not published Geocaches will be available', '2010-08-28 11:48:04');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('508', 'Unpublished Geocaches', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('509', 'All Geocaches are published', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('510', 'E-Mails sent', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('511', 'E-Mails sent: %1', '2010-08-28 11:48:04');
@@ -1981,7 +1981,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1502', 'Enter t
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1503', 'Enter the city, please!', '2010-09-11 02:13:32');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1504', 'Enter the owner, please!', '2010-09-11 02:13:32');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1505', 'Enter the username, please!', '2010-09-11 02:13:32');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1506', 'Multiple listings (waypoint is also set on gc.com or nc.com)', '2010-09-11 02:13:32');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1506', 'GC listings (also listed at gc.com)', '2010-09-11 02:13:32');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1507', 'The selected output format is unknown!', '2010-09-11 02:13:33');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1508', 'The search operation could not be executed, please reenter the search data.', '2010-09-11 02:13:33');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1509', 'Find', '2010-09-11 02:13:33');
@@ -2124,7 +2124,6 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1652', 'Redirec
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1653', 'Do you really want to delete the saved search?', '2010-09-13 00:15:15');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1654', 'State', '2010-09-13 00:15:18');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1655', 'Set state', '2010-09-13 00:15:22');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1656', 'Country (nodes)', '2010-09-13 00:15:26');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1657', 'to', '2010-09-14 01:25:28');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1658', 'Route', '2010-09-15 15:04:49');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1659', 'Cachesize:', '2010-09-15 15:05:09');
@@ -2140,7 +2139,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1668', 'Contain
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1669', 'Hide', '2010-09-19 00:23:51');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1670', 'My owns', '2010-09-19 00:23:51');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1671', 'Not active', '2010-09-19 00:23:51');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1672', 'Double listings', '2010-09-19 00:23:51');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1672', 'GC listings', '2010-09-19 00:23:51');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1673', 'Rating', '2010-09-19 00:23:51');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1674', 'Min. recommendations', '2010-09-19 00:23:51');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1675', 'Drag Zoom', '2010-09-19 00:23:51');
@@ -2431,7 +2430,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2000', 'My last
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2001', 'Own logs', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2002', 'Geocaches found', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2003', 'Geocaches logged', '2013-04-25 23:00:00');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2004', 'active caches', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2004', '%1 of these are active', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2005', 'Show active', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2006', 'Deleted by', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2007', 'User data', '2013-04-25 23:00:00');
@@ -2488,10 +2487,27 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2066', 'Open ch
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2067', 'Status', '2013-05-28 16:51:40');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2068', 'since June 2013', '2013-05-28 16:51:40');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2069', 'since deletion date February 2012', '2013-05-28 16:51:40');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2070', 'One ore more emails to this user could not be delivered. It might be a good idea to additionally log comments on the user\'s geocaches, and/or trying to contact him/her through other channels like a message board account or another geocaching platform.', '2013-05-28 16:51:40');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2070', 'One ore more emails to this user could not be delivered. It might be a good idea to additionally log comments on the user\'s geocaches, and/or use alternative contact addresses like a message board account or another geocaching platform.', '2013-05-28 16:51:40');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2071', 'This cache has been \"temporarily unavailable\" for more than one year now; therefore it is being archived automatically. The owner may decide to maintain the cache and re-enable the listing.', '2013-05-28 16:51:40');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2072', 'This event took place more than five weeks ago; therefore it is being archived automatically. The owner may re-enable the listing if it should stay active for some exceptional reason.', '2013-05-28 16:51:40');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2073', 'This user account is disabled.', '2013-05-28 16:51:40');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2074', 'Adoptions_', '2013-05-28 16:51:40');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2075', 'since September 2012', '2013-05-28 16:51:40');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2076', 'From Owner', '2013-05-28 16:51:40');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2077', 'To Owner', '2013-05-28 16:51:40');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2078', 'Maintenance', '2013-05-28 16:51:40');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2079', 'Show details', '2013-05-28 16:51:40');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2080', 'only active caches', '2013-05-28 16:51:40');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2081', 'Finds', '2013-05-28 16:51:40');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2082', 'Locked', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2083', 'NEW', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2084', 'show archived', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2085', 'hide archived', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2086', 'unknown search type', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2087', 'Show on map', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2089', 'disabled[pl]', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2090', 'archived[pl]', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2091', 'Test for and fix inconsistencies in database tables', '2013-04-25 23:00:00');
 
 -- Table sys_trans_ref
 SET NAMES 'utf8';
@@ -4403,7 +4419,6 @@ INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1654'
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1654', './templates2/ocstyle/viewcache_print.tpl', '91');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1654', './templates2/ocstyle/viewcache_print.tpl', '93');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1655', './templates2/ocstyle/adminreports.tpl', '89');
-INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1656', './templates2/ocstyle/sys_main.tpl', '216');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1657', './lang/de/ocstyle/search.tpl.php', '367');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1657', './lang/de/ocstyle/search.tpl.php', '379');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1657', './templates2/ocstyle/map2.tpl', '2405');
@@ -5320,8 +5335,8 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('503', 'DE', 'Deine letzten Logeinträge:', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('504', 'DE', 'Keine Einträge gefunden', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('505', 'DE', 'Versteckte Caches: %1', '2010-08-28 11:48:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('506', 'DE', 'Deine letzten versteckten Caches:', '2010-08-28 11:48:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('507', 'DE', 'Keine versteckten Geocaches gefunden', '2010-08-28 11:48:06');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('506', 'DE', 'Deine versteckten Caches', '2010-08-28 11:48:06');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('507', 'DE', 'Du hast noch keine Geocaches versteckt.', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('508', 'DE', 'Deine noch nicht veröffentlichten Caches:', '2012-07-23 15:54:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('509', 'DE', 'Keine nicht veröffentlichten Caches', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('510', 'DE', 'Versendete E-Mails', '2010-08-28 11:48:06');
@@ -5482,7 +5497,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('670', 'DE', 'Trefferquote', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('671', 'DE', 'Es können keine Empfehlungen gegeben werden, da keine weiteren Bewertungen vorliegen.', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('672', 'DE', 'Datenbankwartung', '2010-08-28 11:48:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('673', 'DE', 'DB Maintainance', '2010-08-28 11:48:06');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('673', 'DE', 'Datenbankwartung', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('674', 'DE', '%1 hat %2 Einträge korrigiert', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('675', 'DE', 'Ausführen', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('676', 'DE', 'Senden', '2010-08-28 11:48:06');
@@ -5927,7 +5942,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1503', 'DE', 'Bitte im Feld für Ortsname etwas eingeben!', '2010-09-11 02:32:01');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1504', 'DE', 'Bitte im Feld für Besitzer etwas eingeben!', '2010-09-11 02:31:54');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1505', 'DE', 'Bitte im Feld für Finder etwas eingeben!', '2010-09-11 02:31:49');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1506', 'DE', 'Mehrfach-Listings (Wegpunkt bei gc.com oder nc.com gesetzt)', '2010-09-11 02:31:44');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1506', 'DE', 'GC-Listings (auch bei gc.com veröffentlicht)', '2010-09-11 02:31:44');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1507', 'DE', 'Das ausgewählte Ausgabeformat existiert nicht!', '2010-09-11 02:31:38');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1508', 'DE', 'Die Suchanfrage konnte nicht ausgeführt werden; bitte gib die Suchdaten erneut ein.', '2010-09-11 02:31:33');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1509', 'DE', 'Gefunden', '2010-09-11 02:31:18');
@@ -6070,7 +6085,6 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1653', 'DE', 'Soll die gespeicherte Suche wirklich gel\&ouml;scht werden?', '2010-09-13 00:16:43');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1654', 'DE', 'Status', '2010-09-13 00:16:38');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1655', 'DE', 'Status ändern', '2010-09-13 00:16:31');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1656', 'DE', 'Länderknoten', '2010-09-13 00:16:22');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1657', 'DE', 'bis', '2010-09-14 01:26:52');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1658', 'DE', 'Der Weg', '2010-09-15 15:06:51');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1659', 'DE', 'Cachegröße', '2010-09-27 00:34:11');
@@ -6086,7 +6100,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1669', 'DE', 'Ausblenden', '2010-09-27 00:32:12');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1670', 'DE', 'meine eigenen', '2010-09-27 00:30:55');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1671', 'DE', 'inaktiv', '2010-09-27 00:30:39');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1672', 'DE', 'mehrfach gelistet', '2010-09-27 00:30:26');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1672', 'DE', 'auf GC gelistet', '2010-09-27 00:30:26');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1673', 'DE', 'Bewertung', '2010-09-27 00:30:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1674', 'DE', 'min. Empfehlungen', '2010-09-27 00:29:32');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1675', 'DE', 'Drag Zoom', '2010-09-27 00:29:22');
@@ -6375,7 +6389,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2001', 'DE', 'Eigene Logs', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2002', 'DE', 'gefundene Caches', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2003', 'DE', 'geloggte Caches', '2013-04-25 23:00:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2004', 'DE', 'aktive Caches', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2004', 'DE', 'davon %1 aktiv', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2005', 'DE', 'aktive anzeigen', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2006', 'DE', 'gelöscht von', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2007', 'DE', 'Benutzerdaten', '2013-04-25 23:00:00');
@@ -6432,10 +6446,27 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2067', 'DE', 'Status', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2068', 'DE', 'seit Juni 2013', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2069', 'DE', 'seit Löschdatum Februar 2012', '2013-04-25 23:00:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2070', 'DE', 'Eine oder mehrere Emails an diesen Benutzer konnten nicht zugestellt werden. Es könnte ratsam sein, Hinweise zu seinen Caches zusätzlich zu loggen, und ihn ggf. über weitere Adressen wie z.B. Forenaccounts oder andere Geocaching-Plattformen zu kontaktieren.', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2070', 'DE', 'Eine oder mehrere Emails an diesen Benutzer konnten nicht zugestellt werden. Es könnte ratsam sein, Hinweise zu seinen Caches zusätzlich zu loggen und/oder weitere Kontaktmöglichkeiten wie z.B. Forenaccounts oder andere Geocaching-Plattformen zu nutzen.', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2071', 'DE', 'Dieser Cache ist seit mehr als einem Jahr &bdquo;momentan nicht verfügbar&ldquo;; daher wird er automatisch archiviert. Er kann vom Besitzer jederzeit instand gesetzt und reaktiviert werden.', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2072', 'DE', 'Dieses Event fand vor über fünf Wochen statt; daher wird es automatisch archiviert. Das Listing kann vom Owner selbst reaktiviert werden, falls es aus besonderen Gründen weiter aktiv bleiben soll.', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2073', 'DE', 'Dieser Benutzer ist deaktiviert.', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2074', 'DE', 'Adoptionen', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2075', 'DE', 'seit September 2012', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2076', 'DE', 'Alter Besitzer', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2077', 'DE', 'Neuer Besitzer', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2078', 'DE', 'Wartung', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2079', 'DE', 'Details anzeigen', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2080', 'DE', 'nur aktive Caches', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2081', 'DE', 'Funde', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2082', 'DE', 'Gesperrt', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2083', 'DE', 'NEU', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2084', 'DE', 'archivierte einblenden', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2085', 'DE', 'archivierte ausblenden', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2086', 'DE', 'unbekannter Suchtyp', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2087', 'DE', 'auf Karte anzeigen', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2089', 'DE', 'deaktivierte', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2090', 'DE', 'archivierte', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2091', 'DE', 'Sucht und behebt Inkonsistenzen in Datenbanktabellen', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'EN', 'Reorder IDs \r', '2010-09-02 00:15:30');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'EN', 'The database could not be reconnected.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'EN', 'Testing – please do not login', '2010-08-28 11:48:07');
@@ -6917,7 +6948,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('503', 'EN', 'Your latest log entries:', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('504', 'EN', 'No entries found', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('505', 'EN', 'Geocaches hidden: %1', '2010-08-28 11:48:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('506', 'EN', 'Your latest geocaches hidden:', '2010-08-28 11:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('506', 'EN', 'Your geocaches hidden', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('507', 'EN', 'No geocaches hidden ', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('508', 'EN', 'Your pending geocaches:', '2012-07-23 15:54:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('509', 'EN', 'All your geocaches are published.', '2010-08-28 11:48:07');
@@ -7524,7 +7555,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1503', 'EN', 'Enter the city, please!', '2010-09-11 02:32:01');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1504', 'EN', 'Enter the owner, please!', '2010-09-11 02:31:54');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1505', 'EN', 'Enter the username, please!', '2010-09-11 02:31:49');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1506', 'EN', 'multiple listings (waypoint is also set on gc.com or nc.com)', '2010-09-11 02:31:44');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1506', 'EN', 'GC listings (also listed at gc.com)', '2010-09-11 02:31:44');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1507', 'EN', 'The selected output format is unknown!', '2010-09-11 02:31:38');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1508', 'EN', 'The search operation could not be executed, please reenter the search data.', '2010-09-11 02:31:33');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1509', 'EN', 'Find', '2010-09-11 02:31:18');
@@ -7667,7 +7698,6 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1653', 'EN', 'Do you really want to delete the saved search?', '2010-09-13 00:16:43');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1654', 'EN', 'Status', '2010-09-13 00:16:38');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1655', 'EN', 'Set status', '2010-09-13 00:16:31');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1656', 'EN', 'Countries', '2010-09-13 00:17:55');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1657', 'EN', 'to', '2010-09-14 01:27:02');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1658', 'EN', 'Route', '2010-09-27 00:21:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1659', 'EN', 'Cache size:', '2010-09-27 00:23:55');
@@ -7683,7 +7713,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1669', 'EN', 'Hide', '2010-09-27 00:22:55');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1670', 'EN', 'My owns', '2010-09-27 00:22:49');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1671', 'EN', 'Not active', '2010-09-27 00:22:44');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1672', 'EN', 'Double listings', '2010-09-27 00:22:37');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1672', 'EN', 'GC listings', '2010-09-27 00:22:37');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1673', 'EN', 'Rating', '2010-09-27 00:22:31');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1674', 'EN', 'Min. recommendations', '2010-09-27 00:22:25');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1675', 'EN', 'Drag Zoom', '2010-09-27 00:22:19');
@@ -7996,10 +8026,17 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2067', 'EN', 'Status', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2068', 'EN', 'since June 2013', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2069', 'EN', 'since deletion date February 2012', '2013-04-25 23:00:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2070', 'EN', 'One ore more emails to this user could not be delivered. It might be a good idea to additionally log comments on the user\'s geocaches, and/or trying to contact him/her through other channels like a message board account or another geocaching platform.', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2070', 'EN', 'One ore more emails to this user could not be delivered. It might be a good idea to additionally log comments on the user\'s geocaches, and/or use alternative contact addresses like a message board account or another geocaching platform.', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2071', 'EN', 'This cache has been \"temporarily unavailable\" for more than one year now; therefore it is being archived automatically. The owner may decide to maintain the cache and re-enable the listing.', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2072', 'EN', 'This event took place more than five weeks ago; therefore it is being archived automatically. The owner may re-enable the listing if it should stay active for some exceptional reason.', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2073', 'EN', 'This user account is disabled.', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2074', 'EN', 'Adoptions', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2075', 'EN', 'since September 2012', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2076', 'EN', 'From Owner', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2077', 'EN', 'To Owner', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2078', 'EN', 'Maintenance', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2089', 'EN', 'disabled', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2090', 'EN', 'arcbived', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'ES', 'Reordenar ID', '2010-12-09 00:17:55');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'ES', 'La base de datos no se pudo conectar.', '2010-12-09 00:17:55');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'ES', 'En pruebas - por favor, no entre.', '2010-12-09 00:17:55');
@@ -8481,7 +8518,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('503', 'ES', 'Sus últimas entradas de Logs:', '2010-12-09 00:17:57');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('504', 'ES', 'No hay encuentros', '2010-12-09 00:17:57');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('505', 'ES', 'Geocaches escondidos: %1', '2010-12-09 00:17:57');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('506', 'ES', ' Tus últimos geocaches escondidos:', '2010-12-09 00:17:57');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('506', 'ES', 'Tus geocaches escondidos', '2010-12-09 00:17:57');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('507', 'ES', 'No hay geocaches escondidos', '2010-12-09 00:17:57');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('508', 'ES', 'Tus geocaches pendientes de publicar', '2010-12-09 00:17:57');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('509', 'ES', 'Todos tus caches estan publicados', '2010-12-09 00:17:57');
@@ -9068,7 +9105,6 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1477', 'ES', 'Oferta para adopción', '2010-12-09 00:18:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1478', 'ES', 'Estado:', '2010-12-09 00:18:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1479', 'ES', 'Buscar waypoint', '2010-12-09 00:18:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1480', 'ES', 'Country sites', '2010-12-09 00:18:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1482', 'ES', 'Waypoints:', '2010-12-09 00:18:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1483', 'ES', 'hora', '2010-12-09 00:18:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1486', 'ES', 'Si su navegador no soporta redirección automática, por favor haga clic aquí.', '2010-12-09 00:18:00');
@@ -9087,7 +9123,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1503', 'ES', '¡Insertar una ciudad, por favor!', '2010-12-09 00:18:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1504', 'ES', '¡Insertar un propietario, por favor!', '2010-12-09 00:18:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1505', 'ES', '¡Insertar un usuario, por favor!', '2010-12-09 00:18:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1506', 'ES', 'Registro multiple(waypoint presente en gc.com o nc.com)', '2010-12-09 00:18:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1506', 'ES', 'Registro multiple (waypoint presente en gc.com)', '2010-12-09 00:18:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1507', 'ES', '¡El formato de salida seleccionado es desconocido!', '2010-12-09 00:18:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1508', 'ES', 'La operación de búsqueda no se pudo ejecutar, por favor, vuelva a introducir los datos de búsqueda.', '2010-12-09 00:18:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1509', 'ES', 'Encontrar', '2010-12-09 00:18:00');
@@ -9228,7 +9264,6 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1653', 'ES', '¿Estás seguro que quieres eliminar la búsqueda guardada?', '2010-12-09 00:18:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1654', 'ES', 'Estado', '2010-12-09 00:18:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1655', 'ES', 'Establecer el estado', '2010-12-09 00:18:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1656', 'ES', 'Países', '2010-12-09 00:18:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1657', 'ES', 'a', '2010-12-09 00:18:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1658', 'ES', 'Ruta', '2010-12-09 00:18:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1659', 'ES', 'Tamaño del cache:', '2010-12-09 00:18:00');
@@ -9244,7 +9279,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1669', 'ES', 'Escondidos', '2010-12-09 00:18:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1670', 'ES', 'Mio', '2010-12-09 00:18:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1671', 'ES', 'No activo', '2010-12-09 00:18:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1672', 'ES', 'listado doble', '2010-12-09 00:18:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1672', 'ES', 'listado GC', '2010-12-09 00:18:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1673', 'ES', 'Valoración', '2010-12-09 00:18:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1674', 'ES', 'Recomendaciones min.', '2010-12-09 00:18:01');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1675', 'ES', 'Mover el zoom', '2010-12-09 00:18:01');
@@ -10034,7 +10069,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('503', 'IT', 'I tuoi ultimi log:', '2010-08-31 20:06:23');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('504', 'IT', 'Nessuna trovata', '2010-10-27 18:49:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('505', 'IT', 'Geocaches nascoste: %1', '2010-08-31 20:06:23');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('506', 'IT', 'Le tue ultime geocaches nascoste:', '2010-09-01 23:48:28');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('506', 'IT', 'Le tue geocaches nascoste', '2010-09-01 23:48:28');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('507', 'IT', 'Nessuna geocache nascosta', '2010-10-27 18:49:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('508', 'IT', 'Le tue geocache in attesa di pubblicazione', '2010-10-27 18:49:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('509', 'IT', 'Tutte le tue geocache sono pubblicate.', '2010-08-31 20:06:23');
@@ -10641,7 +10676,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1503', 'IT', 'Inserisci la città, per favore!', '2010-10-27 18:49:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1504', 'IT', 'Inserisci il proprietario, per favore!', '2010-10-27 18:49:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1505', 'IT', 'Inserisci l\'utente, per favore!', '2010-10-27 18:49:19');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1506', 'IT', 'Registrate su più siti (waypoint presente in gc.com o nc.com)', '2010-10-27 18:49:19');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1506', 'IT', 'Registrate su più siti (waypoint presente in gc.com)', '2010-10-27 18:49:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1507', 'IT', 'Il formato di uscita selezionato è sconosciuto!', '2010-09-11 02:31:38');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1508', 'IT', 'La ricerca non può essere eseguita, per favore reinserisci i dati di ricerca.', '2010-09-11 02:31:33');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1509', 'IT', 'Trovata', '2010-09-11 02:31:18');
@@ -10784,7 +10819,6 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1653', 'IT', 'Vuoi veramente cancellare la ricerca salvata?', '2010-10-27 18:49:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1654', 'IT', 'Stato', '2010-09-13 00:16:38');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1655', 'IT', 'Setta stato', '2010-09-13 00:16:31');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1656', 'IT', 'Paesi', '2010-09-13 22:10:04');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1657', 'IT', 'a', '2010-10-27 18:49:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1658', 'IT', 'Percorso', '2010-10-27 18:49:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1659', 'IT', 'Dimensioni cache', '2010-10-27 18:49:19');
@@ -10800,7 +10834,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1669', 'IT', 'Nascosta', '2010-10-27 18:49:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1670', 'IT', 'Mie', '2010-10-27 18:49:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1671', 'IT', 'Non attiva', '2010-10-27 18:49:19');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1672', 'IT', 'Doppio listing', '2010-10-27 18:49:19');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1672', 'IT', 'GC listing', '2010-10-27 18:49:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1673', 'IT', 'Valutazione', '2010-10-27 18:49:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1674', 'IT', 'Raccomandazioni min.', '2010-10-27 18:49:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1675', 'IT', 'Sposta zoom', '2010-10-27 18:49:19');
@@ -11089,7 +11123,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2001', 'IT', 'Logs propri', '2013-05-28 16:52:39');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2002', 'IT', 'Geocaches trovate', '2010-09-01 23:48:28');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2003', 'IT', 'Geocaches loggate', '2013-05-28 16:52:39');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2004', 'IT', 'cache attive', '2013-05-28 16:52:39');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2004', 'IT', '%1 cache attive', '2013-05-28 16:52:39');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2005', 'IT', 'Visualizza attive', '2013-05-28 16:52:39');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2006', 'IT', 'Cancellata da', '2013-05-28 16:52:39');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2007', 'IT', 'Dati utente', '2013-05-28 16:52:39');
@@ -11610,7 +11644,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('503', 'NL', 'Je laatste logjes:', '2011-02-04 19:50:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('504', 'NL', 'Geen items gevonden', '2011-02-04 19:50:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('505', 'NL', 'Geplaatste caches: %1', '2011-02-04 19:50:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('506', 'NL', 'Jouw laatste geplaatste caches:', '2011-02-04 19:50:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('506', 'NL', 'Jouw geplaatste caches', '2011-02-04 19:50:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('507', 'NL', 'Geen geplaatste caches gevonden', '2011-02-04 19:50:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('508', 'NL', 'Jouw nog niet gepubliceerde caches:', '2012-07-23 15:54:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('509', 'NL', 'Geen ongepubliceerde caches.', '2011-02-04 19:50:07');
@@ -12017,7 +12051,6 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1653', 'NL', 'Moet de opgeslagen zoek resultaten verwijdert worden?', '2011-02-04 19:50:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1654', 'NL', 'Status', '2011-02-04 19:50:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1655', 'NL', 'Status veranderen', '2011-02-04 19:50:08');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1656', 'NL', 'Landen (nodes)', '2011-02-04 19:50:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1657', 'NL', 'tot', '2011-02-04 19:50:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1658', 'NL', 'Route', '2011-02-04 19:50:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1659', 'NL', 'Cachegrootte', '2011-02-04 19:50:08');
@@ -12033,7 +12066,6 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1669', 'NL', 'Verbergen', '2011-02-04 19:50:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1670', 'NL', 'Mijn eigen', '2011-02-04 19:50:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1671', 'NL', 'Niet actief', '2011-02-04 19:50:08');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1672', 'NL', 'Meerdere lijsten', '2011-02-04 19:50:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1673', 'NL', 'Waardering', '2011-02-04 19:50:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1674', 'NL', 'Min. aanbevelingen', '2011-02-04 19:50:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1675', 'NL', 'Drag Zoom', '2011-02-04 19:50:08');
@@ -12507,7 +12539,6 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('503', 'RU', 'Ваши последние отчёты:', '2010-12-06 22:17:36');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('504', 'RU', 'Нет отчётов', '2010-12-06 22:17:36');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('505', 'RU', 'Спрятано тайников: %1', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('506', 'RU', 'Ваши последние тайники:', '2010-12-06 22:17:36');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('507', 'RU', 'Нет спрятанных тайников', '2010-12-06 22:17:36');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('509', 'RU', 'Все ваши тайники опубликованы', '2010-12-06 22:17:36');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('511', 'RU', 'Отправлено писем: %1', '2010-12-06 22:17:36');
@@ -12646,7 +12677,6 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1629', 'RU', 'Тайник расположен за городом, но до него можно добраться общественным транспортом. Не устанавливайте этот атрибут для тайников в населённых пунктах.', '2010-12-06 22:17:36');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1630', 'RU', 'По пути к тайнику или поблизости от тайника есть источник питьевой воды. Этот атрибут полезен для планирования встреч, длительных пеших прогулок или посещения тайников в потенциально грязных местах, таких, как пещеры.', '2010-12-06 22:17:36');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1636', 'RU', 'При поисках этого тайника придётся ходить по болоту или преодолевать залитые водой участки местности. Носите подходящую одежду и обувь. После ливня местность может стать непроходимой.', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1656', 'RU', 'Другие сайты', '2010-12-06 22:17:36');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1658', 'RU', 'Путь', '2010-12-06 22:17:36');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1659', 'RU', 'Размер контейнера', '2010-12-06 22:17:36');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1710', 'RU', 'Новые тайники в %1', '2010-12-06 22:17:36');

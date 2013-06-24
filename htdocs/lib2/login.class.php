@@ -341,5 +341,10 @@ class login
 
 		return ($this->admin & $privilege) == $privilege;
 	}
+
+	function logged_in()
+	{
+		return $this->userid > 0;
+	}
 }
 ?>

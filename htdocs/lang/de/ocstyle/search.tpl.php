@@ -194,6 +194,7 @@ function sync_options(element)
 		document.forms[formnames[i]].f_userowner.value = document.optionsform.f_userowner.checked ? 1 : 0;
 		document.forms[formnames[i]].f_userfound.value = document.optionsform.f_userfound.checked ? 1 : 0;
 		document.forms[formnames[i]].f_inactive.value = document.optionsform.f_inactive.checked ? 1 : 0;
+		document.forms[formnames[i]].f_disabled.value = document.optionsform.f_disabled.checked ? 1 : 0;
 		document.forms[formnames[i]].f_ignored.value = document.optionsform.f_ignored.checked ? 1 : 0;
 		document.forms[formnames[i]].f_otherPlatforms.value = document.optionsform.f_otherPlatforms.checked ? 1 : 0;
 		document.forms[formnames[i]].country.value = document.optionsform.country.value;
@@ -268,7 +269,7 @@ function switchAttributeCat2()
 //-->
 </script>
 
-		  <div class="content2-pagetitle"><img src="resource2/ocstyle/images/cacheicon/traditional.gif" style="align: left; margin-right: 10px;" width="32" height="32" alt="{t}Search for caches{/t}" />{t}Search for caches{/t}</div>
+<div class="content2-pagetitle"><img src="resource2/ocstyle/images/misc/32x32-search.png" style="align: left; margin-right: 10px;" width="32" height="32" alt="{t}Search for caches{/t}" />{t}Search for caches{/t}</div>
 
 <form name="optionsform" style="display:inline;">
 
@@ -309,8 +310,9 @@ function switchAttributeCat2()
 		<tr>
 			<td>&nbsp;</td>
 			<td colspan="2">
-				<input type="checkbox" name="f_inactive" value="1" id="l_inactive" class="checkbox" onclick="sync_options(this)" {f_inactive_checked} > <label for="l_inactive">{t}Inactive{/t}</label>
-				<input type="checkbox" name="f_otherPlatforms" value="1" id="l_otherPlatforms" class="checkbox" onclick="sync_options(this)" {f_otherPlatforms_checked} > <label for="l_otherPlatforms">{t}Multiple listings (waypoint is also set on gc.com or nc.com){/t}</label>
+				<input type="checkbox" name="f_disabled" value="1" id="l_disabled" class="checkbox" onclick="sync_options(this)" {f_disabled_checked} > <label for="l_disabled">{t}disabled[pl]{/t}</label>&nbsp;
+				<input type="checkbox" name="f_inactive" value="1" id="l_inactive" class="checkbox" onclick="sync_options(this)" {f_inactive_checked} > <label for="l_inactive">{t}archived[pl]{/t}</label>&nbsp;
+				<input type="checkbox" name="f_otherPlatforms" value="1" id="l_otherPlatforms" class="checkbox" onclick="sync_options(this)" {f_otherPlatforms_checked} > <label for="l_otherPlatforms">{t}GC listings (also listed at gc.com){/t}</label>
 			</td>
 		</tr>
 	</table>
@@ -449,6 +451,7 @@ function switchAttributeCat2()
 	<input type="hidden" name="f_userowner" value="{hidopt_userowner}" />
 	<input type="hidden" name="f_userfound" value="{hidopt_userfound}" />
 	<input type="hidden" name="f_inactive" value="{hidopt_inactive}" />
+	<input type="hidden" name="f_disabled" value="{hidopt_disabled}" />
 	<input type="hidden" name="f_ignored" value="{hidopt_ignored}" />
 	<input type="hidden" name="f_otherPlatforms" value="{hidopt_otherPlatforms}" />
 	<input type="hidden" name="country" value="{country}" />
@@ -464,7 +467,7 @@ function switchAttributeCat2()
 	<div class="buffer" style="width: 500px;">&nbsp;</div>
 	<div class="content2-container bg-blue02">
 		<p class="content-title-noshade-size2">
-			<img src="resource2/ocstyle/images/misc/32x32-searchresults.png" style="align: left; margin-right: 10px;" width="22" height="22" alt="" /> 
+			<img src="resource2/ocstyle/images/misc/32x32-search.png" style="align: left; margin-right: 10px;" width="22" height="22" alt="" /> 
 			{t}Search by cachename{/t}
 		</p>
 	</div>
@@ -497,6 +500,7 @@ function switchAttributeCat2()
 	<input type="hidden" name="f_userowner" value="{hidopt_userowner}" />
 	<input type="hidden" name="f_userfound" value="{hidopt_userfound}" />
 	<input type="hidden" name="f_inactive" value="{hidopt_inactive}" />
+	<input type="hidden" name="f_disabled" value="{hidopt_disabled}" />
 	<input type="hidden" name="f_ignored" value="{hidopt_ignored}" />
 	<input type="hidden" name="f_otherPlatforms" value="{hidopt_otherPlatforms}" />
 	<input type="hidden" name="country" value="{country}" />
@@ -512,7 +516,7 @@ function switchAttributeCat2()
 	<div class="buffer" style="width: 500px;">&nbsp;</div>
 	<div class="content2-container bg-blue02">
 		<p class="content-title-noshade-size2">
-			<img src="resource2/ocstyle/images/misc/32x32-searchresults.png" style="align: left; margin-right: 10px;" width="22" height="22" alt="" /> 
+			<img src="resource2/ocstyle/images/misc/32x32-search.png" style="align: left; margin-right: 10px;" width="22" height="22" alt="" /> 
 			{t}Search by distance{/t}
 		</p>
 	</div>
@@ -561,7 +565,7 @@ function switchAttributeCat2()
 <div class="buffer" style="width: 500px;">&nbsp;</div>
 <div class="content2-container bg-blue02">
 	<p class="content-title-noshade-size2">
-		<img src="resource2/ocstyle/images/misc/32x32-searchresults.png" style="align: left; margin-right: 10px;" width="22" height="22" alt="" /> 
+		<img src="resource2/ocstyle/images/misc/32x32-search.png" style="align: left; margin-right: 10px;" width="22" height="22" alt="" /> 
 		{t}Search for city{/t}
 	</p>
 </div>
@@ -589,6 +593,7 @@ function switchAttributeCat2()
 	<input type="hidden" name="f_userowner" value="{hidopt_userowner}" />
 	<input type="hidden" name="f_userfound" value="{hidopt_userfound}" />
 	<input type="hidden" name="f_inactive" value="{hidopt_inactive}" />
+	<input type="hidden" name="f_disabled" value="{hidopt_disabled}" />
 	<input type="hidden" name="f_ignored" value="{hidopt_ignored}" />
 	<input type="hidden" name="f_otherPlatforms" value="{hidopt_otherPlatforms}" />
 	<input type="hidden" name="country" value="{country}" />
@@ -627,6 +632,7 @@ function switchAttributeCat2()
 	<input type="hidden" name="f_userowner" value="{hidopt_userowner}" />
 	<input type="hidden" name="f_userfound" value="{hidopt_userfound}" />
 	<input type="hidden" name="f_inactive" value="{hidopt_inactive}" />
+	<input type="hidden" name="f_disabled" value="{hidopt_disabled}" />
 	<input type="hidden" name="f_ignored" value="{hidopt_ignored}" />
 	<input type="hidden" name="f_otherPlatforms" value="{hidopt_otherPlatforms}" />
 	<input type="hidden" name="country" value="{country}" />
@@ -674,6 +680,7 @@ function switchAttributeCat2()
 	<input type="hidden" name="f_userowner" value="{hidopt_userowner}" />
 	<input type="hidden" name="f_userfound" value="{hidopt_userfound}" />
 	<input type="hidden" name="f_inactive" value="{hidopt_inactive}" />
+	<input type="hidden" name="f_disabled" value="{hidopt_disabled}" />
 	<input type="hidden" name="f_ignored" value="{hidopt_ignored}" />
 	<input type="hidden" name="f_otherPlatforms" value="{hidopt_otherPlatforms}" />
 	<input type="hidden" name="country" value="{country}" />
@@ -689,7 +696,7 @@ function switchAttributeCat2()
 	<div class="buffer" style="width: 500px;">&nbsp;</div>
 	<div class="content2-container bg-blue02">
   	<p class="content-title-noshade-size2">
-			<img src="resource2/ocstyle/images/misc/32x32-searchresults.png" style="align: left; margin-right: 10px;" width="22" height="22" alt="" /> 
+			<img src="resource2/ocstyle/images/misc/32x32-search.png" style="align: left; margin-right: 10px;" width="22" height="22" alt="" /> 
 			{t}Search for text{/t}
 		</p>
 	</div>
@@ -738,6 +745,7 @@ function switchAttributeCat2()
 	<input type="hidden" name="f_userowner" value="{hidopt_userowner}" />
 	<input type="hidden" name="f_userfound" value="{hidopt_userfound}" />
 	<input type="hidden" name="f_inactive" value="{hidopt_inactive}" />
+	<input type="hidden" name="f_disabled" value="{hidopt_disabled}" />
 	<input type="hidden" name="f_ignored" value="{hidopt_ignored}" />
 	<input type="hidden" name="f_otherPlatforms" value="{hidopt_otherPlatforms}" />
 	<input type="hidden" name="country" value="{country}" />
@@ -753,7 +761,7 @@ function switchAttributeCat2()
 	<div class="buffer" style="width: 500px;">&nbsp;</div>
 	<div class="content2-container bg-blue02">
 		<p class="content-title-noshade-size2">
-			<img src="resource2/ocstyle/images/misc/32x32-searchresults.png" style="align: left; margin-right: 10px;" width="22" height="22" alt="" /> 
+			<img src="resource2/ocstyle/images/misc/32x32-search.png" style="align: left; margin-right: 10px;" width="22" height="22" alt="" /> 
 			{t}Search for Owner{/t}
 		</p>
 	</div>
@@ -786,6 +794,7 @@ function switchAttributeCat2()
 	<input type="hidden" name="f_userowner" value="{hidopt_userowner}" />
 	<input type="hidden" name="f_userfound" value="{hidopt_userfound}" />
 	<input type="hidden" name="f_inactive" value="{hidopt_inactive}" />
+	<input type="hidden" name="f_disabled" value="{hidopt_disabled}" />
 	<input type="hidden" name="f_ignored" value="{hidopt_ignored}" />
 	<input type="hidden" name="f_otherPlatforms" value="{hidopt_otherPlatforms}" />
 	<input type="hidden" name="country" value="{country}" />
@@ -801,7 +810,7 @@ function switchAttributeCat2()
 	<div class="buffer" style="width: 500px;">&nbsp;</div>
 	<div class="content2-container bg-blue02">
 		<p class="content-title-noshade-size2">
-			<img src="resource2/ocstyle/images/misc/32x32-searchresults.png" style="align: left; margin-right: 10px;" width="22" height="22" alt="" /> 
+			<img src="resource2/ocstyle/images/misc/32x32-search.png" style="align: left; margin-right: 10px;" width="22" height="22" alt="" /> 
 			{t}Search for Logs{/t}
 		</p>
 	</div>

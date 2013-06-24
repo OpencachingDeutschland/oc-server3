@@ -11,19 +11,27 @@
  *
  ***************************************************************************/
 
-	$opt['rootpath'] = '../../';
-
-	// chdir to proper directory (needed for cronjobs)
-	chdir(substr(realpath($_SERVER['PHP_SELF']), 0, strrpos(realpath($_SERVER['PHP_SELF']), '/')));
-
+	$opt['rootpath'] = dirname(__FILE__) . '/../../';
 	require($opt['rootpath'] . 'lib2/cli.inc.php');
+
+	// test for user who runs the cronjob
+	$processUser = posix_getpwuid(posix_geteuid());
+	if ($processUser['name'] != $opt['cron']['username'])
+		die("ERROR: runcron must be run by '" . $opt['cron']['username'] . "' but was called by '" . $processUser['name'] . "'\n".
+		    "Try something like 'sudo -u ".$opt['cron']['username']." php runcron.php'.\n");
 
 	// use posix pid-files to lock process 
 	if (!CreatePidFile($opt['cron']['pidfile']))
 	{
-      CleanupAndExit($opt['cron']['pidfile'], "Another instance is running!"); 
-      exit;
+		CleanupAndExit($opt['cron']['pidfile'], "Another instance is running!");
+		exit;
 	}
+
+	// Run as system user, if possible.
+	// This is relevant e.g. for publishing and for auto-archiving caches.
+	if ($opt['logic']['systemuser']['user'] != '')
+		if (!$login->system_login($opt['logic']['systemuser']['user']))
+		  die("ERROR: runcron system user login failed");
 
 	$modules_dir = $opt['rootpath'] . 'util2/cron/modules/';
 

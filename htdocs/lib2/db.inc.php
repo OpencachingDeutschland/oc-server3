@@ -31,6 +31,7 @@
 		sql_export_recordset($f, $rs)   ... export recordset to file
 		sql_export_table($f, $table)    ... export table to file
 		sql_export_table_to_file($filename, $table)
+		sql_dropFunction                ... drops stored procedure or trigger
 
 		sql_table_exists                ... tests if a table exists
 		sql_field_exists                ... tests if a table and a field in this table exist
@@ -1086,6 +1087,22 @@
 		$f = fopen($filename, 'w');
 		sql_export_structure($f, $table);
 		fclose($f);
+	}
+
+	function sql_dropFunction($name)
+	{
+	  global $dbname;
+
+		$rs = sql("SHOW FUNCTION STATUS LIKE '&1'", $name);
+		while ($r = sql_fetch_assoc($rs))
+		{
+			if ($r['Db'] == $dbname && $r['Name'] == $name && $r['Type'] == 'FUNCTION')
+			{
+				sql('DROP FUNCTION `&1`', $name);
+				return;
+			}
+		}
+		sql_free_result($rs);
 	}
 
 	// test if a database table exists

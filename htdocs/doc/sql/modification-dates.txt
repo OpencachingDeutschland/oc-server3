@@ -53,6 +53,10 @@ meta_last_modified
 	Updating this field triggers an update of okapi_syncbase. We don't update
 	okapi_syncbase directly, as it may be missing because OKAPI is not installed.
 
+	Note that this field is NOT updated on cache_logs changes, because OKAPI
+	replication does not include logs in geocaches records but treats them as
+	separate objects.
+
 An additional field may be needed in the future for listing data which is not
 provied by the owner (or admins), like wp_gc_maintained or "logger feedback"
 on cache properties. As soon as this data is output via XML interface, it must

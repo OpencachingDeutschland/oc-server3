@@ -4,21 +4,17 @@
 		
 		Unicode Reminder メモ
 
-		Ggf. muss die Location des php-Binaries angepasst werden.
+		Location of PHP binary (see first line) may need adjustment
 		
-	***************************************************************************/
+ ***************************************************************************/
 
 	$opt['rootpath'] = dirname(__FILE__) . '/../../../';
-  require_once($opt['rootpath'] . 'lib/clicompatbase.inc.php');
-
-  if (!file_exists($opt['rootpath'] . 'util/mysql_root/sql_root.inc.php'))
-		die("\n" . 'install util/mysql_root/sql_root.inc.php' . "\n\n");
-
-  require_once($opt['rootpath'] . 'util/mysql_root/sql_root.inc.php');
+	require_once($opt['rootpath'] . 'lib/clicompatbase.inc.php');
+	require_once($opt['rootpath'] . 'util/mysql_root/sql_root.inc.php');
 
 	// retrieve DB password
 	if ($db_root_password == '')
-  {
+	{
 		if (in_array('--flush',$argv))
 		{
 			echo "\nenter DB $db_root_username password:\n";
@@ -32,7 +28,7 @@
 		fclose($fh);
 		if ($db_root_password == '')
 		  die("no DB password - aborting.\n");
-  }
+	}
 
 	// connect to database
 	db_root_connect();

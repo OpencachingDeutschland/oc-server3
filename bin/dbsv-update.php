@@ -47,15 +47,25 @@
 	// Now and then a maintain.php update should be inserted, because multiple
 	// mutations may be run in one batch, and future mutations may depend on
 	// changed triggers, which may not be obvious.
+	//
 	// Of course, a trigger update mutation can also be inserted directly before a
 	// mutation which needs it. (But take care that maintain.php at that point does
 	// not depend on database changes which will be done by that mutation ...)
 
 	function update_triggers()
 	{
-		global $opt;
-		echo " ";  // space for the case of a DB password prompt
-		system('php ' . $opt['rootpath'] . 'doc/sql/stored-proc/maintain.php');
+		global $opt, $db_version;
+
+		$syncfile = $opt['rootpath'] . 'cache2/dbsv-running';
+		file_put_contents($syncfile,'dbsv is running');
+
+		system('php ' . $opt['rootpath'] . 'doc/sql/stored-proc/maintain.php --dbsv '.$db_version.' --flush');
+
+		if (file_exists($syncfile))
+		{
+			die("\nmaintain.php was not properly executed\n");
+			unlink($syncfile);
+		}
 	}
 
 

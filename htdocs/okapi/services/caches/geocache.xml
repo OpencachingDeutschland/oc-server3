@@ -87,7 +87,7 @@
 				<p>Please note, that sometimes it is faster to compute this yourself, on client-side, instead of querying OKAPI.</p>
 			</li>
 			<li>
-				<p><b>bearing3</b> - string, the absolute bearing to the cache, represented as a typical directon
+				<p><b>bearing3</b> - string, the absolute bearing to the cache, represented as a typical direction
 				string of length of 1 or 2 or 3 characters (ex. "N", "NNE", "NE", "ENE", etc.), or "n/a" if it cannot be calculated.
 				This requires <b>my_location</b> parameter to be provided.</p>
 				<p>Please note, that sometimes it is faster to compute this yourself, on client-side, instead of querying OKAPI.</p>
@@ -180,7 +180,7 @@
 			<li><b>descriptions</b> - a dictionary (language code =&gt; HTML string) of cache
 				descriptions,</li>
 			<li class="deprecated"><b>hint</b> - HTML-encoded string, cache hints/spoilers;
-				deprecated (<a href="http://code.google.com/p/opencaching-api/issues/detail?id=261">Why?</a>),
+				deprecated (<a href="http://code.google.com/p/opencaching-api/issues/detail?id=261">why?</a>),
 				use <b>hint2</b> instead,</li>
 			<li class="deprecated"><b>hints</b> - a dictionary (language code =&gt;
 				HTML-encoded string) of cache hints/spoilers; deprecated, use hints2 instead,</li>

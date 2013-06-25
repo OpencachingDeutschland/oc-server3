@@ -83,8 +83,8 @@ Logeinträge:
 				//TODO: load from the users-profile
 				$distance_unit = 'km';
 
-				$lon_rad = $record_coords['longitude'] * 3.14159 / 180;   
-        $lat_rad = $record_coords['latitude'] * 3.14159 / 180; 
+				$lon_rad = $record_coords['longitude'] * 3.14159 / 180;
+				$lat_rad = $record_coords['latitude'] * 3.14159 / 180;
 
 				$sql .= getSqlDistanceFormula($record_coords['longitude'], $record_coords['latitude'], 0, $multiplier[$distance_unit]) . ' `distance`, ';
 			}

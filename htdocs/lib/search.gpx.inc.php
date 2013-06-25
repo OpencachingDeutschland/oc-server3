@@ -352,7 +352,8 @@
 			$thisline = mb_ereg_replace('{hints}', '', $thisline);
 		else
 		  // Ocprop:  <groundspeak:encoded_hints>(.*?)<\/groundspeak:encoded_hints>
-			$thisline = mb_ereg_replace('{hints}', '      <groundspeak:encoded_hints>' . xmlentities(decodeEntities(strip_tags($r['hint']))) . '</groundspeak:encoded_hints>
+			$hint = html_entity_decode(strip_tags($r['hint']), ENT_COMPAT, "UTF-8");
+			$thisline = mb_ereg_replace('{hints}', '      <groundspeak:encoded_hints>' . xmlentities($hint) . '</groundspeak:encoded_hints>
 ', $thisline);
 
 		$thisline = mb_ereg_replace('{shortdesc}', xmlentities($r['short_desc']), $thisline);
@@ -569,7 +570,7 @@
 	}
 
 	exit;
-	
+
 	function decodeEntities($str)
 	{
 		$str = changePlaceholder($str);
@@ -582,7 +583,8 @@
 	{
 		$placeholder[0] = '{oc-placeholder-lt}'; $entity[0] = '&lt;';
 		$placeholder[1] = '{oc-placeholder-gt}'; $entity[1] = '&gt;';
-		for ($i=0;$i<=1;$i++)
+		$placeholder[2] = '{oc-placeholder-amp}'; $entity[2] = '&amp;';
+		for ($i=0;$i<count($placeholder);$i++)
 		{
 			if (!$inverse)
 			{
@@ -601,7 +603,7 @@
 		$str = htmlspecialchars($str, ENT_NOQUOTES, "UTF-8");
 		return filterevilchars($str);
 	}
-	
+
 	function filterevilchars($str)
 	{
 		return mb_ereg_replace('[\\x00-\\x09|\\x0B-\\x0C|\\x0E-\\x1F]', '', $str);

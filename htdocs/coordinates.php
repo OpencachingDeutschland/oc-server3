@@ -27,7 +27,7 @@
 	$tpl->assign('coordUTM', $coord->getUTM());
 	$tpl->assign('coordGK', $coord->getGK());
 	$tpl->assign('coordRD', $coord->getRD());
-	$tpl->assign('showRD', ($coord->nLat >= 0 && $coord->nLon >= 0));
+	$tpl->assign('showRD', ($coord->nLat >= 45 && $coord->nLat <= 57 && $coord->nLon >= 0 && $coord->nLon <= 15));
 	$tpl->assign('coordQTH', $coord->getQTH());
 	$tpl->assign('coordSwissGrid', $coord->getSwissGrid());
 

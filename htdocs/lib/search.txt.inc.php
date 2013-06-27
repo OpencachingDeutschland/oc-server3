@@ -83,8 +83,8 @@ Logeinträge:
 				//TODO: load from the users-profile
 				$distance_unit = 'km';
 
-				$lon_rad = $record_coords['longitude'] * 3.14159 / 180;   
-        $lat_rad = $record_coords['latitude'] * 3.14159 / 180; 
+				$lon_rad = $record_coords['longitude'] * 3.14159 / 180;
+				$lat_rad = $record_coords['latitude'] * 3.14159 / 180;
 
 				$sql .= getSqlDistanceFormula($record_coords['longitude'], $record_coords['latitude'], 0, $multiplier[$distance_unit]) . ' `distance`, ';
 			}
@@ -221,7 +221,7 @@ Logeinträge:
 		if ($r['hint'] == '')
 			$thisline = mb_ereg_replace('{hints}', '', $thisline);
 		else
-			$thisline = mb_ereg_replace('{hints}', str_rot13_html(strip_tags($r['hint'])), $thisline);
+			$thisline = mb_ereg_replace('{hints}', str_rot13_html(decodeEntities(strip_tags($r['hint']))), $thisline);
 		
 		$thisline = mb_ereg_replace('{shortdesc}', $r['short_desc'], $thisline);
 		
@@ -233,7 +233,7 @@ Logeinträge:
 		if ($r['html'] == 0)
 		{
 			$thisline = mb_ereg_replace('{htmlwarn}', '', $thisline);
-			$thisline = mb_ereg_replace('{desc}', strip_tags($r['desc']) . $license, $thisline);
+			$thisline = mb_ereg_replace('{desc}', decodeEntities(strip_tags($r['desc'])) . $license, $thisline);
 		}
 		else
 		{
@@ -272,7 +272,7 @@ Logeinträge:
 			
 			$thislog = mb_ereg_replace('{type}', $logtype, $thislog);
 			if ($rLog['text_html'] == 0)
-				$thislog = mb_ereg_replace('{text}', $rLog['text'], $thislog);
+				$thislog = mb_ereg_replace('{text}', decodeEntities(strip_tags($rLog['text'])), $thislog);
 			else
 				$thislog = mb_ereg_replace('{text}', html2txt($rLog['text']), $thislog);
 
@@ -300,13 +300,20 @@ Logeinträge:
 	}
 
 	exit;
-	
+
+	function decodeEntities($str)
+	{
+		$str = html_entity_decode($str, ENT_COMPAT, "UTF-8");
+		return $str;
+	}
+
 	function html2txt($html)
 	{
 		$str = mb_ereg_replace("\r\n", '', $html);
 		$str = mb_ereg_replace("\n", '', $str);
 		$str = mb_ereg_replace('<br />', "\n", $str);
 		$str = strip_tags($str);
+		$str = decodeEntities($str);
 		return $str;
 	}
 	

@@ -1745,4 +1745,13 @@
 						UPDATE caches SET meta_last_modified=NOW() WHERE caches.wp_oc=OLD.wp;
 					END;");
 
+	// Update trigger version.
+	// Keep this at the end of this file.
+	sql_dropFunction('dbsvTriggerVersion');
+	$db_version = sqlValue("SELECT `value` FROM `sysconfig` WHERE `name`='db_version'", 0);
+	sql("
+		CREATE FUNCTION `dbsvTriggerVersion` () RETURNS INT
+		RETURN '&1'",
+		$db_version);
+
 ?>

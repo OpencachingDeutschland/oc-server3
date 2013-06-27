@@ -1089,22 +1089,6 @@
 		fclose($f);
 	}
 
-	function sql_dropFunction($name)
-	{
-	  global $dbname;
-
-		$rs = sql("SHOW FUNCTION STATUS LIKE '&1'", $name);
-		while ($r = sql_fetch_assoc($rs))
-		{
-			if ($r['Db'] == $dbname && $r['Name'] == $name && $r['Type'] == 'FUNCTION')
-			{
-				sql('DROP FUNCTION `&1`', $name);
-				return;
-			}
-		}
-		sql_free_result($rs);
-	}
-
 	// test if a database table exists
 	function sql_table_exists($table)
 	{
@@ -1148,6 +1132,45 @@
 		                    FROM `information_schema`.`statistics`
 		                   WHERE `table_schema`='&1' AND `table_name`='&2' AND `index_name`='&3'",
 										 0, $opt['db']['placeholder']['db'], $table, $index) > 0;
+	}
+
+	// test if a function or procedure exists
+	function sql_fp_exists($type, $name)
+	{
+		global $opt;
+
+		$rs = sql("SHOW $type STATUS LIKE '&1'", $name);
+		$r = sql_fetch_assoc($rs);
+		sql_free_result($rs);
+
+		return ($r &&
+			      $r['Db'] == $opt['db']['placeholder']['db'] &&
+						$r['Name'] == $name &&
+						$r['Type'] == $type);
+	}
+
+	// test if a function exists
+	function sql_function_exists($name)
+	{
+		return sql_fp_exists('FUNCTION',$name);
+	}
+
+	// delete a function
+	function sql_dropFunction($name)
+	{
+		sql('DROP FUNCTION IF EXISTS `&1`', $name);
+	}
+
+	// test if a procedure exists
+	function sql_procedure_exists($name)
+	{
+		return sql_fp_exists('PROCEDURE',$name);
+	}
+
+	// delete a procedure
+	function sql_dropProcedure($name)
+	{
+		sql('DROP PROCEDURE IF EXISTS `&1`', $name);
 	}
 
 ?>

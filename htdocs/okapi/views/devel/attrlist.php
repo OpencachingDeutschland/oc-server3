@@ -14,6 +14,7 @@ use okapi\InvalidParam;
 use okapi\OkapiServiceRunner;
 use okapi\OkapiInternalRequest;
 use okapi\Settings;
+use okapi\services\attrs\AttrHelper;
 
 class View
 {
@@ -33,37 +34,104 @@ class View
 			print "$id: $name\n";
 
 		print "\nAttributes:\n\n";
-		$dict = Okapi::get_all_atribute_names();
+		require_once($GLOBALS['rootpath'].'okapi/services/attrs/attr_helper.inc.php');
+		$internal2acode = AttrHelper::get_internal_id_to_acode_mapping();
+		$dict = self::get_all_atribute_names();
 		foreach ($dict as $internal_id => $langs)
 		{
 			print $internal_id.": ";
 			$langkeys = array_keys($langs);
 			sort($langkeys);
 			if (in_array('en', $langkeys))
-				print strtoupper($langs['en'])."\n";
+				print strtoupper($langs['en']);
 			else
-				print ">>>> ENGLISH NAME UNSET! <<<<\n";
+				print ">>>> ENGLISH NAME UNSET! <<<<";
+			if ($internal2acode[$internal_id])
+				print " - ".$internal2acode[$internal_id];
+			print "\n";
 			foreach ($langkeys as $langkey)
 				print "        $langkey: ".$langs[$langkey]."\n";
 		}
+
+		print "\nAttribute notices:\n\n";
+		print "There are three priorities: (!), (-) and ( )\n";
+		print "(the last one ( ) can be safely ignored)\n\n";
+
+		$attrdict = AttrHelper::get_attrdict();
 		foreach ($dict as $internal_id => $langs)
 		{
-			print "<attr okapi_attr_id=\"TODO\">\n";
-			print "\t<groundspeak id=\"TODO\" inc=\"TODO\" name=\"TODO\" />\n";
-			print "\t<opencaching site_url=\"SITEURLTODO\" id=\"$internal_id\" />\n";
-			$langkeys = array_keys($langs);
-			usort($langkeys, function($a, $b) {
-				return ($a == "en") ? -1 : (($a == $b) ? 0 : (($a < $b) ? -1 : 1));
-			});
-			foreach ($langkeys as $langkey)
-				print "\t<name lang=\"$langkey\">".$langs[$langkey]."</name>\n";
-			print "</attr>\n";
+			if (!isset($internal2acode[$internal_id]))
+			{
+				print "(!) Attribute ".$internal_id." is not mapped to any A-code.\n";
+				continue;
+			}
+			$acode = $internal2acode[$internal_id];
+			$attr = $attrdict[$acode];
+			foreach ($langs as $lang => $value)
+			{
+				if ($lang == 'en')
+				{
+					continue;
+				}
+				if (!isset($attr['names'][$lang]))
+				{
+					print "(-) Attribute $acode is missing a name in the '$lang' language.\n";
+					print "    Local name: $value\n";
+					print "    OKAPI name: $value\n";
+					continue;
+				}
+				if ($attr['names'][$lang] !== $value)
+				{
+					print "( ) Attribute $acode has a different name in the '$lang' language\n";
+					print "    Local name: $value\n";
+					print "    OKAPI name: ".$attr['names'][$lang]."\n";
+				}
+			}
 		}
 
 		$response = new OkapiHttpResponse();
 		$response->content_type = "text/plain; charset=utf-8";
 		$response->body = ob_get_clean();
 		return $response;
+	}
+
+	/**
+	 * Get an array of all site-specific attributes in the following format:
+	 * $arr[<id_of_the_attribute>][<language_code>] = <attribute_name>.
+	 */
+	private static function get_all_atribute_names()
+	{
+		if (Settings::get('OC_BRANCH') == 'oc.pl')
+		{
+			# OCPL branch uses cache_attrib table to store attribute names. It has
+			# different structure than the OCDE cache_attrib table. OCPL does not
+			# have translation tables.
+
+			$rs = Db::query("select id, language, text_long from cache_attrib order by id");
+		}
+		else
+		{
+			# OCDE branch uses translation tables. Let's make a select which will
+			# produce results compatible with the one above.
+
+			$rs = Db::query("
+				select
+					ca.id,
+					stt.lang as language,
+					stt.text as text_long
+				from
+					cache_attrib ca,
+					sys_trans_text stt
+				where ca.trans_id = stt.trans_id
+				order by ca.id
+			");
+		}
+
+		$dict = array();
+		while ($row = mysql_fetch_assoc($rs)) {
+			$dict[$row['id']][strtolower($row['language'])] = $row['text_long'];
+		}
+		return $dict;
 	}
 
 	/**

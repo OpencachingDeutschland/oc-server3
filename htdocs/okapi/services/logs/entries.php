@@ -75,7 +75,10 @@ class WebService
 					on cr.user_id = u.user_id
 					and cr.cache_id = c.cache_id
 					".$ratingdate_condition."
-					and cl.type in (1,7)
+					and cl.type in (
+						".Okapi::logtypename2id("Found it").",
+						".Okapi::logtypename2id("Attended")."
+					)
 			where
 				cl.uuid in ('".implode("','", array_map('mysql_real_escape_string', $log_uuids))."')
 				and ".((Settings::get('OC_BRANCH') == 'oc.pl') ? "cl.deleted = 0" : "true")."

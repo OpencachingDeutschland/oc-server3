@@ -145,7 +145,7 @@
 				variant, compatible with the one used by opencaching.com (and lately,
 				Garmin GPS devices).</p>
 				<p><b>Note:</b> The mapping is undocumented and may change without notice.</p>
-				<p><b>Note:</b> Some of OC's size values cannot be properly mapped to <b>oxcode</b>,
+				<p><b>Note:</b> Some of OC's size values cannot be properly mapped to <b>oxsize</b>,
 				i.e. the 'other' size.</p>
 			</li>
 			<li><b>difficulty</b> - float (between 1 and 5), difficulty rating of the cache,</li>
@@ -216,12 +216,15 @@
 				the <b>images</b> list described above.</p>
 			</li>
 			<li>
-				<p><b>attrnames</b> - list of names of attributes of the cache; the language will
-				be selected based on the <b>langpref</b> argument.</p>
-				<p>Note: currently each of the OC installations has its own set of attributes. That's
-				why we don't reference them by their IDs - we only return them as text. This could change
-				*if* OC installations would begin to use UUIDs for their attributes and synchronize them
-				between all installations.</p>
+				<p><b>attr_acodes</b> - unordered list of OKAPI geocache-attribute IDs (A-codes) with
+				which the cache was tagged. Use the <b>attrs</b> module to retrieve information on
+				these attributes.</p>
+			</li>
+			<li>
+				<b>attrnames</b> - if you don't want to dig into <b>attr_acodes</b> just now, then
+				you can use these as a simple alternative. <b>attrnames</b> is an unordered list of
+				names of the attributes with which the cache was tagged; the language will be
+				selected based on the <b>langpref</b> parameter.
 			</li>
 			<li>
 				<p><b>attribution_note</b> - the proper attribution note for the cache listing according

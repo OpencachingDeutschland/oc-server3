@@ -27,7 +27,7 @@ use okapi\OkapiServiceRunner;
 use okapi\OkapiInternalRequest;
 use okapi\OkapiInternalConsumer;
 use okapi\services\replicate\ReplicateCommon;
-use okapi\services\attrs\AttrHelper;
+
 
 class CronJobController
 {
@@ -51,7 +51,6 @@ class CronJobController
 				new FulldumpGeneratorJob(),
 				new TileTreeUpdater(),
 				new SearchSetsCleanerJob(),
-				// WRCLEANIT: new AttrsRefresherJob(),
 				new TableOptimizerJob(),
 			);
 			foreach ($cache as $cronjob)
@@ -775,24 +774,6 @@ class LocaleChecker extends Cron5Job
 		Okapi::mail_admins("Additional setup needed: Missing locales.", ob_get_clean());
 	}
 }
-
-/**
- * Once every hour, update the official cache attributes listing.
- *
- * WRTODO: Make it 12 hours later.
- *
- * WRCLEANIT
- *
-class AttrsRefresherJob extends Cron5Job
-{
-	public function get_period() { return 3600; }
-	public function execute()
-	{
-		require_once($GLOBALS['rootpath']."okapi/services/attrs/attr_helper.inc.php");
-		AttrHelper::refresh_if_stale();
-	}
-}
-*/
 
 /** Once per day, optimize certain MySQL tables. */
 class TableOptimizerJob extends Cron5Job

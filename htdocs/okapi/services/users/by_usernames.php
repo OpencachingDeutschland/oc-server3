@@ -38,29 +38,36 @@ class WebService
 		$rs = Db::query("
 			select username, uuid
 			from user
-			where username in ('".implode("','", array_map('mysql_real_escape_string', $usernames))."')
+			where username collate utf8_general_ci in ('".implode("','", array_map('mysql_real_escape_string', $usernames))."')
 		");
-		$username2useruuid = array();
+		$lower_username2useruuid = array();
 		while ($row = mysql_fetch_assoc($rs))
 		{
-			$username2useruuid[$row['username']] = $row['uuid'];
+			$lower_username2useruuid[mb_strtolower($row['username'], 'utf-8')] = $row['uuid'];
 		}
 		mysql_free_result($rs);
 
-		# Retrieve data on given user_uuids.
-		$id_results = OkapiServiceRunner::call('services/users/users', new OkapiInternalRequest(
-			$request->consumer, $request->token, array('user_uuids' => implode("|", array_values($username2useruuid)),
-			'fields' => $fields)));
+		# Retrieve data for the found user_uuids.
 
-		# Map user_uuids to usernames. Also check which usernames were not found
+		if (count($lower_username2useruuid) > 0)
+		{
+			$id_results = OkapiServiceRunner::call('services/users/users', new OkapiInternalRequest(
+				$request->consumer, $request->token, array('user_uuids' => implode("|", array_values($lower_username2useruuid)),
+				'fields' => $fields)));
+		} else {
+			$id_results = array();
+		}
+
+		# Map user_uuids back to usernames. Also check which usernames were not found
 		# and mark them with null.
+
 		$results = array();
 		foreach ($usernames as $username)
 		{
-			if (!isset($username2useruuid[$username]))
+			if (!isset($lower_username2useruuid[mb_strtolower($username, 'utf-8')]))
 				$results[$username] = null;
 			else
-				$results[$username] = $id_results[$username2useruuid[$username]];
+				$results[$username] = $id_results[$lower_username2useruuid[mb_strtolower($username, 'utf-8')]];
 		}
 
 		return Okapi::formatted_response($request, $results);

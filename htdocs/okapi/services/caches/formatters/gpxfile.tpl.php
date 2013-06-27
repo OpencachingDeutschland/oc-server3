@@ -40,6 +40,20 @@ http://www.gsak.net/xmlv1/5 http://www.gsak.net/xmlv1/5/gsak.xsd
 					<groundspeak:owner id="<?= $vars['user_uuid_to_internal_id'][$c['owner']['uuid']] ?>"><?= Okapi::xmlescape($c['owner']['username']) ?></groundspeak:owner>
 					<groundspeak:type><?= $vars['cache_GPX_types'][$c['type']] ?></groundspeak:type>
 					<groundspeak:container><?= $vars['cache_GPX_sizes'][$c['size2']] ?></groundspeak:container>
+					<? if (in_array('gc:attrs', $vars['attrs'])) { /* Does user want us to include groundspeak:attributes? */ ?>
+						<groundspeak:attributes>
+							<?
+								foreach ($c['attr_acodes'] as $acode) {
+									foreach ($vars['attr_index'][$acode]['gc_equivs'] as $gc) {
+										print "<groundspeak:attribute id=\"".$gc['id']."\" ";
+										print "inc=\"".$gc['inc']."\">";
+										print Okapi::xmlescape($gc['name']);
+										print "</groundspeak:attribute>";
+									}
+								}
+							?>
+						</groundspeak:attributes>
+					<? } ?>
 					<groundspeak:difficulty><?= $c['difficulty'] ?></groundspeak:difficulty>
 					<groundspeak:terrain><?= $c['terrain'] ?></groundspeak:terrain>
 					<groundspeak:long_description html="True">
@@ -58,7 +72,7 @@ http://www.gsak.net/xmlv1/5 http://www.gsak.net/xmlv1/5/gsak.xsd
 							&lt;p&gt;&lt;b&gt;<?= _("Personal notes") ?>:&lt;/b&gt; <?= Okapi::xmlescape($c['my_notes']) ?>&lt;/p&gt;
 						<? } ?>
 
-						<? if ($vars['attrs'] == 'desc:text' && count($c['attrnames']) > 0) { /* Does user want us to include attributes? */ ?>
+						<? if (in_array('desc:text', $vars['attrs']) && count($c['attrnames']) > 0) { /* Does user want us to include attributes? */ ?>
 							&lt;p&gt;<?= _("Attributes") ?>:&lt;/p&gt;
 							&lt;ul&gt;&lt;li&gt;<?= implode("&lt;/li&gt;&lt;li&gt;", $c['attrnames']) ?>&lt;/li&gt;&lt;/ul&gt;
 						<? } ?>
@@ -137,7 +151,7 @@ http://www.gsak.net/xmlv1/5 http://www.gsak.net/xmlv1/5/gsak.xsd
 						<? if ($c['oxsize'] !== null) { ?><ox:size><?= $c['oxsize'] ?></ox:size><? } ?>
 						<ox:terrain><?= $c['terrain'] ?></ox:terrain>
 					</ox:ratings>
-					<? if ($vars['attrs'] == 'ox:tags' && count($c['attrnames']) > 0) { /* Does user want us to include ox:tags? */ ?>
+					<? if (in_array('ox:tags', $vars['attrs']) && count($c['attrnames']) > 0) { /* Does user want us to include ox:tags? */ ?>
 						<ox:tags><ox:tag><?= implode("</ox:tag><ox:tag>", $c['attrnames']) ?></ox:tag></ox:tags>
 					<? } ?>
 					<? if ((strpos($vars['images'], "ox:") === 0) && count($c['images']) > 0) { /* Does user want us to include ox:image references? */ ?>

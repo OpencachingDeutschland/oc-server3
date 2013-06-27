@@ -100,7 +100,10 @@ class SearchAssistant
 					throw new InvalidParam('type', "'$name' is not a valid cache type.");
 				}
 			}
-			$where_conds[] = "caches.type $operator ('".implode("','", array_map('mysql_real_escape_string', $types))."')";
+			if (count($types) > 0)
+				$where_conds[] = "caches.type $operator ('".implode("','", array_map('mysql_real_escape_string', $types))."')";
+			else if ($operator == "in")
+				$where_conds[] = "false";
 		}
 
 		#

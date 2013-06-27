@@ -12,56 +12,111 @@ use okapi\ParamMissing;
 use okapi\InvalidParam;
 use okapi\OkapiServiceRunner;
 use okapi\OkapiInternalRequest;
+use okapi\OkapiLock;
 use SimpleXMLElement;
 
 
 class AttrHelper
 {
-	private static $CACHE_KEY = 'attrs/attrlist/1';
+	/**
+	 * By default, when DEBUG mode is enabled, the attributes.xml file is
+	 * reloaded practically on every request. If you don't want that, you can
+	 * temporarilly disable this behavior by settings this to false.
+	 */
+	private static $RELOAD_ON_DEBUG = true;
+
 	private static $attr_dict = null;
-	private static $last_refreshed = null;
 
 	/**
-	 * Forces the download of the new attributes from Google Code.
+	 * Return the cache key suffix to be used for caching. This should be used
+	 * In order for the $RELOAD_ON_DEBUG to work properly when switching to/from
+	 * DEBUG mode.
 	 */
-	private static function refresh_now()
+	private static function cache_key_suffix()
+	{
+		return (self::$RELOAD_ON_DEBUG) ? "#DBG" : "";
+	}
+
+	/** Return the timeout to be used for attribute caching. */
+	private static function ttl()
+	{
+		return (Settings::get('DEBUG') && self::$RELOAD_ON_DEBUG) ? 2 : 86400;
+	}
+
+	/**
+	 * Forces an immediate refresh of the current attributes from the
+	 * attribute-definitions.xml file.
+	 */
+	public static function refresh_now()
 	{
 		try
 		{
-			$opts = array(
-				'http' => array(
-					'method' => "GET",
-					'timeout' => 5.0
-				)
-			);
-			$context = stream_context_create($opts);
-			$xml = file_get_contents("http://opencaching-api.googlecode.com/svn/trunk/etc/attributes.xml",
-				false, $context);
+			$path = $GLOBALS['rootpath']."okapi/services/attrs/attribute-definitions.xml";
+			$xml = file_get_contents($path);
+			self::refresh_from_string($xml);
 		}
-		catch (ErrorException $e)
+		catch (Exception $e)
 		{
-			# Google failed on us. We won't update the cached attributes.
+			# Failed to read or parse the file (i.e. after a syntax error was
+			# commited). Let's check when the last successful parse occured.
+
+			self::init_from_cache(false);
+
+			if (self::$attr_dict === null)
+			{
+				# That's bad! We don't have ANY copy of the data AND we failed
+				# to parse it. We will use a fake, empty data.
+
+				$cache_key = "attrhelper/dict#".Okapi::$revision.self::cache_key_suffix();
+				$cachedvalue = array(
+					'attr_dict' => array(),
+				);
+				Cache::set($cache_key, $cachedvalue, self::ttl());
+			}
+
 			return;
 		}
+	}
 
-		$my_site_url = "http://opencaching.pl/"; // WRTODO
+	/**
+	 * Refresh all attributes from the given XML. Usually, this file is
+	 * downloaded from Google Code (using refresh_now).
+	 */
+	public static function refresh_from_string($xml)
+	{
+		/* attribute.xml file defines attribute relationships between various OC
+		 * installations. Each installation uses its own internal IDs.
+		 * We will temporarily assume that "oc.pl" codebranch uses OCPL's schema
+		 * and "oc.de" codebranch - OCDE's. This is wrong for OCUS and OCORGUK
+		 * nodes, which use "oc.pl" codebranch, but have a schema of their own
+		 * WRTODO. */
+
+		if (Settings::get('OC_BRANCH') == 'oc.pl')
+			$my_schema = "OCPL";
+		else
+			$my_schema = "OCDE";
+
 		$doc = simplexml_load_string($xml);
 		$cachedvalue = array(
 			'attr_dict' => array(),
-			'last_refreshed' => time(),
 		);
+
+		# Build cache attributes dictionary
+
+		$all_internal_ids = array();
 		foreach ($doc->attr as $attrnode)
 		{
 			$attr = array(
-				'code' => (string)$attrnode['okapi_attr_id'],
-				'gs_equiv' => null,
+				'acode' => (string)$attrnode['acode'],
+				'gc_equivs' => array(),
 				'internal_id' => null,
 				'names' => array(),
-				'descriptions' => array()
+				'descriptions' => array(),
+				'is_deprecated' => true
 			);
 			foreach ($attrnode->groundspeak as $gsnode)
 			{
-				$attr['gs_equiv'] = array(
+				$attr['gc_equivs'][] = array(
 					'id' => (int)$gsnode['id'],
 					'inc' => in_array((string)$gsnode['inc'], array("true", "1")) ? 1 : 0,
 					'name' => (string)$gsnode['name']
@@ -69,79 +124,111 @@ class AttrHelper
 			}
 			foreach ($attrnode->opencaching as $ocnode)
 			{
-				if ((string)$ocnode['site_url'] == $my_site_url) {
-					$attr['internal_id'] = (int)$ocnode['id'];
+				/* If it is used by at least one OC node, then it's NOT deprecated. */
+				$attr['is_deprecated'] = false;
+
+				if ((string)$ocnode['schema'] == $my_schema)
+				{
+					/* It is used by THIS OC node. */
+
+					$internal_id = (int)$ocnode['id'];
+					if (isset($all_internal_ids[$internal_id]))
+						throw new Exception("The internal attribute ".$internal_id.
+							" has multiple assigments to OKAPI attributes.");
+					$all_internal_ids[$internal_id] = true;
+					if (!is_null($attr['internal_id']))
+						throw new Exception("There are multiple internal IDs for the ".
+							$attr['acode']." attribute.");
+					$attr['internal_id'] = $internal_id;
 				}
 			}
-			foreach ($attrnode->name as $namenode)
+			foreach ($attrnode->lang as $langnode)
 			{
-				$attr['names'][(string)$namenode['lang']] = (string)$namenode;
+				$lang = (string)$langnode['id'];
+				foreach ($langnode->name as $namenode)
+				{
+					if (isset($attr['names'][$lang]))
+						throw new Exception("Duplicate ".$lang." name of attribute ".$attr['acode']);
+					$attr['names'][$lang] = (string)$namenode;
+				}
+				foreach ($langnode->desc as $descnode)
+				{
+					if (isset($attr['descriptions'][$lang]))
+						throw new Exception("Duplicate ".$lang." description of attribute ".$attr['acode']);
+					$xml = $descnode->asxml(); /* contains "<desc>" and "</desc>" */
+					$innerxml = preg_replace("/(^[^>]+>)|(<[^<]+$)/us", "", $xml);
+					$attr['descriptions'][$lang] = self::cleanup_string($innerxml);
+				}
 			}
-			foreach ($attrnode->desc as $descnode)
-			{
-				$xml = $descnode->asxml(); /* contains "<desc lang="...">" and "</desc>" */
-				$innerxml = preg_replace("/(^[^>]+>)|(<[^<]+$)/us", "", $xml);
-				$attr['descriptions'][(string)$descnode['lang']] = self::cleanup_string($innerxml);
-			}
-			$cachedvalue['attr_dict'][$attr['code']] = $attr;
+			$cachedvalue['attr_dict'][$attr['acode']] = $attr;
 		}
 
-		# Cache it for a month (just in case, usually it will be refreshed every day).
-
-		Cache::set(self::$CACHE_KEY, $cachedvalue, 30*86400);
+		$cache_key = "attrhelper/dict#".Okapi::$revision.self::cache_key_suffix();
+		Cache::set($cache_key, $cachedvalue, self::ttl());
 		self::$attr_dict = $cachedvalue['attr_dict'];
-		self::$last_refreshed = $cachedvalue['last_refreshed'];
+	}
+
+	/**
+	 * Object to be used for forward-compatibility (see the attributes method).
+	 */
+	public static function get_unknown_placeholder($acode)
+	{
+		return array(
+			'acode' => $acode,
+			'gc_equivs' => array(),
+			'internal_id' => null,
+			'names' => array(
+				'en' => "Unknown attribute"
+			),
+			'descriptions' => array(
+				'en' => (
+					"This attribute ($acode) is unknown at ".Okapi::get_normalized_site_name().
+					". It might not exist, or it may be a new attribute, recognized ".
+					"only in newer OKAPI installations. Perhaps ".Okapi::get_normalized_site_name().
+					" needs to have its OKAPI updated?"
+				)
+			),
+			'is_deprecated' => true
+		);
 	}
 
 	/**
 	 * Initialize all the internal attributes (if not yet initialized). This
-	 * loads attribute values from the cache. If they are not present in the cache,
-	 * it won't download them from Google Code, it will initialize them as empty!
+	 * loads attribute values from the cache. If they are not present in the
+	 * cache, it will read and parse them from attribute-definitions.xml file.
 	 */
-	private static function init_from_cache()
+	private static function init_from_cache($allow_refreshing=true)
 	{
 		if (self::$attr_dict !== null)
 		{
 			/* Already initialized. */
 			return;
 		}
-		$cachedvalue = Cache::get(self::$CACHE_KEY);
+		$cache_key = "attrhelper/dict#".Okapi::$revision.self::cache_key_suffix();
+		$cachedvalue = Cache::get($cache_key);
 		if ($cachedvalue === null)
 		{
-			$cachedvalue = array(
-				'attr_dict' => array(),
-				'last_refreshed' => 0,
-			);
+			# I.e. after Okapi::$revision is changed, or cache got invalidated.
+
+			if ($allow_refreshing)
+			{
+				self::refresh_now();
+				self::init_from_cache(false);
+				return;
+			}
+			else
+			{
+				$cachedvalue = array(
+					'attr_dict' => array(),
+				);
+			}
 		}
 		self::$attr_dict = $cachedvalue['attr_dict'];
-		self::$last_refreshed = $cachedvalue['last_refreshed'];
 	}
 
 	/**
-	 * Check if the cached attribute values might be stale. If they were not
-	 * refreshed in a while, perform the refresh from Google Code. (This might
-	 * take a couple of seconds, it should be done via a cronjob.)
-	 */
-	public static function refresh_if_stale()
-	{
-		self::init_from_cache();
-		if (self::$last_refreshed < time() - 86400)
-			self::refresh_now();
-		if (self::$last_refreshed < time() - 3 * 86400)
-		{
-			Okapi::mail_admins(
-				"OKAPI was unable to refresh attributes",
-				"OKAPI periodically refreshes all cache attributes from the list\n".
-				"kept in global repository. OKAPI tried to contact the repository,\n".
-				"but it failed. Your list of attributes might be stale.\n\n".
-				"You should probably update OKAPI or contact OKAPI developers."
-			);
-		}
-	}
-
-	/**
-	 * Return a dictionary of all attributes. The format is the same as in the "attributes"
-	 * key returned by the "services/attrs/attrlist" method.
+	 * Return a dictionary of all attributes. The format is INTERNAL and PRIVATE,
+	 * it is NOT the same as in the "attributes" method (but it is quite similar).
 	 */
 	public static function get_attrdict()
 	{
@@ -153,5 +240,55 @@ class AttrHelper
 	private static function cleanup_string($s)
 	{
 		return preg_replace('/(^\s+)|(\s+$)/us', "", preg_replace('/\s+/us', " ", $s));
+	}
+
+	/**
+	 * Get the mapping table between internal attribute id => OKAPI A-code.
+	 * The result is cached!
+	 */
+	public static function get_internal_id_to_acode_mapping()
+	{
+		static $mapping = null;
+		if ($mapping !== null)
+			return $mapping;
+
+		$cache_key = "attrhelper/id2acode/".Okapi::$revision.self::cache_key_suffix();
+		$mapping = Cache::get($cache_key);
+		if (!$mapping)
+		{
+			self::init_from_cache();
+			$mapping = array();
+			foreach (self::$attr_dict as $acode => &$attr_ref)
+				$mapping[$attr_ref['internal_id']] = $acode;
+			Cache::set($cache_key, $mapping, self::ttl());
+		}
+		return $mapping;
+	}
+
+	/**
+	 * Get the mapping: A-codes => attribute name. The language for the name
+	 * is selected based on the $langpref parameter. The result is cached!
+	 */
+	public static function get_acode_to_name_mapping($langpref)
+	{
+		static $mapping = null;
+		if ($mapping !== null)
+			return $mapping;
+
+		$cache_key = md5(serialize(array("attrhelper/acode2name", $langpref,
+			Okapi::$revision, self::cache_key_suffix())));
+		$mapping = Cache::get($cache_key);
+		if (!$mapping)
+		{
+			self::init_from_cache();
+			$mapping = array();
+			foreach (self::$attr_dict as $acode => &$attr_ref)
+			{
+				$mapping[$acode] = Okapi::pick_best_language(
+					$attr_ref['names'], $langpref);
+			}
+			Cache::set($cache_key, $mapping, self::ttl());
+		}
+		return $mapping;
 	}
 }

@@ -93,9 +93,18 @@ class WebService
 
 		$tmp = $request->get_parameter('attrs');
 		if (!$tmp) $tmp = 'desc:text';
-		if (!in_array($tmp, array('none', 'desc:text', 'ox:tags')))
-			throw new InvalidParam('attrs', "'$tmp'");
-		$vars['attrs'] = $tmp;
+		$tmp = explode("|", $tmp);
+		$vars['attrs'] = array();
+		foreach ($tmp as $elem)
+		{
+			if ($elem == 'none') {
+				/* pass */
+			} elseif (in_array($elem, array('desc:text', 'ox:tags', 'gc:attrs'))) {
+				$vars['attrs'][] = $elem;
+			} else {
+				throw new InvalidParam('attrs', "Invalid list entry: '$elem'");
+			}
+		}
 
 		$tmp = $request->get_parameter('trackables');
 		if (!$tmp) $tmp = 'none';
@@ -114,15 +123,14 @@ class WebService
 
 		$user_uuid = $request->get_parameter('user_uuid');
 
-		# We can get all the data we need from the services/caches/geocaches method.
-		# We don't need to do any additional queries here.
+		# Which fields of the services/caches/geocaches method do we need?
 
 		$fields = 'code|name|location|date_created|url|type|status|size|size2|oxsize'.
 			'|difficulty|terrain|description|hint2|rating|owner|url|internal_id';
 		if ($vars['images'] != 'none')
 			$fields .= "|images";
-		if ($vars['attrs'] != 'none')
-			$fields .= "|attrnames";
+		if (count($vars['attrs']) > 0)
+			$fields .= "|attrnames|attr_acodes";
 		if ($vars['trackables'] == 'desc:list')
 			$fields .= "|trackables";
 		elseif ($vars['trackables'] == 'desc:count')
@@ -138,17 +146,47 @@ class WebService
 		if ($vars['mark_found'])
 			$fields .= "|is_found";
 
-		$vars['caches'] = OkapiServiceRunner::call('services/caches/geocaches', new OkapiInternalRequest(
-			$request->consumer, $request->token, array('cache_codes' => $cache_codes,
-			'langpref' => $langpref, 'fields' => $fields, 'lpc' => $lpc, 'user_uuid' => $user_uuid,
-			'log_fields' => 'uuid|date|user|type|comment|internal_id|was_recommended')));
-		$vars['installation'] = OkapiServiceRunner::call('services/apisrv/installation', new OkapiInternalRequest(
-			new OkapiInternalConsumer(), null, array()));
+		$vars['caches'] = OkapiServiceRunner::call(
+			'services/caches/geocaches', new OkapiInternalRequest(
+				$request->consumer, $request->token, array(
+					'cache_codes' => $cache_codes,
+					'langpref' => $langpref,
+					'fields' => $fields,
+					'lpc' => $lpc,
+					'user_uuid' => $user_uuid,
+					'log_fields' => 'uuid|date|user|type|comment|internal_id|was_recommended'
+				)
+			)
+		);
+
+		# Get all the other data need.
+
+		$vars['installation'] = OkapiServiceRunner::call(
+			'services/apisrv/installation', new OkapiInternalRequest(
+				new OkapiInternalConsumer(), null, array()
+			)
+		);
 		$vars['cache_GPX_types'] = self::$cache_GPX_types;
 		$vars['cache_GPX_sizes'] = self::$cache_GPX_sizes;
+		if (count($vars['attrs']) > 0)
+		{
+			/* The user asked for some kind of attribute output. We'll fetch all
+			 * the data we MAY need. This is often far too much, but thanks to
+			 * caching, it will work fast. */
+
+			$vars['attr_index'] = OkapiServiceRunner::call(
+				'services/attrs/attribute_index', new OkapiInternalRequest(
+					$request->consumer, $request->token, array(
+						'only_locally_used' => 'true',
+						'langpref' => $langpref,
+						'fields' => 'name|gc_equivs'
+					)
+				)
+			);
+		}
 
 		/* OC sites always used internal user_ids in their generated GPX files.
-		 * This might be considered an error in itself (groundspeak's XML namespace
+		 * This might be considered an error in itself (Groundspeak's XML namespace
 		 * doesn't allow that), but it very common (Garmin's OpenCaching.COM
 		 * also does that). Therefore, for backward-compatibility reasons, OKAPI
 		 * will do it the same way. See issue 174.

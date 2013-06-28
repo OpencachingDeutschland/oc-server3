@@ -63,7 +63,7 @@
 		Hattsteiner Allee 26<br />
 		61250 Usingen<br />
 		<br />
-		Telefon: 0172 / 3011455<br />
+		Telefon: 0 60 81 / 912 87 57<br />
 		E-Mail: verein@opencaching.de<br />
 		<br />
 		ACHTUNG: Fragen und Hinweise zu Schatzverstecken oder den Nutzungsbedingungen von 

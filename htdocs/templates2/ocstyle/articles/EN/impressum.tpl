@@ -45,7 +45,7 @@
 		61250 Usingen<br />
 		GERMANY<br />
 		<br />
-		Phone: +49 172 3011455<br />
+		Phone: +49 (0) 60 81 / 912 87 57<br />
 		E-Mail: verein@opencaching.de<br />
 		<br />
 		NOTE: As for questions and information on cache locations and hides or the 

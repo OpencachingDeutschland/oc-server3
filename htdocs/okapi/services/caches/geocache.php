@@ -55,7 +55,7 @@ class WebService
 		$results = OkapiServiceRunner::call('services/caches/geocaches', new OkapiInternalRequest(
 			$request->consumer, $request->token, $params));
 		$result = $results[$cache_code];
-		if ($result == null)
+		if ($result === null)
 			throw new InvalidParam('cache_code', "This cache does not exist.");
 		return Okapi::formatted_response($request, $result);
 	}

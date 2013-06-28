@@ -2505,6 +2505,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2084', 'show ar
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2085', 'hide archived', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2086', 'unknown search type', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2087', 'Show on map', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2088', 'Search options', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2089', 'disabled[pl]', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2090', 'archived[pl]', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2091', 'Test for and fix inconsistencies in database tables', '2013-04-25 23:00:00');
@@ -6464,6 +6465,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2085', 'DE', 'archivierte ausblenden', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2086', 'DE', 'unbekannter Suchtyp', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2087', 'DE', 'auf Karte anzeigen', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2088', 'DE', 'Suchoptionen', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2089', 'DE', 'deaktivierte', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2090', 'DE', 'archivierte', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2091', 'DE', 'Sucht und behebt Inkonsistenzen in Datenbanktabellen', '2013-04-25 23:00:00');

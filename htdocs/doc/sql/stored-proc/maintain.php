@@ -21,7 +21,7 @@
 			flush();
 		}
 		else
-			echo "enter DB $db_root_username password:";
+			echo "enter DB $db_root_username password: ";
 
 		$fh = fopen('php://stdin', 'r');
 		$db_root_password = trim(fgets($fh, 1024));

@@ -12,6 +12,9 @@
 	 * You should normally NOT call this script directly, but via dbupdate.php
 	 * (or something similar on a production system). This ensures that
 	 * everything takes place in the right order.
+	 *
+	 * See http://wiki.opencaching.de/index.php/Entwicklung/Datenbankversionierung
+	 * (German) and the comments in this file for further documentation.
 	 */
 
 	if (!isset($opt['rootpath']))
@@ -19,10 +22,24 @@
 	require_once($opt['rootpath'] . 'lib2/cli.inc.php');
 
 	if (!sql_field_exists('cache_attrib','gc_id'))
-		die("\n
-	       ERROR: Database structure too old. You must first do a manual update
-				 up to commit 467aae4 (March 27, 2013) to enable automatic updates.
-				 See htdocs/doc/sql/db-changes.txt.\n");
+	{
+		die(
+			"  ERROR: Database structure too old. You must first do a manual update\n" .
+			"  up to commit 467aae4 (March 27, 2013) to enable automatic updates.\n" .
+			"  See htdocs/doc/sql/db-changes.txt.\n");
+		// Do not continue with dbupdate.php, because the current data.sql and
+		// maintain.php will not fit either.
+	}
+
+	if (!sql_function_exists('distance') || !sql_procedure_exists('sp_touch_cache'))
+	{
+		// We need a consistent starting point including triggers & functions, and it's
+		// safer not to decide HERE which trigger version to install.
+		echo "Triggers / DB functions are not installed (yet) - skipping DB versioning.\n";
+		exit;
+			// continue with dbupdate.php if called from there and let's hope
+			// maintain.php matches the installed tables' DB version ...
+	}
 
 	$db_version = max(99, sql_value("SELECT `value` FROM `sysconfig` WHERE `name`='db_version'",99));
 
@@ -56,15 +73,27 @@
 	{
 		global $opt, $db_version;
 
-		$syncfile = $opt['rootpath'] . 'cache2/dbsv-running';
-		file_put_contents($syncfile,'dbsv is running');
+		// For the case we re-run an old mutation for some accident, we must make
+		// sure that we are not downgrading to an old trigger version (which may be
+		// incompatible with the current database structures.
+		if (sql_function_exists('dbsvTriggerVersion'))
+			$trigger_version = sql_value('SELECT dbsvTriggerVersion()',0);
+		else
+			$trigger_version = 0;
 
-		system('php ' . $opt['rootpath'] . 'doc/sql/stored-proc/maintain.php --dbsv '.$db_version.' --flush');
-
-		if (file_exists($syncfile))
+		if ($trigger_version < $db_version)
 		{
-			die("\nmaintain.php was not properly executed\n");
-			unlink($syncfile);
+			$syncfile = $opt['rootpath'] . 'cache2/dbsv-running';
+			file_put_contents($syncfile,'dbsv is running');
+
+			system('php ' . $opt['rootpath'] . 'doc/sql/stored-proc/maintain.php --dbsv '.$db_version.' --flush');
+				// This will also update dbsvTriggerVersion.
+
+			if (file_exists($syncfile))
+			{
+				die("\nmaintain.php was not properly executed\n");
+				unlink($syncfile);
+			}
 		}
 	}
 
@@ -271,9 +300,37 @@
 			sql("ALTER TABLE `caches` ADD INDEX `wp_gc_maintained` (`wp_gc_maintained`)");
 	}
 
-	function dbv_113()  // preventive trigger update
+	function dbv_113()  // preventive, initial trigger update
 	{
+		// The if-condition ensures that we will not downgrade to an old trigger
+		// version for the case this function is re-run by some accident.
+		// For future trigger updates, this will be ensured by the version
+		// number returned by dbsvTriggerVersion().
+
+		if (!sql_function_exists('dbsvTriggerVersion'))
+			update_triggers();
+	}
+
+	function dbv_114()  // add dbsvTriggerVersion
+	{
+		// dbsvTriggerVersion was introduced AFTER defining mutation #113 (it was
+		// inserted there later). So we need to additionally install it on installations
+		// which already updated to v113:
+
 		update_triggers();
 	}
+
+
+	// When adding new mutations, take care that they behave well if run multiple
+	// times. This improves robustness of database versioning.
+	//
+	// Please carefully decide if a new mutation relies on any triggers.
+	// If so, check if triggers need to be updated first - they may have changed
+	// since the last trigger update mutation (like #113) - or emulate the trigger
+	// behaviour by additional SQL statements which restore table consistency.
+	//
+	// Trigger updates can be directly included in a mutation, or can be done via
+	// a separate trigger update mutation (see #113 and maintain-113.inc.php).
+	// See also http://wiki.opencaching.de/index.php/Entwicklung/Datenbankversionierung.
 
 ?>

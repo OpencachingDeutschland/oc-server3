@@ -19,8 +19,10 @@
     <tr><td class="header-small"></td><td class="header-small"><b>Nickname</b></td><td class="header-small"><b>Assignments</b></td></tr>
     <tr><td></td><td></td><td></td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/4_vs.jpg" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=162754">4_Vs</a></td><td>chairman</td></tr>
+    <tr><td><img src="http://www.opencaching.de/images/team/clanfamily.jpg" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=244244">ClanFamily</a></td><td>vice chairman</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/schrottie.jpg" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=140946">Schrottie</a></td><td>treasurer; user support, data maintenance</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/danlex.png" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=222261">Danlex</a></td><td>press spokesman; user support, data maintenance</td></tr>
+    <tr><td><img src="http://www.opencaching.de/images/team/cmanie.jpg" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=222664">cmanie</a></td><td>development commissioner</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/dummy.jpg" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=137473">bohrsty</a></td><td>head of system administration</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/pirate77.jpg" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=152708">pirate77</a></td><td>head of user support and data maintenance, wiki</td></tr>
     <tr><td></td><td></td><td></td></tr>
@@ -28,8 +30,6 @@
     <tr><td class="header-small"><b>Photo</b></td><td class="header-small"><b>Nickname</b></td><td class="header-small"><b>Assignments</b></td></tr>
     <tr><td></td><td></td><td></td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/bundy609.jpg" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=189552">Bundy609</a></td><td>user support, data maintenance</td></tr>
-    <tr><td><img src="http://www.opencaching.de/images/team/clanfamily.jpg" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=244244">ClanFamily</a></td><td>design, software development</td></tr>
-    <tr><td><img src="http://www.opencaching.de/images/team/cmanie.jpg" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=222664">cmanie</a></td><td>software development</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/dl6hbo.jpg" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=148310">dl6hbo</a></td><td>server operation, documentation</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/flopp.png" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=126329">Flopp</a></td><td>software development, user support, data maintenance</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/following.png" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=150360">following</a></td><td>data maintenance, software development, message board moderation, wiki</td></tr>

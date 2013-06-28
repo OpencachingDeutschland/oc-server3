@@ -24,7 +24,7 @@
 	</opt>
 	<opt name='ns_ground' default='false'>
 		Boolean. If <b>true</b> then response will include
-		<a href='http://www.groundspeak.com/cache/1/0/cache.xsd'>Groundspeak's
+		<a href='http://www.groundspeak.com/cache/1/0/1/cache.xsd'>Groundspeak's
 		GPX extension</a>. This namespace declares an extra &lt;cache&gt; element
 		used by <a href='http://www.geocaching.com/'>geocaching.com</a> and <b>many others</b>.
 		This namespace was initially associatied with geocaching.com, but now seems to
@@ -72,14 +72,27 @@
 	</opt>
 	<opt name='attrs' default='desc:text'>
 		<p>This argument controls wether cache attributes are included and how they are included.
-		One of the following values:</p>
+		Pipe-separated list consisting of any set of the following values:</p>
+		
 		<ul>
-			<li><b>none</b> - no attributes will be included,</li>
-			<li><b>desc:text</b> - attributes will be listed (in plain-text) within the cache description,</li>
-			<li><b>ox:tags</b> - attributes will be converted to Garmin's ox:tag elements.</li>
+			<li><b>desc:text</b> - attributes will be listed (in plain-text) within
+			the cache description (<b>ns_ground</b> has to be <b>true</b>),</li>
+			<li><b>ox:tags</b> - attributes will be listed as Garmin's <i>ox:tag</i>
+			elements (<b>ns_ox</b> has to be <b>true</b>),</li>
+			<li>
+				<p><b>gc:attrs</b> - attributes will be listed as Groundspeak's
+				<i>groundspeak:attribute</i> elements (<b>ns_ground</b> has to be <b>true</b>),
+				compatible with Geocaching.com (see the list
+				<a href='http://www.geocaching.com/about/icons.aspx'>here</a>).</p>
+				
+				<p>Note that most Opencaching attributes don't have Geocaching.com counterparts.
+				Such attributes cannot be included as gc:attrs and will be ignored.</p>
+			</li>
 		</ul>
-		<p>Note: When using "desc:" mode, remember to set <b>ns_ground</b> to <b>true</b>.</p>
-		<p>Note: When using "ox:" mode, remember to set <b>ns_ox</b> to <b>true</b>.</p>
+		
+		<p>If you don't want any attributes to be included, you must set the <b>attrs</b>
+		parameter to <b>none</b>. Using an empty string won't work this way - it will
+		trigger the default (<b>desc:text</b>) to be selected, for backward-compatibility.</p>
 	</opt>
 	<opt name='trackables' default='none'>
 		<p>This argument controls wether information on trackables is included and how it is included.

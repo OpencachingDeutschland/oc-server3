@@ -112,7 +112,7 @@ class AttrHelper
 				'internal_id' => null,
 				'names' => array(),
 				'descriptions' => array(),
-				'is_deprecated' => true
+				'is_discontinued' => true
 			);
 			foreach ($attrnode->groundspeak as $gsnode)
 			{
@@ -124,8 +124,8 @@ class AttrHelper
 			}
 			foreach ($attrnode->opencaching as $ocnode)
 			{
-				/* If it is used by at least one OC node, then it's NOT deprecated. */
-				$attr['is_deprecated'] = false;
+				/* If it is used by at least one OC node, then it's NOT discontinued. */
+				$attr['is_discontinued'] = false;
 
 				if ((string)$ocnode['schema'] == $my_schema)
 				{
@@ -188,7 +188,7 @@ class AttrHelper
 					" needs to have its OKAPI updated?"
 				)
 			),
-			'is_deprecated' => true
+			'is_discontinued' => true
 		);
 	}
 

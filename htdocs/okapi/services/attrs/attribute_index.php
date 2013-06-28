@@ -34,10 +34,6 @@ class WebService
 		$fields = $request->get_parameter('fields');
 		if (!$fields) $fields = "name";
 
-		$include_deprecated = $request->get_parameter('include_deprecated');
-		if (!$include_deprecated) $include_deprecated = "true";
-		$include_deprecated = ($include_deprecated == "true");
-
 		$only_locally_used = $request->get_parameter('only_locally_used');
 		if (!$only_locally_used) $only_locally_used = "false";
 		$only_locally_used = ($only_locally_used == "true");
@@ -50,11 +46,6 @@ class WebService
 		$acodes = array();
 		foreach ($attrdict as $acode => &$attr_ref)
 		{
-			if ((!$include_deprecated) && ($attr_ref['is_deprecated'])) {
-				/* Skip. */
-				continue;
-			}
-
 			if ($only_locally_used && ($attr_ref['internal_id'] === null)) {
 				/* Skip. */
 				continue;

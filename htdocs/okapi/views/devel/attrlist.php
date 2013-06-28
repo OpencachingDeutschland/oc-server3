@@ -46,8 +46,10 @@ class View
 				print strtoupper($langs['en']);
 			else
 				print ">>>> ENGLISH NAME UNSET! <<<<";
-			if ($internal2acode[$internal_id])
+			if (isset($internal2acode[$internal_id]))
 				print " - ".$internal2acode[$internal_id];
+			else
+				print " - >>>> MISSING A-CODE MAPPING <<<<";
 			print "\n";
 			foreach ($langkeys as $langkey)
 				print "        $langkey: ".$langs[$langkey]."\n";
@@ -77,7 +79,7 @@ class View
 				{
 					print "(-) Attribute $acode is missing a name in the '$lang' language.\n";
 					print "    Local name: $value\n";
-					print "    OKAPI name: $value\n";
+					print "    OKAPI name: >> none <<\n";
 					continue;
 				}
 				if ($attr['names'][$lang] !== $value)

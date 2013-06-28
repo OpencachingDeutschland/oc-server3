@@ -8,7 +8,7 @@
 		All OKAPI attributes are shared among all OKAPI servers. Once an attribute is
 		published (e.g. via the <b>attribute_index</b> method), it won't
 		disappear in any of the future OKAPI revisions, nor will its meaning change.
-		Some attributes may get deprecated in the future, but they will remain accessible
+		Some attributes may get discontinued in the future, but they will remain accessible
 		by their original A-code.</p>
 	</desc>
 	<req name='acode'>
@@ -102,17 +102,15 @@
 				be 100% complete).</p>
 			</li>
 			<li>
-				<p><b>is_deprecated</b> - boolean, indicates if the attribute is deprecated.
-				Or, to be more specific, <b>true</b> means that if *this* OKAPI version
-				were installed on all OC servers, then none of them would
-				ever include the attribute in the <b>attr_anodes</b> field of their
-				<b>geocache</b> method.</p>
+				<p><b>is_discontinued</b> - boolean, indicates if the attribute is discontinued.
+				This means that it is no longer in use at OC servers which run current OKAPI
+				versions, i.e. geocaches are no longer tagged with this attribute. However,
+				it may still be in use at servers which have not been updated yet to the
+				current OKAPI version.</p>
 				
-				<p>Since currently you cannot search with A-codes (we're implementing S-codes
-				for that purpose), this field is purely informative.</p>
-				
-				<p>Note that this flag can change in time. Deprecated attributes can
-				"come back to life" later.</p>
+				<p><b>Important:</b> This flag can change in time. Discontinued attributes can
+				"come back to life" later. You can never be 100% sure you will not
+				encounter them in OKAPI responses, so this field is purely informative.</p>
 			</li>
 		</ul>
 	</returns>

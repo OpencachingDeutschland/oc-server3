@@ -5,15 +5,14 @@
 		<p>This method returns <b>all</b> currently defined OKAPI geocache-attributes.
 		It is useful when you want to cache the data on the client-side.</p>
 		
-		<p>Keep in mind that the number of attributes will grow. If your application
-		uses multiple OKAPI servers, then you should use one of the frequently
-		updated servers for pre-caching attribute data (currently, Opencaching.PL
+		<p>Keep in mind that the number of attributes will grow. Hence, <b>if your application
+		uses multiple OKAPI servers, then it's best to use one of the frequently
+		updated servers for pre-caching attribute data</b> (currently, Opencaching.PL
 		is the most frequently updated installation). Also, you should never assume
-		that you have the complete list: A new attribute might got created just
-		as you were reading this!</p>
+		that you have the complete list cached: A new attribute may be created at any time!</p>
 		
 		<p>Once an attribute is published via this method, it won't disappear, nor
-		will its meaning change. It may get deprecated though.</p>
+		will its meaning change (names and descriptions can be slightly altered though).</p>
 	</desc>
 	<opt name='langpref' default='en'>
 		Works the same as in the <b>attribute</b> method.
@@ -21,22 +20,12 @@
 	<opt name='fields' default='name'>
 		Works the same as in the <b>attribute</b> method.
 	</opt>
-	<opt name='include_deprecated' default='true'>
-		Deprecated attributes are not used by the newest versions of OKAPI,
-		but they can still appear in some contexts, e.g. within data you have
-		downloaded prior to their deprecation. That's why, by default, all attributes
-		are returned, including the deprecated ones. You may skip the deprecated
-		attributes by setting this parameter to <b>false</b>.
-	</opt>
 	<opt name='only_locally_used' default='false'>
 		<p>By default, all known attributes are returned - including those which
 		were used a couple of years back, or those which are used by other OC nodes
 		(and may perhaps be used by the local OC node in the future). If you're
 		interested only in the attributes *currently used* within *this* Opencaching
 		installation, then you may set this parameter to <b>true</b>.</p>
-		
-		<p>Please note that by setting <b>true</b> you will also skip all the
-		deprecated attributes. (Deprecated attributes are never used locally.)</p>
 	</opt>
 	<common-format-params/>
 	<returns>

@@ -1,4 +1,4 @@
-{***************************************************************************
+﻿{***************************************************************************
 *  You can find the license in the docs directory
 *
 *  Unicode Reminder メモ
@@ -155,7 +155,7 @@
 		Benutzern gemeldet werden. Die Meldung kann direkt &uuml;ber den Melde-Hyperlink 
 		in jedem Cachelisting oder per E-Mail an <a href="mailto:contact@opencaching.de">contact@opencaching.de</a> 
 		erfolgen. Die entsprechenden Inhalte werden dann schnellstm&ouml;glich vom 
-		Verein Opencaching Deutschland kontrolliert und bei Bedarf unverz&uuml;glich 
+		Verein Opencaching Deutschland e. V. kontrolliert und bei Bedarf unverz&uuml;glich 
 		entfernt.
 	</p>
 	<p>

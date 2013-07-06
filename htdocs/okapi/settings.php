@@ -130,8 +130,20 @@ final class Settings
 		'DB_USERNAME' => null,
 		'DB_PASSWORD' => null,
 
-		/** URL of the OC site (with slash, and without the "/okapi" part). */
+		/**
+		 * URL of this site (with slash, and without "/okapi"). If this is a
+		 * development installation, it should point to the local URL (e.g.
+		 * "http://localhost/".
+		 */
 		'SITE_URL' => null,
+
+		/**
+		 * URL of the official OC site. For production sites, it should equal
+		 * SITE_URL (this is also the default). For development installations,
+		 * it should point to the official OC site from which you got your
+		 * database dump (e.g. "http://opencaching.pl/").
+		 */
+		'ORIGIN_URL' => null,
 
 		/** OKAPI needs this when inserting new data to cache_logs table. */
 		'OC_NODE_ID' => null,
@@ -177,7 +189,7 @@ final class Settings
 		self::verify(self::$SETTINGS);
 	}
 
-	private static function verify($dict)
+	private static function verify(&$dict)
 	{
 		if (!in_array($dict['OC_BRANCH'], array('oc.pl', 'oc.de')))
 			throw new Exception("Currently, OC_BRANCH has to be either 'oc.pl' or 'oc.de'. Hint: Whom did you get your code from?");
@@ -202,8 +214,12 @@ final class Settings
 		foreach ($notnull as $k)
 			if ($dict[$k] === null)
 				throw new Exception("$k cannot be null.");
-		if ($dict['SITE_URL'][strlen($dict['SITE_URL']) - 1] != '/')
-			throw new Exception("SITE_URL must end with a slash.");
+		if ($dict['ORIGIN_URL'] === null)
+			$dict['ORIGIN_URL'] = $dict['SITE_URL'];
+		$slash_keys = array('SITE_URL', 'ORIGIN_URL');
+		foreach ($slash_keys as $key)
+			if ($dict[$key][strlen($dict[$key]) - 1] != '/')
+				throw new Exception("$key must end with a slash.");
 	}
 
 	/**

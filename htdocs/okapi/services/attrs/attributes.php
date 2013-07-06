@@ -34,7 +34,7 @@ class WebService
 		# Read the parameters.
 
 		$acodes = $request->get_parameter('acodes');
-		if ($acodes === null) throw new ParamMissing('acodes');
+		if (!$acodes) throw new ParamMissing('acodes');
 		$acodes = explode("|", $acodes);
 
 		$langpref = $request->get_parameter('langpref');

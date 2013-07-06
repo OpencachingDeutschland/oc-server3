@@ -191,6 +191,8 @@
 
   $opt['page']['absolute_url'] = 'http://devel.opencaching.de/'; // may be overwritten by $opt['domain'][...]['uri']
 	$opt['page']['develsystem'] = false;
+	$opt['page']['origin_url'] = 'http://www.opencaching.de/';  // reference productive installation for this OC code fork
+
 
   /* maximum number of failed logins per hour before that IP address is blocked
    * (used to prevent brute-force-attacks)

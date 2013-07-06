@@ -21,7 +21,7 @@
 	</opt>
 	<opt name='fields' default='name'>
 		<p>Pipe-separated list of field names which you are interested with.
-		See the <b>returns</b> section for the list of available fields.</p>
+		See below for the list of available fields.</p>
 	</opt>
 	<opt name='forward_compatible' default='true'>
 		By default, OKAPI will return an empty placeholder if you ask for an
@@ -88,7 +88,7 @@
 			<li>
 				<p><b>is_locally_used</b> - boolean, indicates if the attribute is *currently*
 				used by *this* Opencaching server. Or, to be more specific, <b>true</b>
-				means that the attribute CAN *currently* be included in the <b>attr_anodes</b> field
+				means that the attribute CAN *currently* be included in the <b>attr_acodes</b> field
 				of the <b>geocache</b> method in the *current* OKAPI installation.</p>
 				
 				<p>Since currently you cannot search with A-codes (we're implementing S-codes

@@ -47,12 +47,11 @@
 			<li>You wait for some time between requesting the changelog again.</li>
 			<li><b>changelog</b>?since=238017 - etc.</li>
 		</ul>
-		
-
 	</desc>
 	<req name='since'>
 		<p>Current revision of your database. This should be the same as the value
 		of <b>revision</b> attribute, which you received with your previous update.</p>
+		
 		<p>Old revisions are deleted, the <b>since</b> argument MUST referer to a revision no older
 		than 10 days. You will have to download a fulldump if you have an older copy
 		(shame on you!).</p>

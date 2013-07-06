@@ -9,8 +9,19 @@
 	</desc>
 	<req name='fields'>
 		<p>Pipe-separated list of field names which you are interested with.
-		Selected fields will be included in the response.</p>
-		<p>Currently available fields:</p>
+		Selected fields will be included in the response. See below for the
+		list of available fields.</p>
+	</req>
+	<opt name='user_uuid'>
+		<p>ID of the user.</p>
+		<p>This parameter is optional only when you sign your
+		request with an Access Token (Level 3 Authentication). Otherwise,
+		it is <b>required</b>.</p>
+	</opt>
+	<common-format-params/>
+	<returns>
+		<p>A dictionary of fields you have selected. Currently available fields:</p>
+		
 		<ul>
 			<li><b>uuid</b> - ID of the user,</li>
 			<li><b>username</b> - username (login) of the user,</li>
@@ -28,16 +39,7 @@
 			<li><b>caches_hidden</b> - number of caches owned,</li>
 			<li><b>rcmds_given</b> - number of recommendations given.</li>
 		</ul>
-	</req>
-	<opt name='user_uuid'>
-		<p>ID of the user.</p>
-		<p>This parameter is optional only when you sign your
-		request with an Access Token (Level 3 Authentication). Otherwise,
-		it is <b>required</b>.</p>
-	</opt>
-	<common-format-params/>
-	<returns>
-		<p>A dictionary of fields you have selected.</p>
+		
 		<p>If given user does not exist, the method will respond with an HTTP 400 error.</p>
 	</returns>
 </xml>

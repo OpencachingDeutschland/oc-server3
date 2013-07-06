@@ -16,8 +16,73 @@
 	</opt>
 	<opt name='fields' default='code|name|location|type|status'>
 		<p>Pipe-separated list of field names which you are interested with.
-		Selected fields will be included in the response.</p>
-		<p>Currently available fields:</p>
+		Selected fields will be included in the response. See below for the
+		list of available fields.</p>
+	</opt>
+	<opt name='attribution_append' default='full'>
+		<p>By default, OKAPI appends the value of <b>attribution_note</b> field to all the
+		cache descriptions. If you would like to display the attribution note separately,
+		you may use this parameter. Use one of the following values:</p>
+		<ul>
+			<li>
+				<b>full</b> - OKAPI will append the attribution note to the descriptions of the
+				geocache. The language of the note will match the language of the description
+				(i.e. each value in <b>descriptions</b> may contain attribution notes in
+				a different language).
+			</li>
+			<li>
+				<p><b>none</b> - OKAPI will not append the attribution note to geocache
+				descriptions. You will use the <b>attribution_note</b> instead (which depends
+				on the <b>langpref</b> parameter).</p>
+				
+				<p><b>Important note:</b> You are still <b>required</b> to display the
+				<b>attribution_note</b> field in some other way.</p>
+			</li>
+			<li>
+				<b>static</b> - OKAPI will append a "static" attribution note to the descriptions
+				of the geocache. This might equal the "full" attribution note, but not necessarilly,
+				since the "full" note may contain a current date
+				(<a href='https://code.google.com/p/opencaching-api/issues/detail?id=178'>why?</a>),
+				and the "static" note will not. This is implemented primarily for internal use
+				(i.e. the replicate module). Usually you should not use it, because on some
+				installations the static note will not be sufficient to meet the data license
+				requirements. 
+			</li>
+		</ul>
+	</opt>
+	<opt name='lpc' default='10'>
+		Log-entries per cache - the number of logs returned in the <b>latest_logs</b> field.
+		This should be an integer or a special "all" value. Please note, that you must include
+		the <b>latest_logs</b> field in <b>fields</b> in order to see the log entries.
+	</opt>
+	<opt name='log_fields' default='uuid|date|user|type|comment'>
+		Pipe-separated list of log fields to include in the <b>latest_logs</b> field.
+		For valid field names, see <b>logs/entry</b> method.
+	</opt>
+	<opt name='my_location'>
+		<p>The reference point for cache distance and bearing calculation (typically - the user's location),
+		in the "lat|lon" format. This parameter is required when accessing <b>distance</b> and/or <b>bearing</b>
+		fields.</p>
+		<p>Use positive numbers for latitudes in the northern hemisphere and
+		longitudes in the eastern hemisphere (and negative for southern and
+		western hemispheres accordingly). These are full degrees with a dot
+		as a decimal point (ex. "54.3|22.3").</p>
+	</opt>
+	<opt name="user_uuid">
+		<p>User'd ID. Required to access fields like <b>is_found</b> using <b>Level 1</b> Authentication.</p>
+		<p>Please note that if you want to access private fields (like <b>my_notes</b>), then
+		this parameter won't help you. You have to use <b>Level 3</b> Authentication instead.</p>
+		<p>If you use <b>Level 3</b> Authentication, you shouldn't use this parameter. Or, to be exact:</p>
+		<ul>
+			<li><b>user_uuid</b> will be extracted from the Access Token you use. You don't have to provide it.</li>
+			<li>If you provide <b>user_uuid</b>, then it HAS TO match your Access Token. If it doesn't, OKAPI
+			will respond with HTTP 400 error.</li>
+		</ul>
+	</opt>
+	<common-format-params/>
+	<returns>
+		<p>A dictionary of fields you have selected. Currently available fields:</p>
+		
 		<ul>
 			<li><b>code</b> - unique Opencaching code of the geocache,</li>
 			<li><b>name</b> - name of the geocache,</li>
@@ -320,70 +385,7 @@
 			<li><b>internal_id</b> - internal ID of the cache (<b>do not</b> use
 				this, unless you know what you're doing; use the "code" as an identifier).</li>
 		</ul>
-	</opt>
-	<opt name='attribution_append' default='full'>
-		<p>By default, OKAPI appends the value of <b>attribution_note</b> field to all the
-		cache descriptions. If you would like to display the attribution note separately,
-		you may use this parameter. Use one of the following values:</p>
-		<ul>
-			<li>
-				<b>full</b> - OKAPI will append the attribution note to the descriptions of the
-				geocache. The language of the note will match the language of the description
-				(i.e. each value in <b>descriptions</b> may contain attribution notes in
-				a different language).
-			</li>
-			<li>
-				<p><b>none</b> - OKAPI will not append the attribution note to geocache
-				descriptions. You will use the <b>attribution_note</b> instead (which depends
-				on the <b>langpref</b> parameter).</p>
-				
-				<p><b>Important note:</b> You are still <b>required</b> to display the
-				<b>attribution_note</b> field in some other way.</p>
-			</li>
-			<li>
-				<b>static</b> - OKAPI will append a "static" attribution note to the descriptions
-				of the geocache. This might equal the "full" attribution note, but not necessarilly,
-				since the "full" note may contain a current date
-				(<a href='https://code.google.com/p/opencaching-api/issues/detail?id=178'>why?</a>),
-				and the "static" note will not. This is implemented primarily for internal use
-				(i.e. the replicate module). Usually you should not use it, because on some
-				installations the static note will not be sufficient to meet the data license
-				requirements. 
-			</li>
-		</ul>
-	</opt>
-	<opt name='lpc' default='10'>
-		Log-entries per cache - the number of logs returned in the <b>latest_logs</b> field.
-		This should be an integer or a special "all" value. Please note, that you must include
-		the <b>latest_logs</b> field in <b>fields</b> in order to see the log entries.
-	</opt>
-	<opt name='log_fields' default='uuid|date|user|type|comment'>
-		Pipe-separated list of log fields to include in the <b>latest_logs</b> field.
-		For valid field names, see <b>logs/entry</b> method.
-	</opt>
-	<opt name='my_location'>
-		<p>The reference point for cache distance and bearing calculation (typically - the user's location),
-		in the "lat|lon" format. This parameter is required when accessing <b>distance</b> and/or <b>bearing</b>
-		fields.</p>
-		<p>Use positive numbers for latitudes in the northern hemisphere and
-		longitudes in the eastern hemisphere (and negative for southern and
-		western hemispheres accordingly). These are full degrees with a dot
-		as a decimal point (ex. "54.3|22.3").</p>
-	</opt>
-	<opt name="user_uuid">
-		<p>User'd ID. Required to access fields like <b>is_found</b> using <b>Level 1</b> Authentication.</p>
-		<p>Please note that if you want to access private fields (like <b>my_notes</b>), then
-		this parameter won't help you. You have to use <b>Level 3</b> Authentication instead.</p>
-		<p>If you use <b>Level 3</b> Authentication, you shouldn't use this parameter. Or, to be exact:</p>
-		<ul>
-			<li><b>user_uuid</b> will be extracted from the Access Token you use. You don't have to provide it.</li>
-			<li>If you provide <b>user_uuid</b>, then it HAS TO match your Access Token. If it doesn't, OKAPI
-			will respond with HTTP 400 error.</li>
-		</ul>
-	</opt>
-	<common-format-params/>
-	<returns>
-		<p>A dictionary of fields you have selected.</p>
+
 		<p>For example, for <i>geocache?cache_code=OP3D96&amp;fields=type</i>
 		query, the result might look something link this:</p>
 		<pre>{"type": "Traditional"}</pre>

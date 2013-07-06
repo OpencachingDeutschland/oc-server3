@@ -4,6 +4,7 @@ namespace okapi\services\attrs\attribute_index;
 
 use Exception;
 use ErrorException;
+use ArrayObject;
 use okapi\Okapi;
 use okapi\Settings;
 use okapi\Cache;
@@ -56,13 +57,17 @@ class WebService
 
 		# Retrieve the attribute objects and return the results.
 
-		$params = array(
-			'acodes' => implode("|", $acodes),
-			'langpref' => $langpref,
-			'fields' => $fields,
-		);
-		$results = OkapiServiceRunner::call('services/attrs/attributes',
-			new OkapiInternalRequest($request->consumer, $request->token, $params));
+		if (count($acodes) > 0) {
+			$params = array(
+				'acodes' => implode("|", $acodes),
+				'langpref' => $langpref,
+				'fields' => $fields,
+			);
+			$results = OkapiServiceRunner::call('services/attrs/attributes',
+				new OkapiInternalRequest($request->consumer, $request->token, $params));
+		} else {
+			$results = new ArrayObject();
+		}
 		return Okapi::formatted_response($request, $results);
 	}
 }

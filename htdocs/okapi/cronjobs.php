@@ -690,9 +690,10 @@ class AdminStatsSender extends Cron5Job
 				okapi_consumers c
 			where a.consumer_key = c.`key`
 			group by a.consumer_key
+			having count(*) >= 5
 			order by count(*) desc;
 		");
-		print "== Current OAuth usage by Consumers ==\n\n";
+		print "== Current OAuth usage by Consumers with at least 5 users ==\n\n";
 		print "Consumer name                         Users\n";
 		print "----------------------------------- -------\n";
 		foreach ($oauth_users as $row)

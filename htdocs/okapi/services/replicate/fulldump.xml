@@ -30,11 +30,14 @@
 			the entire database every time they want, this could kill our servers.
 			If you want to enable such features for your users, you can do it, but you
 			must use <b>your own server</b> for data traffic (especially, fulldump requests).</li>
+			
 			<li>Fulldump is a copy of the entire database. We generate such copy once every couple of
 			days. This copy if intended for you to start only, later you must use the changelog to
 			keep it up-to-date.</li>
+			
 			<li>Every time our database is extended (new fields or new object types), and you want to
 			make use of these new fields, you are of course allowed to download a fulldump copy again.</li>
+			
 			<li>There is no XMLMAP version of this file.</li>
 		</ul>
 	</desc>

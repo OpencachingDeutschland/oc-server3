@@ -84,17 +84,12 @@ class AttrHelper
 	 */
 	public static function refresh_from_string($xml)
 	{
-		/* attribute.xml file defines attribute relationships between various OC
-		 * installations. Each installation uses its own internal IDs.
-		 * We will temporarily assume that "oc.pl" codebranch uses OCPL's schema
-		 * and "oc.de" codebranch - OCDE's. This is wrong for OCUS and OCORGUK
-		 * nodes, which use "oc.pl" codebranch, but have a schema of their own
-		 * WRTODO. */
+		/* The attribute-definitions.xml file defines relationships between
+		 * attributes originating from various OC installations. Each
+		 * installation uses internal IDs of its own. Which "attribute schema"
+		 * is being used in THIS installation? */
 
-		if (Settings::get('OC_BRANCH') == 'oc.pl')
-			$my_schema = "OCPL";
-		else
-			$my_schema = "OCDE";
+		$my_schema = Settings::get('ORIGIN_URL');
 
 		$doc = simplexml_load_string($xml);
 		$cachedvalue = array(

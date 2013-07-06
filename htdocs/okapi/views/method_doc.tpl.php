@@ -10,6 +10,7 @@ $m = $vars['method'];
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 		<title><?= $m['brief_description'] ?> - OKAPI Reference</title>
 		<link rel="stylesheet" href="<?= $vars['okapi_base_url'] ?>static/common.css?<?= $vars['okapi_rev'] ?>">
+		<link rel="icon" type="image/x-icon" href="<?= $vars['okapi_base_url'] ?>static/favicon.ico">
 		<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js'></script>
 		<script>
 			var okapi_base_url = "<?= $vars['okapi_base_url'] ?>";

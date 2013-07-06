@@ -59,7 +59,7 @@
 		<tr>
 			<td valign="top">{t}Name:{/t}</td>
 			<td colspan="2">
-				<input class="input200" name="title" type="text" value="{$title|escape}" size="43" />
+				<input class="input300" name="title" type="text" value="{$title|escape}" size="43" />
 				{if $errortitle==true}
 					<span class="errormsg">{t}Give the picture a name!{/t}</span>
 				{/if}
@@ -70,17 +70,17 @@
 				<td valign="top">{t}File:{/t}</td>
 				<td colspan="2">
 					<input type="hidden" name="MAX_FILE_SIZE" value="{$opt.logic.pictures.maxsize}">
-					<input class="input200" name="file" type="file" maxlength="{$opt.logic.pictures.maxsize}" />
+					<input class="input300" name="file" type="file" maxlength="{$opt.logic.pictures.maxsize}" />
 				</td>
 			</tr>
 			{if $errorfile==ERROR_UPLOAD_ERR_NO_FILE}
-				<tr><td>&nbsp;</td><td><span class="errormsg">{t}No picture file given.{/t}</span></td></tr>
+				<tr><td>&nbsp;</td><td colspan="2"><span class="errormsg">{t}No picture file given.{/t}</span></td></tr>
 			{elseif $errorfile==ERROR_UPLOAD_ERR_SIZE}
-				<tr><td>&nbsp;</td><td><span class="errormsg">{t}The file was too big. The maximum file size is 250 KB.{/t}</span></td></tr>
+				<tr><td>&nbsp;</td><td colspan="2"><span class="errormsg">{t}The file was too big. The maximum file size is 250 KB.{/t}</span></td></tr>
 			{elseif $errorfile==ERROR_UPLOAD_UNKNOWN}
-				<tr><td>&nbsp;</td><td><span class="errormsg">{t}The file was not uploaded correctly.{/t}</span></td></tr>
+				<tr><td>&nbsp;</td><td colspan="2"><span class="errormsg">{t}The file was not uploaded correctly.{/t}</span></td></tr>
 			{elseif $errorfile==ERROR_UPLOAD_ERR_TYPE}
-				<tr><td>&nbsp;</td><td><span class="errormsg">{t}Only the following picture formats are allowed: BMP, GIF, PNG and JPEG.{/t}</span></td></tr>
+				<tr><td>&nbsp;</td><td colspan="2"><span class="errormsg">{t}Only the following picture formats are allowed: BMP, GIF, PNG and JPEG.{/t}</span></td></tr>
 			{/if}
 		{/if}
 

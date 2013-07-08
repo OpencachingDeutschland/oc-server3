@@ -30,7 +30,11 @@
 		{elseif $logItem.type==9}
 			{t 1=$smarty.capture.username}%1 has archived the geocache{/t}
 		{elseif $logItem.type==10}
-			{t 1=$smarty.capture.username}%1 has maintained the geocache{/t}
+			{if $logItem.oc_team_comment}
+				{t 1=$smarty.capture.username}%1 has activated the geocache{/t}
+			{else}
+				{t 1=$smarty.capture.username}%1 has maintained the geocache{/t}
+			{/if}
 		{elseif $logItem.type==11}
 			{t 1=$smarty.capture.username}%1 has disabled the geocache{/t}
 		{elseif $logItem.type==13}

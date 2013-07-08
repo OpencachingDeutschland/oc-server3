@@ -6218,7 +6218,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1813', 'DE', 'Besitzer', '2013-02-09 19:31:45');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1814', 'DE', 'Melder', '2013-02-09 19:31:30');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1815', 'DE', 'Du muss bestaetigen, dass du sicher bist!', '2013-02-09 19:31:30');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1816', 'DE', 'Die Cachebeschreibung wurde gel\&ouml;scht, weil der Besitzer die Opencaching.de-Datenlizenz abgelehnt hat.', '2013-02-09 19:31:30');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1816', 'DE', 'Die Cachebeschreibung wurde gelöscht, weil der Besitzer die Opencaching.de-Datenlizenz abgelehnt hat.', '2013-02-09 19:31:30');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1817', 'DE', 'Der Benutzerstatus wurde erfolgreich geändert.', '2013-02-09 19:31:30');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1818', 'DE', 'Spoiler', '2013-02-11 11:40:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1819', 'DE', 'Nach dem Speichern musst du evtl. auf den Seiten-Neuladeknopf deines Browsers drücken, um das gewählte Bild in deinem Profil zu sehen.', '2013-02-15 00:48:06');

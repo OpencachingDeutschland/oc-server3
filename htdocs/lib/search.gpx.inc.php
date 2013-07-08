@@ -581,18 +581,21 @@
 
 	function changePlaceholder($str, $inverse = false)
 	{
-		$placeholder[0] = '{oc-placeholder-lt}'; $entity[0] = '&lt;';
-		$placeholder[1] = '{oc-placeholder-gt}'; $entity[1] = '&gt;';
-		$placeholder[2] = '{oc-placeholder-amp}'; $entity[2] = '&amp;';
-		for ($i=0;$i<count($placeholder);$i++)
+		static $translate = array(
+			'&lt;' => '{oc-placeholder-lt}',
+			'&gt;' => '{oc-placeholder-gt}',
+			'&amp;' => '{oc-placeholder-amp}'
+		);
+
+		foreach ($translate as $entity => $placeholder)
 		{
 			if (!$inverse)
 			{
-				$str = mb_ereg_replace($entity[$i], $placeholder[$i], $str);
+				$str = mb_ereg_replace($entity, $placeholder, $str);
 			}
 			else
 			{
-				$str = mb_ereg_replace($placeholder[$i], $entity[$i], $str);
+				$str = mb_ereg_replace($placeholder, $entity, $str);
 			}
 		}
 		return $str;

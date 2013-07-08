@@ -749,15 +749,18 @@
 					$sql_from = '`caches`';
 					$sql_innerjoin[] = '`cache_logs` ON `caches`.`cache_id`=`cache_logs`.`cache_id`';
 					$sql_where[] = '`cache_logs`.`user_id`=\'' . sql_escape($finder_id) . '\'';
-					
-					$ids = explode(',', $options['logtype']);
-					$idNumbers = '0';
-					foreach ($ids AS $id)
+
+					if ($options['logtype'] != '0')  // 0 = all types
 					{
-						if ($idNumbers != '') $idNumbers .= ',';
-						$idNumbers .= ($id+0);
+						$ids = explode(',', $options['logtype']);
+						$idNumbers = '0';
+						foreach ($ids AS $id)
+						{
+							if ($idNumbers != '') $idNumbers .= ',';
+							$idNumbers .= ($id+0);
+						}
+						$sql_where[] = '`cache_logs`.`type` IN (' . $idNumbers . ')';
 					}
-					$sql_where[] = '`cache_logs`.`type` IN (' . $idNumbers . ')';
 				}
 				elseif ($options['searchtype'] == 'bydistance')   // Ocprop
 				{
@@ -1410,11 +1413,16 @@ function outputSearchForm($options)
 
 	// logtypen
 	$logtype_options = '';
-	$rs = sql("SELECT `log_types`.`id`,
-	                  IFNULL(`sys_trans_text`.`text`, `log_types`.`name`) AS `name`
-	             FROM `log_types`
-	        LEFT JOIN `sys_trans_text` ON `sys_trans_text`.`trans_id`=`log_types`.`trans_id` AND `sys_trans_text`.`lang`='&1'
-	         ORDER BY `log_types`.`id` ASC", $locale);
+	$rs = sql("
+		SELECT `id`,
+		IFNULL(`sys_trans_text`.`text`, `log_types`.`name`) AS `name`
+		FROM (
+			SELECT `id`,`name`,`trans_id` FROM `log_types`
+			UNION
+			SELECT 0,'all',(SELECT id FROM sys_trans WHERE `text`='all')
+		) `log_types`
+		LEFT JOIN `sys_trans_text` ON `sys_trans_text`.`trans_id`=`log_types`.`trans_id` AND `sys_trans_text`.`lang`='&1'
+	  ORDER BY `log_types`.`id` ASC", $locale);
 
 	for ($i = 0; $i < mysql_num_rows($rs); $i++)
 	{

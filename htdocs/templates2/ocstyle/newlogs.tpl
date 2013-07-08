@@ -73,7 +73,11 @@
 				{elseif $newLog.type==9}
 					{t 1=$smarty.capture.cachename 2=$smarty.capture.username}%2 has archived %1{/t}
 				{elseif $newLog.type==10}
-					{t 1=$smarty.capture.cachename 2=$smarty.capture.username}%2 has maintainted %1{/t}
+					{if $newLog.oc_team_comment}
+						{t 1=$smarty.capture.cachename 2=$smarty.capture.username}%2 has activated %1{/t}
+					{else}
+						{t 1=$smarty.capture.cachename 2=$smarty.capture.username}%2 has maintainted %1{/t}
+					{/if}
 				{elseif $newLog.type==11}
 					{t 1=$smarty.capture.cachename 2=$smarty.capture.username}%2 has disabled %1{/t}
 				{elseif $newLog.type==13 || $newLog.type==14}

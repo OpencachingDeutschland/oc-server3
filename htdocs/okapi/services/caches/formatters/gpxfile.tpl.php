@@ -40,16 +40,14 @@ http://www.gsak.net/xmlv1/5 http://www.gsak.net/xmlv1/5/gsak.xsd
 					<groundspeak:owner id="<?= $vars['user_uuid_to_internal_id'][$c['owner']['uuid']] ?>"><?= Okapi::xmlescape($c['owner']['username']) ?></groundspeak:owner>
 					<groundspeak:type><?= $vars['cache_GPX_types'][$c['type']] ?></groundspeak:type>
 					<groundspeak:container><?= $vars['cache_GPX_sizes'][$c['size2']] ?></groundspeak:container>
-					<? if (in_array('gc:attrs', $vars['attrs'])) { /* Does user want us to include groundspeak:attributes? */ ?>
+					<? if ($vars['gc_attrs'] || $vars['gc_ocde_attrs']) { /* Does user want us to include groundspeak:attributes? */ ?>
 						<groundspeak:attributes>
 							<?
-								foreach ($c['attr_acodes'] as $acode) {
-									foreach ($vars['attr_index'][$acode]['gc_equivs'] as $gc) {
-										print "<groundspeak:attribute id=\"".$gc['id']."\" ";
-										print "inc=\"".$gc['inc']."\">";
-										print Okapi::xmlescape($gc['name']);
-										print "</groundspeak:attribute>";
-									}
+								foreach ($c['gc_attrs'] as $gc_id => $gc_attr) {
+									print "<groundspeak:attribute id=\"".$gc_id."\" ";
+									print "inc=\"".$gc_attr['inc']."\">";
+									print Okapi::xmlescape($gc_attr['name']);
+									print "</groundspeak:attribute>";
 								}
 							?>
 						</groundspeak:attributes>

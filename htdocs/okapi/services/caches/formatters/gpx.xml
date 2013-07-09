@@ -84,9 +84,17 @@
 				<i>groundspeak:attribute</i> elements (<b>ns_ground</b> has to be <b>true</b>),
 				compatible with Geocaching.com (see the list
 				<a href='http://www.geocaching.com/about/icons.aspx'>here</a>).</p>
-				
 				<p>Note that most Opencaching attributes don't have Geocaching.com counterparts.
 				Such attributes cannot be included as gc:attrs and will be ignored.</p>
+			</li>
+			<li>
+				<p><b>gc_ocde:attrs</b> - attributes will be listed as Groundspeak's
+				<i>groundspeak:attribute</i> elements (<b>ns_ground</b> has to be <b>true</b>).
+				Opencaching attributes which have no Geocaching.com counterparts will be
+				included according to an Opencaching.DE convention, using "makeshift IDs"
+				which may change in the future.</p>
+				<p>Note that this option is supported only by some OC sites. Other sites will
+				handle <b>gc_ocde:attrs</b> in the same way as <b>gc:attrs</b>.</p>
 			</li>
 		</ul>
 		

@@ -14,6 +14,8 @@ use okapi\InvalidParam;
 use okapi\services\caches\search\SearchAssistant;
 use okapi\OkapiInternalConsumer;
 use okapi\Db;
+use okapi\Settings;
+use okapi\services\attrs\AttrHelper;
 
 class WebService
 {
@@ -99,8 +101,11 @@ class WebService
 		{
 			if ($elem == 'none') {
 				/* pass */
-			} elseif (in_array($elem, array('desc:text', 'ox:tags', 'gc:attrs'))) {
-				$vars['attrs'][] = $elem;
+			} elseif (in_array($elem, array('desc:text', 'ox:tags', 'gc:attrs', 'gc_ocde:attrs'))) {
+				if ($elem == 'gc_ocde:attrs' && Settings::get('OC_BRANCH') != 'oc.de')
+					$vars['attrs'][] = 'gc:attrs';
+				else
+					$vars['attrs'][] = $elem;
 			} else {
 				throw new InvalidParam('attrs', "Invalid list entry: '$elem'");
 			}
@@ -168,6 +173,7 @@ class WebService
 		);
 		$vars['cache_GPX_types'] = self::$cache_GPX_types;
 		$vars['cache_GPX_sizes'] = self::$cache_GPX_sizes;
+
 		if (count($vars['attrs']) > 0)
 		{
 			/* The user asked for some kind of attribute output. We'll fetch all
@@ -183,6 +189,61 @@ class WebService
 					)
 				)
 			);
+
+			# prepare GS attribute data
+
+			$vars['gc_attrs'] = in_array('gc:attrs', $vars['attrs']);
+			$vars['gc_ocde_attrs'] = in_array('gc_ocde:attrs', $vars['attrs']);
+			if ($vars['gc_attrs'] || $vars['gc_ocde_attrs'])
+			{
+				if ($vars['gc_ocde_attrs'])
+				{
+					# As this is an OCDE compatibility feature, we use the same Pseudo-GS
+					# attribute names here as OCDE. Note that this code is specific to OCDE
+					# database; OCPL stores attribute names in a different way and may use
+					# different names for equivalent attributes.
+
+					$ocde_attrnames = Db::select_group_by('id',"
+						select id, name
+						from cache_attrib
+					");
+					$attr_dict = AttrHelper::get_attrdict();
+				}
+
+				foreach ($vars['caches'] as &$cache)
+				{
+					$cache['gc_attrs'] = array();
+					foreach ($cache['attr_acodes'] as $acode)
+					{
+						$has_gc_equivs = false;
+						foreach ($vars['attr_index'][$acode]['gc_equivs'] as $gc)
+						{
+							# The assignment via GC-ID as array key will prohibit duplicate
+							# GC attributes, which can result from
+							# - assigning the same GC ID to multiple A-Codes,
+							# - contradicting attributes in one OC listing, e.g. 24/4 + not 24/7. 
+
+							$cache['gc_attrs'][$gc['id']] = $gc;
+							$has_gc_equivs = true;
+						}
+						if (!$has_gc_equivs && $vars['gc_ocde_attrs'])
+						{
+							# Generate an OCDE pseudo-GS attribute;
+							# see http://code.google.com/p/opencaching-api/issues/detail?id=190 and
+							# http://code.google.com/p/opencaching-api/issues/detail?id=271.
+							#
+							# Groundspeak uses ID 1..65 (as of June, 2013), and OCDE makeshift
+							# IDs start at 106, so there is space for 40 new GS attributes.
+
+							$internal_id = $attr_dict[$acode]['internal_id'];
+							$cache['gc_attrs'][100 + $internal_id] = array(
+								'inc' => 1,
+								'name' => $ocde_attrnames[$internal_id][0]['name'],
+							);
+						}
+					}
+				}
+			}
 		}
 
 		/* OC sites always used internal user_ids in their generated GPX files.

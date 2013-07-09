@@ -480,13 +480,22 @@
 		                             FROM `caches_attributes`
 		                       INNER JOIN `cache_attrib` ON `cache_attrib`.`id`=`caches_attributes`.`attrib_id`
 		                            WHERE `caches_attributes`.`cache_id`=&1", $r['cacheid']);
+		$gc_ids = array();
 		while ($rAttrib = sql_fetch_array($rsAttributes))
 		{
-			$thisattribute = mb_ereg_replace('{attrib_id}', $rAttrib['gc_id'], $gpxAttributes);
-			$thisattribute = mb_ereg_replace('{attrib_inc}', $rAttrib['gc_inc'], $thisattribute);
-			$thisattribute = mb_ereg_replace('{attrib_name}', xmlentities($rAttrib['gc_name']), $thisattribute);
-			$attribentries .= $thisattribute . "\n";
+			// Multiple OC attributes can be mapped to one GC attribute, either with
+			// the same "inc"s or with different. Both may disturb applications, so we
+			// output each GC ID only once.
+			if (!isset($gc_ids[$rAttrib['gc_id']]))
+			{
+				$thisattribute = mb_ereg_replace('{attrib_id}', $rAttrib['gc_id'], $gpxAttributes);
+				$thisattribute = mb_ereg_replace('{attrib_inc}', $rAttrib['gc_inc'], $thisattribute);
+				$thisattribute = mb_ereg_replace('{attrib_name}', xmlentities($rAttrib['gc_name']), $thisattribute);
+				$attribentries .= $thisattribute . "\n";
+				$gc_ids[$rAttrib['gc_id']] = true;
+			}
 		}
+
 		mysql_free_result($rsAttributes);
 		$thisline = mb_ereg_replace('{attributes}', $attribentries, $thisline);
 

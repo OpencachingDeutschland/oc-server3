@@ -8,7 +8,10 @@
 		
 	****************************************************************************/
 
+	require_once('lib/npas.inc.php');
+
 	global $content, $bUseZip, $sqldebug, $locale;
+
 
 	$gpxHead = 
 '<?xml version="1.0" encoding="utf-8"?>
@@ -362,7 +365,8 @@
 		$license = getLicenseDisclaimer(
 			$r['userid'], $r['username'], $r['data_license'], $r['cacheid'], $locale, true, true);
 		if ($license != "")
-			$desc .= "<p><em>$license</em></p>";
+			$desc .= "<p><em>$license</em></p>\n";
+		$desc .= get_desc_npas($r['cacheid']);
 		$thisline = mb_ereg_replace('{desc}', xmlentities(decodeEntities($desc)), $thisline);
 
 		$thisline = mb_ereg_replace('{images}', xmlentities(getPictures($r['cacheid'])), $thisline);

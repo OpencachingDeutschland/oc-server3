@@ -179,4 +179,8 @@
 	$opt['template']['locales']['PL']['show'] = false;
 	$opt['template']['locales']['PT']['show'] = false;
 	$opt['template']['locales']['RU']['show'] = false;
+
+	// info on nature protection areas
+	$opt['cms']['npa'] = 'http://wiki.opencaching.de/index.php/Schutzgebiete';
+
 ?>

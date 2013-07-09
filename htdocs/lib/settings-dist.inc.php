@@ -216,6 +216,10 @@
 	// you can use -1 to use the master (not recommended, because replicated to slaves)
 	$opt['db']['slave']['primary'] = -1;
 
+	// info on nature protection areas
+	$opt['cms']['npa'] = 'http://wiki.opencaching.de/index.php/Schutzgebiete';
+
+
 /* post_config() is invoked directly before the first HTML line of the main.tpl.php is sent to the client.
  */
 function post_config()

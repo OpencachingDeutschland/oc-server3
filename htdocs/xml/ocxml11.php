@@ -16,10 +16,11 @@
 	  $ocxmlversion = 11;
 	
 	$opt['rootpath'] = '../';
-  require_once($opt['rootpath'] . 'lib/common.inc.php');
-  require_once($opt['rootpath'] . 'lib/charset.inc.php');
-  require_once($opt['rootpath'] . 'lib2/const.inc.php');
-  require_once($opt['rootpath'] . 'lib/data-license.inc.php');
+	require_once($opt['rootpath'] . 'lib/common.inc.php');
+	require_once($opt['rootpath'] . 'lib/charset.inc.php');
+	require_once($opt['rootpath'] . 'lib2/const.inc.php');
+	require_once($opt['rootpath'] . 'lib/data-license.inc.php');
+	require_once($opt['rootpath'] . 'lib/npas.inc.php');
 
   if ($error == true)
 	{
@@ -561,6 +562,8 @@ function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $z
 			fwrite($f, $t2 . '<license>' . xmlcdata($disclaimer) . '</license>' . "\n");
 		else if ($disclaimer != "")
 			$desc .= "<p><em>" . $disclaimer . "</em></p>";
+
+		$desc .= get_desc_npas($r['cache_id']);
 			
 		fwrite($f, $t2 . '<desc html="' . (($r['desc_html'] == 1) ? '1' : '0') . '">' . xmlcdata(($bAllowView ? $desc : '')) . '</desc>' . "\n");
 		

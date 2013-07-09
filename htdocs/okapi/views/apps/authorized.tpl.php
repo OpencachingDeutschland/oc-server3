@@ -6,7 +6,7 @@
 	</head>
 	<style>
 		.okapi { font-size: 15px; max-width: 600px; font-family: "lucida grande", "Segoe UI", tahoma, arial, sans-serif; color: #555; margin: 20px 60px 0 40px; }
-		.okapi a.opencaching { font-size: 20px; font-weight: bold; padding-top: 13px; color: #333; text-decoration: none; display: block; }
+		.okapi a.opencaching { font-size: 20px; font-weight: bold; padding-top: 13px; color: #333; text-decoration: none; outline:none; display: block; }
 		.okapi * { padding: 0; margin: 0; border: 0; }
 		.okapi input, select { font-size: 15px; font-family: "lucida grande", "Segoe UI", tahoma, arial, sans-serif; color: #444; }
 		.okapi a, .okapi a:hover, .okapi a:visited { cursor: pointer; color: #3e48a8; text-decoration: underline; }
@@ -22,8 +22,8 @@
 
 		<div class='okapi'>
 			<a href='<?= $vars['okapi_base_url'] ?>'><img src='<?= $vars['okapi_base_url'] ?>static/logo-xsmall.gif' alt='OKAPI' style='float: right; margin-left: 10px;'></a>
-			<a href='/'><img src="/images/oc_logo.png" alt='Opencaching' style='float: left; margin-right: 10px'></a>
-			<a class='opencaching'><?= $vars['site_name'] ?></a>
+			<a href='<?= $vars['site_url'] ?>'><img src="<?= $vars['site_logo'] ?>" alt='Opencaching' style='float: left; margin-right: 10px'></a>
+			<a href='<?= $vars['site_url'] ?>' class='opencaching'><?= $vars['site_name'] ?></a>
 
 			<h1 style='clear: both'><?= _("Access successfully granted") ?></h1>
 			<?= sprintf(_("

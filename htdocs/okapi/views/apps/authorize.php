@@ -58,6 +58,8 @@ class View
 				'token' => $token,
 				'token_expired' => true,
 				'site_name' => Okapi::get_normalized_site_name(),
+				'site_url' => Settings::get('SITE_URL'),
+				'site_logo' => Settings::get('SITE_LOGO'),
 				'locales' => $locales,
 			);
 			$response = new OkapiHttpResponse();
@@ -150,6 +152,8 @@ class View
 					'okapi_base_url' => Settings::get('SITE_URL')."okapi/",
 					'token' => $token,
 					'site_name' => Okapi::get_normalized_site_name(),
+					'site_url' => Settings::get('SITE_URL'),
+					'site_logo' => Settings::get('SITE_LOGO'),
 					'locales' => $locales,
 				);
 				$response = new OkapiHttpResponse();

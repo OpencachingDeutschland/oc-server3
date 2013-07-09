@@ -40,6 +40,7 @@ function get_okapi_settings()
 		'ORIGIN_URL'       => $opt['page']['origin_url'],
 		'VAR_DIR'          => $GLOBALS['rootpath'].'var/okapi',
 		'IMAGES_DIR'       => rtrim($opt['logic']['pictures']['dir'], '/'),
+		'SITE_LOGO'        => $opt['page']['absolute_url'] . 'resource2/' . $opt['template']['default']['style'] . '/images/oclogo/oc_logo_alpha3.png',
 		'OC_NODE_ID'       => $opt['logic']['node']['id'],
 		'OC_COOKIE_NAME'   => $opt['session']['cookiename'].'data',
 	);

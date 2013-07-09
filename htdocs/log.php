@@ -97,7 +97,7 @@
 		if ($descMode == 3)
 		{
 			$tpl->add_header_javascript('resource2/tinymce/tiny_mce_gzip.js');
-			$tpl->add_header_javascript('resource2/tinymce/config/user.js.php?lang='.strtolower($opt['template']['locale']));
+			$tpl->add_header_javascript('resource2/tinymce/config/log.js.php?lang='.strtolower($opt['template']['locale']));
 		}
 		
 		// check and prepare log text
@@ -203,10 +203,6 @@
 				
 				// finished, redirect to listing
 				$tpl->redirect('viewcache.php?cacheid=' . $cache->getCacheId());
-			}
-			else
-			{
-				$validate['duplicateLog'] = false;
 			}
 		}
 		

@@ -80,12 +80,6 @@ function _chkFound () {
 <input id="descMode" type="hidden" name="descMode" value="1" />
 <table class="table">
 	<tr><td class="spacer" colspan="2"></td></tr>
-	{if $validate.duplicateLog==false}
-	<tr>
-		<td colspan="2"><span class="errormsg">{t}This log already exists - you tried to submit it twice!{/t}</span></td>
-	</tr>
-	<tr><td class="spacer" colspan="2"></td></tr>
-	{/if}
 	<tr><td colspan="2"></td></tr>
 	<tr>
 		<td width="180px">{t}Type of log-entry:{/t}</td>

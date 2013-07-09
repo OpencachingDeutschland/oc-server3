@@ -44,7 +44,9 @@ class View
 			'okapi_base_url' => Settings::get('SITE_URL')."okapi/",
 			'token' => $token,
 			'verifier' => $verifier,
-			'site_name' => Okapi::get_normalized_site_name()
+			'site_name' => Okapi::get_normalized_site_name(),
+			'site_url' => Settings::get('SITE_URL'),
+			'site_logo' => Settings::get('SITE_LOGO'),
 		);
 		$response = new OkapiHttpResponse();
 		$response->content_type = "text/html; charset=utf-8";

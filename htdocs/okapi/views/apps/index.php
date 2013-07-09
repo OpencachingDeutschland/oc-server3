@@ -46,6 +46,7 @@ class View
 		$vars['okapi_base_url'] = Settings::get('SITE_URL')."okapi/";
 		$vars['site_url'] = Settings::get('SITE_URL');
 		$vars['site_name'] = Okapi::get_normalized_site_name();
+		$vars['site_logo'] = Settings::get('SITE_LOGO');
 		$vars['apps'] = array();
 		while ($row = mysql_fetch_assoc($rs))
 			$vars['apps'][] = $row;

@@ -34,7 +34,8 @@ class WebService
 		'my_notes', 'trackables_count', 'trackables', 'alt_wpts', 'last_found',
 		'last_modified', 'date_created', 'date_hidden', 'internal_id', 'is_watched',
 		'is_ignored', 'willattends', 'country', 'state', 'preview_image',
-		'trip_time', 'trip_distance', 'attribution_note','gc_code', 'hint2', 'hints2');
+		'trip_time', 'trip_distance', 'attribution_note','gc_code', 'hint2', 'hints2',
+		'protection_areas');
 
 	public static function call(OkapiRequest $request)
 	{
@@ -338,6 +339,7 @@ class WebService
 					case 'date_hidden': $entry['date_hidden'] = date('c', strtotime($row['date_hidden'])); break;
 					case 'internal_id': $entry['internal_id'] = $row['cache_id']; break;
 					case 'attribution_note': /* handled separately */ break;
+					case 'protection_areas': /* handled separately */ break;
 					default: throw new Exception("Missing field case: ".$field);
 				}
 			}
@@ -1071,6 +1073,85 @@ class WebService
 						$result_ref['internal_id'], $langpref[0], $langpref,
 						$results[$cache_code]['owner'], 'full'
 					);
+		}
+
+		# Protection areas
+
+		if (in_array('protection_areas', $fields))
+		{
+			$cache_ids_escaped_and_imploded = "'".implode("','", array_map('mysql_real_escape_string', array_keys($cacheid2wptcode)))."'";
+
+			if (Settings::get('OC_BRANCH') == 'oc.de')
+			{
+				$rs = Db::query("
+					select
+						c.wp_oc as cache_code,
+						npa_types.name as type,
+						npa_areas.name as name
+					from
+						caches c
+						inner join cache_npa_areas on cache_npa_areas.cache_id=c.cache_id
+						inner join npa_areas on cache_npa_areas.npa_id = npa_areas.id
+						inner join npa_types on npa_areas.type_id = npa_types.id
+					where
+						c.cache_id in (".$cache_ids_escaped_and_imploded.")
+					group by npa_areas.type_id, npa_areas.name
+					order by npa_types.ordinal
+				");
+			}
+			else if (Settings::get('ORIGIN_URL') == 'http://opencaching.pl/' ||
+			         Settings::get('ORIGIN_URL') == 'http://www.opencaching.nl/')
+			{
+				# Current OCPL table definitions use collation 'latin1' for parkipl
+				# and 'utf8' for np_areas. Union needs identical collations.
+				# To be sure, we convert both to utf8.
+				$rs = Db::query("
+					select
+						c.wp_oc as cache_code,
+						'"._('National Park / Landscape')."' as type,
+						CONVERT(parkipl.name USING utf8) as name
+					from
+						caches c
+						inner join cache_npa_areas on cache_npa_areas.cache_id=c.cache_id
+						inner join parkipl on cache_npa_areas.parki_id=parkipl.id
+					where
+						c.cache_id in (".$cache_ids_escaped_and_imploded.")
+						and cache_npa_areas.parki_id != 0
+					union
+					select
+						c.wp_oc as cache_code,
+						'Natura 2000' as type,
+						CONVERT(npa_areas.sitename USING utf8) as name
+					from
+						caches c
+						inner join cache_npa_areas on cache_npa_areas.cache_id=c.cache_id
+						inner join npa_areas on cache_npa_areas.npa_id=npa_areas.id
+					where
+						c.cache_id in (".$cache_ids_escaped_and_imploded.")
+						and cache_npa_areas.npa_id != 0
+					");
+			}
+			else
+			{
+				# OC.US and .UK do not have a 'parkipl' table.
+				# OC.US has a 'us_parks' table instead.
+				# Natura 2000 is Europe-only.
+				$rs = null;
+			}
+
+			foreach ($results as &$result_ref)
+				$result_ref['protection_areas'] = array();
+			if ($rs)
+			{
+				while ($row = mysql_fetch_assoc($rs))
+				{
+					$results[$row['cache_code']]['protection_areas'][] = array(
+						'type' => $row['type'],
+						'name' => $row['name'],
+					);
+				}
+				mysql_free_result($rs);
+			}
 		}
 
 		# Check which cache codes were not found and mark them with null.

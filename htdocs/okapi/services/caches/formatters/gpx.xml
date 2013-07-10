@@ -102,6 +102,21 @@
 		parameter to <b>none</b>. Using an empty string won't work this way - it will
 		trigger the default (<b>desc:text</b>) to be selected, for backward-compatibility.</p>
 	</opt>
+	<opt name='protection_areas' default='desc:auto'>
+		<p>This argument controls wether protection area information is included and how
+		it is included.</p>
+		<ul>
+			<li><b>desc:text</b> - if the cache is (probably) located within one or more
+			protection areas, e.g. a nature reserve, a list of the protection areas will
+			be included in the cache description.</li>
+			<li><b>desc:auto</b> - protection area information may be included in the
+			cache description, depending on the installation.</li>
+			<li><b>none</b> - no protection area information will be included in the
+			GPX data.</li>
+		</ul>
+		<p>Note that information on protection areas may be incomplete or outdated
+		or completely missing on some installations.</p>
+	</opt>
 	<opt name='trackables' default='none'>
 		<p>This argument controls wether information on trackables is included and how it is included.
 		One of the following values:</p>

@@ -47,10 +47,10 @@ okapi_syncbase
 
 meta_last_modified
 	Is updated if any data changes which is output by OKAPI's geocache method but
-	not part of the cache listing itself. This currently applies to geokrets in
-	the cache (gk_item_waypoint table) and to log and recommendation statistics
-	(stat_caches table), and to the Cronjob-generated information in cache_location
-	and cache_npa_areas tables. Things like caches.wp_gc_maintained may be added.
+	does not update any other fields of the caches table. This currently applies
+	to geokrets in the cache (gk_item_waypoint table), to log and recommendation
+	statistics (stat_caches table), and to the Cronjob-generated cache_location
+	information. Things like caches.wp_gc_maintained may be added.
 
 	Updating this field triggers an update of okapi_syncbase. We don't update
 	okapi_syncbase directly, as it may be missing because OKAPI is not installed.

@@ -7,7 +7,7 @@
 
 	/*
 	 * run okapi database update
-	 * needs 'short_open_tag = Off' in php.ini
+	 * needs 'short_open_tag = On' in php.ini
 	 *
 	 * You should normally NOT call this script directly, but via dbupdate.php
 	 * (or something similar on a production system). This ensures that

@@ -111,6 +111,16 @@ class WebService
 			}
 		}
 
+		$protection_areas = $request->get_parameter('protection_areas');
+		if (!$protection_areas || $protection_areas == 'desc:auto')
+		{
+			if (Settings::get('OC_BRANCH') == 'oc.de') $protection_areas = 'desc:text';
+			else $protection_areas = 'none';
+		}
+		if (!in_array($protection_areas, array('none', 'desc:text')))
+			throw new InvalidParam('protection_areas',"'$protection_areas'");
+		$vars['protection_areas'] = $protection_areas;
+
 		$tmp = $request->get_parameter('trackables');
 		if (!$tmp) $tmp = 'none';
 		if (!in_array($tmp, array('none', 'desc:list', 'desc:count')))
@@ -131,7 +141,8 @@ class WebService
 		# Which fields of the services/caches/geocaches method do we need?
 
 		$fields = 'code|name|location|date_created|url|type|status|size|size2|oxsize'.
-			'|difficulty|terrain|description|hint2|rating|owner|url|internal_id';
+			'|difficulty|terrain|description|hint2|rating|owner|url|internal_id'.
+			'|protection_areas';
 		if ($vars['images'] != 'none')
 			$fields .= "|images";
 		if (count($vars['attrs']) > 0)

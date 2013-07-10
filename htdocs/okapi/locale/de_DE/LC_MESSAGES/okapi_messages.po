@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OKAPI\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-05-03 00:54+0100\n"
-"PO-Revision-Date: 2013-05-03 00:58+0100\n"
+"POT-Creation-Date: 2013-07-10 12:30+0100\n"
+"PO-Revision-Date: 2013-07-10 12:31+0100\n"
 "Last-Translator: following <following@online.de>\n"
 "Language-Team: following <following@online.de>\n"
 "Language: German\n"
@@ -19,11 +19,15 @@ msgstr ""
 "X-Poedit-SearchPath-1: D:\\PRIV\\Projekty\\EclipseWorkspace\\opencaching-api"
 "\\okapi\n"
 
-#: c:\source\oc\server-3.0\htdocs\okapi/services/caches/geocaches.php:911
+#: c:\source\oc\server-3.0\htdocs\okapi/services/caches/geocaches.php:956
 msgid "Stage"
 msgstr "Station"
 
-#: c:\source\oc\server-3.0\htdocs\okapi/services/caches/geocaches.php:1139
+#: c:\source\oc\server-3.0\htdocs\okapi/services/caches/geocaches.php:1108
+msgid "National Park / Landscape"
+msgstr "Nationalpark / Landschaft"
+
+#: c:\source\oc\server-3.0\htdocs\okapi/services/caches/geocaches.php:1260
 #, php-format
 msgid ""
 "This <a href='%s'>geocache</a> description comes from the <a href='%s'>%s</"
@@ -31,7 +35,7 @@ msgid ""
 msgstr ""
 "Diese <a href='%s'>Cache</a>-Beschreibung stammt von <a href='%s'>%s</a>."
 
-#: c:\source\oc\server-3.0\htdocs\okapi/services/caches/geocaches.php:1151
+#: c:\source\oc\server-3.0\htdocs\okapi/services/caches/geocaches.php:1272
 #, php-format
 msgid ""
 "&copy; <a href='%s'>%s</a>, <a href='%s'>%s</a>, <a href='http://"
@@ -42,7 +46,7 @@ msgstr ""
 "creativecommons.org/licenses/by-nc-nd/3.0/de/'>CC-BY-NC-ND</a>, Stand: %s; "
 "alle Logeinträge &copy; jeweiliger Autor"
 
-#: c:\source\oc\server-3.0\htdocs\okapi/services/caches/geocaches.php:1162
+#: c:\source\oc\server-3.0\htdocs\okapi/services/caches/geocaches.php:1283
 #, php-format
 msgid ""
 "&copy; <a href='%s'>%s</a>, <a href='%s'>%s</a>, <a href='http://"
@@ -54,55 +58,60 @@ msgstr ""
 "Logeinträge &copy; jeweiliger Autor"
 
 #: c:\source\oc\server-3.0\htdocs\okapi/services/caches/formatters/gpxfile.tpl.php:31
-#: c:\source\oc\server-3.0\htdocs\okapi/services/caches/formatters/gpxfile.tpl.php:48
+#: c:\source\oc\server-3.0\htdocs\okapi/services/caches/formatters/gpxfile.tpl.php:60
 msgid "hidden by"
 msgstr "versteckt von"
 
-#: c:\source\oc\server-3.0\htdocs\okapi/services/caches/formatters/gpxfile.tpl.php:50
+#: c:\source\oc\server-3.0\htdocs\okapi/services/caches/formatters/gpxfile.tpl.php:62
 #, php-format
 msgid "%d recommendation"
 msgid_plural "%d recommendations"
 msgstr[0] "%d Empfehlung"
 msgstr[1] "%d Empfehlungen"
 
-#: c:\source\oc\server-3.0\htdocs\okapi/services/caches/formatters/gpxfile.tpl.php:51
+#: c:\source\oc\server-3.0\htdocs\okapi/services/caches/formatters/gpxfile.tpl.php:63
 #, php-format
 msgid "found %d time"
 msgid_plural "found %d times"
 msgstr[0] "%d mal gefunden"
 msgstr[1] "%d mal gefunden"
 
-#: c:\source\oc\server-3.0\htdocs\okapi/services/caches/formatters/gpxfile.tpl.php:54
+#: c:\source\oc\server-3.0\htdocs\okapi/services/caches/formatters/gpxfile.tpl.php:66
 #, php-format
 msgid "%d trackable"
 msgid_plural "%d trackables"
 msgstr[0] "%d Geokret"
 msgstr[1] "%d Geokrets"
 
-#: c:\source\oc\server-3.0\htdocs\okapi/services/caches/formatters/gpxfile.tpl.php:58
+#: c:\source\oc\server-3.0\htdocs\okapi/services/caches/formatters/gpxfile.tpl.php:70
 msgid "Personal notes"
 msgstr "Persönliche Notizen"
 
-#: c:\source\oc\server-3.0\htdocs\okapi/services/caches/formatters/gpxfile.tpl.php:62
+#: c:\source\oc\server-3.0\htdocs\okapi/services/caches/formatters/gpxfile.tpl.php:74
 msgid "Attributes"
 msgstr "Attribute"
 
-#: c:\source\oc\server-3.0\htdocs\okapi/services/caches/formatters/gpxfile.tpl.php:66
+#: c:\source\oc\server-3.0\htdocs\okapi/services/caches/formatters/gpxfile.tpl.php:78
 msgid "Trackables"
 msgstr "Geokrets"
 
-#: c:\source\oc\server-3.0\htdocs\okapi/services/caches/formatters/gpxfile.tpl.php:76
-#: c:\source\oc\server-3.0\htdocs\okapi/services/caches/formatters/gpxfile.tpl.php:92
+#: c:\source\oc\server-3.0\htdocs\okapi/services/caches/formatters/gpxfile.tpl.php:88
+#: c:\source\oc\server-3.0\htdocs\okapi/services/caches/formatters/gpxfile.tpl.php:104
 msgid "Images"
 msgstr "Bilder"
 
-#: c:\source\oc\server-3.0\htdocs\okapi/services/caches/formatters/gpxfile.tpl.php:99
+#: c:\source\oc\server-3.0\htdocs\okapi/services/caches/formatters/gpxfile.tpl.php:111
 msgid "Spoilers"
 msgstr "Spoiler"
 
-#: c:\source\oc\server-3.0\htdocs\okapi/services/caches/formatters/gpxfile.tpl.php:108
+#: c:\source\oc\server-3.0\htdocs\okapi/services/caches/formatters/gpxfile.tpl.php:120
 msgid "Image descriptions"
 msgstr "Bildbeschreibungen"
+
+#: c:\source\oc\server-3.0\htdocs\okapi/services/caches/formatters/gpxfile.tpl.php:128
+msgid "The cache probably is located in the following protection areas:"
+msgstr ""
+"Der Geocache befindet sich wahrscheinlich in den folgenden Schutzgebieten:"
 
 #: c:\source\oc\server-3.0\htdocs\okapi/services/logs/submit.php:70
 msgid ""

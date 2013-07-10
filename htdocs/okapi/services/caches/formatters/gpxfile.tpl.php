@@ -124,6 +124,14 @@ http://www.gsak.net/xmlv1/5 http://www.gsak.net/xmlv1/5/gsak.xsd
 								<? } ?>
 							&lt;/ul&gt;
 						<? } ?>
+						<? if ($vars['protection_areas'] == 'desc:text' && count($c['protection_areas'])) { ?>
+							&lt;p&gt;<?= _("The cache probably is located in the following protection areas:") ?>&lt;/p&gt;
+							&lt;ul&gt;
+							<? foreach($c['protection_areas'] as $protection_area) { ?>
+								&lt;li&gt;<?= Okapi::xmlescape($protection_area['type'])." - ".Okapi::xmlescape($protection_area['name']) ?>&lt;/li&gt;
+							<? } ?>
+							&lt;/ul;&gt;
+						<? } ?>
 					</groundspeak:long_description>
 					<groundspeak:encoded_hints><?= Okapi::xmlescape($c['hint2']) ?></groundspeak:encoded_hints>
 					<? if ($vars['latest_logs']) { /* Does user want us to include latest log entries? */ ?>

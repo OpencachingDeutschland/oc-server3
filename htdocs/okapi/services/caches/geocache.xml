@@ -363,6 +363,21 @@
 				parameter in the future).</p>
 			</li>
 			<li>
+				<p><b>protection_areas</b> - list of dictionaries, each representing a
+				protection area in which the cache probably is located; each dictionary
+				has the following structure:</p>
+				<ul>
+					<li><b>type</b> - the type of the protection area, e.g.
+					"National Nature Reserve",</li>
+					<li><b>name</b> - the name of the protection area, e.g.
+					"East Dartmoor Woods and Heaths".</li>
+				</ul>
+				<p>The types and names currently are in a local language of the OC site but
+				may be translated depending on the <b>langpref</b> parameter in the future.</p>
+				<p>Note that this information is not authoritative. It may be outdated
+				or incomplete, and it is completely missing on some OC installations.</p>
+			</li>
+			<li>
 				<p><b>last_found</b> - date and time (ISO 8601) when the
 				geocache was last found <b>or null</b> when it hasn't been yet found.</p>
 				<p>Note, that some Opencaching servers don't store the exact times along

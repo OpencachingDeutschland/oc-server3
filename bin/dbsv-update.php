@@ -31,7 +31,7 @@
 		// maintain.php will not fit either.
 	}
 
-	if (!sql_function_exists('distance') || !sql_procedure_exists('sp_touch_cache'))
+	if (!sql_procedure_exists('sp_touch_cache'))
 	{
 		// We need a consistent starting point including triggers & functions, and it's
 		// safer not to decide HERE which trigger version to install.
@@ -317,6 +317,11 @@
 		// inserted there later). So we need to additionally install it on installations
 		// which already updated to v113:
 
+		update_triggers();
+	}
+
+	function dbv_115()  // remove obsolete functions
+	{
 		update_triggers();
 	}
 

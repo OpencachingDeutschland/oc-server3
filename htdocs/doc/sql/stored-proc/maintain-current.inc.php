@@ -876,6 +876,9 @@
 						   OLD.`latitude`!=NEW.`latitude` THEN
 							SET NEW.`need_npa_recalc`=1;
 						END IF;
+						IF OLD.`need_npa_recalc` AND NOT NEW.`need_npa_recalc` THEN
+							SET NEW.`meta_last_modified` = NOW();
+						END IF;
 
 						IF OLD.`status`=5 AND NEW.`status`<>5 THEN
 							SET NEW.`date_created`=NOW();
@@ -1048,6 +1051,7 @@
 				FOR EACH ROW 
 					BEGIN 
 						SET NEW.`last_modified`=NOW();
+						UPDATE `caches` SET `meta_last_modified`=NOW() WHERE `caches`.`cache_id`=NEW.`cache_id`;
 					END;");
 
 	sql_dropTrigger('cacheLocationBeforeUpdate');
@@ -1055,6 +1059,14 @@
 				FOR EACH ROW 
 					BEGIN 
 						SET NEW.`last_modified`=NOW();
+						UPDATE `caches` SET `meta_last_modified`=NOW() WHERE `caches`.`cache_id`=NEW.`cache_id`;
+					END;");
+
+	sql_dropTrigger('cacheLocationAfterDelete');
+	sql("CREATE TRIGGER `cacheLocationAfterDelete` AFTER DELETE ON `cache_location`
+				FOR EACH ROW
+					BEGIN
+						UPDATE `caches` SET `meta_last_modified`=NOW() WHERE `caches`.`cache_id`=OLD.`cache_id`;
 					END;");
 
 	sql_dropTrigger('cacheLogsBeforeInsert');

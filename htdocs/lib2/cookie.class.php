@@ -116,6 +116,9 @@ class cookie
 		}
 		else
 		{
+			// Store cookie value in internal array. OcSmarty will call this->header()
+			// to actually set the cookie.
+
 			if (!isset($this->values[$name]) || $this->values[$name] != $value)
 			{
 				if ($value == $default)

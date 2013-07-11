@@ -1,147 +1,51 @@
 <?php
 	/***************************************************************************
-															./lib/search.html.inc.php
-																-------------------
-			begin                : July 25 2004
-
 		For license information see doc/license.txt
- 	****************************************************************************/
-
-	/****************************************************************************
 
 		Unicode Reminder メモ
 
 		(X)HTML search output
-
-		TODO: (1) save the options in the database
-		      (2) sort the results and the make the final query
-
+		Used by Ocprop
 	****************************************************************************/
-
-	global $sqldebug;
 
 	require_once($stylepath . '/lib/icons.inc.php');
 	require_once('lib/cache_icon.inc.php');
 
-	//prepare the output
-	$tplname = 'search.result.caches';
-	$caches_per_page = 20;
+	$search_output_file_download = false;
 
-	//build lines
+	$sAddFields .= ', `caches`.`name`, `caches`.`difficulty`, `caches`.`terrain`,
+	                  `caches`.`desc_languages`, `caches`.`date_created`,
+	                  `user`.`username`,
+	                  `cache_type`.`icon_large`,
+	                  `cache_type`.`name` `cacheTypeName`,
+	                  IFNULL(`stat_caches`.`found`, 0) `founds`,
+	                  IFNULL(`stat_caches`.`toprating`, 0) `topratings`,
+	                  IF(ISNULL(`tbloconly`.`cache_id`), 0, 1) AS `oconly`';
+
+	$sAddJoin .= 'INNER JOIN `user` ON `caches`.`user_id`=`user`.`user_id`
+	              INNER JOIN `cache_type` ON `cache_type`.`id`=`caches`.`type`
+	               LEFT JOIN `caches_attributes` AS `tbloconly`
+	                      ON `caches`.`cache_id`=`tbloconly`.`cache_id` AND `tbloconly`.`attrib_id`=6';
+
+
+function search_output()
+{
+	global $sqldebug, $stylepath, $tplname, $logdateformat, $usr, $bgcolor1, $bgcolor2;
+	global $string_by, $caches_olddays, $caches_newstring, $caches_oconlystring, $showonmap;
+	global $options, $lat_rad, $lon_rad, $distance_unit, $startat, $caches_per_page, $sql;
+
+	$tplname = 'search.result.caches';
 	$cache_line = read_file($stylepath . '/search.result.caches.row.tpl.php');
 	$cache_line = mb_ereg_replace('{string_by}', $string_by, $cache_line);
 	$caches_output = '';
 
-	/*
-		$lat_rad
-		$lon_rad
-		$distance_unit
-	*/
-	$distance_unit = 'km';
-
-	$sql = 'SELECT SQL_BUFFER_RESULT SQL_CALC_FOUND_ROWS ';
-
-	if (isset($lat_rad) && isset($lon_rad))
-	{
-		$sql .= getSqlDistanceFormula($lon_rad * 180 / 3.14159, $lat_rad * 180 / 3.14159, 0, $multiplier[$distance_unit]) . ' `distance`, ';
-	}
-	else
-	{
-		if ($usr === false)
-		{
-			$sql .= 'NULL distance, ';
-		}
-		else
-		{
-			//get the users home coords
-			$rs_coords = sql_slave("SELECT `latitude`, `longitude` FROM `user` WHERE `user_id`='&1'", $usr['userid']);
-			$record_coords = sql_fetch_array($rs_coords);
-
-			if ((($record_coords['latitude'] == NULL) && ($record_coords['longitude'] == NULL)) || (($record_coords['latitude'] == 0) && ($record_coords['longitude'] == 0)))
-			{
-				$sql .= 'NULL distance, ';
-			}
-			else
-			{
-				//TODO: load from the users-profile
-				$distance_unit = 'km';
-
-				$lon_rad = $record_coords['longitude'] * 3.14159 / 180;   
-        $lat_rad = $record_coords['latitude'] * 3.14159 / 180; 
-
-				$sql .= getSqlDistanceFormula($record_coords['longitude'], $record_coords['latitude'], 0, $multiplier[$distance_unit]) . ' `distance`, ';
-			}
-			mysql_free_result($rs_coords);
-		}
-	}
-	$sAddJoin = '';
-	$sAddGroupBy = '';
-	$sAddField = '';
-	$sGroupBy = '';
-
-	if ($options['sort'] == 'bylastlog' || $options['sort'] == 'bymylastlog')
-	{
-		$sAddField = ', MAX(`cache_logs`.`date`) AS `lastLog`';
-		$sAddJoin = ' LEFT JOIN `cache_logs` ON `caches`.`cache_id`=`cache_logs`.`cache_id`';
-		if ($options['sort'] == 'bymylastlog')
-			$sAddJoin .= ' AND `cache_logs`.`user_id`=' . sql_escape($usr === false? 0 : $usr['userid']);
-		$sGroupBy = ' GROUP BY `caches`.`cache_id`';
-	}
-	$sql .= '	`caches`.`name` `name`, `caches`.`status` `status`, `caches`.`longitude` `longitude`, `caches`.`latitude` `latitude`,
-				           `caches`.`difficulty` `difficulty`, `caches`.`terrain` `terrain`, `caches`.`desc_languages` `desc_languages`,
-				           `caches`.`date_created` `date_created`, `caches`.`type` `type`, `caches`.`cache_id` `cache_id`,
-				           `user`.`username` `username`, `user`.`user_id` `user_id`,
-				           `cache_type`.`icon_large` `icon_large`,
-				           `cache_type`.`name` `cacheTypeName`,
-				           IFNULL(`stat_caches`.`found`, 0) `founds`, 
-				           IFNULL(`stat_caches`.`toprating`, 0) `topratings`,
-				           IF(IFNULL(`stat_caches`.`toprating`,0)>3, 4, IFNULL(`stat_caches`.`toprating`, 0)) `ratingvalue`,
-				           IF(ISNULL(`tbloconly`.`cache_id`), 0, 1) AS `oconly`' . 
-				           $sAddField
-				  . ' FROM `caches`
-				INNER JOIN `user` ON `caches`.`user_id`=`user`.`user_id`
-				INNER JOIN `cache_type` ON `cache_type`.`id`=`caches`.`type`
-				 LEFT JOIN `stat_caches` ON `caches`.`cache_id`=`stat_caches`.`cache_id`
-				 LEFT JOIN `caches_attributes` AS `tbloconly` ON `caches`.`cache_id`=`tbloconly`.`cache_id` AND
-				                                                 `tbloconly`.`attrib_id`=6' .
-				           $sAddJoin 
-				 . ' WHERE `caches`.`cache_id` IN (' . $sqlFilter . ')' .
-				           $sGroupBy;
-	$sortby = $options['sort'];
-
-	$sql .= ' ORDER BY ';
-	if ($options['orderRatingFirst'])
-		$sql .= '`ratingvalue` DESC, ';
-
-	if ($sortby == 'bylastlog' || $options['sort'] == 'bymylastlog')
-	{
-		$sql .= '`lastLog` DESC, ';
-		$sortby = 'bydistance';
-	}
-
-	if (isset($lat_rad) && isset($lon_rad) && ($sortby == 'bydistance'))
-	{
-		$sql .= '`distance` ASC';
-	}
-	else if ($sortby == 'bycreated')
-	{
-		$sql .= '`caches`.`date_created` DESC';
-	}
-	else // by name
-	{
-		$sql .= '`caches`.`name` ASC';
-	}
-
-	//startat?
-	$startat = isset($_REQUEST['startat']) ? $_REQUEST['startat'] : 0;
-	if (!is_numeric($startat)) $startat = 0;
-	if (!is_numeric($caches_per_page)) $caches_per_page = 20;
+	// output range
 	$startat = floor($startat / $caches_per_page) * $caches_per_page;
 	$sql .= ' LIMIT ' . $startat . ', ' . $caches_per_page;
 
+	// run SQL query
 	$nRowIndex = 0;
-	$rs_caches = sql_slave($sql, $sqldebug);
-
+	$rs_caches = sql_slave("SELECT SQL_BUFFER_RESULT SQL_CALC_FOUND_ROWS " . $sql, $sqldebug);
 	$resultcount = sql_value_slave('SELECT FOUND_ROWS()', 0);
 	tpl_set_var('results_count', $resultcount);
 
@@ -270,7 +174,7 @@
 		if (($nRowIndex % 2) == 1) 	$bgcolor = $bgcolor2;
 		else				$bgcolor = $bgcolor1;
 
-		if($inactive)
+		if ($inactive)
 		{
 			//$bgcolor = $bgcolor_inactive;
 			$tmpline = mb_ereg_replace('{gray_s}', "<span class='text_gray'>", $tmpline);
@@ -353,4 +257,6 @@
 		sqldbg_end();
 	else
 		tpl_BuildTemplate();
+}
+
 ?>

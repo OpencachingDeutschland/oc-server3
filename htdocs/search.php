@@ -1066,42 +1066,257 @@
 			}
 
 			//=================================================================
-			//  X7. run postprocessing module depending on 'output' option
-			//
-			//  The following variables (list may be incomplete) are used
-			//  by the postprocessing modules:
-			//
-			//    $_REQUEST['startat']
-			//    $_REQUEST['count']
-			//    $lat_rad, $lon_rad
-			//    $options['sortby']
-			//    $options['orderRatingFirst']
-			//    $options['queryid']
-			//    $cachesFilter, $sqlFilter
-			//    $map2_bounds
+			//  X7. verify output selection and prepare SQL query
 			//=================================================================
 
-			$map2_bounds = ($options['output'] == 'map2bounds');
-			if ($map2_bounds)
-				$options['output'] = 'map2';
+			$output_module = mb_strtolower($options['output']);  // Ocprop: HTML, gpx
 
-			// Ocprop: HTML, gpx
+			$map2_bounds = ($output_module == 'map2bounds');
+			if ($map2_bounds)
+				$output_module = 'map2';
+
 			if ($map2_bounds && $options['queryid'] == 0)
 			{
 				tpl_set_var('tplname', $tplname);
 				$tplname = 'error';
 				tpl_set_var('error_msg', 'map2bounds requires queryid');
 			}
-			elseif (!file_exists($opt['rootpath'] . 'lib/search.' . mb_strtolower($options['output']) . '.inc.php'))
+			elseif (!file_exists($opt['rootpath'] . 'lib/search.' . $output_module . '.inc.php'))
 			{
 				tpl_set_var('tplname', $tplname);
 				$tplname = 'error';
 				tpl_set_var('error_msg', $outputformat_notexist);
 			}
-			else
+
+			if ($tplname != 'error')
 			{
-				// run search query and output the results
-				require($opt['rootpath'] . 'lib/search.' . mb_strtolower($options['output']) . '.inc.php');
+				$caches_per_page = 20;
+
+				// Default settings; may be modified by output modules
+				$content_type_plain = 'application/octet-stream';
+				$content_type_zipped = 'application/zip';
+				$zip_threshold = $caches_per_page;
+				$add_to_zipfile = true;
+				$sAddJoin = '';
+				$sAddGroupBy = '';
+				$sAddFields = '';
+				$sGroupBy = '';
+
+				// *** load output module ***
+				require($opt['rootpath'] . 'lib/search.' . $output_module . '.inc.php');
+
+				if (!isset($search_output_file_download))
+					die("search_output_file_download not set for $output_module search");
+
+				// *** prepare SQL query ***
+				$sql = '';
+
+				// If no distance unit is preselected by distance search, use 'km' as default.
+				// The unit will be included e.g. in HTML and XML search results.
+				if (!isset($distance_unit))
+					$distance_unit = 'km';
+
+				if (isset($lat_rad) && isset($lon_rad))
+				{
+					$sql .= getSqlDistanceFormula($lon_rad * 180 / 3.14159, $lat_rad * 180 / 3.14159, 0, $multiplier[$distance_unit]) . ' `distance`, ';
+				}
+				else
+				{
+					if ($usr === false)
+					{
+						$sql .= 'NULL distance, ';
+					}
+					else
+					{
+						// get the user's home coords
+						$rs_coords = sql_slave("SELECT `latitude`, `longitude` FROM `user` WHERE `user_id`='&1'", $usr['userid']);
+						$record_coords = sql_fetch_array($rs_coords);
+
+						if ($record_coords['latitude'] == 0 && $record_coords['longitude'] == 0)
+						{
+							$sql .= 'NULL distance, ';
+						}
+						else
+						{
+							$lon_rad = $record_coords['longitude'] * 3.14159 / 180;
+							$lat_rad = $record_coords['latitude'] * 3.14159 / 180;
+
+							$sql .= getSqlDistanceFormula($record_coords['longitude'], $record_coords['latitude'], 0, $multiplier[$distance_unit]) . ' `distance`, ';
+						}
+						mysql_free_result($rs_coords);
+					}
+				}
+
+				if ($options['sort'] == 'bylastlog' || $options['sort'] == 'bymylastlog')
+				{
+					$sAddFields .= ', MAX(`cache_logs`.`date`) AS `lastLog`';
+					$sAddJoin .= ' LEFT JOIN `cache_logs` ON `caches`.`cache_id`=`cache_logs`.`cache_id`';
+					if ($options['sort'] == 'bymylastlog')
+						$sAddJoin .= ' AND `cache_logs`.`user_id`=' . sql_escape($usr === false ? 0 : $usr['userid']);
+					$sGroupBy .= ' GROUP BY `caches`.`cache_id`';
+				}
+				$sql .=   '`caches`.`cache_id`,
+									 `caches`.`status`,
+									 `caches`.`type`,
+									 `caches`.`size`,
+									 `caches`.`longitude`, `caches`.`latitude`,
+									 `caches`.`user_id`,
+									 IF(IFNULL(`stat_caches`.`toprating`,0)>3, 4, IFNULL(`stat_caches`.`toprating`, 0)) `ratingvalue`' .
+									 $sAddFields
+					 . ' FROM `caches`
+				  LEFT JOIN `stat_caches` ON `caches`.`cache_id`=`stat_caches`.`cache_id`' .
+					          $sAddJoin
+				  . ' WHERE `caches`.`cache_id` IN (' . $sqlFilter . ')' . 
+							      $sGroupBy;
+				$sortby = $options['sort'];
+
+				$sql .= ' ORDER BY ';
+				if ($options['orderRatingFirst'])
+					$sql .= '`ratingvalue` DESC, ';
+
+				if ($sortby == 'bylastlog' || $options['sort'] == 'bymylastlog')
+				{
+					$sql .= '`lastLog` DESC, ';
+					$sortby = 'bydistance';
+				}
+
+				if (isset($lat_rad) && isset($lon_rad) && ($sortby == 'bydistance'))
+				{
+					$sql .= '`distance` ASC';
+				}
+				else if ($sortby == 'bycreated')
+				{
+					$sql .= '`caches`.`date_created` DESC';
+				}
+				else // by name
+				{
+					// Some names start with spaces ...
+					// caches.name is not indexed, so ltrimming won't cost performance.
+					$sql .= 'LTRIM(`caches`.`name`) ASC';
+				}
+
+				// range of output
+				$startat = isset($_REQUEST['startat']) ? $_REQUEST['startat'] : 0;
+				if (!is_numeric($startat)) $startat = 0;
+
+				if (isset($_REQUEST['count']))  // Ocprop
+					$count = $_REQUEST['count'];
+				else
+					$count = $caches_per_page;
+				if ($count == 'max') $count = 500;
+				if (!is_numeric($count)) $count = 0;
+				if ($count < 1) $count = 1;
+				if ($count > 500) $count = 500;
+
+				$sqlLimit = ' LIMIT ' . $startat . ', ' . $count;
+
+				if ($search_output_file_download)
+				{
+					//=================================================================
+					//  X8a. run query and output for file downloads
+					//=================================================================
+
+					sql_slave('CREATE TEMPORARY TABLE `searchtmp` SELECT ' . $sql . $sqlLimit,
+					          $sqldebug);
+					$rsCount = sql_slave('SELECT COUNT(*) `count` FROM `searchtmp`');
+					$rCount = sql_fetch_array($rsCount);
+					mysql_free_result($rsCount);
+
+					if ($rCount['count'] == 1)
+					{
+						$rsName = sql_slave('
+							SELECT `caches`.`wp_oc` `wp_oc`
+							FROM `searchtmp`, `caches`
+							WHERE `searchtmp`.`cache_id`=`caches`.`cache_id` LIMIT 1'
+						);
+						$rName = sql_fetch_array($rsName);
+						mysql_free_result($rsName);
+
+						$sFilebasename = $rName['wp_oc'];
+					}
+					else
+						$sFilebasename = 'ocde' . $options['queryid'];
+
+					$bUseZip = ($rCount['count'] > $zip_threshold) ||
+					           (isset($_REQUEST['zip']) && ($_REQUEST['zip'] == '1'));
+					if ($bUseZip)
+					{
+						$content = '';
+						require_once($opt['rootpath'] . 'lib/phpzip/ss_zip.class.php');
+						$phpzip = new ss_zip('',6);
+					}
+
+					if (!$sqldebug)
+					{
+						if ($bUseZip)
+						{
+							header('Content-type: ' . $content_type_zipped);
+							header('Content-disposition: attachment; filename="' . $sFilebasename . '.zip"');
+						}
+						else
+						{
+							header('Content-type: '.$content_type_plain);
+							header('Content-disposition: attachment; filename="' . $sFilebasename . '.' . $output_module .'"');
+						}
+					}
+
+					function append_output($str)
+					{
+						global $content, $bUseZip, $sqldebug;
+						if (!$sqldebug)
+						{
+							if ($bUseZip)
+								$content .= $str;
+							else
+								echo $str;
+						}
+					}
+
+					// *** run output module ***
+					//
+					// Modules will use these variables from search.php (list may be incomplete):
+					//
+					//   $phpzip
+					//   $bUseZip
+
+					search_output();
+
+					if ($sqldebug) sqldbg_end();
+					sql_slave('DROP TABLE `searchtmp`');
+
+					// output zip file
+					if ($bUseZip)
+					{
+						if ($add_to_zipfile)
+						{
+							$phpzip->add_data($sFilebasename . '.' . $output_module, $content);
+						}
+						echo $phpzip->save($sFilebasename . '.zip', 'r');
+					}
+				}
+				else
+				{
+					//=================================================================
+					//  X8b. run other output module (XML, HTML)
+					//
+					//  The following variables from search.php are used by output modules
+					//  (list may be incomplete):
+					//
+					//    $distance_unit
+					//    $lat_rad, $lon_rad
+					//    $startat
+					//    $caches_per_page
+					//    $sql
+					//    $sqlLimit
+					//    $options['sort']
+					//    $options['queryid']
+					//    $cachesFilter
+					//    $map2_bounds
+					//=================================================================
+
+					search_output();
+				}
+
 				exit;
 			}
 		}

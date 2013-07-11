@@ -40,7 +40,7 @@
 			$desc = "<p>" . str_replace('%1',$opt['cms']['npa'], t('This geocache is probably placed within the following nature protection areas (<a href="%1">Info</a>):')) . "</p>\n" .
 			        "<ul>\n";
 			foreach ($npas as $npa)
-				$desc .= "<li>" . $npa['npaTypeName'] . ": <a href='http://www.google.de/search?q=".urlencode($npa['npaName'])."' target='_blank'>" . $npa['npaName'] . "</a></li>\n";
+				$desc .= "<li>" . $npa['npaTypeName'] . ": <a href='http://www.google.de/search?q=".urlencode($npa['npaTypeName'].' '.$npa['npaName'])."' target='_blank'>" . $npa['npaName'] . "</a></li>\n";
 			$desc .= "</ul>\n";
 		}
 		else

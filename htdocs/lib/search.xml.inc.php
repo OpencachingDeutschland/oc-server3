@@ -1,24 +1,19 @@
 <?php
 
 	/***************************************************************************
-	  *  For license information see doc/license.txt
-		*                                         				                                
-		*   This program is free software; you can redistribute it and/or modify  	
-		*   it under the terms of the GNU General Public License as published by  
-		*   the Free Software Foundation; either version 2 of the License, or	    	
-		*   (at your option) any later version.
-		*
-		***************************************************************************/
-
-	/****************************************************************************
+		For license information see doc/license.txt
 		                                         				                                
 		XML search output
-		
 	****************************************************************************/
 
-	global $content, $bUseZip, $sqldebug;
+$search_output_file_download = false;
+
+
+function search_output()
+{
+	global $sqldebug;
+	global $distance_unit, $startat, $count, $sql, $sqlLimit;
 	
-	$lang = 'DE';
 	$encoding = 'UTF-8';
 
 	$xmlLine = "	<cache>
@@ -42,100 +37,17 @@
 	</cache>
 ";
 
-	//prepare the output
-	$caches_per_page = 20;
-	
-	$sql = 'SELECT SQL_BUFFER_RESULT SQL_CALC_FOUND_ROWS '; 
-	
-	if (isset($lat_rad) && isset($lon_rad))
-	{
-		$sql .= getSqlDistanceFormula($lon_rad * 180 / 3.14159, $lat_rad * 180 / 3.14159, 0, $multiplier[$distance_unit]) . ' `distance`, ';
-	}
-	else
-	{
-		if ($usr === false)
-		{
-			$sql .= '0 distance, ';
-		}
-		else
-		{
-			//get the users home coords
-			$rs_coords = sql_slave("SELECT `latitude`, `longitude` FROM `user` WHERE `user_id`='&1'", $usr['userid']);
-			$record_coords = sql_fetch_array($rs_coords);
-			
-			if ((($record_coords['latitude'] == NULL) || ($record_coords['longitude'] == NULL)) || (($record_coords['latitude'] == 0) || ($record_coords['longitude'] == 0)))
-			{
-				$sql .= '0 distance, ';
-			}
-			else
-			{
-				//TODO: load from the users-profile
-				$distance_unit = 'km';
-
-				$lon_rad = $record_coords['longitude'] * 3.14159 / 180;   
-        $lat_rad = $record_coords['latitude'] * 3.14159 / 180; 
-
-				$sql .= getSqlDistanceFormula($record_coords['longitude'], $record_coords['latitude'], 0, $multiplier[$distance_unit]) . ' `distance`, ';
-			}
-			mysql_free_result($rs_coords);
-		}
-	}
-	$sql .= '`caches`.`cache_id` `cache_id`, `caches`.`status` `status`, `caches`.`type` `type`, `caches`.`size` `size`, `caches`.`longitude` `longitude`, `caches`.`latitude` `latitude`, `caches`.`user_id` `user_id`
-				FROM `caches`
-				WHERE `caches`.`cache_id` IN (' . $sqlFilter . ')';
-	
-	$sortby = $options['sort'];
-
-	$sql .= ' ORDER BY ';
-	if ($options['orderRatingFirst'])
-		$sql .= '`ratingvalue` DESC, ';
-
-	if ($sortby == 'bylastlog' || $sortby == 'bymylastlog')
-	{
-		$sql .= '`lastLog` DESC, ';
-		$sortby = 'bydistance';
-	}
-
-	if (isset($lat_rad) && isset($lon_rad) && ($sortby == 'bydistance'))
-	{
-		$sql .= '`distance` ASC';
-	}
-	else if ($sortby == 'bycreated')
-	{
-		$sql .= '`caches`.`date_created` DESC';
-	}
-	else // by name
-	{
-		$sql .= '`caches`.`name` ASC';
-	}
-
-	//startat?
-	$startat = isset($_REQUEST['startat']) ? $_REQUEST['startat'] : 0;
-	if (!is_numeric($startat)) $startat = 0;
-	
-	if (isset($_REQUEST['count']))
-		$count = $_REQUEST['count'];
-	else
-		$count = $caches_per_page;
-	
-	if ($count == 'max') $count = 500;
-	if (!is_numeric($count)) $count = 0;
-	if ($count < 1) $count = 1;
-	if ($count > 500) $count = 500;
-
-	$sqlLimit = ' LIMIT ' . $startat . ', ' . $count;
-
 	// create temporary table
-	sql_slave('CREATE TEMPORARY TABLE `xmlcontent` ' . $sql . $sqlLimit);
+	sql_slave('CREATE TEMPORARY TABLE `searchtmp`
+	           SELECT SQL_BUFFER_RESULT SQL_CALC_FOUND_ROWS ' . $sql . $sqlLimit);
 
 	$resultcount = sql_value_slave('SELECT FOUND_ROWS()', 0);
 
-	$rsCount = sql_slave('SELECT COUNT(*) `count` FROM `xmlcontent`');
+	$rsCount = sql_slave('SELECT COUNT(*) `count` FROM `searchtmp`');
 	$rCount = sql_fetch_array($rsCount);
 	mysql_free_result($rsCount);
 
-	// ok, ausgabe starten
-	
+	// start output
 	if ($sqldebug == false)
 	{
 		header("Content-type: application/xml; charset=".$encoding);
@@ -152,11 +64,9 @@
 	echo "		<total>" . $resultcount . "</total>\n";
 	echo "	</docinfo>\n";
 
-	// ok, ausgabe ...
-	
-	$rs = sql_slave('SELECT `xmlcontent`.`cache_id` `cacheid`, 
-	                        `xmlcontent`.`longitude` `longitude`, 
-	                        `xmlcontent`.`latitude` `latitude`, 
+	$rs = sql_slave('SELECT `searchtmp`.`cache_id` `cacheid`, 
+	                        `searchtmp`.`longitude` `longitude`, 
+	                        `searchtmp`.`latitude` `latitude`, 
 	                        `caches`.`wp_oc` `waypoint`, 
 	                        `caches`.`date_hidden` `date_hidden`, 
 	                        `caches`.`name` `name`, 
@@ -176,10 +86,10 @@
 	                        `cache_desc`.`short_desc` `short_desc`, 
 	                        `cache_desc`.`hint` `hint`, 
 	                        `cache_desc`.`desc_html` `html`, 
-	                        `xmlcontent`.`distance` `distance` 
-	                   FROM `xmlcontent` 
-	             INNER JOIN `caches` ON `xmlcontent`.`cache_id`=`caches`.`cache_id`
-	             INNER JOIN `user` ON `xmlcontent`.`user_id`=`user`.`user_id`
+	                        `searchtmp`.`distance` `distance` 
+	                   FROM `searchtmp` 
+	             INNER JOIN `caches` ON `searchtmp`.`cache_id`=`caches`.`cache_id`
+	             INNER JOIN `user` ON `searchtmp`.`user_id`=`user`.`user_id`
 	             INNER JOIN `cache_desc` ON `caches`.`cache_id`=`cache_desc`.`cache_id` AND `caches`.`default_desclang`=`cache_desc`.`language`
 	             INNER JOIN `cache_type` ON `caches`.`type`=`cache_type`.`id`
 	             INNER JOIN `cache_status` ON `caches`.`status`=`cache_status`.`id`
@@ -244,11 +154,11 @@
 		echo $thisline;
 	}
 	mysql_free_result($rs);
-	sql_slave('DROP TABLE `xmlcontent` ');	
+	sql_slave('DROP TABLE `searchtmp`');
 	if ($sqldebug == true) sqldbg_end();
 	echo "</result>\n";
-	
-	exit;
+}
+
 	
 	function html2txt($html)
 	{
@@ -281,4 +191,5 @@
 
 		return $str;
 	}
+
 ?>

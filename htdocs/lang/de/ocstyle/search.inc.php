@@ -97,6 +97,12 @@
 	$unknown_searchtype = t('unknown search type');
 	$showonmap = t('Show on map');
 
+	$converted_from_html = t('converted from HTML');
+	$state_temporarily_na = t('Temporary not available');
+	$state_archived = t('Archived');
+	$state_locked = t('Locked');
+	$cache_note_text = t('Personal cache note');
+
 
 function dateDiff($interval, $dateTimeBegin, $dateTimeEnd)
 {

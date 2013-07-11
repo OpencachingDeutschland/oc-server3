@@ -5,13 +5,20 @@
 		Unicode Reminder メモ
                                      				                                
 		GPX search output (GC compatible)
+		used by Ocprop
 		
 	****************************************************************************/
 
 	require_once('lib/npas.inc.php');
 
-	global $content, $bUseZip, $sqldebug, $locale;
+	$search_output_file_download = true;
+	$content_type_plain = 'application/gpx';
 
+
+function search_output()
+{
+	global $absolute_server_URI, $locale, $usr, $login;
+	global $cache_note_text;
 
 	$gpxHead = 
 '<?xml version="1.0" encoding="utf-8"?>
@@ -154,157 +161,9 @@
 	$gpxSymNormal = 'Geocache';
 	$gpxSymFound = 'Geocache Found';
 
-	//prepare the output
-	$caches_per_page = 20;
-	
-	$sql = 'SELECT '; 
-
-	if (isset($lat_rad) && isset($lon_rad))
-	{
-		$sql .= getSqlDistanceFormula($lon_rad * 180 / 3.14159, $lat_rad * 180 / 3.14159, 0, $multiplier[$distance_unit]) . ' `distance`, ';
-	}
-	else
-	{
-		if ($usr === false)
-		{
-			$sql .= '0 distance, ';
-		}
-		else
-		{
-			//get the users home coords
-			$rs_coords = sql_slave("SELECT `latitude`, `longitude` FROM `user` WHERE `user_id`='&1'", $usr['userid']);
-			$record_coords = sql_fetch_array($rs_coords);
-			
-			if ((($record_coords['latitude'] == NULL) || ($record_coords['longitude'] == NULL)) || (($record_coords['latitude'] == 0) || ($record_coords['longitude'] == 0)))
-			{
-				$sql .= '0 distance, ';
-			}
-			else
-			{
-				//TODO: load from the users-profile
-				$distance_unit = 'km';
-
-				$lon_rad = $record_coords['longitude'] * 3.14159 / 180;   
-				$lat_rad = $record_coords['latitude'] * 3.14159 / 180;
-
-				$sql .= getSqlDistanceFormula($record_coords['longitude'], $record_coords['latitude'], 0, $multiplier[$distance_unit]) . ' `distance`, ';
-			}
-			mysql_free_result($rs_coords);
-		}
-	}
-	$sAddJoin = '';
-	$sAddGroupBy = '';
-	$sAddField = '';
-	$sGroupBy = '';
-	if ($options['sort'] == 'bylastlog' || $options['sort'] == 'bymylastlog')
-	{
-		$sAddField = ', MAX(`cache_logs`.`date`) AS `lastLog`';
-		$sAddJoin = ' LEFT JOIN `cache_logs` ON `caches`.`cache_id`=`cache_logs`.`cache_id`';
-		if ($options['sort'] == 'bymylastlog')
-			$sAddJoin .= ' AND `cache_logs`.`user_id`=' . sql_escape($usr === false? 0 : $usr['userid']);
-		$sGroupBy = ' GROUP BY `caches`.`cache_id`';
-	}
-	$sql .= '`caches`.`cache_id` `cache_id`, `caches`.`status` `status`, `caches`.`type` `type`, `caches`.`size` `size`, `caches`.`longitude` `longitude`, `caches`.`latitude` `latitude`, `caches`.`user_id` `user_id`,
-	            IF(IFNULL(`stat_caches`.`toprating`,0)>3, 4, IFNULL(`stat_caches`.`toprating`, 0)) `ratingvalue`,
-		 `cache_location`.`adm2` `state`' .
-				      $sAddField
-		 . ' FROM `caches`
-	  LEFT JOIN `stat_caches` ON `caches`.`cache_id`=`stat_caches`.`cache_id`
-	  LEFT JOIN `cache_location` ON `caches`.`cache_id`=`cache_location`.`cache_id`' .
-				      $sAddJoin
-		. ' WHERE `caches`.`cache_id` IN (' . $sqlFilter . ')' .
-				      $sGroupBy;
-	$sortby = $options['sort'];
-
-	$sql .= ' ORDER BY ';
-	if ($options['orderRatingFirst'])
-		$sql .= '`ratingvalue` DESC, ';
-
-	if ($sortby == 'bylastlog' || $options['sort'] == 'bymylastlog')
-	{
-		$sql .= '`lastLog` DESC, ';
-		$sortby = 'bydistance';
-	}
-
-	if (isset($lat_rad) && isset($lon_rad) && ($sortby == 'bydistance'))
-	{
-		$sql .= '`distance` ASC';
-	}
-	else if ($sortby == 'bycreated')
-	{
-		$sql .= '`caches`.`date_created` DESC';
-	}
-	else // by name
-	{
-		$sql .= '`caches`.`name` ASC';
-	}
-
-	//startat?
-	$startat = isset($_REQUEST['startat']) ? $_REQUEST['startat'] : 0;  // Ocprop
-	if (!is_numeric($startat)) $startat = 0;
-	
-	if (isset($_REQUEST['count']))  // Ocprop
-		$count = $_REQUEST['count'];
-	else
-		$count = $caches_per_page;
-	
-	if ($count == 'max') $count = 500;
-	if (!is_numeric($count)) $count = 0;
-	if ($count < 1) $count = 1;
-	if ($count > 500) $count = 500;
-
-	$sqlLimit = ' LIMIT ' . $startat . ', ' . $count;
-
-	// create temporary table
-	sql_slave('CREATE TEMPORARY TABLE `gpxcontent` ' . $sql . $sqlLimit);
-
-	$rsCount = sql_slave('SELECT COUNT(*) `count` FROM `gpxcontent`');
-	$rCount = sql_fetch_array($rsCount);
-	mysql_free_result($rsCount);
-	
-	if ($rCount['count'] == 1)
-	{
-		$rsName = sql_slave('SELECT `caches`.`wp_oc` `wp_oc` FROM `gpxcontent`, `caches` WHERE `gpxcontent`.`cache_id`=`caches`.`cache_id` LIMIT 1');
-		$rName = sql_fetch_array($rsName);
-		mysql_free_result($rsName);
-		
-		$sFilebasename = $rName['wp_oc'];
-	}
-	else
-		$sFilebasename = 'ocde' . $options['queryid'];
-		
-	$bUseZip = ($rCount['count'] > 20);
-	$bUseZip = $bUseZip || (isset($_REQUEST['zip']) && ($_REQUEST['zip'] == '1'));  // Ocprop
-	
-	if ($bUseZip == true)
-	{
-		$content = '';
-		require_once($rootpath . 'lib/phpzip/ss_zip.class.php');
-		$phpzip = new ss_zip('',6);
-	}
-
-	// ok, let's start
-	
-	if ($sqldebug == false)
-	{
-		if ($bUseZip == true)
-		{
-			header("content-type: application/zip");
-			header('Content-Disposition: attachment; filename=' . $sFilebasename . '.zip');
-		}
-		else
-		{
-			header("Content-type: application/gpx");
-			header("Content-Disposition: attachment; filename=" . $sFilebasename . ".gpx");
-		}
-	}
-	
 	$childwphandler = new ChildWp_Handler();
-
-	// ok, output ...
-
 	$children='';
-	$rs = sql('SELECT `gpxcontent`.`cache_id` `cacheid` FROM `gpxcontent`');
+	$rs = sql('SELECT `searchtmp`.`cache_id` `cacheid` FROM `searchtmp`');
 	while ($r = sql_fetch_array($rs))
 		if (count($childwphandler->getChildWps($r['cacheid'])))
 			$children=" (HasChildren)"; 
@@ -319,21 +178,21 @@
 	else
 		$user_id = $usr['userid'];
 	
-	$rs = sql_slave("SELECT SQL_BUFFER_RESULT `gpxcontent`.`cache_id` `cacheid`, `gpxcontent`.`longitude` `longitude`, `gpxcontent`.`latitude` `latitude`, 
-							`gpxcontent`.`state` `state`, `caches`.`wp_oc` `waypoint`, `caches`.`date_hidden` `date_hidden`, `caches`.`name` `name`, 
+	$rs = sql_slave("SELECT SQL_BUFFER_RESULT `searchtmp`.`cache_id` `cacheid`, `searchtmp`.`longitude` `longitude`, `searchtmp`.`latitude` `latitude`, 
+							`cache_location`.`adm2` `state`, `caches`.`wp_oc` `waypoint`, `caches`.`date_hidden` `date_hidden`, `caches`.`name` `name`, 
 							`caches`.`country` `country`, `countries`.`name` AS `country_name`, `caches`.`terrain` `terrain`, `caches`.`difficulty` `difficulty`, `caches`.`desc_languages` `desc_languages`, 
 							`caches`.`size` `size`, `caches`.`type` `type`, `caches`.`status` `status`, `user`.`username` `username`, `caches`.`user_id` `userid`, `user`.`data_license`,
 							`cache_desc`.`desc` `desc`, `cache_desc`.`short_desc` `short_desc`, `cache_desc`.`hint` `hint`,
 							IFNULL(`stat_cache_logs`.`found`, 0) AS `found`
-						FROM `gpxcontent` 
-							INNER JOIN `caches` ON `gpxcontent`.`cache_id`=`caches`.`cache_id`
+						FROM `searchtmp` 
+							INNER JOIN `caches` ON `searchtmp`.`cache_id`=`caches`.`cache_id`
 							INNER JOIN `countries` ON `caches`.`country`=`countries`.`short`
-							INNER JOIN `user` ON `gpxcontent`.`user_id`=`user`.`user_id`
-							INNER JOIN `cache_desc` ON `caches`.`cache_id`=`cache_desc`.`cache_id` 
-								AND `caches`.`default_desclang`=`cache_desc`.`language`
-								LEFT JOIN `stat_cache_logs` ON `gpxcontent`.`cache_id`=`stat_cache_logs`.`cache_id` AND `stat_cache_logs`.`user_id`='&1'", $user_id);
+							INNER JOIN `user` ON `searchtmp`.`user_id`=`user`.`user_id`
+							INNER JOIN `cache_desc` ON `caches`.`cache_id`=`cache_desc`.`cache_id`AND `caches`.`default_desclang`=`cache_desc`.`language` 
+							LEFT JOIN `cache_location` ON `searchtmp`.`cache_id`=`cache_location`.`cache_id`
+							LEFT JOIN `stat_cache_logs` ON `searchtmp`.`cache_id`=`stat_cache_logs`.`cache_id` AND `stat_cache_logs`.`user_id`='&1'", $user_id);
 
-	while($r = sql_fetch_array($rs))
+	while ($r = sql_fetch_array($rs))
 	{
 		$thisline = $gpxLine;
 		
@@ -558,7 +417,7 @@
 			$thiswp = mb_ereg_replace('{name}', $r['waypoint'].'NOTE', $thiswp);
 			$thiswp = mb_ereg_replace('{cachename}', xmlentities($r['name']), $thiswp);
 			$thiswp = mb_ereg_replace('{comment}', xmlentities($cacheNote['note']), $thiswp);
-			$thiswp = mb_ereg_replace('{desc}', $translate->t('Personal cache note','','',0), $thiswp);
+			$thiswp = mb_ereg_replace('{desc}', $cache_note_text, $thiswp);
 			$thiswp = mb_ereg_replace('{type}', "Reference Point", $thiswp);
 			$thiswp = mb_ereg_replace('{parent}', $r['waypoint'], $thiswp);
 			$thiswp = mb_ereg_replace('{cacheid}', $r['cacheid'], $thiswp);
@@ -570,19 +429,10 @@
 		append_output($thisline);
 	}
 	mysql_free_result($rs);
-	
+
 	append_output($gpxFoot);
+}
 
-	if ($sqldebug == true) sqldbg_end();
-	
-	// send using phpzip
-	if ($bUseZip == true)
-	{
-		$phpzip->add_data($sFilebasename . '.gpx', $content);
-		echo $phpzip->save($sFilebasename . '.zip', 'b');
-	}
-
-	exit;
 
 	function decodeEntities($str)
 	{
@@ -623,17 +473,6 @@
 	function filterevilchars($str)
 	{
 		return mb_ereg_replace('[\\x00-\\x09|\\x0B-\\x0C|\\x0E-\\x1F]', '', $str);
-	}
-
-	function append_output($str)
-	{
-		global $content, $bUseZip, $sqldebug;
-		if ($sqldebug == true) return;
-		
-		if ($bUseZip == true)
-			$content .= $str;
-		else
-			echo $str;
 	}
 
 	function getCacheNote($userid, $cacheid)

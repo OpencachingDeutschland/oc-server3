@@ -1,27 +1,27 @@
 <?php
 	/***************************************************************************
-															./lib/search.kml.inc.php
-																-------------------
-			begin                : November 1 2005 
-
 		For license information see doc/license.txt
-	****************************************************************************/
-
-	/****************************************************************************
 		   
 		Unicode Reminder メモ
                                       				                                
 		kml search output
-		
 	****************************************************************************/
 
-	global $content, $bUseZip, $sqldebug;
+	$search_output_file_download = true;
+	$content_type_plain = 'vnd.google-earth.kml';
+	$content_type_zipped = 'vnd.google-earth.kmz';
+
+
+function search_output()
+{
+	global $sqldebug, $stylepath;
+	global $state_temporarily_na, $state_archived, $state_locked;
 	
 	$kmlLine = 
 '
 <Placemark>
   <description><![CDATA[<a href="http://www.opencaching.de/viewcache.php?cacheid={cacheid}">Beschreibung ansehen</a><br>Von {username}<br>&nbsp;<br><table cellspacing="0" cellpadding="0" border="0"><tr><td>{typeimgurl} </td><td>Art: {type}<br>Größe: {size}</td></tr><tr><td colspan="2">Schwierigkeit: {difficulty} von 5.0<br>Gelände: {terrain} von 5.0</td></tr></table>]]></description>
-  <name>{name}</name>
+  <name>{name}{archivedflag}</name>
   <LookAt>
     <longitude>{lon}</longitude>
     <latitude>{lat}</latitude>
@@ -40,153 +40,16 @@
 	$kmlFoot = '</Folder></Document></kml>';
 
 	$kmlTimeFormat = 'Y-m-d\TH:i:s\Z';
-
-	//prepare the output
-	$caches_per_page = 20;
-	
-	$sql = 'SELECT '; 
-	
-	if (isset($lat_rad) && isset($lon_rad))
-	{
-		$sql .= getSqlDistanceFormula($lon_rad * 180 / 3.14159, $lat_rad * 180 / 3.14159, 0, $multiplier[$distance_unit]) . ' `distance`, ';
-	}
-	else
-	{
-		if ($usr === false)
-		{
-			$sql .= '0 distance, ';
-		}
-		else
-		{
-			//get the users home coords
-			$rs_coords = sql_slave("SELECT `latitude`, `longitude` FROM `user` WHERE `user_id`='&1'", $usr['userid']);
-			$record_coords = sql_fetch_array($rs_coords);
-			
-			if ((($record_coords['latitude'] == NULL) || ($record_coords['longitude'] == NULL)) || (($record_coords['latitude'] == 0) || ($record_coords['longitude'] == 0)))
-			{
-				$sql .= '0 distance, ';
-			}
-			else
-			{
-				//TODO: load from the users-profile
-				$distance_unit = 'km';
-
-				$lon_rad = $record_coords['longitude'] * 3.14159 / 180;   
-        $lat_rad = $record_coords['latitude'] * 3.14159 / 180; 
-
-				$sql .= getSqlDistanceFormula($record_coords['longitude'], $record_coords['latitude'], 0, $multiplier[$distance_unit]) . ' `distance`, ';
-			}
-			mysql_free_result($rs_coords);
-		}
-	}
-	$sAddJoin = '';
-	$sAddGroupBy = '';
-	$sAddField = '';
-	$sGroupBy = '';
-	if ($options['sort'] == 'bylastlog' || $options['sort'] == 'bymylastlog')
-	{
-		$sAddField = ', MAX(`cache_logs`.`date`) AS `lastLog`';
-		$sAddJoin = ' LEFT JOIN `cache_logs` ON `caches`.`cache_id`=`cache_logs`.`cache_id`';
-		if ($options['sort'] == 'bymylastlog')
-			$sAddJoin .= ' AND `cache_logs`.`user_id`=' . sql_escape($usr === false? 0 : $usr['userid']);
-		$sGroupBy = ' GROUP BY `caches`.`cache_id`';
-	}
-	$sql .= '`caches`.`cache_id` `cache_id`, `caches`.`status` `status`, `caches`.`type` `type`, `caches`.`size` `size`, `caches`.`longitude` `longitude`, `caches`.`latitude` `latitude`, `caches`.`user_id` `user_id`, 
-	            IF(IFNULL(`stat_caches`.`toprating`,0)>3, 4, IFNULL(`stat_caches`.`toprating`, 0)) `ratingvalue`' . 
-		          $sAddField
-		 . ' FROM `caches`
-	  LEFT JOIN `stat_caches` ON `caches`.`cache_id`=`stat_caches`.`cache_id`' .
-		          $sAddJoin 
-		. ' WHERE `caches`.`cache_id` IN (' . $sqlFilter . ')' . 
-				      $sGroupBy;
-	$sortby = $options['sort'];
-
-	$sql .= ' ORDER BY ';
-	if ($options['orderRatingFirst'])
-		$sql .= '`ratingvalue` DESC, ';
-
-	if ($sortby == 'bylastlog' || $options['sort'] == 'bymylastlog')
-	{
-		$sql .= '`lastLog` DESC, ';
-		$sortby = 'bydistance';
-	}
-
-	if (isset($lat_rad) && isset($lon_rad) && ($sortby == 'bydistance'))
-	{
-		$sql .= '`distance` ASC';
-	}
-	else if ($sortby == 'bycreated')
-	{
-		$sql .= '`caches`.`date_created` DESC';
-	}
-	else // by name
-	{
-		$sql .= '`caches`.`name` ASC';
-	}
-
-	//startat?
-	$startat = isset($_REQUEST['startat']) ? $_REQUEST['startat'] : 0;
-	if (!is_numeric($startat)) $startat = 0;
-	
-	if (isset($_REQUEST['count']))
-		$count = $_REQUEST['count'];
-	else
-		$count = $caches_per_page;
-	
-	if ($count == 'max') $count = 500;
-	if (!is_numeric($count)) $count = 0;
-	if ($count < 1) $count = 1;
-	if ($count > 500) $count = 500;
-
-	$sqlLimit = ' LIMIT ' . $startat . ', ' . $count;
-
-	// temporäre tabelle erstellen
-	sql_slave('CREATE TEMPORARY TABLE `kmlcontent` ' . $sql . $sqlLimit);
-
-	$rsCount = sql_slave('SELECT COUNT(*) `count` FROM `kmlcontent`');
-	$rCount = sql_fetch_array($rsCount);
-	mysql_free_result($rsCount);
-	
-	if ($rCount['count'] == 1)
-	{
-		$rsName = sql_slave('SELECT `caches`.`wp_oc` `wp_oc` FROM `kmlcontent`, `caches` WHERE `kmlcontent`.`cache_id`=`caches`.`cache_id` LIMIT 1');
-		$rName = sql_fetch_array($rsName);
-		mysql_free_result($rsName);
-		
-		$sFilebasename = $rName['wp_oc'];
-	}
-	else
-		$sFilebasename = 'ocde' . $options['queryid'];
-		
-	$bUseZip = ($rCount['count'] > 20);
-	$bUseZip = $bUseZip || (isset($_REQUEST['zip']) && ($_REQUEST['zip'] == '1'));
-	
-	if ($bUseZip == true)
-	{
-		$content = '';
-		require_once($rootpath . 'lib/phpzip/ss_zip.class.php');
-		$phpzip = new ss_zip('',6);
-	}
-
-	// ok, ausgabe starten
-	
-	if ($sqldebug == false)
-	{
-		if ($bUseZip == true)
-		{
-			header("Content-Type: application/vnd.google-earth.kmz");
-			header('Content-Disposition: attachment; filename=' . $sFilebasename . '.kmz');
-		}
-		else
-		{
-			header("Content-Type: application/vnd.google-earth.kml");
-			header("Content-Disposition: attachment; filename=" . $sFilebasename . ".kml");
-		}
-	}
-
 	$kmlDetailHead = read_file($stylepath . '/search.result.caches.kml.head.tpl.php');
 	
-	$rsMinMax = sql_slave('SELECT MIN(`longitude`) `minlon`, MAX(`longitude`) `maxlon`, MIN(`latitude`) `minlat`, MAX(`latitude`) `maxlat` FROM `kmlcontent`', $sqldebug);
+	$rsMinMax = sql_slave('
+		SELECT
+			MIN(`longitude`) `minlon`,
+			MAX(`longitude`) `maxlon`,
+			MIN(`latitude`) `minlat`,
+			MAX(`latitude`) `maxlat`
+		FROM
+			`searchtmp`', $sqldebug);
 	$rMinMax = sql_fetch_array($rsMinMax);
 	mysql_free_result($rsMinMax);
 	
@@ -198,8 +61,6 @@
 	
 	append_output($kmlDetailHead);
 
-	// ok, ausgabe ...
-	
 	/*
 		wp
 		name
@@ -211,8 +72,34 @@
 		icon
 	*/
 
-	$rs = sql_slave('SELECT SQL_BUFFER_RESULT `kmlcontent`.`cache_id` `cacheid`, `kmlcontent`.`longitude` `longitude`, `kmlcontent`.`latitude` `latitude`, `kmlcontent`.`type` `type`, `caches`.`date_hidden` `date_hidden`, `caches`.`name` `name`, `caches`.`status` `status`, `cache_type`.`de` `typedesc`, `cache_size`.`de` `sizedesc`, `caches`.`terrain` `terrain`, `caches`.`difficulty` `difficulty`, `user`.`username` `username` FROM `kmlcontent`, `caches`, `cache_type`, `cache_size`, `user` WHERE `kmlcontent`.`cache_id`=`caches`.`cache_id` AND `kmlcontent`.`type`=`cache_type`.`id` AND `kmlcontent`.`size`=`cache_size`.`id` AND `kmlcontent`.`user_id`=`user`.`user_id`', $sqldebug);
-	while($r = sql_fetch_array($rs))
+	$rs = sql_slave('
+		SELECT SQL_BUFFER_RESULT
+			`searchtmp`.`cache_id` `cacheid`,
+			`searchtmp`.`longitude`,
+			`searchtmp`.`latitude`,
+			`searchtmp`.`type`,
+			`caches`.`date_hidden`,
+			`caches`.`name`,
+			`caches`.`status`,
+			`cache_type`.`de` `typedesc`,
+			`cache_size`.`de` `sizedesc`,
+			`caches`.`terrain`,
+			`caches`.`difficulty`,
+			`user`.`username`
+		FROM
+			`searchtmp`,
+			`caches`,
+			`cache_type`,
+			`cache_size`,
+			`user`
+		WHERE
+			`searchtmp`.`cache_id`=`caches`.`cache_id` AND
+			`searchtmp`.`type`=`cache_type`.`id` AND
+			`searchtmp`.`size`=`cache_size`.`id` AND
+			`searchtmp`.`user_id`=`user`.`user_id`',
+			$sqldebug);
+
+	while ($r = sql_fetch_array($rs))
 	{
 		$thisline = $kmlLine;
 		
@@ -274,12 +161,14 @@
 
 		$thisline = mb_ereg_replace('{name}', xmlentities($r['name']), $thisline);
 		
-		if (($r['status'] == 2) || ($r['status'] == 3))
+		if (($r['status'] == 2) || ($r['status'] == 3) || ($r['status'] == 6))
 		{
 			if ($r['status'] == 2)
-				$thisline = mb_ereg_replace('{archivedflag}', 'Momentan nicht verfügbar!, ', $thisline);
+				$thisline = mb_ereg_replace('{archivedflag}', ' ('.$state_temporarily_na.')', $thisline);
+			elseif ($r['status'] == 3)
+				$thisline = mb_ereg_replace('{archivedflag}', ' ('.$state_archived.')', $thisline);
 			else
-				$thisline = mb_ereg_replace('{archivedflag}', 'Archiviert!, ', $thisline);
+				$thisline = mb_ereg_replace('{archivedflag}', ' ('.$state_locked.')', $thisline);
 		}
 		else
 			$thisline = mb_ereg_replace('{archivedflag}', '', $thisline);
@@ -302,21 +191,11 @@
 		append_output($thisline);
 	}
 	mysql_free_result($rs);
-	
-	append_output($kmlFoot);
-	
-	if ($sqldebug == true) sqldbg_end();
-	
-	// phpzip versenden
-	if ($bUseZip == true)
-	{
-		$phpzip->add_data($sFilebasename . '.kml', $content);
-		// use 'r'=raw instead of 'b'=browser: don't generate new header information!
-		echo $phpzip->save($sFilebasename . '.kmz', 'r');
-	}
 
-	exit;
-	
+	append_output($kmlFoot);
+}
+
+
 	function xmlentities($str)
 	{
 		$from[0] = '&'; $to[0] = '&amp;';
@@ -330,15 +209,5 @@
 
 		return $str;
 	}
-	
-	function append_output($str)
-	{
-		global $content, $bUseZip, $sqldebug;
-		if ($sqldebug == true) return;
-		
-		if ($bUseZip == true)
-			$content .= $str;
-		else
-			echo $str;
-	}
+
 ?>

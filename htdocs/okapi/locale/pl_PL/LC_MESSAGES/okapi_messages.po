@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OKAPI\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-05-08 15:17+0100\n"
-"PO-Revision-Date: 2013-05-08 15:25+0100\n"
+"POT-Creation-Date: 2013-07-11 08:28+0100\n"
+"PO-Revision-Date: 2013-07-11 08:35+0100\n"
 "Last-Translator: Wojciech Rygielski <rygielski@mimuw.edu.pl>\n"
 "Language-Team: \n"
 "Language: pl_PL\n"
@@ -19,18 +19,22 @@ msgstr ""
 "X-Generator: Poedit 1.5.5\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: services/caches/geocaches.php:911
+#: services/caches/geocaches.php:956
 msgid "Stage"
 msgstr "Etap"
 
-#: services/caches/geocaches.php:1139
+#: services/caches/geocaches.php:1111
+msgid "National Park / Landscape"
+msgstr "Park narodowy lub krajobrazowy"
+
+#: services/caches/geocaches.php:1263
 #, php-format
 msgid ""
 "This <a href='%s'>geocache</a> description comes from the <a href='%s'>%s</"
 "a> site."
 msgstr "Opis <a href='%s'>skrzynki</a> pochodzi z serwisu <a href='%s'>%s</a>."
 
-#: services/caches/geocaches.php:1151
+#: services/caches/geocaches.php:1275
 #, php-format
 msgid ""
 "&copy; <a href='%s'>%s</a>, <a href='%s'>%s</a>, <a href='http://"
@@ -41,7 +45,7 @@ msgstr ""
 "creativecommons.org/licenses/by-nc-nd/3.0/de/deed.pl'>CC-BY-NC-ND</a>, w "
 "dniu %s. Prawa autorskie wpisów do logów należą do ich autorów."
 
-#: services/caches/geocaches.php:1162
+#: services/caches/geocaches.php:1286
 #, php-format
 msgid ""
 "&copy; <a href='%s'>%s</a>, <a href='%s'>%s</a>, <a href='http://"
@@ -53,11 +57,11 @@ msgstr ""
 "autorskie wpisów do logów należą do ich autorów."
 
 #: services/caches/formatters/gpxfile.tpl.php:31
-#: services/caches/formatters/gpxfile.tpl.php:48
+#: services/caches/formatters/gpxfile.tpl.php:60
 msgid "hidden by"
 msgstr "ukryta przez"
 
-#: services/caches/formatters/gpxfile.tpl.php:50
+#: services/caches/formatters/gpxfile.tpl.php:62
 #, php-format
 msgid "%d recommendation"
 msgid_plural "%d recommendations"
@@ -65,7 +69,7 @@ msgstr[0] "%d rekomendacja"
 msgstr[1] "%d rekomendacje"
 msgstr[2] "%d rekomendacji"
 
-#: services/caches/formatters/gpxfile.tpl.php:51
+#: services/caches/formatters/gpxfile.tpl.php:63
 #, php-format
 msgid "found %d time"
 msgid_plural "found %d times"
@@ -73,7 +77,7 @@ msgstr[0] "znaleziona %d raz"
 msgstr[1] "znaleziona %d razy"
 msgstr[2] "znaleziona %d razy"
 
-#: services/caches/formatters/gpxfile.tpl.php:54
+#: services/caches/formatters/gpxfile.tpl.php:66
 #, php-format
 msgid "%d trackable"
 msgid_plural "%d trackables"
@@ -81,30 +85,34 @@ msgstr[0] "%d GeoKret (lub TravelBug)"
 msgstr[1] "%d GeoKrety (lub TravelBugi)"
 msgstr[2] "%d GeoKretów (lub TravelBugów)"
 
-#: services/caches/formatters/gpxfile.tpl.php:58
+#: services/caches/formatters/gpxfile.tpl.php:70
 msgid "Personal notes"
 msgstr "Osobiste notatki"
 
-#: services/caches/formatters/gpxfile.tpl.php:62
+#: services/caches/formatters/gpxfile.tpl.php:74
 msgid "Attributes"
 msgstr "Atrybuty"
 
-#: services/caches/formatters/gpxfile.tpl.php:66
+#: services/caches/formatters/gpxfile.tpl.php:78
 msgid "Trackables"
 msgstr "Geokrety, Travelbugi itp."
 
-#: services/caches/formatters/gpxfile.tpl.php:76
-#: services/caches/formatters/gpxfile.tpl.php:92
+#: services/caches/formatters/gpxfile.tpl.php:88
+#: services/caches/formatters/gpxfile.tpl.php:104
 msgid "Images"
 msgstr "Obrazki"
 
-#: services/caches/formatters/gpxfile.tpl.php:99
+#: services/caches/formatters/gpxfile.tpl.php:111
 msgid "Spoilers"
 msgstr "Spoilery"
 
-#: services/caches/formatters/gpxfile.tpl.php:108
+#: services/caches/formatters/gpxfile.tpl.php:120
 msgid "Image descriptions"
 msgstr "Opisy obrazków"
+
+#: services/caches/formatters/gpxfile.tpl.php:128
+msgid "The cache probably is located in the following protection areas:"
+msgstr "Prawdopodobnie skrzynka znajduje się na terenie obszarów chronionych:"
 
 #: services/logs/submit.php:70
 msgid ""

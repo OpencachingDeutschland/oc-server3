@@ -71,7 +71,7 @@
 		<p>In the future, more generic ways of including images in GPX files may emerge.</p>
 	</opt>
 	<opt name='attrs' default='desc:text'>
-		<p>This argument controls wether cache attributes are included and how they are included.
+		<p>This argument controls whether cache attributes are included and how they are included.
 		Pipe-separated list consisting of any set of the following values:</p>
 		
 		<ul>
@@ -103,10 +103,10 @@
 		trigger the default (<b>desc:text</b>) to be selected, for backward-compatibility.</p>
 	</opt>
 	<opt name='protection_areas' default='desc:auto'>
-		<p>This argument controls wether protection area information is included and how
+		<p>This argument controls whether protection area information is included and how
 		it is included.</p>
 		<ul>
-			<li><b>desc:text</b> - if the cache is (probably) located within one or more
+			<li><b>desc:text</b> - if the cache (probably) is located within one or more
 			protection areas, e.g. a nature reserve, a list of the protection areas will
 			be included in the cache description.</li>
 			<li><b>desc:auto</b> - protection area information may be included in the
@@ -118,7 +118,7 @@
 		or completely missing on some installations.</p>
 	</opt>
 	<opt name='trackables' default='none'>
-		<p>This argument controls wether information on trackables is included and how it is included.
+		<p>This argument controls whether information on trackables is included and how it is included.
 		One of the following values:</p>
 		<ul>
 			<li><b>none</b> - no trackables-data will be included,</li>
@@ -128,7 +128,7 @@
 		<p>Note: When using "desc:" mode, remember to set <b>ns_ground</b> to <b>true</b>.</p>
 	</opt>
 	<opt name='recommendations' default='none'>
-		<p>This argument controls wether information on recommendations is included and how it is included.
+		<p>This argument controls whether information on recommendations is included and how it is included.
 		One of the following values:</p>
 		<ul>
 			<li><b>none</b> - no recommendations-info will be included,</li>

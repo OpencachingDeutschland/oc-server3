@@ -1092,7 +1092,7 @@
 			{
 				$caches_per_page = 20;
 
-				// Default settings; may be modified by output modules
+				// Default parameters; may be modified by output modules
 				$content_type_plain = 'application/octet-stream';
 				$content_type_zipped = 'application/zip';
 				$zip_threshold = $caches_per_page;
@@ -1103,16 +1103,19 @@
 				$sGroupBy = '';
 
 				// *** load output module ***
+				//
+				// (map2 module will exit after executing)
+
 				require($opt['rootpath'] . 'lib/search.' . $output_module . '.inc.php');
 
 				if (!isset($search_output_file_download))
-					die("search_output_file_download not set for $output_module search");
+					die("search_output_file_download not set for '$output_module' search");
 
 				// *** prepare SQL query ***
 				$sql = '';
 
-				// If no distance unit is preselected by distance search, use 'km' as default.
-				// The unit will be included e.g. in HTML and XML search results.
+				// If no distance unit is preselected by distance search, use 'km'.
+				// The unit will be shown e.g. in HTML and XML search results.
 				if (!isset($distance_unit))
 					$distance_unit = 'km';
 
@@ -1213,7 +1216,7 @@
 				if ($search_output_file_download)
 				{
 					//=================================================================
-					//  X8a. run query and output for file downloads
+					//  X8a. run query and output for file downloads (GPX, KML, OVL ...)
 					//=================================================================
 
 					sql_slave('CREATE TEMPORARY TABLE `searchtmp` SELECT ' . $sql . $sqlLimit,
@@ -1241,7 +1244,6 @@
 					           (isset($_REQUEST['zip']) && ($_REQUEST['zip'] == '1'));
 					if ($bUseZip)
 					{
-						$content = '';
 						require_once($opt['rootpath'] . 'lib/phpzip/ss_zip.class.php');
 						$phpzip = new ss_zip('',6);
 					}
@@ -1260,6 +1262,7 @@
 						}
 					}
 
+					// helper function for output modules
 					function append_output($str)
 					{
 						global $content, $bUseZip, $sqldebug;
@@ -1274,11 +1277,12 @@
 
 					// *** run output module ***
 					//
-					// Modules will use these variables from search.php (list may be incomplete):
+					// Modules will use these variables from search.php:
 					//
 					//   $phpzip
 					//   $bUseZip
 
+					$content = '';
 					search_output();
 
 					if ($sqldebug) sqldbg_end();
@@ -1297,14 +1301,14 @@
 				else
 				{
 					//=================================================================
-					//  X8b. run other output module (XML, HTML)
+					//  X8b. run other output module (XML, HTML, Map)
 					//
-					//  The following variables from search.php are used by output modules
-					//  (list may be incomplete):
+					//  The following variables from search.php are used by output modules:
 					//
 					//    $distance_unit
 					//    $lat_rad, $lon_rad
 					//    $startat
+					//    $count
 					//    $caches_per_page
 					//    $sql
 					//    $sqlLimit

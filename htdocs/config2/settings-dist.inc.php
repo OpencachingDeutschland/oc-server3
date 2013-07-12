@@ -407,7 +407,6 @@
 
 	/* cronjob
 	 */
-	$opt['cron']['pidfile'] = $opt['rootpath'] . 'cache2/runcron.pid';
 	$opt['cron']['username'] = 'apache';   // system username for cronjobs
 
 	/* phpbb news integration (index.php)

@@ -20,27 +20,26 @@
 		die("ERROR: runcron must be run by '" . $opt['cron']['username'] . "' but was called by '" . $processUser['name'] . "'\n".
 		    "Try something like 'sudo -u ".$opt['cron']['username']." php runcron.php'.\n");
 
-	// use posix pid-files to lock process 
-	if (!CreatePidFile($opt['cron']['pidfile']))
+	// ensure that we do not run concurrently
+	$process_sync = new ProcessSync('runcron');
+	if ($process_sync->Enter())
 	{
-		CleanupAndExit($opt['cron']['pidfile'], "Another instance is running!");
-		exit;
+		// Run as system user, if possible.
+		// This is relevant e.g. for publishing and for auto-archiving caches.
+		if ($opt['logic']['systemuser']['user'] != '')
+			if (!$login->system_login($opt['logic']['systemuser']['user']))
+				die("ERROR: runcron system user login failed");
+
+		$modules_dir = $opt['rootpath'] . 'util2/cron/modules/';
+
+		$hDir = opendir($modules_dir);
+		while (false !== ($file = readdir($hDir)))
+			if (substr($file, -10) == '.class.php')
+				require($modules_dir . $file);
+
+		$process_sync->Leave();
 	}
 
-	// Run as system user, if possible.
-	// This is relevant e.g. for publishing and for auto-archiving caches.
-	if ($opt['logic']['systemuser']['user'] != '')
-		if (!$login->system_login($opt['logic']['systemuser']['user']))
-		  die("ERROR: runcron system user login failed");
-
-	$modules_dir = $opt['rootpath'] . 'util2/cron/modules/';
-
-	$hDir = opendir($modules_dir);
-	while (false !== ($file = readdir($hDir)))
-		if (substr($file, -10) == '.class.php')
-			require($modules_dir . $file);
-
-  CleanupAndExit($opt['cron']['pidfile']); 
 
 function checkJob(&$job)
 {
@@ -53,90 +52,4 @@ function checkJob(&$job)
 	}
 }
 
-// 
-// checks if other instance is running, creates pid-file for locking 
-// 
-function CreatePidFile($PidFile)
-{
-    if(!CheckDaemon($PidFile))
-    {
-        return false;
-    }
-
-    if(file_exists($PidFile))
-    {
-        echo "Error: Pidfile (".$PidFile.") already present at ".__FILE__.":".__LINE__."!\n";
-        return false;
-    }
-    else 
-    {
-        if($pidfile = @fopen($PidFile, "w")) 
-        {
-            fputs($pidfile, posix_getpid()); 
-            fclose($pidfile); 
-            return true; 
-        }
-        else 
-        {
-            echo "can't create Pidfile $PidFile at ".__FILE__.":".__LINE__."!\n"; 
-            return false; 
-        }
-    }
-} 
-
-// 
-// checks if other instance of process is running.. 
-// 
-function CheckDaemon($PidFile) 
-{ 
-    if($pidfile = @fopen($PidFile, "r")) 
-    { 
-        $pid_daemon = fgets($pidfile, 20); 
-        fclose($pidfile); 
-
-        $pid_daemon = (int)$pid_daemon; 
-
-        // process running? 
-        if(posix_kill($pid_daemon, 0)) 
-        { 
-            // yes, good bye 
-            echo "Error: process already running with pid=$pid_daemon!\n"; 
-            false; 
-        } 
-        else 
-        { 
-            // no, remove pid_file 
-            echo "process not running, removing old pid_file (".$PidFile.")\n"; 
-            unlink($PidFile); 
-            return true; 
-        } 
-    } 
-    else 
-    { 
-        return true; 
-    } 
-} 
-
-// 
-// deletes pid-file 
-// 
-function CleanupAndExit($PidFile, $message = false) 
-{ 
-    if($pidfile = @fopen($PidFile, "r")) 
-    { 
-        $pid = fgets($pidfile, 20); 
-        fclose($pidfile); 
-        if($pid == posix_getpid()) 
-            unlink($PidFile); 
-    } 
-    else 
-    { 
-        echo "Error: can't delete own pidfile (".$PidFile.") at ".__FILE__.":".__LINE__."!\n"; 
-    } 
-
-    if($message) 
-    { 
-      echo $message . "\n"; 
-    } 
-}
 ?>

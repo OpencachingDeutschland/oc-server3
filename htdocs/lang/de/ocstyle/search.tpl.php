@@ -281,7 +281,7 @@ function switchAttributeCat2()
 			<td colspan="2">
 				<div style="padding:0 0 5px 0">
 				<input type="radio" name="sort" value="byname" index="0" id="l_sortbyname" class="radio" onclick="sync_options(this)" {byname_checked} > <label for="l_sortbyname">{t}Cachename{/t}</label>&nbsp;
-				<input type="radio" name="sort" value="bydistance" index="1" id="l_sortbydistance" class="radio" onclick="sync_options(this)" {bydistance_checked} {bydistance_enabled} accept=""{disable_nologin}"> <label for="l_sortbydistance" {grey_nologin}">{t}Distance from <a href="myprofile.php">user-profile home coordinates</a>{/t}</label></div>
+				<input type="radio" name="sort" value="bydistance" index="1" id="l_sortbydistance" class="radio" onclick="sync_options(this)" {bydistance_checked} {bydistance_enabled} {disable_nologin}> <label for="l_sortbydistance" {grey_nologin}>{t}Distance from <a href="myprofile.php">user-profile home coordinates</a>{/t}</label></div>
 				<input type="radio" name="sort" value="bycreated" index="2" id="l_sortbycreated" class="radio" onclick="sync_options(this)" {bycreated_checked}> <label for="l_sortbycreated">{t}Listed since{/t}</label>&nbsp;
 				<input type="radio" name="sort" value="bylastlog" index="3" id="l_sortbylastlog" class="radio" onclick="sync_options(this)" {bylastlog_checked}> <label for="l_sortbylastlog" >{t}Last log{/t}</label>&nbsp;
 				<input type="radio" name="sort" value="bymylastlog" index="4" id="l_sortbymylastlog" class="radio" onclick="sync_options(this)" {bymylastlog_checked} {disable_nologin}> <label for="l_sortbymylastlog" {grey_nologin}>{t}My last log{/t}</label>

@@ -1,11 +1,13 @@
 <?php
 	/***************************************************************************
 		For license information see doc/license.txt
-		         
+
 		Unicode Reminder メモ
-                                				                                
+
 		ovl search output for TOP25, TOP50 etc.
 	****************************************************************************/
+
+	require_once($opt['rootpath'] . 'lib2/charset.inc.php');
 
 	$search_output_file_download = true;
 	$content_type_plain = 'application/ovl';
@@ -43,16 +45,16 @@ function search_output()
 	while ($r = sql_fetch_array($rs))
 	{
 		$thisline = $ovlLine;
-		
+
 		$lat = sprintf('%01.5f', $r['latitude']);
 		$thisline = mb_ereg_replace('{lat}', $lat, $thisline);
 		$thisline = mb_ereg_replace('{latname}', $lat, $thisline);
-		
+
 		$lon = sprintf('%01.5f', $r['longitude']);
 		$thisline = mb_ereg_replace('{lon}', $lon, $thisline);
 		$thisline = mb_ereg_replace('{lonname}', $lon, $thisline);
 
-		$thisline = mb_ereg_replace('{cachename}', convert_string($r['name']), $thisline);
+		$thisline = mb_ereg_replace('{cachename}', utf8ToIso88591($r['name']), $thisline);
 		$thisline = mb_ereg_replace('{symbolnr1}', $nr, $thisline);
 		$thisline = mb_ereg_replace('{symbolnr2}', $nr + 1, $thisline);
 
@@ -60,19 +62,10 @@ function search_output()
 		$nr += 2;
 	}
 	mysql_free_result($rs);
-	
+
 	$ovlFoot = mb_ereg_replace('{symbolscount}', $nr - 1, $ovlFoot);
 	append_output($ovlFoot);
 }
 
 
-	function convert_string($str)
-	{
-		$newstr = iconv("UTF-8", "ISO-8859-1", $str);
-		if ($newstr == false)
-			return $str;
-		else
-			return $newstr;
-	}
-	
 ?>

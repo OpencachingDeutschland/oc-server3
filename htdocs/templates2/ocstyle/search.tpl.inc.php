@@ -1,88 +1,47 @@
 <?php
 /****************************************************************************
-												  ./lang/de/ocstyle/search.inc.php
-															-------------------
-		begin                : July 25 2004
-
-		For license information see doc/license.txt
- ****************************************************************************/
-
-/****************************************************************************
+	 For license information see doc/license.txt
 
    Unicode Reminder メモ
 
-	 set template specific language variables
-
+	 variable search template contents
  ****************************************************************************/
 
- 	$outputformat_notexist = t('The selected output format is unknown!');
- 	$error_query_not_found = t('The search operation could not be executed, please reenter the search data.');
+	// search.php -> $tpl->error
+ 	$outputformat_notexist = _('The selected output format is unknown!');
+ 	$error_query_not_found = _('The search operation could not be executed, please reenter the search data.');
+	$unknown_searchoption = _('unknown search option');
+	$unknown_searchtype = _('unknown search type');
 
-	$caches_newstring = '<b class="newsymbol">&nbsp;' . t('NEW') . '&nbsp;</b>&nbsp;';
-	$caches_olddays = 14;  // changed from 7 to 14  -- following 2013/6/17
+	// search.php -> search.tpl
+	$error_plz = '<tr><td colspan="3"><span class="errormsg">' . _('The postal code could not be found') . '</span></td></tr>';
+	$error_ort = '<tr><td colspan="3"><span class="errormsg">' . _('There does no city exist with this name') . '</span></td></tr>';
+	$error_locidnocoords = '<tr><td colspan="3"><span class="errormsg">' . _('There are no Koordinates available for the selected city') . '</span></td></tr>';
+	$error_noort = '<tr><td colspan="3"><span class="errormsg">' . _('The entered city is not valid.') . '</span></td></tr>';
+	$error_nofulltext = '<tr><td colspan="3"><span class="errormsg">' . _('The entered text is invalid.') . '</span></td></tr>';
+	$error_fulltexttoolong = '<tr><td colspan="3"><span class="errormsg">' . _('The entered text contains more than 50 words.') . '</span></td></tr>';
 
+	// search.php -> selectlocid.tpl
+	$locline = '<tr><td width="50px"><p>{nr}.&nbsp;</p></td><td><p><b><a href="search.php?{urlparams}">{locationname}</a>{secondlocationname}</b></p></td></tr>
+							<tr><td width="50px">&nbsp;</td><td><p style="margin-bottom:4px">{coords}</p></td></tr>
+							<tr><td width="50px">&nbsp;</td><td style="padding-bottom:8px; vertical-align:top"><span style="color:#001BBC">{parentlocations}</span></td></tr>';
+
+	$secondlocationname = '&nbsp;<font size="1">({secondlocationname})</font>';
+	$no_location_coords = _('no coordinates available');
+
+	$pages_left_inactive = '<img src="resource2/ocstyle/images/navigation/16x16-browse-first-inactive.png" width="16" height="16"> <img src="resource2/ocstyle/images/navigation/16x16-browse-prev-inactive.png" width="16" height="16">';
+	$pages_left = '<a href="search.php?{urlparams}&locidsite=0"><img src="resource2/ocstyle/images/navigation/16x16-browse-first.png" width="16" height="16"></a> <a href="search.php?{urlparams}&locidsite={prevpage}"><img src="resource2/ocstyle/images/navigation/16x16-browse-prev.png" width="16" height="16"></a>';
+	$page_selectable = '<a href="search.php?{urlparams}&locidsite={linkpage}">{showpage}</a>';
+	$page_selected = '<b>{page}</b>';
+	$pages_right = '<a href="search.php?{urlparams}&locidsite={nextpage}"><img src="resource2/ocstyle/images/navigation/16x16-browse-next.png" width="16" height="16"></a> <a href="search.php?{urlparams}&locidsite={lastpage}"><img src="resource2/ocstyle/images/navigation/16x16-browse-last.png" width="16" height="16"></a>';
+	$pages_right_inactive = '<img src="resource2/ocstyle/images/navigation/16x16-browse-next-inactive.png" width="16" height="16"> <img src="resource2/ocstyle/images/navigation/16x16-browse-last-inactive.png" width="16" height="16">';
+
+	// search.html.inc.php -> search.result.caches.tpl
+	$newcache_days = 14;  // changed from 7 to 14  -- following 2013/6/17
+	$caches_newstring = '<b class="newsymbol">&nbsp;' . _('NEW') . '&nbsp;</b>&nbsp;';
 	$caches_oconlystring = '<img src="resource2/ocstyle/images/misc/is_oconly.png" alt="OConly" title="OConly" style="margin:0px; padding:0px" width="64" height="35" />';
 
- 	$bgcolor1 = 'odd';			// even lines
- 	$bgcolor2 = 'even';			// odd lines
-	$bgcolor_found = "#66FFCC";		// if cache was found by user
-	$bgcolor_owner = "#ffffc5";		// if user is owner
-	$bgcolor_inactive = "#fafafa";	// if cache is inactive
-	
-	$string_by = t('by');
-
- 	$logdateformat = 'd.m.Y';
- 	$logpics[1] = '<img alt="' . t('Find') . '" border="0" src="images/ok.gif">';
- 	$logpics[2] = '<img alt="' . t('Didn\'t find') . '" border="0" src="images/redcross.gif">';
- 	$logpics[3] = '<img alt="' . t('Note') . '" border="0" src="images/info.gif">';
-
- 	$diffpics[2] = 'diff-10.gif';
- 	$diffpics[3] = 'diff-15.gif';
- 	$diffpics[4] = 'diff-20.gif';
- 	$diffpics[5] = 'diff-25.gif';
- 	$diffpics[6] = 'diff-30.gif';
- 	$diffpics[7] = 'diff-35.gif';
- 	$diffpics[8] = 'diff-40.gif';
- 	$diffpics[9] = 'diff-45.gif';
- 	$diffpics[10] = 'diff-50.gif';
-
- 	$terrpics[2] = 'terr-10.gif';
- 	$terrpics[3] = 'terr-15.gif';
- 	$terrpics[4] = 'terr-20.gif';
- 	$terrpics[5] = 'terr-25.gif';
- 	$terrpics[6] = 'terr-30.gif';
- 	$terrpics[7] = 'terr-35.gif';
- 	$terrpics[8] = 'terr-40.gif';
- 	$terrpics[9] = 'terr-45.gif';
- 	$terrpics[10] = 'terr-50.gif';
-
- 	$terrpics[1] = 'rat-10.gif';
- 	$terrpics[2] = 'rat-20.gif';
- 	$terrpics[3] = 'rat-30.gif';
- 	$terrpics[4] = 'rat-40.gif';
- 	$terrpics[5] = 'rat-50.gif';
-
-	$difficulty_text_diff = t("Difficulty: %01.1f of 5.0");
-	$difficulty_text_terr = t("Terrain: %01.1f of 5.0");
-	$rating_text = t("Rating: {rating}%");
-	$not_rated = t('No Rating');
-
-	$error_plz = '<tr><td colspan="3"><span class="errormsg">' . t('The postal code could not be found') . '</span></td></tr>';
-	$error_ort = '<tr><td colspan="3"><span class="errormsg">' . t('There does no city exist with this name') . '</span></td></tr>';
-	$error_locidnocoords = '<tr><td colspan="3"><span class="errormsg">' . t('There are no Koordinates available for the selected city') . '</span></td></tr>';
-	$error_noort = '<tr><td colspan="3"><span class="errormsg">' . t('The entered city is not valid.') . '</span></td></tr>';
-	$error_nofulltext = '<tr><td colspan="3"><span class="errormsg">' . t('The entered text is invalid.') . '</span></td></tr>';
-	$error_fulltexttoolong = '<tr><td colspan="3"><span class="errormsg">' . t('The entered text contains more than 50 words.') . '</span></td></tr>';
-
-	$gns_countries['GM'] = t('Germany');
-	$gns_countries['AU'] = t('Austria');
-	$gns_countries['SZ'] = t('Switzerland');
-
-	$default_lang = t('EN');
-	$search_all_countries = '<option value="" selected="selected">' . t('All countries') . '</option>';
-	$search_all_cachetypes = '<option value="" selected="selected">' . t('All cachetypes') . '</option>';
-
-	$cache_attrib_group = 
+	$cache_attrib_group =
 	'<div class="attribgroup"><table cellspacing="0">
 	     <tr><td bgcolor="{color}" style="line-height:9px;padding-top:2px;margin:0 0 0 0;border-left:1px solid gray;border-right:1px solid gray;border-top:1px solid gray;"><font size="1">{name}</font></td></tr>
 	     <tr><td bgcolor="#F8F8F8" style="margin:0 0 0 0;border-left:1px solid gray;border-right:1px solid gray;border-bottom:1px solid gray;">{attribs}</td></tr>
@@ -94,59 +53,11 @@
 	$search_in_gm = '<a href="http://maps.google.de/maps?f=q&hl=de&q=' . urlencode("http://".$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI']."&output=kml") . '" title="' . $translate->t('Show in Google Maps','','',0) . '">' . $translate->t('(in GM)','','',0) . '</a>';
 	$search_in_gm_zip = '<a href="http://maps.google.de/maps?f=q&hl=de&q=' . urlencode("http://".$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI']."&output=kml&zip=1&count=max") . '" title="' . $translate->t('Show in Google Maps','','',0) . '">' . $translate->t('(in GM)','','',0) . '</a>';
 
-	$unknown_searchtype = t('unknown search type');
-	$showonmap = t('Show on map');
+	// search.*.inc.php (TXT, KML, LOC, GPX ...)
+	$converted_from_html = _('converted from HTML');
+	$state_temporarily_na = _('Temporary not available');
+	$state_archived = _('Archived');
+	$state_locked = _('Locked');
+	$cache_note_text = _('Personal cache note');
 
-	$converted_from_html = t('converted from HTML');
-	$state_temporarily_na = t('Temporary not available');
-	$state_archived = t('Archived');
-	$state_locked = t('Locked');
-	$cache_note_text = t('Personal cache note');
-
-
-function dateDiff($interval, $dateTimeBegin, $dateTimeEnd)
-{
-  //Parse about any English textual datetime
-  //$dateTimeBegin, $dateTimeEnd
-
-  $dateTimeBegin = strtotime($dateTimeBegin);
-  if ($dateTimeBegin === -1)
-    return("..begin date Invalid");
-
-  $dateTimeEnd = strtotime($dateTimeEnd);
-  if ($dateTimeEnd === -1)
-    return("..end date Invalid");
-
-  $dif = $dateTimeEnd - $dateTimeBegin;
-
-  switch($interval)
-  {
-    case "s"://seconds
-      return($dif);
-
-    case "n"://minutes
-      return(floor($dif/60)); //60s=1m
-
-    case "h"://hours
-      return(floor($dif/3600)); //3600s=1h
-
-    case "d"://days
-      return(floor($dif/86400)); //86400s=1d
-
-    case "ww"://Week
-      return(floor($dif/604800)); //604800s=1week=1semana
-
-    case "m": //similar result "m" dateDiff Microsoft
-      $monthBegin = (date("Y",$dateTimeBegin)*12) + date("n",$dateTimeBegin);
-      $monthEnd = (date("Y",$dateTimeEnd)*12) + date("n",$dateTimeEnd);
-      $monthDiff = $monthEnd - $monthBegin;
-      return($monthDiff);
-
-    case "yyyy": //similar result "yyyy" dateDiff Microsoft
-      return(date("Y",$dateTimeEnd) - date("Y",$dateTimeBegin));
-
-    default:
-      return(floor($dif/86400)); //86400s=1d
-  }
-}
 ?>

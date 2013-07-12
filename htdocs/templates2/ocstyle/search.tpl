@@ -1,32 +1,23 @@
-<?php
-/***************************************************************************
-												  ./lang/de/ocstyle/search.simple.tpl.php
-															-------------------
-		begin                : July 25 2004
+{***************************************************************************
+*  You can find the license in the docs directory
+*
+*  Unicode Reminder メモ
+***************************************************************************}
 
-		For license information see doc/license.txt
- ****************************************************************************/
-
-/****************************************************************************
-
-   Unicode Reminder メモ
-
-	 simple filter template for XHTML search form
-
- ****************************************************************************/
-?>
 <script type="text/javascript" src="resource2/ocstyle/js/wz_tooltip.js"></script>
 <script type="text/javascript">
 <!--
 var mnAttributesShowCat2 = 1;
-var maAttributes = new Array({attributes_jsarray});
-var cachesizes = {cachesizes};
+var maAttributes = new Array({$attributes_jsarray});
+var cachesizes = {$cachesizes};
+
+{literal}
 
 function _sbn_click()
 {
 	if (document.searchbyname.cachename.value == "")
 	{
-		alert("{t}Enter a name, please!{/t}");
+		alert("{/literal}{t}Enter a name, please!{/t}{literal}");
 		resetbutton('submit_cachename');
 		return false;
 	}
@@ -37,7 +28,7 @@ function _sbft_click()
 {
 	if (document.searchbyfulltext.fulltext.value == "")
 	{
-		alert("{t}Fill out the text field, please!{/t}");
+		alert("{/literal}{t}Fill out the text field, please!{/t}{literal}");
 		resetbutton('submit_ft');
 		return false;
 	}
@@ -47,7 +38,7 @@ function _sbft_click()
 	   (document.searchbyfulltext.ft_logs.checked == false) &&
 	   (document.searchbyfulltext.ft_pictures.checked == false))
 	{
-		alert("{t}You have to check at least one field!{/t}");
+		alert("{/literal}{t}You have to check at least one field!{/t}{literal}");
 		resetbutton('submit_ft');
 		return false;
 	}
@@ -59,25 +50,25 @@ function _sbd_click()
 {
 	if (isNaN(document.searchbydistance.lon_h.value) || isNaN(document.searchbydistance.lon_min.value))
 	{
-		alert("{t}Longitude has to be a number!\nFormat: hh° mm.mmm{/t}");
+		alert("{/literal}{t}Longitude has to be a number!\nFormat: hh° mm.mmm{/t}{literal}");
 		resetbutton('submit_dist');
 		return false;
 	}
 	else if (isNaN(document.searchbydistance.lat_h.value) || isNaN(document.searchbydistance.lat_min.value))
 	{
-		alert("{t}Latitude has to be a number!\nFormat: hh° mm.mmm{/t}");
+		alert("{/literal}{t}Latitude has to be a number!\nFormat: hh° mm.mmm{/t}{literal}");
 		resetbutton('submit_dist');
 		return false;
 	}
 	else if (isNaN(document.searchbydistance.distance.value))
 	{
-		alert("{t}The maximum distance has to be a number!{/t}");
+		alert("{/literal}{t}The maximum distance has to be a number!{/t}{literal}");
 		resetbutton('submit_dist');
 		return false;
 	}
 	else if (document.searchbydistance.distance.value <= 0 || document.searchbydistance.distance.value > 9999)
 	{
-		alert("{t}The distance has to be between 0 and 9999{/t}");
+		alert("{/literal}{t}The distance has to be between 0 and 9999{/t}{literal}");
 		resetbutton('submit_dist');
 		return false;
 	}
@@ -88,7 +79,7 @@ function _sbplz_click()
 {
 	if (document.searchbyplz.plz.value == "")
 	{
-		alert("{t}Enter the postal code, please!{/t}");
+		alert("{/literal}{t}Enter the postal code, please!{/t}{literal}");
 		resetbutton('submit_plz');
 		return false;
 	}
@@ -99,7 +90,7 @@ function _sbort_click()
 {
 	if (document.searchbyort.ort.value == "")
 	{
-		alert("{t}Enter the city, please!{/t}");
+		alert("{/literal}{t}Enter the city, please!{/t}{literal}");
 		resetbutton('submit_city');
 		return false;
 	}
@@ -110,7 +101,7 @@ function _sbo_click()
 {
 	if (document.searchbyowner.owner.value == "")
 	{
-		alert("{t}Enter the owner, please!{/t}");
+		alert("{/literal}{t}Enter the owner, please!{/t}{literal}");
 		resetbutton('submit_owner');
 		return false;
 	}
@@ -121,7 +112,7 @@ function _sbf_click()
 {
 	if (document.searchbyfinder.finder.value == "")
 	{
-		alert("{t}Enter the username, please!{/t}");
+		alert("{/literal}{t}Enter the username, please!{/t}{literal}");
 		resetbutton('submit_finder');
 		return false;
 	}
@@ -248,7 +239,7 @@ function hideAttributesCat2()
 	mnAttributesShowCat2 = 0;
 	document.getElementById('attributesCat1').style.display = "block";
 	document.getElementById('attributesCat2').style.display = "none";
-	document.getElementById('toggleAttributesCaption').firstChild.nodeValue = "{t}Show all{/t}";
+	document.getElementById('toggleAttributesCaption').firstChild.nodeValue = "{/literal}{t}Show all{/t}{literal}";
 }
 
 function showAttributesCat2()
@@ -256,7 +247,7 @@ function showAttributesCat2()
 	mnAttributesShowCat2 = 1;
 	document.getElementById('attributesCat1').style.display = "none";
 	document.getElementById('attributesCat2').style.display = "block";
-	document.getElementById('toggleAttributesCaption').firstChild.nodeValue = "{t}Less{/t}";
+	document.getElementById('toggleAttributesCaption').firstChild.nodeValue = "{/literal}{t}Less{/t}{literal}";
 }
 
 function switchAttributeCat2()
@@ -268,6 +259,7 @@ function switchAttributeCat2()
 }
 //-->
 </script>
+{/literal}
 
 <div class="content2-pagetitle"><img src="resource2/ocstyle/images/misc/32x32-search.png" style="align: left; margin-right: 10px;" width="32" height="32" alt="{t}Search for caches{/t}" />{t}Search for caches{/t}</div>
 
@@ -275,22 +267,22 @@ function switchAttributeCat2()
 
 <div class="searchdiv">
 	<table class="table">
-		
+
 		<tr>
 			<td style="vertical-align:top">{t}Sorting of result:{/t}</td>
 			<td colspan="2">
 				<div style="padding:0 0 5px 0">
-				<input type="radio" name="sort" value="byname" index="0" id="l_sortbyname" class="radio" onclick="sync_options(this)" {byname_checked} > <label for="l_sortbyname">{t}Cachename{/t}</label>&nbsp;
-				<input type="radio" name="sort" value="bydistance" index="1" id="l_sortbydistance" class="radio" onclick="sync_options(this)" {bydistance_checked} {bydistance_enabled} {disable_nologin}> <label for="l_sortbydistance" {grey_nologin}>{t}Distance from <a href="myprofile.php">user-profile home coordinates</a>{/t}</label></div>
-				<input type="radio" name="sort" value="bycreated" index="2" id="l_sortbycreated" class="radio" onclick="sync_options(this)" {bycreated_checked}> <label for="l_sortbycreated">{t}Listed since{/t}</label>&nbsp;
-				<input type="radio" name="sort" value="bylastlog" index="3" id="l_sortbylastlog" class="radio" onclick="sync_options(this)" {bylastlog_checked}> <label for="l_sortbylastlog" >{t}Last log{/t}</label>&nbsp;
-				<input type="radio" name="sort" value="bymylastlog" index="4" id="l_sortbymylastlog" class="radio" onclick="sync_options(this)" {bymylastlog_checked} {disable_nologin}> <label for="l_sortbymylastlog" {grey_nologin}>{t}My last log{/t}</label>
+				<input type="radio" name="sort" value="byname" index="0" id="l_sortbyname" class="radio" onclick="sync_options(this)" {if $byname_checked}checked="checked"{/if} > <label for="l_sortbyname">{t}Cachename{/t}</label>&nbsp;
+				<input type="radio" name="sort" value="bydistance" index="1" id="l_sortbydistance" class="radio" onclick="sync_options(this)" {if $bydistance_checked}checked="checked"{/if} {if !$bydistance_enabled}disabled="disabled"{/if} {if $disable_nologin}disabled="disabled"{/if}> <label for="l_sortbydistance" {if $disable_nologin}class="disabled">{/if}{t}Distance from <a href="myprofile.php">user-profile home coordinates</a>{/t}</label></div>
+				<input type="radio" name="sort" value="bycreated" index="2" id="l_sortbycreated" class="radio" onclick="sync_options(this)" {if $bycreated_checked}checked="checked"{/if}> <label for="l_sortbycreated">{t}Listed since{/t}</label>&nbsp;
+				<input type="radio" name="sort" value="bylastlog" index="3" id="l_sortbylastlog" class="radio" onclick="sync_options(this)" {if $bylastlog_checked}checked="checked"{/if}> <label for="l_sortbylastlog" >{t}Last log{/t}</label>&nbsp;
+				<input type="radio" name="sort" value="bymylastlog" index="4" id="l_sortbymylastlog" class="radio" onclick="sync_options(this)" {if $bymylastlog_checked}checked="checked"{/if} {if $disable_nologin}disabled="disabled"{/if}> <label for="l_sortbymylastlog" {if $disable_nologin}class="disabled"{/if}>{t}My last log{/t}</label>
 			</td>
 		</tr>
 		<tr>
 			<td>&nbsp;</td>
 			<td>
-				<input id="orderRatingFirst" type="checkbox" name="orderRatingFirst" class="checkbox" value="1" onclick="sync_options(this)" {orderRatingFirst_checked} />
+				<input id="orderRatingFirst" type="checkbox" name="orderRatingFirst" class="checkbox" value="1" onclick="sync_options(this)" {if $orderRatingFirst_checked}checked="checked"{/if} />
 				<label for="orderRatingFirst">{t}Show recommendation from other users first{/t}</label>
 			</td>
 		</tr>
@@ -301,18 +293,18 @@ function switchAttributeCat2()
 		<tr>
 			<td>{t}Hide following caches:{/t}</td>
 			<td colspan="2">
-				<input type="checkbox" name="f_userowner" value="1" id="l_userowner" class="checkbox" onclick="sync_options(this)" {f_userowner_disabled}  /> <label for="l_userowner" {grey_nologin}>{t}My owned{/t}</label>&nbsp;&nbsp;
-				<input type="checkbox" name="f_userfound" value="1" id="l_userfound" class="checkbox" onclick="sync_options(this)" {f_userfound_disabled} /> <label for="l_userfound" {grey_nologin}>{t}My finds{/t}</label>&nbsp;&nbsp;
-				<input type="checkbox" name="f_ignored" value="1" id="l_ignored" class="checkbox" onclick="sync_options(this)" {f_ignored_disabled} > <label for="l_ignored" {grey_nologin}>{t}My ignored{/t}</label>&nbsp;&nbsp;
+				<input type="checkbox" name="f_userowner" value="1" id="l_userowner" class="checkbox" onclick="sync_options(this)" {if $f_userowner_disabled}disabled="disabled"{/if}  /> <label for="l_userowner" {if $disable_nologin}class="disabled"{/if}>{t}My owned{/t}</label>&nbsp;&nbsp;
+				<input type="checkbox" name="f_userfound" value="1" id="l_userfound" class="checkbox" onclick="sync_options(this)" {if $f_userfound_disabled}disabled="disabled"{/if} /> <label for="l_userfound" {if $disable_nologin}class="disabled"{/if}>{t}My finds{/t}</label>&nbsp;&nbsp;
+				<input type="checkbox" name="f_ignored" value="1" id="l_ignored" class="checkbox" onclick="sync_options(this)" {if $f_ignored_disabled}disabled="disabled"{/if} > <label for="l_ignored" {if $disable_nologin}class="disabled"{/if}>{t}My ignored{/t}</label>&nbsp;&nbsp;
 				<img src="lang/de/ocstyle/images/misc/hint.gif" border="0" width="15" height="11" alt="{t}Notice{/t}" title="{t}Notice{/t}" align="middle">{t}Only usable if signed in.{/t}
 			</td>
 		</tr>
 		<tr>
 			<td>&nbsp;</td>
 			<td colspan="2">
-				<input type="checkbox" name="f_disabled" value="1" id="l_disabled" class="checkbox" onclick="sync_options(this)" {f_disabled_checked} > <label for="l_disabled">{t}disabled[pl]{/t}</label>&nbsp;
-				<input type="checkbox" name="f_inactive" value="1" id="l_inactive" class="checkbox" onclick="sync_options(this)" {f_inactive_checked} > <label for="l_inactive">{t}archived[pl]{/t}</label>&nbsp;
-				<input type="checkbox" name="f_otherPlatforms" value="1" id="l_otherPlatforms" class="checkbox" onclick="sync_options(this)" {f_otherPlatforms_checked} > <label for="l_otherPlatforms">{t}GC listings (also listed at gc.com){/t}</label>
+				<input type="checkbox" name="f_disabled" value="1" id="l_disabled" class="checkbox" onclick="sync_options(this)" {if $f_disabled_checked}checked="checked"{/if} > <label for="l_disabled">{t}disabled[pl]{/t}</label>&nbsp;
+				<input type="checkbox" name="f_inactive" value="1" id="l_inactive" class="checkbox" onclick="sync_options(this)" {if $f_inactive_checked}checked="checked"{/if} > <label for="l_inactive">{t}archived[pl]{/t}</label>&nbsp;
+				<input type="checkbox" name="f_otherPlatforms" value="1" id="l_otherPlatforms" class="checkbox" onclick="sync_options(this)" {if $f_otherPlatforms_checked}checked="checked"{/if} > <label for="l_otherPlatforms">{t}GC listings (also listed at gc.com){/t}</label>
 			</td>
 		</tr>
 	</table>
@@ -321,22 +313,22 @@ function switchAttributeCat2()
 	<table class="table">
 		<tr>
 			<td>{t}Cachetype:{/t}</td>
-			<td><input type="checkbox" id="cachetype2" name="cachetype2" value="2" onclick="sync_options(this)" class="checkbox" {cachetype2checked} /> <label for="cachetype2">{t}Traditional Cache{/t}</label></td>
-			<td><input type="checkbox" id="cachetype3" name="cachetype3" value="3" onclick="sync_options(this)" class="checkbox" {cachetype3checked} /> <label for="cachetype3">{t}Multicache{/t}</label></td>
-			<td><input type="checkbox" id="cachetype5" name="cachetype5" value="5" onclick="sync_options(this)" class="checkbox" {cachetype5checked} /> <label for="cachetype5">{t}Webcam Cache{/t}</label></td>
-			<td><input type="checkbox" id="cachetype6" name="cachetype6" value="6" onclick="sync_options(this)" class="checkbox" {cachetype6checked} /> <label for="cachetype6">{t}Event Cache{/t}</label></td>
+			<td><input type="checkbox" id="cachetype2" name="cachetype2" value="2" onclick="sync_options(this)" class="checkbox" {if $cachetype2checked}checked="checked"{/if} /> <label for="cachetype2">{t}Traditional Cache{/t}</label></td>
+			<td><input type="checkbox" id="cachetype3" name="cachetype3" value="3" onclick="sync_options(this)" class="checkbox" {if $cachetype3checked}checked="checked"{/if} /> <label for="cachetype3">{t}Multicache{/t}</label></td>
+			<td><input type="checkbox" id="cachetype5" name="cachetype5" value="5" onclick="sync_options(this)" class="checkbox" {if $cachetype5checked}checked="checked"{/if} /> <label for="cachetype5">{t}Webcam Cache{/t}</label></td>
+			<td><input type="checkbox" id="cachetype6" name="cachetype6" value="6" onclick="sync_options(this)" class="checkbox" {if $cachetype6checked}checked="checked"{/if} /> <label for="cachetype6">{t}Event Cache{/t}</label></td>
 		</tr>
 		<tr>
 			<td></td>
-			<td><input type="checkbox" id="cachetype7" name="cachetype7" value="7" onclick="sync_options(this)" class="checkbox" {cachetype7checked} /> <label for="cachetype7">{t}Quizcache{/t}</label></td>
-			<td><input type="checkbox" id="cachetype8" name="cachetype8" value="8" onclick="sync_options(this)" class="checkbox" {cachetype8checked} /> <label for="cachetype8">{t}Math/Physics-Cache{/t}</label></td>
-			<td><input type="checkbox" id="cachetype9" name="cachetype9" value="9" onclick="sync_options(this)" class="checkbox" {cachetype9checked} /> <label for="cachetype9">{t}Moving Cache{/t}</label></td>
-			<td><input type="checkbox" id="cachetype10" name="cachetype10" value="10" onclick="sync_options(this)" class="checkbox" {cachetype10checked} /> <label for="cachetype10">{t}Drive-In{/t}</label></td>
+			<td><input type="checkbox" id="cachetype7" name="cachetype7" value="7" onclick="sync_options(this)" class="checkbox" {if $cachetype7checked}checked="checked"{/if} /> <label for="cachetype7">{t}Quizcache{/t}</label></td>
+			<td><input type="checkbox" id="cachetype8" name="cachetype8" value="8" onclick="sync_options(this)" class="checkbox" {if $cachetype8checked}checked="checked"{/if} /> <label for="cachetype8">{t}Math/Physics-Cache{/t}</label></td>
+			<td><input type="checkbox" id="cachetype9" name="cachetype9" value="9" onclick="sync_options(this)" class="checkbox" {if $cachetype9checked}checked="checked"{/if} /> <label for="cachetype9">{t}Moving Cache{/t}</label></td>
+			<td><input type="checkbox" id="cachetype10" name="cachetype10" value="10" onclick="sync_options(this)" class="checkbox" {if $cachetype10checked}checked="checked"{/if} /> <label for="cachetype10">{t}Drive-In{/t}</label></td>
 		</tr>
 		<tr>
 			<td></td>
-			<td><input type="checkbox" id="cachetype4" name="cachetype4" value="4" onclick="sync_options(this)" class="checkbox" {cachetype4checked} /> <label for="cachetype4">{t}virtual Cache{/t}</label></td>
-			<td><input type="checkbox" id="cachetype1" name="cachetype1" value="1" onclick="sync_options(this)" class="checkbox" {cachetype1checked} /> <label for="cachetype1">{t}unknown cachetyp{/t}</label></td>
+			<td><input type="checkbox" id="cachetype4" name="cachetype4" value="4" onclick="sync_options(this)" class="checkbox" {if $cachetype4checked}checked="checked"{/if} /> <label for="cachetype4">{t}virtual Cache{/t}</label></td>
+			<td><input type="checkbox" id="cachetype1" name="cachetype1" value="1" onclick="sync_options(this)" class="checkbox" {if $cachetype1checked}checked="checked"{/if} /> <label for="cachetype1">{t}unknown cachetyp{/t}</label></td>
 		</tr>
 	</table>
 </div>
@@ -344,17 +336,17 @@ function switchAttributeCat2()
 	<table class="table">
 		<tr>
 			<td>{t}Cachesize:{/t}</td>
-			<td><input type="checkbox" id="cachesize8" name="cachesize8" value="8" onclick="sync_options(this)" class="checkbox" {cachesize8checked} /> <label for="cachesize8">{t}nano{/t}</label>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-			<td><input type="checkbox" id="cachesize2" name="cachesize2" value="2" onclick="sync_options(this)" class="checkbox" {cachesize2checked} /> <label for="cachesize2">{t}micro{/t}</label></td>
-			<td><input type="checkbox" id="cachesize3" name="cachesize3" value="3" onclick="sync_options(this)" class="checkbox" {cachesize3checked} /> <label for="cachesize3">{t}small{/t}</label></td>
-			<td><input type="checkbox" id="cachesize4" name="cachesize4" value="4" onclick="sync_options(this)" class="checkbox" {cachesize4checked} /> <label for="cachesize4">{t}normal{/t}</label></td>
+			<td><input type="checkbox" id="cachesize8" name="cachesize8" value="8" onclick="sync_options(this)" class="checkbox" {if $cachesize8checked}checked="checked"{/if} /> <label for="cachesize8">{t}nano{/t}</label>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+			<td><input type="checkbox" id="cachesize2" name="cachesize2" value="2" onclick="sync_options(this)" class="checkbox" {if $cachesize2checked}checked="checked"{/if} /> <label for="cachesize2">{t}micro{/t}</label></td>
+			<td><input type="checkbox" id="cachesize3" name="cachesize3" value="3" onclick="sync_options(this)" class="checkbox" {if $cachesize3checked}checked="checked"{/if} /> <label for="cachesize3">{t}small{/t}</label></td>
+			<td><input type="checkbox" id="cachesize4" name="cachesize4" value="4" onclick="sync_options(this)" class="checkbox" {if $cachesize4checked}checked="checked"{/if} /> <label for="cachesize4">{t}normal{/t}</label></td>
 		</tr>
 		<tr>
 			<td></td>
-			<td><input type="checkbox" id="cachesize5" name="cachesize5" value="5" onclick="sync_options(this)" class="checkbox" {cachesize5checked} /> <label for="cachesize5">{t}large{/t}</label></td>
-			<td><input type="checkbox" id="cachesize6" name="cachesize6" value="6" onclick="sync_options(this)" class="checkbox" {cachesize6checked} /> <label for="cachesize6">{t}very large{/t}</label></td>
-			<td><input type="checkbox" id="cachesize7" name="cachesize7" value="7" onclick="sync_options(this)" class="checkbox" {cachesize7checked} /> <label for="cachesize7">{t}no container{/t}</label></td>
-			<td><input type="checkbox" id="cachesize1" name="cachesize1" value="1" onclick="sync_options(this)" class="checkbox" {cachesize1checked} /> <label for="cachesize1">{t}other size{/t}</label></td>
+			<td><input type="checkbox" id="cachesize5" name="cachesize5" value="5" onclick="sync_options(this)" class="checkbox" {if $cachesize5checked}checked="checked"{/if} /> <label for="cachesize5">{t}large{/t}</label></td>
+			<td><input type="checkbox" id="cachesize6" name="cachesize6" value="6" onclick="sync_options(this)" class="checkbox" {if $cachesize6checked}checked="checked"{/if} /> <label for="cachesize6">{t}very large{/t}</label></td>
+			<td><input type="checkbox" id="cachesize7" name="cachesize7" value="7" onclick="sync_options(this)" class="checkbox" {if $cachesize7checked}checked="checked"{/if} /> <label for="cachesize7">{t}no container{/t}</label></td>
+			<td><input type="checkbox" id="cachesize1" name="cachesize1" value="1" onclick="sync_options(this)" class="checkbox" {if $cachesize1checked}checked="checked"{/if} /> <label for="cachesize1">{t}other size{/t}</label></td>
 		</tr>
 	</table>
 </div>
@@ -364,11 +356,15 @@ function switchAttributeCat2()
 			<td>{t}Difficulty:{/t}</td>
 			<td>
 				<select name="difficultymin" class="input80" onchange="sync_options(this)">
-					{difficultymin_options}
+					{foreach from=$difficulty_options item=difficulty_option}
+						<option value="{$difficulty_option}" {if $difficultymin==$difficulty_option}selected="selected"{/if}>{if $difficulty_option==0}-{else}{$difficulty_option/2|sprintf:"%1.1f"}{/if}</option>
+					{/foreach}
 				</select>
 				&nbsp;&nbsp;&nbsp;{t}to{/t}&nbsp;&nbsp;&nbsp;
 				<select name="difficultymax" class="input80" onchange="sync_options(this)">
-					{difficultymax_options}
+					{foreach from=$difficulty_options item=difficulty_option}
+						<option value="{$difficulty_option}" {if $difficultymax==$difficulty_option}selected="selected"{/if}>{if $difficulty_option==0}-{else}{$difficulty_option/2|sprintf:"%1.1f"}{/if}</option>
+					{/foreach}
 				</select>
 			</td>
 		</tr>
@@ -376,11 +372,15 @@ function switchAttributeCat2()
 			<td>{t}Terrain:{/t}</td>
 			<td>
 				<select name="terrainmin" class="input80" onchange="sync_options(this)">
-					{terrainmin_options}
+					{foreach from=$terrain_options item=terrain_option}
+						<option value="{$terrain_option}" {if $terrainmin==$terrain_option}selected="selected"{/if}>{if $terrain_option==0}-{else}{$terrain_option/2|sprintf:"%1.1f"}{/if}</option>
+					{/foreach}
 				</select>
 				&nbsp;&nbsp;&nbsp;{t}to{/t}&nbsp;&nbsp;&nbsp;
 				<select name="terrainmax" class="input80" onchange="sync_options(this)">
-					{terrainmax_options}
+					{foreach from=$terrain_options item=terrain_option}
+						<option value="{$terrain_option}" {if $terrainmax==$terrain_option}selected="selected"{/if}>{if $terrain_option==0}-{else}{$terrain_option/2|sprintf:"%1.1f"}{/if}</option>
+					{/foreach}
 				</select>
 			</td>
 		</tr>
@@ -392,7 +392,10 @@ function switchAttributeCat2()
 			<td>{t}Country:{/t}&nbsp;&nbsp;</td>
 			<td>
 				<select name="country" class="input200" onchange="sync_options(this)">
-					{countryoptions}
+					<option value="" selected="selected">{t}All countries{/t}</option
+					{foreach from=$countryoptions item=countryoption}
+						<option value="{$countryoption.short|escape}" {if $countryoption.selected}selected="selected"{/if}>{$countryoption.name|escape}</option> 
+					{/foreach}
 				</select>
 			</td>
 		</tr>
@@ -406,8 +409,8 @@ function switchAttributeCat2()
 				(<a href="javascript:switchAttributeCat2()"><span id="toggleAttributesCaption">{t}Show all{/t}</span></a>)
 			</td>
 			<td>
-				<div id="attributesCat1" style="display:none;">{cache_attribCat1_list}</div>
-				<div id="attributesCat2" style="display:block;">{cache_attribCat2_list}</div>
+				<div id="attributesCat1" style="display:none;">{$cache_attribCat1_list}</div>
+				<div id="attributesCat2" style="display:block;">{$cache_attribCat2_list}</div>
 			</td>
 		</tr>
 	</table>
@@ -418,6 +421,7 @@ function switchAttributeCat2()
 	<p><span class="errormsg">{t}JavaScript is not activated, you cannot use the above options (sorting to attributes) - basic search is supported nevertheless.{/t}</span></p>
 </div>
 
+{literal}
 <script language="javascript">
 <!--
 	document.getElementById("scriptwarning").style.display = "none";
@@ -438,40 +442,41 @@ function switchAttributeCat2()
 		hideAttributesCat2();
 -->
 </script>
+{/literal}
 
-<form action="search.php" onsubmit="return(_sbn_click());" method="{formmethod}" enctype="application/x-www-form-urlencoded" name="searchbyname" dir="ltr" style="display:inline;">
+<form action="search.php" onsubmit="return(_sbn_click());" method="{$formmethod}" enctype="application/x-www-form-urlencoded" name="searchbyname" dir="ltr" style="display:inline;">
 	<input type="hidden" name="searchto" value="searchbyname" />
 	<input type="hidden" name="showresult" value="1" />
 	<input type="hidden" name="expert" value="0" />
 	<input type="hidden" name="output" value="HTML" />
 	<input type="hidden" name="utf8" value="1" />
 
-	<input type="hidden" name="sort" value="{hidopt_sort}" />
-	<input type="hidden" name="orderRatingFirst" value="{hidopt_orderRatingFirst}" />
-	<input type="hidden" name="f_userowner" value="{hidopt_userowner}" />
-	<input type="hidden" name="f_userfound" value="{hidopt_userfound}" />
-	<input type="hidden" name="f_inactive" value="{hidopt_inactive}" />
-	<input type="hidden" name="f_disabled" value="{hidopt_disabled}" />
-	<input type="hidden" name="f_ignored" value="{hidopt_ignored}" />
-	<input type="hidden" name="f_otherPlatforms" value="{hidopt_otherPlatforms}" />
-	<input type="hidden" name="country" value="{country}" />
-	<input type="hidden" name="cachetype" value="{cachetype}" />
-	<input type="hidden" name="cachesize" value="{cachesize}" />
-	<input type="hidden" name="difficultymin" value="{difficultymin}" />
-	<input type="hidden" name="difficultymax" value="{difficultymax}" />
-	<input type="hidden" name="terrainmin" value="{terrainmin}" />
-	<input type="hidden" name="terrainmax" value="{terrainmax}" />
-	<input type="hidden" name="cache_attribs" value="{hidopt_attribs}" />
-	<input type="hidden" name="cache_attribs_not" value="{hidopt_attribs_not}" />
+	<input type="hidden" name="sort" value="{$hidopt_sort}" />
+	<input type="hidden" name="orderRatingFirst" value="{$hidopt_orderRatingFirst}" />
+	<input type="hidden" name="f_userowner" value="{$hidopt_userowner}" />
+	<input type="hidden" name="f_userfound" value="{$hidopt_userfound}" />
+	<input type="hidden" name="f_inactive" value="{$hidopt_inactive}" />
+	<input type="hidden" name="f_disabled" value="{$hidopt_disabled}" />
+	<input type="hidden" name="f_ignored" value="{$hidopt_ignored}" />
+	<input type="hidden" name="f_otherPlatforms" value="{$hidopt_otherPlatforms}" />
+	<input type="hidden" name="country" value="{$country}" />
+	<input type="hidden" name="cachetype" value="{$cachetype}" />
+	<input type="hidden" name="cachesize" value="{$cachesize}" />
+	<input type="hidden" name="difficultymin" value="{$difficultymin}" />
+	<input type="hidden" name="difficultymax" value="{$difficultymax}" />
+	<input type="hidden" name="terrainmin" value="{$terrainmin}" />
+	<input type="hidden" name="terrainmax" value="{$terrainmax}" />
+	<input type="hidden" name="cache_attribs" value="{$hidopt_attribs}" />
+	<input type="hidden" name="cache_attribs_not" value="{$hidopt_attribs_not}" />
 
 	<div class="buffer" style="width: 500px;">&nbsp;</div>
 	<div class="content2-container bg-blue02">
 		<p class="content-title-noshade-size2">
-			<img src="resource2/ocstyle/images/misc/32x32-search.png" style="align: left; margin-right: 10px;" width="22" height="22" alt="" /> 
+			<img src="resource2/ocstyle/images/misc/32x32-search.png" style="align: left; margin-right: 10px;" width="22" height="22" alt="" />
 			{t}Search by cachename{/t}
 		</p>
 	</div>
-  		
+
 	<table class="table">
 		<colgroup>
 			<col width="200">
@@ -481,42 +486,42 @@ function switchAttributeCat2()
 		<tr><td class="spacer" colspan="3"></td></tr>
 		<tr>
 			<td>{t}Name:{/t}</td>
-			<td><input type="text" name="cachename" value="{cachename}" class="input200" /></td>
+			<td><input type="text" name="cachename" value="{$cachename}" class="input200" /></td>
 			<td><input type="submit" name="submit_cachename" value="{t}Search{/t}" class="formbutton" onclick="submitbutton('submit_cachename')" /></td>
 		</tr>
 		<tr><td class="spacer" colspan="3"></td></tr>
 	</table>
 </form>
 
-<form action="search.php" onsubmit="return(_sbd_click());" method="{formmethod}" enctype="application/x-www-form-urlencoded" name="searchbydistance" dir="ltr" style="display:inline;">
+<form action="search.php" onsubmit="return(_sbd_click());" method="{$formmethod}" enctype="application/x-www-form-urlencoded" name="searchbydistance" dir="ltr" style="display:inline;">
 	<input type="hidden" name="searchto" value="searchbydistance" />
 	<input type="hidden" name="showresult" value="1" />
 	<input type="hidden" name="expert" value="0" />
 	<input type="hidden" name="output" value="HTML" />
 	<input type="hidden" name="utf8" value="1" />
 
-	<input type="hidden" name="sort" value="{hidopt_sort}" />
-	<input type="hidden" name="orderRatingFirst" value="{hidopt_orderRatingFirst}" />
-	<input type="hidden" name="f_userowner" value="{hidopt_userowner}" />
-	<input type="hidden" name="f_userfound" value="{hidopt_userfound}" />
-	<input type="hidden" name="f_inactive" value="{hidopt_inactive}" />
-	<input type="hidden" name="f_disabled" value="{hidopt_disabled}" />
-	<input type="hidden" name="f_ignored" value="{hidopt_ignored}" />
-	<input type="hidden" name="f_otherPlatforms" value="{hidopt_otherPlatforms}" />
-	<input type="hidden" name="country" value="{country}" />
-	<input type="hidden" name="cachetype" value="{cachetype}" />
-	<input type="hidden" name="cachesize" value="{cachesize}" />
-	<input type="hidden" name="difficultymin" value="{difficultymin}" />
-	<input type="hidden" name="difficultymax" value="{difficultymax}" />
-	<input type="hidden" name="terrainmin" value="{terrainmin}" />
-	<input type="hidden" name="terrainmax" value="{terrainmax}" />
-	<input type="hidden" name="cache_attribs" value="{hidopt_attribs}" />
-	<input type="hidden" name="cache_attribs_not" value="{hidopt_attribs_not}" />
+	<input type="hidden" name="sort" value="{$hidopt_sort}" />
+	<input type="hidden" name="orderRatingFirst" value="{$hidopt_orderRatingFirst}" />
+	<input type="hidden" name="f_userowner" value="{$hidopt_userowner}" />
+	<input type="hidden" name="f_userfound" value="{$hidopt_userfound}" />
+	<input type="hidden" name="f_inactive" value="{$hidopt_inactive}" />
+	<input type="hidden" name="f_disabled" value="{$hidopt_disabled}" />
+	<input type="hidden" name="f_ignored" value="{$hidopt_ignored}" />
+	<input type="hidden" name="f_otherPlatforms" value="{$hidopt_otherPlatforms}" />
+	<input type="hidden" name="country" value="{$country}" />
+	<input type="hidden" name="cachetype" value="{$cachetype}" />
+	<input type="hidden" name="cachesize" value="{$cachesize}" />
+	<input type="hidden" name="difficultymin" value="{$difficultymin}" />
+	<input type="hidden" name="difficultymax" value="{$difficultymax}" />
+	<input type="hidden" name="terrainmin" value="{$terrainmin}" />
+	<input type="hidden" name="terrainmax" value="{$terrainmax}" />
+	<input type="hidden" name="cache_attribs" value="{$hidopt_attribs}" />
+	<input type="hidden" name="cache_attribs_not" value="{$hidopt_attribs_not}" />
 
 	<div class="buffer" style="width: 500px;">&nbsp;</div>
 	<div class="content2-container bg-blue02">
 		<p class="content-title-noshade-size2">
-			<img src="resource2/ocstyle/images/misc/32x32-search.png" style="align: left; margin-right: 10px;" width="22" height="22" alt="" /> 
+			<img src="resource2/ocstyle/images/misc/32x32-search.png" style="align: left; margin-right: 10px;" width="22" height="22" alt="" />
 			{t}Search by distance{/t}
 		</p>
 	</div>
@@ -532,28 +537,28 @@ function switchAttributeCat2()
 			<td valign="top">{t}Of coordinates:{/t}</td>
 			<td colspan="2" valign="top">
 				<select name="latNS" class="input40">
-					<option value="N" {latN_sel}>{t}N{/t}</option>
-					<option value="S" {latS_sel}>{t}S{/t}</option>
+					<option value="N" {if $latN_sel}selected="selected"{/if}>{t}N{/t}</option>
+					<option value="S" {if $latS_sel}selected="selected"{/if}>{t}S{/t}</option>
 				</select>&nbsp;
-				<input type="text" name="lat_h" maxlength="2" value="{lat_h}" class="input30" />&nbsp;°&nbsp;
-				<input type="text" name="lat_min" maxlength="6" value="{lat_min}" class="input40" />&nbsp;'&nbsp;
+				<input type="text" name="lat_h" maxlength="2" value="{$lat_h}" class="input30" />&nbsp;°&nbsp;
+				<input type="text" name="lat_min" maxlength="6" value="{$lat_min}" class="input40" />&nbsp;'&nbsp;
 				<br>
 				<select name="lonEW" class="input40">
-					<option value="E" {lonE_sel}>{t}E{/t}</option>
-					<option value="W" {lonW_sel}>{t}W{/t}</option>
+					<option value="E" {if $lonE_sel}selected="selected"{/if}>{t}E{/t}</option>
+					<option value="W" {if $lonW_sel}selected="selected"{/if}>{t}W{/t}</option>
 				</select>&nbsp;
-				<input type="text" name="lon_h" maxlength="3" value="{lon_h}" class="input30" />&nbsp;°&nbsp;
-				<input type="text" name="lon_min" maxlength="6" value="{lon_min}" class="input40" />&nbsp;'&nbsp;
+				<input type="text" name="lon_h" maxlength="3" value="{$lon_h}" class="input30" />&nbsp;°&nbsp;
+				<input type="text" name="lon_min" maxlength="6" value="{$lon_min}" class="input40" />&nbsp;'&nbsp;
 			</td>
 		</tr>
 		<tr>
 			<td>{t}Maximum distance:{/t}</td>
 			<td>
-				<input type="text" name="distance" value="{distance}" maxlength="4" class="input50" />&nbsp;
+				<input type="text" name="distance" value="{$distance}" maxlength="4" class="input50" />&nbsp;
 				<select name="unit" class="input100">
-					<option value="km" {sel_km}>{t}Kilometer{/t}</option>
-					<option value="sm" {sel_sm}>{t}Miles{/t}</option>
-					<option value="nm" {sel_nm}>{t}Seamiles{/t}</option>
+					<option value="km" {if $sel_km}selected="selected"{/if}>{t}Kilometer{/t}</option>
+					<option value="sm" {if $sel_sm}selected="selected"{/if}>{t}Miles{/t}</option>
+					<option value="nm" {if $sel_nm}selected="selected"{/if}>{t}Seamiles{/t}</option>
 				</select>
 			</td>
 			<td><input type="submit" name="submit_dist" value="{t}Search{/t}" class="formbutton" onclick="submitbutton('submit_dist')" /></td>
@@ -565,7 +570,7 @@ function switchAttributeCat2()
 <div class="buffer" style="width: 500px;">&nbsp;</div>
 <div class="content2-container bg-blue02">
 	<p class="content-title-noshade-size2">
-		<img src="resource2/ocstyle/images/misc/32x32-search.png" style="align: left; margin-right: 10px;" width="22" height="22" alt="" /> 
+		<img src="resource2/ocstyle/images/misc/32x32-search.png" style="align: left; margin-right: 10px;" width="22" height="22" alt="" />
 		{t}Search for city{/t}
 	</p>
 </div>
@@ -576,35 +581,35 @@ function switchAttributeCat2()
 		<col width="220">
 		<col>
 	</colgroup>
-	
+
 	<tr><td class="spacer" colspan="3"></td></tr>
-	{ortserror}
+	{$ortserror}
 </table>
 
-<form action="search.php" onsubmit="return(_sbplz_click());" method="{formmethod}" enctype="application/x-www-form-urlencoded" name="searchbyplz" dir="ltr" style="display:inline;">
+<form action="search.php" onsubmit="return(_sbplz_click());" method="{$formmethod}" enctype="application/x-www-form-urlencoded" name="searchbyplz" dir="ltr" style="display:inline;">
 	<input type="hidden" name="searchto" value="searchbyplz" />
 	<input type="hidden" name="showresult" value="1" />
 	<input type="hidden" name="expert" value="0" />
 	<input type="hidden" name="output" value="HTML" />
 	<input type="hidden" name="utf8" value="1" />
 
-	<input type="hidden" name="sort" value="{hidopt_sort}" />
-	<input type="hidden" name="orderRatingFirst" value="{hidopt_orderRatingFirst}" />
-	<input type="hidden" name="f_userowner" value="{hidopt_userowner}" />
-	<input type="hidden" name="f_userfound" value="{hidopt_userfound}" />
-	<input type="hidden" name="f_inactive" value="{hidopt_inactive}" />
-	<input type="hidden" name="f_disabled" value="{hidopt_disabled}" />
-	<input type="hidden" name="f_ignored" value="{hidopt_ignored}" />
-	<input type="hidden" name="f_otherPlatforms" value="{hidopt_otherPlatforms}" />
-	<input type="hidden" name="country" value="{country}" />
-	<input type="hidden" name="cachetype" value="{cachetype}" />
-	<input type="hidden" name="cachesize" value="{cachesize}" />
-	<input type="hidden" name="difficultymin" value="{difficultymin}" />
-	<input type="hidden" name="difficultymax" value="{difficultymax}" />
-	<input type="hidden" name="terrainmin" value="{terrainmin}" />
-	<input type="hidden" name="terrainmax" value="{terrainmax}" />
-	<input type="hidden" name="cache_attribs" value="{hidopt_attribs}" />
-	<input type="hidden" name="cache_attribs_not" value="{hidopt_attribs_not}" />
+	<input type="hidden" name="sort" value="{$hidopt_sort}" />
+	<input type="hidden" name="orderRatingFirst" value="{$hidopt_orderRatingFirst}" />
+	<input type="hidden" name="f_userowner" value="{$hidopt_userowner}" />
+	<input type="hidden" name="f_userfound" value="{$hidopt_userfound}" />
+	<input type="hidden" name="f_inactive" value="{$hidopt_inactive}" />
+	<input type="hidden" name="f_disabled" value="{$hidopt_disabled}" />
+	<input type="hidden" name="f_ignored" value="{$hidopt_ignored}" />
+	<input type="hidden" name="f_otherPlatforms" value="{$hidopt_otherPlatforms}" />
+	<input type="hidden" name="country" value="{$country}" />
+	<input type="hidden" name="cachetype" value="{$cachetype}" />
+	<input type="hidden" name="cachesize" value="{$cachesize}" />
+	<input type="hidden" name="difficultymin" value="{$difficultymin}" />
+	<input type="hidden" name="difficultymax" value="{$difficultymax}" />
+	<input type="hidden" name="terrainmin" value="{$terrainmin}" />
+	<input type="hidden" name="terrainmax" value="{$terrainmax}" />
+	<input type="hidden" name="cache_attribs" value="{$hidopt_attribs}" />
+	<input type="hidden" name="cache_attribs_not" value="{$hidopt_attribs_not}" />
 
 	<table class="table">
 		<colgroup>
@@ -614,36 +619,36 @@ function switchAttributeCat2()
 		</colgroup>
 		<tr>
 			<td>{t}Postal code:{/t}</td>
-			<td><input type="text" name="plz" value="{plz}" maxlength="5" class="input50" /></td>
+			<td><input type="text" name="plz" value="{$plz}" maxlength="5" class="input50" /></td>
 			<td><input type="submit" name="submit_plz" value="{t}Search{/t}" class="formbutton" onclick="submitbutton('submit_plz')" /></td>
 		</tr>
 	</table>
 </form>
 
-<form action="search.php" onsubmit="return(_sbort_click());" method="{formmethod}" enctype="application/x-www-form-urlencoded" name="searchbyort" dir="ltr" style="display:inline;">
+<form action="search.php" onsubmit="return(_sbort_click());" method="{$formmethod}" enctype="application/x-www-form-urlencoded" name="searchbyort" dir="ltr" style="display:inline;">
 	<input type="hidden" name="searchto" value="searchbyort" />
 	<input type="hidden" name="showresult" value="1" />
 	<input type="hidden" name="expert" value="0" />
 	<input type="hidden" name="output" value="HTML" />
 	<input type="hidden" name="utf8" value="1" />
 
-	<input type="hidden" name="sort" value="{hidopt_sort}" />
-	<input type="hidden" name="orderRatingFirst" value="{hidopt_orderRatingFirst}" />
-	<input type="hidden" name="f_userowner" value="{hidopt_userowner}" />
-	<input type="hidden" name="f_userfound" value="{hidopt_userfound}" />
-	<input type="hidden" name="f_inactive" value="{hidopt_inactive}" />
-	<input type="hidden" name="f_disabled" value="{hidopt_disabled}" />
-	<input type="hidden" name="f_ignored" value="{hidopt_ignored}" />
-	<input type="hidden" name="f_otherPlatforms" value="{hidopt_otherPlatforms}" />
-	<input type="hidden" name="country" value="{country}" />
-	<input type="hidden" name="difficultymin" value="{difficultymin}" />
-	<input type="hidden" name="difficultymax" value="{difficultymax}" />
-	<input type="hidden" name="terrainmin" value="{terrainmin}" />
-	<input type="hidden" name="terrainmax" value="{terrainmax}" />
-	<input type="hidden" name="cachetype" value="{cachetype}" />
-	<input type="hidden" name="cachesize" value="{cachesize}" />
-	<input type="hidden" name="cache_attribs" value="{hidopt_attribs}" />
-	<input type="hidden" name="cache_attribs_not" value="{hidopt_attribs_not}" />
+	<input type="hidden" name="sort" value="{$hidopt_sort}" />
+	<input type="hidden" name="orderRatingFirst" value="{$hidopt_orderRatingFirst}" />
+	<input type="hidden" name="f_userowner" value="{$hidopt_userowner}" />
+	<input type="hidden" name="f_userfound" value="{$hidopt_userfound}" />
+	<input type="hidden" name="f_inactive" value="{$hidopt_inactive}" />
+	<input type="hidden" name="f_disabled" value="{$hidopt_disabled}" />
+	<input type="hidden" name="f_ignored" value="{$hidopt_ignored}" />
+	<input type="hidden" name="f_otherPlatforms" value="{$hidopt_otherPlatforms}" />
+	<input type="hidden" name="country" value="{$country}" />
+	<input type="hidden" name="difficultymin" value="{$difficultymin}" />
+	<input type="hidden" name="difficultymax" value="{$difficultymax}" />
+	<input type="hidden" name="terrainmin" value="{$terrainmin}" />
+	<input type="hidden" name="terrainmax" value="{$terrainmax}" />
+	<input type="hidden" name="cachetype" value="{$cachetype}" />
+	<input type="hidden" name="cachesize" value="{$cachesize}" />
+	<input type="hidden" name="cache_attribs" value="{$hidopt_attribs}" />
+	<input type="hidden" name="cache_attribs_not" value="{$hidopt_attribs_not}" />
 
 	<table class="table">
 		<colgroup>
@@ -653,7 +658,7 @@ function switchAttributeCat2()
 		</colgroup>
 		<tr>
 			<td>{t}City:{/t}</td>
-			<td><input type="text" name="ort" value="{ort}" class="input200" /></td>
+			<td><input type="text" name="ort" value="{$ort}" class="input200" /></td>
 			<td><input type="submit" name="submit_city" value="{t}Search{/t}" class="formbutton" onclick="submitbutton('submit_city')" /></td>
 		</tr>
 	</table>
@@ -668,35 +673,35 @@ function switchAttributeCat2()
 	<tr><td class="spacer" colspan="3"></td></tr>
 </table>
 
-<form action="search.php" onsubmit="return(_sbft_click());" method="{formmethod}" enctype="application/x-www-form-urlencoded" name="searchbyfulltext" dir="ltr" style="display:inline;">
+<form action="search.php" onsubmit="return(_sbft_click());" method="{$formmethod}" enctype="application/x-www-form-urlencoded" name="searchbyfulltext" dir="ltr" style="display:inline;">
 	<input type="hidden" name="searchto" value="searchbyfulltext" />
 	<input type="hidden" name="showresult" value="1" />
 	<input type="hidden" name="expert" value="0" />
 	<input type="hidden" name="output" value="HTML" />
 	<input type="hidden" name="utf8" value="1" />
 
-	<input type="hidden" name="sort" value="{hidopt_sort}" />
-	<input type="hidden" name="orderRatingFirst" value="{hidopt_orderRatingFirst}" />
-	<input type="hidden" name="f_userowner" value="{hidopt_userowner}" />
-	<input type="hidden" name="f_userfound" value="{hidopt_userfound}" />
-	<input type="hidden" name="f_inactive" value="{hidopt_inactive}" />
-	<input type="hidden" name="f_disabled" value="{hidopt_disabled}" />
-	<input type="hidden" name="f_ignored" value="{hidopt_ignored}" />
-	<input type="hidden" name="f_otherPlatforms" value="{hidopt_otherPlatforms}" />
-	<input type="hidden" name="country" value="{country}" />
-	<input type="hidden" name="difficultymin" value="{difficultymin}" />
-	<input type="hidden" name="difficultymax" value="{difficultymax}" />
-	<input type="hidden" name="terrainmin" value="{terrainmin}" />
-	<input type="hidden" name="terrainmax" value="{terrainmax}" />
-	<input type="hidden" name="cachetype" value="{cachetype}" />
-	<input type="hidden" name="cachesize" value="{cachesize}" />
-	<input type="hidden" name="cache_attribs" value="{hidopt_attribs}" />
-	<input type="hidden" name="cache_attribs_not" value="{hidopt_attribs_not}" />
+	<input type="hidden" name="sort" value="{$hidopt_sort}" />
+	<input type="hidden" name="orderRatingFirst" value="{$hidopt_orderRatingFirst}" />
+	<input type="hidden" name="f_userowner" value="{$hidopt_userowner}" />
+	<input type="hidden" name="f_userfound" value="{$hidopt_userfound}" />
+	<input type="hidden" name="f_inactive" value="{$hidopt_inactive}" />
+	<input type="hidden" name="f_disabled" value="{$hidopt_disabled}" />
+	<input type="hidden" name="f_ignored" value="{$hidopt_ignored}" />
+	<input type="hidden" name="f_otherPlatforms" value="{$hidopt_otherPlatforms}" />
+	<input type="hidden" name="country" value="{$country}" />
+	<input type="hidden" name="difficultymin" value="{$difficultymin}" />
+	<input type="hidden" name="difficultymax" value="{$difficultymax}" />
+	<input type="hidden" name="terrainmin" value="{$terrainmin}" />
+	<input type="hidden" name="terrainmax" value="{$terrainmax}" />
+	<input type="hidden" name="cachetype" value="{$cachetype}" />
+	<input type="hidden" name="cachesize" value="{$cachesize}" />
+	<input type="hidden" name="cache_attribs" value="{$hidopt_attribs}" />
+	<input type="hidden" name="cache_attribs_not" value="{$hidopt_attribs_not}" />
 
 	<div class="buffer" style="width: 500px;">&nbsp;</div>
 	<div class="content2-container bg-blue02">
   	<p class="content-title-noshade-size2">
-			<img src="resource2/ocstyle/images/misc/32x32-search.png" style="align: left; margin-right: 10px;" width="22" height="22" alt="" /> 
+			<img src="resource2/ocstyle/images/misc/32x32-search.png" style="align: left; margin-right: 10px;" width="22" height="22" alt="" />
 			{t}Search for text{/t}
 		</p>
 	</div>
@@ -708,10 +713,10 @@ function switchAttributeCat2()
 			<col>
 		</colgroup>
 		<tr><td class="spacer" colspan="3"></td></tr>
-		{fulltexterror}
+		{$fulltexterror}
 		<tr>
 			<td>Text:</td>
-			<td><input type="text" name="fulltext" value="{fulltext}" class="input200" /></td>
+			<td><input type="text" name="fulltext" value="{$fulltext}" class="input200" /></td>
 			<td><input type="submit" name="submit_ft" value="{t}Search{/t}" class="formbutton" onclick="submitbutton('submit_ft')" /></td>
 		</tr>
 		<tr>
@@ -719,12 +724,12 @@ function switchAttributeCat2()
 			<td colspan="2">
 				<table class="table" width="250px">
 					<tr>
-						<td><input type="checkbox" name="ft_name" id="ft_name" class="checkbox" value="1" {ft_name_checked} /> <label for="ft_name">{t}Name{/t}</label></td>
-						<td><input type="checkbox" name="ft_desc" id="ft_desc" class="checkbox" value="1" {ft_desc_checked} /> <label for="ft_desc">{t}Description{/t}</label></td>
+						<td><input type="checkbox" name="ft_name" id="ft_name" class="checkbox" value="1" {if $ft_name_checked}checked="checked"{/if} /> <label for="ft_name">{t}Name{/t}</label></td>
+						<td><input type="checkbox" name="ft_desc" id="ft_desc" class="checkbox" value="1" {if $ft_desc_checked}checked="checked"{/if} /> <label for="ft_desc">{t}Description{/t}</label></td>
 					</tr>
 					<tr>
-						<td><input type="checkbox" name="ft_logs" id="ft_logs" class="checkbox" value="1" {ft_logs_checked} /> <label for="ft_logs">{t}Logs{/t}</label></td>
-						<td><input type="checkbox" name="ft_pictures" id="ft_pictures" class="checkbox" value="1" {ft_pictures_checked} /> <label for="ft_pictures">{t}Pictures{/t}</label></td>
+						<td><input type="checkbox" name="ft_logs" id="ft_logs" class="checkbox" value="1" {if $ft_logs_checked}checked="checked"{/if} /> <label for="ft_logs">{t}Logs{/t}</label></td>
+						<td><input type="checkbox" name="ft_pictures" id="ft_pictures" class="checkbox" value="1" {if $ft_pictures_checked}checked="checked"{/if} /> <label for="ft_pictures">{t}Pictures{/t}</label></td>
 					</tr>
 				</table>
 			</td>
@@ -733,35 +738,35 @@ function switchAttributeCat2()
 	</table>
 </form>
 
-<form action="search.php" onsubmit="return(_sbo_click());" method="{formmethod}" enctype="application/x-www-form-urlencoded" name="searchbyowner" dir="ltr" style="display:inline;">
+<form action="search.php" onsubmit="return(_sbo_click());" method="{$formmethod}" enctype="application/x-www-form-urlencoded" name="searchbyowner" dir="ltr" style="display:inline;">
 	<input type="hidden" name="searchto" value="searchbyowner" />
 	<input type="hidden" name="showresult" value="1" />
 	<input type="hidden" name="expert" value="0" />
 	<input type="hidden" name="output" value="HTML" />
 	<input type="hidden" name="utf8" value="1" />
 
-	<input type="hidden" name="sort" value="{hidopt_sort}" />
-	<input type="hidden" name="orderRatingFirst" value="{hidopt_orderRatingFirst}" />
-	<input type="hidden" name="f_userowner" value="{hidopt_userowner}" />
-	<input type="hidden" name="f_userfound" value="{hidopt_userfound}" />
-	<input type="hidden" name="f_inactive" value="{hidopt_inactive}" />
-	<input type="hidden" name="f_disabled" value="{hidopt_disabled}" />
-	<input type="hidden" name="f_ignored" value="{hidopt_ignored}" />
-	<input type="hidden" name="f_otherPlatforms" value="{hidopt_otherPlatforms}" />
-	<input type="hidden" name="country" value="{country}" />
-	<input type="hidden" name="difficultymin" value="{difficultymin}" />
-	<input type="hidden" name="difficultymax" value="{difficultymax}" />
-	<input type="hidden" name="terrainmin" value="{terrainmin}" />
-	<input type="hidden" name="terrainmax" value="{terrainmax}" />
-	<input type="hidden" name="cachetype" value="{cachetype}" />
-	<input type="hidden" name="cachesize" value="{cachesize}" />
-	<input type="hidden" name="cache_attribs" value="{hidopt_attribs}" />
-	<input type="hidden" name="cache_attribs_not" value="{hidopt_attribs_not}" />
+	<input type="hidden" name="sort" value="{$hidopt_sort}" />
+	<input type="hidden" name="orderRatingFirst" value="{$hidopt_orderRatingFirst}" />
+	<input type="hidden" name="f_userowner" value="{$hidopt_userowner}" />
+	<input type="hidden" name="f_userfound" value="{$hidopt_userfound}" />
+	<input type="hidden" name="f_inactive" value="{$hidopt_inactive}" />
+	<input type="hidden" name="f_disabled" value="{$hidopt_disabled}" />
+	<input type="hidden" name="f_ignored" value="{$hidopt_ignored}" />
+	<input type="hidden" name="f_otherPlatforms" value="{$hidopt_otherPlatforms}" />
+	<input type="hidden" name="country" value="{$country}" />
+	<input type="hidden" name="difficultymin" value="{$difficultymin}" />
+	<input type="hidden" name="difficultymax" value="{$difficultymax}" />
+	<input type="hidden" name="terrainmin" value="{$terrainmin}" />
+	<input type="hidden" name="terrainmax" value="{$terrainmax}" />
+	<input type="hidden" name="cachetype" value="{$cachetype}" />
+	<input type="hidden" name="cachesize" value="{$cachesize}" />
+	<input type="hidden" name="cache_attribs" value="{$hidopt_attribs}" />
+	<input type="hidden" name="cache_attribs_not" value="{$hidopt_attribs_not}" />
 
 	<div class="buffer" style="width: 500px;">&nbsp;</div>
 	<div class="content2-container bg-blue02">
 		<p class="content-title-noshade-size2">
-			<img src="resource2/ocstyle/images/misc/32x32-search.png" style="align: left; margin-right: 10px;" width="22" height="22" alt="" /> 
+			<img src="resource2/ocstyle/images/misc/32x32-search.png" style="align: left; margin-right: 10px;" width="22" height="22" alt="" />
 			{t}Search for Owner{/t}
 		</p>
 	</div>
@@ -775,42 +780,42 @@ function switchAttributeCat2()
 		<tr><td class="spacer" colspan="3"></td></tr>
 		<tr>
 			<td>{t}Owner:{/t}</td>
-			<td><input type="text" name="owner" value="{owner}" maxlength="40" class="input200" /></td>
+			<td><input type="text" name="owner" value="{$owner}" maxlength="40" class="input200" /></td>
 			<td><input type="submit" name="submit_owner" value="{t}Search{/t}" class="formbutton" onclick="submitbutton('submit_owner')" /></td>
 		</tr>
 		<tr><td class="spacer" colspan="3"></td></tr>
 	</table>
 </form>
 
-<form action="search.php" onsubmit="return(_sbf_click());" method="{formmethod}" enctype="application/x-www-form-urlencoded" name="searchbyfinder" dir="ltr" style="display:inline;">
+<form action="search.php" onsubmit="return(_sbf_click());" method="{$formmethod}" enctype="application/x-www-form-urlencoded" name="searchbyfinder" dir="ltr" style="display:inline;">
 	<input type="hidden" name="searchto" value="searchbyfinder" />
 	<input type="hidden" name="showresult" value="1" />
 	<input type="hidden" name="expert" value="0" />
 	<input type="hidden" name="output" value="HTML" />
 	<input type="hidden" name="utf8" value="1" />
 
-	<input type="hidden" name="sort" value="{hidopt_sort}" />
-	<input type="hidden" name="orderRatingFirst" value="{hidopt_orderRatingFirst}" />
-	<input type="hidden" name="f_userowner" value="{hidopt_userowner}" />
-	<input type="hidden" name="f_userfound" value="{hidopt_userfound}" />
-	<input type="hidden" name="f_inactive" value="{hidopt_inactive}" />
-	<input type="hidden" name="f_disabled" value="{hidopt_disabled}" />
-	<input type="hidden" name="f_ignored" value="{hidopt_ignored}" />
-	<input type="hidden" name="f_otherPlatforms" value="{hidopt_otherPlatforms}" />
-	<input type="hidden" name="country" value="{country}" />
-	<input type="hidden" name="difficultymin" value="{difficultymin}" />
-	<input type="hidden" name="difficultymax" value="{difficultymax}" />
-	<input type="hidden" name="terrainmin" value="{terrainmin}" />
-	<input type="hidden" name="terrainmax" value="{terrainmax}" />
-	<input type="hidden" name="cachetype" value="{cachetype}" />
-	<input type="hidden" name="cachesize" value="{cachesize}" />
-	<input type="hidden" name="cache_attribs" value="{hidopt_attribs}" />
-	<input type="hidden" name="cache_attribs_not" value="{hidopt_attribs_not}" />
+	<input type="hidden" name="sort" value="{$hidopt_sort}" />
+	<input type="hidden" name="orderRatingFirst" value="{$hidopt_orderRatingFirst}" />
+	<input type="hidden" name="f_userowner" value="{$hidopt_userowner}" />
+	<input type="hidden" name="f_userfound" value="{$hidopt_userfound}" />
+	<input type="hidden" name="f_inactive" value="{$hidopt_inactive}" />
+	<input type="hidden" name="f_disabled" value="{$hidopt_disabled}" />
+	<input type="hidden" name="f_ignored" value="{$hidopt_ignored}" />
+	<input type="hidden" name="f_otherPlatforms" value="{$hidopt_otherPlatforms}" />
+	<input type="hidden" name="country" value="{$country}" />
+	<input type="hidden" name="difficultymin" value="{$difficultymin}" />
+	<input type="hidden" name="difficultymax" value="{$difficultymax}" />
+	<input type="hidden" name="terrainmin" value="{$terrainmin}" />
+	<input type="hidden" name="terrainmax" value="{$terrainmax}" />
+	<input type="hidden" name="cachetype" value="{$cachetype}" />
+	<input type="hidden" name="cachesize" value="{$cachesize}" />
+	<input type="hidden" name="cache_attribs" value="{$hidopt_attribs}" />
+	<input type="hidden" name="cache_attribs_not" value="{$hidopt_attribs_not}" />
 
 	<div class="buffer" style="width: 500px;">&nbsp;</div>
 	<div class="content2-container bg-blue02">
 		<p class="content-title-noshade-size2">
-			<img src="resource2/ocstyle/images/misc/32x32-search.png" style="align: left; margin-right: 10px;" width="22" height="22" alt="" /> 
+			<img src="resource2/ocstyle/images/misc/32x32-search.png" style="align: left; margin-right: 10px;" width="22" height="22" alt="" />
 			{t}Search for Logs{/t}
 		</p>
 	</div>
@@ -826,13 +831,15 @@ function switchAttributeCat2()
 			<td>{t}Logtype:{/t}</td>
 			<td colspan="2">
 				<select name="logtype">
-					{logtype_options}
-				</select> 
+					{foreach from=$logtype_options item=logtype_option}
+						<option value="{$logtype_option.id|escape}" {if $logtype_option.selcted}selected="selected"{/if}>{$logtype_option.name|escape}</option>
+					{/foreach}
+				</select>
 			</td>
 		</tr>
 		<tr>
 			<td>{t}Username:{/t}</td>
-			<td><input type="text" name="finder" value="{finder}" maxlength="40" class="input200" /></td>
+			<td><input type="text" name="finder" value="{$finder}" maxlength="40" class="input200" /></td>
 			<td><input type="submit" name="submit_finder" value="{t}Search{/t}" class="formbutton" onclick="submitbutton('submit_finder')" /></td>
 		</tr>
 		<tr><td class="spacer" colspan="3"></td></tr>

@@ -1,50 +1,32 @@
 #!/usr/local/bin/php -q
 <?php
  /***************************************************************************
-													./util/gns/mkadmtxt.php
-															-------------------
-		begin                : Thu November 6 2005
-
 		For license information see doc/license.txt
- ****************************************************************************/
 
- /***************************************************************************
-		
 		Unicode Reminder メモ
 
-		Ggf. muss die Location des php-Binaries angepasst werden.
-		
-		Dieses Script erstellt den Suchindex für Ortsnamen aus den Daten der 
-		GNS-DB.
+		Dieses Script berechnet andhand von Geodb-Daten die adm1..adm4-Daten 
+		für die GNS-DB.
 		
 	***************************************************************************/
 
-	$rootpath = '../../';
-  require_once($rootpath . 'lib/clicompatbase.inc.php');
-  require_once($rootpath . 'lib/search.inc.php');
-  require_once($rootpath . 'lang/de/stdstyle/selectlocid.inc.php');
+	$opt['rootpath'] = '../../';
+  require_once($opt['rootpath'] . 'lib2/cli.inc.php');
+  require_once($opt['rootpath'] . 'lib2/search/search.inc.php');
+  require_once($opt['rootpath'] . 'lib2/logic/geomath.class.php');
+  require_once($opt['rootpath'] . 'lib2/logic/geodb.inc.php');
 
-/* begin db connect */
-	db_connect();
-	if ($dblink === false)
-	{
-		echo 'Unable to connect to database';
-		exit;
-	}
-/* end db connect */
-  
-/* begin search index rebuild */
 	
 	$rsLocations = sql("SELECT `uni`, `lat`, `lon`, `rc`, `cc1`, `adm1` FROM `gns_locations` WHERE `dsg` LIKE 'PPL%'");
 	while ($rLocations = sql_fetch_array($rsLocations))
 	{
-		$minlat = getMinLat($rLocations['lon'], $rLocations['lat'], 10, 1);
-		$maxlat = getMaxLat($rLocations['lon'], $rLocations['lat'], 10, 1);
-		$minlon = getMinLon($rLocations['lon'], $rLocations['lat'], 10, 1);
-		$maxlon = getMaxLon($rLocations['lon'], $rLocations['lat'], 10, 1);
+		$minlat = geomath::getMinLat($rLocations['lon'], $rLocations['lat'], 10, 1);
+		$maxlat = geomath::getMaxLat($rLocations['lon'], $rLocations['lat'], 10, 1);
+		$minlon = geomath::getMinLon($rLocations['lon'], $rLocations['lat'], 10, 1);
+		$maxlon = geomath::getMaxLon($rLocations['lon'], $rLocations['lat'], 10, 1);
 		
 		// den nächsgelegenen Ort in den geodb ermitteln
-		$sql = 'SELECT ' . getSqlDistanceFormula($rLocations['lon'], $rLocations['lat'], 10, 1, 'lon', 'lat', 'geodb_coordinates') . ' `distance`, 
+		$sql = 'SELECT ' . geomath::getSqlDistanceFormula($rLocations['lon'], $rLocations['lat'], 10, 1, 'lon', 'lat', 'geodb_coordinates') . ' `distance`, 
 							`geodb_coordinates`.`loc_id` `loc_id`
 					  FROM `geodb_coordinates` 
 					  WHERE `lon` > ' . $minlon . ' AND 
@@ -63,7 +45,7 @@
 
 			$locid = $r['loc_id'];
 			
-			$admtxt1 = landFromLocid($locid);
+			$admtxt1 = geodb_landFromLocid($locid);
 			if ($admtxt1 == '0') $admtxt1 = '';
 
 			// bundesland ermitteln
@@ -79,10 +61,10 @@
 			else
 				$admtxt3 = '';
 
-			$admtxt3 = regierungsbezirkFromLocid($locid);
+			$admtxt3 = geodb_regierungsbezirkFromLocid($locid);
 			if ($admtxt3 == '0') $admtxt3 = '';
 
-			$admtxt4 = landkreisFromLocid($locid);
+			$admtxt4 = geodb_landkreisFromLocid($locid);
 			if ($admtxt4 == '0') $admtxt4 = '';
 
 			sql("UPDATE `gns_locations` SET `admtxt1`='&1', `admtxt2`='&2', `admtxt3`='&3', `admtxt4`='&4' WHERE uni='&5'", $admtxt1, $admtxt2, $admtxt3, $admtxt4, $rLocations['uni']);
@@ -95,5 +77,4 @@
 	}
 	mysql_free_result($rsLocations);
 
-/* end search index rebuild */
 ?>

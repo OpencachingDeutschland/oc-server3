@@ -1,14 +1,7 @@
 #!/usr/local/bin/php -q
 <?php
  /***************************************************************************
-											./util/gns/gns_import.php
-											-------------------------
-		begin                : Mon October 31 2005
-
 		For license information see doc/license.txt
- ****************************************************************************/
-
- /***************************************************************************
 
 	Dieses Script liest Dateien von GEOnet Names Server (GNS) ein und importiert 
 	diese in die Table gns_locations.
@@ -20,39 +13,33 @@
 					http://earth-info.nga.mil/gns/html/cntyfile/sz.zip
 	***************************************************************************/
 
-  $rootpath = '../../';
-	require($rootpath . 'lib/clicompatbase.inc.php');
+	// ported from lib1 to lib2 / untested!
+
+  $opt['rootpath'] = '../../';
+	require($opt['rootpath'] . 'lib2/cli.inc.php');
 
 	/* defaults */
 	$importfiles = array("gm.txt", "au.txt", "sz.txt");
 
-	/* begin db connect */
-	db_connect();
-	if ($dblink === false)
-	{
-		echo 'Unable to connect to database';
-		exit;
-	}
-	/* end db connect */
-
 	sql("TRUNCATE TABLE gns_locations");
 
-	foreach($importfiles as $filename)
+	foreach ($importfiles as $filename)
 		importGns($filename, $dblink);
+
 
 	function importGns($filename, $dblink)
 	{
 		echo "Importing '$filename'...\n";
 		$file = fopen($filename, "r");
 		$cnt = 0;
-		while($line = fgets($file, 4096))
+		while ($line = fgets($file, 4096))
 		{
-			if($cnt++ == 0)	// skip first line
+			if ($cnt++ == 0)	// skip first line
 				continue;
 	
 			$gns =  mb_split("\t", $line);
 			
-			$sql = "INSERT IGNORE INTO gns_locations SET
+			sql("INSERT IGNORE INTO gns_locations SET
 					rc = '" . sql_escape($gns[0]) . "',
 					ufi = '" . sql_escape($gns[1]) . "',
 					uni = '" . sql_escape($gns[2]) . "',
@@ -77,12 +64,7 @@
 					SORT_NAME = _utf8'" . sql_escape($gns[21]) . "',
 					FULL_NAME = _utf8'" . sql_escape($gns[22]) . "',
 					FULL_NAME_ND = _utf8'" . sql_escape($gns[23]) . "',
-					MOD_DATE = '" . sql_escape($gns[24]) . "'";
-	
-			if(!$resp = sql($sql, $dblink))
-			{
-				echo mysql_error($dblink); echo "\n";
-			}
+					MOD_DATE = '" . sql_escape($gns[24]) . "'");
 		}
 		fclose($file);
 
@@ -93,4 +75,5 @@
 		sql("UPDATE gns_locations SET full_name='Zitaraves' WHERE uni=-2780984 LIMIT 1");
 		sql("UPDATE gns_locations SET full_name='Zvabek' WHERE uni=105075 LIMIT 1");
 	}
+
 ?>

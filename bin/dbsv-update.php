@@ -325,6 +325,12 @@
 		update_triggers();
 	}
 
+	function dbv_116()	// optimize index for sorting logs
+	{
+		sql("ALTER TABLE `cache_logs` DROP INDEX `date`,
+		     ADD INDEX `date` (`cache_id`,`date`,`date_created`)");
+	}
+
 
 	// When adding new mutations, take care that they behave well if run multiple
 	// times. This improves robustness of database versioning.

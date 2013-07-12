@@ -337,7 +337,8 @@ class cache
 			LEFT JOIN `cache_rating` ON `cache_logs`.`cache_id`=`cache_rating`.`cache_id` AND `cache_logs`.`user_id`=`cache_rating`.`user_id` AND `cache_logs`.`date`=`cache_rating`.`rating_date`
 			".$addjoin."
 			WHERE `cache_logs`.`cache_id`='&1'
-			ORDER BY `cache_logs`.`date` DESC, `cache_logs`.`Id` DESC LIMIT &2, &3", $cacheid, $start+0, $count+0);
+			ORDER BY `cache_logs`.`date` DESC, `cache_logs`.`date_created` DESC
+			LIMIT &2, &3", $cacheid, $start+0, $count+0);
 
 		$logs = array();
 		while ($rLog = sql_fetch_assoc($rsLogs))

@@ -1,38 +1,19 @@
 #!/usr/local/bin/php -q
 <?php
  /***************************************************************************
-													./util/gns/mksearchindex.php
-															-------------------
-		begin                : Thu November 1 2005
-
 		For license information see doc/license.txt
- ****************************************************************************/
-
- /***************************************************************************
 		
 		Unicode Reminder メモ
 
-		Ggf. muss die Location des php-Binaries angepasst werden.
-		
 		Dieses Script erstellt den Suchindex für Ortsnamen aus den Daten der 
 		GNS-DB.
 		
 	***************************************************************************/
 
-  $rootpath = '../../';
-  require_once($rootpath . 'lib/clicompatbase.inc.php');
-  require_once($rootpath . 'lib/search.inc.php');
+  $opt['rootpath'] = '../../';
+  require_once($opt['rootpath'] . 'lib2/cli.inc.php');
+  require_once($opt['rootpath'] . 'lib2/search/search.inc.php');
 
-/* begin db connect */
-	db_connect();
-	if ($dblink === false)
-	{
-		echo 'Unable to connect to database';
-		exit;
-	}
-/* end db connect */
-  
-/* begin search index rebuild */
 
 	$doubleindex['sankt'] = 'st';
 
@@ -62,14 +43,14 @@
 	}
 	mysql_free_result($rs);
 
-/* end search index rebuild */
 
-function nonalpha($str)
-{
-	for ($i = 0; $i < mb_strlen($str); $i++)
-		if (!((ord(mb_substr($str, $i, 1)) >= ord('a')) && (ord(mb_substr($str, $i, 1)) <= ord('z'))))
-			return true;
+	function nonalpha($str)
+	{
+		for ($i = 0; $i < mb_strlen($str); $i++)
+			if (!((ord(mb_substr($str, $i, 1)) >= ord('a')) && (ord(mb_substr($str, $i, 1)) <= ord('z'))))
+				return true;
 	
-	return false;
-}
+		return false;
+	}
+
 ?>

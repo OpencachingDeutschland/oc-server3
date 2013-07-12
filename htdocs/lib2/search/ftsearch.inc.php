@@ -1,17 +1,10 @@
 <?php
 /****************************************************************************
-													    ./lib/ftsearch.inc.php
-															--------------------
-		begin                : January 10 2007
-
 		For license information see doc/license.txt
- ****************************************************************************/
-
-/****************************************************************************
 
 		Unicode Reminder メモ
 
-	functions for the full text search-engine
+		functions for the full text search-engine
 
  ****************************************************************************/
 
@@ -105,7 +98,7 @@ function ftsearch_split(&$str, $simple)
 		else
 		{
 			if ($simple)
-				$astr[$i] = ftsearch_text2simple($astr[$i]); 
+				$astr[$i] = ftsearch_text2simple($astr[$i]);
 
 			if ($astr[$i] == '')
 				unset($astr[$i]);
@@ -323,7 +316,7 @@ function ftsearch_strip_html($text)
 	$text = str_replace('<br>', ' ', $text);
 	$text = strip_tags($text);
 	$text = html_entity_decode($text, ENT_COMPAT, 'UTF-8');
-	
+
 	return $text;
 }
 ?>

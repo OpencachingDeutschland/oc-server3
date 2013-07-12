@@ -1,9 +1,9 @@
 <?php
 	/***************************************************************************
 		For license information see doc/license.txt
-		    
+
 		Unicode Reminder メモ
-                                     				                                
+
 		loc search output
 	****************************************************************************/
 
@@ -13,24 +13,28 @@
 
 function search_output()
 {
+	global $opt;
 	global $state_temporarily_na, $state_archived, $state_locked;
 
-	$locHead = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><loc version="1.0" src="opencaching.de">' . "\n";
-	
-	$locLine = 
+	$server_address = $opt['page']['absolute_url'];
+	$server_domain = parse_url($server_address, PHP_URL_HOST);
+
+	$locHead = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><loc version="1.0" src="'.$server_domain.'">' . "\n";
+
+	$locLine =
 '
 <waypoint>
 	<name id="{waypoint}"><![CDATA[{archivedflag}{name} by {username}]]></name>
 	<coord lat="{lat}" lon="{lon}"/>
 	<type>Geocache</type>
-	<link text="Beschreibung">http://www.opencaching.de/viewcache.php?cacheid={cacheid}</link>
+	<link text="Beschreibung">'.$server_address.'viewcache.php?cacheid={cacheid}</link>
 </waypoint>
 ';
 
 	$locFoot = '</loc>';
 
 	append_output($locHead);
-	
+
 	/*
 		{waypoint}
 		status -> {archivedflag}
@@ -61,16 +65,16 @@ function search_output()
 	while ($r = sql_fetch_array($rs))
 	{
 		$thisline = $locLine;
-		
+
 		$lat = sprintf('%01.5f', $r['latitude']);
 		$thisline = mb_ereg_replace('{lat}', $lat, $thisline);
-		
+
 		$lon = sprintf('%01.5f', $r['longitude']);
 		$thisline = mb_ereg_replace('{lon}', $lon, $thisline);
 
 		$thisline = mb_ereg_replace('{waypoint}', $r['waypoint'], $thisline);
-		$thisline = mb_ereg_replace('{name}', xmlentities($r['name']), $thisline);
-		
+		$thisline = mb_ereg_replace('{name}', $r['name'], $thisline);
+
 		if (($r['status'] == 2) || ($r['status'] == 3) || ($r['status'] == 6))
 		{
 			if ($r['status'] == 2)
@@ -82,30 +86,15 @@ function search_output()
 		}
 		else
 			$thisline = mb_ereg_replace('{archivedflag}', '', $thisline);
-		
-		$thisline = mb_ereg_replace('{username}', xmlentities($r['username']), $thisline);
+
+		$thisline = mb_ereg_replace('{username}', $r['username'], $thisline);
 		$thisline = mb_ereg_replace('{cacheid}', $r['cacheid'], $thisline);
 
 		append_output($thisline);
 	}
 	mysql_free_result($rs);
-	
+
 	append_output($locFoot);
 }
 
-
-	function xmlentities($str)
-	{
-		$from[0] = '&'; $to[0] = '&amp;';
-		$from[1] = '<'; $to[1] = '&lt;';
-		$from[2] = '>'; $to[2] = '&gt;';
-		$from[3] = '"'; $to[3] = '&quot;';
-		$from[4] = '\''; $to[4] = '&apos;';
-
-		for ($i = 0; $i <= 4; $i++)
-			$str = mb_ereg_replace($from[$i], $to[$i], $str);
-
-		return $str;
-	}
-	
 ?>

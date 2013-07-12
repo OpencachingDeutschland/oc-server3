@@ -29,7 +29,7 @@
 	$opt['db']['servername'] = 'localhost';
 	$opt['db']['username'] = '<db>';
 	$opt['db']['password'] = '<pw>';
-	$opt['db']['pconnect'] = true;
+	$opt['db']['pconnect'] = false;
 
 	// ... how long a query can take without warning (0 <= disabled)
 	$opt['db']['warn']['time'] = 1;

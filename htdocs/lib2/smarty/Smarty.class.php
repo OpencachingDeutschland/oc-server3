@@ -1410,7 +1410,6 @@ class Smarty
      */
     function _compile_resource($resource_name, $compile_path)
     {
-
         $_params = array('resource_name' => $resource_name);
         if (!$this->_fetch_resource_info($_params)) {
             return false;

@@ -17,10 +17,10 @@
 	
 	$opt['rootpath'] = '../';
 	require_once($opt['rootpath'] . 'lib/common.inc.php');
-	require_once($opt['rootpath'] . 'lib/charset.inc.php');
+	require_once($opt['rootpath'] . 'lib2/charset.inc.php');
 	require_once($opt['rootpath'] . 'lib2/const.inc.php');
-	require_once($opt['rootpath'] . 'lib/data-license.inc.php');
-	require_once($opt['rootpath'] . 'lib/npas.inc.php');
+	require_once($opt['rootpath'] . 'lib2/data-license.inc.php');
+	require_once($opt['rootpath'] . 'lib2/logic/npas.inc.php');
 
   if ($error == true)
 	{
@@ -828,8 +828,6 @@ function startXmlSession($sModifiedSince, $bCache, $bCachedesc, $bCachelog, $bUs
 		}
 		else if ($selection['type'] == 2)
 		{
-			require_once($opt['rootpath'] . 'lib/search.inc.php');
-
 			$sql = 'CREATE TEMPORARY TABLE `tmpxmlSesssionCaches` (`cache_id` int(11), `distance` double, KEY (`cache_id`)) ENGINE=MEMORY ';
 			$sql .= 'SELECT `cache_coordinates`.`cache_id`, ';
 			$sql .= getSqlDistanceFormula($selection['lon'], $selection['lat'], $selection['distance'], 1, 'longitude', 'latitude', 'cache_coordinates') . ' `distance` ';

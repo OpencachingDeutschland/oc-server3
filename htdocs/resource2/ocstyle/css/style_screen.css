@@ -352,6 +352,8 @@ td.listicon {
 
 td.listcolor1 { background:#fff; line-height:1.7em; }
 td.listcolor2 { background:#f0f0f0; line-height:1.7em; }
+td.search_listcolor1 { background:#fff; }
+td.search_listcolor2 { background:#f0f0f0; }
 
 /* Images */
 .img-left-noborder-notopmargin {float: left; margin: 0px 10px 0px 0px;}
@@ -1470,3 +1472,5 @@ div#havefound {
 
 p.editlog { font-weight: 400; display:inline; }
 .newsymbol { background:#ff9d11; color:#fff; }
+
+label.disabled { color:grey; }

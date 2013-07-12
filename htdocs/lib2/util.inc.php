@@ -273,27 +273,117 @@ function read_file($filename, $maxlength)
 	return $content;
 }
 
+// encodes &<>"'
 function xmlentities($str)
 {
-	$from[0] = '&'; $to[0] = '&amp;';
-	$from[1] = '<'; $to[1] = '&lt;';
-	$from[2] = '>'; $to[2] = '&gt;';
-	$from[3] = '"'; $to[3] = '&quot;';
-	$from[4] = '\''; $to[4] = '&apos;';
+	return htmlspecialchars(xmlfilterevilchars($str), ENT_QUOTES, 'UTF-8');
+}
 
-	for ($i = 0; $i <= 4; $i++)
-		$str = mb_ereg_replace($from[$i], $to[$i], $str);
-
-	return xmlfilterevilchars($str);
+// encodes &<>
+// This is ok for XML content text between tags, but not for XML attribute contents.
+function text_xmlentities($str)
+{
+	return htmlspecialchars(xmlfilterevilchars($str), ENT_NOQUOTES, 'UTF-8');
 }
 
 function xmlfilterevilchars($str)
 {
-	global $sCharset;
-
 	// the same for for ISO-8859-1 and UTF-8
-	$str = mb_ereg_replace('[\x{00}-\x{09}\x{0B}\x{0C}\x{0E}-\x{1F}]*', '', $str);
-
-	return $str;
+	return mb_ereg_replace('[\x{00}-\x{09}\x{0B}\x{0C}\x{0E}-\x{1F}]*', '', $str);
 }
+
+
+	// decimal longitude to string E/W hhh°mm.mmm
+	function help_lonToDegreeStr($lon)
+	{
+		if ($lon < 0)
+		{
+			$retval = 'W ';
+			$lon = -$lon;
+		}
+		else
+		{
+			$retval = 'E ';
+		}
+
+		$retval = $retval . sprintf("%03d", floor($lon)) . '° ';
+		$lon = $lon - floor($lon);
+		$retval = $retval . sprintf("%06.3f", round($lon * 60, 3)) . '\'';
+
+		return $retval;
+	}
+
+	// decimal latitude to string N/S hh°mm.mmm
+	function help_latToDegreeStr($lat)
+	{
+		if ($lat < 0)
+		{
+			$retval = 'S ';
+			$lat = -$lat;
+		}
+		else
+		{
+			$retval = 'N ';
+		}
+
+		$retval = $retval . sprintf("%02d", floor($lat)) . '° ';
+		$lat = $lat - floor($lat);
+		$retval = $retval . sprintf("%06.3f", round($lat * 60, 3)) . '\'';
+
+		return $retval;
+	}
+
+
+	function escape_javascript($text)
+	{
+		return str_replace('\'', '\\\'', str_replace('"', '&quot;', $text));
+	}
+
+
+	// perform str_rot13 without renaming parts in []
+	function str_rot13_gc($str)
+	{
+		$delimiter[0][0] = '[';
+		$delimiter[0][1] = ']';
+
+		$retval = '';
+
+		while (mb_strlen($retval) < mb_strlen($str))
+		{
+			$nNextStart = false;
+			$sNextEndChar = '';
+			foreach ($delimiter AS $del)
+			{
+				$nThisStart = mb_strpos($str, $del[0], mb_strlen($retval));
+
+				if ($nThisStart !== false)
+					if (($nNextStart > $nThisStart) || ($nNextStart === false))
+					{
+						$nNextStart = $nThisStart;
+						$sNextEndChar = $del[1];
+					}
+			}
+
+			if ($nNextStart === false)
+			{
+				$retval .= str_rot13(mb_substr($str, mb_strlen($retval), mb_strlen($str) - mb_strlen($retval)));
+			}
+			else
+			{
+				// crypted part
+				$retval .= str_rot13(mb_substr($str, mb_strlen($retval), $nNextStart - mb_strlen($retval)));
+
+				// uncrypted part
+				$nNextEnd = mb_strpos($str, $sNextEndChar, $nNextStart);
+
+				if ($nNextEnd === false)
+					$retval .= mb_substr($str, $nNextStart, mb_strlen($str) - mb_strlen($retval));
+				else
+					$retval .= mb_substr($str, $nNextStart, $nNextEnd - $nNextStart + 1);
+			}
+		}
+
+		return $retval;
+	}
+
 ?>

@@ -115,6 +115,7 @@
 	// other settings
 	$opt['page']['showdonations'] = true;
 	$opt['logic']['pictures']['dummy']['replacepic'] = $dev_basepath . $dev_codepath . 'htdocs/images/no_image_license.png';
+	$opt['logic']['license']['disclaimer'] = true;
 	
 	$opt['template']['locales']['DA']['show'] = false;
 	$opt['template']['locales']['FR']['show'] = false;

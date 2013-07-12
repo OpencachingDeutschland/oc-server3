@@ -889,6 +889,8 @@ INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustrin
 INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('94', 'MNU_START_NEWLOGSREST', 'Without Germany', '121', 'Without Germany', '121', '0', 'newlogsrest.php', '1', '7', '1', '', '1', NULL);
 INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('95', 'MNU_MYPROFILE_OKAPI', 'OKAPI Applications', '2008', 'OKAPI Apps', '2009', '0', '!okapi/apps/', '1', '9', '9', '', '1', NULL);
 INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('96', 'MNU_ADMIN_HISTORY', 'Cache history', '2059', 'Cache history', '2059', '1', 'adminhistory.php', '1', '12', '4', '', '0', NULL);
+INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('97', 'MNU_CACHES_SEARCH_SELECT_CITY', 'Select city', '1694', 'Select city', '1694', '0', 'search.php', '0', '20', '1', '', '0', NULL);
+INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('98', 'MNU_CACHES_SEARCH_RESULT', 'Show search result', '1695', 'Result', '1696', '0', 'search.php', '0', '20', '2', '', '0', NULL);
 
 -- Table sys_trans
 SET NAMES 'utf8';
@@ -1922,8 +1924,8 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1430', 'Do not 
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1431', 'I have read and agree to the <a href=\"articles.php?page=impressum#tos\" target=\"_blank\">Opencaching.de Terms of Service</a> and the <a href=\"articles.php?page=impressum#datalicense\" target=\"_blank\">Opencaching.de Datalicense</a>', '2010-09-07 20:19:05');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1432', 'Info: Your log entry has been removed from the cache owner', '2010-09-07 20:19:05');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1433', 'Selection of city', '2010-09-07 20:19:05');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1434', 'Total of {resultscount} cities matched', '2010-09-07 20:19:05');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1435', 'For the search criterion no clear result was found. Please choose the correct location.', '2010-09-07 20:19:05');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1434', 'Total of %1 cities matched', '2010-09-07 20:19:05');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1435', 'For the search criterion no clear result was found. Please choose the desired location:', '2010-09-07 20:19:05');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1436', 'Add log-entry for the cache <a href=\"viewcache.php?cacheid={cacheid}\">{cachename}</a>', '2010-09-07 20:19:06');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1437', 'Cachename is invalid', '2010-09-07 20:19:06');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1438', 'The used coordinates are invalid.', '2010-09-07 20:19:06');
@@ -1932,8 +1934,8 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1440', 'The dis
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1441', 'The cache-status does not fit to your publishing options', '2010-09-07 20:19:06');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1442', 'Choose both valuations!', '2010-09-07 20:19:06');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1443', 'No pictures available', '2010-09-07 20:19:06');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1444', '{results_count} caches<span style=\"{search_headline_caches}\"> matched</span>', '2010-09-07 20:19:07');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1445', 'Result {startatp1} to {endat} (as zip):', '2010-09-07 20:19:07');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1444', '%1 caches<span style=\"%2\"> matched</span>', '2010-09-07 20:19:07');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1445', 'Result %1 to %2 (as zip)', '2010-09-07 20:19:07');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1446', 'this description was created on another Opencaching-webserver and can only be deleted there.', '2010-09-07 20:19:07');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1447', 'the cache description has been deleted', '2010-09-07 20:19:07');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1448', 'delete this cache-description', '2010-09-07 20:19:07');
@@ -2180,7 +2182,6 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1713', 'You hav
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1714', 'Revoke the recommendation', '2010-11-29 21:04:55');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1717', 'Please select!', '2010-12-05 00:00:40');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1718', 'Results on this page', '2010-12-05 00:00:57');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1719', 'Result {startatp1} to {endat} (as zip)', '2010-12-05 00:00:57');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1722', 'Do you really want to delete this entry?', '2010-12-05 00:01:46');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1723', 'Do you really want to remove this recommendation?', '2010-12-05 00:01:49');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1724', 'Waylength', '2010-12-05 00:02:00');
@@ -2512,6 +2513,8 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2091', 'Test fo
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2096', '%2 has activated %1', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2097', '%1 has activated the geocache', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2098', 'converted from HTML', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2099', 'unknown search option', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2100', 'no coordinates available', '2013-04-25 23:00:00');
 
 -- Table sys_trans_ref
 SET NAMES 'utf8';
@@ -5887,8 +5890,8 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1431', 'DE', 'Die <a href=\"articles.php?page=impressum#tos\" target=\"_blank\">Opencaching.de-Nutzungsbedingungen</a> und -<a href=\"articles.php?page=impressum#datalicense\" target=\"_blank\">Datenlizenz</a> habe ich gelesen und bin damit einverstanden.', '2010-09-10 23:39:25');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1432', 'DE', 'Info: Dein Logeintrag wurde vom Cachebesitzer entfernt', '2010-09-10 23:39:09');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1433', 'DE', 'Ortsauswahl', '2010-09-10 23:39:01');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1434', 'DE', 'Insgesamt {resultscount} Ortschaften gefunden', '2010-09-10 23:38:52');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1435', 'DE', 'Für das Suchkriterium wurde kein eindeutiges Ergebnis gefunden. Bitte wähle die richtige Ortschaft aus.', '2010-09-10 23:38:27');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1434', 'DE', 'Insgesamt %1 Ortschaften gefunden', '2010-09-10 23:38:52');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1435', 'DE', 'Für das Suchkriterium wurde kein eindeutiges Ergebnis gefunden. Bitte wähle die gewünschte Ortschaft aus:', '2010-09-10 23:38:27');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1436', 'DE', 'Logeintrag f\&uuml;r den Cache <a href=\"viewcache.php?cacheid={cacheid}\">{cachename}</a> hinzuf\&uuml;gen', '2010-09-10 23:38:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1437', 'DE', 'Cachename ung\&uuml;ltig', '2010-09-10 23:34:32');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1438', 'DE', 'Die angegebene Koordinate ist ung\&uuml;ltig.', '2010-09-10 23:38:00');
@@ -5897,8 +5900,8 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1441', 'DE', 'Der Cachestatus paßt nicht zu den Veröffentlichungsoptionen.', '2010-09-10 23:34:16');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1442', 'DE', 'Wähle beide Bewertungsangaben aus!', '2010-09-10 23:33:56');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1443', 'DE', 'Keine Bilder vorhanden', '2010-09-10 23:32:13');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1444', 'DE', '{results_count} Caches<span style=\"{search_headline_caches}\"> gefunden</span>', '2010-09-10 23:33:47');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1445', 'DE', 'Einträge {startatp1} bis {endat} (als zip):', '2010-09-10 23:33:33');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1444', 'DE', '%1 Caches<span style=\"%2\"> gefunden</span>', '2010-09-10 23:33:47');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1445', 'DE', 'Einträge %1 bis %2 (als zip)', '2010-09-10 23:33:33');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1446', 'DE', 'Diese Beschreibung wurde auf einem anderen Opencaching-Webserver erstellt und kann nur auf diesem gelöscht werden.', '2010-09-10 23:31:28');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1447', 'DE', 'Die Cache Beschreibung wurde gel\&ouml;scht.', '2010-09-10 23:31:10');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1448', 'DE', 'Cachebeschreibung l\&ouml;schen', '2010-09-10 23:30:52');
@@ -6475,6 +6478,8 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2096', 'DE', '%2 hat %1 aktiviert', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2097', 'DE', '%1 hat den Geocache aktiviert', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2098', 'DE', 'aus HTML konvertiert', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2099', 'DE', 'unbekannte Suchoption', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2100', 'DE', 'keine Koordinaten verfügbar', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'EN', 'Reorder IDs \r', '2010-09-02 00:15:30');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'EN', 'The database could not be reconnected.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'EN', 'Testing – please do not login', '2010-08-28 11:48:07');
@@ -7504,8 +7509,8 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1431', 'EN', 'I have read and agree to the <a href=\"articles.php?page=impressum#tos\" target=\"_blank\">Opencaching.de Terms of Service</a> and <a href=\"articles.php?page=impressum#datalicense\" target=\"_blank\">Opencaching.de Data license</a>.', '2010-09-10 23:39:25');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1432', 'EN', 'Info: Your log entry has been removed from the cache owner', '2010-09-10 23:39:09');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1433', 'EN', 'Selection of city', '2010-09-10 23:39:01');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1434', 'EN', 'Total of {resultscount} cities matched', '2010-09-10 23:38:52');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1435', 'EN', 'For the search criterion no clear result was found. Please choose the correct location.', '2010-09-10 23:38:27');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1434', 'EN', 'Total of %1 cities matched', '2010-09-10 23:38:52');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1435', 'EN', 'For the search criterion no clear result was found. Please choose the desired location:', '2010-09-10 23:38:27');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1436', 'EN', 'Add log-entry for the cache <a href=\"viewcache.php?cacheid={cacheid}\">{cachename}</a>', '2010-09-10 23:38:20');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1437', 'EN', 'Cachename is invalid', '2010-09-10 23:34:40');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1438', 'EN', 'The used coordinates are invalid.', '2010-09-10 23:38:00');
@@ -7514,8 +7519,8 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1441', 'EN', 'The cache-status does not fit to your publishing options', '2010-09-10 23:34:23');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1442', 'EN', 'Choose both valuations!', '2010-09-10 23:33:56');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1443', 'EN', 'No pictures available', '2010-09-10 23:32:19');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1444', 'EN', '{results_count} caches<span style=\"{search_headline_caches}\"> matched</span>', '2010-09-10 23:33:47');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1445', 'EN', 'Result {startatp1} to {endat} (as zip):', '2010-09-10 23:33:37');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1444', 'EN', '%1 caches<span style=\"%2\"> matched</span>', '2010-09-10 23:33:47');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1445', 'EN', 'Result %1 to %2 (as zip)', '2010-09-10 23:33:37');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1446', 'EN', 'This description was created on another Opencaching-webserver and can only be deleted there.', '2010-09-10 23:31:36');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1447', 'EN', 'The cache description has been deleted', '2010-09-10 23:31:16');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1448', 'EN', 'Delete this cache description', '2010-09-10 23:31:02');
@@ -7762,7 +7767,6 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1714', 'EN', 'Revoke the recommendation', '2012-08-24 17:35:49');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1717', 'EN', 'Please select!', '2012-08-24 17:35:49');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1718', 'EN', 'Results on this page', '2012-08-24 17:35:49');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1719', 'EN', 'Result {startatp1} to {endat} (as zip)', '2012-08-24 17:35:49');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1722', 'EN', 'Do you really want to delete this entry?', '2012-08-24 17:35:49');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1723', 'EN', 'Do you really want to remove this recommendation?', '2012-08-24 17:35:49');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1724', 'EN', 'Route', '2012-08-24 17:35:49');
@@ -9073,8 +9077,8 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1431', 'ES', 'He leído y acepto las <a href=\"articles.php?page=impressum#tos\" target=\"_blank\">la condiciones de uso de Opencaching.de</a>', '2010-12-09 00:18:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1432', 'ES', 'Información: el registro ha sido retirado por el titular del cache', '2010-12-09 00:18:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1433', 'ES', 'Seleccione una ciudad', '2010-12-09 00:18:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1434', 'ES', 'Total de {resultscount} las ciudades correspondientes', '2010-12-09 00:18:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1435', 'ES', 'Para el criterio de búsqueda no encontró resultado un claro. Por favor, elije una ubicación correcta.', '2010-12-09 00:18:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1434', 'ES', 'Total de %1 las ciudades correspondientes', '2010-12-09 00:18:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1435', 'ES', 'Para el criterio de búsqueda no encontró resultado un claro. Por favor, elije una ubicación correcta:', '2010-12-09 00:18:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1436', 'ES', 'Añadir un log para el cache <a href=\"viewcache.php?cacheid={cacheid}\">{cachename}</a>', '2010-12-09 00:18:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1437', 'ES', 'El nombre del cache es invalido', '2010-12-09 00:18:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1438', 'ES', 'Las coordenadas usada no son validas', '2010-12-09 00:18:00');
@@ -9083,8 +9087,8 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1441', 'ES', 'El estado del cache no se corresponde a las opciones para su publicación.', '2010-12-09 00:18:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1442', 'ES', '¡Seleccione la revisión de los datos de ambos!', '2010-12-09 00:18:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1443', 'ES', 'No hay fotos disponibles', '2010-12-09 00:18:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1444', 'ES', ' {results_count} caches<span style=\"{search_headline_caches}\"> encontrados</span>', '2010-12-09 00:18:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1445', 'ES', 'Resultado {startatp1} a {endat} (como zip):', '2010-12-09 00:18:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1444', 'ES', ' %1 caches<span style=\"%2\"> encontrados</span>', '2010-12-09 00:18:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1445', 'ES', 'Resultado %1 a %2 (como zip)', '2010-12-09 00:18:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1446', 'ES', 'su descripción fue creado en otro Opencaching-servidor web y sólo puede ser eliminado allí.', '2010-12-09 00:18:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1447', 'ES', 'La descripción del caché ha sido eliminada.', '2010-12-09 00:18:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1448', 'ES', 'Borrar la descripción del cache', '2010-12-09 00:18:00');
@@ -10625,8 +10629,8 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1431', 'IT', 'Ho letto e accetto le <a href=\"articles.php?page=impressum#tos\" target=\"_blank\">condizioni d\'uso di Opencaching.de</a> e la <a href=\"http://www.opencaching.de/articles.php?page=impressum#datalicense\">Lecenza dati Opencaching.de</a>.', '2010-09-10 23:39:25');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1432', 'IT', 'Informazione: il tuo log è stato cancellato dal proprietario della cache', '2010-09-10 23:39:09');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1433', 'IT', 'Seleziona città', '2010-10-27 18:49:19');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1434', 'IT', 'Totale di {resultscount} città corrispondenti', '2010-09-10 23:38:52');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1435', 'IT', 'Esiste più di un risultato che soddisfa i tuoi criteri di scelta. Per favore seleziona la città corretta.', '2010-09-10 23:38:27');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1434', 'IT', 'Totale di %1 città corrispondenti', '2010-09-10 23:38:52');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1435', 'IT', 'Esiste più di un risultato che soddisfa i tuoi criteri di scelta. Per favore seleziona la città corretta:', '2010-09-10 23:38:27');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1436', 'IT', 'Aggiungi log per la cache <a href=\"viewcache.php?cacheid={cacheid}\">{cachename}</a>', '2010-09-10 23:38:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1437', 'IT', 'Nome cache non valido', '2010-09-10 23:34:32');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1438', 'IT', 'Le coordinate usate non sono valide.', '2010-09-10 23:38:00');
@@ -10635,8 +10639,8 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1441', 'IT', 'Lo stato della cache non corrisponde alle opzioni di pubblicazione.', '2010-09-10 23:34:16');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1442', 'IT', 'Seleziona la revisione dei dati di entrambi!', '2010-09-10 23:33:56');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1443', 'IT', 'Nessuna foto disponibile', '2010-09-10 23:32:13');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1444', 'IT', '{results_count} cache <span style=\"{search_headline_caches}\">trovate</span>', '2010-09-10 23:33:47');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1445', 'IT', 'Risultati {startatp1} a {endat} (come zip):', '2010-09-10 23:33:33');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1444', 'IT', '%1 cache <span style=\"%2\">trovate</span>', '2010-09-10 23:33:47');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1445', 'IT', 'Risultati %1 a %2 (come zip)', '2010-09-10 23:33:33');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1446', 'IT', 'Questa descrizione è stata creata su un server Web Opencaching diverso e può essere cancellata solo su quello.', '2010-10-27 18:49:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1447', 'IT', 'La descrizione della cache è stata eliminata.', '2010-09-10 23:31:10');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1448', 'IT', 'Cancella descrizione cache', '2010-09-10 23:30:52');

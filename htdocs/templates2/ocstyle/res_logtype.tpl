@@ -3,7 +3,8 @@
  *
  *  Unicode Reminder メモ
  ***************************************************************************}
-{* OCSTYLE *}
+{* OCSTYLE *}{strip}
+{* strip is needed by search.result.caches.row.tpl *}
 {if $type==1}
 	<img src="resource2/{$opt.template.style}/images/log/16x16-found.png" alt="{t}Found{/t}" title="{t}Found{/t}"  />
 {elseif $type==2}
@@ -27,3 +28,4 @@
 {else}
 	&nbsp;
 {/if}
+{/strip}

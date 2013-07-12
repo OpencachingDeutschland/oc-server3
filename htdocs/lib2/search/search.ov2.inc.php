@@ -1,11 +1,13 @@
 <?php
 	/***************************************************************************
 		For license information see doc/license.txt
-		      
+
 		Unicode Reminder メモ
-                                   				                                
+
 		ov2 search output
 	****************************************************************************/
+
+	require_once($opt['rootpath'] . 'lib2/charset.inc.php');
 
 	$search_output_file_download = true;
 	$content_type_plain = 'application/ov2';
@@ -68,7 +70,7 @@ function search_output()
 
 		$line = "$name by $username, $type, $size, $cacheid";
 		$record = pack("CLllA*x", 2, 1 + 4 + 4 + 4 + strlen($line) + 1, (int)$lon, (int)$lat, $line);
-		
+
 		append_output($record);
 	}
 	mysql_free_result($rs);
@@ -77,11 +79,7 @@ function search_output()
 
 	function convert_string($str)
 	{
-		$newstr = iconv("UTF-8", "ISO-8859-1", $str);
-		if ($newstr == false)
-			return "--- charset error ---";
-		else
-			return $newstr;
+		return utf8ToIso88591($str);
 	}
 
 ?>

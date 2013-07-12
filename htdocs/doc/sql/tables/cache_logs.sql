@@ -25,5 +25,5 @@ CREATE TABLE `cache_logs` (
   KEY `date_created` (`date_created`),
   KEY `user_id` (`user_id`,`cache_id`),
   KEY `cache_id` (`cache_id`,`user_id`),
-  KEY `date` (`cache_id`,`date`)
+  KEY `date` (`cache_id`,`date`,`date_created`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ;

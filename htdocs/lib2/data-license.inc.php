@@ -25,6 +25,10 @@ function getLicenseDisclaimer($userid, $username, $userlicense, $cacheid, $langu
 
 	$ltext = "";
 	$language = strtoupper($language);
+	if (isset($absolute_server_URI))
+		$server_address = $absolute_server_URI;
+	else
+		$server_address = $opt['page']['absolute_url'];
 
 	if ($opt['logic']['license']['disclaimer'])
 	{
@@ -43,17 +47,17 @@ function getLicenseDisclaimer($userid, $username, $userlicense, $cacheid, $langu
 			else
 				$df = 'd-m-Y';
 
-			$purl = parse_url($absolute_server_URI);
+			$purl = parse_url($server_address);
 			// may be shortened if linked to www.opencaching.de
 			if ($html && strpos($purl['host'],'opencaching.de'))
 				$purl['host'] = "Opencaching.de";
 
 			$ltext = "&copy; ";
-			if ($html) $ltext .= "<a href='" . $absolute_server_URI . "viewprofile.php?userid=" . $userid . "' target='_blank'>";
+			if ($html) $ltext .= "<a href='" . $server_address . "viewprofile.php?userid=" . $userid . "' target='_blank'>";
 			$ltext .= $username;
 			if ($html) $ltext .= "</a>";
 			$ltext .= ", ";
-			if ($html) $ltext .= "<a href='" . $absolute_server_URI . "viewcache.php?cacheid=" . $cacheid . "' target='_blank'>";
+			if ($html) $ltext .= "<a href='" . $server_address . "viewcache.php?cacheid=" . $cacheid . "' target='_blank'>";
 			$ltext .= $purl['host'];
 			if ($html) $ltext .= "</a>";
 			$ltext .= ", ";

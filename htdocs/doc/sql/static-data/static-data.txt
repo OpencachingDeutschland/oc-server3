@@ -15,9 +15,9 @@ Used by: lang/de/ocstyle/selectlocid.inc.php
          lib2/logic/geodb.inc.php  (not in use)
 				 search.php
          util/gns/mkadmtxt.php
-Source:  OpenGeoDb ?
+Source:  OpenGeoDb
 Import:  ?
-License: GNU Free Documentation License ?
+License: GNU Free Documentation License
 
 geodb_locations is only referenced by lib2/logic/geodb.inc.php i.e. it is
 not used (yet) by OC production code.
@@ -25,9 +25,8 @@ not used (yet) by OC production code.
 Tables:  geodb_search
 Content: searching for caches by city
 Used by: (not in use)
-Source:  OpenGeoDb
-Import:  util/geodb_searchindex/index.php
-License: GNU Free Documentation License
+Source:  geodb_textdata
+Import:  util2/geodb/make_searchindex.php
 
 There are more geodb_ tables present in OC developer and production systems,
 which are undocumented, mostly empty and not in use anywhere.
@@ -41,7 +40,7 @@ Content: political geographical data
 Purpose: searching for caches by city (Ortschaften)
 Used by: search.php
 Source:  http://earth-info.nga.mil/gns/html/
-Impport: util/gns/mksearchindex.php
+Import:  util2/gns/gns_import.php
 License: Public Domain
 
 

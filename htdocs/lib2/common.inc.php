@@ -148,6 +148,8 @@ function configure_php()
 		ini_set('display_errors', true);
 		ini_set('error_reporting', E_ALL);
 		ini_set('mysql.trace_mode', true);
+			// SQL_CALC_FOUND_ROWS will not work with trace_mode on!
+			// Use the next two functions below as workaround.
 
 		// not for production use yet (has to be tested thoroughly)
 		register_errorhandlers();
@@ -158,6 +160,19 @@ function configure_php()
 		ini_set('error_reporting', E_ALL & ~E_NOTICE);
 		ini_set('mysql.trace_mode', false);
 	}
+}
+
+function sql_enable_foundrows()
+{
+	ini_set('mysql.trace_mode', false);
+}
+
+function sql_foundrows_done()
+{
+	global $opt;
+
+	if ($opt['php']['debug'] == PHP_DEBUG_ON)
+		ini_set('mysql.trace_mode', true);
 }
 
 function set_domain()

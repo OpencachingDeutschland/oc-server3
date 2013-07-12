@@ -3,7 +3,7 @@
 		For license information see doc/license.txt
 
 		Unicode Reminder メモ
-                              				                                
+
 		GPX search output
 	****************************************************************************/
 
@@ -15,7 +15,7 @@
 
 function search_output()
 {
-	global $absolute_server_URI, $locale;
+	global $opt;
 	global $converted_from_html;
 	global $phpzip, $bUseZip;
 
@@ -29,7 +29,7 @@ Land: {country}
 Cacheart: {type}
 Behälter: {container}
 D/T: {difficulty}/{terrain}
-Online: " . $absolute_server_URI . "viewcache.php?wp={waypoint}
+Online: " . $opt['page']['absolute_url'] . "viewcache.php?wp={waypoint}
 
 Kurzbeschreibung: {shortdesc}
 
@@ -63,10 +63,10 @@ Logeinträge:
 			`caches`.`wp_oc` `waypoint`,
 			`caches`.`date_hidden` `date_hidden`,
 			`caches`.`name` `name`,
-			`caches`.`country` `country`,
 			`caches`.`terrain` `terrain`,
 			`caches`.`difficulty` `difficulty`,
 			`caches`.`desc_languages` `desc_languages`,
+			`sys_trans_text`.`text` AS `country`,
 			`cache_size`.`de` `size`,
 			`cache_type`.`de` `type`,
 			`cache_status`.`de` `status`,
@@ -79,29 +79,26 @@ Logeinträge:
 			`user`.`username`,
 			`user`.`data_license`
 		FROM
-			`searchtmp`,
-			`caches`,
-			`user`,
-			`cache_desc`,
-			`cache_type`,
-			`cache_status`,
-			`cache_size`
-		WHERE
-			`searchtmp`.`cache_id`=`caches`.`cache_id` AND
-			`caches`.`cache_id`=`cache_desc`.`cache_id` AND
-			`caches`.`default_desclang`=`cache_desc`.`language` AND
-			`searchtmp`.`user_id`=`user`.`user_id` AND
-			`caches`.`type`=`cache_type`.`id` AND
-			`caches`.`status`=`cache_status`.`id` AND
-			`caches`.`size`=`cache_size`.`id`');
+			`searchtmp`
+			INNER JOIN `caches` ON `searchtmp`.`cache_id`=`caches`.`cache_id`
+			INNER JOIN `cache_desc` ON `cache_desc`.`cache_id`=`caches`.`cache_id`
+             AND `caches`.`default_desclang`=`cache_desc`.`language`
+ 			INNER JOIN `cache_type` ON `cache_type`.`id`=`caches`.`type`
+ 			INNER JOIN `cache_size` ON `cache_size`.`id`=`caches`.`size`
+ 			INNER JOIN `cache_status` ON `cache_status`.`id`=`caches`.`status`
+ 			INNER JOIN `user` ON `user`.`user_id`=`caches`.`user_id`
+ 			 LEFT JOIN `countries` ON `countries`.`short`=`caches`.`country`
+ 			 LEFT JOIN `sys_trans_text` ON `sys_trans_text`.`trans_id`=`countries`.`trans_id`
+ 			       AND `sys_trans_text`.`lang`=\'&1\'',
+     $opt['template']['locale']);
 
 	while ($r = sql_fetch_array($rs))
 	{
 		$thisline = $txtLine;
-		
+
 		$lat = sprintf('%01.5f', $r['latitude']);
 		$thisline = mb_ereg_replace('{lat}', help_latToDegreeStr($lat), $thisline);
-		
+
 		$lon = sprintf('%01.5f', $r['longitude']);
 		$thisline = mb_ereg_replace('{lon}', help_lonToDegreeStr($lon), $thisline);
 
@@ -110,17 +107,17 @@ Logeinträge:
 		$thisline = mb_ereg_replace('{waypoint}', $r['waypoint'], $thisline);
 		$thisline = mb_ereg_replace('{cacheid}', $r['cacheid'], $thisline);
 		$thisline = mb_ereg_replace('{cachename}', $r['name'], $thisline);
-		$thisline = mb_ereg_replace('{country}', db_CountryFromShort($r['country']), $thisline);
-		
+		$thisline = mb_ereg_replace('{country}', $r['country'], $thisline);
+
 		if ($r['hint'] == '')
 			$thisline = mb_ereg_replace('{hints}', '', $thisline);
 		else
-			$thisline = mb_ereg_replace('{hints}', str_rot13_html(decodeEntities(strip_tags($r['hint']))), $thisline);
-		
+			$thisline = mb_ereg_replace('{hints}', str_rot13_gc(decodeEntities(strip_tags($r['hint']))), $thisline);
+
 		$thisline = mb_ereg_replace('{shortdesc}', $r['short_desc'], $thisline);
-		
+
 		$license = getLicenseDisclaimer(
-			$r['user_id'], $r['username'], $r['data_license'], $r['cacheid'], $locale, true, false, true);
+			$r['user_id'], $r['username'], $r['data_license'], $r['cacheid'], $opt['template']['locale'], true, false, true);
 		if ($license != "")
 			$license = "\r\n\r\n$license";
 
@@ -134,11 +131,11 @@ Logeinträge:
 			$thisline = mb_ereg_replace('{htmlwarn}', " ($converted_from_html)", $thisline);
 			$thisline = mb_ereg_replace('{desc}', html2txt($r['desc']) . $license, $thisline);
 		}
-		
+
 		$thisline = mb_ereg_replace('{type}', $r['type'], $thisline);
 		$thisline = mb_ereg_replace('{container}', $r['size'], $thisline);
 		$thisline = mb_ereg_replace('{status}', $r['status'], $thisline);
-		
+
 		$difficulty = sprintf('%01.1f', $r['difficulty'] / 2);
 		$thisline = mb_ereg_replace('{difficulty}', $difficulty, $thisline);
 
@@ -153,7 +150,7 @@ Logeinträge:
 		while ($rLog = sql_fetch_array($rsLogs))
 		{
 			$thislog = $txtLogs;
-			
+
 			$thislog = mb_ereg_replace('{id}', $rLog['id'], $thislog);
 			if (substr($rLog['date'],11) == "00:00:00")
 				$dateformat = "d.m.Y";
@@ -161,9 +158,9 @@ Logeinträge:
 				$dateformat = "d.m.Y H:i";
 			$thislog = mb_ereg_replace('{date}', date($dateformat, strtotime($rLog['date'])), $thislog);
 			$thislog = mb_ereg_replace('{username}', $rLog['username'], $thislog);
-			
+
 			$logtype = $rLog['type'];
-			
+
 			$thislog = mb_ereg_replace('{type}', $logtype, $thislog);
 			if ($rLog['text_html'] == 0)
 				$thislog = mb_ereg_replace('{text}', decodeEntities(strip_tags($rLog['text'])), $thislog);
@@ -184,12 +181,11 @@ Logeinträge:
 	}
 	mysql_free_result($rs);
 }
-	
+
 
 	function decodeEntities($str)
 	{
-		$str = html_entity_decode($str, ENT_COMPAT, "UTF-8");
-		return $str;
+		return html_entity_decode($str, ENT_COMPAT, "UTF-8");
 	}
 
 	function html2txt($html)
@@ -201,7 +197,7 @@ Logeinträge:
 		$str = decodeEntities($str);
 		return $str;
 	}
-	
+
 	function lf2crlf($str)
 	{
 		return mb_ereg_replace("\r\r\n" ,"\r\n" , mb_ereg_replace("\n" ,"\r\n" , $str));

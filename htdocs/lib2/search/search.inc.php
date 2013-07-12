@@ -1,21 +1,12 @@
 <?php
 /****************************************************************************
-													    ./lib/search.inc.php
-															--------------------
-		begin                : Sun September 25 2005
-
 		For license information see doc/license.txt
- ****************************************************************************/
-
-/****************************************************************************
 
 		Unicode Reminder メモ
 
-	functions for the search-engine
+		functions for the search-engine
 
  ****************************************************************************/
-
-require_once($opt['rootpath'] . 'lib/data-license.inc.php');
 
 /* begin conversion rules */
 

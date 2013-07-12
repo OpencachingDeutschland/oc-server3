@@ -108,8 +108,8 @@
 
 		<div class="content2-container-2col-left" style="width:60px; clear: left;">
 			<div><a href="articles.php?page=cacheinfo#cachetype">{include file="res_cacheicon.tpl" cachetype=$cache.type status=$cache.status}</a></div>
-			<div><a href="articles.php?page=cacheinfo#difficulty"><img src='./resource2/{$opt.template.style}/images/difficulty/diff-{$cache.difficulty*5}.gif' border='0' width='19' height='16' hspace='2' onmouseover='Tip("{t 1=$cache.difficulty*0.5}Difficulty:&nbsp;%1&nbsp;of&nbsp;5{/t}", DELAY, 0, FADEIN, false, FADEOUT, false, BGCOLOR, "#fffedf", BORDERCOLOR, "grey")' onmouseout='UnTip()' /></a></div>
-			<div><a href="articles.php?page=cacheinfo#difficulty"><img src='./resource2/{$opt.template.style}/images/difficulty/terr-{$cache.terrain*5}.gif' border='0' width='19' height='16' hspace='2' onmouseover='Tip("{t 1=$cache.terrain*0.5}Terrain:&nbsp;%1&nbsp;of&nbsp;5{/t}", DELAY, 0, FADEIN, false, FADEOUT, false, BGCOLOR, "#fffedf", BORDERCOLOR, "grey")' onmouseout='UnTip()'/></a></div>
+			<div><a href="articles.php?page=cacheinfo#difficulty">{include file="res_difficon.tpl" difficulty=$cache.difficulty}</a></div>
+			<div><a href="articles.php?page=cacheinfo#difficulty">{include file="res_terricon.tpl" terrain=$cache.terrain}</a></div>
 			<div></div>
 		</div>
 

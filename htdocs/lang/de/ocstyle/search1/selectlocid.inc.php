@@ -15,7 +15,7 @@
 	
  ****************************************************************************/
 
-	$locline = '<tr><td width="50px"><p>{nr}.&nbsp;</p></td><td><p><b><a href="search.php?{urlparams}">{locationname}</a>{secondlocationname}</b></p></td></tr>
+	$locline = '<tr><td width="50px"><p>{nr}.&nbsp;</p></td><td><p><b><a href="search1.php?{urlparams}">{locationname}</a>{secondlocationname}</b></p></td></tr>
 							<tr><td width="50px">&nbsp;</td><td><p>{coords}</p></td></tr>
 							<tr><td width="50px">&nbsp;</td><td style="padding-bottom:3px;"><span style="color:#001BBC">{parentlocations}</span></td></tr>';
 	

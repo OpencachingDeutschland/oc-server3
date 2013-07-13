@@ -59,7 +59,7 @@ $menu = array(
 				'menustring' => t('Search'),
 				'visible' => true,
 				'filename' => 'search.php',
-				'siteid' => 'search',
+				'siteid' => 'search1/search',
 				'submenu' => array(
 					array(
 						'title' => t('Show Geocache'),
@@ -131,14 +131,14 @@ $menu = array(
 						'menustring' => t('Select city'),
 						'visible' => false,
 						'filename' => 'search.php',
-						'siteid' => 'selectlocid'
+						'siteid' => 'search1/selectlocid'
 					),
 					array(
 						'title' => t('Show search result'),
 						'menustring' => t('Result'),
 						'visible' => false,
 						'filename' => 'search.php',
-						'siteid' => 'search.result.caches'
+						'siteid' => 'search1/search.result.caches'
 					),
 					array(
 						'title' => t('Recommendations'),

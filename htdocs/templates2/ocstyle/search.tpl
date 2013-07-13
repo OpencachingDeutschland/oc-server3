@@ -261,7 +261,7 @@ function switchAttributeCat2()
 </script>
 {/literal}
 
-<div class="content2-pagetitle"><img src="resource2/ocstyle/images/misc/32x32-search.png" style="align: left; margin-right: 10px;" width="32" height="32" alt="{t}Search for caches{/t}" />{t}Search for caches{/t}</div>
+<div class="content2-pagetitle"><img src="resource2/ocstyle/images/misc/32x32-search.png" style="align: left; margin-right: 10px;" width="32" height="32" alt="{t}Search for caches{/t}" />{t}Search for caches{/t} &nbsp; <small style="font-weight:normal">(&rarr; <a href="search1.php">{t}old{/t}</a>)</small></div>
 
 <form name="optionsform" style="display:inline;">
 
@@ -273,7 +273,7 @@ function switchAttributeCat2()
 			<td colspan="2">
 				<div style="padding:0 0 5px 0">
 				<input type="radio" name="sort" value="byname" index="0" id="l_sortbyname" class="radio" onclick="sync_options(this)" {if $byname_checked}checked="checked"{/if} > <label for="l_sortbyname">{t}Cachename{/t}</label>&nbsp;
-				<input type="radio" name="sort" value="bydistance" index="1" id="l_sortbydistance" class="radio" onclick="sync_options(this)" {if $bydistance_checked}checked="checked"{/if} {if !$bydistance_enabled}disabled="disabled"{/if} {if $disable_nologin}disabled="disabled"{/if}> <label for="l_sortbydistance" {if $disable_nologin}class="disabled">{/if}{t}Distance from <a href="myprofile.php">user-profile home coordinates</a>{/t}</label></div>
+				<input type="radio" name="sort" value="bydistance" index="1" id="l_sortbydistance" class="radio" onclick="sync_options(this)" {if $bydistance_checked}checked="checked"{/if} {if !$bydistance_enabled}disabled="disabled"{/if} {if $disable_nologin}disabled="disabled"{/if}> <label for="l_sortbydistance" {if $disable_nologin}class="disabled"{/if}>{t}Distance from <a href="myprofile.php">user-profile home coordinates</a>{/t}</label></div>
 				<input type="radio" name="sort" value="bycreated" index="2" id="l_sortbycreated" class="radio" onclick="sync_options(this)" {if $bycreated_checked}checked="checked"{/if}> <label for="l_sortbycreated">{t}Listed since{/t}</label>&nbsp;
 				<input type="radio" name="sort" value="bylastlog" index="3" id="l_sortbylastlog" class="radio" onclick="sync_options(this)" {if $bylastlog_checked}checked="checked"{/if}> <label for="l_sortbylastlog" >{t}Last log{/t}</label>&nbsp;
 				<input type="radio" name="sort" value="bymylastlog" index="4" id="l_sortbymylastlog" class="radio" onclick="sync_options(this)" {if $bymylastlog_checked}checked="checked"{/if} {if $disable_nologin}disabled="disabled"{/if}> <label for="l_sortbymylastlog" {if $disable_nologin}class="disabled"{/if}>{t}My last log{/t}</label>

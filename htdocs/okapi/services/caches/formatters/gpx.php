@@ -286,7 +286,7 @@ class WebService
 		unset($dict);
 
 		$response = new OkapiHttpResponse();
-		$response->content_type = "text/xml; charset=utf-8";
+		$response->content_type = "application/gpx; charset=utf-8";
 		$response->content_disposition = 'attachment; filename="results.gpx"';
 		ob_start();
 		Okapi::gettext_domain_init(explode("|", $langpref)); # Consumer gets properly localized GPX file.

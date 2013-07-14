@@ -178,11 +178,11 @@ function sql_foundrows_done()
 function set_domain()
 {
 	global $opt;
-	if (!isset($opt['domain']))
-		return;
 
 	$domain = isset($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : '';
-	if ($domain == '')
+	$opt['page']['domain'] = $domain;
+
+	if (!isset($opt['domain']) || $domain == '')
 		return;
 
 	if (isset($opt['domain'][$domain]))

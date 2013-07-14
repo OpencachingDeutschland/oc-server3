@@ -3,25 +3,23 @@
  *
  *  Unicode Reminder メモ
  ***************************************************************************}
-{t}welcome at www.opencaching.de!{/t}
+{t 1=$domain}welcome at %1!{/t}
 
-{t 1=$to}The following data has been stored for your E-Mail address %1:{/t}
+{t}The following data has been stored for your account:{/t}
 
 {t}Username{/t}: {$username}
+{t}E-Mail address{/t}: {$to}
+{if $first_name != ''}{t}First name{/t}: {$first_name}{/if}
+{if $last_name != ''}{t}Last name{/t}: {$last_name}{/if}
+{if $country != ''}{t}Country{/t}: {$country}{/if}
 
-{t}Last name{/t}: {$last_name}
-{t}First name{/t}: {$first_name}
+{t}Before you can login for the first time, you have to activate your account by clicking on the following link:{/t}
 
-{t}Country{/t}: {$country}
+{$activation_page}?u={$userid}&c={$code}
 
-
-{t}Before you can login the first time you have to activate your account with
-to followin code:{/t}
+{t 1=$activation_page}Alternatively, you can visit %1 and enter the following code manually:{/t}
 
 {$code}
 
-{t}The activation can be performed on the following URL:{/t}
-{$opt.page.absolute_url}activation.php
+{t}If you don't login in the next 14 days, your account will be deleted.{/t}
 
-
-{t}If you don't login in the next 14 days, your account may be deleted.{/t}

@@ -29,13 +29,6 @@
 	$secondlocationname = '&nbsp;<font size="1">({secondlocationname})</font>';
 	$no_location_coords = _('no coordinates available');
 
-	$pages_left_inactive = '<img src="resource2/ocstyle/images/navigation/16x16-browse-first-inactive.png" width="16" height="16"> <img src="resource2/ocstyle/images/navigation/16x16-browse-prev-inactive.png" width="16" height="16">';
-	$pages_left = '<a href="search.php?{urlparams}&locidsite=0"><img src="resource2/ocstyle/images/navigation/16x16-browse-first.png" width="16" height="16"></a> <a href="search.php?{urlparams}&locidsite={prevpage}"><img src="resource2/ocstyle/images/navigation/16x16-browse-prev.png" width="16" height="16"></a>';
-	$page_selectable = '<a href="search.php?{urlparams}&locidsite={linkpage}">{showpage}</a>';
-	$page_selected = '<b>{page}</b>';
-	$pages_right = '<a href="search.php?{urlparams}&locidsite={nextpage}"><img src="resource2/ocstyle/images/navigation/16x16-browse-next.png" width="16" height="16"></a> <a href="search.php?{urlparams}&locidsite={lastpage}"><img src="resource2/ocstyle/images/navigation/16x16-browse-last.png" width="16" height="16"></a>';
-	$pages_right_inactive = '<img src="resource2/ocstyle/images/navigation/16x16-browse-next-inactive.png" width="16" height="16"> <img src="resource2/ocstyle/images/navigation/16x16-browse-last-inactive.png" width="16" height="16">';
-
 	// search.html.inc.php -> search.result.caches.tpl
 	$newcache_days = 14;  // changed from 7 to 14  -- following 2013/6/17
 	$caches_newstring = '<b class="newsymbol">&nbsp;' . _('NEW') . '&nbsp;</b>&nbsp;';

@@ -110,40 +110,9 @@ function search_output()
 
 	$tpl->assign('caches', $caches);
 
-	// more than one page?
-	if ($resultcount <= $caches_per_page)
-		$pages = '';
-	else
-	{
-		if ($startat > 0)  // Ocprop:  queryid=([0-9]+)
-			$pages = '<a href="search.php?queryid=' . $options['queryid'] . '&startat=0"><img src="resource2/ocstyle/images/navigation/16x16-browse-first.png" width="16" height="16"></a> <a href="search.php?queryid=' . $options['queryid'] . '&startat=' . ($startat - $caches_per_page) . '"><img src="resource2/ocstyle/images/navigation/16x16-browse-prev.png" width="16" height="16"></a> ';
-		else
-			$pages = ' <img src="resource2/ocstyle/images/navigation/16x16-browse-first-inactive.png" width="16" height="16"> <img src="resource2/ocstyle/images/navigation/16x16-browse-prev-inactive.png" width="16" height="16"> ';
+	$pager = new pager('search.php?queryid=' . $options['queryid'] . '&startat={offset}', 2, 9);
+	$pager->make_from_offset($startat, $resultcount, $caches_per_page);
 
-		$frompage = ($startat / $caches_per_page) - 3;
-		if ($frompage < 1) $frompage = 1;
-		$maxpage = ceil($resultcount / $caches_per_page);
-		$topage = $frompage + 8;
-		if ($topage > $maxpage) $topage = $maxpage;
-
-		for ($i = $frompage; $i <= $topage; $i++)
-		{
-			if (($startat / $caches_per_page + 1) == $i)
-				$pages .= ' <b>' . $i . '</b>';
-			else
-				$pages .= ' <a href="search.php?queryid=' . $options['queryid'] . '&startat=' . (($i - 1) * $caches_per_page) . '">' . $i . '</a>';
-		}
-
-		if ($startat / $caches_per_page < ($maxpage - 1))
-			$pages .= ' <a href="search.php?queryid=' . $options['queryid'] . '&startat=' . ($startat + $caches_per_page) . '"><img src="resource2/ocstyle/images/navigation/16x16-browse-next.png" width="16" height="16"></a> <a href="search.php?queryid=' . $options['queryid'] . '&startat=' . (($maxpage - 1) * $caches_per_page) . '"><img src="resource2/ocstyle/images/navigation/16x16-browse-last.png" width="16" height="16"></a> ';
-		else
-			$pages .= ' <img src="resource2/ocstyle/images/navigation/16x16-browse-next-inactive.png" width="16" height="16"> <img src="resource2/ocstyle/images/navigation/16x16-browse-last-inactive.png" width="16" height="16">';
-	}
-
-	//'<a href="search.php?queryid=' . $options['queryid'] . '&startat=20">20</a> 40 60 80 100';
-	//$caches_per_page
-	//count($caches) - 1
-	$tpl->assign('pages', $pages);
 	$tpl->assign('showonmap', $showonmap);
 
 	// downloads

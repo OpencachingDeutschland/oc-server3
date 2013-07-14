@@ -47,28 +47,12 @@
 		sql_free_result($rsNewCaches);
 		$tpl->assign('newCaches', $newCaches);
 
-		$count = sql_value_slave('SELECT COUNT(*) `count` FROM `caches` WHERE `caches`.`status`=1', 0);
-		$maxstart = (ceil($count / $perpage)-1) * $perpage;
+		$startat = isset($_REQUEST['startat']) ? $_REQUEST['startat']+0 : 0;
+		$count = sql_value_slave('SELECT COUNT(*) FROM `caches` WHERE `caches`.`status`=1', 0);
 
-		if ($startat < 4 * $perpage)
-		{
-			$firstpage = 0;
-			$lastpage = 8 * $perpage;
-		}
-		else
-		{
-			$firstpage = $startat - 4 * $perpage;
-			$lastpage = $firstpage + 8 * $perpage;
-		}
-		if ($lastpage > $maxstart)
-			$lastpage = $maxstart;
+		$pager = new pager("newcaches.php?startat={offset}");
+		$pager->make_from_offset($startat, $count, 100);
 
-		$tpl->assign('firstpage', $firstpage);
-		$tpl->assign('lastpage', $lastpage);
-		$tpl->assign('perpage', $perpage);
-
-		$tpl->assign('startat', $startat);
-		$tpl->assign('maxstart', $maxstart);
 		$tpl->assign('defaultcountry', $opt['template']['default']['country']);
 	}
 

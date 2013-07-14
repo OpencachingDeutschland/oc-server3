@@ -296,7 +296,7 @@ function getChildWaypoints($cacheid)
 	$tpl->assign('show_logpics', $logpics ? 1 : 0);
 	if ($logpics)
 	{
-		set_paged_pics(LOGPICS_FOR_CACHE_GALLERY, 0, $cacheid, $tpl, "viewcache.php?cacheid=" . $cacheid . "&logpics=1");
+		set_paged_pics(LOGPICS_FOR_CACHE_GALLERY, 0, $cacheid, "viewcache.php?cacheid=" . $cacheid . "&logpics=1");
 		$tpl->assign('subtitle',"&lt;&lt; <a href='viewcache.php?cacheid=" . $cacheid . "'>" .
 		             $translate->t("Back to the cache description", "", "", 0) . "</a>");
 

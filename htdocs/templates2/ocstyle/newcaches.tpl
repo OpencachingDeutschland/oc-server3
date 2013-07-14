@@ -12,17 +12,7 @@
 <table width="100%" class="table">
 	<tr>
 		<td colspan="3" class="header-small">
-			{include file="res_browse_left.tpl" page="newcaches"}
-
-			{section name=page start=$firstpage loop=$lastpage+1 step=100}
-				{if $smarty.section.page.index!=$startat}
-					<a href="newcaches.php?startat={$smarty.section.page.index}">{$smarty.section.page.index/$perpage+1}</a>
-				{else}
-					<b>{$smarty.section.page.index/$perpage+1}</b>
-				{/if}
-			{/section}
-
-			{include file="res_browse_right.tpl" page="newcaches"}
+			{include file="res_pager.tpl"}
 		</td>
 	</tr>
 	<tr><td class="spacer"></td></tr>
@@ -37,17 +27,7 @@
 	<tr><td class="spacer"></td></tr>
 	<tr>
 		<td colspan="3" class="header-small">
-			{include file="res_browse_left.tpl" page="newcaches"}
-
-			{section name=page start=$firstpage loop=$lastpage+1 step=100}
-				{if $smarty.section.page.index!=$startat}
-					<a href="newcaches.php?startat={$smarty.section.page.index}">{$smarty.section.page.index/$perpage+1}</a>
-				{else}
-					<b>{$smarty.section.page.index/$perpage+1}</b>
-				{/if}
-			{/section}
-
-			{include file="res_browse_right.tpl" page="newcaches"}
+			{include file="res_pager.tpl"}
 		</td>
 	</tr>
 	<tr><td class="spacer"></td></tr>

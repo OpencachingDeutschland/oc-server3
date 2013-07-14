@@ -9,14 +9,11 @@
 
 <p>{t}For the search criterion no clear result was found. Please choose the desired location:{/t}</p>
 <table border="0" cellspacing="0" cellpadding="0" width="100%">
-	<tr><td colspan="2" style="margin-bottom:1px;"><p>{$pages}</p></td></tr>
+	<tr><td colspan="2" style="height:4px"></td></tr>
+	<tr><td colspan="2"><p>{include file="res_pager.tpl"}</p></td></tr>
 	<tr><td>&nbsp;</td></td></tr>
-</table>
-<table border="0" cellspacing="0" cellpadding="0" width="100%">
 	{$locations}
-</table>
-<table border="0" cellspacing="0" cellpadding="0" width="100%">
-	<tr><td>&nbsp;</td></td></tr>
-	<tr><td colspan="2" style="margin-top:1px;"><p>{$pages}</p></td></tr>
+	<tr><td colspan="2" style="height:8px"></td></tr>
+	<tr><td colspan="2"><p>{include file="res_pager.tpl"}</p></td></tr>
 	<tr><td>&nbsp;</td></td></tr>
 </table>

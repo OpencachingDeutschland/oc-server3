@@ -35,8 +35,8 @@
 			<td class="header-small" colspan="2">
 				<table width="98.5%">
 					<tr>
-						<td rowspan="1" style="vertical-align:top; width:300px">{$pages}</td>
-						<td style="text-align:right;">{t}Download{/t}:&nbsp;</td>
+						<td rowspan="1" style="padding:0; margin:0">{include file="res_pager.tpl"}</td>
+						<td style="text-align:right; padding:0; margin:0">{t}Download{/t}:&nbsp;</td>
 						<td><nobr>
 							<select name="wpdownload-page" class="wpdownload" onChange="location.href=this.options[this.selectedIndex].value">
 								<option value="#">{t}Results on this page{/t}</option>
@@ -88,10 +88,10 @@
 				</table>
 			</td>
 		</tr>
-		{if $pages != ''}
+		{if $pages_list}
 			<tr><td class="spacer" colspan="2">&nbsp;</td></tr>
 			<tr>
-				<td colspan="2" class="header-small">{$pages}</td>
+				<td colspan="2" class="header-small">{include file="res_pager.tpl"}</td>
 			</tr>
 			<tr><td style="height:0.6em"></td></tr>
 		{/if}

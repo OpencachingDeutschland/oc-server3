@@ -1811,8 +1811,6 @@ function outputUniidSelectionForm($uniSql, $options)
 {
 	global $tpl;  // settings
 	global $locline, $secondlocationname;
-	global $pages_left_inactive, $pages_left, $pages_right_inactive, $pages_right,
-	       $page_selectable, $page_selected;
 
 	$urlparamString = prepareLocSelectionForm($options);
 
@@ -1826,44 +1824,11 @@ function outputUniidSelectionForm($uniSql, $options)
 	$count = sql_value_slave('SELECT COUNT(*) FROM `uniids`',0);
 	$tpl->assign('resultscount', $count);
 
-	// create page numbering
-	$maxsite = ceil($count / 20) - 1;
-	$pages = '';
+	// create page browser
+	$pager = new pager('search.php?'.$urlparamString.'&locidsite={offset}');
+	$pager->make_from_offset($locidsite, ceil($count/20), 1);
 
-	if ($maxsite > 0)
-	{
-		if ($locidsite > 0)
-			$pages .= mb_ereg_replace('{urlparams}', $urlparamString,
-			          mb_ereg_replace('{prevpage}',  $locidsite - 1, $pages_left)).' ';
-		else
-			$pages .= $pages_left_inactive.' ';
-
-		$frompage = $locidsite - 3;
-		if ($frompage < 1) $frompage = 1;
-
-		$topage = $frompage + 8;
-		if ($topage > $maxsite) $topage = $maxsite + 1;
-
-		for ($i = $frompage; $i <= $topage; $i++)
-		{
-			if (($locidsite + 1) == $i)
-				$pages .= mb_ereg_replace('{page}', $i, $page_selected).' ';
-			else
-				$pages .= mb_ereg_replace('{urlparams}', $urlparamString,
-				          mb_ereg_replace('{linkpage}', $i-1,
-									mb_ereg_replace('{showpage}', $i, $page_selectable))).' '; 
-		}
-
-		if ($locidsite < $maxsite)
-			$pages .= mb_ereg_replace('{urlparams}', $urlparamString,
-			          mb_ereg_replace('{nextpage}',  $locidsite + 1,
-			          mb_ereg_replace('{lastpage}', $maxsite, $pages_right)));
-		else
-			$pages .= $pages_right_inactive;
-	}
-
-	$tpl->assign('pages', $pages);
-
+	// create locations list
 	$rs = sql_slave('SELECT `gns_locations`.`rc` `rc`, `gns_locations`.`cc1` `cc1`, `gns_locations`.`admtxt1` `admtxt1`, `gns_locations`.`admtxt2` `admtxt2`, `gns_locations`.`admtxt3` `admtxt3`, `gns_locations`.`admtxt4` `admtxt4`, `gns_locations`.`uni` `uni_id`, `gns_locations`.`lon` `lon`, `gns_locations`.`lat` `lat`, `gns_locations`.`full_name` `full_name`, `uniids`.`olduni` `olduni` FROM `gns_locations`, `uniids` WHERE `uniids`.`uni_id`=`gns_locations`.`uni` ORDER BY `gns_locations`.`full_name` ASC LIMIT ' . ($locidsite * 20) . ', 20');
 
 	$nr = $locidsite * 20 + 1;
@@ -1872,7 +1837,6 @@ function outputUniidSelectionForm($uniSql, $options)
 	{
 		$thislocation = $locline;
 
-		// locationsdings zusammenbauen
 		$locString = '';
 		if ($r['admtxt1'] != '')
 		{

@@ -130,7 +130,7 @@
 			$tpl->assign('logpics', get_logpics(LOGPICS_FOR_USER_STAT, $userid));
 		else
 		{
-			set_paged_pics(LOGPICS_FOR_USER_GALLERY, $userid, 0, $tpl, "viewprofile.php?userid=" . $userid . "&allpics=1"); 
+			set_paged_pics(LOGPICS_FOR_USER_GALLERY, $userid, 0, "viewprofile.php?userid=" . $userid . "&allpics=1");
 			$tpl->name = 'viewprofile_pics';
 				// actually we dont need all the other stuff here ..
 		}

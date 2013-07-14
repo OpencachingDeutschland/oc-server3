@@ -6,13 +6,13 @@
   <td width="46" class="{$listcolor}" rowspan="2"><nobr>{include file="res_difficon.tpl" difficulty=$cache.difficulty}{include file="res_terricon.tpl" terrain=$cache.terrain}</nobr></td>
   <td width="448" class="{$listcolor}">{if $cache.isnew}<b class="newsymbol">&nbsp;{t}NEW{/t}&nbsp;</b>&nbsp; {/if}<span style="{include file="res_cachestatus_span.tpl" status=$cache.status}"><a href="viewcache.php?cacheid={$cache.cache_id|escape}"><span style="{if $cache.redname}color: #e00000{/if}">{$cache.name|escape}</span></a></span> &nbsp;{t}by{/t} <a href="viewprofile.php?userid={$cache.user_id|escape}">{$cache.username|escape}</a><!-- Ocprop: <a href="viewcache.php?cacheid={$cache.cache_id|escape}">{$cache.name|escape}</a> {t}by{/t} <a href="viewprofile.php?userid={$cache.user_id|escape}">{$cache.username|escape}</a> --></td>
   <td width="74" class="{$listcolor}" rowspan="2" style="padding: 0px">{if $cache.oconly}<img src="resource2/ocstyle/images/misc/is_oconly.png" alt="OConly" title="OConly" style="margin:0px; padding:0px" width="64" height="35" />{/if}</td>
-  <td width="110" valign="top" class="{$listcolor}">
+  <td width="110" valign="top" class="{$listcolor}"><nobr>
 		{if $cache.firstlog}
 			<a href="viewcache.php?cacheid={$cache.cache_id}#logentries">{include file="res_logtype.tpl" type=$cache.firstlog.type}</a><a href="viewcache.php?cacheid={$cache.cache_id}#logentries">{$cache.firstlog.date|date_format:$opt.format.date}</a>&nbsp;
 		{else}
 			<img src="resource2/{$opt.template.style}/images/log/16x16-none.png" width="16" height="16"> --.--.----&nbsp;
 		{/if}
-	</td>
+	</nobr></td>
 </tr>
 <!--n-->
 <tr>

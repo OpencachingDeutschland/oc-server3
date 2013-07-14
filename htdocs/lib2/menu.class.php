@@ -102,7 +102,7 @@ class Menu
 	{
 		global $opt;
 
-		$dir = $opt['rootpath'] . 'cache/';
+		$dir = $opt['rootpath'] . 'cache2/';
 		if ($dh = opendir($dir))
 		{
 			while (($file = readdir($dh)) !== false)

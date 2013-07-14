@@ -21,7 +21,7 @@
 
 	//prepare the templates and include all neccessary
 	require_once('./lib/common.inc.php');
-	require_once('./lib/logtypes.inc.php');
+	require_once('./lib2/logic/logtypes.inc.php');
 	require($stylepath.'/smilies.inc.php');
   require_once($opt['rootpath'] . '../lib/htmlpurifier-4.2.0/library/HTMLPurifier.auto.php');
 

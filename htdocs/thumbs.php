@@ -5,19 +5,20 @@
  *  Unicode Reminder メモ
  ***************************************************************************/
 
-	// define image paths
-	$imgurl_404[1] = 'lang/de/ocstyle/images/thumb/thumb404_1.gif';
-	$imgurl_404[2]= 'lang/de/ocstyle/images/thumb/thumb404_2.gif';
-	$imgurl_intern[1] = 'lang/de/ocstyle/images/thumb/thumbintern_1.gif';
-	$imgurl_intern[2] = 'lang/de/ocstyle/images/thumb/thumbintern_2.gif';
-	$imgurl_extern[1] = 'lang/de/ocstyle/images/thumb/thumbextern_1.gif';
-	$imgurl_extern[2] = 'lang/de/ocstyle/images/thumb/thumbextern_2.gif';
-	$imgurl_spoiler[1] = 'lang/de/ocstyle/images/thumb/thumbspoiler_1.gif';
-	$imgurl_spoiler[2] = 'lang/de/ocstyle/images/thumb/thumbspoiler_2.gif';
-	$imgurl_format[1] = 'lang/de/ocstyle/images/thumb/thumbunknown_1.gif';
-	$imgurl_format[2] = 'lang/de/ocstyle/images/thumb/thumbunknown_2.gif';
-
 	require('./lib2/web.inc.php');
+
+	// define image paths
+	$imgpath = "resource2/".$opt['template']['style']."/images/thumb/";
+	$imgurl_404[1]     = $imgpath.'thumb404_1.gif';
+	$imgurl_404[2]     = $imgpath.'thumb404_2.gif';
+	$imgurl_intern[1]  = $imgpath.'thumbintern_1.gif';
+	$imgurl_intern[2]  = $imgpath.'thumbintern_2.gif';
+	$imgurl_extern[1]  = $imgpath.'thumbextern_1.gif';
+	$imgurl_extern[2]  = $imgpath.'thumbextern_2.gif';
+	$imgurl_spoiler[1] = $imgpath.'thumbspoiler_1.gif';
+	$imgurl_spoiler[2] = $imgpath.'thumbspoiler_2.gif';
+	$imgurl_format[1]  = $imgpath.'thumbunknown_1.gif';
+	$imgurl_format[2]  = $imgpath.'thumbunknown_2.gif';
 
 	$login->verify();
 

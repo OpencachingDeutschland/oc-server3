@@ -142,7 +142,7 @@
 					else
 						cssRules = "cssRules";
 				    
-					var value = document.getElementById(id).checked ? "block" : "none";
+					var value = document.getElementById(id).checked ? "" : "none";
 
 					for (var i = 0; i < document.styleSheets.length; i++)
 						for (var j = 0; j < document.styleSheets[i][cssRules].length; j++)
@@ -163,7 +163,7 @@
 				<td><input checked="checked" onclick="switchOpt('firstresultrow')" id="firstresultrow" type="checkbox" /><label for="firstresultrow">First result row</label></td>
 			</tr>
 			<tr>
-				<td><input onclick="switchOpt('result')" id="result" type="checkbox" /><label for="result">Result rows</label></td>
+				<td><input onclick="switchOpt('result')" id="result" type="checkbox" /><label for="result">Result rows 2-25</label></td>
 				<td><input checked="checked" onclick="switchOpt('explain')" id="explain" type="checkbox" /><label for="explain">Explain query</label></td>
 				<td><input checked="checked" onclick="switchOpt('runtime')" id="runtime" type="checkbox" /><label for="runtime">Runtime</label></td>
 				<td><input checked="checked" onclick="switchOpt('affectedrows')" id="affectedrows" type="checkbox" /><label for="affectedrows">Affected rows</label></td>
@@ -196,7 +196,7 @@
 			{/if}
 				<p class="sqlno">
 					<span class="white">/*</span>
-						SQL command {counter}
+						<b>SQL command {counter}</b>
 						{if $command.slave}
 							<span class="slave_title">(slave query executed on {$command.server|escape}, {$command.dblink|escape})
 						{/if}
@@ -239,24 +239,21 @@
 										<th>{$column}</th>
 									{/foreach}
 								</tr>
-						{/if}
-
-							{if $smarty.foreach.result.first}
 								<tr>
-							{else}
+						{else}
 								<tr class="result">
-							{/if}
+						{/if}
 							
-								{foreach from=$row key=column item=value}
-									<td>
-										{if $value==null}
-											NULL
-										{else}
-											{$value|escape}
-										{/if}
-									</td>
-								{/foreach}
-							</tr>
+									{foreach from=$row key=column item=value}
+										<td>
+											{if $value==null}
+												NULL
+											{else}
+												{$value|escape}
+											{/if}
+										</td>
+									{/foreach}
+								</tr>
 
 						{if $smarty.foreach.result.last}
 							</table>
@@ -296,12 +293,12 @@
 					 *}
 					{foreach from=$command.warnings item=row name=warnings}
 						{if $smarty.foreach.warnings.first}
-							<div class="error">Error while executing SQL command!</div>
+							<div class="error">MySQL warning:</div>
 							<div class="errormsg">
 								<table class="table">
 						{/if}
 
-							<tr><td>{$row|escape}</td></tr>
+							<tr><td style="font-size:1em">{$row|escape}</td></tr>
 
 						{if $smarty.foreach.warnings.last}
 								</table>

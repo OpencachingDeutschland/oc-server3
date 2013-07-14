@@ -435,6 +435,8 @@ class user
 
 		if ($this->reUser->save())
 		{
+			if ($this->getUserId() == ID_NEW)
+				$this->nUserId = $this->reUser->getValue('user_id');
 			$this->getStatpic()->invalidate();
 			sql_slave_exclude();
 			return true;
@@ -583,7 +585,7 @@ class user
 
 	function sendRegistrationCode()
 	{
-		global $translate;
+		global $opt, $translate;
 
 		$countriesList = new countriesList();
 
@@ -591,7 +593,10 @@ class user
 		$mail->name = 'register';
 		$mail->to = $this->getEMail();
 		$mail->subject = $translate->t('Registration confirmation', '', basename(__FILE__), __LINE__);
+		$mail->assign('domain', $opt['page']['domain']);
+		$mail->assign('activation_page', $opt['page']['absolute_url'] . 'activation.php');
 		$mail->assign('username', $this->getUsername());
+		$mail->assign('userid', $this->getUserId());
 		$mail->assign('last_name', $this->getLastName());
 		$mail->assign('first_name', $this->getFirstName());
 		$mail->assign('country', $countriesList->getCountryLocaleName($this->getCountryCode()));

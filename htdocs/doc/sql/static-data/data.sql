@@ -1017,11 +1017,11 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('136', '%2 wrote
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('137', '%2 visited %1', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('138', '%2 want\'s to visit %1', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('139', 'Registration confirmation', '2010-08-28 11:48:03');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('140', 'welcome at www.opencaching.de!', '2010-08-28 11:48:03');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('141', 'The following data has been stored for your E-Mail address %1:', '2010-08-28 11:48:03');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('140', 'welcome at %1!', '2010-08-28 11:48:03');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('141', 'The following data has been stored for your account:', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('142', 'Slave', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('143', 'The activation can be performed on the following URL:', '2010-08-28 11:48:03');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('144', 'If you don\'t login in the next 14 days, your account may be deleted.', '2010-08-28 11:48:03');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('144', 'If you don\'t login in the next 14 days, your account will be deleted.', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('145', 'Czech', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('146', 'Bulgarian', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('147', 'Userprofile of %1', '2010-08-28 11:48:03');
@@ -1361,7 +1361,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('489', 'Edit pro
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('490', 'The notification radius must be not more than 150 km. To deaktivate notifications, set the radius to 0.', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('491', 'Change password', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('492', 'Change statpic', '2010-08-28 11:48:04');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('493', 'E-Mail Address', '2010-08-28 11:48:04');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('493', 'E-Mail address', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('494', 'Available', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('495', 'Temporary disabled', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('496', 'Archived', '2010-08-28 11:48:04');
@@ -1457,7 +1457,6 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('590', 'Username
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('591', 'The country is not valid.', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('592', 'The entered radius is not valid.', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('593', 'An unknown error occured.', '2010-08-28 11:48:04');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('594', 'Before you can login the first time you have to activate your account with to followin code:', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('595', 'New password', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('596', 'Request', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('597', 'Change', '2010-08-28 11:48:04');
@@ -2507,6 +2506,8 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2089', 'disable
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2090', 'archived[pl]', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2096', '%2 has activated %1', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2097', '%1 has activated the geocache', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2101', 'Alternatively, you can visit %1 and enter the following code manually:', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2102', 'Before you can login for the first time, you have to activate your account by clicking on the following link:', '2013-07-14 22:47:12');
 
 -- Table sys_trans_ref
 SET NAMES 'utf8';
@@ -3470,7 +3471,6 @@ INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('592',
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('593', './templates2/ocstyle/myprofile.tpl', '177');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('593', './templates2/ocstyle/newemail.tpl', '51');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('593', './templates2/ocstyle/newemail.tpl', '101');
-INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('594', './templates2/mail/register.tpl', '18');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('595', './templates2/ocstyle/newpw.tpl', '96');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('596', './templates2/ocstyle/newemail.tpl', '40');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('597', './templates2/ocstyle/mydetails.tpl', '93');
@@ -4976,11 +4976,11 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('137', 'DE', '%2 hat %1 besucht', '2010-08-29 17:59:44');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('138', 'DE', '%2 möchte %1 besuchen', '2010-08-29 17:59:36');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('139', 'DE', 'Registrierungsbestätigung', '2010-08-28 11:48:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('140', 'DE', 'Herzlich Willkommen bei www.opencaching.de!', '2010-08-28 11:48:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('141', 'DE', 'Für deine E-Mail-Adresse %1 wurden folgende Benutzerdaten eingetragen:', '2010-08-28 11:48:06');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('140', 'DE', 'herzlich willkommen bei %1!', '2010-08-28 11:48:06');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('141', 'DE', 'Folgende Daten wurden für dich eingetragen:', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('142', 'DE', 'Slawisch', '2010-10-04 00:22:41');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('143', 'DE', 'Die Aktivierungsseite ist unter folgender URL erreichbar:', '2010-08-28 11:48:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('144', 'DE', 'Solltest du dich innerhalb der nächsten 14 Tage nicht einloggen, wird der Benutzeraccount wieder entfernt.', '2010-08-28 11:48:06');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('144', 'DE', 'Solltest du dich innerhalb der nächsten 14 Tage nicht einloggen, wird der Benutzeraccount wieder gelöscht.', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('145', 'DE', 'Tschechisch', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('146', 'DE', 'Bulgarisch', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('147', 'DE', 'Benutzerprofil von %1', '2010-08-28 11:48:06');
@@ -5321,14 +5321,14 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('490', 'DE', 'Der Radius darf maximal 150 km betragen. Zum Deaktivieren der Benachrichtigung setze den Umkreis auf den Wert 0.', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('491', 'DE', 'Passwort ändern', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('492', 'DE', 'Statistikbild wählen', '2010-08-28 11:48:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('493', 'DE', 'E-Mail-Adresse ändern', '2010-08-28 11:48:06');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('493', 'DE', 'E-Mail-Adresse', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('494', 'DE', 'Kann gesucht werden', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('495', 'DE', 'Momentan nicht verfügbar', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('496', 'DE', 'Archiviert', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('497', 'DE', 'nicht gefunden', '2012-07-24 21:30:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('498', 'DE', 'teilgenommen', '2012-07-24 21:30:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('499', 'DE', 'möchte teilnehmen', '2012-07-24 21:30:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('500', 'DE', 'Herzlich Willkommen %1', '2010-08-28 11:48:06');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('500', 'DE', 'Herzlich willkommen %1', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('501', 'DE', 'Logs', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('502', 'DE', 'Funde: %1', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('503', 'DE', 'Deine letzten Logeinträge:', '2010-08-28 11:48:06');
@@ -5417,7 +5417,6 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('591', 'DE', 'Das Land ist nicht gültig.', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('592', 'DE', 'Der eingegebene Radius ist nicht gültig.', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('593', 'DE', 'Ein unbekannter Fehler ist aufgetreten.', '2010-08-28 11:48:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('594', 'DE', 'Vor dem ersten Einloggen musst du deinen Account mit folgendem Code aktivieren:', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('595', 'DE', 'Neues Passwort', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('596', 'DE', 'Anfordern', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('597', 'DE', 'Ändern', '2010-08-28 11:48:06');
@@ -6465,7 +6464,9 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2090', 'DE', 'archivierte', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2096', 'DE', '%2 hat %1 aktiviert', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2097', 'DE', '%1 hat den Geocache aktiviert', '2013-04-25 23:00:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'EN', 'Reorder IDs \r', '2010-09-02 00:15:30');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2101', 'DE', 'Wahlweise kannst du auch auf %1 den folgenden Code von Hand eingeben:', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2102', 'DE', 'Vor dem ersten Einloggen musst du auf folgenden Link klicken, um deinen Account zu aktivieren:', '2010-08-28 11:48:06');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'EN', 'Reorder IDs', '2010-09-02 00:15:30');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'EN', 'The database could not be reconnected.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'EN', 'Testing – please do not login', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('4', 'EN', 'User', '2010-08-28 11:48:07');
@@ -6554,7 +6555,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('102', 'EN', 'Esperanto', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('103', 'EN', 'Greek', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('104', 'EN', 'Danish', '2010-08-28 11:48:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('105', 'EN', 'An unkown error occurred.\r\n', '2010-08-28 11:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('105', 'EN', 'An unkown error occurred.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('106', 'EN', 'Template does not exist.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('107', 'EN', 'Sorry, you are not allowed to view this page.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('108', 'EN', 'Sorry, the requested cache does not exist.', '2010-08-28 11:48:07');
@@ -6587,10 +6588,10 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('135', 'EN', '%2 didn\'t find %1', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('136', 'EN', '%2 wrote a note for %1', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('137', 'EN', '%2 visited %1', '2010-08-28 11:48:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('138', 'EN', '%2 wants to visit %1 \r\n', '2010-08-28 11:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('138', 'EN', '%2 wants to visit %1', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('139', 'EN', 'Registration confirmation', '2010-08-28 11:48:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('140', 'EN', 'Welcome at www.opencaching.de!', '2010-08-28 11:48:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('141', 'EN', 'The following data has been stored for your e-mail address %1: \r\n', '2010-08-28 11:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('140', 'EN', 'welcome at %1!', '2010-08-28 11:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('141', 'EN', 'The following data has been stored for your account:', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('142', 'EN', 'Slave', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('143', 'EN', 'The activation can be performed at the following web address:', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('144', 'EN', 'If you don\'t login within the next 14 days, your account will be deleted.', '2010-08-28 11:48:07');
@@ -6610,7 +6611,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('158', 'EN', 'French', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('159', 'EN', 'English', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('160', 'EN', 'German', '2010-08-28 11:48:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('161', 'EN', 'Attention: If you are using this option, don\'t forget to log out before other persons have access to your computer. Otherwise, they may use and modify your personal data.\r\n', '2010-08-28 11:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('161', 'EN', 'Attention: If you are using this option, don\'t forget to log out before other persons have access to your computer. Otherwise, they may use and modify your personal data.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('162', 'EN', 'Zimbabwe', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('163', 'EN', 'Zambia', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('164', 'EN', 'South Africa', '2010-08-28 11:48:07');
@@ -6672,7 +6673,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('227', 'EN', 'The entered username/e-mail or the specified password did not match.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('228', 'EN', 'Your tried to login more than %1 times within the last hour. The next login will not be allowed before one hour since the first try has passed.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('229', 'EN', 'Your account is not acivated.', '2010-08-28 11:48:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('230', 'EN', '\&gt;<a href=\"activation.php\">Here</a>\&lt; you can activate your account. \r\n', '2010-08-28 11:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('230', 'EN', '\&gt;<a href=\"activation.php\">Here</a>\&lt; you can activate your account.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('231', 'EN', 'Tunisia', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('232', 'EN', 'To complete the registration, you have to enter your e-mail address and activation code.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('233', 'EN', 'Turkmenistan', '2010-08-28 11:48:07');
@@ -6893,7 +6894,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('449', 'EN', '(before an export)', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('450', 'EN', 'We are currently updating opencaching.de. To protect against faults while processing, the entire page is offline.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('452', 'EN', 'News entry has been saved', '2010-08-28 11:48:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('453', 'EN', 'Thank you very much for your news entry. We will try to validate your entry as soon as possible.<br /><br />Back to <a href=\"index.php\">Start</a> \r\n', '2010-08-28 11:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('453', 'EN', 'Thank you very much for your news entry. We will try to validate your entry as soon as possible.<br /><br />Back to <a href=\"index.php\">Start</a>', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('454', 'EN', 'Submit a news entry', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('455', 'EN', 'Submit', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('456', 'EN', 'The code did not match.', '2010-08-28 11:48:07');
@@ -6913,7 +6914,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('470', 'EN', 'Please be patient, we will do our best to get the site back online as soon as possible.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('471', 'EN', 'The account could not be created, the reason is not known. If you cannot solve this problem by yourself, please contact us via <a href=\"mailto:%1\">e-mail</a>.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('472', 'EN', 'We respect your privacy. Your personal data will be stored in our database but not disclosed to third parties. Please note our detailed <a href=\"articles.php?page=dsb\">privacy statement</a>. If you have further questions, please <a href=\"mailto:%1\">contact us</a> <b>before</b> you create an account.', '2010-08-28 11:48:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('473', 'EN', 'We have to approve your news entry before we can display it. We will try to do this within 24 to 48 hours. The news entry cannot be modified after you have submitted it. If you want to make changes, please resubmit the corrected entry. You may submit any news concerning Geocaching, but you may not submit advertisement for products or geocaches. The decision to approve or not approve a news entry is exclusively up to the operator of the web page - there is no claim for publication. In the case of doubts, please wait if your news entry will be published, or ask via e-mail to <a href=\"mailto:%1\">%1</a> before submitting.\r\n', '2010-08-28 11:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('473', 'EN', 'We have to approve your news entry before we can display it. We will try to do this within 24 to 48 hours. The news entry cannot be modified after you have submitted it. If you want to make changes, please resubmit the corrected entry. You may submit any news concerning Geocaching, but you may not submit advertisement for products or geocaches. The decision to approve or not approve a news entry is exclusively up to the operator of the web page - there is no claim for publication. In the case of doubts, please wait if your news entry will be published, or ask via e-mail to <a href=\"mailto:%1\">%1</a> before submitting.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('474', 'EN', 'If this problem persists over a longer time, please contact us via <a href=\"mailto:%1\">%1</a>.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('475', 'EN', 'Opencaching is currently out of service', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('476', 'EN', 'Created at:', '2010-08-28 11:48:07');
@@ -6933,7 +6934,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('490', 'EN', 'The notification radius must not be greater than 150 km. To deactivate notifications, set the radius to 0.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('491', 'EN', 'Change password', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('492', 'EN', 'Change statpic', '2010-08-28 11:48:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('493', 'EN', 'E-mail address \r\n', '2010-08-28 11:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('493', 'EN', 'E-mail address', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('494', 'EN', 'Available', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('495', 'EN', 'Temporarily disabled', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('496', 'EN', 'Archived', '2010-08-28 11:48:07');
@@ -7029,7 +7030,6 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('591', 'EN', 'The country is not valid.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('592', 'EN', 'The entered radius is not valid.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('593', 'EN', 'An unknown error occurred.', '2010-08-28 11:48:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('594', 'EN', 'Before you can login for the first time, you have to activate your account by entering the following code:', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('595', 'EN', 'New password', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('596', 'EN', 'Request', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('597', 'EN', 'Change', '2010-08-28 11:48:07');
@@ -7099,7 +7099,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('661', 'EN', 'Enter your username and we will send a reminder e-mail to your e-mail address.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('662', 'EN', 'Enter an username.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('663', 'EN', 'Username does not exist.', '2010-08-28 11:48:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('664', 'EN', 'The reminder e-mail has been sent.\r\n', '2010-08-28 11:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('664', 'EN', 'The reminder e-mail has been sent.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('665', 'EN', 'Reminder to your e-mail address', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('666', 'EN', 'Your login e-mail address:', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('667', 'EN', 'you requested a reminder e-mail on %1 .', '2010-08-28 11:48:07');
@@ -7116,7 +7116,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('678', 'EN', 'Sorry, the requested user account is deactivated.', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('679', 'EN', 'Sorry, there is no e-mail address for this user.', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('680', 'EN', 'An unkown error occurred and the e-mail was not sent.', '2010-08-28 11:48:08');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('681', 'EN', '\'%1\' contacted you via %2 The user profile: %2viewprofile.php?userid=%3 To answer this e-mail use the e-mail link at the user\'s profile.\r\n', '2010-08-28 11:48:08');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('681', 'EN', '\'%1\' contacted you via %2 The user profile: %2viewprofile.php?userid=%3 To answer this e-mail use the e-mail link at the user\'s profile.', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('682', 'EN', 'Subject:', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('683', 'EN', 'All information will be handled confidential and will not be disclosed to third parties!', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('684', 'EN', '\'%1\' with e-mail address %2 contacted you via %3 The user profile: %3viewprofile.php?userid=%4 Use the reply button of your e-mail client to answer this mail.', '2010-08-28 11:48:08');
@@ -7263,7 +7263,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('834', 'EN', 'There are no caches that can be adopted by you at the moment.', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('835', 'EN', 'Adopt now', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('836', 'EN', 'Geocaches which are offered to you for adoption', '2010-08-28 11:48:08');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('837', 'EN', 'Yes, I have read and understand the above and agree with it. \r\n', '2010-08-28 11:48:08');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('837', 'EN', 'Yes, I have read and understand the above and agree with it.', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('838', 'EN', 'When you have found a user who wants to adopt your geocache, fill in the username here and submit. The user will see this geocache in My Profile \&gt; Adoptions. To complete the adoption, the user has to accept our terms of use and commit the adoption. You may offer this geocache to more than one user. The first user committing the adoption will become the new owner of this cache. With the adoption, you will grant to the committing user an unlimited right to use, modifiy, publish and sublicense content of this geocache.', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('839', 'EN', 'Offer %1 for adoption', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('840', 'EN', 'You have not invited any users to adopt this cache.', '2010-08-28 11:48:08');
@@ -7318,7 +7318,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('894', 'EN', 'of', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('895', 'EN', 'Show in Google Maps', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('896', 'EN', '(in GM)', '2010-08-28 11:48:08');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('897', 'EN', 'This user has not hidden any caches yet. \r\n', '2010-08-28 11:48:08');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('897', 'EN', 'This user has not hidden any caches yet.', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('898', 'EN', 'Geocaching.de', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('899', 'EN', 'Google Maps', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('900', 'EN', 'Donations', '2010-08-28 11:48:08');
@@ -8159,8 +8159,8 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('137', 'ES', '%2 visitas %1', '2010-12-09 00:17:56');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('138', 'ES', '%2 quieren visitar %1', '2010-12-09 00:17:56');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('139', 'ES', 'Confirmación de registro', '2010-12-09 00:17:56');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('140', 'ES', 'Bienvenido a www.opencaching.de', '2010-12-09 00:17:56');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('141', 'ES', 'Los siguientes datos han sido almacenados para su dirección de e-mail', '2010-12-09 00:17:56');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('140', 'ES', 'bienvenido a %1', '2010-12-09 00:17:56');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('141', 'ES', 'Los siguientes datos han sido almacenados para su dirección de cuenta:', '2010-12-09 00:17:56');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('142', 'ES', 'Eslavo', '2010-12-09 00:17:56');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('143', 'ES', 'A la página de activación se puede acceder desde la siguiente URL:', '2010-12-09 00:17:56');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('144', 'ES', 'Si no se inscribe dentro de los próximos 14 días, la cuenta de usuario se elimina.', '2010-12-09 00:17:56');
@@ -8483,7 +8483,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('470', 'ES', 'Por favor, sea paciente, estamos haciendo todo lo posible para que el sitio este de nuevo en línea tan pronto como sea posible.', '2010-12-09 00:17:57');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('471', 'ES', 'La cuenta no se pudo crear, la razón no se conoce. Si no puede resolver este problema por sí mismo, por favor contáctenos a través de <a href=\"mailto:%1\">email</a>.', '2010-12-09 00:17:57');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('472', 'ES', 'Respetamos su privacidad. Sus datos personales serán almacenados en nuestra base de datos pero no divulgación a terceros. Por favor, tome nota detallada de nuestra <a href=\"articles.php?page=dsb\">privacy statement</a>. Si tiene más preguntas, por favor <a href=\"mailto:%1\">contact us</a> <b>before</b> crear una cuenta.', '2010-12-09 00:17:57');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('473', 'ES', 'Tenemos que aprobar la entrada de noticias antes de que podamos mostrarlo. Vamos a tratar de hacer esto dentro de 24 a 48 horas. La entrada de noticias no se puede modificar después de haberla presentado. Si desea hacer cambios, por favor vuelva a enviar la entrada corregida. Usted puede enviar cualquier noticia sobre Geocaching, pero no podrán presentar publicidad de productos o geocachés. La decisión de aprobar o no aprobar tus noticias son exclusivamente hasta el creador de la página web - no hay demanda para su publicación. En el caso de dudas, por favor esperar si la entrada de noticias serán publicadas, o pedir por correo electrónico a <a href=\"mailto:%1\">%1</a> antes de presentar.\r', '2010-12-09 00:17:57');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('473', 'ES', 'Tenemos que aprobar la entrada de noticias antes de que podamos mostrarlo. Vamos a tratar de hacer esto dentro de 24 a 48 horas. La entrada de noticias no se puede modificar después de haberla presentado. Si desea hacer cambios, por favor vuelva a enviar la entrada corregida. Usted puede enviar cualquier noticia sobre Geocaching, pero no podrán presentar publicidad de productos o geocachés. La decisión de aprobar o no aprobar tus noticias son exclusivamente hasta el creador de la página web - no hay demanda para su publicación. En el caso de dudas, por favor esperar si la entrada de noticias serán publicadas, o pedir por correo electrónico a <a href=\"mailto:%1\">%1</a> antes de presentar.', '2010-12-09 00:17:57');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('474', 'ES', 'Si este problema persiste durante un tiempo más largo, por favor contáctenos a través de <a href=\"mailto:%1\">%1</a>.', '2010-12-09 00:17:57');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('475', 'ES', 'Opencaching se encuentra actualmente fuera de servicio', '2010-12-09 00:17:57');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('476', 'ES', 'Creado en:', '2010-12-09 00:17:57');
@@ -8599,7 +8599,6 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('591', 'ES', 'El país no es valido', '2010-12-09 00:17:57');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('592', 'ES', 'La entrada del radio no es valido.', '2010-12-09 00:17:57');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('593', 'ES', 'Ocurrió un error desconocido.', '2010-12-09 00:17:57');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('594', 'ES', 'Antes de que usted puede acceder por primera vez, usted tiene que activar su cuenta introduciendo el siguiente código:', '2010-12-09 00:17:57');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('595', 'ES', 'Nuevo password', '2010-12-09 00:17:57');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('596', 'ES', 'Solicitud', '2010-12-09 00:17:57');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('597', 'ES', 'Cambiar', '2010-12-09 00:17:57');
@@ -8686,7 +8685,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('678', 'ES', 'Lo sentimos, pero el usuario está deshabilitado.', '2010-12-09 00:17:58');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('679', 'ES', 'Lo siento, para el usuario especificado no es una dirección de correo electrónico proporcionada.', '2010-12-09 00:17:58');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('680', 'ES', 'Un error desconocido ocurrió y el e-mail no se ha enviado.', '2010-12-09 00:17:58');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('681', 'ES', '\'%1\' en contacto con usted a través de un %2 Del perfil de usuario: %2viewprofile.php?userid=%3 Para responder a este uso el email el enlace de e-mail del perfil de usuario.\r', '2010-12-09 00:17:58');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('681', 'ES', '\'%1\' en contacto con usted a través de un %2 Del perfil de usuario: %2viewprofile.php?userid=%3 Para responder a este uso el email el enlace de e-mail del perfil de usuario.', '2010-12-09 00:17:58');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('682', 'ES', 'Asunto:', '2010-12-09 00:17:58');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('683', 'ES', '¡Todos los datos serán confidenciales y no se revelará a terceros!', '2010-12-09 00:17:58');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('684', 'ES', '\'%1\' dirección email $2 en contacto con usted a través de $3 El perfil de usuario: %3viewprofile.php?userid=%4 Utilice el botón de respuesta de su cliente de email para responder a este correo.', '2010-12-09 00:17:58');
@@ -9548,7 +9547,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('133', 'FR', 'Indication d\'erreur', '2010-10-04 00:17:40');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('134', 'FR', '%2 a trouvé %1', '2010-10-04 00:17:40');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('135', 'FR', '%2 ne pas trouvé %1', '2010-10-04 00:17:40');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('140', 'FR', 'Bienvenue à www.opencaching.de!', '2010-10-04 00:17:40');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('140', 'FR', 'bienvenue à %1!', '2010-10-04 00:17:40');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('142', 'FR', 'Slave', '2010-10-04 00:17:40');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('145', 'FR', 'Tchèque', '2010-10-04 00:17:40');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('146', 'FR', 'Bulgare', '2010-10-04 00:17:40');
@@ -9710,8 +9709,8 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('137', 'IT', '%2 ha visitato %1', '2010-08-28 21:43:26');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('138', 'IT', '%2 vuole visitare %1', '2010-08-28 21:43:46');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('139', 'IT', 'Conferma registrazione', '2010-08-28 21:43:55');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('140', 'IT', 'Benvenuto a www.opencaching.de!', '2010-10-27 18:49:19');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('141', 'IT', 'I dati seguenti sono stati registrati per il tuo indirizzo di email %1', '2010-10-27 18:49:19');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('140', 'IT', 'benvenuto a %1!', '2010-10-27 18:49:19');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('141', 'IT', 'I dati seguenti sono stati registrati per il tuo indirizzo di registrato:', '2010-10-27 18:49:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('142', 'IT', 'Slave', '2010-09-10 23:15:35');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('143', 'IT', 'L\'attivazione può essere eseguita al seguente indirizzo (URL):', '2010-08-28 21:53:44');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('144', 'IT', 'Se non esegui un accesso entro i prossimi 14 giorni, la tua registrazione può essere cancellata.', '2010-08-28 21:48:54');
@@ -10150,7 +10149,6 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('591', 'IT', 'La nazione non è valida.', '2010-09-01 23:49:03');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('592', 'IT', 'Il raggio introdotto non è valido.', '2010-08-31 20:06:23');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('593', 'IT', 'Si è verificato un errore imprevisto.', '2010-09-01 23:49:03');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('594', 'IT', 'Prima di poterti autenticare per la prima volta è necessario attivare l\'utente inserendo il seguente codice:', '2010-08-31 20:06:23');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('595', 'IT', 'Nuova password', '2010-09-01 23:49:03');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('596', 'IT', 'Richiesta', '2010-08-31 20:06:23');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('597', 'IT', 'Cambio', '2010-09-01 23:49:03');
@@ -10237,7 +10235,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('678', 'IT', 'Spiacente, l\'utente richiesto è disattivato.', '2010-10-27 18:49:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('679', 'IT', 'Spiacente, non esiste un indirizzo email per questo utente.', '2010-09-01 23:49:03');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('680', 'IT', 'Si è verificato un errore sconosciuto e la email non è stata inviata.', '2010-08-31 20:06:23');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('681', 'IT', '\'%1\' ti ha contattato via %2\r Profilo dell\'utente %2viewprofile.php?userid=%3\r Per rispondere a questa email utilizza il link alla email che trovi nel profilo dell\'utente.\r', '2010-09-01 23:49:03');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('681', 'IT', '\'%1\' ti ha contattato via %2\r Profilo dell\'utente %2viewprofile.php?userid=%3\r Per rispondere a questa email utilizza il link alla email che trovi nel profilo dell\'utente.', '2010-09-01 23:49:03');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('682', 'IT', 'Soggetto:', '2010-08-31 20:06:23');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('683', 'IT', 'Tutte le informazioni verranno mantenute confidenziali e non saranno rivelate a terzi!', '2010-10-27 18:49:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('684', 'IT', '\'%1\' con indirizzo email %2 ti ha contattato via %3 Profilo utente: %3viewprofile.php?userid=%4 Utilizza il pulsante rispondi (reply) del tuo cliente email per rispondere a questa email.', '2010-10-27 18:49:19');
@@ -11287,8 +11285,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('137', 'NL', '%2 heeft %1 bezocht', '2011-02-04 19:49:57');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('138', 'NL', '%2 wil %1 bezoeken', '2011-02-04 19:49:57');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('139', 'NL', 'Registratie bevestiging', '2011-02-04 19:49:57');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('140', 'NL', 'Hartelijk welkom op www.opencaching.nl!', '2011-02-04 19:49:57');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('141', 'NL', 'Voor het volgende E-Mail adres %1 werden de volgende gegevens ingevoerd:', '2011-02-04 19:49:57');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('140', 'NL', 'hartelijk welkom op %1!', '2011-02-04 19:49:57');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('142', 'NL', 'Slavisch', '2011-02-04 19:49:57');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('143', 'NL', 'De activering kan worden uitgevoerd op het volgende webadres:', '2011-02-04 19:49:57');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('144', 'NL', 'Als je niet inlogt binnen de komende 14 dagen zal jouw account worden verwijderd', '2011-02-04 19:49:57');
@@ -11629,7 +11626,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('490', 'NL', 'De radius mag maximaal 150 km. Om de notificaties uit te zetten, zet de radius op 0.', '2011-02-04 19:50:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('491', 'NL', 'Wachtwoord veranderen', '2011-02-04 19:50:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('492', 'NL', 'Verander statistiekenplaatje', '2011-02-04 19:50:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('493', 'NL', 'E-Mail adres veranderen', '2011-02-04 19:50:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('493', 'NL', 'E-Mail adres', '2011-02-04 19:50:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('494', 'NL', 'Beschikbaar', '2011-02-04 19:50:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('495', 'NL', 'Niet beschikbaar', '2011-02-04 19:50:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('496', 'NL', 'Gearchiveerd', '2011-02-04 19:50:07');
@@ -11725,7 +11722,6 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('591', 'NL', 'Het land is niet geldig.', '2011-02-04 19:50:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('592', 'NL', 'De opgegeven radius is niet geldig.', '2011-02-04 19:50:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('593', 'NL', 'En onbekende fout is opgetreden.', '2011-02-04 19:50:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('594', 'NL', 'Om de eerste keer in te loggen dien je jouw account te actieveren met de volgende code:', '2011-02-04 19:50:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('595', 'NL', 'Nieuw wachtwoord', '2011-02-04 19:50:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('596', 'NL', 'Vragen', '2011-02-04 19:50:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('597', 'NL', 'Veranderen', '2011-02-04 19:50:07');

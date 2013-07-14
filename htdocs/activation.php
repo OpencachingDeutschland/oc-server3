@@ -8,18 +8,28 @@
 	$disable_verifyemail = true;
 	require('./lib2/web.inc.php');
 
-	$email = isset($_REQUEST['email']) ? trim($_REQUEST['email']) : '';
-	$code = isset($_REQUEST['code']) ? trim($_REQUEST['code']) : '';
-
 	$tpl->name = 'activation';
 	$tpl->menuitem = MNU_START_REGISTER_ACTIVATION;
+
+	// We use short param codes 'u' and 'c' to generate short-enough activation
+	// url that will not be wrapped in plain-text emails.
+
+	if (isset($_REQUEST['email']))
+		$email = trim($_REQUEST['email']);
+	else if (isset($_REQUEST['u']))
+		$email = sql_value("SELECT `email` FROM `user` WHERE `user_id`='&1'", '', $_REQUEST['u']);
+	else
+		$email = '';
+
+	$code = isset($_REQUEST['code']) ? trim($_REQUEST['code']) :
+	        (isset($_REQUEST['c']) ? trim($_REQUEST['c']) : '');
 
 	$tpl->assign('errorEMail', false);
 	$tpl->assign('errorCode', false);
 	$tpl->assign('errorAlreadyActivated', false);
 	$tpl->assign('sucess', false);
 
-	if (isset($_REQUEST['submit']))
+	if (isset($_REQUEST['submit']) || isset($_REQUEST['u']))
 	{
 		$email_not_ok = is_valid_email_address($email) ? false : true;
 

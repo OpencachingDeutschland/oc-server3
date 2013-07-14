@@ -283,6 +283,8 @@ class OcSmarty extends Smarty
 
 		if (($opt['debug'] & DEBUG_SQLDEBUGGER) == DEBUG_SQLDEBUGGER)
 		{
+			require_once($opt['rootpath'] . 'lib2/sqldebugger.class.php');
+
 			parent::fetch($this->main_template . '.tpl', $this->get_cache_id(), $this->get_compile_id());
 
 			$this->clear_all_assign();

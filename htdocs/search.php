@@ -1205,25 +1205,32 @@
 				$phpzip = new ss_zip('',6);
 			}
 
-			if ($bUseZip)
+			if (!$db['debug'])
 			{
-				header('Content-type: ' . $content_type_zipped);
-				header('Content-disposition: attachment; filename="' . $sFilebasename . '.zip"');
-			}
-			else
-			{
-				header('Content-type: '.$content_type_plain);
-				header('Content-disposition: attachment; filename="' . $sFilebasename . '.' . $output_module .'"');
+				if ($bUseZip)
+				{
+					header('Content-type: ' . $content_type_zipped);
+					header('Content-disposition: attachment; filename="' . $sFilebasename . '.zip"');
+				}
+				else
+				{
+					header('Content-type: '.$content_type_plain);
+					header('Content-disposition: attachment; filename="' . $sFilebasename . '.' . $output_module .'"');
+				}
 			}
 
 			// helper function for output modules
 			function append_output($str)
 			{
-				global $content, $bUseZip;
-				if ($bUseZip)
-					$content .= $str;
-				else
-					echo $str;
+				global $db, $content, $bUseZip;
+
+				if (!$db['debug'])
+				{
+					if ($bUseZip)
+						$content .= $str;
+					else
+						echo $str;
+				}
 			}
 
 			// *** run output module ***
@@ -1239,7 +1246,7 @@
 			sql_slave('DROP TABLE `searchtmp`');
 
 			// output zip file
-			if ($bUseZip)
+			if ($bUseZip && !$db['debug'])
 			{
 				if ($add_to_zipfile)
 				{
@@ -1272,7 +1279,8 @@
 			search_output();
 		}
 
-		exit;
+		if (!$db['debug'])
+			exit;
 	}
 	else  // $options['showresult'] == 0
 	{

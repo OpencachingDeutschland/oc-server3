@@ -1,12 +1,10 @@
 <?php
 
-  // Unicode Reminder メモ
+// Unicode Reminder メモ
 
-$rootpath = '../../../';
-require($rootpath . 'lib/common.inc.php');
-require_once($rootpath . 'lib/sqldebugger.inc.php');
-sqldbg_begin();
-$sql_debug = true;
+$opt['rootpath'] = '../../../';
+require($opt['rootpath'] . 'lib2/web.inc.php');
+sql_enable_debugger();
 
 /*
 	(1) Füge alle Einträge die diesem Filter entsprechen der Ergebnisliste hinzu
@@ -45,5 +43,6 @@ sql('DELETE FROM result_caches WHERE status!=1');
 */
 sql('DELETE FROM result_caches WHERE search_time>2');
 
-sqldbg_end();
+$tpl->display();
+
 ?>

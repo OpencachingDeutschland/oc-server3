@@ -1,12 +1,10 @@
 <?php
 
-  // Unicode Reminder メモ
+// Unicode Reminder メモ
 
-$rootpath = '../../../';
-require($rootpath . 'lib/common.inc.php');
-require_once($rootpath . 'lib/sqldebugger.inc.php');
-sqldbg_begin();
-$sql_debug = true;
+$opt['rootpath'] = '../../../';
+require($opt['rootpath'] . 'lib2/web.inc.php');
+sql_enable_debugger();
 
 /*
 	(1) Füge alle Einträge die diesem Filter entsprechen der Ergebnisliste hinzu
@@ -27,5 +25,6 @@ sql('CREATE TEMPORARY TABLE remove_caches (`cache_id` int(11) NOT NULL, PRIMARY 
 sql('DELETE FROM result_caches WHERE cache_id IN (SELECT cache_id FROM remove_caches) OR (status!=1) OR (search_time>2)');
 sql('DROP TABLE remove_caches');
 
-sqldbg_end();
+$tpl->display();
+
 ?>

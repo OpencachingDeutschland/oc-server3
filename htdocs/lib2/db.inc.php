@@ -11,6 +11,8 @@
 /***************************************************************************
 	Overview:
 
+		sql_enable_debugger()           ... enables Sqldebug if not not already done by config
+
 		sql($sql)                       ... Query SQL and return result
 		sql_escape($value)              ... Escape parameter for SQL-use
 		sql_escape_backtick($value)     ... escape $value for use within backticks
@@ -78,6 +80,14 @@
 	$db['temptables_slave'] = array();
 	$db['mode'] = DB_MODE_USER;
 	$db['error'] = false;
+
+	function sql_enable_debugger()
+	{
+		global $opt, $db;
+
+		$opt['debug'] |= DEBUG_SQLDEBUGGER;
+		$db['debug'] = true;
+	}
 
 	/*
 		sql("SELECT id FROM &tmpdb.table WHERE a=&1 AND &tmpdb.b='&2'", 12345, 'abc');

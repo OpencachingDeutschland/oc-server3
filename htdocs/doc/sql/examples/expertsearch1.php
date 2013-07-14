@@ -1,12 +1,10 @@
 <?php
 
-  // Unicode Reminder メモ
+// Unicode Reminder メモ
 
-$rootpath = '../../../';
-require($rootpath . 'lib/common.inc.php');
-require_once($rootpath . 'lib/sqldebugger.inc.php');
-sqldbg_begin();
-$sql_debug = true;
+$opt['rootpath'] = '../../../';
+require($opt['rootpath'] . 'lib2/web.inc.php');
+sql_enable_debugger();
 
 /*
 	(1) Füge alle Einträge die diesem Filter entsprechen der Ergebnisliste hinzu
@@ -63,5 +61,6 @@ sql('ALTER TABLE remove_caches ADD PRIMARY KEY (cache_id)');
 sql('DELETE FROM result_caches WHERE cache_id IN (SELECT cache_id FROM remove_caches)');
 sql('DROP TABLE remove_caches');
 
-sqldbg_end();
+$tpl->display();
+
 ?>

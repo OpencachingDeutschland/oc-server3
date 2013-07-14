@@ -1,12 +1,10 @@
 <?php
 
-  // Unicode Reminder メモ
+// Unicode Reminder メモ
 
-$rootpath = '../../../';
-require($rootpath . 'lib/common.inc.php');
-require_once($rootpath . 'lib/sqldebugger.inc.php');
-sqldbg_begin();
-$sql_debug = true;
+$opt['rootpath'] = '../../../';
+require($opt['rootpath'] . 'lib2/web.inc.php');
+sql_enable_debugger();
 
 /*
 	Sortiert: nach Entfernung
@@ -56,6 +54,6 @@ sql("SELECT acos(cos(0.73304) * cos((90-`caches`.`latitude`) * 3.14159 / 180) + 
            `caches`.`user_id`=`user`.`user_id` AND 
            `cache_type`.`id`=`caches`.`type` ORDER BY distance ASC LIMIT 0, 20");
 
+$tpl->display();
 
-sqldbg_end();
 ?>

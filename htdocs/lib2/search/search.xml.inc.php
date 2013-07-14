@@ -11,7 +11,7 @@ $search_output_file_download = false;
 
 function search_output()
 {
-	global $opt;
+	global $db, $opt;
 	global $distance_unit, $startat, $count, $sql, $sqlLimit;
 
 	$encoding = 'UTF-8';
@@ -48,18 +48,21 @@ function search_output()
 	mysql_free_result($rsCount);
 
 	// start output
-	header("Content-type: application/xml; charset=".$encoding);
-	//header("Content-Disposition: attachment; filename=" . $sFilebasename . ".txt");
+	if (!$db['debug'])
+	{
+		header("Content-type: application/xml; charset=".$encoding);
+		//header("Content-Disposition: attachment; filename=" . $sFilebasename . ".txt");
 
-	echo "<?xml version=\"1.0\" encoding=\"".$encoding."\"?>\n";
-	echo "<result>\n";
+		echo "<?xml version=\"1.0\" encoding=\"".$encoding."\"?>\n";
+		echo "<result>\n";
 
-	echo "	<docinfo>\n";
-	echo "		<results>" . $rCount['count'] . "</results>\n";
-	echo "		<startat>" . $startat . "</startat>\n";
-	echo "		<perpage>" . $count . "</perpage>\n";
-	echo "		<total>" . $resultcount . "</total>\n";
-	echo "	</docinfo>\n";
+		echo "	<docinfo>\n";
+		echo "		<results>" . $rCount['count'] . "</results>\n";
+		echo "		<startat>" . $startat . "</startat>\n";
+		echo "		<perpage>" . $count . "</perpage>\n";
+		echo "		<total>" . $resultcount . "</total>\n";
+		echo "	</docinfo>\n";
+	}
 
 	$rs = sql_slave("SELECT `searchtmp`.`cache_id` `cacheid`,
 	                        `searchtmp`.`longitude` `longitude`,
@@ -154,12 +157,14 @@ function search_output()
 
 		$thisline = lf2crlf($thisline);
 
-		echo $thisline;
+		if (!$db['debug'])
+			echo $thisline;
 	}
 	mysql_free_result($rs);
 	sql_slave('DROP TABLE `searchtmp`');
 
-	echo "</result>\n";
+	if (!$db['debug'])
+		echo "</result>\n";
 }
 
 

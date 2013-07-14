@@ -7,7 +7,7 @@
  ***************************************************************************}
 {* OCSTYLE *}
 {if $pages_list}
-	{if $pages_first_link !==null}
+	{if $pages_first_link !== null}
 		{if $pages_first_link}
 			<a href="{$pages_first_link}"><img src="resource2/{$opt.template.style}/images/navigation/16x16-browse-first.png" width="16" height="16" alt="&lt;&lt;"></a>
 		{else}
@@ -27,7 +27,7 @@
 	{else}
 		<img src="resource2/{$opt.template.style}/images/navigation/16x16-browse-next-inactive.png" width="16" height="16" alt="&lt;">
 	{/if}
-	{if $pages_last_link !==null}
+	{if $pages_last_link !== null}
 		{if $pages_last_link}
 			<a href="{$pages_last_link}"><img src="resource2/{$opt.template.style}/images/navigation/16x16-browse-last.png" width="16" height="16" alt="&gt;&gt;"></a>
 		{else}

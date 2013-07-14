@@ -56,22 +56,22 @@
 				}
 				else
 				{
-					$tpl->assign('pages_first_link', $this->pagelink($first_page,$page_size));
-					$tpl->assign('pages_prev_link', $this->pagelink($current_page-1,$page_size));
+					$tpl->assign('pages_first_link', $this->pagelink($first_page, $page_size));
+					$tpl->assign('pages_prev_link', $this->pagelink($current_page-1, $page_size));
 				}
 
 				$pages = array();
 				$lrspan = ($this->max_pages_shown-1) / 2;
 				$from_page = max($first_page, $current_page-$lrspan);
-				$to_page = min($last_page, max($first_page, $current_page-$lrspan) + $this->max_pages_shown-1);
-				$from_page = max($first_page, $to_page - 2*$lrspan);
+				$to_page = min($last_page, max($first_page, $current_page-$lrspan) + $this->max_pages_shown - 1);
+				$from_page = max($first_page, $to_page - $this->max_pages_shown + 1);
 
 				for ($page = $from_page; $page <= $to_page; $page++)
 				{
 					if ($page == $current_page)
 						$pages[$page] = false;
 					else
-						$pages[$page] = $this->pagelink($page,$page_size);
+						$pages[$page] = $this->pagelink($page, $page_size);
 				}
 				$tpl->assign('pages_list', $pages);
 
@@ -82,8 +82,8 @@
 				}
 				else
 				{
-					$tpl->assign('pages_next_link', $this->pagelink($current_page+1,$page_size));
-					$tpl->assign('pages_last_link', $this->pagelink($last_page,$page_size));
+					$tpl->assign('pages_next_link', $this->pagelink($current_page+1, $page_size));
+					$tpl->assign('pages_last_link', $this->pagelink($last_page, $page_size));
 				}
 
 				if ($last_page-$first_page < 2)

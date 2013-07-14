@@ -52,7 +52,7 @@
 	/* Debug level (combine with OR | )
 	 *  DEBUG_NO              = productive use
 	 *  DEBUG_DEVELOPER       = developer system
-	 *  DEBUG_TEMPLATES       = no template caching
+	 *  DEBUG_TEMPLATES       = no template caching; makes some templates very slow!
 	 *  DEBUG_OUTOFSERVICE    = only admin login (includes DEBUG_TEMPLATES)
 	 *  DEBUG_TESTING         = display warning (includes DEBUG_TEMPLATES)
 	 *  DEBUG_SQLDEBUGGER     = sql debugger (use &sqldebug=1 when calling the site)
@@ -60,9 +60,7 @@
 	 *  DEBUG_FORCE_TRANSLATE = force read of translate messages
 	 *  DEBUG_CLI             = print debug messages of cli scripts
 	 */
-	$opt['debug'] = DEBUG_DEVELOPER|DEBUG_TEMPLATES|DEBUG_SQLDEBUGGER|DEBUG_TRANSLATE|DEBUG_FORCE_TRANSLATE;
-	//$opt['debug'] = DEBUG_DEVELOPER|DEBUG_TEMPLATES|DEBUG_SQLDEBUGGER;
-	//$opt['debug'] = DEBUG_DEVELOPER|DEBUG_SQLDEBUGGER;
+	$opt['debug'] = DEBUG_DEVELOPER|DEBUG_SQLDEBUGGER|DEBUG_TRANSLATE|DEBUG_FORCE_TRANSLATE;
 
 	// node options
 	// see settings-dist.inc.php for known node IDs

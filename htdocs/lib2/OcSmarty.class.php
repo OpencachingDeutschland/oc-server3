@@ -62,12 +62,8 @@ class OcSmarty extends Smarty
 			$this->load_filter('output', 'session');
 
 		// cache control
-		/*  This will make templates with many includes (e.g. search result list,
-		    images galleries ..) VERY slow, and it is not necessary - auto-compile
-		    when file time is touched will work find.   -- following 2013/7/13
 		if (($opt['debug'] & DEBUG_TEMPLATES) == DEBUG_TEMPLATES)
 			$this->force_compile = true;
-		*/
 
 		// process debug level
 		if (($opt['debug'] & DEBUG_SQLDEBUGGER) == DEBUG_SQLDEBUGGER)

@@ -5,7 +5,9 @@
  *  Unicode Reminder メモ
  *
  *  check if the mailserver returns an 550 or 553 code
- ***************************************************************************/
+ *
+ *  This class is currently not in use anywhere (2013-07-15).
+***************************************************************************/
 
 define('CA_OK', 0);
 define('CA_ERROR_TEMPORARY', 1);

@@ -3,6 +3,9 @@
  *  For license information see doc/license.txt
  *
  *  Unicode Reminder メモ
+ *
+ *  Smiley translater for smarty extension, see modifier_smiley.php.
+ *  Same content like smilies.class.php.
  ***************************************************************************/
 
 global $smiley;
@@ -59,6 +62,7 @@ if (!isset($smiley))
 											" XO "
 										);
 
+	// This array is not used anywhere.
 	$smiley['show'] = array(
 											'1',
 											'0',

@@ -3,6 +3,8 @@
  *  For license information see doc/license.txt
  *
  *  Unicode Reminder メモ
+ *
+ *  Looks like this has been replaced by lib2/smiley.inc.php.
  ***************************************************************************/
 
 class smileys

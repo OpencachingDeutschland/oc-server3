@@ -4,7 +4,7 @@
 
 		Unicode Reminder メモ
 
-		GPX search output
+		Plaintext search output, one file per cache
 	****************************************************************************/
 
 	$search_output_file_download = true;

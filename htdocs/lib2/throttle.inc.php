@@ -3,6 +3,8 @@
  *  For license information see doc/license.txt
  *
  *  Unicode Reminder メモ
+ *
+ *  Currently not in use
  ***************************************************************************/
 
 // CheckThrottle();

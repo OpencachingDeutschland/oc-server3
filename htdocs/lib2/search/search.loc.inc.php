@@ -4,7 +4,7 @@
 
 		Unicode Reminder メモ
 
-		loc search output
+		lOC search output
 	****************************************************************************/
 
 	$search_output_file_download = true;

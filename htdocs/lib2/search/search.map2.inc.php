@@ -4,7 +4,7 @@
  *
  *  Unicode Reminder メモ
  *
- *  Execute search request for map.php
+ *  Execute search / filtering request for map2.php
  *  (use caching of the same quries)
  ***************************************************************************/
 

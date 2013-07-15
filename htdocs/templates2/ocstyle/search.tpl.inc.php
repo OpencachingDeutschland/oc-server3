@@ -5,6 +5,8 @@
    Unicode Reminder メモ
 
 	 variable search template contents
+
+	 Todo:  Integrate into search.tpl
  ****************************************************************************/
 
 	// search.php -> $tpl->error

@@ -2,6 +2,8 @@
 *  You can find the license in the docs directory
 *
 *  Unicode Reminder メモ
+*
+*  search form
 ***************************************************************************}
 
 <script type="text/javascript" src="resource2/ocstyle/js/wz_tooltip.js"></script>

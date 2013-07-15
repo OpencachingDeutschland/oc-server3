@@ -4,6 +4,14 @@
 		For license information see doc/license.txt
 
 		XML search output
+
+		This is a very old and primitive API for downloading cache data.
+		It is available on all OC sites and presented in this way:
+
+		OC.de fork:  undocumented, not referenced anywhere
+		OC.pl fork:  linked on the search results page
+		OC.cz fork:  well documented: http://www.opencaching.cz/articles.php?page=api
+
 	****************************************************************************/
 
 $search_output_file_download = false;

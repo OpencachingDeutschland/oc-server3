@@ -2,6 +2,9 @@
 *  You can find the license in the docs directory
 *
 *  Unicode Reminder メモ
+*
+*  Output formatter for the 'html' search option:
+*  Show search results.
 ***************************************************************************}
 
 <script type="text/javascript" src="resource2/{$opt.template.style}/js/wz_tooltip.js"></script>

@@ -101,7 +101,7 @@ function __autoload($class_name)
 	require_once($opt['rootpath'] . 'lib2/login.class.php');
 	require_once($opt['rootpath'] . 'lib2/menu.class.php');
 	require_once($opt['rootpath'] . 'lib2/logic/labels.inc.php');
-	require_once($opt['rootpath'] . 'lib2/throttle.inc.php');
+	// require_once($opt['rootpath'] . 'lib2/throttle.inc.php');
 
 	// apply post configuration
 	if (function_exists('post_config'))

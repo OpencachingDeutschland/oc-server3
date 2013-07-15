@@ -4,7 +4,7 @@
 
 		Unicode Reminder メモ
 
-		ov2 search output
+		OV2 search output
 	****************************************************************************/
 
 	require_once($opt['rootpath'] . 'lib2/charset.inc.php');

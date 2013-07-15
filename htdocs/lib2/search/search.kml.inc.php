@@ -4,7 +4,7 @@
 
 		Unicode Reminder メモ
 
-		kml search output
+		Google KML search output
 	****************************************************************************/
 
 	$search_output_file_download = true;

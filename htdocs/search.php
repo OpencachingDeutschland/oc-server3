@@ -4,19 +4,49 @@
 
 	Unicode Reminder メモ
 
+	This module handles everything which results in the output of a list of
+	caches, including output formatting. It also handles search requests from
+	external tools like the Mozilla Firefox plugin.
+
 	Search options will be loaded from
 		- a saved or caches query in queries table, if either 'queryid' parameter
 				or 'lastqueryid' cookie is present and the query exists; otherwise from
 		- supplied HTTP parameters or
 		- hard-coded default values
 
-	'showresult' parameter triggers building the SQL query from search options
-		and calling the module specified by the 'output' parameter, which will
-		execute the SQL and process the results.
+	showresult=1 produces an SQL query from search options, executes it and
+	  calls the output formatting module as specified by the 'output' parameter. 
 		If 'showresult' != 1, the query options form is presented to the user.
+
+  search type options:
+    searchbyname
+		searchbydistance
+		searchbyowner
+		searchbyfinder
+		searchbyplz
+		searchbyort
+		searchbyfulltext
+		searchbynofilter
+		searchbycacheid
+		searchbywp
+
+	output options:
+		html         display browsable search results list
+		xml          undocumented - very old API
+		txt          plain-text cache listing, zipped if more than one cache
+		map2         internally used for map display and filtering
+
+		gpx          common geocache data files
+		loc
+		ovl
+		ov2
+		kml
+
 
 	To do:
 		- port attributes code to lib2 code as used by map2 (see outputSearchForm)
+		- port output data list generation from prepareLocSelectionForm and
+		    outputLocidSelectionForm to search_selectlocid.tpl.
 
  ****************************************************************************/
 

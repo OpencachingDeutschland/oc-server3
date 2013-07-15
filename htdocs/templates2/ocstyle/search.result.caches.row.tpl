@@ -1,3 +1,5 @@
+{* include file for search.result.caches.tpl
+   outputs one cache line of the search result *}
 <!--m-->
 <tr>
   <td width="18" class="{$listcolor}">&nbsp;{$position}&nbsp;</td>

@@ -2,6 +2,8 @@
 *  You can find the license in the docs directory
 *
 *  Unicode Reminder メモ
+*
+*  select on of multiple locations which matched on a location search
 ***************************************************************************}
 
 <div class="content2-pagetitle"><img src="resource2/ocstyle/images/cacheicon/traditional.gif" style="align: left; margin-right: 10px;" width="32" height="32" alt="{t}Search result{/t}" />{t}Selection of city{/t} - {t 1=$resultscount}Total of %1 cities matched{/t}</div>

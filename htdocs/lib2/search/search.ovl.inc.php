@@ -4,7 +4,7 @@
 
 		Unicode Reminder メモ
 
-		ovl search output for TOP25, TOP50 etc.
+		OVL search output for TOP25, TOP50 etc.
 	****************************************************************************/
 
 	require_once($opt['rootpath'] . 'lib2/charset.inc.php');

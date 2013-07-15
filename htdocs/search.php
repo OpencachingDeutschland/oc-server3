@@ -21,7 +21,7 @@
  ****************************************************************************/
 
 	require 'lib2/web.inc.php';
-	require 'lib2/data-license.inc.php';
+	require 'lib2/logic/data-license.inc.php';
 	require 'lib2/search/search.inc.php';
 	require 'templates2/'.$opt['template']['style'].'/search.tpl.inc.php';
 

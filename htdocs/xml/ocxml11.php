@@ -19,7 +19,7 @@
 	require_once($opt['rootpath'] . 'lib/common.inc.php');
 	require_once($opt['rootpath'] . 'lib2/charset.inc.php');
 	require_once($opt['rootpath'] . 'lib2/const.inc.php');
-	require_once($opt['rootpath'] . 'lib2/data-license.inc.php');
+	require_once($opt['rootpath'] . 'lib2/logic/data-license.inc.php');
 	require_once($opt['rootpath'] . 'lib2/logic/npas.inc.php');
 
   if ($error == true)

@@ -48,123 +48,136 @@ A different license may apply to third party components being used.
 
 List of third party components:
 
+
+PHP libraries
+-------------
+
     1.  Smarty: Template Engine
         Path    : htdocs/lib2/smarty/
         URI     : http://www.smarty.net/
         License : LGPL 3.0
 
     2.  Smarty Gettext (modified)
+        Path    : htdocs/lib2/smarty/ocplugins/prefilter.t.php
         URI     : http://sourceforge.net/projects/smarty-gettext
         License : LGPL 2.1
 
-    3.  cracklib: Password checking library
-        URI     : http://sourceforge.net/projects/cracklib
-        License : LGPL 2.1
-
-    4.  b2evo captcha
-        Path    : htdocs/lib/b2evo-captcha/
-        Path    : htdocs/lib2/b2evo-captcha/
-        URI     : http://sourceforge.net/projects/b2evo-captcha
-        License : GPL
-        TODO: *** Package contains fonts, font licenses are not checked yet. ***
-
-    5.  OpenGeoDB
-        URI     : http://sourceforge.net/projects/opengeodb/
-        License : Public domain
-
-    6.  NGA GEOnet Names Server (GNS)
-        http://earth-info.nga.mil/gns/html/index.html
-
-    7.  InputFilter (modified)
-        URI     : http://freshmeat.net/projects/inputfilter/
-        URI     : http://cyberai.users.phpclasses.org/package/2189-PHP-Filter-out-unwanted-PHP-Javascript-HTML-tags-.html
-        License : GPL
-
-    8.  RFC(2)822 Email Parser by Cal Henderson
+    3.  RFC(2)822 Email Parser
+        Path    : htdocs/lib/common.inc.php
+				          htdocs/lib2/util.inc.php
         URI     : http://iamcal.com/publish/articles/php/parsing_email
         License : CC BY-SA 2.5 / GPL 3.0
+        Author  : Cal Henderson
 
-    9.  ImageCreateFromBMP & ImageBMP
-        URI:    : http://www.jpexs.com/eng/default/php.html   *** DEAD LINK ***
+    4.  ImageBMP & ImageCreateFromBMP
+        Path    : htdocs/lib2/imagebmp.inc.php
+        URI:    : http://de77.com/php/load-and-save-bmp-in-php-imagecreatefrombmp-imagebmp
+                  http://www.phpclasses.org/package/5991-PHP-Load-and-save-images-in-the-BMP-format.html
+        License : MIT
 
-    10. Coordinate system translations
+    5.  Coordinate system translations
         Path    : htdocs/lib2/logic/coordinate.class.php
         URI     : http://www.helmutheimeier.privat.t-online.de/kt/phpscripts.html
         License : MIT
 
-    11. NUTS boundaries from Eurostat
-        URI     : http://epp.eurostat.ec.europa.eu/portal/page?_pageid=2254,62148876,2254_62153840&_dad=portal&_schema=PORTAL
-        (*** DEAD LINK ***)
+    6.  Point-in-polygon test
+        Path    : htdocs/lib2/logic/gis.class.php
+        URI     : http://dev.mysql.com/doc/refman/4.1/en/functions-that-test-spatial-relationships-between-geometries.html
+        License : ??
 
-    12. (NuSOAP - cancelled)
-
-    13. FamFamFam Flag
-        URI     : http://www.famfamfam.com/lab/icons/flags/
-        License : Public domain
-
-        “Flags” are 247 icons — in GIF and PNG formats — representing
-        most countries in the world as small pixel icons. These flag
-        icons are available for free use for any purpose with no
-        requirement for attribution.
-
-    14. JavaScript, DHTML Tooltips 
-        URI     : http://www.walterzorn.de/tooltip/tooltip.htm
-        License : LGPL
-
-    15. PHP Class: HTML to Plain Text Conversion
+    7.  PHP Class: HTML to Plain Text Conversion
+        Path    : htdocs/lib2/html2text.class.php
         URI     : http://www.chuggnutt.com/html2text.php
         License : GPL
 
-    16. Garmin Communicator API
-        URI     : https://my.garmin.com/api/communicator/key-generator.jsp
+    8.  Automatic Image Rotator
+        Path    : resource2/ocstyle/images/head/rotator.php
+        URI     : http://d.alistapart.com/randomizer/rotate.txt
+        License : "freely available to all" (http://alistapart.com/about)
 
-    17. Prototype JavaScript framework
-        URI     : http://www.prototypejs.org/
-        License : MIT
+    9.  HTML Purifier
+        Path    : lib/htmlpurifier-4.2.0
+        URI     : http://htmlpurifier.org/
+        License : LGPL
 
-    18. In his hands: Font in old OC logo
-        URI     : http://www.fontdownloadsfree.com/fonts/1/22/inhishands_inhishan.html
-        Licence : *** UNKNOWN ***
-
-    19. EnlargeIt!: A little Javascript enlarging thumbnail images with a mouse click.
-        URI     : http://enlargeit.timos-welt.de
-        License : GPL 3.0
-
-    20. IE PNG Fix
-        URI     : http://www.twinhelix.com/css/iepngfix/
-        License : LGPL 2.1
-
-    21. Automatic Image Rotator
-        URI     : http://www.automaticlabs.com/ (*** no longer available online ***)
-        License : *** ??? ***
-
-    22. MultiFlex-2 CSS Design
-        http://www.openwebdesign.org/design/2876/MultiFlex21/
-
-    23. TinyMCE: JavaScript WYSIWYG Editor
-        Path    : htdocs/resource2/tinymce/
-				          htdocs/images/icons/
-        URI     : http://tinymce.moxiecode.com/
-        License : LGPL 2.1
-
-    24. OKAPI: Opencaching API
+   10.  OKAPI: Opencaching API
         Path    : htdocs/okapi/
         URI     : http://code.google.com/p/opencaching-api/
         License : MIT
+
+
+The following PHP libraries are currently not in use and may be discarded.
+Note that they need to be properly licensed as long they are included in
+the distrubution!
+
+    1.  b2evo captcha
+        Path    : htdocs/lib2/b2evo-captcha/
+        URI     : http://sourceforge.net/projects/b2evo-captcha
+        License : GPL
+
+    2.  InputFilter (modified)
+        Path    : htdocs/lib2/logic/old/class.inputfilter.php
+        URI     : http://freshmeat.net/projects/inputfilter/
+                  http://cyberai.users.phpclasses.org/package/2189-PHP-Filter-out-unwanted-PHP-Javascript-HTML-tags-.html
+        License : GPL
+
+    3.  SimpleTest unit testing
+        Path    : lib/simpletest
+        URI     : http://simpletest.org/en/download.html
+        License : LGPL
+
+
+JavaScript libraries
+--------------------
+
+    1.  JavaScript, DHTML Tooltips
+        Path    : htdocs/resource2/ocstyle/js/
+        URI     : http://www.walterzorn.de/tooltip/tooltip.htm
+        License : LGPL
+
+    2.  Garmin Communicator API
+        Path    : htdocs/resource2/ocstyle/js/
+        URI     : http://developer.garmin.com/web/communicator-api-1.4/
+        License : Apache 2.0
+
+    3.  EnlargeIt!: A little Javascript enlarging thumbnail images with a mouse click.
+        Path    : htdocs/resource2/ocstyle/js/enlargeit/
+        URI     : http://enlargeit.timos-welt.de
+        License : GPL 3.0
+
+    4.  IE PNG Fix
+        Path    : htdocs/resource2/ocstyle/css/iepngfix.htc
+        URI     : http://www.twinhelix.com/css/iepngfix/
+        License : LGPL 2.1
+
+    5.  TinyMCE: JavaScript WYSIWYG Editor
+        Path    : htdocs/resource2/tinymce/
+        URI     : http://tinymce.moxiecode.com/
+        License : LGPL 2.1
+
+
+Icons
+-----
+
+    1.  FamFamFam Flags
+        Path    : htdocs/images/flags
+        URI     : http://www.famfamfam.com/lab/icons/flags/
+        License : Public domain
 
         OKAPI cache icons
         Path    : htdocs/resource2/ocstyle/images/map/caches2/
         URI     : http://code.google.com/p/opencaching-pl/source/browse/#svn%2Ftrunk%2Fokapi%2Fstatic%2Ftilemap
         License : MIT
 
-    25. OpenIcons 'system-help' and 'preferences-other'
+    2.  OpenIcons 'system-help' and 'preferences-other'
 				Path    : htdocs/resource2/ocstyle/images/misc/
 				          htdocs/resource2/ocstyle/images/map/
 				URI     : http://openiconlibrary.sourceforge.net/gallery2/?./Icons/categories/system-help-3.png
 				          http://openiconlibrary.sourceforge.net/gallery2/?./Icons/categories/preferences-other-3.png
 				License : Creative Commons BY-SA 3.0
+				Author  : Oxygen
 
-		26. 16x16 Icons 'flag-checker', 'footprints', 'clock select', lock
+		3.  16x16 Icons 'flag-checker', 'footprints', 'clock select', lock
 				Path    : htdocs/resource2/ocstyle/images/misc/
 				          htdocs/resource2/ocstyle/images/map/caches2/
 				          htdocs/resource2/ocstyle/images/cachestatus/
@@ -172,7 +185,7 @@ List of third party components:
 				License : Creative Commons BY 3.0
 				Author  : Yusuke Kamiyamane
 
-		27. gears and gps-device icons, watched icon
+		4.  gears and gps-device icons, watched icon
 			  Path    : htdocs/resource2/ocstyle/images/misc/
 			            htdocs/resource2/ocstyle/images/viewcache/
 			  URI     : http://www.softicons.com/free-icons/toolbar-icons/fatcow-hosting-icons-by-fatcow/gear-in-icon
@@ -180,14 +193,61 @@ List of third party components:
 			  License : Creative Commons BY 3.0
 			  Author  : FatCow
 
-		28. checkmark icon
+		5.  checkmark icon
 				Path    : htdocs/resource2/ocstyle/images/misc/
 				URI     : http://www.softicons.com/free-icons/web-icons/bremen-icons-by-pc.de/check-icon
 				License : Creative Commons BY 3.0
 				Author  : PC.DE
 
-		29. search icon
+		6.  search icon
 				Path    : htdocs/resource2/ocstyle/images/misc/
 				URI     : http://www.softicons.com/free-icons/toolbar-icons/24x24-free-pixel-icons-by-aha-soft/search-icon
 				License : Creative Commons BY-SA 3.0
 				Author  : Aha-Soft
+
+    7.  TinyMCE Icons
+        Path    : htdocs/images/icons/
+        URI     : http://tinymce.moxiecode.com/
+        License : LGPL 2.1
+
+
+Other resources
+---------------
+
+    1.  In his hands: Font in old OC logo
+        Path    : htdocs/resource2/ocstyle/images/
+        URI     : http://www.fonts4free.net/in-his-hands-font.html
+        Licence : "Free"
+
+    2.  DejaVu fonts
+        Path    : htdocs/lib2/fonts/dejavu-fonts/
+        License : Bitstream
+
+    3.  MultiFlex-2 CSS Design
+        Path    : htdocs/resource2/ocstyle/css/
+        URI     : http://www.openwebdesign.org/design/2876/MultiFlex21/
+        License : Public Domain
+
+
+Data content
+------------
+
+see htdocs/doc/sql/static-data/static-data.txt on usage
+
+    1.  OpenGeoDB
+        URI     : http://sourceforge.net/projects/opengeodb/
+        License : Public domain
+
+    2.  NGA GEOnet Names Server (GNS)
+        Source  : http://earth-info.nga.mil/gns/html/
+        License : Public domain
+
+    3.  NUTS boundaries
+        URI     : http://epp.eurostat.ec.europa.eu/portal/page/portal/gisco_Geographical_information_maps/popups/references/administrative_units_statistical_units_1
+        License : noncommercial, attribution
+        Author  : Eurostat
+
+    4.  Cracklib password list
+        Path    : doc/sql/static-data/pw_dict.bz2
+        URI     : http://pecl.php.net/package/crack
+        License : PHP

@@ -4,6 +4,8 @@ The following static data is used by the OC code. Only some of this data is
 included in the Git repo distribution, but it is all included in Opencaching.de
 developer VMs and databases (see http://wiki.opencaching.de/index.php/Entwicklung/Entwicklersystem).
 
+See also /doc/license.txt on license terms.
+
 
 Tables:  geodb_coordinates
          geodb_hierarchies
@@ -60,9 +62,9 @@ Tables:  nuts_codes
 Content: NUTS data for adm1..adm4 levels
 Purpose: assigning country, state, district, city to cache listings
 Used by: util2/cron/modules/cache_location.class.php
-Source:  ?
+Source:  http://epp.eurostat.ec.europa.eu/portal/page/portal/gisco_Geographical_information_maps/popups/references/administrative_units_statistical_units_1
 Import:  ?
-License: probably Public Domain
+License: noncommercial, attribution
 
 
 Tabels:  pw_dict

@@ -15,7 +15,7 @@
 
  ****************************************************************************/
 
-	require_once('lib2/data-license.inc.php');
+	require_once('lib2/logic/data-license.inc.php');
 
 /* begin conversion rules */
 

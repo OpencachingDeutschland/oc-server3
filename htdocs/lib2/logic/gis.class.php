@@ -11,6 +11,7 @@ class gis
 	{
 		// thanks to Roger Boily, Gis Consulant
 		// posted at http://dev.mysql.com/doc/refman/5.1/en/functions-that-test-spatial-relationships-between-geometries.html
+		//   [http://dev.mysql.com/doc/refman/4.1/en/functions-that-test-spatial-relationships-between-geometries.html]
 
 		$counter = 0;
 		// get rid of unnecessary stuff

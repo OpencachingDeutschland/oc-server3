@@ -8,6 +8,9 @@
 	Modified by the OC.de Team
 	All Rights Reserved.
 
+	http://alistapart.com/article/randomizer
+	http://d.alistapart.com/randomizer/rotate.txt
+
 	http://www.hiveware.com/imagerotator.php
 	
 	http://www.automaticlabs.com/

@@ -16,7 +16,7 @@
 
 	showresult=1 produces an SQL query from search options, executes it and
 	  calls the output formatting module as specified by the 'output' parameter. 
-		If 'showresult' != 1, the query options form is presented to the user.
+		If 'showresult' != 1, the query search form is presented to the user.
 
   search type options:
     searchbyname
@@ -47,6 +47,8 @@
 		- port attributes code to lib2 code as used by map2 (see outputSearchForm)
 		- port output data list generation from prepareLocSelectionForm and
 		    outputLocidSelectionForm to search_selectlocid.tpl.
+		- merge search.tpl.inc.php into search.tpl
+		- wtf is "expert mode"?
 
  ****************************************************************************/
 
@@ -131,7 +133,7 @@
 
 	if ($queryid != 0)
 	{
-		// load search options from saved/cached query
+		// load search options from stored query
 
 		$query_rs = sql("
 			SELECT `user_id`, `options`
@@ -429,7 +431,7 @@
 
 	//=========================================================
 	//  4. set defaults for new search options
-	//     which may not be present in a stored/cached query
+	//     which may not be present in a stored query
 	//=========================================================
 
 	if (!isset($options['orderRatingFirst'])) $options['orderRatingFirst'] = false;
@@ -449,7 +451,8 @@
 	{
 
 		//===============================================================
-		//  X5. build SQL statement from search options
+		//  X5. build basic SQL statement dependend on search type
+		//      and filtering options
 		//===============================================================
 
 		$cachesFilter = '';
@@ -464,8 +467,9 @@
 		}
 
 		// make a list of cache-ids that are in the result
-		if (!isset($options['expert'])) $options['expert']='';
-		if ($options['expert'] == 0)  // Ocprop
+		if (!isset($options['expert']))
+			$options['expert'] = 0;
+		if ($options['expert'] == 0)
 		{
 			$sql_select = array();
 			$sql_from = '';
@@ -614,20 +618,21 @@
 						// temporäre tabelle erstellen und dann einträge entfernen, die nicht mindestens so oft vorkommen wie worte gegeben wurden
 						sql_slave('CREATE TEMPORARY TABLE tmpuniids (`uni_id` int(11) NOT NULL, `cnt` int(11) NOT NULL, `olduni` int(11) NOT NULL, `simplehash` int(11) NOT NULL) ENGINE=MEMORY SELECT `gns_search`.`uni_id` `uni_id`, 0 `cnt`, 0 `olduni`, `simplehash` FROM `gns_search` WHERE ' . $sqlhashes);
 						sql_slave('ALTER TABLE `tmpuniids` ADD INDEX (`uni_id`)');
-//	BUGFIX: dieser Code sollte nur ausgeführt werden, wenn mehr als ein Suchbegriff eingegeben wurde
-//					damit alle Einträge gefiltert, die nicht alle Suchbegriffe enthalten
-//					nun wird dieser Quellcode auch ausgeführt, um mehrfache uni_id's zu filtern
-//          Notwendig, wenn nach Baden gesucht wird => Baden-Baden war doppelt in der Liste
-//							if ($wordscount > 1)
-//							{
+
+					//	BUGFIX: dieser Code sollte nur ausgeführt werden, wenn mehr als ein Suchbegriff eingegeben wurde
+					//					damit alle Einträge gefiltert, die nicht alle Suchbegriffe enthalten
+					//					nun wird dieser Quellcode auch ausgeführt, um mehrfache uni_id's zu filtern
+					//          Notwendig, wenn nach Baden gesucht wird => Baden-Baden war doppelt in der Liste
+					//	if ($wordscount > 1)
+					//	{
 							sql_slave('CREATE TEMPORARY TABLE `tmpuniids2` (`uni_id` int(11) NOT NULL, `cnt` int(11) NOT NULL, `olduni` int(11) NOT NULL) ENGINE=MEMORY SELECT `uni_id`, COUNT(*) `cnt`, 0 olduni FROM `tmpuniids` GROUP BY `uni_id` HAVING `cnt` >= ' . $wordscount);
 							sql_slave('ALTER TABLE `tmpuniids2` ADD INDEX (`uni_id`)');
 							sql_slave('DROP TABLE `tmpuniids`');
 							sql_slave('ALTER TABLE `tmpuniids2` RENAME `tmpuniids`');
-//							}
+					//	}
 
-//    add: SELECT g2.uni FROM `tmpuniids` JOIN gns_locations g1 ON tmpuniids.uni_id=g1.uni JOIN gns_locations g2 ON g1.ufi=g2.ufi WHERE g1.nt!='N' AND g2.nt='N'
-// remove: SELECT g1.uni FROM `tmpuniids` JOIN gns_locations g1 ON tmpuniids.uni_id=g1.uni JOIN gns_locations g2 ON g1.ufi=g2.ufi WHERE g1.nt!='N' AND g2.nt='N'
+					//    add: SELECT g2.uni FROM `tmpuniids` JOIN gns_locations g1 ON tmpuniids.uni_id=g1.uni JOIN gns_locations g2 ON g1.ufi=g2.ufi WHERE g1.nt!='N' AND g2.nt='N'
+					// remove: SELECT g1.uni FROM `tmpuniids` JOIN gns_locations g1 ON tmpuniids.uni_id=g1.uni JOIN gns_locations g2 ON g1.ufi=g2.ufi WHERE g1.nt!='N' AND g2.nt='N'
 
 						// und jetzt noch alle englischen bezeichnungen durch deutsche ersetzen (wo möglich) ...
 						sql_slave('CREATE TEMPORARY TABLE `tmpuniidsAdd` (`uni` int(11) NOT NULL, `olduni` int(11) NOT NULL, PRIMARY KEY  (`uni`)) ENGINE=MEMORY SELECT g2.uni uni, g1.uni olduni FROM `tmpuniids` JOIN gns_locations g1 ON tmpuniids.uni_id=g1.uni JOIN gns_locations g2 ON g1.ufi=g2.ufi WHERE g1.nt!=\'N\' AND g2.nt=\'N\' GROUP BY uni');
@@ -1064,7 +1069,7 @@
 		}
 
 		//=================================================================
-		//  X6. verify output selection and prepare SQL query
+		//  X6. load output module and output-dependent options
 		//=================================================================
 
 		$output_module = mb_strtolower($options['output']);  // Ocprop: HTML, gpx
@@ -1102,9 +1107,13 @@
 		require($opt['rootpath'] . 'lib2/search/search.' . $output_module . '.inc.php');
 
 		if (!isset($search_output_file_download))
-			die("search_output_file_download not set for '$output_module' search");
+			die("search_output_file_download flag not set for '$output_module' search");
 
-		// *** prepare SQL query ***
+		//=================================================================
+		//  X7. complete SQL statement with output-dependend options,
+		//      sorting and Limits
+		//=================================================================
+
 		$sql = '';
 
 		// If no distance unit is preselected by distance search, use 'km'.
@@ -1151,6 +1160,7 @@
 				$sAddJoin .= ' AND `cache_logs`.`user_id`=' . sql_escape($login->userid);
 			$sGroupBy .= ' GROUP BY `caches`.`cache_id`';
 		}
+
 		$sql .=   '`caches`.`cache_id`,
 							 `caches`.`status`,
 							 `caches`.`type`,
@@ -1169,7 +1179,7 @@
 
 		$sql .= ' ORDER BY ';
 		if ($options['orderRatingFirst'])
-		$sql .= '`ratingvalue` DESC, ';
+			$sql .= '`ratingvalue` DESC, ';
 
 		if ($sortby == 'bylastlog' || $options['sort'] == 'bymylastlog')
 		{
@@ -1209,9 +1219,9 @@
 
 		if ($search_output_file_download)
 		{
-			//=================================================================
-			//  X7a. run query and output for file downloads (GPX, KML, OVL ...)
-			//=================================================================
+			//===================================================================
+			//  X8a. run query and output for file downloads (GPX, KML, OVL ...)
+			//===================================================================
 
 			sql_slave('CREATE TEMPORARY TABLE `searchtmp` SELECT ' . $sql . $sqlLimit);
 
@@ -1287,8 +1297,8 @@
 		}
 		else
 		{
-			//=================================================================
-			//  X7b. run other output module (XML, HTML)
+			//===================================================================
+			//  X8b. run other output module (XML, HTML)
 			//
 			//  The following variables from search.php are used by output modules:
 			//
@@ -1309,7 +1319,9 @@
 			search_output();
 		}
 
-		if (!$db['debug'])
+		if ($db['debug'])
+			$tpl->display();
+		else
 			exit;
 	}
 	else  // $options['showresult'] == 0
@@ -1318,36 +1330,21 @@
 		//  F5. present search options form to the user
 		//=============================================================
 
-		$options['show_all_countries'] = isset($_REQUEST['show_all_countries']) ? $_REQUEST['show_all_countries'] : 0;
-
-		if (isset($_REQUEST['show_all_countries_submit']))
-		{
-			$options['show_all_countries'] = 1;
-		}
-
-		//return the search form
 		if ($options['expert'] == 1)
 		{
-			//expert mode
+			// "expert mode" - what is this?
 			$tpl->assign('formmethod', 'post');
+			$tpl->display();
 		}
 		else
 		{
 			outputSearchForm($options);
-			exit;
 		}
 	}
 
 
-	//=============================================================
-	//  F7. show search options form or error message
-	//=============================================================
-
-	$tpl->display();
-
-
 //=============================================================
-//  F6. prepare search options form
+//  F6. build and output search options form
 //=============================================================
 
 function outputSearchForm($options)
@@ -1797,7 +1794,6 @@ function outputSearchForm($options)
 		$tpl->assign('fulltexterror', $error_fulltexttoolong);
 
 	$tpl->display();
-	exit;
 }
 
 

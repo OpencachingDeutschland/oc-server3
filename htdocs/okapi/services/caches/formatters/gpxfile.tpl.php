@@ -175,10 +175,7 @@ http://www.gsak.net/xmlv1/5 http://www.gsak.net/xmlv1/5/gsak.xsd
 				</ox:opencaching>
 			<? } ?>
 		</wpt>
-	<? } ?>
-	<? if ($vars['alt_wpts']) { ?>
-		<? foreach ($vars['caches'] as $c) { ?>
-			<? if ($c === null) continue; /* ignoring invalid cache codes */ ?>
+		<? if ($vars['alt_wpts']) { ?>
 			<? foreach ($c['alt_wpts'] as $wpt) { ?>
 				<? list($lat, $lon) = explode("|", $wpt['location']); ?>
 				<wpt lat="<?= $lat ?>" lon="<?= $lon ?>">

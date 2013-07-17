@@ -648,7 +648,7 @@ class WebService
 				where
 					cache_id in ('".implode("','", array_map('mysql_real_escape_string', array_keys($cacheid2wptcode)))."')
 					and ".((Settings::get('OC_BRANCH') == 'oc.pl') ? "deleted = 0" : "true")."
-				order by cache_id, date desc
+				order by cache_id, date desc, date_created desc
 			");
 			$loguuids = array();
 			$log2cache_map = array();

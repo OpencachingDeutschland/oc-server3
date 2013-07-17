@@ -97,6 +97,7 @@ PHP libraries
 
     9.  HTML Purifier
         Path    : lib/htmlpurifier-4.2.0
+                  lib2/HTMLPurifier
         URI     : http://htmlpurifier.org/
         License : LGPL
 

@@ -200,10 +200,10 @@
 				// clear statpic
 				$statPic = $user->getStatpic();
 				$statPic->deleteFile();
-				
-				// finished, redirect to listing
-				$tpl->redirect('viewcache.php?cacheid=' . $cache->getCacheId());
 			}
+
+			// finished, redirect to listing
+			$tpl->redirect('viewcache.php?cacheid=' . $cache->getCacheId());
 		}
 		
 		// assign values to template

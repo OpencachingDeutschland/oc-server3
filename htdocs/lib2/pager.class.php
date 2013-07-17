@@ -16,7 +16,7 @@
 
 
 		// Use {page} in link_url als placeholder for the selected page number
-		// and/or {offset} for the 0-based data offset of the selected page number.
+		// and/or {offset} for the 0-based data offset of the selected page.
 
 		function __construct($link_url, $min_pages_shown=2, $max_pages_shown=15)
 		{

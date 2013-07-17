@@ -8,7 +8,7 @@
 		Used by Ocprop
 	****************************************************************************/
 
-	require_once($stylepath . '/search1/icons.inc.php');
+	require_once($stylepath . '/lib/icons.inc.php');
 	require_once('lib/search1/cache_icon.inc.php');
 
 	$search_output_file_download = false;

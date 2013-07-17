@@ -34,3 +34,8 @@ Name:      'ocprofilearchived'
 Type:      permanent
 Contents:  flag for hiding archived caches in user profile
 File:      myhome.tpl
+
+Name:      'oclogdate'
+Type:      temporary, discarded when browser closes
+Contents:  date of last submitted log
+File:      log.php

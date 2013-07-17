@@ -66,11 +66,19 @@
 		$tpl->assign('isowner', $isOwner);
 		
 		// check and prepare form values
+		$datesaved = isset($_COOKIE['oclogdate']);
+		if ($datesaved)
+		{
+			$defaultLogYear  = substr($_COOKIE['oclogdate'],0,4);
+			$defaultLogMonth = substr($_COOKIE['oclogdate'],4,2);
+			$defaultLogDay   = substr($_COOKIE['oclogdate'],6,2);
+		}
+
 		$logText        = (isset($_POST['logtext']))        ? ($_POST['logtext'])           : '';
 		$logType        = (isset($_REQUEST['logtype']))     ? ($_REQUEST['logtype']+0)      : null;
-		$logDateDay     = (isset($_POST['logday']))         ? trim($_POST['logday'])        : date('d');
-		$logDateMonth   = (isset($_POST['logmonth']))       ? trim($_POST['logmonth'])      : date('m');
-		$logDateYear    = (isset($_POST['logyear']))        ? trim($_POST['logyear'])       : date('Y');
+		$logDateDay     = (isset($_POST['logday']))         ? trim($_POST['logday'])        : ($datesaved ? $defaultLogDay   : date('d'));
+		$logDateMonth   = (isset($_POST['logmonth']))       ? trim($_POST['logmonth'])      : ($datesaved ? $defaultLogMonth : date('m'));
+		$logDateYear    = (isset($_POST['logyear']))        ? trim($_POST['logyear'])       : ($datesaved ? $defaultLogYear  : date('Y'));
 		$logTimeHour    = (isset($_POST['loghour']))        ? trim($_POST['loghour'])       : "";
 		$logTimeMinute  = (isset($_POST['logminute']))      ? trim($_POST['logminute'])     : "";
 		$rateOption     = (isset($_POST['ratingoption']))   ? $_POST['ratingoption']+0      : 0;
@@ -132,6 +140,10 @@
 		}
 		else
 			$validate['dateOk'] = false;
+
+		// store valid date in temporary cookie; it will be the default for the next log
+		if ($validate['dateOk'])
+			setcookie('oclogdate', sprintf('%04d%02d%02d',$logDateYear, $logDateMonth, $logDateDay));
 		
 		// check log type
 		$validate['logType'] = $cache->logTypeAllowed($logType);

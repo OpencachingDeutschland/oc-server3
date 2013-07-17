@@ -48,6 +48,7 @@ function __autoload($class_name)
 	// set options
 	require_once($opt['rootpath'] . 'config2/settings-dist.inc.php');
 	require_once($opt['rootpath'] . 'config2/settings.inc.php');
+	require_once($opt['rootpath'] . 'config2/verify-settings.inc.php');
 
 	set_domain();
 

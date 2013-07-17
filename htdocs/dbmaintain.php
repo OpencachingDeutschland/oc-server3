@@ -35,7 +35,7 @@
 	{
 		$proc = isset($_REQUEST['action']) ? $_REQUEST['action'] : '';
 
-//		if (sql_connect_root() == false)
+//		if (sql_connect_maintenance() == false)
 //			$tpl->error(ERROR_DB_NO_ROOT);
 
 		$bError = false;

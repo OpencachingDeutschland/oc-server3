@@ -29,11 +29,9 @@
 		sql_affected_rows()             ... mysql_affected_rows
 		sql_insert_id()                 ... mysql_insert_id
 		sql_num_rows($rs)               ... mysql_num_rows
-		sql_connect_root()              ... connect the database with all privileges
 		sql_export_recordset($f, $rs)   ... export recordset to file
 		sql_export_table($f, $table)    ... export table to file
 		sql_export_table_to_file($filename, $table)
-		sql_dropFunction                ... drops stored procedure or trigger
 
 		sql_table_exists                ... tests if a table exists
 		sql_field_exists                ... tests if a table and a field in this table exist
@@ -66,6 +64,12 @@
 		sql_disconnect_slave()        ... disconnect slave database
 		sql_error()                   ... report an error and stop processing
 		sql_warn($warnmessage)        ... report a warning and resume processing
+
+		// for maintenance functions
+		sql_connect_maintenance()       ... connect the database with more privileges
+		sql_dropFunction                ... drops stored function
+		sql_dropProcedure               ... drops stored procedure
+		sql_dropTrigger                 ... drops stored trigger
 
  ***************************************************************************/
 
@@ -803,17 +807,11 @@
 			sql_error();
 	}
 
-	function sql_connect_root()
+	function sql_connect_maintenance()
 	{
 		global $tpl, $db, $opt;
 
-		if (file_exists($opt['rootpath'] . 'config2/sqlroot.inc.php'))
-			require($opt['rootpath'] . 'config2/sqlroot.inc.php');
-		else
-			return false;
-
-		sql_disconnect();
-		sql_connect($opt['sqlroot']['username'], $opt['sqlroot']['password'], false);
+		sql_connect($opt['db']['maintenance_user'], $opt['db']['maintenance_password'], false);
 		if ($db['dblink'] === false)
 		{
 			sql_disconnect();
@@ -1181,6 +1179,20 @@
 	function sql_dropProcedure($name)
 	{
 		sql('DROP PROCEDURE IF EXISTS `&1`', $name);
+	}
+
+	function sql_dropTrigger($triggername)
+	{
+		$rs = sql("SHOW TRIGGERS");
+		while ($r = sql_fetch_assoc($rs))
+		{
+			if ($r['Trigger'] == $triggername)
+			{
+				sql('DROP TRIGGER `&1`', $triggername);
+				return;
+			}
+		}
+		sql_free_result($rs);
 	}
 
 ?>

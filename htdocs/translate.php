@@ -282,7 +282,7 @@ function resetIds()
 {
 	global $translang, $tpl;
 
-	if (sql_connect_root() == false)
+	if (sql_connect_maintenance() == false)
 		$tpl->error(ERROR_DB_NO_ROOT);
 
 	// clean up dead refs

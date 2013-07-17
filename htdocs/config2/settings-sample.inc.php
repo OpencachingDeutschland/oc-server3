@@ -9,7 +9,6 @@
  *  .dist files at the following places:
  *
  *    lib
- *    util/mysql_root
  *    util/notifications
  *    util/publish_caches
  *    util/watchlist
@@ -27,9 +26,10 @@
 	/* database settings
 	 */
 	$opt['db']['servername'] = 'localhost';
-	$opt['db']['username'] = '<db>';
+	$opt['db']['username'] = '<user>';
 	$opt['db']['password'] = '<pw>';
 	$opt['db']['pconnect'] = false;
+	$opt['db']['maintenance_user'] = '<priviledged_user>';
 
 	// ... how long a query can take without warning (0 <= disabled)
 	$opt['db']['warn']['time'] = 1;

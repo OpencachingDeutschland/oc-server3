@@ -47,6 +47,15 @@
 	$opt['db']['password'] = '';
 	$opt['db']['pconnect'] = false;
 
+	/**
+	 * user for manual maintenance functions
+	 * needs all privileges except for GRANT
+	 *
+	 * Set the password ONLY ON DEVELOPER SYSTEMS !!
+	 */
+	$opt['db']['maintenance_user'] = '';
+	$opt['db']['maintenance_password'] = '';
+
 	// begin throotling when more than 80%
 	// of max_connections is reached on db server
 	$opt['db']['throttle_connection_count'] = 240;

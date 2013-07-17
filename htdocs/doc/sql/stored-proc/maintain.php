@@ -9,34 +9,38 @@
  ***************************************************************************/
 
 	$opt['rootpath'] = dirname(__FILE__) . '/../../../';
-	require_once($opt['rootpath'] . 'lib/clicompatbase.inc.php');
-	require_once($opt['rootpath'] . 'util/mysql_root/sql_root.inc.php');
+	require_once($opt['rootpath'] . 'lib2/cli.inc.php');
+
+	if ($opt['db']['maintenance_user'] == '')
+		die("ERROR: \$opt['db']['maintenance_user'] is not set in config2/settings.inc.php\n");
 
 	// retrieve DB password
-	if ($db_root_password == '')
+	if ($opt['db']['maintenance_password'] == '')
 	{
 		if (in_array('--flush',$argv))
 		{
-			echo "\nenter DB $db_root_username password:\n";
+			echo "\nenter DB ".$opt['db']['maintenance_user']." password:\n";
 			flush();
 		}
 		else
-			echo "enter DB $db_root_username password: ";
+			echo "enter DB ".$opt['db']['maintenance_user']." password: ";
 
 		$fh = fopen('php://stdin', 'r');
-		$db_root_password = trim(fgets($fh, 1024));
+		$opt['db']['maintenance_password'] = trim(fgets($fh, 1024));
 		fclose($fh);
-		if ($db_root_password == '')
+		if ($opt['db']['maintenance_password'] == '')
 		  die("no DB password - aborting.\n");
 	}
 
 	// connect to database
-	db_root_connect();
-	if ($dblink === false)
+	if (!sql_connect_maintenance())
 	{
 		echo 'Unable to connect to database';
 		exit;
 	}
+
+	// set variables used by old maintenance scripts
+	$lang = $opt['template']['locale'];
 
 	// include the requested maintain version file
 	$dbsv = in_array('--dbsv',$argv);
@@ -47,9 +51,15 @@
 			die($versionfile." not found\n");
 		else
 			require $versionfile;
-		unlink($opt['rootpath'] . 'cache2/dbsv-running');
+		@unlink($opt['rootpath'] . 'cache2/dbsv-running');
 	}
 	else
 		require 'maintain-current.inc.php';
+
+
+	function current_triggerversion()
+	{
+		return sql_value("SELECT `value` FROM `sysconfig` WHERE `name`='db_version'", 0);
+	}
 
 ?>

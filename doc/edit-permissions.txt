@@ -4,49 +4,42 @@
                          Rechteverwaltung
 
 
-Rechte gelten jeweils für alle zuordneten Objekte 
+Rechte gelten jeweils fÃ¼r alle zuordneten Objekte 
 z.B. Beschreibung und Bilder.
 
 
-Für Caches
+FÃ¼r Caches
 
               Jeder      Besitzer   ADMIN_USER
 Anzeigen        *1          X           X
 Anlegen                     X
 Bearbeiten                  X           *2
-Löschen                                 *3
+LÃ¶schen
 
  *1 wenn Status 1-3
-
- *2 Status ändern
-    GC-Wegpunkt ändern
-    Beschreibung mit Fixtext ersetzen (Urheberrechtsverletzung)
-    Bild mit Fixbild ersetzen (Urheberrechtsverletzung)
-    Erzeugt auch E-Mail an den Owner
-
- *3 Zusammen mit Logs, Beschreibung und Bildern
-    Erzeugt auch E-Mail an den Owner
+ *2 Status Ã¤ndern
 
 
-Für Cachelogs
-
-              Jeder   Log-Besitzer   Cache-Besitzer   ADMIN_USER
-Anzeigen        *1         *1              X              X
-Anlegen         X          X               X              X
-Bearbeiten                 X             
-Löschen                    X               *2             *2
-
- *1 wenn Cache-Status 1-3
-
- *2 Mit Löschkommentar der an den Owner geschickt wird
-
-
-Für Beschreibungen und Bilder
+FÃ¼r Cachebeschreibungen und Bilder
 
               Jeder      Besitzer   ADMIN_USER
 Anzeigen        *1          X           X
 Anlegen                     X           
-Bearbeiten                              
-Löschen                     X           
+Bearbeiten                  X                              
+LÃ¶schen                     X           
 
  *1 wenn Cache-Status 1-3
+
+
+FÃ¼r Cachelogs
+
+              Jeder   Log-Besitzer   Cache-Besitzer   ADMIN_USER
+Anzeigen        *1         *1              X              X
+Anlegen         X          X               X              *4
+Bearbeiten                 X               *2             
+LÃ¶schen                    X               *3
+
+ *1 wenn Cache-Status 1-3 (suboptiomal beim Log-Besitzer)
+ *2 geplant: Spoierflag setzen (siehe Todo #97)
+ *3 mit LÃ¶schkommentar der an den Owner geschickt wird
+ *4 mit OC-Team-Flag beim Abarbeiten einer Cachemeldung

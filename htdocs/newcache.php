@@ -119,7 +119,7 @@
 			tpl_set_var('lat_min', htmlspecialchars($lat_min, ENT_COMPAT, 'UTF-8'));
 
 			//name
-			$name = isset($_POST['name']) ? $_POST['name'] : '';  // Ocprop
+			$name = isset($_POST['name']) ? trim($_POST['name']) : '';  // Ocprop
 			tpl_set_var('name', htmlspecialchars($name, ENT_COMPAT, 'UTF-8'));
 
 			//shortdesc

@@ -47,11 +47,11 @@
     You need to configure each slave database in the configuration see settings-dist.inc.php
     for available options.
 
- 3.2 util2/replication_monitor/replication_monitor.sh
+ 3.2 local/prodsys/replication_monitor.sh
 
     This script updates a timestamp in the database every 10 seconds.
     This timestamp will be replicated to each slave and can therefore
-    detect in a reliable way what time lack is in the binary log.
+    detect in a reliable way what time lag is in the binary log.
 
     See remarks in the script how to install and use it.
 
@@ -64,7 +64,7 @@
     The DB user requires privilege "REPLICATION CLIENT". If you require SSL
     replication, this may be a security risk.
 
- 3.4 util2/replication_monitor/purge_master_logs.php
+ 3.4 local/prodsys/purge_master_logs.php
 
     This script purges old binary logs that are no more required by any slave.
 
@@ -111,8 +111,12 @@
 
  5.2 Scripts using slave servers
 
+    getNew.class.php -> 404.php, index.php
+		logpics.inc.php -> index.php, myhome.php, newlogpics.php, viewcache.php
+		map2.php
     newcaches.php
     newcachesrest.php
     newlogs.php
     search.php
+    search1.php
     tops.php

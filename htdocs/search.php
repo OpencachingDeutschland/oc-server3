@@ -1197,9 +1197,7 @@
 		}
 		else // by name
 		{
-			// Some names start with spaces ...
-			// caches.name is not indexed, so ltrimming won't cost performance.
-			$sql .= 'LTRIM(`caches`.`name`) ASC';
+			$sql .= '`caches`.`name` ASC';
 		}
 
 		// range of output

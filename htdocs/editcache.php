@@ -101,7 +101,7 @@ function getWaypoints($cacheid)
 					}
 
 					//here we read all used information from the form if submitted, otherwise from DB
-					$cache_name = isset($_POST['name']) ? $_POST['name'] : $cache_record['name'];  // Ocprop
+					$cache_name = trim(isset($_POST['name']) ? $_POST['name'] : $cache_record['name']);  // Ocprop
 					$cache_type = isset($_POST['type']) ? $_POST['type'] : $cache_record['type'];
 					if (!isset($_POST['size']))
 					{
@@ -220,10 +220,9 @@ function getWaypoints($cacheid)
 
 					// name
 					$name_not_ok = false;
-					if(isset($_POST['name']))
+					if($cache_name == "")
 					{
-						if($_POST['name'] == "")
-							$name_not_ok = true;
+						$name_not_ok = true;
 					}
 
 					if (isset($_POST['latNS']))

@@ -1,0 +1,36 @@
+
+Cookies used by the Opencaching implementation
+
+
+Name:      $opt['session']['cookiename'] . 'data'
+File:      cookie.class.php
+Type:      permament
+Contents:  - login/session data  (login.class.php)
+           - country & language selection  (common.inc.php)
+           - last search query-id  (search.php)
+           - translation interface mode  (translate.php)
+
+Name:      'ocgmlastpos'
+Type:      permanent
+Contents:  last map position and zoom level
+File:      map2.tpl
+
+Name:      'ocgmconfig'
+Type:      permanent
+Contents:  selected map type, 'sidebar' status
+File:      map2.tpl
+
+Name:      'ocgmfilter'
+Type:      temporary, discarded when browser closes
+Contents:  current map filter settings
+File:      map2.tpl
+
+Nmae:      'ocgmfilter_saved'
+Type:      permanent
+Contents:  saved map filter settings
+File:      map2.tpl
+
+Name:      'ocprofilearchived'
+Type:      permanent
+Contents:  flag for hiding archived caches in user profile
+File:      myhome.tpl

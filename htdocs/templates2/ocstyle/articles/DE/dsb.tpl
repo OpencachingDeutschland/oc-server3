@@ -68,6 +68,8 @@
 			Loginstatus, Sprache und Einstellungen des HTML-Editors. Dadurch verhält sich die Opencaching-Seite 
 			beim nächsten Start des Webbrowsers wieder so wie beim letzten Mal.</p>
 
+			<p>Eine detaillierte Aufstellung der Cookie-Daten gibt es in der <a href="https://github.com/OpencachingDeutschland/oc-server3/tree/stable/doc/cookies.txt">Entwicklerdokumentation</a> (Englisch).</p>
+
 			<h2>Webserver-Protokolle</h2>
 			
 			<p>Wie fast jeder Webserver führt auch der von Opencaching.de ein Protokoll über alle abgerufenen 

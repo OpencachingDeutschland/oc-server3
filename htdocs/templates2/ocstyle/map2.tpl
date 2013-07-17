@@ -91,6 +91,7 @@ var msInitCookieFilterName = 'ocgmfilter';
 var msInitCookiePermFilterName = 'ocgmfilter_saved';
 if (!navigator.cookieEnabled)
 {
+	// see doc/cookies.txt for information on cookies
 	msInitCookieLastPosName = '';
 	msInitCookieConfigName = '';
 	msInitCookieFilterName = '';

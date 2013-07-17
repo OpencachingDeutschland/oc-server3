@@ -50,6 +50,8 @@
 			by you, e.g. login status, language and editor preferences. This way, the Opencaching site
 			will behave the same after you leave it and come back.</p>
 
+			<p>For detailed information, see the developers' <a href="https://github.com/OpencachingDeutschland/oc-server3/tree/stable/doc/cookies.txt">cookie documentation</a>.</p>
+
 			<h2>Webserver protocols</h2>
 			
 			<p>Like any webserver, Opencaching.de keeps a protocol of all requested pages. For each request,

@@ -5,6 +5,7 @@
  *  Unicode Reminder メモ
  *
  *  Cookie handling
+ *  See doc/cookies.txt for more information in cookies.
  ***************************************************************************/
 
 	$cookie = new cookie();

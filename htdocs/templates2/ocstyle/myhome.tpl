@@ -113,7 +113,7 @@ function myHomeLoad()
 
 {if !$allpics}
 	{* Geocaches hidden *}
-	<div class="content2-container bg-blue02" style="margin-top:5px;">
+	<div class="content2-container bg-blue02" id="mycaches" style="margin-top:5px;">
 		<p class="content-title-noshade-size3">
 			<img src="resource2/{$opt.template.style}/images/misc/22x22-traditional.gif" width="22" height="22"  style="margin-right: 10px;" />&nbsp;
 			{t 1=$hidden}Geocaches hidden: %1{/t} &nbsp;
@@ -152,6 +152,7 @@ function myHomeLoad()
 			</tr>
 		{/foreach}
 
+		{* ... unpublished caches *}
 		{if $notpublished|@count}
 			<tr>
 				<td colspan="4">
@@ -169,8 +170,6 @@ function myHomeLoad()
 		{/if}
 	</table>
 
-	{* ... not published caches *}
-
 	{* Other information *}
 	{*
 	<div class="content2-container bg-blue02" style="margin-top:20px;">
@@ -179,14 +178,6 @@ function myHomeLoad()
 			{t}Other information{/t}
 		</p>
 	</div>
-	*}
-
-	{* Emails sent *}
-	{* useless information when email protocol is regularly cleand-up
-	<p>
-		<img src="resource2/{$opt.template.style}/images/misc/22x22-email.png" width="22" height="22" style="align: left; margin-right: 10px;" />&nbsp;
-		<strong>{t 1=$emails}E-Mails sent: %1{/t}</strong>
-	</p>
 	*}
 {/if}
 

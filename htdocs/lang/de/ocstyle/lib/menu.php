@@ -169,6 +169,13 @@ $menu = array(
 						'visible' => true,
 						'filename' => 'articles.php?page=htmltags',
 						'siteid' => 'articles/htmltags'
+					),
+					array(
+						'title' => t('My caches'),
+						'menustring' => t('My caches'),
+						'visible' => true,
+						'filename' => 'myhome.php#mycaches',
+						'siteid' => 'myhome'
 					)
 				)
 			),

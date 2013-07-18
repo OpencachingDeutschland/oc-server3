@@ -840,7 +840,6 @@ INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustrin
 INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('27', 'MNU_START_CONTACT', 'Contact', '16', 'Contact', '16', '0', 'articles.php?page=contact', '0', '1', '12', '', '1', NULL);
 INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('28', 'MNU_START_PRIVACY', 'Privacy statement', '14', 'Privacy statement', '14', '0', 'articles.php?page=dsb', '0', '1', '13', '', '1', NULL);
 INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('29', 'MNU_START_REGISTER_ACTIVATION', 'Activation', '127', 'Activation', '127', '0', 'activation.php', '0', '3', '1', '', '1', NULL);
-INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('30', 'MNU_CACHES_USERPROFILE', 'Userprofile', '128', 'Userprofile', '128', '0', 'viewprofile.php', '0', '10', '4', '', '0', NULL);
 INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('31', 'MNU_START_NEWS_POST', 'Post some news', '180', 'Post some news', '180', '0', 'newstopic.php', '0', '4', '1', '', '0', NULL);
 INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('32', 'MNU_LOGIN', 'Login', '207', 'Login', '207', '0', 'login.php', '0', '0', '8', '#D5D9FF', '1', NULL);
 INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('33', 'MNU_CACHES_USERTOPS', 'Show recommendations', '248', 'Show recommendations', '248', '0', 'usertops.php', '0', '10', '5', '', '0', NULL);
@@ -891,6 +890,7 @@ INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustrin
 INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('96', 'MNU_ADMIN_HISTORY', 'Cache history', '2059', 'Cache history', '2059', '1', 'adminhistory.php', '1', '12', '4', '', '0', NULL);
 INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('97', 'MNU_CACHES_SEARCH_SELECT_CITY', 'Select city', '1694', 'Select city', '1694', '0', 'search.php', '0', '20', '1', '', '0', NULL);
 INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('98', 'MNU_CACHES_SEARCH_RESULT', 'Show search result', '1695', 'Result', '1696', '0', 'search.php', '0', '20', '2', '', '0', NULL);
+INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('99', 'MNU_CACHES_MY', 'My caches', '2111', 'My caches', '2111', '0', 'myhome.php#mycaches', '1', '21', '4', '', '1', NULL);
 
 -- Table sys_trans
 SET NAMES 'utf8';
@@ -2528,6 +2528,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2107', 'in', '2
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2108', 'All caches', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2109', '{results_count} caches<span style=\"{search_headline_caches}\"> matched</span>', '2010-09-07 20:19:07');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2110', 'Result {startatp1} to {endat} (as zip)', '2010-09-07 20:19:07');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2111', 'My caches', '2010-09-07 20:19:07');
 
 -- Table sys_trans_ref
 SET NAMES 'utf8';
@@ -4918,7 +4919,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('48', 'DE', 'Slowakisch', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('49', 'DE', 'Russisch', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('51', 'DE', 'Zurücksetzen', '2010-08-28 11:48:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('52', 'DE', 'Besondere Caches', '2010-08-28 11:48:06');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('52', 'DE', 'Empfohlene Caches', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('54', 'DE', 'Index', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('55', 'DE', 'Empfehlungen', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('56', 'DE', 'gefunden', '2012-07-24 21:30:00');
@@ -6506,6 +6507,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2108', 'DE', 'Alle Caches', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2109', 'DE', '{results_count} Caches<span style=\"{search_headline_caches}\"> gefunden</span>', '2010-09-10 23:33:47');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2110', 'DE', 'Einträge {startatp1} bis {endat} (als zip)', '2010-09-10 23:33:33');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2111', 'DE', 'Meine Caches', '2010-09-10 23:33:33');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'EN', 'The database could not be reconnected.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'EN', 'Testing – please do not login', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('4', 'EN', 'User', '2010-08-28 11:48:07');

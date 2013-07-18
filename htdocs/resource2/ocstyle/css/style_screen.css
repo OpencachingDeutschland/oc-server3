@@ -1471,6 +1471,6 @@ div#havefound {
 #forum div.rsstext img {max-width:200px; max-height:120px;}
 
 p.editlog { font-weight: 400; display:inline; }
-.newsymbol { background:#ff9d11; color:#fff; }
+.newsymbol { background:#ff9d11; color:#fff; font-size:0.9em;}
 
 label.disabled { color:grey; }

@@ -58,6 +58,10 @@
 	define('MAX_LOGENTRIES_ON_CACHEPAGE', 5);
 	define('MAX_PICTURES_PER_GALLERY_PAGE', 48);   // must be multiple of 6
 
+	// threshold for caches to be marked as "new"
+	// changed from 7 to 14  -- following 2013/6/17
+	$NEWCACHES_DAYS = 14;
+
 	// constants for user options (must match values in DB!)
 	define('USR_OPT_GMZOOM', 1);
 	define('USR_OPT_SHOWSTATS', 5);

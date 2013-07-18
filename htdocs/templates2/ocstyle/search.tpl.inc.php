@@ -5,8 +5,6 @@
    Unicode Reminder メモ
 
 	 variable search template contents
-
-	 Todo:  Integrate into search.tpl
  ****************************************************************************/
 
 	// search.php -> $tpl->error
@@ -32,7 +30,6 @@
 	$no_location_coords = _('no coordinates available');
 
 	// search.html.inc.php -> search.result.caches.tpl
-	$newcache_days = 14;  // changed from 7 to 14  -- following 2013/6/17
 	$caches_newstring = '<b class="newsymbol">&nbsp;' . _('NEW') . '&nbsp;</b>&nbsp;';
 	$caches_oconlystring = '<img src="resource2/ocstyle/images/misc/is_oconly.png" alt="OConly" title="OConly" style="margin:0px; padding:0px" width="64" height="35" />';
 

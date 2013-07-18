@@ -18,6 +18,9 @@
 	  calls the output formatting module as specified by the 'output' parameter. 
 		If 'showresult' != 1, the query search form is presented to the user.
 
+		Note that 'showresult' is also stored in saved queries, so it can be
+		automatically included when the 'queryid' parameter is given.
+
   search type options:
     searchbyname
 		searchbydistance
@@ -44,10 +47,9 @@
 
 
 	To do:
-		- port attributes code to lib2 code as used by map2 (see outputSearchForm)
+		- port attributes code to res_attribgroup.tpl (see outputSearchForm)
 		- port output data list generation from prepareLocSelectionForm and
 		    outputLocidSelectionForm to search_selectlocid.tpl.
-		- merge search.tpl.inc.php into search.tpl
 		- wtf is "expert mode"?
 
  ****************************************************************************/
@@ -72,20 +74,17 @@
 
 	// Determine if search.php was called by a search function ('Caches' menu,
 	// stored query etc.) or for other purpose (e.g. user profile cache lists):
-	$calledbysearch = isset($_REQUEST['calledbysearch']) && $_REQUEST['calledbysearch'];
-
-	// default template variables
-	$tpl->assign('search_in_gm', $search_in_gm);
-	$tpl->assign('search_in_gm_zip', $search_in_gm_zip);
+	$called_by_search = isset($_REQUEST['calledbysearch']) && $_REQUEST['calledbysearch'];
+	$called_by_profile_query = false;
 
 	if (isset($_REQUEST['queryid']) || isset($_REQUEST['showresult']))
 	{  // Ocprop: showresult, queryid
 		$bCookieQueryid = false;
 		$queryid = isset($_REQUEST['queryid']) ? $_REQUEST['queryid'] : 0;
-		if ($queryid)
+		if ($queryid &&
+		    sql_value("SELECT `user_id` FROM `queries` WHERE `id`='&1'", 0, $queryid))
 		{
-			$tpl->assign('search_in_gm', '');
-			$tpl->assign('search_in_gm_zip', '');
+			$called_by_profile_query = true;
 		}
 	}
 	else
@@ -210,7 +209,7 @@
 		// build search options from GET/POST parameters or default values
 
 		// hack
-		if(isset($_REQUEST['searchto']) && ($_REQUEST['searchto'] != ''))
+		if (isset($_REQUEST['searchto']) && ($_REQUEST['searchto'] != ''))
 		{
 			unset($_REQUEST['searchbyname']);
 			unset($_REQUEST['searchbydistance']);
@@ -1300,7 +1299,8 @@
 			//
 			//  The following variables from search.php are used by output modules:
 			//
-			//    $calledbysearch				
+			//    $called_by_search
+			//    $called_by_profile_query
 			//    $distance_unit
 			//    $lat_rad, $lon_rad
 			//    $startat
@@ -1411,7 +1411,7 @@ function outputSearchForm($options)
 	$tpl->assign('hidopt_disabled', ($options['f_disabled'] == 1) ? '1' : '0');
 
 	$tpl->assign('f_ignored_disabled', !$login->logged_in());
-	$tpl->assign('f_ignored_disabled', $login->logged_in() && ($options['f_ignored'] == 1));
+	$tpl->assign('f_ignored_checked', $login->logged_in() && ($options['f_ignored'] == 1));
 	$tpl->assign('hidopt_ignored', ($options['f_ignored'] == 1) ? '1' : '0');
 
 	$tpl->assign('f_otherPlatforms_checked', $options['f_otherPlatforms'] == 1);

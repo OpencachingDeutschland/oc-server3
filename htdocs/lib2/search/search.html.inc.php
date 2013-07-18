@@ -31,9 +31,9 @@
 
 function search_output()
 {
-	global $opt, $tpl, $login; 
-	global $newcache_days, $showonmap;
-	global $calledbysearch, $options, $lat_rad, $lon_rad, $distance_unit;
+	global $opt, $tpl, $login, $NEWCACHES_DAYS;
+	global $search_in_gm, $search_in_gm_zip;
+	global $called_by_search, $called_by_profile_query, $options, $lat_rad, $lon_rad, $distance_unit;
 	global $startat, $caches_per_page, $sql;
 
 	$tpl->name = 'search.result.caches';
@@ -76,7 +76,7 @@ function search_output()
 
 		// decide if the cache is new
 		$dDiff = abs(dateDiff('d', $rCache['date_created'], date('Y-m-d')));
-		$rCache['isnew'] = ($dDiff <= $newcache_days);
+		$rCache['isnew'] = ($dDiff <= $NEWCACHES_DAYS);
 		
 		// get last logs
 		if ($options['sort'] != 'bymylastlog' || !$login->logged_in())
@@ -113,8 +113,6 @@ function search_output()
 	$pager = new pager('search.php?queryid=' . $options['queryid'] . '&startat={offset}', 2, 9);
 	$pager->make_from_offset($startat, $resultcount, $caches_per_page);
 
-	$tpl->assign('showonmap', $showonmap);
-
 	// downloads
 	$tpl->assign('queryid', $options['queryid']);
 
@@ -133,7 +131,18 @@ function search_output()
 		$tpl->assign('distanceunit', $distance_unit);
 
 	$tpl->assign('displayownlogs', $options['sort'] == 'bymylastlog');
-	$tpl->assign('search_headline_caches', $calledbysearch);
+	$tpl->assign('search_headline_caches', $called_by_search);
+
+	if ($called_by_profile_query)
+	{
+		$tpl->assign('search_in_gm', '');
+		$tpl->assign('search_in_gm_zip', '');
+	}
+	else
+	{
+		$tpl->assign('search_in_gm', $search_in_gm);
+		$tpl->assign('search_in_gm_zip', $search_in_gm_zip);
+	}
 
 	$tpl->display();
 }

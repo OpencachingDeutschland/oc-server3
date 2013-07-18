@@ -621,7 +621,8 @@
 						}
 
 						// temporäre tabelle erstellen und dann einträge entfernen, die nicht mindestens so oft vorkommen wie worte gegeben wurden
-						sql_slave('CREATE TEMPORARY TABLE tmpuniids (`uni_id` int(11) NOT NULL, `cnt` int(11) NOT NULL, `olduni` int(11) NOT NULL, `simplehash` int(11) NOT NULL) ENGINE=MEMORY SELECT `gns_search`.`uni_id` `uni_id`, 0 `cnt`, 0 `olduni`, `simplehash` FROM `gns_search` WHERE ' . $sqlhashes);
+						sql_slave('DROP TABLE IF EXISTS `tmpuniids`');
+						sql_slave('CREATE TEMPORARY TABLE `tmpuniids` (`uni_id` int(11) NOT NULL, `cnt` int(11) NOT NULL, `olduni` int(11) NOT NULL, `simplehash` int(11) NOT NULL) ENGINE=MEMORY SELECT `gns_search`.`uni_id` `uni_id`, 0 `cnt`, 0 `olduni`, `simplehash` FROM `gns_search` WHERE ' . $sqlhashes);
 						sql_slave('ALTER TABLE `tmpuniids` ADD INDEX (`uni_id`)');
 
 					//	BUGFIX: dieser Code sollte nur ausgeführt werden, wenn mehr als ein Suchbegriff eingegeben wurde
@@ -1054,7 +1055,7 @@
 
 			$sql_innerjoin[] = '`cache_status` ON `caches`.`status`=`cache_status`.`id`';
 			if ($login->logged_in())
-				$sql_where[] = '(`cache_status`.`allow_user_view`=1 OR `caches`.`user_id`=' . sql_escape($login->userid) . ' OR (`caches`.`status`<>5 AND '. sql_escape($login->hasAdminPriv(ADMIN_USER)) . '>0))';
+				$sql_where[] = '(`cache_status`.`allow_user_view`=1 OR `caches`.`user_id`=' . sql_escape($login->userid) . ' OR (`caches`.`status`<>5 AND '. ($login->hasAdminPriv(ADMIN_USER) ? '1' : '0') . '))';
 			else
 				$sql_where[] = '`cache_status`.`allow_user_view`=1';
 

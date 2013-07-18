@@ -440,7 +440,7 @@ function switchAttributeCat2()
 </form>
 
 <div id="scriptwarning" style="margin:0 5px 0 5px;">
-	<p><span class="errormsg">{t}JavaScript is not activated, you cannot use the above options (sorting to attributes) - basic search is supported nevertheless.{/t}</span></p>
+	<p><span class="errormsg">{t}JavaScript is not activated, you cannot use the above options (hide caches .. sort results) - basic search works nevertheless.{/t}</span></p>
 </div>
 
 {literal}

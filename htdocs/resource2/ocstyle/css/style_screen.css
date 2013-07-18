@@ -1374,6 +1374,7 @@ tr.searchresult td {
 	border-top: solid 1px black;
 	margin-bottom: 5px;
 }
+
 div.searchdiv {
 	width: 94%;
 	margin: 5px;
@@ -1382,6 +1383,29 @@ div.searchdiv {
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	border-radius: 5px;
+}
+
+div.searchdiv2 {
+	margin: 12px 22px 12px 4px;
+	padding: 5px;
+	border: solid 1px #cfdfed;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+
+div.searchdiv2 td {
+	line-height:1.8em;
+}
+div.searchdiv2 td.separator {
+	height: 0.5em;
+}
+div.searchdiv2 td.fieldlabel {
+	line-height: 1.4em;
+	padding-top: 0.3em;
+	padding-bottom: 0.3em;
+	vertical-align: top;
 }
 
 .pad5 { padding: 5px; }
@@ -1474,3 +1498,4 @@ p.editlog { font-weight: 400; display:inline; }
 .newsymbol { background:#ff9d11; color:#fff; font-size:0.9em;}
 
 label.disabled { color:grey; }
+.formlabel { color:#555; font-weight:bold; line-height:1.5em !important}

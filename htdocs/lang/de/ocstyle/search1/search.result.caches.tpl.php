@@ -114,7 +114,7 @@
 				<a href="search1.php?queryid={queryid}&output=ovl&startat={startat}" title="{t}TOP50-Overlay .ovl{/t}">OVL</a>
 				<a href="search1.php?queryid={queryid}&output=txt&startat={startat}" title="{t}Textfile .txt{/t}">TXT</a>
 				<br />
-				<b>{t}Result {startatp1} to {endat} (as zip):{/t}</b>
+				<b>{t}Result {startatp1} to {endat} (as zip){/t}:</b>
 				<a href="search1.php?queryid={queryid}&output=gpx&startat={startat}&count=max&zip=1" title="{t}GPS Exchange Format .gpx{/t}">GPX</a>
 				<a href="search1.php?queryid={queryid}&output=loc&startat={startat}&count=max&zip=1" title="{t}Waypointfile .loc{/t}">LOC</a>
 				<a href="search1.php?queryid={queryid}&output=kml&startat={startat}&count=max&zip=1" title="{t}Google Earth .kml{/t}">KML</a>

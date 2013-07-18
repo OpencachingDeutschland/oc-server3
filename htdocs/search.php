@@ -32,6 +32,7 @@
 		searchbynofilter
 		searchbycacheid
 		searchbywp
+		searchall
 
 	output options:
 		html         display browsable search results list
@@ -219,6 +220,7 @@
 			unset($_REQUEST['searchbyort']);
 			unset($_REQUEST['searchbyfulltext']);
 			unset($_REQUEST['searchbynofilter']);
+			unset($_REQUEST['searchall']);
 			$_REQUEST[$_REQUEST['searchto']] = "hoho";
 		}
 
@@ -371,6 +373,10 @@
 		elseif (isset($_REQUEST['searchbynofilter']))
 		{
 			$options['searchtype'] = 'bynofilter';
+		}
+		elseif (isset($_REQUEST['searchall']))
+		{
+			$options['searchtype'] = 'all';
 		}
 		else
 		{
@@ -921,6 +927,12 @@
 				$sql_select[] = '`caches`.`cache_id` `cache_id`';
 				$sql_from = '`caches`';
 			}
+			else if ($options['searchtype'] == 'all')
+			{
+				$sql_select[] = '`caches`.`cache_id` `cache_id`';
+				$sql_from = '`caches`';
+				$sql_where[] = 'TRUE'; 
+			}
 			else
 			{
 				$tpl->error($unknown_searchtype);
@@ -1354,7 +1366,7 @@ function outputSearchForm($options)
 	$tpl->assign('formmethod', 'get');
 
 	// checkboxen
-	$tpl->assign('disable_nologin', !$login->logged_in());
+	$tpl->assign('logged_in', $login->logged_in());
 
 	$homecoords = ($login->logged_in() && sql_value_slave("SELECT `latitude`+`longitude` FROM user WHERE `user_id`='&1'",  $login->userid) <> 0);
 	if (!$homecoords && isset($options['sort']) && $options['sort'] == 'bydistance')
@@ -1396,12 +1408,10 @@ function outputSearchForm($options)
 	$tpl->assign('orderRatingFirst_checked', $options['orderRatingFirst']);
 	$tpl->assign('hidopt_orderRatingFirst', $options['orderRatingFirst'] ? '1' : '0');
 
-	$tpl->assign('f_userfound_disabled', !$login->logged_in());
 	$tpl->assign('f_userfound_checked', $login->logged_in() && ($options['f_userfound'] == 1));
 	$tpl->assign('hidopt_userfound', ($options['f_userfound'] == 1) ? '1' : '0');
 
-	$tpl->assign('f_userowner_disabled', !$login->logged_in());
-	$tpl->assign('f_userowner_disabled', $login->logged_in() &&($options['f_userowner'] == 1));
+	$tpl->assign('f_userowner_checked', $login->logged_in() &&($options['f_userowner'] == 1));
 	$tpl->assign('hidopt_userowner', ($options['f_userowner'] == 1) ? '1' : '0');
 
 	$tpl->assign('f_inactive_checked', $options['f_inactive'] == 1);
@@ -1410,7 +1420,6 @@ function outputSearchForm($options)
 	$tpl->assign('f_disabled_checked', $options['f_disabled'] == 1);
 	$tpl->assign('hidopt_disabled', ($options['f_disabled'] == 1) ? '1' : '0');
 
-	$tpl->assign('f_ignored_disabled', !$login->logged_in());
 	$tpl->assign('f_ignored_checked', $login->logged_in() && ($options['f_ignored'] == 1));
 	$tpl->assign('hidopt_ignored', ($options['f_ignored'] == 1) ? '1' : '0');
 
@@ -1534,17 +1543,24 @@ function outputSearchForm($options)
 	$tpl->assign_rs('countryoptions',$rs);
 	sql_free_result($rs);
 
-	// cachetype + cachesize
-	$nCount = sql_value("SELECT COUNT(*) FROM `cache_type`", 0);
-	for ($n = 1; $n <= $nCount; $n++)
-		$tpl->assign('cachetype' . $n . 'checked', (strpos(';' . $options['cachetype'] . ';', ';' . $n . ';') !== false) || ($options['cachetype']==''));
-
-	$nCount = sql_value("SELECT COUNT(*) FROM `cache_size`", 0);
-	$tpl->assign('cachesizes', $nCount);
-	for ($n = 1; $n <= $nCount; $n++)
-		$tpl->assign('cachesize' . $n . 'checked', (strpos(';' . $options['cachesize'] . ';', ';' . $n . ';') !== false) || ($options['cachesize']==''));
-
+	// cachetype
+	$rs = sql("SELECT `id` FROM `cache_type` ORDER BY `ordinal`");
+	$rCachetypes = sql_fetch_assoc_table($rs);
+	foreach ($rCachetypes as &$rCachetype)
+	{
+		$rCachetype['checked'] =  ($options['cachetype']=='') || (strpos(';' . $options['cachetype'] . ';', ';' . $rCachetype['id'] . ';') !== false);
+		$rCachetype['unchecked'] = !$rCachetype['checked'];
+	}
+	$tpl->assign('cachetypes',$rCachetypes);
 	$tpl->assign('cachetype', $options['cachetype']);
+
+	// cachesize
+	$cachesizes = array();
+	$rs = sql("SELECT `id` FROM `cache_size`");
+	while ($r = sql_fetch_assoc($rs))
+		$cachesizes[$r['id']]['checked'] = (strpos(';' . $options['cachesize'] . ';', ';' . $r['id'] . ';') !== false) || ($options['cachesize']=='');
+	sql_free_result($rs);
+	$tpl->assign('cachesizes', $cachesizes);
 	$tpl->assign('cachesize', $options['cachesize']);
 
 	// difficulty + terrain
@@ -1750,10 +1766,10 @@ function outputSearchForm($options)
 	$tpl->assign('hidopt_attribs_not', isset($options['cache_attribs_not']) ? implode(';', $options['cache_attribs_not']) : '');
 
 	$tpl->assign('fulltext', '');
+	$tpl->assign('ft_desc_checked', true);
 	$tpl->assign('ft_name_checked', true);
-	$tpl->assign('ft_desc_checked', false);
-	$tpl->assign('ft_logs_checked', false);
 	$tpl->assign('ft_pictures_checked', false);
+	$tpl->assign('ft_logs_checked', false);
 
 	// fulltext options
 	if ($options['searchtype'] == 'byfulltext')
@@ -1761,17 +1777,17 @@ function outputSearchForm($options)
 		if (!isset($options['fulltext'])) $options['fulltext'] = '';
 		$tpl->assign('fulltext', htmlspecialchars($options['fulltext'], ENT_COMPAT, 'UTF-8'));
 
-		if (isset($options['ft_name']) && $options['ft_name']==1)
-			$tpl->assign('ft_name_checked',true);
+		if (isset($options['ft_name']))
+			$tpl->assign('ft_name_checked',$options['ft_name']==1);
 
-		if (isset($options['ft_desc']) && $options['ft_desc']==1)
-			$tpl->assign('ft_desc_checked',true);
+		if (isset($options['ft_desc']))
+			$tpl->assign('ft_desc_checked',$options['ft_desc']==1);
 
-		if (isset($options['ft_logs']) && $options['ft_logs']==1)
-			$tpl->assign('ft_logs_checked',true);
+		if (isset($options['ft_logs']))
+			$tpl->assign('ft_logs_checked',$options['ft_logs']==1);
 
-		if (isset($options['ft_pictures']) && $options['ft_pictures']==1)
-			$tpl->assign('ft_pictures_checked',true);
+		if (isset($options['ft_pictures']))
+			$tpl->assign('ft_pictures_checked',$options['ft_pictures']==1);
 	}
 
 	// errormeldungen

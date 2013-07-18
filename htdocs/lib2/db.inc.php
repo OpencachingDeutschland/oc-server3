@@ -20,6 +20,7 @@
 		sql_fetch_array($rs)            ... mysql_fetch_array with charset conversion
 		sql_fetch_assoc($rs)            ... mysql_fetch_assoc with charset conversion
 		sql_fetch_row($rs)              ... mysql_fetch_row with charset conversion
+		sql_fetch_column($rs)           ... fetch column with charset conversion          
 		sql_fetch_assoc_table($rs)      ... fetch_assoc for all rows 
 		sql_temp_table($table)          ... registers an placeholder for use as temporary
 		                                    table and drop's temporary tables if 
@@ -567,6 +568,19 @@
 				foreach ($retval AS $k => $v)
 					$retval[$k] = iconv($opt['charset']['iconv'], 'UTF-8', $v);
 		return $retval;
+	}
+
+	function sql_fetch_column($rs)
+	{
+		global $opt;
+		$result = array();
+		while ($r = mysql_fetch_row($rs))
+			if ($opt['charset']['iconv'] != 'UTF-8')
+				$result[] = iconv($opt['charset']['iconv'], 'UTF-8', $r[0]);
+			else
+				$result[] = $r[0];
+		mysql_free_result($rs);
+		return $result;
 	}
 
 	function sql_affected_rows()

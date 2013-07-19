@@ -343,7 +343,7 @@ td.listicon {
 	width:1%;
 	margin-right:0 !important;
 	padding-right:1px !important;
-	vertical-align:center;
+	vertical-align:middle;
 }
 
 .table-like-font { font-size:120%; }

@@ -96,9 +96,13 @@ function search_output()
 
 		// get direction from search coordinate 
 		if ($rCache['distance'] > 0)
-			$rCache['direction'] = geomath::Bearing2Text(geomath::calcBearing($lat_rad / 3.14159 * 180, $lon_rad / 3.14159 * 180, $rCache['latitude'], $rCache['longitude']), 1);
+		{
+			$direction = geomath::calcBearing($lat_rad / 3.14159 * 180, $lon_rad / 3.14159 * 180, $rCache['latitude'], $rCache['longitude']);
+			$rCache['direction_deg'] = round($direction / 22.5) * 22.5;
+			$rCache['direction_txt'] = geomath::Bearing2Text($direction, 1);
+		}
 		else 		
-			$rCache['direction'] = '';
+			$rCache['direction_deg'] = false;
 		
 		// other data
 		$rCache['icon'] = getCacheIcon($login->userid, $rCache['cache_id'], $rCache['status'], $rCache['user_id'], $rCache['icon_large']);

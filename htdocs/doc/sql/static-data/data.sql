@@ -2536,6 +2536,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2110', 'Result 
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2111', 'My caches', '2010-09-07 20:19:07');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2112', 'Opencaching', '2010-09-07 20:19:07');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2113', 'New Wiki articles', '2010-09-07 20:19:07');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2114', 'Cardinal direction', '2010-09-07 20:19:07');
 
 -- Table sys_trans_ref
 SET NAMES 'utf8';
@@ -6517,6 +6518,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2111', 'DE', 'Meine Caches', '2010-09-10 23:33:33');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2112', 'DE', 'Opencaching', '2010-09-10 23:33:33');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2113', 'DE', 'Neue Wiki-Artikel', '2010-09-10 23:33:33');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2114', 'DE', 'Himmelsrichtung', '2010-09-10 23:33:33');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'EN', 'The database could not be reconnected.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'EN', 'Testing – please do not login', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('4', 'EN', 'User', '2010-08-28 11:48:07');

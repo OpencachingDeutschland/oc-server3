@@ -2,7 +2,7 @@
    outputs one cache line of the search result *}
 <!--m-->
 <tr>
-  <td width="18" class="{$listcolor}">&nbsp;{$position}&nbsp;</td>
+  <td width="18" class="{$listcolor}">&nbsp;{$position}&nbsp;&nbsp;</td>
   <td width="45" class="{$listcolor}">{if $cache.distance !== null}{$cache.distance|sprintf:"%1.1f"|escape}&nbsp;{/if}</td>
   <td width="32" class="{$listcolor}" rowspan="2"><img src="resource2/{$opt.template.style}/images/cacheicon/{$cache.icon}" title="{$cache.cacheTypeName}"></td>
   <td width="46" class="{$listcolor}" rowspan="2"><nobr>{include file="res_difficon.tpl" difficulty=$cache.difficulty}{include file="res_terricon.tpl" terrain=$cache.terrain}</nobr></td>
@@ -19,7 +19,7 @@
 <!--n-->
 <tr>
   <td width="25" class="{$listcolor}">&nbsp;</td>
-  <td width="32" class="{$listcolor}" valign="top">{$cache.direction}&nbsp;</td>
+  <td width="32" class="{$listcolor}" valign="top">{if $cache.direction_deg !== false}<img src="resource2/ocstyle/images/direction/16x16-{$cache.direction_deg}deg.png" title="{t}Cardinal direction{/t}: {$cache.direction_txt}">&nbsp;{/if}</td>
   <td width="448" class="{$listcolor}" valign="top">
 		<p>{strip}
 		{if $cache.topratings>0}<img src="images/rating-star.gif" title="{t}Recommendations{/t}" width="17" height="16" />{/if}

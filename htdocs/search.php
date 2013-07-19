@@ -9,14 +9,14 @@
 	external tools like the Mozilla Firefox plugin.
 
 	Search options will be loaded from
-		- a saved or caches query in queries table, if either 'queryid' parameter
-				or 'lastqueryid' cookie is present and the query exists; otherwise from
+		- a saved query in queries table, if either 'queryid' parameter or
+		    'lastqueryid' cookie is present and the query exists; otherwise from
 		- supplied HTTP parameters or
 		- hard-coded default values
 
 	showresult=1 produces an SQL query from search options, executes it and
 	  calls the output formatting module as specified by the 'output' parameter. 
-		If 'showresult' != 1, the query search form is presented to the user.
+		If 'showresult' != 1, the search options form is presented to the user.
 
 		Note that 'showresult' is also stored in saved queries, so it can be
 		automatically included when the 'queryid' parameter is given.
@@ -32,7 +32,7 @@
 		searchbynofilter
 		searchbycacheid
 		searchbywp
-		searchall
+		searchall  (needs login)
 
 	output options:
 		html         display browsable search results list
@@ -49,7 +49,7 @@
 
 	To do:
 		- port attributes code to res_attribgroup.tpl (see outputSearchForm)
-		- port output data list generation from prepareLocSelectionForm and
+		- move output data list generation from prepareLocSelectionForm and
 		    outputLocidSelectionForm to search_selectlocid.tpl.
 		- wtf is "expert mode"?
 
@@ -68,10 +68,16 @@
 	$tpl->name = 'search';
 	$tpl->menuitem = MNU_CACHES_SEARCH;
 
-	// km => target-unit
+	// distance constants
+	$DEFAULT_DISTANCE_UNIT = 'km';
+	$DEFAULT_SEARCH_DISTANCE = 75;
+
 	$multiplier['km'] = 1;
 	$multiplier['sm'] = 0.62137;
 	$multiplier['nm'] = 0.53996;
+
+	$homecoords = ($login->logged_in() &&
+	               sql_value_slave("SELECT `latitude`+`longitude` FROM user WHERE `user_id`='&1'",  0, $login->userid) <> 0);
 
 	// Determine if search.php was called by a search function ('Caches' menu,
 	// stored query etc.) or for other purpose (e.g. user profile cache lists):
@@ -284,7 +290,7 @@
 		}
 		else
 		{
-			$options['unit'] = 'km';
+			$options['unit'] = $DEFAULT_DISTANCE_UNIT;
 		}
 
 		if (isset($_REQUEST['searchbyname']))
@@ -398,7 +404,7 @@
 			}
 		}
 
-		$options['sort'] = isset($_REQUEST['sort']) ? $_REQUEST['sort'] : 'bydistance';
+		$options['sort'] = isset($_REQUEST['sort']) ? $_REQUEST['sort'] : ($homecoords ? 'bydistance' : 'byname');
 
 		if (isset($_REQUEST['orderRatingFirst']) && $_REQUEST['orderRatingFirst']==1)
 			$options['orderRatingFirst'] = true;
@@ -412,6 +418,21 @@
 		$options['terrainmin'] = isset($_REQUEST['terrainmin']) ? $_REQUEST['terrainmin']+0 : 0;
 		$options['terrainmax'] = isset($_REQUEST['terrainmax']) ? $_REQUEST['terrainmax']+0 : 0;
 		$options['recommendationmin'] = isset($_REQUEST['recommendationmin']) ? $_REQUEST['recommendationmin']+0 : 0;
+
+		if (in_array($options['searchtype'], array('byort','byplz','bydistance')))
+		{
+			// For distance-based searches, sort by distance instead of name.
+			if ($options['sort'] == 'byname')
+				$options['sort'] = 'bydistance';
+		}
+		else
+		{
+			// For non-distance-based searches, sort by name instead of distance if
+			// no reference coords exist.
+			if (!isset($options['lat']) || !isset($options['lon']) || $options['lat']+$options['lon'] == 0)
+				if (!$homecoords)
+					$options['sort'] = 'byname';
+		}
 
 		$options['queryid'] = 0;
 	}  // $queryid == 0
@@ -560,8 +581,8 @@
 						$lat = $r['lat'] + 0;
 						$lon = $r['lon'] + 0;
 
-						$distance_unit = 'km';
-						$distance = 75;
+						$distance_unit = $DEFAULT_DISTANCE_UNIT;
+						$distance = $DEFAULT_SEARCH_DISTANCE;
 
 						// ab hier selber code wie bei bydistance ... TODO: in funktion auslagern
 
@@ -710,8 +731,8 @@
 						$lon_rad = $lon * 3.14159 / 180;
 						$lat_rad = $lat * 3.14159 / 180;
 
-						$distance_unit = 'km';
-						$distance = 75;
+						$distance_unit = $DEFAULT_DISTANCE_UNIT;
+						$distance = $DEFAULT_SEARCH_DISTANCE;
 
 						// ab hier selber code wie bei bydistance ... TODO: in funktion auslagern
 
@@ -1147,7 +1168,7 @@
 		// If no distance unit is preselected by distance search, use 'km'.
 		// The unit will be shown e.g. in HTML and XML search results.
 		if (!isset($distance_unit))
-			$distance_unit = 'km';
+			$distance_unit = $DEFAULT_DISTANCE_UNIT;
 
 		if (isset($lat_rad) && isset($lon_rad))
 		{
@@ -1215,7 +1236,7 @@
 			$sortby = 'bydistance';
 		}
 
-		if (isset($lat_rad) && isset($lon_rad) && ($sortby == 'bydistance'))
+		if (isset($lat_rad) && isset($lon_rad) && $sortby == 'bydistance')  
 		{
 			$sql .= '`distance` ASC';
 		}
@@ -1383,16 +1404,12 @@ function outputSearchForm($options)
 	global $tpl, $login, $opt;
 	global $error_plz, $error_locidnocoords, $error_ort, $error_noort, $error_nofulltext, $error_fulltexttoolong;
 	global $cache_attrib_jsarray_line, $cache_attrib_group, $cache_attrib_img_line1, $cache_attrib_img_line2;
+	global $DEFAULT_SEARCH_DISTANCE;
 
 	$tpl->assign('formmethod', 'get');
 
 	// checkboxen
 	$tpl->assign('logged_in', $login->logged_in());
-
-	$homecoords = ($login->logged_in() && sql_value_slave("SELECT `latitude`+`longitude` FROM user WHERE `user_id`='&1'",  $login->userid) <> 0);
-	if (!$homecoords && isset($options['sort']) && $options['sort'] == 'bydistance')
-		$options['sort'] = 'byname';
-	$tpl->assign('bydistance_enabled', $homecoords);
 
 	if (isset($options['sort']))
 		$bBynameChecked = ($options['sort'] == 'byname');  // Ocprop
@@ -1531,9 +1548,9 @@ function outputSearchForm($options)
 			$tpl->assign('latN_sel', 'selected="selected"');
 		}
 	}
-	$tpl->assign('distance', isset($options['distance']) ? $options['distance'] : 75);
+	$tpl->assign('distance', isset($options['distance']) ? $options['distance'] : $DEFAULT_SEARCH_DISTANCE);
 
-	if (!isset($options['unit'])) $options['unit'] = 'km';
+	if (!isset($options['unit'])) $options['unit'] = $DEFAULT_DISTANCE_UNIT;
 	$tpl->assign('sel_km', $options['unit'] == 'km');
 	$tpl->assign('sel_sm', $options['unit'] == 'sm');
 	$tpl->assign('sel_nm', $options['unit'] == 'nm');

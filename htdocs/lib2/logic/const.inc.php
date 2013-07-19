@@ -60,7 +60,7 @@
 
 	// threshold for caches to be marked as "new"
 	// changed from 7 to 14  -- following 2013/6/17
-	$NEWCACHES_DAYS = 14;
+	define('NEWCACHES_DAYS', 14);
 
 	// constants for user options (must match values in DB!)
 	define('USR_OPT_GMZOOM', 1);

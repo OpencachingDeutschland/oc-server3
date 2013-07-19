@@ -3,7 +3,7 @@
 <!--m-->
 <tr>
   <td width="18" class="{$listcolor}">&nbsp;{$position}&nbsp;</td>
-  <td width="45" class="{$listcolor}">{$cache.distance|sprintf:"%1.1f"|escape}&nbsp;</td>
+  <td width="45" class="{$listcolor}">{if $cache.distance !== null}{$cache.distance|sprintf:"%1.1f"|escape}&nbsp;{/if}</td>
   <td width="32" class="{$listcolor}" rowspan="2"><img src="resource2/{$opt.template.style}/images/cacheicon/{$cache.icon}" title="{$cache.cacheTypeName}"></td>
   <td width="46" class="{$listcolor}" rowspan="2"><nobr>{include file="res_difficon.tpl" difficulty=$cache.difficulty}{include file="res_terricon.tpl" terrain=$cache.terrain}</nobr></td>
   <td width="448" class="{$listcolor}">{if $cache.isnew}<b class="newsymbol">&nbsp;{t}NEW{/t}&nbsp;</b>&nbsp; {/if}<span style="{include file="res_cachestatus_span.tpl" status=$cache.status}"><a href="viewcache.php?cacheid={$cache.cache_id|escape}"><span style="{if $cache.redname}color: #e00000{/if}">{$cache.name|escape}</span></a></span> &nbsp;{t}by{/t} <a href="viewprofile.php?userid={$cache.user_id|escape}">{$cache.username|escape}</a><!-- Ocprop: <a href="viewcache.php?cacheid={$cache.cache_id|escape}">{$cache.name|escape}</a> {t}by{/t} <a href="viewprofile.php?userid={$cache.user_id|escape}">{$cache.username|escape}</a> --></td>

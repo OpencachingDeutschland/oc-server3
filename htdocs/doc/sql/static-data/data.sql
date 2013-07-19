@@ -541,6 +541,7 @@ INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('newcache', '
 INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('newdesc', 'DE', 'Beschreibungstext');
 INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('newlogpics', 'DE', 'Logbild-Galerien');
 INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('newpw', 'DE', 'Passwort');
+INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('oconly', 'DE', 'OConly');
 INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('picture', 'DE', 'Bilder');
 INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('previewpics', 'DE', 'Vorschaubilder');
 INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('query', 'DE', 'Gespeicherte Suchen');

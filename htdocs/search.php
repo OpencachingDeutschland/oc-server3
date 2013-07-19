@@ -460,6 +460,7 @@
 		//      and filtering options
 		//===============================================================
 
+		sql_drop_temp_table_slave('result_caches');
 		$cachesFilter = '';
 
 		if (!isset($options['output'])) $options['output']='';
@@ -522,6 +523,7 @@
 						$rs = sql($sql);
 						if (sql_num_rows($rs) == 0)
 						{
+							sql_free_result($rs);
 							$options['error_plz'] = true;
 							outputSearchForm($options);
 							exit;
@@ -534,6 +536,7 @@
 						}
 						else
 						{
+							sql_free_result($rs);
 							// ok, viele locations ... alle auflisten ...
 							outputLocidSelectionForm($sql, $options);
 							exit;
@@ -565,9 +568,9 @@
 						$lon_rad = $lon * 3.14159 / 180;
 						$lat_rad = $lat * 3.14159 / 180;
 
-						sql_slave("DROP TEMPORARY TABLE IF EXISTS `result_caches`");
+						sql_temp_table_slave('result_caches');
 						$cachesFilter =
-											 'CREATE TEMPORARY TABLE result_caches ENGINE=MEMORY
+											 'CREATE TEMPORARY TABLE &result_caches ENGINE=MEMORY
 												SELECT
 													(' . geomath::getSqlDistanceFormula($lon, $lat, $distance, $multiplier[$distance_unit]) . ') `distance`,
 													`caches`.`cache_id` `cache_id`
@@ -578,11 +581,11 @@
 													AND `latitude` < ' . ($lat + $max_lat_diff) . '
 												HAVING `distance` < ' . ($distance+0);
 						sql_slave($cachesFilter);
-						sql_slave('ALTER TABLE result_caches ADD PRIMARY KEY ( `cache_id` )');
+						sql_slave('ALTER TABLE &result_caches ADD PRIMARY KEY ( `cache_id` )');
 
-						$sql_select[] = '`result_caches`.`cache_id`';
-						$sql_from = '`result_caches`';
-						$sql_innerjoin[] = '`caches` ON `caches`.`cache_id`=`result_caches`.`cache_id`';
+						$sql_select[] = '&result_caches.`cache_id`';
+						$sql_from = '&result_caches';
+						$sql_innerjoin[] = '`caches` ON `caches`.`cache_id`=&result_caches.`cache_id`';
 					}
 					else
 					{
@@ -621,9 +624,10 @@
 						}
 
 						// temporäre tabelle erstellen und dann einträge entfernen, die nicht mindestens so oft vorkommen wie worte gegeben wurden
-						sql_slave('DROP TABLE IF EXISTS `tmpuniids`');
-						sql_slave('CREATE TEMPORARY TABLE `tmpuniids` (`uni_id` int(11) NOT NULL, `cnt` int(11) NOT NULL, `olduni` int(11) NOT NULL, `simplehash` int(11) NOT NULL) ENGINE=MEMORY SELECT `gns_search`.`uni_id` `uni_id`, 0 `cnt`, 0 `olduni`, `simplehash` FROM `gns_search` WHERE ' . $sqlhashes);
-						sql_slave('ALTER TABLE `tmpuniids` ADD INDEX (`uni_id`)');
+						sql_drop_temp_table_slave('tmpuniids');
+						sql_temp_table_slave('tmpuniids');
+						sql_slave('CREATE TEMPORARY TABLE &tmpuniids (`uni_id` int(11) NOT NULL, `cnt` int(11) NOT NULL, `olduni` int(11) NOT NULL, `simplehash` int(11) NOT NULL) ENGINE=MEMORY SELECT `gns_search`.`uni_id` `uni_id`, 0 `cnt`, 0 `olduni`, `simplehash` FROM `gns_search` WHERE ' . $sqlhashes);
+						sql_slave('ALTER TABLE &tmpuniids ADD INDEX (`uni_id`)');
 
 					//	BUGFIX: dieser Code sollte nur ausgeführt werden, wenn mehr als ein Suchbegriff eingegeben wurde
 					//					damit alle Einträge gefiltert, die nicht alle Suchbegriffe enthalten
@@ -631,25 +635,28 @@
 					//          Notwendig, wenn nach Baden gesucht wird => Baden-Baden war doppelt in der Liste
 					//	if ($wordscount > 1)
 					//	{
-							sql_slave('CREATE TEMPORARY TABLE `tmpuniids2` (`uni_id` int(11) NOT NULL, `cnt` int(11) NOT NULL, `olduni` int(11) NOT NULL) ENGINE=MEMORY SELECT `uni_id`, COUNT(*) `cnt`, 0 olduni FROM `tmpuniids` GROUP BY `uni_id` HAVING `cnt` >= ' . $wordscount);
-							sql_slave('ALTER TABLE `tmpuniids2` ADD INDEX (`uni_id`)');
-							sql_slave('DROP TABLE `tmpuniids`');
-							sql_slave('ALTER TABLE `tmpuniids2` RENAME `tmpuniids`');
+							sql_temp_table_slave('tmpuniids2');
+							sql_slave('CREATE TEMPORARY TABLE &tmpuniids2 (`uni_id` int(11) NOT NULL, `cnt` int(11) NOT NULL, `olduni` int(11) NOT NULL) ENGINE=MEMORY SELECT `uni_id`, COUNT(*) `cnt`, 0 olduni FROM &tmpuniids GROUP BY `uni_id` HAVING `cnt` >= ' . $wordscount);
+							sql_slave('ALTER TABLE &tmpuniids2 ADD INDEX (`uni_id`)');
+							sql_drop_temp_table_slave('tmpuniids');
+							sql_rename_temp_table_slave('tmpuniids2', 'tmpuniids');
 					//	}
 
-					//    add: SELECT g2.uni FROM `tmpuniids` JOIN gns_locations g1 ON tmpuniids.uni_id=g1.uni JOIN gns_locations g2 ON g1.ufi=g2.ufi WHERE g1.nt!='N' AND g2.nt='N'
-					// remove: SELECT g1.uni FROM `tmpuniids` JOIN gns_locations g1 ON tmpuniids.uni_id=g1.uni JOIN gns_locations g2 ON g1.ufi=g2.ufi WHERE g1.nt!='N' AND g2.nt='N'
+					//    add: SELECT g2.uni FROM &tmpuniids JOIN gns_locations g1 ON &tmpuniids.uni_id=g1.uni JOIN gns_locations g2 ON g1.ufi=g2.ufi WHERE g1.nt!='N' AND g2.nt='N'
+					// remove: SELECT g1.uni FROM &tmpuniids JOIN gns_locations g1 ON &tmpuniids.uni_id=g1.uni JOIN gns_locations g2 ON g1.ufi=g2.ufi WHERE g1.nt!='N' AND g2.nt='N'
 
 						// und jetzt noch alle englischen bezeichnungen durch deutsche ersetzen (wo möglich) ...
-						sql_slave('CREATE TEMPORARY TABLE `tmpuniidsAdd` (`uni` int(11) NOT NULL, `olduni` int(11) NOT NULL, PRIMARY KEY  (`uni`)) ENGINE=MEMORY SELECT g2.uni uni, g1.uni olduni FROM `tmpuniids` JOIN gns_locations g1 ON tmpuniids.uni_id=g1.uni JOIN gns_locations g2 ON g1.ufi=g2.ufi WHERE g1.nt!=\'N\' AND g2.nt=\'N\' GROUP BY uni');
-						sql_slave('CREATE TEMPORARY TABLE `tmpuniidsRemove` (`uni` int(11) NOT NULL, PRIMARY KEY  (`uni`)) ENGINE=MEMORY SELECT DISTINCT g1.uni uni FROM `tmpuniids` JOIN gns_locations g1 ON tmpuniids.uni_id=g1.uni JOIN gns_locations g2 ON g1.ufi=g2.ufi WHERE g1.nt!=\'N\' AND g2.nt=\'N\'');
-						sql_slave('DELETE FROM tmpuniids WHERE uni_id IN (SELECT uni FROM tmpuniidsRemove)');
-						sql_slave('DELETE FROM tmpuniidsAdd WHERE uni IN (SELECT uni_id FROM tmpuniids)');
-						sql_slave('INSERT INTO tmpuniids (uni_id, olduni) SELECT uni, olduni FROM tmpuniidsAdd');
-						sql_slave('DROP TABLE tmpuniidsAdd');
-						sql_slave('DROP TABLE tmpuniidsRemove');
+						sql_temp_table_slave('tmpuniidsAdd');
+						sql_slave('CREATE TEMPORARY TABLE &tmpuniidsAdd (`uni` int(11) NOT NULL, `olduni` int(11) NOT NULL, PRIMARY KEY  (`uni`)) ENGINE=MEMORY SELECT g2.uni uni, g1.uni olduni FROM &tmpuniids JOIN gns_locations g1 ON &tmpuniids.uni_id=g1.uni JOIN gns_locations g2 ON g1.ufi=g2.ufi WHERE g1.nt!=\'N\' AND g2.nt=\'N\' GROUP BY uni');
+						sql_temp_table_slave('tmpuniidsRemove');
+						sql_slave('CREATE TEMPORARY TABLE &tmpuniidsRemove (`uni` int(11) NOT NULL, PRIMARY KEY  (`uni`)) ENGINE=MEMORY SELECT DISTINCT g1.uni uni FROM &tmpuniids JOIN gns_locations g1 ON &tmpuniids.uni_id=g1.uni JOIN gns_locations g2 ON g1.ufi=g2.ufi WHERE g1.nt!=\'N\' AND g2.nt=\'N\'');
+						sql_slave('DELETE FROM &tmpuniids WHERE uni_id IN (SELECT uni FROM &tmpuniidsRemove)');
+						sql_slave('DELETE FROM &tmpuniidsAdd WHERE uni IN (SELECT uni_id FROM &tmpuniids)');
+						sql_slave('INSERT INTO &tmpuniids (uni_id, olduni) SELECT uni, olduni FROM &tmpuniidsAdd');
+						sql_drop_temp_table_slave('tmpuniidsAdd');
+						sql_drop_temp_table_slave('tmpuniidsRemove');
 
-						$rs = sql_slave('SELECT `uni_id` FROM tmpuniids');
+						$rs = sql_slave('SELECT `uni_id` FROM &tmpuniids');
 						if (sql_num_rows($rs) == 0)
 						{
 							sql_free_result($rs);
@@ -671,13 +678,13 @@
 
 							if (mb_strtolower($rCmp['full_name']) != mb_strtolower($ort))
 							{
-								outputUniidSelectionForm('SELECT `uni_id`, `olduni` FROM `tmpuniids`', $options);
+								outputUniidSelectionForm('SELECT `uni_id`, `olduni` FROM `&tmpuniids`', $options);
 							}
 						}
 						else
 						{
 							sql_free_result($rs);
-							outputUniidSelectionForm('SELECT `uni_id`, `olduni` FROM `tmpuniids`', $options);
+							outputUniidSelectionForm('SELECT `uni_id`, `olduni` FROM `&tmpuniids`', $options);
 							exit;
 						}
 					}
@@ -708,9 +715,9 @@
 						//TODO: check!!!
 						$max_lon_diff = $distance * 180 / (abs(sin((90 - $lat) * 3.14159 / 180 )) * 6378 * $multiplier[$distance_unit] * 3.14159);
 
-						sql_slave("DROP TEMPORARY TABLE IF EXISTS `result_caches`");
+						sql_temp_table_slave('result_caches');
 						$cachesFilter =
-											 'CREATE TEMPORARY TABLE result_caches ENGINE=MEMORY
+											 'CREATE TEMPORARY TABLE &result_caches ENGINE=MEMORY
 												SELECT
 													(' . geomath::getSqlDistanceFormula($lon, $lat, $distance, $multiplier[$distance_unit]) . ') `distance`,
 													`caches`.`cache_id` `cache_id`
@@ -721,11 +728,11 @@
 													AND `latitude` < ' . ($lat + $max_lat_diff) . '
 												HAVING `distance` < ' . ($distance+0);
 						sql_slave($cachesFilter);
-						sql_slave('ALTER TABLE result_caches ADD PRIMARY KEY ( `cache_id` )');
+						sql_slave('ALTER TABLE &result_caches ADD PRIMARY KEY ( `cache_id` )');
 
-						$sql_select[] = '`result_caches`.`cache_id`';
-						$sql_from = '`result_caches`';
-						$sql_innerjoin[] = '`caches` ON `caches`.`cache_id`=`result_caches`.`cache_id`';
+						$sql_select[] = '&result_caches.`cache_id`';
+						$sql_from = '&result_caches';
+						$sql_innerjoin[] = '`caches` ON `caches`.`cache_id`=&result_caches.`cache_id`';
 					}
 					else
 					{
@@ -828,9 +835,9 @@
 				$lon_rad = $lon * 3.14159 / 180;
 				$lat_rad = $lat * 3.14159 / 180;
 
-				sql_slave("DROP TEMPORARY TABLE IF EXISTS `result_caches`");
+				sql_temp_table_slave('result_caches');
 				$cachesFilter =
-									 'CREATE TEMPORARY TABLE result_caches ENGINE=MEMORY
+									 'CREATE TEMPORARY TABLE &result_caches ENGINE=MEMORY
 										SELECT
 											(' . geomath::getSqlDistanceFormula($lon, $lat, $distance, $multiplier[$distance_unit]) . ') `distance`,
 											`caches`.`cache_id` `cache_id`
@@ -841,11 +848,11 @@
 											AND `latitude` < ' . ($lat + $max_lat_diff) . '
 										HAVING `distance` < ' . ($distance+0);
 				sql_slave($cachesFilter);
-				sql_slave('ALTER TABLE result_caches ADD PRIMARY KEY ( `cache_id` )');
+				sql_slave('ALTER TABLE &result_caches ADD PRIMARY KEY ( `cache_id` )');
 
-				$sql_select[] = '`result_caches`.`cache_id`';
-				$sql_from = '`result_caches`';
-				$sql_innerjoin[] = '`caches` ON `caches`.`cache_id`=`result_caches`.`cache_id`';
+				$sql_select[] = '&result_caches.`cache_id`';
+				$sql_from = '&result_caches';
+				$sql_innerjoin[] = '`caches` ON `caches`.`cache_id`=&result_caches.`cache_id`';
 			}
 			elseif ($options['searchtype'] == 'bycacheid')
 			{
@@ -911,7 +918,9 @@
 						' INNER JOIN ' . implode(' INNER JOIN ', $sql_innerjoin) .
 						' WHERE ' . implode(' AND ', $sql_where);
 
-				sql_slave('CREATE TEMPORARY TABLE `tmpFTCaches` (`cache_id` int (11) PRIMARY KEY) ' . $sqlFilter);
+				sql_drop_temp_table_slave('tmpFTCaches');
+				sql_temp_table_slave('tmpFTCaches');
+				sql_slave('CREATE TEMPORARY TABLE &tmpFTCaches (`cache_id` int (11) PRIMARY KEY) ' . $sqlFilter);
 
 				$sql_select = array();
 				$sql_from = '';
@@ -920,8 +929,8 @@
 				$sql_where = array();
 
 				$sql_select[] = '`caches`.`cache_id` `cache_id`';
-				$sql_from = '`tmpFTCaches`';
-				$sql_innerjoin[] = '`caches` ON `caches`.`cache_id`=`tmpFTCaches`.`cache_id`';
+				$sql_from = '&tmpFTCaches';
+				$sql_innerjoin[] = '`caches` ON `caches`.`cache_id`=&tmpFTCaches.`cache_id`';
 			}
 			elseif ($options['searchtype'] == 'bynofilter')
 			{
@@ -1233,15 +1242,19 @@
 			//  X8a. run query and output for file downloads (GPX, KML, OVL ...)
 			//===================================================================
 
-			sql_slave('CREATE TEMPORARY TABLE `searchtmp` SELECT ' . $sql . $sqlLimit);
+			sql_drop_temp_table_slave('searchtmp');
+				// for the case something went wrong and it was not propery cleaned up
 
-			$count = sql_value_slave('SELECT COUNT(*) FROM `searchtmp`',0);
+			sql_temp_table_slave('searchtmp');
+			sql_slave('CREATE TEMPORARY TABLE &searchtmp SELECT ' . $sql . $sqlLimit);
+
+			$count = sql_value_slave('SELECT COUNT(*) FROM &searchtmp',0);
 			if ($count == 1)
 			{
 				$sFilebasename = sql_value_slave('
 					SELECT `caches`.`wp_oc`
-					FROM `searchtmp`, `caches`
-					WHERE `searchtmp`.`cache_id`=`caches`.`cache_id` LIMIT 1',
+					FROM &searchtmp, `caches`
+					WHERE &searchtmp.`cache_id`=`caches`.`cache_id` LIMIT 1',
 					'?'
 				);
 			}
@@ -1293,7 +1306,7 @@
 			$content = '';
 			search_output();
 
-			sql_slave('DROP TABLE `searchtmp`');
+			sql_drop_temp_table_slave('searchtmp');
 
 			// output zip file
 			if ($bUseZip && !$db['debug'])
@@ -1863,14 +1876,15 @@ function outputUniidSelectionForm($uniSql, $options)
 
 	$urlparamString = prepareLocSelectionForm($options);
 
-	sql_slave('CREATE TEMPORARY TABLE `uniids` ENGINE=MEMORY ' . $uniSql);
-	sql_slave('ALTER TABLE `uniids` ADD PRIMARY KEY (`uni_id`)');
+	sql_temp_table_slave('uniids');
+	sql_slave('CREATE TEMPORARY TABLE &uniids ENGINE=MEMORY ' . $uniSql);
+	sql_slave('ALTER TABLE &uniids ADD PRIMARY KEY (`uni_id`)');
 
 	// locidsite
 	$locidsite = isset($_REQUEST['locidsite']) ? $_REQUEST['locidsite'] : 0;
 	if (!is_numeric($locidsite)) $locidsite = 0;
 
-	$count = sql_value_slave('SELECT COUNT(*) FROM `uniids`',0);
+	$count = sql_value_slave('SELECT COUNT(*) FROM &uniids',0);
 	$tpl->assign('resultscount', $count);
 
 	// create page browser
@@ -1878,7 +1892,7 @@ function outputUniidSelectionForm($uniSql, $options)
 	$pager->make_from_offset($locidsite, ceil($count/20), 1);
 
 	// create locations list
-	$rs = sql_slave('SELECT `gns_locations`.`rc` `rc`, `gns_locations`.`cc1` `cc1`, `gns_locations`.`admtxt1` `admtxt1`, `gns_locations`.`admtxt2` `admtxt2`, `gns_locations`.`admtxt3` `admtxt3`, `gns_locations`.`admtxt4` `admtxt4`, `gns_locations`.`uni` `uni_id`, `gns_locations`.`lon` `lon`, `gns_locations`.`lat` `lat`, `gns_locations`.`full_name` `full_name`, `uniids`.`olduni` `olduni` FROM `gns_locations`, `uniids` WHERE `uniids`.`uni_id`=`gns_locations`.`uni` ORDER BY `gns_locations`.`full_name` ASC LIMIT ' . ($locidsite * 20) . ', 20');
+	$rs = sql_slave('SELECT `gns_locations`.`rc` `rc`, `gns_locations`.`cc1` `cc1`, `gns_locations`.`admtxt1` `admtxt1`, `gns_locations`.`admtxt2` `admtxt2`, `gns_locations`.`admtxt3` `admtxt3`, `gns_locations`.`admtxt4` `admtxt4`, `gns_locations`.`uni` `uni_id`, `gns_locations`.`lon` `lon`, `gns_locations`.`lat` `lat`, `gns_locations`.`full_name` `full_name`, &uniids.`olduni` `olduni` FROM `gns_locations`, &uniids WHERE &uniids.`uni_id`=`gns_locations`.`uni` ORDER BY `gns_locations`.`full_name` ASC LIMIT ' . ($locidsite * 20) . ', 20');
 
 	$nr = $locidsite * 20 + 1;
 	$locations = '';
@@ -1939,6 +1953,7 @@ function outputUniidSelectionForm($uniSql, $options)
 		$locations .= $thislocation . "\n";
 	}
 	sql_free_result($rs);
+	sql_drop_temp_table_slave('uniids');
 
 	$tpl->assign('locations', $locations);
 
@@ -1956,10 +1971,11 @@ function outputLocidSelectionForm($locSql, $options)
 
 	$urlparamString = prepareLocSelectionForm($options) . '&locid={locid}';
 
-	sql_slave('CREATE TEMPORARY TABLE `locids` ENGINE=MEMORY ' . $locSql);
-	sql_slave('ALTER TABLE `locids` ADD PRIMARY KEY (`loc_id`)');
+	sql_temp_table_slave('locids');
+	sql_slave('CREATE TEMPORARY TABLE &locids ENGINE=MEMORY ' . $locSql);
+	sql_slave('ALTER TABLE &locids ADD PRIMARY KEY (`loc_id`)');
 
-	$rs = sql_slave('SELECT `geodb_textdata`.`loc_id` `loc_id`, `geodb_textdata`.`text_val` `text_val` FROM `geodb_textdata`, `locids` WHERE `locids`.`loc_id`=`geodb_textdata`.`loc_id` AND `geodb_textdata`.`text_type`=500100000 ORDER BY `text_val`');
+	$rs = sql_slave('SELECT `geodb_textdata`.`loc_id` `loc_id`, `geodb_textdata`.`text_val` `text_val` FROM `geodb_textdata`, &locids WHERE &locids.`loc_id`=`geodb_textdata`.`loc_id` AND `geodb_textdata`.`text_type`=500100000 ORDER BY `text_val`');
 
 	$nr = 1;
 	$locations = '';
@@ -2008,6 +2024,9 @@ function outputLocidSelectionForm($locSql, $options)
 
 	$tpl->assign('resultscount', sql_num_rows($rs));
 	$tpl->assign('pages', '');
+
+	sql_free_result($rs);
+	sql_drop_temp_table_slave('locids');
 
 	$tpl->display();
 	exit;

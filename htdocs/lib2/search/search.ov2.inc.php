@@ -32,9 +32,9 @@ function search_output()
 
 	$sql = '
 		SELECT
-			`searchtmp`.`cache_id` `cacheid`,
-			`searchtmp`.`longitude`,
-			`searchtmp`.`latitude`,
+			&searchtmp.`cache_id` `cacheid`,
+			&searchtmp.`longitude`,
+			&searchtmp.`latitude`,
 			`caches`.`name`,
 			`caches`.`wp_oc`,
 			`caches`.`terrain`,
@@ -43,16 +43,16 @@ function search_output()
 			`cache_size`.`de` `sizedesc`,
 			`user`.`username`
 		FROM
-			`searchtmp`,
+			&searchtmp,
 			`caches`,
 			`cache_type`,
 			`cache_size`,
 			`user`
 		WHERE
-			`searchtmp`.`cache_id`=`caches`.`cache_id` AND
-			`searchtmp`.`type`=`cache_type`.`id` AND
-			`searchtmp`.`size`=`cache_size`.`id` AND
-			`searchtmp`.`user_id`=`user`.`user_id`';
+			&searchtmp.`cache_id`=`caches`.`cache_id` AND
+			&searchtmp.`type`=`cache_type`.`id` AND
+			&searchtmp.`size`=`cache_size`.`id` AND
+			&searchtmp.`user_id`=`user`.`user_id`';
 
 	$rs = sql_slave($sql, $sqldebug);
 

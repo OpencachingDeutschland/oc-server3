@@ -47,20 +47,20 @@ function search_output()
 
 	$rs = sql_slave('
 		SELECT SQL_BUFFER_RESULT
-			`searchtmp`.`cache_id` `cacheid`,
-			`searchtmp`.`longitude`,
-			`searchtmp`.`latitude`,
+			&searchtmp.`cache_id` `cacheid`,
+			&searchtmp.`longitude`,
+			&searchtmp.`latitude`,
 			`caches`.`name`,
 			`caches`.`status`,
 			`caches`.`wp_oc` `waypoint`,
 			`user`.`username` `username`
 		FROM
-			`searchtmp`,
+			&searchtmp,
 			`caches`,
 			`user`
 		WHERE
-			`searchtmp`.`cache_id`=`caches`.`cache_id` AND
-			`searchtmp`.`user_id`=`user`.`user_id`');
+			&searchtmp.`cache_id`=`caches`.`cache_id` AND
+			&searchtmp.`user_id`=`user`.`user_id`');
 
 	while ($r = sql_fetch_array($rs))
 	{

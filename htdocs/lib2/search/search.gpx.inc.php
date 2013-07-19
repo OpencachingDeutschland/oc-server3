@@ -165,7 +165,7 @@ function search_output()
 
 	$childwphandler = new ChildWp_Handler();
 	$children='';
-	$rs = sql('SELECT `searchtmp`.`cache_id` `cacheid` FROM `searchtmp`');
+	$rs = sql('SELECT &searchtmp.`cache_id` `cacheid` FROM &searchtmp');
 	while ($r = sql_fetch_array($rs) && $children == '')
 	{
 		if (count($childwphandler->getChildWps($r['cacheid'])))
@@ -179,19 +179,19 @@ function search_output()
 
 	$user_id = $login->userid;
 
-	$rs = sql_slave("SELECT SQL_BUFFER_RESULT `searchtmp`.`cache_id` `cacheid`, `searchtmp`.`longitude` `longitude`, `searchtmp`.`latitude` `latitude`,
+	$rs = sql_slave("SELECT SQL_BUFFER_RESULT &searchtmp.`cache_id` `cacheid`, &searchtmp.`longitude` `longitude`, &searchtmp.`latitude` `latitude`,
 							`cache_location`.`adm2` `state`, `caches`.`wp_oc` `waypoint`, `caches`.`date_hidden` `date_hidden`, `caches`.`name` `name`,
 							`caches`.`country` `country`, `countries`.`name` AS `country_name`, `caches`.`terrain` `terrain`, `caches`.`difficulty` `difficulty`, `caches`.`desc_languages` `desc_languages`,
 							`caches`.`size` `size`, `caches`.`type` `type`, `caches`.`status` `status`, `user`.`username` `username`, `caches`.`user_id` `userid`, `user`.`data_license`,
 							`cache_desc`.`desc` `desc`, `cache_desc`.`short_desc` `short_desc`, `cache_desc`.`hint` `hint`,
 							IFNULL(`stat_cache_logs`.`found`, 0) AS `found`
-						FROM `searchtmp`
-							INNER JOIN `caches` ON `searchtmp`.`cache_id`=`caches`.`cache_id`
+						FROM &searchtmp
+							INNER JOIN `caches` ON &searchtmp.`cache_id`=`caches`.`cache_id`
 							INNER JOIN `countries` ON `caches`.`country`=`countries`.`short`
-							INNER JOIN `user` ON `searchtmp`.`user_id`=`user`.`user_id`
+							INNER JOIN `user` ON &searchtmp.`user_id`=`user`.`user_id`
 							INNER JOIN `cache_desc` ON `caches`.`cache_id`=`cache_desc`.`cache_id`AND `caches`.`default_desclang`=`cache_desc`.`language`
-							LEFT JOIN `cache_location` ON `searchtmp`.`cache_id`=`cache_location`.`cache_id`
-							LEFT JOIN `stat_cache_logs` ON `searchtmp`.`cache_id`=`stat_cache_logs`.`cache_id` AND `stat_cache_logs`.`user_id`='&1'", $user_id);
+							LEFT JOIN `cache_location` ON &searchtmp.`cache_id`=`cache_location`.`cache_id`
+							LEFT JOIN `stat_cache_logs` ON &searchtmp.`cache_id`=`stat_cache_logs`.`cache_id` AND `stat_cache_logs`.`user_id`='&1'", $user_id);
 
 	while ($r = sql_fetch_array($rs))
 	{

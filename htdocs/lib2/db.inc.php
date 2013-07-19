@@ -247,7 +247,8 @@
 					$arg = '';
 					
 					// find next non-alphanumeric char
-					while (preg_match('/^[a-zA-Z0-9]{1}/', $nextchar) == 1)
+					// (added '_' - it is used in temptable names - following 2013/07/18)
+					while (preg_match('/^[a-zA-Z0-9_]{1}/', $nextchar) == 1)
 					{
 						$arg .= $nextchar;
 						
@@ -671,6 +672,19 @@
 		unset($db['temptables'][$table]);
 	}
 
+	function sql_rename_temp_table($table, $newname)
+	{
+		global $db, $opt;
+
+		if ($opt['db']['pconnect'] == true)
+			sqlf("UPDATE &db.`sys_temptables` SET `name`='&3' WHERE `threadid`='&1' AND `name`='&2'", mysql_thread_id($db['dblink']), $table, $newname);
+
+		sqlf('ALTER TABLE &tmpdb.`&1` RENAME &tmpdb.`&2`', $table, $newname);
+
+		unset($db['temptables'][$table]);
+		$db['temptables'][$newname] = $newname;
+	}
+
 	function sql_drop_temp_table_slave($table)
 	{
 		global $db, $opt;
@@ -682,6 +696,21 @@
 
 		unset($db['temptables'][$table]);
 		unset($db['temptables_slave'][$table]);
+	}
+
+	function sql_rename_temp_table_slave($table, $newname)
+	{
+		global $db, $opt;
+
+		if ($opt['db']['pconnect'] == true)
+			sqlf("UPDATE &db.`sys_temptables` SET `name`='&3' WHERE `threadid`='&1' AND `name`='&2'", mysql_thread_id($db['dblink']), $table, $newname);
+
+		sqlf_slave('ALTER TABLE &tmpdb.`&1` RENAME &tmpdb.`&2`', $table, $newname);
+
+		unset($db['temptables'][$table]);
+		unset($db['temptables_slave'][$table]);
+		$db['temptables'][$newname] = $newname;
+		$db['temptables_slave'][$newname] = $newname;
 	}
 
 	//database handling

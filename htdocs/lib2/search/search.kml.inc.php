@@ -50,7 +50,7 @@ function search_output()
 			MIN(`latitude`) `minlat`,
 			MAX(`latitude`) `maxlat`
 		FROM
-			`searchtmp`');
+			&searchtmp');
 	$rMinMax = sql_fetch_array($rsMinMax);
 	mysql_free_result($rsMinMax);
 
@@ -75,10 +75,10 @@ function search_output()
 
 	$rs = sql_slave('
 		SELECT SQL_BUFFER_RESULT
-			`searchtmp`.`cache_id` `cacheid`,
-			`searchtmp`.`longitude`,
-			`searchtmp`.`latitude`,
-			`searchtmp`.`type`,
+			&searchtmp.`cache_id` `cacheid`,
+			&searchtmp.`longitude`,
+			&searchtmp.`latitude`,
+			&searchtmp.`type`,
 			`caches`.`date_hidden`,
 			`caches`.`name`,
 			`caches`.`status`,
@@ -88,16 +88,16 @@ function search_output()
 			`caches`.`difficulty`,
 			`user`.`username`
 		FROM
-			`searchtmp`,
+			&searchtmp,
 			`caches`,
 			`cache_type`,
 			`cache_size`,
 			`user`
 		WHERE
-			`searchtmp`.`cache_id`=`caches`.`cache_id` AND
-			`searchtmp`.`type`=`cache_type`.`id` AND
-			`searchtmp`.`size`=`cache_size`.`id` AND
-			`searchtmp`.`user_id`=`user`.`user_id`');
+			&searchtmp.`cache_id`=`caches`.`cache_id` AND
+			&searchtmp.`type`=`cache_type`.`id` AND
+			&searchtmp.`size`=`cache_size`.`id` AND
+			&searchtmp.`user_id`=`user`.`user_id`');
 
 	while ($r = sql_fetch_array($rs))
 	{

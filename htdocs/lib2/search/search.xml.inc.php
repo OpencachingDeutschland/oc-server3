@@ -46,12 +46,13 @@ function search_output()
 ";
 
 	// create temporary table
-	sql_slave('CREATE TEMPORARY TABLE `searchtmp`
+	sql_temp_table_slave('searchtmp');
+	sql_slave('CREATE TEMPORARY TABLE &searchtmp
 	           SELECT SQL_BUFFER_RESULT SQL_CALC_FOUND_ROWS ' . $sql . $sqlLimit);
 
 	$resultcount = sql_value_slave('SELECT FOUND_ROWS()', 0);
 
-	$rsCount = sql_slave('SELECT COUNT(*) `count` FROM `searchtmp`');
+	$rsCount = sql_slave('SELECT COUNT(*) `count` FROM &searchtmp');
 	$rCount = sql_fetch_array($rsCount);
 	mysql_free_result($rsCount);
 
@@ -72,9 +73,9 @@ function search_output()
 		echo "	</docinfo>\n";
 	}
 
-	$rs = sql_slave("SELECT `searchtmp`.`cache_id` `cacheid`,
-	                        `searchtmp`.`longitude` `longitude`,
-	                        `searchtmp`.`latitude` `latitude`,
+	$rs = sql_slave("SELECT &searchtmp.`cache_id` `cacheid`,
+	                        &searchtmp.`longitude` `longitude`,
+	                        &searchtmp.`latitude` `latitude`,
 	                        `caches`.`wp_oc` `waypoint`,
 	                        `caches`.`date_hidden` `date_hidden`,
 	                        `caches`.`name` `name`,
@@ -94,11 +95,11 @@ function search_output()
 	                        `cache_desc`.`short_desc` `short_desc`,
 	                        `cache_desc`.`hint` `hint`,
 	                        `cache_desc`.`desc_html` `html`,
-	                        `searchtmp`.`distance` `distance`,
+	                        &searchtmp.`distance` `distance`,
 	                        `sys_trans_text`.`text` `country`
-	                   FROM `searchtmp`
-	             INNER JOIN `caches` ON `searchtmp`.`cache_id`=`caches`.`cache_id`
-	             INNER JOIN `user` ON `searchtmp`.`user_id`=`user`.`user_id`
+	                   FROM &searchtmp
+	             INNER JOIN `caches` ON &searchtmp.`cache_id`=`caches`.`cache_id`
+	             INNER JOIN `user` ON &searchtmp.`user_id`=`user`.`user_id`
 	             INNER JOIN `cache_desc` ON `caches`.`cache_id`=`cache_desc`.`cache_id` AND `caches`.`default_desclang`=`cache_desc`.`language`
 	             INNER JOIN `cache_type` ON `caches`.`type`=`cache_type`.`id`
 	             INNER JOIN `cache_status` ON `caches`.`status`=`cache_status`.`id`
@@ -169,7 +170,7 @@ function search_output()
 			echo $thisline;
 	}
 	mysql_free_result($rs);
-	sql_slave('DROP TABLE `searchtmp`');
+	sql_drop_temp_table_slave('searchtmp');
 
 	if (!$db['debug'])
 		echo "</result>\n";

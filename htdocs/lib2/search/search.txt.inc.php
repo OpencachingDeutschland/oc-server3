@@ -57,9 +57,9 @@ Logeinträge:
 
 	$rs = sql_slave('
 		SELECT SQL_BUFFER_RESULT
-			`searchtmp`.`cache_id` `cacheid`,
-			`searchtmp`.`longitude` `longitude`,
-			`searchtmp`.`latitude` `latitude`,
+			&searchtmp.`cache_id` `cacheid`,
+			&searchtmp.`longitude` `longitude`,
+			&searchtmp.`latitude` `latitude`,
 			`caches`.`wp_oc` `waypoint`,
 			`caches`.`date_hidden` `date_hidden`,
 			`caches`.`name` `name`,
@@ -79,8 +79,8 @@ Logeinträge:
 			`user`.`username`,
 			`user`.`data_license`
 		FROM
-			`searchtmp`
-			INNER JOIN `caches` ON `searchtmp`.`cache_id`=`caches`.`cache_id`
+			&searchtmp
+			INNER JOIN `caches` ON &searchtmp.`cache_id`=`caches`.`cache_id`
 			INNER JOIN `cache_desc` ON `cache_desc`.`cache_id`=`caches`.`cache_id`
              AND `caches`.`default_desclang`=`cache_desc`.`language`
  			INNER JOIN `cache_type` ON `cache_type`.`id`=`caches`.`type`

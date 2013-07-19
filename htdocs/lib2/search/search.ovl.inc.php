@@ -32,15 +32,15 @@ function search_output()
 	$nr = 1;
 	$rs = sql_slave('
 		SELECT SQL_BUFFER_RESULT
-			`searchtmp`.`cache_id` `cacheid`,
-			`searchtmp`.`longitude`,
-			`searchtmp`.`latitude`,
+			&searchtmp.`cache_id` `cacheid`,
+			&searchtmp.`longitude`,
+			&searchtmp.`latitude`,
 			`caches`.`name`
 		FROM
-			`searchtmp`,
+			&searchtmp,
 			`caches`
 		WHERE
-			`searchtmp`.`cache_id`=`caches`.`cache_id`');
+			&searchtmp.`cache_id`=`caches`.`cache_id`');
 
 	while ($r = sql_fetch_array($rs))
 	{

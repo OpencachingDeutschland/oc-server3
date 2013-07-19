@@ -29,18 +29,19 @@
 
 	//get last logs
 	$tpl->assign_rs('logs', sql("SELECT `cache_logs`.`cache_id` `cacheid`, `cache_logs`.`type` `type`, `cache_logs`.`date` `date`, `caches`.`name` `name`,
-	                                    `user`.`user_id` AS `userid`, `user`.`username`, `caches`.`wp_oc`
-	                               FROM `cache_logs`, `caches`, `user`
+	                                    `user`.`user_id` AS `userid`, `user`.`username`, `caches`.`wp_oc`, `ca`.`attrib_id` IS NOT NULL AS `oconly`
+	                               FROM `cache_logs`
+	                         INNER JOIN `caches` ON `cache_logs`.`cache_id`=`caches`.`cache_id`
+	                         INNER JOIN `user` ON `caches`.`user_id`=`user`.`user_id`
+	                          LEFT JOIN `caches_attributes` `ca` ON `ca`.`cache_id`=`caches`.`cache_id` AND `ca`.`attrib_id`=6
 	                              WHERE `cache_logs`.`user_id`='&1'
-	                                AND `cache_logs`.`cache_id`=`caches`.`cache_id`
-	                                AND `caches`.`user_id`=`user`.`user_id`
 	                           ORDER BY `cache_logs`.`date` DESC, `cache_logs`.`date_created` DESC LIMIT 10", $login->userid));
 
 	//get last hidden caches
 	$tpl->assign_rs('caches', sql("SELECT `caches`.`cache_id`, `caches`.`name`, `caches`.`type`,
 		                                    `caches`.`date_hidden`, `caches`.`status`, `caches`.`wp_oc`,
 		                                    `found`,
-		                                    /* COUNT(*) as `logcount`, */
+		                                    `ca`.`attrib_id` IS NOT NULL AS `oconly`,
 		                                    MAX(`cache_logs`.`date`) AS `lastlog`,
 		                                    (SELECT `type` FROM `cache_logs` `cl2`
 																				 WHERE `cl2`.`cache_id`=`caches`.`cache_id`
@@ -48,6 +49,7 @@
 	                                 FROM `caches`
 	                            LEFT JOIN `stat_caches` ON `stat_caches`.`cache_id`=`caches`.`cache_id`
 	                            LEFT JOIN `cache_logs` ON `cache_logs`.`cache_id`=`caches`.`cache_id`
+	                            LEFT JOIN `caches_attributes` `ca` ON `ca`.`cache_id`=`caches`.`cache_id` AND `ca`.`attrib_id`=6
 	                                WHERE `caches`.`user_id`='&1'
 	                                  AND `caches`.`status` != 5
 	                             GROUP BY `caches`.`cache_id`

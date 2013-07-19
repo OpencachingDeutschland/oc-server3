@@ -74,7 +74,7 @@ function myHomeLoad()
 			<tr>
 				<td>{include file="res_logtype.tpl" type=$logItem.type}</td>
 				<td style="white-space:nowrap; text-align:center">{$logItem.date|date_format:$opt.format.datelong}</td>
-				<td><a href="viewcache.php?wp={$logItem.wp_oc}">{$logItem.name|escape}</a> {t}by{/t} <a href="viewprofile.php?userid={$logItem.userid}">{$logItem.username|escape}</a></td>
+				<td><a href="viewcache.php?wp={$logItem.wp_oc}">{$logItem.name|escape}</a> {include file="res_oconly.tpl" oconly=$logItem.oconly} {t}by{/t} <a href="viewprofile.php?userid={$logItem.userid}">{$logItem.username|escape}</a></td>
 			</tr>
 		{foreachelse}
 			<tr><td>{t}No entries found{/t}</td></tr>
@@ -144,7 +144,7 @@ function myHomeLoad()
 				{assign var="listcolor" value=""}
 			{/if}
 			<tr {if $cacheItem.status>2}name="row_archived"{/if}>
-				<td>{include file="res_cacheicon_22.tpl" cachetype=$cacheItem.type}</td>
+				<td>{include file="res_cacheicon_22.tpl" cachetype=$cacheItem.type} {include file="res_oconly.tpl" oconly=$cacheItem.oconly size="15x21"}</td>
 				<td class="{$listcolor}" style="text-align:center"><nobr>{$cacheItem.date_hidden|date_format:$opt.format.datelong}&nbsp;</nobr></td>
 				<td class="{$listcolor}">{include file="res_cachestatus.tpl" status=$cacheItem.status}</td>
 				<td class="{$listcolor}" style="{if strlen($cacheItem.name) < 45}white-space:nowrap;{/if}min-width:300px;max-width:{if $dotfill==''}400{else}300{/if}px;overflow:hidden;"><a href="viewcache.php?wp={$cacheItem.wp_oc}">{$cacheItem.name|escape}</a>{if strlen($cacheItem.name) < 45} &nbsp;&nbsp; <span style="color:#b0b0b0">{$dotfill}</span>{/if}</td>
@@ -161,7 +161,7 @@ function myHomeLoad()
 			</tr>
 			{foreach from=$notpublished item=notpublishedItem}
 				<tr>
-					<td>{include file="res_cacheicon_22.tpl" cachetype=$notpublishedItem.type}</td>
+					<td>{include file="res_cacheicon_22.tpl" cachetype=$notpublishedItem.type} {include file="res_oconly.tpl" oconly=$cacheItem.oconly size="15x21"}</td>
 					<td>{$notpublishedItem.date_activate|date_format:$opt.format.datelong}</td>
 					<td>{include file="res_cachestatus.tpl" status=$notpublishedItem.status}</td>
 					<td><a href="viewcache.php?wp={$notpublishedItem.wp_oc}">{$notpublishedItem.name|escape}</a></td>

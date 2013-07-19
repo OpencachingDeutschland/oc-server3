@@ -18,11 +18,12 @@
 	$tpl->assign('userid', $userid);
 	$tpl->assign('username', $sUsername);
 
-	$rs = sql("SELECT `cache_rating`.`cache_id` AS `cacheid`, `caches`.`name` AS `cachename`, `user`.`username` AS `ownername`, `caches`.`type` AS `type`, `caches`.`status` AS `status`
+	$rs = sql("SELECT `cache_rating`.`cache_id` AS `cacheid`, `caches`.`name` AS `cachename`, `user`.`username` AS `ownername`, `caches`.`type` AS `type`, `caches`.`status` AS `status`, `ca`.`attrib_id` IS NOT NULL AS `oconly`
 	             FROM `cache_rating` 
 	       INNER JOIN `caches` ON `cache_rating`.`cache_id` = `caches`.`cache_id`
 	       INNER JOIN `user` ON `caches`.`user_id`=`user`.`user_id`
 	       INNER JOIN `cache_status` ON `caches`.`status`=`cache_status`.`id`
+	        LEFT JOIN `caches_attributes` `ca` ON `ca`.`cache_id`=`caches`.`cache_id` AND `ca`.`attrib_id`=6
 	            WHERE `cache_status`.`allow_user_view`=1
 	              AND `cache_rating`.`user_id`='&1' 
 	         ORDER BY `caches`.`name` ASC", $userid);

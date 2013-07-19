@@ -4,5 +4,5 @@
 *  Unicode Reminder メモ
 ***************************************************************************}
 {if $oconly}
-	{if $opt.help.oconly != ''}{$opt.help.oconly}{/if}<img src="resource2/ocstyle/images/misc/15x15-oc.png" width="15" height="15" >{if $opt.help.oconly != ''}</a>{/if}
+	{if $opt.help.oconly != ''}{$opt.help.oconly}{/if}{if $size=='15x21'}<img src="resource2/ocstyle/images/misc/15x21-oc.png" width="15" height="21" >{else}<img src="resource2/ocstyle/images/misc/15x15-oc.png" width="15" height="15" >{/if}{if $opt.help.oconly != ''}</a>{/if}
 {/if}

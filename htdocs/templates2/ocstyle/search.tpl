@@ -131,8 +131,9 @@ function sync_options(element)
 		"searchbyfinder",
 		"searchbyplz",
 		"searchbyort",
-		"searchbyfulltext",
-		"searchall");
+		"searchbyfulltext"
+		{/literal}{if $logged_in},"searchall"{/if}{literal}
+		);
 
 	var sortby = "";
 	if (document.optionsform.sort[0].checked == true)

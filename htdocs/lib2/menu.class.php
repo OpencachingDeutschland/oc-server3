@@ -73,7 +73,7 @@ class Menu
 				$aMenu[$r['id']]['href'] = $r['href'];
 				$aMenu[$r['id']]['target'] = '';
 			}
-			$aMenu[$r['id']]['visible'] = ($r['visible'] == 1) ? true : false;
+			$aMenu[$r['id']]['visible'] = $r['visible'];
 			$aMenu[$r['id']]['sublevel'] = $this->pGetMenuSublevel($r['id']);
 
 			if ($r['parentid'] != 0)
@@ -168,7 +168,7 @@ class Menu
 		$retval = array();
 		foreach ($menuitem[MNU_ROOT]['subitems'] AS $item)
 		{
-			if (($menuitem[$item]['authlevel'] != AUTH_LEVEL_ADMIN || $login->admin != 0) && $menuitem[$item]['visible'] == true)
+			if (($menuitem[$item]['authlevel'] != AUTH_LEVEL_ADMIN || $login->hasAdminPriv()) && ($menuitem[$item]['visible'] == 1 || ($menuitem[$item]['visible'] == 2 && !$login->logged_in())))
 			{
 				$thisitem = $menuitem[$item];
 				$thisitem['selected'] = isset($ids[$item]);
@@ -207,7 +207,7 @@ class Menu
 		{
 			foreach ($menuitem[$menuid]['subitems'] AS $item)
 			{
-				if (($menuitem[$item]['authlevel'] != AUTH_LEVEL_ADMIN || $login->admin != 0) && $menuitem[$item]['visible'] == true)
+				if (($menuitem[$item]['authlevel'] != AUTH_LEVEL_ADMIN || $login->hasAdminPriv()) && ($menuitem[$item]['visible'] == 1 || ($menuitem[$item]['visible'] == 2 && !$login->logged_in())))
 				{
 					$thisitem = $menuitem[$item];
 					$thisitem['selected'] = isset($ids[$item]);

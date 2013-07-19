@@ -376,7 +376,14 @@
 		}
 		elseif (isset($_REQUEST['searchall']))
 		{
-			$options['searchtype'] = 'all';
+			if (!$login->logged_in())
+			{
+				// This operation is very expensive and therefore available only
+				// for logged-in users.
+				$tpl->error(ERROR_LOGIN_REQUIRED);
+			}
+			else
+				$options['searchtype'] = 'all';
 		}
 		else
 		{

@@ -215,7 +215,6 @@ class OcSmarty extends Smarty
 		else
 			$menu->SetSelectItem($this->menuitem);
 
-		$this->assign('tplname', $this->name);
 		$this->assign('topmenu', $menu->getTopMenu());
 		$this->assign('submenu', $menu->getSubMenu());
 		$this->assign('breadcrumb', $menu->getBreadcrumb());

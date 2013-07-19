@@ -22,7 +22,7 @@
 					{cycle assign=listcolor values="listcolor1,listcolor2"}
 					<tr>
 						<td class="{$listcolor}">{include file="res_cacheicon_22.tpl" cachetype=$ratingItem.type|escape}</td>
-						<td class="{$listcolor}"><span style="{include file="res_cachestatus_span.tpl" status=$ratingItem.status}"><a href="viewcache.php?cacheid={$ratingItem.cacheid}">{$ratingItem.cachename|escape}</a></span>&nbsp;{t 1=$ratingItem.ownername|escape}by %1{/t}</td>
+						<td class="{$listcolor}"><span style="{include file="res_cachestatus_span.tpl" status=$ratingItem.status}"><a href="viewcache.php?cacheid={$ratingItem.cacheid}">{$ratingItem.cachename|escape}</a></span> {include file="res_oconly.tpl" oconly=$ratingItem.oconly} {t 1=$ratingItem.ownername|escape}by %1{/t}</td>
 						<td class="{$listcolor}">{include file="res_cachestatus.tpl" status=$ratingItem.status}</td>
 					</tr>
 				{foreachelse}

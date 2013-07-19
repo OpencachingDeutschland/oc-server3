@@ -98,7 +98,7 @@
 			{$topItem.founds}
 		</td>
 		<td>
-			<a href="viewcache.php?wp={$topItem.wpoc}">{$topItem.name|escape}</a> {t}by{/t} <a href="viewprofile.php?userid={$topItem.userid}">{$topItem.username|escape}</a>
+			<a href="viewcache.php?wp={$topItem.wpoc}">{$topItem.name|escape}</a> {include file="res_oconly.tpl" oconly=$topItem.oconly} {t}by{/t} <a href="viewprofile.php?userid={$topItem.userid}">{$topItem.username|escape}</a>
 		</td>
 	</tr>
 

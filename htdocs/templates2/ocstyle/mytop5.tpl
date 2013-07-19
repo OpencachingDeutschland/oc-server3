@@ -33,7 +33,7 @@
 					<tr>
 						<td class="{$listcolor}">{include file="res_cacheicon_22.tpl" cachetype=$ratingItem.type|escape}</td>
 						<td class="{$listcolor}">{include file="res_cachestatus.tpl" status=$ratingItem.status}</td>
-						<td class="{$listcolor}"><span style="{include file="res_cachestatus_span.tpl" status=$ratingItem.status}"><a href="viewcache.php?wp={$ratingItem.wp}">{$ratingItem.cachename|escape}</a></span></td>
+						<td class="{$listcolor}"><span style="{include file="res_cachestatus_span.tpl" status=$ratingItem.status}"><a href="viewcache.php?wp={$ratingItem.wp}">{$ratingItem.cachename|escape}</a></span> {include file="res_oconly.tpl" oconly=$ratingItem.oconly}</td>
 						<td class="{$listcolor}" style="text-align:center">{$ratingItem.rating_date|date_format:$opt.format.date}</td>
 						<td class="{$listcolor}"><nobr>[<a href="javascript:if(confirm('{t escape=js}Do you really want to remove this recommendation?{/t}'))location.href='mytop5.php?action=delete&amp;cacheid={$ratingItem.cacheid}'">{t}Remove recommendation{/t}</a>]</nobr></td>
 					</tr>

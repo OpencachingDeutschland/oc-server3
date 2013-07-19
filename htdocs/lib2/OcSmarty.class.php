@@ -182,7 +182,7 @@ class OcSmarty extends Smarty
 		$optn['cms'] = $opt['cms'];
 		$optn['geokrety'] = $opt['geokrety'];
 		$optn['template']['usercountrieslist'] = labels::getLabels('usercountrieslist');
-		$optn['help']['oconly'] = helppagelink('oconly');
+		$optn['help']['oconly'] = helppagelink('oconly','OConly');
 
 		// url-sessions? (for session timout display)
 		$optn['session']['url'] = false;

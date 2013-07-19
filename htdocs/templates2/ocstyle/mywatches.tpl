@@ -131,7 +131,7 @@
 						<tr>
 							<td class="{$listcolor}">{include file="res_cacheicon_22.tpl" cachetype=$watchItem.type|escape}</td>
 							<td class="{$listcolor}">{include file="res_cachestatus.tpl" status=$watchItem.status}</td>
-							<td class="{$listcolor}"><span style="{include file="res_cachestatus_span.tpl" status=$watchItem.status}"><a href="viewcache.php?wp={$watchItem.wp}">{$watchItem.name|escape}</a></span></td>
+							<td class="{$listcolor}"><span style="{include file="res_cachestatus_span.tpl" status=$watchItem.status}"><a href="viewcache.php?wp={$watchItem.wp}">{$watchItem.name|escape}</a></span> {include file="res_oconly.tpl" oconly=$watchItem.oconly}</td>
 							<td class="{$listcolor}" style="text-align:center">
 								{if $watchItem.lastfound==null}
 									---

@@ -39,10 +39,11 @@
 			}
 	}
 
-	$rs = sql("SELECT `cache_rating`.`cache_id` AS `cacheid`, `cache_rating`.`rating_date`, `caches`.`wp_oc` AS `wp`, `caches`.`name` AS `cachename`, `caches`.`type` AS `type`, `caches`.`status` AS `status`
-	             FROM `cache_rating`, `caches`
-	            WHERE `cache_rating`.`cache_id`=`caches`.`cache_id`
-	              AND `cache_rating`.`user_id`='&1'
+	$rs = sql("SELECT `cache_rating`.`cache_id` AS `cacheid`, `cache_rating`.`rating_date`, `caches`.`wp_oc` AS `wp`, `caches`.`name` AS `cachename`, `caches`.`type` AS `type`, `caches`.`status` AS `status`, `ca`.`attrib_id` IS NOT NULL AS `oconly`
+	             FROM `cache_rating`
+				 INNER JOIN `caches` ON `cache_rating`.`cache_id`=`caches`.`cache_id`
+	        LEFT JOIN `caches_attributes` `ca` ON `ca`.`cache_id`=`caches`.`cache_id` AND `ca`.`attrib_id`=6
+	            WHERE `cache_rating`.`user_id`='&1'
 	         ORDER BY `caches`.`name` ASC", $login->userid);
 	$tpl->assign_rs('ratings', $rs);
 	sql_free_result($rs);

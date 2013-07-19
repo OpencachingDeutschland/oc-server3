@@ -344,7 +344,7 @@ function fix_magic_quotes_gpc()
 // pay attention to use only ' quotes in $text (escape other ')
 //
 // see corresponding function in lib/common.inc.php
-function helppagelink($ocpage)
+function helppagelink($ocpage, $title='Instructions')
 {
 	global $opt, $translate;
 
@@ -358,7 +358,7 @@ function helppagelink($ocpage)
 	if ($helppage == "" && isset($opt['locale'][$opt['template']['locale']]['help'][$ocpage]))
 		$helppage = $opt['locale'][$opt['template']['locale']]['help'][$ocpage];
 
-	$imgtitle = $translate->t('Instructions', '', basename(__FILE__), __LINE__);
+	$imgtitle = $translate->t($title, '', basename(__FILE__), __LINE__);
 	$imgtitle = "alt='" . $imgtitle . "' title='" . $imgtitle  . "'";
 
 	if (substr($helppage,0,1) == "!")

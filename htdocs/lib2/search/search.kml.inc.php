@@ -108,7 +108,7 @@ function search_output()
 		{
 			case 2:
 				$icon = 'tradi';
-				$typeimgurl = '<img src="http://www.opencaching.de/resource2/'.$style.'ocstyle/images/cacheicon/traditional.gif" alt="Normaler Cache" title="Normaler Cache" />';
+				$typeimgurl = '<img src="http://www.opencaching.de/resource2/'.$style.'/images/cacheicon/traditional.gif" alt="Normaler Cache" title="Normaler Cache" />';
 				break;
 			case 3:
 				$icon = 'multi';

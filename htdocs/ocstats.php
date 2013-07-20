@@ -11,7 +11,7 @@
 
 	// Parameter
 	$jpeg_qualitaet = 80;
-	$fontfile = $opt['rootpath'] . "lib2/fonts/dejavu-fonts/ttf/DejaVuSans.ttf";
+	$fontfile = $opt['rootpath'] . 'resource2/'.$opt['template']['style'].'/fonts/dejavu/ttf/DejaVuSans.ttf';
 
 	// get userid and style from URL
 	$userid = isset($_REQUEST['userid']) ? $_REQUEST['userid']+0 : 0;

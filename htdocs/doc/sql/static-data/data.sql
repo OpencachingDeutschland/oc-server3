@@ -3417,7 +3417,7 @@ INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('552',
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('552', './templates2/ocstyle/mydescription.tpl', '48');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('552', './templates2/ocstyle/mydetails.tpl', '90');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('552', './templates2/ocstyle/myprofile.tpl', '188');
-INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('553', '../lib/classes/ChildWp/EditPresenter.php', '19');
+INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('553', './libse/ChildWp/EditPresenter.php', '19');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('553', './lang/de/ocstyle/editcache.inc.php', '18');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('553', './lang/de/ocstyle/editdesc.inc.php', '29');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('553', './lang/de/ocstyle/editlog.inc.php', '18');
@@ -3468,7 +3468,7 @@ INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('576',
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('576', './templates2/ocstyle/res_logentry_logitem.tpl', '50');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('576', './templates2/ocstyle/res_logentry_logitem.tpl', '84');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('576', './templates2/ocstyle/viewcache.tpl', '100');
-INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('577', '../lib/classes/ChildWp/DeletePresenter.php', '19');
+INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('577', './libse/ChildWp/DeletePresenter.php', '19');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('577', './lang/de/ocstyle/editcache.inc.php', '19');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('577', './lang/de/ocstyle/editcache.inc.php', '37');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('577', './lang/de/ocstyle/editcache.inc.php', '42');
@@ -4574,10 +4574,10 @@ INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1776'
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1777', './templates2/ocstyle/childwp.tpl', '24');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1778', './templates2/ocstyle/childwp.tpl', '40');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1779', './templates2/ocstyle/map2.tpl', '2133');
-INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1780', '../lib/classes/ChildWp/AddPresenter.php', '13');
-INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1781', '../lib/classes/ChildWp/AddPresenter.php', '19');
-INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1782', '../lib/classes/ChildWp/DeletePresenter.php', '13');
-INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1783', '../lib/classes/ChildWp/EditPresenter.php', '13');
+INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1780', './libse/ChildWp/AddPresenter.php', '13');
+INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1781', './libse/ChildWp/AddPresenter.php', '19');
+INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1782', './libse/ChildWp/DeletePresenter.php', '13');
+INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1783', './libse/ChildWp/EditPresenter.php', '13');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1788', 'table:coordinates_type;field=name', '0');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1789', 'table:coordinates_type;field=name', '0');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1790', './lang/de/ocstyle/editcache.tpl.php', '299');

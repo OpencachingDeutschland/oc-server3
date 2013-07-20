@@ -20,8 +20,8 @@
 	$msDirlist[] = './templates2/mail';
 	$msDirlist[] = './templates2/ocstyle';
 	
-	// directory ../lib/classes needs to be added recursive
-	addClassesDirecotriesToDirlist('../lib/classes');
+	// directory libse needs to be added recursive
+	addClassesDirecotriesToDirlist('libse');
 
 	require('./lib2/web.inc.php');
 	require_once('./lib2/translate.class.php');

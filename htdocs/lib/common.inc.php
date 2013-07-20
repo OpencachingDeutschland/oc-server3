@@ -28,7 +28,7 @@ function __autoload($class_name)
 	
 	$class_name = str_replace('_', '/', $class_name);
 	
-	$file = $opt['rootpath'] . '../lib/classes/' . $class_name . '.php';
+	$file = $opt['rootpath'] . 'libse/classes/' . $class_name . '.php';
 	if (file_exists($file))
 	  require_once($file);
 }

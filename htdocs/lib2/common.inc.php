@@ -17,14 +17,11 @@ function __autoload($class_name)
 	if (!preg_match('/^[\w]{1,}$/', $class_name))
 		return;
 	
-	$class_name2 = $class_name;
-	$class_name = str_replace('_', '/', $class_name);
-	
-	$file = $opt['rootpath'] . '../lib/classes/' . $class_name . '.php';
-	$file2 = $opt['rootpath'] . 'lib2/' . $class_name2 . '.class.php';
-	$file3 = $opt['rootpath'] . 'lib2/logic/' . $class_name2 . '.class.php';
-	if (file_exists($file)) 
-		require_once($file);
+	$file1 = $opt['rootpath'] . 'lib2/' . $class_name . '.class.php';
+	$file2 = $opt['rootpath'] . 'lib2/logic/' . $class_name . '.class.php';
+	$file3 = $opt['rootpath'] . 'libse/' . str_replace('_', '/', $class_name) . '.php';
+	if (file_exists($file1))
+		require_once($file1);
 	elseif (file_exists($file2)) 
 		require_once($file2);
 	elseif (file_exists($file3))

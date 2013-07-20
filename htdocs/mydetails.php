@@ -8,8 +8,7 @@
 	require_once('lib2/web.inc.php');
 	require_once('lib2/logic/user.class.php');
 	require_once('lib2/logic/useroptions.class.php');
-	require_once('lang/de/ocstyle/smilies.inc.php');
-	require_once('../lib/htmlpurifier-4.2.0/library/HTMLPurifier.auto.php');
+	require_once('lib2/OcHTMLPurifier.class.php');
 
 	$tpl->name = 'mydetails';
 	$tpl->menuitem = MNU_MYPROFILE_DETAILS;
@@ -101,7 +100,7 @@ function changetext()
 
 	if (isset($_REQUEST['save']))
 	{
-		$purifier = new HTMLPurifier();
+		$purifier = new OcHTMLPurifier();
 		$desctext = isset($_REQUEST['desctext']) ? $purifier->purify($_REQUEST['desctext']) : "";
 		sql("UPDATE `user` SET `description`='&2' WHERE `user_id`='&1'", $login->userid, $desctext);
 	  $tpl->redirect('mydetails.php');

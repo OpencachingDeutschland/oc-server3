@@ -9,9 +9,6 @@
 	if ((isset($_POST['submit']) || isset($_POST['submitform'])) && !isset($_POST['version3']))
 		die('Your client may be outdated!');
 	
-	// use purifier in lib2
-	define('PURIFIERLIB2', true);
-	
 	// include librarys
 	require('./lib2/web.inc.php');
 	require_once('./lib2/logic/cache.class.php');

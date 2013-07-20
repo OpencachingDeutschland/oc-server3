@@ -1,15 +1,16 @@
 
 for Version 3.0 changelog, see htdocs/templates2/ocstyle/articles/EN/changelog.tpl
+
 for Database changelog, see htdocs/doc/sql/db-changes.txt
 
 
 
 
-             Opencaching Network Implementation Version 2.0
+             Opencaching Implementation Version 2.0
 
                         Changes File
 
-This list is incomplete.
+This list probably is incomplete.
 
 27.08.2010 (Oliver)
   - modified translation system

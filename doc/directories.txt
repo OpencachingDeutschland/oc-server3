@@ -1,0 +1,83 @@
+
+             Opencaching Implementation Version 3
+
+                     Directory structure
+
+
+There are three library framworks:
+
+- The old OC 1.0 library which we call "lib1",
+- the new OC 2.0 library which we call "lib2",
+- the Opencaching.se library which we call "libse".
+
+lib1 code is being ported to lib2 and will completely disappear.
+
+
+Main directories
+----------------
+
+bin         code and database maintenance scripts
+
+doc         documentaion
+
+htdocs      everything which regularly runs on the Opencaching website
+
+lib/htmlpurifier-4.2.0
+            Old HTML purifier version used by lib1 and OKAPI code.
+            Is being replaced by htdocs/lib2/HTMLPurifier.
+
+local       Special-purpose tools which may be used on development or
+            productive systems.
+
+
+htdocs subdirectories
+---------------------
+
+api         miscellaneous simple APIs for external tools;
+            other APIs are in 'okapi' and in 'xml'.
+
+cache       lib1 temporary files
+cache2      lib2 temporary files, precompiled and cached data
+config2     lib2 settings files. lib1 settings are in htdocs/lib/settings*.
+doc         database documentation, static data and user documentation
+
+download    temporary files for XML interface requests, see htdocs/xml.
+            Directory is configured via lib/settings.inc.php, $zip_basedir
+            and $zip_wwwdir.
+            Note that zip downloads via seach.php are not stored in the file
+            system but directly streamed.
+
+html        some alternatives to index.php which may be displayed e.g.
+            if site is out of service
+
+images      images for several purposes
+  flag/flags:  used by both lib1 and lib2. For compatibility reasons with
+               "external" links e.g. in cache descriptions, they will have to stay here.
+  icons        GC replacement icons for smiley links in copied cache descriptions and logs
+  statpics     cached statistics pictures, referenced indirectly via
+               htdocs/statpics/.htaccess -> ocstats.php rewrite
+  uploads      uploaded cache and log pictures; directory is configured in lib1&2 settings 
+
+lang        lib1 templates and resources; will all be ported to lib2, but some
+            image file will stay here because they can by referenced elsewhere.
+
+lib         OC 1.0 library (leftovers)
+lib2        OC 2.0+ library, including 3rd party libraries
+libse       Opencaching.se library, used for additional waypoints and "personal notes"
+            in cache listings
+
+okapi       replicated from http://code.google.com/p/opencaching-api/source/browse/trunk/#trunk%2Fokapi
+            with core.php:$revision replaced by current svn revision number
+
+resource2   all lib2 files which are no PHP or Smarty code
+templates2  all lib2 Smarty templates
+
+statipcs    redirect source for statistics pictures, see images/statpics
+
+util        lib1 cronjobs and other tools
+util2       lib2 cronjobs and other tools
+
+var/okapi   OKAPI temporary and cached files; may be moved to cache2
+var/errorlog  SQL error protocols
+
+xml         "XML interface" API

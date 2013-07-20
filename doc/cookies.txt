@@ -1,5 +1,7 @@
 
-Cookies used by the Opencaching implementation
+             Opencaching Implementation Version 3
+
+                        Cookies used
 
 
 Name:      $opt['session']['cookiename'] . 'data'

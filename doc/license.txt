@@ -1,5 +1,5 @@
 ﻿
-             Opencaching Network Implementation Version 3
+             Opencaching Implementation Version 3
 
 
                                                                   August 16, 2012
@@ -101,7 +101,12 @@ PHP libraries
         URI     : http://htmlpurifier.org/
         License : LGPL
 
-   10.  OKAPI: Opencaching API
+   10.  ss_zip class
+        Path    : lib2/ss_zip.php
+        URI     : http://smiledsoft.com/demos/phpzip/  (no longer works?)
+        License : ??
+
+   11.  OKAPI: Opencaching API
         Path    : htdocs/okapi/
         URI     : http://code.google.com/p/opencaching-api/
         License : MIT
@@ -111,18 +116,18 @@ The following PHP libraries are currently not in use and may be discarded.
 Note that they need to be properly licensed as long they are included in
 the distrubution!
 
-    1.  b2evo captcha
+   12.  b2evo captcha
         Path    : htdocs/lib2/b2evo-captcha/
         URI     : http://sourceforge.net/projects/b2evo-captcha
         License : GPL
 
-    2.  InputFilter (modified)
+   13.  InputFilter (modified)
         Path    : htdocs/lib2/logic/old/class.inputfilter.php
         URI     : http://freshmeat.net/projects/inputfilter/
                   http://cyberai.users.phpclasses.org/package/2189-PHP-Filter-out-unwanted-PHP-Javascript-HTML-tags-.html
         License : GPL
 
-    3.  SimpleTest unit testing
+   14.  SimpleTest unit testing
         Path    : lib/simpletest
         URI     : http://simpletest.org/en/download.html
         License : LGPL

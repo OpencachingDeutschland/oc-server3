@@ -160,7 +160,7 @@
 						</div>
 					{else}
 						{if $permanentLogin==true}
-							{t}Don't log me out after 15 minutes inaktivity.{/t}<br /">
+							{t}Don't log me out after 15 minutes inaktivity.{/t}<br />
 						{/if}
 					{/if}
 					{if $edit==true}

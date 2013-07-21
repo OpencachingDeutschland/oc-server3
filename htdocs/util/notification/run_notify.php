@@ -1,101 +1,93 @@
 #!/usr/local/bin/php -q
 <?php
  /***************************************************************************
-		./util/notification/run_notify.php
-															-------------------
-		begin                : August 25 2006
-
 		For license information see doc/license.txt
-	***************************************************************************/
-
- /***************************************************************************
 
 		Unicode Reminder メモ
 
-		Ggf. muss die Location des php-Binaries angepasst werden.
-
-		Arbeitet die Tabelle `notify_waiting` ab und verschickt
-		Benachrichtigungsmails ueber neue Caches.
-
+		Processes the `notify_waiting` table and sends notification mails
+		on new caches and new OConly attributes.
 	***************************************************************************/
 
 	// needs absolute rootpath because called as cronjob
 	$rootpath = dirname(__FILE__) . '/../../';
 
-	// chdir to proper directory (needed for cronjobs)
-	chdir(substr(realpath($_SERVER['PHP_SELF']), 0, strrpos(realpath($_SERVER['PHP_SELF']), '/')));
-
 	require_once($rootpath . 'lib/clicompatbase.inc.php');
 	require_once('settings.inc.php');
 	require_once($rootpath . 'lib/consts.inc.php');
+	require_once($rootpath . 'lib2/ProcessSync.class.php');
 
-	// use posix pid-files to lock process 
-	if (!CreatePidFile($notifypid))
-	{
-	      CleanupAndExit($notifypid, "Another instance is running!"); 
-	      exit;
-	}
-
-/* begin with some constants */
-
-	$sDateformat = 'Y-m-d H:i:s';
-
-/* end with some constants */
-
-/* begin db connect */
+	// db connect
 	db_connect();
 	if ($dblink === false)
 	{
 		echo 'Unable to connect to database';
 		exit;
 	}
-/* end db connect */
 
-  $rsNotify = sql("	SELECT  `notify_waiting`.`id`, `notify_waiting`.`cache_id`, `notify_waiting`.`type`,
-				`user`.`username`,
-				`user2`.`email`, `user2`.`username` as `recpname`, `user2`.`latitude` as `lat1`, `user2`.`longitude` as `lon1`, `user2`.`user_id` as `recid`,
-				`caches`.`name` as `cachename`, `caches`.`date_hidden`, `caches`.`latitude` as `lat2`, `caches`.`longitude` as `lon2`, `caches`.`wp_oc`,
-				`cache_type`.`de` as `cachetype`,
-				`cache_size`.`de` as `cachesize`
-			FROM `notify_waiting`, `caches`, `user`, `user` `user2`, `cache_type`, `cache_size`, `cache_status`
-			WHERE `notify_waiting`.`cache_id`=`caches`.`cache_id`
-			  AND `notify_waiting`.`user_id`=`user2`.`user_id`
-			  AND `caches`.`user_id`=`user`.`user_id`
-			  AND `caches`.`type`=`cache_type`.`id`
-			  AND `caches`.`status`=`cache_status`.`id`
-			  AND `caches`.`size`=`cache_size`.`id`
-			  AND `cache_status`.`allow_user_view`=1");
+	$process_sync = new ProcessSync('run_notify');
+	if ($process_sync->Enter())
+	{
+		// send out everything that has to be sent
+	  $rsNotify = sql("
+				SELECT
+					`notify_waiting`.`id`, `notify_waiting`.`cache_id`, `notify_waiting`.`type`,
+					`user`.`username`,
+					`user2`.`email`, `user2`.`username` as `recpname`, `user2`.`latitude` as `lat1`, `user2`.`longitude` as `lon1`, `user2`.`user_id` as `recid`,
+					`caches`.`name` as `cachename`, `caches`.`date_hidden`, `caches`.`latitude` as `lat2`, `caches`.`longitude` as `lon2`, `caches`.`wp_oc`,
+					`cache_type`.`de` as `cachetype`,
+					`cache_size`.`de` as `cachesize`,
+					`cache_status`.`allow_user_view`,
+					`ca`.`attrib_id` IS NOT NULL AS `oconly`
+				FROM `notify_waiting`
+				INNER JOIN `caches` ON `notify_waiting`.`cache_id`=`caches`.`cache_id`
+				INNER JOIN `user` ON `caches`.`user_id`=`user`.`user_id`
+				INNER JOIN `user` `user2` ON `notify_waiting`.`user_id`=`user2`.`user_id`
+				INNER JOIN `cache_type` ON `caches`.`type`=`cache_type`.`id`
+				INNER JOIN `cache_size` ON `caches`.`size`=`cache_size`.`id`
+				INNER JOIN `cache_status` ON `caches`.`status`=`cache_status`.`id`
+				LEFT JOIN `caches_attributes` `ca` ON `ca`.`cache_id`=`caches`.`cache_id` AND `ca`.`attrib_id`=6");
 
-  while($rNotify = sql_fetch_array($rsNotify))
-  {
-	sql("DELETE FROM `notify_waiting` WHERE `id` ='&1'", $rNotify['id']);
-	process_new_cache($rNotify);
-  }
-  mysql_free_result($rsNotify);
+	  while ($rNotify = sql_fetch_array($rsNotify))
+	  {
+			if ($rNotify['allow_user_view'])
+				process_new_cache($rNotify);
+			sql("DELETE FROM `notify_waiting` WHERE `id` ='&1'", $rNotify['id']);
+	  }
+	  mysql_free_result($rsNotify);
 
-  CleanupAndExit($notifypid); 
+		$process_sync->Leave();
+	}
 
-/* end send out everything that has to be sent */
+
 
 function process_new_cache($notify)
 {
-	global $notify_text, $mailfrom, $mailsubject, $debug, $debug_mailto, $rootpath;
+	global $debug, $debug_mailto, $rootpath;
+	global $mailfrom, $new_cache_subject, $new_oconly_subject;
 
 	//echo "process_new_cache(".$notify['id'].")\n";
-	$fehler = false;
+	$error = false;
 
 	// mail-template lesen
-	switch($notify['type'])
+	switch ($notify['type'])
 	{
 		case notify_new_cache: // Type: new cache
 			$mailbody = read_file($rootpath . 'util/notification/notify_newcache.email');
+			$mailsubject = $new_cache_subject;
 			break;
+
+		case notify_new_oconly: // Type: new OConly flag
+			$mailbody = read_file($rootpath . 'util/notification/notify_newoconly.email');
+			$mailsubject = $new_oconly_subject;
+			break;
+
 		default:
-			$fehler = true;
+			$error = true;
 			break;
 	}
 
-	if(!$fehler)
+	if (!$error)
 	{
 		$mailbody = mb_ereg_replace('{username}', $notify['recpname'], $mailbody);
 		$mailbody = mb_ereg_replace('{date}', date('d.m.Y', strtotime($notify['date_hidden'])), $mailbody);
@@ -108,8 +100,10 @@ function process_new_cache($notify)
 		$mailbody = mb_ereg_replace('{bearing}', Bearing2Text(calcBearing($notify['lat1'], $notify['lon1'], $notify['lat2'], $notify['lon2'])), $mailbody);
 		$mailbody = mb_ereg_replace('{cachetype}', $notify['cachetype'], $mailbody);
 		$mailbody = mb_ereg_replace('{cachesize}', $notify['cachesize'], $mailbody);
+		$mailbody = mb_ereg_replace('{oconly}', $notify['oconly'] ? 'OConly-' : '', $mailbody);
 
 		$subject = mb_ereg_replace('{cachename}', $notify['cachename'], $mailsubject);
+		$subject = mb_ereg_replace('{oconly}', $notify['oconly'] ? 'OConly-' : '', $subject);
 
 		/* begin send out everything that has to be sent */
 		$email_headers = 'From: "' . $mailfrom . '" <' . $mailfrom . '>';
@@ -164,90 +158,4 @@ function getToMailDomain($mail)
 	return $domain;
 }
 
-// 
-// checks if other instance is running, creates pid-file for locking 
-// 
-function CreatePidFile($PidFile)
-{
-    if(!CheckDaemon($PidFile))
-    {
-        return false;
-    }
-
-    if(file_exists($PidFile))
-    {
-        echo "Error: Pidfile (".$PidFile.") already present at ".__FILE__.":".__LINE__."!\n";
-        return false;
-    }
-    else 
-    {
-        if($pidfile = @fopen($PidFile, "w")) 
-        {
-            fputs($pidfile, posix_getpid()); 
-            fclose($pidfile); 
-            return true; 
-        }
-        else 
-        {
-            echo "can't create Pidfile $PidFile at ".__FILE__.":".__LINE__."!\n"; 
-            return false; 
-        }
-    }
-} 
-
-// 
-// checks if other instance of process is running.. 
-// 
-function CheckDaemon($PidFile) 
-{ 
-    if($pidfile = @fopen($PidFile, "r")) 
-    { 
-        $pid_daemon = fgets($pidfile, 20); 
-        fclose($pidfile); 
-
-        $pid_daemon = (int)$pid_daemon; 
-
-        // process running? 
-        if(posix_kill($pid_daemon, 0)) 
-        { 
-            // yes, good bye 
-            echo "Error: process already running with pid=$pid_daemon!\n"; 
-            false; 
-        } 
-        else 
-        { 
-            // no, remove pid_file 
-            echo "process not running, removing old pid_file (".$PidFile.")\n"; 
-            unlink($PidFile); 
-            return true; 
-        } 
-    } 
-    else 
-    { 
-        return true; 
-    } 
-} 
-
-// 
-// deletes pid-file 
-// 
-function CleanupAndExit($PidFile, $message = false) 
-{ 
-    if($pidfile = @fopen($PidFile, "r")) 
-    { 
-        $pid = fgets($pidfile, 20); 
-        fclose($pidfile); 
-        if($pid == posix_getpid()) 
-            unlink($PidFile); 
-    } 
-    else 
-    { 
-        echo "Error: can't delete own pidfile (".$PidFile.") at ".__FILE__.":".__LINE__."!\n"; 
-    } 
-
-    if($message) 
-    { 
-      echo $message . "\n"; 
-    } 
-}
 ?>

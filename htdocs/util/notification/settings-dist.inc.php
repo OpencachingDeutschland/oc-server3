@@ -8,7 +8,8 @@
 	if (!isset($maildomain)) $maildomain = 'opencaching.de';
 
 	$mailfrom = 'noreply@' . $maildomain;
-	$mailsubject = '[' . $maildomain . '] Neuer Cache: {cachename}';
+	$new_cache_subject = '[' . $maildomain . '] Neuer {oconly}Cache: {cachename}';
+	$new_oconly_subject = '[' . $maildomain . '] Cache wurde als OConly markiert: {cachename}';
 
 	$debug = false;
 	$debug_mailto = 'abc@xyz.de';

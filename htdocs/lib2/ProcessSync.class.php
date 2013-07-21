@@ -4,7 +4,8 @@
 
 	 Unicode Reminder メモ
 
-	 synchronization of processes which must not run concurrently
+	 synchronization of processes which must not run concurrently;
+	 also used in lib1
 
  ****************************************************************************/
 

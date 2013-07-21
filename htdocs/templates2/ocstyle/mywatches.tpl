@@ -87,7 +87,7 @@
 			{if $error==true}
 				<tr><td colspan="2" class="errormsg">{t}Error while trying to save!{/t}</td></tr>
 			{elseif $saved==true}
-				<tr><td colspan="2" class="successmsg">{t}Settings stored successfull.{/t}</td></tr>
+				<tr><td colspan="2" class="okmsg">{t}Settings have been stored.{/t}</td></tr>
 			{/if}
 			<tr><td class="spacer" colspan="2"></td></tr>
 

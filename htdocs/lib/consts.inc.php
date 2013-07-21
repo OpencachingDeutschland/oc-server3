@@ -28,6 +28,7 @@
 
 	// for notifications
 	define('notify_new_cache', 1);
+	define('notify_new_oconly', 2);
 
 	// for ratings
 	define('rating_percentage', 10); // percentage of found caches to be rated

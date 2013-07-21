@@ -91,13 +91,25 @@ function change()
 
 	if (isset($_REQUEST['notifyRadius']))
 	{
-		$tpl->assign('notifyRadius', $_REQUEST['notifyRadius']);
-		if (!$user->setNotifyRadius($_REQUEST['notifyRadius']))
+		$tpl->assign('notifyRadius', $_REQUEST['notifyRadius']+0);
+		if (!$user->setNotifyRadius($_REQUEST['notifyRadius']+0))
 		{
 			$tpl->assign('notifyRadiusError', true);
 			$bError = true;
 		}
 	}
+
+	if (isset($_REQUEST['notifyOconly']))
+	{
+		$tpl->assign('notifyOconly', $_REQUEST['notifyOconly']+0);
+		$user->setNotifyOconly($_REQUEST['notifyOconly'] != 0);
+	}
+	else if (isset($_REQUEST['save']))
+		$user->setNotifyOconly(false);
+
+	$oconly_helplink = helppagelink('oconly');
+	$tpl->assign('oconly_helpstart', $oconly_helplink);
+	$tpl->assign('oconly_helpend', $oconly_helplink != '' ? '</a>' : '');
 
 	$coord['lat'] = coordinate::parseRequestLat('coord');
 	$coord['lon'] = coordinate::parseRequestLon('coord');
@@ -193,6 +205,12 @@ function assignFromUser($user)
 	$tpl->assign('coordsDecimal', $coords->getFloat());
 
 	$tpl->assign('notifyRadius', $user->getNotifyRadius());
+
+	$tpl->assign('notifyOconly', $user->getNotifyOconly());
+	$oconly_helplink = helppagelink('oconly');
+	$tpl->assign('oconly_helpstart', $oconly_helplink);
+	$tpl->assign('oconly_helpend', $oconly_helplink != '' ? '</a>' : '');
+
 	$tpl->assign('registeredSince', $user->getDateRegistered());
 
 	$tpl->assign('usePMR', $user->getUsePMR());

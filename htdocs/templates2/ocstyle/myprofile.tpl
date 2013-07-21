@@ -117,17 +117,27 @@
 						{if $notifyRadiusError==true}
 							<span class="errormsg">{t}The entered radius is not valid.{/t}</span>
 						{/if}
+						<br />
+						<input type="checkbox" name="notifyOconly" value="1" class="checkbox" {if $notifyOconly}checked="checked"{/if} id="notifyOconly" />
+						<label for="notifyOconly">{t 1=$oconly_helpstart 2=$oconly_helpend}Also notify about newly marked %1OConly%2 caches.{/t}</label>
 					{else}
 						{if $notifyRadius>0}
 							{t 1=$notifyRadius|escape}Notify about new Geocaches in a radius of %1 km.{/t}
+							<br />
+							{if $notifyOconly}
+								{t 1=$oconly_helpstart 2=$oconly_helpend}Notify about newly marked %1OConly%2 caches.{/t}
+							{else}
+								{t 1=$oconly_helpstart 2=$oconly_helpend}Do not notify about newly marked %1OConly%2 caches.{/t}
+							{/if}
 						{else}
-							{t}Notification about new Geocaches is not activated.{/t}
+							{t}Do not notify about new Geocaches.{/t}
 						{/if}
 					{/if}
 				</td>
 			</tr>
 			<tr><td class="spacer" colspan="2"></td></tr>
 
+			{if $edit || $usePMR || $permanentLogin || $noHTMLEditor}
 			<tr>
 				<td valign="top">{t}Others:{/t}</td>
 				<td valign="top">
@@ -137,7 +147,7 @@
 						<br />
 					{else}
 						{if $usePMR==true}
-							<li>{t}I'm taking an PMR walkie talkie on channel 2 with me.{/t}</li>
+							<span class="public-setting">{t}I'm taking an PMR walkie talkie on channel 2 with me.{/t}</span><br />
 						{/if}
 					{/if}
 					{if $edit==true}
@@ -150,7 +160,7 @@
 						</div>
 					{else}
 						{if $permanentLogin==true}
-							<li>{t}Don't log me out after 15 minutes inaktivity.{/t}</li>
+							{t}Don't log me out after 15 minutes inaktivity.{/t}<br /">
 						{/if}
 					{/if}
 					{if $edit==true}
@@ -158,13 +168,14 @@
 						<label for="l_no_htmledit">{t}Don't use an HTML editor by default.{/t}</label>
 						<br />
 					{else}
-						{if $useHTMLEditor==true}
-							<li>{t}Don't use an HTML editor by default.{/t}</li>
+						{if $noHTMLEditor}
+							{t}Don't use an HTML editor by default.{/t}
 						{/if}
 					{/if}
 				</td>
 			</tr>
 			<tr><td class="spacer" colspan="2"></td></tr>
+			{/if}
 
 			<tr>
 				<td class="public-setting">{t}Registered since{/t}:</td>

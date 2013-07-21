@@ -513,17 +513,20 @@
 
 	// notify users with matching watch radius about this cache
 	sql_dropProcedure('sp_notify_new_cache');
-	sql("CREATE PROCEDURE sp_notify_new_cache (IN nCacheId INT(10) UNSIGNED, IN nLongitude DOUBLE, IN nLatitude DOUBLE)
+	sql("CREATE PROCEDURE sp_notify_new_cache (IN nCacheId INT(10) UNSIGNED, IN nLongitude DOUBLE, IN nLatitude DOUBLE, IN nType INT(1))
 	     BEGIN
-	       INSERT IGNORE INTO `notify_waiting` (`id`, `cache_id`, `user_id`, `type`)
-	       SELECT NULL, nCacheId, `user`.`user_id`, 1 /* notify_new_cache */
-	         FROM `user`
-          /* Throttle email sending after undeliverable mails. See also runwatch.php. */
-	        WHERE (`email_problems` = 0 OR DATEDIFF(NOW(),`last_email_problem`) > 1+DATEDIFF(`last_email_problem`,`first_email_problem`))
-	          AND NOT ISNULL(`user`.`latitude`)
-	          AND NOT ISNULL(`user`.`longitude`)
-	          AND `user`.`notify_radius`>0
-	          AND (acos(cos((90-nLatitude) * 3.14159 / 180) * cos((90-`user`.`latitude`) * 3.14159 / 180) + sin((90-nLatitude) * 3.14159 / 180) * sin((90-`user`.`latitude`) * 3.14159 / 180) * cos((nLongitude-`user`.`longitude`) * 3.14159 / 180)) * 6370) <= `user`.`notify_radius`;
+	       /* type 1 = new cache, 2 = new OConly attribute */
+	       IF (nType=1 OR
+	           (nType=2 AND (SELECT `notify_oconly` FROM `user`,`caches` WHERE `user`.`user_id`=`caches`.`user_id` AND `caches`.`cache_id`=nCacheId))) THEN
+		       INSERT IGNORE INTO `notify_waiting` (`cache_id`, `user_id`, `type`)
+		       SELECT nCacheId, `user`.`user_id`, nType /* notify_new_cache */
+		         FROM `user`
+	          /* Throttle email sending after undeliverable mails. See also runwatch.php. */
+		        WHERE (`email_problems` = 0 OR DATEDIFF(NOW(),`last_email_problem`) > 1+DATEDIFF(`last_email_problem`,`first_email_problem`))
+		          AND `user`.`latitude`+`user`.`longitude` <> 0
+		          AND `user`.`notify_radius`>0
+		          AND (acos(cos((90-nLatitude) * 3.14159 / 180) * cos((90-`user`.`latitude`) * 3.14159 / 180) + sin((90-nLatitude) * 3.14159 / 180) * sin((90-`user`.`latitude`) * 3.14159 / 180) * cos((nLongitude-`user`.`longitude`) * 3.14159 / 180)) * 6370) <= `user`.`notify_radius`;
+         END IF;
 	     END;");
 
 	// recreate the user statpic on next request
@@ -619,7 +622,7 @@
 						CALL sp_update_hiddenstat(NEW.`user_id`, NEW.`status`, FALSE);
 
 						IF NEW.`status`=1 THEN
-						  CALL sp_notify_new_cache(NEW.`cache_id`, NEW.`longitude`, NEW.`latitude`);
+						  CALL sp_notify_new_cache(NEW.`cache_id`, NEW.`longitude`, NEW.`latitude`, 1);
 						END IF;
 
 						/* cleanup/delete reserved waypoint */
@@ -724,7 +727,7 @@
 							CALL sp_update_hiddenstat(NEW.`user_id`, NEW.`status`, FALSE);
 						END IF;
             IF OLD.`status`=5 AND NEW.`status`=1 THEN
-              CALL sp_notify_new_cache(NEW.`cache_id`, NEW.`longitude`, NEW.`latitude`);
+              CALL sp_notify_new_cache(NEW.`cache_id`, NEW.`longitude`, NEW.`latitude`, 1);
             END IF;
             IF NEW.`status`<>OLD.`status` THEN
             	INSERT INTO `cache_status_modified` (`cache_id`, `date_modified`, `old_state`, `new_state`, `user_id`) VALUES (NEW.`cache_id`, NOW(), OLD.`status`, NEW.`status`, IFNULL(@STATUS_CHANGE_USER_ID,0));
@@ -1270,6 +1273,7 @@
 							   NEW.`node`!=OLD.`node` OR 
 							   NEW.`date_created`!=OLD.`date_created` OR 
 							   NEW.`username`!=OLD.`username` OR 
+							   NEW.`country`!=OLD.`country` OR 
 							   NEW.`pmr_flag`!=OLD.`pmr_flag` OR
 							   NEW.`description`!=OLD.`description` THEN
 							   
@@ -1387,6 +1391,13 @@
 						   (SELECT `date_created` FROM `caches` WHERE `cache_id`=NEW.`cache_id`) < LEFT(NOW(),10) THEN
 							INSERT IGNORE INTO `caches_attributes_modified` (`cache_id`, `attrib_id`, `date_modified`, `was_set`, `restored_by`) VALUES (NEW.`cache_id`, NEW.`attrib_id`, NOW(), 0, IFNULL(@restoredby,0));
 						END IF;
+						IF (NEW.`attrib_id`=6 AND (SELECT `status` FROM `caches` WHERE `caches`.`cache_id`=NEW.`cache_id`) <= 2) THEN
+							CALL sp_notify_new_cache(
+								NEW.`cache_id`,
+								(SELECT `longitude` FROM `caches` WHERE `caches`.`cache_id`=NEW.`cache_id`),
+								(SELECT `latitude` FROM `caches` WHERE `caches`.`cache_id`=NEW.`cache_id`),
+								2);
+						END IF;
 					END;");
 
 	sql_dropTrigger('cacheAttributesAfterUpdate');
@@ -1401,7 +1412,15 @@
 								CALL sp_update_cache_listingdate(OLD.`cache_id`);
 							END IF;
 						END IF;
-						/* is not called, otherweise cache_attributes_modified would have to be updated */
+						IF (NEW.`attrib_id`=6 AND OLD.`attrib_id`<>6 AND (SELECT `status` FROM `caches` WHERE `caches`.`cache_id`=NEW.`cache_id`) <= 2) THEN
+							CALL sp_notify_new_cache(
+								NEW.`cache_id`,
+								(SELECT `longitude` FROM `caches` WHERE `caches`.`cache_id`=NEW.`cache_id`),
+								(SELECT `latitude` FROM `caches` WHERE `caches`.`cache_id`=NEW.`cache_id`),
+								2);
+						END IF;
+						/* is not called, otherweise cache_attributes_modified would have to be updated,
+						   which would need an extension to restorecaches.php */
 					END;");
 
 	sql_dropTrigger('cacheAttributesAfterDelete');

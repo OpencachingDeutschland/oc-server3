@@ -9,6 +9,7 @@
 
 	require('./lib2/web.inc.php');
 	require_once('./lib2/logic/user.class.php');
+
 	$tpl->name = 'mywatches';
 	$tpl->menuitem = MNU_MYPROFILE_WATCHES;
 
@@ -46,8 +47,12 @@
 				$tpl->assign('error', true);
 		}
 
-		$hours = array(); for ($i = 0; $i < 24; $i++) $hours[] = array('value' => $i, 'time' => mktime($i, 0 , 0));
-		$weekdays = array(); for ($i = 1; $i <= 7; $i++) $weekdays[] = array('value' => $i, 'time' => mktime(0, 0, 0, 0, $i+5, 2000));
+		$hours = array();
+		for ($i = 0; $i < 24; $i++)
+			$hours[] = array('value' => $i, 'time' => mktime($i, 0 , 0));
+		$weekdays = array();
+		for ($i = 1; $i <= 7; $i++)
+			$weekdays[] = array('value' => $i, 'time' => mktime(0, 0, 0, 0, $i+5, 2000));
 
 		$tpl->assign('hours', $hours);
 		$tpl->assign('weekdays', $weekdays);
@@ -75,11 +80,31 @@
 	}
 	else
 	{
-		$rs = sql("SELECT `cache_watches`.`cache_id` AS `cacheid`, `caches`.`wp_oc` AS `wp`, `caches`.`name` AS `name`, `stat_caches`.`last_found` AS `lastfound`, `caches`.`type` AS `type`, `caches`.`status` AS `status`, `ca`.`attrib_id` IS NOT NULL AS `oconly` FROM `cache_watches` INNER JOIN `caches` ON `cache_watches`.`cache_id`=`caches`.`cache_id` INNER JOIN `cache_status` ON `caches`.`status`=`cache_status`.`id` LEFT JOIN `stat_caches` ON `caches`.`cache_id`=`stat_caches`.`cache_id` LEFT JOIN `caches_attributes` `ca` ON `ca`.`cache_id`=`caches`.`cache_id` AND `ca`.`attrib_id`=6 WHERE (`cache_status`.`allow_user_view`=1 OR `caches`.`user_id`='&1') AND `cache_watches`.`user_id`='&1' ORDER BY `caches`.`name`", $login->userid);
+		$rs = sql("
+			SELECT
+				`cache_watches`.`cache_id` AS `cacheid`,
+				`caches`.`wp_oc` AS `wp`,
+				`caches`.`name` AS `name`,
+				`stat_caches`.`last_found` AS `lastfound`,
+				`caches`.`type` AS `type`,
+				`caches`.`status` AS `status`,
+				`ca`.`attrib_id` IS NOT NULL AS `oconly`
+			FROM
+				`cache_watches`
+				INNER JOIN `caches` ON `cache_watches`.`cache_id`=`caches`.`cache_id`
+				INNER JOIN `cache_status` ON `caches`.`status`=`cache_status`.`id`
+				LEFT JOIN `stat_caches` ON `caches`.`cache_id`=`stat_caches`.`cache_id`
+				LEFT JOIN `caches_attributes` `ca` ON `ca`.`cache_id`=`caches`.`cache_id` AND `ca`.`attrib_id`=6
+			WHERE (`cache_status`.`allow_user_view`=1 OR `caches`.`user_id`='&1')
+				AND `cache_watches`.`user_id`='&1'
+			ORDER BY `caches`.`name`",
+			$login->userid);
+
 		$tpl->assign_rs('watches', $rs);
 		sql_free_result($rs);
 	}
 
 	$tpl->assign('action', $action);
 	$tpl->display();
+
 ?>

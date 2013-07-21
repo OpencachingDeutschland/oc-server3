@@ -331,6 +331,16 @@
 		     ADD INDEX `date` (`cache_id`,`date`,`date_created`)");
 	}
 
+	function dbv_117()	// add user profile flag for OConly notifications
+	{
+		if (!sql_field_exists('user','notify_oconly'))
+		{
+			sql("ALTER TABLE `user` ADD COLUMN `notify_oconly` tinyint(1) NOT NULL default '1' AFTER `notify_radius`");
+			sql("UPDATE `user` SET `notify_oconly`=0");
+				// is default-enabled for new users but default-disabled for old users
+		}
+	}
+
 
 	// When adding new mutations, take care that they behave well if run multiple
 	// times. This improves robustness of database versioning.

@@ -77,6 +77,7 @@ class user
 		$this->reUser->addString('activation_code', '', false);
 		$this->reUser->addBoolean('no_htmledit_flag', false, false);
 		$this->reUser->addInt('notify_radius', 0, false);
+		$this->reUser->addInt('notify_oconly', 1, false);
 		$this->reUser->addInt('admin', 0, false);
 		$this->reUser->addInt('data_license', $opt['logic']['license']['newusers'], false);
 		$this->reUser->addInt('node', 0, false);
@@ -241,6 +242,14 @@ class user
 		if (($value+0) < 0 || ($value+0) > 150)
 			return false;
 		return $this->reUser->setValue('notify_radius', $value+0);
+	}
+	function getNotifyOconly()
+	{
+		return $this->reUser->getValue('notify_oconly') != 0;
+	}
+	function setNotifyOconly($value)
+	{
+		return $this->reUser->setValue('notify_oconly', $value ? 1 : 0);
 	}
 	function getPermanentLogin()
 	{

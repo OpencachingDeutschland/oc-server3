@@ -62,12 +62,14 @@
 
 				{if $newLog.type==1}
 					{t 1=$smarty.capture.cachename 2=$smarty.capture.username}%2 found %1{/t}
+					{if $newLog.recommended}<img src="images/rating-star.gif" width="17" height="16" title="{t}with recommendation{/t}">{/if}
 				{elseif $newLog.type==2}
 					{t 1=$smarty.capture.cachename 2=$smarty.capture.username}%2 didn't find %1{/t}
 				{elseif $newLog.type==3}
 					{t 1=$smarty.capture.cachename 2=$smarty.capture.username}%2 wrote a note for %1{/t}
 				{elseif $newLog.type==7}
 					{t 1=$smarty.capture.cachename 2=$smarty.capture.username}%2 visited %1{/t}
+					{if $newLog.recommended}<img src="images/rating-star.gif" width="17" height="16" title="{t}with recommendation{/t}">{/if}
 				{elseif $newLog.type==8}
 					{t 1=$smarty.capture.cachename 2=$smarty.capture.username}%2 want's to visit %1{/t}
 				{elseif $newLog.type==9}

@@ -44,7 +44,7 @@
 				 INNER JOIN `caches` ON `cache_rating`.`cache_id`=`caches`.`cache_id`
 	        LEFT JOIN `caches_attributes` `ca` ON `ca`.`cache_id`=`caches`.`cache_id` AND `ca`.`attrib_id`=6
 	            WHERE `cache_rating`.`user_id`='&1'
-	         ORDER BY `caches`.`name` ASC", $login->userid);
+	         ORDER BY `rating_date` DESC", $login->userid);
 	$tpl->assign_rs('ratings', $rs);
 	sql_free_result($rs);
 

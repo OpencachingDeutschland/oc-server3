@@ -177,7 +177,7 @@ function _chkFound () {
 	{if $logpw}
 	<tr>
 		<td colspan="2">{t}passwort to log:{/t}
-			<input class="input100" type="text" name="log_pw" maxlength="20" value="" /> {if $validate.pwOk==false}<span class="errormsg">{t}Invalid password!{/t}</span>{else}({if $cachetype==6}{t}only for attended-logs{/t}{else}{t}only for found-logs{/t}{/if}){/if}
+			<input class="input100" type="text" name="log_pw" maxlength="20" value="" /> {if $validate.pwOk==false}<span class="errormsg">{t}Invalid password!{/t}</span>{else}({if $cachetype==6}{t}only for attended-logs{/t}{else}{t}only for found logs{/t}{/if}){/if}
 		</td>
 	</tr>
 	<tr><td class="spacer" colspan="2"></td></tr>

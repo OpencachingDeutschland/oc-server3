@@ -29,13 +29,16 @@
 
 	//get last logs
 	$tpl->assign_rs('logs', sql("SELECT `cache_logs`.`cache_id` `cacheid`, `cache_logs`.`type` `type`, `cache_logs`.`date` `date`, `caches`.`name` `name`,
-	                                    `user`.`user_id` AS `userid`, `user`.`username`, `caches`.`wp_oc`, `ca`.`attrib_id` IS NOT NULL AS `oconly`
+	                                    `user`.`user_id` AS `userid`, `user`.`username`, `caches`.`wp_oc`, `ca`.`attrib_id` IS NOT NULL AS `oconly`,
+	                                    `cache_rating`.`rating_date` IS NOT NULL AS `recommended`
 	                               FROM `cache_logs`
 	                         INNER JOIN `caches` ON `cache_logs`.`cache_id`=`caches`.`cache_id`
 	                         INNER JOIN `user` ON `caches`.`user_id`=`user`.`user_id`
 	                          LEFT JOIN `caches_attributes` `ca` ON `ca`.`cache_id`=`caches`.`cache_id` AND `ca`.`attrib_id`=6
+	                          LEFT JOIN `cache_rating` ON `cache_rating`.`cache_id`=`caches`.`cache_id` AND `cache_rating`.`user_id`=`cache_logs`.`user_id` AND `cache_rating`.`rating_date`=`cache_logs`.`date`
 	                              WHERE `cache_logs`.`user_id`='&1'
-	                           ORDER BY `cache_logs`.`date` DESC, `cache_logs`.`date_created` DESC LIMIT 10", $login->userid));
+	                           ORDER BY `cache_logs`.`date` DESC, `cache_logs`.`date_created` DESC
+														    LIMIT 10", $login->userid));
 
 	//get last hidden caches
 	$tpl->assign_rs('caches', sql("SELECT `caches`.`cache_id`, `caches`.`name`, `caches`.`type`,

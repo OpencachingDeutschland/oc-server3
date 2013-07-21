@@ -13,7 +13,7 @@
 		$exclude_country = 'DE';
 
 		// As nearly all logs are from Germany, retrieving non-German logs is
-		// expensive -> longer cache lifetime and smaller count:
+		// expensive -> longer cache lifetime.
 		$tpl->cache_lifetime = 900;
 		$logcount = 250;
 	}
@@ -62,6 +62,7 @@
 																`cacheloguser`.`user_id`, 
 																`cacheloguser`.`username`,
 																`cache_logs`.`cache_id`,
+																`cache_rating`.`rating_date` IS NOT NULL AS `recommended`,
 																'' AS `pic_uuid`,
 																0 AS `picshown`,
 																(SELECT COUNT(*) FROM `pictures` WHERE `object_type`=1 AND `object_id`=`cache_logs`.`id`) AS `pics`
@@ -72,6 +73,7 @@
 										 INNER JOIN `countries` ON `caches`.`country`=`countries`.`short` 
 										  LEFT JOIN `sys_trans_text` ON `countries`.`trans_id`=`sys_trans_text`.`trans_id` AND `sys_trans_text`.`lang`='&1'
 										  LEFT JOIN `cache_logs_restored` ON `cache_logs_restored`.`id`=`cache_logs`.`id`
+										  LEFT JOIN `cache_rating` ON `cache_rating`.`cache_id`=`caches`.`cache_id` AND `cache_rating`.`user_id`=`cache_logs`.`user_id` AND `cache_rating`.`rating_date`=`cache_logs`.`date`
 										      WHERE IFNULL(`cache_logs_restored`.`restored_by`,0)=0
 										   ORDER BY " . $sqlOrderBy . "`cache_logs`.`date_created` DESC",
 											          $opt['template']['locale']);

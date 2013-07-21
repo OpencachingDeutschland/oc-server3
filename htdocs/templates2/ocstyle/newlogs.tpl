@@ -6,8 +6,27 @@
 {* OCSTYLE *}
 <div class="content2-pagetitle">
 	<img src="resource2/{$opt.template.style}/images/cacheicon/traditional.gif" style="align: left; margin-right: 10px;" width="32" height="32" alt="" />
-	{t}Latest logs entries{/t} {if $rest}{t}Without Germany{/t}{/if}
+	{if $ownerlogs}
+		{if $ownlogs}
+			{t}Newest log entries for your geocaches{/t}
+		{else}
+			{capture name=ownerlink}<a href="viewprofile.php?userid={$ownerid}">{$ownername|escape}</a>{/capture}
+			{t 1=$smarty.capture.ownerlink}Newest log entries for caches of %1{/t}
+		{/if}
+	{else}
+		{t}Latest logs entries{/t} {if $rest}{t}Without Germany{/t}{/if}
+	{/if}
 </div>
+
+{if $ownerlogs && $ownlogs}
+	<p style="line-height:2em">
+		{if $show_own_logs}
+			<a href="ownerlogs.php?ownlogs=0">{t}Hide own logs{/t}</a>
+		{else}
+			<a href="ownerlogs.php?ownlogs=1">{t}Show own logs{/t}</a>
+		{/if}
+	</p>
+{/if}
 
 <table width="100%" class="table"> 
 	{assign var='lastCountry' value=''}
@@ -25,7 +44,7 @@
 			{/if}
 		{/if}
 		<tr>
-			<td>
+			<td style="width:1px">
 				{$newLog.date_created|date_format:$opt.format.date}
 			</td>
 			<td class="listicon">
@@ -54,7 +73,7 @@
 			<td>
 				{if $newLog.oc_team_comment}<img src="resource2/{$opt.template.style}/images/oclogo/oc-team-comment.png" alt="OC-Team" title="{t}OC team comment{/t}"/>{/if}
 				{capture name=cachename}
-					<a href="viewcache.php?wp={$newLog.wp_oc}">{$newLog.cachename|escape}</a>
+					{if $newLog.first}<b>{/if}<a href="viewcache.php?wp={$newLog.wp_oc}">{$newLog.cachename|escape}</a>{if $newLog.first}</b>{/if}
 				{/capture}
 				{capture name=username}
 					<a href="viewprofile.php?userid={$newLog.user_id}">{$newLog.username|escape}</a>
@@ -100,5 +119,5 @@
 		</tr>
 		{assign var='lastCountry' value=$newLog.country_name}
 	{/foreach}
-	<tr><td class="spacer"></td></tr>
+	<tr><td class="spacer" style="height:{$addpiclines}em"></td></tr>
 </table>

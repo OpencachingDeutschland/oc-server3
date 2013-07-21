@@ -128,34 +128,36 @@ function myHomeLoad()
 	</div>
 
 	<table class="table" style="max-width:97%">
-		<tr>
-			{if $caches|@count == 0}
-				<td colspan="4"><p style="margin-bottom:24px">{t}No Geocaches hidden{/t}</p></td>
-			{else}
-				{assign var="archived" value=0}
-				{foreach from=$caches item=cacheItem}
-					{if $cacheItem.status > 2}
-						{assign var="archived" value=$archived+1}
-					{/if}
-				{/foreach}
+		{if $caches|@count == 0}
+			<tr><td colspan="4"><p style="margin-bottom:24px">{t}No Geocaches hidden{/t}</p></td></tr>
+		{else}
+			{assign var="archived" value=0}
+			{foreach from=$caches item=cacheItem}
+				{if $cacheItem.status > 2}
+					{assign var="archived" value=$archived+1}
+				{/if}
+			{/foreach}
+			<tr>
 				<td colspan="4"><b><span style="line-height:2em">{t}Your geocaches hidden{/t}</b><span id="toggle_archived_option" style="display:none">{if $archived>0} (<a href="javascript:toggle_archived()" style="outline:none"><span id="hide_archived">{t}hide archived{/t}</span><span id="show_archived" style="display:none">{t}show archived{/t}</span></a>){/if}</span>:</span></td>
 				<td colspan="2" style="text-align:right"><span style="line-height:2em"><b>{t}Finds{/t} / {t}Last log{/t}</b></span></td>
-			{/if}
-		</tr>
-		{foreach from=$caches item=cacheItem}
-			{if $dotfill == ''}
-				{cycle values="listcolor1,listcolor2" assign=listcolor}
-			{else}
-				{assign var="listcolor" value=""}
-			{/if}
-			<tr {if $cacheItem.status>2}name="row_archived"{/if}>
-				<td>{include file="res_cacheicon_22.tpl" cachetype=$cacheItem.type} {include file="res_oconly.tpl" oconly=$cacheItem.oconly size="15x21"}</td>
-				<td class="{$listcolor}" style="text-align:center"><nobr>{$cacheItem.date_hidden|date_format:$opt.format.datelong}&nbsp;</nobr></td>
-				<td class="{$listcolor}">{include file="res_cachestatus.tpl" status=$cacheItem.status}</td>
-				<td class="{$listcolor}" style="{if strlen($cacheItem.name) < 45}white-space:nowrap;{/if}min-width:300px;max-width:{if $dotfill==''}400{else}300{/if}px;overflow:hidden;"><a href="viewcache.php?wp={$cacheItem.wp_oc}">{$cacheItem.name|escape}</a>{if strlen($cacheItem.name) < 45} &nbsp;&nbsp; <span style="color:#b0b0b0">{$dotfill}</span>{/if}</td>
-				<td class="{$listcolor}" style="text-align:right;" align="right"><nobr>&nbsp;&nbsp;{if $cacheItem.found>0}{$cacheItem.found}{/if} &nbsp;&nbsp; <a href="viewcache.php?cacheid={$cacheItem.cache_id}#logentries">{$cacheItem.lastlog|date_format:$opt.format.date}</a>&nbsp; {include file="res_logtype.tpl" type=$cacheItem.lastlog_type}</nobr></td>
 			</tr>
-		{/foreach}
+			{foreach from=$caches item=cacheItem}
+				{if $dotfill == ''}
+					{cycle values="listcolor1,listcolor2" assign=listcolor}
+				{else}
+					{assign var="listcolor" value=""}
+				{/if}
+				<tr {if $cacheItem.status>2}name="row_archived"{/if}>
+					<td>{include file="res_cacheicon_22.tpl" cachetype=$cacheItem.type} {include file="res_oconly.tpl" oconly=$cacheItem.oconly size="15x21"}</td>
+					<td class="{$listcolor}" style="text-align:center"><nobr>{$cacheItem.date_hidden|date_format:$opt.format.datelong}&nbsp;</nobr></td>
+					<td class="{$listcolor}">{include file="res_cachestatus.tpl" status=$cacheItem.status}</td>
+					<td class="{$listcolor}" style="{if strlen($cacheItem.name) < 45}white-space:nowrap;{/if}min-width:300px;max-width:{if $dotfill==''}400{else}300{/if}px;overflow:hidden;"><a href="viewcache.php?wp={$cacheItem.wp_oc}">{$cacheItem.name|escape}</a>{if strlen($cacheItem.name) < 45} &nbsp;&nbsp; <span style="color:#b0b0b0">{$dotfill}</span>{/if}</td>
+					<td class="{$listcolor}" style="text-align:right;" align="right"><nobr>&nbsp;&nbsp;{if $cacheItem.found>0}{$cacheItem.found}{/if} &nbsp;&nbsp; <a href="viewcache.php?cacheid={$cacheItem.cache_id}#logentries">{$cacheItem.lastlog|date_format:$opt.format.date}</a>&nbsp; {include file="res_logtype.tpl" type=$cacheItem.lastlog_type}</nobr></td>
+				</tr>
+			{/foreach}
+			<tr><td class="spacer" colspan="3"></td></tr>
+			<tr><td colspan="3"><a href="ownerlogs.php">{t}Show log history{/t}</a></td></tr>
+		{/if}
 
 		{* ... unpublished caches *}
 		{if $notpublished|@count}

@@ -5,8 +5,23 @@
  *  Unicode Reminder メモ
  ***************************************************************************/
 
-	require('./lib2/web.inc.php');
-	if (@$newlogs_rest)
+	require_once('./lib2/web.inc.php');
+
+	$add_where = '';
+	$newLogsPerCountry = $opt['logic']['new_logs_per_country'];
+
+	if (isset($ownerid))
+	{
+		$exclude_country = '*';
+		$add_where = "AND `caches`.`user_id`='" . sql_escape($ownerid) . "' ";
+		if (!$show_own_logs)
+			$add_where .= "AND `cache_logs`.`user_id`<>'" . sql_escape($login->userid) . "' ";
+		$tpl->caching = false;
+		$logcount = 200;
+		$newLogsPerCountry = false;
+		$caches_logged = array();
+	}
+	elseif (@$newlogs_rest)
 	{
 		$tpl->name = 'newlogsrest';
 		$tpl->menuitem = MNU_START_NEWLOGSREST;
@@ -14,6 +29,7 @@
 
 		// As nearly all logs are from Germany, retrieving non-German logs is
 		// expensive -> longer cache lifetime.
+		$tpl->caching = true;
 		$tpl->cache_lifetime = 900;
 		$logcount = 250;
 	}
@@ -22,11 +38,10 @@
 		$tpl->name = 'newlogs';
 		$tpl->menuitem = MNU_START_NEWLOGS;
 		$exclude_country = '*';
+		$tpl->caching = true;
 		$tpl->cache_lifetime = 300;
 		$logcount = 250;
 	}
-
-	$tpl->caching = true;
 
 	if (!$tpl->is_cached())
 	{
@@ -39,7 +54,8 @@
 			     INNER JOIN `user` ON `cache_logs`.`user_id`=`user`.`user_id`
 			          WHERE `cache_status`.`allow_user_view`=1
 			                AND `caches`.`country`<>'&1'
-			                AND `username`<>'&2'
+			                AND `username`<>'&2'".
+			                $add_where."
 			       ORDER BY `cache_logs`.`date_created` DESC
 			          LIMIT &3",
 			                $exclude_country,
@@ -104,9 +120,9 @@
 					}
 					else if (count($newLogs) == 1)
 					{
-						$newLogs[count($newLogs)-1]['pic_uuid'] = $rPic['uuid'];
-						$newLogs[count($newLogs)-1]['pic_url'] = $rPic['url'];
-						$newLogs[count($newLogs)-1]['title'] = $rPic['title'];
+						$newLogs[0]['pic_uuid'] = $rPic['uuid'];
+						$newLogs[0]['pic_url'] = $rPic['url'];
+						$newLogs[0]['title'] = $rPic['title'];
 						$pics = $lines_per_pic+1;
 					}
 					else
@@ -122,6 +138,16 @@
 			}
 			$pics--;
 
+			$rLog['first'] = false;
+			if (isset($caches_logged))
+			{
+				if (!isset($caches_logged[$rLog['cache_id']]))
+				{
+					$caches_logged[$rLog['cache_id']] = true;
+					$rLog['first'] = true;
+				}
+			}
+
 			$newLogs[] = $rLog;
 		}
 		sql_free_result($rsLogs);
@@ -129,8 +155,9 @@
 		sql_drop_temp_table_slave('loglist');
 
 		$tpl->assign('newLogs', $newLogs);
+		$tpl->assign('addpiclines', max($pics-1,0));
 
-		$tpl->assign('newLogsPerCountry', $opt['logic']['new_logs_per_country']);
+		$tpl->assign('newLogsPerCountry', $newLogsPerCountry);
 	}
 
 	$tpl->display();

@@ -251,6 +251,12 @@
 	 *
 	 */
 	$opt['logic']['rating']['percentageOfFounds'] = 10;
+	
+	/*
+	 * count of identical logs (date and text) that shows a warning message on
+	 * next log 
+	 */
+	$opt['logic']['masslog']['count'] = 20;
 
 	/* Well known node id's - required for synchronization
 	 *  1 Opencaching Deutschland (www.opencaching.de)

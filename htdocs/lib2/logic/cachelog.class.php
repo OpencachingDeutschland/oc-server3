@@ -295,6 +295,8 @@ class cachelog
 	
 	static function isMasslogging($userId)
 	{
+		global $opt;
+		
 		// check for wrong-dated mass logs 
 		$rs = sql("
 					SELECT `date`, `text`
@@ -330,7 +332,7 @@ class cachelog
 		else 
 			$masslogs = 0;
 		 
-		return ($masslogs > 20);
+		return ($masslogs > $opt['logic']['masslog']['count']);
 	}
 }
 ?>

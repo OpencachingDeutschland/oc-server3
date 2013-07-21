@@ -70,17 +70,29 @@
 			$defaultLogMonth = substr($_COOKIE['oclogdate'],4,2);
 			$defaultLogDay   = substr($_COOKIE['oclogdate'],6,2);
 		}
+		
+		// check if masslog warning is accepted (in cookie)
+		$masslogSaved = isset($_COOKIE['ocmasslogwarn']);
+		if ($masslogSaved)
+			$cookieMasslogSaved = $_COOKIE['ocmasslogwarn'] + 0;
+		else
+		{
+			// save masslog acception in cookie that expires on midnight if clicked
+			if (isset($_REQUEST['notShowMasslogAgain']) && $_REQUEST['notShowMasslogAgain'] == 1)
+				setcookie('ocmasslogwarn', '1', strtotime('tomorrow'));
+		}
 
-		$logText        = (isset($_POST['logtext']))        ? ($_POST['logtext'])           : '';
-		$logType        = (isset($_REQUEST['logtype']))     ? ($_REQUEST['logtype']+0)      : null;
-		$logDateDay     = (isset($_POST['logday']))         ? trim($_POST['logday'])        : ($datesaved ? $defaultLogDay   : date('d'));
-		$logDateMonth   = (isset($_POST['logmonth']))       ? trim($_POST['logmonth'])      : ($datesaved ? $defaultLogMonth : date('m'));
-		$logDateYear    = (isset($_POST['logyear']))        ? trim($_POST['logyear'])       : ($datesaved ? $defaultLogYear  : date('Y'));
-		$logTimeHour    = (isset($_POST['loghour']))        ? trim($_POST['loghour'])       : "";
-		$logTimeMinute  = (isset($_POST['logminute']))      ? trim($_POST['logminute'])     : "";
-		$rateOption     = (isset($_POST['ratingoption']))   ? $_POST['ratingoption']+0      : 0;
-		$rateCache      = (isset($_POST['rating']))         ? $_POST['rating']+0            : 0;
-		$ocTeamComment  = (isset($_REQUEST['teamcomment'])) ? $_REQUEST['teamcomment'] != 0 : 0;
+		$logText         = (isset($_POST['logtext']))                ? ($_POST['logtext'])              : '';
+		$logType         = (isset($_REQUEST['logtype']))             ? ($_REQUEST['logtype']+0)         : null;
+		$logDateDay      = (isset($_POST['logday']))                 ? trim($_POST['logday'])           : ($datesaved ? $defaultLogDay   : date('d'));
+		$logDateMonth    = (isset($_POST['logmonth']))               ? trim($_POST['logmonth'])         : ($datesaved ? $defaultLogMonth : date('m'));
+		$logDateYear     = (isset($_POST['logyear']))                ? trim($_POST['logyear'])          : ($datesaved ? $defaultLogYear  : date('Y'));
+		$logTimeHour     = (isset($_POST['loghour']))                ? trim($_POST['loghour'])          : "";
+		$logTimeMinute   = (isset($_POST['logminute']))              ? trim($_POST['logminute'])        : "";
+		$rateOption      = (isset($_POST['ratingoption']))           ? $_POST['ratingoption']+0         : 0;
+		$rateCache       = (isset($_POST['rating']))                 ? $_POST['rating']+0               : 0;
+		$ocTeamComment   = (isset($_REQUEST['teamcomment']))         ? $_REQUEST['teamcomment'] != 0    : 0;
+		$masslogAccepted = (isset($_REQUEST['notShowMasslogAgain'])) ? $_REQUEST['notShowMasslogAgain'] : ($masslogSaved ? $cookieMasslogSaved : 0);
 		
 		// if not a found log, ignore the rating
 		$rateOption = ($logType == 1 || $logType == 7) + 0;
@@ -241,7 +253,7 @@
 		$tpl->assign('octeamcomment', ($ocTeamComment || (!$cache->statusUserLogAllowed() && $useradmin)) ? true : false);
 		$tpl->assign('octeamcommentclass', (!$cache->statusUserLogAllowed() && $useradmin) ? 'redtext' : '');
 		// masslogs
-		$tpl->assign('masslog', cachelog::isMasslogging($user->getUserId()));
+		$tpl->assign('masslog', cachelog::isMasslogging($user->getUserId()) && $masslogAccepted == 0);
 		// show number of found on log page
 		$tpl->assign('showstatfounds', $user->showStatFounds());
 		

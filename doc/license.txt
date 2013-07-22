@@ -97,19 +97,20 @@ PHP libraries
 
     9.  HTML Purifier
         Path    : lib/htmlpurifier-4.2.0
-                  lib2/HTMLPurifier
+                  htdocs/lib2/HTMLPurifier
         URI     : http://htmlpurifier.org/
         License : LGPL
 
    10.  ss_zip class
-        Path    : lib2/ss_zip.php
+        Path    : htdocs/lib2/ss_zip.php
         URI     : http://smiledsoft.com/demos/phpzip/  (no longer works?)
         License : ??
 
    11.  OKAPI: Opencaching API
         Path    : htdocs/okapi/
         URI     : http://code.google.com/p/opencaching-api/
-        License : MIT
+        License : MIT, with exception of okapi/res/attribute icons which
+                  are under Opencaching-GPL license
 
 
 The following PHP libraries are currently not in use and may be discarded.
@@ -126,11 +127,6 @@ the distrubution!
         URI     : http://freshmeat.net/projects/inputfilter/
                   http://cyberai.users.phpclasses.org/package/2189-PHP-Filter-out-unwanted-PHP-Javascript-HTML-tags-.html
         License : GPL
-
-   14.  SimpleTest unit testing
-        Path    : lib/simpletest
-        URI     : http://simpletest.org/en/download.html
-        License : LGPL
 
 
 JavaScript libraries

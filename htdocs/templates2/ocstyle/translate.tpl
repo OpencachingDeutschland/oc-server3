@@ -49,6 +49,9 @@
 	<a href="translate.php?translang={$translang}&action=textexportnew">{t}Text Download (new){/t} {$translang}</a><br />
 	<a href="translate.php?translang={$translang}&action=textexportall">{t}Text Download (all){/t} {$translang}</a><br />
 	<a href="translate.php?translang={$translang}&action=textimport">{t}Text Import{/t} {$translang}</a><br />
+	{if $translang == 'EN'}
+		<a href="translate.php?translang={$translang}&action=copy_en">{t}Copy EN{/t}</a><br />
+	{/if}
 	<br />
 
 	{if $action=="listnew" || $action=="listfaults" || $action=="listall"}

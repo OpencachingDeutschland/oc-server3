@@ -85,6 +85,8 @@
 
 		edit();
 	}
+	else if ($action == 'copy_en')
+		copy_english_texts();
 	else if ($action == 'listfaults')
 	{
 		$trans = sql("SELECT `sys_trans`.`id`, `sys_trans`.`text` FROM `sys_trans` LEFT JOIN `sys_trans_ref` ON `sys_trans`.`id`=`sys_trans_ref`.`trans_id` WHERE ISNULL(`sys_trans_ref`.`trans_id`) ORDER BY `sys_trans`.`id` DESC");
@@ -770,6 +772,21 @@ function textimport($lang)
 	}
 
 	$tpl->assign('texts', $saTexts);
+}
+
+function copy_english_texts()
+{
+	sql_temp_table('transtmp');
+	sql("
+			CREATE TEMPORARY TABLE &transtmp
+			SELECT `st`.`id` AS `trans_id`, 'EN' AS `lang`, `st`.`text`
+			FROM `sys_trans` `st`
+	    LEFT JOIN `sys_trans_text` `stt` ON `stt`.`trans_id`=`st`.`id` AND `stt`.`lang`='EN'
+	    WHERE `stt`.`trans_id` IS NULL");
+	sql("
+			INSERT INTO `sys_trans_text`
+			SELECT *,NULL FROM &transtmp");
+	sql_drop_temp_table('transtmp');
 }
 
 function addClassesDirecotriesToDirlist($basedir)

@@ -64,13 +64,13 @@ function _chkFound () {
 <form action="log.php" method="post" enctype="application/x-www-form-urlencoded" name="logform" dir="ltr">
 {if $masslog==true}
 <p class="redtext"> 
-	{t}You submitted more than 20 identical logs. Please make sure that you are entering the date of your cache visit, not the current date - also when "late logging" old finds.{/t} 
+	{t 1=$masslogCount}You submitted more than %1 identical logs. Please make sure that you are entering the date of your cache visit, not the current date - also when "late logging" old finds.{/t} 
 </p>
 <p>
 	{t}Wrong log dates can impair several OC functions like searching by last log date. Also, the owner and other caches may think that the cache has been currently found (date and type of the last log are shown in the owner's caches list!), which can adversely affect cache maintenance and lead to more DNFs.{/t}
 </p>
 <p>
-	<input type="checkbox" name="notShowMasslogAgain" value="1" class="checkbox" id="notShowMasslogAgain" /> <label for="notShowMasslogAgain">{t}I know what I am doing, do not show again today.{/t}</label>
+	<input type="checkbox" name="suppressMasslogWarning" value="1" class="checkbox" id="suppressMasslogWarning" /> <label for="suppressMasslogWarning">{t}I know what I am doing, do not show again today.{/t}</label>
 </p>
 {/if}
 {if $showstatfounds==true}

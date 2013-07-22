@@ -11,7 +11,7 @@
 		<input type="hidden" name="cacheid" value="{$cacheid}" />
 
 		<div class="content2-pagetitle">
-			<img src="resource2/{$opt.template.style}/images/profile/22x22-email.png" style="align: left; margin-right: 10px;" width="22" height="22" alt="" />
+			<img src="resource2/{$opt.template.style}/images/profile/32x32-adopt.png" style="align: left; margin-right: 10px;" width="32" height="32" alt="" />
 			{t 1=$cachename|escape}List of users you offered %1 for adoption{/t}
 		</div>
 
@@ -36,6 +36,7 @@
 					</td>
 				</tr>
 			{foreachelse}
+				<tr><td class="spacer" colspan="3"></td></tr>
 				<tr>
 					<td colspan="3">
 						{t}You have no users invited to adopt your cache.{/t}
@@ -43,21 +44,22 @@
 				</tr>
 			{/foreach}
 
-			<tr><td colspan="3">&nbsp;</td></tr>
+			<tr><td colspan="3"></td></tr>
 			<tr>
 				<td class="header" colspan="3">
-					<b>{t 1=$cachename|escape}Offer %1 for adoption{/t}</b>
+					{t 1=$cachename|escape}Offer <b>%1</b> for adoption{/t}
 				</td>
 			</tr>
 			<tr>
 				<td colspan="3">
-					 {t}If you find a user that wants to adopt your Geocache, fill in the username here
+					 <p>{t}If you find a user that wants to adopt your Geocache, fill in the username here
 					 and submit. The user will then see this Geocache under My Profile &gt; Adoptions.
-					 To complete, the user has to accept our terms of use and commit the adoption.
-					 You can offer this Geocache to more than one user. The first user committing the 
+					 To complete, the user has to accept our terms of use and commit the adoption.{/t}</p>
+
+					 <p>{t}You can offer this Geocache to more than one user. The first user committing the 
 					 adoption will get the new owner of this Geocache.
 					 With the adoption, you will give the committing user an unlimited right to use, modifiy, 
-					 publish and sublicense content of this Geocache.{/t}
+					 publish and sublicense content of this Geocache.{/t}</p>
 				</td>
 			</tr>
 			<tr><td colspan="3">&nbsp;</td></tr>
@@ -72,6 +74,7 @@
 			{elseif $error=='self'}
 				<tr><td>&nbsp;</td><td colspan="2"><span class="errormsg">{t}You cannot adopt your own cache!{/t}</span></td></tr>
 			{/if}
+			<tr><td class="spacer" colspan="3"></td></tr>
 			<tr>
 				<td colspan="3">
 					<input type="checkbox" name="tou" value="1" />
@@ -96,7 +99,7 @@
 {elseif $action=='listbyuser'}
 
 	<div class="content2-pagetitle">
-		<img src="resource2/{$opt.template.style}/images/profile/22x22-email.png" style="align: left; margin-right: 10px;" width="22" height="22" alt="" />
+		<img src="resource2/{$opt.template.style}/images/profile/32x32-adopt.png" style="align: left; margin-right: 10px;" width="32" height="32" alt="" />
 		{t}Geocaches the owner offers you for adoption{/t}
 	</div>
 

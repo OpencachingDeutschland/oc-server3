@@ -61,12 +61,16 @@ function _chkFound () {
 	<img src="resource2/{$opt.template.style}/images/description/22x22-logs.png" style="align: left; margin-right: 10px;" width="22" height="22" alt="{t}New log-entry{/t}" />
 	{t 1=$cachelink}Add log-entry for the cache %1{/t}
 </div>
+<form action="log.php" method="post" enctype="application/x-www-form-urlencoded" name="logform" dir="ltr">
 {if $masslog==true}
 <p class="redtext"> 
-	{t}You submitted more than 20 identical logs. Please make sure that you are entering the date of your cache visit, not the current date - also when "late logging" old finds.{/t} 
+	{t 1=$masslogCount}You submitted more than %1 identical logs. Please make sure that you are entering the date of your cache visit, not the current date - also when "late logging" old finds.{/t} 
 </p>
 <p>
 	{t}Wrong log dates can impair several OC functions like searching by last log date. Also, the owner and other caches may think that the cache has been currently found (date and type of the last log are shown in the owner's caches list!), which can adversely affect cache maintenance and lead to more DNFs.{/t}
+</p>
+<p>
+	<input type="checkbox" name="suppressMasslogWarning" value="1" class="checkbox" id="suppressMasslogWarning" /> <label for="suppressMasslogWarning">{t}I know what I am doing, do not show again today.{/t}</label>
 </p>
 {/if}
 {if $showstatfounds==true}
@@ -74,7 +78,6 @@ function _chkFound () {
 	<b>{t 1=$userFound}You found %1 caches until now.{/t}</b>
 </p>
 {/if}
-<form action="log.php" method="post" enctype="application/x-www-form-urlencoded" name="logform" dir="ltr">
 <input type="hidden" name="cacheid" value="{$cacheid}"/>
 <input type="hidden" name="version3" value="1"/>
 <input id="descMode" type="hidden" name="descMode" value="1" />

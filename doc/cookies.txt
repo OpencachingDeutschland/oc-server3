@@ -41,3 +41,8 @@ Name:      'oclogdate'
 Type:      temporary, discarded when browser closes
 Contents:  date of last submitted log
 File:      log.php
+
+Name:      'ocsuppressmasslogwarn'
+Type:      temporary, expires at midnight
+Contents:  suppression of masslog warning
+File:      log.php

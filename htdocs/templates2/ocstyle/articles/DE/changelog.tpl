@@ -10,7 +10,70 @@
 
 	<p>Opencaching Version 1.0 ging im August 2005 online. In den nachfolgenden Jahren wurde die Website stetig verbessert und zur Version 2 weiterentwickelt. Anfang 2011 wurde die Entwicklung vorübergehend eingestellt, bis der neue Verein Opencaching Deutschland sie Mitte 2012 unter der Versionsnummer&nbsp;3.0 wieder aufnahm.</p>
 
-	<p>Im Folgenden sind alle Veränderungen ab OC Version&nbsp;3.0 aufgelistet. Manche Kleinigkeiten wurden zur besseren Übersicht weggelassen und sind im <a href="http://forum.opencaching-network.org/index.php?board=43.0">Entwicklerforum</a> nachlesbar.</p>
+	<p>Im Folgenden sind alle Veränderungen ab OC Version&nbsp;3.0 aufgelistet. Manche Kleinigkeiten wurden zur besseren Übersicht weggelassen und sind im <a href="http://forum.opencaching-network.org/index.php?board=43.0">Entwicklerforum</a> nachlesbar. Neue Funktionen werden manchmal schon vorab freigegeben.</p>
+	<br />
+
+	<p id="v3.0.9"><strong>OC 3.0 Version 9</strong> &ndash; 26. Juli 2013</p>
+	<p><a href="search.php">Suchfunktion</a> überarbeitet:</p>
+	<ul>
+		<li>neues, übersichtlicheres Design</li>
+		<li>Suchergebnisse auf Karte anzeigen</li>
+		<li>deaktivierte und archivierte Caches sind separat ausblendbar (auch auf der Karte)</li>
+		<li>Ausblendoption für Mehrfachlistings geändert in GC-Listings; dabei werden neben den Angaben des Owners zusätzliche, vom OC-Team eingepflegte GC-Wegpunkte berücksichtigt (auch auf der Karte).</li>
+		<li>Cachearten oder -größen sind schneller auswählbar durch neue Schalter &bdquo;alle&ldquo; / &bdquo;keine&ldquo;.</li>
+		<li>Suche nach allen von einem Benutzer geloggten Caches (bisher nur einzeln nach Logtyp)</li>
+	</ul>
+
+	<p>Neues in der <a href="myhome.php#mycaches">Liste eigener Caches</a>:</p>
+	<ul>
+		<li>Anzeige von Cachetyp, Fundzahl und Typ/Datum des letzten Logs</li>
+		<li>archivierte und gesperrte Caches sind ausblendbar</li>
+		<li>Anzeige aller Caches statt nur der neuesten 20</li>
+		<li><a href="ownerlogs.php">Logübersicht</a> für alle eigenen Caches</li>
+	</ul>
+
+	<p>Weitere neue Features:</p>
+	<ul>
+		<li>Empfehlungen werden in allen Loglisten mit <img src="images/rating-star.gif"> markiert.</li>
+		<li>OConly-Caches werden in allen Cachelisten mit <img src="resource2/ocstyle/images/misc/15x15-oc.png"> markiert.</li>
+		<li>OConly-Hinweis in Benachrichtigungen über neue Caches; Benachrichtigung über neu markierte OConly-Caches im Profil aktivierbar</li>
+		<li>Informationen über Schutzgebiete in GPX-, OKAPI- und XML-Interface-Downloads</li>
+		<li>neuer Menüpunkt &bdquo;neue Features&ldquo; auf der Startseite</li>
+		<li>neuer Menüpunkt &bdquo;neue Wiki-Artikel&ldquo; auf der Startseite</li>
+		<li>Deaktivierte Caches werden nach einem Jahr automatisch archiviert, deaktivierte Events nach fünf Wochen.</li>
+		<li>Laufende Auswertung von unzustellbaren Emails; die Benutzer erhalten beim Login einen Hinweis und müssen ihre Mailadresse ändern oder bestätigen.</li>
+		<li>OKAPI: Abfrage von Cacheattributen über OKAPI-eigene, für alle OC-Seiten gültige Attribut-IDs</li>
+		<li>OKAPI: GC- und OC.de-kompatible Cacheattribute in GPX-Dateien</li>
+	</ul>
+
+	<p>Geändert / verbessert:</p>
+	<ul>
+		<li>Bei Eingabe mehrerer Logs wird jeweils das Datum des letzten Logs vorgeschlagen.</li>
+		<li>übersichtlicheres Startseiten-Menü, aufgeteilt in &bdquo;Aktuelles&ldquo; und &bdquo;Opencaching&ldquo;</li>
+		<li><a href="webchat.php">Chat</a> direkt in die OC-Seite integriert</li>
+		<li>Garmin-Download-Fenster kann mit nur einem Klick auf OK geschlossen werden</li>
+		<li>Anzeige eigener unveröffentlichter Caches auf der Karte (kann eine Stunde dauern, bis sie erscheinen)</li>
+		<li>deutlichere Kennzeichnung neuer Caches in Suchergebnislisten; Neu-Zeitraum von 7 auf 14 Tage erweitert</li>
+		<li>Probleme mit der Darstellung von Umlauten auf einigen Garmin-Geräten behoben</li>
+		<li>einfachere Bestätigung der Benutzerregistrierung mit nur einem Klick</li>
+		<li>Ausblenden ungültiger Dutch-Grid-Koordinaten bei &bdquo;andere Koordinatensysteme&ldquo; im Cachelisting</li>
+		<li>neues OC.de-Logo an weiteren Stellen eingebaut</li>
+		<li>Status-Logs werden auch durch Ocprop und beim Deaktivieren von Benutzerkonten erzeugt</li>
+		<li>diverse Verbesserungen auf der Adoptionsseite</li>
+		<li>umfangreiche interne Umstrukturierungen / Aufräumarbeiten</li>
+	</ul>
+
+	<p>Korrigiert (Bugfixes):</p>
+	<ul>
+		<li>Inkonsistenzen in Geokret-Daten behoben (Problem mit als verloren geloggten Geokrets besteht noch)</li>
+		<li>Bildformatierung in der Liste der neuen Logs korrigiert [Bug von Version 5]</li>
+		<li>Noch ein Problem bei der Darstellung von Bildern mit ' im Titel behoben [Bug von Version 5]</li>
+		<li>Übernahme von OC-Benutzernamen in den Chat korrigiert</li>
+		<li>Versionsinkonsistenz in GPX-Dateien behoben durch vollständige Umstellung auf Groundspeak-Version 1.0.1</li>
+		<li>Datumsangabe in Email-Adress-Erinnerungsmails korrigiert</li>
+		<li>Ausgabe von Empfehlungen in der XML-Schnittstelle korrigiert</li>
+		<li>diverse OKAPI-Bugs korrigiert</li>
+  </ul>
 	<br />
 
 	<p id="v3.0.8"><strong>OC 3.0 Version 8</strong> &ndash; 1. Juni 2013</p>

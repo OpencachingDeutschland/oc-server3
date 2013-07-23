@@ -320,7 +320,7 @@ ol {margin: 0px 0px 0px 9px; padding: 0px 0px 0px 25px; list-style-type: decimal
 ul.linklist-noindent {margin: -0.3em 0px 0.5em 0px; padding: 0px; list-style-type: none; line-height: 1.2em; font-size: 120%; }
 ul.linklist-indent {margin: -0.3em 0px 0.5em 0px; padding: 0px 0px 0px 10px; list-style-type: none; line-height: 1.2em; font-size: 120%; }
 div.changelog ul {font-size: 105%; margin: 0px 0px 10px 0px; }
-div.changelog ul li {margin: 0px 0px 0.1em 0px; }
+div.changelog ul li {margin: 0px 0px 0.2em 0px; }
 div.changelog ul li ul {font-size: 90%; margin:0}
 
 /* Tables */

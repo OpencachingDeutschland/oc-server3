@@ -1131,7 +1131,7 @@ function parseXML_GetHTML(xmlobject)
 	var sName = aCaches[0].getAttribute("name");
 	var sWPOC = aCaches[0].getAttribute("wpoc");
 	var sCoords = aCaches[0].getAttribute("coords");
-	var bStatusTNA = aCaches[0].getAttribute("status_tna");
+	var bInactive = aCaches[0].getAttribute("inactive");
 	var sStatusText = aCaches[0].getAttribute("status_text");
 	var nTypeId = aCaches[0].getAttribute("type_id");
 	var sTypeText = aCaches[0].getAttribute("type_text");
@@ -1159,7 +1159,7 @@ function parseXML_GetHTML(xmlobject)
 	*}
 
 	var sHtml = "<div id='mapinfowindow' class='mappopup' style='z-index:800'><table class='mappopup'>";
-	if (bStatusTNA == 1)
+	if (bInactive == 1)
 		sHtml += "<tr><td colspan='2'><font size='2' color='red'><b>" + xmlentities(sStatusText) + "</b></font></td></tr>";
 
 	// InfoWindows have a min width; set min width for content to avoid large right borders:

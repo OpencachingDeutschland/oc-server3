@@ -71,13 +71,13 @@
 			<td colspan="2" style="padding-left: 0px; padding-right: 0px;">
 				<table class="searchtable" border="0" cellspacing="0" cellpadding="0" width="98.5%">
 					<tr>
-					<th width="18" height="13" >&nbsp;#&nbsp;</th>
-					<th width="45" height="13">{$distanceunit|escape}</th>
-					<th width="32" height="13">{t}Type{/t}</th>
-					<th width="46" height="13">{t}D/T{/t}</th>
-					<th width="460" height="13">{t}Name{/t}</th>
-					<th width="48" height="13">&nbsp;</th>
-					<th width="106" height="13">{if $displayownlogs}{t}Own logs{/t}{else}{t}Last logs{/t}{/if}</th>
+					<th width="18">&nbsp;#&nbsp;</th>
+					<th width="45">{$distanceunit|escape}</th>
+					<th width="32">{t}Type{/t}</th>
+					<th width="46">&nbsp;{t}D/T{/t}</th>
+					<th width="460">{t}Name{/t}</th>
+					<th width="48">&nbsp;</th>
+					<th width="106">{if $displayownlogs}{t}Own logs{/t}{else}{t}Last logs{/t}{/if}</th>
 					</tr>
 					<tr><td></td></tr>
 					<!--a-->

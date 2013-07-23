@@ -11,6 +11,15 @@
 	<p>Opencaching Version 1.0 ging im August 2005 online. In den nachfolgenden Jahren wurde die Website stetig verbessert und zur Version 2 weiterentwickelt. Anfang 2011 wurde die Entwicklung vorübergehend eingestellt, bis der neue Verein Opencaching Deutschland sie Mitte 2012 unter der Versionsnummer&nbsp;3.0 wieder aufnahm.</p>
 
 	<p>Im Folgenden sind alle Veränderungen ab OC Version&nbsp;3.0 aufgelistet. Manche Kleinigkeiten wurden zur besseren Übersicht weggelassen und sind im <a href="http://forum.opencaching-network.org/index.php?board=43.0">Entwicklerforum</a> nachlesbar. Neue Funktionen werden manchmal schon vorab freigegeben.</p>
+
+	<p>Eine redaktionell aufbereitete Erläuterung neuer Opencaching-Funktionen gibt es auch im <a href="http://blog.dafb-o.de/">Altmetall-Blog</a>:</p>
+	<ul>
+		<li><a href="http://blog.dafb-o.de/opencaching-3-0-version-8-veroeffentlicht/">Version 8</a>: Statuslogs, Listinglayout, Koordinaten für zusätzliche Wegpunkte, Safari-Caches, Kartenfilteroptionen speichern, automatische Archivierung</li>
+		<li><a href="http://blog.dafb-o.de/okapi-jetzt-auch-fuer-opencaching-de/">Version 7</a>: OKAPI</li>
+		<li><a href="http://blog.dafb-o.de/oc-3-0-6-loggen-mit-uhrzeit/">Version 6</a>: Loggen mit Uhrzeit, Schutz vor Listingvandalismus</li>
+		<li><a href="http://blog.dafb-o.de/opencaching-3-0-5-veroeffentlicht/">Version 5</a>: neue Karte, Vorschaubilder, Bildgalerien, Online-Hilfe ...; vorab: <a href="http://blog.dafb-o.de/neue-icons-auf-der-cachekarte/">neue Kartensymbole</a></li>
+		<li><a href="http://blog.dafb-o.de/page/2/">Version 4</a>: GPX-Wegpunkte und -Bildeinbettung, Nano-Caches, neue Datenlizenz</li>
+	</ul>
 	<br />
 
 	<p id="v3.0.9"><strong>OC 3.0 Version 9</strong> &ndash; 26. Juli 2013</p>
@@ -20,7 +29,7 @@
 		<li>Suchergebnisse auf Karte anzeigen</li>
 		<li>deaktivierte und archivierte Caches sind separat ausblendbar (auch auf der Karte)</li>
 		<li>Ausblendoption für Mehrfachlistings geändert in GC-Listings; dabei werden neben den Angaben des Owners zusätzliche, vom OC-Team eingepflegte GC-Wegpunkte berücksichtigt (auch auf der Karte).</li>
-		<li>Cachearten oder -größen sind schneller auswählbar durch neue Schalter &bdquo;alle&ldquo; / &bdquo;keine&ldquo;.</li>
+		<li>Cachearten oder -größen schneller auswählbar durch neue Schalter &bdquo;alle&ldquo; / &bdquo;keine&ldquo;</li>
 		<li>Suche nach allen von einem Benutzer geloggten Caches (bisher nur einzeln nach Logtyp)</li>
 	</ul>
 
@@ -36,13 +45,13 @@
 	<ul>
 		<li>Empfehlungen werden in allen Loglisten mit <img src="images/rating-star.gif"> markiert.</li>
 		<li>OConly-Caches werden in allen Cachelisten mit <img src="resource2/ocstyle/images/misc/15x15-oc.png"> markiert.</li>
-		<li>OConly-Hinweis in Benachrichtigungen über neue Caches; Benachrichtigung über neu markierte OConly-Caches im Profil aktivierbar</li>
-		<li>Informationen über Schutzgebiete in GPX-, OKAPI- und XML-Interface-Downloads</li>
+		<li>OConly-Hinweis in Benachrichtigungen über neue Caches; Benachrichtigung über neu markierte OConlys im Profil aktivierbar</li>
+		<li>Informationen über <a href="http://wiki.opencaching.de/index.php/Schutzgebiete">Schutzgebiete</a> in GPX-, OKAPI- und <a href="http://wiki.opencaching.de/index.php/XML-Schnittstelle">XML-Interface</a>-Downloads</li>
 		<li>neuer Menüpunkt &bdquo;neue Features&ldquo; auf der Startseite</li>
 		<li>neuer Menüpunkt &bdquo;neue Wiki-Artikel&ldquo; auf der Startseite</li>
-		<li>Deaktivierte Caches werden nach einem Jahr automatisch archiviert, deaktivierte Events nach fünf Wochen.</li>
-		<li>Laufende Auswertung von unzustellbaren Emails; die Benutzer erhalten beim Login einen Hinweis und müssen ihre Mailadresse ändern oder bestätigen.</li>
-		<li>OKAPI: Abfrage von Cacheattributen über OKAPI-eigene, für alle OC-Seiten gültige Attribut-IDs</li>
+		<li>Deaktivierte Caches werden nach einem Jahr automatisch archiviert, Events nach fünf Wochen.</li>
+		<li>laufende Auswertung und Vermeidung unzustellbarer Emails; siehe auch Vesion 5 / unzustellbare Emails</li>
+		<li>OKAPI: Abfrage von Cacheattributen über OKAPI-eigene, für alle OC-Seiten einheitliche Attribut-IDs</li>
 		<li>OKAPI: GC- und OC.de-kompatible Cacheattribute in GPX-Dateien</li>
 	</ul>
 
@@ -50,25 +59,25 @@
 	<ul>
 		<li>Bei Eingabe mehrerer Logs wird jeweils das Datum des letzten Logs vorgeschlagen.</li>
 		<li>übersichtlicheres Startseiten-Menü, aufgeteilt in &bdquo;Aktuelles&ldquo; und &bdquo;Opencaching&ldquo;</li>
-		<li><a href="webchat.php">Chat</a> direkt in die OC-Seite integriert</li>
-		<li>Garmin-Download-Fenster kann mit nur einem Klick auf OK geschlossen werden</li>
 		<li>Anzeige eigener unveröffentlichter Caches auf der Karte (kann eine Stunde dauern, bis sie erscheinen)</li>
 		<li>deutlichere Kennzeichnung neuer Caches in Suchergebnislisten; Neu-Zeitraum von 7 auf 14 Tage erweitert</li>
 		<li>Probleme mit der Darstellung von Umlauten auf einigen Garmin-Geräten behoben</li>
+		<li>Garmin-Download-Fenster kann mit nur einem Klick auf OK geschlossen werden</li>
 		<li>einfachere Bestätigung der Benutzerregistrierung mit nur einem Klick</li>
 		<li>Ausblenden ungültiger Dutch-Grid-Koordinaten bei &bdquo;andere Koordinatensysteme&ldquo; im Cachelisting</li>
+		<li><a href="mytop5.php">eigene Empfehlungsliste</a> wird nach Datum sortiert</li>
 		<li>neues OC.de-Logo an weiteren Stellen eingebaut</li>
-		<li>Status-Logs werden auch durch Ocprop und beim Deaktivieren von Benutzerkonten erzeugt</li>
+		<li>Status-Logs (siehe Version 8) werden auch durch <a href="http://wiki.opencaching.de/index.php/Ocprop">Ocprop</a> und beim Deaktivieren von Benutzerkonten erzeugt</li>
 		<li>diverse Verbesserungen auf der Adoptionsseite</li>
 		<li>umfangreiche interne Umstrukturierungen / Aufräumarbeiten</li>
 	</ul>
 
 	<p>Korrigiert (Bugfixes):</p>
 	<ul>
-		<li>Inkonsistenzen in Geokret-Daten behoben (Problem mit als verloren geloggten Geokrets besteht noch)</li>
-		<li>Bildformatierung in der Liste der neuen Logs korrigiert [Bug von Version 5]</li>
+		<li>Inkonsistenzen in Geokret-Daten behoben (Problem mit als verloren gemeldeten Geokrets besteht noch)</li>
+		<li>Seitenlayout bei Anzeige von Bildern in der Liste der neuen Logs korrigiert [Bug von Version 5]</li>
 		<li>Noch ein Problem bei der Darstellung von Bildern mit ' im Titel behoben [Bug von Version 5]</li>
-		<li>Übernahme von OC-Benutzernamen in den Chat korrigiert</li>
+		<li>Übernahme von OC-Benutzernamen in den <a href="webchat.php">Chat</a> korrigiert</li>
 		<li>Versionsinkonsistenz in GPX-Dateien behoben durch vollständige Umstellung auf Groundspeak-Version 1.0.1</li>
 		<li>Datumsangabe in Email-Adress-Erinnerungsmails korrigiert</li>
 		<li>Ausgabe von Empfehlungen in der XML-Schnittstelle korrigiert</li>
@@ -90,8 +99,8 @@
 		<li>Suchergebnisse sind nach Datum des letzten eigenen Logs sortierbar; in der Suchergebnisliste erscheinen dann rechts nur die eigenen Logs</li>
 		<li>Kartenfilter-Einstellungen sind nun permanent speicherbar</li>
 		<li>OC-Supportmitarbeiter können ihr Logs als &bdquo;OC-Team-Log&ldquo; (<img src="resource2/ocstyle/images/oclogo/oc-team-comment.png" />) markieren.</li>
-		<li>zusätzliche Wegpunkte, Loguhrzeit, OC-Team-Log-Flag und Vorschaubild-Flag im <a href="http://wiki.opencaching.de/index.php/XML-Schnittstelle">XML-Interface</a></li>
 		<li>neuer Menüpunkt <a href="okapi/apps/">API-Anwendungen</a> im Benutzerprofil, zur Kontrolle von <a href="okapi">OKAPI</a>-Anwendungsrechten</li>
+		<li><a href="http://wiki.opencaching.de/index.php/XML-Schnittstelle">XML-Interface</a>: zusätzliche Wegpunkte, Loguhrzeit, OC-Team-Log-Flag und Vorschaubild-Flag werden mitgeliefert</li>
 		<li>OKAPI: GC-Codes von Caches und OC-Team-Log-Flag sind abfragbar</li>
 		<li>OKAPI: Bilder in GPX-Dateien sind als &bdquo;Thumbnail&ldquo; einbettbar</li>
 		<li>neue <a href="404.php">Fehlerseite</a> für ungültige Seitenabrufe</li>

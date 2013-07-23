@@ -181,7 +181,7 @@
 
 	<tr>
 		<td class="header-small">
-		<img src="resource2/{$opt.template.style}/images/viewcache/cache-rate.png" align="middle" border="0" />&nbsp;&nbsp;&nbsp;<b>{t}Recommendations{/t}:</b></td>
+		<img src="resource2/{$opt.template.style}/images/viewcache/rating-star.gif" align="middle" border="0" />&nbsp;&nbsp;&nbsp;<b>{t}Recommendations{/t}:</b></td>
 		<td class="header-small" >{t 1=$recommended 2=$maxrecommended}%1 of %2 possibles{/t} {if $recommended>0}[<a href="usertops.php?userid={$userid}">{t}Show all{/t}</a>]{/if}
 		</td>
 	</tr>

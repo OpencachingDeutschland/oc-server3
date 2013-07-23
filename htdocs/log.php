@@ -18,7 +18,7 @@
 	
 	// prepare template and menue
 	$tpl->name = 'log_cache';
-	$tpl->menuitem = MNU_CACHES_SEARCH_VIEWCACHE;
+	$tpl->menuitem = MNU_CACHES_LOG;
 	$tpl->caching = false;
 	
 	// check login

@@ -297,7 +297,8 @@ class cachelog
 	{
 		global $opt;
 		
-		// check for wrong-dated mass logs 
+		// check for probably wrong-dated mass logs
+
 		$rs = sql("
 					SELECT `date`, `text`
 					FROM `cache_logs`

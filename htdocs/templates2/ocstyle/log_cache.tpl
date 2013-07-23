@@ -69,8 +69,8 @@ function _chkFound () {
 <p>
 	{t}Wrong log dates can impair several OC functions like searching by last log date. Also, the owner and other caches may think that the cache has been currently found (date and type of the last log are shown in the owner's caches list!), which can adversely affect cache maintenance and lead to more DNFs.{/t}
 </p>
-<p>
-	<input type="checkbox" name="suppressMasslogWarning" value="1" class="checkbox" id="suppressMasslogWarning" /> <label for="suppressMasslogWarning">{t}I know what I am doing, do not show again today.{/t}</label>
+<p class="spacer_before">
+	<input type="checkbox" name="suppressMasslogWarning" value="1" class="checkbox" id="suppressMasslogWarning" /> <label for="suppressMasslogWarning">{t}I know what I am doing, do not show this advice again today.{/t}</label>
 </p>
 {/if}
 {if $showstatfounds==true}

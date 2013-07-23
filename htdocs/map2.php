@@ -260,7 +260,7 @@ function output_cachexml($sWaypoint)
 
 	$rsCache = sql_slave("SELECT `caches`.`cache_id`, `caches`.`name`, `caches`.`wp_oc`, `caches`.`cache_id`, `caches`.`type`,
 	                             `caches`.`longitude`, `caches`.`latitude`, 
-	                             IF(`caches`.`status` IN (2,3,6), 1, 0) AS `tna`, 
+	                             `caches`.`status`>1 AS `inactive`,
 	                             IFNULL(`trans_status_text`.`text`, `cache_status`.`name`) AS `statustext`,
 	                             IFNULL(`trans_type_text`.`text`, `cache_type`.`name`) AS `type_text`, `cache_type`.`id` AS `type_id`, 
 	                             IFNULL(`trans_size_text`.`text`, `cache_size`.`name`) AS `size`, 
@@ -316,7 +316,7 @@ function output_cachexml($sWaypoint)
 	echo 'name="' . xmlentities($rCache['name']) . '" ';
 	echo 'wpoc="' . xmlentities($rCache['wp_oc']) . '" ';
 	echo 'coords="' . $rCache['longitude'] . ',' . $rCache['latitude'] . '" ';
-	echo 'status_tna="' . xmlentities($rCache['tna']) . '" ';
+	echo 'inactive="' . xmlentities($rCache['inactive']) . '" ';
 	echo 'status_text="' . xmlentities($rCache['statustext']) . '" ';
 	echo 'type_id="' . xmlentities($rCache['type_id']) . '" ';
 	echo 'type_text="' . xmlentities($rCache['type_text']) . '" ';
@@ -449,7 +449,7 @@ function output_searchresult($nResultId, $compact, $nLon1, $nLon2, $nLat1, $nLat
                   LEFT JOIN `cache_logs` `notfound_logs` ON `notfound_logs`.`cache_id`=`caches`.`cache_id` AND `notfound_logs`.`user_id`='&6' AND `notfound_logs`.`type`=2
                   LEFT JOIN `caches_attributes` ON `caches_attributes`.`cache_id`=`caches`.`cache_id` AND `caches_attributes`.`attrib_id`=6
                       WHERE `map2_data`.`result_id`='&1' AND `caches`.`longitude`>'&2' AND `caches`.`longitude`<'&3' AND `caches`.`latitude`>'&4' AND `caches`.`latitude`<'&5'
-	                      AND `caches`.`status`<>5   /* hide unpublished caches */
+	                      AND (`caches`.`status`<>5 OR `caches`.`user_id`='&6')   /* hide unpublished caches */
 	                      AND `caches`.`status`<>6   /* ... and vandalized listings, locked duplicates etc. */
 	                      AND `caches`.`status`<>7   /* ... and locked/invisible caches */
 									 ORDER BY `caches`.`status` DESC, `oconly` AND NOT (`found` OR `notfound`), NOT (`found` OR `notfound`), `caches`.`type`<>4, MD5(`caches`.`name`)

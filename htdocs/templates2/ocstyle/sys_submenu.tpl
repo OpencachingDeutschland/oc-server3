@@ -8,7 +8,7 @@
 	{foreach name=submenu from=$items item=menuitem}
 		{if $menuitem.href == ''}
 			{* separator headline *}
-			<li class="bgcolor1" style="line-height:1.5em">&nbsp;</li>
+			<li class="bgcolor1" style="line-height:1em">&nbsp;</li>
 			<li class="title">{$menuitem.menustring|escape}</li>
 		{else}
 			{* selectable menu option *}

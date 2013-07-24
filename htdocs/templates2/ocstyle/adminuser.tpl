@@ -95,7 +95,7 @@
 			</tr>
 			<tr>
 				<td>{t}Active geocaches:{/t}</td>
-				<td>{$user.hidden_active|escape} &nbsp; &ndash; &nbsp; <a href="ownerlogs.php?userid={$user.user_id|escape}">{t}Show all logentries{/t}</a></td>
+				<td>{$user.hidden_active|escape} &nbsp; &ndash; &nbsp; <a href="ownerlogs.php?userid={$user.user_id|escape}">{t}Show log history{/t}</a></td>
 			</tr>
 			<tr>
 				<td>{t}Cache reports{/t}:</td>

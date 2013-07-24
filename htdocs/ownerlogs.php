@@ -11,8 +11,10 @@
 	$tpl->menuitem = MNU_MYPROFILE_OWNERLOGS;
 	$login->verify();
 
-	if (isset($_REQUEST['userid']))
+	if (isset($_REQUEST['userid']) && $login->hasAdminPriv(ADMIN_USER))
 		$ownerid = $_REQUEST['userid']+0;
+	else if ($login->userid == 0)
+		$tpl->redirect('login.php?target=ownerlogs.php');
 	else
 		$ownerid = $login->userid;
 
@@ -22,7 +24,10 @@
 	$tpl->assign('ownername', $ownername);
 	$tpl->assign('ownerid', $ownerid);
 
-	$show_own_logs = isset($_REQUEST['ownlogs']) && $_REQUEST['ownlogs'];
+	if ($ownerid != $login->userid)
+		$show_own_logs = true;
+	else
+		$show_own_logs = isset($_REQUEST['ownlogs']) && $_REQUEST['ownlogs'];
 	$tpl->assign('show_own_logs', $show_own_logs);
 	$tpl->assign('ownlogs', $ownerid == $login->userid);
 

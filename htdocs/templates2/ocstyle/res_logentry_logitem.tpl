@@ -3,8 +3,9 @@
 *
 *  Unicode Reminder メモ
 ***************************************************************************}
+<div id="log{$logItem.id}">
 <div class="content-txtbox-noshade">  {* Ocprop: <div class="content-txtbox-noshade">(.*?)<\/div> *}
-	<div class="logs" id="log{$logItem.id}">
+	<div class="logs">
 	<p class="content-title-noshade-size1" style="display:inline; margin-right:0">
 		{if $logItem.oc_team_comment}<img src="resource2/{$opt.template.style}/images/oclogo/oc-team-comment.png" alt="OC-Team" title="{t}OC team comment{/t}"/>{/if}
 		{include file="res_logtype.tpl" type=$logItem.type} 
@@ -98,4 +99,5 @@
 
 	</div>
 	</div>
+</div>
 </div>

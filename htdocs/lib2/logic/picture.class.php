@@ -441,5 +441,18 @@ class picture
 
 		return false;
 	}
+
+	function getPageLink()
+	{
+		$pl = 'viewcache.php?cacheid=' . urlencode($this->getCacheId());
+		if ($this->getObjectType() == OBJECT_CACHELOG)
+		{
+			if (!$this->isVisibleOnCachePage())
+				$pl .= "&log=A";
+			$pl .= "#log" . urlencode($this->getLogId());
+		}
+		return $pl;
+	}
+
 }
 ?>

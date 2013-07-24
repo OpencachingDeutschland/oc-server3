@@ -133,7 +133,7 @@
 				else if ($picture->save())
 				{
 					if ($redirect == '')
-						$redirect = 'viewcache.php?cacheid=' . urlencode($picture->getCacheId());
+						$redirect = $picture->getPageLink();
 					$tpl->redirect($redirect);
 				}
 				else
@@ -153,14 +153,7 @@
 			$tpl->error(ERROR_PICTURE_NOT_EXISTS);
 
 		if ($redirect == '')
-		{
-			$redirect = 'viewcache.php?cacheid=' . urlencode($picture->getCacheId());
-			if ($picture->getObjectType() == OBJECT_CACHELOG)
-				if ($picture->isVisibleOnCachePage())
-					$redirect .= "#logentries";
-				else
-					$redirect = "viewlogs.php?cacheid=" . urlencode($picture->getCacheId()) . "#log" . $picture->getLogId();
-		}
+			$redirect = $picture->getPageLink();
 
 		if ($picture->allowEdit() == false)
 			$tpl->error(ERROR_NO_ACCESS);

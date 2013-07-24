@@ -496,7 +496,7 @@
 	<div class="content2-container bg-blue02">
   	<p class="content-title-noshade-size2">
   		<img src="resource2/{$opt.template.style}/images/action/16x16-showall.png" style="align: left; margin-right: 10px;" width="16" height="16" alt="{t}Show all logentries{/t}" />  
-  		[<a href="viewlogs.php?cacheid={$cache.cacheid}">{t}Show all logentries{/t}</a>]
+			[<a href="viewcache.php?cacheid={$cache.cacheid}&log=A#logentries">{t}Show all logentries{/t}</a>]
   	</p>
 	</div>
 {/if}

@@ -16,7 +16,7 @@
 							{else}
 								{assign var=dateformat value=$opt.format.dm}
 							{/if}
-							{if !$loguser}<a href="viewlogs.php?cacheid={$picture.cache_id}#log{$picture.logid}">{/if}{$picture.picdate|date_format:$dateformat}{if !$loguser}</a>{/if}{/if}&nbsp;{if $loguser}<a href="{if $profilelink}viewprofile.php?userid={$picture.user_id}{else}viewlogs.php?cacheid={$picture.cache_id}#log{$picture.logid}{/if}">{$picture.username|escape}</a>
+							{if !$loguser}<a href="viewcache.php?cacheid={$picture.cache_id}&log=A#log{$picture.logid}">{/if}{$picture.picdate|date_format:$dateformat}{if !$loguser}</a>{/if}{/if}&nbsp;{if $loguser}<a href="{if $profilelink}viewprofile.php?userid={$picture.user_id}{else}viewcache.php?cacheid={$picture.cache_id}&log=A#log{$picture.logid}{/if}">{$picture.username|escape}</a>
 						{/if}
 					</div>
 				{/if}

@@ -10,7 +10,7 @@
 
 	<p>Opencaching.de Version 1.0 went online in August 2005 und was steadily enhanced in the following years, switching to Version 2. In the beginning of 2011, development was halted, until the new Opencaching Deutschland association restarted it in July 2012 at Version&nbsp;3.0.</p>
 
-	<p>This page lists all changes since version 3.0. Some small items have been omitted here. New Features may be relased before the final relase date.</p>
+	<p>This page lists all changes since version 3.0. Some minor changes have been omitted here. New Features may be relased before the final relase date.</p>
 	<br />
 
 	<p id="v3.0.9"><strong>OC 3.0 Release 9</strong> &ndash; July 26, 2013</p>

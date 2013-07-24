@@ -34,7 +34,7 @@
 	{
 		//logid
 		$log_id = 0;
-		if (isset($_REQUEST['logid']))
+		if (isset($_REQUEST['logid']))  // Ocprop
 		{
 			$log_id = $_REQUEST['logid'];
 		}
@@ -96,8 +96,11 @@
 					$cache_name = $log_record['cachename'];
 					$cache_type = $log_record['cachetype'];
 					$cache_user_id = $log_record['cache_user_id'];
-					$log_type = isset($_POST['logtype']) ? $_POST['logtype'] : $log_record['logtype'];
 
+					// Ocprop:
+					//  logtype, logday, logmonth, logyear, rating, submitform
+
+					$log_type = isset($_POST['logtype']) ? $_POST['logtype'] : $log_record['logtype'];
 					$log_date_day = isset($_POST['logday']) ? trim($_POST['logday']) : date('d', strtotime($log_record['date']));
 					$log_date_month = isset($_POST['logmonth']) ? trim($_POST['logmonth']) : date('m', strtotime($log_record['date']));
 					$log_date_year = isset($_POST['logyear']) ? trim($_POST['logyear']) : date('Y', strtotime($log_record['date']));
@@ -140,7 +143,7 @@
 
 					tpl_set_var('rating_message', mb_ereg_replace('{rating_msg}', $rating_msg, $rating_tpl));
 
-					if (isset($_POST['descMode']))
+					if (isset($_POST['descMode']))  // Ocprop: 2
 					{
 						$descMode = $_POST['descMode']+0;
 						if (($descMode < 1) || ($descMode > 3)) $descMode = 3;
@@ -165,7 +168,7 @@
 
 					if ($descMode != 1)
 					{
-						// Text from textarea
+						// Text from textarea; Ocprop
 						$log_text = isset($_POST['logtext']) ? ($_POST['logtext']) : ($log_record['text']);
 
 						// fuer alte Versionen von OCProp
@@ -227,7 +230,7 @@
 						$oc_team_comment = 0;
 
 					//store?
-					if (isset($_POST['submitform']) && $date_ok && $logtype_ok && $pw_ok)
+					if (isset($_POST['submitform']) && $date_ok && $logtype_ok && $pw_ok)  // Ocprop
 					{
 						// 00:00:01 = "00:00 was logged"
 						// 00:00:00 = "no time was logged"

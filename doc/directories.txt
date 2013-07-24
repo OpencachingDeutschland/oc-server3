@@ -66,6 +66,9 @@ lib2        OC 2.0+ library, including 3rd party libraries
 libse       Opencaching.se library, used for additional waypoints and "personal notes"
             in cache listings
 
+old         obsolete files which are included for reference only and will be removed
+            later. There are also some 'old' subdirectories at lower levels.
+
 okapi       replicated from http://code.google.com/p/opencaching-api/source/browse/trunk/#trunk%2Fokapi
             with core.php:$revision replaced by current svn revision number
 

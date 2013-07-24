@@ -30,7 +30,7 @@
 	$cacheId = 0;
 	if (isset($_REQUEST['wp']))
 		$cacheId = cache::cacheIdFromWP($_REQUEST['wp']);
-	else if (isset($_REQUEST['cacheid']))
+	else if (isset($_REQUEST['cacheid']))  // Ocprop
 		$cacheId = $_REQUEST['cacheid'];
 	
 	// check adminstatus of user
@@ -82,6 +82,9 @@
 				setcookie('ocsuppressmasslogwarn', '1', strtotime('tomorrow'));
 		}
 
+		// Ocprop:
+		//   logtext, logtype, logday, logmonth, logyear
+
 		$logText                = (isset($_POST['logtext']))                   ? ($_POST['logtext'])                 : '';
 		$logType                = (isset($_REQUEST['logtype']))                ? ($_REQUEST['logtype']+0)            : null;
 		$logDateDay             = (isset($_POST['logday']))                    ? trim($_POST['logday'])              : ($datesaved ? $defaultLogDay   : date('d'));
@@ -100,7 +103,7 @@
 		// get logtext editormode (from form or from userprofile)
 		// 1 = text; 2 = HTML; 3 = tinyMCE 
 		if (isset($_POST['descMode']))
-			$descMode = $_POST['descMode']+0;
+			$descMode = $_POST['descMode']+0;  // Ocprop: 2
 		else
 		{
 			if ($user->getNoHTMLEditor() == 1)
@@ -169,7 +172,7 @@
 		$validate['duplicateLog'] = true;
 		
 		// all checks done, no error => log
-		if (isset($_POST['submitform']) && $loggable)
+		if (isset($_POST['submitform']) && $loggable)  // Ocprop
 		{
 			/*
 			 * check if time is logged

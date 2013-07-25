@@ -739,7 +739,7 @@ function switchAttributeCat2()
 			<td colspan="2">
 				<select name="logtype">
 					{foreach from=$logtype_options item=logtype_option}
-						<option value="{$logtype_option.id|escape}" {if $logtype_option.selcted}selected="selected"{/if}>{$logtype_option.name|escape}</option>
+						<option value="{$logtype_option.id|escape}" {if $logtype_option.selected}selected="selected"{/if}>{$logtype_option.name|escape}</option>
 					{/foreach}
 				</select>
 			</td>

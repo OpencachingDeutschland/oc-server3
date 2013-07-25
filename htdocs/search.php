@@ -1622,6 +1622,7 @@ function outputSearchForm($options)
 		LEFT JOIN `sys_trans_text` ON `sys_trans_text`.`trans_id`=`log_types`.`trans_id` AND `sys_trans_text`.`lang`='&1'
 	  ORDER BY `log_types`.`id` ASC",
 		$opt['template']['locale'], isset($options['logtype']) ? $options['logtype'] : 0);  
+
 	$tpl->assign_rs('logtype_options',$rs);
 	sql_free_result($rs);
 

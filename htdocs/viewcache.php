@@ -227,6 +227,8 @@ function getChildWaypoints($cacheid)
 								break;
 								
 			case 'A': $rscount = current(cache::getLogsCount($cacheid));
+			          // This option is also used when referencing logs, e.g. from log lists
+			          // and picture galleries.
 								break;
  								
 			default:  if ($_REQUEST['log'] > 0)

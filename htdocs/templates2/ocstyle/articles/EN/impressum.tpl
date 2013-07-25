@@ -280,6 +280,11 @@
 		components may be subject to other licenses.
 	</p>
 	<p>
+		For a compilation of third party software components which are currently in use at
+		www.opencaching.de, including license conditions and other information, see
+		<a href="https://github.com/OpencachingDeutschland/oc-server3/blob/stable/doc/license.txt">this document</a>.
+	</p>
+	<p>
 		The source code can be obtained from <a href="https://github.com/OpencachingDeutschland/oc-server3">GitHub</a>.
 	</p>
 	

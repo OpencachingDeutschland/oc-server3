@@ -321,7 +321,12 @@
 		Wortlaut dieser Lizenz befindet sich 
 		<a href="https://github.com/OpencachingDeutschland/oc-server3/blob/master/doc/license.txt">hier</a>. 
 		Dabei ist zu beachten, dass einige Bestandteile der Software von Drittanbietern 
-		stammen. Diese Bestandteile unterliegen m&ouml;glicherweise anderen Lizenzen.
+		stammen. Diese Bestandteile können anderen Lizenzen unterliegen.
+	</p>
+	<p>
+		Eine Aufstellung der Softwarebestandteile von Drittanbietern, die derzeit auf www.opencaching.de
+		verwendet werden, inklusive Lizenzbedingungen und weiterer Angaben gibt es
+		<a href="https://github.com/OpencachingDeutschland/oc-server3/blob/stable/doc/license.txt">hier</a>.
 	</p>
 	<p>
 		Der Quellcode kann via <a href="https://github.com/OpencachingDeutschland/oc-server3">GitHub</a> 

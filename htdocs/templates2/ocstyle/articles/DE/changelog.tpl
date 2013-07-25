@@ -50,7 +50,7 @@
 		<li>neuer Menüpunkt &bdquo;neue Features&ldquo; auf der Startseite</li>
 		<li>neuer Menüpunkt &bdquo;neue Wiki-Artikel&ldquo; auf der Startseite</li>
 		<li>Deaktivierte Caches werden nach einem Jahr automatisch archiviert, Events nach fünf Wochen.</li>
-		<li>laufende Auswertung und Vermeidung unzustellbarer Emails; siehe auch Vesion 5 / unzustellbare Emails</li>
+		<li>laufende Auswertung und Vermeidung unzustellbarer Emails; siehe auch Version 5 / unzustellbare Emails</li>
 		<li>OKAPI: Abfrage von Cacheattributen über OKAPI-eigene, für alle OC-Seiten einheitliche Attribut-IDs</li>
 		<li>OKAPI: GC- und OC.de-kompatible Cacheattribute in GPX-Dateien</li>
 	</ul>

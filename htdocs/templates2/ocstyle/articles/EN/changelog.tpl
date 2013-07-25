@@ -40,7 +40,7 @@
 		<li>information on protection areas in GPX, OKAPI and <a href="doc/xml">XML Interface</a> downloads</li>
 		<li>new menu option &bdquo;New Features&ldquo; on the start page</li>
 		<li>new menu option &bdquo;New Wiki articles&ldquo; (currently German only) on the start page</li>
-		<li>Disabled caches are automatically archived after one year, event caches after five weeks.</li>
+		<li>"Temporarily unavailable" geocaches are automatically archived after one year, event caches after five weeks.</li>
 		<li>ongoing evaluation and avoiding of undeliverable e-mails; see also release 5 / undeliverable emails</li>
 		<li>OKAPI: query geocache attributes via "OKAPI attributes" which are the same on all OC sites</li>
 		<li>OKAPI: GC and OC.de compatible geocache attributes in GPX files</li>
@@ -49,7 +49,7 @@
 	<p>Changed / improved:</p>
 	<ul>
 		<li>When entering multiple logs, the last log date is proposed.</li>
-		<li>Clearer start page menu, splitted into &bdquo;News&ldquo; and &bdquo;Opencaching&ldquo;</li>
+		<li>clearer start page menu, splitted into &bdquo;News&ldquo; and &bdquo;Opencaching&ldquo;</li>
 		<li>show own unpublished caches on the map (can take up to one hour until they appear)</li>
 		<li>bolder tagging of new caches in search result lists; extended new-timespan from 7 to 14 days</li>
 		<li>worked around special character display problems on some Garmin devices</li>

@@ -22,7 +22,7 @@
 	</ul>
 	<br />
 
-	<p id="v3.0.9"><strong>OC 3.0 Version 9</strong> &ndash; 26. Juli 2013</p>
+	<p id="v3.0.9"><strong>OC 3.0 Version 9</strong> &ndash; 25. Juli 2013</p>
 	<p><a href="search.php">Suchfunktion</a> überarbeitet:</p>
 	<ul>
 		<li>neues, übersichtlicheres Design</li>

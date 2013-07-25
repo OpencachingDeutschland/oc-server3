@@ -13,7 +13,7 @@
 	<p>This page lists all changes since version 3.0. Some minor changes have been omitted here. New Features may be relased before the final relase date.</p>
 	<br />
 
-	<p id="v3.0.9"><strong>OC 3.0 Release 9</strong> &ndash; July 26, 2013</p>
+	<p id="v3.0.9"><strong>OC 3.0 Release 9</strong> &ndash; July 25, 2013</p>
 	<p>Reworked <a href="search.php">searching for geocaches</a>:</p>
 	<ul>
 		<li>new, clearer design</li>

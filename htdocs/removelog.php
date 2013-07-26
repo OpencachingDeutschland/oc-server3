@@ -73,7 +73,9 @@
 					exit;
 				}
 
-				if ($log_record['allow_user_view'] != 1 && $log_record['cache_owner_id'] != $usr['userid'])
+				if ($log_record['allow_user_view'] != 1 &&
+				    $log_record['cache_owner_id'] != $usr['userid'] &&
+				    !($usr['admin'] && ADMIN_USER))
 					exit;
 
 				// deleted allowed by cache-owner or log-owner

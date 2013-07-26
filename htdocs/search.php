@@ -1292,7 +1292,7 @@
 				);
 			}
 			else
-				$sFilebasename = 'ocde' . $options['queryid'];
+				$sFilebasename = 'ocde' . $queryid;
 
 			$bUseZip = ($count > $zip_threshold) ||
 			           (isset($_REQUEST['zip']) && ($_REQUEST['zip'] == '1'));

@@ -96,11 +96,11 @@ function change()
 
 function changetext()
 {
-	global $tpl, $login;
+	global $tpl, $login, $opt;
 
 	if (isset($_REQUEST['save']))
 	{
-		$purifier = new OcHTMLPurifier();
+		$purifier = new OcHTMLPurifier($opt);
 		$desctext = isset($_REQUEST['desctext']) ? $purifier->purify($_REQUEST['desctext']) : "";
 		sql("UPDATE `user` SET `description`='&2' WHERE `user_id`='&1'", $login->userid, $desctext);
 	  $tpl->redirect('mydetails.php');

@@ -207,8 +207,11 @@ class WebService
 				# NOTICE: We are including EXTERNAL OCDE library here! This
 				# code does not belong to OKAPI!
 
-				require_once $GLOBALS['rootpath'] . '../lib/htmlpurifier-4.2.0/library/HTMLPurifier.auto.php';
-				$purifier = new \HTMLPurifier();
+				$opt['rootpath'] = $GLOBALS['rootpath'];
+				$opt['html_purifier'] = Settings::get('OCDE_HTML_PURIFIER_SETTINGS');
+				require_once $GLOBALS['rootpath'] . 'lib2/OcHTMLPurifier.class.php';
+
+				$purifier = new \OcHTMLPurifier($opt);
 				$formatted_comment = $purifier->purify($formatted_comment);
 				$value_for_text_html_field = 1;
 			}

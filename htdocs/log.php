@@ -123,7 +123,7 @@
 		// check and prepare log text
 		if ($descMode != 1)
 		{
-			$ocPurifier = new OcHTMLPurifier();
+			$ocPurifier = new OcHTMLPurifier($opt);
 			$logText = $ocPurifier->purify($logText);
 		}
 		else

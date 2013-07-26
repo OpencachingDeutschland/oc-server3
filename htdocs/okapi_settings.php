@@ -43,5 +43,7 @@ function get_okapi_settings()
 		'SITE_LOGO'        => $opt['page']['absolute_url'] . 'resource2/' . $opt['template']['default']['style'] . '/images/oclogo/oc_logo_alpha3.png',
 		'OC_NODE_ID'       => $opt['logic']['node']['id'],
 		'OC_COOKIE_NAME'   => $opt['session']['cookiename'].'data',
+		'OCDE_HTML_PURIFIER_SETTINGS'
+		                   => $opt['html_purifier'],
 	);
 }

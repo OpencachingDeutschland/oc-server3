@@ -7,22 +7,29 @@
 
 require_once($opt['rootpath'] . 'lib2/HTMLPurifier/library/HTMLPurifier.auto.php');
 
+
+// !! THIS CODE IS ALSO USED IN OKAPI !!
+// Any changes must be tested with OKAPI services/logs/submit method.
+// Avoid to include any other OC.de code here.
+
+
 class OcHTMLPurifier extends HTMLPurifier
 {
+	// $opt needs to be passed as parameter here because it resides in another
+	// namespace in OKAPI. All options used here must be included in the
+	// $opt['html_purifier'] array.
 
-    function __construct()
-    {
-    	global $opt;
-    	
-    	// prepare config
-    	$config = HTMLPurifier_Config::createDefault();
-    	
-    	// set cache directory
-    	$config->set('Cache.SerializerPath', $opt['html_purifier']['cache_path']);
-    	
-    	// create parent object with config
-    	parent::__construct($config);
-    }
+	function __construct($opt)
+	{
+		// prepare config
+		$config = HTMLPurifier_Config::createDefault();
+
+		// set cache directory
+		$config->set('Cache.SerializerPath', $opt['html_purifier']['cache_path']);
+
+		// create parent object with config
+		parent::__construct($config);
+	}
 }
 
 

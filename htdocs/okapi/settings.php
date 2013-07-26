@@ -159,6 +159,11 @@ final class Settings
 		 * Minimum size is 64x64 pixels, maximum size 72x72 pixels.
 		 */
 		'SITE_LOGO' => null,
+
+		/**
+		 * Settings for the OCDE HTML purifier which is used by services/logs/submit.
+		 */
+		'OCDE_HTML_PURIFIER_SETTINGS' => array(),
 	);
 
 	/**

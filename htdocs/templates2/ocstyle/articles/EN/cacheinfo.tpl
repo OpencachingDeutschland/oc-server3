@@ -66,6 +66,19 @@
 				<tr><td class="spacer"><img src="/images/trans.gif" border="0" width="1" height="1" alt="" title=""></td></tr>
 			</table>
 
+		<p><b id="cachesize">Cache size:</b> Size of the cache container; common sizes are:
+		<div style="margin-left:12px">
+		<ul>
+			<li><p>nano: tiny, size of a thimble</p></li>
+			<li><p>mikro: e.g. a film canister or a &bdquo;PETling&ldquo;</p></li>
+			<li><p>small: between 100 and 750 ml volume</p></li>
+			<li><p>normal: up to three litres</p></li>
+			<li><p>large: as big as a bucket</p></li>
+			<li><p>very large: everything which is even larger</p></li>
+		</ul>
+		</div>
+		</p>
+
 		<p><b>Coordinates:</b> The hiding place of the cache, or the first stage, trailhead or parking area of a multicache. If the coordinates have to be found by solving a puzzle: An arbitrary coordinate in the target area, so that the cache may be found on maps and the distance may be estimated.</p>
 		<p><b>Country:</b> In which country is the cache location? This information is important especially for near-border caches.</p>
 		<p id="difficulty"><b>Rating:</b> Difficulty and Terrain: Difficulty of the tasks necessary to find and unhide the cache / how demanding is the way to the cache?</p>

@@ -10,9 +10,8 @@
 	<div class="content-txtbox-noshade" style="padding-right: 25px;">
 	
 	
-<p>
-		<b>Name:</b> W&auml;hle einen verst&auml;ndlichen Namen, der den Cache oder seine Umgebung beschreibt. Verwende verschiedene Namen f&uuml;r verschiedene Caches.</p><p>
-			<b id="cachetype">Cacheart:</b> Es gibt mehrere M&ouml;glichkeiten, einen Cache zu gestalten:</p>
+		<p><b>Name:</b> W&auml;hle einen verst&auml;ndlichen Namen, der den Cache oder seine Umgebung beschreibt. Verwende verschiedene Namen f&uuml;r verschiedene Caches.</p>
+		<p><b id="cachetype">Cacheart:</b> Es gibt mehrere M&ouml;glichkeiten, einen Cache zu gestalten:</p>
 			<table  class="table">
 				<tr>
 					<td valign="top" style="padding-top:5px"><img src="resource2/ocstyle/images/cacheicon/traditional.gif" width="32" border="0" height="32" align="left" alt="Normaler Cache" title="Normaler Cache"></td>
@@ -66,6 +65,19 @@
 				</tr>
 				<tr><td class="spacer"><img src="/images/trans.gif" border="0" width="1" height="1" alt="" title=""></td></tr>
 			</table>
+
+		<p><b id="cachesize">Cachegröße:</b> Folgende Größenangaben sind üblich:
+		<div style="margin-left:12px">
+		<ul>
+			<li><p>nano: ein winziger Behälter in Fingerhutgröße</p></li>
+			<li><p>mikro: zum Beispiel eine Filmdose oder ein &bdquo;PETling&ldquo;</p></li>
+			<li><p>klein: ein Behälter mit ca. 100 bis 750 ml Volumen</p></li>
+			<li><p>normal: bis zu drei Litern Inhalt</p></li>
+			<li><p>groß: so groß wie ein Eimer</p></li>
+			<li><p>extrem groß: alles, was deutlich darüber hinausgeht</p></li>
+		</ul>
+		</div>
+		</p>
 
 		<p><b>Koordinaten:</b> Der Ort, an dem der Cache versteckt ist, oder der Startpunkt oder Parkplatz bei einem mehrteiligen Cache. Wenn der Ort oder Startpunkt err&auml;tselt werden muss: Eine beliebige Koordinate im Zielgebiet, damit man den Cache auf der Karte finden und die ungef&auml;hre Entfernung absch&auml;tzen kann.</p>
 		<p><b>Land:</b> In welchem Land liegt der Cache? Besonders wichtig ist diese Angabe bei Caches in Grenzn&auml;he.</p>

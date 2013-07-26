@@ -59,7 +59,7 @@ div#langstripe {
 }
 
 #ocmain ul li {
-	font-size: 110%; 
+	font-size: 12px;
 }
 
 #ocmain p, #ocmain ul, #ocmain ol {
@@ -319,9 +319,9 @@ ul.indent li {margin-bottom:4px}
 ol {margin: 0px 0px 0px 9px; padding: 0px 0px 0px 25px; list-style-type: decimal; list-style-position: outside; font-size: 120%;}
 ul.linklist-noindent {margin: -0.3em 0px 0.5em 0px; padding: 0px; list-style-type: none; line-height: 1.2em; font-size: 120%; }
 ul.linklist-indent {margin: -0.3em 0px 0.5em 0px; padding: 0px 0px 0px 10px; list-style-type: none; line-height: 1.2em; font-size: 120%; }
-div.changelog ul {font-size: 105%; margin: 0px 0px 10px 0px; }
+div.changelog ul {margin: 0px 0px 10px 0px; }
 div.changelog ul li {margin: 0px 0px 0.2em 0px; }
-div.changelog ul li ul {font-size: 90%; margin:0}
+div.changelog ul li ul {font-size: 83%; margin:0}
 
 /* Tables */
 .table {font-size: 10px; line-height: 1.8em; clear: left; padding: 0px; margin: 0.5em 0px 0.2em 0px; border: solid 0px rgb(150,150,150); empty-cells: show; border-collapse: collapse; background-color: rgb(255,255,255);}
@@ -1500,3 +1500,5 @@ p.editlog { font-weight: 400; display:inline; }
 
 label.disabled { color:grey; }
 .formlabel { color:#555; font-weight:bold; line-height:1.5em !important}
+
+.smalltext { font-size:88% !important }

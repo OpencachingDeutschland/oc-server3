@@ -35,19 +35,6 @@
 		</tr>
 	{/if}
 
-	{if $pmr==1}
-		<tr>
-			<td style="vertical-align:top;"><b>{t}Others{/t}:</b></td>
-			<td>
-				<ul>
-					{if $pmr==1}
-						<li>{t}I'm taking an PMR radio on channel 2 with me{/t}</li>
-					{/if}
-				</ul>
-			</td>
-		</tr>
-	{/if}
-
 	<tr>
 		<td><b>{t}Registered&nbsp;since{/t}:</b></td>
 		<td>{$registered|date_format:$opt.format.date}</td>
@@ -83,6 +70,15 @@
 			{/if}
 		</tr>
 	{/foreach}
+
+	{if $pmr==1}
+		<tr>
+			<td style="vertical-align:top;"><b>{t}Others{/t}:</b></td>
+			<td>
+				{t}I'm taking an PMR radio on channel 2 with me{/t}<br />
+			</td>
+		</tr>
+	{/if}
 
 	<tr><td><td class="spacer"> </td></tr>
 </table>

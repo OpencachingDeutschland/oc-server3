@@ -79,10 +79,12 @@
 					{t}This enables the receiver to answer your E-Mail directly with his E-Mail agent.{/t}<br />
 					<br />
 					<img src="resource2/{$opt.template.style}/images/misc/hint.gif" border="0" width="15" height="11" align="middle">
-					{t}To protect you and us from abuse:{/t}
-					<li>{t}Only E-Mail that regards Geocaching are allowed. Spaming is not allowed!{/t}</li>
-					<li>{t}All relevant informations will be logged (date/time, sender/receiver and IP address){/t}</li>
-					<li>{t}All informations will be handled confidential and not published to third parties!{/t}</li>
+					<span class="smalltext">{t}To protect you and us from abuse:{/t}</span>
+					<ul style="margin:0">
+					<li class="smalltext">{t}Only E-Mail that regards Geocaching are allowed. Spaming is not allowed!{/t}</li>
+					<li class="smalltext">{t}All relevant informations will be logged (date/time, sender/receiver and IP address){/t}</li>
+					<li class="smalltext">{t}All informations will be handled confidential and not published to third parties!{/t}</li>
+					</ul>
 				</td>
 			</tr>
 			<tr><td class="spacer" colspan="2"></td></tr>

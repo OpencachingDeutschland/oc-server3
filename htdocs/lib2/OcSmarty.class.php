@@ -225,6 +225,21 @@ class OcSmarty extends Smarty
 		if ($this->title == '')
 			$optn['template']['title'] = $menu->GetMenuTitle();
 
+		// build address for switching locales
+		$locale_pageadr = $_SERVER['REQUEST_URI'];
+		$lpos = strpos($locale_pageadr,"locale=");
+		if ($lpos)
+			$locale_pageadr = substr($locale_pageadr,0,$lpos);
+		else
+		{
+			$urx = explode('#', $locale_pageadr);
+			$locale_pageadr = $urx[0];
+			if (strpos($locale_pageadr,'?') == 0)
+				$locale_pageadr .= '?';
+			else
+				$locale_pageadr .= '&';
+		}
+		$this->assign('locale_pageadr', $locale_pageadr);
 
 		if ($opt['logic']['license']['disclaimer'])
 		{

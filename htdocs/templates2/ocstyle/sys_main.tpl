@@ -125,7 +125,7 @@
 						<td>
 							{foreach from=$opt.template.locales key=localeKey item=localeItem}
 								{if $localeItem.show}
-								<a style="text-decoration: none;" href="index.php?locale={$localeKey}"><img src="{$localeItem.flag}" alt="{$localeItem.name|escape}" width="24px" height="18px" /></a>
+								<a style="text-decoration: none;" href="{$locale_pageadr}locale={$localeKey}"><img src="{$localeItem.flag}" alt="{$localeItem.name|escape}" width="24px" height="18px" /></a>
 							{/if}
 							{/foreach}
 						</td>

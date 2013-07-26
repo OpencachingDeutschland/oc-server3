@@ -14,13 +14,13 @@
 		<td style="white-space:nowrap">
 			<p class="content-title-noshade-size15" style="padding:0; margin:4px;">&nbsp;{t 1=$results_count 2=($search_headline_caches?'':'display:none')}%1 caches<span style="%2"> matched</span>{/t}&nbsp;</p>
 		</td>
-		{if $caches|@count}
-		<td style="text-align:right; width:1px">
-			<a href="search.php?queryid={$queryid}&output=map2bounds&showresult=1&skipqueryid=1&expert=0&utf8=1" class="nooutline"><img src="resource2/ocstyle/images/misc/32x32-world.png"/></a>
-		</td>
-		<td style="white-space:nowrap; text-align:left; padding-bottom:2px">
-			<p class="inheader"><a href="search.php?queryid={$queryid}&output=map2bounds&showresult=1&skipqueryid=1&expert=0&utf8=1">{t}Show on map{/t}</a></p>
-		</td>
+		{if $caches|@count && $enable_mapdisplay}
+			<td style="text-align:right; width:1px">
+				<a href="search.php?queryid={$queryid}&output=map2bounds&showresult=1&skipqueryid=1&expert=0&utf8=1" class="nooutline"><img src="resource2/ocstyle/images/misc/32x32-world.png"/></a>
+			</td>
+			<td style="white-space:nowrap; text-align:left; padding-bottom:2px">
+				<p class="inheader"><a href="search.php?queryid={$queryid}&output=map2bounds&showresult=1&skipqueryid=1&expert=0&utf8=1">{t}Show on map{/t}</a></p>
+			</td>
 		{/if}
 		<td style="text-align:right; padding-bottom:2px"><p class="inheader">
 			<span style="white-space:nowrap">[<a href="query.php?action=save&queryid={$queryid}">{t}Save options{/t}</a>]</span>

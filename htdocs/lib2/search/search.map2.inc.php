@@ -8,6 +8,9 @@
  *  (use caching of the same quries)
  ***************************************************************************/
 
+	if (!$enable_mapdisplay)
+		$tpl->error(ERROR_INVALID_OPERATION);
+
 	$sqlchecksum = sprintf('%u', crc32($cachesFilter."\n".$sqlFilter));
 
 	// check if query was already executed within the cache period

@@ -1149,9 +1149,14 @@
 		$sAddWhere = '';
 		$sGroupBy = '';
 
+		// disallow mapping other users' logs for data protection reasons
+		$enable_mapdisplay = ($options['searchtype'] != 'byfinder') ||
+		                     ($options['finderid'] == $login->userid);
+
 		// *** load output module ***
 		//
-		// (map2 module will execute and exit)
+		// (map2 module will execute and exit; it will use the variables
+		// $cachesFilter, $sqlFilter and $map2_bounds and $options['queryid'].)
 
 		require($opt['rootpath'] . 'lib2/search/search.' . $output_module . '.inc.php');
 
@@ -1364,8 +1369,7 @@
 			//    $sqlLimit
 			//    $options['sort']
 			//    $options['queryid']
-			//    $cachesFilter
-			//    $map2_bounds
+			//    $enable_mapdisplay
 			//=================================================================
 
 			search_output();
@@ -1608,8 +1612,13 @@ function outputSearchForm($options)
 	$tpl->assign('terrainmin', $options['terrainmin']);
 	$tpl->assign('terrainmax', $options['terrainmax']);
 	$tpl->assign('terrain_options', array(0,2,3,4,5,6,7,8,9,10));
-	
+
 	// logtypen
+	if (isset($options['logtype']))
+		$logtypes = explode(',', $options['logtype']);
+	else
+		$logtypes = array();
+
 	$rs = sql("
 		SELECT `id`,
 		IFNULL(`sys_trans_text`.`text`, `log_types`.`name`) AS `name`,
@@ -1621,7 +1630,7 @@ function outputSearchForm($options)
 		) `log_types`
 		LEFT JOIN `sys_trans_text` ON `sys_trans_text`.`trans_id`=`log_types`.`trans_id` AND `sys_trans_text`.`lang`='&1'
 	  ORDER BY `log_types`.`id` ASC",
-		$opt['template']['locale'], isset($options['logtype']) ? $options['logtype'] : 0);  
+		$opt['template']['locale'], $logtypes ? $logtypes[0] : 0);
 
 	$tpl->assign_rs('logtype_options',$rs);
 	sql_free_result($rs);

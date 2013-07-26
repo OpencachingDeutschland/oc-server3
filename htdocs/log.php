@@ -204,6 +204,7 @@
 				$cacheLog->setText($logText);
 				$cacheLog->setTextHtml(($descMode != 1) ? 1 : 0);
 				$cacheLog->setTextHtmlEdit(($descMode == 3) ? 1 : 0);
+				$cacheLog->setOcTeamComment($ocTeamComment);
 				
 				// save log values
 				$cacheLog->save();

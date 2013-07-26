@@ -260,7 +260,7 @@
 		$tpl->assign('masslog', cachelog::isMasslogging($user->getUserId()) && $suppressMasslogWarning == 0);
 		// show number of found on log page
 		$tpl->assign('showstatfounds', $user->showStatFounds());
-		
+		$tpl->assign('logpw', $cache->requireLogPW());
 	}
 	else
 	{

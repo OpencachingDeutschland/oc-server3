@@ -244,7 +244,7 @@ class cache
 	// TODO: use prepared one way hash
 	function validateLogPW($nLogType, $sLogPW)
 	{
-		if ($sLogPW == '')
+		if (!$this->requireLogPW())
 			return true;
 
 		if (sql_value("SELECT `require_password` FROM `log_types` WHERE `id`='&1'", 0, $nLogType) == 0)

@@ -446,7 +446,7 @@
 		// This is used by the map, which implements its own query-caching.
 	if ($bRememberQuery)
 	{
-		if ($options['showresult'] != 0)  // 'showresult' = "execute query"
+		if ($queryid == 0 && $options['showresult'] != 0)  // 'showresult' = "execute query"
 		{
 			sql("INSERT INTO `queries` (`user_id`, `options`, `last_queried`) VALUES (0, '&1', NOW())", serialize($options));
 			$options['queryid'] = sql_insert_id();

@@ -230,6 +230,37 @@
 
  	// require SSL for SOAP access
  	$opt['page']['nusoap_require_https'] = false;
+ 	
+ 	
+ 	/*
+ 	 * configure infos on 404.php
+ 	 */
+ 	$opt['page']['404']['www.opencaching.de'] = array(
+ 			'blog' => array(
+ 					'show' => false,
+ 					'feedurl'  => '',
+ 					'url' => '',
+ 					'urlname' => '',
+ 				),
+ 			'forum' => array(
+ 					'show' => false,
+ 					'feedurl'  => '',
+ 					'url' => '',
+ 					'urlname' => '',
+ 				),
+ 			'wiki' => array(
+ 					'show' => false,
+ 					'feedurl'  => '',
+ 					'url' => '',
+ 					'urlname' => '',
+ 				),
+ 			
+			'newcaches' => array(
+					'show' => true,
+					'url' => 'http://www.opencaching.de',
+					'urlname' => 'www.opencaching.de',
+				),
+ 		);
 
 	/* multi-domain settings
 	 *

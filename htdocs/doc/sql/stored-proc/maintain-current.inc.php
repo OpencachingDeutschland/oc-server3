@@ -7,6 +7,33 @@
 
 	***************************************************************************/
 
+ /**
+  * global variables which are used here:
+  * 
+  * @LAST_UUID
+	*   The last generated UUID.
+	* 
+  * @dont_update_listingdate and @dont_update_logdate
+	*   Flags which prevent recursive write access to 'caches' resp. 'cache_logs'
+	*   from within SELECTs on the same tables.
+	* 
+	* @XMLSYNC
+	*   Set by the XML client (local/ocxml11client) to prevent updates of
+	*   modification dates. The dates are replicated and set by the XML client
+	*   itself.
+	* 
+	* @restoredby
+	*   ID of the admin who is restoring a vandalized listing, see
+	*   htdocs/restorecaches.php.
+	* 
+	* @archive_picop
+	*   determines if a 'pictures' table change is to be recorded to make it
+	*   vandalism-restorable.
+	* @original_picid
+	*   original ID of a restored picture
+	*/ 
+
+
 	/* get prefered language from string
 	 */
 	sql_dropFunction('PREFERED_LANG');

@@ -44,7 +44,6 @@
 	// database names
 	$opt['db']['placeholder']['db'] = 'ocde';
 	$opt['db']['placeholder']['tmpdb'] = 'ocdetmp';
-	$opt['db']['placeholder']['hist'] = 'ocde';
 
 	/* cookie or session
 	 *

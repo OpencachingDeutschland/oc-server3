@@ -1,7 +1,7 @@
 {***************************************************************************
 *  You can find the license in the docs directory
 *
-*  Unicode Reminder ..
+*  Unicode Reminder メモ
 ***************************************************************************}
 	<div class="content2-pagetitle">
 		<img src="resource2/{$opt.template.style}/images/cacheicon/traditional.gif" style="align: left; margin-right: 10px;" width="32" height="32" alt="" />Cosa è il Geocaching

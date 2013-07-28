@@ -1,7 +1,7 @@
 {***************************************************************************
 *  You can find the license in the docs directory
 *
-*  Unicode Reminder ..
+*  Unicode Reminder メモ
 ***************************************************************************}
 
 	<div class="content2-pagetitle">

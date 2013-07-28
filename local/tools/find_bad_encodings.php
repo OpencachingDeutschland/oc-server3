@@ -4,7 +4,7 @@
  *
  *  Unicode Reminder メモ
  *
- *  Searches for Unicode byte order marks in code and template files
+ *  Searches for files which are no longer Unicode-encoded
 ***************************************************************************/
 
 chdir ("../../htdocs");
@@ -14,7 +14,7 @@ require('lib2/cli.inc.php');
 scan('.', false);
 
 foreach (
-	array('api', 'lang', 'lib', 'lib2', 'libse', 'okapi', 'templates2', 'util', 'util2', 'xml')
+	array('api', 'lang', 'lib', 'lib2', 'libse', 'templates2', 'util', 'util2', 'xml')
 	as $dir)
 {
 	scan($dir,true);
@@ -35,18 +35,20 @@ function scan($dir, $subdirs)
 				scan($path,$subdirs);
 			else if (is_file($path))
 				if ((substr($file, -4) == '.tpl') || (substr($file, -4) == '.php'))
-					testforbom($path);
+					test_encoding($path);
 		}
 		closedir($hDir);
 	}
 }
 
 
-function testforbom($path)
+function test_encoding($path)
 {
-	$filestart = file_get_contents($path, false, null, 0, 2);
-	if (ord($filestart) > 126)
-		printf("%02X-%02X found in %s\n", ord($filestart), ord(substr($filestart,1)), $path);
+	$contents = file_get_contents($path, false, null, 0, 2048);
+	$ur = stripos($contents, "Unicode Reminder");
+	if ($ur)
+		if (mb_trim(mb_substr($contents, $ur+17,2)) != "メモ")
+			echo "Bad Unicode Reminder found in $path: ".mb_trim(mb_substr($contents, $ur+17,2))."\n";
 }
 
 

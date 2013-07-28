@@ -2,7 +2,7 @@
 /***************************************************************************
  *  You can find the license in the docs directory
  *
- *  Unicode Reminder ??
+ *  Unicode Reminder メモ
  *
  *  For more information about this smarty-extension see
  *  prefilter.t.php

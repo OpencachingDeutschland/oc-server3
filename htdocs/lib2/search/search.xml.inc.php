@@ -3,6 +3,9 @@
 	/***************************************************************************
 		For license information see doc/license.txt
 
+		Unicode Reminder メモ
+
+
 		XML search output
 
 		This is a very old and primitive API for downloading cache data.

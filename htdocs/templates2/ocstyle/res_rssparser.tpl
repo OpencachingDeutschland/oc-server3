@@ -1,3 +1,8 @@
+{***************************************************************************
+*  You can find the license in the docs directory
+*
+*  Unicode Reminder メモ
+***************************************************************************}
 <div class="buffer" style="width: 500px;height: 2px;">&nbsp;</div>
 	<div class="newsblock">
 {if !$includetext}

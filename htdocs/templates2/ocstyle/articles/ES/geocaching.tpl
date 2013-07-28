@@ -1,3 +1,8 @@
+{***************************************************************************
+*  You can find the license in the docs directory
+*
+*  Unicode Reminder メモ
+***************************************************************************}
 <div class="content2-pagetitle"><img style="MARGIN-RIGHT: 10px; align: left" height="32" alt="" src="resource2/{$opt.template.style}/images/cacheicon/traditional.gif" width="32" />Acerca de Geocaching </div>
 <div class="content-txtbox-noshade" style="PADDING-RIGHT: 25px">
   <p><img style="MARGIN-LEFT: 5px" alt="Über Geocaching" src="images/ueber.jpg" align="right" /></p>

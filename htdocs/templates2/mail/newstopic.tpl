@@ -1,3 +1,8 @@
+{***************************************************************************
+ *  You can find the license in the docs directory
+ *
+ *  Unicode Reminder メモ
+ ***************************************************************************}
 Es wurde ein neuer Newseintrag erstellt.
 
 E-Mail-Adresse des Benutzer: {$email}

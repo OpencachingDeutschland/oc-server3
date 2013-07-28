@@ -3,6 +3,8 @@
  /***************************************************************************
 		For license information see doc/license.txt
 
+		Unicode Reminder メモ
+
 	Dieses Script liest Dateien von GEOnet Names Server (GNS) ein und importiert 
 	diese in die Table gns_locations.
 	Homepage:		http://earth-info.nga.mil/gns/html/
@@ -70,7 +72,7 @@
 
 		echo "$cnt Records imported\n";
 		
-		// ein paar Querschl�ger gleich korrigieren ...
+		// ein paar Querschläger gleich korrigieren ...
 		sql("UPDATE gns_locations SET full_name='Zeluce' WHERE uni=100528 LIMIT 1");
 		sql("UPDATE gns_locations SET full_name='Zitaraves' WHERE uni=-2780984 LIMIT 1");
 		sql("UPDATE gns_locations SET full_name='Zvabek' WHERE uni=105075 LIMIT 1");

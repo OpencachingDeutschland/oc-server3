@@ -1,3 +1,8 @@
+{***************************************************************************
+*  You can find the license in the docs directory
+*
+*  Unicode Reminder メモ
+***************************************************************************}
 <span class="errormsg">
 	{t}Your password did not pass our security check.{/t}<br />
 	{t}Verify that your password matches the following criteria:{/t}<br />

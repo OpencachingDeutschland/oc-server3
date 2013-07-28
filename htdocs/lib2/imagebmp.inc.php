@@ -4,6 +4,10 @@
 *                   BMP Image functions
 *------------------------------------------------------------
 *                      By JPEXS
+*
+* This file is ISO-8859-1 encoded. If you intend to change it
+* to UTF-8, take care that any string functions used are
+* multibyte-aware.
 */
 
 

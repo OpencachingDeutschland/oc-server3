@@ -1,6 +1,8 @@
 <?php
 /* ***
  *  For license information see doc/license.txt
+ *
+ *  Unicode Reminder ãƒ¡ãƒ¢
  
 * RSS Class for Opencaching.de
 * *************************************
@@ -155,9 +157,9 @@
 		}
 	
 		function rss_clear($input) {
-			$umlaute = Array("/ä/","/ö/","/ü/","/Ä/","/Ö/","/Ü/","/ß/");
+			$umlaute = Array("/Ã¤/","/Ã¶/","/Ã¼/","/Ã„/","/Ã–/","/Ãœ/","/ÃŸ/");
 			$replace = Array("ae","oe","ue","Ae","Oe","Ue","ss");
-			$output = preg_replace($umlaute, $replace, $input);
+			$output = mb_ereg_replace($umlaute, $replace, $input);
 			return $output;		
 }	
 

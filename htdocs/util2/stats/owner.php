@@ -1,4 +1,10 @@
 <?php
+/***************************************************************************
+ *	For license information see doc/license.txt
+ *
+ *  Unicode Reminder メモ
+ ***************************************************************************/
+
   $opt['rootpath'] = '../../';
   require($opt['rootpath'] . 'lib2/web.inc.php');
 

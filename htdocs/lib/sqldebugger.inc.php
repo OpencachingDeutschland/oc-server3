@@ -5,6 +5,8 @@
 		begin                : Mon June 27 2006
 
 		For license information see doc/license.txt
+
+		Unicode Reminder メモ
  ****************************************************************************/
 
 require_once($opt['rootpath'] . 'lib/bench.inc.php');

@@ -1,3 +1,8 @@
+{***************************************************************************
+*  You can find the license in the docs directory
+*
+*  Unicode Reminder メモ
+***************************************************************************}
 <form action="childwp.php" method="post" name="fchildwp">
   <input type="hidden" name="cacheid" value="{$cacheid|escape}" />
   <input type="hidden" name="childid" value="{$childid|escape}" />

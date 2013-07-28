@@ -44,11 +44,33 @@ function scan($dir, $subdirs)
 
 function test_encoding($path)
 {
+	static $ur_exclude = array(  // no unicode reminder needed
+		'lang/de/ocstyle/search1/search.result.caches',
+		'lib2/b2evo-captcha',
+		'lib2/HTMLPurifier',
+		'lib2/html2text.class.php',
+		'lib2/imagebmp.inc.php',
+		'lib2/smarty',
+	);
+
 	$contents = file_get_contents($path, false, null, 0, 2048);
 	$ur = stripos($contents, "Unicode Reminder");
 	if ($ur)
+	{
 		if (mb_trim(mb_substr($contents, $ur+17,2)) != "メモ")
 			echo "Bad Unicode Reminder found in $path: ".mb_trim(mb_substr($contents, $ur+17,2))."\n";
+	}
+	else
+	{
+		$ok = false;
+		foreach ($ur_exclude as $exclude)
+		{
+			if (strpos($path,$exclude) === 0)
+				$ok = true;
+		}
+		if (!$ok)
+			echo "No Unicode Reminder found in $path\n";
+	}
 }
 
 

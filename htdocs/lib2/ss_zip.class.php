@@ -2,7 +2,10 @@
 /** SS_ZIP class is designed to work with ZIP archives
 @author Yuriy Horobey, smiledsoft.com
 @email info@smiledsoft.com
+
+Unicode Reminder メモ
 */
+
 class ss_zip{
 	/** contains whole zipfile
 	@see ss_zip::archive()

@@ -1,5 +1,8 @@
 <?php
 
+// This file is ISO-88591-encoded! Beware of the '£' and of
+// not multibyte-aware functions if you intend to change this!
+
 /*************************************************************************
  *                                                                       *
  * class.html2text.inc                                                   *

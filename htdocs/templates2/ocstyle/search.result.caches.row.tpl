@@ -1,5 +1,11 @@
-{* include file for search.result.caches.tpl
-   outputs one cache line of the search result *}
+{***************************************************************************
+*  You can find the license in the docs directory
+*
+*  Unicode Reminder メモ
+*
+*  include file for search.result.caches.tpl
+*  outputs one cache line of the search result 
+***************************************************************************}
 <!--m-->
 <tr>
   <td width="18" class="{$listcolor}">&nbsp;{$position}&nbsp;&nbsp;</td>

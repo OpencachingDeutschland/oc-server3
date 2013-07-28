@@ -1,3 +1,8 @@
+{***************************************************************************
+*  You can find the license in the docs directory
+*
+*  Unicode Reminder メモ
+***************************************************************************}
 <div><img src="http://www.opencaching.de/resource2/ocstyle/images/misc/32x32-tools.png" width="32" height="32" alt="" />CREAR UN NUEVO CACHE </div>
 <div>
   <p><strong>Nombre:</strong> Ha cada cache se le da un nombre. Múltiples caches pueden tener el mismo nombre, pero se debe evitar esto. Buscando un nombre que tenga que ver con el cache -y evitar significativa denominaciones tales como &quot;A81 # 589&quot;. La única restricción en el nombre de la longitud, con un máximo de 60 caracteres están permitidos.</p>

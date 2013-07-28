@@ -13,6 +13,13 @@ There are three library framworks:
 lib1 code is being ported to lib2 and will completely disappear.
 
 
+When adding or renaming code directories, add them also to file scanning in
+
+- htdocs/translate.php
+- local/tools/find_bad_encodings.php
+- local/tools/find_unicode_boms.php
+
+
 Main directories
 ----------------
 

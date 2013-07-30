@@ -1450,20 +1450,21 @@ function outputSearchForm($options)
 	$tpl->assign('orderRatingFirst_checked', $options['orderRatingFirst']);
 	$tpl->assign('hidopt_orderRatingFirst', $options['orderRatingFirst'] ? '1' : '0');
 
-	$tpl->assign('f_userfound_checked', $login->logged_in() && ($options['f_userfound'] == 1));
-	$tpl->assign('hidopt_userfound', ($options['f_userfound'] == 1) ? '1' : '0');
-
 	$tpl->assign('f_userowner_checked', $login->logged_in() &&($options['f_userowner'] == 1));
 	$tpl->assign('hidopt_userowner', ($options['f_userowner'] == 1) ? '1' : '0');
 
-	$tpl->assign('f_inactive_checked', $options['f_inactive'] == 1);
-	$tpl->assign('hidopt_inactive', ($options['f_inactive'] == 1) ? '1' : '0');
+	$tpl->assign('f_userfound_checked', $login->logged_in() && ($options['f_userfound'] == 1));
+	$tpl->assign('hidopt_userfound', ($options['f_userfound'] == 1) ? '1' : '0');
+
+	$tpl->assign('f_ignored_checked', $login->logged_in() && ($options['f_ignored'] == 1));
+	$tpl->assign('hidopt_ignored', ($options['f_ignored'] == 1) ? '1' : '0');
 
 	$tpl->assign('f_disabled_checked', $options['f_disabled'] == 1);
 	$tpl->assign('hidopt_disabled', ($options['f_disabled'] == 1) ? '1' : '0');
 
-	$tpl->assign('f_ignored_checked', $login->logged_in() && ($options['f_ignored'] == 1));
-	$tpl->assign('hidopt_ignored', ($options['f_ignored'] == 1) ? '1' : '0');
+	// archived is called "disabled" here for backward compatibility
+	$tpl->assign('f_inactive_checked', $options['f_inactive'] == 1);
+	$tpl->assign('hidopt_inactive', ($options['f_inactive'] == 1) ? '1' : '0');
 
 	$tpl->assign('f_otherPlatforms_checked', $options['f_otherPlatforms'] == 1);
 	$tpl->assign('hidopt_otherPlatforms', ($options['f_otherPlatforms'] == 1) ? '1' : '0');

@@ -1,4 +1,11 @@
-<?phpclass Validator_Real extends Validator_Numeric
+<?php
+/***************************************************************************
+ *  For license information see doc/license.txt
+ *
+ *  Unicode Reminder メモ
+ ***************************************************************************/
+
+class Validator_Real extends Validator_Numeric
 {
   private $int_len;
   private $dec_len;
@@ -33,4 +40,5 @@
     return floatval($value);
   }
 }
-?>
+
+?>

@@ -1,4 +1,9 @@
 <?php
+/***************************************************************************
+ *  For license information see doc/license.txt
+ *
+ *  Unicode Reminder メモ
+ ***************************************************************************/
 
 class ChildWp_EditPresenter extends ChildWp_Presenter
 {

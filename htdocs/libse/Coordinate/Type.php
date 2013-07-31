@@ -1,4 +1,9 @@
 <?php
+/***************************************************************************
+ *  For license information see doc/license.txt
+ *
+ *  Unicode Reminder メモ
+ ***************************************************************************/
 
 require_once($opt['rootpath'] . 'lib2/logic/const.inc.php');
 

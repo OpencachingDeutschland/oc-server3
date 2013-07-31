@@ -1,4 +1,9 @@
 <?php
+/***************************************************************************
+ *  For license information see doc/license.txt
+ *
+ *  Unicode Reminder メモ
+ ***************************************************************************/
 
 class Coordinate_Formatter
 {

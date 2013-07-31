@@ -1,4 +1,11 @@
-<?phpabstract class Validator_Numeric
+<?php
+/***************************************************************************
+ *  For license information see doc/license.txt
+ *
+ *  Unicode Reminder メモ
+ ***************************************************************************/
+
+abstract class Validator_Numeric
 {
   private $min;
   private $max;
@@ -35,4 +42,5 @@
   abstract protected function getValidateRegex();
   abstract protected function getValue($value);
 }
-?>
+
+?>

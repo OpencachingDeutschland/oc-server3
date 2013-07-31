@@ -1,4 +1,11 @@
-<?phpclass Validator_Regex
+<?php
+/***************************************************************************
+ *  For license information see doc/license.txt
+ *
+ *  Unicode Reminder メモ
+ ***************************************************************************/
+
+class Validator_Regex
 {
   private $regex;
 
@@ -12,4 +19,5 @@
     return mb_ereg_match($this->regex, $value);
   }
 }
-?>
+
+?>

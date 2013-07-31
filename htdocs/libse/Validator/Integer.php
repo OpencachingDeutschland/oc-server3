@@ -1,4 +1,11 @@
-<?phpclass Validator_Integer extends Validator_Numeric
+<?php
+/***************************************************************************
+ *  For license information see doc/license.txt
+ *
+ *  Unicode Reminder メモ
+ ***************************************************************************/
+
+class Validator_Integer extends Validator_Numeric
 {
   private $int_len;
 
@@ -29,4 +36,5 @@
     return intval($value);
   }
 }
-?>
+
+?>

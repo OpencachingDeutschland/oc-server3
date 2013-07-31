@@ -3,9 +3,6 @@
 *
 *  Unicode Reminder メモ
 ***************************************************************************}
-{* check if actualpath is set *}
-{if !isset($actualpath)}{assign var='actualpath' value=''}{/if}
-
 {if $minimap_enabled}
 <div>
 <img class="img-minimap" style="margin:16px 20px 16px 16px; width: 220px; height: 220px; float: right;" src="{$minimap_url}{foreach name=newcaches from=$newcaches item=cacheitem}|{$cacheitem.latitude},{$cacheitem.longitude}{/foreach}">
@@ -14,9 +11,9 @@
 	{foreach name=newcaches from=$newcaches item=cacheitem}
 		<li class="newcache_list_multi" style="margin-bottom: 8px;">
 			<table class="null" cellspacing="0" cellpadding="0"><tr>
-			<td style="vertical-align:top; padding-right:2px; padding-top:2px" rowspan="2">{include file="res_cacheicon_22.tpl" cachetype=$cacheitem.type actualpath=$actualpath}</td>
+			<td style="vertical-align:top; padding-right:2px; padding-top:2px" rowspan="2">{include file="res_cacheicon_22.tpl" cachetype=$cacheitem.type}</td>
 			<td style="vertical-align:top; ">{$cacheitem.date_created|date_format:$opt.format.date}&nbsp;&nbsp;</td>
-			<td style="text-align:left; width:100%"><b><a class="links" href="viewcache.php?cacheid={$cacheitem.cache_id}">{$cacheitem.name|escape}</a></b> {include file="res_oconly.tpl" oconly=$cacheitem.oconly actualpath=$actualpath}
+			<td style="text-align:left; width:100%"><b><a class="links" href="viewcache.php?cacheid={$cacheitem.cache_id}">{$cacheitem.name|escape}</a></b> {include file="res_oconly.tpl" oconly=$cacheitem.oconly}
 			{t}by{/t}
 			<b><a class="links" href="viewprofile.php?userid={$cacheitem.user_id}">{$cacheitem.username|escape}</a></b></td>
 			</tr>

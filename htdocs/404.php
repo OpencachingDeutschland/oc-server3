@@ -19,43 +19,18 @@
 	$tpl->cache_lifetime = 300;
 	$tpl->cache_id = $sUserCountry;
 	
-	// simplify variables if exists
-	$redirectUrl = '';
-	$isRedirect404 = false;
-	if (isset($_SERVER['REDIRECT_URL']))
-	{
-		$redirectUrl = $_SERVER['REDIRECT_URL'];
-		$isRedirect404 = true;
-	}
-	
-	// assign redirection status
+	// test for redirection to this page
+	$isRedirect404 = isset($_SERVER['REDIRECT_URL']);
 	$tpl->assign('isRedirect404', $isRedirect404);
-	
-	// check if original path starts with "/" and remove it
-	if (substr($redirectUrl, 0, 1) == '/')
-		$redirectUrl = substr($redirectUrl, 1);
-	
-	// get number of subdirectories (-1 because the last part of url is treated as file)
-	$numDirs = count(explode('/', $redirectUrl)) - 1 -2;
-	
-	// put ../ together according to $numDirs
-	$prePath = '';
-	for ($i=0; $i<$numDirs;  $i++)
-	{
-		$prePath .= '../';
-	}
-	
-	// assign path
-	$tpl->assign('actualpath',$prePath);
 
-	// website, if is 404 redirection
+	// determine website url, if is 404 redirection
 	if ($isRedirect404)
 	{
 		// check length
 		$uril = 70;
 		$uri = 'http://'.strtolower($_SERVER['SERVER_NAME']).$_SERVER['REQUEST_URI'];
 		// limit to $uril
-		if(strlen($uri) > $uril) {
+		if (strlen($uri) > $uril) {
 			$uri = substr($uri,0,$uril-3).'...';
 		}
 		
@@ -73,7 +48,10 @@
 	// simplify $opt
 	foreach ($options as $option)
 	{
-		$opt404[$option] = (isset($opt['page']['404'][$_SERVER['SERVER_NAME']][$option]) ? $opt['page']['404'][$_SERVER['SERVER_NAME']][$option] : $opt['page']['404']['www.opencaching.de'][$option]);
+		if (isset($opt['page']['404'][$_SERVER['SERVER_NAME']][$option]))
+			$opt404[$option] = $opt['page']['404'][$_SERVER['SERVER_NAME']][$option];
+		else
+			$opt404[$option] = $opt['page']['404']['www.opencaching.de'][$option];
 	}
 	
 	// get feeds from $feeds array

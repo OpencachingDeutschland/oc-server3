@@ -27,26 +27,26 @@
 		<meta http-equiv="gallerimg" content="no" />
 		<meta http-equiv="cache-control" content="no-cache" />
 		<link rel="SHORTCUT ICON" href="favicon.ico">
-		<link rel="apple-touch-icon" href="{$actualpath}resource2/{$opt.template.style}/images/oclogo/apple-touch-icon-iphone.png" />
-		<link rel="apple-touch-icon" sizes="72x72" href="{$actualpath}resource2/{$opt.template.style}/images/oclogo/apple-touch-icon-ipad.png" />
-		<link rel="apple-touch-icon" sizes="114x114" href="{$actualpath}resource2/{$opt.template.style}/images/oclogo/apple-touch-icon-iphone-retina.png" />
-		<link rel="apple-touch-icon" sizes="144x144" href="{$actualpath}resource2/{$opt.template.style}/images/oclogo/apple-touch-icon-ipad-retina.png" />
-		<link rel="stylesheet" type="text/css" href="{$actualpath}resource2/{$opt.template.style}/css/style_screen.css" />
-		<link rel="stylesheet" type="text/css" href="{$actualpath}resource2/{$opt.template.style}/css/style_oc404.css" />
+		<link rel="apple-touch-icon" href="{$opt.page.absolute_urlpath}resource2/{$opt.template.style}/images/oclogo/apple-touch-icon-iphone.png" />
+		<link rel="apple-touch-icon" sizes="72x72" href="{$opt.page.absolute_urlpath}resource2/{$opt.template.style}/images/oclogo/apple-touch-icon-ipad.png" />
+		<link rel="apple-touch-icon" sizes="114x114" href="{$opt.page.absolute_urlpath}resource2/{$opt.template.style}/images/oclogo/apple-touch-icon-iphone-retina.png" />
+		<link rel="apple-touch-icon" sizes="144x144" href="{$opt.page.absolute_urlpath}resource2/{$opt.template.style}/images/oclogo/apple-touch-icon-ipad-retina.png" />
+		<link rel="stylesheet" type="text/css" href="{$opt.page.absolute_urlpath}resource2/{$opt.template.style}/css/style_screen.css" />
+		<link rel="stylesheet" type="text/css" href="{$opt.page.absolute_urlpath}resource2/{$opt.template.style}/css/style_oc404.css" />
 	</head>
 	<body>
 		<div id="frame">
 			<div class="header">
 				<div class="headerimage">
-					<img src="{$actualpath}resource2/{$opt.template.style}/images/head/rotator.php?path={$opt.page.headimagepath}" class="headerimagecontent" />
+					<img src="{$opt.page.absolute_urlpath}resource2/{$opt.template.style}/images/head/rotator.php?path={$opt.page.headimagepath}" class="headerimagecontent" />
 				</div>
 				<div class="headerlogo">
-					<img src="{$actualpath}resource2/{$opt.template.style}/images/oclogo/oc_head_alpha3.png" class="headerimagecontent" />
+					<img src="{$opt.page.absolute_urlpath}resource2/{$opt.template.style}/images/oclogo/oc_head_alpha3.png" class="headerimagecontent" />
 				</div>
 			</div>
 			<div id="head">
 				<p>
-					<img id="oc404" src="{$actualpath}resource2/{$opt.template.style}/images/oc_404.png" title="opencaching.de 404" alt="opencaching.de 404" />
+					<img id="oc404" src="{$opt.page.absolute_urlpath}resource2/{$opt.template.style}/images/oc_404.png" title="opencaching.de 404" alt="opencaching.de 404" />
 					<span class="dnf">- {t}Page not found{/t} - DNF</span>
 				</p>
 			</div>

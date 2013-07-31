@@ -164,6 +164,7 @@ class OcSmarty extends Smarty
 		$optn['page']['headimagepath'] = $opt['page']['headimagepath'];
 		$optn['page']['max_logins_per_hour'] = $opt['page']['max_logins_per_hour'];
 		$optn['page']['absolute_url'] = $opt['page']['absolute_url'];
+		$optn['page']['absolute_urlpath'] = parse_url($opt['page']['absolute_url'], PHP_URL_PATH);
 		$optn['page']['target'] = $this->target;
 		$optn['page']['showdonations'] = $opt['page']['showdonations'];
 		$optn['page']['title'] = $opt['page']['title'];

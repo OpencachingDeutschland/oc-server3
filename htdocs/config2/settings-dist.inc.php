@@ -258,7 +258,7 @@
 			'newcaches' => array(
 					'show' => true,
 					'url' => 'http://www.opencaching.de',
-					'urlname' => 'www.opencaching.de',
+					'urlname' => '',  // optional: show other name than the url-domain
 				),
  		);
 

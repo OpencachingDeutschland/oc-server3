@@ -52,6 +52,8 @@
 			$opt404[$option] = $opt['page']['404'][$_SERVER['SERVER_NAME']][$option];
 		else
 			$opt404[$option] = $opt['page']['404']['www.opencaching.de'][$option];
+		if ($opt404[$option]['urlname'] == '')
+			$opt404[$option]['urlname'] = parse_url($opt404[$option]['url'], PHP_URL_HOST);
 	}
 	
 	// get feeds from $feeds array

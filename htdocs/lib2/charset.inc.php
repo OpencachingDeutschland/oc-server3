@@ -58,6 +58,7 @@ function utf8ToIso88591($s)
           case 0x2026 : $result .= "...";  break;
           case 0x2025 : $result .= "..";   break;
           case 0x20AC : $result .= "Euro"; break; 
+          case 0x2605 : $result .= "*";    break;
           default:
             if ($code >= 0x2000 && $code <= 0x203F)
               $result .= $utf_punct[$code - 0x2000];

@@ -340,6 +340,13 @@ div.changelog ul li ul {font-size: 83%; margin:0}
 .narrowtable th {margin: 0px; background-color: #deebcd; color: #404040; padding: 2px 7px 2px 7px; border-top: solid 1px #404040; border-bottom: solid 1px #404040; empty-cells: show; text-align: left; font-size: 120%; }
 .narrowtable-caption {margin: 0.5em 0px 1.0em 30px; padding: 0px; clear: both; text-align: left; font-size: 120%;}
 
+.stattable { font-size:10px; line-height:1.4em; padding:0; background-color: white; }
+.stattable th { background-color: #deebcd; color: #404040; border:0; min-width: 1.8em; line-height:1.4em; }
+.stattable th.h1 { background-color: #fff; }
+span.percent { font-size: 11px; }
+
+
+
 td.listicon {
 	width:1%;
 	margin-right:0 !important;
@@ -367,9 +374,8 @@ td.search_listcolor2 { background:#f0f0f0; }
 .img-right-border-topmargin {float: right; margin: 3px 0px 0px 10px; border: solid 1px rgb(150,150,150);}
 
 /* Other */
-div.default {
-	font-size:110%;
-}
+div.default { font-size:110%; }
+td.default { font-size:12px; }
 
 /* Links */
 a.nooutline:focus { outline: 0; }

@@ -93,7 +93,7 @@
 	<div>&nbsp;</div>
 {/if}
 
-{* statistics *}
+{* all-caches statistics *}
 <div class="content2-container bg-blue02">
 	<p class="content-title-noshade-size2">
 		<img src="resource2/{$opt.template.style}/images/cacheicon/20x20-3.png" style="align: left; margin-right: 10px;" />
@@ -104,92 +104,99 @@
 <table class="table">
 	<tr><td class="spacer" colspan="2"></td></tr>
 
-	<tr>
-		<td valign="middle" class="header-small" style="padding-top:5px;padding-bottom:5px">
-		<img src="resource2/{$opt.template.style}/images/cacheicon/22x22-traditional.gif" width="22" height="22" align="middle" border="0" />&nbsp;<b>{t}Hidden caches{/t}:</b></td>
-		<td class="header-small">{$hidden}
-			{if $hidden>0}[<a href="search.php?showresult=1&amp;expert=0&amp;f_inactive=0&amp;output=HTML&amp;sort=byname&amp;ownerid={$userid}&amp;searchbyowner=&amp;calledbysearch=0">{t}Show all{/t}</a>]{if $active<$hidden}, {t 1=$active}%1 of these are active{/t} {if $active>0}[<a href="search.php?showresult=1&amp;expert=0&amp;f_inactive=1&amp;output=HTML&amp;sort=byname&amp;ownerid={$userid}&amp;searchbyowner=&amp;calledbysearch=0">{t}Show{/t}</a>]{/if}{/if}{/if}
-		</td>
-	</tr>
+	{include file="res_userstats.tpl"
+	         oconly=false
+	         hidden=$hidden
+	         hidden_active=$active
+	         hidden_by_cachetype=$userstatshidden
+	         found=$founds
+	         found_by_cachetype=$userstatsfound
+	         dnf=$notfound
+	         notes=$note
+	         maintainence=$maintenance
+	         recommended=$recommended
+	         maxrecommended=$maxrecommended
+	         logpics=$logpics
+	         regionstat=$regionstat}
 
-	{if $show_statistics==true}
-		{foreach from=$userstatshidden item=stats}
-			<tr>
-				<td>{include file="res_cacheicon_15.tpl" cachetype=$stats.id}{$stats.cachetype|escape}:</td>
-				<td>{$stats.anzahl}&nbsp;
-				  <span style="color:#666666; font-size:10px;">
-				  (<a href="search.php?showresult=1&expert=0&output=HTML&sort=byname&ownerid={$userid}&searchbyowner=&f_inactive=0&cachetype={$stats.id}&amp;calledbysearch=0">{t}show{/t}</a>)
-				  </span>
-				</td>
-			</tr>
-		{/foreach}
-		<tr><td class="spacer" colspan="2"></td></tr>
-	{/if}
+	<tr><td class="spacer">&nbsp;</td></tr>
+</table>
 
-	<tr>
-		<td valign="middle" class="header-small" style="padding-top:5px;padding-bottom:5px">
-			<img src="resource2/ocstyle/images/log/16x16-found.png" />
-			&nbsp;<b>{t}Caches found{/t}:</b>
-		</td>
-		<td class="header-small">
-			{$founds}
-			{if $founds>0}[<a href="search.php?showresult=1&amp;expert=0&amp;f_inactive=0&amp;output=HTML&amp;sort=byname&amp;finderid={$userid}&amp;searchbyfinder=&amp;logtype=1,7&amp;calledbysearch=0">{t}Show all{/t}</a>]{/if}
-		</td>
-	</tr>
+{* OConly statistics *}
+<div class="content2-container bg-blue02">
+	<p class="content-title-noshade-size2">
+		<img src="resource2/{$opt.template.style}/images/misc/is_oconly_small.png" style="align: left; margin-right: 10px;" />
+		{t}OConly statistics{/t}
+	</p>
+</div>
 
-	{if $show_statistics==true}
-		{foreach from=$userstatsfound item=stats}
-			<tr>
-				<td>{include file="res_cacheicon_15.tpl" cachetype=$stats.id}{$stats.cachetype|escape}:</td>
-				<td>{$stats.anzahl}&nbsp;
-				  <span style="color:#666666; font-size:10px;">
-				  (<a href="search.php?showresult=1&expert=0&output=HTML&sort=byname&finderid={$userid}&searchbyfinder=&f_inactive=0&cachetype={$stats.id}&amp;logtype=1,7&amp;calledbysearch=0">{t}show{/t}</a>)
-				  </span>
-				</td>
-			</tr>
-		{/foreach}
-		<tr><td class="spacer" colspan="2"></td></tr>
-
-		<tr>
-			<td valign="middle" class="header-small" style="padding-top:5px;padding-bottom:5px">
-			<img src="resource2/ocstyle/images/log/16x16-dnf.png" />&nbsp;&nbsp;&nbsp;<b>{t}Not found{/t}:</b></td>
-			<td class="header-small" >{$notfound}
-				{if $notfound > 0}[<a href="search.php?showresult=1&amp;expert=0&amp;f_inactive=0&amp;output=HTML&amp;sort=byname&amp;finderid={$userid}&amp;searchbyfinder=&amp;logtype=2&amp;calledbysearch=0">{t}Show all{/t}</a>]{/if}
-			</td>
-		</tr>
-		<tr>
-			<td valign="middle" class="header-small" style="padding-bottom:5px">
-			<img src="resource2/ocstyle/images/log/16x16-note.png" />&nbsp;&nbsp;&nbsp;<b>{t}Notes{/t}:</b></td>
-			<td class="header-small" >{$note}
-				{if $note>0}[<a href="search.php?showresult=1&amp;expert=0&amp;f_inactive=0&amp;output=HTML&amp;sort=byname&amp;finderid={$userid}&amp;searchbyfinder=&amp;logtype=3&amp;calledbysearch=0">{t}Show all{/t}</a>]{/if}
-			</td>
-		</tr>
-		{if $maintenance > 0}
-		<tr>
-			<td valign="middle" class="header-small" style="padding-bottom:5px">
-			<img src="resource2/ocstyle/images/viewcache/16x16-maintenance.png" />&nbsp;&nbsp;&nbsp;<b>{t}Maintenance logs{/t}:</b></td>
-			<td class="header-small" >{$maintenance}
-				[<a href="search.php?showresult=1&amp;expert=0&amp;f_inactive=0&amp;output=HTML&amp;sort=byname&amp;finderid={$userid}&amp;searchbyfinder=&amp;logtype=9,10,11,13,14&amp;calledbysearch=0">{t}Show all{/t}</a>]
-			</td>
-		</tr>
-		{/if}
-	{/if}
-
-	<tr>
-		<td class="header-small">
-		<img src="resource2/{$opt.template.style}/images/viewcache/rating-star.gif" align="middle" border="0" />&nbsp;&nbsp;&nbsp;<b>{t}Recommendations{/t}:</b></td>
-		<td class="header-small" >{t 1=$recommended 2=$maxrecommended}%1 of %2 possibles{/t} {if $recommended>0}[<a href="usertops.php?userid={$userid}">{t}Show all{/t}</a>]{/if}
-		</td>
-	</tr>
-
-	{if $show_picstat}
-		<tr>
-			<td class="header-small">
-			<img src="resource2/{$opt.template.style}/images/action/16x16-addimage.png" align="middle" border="0" />&nbsp;&nbsp;&nbsp;<b>{t}Log pictures{/t}:</b></td> 
-			<td class="header-small" >{$logpics} {if $logpics>0}[<a href="viewprofile.php?userid={$userid}&allpics=1">{t}Show all{/t}</a>]{/if}
-			</td>
-		</tr>
-	{/if}
-	
+<table class="table">
 	<tr><td class="spacer" colspan="2"></td></tr>
+
+	{include file="res_userstats.tpl"
+	         oconly=true
+	         hidden=$oconly_hidden
+	         hidden_active=$oconly_hidden_active
+	         hidden_by_cachetype=$oconly_userstatshidden
+	         found=$oconly_found
+	         found_by_cachetype=$oconly_userstatsfound
+	         dnf=$oconly_dnf
+	         notes=$oconly_note
+	         maintainence=$oconly_maint
+	         recommended=$oconly_recommended
+	         maxrecommended=null
+	         logpics=$oconly_logpics
+	         regionstat=$oconly_regionstat}
+
+	<tr><td class="spacer"></td></tr>
+
+	{if $show_oconly81}
+		<tr><td colspan="3">
+		<table class="stattable">
+			<tr>
+				<th class="h1"></th>
+				<th class="h1" colspan="11" style="text-align:center; line-height:1.8em">{t}Terrain{/t}</th>
+			</tr>
+			<tr>
+				<td></td>
+				<td>&nbsp;<img src="resource2/ocstyle/images/log/16x16-found.png" /</td>
+				{foreach from=$stat81 key=step item=dummy}
+					<th style="text-align:center">{$step/2}</th>
+				{/foreach}
+				<th class="h1" style="text-align:center">Σ</th>
+			</tr>
+			{assign var=matrixfound value=0}
+			{foreach from=$stat81 key=difficulty item=terrains name=difficulty}
+				<tr>
+					{if $smarty.foreach.difficulty.first}
+						<th class="h1" rowspan="9">{t}Difficulty{/t}&nbsp;&nbsp;&nbsp;&nbsp;</th>
+					{/if}
+					<th>&nbsp;{$difficulty/2}</th>
+					{assign var=dsum value=0}
+					{foreach from=$terrains key=terrain item=count}
+						<td style="text-align:center; background-color:{if $count}rgb({$count/$stat81_maxcount*-242+242.5|floor},{$count/$stat81_maxcount*-242+242.5|floor},242){else}#f2f2f2{/if}" {if $count}onclick='location.href="search.php?showresult=1&amp;expert=0&amp;f_inactive=0&amp;output=HTML&amp;sort=byname&amp;finderid={$userid}&amp;searchbyfinder=&amp;logtype=1,7&amp;calledbysearch=0&amp;cache_attribs=6&amp;terrainmin={$terrain}&amp;terrainmax={$terrain}&amp;difficultymin={$difficulty}&amp;difficultymax={$difficulty}"'{/if}>
+							{if $count}
+								<span style="cursor:pointer; color:{if $count > $stat81_maxcount/3}#fff{else}#000{/if}">{$count}</span>
+								{assign var=dsum value=$dsum+$count}
+								{assign var=matrixfound value=$matrixfound+1}
+							{else}&nbsp;{/if}
+						</td>
+					{/foreach}
+					<td style="text-align:center">{if $dsum}{$dsum}{/if}</td>
+				</tr>
+			{/foreach}
+			<tr>
+				<td rowspan="2"></td>
+				<th class="h1" style="text-align:center">Σ</th>
+				{foreach from=$stat81_tsum item=count}
+					<td style="text-align:center">{if $count}{$count}{/if}</td>
+				{/foreach}
+				<td style="text-align:center"><b>{$oconly_found}</b></td>
+			</tr>
+			<tr>
+				<td colspan="11" style="padding-top:0.5em"><p>{t 1=$matrixfound}The user has found %1 of 81 theoretically possible terrain/difficulty combinations.{/t}</p></td> 
+			</tr>
+		</table>
+		</td></tr>
+	{/if}
 </table>

@@ -138,6 +138,7 @@ class OcSmarty extends Smarty
 	function display($dummy1=null, $dummy2=null, $dummy3=null)
 	{
 		global $opt, $db, $cookie, $login, $menu, $sqldebugger, $translate;
+		global $useragent_msie;
 		$cookie->close();
 
 		// if the user is an admin, dont cache the content
@@ -184,6 +185,7 @@ class OcSmarty extends Smarty
 		$optn['geokrety'] = $opt['geokrety'];
 		$optn['template']['usercountrieslist'] = labels::getLabels('usercountrieslist');
 		$optn['help']['oconly'] = helppagelink('oconly','OConly');
+		$optn['msie'] = $useragent_msie;
 
 		// url-sessions? (for session timout display)
 		$optn['session']['url'] = false;

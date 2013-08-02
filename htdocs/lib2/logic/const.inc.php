@@ -72,6 +72,7 @@
 	define('USR_OPT_MAP_PREVIEW', 10);
 	define('USR_OPT_PICSTAT', 11);
 	define('USR_OPT_TRANSLANG', 12);
+	define('USR_OPT_OCONLY81', 13);
 
 	// user.data_license values
 	define('OLD_DATA_LICSENSE',0);                       // before deadline

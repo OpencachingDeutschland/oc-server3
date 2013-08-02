@@ -410,6 +410,7 @@
 			$options['orderRatingFirst'] = true;
 
 		$options['country'] = isset($_REQUEST['country']) ? $_REQUEST['country'] : '';
+		$options['adm2'] = isset($_REQUEST['adm2']) ? $_REQUEST['adm2'] : '';
 		$options['cachetype'] = isset($_REQUEST['cachetype']) ? $_REQUEST['cachetype'] : '';
 
 		$options['cachesize'] = isset($_REQUEST['cachesize']) ? $_REQUEST['cachesize'] : '';
@@ -1015,10 +1016,18 @@
 				// ignore NC listings, which are mostly unmaintained or dead
 				$sql_where[] = "`caches`.`wp_gc_maintained`=''";
 			}
+
 			if (!isset($options['country'])) $options['country']='';
 			if ($options['country'] != '')
 			{
 				$sql_where[] = '`caches`.`country`=\'' . sql_escape($options['country']) . '\'';
+			}
+
+			if (!isset($options['adm2'])) $options['adm2']='';
+			if ($options['adm2'] != '')
+			{
+				$sql_innerjoin[] = '`cache_location` ON `cache_location`.`cache_id`=`caches`.`cache_id`';
+				$sql_where[] = '`cache_location`.`code2`=\'' . sql_escape($options['adm2']) . '\'';
 			}
 
 			if ($options['cachetype'] != '')

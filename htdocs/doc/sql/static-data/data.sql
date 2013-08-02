@@ -693,6 +693,7 @@ INSERT INTO `profile_options` (`id`, `name`, `trans_id`, `internal_use`, `defaul
 INSERT INTO `profile_options` (`id`, `name`, `trans_id`, `internal_use`, `default_value`, `check_regex`, `option_order`, `option_input`, `optionset`) VALUES ('9', 'Cache icons', '1872', '1', '1', '^[1-9]$', '140', 'select:1=classic OC,', '2');
 INSERT INTO `profile_options` (`id`, `name`, `trans_id`, `internal_use`, `default_value`, `check_regex`, `option_order`, `option_input`, `optionset`) VALUES ('10', 'Show %1preview pictures</a><br />(% of map area, 0=off)', '1928', '1', '7', '^[0-5]?[0-9]$', '150', 'text', '2');
 INSERT INTO `profile_options` (`id`, `name`, `trans_id`, `internal_use`, `default_value`, `check_regex`, `option_order`, `option_input`, `optionset`) VALUES ('11', 'Show picture stats and gallery', '1944', '1', '1', '^[0-1]$', '60', 'checkbox', '1');
+INSERT INTO `profile_options` (`id`, `name`, `trans_id`, `internal_use`, `default_value`, `check_regex`, `option_order`, `option_input`, `optionset`) VALUES ('13', 'Show OConly-81 stats', '2135', '1', '0', '^[0-1]$', '65', 'checkbox', '1');
 
 -- Table replication_overwritetypes
 SET NAMES 'utf8';
@@ -2555,6 +2556,10 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2131', 'If you 
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2132', 'You can offer this Geocache to more than one user. The first user committing the adoption will get the new owner of this Geocache. With the adoption, you will give the committing user an unlimited right to use, modifiy, publish and sublicense content of this Geocache.', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2133', 'Copy EN', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2134', 'I know what I am doing, do not show this advice again today.', '2010-09-07 20:19:07');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2135', 'Show OConly-81 stats', '2010-09-07 20:19:07');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2136', 'OConly statistics', '2010-09-07 20:19:07');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2137', 'The user has found %1 of 81 theoretically possible terrain/difficulty combinations.', '2010-09-07 20:19:07');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2138', 'Finds by region', '2010-09-07 20:19:07');
 
 -- Table sys_trans_ref
 SET NAMES 'utf8';
@@ -6568,6 +6573,10 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2132', 'DE', 'Du kannst einen Geocache mehreren Benutzern zur Adoption anbieten. Der erste Benutzer, der die Adoption bestätigt, wird der neue Besitzer des Geocaches. Mit der Adoption gibst du dem Benutzer ein unbeschränktes Recht, urheberrechtlich geschützte Inhalte dieses Geocaches zu nutzen, zu modifizieren und weiterzugeben.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2133', 'DE', 'EN kopieren', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2134', 'DE', 'Ich weiß was ich tue \&ndash; diesen Hinweis heute nicht mehr anzeigen.', '2010-08-28 11:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2135', 'DE', 'OConly81-Statistik anzeigen', '2010-08-28 11:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2136', 'DE', 'OConly-Statistik', '2010-08-28 11:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2137', 'DE', 'Der Benutzer hat %1 von 81 theoretisch möglichen Gelände/Schwierigkeit-Kombinationen gefunden.', '2010-08-28 11:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2138', 'DE', 'Funde nach Region', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'EN', 'Reorder IDs', '2010-09-02 00:15:30');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'EN', 'The database could not be reconnected.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'EN', 'Testing – please do not login', '2010-08-28 11:48:07');

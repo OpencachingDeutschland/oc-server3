@@ -29,6 +29,7 @@
 		}
 	}
 
+	// user data and basic statistics
 	$rs = sql("SELECT `user`.`username`, 
 										`user`.`last_login`, 
 										`user`.`pmr_flag`, 
@@ -75,36 +76,196 @@
 	$tpl->assign('description',
 		sql_value("SELECT `description` FROM `user` WHERE `user_id`='&1'", "", $userid));
 
-	$rs = sql("SELECT COUNT(*) AS `anzahl`, `t`.`id`, IFNULL(`tt`.`text`, `t`.`name`) AS `cachetype`
-		           FROM `caches` AS `c`
-		      LEFT JOIN `cache_type` AS `t` ON `t`.`id`=`c`.`type`
-		      LEFT JOIN `sys_trans` AS `st` ON `st`.`id`=`t`.`trans_id` AND `t`.`name`=`st`.`text`
-		      LEFT JOIN `sys_trans_text` AS `tt` ON `st`.`id`=`tt`.`trans_id` AND `tt`.`lang`='&2'
-		      LEFT JOIN `cache_status` ON `cache_status`.`id`=`c`.`status`
-		          WHERE `c`.`user_id`='&1' AND `allow_user_view`='1'
-		       GROUP BY `t`.`id`
-		       ORDER BY `anzahl` DESC", 
-		                $userid, 
-		                $opt['template']['locale']);
-	$tpl->assign_rs('userstatshidden', $rs);
-	sql_free_result($rs);
-
-	$rs = sql("SELECT COUNT(*) AS `anzahl`, `t`.`id`, IFNULL(`tt`.`text`, `t`.`name`) AS `cachetype`
-		           FROM `cache_logs` AS `l`
-		      LEFT JOIN `caches` AS `c` ON `l`.`cache_id`=`c`.`cache_id`
-		      LEFT JOIN `cache_type` AS `t` ON `t`.`id`=`c`.`type`
-		      LEFT JOIN `sys_trans` AS `st` ON `st`.`id`=`t`.`trans_id` AND `t`.`name`=`st`.`text`
-		      LEFT JOIN `sys_trans_text` AS `tt` ON `st`.`id`=`tt`.`trans_id` AND `tt`.`lang`='&2'
-		          WHERE `l`.`user_id`='&1' AND (`l`.`type`=1 OR `l`.`type`=7)
-		       GROUP BY `t`.`id`
-		       ORDER BY `anzahl` DESC", 
-		                $userid, 
-		                $opt['template']['locale']);
-	$tpl->assign_rs('userstatsfound', $rs);
-	sql_free_result($rs);
-
 	$useropt = new useroptions($userid);
-	$tpl->assign('show_statistics', ($useropt->getOptValue(USR_OPT_SHOWSTATS) == 1));
+	$show_statistics = $useropt->getOptValue(USR_OPT_SHOWSTATS);
+	$show_oconly81 = $useropt->getOptValue(USR_OPT_OCONLY81);
+
+	if ($show_statistics)
+	{
+		// detail statistics
+		$rs = sql("SELECT COUNT(*) AS `anzahl`, `t`.`id`, IFNULL(`tt`.`text`, `t`.`name`) AS `cachetype`
+			           FROM `caches` AS `c`
+			      LEFT JOIN `cache_type` AS `t` ON `t`.`id`=`c`.`type`
+			      LEFT JOIN `sys_trans` AS `st` ON `st`.`id`=`t`.`trans_id` AND `t`.`name`=`st`.`text`
+			      LEFT JOIN `sys_trans_text` AS `tt` ON `st`.`id`=`tt`.`trans_id` AND `tt`.`lang`='&2'
+			      LEFT JOIN `cache_status` ON `cache_status`.`id`=`c`.`status`
+			          WHERE `c`.`user_id`='&1' AND `allow_user_view`='1'
+			       GROUP BY `t`.`id`
+			       ORDER BY `anzahl` DESC, `t`.`ordinal` ASC", 
+			                $userid, 
+			                $opt['template']['locale']);
+		$tpl->assign_rs('userstatshidden', $rs);
+		sql_free_result($rs);
+
+		$rs = sql("SELECT COUNT(*) AS `anzahl`, `t`.`id`, IFNULL(`tt`.`text`, `t`.`name`) AS `cachetype`
+			           FROM `cache_logs` AS `l`
+			      LEFT JOIN `caches` AS `c` ON `l`.`cache_id`=`c`.`cache_id`
+			      LEFT JOIN `cache_type` AS `t` ON `t`.`id`=`c`.`type`
+			      LEFT JOIN `sys_trans` AS `st` ON `st`.`id`=`t`.`trans_id` AND `t`.`name`=`st`.`text`
+			      LEFT JOIN `sys_trans_text` AS `tt` ON `st`.`id`=`tt`.`trans_id` AND `tt`.`lang`='&2'
+			          WHERE `l`.`user_id`='&1' AND (`l`.`type`=1 OR `l`.`type`=7)
+			       GROUP BY `t`.`id`
+			       ORDER BY `anzahl` DESC, `t`.`ordinal` ASC", 
+			                $userid, 
+			                $opt['template']['locale']);
+		$tpl->assign_rs('userstatsfound', $rs);
+		sql_free_result($rs);
+
+		$rs = sql("
+			SELECT
+				COUNT(*) AS `count`,
+				IFNULL(`stt`.`text`, `caches`.`country`) AS `country`,
+				IF(`caches`.`country`='&3' AND `cache_location`.`code1`='&3', `cache_location`.`adm2`, NULL) AS `state`,
+				`caches`.`country` AS `countrycode`,
+				`cache_location`.`code2` AS `adm2code`
+			FROM
+				`cache_logs`
+				INNER JOIN `caches` ON `caches`.`cache_id`=`cache_logs`.`cache_id`
+				INNER JOIN `cache_location` ON `cache_location`.`cache_id`=`cache_logs`.`cache_id`
+				LEFT JOIN `countries` ON `countries`.`short`=`caches`.`country`
+				LEFT JOIN `sys_trans_text` `stt` ON `stt`.`lang`='&2' AND `stt`.`trans_id`=`countries`.`trans_id`
+			WHERE `cache_logs`.`user_id`='&1' AND `cache_logs`.`type` IN (1,7)
+			GROUP BY `country`, `state`
+			ORDER BY `count` DESC, `country`, `state`",
+			$userid, $opt['template']['locale'], $login->getUserCountry());
+
+		$tpl->assign_rs('regionstat', $rs);
+		sql_free_result($rs);
+	}
+
+	// OConly statistics
+	$oconly_hidden = sql_value("
+		SELECT COUNT(*)
+		FROM `caches`
+		INNER JOIN `caches_attributes` ON `caches_attributes`.`cache_id`=`caches`.`cache_id` AND `caches_attributes`.`attrib_id`=6
+		INNER JOIN `cache_status` ON `cache_status`.`id`=`caches`.`status` AND `allow_user_view`=1
+		WHERE `user_id`='&1'",
+		0, $userid);
+	$oconly_hidden_active = sql_value("
+		SELECT COUNT(*)
+		FROM `caches`
+		INNER JOIN `caches_attributes` ON `caches_attributes`.`cache_id`=`caches`.`cache_id` AND `caches_attributes`.`attrib_id`=6
+		WHERE `user_id`='&1' AND `caches`.`status`=1",
+		0, $userid);
+	$oconly_recommended = sql_value("
+		SELECT COUNT(*)
+		FROM `cache_logs`
+		INNER JOIN `caches_attributes` ON `caches_attributes`.`cache_id`=`cache_logs`.`cache_id` AND `caches_attributes`.`attrib_id`=6
+		INNER JOIN `cache_rating` ON `cache_rating`.`user_id`=`cache_logs`.`user_id` AND `cache_rating`.`cache_id`=`cache_logs`.`cache_id` AND `cache_rating`.`rating_date`=`cache_logs`.`date` 
+		WHERE `cache_logs`.`user_id`='&1' AND `cache_logs`.`type` IN (1,7)",
+		0, $userid); 
+
+		$rs = sql("
+			SELECT
+				COUNT(*) AS `count`,
+				IFNULL(`stt`.`text`, `caches`.`country`) AS `country`,
+				IF(`caches`.`country`='&3' AND `cache_location`.`code1`='&3', `cache_location`.`adm2`, NULL) AS `state`,
+				`caches`.`country` AS `countrycode`,
+				`cache_location`.`code2` AS `adm2code`
+			FROM
+				`cache_logs`
+				INNER JOIN `caches_attributes` ON `caches_attributes`.`cache_id`=`cache_logs`.`cache_id` AND `caches_attributes`.`attrib_id`=6
+				INNER JOIN `caches` ON `caches`.`cache_id`=`cache_logs`.`cache_id`
+				INNER JOIN `cache_location` ON `cache_location`.`cache_id`=`cache_logs`.`cache_id`
+				LEFT JOIN `countries` ON `countries`.`short`=`caches`.`country`
+				LEFT JOIN `sys_trans_text` `stt` ON `stt`.`lang`='&2' AND `stt`.`trans_id`=`countries`.`trans_id`
+			WHERE `cache_logs`.`user_id`='&1' AND `cache_logs`.`type` IN (1,7)
+			GROUP BY `country`, `state`
+			ORDER BY `count` DESC, `country`, `state`",
+			$userid, $opt['template']['locale'], $login->getUserCountry());
+
+	$tpl->assign_rs('oconly_regionstat', $rs);
+	sql_free_result($rs);
+
+	$rs = sql("
+		SELECT `cache_logs`.`type`, COUNT(*) AS `count`
+		FROM `cache_logs`
+		INNER JOIN `caches_attributes` ON `caches_attributes`.`cache_id`=`cache_logs`.`cache_id` AND `caches_attributes`.`attrib_id`=6
+		WHERE `user_id`='&1'
+		GROUP BY `cache_logs`.`type`",
+		$userid); 
+	$oconly_found = 0;
+	$oconly_dnf = 0;
+	$oconly_note = 0;
+	$oconly_maint = 0;
+	while ($r = sql_fetch_assoc($rs))
+	{
+		switch ($r['type'])
+		{
+			case 1:
+			case 7:   $oconly_found += $r['count']; break;
+			case 2:   $oconly_dnf   =  $r['count']; break;
+			case 3:   $oconly_note  =  $r['count']; break;
+			case 9:
+			case 10:
+			case 11:
+			case 13:  $oconly_maint += $r['count']; break;
+		}
+	}
+	sql_free_result($rs);
+	$tpl->assign('oconly_found', $oconly_found);
+	$tpl->assign('oconly_dnf', $oconly_dnf);
+	$tpl->assign('oconly_note', $oconly_note);
+	$tpl->assign('oconly_maint', $oconly_maint);
+
+	// OConly detail statistics
+	if ($show_statistics)
+	{
+		$rs = sql("SELECT COUNT(*) AS `anzahl`, `t`.`id`, IFNULL(`tt`.`text`, `t`.`name`) AS `cachetype`
+			           FROM `caches` AS `c`
+			      LEFT JOIN `cache_type` AS `t` ON `t`.`id`=`c`.`type`
+			      LEFT JOIN `sys_trans` AS `st` ON `st`.`id`=`t`.`trans_id` AND `t`.`name`=`st`.`text`
+			      LEFT JOIN `sys_trans_text` AS `tt` ON `st`.`id`=`tt`.`trans_id` AND `tt`.`lang`='&2'
+			      LEFT JOIN `cache_status` ON `cache_status`.`id`=`c`.`status`
+			     INNER JOIN `caches_attributes` ON `caches_attributes`.`cache_id`=`c`.`cache_id` AND `caches_attributes`.`attrib_id`=6
+			          WHERE `c`.`user_id`='&1' AND `allow_user_view`='1'
+			       GROUP BY `t`.`id`
+			       ORDER BY `anzahl` DESC, `t`.`ordinal` ASC", 
+			                $userid, 
+			                $opt['template']['locale']);
+		$tpl->assign_rs('oconly_userstatshidden', $rs);
+		sql_free_result($rs);
+
+		$rs = sql("SELECT COUNT(*) AS `anzahl`, `t`.`id`, IFNULL(`tt`.`text`, `t`.`name`) AS `cachetype`
+			           FROM `cache_logs` AS `l`
+			      LEFT JOIN `caches` AS `c` ON `l`.`cache_id`=`c`.`cache_id`
+			      LEFT JOIN `cache_type` AS `t` ON `t`.`id`=`c`.`type`
+			      LEFT JOIN `sys_trans` AS `st` ON `st`.`id`=`t`.`trans_id` AND `t`.`name`=`st`.`text`
+			      LEFT JOIN `sys_trans_text` AS `tt` ON `st`.`id`=`tt`.`trans_id` AND `tt`.`lang`='&2'
+			     INNER JOIN `caches_attributes` ON `caches_attributes`.`cache_id`=`c`.`cache_id` AND `caches_attributes`.`attrib_id`=6
+			          WHERE `l`.`user_id`='&1' AND (`l`.`type`=1 OR `l`.`type`=7)
+			       GROUP BY `t`.`id`
+			       ORDER BY `anzahl` DESC, `t`.`ordinal` ASC", 
+			                $userid, 
+			                $opt['template']['locale']);
+		$tpl->assign_rs('oconly_userstatsfound', $rs);
+		sql_free_result($rs);
+	}
+
+	if ($show_oconly81)
+	{
+		$terr = $tsum = array(2=>0, 3=>0, 4=>0, 5=>0, 6=>0, 7=>0, 8=>0, 9=>0, 10=>0); 
+		$stat81 = array(2=>$terr, 3=>$terr, 4=>$terr, 5=>$terr, 6=>$terr, 7=>$terr, 8=>$terr, 9=>$terr, 10=>$terr);
+		$rs = sql("
+			SELECT `difficulty`, `terrain`, COUNT(*) AS `count`
+			FROM `cache_logs`
+			INNER JOIN `caches` ON `caches`.`cache_id`=`cache_logs`.`cache_id`
+			INNER JOIN `caches_attributes` ON `caches_attributes`.`cache_id`=`cache_logs`.`cache_id` AND `caches_attributes`.`attrib_id`=6
+			WHERE `cache_logs`.`user_id`='&1' AND `cache_logs`.`type` IN (1,7)
+			GROUP BY `difficulty`*10 + `terrain`",
+			$userid);
+		$maxcount = 0;
+		while ($r = sql_fetch_assoc($rs))
+		{
+			$stat81[$r['difficulty']][$r['terrain']] = $r['count'];
+			$maxcount = max($maxcount, $r['count']);
+			$tsum[$r['difficulty']] += $r['count'];
+		}
+		sql_free_result($rs);
+		$tpl->assign('stat81',$stat81);
+		$tpl->assign('stat81_maxcount',max(10,$maxcount));
+		$tpl->assign('stat81_tsum', $tsum);
+	}
 
 	$tpl->assign('username', $record['username']);
 	$tpl->assign('userid', $userid);
@@ -117,6 +278,12 @@
 	$tpl->assign('active', $active);
 	$tpl->assign('recommended', sql_value("SELECT COUNT(*) FROM `cache_rating` WHERE `user_id`='&1'", 0, $userid));
 	$tpl->assign('maxrecommended', floor($record['found'] * $opt['logic']['rating']['percentageOfFounds'] / 100));
+	$tpl->assign('show_statistics', $show_statistics);
+	$tpl->assign('show_oconly81', $show_oconly81);
+
+	$tpl->assign('oconly_hidden', $oconly_hidden);
+	$tpl->assign('oconly_hidden_active', $oconly_hidden_active);
+	$tpl->assign('oconly_recommended', $oconly_recommended);
 
 	$user = new user($userid);
 

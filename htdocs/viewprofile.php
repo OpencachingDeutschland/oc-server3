@@ -259,7 +259,7 @@
 		{
 			$stat81[$r['difficulty']][$r['terrain']] = $r['count'];
 			$maxcount = max($maxcount, $r['count']);
-			$tsum[$r['difficulty']] += $r['count'];
+			$tsum[$r['terrain']] += $r['count'];
 		}
 		sql_free_result($rs);
 		$tpl->assign('stat81',$stat81);

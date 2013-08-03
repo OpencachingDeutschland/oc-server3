@@ -149,6 +149,7 @@
 	         regionstat=$oconly_regionstat}
 
 	<tr><td class="spacer"></td></tr>
+	<tr><td class="spacer"></td></tr>
 
 	{if $show_oconly81}
 		<tr><td colspan="3">

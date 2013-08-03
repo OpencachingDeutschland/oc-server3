@@ -486,10 +486,10 @@ class cache
 	{
 		return (sql_value("SELECT COUNT(*) FROM `cache_rating` WHERE `cache_id`='&1' AND `user_id`='&2'", 0, $this->nCacheId, $nUserId) > 0);
 	}
-	function addRecommendation($nUserId)
+	function addRecommendation($nUserId, $logdate)
 	{
 		// rating_date will be set to NOW() by Insert-trigger
-		sql("INSERT IGNORE INTO `cache_rating` (`cache_id`, `user_id`) VALUES ('&1', '&2')", $this->nCacheId, $nUserId);
+		sql("INSERT IGNORE INTO `cache_rating` (`cache_id`, `user_id`, `rating_date`) VALUES ('&1', '&2', '&3')", $this->nCacheId, $nUserId, $logdate);
 	}
 	function removeRecommendation($nUserId)
 	{

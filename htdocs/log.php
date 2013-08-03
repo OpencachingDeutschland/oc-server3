@@ -215,7 +215,7 @@
 				// update rating (if correct logtype, user has ratings to give and is not owner (exept owner adopted cache))
 				if ($rateOption && $user->allowRatings() && (!$isOwner || ($isOwner && $cache->hasAdopted($user->getUserId()))))
 					if ($rateCache)
-						$cache->addRecommendation($user->getUserId());
+						$cache->addRecommendation($user->getUserId(), $logDate);
 					else
 						$cache->removeRecommendation($user->getUserId());
 				

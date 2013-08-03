@@ -11,7 +11,7 @@
 
 <div class="content-txtbox-noshade" style="padding-right: 25px;">
 	<p>
-		{t}<b>OConly-81</b> is a new contest about finding OConly caches under varying conditions, i.e. with different difficulty and terrain ratings. To participate, you can enable the OConly-81 statistics in your <a href="mydetails.php">user profile settings</a>.{/t}<br />
+		{t}<b>OConly-81</b> is a new challenge about finding OConly caches under varying conditions, i.e. with different difficulty and terrain ratings. To participate, you can enable the OConly-81 statistics in your <a href="mydetails.php">user profile settings</a>.{/t}<br />
 	</p>
 
 	<div class="buffer" style="width: 500px;">&nbsp;</div>
@@ -24,7 +24,7 @@
 	</div>
 
 	<p>
-		{t}These Opencaching users participate in the OConly-81 contest:{/t}
+		{t}These Opencaching users have OConly-81 statistics enabled:{/t}
 	</p>
 
 	<ul style="column-count:4; -moz-column-count:4; -webkit-column-count:4;">

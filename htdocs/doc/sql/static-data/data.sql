@@ -2562,10 +2562,10 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2136', 'OConly 
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2137', 'The user has found <b>%1</b> of <b>81</b> theoretically possible terrain/difficulty combinations.', '2010-09-07 20:19:07');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2138', 'Finds by region', '2010-09-07 20:19:07');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2139', 'OConly-81', '2010-09-07 20:19:07');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2140', 'These Opencaching users participate in the OConly-81 contest:', '2010-09-07 20:19:07');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2140', 'These Opencaching users have OConly-81 statistics enabled:', '2010-09-07 20:19:07');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2141', 'OConly-81 statistics', '2010-09-07 20:19:07');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2142', 'inactive', '2010-09-07 20:19:07');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2143', '<b>OConly-81</b> is a new contest about finding OConly caches under varying conditions, i.e. with different difficulty and terrain ratings. To participate, you can enable the OConly-81 statistics in your <a href=\"mydetails.php\">user profile settings</a>.', '2010-09-07 20:19:07');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2143', '<b>OConly-81</b> is a new challenge about finding OConly caches under varying conditions, i.e. with different difficulty and terrain ratings. To participate, you can enable the OConly-81 statistics in your <a href=\"mydetails.php\">user profile settings</a>.', '2010-09-07 20:19:07');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2144', 'Participants', '2010-09-07 20:19:07');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2146', 'Statistics', '2010-09-07 20:19:07');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2147', 'Overall terrain and difficulty distribution of active OConly caches:', '2010-09-07 20:19:07');
@@ -6587,10 +6587,10 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2137', 'DE', 'Der Benutzer hat <b>%1</b> von <b>81</b> theoretisch möglichen Gelände/Schwierigkeit-Kombinationen gefunden.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2138', 'DE', 'Funde nach Region', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2139', 'DE', 'OConly-81', '2010-09-07 20:19:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2140', 'DE', 'Diese Benutzer machen beim OConly-81-Wettbewerb mit:', '2010-09-07 20:19:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2140', 'DE', 'Diese Benutzer haben ihre OConly-81-Statistik aktiviert:', '2010-09-07 20:19:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2141', 'DE', 'OConly-81-Statistik', '2010-09-07 20:19:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2142', 'DE', 'inaktiv', '2010-09-07 20:19:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2143', 'DE', '<b>OConly-81</b> ist ein neuer Wettbewerb bei dem es darum geht, OC-Only-Caches unter den verschiedensten Bedingungen zu finden, d.&nbsp;h. mit verschiedenen Schwierigkeits- und Geländewertungen. Um teilzunehmen, kannst du in deinen <a href=\"mydetails.php\">Profileinstellungen</a> die OConly-81-Statistik aktivieren.', '2010-09-07 20:19:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2143', 'DE', '<b>OConly-81</b> ist eine sportliche Herausforderung bei dem es darum geht, OC-Only-Caches unter den verschiedensten Bedingungen zu finden, d.&nbsp;h. mit verschiedenen Schwierigkeits- und Geländewertungen. Um mitzumachen, kannst du in deinen <a href=\"mydetails.php\">Profileinstellungen</a> die OConly-81-Statistik aktivieren.', '2010-09-07 20:19:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2144', 'DE', ' Teilnehmer', '2010-09-07 20:19:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2146', 'DE', 'Statistik', '2010-09-07 20:19:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2147', 'DE', 'Gelände- und Schwierigkeitsverteilung aller OConly-Caches:', '2010-09-07 20:19:07');

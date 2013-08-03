@@ -91,8 +91,8 @@
 				</table>
 			</td>
 		</tr>
+		<tr><td class="spacer" colspan="2">&nbsp;</td></tr>
 		{if $pages_list}
-			<tr><td class="spacer" colspan="2">&nbsp;</td></tr>
 			<tr>
 				<td colspan="2" class="header-small">{include file="res_pager.tpl"}</td>
 			</tr>

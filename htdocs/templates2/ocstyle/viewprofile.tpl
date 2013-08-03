@@ -152,52 +152,21 @@
 	<tr><td class="spacer"></td></tr>
 
 	{if $show_oconly81}
-		<tr><td colspan="3">
-		<table class="stattable">
-			<tr>
-				<th class="h1"></th>
-				<th class="h1" colspan="11" style="text-align:center; line-height:1.8em">{t}Terrain{/t}</th>
-			</tr>
-			<tr>
-				<td></td>
-				<td>&nbsp;<img src="resource2/ocstyle/images/log/16x16-found.png" /</td>
-				{foreach from=$stat81 key=step item=dummy}
-					<th style="text-align:center">{$step/2}</th>
-				{/foreach}
-				<th class="h1" style="text-align:center">Σ</th>
-			</tr>
-			{assign var=matrixfound value=0}
-			{foreach from=$stat81 key=difficulty item=terrains name=difficulty}
-				<tr>
-					{if $smarty.foreach.difficulty.first}
-						<th class="h1" rowspan="9">{t}Difficulty{/t}&nbsp;&nbsp;&nbsp;&nbsp;</th>
-					{/if}
-					<th>&nbsp;{$difficulty/2}</th>
-					{assign var=dsum value=0}
-					{foreach from=$terrains key=terrain item=count}
-						<td style="text-align:center; background-color:{if $count}rgb({$count/$stat81_maxcount*-242+242.5|floor},{$count/$stat81_maxcount*-242+242.5|floor},242){else}#f2f2f2{/if}" {if $count}onclick='location.href="search.php?showresult=1&amp;expert=0&amp;f_inactive=0&amp;output=HTML&amp;sort=byname&amp;finderid={$userid}&amp;searchbyfinder=&amp;logtype=1,7&amp;calledbysearch=0&amp;cache_attribs=6&amp;terrainmin={$terrain}&amp;terrainmax={$terrain}&amp;difficultymin={$difficulty}&amp;difficultymax={$difficulty}"'{/if}>
-							{if $count}
-								<span style="cursor:pointer; color:{if $count > $stat81_maxcount/3}#fff{else}#000{/if}">{$count}</span>
-								{assign var=dsum value=$dsum+$count}
-								{assign var=matrixfound value=$matrixfound+1}
-							{else}&nbsp;{/if}
-						</td>
-					{/foreach}
-					<td style="text-align:center">{if $dsum}{$dsum}{/if}</td>
-				</tr>
-			{/foreach}
-			<tr>
-				<td rowspan="2"></td>
-				<th class="h1" style="text-align:center">Σ</th>
-				{foreach from=$stat81_tsum item=count}
-					<td style="text-align:center">{if $count}{$count}{/if}</td>
-				{/foreach}
-				<td style="text-align:center"><b>{$oconly_found}</b></td>
-			</tr>
-			<tr>
-				<td colspan="11" style="padding-top:0.5em"><p>{t 1=$matrixfound}The user has found %1 of 81 theoretically possible terrain/difficulty combinations.{/t}</p></td> 
-			</tr>
-		</table>
-		</td></tr>
+		<tr id="oconly81">
+			<td colspan="3">
+				{include file="res_oconly81.tpl" userid=$userid}
+			</td>
+		</tr>
+	{else}
+		<tr>
+			<td valign="middle" class="header-small" style="white-space:nowrap" width="1%">
+				<img src="resource2/ocstyle/images/log/16x16-found.png" style="padding-right:2px"  />
+				<b>{t}OConly-81 statistics{/t}:</b>
+			</td>
+			<td valign="middle">
+				{t}inactive{/t} (<a href="oconly81.php">{t}Info{/t}</a>)
+			</td>
+		</tr>
+		<tr><td class="spacer"></td></tr>
 	{/if}
 </table>

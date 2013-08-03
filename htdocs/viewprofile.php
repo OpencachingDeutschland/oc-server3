@@ -244,27 +244,8 @@
 
 	if ($show_oconly81)
 	{
-		$terr = $tsum = array(2=>0, 3=>0, 4=>0, 5=>0, 6=>0, 7=>0, 8=>0, 9=>0, 10=>0); 
-		$stat81 = array(2=>$terr, 3=>$terr, 4=>$terr, 5=>$terr, 6=>$terr, 7=>$terr, 8=>$terr, 9=>$terr, 10=>$terr);
-		$rs = sql("
-			SELECT `difficulty`, `terrain`, COUNT(*) AS `count`
-			FROM `cache_logs`
-			INNER JOIN `caches` ON `caches`.`cache_id`=`cache_logs`.`cache_id`
-			INNER JOIN `caches_attributes` ON `caches_attributes`.`cache_id`=`cache_logs`.`cache_id` AND `caches_attributes`.`attrib_id`=6
-			WHERE `cache_logs`.`user_id`='&1' AND `cache_logs`.`type` IN (1,7)
-			GROUP BY `difficulty`*10 + `terrain`",
-			$userid);
-		$maxcount = 0;
-		while ($r = sql_fetch_assoc($rs))
-		{
-			$stat81[$r['difficulty']][$r['terrain']] = $r['count'];
-			$maxcount = max($maxcount, $r['count']);
-			$tsum[$r['terrain']] += $r['count'];
-		}
-		sql_free_result($rs);
-		$tpl->assign('stat81',$stat81);
-		$tpl->assign('stat81_maxcount',max(10,$maxcount));
-		$tpl->assign('stat81_tsum', $tsum);
+		require 'lib2/logic/oconly81.inc.php';
+		set_oconly81_tpldata($userid);
 	}
 
 	$tpl->assign('username', $record['username']);

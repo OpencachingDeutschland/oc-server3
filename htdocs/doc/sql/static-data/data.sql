@@ -898,6 +898,7 @@ INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustrin
 INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('101', 'MNU_START_WIKINEWS', 'New Wiki articles', '2113', 'New Wiki articles', '2113', '0', '!http://wiki.opencaching.de/index.php/Hauptseite/Neue_Artikel', '1', '1', '4', '', '0', NULL);
 INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('102', 'MNU_START_NEWFEATURES', 'New features', '2115', 'New features', '2115', '0', 'articles.php?page=changelog', '1', '1', '5', '', '0', NULL);
 INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('103', 'MNU_MYPROFILE_OWNERLOGS', 'Log history', '2126', 'Log history', '2126', '0', '!okapi/apps/', '0', '9', '10', '', '1', NULL);
+INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('104', 'MNU_CACHES_OCONLY81', 'OConly-81', '2139', 'OConly-81', '2139', '0', 'oconly81.php', '1', '10', '5', '', '1', NULL);
 
 -- Table sys_trans
 SET NAMES 'utf8';
@@ -2558,8 +2559,16 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2133', 'Copy EN
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2134', 'I know what I am doing, do not show this advice again today.', '2010-09-07 20:19:07');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2135', 'Show OConly-81 stats', '2010-09-07 20:19:07');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2136', 'OConly statistics', '2010-09-07 20:19:07');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2137', 'The user has found %1 of 81 theoretically possible terrain/difficulty combinations.', '2010-09-07 20:19:07');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2137', 'The user has found <b>%1</b> of <b>81</b> theoretically possible terrain/difficulty combinations.', '2010-09-07 20:19:07');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2138', 'Finds by region', '2010-09-07 20:19:07');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2139', 'OConly-81', '2010-09-07 20:19:07');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2140', 'These Opencaching users participate in the OConly-81 contest:', '2010-09-07 20:19:07');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2141', 'OConly-81 statistics', '2010-09-07 20:19:07');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2142', 'inactive', '2010-09-07 20:19:07');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2143', '<b>OConly-81</b> is a new contest about finding OConly caches under varying conditions, i.e. with different difficulty and terrain ratings. To participate, you can enable the OConly-81 statistics in your <a href=\"mydetails.php\">user profile settings</a>.', '2010-09-07 20:19:07');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2144', 'Participants', '2010-09-07 20:19:07');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2146', 'Statistics', '2010-09-07 20:19:07');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2147', 'Overall terrain and difficulty distribution of active OConly caches:', '2010-09-07 20:19:07');
 
 -- Table sys_trans_ref
 SET NAMES 'utf8';
@@ -6573,10 +6582,18 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2132', 'DE', 'Du kannst einen Geocache mehreren Benutzern zur Adoption anbieten. Der erste Benutzer, der die Adoption bestätigt, wird der neue Besitzer des Geocaches. Mit der Adoption gibst du dem Benutzer ein unbeschränktes Recht, urheberrechtlich geschützte Inhalte dieses Geocaches zu nutzen, zu modifizieren und weiterzugeben.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2133', 'DE', 'EN kopieren', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2134', 'DE', 'Ich weiß was ich tue \&ndash; diesen Hinweis heute nicht mehr anzeigen.', '2010-08-28 11:48:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2135', 'DE', 'OConly81-Statistik anzeigen', '2010-08-28 11:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2135', 'DE', 'OConly-81-Statistik anzeigen', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2136', 'DE', 'OConly-Statistik', '2010-08-28 11:48:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2137', 'DE', 'Der Benutzer hat %1 von 81 theoretisch möglichen Gelände/Schwierigkeit-Kombinationen gefunden.', '2010-08-28 11:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2137', 'DE', 'Der Benutzer hat <b>%1</b> von <b>81</b> theoretisch möglichen Gelände/Schwierigkeit-Kombinationen gefunden.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2138', 'DE', 'Funde nach Region', '2010-08-28 11:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2139', 'DE', 'OConly-81', '2010-09-07 20:19:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2140', 'DE', 'Diese Benutzer machen beim OConly-81-Wettbewerb mit:', '2010-09-07 20:19:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2141', 'DE', 'OConly-81-Statistik', '2010-09-07 20:19:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2142', 'DE', 'inaktiv', '2010-09-07 20:19:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2143', 'DE', '<b>OConly-81</b> ist ein neuer Wettbewerb bei dem es darum geht, OC-Only-Caches unter den verschiedensten Bedingungen zu finden, d.&nbsp;h. mit verschiedenen Schwierigkeits- und Geländewertungen. Um teilzunehmen, kannst du in deinen <a href=\"mydetails.php\">Profileinstellungen</a> die OConly-81-Statistik aktivieren.', '2010-09-07 20:19:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2144', 'DE', ' Teilnehmer', '2010-09-07 20:19:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2146', 'DE', 'Statistik', '2010-09-07 20:19:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2147', 'DE', 'Gelände- und Schwierigkeitsverteilung aller OConly-Caches:', '2010-09-07 20:19:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'EN', 'Reorder IDs', '2010-09-02 00:15:30');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'EN', 'The database could not be reconnected.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'EN', 'Testing – please do not login', '2010-08-28 11:48:07');

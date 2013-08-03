@@ -17,4 +17,5 @@ Disallow: /search.php?*output=ovl*
 Disallow: /search.php?*output=txt*
 Disallow: /search.php?*output=xml*
 Disallow: /search.php?*queryid=*
+Disallow: /search.php?*searchbyall=*
 Disallow: /xml*

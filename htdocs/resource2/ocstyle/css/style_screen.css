@@ -322,6 +322,7 @@ ul.linklist-indent {margin: -0.3em 0px 0.5em 0px; padding: 0px 0px 0px 10px; lis
 div.changelog ul {margin: 0px 0px 10px 0px; }
 div.changelog ul li {margin: 0px 0px 0.2em 0px; }
 div.changelog ul li ul {font-size: 83%; margin:0}
+ul.col4 { column-count:4; -moz-column-count:4; -webkit-column-count:4; line-height:1.7em; }
 
 /* Tables */
 .table {font-size: 10px; line-height: 1.8em; clear: left; padding: 0px; margin: 0.5em 0px 0.2em 0px; border: solid 0px rgb(150,150,150); empty-cells: show; border-collapse: collapse; background-color: rgb(255,255,255);}

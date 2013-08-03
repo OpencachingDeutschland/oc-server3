@@ -27,12 +27,13 @@
 		INNER JOIN `caches_attributes` ON `caches_attributes`.`cache_id`=`cache_logs`.`cache_id` AND `caches_attributes`.`attrib_id`=6
 		INNER JOIN `user_options` ON `user_options`.`user_id`=`user`.`user_id`
 		WHERE `user_options`.`option_id`=13 AND `user_options`.`option_value`='1'");
+		// users with 0 OConly founds are filtered out here
 	$rs = sql("
 		SELECT `user`.`username`, `user`.`user_id`, COUNT(*) AS `count`
 		FROM `user`
 		INNER JOIN &oconly81 ON &oconly81.`user_id`=`user`.`user_id`
 		GROUP BY `user`.`user_id`
-		ORDER BY `user`.`username`");
+		ORDER BY `count` DESC, `username` ASC");
 	$tpl->assign_rs('users', $rs);
 	sql_free_result($rs);
 	sql_drop_temp_table('oconly81');

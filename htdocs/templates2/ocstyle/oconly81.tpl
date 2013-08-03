@@ -24,10 +24,10 @@
 	</div>
 
 	<p>
-		{t}These Opencaching users have OConly-81 statistics enabled:{/t}
+		{t}Users with OConly-81 statistics:{/t}
 	</p>
 
-	<ul style="column-count:4; -moz-column-count:4; -webkit-column-count:4;">
+	<ul class="col4">
 		{foreach from=$users item=user}
 			<li><a href="viewprofile.php?userid={$user.user_id}#oconly81">{$user.username}</a> ({$user.count})</li>
 		{/foreach}

@@ -47,6 +47,10 @@ function __autoload($class_name)
 	require_once($opt['rootpath'] . 'config2/settings.inc.php');
 	require_once($opt['rootpath'] . 'config2/verify-settings.inc.php');
 
+	foreach ($opt['page']['banned_user_agents'] as $ua)
+		if (strpos($useragent, $ua) !== false)
+			die();
+
 	set_domain();
 
 	if (!(isset($_REQUEST['sqldebug']) && $_REQUEST['sqldebug']=='1'))

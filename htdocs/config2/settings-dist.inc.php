@@ -230,7 +230,9 @@
 
  	// require SSL for SOAP access
  	$opt['page']['nusoap_require_https'] = false;
- 	
+
+	// block troublemakers
+	$opt['page']['banned_user_agents'] = array();
  	
  	/*
  	 * configure infos on 404.php

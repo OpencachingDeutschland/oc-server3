@@ -122,6 +122,9 @@
    */
 	$opt['page']['max_logins_per_hour'] = 1000;    // for development ... 
 
+	// block troublemakers
+	$opt['page']['banned_user_agents'] = array();
+
   // copy of config2/settings-dist.inc.php
   /* pregenerated waypoint list for new caches
    * - Waypoint prefix (OC, OP, OZ etc.)

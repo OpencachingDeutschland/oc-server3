@@ -52,6 +52,12 @@
 	require_once($opt['rootpath'] . 'lib/consts.inc.php');
 	require_once($opt['rootpath'] . 'lib2/errorhandler.inc.php');
 
+	// check for banned UAs
+	$useragent = isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : "";
+	foreach ($opt['page']['banned_user_agents'] as $ua)
+		if (strpos($useragent, $ua) !== false)
+			die();
+
 	// basic PHP settings
 	date_default_timezone_set($timezone);
 	if ($debug_page)

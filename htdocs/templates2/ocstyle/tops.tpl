@@ -24,7 +24,7 @@
 	</tr>
 	<tr>
 		<td style="padding-left:32px; padding-bottom:32px;">
-			<table width="100%">
+			<table class="table" width="100%">
 				{assign var='lastadm1' value=''}
 				{assign var='lastadm3' value=''}
 
@@ -67,6 +67,7 @@
 	{/if}
 
 	{if $makehead}
+		{if !$smarty.foreach.tops.first}<br />{/if}
 		<p class="content-title-noshade-size3">
 			<a name="{$topItem.adm1|urlencode}{if $topItem.adm3==null}null{else}{$topItem.adm3|urlencode}{/if}"></a> 
 			{$topItem.adm1|escape}
@@ -80,23 +81,25 @@
 
 		<table class="table">
 			<tr>
-				<td align="right"><b>{t}Index{/t}</b></td>
-				<td align="center"><img src="images/rating-star.gif" border="0" alt="{t}Recommendations{/t}"></td>
-				<td align="center"><img src="resource2/{$opt.template.style}/images/log/16x16-found.png" width="16" height="16" border="0" alt="{t}Found{/t}"></td>
+				<td style="text-align:right"><b>{t}Index{/t}</b></td>
+				<td style="text-align:right"><img src="images/rating-star.gif" border="0" alt="{t}Recommendations{/t}"></td>
+				<td style="text-align:right"><img src="resource2/{$opt.template.style}/images/log/16x16-found.png" width="16" height="16" border="0" alt="{t}Found{/t}"></td>
+				<td></td>
 				<td>&nbsp;</td>
 			</tr>
 	{/if}
 
 	<tr>
-		<td width="40px" align="right">
+		<td width="40px" style="text-align:right">
 			{$topItem.idx}
 		</td>
-		<td width="40px" align="center">
+		<td width="30px" style="text-align:right">
 			{$topItem.ratings}
 		</td>
-		<td width="60px" align="center">
+		<td width="40px" style="text-align:right">
 			{$topItem.founds}
 		</td>
+		<td></td>
 		<td>
 			<a href="viewcache.php?wp={$topItem.wpoc}">{$topItem.name|escape}</a> {include file="res_oconly.tpl" oconly=$topItem.oconly} {t}by{/t} <a href="viewprofile.php?userid={$topItem.userid}">{$topItem.username|escape}</a>
 		</td>
@@ -106,6 +109,7 @@
 		{assign var='makefoot' value=true}
 	{/if}
 	{if $makefoot}
+			<tr><td class="spacer">&nbsp;</td></tr>
 		</table>
 	{/if}
 

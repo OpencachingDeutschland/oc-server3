@@ -88,7 +88,10 @@
 	</p>
 </div>
 <p style="line-height: 1.6em;">{t 1=$usercountry|escape}Geocaches with most ratings in the last 30 days in %1.{/t}</p>
-{include file="res_newratings.tpl" topratings=$topratings}
+
+<div style="margin-bottom:16px">
+	{include file="res_newratings.tpl" topratings=$topratings}
+</div>
 
 {* forum news *}
 {if $phpbb_enabled==true}

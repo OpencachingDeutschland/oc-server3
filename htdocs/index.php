@@ -91,9 +91,9 @@
 		$tpl->assign('phpbb_link', $opt['cron']['phpbbtopics']['link']);
 
 		// current cache and log-counters
-		$tpl->assign('count_hiddens', sql_value_slave('SELECT COUNT(*) AS `hiddens` FROM `caches` WHERE `status`=1', 0));
-		$tpl->assign('count_founds', sql_value_slave('SELECT COUNT(*) AS `founds` FROM `cache_logs` WHERE `type`=1', 0));
-		$tpl->assign('count_users', sql_value_slave('SELECT COUNT(*) AS `users` FROM (SELECT DISTINCT `user_id` FROM `cache_logs` UNION DISTINCT SELECT DISTINCT `user_id` FROM `caches`) AS `t`', 0));
+		$tpl->assign('count_hiddens', number1000(sql_value_slave('SELECT COUNT(*) AS `hiddens` FROM `caches` WHERE `status`=1', 0)));
+		$tpl->assign('count_founds', number1000(sql_value_slave('SELECT COUNT(*) AS `founds` FROM `cache_logs` WHERE `type`=1', 0)));
+		$tpl->assign('count_users', number1000(sql_value_slave('SELECT COUNT(*) AS `users` FROM (SELECT DISTINCT `user_id` FROM `cache_logs` UNION DISTINCT SELECT DISTINCT `user_id` FROM `caches`) AS `t`', 0)));
 
 		// get newest events
 		$tpl->assign_rs('events', $getNew->rsForSmarty('event'));

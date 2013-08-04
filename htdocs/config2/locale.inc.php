@@ -101,6 +101,7 @@
 	$opt['locale']['EN']['format']['time'] = '%I:%M %p';
 	$opt['locale']['EN']['format']['timesec'] = '%X';
 	$opt['locale']['EN']['format']['phpdate'] = 'm/d/Y';
+	$opt['locale']['EN']['format']['dot1000'] = ',';
 	$opt['locale']['EN']['country'] = 'UK';
 	$opt['locale']['EN']['page']['subtitle1'] = 'Geocaching with Opencaching';
 	$opt['locale']['EN']['page']['subtitle2'] = '';

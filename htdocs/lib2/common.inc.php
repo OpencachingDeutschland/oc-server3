@@ -388,4 +388,18 @@ function helppagelink($ocpage, $title='Instructions')
 	return "";
 }
 
+
+// format number with 1000er dots
+
+function number1000($n)
+{
+	global $opt;
+
+	if (isset($opt['locale'][$opt['template']['locale']]['format']['dot1000']) &&
+	    $opt['locale'][$opt['template']['locale']]['format']['dot1000'] == ',')
+		return number_format($n);
+	else
+		return str_replace(',', '.', number_format($n));
+}
+
 ?>

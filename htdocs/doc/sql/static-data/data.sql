@@ -5004,7 +5004,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('83', 'DE', 'Bei der Dateiübertragung ist ein Fehler aufgetreten.', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('84', 'DE', 'Die Datei war zu groß. Es sind maximal 250 KB erlaubt.', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('85', 'DE', 'Kein Bild angegeben.', '2010-08-28 11:48:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('86', 'DE', 'Gleiche Cacheart', '2010-09-04 21:39:08');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('86', 'DE', 'gleiche Cacheart', '2010-09-04 21:39:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('87', 'DE', 'Opencaching.de', '2010-08-29 17:36:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('90', 'DE', 'Insgesamt %1 aktive Caches und %2 Funde von %3 Benutzern', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('91', 'DE', 'Ungarisch', '2010-08-28 11:48:06');

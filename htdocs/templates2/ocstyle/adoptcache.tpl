@@ -23,6 +23,8 @@
 				<th>&nbsp;</th>
 			</tr>
 
+			<tr><td class="spacer"></td></tr>
+
 			{foreach from=$adoptions item=adoptItem}
 				<tr>
 					<td>
@@ -110,6 +112,8 @@
 			<th>{t}Owner{/t}</th>
 			<th></th>
 		</tr>
+
+		<tr><td class="spacer"></td></tr>
 
 		{foreach from=$adoptions item=adoptItem}
 			<tr>

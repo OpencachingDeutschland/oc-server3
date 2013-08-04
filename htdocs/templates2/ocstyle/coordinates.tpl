@@ -7,7 +7,7 @@
 
 	{if $wp!=''}
 		<div style="margin-top:4px;">
-			<p style="color: 5890a8"><b><a href="viewcache.php?wp={$wp}" target="_blank">{$cachename}</a></b><br />
+			<p style="color: 5890a8"><b>{$cachename}</b><br />
 			<p style="color: 5890a8">{t}by{/t} {$owner}</p>
 		</div>
 	{/if}

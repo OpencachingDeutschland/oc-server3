@@ -323,11 +323,12 @@ div.changelog ul {margin: 0px 0px 10px 0px; }
 div.changelog ul li {margin: 0px 0px 0.2em 0px; }
 div.changelog ul li ul {font-size: 83%; margin:0}
 ul.col4 { column-count:4; -moz-column-count:4; -webkit-column-count:4; line-height:1.7em; }
+ol.col4 { column-count:4; -moz-column-count:4; -webkit-column-count:4; line-height:1.7em; }
 
 /* Tables */
 .table {font-size: 10px; line-height: 1.8em; clear: left; padding: 0px; margin: 0.5em 0px 0.2em 0px; border: solid 0px rgb(150,150,150); empty-cells: show; border-collapse: collapse; background-color: rgb(255,255,255);}
 .table tr {margin: 0px; padding:0; }
-.table td {padding: 2px 7px 5px 7px; border: solid 0px rgb(150,150,150); text-align: left; font-size: 120%;}
+.table td {padding: 2px 7px 4px 7px; border: solid 0px rgb(150,150,150); text-align: left; font-size: 120%;}
 /* .table th {margin: 0px; background-color: #e6e6e6;color: #404040; padding: 2px 7px 2px 7px; border-top: solid 1px #404040; border-bottom: solid 1px #404040; empty-cells: show; text-align: left; font-size: 120%; } */
 /* .table th {margin: 0px; background-color: #7fa2ca;color: #f8f8f8; padding: 2px 7px 2px 7px; border: solid 0px rgb(150,150,150); empty-cells: show; text-align: left; font-size: 120%; } */
 .table th, .searchtable th {margin: 0px; background-color: #deebcd; color: #404040; padding: 2px 7px 2px 7px; border-top: solid 1px #404040; border-bottom: solid 1px #404040; empty-cells: show; text-align: left; font-size: 120%; }
@@ -378,9 +379,6 @@ td.search_listcolor2 { background:#f0f0f0; }
 div.default { font-size:110%; }
 td.default { font-size:12px; }
 
-/* Links */
-a.nooutline:focus { outline: 0; }
-
 /*--------------------*/
 /* 6.2 - Sidebar Area */
 /*--------------------*/
@@ -402,11 +400,39 @@ a.nooutline:focus { outline: 0; }
 /*-------------------*/
 /* 6.4 - Hyperlinks  */
 /*-------------------*/
-.content1 a, .content2 a, .content3 a, .sidebar-txtbox-noshade a, .sidebar-txtbox-shade a, .popup a {color: rgb(75,75,75); text-decoration: underline;}
-.content1 a:hover, .content2 a:hover, .content3 a:hover, .sidebar-txtbox-noshade a:hover, .sidebar-txtbox-shade a:hover {color: rgb(0,0,0); text-decoration: none;}
-.content1 a:visited, .content2 a:visited, .content3 a:visited, .sidebar-txtbox-noshade a:visited, .sidebar-txtbox-shade a:visited  {color: rgb(130,75,150);}
+
+/* standard links */
+.content1 a, .content2 a, .content3 a, .sidebar-txtbox-noshade a, .sidebar-txtbox-shade a, .popup a {color: rgb(75,75,175); text-decoration: none;}
+.content1 a:hover, .content2 a:hover, .content3 a:hover, .sidebar-txtbox-noshade a:hover, .sidebar-txtbox-shade a:hover {text-decoration: underline;}
+.content1 a:visited, .content2 a:visited, .content3 a:visited, .sidebar-txtbox-noshade a:visited, .sidebar-txtbox-shade a:visited  {color: rgb(120,0,150);}
 .footer a {color: rgb(255,255,255); text-decoration: underline;}
 .footer a:hover {color: rgb(0,0,0); text-decoration: none;}
+
+/* fat cache and username links */
+a.links:link {
+	font-weight: bold;
+	color: black;
+	text-decoration: none;
+}
+
+a.links:visited {
+	font-weight: bold;
+	color: purple;
+	text-decoration: none;
+}
+
+a.links:active {
+	background-color: yellow;
+	text-decoration: none;
+}
+
+a.links:hover {
+	text-decoration: underline;
+}
+
+/* other */
+a.nooutline:focus { outline: 0; }
+
 
 /*******************************/
 /* SECTION 7 - GENERIC CLASSES */
@@ -855,55 +881,6 @@ div.gsc-resultsRoot, div.gsc-branding-text, img.gsc-branding-img {
 
 #map_canvas input.gsc-search-button {
 	font-size: 14px;
-}
-
-/* linki w recomendation cache sp2ong */
-
-a.links:link {
-	font-weight:bold;
-	color: black;
-	text-decoration:none;
-}
-
-a.links:visited {
-	font-weight:bold;
-	color: purple;
-	text-decoration:none;
-}
-
-a.links:active {
-	background-color: yellow;
-	text-decoration:none;
-}
-
-a.links:hover {
-	font-weight:bold;
-	color:blue;
-/*	background-color:rgb(219,230,241); */
-	text-decoration: underline;
-}
-a.links2:link {
-	font-weight:bold;
-	color: black;
-	text-decoration:none;
-}
-
-a.links2:visited {
-	font-weight:bold;
-	color: black;
-	text-decoration:none;
-}
-
-a.links2:active {
-	background-color: yellow;
-	text-decoration:none;
-}
-
-a.links2:hover {
-	font-weight:bold;
-	color:blue;
-/*	background-color:rgb(219,230,241); */
-	text-decoration: none;
 }
 
 a.info{

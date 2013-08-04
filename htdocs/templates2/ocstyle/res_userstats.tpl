@@ -14,15 +14,19 @@
 	</tr>
 
 	{if $show_statistics==true}
-		<tr>
-			<td style="padding-left:34px; vertical-align:top; line-height:1.8em">{t}... by cache type{/t}:</td>
-			<td>
-				<div style="padding-left:2px">
-					{include file="res_cachetypestats.tpl" stat=$hidden_by_cachetype total=$hidden logs=false}
-				</div>
-			</td>
-		</tr>
-		<tr><td class="spacer" colspan="2"></td></tr>
+		{if $hidden_by_cachetype|@count}
+			<tr>
+				<td style="padding-left:34px; vertical-align:top; line-height:1.8em">{t}... by cache type{/t}:</td>
+				<td>
+					<div style="padding-left:6px">
+						{include file="res_cachetypestats.tpl" stat=$hidden_by_cachetype total=$hidden logs=false}
+					</div>
+				</td>
+			</tr>
+		{/if}
+		{if $hidden_by_cachetype|@count || $found_by_cachetype|@count}
+			<tr><td class="spacer" colspan="2"></td></tr>
+		{/if}
 	{/if}
 
 	<tr>
@@ -37,37 +41,41 @@
 	</tr>
 
 	{if $show_statistics==true}
-		<tr>
-			<td style="padding-left:34px; vertical-align:top; line-height:1.8em">{t}... by cache type{/t}:</td>
-			<td>
-				<div style="padding-left:2px">
-					{include file="res_cachetypestats.tpl" stat=$found_by_cachetype total=$found logs=true}
-				</div>
-			</td>
-		</tr>
+		{if $found_by_cachetype|@count}
+			<tr>
+				<td style="padding-left:34px; vertical-align:top; line-height:1.8em">{t}... by cache type{/t}:</td>
+				<td>
+					<div style="padding-left:6px">
+						{include file="res_cachetypestats.tpl" stat=$found_by_cachetype total=$found logs=true}
+					</div>
+				</td>
+			</tr>
 
-		<tr>
-			<td valign="top" style="padding-left:34px">
-				{t}... by region{/t}:
-			</td>
-			<td>
-				<table cellspacing="0" cellpadding="0">
-				{foreach from=$regionstat item=region name=regions}
-					<tr>
-						<td class="default" style="text-align:right; padding:0">
-							{$region.count} &nbsp;
-						</td>
-						<td class="default" style="padding:0">
-							{if !$region.state}<a href="search.php?showresult=1&amp;expert=0&amp;f_inactive=0&amp;output=HTML&amp;sort=byname&amp;finderid={$userid}&amp;searchbyfinder=&amp;logtype=1,7&amp;country={$region.countrycode}&amp;calledbysearch=0{if $oconly}&amp;cache_attribs=6{/if}">{$region.country}</a>{else}{$region.country}{/if}
-							 {if $region.state}&gt; <a href="search.php?showresult=1&amp;expert=0&amp;f_inactive=0&amp;output=HTML&amp;sort=byname&amp;finderid={$userid}&amp;searchbyfinder=&amp;logtype=1,7&amp;adm2={$region.adm2code}&amp;calledbysearch=0{if $oconly}&amp;cache_attribs=6{/if}">{$region.state}</a>{/if}
-							&nbsp;<img src="images/flags/{$region.countrycode|lower}.gif" />
-						</td>
-					</tr>
-				{/foreach}
-				</table>
-			</td>
-		</tr>
-		<tr><td class="spacer" colspan="2"></td></tr>
+			<tr>
+				<td valign="top" style="padding-left:34px">
+					{t}... by region{/t}:
+				</td>
+				<td>
+					<table cellspacing="0" cellpadding="0">
+					{foreach from=$regionstat item=region name=regions}
+						<tr>
+							<td class="default" style="text-align:right; padding:0">
+								{$region.count} &nbsp;
+							</td>
+							<td class="default" style="padding:0">
+								{if !$region.state}<a href="search.php?showresult=1&amp;expert=0&amp;f_inactive=0&amp;output=HTML&amp;sort=byname&amp;finderid={$userid}&amp;searchbyfinder=&amp;logtype=1,7&amp;country={$region.countrycode}&amp;calledbysearch=0{if $oconly}&amp;cache_attribs=6{/if}">{$region.country}</a>{else}{$region.country}{/if}
+								 {if $region.state}&gt; <a href="search.php?showresult=1&amp;expert=0&amp;f_inactive=0&amp;output=HTML&amp;sort=byname&amp;finderid={$userid}&amp;searchbyfinder=&amp;logtype=1,7&amp;adm2={$region.adm2code}&amp;calledbysearch=0{if $oconly}&amp;cache_attribs=6{/if}">{$region.state}</a>{/if}
+								&nbsp;<img src="images/flags/{$region.countrycode|lower}.gif" />
+							</td>
+						</tr>
+					{/foreach}
+					</table>
+				</td>
+			</tr>
+		{/if}
+		{if $hidden_by_cachetype|@count || $found_by_cachetype|@count}
+			<tr><td class="spacer" colspan="2"></td></tr>
+		{/if}
 
 		<tr>
 			<td valign="middle" class="header-small" style="padding-top:5px;padding-bottom:5px;white-space:nowrap">

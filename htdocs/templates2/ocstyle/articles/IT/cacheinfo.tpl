@@ -22,37 +22,37 @@
 					<td>Cache Normale: Le coordinate indicano la posizione della cache, la cache &egrave; una scatola come ad esempio un tupperware contenente un giornale di bordo (logbook) e per trovare e aprire la cache non ci sono enigmi da risolvere o altro.
 					</td>
 				</tr>
-				<tr><td class="spacer"><img src="/images/trans.gif" border="0" width="1" height="1" alt="" title=""></td></tr>
+				<tr><td class="spacer"><img src="images/trans.gif" border="0" width="1" height="1" alt="" title=""></td></tr>
 				<tr>
 					<td valign="top" style="padding-top:5px"><img src="resource2/ocstyle/images/cacheicon/drivein.gif" width="32" border="0" height="32" align="left" alt="Drive-In" title="Drive-In"></td>
 					<td>Drive-In: come una cache normale, ma la cache si trova molto vicino ad un parcheggio. Inolte per trovare la cache non sono richieste attrezzature speciali.</td>
 				</tr>
-				<tr><td class="spacer"><img src="/images/trans.gif" border="0" width="1" height="1" alt="" title=""></td></tr>
+				<tr><td class="spacer"><img src="images/trans.gif" border="0" width="1" height="1" alt="" title=""></td></tr>
 				<tr>
 					<td valign="top" style="padding-top:5px"><img src="resource2/ocstyle/images/cacheicon/multi.gif" width="32" border="0" height="32" align="left" alt="Multi Cache" title="Multi Cache"></td>
 					<td>Multicache: Le coordinate non danno la posizione della cache, ma un possibile punto di partenza per trovarla. La ricerca pu&ograve; richiedere la risoluzione di problemi o puzzle, ma anche il ritrovamento di stazioni intermedie. Deve essere possibile trovare la soluzione dei compiti e puzzle sul posto, e possono essere richieste attrezzature speciali (ad esempio l'accesso a Internet, una calcolatrice scientifica) o speciali conoscenze.</td>
 				</tr>
-				<tr><td class="spacer"><img src="/images/trans.gif" border="0" width="1" height="1" alt="" title=""></td></tr>
+				<tr><td class="spacer"><img src="images/trans.gif" border="0" width="1" height="1" alt="" title=""></td></tr>
 				<tr>
 					<td valign="top" style="padding-top:5px"><img src="resource2/ocstyle/images/cacheicon/mystery.gif" width="32" border="0" height="32" align="left" alt="Mystery Cache" title="Mystery Cache"></td>
 					<td>Mystery Cache: Una Mystery Cache pu&ograve; essere qualsiasi cache (normale, multi, virtuale, ecc.) Tuttavia per trovare la soluzione devono essere risolti uno o pi&ugrave; enigmi, che di solito richiedono ulteriori ricerche sul sito o su Internet.</td>
 				</tr>
-				<tr><td class="spacer"><img src="/images/trans.gif" border="0" width="1" height="1" alt="" title=""></td></tr>
+				<tr><td class="spacer"><img src="images/trans.gif" border="0" width="1" height="1" alt="" title=""></td></tr>
 				<tr>
 					<td valign="top" style="padding-top:5px"><img src="resource2/ocstyle/images/cacheicon/mathe.gif" width="32" border="0" height="32" align="left" alt="Matematica/Fisica" title="Matematica/Fisica"></td>
 					<td>Cache Matematica/Fisica: Per risolvere la cache, debbono essere risolti uno o pi&ugrave; problemi di matematica o fisica, la cui difficolt&agrave; &egave; superiore a quella di semplici Mystery.</td>
 				</tr>
-				<tr><td class="spacer"><img src="/images/trans.gif" border="0" width="1" height="1" alt="" title=""></td></tr>
+				<tr><td class="spacer"><img src="images/trans.gif" border="0" width="1" height="1" alt="" title=""></td></tr>
 				<tr>
 					<td valign="top" style="padding-top:5px"><img src="resource2/ocstyle/images/cacheicon/moving.gif" width="32" border="0" height="32" align="left" alt="Cache in Movimento" title="Cache in Movimento"></td>
 					<td>Cache in Movimento: In questo tipo di cache il box &egrave; nascosto, a seconda del compito di ogni luogo, in un nuovo punto. Le nuove coordinate e il nuovo compito saranno pubblicati nel registro della cache.</td>
 				</tr>
-				<tr><td class="spacer"><img src="/images/trans.gif" border="0" width="1" height="1" alt="" title=""></td></tr>
+				<tr><td class="spacer"><img src="images/trans.gif" border="0" width="1" height="1" alt="" title=""></td></tr>
 				<tr>
 					<td valign="top" style="padding-top:5px"><img src="resource2/ocstyle/images/cacheicon/virtual.gif" width="32" border="0" height="32" align="left" alt="Cache Virtuale" title="Cache Virtuale"></td>
 					<td>Cache Virtuale: Alle cordinate non c'&egrave; una scatola n&eacute; un log. A seconda del compito, &egrave; necessario rispondere ad una domanda del proprietario o fare una foto per dimostrare che siete stati davvero sul posto.</td>
 				</tr>
-				<tr><td class="spacer"><img src="/images/trans.gif" border="0" width="1" height="1" alt="" title=""></td></tr>
+				<tr><td class="spacer"><img src="images/trans.gif" border="0" width="1" height="1" alt="" title=""></td></tr>
 				<tr>
 					<td valign="top" style="padding-top:5px"><img src="resource2/ocstyle/images/cacheicon/webcam.gif" width="32" border="0" height="32" align="left" alt="Webcam" title="Webcam"></td>
 					<td>Webcam Cache: per risolvere queste cache si dovr&agrave; in qualche modo utilizzare una webcam. Spesso la webcam si trova alle coordinate ed &egrave; necessario utilizzarla per prendere una foto di se stessi. L'immagine viene poi aggiunta al log. Non vi &egrave; alcun contenitore per scambio di oggetti o log.</td>
@@ -61,7 +61,7 @@
 					<td valign="top" style="padding-top:5px"><img src="resource2/ocstyle/images/cacheicon/event.gif" width="32" border="0" height="32" align="left" alt="Evento" title="Evento"></td>
 					<td>Cache Evento: Raduno di geocachers per chiaccherare in comune. Possono partecipare tutti i geocacher che lo desderino.</td>
 				</tr>
-				<tr><td class="spacer"><img src="/images/trans.gif" border="0" width="1" height="1" alt="" title=""></td></tr>
+				<tr><td class="spacer"><img src="images/trans.gif" border="0" width="1" height="1" alt="" title=""></td></tr>
 				<tr>
 					<td valign="top" style="padding-top:5px"><img src="resource2/ocstyle/images/cacheicon/unknown.gif" width="32" border="0" height="32" align="left" alt="Cache di tipo sconosciuto" title="Cache di tipo sconosciuto"></td>
 					<td>Cache di tipo sconosciuto: Tutte quelle che non rientrano in altri tipi di cache.</td>
@@ -76,7 +76,7 @@
 			<b>Attributi Cache:</b> E' possibile specificare degli attributi per la cache che, per esempio, possono essere utilizzati nella <a href="search.php">Ricerca</a>.
 			Molti attributi riguardano le condizioni o sono degli avvertimenti (ad esempio, zecche). Come cercatore di cache ti puo' interessare il proprietario, ed egli assegna gli attributi appropriati per la cache. Quando si specificano gli attributi per la geocache si dovrebbero considerare le condizioni normali, con tempo asciutto.</p>
 			<table class="table">
-				<tr><td class="spacer"><img src="/images/trans.gif" border="0" width="1" height="1" alt="" title=""></td></tr>
+				<tr><td class="spacer"><img src="images/trans.gif" border="0" width="1" height="1" alt="" title=""></td></tr>
 
 				{foreach from=$attributes item=attribGroupItem}
 					<tr><td colspan="2" bgcolor="{$attribGroupItem.color|escape}"><b><i>{$attribGroupItem.category|escape} / {$attribGroupItem.name|escape}</i></b></td></tr>
@@ -89,7 +89,7 @@
 							</td>
 						</tr>
 						
-						<tr><td class="spacer"><img src="/images/trans.gif" border="0" width="1" height="1" alt="" title=""></td></tr>
+						<tr><td class="spacer"><img src="images/trans.gif" border="0" width="1" height="1" alt="" title=""></td></tr>
 					{/foreach}
 				{/foreach}
 			</table>

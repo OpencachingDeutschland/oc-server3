@@ -139,7 +139,7 @@ function toggleAttr(id)
 		<td>{t}Name:{/t}</td>
 		<td><input type="text" name="name" value="{name}" maxlength="60" class="input400" />{name_message}</td>
 	</tr>
-	<tr><td class="spacer" colspan="2"><img src="/images/trans.gif" border="0" width="1" height="1" alt="" title="" /></td></tr>
+	<tr><td class="spacer" colspan="2"><img src="images/trans.gif" border="0" width="1" height="1" alt="" title="" /></td></tr>
 	<tr>
 		<td>{t}Cachetype:{/t}</td>
 		<td>

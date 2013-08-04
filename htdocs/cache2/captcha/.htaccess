@@ -1,4 +1,4 @@
 <FilesMatch ".*">
-Order Deny,Allow
-Deny from All
+Order Allow,Deny
+Allow from All
 </FilesMatch>

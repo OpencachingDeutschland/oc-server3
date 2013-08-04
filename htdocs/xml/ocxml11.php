@@ -95,9 +95,10 @@
 		exit;
 	}
 
-	// cleanup ... 2h after last call
-	// [2013-04-27 following: down from 24h due to high usage]
-	$cleanerdate = date($sDateformat, time() - 7200);
+	// cleanup ... 1h after last call
+	// [2013-04-27 following: down from 24h to 2h due to high usage]
+	// [2013-08-04 following: down to 1h for same reason]
+	$cleanerdate = date($sDateformat, time() - 3600);
 	$rs = sql("SELECT `id` FROM `xmlsession` WHERE `last_use`<'&1' AND `cleaned`=0", $cleanerdate);
 	while ($r = sql_fetch_array($rs))
 	{

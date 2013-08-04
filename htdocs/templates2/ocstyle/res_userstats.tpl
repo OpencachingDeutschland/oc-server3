@@ -18,7 +18,7 @@
 			<td style="padding-left:34px; vertical-align:top; line-height:1.8em">{t}... by cache type{/t}:</td>
 			<td>
 				<div style="padding-left:2px">
-					{include file="res_cachetypestats.tpl" stat=$hidden_by_cachetype total=$hidden logs=false oconly=true}
+					{include file="res_cachetypestats.tpl" stat=$hidden_by_cachetype total=$hidden logs=false}
 				</div>
 			</td>
 		</tr>
@@ -41,7 +41,7 @@
 			<td style="padding-left:34px; vertical-align:top; line-height:1.8em">{t}... by cache type{/t}:</td>
 			<td>
 				<div style="padding-left:2px">
-					{include file="res_cachetypestats.tpl" stat=$found_by_cachetype total=$found logs=true oconly=true}
+					{include file="res_cachetypestats.tpl" stat=$found_by_cachetype total=$found logs=true}
 				</div>
 			</td>
 		</tr>

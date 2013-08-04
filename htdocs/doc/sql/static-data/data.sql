@@ -2569,6 +2569,8 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2143', '<b>OCon
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2144', 'Participants', '2010-09-07 20:19:07');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2146', 'Statistics', '2010-09-07 20:19:07');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2147', 'Overall terrain and difficulty distribution of active OConly caches:', '2010-09-07 20:19:07');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2148', '... by cache type', '2010-09-07 20:19:07');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2149', '... by region', '2010-09-07 20:19:07');
 
 -- Table sys_trans_ref
 SET NAMES 'utf8';
@@ -6594,6 +6596,8 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2144', 'DE', ' Teilnehmer', '2010-09-07 20:19:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2146', 'DE', 'Statistik', '2010-09-07 20:19:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2147', 'DE', 'Gelände- und Schwierigkeitsverteilung aller OConly-Caches:', '2010-09-07 20:19:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2148', 'DE', '... nach Cachetyp', '2010-09-07 20:19:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2149', 'DE', '... nach Region', '2010-09-07 20:19:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'EN', 'Reorder IDs', '2010-09-02 00:15:30');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'EN', 'The database could not be reconnected.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'EN', 'Testing – please do not login', '2010-08-28 11:48:07');

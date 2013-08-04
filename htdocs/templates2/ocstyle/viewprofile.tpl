@@ -80,7 +80,7 @@
 		</tr>
 	{/if}
 
-	<tr><td><td class="spacer"> </td></tr>
+	<tr><td><td class="spacer"></td></tr>
 </table>
 
 {* description *}
@@ -90,8 +90,8 @@
 	<div class="table-like-font" style="margin-left:6px">
 		{$description}
 	</div>
-	<div>&nbsp;</div>
 {/if}
+<div>&nbsp;</div>
 
 {* all-caches statistics *}
 <div class="content2-container bg-blue02">
@@ -161,7 +161,7 @@
 		<tr>
 			<td valign="middle" class="header-small" style="white-space:nowrap" width="1%">
 				<img src="resource2/ocstyle/images/log/16x16-found.png" style="padding-right:2px"  />
-				<b>{t}OConly-81 statistics{/t}:</b>
+				&nbsp;<b>{t}OConly-81 statistics{/t}:</b>
 			</td>
 			<td valign="middle">
 				{t}inactive{/t} (<a href="oconly81.php">{t}Info{/t}</a>)

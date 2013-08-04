@@ -172,7 +172,7 @@ Logeinträge:
 		$thisline = mb_ereg_replace('{logs}', $logentries, $thisline);
 
 		$thisline = lf2crlf($thisline);
-		if (($rCount['count'] == 1) && !$bUseZip)
+		if (!$bUseZip)
 			echo $thisline;
 		else
 		{

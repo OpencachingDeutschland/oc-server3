@@ -120,7 +120,7 @@ function myHomeLoad()
 	{* Geocaches hidden *}
 	<div class="content2-container bg-blue02" id="mycaches" style="margin-top:5px;">
 		<p class="content-title-noshade-size3">
-			<img src="resource2/{$opt.template.style}/images/misc/22x22-traditional.gif" width="22" height="22"  style="margin-right: 10px;" />&nbsp;
+			<img src="resource2/{$opt.template.style}/images/cacheicon/22x20-traditional.png" width="22" height="20"  style="margin-right: 10px;" />&nbsp;
 			{t 1=$hidden}Geocaches hidden: %1{/t} &nbsp;
 			{* Ocprop: (find|us|own)erid=([0-9]+) *}
 			<span class="content-title-link">[<a href="search.php?showresult=1&amp;expert=0&amp;output=HTML&amp;sort=byname&amp;ownerid={$login.userid}&amp;searchbyowner=&amp;f_inactive=0&calledbysearch=0">{t}Show details{/t}</a>]&nbsp; [<a href="search.php?showresult=1&amp;expert=0&amp;output=HTML&amp;sort=byname&amp;ownerid={$login.userid}&amp;searchbyowner=&amp;f_inactive=1&calledbysearch=0">... {t}only active caches{/t}</a>]</span>

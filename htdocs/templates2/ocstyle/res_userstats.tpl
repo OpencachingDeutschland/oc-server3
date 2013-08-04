@@ -7,7 +7,7 @@
 
 	<tr>
 		<td valign="middle" class="header-small" style="padding-top:5px;padding-bottom:5px;white-space:nowrap" width="1%">
-		<img src="resource2/{$opt.template.style}/images/cacheicon/22x22-traditional.gif" width="22" height="22" align="middle" border="0" style="padding-right:2px" />&nbsp;<b>{t}Hidden caches{/t}:</b></td>
+		<img src="resource2/{$opt.template.style}/images/cacheicon/22x20-traditional.png" width="22" height="20" align="middle" border="0" style="padding-right:2px" />&nbsp;<b>{t}Hidden caches{/t}:</b></td>
 		<td class="header-small">{$hidden}
 			{if $hidden>0}&nbsp;[<a href="search.php?showresult=1&amp;expert=0&amp;f_inactive=0&amp;output=HTML&amp;sort=byname&amp;ownerid={$userid}&amp;searchbyowner=&amp;calledbysearch=0{if $oconly}&amp;cache_attribs=6{/if}">{t}Show{/t}</a>]{if $hidden_active<$hidden}, &nbsp;{t 1=$hidden_active}%1 of these are active{/t} {if $hidden_active>0}&nbsp;[<a href="search.php?showresult=1&amp;expert=0&amp;f_inactive=1&amp;output=HTML&amp;sort=byname&amp;ownerid={$userid}&amp;searchbyowner=&amp;calledbysearch=0{if $oconly}&amp;cache_attribs=6{/if}">{t}Show{/t}</a>]{/if}{/if}{/if}
 		</td>
@@ -60,7 +60,7 @@
 						<td class="default" style="padding:0">
 							{if !$region.state}<a href="search.php?showresult=1&amp;expert=0&amp;f_inactive=0&amp;output=HTML&amp;sort=byname&amp;finderid={$userid}&amp;searchbyfinder=&amp;logtype=1,7&amp;country={$region.countrycode}&amp;calledbysearch=0{if $oconly}&amp;cache_attribs=6{/if}">{$region.country}</a>{else}{$region.country}{/if}
 							 {if $region.state}&gt; <a href="search.php?showresult=1&amp;expert=0&amp;f_inactive=0&amp;output=HTML&amp;sort=byname&amp;finderid={$userid}&amp;searchbyfinder=&amp;logtype=1,7&amp;adm2={$region.adm2code}&amp;calledbysearch=0{if $oconly}&amp;cache_attribs=6{/if}">{$region.state}</a>{/if}
-							&nbsp;<img src="images/flags/{$region.countrycode|lower}.gif" width="16" height="11">
+							&nbsp;<img src="images/flags/{$region.countrycode|lower}.gif" />
 						</td>
 					</tr>
 				{/foreach}

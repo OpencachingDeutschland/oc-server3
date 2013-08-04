@@ -187,7 +187,7 @@ div#bg2 {display: none;}
 /*----------------------------*/
 /* 2.5 - Navigation - Level 3 */
 /*----------------------------*/
-.nav3 {overflow: hidden; clear: both; float: left; width: 160px; min-height: 500px; margin: 0px; padding: 0px; color: rgb(75,75,75); font-size: 1.0em;}
+.nav3 {overflow: hidden; clear: both; float: left; width: 160px; min-height: 500px; margin: 0px; padding: 0px; color: rgb(75,75,75); font-size: 1.0em; }
 .nav3 ul {width: 160px; margin: 0px 0px 20px 0px; padding: 0px; border-bottom: solid 1px rgb(216,206,159); background-color: rgb(219,230,241);}	
 .nav3 li {list-style: none; margin: 0px; padding: 0px;}
 .nav3 li.title {margin: 0px 0px 0px 0px; padding: 3px 5px 2px 15px; background-color: rgb(156,186,214); color: rgb(255,255,255); text-transform: uppercase; font-weight: bold; font-size: 120%;}
@@ -343,11 +343,9 @@ ol.col4 { column-count:4; -moz-column-count:4; -webkit-column-count:4; line-heig
 .narrowtable-caption {margin: 0.5em 0px 1.0em 30px; padding: 0px; clear: both; text-align: left; font-size: 120%;}
 
 .stattable { font-size:10px; line-height:1.4em; padding:0; background-color: white; }
-.stattable th { background-color: #deebcd; color: #404040; border:0; min-width: 1.8em; line-height:1.4em; }
+.stattable th { background-color: #deebcd; color: #404040; border:0; width: 3.2em; line-height:1.4em; padding:0}
 .stattable th.h1 { background-color: #fff; }
 span.percent { font-size: 11px; }
-
-
 
 td.listicon {
 	width:1%;
@@ -543,7 +541,13 @@ a.nooutline:focus { outline: 0; }
 .bg-yellow10 {background-color: rgb(247,224,23);}
 
 .bg-blue01 {background-color: rgb(238,237,249);}
-.bg-blue02 {background-color: rgb(219,230,241); padding: 2px;}
+.bg-blue02 {background-color: rgb(219,230,241);
+	padding:2px 0px 2px 4px;
+	border-radius: 5px; -webkit-border-radius: 5px; -moz-border-radius: 5px;
+	box-shadow: 1px 1px 2px #676767;
+	-moz-box-shadow: 1px 1px 2px #676767;
+	-webkit-box-shadow: 1px 1px 2px #676767;
+	}
 .bg-blue03 {background-color: rgb(205,202,236);}
 .bg-blue04 {background-color: rgb(189,185,229);}
 .bg-blue05 {background-color: rgb(172,167,223);}

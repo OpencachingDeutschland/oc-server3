@@ -26,7 +26,7 @@
 			{if $smarty.foreach.difficulty.first}
 				<th class="h1" rowspan="9">{t}Difficulty{/t}&nbsp;&nbsp;&nbsp;</th>
 			{/if}
-			<th>&nbsp;{$difficulty/2}</th>
+			<th>&nbsp;&nbsp;{$difficulty/2}</th>
 			{assign var=dsum value=0}
 			{foreach from=$terrains key=terrain item=count}
 				<td style="text-align:center; background-color:{if $count}rgb({$count/$stat81_maxcount*-242+242.5|floor},{$count/$stat81_maxcount*-242+242.5|floor},242){else}#f2f2f2{/if}" {if $count}onclick='location.href="search.php?showresult=1&amp;expert=0&amp;output=HTML&amp;sort=byname&amp;{if $userid>0}f_inactive=0&amp;f_disabled=0&amp;finderid={$userid}&amp;searchbyfinder={else}f_inactive=1&amp;f_disabled=1&amp;searchall={/if}&amp;logtype=1,7&amp;calledbysearch=0&amp;cache_attribs=6&amp;terrainmin={$terrain}&amp;terrainmax={$terrain}&amp;difficultymin={$difficulty}&amp;difficultymax={$difficulty}"'{/if}>

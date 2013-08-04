@@ -18,7 +18,7 @@
 
 	<div class="content2-container bg-blue02">
 		<p class="content-title-noshade-size2">
-			<img src="resource2/{$opt.template.style}/images/profile/32x32-profile.png" style="align: left; margin-right: 10px;" width="32" height="32"  /> 
+			<img src="resource2/{$opt.template.style}/images/profile/32x22-profile.png" style="align: left; margin-right: 10px;" width="32" height="22"  /> 
 			{t}Participants{/t}
 		</p>
 	</div>
@@ -37,7 +37,7 @@
 
 	<div class="content2-container bg-blue02">
 		<p class="content-title-noshade-size2">
-			<img src="resource2/{$opt.template.style}/images/cacheicon/traditional.gif" style="align: left; margin-right: 10px;" width="32" height="32"  /> 
+			<img src="resource2/{$opt.template.style}/images/cacheicon/22x20-traditional.png" style="align: left; margin-right: 10px;" width="22" height="20"  /> 
 			{t}Statistics{/t}
 		</p>
 	</div>

@@ -20,7 +20,7 @@
 {* profile data *}
 <div class="content2-container bg-blue02">
 	<p class="content-title-noshade-size2">
-		<img src="resource2/{$opt.template.style}/images/profile/32x32-profile.png" style="align: left; margin-right: 10px;" width="32" height="32"  /> 
+		<img src="resource2/{$opt.template.style}/images/profile/32x22-profile.png" style="align: left; margin-right: 10px;" width="32" height="22"  /> 
 		{t}User data{/t}
 	</p>
 </div>
@@ -125,7 +125,7 @@
 {* OConly statistics *}
 <div class="content2-container bg-blue02">
 	<p class="content-title-noshade-size2">
-		<img src="resource2/{$opt.template.style}/images/misc/is_oconly_small.png" style="align: left; margin-right: 10px;" />
+		<img src="resource2/{$opt.template.style}/images/misc/40x22-oconly.png" style="align: left; margin-right: 10px;" />
 		{t}OConly statistics{/t}
 	</p>
 </div>

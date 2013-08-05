@@ -33,7 +33,7 @@
 						<tr>
 							<td valign="top" width="150px" {if $lastadm1!=$topItem.adm1}style="padding-top:12px"{/if}>
 								{if $lastadm1!=$topItem.adm1}
-									{$topItem.adm1|escape}&nbsp; <img src="images/flags/{$topItem.code1}.gif" />
+									{$topItem.adm1|escape}&nbsp; <img src="images/flags/{$topItem.code1|lower}.gif" />
 								{/if}
 							</td>
 							<td {if $lastadm1!=$topItem.adm1}style="padding-top:12px"{/if}>

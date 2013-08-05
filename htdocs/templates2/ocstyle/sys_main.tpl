@@ -120,7 +120,7 @@
 							{nocache}
 								&nbsp;
 								{if $login.userid==0}
-									<b><form action="login.php" method="post" enctype="application/x-www-form-urlencoded" name="login" dir="ltr" style="display: inline;">{t}User{/t}:&nbsp;&nbsp;<input name="email" size="10" type="text" class="textboxes" value="" />&nbsp;&nbsp;&nbsp;{t}Password{/t}:&nbsp;&nbsp;<input name="password" size="10" type="password" class="textboxes" value="" />&nbsp;<input type="hidden" name="action" value="login" /><input type="hidden" name="target" value="{$opt.page.target|escape}" /><input type="hidden" name="source" value="titlebar" />&nbsp;<input name="LogMeIn" value="{t}Login{/t}" class="formbuttons" style="width: 65px;" type="submit"></form></b>	
+									<b><form action="login.php" method="post" enctype="application/x-www-form-urlencoded" name="login" dir="ltr" style="display: inline;">{t}User{/t}:&nbsp;&nbsp;<input name="email" size="10" type="text" class="textboxes" value="" />&nbsp;&nbsp;&nbsp;{t}Password{/t}:&nbsp;&nbsp;<input name="password" size="10" type="password" class="textboxes" value="" />&nbsp;<input type="hidden" name="action" value="login" /><input type="hidden" name="target" value="{$opt.page.target|escape}" /><input type="hidden" name="source" value="titlebar" />&nbsp;<input name="LogMeIn" value="{t}Login{/t}" class="formbuttons" style="width: 65px;" type="submit" /></form></b>	
 								{else}  {* Ocprop: <a href="myhome.php">(.*?)<\/a>.*?<a href="login.php
 								                   <a href="myhome.php">.*?<a href="login.php\?action=logout"> *}
 									<b>{t}Logged in as{/t} <a href="myhome.php">{$login.username|escape}</a></b> - <a href="login.php?action=logout">{t}Logout{/t}</a>

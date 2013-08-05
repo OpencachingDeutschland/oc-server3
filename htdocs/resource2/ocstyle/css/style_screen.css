@@ -826,6 +826,11 @@ p.main-totalstats {
 	-webkit-box-shadow: 1px 2px 2px #555;
 }
 
+.img-noshadow-loggallery {
+	border: 1px solid #a9a9a9;
+	padding: 2px;
+}
+
 .img-minimap {
 	border: 1px solid #a9a9a9; 
 	padding: 2px; 

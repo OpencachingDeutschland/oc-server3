@@ -112,7 +112,7 @@
 			</td>
 			{if $newLog.pic_uuid != ""}
 				<td rowspan="{$lines_per_pic}">
-					{include file="res_logpicture.tpl" picture=$newLog logdate=false loguser=false}
+					{include file="res_logpicture.tpl" picture=$newLog logdate=false loguser=false nopicshadow=true}
 				</td>
 				<td></td>
 			{/if}

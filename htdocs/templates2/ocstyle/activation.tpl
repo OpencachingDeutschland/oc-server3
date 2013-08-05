@@ -29,7 +29,7 @@
 		</div>
 
 	  <p style="line-height: 1.6em;">
-			<img src="resource2/{$opt.template.style}/images/misc/hint.gif" border="0" width="15" height="11" alt="{t}Hint{/t}" align="middle">
+			<img src="resource2/{$opt.template.style}/images/misc/hint.gif" border="0" width="15" height="11" alt="{t}Hint{/t}" align="middle" />
 			{t}To complete the registration, you have to enter your E-Mail and activation code.{/t}
 		</p>
 

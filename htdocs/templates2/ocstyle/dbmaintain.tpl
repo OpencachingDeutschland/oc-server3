@@ -15,7 +15,7 @@
 		<tr><td class="spacer" colspan="2">&nbsp;</td></tr>
 
 		{foreach from=$procedures item=procItem}
-			<tr><td colspan="2"><input id="{$procItem|escape}" type="radio" name="action" value="{$procItem|escape}"> <label for="{$procItem|escape}">{$procItem|escape}</label></td></tr>
+			<tr><td colspan="2"><input id="{$procItem|escape}" type="radio" name="action" value="{$procItem|escape}" /> <label for="{$procItem|escape}">{$procItem|escape}</label></td></tr>
 		{/foreach}
 
 		{if $executed==true}

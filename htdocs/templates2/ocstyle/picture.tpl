@@ -69,7 +69,7 @@
 			<tr>
 				<td valign="top">{t}File:{/t}</td>
 				<td colspan="2">
-					<input type="hidden" name="MAX_FILE_SIZE" value="{$opt.logic.pictures.maxsize}">
+					<input type="hidden" name="MAX_FILE_SIZE" value="{$opt.logic.pictures.maxsize}" />
 					<input class="input300" name="file" type="file" maxlength="{$opt.logic.pictures.maxsize}" />
 				</td>
 			</tr>
@@ -96,7 +96,7 @@
 			<tr><td class="spacer" colspan="2"></td></tr>
 			<tr>
 				<td colspan="3">
-					<img src="resource2/{$opt.template.style}/images/misc/hint.gif" border="0" width="15" height="11" alt="{t}Note{/t}" title="{t}Note{/t}">
+					<img src="resource2/{$opt.template.style}/images/misc/hint.gif" border="0" width="15" height="11" alt="{t}Note{/t}" title="{t}Note{/t}" />
 					{t}Generally, spoiler pictures should not be logged. In the case that en exception from this rule makes sense, e.g. to document your finding or problems with the stash, please mark the picture als spoiler so that it won't appear in galleries.{/t}
 				 </td>
 			 </tr>
@@ -105,12 +105,12 @@
 		{if $objecttype==OBJECT_CACHE}
 			<tr>
 				<td></td>
-				<td style="width:1%"><input class="checkbox" type="checkbox" name="notdisplay" value="1" {if $displaychecked==false}checked="checked"{/if}></td>
+				<td style="width:1%"><input class="checkbox" type="checkbox" name="notdisplay" value="1" {if $displaychecked==false}checked="checked"{/if} /></td>
 				<td>{t}Do not separately display this picture (used in HTML description etc.){/t}</td>
 			</tr>
 			<tr>
 			<td></td>
-				<td style="width:1%"><input class="checkbox" type="checkbox" name="mappreview" value="1" {if $mappreviewchecked==true}checked="checked"{/if}></td>
+				<td style="width:1%"><input class="checkbox" type="checkbox" name="mappreview" value="1" {if $mappreviewchecked==true}checked="checked"{/if} /></td>
 				<td>{t}Preview picture for map &ndash; is shown when this cache is selected on the map.<br />You can have only <em>one</em> preview picture per cache.{/t}</td>
 			</tr>
 		{/if}
@@ -118,7 +118,7 @@
 			<tr><td class="spacer" colspan="2"></td></tr>
 			<tr>
 				<td class="help" colspan="3">
-					<img src="resource2/{$opt.template.style}/images/misc/hint.gif" border="0" width="15" height="11" alt="{t}Note{/t}" title="{t}Note{/t}">
+					<img src="resource2/{$opt.template.style}/images/misc/hint.gif" border="0" width="15" height="11" alt="{t}Note{/t}" title="{t}Note{/t}" />
 					{t}Only the following picture formats are allowed: BMP, GIF, PNG and JPEG. We recommend JPEG for photos.{/t}<br />
 					{t}The file size of the pictures must not exeed 250 KB. We recommend 640x480 pixel of picture size.{/t}<br />
 					{t}After click to upload, it can take a while, until the next page is been shown.{/t}

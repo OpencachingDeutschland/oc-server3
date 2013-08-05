@@ -76,7 +76,7 @@
 			<table border="0" cellpadding="0" cellspacing="0" width="100%">
 				<tr>
 					<td valign="top">
-						<img src="resource2/{$opt.template.style}/images/description/22x22-location.png"  width="22" height="22" border="0" alt="" title="" align="left">&nbsp;
+						<img src="resource2/{$opt.template.style}/images/description/22x22-location.png"  width="22" height="22" border="0" alt="" title="" align="left" />&nbsp;
 						<font size="3"><b><nobr>{$coordinates.lat|escape}</nobr> <nobr>{$coordinates.lon|escape}</nobr></b></font> <font size="1">(WGS84)</font><br />
 						<font size="1"><a href="#" onclick="window.open('coordinates.php?lat={$cache.latitude}&lon={$cache.longitude}&popup=y&wp={$cache.wpoc}','{t escape=js}Coordinates{/t}','width=280,height=394,resizable=no,scrollbars=0')">{t}Convert coordinates{/t}</a></font><br />
 						{t}Size{/t}: {$cache.sizeName|escape}<br />
@@ -126,8 +126,8 @@
 						<!-- <a href="http://maps.geocaching.de/gm/oc.php?lat={$cache.latitude}&lon={$cache.longitude}&zoom=14" target="_blank">{t}Geocaching.de{/t}</a><br />                -->
 						<!-- <a href="http://maps.google.com/maps?q={$cache.latitude}+{$cache.longitude}" target="_blank">{t}Google Maps{/t}</a><br />                                        -->
 
-						<img src="resource2/{$opt.template.style}/images/log/16x16-found.png" width="16" height="16" border="0"> {$cache.found} {if $cache.type==6}{t}Attended{/t}{else}{t}Found{/t}{/if}<br />
-						<nobr><img src="resource2/{$opt.template.style}/images/log/16x16-dnf.png" width="16" height="16" border="0">{if $cache.type==6} {$cache.willattend} {t}Will attend{/t}{else} {$cache.notfound} {t}Not found{/t}{/if}</nobr><br />
+						<img src="resource2/{$opt.template.style}/images/log/16x16-found.png" width="16" height="16" border="0" /> {$cache.found} {if $cache.type==6}{t}Attended{/t}{else}{t}Found{/t}{/if}<br />
+						<nobr><img src="resource2/{$opt.template.style}/images/log/16x16-dnf.png" width="16" height="16" border="0" />{if $cache.type==6} {$cache.willattend} {t}Will attend{/t}{else} {$cache.notfound} {t}Not found{/t}{/if}</nobr><br />
 						<img src="resource2/{$opt.template.style}/images/viewcache/16x16-note.png" class="icon16" alt="" /> {$cache.note} {if $cache.note==1}{t}Note{/t}{else}{t}Notes{/t}{/if}<br />
 						{if $cache.maintenance}<img src="resource2/{$opt.template.style}/images/viewcache/16x16-maintenance.png" class="icon16" alt="" /> {$cache.maintenance} {if $cache.maintenance==1}{t}Maintenance log{/t}{else}{t}Maintenance logs{/t}{/if}<br />{/if}
 						<img src="resource2/{$opt.template.style}/images/viewcache/16x16-watch.png" class="icon16" alt="" /> {$cache.watcher} {if $cache.watcher==1}{t}Watcher{/t}{else}{t}Watchers{/t}{/if}<br />
@@ -159,7 +159,7 @@
 		{else}
 		<td class="header-small">
 		{/if}
-			<img src="resource2/{$opt.template.style}/images/description/22x22-encrypted.png" width="22" height="22" style="vertical-align:middle" border="0">
+			<img src="resource2/{$opt.template.style}/images/description/22x22-encrypted.png" width="22" height="22" style="vertical-align:middle" border="0" />
 			<b>{t}Cache attributes{/t}</b><br />
 		 </td>
 	  </tr>
@@ -193,7 +193,7 @@
 		{else}
 		<td class="header-small">
 		{/if}
-			<img src="resource2/{$opt.template.style}/images/description/22x22-description.png" width="22" height="22" style="vertical-align:middle" border="0">
+			<img src="resource2/{$opt.template.style}/images/description/22x22-description.png" width="22" height="22" style="vertical-align:middle" border="0" />
 			<b>{t}Description{/t}</b>&nbsp;&nbsp;
 			<span style="font-weight: 400;">
 				{foreach from=$cache.desclanguages item=desclanguagesItem name=desclanguagesItem}
@@ -234,9 +234,9 @@
 	{* personal note *}
 	{if $enableCacheNote && ($note != "" || $inclCoord)}
 		{if $print==y}
-			<tr><td class="spacer-print"><br></td></tr>
+			<tr><td class="spacer-print"><br /></td></tr>
 		{else}
-			<tr><td class="spacer"><br></td></tr>
+			<tr><td class="spacer"><br /></td></tr>
 		{/if}
 
 		<tr>
@@ -245,7 +245,7 @@
 			{else}
 				<td class="header-small">
 			{/if}
-				<img src="resource2/{$opt.template.style}/images/description/22x22-description.png" width="20" height="20" style="vertical-align:middle" border="0">
+				<img src="resource2/{$opt.template.style}/images/description/22x22-description.png" width="20" height="20" style="vertical-align:middle" border="0" />
 				<b>{t}Personal cache note{/t}</b> &nbsp;&nbsp;
 				&nbsp;
 			</td>
@@ -259,9 +259,9 @@
 	{* Additional waypoints *}
 	{if count($childWaypoints)>0}
 		{if $print==y}
-			<tr><td class="spacer-print"><br></td></tr>
+			<tr><td class="spacer-print"><br /></td></tr>
 		{else}
-			<tr><td class="spacer"><br></td></tr>
+			<tr><td class="spacer"><br /></td></tr>
 		{/if}
 
 		<tr>
@@ -270,7 +270,7 @@
 			{else}
 				<td class="header-small">
 			{/if}
-				<img src="resource2/{$opt.template.style}/images/description/20x20-compass.png" width="20" height="20" style="vertical-align:middle" border="0">
+				<img src="resource2/{$opt.template.style}/images/description/20x20-compass.png" width="20" height="20" style="vertical-align:middle" border="0" />
 				<b>{t}Additional waypoints{/t}</b> &nbsp;&nbsp;
 				&nbsp;
 			</td>
@@ -306,9 +306,9 @@
 	{* Hint *}
 	{if $cache.hint!=''}
 		{if $print==y}
-			<tr><td class="spacer-print"><br></td></tr>
+			<tr><td class="spacer-print"><br /></td></tr>
 		{else}
-			<tr><td class="spacer"><br></td></tr>
+			<tr><td class="spacer"><br /></td></tr>
 		{/if}
 
 		<tr>
@@ -317,9 +317,9 @@
 			{else}
 			<td class="header-small">
 			{/if}
-				<img src="resource2/{$opt.template.style}/images/description/22x22-encrypted.png" width="22" height="22" style="vertical-align:middle" border="0">
+				<img src="resource2/{$opt.template.style}/images/description/22x22-encrypted.png" width="22" height="22" style="vertical-align:middle" border="0" />
 				<b>{t}Additional hint{/t}</b>&nbsp;&nbsp;
-				<img src="resource2/{$opt.template.style}/images/action/16x16-encrypt.png" width="16" height="16" style="vertical-align:middle" border="0">
+				<img src="resource2/{$opt.template.style}/images/action/16x16-encrypt.png" width="16" height="16" style="vertical-align:middle" border="0" />
 				{if $crypt==true}
 					{if $log=="5"}
 						<span style="font-weight:400">[<a href="viewcache.php?cacheid={$cache.cacheid}&log=5&print=y&nocrypt=1&desclang={$cache.desclanguage|urlencode}">{t}Decrypt{/t}</a>]
@@ -379,7 +379,7 @@
 									</tr>
 									<tr>
 										<td>
-											<font face="Courier" style="font-family : 'Courier New', FreeMono, Monospace;">N|O|P|Q|R|S|T|U|V|W|X|Y|Z</font><br><br>
+											<font face="Courier" style="font-family : 'Courier New', FreeMono, Monospace;">N|O|P|Q|R|S|T|U|V|W|X|Y|Z</font><br /><br />
 										</td>
 									</tr>
 								</table>
@@ -401,7 +401,7 @@
 			{else}
 				<td class="header-small">
 			{/if}
-				<img src="resource2/{$opt.template.style}/images/description/22x22-image.png" width="22" height="22" style="vertical-align:middle" border="0">
+				<img src="resource2/{$opt.template.style}/images/description/22x22-image.png" width="22" height="22" style="vertical-align:middle" border="0" />
 				<b>{t}Pictures{/t}</b> &nbsp;&nbsp;
 				&nbsp;
 			</td>
@@ -420,9 +420,9 @@
 		</tr>
 	
 		{if $print==y}
-			<tr><td class="spacer-print"><br></td></tr>
+			<tr><td class="spacer-print"><br /></td></tr>
 		{else}
-			<tr><td class="spacer"><br></td></tr>
+			<tr><td class="spacer"><br /></td></tr>
 		{/if}
 	{/if}
 
@@ -434,7 +434,7 @@
 			{else}
 			<td class="header-small" valign="middle">
 			{/if}
-				<img src="resource2/{$opt.template.style}/images/description/22x22-utility.png" width="22" height="22" style="vertical-align:middle" border="0" title="">
+				<img src="resource2/{$opt.template.style}/images/description/22x22-utility.png" width="22" height="22" style="vertical-align:middle" border="0" title="" />
 				<b>{t}Nature protection{/t}</b>
 			</td>
 		</tr>
@@ -442,9 +442,9 @@
 
 	{if count($npaareasWarning) > 0}
 		{if $print==y}
-			<tr><td class="spacer-print"><br></td></tr>
+			<tr><td class="spacer-print"><br /></td></tr>
 		{else}
-			<tr><td class="spacer"><br></td></tr>
+			<tr><td class="spacer"><br /></td></tr>
 		{/if}
 		<tr>
 			<td>
@@ -491,14 +491,14 @@
 			{else}
 			<td class="header-small" valign="middle">
 			{/if}
-				<img src="resource2/{$opt.template.style}/images/description/22x22-geokret.gif" width="22" height="22" style="vertical-align:middle" border="0" title="">
+				<img src="resource2/{$opt.template.style}/images/description/22x22-geokret.gif" width="22" height="22" style="vertical-align:middle" border="0" title="" />
 				{t}Geokrets{/t}
 			</td>
 		</tr>
 		{if $print==y}
-			<tr><td class="spacer-print"><br></td></tr>
+			<tr><td class="spacer-print"><br /></td></tr>
 		{else}
-			<tr><td class="spacer"><br></td></tr>
+			<tr><td class="spacer"><br /></td></tr>
 		{/if}
 		<tr>
 			<td>
@@ -512,9 +512,9 @@
 
 	{* Logs *}
 	{if $print==y}
-		<tr><td class="spacer-print"><br></td></tr>
+		<tr><td class="spacer-print"><br /></td></tr>
 	{else}
-		<tr><td class="spacer"><br></td></tr>
+		<tr><td class="spacer"><br /></td></tr>
 	{/if}
 	<tr>
 			{if $print==y}
@@ -533,7 +533,7 @@
 				{else}
 				<td class="header-small">
 				{/if}
-					<a href="viewlogs.php?cacheid={$cache.cacheid}"><img src="resource2/{$opt.template.style}/images/action/16x16-showall.png" width="16" height="16" align="middle" border="0" align="left"></a>
+					<a href="viewlogs.php?cacheid={$cache.cacheid}"><img src="resource2/{$opt.template.style}/images/action/16x16-showall.png" width="16" height="16" align="middle" border="0" align="left" /></a>
 					[<a href="viewlogs.php?cacheid={$cache.cacheid}">{t}Show all logentries{/t}</a>]
 				</td>
 			</tr>

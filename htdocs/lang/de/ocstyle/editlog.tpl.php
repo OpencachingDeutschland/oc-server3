@@ -109,7 +109,7 @@ function _chkFound () {
 	<tr>
 		<td></td>
 		<td>
-			<img src="lang/de/ocstyle/images/misc/hint.gif" border="0" width="15" height="11">
+			<img src="lang/de/ocstyle/images/misc/hint.gif" border="0" width="15" height="11" />
 			{t}For 'Found' and 'Not found' logs: Date and (optional) time of the cache search.{/t}
 		</td>
 	</tr>

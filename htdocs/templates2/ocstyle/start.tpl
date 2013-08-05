@@ -25,7 +25,7 @@
 				</td>
 				{if "$newsfeed" != ""}
 					<td style="text-align:right">
-						<a href="{$newsfeed}"><img src="resource2/ocstyle/images/misc/22x22-feed-icon.png"></a>
+						<a href="{$newsfeed}"><img src="resource2/ocstyle/images/misc/22x22-feed-icon.png" /></a>
 					</td>
 					<td width="4px"></td>
 				{/if}
@@ -98,7 +98,7 @@
 	<div class="buffer" style="width: 500px;height: 2px;">&nbsp;</div>
 	<div class="content2-container bg-blue02"> 
 		<p class="content-title-noshade-size3"> 
-			<img src="resource2/ocstyle/images/misc/32x32-news.png" style="margin-right: 10px;" alt="" width="24" height="24"> 
+			<img src="resource2/ocstyle/images/misc/32x32-news.png" style="margin-right: 10px;" alt="" width="24" height="24" /> 
 			<a href="{$phpbb_link|escape}" style="color: rgb(88, 144, 168); text-decoration: none;">{t 1=$phpbb_name|escape}New forum topcis (%1){/t}</a>
 		</p> 
 	</div>
@@ -120,7 +120,7 @@
 	<ul class="nodot">
 		{foreach from=$phpbb_topics item=phpbbItem}
 			<li class="newcache_list_multi" style="margin-bottom: 8px;">
-				<img src="resource2/ocstyle/images/cacheicon/event-rand1.gif" alt="" style="margin-right: 5px;" width="22" height="22" align="left" border="0"> 
+				<img src="resource2/ocstyle/images/cacheicon/event-rand1.gif" alt="" style="margin-right: 5px;" width="22" height="22" align="left" border="0" /> 
 				{$phpbbItem.updated|date_format:$opt.format.datetime}&nbsp;
 				<b><a href="{$phpbbItem.link|escape}" target="thegreenhell">{$phpbbItem.title|escape}</a></b>
 				von {$phpbbItem.username|escape}

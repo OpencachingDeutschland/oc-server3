@@ -16,7 +16,7 @@
   <table>
     <tr>
       {foreach from=$wpNameImages key=typeName item=typeImage}
-        <td><img src="{$typeImage}"></td><td>{$typeName}</td><td>&nbsp;&nbsp;&nbsp;</td>
+        <td><img src="{$typeImage}" /></td><td>{$typeName}</td><td>&nbsp;&nbsp;&nbsp;</td>
      {/foreach}
    </tr>
   </table>

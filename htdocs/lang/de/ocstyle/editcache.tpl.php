@@ -119,7 +119,7 @@ function toggleAttr(id)
 	<tr>
 		<td>{t}Name:{/t}</td>
 		<td>
-			<input type="text" name="name" value="{name}" maxlength="60" class="input400">{name_message}
+			<input type="text" name="name" value="{name}" maxlength="60" class="input400" />{name_message}
 		</td>
 	</tr>
 	<tr>
@@ -215,7 +215,7 @@ function toggleAttr(id)
 	</tr>
 	<tr>
 		<td>&nbsp;</td>
-		<td class="help"><img src="lang/de/ocstyle/images/misc/hint.gif" border="0" width="15" height="11" alt="{t}Notice{/t}" title="{t}Notice{/t}">
+		<td class="help"><img src="lang/de/ocstyle/images/misc/hint.gif" border="0" width="15" height="11" alt="{t}Notice{/t}" title="{t}Notice{/t}" />
 			{t}Of course, this effort can only be estimated and can vary depending on enviromental influences. If you cannot make sufficiently detailed information, fill both fields up with a O (zero).{/t}
 		</td>
 	</tr>
@@ -224,14 +224,14 @@ function toggleAttr(id)
 	<tr>
 		<td>{t}Waypoints (optional):{/t}</td>
 		<!-- allow wp_gc copy&paste with leading spaces; will be trimmed later -->
-		<td>geocaching.com: <input type="text" name="wp_gc" value="{wp_gc}" maxlength="12" class="input50">
-			navicache.com: <input type="text" name="wp_nc" value="{wp_nc}" maxlength="6" class="input50">
+		<td>geocaching.com: <input type="text" name="wp_gc" value="{wp_gc}" maxlength="12" class="input50" />
+			navicache.com: <input type="text" name="wp_nc" value="{wp_nc}" maxlength="6" class="input50" />
 		</td>
 	</tr>
 	<tr>
 		<td>&nbsp;</td>
 		<td class="help">
-			<img src="lang/de/ocstyle/images/misc/hint.gif" border="0" width="15" height="11" alt="{t}Notice{/t}" title="{t}Notice{/t}">
+			<img src="lang/de/ocstyle/images/misc/hint.gif" border="0" width="15" height="11" alt="{t}Notice{/t}" title="{t}Notice{/t}" />
 			{t}This waypoints will be used to show links in the view cache and the log page.{/t}<br />
 			{t}No data will be imported automatically from these listing services.{/t}
 		</td>
@@ -242,7 +242,7 @@ function toggleAttr(id)
 		<td class="header-small" colspan="2">
 			<div class="content2-container bg-blue02">
 				<p class="content-title-noshade-size2">
-					<img src="lang/de/ocstyle/images/description/22x22-description.png" width="22" height="22" align="middle" border="0">
+					<img src="lang/de/ocstyle/images/description/22x22-description.png" width="22" height="22" align="middle" border="0" />
 					{t}Cache attributes{/t}&nbsp;&nbsp;
 				</p>
 			</div>
@@ -258,7 +258,7 @@ function toggleAttr(id)
 		<td class="header-small" colspan="2">
 			<div class="content2-container bg-blue02">
 				<p class="content-title-noshade-size2">
-					<img src="lang/de/ocstyle/images/description/22x22-description.png" width="22" height="22" align="middle" border="0">
+					<img src="lang/de/ocstyle/images/description/22x22-description.png" width="22" height="22" align="middle" border="0" />
 					{t}Descriptions{/t}&nbsp;&nbsp;
 					<img src="lang/de/ocstyle/images/action/16x16-adddesc.png" width="16" height="16" align="middle" border="0" alt="{t}Create a new description{/t}" title="{t}Create a new description{/t}">
 					<span style="font-weight: 400;font-size: small;">[<a href="newdesc.php?cacheid={cacheid_urlencode}">{t}Add an additional description{/t}</a>]</span>
@@ -269,7 +269,7 @@ function toggleAttr(id)
 	<tr><td class="spacer" colspan="2"></td></tr>
 	{cache_descs}
 	{gc_com_refs_start}
-	<tr><td class="help" colspan="2"><img src="lang/de/ocstyle/images/misc/hint.gif" border="0" width="15" height="11" alt="{t}Notice{/t}" title="{t}Notice{/t}"><span style="color:red">{t}Your description contains at least one link to a picture hosted on geocaching.com!{/t}<br />
+	<tr><td class="help" colspan="2"><img src="lang/de/ocstyle/images/misc/hint.gif" border="0" width="15" height="11" alt="{t}Notice{/t}" title="{t}Notice{/t}" /><span style="color:red">{t}Your description contains at least one link to a picture hosted on geocaching.com!{/t}<br />
 	{t}To prevent any problems with geocaching.com we want to please you to upload all linked pictures to opencaching.de as well and link the pictures in the HTML code to these on opencaching.de{/t}</span>
 	</td></tr>
 	{gc_com_refs_end}
@@ -279,9 +279,9 @@ function toggleAttr(id)
 		<td class="header-small" colspan="2">
 			<div class="content2-container bg-blue02">
 				<p class="content-title-noshade-size2">
-					<img src="lang/de/ocstyle/images/description/22x22-image.png" width="22" height="22" align="middle" border="0">
+					<img src="lang/de/ocstyle/images/description/22x22-image.png" width="22" height="22" align="middle" border="0" />
 					{t}Pictures{/t}&nbsp;&nbsp;
-					<img src="lang/de/ocstyle/images/action/16x16-addimage.png" width="16" height="16" align="middle" border="0">
+					<img src="lang/de/ocstyle/images/action/16x16-addimage.png" width="16" height="16" align="middle" border="0" />
 					<span style="font-weight: 400;font-size: small;">[<!-- Ocprop >> --><a href="picture.php?action=add&cacheuuid={cacheuuid_urlencode}">{t}Upload a picture{/t}</a>]</span>
 				</p>
 			</div>
@@ -295,7 +295,7 @@ function toggleAttr(id)
 		<td class="header-small" colspan="2">
 			<div class="content2-container bg-blue02">
 				<p class="content-title-noshade-size2">
-					<img src="resource2/ocstyle/images/description/20x20-compass.png" align="middle" border="0">
+					<img src="resource2/ocstyle/images/description/20x20-compass.png" align="middle" border="0" />
 					{t}Additional waypoints{/t}&nbsp;&nbsp;
 					<span style="font-weight: 400;font-size: small;">[<a href="childwp.php?cacheid={cacheid_urlencode}">{t}Add a waypoint{/t}</a>]</span>
 				</p>
@@ -306,7 +306,7 @@ function toggleAttr(id)
 	{waypoints}
 	<tr>
 		<td class="help" colspan="2">
-			<img src="lang/de/ocstyle/images/misc/hint.gif" border="0" width="15" height="11" alt="{t}Notice{/t}" title="{t}Notice{/t}">
+			<img src="lang/de/ocstyle/images/misc/hint.gif" border="0" width="15" height="11" alt="{t}Notice{/t}" title="{t}Notice{/t}" />
 			{t}Additional waypoints can be entered to make searching easier, for example by pointing to a suitable parking location or start of a path (the waypoint's description may contain more information). They may also specify the stages of a multicache. The waypoints are shown on the map when the cache is selected, are included in GPX file downloads and will be sent to the GPS device.{/t}
 		</td>
 	</tr>
@@ -315,7 +315,7 @@ function toggleAttr(id)
 		<td class="header-small" colspan="2">
 			<div class="content2-container bg-blue02">
 				<p class="content-title-noshade-size2">
-					<img src="lang/de/ocstyle/images/description/22x22-misc.png" width="22" height="22" align="middle" border="0">
+					<img src="lang/de/ocstyle/images/description/22x22-misc.png" width="22" height="22" align="middle" border="0" />
 					{t}Others{/t}
 				</p>
 			</div>
@@ -344,7 +344,7 @@ function toggleAttr(id)
 	</tr>
 	<tr>
 		<td class="help" colspan="2">
-			<img src="lang/de/ocstyle/images/misc/hint-link.gif" border="0" width="15" height="11" alt="{t}Notice{/t}" title="{t}Notice{/t}">
+			<img src="lang/de/ocstyle/images/misc/hint-link.gif" border="0" width="15" height="11" alt="{t}Notice{/t}" title="{t}Notice{/t}" />
 			{t}Please note the <a href="articles.php?page=cacheinfo#logpw" target="_blank">description</a>{/t}
 		</td>
 	</tr>

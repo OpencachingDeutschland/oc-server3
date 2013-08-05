@@ -78,7 +78,7 @@ function myHomeLoad()
 					<a href="viewcache.php?wp={$logItem.wp_oc}">{$logItem.name|escape}</a>
 					{include file="res_oconly.tpl" oconly=$logItem.oconly}
 					{t}by{/t} <a href="viewprofile.php?userid={$logItem.userid}">{$logItem.username|escape}</a>
-					{if $logItem.recommended}<img src="images/rating-star.gif" width="17" height="16" title="{t}with recommendation{/t}">{/if}
+					{if $logItem.recommended}<img src="images/rating-star.gif" width="17" height="16" title="{t}with recommendation{/t}" />{/if}
 				</td>
 			</tr>
 		{foreachelse}

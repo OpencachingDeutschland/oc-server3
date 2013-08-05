@@ -201,9 +201,9 @@ function search_output()
 	else
 	{
 		if ($startat > 0)  // Ocprop:  queryid=([0-9]+)
-			$pages = '<a href="search1.php?queryid=' . $options['queryid'] . '&startat=0"><img src="resource2/ocstyle/images/navigation/16x16-browse-first.png" width="16" height="16"></a> <a href="search1.php?queryid=' . $options['queryid'] . '&startat=' . ($startat - $caches_per_page) . '"><img src="resource2/ocstyle/images/navigation/16x16-browse-prev.png" width="16" height="16"></a></a> ';
+			$pages = '<a href="search1.php?queryid=' . $options['queryid'] . '&startat=0"><img src="resource2/ocstyle/images/navigation/16x16-browse-first.png" width="16" height="16" /></a> <a href="search1.php?queryid=' . $options['queryid'] . '&startat=' . ($startat - $caches_per_page) . '"><img src="resource2/ocstyle/images/navigation/16x16-browse-prev.png" width="16" height="16" /></a></a> ';
 		else
-			$pages = ' <img src="resource2/ocstyle/images/navigation/16x16-browse-first-inactive.png" width="16" height="16"></a> <img src="resource2/ocstyle/images/navigation/16x16-browse-prev-inactive.png" width="16" height="16"></a> ';
+			$pages = ' <img src="resource2/ocstyle/images/navigation/16x16-browse-first-inactive.png" width="16" height="16" /></a> <img src="resource2/ocstyle/images/navigation/16x16-browse-prev-inactive.png" width="16" height="16" /></a> ';
 
 		$frompage = ($startat / $caches_per_page) - 3;
 		if ($frompage < 1) $frompage = 1;
@@ -220,9 +220,9 @@ function search_output()
 		}
 
 		if ($startat / $caches_per_page < ($maxpage - 1))
-			$pages .= ' <a href="search1.php?queryid=' . $options['queryid'] . '&startat=' . ($startat + $caches_per_page) . '"><img src="resource2/ocstyle/images/navigation/16x16-browse-next.png" width="16" height="16"></a> <a href="search1.php?queryid=' . $options['queryid'] . '&startat=' . (($maxpage - 1) * $caches_per_page) . '"><img src="resource2/ocstyle/images/navigation/16x16-browse-last.png" width="16" height="16"></a> ';
+			$pages .= ' <a href="search1.php?queryid=' . $options['queryid'] . '&startat=' . ($startat + $caches_per_page) . '"><img src="resource2/ocstyle/images/navigation/16x16-browse-next.png" width="16" height="16" /></a> <a href="search1.php?queryid=' . $options['queryid'] . '&startat=' . (($maxpage - 1) * $caches_per_page) . '"><img src="resource2/ocstyle/images/navigation/16x16-browse-last.png" width="16" height="16" /></a> ';
 		else
-			$pages .= ' <img src="resource2/ocstyle/images/navigation/16x16-browse-next-inactive.png" width="16" height="16"> <img src="resource2/ocstyle/images/navigation/16x16-browse-last-inactive.png" width="16" height="16"></a>';
+			$pages .= ' <img src="resource2/ocstyle/images/navigation/16x16-browse-next-inactive.png" width="16" height="16" /> <img src="resource2/ocstyle/images/navigation/16x16-browse-last-inactive.png" width="16" height="16" /></a>';
 	}
 
 	//'<a href="search1.php?queryid=' . $options['queryid'] . '&startat=20">20</a> 40 60 80 100';

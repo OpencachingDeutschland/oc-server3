@@ -7,7 +7,7 @@
 <div class="content-txtbox-noshade">  {* Ocprop: <div class="content-txtbox-noshade">(.*?)<\/div> *}
 	<div class="logs">
 	<p class="content-title-noshade-size1" style="display:inline; margin-right:0">
-		{if $logItem.oc_team_comment}<img src="resource2/{$opt.template.style}/images/oclogo/oc-team-comment.png" alt="OC-Team" title="{t}OC team comment{/t}"/>{/if}
+		{if $logItem.oc_team_comment}<img src="resource2/{$opt.template.style}/images/oclogo/oc-team-comment.png" alt="OC-Team" title="{t}OC team comment{/t}" />{/if}
 		{include file="res_logtype.tpl" type=$logItem.type} 
 		{if $logItem.recommended==1}  {* Ocprop: rating-star\.gif *}
 			<img src="images/rating-star.gif" border="0" alt="{t}Recommended{/t}" width="17px" height="16px" />
@@ -80,7 +80,7 @@
 			{/if}
 
 			{* the position of the following image is the anchor for enlargit activity: *}
-			<a name="piclink" href="{$pictureItem.url}" onclick="enlarge(document.getElementById('pic{$pictureItem.id}'))" style="cursor:pointer">{$pictureItem.title|escape}<img id="pic{$pictureItem.id}" src="resource2/ocstyle/images/misc/empty.png" longdesc="{$pictureItem.url}"/></a>
+			<a name="piclink" href="{$pictureItem.url}" onclick="enlarge(document.getElementById('pic{$pictureItem.id}'))" style="cursor:pointer">{$pictureItem.title|escape}<img id="pic{$pictureItem.id}" src="resource2/ocstyle/images/misc/empty.png" longdesc="{$pictureItem.url}" /></a>
 			{if $pictureItem.spoiler}
 				({t}Spoiler{/t})
 			{/if}

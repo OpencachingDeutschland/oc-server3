@@ -13,7 +13,7 @@
 	<table class="table">
 		<tr>
 			<td class="help" colspan="2">
-				<img src="resource2/{$opt.template.style}/images/misc/hint.gif" border="0" width="15" height="11" align="middle" alt="">
+				<img src="resource2/{$opt.template.style}/images/misc/hint.gif" border="0" width="15" height="11" align="middle" alt="" />
 				{t}Enter your username and we will send an E-Mail to your E-Mail-Address.{/t}
 			</td>
 		</tr>

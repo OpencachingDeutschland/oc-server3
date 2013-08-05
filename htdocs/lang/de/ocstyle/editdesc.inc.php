@@ -23,7 +23,7 @@
 	$error_desc_exists = t('(internal error) It already exists a description for this language.');
 
 	$nopictures = t('No pictures available');
-	$pictureline = '<td><a href="javascript:SelectFile(\'{link}\');">{title}<br/><img src="{link}" width="180"></a></td>';
+	$pictureline = '<td><a href="javascript:SelectFile(\'{link}\');">{title}<br /><img src="{link}" width="180" /></a></td>';
 	$picturelines = '{lines}';
 
 	$submit = t('Save');

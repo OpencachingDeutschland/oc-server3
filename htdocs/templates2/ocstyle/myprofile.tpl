@@ -110,7 +110,7 @@
 							<input type="text" name="notifyRadius" maxlength="3" value="{$notifyRadius|escape}" class="input30" />
 						{/capture}
 						{t 1=$smarty.capture.inputfield}I want to be notified about new Geocaches within an radius of %1 km.{/t}<br />
-						<img src="resource2/{$opt.template.style}/images/misc/hint.gif" border="0" width="15" height="11" align="middle">
+						<img src="resource2/{$opt.template.style}/images/misc/hint.gif" border="0" width="15" height="11" align="middle" />
 						<span style="font-size:10px;">
 							{t}The notification radius must be not more than 150 km. To deaktivate notifications, set the radius to 0.{/t}
 						</span>
@@ -154,7 +154,7 @@
 						<input type="checkbox" name="permanentLogin" value="1" {if $permanentLogin==true}checked="checked"{/if} id="l_using_permanent_login" class="checkbox" />
 						<label for="l_using_permanent_login">{t}Don't log me out after 15 minutes inaktivity.{/t}</label><br/>
 						<div style="padding-left:25px;">
-							<img src="resource2/{$opt.template.style}/images/misc/hint.gif" border="0" width="15" height="11" align="middle">
+							<img src="resource2/{$opt.template.style}/images/misc/hint.gif" border="0" width="15" height="11" align="middle" />
 							<span style="color:red; font-size:10px; line-height:1.3em">{t}Attention: If you are using this option, don't forget to log out before other persons can use your computer.
 							Otherwise, they can use and modify your personal data.{/t}</span>
 						</div>

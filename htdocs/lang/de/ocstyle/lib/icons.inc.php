@@ -16,7 +16,7 @@
 function icon_log_type($icon_small, $text)
 {
 	global $stylepath;
-	return "<img src='resource2/ocstyle/images/$icon_small' width='16' height='16' align='middle' border='0' align='left' alt='$text' title='$text'>";
+	return "<img src='resource2/ocstyle/images/$icon_small' width='16' height='16' align='middle' border='0' align='left' alt='$text' title='$text' />";
 }
 
 function icon_difficulty($what, $difficulty)
@@ -34,7 +34,7 @@ function icon_difficulty($what, $difficulty)
 
 	$icon = sprintf("$stylepath/images/difficulty/$what-%d%d.gif", (int)$difficulty / 2, ((float)($difficulty / 2) - (int)($difficulty / 2)) * 10);
 	$text = sprintf($what == "diff" ? $difficulty_text_diff : $difficulty_text_terr, $difficulty / 2);
-	return "<img src='$icon' border='0' width='19' height='16' hspace='2' alt='$text' title='$text'>";
+	return "<img src='$icon' border='0' width='19' height='16' hspace='2' alt='$text' title='$text' />";
 
 }
 

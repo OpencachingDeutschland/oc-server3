@@ -172,7 +172,8 @@
             </td>
 					</tr>
 				</table>
-			</div>
+			</div> <!-- langstripe -->
+
 		  <div class="page-container-1" style="position: relative;">
 				{backgroundimage}
 
@@ -268,7 +269,7 @@
 						</p>
 					</div>
 
-				</div>
+				</div> <!-- nav3 -->
 
   			<!-- CONTENT -->
 				<div class="content2">
@@ -279,17 +280,17 @@
 						<?php mnu_EchoHelpLink($tplname); ?>
 					</div>
 			
-				<div id="ocmain">
-					{template}
+					<div id="ocmain">
+						{template}
+					</div>
 				</div>
-			</div>
-			<!-- End Text Container -->
+			</div> <!-- page-container-1 -->
 
 			<!-- FOOTER -->
 			<div class="footer">
 				<p><a href="articles.php?page=dsb">{t}Privacy statement{/t}</a> | <a href="articles.php?page=impressum">{t}Terms of use and legal information{/t}</a> | <a href="articles.php?page=contact">{t}Contact{/t}</a> | <a href="articles.php?page=changelog">{t}Changelog{/t}</a> | <a href="sitemap.php">{t}Sitemap{/t}</a></p>
 				<p><strong>{sponsorbottom}</strong></p>
 			</div>
-		</div>
+		</div> <!-- overall -->
 	</body>
 </html>

@@ -6,12 +6,15 @@
 
 <div class="content-txtbox-noshade">
 	<div class="content-txtbox-noshade">
-		<p style="line-height: 1.5em;">{$message}</p>
+		<p class="startmessage">{$message}</p>
 		<div class="buffer" style="width: 500px;">&nbsp;</div>
 	</div> 
 </div>
 
+{foreach from=$sections item=section}
+
 {* news or blog *}
+{if $section == 'news'}
 <div>
 	<div class="content2-container bg-blue02">
 		<table class="none" cellspacing="0" cellpadding="0" width="100%">
@@ -60,6 +63,7 @@
 {/if}
 
 {* next events *}
+{elseif $section == 'events'}
 <div class="content2-container bg-blue02">
 	<p class="content-title-noshade-size3">
 		<img src="resource2/{$opt.template.style}/images/cacheicon/event.gif" style="align: left; margin-right: 10px;" width="24" height="24" alt="" />
@@ -71,6 +75,7 @@
 </div>
 
 {* new logpix *}
+{elseif $section == 'logpics'}
 <div class="content2-container bg-blue02" style="margin-bottom:6px">
 	<p class="content-title-noshade-size3">
 		<img src="resource2/{$opt.template.style}/images/misc/32x32-pictures.gif" style="align: left; margin-right: 10px;" width="24" height="24" />
@@ -81,19 +86,21 @@
 {include file="res_logpictures.tpl" logdate=true loguser=true}
 
 {* recommendations *}
+{elseif $section == 'recommendations'}
 <div class="content2-container bg-blue02">
 	<p class="content-title-noshade-size3">
 		<img src="resource2/{$opt.template.style}/images/misc/32x32-winner.png" style="align: left; margin-right: 10px;" width="24" height="24" alt="" />
 		<a href="tops.php" style="color:rgb(88,144,168); text-decoration: none;">{t}Current top ratings{/t}</a>
 	</p>
 </div>
-<p style="line-height: 1.6em;">{t 1=$usercountry|escape}Geocaches with most ratings in the last 30 days in %1.{/t}</p>
+<p style="line-height: 1.6em;">{t 1=$usercountry|escape 2=$toprating_days}Geocaches with most ratings in the last %2 days in %1.{/t}</p>
 
 <div style="margin-bottom:16px">
 	{include file="res_newratings.tpl" topratings=$topratings}
 </div>
 
 {* forum news *}
+{elseif $section == 'forum'}
 {if $phpbb_enabled==true}
 	<div class="buffer" style="width: 500px;height: 2px;">&nbsp;</div>
 	<div class="content2-container bg-blue02"> 
@@ -131,14 +138,17 @@
 {/if}
 
 {* new caches *}
+{elseif $section == 'newcaches'}
 <div class="content2-container bg-blue02">
 	<p class="content-title-noshade-size3">
 		<img src="resource2/{$opt.template.style}/images/cacheicon/traditional.gif" style="align: left; margin-right: 10px;" width="24" height="24" alt="" />
 		<a href="newcaches.php" style="color:rgb(88,144,168); text-decoration: none;">{t 1=$usercountry|escape}Newest caches in %1{/t}</a>
-	&nbsp; <span style="color:black; font-size:0.8em; font-weight:normal">[<a href="newcaches.php">{t}more{/t}...</a>]</span>
+	&nbsp; <span style="color:black; font-size:0.8em; font-weight:normal">[<a href="newcaches.php?country={$usercountryCode}">{t}more{/t}...</a>]</span>
 	</p>
 </div>
 <p style="line-height: 1.6em;">({t 1=$count_hiddens 2=$count_founds 3=$count_users}Total of %1 active Caches and %2 founds by %3 users{/t})</p>
 {include file="res_newcaches.tpl" newcaches=$newcaches}
-	
+
+{/if}
+{/foreach}
 

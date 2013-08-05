@@ -27,7 +27,7 @@
 		if (isset ($opt['page']['message']))
 			$tpl->assign('message',$opt['page']['message']);
 		else
-			$tpl->assign('message',$translate->t('<p>You can find everything you need to go Geocaching ...</p>', '', '', 0));
+			$tpl->assign('message',$translate->t('You can find everything you need to go Geocaching ...', '', '', 0));
 
 		// pictures
 		$tpl->assign('pictures', get_logpics(LOGPICS_FOR_STARTPAGE_GALLERY));
@@ -124,13 +124,20 @@
 		
 		// last 30 days' top ratings
 		$tpl->assign_rs('topratings', $getNew->rsForSmarty('rating'));
+		$tpl->assign('toprating_days', $getNew->ratingDays());
 
+		// country and language parameters
 		$sUserCountryName = sql_value("SELECT IFNULL(`sys_trans_text`.`text`, `countries`.`name`) 
 		                                 FROM `countries` 
 		                            LEFT JOIN `sys_trans` ON `countries`.`trans_id`=`sys_trans`.`id`
 		                            LEFT JOIN `sys_trans_text` ON `sys_trans`.`id`=`sys_trans_text`.`trans_id` AND `sys_trans_text`.`lang`='&2'
 		                                WHERE `countries`.`short`='&1'", '', $sUserCountry, $opt['template']['locale']);
 		$tpl->assign('usercountry', $sUserCountryName);
+		$tpl->assign('usercountryCode', $sUserCountry);
+		if ($opt['template']['locale'] == $opt['page']['main_locale'])
+			$tpl->assign('sections', array('news', 'events', 'logpics', 'recommendations', 'forum', 'newcaches'));
+		else
+			$tpl->assign('sections', array('events', 'recommendations', 'newcaches', 'logpics', 'forum', 'news'));
 	}
 
 	$tpl->display();

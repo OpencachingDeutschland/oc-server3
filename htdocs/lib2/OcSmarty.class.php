@@ -163,6 +163,7 @@ class OcSmarty extends Smarty
 		$optn['page']['subtitle1'] = isset($opt['locale'][$locale]['page']['subtitle1']) ? $opt['locale'][$locale]['page']['subtitle1'] : $opt['page']['subtitle1'];
 		$optn['page']['subtitle2'] = isset($opt['locale'][$locale]['page']['subtitle2']) ? $opt['locale'][$locale]['page']['subtitle2'] : $opt['page']['subtitle2'];
 		$optn['page']['headimagepath'] = $opt['page']['headimagepath'];
+		$optn['page']['headoverlay'] = $opt['page']['headoverlay'];
 		$optn['page']['max_logins_per_hour'] = $opt['page']['max_logins_per_hour'];
 		$optn['page']['absolute_url'] = $opt['page']['absolute_url'];
 		$optn['page']['absolute_urlpath'] = parse_url($opt['page']['absolute_url'], PHP_URL_PATH);

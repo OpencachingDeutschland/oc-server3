@@ -10,12 +10,14 @@
 	$tpl->menuitem = MNU_START_NEWCACHES;
 
 	$startat = isset($_REQUEST['startat']) ? $_REQUEST['startat']+0 : 0;
+	$country = isset($_REQUEST['country']) ? $_REQUEST['country'] : '';
+
 	$perpage = 100;
 	$startat -= $startat % $perpage;
 	if ($startat < 0) $startat = 0;
 
 	$tpl->caching = true;
-	$tpl->cache_id = $startat;
+	$tpl->cache_id = $startat . $country;
 	if ($startat > 10 * $perpage)
 		$tpl->cache_lifetime = 3600;
 	else
@@ -40,7 +42,7 @@
 			 LEFT JOIN `sys_trans_text` ON `sys_trans_text`.`trans_id` = `countries`.`trans_id`
 			           AND `sys_trans_text`.`lang` = '" . sql_escape($opt['template']['locale']) . "'
 			 LEFT JOIN `caches_attributes` `ca` ON `ca`.`cache_id`=`caches`.`cache_id` AND `ca`.`attrib_id`=6
-			     WHERE `caches`.`status` = 1
+			     WHERE `caches`.`status` = 1" . ($country ? " AND `caches`.`country`='" . sql_escape($country) . "'" : "") . "
 			  ORDER BY `caches`.`date_created` DESC
 				   LIMIT " . ($startat+0) . ', ' . ($perpage+0));
 			// see also write_newcaches_urls() in sitemap.class.php
@@ -50,12 +52,31 @@
 		$tpl->assign('newCaches', $newCaches);
 
 		$startat = isset($_REQUEST['startat']) ? $_REQUEST['startat']+0 : 0;
-		$count = sql_value_slave('SELECT COUNT(*) FROM `caches` WHERE `caches`.`status`=1', 0);
-
-		$pager = new pager("newcaches.php?startat={offset}");
+		if ($country == '')
+		{
+			$count = sql_value_slave("SELECT COUNT(*) FROM `caches` WHERE `caches`.`status`=1", 0);
+			$pager = new pager("newcaches.php?startat={offset}");
+		}
+		else
+		{
+			$count = sql_value_slave("SELECT COUNT(*) FROM `caches` WHERE `caches`.`status`=1 AND `caches`.`country`='&1'", 0, $country);
+			$pager = new pager("newcaches.php?country=".$country."&startat={offset}");
+		}
 		$pager->make_from_offset($startat, $count, 100);
 
 		$tpl->assign('defaultcountry', $opt['template']['default']['country']);
+		$tpl->assign('countryCode', $country);
+		if ($country != '')
+		{
+			$tpl->assign(
+				'countryName',
+				sql_value("SELECT IFNULL(`sys_trans_text`.`text`, `countries`.`name`) 
+		                FROM `countries`
+		           LEFT JOIN `sys_trans` ON `countries`.`trans_id`=`sys_trans`.`id`
+		           LEFT JOIN `sys_trans_text` ON `sys_trans`.`id`=`sys_trans_text`.`trans_id` AND `sys_trans_text`.`lang`='&2'
+		               WHERE `countries`.`short`='&1'", '', $country, $opt['template']['locale'])
+			);
+   	}
 	}
 
 	$tpl->display();

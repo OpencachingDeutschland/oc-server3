@@ -179,6 +179,12 @@
 	 */
 	$opt['debug'] = DEBUG_DEVELOPER;
 
+	/* Main locale and style: The country and language with most content on this site.
+	 *
+	 */
+	$opt['page']['main_country'] = 'DE';
+	$opt['page']['main_locale'] = 'DE';
+
 	/* Default locale and style
 	 *
 	 */
@@ -202,7 +208,6 @@
 	$opt['page']['develsystem'] = false;
 	$opt['page']['origin_url'] = 'http://www.opencaching.de/';  // reference productive installation for this OC code fork
 
-
   /* maximum number of failed logins per hour before that IP address is blocked
    * (used to prevent brute-force-attacks)
    */
@@ -221,6 +226,7 @@
   
   // directory of rotator pictures and script, relative to head images dir
   $opt['page']['headimagepath'] = '';
+  $opt['page']['headoverlay'] = 'oc_head_alpha3_generic';
 
  	/* disable or enable https access to the main site
  	 * if false and connection is https, redirect to $opt['page']['absolute_url']
@@ -284,6 +290,8 @@
 	 *
 	 */
 	$opt['logic']['rating']['percentageOfFounds'] = 10;
+	$opt['logic']['rating']['topdays_mainCountry'] = 30;
+	$opt['logic']['rating']['topdays_otherCountry'] = 180;
 	
 	/*
 	 * count of identical logs (date and text) that shows a warning message on

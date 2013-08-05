@@ -72,6 +72,7 @@
 	$news_approver_email = 'news-approver@devel.opencaching.de';
 
 	$opt['page']['showdonations'] = false;
+	$opt['page']['headoverlay'] = 'oc_head_alpha3_generic';
 
 	//local database settings
 	$dbusername = 'username';

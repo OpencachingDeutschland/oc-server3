@@ -18,7 +18,7 @@
 		</title>
 		<meta name="keywords" content="Geocaching, Geocache, Cache, Geocashing, Schnitzeljagd, Schatzsuche, GPS, Openstreetmap, kostenlos, GPX, GPX download, Koordinaten, Hobby, Natur" />
 			{* siehe http://forum.opencaching-network.org/index.php?topic=3065.0 *}
-		<meta name="description" content="Geocaching ist ein GPS-Schatzsuche-Spiel: Es werden kleine Behälter versteckt, die anhand der GPS-Koordinaten zu finden sind. Opencaching.de ist das freie Portal, um diese Verstecke mit anderen zu teilen." />
+		<meta name="description" content="Opencaching.de ist das freie Portal für Geocaching, ein GPS-Schatzsuche-Spiel: Es werden kleine Behälter versteckt, die anhand von GPS-Koordinaten zu finden sind." />
 		<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 		<meta http-equiv="Content-Style-Type" content="text/css" />
@@ -183,7 +183,7 @@
 					<img src="resource2/{$opt.template.style}/images/head/rotator.php?path={$opt.page.headimagepath}" class="headerimagecontent" />
 				</div>
 				<div class="headerlogo">
-					<img src="resource2/{$opt.template.style}/images/oclogo/oc_head_alpha3.png" class="headerimagecontent" />
+					<img src="resource2/{$opt.template.style}/images/oclogo/{$opt.page.headoverlay}.png" class="headerimagecontent" />
 				</div>
 			</div> <!-- header -->
 

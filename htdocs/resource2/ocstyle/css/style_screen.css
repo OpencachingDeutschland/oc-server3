@@ -304,6 +304,7 @@ div.cachedesc p {font-size: 100%;}
 div.welcome p {line-height: 1.6em;}
 p.inheader {margin:4px; font-size:125%;}
 p.spacer_before {margin-top:12px;}
+p.startmessage { line-height: 1.4em; }
 
 /* Quote */
 p.quote {clear: left; margin: 0em 30px 0.6em 30px;	line-height: 120%; font-size: 110%;}
@@ -1490,3 +1491,5 @@ label.disabled { color:grey; }
 .formlabel { color:#555; font-weight:bold; line-height:1.5em !important}
 
 .smalltext { font-size:88% !important }
+
+p.startmessage { line-height: 1.4em; }

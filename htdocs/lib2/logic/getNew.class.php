@@ -139,7 +139,7 @@ class getNew
 		// check $args and set defaults
 		if (is_null($args) || !is_array($args))
 		{
-			$args = array($this->get_userCountry(), $opt['template']['locale'],10);
+			$args = array($this->get_userCountry(), $opt['page']['main_country'], 10);
 		}
 
 		// execute sql
@@ -171,6 +171,26 @@ class getNew
 
 
 	/**
+	 * ratingDays returns the number of days used for top rating calculation
+	 *
+	 * @return days
+	 */
+	public function ratingDays()
+	{
+		// global
+		global $opt;
+
+		// Calculate days dependend on country selection.
+		// Todo: make default country configurable and use this also for
+		// "except of [Germany]" new caches and logs lists
+
+		if ($this->get_userCountry() == 'DE')
+			return $opt['logic']['rating']['topdays_mainCountry'];
+		else
+			return $opt['logic']['rating']['topdays_otherCountry'];
+	}
+
+	/**
 	 * ratingRs executes the database statements for type "rating"
 	 *
 	 * @param array $args numeric array containing the parameter for "sql_slave"
@@ -184,7 +204,12 @@ class getNew
 		// check $args and set defaults
 		if (is_null($args) || !is_array($args))
 		{
-			$args = array($this->get_userCountry(), $opt['template']['locale'],10);
+			$args = array(
+				$this->get_userCountry(),
+				$opt['template']['locale'],
+				10,
+				$this->ratingDays()
+			);
 		}
 
 		// execute sql
@@ -211,7 +236,7 @@ class getNew
 								LEFT JOIN `sys_trans_text` ON `sys_trans_text`.`trans_id`=`countries`.`trans_id` AND `sys_trans_text`.`lang`='&2'
 								LEFT JOIN `caches_attributes` `ca` ON `ca`.`cache_id`=`caches`.`cache_id` AND `ca`.`attrib_id`=6
 							WHERE `caches`.`country`='&1' AND
-								`cache_rating`.`rating_date`>DATE_SUB(NOW(), INTERVAL 30 DAY) AND
+								`cache_rating`.`rating_date`>DATE_SUB(NOW(), INTERVAL &4 DAY) AND
 								`caches`.`type`!=6 AND
 								`caches`.`status`=1
 							GROUP BY `cache_rating`.`cache_id`

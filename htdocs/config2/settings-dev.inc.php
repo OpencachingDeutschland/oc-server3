@@ -112,6 +112,8 @@
 
 	// other settings
 	$opt['page']['showdonations'] = true;
+	$opt['page']['headoverlay'] = 'oc_head_alpha3';
+
 	$opt['logic']['pictures']['dummy']['replacepic'] = $dev_basepath . $dev_codepath . 'htdocs/images/no_image_license.png';
 	$opt['logic']['license']['disclaimer'] = true;
 	

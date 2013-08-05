@@ -40,7 +40,7 @@
 										`user`.`latitude`, 
 										`user`.`longitude`,
 										`user`.`data_license`, 
-										`countries`.`de` AS `country`, 
+										IFNULL(`sys_trans_text`.`text`,`countries`.`de`) AS `country`,
 										`stat_user`.`hidden`, 
 										`stat_user`.`found`, 
 										`stat_user`.`notfound`, 
@@ -49,8 +49,9 @@
 										`user`.`uuid` 
 							 FROM `user` 
 					LEFT JOIN `stat_user` ON `user`.`user_id`=`stat_user`.`user_id` 
-					LEFT JOIN `countries` ON `user`.`country`=`countries`.`short` 
-							WHERE `user`.`user_id`='&1'", $userid);
+					LEFT JOIN `countries` ON `user`.`country`=`countries`.`short`
+					LEFT JOIN `sys_trans_text` ON `sys_trans_text`.`lang`='&2' AND `sys_trans_text`.`trans_id`=`countries`.`trans_id`
+							WHERE `user`.`user_id`='&1'", $userid,  $opt['template']['locale']);
 	$record = sql_fetch_array($rs);
 	sql_free_result($rs);
 

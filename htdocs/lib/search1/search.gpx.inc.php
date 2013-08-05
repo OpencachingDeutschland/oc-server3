@@ -500,7 +500,7 @@ function search_output()
 		while ($r = sql_fetch_array($rs))
 		{
 			$retval .= '<div style="float:left; padding:8px"><a href="' . $r['url'] . '" target="_blank">' .
-			           '<img src="' . $absolute_server_URI . 'thumbs.php?uuid=' . $r["uuid"]. '" >' .
+			           '<img src="' . $absolute_server_URI . 'thumbs.php?uuid=' . $r["uuid"]. '" />' .
 			           '</a><br />' . $r['title'];
 			if ($r['spoiler'])
 				$retval .= ' (' . $translate->t('click on spoiler to display','',basename(__FILE__), __LINE__) . ')';

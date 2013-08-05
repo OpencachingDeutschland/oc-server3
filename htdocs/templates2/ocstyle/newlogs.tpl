@@ -37,7 +37,7 @@
 				<tr><td class="spacer"></td></tr>
 				<tr><td colspan="3">
 					<table cellspacing="0" cellpadding="0"><tr>
-						<td class="content-title-flag" ><img src="images/flags/{$newLog.country|lower}.gif" ></td>
+						<td class="content-title-flag" ><img src="images/flags/{$newLog.country|lower}.gif" /></td>
 						<td><b class="content-title-noshade-size08">{$newLog.country_name|escape}</b>&nbsp;</b></td>
 					</tr></table>
 				</td></tr>
@@ -71,7 +71,7 @@
 				{/if}
 			</td>
 			<td>
-				{if $newLog.oc_team_comment}<img src="resource2/{$opt.template.style}/images/oclogo/oc-team-comment.png" alt="OC-Team" title="{t}OC team comment{/t}"/>{/if}
+				{if $newLog.oc_team_comment}<img src="resource2/{$opt.template.style}/images/oclogo/oc-team-comment.png" alt="OC-Team" title="{t}OC team comment{/t}" />{/if}
 				{capture name=cachename}
 					<a href="viewcache.php?wp={$newLog.wp_oc}&log=A#log{$newLog.id}">{if $newLog.first}<b>{$newLog.cachename|escape}</b>{else}{$newLog.cachename|escape}{/if}</a>
 				{/capture}
@@ -81,14 +81,14 @@
 
 				{if $newLog.type==1}
 					{t 1=$smarty.capture.cachename 2=$smarty.capture.username}%2 found %1{/t}
-					{if $newLog.recommended}<img src="images/rating-star.gif" width="17" height="16" title="{t}with recommendation{/t}">{/if}
+					{if $newLog.recommended}<img src="images/rating-star.gif" width="17" height="16" title="{t}with recommendation{/t}" />{/if}
 				{elseif $newLog.type==2}
 					{t 1=$smarty.capture.cachename 2=$smarty.capture.username}%2 didn't find %1{/t}
 				{elseif $newLog.type==3}
 					{t 1=$smarty.capture.cachename 2=$smarty.capture.username}%2 wrote a note for %1{/t}
 				{elseif $newLog.type==7}
 					{t 1=$smarty.capture.cachename 2=$smarty.capture.username}%2 visited %1{/t}
-					{if $newLog.recommended}<img src="images/rating-star.gif" width="17" height="16" title="{t}with recommendation{/t}">{/if}
+					{if $newLog.recommended}<img src="images/rating-star.gif" width="17" height="16" title="{t}with recommendation{/t}" />{/if}
 				{elseif $newLog.type==8}
 					{t 1=$smarty.capture.cachename 2=$smarty.capture.username}%2 want's to visit %1{/t}
 				{elseif $newLog.type==9}

@@ -19,7 +19,7 @@
     <tr>
       <td></td>
       <td colspan="2">
-        <input type="submit" name="submit_cache_note" value="{t}Save{/t}" class="formbutton" onclick="submitbutton('submit_cache_note')" >
+        <input type="submit" name="submit_cache_note" value="{t}Save{/t}" class="formbutton" onclick="submitbutton('submit_cache_note')" />
       </td>
     </tr>
     <tr>

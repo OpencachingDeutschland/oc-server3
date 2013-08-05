@@ -4,7 +4,7 @@
  *  Unicode Reminder メモ
  ***************************************************************************}
  {* no - OCSTYLE *}
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 	<head>
 		<title>
@@ -19,7 +19,7 @@
 		<meta http-equiv="Content-Style-Type" content="text/css" />
 		<meta http-equiv="Content-Language" content="{$opt.template.locale}" />
 		<meta http-equiv="gallerimg" content="no" />
-		<link rel="SHORTCUT ICON" href="favicon.ico">
+		<link rel="SHORTCUT ICON" href="favicon.ico" />
 		<style type="text/css">
 		<!--
 			{literal}

@@ -13,7 +13,7 @@
 		<table border="0" cellspacing="0" cellpadding="2" width="100%">
 			<tr>
 				<td width="80px">
-					<a href="index.php"><img src="images/newlogo.png" alt="oc-Logo" style="border:0px;"/></a>
+					<a href="index.php"><img src="images/newlogo.png" alt="oc-Logo" style="border:0px;" /></a>
 				</td>
 				<td width="100%">
 					&nbsp;

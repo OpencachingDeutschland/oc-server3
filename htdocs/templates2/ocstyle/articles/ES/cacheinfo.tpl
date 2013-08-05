@@ -82,20 +82,20 @@
   <p><strong>Atributos del Cache:</strong> los atributos donde se puede obtener más datos de la cache.</p>
 
 	<table class="table">
-		<tr><td class="spacer"><img src="images/trans.gif" border="0" width="1" height="1" alt="" title=""></td></tr>
+		<tr><td class="spacer"><img src="images/trans.gif" border="0" width="1" height="1" alt="" title="" /></td></tr>
 
 		{foreach from=$attributes item=attribGroupItem}
 			<tr><td colspan="2" bgcolor="{$attribGroupItem.color|escape}"><b><i>{$attribGroupItem.category|escape} / {$attribGroupItem.name|escape}</i></b></td></tr>
 			
 			{foreach from=$attribGroupItem.attr item=attribItem name=attrItem}
 				<tr>
-					<td valign="top" style="padding-top:5px"><img src="resource2/ocstyle/images/attributes/{$attribItem.icon|escape}.png" border="0" align="left" alt="{$attribItem.name|escape}" title="{$attribItem.name|escape}"></td>
+					<td valign="top" style="padding-top:5px"><img src="resource2/ocstyle/images/attributes/{$attribItem.icon|escape}.png" border="0" align="left" alt="{$attribItem.name|escape}" title="{$attribItem.name|escape}" /></td>
 					<td valign="top">
 						{$attribItem.name|escape}: {$attribItem.html_desc}
 					</td>
 				</tr>
 				
-				<tr><td class="spacer"><img src="images/trans.gif" border="0" width="1" height="1" alt="" title=""></td></tr>
+				<tr><td class="spacer"><img src="images/trans.gif" border="0" width="1" height="1" alt="" title="" /></td></tr>
 			{/foreach}
 		{/foreach}
 	</table>

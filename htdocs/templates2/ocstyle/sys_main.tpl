@@ -6,7 +6,7 @@
 *  Main template for "navigation frame" of all pages
 ***************************************************************************}
 {* OCSTYLE *}
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<title>
@@ -25,13 +25,13 @@
 		<meta http-equiv="Content-Language" content="{$opt.template.locale}" />
 		<meta http-equiv="gallerimg" content="no" />
 		<meta http-equiv="cache-control" content="no-cache" />
-		<link rel="SHORTCUT ICON" href="favicon.ico">
+		<link rel="SHORTCUT ICON" href="favicon.ico" />
 		<link rel="apple-touch-icon" href="resource2/{$opt.template.style}/images/oclogo/apple-touch-icon-iphone.png" />
 		<link rel="apple-touch-icon" sizes="72x72" href="resource2/{$opt.template.style}/images/oclogo/apple-touch-icon-ipad.png" />
 		<link rel="apple-touch-icon" sizes="114x114" href="resource2/{$opt.template.style}/images/oclogo/apple-touch-icon-iphone-retina.png" />
 		<link rel="apple-touch-icon" sizes="144x144" href="resource2/{$opt.template.style}/images/oclogo/apple-touch-icon-ipad-retina.png" />
-		<link rel="stylesheet" type="text/css" media="screen,projection" href="resource2/{$opt.template.style}/css/style_screen.css?ft={$screen_css_time}">
-		<link rel="stylesheet" type="text/css" media="print" href="resource2/{$opt.template.style}/css/style_print.css?ft={$print_css_time}">
+		<link rel="stylesheet" type="text/css" media="screen,projection" href="resource2/{$opt.template.style}/css/style_screen.css?ft={$screen_css_time}" />
+		<link rel="stylesheet" type="text/css" media="print" href="resource2/{$opt.template.style}/css/style_print.css?ft={$print_css_time}" />
 		{literal}
 			<script type="text/javascript">
 			<!--
@@ -41,8 +41,8 @@
 				else if (screen.availWidth)
 					nWindowWidth = screen.availWidth;
 				if (nWindowWidth > 970)
-					document.writeln('<link rel="stylesheet" type="text/css" media="screen,projection" href="{/literal}{season winter='resource2/ocstyle/css/seasons/style_winter.css' spring='resource2/ocstyle/css/seasons/style_spring.css' summer='resource2/ocstyle/css/seasons/style_summer.css' autumn='resource2/ocstyle/css/seasons/style_autumn.css'}{literal}">');
-				document.writeln('<link rel="stylesheet" type="text/css" media="screen,projection" href="{/literal}{season winter='resource2/ocstyle/css/seasons/style_langstripe_winter.css' spring='resource2/ocstyle/css/seasons/style_langstripe_spring.css' summer='resource2/ocstyle/css/seasons/style_langstripe_summer.css' autumn='resource2/ocstyle/css/seasons/style_langstripe_autumn.css'}{literal}">');
+					document.writeln('<link rel="stylesheet" type="text/css" media="screen,projection" href="{/literal}{season winter='resource2/ocstyle/css/seasons/style_winter.css' spring='resource2/ocstyle/css/seasons/style_spring.css' summer='resource2/ocstyle/css/seasons/style_summer.css' autumn='resource2/ocstyle/css/seasons/style_autumn.css'}{literal}" />');
+				document.writeln('<link rel="stylesheet" type="text/css" media="screen,projection" href="{/literal}{season winter='resource2/ocstyle/css/seasons/style_langstripe_winter.css' spring='resource2/ocstyle/css/seasons/style_langstripe_spring.css' summer='resource2/ocstyle/css/seasons/style_langstripe_summer.css' autumn='resource2/ocstyle/css/seasons/style_langstripe_autumn.css'}{literal}" />');
 
 				function usercountry_change()
 				{
@@ -107,7 +107,7 @@
 			<div id="langstripe">
 
 				{* <!-- Navigation Level 1 --> *}
-				<table class="nav1" cellspacing=0>
+				<table class="nav1" cellspacing="0">
 					<tr>
 						{if $opt.session.url==true}
 							<div id="sessionWarn">
@@ -158,7 +158,7 @@
 						</td>
 					</tr>
 				</table>
-			</div>
+			</div> <!-- langstripe -->
 			<div class="page-container-1" style="position: relative;">
 
 			{if $greybg}
@@ -185,7 +185,7 @@
 				<div class="headerlogo">
 					<img src="resource2/{$opt.template.style}/images/oclogo/oc_head_alpha3.png" class="headerimagecontent" />
 				</div>
-			</div>
+			</div> <!-- header -->
 
 			{* <!-- Navigation Level 2 --> *}
 			<div class="nav2">
@@ -194,7 +194,7 @@
 						{include file="sys_topmenu.tpl" items="$topmenu"}
 					{/nocache}
 				</ul>
-			</div>
+			</div> <!-- nav 2 -->
 
 			{* <!-- Buffer after header --> *}
 			<div class="buffer" style="height: 30px;"></div>
@@ -273,10 +273,9 @@
 							{/nocache}
 							{t}Created at{/t}: {"0"|date_format:$opt.format.datetime}
 						</small>
-					</p>			
+					</p>
 				</div>
-
-			</div>
+			</div> <!-- nav3 -->
 
 			{* <!-- CONTENT --> *}
 			<div class="content2">
@@ -290,10 +289,10 @@
 					{else}
 						{include file="$template.tpl"}
 					{/if}
-				</div>
+				</div> <!-- ocmain -->
 
 {if $opt.template.popup!=true}
-			</div>
+			</div> <!-- content2 -->
 
 			{* <!-- End Text Container --> *}
 
@@ -302,8 +301,8 @@
 				<p><a href="articles.php?page=dsb">{t}Privacy statement{/t}</a> | <a href="articles.php?page=impressum">{t}Terms of use and legal information{/t}</a> | <a href="articles.php?page=contact">{t}Contact{/t}</a> | <a href="articles.php?page=changelog">{t}Changelog{/t}</a> | <a href="sitemap.php">{t}Sitemap{/t}</a></p>
 				<p><strong>{$opt.page.sponsor.bottom}</strong></p>
 			</div>
-		</div>
-
+			</div> <!-- page-container-1 -->
+		</div> <!-- overall -->
 {/if}{*popup*}
 
 	</body>

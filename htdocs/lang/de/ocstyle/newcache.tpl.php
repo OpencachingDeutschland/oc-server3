@@ -130,7 +130,7 @@ function toggleAttr(id)
 	<tr><td class="spacer" colspan="2"></td></tr>
 	<tr>
 		<td class="help" colspan="2">
-			<img src="lang/de/ocstyle/images/misc/hint.gif" border="0" width="15" height="11" alt="{t}Notice{/t}" title="{t}Notice{/t}">
+			<img src="lang/de/ocstyle/images/misc/hint.gif" border="0" width="15" height="11" alt="{t}Notice{/t}" title="{t}Notice{/t}" />
 			{t}If this is your first cache on Opencaching.de, be sure to check out the <a href="articles.php?page=cacheinfo">description</a> of the individual fields.{/t}
 		</td>
 	</tr>
@@ -211,7 +211,7 @@ function toggleAttr(id)
 	</tr>
 	<tr>
 		<td>&nbsp;</td>
-		<td class="help"><img src="lang/de/ocstyle/images/misc/hint.gif" border="0" width="15" height="11" alt="{t}Notice{/t}" title="{t}Notice{/t}">
+		<td class="help"><img src="lang/de/ocstyle/images/misc/hint.gif" border="0" width="15" height="11" alt="{t}Notice{/t}" title="{t}Notice{/t}" />
 			{t}The effort is of course only be estimated and can vary depending on environmental influences. 
 				 If you can not make sufficiently detailed information, write 0 (zero) in both fields. 
 				 (See also: <a href="articles.php?page=cacheinfo#time" target="_blank">description</a>){/t}
@@ -221,13 +221,13 @@ function toggleAttr(id)
 	<tr>
 		<td>{t}Waypoints:{/t}</td>
 		<!-- allow wp_gc copy&paste with leading spaces; will be trimmed later -->
-		<td>geocaching.com: <input type="text" name="wp_gc" value="{wp_gc}" maxlength="12" class="input50">
-			navicache.com: <input type="text" name="wp_nc" value="{wp_nc}" maxlength="6" class="input50">
+		<td>geocaching.com: <input type="text" name="wp_gc" value="{wp_gc}" maxlength="12" class="input50" />
+			navicache.com: <input type="text" name="wp_nc" value="{wp_nc}" maxlength="6" class="input50" />
 		</td>
 	</tr>
 	<tr>
 		<td>&nbsp;</td>
-		<td class="help"><img src="lang/de/ocstyle/images/misc/hint.gif" border="0" width="15" height="11" alt="{t}Notice{/t}" title="{t}Notice{/t}">
+		<td class="help"><img src="lang/de/ocstyle/images/misc/hint.gif" border="0" width="15" height="11" alt="{t}Notice{/t}" title="{t}Notice{/t}" />
 		{t}This waypoints will be used to show links in the view cache and the log page.{/t}<br />
 		{t}No data will be imported automatically from these listing services.{/t}
 		</td>
@@ -237,7 +237,7 @@ function toggleAttr(id)
 		<td class="header-small" colspan="2">
 			<div class="content2-container bg-blue02">
 				<p class="content-title-noshade-size2">
-					<img src="lang/de/ocstyle/images/description/22x22-description.png" width="22" height="22" align="middle" border="0">
+					<img src="lang/de/ocstyle/images/description/22x22-description.png" width="22" height="22" align="middle" border="0" />
 					{t}Cache attributes{/t}&nbsp;&nbsp;
 				</p>
 			</div>
@@ -251,7 +251,7 @@ function toggleAttr(id)
 		<td class="header-small" colspan="2">
 			<div class="content2-container bg-blue02">
 				<p class="content-title-noshade-size2">
-					<img src="lang/de/ocstyle/images/description/22x22-description.png" width="22" height="22" align="middle" border="0">
+					<img src="lang/de/ocstyle/images/description/22x22-description.png" width="22" height="22" align="middle" border="0" />
 					{t}Description{/t}
 				</p>
 			</div>
@@ -269,7 +269,7 @@ function toggleAttr(id)
 	</tr>
 	<tr>
 	  <td class="help" colspan="2">
-			<img src="lang/de/ocstyle/images/misc/hint.gif" border="0" width="15" height="11" alt="{t}Notice{/t}" title="{t}Notice{/t}">
+			<img src="lang/de/ocstyle/images/misc/hint.gif" border="0" width="15" height="11" alt="{t}Notice{/t}" title="{t}Notice{/t}" />
 		  {t}You can add more descriptions in other languages publishing the cache.{/t}
 		</td>
 	</tr>
@@ -308,7 +308,7 @@ function toggleAttr(id)
 	<tr><td class="spacer" colspan="2"></td></tr>
 	<tr>
 		<td class="help" colspan="2">
-			<img src="lang/de/ocstyle/images/misc/hint.gif" border="0" width="15" height="11" alt="{t}Notice{/t}" title="{t}Notice{/t}">
+			<img src="lang/de/ocstyle/images/misc/hint.gif" border="0" width="15" height="11" alt="{t}Notice{/t}" title="{t}Notice{/t}" />
 			{t}Your HTML code will be changed again by a special filter. This is necessary to avoid dangerous HTML-tags, 
 				 such as &lt;script&gt;. A list of allowed HTML tags, you can find 
 				 <a href="http://www.opencaching.de/articles.php?page=htmltags">here</a>{/t}
@@ -330,7 +330,7 @@ function toggleAttr(id)
 		<td class="header-small" colspan="2">
 			<div class="content2-container bg-blue02">
 				<p class="content-title-noshade-size2">
-					<img src="lang/de/ocstyle/images/description/22x22-description.png" width="22" height="22" align="middle" border="0">
+					<img src="lang/de/ocstyle/images/description/22x22-description.png" width="22" height="22" align="middle" border="0" />
 					{t}Others{/t}
 				</p>
 			</div>
@@ -338,7 +338,7 @@ function toggleAttr(id)
 	</tr>
 	<tr>
 		<td class="help" colspan="2">
-			<img src="lang/de/ocstyle/images/misc/hint.gif" border="0" width="15" height="11" alt="{t}Notice{/t}" title="{t}Notice{/t}">
+			<img src="lang/de/ocstyle/images/misc/hint.gif" border="0" width="15" height="11" alt="{t}Notice{/t}" title="{t}Notice{/t}" />
 			{t}You can add additional pictures after creating the cache.{/t}
 		</td>
 	</tr>
@@ -363,15 +363,15 @@ function toggleAttr(id)
 	<tr>
 		<td>{t}Publication:{/t}</td>
 		<td>
-			<input type="radio" class="radio" name="publish" id="publish_now" value="now2" {publish_now_checked}>&nbsp;<label for="publish_now">{t}Publish now{/t}</label><br />
-			<input type="radio" class="radio" name="publish" id="publish_later" value="later" {publish_later_checked}>&nbsp;<label for="publish_later">{t}Publish on{/t}</label>
+			<input type="radio" class="radio" name="publish" id="publish_now" value="now2" {publish_now_checked} />&nbsp;<label for="publish_now">{t}Publish now{/t}</label><br />
+			<input type="radio" class="radio" name="publish" id="publish_later" value="later" {publish_later_checked} />&nbsp;<label for="publish_later">{t}Publish on{/t}</label>
 			<input class="input20" type="text" name="activate_day" maxlength="2" value="{activate_day}"/>.
 			<input class="input20" type="text" name="activate_month" maxlength="2" value="{activate_month}"/>.
 			<input class="input40" type="text" name="activate_year" maxlength="4" value="{activate_year}"/>&nbsp;
 			<select name="activate_hour" class="input60">
 				{activation_hours}
 			</select>&nbsp;{t}#time_suffix_label#{/t}&nbsp;{activate_on_message}<br />
-			<input type="radio" class="radio" name="publish" id="publish_notnow" value="notnow" {publish_notnow_checked}>&nbsp;<label for="publish_notnow">{t}Do not publish now.{/t}</label>
+			<input type="radio" class="radio" name="publish" id="publish_notnow" value="notnow" {publish_notnow_checked} />&nbsp;<label for="publish_notnow">{t}Do not publish now.{/t}</label>
 		</td>
 	</tr>
 
@@ -382,7 +382,7 @@ function toggleAttr(id)
 	</tr>
 	<tr>
 		<td class="help" colspan="2">
-			<img src="lang/de/ocstyle/images/misc/hint-link.gif" border="0" width="15" height="11" alt="{t}Notice{/t}" title="{t}Notice{/t}">
+			<img src="lang/de/ocstyle/images/misc/hint-link.gif" border="0" width="15" height="11" alt="{t}Notice{/t}" title="{t}Notice{/t}" />
 			{t}Please note the <a href="articles.php?page=cacheinfo#logpw" target="_blank">description</a>{/t}
 		</td>
 	</tr>

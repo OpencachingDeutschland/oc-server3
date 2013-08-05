@@ -315,10 +315,10 @@ function switchAttributeCat2()
 		<tr>
 			<td class="formlabel">{t}Hide following caches:{/t}</td>
 			<td colspan="4">
-				<input type="checkbox" name="f_userowner" value="1" id="l_userowner" class="checkbox" onclick="sync_options(this)" {if $f_userowner_checked}checked="checked"{/if} {if !$logged_in}disabled="disabled"{/if}  /> <label for="l_userowner" {if !$logged_in}class="disabled"{/if}>{t}My owned{/t}</label> &nbsp;
+				<input type="checkbox" name="f_userowner" value="1" id="l_userowner" class="checkbox" onclick="sync_options(this)" {if $f_userowner_checked}checked="checked"{/if} {if !$logged_in}disabled="disabled"{/if} /> <label for="l_userowner" {if !$logged_in}class="disabled"{/if}>{t}My owned{/t}</label> &nbsp;
 				<input type="checkbox" name="f_userfound" value="1" id="l_userfound" class="checkbox" onclick="sync_options(this)" {if $f_userfound_checked}checked="checked"{/if} {if !$logged_in}disabled="disabled"{/if} /> <label for="l_userfound" {if !$logged_in}class="disabled"{/if}>{t}My finds{/t}</label> &nbsp;
 				<input type="checkbox" name="f_ignored" value="1" id="l_ignored" class="checkbox" onclick="sync_options(this)" {if $f_ignored_checked}checked="checked"{/if} {if !$logged_in}disabled="disabled"{/if} /> <label for="l_ignored" {if !$logged_in}class="disabled"{/if}>{t}My ignored{/t}</label> &nbsp;
-				<input type="checkbox" name="f_disabled" value="1" id="l_disabled" class="checkbox" onclick="sync_options(this)" {if $f_disabled_checked}checked="checked"{/if} > <label for="l_disabled">{t}disabled[pl]{/t}</label> &nbsp;
+				<input type="checkbox" name="f_disabled" value="1" id="l_disabled" class="checkbox" onclick="sync_options(this)" {if $f_disabled_checked}checked="checked"{/if} /> <label for="l_disabled">{t}disabled[pl]{/t}</label> &nbsp;
 				<nobr><input type="checkbox" name="f_inactive" value="1" id="l_inactive" class="checkbox" onclick="sync_options(this)" {if $f_inactive_checked}checked="checked"{/if} /> <label for="l_inactive">{t}archived[pl]{/t}</label></nobr> &nbsp;
 				<br />
 				<nobr><input type="checkbox" name="f_otherPlatforms" value="1" id="l_otherPlatforms" class="checkbox" onclick="sync_options(this)" {if $f_otherPlatforms_checked}checked="checked"{/if} /> <label for="l_otherPlatforms">{t}also listed at GC.com{/t}</label></nobr>
@@ -425,11 +425,11 @@ function switchAttributeCat2()
 		<tr>
 			<td class="formlabel">{t}Sorting of result:{/t}</td>
 			<td colspan="4">
-				<input type="radio" name="sort" value="byname" index="0" id="l_sortbyname" class="radio" onclick="sync_options(this)" {if $byname_checked}checked="checked"{/if} > <label for="l_sortbyname">{t}Cachename{/t}</label> &nbsp;
-				<input type="radio" name="sort" value="bydistance" index="1" id="l_sortbydistance" class="radio" onclick="sync_options(this)" {if $bydistance_checked}checked="checked"{/if}> <label for="l_sortbydistance">{t}Distance{/t}</label> &nbsp;
-				<input type="radio" name="sort" value="bycreated" index="2" id="l_sortbycreated" class="radio" onclick="sync_options(this)" {if $bycreated_checked}checked="checked"{/if}> <label for="l_sortbycreated">{t}Listed since{/t}</label> &nbsp;
-				<nobr><input type="radio" name="sort" value="bylastlog" index="3" id="l_sortbylastlog" class="radio" onclick="sync_options(this)" {if $bylastlog_checked}checked="checked"{/if}> <label for="l_sortbylastlog" >{t}Last log{/t}</label> &nbsp;
-				<input type="radio" name="sort" value="bymylastlog" index="4" id="l_sortbymylastlog" class="radio" onclick="sync_options(this)" {if $bymylastlog_checked}checked="checked"{/if} {if !$logged_in}disabled="disabled"{/if}> <label for="l_sortbymylastlog" {if !$logged_in}class="disabled"{/if}>{t}My last log{/t}</label></nobr>
+				<input type="radio" name="sort" value="byname" index="0" id="l_sortbyname" class="radio" onclick="sync_options(this)" {if $byname_checked}checked="checked"{/if} /> <label for="l_sortbyname">{t}Cachename{/t}</label> &nbsp;
+				<input type="radio" name="sort" value="bydistance" index="1" id="l_sortbydistance" class="radio" onclick="sync_options(this)" {if $bydistance_checked}checked="checked"{/if} /> <label for="l_sortbydistance">{t}Distance{/t}</label> &nbsp;
+				<input type="radio" name="sort" value="bycreated" index="2" id="l_sortbycreated" class="radio" onclick="sync_options(this)" {if $bycreated_checked}checked="checked"{/if} /> <label for="l_sortbycreated">{t}Listed since{/t}</label> &nbsp;
+				<nobr><input type="radio" name="sort" value="bylastlog" index="3" id="l_sortbylastlog" class="radio" onclick="sync_options(this)" {if $bylastlog_checked}checked="checked"{/if} /> <label for="l_sortbylastlog" >{t}Last log{/t}</label> &nbsp;
+				<input type="radio" name="sort" value="bymylastlog" index="4" id="l_sortbymylastlog" class="radio" onclick="sync_options(this)" {if $bymylastlog_checked}checked="checked"{/if} {if !$logged_in}disabled="disabled"{/if} /> <label for="l_sortbymylastlog" {if !$logged_in}class="disabled"{/if}>{t}My last log{/t}</label></nobr>
 				<br />
 				<input id="orderRatingFirst" type="checkbox" name="orderRatingFirst" class="checkbox" value="1" onclick="sync_options(this)" {if $orderRatingFirst_checked}checked="checked"{/if} />
 				<label for="orderRatingFirst">{t}Show recommendation from other users first{/t}</label>

@@ -9,10 +9,10 @@
 			<table class="null" cellspacing="0" cellpadding="0"><tr>
 			<td style="vertical-align:top; padding-right:2px; padding-top:2px" rowspan="2">{include file="res_cacheicon_22.tpl" cachetype=$cacheitem.type}</td>
 			<td style="vertical-align:top; ">
-			{if $cacheitem.cRatings>=1}<img src="images/rating-star.gif" border="0" alt="{t 1=$cacheitem.cRatings}%1 Recommendations in the last 30 days{/t}">{/if}
-			{if $cacheitem.cRatings>=2}<img src="images/rating-star.gif" border="0" alt="{t 1=$cacheitem.cRatings}%1 Recommendations in the last 30 days{/t}">{/if}
-			{if $cacheitem.cRatings==3}<img src="images/rating-star.gif" border="0" alt="{t 1=$cacheitem.cRatings}%1 Recommendations in the last 30 days{/t}">{/if}
-			{if $cacheitem.cRatings>3}<img src="images/rating-plus.gif" border="0" alt="{t 1=$cacheitem.cRatings}%1 Recommendations in the last 30 days{/t}">{/if}
+			{if $cacheitem.cRatings>=1}<img src="images/rating-star.gif" border="0" alt="{t 1=$cacheitem.cRatings}%1 Recommendations in the last 30 days{/t}" />{/if}
+			{if $cacheitem.cRatings>=2}<img src="images/rating-star.gif" border="0" alt="{t 1=$cacheitem.cRatings}%1 Recommendations in the last 30 days{/t}" />{/if}
+			{if $cacheitem.cRatings==3}<img src="images/rating-star.gif" border="0" alt="{t 1=$cacheitem.cRatings}%1 Recommendations in the last 30 days{/t}" />{/if}
+			{if $cacheitem.cRatings>3}<img src="images/rating-plus.gif" border="0" alt="{t 1=$cacheitem.cRatings}%1 Recommendations in the last 30 days{/t}" />{/if}
 			&nbsp;
 			<b><a class="links" href="viewcache.php?cacheid={$cacheitem.cache_id}">{$cacheitem.name|escape}</a></b> {include file="res_oconly.tpl" oconly=$cacheitem.oconly}
 			{t}by{/t}

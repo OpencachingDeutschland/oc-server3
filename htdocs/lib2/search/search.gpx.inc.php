@@ -484,7 +484,7 @@ function search_output()
 		while ($r = sql_fetch_array($rs))
 		{
 			$retval .= '<div style="float:left; padding:8px"><a href="' . $r['url'] . '" target="_blank">' .
-			           '<img src="' . $server_address . 'thumbs.php?uuid=' . $r["uuid"]. '" >' .
+			           '<img src="' . $server_address . 'thumbs.php?uuid=' . $r["uuid"]. '" />' .
 			           '</a><br />' . $r['title'];
 			if ($r['spoiler'])
 				$retval .= ' (' . _('click on spoiler to display') . ')';

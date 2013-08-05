@@ -81,10 +81,10 @@
 	<tr><td class="spacer" colspan="2"></td></tr>
 	<tr>
 		<td class="help" colspan="2">
-			<img src="lang/de/ocstyle/images/misc/hint.gif" border="0" width="15" height="11" alt="{t}Notice{/t}" title="{t}Notice{/t}"> 
+			<img src="lang/de/ocstyle/images/misc/hint.gif" border="0" width="15" height="11" alt="{t}Notice{/t}" title="{t}Notice{/t}" /> 
 			{t}Your HTML code will be changed again by a special filter. This is nacessary to avoid dangerous HTML-tags, such as &lt;script&gt;.
 				 A list of allowed HTML tags can be find <a href="http://www.opencaching.de/articles.php?page=htmltags">here</a>.{/t}<br />
-			<img src="lang/de/ocstyle/images/misc/hint.gif" border="0" width="15" height="11" alt="{t}Notice{/t}" title="{t}Notice{/t}">
+			<img src="lang/de/ocstyle/images/misc/hint.gif" border="0" width="15" height="11" alt="{t}Notice{/t}" title="{t}Notice{/t}" />
 			{t}Please do not use any images that are hosted on geocaching.com. Upload your fotos instead on our server as well.{/t}
 		</td>
 	</tr>

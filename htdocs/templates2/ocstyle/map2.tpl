@@ -510,7 +510,7 @@ function updateCopyrights()
 		else
 			copyrightDiv.innerHTML = '{t escape=js}Map data &copy; <a href="http://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a> contributors{/t}';
 		if (newMapType == "MQ")
-			copyrightDiv.innerHTML += ', ' + '{t escape=js}tiles provided by <a href="http://www.mapquest.com/" target="_blank">MapQuest</a>{/t}' + ' <img src="http://developer.mapquest.com/content/osm/mq_logo.png">';
+			copyrightDiv.innerHTML += ', ' + '{t escape=js}tiles provided by <a href="http://www.mapquest.com/" target="_blank">MapQuest</a>{/t}' + ' <img src="http://developer.mapquest.com/content/osm/mq_logo.png" />';
 		{literal}
 	}
 	else
@@ -1040,7 +1040,7 @@ function init_waypoint_markers(aWaypoints)
 				var text =
 					"<div id='mapinfowindow' style='max-height:320px;" + {if $msie}" max-width:" + maxwidth + ";" +{/if} " overflow:auto'><table class='mappopup'>" +
 					"<tr><td><table cellspacing='0' cellpadding='0'><tr><td>" +
-						"<img src='" + image + "' width='" + imagewidth + "' height='" + imageheight + "' ></td>" +
+						"<img src='" + image + "' width='" + imagewidth + "' height='" + imageheight + "' /></td>" +
 						"<td class='wppopupheader'><span style='white-space:normal'>" + typename + "</span></td><td style='vertical-align:top'></td><td class='wppopupheader'>&nbsp;" + preposition + "</span></td>" +
 						"<td class='wppopupheader' style='font-weight:bold'>&nbsp;<a href='viewcache.php?wp=" + msPopupMarkerWP + "' target='_blank_'>" + msPopupMarkerWP + "</a></td>" +
 					"</tr></table></td></tr>";
@@ -1163,7 +1163,7 @@ function parseXML_GetHTML(xmlobject)
 		sHtml += "<tr><td colspan='2'><font size='2' color='red'><b>" + xmlentities(sStatusText) + "</b></font></td></tr>";
 
 	// InfoWindows have a min width; set min width for content to avoid large right borders:
-	sHtml += "<tr><td><img src='resource2/ocstyle/images/cacheicon/20x20-" + nTypeId + ".png' alt='" + xmlentities(sTypeText) + "' title='" + xmlentities(sTypeText) + "' height='20px' width='20px'/></td><td style='min-width:150px";
+	sHtml += "<tr><td><img src='resource2/ocstyle/images/cacheicon/20x20-" + nTypeId + ".png' alt='" + xmlentities(sTypeText) + "' title='" + xmlentities(sTypeText) + "' height='20px' width='20px' /></td><td style='min-width:150px";
 	if (sName.length > 60)
 		sHtml += "; white-space:normal";
 	sHtml += "'><a href='viewcache.php?wp=" + encodeURI(sWPOC) + "' target='_blank'><font size='2'>" + xmlentities(sName) + "</font></a></td><td align='right' vertical-align:'top'><font size='2'><b>&nbsp;" + xmlentities(sWPOC) + "</b></font></td></tr>";
@@ -2142,7 +2142,7 @@ function toggle_attribselection(bSaveCookies)
 					{* login status *}
 					<td rowspan="2">&nbsp;&nbsp;</td>
 					<td rowspan="2" class="maplogin">
-						{if $username != ""}{t}Logged in as{/t}<br /><a href="myhome.php"><b>{$username}</b></a> &nbsp;<a href="map2.php?action=logout&mode=fullscreen{if $queryid>0}&queryid={$queryid}{/if}"><img src="resource2/ocstyle/images/action/15x13-logout.png" style="margin-bottom:2px" alt="{t}Logout{/t}" title="{t}Logout{/t}"></a>{else}<a href="login.php?target=map2.php%3Fmode%3Dfullscreen{if $queryid>0}%26queryid%3D{$queryid}{/if}">{t}Login{/t}...</a>{/if}
+						{if $username != ""}{t}Logged in as{/t}<br /><a href="myhome.php"><b>{$username}</b></a> &nbsp;<a href="map2.php?action=logout&mode=fullscreen{if $queryid>0}&queryid={$queryid}{/if}"><img src="resource2/ocstyle/images/action/15x13-logout.png" style="margin-bottom:2px" alt="{t}Logout{/t}" title="{t}Logout{/t}" /></a>{else}<a href="login.php?target=map2.php%3Fmode%3Dfullscreen{if $queryid>0}%26queryid%3D{$queryid}{/if}">{t}Login{/t}...</a>{/if}
 					</td>
 					<td rowspan="2">&nbsp;&nbsp;</td>
 				{/if}
@@ -2159,7 +2159,7 @@ function toggle_attribselection(bSaveCookies)
 				{/if}
 
 				{* GPX download button *}
-				<td rowspan="2"><a class="jslink" onclick="download_gpx()"><img id="download_gpx_img" src="resource2/{$opt.template.style}/images/map/35x35-gpx-download.png" style="margin-left:5px; margin-right:5px" height="35" width="35" alt="{t}Download GPX file (max. 500 caches){/t}" title="{t}Download GPX file (max. 500 caches){/t}"/></a></td>
+				<td rowspan="2"><a class="jslink" onclick="download_gpx()"><img id="download_gpx_img" src="resource2/{$opt.template.style}/images/map/35x35-gpx-download.png" style="margin-left:5px; margin-right:5px" height="35" width="35" alt="{t}Download GPX file (max. 500 caches){/t}" title="{t}Download GPX file (max. 500 caches){/t}" /></a></td>
 
 				{* permalink button *}
 				<td rowspan="2"><a class="jslink" onclick="showPermlinkBox_click()"><img src="resource2/{$opt.template.style}/images/map/35x35-star.png" style="margin-left:3px; margin-right:1px" height="35" width="35" alt="{t}Show link to this map{/t}" title="{t}Show link to this map{/t}" /></a></td>
@@ -2198,7 +2198,7 @@ function toggle_attribselection(bSaveCookies)
 	{* popup box for permalink *}
 	<div id="permalink_box" class="mappermalink mapboxframe mapboxshadow" style="display:none">
 		<table>
-			<tr><td><img src="resource2/ocstyle/images/viewcache/link.png" alt="" height="16" width="16" /> {t}Link to this map view{/t}:</td><td align="right"><a href="javascript:permalinkbox_hide()"><img src="resource2/ocstyle/images/navigation/19x19-close.png" style="opacity:0.7" ></a></td></tr>
+			<tr><td><img src="resource2/ocstyle/images/viewcache/link.png" alt="" height="16" width="16" /> {t}Link to this map view{/t}:</td><td align="right"><a href="javascript:permalinkbox_hide()"><img src="resource2/ocstyle/images/navigation/19x19-close.png" style="opacity:0.7" /></a></td></tr>
 			<tr><td><input id="permalink_text" type="text" value="" size="55"/></td></tr>
 			<tr id="permalink_addFavorites"><td align="right"><input type="button" value="{t}Add to favorites...{/t}" onclick="addFavorites_click()" /></td></tr>
 		</table>
@@ -2247,10 +2247,10 @@ function toggle_attribselection(bSaveCookies)
 
 			<div id="cachepicbox" class="default mapboxframe mapboxshadow" style="position:absolute; {if $bFullscreen}left:4px; top:7px;{else}left:0; top:0;{/if} background:#fdfdfd; display:none; z-index:60">
 				<div style="position:absolute; right:-19px; top:2px; opacity:0.7">
-					<img src="resource2/ocstyle/images/navigation/15x15-smallclose.png" onclick="hide_picture()" style="cursor:pointer"/>
+					<img src="resource2/ocstyle/images/navigation/15x15-smallclose.png" onclick="hide_picture()" style="cursor:pointer" />
 				</div>
 				<div>
-					<a id="cachepiccontainer" class="nooutline"><img id="cachepic"/></a>
+					<a id="cachepiccontainer" class="nooutline"><img id="cachepic" /></a>
 				</div>
 				<div id="cachepictitle" style="clear:both; padding:0px 4px 0px 4px; line-height:1.3em; max-height:2.6em; overflow:hidden"></div>
 			</div>
@@ -2261,12 +2261,12 @@ function toggle_attribselection(bSaveCookies)
 
 	{if $bFullscreen}
 		{* the logo *}
-		<a href="index.php"><img id="oclogo" src="resource2/ocstyle/images/oclogo/oc_logo_alpha3.png" style="position:absolute; left:32px; top:50px; z-index:2; border:0"/></a>
+		<a href="index.php"><img id="oclogo" src="resource2/ocstyle/images/oclogo/oc_logo_alpha3.png" style="position:absolute; left:32px; top:50px; z-index:2; border:0" /></a>
 
 		{* back-to-searchoptions link *}
 		{if $queryid>0}
 			<div class="mapboxframe mapboxshadow" style="position:absolute; top:80px; right:5px; background:#fff; z-index:2">
-				<a class="nooutline" href="search.php?queryid={$queryid}&showresult=0"><img src="resource2/{$opt.template.style}/images/misc/32x32-search.png" style="padding:2px" alt="{t}Search options{/t}" title="{t}Search options{/t}"/></a>
+				<a class="nooutline" href="search.php?queryid={$queryid}&showresult=0"><img src="resource2/{$opt.template.style}/images/misc/32x32-search.png" style="padding:2px" alt="{t}Search options{/t}" title="{t}Search options{/t}" /></a>
 			</div>
 		{/if}
 
@@ -2302,7 +2302,7 @@ function toggle_attribselection(bSaveCookies)
 		{* frame for all sidebare contents: *}
 		<div class="mapboxframe mapboxshadow" style="position:absolute; top: 80px; right:0px; margin: 0px; padding: 4px; background:#fff; opacity: .9; z-index:2; {if $queryid > 0}display:none;{/if}">
 			{* sidebar hidden: '<' icon to open *}
-			<a class="jslink nofocus" onclick="toggle_sidebar(true);" id='sidebar-toggle' style="width: 32px; height: 32px"><img id="sidbar-toggle-img" src="resource2/{$opt.template.style}/images/map/32x32-left.png"></a>
+			<a class="jslink nofocus" onclick="toggle_sidebar(true);" id='sidebar-toggle' style="width: 32px; height: 32px"><img id="sidbar-toggle-img" src="resource2/{$opt.template.style}/images/map/32x32-left.png" /></a>
 			{* sidebar visible: filter options table & '>' icon to close *}
 			<div id="sidebar" style="display:none; overflow:auto">
 
@@ -2314,7 +2314,7 @@ function toggle_attribselection(bSaveCookies)
 			<tr>
 				<td style="width:3px"></td>
 				<td id="filterboxtitle" class="content-title-noshade-size1">{t}Only show Geocaches with the following properties:{/t}</td>
-				<td align="right"><a class="jslink" onclick="toggle_sidebar(true);"><img src="resource2/ocstyle/images/map/32x32-right.png"></a></td>
+				<td align="right"><a class="jslink" onclick="toggle_sidebar(true);"><img src="resource2/ocstyle/images/map/32x32-right.png" /></a></td>
 			</tr>
 		</table>
 	{else}
@@ -2351,12 +2351,12 @@ function toggle_attribselection(bSaveCookies)
 			{* cache types *}
 			<td valign="top" class="mapfilter pad10" width="{if $bFullscreen}140{else}150{/if}">
 				<table>
-					<tr><td colspan="3" class="mapfiltertopic mft_withcheckbox"><input id="all_cachetypes" type="checkbox" checked="checked" onchange="alltypes_changed()"> <label for="all_cachetypes">{t}Cachetype{/t}</label></td></tr>
+					<tr><td colspan="3" class="mapfiltertopic mft_withcheckbox"><input id="all_cachetypes" type="checkbox" checked="checked" onchange="alltypes_changed()" /> <label for="all_cachetypes">{t}Cachetype{/t}</label></td></tr>
 					<tr><td><span style="line-height: 5px;">&nbsp;</span></td></tr>
 					{foreach from=$aCacheType item=cacheTypeItem}
 						<tr>
 							<td><input type="checkbox" id="cachetype{$cacheTypeItem.id}" name="cachetype{$cacheTypeItem.id}" value="1" checked="checked" onchange="cachetype_filter_changed()" class="checkbox" /></td>
-							<td><img src="resource2/ocstyle/images/cacheicon/16x16-{$cacheTypeItem.id}.gif"></td>
+							<td><img src="resource2/ocstyle/images/cacheicon/16x16-{$cacheTypeItem.id}.gif" /></td>
 							<td style="white-space:nowrap;">&nbsp;<label for="cachetype{$cacheTypeItem.id}">{$cacheTypeItem.text|escape}</label></td>
 						</tr>
 					{/foreach}
@@ -2366,7 +2366,7 @@ function toggle_attribselection(bSaveCookies)
 			{* cache sizes *}
 			<td valign="top" class="mapfilter pad10" width="{if $bFullscreen}128{else}137{/if}">
 				<table>
-					<tr><td class="mapfiltertopic mft_withcheckbox"><input id="all_cachesizes" type="checkbox" checked="checked" onchange="allsizes_changed()"> <label for="all_cachesizes">{t}Container{/t}</label></td></tr>
+					<tr><td class="mapfiltertopic mft_withcheckbox"><input id="all_cachesizes" type="checkbox" checked="checked" onchange="allsizes_changed()" /> <label for="all_cachesizes">{t}Container{/t}</label></td></tr>
 					<tr><td><span style="line-height: 5px;">&nbsp;</span></td></tr>
 					{foreach from=$aCacheSize item=cacheSizeItem}
 						<tr>

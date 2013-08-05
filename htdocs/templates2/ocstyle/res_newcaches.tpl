@@ -5,7 +5,7 @@
 ***************************************************************************}
 {if $minimap_enabled}
 <div>
-<img class="img-minimap" style="margin:16px 20px 16px 16px; width: 220px; height: 220px; float: right;" src="{$minimap_url}{foreach name=newcaches from=$newcaches item=cacheitem}|{$cacheitem.latitude},{$cacheitem.longitude}{/foreach}">
+<img class="img-minimap" style="margin:16px 20px 16px 16px; width: 220px; height: 220px; float: right;" src="{$minimap_url}{foreach name=newcaches from=$newcaches item=cacheitem}|{$cacheitem.latitude},{$cacheitem.longitude}{/foreach}" />
 {/if}
 <ul class="nodot">
 	{foreach name=newcaches from=$newcaches item=cacheitem}

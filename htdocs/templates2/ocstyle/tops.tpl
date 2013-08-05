@@ -16,10 +16,10 @@
 			regional classification in the <a href="http://wiki.opencaching.de/index.php/Empfehlungen">Wiki</a>.<br />
 			<br />
 			The numbers in the list below means:<br />
-			<img src="images/rating-star.gif" border="0" alt="Recommendations"> Number of users that recommend this cache<br />
-			<img src="resource2/%1/images/log/16x16-found.png" width="16" height="16" border="0" alt="Found"> Checks = Number of time the cache was found<br />
+			<img src="images/rating-star.gif" border="0" alt="Recommendations" /> Number of users that recommend this cache<br />
+			<img src="resource2/%1/images/log/16x16-found.png" width="16" height="16" border="0" alt="Found" /> Checks = Number of time the cache was found<br />
 			Index tries to take the number of recommendations and founds in an order to show 'the best' geocache first.<br />
-			<img src="images/tops-formula.png" border="0" alt="Formula">{/t}
+			<img src="images/tops-formula.png" border="0" alt="Formula" />{/t}
 		</td>
 	</tr>
 	<tr>
@@ -82,8 +82,8 @@
 		<table class="table">
 			<tr>
 				<td style="text-align:right"><b>{t}Index{/t}</b></td>
-				<td style="text-align:right"><img src="images/rating-star.gif" border="0" alt="{t}Recommendations{/t}"></td>
-				<td style="text-align:right"><img src="resource2/{$opt.template.style}/images/log/16x16-found.png" width="16" height="16" border="0" alt="{t}Found{/t}"></td>
+				<td style="text-align:right"><img src="images/rating-star.gif" border="0" alt="{t}Recommendations{/t}" /></td>
+				<td style="text-align:right"><img src="resource2/{$opt.template.style}/images/log/16x16-found.png" width="16" height="16" border="0" alt="{t}Found{/t}" /></td>
 				<td></td>
 				<td>&nbsp;</td>
 			</tr>

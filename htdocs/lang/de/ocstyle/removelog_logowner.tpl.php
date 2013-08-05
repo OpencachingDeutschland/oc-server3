@@ -23,7 +23,7 @@
 <input type="hidden" name="commit" value="1"/>
 <input type="hidden" name="logid" value="{logid}"/>
 <table class="table">
-	<tr><td class="header" colspan="2"><img src="lang/de/ocstyle/images/description/22x22-logs.png" border="0" width="22" height="22" alt="" title="" align="middle"> <b>{t}remove log entry for <a href="viewcache.php?cacheid={cacheid}">{cachename}</a>{/t}</b></td></tr>
+	<tr><td class="header" colspan="2"><img src="lang/de/ocstyle/images/description/22x22-logs.png" border="0" width="22" height="22" alt="" title="" align="middle" /> <b>{t}remove log entry for <a href="viewcache.php?cacheid={cacheid}">{cachename}</a>{/t}</b></td></tr>
 	<tr><td class="spacer"></td></tr>
 
 	<tr><td colspan="2">{t}Are you sure to remove your log entry?{/t}</td></tr>

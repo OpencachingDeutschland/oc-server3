@@ -102,7 +102,7 @@
 				</tr>
 				<tr><td colspan="2">&nbsp;</td></tr>
 				<tr>
-					<td colspan="2"><input type="checkbox" name="commit" value="1"> Sicher?</td>
+					<td colspan="2"><input type="checkbox" name="commit" value="1" /> Sicher?</td>
 				</tr>
 				<tr>
 					<td colspan="2"><input type="submit" value="Auswählen" /></td>

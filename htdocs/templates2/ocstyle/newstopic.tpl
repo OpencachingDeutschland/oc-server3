@@ -67,7 +67,7 @@
 			<tr><td><input type="checkbox" name="newshtml" id="newshtml" value="1" style="border:0;" {if $newshtml==1}checked="checked"{/if} /> <label for="newshtml">{t}The newsentry is written with HTML tags{/t}</label></td></tr>
 			<tr>
 				<td>
-					<img src="resource2/{$opt.template.style}/images/misc/hint.gif" border="0" width="15" height="11" alt="" align="middle">
+					<img src="resource2/{$opt.template.style}/images/misc/hint.gif" border="0" width="15" height="11" alt="" align="middle" />
 					<span style="color:#666666; font-size:10px;">
 						{t}Please only use HTML tags to format the text - eg. bold, color or hyperlinks. We do not want tables, divs etc.{/t}
 					</span>

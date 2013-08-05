@@ -104,13 +104,13 @@
 		else
 			echo $r['icon_undef'];
 		 
-		echo '">&nbsp;';
+		echo '" />&nbsp;';
 	}
 	mysql_free_result($rs);
 ?>
 			<input type="hidden" name="wp" value="<?php echo $wp; ?>" />
 			<input type="hidden" id="cache_attribs" name="cache_attribs" value="" />
-			<input type="submit" name="post" value="OK">
+			<input type="submit" name="post" value="OK" />
 		</form>
 	</body>
 </html>

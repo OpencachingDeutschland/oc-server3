@@ -49,7 +49,7 @@
 	<tr>
 		<td>
 			Sollten die oben genannten Möglichkeiten nicht ausreichen oder die Betreiber von <i>opencaching.de</i> direkt 
-			kontaktiert werden, kannst du auch eine Email an <a href="mailto:contact@opencaching.de">contact@opencaching.de</a> schreiben.<br>
+			kontaktiert werden, kannst du auch eine Email an <a href="mailto:contact@opencaching.de">contact@opencaching.de</a> schreiben.<br />
 			Bitte werde nicht ungeduldig wenn nicht sofort eine Antwort kommt, <i>opencaching.de</i> wird von Freiwilligen
 			betreut, die leider nicht immer und sofort zur Verfügung stehen können.<br />
 			&nbsp;

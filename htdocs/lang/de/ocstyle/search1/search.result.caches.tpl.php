@@ -32,7 +32,7 @@
 			<p class="content-title-noshade-size15" style="padding:0; margin:4px;">&nbsp;{t}{results_count} caches<span style="{search_headline_caches}"> matched</span>{/t}&nbsp;</p>
 		</td>
 		<td style="text-align:right; width:1px">
-			<a href="search1.php?queryid={queryid}&output=map2bounds&showresult=1&skipqueryid=1&expert=0&utf8=1" class="nooutline"><img src="resource2/ocstyle/images/misc/32x32-world.png"/></a>
+			<a href="search1.php?queryid={queryid}&output=map2bounds&showresult=1&skipqueryid=1&expert=0&utf8=1" class="nooutline"><img src="resource2/ocstyle/images/misc/32x32-world.png" /></a>
 		</td>
 		<td style="white-space:nowrap; text-align:left; padding-bottom:2px">
 			<p class="inheader"><a href="search1.php?queryid={queryid}&output=map2bounds&showresult=1&skipqueryid=1&expert=0&utf8=1">{showonmap}</a></p>

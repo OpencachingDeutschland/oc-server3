@@ -22,7 +22,7 @@
 		</tr>
 		<tr>
 			<td class="help" colspan="2">
-				<img src="resource2/{$opt.template.style}/images/misc/hint.gif" border="0" width="15" height="11" align="middle">
+				<img src="resource2/{$opt.template.style}/images/misc/hint.gif" border="0" width="15" height="11" align="middle" />
 				{t}To change your E-Mail address, you have to request a security code. It will be sent to your new E-Mail-Address.{/t}
 			</td>
 		</tr>

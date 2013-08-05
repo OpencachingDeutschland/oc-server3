@@ -11,7 +11,7 @@
 	</tr>
 	<tr>
 		<td></td>
-		<td>&nbsp;<img src="resource2/ocstyle/images/log/16x16-found.png" /</td>
+		<td>&nbsp;<img src="resource2/ocstyle/images/log/16x16-found.png" /></td>
 		{foreach from=$stat81 key=step item=dummy}
 			<th style="text-align:center">{$step/2}</th>
 		{/foreach}

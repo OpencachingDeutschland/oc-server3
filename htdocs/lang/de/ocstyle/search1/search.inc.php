@@ -32,9 +32,9 @@
 	$string_by = t('by');
 
  	$logdateformat = 'd.m.Y';
- 	$logpics[1] = '<img alt="' . t('Find') . '" border="0" src="images/ok.gif">';
- 	$logpics[2] = '<img alt="' . t('Didn\'t find') . '" border="0" src="images/redcross.gif">';
- 	$logpics[3] = '<img alt="' . t('Note') . '" border="0" src="images/info.gif">';
+ 	$logpics[1] = '<img alt="' . t('Find') . '" border="0" src="images/ok.gif" />';
+ 	$logpics[2] = '<img alt="' . t('Didn\'t find') . '" border="0" src="images/redcross.gif" />';
+ 	$logpics[3] = '<img alt="' . t('Note') . '" border="0" src="images/info.gif" />';
 
  	$diffpics[2] = 'diff-10.gif';
  	$diffpics[3] = 'diff-15.gif';

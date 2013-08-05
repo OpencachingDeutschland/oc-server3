@@ -7,7 +7,7 @@
 {*cachetype=1 status=1 logtype=0 owner=false small=false*}
 
 {if $cachetype==1}
-	<img src="resource2/{$opt.template.style}/images/cacheicon/unknown{if $greyed}-grey{/if}.gif" alt="{t}Unknown Geocache{/t}" title="{t}Unknown Geocache{/t}" border="0" width="32" height="32" class="icon32" id="{if $typeid}cacheicon{$cachetype}{else}viewcache-cacheicon{/if}" onclick="{$onclick}"/>
+	<img src="resource2/{$opt.template.style}/images/cacheicon/unknown{if $greyed}-grey{/if}.gif" alt="{t}Unknown Geocache{/t}" title="{t}Unknown Geocache{/t}" border="0" width="32" height="32" class="icon32" id="{if $typeid}cacheicon{$cachetype}{else}viewcache-cacheicon{/if}" onclick="{$onclick}" />
 {elseif $cachetype==2}
 	<img src="resource2/{$opt.template.style}/images/cacheicon/traditional{if $greyed}-grey{/if}.gif" alt="{t}Traditional Geocache{/t}" title="{t}Traditional Geocache{/t}" border="0" width="32" height="32" class="icon32" id="{if $typeid}cacheicon{$cachetype}{else}viewcache-cacheicon{/if}" onclick="{$onclick}" />
 {elseif $cachetype==3}  {* Ocprop: \/cacheicon\/multi\.gif"\s+alt="Multicache" *}

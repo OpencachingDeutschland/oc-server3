@@ -44,8 +44,8 @@
 
 	<p>Weitere neue Features:</p>
 	<ul>
-		<li>Empfehlungen werden in allen Loglisten mit <img src="images/rating-star.gif"> markiert.</li>
-		<li>OConly-Caches werden in allen Cachelisten mit <img src="resource2/ocstyle/images/misc/15x15-oc.png"> markiert.</li>
+		<li>Empfehlungen werden in allen Loglisten mit <img src="images/rating-star.gif" /> markiert.</li>
+		<li>OConly-Caches werden in allen Cachelisten mit <img src="resource2/ocstyle/images/misc/15x15-oc.png" /> markiert.</li>
 		<li>OConly-Hinweis in Benachrichtigungen über neue Caches; Benachrichtigung über neu markierte OConlys im Profil aktivierbar</li>
 		<li>Informationen über <a href="http://wiki.opencaching.de/index.php/Schutzgebiete">Schutzgebiete</a> in GPX-, OKAPI- und <a href="http://wiki.opencaching.de/index.php/XML-Schnittstelle">XML-Interface</a>-Downloads</li>
 		<li>neuer Menüpunkt &bdquo;neue Features&ldquo; auf der Startseite</li>
@@ -351,7 +351,7 @@
 	 <ul>	   
 	   <li>Kurzadressen für Direktzugriff auf Cachelistings, z.B. <a href="http://www.opencaching.de/OCD93B">http://opencaching.de/OCD93B</a></li>
 	   <li>Anzeige &bdquo;Du hast dieses Event besucht&ldquo; in Karten-Popup-Fenstern
-	   <li>englische Übersetzung der Seiten <a href="./articles.php?page=geocaching">Über Geocaching</a>, <a href="./articles.php?page=cacheinfo">Cachebeschreibung</a>, <a href="./articles.php?page=impressum">Impressum &amp; Nutzungsbedingungen</a>, <a href="./articles.php?page=dsb">Datenschutzbelehrung</a>, <a href="./articles.php?page=donations">Spenden</a>, <a href="./articles.php?page=contact">Kontakt</a> und <a href="./articles.php?page=team">Teamliste</a> (umschalten auf englischsprachige Seite oben mit <img src="images/flag/EN.png">)
+	   <li>englische Übersetzung der Seiten <a href="./articles.php?page=geocaching">Über Geocaching</a>, <a href="./articles.php?page=cacheinfo">Cachebeschreibung</a>, <a href="./articles.php?page=impressum">Impressum &amp; Nutzungsbedingungen</a>, <a href="./articles.php?page=dsb">Datenschutzbelehrung</a>, <a href="./articles.php?page=donations">Spenden</a>, <a href="./articles.php?page=contact">Kontakt</a> und <a href="./articles.php?page=team">Teamliste</a> (umschalten auf englischsprachige Seite oben mit <img src="images/flag/EN.png" />)
      <li>Versionsgeschichte</li>
    </ul>
 	 <p>Geändert / verbessert:</p>

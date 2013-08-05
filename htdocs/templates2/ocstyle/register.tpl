@@ -13,7 +13,7 @@
 	<table class="table">
 		<tr>
 			<td colspan="2" class="help">
-				<img src="resource2/{$opt.template.style}/images/misc/hint.gif" border="0" width="15" height="11" alt="{t}Note{/t}" title="{t}Note{/t}" align="middle">
+				<img src="resource2/{$opt.template.style}/images/misc/hint.gif" border="0" width="15" height="11" alt="{t}Note{/t}" title="{t}Note{/t}" align="middle" />
 				{t}The activation code was sent with an E-Mail to you.<br />
 				Please follow the instructions in the E-Mail.{/t}<br />
 				{t}If you do not see any E-Mail, please check the spam folder of your mailbox.{/t}
@@ -60,7 +60,7 @@
 		<table class="table">
 			<tr>
 				<td colspan="2" class="help">
-					<img src="resource2/{$opt.template.style}/images/misc/hint.gif" border="0" width="15" height="11" alt="{t}Note{/t}" align="middle">
+					<img src="resource2/{$opt.template.style}/images/misc/hint.gif" border="0" width="15" height="11" alt="{t}Note{/t}" align="middle" />
 					{t}To create an account on opencaching.de, you have to enter a vaild E-Mail address and an username.
 					An E-Mail will be sent to the address you supplied with an activation code. Only one account can be
 					created per E-Mail address. First name, last name and country are optional.{/t}
@@ -168,7 +168,7 @@
 
 			<tr>
 				<td colspan="2" class="help">
-					<img src="resource2/{$opt.template.style}/images/misc/hint.gif" border="0" width="15" height="11" alt="{t}Note{/t}" title="{t}Note{/t}" align="middle">
+					<img src="resource2/{$opt.template.style}/images/misc/hint.gif" border="0" width="15" height="11" alt="{t}Note{/t}" title="{t}Note{/t}" align="middle" />
 					{t 1=$opt.mail.contact}We respect your privacy. Your personal data will be stored in our database, but not shared to third parties.
 					Please note our exact <a href="articles.php?page=dsb">privacy statement</a>. If you have further questions, please <a href="mailto:%1">contact us</a> <b>before</b> you create your
 					account.{/t}

@@ -14,7 +14,7 @@
  *}
 
 {* OCSTYLE *}
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<title>
@@ -26,7 +26,7 @@
 		<meta http-equiv="Content-Language" content="{$opt.template.locale}" />
 		<meta http-equiv="gallerimg" content="no" />
 		<meta http-equiv="cache-control" content="no-cache" />
-		<link rel="SHORTCUT ICON" href="favicon.ico">
+		<link rel="SHORTCUT ICON" href="favicon.ico" />
 		<link rel="apple-touch-icon" href="{$opt.page.absolute_urlpath}resource2/{$opt.template.style}/images/oclogo/apple-touch-icon-iphone.png" />
 		<link rel="apple-touch-icon" sizes="72x72" href="{$opt.page.absolute_urlpath}resource2/{$opt.template.style}/images/oclogo/apple-touch-icon-ipad.png" />
 		<link rel="apple-touch-icon" sizes="114x114" href="{$opt.page.absolute_urlpath}resource2/{$opt.template.style}/images/oclogo/apple-touch-icon-iphone-retina.png" />

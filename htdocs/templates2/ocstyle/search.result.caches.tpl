@@ -16,7 +16,7 @@
 		</td>
 		{if $caches|@count && $enable_mapdisplay}
 			<td style="text-align:right; width:1px">
-				<a href="search.php?queryid={$queryid}&output=map2bounds&showresult=1&skipqueryid=1&expert=0&utf8=1" class="nooutline"><img src="resource2/ocstyle/images/misc/32x32-world.png"/></a>
+				<a href="search.php?queryid={$queryid}&output=map2bounds&showresult=1&skipqueryid=1&expert=0&utf8=1" class="nooutline"><img src="resource2/ocstyle/images/misc/32x32-world.png" /></a>
 			</td>
 			<td style="white-space:nowrap; text-align:left; padding-bottom:2px">
 				<p class="inheader"><a href="search.php?queryid={$queryid}&output=map2bounds&showresult=1&skipqueryid=1&expert=0&utf8=1">{t}Show on map{/t}</a></p>

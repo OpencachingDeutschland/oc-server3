@@ -133,7 +133,7 @@
 			{if $cansetemail==true}
 				<tr>
 					<td></td>
-					<td><input type="checkbox" name="chkemail" value="1"> {t}Mark e-mail address as invalid{/t}{if $licensefunctions}&nbsp;&nbsp;&nbsp;<input type="checkbox" name="chkdl" value="1"> {t}data license mail was not delivered{/t}{/if}</td>
+					<td><input type="checkbox" name="chkemail" value="1" /> {t}Mark e-mail address as invalid{/t}{if $licensefunctions}&nbsp;&nbsp;&nbsp;<input type="checkbox" name="chkdl" value="1" /> {t}data license mail was not delivered{/t}{/if}</td>
 				</tr>
 			{/if}
 

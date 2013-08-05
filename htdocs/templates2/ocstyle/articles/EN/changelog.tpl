@@ -34,8 +34,8 @@
 
 	<p>More new features:</p>
 	<ul>
-		<li>recommendations are marked with <img src="images/rating-star.gif"> in log lists</li>
-		<li>OConly caches are marked with <img src="resource2/ocstyle/images/misc/15x15-oc.png"> in cache lists</li>
+		<li>recommendations are marked with <img src="images/rating-star.gif" /> in log lists</li>
+		<li>OConly caches are marked with <img src="resource2/ocstyle/images/misc/15x15-oc.png" /> in cache lists</li>
 		<li>OConly tag in new cache notifications; notifications about newly tagged OConlies can be enabled in user profile</li>
 		<li>information on protection areas in GPX, OKAPI and <a href="doc/xml">XML Interface</a> downloads</li>
 		<li>new menu option &bdquo;New Features&ldquo; on the start page</li>

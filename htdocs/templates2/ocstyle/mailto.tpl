@@ -46,7 +46,7 @@
 			{/if}
 
 			<tr>
-				<td colspan="2">{t}Subject:{/t} <input type="text" name="subject" value="{$subject|escape}" class="input400"></td>
+				<td colspan="2">{t}Subject:{/t} <input type="text" name="subject" value="{$subject|escape}" class="input400" /></td>
 			</tr>
 			<tr><td class="spacer" colspan="2"></td></tr>
 
@@ -75,10 +75,10 @@
 			</tr>
 			<tr>
 				<td class="help" colspan="2">
-					<img src="resource2/{$opt.template.style}/images/misc/hint.gif" border="0" width="15" height="11" align="middle"> 
+					<img src="resource2/{$opt.template.style}/images/misc/hint.gif" border="0" width="15" height="11" align="middle" /> 
 					{t}This enables the receiver to answer your E-Mail directly with his E-Mail agent.{/t}<br />
 					<br />
-					<img src="resource2/{$opt.template.style}/images/misc/hint.gif" border="0" width="15" height="11" align="middle">
+					<img src="resource2/{$opt.template.style}/images/misc/hint.gif" border="0" width="15" height="11" align="middle" />
 					<span class="smalltext">{t}To protect you and us from abuse:{/t}</span>
 					<ul style="margin:0">
 					<li class="smalltext">{t}Only E-Mail that regards Geocaching are allowed. Spaming is not allowed!{/t}</li>

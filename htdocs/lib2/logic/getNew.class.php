@@ -139,7 +139,7 @@ class getNew
 		// check $args and set defaults
 		if (is_null($args) || !is_array($args))
 		{
-			$args = array($this->get_userCountry(), $opt['page']['main_country'], 10);
+			$args = array($this->get_userCountry(), $opt['template']['locale'], 10);
 		}
 
 		// execute sql

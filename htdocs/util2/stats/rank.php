@@ -12,7 +12,8 @@
   $n = 1;
   $rs = sql('SELECT `user`.`username`, `stat_user`.`found` 
                FROM `stat_user` 
-         INNER JOIN `user` on `stat_user`.`user_id`=`user`.`user_id` 
+         INNER JOIN `user` on `stat_user`.`user_id`=`user`.`user_id`
+              WHERE `user`.`is_active_flag`=1
            ORDER BY `stat_user`.`found` DESC 
               LIMIT 100');
   while ($r = sql_fetch_assoc($rs))

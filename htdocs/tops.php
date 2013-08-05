@@ -17,7 +17,8 @@
 	if (!$tpl->is_cached())
 	{
 		$rs = sql("SELECT IFNULL(`sys_trans_text`.`text`,`cache_location`.`adm1`) AS `adm1`,
-		                  `cache_location`.`adm3`, 
+		                  `cache_location`.`adm3`,
+		                  `cache_location`.`code1`,
 		                  `rating_tops`.`rating` AS `idx`, `stat_caches`.`toprating` AS `ratings`, `stat_caches`.`found` AS `founds`, 
 		                  `caches`.`name`, `caches`.`wp_oc` AS `wpoc`, `user`.`username`, `user`.`user_id` AS `userid`,
 		                  `ca`.`attrib_id` IS NOT NULL AS `oconly`

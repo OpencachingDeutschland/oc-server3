@@ -11,7 +11,7 @@
 
 <table class="table">
 	<tr>
-		<td style="padding-left:32px; padding-bottom:32px;">
+		<td style="padding-bottom:20px;">
 			{t 1=$opt.template.style}The following list is generated automatically by the given recommendations of the users. You can find more informations on
 			regional classification in the <a href="http://wiki.opencaching.de/index.php/Empfehlungen">Wiki</a>.<br />
 			<br />
@@ -24,19 +24,19 @@
 	</tr>
 	<tr>
 		<td style="padding-left:32px; padding-bottom:32px;">
-			<table class="table" width="100%">
+			<table class="narrowtable" width="100%">
 				{assign var='lastadm1' value=''}
 				{assign var='lastadm3' value=''}
 
 				{foreach name=tops from=$tops item=topItem}
 					{if ($lastadm1!=$topItem.adm1 || ($lastadm3!=$topItem.adm3))}
 						<tr>
-							<td valign="top" width="150px">
+							<td valign="top" width="150px" {if $lastadm1!=$topItem.adm1}style="padding-top:12px"{/if}>
 								{if $lastadm1!=$topItem.adm1}
-									{$topItem.adm1|escape}
+									{$topItem.adm1|escape}&nbsp; <img src="images/flags/{$topItem.code1}.gif" />
 								{/if}
 							</td>
-							<td>
+							<td {if $lastadm1!=$topItem.adm1}style="padding-top:12px"{/if}>
 								{if $topItem.adm3==null}
 									<a href="#{$topItem.adm1|urlencode}null"><i>(ohne geogr. Bezug)</i><br /></a>
 								{else}

@@ -445,7 +445,7 @@ function switchAttributeCat2()
 </div>
 
 {literal}
-<script language="javascript">
+<script type="text/javascript">
 <!--
 	document.getElementById("scriptwarning").style.display = "none";
 

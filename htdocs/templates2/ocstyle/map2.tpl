@@ -2271,7 +2271,7 @@ function toggle_attribselection(bSaveCookies)
 		{/if}
 
 		{literal}
-		<script language="javascript">
+		<script type="text/javascript">
 		function toggle_sidebar(savecookies)
 		{
 			var ele = document.getElementById("sidebar");

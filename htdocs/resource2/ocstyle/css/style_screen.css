@@ -1498,6 +1498,7 @@ p.editlog { font-weight: 400; display:inline; }
 label.disabled { color:grey; }
 .formlabel { color:#555; font-weight:bold; line-height:1.5em !important}
 
-.smalltext { font-size:88% !important }
+.smalltext { font-size:10px !important }
+.smalltext2 { font-size:11px !important }
 
 p.startmessage { line-height: 1.4em; }

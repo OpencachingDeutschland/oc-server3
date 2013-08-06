@@ -11,7 +11,7 @@
 
 {include file="res_logpictures.tpl" logdate=true loguser=true}
 
-<p><img src="resource2/{$opt.template.style}/images/misc/hint.gif" border="0" width="15" height="11" alt="" align="middle" />{t}Dates show the date of picture upload, wich can differ from the log date.{/t} {t}Maximum one picture per day and user is displayed here. The small gallery on the start page is additionally limited to one picture per cache and day.{/t}</p>
+<p class="smalltext2"><img src="resource2/{$opt.template.style}/images/misc/hint.gif" border="0" width="15" height="11" alt="" align="middle" />{t}Dates show the date of picture upload, wich can differ from the log date.{/t} {t}Maximum one picture per day and user is displayed here. The small gallery on the start page is additionally limited to one picture per cache and day.{/t}</p>
 
-<p>{t}All pictures are copyrighted and subject to the <a href="articles.php?page=impressum#datalicense">Opencaching.de data license</a>.{/t}</p>
+<p class="smalltext2">{t}All pictures are copyrighted and subject to the <a href="articles.php?page=impressum#datalicense">Opencaching.de data license</a>.{/t}</p>
 <p>&nbsp;</p>

@@ -411,9 +411,9 @@ td.default { font-size:12px; }
 /*-------------------*/
 
 /* standard links */
-.content1 a, .content2 a, .content3 a, .sidebar-txtbox-noshade a, .sidebar-txtbox-shade a, .popup a {color: rgb(75,75,175); text-decoration: none;}
-.content1 a:hover, .content2 a:hover, .content3 a:hover, .sidebar-txtbox-noshade a:hover, .sidebar-txtbox-shade a:hover {text-decoration: underline;}
-.content1 a:visited, .content2 a:visited, .content3 a:visited, .sidebar-txtbox-noshade a:visited, .sidebar-txtbox-shade a:visited  {color: rgb(120,0,150);}
+#langstripe a, .content1 a, .content2 a, .content3 a, .sidebar-txtbox-noshade a, .sidebar-txtbox-shade a, .popup a {color: rgb(75,75,175); text-decoration: none;}
+#langstripe a:hover, .content1 a:hover, .content2 a:hover, .content3 a:hover, .sidebar-txtbox-noshade a:hover, .sidebar-txtbox-shade a:hover {text-decoration: underline;}
+#langstripe a:visited, .content1 a:visited, .content2 a:visited, .content3 a:visited, .sidebar-txtbox-noshade a:visited, .sidebar-txtbox-shade a:visited  {color: rgb(120,0,150);}
 .footer a {color: rgb(255,255,255); text-decoration: underline;}
 .footer a:hover {color: rgb(0,0,0); text-decoration: none;}
 

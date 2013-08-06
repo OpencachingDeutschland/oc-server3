@@ -11,7 +11,7 @@
 	{/foreach}
 {else}
 	<p>
-		{t}Languages{/t} 
+		{t}Languages{/t}:&nbsp; 
 		{foreach from=$languages item=languageItem}
 			{if $languageItem==$translang}
 				<b>{$languageItem}</b>
@@ -29,30 +29,32 @@
 		</div>
 	{/if}
 
-	{t}Quick translation{/t}<br />
-	<a href="translate.php?translang={$translang}&action=quicknone">{t}Disable{/t}</a><br />
-	<a href="translate.php?translang={$translang}&action=quicknew">{t}Enable - new{/t}</a><br />
-	<a href="translate.php?translang={$translang}&action=quickall">{t}Enable - all{/t}</a><br />
-	<br />
-	<a href="translate.php?translang={$translang}&action=scan">{t}Scan source codes{/t}</a><br />
-	<br />
-	<a href="translate.php?translang={$translang}&action=listnew">{t}Show new translations{/t}</a><br />
-	<a href="translate.php?translang={$translang}&action=clearcache">{t}Clear smarty cache{/t}</a><br />
-	<a href="translate.php?translang={$translang}&action=listfaults">{t}Show translations no longer referenced{/t}</a><br />
-	<a href="translate.php?translang={$translang}&action=listall">{t}Show all translations{/t}</a><br />
-	<a href="translate.php?translang={$translang}&action=resetids">{t}Reorder ID's{/t}</a> {t}(before an export){/t}<br />
-	<a href="translate.php?translang={$translang}&action=export">{t}SQL Export{/t}</a><br />
-	<br />
-	<a href="translate.php?translang={$translang}&action=xmlexport">{t}XML Download{/t}</a><br />
-	<a href="translate.php?translang={$translang}&action=xmlimport">{t}XML Import{/t}</a><br />
-	<br />
-	<a href="translate.php?translang={$translang}&action=textexportnew">{t}Text Download (new){/t} {$translang}</a><br />
-	<a href="translate.php?translang={$translang}&action=textexportall">{t}Text Download (all){/t} {$translang}</a><br />
-	<a href="translate.php?translang={$translang}&action=textimport">{t}Text Import{/t} {$translang}</a><br />
-	{if $translang == 'EN'}
-		<a href="translate.php?translang={$translang}&action=copy_en">{t}Copy EN{/t}</a><br />
-	{/if}
-	<br />
+	<p>
+		{t}Quick translation{/t}<br />
+		<a href="translate.php?translang={$translang}&action=quicknone">{t}Disable{/t}</a><br />
+		<a href="translate.php?translang={$translang}&action=quicknew">{t}Enable - new{/t}</a><br />
+		<a href="translate.php?translang={$translang}&action=quickall">{t}Enable - all{/t}</a><br />
+		<br />
+		<a href="translate.php?translang={$translang}&action=scan">{t}Scan source codes{/t}</a><br />
+		<br />
+		<a href="translate.php?translang={$translang}&action=listnew">{t}Show new translations{/t}</a><br />
+		<a href="translate.php?translang={$translang}&action=clearcache">{t}Clear smarty cache{/t}</a><br />
+		<a href="translate.php?translang={$translang}&action=listfaults">{t}Show translations no longer referenced{/t}</a><br />
+		<a href="translate.php?translang={$translang}&action=listall">{t}Show all translations{/t}</a><br />
+		<a href="translate.php?translang={$translang}&action=resetids">{t}Reorder ID's{/t}</a> {t}(before an export){/t}<br />
+		<a href="translate.php?translang={$translang}&action=export">{t}SQL Export{/t}</a><br />
+		<br />
+		<a href="translate.php?translang={$translang}&action=xmlexport">{t}XML Download{/t}</a><br />
+		<a href="translate.php?translang={$translang}&action=xmlimport">{t}XML Import{/t}</a><br />
+		<br />
+		<a href="translate.php?translang={$translang}&action=textexportnew">{t}Text Download (new){/t} {$translang}</a><br />
+		<a href="translate.php?translang={$translang}&action=textexportall">{t}Text Download (all){/t} {$translang}</a><br />
+		<a href="translate.php?translang={$translang}&action=textimport">{t}Text Import{/t} {$translang}</a><br />
+		{if $translang == 'EN'}
+			<a href="translate.php?translang={$translang}&action=copy_en">{t}Copy EN{/t}</a><br />
+		{/if}
+		<br />
+	</p>
 
 	{if $action=="listnew" || $action=="listfaults" || $action=="listall"}
 		{if $action=="listnew"}
@@ -230,8 +232,8 @@
 		</script>
 	{elseif $action=="scan"}
 		<p>
-			<input type="button" id="scanbutton" value="Scan" onclick="scanFiles()" /><br />
-			{t}Current file:{/t} <span id="currentfile">-</span>
+			<input type="button" id="scanbutton" class="formbutton" value="Scan" onclick="scanFiles()" /><br />
+			<br />{t}Current file:{/t} <span id="currentfile">-</span>
 		</p>
 		{foreach from=$files item=fileItem key=fileKey}
 			<input type="hidden" id="filename{$fileKey}" value="{$fileItem|escape}" />

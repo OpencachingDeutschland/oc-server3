@@ -240,6 +240,8 @@ ul#statmenu { padding: 0px; margin: 0px;}
 .content2 {float: left; width: 790px; min-height: 500px; margin: 0px; padding: 0px 0px 0px 20px; color: rgb(75,75,75); font-size: 1.0em;}
 .content3 {float: left; width: 790px; min-height: 500px; margin: 0px; padding: 0px 0px 0px 20px; color: rgb(75,75,75); font-size: 1.0em;}
 .content2-container, .content3-container {clear: both; float: left; width: 769px; margin: 0px 0px 15px 0px; padding: 0px;}
+.content2-section-no-p { margin-bottom: 20px !important; }
+  /* use if a section does not contain a <p>..</p> to obtain equal spacing to other sections */ 
 .content2-container-1col, .content3-container-1col {overflow: hidden; width: 769px; margin: 0px; padding: 0px;}
 /* removed "overflow:hidden" from content2-container-2col* to fix bug RT #3886 ... */
 .content2-container-2col {width: 272px; margin: 0px; padding: 0px;}
@@ -299,7 +301,7 @@ p.readmore {margin: 1.0em 0px 0.5em 0px; padding: 0px; line-height: 1.2em; font-
 p.quote {margin: 0em 30px 0.6em 30px;	line-height: 120%; font-size: 120%;}
 p.embed {float: left; width: 120px; margin: 7px 7px 5px 0px; padding: 5px 5px 5px 5px; background-color: rgb(238,237,249); font-style: italic; font-weight: bold;  line-height: 1.2em; font-size: 140%;}
 p.embed-caption {float: left; margin: 5px 0px 0px 0px; padding: 0px; font-style: italic; font-weight: normal; line-height: 1.2em; font-size: 70%;}
-div.cachedesc {font-size: 120%;}
+div.cachedesc {font-size: 120%; padding-bottom:6px}
 div.cachedesc p {font-size: 100%;}
 div.welcome p {line-height: 1.6em;}
 p.inheader {margin:4px; font-size:125%;}
@@ -543,7 +545,8 @@ a.nooutline:focus { outline: 0; }
 
 .bg-blue01 {background-color: rgb(238,237,249);}
 .bg-blue02 {background-color: rgb(219,230,241);
-	padding:2px 0px 2px 4px;
+	padding: 2px 0px 2px 4px;
+	margin: 2px 0 17px 0;
 	border-radius: 5px; -webkit-border-radius: 5px; -moz-border-radius: 5px;
 	box-shadow: 1px 1px 2px #676767;
 	-moz-box-shadow: 1px 1px 2px #676767;
@@ -1383,7 +1386,7 @@ div.searchdiv {
 div.searchdiv2 {
 	margin: 12px 22px 12px 4px;
 	padding: 5px;
-	border: solid 1px #cfdfed;
+	border: solid 1px #cadbea;
 	border-radius: 5px;
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;

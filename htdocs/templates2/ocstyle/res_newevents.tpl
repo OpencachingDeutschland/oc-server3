@@ -3,7 +3,7 @@
 *
 *  Unicode Reminder メモ
 ***************************************************************************}
-<ul class="nodot" style="clear:both">  {* 'clear' is needed because the content2-container above is float:left *}
+<ul class="nodot" {if !$opt.msie}style="clear:both"{/if}>  {* 'clear' is needed because the content2-container above is float:left *}
 	{foreach name=events from=$events item=eventitem}
 		<li class="newcache_list_multi" style="margin-bottom: 8px;">
 			<table class="null" cellspacing="0" cellpadding="0"><tr>

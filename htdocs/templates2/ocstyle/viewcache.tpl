@@ -267,7 +267,7 @@
 </div>
 <!-- End Cachedetails -->
 
-<!-- Attribute -->
+<!-- Attributes -->
 {if count($attributes)>0}
 	<div class="content2-container bg-blue02">
 		<p class="content-title-noshade-size2"><img src="resource2/{$opt.template.style}/images/description/22x22-encrypted.png" style="align: left; margin-right: 10px;" width="22" height="22" alt="{t}Cache attributes{/t}" /> {t}Cache attributes{/t}</p>
@@ -278,9 +278,9 @@
 		</p>
 	</div>
 {/if}
-<!-- End Attribute -->
+<!-- End Attributes -->
 
-<!-- Beschreibung -->
+<!-- Description -->
 <div class="content2-container bg-blue02">
 	<p class="content-title-noshade-size2">
 		<img src="resource2/{$opt.template.style}/images/description/22x22-description.png" style="align: left; margin-right: 10px;" width="22" height="22" alt="{t}Description{/t}" /> {t}Description{/t}&nbsp;&nbsp;
@@ -304,15 +304,15 @@
 
 <div class="content2-container cachedesc">
 	<p style="line-height: 1.6em;"></p>  
-		{if $cache.deschtml==0}
-			{$cache.desc|smiley|hyperlink}
-		{else}
-			{$cache.desc|smiley}
-		{/if}
-		
+	{if $cache.deschtml==0}
+		{$cache.desc|smiley|hyperlink}
+	{else}
+		{$cache.desc|smiley}
+	{/if}
 </div>
-<!-- End Beschreibung -->
+<!-- End Description -->
 
+<!-- Personal Note -->
 {if $enableCacheNote}
 	<div class="content2-container bg-blue02">
 		<p class="content-title-noshade-size2">
@@ -327,16 +327,18 @@
 		</form>
 	</div>
 {/if}
+<!-- End Personal Note -->
 
+<!-- Additional Waypoints -->
 {if count($childWaypoints)>0}
-	<div class="content2-container bg-blue02">
+	<div class="content2-container bg-blue02 content2-section-no-p">
 		<p class="content-title-noshade-size2">
 			<img src="resource2/{$opt.template.style}/images/description/20x20-compass.png" style="align: left; margin-right: 10px;" alt="{t}Additional waypoints{/t}" /> 
 			{t}Additional waypoints{/t}
 		</p>
 	</div>
 
-	<div class="content2-container" style="margin-left:10px;">
+	<div class="content2-container content2-section-no-p" style="margin-left:10px;">
 		<table bgcolor="#dddddd" width="95%" cellpadding="5%" style="margin-bottom:4px">
 		{foreach from=$childWaypoints item=childWaypoint}
 			<tr bgcolor="{cycle values="#ffffff,#eeeeee"}">
@@ -350,6 +352,7 @@
 		{t}The additional waypoints are shown on the map when the cache is selected, are included in GPX file downloads and will be sent to the GPS device.{/t}
 	</div>
 {/if}
+<!-- End Addtional Waypoints -->
 
 <!-- Hints -->
 {if $cache.hint!=''}
@@ -375,7 +378,7 @@
 {/if}
 <!-- End Hints -->
 
-<!-- Bilder -->
+<!-- Pictures -->
 {if count($pictures)>0}
 	<div class="content2-container bg-blue02">
 		<p class="content-title-noshade-size2">
@@ -397,7 +400,7 @@
 		{/foreach}
 	</div>
 {/if}
-<!-- End Bilder -->
+<!-- End Pictures -->
 
 <!-- Utilities -->
 <div class="content2-container bg-blue02">

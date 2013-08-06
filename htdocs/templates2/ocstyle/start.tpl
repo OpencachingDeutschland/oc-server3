@@ -64,13 +64,13 @@
 
 {* next events *}
 {elseif $section == 'events'}
-<div class="content2-container bg-blue02">
+<div class="content2-container bg-blue02 content2-section-no-p">
 	<p class="content-title-noshade-size3">
 		<img src="resource2/{$opt.template.style}/images/cacheicon/event.gif" style="align: left; margin-right: 10px;" width="24" height="24" alt="" />
 		{t 1=$usercountry|escape}The next events in %1{/t}
 	</p>
 </div>
-<div style="padding:2px 0 6px 0">
+<div class="content2-section-no-p">
 	{include file="res_newevents.tpl" events=$events}
 </div>
 
@@ -147,7 +147,9 @@
 	</p>
 </div>
 <p style="line-height: 1.6em;">({t 1=$count_hiddens 2=$count_founds 3=$count_users}Total of %1 active Caches and %2 founds by %3 users{/t})</p>
-{include file="res_newcaches.tpl" newcaches=$newcaches}
+<div class="content2-section-no-p">
+	{include file="res_newcaches.tpl" newcaches=$newcaches}
+</div>
 
 {/if}
 {/foreach}

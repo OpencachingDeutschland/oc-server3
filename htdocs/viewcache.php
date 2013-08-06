@@ -285,14 +285,18 @@ function getChildWaypoints($cacheid)
 	$tpl->assign('geokret_count', sql_num_rows($rsGeoKret));
 	sql_free_result($rsGeoKret);
 
-	if(isset($_REQUEST['print']) && $_REQUEST['print'] == 'y')
+	if (isset($_REQUEST['print']) && $_REQUEST['print'] == 'y')
 	{
 		$tpl->popup = 1;
 		$tpl->assign('print', true);
 		$tpl->name = 'viewcache_print';
 		$tpl->assign('log', $_REQUEST['log']);
 	}
-	
+	else
+	{
+		$tpl->assign('print', false);
+	}
+
 	/* logpics
 	 */
 	$tpl->assign('show_logpics', $logpics ? 1 : 0);

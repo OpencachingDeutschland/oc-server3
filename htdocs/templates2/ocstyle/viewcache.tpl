@@ -338,18 +338,20 @@
 		</p>
 	</div>
 
-	<div class="content2-container content2-section-no-p" style="margin-left:10px;">
-		<table bgcolor="#dddddd" width="95%" cellpadding="5%" style="margin-bottom:4px">
+	<div class="content2-container content2-section-no-p" style="margin:4px 0 0 10px" >
+		<table class="waypointtable" cellpadding="5%" cellspacing="1">
 		{foreach from=$childWaypoints item=childWaypoint}
-			<tr bgcolor="{cycle values="#ffffff,#eeeeee"}">
+			<tr bgcolor="{cycle values="#ffffff,#f4f4f4"}">
 				<td width="25%"><table cellspacing="0" cellpadding="0"><tr><td><img src="{$childWaypoint.image}" /></td><td>{$childWaypoint.name|escape}</td></tr></table></td>
-				<td width="18%">{$childWaypoint.coordinateHtml}</td>
-				<td>{$childWaypoint.description|escape|replace:"\r\n":"<br />"}</td>
+				<td class="wpt_text" width="18%">{$childWaypoint.coordinateHtml}</td>
+				<td class="wpt_text" >{$childWaypoint.description|escape|replace:"\r\n":"<br />"}</td>
 			</tr>
 		{/foreach}
 		</table>
-		<img src="resource2/{$opt.template.style}/images/viewcache/16x16-info.png" class="icon16" alt="Info" />
+		<div style="padding-top:4px">
+			<img src="resource2/{$opt.template.style}/images/viewcache/16x16-info.png" class="icon16" alt="Info" />
 		{t}The additional waypoints are shown on the map when the cache is selected, are included in GPX file downloads and will be sent to the GPS device.{/t}
+		</div>
 	</div>
 {/if}
 <!-- End Addtional Waypoints -->
@@ -387,7 +389,7 @@
 		</p>
 	</div>
 
-	<div class="content2-container">
+	<div class="content2-container content2-section-no-p">
 		{foreach from=$pictures item=pictureItem}
 			<div class="viewcache-pictureblock">
 				<div class="img-shadow">
@@ -412,7 +414,7 @@
 
 <div class="content2-container">
 	{if count($npaareasWarning) > 0}
-		<div style="border: solid 1px red;padding:10px;">
+		<div style="border: solid 1px red; padding:10px 10px 0px 10px; margin: 3px 0 8px 0">
 			<p style="line-height: 1.6em;">
 				<img src="resource2/{$opt.template.style}/images/viewcache/npa.gif" align="left" style="margin-right: 25px;" width="32" height="32" alt="NSG/NPA" />
 				{t 1=$opt.cms.npa}This geocache is probably placed within a nature protection area! See <a href="%1">here</a> for further informations, please.{/t}<br />
@@ -426,7 +428,7 @@
 
 	{if count($npaareasNoWarning) > 0}
 		<p style="line-height: 1.6em;">
-			{t 1=$opt.cms.npa}This geocache is probably placed within the following nature protection areas (<a href="%1">Info</a>):{/t}
+			{t 1=$opt.cms.npa}This geocache is probably placed within the following protection areas (<a href="%1">Info</a>):{/t}
 			{foreach from=$npaareasNoWarning item=npaItem name=npaareas}
 				{$npaItem.npaTypeName|escape} 
 				{$npaItem.npaName|escape} (<a href="http://www.google.de/search?q={$npaItem.npaTypeName|urlencode}+{$npaItem.npaName|urlencode}" target="_blank">{t}Info{/t}</a>){if !$smarty.foreach.npaareas.last},{/if}

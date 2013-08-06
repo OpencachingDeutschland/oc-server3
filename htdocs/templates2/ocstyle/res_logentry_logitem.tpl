@@ -6,7 +6,7 @@
 <div id="log{$logItem.id}">
 <div class="content-txtbox-noshade">  {* Ocprop: <div class="content-txtbox-noshade">(.*?)<\/div> *}
 	<div class="logs">
-	<p class="content-title-noshade-size1" style="display:inline; margin-right:0">
+	<p class="content-title-noshade-size1 {if $print}printlogheader{/if}" style="display:inline; margin-right:0">
 		{if $logItem.oc_team_comment}<img src="resource2/{$opt.template.style}/images/oclogo/oc-team-comment.png" alt="OC-Team" title="{t}OC team comment{/t}" />{/if}
 		{include file="res_logtype.tpl" type=$logItem.type} 
 		{if $logItem.recommended==1}  {* Ocprop: rating-star\.gif *}
@@ -48,7 +48,7 @@
 	</p>
 
 	{* Ocprop: /\?logid=([0-9a-f\-]+)" *}
-	{if $logItem.deleted !== "1" && ($cache.userid==$login.userid || $logItem.userid==$login.userid)}
+	{if $logItem.deleted !== "1" && !$print && ($cache.userid==$login.userid || $logItem.userid==$login.userid)}
 		<p class="editlog"><img src="images/trans.gif" border="0" width="16" height="16" alt="" title="" />
 			{if $logItem.userid==$login.userid && ($cache.userid==$login.userid || $cache.status!=6 || $cache.adminlog)}
 				<a href="editlog.php?logid={$logItem.id|urlencode}"><img src="resource2/{$opt.template.style}/images/action/16x16-properties.png" border="0" align="middle" border="0" width="16" height="16" alt="" /></a>

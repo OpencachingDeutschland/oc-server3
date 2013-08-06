@@ -6,11 +6,7 @@
 {* OCSTYLE *}
 <table class="table">
 	<tr>
-		{if $print==y}
 		<td class="header-print">
-		{else}
-		<td class="header">
-		{/if}
 
 			<table class="null" border="0">
 				<tr>
@@ -33,25 +29,22 @@
 					<td align="right" valign="top" width="20">
 						{include file="res_cacheicon.tpl" cachetype=$cache.type status=$cache.status}
 					</td>
-					<td align="left" valign="top" width="397">
+					<td align="left" valign="top" width="99%">
 						<font size="3"><b>{$cache.name|escape}</b></font><br />
 						<span style="font-weight:400">&nbsp;{t}by{/t} <a>{$cache.username|escape}</a></span><br />
 						{if $cache.shortdesc!=''}
 							{$cache.shortdesc|escape}<br />
 						{/if}
-		
-						{if $cache.type==6}
-							<a href="#" onclick="window.open('event_attendance.php?id={$cache.cacheid}&popup=y','{t escape=js}List of participants{/t}','width=320,height=440,resizable=no,scrollbars=1')">{t}List of participants{/t}</a>
-						{/if}
 					</td>
-					<td valign="top" nowrap="1" width="140" style="text-align:right">
+					<td valign="top" nowrap="1" width="1%" style="text-align:right"><nobr>
 						{t}Difficulty{/t}:
 						<img src="./resource2/{$opt.template.style}/images/difficulty/diff-{$cache.difficulty*5}.gif" border="0" width="19" height="16" hspace="2" /><br />
 						{t}Terrain{/t}:
 						<img src="./resource2/{$opt.template.style}/images/difficulty/terr-{$cache.terrain*5}.gif" border="0" width="19" height="16" hspace="2" />
+						</nobr>
 					</td>
 				</tr>
-
+				<tr><td class="spacer"></td></tr>
 			</table>
 		</td>
 	</tr>
@@ -67,46 +60,43 @@
 	{/if}
 
 	<tr>
-		{if $print==y}
 		<td class="inner-print">
-		{else}
-		<td>
-		{/if}
 
 			<table border="0" cellpadding="0" cellspacing="0" width="100%">
 				<tr>
-					<td valign="top">
+					<td valign="top" style="padding-left:0">
 						<img src="resource2/{$opt.template.style}/images/description/22x22-location.png"  width="22" height="22" border="0" alt="" title="" align="left" />&nbsp;
 						<font size="3"><b><nobr>{$coordinates.lat|escape}</nobr> <nobr>{$coordinates.lon|escape}</nobr></b></font> <font size="1">(WGS84)</font><br />
-						<font size="1"><a href="#" onclick="window.open('coordinates.php?lat={$cache.latitude}&lon={$cache.longitude}&popup=y&wp={$cache.wpoc}','{t escape=js}Coordinates{/t}','width=280,height=394,resizable=no,scrollbars=0')">{t}Convert coordinates{/t}</a></font><br />
-						{t}Size{/t}: {$cache.sizeName|escape}<br />
+						<font size="1"><br /></font>
+						<table class="print-cachemeta" cellspacing="0" cellpadding="0">
+							<tr><td>{t}Size{/t}:</td><td>{$cache.sizeName|escape}<br /></td></tr>
 						{if $cache.searchtime>0}
-							<nobr>{t}Time required{/t}: {$cache.searchtime|format_hour} h</nobr>
+							<tr><td><nobr>{t}Time required{/t}:</td><td>{$cache.searchtime|format_hour}
+								h{if $cache.waylength>0}, &nbsp;{t}Distance{/t}: {$cache.waylength} km{/if}
+							</nobr></td>
+						{elseif $cache.waylength>0}
+							<tr><td><nobr>{t}Distance{/t}:</td><td>{$cache.waylength} km</nobr></td></tr>
 						{/if}
-						{if $cache.waylength>0}
-							<nobr>{t}Distance{/t}: {$cache.waylength} km</nobr>
-						{/if}
-						{if $cache.searchtime>0 || $cache.waylength>0}<br />{/if}
 						{if $cache.status!=1}
-							{t}State{/t}: <span class="errormsg">{$cache.statusName|escape}</span>
+							<tr><td>{t}State{/t}:</td><td><span class="errormsg">{$cache.statusName|escape}</span></td></tr>
 						{else}
-							{t}State{/t}: {$cache.statusName|escape}
+							<tr><td>{t}State{/t}:</td><td>{$cache.statusName|escape}</td></tr>
 						{/if}
-						<br />
-						{t}Hidden at{/t}: {$cache.datehidden|date_format:$opt.format.datelong}<br />
-						{if $cache.is_publishdate==0}{t}Listed since{/t}{else}{t}Published on{/t}{/if}: {$cache.datecreated|date_format:$opt.format.datelong}<br />
-						{t}Last update{/t}: {$cache.lastmodified|date_format:$opt.format.datelong}<br />
+						<tr><td>{t}Hidden at{/t}:</td><td>{$cache.datehidden|date_format:$opt.format.datelong}</td></tr>
+						<tr><td>{if $cache.is_publishdate==0}{t}Listed since{/t}{else}{t}Published on{/t}{/if}:</td><td>{$cache.datecreated|date_format:$opt.format.datelong}</td></tr>
+						<tr><td>{t}Last update{/t}:</td><td>{$cache.lastmodified|date_format:$opt.format.datelong}</td></tr>
 						
 						{if $cache.wpgc!='' || $cache.wpnc!=''}
-							{t}Also listed at{/t}:
-							{if $cache.wpgc!=''}
-								<a href="http://www.geocaching.com/seek/cache_details.aspx?wp={$cache.wpgc}" target="_blank">geocaching.com</a>
-							{/if}
-							{if $cache.wpnc!=''}
-								<a href="http://www.navicache.com/cgi-bin/db/displaycache2.pl?CacheID={nccacheid wp=$cache.wpnc}" target="_blank">navicache.com</a>
-							{/if}
-							<br />
+							<tr>
+							<td>{t}Also listed as{/t}:</td>
+							<td>
+								{if $cache.wpgc!=''}{$cache.wpgc}{if $cache.wpnc!=''}, {/if}{/if}
+								{if $cache.wpnc!=''}{$cache.wpnc}{/if}
+							</td>
 						{/if}
+
+						<tr><td class="spacer-print"></td></td>
+						</table>
 					</td>
 					<td valign="top">
 						{if $cache.code1=="" or $cache.code1 != $cache.countryCode}
@@ -122,9 +112,7 @@
 							{/if}
 						{/if}
 
-						<!-- <a href="http://www.mapquest.com/maps/map.adp?latlongtype=decimal&latitude={$cache.latitude}&longitude={$cache.longitude}" target="_blank">Mapquest</a><br />    -->
-						<!-- <a href="http://maps.geocaching.de/gm/oc.php?lat={$cache.latitude}&lon={$cache.longitude}&zoom=14" target="_blank">{t}Geocaching.de{/t}</a><br />                -->
-						<!-- <a href="http://maps.google.com/maps?q={$cache.latitude}+{$cache.longitude}" target="_blank">{t}Google Maps{/t}</a><br />                                        -->
+						<div style="height:2px"></div>
 
 						<img src="resource2/{$opt.template.style}/images/log/16x16-found.png" width="16" height="16" border="0" /> {$cache.found} {if $cache.type==6}{t}Attended{/t}{else}{t}Found{/t}{/if}<br />
 						<nobr><img src="resource2/{$opt.template.style}/images/log/16x16-dnf.png" width="16" height="16" border="0" />{if $cache.type==6} {$cache.willattend} {t}Will attend{/t}{else} {$cache.notfound} {t}Not found{/t}{/if}</nobr><br />
@@ -154,19 +142,9 @@
 	{* Attributes *}
   {if count($attributes)>0}
 	  <tr>
-		{if $print==y}
-		<td class="header-small-print">
-		{else}
-		<td class="header-small">
-		{/if}
-			<img src="resource2/{$opt.template.style}/images/description/22x22-encrypted.png" width="22" height="22" style="vertical-align:middle" border="0" />
-			<b>{t}Cache attributes{/t}</b><br />
-		 </td>
-	  </tr>
-	  <tr>
 		  <td valign="top">
 				{foreach from=$attributes item=attributGroup}
-					<table cellspacing="0" style="display:inline;border-spacing:0px;">
+					<table cellspacing="0" style="display:inline-block;border-spacing:0px">
 						<tr>
 							<td bgcolor="{$attributGroup.color|escape}" style="line-height:9px;padding-top:2px;margin:0 0 0 0;border-left:1px solid gray;border-right:1px solid gray;border-top:1px solid gray;">
 								<font size="1">{$attributGroup.name|escape}</font>
@@ -183,44 +161,37 @@
 				{/foreach}
 		  </td>
 	  </tr>
-	  <tr><td class="spacer"><br /></td></tr>
+	  <tr><td class="spacer-print"><br /></td></tr>
 	{/if}
 
 	{* Description *}
 	<tr>
-		{if $print==y}
 		<td class="header-small-print">
-		{else}
-		<td class="header-small">
-		{/if}
-			<img src="resource2/{$opt.template.style}/images/description/22x22-description.png" width="22" height="22" style="vertical-align:middle" border="0" />
-			<b>{t}Description{/t}</b>&nbsp;&nbsp;
-			<span style="font-weight: 400;">
-				{foreach from=$cache.desclanguages item=desclanguagesItem name=desclanguagesItem}
-					{strip}
-						{if $smarty.foreach.desclanguagesItem.first==false},&nbsp;{/if}
-						<img src="images/flags/{$desclanguagesItem|lower}.gif" style="vertical-align:middle" />&nbsp;
-						<a href="viewcache.php?wp={$cache.wpoc}&desclang={$desclanguagesItem|escape}">
-							{if $cache.desclanguage==$desclanguagesItem}
-								<i>{$desclanguagesItem|escape}</i>
-							{else}
-								{$desclanguagesItem|escape}
-							{/if}
-						</a>
-					{/strip}
-				{foreachelse}
-					<b>{$cache.desclanguage|escape}</b>
-				{/foreach}
-			</span>
-			&nbsp;
+			<!-- <img src="resource2/{$opt.template.style}/images/description/22x22-description.png" width="22" height="22" style="vertical-align:middle" border="0" /> -->
+			{t}Description{/t}&nbsp;&nbsp;
+			{if $cache.desclanguages|@count > 1}
+				<span style="font-weight: 400;">
+					{foreach from=$cache.desclanguages item=desclanguagesItem name=desclanguagesItem}
+						{strip}
+							{if $smarty.foreach.desclanguagesItem.first==false},&nbsp;{/if}
+							<img src="images/flags/{$desclanguagesItem|lower}.gif" style="vertical-align:middle" />&nbsp;
+							<a href="viewcache.php?wp={$cache.wpoc}&desclang={$desclanguagesItem|escape}">
+								{if $cache.desclanguage==$desclanguagesItem}
+									<i>{$desclanguagesItem|escape}</i>
+								{else}
+									{$desclanguagesItem|escape}
+								{/if}
+							</a>
+						{/strip}
+					{foreachelse}
+						<b>{$cache.desclanguage|escape}</b>
+					{/foreach}
+				</span>
+			{/if}
 		</td>
 	</tr>
 	<tr>
-		{if $print==y}
 		<td class="inner-print">
-		{else}
-		<td>
-		{/if}
 			<p>
 				{if $cache.deschtml==0}
 					{$cache.desc|smiley|hyperlink}
@@ -233,59 +204,35 @@
 
 	{* personal note *}
 	{if $enableCacheNote && ($note != "" || $inclCoord)}
-		{if $print==y}
-			<tr><td class="spacer-print"><br /></td></tr>
-		{else}
-			<tr><td class="spacer"><br /></td></tr>
-		{/if}
-
 		<tr>
-			{if $print==y}
-				<td class="header-small-print">
-			{else}
-				<td class="header-small">
-			{/if}
-				<img src="resource2/{$opt.template.style}/images/description/22x22-description.png" width="20" height="20" style="vertical-align:middle" border="0" />
-				<b>{t}Personal cache note{/t}</b> &nbsp;&nbsp;
-				&nbsp;
+			<td class="header-small-print">
+				<br />
+				<!-- <img src="resource2/{$opt.template.style}/images/description/22x22-description.png" width="20" height="20" style="vertical-align:middle" border="0" /> -->
+				{t}Personal cache note{/t}
 			</td>
 		</tr>
 		{if $inclCoord}
 			<tr><td>{$lat_hem} {$lat_deg}° {$lat_min}' &nbsp; {$lon_hem} {$lon_deg}° {$lon_min}'</td></tr>
 		{/if}
-		<tr><td>{$note|escape}</td></tr>
+		<tr><td><font size="2">{$note|escape|nl2br}</font></td></tr>
 	{/if}
 
 	{* Additional waypoints *}
 	{if count($childWaypoints)>0}
-		{if $print==y}
-			<tr><td class="spacer-print"><br /></td></tr>
-		{else}
-			<tr><td class="spacer"><br /></td></tr>
-		{/if}
-
 		<tr>
-			{if $print==y}
-				<td class="header-small-print">
-			{else}
-				<td class="header-small">
-			{/if}
-				<img src="resource2/{$opt.template.style}/images/description/20x20-compass.png" width="20" height="20" style="vertical-align:middle" border="0" />
-				<b>{t}Additional waypoints{/t}</b> &nbsp;&nbsp;
-				&nbsp;
+			<td class="header-small-print">
+				<br />
+				<!-- <img src="resource2/{$opt.template.style}/images/description/20x20-compass.png" width="20" height="20" style="vertical-align:middle" border="0" /> -->
+				{t}Additional waypoints{/t}
 			</td>
 		</tr>
 
 		<tr>
-			{if $print==y}
 			<td class="inner-print">
-			{else}
-			<td>
-			{/if}
-				<table class="table printwptable" width="95%">
+				<table class="table printwptable">
 				{foreach from=$childWaypoints item=childWaypoint}
 					<tr>
-						<td width="1%">
+						<td class="framed" width="1%">
 							<table class="table">
 								<tr>
 									<td style="margin:0; padding:0"><img src="{$childWaypoint.image}" /></td>
@@ -293,9 +240,10 @@
 								</tr>
 							</table>
 						</td>
-						<td width="1%" style="white-space:norwap"><nobr>{$childWaypoint.coordinateHtml}</nobr></td>
-						<td width="1%"></td>
-						<td>{$childWaypoint.description|escape|replace:"\r\n":"<br />"}</td>
+						<td class="framed" width="1%" style="white-space:norwap"><nobr>{$childWaypoint.coordinateHtml}</nobr></td>
+						<td class="framed" width="1%"></td>
+						<td class="framed" >{$childWaypoint.description|escape|replace:"\r\n":"<br />"}</td>
+						<td></td>
 					</tr>
 				{/foreach}
 				</table>
@@ -305,20 +253,11 @@
 
 	{* Hint *}
 	{if $cache.hint!=''}
-		{if $print==y}
-			<tr><td class="spacer-print"><br /></td></tr>
-		{else}
-			<tr><td class="spacer"><br /></td></tr>
-		{/if}
-
 		<tr>
-			{if $print==y}
 			<td class="header-small-print">
-			{else}
-			<td class="header-small">
-			{/if}
-				<img src="resource2/{$opt.template.style}/images/description/22x22-encrypted.png" width="22" height="22" style="vertical-align:middle" border="0" />
-				<b>{t}Additional hint{/t}</b>&nbsp;&nbsp;
+				<br />
+				<!-- <img src="resource2/{$opt.template.style}/images/description/22x22-encrypted.png" width="22" height="22" style="vertical-align:middle" border="0" /> -->
+				{t}Additional hint{/t}&nbsp;&nbsp;
 				<img src="resource2/{$opt.template.style}/images/action/16x16-encrypt.png" width="16" height="16" style="vertical-align:middle" border="0" />
 				{if $crypt==true}
 					{if $log=="5"}
@@ -333,35 +272,11 @@
 						[<a href="viewcache.php?cacheid={$cache.cacheid}&log=A&print=y&nocrypt=1&desclang={$cache.desclanguage|urlencode}">{t}Decrypt{/t}</a>]
 						</span>
 					{/if}
-
-				{else}
-				<!-- 	20100702 Uwe Neumann
-					Taken out to inline the function with the view.
-
-                                        {if $log=="5"}
-						<span style="font-weight:400">[<a href="viewcache.php?cacheid={$cache.cacheid}&log=5&print=y&nocrypt=0&desclang={$cache.desclanguage|urlencode}">{t}Decrypt{/t}</a>]
-						</span>
-					{elseif $log =="N"} 
-						<span style="font-weight:400">
-						[<a href="viewcache.php?cacheid={$cache.cacheid}&log=N&print=y&nocrypt=0&desclang={$cache.desclanguage|urlencode}">{t}Decrypt{/t}</a>]
-						</span>
-					{else}
-						<span style="font-weight:400">
-						[<a href="viewcache.php?cacheid={$cache.cacheid}&log=A&print=y&nocrypt=0&desclang={$cache.desclanguage|urlencode}">{t}Decrypt{/t}</a>]
-						</span>
-					{/if}
-                                -->
 				{/if}
-
-				<br />
 			</td>
 		</tr>
 		<tr>
-			{if $print==y}
 			<td class="inner-print">
-			{else}
-			<td>
-			{/if}
 				{if $crypt==true}
 					<table width="100%" cellspacing="0" border="0" cellpadding="0">
 						<tr>
@@ -379,7 +294,7 @@
 									</tr>
 									<tr>
 										<td>
-											<font face="Courier" style="font-family : 'Courier New', FreeMono, Monospace;">N|O|P|Q|R|S|T|U|V|W|X|Y|Z</font><br /><br />
+											<font face="Courier" style="font-family : 'Courier New', FreeMono, Monospace;">N|O|P|Q|R|S|T|U|V|W|X|Y|Z</font>
 										</td>
 									</tr>
 								</table>
@@ -396,56 +311,33 @@
 	{* Pictures *}
 	{if count($pictures)>0}
 		<tr>
-			{if $print==y}
-				<td class="header-small-print">
-			{else}
-				<td class="header-small">
-			{/if}
-				<img src="resource2/{$opt.template.style}/images/description/22x22-image.png" width="22" height="22" style="vertical-align:middle" border="0" />
-				<b>{t}Pictures{/t}</b> &nbsp;&nbsp;
-				&nbsp;
+			<td class="header-small-print">
+				<br />
+				<!-- <img src="resource2/{$opt.template.style}/images/description/22x22-image.png" width="22" height="22" style="vertical-align:middle" border="0" /> -->
+				{t}Pictures{/t}
 			</td>
 		</tr>
 		<tr>
-			{if $print==y}
-				<td class="header-small-print">
-			{else}
-				<td class="header-small">
-			{/if}
-
-			{foreach from=$pictures item=pictureItem}
-				<a href="{$pictureItem.url|escape}" target="_blank"><img src="thumbs.php?uuid={$pictureItem.uuid|urlencode}" alt="{$pictureItem.title|escape}" title="{$pictureItem.title|escape}" border="0" align="bottom" /></a>
-			{/foreach}
+			<td class="header-small-print">
+				{foreach from=$pictures item=pictureItem}
+					<a href="{$pictureItem.url|escape}" target="_blank"><img src="thumbs.php?uuid={$pictureItem.uuid|urlencode}" alt="{$pictureItem.title|escape}" title="{$pictureItem.title|escape}" border="0" align="bottom" /></a>
+				{/foreach}
 			</td>
 		</tr>
-	
-		{if $print==y}
-			<tr><td class="spacer-print"><br /></td></tr>
-		{else}
-			<tr><td class="spacer"><br /></td></tr>
-		{/if}
 	{/if}
 
 	{* Nature protection areas *}
 	{if count($npaareasWarning) + count($npaareasNoWarning) > 0}
 		<tr>
-			{if $print==y}
 			<td class="header-small-print" valign="middle">
-			{else}
-			<td class="header-small" valign="middle">
-			{/if}
-				<img src="resource2/{$opt.template.style}/images/description/22x22-utility.png" width="22" height="22" style="vertical-align:middle" border="0" title="" />
-				<b>{t}Nature protection{/t}</b>
+				<br />
+				<!-- <img src="resource2/{$opt.template.style}/images/description/22x22-utility.png" width="22" height="22" style="vertical-align:middle" border="0" title="" /> -->
+				{t}Nature protection{/t}
 			</td>
 		</tr>
 	{/if}
 
 	{if count($npaareasWarning) > 0}
-		{if $print==y}
-			<tr><td class="spacer-print"><br /></td></tr>
-		{else}
-			<tr><td class="spacer"><br /></td></tr>
-		{/if}
 		<tr>
 			<td>
 				<p align="center">
@@ -456,10 +348,10 @@
 							</td>
 							<td style="text-align:left; vertical-align:top">
 								{t 1=$opt.cms.npa}This geocache is probably placed within a nature protection area! See <a href="%1">here</a> for further informations, please.{/t}<br />
-								<font size="1">
+								<font size="2">
 									{foreach from=$npaareasWarning item=npaItem name=npaareas}
 										{$npaItem.npaTypeName|escape} 
-										{$npaItem.npaName|escape} <font size="1">(<a href="http://www.google.de/search?q={$npaItem.npaTypeName|urlencode}+{$npaItem.npaName|urlencode}" target="_blank">{t}Info{/t}</a>)</font>{if !$smarty.foreach.npaareas.last},{/if}
+										{$npaItem.npaName|escape}{if !$smarty.foreach.npaareas.last},{/if}
 									{/foreach}
 								</font>
 							</td>
@@ -472,11 +364,11 @@
 	{if count($npaareasNoWarning) > 0}
 		<tr>
 			<td>
-				<font size="1">
-					{t 1=$opt.cms.npa}This geocache is probably placed within the following nature protection areas (<a href="%1">Info</a>):{/t}
+				<font size="2">
+					{t 1=$opt.cms.npa}This geocache is probably placed within the following protection areas:{/t}
 					{foreach from=$npaareasNoWarning item=npaItem name=npaareas}
 						{$npaItem.npaTypeName|escape} 
-						{$npaItem.npaName|escape} <font size="1">(<a href="http://www.google.de/search?q={$npaItem.npaTypeName|urlencode}+{$npaItem.npaName|urlencode}" target="_blank">{t}Info{/t}</a>)</font>{if !$smarty.foreach.npaareas.last},{/if}
+						{$npaItem.npaName|escape}{if !$smarty.foreach.npaareas.last},{/if}
 					{/foreach}
 				</font>
 			</td>
@@ -486,20 +378,13 @@
 	{* Geokrets *}
 	{if $geokret_count!=0}
 		<tr>
-			{if $print==y}
 			<td class="header-small-print" valign="middle">
-			{else}
-			<td class="header-small" valign="middle">
-			{/if}
-				<img src="resource2/{$opt.template.style}/images/description/22x22-geokret.gif" width="22" height="22" style="vertical-align:middle" border="0" title="" />
+				<br />
+				<!-- <img src="resource2/{$opt.template.style}/images/description/22x22-geokret.gif" width="22" height="22" style="vertical-align:middle" border="0" title="" /> -->
 				{t}Geokrets{/t}
 			</td>
 		</tr>
-		{if $print==y}
-			<tr><td class="spacer-print"><br /></td></tr>
-		{else}
-			<tr><td class="spacer"><br /></td></tr>
-		{/if}
+		<tr><td class="spacer-print"><br /></td></tr>
 		<tr>
 			<td>
 			  {foreach from=$geokret item=geokretItem name=geokret}
@@ -511,32 +396,10 @@
 	{/if}
 
 	{* Logs *}
-	{if $print==y}
-		<tr><td class="spacer-print"><br /></td></tr>
-	{else}
-		<tr><td class="spacer"><br /></td></tr>
-	{/if}
+	<tr><td class="spacer-print"><br /></td></tr>
 	<tr>
-			{if $print==y}
-			<td class="inner-print">
-			{else}
-			<td>
-			{/if}
+		<td class="inner-print">
 			{include file="res_logentry.tpl" header=true footer=true footbacklink=false logs=$logs cache=$cache}
 		</td>
 	</tr>
-	{if $print!=y}
-		{if $showalllogs}
-			<tr>
-				{if $print==y}
-				<td class="header-small-print">
-				{else}
-				<td class="header-small">
-				{/if}
-					<a href="viewlogs.php?cacheid={$cache.cacheid}"><img src="resource2/{$opt.template.style}/images/action/16x16-showall.png" width="16" height="16" align="middle" border="0" align="left" /></a>
-					[<a href="viewlogs.php?cacheid={$cache.cacheid}">{t}Show all logentries{/t}</a>]
-				</td>
-			</tr>
-		{/if}
-	{/if}
 </table>

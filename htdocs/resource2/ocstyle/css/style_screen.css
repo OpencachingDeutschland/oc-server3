@@ -307,6 +307,7 @@ div.welcome p {line-height: 1.6em;}
 p.inheader {margin:4px; font-size:125%;}
 p.spacer_before {margin-top:12px;}
 p.startmessage { line-height: 1.4em; }
+p.printlogheader { font-size:120%; }
 
 /* Quote */
 p.quote {clear: left; margin: 0em 30px 0.6em 30px;	line-height: 120%; font-size: 110%;}
@@ -350,6 +351,15 @@ ol.col4 { column-count:4; -moz-column-count:4; -webkit-column-count:4; line-heig
 .stattable th.h1 { background-color: #fff; }
 span.percent { font-size: 11px; }
 
+.waypointtable { width: 96%; margin-bottom:4px; background-color: #d0d0d0; }
+.waypointtable td { font-size: 11px; }
+.waypointtable td.wpt_text { padding: 6px 6px 6px 8px; }
+
+.printwptable td { line-height:1.4em; font-size:125%;}
+.printwptable td.framed { border-bottom:1px solid #aaa; border-top:1px solid #aaa; }  
+.print-cachemeta td { font-size:100%; line-height:1em }
+td.header-small-print { font-size: 140%; font-weight:bold; padding-top:0; }
+
 td.listicon {
 	width:1%;
 	margin-right:0 !important;
@@ -358,8 +368,6 @@ td.listicon {
 }
 
 .table-like-font { font-size:120%; }
-
-.printwptable td { line-height:1.4em; font-size:12px; }
 
 td.listcolor1 { background:#fff; line-height:1.7em; }
 td.listcolor2 { background:#f0f0f0; line-height:1.7em; }

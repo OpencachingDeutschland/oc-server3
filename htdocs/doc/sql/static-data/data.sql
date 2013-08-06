@@ -2222,7 +2222,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1762', 'Subscri
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1763', 'Your browser has rejected our cookie.<br /> You can find more informations about this topic in the <a href=\"%1\">Opencaching.de-help</a>.', '2011-05-20 23:48:15');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1764', 'Personal cache note', '2011-05-20 23:48:29');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1765', 'This geocache is probably placed within a nature protection area! See <a href=\"%1\">here</a> for further informations, please.', '2011-05-20 23:48:29');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1766', 'This geocache is probably placed within the following nature protection areas (<a href=\"%1\">Info</a>):', '2011-05-20 23:48:29');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1766', 'This geocache is probably placed within the following protection areas (<a href=\"%1\">Info</a>):', '2011-05-20 23:48:29');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1767', 'Quick translation', '2011-07-10 18:02:33');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1768', 'Disable', '2011-07-10 18:02:33');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1769', 'Enable - new', '2011-07-10 18:02:33');
@@ -2571,6 +2571,8 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2146', 'Statist
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2147', 'Overall terrain and difficulty distribution of active OConly caches:', '2010-09-07 20:19:07');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2148', '... by cache type', '2010-09-07 20:19:07');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2149', '... by region', '2010-09-07 20:19:07');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2150', 'This geocache is probably placed within the following protection areas:', '2011-05-20 23:48:29');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2151', 'Also listed as', '2011-05-20 23:48:29');
 
 -- Table sys_trans_ref
 SET NAMES 'utf8';
@@ -6598,6 +6600,8 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2147', 'DE', 'Gelände- und Schwierigkeitsverteilung aller OConly-Caches:', '2010-09-07 20:19:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2148', 'DE', '... nach Cachetyp', '2010-09-07 20:19:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2149', 'DE', '... nach Region', '2010-09-07 20:19:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2150', 'DE', 'Dieser Geocache liegt vermutlich in den folgenden Schutzgebieten:', '2011-05-23 22:18:40');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2151', 'DE', 'Auch gelistet als', '2011-05-23 22:18:40');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'EN', 'Reorder IDs', '2010-09-02 00:15:30');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'EN', 'The database could not be reconnected.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'EN', 'Testing – please do not login', '2010-08-28 11:48:07');
@@ -7916,8 +7920,8 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1762', 'EN', 'Subscribe to feeds from opencaching', '2012-08-24 17:35:49');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1763', 'EN', 'Your browser has rejected our cookie.<br /> For more information on this topic, see <a href=\"%1\">Opencaching.de-help</a>.', '2011-05-23 22:25:18');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1764', 'EN', 'Personal cache note', '2012-08-24 17:35:49');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1765', 'EN', 'This geocache is probably placed within a nature protection area! Please see <a href=\"%1\" target=\"_blank\">here</a> for further information.', '2012-08-24 17:35:49');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1766', 'EN', 'This geocache is probably placed within the following nature reserves (<a href=\"%1\" target=\"_blank\">Info</a>):', '2011-05-23 22:19:23');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1765', 'EN', 'This geocache is probably placed within a nature reserve! Please see <a href=\"%1\" target=\"_blank\">here</a> for further information.', '2012-08-24 17:35:49');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1766', 'EN', 'This geocache is probably placed within the following protection areas (<a href=\"%1\" target=\"_blank\">Info</a>):', '2011-05-23 22:19:23');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1767', 'EN', 'Quick translation', '2012-08-24 17:35:49');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1768', 'EN', 'Disable', '2012-08-24 17:35:49');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1769', 'EN', 'Enable - new', '2012-08-24 17:35:49');
@@ -8253,6 +8257,8 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2132', 'EN', 'You may offer this geocache to more than one user. The first user committing the adoption will become the new owner of this cache. With the adoption, you will grant to the committing user an unlimited right to use, modifiy, publish and sublicense content of this geocache.', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2133', 'EN', 'Copy EN', '2013-07-22 15:50:48');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2134', 'EN', 'I know what I am doing, do not show this advice again today.', '2013-07-22 15:50:48');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2150', 'EN', 'This geocache is probably placed within the following protection areas:', '2011-05-23 22:19:23');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2151', 'EN', 'Also listed as', '2011-05-23 22:19:23');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'ES', 'Reordenar ID', '2010-12-09 00:17:55');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'ES', 'La base de datos no se pudo conectar.', '2010-12-09 00:17:55');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'ES', 'En pruebas - por favor, no entre.', '2010-12-09 00:17:55');
@@ -9727,6 +9733,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2131', 'ES', 'Cuando usted encuentra un usuario que quiere adoptar de su geocache, por favor, ponga el nombre de usuario y confirme la operación. El usuario es entonces este geocache \&gt; mi perfil de adopciones. Para completar la adopción, las condiciones del usuario del servicio de Opencaching.de debera aceptar y confirmar la aprobación.', '2010-12-09 00:17:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2132', 'ES', 'Puedes dejar un geocache a varios usuarios para ofrecer en adopción. El primer usuario de la adopción se confirma, sera el nuevo propietario de la caché. Con la aprobación que le da al usuario un derecho ilimitado para usar este contenido protegido por derechos de autor del cache, modificar y transmitir.', '2010-12-09 00:17:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2133', 'ES', 'Copia EN', '2010-12-09 00:17:59');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2150', 'ES', 'Este geocache está probablemente en las siguientes áreas protegidas:', '2011-05-23 22:20:30');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('6', 'FR', 'Pseudo', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('7', 'FR', 'Quite', '2010-10-04 00:17:39');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('24', 'FR', 'Prénom', '2010-10-04 00:17:39');
@@ -11468,6 +11475,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2132', 'IT', 'Puoi offrire questa geocache a più di un utente. Il primo utente che conferma l\'adozione diventa il nuovo proprietario di questa cache. Con l\'adozione, concedi all\'utente diritti illimitati di utilizzo, modifica, pubblicazione e licenza sulla geocache.', '2010-10-27 18:49:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2133', 'IT', 'Copia EN', '2010-10-27 18:49:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2134', 'IT', 'So quello che sto facendo, non visualizzare di nuovo questo avvertimento per oggi.', '2013-07-25 15:53:16');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2150', 'IT', 'Questa geocache probabilmente è situata in una riserva naturale:', '2011-05-23 22:19:58');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('922', 'JA', 'JA', '2011-05-15 16:04:51');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'NL', 'ID\'s opnieuw sorteren', '2011-02-04 19:49:56');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'NL', 'De verbinding met de database kon niet hersteld worden.', '2011-02-04 19:49:56');

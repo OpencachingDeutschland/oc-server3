@@ -190,6 +190,7 @@ p.readmore {margin: 1.0em 0px 0.5em 0px; padding: 0px; line-height: 1.2em; font-
 p.quote {margin: 0em 30px 0.6em 30px;	line-height: 120%; font-size: 120%;}
 p.embed {float: left; width: 120px; margin: 7px 7px 5px 0px; padding: 5px 5px 5px 5px; background-color: rgb(238,237,249); font-style: italic; font-weight: bold;  line-height: 1.2em; font-size: 140%;}
 p.embed-caption {float: left; margin: 5px 0px 0px 0px; padding: 0px; font-style: italic; font-weight: normal; line-height: 1.2em; font-size: 70%;}
+p.printlogheader { font-size:120%; }
 
 /* Quote */
 p.quote {clear: left; margin: 0em 30px 0.6em 30px;	line-height: 120%; font-size: 110%;}
@@ -220,7 +221,10 @@ div.changelog ul li {margin: 0px 0px 0.1em 0px; }
 .narrowtable th {margin: 0px; background-color: rgb(127,162,202); padding: 0 7px 0 7px; border: solid 0px rgb(150,150,150); empty-cells: show; text-align: left; font-size: 120%; color: rgb(255,255,255);	}
 .narrowtable-caption {margin: 0.5em 0px 1.0em 30px; padding: 0px; clear: both; text-align: left; font-size: 120%;}
 
-.printwptable td { line-height:1.4em; font-size:12px; }
+.printwptable td { line-height:1.4em; font-size:12px;}
+.printwptable td.framed { border-bottom:1px solid #aaa; border-top:1px solid #aaa; }  
+.print-cachemeta td { font-size:100%; padding:0 0.6em 1px 0; }
+td.header-small-print { font-size: 140%; font-weight:bold; padding-top:0; }
 
 /* Images */
 .img-left-noborder-notopmargin {float: left; margin: 0px 10px 0px 0px;}

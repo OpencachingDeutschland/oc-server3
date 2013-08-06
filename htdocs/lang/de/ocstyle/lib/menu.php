@@ -185,7 +185,14 @@ $menu = array(
 				'visible' => true,
 				'filename' => 'tops.php',
 				'siteid' => 'tops'
-			)
+			),
+				array(
+					'title' => 'OConly-81',
+					'menustring' => 'OConly-81',
+					'visible' => true,
+					'filename' => 'oconly81.php',
+					'siteid' => 'oconly81'
+				)
 		)
 	),
 	array(

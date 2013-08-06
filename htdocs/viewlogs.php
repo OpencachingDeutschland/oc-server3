@@ -74,6 +74,7 @@
 	$tpl->assign('cache', $rCache);
 
 	$tpl->assign('logs', cache::getLogsArray($cache_id, $start, $count, $deleted));
+	$tpl->assign('tagloadlogs', @$_REQUEST['tagloadlogs'] == 1);
 	
 
 	$tpl->display();

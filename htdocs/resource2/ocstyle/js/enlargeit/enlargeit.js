@@ -5,12 +5,15 @@ General Public License as published by the Free Software Foundation, either
 version 3 of the License, or (at your option) any later version. See LICENSE.TXT 
 for details. */
 
-// disable non-javascript fallback links do that enlargeit receives the mouse clicks
-function remove_piclinks()
+function init_enlargeit_for_logentries()
 {
+  // disable non-javascript fallback links so that enlargeit receives the mouse clicks
   var piclinks = document.getElementsByName("piclink");
   for (var pic=0; pic<piclinks.length; pic++)
     piclinks[pic].removeAttribute('href');
+
+  // Be sure that enlargit will be initialized. This is needed after logpic autoloading.
+  enl_firstcall = 0;
 }
 
 // modify these

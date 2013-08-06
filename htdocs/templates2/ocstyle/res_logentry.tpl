@@ -6,6 +6,8 @@
 {* OCSTYLE *}
 {if $log != "N"}
 
+{if $tagloadlogs}<ocloadlogs>{/if}
+
 {if $header==true}
   <div class="content2-container bg-blue02" id="logentries">
 	  <p class="content-title-noshade-size2">
@@ -30,7 +32,7 @@
 			{include file="res_logentry_logitem.tpl" logs=$logs cache=$cache}
 		{/foreach}
 
-{if $footer==true}
+{if $footer==true && !$tagloadlogs}
 
 		{if $footbacklink==true}
 
@@ -43,12 +45,14 @@
 {* $footer==true *}
 {/if}
 
+{if tagloadlogs}</ocloadlogs>{/if}
+
 {* $log != "N" *}
 {/if}
 
 
 <script type="text/javascript">
 <!--
- remove_piclinks();
+ init_enlargeit_for_logentries();
 -->
 </script> 

@@ -694,6 +694,7 @@ INSERT INTO `profile_options` (`id`, `name`, `trans_id`, `internal_use`, `defaul
 INSERT INTO `profile_options` (`id`, `name`, `trans_id`, `internal_use`, `default_value`, `check_regex`, `option_order`, `option_input`, `optionset`) VALUES ('10', 'Show %1preview pictures</a><br />(% of map area, 0=off)', '1928', '1', '7', '^[0-5]?[0-9]$', '150', 'text', '2');
 INSERT INTO `profile_options` (`id`, `name`, `trans_id`, `internal_use`, `default_value`, `check_regex`, `option_order`, `option_input`, `optionset`) VALUES ('11', 'Show picture stats and gallery', '1944', '1', '1', '^[0-1]$', '60', 'checkbox', '1');
 INSERT INTO `profile_options` (`id`, `name`, `trans_id`, `internal_use`, `default_value`, `check_regex`, `option_order`, `option_input`, `optionset`) VALUES ('13', 'Show OConly-81 stats', '2135', '1', '0', '^[0-1]$', '65', 'checkbox', '1');
+INSERT INTO `profile_options` (`id`, `name`, `trans_id`, `internal_use`, `default_value`, `check_regex`, `option_order`, `option_input`, `optionset`) VALUES ('14', 'Auto-load log entries', '2153', '1', '1', '^[0-1]$', '15', 'checkbox', '1');
 
 -- Table replication_overwritetypes
 SET NAMES 'utf8';
@@ -2573,6 +2574,8 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2148', '... by 
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2149', '... by region', '2010-09-07 20:19:07');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2150', 'This geocache is probably placed within the following protection areas:', '2011-05-20 23:48:29');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2151', 'Also listed as', '2011-05-20 23:48:29');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2152', 'Loading more log entries ...', '2011-05-20 23:48:29');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2153', 'Auto-load log entries', '2011-05-20 23:48:29');
 
 -- Table sys_trans_ref
 SET NAMES 'utf8';
@@ -6602,6 +6605,8 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2149', 'DE', '... nach Region', '2010-09-07 20:19:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2150', 'DE', 'Dieser Geocache liegt vermutlich in den folgenden Schutzgebieten:', '2011-05-23 22:18:40');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2151', 'DE', 'Auch gelistet als', '2011-05-23 22:18:40');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2152', 'DE', 'Lade weitere Logeinträge ...', '2011-05-23 22:18:40');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2153', 'DE', 'Logeinträge automatisch nachladen', '2011-05-23 22:18:40');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'EN', 'Reorder IDs', '2010-09-02 00:15:30');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'EN', 'The database could not be reconnected.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'EN', 'Testing – please do not login', '2010-08-28 11:48:07');

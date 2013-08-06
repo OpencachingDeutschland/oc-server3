@@ -8,6 +8,7 @@
 <script type="text/javascript" src="resource2/{$opt.template.style}/js/tip_balloon.js"></script>
 <script type="text/javascript" src="resource2/{$opt.template.style}/js/tip_centerwindow.js"></script>
 <script type="text/javascript" src="resource2/{$opt.template.style}/js/rot13.js"></script>
+<script type="text/javascript" src="resource2/{$opt.template.style}/js/tools.js"></script>
 
 <script type="text/javascript">
 {literal}
@@ -28,6 +29,8 @@
 		xmlReq.setRequestHeader("Connection", "close");
 		xmlReq.send(params);
 	}
+
+	window.setTimeout("visitCounter()", 1000);
 
 	function createXMLHttp()
 	{
@@ -51,7 +54,41 @@
 		return null;
 	}
 
-	window.setTimeout("visitCounter()", 1000);
+	function loadRestOfLogs()
+	{
+		var xmlhttp = createXMLHttp();
+		if (!xmlhttp)
+			return;
+
+		document.getElementById('showalllogs_img').src = 'resource2/ocstyle/images/misc/16x16-ajax-loader.gif';
+		document.getElementById('showalllogs_text').innerHTML = "{/literal}{t}Loading more log entries ...{/t}{literal}";
+
+		xmlhttp.onreadystatechange = function()
+		{
+			if (xmlhttp.readyState == 4 && xmlhttp.status == 200)
+			{
+				var logblockstart = xmlhttp.responseText.indexOf('<ocloadlogs>');
+				var logblockend = xmlhttp.responseText.indexOf('</ocloadlogs>');
+				if (logblockstart > 0 && logblockend > logblockstart)
+				{
+					document.getElementById('logblock').innerHTML = xmlhttp.responseText.substring(logblockstart+12, logblockend);
+					init_enlargeit_for_logentries();
+				}
+			}
+		}
+		xmlhttp.open("GET", "viewlogs.php?cacheid={/literal}{$cache.cacheid}{literal}&tagloadlogs=1", true);
+		xmlhttp.send();
+	}
+
+	function onScroll(oEvent)
+	{
+		if (scrolledToBottom(70))
+		{
+			window.onscroll = null;
+			loadRestOfLogs();
+		}
+	}
+
 //-->
 {/literal}
 </script>
@@ -495,15 +532,25 @@
 <!-- End GK -->
 
 <!-- Logs -->
-{include file="res_logentry.tpl" header=true footer=true footbacklink=false logs=$logs cache=$cache}
+<div id="logblock">
+	{include file="res_logentry.tpl" header=true footer=true footbacklink=false logs=$logs cache=$cache}
 
-{if $showalllogs}
-	<div class="content2-container bg-blue02">
-  	<p class="content-title-noshade-size2">
-  		<img src="resource2/{$opt.template.style}/images/action/16x16-showall.png" style="align: left; margin-right: 10px;" width="16" height="16" alt="{t}Show all logentries{/t}" />  
-			[<a href="viewcache.php?cacheid={$cache.cacheid}&log=A#logentries">{t}Show all logentries{/t}</a>]
-  	</p>
-	</div>
+	{if $showalllogs}
+		<div class="content2-container bg-blue02">
+			<p id="showalllogs" class="content-title-noshade-size2">
+				<img id="showalllogs_img" src="resource2/{$opt.template.style}/images/action/16x16-showall.png" style="align: left; margin-right: 10px;" width="16" height="16" alt="{t}Show all logentries{/t}" />  
+				<span id="showalllogs_text">[<a href="viewcache.php?cacheid={$cache.cacheid}&log=A#logentries">{t}Show all logentries{/t}</a>]</span>
+			</p>
+		</div>
+		<div style="clear:both"></div>  {* MSIE needs this to keep some space below the show-all-logs block *}
+	{/if}
+</div>
+
+{if $showalllogs && $autoload_logs}
+<script type="text/javascript">
+	window.onscroll = onScroll;
+</script>
 {/if}
+
 <!-- End Logs -->
 {/if}  {* not $show_logpics *}

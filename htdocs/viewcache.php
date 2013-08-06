@@ -310,15 +310,21 @@ function getChildWaypoints($cacheid)
 	else
 		$tpl->assign('logpics', get_logpics(LOGPICS_FOR_CACHE_STAT, 0, $cacheid));
 
-	/* process the cachmap options
+	/* process profile settings
 	 */
 	$userzoom = 11;
 	if ($login->userid > 0)
 	{
 		$useropt = new useroptions($login->userid);
 		$userzoom = $useropt->getOptValue(USR_OPT_GMZOOM);
+		$autoload_logs = $useropt->getOptValue(USR_OPT_LOG_AUTOLOAD);
+	}
+	else
+	{
+		$autoload_logs = false;
 	}
 	$tpl->assign('userzoom', $userzoom);
+	$tpl->assign('autoload_logs', $autoload_logs);
 
 	// get the correct mapkey
 	$sHost = strtolower($_SERVER['HTTP_HOST']);

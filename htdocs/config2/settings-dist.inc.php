@@ -202,7 +202,8 @@
 	$opt['page']['subtitle1'] = 'Geocaching with Opencaching';
 	$opt['page']['subtitle2'] = '';
 	$opt['page']['title'] = 'OPENCACHING';
- 	$opt['page']['showdonations'] = false; // Show donations button
+	$opt['page']['showdonations'] = false; // Show donations button
+	$opt['page']['showsocialmedia'] = false;
 
   $opt['page']['absolute_url'] = 'http://devel.opencaching.de/'; // may be overwritten by $opt['domain'][...]['uri']
 	$opt['page']['develsystem'] = false;

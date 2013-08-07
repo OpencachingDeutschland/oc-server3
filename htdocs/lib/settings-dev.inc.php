@@ -80,7 +80,8 @@
 	$news_approver_email = 'root';
 
 	$opt['page']['showdonations'] = true;
-
+	$opt['page']['showsocialmedia'] = true;
+    
 	// date format
 	$opt['db']['dateformat'] = 'Y-m-d H:i:s';
 

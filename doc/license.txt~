@@ -211,12 +211,6 @@ Icons
         Path    : htdocs/images/icons/
         URI     : http://tinymce.moxiecode.com/
         License : LGPL 2.1
-    
-    8.  Social media icons (feed, google+, facebook, twitter)
-        Path    : htdocs/resource2/ocstyle/images/misc/
-        URI     : https://github.com/paulrobertlloyd/socialmediaicons
-        License : Creative Commons BY-SA 3.0
-        Autor   : Paul Robert Lloyd (and other contributors)
 
 
 Other resources

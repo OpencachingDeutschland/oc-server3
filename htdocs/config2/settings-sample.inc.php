@@ -155,6 +155,7 @@
 	$opt['mail']['contact'] = 'contact@opencaching.de';
 
 	$opt['page']['showdonations'] = true;
+	$opt['page']['showsocialmedia'] = true;
 
 
 function post_config()

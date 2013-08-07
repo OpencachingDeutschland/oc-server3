@@ -85,8 +85,7 @@
 
 {* description *}
 {if $description != ""}
-	<div class="content2-container bg-blue02" >
-	</div>
+	<div class="content2-container bg-blue02" style="height:0px"></div>
 	<div class="table-like-font" style="margin-left:6px">
 		{$description}
 	</div>

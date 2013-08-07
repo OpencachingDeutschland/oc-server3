@@ -347,8 +347,10 @@ ol.col4 { column-count:4; -moz-column-count:4; -webkit-column-count:4; line-heig
 .narrowtable-caption {margin: 0.5em 0px 1.0em 30px; padding: 0px; clear: both; text-align: left; font-size: 120%;}
 
 .stattable { font-size:10px; line-height:1.4em; padding:0; background-color: white; }
-.stattable th { background-color: #deebcd; color: #404040; border:0; width: 3.2em; line-height:1.4em; padding:0}
-.stattable th.h1 { background-color: #fff; }
+.stattable th { background-color: #deebcd; color: #404040; border:0; width:3.3em; line-height:1.4em; padding:0}
+.stattable th.h1 { background-color: #fff; text-align:center; }
+.stattable th.h0 { background-color: #fff; text-align:center; font-weight:normal;}
+.stattable th.nodatacell { width:auto; }
 span.percent { font-size: 11px; }
 
 .waypointtable { width: 96%; margin-bottom:4px; background-color: #d0d0d0; }

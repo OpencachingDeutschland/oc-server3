@@ -6,8 +6,8 @@
 {* OCSTYLE *}
 <table class="stattable">
 	<tr>
-		<th class="h1" style="text-align:right">{if $userid>0}<a href="oconly81.php">OConly-81</a>&nbsp;&nbsp;&nbsp;{/if}</th>
-		<th class="h1" colspan="11" style="text-align:center; line-height:1.8em">{t}Terrain{/t}</th>
+		<th class="h1 nodatacell" style="text-align:right">{if $userid>0}<nobr><a href="oconly81.php">OConly-81</a>&nbsp;&nbsp;&nbsp;</nobr>{/if}</th>
+		<th class="h1 nodatacell" colspan="11" style="line-height:1.8em">{t}Terrain{/t}</th>
 	</tr>
 	<tr>
 		<td></td>
@@ -15,7 +15,7 @@
 		{foreach from=$stat81 key=step item=dummy}
 			<th style="text-align:center">{$step/2}</th>
 		{/foreach}
-		<th class="h1" style="text-align:center">Σ</th>
+		<th class="h1">Σ</th>
 		<td>&nbsp;</td>
 	</tr>
 
@@ -37,21 +37,21 @@
 					{else}&nbsp;{/if}
 				</td>
 			{/foreach}
-			<td style="text-align:center">{if $dsum}{$dsum}{assign var=totalsum value=$totalsum+$dsum}{/if}</td>
+			<th class="h0" style="text-align:center">{if $dsum}{$dsum}{assign var=totalsum value=$totalsum+$dsum}{/if}</th>
 		</tr>
 	{/foreach}
 
 	<tr>
 		<td rowspan="2"></td>
-		<th class="h1" style="text-align:center">Σ</th>
+		<th class="h1">Σ</th>
 		{foreach from=$stat81_tsum item=count}
-			<td style="text-align:center">{if $count}{$count}{/if}</td>
+			<th class="h0">{if $count}{$count}{/if}</td>
 		{/foreach}
 		<td style="text-align:center"><b>{$totalsum}</b></td>
 	</tr>
 	{if $userid > 0}
 		<tr>
-			<td colspan="12" style="padding-top:0.5em"><p>{t 1=$matrixfound}The user has found <b>%1</b> of <b>81</b> theoretically possible terrain/difficulty combinations.{/t}</p></td> 
+			<td colspan="12" style="padding-top:0.5em"><p>{t 1=$matrixfound}The user has found <b>%1</b> of <b>81</b> theoretically possible terrain/difficulty combinations.{/t}</p></td>
 		</tr>
 	{/if}
 </table>

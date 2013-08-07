@@ -423,14 +423,17 @@ function switchAttributeCat2()
 <div class="searchdiv2">
 	<table class="table">
 		<tr>
-			<td class="formlabel">{t}Sorting of result:{/t}</td>
-			<td colspan="4">
+			<td class="formlabel" rowspan="2">{t}Sorting of result:{/t}</td>
+			<td colspan="4" style="padding-bottom:0">
 				<input type="radio" name="sort" value="byname" index="0" id="l_sortbyname" class="radio" onclick="sync_options(this)" {if $byname_checked}checked="checked"{/if} /> <label for="l_sortbyname">{t}Cachename{/t}</label> &nbsp;
 				<input type="radio" name="sort" value="bydistance" index="1" id="l_sortbydistance" class="radio" onclick="sync_options(this)" {if $bydistance_checked}checked="checked"{/if} /> <label for="l_sortbydistance">{t}Distance{/t}</label> &nbsp;
 				<input type="radio" name="sort" value="bycreated" index="2" id="l_sortbycreated" class="radio" onclick="sync_options(this)" {if $bycreated_checked}checked="checked"{/if} /> <label for="l_sortbycreated">{t}Listed since{/t}</label> &nbsp;
 				<nobr><input type="radio" name="sort" value="bylastlog" index="3" id="l_sortbylastlog" class="radio" onclick="sync_options(this)" {if $bylastlog_checked}checked="checked"{/if} /> <label for="l_sortbylastlog" >{t}Last log{/t}</label> &nbsp;
 				<input type="radio" name="sort" value="bymylastlog" index="4" id="l_sortbymylastlog" class="radio" onclick="sync_options(this)" {if $bymylastlog_checked}checked="checked"{/if} {if !$logged_in}disabled="disabled"{/if} /> <label for="l_sortbymylastlog" {if !$logged_in}class="disabled"{/if}>{t}My last log{/t}</label></nobr>
-				<br />
+			</td>
+		</tr>
+		<tr>
+			<td>
 				<input id="orderRatingFirst" type="checkbox" name="orderRatingFirst" class="checkbox" value="1" onclick="sync_options(this)" {if $orderRatingFirst_checked}checked="checked"{/if} />
 				<label for="orderRatingFirst">{t}Show recommendation from other users first{/t}</label>
 			</td>

@@ -48,9 +48,12 @@
 
 	<table class="table">
 		<tr>
-			<td>
+			<td width="1%">
 				{include file="res_oconly81.tpl" userid=$userid}
 			</td>
+		</tr>
+		<tr>
+			<td class="spacer">&nbsp;</td>
 		</tr>
 	</table>
 

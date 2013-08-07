@@ -118,7 +118,7 @@ function myHomeLoad()
 
 {if !$allpics}
 	{* Geocaches hidden *}
-	<div class="content2-container bg-blue02" id="mycaches" style="margin-top:5px;">
+	<div class="content2-container bg-blue02" id="mycaches" style="margin-top:5px">
 		<p class="content-title-noshade-size3">
 			<img src="resource2/{$opt.template.style}/images/cacheicon/22x20-traditional.png" width="22" height="20"  style="margin-right: 10px;" />&nbsp;
 			{t 1=$hidden}Geocaches hidden: %1{/t} &nbsp;

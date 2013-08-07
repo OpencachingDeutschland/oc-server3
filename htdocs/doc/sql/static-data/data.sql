@@ -2578,6 +2578,12 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2150', 'This ge
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2151', 'Also listed as', '2011-05-20 23:48:29');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2152', 'Loading more log entries ...', '2011-05-20 23:48:29');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2153', 'Auto-load log entries', '2011-05-20 23:48:29');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2155', 'Social media', '2013-08-07 18:30:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2156', 'Follow us:', '2013-08-07 18:30:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2157', 'Join discussions:', '2013-08-07 18:30:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2158', 'Opencaching Forum', '2013-08-07 18:30:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2159', 'Google+ Community', '2013-08-07 18:30:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2160', 'Facebook Group', '2013-08-07 18:30:00');
 
 -- Table sys_trans_ref
 SET NAMES 'utf8';
@@ -6609,6 +6615,12 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2151', 'DE', 'Auch gelistet als', '2011-05-23 22:18:40');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2152', 'DE', 'Lade weitere Logeinträge ...', '2011-05-23 22:18:40');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2153', 'DE', 'Logeinträge automatisch nachladen', '2011-05-23 22:18:40');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2155', 'DE', 'Soziale Medien', '2013-08-07 18:30:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2156', 'DE', 'Folge uns:', '2013-08-07 18:30:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2157', 'DE', 'Diskutiere mit:', '2013-08-07 18:30:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2158', 'DE', 'Opencaching-Forum', '2013-08-07 18:30:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2159', 'DE', 'Google+ Community', '2013-08-07 18:30:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2160', 'DE', 'Facebook-Gruppe', '2013-08-07 18:30:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'EN', 'Reorder IDs', '2010-09-02 00:15:30');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'EN', 'The database could not be reconnected.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'EN', 'Testing – please do not login', '2010-08-28 11:48:07');

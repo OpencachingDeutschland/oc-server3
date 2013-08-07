@@ -203,7 +203,7 @@
 					<div id="breadcrumb_fullsize">{include file="sys_breadcrumb.tpl" items="$breadcrumb"}</div>
 				{else}
 					<div id="breadcrumb">{include file="sys_breadcrumb.tpl" items="$breadcrumb"}</div>
-					<div id="suchbox"><form action="searchplugin.php" method="post"><b>{t}Waypoint-Search{/t}:</b><input type="hidden" name="sourceid" value="waypoint-search" /> <input type="text" name="userinput" size="10" /> <input type="submit" value="{t}Go{/t}" /></form></div>
+					<div id="suchbox"><form action="searchplugin.php" method="post"><b>{t}Waypoint-Search{/t}:</b>&nbsp;<input type="hidden" name="sourceid" value="waypoint-search" /> <input type="text" name="userinput" size="10" /> <input type="submit" name="wpsearch" class="formbutton" style="width:auto" value="&nbsp;{t}Go{/t}&nbsp;" onclick="submitbutton('wpsearch')" /></form></div>
 				{/if}
 			</div>
 
@@ -240,7 +240,7 @@
 				{* <!-- Paypalbutton --> *}
 				{if $opt.page.showdonations}
 					<p class="sidebar-maintitle">{t}Donations{/t}</p>
-					<div style="margin-top:20px;width:100%;text-align:center;">
+					<div style="margin-top:16px; width:100%; text-align:center;">
 						<a href="http://www.opencaching.de/articles.php?page=donations">
 							<img src="resource2/{$opt.template.style}/images/misc/donate.gif" alt="{t}Donations{/t}" style="border:0px;" />
 						</a><br />
@@ -250,23 +250,24 @@
 
 				{* <!-- Social Media --> *}
 				{if $opt.page.showsocialmedia}
-					<p class="sidebar-maintitle">{t}Social Media{/t}</p>
-					<div style="margin-top: 10px; margin-bottom: 10px; margin-left: auto; margin-right: auto; text-align: center">
-						<p style="width: 100%">{t}Follow Us{/t}</p>
+					<p class="sidebar-maintitle">{t}Social media{/t}</p>
+					<div style="margin-top: 10px; margin-bottom: 12px; margin-left: auto; margin-right: auto; text-align: center">
 						<table style="margin-left: auto; margin-right: auto;">
 							<tr>
-								<td><a href="http://blog.opencaching.de/feed"><img src="resource2/{$opt.template.style}/images/misc/32x32-feed.png" /></a></td>
-								<td><a href="https://twitter.com/opencaching"><img src="resource2/{$opt.template.style}/images/misc/32x32-twitter.png" /></a></td>
-								<td><a href="https://plus.google.com/104950249357104618315"><img src="resource2/{$opt.template.style}/images/misc/32x32-google+.png" /></a></td>
-								<td><a href="https://www.facebook.com/opencaching.de"><img src="resource2/{$opt.template.style}/images/misc/32x32-facebook.png" /></a></td>
+								<td class="smalltext2">{t}Follow us:{/t}</td>
+								<td><a href="http://blog.opencaching.de/feed"><img src="resource2/{$opt.template.style}/images/media/16x16-feed.png" width="16" height="16" /></a></td>
+								<td><a href="https://twitter.com/opencaching"><img src="resource2/{$opt.template.style}/images/media/16x16-twitter.png" width="16" height="16"  /></a></td>
+								<td><a href="https://plus.google.com/104950249357104618315"><img src="resource2/{$opt.template.style}/images/media/16x16-google+.png" width="16" height="16"  /></a></td>
+								<td><a href="https://www.facebook.com/opencaching.de"><img src="resource2/{$opt.template.style}/images/media/16x16-facebook.png" width="16" height="16"  /></a></td>
+							</tr>
+							<tr>
+								<td class="smalltext2" colspan="5" style="padding-top:0.6em; text-align:left">{t}Join discussions:{/t}</td>							
 							</tr>
 						</table>
-						&nbsp;
-						<p style="width: 100%">{t}Join Discussions{/t}</p>
 						<table style="margin-left: auto; margin-right: auto;">
 							<tr><td><a href="http://forum.opencaching-network.org/"><img src="resource2/{$opt.template.style}/images/oclogo/16x16-oc_logo.png" /></a></td><td style="text-align: left"><a href="http://forum.opencaching-network.org/">{t}Opencaching Forum{/t}</a></td></tr>
-							<tr><td><a href="https://plus.google.com/communities/106940399712236494701"><img src="resource2/{$opt.template.style}/images/misc/16x16-google+.png" /></a></td><td style="text-align: left"><a href="https://plus.google.com/communities/106940399712236494701">{t}Google+ Community{/t}</a></td></tr>
-							<tr><td><a href="https://www.facebook.com/groups/198752500146032/"><img src="resource2/{$opt.template.style}/images/misc/16x16-facebook.png" /></a></td><td style="text-align: left"><a href="https://www.facebook.com/groups/198752500146032/">{t}Facebook Group{/t}</a></td></tr>
+							<tr><td><a href="https://plus.google.com/communities/106940399712236494701"><img src="resource2/{$opt.template.style}/images/media/16x16-google+.png" /></a></td><td style="text-align: left"><a href="https://plus.google.com/communities/106940399712236494701">{t}Google+ Community{/t}</a></td></tr>
+							<tr><td><a href="https://www.facebook.com/groups/198752500146032/"><img src="resource2/{$opt.template.style}/images/media/16x16-facebook.png" /></a></td><td style="text-align: left"><a href="https://www.facebook.com/groups/198752500146032/">{t}Facebook Group{/t}</a></td></tr>
 						</table>
 					</div>
 				{/if}

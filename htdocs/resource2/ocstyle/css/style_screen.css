@@ -190,7 +190,7 @@ div#bg2 {display: none;}
 .nav3 {overflow: hidden; clear: both; float: left; width: 160px; min-height: 500px; margin: 0px; padding: 0px; color: rgb(75,75,75); font-size: 1.0em; }
 .nav3 ul {width: 160px; margin: 0px 0px 20px 0px; padding: 0px; border-bottom: solid 1px rgb(216,206,159); background-color: rgb(219,230,241);}	
 .nav3 li {list-style: none; margin: 0px; padding: 0px;}
-.nav3 li.title {margin: 0px 0px 0px 0px; padding: 3px 5px 2px 15px; background-color: rgb(156,186,214); color: rgb(255,255,255); text-transform: uppercase; font-weight: bold; font-size: 120%;}
+.nav3 li.title {margin: 2px 0px 0px 0px; padding: 3px 5px 2px 15px; background-color: rgb(156,186,214); color: rgb(255,255,255); text-transform: uppercase; font-weight: bold; font-size: 120%;}
 .nav3 li.group1 a {display: block; min-height: 1.7em; height: auto !important; height: 1.7em; line-height: 1.7em; margin: 0px; padding: 0px 7px 0px 15px; border-top: solid 1px rgb(200,200,200); border-left: solid 7px rgb(219,230,241); color: rgb(75,75,75); font-weight: bold; font-size: 120%;}
 .nav3 li.group_active a {border-left: solid 7px rgb(156,186,214); background-color: rgb(156,186,214);}
 .nav3 li.group2 a {display: block; min-height: 1.7em; height: auto !important; height: 1.7em; line-height: 1.7em; margin: 0px; padding: 0px 7px 0px 15px; border-top: solid 1px rgb(200,200,200); border-left: solid 14px rgb(219,230,241); color: rgb(75,75,75); font-weight: normal; font-size: 120%;}
@@ -405,7 +405,7 @@ td.default { font-size:12px; }
 /* 6.2 - Sidebar Area */
 /*--------------------*/
 .sidebar {overflow: hidden; float: right; width: 160px; min-height: 500px; margin: 0px; padding: 0px 0px 10px 0px; text-align: left; color: rgb(75,75,75);}
-.sidebar-maintitle {margin: 0px 0px 10px 0px; padding: 3px 10px 2px 10px; background-color: rgb(156,186,214); color: rgb(255,255,255); text-transform: uppercase; font-weight: bold; font-size: 120%;}
+.sidebar-maintitle {margin:4px 0px 10px 0px; padding: 3px 10px 2px 10px; background-color: rgb(156,186,214); color: rgb(255,255,255); text-transform: uppercase; font-weight: bold; font-size: 120%;}
 .sidebar-title-noshade {margin: 0px; padding: 2px 10px 3px 10px; border-top: solid 1px rgb(215,215,215); color: rgb(75,75,75); font-weight: bold; font-size: 120%;}
 .sidebar-title-shade {margin: 0px; padding: 2px 10px 3px 10px; background-color: rgb(215,215,215); color: rgb(75,75,75); font-weight: bold; font-size: 120%;}
 .sidebar-txtbox-noshade {margin: 0px 0px 10px 0px; padding: 2px 10px 3px 10px;}

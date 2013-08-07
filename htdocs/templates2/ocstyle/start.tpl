@@ -28,7 +28,7 @@
 				</td>
 				{if "$newsfeed" != ""}
 					<td style="text-align:right">
-						<a href="{$newsfeed}"><img src="resource2/ocstyle/images/misc/22x22-feed-icon.png" /></a>
+						<a href="{$newsfeed}"><img src="resource2/ocstyle/images/media/22x22-feed.png" /></a>
 					</td>
 					<td width="4px"></td>
 				{/if}

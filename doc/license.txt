@@ -2,11 +2,11 @@
              Opencaching Implementation Version 3
 
 
-                                                                  August 16, 2012
+                                                                  July 25, 2013
 
 License Information
 
-Copyright (C) 2006-2012  Opencaching Deutschland and Contributors
+Copyright (C) 2006-2013  Opencaching Deutschland and Contributors
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -152,7 +152,7 @@ JavaScript libraries
         URI     : http://www.twinhelix.com/css/iepngfix/
         License : LGPL 2.1
 
-    5.  TinyMCE: JavaScript WYSIWYG Editor
+    5.  TinyMCE JavaScript WYSIWYG Editor
         Path    : htdocs/resource2/tinymce/
         URI     : http://tinymce.moxiecode.com/
         License : LGPL 2.1
@@ -166,12 +166,12 @@ Icons
         URI     : http://www.famfamfam.com/lab/icons/flags/
         License : Public domain
 
-        OKAPI cache icons
+    2.  OKAPI cache icons
         Path    : htdocs/resource2/ocstyle/images/map/caches2/
         URI     : http://code.google.com/p/opencaching-pl/source/browse/#svn%2Ftrunk%2Fokapi%2Fstatic%2Ftilemap
         License : MIT
 
-    2.  OpenIcons 'system-help' and 'preferences-other'
+    3.  OpenIcons 'system-help' and 'preferences-other'
         Path    : htdocs/resource2/ocstyle/images/misc/
                   htdocs/resource2/ocstyle/images/map/
         URI     : http://openiconlibrary.sourceforge.net/gallery2/?./Icons/categories/system-help-3.png
@@ -179,7 +179,7 @@ Icons
         License : Creative Commons BY-SA 3.0
         Author  : Oxygen
 
-    3.  16x16 Icons 'flag-checker', 'footprints', 'clock select', lock
+    4.  16x16 Icons 'flag-checker', 'footprints', 'clock select', lock
         Path    : htdocs/resource2/ocstyle/images/misc/
                   htdocs/resource2/ocstyle/images/map/caches2/
                   htdocs/resource2/ocstyle/images/cachestatus/
@@ -187,7 +187,7 @@ Icons
         License : Creative Commons BY 3.0
         Author  : Yusuke Kamiyamane
 
-    4.  gears and gps-device icons, watched icon
+    5.  gears and gps-device icons, watched icon
         Path    : htdocs/resource2/ocstyle/images/misc/
                   htdocs/resource2/ocstyle/images/viewcache/
         URI     : http://www.softicons.com/free-icons/toolbar-icons/fatcow-hosting-icons-by-fatcow/gear-in-icon
@@ -195,25 +195,25 @@ Icons
         License : Creative Commons BY 3.0
         Author  : FatCow
 
-    5.  checkmark icon
+    6.  checkmark icon
         Path    : htdocs/resource2/ocstyle/images/misc/
         URI     : http://www.softicons.com/free-icons/web-icons/bremen-icons-by-pc.de/check-icon
         License : Creative Commons BY 3.0
         Author  : PC.DE
 
-    6.  search icon
+    7.  search icon
         Path    : htdocs/resource2/ocstyle/images/misc/
         URI     : http://www.softicons.com/free-icons/toolbar-icons/24x24-free-pixel-icons-by-aha-soft/search-icon
         License : Creative Commons BY-SA 3.0
         Author  : Aha-Soft
 
-    7.  TinyMCE Icons
+    8.  TinyMCE Icons
         Path    : htdocs/images/icons/
         URI     : http://tinymce.moxiecode.com/
         License : LGPL 2.1
-    
-    8.  Social media icons (feed, google+, facebook, twitter)
-        Path    : htdocs/resource2/ocstyle/images/misc/
+
+    9.  Social media icons (feed, google+, facebook, twitter)
+        Path    : htdocs/resource2/ocstyle/images/media/
         URI     : https://github.com/paulrobertlloyd/socialmediaicons
         License : Creative Commons BY-SA 3.0
         Autor   : Paul Robert Lloyd (and other contributors)

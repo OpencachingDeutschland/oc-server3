@@ -174,7 +174,8 @@ class OcSmarty extends Smarty
 		$optn['page']['header_javascript'] = $this->header_javascript;
 		$optn['page']['body_load'] = $this->body_load;
 		$optn['page']['body_unload'] = $this->body_unload;
-    $optn['page']['sponsor'] = $opt['page']['sponsor'];
+		$optn['page']['sponsor'] = $opt['page']['sponsor'];
+		$optn['page']['showsocialmedia'] = $opt['page']['showsocialmedia'];
 		$optn['template']['title'] = $this->title;
 		$optn['template']['caching'] = $this->caching;
 		$optn['template']['popup'] = $this->popup;

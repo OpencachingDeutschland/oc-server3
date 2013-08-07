@@ -951,10 +951,10 @@ a.info:hover span{ /*the span will display just on :hover state*/
 
 #breadcrumb
 {
-	position: absolute; 
-	top:110px;
-	right: 250px;
-	left: 180px;
+	position:relative;
+	top:4px;
+	margin-left:180px;
+	width:520px;
 	color:#505050;
 	font-size:x-small;
 	font-family:sans-serif;
@@ -968,11 +968,10 @@ a.info:hover span{ /*the span will display just on :hover state*/
 
 #breadcrumb_fullsize
 {
-	position: absolute; 
-	top:110px;
-	right: 20px;
-	left: 180px;
-
+	position:relative;
+	top:4px;
+	margin-left:180px;
+	width:620px;
 	color:#505050;
 	font-size:x-small;
 	font-family:sans-serif;

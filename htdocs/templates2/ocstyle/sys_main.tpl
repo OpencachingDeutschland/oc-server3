@@ -197,16 +197,15 @@
 				</ul>
 			</div> <!-- nav 2 -->
 
-			{* <!-- Buffer after header --> *}
-			<div class="buffer" style="height: 30px;"></div>
-
-			{* <!-- Suchbox --> *}
-			{if !$opt.page.nowpsearch}
-				<div id="breadcrumb">{include file="sys_breadcrumb.tpl" items="$breadcrumb"}</div>
-				<div id="suchbox"><form action="searchplugin.php" method="post" style="display:inline;"><b>{t}Waypoint-Search{/t}:</b><input type="hidden" name="sourceid" value="waypoint-search" /> <input type="text" name="userinput" size="10" /> <input type="submit" value="{t}Go{/t}" /></form></div>
-			{else}
-				<div id="breadcrumb_fullsize">{include file="sys_breadcrumb.tpl" items="$breadcrumb"}</div>
-			{/if}
+			{* <!-- Breadcrumb Navigation and Search box --> *}
+			<div class="buffer" style="height: 30px; width:100%;">
+				{if $opt.page.nowpsearch}
+					<div id="breadcrumb_fullsize">{include file="sys_breadcrumb.tpl" items="$breadcrumb"}</div>
+				{else}
+					<div id="breadcrumb">{include file="sys_breadcrumb.tpl" items="$breadcrumb"}</div>
+					<div id="suchbox"><form action="searchplugin.php" method="post"><b>{t}Waypoint-Search{/t}:</b><input type="hidden" name="sourceid" value="waypoint-search" /> <input type="text" name="userinput" size="10" /> <input type="submit" value="{t}Go{/t}" /></form></div>
+				{/if}
+			</div>
 
 			{if $helplink != ""}
 				<div class="tplhelp">{$helplink}<img src="resource2/ocstyle/images/misc/32x32-help.png" /></a></div>

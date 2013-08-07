@@ -202,11 +202,16 @@
 ?>
 					</ul>
 				</div>
-				<!-- Buffer after header -->
-				<div class="buffer" style="height: 30px;"></div>
 
-				<!-- Suchbox -->
-				<div id="suchbox"><form action="searchplugin.php" method="post" style="display:inline;"><b>{t}Waypoint search:{/t}</b><input type="hidden" name="sourceid" value="waypoint-search" /> <input type="text" name="userinput" size="10" /> <input type="submit" value="Go" /></form></div>
+				<!-- Breadcrumb & waypoint search -->
+				<div class="buffer" style="height: 30px; width:100%;">
+					<div id="breadcrumb">
+						<?php mnu_EchoBreadCrumb($tplname, $pageidx); ?>
+					</div>
+					<div id="suchbox">
+						<form action="searchplugin.php" method="post" style="display:inline;"><b>{t}Waypoint search:{/t}</b><input type="hidden" name="sourceid" value="waypoint-search" /> <input type="text" name="userinput" size="10" /> <input type="submit" value="Go" /></form>
+					</div>
+				</div>
 			
 				<!-- NAVIGATION -->
 				<!-- Navigation Level 3 -->
@@ -273,9 +278,6 @@
 
   			<!-- CONTENT -->
 				<div class="content2">
-					<div id="breadcrumb">
-						<?php mnu_EchoBreadCrumb($tplname, $pageidx); ?>
-					</div>
 					<div class="tplhelp">
 						<?php mnu_EchoHelpLink($tplname); ?>
 					</div>

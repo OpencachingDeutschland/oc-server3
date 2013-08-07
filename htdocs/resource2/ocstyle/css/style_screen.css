@@ -411,29 +411,31 @@ td.default { font-size:12px; }
 /*-------------------*/
 
 /* standard links */
-#langstripe a, .content1 a, .content2 a, .content3 a, .sidebar-txtbox-noshade a, .sidebar-txtbox-shade a, .popup a {color: rgb(75,75,175); text-decoration: none;}
-#langstripe a:hover, .content1 a:hover, .content2 a:hover, .content3 a:hover, .sidebar-txtbox-noshade a:hover, .sidebar-txtbox-shade a:hover {text-decoration: underline;}
-#langstripe a:visited, .content1 a:visited, .content2 a:visited, .content3 a:visited, .sidebar-txtbox-noshade a:visited, .sidebar-txtbox-shade a:visited  {color: rgb(120,0,150);}
+#langstripe a, .nav3 a, .content1 a, .content2 a, .content3 a, .sidebar-txtbox-noshade a, .sidebar-txtbox-shade a, .popup a {color: rgb(75,75,175); text-decoration: none;}
+#langstripe a:hover, .nav3 a:hover, .content1 a:hover, .content2 a:hover, .content3 a:hover, .sidebar-txtbox-noshade a:hover, .sidebar-txtbox-shade a:hover {text-decoration: underline;}
+#langstripe a:visited, .nav3 a:visited, .content1 a:visited, .content2 a:visited, .content3 a:visited, .sidebar-txtbox-noshade a:visited, .sidebar-txtbox-shade a:visited  {color: rgb(120,0,150);}
+a.boldlink:visited, .content1 b a:visited, .content2 b a:visited, .content3 b a:visited {color: rgb(130,0,145) !important;}
 .footer a {color: rgb(255,255,255); text-decoration: underline;}
 .footer a:hover {color: rgb(0,0,0); text-decoration: none;}
 
 /* fat cache and username links */
 a.links:link {
 	font-weight: bold;
-	color: black;
+	color: rgb(60,60,60);
 	text-decoration: none;
 }
 
 a.links:visited {
 	font-weight: bold;
-	color: purple;
+	color: rgb(128,0,128);
 	text-decoration: none;
 }
 
-a.links:active {
+/* a.links:active {
 	background-color: yellow;
 	text-decoration: none;
 }
+*/
 
 a.links:hover {
 	text-decoration: underline;

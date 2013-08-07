@@ -15,7 +15,7 @@
 		{$logItem.date|date_format:$opt.format.datelong}{if $logItem.time!="00:00:00"}, {$logItem.time|substr:0:5}{/if}
 
 		{capture name=username}
-			<a href="viewprofile.php?userid={$logItem.userid}">{$logItem.username|escape}</a>
+			<a class="boldlink" href="viewprofile.php?userid={$logItem.userid}">{$logItem.username|escape}</a>
 		{/capture}
 
 		{if $logItem.type==1}  {* Ocprop: $htmluserid<\/a>\s*(hat das Event besucht|hat den Geocache gefunden|found the Geocache|has visited the event) *}

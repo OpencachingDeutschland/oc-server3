@@ -421,7 +421,7 @@ a.boldlink:visited, .content1 b a:visited, .content2 b a:visited, .content3 b a:
 /* fat cache and username links */
 a.links:link {
 	font-weight: bold;
-	color: rgb(60,60,60);
+	color: rgb(48,48,48);
 	text-decoration: none;
 }
 

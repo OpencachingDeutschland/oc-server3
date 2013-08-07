@@ -81,8 +81,18 @@ class useroptions
 	}
 	function getOptValue($pId)
 	{
-		if (array_key_exists($pId, $this->nOptions))
+		if ($pId == USR_OPT_SHOWSTATS &&
+		    sql_value("SELECT `is_active_flag` FROM `user` WHERE `user_id`='&1'", 0, $this->nUserId) == 0)
+  	{
+  		// User profile options are deleted when an account is disabled. This will
+  		// enable USR_OPT_SHOWSTATS which is 1 by default. We encounter this by
+  		// forcing USR_OPT_SHOWSTATS = 0 for disabled users.
+  		return 0;
+ 		}
+ 		else if (array_key_exists($pId, $this->nOptions))
+ 		{
 			return $this->nOptions[$pId]['option_value'];
+		}
 
 		return false;
 	}

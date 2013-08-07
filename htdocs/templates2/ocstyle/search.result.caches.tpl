@@ -11,8 +11,13 @@
 
 <div class="content2-container bg-blue02" style="margin-top:20px;">
 	<table cellspacing="0" cellpadding="0" width="100%" border="0"><tr>
-		<td style="white-space:nowrap">
-			<p class="content-title-noshade-size15" style="padding:0; margin:4px;">&nbsp;{t 1=$results_count 2=($search_headline_caches?'':'display:none')}%1 caches<span style="%2"> matched</span>{/t}&nbsp;</p>
+		<td style="white-space:nowrap; min-width:150px">
+			{if $search_headline_caches}
+				{assign var=showmatched value=''}
+			{else}
+				{assign var=showmatched value='display:none'}
+			{/if}
+			<p class="content-title-noshade-size15" style="padding:0; margin:4px;">&nbsp;{t 1=$results_count 2=$showmatched}%1 caches<span style="%2"> matched</span>{/t}&nbsp;</p>
 		</td>
 		{if $caches|@count && $enable_mapdisplay}
 			<td style="text-align:right; width:1px">

@@ -81,7 +81,7 @@
 
 	// Determine if search.php was called by a search function ('Caches' menu,
 	// stored query etc.) or for other purpose (e.g. user profile cache lists):
-	$called_by_search = isset($_REQUEST['calledbysearch']) && $_REQUEST['calledbysearch'];
+	$called_by_search = isset($_REQUEST['calledbysearch']) ? $_REQUEST['calledbysearch'] <> 0 : true;
 	$called_by_profile_query = false;
 
 	if (isset($_REQUEST['queryid']) || isset($_REQUEST['showresult']))

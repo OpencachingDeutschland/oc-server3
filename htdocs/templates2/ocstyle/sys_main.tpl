@@ -74,6 +74,7 @@
 			</script>
 		{/literal}
 		<script type="text/javascript" src="resource2/{$opt.template.style}/js/enlargeit/enlargeit.js"></script>
+		<script type="text/javascript" src="resource2/{$opt.template.style}/js/tools.js"></script>
 		{if $opt.session.url==true}
 			<script type="text/javascript">
 				{literal}

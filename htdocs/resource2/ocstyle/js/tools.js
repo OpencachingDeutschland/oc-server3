@@ -3,11 +3,11 @@
  *
  *  Unicode Reminder メモ
  *
- *  Javascript toolbox
+ *  Javascript toolbox; browser-idependend functions
  ***************************************************************************/
 
 
-	// detect client size and scoll position on all browsers
+	// detect client size and scoll position
 	//
 	// based on http://www.ajaxschmiede.de/javascript/fenstergrose-und-scrollposition-in-javascript-auslesen/
 
@@ -44,7 +44,7 @@
 	}
 
 
-	// detect document height in all browsers
+	// detect document height
 	//
 	// from http://james.padolsey.com/javascript/get-document-height-cross-browser/
 
@@ -65,4 +65,30 @@
 	{
 		// alert(getScrollY() + " " + getClientHeight() + " " + getDocHeight());
 		return getScrollY() + getClientHeight() + tolerance >= getDocHeight();
+	}
+
+
+	// create object for XMLHttp-Requests, i.e. for retreiving web pages or
+	// other XML pages via HTTP
+
+	function createXMLHttp()
+	{
+		if (typeof XMLHttpRequest != 'undefined')
+			return new XMLHttpRequest();
+		else if (window.ActiveXObject)
+		{
+			var avers = ["Microsoft.XmlHttp", "MSXML2.XmlHttp","MSXML2.XmlHttp.3.0", "MSXML2.XmlHttp.4.0","MSXML2.XmlHttp.5.0"];
+			for (var i = avers.length -1; i >= 0; i--)
+			{
+				try
+				{
+					httpObj = new ActiveXObject(avers[i]);
+					return httpObj;
+				}
+				catch(e)
+				{
+				}
+			}
+		}
+		return null;
 	}

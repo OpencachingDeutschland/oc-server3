@@ -111,7 +111,7 @@
 			</tr>
 			<tr>
 				<td colspan="3">
-					{if $desctext==""}<em>({t}no text entered yet{/t})</em>{else}<div class="textblock wide_textblock">{$desctext} &nbsp;</div>{/if}
+					{if $desctext==""}<em>({t}no text entered yet{/t})</em>{else}<div class="textblock wide_textblock">{$desctext}<div style="clear:both"></div></div>{/if}
 				</td>
 			</tr>
 			<tr><td class="spacer" colspan="3"></td></tr>

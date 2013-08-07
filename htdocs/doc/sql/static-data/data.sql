@@ -536,12 +536,14 @@ INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('myhome', 'DE
 INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('myignores', 'DE', 'Caches ignorieren');
 INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('mytop5', 'DE', 'Empfehlungen');
 INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('myprofile', 'DE', 'Benutzerprofil#Einstellungen');
+INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('mystatpic', 'DE', 'Statistikbild');
 INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('mywatches', 'DE', 'Benachrichtigungen');
 INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('newcache', '*', '!articles.php?page=cacheinfo');
 INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('newdesc', 'DE', 'Beschreibungstext');
 INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('newlogpics', 'DE', 'Logbild-Galerien');
 INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('newpw', 'DE', 'Passwort');
 INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('oconly', 'DE', 'OConly');
+INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('oconly81', 'DE', 'OConly');
 INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('picture', 'DE', 'Bilder');
 INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('previewpics', 'DE', 'Vorschaubilder');
 INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('query', 'DE', 'Gespeicherte Suchen');

@@ -248,6 +248,30 @@
 					</div>
 				{/if}
 
+				{* <!-- Social Media --> *}
+				{if $opt.page.showsocialmedia}
+					<p class="sidebar-maintitle">{t}Social Media{/t}</p>
+					<div style="margin-top: 10px; margin-bottom: 10px; margin-left: auto; margin-right: auto; text-align: center">
+						<p style="width: 100%">{t}Follow Us{/t}</p>
+						<table style="margin-left: auto; margin-right: auto;">
+							<tr>
+								<td><a href="http://blog.opencaching.de/feed"><img src="resource2/{$opt.template.style}/images/misc/32x32-feed.png" /></a></td>
+								<td><a href="https://twitter.com/opencaching"><img src="resource2/{$opt.template.style}/images/misc/32x32-twitter.png" /></a></td>
+								<td><a href="https://plus.google.com/104950249357104618315"><img src="resource2/{$opt.template.style}/images/misc/32x32-google+.png" /></a></td>
+								<td><a href="https://www.facebook.com/opencaching.de"><img src="resource2/{$opt.template.style}/images/misc/32x32-facebook.png" /></a></td>
+							</tr>
+						</table>
+						&nbsp;
+						<p style="width: 100%">{t}Join Discussions{/t}</p>
+						<table style="margin-left: auto; margin-right: auto;">
+							<tr><td><a href="http://forum.opencaching-network.org/"><img src="resource2/{$opt.template.style}/images/oclogo/16x16-oc_logo.png" /></a></td><td style="text-align: left"><a href="http://forum.opencaching-network.org/">{t}Opencaching Forum{/t}</a></td></tr>
+							<tr><td><a href="https://plus.google.com/communities/106940399712236494701"><img src="resource2/{$opt.template.style}/images/misc/16x16-google+.png" /></a></td><td style="text-align: left"><a href="https://plus.google.com/communities/106940399712236494701">{t}Google+ Community{/t}</a></td></tr>
+							<tr><td><a href="https://www.facebook.com/groups/198752500146032/"><img src="resource2/{$opt.template.style}/images/misc/16x16-facebook.png" /></a></td><td style="text-align: left"><a href="https://www.facebook.com/groups/198752500146032/">{t}Facebook Group{/t}</a></td></tr>
+						</table>
+					</div>
+				{/if}
+
+
 				{if $license_disclaimer != ""}
 					<!-- Datalicense -->
 					<p class="sidebar-maintitle">{t}Datalicense{/t}</p>

@@ -276,10 +276,8 @@
 				{if $license_disclaimer != ""}
 					<!-- Datalicense -->
 					<p class="sidebar-maintitle">{t}Datalicense{/t}</p>
-					<div style="margin-top:20px;width:100%;text-align:center;">
+					<div style="margin:20px 0 16px 0; width:100%; text-align:center;">
 						{$license_disclaimer}
-						<br />
-						&nbsp;
 					</div>
 				{/if}
 
@@ -291,10 +289,12 @@
 								{if ($opt.template.caching == true)}
 									{t}Page cached{/t}: {if $sys_cached==true}{t}Yes{/t}{else}{t}No{/t}{/if}<br />
 								{/if}
+								{*
 								{t}DB connected{/t}: 
 								{if $sys_dbconnected==true}{t}Yes{/t}{else}{t}No{/t}{/if}
 								{if $sys_dbslave==true}, {t}Slave{/t}{/if}
 								<br />
+								*}
 							{/nocache}
 							{t}Created at{/t}: {"0"|date_format:$opt.format.datetime}
 						</small>

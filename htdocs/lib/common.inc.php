@@ -480,9 +480,8 @@ function __autoload($class_name)
 			$ld = '<p class="sidebar-maintitle">' .
 			      $translate->t('Datalicense', '', '', 0) .
 						'</p>' .
-            '<div style="margin-top:20px;width:100%;text-align:center;">' .
+            '<div style="margin:20px 0 16px 0; width:100%; text-align:center;">' .
             mb_ereg_replace('%1', $lurl, $ltext) .
-						'<br />&nbsp;' .
 						'</div>';
 			tpl_set_var('license_disclaimer', $ld);
 		}

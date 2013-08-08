@@ -8,7 +8,7 @@
 
 {if $tagloadlogs}<ocloadlogs>{/if}
 
-{if $header==true}
+{if $header_footer}
   <div class="content2-container bg-blue02" id="logentries">
 	  <p class="content-title-noshade-size2">
 			<img src="resource2/{$opt.template.style}/images/description/22x22-logs.png" style="align: left; margin-right: 10px;" width="22" height="22" alt="Logs" />
@@ -25,34 +25,27 @@
 	</div>
 
 	<div class="content2-container">
-
 {/if}
 
-		{foreach from=$logs item=logItem name=log} 
-			{include file="res_logentry_logitem.tpl" logs=$logs cache=$cache}
-		{/foreach}
+{foreach from=$logs item=logItem name=log}
+	{include file="res_logentry_logitem.tpl" logs=$logs cache=$cache}
+{/foreach}
 
-{if $footer==true && !$tagloadlogs}
-
-		{if $footbacklink==true}
-
-					<p><span style="font-weight: 400;">[<a href="viewcache.php?wp={$cache.wpoc|urlencode}">{t}Back to the Geocache{/t}</a>]</span></p>
-
-		{/if}
-
+{if $header_footer}
+	{if $footbacklink && !$tagloadlogs}
+		<p><span style="font-weight: 400;">[<a href="viewcache.php?wp={$cache.wpoc|urlencode}">{t}Back to the Geocache{/t}</a>]</span></p>
+	{/if}
 	</div>	
-
-{* $footer==true *}
 {/if}
 
-{if tagloadlogs}</ocloadlogs>{/if}
+{if $tagloadlogs}</ocloadlogs>{/if}
 
 {* $log != "N" *}
-{/if}
-
 
 <script type="text/javascript">
 <!--
  init_enlargeit_for_logentries();
 -->
 </script> 
+
+{/if}

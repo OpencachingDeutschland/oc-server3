@@ -399,7 +399,7 @@
 	<tr><td class="spacer-print"><br /></td></tr>
 	<tr>
 		<td class="inner-print">
-			{include file="res_logentry.tpl" header=true footer=true footbacklink=false logs=$logs cache=$cache}
+			{include file="res_logentry.tpl" header_footer=true footbacklink=false logs=$logs cache=$cache}
 		</td>
 	</tr>
 </table>

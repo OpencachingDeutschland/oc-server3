@@ -433,7 +433,7 @@ function switchAttributeCat2()
 			</td>
 		</tr>
 		<tr>
-			<td>
+			<td style="padding-top:0">
 				<input id="orderRatingFirst" type="checkbox" name="orderRatingFirst" class="checkbox" value="1" onclick="sync_options(this)" {if $orderRatingFirst_checked}checked="checked"{/if} />
 				<label for="orderRatingFirst">{t}Show recommendation from other users first{/t}</label>
 			</td>

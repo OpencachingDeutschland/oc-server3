@@ -10,6 +10,7 @@
 	{t}Revert Vandalism{/t}
 </div>
 
+<div class="content2-container">
 {* step 1: select user *}
 {if $step == 1}
 	<form method="post" action="restorecaches.php">
@@ -208,3 +209,4 @@
 	{/if}
 
 {/if}
+</div>

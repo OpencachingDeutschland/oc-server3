@@ -15,6 +15,7 @@
 		{t}Reported caches{/t}
 	</div>
 
+	<div class="content2-container">
 	{if $error == 1}
 		<p style="line-height: 1.6em;">{t}The report is already assigned to another admin!{/t}</p>
 	{elseif $error == 2}
@@ -109,6 +110,7 @@
 
 		{include file=adminhistory.tpl reportdisplay=true showhistory=true}
 	{/if}
+	</div>
 
 </form>
 {/strip}

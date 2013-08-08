@@ -88,7 +88,7 @@
 {/if}
 
 <!-- Cachemeta -->
-<div class="content2-container line-box">
+<div class="content2-container line-box" style="float:left">  {* div height will be wroing without float:left - why *}  
 	<div class="">
 		<div class="nav4">
 			<ul id="cachemenu">
@@ -403,7 +403,7 @@
 		</p>
 	</div>
 
-	<div class="content2-container content2-section-no-p">
+	<div class="content2-container content2-section-no-p" style="float:left"> {* bottom margin would not work without float:left - why? *}
 		{foreach from=$pictures item=pictureItem}
 			<div class="viewcache-pictureblock">
 				<div class="img-shadow">

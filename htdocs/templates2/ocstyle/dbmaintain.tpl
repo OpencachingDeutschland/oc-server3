@@ -3,15 +3,19 @@
 *
 *  Unicode Reminder メモ
 ***************************************************************************}
- {* OCSTYLE - ohne Änderungen *}
+
+<div class="content2-pagetitle">
+	<img src="resource2/{$opt.template.style}/images/misc/32x32-tools.png" style="align: left; margin-right: 10px;" width="32" height="32" alt="" />
+	{t}Database maintainance{/t}
+</div>
+
 <form action="dbmaintain.php" method="post">
 	<table class="table">
 		<colgroup>
-			<col width="150">
-			<col>
+			<col width="150" />
+			<col />
 		</colgroup>
-		<tr><td class="header" colspan="2"><img src="resource2/{$opt.template.style}/images/misc/32x32-tools.png" border="0" width="32" height="32" align="middle" /><font size="4">  <b>{t}Database maintainance{/t}</b></font></td></tr>
-		<tr><td colspan="2">{t}Test for and fix inconsistencies in database tables{/t}</td></tr>
+		<tr><td colspan="2">{t}Test for and fix inconsistencies in database tables{/t}.</td></tr>
 		<tr><td class="spacer" colspan="2">&nbsp;</td></tr>
 
 		{foreach from=$procedures item=procItem}

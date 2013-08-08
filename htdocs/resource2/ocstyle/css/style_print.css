@@ -148,7 +148,7 @@ ul#statmenu { padding: 0px; margin: 0px;}
 
 .content2 {float: left; width: 790px; min-height: 500px; margin: 0px; padding: 0px 0px 0px 20px; color: rgb(75,75,75); font-size: 1.0em;}
 .content3 {float: left; width: 790px; min-height: 500px; margin: 0px; padding: 0px 0px 0px 20px; color: rgb(75,75,75); font-size: 1.0em;}
-.content2-container, .content3-container {clear: both; float: left; width: 100%; margin: 0px 0px 15px 0px; padding: 0px;}
+.content2-container, .content3-container {clear: both; width: 100%; margin: 0px 0px 15px 0px; padding: 0px;}
 .content2-container-1col, .content3-container-1col {overflow: hidden; width: 100%; margin: 0px; padding: 0px;}
 .content2-container-2col {overflow: hidden; width: 272px; margin: 0px; padding: 0px;}
 .content2-container-2col-left, .content3-container-2col-left {overflow: hidden; float: left; width: 272px; margin: 0px; padding: 0px;}
@@ -291,7 +291,7 @@ div.default {
 /* 7.3  Text colors */
 /*------------------*/
 .txt-white {color: rgb(255,255,255);}
-.txt-black {color: rgb(0,0,0);}
+.txt-black {color: rgb(75,75,75);}
 
 .txt-grey01 {color: rgb(242,242,242);}
 .txt-grey02 {color: rgb(230,230,230);}

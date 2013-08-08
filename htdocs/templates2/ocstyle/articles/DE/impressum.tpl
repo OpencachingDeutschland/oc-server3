@@ -11,7 +11,7 @@
 
 <div class="content2-container bg-blue02">
 	<p class="content-title-noshade-size3">
-		<img src="resource2/ocstyle/images/misc/32x32-news.png" style="align: left; margin-right: 10px;" width="32" height="32" alt="Lizenz" />
+		&nbsp;<span class="txt-black">§</span> &nbsp;
 		Zweck des Projektes
 	</p>
 </div>
@@ -39,7 +39,7 @@
 
 <div class="content2-container bg-blue02">
 	<p class="content-title-noshade-size3">
-		<img src="resource2/ocstyle/images/misc/32x32-news.png" style="align: left; margin-right: 10px;" width="32" height="32" alt="Lizenz" />
+		&nbsp;<span class="txt-black">§</span> &nbsp;
 		Betreiber des Internetangebotes
 	</p>
 </div>
@@ -110,7 +110,7 @@
 			
 <div class="content2-container bg-blue02">
 	<p class="content-title-noshade-size3">
-		<img src="resource2/ocstyle/images/misc/32x32-news.png" style="align: left; margin-right: 10px;" width="32" height="32" alt="Lizenz" />
+		&nbsp;<span class="txt-black">§</span> &nbsp;
 		Haftungshinweis f&uuml;r externe Links
 	</p>
 </div>
@@ -128,7 +128,7 @@
 
 <div class="content2-container bg-blue02">
 	<p class="content-title-noshade-size3">
-		<img src="resource2/ocstyle/images/misc/32x32-news.png" style="align: left; margin-right: 10px;" width="32" height="32" alt="Lizenz" />
+		&nbsp;<span class="txt-black">§</span> &nbsp;
 		<a name="tos"></a>Nutzungsbedingungen
 	</p>
 </div>
@@ -270,7 +270,7 @@
 	
 <div class="content2-container bg-blue02">
 	<p class="content-title-noshade-size3">
-		<img src="resource2/ocstyle/images/misc/32x32-news.png" style="align: left; margin-right: 10px;" width="32" height="32" alt="Lizenz" />
+		&nbsp;<span class="txt-black">§</span> &nbsp;
 		<a name="datalicense"></a>Datenlizenz
 	</p>
 </div>
@@ -309,7 +309,7 @@
 
 <div class="content2-container bg-blue02">
 	<p class="content-title-noshade-size3">
-		<img src="resource2/ocstyle/images/misc/32x32-news.png" style="align: left; margin-right: 10px;" width="32" height="32" alt="Lizenz" />
+		&nbsp;<span class="txt-black">§</span> &nbsp;
 		<a name="codelicense"></a>Quellcodelizenz
 	</p>
 </div>
@@ -337,13 +337,13 @@
 
 <div class="content2-container bg-blue02">
 	<p class="content-title-noshade-size3">
-		<img src="resource2/ocstyle/images/misc/32x32-news.png" style="align: left; margin-right: 10px;" width="32" height="32" alt="Lizenz" />
+		&nbsp;<span class="txt-black">§</span> &nbsp;
 		Hinweise zum Datenschutz
 	</p>
 </div>
 <div class="content-txtbox-noshade" style="padding-right: 25px;">
 	<p>
-		Die Datenschutzbelehrung kann auf folgender Internetseite abgerufen werden:<br />
+		Die Datenschutzbelehrung kann auf folgender Seite abgerufen werden:<br />
 		<br />
 		<a href="articles.php?page=dsb">http://www.opencaching.de/articles.php?page=dsb</a>
 	</p>

@@ -16,13 +16,10 @@
 	<tr><td class="spacer"></td></tr>
 	<tr>
 		<td>
-			Für Fragen rund um Opencaching und zum Thema Geocaching ist das <a href="http://wiki.opencaching.de">Opencaching-Wiki</a> eine gute Anlaufstelle. Weitere Informationen zum Geocaching gibt es auf <a href="http://www.geocaching.de">www.geocaching.de</a>.
-			<br />
-			<br />
-			Wenn du ein spezielles Problem hast und darauf keine Antwort findest, 
+			<p>Für Fragen rund um Opencaching und zum Thema Geocaching ist das <a href="http://wiki.opencaching.de">Opencaching-Wiki</a> eine gute Anlaufstelle. Weitere Informationen zum Geocaching gibt es auf <a href="http://www.geocaching.de">www.geocaching.de</a>.</p>
+			<p>Wenn du ein spezielles Problem hast und darauf keine Antwort findest, 
 			kannst du dir unter <a href="http://forum.opencaching-network.org/">forum.opencaching-network.org</a>
-			ein passendes Forum raussuchen und dich dort erkundigen.<br />
-			&nbsp;
+			ein passendes Forum raussuchen und dich dort erkundigen.</p>
 		</td>
 	</tr>
 
@@ -36,8 +33,6 @@
 			Hierfür gibt es ein eigenes Unterforum auf 
 			<a href="http://forum.opencaching-network.org/index.php?board=33.0">forum.opencaching-network.org</a>.
 			Dort findest du auch weitere Informationen, falls du in unserem Team mitmachen möchtest.
-			<br />
-			&nbsp;
 		</td>
 	</tr>
 
@@ -48,12 +43,13 @@
 	<tr><td class="spacer"></td></tr>
 	<tr>
 		<td>
-			Sollten die oben genannten Möglichkeiten nicht ausreichen oder die Betreiber von <i>opencaching.de</i> direkt 
-			kontaktiert werden, kannst du auch eine Email an <a href="mailto:contact@opencaching.de">contact@opencaching.de</a> schreiben.<br />
-			Bitte werde nicht ungeduldig wenn nicht sofort eine Antwort kommt, <i>opencaching.de</i> wird von Freiwilligen
-			betreut, die leider nicht immer und sofort zur Verfügung stehen können.<br />
-			&nbsp;
+			<p>Sollten die oben genannten Möglichkeiten nicht ausreichen oder die Betreiber von <i>opencaching.de</i> direkt 
+			kontaktiert werden, kannst du auch eine Email an <a href="mailto:contact@opencaching.de">contact@opencaching.de</a> schreiben.</p>
+			<p>Bitte werde nicht ungeduldig wenn nicht sofort eine Antwort kommt, <i>opencaching.de</i> wird von Freiwilligen
+			betreut, die leider nicht immer und sofort zur Verfügung stehen können.</p>
 		</td>
 	</tr>
 </table>
+
+<br />
 </div>

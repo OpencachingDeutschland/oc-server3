@@ -34,7 +34,7 @@
 		verarbeitenden Form zum Download an. Dabei sind die geltenden Datenschutzhinweise 
 		sowie Nutzungsbedingungen zu beachten.
 	</p>
-	<p>&nbsp;</p>
+	<br />
 </div>
 
 <div class="content2-container bg-blue02">
@@ -81,11 +81,13 @@
 	<p>
 		Der gesch&auml;ftsf&uuml;hrende Vorstand besteht aus (Stand 06.06.2013):
 	</p>
-	<ul class="indent">
-		<li>Michael Vaahsen, Vorsitzender</li>
-		<li>unbesetzt, stellv. Vorsitzender</li>
-		<li>Maik Bischoff, Kassenwart</li>
-	</ul>
+	<p>
+		<ul class="indent narrowlist">
+			<li>Michael Vaahsen, Vorsitzender</li>
+			<li>unbesetzt, stellv. Vorsitzender</li>
+			<li>Maik Bischoff, Kassenwart</li>
+		</ul>
+	</p>
 	
 	<p>
 		Alle Rechte und Pflichten von namentlich gekennzeichneten Artikeln liegen bei den 
@@ -104,7 +106,7 @@
 		Opencaching.de wird im folgenden als Synonym f&uuml;r den Betreiber des 
 		Internetauftritts verwendet.
 	</p>
-	<p>&nbsp;</p>
+	<br />
 </div>
 
 			
@@ -123,7 +125,7 @@
 		werden, bittet Opencaching.de darum per E-Mail dar&uuml;ber informiert zu werden. 
 		Der entsprechende Link wird dann gepr&uuml;ft und ggf. unverz&uuml;glich entfernt.
 	</p>
-	<p>&nbsp;</p>
+	<br />
 </div>
 
 <div class="content2-container bg-blue02">
@@ -265,7 +267,7 @@
 			zu beachten.
 		</li>
 	</ul>
-	<p>&nbsp;</p>
+	<br />
 </div>
 	
 <div class="content2-container bg-blue02">
@@ -302,9 +304,9 @@
 		<p>Aufgrund einiger Rückfragen weisen wir darauf hin, dass die Opencaching.de-Datenlizenz
 		selbstverständlich keine &bdquo;Exklusivlizenz&ldquo; ist. Das heißt, es steht jedem Nutzer frei,
 		seine Inhalte auf Opencaching.de oder an anderer Stelle auch unter weiteren Lizenzen zu
-		veröffentlichen (<em>Mehrfachlizenzierung</em>) und dies auch in den Cachelistings oder Logs zu vermerken.</p>
-	
-	<p>&nbsp;</p>
+		veröffentlichen (<em>Mehrfachlizenzierung</em>) und dies auch in den Cachelistings oder Logs zu vermerken.
+	</p>
+	<br />
 </div>
 
 <div class="content2-container bg-blue02">
@@ -332,7 +334,7 @@
 		Der Quellcode kann via <a href="https://github.com/OpencachingDeutschland/oc-server3">GitHub</a> 
 		bezogen werden.
 	</p>
-	<p>&nbsp;</p>
+	<br />
 </div>
 
 <div class="content2-container bg-blue02">
@@ -343,9 +345,10 @@
 </div>
 <div class="content-txtbox-noshade" style="padding-right: 25px;">
 	<p>
-		Die Datenschutzbelehrung kann auf folgender Seite abgerufen werden:<br />
-		<br />
+		Die Datenschutzbelehrung kann auf folgender Seite abgerufen werden:
+	</p>
+	<p>
 		<a href="articles.php?page=dsb">http://www.opencaching.de/articles.php?page=dsb</a>
 	</p>
-	<p>&nbsp;</p>
+	<br />
 </div>

@@ -12,7 +12,7 @@
 
 	<p>Im Folgenden sind alle Veränderungen ab OC Version&nbsp;3.0 aufgelistet. Manche Kleinigkeiten wurden zur besseren Übersicht weggelassen; sie sind im <a href="http://redmine.opencaching.de/projects/oc-dev/roadmap">Issue-Tracker</a>, in der <a href="https://github.com/OpencachingDeutschland/oc-server3/commits/stable">Codehistorie</a> und im <a href="http://forum.opencaching-network.org/index.php?board=43.0">Entwicklerforum</a> nachlesbar. Neue Funktionen werden manchmal schon vorab freigegeben.</p>
 
-	<p>Eine redaktionell aufbereitete Erläuterung neuer Opencaching-Funktionen gibt es auch im <a href="http://blog.dafb-o.de/">Altmetall-Blog</a>:</p>
+	<p>Eine redaktionell aufbereitete Erläuterung neuer OC-Versionen gibt es auch im <em>Altmetall-Blog</em>:</p>
 	<ul>
 		<li><a href="http://blog.dafb-o.de/alle-neune-oder-ein-update-fuer-opencachingde/">Version 9</a>: Suchfunktion, OConly-Features, Liste der eigenen Caches + Loghistorie, Schutzgebiete ...</li>
 		<li><a href="http://blog.dafb-o.de/opencaching-3-0-version-8-veroeffentlicht/">Version 8</a>: Statuslogs, Listinglayout, Koordinaten für zusätzliche Wegpunkte, Safari-Caches, Kartenfilteroptionen speichern, automatische Archivierung</li>
@@ -22,6 +22,8 @@
 		<li><a href="http://blog.dafb-o.de/page/2/">Version 4</a>: GPX-Wegpunkte und -Bildeinbettung, Nano-Caches, neue Datenlizenz</li>
 	</ul>
 	<br />
+
+	<div class="changelog-changes">
 
 	<p id="v3.0.9"><strong>OC 3.0 Version 9</strong> &ndash; 25. Juli 2013</p>
 	<p><a href="search.php">Suchfunktion</a> überarbeitet:</p>
@@ -382,4 +384,5 @@
    </ul>
 	<br />
 
+	</div>
 </div>

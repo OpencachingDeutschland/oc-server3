@@ -77,5 +77,5 @@
 
 			<p>Viele Gr&uuml;&szlig;e<br />
 			Euer Team von Opencaching Deutschland</p>
-
+			<br />
 </div>

@@ -64,11 +64,13 @@
 	<p>
 		The managing comittee are (as of July 06, 2013):
 	</p>
-	<ul class="indent">
-		<li>Michael Vaahsen, chairman</li>
-		<li>n.n., vice chairman</li>
-		<li>Maik Bischoff, treasurer</li>
-	</ul>
+	<p>
+		<ul class="indent narrowlist">
+			<li>Michael Vaahsen, chairman</li>
+			<li>n.n., vice chairman</li>
+			<li>Maik Bischoff, treasurer</li>
+		</ul>
+	</p>
 
 	<p>
 		All rights and responsibilities for articles marked with authors' names are held 
@@ -85,7 +87,7 @@
 		operator of this website.
 	</p>
 	
-	<p>&nbsp;</p>
+	<br />
 </div>
 
 <div class="content2-container bg-blue02">
@@ -104,7 +106,7 @@
 		necessary &ndash; remove the link.
 	</p>
 	
-	<p>&nbsp;</p>
+	<br />
 </div>
 
 <div class="content2-container bg-blue02">
@@ -226,7 +228,7 @@
 		</li>
 	</ul>
 	
-	<p>&nbsp;</p>
+	<br />
 </div>
 
 <div class="content2-container bg-blue02">
@@ -261,7 +263,7 @@
 		publish her contents &ndash; on the Opencaching.de website or somewhere else &ndash; under
 		additional licenses (<em>multiple licensing</em>). This may be noted in the geocache
 		descriptions and logs.</p>
-	<p>&nbsp;</p>
+	<br />
 </div>
 
 <div class="content2-container bg-blue02">
@@ -288,7 +290,7 @@
 		The source code can be obtained from <a href="https://github.com/OpencachingDeutschland/oc-server3">GitHub</a>.
 	</p>
 	
-	<p>&nbsp;</p>
+	<br />
 </div>
 
 <div class="content2-container bg-blue02">
@@ -304,5 +306,5 @@
 		<a href="articles.php?page=dsb">http://www.opencaching.de/articles.php?page=dsb</a>.
 	</p>
 	
-	<p>&nbsp;</p>
+	<br />
 </div>

@@ -4,4 +4,6 @@
  *  Unicode Reminder メモ
  ***************************************************************************}
  {* OCSTYLE *}
+<div class="article">
 {include file="articles/$language/$article.tpl"}
+</div>

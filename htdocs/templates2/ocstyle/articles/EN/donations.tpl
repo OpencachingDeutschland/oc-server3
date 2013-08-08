@@ -57,5 +57,5 @@
       
 			<p>Kind regards<br />
 			Your Opencaching Deutschland team</p>
-
+			<br />
 </div>

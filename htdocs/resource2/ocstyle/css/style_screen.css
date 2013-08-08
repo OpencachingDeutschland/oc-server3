@@ -353,7 +353,7 @@ ol.col4 { column-count:4; -moz-column-count:4; -webkit-column-count:4; line-heig
 .stattable th.nodatacell { width:auto; }
 span.percent { font-size: 11px; }
 
-.waypointtable { width: 96%; margin-bottom:4px; background-color: #d0d0d0; }
+.waypointtable { width: 96%; margin-bottom:4px; background-color: #c0c0c0; }
 .waypointtable td { font-size: 11px; }
 .waypointtable td.wpt_text { padding: 6px 6px 6px 8px; }
 

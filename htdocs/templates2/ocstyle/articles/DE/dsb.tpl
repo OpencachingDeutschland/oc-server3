@@ -20,7 +20,7 @@
 			<p>Einige Dienste der Opencaching-Internetseite erfordern eine Registrierung.
 			Bei der Registrierung muss</p>
 			 
-			<ul>
+			<ul class="narrowlist">
 				<li>ein frei gewählter Benutzername,</li>
 				<li>eine gültige E-Mail-Adresse und</li>
 				<li>ein vom Benutzer gewähltes Passwort</li>
@@ -34,7 +34,7 @@
 			eingeloggt bist, oder fördern den Kontakt zu anderen Geocachern. Folgende persönliche Daten
 			kannst du hier angeben, die gepeichert werden:</p>
 			
-			<ul>
+			<ul class="narrowlist">
 				<li>Vor- und Nachname</li>
 				<li>Heimatkoordinaten</li>
 				<li>Heimatland</li>
@@ -119,3 +119,4 @@
 			<p>Bei Unklarheiten oder im Zweifelsfall kontaktiere bitte
 			<a href="mailto:contact@opencaching.de">contact@opencaching.de</a>. Danke!</p>
 		</div>
+		<br />

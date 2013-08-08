@@ -1375,6 +1375,9 @@ div.logs {
 	margin: 0 0 10px 0;
 	padding: 3px 5px 5px 5px;
 	background: #fff url(../images/misc/bg-gradient-blue.png) repeat-x top left;
+	/* the gradient image has a height of some 1000 px to work around an MSEI
+	   rendering bug, which will create a blue line at the image bottom at
+	   certain zoom levels. */
 	border-radius: 5px;
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;

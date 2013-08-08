@@ -251,7 +251,7 @@
 				{* <!-- Social Media --> *}
 				{if $opt.page.showsocialmedia}
 					<p class="sidebar-maintitle">{t}Social media{/t}</p>
-					<div style="margin-top: 10px; margin-bottom: 12px; margin-left: auto; margin-right: auto; text-align: center">
+					<div style="margin-top: 10px; margin-bottom: 14px; margin-left: auto; margin-right: auto; text-align: center">
 						<table style="margin-left: auto; margin-right: auto;">
 							<tr>
 								<td class="smalltext2">{t}Follow us:{/t}</td>

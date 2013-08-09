@@ -4,7 +4,7 @@
 *  Unicode Reminder メモ
 ***************************************************************************}
 {* OCSTYLE *}
-<table class="table print">
+<table class="table print" width="100%">
 	<tr>
 		<td class="header-print">
 
@@ -143,7 +143,8 @@
 	  <tr>
 		  <td valign="top">
 				{foreach from=$attributes item=attributGroup}
-					<table cellspacing="0" style="display:inline-block;border-spacing:0px">
+					<div class="attribgroup" style="padding-right:6px">
+					<table cellspacing="0">
 						<tr>
 							<td bgcolor="{$attributGroup.color|escape}" style="line-height:9px;padding-top:2px;margin:0 0 0 0;border-left:1px solid gray;border-right:1px solid gray;border-top:1px solid gray;">
 								<font size="1">{$attributGroup.name|escape}</font>
@@ -156,7 +157,8 @@
 								{/foreach}
 							</td>
 						</tr>
-					</table>&nbsp;
+					</table>
+					</div>
 				{/foreach}
 		  </td>
 	  </tr>

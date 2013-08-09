@@ -402,8 +402,16 @@
 	/* search engines
 	 * will be excluded from cache visitor count
 	 * current active bots on www.opencaching.de in 03/2013:
+	 *
+	 * (I added this and then noticed that is may be unnecessary, as the
+	 * visit counter function is special javascript code which probably is not
+	 * executed by search engines.  -- following)
 	 */
 	$opt['logic']['search_engines'] = 'AcoonBot;AhrefsBot;Baiduspider;bingbot;Exabot;Ezooms;Googlebot;Googlebot-mobile;ia_archiver,Linguee Bot;Mail.RU_Bot;MJ12bot;msnbot;SISTRIX Crawler;Sophora Linkchecker;TweetmemeBot;WBSearchBot;Yahoo! Slurp;YandexBot';
+
+	/* default maximum of OConly-81 ranklist members
+	 */
+	$opt['logic']['oconly81']['default_maxusers'] = 60;
 
 	/* opencaching prefixes in database available to search for
 	 */

@@ -23,7 +23,7 @@
 					<p class="content-title-noshade-size3">
 						<img src="resource2/{$opt.template.style}/images/misc/32x32-news.png" style="align: left; margin-right: 10px;" width="24" height="24" alt="" />
 						<a href="http://blog.opencaching.de/" style="color:rgb(88,144,168); text-decoration: none;">{t}News{/t}</a>
-						&nbsp; <span style="color:black; font-size:0.8em; font-weight:normal">[<a href="http://blog.opencaching.de/">{t}more{/t}...</a>]</span>
+						&nbsp; <span class="content-title-size3-more">[<a href="http://blog.opencaching.de/">{t}more{/t}...</a>]</span>
 					</p>
 				</td>
 				{if "$newsfeed" != ""}
@@ -80,7 +80,7 @@
 	<p class="content-title-noshade-size3">
 		<img src="resource2/{$opt.template.style}/images/misc/32x32-pictures.gif" style="align: left; margin-right: 10px;" width="24" height="24" />
 		<a href="newlogpics.php" style="color:rgb(88,144,168); text-decoration: none;">{t}New log pictures{/t}</a>
-	&nbsp; <span style="color:black; font-size:0.8em; font-weight:normal">[<a href="newlogpics.php">{t}more{/t}...</a>]</span>
+	&nbsp; <span class="content-title-size3-more">[<a href="newlogpics.php">{t}more{/t}...</a>]</span>
 	</p>
 </div>
 {include file="res_logpictures.tpl" logdate=true loguser=true}
@@ -143,7 +143,7 @@
 	<p class="content-title-noshade-size3">
 		<img src="resource2/{$opt.template.style}/images/cacheicon/traditional.gif" style="align: left; margin-right: 10px;" width="24" height="24" alt="" />
 		<a href="newcaches.php" style="color:rgb(88,144,168); text-decoration: none;">{t 1=$usercountry|escape}Newest caches in %1{/t}</a>
-	&nbsp; <span style="color:black; font-size:0.8em; font-weight:normal">[<a href="newcaches.php?country={$usercountryCode}">{t}more{/t}...</a>]</span>
+	&nbsp; <span class="content-title-size3-more">[<a href="newcaches.php?country={$usercountryCode}">{t}more{/t}...</a>]</span>
 	</p>
 </div>
 <p style="line-height: 1.6em;">({t 1=$count_hiddens 2=$count_founds 3=$count_users}Total of %1 active Caches and %2 founds by %3 users{/t})</p>

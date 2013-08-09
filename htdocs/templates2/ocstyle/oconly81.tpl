@@ -20,6 +20,9 @@
 		<p class="content-title-noshade-size2">
 			<img src="resource2/{$opt.template.style}/images/profile/32x22-profile.png" style="align: left; margin-right: 10px;" width="32" height="22"  /> 
 			{t}Participants{/t}
+			{if !$showall && ($users|@count > $default_maxusers)}
+				&nbsp; <span class="content-title-size3-more">[<a href="oconly81.php?showall=1">{t}Show all{/t}</a>]</span>
+			{/if}
 		</p>
 	</div>
 
@@ -28,8 +31,12 @@
 	</p>
 
 	<ul class="col4">
-		{foreach from=$users item=user}
-			<li><a href="viewprofile.php?userid={$user.user_id}#oconly81">{$user.username}</a> ({$user.count})</li>
+		{foreach from=$users key=n item=user}
+			{if $showall || ($n < $default_maxusers)}
+				<li>
+					<a href="viewprofile.php?userid={$user.user_id}#oconly81">{$user.username}</a> ({$user.count})
+				</li>
+			{/if}
 		{/foreach}
 	</ul>
 

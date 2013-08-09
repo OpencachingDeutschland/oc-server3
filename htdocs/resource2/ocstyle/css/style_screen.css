@@ -275,6 +275,8 @@ ul#statmenu { padding: 0px; margin: 0px;}
 }
 .content-title-noshade-size5 {margin: 0px; padding: 0px; color: rgb(88,144,168); font-weight: bold; font-size: 200%;}
 
+.content-title-size3-more { color:black; font-size:0.8em; font-weight:normal; }
+
 td.content-title-flag {
 	margin-left:0 !important;
 	padding-left:0 !important;

@@ -366,6 +366,7 @@ span.percent { font-size: 11px; }
 .waypointtable td { font-size: 11px; }
 .waypointtable td.wpt_text { padding: 6px 6px 6px 8px; }
 
+.print td { line-height: 1.25em; }
 .printwptable td { line-height:1.4em; font-size:125%;}
 .printwptable td.framed { border-bottom:1px solid #aaa; border-top:1px solid #aaa; }  
 .print-cachemeta td { font-size:100%; padding:0 0.6em 1px 0; }

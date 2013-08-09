@@ -4,7 +4,7 @@
 *  Unicode Reminder メモ
 ***************************************************************************}
 {* OCSTYLE *}
-<table class="table">
+<table class="table print">
 	<tr>
 		<td class="header-print">
 
@@ -31,7 +31,7 @@
 					</td>
 					<td align="left" valign="top" width="99%">
 						<font size="3"><b>{$cache.name|escape}</b></font><br />
-						<span style="font-weight:400">&nbsp;{t}by{/t} <a>{$cache.username|escape}</a></span><br />
+						<span style="font-weight:400">&nbsp;{t}by{/t} {$cache.username|escape}</span><br />
 						{if $cache.shortdesc!=''}
 							{$cache.shortdesc|escape}<br />
 						{/if}
@@ -44,7 +44,6 @@
 						</nobr>
 					</td>
 				</tr>
-				<tr><td class="spacer"></td></tr>
 			</table>
 		</td>
 	</tr>
@@ -67,7 +66,7 @@
 					<td valign="top" style="padding-left:0">
 						<img src="resource2/{$opt.template.style}/images/description/22x22-location.png"  width="22" height="22" border="0" alt="" title="" align="left" />&nbsp;
 						<font size="3"><b><nobr>{$coordinates.lat|escape}</nobr> <nobr>{$coordinates.lon|escape}</nobr></b></font> <font size="1">(WGS84)</font><br />
-						<font size="1"><br /></font>
+						<div style="height:0.5em"></div>
 						<table class="print-cachemeta" cellspacing="0" cellpadding="0">
 							<tr><td>{t}Size{/t}:</td><td>{$cache.sizeName|escape}<br /></td></tr>
 						{if $cache.searchtime>0}
@@ -161,7 +160,7 @@
 				{/foreach}
 		  </td>
 	  </tr>
-	  <tr><td class="spacer-print"><br /></td></tr>
+	  <tr><td class="spacer-print"><div style="height:0.5em"></div></td></tr>
 	{/if}
 
 	{* Description *}

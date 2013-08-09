@@ -80,7 +80,7 @@
 			{/if}
 
 			{* the position of the following image is the anchor for enlargit activity: *}
-			<a name="piclink" href="{$pictureItem.url}" onclick="enlarge(document.getElementById('pic{$pictureItem.id}'))" style="cursor:pointer">{$pictureItem.title|escape}<img id="pic{$pictureItem.id}" src="resource2/ocstyle/images/misc/empty.png" longdesc="{$pictureItem.url}" /></a>
+			<a name="piclink" href="{$pictureItem.url}" onclick="enlarge(document.getElementById('pic{$pictureItem.id}'))" style="cursor:pointer">{$pictureItem.title|escape}<img id="pic{$pictureItem.id}" class="enlargegroup{$logItem.id}" src="resource2/ocstyle/images/misc/empty.png" longdesc="{$pictureItem.url}" title="{$pictureItem.title|replace:"'":"´"|replace:'"':'´´'}" alt="{$pictureItem.title|replace:"'":"´"|replace:'"':'´´'}" /></a> {* ' in title would cause enlargit and IE errors, even if escaped *}
 			{if $pictureItem.spoiler}
 				({t}Spoiler{/t})
 			{/if}

@@ -152,6 +152,7 @@ function enl_init()
         if (enl_ui.search(/enlarge/) != -1)
         {
           enl_imglist[enl_i].title = '';
+          enl_imglist[enl_i].saveClassName = enl_imglist[enl_i].className;
           if (enl_isie) enl_imglist[enl_i].galleryimg = 'no';
           if (!enl_imglist[enl_i].id) enl_imglist[enl_i].id = 'enl_autoid'+enl_i;
           enl_setcur(enl_imglist[enl_i],enl_pluscur,'pointer','hand');
@@ -388,6 +389,7 @@ function enl_getnext(enl_imgid,enl_prvnxt)
 function enl_mkborder(enl_imgid)
 {
   enl_img = enl_geto(enl_imgid);
+  enl_img.className = '';  // removes the OC image shadow
   enl_brdclone = enl_geto(enl_imgid+"brd");
   if (enl_wheelnav) enl_wheelenable(enl_brdclone);
   if (enl_titlebar && enl_brdsize < enl_btnheight+4)
@@ -419,6 +421,7 @@ function enl_delborder(enl_imgid)
   enl_hide(enl_brdm);
   enl_setpos(enl_brdm,-5000,0);
   if (enl_shadow) enl_delshadow(enl_imgid);
+  enl_img.className = enl_img.saveClassName;  // restores the OC image shadow
 }
 
 // -------- main functions -------
@@ -949,7 +952,7 @@ function enl_mktitlebar(enl_imgid)
     }
     enl_gettitle = enl_orig.alt;
     if (!enl_gettitle) enl_gettitle='';
-    if (enl_gettitle.length > Math.round(enl_maxwidth*0.08)) enl_gettitle = enl_gettitle.substring(0, Math.round(enl_maxwidth*0.08)-2)+'...';
+    if (enl_gettitle.length > Math.round(enl_maxwidth*0.1)) enl_gettitle = enl_gettitle.substring(0, Math.round(enl_maxwidth*0.1)-2)+'...';
     enl_title.innerHTML = enl_gettitle;
     enl_title.style.width = enl_maxwidth+'px';
     enl_btns.appendChild(enl_title);

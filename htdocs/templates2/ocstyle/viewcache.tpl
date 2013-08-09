@@ -171,7 +171,7 @@
 <!--  End Warning -->
 
 <!-- Cachedetails -->
-<div class="content2-container">
+<div class="content2-container" style="margin-bottom:8px">
 	<table cellspacing="0" cellpadding="0" width="100%">
 		<tr>
 			<td style="vertical-align:top">
@@ -273,7 +273,6 @@
 				</select>&nbsp;
 				<img src="resource2/{$opt.template.style}/images/viewcache/14x19-gps-device.png" class="icon16" alt="" />
 				<a class="send-to-gps" href="#" onclick="window.open('garmin.php?lat={$cache.latitude}&lon={$cache.longitude}&wp={$cache.wpoc}','{t escape=js}Send{/t}','width=640,height=320,resizable=no,scrollbars=1')"><input name="SendToGPS" value="{t}Send to GPS device{/t}" id="SendToGPS" type="button" /></a>
-				<br /><br />
 			</p></td>	
 		</tr>
 	</table>
@@ -283,9 +282,7 @@
 
 <!-- Attributes -->
 {if count($attributes)>0}
-	<div class="content2-container bg-blue02">
-		<p class="content-title-noshade-size2"><img src="resource2/{$opt.template.style}/images/description/22x22-encrypted.png" style="align: left; margin-right: 10px;" width="22" height="22" alt="{t}Cache attributes{/t}" /> {t}Cache attributes{/t}</p>
-	</div>
+	<div class="content2-container line-box"></div>
 	<div class="content2-container">
 		<p style="line-height: 1.6em;">
 			{include file="res_attribgroup.tpl" attriblist=$attributes}

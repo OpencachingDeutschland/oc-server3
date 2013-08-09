@@ -12,6 +12,10 @@
 /*   Additions for OC/OC.de:  Sp2ong                         */
 /*   Additions for OC.de:     Schrottie                      */
 /*************************************************************/
+
+/* When adding or changing styles, please check out if style_print.css
+ * needs to be updated, too! */
+
 html {
 	height: 100%;
 }
@@ -33,7 +37,7 @@ body.popup {
 	width: 970px;
 	margin: 29px auto auto auto;
 	padding: 0px;
-	background-color:#ffffff;
+	background-color: #ffffff;
 	border: solid 1px rgb(100,100,100);
 	position: relative;
 }
@@ -93,10 +97,6 @@ div#bg2 {display: none;}
 /*************************************/
 /* SECTION 2 - HEADER AND NAVIGATION */
 /*************************************/
-
-/* search results */
-.bgcolor1 {background-color: rgb(255,255,255);}
-.bgcolor2 {background-color: rgb(219,230,241);}
 
 /*-----------------------------------*/
 /* 2.1 - Sitename, slogan and banner */
@@ -241,7 +241,7 @@ ul#statmenu { padding: 0px; margin: 0px;}
 .content3 {float: left; width: 790px; min-height: 500px; margin: 0px; padding: 0px 0px 0px 20px; color: rgb(75,75,75); font-size: 1.0em;}
 .content2-container, .content3-container {clear: both; width: 769px; margin: 0px 0px 15px 0px; padding: 0px;}
 .content2-section-no-p { margin-bottom: 20px !important; }
-  /* use if a section does not contain a <p>..</p> to obtain equal spacing to other sections */ 
+/* use if a section does not contain a <p>..</p> to obtain equal spacing to other sections */
 .content2-container-1col, .content3-container-1col {overflow: hidden; width: 769px; margin: 0px; padding: 0px;}
 /* removed "overflow:hidden" from content2-container-2col* to fix bug RT #3886 ... */
 .content2-container-2col {width: 272px; margin: 0px; padding: 0px;}
@@ -308,12 +308,13 @@ div.welcome p {line-height: 1.6em;}
 p.inheader {margin:4px; font-size:125%;}
 p.spacer_before {margin-top:12px;}
 p.startmessage { line-height: 1.4em; }
-p.printlogheader { font-size:120%; }
 .article p { line-height: 1.4em; margin-bottom:0.8em; }
+p.printlogheader { font-size:120%; }
 #cachedescinfo p { margin-bottom:12px; }
 table.cachedesctable p { margin-bottom: 6px !important; }
 .changelog-changes p { line-height:1em; padding-top:6px;}
 p.content-title-noshade-size3 { margin:0 !important; }
+p.editlog { font-weight: 400; display:inline; }
 
 /* Quote */
 p.quote {clear: left; margin: 0em 30px 0.6em 30px;	line-height: 120%; font-size: 110%;}
@@ -367,7 +368,7 @@ span.percent { font-size: 11px; }
 
 .printwptable td { line-height:1.4em; font-size:125%;}
 .printwptable td.framed { border-bottom:1px solid #aaa; border-top:1px solid #aaa; }  
-.print-cachemeta td { font-size:100%; line-height:1em }
+.print-cachemeta td { font-size:100%; padding:0 0.6em 1px 0; }
 td.header-small-print { font-size: 140%; font-weight:bold; padding-top:0; }
 
 td.listicon {
@@ -459,6 +460,59 @@ a.links:hover {
 /* other */
 a.nooutline:focus { outline: 0; }
 
+/* ----> What is this? Is it still in use somewhere? */
+a.info{
+    position:relative; /*this is the key*/
+    z-index:24; background-color:#FFFFFF;
+    color:#000;
+    text-decoration:none;
+}
+
+a.info:visited {
+	color: black;
+	text-decoration:none;
+}
+
+a.info:hover{
+	z-index:25;
+	background-color:#FFFFFF;
+}
+
+a.info span{
+	display: none
+}
+
+a.info:hover span{ /*the span will display just on :hover state*/
+    display:block;
+    position:relative;
+    bottom:15em; left:0em; width:15em;
+    border:1px solid #000;
+    background-color:#FFFFCC; color:#000;
+    text-align: left; font-size: 11px;
+	}
+/* <---- */
+
+/* external links in Maindiv, decorated with ext-icon */
+
+#ocmain a[href^="http:"], #ocmain a[href^="https:"]
+{
+	padding-right: 14px;
+	background-image: url('../images/misc/linkicon.png');
+	background-repeat: no-repeat;
+	background-position: right center;
+}
+
+/* internal links without symbol */
+
+/* This setting is especially important for popup InfoWindows on google maps,
+   as the right-padding is not correctly calculated into the GM InfoWindow
+   content size. */
+
+#googlemap a[href], #ocmain a[href^="http://www.opencaching"], #ocmain a[href^="http://blog.opencaching"], #ocmain a[href^="http://wiki.opencaching"], #ocmain a[href^="http://opencaching"], #ocmain a[href^="http://test.opencaching"], #ocmain a[href^="http://local.opencaching"], #ocmain a[href^="http://oc-devel"]
+{
+	padding-right: 0;
+	background-image: none;
+}
 
 /*******************************/
 /* SECTION 7 - GENERIC CLASSES */
@@ -921,44 +975,6 @@ div.gsc-resultsRoot, div.gsc-branding-text, img.gsc-branding-img {
 	font-size: 14px;
 }
 
-a.info{
-    position:relative; /*this is the key*/
-    z-index:24; background-color:#FFFFFF;
-    color:#000;
-    text-decoration:none;
-}
-    
-a.info:visited {
-	color: black;
-	text-decoration:none;
-}
-
-a.info:hover{
-	z-index:25; 
-	background-color:#FFFFFF;
-}
-
-a.info span{
-	display: none
-}
-
-a.info:hover span{ /*the span will display just on :hover state*/
-    display:block;
-    position:relative;
-    bottom:15em; left:0em; width:15em;
-    border:1px solid #000;
-    background-color:#FFFFCC; color:#000;
-    text-align: left; font-size: 11px;
-	}
- 
-/* DWJ-Logo */
-
-#dwj {
-	line-height:0.8em;
-	font-size:small;
-	font-family:Verdana,Arial,Helvetica,sans-serif;
-	margin-right:5px;
-}
 
 /* Breadcrumb-Navigation */
 
@@ -1021,28 +1037,6 @@ ul.nodot li {
 	right: 15px;
 }
 
-/* external links in Maindiv, decorated with ext-icon */
-
-#ocmain a[href^="http:"], #ocmain a[href^="https:"]
-{
-	padding-right: 14px;
-	background-image: url('../images/misc/linkicon.png');
-	background-repeat: no-repeat;
-	background-position: right center;
-}
-
-/* internal links without symbol */
-
-/* This setting is especially important for popup InfoWindows on google maps,
-   as the right-padding is not correctly calculated into the GM InfoWindow
-   content size. */
-
-#googlemap a[href], #ocmain a[href^="http://www.opencaching"], #ocmain a[href^="http://blog.opencaching"], #ocmain a[href^="http://wiki.opencaching"], #ocmain a[href^="http://opencaching"], #ocmain a[href^="http://test.opencaching"], #ocmain a[href^="http://local.opencaching"], #ocmain a[href^="http://oc-devel"]
-{
-	padding-right: 0;
-	background-image: none;
-}
-
 /* attributes on search page */
 
 div#attribs1 {
@@ -1064,9 +1058,7 @@ div.attribswide {
 	margin: 0;
 }
 
-
 div.attribgroup td {padding: 3px 5px 2px 5px; text-align: left; font-size: 120%;}
-
 
  /* CSS-Hack for Firefox */
  
@@ -1519,7 +1511,6 @@ div#havefound {
 .quoteheader, .topslice_quote, .bbc_standard_quote  { display:none; }
 #forum div.rsstext img {max-width:200px; max-height:120px;}
 
-p.editlog { font-weight: 400; display:inline; }
 .newsymbol { background:#ff9d11; color:#fff; font-size:0.9em;}
 
 label.disabled { color:grey; }
@@ -1528,7 +1519,9 @@ label.disabled { color:grey; }
 .smalltext { font-size:10px !important }
 .smalltext2 { font-size:11px !important }
 
-p.startmessage { line-height: 1.4em; }
-
 .subtitle { font-weight:bold; }
 .subtitle-header { font-weight:bold; line-height: 1.6em }
+
+/* search results */
+.bgcolor1 {background-color: rgb(255,255,255);}
+.bgcolor2 {background-color: rgb(219,230,241);}

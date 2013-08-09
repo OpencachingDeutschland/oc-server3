@@ -144,20 +144,20 @@
 		  <td valign="top">
 				{foreach from=$attributes item=attributGroup}
 					<div class="attribgroup" style="padding-right:6px">
-					<table cellspacing="0">
-						<tr>
-							<td bgcolor="{$attributGroup.color|escape}" style="line-height:9px;padding-top:2px;margin:0 0 0 0;border-left:1px solid gray;border-right:1px solid gray;border-top:1px solid gray;">
-								<font size="1">{$attributGroup.name|escape}</font>
-							</td>
-						</tr>
-						<tr>
-							<td bgcolor="#F8F8F8" style="margin:0 0 0 0;border-left:1px solid gray;border-right:1px solid gray;border-bottom:1px solid gray;">
-								{foreach from=$attributGroup.attr item=attributeItem}
-									{include file="res_attribute.tpl" id=$attributeItem.id state=1 name=$attributeItem.name icon=$attributeItem.icon html_desc=$attributeItem.html_desc color=$attributGroup.color}
-								{/foreach}
-							</td>
-						</tr>
-					</table>
+						<table cellspacing="0">
+							<tr>
+								<td bgcolor="{$attributGroup.color|escape}" style="line-height:9px;padding-top:2px;margin:0 0 0 0;border-left:1px solid gray;border-right:1px solid gray;border-top:1px solid gray;">
+									<font size="1">{$attributGroup.name|escape}</font>
+								</td>
+							</tr>
+							<tr>
+								<td bgcolor="#F8F8F8" style="margin:0 0 0 0;border-left:1px solid gray;border-right:1px solid gray;border-bottom:1px solid gray;">
+									{foreach from=$attributGroup.attr item=attributeItem}
+										{include file="res_attribute.tpl" id=$attributeItem.id state=1 name=$attributeItem.name icon=$attributeItem.icon html_desc=$attributeItem.html_desc color=$attributGroup.color}
+									{/foreach}
+								</td>
+							</tr>
+						</table>
 					</div>
 				{/foreach}
 		  </td>

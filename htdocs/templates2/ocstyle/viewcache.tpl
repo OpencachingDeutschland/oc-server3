@@ -284,9 +284,11 @@
 {if count($attributes)>0}
 	<div class="content2-container line-box"></div>
 	<div class="content2-container">
-		<p style="line-height: 1.6em;">
-			{include file="res_attribgroup.tpl" attriblist=$attributes}
-		</p>
+		<div style="padding-left:2px">
+			<p style="line-height: 1.6em;">
+				{include file="res_attribgroup.tpl" attriblist=$attributes}
+			</p>
+		</div>
 	</div>
 {else}
 	<br />

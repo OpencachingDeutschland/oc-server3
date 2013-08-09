@@ -9,8 +9,15 @@
 
 	require('./lib2/web.inc.php');
 	require_once('./lib2/logic/cache.class.php');
+
 	$tpl->name = 'viewlogs';
 	$tpl->menuitem = MNU_CACHES_VIEWLOGS;
+
+	// 'tagloadlogs' produces a stripped-down version of the loglist for
+	// log autoloading (see viewcache.php). The actual log block to be inserted
+	// is tagged with <ocloadlogs>...</ocloadlogs>.
+	$tagloadlogs = (@$_REQUEST['tagloadlogs'] == 1);
+	$tpl->popup = $tagloadlogs;
 
 	$login->verify();
 
@@ -74,7 +81,7 @@
 	$tpl->assign('cache', $rCache);
 
 	$tpl->assign('logs', cache::getLogsArray($cache_id, $start, $count, $deleted));
-	$tpl->assign('tagloadlogs', @$_REQUEST['tagloadlogs'] == 1);
+	$tpl->assign('tagloadlogs', $tagloadlogs);
 	
 
 	$tpl->display();

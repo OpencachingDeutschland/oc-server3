@@ -288,6 +288,8 @@
 			{include file="res_attribgroup.tpl" attriblist=$attributes}
 		</p>
 	</div>
+{else}
+	<br />
 {/if}
 <!-- End Attributes -->
 

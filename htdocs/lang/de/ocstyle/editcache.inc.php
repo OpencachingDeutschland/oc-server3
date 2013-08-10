@@ -21,7 +21,7 @@
 
  	$error_wrong_node = t('This cache has been created on another Opencaching website. The cache can only be edited there.');
 
-	$all_countries_submit = '<input type="submit" name="show_all_countries_submit" value="' . t('Show all') . '"/>';
+	$all_countries_submit = '<input type="submit" name="show_all_countries_submit" id="showallcountries" value="' . t('Show all') . '" class="formbutton" onclick="submitbutton(\'showallcountries\')" />';
  	$error_general = "<tr><td class='error' colspan='2'><b>" . t('Some errors occured, please check the marked fields.') . "</b></td></tr>";
 	$name_message = '&nbsp;<span class="errormsg">' . t('Cachename is invalid') . '</span>';
 	$date_message = '<span class="errormsg">' . t('date is invalid') . '</span>';

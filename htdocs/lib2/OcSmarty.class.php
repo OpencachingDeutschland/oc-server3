@@ -281,6 +281,7 @@ class OcSmarty extends Smarty
 		$this->assign('sys_runtime', $this->bench->diff());
 
 		$this->assign('screen_css_time',filemtime($opt['rootpath'] . "resource2/" . $opt['template']['style'] . "/css/style_screen.css"));
+		$this->assign('screen_msie_css_time',filemtime($opt['rootpath'] . "resource2/" . $opt['template']['style'] . "/css/style_screen_msie.css"));
 		$this->assign('print_css_time',filemtime($opt['rootpath'] . "resource2/" . $opt['template']['style'] . "/css/style_print.css"));
 
 		// check if the template is compiled

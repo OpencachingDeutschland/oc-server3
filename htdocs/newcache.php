@@ -258,11 +258,11 @@
 			{
 				if ($activate_hour == $i)
 				{
-					$activation_hours .= '<option value="' . $i . '" selected="selected">' . $i . '</options>';
+					$activation_hours .= '<option value="' . $i . '" selected="selected">' . $i . '</option>';
 				}
 				else
 				{
-					$activation_hours .= '<option value="' . $i . '">' . $i . '</options>';
+					$activation_hours .= '<option value="' . $i . '">' . $i . '</option>';
 				}
 				$activation_hours .= "\n";
 			}
@@ -287,11 +287,11 @@
 			{
 				if ($difficulty == $i)
 				{
-					$difficulty_options .= '<option value="' . $i . '" selected="selected">' . $i / 2 . '</options>';
+					$difficulty_options .= '<option value="' . $i . '" selected="selected">' . $i / 2 . '</option>';
 				}
 				else
 				{
-					$difficulty_options .= '<option value="' . $i . '">' . $i / 2 . '</options>';
+					$difficulty_options .= '<option value="' . $i . '">' . $i / 2 . '</option>';
 				}
 				$difficulty_options .= "\n";
 			}
@@ -304,11 +304,11 @@
 			{
 				if ($terrain == $i)
 				{
-					$terrain_options .= '<option value="' . $i . '" selected="selected">' . $i / 2 . '</options>';
+					$terrain_options .= '<option value="' . $i . '" selected="selected">' . $i / 2 . '</option>';
 				}
 				else
 				{
-					$terrain_options .= '<option value="' . $i . '">' . $i / 2 . '</options>';
+					$terrain_options .= '<option value="' . $i . '">' . $i / 2 . '</option>';
 				}
 				$terrain_options .= "\n";
 			}
@@ -405,7 +405,7 @@
 			if ($show_all_countries == 0)
 			{
 				tpl_set_var('show_all_countries', '0');
-				tpl_set_var('show_all_countries_submit', '<input type="submit" name="show_all_countries_submit" value="' . $show_all . '"/>');
+				tpl_set_var('show_all_countries_submit', '<input type="submit" id="showallcountries" class="formbutton" name="show_all_countries_submit" value="' . $show_all . '" onclick="submitbutton(\'showallcountries\')" />');
 
 				$rs = sql("SELECT `countries`.`short`, IFNULL(`sys_trans_text`.`text`, `countries`.`name`) AS `name` FROM `countries` INNER JOIN `countries_list_default` ON `countries_list_default`.`show`=`countries`.`short` LEFT JOIN `sys_trans` ON `countries`.`trans_id`=`sys_trans`.`id` LEFT JOIN `sys_trans_text` ON `sys_trans`.`id`=`sys_trans_text`.`trans_id` AND `sys_trans_text`.`lang`='&1' WHERE `countries_list_default`.`lang`='&1' ORDER BY `name` ASC", $locale);
 			}

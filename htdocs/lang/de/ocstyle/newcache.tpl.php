@@ -160,7 +160,7 @@ function toggleAttr(id)
 	<tr>
 		<td valign="top">{t}Coordinates:{/t}</td>
 		<td>
-			<select name="latNS" class="input40">
+			<select name="latNS">
 				<option value="N"{latNsel}>{t}N{/t}</option>
 				<option value="S"{latSsel}>{t}S{/t}</option>
 			</select>
@@ -168,7 +168,7 @@ function toggleAttr(id)
 			°&nbsp;<input type="text" name="lat_min" maxlength="6" value="{lat_min}" class="input50" />&nbsp;'&nbsp;
 			{lat_message}
 			&nbsp;&nbsp;
-			<select name="lonEW" class="input40">
+			<select name="lonEW">
 				<option value="E"{lonEsel}>{t}E{/t}</option>
 				<option value="W"{lonWsel}>{t}W{/t}</option>
 			</select>
@@ -184,7 +184,7 @@ function toggleAttr(id)
 			<select name="country" class="input200">
 				{countryoptions}
 			</select>
-			{show_all_countries_submit}
+			&nbsp;{show_all_countries_submit}
 		</td>
 	</tr>
 	<tr><td class="spacer" colspan="2"></td></tr>
@@ -364,7 +364,7 @@ function toggleAttr(id)
 		<td>{t}Publication:{/t}</td>
 		<td>
 			<input type="radio" class="radio" name="publish" id="publish_now" value="now2" {publish_now_checked} />&nbsp;<label for="publish_now">{t}Publish now{/t}</label><br />
-			<input type="radio" class="radio" name="publish" id="publish_later" value="later" {publish_later_checked} />&nbsp;<label for="publish_later">{t}Publish on{/t}</label>
+			<input type="radio" class="radio" name="publish" id="publish_later" value="later" {publish_later_checked} />&nbsp;<label for="publish_later">{t}Publish on{/t}</label>&nbsp;
 			<input class="input20" type="text" name="activate_day" maxlength="2" value="{activate_day}"/>.
 			<input class="input20" type="text" name="activate_month" maxlength="2" value="{activate_month}"/>.
 			<input class="input40" type="text" name="activate_year" maxlength="4" value="{activate_year}"/>&nbsp;

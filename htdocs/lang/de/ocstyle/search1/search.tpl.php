@@ -531,14 +531,14 @@ function switchAttributeCat2()
 		<tr>
 			<td valign="top">{t}Of coordinates:{/t}</td>
 			<td colspan="2" valign="top">
-				<select name="latNS" class="input40">
+				<select name="latNS">
 					<option value="N" {latN_sel}>{t}N{/t}</option>
 					<option value="S" {latS_sel}>{t}S{/t}</option>
 				</select>&nbsp;
 				<input type="text" name="lat_h" maxlength="2" value="{lat_h}" class="input30" />&nbsp;°&nbsp;
 				<input type="text" name="lat_min" maxlength="6" value="{lat_min}" class="input40" />&nbsp;'&nbsp;
 				<br>
-				<select name="lonEW" class="input40">
+				<select name="lonEW">
 					<option value="E" {lonE_sel}>{t}E{/t}</option>
 					<option value="W" {lonW_sel}>{t}W{/t}</option>
 				</select>&nbsp;

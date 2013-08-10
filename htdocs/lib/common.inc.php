@@ -446,6 +446,7 @@ function __autoload($class_name)
 		global $tpl_usercountries;
 
 		tpl_set_var('screen_css_time',filemtime($opt['rootpath'] . "resource2/" . $style . "/css/style_screen.css"));
+		tpl_set_var('screen_msie_css_time',filemtime($opt['rootpath'] . "resource2/" . $style . "/css/style_screen_msie.css"));
 		tpl_set_var('print_css_time',filemtime($opt['rootpath'] . "resource2/" . $style . "/css/style_print.css"));
 
 		if (isset($bScriptExecution))

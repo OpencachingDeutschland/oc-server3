@@ -272,7 +272,7 @@
 					<option value="search.php?searchto=searchbycacheid&showresult=1&f_inactive=0&f_ignored=0&startat=0&cacheid={$cache.cacheid}&output=txt">TXT</option>
 				</select>&nbsp;
 				<img src="resource2/{$opt.template.style}/images/viewcache/14x19-gps-device.png" class="icon16" alt="" />
-				<a href="#" onclick="window.open('garmin.php?lat={$cache.latitude}&lon={$cache.longitude}&wp={$cache.wpoc}','{t escape=js}Send{/t}','width=640,height=320,resizable=no,scrollbars=1')"><input class="exportbutton" value="{t}Send to GPS device{/t}" type="button" /></a>
+				<input type="button" class="exportbutton" value="{t}Send to GPS device{/t}" onclick="window.open('garmin.php?lat={$cache.latitude}&lon={$cache.longitude}&wp={$cache.wpoc}','{t escape=js}Send{/t}','width=640,height=320,resizable=no,scrollbars=1')" />
 			</p></td>	
 		</tr>
 	</table>
@@ -282,7 +282,7 @@
 
 <!-- Attributes -->
 {if count($attributes)>0}
-	<div class="content2-container line-box"></div>
+	<div class="content2-container line-box" style="height:0px"></div> {* MSIE needs explicit height *}
 	<div class="content2-container">
 		<div style="padding-left:2px">
 			<p style="line-height: 1.6em;">
@@ -290,6 +290,7 @@
 			</p>
 		</div>
 	</div>
+	<div style="height:2px"></div>
 {else}
 	<br />
 {/if}

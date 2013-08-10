@@ -162,7 +162,7 @@ function toggleAttr(id)
 	<tr>
 		<td valign="top">{t}Coordinates:{/t}</td>
 		<td>
-			<select name="latNS" class="input40">
+			<select name="latNS">
 				<option value="N"{selLatN}>{t}N{/t}</option>
 				<option value="S"{selLatS}>{t}S{/t}</option>
 			</select>
@@ -170,7 +170,7 @@ function toggleAttr(id)
 			°&nbsp;<input type="text" name="lat_min" maxlength="6" value="{lat_min}" class="input50" />&nbsp;'&nbsp;
 			{lat_message}
 			&nbsp;&nbsp;
-			<select name="lonEW" class="input40">
+			<select name="lonEW">
 				<option value="E"{selLonE}>{t}E{/t}</option>
 				<option value="W"{selLonW}>{t}W{/t}</option>
 			</select>
@@ -187,7 +187,7 @@ function toggleAttr(id)
 			<select name="country" class="input200">
 				{countryoptions}
 			</select>
-			{show_all_countries_submit}
+			&nbsp;{show_all_countries_submit}
 		</td>
 	</tr>
 	<tr><td class="spacer" colspan="2"></td></tr>

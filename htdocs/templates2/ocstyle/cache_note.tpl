@@ -12,7 +12,7 @@
         <textarea name="note" rows="4" cols="60" >{$note}</textarea>
       </td>
       <td>
-        <input type="checkbox" name="incl_coord" value="true" {if $inclCoord}checked="checked"{/if}/>{t}Include a coordinate in the note{/t}<br />
+        <input type="checkbox" class="checkbox" name="incl_coord" value="true" {if $inclCoord}checked="checked"{/if}/> {t}Include a coordinate in the note{/t}<br />
         {include file='coordinate_input.tpl'}
       </td>
     </tr>

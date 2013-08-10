@@ -665,11 +665,11 @@ function getWaypoints($cacheid)
 					{
 						if ($cache_difficulty == $i)
 						{
-							$difficulty_options .= '<option value="' . $i . '" selected="selected">' . $i / 2 . '</options>';
+							$difficulty_options .= '<option value="' . $i . '" selected="selected">' . $i / 2 . '</option>';
 						}
 						else
 						{
-							$difficulty_options .= '<option value="' . $i . '">' . $i / 2 . '</options>';
+							$difficulty_options .= '<option value="' . $i . '">' . $i / 2 . '</option>';
 						}
 						$difficulty_options .= "\n";
 					}
@@ -681,11 +681,11 @@ function getWaypoints($cacheid)
 					{
 						if ($cache_terrain == $i)
 						{
-							$terrain_options .= '<option value="' . $i . '" selected="selected">' . $i / 2 . '</options>';
+							$terrain_options .= '<option value="' . $i . '" selected="selected">' . $i / 2 . '</option>';
 						}
 						else
 						{
-							$terrain_options .= '<option value="' . $i . '">' . $i / 2 . '</options>';
+							$terrain_options .= '<option value="' . $i . '">' . $i / 2 . '</option>';
 						}
 						$terrain_options .= "\n";
 					}
@@ -805,11 +805,11 @@ function getWaypoints($cacheid)
 						{
 							if ($cache_activate_hour == $i)
 							{
-								$activation_hours .= '<option value="' . $i . '" selected="selected">' . $i . '</options>';
+								$activation_hours .= '<option value="' . $i . '" selected="selected">' . $i . '</option>';
 							}
 							else
 							{
-								$activation_hours .= '<option value="' . $i . '">' . $i . '</options>';
+								$activation_hours .= '<option value="' . $i . '">' . $i . '</option>';
 							}
 							$activation_hours .= "\n";
 						}

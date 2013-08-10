@@ -1,0 +1,13 @@
+/*************************************************************/
+/*  Style sheet adjustments for Internet Explorer.           */
+/*  Use this only if it cannot be avoided!                   */
+/*************************************************************/
+
+/* When overriding any styles, leave a comment in style_screen.css! */
+
+/* remove shadow margin space */
+.bg-blue02 { margin: 0 0 15px 0; }
+
+/* buttons */
+.exportlist { background: white; }
+.exportbutton { padding: 1px; width:180px; }

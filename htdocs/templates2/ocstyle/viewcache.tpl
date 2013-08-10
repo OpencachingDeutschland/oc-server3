@@ -319,7 +319,6 @@
 </div>
 
 <div class="content2-container cachedesc">
-	<p style="line-height: 1.6em;"></p>  
 	{if $cache.deschtml==0}
 		{$cache.desc|smiley|hyperlink}
 	{else}

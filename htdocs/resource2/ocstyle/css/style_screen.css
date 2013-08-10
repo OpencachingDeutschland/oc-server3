@@ -708,6 +708,7 @@ p.startmessage { line-height: 1.4em; }
 
 div.cachedesc {font-size: 120%; padding-bottom:6px;}
 div.cachedesc p {font-size: 100%; line-height:normal;}
+div.cachedesc-print p {line-height:normal;}
 
 .showcode {font-family: monospace; font-weight: bold; font-size: 13px; color: rgb(255,0,0);}
 

@@ -193,13 +193,13 @@
 	</tr>
 	<tr>
 		<td class="inner-print">
-			<p>
+			<div class="cachedesc-print">
 				{if $cache.deschtml==0}
 					{$cache.desc|smiley|hyperlink}
 				{else}
 					{$cache.desc|smiley}
 				{/if}
-			</p>
+			</div>
 		</td>
 	</tr>
 

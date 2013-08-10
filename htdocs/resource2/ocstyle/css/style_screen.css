@@ -705,7 +705,12 @@ p.startmessage { line-height: 1.4em; }
 
 /* Viewcache */
 #cache_name_block { width: 670px; padding-left: 5px; padding-top: 5px;}
+
+div.cachedesc {font-size: 120%; padding-bottom:6px;}
+div.cachedesc p {font-size: 100%; line-height:normal;}
+
 .showcode {font-family: monospace; font-weight: bold; font-size: 13px; color: rgb(255,0,0);}
+
 div.viewcache-pictureblock { float: left; }
 div.viewcache-pictureblock span.title { display: block; max-width: 175px; padding-left: 10px; padding-right: 5px;clear: left; font-size: 125%;}
 
@@ -803,10 +808,6 @@ p.editlog { font-weight: 400; display:inline; }
 
 /* Garmin downlaod */
 .garmintext { font-size: 1.1em; }
-
-/* Newcache, Editcache, Personal note */
-div.cachedesc {font-size: 120%; padding-bottom:6px}
-div.cachedesc p {font-size: 100%;}
 
 .edit_wptable {
 	background-color:#dddddd;

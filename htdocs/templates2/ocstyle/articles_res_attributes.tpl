@@ -5,8 +5,6 @@
 ***************************************************************************}
 
 <table class="narrowtable">
-	<tr><td class="spacer"><img src="images/trans.gif" border="0" width="1" height="1" alt="" title="" /></td></tr>
-
 	{foreach from=$attributes item=attribGroupItem}
 		<tr><td><div style="height:4px"></div></td></tr>
 		<tr><td colspan="2" bgcolor="{$attribGroupItem.color|escape}" style="line-height:1.8em"><b><i>{$attribGroupItem.category|escape} / {$attribGroupItem.name|escape}</i></b></td></tr>

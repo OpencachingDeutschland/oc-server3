@@ -235,6 +235,7 @@ Other resources
         Path    : htdocs/resource2/ocstyle/css/
         URI     : http://www.openwebdesign.org/design/2876/MultiFlex21/
         License : Public Domain
+        Author  : G. Wolfgang
 
 
 Data content

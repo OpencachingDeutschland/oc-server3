@@ -167,9 +167,6 @@
    * (plain HTML)
    */
 
-  // example: $opt['page']['sponsor']['topright'] = '<div class="site-slogan" style="background-image: url(resource2/ocstyle/images/darkbluetransparent.png);"><div style="width: 100%; text-align: left;"><p class="search"><a href="http://www.wanderjugend.de" target="_blank"><img border="0" align="right" style="margin-left: 10px;" src="resource2/ocstyle/images/dwj.gif" width="40px" height="20px" alt="... die outdoororientierte Jugendorganisation des Deutschen Wanderverbandes" /></a> Unterst&uuml;tzt und gef&ouml;rdert durch<br />die Deutsche Wanderjugend</p> </div></div>';
-  $opt['page']['sponsor']['topright'] = '<div class="site-slogan" style="border-width:0px;"><div style="width: 100%; text-align: left;"><p class="search">&nbsp;<br />&nbsp;</p></div></div>';
-
   $opt['page']['sponsor']['bottom'] = 'Driven by the Opencaching Community';
 
 	/* multi-domain settings

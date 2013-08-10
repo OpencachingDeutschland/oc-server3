@@ -10,7 +10,7 @@
 </div>
 
 <div class="content-txtbox-noshade" style="padding-right: 25px;">
-	<p>
+	<p class="article">
 		{t}<b>OConly-81</b> is a new challenge about finding OConly caches under varying conditions, i.e. with different difficulty and terrain ratings. To participate, you can enable the OConly-81 statistics in your <a href="mydetails.php">user profile settings</a>.{/t}<br />
 	</p>
 

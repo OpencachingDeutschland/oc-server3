@@ -1,11 +1,12 @@
 /*************************************************************/
 /*  Style sheet for printing                                 */
-/*                                                           */
-/*  Sets text colors from dark grey to black, which will     */
-/*  produce nicer output on many printers.                   */
 /*************************************************************/
 
 @import "style_screen.css";
+
+
+/* Set text colors from dark grey to black.
+ * This will produce nicer output on many printers. */
 
 .nav3 { color: black !important; }
 .nav3 li.group1 a { color: black !important; }

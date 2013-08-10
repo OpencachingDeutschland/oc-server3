@@ -24,7 +24,7 @@
 	// search.php -> selectlocid.tpl
 	$locline = '<tr><td width="50px"><p>{nr}.&nbsp;</p></td><td><p><b><a href="search.php?{urlparams}">{locationname}</a>{secondlocationname}</b></p></td></tr>
 							<tr><td width="50px">&nbsp;</td><td><p style="margin-bottom:4px">{coords}</p></td></tr>
-							<tr><td width="50px">&nbsp;</td><td style="padding-bottom:8px; vertical-align:top"><span style="color:#001BBC">{parentlocations}</span></td></tr>';
+							<tr><td width="50px">&nbsp;</td><td style="padding-bottom:8px; vertical-align:top"><span class="content-subtitle">{parentlocations}</span></td></tr>';
 
 	$secondlocationname = '&nbsp;<font size="1">({secondlocationname})</font>';
 	$no_location_coords = _('no coordinates available');

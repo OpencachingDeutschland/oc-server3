@@ -46,7 +46,7 @@
 						<td rowspan="1" style="width:300px; padding:0; margin:0">{include file="res_pager.tpl"}</td>
 						<td style="text-align:right; padding:0; margin:0">{t}Download{/t}:&nbsp;</td>
 						<td><nobr>
-							<select name="wpdownload-page" class="wpdownload" onChange="location.href=this.options[this.selectedIndex].value">
+							<select class="exportlist" onChange="location.href=this.options[this.selectedIndex].value">
 								<option value="#">{t}Results on this page{/t}</option>
 								<option value="search.php?queryid={$queryid}&output=gpx&startat={$startat}">GPX</option>
 								<option value="search.php?queryid={$queryid}&output=loc&startat={$startat}">LOC</option>
@@ -55,7 +55,7 @@
 								<option value="search.php?queryid={$queryid}&output=ovl&startat={$startat}">OVL</option>
 								<option value="search.php?queryid={$queryid}&output=txt&startat={$startat}">TXT</option>
 							</select>
-							<select name="wpdownload-all" class="wpdownload" onChange="location.href=this.options[this.selectedIndex].value">
+							<select class="exportlist" onChange="location.href=this.options[this.selectedIndex].value">
 								<option value="#">{t 1=$startatp1 2=$endat}Result %1 to %2 (as zip){/t}</option>
 								<option value="search.php?queryid={$queryid}&output=gpx&startat={$startat}&count=max&zip=1">GPX</option>
 								<option value="search.php?queryid={$queryid}&output=loc&startat={$startat}&count=max&zip=1">LOC</option>

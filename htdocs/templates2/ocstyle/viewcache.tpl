@@ -254,7 +254,7 @@
 		<tr>
 			<td colspan="2"><p>
 				<img src="resource2/{$opt.template.style}/images/viewcache/print-18.png" class="icon16" alt="" />
-				<select class="wpdownload" onchange="location.href=this.options[this.selectedIndex].value+'&nocrypt='+bNoCrypt" class="formselect">
+				<select class="exportlist" onchange="location.href=this.options[this.selectedIndex].value+'&nocrypt='+bNoCrypt">
 					<option value="#">{t}Print{/t} …</option>
 					<option value="viewcache.php?cacheid={$cache.cacheid}&print=y&log=N">{t}without logs{/t}</option>
 					<option value="viewcache.php?cacheid={$cache.cacheid}&print=y&log=5">{t}with 5 logs{/t}</option>
@@ -262,7 +262,7 @@
 					<option value="viewcache.php?cacheid={$cache.cacheid}&print=y&log=A">{t}with all logs{/t}</option>
 				</select>&nbsp;
 				<img src="resource2/{$opt.template.style}/images/viewcache/16x16-save.png" class="icon16" alt="" />
-				<select name="wpdownload" class="wpdownload" onchange="location.href=this.options[this.selectedIndex].value"> 
+				<select class="exportlist" onchange="location.href=this.options[this.selectedIndex].value"> 
 					<option value="#">{t}Download as...{/t}</option>
 					<option value="search.php?searchto=searchbycacheid&showresult=1&f_inactive=0&f_ignored=0&startat=0&cacheid={$cache.cacheid}&output=gpx">GPX</option>
 					<option value="search.php?searchto=searchbycacheid&showresult=1&f_inactive=0&f_ignored=0&startat=0&cacheid={$cache.cacheid}&output=loc">LOC</option>
@@ -272,7 +272,7 @@
 					<option value="search.php?searchto=searchbycacheid&showresult=1&f_inactive=0&f_ignored=0&startat=0&cacheid={$cache.cacheid}&output=txt">TXT</option>
 				</select>&nbsp;
 				<img src="resource2/{$opt.template.style}/images/viewcache/14x19-gps-device.png" class="icon16" alt="" />
-				<a class="send-to-gps" href="#" onclick="window.open('garmin.php?lat={$cache.latitude}&lon={$cache.longitude}&wp={$cache.wpoc}','{t escape=js}Send{/t}','width=640,height=320,resizable=no,scrollbars=1')"><input name="SendToGPS" value="{t}Send to GPS device{/t}" id="SendToGPS" type="button" /></a>
+				<a href="#" onclick="window.open('garmin.php?lat={$cache.latitude}&lon={$cache.longitude}&wp={$cache.wpoc}','{t escape=js}Send{/t}','width=640,height=320,resizable=no,scrollbars=1')"><input class="exportbutton" value="{t}Send to GPS device{/t}" type="button" /></a>
 			</p></td>	
 		</tr>
 	</table>

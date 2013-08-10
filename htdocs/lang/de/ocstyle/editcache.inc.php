@@ -53,7 +53,7 @@
 
 	$default_lang = t('EN');
 
-	 $activation_form = '
+	$activation_form = '
 		<tr><td class="spacer" colspan="2"></td></tr>
 		<tr>
 			<td>' . t('Publication:') . '</td>

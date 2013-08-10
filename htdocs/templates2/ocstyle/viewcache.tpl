@@ -344,7 +344,7 @@
 {/if}
 <!-- End Personal Note -->
 
-<!-- Additional Waypoints -->
+<!-- Additional Waypoints / Child Waypoints-->
 {if count($childWaypoints)>0}
 	<div class="content2-container bg-blue02 content2-section-no-p">
 		<p class="content-title-noshade-size2">

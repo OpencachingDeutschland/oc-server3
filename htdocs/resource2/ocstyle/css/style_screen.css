@@ -637,6 +637,7 @@ input.formbutton_active {
 }
 
 /* Editor fields for Descritpions, Logs etc. */
+textarea { font-family: Arial, sans-serif, Tahoma, Verdana; font-size: 8pt; }
 textarea.cachedesc { width:750px; height:500px; }  /* only cacheeditor */
 textarea.hint {	width:750px; height:100px; }  /* only cacheditor */
 textarea.logs {	width:640px; height:300px; }  /* only logeditor */
@@ -788,11 +789,6 @@ div.cachedesc p {font-size: 100%;}
 .edit_wptable {
 	background-color:#dddddd;
 	font-size:0.85em;
-}
-
-.libse form, .libse input, .libse textarea, .libse button {
-	font-family: Arial, sans-serif, Tahoma, Verdana;
-	font-size: 8pt;
 }
 
 /* Articles */

@@ -3,7 +3,6 @@
 *
 *  Unicode Reminder メモ
 ***************************************************************************}
-<div class="libse">
 <form action="childwp.php" method="post" name="fchildwp">
   <input type="hidden" name="cacheid" value="{$cacheid|escape}" />
   <input type="hidden" name="childid" value="{$childid|escape}" />
@@ -69,4 +68,3 @@
     </tr>
   </table>
 </form>
-</div>

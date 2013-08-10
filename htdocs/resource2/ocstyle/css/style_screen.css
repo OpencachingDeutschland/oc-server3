@@ -646,13 +646,6 @@ textarea.removelogs {	width:620px; height:200px; }  /* log removal */
 label.disabled { color:grey; }
 .formlabel { color:#555; font-weight:bold; line-height:1.5em !important}
 
-/* commented out, looks obsolete  - following 10.8.2013
-form, input, textarea, button {
-	font-family: Arial, Tahoma, Verdana, sans-serif;
-	font-size: 8pt;
-}
-*/
-
 
 /********************************/
 /* SECTION 9 - "BUSINESS LOGIC" */
@@ -788,13 +781,18 @@ p.editlog { font-weight: 400; display:inline; }
 /* Garmin downlaod */
 .garmintext { font-size: 1.1em; }
 
-/* Newcaceh / Editcache */
+/* Newcache, Editcache, Personal note */
 div.cachedesc {font-size: 120%; padding-bottom:6px}
 div.cachedesc p {font-size: 100%;}
 
 .edit_wptable {
 	background-color:#dddddd;
 	font-size:0.85em;
+}
+
+.libse form, .libse input, .libse textarea, .libse button {
+	font-family: Arial, sans-serif, Tahoma, Verdana;
+	font-size: 8pt;
 }
 
 /* Articles */

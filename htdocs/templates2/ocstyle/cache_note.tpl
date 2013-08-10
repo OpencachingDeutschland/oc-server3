@@ -3,6 +3,7 @@
 *
 *  Unicode Reminder メモ
 ***************************************************************************}
+<div class="libse">
   <input type="hidden" name="cacheid" value="{$cacheid|escape}" />
 
   <table class="table">
@@ -31,3 +32,4 @@
       </td>
     </tr>
   </table>
+</div>

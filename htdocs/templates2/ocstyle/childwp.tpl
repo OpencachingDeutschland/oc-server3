@@ -3,6 +3,7 @@
 *
 *  Unicode Reminder メモ
 ***************************************************************************}
+<div class="libse">
 <form action="childwp.php" method="post" name="fchildwp">
   <input type="hidden" name="cacheid" value="{$cacheid|escape}" />
   <input type="hidden" name="childid" value="{$childid|escape}" />
@@ -51,7 +52,7 @@
     <tr>
       <td valign="top">{t}Description:{/t}</td>
       <td>
-        <textarea name="desc" rows="5" cols="60" {if $disabled}disabled="disabled"{/if}>{$wpDesc}</textarea>
+        <textarea name="desc" rows="5" cols="80" {if $disabled}disabled="disabled"{/if}>{$wpDesc}</textarea>
       </td>
     </tr>
 
@@ -68,3 +69,4 @@
     </tr>
   </table>
 </form>
+</div>

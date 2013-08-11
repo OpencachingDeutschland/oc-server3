@@ -769,7 +769,7 @@ div#havefound {
 .printwptable td.framed { border-bottom:1px solid #aaa; border-top:1px solid #aaa; }  
 .print-cachemeta td { font-size:100%; padding:0 0.6em 1px 0; }
 td.header-small-print { font-size: 140%; font-weight:bold; padding-top:0; }
-p.printlogheader { font-size:120%; }
+p.printlogheader { font-size:115%; }
 
 /* Log entries */
 div.viewcache_log-content { font-family: arial, sans serif; line-height: 1.6em; font-size: 12px; margin-left: 20px; margin-top: 5px;}

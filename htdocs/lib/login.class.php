@@ -14,6 +14,8 @@
  *    userid          Integer 0 if no login, userid otherwise
  *    username        String username or ''
  *
+ *  !! See also lib2/login.class.php. !!
+ *
  ***************************************************************************/
 
 	define('LOGIN_UNKNOWN_ERROR', -1);     // unkown error occured

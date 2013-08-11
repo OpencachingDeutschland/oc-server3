@@ -54,7 +54,8 @@
 		<tr><td class="spacer" colspan="2"></td></tr>
 
 		<tr>
-			<td class="header-small" colspan="2">
+			<td></td>
+			<td class="header-small">
 				<!-- <input type="reset" name="reset" value="{t}Reset{/t}" class="formbutton" onclick="flashbutton('reset')" />&nbsp;&nbsp; -->
 				<input type="submit" name="submit" value="{t}Login{/t}" class="formbutton" onclick="submitbutton('submit')" />
 			</td>

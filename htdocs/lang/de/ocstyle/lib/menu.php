@@ -32,6 +32,13 @@ global $menu;
 
 $menu = array(
 	array(
+		'title' => t('Login'),
+		'menustring' => t('Login'),
+		'siteid' => 'login',
+		'visible' => false,
+		'filename' => 'login.php'
+	),
+	array(
 		'title' => t(''),
 		'menustring' => t('Start'),
 		'siteid' => 'start',

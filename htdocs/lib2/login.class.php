@@ -16,6 +16,8 @@
  *    userid          Integer 0 if no login, userid otherwise
  *    username        String username or ''
  *
+ *  !! See also lib/login.class.php. !!
+ *
  ***************************************************************************/
 
 	define('LOGIN_UNKNOWN_ERROR', -1);     // unkown error occured
@@ -53,7 +55,7 @@ class login
 			$this->permanent = (($cookie->get('permanent')+0) == 1);
 			$this->lastlogin = $cookie->get('lastlogin');
 			$this->sessionid = $cookie->get('sessionid');
-			$this->admin = $cookie->get('admin')+0;
+			// $this->admin = $cookie->get('admin')+0;   nonsense
 			$this->verified = false;
 
 			$this->verify();
@@ -122,7 +124,7 @@ class login
 		$cookie->set('permanent', ($this->permanent==true ? 1 : 0));
 		$cookie->set('lastlogin', $this->lastlogin);
 		$cookie->set('sessionid', $this->sessionid);
-		$cookie->set('admin', $this->admin);
+		// $cookie->set('admin', $this->admin);   nonsense
 	}
 
 	function verify()

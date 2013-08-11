@@ -21,7 +21,7 @@
 			<img src="resource2/{$opt.template.style}/images/profile/32x22-profile.png" style="align: left; margin-right: 10px;" width="32" height="22"  /> 
 			{t}Participants{/t}
 			{if !$showall && ($users|@count > $default_maxusers)}
-				&nbsp; <span class="content-title-size3-more">[<a href="oconly81.php?showall=1">{t}Show all{/t}</a>]</span>
+				&nbsp; <span class="content-title-link">[<a href="oconly81.php?showall=1">{t}Show all{/t}</a>]</span>
 			{/if}
 		</p>
 	</div>

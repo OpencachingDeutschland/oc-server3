@@ -18,7 +18,7 @@
 				<td colspan="3">
 					<span class="boldtext ">{t}The following informations are stored in your userprofile:{/t}</span><br />
 				<img src="resource2/{$opt.template.style}/images/misc/hint.gif" border="0" width="15" height="11" alt="" align="middle" />
-				<span style="font-size:10px;">{t}Only the <span class="public-setting">green entries</span> are visible in your <a href="viewprofile.php">public profile</a>.{/t}</span>
+				<span class="systemlink" style="font-size:10px;">{t}Only the <span class="public-setting">green entries</span> are visible in your <a href="viewprofile.php">public profile</a>.{/t}</span>
 				</td>
 			</tr>
 			<tr><td class="spacer"></td></tr>

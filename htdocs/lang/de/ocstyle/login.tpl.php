@@ -55,7 +55,7 @@
 
 </form>
 
-<div class="content-txtbox-noshade">
+<div class="content-txtbox-noshade systemlink">
 	<p style="line-height: 1.6em;">
 		{t}Not registered?{/t} <a href="register.php">{t}Register{/t}</a><br />
 		{t}Forgotten your password?{/t} <a href="newpw.php">{t}Create a new password{/t}</a><br />

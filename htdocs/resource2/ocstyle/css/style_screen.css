@@ -327,7 +327,6 @@ ul#statmenu { padding: 0px; margin: 0px;}
 	margin-top: 0;
 	margin-bottom: 0;
 }
-.content-title-size3-more { color:black; font-size:0.8em; font-weight:normal; }
 p.content-title-noshade-size3 { margin:0 !important; }
 
 td.content-title-flag {
@@ -446,12 +445,14 @@ td.default { font-size:12px; }
 /*********************************/
 
 /* standard links */
-#langstripe a, .nav3 a, .content1 a, .content2 a, .content3 a, .sidebar-txtbox-noshade a, .sidebar-txtbox-shade a, .popup a {color: rgb(75,75,175); text-decoration: none;}
-#langstripe a:hover, .nav3 a:hover, .content1 a:hover, .content2 a:hover, .content3 a:hover, .sidebar-txtbox-noshade a:hover, .sidebar-txtbox-shade a:hover {text-decoration: underline;}
-#langstripe a:visited, .nav3 a:visited, .content1 a:visited, .content2 a:visited, .content3 a:visited, .sidebar-txtbox-noshade a:visited, .sidebar-txtbox-shade a:visited  {color: rgb(120,0,150);}
+.nav3 a, .content1 a, .content2 a, .content3 a, .sidebar-txtbox-noshade a, .sidebar-txtbox-shade a, .popup a {color: rgb(75,75,175); text-decoration: none;}
+#langstripe a, .mapform a { color:rgb(60,60,140); text-decoration: none; }
+  /* the mapform area is also popup -> declare mapform link style after popup */
+#langstripe a:hover, .nav3 a:hover, .content1 a:hover, .content2 a:hover, .content3 a:hover, .sidebar-txtbox-noshade a:hover, .sidebar-txtbox-shade a:hover, .footer a:hover {text-decoration: underline;}
+.content1 a:visited, .content2 a:visited, .content3 a:visited {color: rgb(120,0,150);}
+.footer a {color: rgb(255,255,255); text-decoration:none; }
+a.systemlink:visited, .systemlink a:visited, .content-title-link a:visited { color: rgb(75,75,175); }
 a.boldlink:visited, .content1 b a:visited, .content2 b a:visited, .content3 b a:visited {color: rgb(130,0,145) !important;}
-.footer a {color: rgb(255,255,255); text-decoration: underline;}
-.footer a:hover {color: rgb(0,0,0); text-decoration: none;}
 
 /* fat cache and username links */
 a.links:link {

@@ -106,7 +106,7 @@
 		<table class="table">
 			<tr>
 				<td colspan="3">
-					<span class="boldtext">{t}The following text is displayed in your <a href="viewprofile.php">public profile</a>:{/t}</span>
+					<span class="boldtext systemlink">{t}The following text is displayed in your <a href="viewprofile.php">public profile</a>:{/t}</span>
 				</td>
 			</tr>
 			<tr>

@@ -156,7 +156,7 @@ function myHomeLoad()
 				</tr>
 			{/foreach}
 			<tr><td class="spacer" colspan="3"></td></tr>
-			<tr><td colspan="3"><a href="ownerlogs.php">{t}Show log history{/t}</a></td></tr>
+			<tr><td colspan="3"><a class="systemlink" href="ownerlogs.php">{t}Show log history{/t}</a></td></tr>
 		{/if}
 
 		{* ... unpublished caches *}

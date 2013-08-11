@@ -31,4 +31,4 @@
 		</li>
 	{/foreach}
 </ul>
-<p style="line-height: 1.6em;">{t}You can find more recommendations &gt;<a href="tops.php">here</a>&lt;.{/t}</p>
+<p class="systemlink" style="line-height: 1.6em;">{t}You can find more recommendations &gt;<a href="tops.php">here</a>&lt;.{/t}</p>

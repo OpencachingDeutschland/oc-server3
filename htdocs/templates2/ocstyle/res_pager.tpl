@@ -20,7 +20,7 @@
 		<img src="resource2/{$opt.template.style}/images/navigation/16x16-browse-prev-inactive.png" width="16" height="16" alt="&lt;" />
 	{/if}
 	{foreach from=$pages_list key=page item=pagelink}
-		{if $pagelink}<a href="{$pagelink}">{$page}</a>{else}<b>{$page}</b>{/if}
+		{if $pagelink}<a class="systemlink" href="{$pagelink}">{$page}</a>{else}<b>{$page}</b>{/if}
 	{/foreach}
 	{if $pages_next_link}
 		<a href="{$pages_next_link}"><img src="resource2/{$opt.template.style}/images/navigation/16x16-browse-next.png" width="16" height="16" alt="&gt;" /></a>

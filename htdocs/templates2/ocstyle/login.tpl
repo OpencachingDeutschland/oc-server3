@@ -9,6 +9,7 @@
 	{t}Login{/t}
 </div>
 
+<div class="systemlink">
 <form action="login.php" method="post" enctype="application/x-www-form-urlencoded" style="display: inline;">
 	<input type="hidden" name="target" value="{$target|escape}" />
 	<input type="hidden" name="action" value="login" />
@@ -74,4 +75,6 @@
 		{t}Here you can find more troubleshooting:{/t} <a href="http://wiki.opencaching.de/index.php/Login_auf_Opencaching.de" target="_blank">{t}Problems with login{/t}</a>.
 	</p>
 	<div class="buffer" style="width: 500px;">&nbsp;</div>
+</div>
+
 </div>

@@ -180,16 +180,12 @@ class login
 
 	function try_login($user, $password, $permanent)
 	{
-		global $opt;
-
 		if ($password == '')
 			return LOGIN_EMPTY_USERPASSWORD;
 
-		$pwmd5 = md5($password);
-		if ($opt['logic']['password_hash'])
-			$pwmd5 = hash('sha512', $pwmd5);
+		$encryptedPassword = crypt::encryptPassword($password);
 
-		return $this->try_login_md5($user, $pwmd5, $permanent);
+		return $this->try_login_encrypted($user, $encryptedPassword, $permanent);
 	}
 
 	function checkLoginsCount()
@@ -209,12 +205,11 @@ class login
 			return true;
 	}
 
-	function try_login_md5($user, $pwmd5, $permanent)
+	function try_login_encrypted($user, $encryptedPassword, $permanent)
 	{
-		global $opt;
 		$this->pClear();
 
-		if ($user == '' || $pwmd5 == '')
+		if ($user == '' || $encryptedPassword == '')
 			return LOGIN_EMPTY_USERPASSWORD;
 
 		if ($this->checkLoginsCount() == false)
@@ -226,7 +221,7 @@ class login
 
 		// compare $user with email and username, if both matches use email
 		$rsUser = sqlf("SELECT `user_id`, `username`, 2 AS `prio`, `is_active_flag`, `permanent_login_flag`, `admin` FROM `user` WHERE `username`='&1' AND `password`='&2' UNION
-		                SELECT `user_id`, `username`, 1 AS `prio`, `is_active_flag`, `permanent_login_flag`, `admin` FROM `user` WHERE `email`='&1' AND `password`='&2' ORDER BY `prio` ASC LIMIT 1", $user, $pwmd5);
+		                SELECT `user_id`, `username`, 1 AS `prio`, `is_active_flag`, `permanent_login_flag`, `admin` FROM `user` WHERE `email`='&1' AND `password`='&2' ORDER BY `prio` ASC LIMIT 1", $user, $encryptedPassword);
 		$rUser = sql_fetch_assoc($rsUser);
 		sql_free_result($rsUser);
 

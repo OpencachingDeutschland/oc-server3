@@ -38,7 +38,15 @@ while ($r = sql_fetch_array($rs))
 	}
 	$pwhash = crypt::secondStagePasswordEncryption($password);
 
+	$oldpw = sql_value("SELECT `password` FROM `user` WHERE `user_id`='&1'", '', $r['user_id']);
 	sql("UPDATE `user` SET `password`='&1' WHERE `user_id`='&2'", $pwhash, $r['user_id']);
+
+	if ($pwhash != sql_value("SELECT `password` FROM `user` WHERE `user_id`='&1'", '', $r['user_id']))
+	{
+		sql("UPDATE `user` SET `password`='&1' WHERE `user_id`='&2'", $oldpw, $r['user_id']);
+		echo "Error!\nCould not store new password. Password field not updated to 128 chars?\n\n";
+		break;
+	}
 }
 
 mysql_free_result($rs);

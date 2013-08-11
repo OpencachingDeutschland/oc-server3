@@ -31,7 +31,7 @@ body {
 	margin: 0px auto;
 	height: 100%;
 	padding: 0px;
-	background-color: #f8f2d6;
+	background-color: #3a663a;
 	font-family: arial, sans-serif, Tahoma, Verdana;
 }
 
@@ -116,7 +116,7 @@ div#langstripe {
 	width: 100%;
 	padding-top: 0;
 	height: 31px;
-	background: #707070 url(../images/bg-langstripe.png) 0 100% repeat-x;
+	background: #abb4bd url(../images/bg-langstripe.png) 0 100% repeat-x;
 	color: black;
 	z-index: 5;
 }

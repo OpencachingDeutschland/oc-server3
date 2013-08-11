@@ -7,6 +7,7 @@
 
 	require('lib2/web.inc.php');
 	require('lib2/logic/logpics.inc.php');
+
 	$sUserCountry = $login->getUserCountry();
 
 	// create object for "newest" information
@@ -15,7 +16,7 @@
 	$tpl->main_template = 'sys_oc404';
 	$tpl->name = 'sys_oc404';
 
-	$tpl->caching = false;
+	$tpl->caching = true;
 	$tpl->cache_lifetime = 300;
 	$tpl->cache_id = $sUserCountry;
 	

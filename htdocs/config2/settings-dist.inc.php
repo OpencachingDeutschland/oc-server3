@@ -388,6 +388,11 @@
 	 */
 	$opt['logic']['password_hash'] = false;
 
+	/* password salt
+	 * is a random generated String that is appended to the password
+	 */
+	$opt['logic']['password_salt'] = '';
+
 	/* new lows style
 	 */
 	$opt['logic']['new_logs_per_country'] = true;

@@ -15,6 +15,7 @@ require_once($opt['rootpath'] . 'lib2/logic/countriesList.class.php');
 require_once($opt['rootpath'] . 'lib2/logic/picture.class.php');
 require_once($opt['rootpath'] . 'lib2/logic/cache.class.php');
 require_once($opt['rootpath'] . 'lib2/logic/cracklib.inc.php');
+require_once($opt['rootpath'] . 'lib2/logic/crypt.class.php');
 require_once($opt['rootpath'] . 'lib2/translate.class.php');
 
 class user
@@ -155,21 +156,17 @@ class user
 	{
 		return $this->reUser->getValue('password');
 	}
-	function setPassword($value)
+	function setPassword($password)
 	{
-		global $opt;
-	
-		if (!mb_ereg_match(REGEX_PASSWORD, $value))
+		if (!mb_ereg_match(REGEX_PASSWORD, $password))
 			return false;
 
-		if (cracklib_checkPW($value, array('open', 'caching', 'cache', $this->getUsername(), $this->getFirstName(), $this->getLastName())) == false)
+		if (cracklib_checkPW($password, array('open', 'caching', 'cache', $this->getUsername(), $this->getFirstName(), $this->getLastName())) == false)
 			return false;
 
-		$pwmd5 = md5($value);
-		if ($opt['logic']['password_hash'])
-			$pwmd5 = hash('sha512', $pwmd5);
+		$encryptedPassword = crypt::encryptPassword($password);
 
-		return $this->reUser->setValue('password', $pwmd5);
+		return $this->reUser->setValue('password', $encryptedPassword);
 	}
 	function getFirstName()
 	{
@@ -197,7 +194,6 @@ class user
 	}
 	function getCountry()
 	{
-		global $opt;
 		return countriesList::getCountryLocaleName($this->reUser->getValue('country'));
 	}
 	function getCountryCode()

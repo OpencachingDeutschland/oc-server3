@@ -291,7 +291,7 @@ ul#statmenu { padding: 0px; margin: 0px;}
 .content2 {float: left; width: 790px; min-height: 500px; margin: 0px; padding: 0px 0px 0px 20px; color: rgb(75,75,75); font-size: 1.0em;}
 .content3 {float: left; width: 790px; min-height: 500px; margin: 0px; padding: 0px 0px 0px 20px; color: rgb(75,75,75); font-size: 1.0em;}
 .content2-container, .content3-container {clear: both; width: 769px; margin: 0px 0px 15px 0px; padding: 0px;}
-.content2-section-no-p { margin-bottom: 20px !important; }
+.content2-section-no-p { margin-bottom: 21px !important; }
 /* use if a section does not contain a <p>..</p> to obtain equal spacing to other sections */
 .content2-container-1col, .content3-container-1col {overflow: hidden; width: 769px; margin: 0px; padding: 0px;}
 /* removed "overflow:hidden" from content2-container-2col* to fix bug RT #3886 ... */
@@ -303,7 +303,7 @@ ul#statmenu { padding: 0px; margin: 0px;}
 /* Titles */
 .bg-blue02 {background-color: rgb(219,230,241);
 	padding: 2px 0px 2px 4px;
-	margin: 2px 0 17px 0;  /* see adjustment in style_screen_msie.css */
+	margin: 2px 0 16px 0;  /* see adjustment in style_screen_msie.css */
 	border-radius: 5px; -webkit-border-radius: 5px; -moz-border-radius: 5px;
 	box-shadow: 1px 1px 2px #676767;
 	-moz-box-shadow: 1px 1px 2px #676767;

@@ -83,6 +83,7 @@
 	&nbsp; <span class="content-title-size3-more">[<a href="newlogpics.php">{t}more{/t}...</a>]</span>
 	</p>
 </div>
+<div style="height:2px"></div>
 {include file="res_logpictures.tpl" logdate=true loguser=true}
 
 {* recommendations *}

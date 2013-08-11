@@ -409,6 +409,8 @@ td.even { background: #eee; padding-top:2px; }
 td.listcolor1 { background:#fff; line-height:1.7em; }
 td.listcolor2 { background:#f0f0f0; line-height:1.7em; }
 
+td div.mediumspacer { height:6px; }
+
 /* Text styles */
 .txt-white {color: rgb(255,255,255);}
 .txt-black {color: rgb(75,75,75);}

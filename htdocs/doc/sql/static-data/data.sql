@@ -945,7 +945,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('36', 'Turkish',
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('37', 'Your password', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('39', 'The passwords do not match.', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('40', 'Please repeat', '2010-08-28 11:48:03');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('41', '* are required', '2010-08-28 11:48:03');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('41', '* mandatory field', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('42', 'Swedish', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('43', 'Slovenian', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('45', 'At least 4 different chars', '2010-08-28 11:48:03');
@@ -1057,7 +1057,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('163', 'Zambia',
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('164', 'South Africa', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('165', 'Mayotte', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('166', 'The activation code was sent with an E-Mail to you.<br /> Please follow the instructions in the E-Mail.', '2010-08-28 11:48:03');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('167', 'To create an account on opencaching.de, you have to enter a vaild E-Mail address and an username. An E-Mail will be sent to the address you supplied with an activation code. Only one account can be created per E-Mail address. First name, last name and country are optional.', '2010-08-28 11:48:03');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('167', 'To create an account on Opencaching.de, you have to enter a vaild E-Mail address and an username. An E-Mail will be sent to the address you supplied with an activation code.', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('168', 'There already exists an account with that E-Mail address. It\'s not possible the register a scond account with the same E-Mail address.', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('171', 'The activation code or E-Mail was incorrect.<br /> The activation of your account was not successfull<br /> Please use the E-Mail where the registration mail was sent to.<br /> <br /> Please check if you have mistyped - if you cannot solve the problem yourself, contact us via <a href=\"mailto:%1\">%1</a>', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('172', 'Yemen', '2010-08-28 11:48:03');
@@ -2584,6 +2584,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2157', 'Join di
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2158', 'Opencaching Forum', '2013-08-07 18:30:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2159', 'Google+ Community', '2013-08-07 18:30:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2160', 'Facebook Group', '2013-08-07 18:30:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2161', 'Only one account can be created per E-Mail address. First name, last name and country are optional.', '2013-08-07 18:30:00');
 
 -- Table sys_trans_ref
 SET NAMES 'utf8';
@@ -4982,7 +4983,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('37', 'DE', 'Dein Passwort', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('39', 'DE', 'Die beiden Passwörter sind nicht identisch.', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('40', 'DE', 'Wiederholen', '2010-08-28 11:48:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('41', 'DE', 'Mit * gekennzeichnete Felder müssen eingegeben werden.', '2010-10-04 00:22:41');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('41', 'DE', '* Pflichtangabe', '2010-10-04 00:22:41');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('42', 'DE', 'Schwedisch', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('43', 'DE', 'Slowenisch', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('45', 'DE', 'mindestens 4 unterschiedliche Zeichen', '2010-08-28 11:48:06');
@@ -5094,7 +5095,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('164', 'DE', 'Südafrika', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('165', 'DE', 'Mayotte', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('166', 'DE', 'Der Aktivierungscode wurde per E-Mail versendet.<br />Für den Abschluss der Registrierung folge bitte den weiteren Anweisungen in der E-Mail.', '2010-08-28 11:48:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('167', 'DE', 'Um dir einen Benutzeraccount auf opencaching.de einzurichten, musst du nur eine gültige E-Mail-Adresse und einen Benutzername \'Nickname\' angeben. An die angegebene E-Mail-Adresse wird eine E-Mail gesendet, mit der du deinen Account aktivieren kannst. Pro E-Mail-Adresse kann nur ein Benutzeraccount eingerichtet werden. Nachname, Vorname und Land müssen nicht angegeben werden.', '2010-08-28 11:48:06');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('167', 'DE', 'Um dir einen Benutzeraccount auf Opencaching.de einzurichten, musst du nur eine gültige E-Mail-Adresse und einen Benutzername (&bdquo;Nickname&ldquo;) angeben. An die angegebene E-Mail-Adresse wird eine E-Mail gesendet, mit der du deinen Account aktivieren kannst.', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('168', 'DE', 'Es ist bereits ein Account mit dieser E-Mail-Adresse vorhanden. Es ist nicht möglich, einen zweiten Account auf diese E-Mail-Adresse zu registrieren.', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('171', 'DE', 'Der Aktivierungscode oder die E-Mail-Adresse ist nicht korrekt.<br />\r\nDie Aktivierung deines Account war nicht erfolgreich.<br />\r\nVerwende bitte die E-Mail-Adresse aus der Registrierungsbestätigung, die du per E-Mail bekommen hast.<br />\r\n<br />\r\nÜberprüfe bitte, ob du dich vertippt hast - sollten die Probleme längere Zeit bestehen, melde dich bitte unter <a href=\"mailto:%1\">%1</a>', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('172', 'DE', 'Jemen', '2010-08-28 11:48:06');
@@ -6621,6 +6622,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2158', 'DE', 'Opencaching-Forum', '2013-08-07 18:30:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2159', 'DE', 'Google+ Community', '2013-08-07 18:30:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2160', 'DE', 'Facebook-Gruppe', '2013-08-07 18:30:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2161', 'DE', 'Pro E-Mail-Adresse kann nur ein Benutzeraccount eingerichtet werden. Die Angabe von Vorname, Nachname und Land sind freiwillig.', '2013-08-07 18:30:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'EN', 'Reorder IDs', '2010-09-02 00:15:30');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'EN', 'The database could not be reconnected.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'EN', 'Testing – please do not login', '2010-08-28 11:48:07');
@@ -6660,7 +6662,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('37', 'EN', 'Your password', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('39', 'EN', 'The passwords do not match.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('40', 'EN', 'Please repeat', '2010-08-28 11:48:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('41', 'EN', 'Fields marked with * are mandatory', '2010-08-28 11:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('41', 'EN', '* mandatory field', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('42', 'EN', 'Swedish', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('43', 'EN', 'Slovenian', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('45', 'EN', 'at least 4 different characters', '2010-08-28 11:48:07');
@@ -8429,7 +8431,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('164', 'ES', 'Sudafrica', '2010-12-09 00:17:56');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('165', 'ES', 'Mayotte', '2010-12-09 00:17:56');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('166', 'ES', 'El código de activación se envían por email.<br /> Por favor, siga las instrucciones del email.', '2010-12-09 00:17:56');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('167', 'ES', 'Para crear una cuenta en opencaching.de, tiene que introducir una dirección de email valida y un nombre de usuario. Un código de activación será enviado a la dirección de email que proporcionó. Sólo una cuenta se puede crear por dirección de email. Nombre, apellido y país son opcionales.', '2010-12-09 00:17:56');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('167', 'ES', 'Para crear una cuenta en opencaching.de, tiene que introducir una dirección de email valida y un nombre de usuario. Un código de activación será enviado a la dirección de email que proporcionó.', '2010-12-09 00:17:56');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('168', 'ES', 'Una cuenta con esa dirección de email ya existe. No sera posible crear una segunda cuenta con la misma dirección de email.', '2010-12-09 00:17:56');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('171', 'ES', 'El código de activación o dirección de e-mail era incorrecta.<br /> La activación de su cuenta no se ha realizado correctamente.<br /> Por favor, utilice la misma dirección de correo electrónico a la que se envió el correo de registro.<br /> <br /> Por favor, compruebe si había escrito mal. Si no puede resolver el problema, contacte con nosotros a través de <a href=\"mailto:%1\">%1</a>.', '2010-12-09 00:17:56');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('172', 'ES', 'Yemen', '2010-12-09 00:17:56');
@@ -9753,6 +9755,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2132', 'ES', 'Puedes dejar un geocache a varios usuarios para ofrecer en adopción. El primer usuario de la adopción se confirma, sera el nuevo propietario de la caché. Con la aprobación que le da al usuario un derecho ilimitado para usar este contenido protegido por derechos de autor del cache, modificar y transmitir.', '2010-12-09 00:17:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2133', 'ES', 'Copia EN', '2010-12-09 00:17:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2150', 'ES', 'Este geocache está probablemente en las siguientes áreas protegidas:', '2011-05-23 22:20:30');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2161', 'ES', 'Sólo una cuenta se puede crear por dirección de email. Nombre, apellido y país son opcionales.', '2011-05-23 22:20:30');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('6', 'FR', 'Pseudo', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('7', 'FR', 'Quite', '2010-10-04 00:17:39');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('24', 'FR', 'Prénom', '2010-10-04 00:17:39');
@@ -9991,7 +9994,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('164', 'IT', 'Sudafrica', '2010-08-28 22:00:39');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('165', 'IT', 'Mayotte', '2010-08-28 22:00:55');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('166', 'IT', 'Ti è stato spedito via email il codice di attivazione.<br />Per favore segui le istruzioni contenute nella email.', '2010-08-28 22:01:58');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('167', 'IT', 'Per creare un utente registrato su opencaching.de devi inserire un indirizzo di email valido e un nome utente. Verrà spedita una email contenete un codice di attivazione all\'indirizzo da te indicato. Un solo utente registrato può essere creato per ciascun indirizzo email. Nome, Cognome e Nazione sono campi opzionali.', '2010-10-27 18:49:19');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('167', 'IT', 'Per creare un utente registrato su opencaching.de devi inserire un indirizzo di email valido e un nome utente. Verrà spedita una email contenete un codice di attivazione all\'indirizzo da te indicato.', '2010-10-27 18:49:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('168', 'IT', 'Esiste già un utente registrato con questo indirizzo email. Non è possibile registrare un secondo utente con lo stesso indirizzo email.', '2010-08-28 22:05:18');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('171', 'IT', 'Il codice di attivazione o la email sono sbagliati.<br/>L\'attivazione della tua registrazione utente non è andata a buon fine.<br/>Per favore utilizza l\'indirizzo email a cui la email è stata inviata.<br/><br/>Per favore controlla di aver digitato correttamente - se non riesci a risolvere il problema da solo, contattaci alla email <a href=\"mailto:%1\">%1</a>', '2010-08-28 22:12:18');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('172', 'IT', 'Yemen', '2010-08-28 22:11:35');
@@ -11495,6 +11498,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2133', 'IT', 'Copia EN', '2010-10-27 18:49:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2134', 'IT', 'So quello che sto facendo, non visualizzare di nuovo questo avvertimento per oggi.', '2013-07-25 15:53:16');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2150', 'IT', 'Questa geocache probabilmente è situata in una riserva naturale:', '2011-05-23 22:19:58');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2161', 'IT', 'Un solo utente registrato può essere creato per ciascun indirizzo email. Nome, Cognome e Nazione sono campi opzionali.', '2011-05-23 22:19:58');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('922', 'JA', 'JA', '2011-05-15 16:04:51');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'NL', 'ID\'s opnieuw sorteren', '2011-02-04 19:49:56');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'NL', 'De verbinding met de database kon niet hersteld worden.', '2011-02-04 19:49:56');

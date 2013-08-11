@@ -57,13 +57,18 @@
 			{t}Register new user{/t}
 		</div>
 
+		<div class="article">
 		<table class="table">
 			<tr>
 				<td colspan="2" class="help">
-					<img src="resource2/{$opt.template.style}/images/misc/hint.gif" border="0" width="15" height="11" alt="{t}Note{/t}" align="middle" />
-					{t}To create an account on opencaching.de, you have to enter a vaild E-Mail address and an username.
-					An E-Mail will be sent to the address you supplied with an activation code. Only one account can be
-					created per E-Mail address. First name, last name and country are optional.{/t}
+					<p>
+						<img src="resource2/{$opt.template.style}/images/misc/hint.gif" border="0" width="15" height="11" alt="{t}Note{/t}" align="middle" />
+						{t}To create an account on Opencaching.de, you have to enter a vaild E-Mail address and an username.
+						An E-Mail will be sent to the address you supplied with an activation code.{/t}
+					</p>
+					<p>
+						{t}Only one account can be created per E-Mail address. First name, last name and country are optional.{/t}
+					</p>
 				</td>
 			</tr>
 			<tr><td class="spacer" colspan="2"></td></tr>
@@ -71,7 +76,7 @@
 			<tr>
 				<td width="145" valign="top">{t}Username{/t}:</td>
 				<td valign="top">
-					<input type="text" name="username" maxlength="60" value="{$username|escape}" class="input200" />*
+					<input type="text" name="username" maxlength="60" value="{$username|escape}" class="input200" /> *
 					{if $error_username_not_ok==1}
 						<span class="errormsg">{t}The username is not valid.{/t}</span>
 					{elseif $error_username_exists==1}
@@ -79,23 +84,23 @@
 					{/if}
 				</td>
 			</tr>
-			<tr><td class="spacer" colspan="2"></td></tr>
+			<tr><td class="spacer" colspan="2"><div class="mediumspacer"></td></tr>
 
-			<tr>
-				<td width="145" valign="top">{t}Last name{/t}:</td>
-				<td valign="top">
-					<input type="text" name="last_name" maxlength="60" value="{$last_name|escape}" class="input200" />
-					{if $error_last_name_not_ok==1}
-						<span class="errormsg">{t}The last name is not valid.{/t}</span>
-					{/if}
-				</td>
-			</tr>
 			<tr>
 				<td width="145" valign="top">{t}First name{/t}:</td>
 				<td valign="top">
 					<input type="text" name="first_name" maxlength="60" value="{$first_name|escape}" class="input200" /> 
 					{if $error_first_name_not_ok==1}
 						<span class="errormsg">{t}The first name is not valid.{/t}</span>
+					{/if}
+				</td>
+			</tr>
+			<tr>
+				<td width="145" valign="top">{t}Last name{/t}:</td>
+				<td valign="top">
+					<input type="text" name="last_name" maxlength="60" value="{$last_name|escape}" class="input200" />
+					{if $error_last_name_not_ok==1}
+						<span class="errormsg">{t}The last name is not valid.{/t}</span>
 					{/if}
 				</td>
 			</tr>
@@ -113,12 +118,12 @@
 					{/if}
 				</td>
 			</tr>
-			<tr><td class="spacer" colspan="2"></td></tr>
+			<tr><td class="spacer" colspan="2"><div class="mediumspacer"></td></tr>
 
 			<tr>
 				<td width="145" valign="top">{t}E-Mail{/t}:</td>
 				<td valign="top">
-					<input type="text" name="email" maxlength="80" value="{$email|escape}" class="input200" />*&nbsp;
+					<input type="text" name="email" maxlength="80" value="{$email|escape}" class="input200" /> *&nbsp;
 					{if $error_email_not_ok==1}
 						<span class="errormsg">{t}The E-Mail is not valid.{/t}</span>
 					{elseif $error_email_exists==1}
@@ -130,13 +135,13 @@
 			<tr>
 				<td width="145" valign="top">{t}Your password{/t}:</td>
 				<td valign="top">
-					<input type="password" name="password1" maxlength="80" value="" class="input200" />*&nbsp;
+					<input type="password" name="password1" maxlength="80" value="" class="input200" /> *&nbsp;
 				</td>
 			</tr>
 			<tr>
 				<td width="145" valign="top">{t}Please repeat{/t}:</td>
 				<td valign="top">
-					<input type="password" name="password2" maxlength="80" value="" class="input200" />*
+					<input type="password" name="password2" maxlength="80" value="" class="input200" /> *
 				</td>
 			</tr>
 			{if $error_password_not_ok==1 or $error_password_diffs==1}
@@ -154,7 +159,7 @@
 			<tr>
 				<td width="145" valign="top">&nbsp;</td>
 				<td valign="top">
-					{t}* are required{/t}
+					{t}* mandatory field{/t}
 					{if $error_unkown==1}
 						<br />
 						<span class="errormsg">
@@ -168,13 +173,14 @@
 
 			<tr>
 				<td colspan="2" class="help">
-					<img src="resource2/{$opt.template.style}/images/misc/hint.gif" border="0" width="15" height="11" alt="{t}Note{/t}" title="{t}Note{/t}" align="middle" />
-					{t 1=$opt.mail.contact}We respect your privacy. Your personal data will be stored in our database, but not shared to third parties.
-					Please note our exact <a href="articles.php?page=dsb">privacy statement</a>. If you have further questions, please <a href="mailto:%1">contact us</a> <b>before</b> you create your
-					account.{/t}
+					<p class="article">
+						<img src="resource2/{$opt.template.style}/images/misc/hint.gif" border="0" width="15" height="11" alt="{t}Note{/t}" title="{t}Note{/t}" align="middle" />
+						{t 1=$opt.mail.contact}We respect your privacy. Your personal data will be stored in our database, but not shared to third parties.
+						Please note our exact <a href="articles.php?page=dsb">privacy statement</a>. If you have further questions, please <a href="mailto:%1">contact us</a> <b>before</b> you create your
+						account.{/t}
+					</p>
 				</td>
 			</tr>
-			<tr><td class="spacer" colspan="2"></td></tr>
 
 			<tr>
 				<td colspan="2">
@@ -195,5 +201,6 @@
 				</td>
 			</tr>
 		</table>
+		</div>
 	</form>
 {/if}

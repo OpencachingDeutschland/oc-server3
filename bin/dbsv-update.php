@@ -341,6 +341,11 @@
 		}
 	}
 
+	function dbv_118()	// resize field password to fit to the new hashed passwords
+	{
+		sql("ALTER TABLE `user` MODIFY COLUMN `password` VARCHAR(128)");
+	}
+
 
 	// When adding new mutations, take care that they behave well if run multiple
 	// times. This improves robustness of database versioning.

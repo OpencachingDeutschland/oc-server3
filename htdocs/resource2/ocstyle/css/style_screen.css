@@ -709,7 +709,7 @@ p.startmessage { line-height: 1.4em; }
 /* Viewcache */
 #cache_name_block { width: 670px; padding-left: 5px; padding-top: 5px;}
 
-div.cachedesc {font-size: 120%; padding-bottom:6px;}
+div.cachedesc {font-size: 120%; padding-bottom:6px; overflow:hidden; }
 div.cachedesc p {font-size: 100%; line-height:normal;}
 div.cachedesc-print p {line-height:normal;}
 

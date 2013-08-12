@@ -29,7 +29,7 @@
 						{include file="res_cacheicon.tpl" cachetype=$cache.type status=$cache.status}
 					</td>
 					<td align="left" valign="top" width="397"><font size="3"><b>{$cache.name|escape}</b></font><br />
-						<span class="garmintext">{t}by{/t} <a>{$cache.username|escape}</a><br />
+						<span class="garmintext">{t}by{/t} {$cache.username|escape}<br />
 						{if $cache.shortdesc!=''}
 							{$cache.shortdesc|escape}
 						{/if}

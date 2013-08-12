@@ -448,7 +448,7 @@ td.default { font-size:12px; }
 .nav3 a, .content1 a, .content2 a, .content3 a, .sidebar-txtbox-noshade a, .sidebar-txtbox-shade a, .popup a {color: rgb(75,75,175); text-decoration: none;}
 #langstripe a, .mapform a { color:rgb(60,60,140); text-decoration: none; }
   /* the mapform area is also popup -> declare mapform link style after popup */
-#langstripe a:hover, .nav3 a:hover, .content1 a:hover, .content2 a:hover, .content3 a:hover, .sidebar-txtbox-noshade a:hover, .sidebar-txtbox-shade a:hover, .footer a:hover {text-decoration: underline;}
+#langstripe a:hover, .nav3 a:hover, .content1 a:hover, .content2 a:hover, .content3 a:hover, .sidebar-txtbox-noshade a:hover, .sidebar-txtbox-shade a:hover, .footer a:hover, .popup a:hover {text-decoration: underline;}
 .content1 a:visited, .content2 a:visited, .content3 a:visited {color: rgb(120,0,150);}
 .footer a {color: rgb(255,255,255); text-decoration:none; }
 a.systemlink:visited, .systemlink a:visited, .content-title-link a:visited { color: rgb(75,75,175); }

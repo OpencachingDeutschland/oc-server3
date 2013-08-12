@@ -82,13 +82,13 @@ function getWaypoints($cacheid)
 		}
 		else
 		{
-			$cache_rs = sql("SELECT `caches`.`uuid`, `caches`.`user_id`, `caches`.`name`, `stat_caches`.`picture`, `caches`.`type`, `caches`.`size`, `caches`.`date_hidden`, `caches`.`date_activate`, `caches`.`longitude`, `caches`.`latitude`, `caches`.`country`, `caches`.`terrain`, `caches`.`difficulty`, `caches`.`desc_languages`, `caches`.`status`, `caches`.`search_time`, `caches`.`way_length`, `caches`.`logpw`, `caches`.`wp_gc`, `caches`.`wp_nc`, `caches`.`node`, `user`.`username` FROM `caches` INNER JOIN `user` ON `caches`.`user_id`=`user`.`user_id` LEFT JOIN `stat_caches` ON `caches`.`cache_id`=`stat_caches`.`cache_id` WHERE `caches`.`cache_id`='&1'", $cache_id);
+			$cache_rs = sql("SELECT `caches`.`uuid`, `caches`.`user_id`, `caches`.`name`, `stat_caches`.`picture`, `caches`.`type`, `caches`.`size`, `caches`.`date_hidden`, `caches`.`date_activate`, `caches`.`longitude`, `caches`.`latitude`, `caches`.`country`, `caches`.`terrain`, `caches`.`difficulty`, `caches`.`desc_languages`, `caches`.`status`, `caches`.`search_time`, `caches`.`way_length`, `caches`.`logpw`, `caches`.`wp_oc`, `caches`.`wp_gc`, `caches`.`wp_nc`, `caches`.`node`, `user`.`username` FROM `caches` INNER JOIN `user` ON `caches`.`user_id`=`user`.`user_id` LEFT JOIN `stat_caches` ON `caches`.`cache_id`=`stat_caches`.`cache_id` WHERE `caches`.`cache_id`='&1'", $cache_id);
 			$cache_record = sql_fetch_array($cache_rs);
 			sql_free_result($cache_rs);
 
 			if ($cache_record !== false)
 			{
-				if ($cache_record['user_id'] == $usr['userid'])
+				if ($cache_record['user_id'] == $usr['userid'] || $login->listingAdmin())
 				{
 					$tplname = 'editcache';
 
@@ -478,6 +478,18 @@ function getWaypoints($cacheid)
 							// but still used by Ocprop and maybe other tools.
 							sql("SET @STATUS_CHANGE_USER_ID='&1'", $usr['userid']);
 							sql("UPDATE `caches` SET `name`='&1', `longitude`='&2', `latitude`='&3', `type`='&4', `date_hidden`='&5', `country`='&6', `size`='&7', `difficulty`='&8', `terrain`='&9', `status`='&10', `search_time`='&11', `way_length`='&12', `logpw`='&13', `wp_gc`='&14', `wp_nc`='&15', `date_activate` = $activation_date WHERE `cache_id`='&16'", $cache_name, $cache_lon, $cache_lat, $cache_type, date('Y-m-d', mktime(0, 0, 0, $cache_hidden_month, $cache_hidden_day, $cache_hidden_year)), $cache_country, $sel_size, $cache_difficulty, $cache_terrain, $status, $search_time, $way_length, $log_pw, $wp_gc, $wp_nc, $cache_id);
+
+							// send notification on admin intervention
+							if ($cache_record['user_id'] != $usr['userid'] &&
+							    $opt['logic']['admin']['listingadmin_notification'] != '')
+							{
+								mail(
+									$opt['logic']['admin']['listingadmin_notification'],
+									mb_ereg_replace('{occode}', $cache_record['wp_oc'],
+										mb_ereg_replace('{username}', $usr['username'],
+										t('Cache listing {occode} has been modified by {username}'))),
+										t('The modifications can be checked via vandalism restore function.'));
+							}
 
 							// generate status-change log
 							if ($status != $status_old && $status_old != 5)

@@ -151,6 +151,8 @@
 
 	// admin may use OC-team-comment log flag only when processing a cache report 
 	$opt['logic']['admin']['team_comments_only_for_reports'] = true;
+	$opt['logic']['admin']['enable_listing_admins'] = false;
+	$opt['logic']['admin']['listingadmin_notification'] = 'root';
 
   // see config2/settings-dist.inc.php
 	$opt['template']['default']['locale'] = 'DE';      // may be overwritten by $opt['domain'][...]['locale']

@@ -149,6 +149,12 @@ class login
 		return ($this->admin & $privilege) == $privilege;
 	}
 
+	public function listingAdmin()
+	{
+		global $opt;
+		return $this->hasAdminPriv(ADMIN_LISTING) && $opt['logic']['admin']['enable_listing_admins'];
+	}
+
   function checkLoginsCount()
 	{
 		global $opt;

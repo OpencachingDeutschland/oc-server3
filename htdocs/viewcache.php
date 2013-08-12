@@ -343,6 +343,7 @@ function getChildWaypoints($cacheid)
 	$tpl->assign('cachemap', $cachemap);
 
 	$tpl->assign('shortlink_domain', $opt['logic']['shortlink_domain']);
+	$tpl->assign('listing_admin', $login->listingAdmin());
 
 	// display the page
 	$tpl->display();

@@ -2588,6 +2588,9 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2160', 'Faceboo
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2161', 'Only one account can be created per E-Mail address. First name, last name and country are optional.', '2013-08-07 18:30:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2162', 'Your log entries', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2163', 'There are no log entries yet for your geocaches.', '2010-08-28 11:48:04');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2164', 'Cache listing {occode} has been modified by {username}', '2010-08-28 11:48:04');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2165', 'The cache description of {occode} has been modified by {username}', '2010-08-28 11:48:04');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2166', 'The modifications can be checked via vandalism restore function.', '2010-08-28 11:48:04');
 
 -- Table sys_trans_ref
 SET NAMES 'utf8';
@@ -6628,6 +6631,9 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2161', 'DE', 'Pro E-Mail-Adresse kann nur ein Benutzeraccount eingerichtet werden. Die Angabe von Vorname, Nachname und Land sind freiwillig.', '2013-08-07 18:30:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2162', 'DE', 'Deine Logeinträge', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2163', 'DE', 'Es gibt noch keine Logeinträge für deine Caches.', '2010-08-28 11:48:06');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2164', 'DE', 'Das Cachelisting {occode} wurde von {username} verändert.', '2010-08-28 11:48:06');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2165', 'DE', 'Die Cachebeschreibung von {occode} wurde von {username} verändert.', '2010-08-28 11:48:06');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2166', 'DE', 'Was geändert wurde, ist über die Vandalismus-Revertierfunktion einsehbar.', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'EN', 'Reorder IDs', '2010-09-02 00:15:30');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'EN', 'The database could not be reconnected.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'EN', 'Testing – please do not login', '2010-08-28 11:48:07');

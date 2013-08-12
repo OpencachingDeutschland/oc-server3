@@ -110,7 +110,7 @@
 						<li class="group"><a style="background-image: url(resource2/{$opt.template.style}/images/viewcache/ignore-18.png);background-repeat:no-repeat;" href="ignore.php?cacheid={$cache.cacheid|urlencode}&amp;action=addignore">{t}Ignore{/t}</a></li>
 					{/if}
 
-					{if $login.userid==$cache.userid}
+					{if $login.userid==$cache.userid || $listing_admin }
 						<li class="group"><a style="background-image: url(resource2/{$opt.template.style}/images/viewcache/page.png);background-repeat:no-repeat;" href="editcache.php?cacheid={$cache.cacheid|urlencode}">{t}Edit{/t}</a></li>
 					{/if}
 				{/if}	

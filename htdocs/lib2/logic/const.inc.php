@@ -35,6 +35,7 @@
 	define('ADMIN_NEWS', 8);          // approve news entries
 	define('ADMIN_RESTORE', 16);      // restore vandalized listings
 	define('ADMIN_ROOT', 128 | 127);  // root + all previous rights
+	define('ADMIN_LISTING', 1024);    // can edit any cache listings
 
 	define('ATTRIB_SELECTED', 1);
 	define('ATTRIB_UNSELECTED', 2);

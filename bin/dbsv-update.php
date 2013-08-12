@@ -343,7 +343,12 @@
 
 	function dbv_118()	// resize field password to fit to the new hashed passwords
 	{
-		sql("ALTER TABLE `user` MODIFY COLUMN `password` VARCHAR(128)");
+		sql("ALTER TABLE `user` MODIFY COLUMN `password` VARCHAR(128) default NULL");
+	}
+
+	function dbv_119()	// resize admin status field to enable more detailed rights
+	{
+		sql("ALTER TABLE `user` MODIFY COLUMN `admin` smallint(5) unsigned NOT NULL default '0'");
 	}
 
 

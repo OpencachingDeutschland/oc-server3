@@ -66,7 +66,7 @@
 		else
 		{
 
-			$desc_rs = sql("SELECT `cache_desc`.`cache_id` `cache_id`, `cache_desc`.`node` `node`, `cache_desc`.`language` `language`, `caches`.`name` `name`, `caches`.`user_id` `user_id`, `cache_desc`.`desc` `desc`, `cache_desc`.`hint` `hint`, `cache_desc`.`short_desc` `short_desc`, `cache_desc`.`desc_html` `desc_html`, `cache_desc`.`desc_htmledit` `desc_htmledit` FROM `caches`, `cache_desc` WHERE (`caches`.`cache_id` = `cache_desc`.`cache_id`) AND `cache_desc`.`id`='&1'", $descid);
+			$desc_rs = sql("SELECT `cache_desc`.`cache_id` `cache_id`, `cache_desc`.`node` `node`, `cache_desc`.`language` `language`, `caches`.`name` `name`, `caches`.`user_id` `user_id`, `caches`.`wp_oc`, `cache_desc`.`desc` `desc`, `cache_desc`.`hint` `hint`, `cache_desc`.`short_desc` `short_desc`, `cache_desc`.`desc_html` `desc_html`, `cache_desc`.`desc_htmledit` `desc_htmledit` FROM `caches`, `cache_desc` WHERE (`caches`.`cache_id` = `cache_desc`.`cache_id`) AND `cache_desc`.`id`='&1'", $descid);
 			$desc_record = sql_fetch_array($desc_rs);
 			sql_free_result($desc_rs);
 
@@ -81,7 +81,7 @@
 					exit;
 				}
 
-				if ($desc_record['user_id'] == $usr['userid'])
+				if ($desc_record['user_id'] == $usr['userid'] || $login->listingAdmin())
 				{
 					$tplname = 'editdesc';
 
@@ -180,6 +180,18 @@
 							            nl2br($hint),
 							            $desclang,
 							            $descid);
+
+							// send notification on admin intervention
+							if ($desc_record['user_id'] != $usr['userid'] &&
+							    $opt['logic']['admin']['listingadmin_notification'] != '')
+							{
+								mail(
+									$opt['logic']['admin']['listingadmin_notification'],
+									mb_ereg_replace('{occode}', $desc_record['wp_oc'],
+										mb_ereg_replace('{username}', $usr['username'],
+										t('The cache description of {occode} has been modified by {username}'))),
+										'');
+							}
 
 							// do not use slave server for the next time ...
 							db_slave_exclude();

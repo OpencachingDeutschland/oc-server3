@@ -32,6 +32,7 @@
 		if ($record['admin'] & ADMIN_NEWS)					$rights[] = "newsapprove";
 		if ($record['admin'] & ADMIN_RESTORE)				$rights[] = "vand.restore";
 		if ($record['admin'] & 128)									$rights[] = "root";
+		if ($record['admin'] & ADMIN_LISTING)				$rights[] = "listing";
 		$admin['rights'] = implode(", ", $rights);
 		$admins[] = $admin;
 	}

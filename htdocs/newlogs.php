@@ -50,7 +50,7 @@
 		$tpl->caching = true;
 		$tpl->cache_lifetime = 900;
 		$logcount = 250;
-		$paging = false;  // paging would probably have a performance / DB load problem
+		$paging = false;  // paging would have poor performance for all logs
 		$orderByDate = '';
 	}
 	else
@@ -62,7 +62,7 @@
 		$tpl->caching = true;
 		$tpl->cache_lifetime = 300;
 		$logcount = 250;
-		$paging = false;  // paging would probably have a performance / DB load problem
+		$paging = false;  // paging would have poor performance for all logs
 		$orderByDate = '';
 	}
 
@@ -73,7 +73,7 @@
 		if ($paging) sql_enable_foundrows();
 		sql_temp_table_slave('loglist');
 		sql_slave("CREATE TEMPORARY TABLE &loglist (`id` INT(11) PRIMARY KEY)
-			         SELECT SQL_CALC_FOUND_ROWS `cache_logs`.`id`
+			         SELECT " . ($paging ? "SQL_CALC_FOUND_ROWS" : "") . " `cache_logs`.`id`
 			           FROM `cache_logs`
 			     INNER JOIN `caches` ON `cache_logs`.`cache_id`=`caches`.`cache_id`
 			     INNER JOIN `cache_status` ON `caches`.`status`=`cache_status`.`id`

@@ -8,25 +8,31 @@
 	<img src="resource2/{$opt.template.style}/images/cacheicon/traditional.gif" style="align: left; margin-right: 10px;" width="32" height="32" alt="" />
 	{if $ownerlogs}
 		{if $ownlogs}
-			{t}Newest log entries for your geocaches{/t}
+			{t}Log entries for your geocaches{/t}
 		{else}
 			{capture name=ownerlink}<a href="viewprofile.php?userid={$ownerid}">{$ownername|escape}</a>{/capture}
 			{t 1=$smarty.capture.ownerlink}Newest log entries for caches of %1{/t}
 		{/if}
+	{elseif $ownlogs}
+		{t}Your log entries{/t}
 	{else}
 		{t}Latest logs entries{/t} {if $rest}{t}Without Germany{/t}{/if}
 	{/if}
 </div>
 
-{if $ownerlogs && $ownlogs}
-	<p style="line-height:2em">
+<p style="line-height:2em">
+	{if $paging}
+		{include file="res_pager.tpl"}
+		&nbsp; &nbsp;
+	{/if}
+	{if $ownerlogs && $ownlogs}
 		{if $show_own_logs}
-			<a href="ownerlogs.php?ownlogs=0">{t}Hide own logs{/t}</a>
+			<a class="systemlink" href="ownerlogs.php?ownlogs=0">{t}Hide own logs{/t}</a>
 		{else}
-			<a href="ownerlogs.php?ownlogs=1">{t}Show own logs{/t}</a>
+			<a class="systemlink" href="ownerlogs.php?ownlogs=1">{t}Show own logs{/t}</a>
 		{/if}
-	</p>
-{/if}
+	{/if}
+</p>
 
 <table width="100%" class="table"> 
 	{assign var='lastCountry' value=''}
@@ -45,7 +51,7 @@
 		{/if}
 		<tr>
 			<td style="width:1px">
-				{$newLog.date_created|date_format:$opt.format.date}
+				{if $creation_date}{$newLog.date_created|date_format:$opt.format.date}{else}{$newLog.date|date_format:$opt.format.date}{/if}
 			</td>
 			<td class="listicon">
 				{if $newLog.type==1}
@@ -118,6 +124,17 @@
 			{/if}
 		</tr>
 		{assign var='lastCountry' value=$newLog.country_name}
+	{foreachelse}
+		{if $ownerlogs}
+			<p>{t}There are no log entries yet for your geocaches.{/t}</p>
+		{/if}
 	{/foreach}
 	<tr><td class="spacer" style="height:{$addpiclines}em"></td></tr>
 </table>
+
+{if $paging && $newLogs|@count > 20}
+	<p>
+		{include file="res_pager.tpl"}
+	</p>
+	<br />
+{/if}

@@ -28,7 +28,8 @@
 	$tpl->assign('hidden', $rUser['hidden']);
 
 	//get last logs
-	$tpl->assign_rs('logs', sql("SELECT `cache_logs`.`cache_id` `cacheid`, `cache_logs`.`type` `type`, `cache_logs`.`date` `date`, `caches`.`name` `name`,
+	sql_enable_foundrows();
+	$tpl->assign_rs('logs', sql("SELECT SQL_CALC_FOUND_ROWS `cache_logs`.`cache_id` `cacheid`, `cache_logs`.`type` `type`, `cache_logs`.`date` `date`, `caches`.`name` `name`,
 	                                    `user`.`user_id` AS `userid`, `user`.`username`, `caches`.`wp_oc`, `ca`.`attrib_id` IS NOT NULL AS `oconly`,
 	                                    `cache_rating`.`rating_date` IS NOT NULL AS `recommended`
 	                               FROM `cache_logs`
@@ -39,6 +40,8 @@
 	                              WHERE `cache_logs`.`user_id`='&1'
 	                           ORDER BY `cache_logs`.`date` DESC, `cache_logs`.`date_created` DESC
 														    LIMIT 10", $login->userid));
+	$tpl->assign('morelogs', sql_value("SELECT FOUND_ROWS()", 0) > 10);
+	sql_foundrows_done();
 
 	//get last hidden caches
 	$tpl->assign_rs('caches', sql("SELECT `caches`.`cache_id`, `caches`.`name`, `caches`.`type`,

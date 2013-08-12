@@ -43,7 +43,7 @@
 			<td class="header-small" colspan="2">
 				<table width="98.5%">
 					<tr>
-						<td rowspan="1" style="width:300px; padding:0; margin:0">{include file="res_pager.tpl"}</td>
+						<td rowspan="1" style="width:300px; padding:0; margin:0">{include file="res_pager.tpl" smallnumbers=true}</td>
 						<td style="text-align:right; padding:0; margin:0">{t}Download{/t}:&nbsp;</td>
 						<td><nobr>
 							<select class="exportlist" onChange="location.href=this.options[this.selectedIndex].value">

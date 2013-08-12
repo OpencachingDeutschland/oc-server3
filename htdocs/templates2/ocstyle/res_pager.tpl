@@ -7,6 +7,7 @@
  ***************************************************************************}
 {* OCSTYLE *}
 {if $pages_list}
+	<span class="{if isset($smallnumbers) && $smallnumbers}small{/if}pager">
 	{if $pages_first_link !== null}
 		{if $pages_first_link}
 			<a href="{$pages_first_link}"><img src="resource2/{$opt.template.style}/images/navigation/16x16-browse-first.png" width="16" height="16" alt="&lt;&lt;" /></a>
@@ -34,4 +35,5 @@
 			<img src="resource2/{$opt.template.style}/images/navigation/16x16-browse-last-inactive.png" width="16" height="16" alt="&gt;&gt;" />
 		{/if}
 	{/if}
+	</span>
 {/if}

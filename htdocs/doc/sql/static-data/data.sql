@@ -900,8 +900,9 @@ INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustrin
 INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('100', 'MNU_START_OCMENU', 'Opencaching', '2112', 'Opencaching', '2112', '0', '', '1', '1', '9', '', '0', NULL);
 INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('101', 'MNU_START_WIKINEWS', 'New Wiki articles', '2113', 'New Wiki articles', '2113', '0', '!http://wiki.opencaching.de/index.php/Hauptseite/Neue_Artikel', '1', '1', '4', '', '0', NULL);
 INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('102', 'MNU_START_NEWFEATURES', 'New features', '2115', 'New features', '2115', '0', 'articles.php?page=changelog', '1', '1', '5', '', '0', NULL);
-INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('103', 'MNU_MYPROFILE_OWNERLOGS', 'Log history', '2126', 'Log history', '2126', '0', '!okapi/apps/', '0', '9', '10', '', '1', NULL);
-INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('104', 'MNU_CACHES_OCONLY81', 'OConly-81', '2139', 'OConly-81', '2139', '0', 'oconly81.php', '1', '10', '5', '', '1', NULL);
+INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('103', 'MNU_MYPROFILE_OWNERLOGS', 'Log history', '2126', 'Log history', '2126', '0', 'ownerlogs.php', '0', '9', '10', '', '1', NULL);
+INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('104', 'MNU_MYPROFILE_OWNLOGS', 'Log history', '2126', 'Log history', '2126', '0', 'ownlogs.php', '0', '9', '11', '', '1', NULL);
+INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('105', 'MNU_CACHES_OCONLY81', 'OConly-81', '2139', 'OConly-81', '2139', '0', 'oconly81.php', '1', '10', '5', '', '1', NULL);
 
 -- Table sys_trans
 SET NAMES 'utf8';
@@ -1384,7 +1385,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('499', 'Will att
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('500', 'Hello %1', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('501', 'Logs', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('502', 'Finds: %1', '2010-08-28 11:48:04');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('503', 'Your latest log entries:', '2010-08-28 11:48:04');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('503', 'Your latest log entries', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('504', 'No entries found', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('505', 'Geocaches hidden: %1', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('506', 'Your geocaches hidden', '2010-08-28 11:48:04');
@@ -2552,10 +2553,10 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2123', 'A recom
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2124', 'Add log-entry for the cache <a href=\"viewcache.php?cacheid={cacheid}\">{cachename}</a>', '2010-09-07 20:19:07');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2125', 'Show log history', '2010-09-07 20:19:07');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2126', 'Log history', '2010-09-07 20:19:07');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2127', 'Newest log entries for caches of %1', '2010-09-07 20:19:07');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2127', 'Log entries for caches of %1', '2010-09-07 20:19:07');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2128', 'Hide own logs', '2010-09-07 20:19:07');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2129', 'Show own logs', '2010-09-07 20:19:07');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2130', 'Newest log entries for your geocaches', '2010-09-07 20:19:07');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2130', 'Log entries for your geocaches', '2010-09-07 20:19:07');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2131', 'If you find a user that wants to adopt your Geocache, fill in the username here and submit. The user will then see this Geocache under My Profile \&gt; Adoptions. To complete, the user has to accept our terms of use and commit the adoption.', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2132', 'You can offer this Geocache to more than one user. The first user committing the adoption will get the new owner of this Geocache. With the adoption, you will give the committing user an unlimited right to use, modifiy, publish and sublicense content of this Geocache.', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2133', 'Copy EN', '2010-08-28 11:48:04');
@@ -2585,6 +2586,8 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2158', 'Opencac
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2159', 'Google+ Community', '2013-08-07 18:30:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2160', 'Facebook Group', '2013-08-07 18:30:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2161', 'Only one account can be created per E-Mail address. First name, last name and country are optional.', '2013-08-07 18:30:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2162', 'Your log entries', '2010-08-28 11:48:04');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2163', 'There are no log entries yet for your geocaches.', '2010-08-28 11:48:04');
 
 -- Table sys_trans_ref
 SET NAMES 'utf8';
@@ -5423,7 +5426,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('500', 'DE', 'Herzlich willkommen %1', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('501', 'DE', 'Logs', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('502', 'DE', 'Funde: %1', '2010-08-28 11:48:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('503', 'DE', 'Deine letzten Logeinträge:', '2010-08-28 11:48:06');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('503', 'DE', 'Deine letzten Logeinträge', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('504', 'DE', 'Keine Einträge gefunden', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('505', 'DE', 'Versteckte Caches: %1', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('506', 'DE', 'Deine versteckten Caches', '2010-08-28 11:48:06');
@@ -6590,10 +6593,10 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2124', 'DE', 'Logeintrag f\&uuml;r den Cache <a href=\"viewcache.php?cacheid={cacheid}\">{cachename}</a> hinzuf\&uuml;gen', '2010-09-10 23:33:33');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2125', 'DE', 'Loghistorie anzeigen', '2010-09-10 23:33:33');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2126', 'DE', 'Loghistorie', '2010-09-10 23:33:33');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2127', 'DE', 'Neueste Logs für Caches von %1', '2010-09-10 23:33:33');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2127', 'DE', 'Logeinträge für Caches von %1', '2010-09-10 23:33:33');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2128', 'DE', 'eigene Logs ausblenden', '2010-09-10 23:33:33');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2129', 'DE', 'eigene Logs einblenden', '2010-09-10 23:33:33');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2130', 'DE', 'Neueste Logs für deine Caches', '2010-09-10 23:33:33');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2130', 'DE', 'Logeinträge für deine Caches', '2010-09-10 23:33:33');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2131', 'DE', 'Wenn du einen Benutzer gefunden hast, der deinen Geocache adoptieren möchte, trage bitte unten den Benutzername ein und bestätige den Vorgang. Dem Benutzer wird diesen Geocache dann unter Mein Profil \&gt; Adoptionen angezeigt. Um die Adoption abzuschließen, muss der Benutzer die Nutzungsbedingungen von Opencaching.de akzeptieren und die Adoption bestätigen.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2132', 'DE', 'Du kannst einen Geocache mehreren Benutzern zur Adoption anbieten. Der erste Benutzer, der die Adoption bestätigt, wird der neue Besitzer des Geocaches. Mit der Adoption gibst du dem Benutzer ein unbeschränktes Recht, urheberrechtlich geschützte Inhalte dieses Geocaches zu nutzen, zu modifizieren und weiterzugeben.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2133', 'DE', 'EN kopieren', '2010-08-28 11:48:07');
@@ -6623,6 +6626,8 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2159', 'DE', 'Google+ Community', '2013-08-07 18:30:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2160', 'DE', 'Facebook-Gruppe', '2013-08-07 18:30:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2161', 'DE', 'Pro E-Mail-Adresse kann nur ein Benutzeraccount eingerichtet werden. Die Angabe von Vorname, Nachname und Land sind freiwillig.', '2013-08-07 18:30:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2162', 'DE', 'Deine Logeinträge', '2010-08-28 11:48:06');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2163', 'DE', 'Es gibt noch keine Logeinträge für deine Caches.', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'EN', 'Reorder IDs', '2010-09-02 00:15:30');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'EN', 'The database could not be reconnected.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'EN', 'Testing – please do not login', '2010-08-28 11:48:07');
@@ -7101,7 +7106,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('500', 'EN', 'Hello %1', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('501', 'EN', 'Logs', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('502', 'EN', 'Finds: %1', '2010-08-28 11:48:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('503', 'EN', 'Your latest log entries:', '2010-08-28 11:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('503', 'EN', 'Your latest log entries', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('504', 'EN', 'No entries found', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('505', 'EN', 'Geocaches hidden: %1', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('506', 'EN', 'Your geocaches hidden', '2010-08-28 11:48:07');
@@ -8270,16 +8275,17 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2124', 'EN', 'Add log-entry for the cache <a href=\"viewcache.php?cacheid={cacheid}\">{cachename}</a>', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2125', 'EN', 'Show log history', '2013-07-22 15:50:48');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2126', 'EN', 'Log history', '2013-07-22 15:50:48');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2127', 'EN', 'Newest log entries for caches of %1', '2013-07-22 15:50:48');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2127', 'EN', 'Log entries for caches of %1', '2013-07-22 15:50:48');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2128', 'EN', 'Hide own logs', '2013-07-22 15:50:48');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2129', 'EN', 'Show own logs', '2013-07-22 15:50:48');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2130', 'EN', 'Newest log entries for your geocaches', '2013-07-22 15:50:48');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2130', 'EN', 'Log entries for your geocaches', '2013-07-22 15:50:48');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2131', 'EN', 'When you have found a user who wants to adopt your geocache, fill in the username here and submit. The user will see this geocache in My Profile \&gt; Adoptions. To complete the adoption, the user has to accept our terms of use and commit the adoption.', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2132', 'EN', 'You may offer this geocache to more than one user. The first user committing the adoption will become the new owner of this cache. With the adoption, you will grant to the committing user an unlimited right to use, modifiy, publish and sublicense content of this geocache.', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2133', 'EN', 'Copy EN', '2013-07-22 15:50:48');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2134', 'EN', 'I know what I am doing, do not show this advice again today.', '2013-07-22 15:50:48');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2150', 'EN', 'This geocache is probably placed within the following protection areas:', '2011-05-23 22:19:23');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2151', 'EN', 'Also listed as', '2011-05-23 22:19:23');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2162', 'EN', 'Your log entries', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'ES', 'Reordenar ID', '2010-12-09 00:17:55');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'ES', 'La base de datos no se pudo conectar.', '2010-12-09 00:17:55');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'ES', 'En pruebas - por favor, no entre.', '2010-12-09 00:17:55');
@@ -8758,7 +8764,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('500', 'ES', 'Hola %1', '2010-12-09 00:17:57');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('501', 'ES', 'Logs', '2010-12-09 00:17:57');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('502', 'ES', 'Encontrados: %1', '2011-04-04 22:05:42');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('503', 'ES', 'Sus últimas entradas de Logs:', '2010-12-09 00:17:57');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('503', 'ES', 'Sus últimas entradas de Logs', '2010-12-09 00:17:57');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('504', 'ES', 'No hay encuentros', '2010-12-09 00:17:57');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('505', 'ES', 'Geocaches escondidos: %1', '2010-12-09 00:17:57');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('506', 'ES', 'Tus geocaches escondidos', '2010-12-09 00:17:57');
@@ -9756,6 +9762,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2133', 'ES', 'Copia EN', '2010-12-09 00:17:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2150', 'ES', 'Este geocache está probablemente en las siguientes áreas protegidas:', '2011-05-23 22:20:30');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2161', 'ES', 'Sólo una cuenta se puede crear por dirección de email. Nombre, apellido y país son opcionales.', '2011-05-23 22:20:30');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2162', 'ES', 'Sus entradas de Logs', '2010-12-09 00:17:57');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('6', 'FR', 'Pseudo', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('7', 'FR', 'Quite', '2010-10-04 00:17:39');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('24', 'FR', 'Prénom', '2010-10-04 00:17:39');
@@ -10321,7 +10328,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('500', 'IT', 'Ciao %1', '2010-09-01 23:48:28');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('501', 'IT', 'Log', '2010-08-31 20:06:23');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('502', 'IT', 'Trovate: %1', '2012-08-26 02:39:48');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('503', 'IT', 'I tuoi ultimi log:', '2010-08-31 20:06:23');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('503', 'IT', 'I tuoi ultimi log', '2010-08-31 20:06:23');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('504', 'IT', 'Nessuna trovata', '2010-10-27 18:49:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('505', 'IT', 'Geocaches nascoste: %1', '2010-08-31 20:06:23');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('506', 'IT', 'Le tue geocaches nascoste', '2010-09-01 23:48:28');
@@ -11489,16 +11496,17 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2124', 'IT', 'Aggiungi log per la cache <a href=\"viewcache.php?cacheid={cacheid}\">{cachename}</a>', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2125', 'IT', 'Vedi log storico', '2013-07-25 15:53:16');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2126', 'IT', 'Log storico', '2013-07-25 15:53:16');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2127', 'IT', 'Ultimi iserimenti sul log per cache di %1', '2013-07-25 15:53:16');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2127', 'IT', 'Iserimenti sul log per cache di %1', '2013-07-25 15:53:16');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2128', 'IT', 'Nascondi miei logs', '2013-07-25 15:53:16');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2129', 'IT', 'Visualizza miei logs', '2013-07-25 15:53:16');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2130', 'IT', 'Ultimi inserimenti log per le tue geocache', '2013-07-25 15:53:16');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2130', 'IT', 'Inserimenti log per le tue geocache', '2013-07-25 15:53:16');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2131', 'IT', 'Quando hai trovato un utente che voglia adottare la tua geocache, inserisci il nome utente e invia. L\'utente vedrà questa geocache in \"il mio Profilo \&gt; Adozioni\". Per completare l\'adozioni, l\'utente deve accettare le condizioni d\'uso e confermare l\'adozione.', '2010-10-27 18:49:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2132', 'IT', 'Puoi offrire questa geocache a più di un utente. Il primo utente che conferma l\'adozione diventa il nuovo proprietario di questa cache. Con l\'adozione, concedi all\'utente diritti illimitati di utilizzo, modifica, pubblicazione e licenza sulla geocache.', '2010-10-27 18:49:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2133', 'IT', 'Copia EN', '2010-10-27 18:49:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2134', 'IT', 'So quello che sto facendo, non visualizzare di nuovo questo avvertimento per oggi.', '2013-07-25 15:53:16');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2150', 'IT', 'Questa geocache probabilmente è situata in una riserva naturale:', '2011-05-23 22:19:58');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2161', 'IT', 'Un solo utente registrato può essere creato per ciascun indirizzo email. Nome, Cognome e Nazione sono campi opzionali.', '2011-05-23 22:19:58');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2162', 'IT', 'I tuoi log', '2010-08-31 20:06:23');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('922', 'JA', 'JA', '2011-05-15 16:04:51');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'NL', 'ID\'s opnieuw sorteren', '2011-02-04 19:49:56');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'NL', 'De verbinding met de database kon niet hersteld worden.', '2011-02-04 19:49:56');
@@ -11975,7 +11983,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('500', 'NL', 'Welkom %1', '2011-02-04 19:50:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('501', 'NL', 'Logs', '2011-02-04 19:50:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('502', 'NL', 'Gevonden caches: %1', '2011-02-04 19:50:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('503', 'NL', 'Je laatste logjes:', '2011-02-04 19:50:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('503', 'NL', 'Je laatste logjes', '2011-02-04 19:50:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('504', 'NL', 'Geen items gevonden', '2011-02-04 19:50:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('505', 'NL', 'Geplaatste caches: %1', '2011-02-04 19:50:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('506', 'NL', 'Jouw geplaatste caches', '2011-02-04 19:50:07');
@@ -12869,7 +12877,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('493', 'RU', 'Сменить адрес', '2010-12-06 22:17:36');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('497', 'RU', 'Не найден', '2010-12-06 22:17:36');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('502', 'RU', 'Найдено тайников: %1', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('503', 'RU', 'Ваши последние отчёты:', '2010-12-06 22:17:36');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('503', 'RU', 'Ваши последние отчёты', '2010-12-06 22:17:36');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('504', 'RU', 'Нет отчётов', '2010-12-06 22:17:36');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('505', 'RU', 'Спрятано тайников: %1', '2010-12-06 22:17:36');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('507', 'RU', 'Нет спрятанных тайников', '2010-12-06 22:17:36');

@@ -9,20 +9,38 @@
 
 	$add_where = '';
 	$newLogsPerCountry = $opt['logic']['new_logs_per_country'];
+	$startat = isset($_GET['startat']) ? $_GET['startat']+0 : 0;
+	$urlparams = '';
 
 	if (isset($ownerid))
 	{
+		// all logs for caches of one owner
 		$exclude_country = '*';
 		$add_where = "AND `caches`.`user_id`='" . sql_escape($ownerid) . "' ";
 		if (!$show_own_logs)
 			$add_where .= "AND `cache_logs`.`user_id`<>'" . sql_escape($login->userid) . "' ";
 		$tpl->caching = false;
-		$logcount = 200;
+		$logcount = 100;
+		$paging = true;
 		$newLogsPerCountry = false;
 		$caches_logged = array();
+		$orderByDate = '`cache_logs`.`date` DESC, ';
+		if ($show_own_logs) $urlparams = '&ownlogs=1';
+	}
+	elseif (isset($userid))
+	{
+		// all logs by one user
+		$exclude_country = '*';
+		$add_where = "AND `cache_logs`.`user_id`='" . sql_escape($userid) . "' ";
+		$tpl->caching = false;
+		$logcount = 100;
+		$paging = true;
+		$newLogsPerCountry = false;
+		$orderByDate = '`cache_logs`.`date` DESC, ';
 	}
 	elseif (@$newlogs_rest)
 	{
+		// latest logs for all countries but Germany
 		$tpl->name = 'newlogsrest';
 		$tpl->menuitem = MNU_START_NEWLOGSREST;
 		$exclude_country = 'DE';
@@ -32,22 +50,30 @@
 		$tpl->caching = true;
 		$tpl->cache_lifetime = 900;
 		$logcount = 250;
+		$paging = false;  // paging would probably have a performance / DB load problem
+		$orderByDate = '';
 	}
 	else
 	{
+		// latest logs for all countries
 		$tpl->name = 'newlogs';
 		$tpl->menuitem = MNU_START_NEWLOGS;
 		$exclude_country = '*';
 		$tpl->caching = true;
 		$tpl->cache_lifetime = 300;
 		$logcount = 250;
+		$paging = false;  // paging would probably have a performance / DB load problem
+		$orderByDate = '';
 	}
+
+	$tpl->assign('creation_date', $orderByDate == '');
 
 	if (!$tpl->is_cached())
 	{
+		if ($paging) sql_enable_foundrows();
 		sql_temp_table_slave('loglist');
 		sql_slave("CREATE TEMPORARY TABLE &loglist (`id` INT(11) PRIMARY KEY)
-			         SELECT `cache_logs`.`id`
+			         SELECT SQL_CALC_FOUND_ROWS `cache_logs`.`id`
 			           FROM `cache_logs`
 			     INNER JOIN `caches` ON `cache_logs`.`cache_id`=`caches`.`cache_id`
 			     INNER JOIN `cache_status` ON `caches`.`status`=`cache_status`.`id`
@@ -56,20 +82,28 @@
 			                AND `caches`.`country`<>'&1'
 			                AND `username`<>'&2'".
 			                $add_where."
-			       ORDER BY `cache_logs`.`date_created` DESC
-			          LIMIT &3",
+			       ORDER BY " . $orderByDate . "`cache_logs`.`date_created` DESC
+			          LIMIT &3, &4",
 			                $exclude_country,
 			                isset($_GET['showsyslogs']) ? '' : $opt['logic']['systemuser']['user'],
+			                $startat,
 			                $logcount);
+		if ($paging)
+		{
+			$total_logs = sql_value("SELECT FOUND_ROWS()", 0);
+			sql_foundrows_done();
+			$paging = ($total_logs > $logcount);
+		}
 
-		if ($opt['logic']['new_logs_per_country'])
-			$sqlOrderBy = '`countries`.`de` ASC, ';
+		if ($newLogsPerCountry)
+			$orderByCountry = '`countries`.`de` ASC, ';
 		else
-			$sqlOrderBy = '';
+			$orderByCountry = '';
 		
 		$rsLogs = sql_slave("SELECT IFNULL(`sys_trans_text`.`text`, `countries`.`name`) AS `country_name`, 
 		                            `cache_logs`.`id`, 
-																`cache_logs`.`date_created`, 
+																`cache_logs`.`date_created`,
+																`cache_logs`.`date`, 
 																`caches`.`name` AS `cachename`, 
 																`caches`.`wp_oc`, 
 																`caches`.`country` AS `country`,
@@ -91,7 +125,7 @@
 										  LEFT JOIN `cache_logs_restored` ON `cache_logs_restored`.`id`=`cache_logs`.`id`
 										  LEFT JOIN `cache_rating` ON `cache_rating`.`cache_id`=`caches`.`cache_id` AND `cache_rating`.`user_id`=`cache_logs`.`user_id` AND `cache_rating`.`rating_date`=`cache_logs`.`date`
 										      WHERE IFNULL(`cache_logs_restored`.`restored_by`,0)=0
-										   ORDER BY " . $sqlOrderBy . "`cache_logs`.`date_created` DESC",
+										   ORDER BY " . $orderByCountry . $orderByDate . "`cache_logs`.`date_created` DESC",
 											          $opt['template']['locale']);
 
 		$newLogs = array();
@@ -156,8 +190,14 @@
 
 		$tpl->assign('newLogs', $newLogs);
 		$tpl->assign('addpiclines', max($pics-1,0));
-
 		$tpl->assign('newLogsPerCountry', $newLogsPerCountry);
+
+		$tpl->assign('paging', $paging);
+		if ($paging)
+		{
+			$pager = new pager($_SERVER["SCRIPT_NAME"] . '?startat={offset}'. $urlparams);
+			$pager->make_from_offset($startat, $total_logs, $logcount);
+		}
 	}
 
 	$tpl->display();

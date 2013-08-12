@@ -62,12 +62,12 @@ function myHomeLoad()
 		<p class="content-title-noshade-size3">
 			<img src="resource2/{$opt.template.style}/images/description/22x22-logs.png" width="22" height="22"  style="margin-right: 10px;" />&nbsp;
 			{t 1=$found}Finds: %1{/t} &nbsp;
-			<span class="content-title-link">[<a href="search.php?showresult=1&amp;expert=0&amp;output=HTML&amp;sort=bymylastlog&amp;finderid={$login.userid}&amp;searchbyfinder=&amp;f_inactive=0&amp;logtype=1,7&amp;calledbysearch=0">{t}Geocaches found{/t}</a>]&nbsp; [<a href="search.php?showresult=1&amp;expert=0&amp;output=HTML&amp;sort=bymylastlog&amp;finderid={$login.userid}&amp;searchbyfinder=&amp;f_inactive=0&amp;logtype=1,2,3,4,5,6,7,8,9,10,11,12,13,14&amp;calledbysearch=0">{t}Geocaches logged{/t}</a>]</span>
+			{if $logs|@count > 0}<span class="content-title-link">[<a href="search.php?showresult=1&amp;expert=0&amp;output=HTML&amp;sort=bymylastlog&amp;finderid={$login.userid}&amp;searchbyfinder=&amp;f_inactive=0&amp;logtype=1,7&amp;calledbysearch=0">{t}Geocaches found{/t}</a>]&nbsp; [<a href="search.php?showresult=1&amp;expert=0&amp;output=HTML&amp;sort=bymylastlog&amp;finderid={$login.userid}&amp;searchbyfinder=&amp;f_inactive=0&amp;logtype=0&amp;calledbysearch=0">{t}Geocaches logged{/t}</a>]</span>{/if}
 		</p>
 	</div>
 
 	{* Ocprop: (find|us|own)erid=([0-9]+) *}
-	<p style="line-height: 1.6em;"><b>{t}Your latest log entries:{/t}</b></p>
+	<p style="line-height: 1.6em;"><b>{t}Your latest log entries{/t}{if $morelogs} </b>(<a class="systemlink" href="ownlogs.php">{t}more{/t}</a>):{else}:</b>{/if}</p>
 
 	<table class="table">
 		{foreach from=$logs item=logItem}
@@ -92,12 +92,13 @@ function myHomeLoad()
 	<p class="content-title-noshade-size3">
 		<img src="resource2/{$opt.template.style}/images/misc/32x32-pictures.gif" width="24" height="24"  style="margin-right: 10px;" />&nbsp;
 		{t 1=$total_pictures}Log pictures: %1{/t} &nbsp;
-		{if !$allpics}<span class="content-title-link">[<a href="myhome.php?allpics=1">{t}Show all{/t}</a>]</span>{/if}
+		{if $pictures|@count > 0 && !$allpics}<span class="content-title-link">[<a href="myhome.php?allpics=1">{t}Show all{/t}</a>]</span>{/if}
 	</p>
 </div>
 
 {if $pictures|@count == 0}
 	<p>{t}You did not upload any log pictures yet.{/t}</p>
+	<br />
 {else}
 	<p style="line-height: 1.6em;">
 		{if !$allpics}
@@ -123,7 +124,7 @@ function myHomeLoad()
 			<img src="resource2/{$opt.template.style}/images/cacheicon/22x20-traditional.png" width="22" height="20"  style="margin-right: 10px;" />&nbsp;
 			{t 1=$hidden}Geocaches hidden: %1{/t} &nbsp;
 			{* Ocprop: (find|us|own)erid=([0-9]+) *}
-			<span class="content-title-link">[<a href="search.php?showresult=1&amp;expert=0&amp;output=HTML&amp;sort=byname&amp;ownerid={$login.userid}&amp;searchbyowner=&amp;f_inactive=0&calledbysearch=0">{t}Show details{/t}</a>]&nbsp; [<a href="search.php?showresult=1&amp;expert=0&amp;output=HTML&amp;sort=byname&amp;ownerid={$login.userid}&amp;searchbyowner=&amp;f_inactive=1&calledbysearch=0">... {t}only active caches{/t}</a>]</span>
+			{if $caches|@count > 0}<span class="content-title-link">[<a href="search.php?showresult=1&amp;expert=0&amp;output=HTML&amp;sort=byname&amp;ownerid={$login.userid}&amp;searchbyowner=&amp;f_inactive=0&calledbysearch=0">{t}Show details{/t}</a>{if $active < $hidden}]&nbsp; [<a href="search.php?showresult=1&amp;expert=0&amp;output=HTML&amp;sort=byname&amp;ownerid={$login.userid}&amp;searchbyowner=&amp;f_inactive=1&calledbysearch=0">... {t}only active caches{/t}</a>]{/if}</span>{/if}
 		</p>
 	</div>
 

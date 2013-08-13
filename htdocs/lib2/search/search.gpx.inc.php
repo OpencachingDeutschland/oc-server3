@@ -221,7 +221,7 @@ function search_output()
 
 		$thisline = mb_ereg_replace('{shortdesc}', text_xmlentities($r['short_desc']), $thisline);
 
-		$desc = str_replace('<img src="images/uploads/','<img src="' . $server_address . 'images/uploads/', $r['desc']);
+		$desc = str_replace(' src="images/uploads/',' src="' . $server_address . 'images/uploads/', $r['desc']);
 		$license = getLicenseDisclaimer(
 			$r['userid'], $r['username'], $r['data_license'], $r['cacheid'], $opt['template']['locale'], true, true);
 		if ($license != "")

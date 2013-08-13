@@ -24,7 +24,7 @@
     <tr><td><img src="http://www.opencaching.de/images/team/dummy.jpg" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=137473">bohrsty</a><br />head of system administration</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/pirate77.jpg" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=152708">pirate77</a><br />head of user support and data maintenance, wiki</td></tr>
     <tr><td></td></tr>
-    <tr><th colspan="3"><br /><span class="content-title-noshade-size1">Team members</span></td></th>
+    <tr><th colspan="3"><br /><span class="content-title-noshade-size1">Team members</span></th>
     <tr><td></td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/bundy609.jpg" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=189552">Bundy609</a><br />user support, data maintenance</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/cmanie.jpg" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=222664">cmanie</a><br />software development</td></tr>

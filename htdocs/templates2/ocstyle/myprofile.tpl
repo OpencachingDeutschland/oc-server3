@@ -224,5 +224,3 @@
 			</table>
 		</form>
 	{/if}
-
-	</form>

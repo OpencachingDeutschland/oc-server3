@@ -397,7 +397,7 @@ function switchAttributeCat2()
 			<td class="formlabel">{t}Country:{/t}&nbsp;&nbsp;</td>
 			<td>
 				<select name="country" class="input200" onchange="sync_options(this)">
-					<option value="" selected="selected">{t}All countries{/t}</option
+					<option value="" selected="selected">{t}All countries{/t}</option>
 					{foreach from=$countryoptions item=countryoption}
 						<option value="{$countryoption.short|escape}" {if $countryoption.selected}selected="selected"{/if}>{$countryoption.name|escape}</option> 
 					{/foreach}

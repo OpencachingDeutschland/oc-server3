@@ -106,7 +106,7 @@
 	$opt['locale']['EN']['page']['subtitle1'] = 'Geocaching with Opencaching';
 	$opt['locale']['EN']['page']['subtitle2'] = '';
 	$opt['locale']['EN']['page']['license_url'] = 'http://creativecommons.org/licenses/by-nc-nd/3.0/de/deed.en';
-	$opt['locale']['EN']['page']['license'] = '<a rel="license" href="%1"><img alt="Creative Commons License Terms" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-nd/3.0/de/88x31.png" /></a><div style="text-align:center; margin:8px 0 0 6px;">The Opencaching.de <a href="articles.php?page=impressum#datalicense">content</a> is licensed under Creative Commons <a rel="license" href=%1" target="_blank">BY-BC-ND 3.0 DE</a>.</div>';
+	$opt['locale']['EN']['page']['license'] = '<a rel="license" href="%1"><img alt="Creative Commons License Terms" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-nd/3.0/de/88x31.png" /></a><div style="text-align:center; margin:8px 0 0 6px;">The Opencaching.de <a href="articles.php?page=impressum#datalicense">content</a> is licensed under Creative Commons <a rel="license" href="%1" target="_blank">BY-BC-ND 3.0 DE</a>.</div>';
 
 	$opt['locale']['DE']['format']['dm'] = '%d.%m.';
 	$opt['locale']['DE']['format']['dateshort'] = '%d.%m.%y';

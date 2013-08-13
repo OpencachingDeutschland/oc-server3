@@ -45,7 +45,7 @@
 		<td rowspan="2"></td>
 		<th class="h1">Σ</th>
 		{foreach from=$stat81_tsum item=count}
-			<th class="h0">{if $count}{$count}{/if}</td>
+			<th class="h0">{if $count}{$count}{/if}</th>
 		{/foreach}
 		<td style="text-align:center"><b>{$totalsum}</b></td>
 	</tr>

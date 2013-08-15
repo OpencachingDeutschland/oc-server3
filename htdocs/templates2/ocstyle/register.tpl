@@ -10,17 +10,14 @@
 		{t}New user registered{/t}
 	</div>
 
-	<table class="table">
-		<tr>
-			<td colspan="2" class="help">
-				<img src="resource2/{$opt.template.style}/images/misc/hint.gif" border="0" width="15" height="11" alt="{t}Note{/t}" title="{t}Note{/t}" align="middle" />
-				{t}The activation code was sent with an E-Mail to you.<br />
-				Please follow the instructions in the E-Mail.{/t}<br />
-				{t}If you do not see any E-Mail, please check the spam folder of your mailbox.{/t}
-			</td>
-		</tr>
-		<tr><td class="spacer" colspan="2"></td></tr>
+	<p>
+		<img src="resource2/{$opt.template.style}/images/misc/hint.gif" border="0" width="15" height="11" alt="{t}Note{/t}" title="{t}Note{/t}" align="middle" />
+		{t}The activation code was sent with an E-Mail to you.<br />
+		Please follow the instructions in the E-Mail.{/t}<br />
+		{t}If you do not see any E-Mail, please check the spam folder of your mailbox.{/t}
+	</p>
 
+	<table class="table">
 		<tr>
 			<td>{t}Username{/t}:</td>
 			<td>{$username|escape}</td>

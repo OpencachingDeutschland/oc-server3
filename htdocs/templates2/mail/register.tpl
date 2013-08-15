@@ -15,7 +15,7 @@
 
 {t}Before you can login for the first time, you have to activate your account by clicking on the following link:{/t}
 
-{$activation_page}?u={$userid}&c={$code}
+{$short_activation_page}?e={$to|urlencode}&c={$code}
 
 {t 1=$activation_page}Alternatively, you can visit %1 and enter the following code manually:{/t}
 

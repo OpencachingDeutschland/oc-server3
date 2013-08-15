@@ -601,6 +601,7 @@ class user
 		$mail->subject = $translate->t('Registration confirmation', '', basename(__FILE__), __LINE__);
 		$mail->assign('domain', $opt['page']['domain']);
 		$mail->assign('activation_page', $opt['page']['absolute_url'] . 'activation.php');
+		$mail->assign('short_activation_page', $opt['page']['absolute_url'] . 'a.php');
 		$mail->assign('username', $this->getUsername());
 		$mail->assign('userid', $this->getUserId());
 		$mail->assign('last_name', $this->getLastName());

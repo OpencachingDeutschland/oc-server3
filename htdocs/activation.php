@@ -14,22 +14,17 @@
 	// We use short param codes 'u' and 'c' to generate short-enough activation
 	// url that will not be wrapped in plain-text emails.
 
-	if (isset($_REQUEST['email']))
-		$email = trim($_REQUEST['email']);
-	else if (isset($_REQUEST['u']))
-		$email = sql_value("SELECT `email` FROM `user` WHERE `user_id`='&1'", '', $_REQUEST['u']);
-	else
-		$email = '';
-
 	$code = isset($_REQUEST['code']) ? trim($_REQUEST['code']) :
 	        (isset($_REQUEST['c']) ? trim($_REQUEST['c']) : '');
+	$email = isset($_REQUEST['email']) ? trim($_REQUEST['email']) :
+	        (isset($_REQUEST['e']) ? trim($_REQUEST['e']) : '');
 
 	$tpl->assign('errorEMail', false);
 	$tpl->assign('errorCode', false);
 	$tpl->assign('errorAlreadyActivated', false);
 	$tpl->assign('sucess', false);
 
-	if (isset($_REQUEST['submit']) || isset($_REQUEST['u']))
+	if (isset($_REQUEST['submit']) || ($code != '' && $email != ''))
 	{
 		$email_not_ok = is_valid_email_address($email) ? false : true;
 

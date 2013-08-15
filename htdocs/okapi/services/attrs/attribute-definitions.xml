@@ -99,7 +99,7 @@ It also defines attribute names and descriptions in several languages.
 		<lang id="de">
 			<name>an einem Vermessungspunkt</name>
 			<desc>
-				Der Cache ist inder Nähe eines festen Vermessungspunktes versteckt.
+				Der Cache ist in der Nähe eines festen Vermessungspunktes versteckt.
 			</desc>
 		</lang>
 	</attr>
@@ -127,7 +127,7 @@ It also defines attribute names and descriptions in several languages.
 			<name>Wherigo-Cache</name>
 			<desc>
 				Zur Cachebeschreibung gehört eine Datei, die „Wherigo-Cartridge“. Sie muss
-				heruntergeladen und auf Gerät mit einer entsprechenden Abspielsoftware
+				heruntergeladen und auf ein Gerät mit einer entsprechenden Abspielsoftware
 				installiert werden. Der Inhalt der Cartridge führt dich durch den Cache.
 			</desc>
 		</lang>
@@ -232,7 +232,7 @@ It also defines attribute names and descriptions in several languages.
 		<lang id="de">
 			<name>magnetischer Cache</name>
 			<desc>
-				Der Geocache ist mit einem Mangeten angebracht.
+				Der Geocache ist mit einem Magneten angebracht.
 			</desc>
 		</lang>
 		<lang id="nl">
@@ -511,7 +511,7 @@ It also defines attribute names and descriptions in several languages.
 		<lang id="de">
 			<name>Rätsel</name>
 			<desc>
-				Bei diesem Cache sind als Vorarbeit oder während der Suche Rütsel zu lösen.
+				Bei diesem Cache sind als Vorarbeit oder während der Suche Rätsel zu lösen.
 			</desc>
 		</lang>
 		<lang id="es">
@@ -542,7 +542,7 @@ It also defines attribute names and descriptions in several languages.
 			<name>Rechenaufgabe</name>
 			<desc>
 				Es müssen vorab oder während der Suche Rechenaufgaben gelöst werden, die
-				über das kleine Geocacher 1x1 hinausgehen. zum Beispiel
+				über das kleine Geocacher-1x1 hinausgehen, zum Beispiel
 				Mittelpunktberechnungen oder Peilungen.
 			</desc>
 		</lang>
@@ -633,7 +633,7 @@ It also defines attribute names and descriptions in several languages.
 			<name>nahe beim Auto</name>
 			<desc>
 				Der Parkplatz befindet sich in unmittelbarer Nähe zum Geocache.
-				Es sind nicht mehr als einige Schritte notwendig um den Geocache zu finden.
+				Es sind nicht mehr als einige Schritte notwendig, um den Geocache zu finden.
 			</desc>
 		</lang>
 		<lang id="es">
@@ -728,7 +728,7 @@ It also defines attribute names and descriptions in several languages.
 			</desc>
 		</lang>
 		<lang id="de">
-			<name>sumpfig/matschiges Gelände / waten</name>
+			<name>sumpfiges/matschiges Gelände / waten</name>
 			<desc>
 				Bei diesem Cache geht es durch sumpfiges oder matschiges Gelände oder
 				es muss durch flaches Wasser gewatet werden. Entsprechende Kleidung
@@ -835,7 +835,7 @@ It also defines attribute names and descriptions in several languages.
 		<lang id="de">
 			<name>Schwimmen erforderlich</name>
 			<desc>
-				Auf dem Weg zum Geocache muss ein Fluß oder See überquert werden.
+				Auf dem Weg zum Geocache muss ein Fluss oder See überquert werden.
 				Das Wasser ist tief genug um zu schwimmen. Je nach Örtlichkeit kann auch
 				ein Schlauchboot, Kajak oder ähnliches verwendet werden (näheres ist
 				in der Beschreibung zum Geocache zu finden). Die Entfernung ist aber ohne
@@ -983,7 +983,7 @@ It also defines attribute names and descriptions in several languages.
 			<name>interessanter Ort</name>
 			<desc>
 				Der Geocache ist in unmittelbarer Nähe zu einer Sehenswürdigkeit
-				versteckt. Das kann ein z.B. schüner Aussichtspunkt oder eine größere
+				versteckt. Das kann ein z.B. schöner Aussichtspunkt oder eine größere
 				Burgruine sein. Ein Besuch würde sich auch ohne besonderen Anlass
 				(den Geocache) lohnen.
 			</desc>
@@ -1157,7 +1157,7 @@ It also defines attribute names and descriptions in several languages.
 			<desc>
 				Während der Cachetour oder in der Nähe des Geocaches ist Trinkwasser
 				verfügbar. Besonders bei Event-Caches, längeren Multicaches und bei
-				Geocaches wo man vermutlich schmutzig wird kann dies hilfreich sein.
+				Geocaches, wo man vermutlich schmutzig wird, kann dies hilfreich sein.
 			</desc>
 		</lang>
 		<lang id="es">
@@ -1356,7 +1356,7 @@ It also defines attribute names and descriptions in several languages.
 			</desc>
 		</lang>
 		<lang id="de">
-			<name>nur tagüber</name>
+			<name>nur tagsüber</name>
 			<desc>
 				Dieser Cache lässt sich nur tagsüber angehen, zum Beispiel weil das Gelände
 				gefährlich ist oder die Suche mit Taschenlampen in einem Wohngebiet negativ
@@ -1405,10 +1405,9 @@ It also defines attribute names and descriptions in several languages.
 		<lang id="de">
 			<name>am besten nachts findbar</name>
 			<desc>
-				Es wird empfohlen, den Cache nachts zu suchen.
-				It is recommended to search for this cache by night. I.e. there
-				might be some light-reflecting surfaces involved which are usually
-				invisible during daylight.
+				Es wird empfohlen, den Cache nachts zu suchen. Es können zum
+				Beispiel Reflektoren vorhanden sein, die tagsüber schwer oder gar 
+				nicht erkennbar sind.
 			</desc>
 		</lang>
 	</attr>
@@ -1428,7 +1427,7 @@ It also defines attribute names and descriptions in several languages.
 			<name>nur bei Nacht</name>
 			<desc>
 				Der Geocache kann nur bei Nacht gelöst werden und wird deshalb Nachtcache
-				genannt. Zum Beispiel mössen Reflektoren mit einer Taschenlampe 
+				genannt. Zum Beispiel müssen Reflektoren mit einer Taschenlampe 
 				angeleuchtet werden, die dann den Weg zum Versteck zeigen.
 			</desc>
 		</lang>
@@ -1463,7 +1462,7 @@ It also defines attribute names and descriptions in several languages.
 			</desc>
 		</lang>
 		<lang id="de">
-			<name>ganzjähig zugänglich</name>
+			<name>ganzjährig zugänglich</name>
 			<desc>
 				Dieser Cache lässt sich während des gesamten Jahres finden, wobei je
 				nach Jahreszeit die Schwierigkeit bei der Suche schwanken kann.
@@ -1572,7 +1571,7 @@ It also defines attribute names and descriptions in several languages.
 			<desc>
 				Dieser Cache lässt sich auch nach starkem Schneefall suchen. Die einzelnen
 				Stationen und der Geocache sind so versteckt, dass sie nicht von Schnee
-				verdeckt werden, bzw. von Schneehaufen die durch Räumfahrzeuge entstehen.
+				verdeckt werden, bzw. von Schneehaufen, die durch Räumfahrzeuge entstehen.
 			</desc>
 		</lang>
 		<lang id="es">
@@ -1799,8 +1798,8 @@ It also defines attribute names and descriptions in several languages.
 			<desc>
 				Der Geocache ist in einer Höhle versteckt und man sollte entsprechende
 				Ausrüstung mitbringen. Vorsicht: Bereits kleinste Höhlensysteme können
-				bei unvorhergesehenen Problem z.B. Gewittern (Wasser!) oder einem
-				verstauchten Knöchel sehr gefährlich werden! Ihr solltet euch vorab
+				bei unvorhergesehenen Problemen, z.B. Gewittern (Wasser!) oder einem
+				verstauchten Knöchel, sehr gefährlich werden! Ihr solltet euch vorab
 				gründlich bei erfahreren Höhlengehern informieren. Beachtet auch den
 				Naturschutz – Fledermausquartiere dürfen nicht gestört werden!
 			</desc>
@@ -1846,7 +1845,7 @@ It also defines attribute names and descriptions in several languages.
 			<name>Taucherausrüstung</name>
 			<desc>
 				Um den Geocache zu finden benötigt ihr eine Tauchausrüstung. In welcher
-				Tiefe der Geocache liegt ist in der Beschreibung angegeben. Bitte beachtet,
+				Tiefe der Geocache liegt, ist in der Beschreibung angegeben. Bitte beachtet,
 				dass Ihr für einen sicheren Tauchgang eine entsprechende Ausbildung
 				benötigt. Als Nicht-Taucher könnt ihr den Geocache evtl. zusammen mit
 				einem Tauchlehrer suchen.
@@ -1900,7 +1899,7 @@ It also defines attribute names and descriptions in several languages.
 			<desc>
 				Für diesen Cache benötigst du weitere Ausrüstung, die nicht durch die
 				anderen Attribute angegeben ist und nicht zur Standardausrüstung eines
-				Geocachers gehört. Was genau du benütigst, ist in der Beschreibung
+				Geocachers gehört. Was genau du benötigst, ist in der Beschreibung
 				angegeben.
 			</desc>
 		</lang>
@@ -2411,7 +2410,7 @@ It also defines attribute names and descriptions in several languages.
 				Der Geocache kann nicht mit einer einzigen Tages- oder Nachttour gelöst
 				werden. Er muss entweder mehrmals angefahren werden oder es muss vor Ort
 				übernachtet werden. Zeit für Recherchen vorab sind dabei nicht
-				berücksicht, sondern nur die Zeit vor Ort.
+				berücksichtigt, sondern nur die Zeit vor Ort.
 			</desc>
 		</lang>
 		<lang id="es">
@@ -2455,7 +2454,7 @@ It also defines attribute names and descriptions in several languages.
 		<lang id="de">
 			<name>für kleine Kinder geeignet</name>
 			<desc>
-				Der Cache ist einfach und – nach Einschätzungs des Besitzers –
+				Der Cache ist einfach und – nach Einschätzung des Besitzers –
 				ohne besondere Gefahren findbar.
 			</desc>
 		</lang>

@@ -9,12 +9,12 @@
 
 {t}Username{/t}: {$username}
 {t}E-Mail address{/t}: {$to}
-{if $first_name != ''}{t}First name{/t}: {$first_name}{/if}
-
-{if $last_name != ''}{t}Last name{/t}: {$last_name}{/if}
-
-{if $country != ''}{t}Country{/t}: {$country}{/if}
-
+{if $first_name != ''}{t}First name{/t}: {$first_name}
+{/if}
+{if $last_name != ''}{t}Last name{/t}: {$last_name}
+{/if}
+{if $country != ''}{t}Country{/t}: {$country}
+{/if}
 
 {t}Before you can login for the first time, you have to activate your account by clicking on the following link:{/t}
 

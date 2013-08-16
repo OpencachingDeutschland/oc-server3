@@ -1115,9 +1115,15 @@ td.mapheader_spacer {
 	width: 380px;
 }
 
-div.mappopup {
-	overflow:hidden;      /* avoids double-scrollbars in MSIE; 'visible' wont work */
+div.mappopup, div.mappopup a {
+	font-family: arial, sans-serif, Tahoma, Verdana !important;
+	font-weight: normal !important;
+	font-size: 11px !important;
+	overflow: hidden;      /* avoids double-scrollbars in MSIE; 'visible' wont work */
 }
+
+div.mappopup { padding: 3px 0 3px 3px; }
+div.mappopup b { font-weight: bold; }
 
 table.mappopup td {
 	font-size: 11px;

@@ -276,7 +276,7 @@
 								<td class="mediumsmalltext">{t}Follow us:{/t}</td>
 								<td><a href="http://blog.opencaching.de/feed"><img src="resource2/{style}/images/media/16x16-feed.png" width="16" height="16" /></a></td>
 								<td><a href="https://twitter.com/opencaching"><img src="resource2/{style}/images/media/16x16-twitter.png" width="16" height="16"  /></a></td>
-								<td><a href="https://plus.google.com/104950249357104618315"><img src="resource2/{style}/images/media/16x16-google+.png" width="16" height="16"  /></a></td>
+								<td><a href="https://plus.google.com/+opencaching"><img src="resource2/{style}/images/media/16x16-google+.png" width="16" height="16"  /></a></td>
 								<td><a href="https://www.facebook.com/opencaching.de"><img src="resource2/{style}/images/media/16x16-facebook.png" width="16" height="16"  /></a></td>
 							</tr>
 							<tr>

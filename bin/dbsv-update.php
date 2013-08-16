@@ -351,6 +351,12 @@
 		sql("ALTER TABLE `user` MODIFY COLUMN `admin` smallint(5) unsigned NOT NULL default '0'");
 	}
 
+	function dbv_120()	// remove obsolete tables of very old, discarded map code
+	{
+		if (sql_table_exists('mapresult')) sql("DROP TABLE `mapresult`");
+		if (sql_table_exists('mapresult_data')) sql("DROP TABLE `mapresult_data`");
+	}
+
 
 	// When adding new mutations, take care that they behave well if run multiple
 	// times. This improves robustness of database versioning.

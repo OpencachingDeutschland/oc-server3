@@ -36,18 +36,10 @@ class slave_cleanup
 		else
 			sql_connect_slave($slaveId);
 
-		$this->cleanup_mapresult($slaveId);
 		$this->cleanup_mapresult2($slaveId);
 
 		// disconnect slave
 		sql_disconnect_slave();
-	}
-
-	function cleanup_mapresult($slaveId)
-	{
-		// table mapresult
-		sql_slave("DELETE FROM `mapresult` WHERE `date_created`<DATE_SUB(NOW(), INTERVAL 5 MINUTE)");
-		sql_slave("DELETE `mapresult_data` FROM `mapresult_data` LEFT JOIN `mapresult` ON `mapresult_data`.`query_id`=`mapresult`.`query_id` WHERE ISNULL(`mapresult`.`query_id`)");
 	}
 
 	function cleanup_mapresult2($slaveId)

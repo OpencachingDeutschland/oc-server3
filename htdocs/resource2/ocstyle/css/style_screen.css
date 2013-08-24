@@ -301,15 +301,19 @@ ul#statmenu { padding: 0px; margin: 0px;}
 /* ... up to here */
 
 /* Titles */
-.bg-blue02 {background-color: rgb(219,230,241);
+.bg-blue02 {
+	background-color: #e4edf4;
 	padding: 2px 0px 2px 4px;
-	margin: 2px 0 16px 0;  /* see adjustment in style_screen_msie.css */
+	margin: 2px 0 14px 0;  /* see adjustment in style_screen_msie.css */
 	border-radius: 5px; -webkit-border-radius: 5px; -moz-border-radius: 5px;
+	border:1px solid #c0d3e4;	
+	/*	
+	margin: 2px 0 16px 0;
 	box-shadow: 1px 1px 2px #676767;
 	-moz-box-shadow: 1px 1px 2px #676767;
 	-webkit-box-shadow: 1px 1px 2px #676767;
-	}
-
+	*/	
+}
 .content2-pagetitle, .content3-pagetitle {overflow: hidden; width: 773px; margin: 0px 0px 10px 0px; padding: 0px 0px 2px 0px; border-bottom: solid 3px rgb(88,144,168); color: rgb(88,144,168); font-weight: bold; font-size: 180%;}
 
 .content-title-noshade {margin: 0px; padding: 0px; color: rgb(88,144,168); font-weight: bold; font-size: 100%;}

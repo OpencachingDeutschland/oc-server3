@@ -25,6 +25,40 @@
 
 	<div class="changelog-changes">
 
+	<p id="v3.0.10"><strong>OC 3.0 Version 10</strong> &ndash; 24. August 2013</p>
+	<p>Neu:</p>
+	<ul>
+		<li>Wenn mehr als 5 Logeinträge vorhanden sind und man zum Ende des Listings blättert, werden die übrigen Logs automatisch nachgeladen.</li>
+		<li>regionale Fundstatistik im Benutzerprofil</li>
+		<li>OConly-Statistik im Benutzerprofil</li>
+		<li><a href="oconly81.php">OConly-81</a></li>
+		<li>&bdquo;alle&ldquo;-Funktion in der Liste der eigenen Logs</li>
+		<li>zwischen den Bildern eines Logeintrags kann geblättert werden</li>
+		<li>Verlinkung von Social-Media-Angeboten im &bdquo;Sidebar&ldquo; (links unten)</li>
+		<li>Erläuterung der Cachegrößen auf der <a href="articles.php?page=cacheinfo">Beschreibungsseite</a></li>
+	</ul>
+
+	<p>Geändert / verbessert:</p>
+	<ul>
+		<li>Hyperlink-Design überarbeitet</li>
+		<li>übersichtlichere Darstellung in der Listing-Druckansicht</li>
+		<li>zahlreiche kleine Verbesserungen von Seitendarstellung und -layout</li>
+		<li>interne Komplettüberarbeitung der CSS-Style-Sheets</li>
+		<li>Startseite für www.opencaching.it und www.opencachingspain.es überarbeitet</li>
+	</ul>
+
+	<p>Korrigiert (Bugfixes):</p>
+	<ul>
+		<li>diverse Darstellungsfehler im Microsoft Internet Explorer korrigiert</li>
+		<li>Zeilenabstände bei großer Schrift in Cachebeschreibungen korrigiert</li>
+		<li>Bildtitel bei Logbildern wird immer angezeigt [Bug von Version 5]</li>
+		<li>diverse Syntaxfehler im HTML-Code korrigiert</li>
+		<li>Anzeige von Empfehlungssternen in Loglisten korrigiert [Bug von Version 9]</li>
+		<li>mehrere Fehler beim Herunterladen von Suchergebnissen korrigiert [Bugs von Version 9]</li>
+		<li>Rechtschreibkorrekturen in den OKAPI-Attributbeschreibungen [eingeführt mit Version 9]</li>
+	</ul>
+	<br />
+
 	<p id="v3.0.9"><strong>OC 3.0 Version 9</strong> &ndash; 25. Juli 2013</p>
 	<p><a href="search.php">Suchfunktion</a> überarbeitet:</p>
 	<ul>

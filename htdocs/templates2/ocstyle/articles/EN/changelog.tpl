@@ -15,6 +15,39 @@
 
 	<div class="changelog-changes">
 
+	<p id="v3.0.10"><strong>OC 3.0 Release 10</strong> &ndash; August 24, 2013</p>
+	<p>New:</p>
+	<ul>
+		<li>automatically load rest of log entries, when scrolling to the end of a cache page and more than 5 logs are present</li>
+		<li>regional finds statistics in user profile</li>
+		<li>OConly statistics in user profile</li>
+		<li><a href="oconly81.php">OConly-81</a></li>
+		<li>"all" function in the list of own logs</li>
+		<li>image browsing for pictures of one log entry</li>
+		<li>added Social Media links to "sidebar" menu (left/bottom, German media only)</i>
+		<li>explained cache sizes on the <a href="articles.php?page=cacheinfo">description</a> page</li>
+	</ul>
+
+	<p>Changed / improved:</p>
+	<ul>
+		<li>redesigned hyperlinks</li>
+		<li>improved cache listing print view</li>
+		<li>many minor improvements of page display and layout</li>
+		<li>reworked CSS style sheets</li>
+		<li>redesigned www.opencaching.it and www.opencachingspain.es start pages</li>
+	</ul>
+
+	<p>Fixed:</p>
+	<ul>
+		<li>fixed several display glitches in Microsoft Internet Explorer</li>
+		<li>fixed line spacing for large fonts in cache listings</li>
+		<li>always show log picture titles [bug of release 5]</li>
+		<li>fixed lots of HTML syntax errors</li>
+		<li>fixed recommendation star display in log lists [bug of release 9]</li>
+		<li>fixed several problems when downloading search results [bugs of release 9]</li>
+	</ul>
+	<br />
+
 	<p id="v3.0.9"><strong>OC 3.0 Release 9</strong> &ndash; July 25, 2013</p>
 	<p>Reworked <a href="search.php">searching for geocaches</a>:</p>
 	<ul>

@@ -249,6 +249,12 @@
 		set_oconly81_tpldata($userid);
 	}
 
+        //Titel
+        $menu->SetSelectItem($tpl->menuitem);
+        
+        $tpl->title = $menu->GetMenuTitle() . " ". $record['username'];
+        
+        
 	$tpl->assign('username', $record['username']);
 	$tpl->assign('userid', $userid);
 	$tpl->assign('uuid', $record['uuid']);

@@ -47,30 +47,25 @@ class OkapiDataStore extends OAuthDataStore
 
 	public function lookup_nonce($consumer, $token, $nonce, $timestamp)
 	{
-		# First, see if it exists. Note, that old nonces are periodically deleted.
-
-		$exists = Db::select_value("
-			select 1
-			from okapi_nonces
-			where
-				consumer_key = '".mysql_real_escape_string($consumer->key)."'
-				and `key` = '".mysql_real_escape_string($nonce)."'
-				and timestamp = '".mysql_real_escape_string($timestamp)."'
-		");
-		if ($exists)
+		try
+		{
+			Db::execute("
+				insert into okapi_nonces (consumer_key, `key`, timestamp)
+				values (
+					'".mysql_real_escape_string($consumer->key)."',
+					'".mysql_real_escape_string($nonce)."',
+					'".mysql_real_escape_string($timestamp)."'
+				);
+			");
+			return null;
+		}
+		catch (\Exception $e)
+		{
+			# INSERT failed. Assume this nonce was already used.
+			# Note, that old nonces are periodically deleted (see cronjobs).
+			
 			return $nonce;
-
-		# It didn't exist. We have to remember it.
-
-		Db::execute("
-			insert into okapi_nonces (consumer_key, `key`, timestamp)
-			values (
-				'".mysql_real_escape_string($consumer->key)."',
-				'".mysql_real_escape_string($nonce)."',
-				'".mysql_real_escape_string($timestamp)."'
-			);
-		");
-		return null;
+		}
 	}
 
 	public function new_request_token($consumer, $callback = null)

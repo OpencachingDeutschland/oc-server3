@@ -1,4 +1,4 @@
-{***************************************************************************
+﻿{***************************************************************************
 *  You can find the license in the docs directory
 *
 *  Unicode Reminder メモ
@@ -44,6 +44,9 @@
 	</p>
 </div>
 <div class="content-txtbox-noshade" style="padding-right: 25px;">
+	<p>	<b>ACHTUNG</b>: Fragen und Hinweise zu Schatzverstecken oder den Nutzungsbedingungen von 
+		opencaching.de richten Sie bitte an <b>contact@opencaching.de</b><br />
+	</p>
 	<p>
 		Angaben gem. &sect;5 Telemediengesetz<br />
 		Verantwortlich im Sinne des TDG/MDStV<br />
@@ -66,8 +69,6 @@
 		Telefon: 0 60 81 / 912 87 57<br />
 		E-Mail: verein@opencaching.de<br />
 		<br />
-		ACHTUNG: Fragen und Hinweise zu Schatzverstecken oder den Nutzungsbedingungen von 
-		opencaching.de richten Sie bitte an contact@opencaching.de
 	</p>
 	
 	<p>

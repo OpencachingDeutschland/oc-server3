@@ -1,4 +1,4 @@
-{***************************************************************************
+﻿{***************************************************************************
 *  You can find the license in the docs directory
 *
 *  Unicode Reminder メモ
@@ -25,6 +25,8 @@
 </div>
 
 <div class="content-txtbox-noshade" style="padding-right: 25px;">
+	<p>	<b>NOTE</b>: As for questions and information on cache locations and hides or the 
+		terms of use of opencaching.de please refer to <b>contact@opencaching.de</b><br /><p>
 	<p>
 		Information according to &sect;5 German Teleservices Act<br />
 		Responsible as of German remote services statue / value added tax law<br />
@@ -48,8 +50,6 @@
 		Phone: +49 (0) 60 81 / 912 87 57<br />
 		E-Mail: verein@opencaching.de<br />
 		<br />
-		NOTE: As for questions and information on cache locations and hides or the 
-		terms of use of opencaching.de please refer to contact@opencaching.de
 	</p>
 
 	<p>

@@ -36,7 +36,8 @@ class maillog
 
 		$dbc = @mysql_connect($opt['system']['maillog']['syslog_db_host'],
 		                     $opt['system']['maillog']['syslog_db_user'],
-		                     $opt['system']['maillog']['syslog_db_password']);
+		                     $opt['system']['maillog']['syslog_db_password'],
+		                     TRUE);  // use separate connection even if on same DB host
 		if ($dbc === FALSE)
 		{
 			echo $this->name.": could not connect to syslog database\n";
@@ -78,12 +79,13 @@ class maillog
 					$emailadr = $matches[1];
 					if ($delivered)
 						sql("UPDATE `user` SET `email_problems`=0
-						      WHERE `email`='" . mysql_real_escape_string($emailadr) . "'");
+						      WHERE `email`='&1'", $emailadr);
 					else if ($bounced)
 						// maximum one bounce per day is counted, to filter out temporary problems
-						sql("UPDATE `user` SET `email_problems`=`email_problems`+1, `last_email_problem`='" . mysql_real_escape_string($logentry['created']) . "'
-						      WHERE `email`='" . mysql_real_escape_string($emailadr) . "'
-									  AND IFNULL(`last_email_problem`,'') < '" . mysql_real_escape_string(substr($logentry['created'],0,10)) . "'");
+						sql("UPDATE `user` SET `email_problems`=`email_problems`+1, `last_email_problem`='&2'
+						      WHERE `email`='&1' AND IFNULL(`last_email_problem`,'') < '&2'",
+						    $emailadr,
+						    $logentry['created']);
 			  }
 			  else
 					echo $this->name.": no email address found for record ID ".$logentry['id']."\n";

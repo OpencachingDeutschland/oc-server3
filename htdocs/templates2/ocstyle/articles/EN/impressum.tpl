@@ -57,7 +57,7 @@
 	</p>
 
 	<p>
-		Due to &sect;10 of the associations statutes two members of the managing 
+		Due to &sect;10 of the associations statutes the chairman is single authorized to represent, both of the other members of the managing 
 		committee together are authorized to represent.
 	</p>
 	
@@ -67,7 +67,7 @@
 	<p>
 		<ul class="indent narrowlist">
 			<li>Michael Vaahsen, chairman</li>
-			<li>n.n., vice chairman</li>
+			<li>Mirco Baumann, vice chairman</li>
 			<li>Maik Bischoff, treasurer</li>
 		</ul>
 	</p>

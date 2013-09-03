@@ -76,7 +76,7 @@
 	</p>
 	
 	<p>
-		Laut &sect;10 der Vereinssatzung sind je zwei Mitglieder des gesch&auml;ftsf&uuml;hrenden
+		Laut &sect;10 der Vereinssatzung ist der Vorsitzende alleine vertretungsberechtigt, die zwei weiteren Mitglieder des gesch&auml;ftsf&uuml;hrenden
 		Vorstandes gemeinsam vertretungsberechtigt.
 	</p>
 	<p>
@@ -85,7 +85,7 @@
 	<p>
 		<ul class="indent narrowlist">
 			<li>Michael Vaahsen, Vorsitzender</li>
-			<li>unbesetzt, stellv. Vorsitzender</li>
+			<li>Mirco Baumann, 2. Vorsitzender</li>
 			<li>Maik Bischoff, Kassenwart</li>
 		</ul>
 	</p>

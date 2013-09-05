@@ -43,6 +43,7 @@
     <tr><td><img src="http://www.opencaching.de/images/team/mic@.jpg" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=103599">mic@</a><br />Anwendersupport, Datenpflege, Forenmoderation</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/mrspommelhorst.jpg" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=144252">Mrs.Pommelhorst</a><br />Anwendersupport, Datenpflege, Wiki</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/dummy.jpg" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=159941">Slini11</a><br />Datenpflege</td></tr>
+    <tr><td><img src="http://www.opencaching.de/images/team/dummy.jpg" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=130977">Spike05de</a><br />Anwendersupport</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/steingesicht.jpg" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=165774">Steingesicht</a><br />Datenpflege, Forenmoderation</td></tr>
     <tr><td>&nbsp;</td></tr>
   </table>

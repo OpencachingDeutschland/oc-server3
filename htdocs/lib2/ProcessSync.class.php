@@ -61,12 +61,19 @@
 
 				$pid_daemon = (int)$pid_daemon;
 
+				// bad PID file, e.g. due to system malfunction while creating the file?
+				if ($pid_daemon <= 0)
+				{
+					echo "removing bad pid_file (".$this->pidfile_path.")\n";
+					unlink($this->pidfile_path);
+					return false;
+				}
 				// process running?
-				if (posix_kill($pid_daemon, 0))
+				elseif (posix_kill($pid_daemon, 0))
 				{
 					// yes, good bye
 					echo "Error: process for ".$this->pidfile_path. " is already running with pid=$pid_daemon\n";
-					false;
+					return false;
 				}
 				else
 				{

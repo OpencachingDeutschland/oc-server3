@@ -1,4 +1,4 @@
-{***************************************************************************
+﻿{***************************************************************************
 *  You can find the license in the docs directory
 *
 *  Unicode Reminder メモ
@@ -38,7 +38,7 @@
     <tr><td><img src="http://www.opencaching.de/images/team/mic@.jpg" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=103599">mic@</a><br />user support, data maintenance, message board moderation</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/mrspommelhorst.jpg" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=144252">Mrs.Pommelhorst</a><br />user support, data maintenance, wiki</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/dummy.jpg" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=159941">Slini11</a><br />data maintenance</td></tr>
-	<tr><td><img src="http://www.opencaching.de/images/team/dummy.jpg" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=130977">Spike05de</a><br />user support</td></tr>
+    <tr><td><img src="images/team/spike05de.png" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=130977">Spike05de</a><br />user support</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/steingesicht.jpg" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=165774">Steingesicht</a><br />data maintenance, message board moderation</td></tr>
     <tr><td></td><td></td><td></td></tr>
   </table>

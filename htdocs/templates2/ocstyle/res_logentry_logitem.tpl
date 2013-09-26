@@ -87,7 +87,7 @@
 			{if $logItem.userid==$login.userid}
 				&nbsp;
 				[<a href="picture.php?action=edit&uuid={$pictureItem.uuid|escape}">{t}Edit{/t}</a>]
-				[<a href="picture.php?action=delete&uuid={$pictureItem.uuid|escape}">{t}Delete{/t}</a>]
+				[<a href="javascript:if(confirm('{t escape=js}Do you really want to delete this picture?{/t}'))location.href='picture.php?action=delete&uuid={$pictureItem.uuid|escape}'">{t}Delete{/t}</a>]
 			{/if}
 			<br />
 		{/foreach}

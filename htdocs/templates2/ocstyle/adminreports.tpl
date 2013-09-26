@@ -56,6 +56,8 @@
 	{else}
 		<p style="line-height: 1.6em;">{t}Details for report of {/t} <a href="viewcache.php?cacheid={$cacheid}" target="_blank">{$cachename|escape}</a> {t} by {/t} <a href="viewprofile.php?userid={$userid}" target="_blank">{$usernick|escape}</a>
 		&nbsp; &nbsp; &nbsp;
+		[<a href="http://www.geocaching.com/seek/nearest.aspx?t=k&origin_lat={$cache.latitude}&amp;origin_long={$cache.longitude}&amp;dist=1&amp;submit3=Search" target="_blank">{t}Nearby search at geocaching.com{/t}</a>]
+		&nbsp; &nbsp; &nbsp;
 		{foreach from=$cachexternal key=extname item=exturl}
 			[<a href="{$exturl|replace:_cache_id_:$cacheid}" target="_blank">{$extname}</a>] &nbsp;
 		{/foreach}

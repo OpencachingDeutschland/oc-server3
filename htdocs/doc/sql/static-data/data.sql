@@ -2594,6 +2594,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2166', 'The mod
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2167', 'OC Admins', '2013-08-24 12:56:09');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2168', 'Newest log entries for caches of %1', '2013-08-24 12:56:14');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2169', 'Do you really want to delete this picture?', '2013-10-01 18:10:14');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2170', 'Nearby search at geocaching.com', '2013-10-02 18:40:04');
 
 -- Table sys_trans_ref
 SET NAMES 'utf8';
@@ -4979,6 +4980,7 @@ INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('2166'
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('2167', './templates2/ocstyle/admins.tpl', '10');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('2168', './templates2/ocstyle/newlogs.tpl', '14');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('2169', './templates2/ocstyle/res_logentry_logitem.tpl', '91');
+INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('2170', './templates2/ocstyle/adminreports.tpl', '59');
 
 -- Table sys_trans_text
 SET NAMES 'utf8';
@@ -6671,6 +6673,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2167', 'DE', 'OC-Admins', '2013-08-24 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2168', 'DE', 'Neueste Logeinträge für Caches von %1', '2013-08-24 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2169', 'DE', 'Willst du dieses Bild wirklich löschen?', '2013-10-01 18:10:24');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2170', 'DE', 'Umkreissuche auf geocaching.com', '2013-10-02 18:40:04');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'EN', 'Reorder IDs', '2010-09-02 00:15:30');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'EN', 'The database could not be reconnected.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'EN', 'Testing – please do not login', '2010-08-28 11:48:07');

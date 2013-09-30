@@ -8,7 +8,7 @@
 	<div class="logs">
 	<p class="content-title-noshade-size1 {if $print}printlogheader{/if}" style="display:inline; margin-right:0">
 		{if $logItem.oc_team_comment}<img src="resource2/{$opt.template.style}/images/oclogo/oc-team-comment.png" alt="OC-Team" title="{t}OC team comment{/t}" />{/if}
-		{include file="res_logtype.tpl" type=$logItem.type} 
+		<a href="viewcache.php?cacheid={$cache.cacheid}&log=A#log{$logItem.id|urlencode}">{include file="res_logtype.tpl" type=$logItem.type}</a>  
 		{if $logItem.recommended==1}  {* Ocprop: rating-star\.gif *}
 			<img src="images/rating-star.gif" border="0" alt="{t}Recommended{/t}" width="17px" height="16px" />
 		{/if}

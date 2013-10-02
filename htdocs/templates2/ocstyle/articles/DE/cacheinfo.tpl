@@ -153,7 +153,7 @@
 		<p><b>Kurzbeschreibung:</b> Kannst du den Charakter des Caches in einem kurzen Satz oder in Stichworten beschreiben?</p>
 
 		<p><b>Beschreibung:</b> Hier solltest du m&ouml;glichst alles angeben, was notwendig ist um den Cache zu finden, aber trotzdem nicht die Spannung nehmen 
-		indem du zu viel Hilfe gibst.</p>
+		indem du zu viel Hilfe gibst. Nat&uuml;rlich kannst Du hier auch weitere Infos zur Umgebung machen: z. B. Was ist das f&uuml;r ein Denkmal oder was genau willst Du an diesem Ort zeigen.</p>
 
 		<p><b>Hinweis:</b> Kann es sein, dass jemand so auf dem Schlauch steht, dass er den Cache nicht findet? Dann solltest du hier noch einen letzten Tip 
 		f&uuml;r unterwegs mitgeben.</p>

@@ -383,7 +383,7 @@ class SearchAssistant
 					from cache_watches
 					where user_id = '".mysql_real_escape_string($request->token->user_id)."'
 				");
-				$where_conds[] = "cache_id in ('".implode("','", array_map('mysql_real_escape_string', $watched_cache_ids))."')";
+				$where_conds[] = "caches.cache_id in ('".implode("','", array_map('mysql_real_escape_string', $watched_cache_ids))."')";
 			}
 		}
 
@@ -403,7 +403,7 @@ class SearchAssistant
 					from cache_ignore
 					where user_id = '".mysql_real_escape_string($request->token->user_id)."'
 				");
-				$where_conds[] = "cache_id not in ('".implode("','", array_map('mysql_real_escape_string', $ignored_cache_ids))."')";
+				$where_conds[] = "caches.cache_id not in ('".implode("','", array_map('mysql_real_escape_string', $ignored_cache_ids))."')";
 			}
 		}
 

@@ -136,6 +136,24 @@
 				</td>
 			</tr>
 			<tr><td class="spacer" colspan="2"></td></tr>
+			
+			<tr>
+				<td valign="top">{t}Newsletter:{/t}</td>
+				<td valign="top">
+					{if $edit==true}
+						<input type="checkbox" name="accMailing" value="1" {if $accMailing==true}checked="checked"{/if} id="acc_Mailing" class="checkbox" /> 
+						<label for="acc_Mailing">{t}Please send me mailings about news and actions on opencaching.de. (max. 2-5 per year){/t}</label>
+						<br />
+					{else}
+						{if $accMailing==true}
+							{t}Yes, I want to recieve mailings about news and actions on opencaching.de. (max. 2-5 per year){/t}<br />
+						{else}
+							{t}No, I dont't want any mailings about news and actions on opencaching.de.{/t}
+						{/if}
+					{/if}
+				</td>
+			</tr>
+			<tr><td class="spacer" colspan="2"></td></tr>
 
 			{if $edit || $usePMR || $permanentLogin || $noHTMLEditor}
 			<tr>

@@ -128,6 +128,10 @@ function change()
 		}
 	}
 
+	$bAccMailing = isset($_REQUEST['save']) ? isset($_REQUEST['accMailing']) : $user->getAccMailing();
+	$tpl->assign('accMailing', $bAccMailing);
+	$user->setAccMailing($bAccMailing);
+
 	$bUsePMR = isset($_REQUEST['save']) ? isset($_REQUEST['usePMR']) : $user->getUsePMR();
 	$tpl->assign('usePMR', $bUsePMR);
 	$user->setUsePMR($bUsePMR);
@@ -212,6 +216,8 @@ function assignFromUser($user)
 	$tpl->assign('oconly_helpend', $oconly_helplink != '' ? '</a>' : '');
 
 	$tpl->assign('registeredSince', $user->getDateRegistered());
+
+	$tpl->assign('accMailing', $user->getAccMailing());
 
 	$tpl->assign('usePMR', $user->getUsePMR());
 	$tpl->assign('permanentLogin', $user->getPermanentLogin());

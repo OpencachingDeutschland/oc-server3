@@ -32,6 +32,7 @@
 	// user data and basic statistics
 	$rs = sql("SELECT `user`.`username`, 
 										`user`.`last_login`, 
+										`user`.`accept_mailing`, 
 										`user`.`pmr_flag`, 
 										`user`.`date_created`, 
 										`user`.`password`, 
@@ -320,6 +321,7 @@
 
 	$tpl->assign('license_actively_declined', $record['data_license'] == NEW_DATA_LICENSE_ACTIVELY_DECLINED);
 	$tpl->assign('license_passively_declined', $record['data_license'] == NEW_DATA_LICENSE_PASSIVELY_DECLINED);
+	$tpl->assign('accMailing', $record['accept_mailing']);
 	$tpl->assign('pmr', $record['pmr_flag']);
 
 	$tpl->display();

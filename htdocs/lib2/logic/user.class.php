@@ -62,6 +62,7 @@ class user
 		$this->reUser->addString('last_name', '', false);
 		$this->reUser->addString('first_name', '', false);
 		$this->reUser->addString('country', null, true);
+		$this->reUser->addBoolean('accept_mailing', false, false);
 		$this->reUser->addBoolean('pmr_flag', false, false);
 		$this->reUser->addString('new_pw_code', null, true);
 		$this->reUser->addDate('new_pw_date', null, true);
@@ -254,6 +255,14 @@ class user
 	function setPermanentLogin($value)
 	{
 		return $this->reUser->setValue('permanent_login_flag', $value);
+	}
+	function getAccMailing()
+	{
+		return $this->reUser->getValue('accept_mailing');
+	}
+	function setAccMailing($value)
+	{
+		return $this->reUser->setValue('accept_mailing', $value);
 	}
 	function getNoHTMLEditor()
 	{
@@ -731,7 +740,7 @@ class user
 		sql("UPDATE `user` SET `password`=NULL, `email`=NULL, 
 		                       `is_active_flag`=0, 
 		                       `latitude`=0, `longitude`=0, 
-		                       `last_name`='', `first_name`='', `country`=NULL, `pmr_flag`=0,
+		                       `last_name`='', `first_name`='', `country`=NULL, `accept_mailing`=0, `pmr_flag`=0,
 		                       `new_pw_code`=NULL, `new_pw_date`=NULL,
 		                       `new_email`=NULL, `new_email_code`=NULL, `new_email_date`=NULL,
 		                       `email_problems`=0, `first_email_problem`=NULL, `last_email_problem`=NULL,

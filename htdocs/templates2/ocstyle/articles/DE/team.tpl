@@ -37,7 +37,6 @@
     <tr><td><img src="http://www.opencaching.de/images/team/flopp.png" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=126329">Flopp</a><br />Softwareentwicklung, Anwendersupport, Datenpflege</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/following.png" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=150360">following</a><br />Datenpflege, Softwareentwicklung, Forenmoderation, Wiki</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/friedrichfroebel.jpg" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=234947">FriedrichFröbel</a><br />Wiki, Forenmoderation</td></tr>
-    <tr><td><img src="http://www.opencaching.de/images/team/dummy.jpg" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=205779">Hanekju</a><br />Datenpflege</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/joerg.jpg" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=102153">Jörg</a><br />Berater für Naturschutz und Kontakte zu Behörden und Verbänden</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/metrax.png" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=212145">Metrax</a><br />Berater für Webhosting</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/mic@.jpg" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=103599">mic@</a><br />Anwendersupport, Datenpflege, Forenmoderation</td></tr>

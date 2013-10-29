@@ -2,8 +2,6 @@
 
 namespace okapi\services\apiref\method_index;
 
-use okapi\OkapiInternalRequest;
-
 use Exception;
 use okapi\Okapi;
 use okapi\OkapiRequest;
@@ -12,6 +10,8 @@ use okapi\InvalidParam;
 use okapi\OkapiServiceRunner;
 use okapi\Cache;
 use okapi\OkapiInternalConsumer;
+use okapi\OkapiInternalRequest;
+
 
 class WebService
 {

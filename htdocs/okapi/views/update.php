@@ -672,4 +672,8 @@ class View
 	private static function ver81() { Db::execute("alter table okapi_search_sets add column expires datetime not null"); }
 	private static function ver82() { CronJobController::reset_job_schedule("FulldumpGeneratorJob"); }
 	private static function ver83() { Db::execute("alter table okapi_stats_temp engine=InnoDB"); }
+	private static function ver84() { Db::execute("truncate okapi_nonces;"); }
+	private static function ver85() { Db::execute("alter table okapi_nonces drop primary key;"); }
+	private static function ver86() { Db::execute("alter table okapi_nonces change column `key` nonce_hash varchar(32) character set utf8 collate utf8_bin not null;"); }
+	private static function ver87() { Db::execute("alter table okapi_nonces add primary key (consumer_key, nonce_hash);"); }
 }

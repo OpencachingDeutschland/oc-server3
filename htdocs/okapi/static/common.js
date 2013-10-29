@@ -11,8 +11,13 @@ $(function() {
 			},
 			success: function(issue)
 			{
-				var comments = (issue.comment_count == 1) ? "comment" : "comments";
-				var link = $("<a>" + issue.comment_count + " " + comments + "</a>");
+				var comments, link;
+				if (issue.comment_count === null) {
+					link = $("<a>Comments</a>");
+				} else {
+					comments = (issue.comment_count == 1) ? "comment" : "comments";
+					link = $("<a>" + issue.comment_count + " " + comments + "</a>");
+				}
 				link.attr('href', issue.url);
 				div.append(link);
 				var notice = $("<span class='notice'>Notice: comments are shared between all OKAPI installations.</span>");

@@ -22,6 +22,12 @@ namespace okapi;
 # order to get it to work with your code. Just call this after you
 # include the Facade file: Facade::disable_error_handling().
 
+# EXAMPLE OF USAGE:
+
+# require_once($rootpath.'okapi/facade.php');
+# \okapi\Facade::schedule_user_entries_check(...);
+# \okapi\Facade::disable_error_handling();
+
 
 use Exception;
 use okapi\OkapiServiceRunner;
@@ -106,7 +112,7 @@ class Facade
 	 * This is useful in some cases, when OKAPI cannot detect the modification
 	 * for itself (grep OCPL code for examples). See issue #179.
 	 *
-	 * $cache_codes may be a single cache code or an array of codes.
+	 * $cache_codes - a single cache code OR an array of cache codes.
 	 */
 	public static function schedule_geocache_check($cache_codes)
 	{
@@ -116,6 +122,24 @@ class Facade
 			update caches
 			set okapi_syncbase = now()
 			where wp_oc in ('".implode("','", array_map('mysql_real_escape_string', $cache_codes))."')
+		");
+	}
+
+	/**
+	 * Find all log entries of the specified user for the specified cache and
+	 * mark them as *possibly* modified. See issue #265.
+	 *
+	 * $cache_id - internal ID of the geocache,
+	 * $user_id - internal ID of the user.
+	 */
+	public static function schedule_user_entries_check($cache_id, $user_id)
+	{
+		Db::execute("
+			update cache_logs
+			set okapi_syncbase = now()
+			where
+				cache_id = '".mysql_real_escape_string($cache_id)."'
+				and user_id = '".mysql_real_escape_string($user_id)."'
 		");
 	}
 

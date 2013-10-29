@@ -42,27 +42,37 @@
 				attribute.</p>
 			</li>
 			<li>
-				<b>name</b> - plaintext string, name of the attribute (language is
-				selected based on your <b>langpref</b> parameter),
+				<p><b>name</b> - plaintext string, name of the attribute (language is
+				selected based on your <b>langpref</b> parameter),</p>
+				
+				<p>If you think your language is missing, then feel free to add missing
+				translations directly to OKAPI repository. See
+				<a href='https://code.google.com/p/opencaching-api/source/browse/trunk/okapi/services/attrs/attribute-definitions.xml'>here</a>.</p>
 			</li>
 			<li>
 				<p><b>names</b> - a dictionary of all known names of the attribute, in
 				various languages (ISO 639-1 language code is used as dictionary
 				key).</p>
 			
-				<p>If you'd like to help with the translations, see
+				<p>If you think your language is missing, then feel free to add missing
+				translations directly to OKAPI repository. See
 				<a href='https://code.google.com/p/opencaching-api/source/browse/trunk/okapi/services/attrs/attribute-definitions.xml'>here</a>.</p>
 			</li>
 			<li>
 				<b>description</b> - HTML string, description of the attribute (language is
 				selected based on your <b>langpref</b> parameter),
+				
+				<p>If you think your language is missing, then feel free to add missing
+				translations directly to OKAPI repository. See
+				<a href='https://code.google.com/p/opencaching-api/source/browse/trunk/okapi/services/attrs/attribute-definitions.xml'>here</a>.</p>
 			</li>
 			<li>
 				<p><b>descriptions</b> - a dictionary of all known descriptions of the
 				attribute, in various languages (ISO 639-1 language code is used as
 				dictionary key).</p>
 			
-				<p>If you'd like to help with the translations, see
+				<p>If you think your language is missing, then feel free to add missing
+				translations directly to OKAPI repository. See
 				<a href='https://code.google.com/p/opencaching-api/source/browse/trunk/okapi/services/attrs/attribute-definitions.xml'>here</a>.</p>
 			</li>
 			<li>

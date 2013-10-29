@@ -47,13 +47,26 @@ class OkapiDataStore extends OAuthDataStore
 
 	public function lookup_nonce($consumer, $token, $nonce, $timestamp)
 	{
+		# Since it's not important for us to save the actual token and nonce
+		# value, we will save a hash only. We could also include the consumer
+		# key in this hash and drop the column, but we will leave it be for
+		# now (for a couple of less important reasons).
+
+		$nonce_hash = md5(serialize(array(
+			$token ? $token->key : null,
+			$timestamp,
+			$nonce
+		)));
 		try
 		{
+			# Time timestamp is saved separately, because we are periodically
+			# removing older nonces from the database (see cronjobs).
+
 			Db::execute("
-				insert into okapi_nonces (consumer_key, `key`, timestamp)
+				insert into okapi_nonces (consumer_key, nonce_hash, timestamp)
 				values (
 					'".mysql_real_escape_string($consumer->key)."',
-					'".mysql_real_escape_string($nonce)."',
+					'".mysql_real_escape_string($nonce_hash)."',
 					'".mysql_real_escape_string($timestamp)."'
 				);
 			");
@@ -61,9 +74,8 @@ class OkapiDataStore extends OAuthDataStore
 		}
 		catch (\Exception $e)
 		{
-			# INSERT failed. Assume this nonce was already used.
-			# Note, that old nonces are periodically deleted (see cronjobs).
-			
+			# INSERT failed. This nonce was already used.
+
 			return $nonce;
 		}
 	}

@@ -2,6 +2,10 @@
 	<brief>Retrieve information on given issue</brief>
 	<issue-id>11</issue-id>
 	<desc>
+		<p><b>Important:</b> This method stopped working properly in October 2013.
+		Now, it returns a simple placeholder.
+		<a href='https://code.google.com/p/opencaching-api/issues/detail?id=288'>Read more</a>.</p>
+		
 		<p>OKAPI is trying to be as <b>integrated</b> with its
 		<a href='http://code.google.com/p/opencaching-api/'>Main Project Page</a> as it can.
 		This method retrieves basic information on a given issue from our project
@@ -17,10 +21,11 @@
 		<p>A dictionary of the following structure:</p>
 		<ul>
 			<li><b>id</b> - number of the issue created for this method,</li>
-			<li><b>last_updated</b> - date and time (ISO 8601) when the issue was last updated,</li>
-			<li><b>title</b> - issue title,</li>
+			<li><b>last_updated</b> - date and time (ISO 8601) when the issue was last updated
+				<b>or null</b> if unknown,</li>
+			<li><b>title</b> - issue title <b>or null</b> if unknown,</li>
 			<li><b>url</b> - URL of the issue page,</li>
-			<li><b>comment_count</b> - total number of submitted comments.</li>
+			<li><b>comment_count</b> - total number of submitted comments <b>or null</b> if unknown.</li>
 		</ul>
 		<p>Note, that this will respond with HTTP 400 if we fail to retrieve data from
 		the Google Code site.</p>

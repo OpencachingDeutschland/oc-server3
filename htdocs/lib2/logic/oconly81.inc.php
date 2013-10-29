@@ -21,7 +21,7 @@
 				FROM `cache_logs`
 				INNER JOIN `caches` ON `caches`.`cache_id`=`cache_logs`.`cache_id`
 				INNER JOIN `caches_attributes` ON `caches_attributes`.`cache_id`=`cache_logs`.`cache_id` AND `caches_attributes`.`attrib_id`=6
-				WHERE `cache_logs`.`user_id`='&1' AND `cache_logs`.`type` IN (1,7) AND `caches`.`type` <> 6
+				WHERE `cache_logs`.`user_id`='&1' AND `cache_logs`.`type` = 1
 				GROUP BY `difficulty`, `terrain`",
 				$userid);
 		}

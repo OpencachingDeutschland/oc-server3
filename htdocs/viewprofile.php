@@ -80,6 +80,8 @@
 	$useropt = new useroptions($userid);
 	$show_statistics = $useropt->getOptValue(USR_OPT_SHOWSTATS);
 	$show_oconly81 = $useropt->getOptValue(USR_OPT_OCONLY81);
+	if ($show_oconly81)
+		$tpl->assign('oco81_helplink', helppagelink('oconly81'));
 
 	if ($show_statistics)
 	{

@@ -6,7 +6,7 @@
 {* OCSTYLE *}
 <table class="stattable">
 	<tr>
-		<th class="h1 nodatacell" style="text-align:right">{if $userid>0}<nobr><a class="systemlink" href="oconly81.php">OConly-81</a>&nbsp;&nbsp;&nbsp;</nobr>{/if}</th>
+		<th class="h1 nodatacell" style="text-align:right">{if $userid>0}<nobr>{if @$oco81_helplink}{$oco81_helplink}{else}<a class="systemlink" href="oconly81.php">{/if}OConly-81</a>&nbsp;&nbsp;&nbsp;</nobr>{/if}</th>
 		<th class="h1 nodatacell" colspan="11" style="line-height:1.8em">{t}Terrain{/t}</th>
 	</tr>
 	<tr>

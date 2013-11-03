@@ -356,6 +356,14 @@
 		sql("DROP TABLE IF EXISTS `mapresult`");
 		sql("DROP TABLE IF EXISTS `mapresult_data`");
 	}
+	
+	function dbv_121()	// add user profile flag for receiving newsletter
+	{
+		if (!sql_field_exists('user','accept_mailing'))
+		{
+			sql("ALTER TABLE `user` ADD COLUMN `accept_mailing` tinyint(1) NOT NULL default '1' AFTER `mailing_problems`");
+		}
+	}
 
 
 	// When adding new mutations, take care that they behave well if run multiple

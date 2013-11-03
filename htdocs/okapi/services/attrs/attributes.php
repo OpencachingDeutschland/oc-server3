@@ -13,6 +13,7 @@ use okapi\InvalidParam;
 use okapi\OkapiServiceRunner;
 use okapi\OkapiInternalRequest;
 use okapi\services\attrs\AttrHelper;
+use okapi\Db;
 
 
 class WebService
@@ -26,7 +27,7 @@ class WebService
 
 	private static $valid_field_names = array(
 		'acode', 'name', 'names', 'description', 'descriptions', 'gc_equivs',
-		'is_locally_used', 'is_deprecated', 'is_discontinued'
+		'is_locally_used', 'is_deprecated', 'local_icon_url', 'is_discontinued'
 	);
 
 	public static function call(OkapiRequest $request)
@@ -86,20 +87,49 @@ class WebService
 			$attr['name'] = Okapi::pick_best_language($attr['names'], $langpref);
 			$attr['description'] = Okapi::pick_best_language($attr['descriptions'], $langpref);
 
-			# Fill all the other fields not kept in the (private) attrdict.
+			# Fill some other fields (not kept in the cached attrdict).
 
 			$attr['is_locally_used'] = ($attr['internal_id'] !== null);
 			$attr['is_deprecated'] = $attr['is_discontinued'];  // deprecated and undocumetned field, see issue 70
 
-			# Filter the fields.
-
-			$clean_attr = array();
-			foreach ($fields as $field)
-				$clean_attr[$field] = $attr[$field];
-
 			# Add to results.
 
-			$results[$acode] = $clean_attr;
+			$results[$acode] = $attr;
+		}
+
+		# If the user wanted local_icon_urls, fetch them now. (We cannot cache them
+		# in the $attrdict because currently we have no way of knowing then they
+		# change.)
+
+		if (in_array('local_icon_url', $fields))
+		{
+			$tmp = Db::select_all("
+				select id, icon_large
+				from cache_attrib
+			");
+			$map = array();
+			foreach ($tmp as &$row_ref) {
+				$map[$row_ref['id']] = &$row_ref;
+			}
+			$prefix = Settings::get('SITE_URL');
+			foreach ($results as &$attr_ref) {
+				$internal_id = $attr_ref['internal_id'];
+				if (isset($map[$internal_id])) {
+					$row = $map[$internal_id];
+					$attr_ref['local_icon_url'] = $prefix.$row['icon_large'];
+				} else {
+					$attr_ref['local_icon_url'] = null;
+				}
+			}
+		}
+
+		# Filter the fields.
+
+		foreach ($results as &$attr_ref) {
+			$clean_row = array();
+			foreach ($fields as $field)
+				$clean_row[$field] = $attr_ref[$field];
+			$attr_ref = $clean_row;
 		}
 
 		return Okapi::formatted_response($request, $results);

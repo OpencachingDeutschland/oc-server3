@@ -14,6 +14,7 @@ CREATE TABLE `user` (
   `first_email_problem` date default NULL,
   `last_email_problem` datetime default NULL,
   `mailing_problems` int(10) unsigned NOT NULL default '0',
+  `accept_mailing` tinyint(1) NOT NULL default '1',
   `latitude` double NOT NULL,
   `longitude` double NOT NULL,
   `is_active_flag` tinyint(1) NOT NULL,

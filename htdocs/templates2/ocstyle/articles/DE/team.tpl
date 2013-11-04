@@ -35,6 +35,7 @@
     <tr><td><img src="http://www.opencaching.de/images/team/cmanie.jpg" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=222664">cmanie</a><br />Softwareentwicklung</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/dl6hbo.jpg" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=148310">dl6hbo</a><br />Dokumentation</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/flopp.png" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=126329">Flopp</a><br />Softwareentwicklung, Anwendersupport, Datenpflege</td></tr>
+    <tr><td><img src="http://www.opencaching.de/images/team/following.png" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=150360">following</a><br />Datenpflege, Softwareentwicklung, Forenmoderation, Wiki</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/friedrichfroebel.jpg" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=234947">FriedrichFröbel</a><br />Wiki, Forenmoderation</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/joerg.jpg" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=102153">Jörg</a><br />Berater für Naturschutz und Kontakte zu Behörden und Verbänden</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/metrax.png" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=212145">Metrax</a><br />Berater für Webhosting</td></tr>

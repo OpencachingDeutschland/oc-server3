@@ -7,6 +7,8 @@
  *  Display some status information about the server and Opencaching
  ***************************************************************************/
 
+require_once 'vendor/autoload.php';
+
 	require('./lib2/web.inc.php');
 	require('./lib2/logic/logpics.inc.php');
 	$sUserCountry = $login->getUserCountry();
@@ -141,4 +143,3 @@
 	}
 
 	$tpl->display();
-?>

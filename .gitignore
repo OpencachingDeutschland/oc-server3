@@ -20,6 +20,10 @@
 /htdocs/util/mysql_root/.htaccess
 /htdocs/util/search_index/.htaccess
 
+# external libs (to be installed by Composer)
+/htdocs/composer.phar
+/htdocs/vendor/*
+
 # other data
 /htdocs/cache/*
 /htdocs/cache2/*

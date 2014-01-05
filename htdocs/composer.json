@@ -1,0 +1,34 @@
+{
+    "name": "OpenCaching.de",
+    "description": "OpenCaching DE source code",
+    "require": {
+        "php": ">=5.3.0",
+        "ezyang/htmlpurifier": "4.5.0",
+        "smarty/smarty": "2.6.26"
+    },
+    "autoload": {
+        "psr-0": { "": "lib2/" },
+        "classmap": [ "lib2/", "lib2/logic/", "libse/" ]
+    },
+    "repositories": [
+        {
+            "type": "package",
+            "package": {
+                "name": "smarty/smarty",
+                "version": "2.6.26",
+                "dist": {
+                    "url": "http://www.smarty.net/files/Smarty-2.6.26.tar.gz",
+                    "type": "tar"
+                },
+                "source": {
+                    "url": "http://smarty-php.googlecode.com/svn/",
+                    "type": "svn",
+                    "reference": "tags/Smarty_2_6_26/"
+                },
+                "autoload": {
+                    "classmap": [ "libs/" ]
+                }
+            }
+        }
+    ]
+}

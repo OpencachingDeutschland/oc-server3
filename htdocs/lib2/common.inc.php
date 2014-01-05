@@ -10,24 +10,8 @@
  *  TODO: accept-language des Browser auswerten
  ***************************************************************************/
 
-function __autoload($class_name)
-{
-	global $opt;
-
-	if (!preg_match('/^[\w]{1,}$/', $class_name))
-		return;
-	
-	$file1 = $opt['rootpath'] . 'lib2/' . $class_name . '.class.php';
-	$file2 = $opt['rootpath'] . 'lib2/logic/' . $class_name . '.class.php';
-	$file3 = $opt['rootpath'] . 'libse/' . str_replace('_', '/', $class_name) . '.php';
-	if (file_exists($file1))
-		require_once($file1);
-	elseif (file_exists($file2)) 
-		require_once($file2);
-	elseif (file_exists($file3))
-		require_once($file3);
-}
-
+// load Composer autoloader, if not yet done
+require_once dirname(__FILE__) . '/../vendor/autoload.php';
 
 	// check for broken browsers
 	$useragent = isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : "";
@@ -401,5 +385,3 @@ function number1000($n)
 	else
 		return str_replace(',', '.', number_format($n));
 }
-
-?>

@@ -1,6 +1,6 @@
 {
-    "name": "OpenCaching.de",
-    "description": "OpenCaching DE source code",
+    "name": "opencaching.de",
+    "description": "opencaching.de source code",
     "require": {
         "php": ">=5.3.0",
         "ezyang/htmlpurifier": "4.5.0",

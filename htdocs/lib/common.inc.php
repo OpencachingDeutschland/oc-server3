@@ -19,21 +19,8 @@
 
  ****************************************************************************/
 
-function __autoload($class_name)
-{
-	global $opt;
-
-	if (!preg_match('/^[\w]{1,}$/', $class_name))
-		return;
-	
-	$class_name = str_replace('_', '/', $class_name);
-	
-	$file = $opt['rootpath'] . 'libse/' . $class_name . '.php';
-	if (file_exists($file))
-	  require_once($file);
-}
-
-
+// load Composer autoloader, if not yet done
+require_once dirname(__FILE__) . '/../vendor/autoload.php';
 
 	if (isset($opt['rootpath']))
 		$rootpath = $opt['rootpath'];

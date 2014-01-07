@@ -1,4 +1,7 @@
 <?php
+
+use \OpenCachingDE\Conversions\Coordinates;
+
 /***************************************************************************
 	For license information see doc/license.txt
 
@@ -2013,7 +2016,7 @@ function outputUniidSelectionForm($uniSql, $urlparams)
 		$thislocation = mb_ereg_replace('{parentlocations}', $locString, $thislocation);
 
 		// koordinaten ermitteln
-		$coordString = help_latToDegreeStr($r['lat']) . ' ' . help_lonToDegreeStr($r['lon']);
+		$coordString = Coordinates::latToDegreeStr($r['lat']) . ' ' . Coordinates::lonToDegreeStr($r['lon']);
 		$thislocation = mb_ereg_replace('{coords}', htmlspecialchars($coordString, ENT_COMPAT, 'UTF-8'), $thislocation);
 
 		if ($r['olduni'] != 0)
@@ -2119,7 +2122,7 @@ function outputLocidSelectionForm($locSql, $urlparams)
 		$r['loc_id'] = $r['loc_id'] + 0;
 		$rsCoords = sql_slave('SELECT `lon`, `lat` FROM `geodb_coordinates` WHERE loc_id=' . $r['loc_id'] . ' LIMIT 1');
 		if ($rCoords = sql_fetch_array($rsCoords))
-			$coordString = help_latToDegreeStr($rCoords['lat']) . ' ' . help_lonToDegreeStr($rCoords['lon']);
+			$coordString = Coordinates::latToDegreeStr($rCoords['lat']) . ' ' . Coordinates::lonToDegreeStr($rCoords['lon']);
 		else
 			$coordString = '[keine Koordinaten vorhanden]';
 

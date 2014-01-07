@@ -1,5 +1,7 @@
 <?php
 
+use \OpenCachingDE\Conversions\Coordinates;
+
 	/***************************************************************************
 		For license information see doc/license.txt
 
@@ -117,11 +119,11 @@ function search_output()
 		$thisline = $xmlLine;
 
 		$lat = sprintf('%01.5f', $r['latitude']);
-		$thisline = str_replace('{lat}', help_latToDegreeStr($lat), $thisline);
+		$thisline = str_replace('{lat}', Coordinates::latToDegreeStr($lat), $thisline);
 		$thisline = str_replace('{latvalue}', $lat, $thisline);
 
 		$lon = sprintf('%01.5f', $r['longitude']);
-		$thisline = str_replace('{lon}', help_lonToDegreeStr($lon), $thisline);
+		$thisline = str_replace('{lon}', Coordinates::lonToDegreeStr($lon), $thisline);
 		$thisline = str_replace('{lonvalue}', $lon, $thisline);
 
 		$time = date('d.m.Y', strtotime($r['date_hidden']));

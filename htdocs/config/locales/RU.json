@@ -1,0 +1,46 @@
+// **************************************************************************
+//                                _    _                _
+//  ___ _ __  ___ _ _  __ __ _ __| |_ (_)_ _  __ _   __| |___
+// / _ \ '_ \/ -_) ' \/ _/ _` / _| ' \| | ' \/ _` |_/ _` / -_)
+// \___/ .__/\___|_||_\__\__,_\__|_||_|_|_||_\__, (_)__,_\___|
+//     |_|                                   |___/
+//
+// For license information see doc/license.txt   ---   Unicode Reminder メモ
+//
+// **************************************************************************
+{
+    "template": {
+        "locales": {
+            "RU": {
+                "show": true,
+                "flag": "images/flag/RU.png",
+                "name": "Русский"
+            }
+        }
+    },
+
+    // geokrety language key association
+    "geokrety": {
+        "locales": {
+            "RU": "en_EN"
+        }
+    },
+
+    "locale": {
+        "RU": {
+            "country": "RU",
+            "format": {
+                "dm": "%d.%m.",
+                "dateshort": "%d.%m.%y",
+                "date": "%x",
+                "datelong": "%d. %B %Y",
+                "datetime": "%x %H:%M",
+                "datetimesec": "%x %X",
+                "time": "%H:%M",
+                "timesec": "%X",
+                "phpdate": "d-m-Y"
+            },
+            "locales": [ "ru_RU.utf8", "ru_RU", "ru" ]
+        }
+    }
+}

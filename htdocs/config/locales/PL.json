@@ -1,0 +1,46 @@
+// **************************************************************************
+//                                _    _                _
+//  ___ _ __  ___ _ _  __ __ _ __| |_ (_)_ _  __ _   __| |___
+// / _ \ '_ \/ -_) ' \/ _/ _` / _| ' \| | ' \/ _` |_/ _` / -_)
+// \___/ .__/\___|_||_\__\__,_\__|_||_|_|_||_\__, (_)__,_\___|
+//     |_|                                   |___/
+//
+// For license information see doc/license.txt   ---   Unicode Reminder メモ
+//
+// **************************************************************************
+{
+    "template": {
+        "locales": {
+            "PL": {
+                "show": true,
+                "flag": "images/flag/PL.png",
+                "name": "Polski"
+            }
+        }
+    },
+
+    // geokrety language key association
+    "geokrety": {
+        "locales": {
+            "PL": "pl_PL.UTF-8"
+        }
+    },
+
+    "locale": {
+        "PL": {
+            "country": "PL",
+            "format": {
+                "dm": "%d.%m.",
+                "dateshort": "%d.%m.%y",
+                "date": "%x",
+                "datelong": "%d. %B %Y",
+                "datetime": "%x %H:%M",
+                "datetimesec": "%x %X",
+                "time": "%H:%M",
+                "timesec": "%X",
+                "phpdate": "d-m-Y"
+            },
+            "locales": [ "pl_PL.utf8", "pl_PL", "pl" ]
+        }
+    }
+}

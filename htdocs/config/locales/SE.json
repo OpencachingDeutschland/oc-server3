@@ -1,0 +1,50 @@
+// **************************************************************************
+//                                _    _                _
+//  ___ _ __  ___ _ _  __ __ _ __| |_ (_)_ _  __ _   __| |___
+// / _ \ '_ \/ -_) ' \/ _/ _` / _| ' \| | ' \/ _` |_/ _` / -_)
+// \___/ .__/\___|_||_\__\__,_\__|_||_|_|_||_\__, (_)__,_\___|
+//     |_|                                   |___/
+//
+// For license information see doc/license.txt   ---   Unicode Reminder メモ
+//
+// **************************************************************************
+{
+    "template": {
+        "locales": {
+            "SV": {
+                "show": true,   // sv_SE
+                "flag": "images/flag/SE.png",
+                "name": "Svenska"
+            }
+        }
+    },
+
+    // geokrety language key association
+    "geokrety": {
+        "locales": {
+            "SV": "sv_SE.UTF-8"
+        }
+    },
+
+    "locale": {
+        "SV": {
+            "country": "SE",
+            "format": {
+                "dm": "%d/%m",
+                "dateshort": "%y-%m-%d",
+                "date": "%Y-%m-%d",
+                "datelong": "%Y-%m-%d",
+                "datetime": "%x %H:%M",
+                "datetimesec": "%x %X",
+                "time": "%H:%M",
+                "timesec": "%X",
+                "phpdate": "Y-m-d"
+            },
+            "page": {
+                "subtitle1": "Geocaching med Opencaching",
+                "subtitle2": ""
+            },
+            "locales": [ "sv_SE.utf8", "sv_SE", "se" ]
+        }
+    }
+}

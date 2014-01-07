@@ -8,7 +8,7 @@
         "ocpl/okapi": "dev-master"
     },
     "autoload": {
-        "psr-0": { "": "lib/" },
+        "psr-4": { "": "lib/" },
         "classmap": [ "lib2/", "lib2/logic/", "libse/" ]
     },
     "repositories": [

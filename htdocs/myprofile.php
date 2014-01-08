@@ -5,9 +5,10 @@
  *  Unicode Reminder メモ
  ***************************************************************************/
 
+use \OpenCachingDE\Conversions\Coordinate;
+
 	require_once('./lib2/web.inc.php');
 	require_once('./lib2/logic/user.class.php');
-	require_once('./lib2/logic/coordinate.class.php');
 	require_once('./lib2/logic/countriesList.class.php');
 
 	$tpl->name = 'myprofile';
@@ -111,8 +112,8 @@ function change()
 	$tpl->assign('oconly_helpstart', $oconly_helplink);
 	$tpl->assign('oconly_helpend', $oconly_helplink != '' ? '</a>' : '');
 
-	$coord['lat'] = coordinate::parseRequestLat('coord');
-	$coord['lon'] = coordinate::parseRequestLon('coord');
+	$coord['lat'] = Coordinate::parseRequestLat('coord');
+	$coord['lon'] = Coordinate::parseRequestLon('coord');
 	if (($coord['lat'] !== false) && ($coord['lon'] !== false))
 	{
 		$tpl->assign('coordsDecimal', $coord);
@@ -204,7 +205,7 @@ function assignFromUser($user)
 	$tpl->assign('country', $user->getCountry());
 	$tpl->assign('countryCode', $user->getCountryCode());
 
-	$coords = new coordinate($user->getLatitude(), $user->getLongitude());
+	$coords = new Coordinate($user->getLatitude(), $user->getLongitude());
 	$tpl->assign('coords', $coords->getDecimalMinutes());
 	$tpl->assign('coordsDecimal', $coords->getFloat());
 
@@ -223,5 +224,3 @@ function assignFromUser($user)
 	$tpl->assign('permanentLogin', $user->getPermanentLogin());
 	$tpl->assign('noHTMLEditor', $user->getNoHTMLEditor());
 }
-
-?>

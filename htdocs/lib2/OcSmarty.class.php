@@ -7,7 +7,8 @@
  *  Inherit Smarty-Class and extend it
  ***************************************************************************/
 
-require_once($opt['rootpath'] . 'lib2/smarty/Smarty.class.php');
+require_once dirname(__FILE__) . '/../vendor/autoload.php';
+
 require_once($opt['rootpath'] . 'lib2/db.inc.php');
 require_once($opt['rootpath'] . 'lib2/logic/labels.inc.php');
 
@@ -47,7 +48,7 @@ class OcSmarty extends Smarty
 		$this->template_dir = $opt['stylepath'];
 		$this->compile_dir = $opt['rootpath'] . 'cache2/smarty/compiled/';
 		$this->cache_dir = $opt['rootpath'] . 'cache2/smarty/cache/';
-		$this->plugins_dir = array('plugins', 'ocplugins');
+		$this->plugins_dir = array('plugins', dirname(__FILE__).'/smarty/ocplugins');
 		
 		// disable caching ... if caching is enabled, 1 hour is default
 		$this->caching = false;

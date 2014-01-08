@@ -1,0 +1,52 @@
+// **************************************************************************
+//                                _    _                _
+//  ___ _ __  ___ _ _  __ __ _ __| |_ (_)_ _  __ _   __| |___
+// / _ \ '_ \/ -_) ' \/ _/ _` / _| ' \| | ' \/ _` |_/ _` / -_)
+// \___/ .__/\___|_||_\__\__,_\__|_||_|_|_||_\__, (_)__,_\___|
+//     |_|                                   |___/
+//
+// For license information see doc/license.txt   ---   Unicode Reminder メモ
+//
+// **************************************************************************
+{
+    "template": {
+        "locales": {
+            "IT": {
+                "show": true,
+                "flag": "images/flag/IT.png",
+                "name": "Italiano"
+            }
+        }
+    },
+
+    // geokrety language key association
+    "geokrety": {
+        "locales": {
+            "IT": "en_EN"
+        }
+    },
+
+    "locale": {
+        "IT": {
+            "country": "IT",
+            "format": {
+                "dm": "%d/%m",
+                "dateshort": "%d/%m/%y",
+                "date": "%x",
+                "datelong": "%d. %B %Y",
+                "datetime": "%x %H:%M",
+                "datetimesec": "%x %X",
+                "time": "%H:%M",
+                "timesec": "%X",
+                "phpdate": "d/m/Y"
+            },
+            "page": {
+                "subtitle1": "Geocaching con Opencaching",
+                "subtitle2": "",
+                "license_url": "http://creativecommons.org/licenses/by-nc-nd/3.0/de/deed.it",
+                "license": "<a rel=\"license\" href=\"%1\" target=\"_blank\"><img alt=\"Creative Commons License Terms\" style=\"border-width: 0;\" src=\"http://i.creativecommons.org/l/by-nc-nd/3.0/de/88x31.png\" /></a><div style=\"text-align: center; margin: 8px 0 0 6px;\">Il <a href=\"articles.php?page=impressum#datalicense\">contenuto</a> di Opencaching.de è rilasciato sotto licenza Creative Commons <a rel=\"license\" href=\"%1\" target=\"_blank\">BY-NC-ND 3.0 DE</a>.</div>"
+            },
+            "locales": [ "it_IT.utf8", "it_IT", "it" ]
+        }
+    }
+}

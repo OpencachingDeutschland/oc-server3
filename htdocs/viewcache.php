@@ -7,11 +7,12 @@
  * TODO: use cache() class at all
  ***************************************************************************/
 
+use \OpenCachingDE\Conversions\Coordinate;
+
 	require('./lib2/web.inc.php');
 	require_once('./lib2/logic/labels.inc.php');
 	require_once('./lib2/logic/cache.class.php');
 	require_once('./lib2/logic/attribute.class.php');
-	require_once('./lib2/logic/coordinate.class.php');
 	require_once('./lib2/logic/useroptions.class.php');
 	require_once('./lib2/logic/logpics.inc.php');
 
@@ -186,7 +187,7 @@ function getChildWaypoints($cacheid)
 	$tpl->assign('cache', $rCache);
 	$tpl->title = $rCache['wpoc'] . ' ' . $rCache['name'];
 
-	$coord = new coordinate($rCache['latitude'], $rCache['longitude']);
+	$coord = new Coordinate($rCache['latitude'], $rCache['longitude']);
 	$tpl->assign('coordinates', $coord->getDecimalMinutes());
 
 	// pictures

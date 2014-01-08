@@ -1,4 +1,7 @@
 <?php
+
+use \OpenCachingDE\Conversions\Coordinates;
+
 	/***************************************************************************
 		For license information see doc/license.txt
 
@@ -97,10 +100,10 @@ Logeinträge:
 		$thisline = $txtLine;
 
 		$lat = sprintf('%01.5f', $r['latitude']);
-		$thisline = mb_ereg_replace('{lat}', help_latToDegreeStr($lat), $thisline);
+		$thisline = mb_ereg_replace('{lat}', Coordinates::latToDegreeStr($lat), $thisline);
 
 		$lon = sprintf('%01.5f', $r['longitude']);
-		$thisline = mb_ereg_replace('{lon}', help_lonToDegreeStr($lon), $thisline);
+		$thisline = mb_ereg_replace('{lon}', Coordinates::lonToDegreeStr($lon), $thisline);
 
 		$time = date('d.m.Y', strtotime($r['date_hidden']));
 		$thisline = mb_ereg_replace('{time}', $time, $thisline);

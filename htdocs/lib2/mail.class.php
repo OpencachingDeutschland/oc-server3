@@ -5,7 +5,7 @@
  *  Unicode Reminder メモ
  ***************************************************************************/
 
-require_once($opt['rootpath'] . 'lib2/smarty/Smarty.class.php');
+require_once dirname(__FILE__) . '/../vendor/autoload.php';
 
 class mail extends Smarty
 {

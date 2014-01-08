@@ -1,0 +1,50 @@
+{
+    "name": "opencaching.de",
+    "description": "opencaching.de source code",
+    "require": {
+        "php": ">=5.3.0",
+        "ezyang/htmlpurifier": "4.5.0",
+        "smarty/smarty": "2.6.26",
+        "ocpl/okapi": "dev-master"
+    },
+    "autoload": {
+        "psr-4": { "": "lib/" },
+        "classmap": [ "lib2/", "lib2/logic/", "libse/" ]
+    },
+    "repositories": [
+        {
+            "type": "package",
+            "package": {
+                "name": "smarty/smarty",
+                "version": "2.6.26",
+                "dist": {
+                    "url": "http://www.smarty.net/files/Smarty-2.6.26.tar.gz",
+                    "type": "tar"
+                },
+                "source": {
+                    "type": "svn",
+                    "url": "http://smarty-php.googlecode.com/svn/",
+                    "reference": "tags/Smarty_2_6_26/"
+                },
+                "autoload": {
+                    "classmap": [ "libs/" ]
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "ocpl/okapi",
+                "version": "dev-master",
+                "source": {
+                    "type": "svn",
+                    "url": "http://opencaching-api.googlecode.com/svn/",
+                    "reference": "trunk/okapi/"
+                },
+                "autoload": {
+                    "classmap": [ "./" ]
+                }
+            }
+        }
+    ]
+}

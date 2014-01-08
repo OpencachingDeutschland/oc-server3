@@ -5,8 +5,7 @@
  *  Unicode Reminder メモ
  ***************************************************************************/
 
-require_once($opt['rootpath'] . 'lib2/HTMLPurifier/library/HTMLPurifier.auto.php');
-
+require_once dirname(__FILE__) . '/../vendor/autoload.php';
 
 // !! THIS CODE IS ALSO USED IN OKAPI !!
 // Any changes must be tested with OKAPI services/logs/submit method.

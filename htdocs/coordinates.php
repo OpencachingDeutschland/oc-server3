@@ -5,45 +5,45 @@
  *  Unicode Reminder メモ
  ***************************************************************************/
 
-	require('./lib2/web.inc.php');
-	require_once('./lib2/logic/coordinate.class.php');
+use \OpenCachingDE\Conversions\Coordinate;
 
-	$tpl->name = 'coordinates';
-	$tpl->popup = true;
+require('./lib2/web.inc.php');
 
-	$lat_float = 0;
-	if (isset($_REQUEST['lat']))
-		$lat_float += $_REQUEST['lat'];
+$tpl->name = 'coordinates';
+$tpl->popup = true;
 
-	$lon_float = 0;
-	if (isset($_REQUEST['lon']))
-		$lon_float += $_REQUEST['lon'];
+$lat_float = 0;
+if (isset($_REQUEST['lat'])) {
+    $lat_float += $_REQUEST['lat'];
+}
 
-	$coord = new coordinate($lat_float, $lon_float);
+$lon_float = 0;
+if (isset($_REQUEST['lon'])) {
+    $lon_float += $_REQUEST['lon'];
+}
 
-	$tpl->assign('coordDeg', $coord->getDecimal());
-	$tpl->assign('coordDegMin', $coord->getDecimalMinutes());
-	$tpl->assign('coordDegMinSec', $coord->getDecimalMinutesSeconds());
-	$tpl->assign('coordUTM', $coord->getUTM());
-	$tpl->assign('coordGK', $coord->getGK());
-	$tpl->assign('coordRD', $coord->getRD());
-	$tpl->assign('showRD', ($coord->nLat >= 45 && $coord->nLat <= 57 && $coord->nLon >= 0 && $coord->nLon <= 15));
-	$tpl->assign('coordQTH', $coord->getQTH());
-	$tpl->assign('coordSwissGrid', $coord->getSwissGrid());
+$coord = new Coordinate($lat_float, $lon_float);
 
-	// wp gesetzt?
-	$wp = isset($_REQUEST['wp']) ? $_REQUEST['wp'] : '';
-	if ($wp != '')
-	{
-		$rs = sql("SELECT `caches`.`name`, `user`.`username` FROM `caches` INNER JOIN `cache_status` ON `caches`.`status`=`cache_status`.`id` INNER JOIN `user` ON `user`.`user_id`=`caches`.`user_id` WHERE `cache_status`.`allow_user_view`=1 AND `caches`.`wp_oc`='&1'", $wp);
-		if ($r = sql_fetch_array($rs))
-		{
-			$tpl->assign('owner', $r['username']);
-			$tpl->assign('cachename', $r['name']);
-		}
-		sql_free_result($rs);
-	}
-	$tpl->assign('wp', $wp);
+$tpl->assign('coordDeg', $coord->getDecimal());
+$tpl->assign('coordDegMin', $coord->getDecimalMinutes());
+$tpl->assign('coordDegMinSec', $coord->getDecimalMinutesSeconds());
+$tpl->assign('coordUTM', $coord->getUTM());
+$tpl->assign('coordGK', $coord->getGK());
+$tpl->assign('coordRD', $coord->getRD());
+$tpl->assign('showRD', ($coord->nLat >= 45 && $coord->nLat <= 57 && $coord->nLon >= 0 && $coord->nLon <= 15));
+$tpl->assign('coordQTH', $coord->getQTH());
+$tpl->assign('coordSwissGrid', $coord->getSwissGrid());
 
-	$tpl->display();
-?>
+// wp gesetzt?
+$wp = isset($_REQUEST['wp']) ? $_REQUEST['wp'] : '';
+if ($wp != '') {
+    $rs = sql("SELECT `caches`.`name`, `user`.`username` FROM `caches` INNER JOIN `cache_status` ON `caches`.`status`=`cache_status`.`id` INNER JOIN `user` ON `user`.`user_id`=`caches`.`user_id` WHERE `cache_status`.`allow_user_view`=1 AND `caches`.`wp_oc`='&1'", $wp);
+    if ($r = sql_fetch_array($rs)) {
+        $tpl->assign('owner', $r['username']);
+        $tpl->assign('cachename', $r['name']);
+    }
+    sql_free_result($rs);
+}
+$tpl->assign('wp', $wp);
+
+$tpl->display();

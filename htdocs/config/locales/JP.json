@@ -1,0 +1,50 @@
+// **************************************************************************
+//                                _    _                _
+//  ___ _ __  ___ _ _  __ __ _ __| |_ (_)_ _  __ _   __| |___
+// / _ \ '_ \/ -_) ' \/ _/ _` / _| ' \| | ' \/ _` |_/ _` / -_)
+// \___/ .__/\___|_||_\__\__,_\__|_||_|_|_||_\__, (_)__,_\___|
+//     |_|                                   |___/
+//
+// For license information see doc/license.txt   ---   Unicode Reminder メモ
+//
+// **************************************************************************
+{
+    "template": {
+        "locales": {
+            "JA": {
+                "show": true,   // ja_JP
+                "flag": "images/flag/JP.png",
+                "name": "日本語"
+            }
+        }
+    },
+
+    // geokrety language key association
+    "geokrety": {
+        "locales": {
+            "JA": "ja_JP.UTF-8"
+        }
+    },
+
+    "locale": {
+        "JA": {
+            "country": "JP",
+            "format": {
+                "dm": "%d.%m.",
+                "dateshort": "%d.%m.%y",
+                "date": "%Y-%m-%d",
+                "datelong": "%Y-%m-%d",
+                "datetime": "%x %H:%M",
+                "datetimesec": "%x %X",
+                "time": "%H:%M",
+                "timesec": "%X",
+                "phpdate": "d-m-Y"
+            },
+            "page": {
+                "subtitle1": "Opencachingとジオキャッシング",
+                "subtitle2": ""
+            },
+            "locales": [ "ja_JP.utf8", "ja_JP", "jp" ]
+        }
+    }
+}

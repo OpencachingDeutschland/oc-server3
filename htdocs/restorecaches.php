@@ -9,6 +9,8 @@
  *		- do not archive anything with is not from our node
  ***************************************************************************/
 
+use \OpenCachingDE\Conversions\Coordinate;
+
 /*
 	The following tables are monitored. On changes the OLD data is recorded
 	(except for cache_coordinates and cache_countries, where the NEW data is recorded
@@ -136,7 +138,6 @@ x                    cache_logs_restored   I*     here          datetime     no 
 	require_once('./lib2/logic/labels.inc.php');
 	require_once('./lib2/logic/cache.class.php');
 	require_once('./lib2/logic/cachelog.class.php');
-	require_once('./lib2/logic/coordinate.class.php');
 	require_once('./lib2/logic/picture.class.php');
 
 	$tpl->name = 'restorecaches';
@@ -178,7 +179,7 @@ x                    cache_logs_restored   I*     here          datetime     no 
 		$caches = array();
 		while ($rCache = sql_fetch_assoc($rs))
 		{
-			$coord = new coordinate($rCache['latitude'], $rCache['longitude']);
+			$coord = new Coordinate($rCache['latitude'], $rCache['longitude']);
 			$rCache['coordinates'] = $coord->getDecimalMinutes();
 			$rCache['data'] = get_archive_data(array($rCache['cache_id']));
 			if (count($rCache['data']))
@@ -310,7 +311,7 @@ function get_archive_data($caches)
 	$lastcoord = array();
 	while ($r = sql_fetch_assoc($rs))
 	{
-		$coord = new coordinate($r['latitude'], $r['longitude']);
+		$coord = new Coordinate($r['latitude'], $r['longitude']);
 		$coord = $coord->getDecimalMinutes();
 		$coord = $coord['lat'] . " " . $coord['lon'];
 		if (isset($lastcoord[$r['cache_id']]) && $coord != $lastcoord[$r['cache_id']])

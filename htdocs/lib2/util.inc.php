@@ -1,4 +1,7 @@
 <?php
+
+use \OpenCachingDE\Conversions\Coordinates;
+
 /***************************************************************************
  *  For license information see doc/license.txt
  *
@@ -291,47 +294,6 @@ function xmlfilterevilchars($str)
 	// the same for for ISO-8859-1 and UTF-8
 	return mb_ereg_replace('[\x{00}-\x{09}\x{0B}\x{0C}\x{0E}-\x{1F}]*', '', $str);
 }
-
-
-	// decimal longitude to string E/W hhh°mm.mmm
-	function help_lonToDegreeStr($lon)
-	{
-		if ($lon < 0)
-		{
-			$retval = 'W ';
-			$lon = -$lon;
-		}
-		else
-		{
-			$retval = 'E ';
-		}
-
-		$retval = $retval . sprintf("%03d", floor($lon)) . '° ';
-		$lon = $lon - floor($lon);
-		$retval = $retval . sprintf("%06.3f", round($lon * 60, 3)) . '\'';
-
-		return $retval;
-	}
-
-	// decimal latitude to string N/S hh°mm.mmm
-	function help_latToDegreeStr($lat)
-	{
-		if ($lat < 0)
-		{
-			$retval = 'S ';
-			$lat = -$lat;
-		}
-		else
-		{
-			$retval = 'N ';
-		}
-
-		$retval = $retval . sprintf("%02d", floor($lat)) . '° ';
-		$lat = $lat - floor($lat);
-		$retval = $retval . sprintf("%06.3f", round($lat * 60, 3)) . '\'';
-
-		return $retval;
-	}
 
 
 	function escape_javascript($text)

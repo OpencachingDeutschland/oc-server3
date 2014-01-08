@@ -1,0 +1,50 @@
+// **************************************************************************
+//                                _    _                _
+//  ___ _ __  ___ _ _  __ __ _ __| |_ (_)_ _  __ _   __| |___
+// / _ \ '_ \/ -_) ' \/ _/ _` / _| ' \| | ' \/ _` |_/ _` / -_)
+// \___/ .__/\___|_||_\__\__,_\__|_||_|_|_||_\__, (_)__,_\___|
+//     |_|                                   |___/
+//
+// For license information see doc/license.txt   ---   Unicode Reminder メモ
+//
+// **************************************************************************
+{
+    "template": {
+        "locales": {
+            "NL": {
+                "show": true,
+                "flag": "images/flag/NL.png",
+                "name": "Nederlands"
+            }
+        }
+    },
+
+    // geokrety language key association
+    "geokrety": {
+        "locales": {
+            "NL": "en_EN"
+        }
+    },
+
+    "locale": {
+        "NL": {
+            "country": "NL",
+            "format": {
+                "dm": "%d.%m.",
+                "dateshort": "%d.%m.%y",
+                "date": "%x",
+                "datelong": "%d. %B %Y",
+                "datetime": "%x %H:%M",
+                "datetimesec": "%x %X",
+                "time": "%H:%M",
+                "timesec": "%X",
+                "phpdate": "d-m-Y"
+            },
+            "page": {
+                "subtitle1": "Geocaching met Opencaching",
+                "subtitle2": ""
+            },
+            "locales": [ "nl_NL.utf8", "nl_NL", "nl" ]
+        }
+    }
+}

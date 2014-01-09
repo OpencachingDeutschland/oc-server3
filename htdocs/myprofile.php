@@ -5,7 +5,7 @@
  *  Unicode Reminder メモ
  ***************************************************************************/
 
-use \OpenCachingDE\Conversions\Coordinate;
+use \OpencachingDE\Conversions\Coordinate;
 
 	require_once('./lib2/web.inc.php');
 	require_once('./lib2/logic/user.class.php');

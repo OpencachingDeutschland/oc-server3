@@ -7,7 +7,7 @@
  * TODO: use cache() class at all
  ***************************************************************************/
 
-use \OpenCachingDE\Conversions\Coordinate;
+use \OpencachingDE\Conversions\Coordinate;
 
 	require('./lib2/web.inc.php');
 	require_once('./lib2/logic/labels.inc.php');

@@ -1,6 +1,6 @@
 <?php
 
-use \OpenCachingDE\Conversions\Coordinates;
+use \OpencachingDE\Conversions\Coordinates;
 
 /***************************************************************************
 	For license information see doc/license.txt

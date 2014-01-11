@@ -1,0 +1,11 @@
+parameters:
+    ocde.config.class:  OpencachingDE\Config\Config
+    ocde.logging.class: OpencachingDE\Logging\ChromePhp
+
+services:
+    ocde.config:
+        class: "%ocde.config.class%"
+
+    # Monolog/Symfony compatible name
+    logger:
+        class: "%ocde.logging.class%"

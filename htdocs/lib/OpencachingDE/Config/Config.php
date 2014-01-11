@@ -11,15 +11,18 @@ For license information see doc/license.txt   ---   Unicode Reminder メモ
 
 ****************************************************************************/
 
-require_once __DIR__ . '/../vendor/autoload.php';
+namespace OpencachingDE\Config;
 
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\Config\FileLocator;
-use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
+class Config
+{
+    public function __construct()
+    {
+        $logger = $this->getContainer()->get('logger');
+        $logger->debug('Hello world!');
+    }
 
-$container = new ContainerBuilder();
-$loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../config/'));
-$loader->load('services.yml');
-// $loader->load('anotherfile.yml');
-
-$config = $container->get('ocde.config');
+    public function getContainer()
+    {
+        return $GLOBALS['container'];
+    }
+}

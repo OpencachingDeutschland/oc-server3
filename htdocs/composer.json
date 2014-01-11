@@ -5,7 +5,11 @@
         "php": ">=5.3.0",
         "ezyang/htmlpurifier": "4.5.0",
         "smarty/smarty": "2.6.26",
-        "ocpl/okapi": "dev-master"
+        "ocpl/okapi": "dev-master",
+        "symfony/dependency-injection": "dev-master",
+        "symfony/yaml": "dev-master",
+        "symfony/config": "dev-master",
+        "ccampbell/chromephp": "dev-master"
     },
     "autoload": {
         "psr-4": { "": "lib/" },

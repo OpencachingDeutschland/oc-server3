@@ -5,7 +5,7 @@
  *  Unicode Reminder メモ
  ***************************************************************************/
 
-require_once dirname(__FILE__) . '/../vendor/autoload.php';
+require_once __DIR__ . '/../lib/core.php';
 
 // !! THIS CODE IS ALSO USED IN OKAPI !!
 // Any changes must be tested with OKAPI services/logs/submit method.

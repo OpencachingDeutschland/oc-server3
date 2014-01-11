@@ -7,7 +7,7 @@
  *  Inherit Smarty-Class and extend it
  ***************************************************************************/
 
-require_once dirname(__FILE__) . '/../vendor/autoload.php';
+require_once __DIR__ . '/../lib/core.php';
 
 require_once($opt['rootpath'] . 'lib2/db.inc.php');
 require_once($opt['rootpath'] . 'lib2/logic/labels.inc.php');

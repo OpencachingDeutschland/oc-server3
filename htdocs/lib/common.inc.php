@@ -21,7 +21,7 @@
  ****************************************************************************/
 
 // load Composer autoloader, if not yet done
-require_once dirname(__FILE__) . '/../vendor/autoload.php';
+require_once __DIR__ . '/core.php';
 
     if (isset($opt['rootpath']))
         $rootpath = $opt['rootpath'];

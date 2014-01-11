@@ -9,7 +9,7 @@
  *		- do not archive anything with is not from our node
  ***************************************************************************/
 
-use \OpenCachingDE\Conversions\Coordinate;
+use \OpencachingDE\Conversions\Coordinate;
 
 /*
 	The following tables are monitored. On changes the OLD data is recorded

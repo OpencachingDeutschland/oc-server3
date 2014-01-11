@@ -11,7 +11,7 @@ For license information see doc/license.txt   ---   Unicode Reminder メモ
 
 ****************************************************************************/
 
-namespace OpenCachingDE\Conversions;
+namespace OpencachingDE\Conversions;
 
 // TODO: Use https://github.com/mjaschen/phpgeo for conversions
 

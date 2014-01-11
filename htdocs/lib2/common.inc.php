@@ -11,7 +11,7 @@
  ***************************************************************************/
 
 // load Composer autoloader, if not yet done
-require_once dirname(__FILE__) . '/../vendor/autoload.php';
+require_once __DIR__ . '/../lib/core.php';
 
 	// check for broken browsers
 	$useragent = isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : "";

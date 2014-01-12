@@ -48,7 +48,7 @@ Check out other OKAPI installations:</p>
 which are "national views" of Opencaching.DE. All three share one
 database, so you can access all their data through the Opencaching.DE
 OKAPI installation and select Italian or Spanish language.</p>
-	
+
 <p>And also:</p>
 <ul>
 	<li>OKAPI Project Homepage - <a href='http://code.google.com/p/opencaching-api/'>http://code.google.com/p/opencaching-api/</a></li>
@@ -132,6 +132,18 @@ and don't have to care about OAuth.</p>
 <p>Whichever you want. OKAPI will treat GET and POST requests as equal.
 You may also use the HTTP <code>Authorization</code> header for passing OAuth arguments.
 OKAPI does not allow usage of PUT and DELETE requests.</p>
+
+<h2 id='html'>About HTML fields</h2>
+
+<p>There are many HTML-formatted fields in OKAPI. However, most of them come directly
+from the underlying Opencaching database. These fields are <b>not validated by OKAPI</b>.
+They <b>may</b> be validated by some other Opencaching code
+(prior to inserting it to the database), but we cannot guarantee it. And you shouldn't
+count on it too. You must assume that HTML content may contain anything, e.g.
+invalid HTML markup, tracking images (pixels), or even
+<a href='http://en.wikipedia.org/wiki/Cross-site_scripting'>XSS vectors</a>.
+This also applies to the descriptions included in the GPX files.</p>
+
 
 <h2 id='common-formatting'>Common formatting parameters</h2>
 
@@ -229,11 +241,20 @@ method calls and redirects which provide you with an Access Token).</p>
 <p>Basic rules apply:</p>
 <ul>
 	<li>If all goes well, OKAPI will respond with a <b>HTTP 200</b> status.</li>
+
 	<li>If there is something wrong with your request, you will get a <b>HTTP 4xx</b>
 	response (with a JSON object described below). These kind of responses should
 	trigger some kind of an exception inside your application.</li>
+
 	<li>If something goes wrong <b>on our part</b>, you will get a <b>HTTP 5xx</b> response.
 	We will try to fix such errors as soon as possible.</li>
+
+	<li>Sometimes, due to invalid server configuration, you may receive <b>HTTP 200</b>
+	instead of <b>HTTP 500</b>. We know that's "unprofessional", but we cannot guarantee
+	that all OC servers are configured properly
+	(<a href='https://code.google.com/p/opencaching-api/issues/detail?id=293'>example</a>).
+	If you get <b>HTTP 200</b> <u>and</u> you cannot parse the server response, you should
+	treat it as <b>HTTP 500</b>.</li>
 </ul>
 
 <p>Each <b>HTTP 4xx</b> error will be properly described in the response, using a <b>JSON error

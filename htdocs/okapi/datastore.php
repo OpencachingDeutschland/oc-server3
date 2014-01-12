@@ -9,14 +9,14 @@ class OkapiDataStore extends OAuthDataStore
 	public function lookup_consumer($consumer_key)
 	{
 		$row = Db::select_row("
-			select `key`, secret, name, url, email
+			select `key`, secret, name, url, email, admin
 			from okapi_consumers
 			where `key` = '".mysql_real_escape_string($consumer_key)."'
 		");
 		if (!$row)
 			return null;
 		return new OkapiConsumer($row['key'], $row['secret'], $row['name'],
-			$row['url'], $row['email']);
+			$row['url'], $row['email'], $row['admin'] ? true : false);
 	}
 
 	public function lookup_token($consumer, $token_type, $token)

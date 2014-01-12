@@ -185,12 +185,16 @@
 		<p><b>Examples:</b></p>
 		<ul>
 			<li>to order by cache name use "order_by=name" or "order_by=+name",</li>
-			<li>to have the largest caches in front, use "order_by=-size",</li>
-			<li>multicolumn sorting is also allowed, ex. "order_by=-founds|-size|distance"</li>
+			<li>to have the most recommended caches caches in front, use "order_by=-rcmds%",</li>
+			<li>multicolumn sorting is also allowed, ex. "order_by=-founds|name"</li>
 		</ul>
 		<p><b>Note:</b> Try to avoid executing separate OKAPI request every time you
 		want to sort the data which you <b>already have</b>. Consider caching and
 		sorting on client side. This will speed up things for both sides.</p>
+		<p><b>Note:</b> For most other methods (like <b>bbox</b> and <b>nearest</b>),
+		the default order is <i>by the distance from the center</i>. If you supply
+		custom <b>order_by</b> parameter, then we will try to order by your preference
+		first, and then by the distance later.</p>
 	</opt>
 	<common-format-params/>
 	<returns>

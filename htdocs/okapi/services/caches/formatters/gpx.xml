@@ -11,6 +11,8 @@
 		This method can produce many various types of GPX files. The simplest list of
 		waypoints takes ~50 times less space than the same list with cache descriptions
 		and log entries included.</p>
+		<p>Note, that GPX files may contain <a href='%OKAPI:docurl:html%'>unvalidated
+		HTML</a>.</p>
 	</desc>
 	<req name='cache_codes'>
 		<p>Pipe-separated list of cache codes which you are interested in.
@@ -138,10 +140,24 @@
 		<p>Note: When using "desc:" mode, remember to set <b>ns_ground</b> to <b>true</b>.</p>
 	</opt>
 	<opt name='my_notes' default='none'>
-		<p>Allows you to include personal user's notes on each cache. One of the following values:</p>
+		<p>Allows you to include personal user's notes on each cache. This parameter
+		takes either <b>none</b> (default value), or pipe separeted list of the
+		following values:</p>
+		
 		<ul>
-			<li><b>none</b> - don't include personal notes,</li>
-			<li><b>desc:text</b> - include personal notes as part of the cache description.</li>
+			<li><b>desc:text</b> - include personal notes as part of the cache
+			description.</li>
+			
+			<li>
+				<p><b>gc:personal_note</b> - include personal notes as
+				&lt;groundspeak:personal_note&gt; element (under
+				&lt;groundspeak:cache&gt; element).</p>
+				
+				<p><b>Warning:</b> This element is not a part of
+				<i>http://www.groundspeak.com/cache/1/0/1</i> groundspeak schema, but it
+				is a <i>http://www.groundspeak.com/cache/1/0/2</i> schema element. Using
+				this option will generate formally invalid XML file.</p>
+			</li>
 		</ul>
 		<p>Note: You need to use Level 3 Authentication in order to set it to anything else than "none".</p>
 	</opt>

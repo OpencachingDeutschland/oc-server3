@@ -66,8 +66,8 @@ http://www.gsak.net/xmlv1/5 http://www.gsak.net/xmlv1/5/gsak.xsd
 								<?= sprintf(ngettext("%d trackable", "%d trackables", $c['trackables_count']), $c['trackables_count']) ?>.
 							<? } ?>
 						&lt;/p&gt;
-						<? if (($vars['my_notes'] == 'desc:text') && ($c['my_notes'] != null)) { /* Does user want us to include personal notes? */ ?>
-							&lt;p&gt;&lt;b&gt;<?= _("Personal notes") ?>:&lt;/b&gt; <?= Okapi::xmlescape($c['my_notes']) ?>&lt;/p&gt;
+						<? if ((in_array('desc:text', $vars['my_notes'])) && ($c['my_notes'] != null)) { /* Does user want us to include personal notes? */ ?>
+							&lt;p&gt;&lt;b&gt;<?= _("Personal notes") ?>:&lt;/b&gt;&lt;br&gt;<?= Okapi::xmlescape(nl2br($c['my_notes'])) ?>&lt;/p&gt;
 						<? } ?>
 
 						<? if (in_array('desc:text', $vars['attrs']) && count($c['attrnames']) > 0) { /* Does user want us to include attributes? */ ?>
@@ -134,6 +134,9 @@ http://www.gsak.net/xmlv1/5 http://www.gsak.net/xmlv1/5/gsak.xsd
 						<? } ?>
 					</groundspeak:long_description>
 					<groundspeak:encoded_hints><?= Okapi::xmlescape($c['hint2']) ?></groundspeak:encoded_hints>
+					<? if ((in_array('gc:personal_note', $vars['my_notes'])) && ($c['my_notes'] != null)) { /* Does user want us to include personal notes? -> Issue 294 */ ?>
+						<groundspeak:personal_note><?= Okapi::xmlescape($c['my_notes']) ?></groundspeak:personal_note>
+					<? } ?>
 					<? if ($vars['latest_logs']) { /* Does user want us to include latest log entries? */ ?>
 						<groundspeak:logs>
 							<? foreach ($c['latest_logs'] as $log) { ?>

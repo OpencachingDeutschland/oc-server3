@@ -676,4 +676,5 @@ class View
 	private static function ver85() { Db::execute("alter table okapi_nonces drop primary key;"); }
 	private static function ver86() { Db::execute("alter table okapi_nonces change column `key` nonce_hash varchar(32) character set utf8 collate utf8_bin not null;"); }
 	private static function ver87() { Db::execute("alter table okapi_nonces add primary key (consumer_key, nonce_hash);"); }
+	private static function ver88() { Db::execute("alter table okapi_consumers add column admin tinyint not null default 0;"); }
 }

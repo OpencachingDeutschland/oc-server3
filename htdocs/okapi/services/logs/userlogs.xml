@@ -34,7 +34,8 @@
 				everything</b>, but there are some primary types (see logs/entry
 				method for more info).</p>
 			</li>
-			<li><b>comment</b> - HTML string, text entered with the log entry.</li>
+			<li><b>comment</b> - <a href='%OKAPI:docurl:html%'>HTML string</a>, text entered
+				with the log entry.</li>
 		</ul>
 	</returns>
 </xml>

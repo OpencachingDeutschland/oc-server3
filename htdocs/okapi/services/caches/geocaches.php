@@ -105,7 +105,7 @@ class WebService
 			$user_id = Db::select_value("select user_id from user where uuid='".mysql_real_escape_string($user_uuid)."'");
 			if ($user_id == null)
 				throw new InvalidParam('user_uuid', "User not found.");
-			if (($request->token != null) && ($this->token->user_id != $user_id))
+			if (($request->token != null) && ($request->token->user_id != $user_id))
 				throw new InvalidParam('user_uuid', "User does not match the Access Token used.");
 		}
 		elseif (($user_uuid == null) && ($request->token != null))
@@ -497,7 +497,8 @@ class WebService
 					/* Note, that the "owner" and "internal_id" fields are automatically included,
 					 * whenever the cache description is included. */
 
-					$tmp = $row['desc'];
+					$tmp = Okapi::fix_oc_html($row['desc']);
+
 					if ($attribution_append != 'none')
 					{
 						$tmp .= "\n<p><em>".

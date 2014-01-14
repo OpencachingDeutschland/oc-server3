@@ -30,7 +30,6 @@
     <tr><td><img src="http://www.opencaching.de/images/team/cmanie.jpg" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=222664">cmanie</a><br />software development</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/dl6hbo.jpg" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=148310">dl6hbo</a><br />documentation</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/flopp.png" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=126329">Flopp</a><br />software development, user support, data maintenance</td></tr>
-    <tr><td><img src="http://www.opencaching.de/images/team/following.png" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=150360">following</a><br />data maintenance, software development, message board moderation, wiki</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/friedrichfroebel.jpg" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=234947">FriedrichFröbel</a><br />wiki, message board moderation</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/joerg.jpg" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=102153">Jörg</a><br />advisor for nature protection and authority relations</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/metrax.png" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=212145">Metrax</a><br />advisor for webhosting</td></tr>

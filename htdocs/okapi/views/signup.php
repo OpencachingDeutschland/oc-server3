@@ -32,8 +32,8 @@ class View
 				$notice = "Application name should be less than 100 characters long.";
 			elseif (mb_strlen($appurl) > 250)
 				$notice = "Application URL should be less than 250 characters long.";
-			elseif ($appurl && (substr($appurl, 0, 7) != "http://"))
-				$notice = "Application homepage URL should start with http://. (Note: this URL is OPTIONAL and it is NOT for OAuth callback.)";
+			elseif ($appurl && (substr($appurl, 0, 7) != "http://") && (substr($appurl, 0, 8) != "https://"))
+				$notice = "Application homepage URL should start with http(s)://. (Note: this URL is OPTIONAL and it is NOT for OAuth callback.)";
 			elseif (!$email)
 				$notice = "Please provide a valid email address.";
 			elseif (mb_strlen($email) > 70)

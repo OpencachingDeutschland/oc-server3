@@ -38,10 +38,33 @@ class WebService
 
 	private static function get_inner_xml($node)
 	{
+		/* Fetch as <some-node>content</some-node>, extract content. */
+
 		$s = $node->asXML();
 		$start = strpos($s, ">") + 1;
 		$length = strlen($s) - $start - (3 + strlen($node->getName()));
-		return substr($s, $start, $length);
+		$s = substr($s, $start, $length);
+
+		/* Find and replace %okapi:plugins%. */
+
+		$s = preg_replace_callback("~%OKAPI:([a-z:]+)%~", array("self", "plugin_callback"), $s);
+
+		return $s;
+	}
+
+	public static function plugin_callback($matches)
+	{
+		$input = $matches[1];
+		$arr = explode(":", $input);
+		$plugin_name = $arr[0];
+
+		switch ($plugin_name) {
+			case 'docurl':
+				$fragment = $arr[1];
+				return Settings::get('SITE_URL')."okapi/introduction.html#".$fragment;
+			default:
+				throw new Exception("Unknown plugin: ".$input);
+		}
 	}
 
 	public static function call(OkapiRequest $request)

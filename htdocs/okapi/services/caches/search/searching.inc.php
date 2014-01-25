@@ -498,7 +498,12 @@ class SearchAssistant
 		if (!is_numeric($limit))
 			throw new InvalidParam('limit', "'$limit'");
 		if ($limit < 1 || (($limit > 500) && (!$request->skip_limits)))
-			throw new InvalidParam('limit', "Has to be between 1 and 500.");
+			throw new InvalidParam(
+				'limit',
+				$request->skip_limits
+					? "Cannot be lower than 1."
+					: "Has to be between 1 and 500."
+			);
 
 		#
 		# offset
@@ -510,8 +515,13 @@ class SearchAssistant
 			throw new InvalidParam('offset', "'$offset'");
 		if (($offset + $limit > 500) && (!$request->skip_limits))
 			throw new BadRequest("The sum of offset and limit may not exceed 500.");
-		if ($offset < 0 || $offset > 499)
-			throw new InvalidParam('offset', "Has to be between 0 and 499.");
+		if ($offset < 0 || (($offset > 499) && (!$request->skip_limits)))
+			throw new InvalidParam(
+				'offset',
+				$request->skip_limits
+					? "Cannot be lower than 0."
+					: "Has to be between 0 and 499."
+			);
 
 		#
 		# order_by

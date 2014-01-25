@@ -61,6 +61,12 @@ It also defines attribute names and descriptions in several languages.
 				es sich lohnt näher anzusehen.
 			</desc>
 		</lang>
+		<lang id="nl">
+			<name>Alleen te loggen op Opencaching</name>
+			<desc>
+				Deze cache is alleen beschikbaar en te loggen op opencaching.
+			</desc>
+		</lang>
 		<lang id="es">
 			<name>Solo loggeable en Opencaching</name>
 			<desc>
@@ -77,9 +83,7 @@ It also defines attribute names and descriptions in several languages.
 				interessanti cache OC di qualità.
 			</desc>
 		</lang>
-		<lang id="nl">
-			<name>Alleen te loggen op Opencaching</name>
-		</lang>
+
 	</attr>
 
 	<attr acode="A2" categories="de-cache-types">
@@ -103,6 +107,12 @@ It also defines attribute names and descriptions in several languages.
 			<name>an einem Vermessungspunkt</name>
 			<desc>
 				Der Cache ist in der Nähe eines festen Vermessungspunktes versteckt.
+			</desc>
+		</lang>
+		<lang id="nl">
+			<name>Meetpunt</name>
+			<desc>
+				Deze cache heeft te maken met een meetpunt of geodetisch punt.
 			</desc>
 		</lang>
 	</attr>
@@ -168,6 +178,14 @@ It also defines attribute names and descriptions in several languages.
 				<a href="http://wiki.opencaching.de/index.php/Letterboxing">Weitere Informationen</a>.
 			</desc>
 		</lang>
+		<lang id="nl">
+			<name>Letterbox (een stempel nodig)</name>
+			<desc>
+				Er bevind sich een stempel in de cache waarmee je een in een eigen logboek 
+				kan stempelen. Met een eigen stempel kun je het logboek in de cache stempelen. 
+				Let op om niet per ongeluk de stempels te verwisselen!
+			</desc>
+		</lang>
 		<lang id="es">
 			<name>Letterbox (necesita un estampador)</name>
 			<desc>
@@ -214,6 +232,10 @@ It also defines attribute names and descriptions in several languages.
 		</lang>
 		<lang id="nl">
 			<name>GeoHotel</name>
+			<desc>
+				Deze cache is speciaal voor reizende items zoals: GeoKrets,
+				TravelBugs enz.
+			</desc>
 		</lang>
 	</attr>
 
@@ -240,6 +262,9 @@ It also defines attribute names and descriptions in several languages.
 		</lang>
 		<lang id="nl">
 			<name>Bevestigd met magneet</name>
+			<desc>
+				Deze cache is met een magneet bevestigt.
+			</desc>
 		</lang>
 	</attr>
 
@@ -266,6 +291,13 @@ It also defines attribute names and descriptions in several languages.
 			<desc>
 				Um diesen Cache zu finden musst du eine Tonaufnahme anhören,
 				die der Cachbeschreibung beigefügt ist.
+			</desc>
+		</lang>
+		<lang id="nl">
+			<name>Beschrijving bevat een audio bestand</name>
+			<desc>
+				Om deze cache te vinden moeten instructies via een audio bestand
+				(bijv. MP3) beluisterd worden welke in de cachebeschrijving te vinden is.
 			</desc>
 		</lang>
 	</attr>
@@ -324,6 +356,12 @@ It also defines attribute names and descriptions in several languages.
 				werden. Dazu wird ein passender Empfänger benötigt.
 			</desc>
 		</lang>
+		<lang id="nl">
+			<name>Beacon - Garmin chirp</name>
+			<desc>
+				Deze cache is gemaakt met 1 of meer Garmins chirp draadloze zenders.
+			</desc>
+		</lang>
 	</attr>
 
 	<attr acode="A10" categories="de-cache-types">
@@ -353,6 +391,15 @@ It also defines attribute names and descriptions in several languages.
 				Der Cache besteht aus einem fest angebrachten USB-Stick. Er enthält
 				eine readme.txt-Datei mit Erläuterungen zum Cache und eine Datei
 				logbook.txt zum Loggen.
+			</desc>
+		</lang>
+		<lang id="nl">
+			<name>Dead Drop USB cache</name>
+			<desc>
+				Deze cache bestaat uit een vast gemonteerde USB stick, zoals in een
+				muur of paal enz. Deze bevat een readme.txt bestand met de cache 
+				beschrijving en een logboek.txt bestand om je bezoek te kunnen loggen.
+				<a href="http://wiki.opencaching.nl/index.php/Dead_Drop_Caches">Voor informatie</a>.
 			</desc>
 		</lang>
 	</attr>
@@ -620,6 +667,10 @@ It also defines attribute names and descriptions in several languages.
 		</lang>
 		<lang id="nl">
 			<name>Rolstoel toegankelijk</name>
+			<desc>
+				Deze cache is zo gemaakt dat de cache ook met de rolstoel te vinden 
+				en te loggen is.
+			</desc>
 		</lang>
 	</attr>
 
@@ -915,6 +966,12 @@ It also defines attribute names and descriptions in several languages.
 				Der Cache ist mit dem Fahrrad erreichbar.
 			</desc>
 		</lang>
+		<lang id="nl">
+			<name>Fietsen toegestaan</name>
+			<desc>
+				Deze cache is ook met de fiets te doen.
+			</desc>
+		</lang>
 	</attr>
 
 	<attr acode="A28" categories="de-location">
@@ -943,6 +1000,9 @@ It also defines attribute names and descriptions in several languages.
 		</lang>
 		<lang id="nl">
 			<name>Cache met veel natuur</name>
+			<desc>
+				Deze cache loopt door de natuur. Zoals bossen, heide, moerasgebieden enz.
+			</desc>
 		</lang>
 	</attr>
 
@@ -1108,6 +1168,9 @@ It also defines attribute names and descriptions in several languages.
 		</lang>
 		<lang id="nl">
 			<name>Parkeerplaats vlakbij</name>
+			<desc>
+				Er is een parkeerplaats vlak bij om deze cache te beginnen.
+			</desc>
 		</lang>
 	</attr>
 
@@ -2174,7 +2237,7 @@ It also defines attribute names and descriptions in several languages.
 			</desc>
 		</lang>
 		<lang id="nl">
-			<name>jachtgebied</name>
+			<name>Let op: jachtgebied</name>
 		</lang>
 	</attr>
 
@@ -2209,6 +2272,9 @@ It also defines attribute names and descriptions in several languages.
 		</lang>
 		<lang id="nl">
 			<name>Let op: doornen</name>
+			<desc>
+				Er kunnen doornen bij de cache zijn. Draag beschermende kleding.
+			</desc>
 		</lang>
 	</attr>
 
@@ -2254,6 +2320,11 @@ It also defines attribute names and descriptions in several languages.
 		</lang>
 		<lang id="nl">
 			<name>Let op: teken</name>
+			<desc>
+				In dit gebied zouden teken voorkomen. Neem voorzorgen om geen teken 
+				op te lopen door beschermende kleding te dragen. Vor meer informatie 
+				kijk op <a href="http://nl.wikipedia.org/wiki/Teken_%28dieren%29">www.meningitis.de</a>
+			</desc>
 		</lang>
 	</attr>
 
@@ -2439,7 +2510,7 @@ It also defines attribute names and descriptions in several languages.
 	<attr acode="A70" categories="de-rating">
 		<groundspeak id="6" inc="true" name="Recommended for kids" />
 		<opencaching schema="http://opencaching.pl/" id="41" />
-		<opencaching schema="http://www.opencaching.nl/" id="59" />
+		<opencaching schema="http://www.opencaching.nl/" id="41" />
 		<lang id="en">
 			<name>Take your children</name>
 			<desc>
@@ -2463,6 +2534,10 @@ It also defines attribute names and descriptions in several languages.
 		</lang>
 		<lang id="nl">
 			<name>Kindvriendelijke cache</name>
+			<desc>
+				Dit is een makkelijke en veilige cache. De kleine kinderen
+				kunnen ook aan deze cache deelnemen.
+			</desc>
 		</lang>
 	</attr>
 

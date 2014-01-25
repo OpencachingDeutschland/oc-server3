@@ -101,7 +101,7 @@ class WebService
 				),
 				'type' => Okapi::logtypeid2name($row['type']),
 				'was_recommended' => $row['was_recommended'] ? true : false,
-				'comment' => $row['text'],
+				'comment' => Okapi::fix_oc_html($row['text']),
 				'images' => array(),
 				'internal_id' => $row['id'],
 			);

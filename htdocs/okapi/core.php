@@ -480,14 +480,16 @@ class OkapiConsumer extends OAuthConsumer
 	public $name;
 	public $url;
 	public $email;
+	public $admin;
 
-	public function __construct($key, $secret, $name, $url, $email)
+	public function __construct($key, $secret, $name, $url, $email, $admin=false)
 	{
 		$this->key = $key;
 		$this->secret = $secret;
 		$this->name = $name;
 		$this->url = $url;
 		$this->email = $email;
+		$this->admin = $admin;
 	}
 
 	public function __toString()
@@ -814,7 +816,7 @@ class Okapi
 {
 	public static $data_store;
 	public static $server;
-	public static $revision = 893; # This gets replaced in automatically deployed packages
+	public static $revision = 938; # This gets replaced in automatically deployed packages
 	private static $okapi_vars = null;
 
 	/** Get a variable stored in okapi_vars. If variable not found, return $default. */
@@ -855,7 +857,13 @@ class Okapi
 	/** Send an email message to local OKAPI administrators. */
 	public static function mail_admins($subject, $message)
 	{
-		# First, make sure we're not spamming.
+		# Make sure we're not sending HUGE emails.
+
+		if (strlen($message) > 10000) {
+			$message = substr($message, 0, 10000)."\n\n...(message clipped at 10k chars)\n";
+		}
+
+		# Make sure we're not spamming.
 
 		$cache_key = 'mail_admins_counter/'.(floor(time() / 3600) * 3600).'/'.md5($subject);
 		try {
@@ -1146,17 +1154,19 @@ class Okapi
 
 		# Message for the Consumer.
 		ob_start();
-		print "This is the key-pair we've generated for your application:\n\n";
+		print "This is the key-pair we have created for your application:\n\n";
 		print "Consumer Key: $consumer->key\n";
 		print "Consumer Secret: $consumer->secret\n\n";
 		print "Note: Consumer Secret is needed only when you intend to use OAuth.\n";
 		print "You don't need Consumer Secret for Level 1 Authentication.\n\n";
-		print "Now you may easily access Level 1 methods of OKAPI! For example:\n";
+		print "Now you can easily access Level 1 OKAPI methods. E.g.:\n";
 		print Settings::get('SITE_URL')."okapi/services/caches/geocache?cache_code=$sample_cache_code&consumer_key=$consumer->key\n\n";
-		print "If you plan on using OKAPI for a longer time, then you should subscribe\n";
-		print "to the OKAPI News blog to stay up-to-date. Check it out here:\n";
+		print "If you plan on using OKAPI for a longer time, then you may want to\n";
+		print "subscribe to the OKAPI News blog to stay up-to-date:\n";
 		print "http://opencaching-api.blogspot.com/\n\n";
-		print "Have fun!";
+		print "Have fun!\n\n";
+		print "-- \n";
+		print "OKAPI Team\n";
 		Okapi::mail_from_okapi($email, "Your OKAPI Consumer Key", ob_get_clean());
 
 		# Message for the Admins.
@@ -1616,6 +1626,7 @@ class Okapi
 		# Other.
 		if ($id == 4) return "Moved";
 		if ($id == 5) return "Needs maintenance";
+		if ($id == 6) return "Maintenance performed";
 		if ($id == 9) return "Archived";
 		if ($id == 10) return "Ready to search";
 		if ($id == 11) return "Temporarily unavailable";
@@ -1627,6 +1638,33 @@ class Okapi
 		# description.
 
 		return "Comment";
+	}
+
+	/**
+	 * "Fix" user-supplied HTML fetched from the OC database.
+	 */
+	public static function fix_oc_html($html)
+	{
+		/* There are thousands of relative URLs in cache descriptions. We will
+		 * attempt to find them and fix them. In theory, the "proper" way to do this
+		 * would be to parse the description into a DOM tree, but that would simply
+		 * be very hard (and inefficient) to do, since most of the descriptions are
+		 * not even valid HTML.
+		 */
+
+		$html = preg_replace(
+			"~\b(src|href)=([\"'])(?![a-z0-9_-]+:)~",
+			"$1=$2".Settings::get("SITE_URL"),
+			$html
+		);
+
+		/* Other things to do in the future:
+		 *
+		 * 1. Check for XSS vulerabilities?
+		 * 2. Transform to a valid (X)HTML?
+		 */
+
+		return $html;
 	}
 }
 
@@ -1999,6 +2037,16 @@ class OkapiHttpRequest extends OkapiRequest
 					throw new BadRequest("This method requires the 'consumer_key' argument (Level 1 ".
 						"Authentication). You didn't provide one.");
 			}
+		}
+
+		if (is_object($this->consumer) && $this->consumer->admin)
+		{
+			/* Some chosen Consumers gain special permissions within OKAPI.
+			 * Currently, there's only a single "admin" flag in the okapi_consumers
+			 * table, and there's just a single extra permission to gain, but
+			 * the this set of permissions may grow in time. */
+
+			$this->skip_limits = true;
 		}
 
 		#

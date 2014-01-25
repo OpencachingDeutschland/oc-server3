@@ -80,12 +80,29 @@ class WebService
 			throw new BadRequest("In order for 'latest_logs' to work you have to also include 'ns_ground' extensions.");
 
 		$tmp = $request->get_parameter('my_notes');
-		if (!$tmp) $tmp = "none";
-		if (!in_array($tmp, array("none", "desc:text")))
-			throw new InvalidParam("my_notes");
-		if (($tmp != 'none') && ($request->token == null))
-			throw new BadRequest("Level 3 Authentication is required to access my_notes data.");
-		$vars['my_notes'] = $tmp;
+		$vars['my_notes'] = array();
+		if ($tmp && $tmp != 'none') {
+			$tmp = explode('|', $tmp);
+			foreach ($tmp as $elem) {
+				if ($elem == 'none') {
+					/* pass */
+				} elseif (in_array($elem, array('desc:text', 'gc:personal_note'))) {
+					if (in_array('none', $tmp)) {
+						throw new InvalidParam(
+							'my_notes', "You cannot mix 'none' and '$elem'"
+						);
+					}
+					if ($request->token == null) {
+						throw new BadRequest(
+							"Level 3 Authentication is required to access my_notes data."
+						);
+					}
+					$vars['my_notes'][] = $elem;
+				} else {
+					throw new InvalidParam('my_notes', "Invalid list entry: '$elem'");
+				}
+			}
+		}
 
 		$images = $request->get_parameter('images');
 		if (!$images) $images = 'descrefs:nonspoilers';
@@ -155,7 +172,7 @@ class WebService
 			$fields .= "|alt_wpts";
 		if ($vars['recommendations'] != 'none')
 			$fields .= "|recommendations|founds";
-		if ($vars['my_notes'] != 'none')
+		if (count($vars['my_notes']) > 0)
 			$fields .= "|my_notes";
 		if ($vars['latest_logs'])
 			$fields .= "|latest_logs";
@@ -232,7 +249,7 @@ class WebService
 							# The assignment via GC-ID as array key will prohibit duplicate
 							# GC attributes, which can result from
 							# - assigning the same GC ID to multiple A-Codes,
-							# - contradicting attributes in one OC listing, e.g. 24/4 + not 24/7. 
+							# - contradicting attributes in one OC listing, e.g. 24/4 + not 24/7.
 
 							$cache['gc_attrs'][$gc['id']] = $gc;
 							$has_gc_equivs = true;

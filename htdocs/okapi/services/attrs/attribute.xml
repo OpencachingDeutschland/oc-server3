@@ -96,13 +96,10 @@
 				that one Geocaching.com ID may be present in many gc_equivs.</p>
 			</li>
 			<li>
-				<p><b>is_locally_used</b> - boolean, indicates if the attribute is *currently*
-				used by *this* Opencaching server. Or, to be more specific, <b>true</b>
-				means that the attribute CAN *currently* be included in the <b>attr_acodes</b> field
-				of the <b>geocache</b> method in the *current* OKAPI installation.</p>
-				
-				<p>Since currently you cannot search with A-codes (we're implementing S-codes
-				for that purpose), this field is purely informative.</p>
+				<p><b>is_locally_used</b> - boolean, indicates if the attribute is <i>currently</i>
+				used by <i>this</i> Opencaching server. Or, to be more specific, <b>true</b>
+				means that the attribute can currently be included in the <b>attr_acodes</b> field
+				of the <b>geocache</b> method in this OKAPI installation.</p>
 				
 				<p>Note that this flag can change in time. Some attributes may get
 				introduced into other installations, whereas other attributes may
@@ -110,6 +107,16 @@
 				towards global unification of all attributes between all OC nodes,
 				but this process will take time (and probably it will never
 				be 100% complete).</p>
+			</li>
+			<li>
+				<p><b>local_icon_url</b> - an URL pointing to an image associated with
+				this particular attribute in the local OC server, <b>or null</b> if the
+				current server does not have any image for this attribute.</p>
+				
+				<p>Please note, that each OC server uses a different image set for their
+				attributes. All these images come in various sizes and can change over time.
+				In other words, if you want to use this attribute, then you must always be
+				prepared to receive <b>null</b>, or an image of unexpected dimensions.</p>
 			</li>
 			<li>
 				<p><b>is_discontinued</b> - boolean, indicates if the attribute is discontinued.

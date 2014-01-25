@@ -241,14 +241,17 @@
 			<li><b>recommendations</b> - number of recommendations for this cache,</li>
 			<li><b>req_passwd</b> - boolean; states if this cache requires a password
 				in order to submit a "Found it" log entry,</li>
-			<li><b>description</b> - HTML string, description of the cache,</li>
-			<li><b>descriptions</b> - a dictionary (language code =&gt; HTML string) of cache
-				descriptions,</li>
-			<li class="deprecated"><b>hint</b> - HTML-encoded string, cache hints/spoilers;
-				deprecated (<a href="http://code.google.com/p/opencaching-api/issues/detail?id=261">why?</a>),
+			<li><b>description</b> - <a href='%OKAPI:docurl:html%'>HTML string</a>,
+				description of the cache,</li>
+			<li><b>descriptions</b> - a dictionary (language code =&gt;
+				<a href='%OKAPI:docurl:html%'>HTML string</a>) of cache descriptions,</li>
+			<li class="deprecated"><b>hint</b> - <a href='%OKAPI:docurl:html%'>HTML-encoded</a>
+				string, cache hints/spoilers; deprecated
+				(<a href="http://code.google.com/p/opencaching-api/issues/detail?id=261">why?</a>),
 				use <b>hint2</b> instead,</li>
 			<li class="deprecated"><b>hints</b> - a dictionary (language code =&gt;
-				HTML-encoded string) of cache hints/spoilers; deprecated, use hints2 instead,</li>
+				<a href='%OKAPI:docurl:html%'>HTML-encoded</a> string) of cache hints/spoilers;
+				deprecated, use hints2 instead,</li>
 			<li><b>hint2</b> - plain-text string, cache hints/spoilers; in general, hints
 				should not be displayed to the user unless user specifically asks for them,</li>
 			<li><b>hints2</b> - a dictionary (language code =&gt;

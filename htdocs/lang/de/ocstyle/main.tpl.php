@@ -312,6 +312,7 @@
 				<div class="content2">
 					<div class="tplhelp">
 						<?php mnu_EchoHelpLink($tplname); ?>
+			        <!--[if IE]><div></div><![endif]-->
 					</div>
 			
 					<div id="ocmain">

@@ -4,6 +4,7 @@
 /*************************************************************/
 
 /* When overriding any styles, leave a comment in style_screen.css! */
+/* Not needed for IE10 and above */
 
 /* remove shadow margin space */
 .bg-blue02 { margin: 0 0 15px 0; }

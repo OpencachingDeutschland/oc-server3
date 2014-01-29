@@ -11,3 +11,7 @@
 /* buttons */
 .exportlist { background: white; }
 .exportbutton { padding: 1px; width:180px; }
+input.formbutton {
+		border: none !important;
+		filter: progid:DXImageTransform.Microsoft.glow(color=#5f90bb,strength=1);
+}

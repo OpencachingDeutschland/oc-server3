@@ -85,6 +85,7 @@
 	<div id="havefound">
 		<p><img src="resource2/{$opt.template.style}/images/viewcache/have-found.png" width="35" height="35" align="left" style="padding-right: 5px;" alt="{if $cache.type==6}{t}You have attended this event!{/t}{else}{t}You have already found this cache!{/t}{/if}" title="{if $cache.type==6}{t}You have attended this event!{/t}{else}{t}You have already found this cache!{/t}{/if}" /></p>
 	</div>
+	<!--[if IE]><div></div><![endif]-->
 {/if}
 
 <!-- Cachemeta -->

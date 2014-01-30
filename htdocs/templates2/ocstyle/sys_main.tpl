@@ -212,6 +212,7 @@
 
 			{if $helplink != ""}
 				<div class="tplhelp">{$helplink}<img src="resource2/ocstyle/images/misc/32x32-help.png" /></a></div>
+			    <!--[if IE]><div></div><![endif]-->
 			{/if}
 
 			{* <!-- NAVIGATION --> *}				

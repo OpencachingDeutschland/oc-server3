@@ -56,7 +56,6 @@
 		<title><?php echo $tpl_subtitle; ?>{title}</title>
 		<meta name="keywords" content="Geocaching, Geocache, Cache, Geocashing, Schnitzeljagd, Schatzsuche, GPS, Openstreetmap, kostenlos, GPX, GPX download, Koordinaten, Hobby, Natur" />
 		<meta name="description" content="Opencaching.de ist das freie Portal für Geocaching, ein GPS-Schatzsuche-Spiel: Es werden kleine Behälter versteckt, die anhand von GPS-Koordinaten zu finden sind." />
-		<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 		<meta http-equiv="Content-Style-Type" content="text/css" />
 		<meta http-equiv="Content-Language" content="{lang}" />
@@ -68,7 +67,8 @@
 		<link rel="apple-touch-icon" sizes="114x114" href="resource2/{style}/images/oclogo/apple-touch-icon-iphone-retina.png" />
 		<link rel="apple-touch-icon" sizes="144x144" href="resource2/{style}/images/oclogo/apple-touch-icon-ipad-retina.png" />
 		<link rel="stylesheet" type="text/css" media="screen,projection" href="resource2/{style}/css/style_screen.css?ft={screen_css_time}" />
-		<!--[if IE]>
+		<!--[if lte IE 9]>
+			<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
 			<link rel="stylesheet" type="text/css" media="screen,projection" href="resource2/{style}/css/style_screen_msie.css?ft={screen_msie_css_time}" />
 		<![endif]-->
       <script type="text/javascript">

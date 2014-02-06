@@ -578,7 +578,7 @@ input.formbutton_header {
 
 input.formbutton {
 	width:120px;
-	border:1px solid #5f90bb;
+	border:1px solid #5f90bb; /* see adjustment in style_screen_msie.css */
 	padding:1px 0px 1px 0;
 	background-color:#dbe6f1;
 	color: #000000;

@@ -217,7 +217,7 @@ div#langstripe {
 	margin-left:180px;
 	width:520px;
 	color:#505050;
-	font-size:x-small;
+	font-size:10px; /* x-small has different size in different browsers */
 	font-family:sans-serif;
 	border-bottom:1px solid #AAAAAA;
 	text-align:left;
@@ -234,7 +234,7 @@ div#langstripe {
 	margin-left:180px;
 	width:620px;
 	color:#505050;
-	font-size:x-small;
+	font-size:10px; /* x-small has different size in different browsers */
 	font-family:sans-serif;
 	border-bottom:1px solid #AAAAAA;
 	text-align:left;
@@ -314,7 +314,7 @@ ul#statmenu { padding: 0px; margin: 0px;}
 	-webkit-box-shadow: 1px 1px 2px #676767;
 	*/	
 }
-.content2-pagetitle, .content3-pagetitle {overflow: hidden; width: 773px; margin: 0px 0px 10px 0px; padding: 0px 0px 2px 0px; border-bottom: solid 3px rgb(88,144,168); color: rgb(88,144,168); font-weight: bold; font-size: 180%;}
+.content2-pagetitle, .content3-pagetitle {overflow: hidden; width: 773px; min-height:32px; margin: 0px 0px 10px 0px; padding: 0px 0px 2px 0px; border-bottom: solid 3px rgb(88,144,168); color: rgb(88,144,168); font-weight: bold; font-size: 180%;}
 
 .content-title-noshade {margin: 0px; padding: 0px; color: rgb(88,144,168); font-weight: bold; font-size: 100%;}
 .content-title-noshade-size0 {margin: 0px; padding: 0px; color: rgb(88,144,168); font-weight: bold; font-size: 70%;}

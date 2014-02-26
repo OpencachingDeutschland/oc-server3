@@ -109,7 +109,7 @@ class picture
 		if (strpos($sFilename, '.') === false)
 			return;
 
-		$sExtension = mb_strtolower(substr($sFilename, strrpos($sFilename, '.') + 1));
+		$sExtension = 'jpg';//mb_strtolower(substr($sFilename, strrpos($sFilename, '.') + 1));
 		$this->sFileExtension = $sExtension;
 
 		$sUUID = $this->getUUID();
@@ -453,6 +453,71 @@ class picture
 		}
 		return $pl;
 	}
+    /*
+        Shrink picture to a specified maximum size. If present Imagemagick extension will be used, if not gd.
+        Imagick is sharper, faster, need less memory and supports more types.
+        For gd size is limited to 5000px (memory consumption).
+        i prefer FILTER_CATROM because its faster but similiar to lanczos see http://de1.php.net/manual/de/imagick.resizeimage.php
+        parameter:
+        $tmpfile: full name of uploaded file
+        $longSideSize:  if longer side of picture > $longSideSize, then it will be prop. shrinked to
+        returns: true if no error occur, otherwise false
+    */
+    public function shrink($tmpFile,$longSideSize)
+    {
+        global $opt;
+        if (extension_loaded('imagick')) {
+            try {
 
+                $image = new Imagick();
+                $image->readImage($tmpFile);
+                $w=$image->getImageWidth();
+                $h=$image->getImageHeight();
+                $image->setImageResolution(PICTURE_RESOLUTION,PICTURE_RESOLUTION);
+                $image->setImageCompression(Imagick::COMPRESSION_JPEG);
+                $image->setImageCompressionQuality(PICTURE_QUALITY);
+                $image->stripImage(); //clears exif, private data
+                //$newSize=$w<$h?array($w*$longSideSize/$h,$longSideSize):array($longSideSize,$h*$longSideSize/$w);
+                if (max($w,$h)>$longSideSize)
+                    $image->resizeImage($longSideSize,$longSideSize,imagick::FILTER_CATROM,1,true);
+                $result=$image->writeImage($this->getFilename());
+                $image->clear();
+            }
+            catch (Exception $e){
+                if ($image)$image->clear();
+                if($opt['debug'] & DEBUG_DEVELOPER)die($e);
+                $result=false;
+            }
+            return $result;
+        }
+        else if (extension_loaded('gd')) {
+            $imageNew=null;
+            try{
+              $image = imagecreatefromstring(file_get_contents($tmpFile)); ;
+              $w=imagesx($image);
+              $h=imagesy($image);
+              if (max($w,$h)>5000)throw new Exception("Image too large >5000px");
+              if (max($w,$h)<=$longSideSize)
+                $result=imagejpeg($image,$this->getFilename(),PICTURE_QUALITY);
+              else {
+                  $newSize=$w<$h?array($w*$longSideSize/$h,$longSideSize):array($longSideSize,$h*$longSideSize/$w);
+                  $imageNew = imagecreatetruecolor($newSize[0], $newSize[1]);
+                  imagecopyresampled($imageNew, $image, 0, 0, 0, 0,$newSize[0], $newSize[1], $w, $h);
+                  $result=imagejpeg($imageNew,$this->getFilename(),PICTURE_QUALITY);
+                  imagedestroy($imageNew);
+              }
+              imagedestroy($image);
+            }
+            catch (Exception $e){
+                if ($image)imagedestroy($image);
+                if ($imageNew)imagedestroy($imageNew);
+                if($opt['debug'] & DEBUG_DEVELOPER)die($e);
+                $result=false;
+            }
+            return $result;
+
+        }
+        else return false;
+    }
 }
 ?>

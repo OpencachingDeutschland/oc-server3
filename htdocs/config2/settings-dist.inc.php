@@ -315,8 +315,11 @@
 	 */
 	$opt['logic']['pictures']['dir'] = $opt['rootpath'] . 'images/uploads';  // Ocprop
 	$opt['logic']['pictures']['url'] = 'http://devel.opencaching.de/images/uploads';
-	$opt['logic']['pictures']['maxsize'] = 256000;
-	$opt['logic']['pictures']['extensions'] = 'jpg;jpeg;gif;png;bmp';
+	$opt['logic']['pictures']['maxsize'] = 6000*1024;
+    if (extension_loaded('imagick'))
+    $opt['logic']['pictures']['extensions'] = 'jpg;jpeg;gif;png;bmp;tif;psd;pcx;svg;xpm';
+    else
+    $opt['logic']['pictures']['extensions'] = 'jpg;jpeg;gif;png';
 
 	/* Thumbnail sizes
 	 */

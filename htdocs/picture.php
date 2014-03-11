@@ -124,8 +124,9 @@
 				$picture->setFilenames($_FILES['file']['name']);
 				$picture->setLocal(1);
 
-				// try saving file and record
-				if (!move_uploaded_file($_FILES['file']['tmp_name'], $picture->getFilename()))
+
+                // try saving and shrinking if > PICTURE_MAX_LONG_SIDE file and record
+				if (!$picture->shrink($_FILES['file']['tmp_name'],PICTURE_MAX_LONG_SIDE))
 				{
 					$tpl->assign('errorfile', ERROR_UPLOAD_UNKNOWN);
 					$bError = true;

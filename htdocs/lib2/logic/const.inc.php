@@ -83,4 +83,8 @@
 	define('NEW_DATA_LICENSE_PASSIVELY_ACCEPTED',3);     // did not decline license until deadline
 	define('NEW_DATA_LICENSE_PASSIVELY_DECLINED',4);     // could not accept/decline because disabled
 
+    //picture upload/resize parameters
+    define('PICTURE_QUALITY',85);
+    define('PICTURE_RESOLUTION',72);
+    define('PICTURE_MAX_LONG_SIDE',1024);
 ?>

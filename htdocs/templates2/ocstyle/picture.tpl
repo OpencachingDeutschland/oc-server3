@@ -9,13 +9,21 @@
 {literal}
 	function checkForm()
 	{
-		if (document.fpicture.title.value == "")
-		{
+        if (document.fpicture.title.value == "")
+        {
 			alert('{/literal}{t escape=js}Please give the picture a name!{/t}{literal}');
 			resetbutton('ok');
 			return false;
 		}
-		return true;
+        if (typeof FileReader !== "undefined") {
+            var size = document.fpicture.file.files[0].size;
+            var maxsize=+document.fpicture.MAX_FILE_SIZE.value;
+            if (size>maxsize){
+                alert('{/literal}{t escape=js 1=$siteSettings.logic.pictures.maxsize/1024|string_format:"%d"}The file was too big. The maximum file size is %1 KB.{/t}{literal}');
+                return false;
+            }
+        }
+	   return true;
 	}
 {/literal}
 //-->
@@ -69,18 +77,18 @@
 			<tr>
 				<td valign="top">{t}File:{/t}</td>
 				<td colspan="2">
-					<input type="hidden" name="MAX_FILE_SIZE" value="{$opt.logic.pictures.maxsize}" />
-					<input class="input300" name="file" type="file" maxlength="{$opt.logic.pictures.maxsize}" />
+					<input type="hidden" name="MAX_FILE_SIZE" value="{$siteSettings.logic.pictures.maxsize}" />
+					<input class="input300" name="file" type="file" />
 				</td>
 			</tr>
-			{if $errorfile==ERROR_UPLOAD_ERR_NO_FILE}
+   {if $errorfile==ERROR_UPLOAD_ERR_NO_FILE}
 				<tr><td>&nbsp;</td><td colspan="2"><span class="errormsg">{t}No picture file given.{/t}</span></td></tr>
 			{elseif $errorfile==ERROR_UPLOAD_ERR_SIZE}
-				<tr><td>&nbsp;</td><td colspan="2"><span class="errormsg">{t}The file was too big. The maximum file size is 250 KB.{/t}</span></td></tr>
+				<tr><td>&nbsp;</td><td colspan="2"><span class="errormsg">{t 1=$siteSettings.logic.pictures.maxsize/1024|string_format:"%d"}The file was too big. The maximum file size is %1 KB.{/t}</span></td></tr>
 			{elseif $errorfile==ERROR_UPLOAD_UNKNOWN}
 				<tr><td>&nbsp;</td><td colspan="2"><span class="errormsg">{t}The file was not uploaded correctly.{/t}</span></td></tr>
 			{elseif $errorfile==ERROR_UPLOAD_ERR_TYPE}
-				<tr><td>&nbsp;</td><td colspan="2"><span class="errormsg">{t}Only the following picture formats are allowed: BMP, GIF, PNG and JPEG.{/t}</span></td></tr>
+				<tr><td>&nbsp;</td><td colspan="2"><span class="errormsg">{t 1=$siteSettings.logic.pictures.extensions|upper|replace:";":", "}Only the following picture formats are allowed: %1.{/t}</span></td></tr>
 			{/if}
 		{/if}
 
@@ -119,8 +127,8 @@
 			<tr>
 				<td class="help" colspan="3">
 					<img src="resource2/{$opt.template.style}/images/misc/hint.gif" border="0" width="15" height="11" alt="{t}Note{/t}" title="{t}Note{/t}" />
-					{t}Only the following picture formats are allowed: BMP, GIF, PNG and JPEG. We recommend JPEG for photos.{/t}<br />
-					{t}The file size of the pictures must not exeed 250 KB. We recommend 640x480 pixel of picture size.{/t}<br />
+					{t 1=$siteSettings.logic.pictures.extensions|upper|replace:";":", "}Only the following picture formats are allowed: %1. We recommend JPEG for photos.{/t}<br />
+					{t 1=$siteSettings.logic.pictures.maxsize/1024}The file size of the pictures must not exeed %1 KB. We recommend 640x480 pixel of picture size.{/t}<br />
 					{t}After click to upload, it can take a while, until the next page is been shown.{/t}
 				</td>
 			</tr>
@@ -139,8 +147,8 @@
 		<tr>
 			<td class="header-small" colspan="3">
 				<!-- <input type="reset" name="reset" value="{t}Reset{/t}" class="formbutton" onclick="flashbutton('reset')" />&nbsp;&nbsp; -->
-				<input type="submit" name="ok" value="{if $action=='add'}{t}Upload{/t}{else}{t}Submit{/t}{/if}" class="formbutton" onclick="submitbutton('ok')" />
-			</td>
-		</tr>
+    <input type="submit" name="ok" value="{if $action=='add'}{t}Upload{/t}{else}{t}Submit{/t}{/if}" class="formbutton" onclick="submitbutton('ok')" />
+   </td>
+  </tr>
 	</table>
 </form>

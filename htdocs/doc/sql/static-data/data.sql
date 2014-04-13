@@ -902,6 +902,7 @@ INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustrin
 INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('102', 'MNU_START_NEWFEATURES', 'New features', '2115', 'New features', '2115', '0', 'articles.php?page=changelog', '1', '1', '5', '', '0', NULL);
 INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('103', 'MNU_MYPROFILE_OWNERLOGS', 'Log history', '2126', 'Log history', '2126', '0', 'ownerlogs.php', '0', '9', '10', '', '1', NULL);
 INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('104', 'MNU_MYPROFILE_OWNLOGS', 'Log history', '2126', 'Log history', '2126', '0', 'ownlogs.php', '0', '9', '11', '', '1', NULL);
+INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('105', 'MNU_CACHES_OCONLY81', 'OConly-81', '2139', 'OConly-81', '2139', '0', 'oconly81.php', '1', '10', '5', '', '1', NULL);
 
 -- Table sys_trans
 SET NAMES 'utf8';

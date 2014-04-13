@@ -52,7 +52,7 @@
 	if ($cache_id != 0)
 	{ 
 		//get cache record
-		$rs = sql("SELECT `caches`.`cache_id`, `caches`.`wp_oc` AS `wpoc`, 
+		$rs = sql("SELECT `caches`.`cache_id`, `caches`.`wp_oc` AS `wpoc`, `caches`.`cache_id` AS `cacheid`, 
 											`caches`.`user_id` AS `userid`, `caches`.`name`, 
 											`caches`.`status` AS `status`,
 											IFNULL(`stat_caches`.`found`, 0) AS `found`, 

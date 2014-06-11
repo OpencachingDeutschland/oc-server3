@@ -63,10 +63,10 @@
 	<p>
 		Opencaching Deutschland e.V.<br />
 		c/o Michael Vaahsen<br />
-		Hattsteiner Allee 26<br />
-		61250 Usingen<br />
+		Am Weiherboden 21a<br />
+		61276 Weilrod<br />
 		<br />
-		Telefon: 0 60 81 / 912 87 57<br />
+		Telefon: 0 60 83 / 32 99 654<br />
 		E-Mail: verein@opencaching.de<br />
 		<br />
 	</p>

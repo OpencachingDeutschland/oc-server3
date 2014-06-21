@@ -15,6 +15,30 @@
 
 	<div class="changelog-changes">
 
+	<p id="v3.0.11"><strong>OC 3.0 Release 11</strong> &ndash; June 21, 2014</p>
+	<p>New:</p>
+	<ul>
+		<li>get direct link to a specific log entry by right-clicking on its symbol and choosing "copy hyperlink"</li>
+		<li>automatically shrink images on upload</li>
+		<li>confirmation before deleting pictures</li>
+		<li>show link "Nearby search at geocaching.com" in admin area for reported caches</li>
+		<li>user option for receiving the OC newsletter (or not)</li>
+	</ul>
+
+	<p>Changed / improved:</p>
+	<ul>
+		<li>improved button design in IE</li>
+		<li>link to listing on listing page with http:// for better use on webpages</li>
+	</ul>
+
+	<p>Fixed:</p>
+	<ul>
+		<li>fixed positioining of help button in IE</li>
+		<li>fixed generation of direct link to log entry after loading all logs</li>
+		<li>fixed a few typos in german translation and teamlist</li>
+	</ul>
+	<br />
+
 	<p id="v3.0.10"><strong>OC 3.0 Release 10</strong> &ndash; August 24, 2013</p>
 	<p>New:</p>
 	<ul>

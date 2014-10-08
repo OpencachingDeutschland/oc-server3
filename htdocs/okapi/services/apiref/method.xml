@@ -1,55 +1,55 @@
 <xml>
-	<brief>Get information on a given OKAPI service method</brief>
-	<issue-id>13</issue-id>
-	<desc>
-		<p>This method allows you to <b>access API documentation</b> (the same which you
-		are reading just now). Given a method name, it returns a complete method description.</p>
-	</desc>
-	<req name='name'>
-		Name of a method (begins with "services/").
-	</req>
-	<common-format-params/>
-	<returns>
-		<p>A dictionary of the following structure:</p>
-		<ul>
-			<li><b>name</b> - name of the method,</li>
-			<li><b>short_name</b> - name without a path,</li>
-			<li><b>issue_id</b> - ID of the "general discussion" issue (in our project's
-				homepage Issue Tracker) associated with this method <b>or null</b> if this
-				method has associated issue,</li>
-			<li><b>description</b> - HTML-formatted description of what the method does,</li>
-			<li><b>brief_description</b> - brief (max 80 characters), single-line,
-				plain-text description of what the method does,</li>
-			<li><b>ref_url</b> - URL of the documentation page with method description,</li>
-			<li>
-				<b>auth_options</b> - a dictionary which describes authentication
-				requirements for this method, it has a following structure:
-				<ul>
-					<li><b>min_auth_level</b> - integer, in range from 0 to 3,
-						see Introduction page.</li>
-					<li><b>oauth_consumer</b> - true, if requests are required to be signed
-						with OAuth Consumer Key (min_auth_level >= 2),</li>
-					<li><b>oauth_token</b> - true, if requests are required to include an
-						OAuth Token (min_auth_level == 3).</li>
-				</ul>
-			</li>
-			<li><b>arguments</b> - list of dictionaries, describes method
-				arguments. Each dictionary has a following structure:
-				<ul>
-					<li><b>name</b> - name of an argument,</li>
-					<li><b>is_required</b> - boolean, true if the argument is required,</li>
-					<li><b>is_deprecated</b> - boolean, true if the argument is deprecated,</li>
-					<li><b>description</b> - HTML-formatted description of an argument.</li>
-					<li>
-						<p><b>class</b> - space separated list of the following values: <i>public</i>,
-						<i>inherited</i>, <i>common-formatting</i> and <i>deprecated</i>
-						(other values might be introduced in future).</p>
-						<p>Currently these values do not mean anything specific. They are
-						used for different coloring/styling in the documentation pages.</p>
-					</li>
-				</ul>
-			</li>
-			<li><b>returns</b> - HTML-formatted description method's return value.</li>
-		</ul>
-	</returns>
+    <brief>Get information on a given OKAPI service method</brief>
+    <issue-id>13</issue-id>
+    <desc>
+        <p>This method allows you to <b>access API documentation</b> (the same which you
+        are reading just now). Given a method name, it returns a complete method description.</p>
+    </desc>
+    <req name='name'>
+        Name of a method (begins with "services/").
+    </req>
+    <common-format-params/>
+    <returns>
+        <p>A dictionary of the following structure:</p>
+        <ul>
+            <li><b>name</b> - name of the method,</li>
+            <li><b>short_name</b> - name without a path,</li>
+            <li><b>issue_id</b> - ID of the "general discussion" issue (in our project's
+                homepage Issue Tracker) associated with this method <b>or null</b> if this
+                method has associated issue,</li>
+            <li><b>description</b> - HTML-formatted description of what the method does,</li>
+            <li><b>brief_description</b> - brief (max 80 characters), single-line,
+                plain-text description of what the method does,</li>
+            <li><b>ref_url</b> - URL of the documentation page with method description,</li>
+            <li>
+                <b>auth_options</b> - a dictionary which describes authentication
+                requirements for this method, it has a following structure:
+                <ul>
+                    <li><b>min_auth_level</b> - integer, in range from 0 to 3,
+                        see Introduction page.</li>
+                    <li><b>oauth_consumer</b> - true, if requests are required to be signed
+                        with OAuth Consumer Key (min_auth_level >= 2),</li>
+                    <li><b>oauth_token</b> - true, if requests are required to include an
+                        OAuth Token (min_auth_level == 3).</li>
+                </ul>
+            </li>
+            <li><b>arguments</b> - list of dictionaries, describes method
+                arguments. Each dictionary has a following structure:
+                <ul>
+                    <li><b>name</b> - name of an argument,</li>
+                    <li><b>is_required</b> - boolean, true if the argument is required,</li>
+                    <li><b>is_deprecated</b> - boolean, true if the argument is deprecated,</li>
+                    <li><b>description</b> - HTML-formatted description of an argument.</li>
+                    <li>
+                        <p><b>class</b> - space separated list of the following values: <i>public</i>,
+                        <i>inherited</i>, <i>common-formatting</i> and <i>deprecated</i>
+                        (other values might be introduced in future).</p>
+                        <p>Currently these values do not mean anything specific. They are
+                        used for different coloring/styling in the documentation pages.</p>
+                    </li>
+                </ul>
+            </li>
+            <li><b>returns</b> - HTML-formatted description method's return value.</li>
+        </ul>
+    </returns>
 </xml>

@@ -1,134 +1,134 @@
 <xml>
-	<brief>Retrieve data on a single attribute</brief>
-	<issue-id>268</issue-id>
-	<desc>
-		<p>Retrieve data on a single OKAPI geocache-attribute.</p>
-		
-		<p>OKAPI attributes are identified by an unique ID called an <b>A-code</b>.
-		All OKAPI attributes are shared among all OKAPI servers. Once an attribute is
-		published (e.g. via the <b>attribute_index</b> method), it won't
-		disappear in any of the future OKAPI revisions, nor will its meaning change.
-		Some attributes may get discontinued in the future, but they will remain accessible
-		by their original A-code.</p>
-	</desc>
-	<req name='acode'>
-		The A-code of the attribute you're interested in.
-	</req>
-	<opt name='langpref' default='en'>
-		<p>Pipe-separated list of ISO 639-1 language codes. This indicates the
-		order of preference in which language will be chosen for fields like
-		<b>name</b> and <b>description</b>.</p>
-	</opt>
-	<opt name='fields' default='name'>
-		<p>Pipe-separated list of field names which you are interested with.
-		See below for the list of available fields.</p>
-	</opt>
-	<opt name='forward_compatible' default='true'>
-		By default, OKAPI will return an empty placeholder if you ask for an
-		unknown attribute. If you'd like to catch such errors and handle them
-		differently, then you may change this behavior by setting this parameter
-		to <b>false</b>. Then, OKAPI will return HTTP 400 error response,
-		instead of the placeholder (note that it behaves differently in the
-		<b>attributes</b> method).
-	</opt>
-	<common-format-params/>
-	<returns>
-		<p>A dictionary of fields you have selected in the <b>fields</b>
-		parameter. Available fields:</p>
-		
-		<ul>
-			<li>
-				<p><b>acode</b> - string, the A-code. Unique identifier of the
-				attribute.</p>
-			</li>
-			<li>
-				<p><b>name</b> - plaintext string, name of the attribute (language is
-				selected based on your <b>langpref</b> parameter),</p>
-				
-				<p>If you think your language is missing, then feel free to add missing
-				translations directly to OKAPI repository. See
-				<a href='https://code.google.com/p/opencaching-api/source/browse/trunk/okapi/services/attrs/attribute-definitions.xml'>here</a>.</p>
-			</li>
-			<li>
-				<p><b>names</b> - a dictionary of all known names of the attribute, in
-				various languages (ISO 639-1 language code is used as dictionary
-				key).</p>
-			
-				<p>If you think your language is missing, then feel free to add missing
-				translations directly to OKAPI repository. See
-				<a href='https://code.google.com/p/opencaching-api/source/browse/trunk/okapi/services/attrs/attribute-definitions.xml'>here</a>.</p>
-			</li>
-			<li>
-				<b>description</b> - HTML string, description of the attribute (language is
-				selected based on your <b>langpref</b> parameter),
-				
-				<p>If you think your language is missing, then feel free to add missing
-				translations directly to OKAPI repository. See
-				<a href='https://code.google.com/p/opencaching-api/source/browse/trunk/okapi/services/attrs/attribute-definitions.xml'>here</a>.</p>
-			</li>
-			<li>
-				<p><b>descriptions</b> - a dictionary of all known descriptions of the
-				attribute, in various languages (ISO 639-1 language code is used as
-				dictionary key).</p>
-			
-				<p>If you think your language is missing, then feel free to add missing
-				translations directly to OKAPI repository. See
-				<a href='https://code.google.com/p/opencaching-api/source/browse/trunk/okapi/services/attrs/attribute-definitions.xml'>here</a>.</p>
-			</li>
-			<li>
-				<p><b>gc_equivs</b> - a list of Geocaching.com (Groundspeak)
-				attributes, which have exactly the same (or a very similar) meaning. Each
-				attribute is described as a dictionary of the following structure:</p>
-				
-				<ul>
-					<li><b>id</b> - ID of the Geocaching.com attribute,</li>
-					<li>
-						<b>inc</b> - integer, either 1 or 0. See Geocaching.com's
-						XSD for details on its meaning,
-					</li>
-					<li>
-						<b>name</b> - the name of the attribute (as it is included
-						in Geocaching.com GPX files).
-					</li>
-				</ul>
-				
-				<p>Note that one gc_equivs list may have multiple items on it, and
-				that one Geocaching.com ID may be present in many gc_equivs.</p>
-			</li>
-			<li>
-				<p><b>is_locally_used</b> - boolean, indicates if the attribute is <i>currently</i>
-				used by <i>this</i> Opencaching server. Or, to be more specific, <b>true</b>
-				means that the attribute can currently be included in the <b>attr_acodes</b> field
-				of the <b>geocache</b> method in this OKAPI installation.</p>
-				
-				<p>Note that this flag can change in time. Some attributes may get
-				introduced into other installations, whereas other attributes may
-				(temporarily or permanently) stop being used. In general, we are aiming
-				towards global unification of all attributes between all OC nodes,
-				but this process will take time (and probably it will never
-				be 100% complete).</p>
-			</li>
-			<li>
-				<p><b>local_icon_url</b> - an URL pointing to an image associated with
-				this particular attribute in the local OC server, <b>or null</b> if the
-				current server does not have any image for this attribute.</p>
-				
-				<p>Please note, that each OC server uses a different image set for their
-				attributes. All these images come in various sizes and can change over time.
-				In other words, if you want to use this attribute, then you must always be
-				prepared to receive <b>null</b>, or an image of unexpected dimensions.</p>
-			</li>
-			<li>
-				<p><b>is_discontinued</b> - boolean, indicates if the attribute is discontinued.
-				This means that it is no longer in use at OC servers which run current OKAPI
-				versions, i.e. geocaches are no longer tagged with this attribute. However,
-				it may still be in use at servers which have not been updated yet to the
-				current OKAPI version.</p>
-				
-				<p><b>Important:</b> This flag can change in time. Discontinued attributes can
-				"come back to life" later. You can never be 100% sure you will not
-				encounter them in OKAPI responses, so this field is purely informative.</p>
-			</li>
-		</ul>
-	</returns>
+    <brief>Retrieve data on a single attribute</brief>
+    <issue-id>268</issue-id>
+    <desc>
+        <p>Retrieve data on a single OKAPI geocache-attribute.</p>
+
+        <p>OKAPI attributes are identified by an unique ID called an <b>A-code</b>.
+        All OKAPI attributes are shared among all OKAPI servers. Once an attribute is
+        published (e.g. via the <b>attribute_index</b> method), it won't
+        disappear in any of the future OKAPI revisions, nor will its meaning change.
+        Some attributes may get discontinued in the future, but they will remain accessible
+        by their original A-code.</p>
+    </desc>
+    <req name='acode'>
+        The A-code of the attribute you're interested in.
+    </req>
+    <opt name='langpref' default='en'>
+        <p>Pipe-separated list of ISO 639-1 language codes. This indicates the
+        order of preference in which language will be chosen for fields like
+        <b>name</b> and <b>description</b>.</p>
+    </opt>
+    <opt name='fields' default='name'>
+        <p>Pipe-separated list of field names which you are interested with.
+        See below for the list of available fields.</p>
+    </opt>
+    <opt name='forward_compatible' default='true'>
+        By default, OKAPI will return an empty placeholder if you ask for an
+        unknown attribute. If you'd like to catch such errors and handle them
+        differently, then you may change this behavior by setting this parameter
+        to <b>false</b>. Then, OKAPI will return HTTP 400 error response,
+        instead of the placeholder (note that it behaves differently in the
+        <b>attributes</b> method).
+    </opt>
+    <common-format-params/>
+    <returns>
+        <p>A dictionary of fields you have selected in the <b>fields</b>
+        parameter. Available fields:</p>
+
+        <ul>
+            <li>
+                <p><b>acode</b> - string, the A-code. Unique identifier of the
+                attribute.</p>
+            </li>
+            <li>
+                <p><b>name</b> - plaintext string, name of the attribute (language is
+                selected based on your <b>langpref</b> parameter),</p>
+
+                <p>If you think your language is missing, then feel free to add missing
+                translations directly to OKAPI repository. See
+                <a href='https://code.google.com/p/opencaching-api/source/browse/trunk/okapi/services/attrs/attribute-definitions.xml'>here</a>.</p>
+            </li>
+            <li>
+                <p><b>names</b> - a dictionary of all known names of the attribute, in
+                various languages (ISO 639-1 language code is used as dictionary
+                key).</p>
+
+                <p>If you think your language is missing, then feel free to add missing
+                translations directly to OKAPI repository. See
+                <a href='https://code.google.com/p/opencaching-api/source/browse/trunk/okapi/services/attrs/attribute-definitions.xml'>here</a>.</p>
+            </li>
+            <li>
+                <b>description</b> - HTML string, description of the attribute (language is
+                selected based on your <b>langpref</b> parameter),
+
+                <p>If you think your language is missing, then feel free to add missing
+                translations directly to OKAPI repository. See
+                <a href='https://code.google.com/p/opencaching-api/source/browse/trunk/okapi/services/attrs/attribute-definitions.xml'>here</a>.</p>
+            </li>
+            <li>
+                <p><b>descriptions</b> - a dictionary of all known descriptions of the
+                attribute, in various languages (ISO 639-1 language code is used as
+                dictionary key).</p>
+
+                <p>If you think your language is missing, then feel free to add missing
+                translations directly to OKAPI repository. See
+                <a href='https://code.google.com/p/opencaching-api/source/browse/trunk/okapi/services/attrs/attribute-definitions.xml'>here</a>.</p>
+            </li>
+            <li>
+                <p><b>gc_equivs</b> - a list of Geocaching.com (Groundspeak)
+                attributes, which have exactly the same (or a very similar) meaning. Each
+                attribute is described as a dictionary of the following structure:</p>
+
+                <ul>
+                    <li><b>id</b> - ID of the Geocaching.com attribute,</li>
+                    <li>
+                        <b>inc</b> - integer, either 1 or 0. See Geocaching.com's
+                        XSD for details on its meaning,
+                    </li>
+                    <li>
+                        <b>name</b> - the name of the attribute (as it is included
+                        in Geocaching.com GPX files).
+                    </li>
+                </ul>
+
+                <p>Note that one gc_equivs list may have multiple items on it, and
+                that one Geocaching.com ID may be present in many gc_equivs.</p>
+            </li>
+            <li>
+                <p><b>is_locally_used</b> - boolean, indicates if the attribute is <i>currently</i>
+                used by <i>this</i> Opencaching server. Or, to be more specific, <b>true</b>
+                means that the attribute can currently be included in the <b>attr_acodes</b> field
+                of the <b>geocache</b> method in this OKAPI installation.</p>
+
+                <p>Note that this flag can change in time. Some attributes may get
+                introduced into other installations, whereas other attributes may
+                (temporarily or permanently) stop being used. In general, we are aiming
+                towards global unification of all attributes between all OC nodes,
+                but this process will take time (and probably it will never
+                be 100% complete).</p>
+            </li>
+            <li>
+                <p><b>local_icon_url</b> - an URL pointing to an image associated with
+                this particular attribute in the local OC server, <b>or null</b> if the
+                current server does not have any image for this attribute.</p>
+
+                <p>Please note, that each OC server uses a different image set for their
+                attributes. All these images come in various sizes and can change over time.
+                In other words, if you want to use this attribute, then you must always be
+                prepared to receive <b>null</b>, or an image of unexpected dimensions.</p>
+            </li>
+            <li>
+                <p><b>is_discontinued</b> - boolean, indicates if the attribute is discontinued.
+                This means that it is no longer in use at OC servers which run current OKAPI
+                versions, i.e. geocaches are no longer tagged with this attribute. However,
+                it may still be in use at servers which have not been updated yet to the
+                current OKAPI version.</p>
+
+                <p><b>Important:</b> This flag can change in time. Discontinued attributes can
+                "come back to life" later. You can never be 100% sure you will not
+                encounter them in OKAPI responses, so this field is purely informative.</p>
+            </li>
+        </ul>
+    </returns>
 </xml>

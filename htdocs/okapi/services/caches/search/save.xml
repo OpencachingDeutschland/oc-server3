@@ -1,36 +1,36 @@
 <xml>
-	<brief>Save a search result set</brief>
-	<issue-id>163</issue-id>
-	<desc>
-		<p>This works similar to the <b>search/all</b> method, but the returned
-		set of geocaches is temporarilly stored, instead of being directly
-		returned to you.</p>
-		<p>You may want to use this method when you don't want your search
-		results modified while the user is browsing through them, page by page.
-		To view a portion of a saved search, use the <b>search/all</b>
-		method with proper <b>set_and</b> <u>and <b>status</b></u> (!)
-		parameters.</p>
-	</desc>
-	<opt name='min_store' default="300">
-		The amount of time (in seconds) after which you allow OKAPI to delete
-		the set (OKAPI <b>may</b> remove it, but doesn't have to).
-		The maximum allowed value is 64800 (18 hours).
-	</opt>
-	<opt name='ref_max_age' default="300">
-		<p>If OKAPI finds an existing result set which was created for your
-		search query, it may return the ID of this existing set (and possibly
-		extend its lifetime so it fits your <b>min_store</b>). What is the
-		maximum age of the existing result set which you are willing to accept?</p>
-		<p>This should be an integer (in seconds) <b>or</b> a special
-		<b>nolimit</b> value. It must be greater or equal to 300 (5 minutes).</p>
-	</opt>
-	<import-params method='services/caches/search/all' except="offset|limit|order_by"/>
-	<common-format-params/>
-	<returns>
-		<p>A dictionary of the following structure:</p>
-		<ul>
-			<li><b>set_id</b> - string, the identifier of your saved set,
-			for future reference.</li>
-		</ul>
-	</returns>
+    <brief>Save a search result set</brief>
+    <issue-id>163</issue-id>
+    <desc>
+        <p>This works similar to the <b>search/all</b> method, but the returned
+        set of geocaches is temporarilly stored, instead of being directly
+        returned to you.</p>
+        <p>You may want to use this method when you don't want your search
+        results modified while the user is browsing through them, page by page.
+        To view a portion of a saved search, use the <b>search/all</b>
+        method with proper <b>set_and</b> <u>and <b>status</b></u> (!)
+        parameters.</p>
+    </desc>
+    <opt name='min_store' default="300">
+        The amount of time (in seconds) after which you allow OKAPI to delete
+        the set (OKAPI <b>may</b> remove it, but doesn't have to).
+        The maximum allowed value is 64800 (18 hours).
+    </opt>
+    <opt name='ref_max_age' default="300">
+        <p>If OKAPI finds an existing result set which was created for your
+        search query, it may return the ID of this existing set (and possibly
+        extend its lifetime so it fits your <b>min_store</b>). What is the
+        maximum age of the existing result set which you are willing to accept?</p>
+        <p>This should be an integer (in seconds) <b>or</b> a special
+        <b>nolimit</b> value. It must be greater or equal to 300 (5 minutes).</p>
+    </opt>
+    <import-params method='services/caches/search/all' except="offset|limit|order_by"/>
+    <common-format-params/>
+    <returns>
+        <p>A dictionary of the following structure:</p>
+        <ul>
+            <li><b>set_id</b> - string, the identifier of your saved set,
+            for future reference.</li>
+        </ul>
+    </returns>
 </xml>

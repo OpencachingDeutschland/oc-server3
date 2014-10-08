@@ -1,18 +1,18 @@
 <xml>
-	<brief>Get cache map tile</brief>
-	<issue-id>150</issue-id>
-	<desc>
-		<p><b>CLOSED BETA</b> version. Due to long-term performance tests, currently
-		this method is not publicly accessible. Let us know if you're interested
-		in using it.</p>
-		<p>Use this method to retrieve a tile-map of all caches included in your search
-		result.</p>
-	</desc>
-	<req name='z'>Zoom level (0..21).</req>
-	<req name='x'>Tile number on the X axis.</req>
-	<req name='y'>Tile number on the Y axis.</req>
-	<import-params method="services/caches/search/save"/>
-	<returns>
-		The PNG image with the requested map tile.
-	</returns>
+    <brief>Get cache map tile</brief>
+    <issue-id>150</issue-id>
+    <desc>
+        <p><b>CLOSED BETA</b> version. Due to long-term performance tests, currently
+        this method is not publicly accessible. Let us know if you're interested
+        in using it.</p>
+        <p>Use this method to retrieve a tile-map of all caches included in your search
+        result.</p>
+    </desc>
+    <req name='z'>Zoom level (0..21).</req>
+    <req name='x'>Tile number on the X axis.</req>
+    <req name='y'>Tile number on the Y axis.</req>
+    <import-params method="services/caches/search/save"/>
+    <returns>
+        The PNG image with the requested map tile.
+    </returns>
 </xml>

@@ -1,17 +1,17 @@
 <xml>
-	<brief>Get a list of OKAPI methods with brief descriptions</brief>
-	<issue-id>12</issue-id>
-	<desc>
-		<p>Get a list of OKAPI methods with brief descriptions.</p>
-	</desc>
-	<common-format-params/>
-	<returns>
-		A list of dictionaries, each of which contains one API
-		method description in the following format:
-		<ul>
-			<li><b>name</b> - name of a method,</li>
-			<li><b>brief_description</b> - brief (max 80 characters), single-line,
-				plain-text description of what the method does.</li>
-		</ul>
-	</returns>
+    <brief>Get a list of OKAPI methods with brief descriptions</brief>
+    <issue-id>12</issue-id>
+    <desc>
+        <p>Get a list of OKAPI methods with brief descriptions.</p>
+    </desc>
+    <common-format-params/>
+    <returns>
+        A list of dictionaries, each of which contains one API
+        method description in the following format:
+        <ul>
+            <li><b>name</b> - name of a method,</li>
+            <li><b>brief_description</b> - brief (max 80 characters), single-line,
+                plain-text description of what the method does.</li>
+        </ul>
+    </returns>
 </xml>

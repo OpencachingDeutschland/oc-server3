@@ -1,83 +1,83 @@
 <!doctype html>
 <html lang='en'>
-	<head>
-		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-		<title>OKAPI JavaScript Example</title>
-		<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js'></script>
-		<script>
-			$(function() {
-			
-				// Fill the OKAPI installations select-box with dynamic installation list.
-				
-				$.ajax({
-					url: 'http://opencaching.pl/okapi/services/apisrv/installations',
-					dataType: 'json',
-					success: function(installations) {
-						for (var i in installations) {
-							var inst = installations[i];
-							$('#installations').append(
-								$("<option></option>")
-								.attr('value', inst.okapi_base_url)
-								.text(inst.okapi_base_url)
-							);
-						}
-					}
-				});
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <title>OKAPI JavaScript Example</title>
+        <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js'></script>
+        <script>
+            $(function() {
 
-				$('#get_nearest').click(function() {
-					$('#get_nearest').hide();
-					$('#results').text("Attempting to access your location...");
-					if (navigator.geolocation) 
-					{
-						navigator.geolocation.getCurrentPosition(
-							function(position) {
-								$('#results').text("Location acquired! Search for geocaches...");
-								$.ajax({
-									url: $('#installations option:selected').attr('value') + 'services/caches/shortcuts/search_and_retrieve',
-									dataType: 'json',
-									data: {
-										'search_method': 'services/caches/search/nearest',
-										'search_params': '{"center": "' + position.coords.latitude + "|" +
-											position.coords.longitude + '", "limit": 5}',
-										'retr_method': 'services/caches/geocaches',
-										'retr_params': '{"fields": "code|name|url"}',
-										'wrap': 'false',
-										'consumer_key': $('#consumer_key').attr('value')
-									},
-									success: function(response) {
-										var ul = $("<ul></ul>");
-										for (var cache_code in response) {
-											var cache = response[cache_code];
-											var li = $("<li><a></a></li>");
-											li.find('a').attr('href', cache.url).text(cache.name);
-											ul.append(li);
-										}
-										$('#results').html("<p>Nearest geocaches:</p>");
-										$('#results').append(ul);
-									},
-									error: function() {
-										$('#results').text("Error :( Have you entered a valid Consumer Key?");
-									}
-								});
-							}, 
-							function (error) {
-								$('#results').text("Your browser refused to give me your location.");
-							}
-						);
-					} else {
-						$('#results').text("Your browser does not support geolocation.");
-					}
-				});
-			});
-		</script>
-		<style>
-			a { color: #008; text-decoration: underline; cursor: pointer; }
-		</style>
-	</head>
-	<body>
-		<p>Select OKAPI installation: <select id='installations'></select></p>
-		<p>Enter your Consumer Key: <input type='text' id='consumer_key'></p>
-		<p><a id='get_nearest'>Click here to view the nearest caches</a></p>
-		<div id='results'></div>
-	</body>
+                // Fill the OKAPI installations select-box with dynamic installation list.
+
+                $.ajax({
+                    url: 'http://opencaching.pl/okapi/services/apisrv/installations',
+                    dataType: 'json',
+                    success: function(installations) {
+                        for (var i in installations) {
+                            var inst = installations[i];
+                            $('#installations').append(
+                                $("<option></option>")
+                                .attr('value', inst.okapi_base_url)
+                                .text(inst.okapi_base_url)
+                            );
+                        }
+                    }
+                });
+
+                $('#get_nearest').click(function() {
+                    $('#get_nearest').hide();
+                    $('#results').text("Attempting to access your location...");
+                    if (navigator.geolocation)
+                    {
+                        navigator.geolocation.getCurrentPosition(
+                            function(position) {
+                                $('#results').text("Location acquired! Search for geocaches...");
+                                $.ajax({
+                                    url: $('#installations option:selected').attr('value') + 'services/caches/shortcuts/search_and_retrieve',
+                                    dataType: 'json',
+                                    data: {
+                                        'search_method': 'services/caches/search/nearest',
+                                        'search_params': '{"center": "' + position.coords.latitude + "|" +
+                                            position.coords.longitude + '", "limit": 5}',
+                                        'retr_method': 'services/caches/geocaches',
+                                        'retr_params': '{"fields": "code|name|url"}',
+                                        'wrap': 'false',
+                                        'consumer_key': $('#consumer_key').attr('value')
+                                    },
+                                    success: function(response) {
+                                        var ul = $("<ul></ul>");
+                                        for (var cache_code in response) {
+                                            var cache = response[cache_code];
+                                            var li = $("<li><a></a></li>");
+                                            li.find('a').attr('href', cache.url).text(cache.name);
+                                            ul.append(li);
+                                        }
+                                        $('#results').html("<p>Nearest geocaches:</p>");
+                                        $('#results').append(ul);
+                                    },
+                                    error: function() {
+                                        $('#results').text("Error :( Have you entered a valid Consumer Key?");
+                                    }
+                                });
+                            },
+                            function (error) {
+                                $('#results').text("Your browser refused to give me your location.");
+                            }
+                        );
+                    } else {
+                        $('#results').text("Your browser does not support geolocation.");
+                    }
+                });
+            });
+        </script>
+        <style>
+            a { color: #008; text-decoration: underline; cursor: pointer; }
+        </style>
+    </head>
+    <body>
+        <p>Select OKAPI installation: <select id='installations'></select></p>
+        <p>Enter your Consumer Key: <input type='text' id='consumer_key'></p>
+        <p><a id='get_nearest'>Click here to view the nearest caches</a></p>
+        <div id='results'></div>
+    </body>
 </html>

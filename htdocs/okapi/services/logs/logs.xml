@@ -1,31 +1,31 @@
 <xml>
-	<brief>Retrieve all log entries for the specified geocache</brief>
-	<issue-id>41</issue-id>
-	<desc>
-		<p>Retrieve the log entries for the specified geocache. Use the offset and
-		limit parameters for pagination. If you want only the latest entries, you
-		may also use the <b>latest_logs</b> field in the services/caches/geocache method.</p>
-		<p>Log entries are ordered by a descending date of the entry.</p>
-	</desc>
-	<req name='cache_code'>
-		<p>Code of the geocache.</p>
-	</req>
-	<opt name='fields' default='uuid|date|user|type|comment'>
-		<p>Same as in the services/logs/entry method. Pipe-separated list
-		of field names which you are interested with.
-		See services/logs/entry method for a list of available values.</p>
-	</opt>
-	<opt name='offset' default='0'>
-		<p>Number of entries to skip at the beginning. Use this along the <b>limit</b> parameter
-		for pagination.</p>
-	</opt>
-	<opt name='limit' default='none'>
-		<p>Maximum number of entries to return or <b>none</b>
-		if you want all the entries.</p>
-	</opt>
-	<common-format-params/>
-	<returns>
-		<p>A list of log entries, ordered by date. Each log entry is a dictionary of a format
-		described in the "entry" method.</p>
-	</returns>
+    <brief>Retrieve all log entries for the specified geocache</brief>
+    <issue-id>41</issue-id>
+    <desc>
+        <p>Retrieve the log entries for the specified geocache. Use the offset and
+        limit parameters for pagination. If you want only the latest entries, you
+        may also use the <b>latest_logs</b> field in the services/caches/geocache method.</p>
+        <p>Log entries are ordered by a descending date of the entry.</p>
+    </desc>
+    <req name='cache_code'>
+        <p>Code of the geocache.</p>
+    </req>
+    <opt name='fields' default='uuid|date|user|type|comment'>
+        <p>Same as in the services/logs/entry method. Pipe-separated list
+        of field names which you are interested with.
+        See services/logs/entry method for a list of available values.</p>
+    </opt>
+    <opt name='offset' default='0'>
+        <p>Number of entries to skip at the beginning. Use this along the <b>limit</b> parameter
+        for pagination.</p>
+    </opt>
+    <opt name='limit' default='none'>
+        <p>Maximum number of entries to return or <b>none</b>
+        if you want all the entries.</p>
+    </opt>
+    <common-format-params/>
+    <returns>
+        <p>A list of log entries, ordered by date. Each log entry is a dictionary of a format
+        described in the "entry" method.</p>
+    </returns>
 </xml>

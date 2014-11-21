@@ -1,27 +1,27 @@
 <xml>
-	<brief>Retrieve information on multiple log entries</brief>
-	<issue-id>107</issue-id>
-	<desc>
-		<p>This method works like the services/logs/entry method, but works
-		with multiple log entries (instead of only one).</p>
-	</desc>
-	<req name='log_uuids'>
-		<p>Pipe-separated list of UUIDs. These represent the log entries you
-		are interested in. No more than 500 codes are allowed.
-		Unlike in the "entry" method, this CAN be an empty string (it will
-		result in an empty, but valid, response).</p>
-	</req>
-	<opt name='fields' default='date|user|type|comment'>
-		<p>Same as in the services/logs/entry method. Pipe-separated list
-		of field names which you are interested with.
-		See services/logs/entry method for a list of available values.</p>
-	</opt>
-	<common-format-params/>
-	<returns>
-		<p>A dictionary. UUIDs you provide will be mapped to dictionary keys,
-		and each value will be a dictionary of fields you have selected.</p>
-		<p>Value of <b>null</b> means that the given UUID haven't been found.
-		(This behavior is different than in the services/logs/entry method, which
-		responds with an HTTP 400 error in such case.)</p>
-	</returns>
+    <brief>Retrieve information on multiple log entries</brief>
+    <issue-id>107</issue-id>
+    <desc>
+        <p>This method works like the services/logs/entry method, but works
+        with multiple log entries (instead of only one).</p>
+    </desc>
+    <req name='log_uuids'>
+        <p>Pipe-separated list of UUIDs. These represent the log entries you
+        are interested in. No more than 500 codes are allowed.
+        Unlike in the "entry" method, this CAN be an empty string (it will
+        result in an empty, but valid, response).</p>
+    </req>
+    <opt name='fields' default='date|user|type|comment'>
+        <p>Same as in the services/logs/entry method. Pipe-separated list
+        of field names which you are interested with.
+        See services/logs/entry method for a list of available values.</p>
+    </opt>
+    <common-format-params/>
+    <returns>
+        <p>A dictionary. UUIDs you provide will be mapped to dictionary keys,
+        and each value will be a dictionary of fields you have selected.</p>
+        <p>Value of <b>null</b> means that the given UUID haven't been found.
+        (This behavior is different than in the services/logs/entry method, which
+        responds with an HTTP 400 error in such case.)</p>
+    </returns>
 </xml>

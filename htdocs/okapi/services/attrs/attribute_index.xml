@@ -1,35 +1,35 @@
 <xml>
-	<brief>Get the list of all OKAPI attributes (A-codes)</brief>
-	<issue-id>270</issue-id>
-	<desc>
-		<p>This method returns <b>all</b> currently defined OKAPI geocache-attributes.
-		It is useful when you want to cache the data on the client-side.</p>
-		
-		<p>Keep in mind that the number of attributes will grow. Hence, <b>if your application
-		uses multiple OKAPI servers, then it's best to use one of the frequently
-		updated servers for pre-caching attribute data</b> (currently, Opencaching.PL
-		is the most frequently updated installation). Also, you should never assume
-		that you have the complete list cached: A new attribute may be created at any time!</p>
-		
-		<p>Once an attribute is published via this method, it won't disappear, nor
-		will its meaning change (names and descriptions can be slightly altered though).</p>
-	</desc>
-	<opt name='langpref' default='en'>
-		Works the same as in the <b>attribute</b> method.
-	</opt>
-	<opt name='fields' default='name'>
-		Works the same as in the <b>attribute</b> method.
-	</opt>
-	<opt name='only_locally_used' default='false'>
-		<p>By default, all known attributes are returned - including those which
-		were used a couple of years back, or those which are used by other OC nodes
-		(and may perhaps be used by the local OC node in the future). If you're
-		interested only in the attributes *currently used* within *this* Opencaching
-		installation, then you may set this parameter to <b>true</b>.</p>
-	</opt>
-	<common-format-params/>
-	<returns>
-		A dictionary. All A-codes will be mapped to dictionary keys, and
-		each value will be an object, as described in the <b>attribute</b> method.
-	</returns>
+    <brief>Get the list of all OKAPI attributes (A-codes)</brief>
+    <issue-id>270</issue-id>
+    <desc>
+        <p>This method returns <b>all</b> currently defined OKAPI geocache-attributes.
+        It is useful when you want to cache the data on the client-side.</p>
+
+        <p>Keep in mind that the number of attributes will grow. Hence, <b>if your application
+        uses multiple OKAPI servers, then it's best to use one of the frequently
+        updated servers for pre-caching attribute data</b> (currently, Opencaching.PL
+        is the most frequently updated installation). Also, you should never assume
+        that you have the complete list cached: A new attribute may be created at any time!</p>
+
+        <p>Once an attribute is published via this method, it won't disappear, nor
+        will its meaning change (names and descriptions can be slightly altered though).</p>
+    </desc>
+    <opt name='langpref' default='en'>
+        Works the same as in the <b>attribute</b> method.
+    </opt>
+    <opt name='fields' default='name'>
+        Works the same as in the <b>attribute</b> method.
+    </opt>
+    <opt name='only_locally_used' default='false'>
+        <p>By default, all known attributes are returned - including those which
+        were used a couple of years back, or those which are used by other OC nodes
+        (and may perhaps be used by the local OC node in the future). If you're
+        interested only in the attributes *currently used* within *this* Opencaching
+        installation, then you may set this parameter to <b>true</b>.</p>
+    </opt>
+    <common-format-params/>
+    <returns>
+        A dictionary. All A-codes will be mapped to dictionary keys, and
+        each value will be an object, as described in the <b>attribute</b> method.
+    </returns>
 </xml>

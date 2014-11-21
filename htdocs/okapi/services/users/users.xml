@@ -1,25 +1,25 @@
 <xml>
-	<brief>Retrieve information on multiple users</brief>
-	<issue-id>27</issue-id>
-	<desc>
-		<p>This method works like the services/users/user method, but works
-		with multiple users (instead of only one).</p>
-	</desc>
-	<req name='user_uuids'>
-		<p>Pipe-separated list of user IDs. No more than 500 IDs are allowed.</p>
-	</req>
-	<req name='fields'>
-		<p>Same as in the services/users/user method. Pipe-separated list
-		of field names which you are interested with.
-		See services/users/user method for a list available values.</p>
-	</req>
-	<common-format-params/>
-	<returns>
-		<p>A dictionary. User IDs you provide will be mapped to dictionary keys,
-		and each value will be a dictionary of fields you have selected.</p>
-		
-		<p>Value of <b>null</b> means that the given user haven't been found.
-		(This behavior is different than in the services/users/user method, which
-		responds with an HTTP 400 error in such case.)</p>
-	</returns>
+    <brief>Retrieve information on multiple users</brief>
+    <issue-id>27</issue-id>
+    <desc>
+        <p>This method works like the services/users/user method, but works
+        with multiple users (instead of only one).</p>
+    </desc>
+    <req name='user_uuids'>
+        <p>Pipe-separated list of user IDs. No more than 500 IDs are allowed.</p>
+    </req>
+    <req name='fields'>
+        <p>Same as in the services/users/user method. Pipe-separated list
+        of field names which you are interested with.
+        See services/users/user method for a list available values.</p>
+    </req>
+    <common-format-params/>
+    <returns>
+        <p>A dictionary. User IDs you provide will be mapped to dictionary keys,
+        and each value will be a dictionary of fields you have selected.</p>
+
+        <p>Value of <b>null</b> means that the given user haven't been found.
+        (This behavior is different than in the services/users/user method, which
+        responds with an HTTP 400 error in such case.)</p>
+    </returns>
 </xml>

@@ -1,110 +1,110 @@
 <xml>
-	<brief>Submit a log entry</brief>
-	<issue-id>42</issue-id>
-	<desc>
-		<p>Submit a log entry for the geocache. Please note, that you won't be
-		able to use this method until you learn to handle OAuth.</p>
-	</desc>
-	<req name='cache_code'>
-		<p>Code of the geocache.</p>
-	</req>
-	<req name='logtype'>
-		<p>Type of an entry. This should be one of:</p>
-		<ul>
-			<li>
-				<i>Will attend</i>, <i>Attended</i> or <i>Comment</i> for Event caches;
-			</li>
-			<li>
-				<i>Found it</i>, <i>Didn't find it</i> or <i>Comment</i> for all other
-				cache types.
-			</li>
-		</ul>
-	</req>
-	<opt name='comment'>
-		<p>Text to be submitted with the log entry.</p>
-	</opt>
-	<opt name='comment_format' default='auto'>
-		<p>Indicates the format of your <b>comment</b>. Three values allowed:
-		<b>auto</b>, <b>html</b> or <b>plaintext</b>. Usually, you should <b>not</b>
-		use the <b>auto</b> option, because its exact behavior is unspecified
-		and may depend on the installation
-		(<a href='https://code.google.com/p/opencaching-api/issues/detail?id=124'>more info</a>).</p>
+    <brief>Submit a log entry</brief>
+    <issue-id>42</issue-id>
+    <desc>
+        <p>Submit a log entry for the geocache. Please note, that you won't be
+        able to use this method until you learn to handle OAuth.</p>
+    </desc>
+    <req name='cache_code'>
+        <p>Code of the geocache.</p>
+    </req>
+    <req name='logtype'>
+        <p>Type of an entry. This should be one of:</p>
+        <ul>
+            <li>
+                <i>Will attend</i>, <i>Attended</i> or <i>Comment</i> for Event caches;
+            </li>
+            <li>
+                <i>Found it</i>, <i>Didn't find it</i> or <i>Comment</i> for all other
+                cache types.
+            </li>
+        </ul>
+    </req>
+    <opt name='comment'>
+        <p>Text to be submitted with the log entry.</p>
+    </opt>
+    <opt name='comment_format' default='auto'>
+        <p>Indicates the format of your <b>comment</b>. Three values allowed:
+        <b>auto</b>, <b>html</b> or <b>plaintext</b>. Usually, you should <b>not</b>
+        use the <b>auto</b> option, because its exact behavior is unspecified
+        and may depend on the installation
+        (<a href='https://code.google.com/p/opencaching-api/issues/detail?id=124'>more info</a>).</p>
 
-		<p><b>Important note:</b> The subset of allowed HTML elements is left undefined
-		and may change in the future. For future-compatibility, you should use only
-		basic formatting tags.</p>
-	</opt>
-	<opt name='when'>
-		<p>A date and time string. This should be in ISO 8601 format (currently any
-		format acceptable by PHP's <a href='http://pl2.php.net/strtotime'>strtotime</a>
-		function also will do, but most of them don't handle time zones properly,
-		try to use ISO 8601!).</p>
-		<p>Indicates when the cache was found. If given, the log will be published
-		with the given date and time. If not, log will be published using the current
-		date and time.</p>
-	</opt>
-	<opt name='password'>
-		<p>Some caches require a password in order to submit a "Found it" log entry.
-		You may check if this cache requires password with <b>req_passwd</b> field
-		of the services/caches/geocache method.</p>
-	</opt>
-	<opt name='langpref' default='en'>
-		<p>Pipe-separated list of ISO 639-1 language codes. This indicates the
-		order of preference in which language will be chosen for error messages.</p>
-	</opt>
-	<opt name='on_duplicate' default='silent_success'>
-		<p>How should OKAPI react when you are trying to submit a duplicate entry?
-		One of the following values:</p>
-		<ul>
-			<li><b>silent_success</b> - try to respond with success=true, but don't
-			add a new log entry (existing log_uuid will be returned),</li>
-			<li><b>user_error</b> - respond with success=false and a proper user message,</li>
-			<li><b>continue</b> - don't detect duplicates (note, that this will still
-			fail in some cases, i.e. when you're trying to submit a "Found it" entry for an
-			already found cache).</li>
-		</ul>
-		<p>Note, that duplicate detection may take the <b>when</b> parameter into account.
-		When you don't supply it, "when" is generated for you. This means that you may
-		have to supply the "when" parameter if you want duplicate detection to work.</p>
-	</opt>
-	<opt name='rating'>
-		<p>An integer in range between 1 and 5 - user's optional rating of a found cache.</p>
-		<p>Important: <b>logtype</b> has to be "Found it" in order to use this argument.</p>
-		<p>Note: You should allow your user to <b>not</b> rate a found cache.</p>
-		<p>Note: Currently, some OC installations do not support cache ratings. On such installations
-		user's rating will be <b>ignored</b> (if you include the rating, log entry will be posted
-		successfully, but rating will be ignored).</p>
-	</opt>
-	<opt name='recommend' default='false'>
-		<p>Set to <b>true</b> if the user wants to recommend this cache.</p>
-		<p>Important: <b>logtype</b> has to be "Found it" or "Attended" in order to
-		use this argument. However, some installations do not support recommending
-		event caches (if you include a recommendation, the log entry will be posted
-		successfully, but the recommendation will be <b>ignored</b>).</p>
-		<p>Recommending may only succeed when the user meets certain criteria
-		set on him by the OC site. If criteria are not met, the request will
-		end with user error (HTTP 200, success=false).</p>
-	</opt>
-	<opt name='needs_maintenance' default='false'>
-		<p>Set to <b>true</b> if the user thinks that the cache needs some special attension
-		of its owner. Users should describe the reason for maintenance in their comments.</p>
-		<p>Note: Depending on OC installation and user's log entry type, OKAPI may actually
-		publish two separate log entries when you check this flag (one of them with empty
-		comment). Even then, you will still receive only one UUID reference (pointing to
-		only one of those entries). Moreover, on some OC servers this flag might be
-		<b>completely ignored</b> (not all OC servers support this feature).</p>
-		<p>Note: Currently, this is not allowed for Event Caches (you will get a HTTP 200
-		"user friendly" response).</p>
-	</opt>
-	<common-format-params/>
-	<returns>
-		<p>A dictionary of the following structure:</p>
-		<ul>
-			<li><b>success</b> - true, if the log entry was submitted successfully,</li>
-			<li><b>message</b> - plain-text string, a message for the user, which acknowledges success
-				or describes an error (usually you want to display this only when success is false),</li>
-			<li><b>log_uuid</b> - ID of the newly created log entry, <b>or null</b>
-				in case of an error.</li>
-		</ul>
-	</returns>
+        <p><b>Important note:</b> The subset of allowed HTML elements is left undefined
+        and may change in the future. For future-compatibility, you should use only
+        basic formatting tags.</p>
+    </opt>
+    <opt name='when'>
+        <p>A date and time string. This should be in ISO 8601 format (currently any
+        format acceptable by PHP's <a href='http://pl2.php.net/strtotime'>strtotime</a>
+        function also will do, but most of them don't handle time zones properly,
+        try to use ISO 8601!).</p>
+        <p>Indicates when the cache was found. If given, the log will be published
+        with the given date and time. If not, log will be published using the current
+        date and time.</p>
+    </opt>
+    <opt name='password'>
+        <p>Some caches require a password in order to submit a "Found it" log entry.
+        You may check if this cache requires password with <b>req_passwd</b> field
+        of the services/caches/geocache method.</p>
+    </opt>
+    <opt name='langpref' default='en'>
+        <p>Pipe-separated list of ISO 639-1 language codes. This indicates the
+        order of preference in which language will be chosen for error messages.</p>
+    </opt>
+    <opt name='on_duplicate' default='silent_success'>
+        <p>How should OKAPI react when you are trying to submit a duplicate entry?
+        One of the following values:</p>
+        <ul>
+            <li><b>silent_success</b> - try to respond with success=true, but don't
+            add a new log entry (existing log_uuid will be returned),</li>
+            <li><b>user_error</b> - respond with success=false and a proper user message,</li>
+            <li><b>continue</b> - don't detect duplicates (note, that this will still
+            fail in some cases, i.e. when you're trying to submit a "Found it" entry for an
+            already found cache).</li>
+        </ul>
+        <p>Note, that duplicate detection may take the <b>when</b> parameter into account.
+        When you don't supply it, "when" is generated for you. This means that you may
+        have to supply the "when" parameter if you want duplicate detection to work.</p>
+    </opt>
+    <opt name='rating'>
+        <p>An integer in range between 1 and 5 - user's optional rating of a found cache.</p>
+        <p>Important: <b>logtype</b> has to be "Found it" in order to use this argument.</p>
+        <p>Note: You should allow your user to <b>not</b> rate a found cache.</p>
+        <p>Note: Currently, some OC installations do not support cache ratings. On such installations
+        user's rating will be <b>ignored</b> (if you include the rating, log entry will be posted
+        successfully, but rating will be ignored).</p>
+    </opt>
+    <opt name='recommend' default='false'>
+        <p>Set to <b>true</b> if the user wants to recommend this cache.</p>
+        <p>Important: <b>logtype</b> has to be "Found it" or "Attended" in order to
+        use this argument. However, some installations do not support recommending
+        event caches (if you include a recommendation, the log entry will be posted
+        successfully, but the recommendation will be <b>ignored</b>).</p>
+        <p>Recommending may only succeed when the user meets certain criteria
+        set on him by the OC site. If criteria are not met, the request will
+        end with user error (HTTP 200, success=false).</p>
+    </opt>
+    <opt name='needs_maintenance' default='false'>
+        <p>Set to <b>true</b> if the user thinks that the cache needs some special attension
+        of its owner. Users should describe the reason for maintenance in their comments.</p>
+        <p>Note: Depending on OC installation and user's log entry type, OKAPI may actually
+        publish two separate log entries when you check this flag (one of them with empty
+        comment). Even then, you will still receive only one UUID reference (pointing to
+        only one of those entries). Moreover, on some OC servers this flag might be
+        <b>completely ignored</b> (not all OC servers support this feature).</p>
+        <p>Note: Currently, this is not allowed for Event Caches (you will get a HTTP 200
+        "user friendly" response).</p>
+    </opt>
+    <common-format-params/>
+    <returns>
+        <p>A dictionary of the following structure:</p>
+        <ul>
+            <li><b>success</b> - true, if the log entry was submitted successfully,</li>
+            <li><b>message</b> - plain-text string, a message for the user, which acknowledges success
+                or describes an error (usually you want to display this only when success is false),</li>
+            <li><b>log_uuid</b> - ID of the newly created log entry, <b>or null</b>
+                in case of an error.</li>
+        </ul>
+    </returns>
 </xml>

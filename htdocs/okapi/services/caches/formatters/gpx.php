@@ -54,7 +54,34 @@ class WebService
         'other' => 'Other',
     );
 
+    /**
+     * When used in create_gpx() method, enables GGZ index generation.
+     * The index is then returned along the method's response, in the
+     * 'ggz_entries' key. See formatters/ggz method.
+     */
+    const FLAG_CREATE_GGZ_IDX = 1;
+
     public static function call(OkapiRequest $request)
+    {
+        $response = new OkapiHttpResponse();
+        $response->content_type = "application/gpx; charset=utf-8";
+        $response->content_disposition = 'attachment; filename="results.gpx"';
+
+        $result_ref = self::create_gpx($request);
+        $response->body = &$result_ref['gpx'];
+
+        return $response;
+    }
+
+    /**
+     * Generate a GPX file.
+     *
+     * @param OkapiRequest $request
+     * @param integer $flags
+     * @throws BadRequest
+     * @return An array with GPX file content under 'gpx' key
+     */
+    public static function create_gpx(OkapiRequest $request, $flags = null)
     {
         $vars = array();
 
@@ -388,14 +415,85 @@ class WebService
             }
         }
 
-        $response = new OkapiHttpResponse();
-        $response->content_type = "application/gpx; charset=utf-8";
-        $response->content_disposition = 'attachment; filename="results.gpx"';
+        # Do we need a GGZ index?
+
+        if ($flags & self::FLAG_CREATE_GGZ_IDX) {
+
+            # GGZ index consist of entries - one per each waypoint in the GPX file.
+            # We will keep a list of all such entries here.
+
+            $ggz_entries = array();
+
+            foreach ($vars['caches'] as &$cache_ref)
+            {
+                # Every $cache_ref will also be holding a reference to its entry.
+                # Note, that more attributes are added while processing gpsfile.tpl.php!
+
+                if (!isset($cache_ref['ggz_entry'])) {
+                    $cache_ref['ggz_entry'] = array();
+                }
+                $ggz_entry = &$cache_ref['ggz_entry'];
+                $ggz_entries[] = &$ggz_entry;
+
+                $ggz_entry['code'] = $cache_ref['code'];
+                $ggz_entry['name'] = isset($cache_ref['name_2']) ? $cache_ref['name_2'] : $cache_ref['name'];
+                $ggz_entry['type'] = $vars['cache_GPX_types'][$cache_ref['type']];
+                list($lat, $lon) = explode("|", $cache_ref['location']);
+                $ggz_entry['lat'] = $lat;
+                $ggz_entry['lon'] = $lon;
+
+                $ggz_entry['ratings'] = array();
+                $ratings_ref = &$ggz_entry['ratings'];
+                if (isset($cache_ref['rating'])){
+                   $ratings_ref['awesomeness'] = $cache_ref['rating'];
+                }
+                $ratings_ref['difficulty'] = $cache_ref['difficulty'];
+                if (!isset($cache_ref['size'])) {
+                    $ratings_ref['size'] = 0; // Virtual, Event
+                } else if ($cache_ref['oxsize'] !== null) { // is this ox size one-to-one?
+                    $ratings_ref['size'] = $cache_ref['oxsize'];
+                }
+                $ratings_ref['terrain'] = $cache_ref['terrain'];
+
+                if ($vars['mark_found'] && $cache_ref['is_found']) {
+                    $ggz_entry['found'] = true;
+                }
+
+                # Additional waypoints. Currently, we're not 100% sure if their entries should
+                # be included in the GGZ file (the format is undocumented).
+
+                if (isset($cache_ref['alt_wpts'])) {
+                    $idx = 1;
+                    foreach ($cache_ref['alt_wpts'] as &$alt_wpt_ref) {
+                        if (!isset($alt_wpt_ref['ggz_entry'])) {
+                            $alt_wpt_ref['ggz_entry'] = array();
+                        }
+                        $ggz_entry = &$alt_wpt_ref['ggz_entry'];
+                        $ggz_entries[] = &$ggz_entry;
+
+                        $ggz_entry['code'] = $cache_ref['code'] . '-' . $idx;
+                        $ggz_entry['name'] = $alt_wpt_ref['type_name'];
+                        $ggz_entry['type'] = $alt_wpt_ref['sym'];
+                        list($lat, $lon) = explode("|", $alt_wpt_ref['location']);
+                        $ggz_entry['lat'] = $lat;
+                        $ggz_entry['lon'] = $lon;
+
+                        $idx++;
+                    }
+                }
+            }
+        }
+
         ob_start();
         Okapi::gettext_domain_init(explode("|", $langpref)); # Consumer gets properly localized GPX file.
         include 'gpxfile.tpl.php';
         Okapi::gettext_domain_restore();
-        $response->body = ob_get_clean();
-        return $response;
+
+        $result = array('gpx' => ob_get_clean());
+        if ($flags & self::FLAG_CREATE_GGZ_IDX) {
+            $result['ggz_entries'] = $ggz_entries;
+        }
+
+        return $result;
     }
 }

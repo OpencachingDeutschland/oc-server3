@@ -249,7 +249,7 @@
     <opt name="location_change_prefix" default="#">
         <p>Prefix to be added to the geocache name, in case its location has been changed due to
         the <b><a href="%OKAPI:methodargref:#location_source%">location_source</a></b> parameter
-        matching any of the alternate waypoint.</p>
+        matching any of the alternate waypoints.</p>
     </opt>
     <returns>
         <p>GPX file. All invalid cache codes will be skipped without any notice!</p>

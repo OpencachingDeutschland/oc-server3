@@ -1,0 +1,32 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Garmin Communicator Plug-in Check</title>
+</head>
+<script type="text/javascript" src="../prototype/prototype.js">&#160;</script>
+<script type="text/javascript" src="../garmin/device/GarminDeviceControl.js">&#160;</script>
+<script type="text/javascript" src="../garmin/device/GarminDevicePlugin.js">&#160;</script>
+<script type="text/javascript" src="../garmin/util/Util-PluginDetect.js">&#160;</script>
+<script type="text/javascript" src="../garmin/util/Util-Broadcaster.js">&#160;</script>
+<script type="text/javascript" src="../garmin/util/Util-BrowserDetect.js">&#160;</script>
+<script type="text/javascript">
+        var control;    
+        function load() {
+            try {
+                control = new Garmin.DeviceControl();
+                if(control && control.isPluginInitialized()) {
+	                $('message').innerHTML = "<h2>Garmin Communicator Plugin Version " + control.getPluginVersionString() + " Found!</h2>";
+	            }
+            } catch(e) {
+                $('message').innerHTML = "<h2>" + e.message + "</h2>";
+            }
+        }
+</script>
+<body onload="load()">
+	<h1>Garmin Communicator Plug-in Check</h1>
+	<div id="message"></div>
+	<object id="GarminActiveXControl" style="WIDTH: 0px; HEIGHT: 0px; visible: hidden" height="0" width="0" classid="CLSID:099B5A62-DE20-48C6-BF9E-290A9D1D8CB5">
+  		<object id="GarminNetscapePlugin" type="application/vnd-garmin.mygarmin" width="0" height="0"> </object>
+	</object>
+</body></html>

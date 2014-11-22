@@ -1,0 +1,22 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Garmin Display - Default Configuration</title>
+</head>
+<style type="text/css" media="all">@import "../garmin/device/style/communicator.css";</style>
+<script type="text/javascript" src="../prototype/prototype.js">&#160;</script>
+<script type="text/javascript" src="../garmin/device/GarminDeviceDisplay.js">&#160;</script>
+<script type="text/javascript">	
+	function load() {
+	    var display = new Garmin.DeviceDisplay("garminDisplay", {
+	    	pathKeyPairsArray: ["http://developer.garmin.com/","ee3934433a35ee348583236c2eeadbc1"]
+		});
+	}
+</script>
+<body onload="load()">
+
+<h2>Garmin Display - Default Configuration</h2>
+
+<div id="garminDisplay"/>
+
+</body>
+</html>

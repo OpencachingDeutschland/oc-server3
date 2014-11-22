@@ -1,0 +1,59 @@
+<html><head><meta http-equiv="content-type" content="text/html; charset=utf-8"> <style>
+	.KEYW {color: #933;}
+	.COMM {color: #bbb; font-style: italic;}
+	.NUMB {color: #393;}
+	.STRN {color: #393;}
+	.REGX {color: #339;}
+	.line {border-right: 1px dotted #666; color: #666; font-style: normal;}
+	</style></head><body><pre><span class='line'>  1</span> <span class="COMM">/**
+<span class='line'>  2</span>  * Copyright &copy; 2007-2010 Garmin Ltd. or its subsidiaries.
+<span class='line'>  3</span>  *
+<span class='line'>  4</span>  * Licensed under the Apache License, Version 2.0 (the 'License')
+<span class='line'>  5</span>  * you may not use this file except in compliance with the License.
+<span class='line'>  6</span>  * You may obtain a copy of the License at
+<span class='line'>  7</span>  *
+<span class='line'>  8</span>  *    http://www.apache.org/licenses/LICENSE-2.0
+<span class='line'>  9</span>  *
+<span class='line'> 10</span>  * Unless required by applicable law or agreed to in writing, software
+<span class='line'> 11</span>  * distributed under the License is distributed on an 'AS IS' BASIS,
+<span class='line'> 12</span>  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+<span class='line'> 13</span>  * See the License for the specific language governing permissions and
+<span class='line'> 14</span>  * limitations under the License.
+<span class='line'> 15</span>  * 
+<span class='line'> 16</span>  * @fileoverview Generate and insert the object tag
+<span class='line'> 17</span>  * only when the browser reports that the plugin is installed.
+<span class='line'> 18</span>  * @version 1.10
+<span class='line'> 19</span>  */</span><span class="WHIT">
+<span class='line'> 20</span> 
+<span class='line'> 21</span> </span><span class="COMM">/**
+<span class='line'> 22</span>  * This snippet of code is required to generate the object tag
+<span class='line'> 23</span>  * only when the browser reports that the plugin is installed.
+<span class='line'> 24</span>  * 
+<span class='line'> 25</span>  * @requires PluginDetect, BrowserDetect
+<span class='line'> 26</span>  */</span><span class="WHIT">
+<span class='line'> 27</span> </span><span class="KEYW">if</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">PluginDetect.detectGarminCommunicatorPlugin</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 28</span> </span><span class="WHIT">	</span><span class="WHIT">
+<span class='line'> 29</span> </span><span class="WHIT">	</span><span class="COMM">// Insert object tag based on browser</span><span class="WHIT">
+<span class='line'> 30</span> </span><span class="WHIT">	</span><span class="KEYW">switch</span><span class="PUNC">(</span><span class="NAME">BrowserDetect.browser</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 31</span> </span><span class="WHIT">	    </span><span class="COMM">// TODO pull these out into constants later, in BrowserDetect</span><span class="WHIT">
+<span class='line'> 32</span> </span><span class="WHIT">	    </span><span class="KEYW">case</span><span class="WHIT"> </span><span class="STRN">"Explorer"</span><span class="PUNC">:</span><span class="WHIT">
+<span class='line'> 33</span> </span><span class="WHIT">            </span><span class="NAME">document.write</span><span class="PUNC">(</span><span class="STRN">'&lt;object id="GarminActiveXControl" style="WIDTH: 0px; HEIGHT: 0px; visible: hidden" height="0" width="0" classid="CLSID:099B5A62-DE20-48C6-BF9E-290A9D1D8CB5">&#160;&lt;/object>'</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 34</span> </span><span class="WHIT">            </span><span class="KEYW">break</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 35</span> </span><span class="WHIT">	    </span><span class="KEYW">case</span><span class="WHIT"> </span><span class="STRN">"Firefox"</span><span class="PUNC">:</span><span class="WHIT">
+<span class='line'> 36</span> </span><span class="WHIT">	    </span><span class="KEYW">case</span><span class="WHIT"> </span><span class="STRN">"Mozilla"</span><span class="PUNC">:</span><span class="WHIT">
+<span class='line'> 37</span> </span><span class="WHIT">	    </span><span class="KEYW">case</span><span class="WHIT"> </span><span class="STRN">"Safari"</span><span class="PUNC">:</span><span class="WHIT">
+<span class='line'> 38</span> </span><span class="WHIT">        	</span><span class="COMM">// Outer div necessary for Safari and Chrome</span><span class="WHIT">
+<span class='line'> 39</span> </span><span class="WHIT">        	</span><span class="COMM">// TODO try removing the divs to see if Safari 3+ has fixed their bug  </span><span class="WHIT">
+<span class='line'> 40</span> </span><span class="WHIT">        	</span><span class="NAME">document.write</span><span class="PUNC">(</span><span class="STRN">'&lt;div style="height:0px; width:0px;">'</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 41</span> </span><span class="WHIT">        	</span><span class="NAME">document.write</span><span class="PUNC">(</span><span class="STRN">'&lt;object id="GarminNetscapePlugin" type="application/vnd-garmin.mygarmin" width="0" height="0">&#160;&lt;/object>'</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 42</span> </span><span class="WHIT">        	</span><span class="NAME">document.write</span><span class="PUNC">(</span><span class="STRN">'&lt;/div>'</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 43</span> </span><span class="WHIT">            </span><span class="KEYW">break</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 44</span> </span><span class="WHIT">	    </span><span class="KEYW">default</span><span class="PUNC">:</span><span class="WHIT">
+<span class='line'> 45</span> </span><span class="WHIT">        	</span><span class="NAME">document.write</span><span class="PUNC">(</span><span class="STRN">'&lt;div style="height:0px; width:0px;">&lt;object id="GarminActiveXControl" style="WIDTH: 0px; HEIGHT: 0px; visible: hidden" height="0" width="0" classid="CLSID:099B5A62-DE20-48C6-BF9E-290A9D1D8CB5">'</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 46</span> </span><span class="WHIT">        	</span><span class="NAME">document.write</span><span class="PUNC">(</span><span class="STRN">'	&lt;object id="GarminNetscapePlugin" type="application/vnd-garmin.mygarmin" width="0" height="0">&#160;&lt;/object>'</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 47</span> </span><span class="WHIT">        	</span><span class="NAME">document.write</span><span class="PUNC">(</span><span class="STRN">'&lt;/object>&lt;/div>'</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 48</span> </span><span class="WHIT">        	</span><span class="KEYW">break</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 49</span> </span><span class="WHIT">	</span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'> 50</span> </span><span class="WHIT">	</span><span class="WHIT">
+<span class='line'> 51</span> </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'> 52</span> </span></pre></body></html>

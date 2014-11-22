@@ -1,0 +1,762 @@
+@charset "UTF-8";
+
+/* @group General */
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	background-color: transparent;
+}
+
+p {
+	background-color: transparent;
+}
+
+.fontSize16 {
+	font-size: 16px;
+}
+
+#uploadHeaders {
+	position: relative;
+	height: 30px;
+}
+
+.uploadWrapper {
+	position: relative;
+	width: 980px;
+	height: 510px;
+	background-image: url(images/background0.png);
+	left: 50%;
+	margin-left: -490px;
+	font-family: 'lucida grande', arial, tahoma, verdana, sans-serif;
+	margin-top: 15px;
+	margin-bottom: -10px;
+}
+/* @end */
+
+/* @group Warning pages */
+.uploadLogo {
+	position: absolute;
+	width: 980px;
+	height: 170px;
+	text-align: center;
+	top: 70px;
+	/*top: 50px;*/
+	left: 0px;
+}
+
+#deviceIcon {
+	display: inline-block;
+	width: 384px;
+	height: 170px;
+	background: url(images/device-icon.png) no-repeat 0 0;
+	_background: url(images/ie/device-icon.gif) no-repeat 0 0;
+}
+
+#communicatorLogo {
+	display: inline-block;
+	width: 384px;
+	height: 170px;
+	background: url(images/communicator-logo.png) no-repeat 0 0;
+	_background: url(images/ie/communicator-logo.gif) no-repeat 0 0;
+}
+
+
+.searchDeviceIcon {
+	position: absolute;
+	width: 980px;
+	height: 30px;
+	text-align: center;
+	top: 215px;
+	left: 0px;
+}
+
+.pluginMessage {
+	color: #444445;
+	position: absolute;
+	top: 265px;
+	/*top: 223px;*/
+	text-shadow: #fff 0 1px 0;
+	font-weight: bold;
+	font-size: 18px;
+	line-height: 25px;
+	left: 0px;
+}
+
+.pluginMessage p {
+	height: 50px;
+	vertical-align: middle;
+	display: table-cell;
+	width: 980px;
+	text-align: center;
+}
+
+.pluginMessage a {
+	color: #444445;
+}
+
+.pluginMessage a:hover {
+	color: #000;
+}
+
+.blackButton {
+	cursor: pointer;
+	position: absolute;
+	width: 350px;
+	line-height: 42px;
+	background: url(images/button-bg-r.png) no-repeat right 0;
+	_background: url(images/ie/button-bg-r.gif) no-repeat right 0;
+	text-align: center;
+	color: #fff;
+	text-shadow: #444445 1px 1px 2px;
+	font-weight: bold;
+	font-size: 16px;
+	left: 50%;
+	margin-left: -181px;
+	top: 328px;
+	padding: 0 15px 0 0;
+}
+
+.blackButton a {
+	position: relative;
+	height: 42px;
+	display: block;
+	white-space: nowrap;
+	padding: 0 0 0 15px;
+	background: url(images/button-bg-l.png) no-repeat left 0;
+	_background: url(images/ie/button-bg-l.gif) no-repeat left 0;
+	color: #fff;
+	text-decoration: none;
+	text-shadow: #28242a 1px 1px 1px;
+}
+
+.blackButton a:visited {
+	color: #fff;
+}
+
+.blackButton:hover {
+	background-position: right -50px;
+}
+
+.blackButton:hover a {
+	background-position: left -50px;
+}
+
+.blackButton:active {
+	background-position: right -100px;
+}
+
+.blackButton:active a {
+	background-position: left -100px;
+}
+
+#browseComputerButton {
+	position: absolute;
+	text-align: center;
+	top: 455px;
+	width: 980px;
+}
+
+#browseComputerButton a {
+	color: #333333;
+	font-size: 14px;
+	font-weight: bold;
+	text-decoration: underline;
+}
+
+#browseComputerButton a:hover {
+	color: #666666;
+}
+
+#findDevicesButton, #downloadButton {
+	top: 340px;
+}
+	
+.manualUpload {
+	top: 400px;
+}
+
+/* @end */
+
+
+/* @group Main Page */
+
+#uploadMainDeviceLabel {
+	position: absolute;
+	top: 53px;
+	left: 312px;
+	font-size: 13px;
+	color: #666666;
+}
+
+.uploadMainChangeDevice {
+	position: absolute;
+	top: 53px;
+	right: 318px;
+	font-size: 13px;
+}
+
+.uploadMainChangeDevice a {
+	color: #666666;
+	text-decoration: underline;
+}
+
+.uploadMainChangeDevice a:hover {
+	color: #000;
+}
+
+.uploadMainDevice {
+	position: absolute;
+	left: 50%;
+	margin-left: -179px;
+	width: 352px;
+	height: 215px;
+	text-align: center;
+	top: 70px;
+	background: url(images/device-background.png) no-repeat center 0;
+}
+
+.uploadMainDevice p {
+	height: 30px;
+	text-align: center;
+	font-weight: bold;
+	color: #444445;
+	font-size: 17px;
+	text-shadow: #fff 0 1px 0;
+	padding-top: 170px;
+}
+
+.connectedDevicesTitle {
+	position: relative;
+	margin-top: 20px;
+	height: 40px;
+	background: url(images/device-divider.png) no-repeat center bottom;
+	line-height: 23px;
+	text-shadow: #fff 1px 1px 0;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+.uploadMainDevice ul {
+	position: relative;
+	width: 329px;
+	height: 130px;
+	padding: 10px;
+	list-style-type: none;
+	font-size: 14px;
+	text-shadow: #fff 1px 1px 0;
+	font-weight: bold;
+	overflow: auto;
+}
+
+.uploadMainDevice li {
+	line-height: 42px;
+}
+
+.uploadMainDevice a {
+	display: block;
+	color: #434445;
+	text-decoration: none;
+}
+
+.uploadMainDevice a:hover {
+	color: #3789ec;
+}
+
+#simpleUploadButton {
+	left: 50%;
+	margin-left: -177px;
+	top: 302px;
+	width: 335px;
+	_width: 350px;
+}
+
+#advancedUploadButton {
+	left: 50%;
+	margin-left: -177px;
+	top: 350px;
+	width: 335px;
+	_width: 350px;
+}
+
+#uploadHealthDataButton {
+	left: 50%;
+	margin-left: -177px;
+	top: 398px;
+	width: 335px;
+	_width: 350px;
+}
+
+#findDevicesButton {
+	/*top: 304px;*/
+}
+
+.pluginDownloadNote {
+	position: absolute;
+	bottom: 30px;
+	left: 30px;
+	font-size: 11px;
+	color: #787879;
+	background: url(images/icon-warning.png) no-repeat 0 0;
+	_background: url(images/ie/icon-warning.gif) no-repeat 0 0;
+	padding-left: 20px;
+	padding-top: 2px;
+}
+
+.pluginDownloadNote a {
+	color: #787879;
+}
+
+.pluginDownloadNote a:hover {
+	color: #000;
+}
+
+/* @end */
+
+/* @group Progress Bar */
+
+#uploadDeviceProgressBG {
+	background-image: none;
+}
+
+#uploadProgressText {
+	position: absolute;
+	top: 315px;
+	left: 120px;
+	font-size: 13px;
+}
+
+/**********
+.uploadProgressCancel {
+	z-index: 3;
+	cursor: pointer;
+	position: absolute;
+	width: 100px;
+	height: 30px;
+	background: url(images/icon-cancel.png) no-repeat right 0;
+	right: 115px;
+	top: 331px;
+}
+
+.uploadProgressCancel:hover {
+	background-position: right -30px;
+}
+*/
+
+/* @end */
+
+/* @group Advanced Upload List */
+
+#browseDevicesText {
+	position: absolute;
+	left: 70px;
+	top: 70px;
+	font-weight: bold;
+	color: #262626;
+	text-shadow: #fff 1px 1px 1px;
+}
+
+.tableBackground {
+	position: absolute;
+	width: 661px;
+	height: 308px;
+	background-image: url(images/table-bg.png);
+	_background-image: url(images/ie/table-bg.gif);
+	/**background-image: none;*/
+	top: 55px;
+	left: 270px;
+	*z-index: -5;
+}
+
+#deviceList {
+	z-index: 1;
+	position: absolute;
+	left: 50px;
+	top: 100px;
+	list-style-type: none;
+	font-size: 14px;
+	width: 250px;
+}
+
+#deviceList li {
+	height: 30px;
+	_height: 50px;
+	padding: 14px 0 5px 20px;
+}
+
+#deviceList li.selected  {
+	height: 30px;
+	_height: 50px;
+	font-size: 16px;
+	font-weight: bold;
+	color: #fff;
+	background: url(images/indicator-bg.png) no-repeat 0 -2px;
+	_background: url(images/ie/indicator-bg.gif) no-repeat 0 -2px;
+	text-shadow: #444445 1px 1px 1px;
+}
+
+#deviceList li a {
+	text-decoration: none;
+	color: #615c64;
+}
+
+#deviceList li a:hover {
+	color: #000;
+}
+
+#deviceList li.selected a {
+	color: #fff;
+}
+
+#uploadFromListButton {
+	left: 295px;
+	top: 315px;
+	width: 280px;
+}
+
+#viewActivitiesButton {
+	left: 325px;
+	top: 323px;
+	width: 350px;
+}
+
+/* @end */
+
+/* @group Summary */
+
+.noticeSuccess {
+	position: absolute;
+	top: 95px;
+	left: 50px;
+	width: 170px;
+	font-size: 12px;
+	line-height: 18px;
+	background: url(images/icon-success.gif) no-repeat 0 0;
+	_background: url(images/ie/icon-success.gif) no-repeat 0 0;
+	padding-left: 22px;
+}
+
+.noticeFailed {
+	position: absolute;
+	top: 240px;
+	left: 50px;
+	width: 170px;
+	font-size: 12px;
+	line-height: 18px;
+	background: url(images/icon-failed.gif) no-repeat 0 0;
+	_background: url(images/ie/icon-failed.gif) no-repeat 0 0;
+	padding-left: 22px;
+	color: #d9413f;
+}
+
+/* @end */
+
+/* @group Activity List Table */
+
+#activityListHeader {
+	position: absolute;
+	width: 646px;
+	left: 8px;
+	top: 6px;
+}
+
+#activityListHeader td {
+	height: 34px;
+	color: #fff;
+	font-size: 15px;
+	padding-right: 5px;
+	padding-left: 5px;
+}
+
+#activityListTable {
+	position: absolute;
+	width: 629px;
+	left: 0px;
+	top: 0px;
+}
+
+#activityListTable td {
+	height: 35px;
+	padding-right: 5px;
+	padding-left: 5px;
+	font-size: 13px;
+	vertical-align: middle;
+}
+
+#activityListTable tr {
+	color: #474249;
+}
+
+#activityListTable img {
+	position: relative;
+	top: 3px;
+}
+
+tr.newActivity {
+	font-weight: bold;
+	color: #000;
+}
+
+a.successLink {
+	color: #4b8dfe;
+	font-weight: normal;
+	font-style: normal;
+}
+
+#activityListTable a {
+	color: #4b8dfe;
+	font-weight: normal;
+	font-style: normal;
+}
+
+#activityListTable a:hover {
+	text-decoration: underline;
+}
+
+#activityListTable a.failedLink {
+	color: #dc0021;
+	font-weight: normal;
+	font-style: normal;
+}
+
+#activityTableContainer {
+	position: absolute;
+	left: 8px;
+	top: 45px;
+	width: 646px;
+	height: 245px;
+	overflow: auto;
+}
+
+.uploadStatusLink {
+	position: relative;
+}
+
+.failedPopup {
+	position: absolute;
+	width: 599px;
+	right: -5px;
+	top: -8px;
+	background-color: #ffdde2;
+	padding: 7px 0px 9px 30px;
+	font-weight: normal;
+	font-style: normal;
+}
+
+.failedPopup img {
+	margin-right: 5px;
+}
+
+#activityListTable .failedPopup a {
+	position: absolute;
+	right: 6px;
+	color: #fe797b;
+	border: 1px solid #feaaaa;
+	padding: 2px 6px;
+	line-height: normal;
+	text-decoration: none;
+	background-color: #fff;
+	font-size: 12px;
+}
+
+#activityListTable .failedPopup a:hover {
+	color: #e3444b;
+	border-color: #fe797b;
+	background-color: #fff;
+}
+
+/* @end */
+
+/* @group Manual Upload */
+
+#manualUploadTitle {
+	color: #fff;
+	font-size: 15px;
+	text-align: center;
+	text-shadow: #444 1px 1px 2px;
+	font-weight: bold;
+	line-height: 45px;
+}
+
+.manualUploadContent {
+	text-align: center;
+	position: relative;
+	width: 640px;
+	top: 25px;
+	font-size: 13px;
+	font-family: 'lucida grande', arial, tahoma, verdana,  sans-serif;
+	*top: 5px;
+	
+}
+
+.manualUploadContent p {
+	margin-bottom: 20px;
+	*margin-bottom: 10px;
+}
+
+#browseComputerElementContents {
+	position: absolute;
+	width: 648px;
+	height: 350px;
+	left: 7px;
+	top: 40px;
+	*height: 250px;
+	*top: 42px;
+}
+
+#uploadFromFileButton {
+	position: absolute;
+	top: 258px;
+	width: 350px;
+	left: 320px;
+	*top: 198px;
+}
+/* @end */
+
+/* @group Misc */
+
+#statusBox {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 980px; 
+	text-align: center;
+}
+
+.longStatus {
+	text-align: left;
+	position: relative;
+	top: 330px;
+	left: 120px;
+	font-size: 12px;
+}
+
+.shortStatus {
+	text-align: center;
+	position: relative;
+	top: 185px;
+	left: 115px;
+	font-size: 12px;
+	z-index: 98;
+}
+
+/*#loadingText {
+	text-align: center;
+	position: relative;
+	top: 130px;
+	font-size: 12px;
+}*/
+
+#uploadProgress{
+	right: 38px; 
+	/*right: -6px;*/
+}
+#cancelUploadButton {
+	right: -6px;
+	top: 18px;
+	font-size: 12px;
+	position: absolute;
+}
+
+
+#cancelUploadButton a {
+	font-size: 11px;
+	color: #666666;
+	text-decoration: underline;
+}
+
+#cancelUploadButton a:hover {
+	color: #000;
+}
+
+.longProgressText {
+	position: relative;
+	top: 18px;
+	text-align: right;
+	right: -5px;
+	font-size: 12px;
+	color: #666666;
+	/* IE */ 
+	*right: -380px;
+}
+
+.shortProgressText {
+	position: relative;
+	top: 18px;
+	text-align: right;
+	right: -5px;
+	font-size: 11px;
+	color: #666666;
+	/* I hate IE */ 
+	*right: -250px;
+}
+
+.longProgressBar {
+	position: absolute;
+	left: 115px;
+	top: 345px;
+	width: 750px;
+	z-index: 99;
+	*left: -260px;
+}
+
+.shortProgressBar {
+	position: absolute;
+	left: 355px;
+	top: 210px;
+	width: 500px;
+	z-index: 99;
+	*left: 100px;
+}
+
+/*#loadingProgressBar, #uploadProgressBar {
+	*left: 0;
+}*/
+
+#loadingProgressBarB, #uploadProgressBarB {
+	width: 100%;
+}
+
+/* Progress indicator width */
+#loadingProgressBarA {
+	width: 0%;
+}
+
+.progressBarB, .progressBarA {
+	position: absolute;
+	background: url(images/progress-s-b-r.png) no-repeat right 0;
+	_background: url(images/ie/progress-s-b-r.gif) no-repeat right 0;
+	padding: 0 10px 0 0;
+}
+
+.progressBarB span, .progressBarA span {
+	position: relative;
+	height: 20px;
+	display: block;
+	padding: 0 0 0 10px;
+	background: url(images/progress-s-b-l.png) no-repeat left 0;
+	_background: url(images/ie/progress-s-b-l.gif) no-repeat left 0;
+}
+
+.progressBarA {
+	background: url(images/progress-s-a-r.png) no-repeat right 0;
+	_background: url(images/ie/progress-s-a-r.gif) no-repeat right 0;
+}	
+
+.progressBarA span {
+	background: url(images/progress-s-a-l.png) no-repeat left 0;
+	_background: url(images/ie/progress-s-a-l.gif) no-repeat left 0;
+}	
+
+/* @end */
+
+#previewDevice {
+	background: url(images/icon-edge.png) no-repeat center 18px;
+	_background: url(images/ie/icon-edge.gif) no-repeat center 18px;
+	height: 200px;
+	width: 100%;
+	position: relative; 
+}

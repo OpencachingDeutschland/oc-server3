@@ -1,0 +1,735 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Garmin Communicator Plugin Demo</title>
+</head>
+<script type="text/javascript" src="../prototype/prototype.js">&#160;</script>
+<script type="text/javascript" src="../garmin/device/GarminDevicePlugin.js">&#160;</script>
+<script type="text/javascript" src="GarminDevicePluginDemo.js">&#160;</script>
+<script type="text/javascript" src="../garmin/util/Util-XmlConverter.js">&#160;</script>
+<script type="text/javascript">
+
+/*
+ *	This is a reference to the GarminDevicePlugin.js that is used to link the call to unclockAndStartFind()
+ *	 with finishFindDevices(). In order to execute finishFindDevices(), there needs to be a reference on this page
+ *  to what was returned by the first call to unclockAndStartFind().
+ */
+var garminGpsPluginReference;
+
+/*
+* Stores the code returned by the Garmin Browser Plugin Site Key Generator, once the user enters the code
+* from the prompt window. 
+*/
+var siteKeyCodeArray = ["http://developer.garmin.com/","ee3934433a35ee348583236c2eeadbc1"];
+/*
+ * checkPlugin calls findPlugin() on GarminDevicePlugin.js and displays an alert
+ * based on what state it returns. 
+ * 
+ */
+function checkPlugin(){
+	if(findPlugin()){
+		alert("Plugin Found.");
+	}else{
+		alert("Plugin NOT Found.");
+	}	
+}
+/*
+ * Calls unlockPluginAndStartFindingDevices() passing in the url and code to unlock the 
+ * device and start searching for any devices connected to this machine.
+ */
+function unlockAndStartFind(){
+
+	var yourUrl = siteKeyCodeArray[0];
+
+	if(findPlugin() == true){
+		
+		var siteKeyCode = prompt("Your url is: "+yourUrl +  "\n Please enter the code returned from the Garmin Plugin Site Key Generator for this url:",siteKeyCodeArray[1]  );
+		
+		if(siteKeyCode == null) {
+			return;
+		} else {
+			siteKeyCodeArray[1] = siteKeyCode;
+		}
+		
+		var pluginUnlocked = unlockPluginAndStartFindingDevices(siteKeyCodeArray);
+		
+		if(pluginUnlocked != null){
+
+			alert("Plugin unlocked for : " +yourUrl);
+		}else{
+			alert("Plugin could not be unlocked using your code for the url: " + yourUrl);	
+		}
+		
+	}else{
+		alert("Plugin NOT Found.");
+	}
+	this.garminGpsPluginReference = 	pluginUnlocked;
+}	
+/*
+ * To be called after unlockAndStartFind(), this method checks to see the state of finishFindingDevices()
+ * and then calls getDevicesDescription(). If finishedLooking is true and the deviceDescription is not null,
+ * then alert the description found of the devices connected to this machine.
+ */
+function finishFindDevices(){
+
+	if(garminGpsPluginReference){
+		var finishedLooking = garminGpsPluginReference.finishFindingDevices();
+		var deviceDescription = garminGpsPluginReference.getDescriptionOfDevices();
+		
+		if(finishedLooking && deviceDescription != null){
+	
+			alert(deviceDescription);	
+		}else{
+			alert("No Devices found.");
+		}
+	}else{
+		 showPluginNotReady()	
+	}
+}
+/*
+*	This helper function only shows an alert typically used when the plugin has not been unlocked.
+*
+*/
+function showPluginNotReady(){
+
+	alert("Plugin Not Ready. Try Unlocking the device.");
+}
+/*
+*	Initates the read from the device as well as showing some intermediate status text in the 
+*	textarea.
+*
+*/
+function startRead(){
+
+	if(garminGpsPluginReference){
+
+		startReadGpsFromFirstDevice();
+		
+		document.getElementById("readData").style.fontStyle = "italic";
+		document.getElementById("readData").value = "read from the device initiated... click 'Finish Reading' to check status and show the data read from the device. ";
+	}else{
+		 showPluginNotReady()	
+	}		
+}
+/*
+*	UI helper function that clears the textarea.
+*
+*/
+function clearRead(){
+
+	document.getElementById("readData").style.fontStyle = "";
+	document.getElementById("readStyle").style.overflow = "";
+	document.getElementById("readStyle").style.height = ""; 
+	document.getElementById("readStyle").style.width=""; 
+	document.getElementById("readData").value =" ";
+}
+/*
+ * To be called after startRead(), this method checks to see the state of finishReadAndGetData().
+ * Also takes care of some UI alterations to allow for the read data to be displayed.
+ */
+function finishReading(){
+
+	if(garminGpsPluginReference){
+
+		document.getElementById("readData").style.fontStyle = "italic";
+		document.getElementById("readStyle").style.overflow = "auto";
+		document.getElementById("readStyle").style.height = "500px"; 
+		document.getElementById("readStyle").style.width="800px"; 
+
+		var readData =  finishReadAndGetData();
+
+		document.getElementById("readData").style.fontStyle = "normal";
+		document.getElementById("readData").value = readData;	
+
+	}else{
+		 showPluginNotReady()	
+	}		
+}
+
+/*
+*	Initates the write to the device as well as showing some intermediate status text in the 
+*	textarea.
+*	Uses the filename input as well as the xml data input in the textarea.
+*
+*/
+function startWrite(){
+
+	var readDataNode = document.getElementById("writeTitle");
+	
+	if(readDataNode && readDataNode.firstChild){	
+		readDataNode.removeChild(readDataNode.firstChild);
+	}
+
+	if(garminGpsPluginReference){
+
+		var writeData = document.getElementById("writeData").value;
+		
+		if(!writeData){
+		
+			alert("Please enter the GpsXml data to be written.");
+			return;
+		}
+		
+		var filename = document.getElementById("filename").value;
+
+		if(!filename || !filename.length > 0){
+		
+			alert("Please enter the filename to be written.");
+			return;
+		}
+		
+		startWriteToFirstDevice(writeData,filename); 
+		
+		document.getElementById("writeData").style.fontStyle = "italic";
+		document.getElementById("writeStyle").style.overflow = "auto";
+		document.getElementById("writeStyle").style.height = "500px"; 
+		document.getElementById("writeStyle").style.width="800px"; 
+		
+	}else{
+		 showPluginNotReady()	
+	}		
+}
+/*
+ * To be called after startWrite(), this method checks to see the state of finishWriteAndGetData().
+ * Also takes care of some UI alterations to allow for the read data to be displayed.
+ */
+function finishWriting(){
+
+	if(garminGpsPluginReference){
+
+	//	var writeData = document.getElementById("writeData").value;
+
+		var writeData =  finishWriteToDevice();
+
+		if (document.getElementById && document.createElement) {
+		
+			var readDataNode = document.getElementById("writeTitle");
+			var messageText = document.createTextNode('   Done Writing!');
+			readDataNode.style.color = 'red';
+			readDataNode.appendChild(messageText);
+		}
+
+	}else{
+		 showPluginNotReady()	
+	}		
+}
+
+function finishWritingFitness(){
+
+	if(garminGpsPluginReference){
+		
+		var writeData =  finishWriteToDeviceForFitness();
+
+		if (document.getElementById && document.createElement) {
+		
+			var readDataNode = document.getElementById("writeTitleFitness");
+			var messageText = document.createTextNode('   Done Writing!');
+			readDataNode.style.color = 'red';
+			readDataNode.appendChild(messageText);
+		}
+
+	}else{
+		 showPluginNotReady()	
+	}		
+}
+
+/*
+*
+* UI function that clears the contents of the Write textarea.
+*
+*/
+function clearWrite(){
+
+	document.getElementById("writeData").style.fontStyle = "";
+	document.getElementById("writeStyle").style.overflow = "";
+	document.getElementById("writeStyle").style.height = ""; 
+	document.getElementById("writeStyle").style.width=""; 
+	document.getElementById("writeData").value =" ";
+	
+	var readDataNode = document.getElementById("writeTitle");	
+	readDataNode.removeChild(readDataNode.firstChild);
+	
+}
+
+/*
+*
+* UI function that clears the contents of the Write textarea.
+*
+*/
+function clearWriteFitness(){
+
+	document.getElementById("writeDataFitness").style.fontStyle = "";
+	document.getElementById("writeStyleFitness").style.overflow = "";
+	document.getElementById("writeStyleFitness").style.height = ""; 
+	document.getElementById("writeStyleFitness").style.width=""; 
+	document.getElementById("writeDataFitness").value =" ";
+	
+	var readDataNode = document.getElementById("writeTitleFitness");	
+	readDataNode.removeChild(readDataNode.firstChild);
+	
+}
+
+function startReadFitnessHistoryDirectory(){
+
+	if(garminGpsPluginReference){
+
+		startReadHistoryDirectoryFromFirstDevice()
+		
+		document.getElementById("readDataFitness").style.fontStyle = "italic";
+		document.getElementById("readDataFitness").value = "read history directory from the device initiated... click 'Finish Reading' to check status and show the data read from the device. ";
+	}else{
+		 showPluginNotReady();
+	}		
+}
+
+function startReadFitnessCourseDirectory(){
+
+	if(garminGpsPluginReference){
+
+		startReadCourseDirectoryFromFirstDevice()
+		
+		document.getElementById("readDataFitness").style.fontStyle = "italic";
+		document.getElementById("readDataFitness").value = "read course directory from the device initiated... click 'Finish Reading' to check status and show the data read from the device. ";
+	}else{
+		 showPluginNotReady();
+	}		
+}
+
+function finishReadingFitnessDirectory(){
+
+	if(garminGpsPluginReference){
+
+		document.getElementById("readDataFitness").style.fontStyle = "italic";
+		document.getElementById("readStyleFitness").style.overflow = "auto";
+		document.getElementById("readStyleFitness").style.height = "500px"; 
+		document.getElementById("readStyleFitness").style.width="800px"; 
+
+		var readData =  finishReadFitnessDirectory();
+
+		document.getElementById("readDataFitness").style.fontStyle = "normal";
+		document.getElementById("readDataFitness").value = readData;	
+
+	}else{
+		 showPluginNotReady();
+	}		
+}
+
+function cancelReadingFitnessDirectory() {
+	
+	if(garminGpsPluginReference){
+
+		document.getElementById("readDataFitness").style.fontStyle = "italic";
+		document.getElementById("readStyleFitness").style.overflow = "auto";
+		document.getElementById("readStyleFitness").style.height = "500px"; 
+		document.getElementById("readStyleFitness").style.width="800px"; 
+
+		var readData =  cancelReadFitnessDirectory();
+
+		document.getElementById("readDataFitness").style.fontStyle = "normal";
+		document.getElementById("readDataFitness").value = readData;	
+
+	}else{
+		 showPluginNotReady();
+	}	
+}
+
+/*
+*	Initiates history read from the fitness device as well as showing some intermediate status text in the 
+*	textarea.
+*/
+function startReadFitnessHistory(){
+
+	if(garminGpsPluginReference){
+
+		startReadHistoryFromFirstDevice()
+		
+		document.getElementById("readDataFitness").style.fontStyle = "italic";
+		document.getElementById("readDataFitness").value = "read from the device initiated... click 'Finish Reading' to check status and show the data read from the device. ";
+	}else{
+		 showPluginNotReady();
+	}		
+}
+
+/*
+*	Initiates course read from the fitness device as well as showing some intermediate status text in the 
+*	textarea.
+*/
+function startReadFitnessCourse() {
+	if(garminGpsPluginReference){
+
+		startReadCourseFromFirstDevice()
+		
+		document.getElementById("readDataFitness").style.fontStyle = "italic";
+		document.getElementById("readDataFitness").value = "read from the device initiated... click 'Finish Reading' to check status and show the data read from the device. ";
+	}else{
+		 showPluginNotReady();
+	}		
+}
+
+/*
+*	UI helper function that clears the textarea.
+*
+*/
+function clearReadFitness(){
+
+	document.getElementById("readDataFitness").style.fontStyle = "";
+	document.getElementById("readStyleFitness").style.overflow = "";
+	document.getElementById("readStyleFitness").style.height = ""; 
+	document.getElementById("readStyleFitness").style.width=""; 
+	document.getElementById("readDataFitness").value =" ";
+}
+/*
+ * To be called after startReadFitness(), this method checks to see the state of finishReadAndGetData().
+ * Also takes care of some UI alterations to allow for the read data to be displayed.
+ */
+function finishReadingFitness(){
+
+	if(garminGpsPluginReference){
+
+		document.getElementById("readDataFitness").style.fontStyle = "italic";
+		document.getElementById("readStyleFitness").style.overflow = "auto";
+		document.getElementById("readStyleFitness").style.height = "500px"; 
+		document.getElementById("readStyleFitness").style.width="800px"; 
+
+		var readData =  finishReadAndGetDataForFitness();
+
+		document.getElementById("readDataFitness").style.fontStyle = "normal";
+		document.getElementById("readDataFitness").value = readData;	
+
+	}else{
+		 showPluginNotReady();
+	}		
+}
+/*
+ *	This method cancels the fitness read attempt and clears the output textbox.
+ */
+ function cancelReadingFitness(){
+ 
+ 	if(garminGpsPluginReference){
+ 		cancelReadingTcdXml();
+ 		clearReadFitness();
+ 	}else{
+ 		showPluginNotReady();
+ 	}
+ }
+ 
+ /*
+*	Initates the write to the device as well as showing some intermediate status text in the 
+*	textarea.
+*	Uses the filename input as well as the xml data input in the textarea.
+*
+*/
+function startWriteFitness(){
+
+	var readDataNode = document.getElementById("writeTitleFitness");
+	
+	if(readDataNode && readDataNode.firstChild){	
+		readDataNode.removeChild(readDataNode.firstChild);
+	}
+
+	if(garminGpsPluginReference){
+
+		var writeData = document.getElementById("writeDataFitness").value;
+		
+		if(!writeData){
+		
+			alert("Please enter the TcdXml data to be written.");
+			return;
+		}
+		
+		var filenameFitness = document.getElementById("filenameFitness").value;
+		
+		if(!filenameFitness || !filenameFitness.length > 0){
+		
+			alert("Please enter the filename to be written.");
+			return;
+		}
+		
+		startWriteToFirstDeviceForFitness(writeData, filenameFitness); 
+		
+		document.getElementById("writeDataFitness").style.fontStyle = "italic";
+		document.getElementById("writeStyleFitness").style.overflow = "auto";
+		document.getElementById("writeStyleFitness").style.height = "500px"; 
+		document.getElementById("writeStyleFitness").style.width="800px"; 
+		
+	}else{
+		 showPluginNotReady()	
+	}		
+}
+/*
+ * To be called after startWriteFitness(), this method checks to see the state of finishReadAndGetDataForFitness().
+ * Also takes care of some UI alterations to allow for the read data to be displayed.
+ */
+function finishWritingFitness(){
+
+	if(garminGpsPluginReference){
+
+	//	var writeData = document.getElementById("writeDataFitness").value;
+
+		var writeData =  finishWriteToDeviceForFitness();
+
+		if (document.getElementById && document.createElement) {
+		
+			var readDataNode = document.getElementById("writeTitleFitness");
+			var messageText = document.createTextNode('   Done Writing!');
+			readDataNode.style.color = 'red';
+			readDataNode.appendChild(messageText);
+		}
+
+	}else{
+		 showPluginNotReady()	
+	}		
+}
+
+
+function getMainSoftware() {
+	if(garminGpsPluginReference) {
+		var responsesXml = getUnitSoftwareUpdateRequests();
+		document.getElementById("unitSoftwareResponses").value = responsesXml;
+	} else{
+		showPluginNotReady();
+	}
+}
+
+function getAdditionalSoftware() {
+	if(garminGpsPluginReference) {
+		var responsesXml = getAdditionalSoftwareRequests();
+		document.getElementById("unitSoftwareResponses").value = responsesXml;
+	} else{
+		showPluginNotReady();
+	}
+}
+
+function startSoftwareUpdate() {
+	if(garminGpsPluginReference) {
+		var responsesXml = document.getElementById("unitSoftwareResponses").value;
+		startUnitSoftwareUpdate(responsesXml);
+	} else{
+		showPluginNotReady();
+	}
+}
+
+function finishSoftwareUpdate() {
+	if(garminGpsPluginReference){
+
+		finishUnitSoftwareUpdate();
+
+		if (document.getElementById && document.createElement) {
+		
+			var readDataNode = document.getElementById("unitSoftwareResponses");
+			var messageText = document.createTextNode('   Done updating!');
+			readDataNode.style.color = 'red';
+			readDataNode.appendChild(messageText);
+		}
+
+	}else{
+		 showPluginNotReady();
+	}		
+}
+
+function cancelSoftwareUpdate() {
+}
+
+</script>
+<body>
+
+<!-- This is where we bind the plugin to the DOM of this page. 
+	This is necessary inorder to be able to find and use the plugin later -->
+
+<object id="GarminActiveXControl"
+	style="WIDTH: 0px; HEIGHT: 0px; visible: hidden" height="0" width="0"
+	classid="CLSID:099B5A62-DE20-48C6-BF9E-290A9D1D8CB5"> <object
+		id="GarminNetscapePlugin" type="application/vnd-garmin.mygarmin"
+		width="0" height="0"> </object> </object>
+
+<form method="GET" action="">
+<div class="dashboard" align="center">
+<h2>Garmin Plugin Test Page</h2>
+<hr>
+</div>
+
+<!-- Initalizing and finding devices -->
+<div class="dashboard" align="justify">
+<h3 align="center">Initalizing and finding devices</h3>
+	Is Plugin is installed in your browser: 
+	<input type="button" 	onclick="checkPlugin();" value="Determine if plugin installed" />
+	<br/>JSDoc for the above command:<br/>
+	<a  href="../documentation/symbols/Garmin.DevicePlugin.html#getVersionXml" >Garmin.DevicePlugin.getVersionXml()</a></div>
+	<br/>
+	
+	<div class="dashboard" align="justify">Unlock the Plugin and start finding devices: 
+		<input type="button" onclick="unlockAndStartFind();" 	value="Unlock &amp; start finding devices" />
+		<div style="font-style: italic" >(You can get a key here: <a href="https://my.garmin.com/api/communicator/key-generator.jsp" >Garmin Plugin Site Key Generator</a> )</div>
+	
+		<br/>JSDoc for the above command:<br/>
+		<a  href="../documentation/symbols/Garmin.DevicePlugin.html#unlock" >Garmin.DevicePlugin.unlockl(url, code)</a>
+		<a  href="../documentation/symbols/Garmin.DevicePlugin.html#startFindDevices" >Garmin.DevicePlugin.startFindDevices()</a></div>
+		 <br/>
+		 
+	<div class="dashboard" align="justify">Display xml information about the devices found: 
+		<input type="button" onclick="finishFindDevices();" value="Show devices found" />
+		<br/>JSDoc for the above command:<br/>
+		<a  href="../documentation/symbols/Garmin.DevicePlugin.html#finishFindDevices" >Garmin.DevicePlugin.finishFindDevices()</a>
+		<a  href="../documentation/symbols/Garmin.DevicePlugin.html#getDevicesXml" >Garmin.DevicePlugin.getDevicesXml()</a></div>
+		<br/>
+<hr>
+
+<!-- Reading from a Device -->
+<div class="dashboard" align="justify">
+<h3 align="center">Reading from a device</h3>
+</div>
+<div class="dashboard" align="justify">Initiate Read GpsXml  from device number 0: 
+	<input type="button" onclick="startRead();" value="Start Reading From Device" />
+		<br/>JSDoc for the above command:<br/>
+		<a  href="../documentation/symbols/Garmin.DevicePlugin.html#startReadFromGps" >Garmin.DevicePlugin.startReadFromGps(deviceNumber)</a>
+		 <br/> <br/>
+		  
+	Check if read is complete: <input type="button" onclick="finishReading();" value="Finish Reading" />
+			<br/>JSDoc for the above command:<br/>
+		<a  href="../documentation/symbols/Garmin.DevicePlugin.html#finishReadFromGps" >Garmin.DevicePlugin.finishReadFromGps()</a>
+		<a  href="../documentation/symbols/Garmin.DevicePlugin.html#getProgressXml" >Garmin.DevicePlugin.getProgressXml()</a>
+		<a  href="../documentation/symbols/Garmin.DevicePlugin.html#getGpsXml" >Garmin.DevicePlugin.getGpsXml()</a>
+		 <br/>
+</div>
+
+<table cellpadding="0" cellspacing="0" style="width:600px;">
+	<tr>
+		<td align="center">
+			<div id="readStyle">
+				<textarea style="width: 99%; height: 99%" 	id="readData" cols="" rows=""></textarea>
+			</div>
+		</td>
+	</tr>
+</table>
+<input align="right" type="button" onclick="clearRead();"
+	value="Clear Output" />
+<hr>
+
+<!-- Writing to a Device -->
+<div class="dashboard" align="justify">
+<h3 align="center">Writing to a device</h3>
+</div>
+Filename to be put on the device: <input align="right" type="text" 	id="filename" value="Default.gpx" />
+<br/>Data to be written:<div id="writeTitle"> </div><div class="dashboard" align="justify" id="writeStatus" />
+<table cellpadding="0" cellspacing="0" style="width:600px;">
+	<tr>
+		<td align="center">
+		<div id="writeStyle"><textarea style="width: 99%; height: 99%" 	id="writeData" cols="" rows=""></textarea></div>
+		</td>
+	</tr>
+</table>
+<div class="dashboard" align="justify">Write Gps data to device number 0: 
+	<input type="button" onclick="startWrite();"
+		value="Start Writing to  Device" />
+	<br/>JSDoc for the above command:<br/>
+		<a  href="../documentation/symbols/Garmin.DevicePlugin.html#startWriteToGps" >Garmin.DevicePlugin.startWriteToGps(gpsXml, filename, deviceNumber)</a>
+	 <br/> <br/>	 
+	Check if write is complete: <input type="button"
+		onclick="finishWriting();" value="Finish Writing" />
+	<br/>JSDoc for the above command:<br/>
+		<a  href="../documentation/symbols/Garmin.DevicePlugin.html#finishWriteToGps" >Garmin.DevicePlugin.finishWriteToGps()</a>
+		<a  href="../documentation/symbols/Garmin.DevicePlugin.html#getGpsProgressXml" >Garmin.DevicePlugin.getGpsProgressXml()</a>
+	 <br/> <br/>	
+	<input align="right" type="button" onclick="clearWrite();"
+		value="Clear Input" /></div>
+<hr>
+
+ </div>
+ 
+ <!-- Reading Fitness (Course or History) from a Device -->
+<div class="dashboard" align="justify">
+<h3 align="center">Reading Fitness Data from a device</h3>
+</div>
+<div class="dashboard" align="justify">
+	Initiate HISTORY (TCX) read from device number 0:
+	<input type="button" onclick="startReadFitnessHistory();" value="Start History Read" />
+	  
+	Check if read is complete:
+	<input type="button" onclick="finishReadingFitness();" value="Finish Reading" />
+	
+	Cancel read:
+	<input type="button" onclick="cancelReadingFitness();" value="Cancel Reading" />
+	<br/>	
+<!-- NOT YET IMPLEMENTED IN THE PLUG-IN
+	<br/>
+	Initiate COURSE (TCX) read from device number 0:
+	<input type="button" onclick="startReadFitnessCourse();" value="Start Course Read" />
+	  
+	Check if read is complete:
+	<input type="button" onclick="finishReadingFitness();" value="Finish Reading" />
+	
+	Cancel read:
+	<input type="button" onclick="cancelReadingFitness();" value="Cancel Reading" />
+	-->
+</div>
+ <!-- Reading Fitness Directory (Course or History) from a Device -->
+<div class="dashboard" align="justify">
+<h3 align="center">Reading Fitness Directory from a device</h3>
+</div>
+<div class="dashboard" align="justify">
+	Initiate HISTORY (TCX) Directory read from device number 0:
+	<input type="button" onclick="startReadFitnessHistoryDirectory();" value="Start History Directory Read" />
+	  
+	Check if read is complete:
+	<input type="button" onclick="finishReadingFitnessDirectory();" value="Finish Reading" />
+	
+	Cancel read:
+	<input type="button" onclick="cancelReadingFitnessDirectory();" value="Cancel Reading" />
+	<br/>	
+
+	Initiate COURSE (TCX) read from device number 0:
+	<input type="button" onclick="startReadFitnessCourseDirectory();" value="Start Course Directory Read" />
+	  
+	Check if read is complete:
+	<input type="button" onclick="finishReadingFitnessDirectory();" value="Finish Reading" />
+	
+	Cancel read:
+	<input type="button" onclick="cancelReadingFitnessDirectory();" value="Cancel Reading" />
+</div>
+
+<table cellpadding="0" cellspacing="0" style="width:600px;">
+	<tr>
+		<td align="center">
+			<div id="readStyleFitness">
+				<textarea style="width: 99%; height: 99%" 	id="readDataFitness" cols="" rows=""></textarea>
+			</div>
+		</td>
+	</tr>
+</table>
+<input align="right" type="button" onclick="clearReadFitness();"
+	value="Clear Output" />
+<hr>
+
+<!-- Writing Fitness Course to a Device -->
+<div class="dashboard" align="justify">
+<h3 align="center">Writing Fitness Course to a device</h3>
+</div>
+Filename to be put on the device: <input align="right" type="text" 	id="filenameFitness" value="Default.tcx" />
+<br/>Data to be written:<div id="writeTitleFitness"> </div><div class="dashboard" align="justify" id="writeStatusFitness" />
+<table cellpadding="0" cellspacing="0" style="width:600px;">
+	<tr>
+		<td align="center">
+		<div id="writeStyleFitness"><textarea style="width: 99%; height: 99%" 	id="writeDataFitness" cols="" rows=""></textarea></div>
+		</td>
+	</tr>
+</table>
+<div class="dashboard" align="justify">Write Gps data to device number 0: 
+	<input type="button" onclick="startWriteFitness();"
+		value="Start Writing to Fitness Device" />
+	<br/>JSDoc for the above command:<br/>
+		<a  href="../documentation/symbols/Garmin.DevicePlugin.html#startWriteFitnessData" >Garmin.DevicePlugin.startWriteFitnessData(tcdXml, deviceNumber, filenameFitness, deviceDescription)</a>
+	 <br/> <br/>	 
+	Check if write is complete: <input type="button"
+		onclick="finishWritingFitness();" value="Finish Writing" />
+	<br/>JSDoc for the above command:<br/>
+		<a  href="../documentation/symbols/Garmin.DevicePlugin.html#finishWriteFitnessData" >Garmin.DevicePlugin.finishWriteFitnessData()</a>
+		<a  href="../documentation/symbols/Garmin.DevicePlugin.html#getProgressXml" >Garmin.DevicePlugin.getProgressXml()</a>
+	 <br/> <br/>	
+	<input align="right" type="button" onclick="clearWriteFitness();"
+		value="Clear Input" /></div>
+</div>
+
+</form>
+</body>
+</html>

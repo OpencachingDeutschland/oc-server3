@@ -89,8 +89,8 @@
 			<script src="resource2/{$opt.template.style}/js/session.js" type="text/javascript"></script>
 		{/if}
 		{if $garmin==true}
-		  <script type="text/javascript" src="resource2/{$opt.template.style}/js/GarminPrototype.js"></script>
-		  <script type="text/javascript" src="http://developer.garmin.com/web/communicator-api/garmin/device/GarminDeviceDisplay.js"> </script>
+		  <script type="text/javascript" src="resource2/{$opt.template.style}/js/communicator-api/prototype/prototype.js"></script>
+		  <script type="text/javascript" src="resource2/{$opt.template.style}/js/communicator-api/garmin/device/GarminDeviceDisplay.js"></script>
 		  <script type="text/javascript">var garmin_gpx_filename = '{$cache.wpoc}.gpx';</script>
 		  <script type="text/javascript" src="resource2/{$opt.template.style}/js/GarminDisplay.js"></script>
 		  {* <!-- <script type="text/javascript" src="resource2/{$opt.template.style}/js/search.js"></script> --> *}

@@ -51,7 +51,7 @@ Garmin.XmlConverter = {
      * @member Garmin.XmlConverter
      */  
     toString: function(fromDocument) {
-+		if( window.ActiveXObject !== undefined ) { // Since IE11, this can NOT be shortened to if(window.ActiveXObject)
+		if( window.ActiveXObject !== undefined ) { // Since IE11, this can NOT be shortened to if(window.ActiveXObject)
 			return fromDocument.xml
 		}
 		else {

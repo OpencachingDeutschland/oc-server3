@@ -185,14 +185,14 @@ class WebService
                 if (($include_list === null) && (count($exclude_list) == 0))
                 {
                     $arg['description'] = "<i>Inherited from <a href='".$referenced_method_info['ref_url'].
-                        "'>".$referenced_method_info['name']."</a> method.</i>";
+                        "#arg_". $arg['name'] . "'>".$referenced_method_info['name']."</a> method.</i>";
                 }
                 elseif (
                     (($include_list === null) || in_array($arg['name'], $include_list))
                     && (!in_array($arg['name'], $exclude_list))
                 ) {
                     $arg['description'] = "<i>Same as in the <a href='".$referenced_method_info['ref_url'].
-                        "'>".$referenced_method_info['name']."</a> method.</i>";
+                        "#arg_". $arg['name'] . "'>".$referenced_method_info['name']."</a> method.</i>";
                 } else {
                     continue;
                 }

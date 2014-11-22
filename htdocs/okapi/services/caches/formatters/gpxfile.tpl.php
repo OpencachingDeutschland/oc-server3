@@ -22,8 +22,16 @@ http://www.gsak.net/xmlv1/5 http://www.gsak.net/xmlv1/5/gsak.xsd
     <url><?= $vars['installation']['site_url'] ?></url>
     <urlname><?= $vars['installation']['site_name'] ?></urlname>
     <time><?= date('c') ?></time>
-    <? foreach ($vars['caches'] as $c) { ?>
-        <? list($lat, $lon) = explode("|", $c['location']); ?>
+    <? foreach ($vars['caches'] as &$cache_ref) { ?>
+        <?
+            if (isset($cache_ref['ggz_entry'])) {
+                /* The base parts of the GGZ index are the offset and length of the entry
+                 * in the GPX file. This needs to be calculated here. */
+                $cache_ref['ggz_entry']['file_pos'] = ob_get_length();
+            }
+            $c = $cache_ref;
+            list($lat, $lon) = explode("|", $c['location']);
+        ?>
         <wpt lat="<?= $lat ?>" lon="<?= $lon ?>">
             <time><?= $c['date_created'] ?></time>
             <name><?= $c['code'] ?></name>
@@ -154,7 +162,6 @@ http://www.gsak.net/xmlv1/5 http://www.gsak.net/xmlv1/5/gsak.xsd
                             <? } ?>
                         </groundspeak:logs>
                     <? } ?>
-                    <? /* groundspeak:travelbugs - does it actually DO anything? WRTODO */ ?>
                 </groundspeak:cache>
             <? } ?>
             <? if ($vars['ns_ox']) { /* Does user want us to include Garmin's <opencaching> element? */ ?>
@@ -183,9 +190,20 @@ http://www.gsak.net/xmlv1/5 http://www.gsak.net/xmlv1/5/gsak.xsd
                 </ox:opencaching>
             <? } ?>
         </wpt>
+        <?
+            if (isset($cache_ref['ggz_entry'])) {
+                $cache_ref['ggz_entry']['file_len'] = ob_get_length() - $cache_ref['ggz_entry']['file_pos'];
+            }
+        ?>
         <? if ($vars['alt_wpts']) { ?>
-            <? foreach ($c['alt_wpts'] as $wpt) { ?>
-                <? list($lat, $lon) = explode("|", $wpt['location']); ?>
+            <? foreach ($cache_ref['alt_wpts'] as &$wpt_ref) { ?>
+                <?
+                    if (isset($wpt_ref['ggz_entry'])) {
+                        $wpt_ref['ggz_entry']['file_pos'] = ob_get_length();
+                    }
+                    $wpt = $wpt_ref;
+                    list($lat, $lon) = explode("|", $wpt['location']);
+                ?>
                 <wpt lat="<?= $lat ?>" lon="<?= $lon ?>">
                     <time><?= $c['date_created'] ?></time>
                     <name><?= Okapi::xmlescape($wpt['name']) ?></name>
@@ -201,6 +219,11 @@ http://www.gsak.net/xmlv1/5 http://www.gsak.net/xmlv1/5/gsak.xsd
                         </gsak:wptExtension>
                     <? } ?>
                 </wpt>
+                <?
+                    if (isset($wpt_ref['ggz_entry'])){
+                        $wpt_ref['ggz_entry']['file_len'] = ob_get_length() - $wpt_ref['ggz_entry']['file_pos'];
+                    }
+                ?>
             <? } ?>
         <? } ?>
     <? } ?>

@@ -560,7 +560,7 @@ class WebService
                 $preview_field = "mappreview";
             else
                 $preview_field = "0";
-            $rs = Db::query("
+            $sql = "
                 select object_id, uuid, url, title, spoiler, ".$preview_field." as preview
                 from pictures
                 where
@@ -568,8 +568,15 @@ class WebService
                     and display = 1
                     and object_type = 2
                     and unknown_format = 0
-                order by object_id, date_created
-            ");
+            ";
+            if (Settings::get('OC_BRANCH') == 'oc.pl'){
+                // oc.pl installation allows arbitrary order of the geocache's images
+                $sql .= "order by object_id, seq, date_created";
+            } else {
+                $sql .= "order by object_id, date_created";
+            }
+            $rs = Db::query($sql);
+            unset($sql);
             $prev_cache_code = null;
             while ($row = mysql_fetch_assoc($rs))
             {

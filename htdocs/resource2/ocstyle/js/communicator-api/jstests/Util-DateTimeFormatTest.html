@@ -1,0 +1,123 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Garmin Util-Broadcaster JsUnit Tests</title>
+
+<!--Start YUI Test dependencies-->
+<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.7.0/build/logger/assets/logger.css">
+<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.7.0/build/yuitest/assets/testlogger.css">
+<script type="text/javascript" src="http://yui.yahooapis.com/2.7.0/build/yahoo-dom-event/yahoo-dom-event.js"></script>
+<script type="text/javascript" src="http://yui.yahooapis.com/2.7.0/build/logger/logger-min.js"></script>
+<script type="text/javascript" src="http://yui.yahooapis.com/2.7.0/build/yuitest/yuitest-min.js"></script>
+<!--End YUI Test dependencies-->
+
+<script type="text/javascript" src="../prototype/prototype.js">&#160;</script>
+<script type="text/javascript" src="../garmin/util/Util-DateTimeFormat.js">&#160;</script> 
+</head>
+<body>
+<script language="JavaScript" type="text/javascript">
+	var Assert = YAHOO.util.Assert;
+	
+	// WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING 
+	// this test must have the timezoneOffset manualy set for the tests to succeed. 
+	// WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING 
+	var timezoneOffset = "-8:00";
+	
+    var dateTimeFormatTestCase = new YAHOO.tool.TestCase({
+   
+        name: "Garmin Date Time Format Unit Tests",
+        
+		setUp: function() {
+			var d = new Garmin.DateTimeFormat();
+			timezoneOffset = (d.date.getTimezoneOffset() / 60); //getTimezoneOffset is BROKEN!!
+			timezoneOffset = -1*(timezoneOffset + 1) + ":00"; //try to fix it
+			//alert("timezoneOffset="+timezoneOffset);
+		    setUpPageStatus = 'complete';
+		},
+
+		testDayOfYear: function() {
+			var d = new Garmin.DateTimeFormat();
+			d.parseXsdDateTime("2007-02-01T17:23:55"+timezoneOffset);
+			Assert.areEqual(32, d.getDayOfYear(), "day of year");
+		},
+		
+		testFormatTime: function() {
+			var d = new Garmin.DateTimeFormat();
+			d.parseXsdDateTime("2007-02-01T7:3:55"+timezoneOffset);
+			Assert.areEqual("7:3:55", d.formatTime(false), "format time");
+		},
+		
+		testFormatTimeLeftPad: function() {
+			var d = new Garmin.DateTimeFormat();
+			d.parseXsdDateTime("2007-02-01T7:3:5"+timezoneOffset);
+			Assert.areEqual("07:03:05", d.formatTime(), "format time with left padding");
+		},
+		
+		testFormatDate: function() {
+			var d = new Garmin.DateTimeFormat();
+			d.parseXsdDateTime("2007-2-01T17:3:55"+timezoneOffset);
+			Assert.areEqual("2/1/2007", d.formatDate(false), "format date");
+		},
+		
+		testFormatDateLeftPad: function() {
+			var d = new Garmin.DateTimeFormat();
+			d.parseXsdDateTime("2007-02-01T7:3:5"+timezoneOffset);
+			Assert.areEqual("02/01/2007", d.formatDate(), "format date with left padding");
+		},
+		
+		testFormatTimestamp: function() {
+			var d = new Garmin.DateTimeFormat(false);
+			d.parseXsdDateTime("2007-2-01T7:3:5"+"-8:00");
+			Assert.areEqual("2/1/2007 7:3:5", d.formatTimestamp(false), "format Timestamp");
+		},
+		
+		testFormatTimestampLeftPad: function() {
+			var d = new Garmin.DateTimeFormat();
+			d.parseXsdDateTime("2007-02-01T7:3:5"+timezoneOffset);
+			Assert.areEqual("02/01/2007 07:03:05", d.formatTimestamp(true), "format Timestamp with left padding");
+		},
+		
+		testEuropeDateFormat: function() {
+			var d = new Garmin.DateTimeFormat();
+			d.parseXsdDateTime("2007-2-1T17:3:55"+timezoneOffset);
+			Assert.areEqual("2007-02-01", d.format("#{year}-#{month}-#{day}", true), "format date");
+		},
+		
+		testLeftPad: function() {
+			var d = new Garmin.DateTimeFormat();
+			Assert.areEqual("04", d.leftPad(4, true), "left pad");
+			Assert.areEqual("4", d.leftPad(4, false), "left pad");
+			Assert.areEqual("10", d.leftPad(10, true), "left pad");
+		},
+		
+		testFormatTwelveHourClock: function() {
+			var d = new Garmin.DateTimeFormat();
+			d.parseXsdDateTime("2007-2-1T17:13:55"+timezoneOffset);
+			Assert.areEqual("5PM", d.format("#{hour}#{meridian}", false, true), "format Twelve Hour Clock");
+			d.parseXsdDateTime("2007-2-1T1:1:55"+timezoneOffset);
+			Assert.areEqual("1AM", d.format("#{hour}#{meridian}", false, true), "Twelve Hour Clock formatting");
+		},
+		
+		testGetTimeString: function() {
+			var d = new Garmin.DateTimeFormat();
+			d.parseXsdDateTime("2007-2-1T17:13:55"+timezoneOffset);
+			Assert.areEqual("02/01/2007 05:13:55 PM", d.getTimeString(), "getTimeString formatting");
+		}
+   	});
+   	
+    //add the test cases and suites
+    YAHOO.tool.TestRunner.add(dateTimeFormatTestCase);
+    
+    //run all tests
+    var oLogger = new YAHOO.tool.TestLogger(); 
+    YAHOO.tool.TestRunner.run();
+    
+    // Notifies the manager that this test page has loaded.  Needed for running the test suite.
+    YAHOO.tool.TestManager.load(); 
+</script>
+  <h1>Garmin Util-Broadcaster JsUnit Tests</h1>
+  <p>This page contains tests for the JsUnit tests.</p>
+</body>
+</html>

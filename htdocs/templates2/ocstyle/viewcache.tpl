@@ -272,10 +272,8 @@
 					<option value="search.php?searchto=searchbycacheid&showresult=1&f_inactive=0&f_ignored=0&startat=0&cacheid={$cache.cacheid}&output=ovl">OVL</option>
 					<option value="search.php?searchto=searchbycacheid&showresult=1&f_inactive=0&f_ignored=0&startat=0&cacheid={$cache.cacheid}&output=txt">TXT</option>
 				</select>&nbsp;
-{* removed "send to GPS" button due to changes on Garmin site, function isn't properly working
 				<img src="resource2/{$opt.template.style}/images/viewcache/14x19-gps-device.png" class="icon16" alt="" />
 				<input type="button" class="exportbutton" value="{t}Send to GPS device{/t}" onclick="window.open('garmin.php?lat={$cache.latitude}&lon={$cache.longitude}&wp={$cache.wpoc}','{t escape=js}Send{/t}','width=640,height=320,resizable=no,scrollbars=1')" />
-*}
 			</p></td>	
 		</tr>
 	</table>

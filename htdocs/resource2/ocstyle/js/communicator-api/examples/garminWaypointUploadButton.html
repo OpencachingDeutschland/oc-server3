@@ -1,0 +1,50 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Garmin Display - Single-Click Waypoint Send</title>
+</head>
+<style type="text/css" media="all">@import "../garmin/device/style/communicator.css";</style>
+<script type="text/javascript" src="../prototype/prototype.js">&#160;</script>
+<script type="text/javascript" src="../garmin/device/GarminDeviceDisplay.js">&#160;</script>
+<script type="text/javascript">	
+	function load() {
+	    var display = new Garmin.DeviceDisplay("garminDisplay", {
+	    	pathKeyPairsArray: ["http://developer.garmin.com/","ee3934433a35ee348583236c2eeadbc1"],
+	    	unlockOnPageLoad: false,
+		    hideIfBrowserNotSupported: true,
+	    	showStatusElement: false,
+	    	autoFindDevices: false,
+	    	findDevicesButtonText: "Send Waypoint",
+	    	showCancelFindDevicesButton: false,
+	    	autoSelectFirstDevice: true,
+	    	autoReadData: false,
+	    	autoWriteData: true,
+	    	showReadDataElement: false,
+		    getWriteData: function() { return $("dataString").value;  }
+		});
+	}
+</script>
+
+<body onload="load()">
+
+
+<h2>Single-Click Waypoint Send</h2>
+<p>This page works by displaying the findDevice button as "Send Waypoint" and setting autoWriteData to true.
+By having unlockOnPageLoad set to false, the plugin is not loaded until the user takes action avoiding the security dialog.
+</p>
+<div id="garminDisplay"></div>
+
+<h5>Waypoint XML</h5>
+<div id="debug">
+	<textarea id="dataString" rows="22" cols="50"><?xml version="1.0" encoding="utf-8"?>
+<gpx xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0" creator="Garmin Communicator Plugin" xsi:schemaLocation="http://www.topografix.com/GPX/1/0 http://www.topografix.com/GPX/1/0/gpx.xsd" xmlns="http://www.topografix.com/GPX/1/0">
+  <time>2007-05-09T20:53:37.7627544-07:00</time>
+  <wpt lat="37.828567" lon="-122.49875">
+    <ele>100</ele>
+    <time>2002-11-12T00:00:00.0000000-08:00</time>
+    <name>MM5MM</name>
+    <cmt>SpiderTracks</cmt>
+  </wpt>
+</gpx></textarea>
+</div>
+</body>
+</html>

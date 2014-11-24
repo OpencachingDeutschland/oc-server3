@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Garmin Plugin Utils Tests</title>
+
+<!--Start YUI Test dependencies-->
+<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.7.0/build/logger/assets/logger.css">
+<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.7.0/build/yuitest/assets/testlogger.css">
+<script type="text/javascript" src="http://yui.yahooapis.com/2.7.0/build/yahoo-dom-event/yahoo-dom-event.js"></script>
+<script type="text/javascript" src="http://yui.yahooapis.com/2.7.0/build/logger/logger-min.js"></script>
+<script type="text/javascript" src="http://yui.yahooapis.com/2.7.0/build/yuitest/yuitest-min.js"></script>
+<!--End YUI Test dependencies-->
+
+<script type="text/javascript" src="../prototype/prototype.js">&#160;</script>
+<script type="text/javascript" src="../garmin/util/Util-XmlConverter.js">&#160;</script>
+<script type="text/javascript" src="../garmin/device/GarminDevice.js">&#160;</script>
+<script type="text/javascript" src="../garmin/device/GarminPluginUtils.js">&#160;</script> 
+<script type="text/javascript" src="../garmin/device/GarminDeviceControl.js">&#160;</script> 
+<script type="text/javascript" src="GarminDevicePluginStub.js">&#160;</script>
+</head>
+
+<body>
+<script language="JavaScript" type="text/javascript">
+	var Assert = YAHOO.util.Assert; 
+	
+	var xmlErrorNoMessage = '<?xml version="1.0" encoding="UTF-8" standalone="no" ?><ErrorReport xmlns="http://www.garmin.com/xmlschemas/ApplicationErrors/v1"><Error><Exception><SourceCodeLocation><SourceFileName>IOA_FILESENDER.CPP</SourceFileName><SourceFileLine>87</SourceFileLine></SourceCodeLocation></Exception><Application><Name>Garmin Communicator Plug-In</Name><Build><Version><VersionMajor>2</VersionMajor><VersionMinor>1</VersionMinor><BuildMajor>0</BuildMajor><BuildMinor>3</BuildMinor></Version><Type>Internal</Type><Time>May 23 2007, 15:15:48</Time><Builder>wissenba</Builder></Build><LanguageID>1033</LanguageID><PartNumber>006-A0161-00</PartNumber></Application><Computer><OperatingSystem>Windows XP Service Pack 2</OperatingSystem><Processor>x86, Processor Level: 15, Processors:2, Model: 2 Stepping: 9</Processor><RamSize>1047548</RamSize></Computer><Time>2007-06-08T22:29:55Z</Time></Error></ErrorReport>';
+	//var devicesListingXml = '<?xml version="1.0" encoding="UTF-8" standalone="no" ?><Devices xmlns="http://www.garmin.com/xmlschemas/PluginAPI/v1">  <Device DisplayName="Etrex Vista C (Unit ID 3021100206)" Number="0"/></Devices>';
+	var deviceDescriptionXml = "<?xml version='1.0' encoding='UTF-8' standalone='no' ?><Device xmlns='http://www.garmin.com/xmlschemas/GarminDevice/v2'><Model><PartNumber>006-B0484-00</PartNumber><SoftwareVersion>240</SoftwareVersion><Description>Forerunner305 Software Version 2.40</Description></Model><Id>3308802814</Id><DisplayName>mbina</DisplayName><MassStorageMode><DataType><Name>GPSData</Name><File><Specification><Identifier>http://www.topografix.com/GPX/1/1</Identifier><Documentation>http://www.topografix.com/GPX/1/1/gpx.xsd</Documentation></Specification><Location><FileExtension>GPX</FileExtension></Location><TransferDirection>InputOutput</TransferDirection></File></DataType></MassStorageMode></Device>";
+	
+    var pluginUtilsTestCase = new YAHOO.tool.TestCase({
+   
+        name: "Garmin Device Plugin Utils Unit Tests",
+        
+		testcreateDeviceFromXmlNoDetail: function(){
+			var doc = Garmin.XmlConverter.toDocument(deviceDescriptionXml);
+			var device = Garmin.PluginUtils._createDeviceFromXml("Edge", 0, doc);
+			Assert.areEqual("Edge", device.getDisplayName());
+			Assert.areEqual("Forerunner305 Software Version 2.40", device.getDescription());
+			Assert.areEqual("006-B0484-00", device.getPartNumber());
+			Assert.isTrue(device.getDeviceDataTypes().keys().length > 0);
+		},
+		
+		testcreateDeviceFromXmlWithDetail: function() {
+			var doc = Garmin.XmlConverter.toDocument(deviceDescriptionXml);
+			var device = Garmin.PluginUtils._createDeviceFromXml("Edge", 0, doc);
+			Assert.isNotNull(device);
+			Assert.areEqual("Edge", device.getDisplayName());
+			Assert.areEqual("Forerunner305 Software Version 2.40", device.getDescription());
+			Assert.areEqual("006-B0484-00", device.getPartNumber());
+			Assert.isTrue(device.getDeviceDataTypes().keys().length > 0);
+			Assert.isTrue(device.getDeviceDataTypes().keys().length > 0);
+			//Assert.isNotNull(device.getDeviceDataTypes()["gpx"]);
+			//Assert.areEqual(true, device.getDeviceDataTypes()["gpx"].hasReadAccess());
+		},
+		
+		testParseDeviceXml: function() {
+			var plugin = new Garmin.DevicePlugin();
+			var devices = Garmin.PluginUtils.parseDeviceXml(plugin, false);
+			Assert.isTrue(devices && devices.length>0);
+			Assert.areEqual("mbina", devices[0].getDisplayName());
+			Assert.areEqual(0, devices[0].getNumber());
+		},
+		
+		testIsDeviceErrorXml: function(){
+			Assert.isTrue(Garmin.PluginUtils.isDeviceErrorXml(xmlErrorNoMessage));
+		},
+		
+		testGetDeviceErrorMessage: function(){
+			var s = Garmin.PluginUtils.getDeviceErrorMessage(xmlErrorNoMessage);
+			Assert.isTrue(s.indexOf("IOA_FILESENDER") >= 0);
+		},
+		
+		testGpiUtil: function() {
+		    var xml = Garmin.GpiUtil.buildDeviceDownloadXML("http://developer.garmin.com/testGpi.gpi", "Garmin\\Gpi\\Test.gpi");
+		    Assert.isTrue(xml.indexOf("Destination=\"Garmin\\Gpi\\Test.gpi\"") > 0);
+		    Assert.isTrue(xml.indexOf("Source=\"http://developer.garmin.com/testGpi.gpi\"") > 0);
+		},
+		
+		testGpiFilename: function() {
+		    Assert.isFalse(Garmin.GpiUtil.isDestinationValid("Garmin/Gpi/Test!.gpi"));
+		}
+   	});
+   	
+    //add the test cases and suites
+    YAHOO.tool.TestRunner.add(pluginUtilsTestCase);
+    
+    //run all tests
+    var oLogger = new YAHOO.tool.TestLogger(); 
+    YAHOO.tool.TestRunner.run();
+    
+    // Notifies the manager that this test page has loaded.  Needed for running the test suite.
+    YAHOO.tool.TestManager.load(); 
+</script>
+<h1>Garmin Plugin Utils Tests</h1>
+
+</body>
+</html>

@@ -1,4 +1,4 @@
-﻿function load(lat, lon, id, url, garminKey, language)
+function load(lat, lon, id, url, garminKey, language)
 {
 	var sSuccessMessage = "Geocache saved successfully";
 
@@ -62,7 +62,7 @@
 		pathKeyPairsArray: [url, garminKey],
 		showStatusElement: true,                        //basic feedback provided
 		unlockOnPageLoad: false,                        //delays unlocking to avoid authorization prompt until action
-		hideIfBrowserNotSupported: true,
+		hideIfBrowserNotSupported: false,
 		showStatusElement: true,                        //provide minimal feedback
 		autoFindDevices: true,                          //it will search for devices upon action
 		showCancelFindDevicesButton: true,              //no need to cancel small data transfers

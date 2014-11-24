@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <title>Garmin Display - Single-Click Send Waypoint </title>
+    <style type="text/css" media="all">@import "../garmin/device/style/communicator.css";</style>
+    
+</head>
+    <script type="text/javascript" src="../prototype/prototype.js">&#160;</script>
+    <script type="text/javascript" src="../garmin/device/GarminDeviceDisplay.js">&#160;</script>
+    <script type="text/javascript">
+        function load() {
+        var display = new Garmin.DeviceDisplay("garminDisplay", {
+            pathKeyPairsArray: ["http://developer.garmin.com/","ee3934433a35ee348583236c2eeadbc1"],
+            unlockOnPageLoad: false,                       //delays unlocking to avoid authorization prompt until action
+            hideIfBrowserNotSupported: true,                              
+            showStatusElement: false,                       //provide minimal feedback
+            autoFindDevices: false,                        //it will search for devices upon action                      
+            findDevicesButtonText: "Send Waypoint",      //allows you to customize the action text
+            showCancelFindDevicesButton: false,            //no need to cancel small data transfers
+	    	autoSelectFirstDevice: true,					//pick the first device if several are found
+            autoReadData: false,                           //don't automatically read the tracks/etc
+            autoWriteData: true,                           //automatically write the data once devices found
+            showReadDataElement: false,                    
+            /*This is where the waypoint object is created and the necessary GPX is created.
+             * The plugin speaks GPX, but you (the developer) may not so simply use the 
+             * Waypoint data structure to produce the GPX.
+             */
+            getWriteData: function() {
+            
+            var waypoint = new Garmin.WayPoint("37.828567", "-122.49875", null, "Geocache", "go find it...");
+            var factory = new Garmin.GpsDataFactory();
+            var gpx = factory.produceGpxString(null, [waypoint]);
+            return gpx;
+        },
+        afterFinishWriteToDevice: function(success, display) {
+            alert("Geocache saved "+(success ? "successfully" : "unsuccessfully"));
+        }
+        });
+        }
+    </script>
+    <body onload="load()">
+        
+       
+
+        <h2>Single-Click Send Waypoint</h2>
+        Provides an example of how a Waypoint can be send to the device using the
+        Waypoint data structure to generate the GPX.  Much easier to use for websites
+        that don't produce their own GPX.
+        <div id="garminDisplay">&#160;</div>
+     <pre>   &lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.01//EN&quot; &quot;http://www.w3.org/TR/html4/strict.dtd&quot;&gt;
+        &lt;html&gt;&lt;head&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=ISO-8859-1&quot; /&gt;
+            &lt;title&gt;Garmin Display - Single-Click Waypoint Upload&lt;/title&gt;
+        &lt;/head&gt;
+            &lt;script type=&quot;text/javascript&quot; src=&quot;../prototype/prototype.js&quot;&gt;&amp;#160;&lt;/script&gt;
+            &lt;script type=&quot;text/javascript&quot; src=&quot;../garmin/device/GarminDeviceDisplay.js&quot;&gt;&amp;#160;&lt;/script&gt;
+            &lt;script type=&quot;text/javascript&quot;&gt;
+                function load() {
+                var display = new Garmin.DeviceDisplay(&quot;garminDisplay&quot;, {
+                pathKeyPairsArray: [&quot;http://developer.garmin.com/&quot;,&quot;ee3934433a35ee348583236c2eeadbc1&quot;],
+                unlockOnPageLoad: false,                       //delays unlocking to avoid authorization prompt until action
+                hideIfBrowserNotSupported: true,                              
+                showStatusElement: true,                       //provide minimal feedback
+                autoFindDevices: false,                        //it will search for devices upon action                      
+                findDevicesButtonText: &quot;Upload Waypoint&quot;,      //allows you to customize the action text
+                showCancelFindDevicesButton: false,            //no need to cancel small data transfers
+                autoSelectFirstDevice: true,                   //pick the first device if several are found
+                autoReadData: false,                           //don&apos;t automatically read the tracks/etc
+                autoWriteData: true,                           //automatically write the data once devices found
+                showReadDataElement: false,  
+                                  
+                /*This is where the waypoint object is created and the necessary GPX is created.
+                * The plugin speaks GPX, but you (the developer) may not so simply use the 
+                * Waypoint data structure to produce the GPX.
+                */
+                getWriteData: function() {
+                
+                var waypoint = new Garmin.WayPoint(&quot;37.828567&quot;, &quot;-122.49875&quot;, null, &quot;Geocache&quot;, &quot;go find it...&quot;);
+                var factory = new Garmin.GpsDataFactory();
+                var gpx = factory.produceGpxString(null, [waypoint]);
+                return gpx;
+                },
+                afterFinishWriteToDevice: function() {
+                alert(&quot;Geocache saved successfully&quot;);
+                }
+                });
+                }
+            &lt;/script&gt;
+            &lt;body onload=&quot;load()&quot;&gt;
+                &lt;h2&gt;Single-Click Waypoint Upload&lt;/h2&gt;
+                &lt;div id=&quot;garminDisplay&quot;&gt;&amp;#160;&lt;/div&gt;
+            &lt;/body&gt;
+        &lt;/html&gt;</pre>
+     
+    </body>
+</html>
+

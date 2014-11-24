@@ -1,0 +1,303 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+    <style type="text/css">
+        #main {
+        	font-family: Arial, Helvetica, sans-serif;
+        	font-size: 12px;
+        	border-style: solid;
+        	width: 375px;
+        	background-color:#F3F3F3;
+        	border-color: #999999;
+        	border-width: 1px;
+            -moz-border-radius:5px;
+            -webkit-border-radius:5px;
+            border-radius:5px;
+        	padding-top: 15px;
+        	padding-left:15px;
+        	padding-right:15px;
+        	padding-bottom:5px;
+        
+        }
+        
+        #titleBox {
+        	font-size: larger;
+        	border-bottom-width: 1px;
+        	border-top-style: none;
+        	border-bottom-style: dotted;
+        	font-variant: small-caps;
+        	font-weight: bold;
+        }
+        
+        #garminDevices {
+            padding-bottom: 10px;
+            padding-top: 10px;
+            padding-left:3px;
+            width: 100%;
+            background-color:white;
+        }
+        
+        #controlsBox {
+            margin-top:5px;
+            margin-left:0px;
+        }
+        
+        #output {
+            margin-top: 10px;
+            margin-bottom: 10px;
+        	width: inherit;
+           	height: 300px;
+            display: none;
+        }
+        
+        button.fancyButton {
+        	padding: 5px 15px;
+        	background: -moz-linear-gradient(
+        		top,
+        		#ffffff 0%,
+        		#ebebeb 50%,
+        		#dbdbdb 50%,
+        		#b5b5b5);
+        	background: -webkit-gradient(
+        		linear, left top, left bottom, 
+        		from(#ffffff),
+        		color-stop(0.50, #ebebeb),
+        		color-stop(0.50, #dbdbdb),
+        		to(#b5b5b5));
+        	border-radius: 5px;
+        	-moz-border-radius: 5px;
+        	-webkit-border-radius: 5px;
+        	border: 1px solid #949494;
+        }
+    </style>
+
+    <head>
+        <title>TCX Fitness Read Example</title>
+    </head>
+
+	<!-- Prototype -->
+    <script type="text/javascript" src="../prototype/prototype.js"></script>
+    
+	<!-- API -->
+    <script type="text/javascript" src="../garmin/util/Util-BrowserDetect.js"></script>
+    <script type="text/javascript" src="../garmin/util/Util-Broadcaster.js"></script>
+    <script type="text/javascript" src="../garmin/util/Util-PluginDetect.js"></script>
+    <script type="text/javascript" src="../garmin/util/Util-XmlConverter.js"></script>
+
+    <script type="text/javascript" src="../garmin/device/GarminObjectGenerator.js"></script>
+    <script type="text/javascript" src="../garmin/device/GarminPluginUtils.js"></script>
+    <script type="text/javascript" src="../garmin/device/GarminDevicePlugin.js"></script>
+    <script type="text/javascript" src="../garmin/device/GarminDevice.js"></script>
+
+    <script type="text/javascript" src="../garmin/device/GarminDeviceControl.js"></script>
+    
+	<!-- Main -->
+    <script type="text/javascript">	
+        Garmin.SimpleFitnessReader = Class.create( {
+            initialize: function() {
+                this.contentEl = $('garminDevices');
+                this.progressEl = $('progress');
+                this.outputEl = $('output');
+                this.findButton = $('findButton');
+                this.readButton = $('readButton');
+                this.dataTypeForm = $('dataTypeForm');
+                this.devControl = null;
+                this.dataType = null;
+                
+                this.readButton.disabled = true;
+                this.dataTypeForm.setStyle({ display:'none' });
+                
+                try 
+                {
+                	this.devControl = new Garmin.DeviceControl();
+                	this.devControl.register(this);
+                	this.devControl.unlock( ["http://developer.garmin.com/",
+                	                         "ee3934433a35ee348583236c2eeadbc1"] );
+                	this.devControl.validatePlugin(); //throws if not available
+                
+                    this.findButton.observe("click", this.findDevices.bind( this ) );
+                    this.readButton.observe("click", this.readTCX.bind( this ) );
+                }
+                catch (e) 
+                {
+                    alert('Initialization Exception: ' + e );
+                }
+            },
+        
+            findDevices: function(event)
+            {
+                this.progressEl.innerHTML = '';
+                this.contentEl.innerHTML = "Finding Devices...";
+                this.outputEl.value = '';
+                this.outputEl.setStyle({ display: 'none' });
+                this.devControl.findDevices();
+                this.findButton.disabled = true;
+                this.dataTypeForm.setStyle({ display:'none' });
+            },
+
+            readTCX: function(event)
+            {
+                try
+                {
+                    var theSelect = $('deviceSelect');
+                    var theSelectedDevEl = theSelect.options[theSelect.selectedIndex];
+                    var theSelectedIndex = parseInt(theSelectedDevEl.id);
+                    this.devControl.setDeviceNumber(theSelectedIndex);
+                    this.progressEl.innerHTML = "Reading from device " + this._currentDeviceName();
+
+                    var theRadios = this.dataTypeForm["dataType"];
+                    var theDataType = null;
+                    for( var i = 0; i < theRadios.length; ++i )
+                    {
+                        var theRadio = theRadios[i];
+                        if( theRadio.checked )
+                        {
+                            this.dataType = theRadio.value;
+                            continue;  
+                        }
+                    }
+
+                    this.outputEl.setStyle({ display: 'none' });
+                    this.findButton.disabled = true;
+                    this.readButton.disabled = true;
+                    
+                    //as of Communicator v3.0.0.0, if a startReadFitness* function is called for a FIT
+                    //device, the plugin will attempt a conversion from FIT to TCX.
+                    //*Note:* TCX cannot fully represent FIT, therefore this conversion can be lossy.
+                    this.devControl.readDataFromDevice( this.dataType );
+                }
+                catch (e)
+                {
+                    this.findButton.disabled = false;
+                    this.readButton.disabled = false;
+
+                    if ( e.name == "UnsupportedDataTypeException" )
+                    {
+                        this.progressEl.innerHTML = this._currentDeviceName() + ' does _not_ support reading ' + this.dataType;
+                    }
+                    else
+                    {
+                        alert('Read Exception: ' + e.name + ' ' + e.msg );
+                    }
+                }
+            },
+
+            _parentDevices: function()
+            {
+                var theParents = new Array();
+                var theDevices = this.devControl.getDevices();
+                for( var i = 0; i < theDevices.length; ++i ) 
+                {
+                    if( theDevices[i].getParent() == null )
+                    {
+                        theParents.push( theDevices[i] );
+                    }
+                }
+                return theParents;
+            },
+            
+            _currentDeviceName: function()
+            {
+                return this.devControl.getDevices()[this.devControl.getDeviceNumber()].getDisplayName();
+            },
+
+            onFinishFindDevices: function(aController)
+            {
+                var theParents = this._parentDevices();
+                var theMarkup = '';
+                if( theParents.length > 0 )
+                {
+                    theMarkup += '<select id="deviceSelect">';
+                    for( var i = 0; i < theParents.length; ++i ) 
+                    {
+                        theMarkup += '<option id="'+theParents[i].getNumber() +'" >' + theParents[i].getDisplayName() + '</option>';
+                        var theChildren = theParents[i].getChildren();
+                        if( theChildren.length > 0 )
+                        {
+                            for( var j = 0; j < theChildren.length; ++j )
+                            {
+                                theMarkup += '<option id="'+theChildren[j].getNumber() +'" >' + ' -- ' + theChildren[j].getDisplayName() + '</option>';
+                            }
+                        }
+                    }
+                    theMarkup += '</select>';
+
+                    var theNumParents = theParents.length;
+                    var theNumChildren = this.devControl.getDevices().length - theNumParents;
+                    this.progressEl.innerHTML = 'Found ' + theNumParents +' parent device(s) and ' + theNumChildren + ' child device(s)';
+                    
+                    this.devSelect = $('deviceSelect');
+
+                    this.readButton.disabled = false;
+                    this.dataTypeForm.setStyle({display:'inline'});
+
+                }
+                else
+                {
+                    theMarkup += 'No devices found. <br/> Click "Find Devices" to search again.'
+                }
+                this.contentEl.innerHTML = theMarkup;
+                this.findButton.disabled = false;
+            },
+            
+            onFinishReadFromDevice: function(aJSON)
+            {
+                this.findButton.disabled = false;
+                this.readButton.disabled = false;
+
+                var theSuccess = aJSON.success;
+                if( theSuccess == true )
+                {
+                    this.progressEl.innerHTML = 'Successfully retrieved ' + this.dataType + ' as TCX';
+                    this.outputEl.setStyle({ display: 'inline' });
+                    this.outputEl.value = this.devControl.gpsDataString;
+                }
+                else
+                {
+                    this.progressEl.innerHTML = 'Failed to retrieve TCX Data!';
+                }
+            },
+             
+            onProgressReadFromDevice: function(aJSON)
+            {
+                if( aJSON.progress == "Transfer Complete" )
+                {
+                    //FIT to TCX conversion can take a while...
+                    this.progressEl.innerHTML = aJSON.progress + ', Processing...';                       
+                }
+                else
+                {               
+                    this.progressEl.innerHTML = "Read Progress " + aJSON.progress;
+                }
+            },
+            
+            onException: function(e)
+            {
+                alert('Exception Handler: ' + e.name + ' ' + e.msg );
+            }
+
+        });
+    </script>
+
+	<!-- Markup -->
+    <body onload="var gTCXReader = new Garmin.SimpleFitnessReader();">
+        <div id="main">
+            <div id="titleBox">TCX Fitness Read Example</div>
+            <div id="garminDevices">Click "Find Devices" to get started...</div>
+            <div id="progress"></div>
+            <div id="controlsBox">
+                <form id="dataTypeForm">
+                    <p></p>Select Type of Fitness Data to Read <br/>
+                    <input type="radio" name="dataType" value="FitnessHistory" checked="checked" />Fitness History <br/>
+                    <input type="radio" name="dataType" value="FitnessHistoryDirectory" />Fitness History Directory <br/>
+                    <input type="radio" name="dataType" value="FitnessCourses" />Fitness Courses <br/>
+                    <input type="radio" name="dataType" value="FitnessCoursesDirectory" />Fitness Courses Directory <br/>
+                    <input type="radio" name="dataType" value="FitnessWorkouts" />Fitness Workouts <br/>
+                </form>
+                <p></p>
+                <button type="button" class="fancyButton" id="findButton">Find Devices</button>&nbsp;&nbsp;
+                <button type="button" class="fancyButton" id="readButton">Read Fitness Data</button>
+            </div>
+            <textarea id="output"></div>
+        </div>
+    </body>
+</html>

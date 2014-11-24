@@ -1,0 +1,40 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Garmin GPS JsUnit Test Suite</title>
+    
+    <!--Start YUI Test dependencies-->
+	<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.7.0/build/logger/assets/logger.css">
+	<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.7.0/build/yuitest/assets/testlogger.css">
+	<script type="text/javascript" src="http://yui.yahooapis.com/2.7.0/build/yahoo-dom-event/yahoo-dom-event.js"></script>
+	<script type="text/javascript" src="http://yui.yahooapis.com/2.7.0/build/logger/logger-min.js"></script>
+	<script type="text/javascript" src="http://yui.yahooapis.com/2.7.0/build/yuitest/yuitest-min.js"></script>
+	<!--End YUI Test dependencies-->
+    
+</head>
+
+<body>
+
+<script language="JavaScript" type="text/javascript">
+	//create the test suite
+	YAHOO.tool.TestManager.setPages([
+		"../jstests/controlTest.html", 
+		"../jstests/displayLogicTest.html", 
+		"../jstests/displayUIGenerationTest.html", 
+		"../jstests/gpsDataStructuresTest.html", 
+		"../jstests/gpxDataStructuresTest.html", 
+		"../jstests/pluginTest.html",
+		"../jstests/pluginUtilsTest.html"
+	]);
+    	
+	var oLogger = new YAHOO.tool.TestLogger();
+	
+    YAHOO.tool.TestManager.start();
+</script>
+<h1>Garmin GPS JsUnit Test Suite</h1>
+
+<p>This page contains a suite of tests for testing JsUnit.</p>
+</body>
+</html>

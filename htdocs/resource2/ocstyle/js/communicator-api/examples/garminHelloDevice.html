@@ -1,0 +1,34 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Garmin Communicator - Hello Device</title>
+<style type="text/css" media="all">@import "../garmin/device/style/communicator.css";</style>
+
+<!-- Google Maps Script Tag goes here if showReadGoogleMap: true property is set. 
+<script src="http://maps.google.com/maps?file=api&v=2.x&key=ABQIAAAAkOp4960CVjgwg7aH_RVbsBRx8XQQBS7xHJZeF9Ardr7B9wB3FxQLA2vT2m8bhaXkBrcrYKlrWsZJMw" type="text/javascript">&#160;</script>
+-->
+<script type="text/javascript" src="../prototype/prototype.js">&#160;</script>
+<script type="text/javascript" src="../garmin/device/GarminDeviceDisplay.js">&#160;</script>
+
+<script type="text/javascript">	
+    function load() {
+    var display = new Garmin.DeviceDisplay("garminDisplay", { 
+    pathKeyPairsArray:      ["http://developer.garmin.com","49048b3369edffd4a511d920202a6214"], 
+    autoFindDevices: true, //start searching for devices
+    showStatusElement: true, //basic feedback provided
+    showReadDataElement: false //don't offer to read data
+    //add other options per the documentation
+    });
+    }
+</script>
+    
+</head>
+    
+
+<body onload="load()">
+<p>The demonstrates basic detection of devices.</p>
+
+<div id="garminDisplay"></div>
+</body>
+</html>

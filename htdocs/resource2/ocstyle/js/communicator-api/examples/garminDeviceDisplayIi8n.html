@@ -1,0 +1,85 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Garmin Display - Internationalization Demo</title>
+</head>
+<style type="text/css" media="all">@import "../garmin/device/style/communicator.css";</style>
+<script type="text/javascript" src="../prototype/prototype.js">&#160;</script>
+<script src="http://maps.google.es/maps?file=api&lang=es&v=2.x&key=ABQIAAAAkOp4960CVjgwg7aH_RVbsBRx8XQQBS7xHJZeF9Ardr7B9wB3FxQLA2vT2m8bhaXkBrcrYKlrWsZJMw" type="text/javascript">&#160;</script>
+<script type="text/javascript" src="../garmin/device/GarminDeviceDisplay.js">&#160;</script>
+<script type="text/javascript">	
+	function load() {
+	    var display = new Garmin.DeviceDisplay("garminDisplay", {
+	    	pathKeyPairsArray: ["http://developer.garmin.com/","ee3934433a35ee348583236c2eeadbc1"],
+			showReadGoogleMap: true,
+			showWriteDataElement: true,
+			autoFindDevices: true,
+			findDevicesButtonText: "Dispositivos del hallazgo",						//"Find Devices"
+			cancelFindDevicesButtonText: "Cancelar los dispositivos del hallazgo",	//"Cancel Find Devices"
+			deviceSelectLabel: "Dispositivos: ",									//"Devices: "
+			noDeviceDetectedStatusText: "Ningunos dispositivos encontraron",		//"No devices found"
+			readDataButtonText: "Conseguir los datos",								//"Get Data"
+			cancelReadDataButtonText: "Cancelar consiguen datos",					//"Cancel Get Data"
+			cancelReadStatusText: "Leer cancelado",									//"Read cancelled"
+			readTracksSelectLabel: "Pistas: ",										//"Tracks: "
+			readRoutesSelectLabel: "Rutas: ",										//"Routes: "
+			readWaypointsSelectLabel: "Waypoints: ",								//"Waypoints: "
+			writeDataButtonText: "Escribir",										//"Write"
+			cancelWriteDataButtonText: "Cancelar escriben",							//"Cancel Write"
+		    getWriteData: function() { 
+				var gpx = '<gpx xmlns="http://www.topografix.com/GPX/1/0" creator="nüvi" version="1.0">';
+				gpx += '<wpt lat="37.8794340" lon="-122.2690070"><name>French Hotel</name><sym>Fast Food</sym></wpt>';
+				gpx += '</gpx>';
+		    	return gpx;  
+		    },
+			//status messages:
+			pluginUnlocked: "Plug-in inicializado. Encontrar algunos dispositivos para conseguir comenzado. ", 
+			pluginNotUnlocked: "El plug-in no fue abierto con éxito", 
+			gpsData: "Datos del GPS", 
+			trainingData: "Datos del entrenamiento", 
+			usingDevice: "Usando #{deviceName}",
+			trackListing: "#{date} (Duración: #{duration})",
+			dataFound: "#{routes} rutas, #{tracks} sigue y #{waypoints} waypoints encontrado",
+			poweredByGarmin: "Accionó por <a href='http://www.garmin.com/products/communicator/' target='_new'>Garmin Communicator</a>", 
+			writingToDevice: "Datos de la escritura al dispositivo", 
+			writtenToDevice: "Datos escritos al dispositivo", 
+			writingCancelled: "Escritura cancelada", 
+			overwritingFile: "Sobreescribiendo el archivo", 
+			notOverwritingFile: "No sobreescribirá el archivo", 
+			lookingForDevices: "Buscando los dispositivos conectados...", 
+			foundDevice: "Encontrado #{deviceName}",
+			foundDevices: "Encontrado #{deviceCount} dispositivos",
+			findCancelled: "Hallazgo cancelado", 
+			dataReadProcessing: "Datos leídos en el dispositivo. Procesando…", 
+			noParseSupportForType: "El plugin no tiene ayuda del análisis para el tipo del archivo", 
+			installNow: "¿Ahora instalar? ", 
+			downloadAndInstall: "Ahora descargar e instalar"	
+		});
+	};
+	Garmin.DeviceControl.MESSAGES = {
+	 	deviceControlMissing: "Garmin.DeviceControl depende del marco de Garmin.DevicePlugin. ",
+	 	missingPluginTag: "Etiqueta enchufable del HTML no encontrada. ", 
+	 	browserNotSupported: "Tu browser no se apoya para utilizar el Plug-In del comunicador de Garmin. ", 
+	 	pluginNotInstalled: "Plugin del comunicador de Garmin no detectada. ", 
+	 	outOfDatePlugin1: "Tu versión del Plug-In del comunicador de Garmin es anticuada, requerido: ", 
+	 	outOfDatePlugin2: ", corriente: ", 
+	 	pluginNotUnlocked: "Garmin Plugin no se ha abierto", 
+	 	noDevicesConnected: "Ningún dispositivo conectó, no puede comunicarse con el dispositivo. ", 
+	 	invalidFileType: "No puede procesar el tipo del archivo del dispositivo: " 
+	}; 
+	Garmin.DateTimeFormat.FORMAT = {
+		date: "#{year}-#{month}-#{day}",
+		time: "#{hour}:#{minute}:#{second}",
+		timestamp: "#{year}-#{month}-#{day} #{hour}:#{minute}:#{second}",
+		timestamp12hour: "#{year}-#{month}-#{day} #{hour}:#{minute}:#{second} #{meridian}"
+	};
+</script>
+<body onload="load()">
+
+<h2>Garmin Display - Internationalization Demo</h2>
+
+<div id="garminDisplay"/>
+
+</body>
+</html>

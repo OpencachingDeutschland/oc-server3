@@ -1,0 +1,131 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Garmin GPS Control JsUnit Tests</title>
+
+<!--Start YUI Test dependencies-->
+<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.7.0/build/logger/assets/logger.css">
+<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.7.0/build/yuitest/assets/testlogger.css">
+<script type="text/javascript" src="http://yui.yahooapis.com/2.7.0/build/yahoo-dom-event/yahoo-dom-event.js"></script>
+<script type="text/javascript" src="http://yui.yahooapis.com/2.7.0/build/logger/logger-min.js"></script>
+<script type="text/javascript" src="http://yui.yahooapis.com/2.7.0/build/yuitest/yuitest-min.js"></script>
+<!--End YUI Test dependencies-->
+
+<script type="text/javascript" src="../prototype/prototype.js">&#160;</script>
+<script type="text/javascript" src="../garmin/device/GarminDeviceDisplay.js">&#160;</script>
+<script type="text/javascript" src="GarminDevicePluginStub.js">&#160;</script>
+<script type="text/javascript" src="../garmin/util/Util-XmlConverter.js">&#160;</script>
+<script type="text/javascript" src="../garmin/device/GarminPluginUtils.js">&#160;</script>
+</head>
+
+<body>
+<script language="JavaScript" type="text/javascript">
+	var Assert = YAHOO.util.Assert; 
+	var garminPlugin;
+	
+    var displayLogicTestCase = new YAHOO.tool.TestCase({
+   
+        name: "Garmin Device Plugin Unit Tests",
+        
+        _should: {
+            ignore: {
+            	/* enter list of tests here*/
+                //testReadFitnessHistoryDirectory: true //ignore this test
+            },
+            error: {
+            	testValidOptionConfigParam: true
+            }            
+        },
+        
+        /* clean up the dynamic HTML DOM after each test is run*/
+        tearDown: function() {
+        	//document.getElementById("garminDisplayDiv").innerHTML = "";
+    	},
+        
+        testValidOptionConfigParam: function(){
+			var display = new Garmin.DeviceDisplay("garminDisplayDiv", {
+				bogusKey: "doesn't matter"
+			});
+		},
+		
+		 testUnlockOnPageLoadTrue: function() {
+			var display = new Garmin.DeviceDisplay("garminDisplayDiv", {
+				pathKeyPairsArray: ["http://www.fakeURLStoredInGarminDevicePluginStub.com/", "0000"],
+				unlockOnPageLoad:			true
+			});
+			Assert.isTrue(display.isUnlocked(), "test unlockOnPageLoad=true" );
+		},
+		
+		 testUnlockOnPageLoadFalse: function() {
+			var display = new Garmin.DeviceDisplay("garminDisplayDiv", {
+				pathKeyPairsArray: ["http://www.fakeURLStoredInGarminDevicePluginStub.com/", "0000"],
+				unlockOnPageLoad:			false
+			});
+			Assert.isTrue(!display.isUnlocked(), "test unlockOnPageLoad=false" );
+		},
+		
+		
+		 testAutoWriteData: function(){
+			var display = new Garmin.DeviceDisplay("garminDisplayDiv", {
+				pathKeyPairsArray: ["http://www.fakeURLStoredInGarminDevicePluginStub.com/", "0000"],
+				autoWriteData:				true,
+				getWriteDataFileName:		function(){ return "daaataa.gpx"; },
+				getWriteData:				function() { return "xxyy"; }
+			});
+			//_finishFindDevices parses dummy device xml from plugin stub
+			display.getController(true)._finishFindDevices();
+			var autoWriteResult = display.getController().garminPlugin.getGpsXml();
+			//alert("testAutoWriteData, autoWriteResult="+autoWriteResult);
+			Assert.areEqual("xxyy", autoWriteResult, "data read on autoWriteData");
+		},
+		
+		 testAfterFinishFindDevicesCalled: function(){
+			var devices;
+			var display = new Garmin.DeviceDisplay("garminDisplayDiv", { 
+				pathKeyPairsArray: ["http://www.fakeURLStoredInGarminDevicePluginStub.com/", "0000"],
+				afterFinishFindDevices:	    function(_devices, _display) { devices=_devices; },
+				getWriteDataFileName:		function(){ return "daaataa.gpx"; },
+				getWriteData:				function() { return "xxyy"; }
+			});
+			//_finishFindDevices parses dummy device xml from plugin stub
+			display.getController(true)._finishFindDevices(); 
+			Assert.isNotNull(devices, "afterFinishFindDevices call-back invoked");
+			Assert.isTrue((devices.length > 0), "_finishFindDevices created devices" );
+			Assert.isNotNull(devices[0].getId(), "devices has an id" );
+			Assert.isNotNull(devices[0].getDisplayName(), "devices has an displayName" );
+		},
+		
+		 testAutoReadData: function(){
+			var display = new Garmin.DeviceDisplay("garminDisplayDiv", {
+				pathKeyPairsArray:        ["http://www.fakeURLStoredInGarminDevicePluginStub.com/", "0000"],
+				showReadDataTypesSelect:  false,
+				readDataType:             'gpx',
+				autoReadData:			  true,
+				afterFinishReadFromDevice: function(xmlString, dom) { 
+					Assert.isNotNull(xmlString);
+					Assert.isTrue(xmlString.indexOf('</wpt>') > 0);
+				}
+			});
+			display.getController(true)._finishFindDevices();
+		}
+		      	
+   	});
+   	
+   	
+    //add the test cases and suites
+    YAHOO.tool.TestRunner.add(displayLogicTestCase);
+    
+    //run all tests
+    var oLogger = new YAHOO.tool.TestLogger(); 
+    YAHOO.tool.TestRunner.run();
+    
+    // Notifies the manager that this test page has loaded.  Needed for running the test suite.
+    YAHOO.tool.TestManager.load(); 
+</script>
+<h1>Garmin Device Display Logic Tests</h1>
+
+<div id="garminDisplayDiv"></div>
+</body>
+</html>

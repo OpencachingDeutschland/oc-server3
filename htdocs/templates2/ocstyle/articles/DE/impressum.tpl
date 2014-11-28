@@ -80,13 +80,13 @@
 		Vorstandes gemeinsam vertretungsberechtigt.
 	</p>
 	<p>
-		Der gesch&auml;ftsf&uuml;hrende Vorstand besteht aus (Stand 06.06.2013):
+		Der gesch&auml;ftsf&uuml;hrende Vorstand besteht aus (Stand 26.11.2013):
 	</p>
 	<p>
 		<ul class="indent narrowlist">
 			<li>Michael Vaahsen, Vorsitzender</li>
 			<li>Mirco Baumann, 2. Vorsitzender</li>
-			<li>Maik Bischoff, Kassenwart</li>
+			<li>Christoph Convent, Kassenwart (kommissarisch)</li>
 		</ul>
 	</p>
 	

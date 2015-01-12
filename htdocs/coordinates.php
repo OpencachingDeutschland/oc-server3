@@ -30,6 +30,8 @@
 	$tpl->assign('showRD', ($coord->nLat >= 45 && $coord->nLat <= 57 && $coord->nLon >= 0 && $coord->nLon <= 15));
 	$tpl->assign('coordQTH', $coord->getQTH());
 	$tpl->assign('coordSwissGrid', $coord->getSwissGrid());
+	$tpl->assign('coordW3Wde', $coord->getW3W('de'));
+	$tpl->assign('coordW3Wen', $coord->getW3W('en'));
 
 	// wp gesetzt?
 	$wp = isset($_REQUEST['wp']) ? $_REQUEST['wp'] : '';

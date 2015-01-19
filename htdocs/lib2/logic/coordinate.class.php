@@ -9,6 +9,7 @@ class coordinate
 {
 	var $nLat = 0;
 	var $nLon = 0;
+	var $w3wApiKey = 'MVPP32BC';   // what3words.com
 
 	function __construct($nNewLat, $nNewLon)
 	{
@@ -552,6 +553,31 @@ class coordinate
 			$lon = -$lon;
 
 		return $lon;
+	}
+
+	function getW3W($language = "de")
+	{
+		$params = array(
+			'key' => $this->w3wApiKey,
+			'position' => sprintf('%f,%f', $this->nLat, $this->nLon),
+			'lang' => $language,
+		);
+		$params_str = http_build_query($params);
+		$context = stream_context_create( array(
+			'http' => array(
+				'method' => 'POST',
+				'header' => "Content-Type: application/x-www-form-urlencoded\r\n" .
+							"Content-Length: " . strlen($params_str) . "\r\n",
+				'content' => $params_str,
+			),
+		));
+		
+		$result = file_get_contents('http://api.what3words.com/position', false, $context);
+		if ($result === false) {
+			return false;
+		}
+		$json = json_decode($result, true);
+		return implode('.', $json['words']);
 	}
 }
 ?>

@@ -45,3 +45,11 @@
 		{$coordRD|escape}</p>
 	</div>
     {/if}
+	<div style="margin-top:4px;">
+		<p style="color: 5890a8"><b>what3words</b> <small>(deutsch)</small><br />
+		{$coordW3Wde|escape}</p>
+	</div>
+	<div style="margin-top:4px;">
+		<p style="color: 5890a8"><b>what3words</b> <small>(english)</small><br />
+		{$coordW3Wen|escape}</p>
+	</div>

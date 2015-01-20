@@ -9,7 +9,6 @@ class coordinate
 {
 	var $nLat = 0;
 	var $nLon = 0;
-	var $w3wApiKey = 'MVPP32BC';   // what3words.com
 
 	function __construct($nNewLat, $nNewLon)
 	{
@@ -557,8 +556,10 @@ class coordinate
 
 	function getW3W($language = "de")
 	{
+        global $opt;
+
 		$params = array(
-			'key' => $this->w3wApiKey,
+			'key' => $opt['lib']['w3w']['apikey'],
 			'position' => sprintf('%f,%f', $this->nLat, $this->nLon),
 			'lang' => $language,
 		);

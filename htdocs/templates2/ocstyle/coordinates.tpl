@@ -47,9 +47,9 @@
     {/if}
 	<div style="margin-top:4px;">
 		<p style="color: 5890a8"><b>what3words</b> <small>(deutsch)</small><br />
-		{$coordW3Wde|escape}</p>
+		<a href="http://w3w.co/{$coordW3Wde|escape}">{$coordW3Wde|escape}</a></p>
 	</div>
 	<div style="margin-top:4px;">
 		<p style="color: 5890a8"><b>what3words</b> <small>(english)</small><br />
-		{$coordW3Wen|escape}</p>
+		<a href="http://w3w.co/{$coordW3Wen|escape}">{{$coordW3Wen|escape}</a></p>
 	</div>

@@ -581,6 +581,9 @@
  	// (e.g. domain called without www. prefix) - must match domain of $opt['lib']['garmin']['url']
  	$opt['lib']['garmin']['redirect'] = 'http://www.site.org/garmin.php?redirect=1&cacheid={cacheid}';
 
+    // developer.what3words.com API key
+    $opt['lib']['w3w']['apikey'] = 'YOURAPIKEY';
+
 	// Google Maps API key
 	// http://code.google.com/intl/de/apis/maps/signup.html
 	$opt['lib']['google']['mapkey'] = array();

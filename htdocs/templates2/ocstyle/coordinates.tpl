@@ -51,5 +51,5 @@
 	</div>
 	<div style="margin-top:4px;">
 		<p style="color: 5890a8"><b>what3words</b> <small>(english)</small><br />
-		<a href="http://w3w.co/{$coordW3Wen|escape}">{{$coordW3Wen|escape}</a></p>
+		<a href="http://w3w.co/{$coordW3Wen|escape}">{$coordW3Wen|escape}</a></p>
 	</div>

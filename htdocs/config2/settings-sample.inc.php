@@ -141,6 +141,9 @@
  	$opt['lib']['garmin']['key'] = '00112233445566778899AABBCCDDEEFF00';
  	$opt['lib']['garmin']['url'] = 'http://www.site.org/';
 
+    // developer.what3words.com API Key
+    $opt['lib']['w3w']['apikey'] = 'YOURAPIKEY';
+
 	$opt['logic']['node']['id'] = 4;
 
 	// Google Maps API key

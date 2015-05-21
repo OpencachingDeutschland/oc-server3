@@ -573,7 +573,7 @@ class coordinate
 			),
 		));
 		
-		$result = file_get_contents('http://api.what3words.com/position', false, $context);
+		$result = @file_get_contents('http://api.what3words.com/position', false, $context);
 		if ($result === false) {
 			return false;
 		}

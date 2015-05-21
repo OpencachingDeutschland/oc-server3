@@ -156,6 +156,11 @@ JavaScript libraries
         Path    : htdocs/resource2/tinymce/
         URI     : http://tinymce.moxiecode.com/
         License : LGPL 2.1
+        
+    6.  Garmin Communicator Plugin API
+        Path    : htdocs/resource2/ocstyle/js/communicator-api/
+        URI     : http://www.garmindeveloper.com/web-device/garmin-communicator-plugin/
+        License : Apache 2.0
 
 
 Icons

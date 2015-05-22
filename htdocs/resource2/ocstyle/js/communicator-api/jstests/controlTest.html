@@ -1,0 +1,232 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Garmin GPS Control Unit Tests</title>
+<!--CSS-->
+<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.7.0/build/logger/assets/logger.css">
+<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.7.0/build/yuitest/assets/testlogger.css">
+<!-- Dependencies --> 
+<script type="text/javascript" src="http://yui.yahooapis.com/2.7.0/build/yahoo-dom-event/yahoo-dom-event.js"></script>
+<script type="text/javascript" src="http://yui.yahooapis.com/2.7.0/build/logger/logger-min.js"></script>
+<!-- Source File -->
+<script type="text/javascript" src="http://yui.yahooapis.com/2.7.0/build/yuitest/yuitest-min.js"></script>
+
+<script type="text/javascript" src="../prototype/prototype.js">&#160;</script>
+
+<script type="text/javascript" src="../garmin/util/Util-Broadcaster.js">&#160;</script>
+<script type="text/javascript" src="../garmin/util/Util-BrowserDetect.js">&#160;</script>
+<script type="text/javascript" src="../garmin/util/Util-DateTimeFormat.js">&#160;</script>
+<script type="text/javascript" src="../garmin/util/Util-PluginDetect.js">&#160;</script>
+<script type="text/javascript" src="../garmin/util/Util-XmlConverter.js">&#160;</script>
+<script type="text/javascript" src="../garmin/device/GarminGpsDataStructures.js">&#160;</script>
+<script type="text/javascript" src="../garmin/device/GarminPluginUtils.js">&#160;</script>
+<script type="text/javascript" src="../garmin/device/GarminDevice.js">&#160;</script>
+<script type="text/javascript" src="../garmin/device/GarminObjectGenerator.js">&#160;</script>
+<script type="text/javascript" src="../garmin/device/GarminDeviceControl.js">&#160;</script> 
+<script type="text/javascript" src="GarminDevicePluginStub.js">&#160;</script>
+</head>
+
+<body>
+<script language="JavaScript" type="text/javascript">
+	var Assert = YAHOO.util.Assert; 
+	var garminController;
+	
+    var controlTestCase = new YAHOO.tool.TestCase({
+   
+        name: "Garmin Device Control Unit Tests",
+        
+        _should: {
+            ignore: {
+                testReadFitnessHistoryDirectory: true, //ignore this test
+                testReadFitnessCoursesDirectory: true, //ignore this test
+                testReadFitnessHistoryDetail: true, //ignore this test
+                testReadFitnessCoursesDetail: true //ignore this test
+            }
+        },
+        
+        setUp: function() {
+			setUpPageStatus = 'complete';
+			garminController = new Garmin.DeviceControl();
+        },
+        
+        testValidUnlock: function() {
+			Assert.isTrue(garminController.unlock(["http://www.fakeURLStoredInGarminDevicePluginStub.com/", "0000"]));
+		},
+		
+		testInvalidUnlock: function() {
+			Assert.isFalse(garminController.unlock(["http://www.fakeURLStoredInGarminDevicePluginStub.com/", "0001"]));
+		},
+		
+		testValidatePlugin: function() {
+			// Throws an exception if out of date, no assert needed.
+			garminController.validatePlugin();
+		},
+		
+      	testVersionArray: function() {
+			var versionArray = garminController.getPluginVersion();
+			
+			// current version of plug-in is 2.1.0.3
+			Assert.areEqual(2, versionArray[0]);
+			Assert.areEqual(1, versionArray[1]);
+			Assert.areEqual(0, versionArray[2]);
+			Assert.areEqual(3, versionArray[3]);
+		},
+		
+		testVersionString: function() {
+			var versionString = garminController.getPluginVersionString();
+			
+			// current version of plug-in is 2.1.0.3
+			Assert.areEqual("2.1.0.3", versionString);
+		},
+		
+		/* Test that plugin updates are detected. */
+		testCheckForUpdates: function() {
+			// Throws an exception if out of date, no assert needed.
+			var outOfDate = garminController.checkForUpdates();
+		},
+		
+		testPluginInitialized: function() {
+			Assert.isTrue(garminController.isPluginInitialized());
+		},
+		
+		testPluginInstalled: function() {
+			Assert.isTrue(garminController.isPluginInstalled());
+		},
+
+
+		testProgress: function() {
+			var progress = garminController.getDeviceStatus();
+			
+			Assert.areEqual("Receiving From mbina", progress.getTitle());
+			Assert.areEqual("93% complete, 1 second(s) remaining", progress.getText()[0]);
+			Assert.areEqual("Receiving tracks...", progress.getText()[1]);
+			Assert.areEqual(undefined, progress.getText()[2]);
+			Assert.areEqual("93", progress.getPercentage());
+		},
+		
+		testNumDevices: function() {
+			garminController._finishFindDevices();
+			
+			Assert.areEqual(2, garminController.numDevices);
+			Assert.areEqual(2, garminController.getDevices().length);
+			Assert.areEqual(garminController.numDevices, garminController.getDevices().length);
+			Assert.areEqual(garminController.getDevicesCount(), 2);
+		},
+		
+		testFirstDevice: function() {
+			garminController._finishFindDevices();
+			var device = garminController.getDevices()[0];
+		
+			Assert.areEqual("mbina", device.getDisplayName());
+			Assert.areEqual(0, device.getNumber());
+		},
+		
+		testFirstDeviceDetails: function() {
+			garminController._finishFindDevices();
+			var device = garminController.getDevices()[0];
+			
+			Assert.areEqual("006-B0484-00", device.getPartNumber());
+			Assert.areEqual("240", device.getSoftwareVersion());
+			Assert.areEqual("Forerunner305 Software Version 2.40", device.getDescription());
+			Assert.areEqual("3308802814", device.getId());
+		},
+		
+		 testIsMember: function() {
+			Assert.isTrue( garminController._isAMember('B',['A','B','C']) );
+			Assert.isFalse( garminController._isAMember('Z',['A','B','C']) );
+		},
+		
+		 testReadFitnessHistoryDirectory: function() {
+			garminController.unlock(["http://www.fakeURLStoredInGarminDevicePluginStub.com/", "0000"]);
+			garminController._finishFindDevices();
+			garminController.readDataFromDevice("FitnessHistoryDirectory");
+			garminController._finishReadFromDevice();
+			
+			Assert.areEqual( 2, garminController.gpsData.getElementsByTagName("Activity").length );
+		},
+		
+		 testReadFitnessCoursesDirectory: function() {
+			garminController.unlock(["http://www.fakeURLStoredInGarminDevicePluginStub.com/", "0000"]);
+			garminController._finishFindDevices();
+			garminController.readDataFromDevice("FitnessCoursesDirectory");
+			garminController._finishReadFromDevice();
+			
+			Assert.areEqual( 3, garminController.gpsData.getElementsByTagName("Course").length );
+		},
+		
+		 testReadFitnessHistoryDetail: function() {
+			garminController.unlock(["http://www.fakeURLStoredInGarminDevicePluginStub.com/", "0000"]);
+			garminController._finishFindDevices();
+			garminController.readDetailFromDevice("FitnessHistoryDetail");
+			garminController._finishReadFromDevice();
+			
+			Assert.areEqual( 1, garminController.gpsData.getElementsByTagName("Activity").length );
+		},
+		
+		 testReadFitnessCoursesDetail: function() {
+			garminController.unlock(["http://www.fakeURLStoredInGarminDevicePluginStub.com/", "0000"]);
+			garminController._finishFindDevices();
+			garminController.readDetailFromDevice("FitnessCoursesDetail");
+			garminController._finishReadFromDevice();
+			
+			Assert.areEqual( 1, garminController.gpsData.getElementsByTagName("Course").length );
+		},
+		
+		testBytesAvailable: function() {
+			Assert.areEqual( 22222, garminController.bytesAvailable('') );
+			Assert.areEqual( 40000, garminController.bytesAvailable('Garmin/gmapbmap.img') );	
+		},
+		
+		testGetDeviceByNumber: function() {
+			garminController._finishFindDevices();
+			Assert.isObject(garminController._getDeviceByNumber(0));
+		},
+
+		testGetCurrentDeviceXml: function() {
+			garminController._finishFindDevices();
+			Assert.isString(garminController.getCurrentDeviceXml());
+		},
+		
+		testSetDeviceNumber: function() {
+			garminController._finishFindDevices();
+			garminController.setDeviceNumber(1);
+			Assert.areEqual(garminController.getDeviceNumber(), 1);
+		},
+		
+		testCheckDeviceReadSupport: function() {
+			garminController._finishFindDevices();
+			Assert.isFalse(garminController.checkDeviceReadSupport(Garmin.DeviceControl.FILE_TYPES.fitDir), "Device should not support FIT directory reading.");
+			Assert.isFalse(garminController.checkDeviceReadSupport(Garmin.DeviceControl.FILE_TYPES.tcx), "Device should support TCX reading.");
+			Assert.isFalse(garminController.checkDeviceReadSupport(Garmin.DeviceControl.FILE_TYPES.tcxDir), "Device should support TCX directory reading.");
+			Assert.isTrue(garminController.checkDeviceReadSupport(Garmin.DeviceControl.FILE_TYPES.gpx), "Device should support GPX reading.");
+		},
+		
+		testDownloadFirmwareToDevice: function() {
+			garminController.unlock(["http://www.fakeURLStoredInGarminDevicePluginStub.com/", "0000"]);
+			garminController._finishFindDevices();
+			garminController.downloadFirmwareToDevice("<Update responses XML String>");
+			garminController._finishWriteToDevice();
+			Assert.isTrue(garminController.garminPlugin.downloadDataSucceeded(), "Device should return success when finished downloading firmware.");
+		}
+		      	
+   	});
+   	
+   	
+    //add the test cases and suites
+    YAHOO.tool.TestRunner.add(controlTestCase);
+    
+    //run all tests
+    var oLogger = new YAHOO.tool.TestLogger(); 
+    YAHOO.tool.TestRunner.run(); 
+    
+    // Notifies the manager that this test page has loaded.  Needed for running the test suite.
+    YAHOO.tool.TestManager.load();
+</script>
+<h1>Garmin Device Control Unit Tests</h1>
+
+<p>This page contains tests for the YUI Test Runner. To see them, take a look at the source.</p>
+<p>The unit tests are hitting a mocked GarminDevicePlugin object at <a href="GarminDevicePluginStub.js">GarminDevicePluginStub.js</a>.</p>
+</body>
+</html>

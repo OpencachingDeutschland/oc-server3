@@ -51,7 +51,7 @@
 <table class="table">
 	<tr>
 		<td width="350px">
-			<div id="garminDisplay">&nbsp;</div>
+			<div id="garminDisplay"></div>
 		</td>
 		<td>
 			<a href="http://www.garmin.com" target="_blank"><img src="images/garmin.png" width="200px" height="78px" alt="Garmin Mobile Navigation" title="Garmin Mobile Navigation" /></a>

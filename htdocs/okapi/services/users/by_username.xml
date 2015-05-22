@@ -1,22 +1,22 @@
 <xml>
-	<brief>Find single user, by his/her username</brief>
-	<issue-id>24</issue-id>
-	<desc>
-		<p>Retrieve information on a single user, referencing him by his username.</p>
-		<p><b>IMPORTANT:</b> user IDs don't change, but usernames <b>may</b> change.</p>
-		<p>Usually, you'll want to run this method only once, in order to get the IDs
-		of referenced users. You should not store usernames in your database, it is
-		much safer to reference them by their IDs.</p>
-	</desc>
-	<req name='username'>Name of the user (case insensitive).</req>
-	<req name='fields'>
-		<p>Same as in the services/users/user method. Pipe-separated list
-		of field names which you are interested with.
-		See services/users/user method for a list available values.</p>
-	</req>
-	<common-format-params/>
-	<returns>
-		<p>A dictionary of fields you have selected.</p>
-		<p>If given user does not exist, the method will respond with an HTTP 400 error.</p>
-	</returns>
+    <brief>Find single user, by his/her username</brief>
+    <issue-id>24</issue-id>
+    <desc>
+        <p>Retrieve information on a single user, referencing him by his username.</p>
+        <p><b>IMPORTANT:</b> user IDs don't change, but usernames <b>may</b> change.</p>
+        <p>Usually, you'll want to run this method only once, in order to get the IDs
+        of referenced users. You should not store usernames in your database, it is
+        much safer to reference them by their IDs.</p>
+    </desc>
+    <req name='username'>Name of the user (case insensitive).</req>
+    <req name='fields'>
+        <p>Same as in the services/users/user method. Pipe-separated list
+        of field names which you are interested with.
+        See services/users/user method for a list available values.</p>
+    </req>
+    <common-format-params/>
+    <returns>
+        <p>A dictionary of fields you have selected.</p>
+        <p>If given user does not exist, the method will respond with an HTTP 400 error.</p>
+    </returns>
 </xml>

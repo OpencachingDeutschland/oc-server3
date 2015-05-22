@@ -1,45 +1,45 @@
 <xml>
-	<brief>Retrieve information on a single user</brief>
-	<issue-id>26</issue-id>
-	<desc>
-		Retrieve information on a single user. This method might be also used
-		to retrieve data of the user in who's name the Access Token have been
-		issued. To do this, include the Access Token in your request, and <b>don't</b>
-		include the user_uuid argument.
-	</desc>
-	<req name='fields'>
-		<p>Pipe-separated list of field names which you are interested with.
-		Selected fields will be included in the response. See below for the
-		list of available fields.</p>
-	</req>
-	<opt name='user_uuid'>
-		<p>ID of the user.</p>
-		<p>This parameter is optional only when you sign your
-		request with an Access Token (Level 3 Authentication). Otherwise,
-		it is <b>required</b>.</p>
-	</opt>
-	<common-format-params/>
-	<returns>
-		<p>A dictionary of fields you have selected. Currently available fields:</p>
-		
-		<ul>
-			<li><b>uuid</b> - ID of the user,</li>
-			<li><b>username</b> - username (login) of the user,</li>
-			<li><b>profile_url</b> - URL of the user's Opencaching profile page,</li>
-			<li>
-				<p><b>is_admin</b> - boolean; true is user has admin privileges.</p>
-				<p>This value can be accessed only with <b>Level 3</b> Authentication
-				and only for the user of your Access Token. For all other reads, is_admin
-				will equal <b>null</b>.</p>
-			</li>
-			<li><b>internal_id</b> - internal ID of the user (<b>DO NOT</b> use this!
-				use the <b>uuid</b> as the user identifier),</li>
-			<li><b>caches_found</b> - number of "Found it" and "Attended" log entries,</li>
-			<li><b>caches_notfound</b> - number of "Didn't find it" log entries,</li>
-			<li><b>caches_hidden</b> - number of caches owned,</li>
-			<li><b>rcmds_given</b> - number of recommendations given.</li>
-		</ul>
-		
-		<p>If given user does not exist, the method will respond with an HTTP 400 error.</p>
-	</returns>
+    <brief>Retrieve information on a single user</brief>
+    <issue-id>26</issue-id>
+    <desc>
+        Retrieve information on a single user. This method might be also used
+        to retrieve data of the user in who's name the Access Token have been
+        issued. To do this, include the Access Token in your request, and <b>don't</b>
+        include the user_uuid argument.
+    </desc>
+    <req name='fields'>
+        <p>Pipe-separated list of field names which you are interested with.
+        Selected fields will be included in the response. See below for the
+        list of available fields.</p>
+    </req>
+    <opt name='user_uuid'>
+        <p>ID of the user.</p>
+        <p>This parameter is optional only when you sign your
+        request with an Access Token (Level 3 Authentication). Otherwise,
+        it is <b>required</b>.</p>
+    </opt>
+    <common-format-params/>
+    <returns>
+        <p>A dictionary of fields you have selected. Currently available fields:</p>
+
+        <ul>
+            <li><b>uuid</b> - ID of the user,</li>
+            <li><b>username</b> - username (login) of the user,</li>
+            <li><b>profile_url</b> - URL of the user's Opencaching profile page,</li>
+            <li>
+                <p><b>is_admin</b> - boolean; true is user has admin privileges.</p>
+                <p>This value can be accessed only with <b>Level 3</b> Authentication
+                and only for the user of your Access Token. For all other reads, is_admin
+                will equal <b>null</b>.</p>
+            </li>
+            <li><b>internal_id</b> - internal ID of the user (<b>DO NOT</b> use this!
+                use the <b>uuid</b> as the user identifier),</li>
+            <li><b>caches_found</b> - number of "Found it" and "Attended" log entries,</li>
+            <li><b>caches_notfound</b> - number of "Didn't find it" log entries,</li>
+            <li><b>caches_hidden</b> - number of caches owned,</li>
+            <li><b>rcmds_given</b> - number of recommendations given.</li>
+        </ul>
+
+        <p>If given user does not exist, the method will respond with an HTTP 400 error.</p>
+    </returns>
 </xml>

@@ -1,0 +1,1162 @@
+<html><head><meta http-equiv="content-type" content="text/html; charset=utf-8"> <style>
+	.KEYW {color: #933;}
+	.COMM {color: #bbb; font-style: italic;}
+	.NUMB {color: #393;}
+	.STRN {color: #393;}
+	.REGX {color: #339;}
+	.line {border-right: 1px dotted #666; color: #666; font-style: normal;}
+	</style></head><body><pre><span class='line'>  1</span> <span class="KEYW">if</span><span class="PUNC">(</span><span class="NAME">Garmin</span><span class="WHIT"> </span><span class="PUNC">==</span><span class="WHIT"> </span><span class="NAME">undefined</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>  2</span> </span><span class="WHIT">    </span><span class="COMM">/**
+<span class='line'>  3</span>     *@namespace Garmin The Garmin namespace object.
+<span class='line'>  4</span>     */</span><span class="WHIT">
+<span class='line'>  5</span> </span><span class="WHIT">    </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">Garmin</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>  6</span> </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>  7</span> </span><span class="COMM">/** Copyright &copy; 2007-2011 Garmin Ltd. or its subsidiaries.
+<span class='line'>  8</span>  *
+<span class='line'>  9</span>  * Licensed under the Apache License, Version 2.0 (the 'License')
+<span class='line'> 10</span>  * you may not use this file except in compliance with the License.
+<span class='line'> 11</span>  * You may obtain a copy of the License at
+<span class='line'> 12</span>  *
+<span class='line'> 13</span>  *    http://www.apache.org/licenses/LICENSE-2.0
+<span class='line'> 14</span>  *
+<span class='line'> 15</span>  * Unless required by applicable law or agreed to in writing, software
+<span class='line'> 16</span>  * distributed under the License is distributed on an 'AS IS' BASIS,
+<span class='line'> 17</span>  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+<span class='line'> 18</span>  * See the License for the specific language governing permissions and
+<span class='line'> 19</span>  * limitations under the License.
+<span class='line'> 20</span>  * 
+<span class='line'> 21</span>  * @fileOverview Garmin.DevicePlugin wraps the Garmin ActiveX/Netscape plugin that should be installed on your machine in order to talk to a Garmin Device.&lt;br/>
+<span class='line'> 22</span>  * The plugin is available for download from http://www.garmin.com/support/download_details.jsp?id=3608
+<span class='line'> 23</span>  * More information is available about this plugin from http://www.garmin.com/products/communicator/
+<span class='line'> 24</span>  * @version 1.10
+<span class='line'> 25</span>  */</span><span class="WHIT">
+<span class='line'> 26</span> 
+<span class='line'> 27</span> </span><span class="COMM">/**
+<span class='line'> 28</span>  * Wraps the ActiveX/Netscape plugin that should be installed on your machine in order to talk to a Garmin Device.
+<span class='line'> 29</span>  * The Garmin Communicator Plugin is available for download &lt;a href="http://www.garmin.com/support/download_details.jsp?id=3608">here&lt;/a>&lt;br/>
+<span class='line'> 30</span>  * More information is available about the plugin &lt;a href="http://www.garmin.com/products/communicator/">here&lt;/a>&lt;br/>&lt;br/>
+<span class='line'> 31</span>  * This api provides a set of functions to accomplish the following tasks with a Garmin Device:
+<span class='line'> 32</span>  * &lt;br/>
+<span class='line'> 33</span>  * &lt;br/>  1) Unlocking devices allowing them to be found and accessed.
+<span class='line'> 34</span>  * &lt;br/>  2) Finding avaliable devices plugged into this machine.
+<span class='line'> 35</span>  * &lt;br/>  3) Reading from the device.
+<span class='line'> 36</span>  * &lt;br/>  4) Writing to the device.
+<span class='line'> 37</span>  * &lt;br/>  5) Getting messages, getting transfer status/progress and version information from the device.
+<span class='line'> 38</span>  * &lt;br/>&lt;br/>
+<span class='line'> 39</span>  * Note that XML schemas &lt;a href=http://www.garmin.com/xmlschemas/GarminPluginAPIV1.xsd>GarminPluginAPIV1&lt;/a> and
+<span class='line'> 40</span>  * &lt;a href=http://www.garmin.com/xmlschemas/DeviceDownloadV1.xsd>DeviceDownloadV1&lt;/a> define XML input and output throughout this API.&lt;br/>
+<span class='line'> 41</span>  * 
+<span class='line'> 42</span>  * @class Garmin.DevicePlugin
+<span class='line'> 43</span>  * @constructor
+<span class='line'> 44</span>  * @param pluginElement element that references the Garmin GPS Control Web Plugin that should be installed.
+<span class='line'> 45</span>  * @return a new Garmin.DevicePlugin
+<span class='line'> 46</span>  *
+<span class='line'> 47</span>  * @requires Prototype
+<span class='line'> 48</span>  */</span><span class="WHIT">
+<span class='line'> 49</span> 
+<span class='line'> 50</span> </span><span class="NAME">Garmin.DevicePlugin</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="NAME">pluginElement</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">  </span><span class="COMM">//just here for jsdoc</span><span class="WHIT">
+<span class='line'> 51</span> </span><span class="NAME">Garmin.DevicePlugin</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">Class.create</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 52</span> </span><span class="NAME">Garmin.DevicePlugin.prototype</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 53</span> 
+<span class='line'> 54</span> </span><span class="WHIT">    </span><span class="COMM">/** Constructor.
+<span class='line'> 55</span>      * @private
+<span class='line'> 56</span>      */</span><span class="WHIT">
+<span class='line'> 57</span> </span><span class="WHIT">	</span><span class="NAME">initialize</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="NAME">pluginElement</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">        
+<span class='line'> 58</span> 	    </span><span class="NAME">this.plugin</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">pluginElement</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 59</span> </span><span class="WHIT">	    </span><span class="NAME">this.unlocked</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">false</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 60</span> </span><span class="WHIT">	    </span><span class="COMM">//console.debug("DevicePlugin constructor supportsFitnessWrite="+this.supportsFitnessWrite)</span><span class="WHIT">
+<span class='line'> 61</span> </span><span class="WHIT">	</span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 62</span> </span><span class="WHIT">	
+<span class='line'> 63</span> 	</span><span class="COMM">/** Unlocks the GpsControl object to be used at the given web address.  
+<span class='line'> 64</span>      * More than one set of path-key pairs my be passed in, for example:
+<span class='line'> 65</span>      * ['http://myDomain.com/', 'xxx','http://www.myDomain.com/', 'yyy']
+<span class='line'> 66</span>      * See documentation site for more info on getting a key. &lt;br/>
+<span class='line'> 67</span>      * &lt;br/>
+<span class='line'> 68</span>      * Minimum plugin version 2.0.0.4
+<span class='line'> 69</span>      * 
+<span class='line'> 70</span>      * @param pathKeyPairsArray {Array}- baseURL and key pairs.  
+<span class='line'> 71</span>      * @type Boolean
+<span class='line'> 72</span>      * @return true if successfully unlocked or undefined otherwise
+<span class='line'> 73</span>      */</span><span class="WHIT">
+<span class='line'> 74</span> </span><span class="WHIT">	</span><span class="NAME">unlock</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="NAME">pathKeyPairsArray</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 75</span> </span><span class="WHIT">	    </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">len</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">pathKeyPairsArray</span><span class="WHIT"> </span><span class="PUNC">?</span><span class="WHIT"> </span><span class="NAME">pathKeyPairsArray.length</span><span class="WHIT"> </span><span class="PUNC">/</span><span class="WHIT"> </span><span class="NUMB">2</span><span class="WHIT"> </span><span class="PUNC">:</span><span class="WHIT"> </span><span class="NUMB">0</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 76</span> </span><span class="WHIT">	    </span><span class="KEYW">for</span><span class="PUNC">(</span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">i</span><span class="PUNC">=</span><span class="NUMB">0</span><span class="PUNC">;</span><span class="NAME">i</span><span class="PUNC">&lt;</span><span class="NAME">len</span><span class="PUNC">;</span><span class="NAME">i</span><span class="PUNC">++</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 77</span> </span><span class="WHIT">	    	</span><span class="KEYW">if</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">this.plugin.Unlock</span><span class="PUNC">(</span><span class="NAME">pathKeyPairsArray</span><span class="PUNC">[</span><span class="NAME">i</span><span class="PUNC">*</span><span class="NUMB">2</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">pathKeyPairsArray</span><span class="PUNC">[</span><span class="NAME">i</span><span class="PUNC">*</span><span class="NUMB">2</span><span class="PUNC">+</span><span class="NUMB">1</span><span class="PUNC">]</span><span class="PUNC">)</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 78</span> </span><span class="WHIT">	    		</span><span class="NAME">this.unlocked</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">true</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 79</span> </span><span class="WHIT">	    		</span><span class="KEYW">return</span><span class="WHIT"> </span><span class="NAME">this.unlocked</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 80</span> </span><span class="WHIT">	    	</span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'> 81</span> </span><span class="WHIT">	    </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'> 82</span> </span><span class="WHIT">	    
+<span class='line'> 83</span> 	    </span><span class="COMM">// Unlock codes for local development</span><span class="WHIT">
+<span class='line'> 84</span> </span><span class="WHIT">	    </span><span class="NAME">this.tryUnlock</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">this.plugin.Unlock</span><span class="PUNC">(</span><span class="STRN">"file:///"</span><span class="PUNC">,</span><span class="STRN">"cb1492ae040612408d87cc53e3f7ff3c"</span><span class="PUNC">)</span><span class="WHIT">
+<span class='line'> 85</span> </span><span class="WHIT">        	</span><span class="PUNC">||</span><span class="WHIT"> </span><span class="NAME">this.plugin.Unlock</span><span class="PUNC">(</span><span class="STRN">"http://localhost"</span><span class="PUNC">,</span><span class="STRN">"45517b532362fc3149e4211ade14c9b2"</span><span class="PUNC">)</span><span class="WHIT">
+<span class='line'> 86</span> </span><span class="WHIT">        	</span><span class="PUNC">||</span><span class="WHIT"> </span><span class="NAME">this.plugin.Unlock</span><span class="PUNC">(</span><span class="STRN">"http://127.0.0.1"</span><span class="PUNC">,</span><span class="STRN">"40cd4860f7988c53b15b8491693de133"</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 87</span> </span><span class="WHIT">        
+<span class='line'> 88</span>         </span><span class="NAME">this.unlocked</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="PUNC">!</span><span class="NAME">this.plugin.Locked</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 89</span> </span><span class="WHIT">        	
+<span class='line'> 90</span> 	    </span><span class="KEYW">return</span><span class="WHIT"> </span><span class="NAME">this.unlocked</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 91</span> </span><span class="WHIT">	</span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 92</span> </span><span class="WHIT">	
+<span class='line'> 93</span> 	</span><span class="COMM">/** Returns true if the plug-in is unlocked.
+<span class='line'> 94</span> 	 */</span><span class="WHIT">
+<span class='line'> 95</span> </span><span class="WHIT">	</span><span class="NAME">isUnlocked</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 96</span> </span><span class="WHIT">		</span><span class="KEYW">return</span><span class="WHIT"> </span><span class="NAME">this.unlocked</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 97</span> </span><span class="WHIT">	</span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 98</span> </span><span class="WHIT">	
+<span class='line'> 99</span> 	</span><span class="COMM">/**
+<span class='line'>100</span> 	* Check to see if a property (function or field) is defined for an object.
+<span class='line'>101</span> 	* This function is reliable for native and host objects.
+<span class='line'>102</span> 	* @param object {Object} - the object to test.
+<span class='line'>103</span> 	* @param propertyName {String} - name of the property to test.
+<span class='line'>104</span>     * @type Boolean
+<span class='line'>105</span> 	* @return true - if property is defined,  False otherwise.
+<span class='line'>106</span> 	*/</span><span class="WHIT">
+<span class='line'>107</span> </span><span class="WHIT">	</span><span class="NAME">_propertyExists</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="WHIT"> </span><span class="NAME">object</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">property</span><span class="WHIT"> </span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>108</span> </span><span class="WHIT">	    </span><span class="COMM">//tweaked version of Michaux's detection function:</span><span class="WHIT">
+<span class='line'>109</span> </span><span class="WHIT">        </span><span class="COMM">//http://peter.michaux.ca/articles/feature-detection-state-of-the-art-browser-scripting</span><span class="WHIT">
+<span class='line'>110</span> </span><span class="WHIT">        </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">isProperty</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">false</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>111</span> </span><span class="WHIT">        </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">theType</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">typeof</span><span class="WHIT"> </span><span class="NAME">object</span><span class="PUNC">[</span><span class="NAME">property</span><span class="PUNC">]</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>112</span> </span><span class="WHIT">        </span><span class="KEYW">if</span><span class="PUNC">(</span><span class="WHIT"> </span><span class="NAME">theType</span><span class="WHIT"> </span><span class="PUNC">!=</span><span class="WHIT"> </span><span class="STRN">'undefined'</span><span class="WHIT"> </span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>113</span> </span><span class="WHIT">            </span><span class="NAME">isProperty</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">true</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>114</span> </span><span class="WHIT">        </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>115</span> </span><span class="WHIT">        </span><span class="KEYW">else</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>116</span> </span><span class="WHIT">            </span><span class="KEYW">try</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>117</span> </span><span class="WHIT">                </span><span class="COMM">// This test would error for ActiveX but</span><span class="WHIT">
+<span class='line'>118</span> </span><span class="WHIT">                </span><span class="COMM">// those test will have returned above </span><span class="WHIT">
+<span class='line'>119</span> </span><span class="WHIT">                </span><span class="COMM">// because typeof result will have been </span><span class="WHIT">
+<span class='line'>120</span> </span><span class="WHIT">                </span><span class="COMM">// 'unknown'.</span><span class="WHIT">
+<span class='line'>121</span> </span><span class="WHIT">                </span><span class="KEYW">if</span><span class="PUNC">(</span><span class="WHIT"> </span><span class="NAME">object</span><span class="PUNC">[</span><span class="NAME">property</span><span class="PUNC">]</span><span class="WHIT"> </span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>122</span> </span><span class="WHIT">                    </span><span class="NAME">isProperty</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">true</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>123</span> </span><span class="WHIT">                </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>124</span> </span><span class="WHIT">            </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>125</span> </span><span class="WHIT">            </span><span class="KEYW">catch</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">e</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>126</span> </span><span class="WHIT">        </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>127</span> </span><span class="WHIT">        </span><span class="KEYW">return</span><span class="WHIT"> </span><span class="NAME">isProperty</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>128</span> </span><span class="WHIT">	</span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>129</span> </span><span class="WHIT">	
+<span class='line'>130</span> 	</span><span class="COMM">/** Lazy-logic accessor to fitness write support var.
+<span class='line'>131</span> 	 * This is used to detect whether the user's installed plugin supports fitness writing.
+<span class='line'>132</span> 	 * Fitness writing capability has a minimum requirement of plugin version 2.2.0.1.
+<span class='line'>133</span> 	 * This should NOT be called until the plug-in has been unlocked.
+<span class='line'>134</span> 	 */</span><span class="WHIT">
+<span class='line'>135</span> </span><span class="WHIT">	</span><span class="NAME">getSupportsFitnessWrite</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>136</span> </span><span class="WHIT">	    </span><span class="KEYW">return</span><span class="WHIT"> </span><span class="NAME">this._propertyExists</span><span class="PUNC">(</span><span class="NAME">this.plugin</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="STRN">"StartWriteFitnessData"</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT"> 
+<span class='line'>137</span> 	</span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>138</span> </span><span class="WHIT">	
+<span class='line'>139</span> 	</span><span class="COMM">/** Lazy-logic accessor to fitness write support var.
+<span class='line'>140</span> 	 * This is used to detect whether the user's installed plugin supports fitness directory reading,
+<span class='line'>141</span> 	 * which has a minimum requirement of plugin version 2.2.0.2.
+<span class='line'>142</span> 	 * This should NOT be called until the plug-in has been unlocked.
+<span class='line'>143</span> 	 */</span><span class="WHIT">
+<span class='line'>144</span> </span><span class="WHIT">	</span><span class="NAME">getSupportsFitnessDirectoryRead</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">	
+<span class='line'>145</span> 		</span><span class="KEYW">return</span><span class="WHIT"> </span><span class="NAME">this._propertyExists</span><span class="PUNC">(</span><span class="NAME">this.plugin</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="STRN">"StartReadFitnessDirectory"</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>146</span> </span><span class="WHIT">	</span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>147</span> 
+<span class='line'>148</span> </span><span class="WHIT">	</span><span class="COMM">/** Lazy-logic accessor to FIT read support var.
+<span class='line'>149</span> 	 * This is used to detect whether the user's installed plugin supports FIT directory reading,
+<span class='line'>150</span> 	 * which has a minimum requirement of plugin version 2.8.1.0.
+<span class='line'>151</span> 	 * This should NOT be called until the plug-in has been unlocked.
+<span class='line'>152</span> 	 */</span><span class="WHIT">
+<span class='line'>153</span> </span><span class="WHIT">	</span><span class="NAME">getSupportsFitDirectoryRead</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>154</span> </span><span class="WHIT">        </span><span class="KEYW">return</span><span class="WHIT"> </span><span class="NAME">this._propertyExists</span><span class="PUNC">(</span><span class="NAME">this.plugin</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="STRN">"StartReadFITDirectory"</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>155</span> </span><span class="WHIT">	</span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>156</span> </span><span class="WHIT">	
+<span class='line'>157</span> 	</span><span class="COMM">/** Lazy-logic accessor to fitness read compressed support var.
+<span class='line'>158</span> 	 * This is used to detect whether the user's installed plugin supports fitness reading in compressed format,
+<span class='line'>159</span> 	 * which has a minimum requirement of plugin version 2.2.0.2.
+<span class='line'>160</span> 	 * This should NOT be called until the plug-in has been unlocked.
+<span class='line'>161</span> 	 */</span><span class="WHIT">
+<span class='line'>162</span> </span><span class="WHIT">	</span><span class="NAME">getSupportsFitnessReadCompressed</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>163</span> </span><span class="WHIT">	    </span><span class="KEYW">return</span><span class="WHIT"> </span><span class="NAME">this._propertyExists</span><span class="PUNC">(</span><span class="NAME">this.plugin</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="STRN">"TcdXmlz"</span><span class="WHIT"> </span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>164</span> </span><span class="WHIT">	</span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>165</span> 
+<span class='line'>166</span> </span><span class="WHIT">	</span><span class="COMM">/** This is used to detect whether the user's installed plugin supports readable file listing.
+<span class='line'>167</span> 	 * Readable file listing has a minimum requirement of plugin version 2.8.1.0.
+<span class='line'>168</span> 	 * This should NOT be called until the plug-in has been unlocked.
+<span class='line'>169</span> 	 */</span><span class="WHIT">
+<span class='line'>170</span> </span><span class="WHIT">	</span><span class="NAME">getSupportsReadableFileListing</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">		
+<span class='line'>171</span>         </span><span class="KEYW">return</span><span class="WHIT"> </span><span class="NAME">this._propertyExists</span><span class="PUNC">(</span><span class="NAME">this.plugin</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="STRN">"StartReadableFileListing"</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>172</span> </span><span class="WHIT">	</span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>173</span> </span><span class="WHIT">	
+<span class='line'>174</span> 	</span><span class="COMM">/** Initiates a find Gps devices action on the plugin. 
+<span class='line'>175</span> 	 * Poll with finishFindDevices to determine when the plugin has completed this action.
+<span class='line'>176</span> 	 * Use getDeviceXmlString to inspect xml contents for and array of Device nodes.&lt;br/>
+<span class='line'>177</span> 	 * &lt;br/>
+<span class='line'>178</span> 	 * Minimum plugin version 2.0.0.4
+<span class='line'>179</span> 	 * 
+<span class='line'>180</span> 	 * @see #finishFindDevices
+<span class='line'>181</span> 	 * @see #cancelFindDevices
+<span class='line'>182</span> 	 */</span><span class="WHIT">
+<span class='line'>183</span> </span><span class="WHIT">	</span><span class="NAME">startFindDevices</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>184</span> </span><span class="WHIT">		</span><span class="NAME">this.plugin.StartFindDevices</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>185</span> </span><span class="WHIT">	</span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>186</span> 
+<span class='line'>187</span> </span><span class="WHIT">	</span><span class="COMM">/** Cancels the current find devices interaction. &lt;br/>
+<span class='line'>188</span> 	 * &lt;br/>
+<span class='line'>189</span> 	 * Minimum plugin version 2.0.0.4
+<span class='line'>190</span> 	 * 
+<span class='line'>191</span> 	 * @see #startFindDevices
+<span class='line'>192</span> 	 * @see #finishFindDevices
+<span class='line'>193</span> 	 */</span><span class="WHIT">
+<span class='line'>194</span> </span><span class="WHIT">	</span><span class="NAME">cancelFindDevices</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>195</span> </span><span class="WHIT">        </span><span class="NAME">this.plugin.CancelFindDevices</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>196</span> </span><span class="WHIT">	</span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>197</span> 
+<span class='line'>198</span> </span><span class="WHIT">	</span><span class="COMM">/** Poll - with this function to determine completion of startFindDevices. Used after 
+<span class='line'>199</span> 	 * the call to startFindDevices(). &lt;br/>
+<span class='line'>200</span> 	 * &lt;br/>
+<span class='line'>201</span> 	 * Minimum plugin version 2.0.0.4
+<span class='line'>202</span> 	 * 
+<span class='line'>203</span> 	 * @type Boolean
+<span class='line'>204</span> 	 * @return Returns true if completed finding devices otherwise false.
+<span class='line'>205</span> 	 * @see #startFindDevices
+<span class='line'>206</span> 	 * @see #cancelFindDevices
+<span class='line'>207</span> 	 */</span><span class="WHIT">
+<span class='line'>208</span> </span><span class="WHIT">	</span><span class="NAME">finishFindDevices</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>209</span> </span><span class="WHIT">    	</span><span class="KEYW">return</span><span class="WHIT"> </span><span class="NAME">this.plugin.FinishFindDevices</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>210</span> </span><span class="WHIT">	</span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>211</span> </span><span class="WHIT">	
+<span class='line'>212</span> 	</span><span class="COMM">/** Returns information about the number of devices connected to this machine as 
+<span class='line'>213</span> 	 * well as the names of those devices. Refer to the Devices_t element in the
+<span class='line'>214</span> 	 * &lt;a href="http://www.garmin.com/xmlschemas/GarminPluginAPIV1.xsd">GarminPluginAPIV1 schema&lt;/a>
+<span class='line'>215</span> 	 * for what is included.
+<span class='line'>216</span> 	 * The xml returned should contain a 'Device' element with 'DisplayName' and 'Number'
+<span class='line'>217</span> 	 * if there is a device actually connected. &lt;br/>
+<span class='line'>218</span> 	 * &lt;br/>
+<span class='line'>219</span> 	 * Minimum plugin version 2.0.0.4
+<span class='line'>220</span> 	 * 
+<span class='line'>221</span> 	 * @type String
+<span class='line'>222</span> 	 * @return Xml string with detailed device info
+<span class='line'>223</span> 	 * @see #getDeviceDescriptionXml
+<span class='line'>224</span> 	 */</span><span class="WHIT">
+<span class='line'>225</span> </span><span class="WHIT">	</span><span class="NAME">getDevicesXml</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>226</span> </span><span class="WHIT">		</span><span class="KEYW">return</span><span class="WHIT"> </span><span class="NAME">this.plugin.DevicesXmlString</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>227</span> </span><span class="WHIT">	</span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>228</span> 
+<span class='line'>229</span> </span><span class="WHIT">	</span><span class="COMM">/** Returns information about the specified Device indicated by the device Number. 
+<span class='line'>230</span> 	 * See the getDevicesXml function to get the actual deviceNumber assigned.
+<span class='line'>231</span> 	 * Refer to the 
+<span class='line'>232</span> 	 * &lt;a href="http://developer.garmin.com/schemas/device/v2/xmlspy/index.html#Link04DDFE88">Devices_t&lt;/a>
+<span class='line'>233</span> 	 * element in the Device XML schema for what is included in the XML. &lt;br/>
+<span class='line'>234</span> 	 * &lt;br/>
+<span class='line'>235</span> 	 * Minimum plugin version 2.0.0.4
+<span class='line'>236</span> 	 * 
+<span class='line'>237</span> 	 * @param deviceNumber {Number} Assigned by the plugin, see getDevicesXml for 
+<span class='line'>238</span> 	 * assignment of that number.
+<span class='line'>239</span> 	 * @type String
+<span class='line'>240</span> 	 * @return Xml string with detailed device info
+<span class='line'>241</span> 	 * @see #getDevicesXml for device number assignment
+<span class='line'>242</span> 	 */</span><span class="WHIT">
+<span class='line'>243</span> </span><span class="WHIT">	</span><span class="NAME">getDeviceDescriptionXml</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="NAME">deviceNumber</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>244</span> </span><span class="WHIT">		</span><span class="KEYW">return</span><span class="WHIT"> </span><span class="NAME">this.plugin.DeviceDescription</span><span class="PUNC">(</span><span class="NAME">deviceNumber</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>245</span> </span><span class="WHIT">	</span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>246</span> </span><span class="WHIT">	
+<span class='line'>247</span> 	</span><span class="COMM">/**Returns the number, assigned by plugin, of the parent device.&lt;br/> 
+<span class='line'>248</span>      * If the device has no parent, -1 is returned.&lt;br/>
+<span class='line'>249</span> 	 * Minimum plugin version 2.9.2.5
+<span class='line'>250</span> 	 * 
+<span class='line'>251</span> 	 * @param deviceNumber {Number} Assigned by the plugin
+<span class='line'>252</span>      * @returns {Number} Parent device's assigned number. -1 if the device has no parent.
+<span class='line'>253</span> 	 * @see #getDevicesXml for device number assignment
+<span class='line'>254</span> 	 */</span><span class="WHIT">
+<span class='line'>255</span> </span><span class="WHIT">	</span><span class="NAME">getParentDevice</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="NAME">deviceNumber</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>256</span> </span><span class="WHIT">		</span><span class="KEYW">if</span><span class="PUNC">(</span><span class="WHIT"> </span><span class="PUNC">!</span><span class="NAME">this.checkPluginVersionSupport</span><span class="PUNC">(</span><span class="PUNC">[</span><span class="NUMB">2</span><span class="PUNC">,</span><span class="NUMB">9</span><span class="PUNC">,</span><span class="NUMB">2</span><span class="PUNC">,</span><span class="NUMB">5</span><span class="PUNC">]</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">)</span><span class="WHIT"> 
+<span class='line'>257</span> 		</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>258</span> </span><span class="WHIT">			</span><span class="KEYW">throw</span><span class="WHIT"> </span><span class="KEYW">new</span><span class="WHIT"> </span><span class="NAME">Error</span><span class="PUNC">(</span><span class="STRN">"Your Communicator Plug-in version ("</span><span class="WHIT"> </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="NAME">this.getPluginVersionString</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="STRN">") does not support device hierarchy (getParentDevice)"</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>259</span> </span><span class="WHIT">		</span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>260</span> </span><span class="WHIT">		</span><span class="KEYW">return</span><span class="WHIT"> </span><span class="NAME">this.plugin.ParentDevice</span><span class="PUNC">(</span><span class="NAME">deviceNumber</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>261</span> </span><span class="WHIT">	</span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>262</span> </span><span class="WHIT">	
+<span class='line'>263</span> 	</span><span class="COMM">// Read Methods</span><span class="WHIT">
+<span class='line'>264</span> </span><span class="WHIT">	
+<span class='line'>265</span> 	</span><span class="COMM">/** Initiates the read from the gps device conneted. Use finishReadFromGps and getGpsProgressXml to 
+<span class='line'>266</span> 	 * determine when the plugin is done with this operation. Also, use getGpsXml to extract the
+<span class='line'>267</span> 	 * actual data from the device. &lt;br/>
+<span class='line'>268</span> 	 * &lt;br/>
+<span class='line'>269</span> 	 * Minimum plugin version 2.0.0.4
+<span class='line'>270</span> 	 * 
+<span class='line'>271</span> 	 * @param deviceNumber {Number} assigned by the plugin, see getDevicesXml for 
+<span class='line'>272</span> 	 * assignment of that number.
+<span class='line'>273</span> 	 * @see #finishReadFromGps
+<span class='line'>274</span> 	 * @see #cancelReadFromGps
+<span class='line'>275</span> 	 * @see #getDevicesXml for device number assignment
+<span class='line'>276</span> 	 */</span><span class="WHIT">
+<span class='line'>277</span> </span><span class="WHIT">	</span><span class="NAME">startReadFromGps</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="NAME">deviceNumber</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>278</span> </span><span class="WHIT">		 </span><span class="NAME">this.plugin.StartReadFromGps</span><span class="PUNC">(</span><span class="WHIT"> </span><span class="NAME">deviceNumber</span><span class="WHIT"> </span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>279</span> </span><span class="WHIT">	</span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>280</span> 
+<span class='line'>281</span> </span><span class="WHIT">	</span><span class="COMM">/** Indicates the status of the read process. It will return an integer
+<span class='line'>282</span> 	 * know as the completion state.  The purpose is to show the 
+<span class='line'>283</span>  	 * user information about what is happening to the plugin while it 
+<span class='line'>284</span>  	 * is servicing your request. Used after startReadFromGps(). &lt;br/>
+<span class='line'>285</span>  	 * &lt;br/>
+<span class='line'>286</span>  	 * Minimum plugin version 2.0.0.4
+<span class='line'>287</span>  	 * 
+<span class='line'>288</span> 	 * @type Number
+<span class='line'>289</span> 	 * @return Completion state - The completion state can be one of the following: &lt;br/>
+<span class='line'>290</span> 	 *  &lt;br/>
+<span class='line'>291</span> 	 *	0 = idle &lt;br/>
+<span class='line'>292</span>  	 * 	1 = working &lt;br/>
+<span class='line'>293</span>  	 * 	2 = waiting &lt;br/>
+<span class='line'>294</span>  	 * 	3 = finished &lt;br/>
+<span class='line'>295</span>  	 * @see #startReadFromGps
+<span class='line'>296</span> 	 * @see #cancelReadFromGps
+<span class='line'>297</span> 	 */</span><span class="WHIT">
+<span class='line'>298</span> </span><span class="WHIT">	</span><span class="NAME">finishReadFromGps</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>299</span> </span><span class="WHIT">		</span><span class="KEYW">return</span><span class="WHIT"> </span><span class="NAME">this.plugin.FinishReadFromGps</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>300</span> </span><span class="WHIT">	</span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>301</span> </span><span class="WHIT">	
+<span class='line'>302</span> 	</span><span class="COMM">/** Cancels the current read from the device. &lt;br/>
+<span class='line'>303</span> 	 * &lt;br/>
+<span class='line'>304</span> 	 * Minimum plugin version 2.0.0.4
+<span class='line'>305</span> 	 * @see #startReadFromGps
+<span class='line'>306</span> 	 * @see #finishReadFromGps
+<span class='line'>307</span>      */</span><span class="WHIT">	
+<span class='line'>308</span> 	</span><span class="NAME">cancelReadFromGps</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>309</span> </span><span class="WHIT">		</span><span class="NAME">this.plugin.CancelReadFromGps</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>310</span> </span><span class="WHIT">	</span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>311</span> </span><span class="WHIT">	
+<span class='line'>312</span> 	</span><span class="COMM">/** Start the asynchronous ReadFitnessData operation. &lt;br/>
+<span class='line'>313</span> 	 * &lt;br/>
+<span class='line'>314</span> 	 * Minimum plugin version 2.1.0.3 for FitnessHistory type&lt;br/>
+<span class='line'>315</span>      * Minimum plugin version 2.2.0.1 for FitnessWorkouts, FitnessUserProfile, FitnessCourses
+<span class='line'>316</span> 	 * 
+<span class='line'>317</span> 	 * @param deviceNumber {Number} assigned by the plugin.
+<span class='line'>318</span>      * @param dataTypeName {String} a fitness datatype from the 
+<span class='line'>319</span> 	 * &lt;a href="http://developer.garmin.com/schemas/device/v2">Garmin Device XML&lt;/a> 
+<span class='line'>320</span> 	 * retrieved with getDeviceDescriptionXml
+<span class='line'>321</span> 	 * @see #finishReadFitnessData  
+<span class='line'>322</span> 	 * @see #cancelReadFitnessData
+<span class='line'>323</span> 	 * @see #getDeviceDescriptionXml
+<span class='line'>324</span> 	 * @see #getDevicesXml for device number assignment
+<span class='line'>325</span> 	 * @see Garmin.DeviceControl#FILE_TYPES
+<span class='line'>326</span> 	 */</span><span class="WHIT">
+<span class='line'>327</span> </span><span class="WHIT">	</span><span class="NAME">startReadFitnessData</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="NAME">deviceNumber</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">dataTypeName</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>328</span> </span><span class="WHIT">		</span><span class="KEYW">if</span><span class="PUNC">(</span><span class="WHIT"> </span><span class="PUNC">!</span><span class="NAME">this.checkPluginVersionSupport</span><span class="PUNC">(</span><span class="PUNC">[</span><span class="NUMB">2</span><span class="PUNC">,</span><span class="NUMB">1</span><span class="PUNC">,</span><span class="NUMB">0</span><span class="PUNC">,</span><span class="NUMB">3</span><span class="PUNC">]</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>329</span> </span><span class="WHIT">			</span><span class="KEYW">throw</span><span class="WHIT"> </span><span class="KEYW">new</span><span class="WHIT"> </span><span class="NAME">Error</span><span class="PUNC">(</span><span class="STRN">"Your Communicator Plug-in version ("</span><span class="WHIT"> </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="NAME">this.getPluginVersionString</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="STRN">") does not support reading this type of fitness data."</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>330</span> </span><span class="WHIT">		</span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>331</span> 
+<span class='line'>332</span> </span><span class="WHIT">		 </span><span class="NAME">this.plugin.StartReadFitnessData</span><span class="PUNC">(</span><span class="WHIT"> </span><span class="NAME">deviceNumber</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">dataTypeName</span><span class="WHIT"> </span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>333</span> </span><span class="WHIT">	</span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>334</span> 
+<span class='line'>335</span> </span><span class="WHIT">	</span><span class="COMM">/** Poll for completion of the asynchronous ReadFitnessData operation. &lt;br/>
+<span class='line'>336</span>      * &lt;br/>
+<span class='line'>337</span>      * If the CompletionState is eMessageWaiting, call MessageBoxXml
+<span class='line'>338</span>      * to get a description of the message box to be displayed to
+<span class='line'>339</span>      * the user, and then call RespondToMessageBox with the value of the
+<span class='line'>340</span>      * selected button to resume operation.&lt;br/>
+<span class='line'>341</span>      * &lt;br/>
+<span class='line'>342</span>      * Minimum plugin version 2.1.0.3 for FitnessHistory type &lt;br/>
+<span class='line'>343</span>      * Minimum plugin version 2.2.0.1 for FitnessWorkouts, FitnessUserProfile, FitnessCourses
+<span class='line'>344</span> 	 * 
+<span class='line'>345</span> 	 * @type Number
+<span class='line'>346</span> 	 * @return Completion state - The completion state can be one of the following: &lt;br/>
+<span class='line'>347</span> 	 *  &lt;br/>
+<span class='line'>348</span> 	 *	0 = idle &lt;br/>
+<span class='line'>349</span>  	 * 	1 = working &lt;br/>
+<span class='line'>350</span>  	 * 	2 = waiting &lt;br/>
+<span class='line'>351</span>  	 * 	3 = finished &lt;br/>
+<span class='line'>352</span>  	 * @see #startReadFitnessData  
+<span class='line'>353</span> 	 * @see #cancelReadFitnessData
+<span class='line'>354</span> 	 */</span><span class="WHIT">
+<span class='line'>355</span> </span><span class="WHIT">	</span><span class="NAME">finishReadFitnessData</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>356</span> </span><span class="WHIT">	 	 </span><span class="KEYW">return</span><span class="WHIT">  </span><span class="NAME">this.plugin.FinishReadFitnessData</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>357</span> </span><span class="WHIT">	</span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>358</span> </span><span class="WHIT">	
+<span class='line'>359</span> 	</span><span class="COMM">/** Cancel the asynchronous ReadFitnessData operation. &lt;br/>
+<span class='line'>360</span> 	 * &lt;br/>
+<span class='line'>361</span> 	 * Minimum plugin version 2.1.0.3 for FitnessHistory type &lt;br/>
+<span class='line'>362</span>      * Minimum plugin version 2.2.0.1 for FitnessWorkouts, FitnessUserProfile, FitnessCourses
+<span class='line'>363</span>      * 
+<span class='line'>364</span>      * @see #startReadFitnessData  
+<span class='line'>365</span> 	 * @see #finishReadFitnessData
+<span class='line'>366</span>      */</span><span class="WHIT">	
+<span class='line'>367</span> 	</span><span class="NAME">cancelReadFitnessData</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>368</span> </span><span class="WHIT">		</span><span class="NAME">this.plugin.CancelReadFitnessData</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>369</span> </span><span class="WHIT">	</span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>370</span> </span><span class="WHIT">	
+<span class='line'>371</span> 	</span><span class="COMM">/**
+<span class='line'>372</span> 	 * List all of the FIT files on the device. Starts an asynchronous directory listing operation for the device.
+<span class='line'>373</span> 	 * Poll for finished with FinishReadFitDirectory. The result can be retrieved with {@link #getDirectoryXml}.
+<span class='line'>374</span> 	 * 
+<span class='line'>375</span> 	 * Minimum plugin version 2.7.2.0
+<span class='line'>376</span> 	 * @see #finishReadFitDirectory
+<span class='line'>377</span> 	 */</span><span class="WHIT">
+<span class='line'>378</span> </span><span class="WHIT">	</span><span class="NAME">startReadFitDirectory</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="NAME">deviceNumber</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>379</span> </span><span class="WHIT">	    </span><span class="KEYW">if</span><span class="PUNC">(</span><span class="WHIT"> </span><span class="PUNC">!</span><span class="NAME">this.getSupportsFitDirectoryRead</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>380</span> </span><span class="WHIT">			</span><span class="KEYW">throw</span><span class="WHIT"> </span><span class="KEYW">new</span><span class="WHIT"> </span><span class="NAME">Error</span><span class="PUNC">(</span><span class="STRN">"Your Communicator Plug-in version ("</span><span class="WHIT"> </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="NAME">this.getPluginVersionString</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="STRN">") does not support FIT directory listing data."</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>381</span> </span><span class="WHIT">		</span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>382</span> </span><span class="WHIT">	    </span><span class="NAME">this.plugin.StartReadFITDirectory</span><span class="PUNC">(</span><span class="NAME">deviceNumber</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>383</span> </span><span class="WHIT">	</span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>384</span> </span><span class="WHIT">	
+<span class='line'>385</span> 	</span><span class="COMM">/** Poll for completion of the asynchronous startReadFitDirectory operation. &lt;br/>
+<span class='line'>386</span>      * &lt;br/>
+<span class='line'>387</span> 	 * Minimum plugin version 2.7.2.0
+<span class='line'>388</span> 	 * 
+<span class='line'>389</span> 	 * @type Number
+<span class='line'>390</span> 	 * @return Completion state - The completion state can be one of the following: &lt;br/>
+<span class='line'>391</span> 	 *  &lt;br/>
+<span class='line'>392</span> 	 *	0 = idle &lt;br/>
+<span class='line'>393</span>  	 * 	1 = working &lt;br/>
+<span class='line'>394</span>  	 * 	2 = waiting &lt;br/>
+<span class='line'>395</span>  	 * 	3 = finished &lt;br/>
+<span class='line'>396</span> 	 * 
+<span class='line'>397</span> 	 * @see #startReadFitDirectory
+<span class='line'>398</span> 	 * @see #cancelReadFitDirectory
+<span class='line'>399</span> 	 * @see #getMessageBoxXml
+<span class='line'>400</span> 	 * @see #respondToMessageBox
+<span class='line'>401</span> 	 */</span><span class="WHIT">
+<span class='line'>402</span> </span><span class="WHIT">	</span><span class="NAME">finishReadFitDirectory</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>403</span> </span><span class="WHIT">		</span><span class="KEYW">return</span><span class="WHIT"> </span><span class="NAME">this.plugin.FinishReadFITDirectory</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>404</span> </span><span class="WHIT">	</span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>405</span> </span><span class="WHIT">	
+<span class='line'>406</span> 	</span><span class="COMM">/** Start the asynchronous ReadFitnessDirectory operation. &lt;br/>
+<span class='line'>407</span> 	 * &lt;br/>
+<span class='line'>408</span> 	 * Minimum plugin version 2.2.0.2
+<span class='line'>409</span> 	 * 
+<span class='line'>410</span> 	 * @param deviceNumber {Number} assigned by the plugin
+<span class='line'>411</span>      * @param dataTypeName a Fitness DataType from the GarminDevice.xml retrieved with DeviceDescription
+<span class='line'>412</span> 	 * @see #finishReadFitnessDirectory
+<span class='line'>413</span> 	 * @see #cancelReadFitnessDirectory
+<span class='line'>414</span> 	 * @see #getDevicesXml for device number assignment
+<span class='line'>415</span> 	 * @see Garmin.DeviceControl#FILE_TYPES
+<span class='line'>416</span> 	 */</span><span class="WHIT">
+<span class='line'>417</span> </span><span class="WHIT">	</span><span class="NAME">startReadFitnessDirectory</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="NAME">deviceNumber</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">dataTypeName</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>418</span> </span><span class="WHIT">		</span><span class="KEYW">if</span><span class="PUNC">(</span><span class="WHIT"> </span><span class="PUNC">!</span><span class="NAME">this.getSupportsFitnessDirectoryRead</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>419</span> </span><span class="WHIT">			</span><span class="KEYW">throw</span><span class="WHIT"> </span><span class="KEYW">new</span><span class="WHIT"> </span><span class="NAME">Error</span><span class="PUNC">(</span><span class="STRN">"Your Communicator Plug-in version ("</span><span class="WHIT"> </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="NAME">this.getPluginVersionString</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="STRN">") does not support reading fitness directory data."</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>420</span> </span><span class="WHIT">		</span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>421</span> </span><span class="WHIT">		</span><span class="NAME">this.plugin.StartReadFitnessDirectory</span><span class="PUNC">(</span><span class="WHIT"> </span><span class="NAME">deviceNumber</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">dataTypeName</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>422</span> </span><span class="WHIT">	</span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>423</span> </span><span class="WHIT">	
+<span class='line'>424</span> 	</span><span class="COMM">/** Poll for completion of the asynchronous ReadFitnessDirectory operation. &lt;br/>
+<span class='line'>425</span>      * &lt;br/>
+<span class='line'>426</span>      * If the CompletionState is eMessageWaiting, call getMessageBoxXml
+<span class='line'>427</span>      * to get a description of the message box to be displayed to
+<span class='line'>428</span>      * the user, and then call respondToMessageBox with the value of the
+<span class='line'>429</span>      * selected button to resume operation.&lt;br/>
+<span class='line'>430</span> 	 * &lt;br/>
+<span class='line'>431</span> 	 * Minimum plugin version 2.2.0.2
+<span class='line'>432</span> 	 * 
+<span class='line'>433</span> 	 * @type Number
+<span class='line'>434</span> 	 * @return Completion state - The completion state can be one of the following: &lt;br/>
+<span class='line'>435</span> 	 *  &lt;br/>
+<span class='line'>436</span> 	 *	0 = idle &lt;br/>
+<span class='line'>437</span>  	 * 	1 = working &lt;br/>
+<span class='line'>438</span>  	 * 	2 = waiting &lt;br/>
+<span class='line'>439</span>  	 * 	3 = finished &lt;br/>
+<span class='line'>440</span> 	 * 
+<span class='line'>441</span> 	 * @see #startReadFitnessDirectory
+<span class='line'>442</span> 	 * @see #cancelReadFitnessDirectory
+<span class='line'>443</span> 	 * @see #getMessageBoxXml
+<span class='line'>444</span> 	 * @see #respondToMessageBox
+<span class='line'>445</span> 	 */</span><span class="WHIT">
+<span class='line'>446</span> </span><span class="WHIT">	</span><span class="NAME">finishReadFitnessDirectory</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>447</span> </span><span class="WHIT">		</span><span class="KEYW">return</span><span class="WHIT"> </span><span class="NAME">this.plugin.FinishReadFitnessDirectory</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>448</span> </span><span class="WHIT">	</span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>449</span> </span><span class="WHIT">	
+<span class='line'>450</span> 	</span><span class="COMM">/** Cancel the asynchronous ReadFitnessDirectory operation. &lt;br/>
+<span class='line'>451</span> 	 * &lt;br/>
+<span class='line'>452</span> 	 * Minimum plugin version 2.2.0.2
+<span class='line'>453</span> 	 * 
+<span class='line'>454</span> 	 * @see #startReadFitnessDirectory
+<span class='line'>455</span> 	 * @see #finishReadFitnessDirectory
+<span class='line'>456</span>      */</span><span class="WHIT">	
+<span class='line'>457</span> 	</span><span class="NAME">cancelReadFitnessDirectory</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>458</span> </span><span class="WHIT">		</span><span class="NAME">this.plugin.CancelReadFitnessDirectory</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>459</span> </span><span class="WHIT">	</span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>460</span> 
+<span class='line'>461</span> </span><span class="WHIT">	</span><span class="COMM">/** Cancel the asynchronous ReadFitDirectory operation. &lt;br/>
+<span class='line'>462</span> 	 * &lt;br/>
+<span class='line'>463</span> 	 * Minimum plugin version 2.7.2.0
+<span class='line'>464</span> 	 * 
+<span class='line'>465</span> 	 * @see #startReadFitDirectory
+<span class='line'>466</span> 	 * @see #finishReadFitDirectory
+<span class='line'>467</span>      */</span><span class="WHIT">	
+<span class='line'>468</span> 	</span><span class="NAME">cancelReadFitDirectory</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>469</span> </span><span class="WHIT">		</span><span class="NAME">this.plugin.CancelReadFitDirectory</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>470</span> </span><span class="WHIT">	</span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>471</span> </span><span class="WHIT">	
+<span class='line'>472</span> 	</span><span class="COMM">/** Start the asynchronous ReadFitnessDetail operation. &lt;br/>
+<span class='line'>473</span> 	 * &lt;br/>
+<span class='line'>474</span> 	 * Minimum plugin version 2.2.0.2
+<span class='line'>475</span> 	 * 
+<span class='line'>476</span> 	 * @param deviceNumber assigned by the plugin
+<span class='line'>477</span>      * @param dataTypeName a Fitness DataType from the GarminDevice.xml retrieved with DeviceDescription
+<span class='line'>478</span> 	 * @see #finishReadFitnessDetail
+<span class='line'>479</span> 	 * @see #cancelReadFitnessDetail
+<span class='line'>480</span>      * @see #getDevicesXml for device number assignment
+<span class='line'>481</span> 	 * @see Garmin.DeviceControl#FILE_TYPES
+<span class='line'>482</span> 	 */</span><span class="WHIT">
+<span class='line'>483</span> </span><span class="WHIT">	</span><span class="NAME">startReadFitnessDetail</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="NAME">deviceNumber</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">dataTypeName</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">dataId</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>484</span> </span><span class="WHIT">		</span><span class="KEYW">if</span><span class="PUNC">(</span><span class="WHIT"> </span><span class="PUNC">!</span><span class="NAME">this.checkPluginVersionSupport</span><span class="PUNC">(</span><span class="PUNC">[</span><span class="NUMB">2</span><span class="PUNC">,</span><span class="NUMB">2</span><span class="PUNC">,</span><span class="NUMB">0</span><span class="PUNC">,</span><span class="NUMB">2</span><span class="PUNC">]</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>485</span> </span><span class="WHIT">			</span><span class="KEYW">throw</span><span class="WHIT"> </span><span class="KEYW">new</span><span class="WHIT"> </span><span class="NAME">Error</span><span class="PUNC">(</span><span class="STRN">"Your Communicator Plug-in version ("</span><span class="WHIT"> </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="NAME">this.getPluginVersionString</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="STRN">") does not support reading fitness detail."</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>486</span> </span><span class="WHIT">		</span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>487</span> </span><span class="WHIT">		
+<span class='line'>488</span> 		</span><span class="NAME">this.plugin.StartReadFitnessDetail</span><span class="PUNC">(</span><span class="NAME">deviceNumber</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">dataTypeName</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">dataId</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>489</span> </span><span class="WHIT">	</span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>490</span> </span><span class="WHIT">	
+<span class='line'>491</span> 	</span><span class="COMM">/** Poll for completion of the asynchronous ReadFitnessDetail operation. &lt;br/>
+<span class='line'>492</span>      * &lt;br/>
+<span class='line'>493</span>      * If the CompletionState is eMessageWaiting, call MessageBoxXml
+<span class='line'>494</span>      * to get a description of the message box to be displayed to
+<span class='line'>495</span>      * the user, and then call RespondToMessageBox with the value of the
+<span class='line'>496</span>      * selected button to resume operation.&lt;br/>
+<span class='line'>497</span>      * &lt;br/>
+<span class='line'>498</span>      * Minimum plugin version 2.2.0.2
+<span class='line'>499</span> 	 * 
+<span class='line'>500</span> 	 * @type Number
+<span class='line'>501</span> 	 * @return Completion state - The completion state can be one of the following: &lt;br/>
+<span class='line'>502</span> 	 *  &lt;br/>
+<span class='line'>503</span> 	 *	0 = idle &lt;br/>
+<span class='line'>504</span>  	 * 	1 = working &lt;br/>
+<span class='line'>505</span>  	 * 	2 = waiting &lt;br/>
+<span class='line'>506</span>  	 * 	3 = finished &lt;br/>
+<span class='line'>507</span> 	 * 
+<span class='line'>508</span> 	 */</span><span class="WHIT">
+<span class='line'>509</span> </span><span class="WHIT">	</span><span class="NAME">finishReadFitnessDetail</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>510</span> </span><span class="WHIT">		</span><span class="KEYW">return</span><span class="WHIT"> </span><span class="NAME">this.plugin.FinishReadFitnessDetail</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>511</span> </span><span class="WHIT">	</span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>512</span> </span><span class="WHIT">	
+<span class='line'>513</span> 	</span><span class="COMM">/** Cancel the asynchronous ReadFitnessDirectory operation. &lt;br/>
+<span class='line'>514</span> 	 * &lt;br/>
+<span class='line'>515</span> 	 * Minimum version 2.2.0.2
+<span class='line'>516</span> 	 * 
+<span class='line'>517</span> 	 * @see #startReadFitnessDetail
+<span class='line'>518</span> 	 * @see #finishReadFitnessDetail
+<span class='line'>519</span>      */</span><span class="WHIT">	
+<span class='line'>520</span> 	</span><span class="NAME">cancelReadFitnessDetail</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>521</span> </span><span class="WHIT">		</span><span class="NAME">this.plugin.CancelReadFitnessDetail</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>522</span> </span><span class="WHIT">	</span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>523</span> 
+<span class='line'>524</span> 
+<span class='line'>525</span> </span><span class="WHIT">   </span><span class="COMM">/** Starts an asynchronous file listing operation for a Mass Storage mode device. &lt;br/>
+<span class='line'>526</span> 	* Only files that are output from the device are listed. &lt;/br>
+<span class='line'>527</span> 	* The result can be retrieved with {@link #getDirectoryXml}.
+<span class='line'>528</span> 	* Minimum plugin version 2.8.1.0 &lt;br/>
+<span class='line'>529</span>     *
+<span class='line'>530</span> 	* @param {Number} deviceNumber assigned by the plugin
+<span class='line'>531</span> 	* @param {String} dataTypeName a DataType from GarminDevice.xml retrieved with DeviceDescription
+<span class='line'>532</span> 	* @param {String} fileTypeName a Specification Identifier for a File in dataTypeName from GarminDevice.xml
+<span class='line'>533</span>     * @param {Boolean} computeMD5 If true, the plug-in will generate an MD5 checksum for each readable file. 
+<span class='line'>534</span> 	*
+<span class='line'>535</span> 	* @see #finishReadableFileListing
+<span class='line'>536</span> 	* @see #cancelReadableFileListing
+<span class='line'>537</span>     * @see #getDevicesXml for device number assignment
+<span class='line'>538</span> 	* @see Garmin.DeviceControl.FILE_TYPES
+<span class='line'>539</span> 	*/</span><span class="WHIT">
+<span class='line'>540</span> </span><span class="WHIT">	</span><span class="NAME">startReadableFileListing</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="WHIT"> </span><span class="NAME">deviceNumber</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">dataTypeName</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">fileTypeName</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">computeMD5</span><span class="WHIT"> </span><span class="PUNC">)</span><span class="WHIT"> 
+<span class='line'>541</span> 	</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>542</span> </span><span class="WHIT">		</span><span class="KEYW">if</span><span class="PUNC">(</span><span class="WHIT"> </span><span class="PUNC">!</span><span class="NAME">this.checkPluginVersionSupport</span><span class="PUNC">(</span><span class="PUNC">[</span><span class="NUMB">2</span><span class="PUNC">,</span><span class="NUMB">8</span><span class="PUNC">,</span><span class="NUMB">1</span><span class="PUNC">,</span><span class="NUMB">0</span><span class="PUNC">]</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">)</span><span class="WHIT"> 
+<span class='line'>543</span> 		</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>544</span> </span><span class="WHIT">			</span><span class="KEYW">throw</span><span class="WHIT"> </span><span class="KEYW">new</span><span class="WHIT"> </span><span class="NAME">Error</span><span class="PUNC">(</span><span class="STRN">"Your Communicator Plug-in version ("</span><span class="WHIT"> </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="NAME">this.getPluginVersionString</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="STRN">") does not support listing readable files."</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>545</span> </span><span class="WHIT">		</span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>546</span> </span><span class="WHIT">		
+<span class='line'>547</span> 		</span><span class="NAME">this.plugin.StartReadableFileListing</span><span class="PUNC">(</span><span class="NAME">deviceNumber</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">dataTypeName</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">fileTypeName</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">computeMD5</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>548</span> </span><span class="WHIT">	</span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>549</span> </span><span class="WHIT">	
+<span class='line'>550</span>    </span><span class="COMM">/** Cancel the asynchronous ReadableFileListing operation &lt;br/>
+<span class='line'>551</span>     * Minimum version 2.8.1.0 &lt;br/>
+<span class='line'>552</span>     *
+<span class='line'>553</span>  	* @see #startReadableFileListing
+<span class='line'>554</span>  	* @see #finishReadableFileListing
+<span class='line'>555</span>  	*/</span><span class="WHIT">
+<span class='line'>556</span> </span><span class="WHIT">	</span><span class="NAME">cancelReadableFileListing</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> 
+<span class='line'>557</span> 	</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>558</span> </span><span class="WHIT">		</span><span class="NAME">this.plugin.CancelReadableFileListing</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">	
+<span class='line'>559</span> 	</span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>560</span> 
+<span class='line'>561</span> </span><span class="WHIT">	</span><span class="COMM">/** Poll for completion of the asynchronous ReadableFileListing operation. &lt;br/>
+<span class='line'>562</span>      * &lt;br/>
+<span class='line'>563</span>      * If the CompletionState is eMessageWaiting, call MessageBoxXml
+<span class='line'>564</span>      * to get a description of the message box to be displayed to
+<span class='line'>565</span>      * the user, and then call RespondToMessageBox with the value of the
+<span class='line'>566</span>      * selected button to resume operation.&lt;br/>
+<span class='line'>567</span>      * &lt;br/>
+<span class='line'>568</span>      * Minimum version 2.8.1.0 &lt;br/>
+<span class='line'>569</span> 	 * 
+<span class='line'>570</span> 	 * @type Number
+<span class='line'>571</span> 	 * @return Completion state - The completion state can be one of the following: &lt;br/>
+<span class='line'>572</span> 	 *  &lt;br/>
+<span class='line'>573</span> 	 *	0 = idle &lt;br/>
+<span class='line'>574</span>  	 * 	1 = working &lt;br/>
+<span class='line'>575</span>  	 * 	2 = waiting &lt;br/>
+<span class='line'>576</span>  	 * 	3 = finished &lt;br/>
+<span class='line'>577</span> 	 * 
+<span class='line'>578</span> 	 */</span><span class="WHIT">
+<span class='line'>579</span> </span><span class="WHIT">	</span><span class="NAME">finishReadableFileListing</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT">
+<span class='line'>580</span> </span><span class="WHIT">	</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>581</span> </span><span class="WHIT">		</span><span class="KEYW">return</span><span class="WHIT"> </span><span class="NAME">this.plugin.FinishReadableFileListing</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>582</span> </span><span class="WHIT">	</span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>583</span> 
+<span class='line'>584</span> </span><span class="WHIT">	</span><span class="COMM">// Write Methods</span><span class="WHIT">
+<span class='line'>585</span> </span><span class="WHIT">	
+<span class='line'>586</span> 	</span><span class="COMM">/** Initates writing the gpsXml to the device specified by deviceNumber with a filename set by filename.
+<span class='line'>587</span> 	 * The gpsXml is typically in GPX fomat and the filename is only the name without the extension. The 
+<span class='line'>588</span> 	 * plugin will append the .gpx extension automatically.&lt;br/>
+<span class='line'>589</span> 	 * &lt;br/>
+<span class='line'>590</span> 	 * Use finishWriteToGps to poll when the write operation/plugin is complete.&lt;br/>
+<span class='line'>591</span> 	 * &lt;br/>
+<span class='line'>592</span> 	 * Uses the helper functions to set the xml info and the filename.  &lt;br/>
+<span class='line'>593</span> 	 * &lt;br/>
+<span class='line'>594</span> 	 * Minimum plugin version 2.0.0.4&lt;br/>
+<span class='line'>595</span>      * Minimum plugin version 2.2.0.1 for writes of GPX to SD Card
+<span class='line'>596</span> 	 * 
+<span class='line'>597</span> 	 * @param gpsXml {String} the gps/gpx information that should be transferred to the device.
+<span class='line'>598</span> 	 * @param filename {String} the desired filename for the gpsXml that shall end up on the device.
+<span class='line'>599</span> 	 * @param deviceNumber {Number} the device number assigned by the plugin.
+<span class='line'>600</span> 	 * @see #finishWriteToGps
+<span class='line'>601</span> 	 * @see #cancelWriteToGps  
+<span class='line'>602</span> 	 */</span><span class="WHIT">
+<span class='line'>603</span> </span><span class="WHIT">	</span><span class="NAME">startWriteToGps</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="NAME">gpsXml</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">filename</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">deviceNumber</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>604</span> </span><span class="WHIT">		</span><span class="NAME">this._setWriteGpsXml</span><span class="PUNC">(</span><span class="NAME">gpsXml</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>605</span> </span><span class="WHIT">		</span><span class="NAME">this._setWriteFilename</span><span class="PUNC">(</span><span class="NAME">filename</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>606</span> </span><span class="WHIT">	    </span><span class="NAME">this.plugin.StartWriteToGps</span><span class="PUNC">(</span><span class="NAME">deviceNumber</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>607</span> </span><span class="WHIT">	</span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>608</span> 
+<span class='line'>609</span> </span><span class="WHIT">	</span><span class="COMM">/** Sets the gps xml content that will end up on the device once the transfer is complete.
+<span class='line'>610</span> 	 * Use in conjunction with startWriteToGps to initiate the actual write.
+<span class='line'>611</span> 	 *
+<span class='line'>612</span> 	 * @private 
+<span class='line'>613</span> 	 * @param gpsXml {String} xml data that is to be written to the device. Must be in GPX format.
+<span class='line'>614</span> 	 */</span><span class="WHIT">
+<span class='line'>615</span> </span><span class="WHIT">	</span><span class="NAME">_setWriteGpsXml</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="NAME">gpsXml</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>616</span> </span><span class="WHIT">    	</span><span class="NAME">this.plugin.GpsXml</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">gpsXml</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>617</span> </span><span class="WHIT">	</span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>618</span> 
+<span class='line'>619</span> </span><span class="WHIT">	</span><span class="COMM">/** This the filename that wil contain the gps xml once the transfer is complete. Use with 
+<span class='line'>620</span> 	 * setWriteGpsXml to set what the file contents will be. Also, use startWriteToGps to 
+<span class='line'>621</span> 	 * actually make the write happen.
+<span class='line'>622</span> 	 * 
+<span class='line'>623</span> 	 * @private
+<span class='line'>624</span> 	 * @param filename {String} the actual filename that will end up on the device. Should only be the
+<span class='line'>625</span> 	 * name and not the extension. The plugin will append the extension portion to the file name--typically .gpx.
+<span class='line'>626</span> 	 * @see #setWriteGpsXml, #startWriteToGps, #startWriteFitnessData
+<span class='line'>627</span> 	 */</span><span class="WHIT">
+<span class='line'>628</span> </span><span class="WHIT">	</span><span class="NAME">_setWriteFilename</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="NAME">filename</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>629</span> </span><span class="WHIT">    	</span><span class="NAME">this.plugin.FileName</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">filename</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>630</span> </span><span class="WHIT">	</span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>631</span> 
+<span class='line'>632</span> </span><span class="WHIT">	</span><span class="COMM">/** This is used to indicate the status of the write process. It will return an integer
+<span class='line'>633</span> 	 * know as the completion state.  The purpose is to show the 
+<span class='line'>634</span>  	 * user information about what is happening to the plugin while it 
+<span class='line'>635</span>  	 * is servicing your request. &lt;br/>
+<span class='line'>636</span>  	 * &lt;br/>
+<span class='line'>637</span>  	 * Minimum plugin version 2.0.0.4&lt;br/>
+<span class='line'>638</span>      * Minimum plugin version 2.2.0.1 for writes of GPX to SD Card 
+<span class='line'>639</span>  	 * 
+<span class='line'>640</span> 	 * @type Number
+<span class='line'>641</span> 	 * @return Completion state - The completion state can be one of the following: &lt;br/>
+<span class='line'>642</span> 	 *  &lt;br/>
+<span class='line'>643</span> 	 *	0 = idle &lt;br/>
+<span class='line'>644</span>  	 * 	1 = working &lt;br/>
+<span class='line'>645</span>  	 * 	2 = waiting &lt;br/>
+<span class='line'>646</span>  	 * 	3 = finished &lt;br/>
+<span class='line'>647</span>  	 * @see #startWriteToGps
+<span class='line'>648</span> 	 * @see #cancelWriteToGps  
+<span class='line'>649</span>  	 */</span><span class="WHIT">
+<span class='line'>650</span> </span><span class="WHIT">	</span><span class="NAME">finishWriteToGps</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>651</span> </span><span class="WHIT">		</span><span class="COMM">//console.debug("Plugin.finishWriteToGps");</span><span class="WHIT">
+<span class='line'>652</span> </span><span class="WHIT">	   	</span><span class="KEYW">return</span><span class="WHIT">  </span><span class="NAME">this.plugin.FinishWriteToGps</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>653</span> </span><span class="WHIT">	</span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>654</span> </span><span class="WHIT">    
+<span class='line'>655</span> 	</span><span class="COMM">/** Cancels the current write operation to the gps device. &lt;br/>
+<span class='line'>656</span> 	 * &lt;br/>
+<span class='line'>657</span> 	 * Minimum plugin version 2.0.0.4&lt;br/>
+<span class='line'>658</span>      * Minimum plugin version 2.2.0.1 for writes of GPX to SD Card
+<span class='line'>659</span>      * 
+<span class='line'>660</span>      * @see #startWriteToGps
+<span class='line'>661</span> 	 * @see #finishWriteToGps  
+<span class='line'>662</span>      */</span><span class="WHIT">	
+<span class='line'>663</span> 	</span><span class="NAME">cancelWriteToGps</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>664</span> </span><span class="WHIT">		</span><span class="NAME">this.plugin.CancelWriteToGps</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>665</span> </span><span class="WHIT">	</span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>666</span> 
+<span class='line'>667</span> </span><span class="WHIT">	</span><span class="COMM">/** Start the asynchronous StartWriteFitnessData operation. &lt;br/>
+<span class='line'>668</span>      * For binary files such as FIT, use {@link #startDownloadData}
+<span class='line'>669</span> 	 * &lt;br/>
+<span class='line'>670</span> 	 * Minimum plugin version 2.2.0.1
+<span class='line'>671</span> 	 * 
+<span class='line'>672</span> 	 * @param tcdXml {String} XML of TCD data
+<span class='line'>673</span> 	 * @param deviceNumber {Number} the device number, assigned by the plugin.
+<span class='line'>674</span> 	 * @param filename {String} the filename to write to on the device.
+<span class='line'>675</span> 	 * @param dataTypeName {String} a Fitness DataType from the GarminDevice.xml retrieved with DeviceDescription
+<span class='line'>676</span> 	 * @see #finishWriteFitnessData  
+<span class='line'>677</span> 	 * @see #cancelWriteFitnessData
+<span class='line'>678</span> 	 * @see #getDevicesXml for device number assignment
+<span class='line'>679</span> 	 * @see Garmin.DeviceControl#FILE_TYPES
+<span class='line'>680</span> 	 */</span><span class="WHIT">
+<span class='line'>681</span> </span><span class="WHIT">	</span><span class="NAME">startWriteFitnessData</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="NAME">tcdXml</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">deviceNumber</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">filename</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">dataTypeName</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">	
+<span class='line'>682</span> 		</span><span class="KEYW">if</span><span class="PUNC">(</span><span class="WHIT"> </span><span class="PUNC">!</span><span class="NAME">this.checkPluginVersionSupport</span><span class="PUNC">(</span><span class="PUNC">[</span><span class="NUMB">2</span><span class="PUNC">,</span><span class="NUMB">2</span><span class="PUNC">,</span><span class="NUMB">0</span><span class="PUNC">,</span><span class="NUMB">1</span><span class="PUNC">]</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>683</span> </span><span class="WHIT">			</span><span class="KEYW">throw</span><span class="WHIT"> </span><span class="KEYW">new</span><span class="WHIT"> </span><span class="NAME">Error</span><span class="PUNC">(</span><span class="STRN">"Your Communicator Plug-in version ("</span><span class="WHIT"> </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="NAME">this.getPluginVersionString</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="STRN">") does not support writing fitness data."</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>684</span> </span><span class="WHIT">		</span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>685</span> </span><span class="WHIT">		
+<span class='line'>686</span> 		</span><span class="NAME">this._setWriteTcdXml</span><span class="PUNC">(</span><span class="NAME">tcdXml</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>687</span> </span><span class="WHIT">		</span><span class="NAME">this._setWriteFilename</span><span class="PUNC">(</span><span class="NAME">filename</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>688</span> </span><span class="WHIT">		</span><span class="NAME">this.plugin.StartWriteFitnessData</span><span class="PUNC">(</span><span class="NAME">deviceNumber</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">dataTypeName</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>689</span> </span><span class="WHIT">	</span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>690</span> </span><span class="WHIT">	
+<span class='line'>691</span> 	</span><span class="COMM">/** This is used to indicate the status of the write process for fitness data. It will return an integer
+<span class='line'>692</span> 	 * know as the completion state.  The purpose is to show the 
+<span class='line'>693</span>  	 * user information about what is happening to the plugin while it 
+<span class='line'>694</span>  	 * is servicing your request. &lt;br/>
+<span class='line'>695</span>  	 * &lt;br/>
+<span class='line'>696</span>  	 * Minimum plugin version 2.2.0.1
+<span class='line'>697</span>  	 * 
+<span class='line'>698</span> 	 * @type Number
+<span class='line'>699</span> 	 * @return Completion state - The completion state can be one of the following: &lt;br/>
+<span class='line'>700</span> 	 *  &lt;br/>
+<span class='line'>701</span> 	 *	0 = idle &lt;br/>
+<span class='line'>702</span>  	 * 	1 = working &lt;br/>
+<span class='line'>703</span>  	 * 	2 = waiting &lt;br/>
+<span class='line'>704</span>  	 * 	3 = finished &lt;br/>
+<span class='line'>705</span>  	 * @see #startWriteFitnessData  
+<span class='line'>706</span> 	 * @see #cancelWriteFitnessData
+<span class='line'>707</span> 	 */</span><span class="WHIT">
+<span class='line'>708</span> </span><span class="WHIT">	</span><span class="NAME">finishWriteFitnessData</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>709</span> </span><span class="WHIT">	 	</span><span class="KEYW">return</span><span class="WHIT">  </span><span class="NAME">this.plugin.FinishWriteFitnessData</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>710</span> </span><span class="WHIT">	</span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>711</span> </span><span class="WHIT">	
+<span class='line'>712</span> 	</span><span class="COMM">/** Cancel the asynchronous ReadFitnessData operation. &lt;br/>
+<span class='line'>713</span> 	 * &lt;br/>
+<span class='line'>714</span> 	 * Minimum plugin version 2.2.0.1
+<span class='line'>715</span> 	 * 
+<span class='line'>716</span> 	 * @see #startWriteFitnessData  
+<span class='line'>717</span> 	 * @see #finishWriteFitnessData
+<span class='line'>718</span>      */</span><span class="WHIT">	
+<span class='line'>719</span> 	</span><span class="NAME">cancelWriteFitnessData</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>720</span> </span><span class="WHIT">		</span><span class="NAME">this.plugin.CancelWriteFitnessData</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>721</span> </span><span class="WHIT">	</span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>722</span> </span><span class="WHIT">	
+<span class='line'>723</span> 	</span><span class="COMM">/** Sets the tcd xml content that will end up on the device once the transfer is complete.
+<span class='line'>724</span> 	 * Use in conjunction with startWriteFitnessData to initiate the actual write.
+<span class='line'>725</span> 	 *
+<span class='line'>726</span> 	 * @private 
+<span class='line'>727</span> 	 * @param tcdXml {String} xml data that is to be written to the device. Must be in TCX format.
+<span class='line'>728</span> 	 */</span><span class="WHIT">
+<span class='line'>729</span> </span><span class="WHIT">	</span><span class="NAME">_setWriteTcdXml</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="NAME">tcdXml</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>730</span> </span><span class="WHIT">    	</span><span class="NAME">this.plugin.TcdXml</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">tcdXml</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>731</span> </span><span class="WHIT">	</span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>732</span> </span><span class="WHIT">	
+<span class='line'>733</span> 	</span><span class="COMM">/**
+<span class='line'>734</span> 	 * Determine the amount of space available on a Mass Storage Mode Device Volume.
+<span class='line'>735</span> 	 * 
+<span class='line'>736</span> 	 * @param {Number} deviceNumber - the device number assigned by the plugin.
+<span class='line'>737</span> 	 * @param {String} relativeFilePath - if a file is being replaced, set to relative path on device, otherwise set to empty string.
+<span class='line'>738</span> 	 * @return -1 for non-mass storage mode devices.  
+<span class='line'>739</span> 	 * @see #getDevicesXml for device number assignment
+<span class='line'>740</span> 	 */</span><span class="WHIT">
+<span class='line'>741</span> </span><span class="WHIT">	</span><span class="NAME">bytesAvailable</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="NAME">deviceNumber</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">relativeFilePath</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>742</span> </span><span class="WHIT">	    </span><span class="KEYW">return</span><span class="WHIT"> </span><span class="NAME">this.plugin.BytesAvailable</span><span class="PUNC">(</span><span class="NAME">deviceNumber</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">relativeFilePath</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>743</span> </span><span class="WHIT">	</span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>744</span> 
+<span class='line'>745</span> </span><span class="WHIT">	</span><span class="COMM">/**
+<span class='line'>746</span> 	 * Determine if device is file-based. &lt;br/>
+<span class='line'>747</span> 	 * File-based devices include Mass Storage Mode Devices such as Nuvi, Oregon, Edge 705,
+<span class='line'>748</span> 	 * as well as ANT Proxy Devices.&lt;br/>
+<span class='line'>749</span> 	 * 
+<span class='line'>750</span> 	 * Minimum plugin version 2.8.1.0 &lt;br/>
+<span class='line'>751</span> 	 * @param {Number} deviceNumber the device number assigned by the plugin.
+<span class='line'>752</span> 	 * @returns {Boolean} true for file based devices, false otherwise
+<span class='line'>753</span> 	 * @see #getDevicesXml for device number assignment
+<span class='line'>754</span> 	 */</span><span class="WHIT">
+<span class='line'>755</span> </span><span class="WHIT">	</span><span class="NAME">isDeviceFileBased</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="NAME">deviceNumber</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>756</span> </span><span class="WHIT">        </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">theReturn</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">true</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>757</span> </span><span class="WHIT">        </span><span class="COMM">//do a dummy file listing</span><span class="WHIT">
+<span class='line'>758</span> </span><span class="WHIT">        </span><span class="KEYW">try</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>759</span> </span><span class="WHIT">            </span><span class="NAME">this.startReadableFileListing</span><span class="PUNC">(</span><span class="WHIT"> </span><span class="NAME">deviceNumber</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="STRN">'FileBasedTest'</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="STRN">'FileBasedTest'</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="KEYW">false</span><span class="WHIT"> </span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>760</span> </span><span class="WHIT">	        </span><span class="KEYW">while</span><span class="PUNC">(</span><span class="WHIT"> </span><span class="NAME">this.finishReadableFileListing</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">==</span><span class="WHIT"> </span><span class="NUMB">1</span><span class="WHIT"> </span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>761</span> </span><span class="WHIT">            </span><span class="COMM">//wait until done. Only safe to do because fxn returns quickly because of test name and id!</span><span class="WHIT">
+<span class='line'>762</span> </span><span class="WHIT">            </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>763</span> </span><span class="WHIT">        </span><span class="PUNC">}</span><span class="WHIT"> </span><span class="KEYW">catch</span><span class="PUNC">(</span><span class="NAME">e</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>764</span> </span><span class="WHIT">            </span><span class="NAME">theReturn</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">false</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>765</span> </span><span class="WHIT">        </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>766</span> </span><span class="WHIT">        </span><span class="KEYW">return</span><span class="WHIT"> </span><span class="NAME">theReturn</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>767</span> </span><span class="WHIT">	</span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>768</span> 
+<span class='line'>769</span> </span><span class="WHIT">    </span><span class="COMM">/** Responds to a message box on the device. &lt;br/>
+<span class='line'>770</span>      * &lt;br/>
+<span class='line'>771</span>      * Minimum plugin version 2.0.0.4
+<span class='line'>772</span>      *   
+<span class='line'>773</span>      * @param response should be an int which corresponds to a button value from this.plugin.MessageBoxXml
+<span class='line'>774</span>      */</span><span class="WHIT">
+<span class='line'>775</span> </span><span class="WHIT">    </span><span class="NAME">respondToMessageBox</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="NAME">response</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>776</span> </span><span class="WHIT">        </span><span class="NAME">this.plugin.RespondToMessageBox</span><span class="PUNC">(</span><span class="NAME">response</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>777</span> </span><span class="WHIT">    </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>778</span> 
+<span class='line'>779</span> </span><span class="WHIT">	</span><span class="COMM">/** Downloads and writes files asynchronously to the specified device. &lt;br/>
+<span class='line'>780</span> 	 * Use {@link #finishDownloadData} to poll when the write operation/plugin is complete.&lt;br/>
+<span class='line'>781</span> 	 * &lt;br/>
+<span class='line'>782</span> 	 * Minimum plugin version 2.0.0.4
+<span class='line'>783</span> 	 *  
+<span class='line'>784</span>      * @param xmlDownloadDescription {String} XML string containing information about the files to be downloaded onto the device.&lt;br/>
+<span class='line'>785</span> 	 * This xml must conform to one of two schemas:&lt;br/>
+<span class='line'>786</span> 	 * &lt;a href=http://www.garmin.com/xmlschemas/GarminPluginAPIV1.xsd>GarminPluginAPIV1&lt;/a> &lt;br/>
+<span class='line'>787</span> 	 * &lt;a href=http://www.garmin.com/xmlschemas/DeviceDownloadV1.xsd>DeviceDownloadV1&lt;/a> &lt;strong>Recommended&lt;/strong> &lt;br/>
+<span class='line'>788</span> 	 * @param deviceNumber {Number} the device number assigned by the plugin. 
+<span class='line'>789</span> 	 * @see #finishDownloadData  
+<span class='line'>790</span> 	 * @see #cancelDownloadData
+<span class='line'>791</span>      * @see #Garmin.GpiUtil
+<span class='line'>792</span> 	 */</span><span class="WHIT">
+<span class='line'>793</span> </span><span class="WHIT">	</span><span class="NAME">startDownloadData</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="NAME">xmlDownloadDescription</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">deviceNumber</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>794</span> </span><span class="WHIT">		</span><span class="NAME">this.plugin.StartDownloadData</span><span class="PUNC">(</span><span class="NAME">xmlDownloadDescription</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">deviceNumber</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>795</span> </span><span class="WHIT">	</span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>796</span> 
+<span class='line'>797</span> </span><span class="WHIT">	</span><span class="COMM">/** This is used to indicate the status of the download process. It will return an integer
+<span class='line'>798</span> 	 * know as the completion state.  The purpose is to show the 
+<span class='line'>799</span>  	 * user information about what is happening to the plugin while it 
+<span class='line'>800</span>  	 * is servicing your request.&lt;br/>
+<span class='line'>801</span> 	 * &lt;br/>
+<span class='line'>802</span> 	 * Minimum plugin version 2.0.0.4
+<span class='line'>803</span> 	 * 
+<span class='line'>804</span> 	 * @type Number
+<span class='line'>805</span> 	 * @return Completion state - The completion state can be one of the following: &lt;br/>
+<span class='line'>806</span> 	 *  &lt;br/>
+<span class='line'>807</span> 	 *	0 = idle &lt;br/>
+<span class='line'>808</span>  	 * 	1 = working &lt;br/>
+<span class='line'>809</span>  	 * 	2 = waiting &lt;br/>
+<span class='line'>810</span>  	 * 	3 = finished &lt;br/>
+<span class='line'>811</span>  	 * @see #startDownloadData  
+<span class='line'>812</span> 	 * @see #cancelDownloadData
+<span class='line'>813</span> 	 */</span><span class="WHIT">
+<span class='line'>814</span> </span><span class="WHIT">	</span><span class="NAME">finishDownloadData</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>815</span> </span><span class="WHIT">		</span><span class="COMM">//console.debug("Plugin.finishDownloadData");</span><span class="WHIT">
+<span class='line'>816</span> </span><span class="WHIT">		</span><span class="KEYW">return</span><span class="WHIT"> </span><span class="NAME">this.plugin.FinishDownloadData</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>817</span> </span><span class="WHIT">	</span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>818</span> 
+<span class='line'>819</span> </span><span class="WHIT">	</span><span class="COMM">/** Cancel the asynchronous Download Data operation. &lt;br/>
+<span class='line'>820</span> 	 * &lt;br/>
+<span class='line'>821</span> 	 * Minimum plugin version 2.0.0.4
+<span class='line'>822</span> 	 * 
+<span class='line'>823</span> 	 * @see #startDownloadData  
+<span class='line'>824</span> 	 * @see #finishDownloadData
+<span class='line'>825</span> 	 */</span><span class="WHIT">
+<span class='line'>826</span> </span><span class="WHIT">	</span><span class="NAME">cancelDownloadData</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>827</span> </span><span class="WHIT">		</span><span class="NAME">this.plugin.CancelDownloadData</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>828</span> </span><span class="WHIT">	</span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>829</span> 
+<span class='line'>830</span> </span><span class="WHIT">    </span><span class="COMM">/** Indicates success of StartDownloadData operation. &lt;br/>
+<span class='line'>831</span>      * &lt;br/>
+<span class='line'>832</span>      * Minimum plugin version 2.0.0.4
+<span class='line'>833</span>      * 
+<span class='line'>834</span>      * @type Boolean
+<span class='line'>835</span>      * @return True if the last StartDownloadData operation was successful
+<span class='line'>836</span>      */</span><span class="WHIT">
+<span class='line'>837</span> </span><span class="WHIT">    </span><span class="NAME">downloadDataSucceeded</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>838</span> </span><span class="WHIT">		</span><span class="KEYW">return</span><span class="WHIT"> </span><span class="NAME">this.plugin.DownloadDataSucceeded</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>839</span> </span><span class="WHIT">    </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>840</span> 
+<span class='line'>841</span> </span><span class="WHIT">    </span><span class="COMM">/** Download and install a list of unit software updates.  Start the asynchronous 
+<span class='line'>842</span>      * StartUnitSoftwareUpdate operation.
+<span class='line'>843</span>      * 
+<span class='line'>844</span>      * Check for completion with the FinishUnitSoftwareUpdate() method.  After
+<span class='line'>845</span>      * completion check the DownloadDataSucceeded property to make sure that all of the downloads 
+<span class='line'>846</span>      * were successfully placed on the device. 
+<span class='line'>847</span>      * 
+<span class='line'>848</span>      * See the Schema UnitSoftwareUpdatev3.xsd for the format of the UpdateResponsesXml description
+<span class='line'>849</span>      *
+<span class='line'>850</span>      * @see Garmin.DevicePlugin.finishUnitSoftwareUpdate
+<span class='line'>851</span>      * @see Garmin.DevicePlugin.cancelUnitSoftwareUpdate
+<span class='line'>852</span>      * @see Garmin.DevicePlugin.downloadDataSucceeded
+<span class='line'>853</span>      * @version plugin v2.6.2.0
+<span class='line'>854</span>      */</span><span class="WHIT">
+<span class='line'>855</span> </span><span class="WHIT">    </span><span class="NAME">startUnitSoftwareUpdate</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="NAME">updateResponsesXml</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">deviceNumber</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>856</span> </span><span class="WHIT">        </span><span class="NAME">this.plugin.StartUnitSoftwareUpdate</span><span class="PUNC">(</span><span class="NAME">updateResponsesXml</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">deviceNumber</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>857</span> </span><span class="WHIT">    </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>858</span> </span><span class="WHIT">    
+<span class='line'>859</span>     </span><span class="COMM">/** Poll for completion of the asynchronous Unit Software Update operation. It will return an integer
+<span class='line'>860</span> 	 * know as the completion state.  The purpose is to show the 
+<span class='line'>861</span>  	 * user information about what is happening to the plugin while it 
+<span class='line'>862</span>  	 * is servicing your request.&lt;br/>
+<span class='line'>863</span>  	 * @type Number 
+<span class='line'>864</span>      * @version plugin v2.6.2.0
+<span class='line'>865</span>      * @return Completion state - The completion state can be one of the following: &lt;br/>
+<span class='line'>866</span> 	 *  &lt;br/>
+<span class='line'>867</span> 	 *	0 = idle &lt;br/>
+<span class='line'>868</span>  	 * 	1 = working &lt;br/>
+<span class='line'>869</span>  	 * 	2 = waiting &lt;br/>
+<span class='line'>870</span>  	 * 	3 = finished &lt;br/>
+<span class='line'>871</span>  	 * @see Garmin.DevicePlugin.startUnitSoftwareUpdate
+<span class='line'>872</span>  	 * @see Garmin.DevicePlugin.cancelUnitSoftwareUpdate
+<span class='line'>873</span>      */</span><span class="WHIT">
+<span class='line'>874</span> </span><span class="WHIT">    </span><span class="NAME">finishUnitSoftwareUpdate</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>875</span> </span><span class="WHIT">        </span><span class="KEYW">return</span><span class="WHIT"> </span><span class="NAME">this.plugin.FinishUnitSoftwareUpdate</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">  
+<span class='line'>876</span>     </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>877</span> </span><span class="WHIT">    
+<span class='line'>878</span>     </span><span class="COMM">/** Cancel the asynchrous Download Data operation
+<span class='line'>879</span>      * @version plugin v2.6.2.0
+<span class='line'>880</span>      */</span><span class="WHIT">
+<span class='line'>881</span> </span><span class="WHIT">    </span><span class="NAME">cancelUnitSoftwareUpdate</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>882</span> </span><span class="WHIT">        </span><span class="NAME">this.plugin.CancelUnitSoftwareUpdate</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>883</span> </span><span class="WHIT">    </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>884</span> </span><span class="WHIT">    
+<span class='line'>885</span>     </span><span class="COMM">/** Get the UnitSoftwareUpdateRequests for a given device.
+<span class='line'>886</span>      * This request retrieves the main system software (system region only.)
+<span class='line'>887</span>      * @param deviceNumber {Number} the device number to retrieve unit software information for. 
+<span class='line'>888</span>      * @return {String} XML string of the document format in the namespace below, or
+<span class='line'>889</span>      * the most current version of that xms namespace
+<span class='line'>890</span>      * http://www.garmin.com/xmlschemas/UnitSoftwareUpdate/v3
+<span class='line'>891</span>      * @version plugin v2.6.2.0
+<span class='line'>892</span>      * @see Garmin.DevicePlugin.getAdditionalSoftwareUpdateRequests
+<span class='line'>893</span>      */</span><span class="WHIT">
+<span class='line'>894</span> </span><span class="COMM">//    getUnitSoftwareUpdateRequests: function(deviceNumber) {</span><span class="WHIT">
+<span class='line'>895</span> </span><span class="COMM">//        return this.plugin.UnitSoftwareUpdateRequests(deviceNumber);</span><span class="WHIT">
+<span class='line'>896</span> </span><span class="COMM">//    },</span><span class="WHIT">
+<span class='line'>897</span> </span><span class="WHIT">    
+<span class='line'>898</span>     </span><span class="COMM">/** Get the AdditionalSoftwareUpdateRequests for a given device.
+<span class='line'>899</span>      * This request retrieves the additional system software (all software except for system region.)
+<span class='line'>900</span>      * @param deviceNumber {Number} the device number to retrieve unit software information for.
+<span class='line'>901</span>      * @return {String} XML string of the document format in the namespace below, or
+<span class='line'>902</span>      * the most current version of that xms namespace
+<span class='line'>903</span>      * http://www.garmin.com/xmlschemas/UnitSoftwareUpdate/v3
+<span class='line'>904</span>      * @version plugin v2.6.2.0
+<span class='line'>905</span>      * @see Garmin.DevicePlugin.getUnitSoftwareUpdateRequests
+<span class='line'>906</span>      */</span><span class="WHIT">
+<span class='line'>907</span> </span><span class="COMM">//    getAdditionalSoftwareUpdateRequests: function(deviceNumber) {</span><span class="WHIT">
+<span class='line'>908</span> </span><span class="COMM">//        return this.plugin.AdditionalSoftwareUpdateRequests(deviceNumber);</span><span class="WHIT">
+<span class='line'>909</span> </span><span class="COMM">//    },</span><span class="WHIT">
+<span class='line'>910</span> </span><span class="WHIT">    
+<span class='line'>911</span>     </span><span class="COMM">/** Indicates success of WriteToGps operation. &lt;br/>
+<span class='line'>912</span>      * &lt;br/>
+<span class='line'>913</span>      * Minimum plugin version 2.0.0.4
+<span class='line'>914</span>      * 
+<span class='line'>915</span>      * @type Boolean
+<span class='line'>916</span>      * @return True if the last ReadFromGps or WriteToGps operation was successful
+<span class='line'>917</span>      */</span><span class="WHIT">
+<span class='line'>918</span> </span><span class="WHIT">    </span><span class="NAME">gpsTransferSucceeded</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>919</span> </span><span class="WHIT">		</span><span class="KEYW">return</span><span class="WHIT"> </span><span class="NAME">this.plugin.GpsTransferSucceeded</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>920</span> </span><span class="WHIT">    </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>921</span> 
+<span class='line'>922</span> </span><span class="WHIT">    </span><span class="COMM">/** Indicates success of ReadFitnessData or WriteFitnessData operation. &lt;br/>
+<span class='line'>923</span>      * &lt;br/>
+<span class='line'>924</span>      * Minimum plugin version 2.1.0.3
+<span class='line'>925</span>      * 
+<span class='line'>926</span>      * @type Boolean
+<span class='line'>927</span>      * @return True if the last ReadFitnessData or WriteFitnessData operation succeeded
+<span class='line'>928</span>      */</span><span class="WHIT">
+<span class='line'>929</span> </span><span class="WHIT">    </span><span class="NAME">fitnessTransferSucceeded</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>930</span> </span><span class="WHIT">		</span><span class="KEYW">return</span><span class="WHIT"> </span><span class="NAME">this.plugin.FitnessTransferSucceeded</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>931</span> </span><span class="WHIT">    </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>932</span> </span><span class="WHIT">    
+<span class='line'>933</span>     </span><span class="COMM">/** Return the specified file as a UU-Encoded string
+<span class='line'>934</span>      * &lt;br/>
+<span class='line'>935</span>      * Minimum version 2.6.3.1
+<span class='line'>936</span>      * 
+<span class='line'>937</span>      * If the file is known to be compressed, compressed should be
+<span class='line'>938</span>      * set to false. Otherwise, set compressed to true to retrieve a
+<span class='line'>939</span>      * gzipped and uuencoded file.
+<span class='line'>940</span>      * 
+<span class='line'>941</span>      * @param relativeFilePath {String} path relative to the Garmin folder on the device
+<span class='line'>942</span>      */</span><span class="WHIT">
+<span class='line'>943</span> </span><span class="WHIT">    </span><span class="NAME">getBinaryFile</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="NAME">deviceNumber</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">relativeFilePath</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">compressed</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>944</span> </span><span class="WHIT">        </span><span class="KEYW">return</span><span class="WHIT"> </span><span class="NAME">this.plugin.GetBinaryFile</span><span class="PUNC">(</span><span class="NAME">deviceNumber</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">relativeFilePath</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">compressed</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>945</span> </span><span class="WHIT">    </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>946</span> </span><span class="WHIT">    
+<span class='line'>947</span>     </span><span class="COMM">/** This is the GpsXml information from the device. Typically called after a read operation.
+<span class='line'>948</span>      * 
+<span class='line'>949</span>      * @see #finishReadFromGps
+<span class='line'>950</span>      */</span><span class="WHIT">
+<span class='line'>951</span> </span><span class="WHIT">	</span><span class="NAME">getGpsXml</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>952</span> </span><span class="WHIT">		</span><span class="KEYW">return</span><span class="WHIT"> </span><span class="NAME">this.plugin.GpsXml</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>953</span> </span><span class="WHIT">	</span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>954</span> 
+<span class='line'>955</span> </span><span class="WHIT">    </span><span class="COMM">/** This is the fitness data Xml information from the device. Typically called after a ReadFitnessData operation. &lt;br/>
+<span class='line'>956</span> 	 * &lt;br/>
+<span class='line'>957</span>      * Schemas for the TrainingCenterDatabase format are available at
+<span class='line'>958</span>      * &lt;a href="http://developer.garmin.com/schemas/tcx/v2/">http://developer.garmin.com/schemas/tcx/v2/&lt;/a>&lt;br/>
+<span class='line'>959</span>      * &lt;br/>
+<span class='line'>960</span>      * Minimum plugin version 2.1.0.3
+<span class='line'>961</span>      * 
+<span class='line'>962</span>      * @see #finishReadFitnessData
+<span class='line'>963</span>      * @see #finishReadFitnessDirectory
+<span class='line'>964</span>      * @see #finishReadFitnessDetail
+<span class='line'>965</span>      */</span><span class="WHIT">
+<span class='line'>966</span> </span><span class="WHIT">	</span><span class="NAME">getTcdXml</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>967</span> </span><span class="WHIT">		</span><span class="KEYW">return</span><span class="WHIT"> </span><span class="NAME">this.plugin.TcdXml</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>968</span> </span><span class="WHIT">	</span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>969</span> </span><span class="WHIT">	
+<span class='line'>970</span> 	 </span><span class="COMM">/** Returns last read fitness xml data in compressed format.  The xml is compressed as gzp and base64 expanded. &lt;br/>
+<span class='line'>971</span> 	  * &lt;br/>
+<span class='line'>972</span> 	  * Minimum plugin version 2.2.0.2
+<span class='line'>973</span> 	  * 
+<span class='line'>974</span> 	  * @return The read xml data in compressed gzp and base64 expanded format.
+<span class='line'>975</span> 	  * @see #finishReadFitnessData
+<span class='line'>976</span>       * @see #finishReadFitnessDirectory
+<span class='line'>977</span>       * @see #finishReadFitnessDetail
+<span class='line'>978</span> 	  */</span><span class="WHIT">
+<span class='line'>979</span> </span><span class="WHIT">	</span><span class="NAME">getTcdXmlz</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>980</span> </span><span class="WHIT">		</span><span class="KEYW">return</span><span class="WHIT"> </span><span class="NAME">this.plugin.TcdXmlz</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>981</span> </span><span class="WHIT">	</span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>982</span> 
+<span class='line'>983</span> </span><span class="WHIT">	 </span><span class="COMM">/** Returns last read directory xml data.&lt;br/>
+<span class='line'>984</span> 	  * &lt;br/>
+<span class='line'>985</span> 	  * 
+<span class='line'>986</span> 	  * @return The directory xml data
+<span class='line'>987</span> 	  * @see #finishReadFitDirectory
+<span class='line'>988</span> 	  */</span><span class="WHIT">
+<span class='line'>989</span> </span><span class="WHIT">	</span><span class="NAME">getDirectoryXml</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>990</span> </span><span class="WHIT">		</span><span class="KEYW">return</span><span class="WHIT"> </span><span class="NAME">this.plugin.DirectoryListingXml</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>991</span> </span><span class="WHIT">	</span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>992</span> </span><span class="WHIT">	
+<span class='line'>993</span>     </span><span class="COMM">/** Returns the xml describing the message when the plug-in is waiting for input from the user.
+<span class='line'>994</span>      * @type String
+<span class='line'>995</span>      * @return The xml describing the message when the plug-in is waiting for input from the user.
+<span class='line'>996</span>      */</span><span class="WHIT">
+<span class='line'>997</span> </span><span class="WHIT">	</span><span class="NAME">getMessageBoxXml</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>998</span> </span><span class="WHIT">		</span><span class="KEYW">return</span><span class="WHIT"> </span><span class="NAME">this.plugin.MessageBoxXml</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>999</span> </span><span class="WHIT">	</span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>1000</span> </span><span class="WHIT">    
+<span class='line'>1001</span> 	</span><span class="COMM">/** Get the status/progress of the current state or transfer.
+<span class='line'>1002</span>      * @type String
+<span class='line'>1003</span>      * @return The xml describing the current progress state of the plug-in.
+<span class='line'>1004</span>      */</span><span class="WHIT">	
+<span class='line'>1005</span> 	</span><span class="NAME">getProgressXml</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>1006</span> </span><span class="WHIT">		</span><span class="KEYW">return</span><span class="WHIT"> </span><span class="NAME">this.plugin.ProgressXml</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>1007</span> </span><span class="WHIT">	</span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>1008</span> 
+<span class='line'>1009</span> </span><span class="WHIT">	</span><span class="COMM">/** Returns metadata information about the plugin version. 
+<span class='line'>1010</span>      * @type String
+<span class='line'>1011</span>      * @return The xml describing the user's version of the plug-in.
+<span class='line'>1012</span> 	 */</span><span class="WHIT">
+<span class='line'>1013</span> </span><span class="WHIT">	</span><span class="NAME">getVersionXml</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>1014</span> </span><span class="WHIT">		</span><span class="KEYW">return</span><span class="WHIT"> </span><span class="NAME">this.plugin.VersionXml</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>1015</span> </span><span class="WHIT">	</span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>1016</span> </span><span class="WHIT">	
+<span class='line'>1017</span> 	</span><span class="COMM">/** Gets a string of the version number for the plugin the user has currently installed.
+<span class='line'>1018</span>      * @type String 
+<span class='line'>1019</span>      * @return A string of the format "versionMajor.versionMinor.buildMajor.buildMinor", ex: "2.0.0.4"
+<span class='line'>1020</span>      */</span><span class="WHIT">	
+<span class='line'>1021</span> 	</span><span class="NAME">getPluginVersionString</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>1022</span> </span><span class="WHIT">		</span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">versionArray</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">this.getPluginVersion</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>1023</span> </span><span class="WHIT">	
+<span class='line'>1024</span> 		</span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">versionString</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">versionArray</span><span class="PUNC">[</span><span class="NUMB">0</span><span class="PUNC">]</span><span class="WHIT"> </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="STRN">"."</span><span class="WHIT"> </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="NAME">versionArray</span><span class="PUNC">[</span><span class="NUMB">1</span><span class="PUNC">]</span><span class="WHIT"> </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="STRN">"."</span><span class="WHIT"> </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="NAME">versionArray</span><span class="PUNC">[</span><span class="NUMB">2</span><span class="PUNC">]</span><span class="WHIT"> </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="STRN">"."</span><span class="WHIT"> </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="NAME">versionArray</span><span class="PUNC">[</span><span class="NUMB">3</span><span class="PUNC">]</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>1025</span> </span><span class="WHIT">	    </span><span class="KEYW">return</span><span class="WHIT"> </span><span class="NAME">versionString</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>1026</span> </span><span class="WHIT">	</span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>1027</span> </span><span class="WHIT">	
+<span class='line'>1028</span> 	</span><span class="COMM">/** Gets the version number for the plugin the user has currently installed.
+<span class='line'>1029</span>      * @type Array 
+<span class='line'>1030</span>      * @return An array of the format: [versionMajor, versionMinor, buildMajor, buildMinor].
+<span class='line'>1031</span>      */</span><span class="WHIT">	
+<span class='line'>1032</span> 	</span><span class="NAME">getPluginVersion</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>1033</span> </span><span class="WHIT">    	</span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">versionMajor</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">parseInt</span><span class="PUNC">(</span><span class="NAME">this._getElementValue</span><span class="PUNC">(</span><span class="NAME">this.getVersionXml</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="STRN">"VersionMajor"</span><span class="PUNC">)</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>1034</span> </span><span class="WHIT">    	</span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">versionMinor</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">parseInt</span><span class="PUNC">(</span><span class="NAME">this._getElementValue</span><span class="PUNC">(</span><span class="NAME">this.getVersionXml</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="STRN">"VersionMinor"</span><span class="PUNC">)</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>1035</span> </span><span class="WHIT">    	</span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">buildMajor</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">parseInt</span><span class="PUNC">(</span><span class="NAME">this._getElementValue</span><span class="PUNC">(</span><span class="NAME">this.getVersionXml</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="STRN">"BuildMajor"</span><span class="PUNC">)</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>1036</span> </span><span class="WHIT">    	</span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">buildMinor</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">parseInt</span><span class="PUNC">(</span><span class="NAME">this._getElementValue</span><span class="PUNC">(</span><span class="NAME">this.getVersionXml</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="STRN">"BuildMinor"</span><span class="PUNC">)</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>1037</span> 
+<span class='line'>1038</span> </span><span class="WHIT">	    </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">versionArray</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NAME">versionMajor</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">versionMinor</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">buildMajor</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">buildMinor</span><span class="PUNC">]</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>1039</span> </span><span class="WHIT">	    </span><span class="KEYW">return</span><span class="WHIT"> </span><span class="NAME">versionArray</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>1040</span> </span><span class="WHIT">	</span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>1041</span> </span><span class="WHIT">	
+<span class='line'>1042</span> 	</span><span class="COMM">/** Sets the required plugin version number for the application.
+<span class='line'>1043</span> 	 * @param reqVersionArray {Array} The required version to set to.  In the format [versionMajor, versionMinor, buildMajor, buildMinor]
+<span class='line'>1044</span> 	 * 			i.e. [2,2,0,1]
+<span class='line'>1045</span> 	 */</span><span class="WHIT">
+<span class='line'>1046</span> </span><span class="WHIT">	</span><span class="NAME">setPluginRequiredVersion</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="NAME">reqVersionArray</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>1047</span> </span><span class="WHIT">		</span><span class="NAME">Garmin.DevicePlugin.REQUIRED_VERSION.versionMajor</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">reqVersionArray</span><span class="PUNC">[</span><span class="NUMB">0</span><span class="PUNC">]</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>1048</span> </span><span class="WHIT">		</span><span class="NAME">Garmin.DevicePlugin.REQUIRED_VERSION.versionMinor</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">reqVersionArray</span><span class="PUNC">[</span><span class="NUMB">1</span><span class="PUNC">]</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>1049</span> </span><span class="WHIT">		</span><span class="NAME">Garmin.DevicePlugin.REQUIRED_VERSION.buildMajor</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">reqVersionArray</span><span class="PUNC">[</span><span class="NUMB">2</span><span class="PUNC">]</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>1050</span> </span><span class="WHIT">		</span><span class="NAME">Garmin.DevicePlugin.REQUIRED_VERSION.buildMinor</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">reqVersionArray</span><span class="PUNC">[</span><span class="NUMB">3</span><span class="PUNC">]</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>1051</span> </span><span class="WHIT">	</span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>1052</span> </span><span class="WHIT">	
+<span class='line'>1053</span> 	</span><span class="COMM">/** Sets the latest plugin version number.  This represents the latest version available for download at Garmin.
+<span class='line'>1054</span> 	 * We will attempt to keep the default value of this up to date with each API release, but this is not guaranteed,
+<span class='line'>1055</span> 	 * so set this to be safe or if you don't want to upgrade to the latest API.
+<span class='line'>1056</span> 	 * 
+<span class='line'>1057</span> 	 * @param reqVersionArray {Array} The latest version to set to.  In the format [versionMajor, versionMinor, buildMajor, buildMinor]
+<span class='line'>1058</span> 	 * 			i.e. [2,2,0,1]
+<span class='line'>1059</span> 	 */</span><span class="WHIT">
+<span class='line'>1060</span> </span><span class="WHIT">	</span><span class="NAME">setPluginLatestVersion</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="NAME">reqVersionArray</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>1061</span> </span><span class="WHIT">		</span><span class="NAME">Garmin.DevicePlugin.LATEST_VERSION.versionMajor</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">reqVersionArray</span><span class="PUNC">[</span><span class="NUMB">0</span><span class="PUNC">]</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>1062</span> </span><span class="WHIT">		</span><span class="NAME">Garmin.DevicePlugin.LATEST_VERSION.versionMinor</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">reqVersionArray</span><span class="PUNC">[</span><span class="NUMB">1</span><span class="PUNC">]</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>1063</span> </span><span class="WHIT">		</span><span class="NAME">Garmin.DevicePlugin.LATEST_VERSION.buildMajor</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">reqVersionArray</span><span class="PUNC">[</span><span class="NUMB">2</span><span class="PUNC">]</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>1064</span> </span><span class="WHIT">		</span><span class="NAME">Garmin.DevicePlugin.LATEST_VERSION.buildMinor</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">reqVersionArray</span><span class="PUNC">[</span><span class="NUMB">3</span><span class="PUNC">]</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>1065</span> </span><span class="WHIT">	</span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>1066</span> </span><span class="WHIT">	
+<span class='line'>1067</span> 	</span><span class="COMM">/** Used to check if the user's installed plugin version meets the required version for feature support purposes.
+<span class='line'>1068</span> 	 *  
+<span class='line'>1069</span> 	 * @param {Array} reqVersionArray An array representing the required version, in the format: [versionMajor, versionMinor, buildMajor, buildMinor]. 
+<span class='line'>1070</span> 	 * @return {boolean} true if the passed in required version is met by the user's plugin version (user's version is equal to or greater), false otherwise.
+<span class='line'>1071</span> 	 * @see setPluginRequiredVersion
+<span class='line'>1072</span> 	 */</span><span class="WHIT">
+<span class='line'>1073</span> </span><span class="WHIT">	</span><span class="NAME">checkPluginVersionSupport</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="NAME">reqVersionArray</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>1074</span> </span><span class="WHIT">		
+<span class='line'>1075</span> 		</span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">pVersion</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">this._versionToNumber</span><span class="PUNC">(</span><span class="NAME">this.getPluginVersion</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>1076</span> </span><span class="WHIT">   		</span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">rVersion</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">this._versionToNumber</span><span class="PUNC">(</span><span class="NAME">reqVersionArray</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>1077</span> </span><span class="WHIT">        </span><span class="KEYW">return</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">pVersion</span><span class="WHIT"> </span><span class="PUNC">>=</span><span class="WHIT"> </span><span class="NAME">rVersion</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>1078</span> </span><span class="WHIT">	</span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>1079</span> </span><span class="WHIT">	
+<span class='line'>1080</span> 	</span><span class="COMM">/**
+<span class='line'>1081</span> 	 * @private
+<span class='line'>1082</span> 	 */</span><span class="WHIT">
+<span class='line'>1083</span> </span><span class="WHIT">	</span><span class="NAME">_versionToNumber</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="NAME">versionArray</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>1084</span> </span><span class="WHIT">		</span><span class="KEYW">if</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">versionArray</span><span class="PUNC">[</span><span class="NUMB">1</span><span class="PUNC">]</span><span class="WHIT"> </span><span class="PUNC">></span><span class="WHIT"> </span><span class="NUMB">99</span><span class="WHIT"> </span><span class="PUNC">||</span><span class="WHIT"> </span><span class="NAME">versionArray</span><span class="PUNC">[</span><span class="NUMB">2</span><span class="PUNC">]</span><span class="WHIT"> </span><span class="PUNC">></span><span class="WHIT"> </span><span class="NUMB">99</span><span class="WHIT"> </span><span class="PUNC">||</span><span class="WHIT"> </span><span class="NAME">versionArray</span><span class="PUNC">[</span><span class="NUMB">3</span><span class="PUNC">]</span><span class="WHIT"> </span><span class="PUNC">></span><span class="WHIT"> </span><span class="NUMB">99</span><span class="PUNC">)</span><span class="WHIT">
+<span class='line'>1085</span> </span><span class="WHIT">			</span><span class="KEYW">throw</span><span class="WHIT"> </span><span class="KEYW">new</span><span class="WHIT"> </span><span class="NAME">Error</span><span class="PUNC">(</span><span class="STRN">"version segment is greater than 99: "</span><span class="PUNC">+</span><span class="NAME">versionArray</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>1086</span> </span><span class="WHIT">		</span><span class="KEYW">return</span><span class="WHIT"> </span><span class="NUMB">1000000</span><span class="PUNC">*</span><span class="NAME">versionArray</span><span class="PUNC">[</span><span class="NUMB">0</span><span class="PUNC">]</span><span class="WHIT"> </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="NUMB">10000</span><span class="PUNC">*</span><span class="NAME">versionArray</span><span class="PUNC">[</span><span class="NUMB">1</span><span class="PUNC">]</span><span class="WHIT"> </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="NUMB">100</span><span class="PUNC">*</span><span class="NAME">versionArray</span><span class="PUNC">[</span><span class="NUMB">2</span><span class="PUNC">]</span><span class="WHIT"> </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="NAME">versionArray</span><span class="PUNC">[</span><span class="NUMB">3</span><span class="PUNC">]</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>1087</span> </span><span class="WHIT">	</span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>1088</span> </span><span class="WHIT">	
+<span class='line'>1089</span> 	</span><span class="COMM">/** Determines if the Garmin plugin is at least the required version for the application.
+<span class='line'>1090</span>      * @type Boolean
+<span class='line'>1091</span>      * @see setPluginRequiredVersion
+<span class='line'>1092</span> 	 */</span><span class="WHIT">
+<span class='line'>1093</span> </span><span class="WHIT">	</span><span class="NAME">isPluginOutOfDate</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>1094</span> </span><span class="WHIT">    	</span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">pVersion</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">this._versionToNumber</span><span class="PUNC">(</span><span class="NAME">this.getPluginVersion</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>1095</span> </span><span class="WHIT">   		</span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">rVersion</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">this._versionToNumber</span><span class="PUNC">(</span><span class="NAME">Garmin.DevicePlugin.REQUIRED_VERSION.toArray</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>1096</span> </span><span class="WHIT">        </span><span class="KEYW">return</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">pVersion</span><span class="WHIT"> </span><span class="PUNC">&lt;</span><span class="WHIT"> </span><span class="NAME">rVersion</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>1097</span> </span><span class="WHIT">	</span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>1098</span> </span><span class="WHIT">	
+<span class='line'>1099</span> 	</span><span class="COMM">/** Checks if plugin is the most recent version released, for those that want the latest and greatest.
+<span class='line'>1100</span>      */</span><span class="WHIT">
+<span class='line'>1101</span> </span><span class="WHIT">    </span><span class="NAME">isUpdateAvailable</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>1102</span> </span><span class="WHIT">    	</span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">pVersion</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">this._versionToNumber</span><span class="PUNC">(</span><span class="NAME">this.getPluginVersion</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>1103</span> </span><span class="WHIT">   		</span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">cVersion</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">this._versionToNumber</span><span class="PUNC">(</span><span class="NAME">Garmin.DevicePlugin.LATEST_VERSION.toArray</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>1104</span> </span><span class="WHIT">        </span><span class="KEYW">return</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">pVersion</span><span class="WHIT"> </span><span class="PUNC">&lt;</span><span class="WHIT"> </span><span class="NAME">cVersion</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>1105</span> </span><span class="WHIT">    </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>1106</span> </span><span class="WHIT">	
+<span class='line'>1107</span> 	</span><span class="COMM">/** Pulls value from xml given an element name or null if no tag exists with that name.
+<span class='line'>1108</span> 	 * @private
+<span class='line'>1109</span> 	 */</span><span class="WHIT">
+<span class='line'>1110</span> </span><span class="WHIT">	</span><span class="NAME">_getElementValue</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="NAME">xml</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">tagName</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>1111</span> </span><span class="WHIT">		</span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">start</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">xml.indexOf</span><span class="PUNC">(</span><span class="STRN">"&lt;"</span><span class="PUNC">+</span><span class="NAME">tagName</span><span class="PUNC">+</span><span class="STRN">">"</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>1112</span> </span><span class="WHIT">		</span><span class="KEYW">if</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">start</span><span class="WHIT"> </span><span class="PUNC">==</span><span class="WHIT"> </span><span class="PUNC">-</span><span class="NUMB">1</span><span class="PUNC">)</span><span class="WHIT">
+<span class='line'>1113</span> </span><span class="WHIT">			</span><span class="KEYW">return</span><span class="WHIT"> </span><span class="KEYW">null</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>1114</span> </span><span class="WHIT">		</span><span class="NAME">start</span><span class="WHIT"> </span><span class="PUNC">+</span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">tagName.length</span><span class="PUNC">+</span><span class="NUMB">2</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>1115</span> </span><span class="WHIT">		</span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">end</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">xml.indexOf</span><span class="PUNC">(</span><span class="STRN">"&lt;/"</span><span class="PUNC">+</span><span class="NAME">tagName</span><span class="PUNC">+</span><span class="STRN">">"</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>1116</span> </span><span class="WHIT">		</span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">result</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">xml.substring</span><span class="PUNC">(</span><span class="NAME">start</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">end</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>1117</span> </span><span class="WHIT">		</span><span class="KEYW">return</span><span class="WHIT"> </span><span class="NAME">result</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>1118</span> </span><span class="WHIT">	</span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>1119</span> </span><span class="WHIT">	
+<span class='line'>1120</span> </span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>1121</span> 
+<span class='line'>1122</span> </span><span class="COMM">/** Latest version (not required) of the Garmin Communicator Plugin, and a complementary toString function to print it out with
+<span class='line'>1123</span>  */</span><span class="WHIT">
+<span class='line'>1124</span> </span><span class="NAME">Garmin.DevicePlugin.LATEST_VERSION</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>1125</span> </span><span class="WHIT">    </span><span class="NAME">versionMajor</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="NUMB">3</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>1126</span> </span><span class="WHIT">    </span><span class="NAME">versionMinor</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="NUMB">0</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>1127</span> </span><span class="WHIT">    </span><span class="NAME">buildMajor</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="NUMB">1</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>1128</span> </span><span class="WHIT">    </span><span class="NAME">buildMinor</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="NUMB">0</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>1129</span> </span><span class="WHIT">    
+<span class='line'>1130</span>     </span><span class="NAME">toString</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>1131</span> </span><span class="WHIT">        </span><span class="KEYW">return</span><span class="WHIT"> </span><span class="NAME">this.versionMajor</span><span class="WHIT"> </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="STRN">"."</span><span class="WHIT"> </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="NAME">this.versionMinor</span><span class="WHIT"> </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="STRN">"."</span><span class="WHIT"> </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="NAME">this.buildMajor</span><span class="WHIT"> </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="STRN">"."</span><span class="WHIT"> </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="NAME">this.buildMinor</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>1132</span> </span><span class="WHIT">    </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>1133</span> </span><span class="WHIT">    
+<span class='line'>1134</span>     </span><span class="NAME">toArray</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>1135</span> </span><span class="WHIT">        </span><span class="KEYW">return</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NAME">this.versionMajor</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">this.versionMinor</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">this.buildMajor</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">this.buildMinor</span><span class="PUNC">]</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>1136</span> </span><span class="WHIT">    </span><span class="PUNC">}</span><span class="WHIT">	
+<span class='line'>1137</span> </span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT"> 
+<span class='line'>1138</span>  
+<span class='line'>1139</span>  
+<span class='line'>1140</span> </span><span class="COMM">/** Latest required version of the Garmin Communicator Plugin, and a complementary toString function to print it out with. 
+<span class='line'>1141</span>  */</span><span class="WHIT">
+<span class='line'>1142</span> </span><span class="NAME">Garmin.DevicePlugin.REQUIRED_VERSION</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>1143</span> </span><span class="WHIT">    </span><span class="NAME">versionMajor</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="NUMB">3</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>1144</span> </span><span class="WHIT">    </span><span class="NAME">versionMinor</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="NUMB">0</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>1145</span> </span><span class="WHIT">    </span><span class="NAME">buildMajor</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="NUMB">0</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>1146</span> </span><span class="WHIT">    </span><span class="NAME">buildMinor</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="NUMB">0</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>1147</span> </span><span class="WHIT">    
+<span class='line'>1148</span>     </span><span class="NAME">toString</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>1149</span> </span><span class="WHIT">        </span><span class="KEYW">return</span><span class="WHIT"> </span><span class="NAME">this.versionMajor</span><span class="WHIT"> </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="STRN">"."</span><span class="WHIT"> </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="NAME">this.versionMinor</span><span class="WHIT"> </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="STRN">"."</span><span class="WHIT"> </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="NAME">this.buildMajor</span><span class="WHIT"> </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="STRN">"."</span><span class="WHIT"> </span><span class="PUNC">+</span><span class="WHIT"> </span><span class="NAME">this.buildMinor</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>1150</span> </span><span class="WHIT">    </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>1151</span> </span><span class="WHIT">    
+<span class='line'>1152</span>     </span><span class="NAME">toArray</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>1153</span> </span><span class="WHIT">        </span><span class="KEYW">return</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NAME">this.versionMajor</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">this.versionMinor</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">this.buildMajor</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">this.buildMinor</span><span class="PUNC">]</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>1154</span> </span><span class="WHIT">    </span><span class="PUNC">}</span><span class="WHIT">	
+<span class='line'>1155</span> </span><span class="PUNC">}</span><span class="PUNC">;</span></pre></body></html>

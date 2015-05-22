@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+	<head>
+		<title id="title">Sending geocache to GPS Unit</title>
+		<style type="text/css" media="all">@import "../garmin/device/style/communicator2.css";</style>
+		<script type="text/javascript" src="../prototype/prototype.js"> </script>
+		<script type="text/javascript" src="../garmin/device/GarminDeviceDisplay.js"> </script>
+		<script type="text/javascript">
+        function load() {
+            var display = new Garmin.DeviceDisplay("garminDisplay", {
+                pathKeyPairsArray: ["http://developer.garmin.com/","ee3934433a35ee348583236c2eeadbc1"],
+                unlockOnPageLoad: false,
+                hideIfBrowserNotSupported: true,
+                showStatusElement: true,
+                autoFindDevices: false,
+                findDevicesButtonText: "Send to Garmin",
+                showCancelFindDevicesButton: false,
+                showDeviceSelectOnLoad: false,
+                showDeviceSelectNoDevice: false,
+                autoReadData: false,
+                autoWriteData: true,
+                showReadDataElement: false,
+                showProgressBar: true,
+                getWriteData: function() { return getWptData() },
+		        afterFinishWriteToDevice: function(success) {
+		            this.setStatus(waypoint.getName()+" geocache saved "+(success ? "successfully" : "unsuccessfully"));
+		        }
+             });
+        }
+        
+        var waypoint = null;
+        
+        function getWptData() {
+			var lat = 37.8544;
+			var lng = -122.2468;
+			var elv = 0;
+			var name = 'GC117FB';
+			var descr = 'Donald Lawton Park';
+			var sym = 'Geocache';
+    		var type = 'Geocache|Traditional Cache';
+			waypoint = new Garmin.WayPoint(lat, lng, elv, name, null, descr, sym, type, null);
+			var factory = new Garmin.GpsDataFactory();
+			var gpx = factory.produceGpxString(null, [waypoint]);
+			return gpx;
+        }
+        
+        function finishRead(json) {
+			alert(json);
+        }
+        function fc() {
+			
+        }
+		</script>
+	</head>
+	<body onload="load();" bgcolor="#EFF4F9">
+		<form name="Form1" method="post" action="sendtogps.aspx?guid=d5d6dbdf-dff4-4a9c-aead-c57e6b8a64dd" id="Form1">
+		<input type="hidden" name="__VIEWSTATE" value="dDwxMjY0OTIyMDc2O3Q8O2w8aTwxPjtpPDM+Oz47bDx0PHA8bDxpbm5lcmh0bWw7PjtsPFNlbmRpbmcgIHRvIEdQUyBVbml0Oz4+Ozs+O3Q8cDxsPFRleHQ7PjtsPHZhciBsYXQgPSAzNy44NTQ0XDsNCnZhciBsbmcgPSAtMTIyLjI0NjhcOw0KdmFyIGVsdiA9IDBcOw0KdmFyIG5hbWUgPSAnR0MxMTdGQidcOw0KdmFyIGRlc2NyID0gJ0RvbmFsZCBMYXd0b24gUGFyaydcOw0KOz4+Ozs+Oz4+Oz6aqI8ojBGeeoChQgNZyTg7561Q6A==" />
+
+			<table border="0" cellpadding="4" cellspacing="0" width="100%">
+				<tr bgcolor="#EFF4F9" height="50">
+					<td align="left" style="padding-bottom:0px;"><img src="../images/sendtogps.png" alt="Send geocache to GPS" title="Send geocache to GPS"></td>
+				</tr>
+				<tr>
+					<td style="border:solid 1px #C0CEE3;" valign="bottom" height="205" bgcolor="#ffffff">
+						<div id="garminDisplay"></div>
+					</td>
+				</tr>
+
+				<tr bgcolor="#EFF4F9" height="30">
+					<td><small>Can't get it to run? Try installing the <a href='http://www.garmin.com/products/communicator' target="_blank">
+								latest plugin here</a></small></td>
+				</tr>
+			</table>
+		</form>
+	</body>
+</html>
+

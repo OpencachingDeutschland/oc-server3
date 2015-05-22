@@ -1,66 +1,66 @@
 <xml>
-	<brief>Authorize the Request Token</brief>
-	<issue-id>22</issue-id>
-	<desc>
-		<p>Unlike other methods, the <b>authorize</b> method is to be executed
-		inside the User's browser. Consumer's role is to <b>redirect</b> the User to
-		this URL, then wait if he ever comes back with a callback request.</p>
-		<p>Once the User is redirected to this URL, several things will happen:</p>
-		<ul>
-			<li>If he's not already logged in, he will be asked to do so.</li>
-			<li>OKAPI will check if the User haven't previously granted your
-			application access to his Opencaching account.</li>
-			<li>If User did not previously authorize your application, OKAPI
-			will display an "Authorization Request" form to the User. User
-			will be presented with a choice to allow or not to allow your
-			application access to his account.</li>
-			<li>If the User clicks one of these two options ("allow" or "don't allow"),
-			he's browser will be redirected to the <b>callback_url</b> you defined
-			while getting your Request Token.
-			If you did not provide a callback (in other word, provided "oob"),
-			user will be redirected to a default "authorized" page, where he
-			will be presented with an oauth_verifier (user will know it
-			by name of a <b>PIN code</b>) and asked to type it into your application.</li>
-		</ul>
-	</desc>
-	<req name='oauth_token'>
-		Consult <a href='http://oauth.net/documentation/spec/'>OAuth documentation</a> for details.
-	</req>
-	<opt name='interactivity' default='minimal'>
-		<p>Currently, one of the following values:</p>
-		<ul>
-			<li><b>minimal</b> - OKAPI will use as little interactivity as it can.
-			It will assume that currently logged in user is the user which you
-			want to authorize. If the user has already authorized your application,
-			he will not be asked to do this again.</li>
-			<li><b>confirm_user</b> - even if a user is logged in, OKAPI will NOT
-			assume that this is the user who wants to be authorized. OKAPI will
-			offer to authorize a different user (e.g. by automatically logging out
-			the user who is currently logged in).</li>
-		</ul>
-	</opt>
-	<opt name='langpref'>
-		<p>Pipe-separated list of ISO 639-1 language codes. This indicates the
-		order of preference in which the language will be chosen for the authorization page.</p>
-		<p>By default, OKAPI will display the page in the primary native language of local
-		Opencaching installation.</p>
-	</opt>
-	<returns>
-		<p>Technically, an HTTP 302 Redirect - it will direct user's browser to the OKAPI apps
-		authorization page.</p>
-		<p>Whether with callback_url or with a manual user entry - you will get
-		your <b>oauth_verifier</b>, which allows you to continue the 3-legged
-		authentication dance.</p>
-		<p>If you used <b>callback_url</b>, you should wait for an HTTP GET request,
-		with one additional GET parameter appended:</p>
-		<ul>
-			<li><b>oauth_token</b> - the Request Token that has been just authorized,</li>
-			<li><b>oauth_verifier</b> - the PIN code required to get an Access Token.</li>
-		</ul>
-		<p>OR, in case when user denied the request:</p>
-		<ul>
-			<li><b>oauth_token</b> - the Request Token,</li>
-			<li><b>error</b> - codename of an error - <b>access_denied</b>.</li>
-		</ul>
-	</returns>
+    <brief>Authorize the Request Token</brief>
+    <issue-id>22</issue-id>
+    <desc>
+        <p>Unlike other methods, the <b>authorize</b> method is to be executed
+        inside the User's browser. Consumer's role is to <b>redirect</b> the User to
+        this URL, then wait if he ever comes back with a callback request.</p>
+        <p>Once the User is redirected to this URL, several things will happen:</p>
+        <ul>
+            <li>If he's not already logged in, he will be asked to do so.</li>
+            <li>OKAPI will check if the User haven't previously granted your
+            application access to his Opencaching account.</li>
+            <li>If User did not previously authorize your application, OKAPI
+            will display an "Authorization Request" form to the User. User
+            will be presented with a choice to allow or not to allow your
+            application access to his account.</li>
+            <li>If the User clicks one of these two options ("allow" or "don't allow"),
+            he's browser will be redirected to the <b>callback_url</b> you defined
+            while getting your Request Token.
+            If you did not provide a callback (in other word, provided "oob"),
+            user will be redirected to a default "authorized" page, where he
+            will be presented with an oauth_verifier (user will know it
+            by name of a <b>PIN code</b>) and asked to type it into your application.</li>
+        </ul>
+    </desc>
+    <req name='oauth_token'>
+        Consult <a href='http://oauth.net/documentation/spec/'>OAuth documentation</a> for details.
+    </req>
+    <opt name='interactivity' default='minimal'>
+        <p>Currently, one of the following values:</p>
+        <ul>
+            <li><b>minimal</b> - OKAPI will use as little interactivity as it can.
+            It will assume that currently logged in user is the user which you
+            want to authorize. If the user has already authorized your application,
+            he will not be asked to do this again.</li>
+            <li><b>confirm_user</b> - even if a user is logged in, OKAPI will NOT
+            assume that this is the user who wants to be authorized. OKAPI will
+            offer to authorize a different user (e.g. by automatically logging out
+            the user who is currently logged in).</li>
+        </ul>
+    </opt>
+    <opt name='langpref'>
+        <p>Pipe-separated list of ISO 639-1 language codes. This indicates the
+        order of preference in which the language will be chosen for the authorization page.</p>
+        <p>By default, OKAPI will display the page in the primary native language of local
+        Opencaching installation.</p>
+    </opt>
+    <returns>
+        <p>Technically, an HTTP 302 Redirect - it will direct user's browser to the OKAPI apps
+        authorization page.</p>
+        <p>Whether with callback_url or with a manual user entry - you will get
+        your <b>oauth_verifier</b>, which allows you to continue the 3-legged
+        authentication dance.</p>
+        <p>If you used <b>callback_url</b>, you should wait for an HTTP GET request,
+        with one additional GET parameter appended:</p>
+        <ul>
+            <li><b>oauth_token</b> - the Request Token that has been just authorized,</li>
+            <li><b>oauth_verifier</b> - the PIN code required to get an Access Token.</li>
+        </ul>
+        <p>OR, in case when user denied the request:</p>
+        <ul>
+            <li><b>oauth_token</b> - the Request Token,</li>
+            <li><b>error</b> - codename of an error - <b>access_denied</b>.</li>
+        </ul>
+    </returns>
 </xml>

@@ -1,18 +1,18 @@
 <xml>
-	<brief>Find single user, by his internal_id</brief>
-	<issue-id>44</issue-id>
-	<desc>
-		<p>Retrieve information on a single user, referencing him by his <b>internal</b> ID.</p>
-		<p>In general, you should not use this method. Reference your users by their
-		normal ID - <b>user_uuid</b>. Also, internal IDs are not universally unique and are
-		a poor choice for a key.</p>
-	</desc>
-	<req name='internal_id'>Internal ID</req>
-	<req name='fields'>
-		<p>See services/users/user method.</p>
-	</req>
-	<common-format-params/>
-	<returns>
-		<p>See services/users/user method.</p>
-	</returns>
+    <brief>Find single user, by his internal_id</brief>
+    <issue-id>44</issue-id>
+    <desc>
+        <p>Retrieve information on a single user, referencing him by his <b>internal</b> ID.</p>
+        <p>In general, you should not use this method. Reference your users by their
+        normal ID - <b>user_uuid</b>. Also, internal IDs are not universally unique and are
+        a poor choice for a key.</p>
+    </desc>
+    <req name='internal_id'>Internal ID</req>
+    <req name='fields'>
+        <p>See services/users/user method.</p>
+    </req>
+    <common-format-params/>
+    <returns>
+        <p>See services/users/user method.</p>
+    </returns>
 </xml>

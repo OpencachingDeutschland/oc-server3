@@ -839,6 +839,9 @@ class OAuthServer {
     if( ! $timestamp )
       throw new OAuthMissingParameterException('oauth_timestamp');
 
+    // Cast to integer. See issue #314.
+    $timestamp = $timestamp + 0;
+
     // verify that timestamp is recentish
     $now = time();
     if (abs($now - $timestamp) > $this->timestamp_threshold) {

@@ -553,5 +553,32 @@ class coordinate
 
 		return $lon;
 	}
+
+	function getW3W($language = "de")
+	{
+        global $opt;
+
+		$params = array(
+			'key' => $opt['lib']['w3w']['apikey'],
+			'position' => sprintf('%f,%f', $this->nLat, $this->nLon),
+			'lang' => $language,
+		);
+		$params_str = http_build_query($params);
+		$context = stream_context_create( array(
+			'http' => array(
+				'method' => 'POST',
+				'header' => "Content-Type: application/x-www-form-urlencoded\r\n" .
+							"Content-Length: " . strlen($params_str) . "\r\n",
+				'content' => $params_str,
+			),
+		));
+		
+		$result = @file_get_contents('http://api.what3words.com/position', false, $context);
+		if ($result === false) {
+			return false;
+		}
+		$json = json_decode($result, true);
+		return implode('.', $json['words']);
+	}
 }
 ?>

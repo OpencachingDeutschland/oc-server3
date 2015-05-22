@@ -9,28 +9,28 @@ namespace okapi;
 
 class OkapiUrls
 {
-	public static $mapping = array(
-		'^(services/.*)\.html$' => 'method_doc',
-		'^(services/.*)$' => 'method_call',
-		'^introduction\.html$' => 'introduction',
-		'^signup\.html$' => 'signup',
-		'^examples\.html$' => 'examples',
-		'^$' => 'index',
-		'^apps/$' => 'apps/index',
-		'^apps/authorize$' => 'apps/authorize',
-		'^apps/authorized$' => 'apps/authorized',
-		'^apps/revoke_access$' => 'apps/revoke_access',
-		'^update/?$' => 'update',
-		'^cron5$' => 'cron5',
-		'^devel/attrlist$' => 'devel/attrlist',
-		'^devel/dbstruct$' => 'devel/dbstruct',
-		'^devel/cronreport$' => 'devel/cronreport',
-		'^devel/tilereport$' => 'devel/tilereport',
-		'^devel/clogentry$' => 'devel/clogentry',
+    public static $mapping = array(
+        '^(services/.*)\.html$' => 'method_doc',
+        '^(services/.*)$' => 'method_call',
+        '^introduction\.html$' => 'introduction',
+        '^signup\.html$' => 'signup',
+        '^examples\.html$' => 'examples',
+        '^$' => 'index',
+        '^apps/$' => 'apps/index',
+        '^apps/authorize$' => 'apps/authorize',
+        '^apps/authorized$' => 'apps/authorized',
+        '^apps/revoke_access$' => 'apps/revoke_access',
+        '^update/?$' => 'update',
+        '^cron5$' => 'cron5',
+        '^devel/attrlist$' => 'devel/attrlist',
+        '^devel/dbstruct$' => 'devel/dbstruct',
+        '^devel/cronreport$' => 'devel/cronreport',
+        '^devel/tilereport$' => 'devel/tilereport',
+        '^devel/clogentry$' => 'devel/clogentry',
 
-		# For debugging TileMap performance only.
-		// '^tilestress$' => 'tilestress',
-	);
+        # For debugging TileMap performance only.
+        // '^tilestress$' => 'tilestress',
+    );
 }
 
 # This line is used for commit-hooks testing: ..........>

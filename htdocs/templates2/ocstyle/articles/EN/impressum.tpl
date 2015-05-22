@@ -62,13 +62,13 @@
 	</p>
 	
 	<p>
-		The managing comittee are (as of July 06, 2013):
+		The managing comittee are (as of November 26th, 2014):
 	</p>
 	<p>
 		<ul class="indent narrowlist">
 			<li>Michael Vaahsen, chairman</li>
 			<li>Mirco Baumann, vice chairman</li>
-			<li>Maik Bischoff, treasurer</li>
+			<li>Christoph Convent, treasurer (acting)</li>
 		</ul>
 	</p>
 

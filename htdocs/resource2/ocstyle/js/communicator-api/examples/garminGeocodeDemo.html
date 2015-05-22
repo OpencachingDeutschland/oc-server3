@@ -1,0 +1,131 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Garmin Web Drop Test Page</title>
+</head>
+
+<script src="http://maps.google.com/maps?file=api&v=2.x&key=ABQIAAAAkOp4960CVjgwg7aH_RVbsBRx8XQQBS7xHJZeF9Ardr7B9wB3FxQLA2vT2m8bhaXkBrcrYKlrWsZJMw" type="text/javascript">&#160;</script>
+<script type="text/javascript" src="../prototype/prototype.js">&#160;</script>
+<script type="text/javascript" src="../garmin/device/GarminDeviceControl.js">&#160;</script>
+<script type="text/javascript" src="../garmin/device/GarminDevicePlugin.js">&#160;</script>
+<script type="text/javascript" src="../garmin/device/GarminGpsDataStructures.js">&#160;</script>
+<script type="text/javascript" src="../garmin/device/GarminDevice.js">&#160;</script>
+<script type="text/javascript" src="../garmin/device/GarminGeocode.js">&#160;</script>
+<script type="text/javascript" src="../garmin/device/GarminPluginUtils.js">&#160;</script>
+<script type="text/javascript" src="../garmin/util/Util-XmlConverter.js">&#160;</script>
+<script type="text/javascript" src="../garmin/util/Util-Broadcaster.js">&#160;</script>
+<script type="text/javascript" src="../garmin/util/Util-DateTimeFormat.js">&#160;</script>
+<script type="text/javascript" src="../garmin/util/Util-BrowserDetect.js">&#160;</script>
+<script type="text/javascript" src="../garmin/util/Util-PluginDetect.js">&#160;</script>
+<script type="text/javascript" src="../garmin/device/GarminObjectGenerator.js">&#160;</script>
+
+<script type="text/javascript">
+	var GoogleGeocodeDemo = Class.create();
+	GoogleGeocodeDemo.prototype = {
+	
+		initialize: function() {        
+			//ui
+	        this.status = $("statusText");
+        	this.address = $("address");
+        	this.lat = $("lat");
+        	this.lng = $("lng");
+			//property
+        	this.waypoint = null;
+        	//init plugin and look for devices
+			var pos = location.search.indexOf("address=");
+			var siteKeyCodeArray = ["http://developer.garmin.com/","ee3934433a35ee348583236c2eeadbc1"];
+		    if (location.search && pos >=0 && location.search.length > pos+8) {
+		    	this.address.innerHTML=unescape(location.search.substring(pos+8));
+				this.garminController = new Garmin.DeviceControl();
+				this.garminController.register(this);
+				if(!this.garminController.unlock(siteKeyCodeArray)) {
+		        	throw new Error("The plug-in was not unlocked successfully.");
+				}
+	        	this.setStatus("Plug-in initialized.  Looking for devices...");
+				this.garminController.findDevices();
+		    } 
+	 	},
+		
+	    onFinishFindDevices: function(json) {
+	        if(json.controller.numDevices == 0) {
+	        	alert("No devices found. Plugin your device and reload the page.");
+        	} else {
+            	var devices = json.controller.getDevices();
+            	this.setStatus("Found " + devices.length + " device(s).");
+            	this.garminController.writeAddressToDevice(this.address.innerHTML);
+            }
+	    },
+	    
+		onFinishedFindLatLon: function(json) {
+	        this.setStatus("located address: "+json.waypoint);
+			this.waypoint = json.waypoint;
+			var newName = prompt("Name to store this address under: "+this.waypoint.name);
+			if (newName && newName.length>0) {
+				//replace name with user provided text, move old name to desc field
+				this.waypoint.desc = this.waypoint.name;
+				this.waypoint.name = newName;
+			}
+		},
+				
+	    onFinishWriteToDevice: function(json) {
+	    	if (json.success) {
+	    		this.setStatus("Location saved to the device's favorites: " + this.waypoint);
+    		} else {
+	    		this.setStatus("Location NOT saved to the device: " + this.waypoint);
+    		}
+	    },
+
+	    onException: function(json) {
+		    alert("Exception: " + json.msg.message);
+	    },
+	
+		setStatus: function(statusText) {
+		    this.status.innerHTML = statusText;
+		}
+	};
+</script>
+
+<script type="text/javascript">
+	var display;
+	
+	function load() {
+	    display = new GoogleGeocodeDemo();
+	}
+</script>
+
+<body onload="load()">
+
+
+<h1>Garmin Web Drop Test Page</h1>
+<h2><a href="http://developer.garmin.com/web-device/garmin-communicator-plugin/">Garmin Communicator API</a></h2>
+<p>This page demonstrates how to load an address into a Garmin GPS device as a waypoint.</p> 
+
+<h4>Instructions:</h4>
+<ol>
+<li>Save the following link as a bookmark: <a href="javascript:var q;if(document.getSelection){q=document.getSelection()}else{q=document.selection.createRange().text};for(i=0;i<top.frames.length;i++){if(q!='')break;var theDoc=top.frames[i].document;if(theDoc.getSelection){q=theDoc.getSelection()}else{q=theDoc.selection.createRange().text}};top.location.href=(top.location.href.split("?")[0]+'?address='+q);">Save Address to Garmin GPS</a></li>
+<li>Select an address below with cursor</li>
+<li>Choose <b>Save Address to Garmin GPS</b> from your bookmarks menu</li>
+<li>Waypoint should appear under the <b>Favorites</b> menu on your device</li>
+</ol>
+
+<h4>Status:</h4>
+<div id="statusBox">
+	<div id="statusText">Status Text</div>
+</div>
+
+<h4>Target Address:</h4>
+<div id="address"></div>
+
+<h4>Example Addresses:</h4>
+<ul>
+<li>180 Harbor Drive, Sausalito, CA 94965</li>
+<li>13310A Nevada City Ave. Grass Valley, California, 95945</li>
+<li>320 Main St N, Ketchum, ID 83340</li>
+<li>1250 Bridgeway, Sausalito, CA 94965</li>
+<li>9280 S Kyrene, 85284</li>
+</ul>
+
+
+</body>
+</html>

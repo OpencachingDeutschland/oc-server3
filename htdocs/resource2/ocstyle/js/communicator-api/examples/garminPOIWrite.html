@@ -1,0 +1,35 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Garmin Display - Write POI to Device</title>
+</head>
+<script type="text/javascript" src="../prototype/prototype.js">&#160;</script>
+<script type="text/javascript" src="../garmin/device/GarminDeviceDisplay.js">&#160;</script>
+<script type="text/javascript">	
+	function load() {
+	    var display = new Garmin.DeviceDisplay("garminDisplay", {
+	    	pathKeyPairsArray: ["http://developer.garmin.com/","ee3934433a35ee348583236c2eeadbc1"],
+	    	unlockOnPageLoad: false,
+	    	showStatusElement: true,
+	    	autoFindDevices: false,
+	    	findDevicesButtonText: "Write POIs",
+	    	showCancelFindDevicesButton: false,
+	    	autoSelectFirstDevice: true,
+	    	autoReadData: false,
+	    	autoWriteData: true,
+	    	showReadDataElement: false,    	
+			getGpiWriteDescription:	function() { return ["data/BerkeleyCafes.gpi", "Garmin/POI/BerkeleyCafes.gpi"] },
+			writeDataType:	Garmin.DeviceControl.FILE_TYPES.gpi,
+			afterFinishWriteToDevice: function(success) {
+				alert(this.options.getGpiWriteDescription()[1] + " POI write to " +
+					  this.getController().getDevices()[0].getDisplayName() + 
+					  " was " + (success ? "" : "NOT ") + "successful.");
+			}
+		});
+	}
+</script>
+<body onload="load()">
+<h2>Write POI to Device</h2>
+<p>Demonstrates sending Points Of Interest (POI) to a Garmin device.</p>
+<div id="garminDisplay"></div>
+</body>
+</html>

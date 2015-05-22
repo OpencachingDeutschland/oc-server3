@@ -1,0 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>JavaScript Unit Test Template</title>
+<!--Start YUI Test dependencies-->
+<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.7.0/build/logger/assets/logger.css">
+<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.7.0/build/yuitest/assets/testlogger.css">
+<script type="text/javascript" src="http://yui.yahooapis.com/2.7.0/build/yahoo-dom-event/yahoo-dom-event.js"></script>
+<script type="text/javascript" src="http://yui.yahooapis.com/2.7.0/build/logger/logger-min.js"></script>
+<script type="text/javascript" src="http://yui.yahooapis.com/2.7.0/build/yuitest/yuitest-min.js"></script>
+<!--End YUI Test dependencies-->
+
+<!-- INCLUDE SCRIPTS NEEDED FOR TEST GO HERE -->                
+<!-- <script type="text/javascript" src="../prototype/prototype.js">&#160;</script>
+<script type="text/javascript" src="../garmin/device/GarminDeviceDisplay.js">&#160;</script>
+<script type="text/javascript" src="GarminDevicePluginStub.js">&#160;</script> -->
+</head>
+
+<body>
+<script language="JavaScript" type="text/javascript">
+	var Assert = YAHOO.util.Assert; 
+	/* GLOBAL VAR DECLARATIONS GO HERE*/
+	//var display;
+	
+	/* NAME YOUR TEST CASE VAR */
+    var nameYourTestCase = new YAHOO.tool.TestCase({
+   		/* PRETTY NAME FOR YOUR TEST CASE */
+        name: "Garmin Device Display UI Generation Unit Tests",
+        
+        _should: {
+            ignore: {
+            	/* LIST OF TESTS TO IGNORE */
+                //testReadFitnessHistoryDirectory: true //ignore this test
+            },
+            error: {
+            	/* LIST OF TESTS EXPECTED TO FAIL */
+            	//testValidOptionConfigParam: true
+            }            
+        },
+        
+        setUp: function() {
+			/* SETUP CODE THAT IS RUN BEFORE EACH TEST */  
+        },
+        
+        tearDown: function() {
+        	/* CLEAN UP CODE THAT IS RUN AFTER EACH TEST (MEMORY OR DOM)*/
+    	},
+        
+        /* TESTS GO HERE */
+        testDoesDaftPunkRock: function() {
+        	var hellYeah = true;
+			Assert.isTrue(hellYeah);
+		}
+		      	
+   	});
+   	
+	/* UPDATE WITH YOUR TEST CASE VAR HERE*/   	
+    //add the test cases and suites
+    YAHOO.tool.TestRunner.add(nameYourTestCase);
+    
+    //run all tests
+    var oLogger = new YAHOO.tool.TestLogger(); 
+    YAHOO.tool.TestRunner.run();
+    
+    // Notifies the manager that this test page has loaded.  Needed for running the test suite.
+    YAHOO.tool.TestManager.load(); 
+</script>
+                
+<h1>Garmin Javascript Unit Test Template</h1>
+
+<!-- INCLUDE ANY HTML NEEDED BY YOUR TESTS HERE -->
+<!-- <div id="garminDisplayDiv"></div> -->
+</body>
+</html>

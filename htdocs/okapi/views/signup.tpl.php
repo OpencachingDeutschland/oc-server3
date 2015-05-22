@@ -38,7 +38,7 @@
     <body class='api'>
         <div class='okd_mid'>
             <div class='okd_top'>
-                <? include 'installations_box.tpl.php'; ?>
+                <?php include 'installations_box.tpl.php'; ?>
                 <table cellspacing='0' cellpadding='0'><tr>
                     <td class='apimenu'>
                         <?= $vars['menu'] ?>

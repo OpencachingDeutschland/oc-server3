@@ -46,7 +46,7 @@ class WebService
         $format = $request->get_parameter('caches_format');
         if (!$format) $format = "gpx";
         if (!in_array($format, array("gpx", "ggz")))
-            throw new InvalidParam('format');
+            throw new InvalidParam('caches_format');
 
         $location_source = $request->get_parameter('location_source');
         $location_change_prefix = $request->get_parameter('location_change_prefix');
@@ -89,7 +89,7 @@ class WebService
                 'my_notes' => ($request->token != null) ? "desc:text" : "none",
                 'location_source' => $location_source,
                 'location_change_prefix' => $location_change_prefix
-            )))->get_body(), TBSZIP_STRING, $data_use_compression);
+            )))->get_body(), clsTbsZip::TBSZIP_STRING, $data_use_compression);
 
         # Then, include all the images.
 
@@ -143,7 +143,7 @@ class WebService
                     $syspath = Settings::get('IMAGES_DIR')."/".$img['uuid'].".jpg";
                     if (file_exists($syspath))
                     {
-                        $response->zip->FileAdd($zippath, $syspath, TBSZIP_FILE, false);
+                        $response->zip->FileAdd($zippath, $syspath, clsTbsZip::TBSZIP_FILE, false);
                     }
                     else
                     {
@@ -181,7 +181,7 @@ class WebService
                             }
                         }
                         if ($jpeg_contents)  # This can be "null" *or* "false"!
-                            $response->zip->FileAdd($zippath, $jpeg_contents, TBSZIP_STRING, false);
+                            $response->zip->FileAdd($zippath, $jpeg_contents, clsTbsZip::TBSZIP_STRING, false);
                     }
                 }
             }

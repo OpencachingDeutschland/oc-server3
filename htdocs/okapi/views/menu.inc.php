@@ -1,4 +1,4 @@
-<?
+<?php
 
 namespace okapi\views\menu;
 

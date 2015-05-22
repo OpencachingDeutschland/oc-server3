@@ -137,7 +137,10 @@ class View
                     # back to the Consumer application with an error.
 
                     if ($token['callback']) {
-                        return new OkapiRedirectResponse($token['callback'].$callback_concat_char."error=access_denied");
+                        return new OkapiRedirectResponse(
+                            $token['callback'].$callback_concat_char."error=access_denied".
+                            "&oauth_token=".$token['key']
+                        );
                     } else {
                         # Consumer did not provide a callback URL (oauth_callback=oob).
                         # We'll have to redirect to the Opencaching main page then...

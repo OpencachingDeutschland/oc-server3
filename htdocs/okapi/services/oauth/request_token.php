@@ -1,4 +1,4 @@
-<?
+<?php
 
 namespace okapi\services\oauth\request_token;
 

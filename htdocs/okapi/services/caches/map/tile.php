@@ -187,6 +187,7 @@ class WebService
         $response->content_type = $tile->get_content_type();
         $response->cache_control = "Cache-Control: private, max-age=600";
         $response->etag = 'W/"'.$image_fingerprint.'"';
+        $response->allow_gzip = false; // images are usually compressed, prevent compression at Apache level
 
         # Check if the request didn't include the same ETag.
 

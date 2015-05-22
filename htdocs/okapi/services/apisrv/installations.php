@@ -45,6 +45,10 @@ class WebService
                 $context = stream_context_create($opts);
                 $xml = file_get_contents("http://opencaching-api.googlecode.com/svn/trunk/etc/installations.xml",
                     false, $context);
+                $doc = simplexml_load_string($xml);
+                if (!$doc) {
+                    throw new ErrorException(); # just to get to the catch block
+                }
             }
             catch (ErrorException $e)
             {
@@ -71,7 +75,6 @@ class WebService
                 return Okapi::formatted_response($request, $results);
             }
 
-            $doc = simplexml_load_string($xml);
             $results = array();
             $i_was_included = false;
             foreach ($doc->installation as $inst)

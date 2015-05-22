@@ -30,6 +30,13 @@
         and may depend on the installation
         (<a href='https://code.google.com/p/opencaching-api/issues/detail?id=124'>more info</a>).</p>
 
+        <p><b>Important note:</b> Unfortunatelly, some OC nodes don't support this
+        parameter properly - regardless of what you choose, you may end up with
+        <a href='https://code.google.com/p/opencaching-api/issues/detail?id=324'>unexpected
+        results</a>. Currently, there is nothing OKAPI developers can do
+        to fix this, but you should use this parameter either way (to indicate how
+        you <b>expect</b> it to behave) - we hope this will be fixed, eventually.</p>
+
         <p><b>Important note:</b> The subset of allowed HTML elements is left undefined
         and may change in the future. For future-compatibility, you should use only
         basic formatting tags.</p>

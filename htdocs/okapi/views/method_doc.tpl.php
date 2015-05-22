@@ -1,4 +1,4 @@
-<?
+<?php
 
 # Shortcuts
 $m = $vars['method'];
@@ -20,7 +20,7 @@ $m = $vars['method'];
     <body class='api'>
         <div class='okd_mid'>
             <div class='okd_top'>
-                <? include 'installations_box.tpl.php'; ?>
+                <?php include 'installations_box.tpl.php'; ?>
                 <table cellspacing='0' cellpadding='0'><tr>
                     <td class='apimenu'>
                         <?= $vars['menu'] ?>
@@ -50,30 +50,30 @@ $m = $vars['method'];
                                     <?= $m['description'] ?>
                                 </td>
                             </tr>
-                            <? foreach ($m['arguments'] as $arg) { ?>
+                            <?php foreach ($m['arguments'] as $arg) { ?>
                                 <tr class='<?= $arg['class'] ?>' id='<?= 'arg_'.$arg['name'] ?>'>
                                     <td class='argname'><?= $arg['name'] ?></td>
-                                    <td class='<? echo $arg['is_required'] ? 'required' : 'optional'; ?>'><? echo $arg['is_required'] ? 'required' : 'optional'; ?></td>
+                                    <td class='<?php echo $arg['is_required'] ? 'required' : 'optional'; ?>'><?php echo $arg['is_required'] ? 'required' : 'optional'; ?></td>
                                     <td class='argdesc'>
                                         <?= $arg['description'] ?>
                                     </td>
                                 </tr>
-                            <? } ?>
+                            <?php } ?>
                             <tr>
                                 <td colspan='3' class='oauth_args'>
-                                    <? if ($m['auth_options']['min_auth_level'] == 0) { ?>
+                                    <?php if ($m['auth_options']['min_auth_level'] == 0) { ?>
                                         No additional authentication parameters are required.
-                                    <? } elseif ($m['auth_options']['min_auth_level'] == 1) { ?>
+                                    <?php } elseif ($m['auth_options']['min_auth_level'] == 1) { ?>
                                         <b>Plus required</b> <i>consumer_key</i> argument, assigned for your application.
-                                    <? } else { ?>
+                                    <?php } else { ?>
                                         <b>Plus required</b>
                                         standard OAuth Consumer signing arguments:
                                         <i>oauth_consumer_key, oauth_nonce, oauth_timestamp, oauth_signature,
                                         oauth_signature_method, oauth_version</i>.
-                                        <? if ($m['auth_options']['min_auth_level'] == 3) { ?>
+                                        <?php if ($m['auth_options']['min_auth_level'] == 3) { ?>
                                             <b>Plus required</b> <i>oauth_token</i> for Token authorization.
-                                        <? } ?>
-                                    <? } ?>
+                                        <?php } ?>
+                                    <?php } ?>
                                 </td>
                             </tr>
                             <tr><td colspan='3' class='returns'>
@@ -81,9 +81,9 @@ $m = $vars['method'];
                                 <?= $m['returns'] ?>
                             </td></tr>
                         </table>
-                        <? if ($m['issue_id']) { ?>
+                        <?php if ($m['issue_id']) { ?>
                             <div class='issue-comments' issue_id='<?= $m['issue_id'] ?>'></div>
-                        <? } ?>
+                        <?php } ?>
                     </td>
                 </tr></table>
             </div>

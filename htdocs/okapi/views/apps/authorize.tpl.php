@@ -36,16 +36,16 @@
             <div style='float: right; clear: right; margin: 10px 0 10px 30px'>
                 Choose your language:
                 <select id='langpref' style='border: 1px solid #ccc'>
-                    <? foreach ($vars['locales'] as $locale => $attrs) { ?>
+                    <?php foreach ($vars['locales'] as $locale => $attrs) { ?>
                         <option value='<?= $attrs['lang'] ?>' <?= ($attrs['locale'] == $vars['locale_displayed']) ? "selected" : "" ?>><?= $attrs['name'] ?></option>
-                    <? } ?>
+                    <?php } ?>
                 </select>
             </div>
 
-            <? if (isset($vars['token_expired']) && $vars['token_expired']) { ?>
+            <?php if (isset($vars['token_expired']) && $vars['token_expired']) { ?>
                 <h1 style='clear: both'><?= _("Expired request") ?></h1>
                 <p><?= _("Unfortunately, the request has expired. Please try again.") ?></p>
-            <? } elseif ($vars['token']) { ?>
+            <?php } elseif ($vars['token']) { ?>
                 <h1 style='clear: both'><?= _("External application is requesting access...") ?></h1>
                 <p><?= sprintf(_("<b>%s</b> wants to access your <b>%s</b> account. Do you agree to grant access to this application?"), htmlentities($vars['token']['consumer_name']), $vars['site_name']) ?></p>
                 <form id='authform' method='POST' class='form'>
@@ -61,7 +61,7 @@
                     by the OKAPI Framework, i.e. post log entries on geocaches in your name.
                     You can revoke this permission at any moment.</p>
                 "), $vars['okapi_base_url']."apps/", $vars['okapi_base_url']) ?>
-            <? } ?>
+            <?php } ?>
         </div>
 
     </body>

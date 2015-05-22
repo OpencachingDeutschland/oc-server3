@@ -27,7 +27,7 @@
             <a href='<?= $vars['site_url'] ?>' class='opencaching'><?= $vars['site_name'] ?></a>
 
             <h1 style='clear: both'><?= _("Your external applications") ?></h1>
-            <? if (count($vars['apps']) > 0) { ?>
+            <?php if (count($vars['apps']) > 0) { ?>
                 <?= sprintf(_("
                     <p>This is the list of applications which you granted access to your <b>%s</b> account.
                     This page gives you the abbility to revoke all previously granted privileges.
@@ -35,24 +35,24 @@
                     actions on your behalf.</p>
                 "), $vars['site_name']) ?>
                 <ul>
-                    <? foreach ($vars['apps'] as $app) { ?>
+                    <?php foreach ($vars['apps'] as $app) { ?>
                         <li>
-                            <? if ($app['url']) { ?>
+                            <?php if ($app['url']) { ?>
                                 <a href='<?= htmlspecialchars($app['url'], ENT_QUOTES, 'utf-8') ?>'><?= htmlspecialchars($app['name'], ENT_QUOTES, 'utf-8') ?></a>
-                            <? } else { ?>
+                            <?php } else { ?>
                                 <?= htmlspecialchars($app['name'], ENT_QUOTES, 'utf-8') ?>
-                            <? } ?>
+                            <?php } ?>
                             - <a href='<?= $vars['okapi_base_url'] ?>apps/revoke_access?consumer_key=<?= $app['key'] ?>'><?= _("remove") ?></a>
                         </li>
-                    <? } ?>
+                    <?php } ?>
                 </ul>
-            <? } else { ?>
+            <?php } else { ?>
                 <?= sprintf(_("
                     <p>Thanks to the <a href='%s'>OKAPI Framework</a> you can grant external applications
                     access to your <b>%s</b> account. Currently no applications are authorized to act
                     on your behalf. Once you start using external Opencaching applications, they will appear here.</p>
                 "), $vars['okapi_base_url'], $vars['site_name']) ?>
-            <? } ?>
+            <?php } ?>
         </div>
 
     </body>

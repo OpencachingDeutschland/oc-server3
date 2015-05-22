@@ -74,12 +74,18 @@ class WebService
             array('caches.wp_oc is not null'),
             $search_params['where_conds']
         );
+
+        if (isset($search_params['extra_joins']) && is_array($search_params['extra_joins']))
+            $joins = $search_params['extra_joins'];
+        else
+            $joins = array();
+
         unset($search_params);
 
         # Generate, or retrieve an existing set, and return the result.
         # All user-supplied data in $tables and $where_conds MUST be escaped!
 
-        $result = self::get_set($tables, $where_conds, $min_store, $ref_max_age);
+        $result = self::get_set($tables, $joins, $where_conds, $min_store, $ref_max_age);
         return Okapi::formatted_response($request, $result);
     }
 
@@ -87,11 +93,11 @@ class WebService
      * Important: YOU HAVE TO make sure $tables and $where_conds don't contain
      * unescaped user-supplied data!
      */
-    public static function get_set($tables, $where_conds, $min_store, $ref_max_age)
+    public static function get_set($tables, $joins, $where_conds, $min_store, $ref_max_age)
     {
         # Compute the "params hash".
 
-        $params_hash = md5(serialize(array($tables, $where_conds)));
+        $params_hash = md5(serialize(array($tables, $joins, $where_conds)));
 
         # Check if there exists an entry for this hash, which also meets the
         # given freshness criteria.
@@ -133,7 +139,9 @@ class WebService
                         select distinct
                             '".mysql_real_escape_string($set_id)."',
                             caches.cache_id
-                        from ".implode(", ", $tables)."
+                        from
+                            ".implode(", ", $tables)."
+                            ".implode(" ", $joins)."
                         where (".implode(") and (", $where_conds).")
                     ");
 

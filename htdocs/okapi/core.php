@@ -784,31 +784,35 @@ class OkapiRedirectResponse extends OkapiHttpResponse
     }
 }
 
+require_once ($GLOBALS['rootpath'].'okapi/lib/tbszip.php');
+use \clsTbsZip;
+
 class OkapiZIPHttpResponse extends OkapiHttpResponse
 {
     public $zip;
 
     public function __construct()
     {
-        require_once ($GLOBALS['rootpath'].'okapi/lib/tbszip.php');
-        
-        $this->zip = new \clsTbsZip();
+        $this->zip = new clsTbsZip();
         $this->zip->CreateNew();
     }
 
     public function print_body()
     {
-        $this->zip->Flush(TBSZIP_DOWNLOAD|TBSZIP_NOHEADER);
+        $this->zip->Flush(clsTbsZip::TBSZIP_DOWNLOAD|clsTbsZip::TBSZIP_NOHEADER);
     }
 
     public function get_body()
     {
-        $this->zip->Flush(TBSZIP_STRING);
-        return $this->zip->OutputSrc; 
+        $this->zip->Flush(clsTbsZip::TBSZIP_STRING);
+        return $this->zip->OutputSrc;
     }
 
     public function get_length()
     {
+        # The _EstimateNewArchSize() method returns *false* if archive
+        # size can not be calculated *exactly*, which causes display()
+        # method to skip Content-Length header, and triggers chunking
         return $this->zip->_EstimateNewArchSize();
     }
 
@@ -890,7 +894,7 @@ class Okapi
 {
     public static $data_store;
     public static $server;
-    public static $revision = 1055; # This gets replaced in automatically deployed packages
+    public static $revision = 1075; # This gets replaced in automatically deployed packages
     private static $okapi_vars = null;
 
     /** Get a variable stored in okapi_vars. If variable not found, return $default. */

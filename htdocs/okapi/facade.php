@@ -1,4 +1,4 @@
-<?
+<?php
 
 namespace okapi;
 
@@ -103,7 +103,7 @@ class Facade
             'caches.status in (1,2,3)',
         );
         return \okapi\services\caches\search\save\WebService::get_set(
-            $tables, $where_conds, $min_store, $max_ref_age
+            $tables, array() /* joins */, $where_conds, $min_store, $max_ref_age
         );
     }
 

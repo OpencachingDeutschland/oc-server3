@@ -57,18 +57,28 @@ class WebService
         $search_assistant->prepare_location_search_params();
 
         $where_conds = array();
-        $where_conds[] = $search_assistant->get_latitude_expr()." between '".mysql_real_escape_string($bbsouth)."' and '".mysql_real_escape_string($bbnorth)."'";
+        $lat = $search_assistant->get_latitude_expr();
+        $lon = $search_assistant->get_longitude_expr();
+        $where_conds[] = "(
+            $lat >= '".mysql_real_escape_string($bbsouth)."'
+            and $lat < '".mysql_real_escape_string($bbnorth)."'
+        )";
         if ($bbeast > $bbwest)
         {
             # Easy one.
-            $where_conds[] = $search_assistant->get_longitude_expr()." between '".mysql_real_escape_string($bbwest)."' and '".mysql_real_escape_string($bbeast)."'";
+            $where_conds[] = "(
+                $lon >= '".mysql_real_escape_string($bbwest)."'
+                and $lon < '".mysql_real_escape_string($bbeast)."'
+            )";
         }
         else
         {
-            # We'll have to assume that this box goes through the 180-degree meridian.
+            # We'll have to assume that this bbox goes through the 180-degree meridian.
             # For example, $bbwest = 179 and $bbeast = -179.
-            $where_conds[] = "(".$search_assistant->get_longitude_expr()." > '".mysql_real_escape_string($bbwest)
-                ."' or ".$search_assistant->get_longitude_expr()." < '".mysql_real_escape_string($bbeast)."')";
+            $where_conds[] = "(
+                $lon >= '".mysql_real_escape_string($bbwest)."'
+                or $lon < '".mysql_real_escape_string($bbeast)."'
+            )";
         }
 
         #

@@ -88,7 +88,7 @@ It also defines attribute names and descriptions in several languages.
 
     <attr acode="A2" categories="de-cache-types">
         <opencaching schema="http://opencaching.pl/" id="54" />
-        <opencaching schema="http://www.opencaching.nl/" id="61" />
+        <opencaching schema="http://www.opencaching.nl/" id="54" />
         <lang id="en">
             <name>Near a Survey Marker</name>
             <desc>
@@ -1008,6 +1008,7 @@ It also defines attribute names and descriptions in several languages.
 
     <attr acode="A29" categories="de-location">
         <opencaching schema="http://opencaching.pl/" id="61" />
+        <opencaching schema="http://www.opencaching.nl/" id="61" />
         <lang id="en">
             <name>Historic site</name>
             <desc>
@@ -1029,11 +1030,17 @@ It also defines attribute names and descriptions in several languages.
                 einer Burg, einem Friedhof, einer ehemaligem Militäranlage etc.
             </desc>
         </lang>
+        <lang id="nl">
+            <name>Lost Place</name>
+            <desc>
+                Deze cache bevind zich op of rond een verlaten plek. Zoals een,
+                verlaten kasteel, oude bunker, industrie, etc.
+            </desc>
+        </lang>
     </attr>
 
     <attr acode="A30" categories="de-location">
         <opencaching schema="http://www.opencaching.de/" id="30" />
-        <opencaching schema="http://www.opencaching.nl/" id="30" />
         <lang id="en">
             <name>Point of interest</name>
             <desc>
@@ -2652,4 +2659,23 @@ It also defines attribute names and descriptions in several languages.
             </desc>
         </lang>
     </attr>
+
+    <attr acode="A74" categories="de-dangers">
+        <groundspeak id="40" inc="true" name="Stealth required" />
+        <opencaching schema="http://www.opencaching.nl/" id="45" />
+        <lang id="en">
+            <name>Stealth required</name>
+            <desc>
+                The cache is hidden in an area where other non-geocaching people might
+                see it. You should be extra careful to avoid this unwanted attention.
+            </desc>
+        </lang>
+        <lang id="nl">
+            <name>Stealth vereist</name>
+            <desc>
+                Deze cache dient ongezien gelogd te worden.
+            </desc>
+        </lang>
+    </attr>
+
 </xml>

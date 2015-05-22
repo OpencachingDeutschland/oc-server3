@@ -514,10 +514,32 @@ class SearchAssistant
         if ($tmp = $this->request->get_parameter('ftf_hunter'))
         {
             if (!in_array($tmp, array('true', 'false'), 1))
-                throw new InvalidParam('not_yet_found_only', "'$tmp'");
+                throw new InvalidParam('ftf_hunter', "'$tmp'");
             if ($tmp == 'true')
             {
                 $where_conds[] = "$X_FOUNDS = 0";
+            }
+        }
+
+        #
+        # powertrail_only
+        #
+        if (!is_null($tmp = $this->request->get_parameter('powertrail_only')))
+        {
+            if (!in_array($tmp, array('true', 'false'), 1))
+                throw new InvalidParam('powertrail_only', "'$tmp'");
+            if ($tmp == 'true')
+            {
+                if (Settings::get('OC_BRANCH') == 'oc.pl') {
+                    $extra_joins[] = 'inner join powerTrail_caches on powerTrail_caches.cacheId = caches.cache_id';
+                    #
+                    # Filter out caches from inactive powerTrails as well
+                    #
+                    $extra_joins[] = 'inner join PowerTrail on PowerTrail.id = powerTrail_caches.powerTrailId';
+                    $where_conds[] = 'PowerTrail.status = 1';
+                } else {
+                    $where_conds[] = "0=1";
+                }
             }
         }
 

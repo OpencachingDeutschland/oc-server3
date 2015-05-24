@@ -155,7 +155,9 @@
 
 		// store valid date in temporary cookie; it will be the default for the next log
 		if ($validate['dateOk'])
-			setcookie('oclogdate', sprintf('%04d%02d%02d',$logDateYear, $logDateMonth, $logDateDay));
+			setcookie('oclogdate',
+			          sprintf('%04d%02d%02d',$logDateYear, $logDateMonth, $logDateDay),
+			          time() + 12*60*60);   // expiration time
 		
 		// check log type
 		$validate['logType'] = $cache->logTypeAllowed($logType);

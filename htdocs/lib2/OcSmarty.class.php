@@ -232,6 +232,10 @@ class OcSmarty extends Smarty
 
 		// build address for switching locales
 		$locale_pageadr = $_SERVER['REQUEST_URI'];
+		// workaround for http://redmine.opencaching.de/issues/703
+		$strange_things_pos = strpos($locale_pageadr,".php/");
+		if ($strange_things_pos)
+			$locale_pageadr = substr($locale_pageadr,0,$strange_things_pos + 4);
 		$lpos = strpos($locale_pageadr,"locale=");
 		if ($lpos)
 			$locale_pageadr = substr($locale_pageadr,0,$lpos);

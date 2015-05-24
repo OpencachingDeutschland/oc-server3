@@ -155,7 +155,7 @@
 			</tr>
 			<tr><td class="spacer" colspan="2"></td></tr>
 
-			{if $edit || $usePMR || $permanentLogin || $noHTMLEditor}
+			{if $edit || $usePMR || $permanentLogin || $noHTMLEditor || $sendUsermailAddress }
 			<tr>
 				<td valign="top">{t}Others:{/t}</td>
 				<td valign="top">
@@ -188,6 +188,15 @@
 					{else}
 						{if $noHTMLEditor}
 							{t}Don't use an HTML editor by default.{/t}
+						{/if}
+					{/if}
+					{if $edit==true}
+						<input type="checkbox" name="sendUsermailAddress" value="1" {if $sendUsermailAddress==true}checked="checked"{/if} id="l_send_usermail_address" class="checkbox" />
+						<label for="l_send_usermail_address">{t}Disclose my e-mail address by default when sending e-mails to other users.{/t}</label>
+						<br />
+					{else}
+						{if $sendUsermailAddress}
+							{t}Disclose my e-mail address by default when sending e-mails to other users.{/t}
 						{/if}
 					{/if}
 				</td>

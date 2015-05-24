@@ -78,6 +78,7 @@ class user
 		$this->reUser->addInt('watchmail_day', 0, false);
 		$this->reUser->addString('activation_code', '', false);
 		$this->reUser->addBoolean('no_htmledit_flag', false, false);
+		$this->reUser->addBoolean('usermail_send_addr', false, false);
 		$this->reUser->addInt('notify_radius', 0, false);
 		$this->reUser->addInt('notify_oconly', 1, false);
 		$this->reUser->addInt('admin', 0, false);
@@ -263,6 +264,14 @@ class user
 	function setAccMailing($value)
 	{
 		return $this->reUser->setValue('accept_mailing', $value);
+	}
+	function getUsermailSendAddress()
+	{
+		return $this->reUser->getValue('usermail_send_addr');
+	}
+	function setUsermailSendAddress($value)
+	{
+		return $this->reUser->setValue('usermail_send_addr', $value);
 	}
 	function getNoHTMLEditor()
 	{

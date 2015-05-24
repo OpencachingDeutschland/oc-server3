@@ -375,9 +375,7 @@ function output_cachexml($sWaypoint)
 
 function output_namesearch($sName, $nLat, $nLon, $nResultId)
 {
-	global $login;
-
-  $sName = '%' . $sName . '%';
+  global $login, $opt;
 
   echo '<caches>' . "\n";
   $rs = sql_slave("SELECT " . geomath::getSqlDistanceFormula($nLon, $nLat, 0) . " AS `distance`, 
@@ -389,15 +387,34 @@ function output_namesearch($sName, $nLat, $nLon, $nResultId)
                       AND (`cache_status`.`allow_user_view`=1 OR `caches`.`user_id`='&3')
                       AND `map2_data`.`result_id`='&2'
 					       ORDER BY `distance` ASC LIMIT 30",
-					                $sName,
+					                '%' . $sName . '%',
 					                $nResultId,
 					                $login->userid);
+  $caches_found = 0;
   while ($r = sql_fetch_assoc($rs))
   {
     echo '<cache name="' . xmlentities($r['name']) . '" wpoc="' . xmlentities($r['wp_oc']) . '" />' . "\n";
+    ++$caches_found;
   }
   sql_free_result($rs);
-  echo '</caches>';
+
+  if (!$caches_found && preg_match('/^[^\s]{2,}\.[^\s]{2,}\.[^\s]{2,}$/', $sName))
+	{
+		$result = @file_get_contents('http://api.what3words.com/w3w?key=' . $opt['lib']['w3w']['apikey']
+		                             . '&string=' . urlencode($sName));
+		if ($result)
+		{
+			$json = json_decode($result, true);
+			if (!is_null($json['words']) && !is_null($json['position']) && count($json['position']) == 2)
+			{
+				echo '<coord name="' . xmlentities(implode('.', $json['words'])) .
+				     '" latitude="' . xmlentities($json["position"][0]) .
+				     '" longitude="' . xmlentities($json["position"][1]) . '" />' ."\n";
+			}
+		}
+	}
+  echo '</caches>' . "\n";
+
   exit;
 }
 

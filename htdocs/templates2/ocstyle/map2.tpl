@@ -1751,6 +1751,20 @@ function mapsearch_click()
 
 					if (moSearchList.length==0)
 					{
+						var coords = xml.documentElement.getElementsByTagName("coord");
+						for (var nCoordIndex=0; nCoordIndex<coords.length; nCoordIndex++)
+						{
+							var value = add_searchlist_itemcoords(coords[nCoordIndex].getAttribute("latitude"),
+							                                      coords[nCoordIndex].getAttribute("longitude"),
+							                                      "",
+							                                      coords[nCoordIndex].getAttribute("name"));
+							var item = new Option(coords[nCoordIndex].getAttribute("name"), value);
+							moSearchList.options[moSearchList.length] = item;
+						}
+					}
+
+					if (moSearchList.length==0)
+					{
 						mapselectlist_hide();
 						alert("'" + sSearchText + "' {/literal}{t escape=js}was not found (with the selected settings){/t}{literal}");
 						return;

@@ -141,6 +141,8 @@
 		erl&auml;utere den Aufwand in der Cachebeschreibung. Wenn du bei der 
 		Sch&auml;tzung davon ausgehst, dass eine Teilstrecke mit Inline-Skates, dem Fahrrad oder dem Auto zur&uuml;ckgelegt wird, weise ebenfalls in der Beschreibung darauf hin.</p>
 
+		<p><b>Wegpunkte:</b> Falls du den Cache auch auf anderen Geocaching-Plattformen veröffentlicht hast, kannst du hier die entsprechenden Wegpunkte angeben. geocaching.com-Wegpunkte haben das Format GCXXXXX, wobei XXXXX für bis zu fünf Großbuchstaben und/oder Ziffern steht. Navicache-Wegpunkte haben das Format NXXXX.</p>
+
 		<p>
 			<b>Cacheattribute:</b> Mit den Cacheattributen kannst du genauere Angaben zu deinem Cache machen, die z.B. bei der <a href="search.php">Suche</a> als Kriterium angegeben werden k&ouml;nnen.
 			Viele Attribute sind dabei Erfahrungswerte (z.B. Zeckengefahr). Als Finder eines Geocaches kannst du gerne den Owner darauf hinweisen, dass er dem Geocache die entsprechenden Attribute zuordnen kann.

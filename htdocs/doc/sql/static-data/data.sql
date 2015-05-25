@@ -2599,6 +2599,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2171', 'Please 
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2172', 'Yes, I want to recieve mailings about news and actions on opencaching.de. (max. 2-5 per year)', '2013-11-03 10:09:14');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2173', 'No, I dont\'t want any mailings about news and actions on opencaching.de.', '2013-11-03 10:09:14');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2174', 'Newsletter:', '2013-11-03 10:09:14');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2177', 'Another cache exists at these coords. Maybe you pressed \"submit cache\" twice. To publish a cache with identical coords, enter other coords first, then edit the listing and change coords.', '2013-11-03 10:09:14');
 
 -- Table sys_trans_ref
 SET NAMES 'utf8';
@@ -6687,6 +6688,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2172', 'DE', 'Ja, ich möchte Informationen zu Neuigkeiten und Aktionen auf opencaching.de per Email erhalten. (max. 2-5 pro Jahr)', '2013-11-03 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2173', 'DE', 'Nein, ich möchte keine Informationen zu Neuigkeiten und Aktionen auf opencaching.de per Email erhalten.', '2013-11-03 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2174', 'DE', 'Newsletter:', '2013-11-03 10:09:14');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2177', 'DE', 'An diesen Koordinaten befindet sich bereits ein Cache. Vielleicht hast du mehrfach auf \"Cache senden\" geklickt. Wenn du tatsächlich einen weiteren Cache mit identischen Koordinaten veröffentlichen möchtest, lege ihn zunächst mit abweichenden Koordinaten an, bearbeite dann das Listing und ändere die Koordinaten.', '2013-11-03 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'EN', 'Reorder IDs', '2010-09-02 00:15:30');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'EN', 'The database could not be reconnected.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'EN', 'Testing – please do not login', '2010-08-28 11:48:07');

@@ -68,6 +68,9 @@
 	<p class="content-title-noshade-size3">
 		<img src="resource2/{$opt.template.style}/images/cacheicon/event.gif" style="align: left; margin-right: 10px;" width="24" height="24" alt="" />
 		{t 1=$usercountry|escape}The next events in %1{/t}
+		{if $total_events > $events|@count}
+			&nbsp; <span class="content-title-link">[<a href="newcaches.php?cachetype=6">{t}more{/t}...</a>]</span>
+		{/if}
 	</p>
 </div>
 <div class="content2-section-no-p">

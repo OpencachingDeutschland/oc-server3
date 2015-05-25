@@ -97,6 +97,9 @@
 
 		// get newest events
 		$tpl->assign_rs('events', $getNew->rsForSmarty('event'));
+		// get total event count for all countries
+		$tpl->assign('total_events', sql_value_slave(
+				"SELECT COUNT(*) FROM `caches` WHERE `type`=6 AND `date_hidden` >= curdate() AND `status`=1", 0));
 
 		// get newest caches
 		$tpl->assign_rs('newcaches', $getNew->rsForSmarty('cache'));

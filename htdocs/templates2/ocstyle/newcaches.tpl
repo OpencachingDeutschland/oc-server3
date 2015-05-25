@@ -6,7 +6,7 @@
 {* OCSTYLE *}
 <div class="content2-pagetitle">
 	<img src="resource2/{$opt.template.style}/images/cacheicon/traditional.gif" style="align: left; margin-right: 10px;" width="32" height="32" alt="" />
-	{if $countryCode == ''}{t}Latest caches{/t}{else}{t 1=$countryName|escape}Newest caches in %1{/t}{/if}
+	{if $events}{t}Planned events{/t}{elseif $countryCode == ''}{t}Latest caches{/t}{else}{t 1=$countryName|escape}Newest caches in %1{/t}{/if}
 </div>
 
 <table width="100%" class="table">

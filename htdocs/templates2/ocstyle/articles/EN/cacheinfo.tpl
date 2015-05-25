@@ -135,6 +135,8 @@
 
 		<p><a name="time"></a><b>Effort:</b> How much time and way is to be expected, beginning at the starting point or parking lot, to find the cache and return to the starting point? Please assume that the geocacher is experienced, but will struggle to solve the one or other puzzle or quest. If you cannot pin down the time needed, keep the default of 0&nbsp;h / 0&nbsp;min and describe the effort. If you estimated the time assuming use of inline skates, a bicycle or car, please mention it in the cache description.</p>
 
+		<p><b>Waypoints:</b> If you published this cache also at other geocaching websites, you are encouraged to enter the corresponding waypoints here. geocaching.com waypoints have the format GCXXXXX, with XXXXX being up to 5 capital letters and/or digits. Navicache waypoints have the format NXXXX.</p>
+
 		<p><b>Cache attributes:</b> Use the attributes to specify properties of your cache, which may be selected by the <a href="search.php">search function</a>. Attributes may be estimated and depend on your knowledge of the site (e.g. frequent occurance of ticks). As searcher and finder of a cache, you may tell the owner about the usage and helpfullness of attributes or make suggestions. When describing your caches, please assume normal, dry weather conditions.</p>
 		<p><a href="#attributedesc">See below</a> for a complete explanation of cache attributes.</p>
 

@@ -337,6 +337,12 @@ function getWaypoints($cacheid)
 					    $error = true;
 					  }
 
+					//check GC waypoint
+					$wpgc_not_ok = $wp_gc != "" && !preg_match("/^(?:GC|CX)[0-9A-Z]{3,6}$/", $wp_gc);
+					if ($wpgc_not_ok)
+					{
+						$error = true;
+					}
 
 					//check hidden_since
 					$hidden_date_not_ok = true;
@@ -428,7 +434,7 @@ function getWaypoints($cacheid)
 					if (isset($_POST['submit']))  // Ocprop
 					{
 						//all validations ok?
-						if (!($hidden_date_not_ok || $lat_not_ok || $lon_not_ok || $name_not_ok || $time_not_ok || $way_length_not_ok || $size_not_ok || $activate_date_not_ok || $status_not_ok || $diff_not_ok || $attribs_not_ok))
+						if (!($hidden_date_not_ok || $lat_not_ok || $lon_not_ok || $name_not_ok || $time_not_ok || $way_length_not_ok || $size_not_ok || $activate_date_not_ok || $status_not_ok || $diff_not_ok || $attribs_not_ok || $wpgc_not_ok))
 						{
 							$cache_lat = $coords_lat_h + $coords_lat_min / 60;
 							if ($coords_latNS == 'S') $cache_lat = -$cache_lat;
@@ -892,6 +898,7 @@ function getWaypoints($cacheid)
 					tpl_set_var('lat_message', ($lat_not_ok == true) ? $coords_message : '');
 					tpl_set_var('date_message', ($hidden_date_not_ok == true) ? $date_message : '');
 					tpl_set_var('size_message', ($size_not_ok == true) ? $sizemismatch_message : '');
+					tpl_set_var('wpgc_message', ($wpgc_not_ok == true) ? $bad_wpgc_message : '');
 
 					if($lon_not_ok || $lat_not_ok || $hidden_date_not_ok || $name_not_ok)
 						tpl_set_var('general_message', $error_general);

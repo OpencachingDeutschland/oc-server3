@@ -331,7 +331,7 @@
 
 <!-- Personal Note -->
 {if $enableCacheNote}
-	<div class="content2-container bg-blue02">
+	<div class="content2-container bg-blue02" id="personal_note">
 		<p class="content-title-noshade-size2">
 			<img src="resource2/{$opt.template.style}/images/description/20x20-cache-note.png" style="align: left; margin-right: 10px;" alt="{t}Personal cache note{/t}" /> 
 			{t}Personal cache note{/t}
@@ -534,6 +534,12 @@
 {if $showalllogs && $autoload_logs}
 <script type="text/javascript">
 	window.onscroll = onScroll;
+</script>
+{/if}
+
+{if $enableCacheNote && isset($coord_error)}
+<script type="text/javascript">
+	document.getElementById('personal_note').scrollIntoView();
 </script>
 {/if}
 

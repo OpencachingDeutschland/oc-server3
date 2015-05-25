@@ -398,7 +398,7 @@ function output_namesearch($sName, $nLat, $nLon, $nResultId)
   }
   sql_free_result($rs);
 
-  if (!$caches_found && preg_match('/^[^\s]{2,}\.[^\s]{2,}\.[^\s]{2,}$/', $sName))
+  if (!$caches_found && preg_match('/^[^\s[:punct:]]{2,}\.[^\s[:punct:]]{2,}\.[^\s[:punct:]]{2,}$/', $sName))
 	{
 		$result = @file_get_contents('http://api.what3words.com/w3w?key=' . $opt['lib']['w3w']['apikey']
 		                             . '&string=' . urlencode($sName));

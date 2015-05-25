@@ -58,7 +58,12 @@ class CacheNote_Presenter
     $this->request->validate(self::req_note, new Validator_AlwaysValid());
 
     if ($this->includeCoordinate())
-      return $coordinateValid = $this->coordinate->validate();
+    {
+      $this->coordinate->validate();
+      // Removed false-return for invalid coordinate, so that at least the note will be saved.
+      // validate() produces some formal valid coordinate.
+      // -- following 25 May 2015
+    }
     else
       $this->coordinate->init(0, 0);
 

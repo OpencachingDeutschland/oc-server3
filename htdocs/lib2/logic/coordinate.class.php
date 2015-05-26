@@ -558,6 +558,9 @@ class coordinate
 	{
         global $opt;
 
+		if (!$opt['lib']['w3w']['apikey'])
+			return false;
+
 		$params = array(
 			'key' => $opt['lib']['w3w']['apikey'],
 			'position' => sprintf('%f,%f', $this->nLat, $this->nLon),
@@ -578,6 +581,8 @@ class coordinate
 			return false;
 		}
 		$json = json_decode($result, true);
+		if (!isset($json['words']))
+			return false;
 		return implode('.', $json['words']);
 	}
 }

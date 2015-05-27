@@ -647,6 +647,18 @@
 				$lon_not_ok = $lon_min_not_ok || $lon_h_not_ok;
 				$lat_not_ok = $lat_min_not_ok || $lat_h_not_ok;
 
+				// check for duplicate coords
+				if (!($lon_not_ok || $lat_not_ok) &&
+					  sqlValue("SELECT COUNT(*) FROM `caches`
+						                       WHERE `status`=1
+						                         AND `longitude`=" . sql_escape($longitude) . "
+						                         AND `latitude`=" . sql_escape($latitude),
+									 0) > 0)
+				{
+					tpl_set_var('lon_message', $error_duplicate_coords);
+					$lon_not_ok = true;
+				}
+
 				//check effort
 				$time_not_ok = true;
 				if (is_numeric($search_time) || ($search_time == ''))

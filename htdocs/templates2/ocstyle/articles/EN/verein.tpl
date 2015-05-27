@@ -17,10 +17,10 @@
 <p>Membership is free for active members (<em>ordentliche Mitglieder</em>) who directly contribute time and work to the Opencaching.de project. We are always looking for software developers and testes, graphic designers, photographers, lectors, support people, documenters etc.! If you don't have the time for this, you may become passive member (<em>Fördermitglied</em>). The minimum fee for passive members is 1 Euro per month.</p>
 
 <h5>Where do I find the association's statutes?</h5>
-<p>You cand download the current statutes <a href="https://dl.dropboxusercontent.com/u/96816678/OCeV_Satzung_aktuell.pdf">here</a> (in German).</p>
+<p>You cand download the current statutes <a href="http://download.opencaching.de/verein/OCeV_Satzung_aktuell.pdf" target="_blank">here</a> (in German).</p>
 
 <h5>Where do I find the membership application form?</h5>
-<p>You can download the application form <a href="https://dl.dropboxusercontent.com/u/96816678/Beitritt_OCeV_aktuell.pdf">here</a> (in German).</p>
+<p>You can download the application form <a href="http://download.opencaching.de/verein/Beitritt_OCeV_aktuell.pdf" target="_blank">here</a> (in German).</p>
 
 <h5>I would like to support Opencaching, but I don't want do join the association. What else can I do?</h5>
 <p>We depend on your donations to finance the technical operation of the website. We will be glad to recieve you support via our <a href="./articles.php?page=donations" target="_blank">donations page</a>; a few Euros will already help us.</p>

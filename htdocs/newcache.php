@@ -648,15 +648,18 @@
 				$lat_not_ok = $lat_min_not_ok || $lat_h_not_ok;
 
 				// check for duplicate coords
-				if (!($lon_not_ok || $lat_not_ok) &&
-					  sqlValue("SELECT COUNT(*) FROM `caches`
-						                       WHERE `status`=1
-						                         AND `longitude`=" . sql_escape($longitude) . "
-						                         AND `latitude`=" . sql_escape($latitude),
-									 0) > 0)
+				if (!($lon_not_ok || $lat_not_ok))
 				{
-					tpl_set_var('lon_message', $error_duplicate_coords);
-					$lon_not_ok = true;
+					$duplicate_wpoc =
+					  sqlValue("SELECT MIN(wp_oc) FROM `caches`
+						                           WHERE `status`=1
+						                             AND `longitude`=" . sql_escape($longitude) . "
+						                             AND `latitude`=" . sql_escape($latitude), null);
+					if ($duplicate_wpoc)
+					{
+						tpl_set_var('lon_message', mb_ereg_replace('%1', $duplicate_wpoc, $error_duplicate_coords));
+						$lon_not_ok = true;
+					}
 				}
 
 				//check effort

@@ -7,7 +7,7 @@
 
 {/if}
 {if $sendemailaddress==true}
-{t 1=$fromusername 2=$fromemail 3=$opt.page.absolute_url 4=$fromuserid}'%1' with the E-Mail address %2 contacted you via %3
+{t 1=$fromusername 2=$fromuseremail 3=$opt.page.absolute_url 4=$fromuserid}'%1' with the E-Mail address %2 contacted you via %3
 The user profile: %3viewprofile.php?userid=%4
 Use the reply button of your E-Mail agent to answer this E-Mail.{/t}
 {else}

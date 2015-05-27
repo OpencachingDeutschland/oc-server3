@@ -58,6 +58,7 @@
 			tpl_set_var('desc_message', '');
 			tpl_set_var('effort_message', '');
 			tpl_set_var('size_message', '');
+			tpl_set_var('wpgc_message', '');
 			tpl_set_var('type_message', '');
 			tpl_set_var('diff_message', '');
 			tpl_set_var('safari_message', '');
@@ -697,6 +698,14 @@
 					$error = true;
 				}
 
+				//check GC waypoint
+				$wpgc_not_ok = $wp_gc != "" && !preg_match("/^(?:GC|CX)[0-9A-Z]{3,6}$/", $wp_gc);
+				if ($wpgc_not_ok)
+				{
+					tpl_set_var('wpgc_message', $bad_wpgc_message);
+					$error = true;
+				}
+
 				//check date_activate
 				$activation_date_not_ok = true;
 				if (is_numeric($activate_day) && is_numeric($activate_month) && is_numeric($activate_year) && is_numeric($activate_hour))
@@ -796,7 +805,7 @@
 					tpl_set_var('safari_message', '');
 
 				//no errors?
-				if (!($tos_not_ok || $name_not_ok || $hidden_date_not_ok || $activation_date_not_ok || $lon_not_ok || $lat_not_ok || $time_not_ok || $way_length_not_ok || $size_not_ok || $type_not_ok || $diff_not_ok || $attribs_not_ok))
+				if (!($tos_not_ok || $name_not_ok || $hidden_date_not_ok || $activation_date_not_ok || $lon_not_ok || $lat_not_ok || $time_not_ok || $way_length_not_ok || $size_not_ok || $type_not_ok || $diff_not_ok || $attribs_not_ok || $wpgc_not_ok))
 				{
 					//sel_status
 					$now = getdate();

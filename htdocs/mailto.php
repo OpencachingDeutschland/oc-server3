@@ -27,7 +27,10 @@
 
 	$subject = isset($_REQUEST['subject']) ? $_REQUEST['subject'] : '';
 	$text = isset($_REQUEST['text']) ? $_REQUEST['text'] : '';
-	$bEmailaddress = isset($_REQUEST['emailaddress']) ? ($_REQUEST['emailaddress']==1) : false;
+	if (isset($_REQUEST['emailaddress']))
+		$bEmailaddress = ($_REQUEST['emailaddress']==1);
+	else
+		$bEmailaddress = $user->getUsermailSendAddress();
 
 	if (isset($_REQUEST['ok']))
 	{

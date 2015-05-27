@@ -76,7 +76,7 @@
 			<tr>
 				<td class="help" colspan="2">
 					<img src="resource2/{$opt.template.style}/images/misc/hint.gif" border="0" width="15" height="11" align="middle" /> 
-					{t}This enables the receiver to answer your E-Mail directly with his E-Mail agent.{/t}<br />
+					{t}This enables the receiver to answer your E-Mail directly with his E-Mail agent. You may enable this option by default in your <a href="myprofile.php">user profile</a>.{/t}<br />
 					<div style="padding: 10px 0 10px 0">
 						<img src="resource2/{$opt.template.style}/images/misc/hint.gif" border="0" width="15" height="11" align="middle" />
 						<span class="smalltext">{t}To protect you and us from abuse:{/t}</span>

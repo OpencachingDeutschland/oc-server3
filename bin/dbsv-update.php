@@ -365,6 +365,14 @@
 		}
 	}
 
+	function dbv_122()	// add user profile flag for default setting of send-my-email option
+	{
+		if (!sql_field_exists('user','usermail_send_addr'))
+		{
+			sql("ALTER TABLE `user` ADD COLUMN `usermail_send_addr` tinyint(1) NOT NULL default '0' AFTER `accept_mailing`");
+		}
+	}
+
 
 	// When adding new mutations, take care that they behave well if run multiple
 	// times. This improves robustness of database versioning.

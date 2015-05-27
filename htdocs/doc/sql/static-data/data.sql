@@ -1567,7 +1567,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('687', 'Send E-M
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('688', 'You have to enter a subject!', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('689', 'You have to enter a content!', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('690', 'Send my E-Mail address with this message', '2010-08-28 11:48:04');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('691', 'This enables the receiver to answer your E-Mail directly with his E-Mail agent.', '2010-08-28 11:48:04');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('691', 'This enables the receiver to answer your E-Mail directly with his E-Mail agent. You may enable this option by default in your <a href=\"myprofile.php\">user profile</a>.', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('692', 'To protect you and us from abuse:', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('693', 'Only E-Mail that regards Geocaching are allowed. Spaming is not allowed!', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('694', 'All relevant informations will be logged (date/time, sender/receiver and IP address)', '2010-08-28 11:48:04');
@@ -2599,6 +2599,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2171', 'Please 
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2172', 'Yes, I want to recieve mailings about news and actions on opencaching.de. (max. 2-5 per year)', '2013-11-03 10:09:14');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2173', 'No, I dont\'t want any mailings about news and actions on opencaching.de.', '2013-11-03 10:09:14');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2174', 'Newsletter:', '2013-11-03 10:09:14');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2175', 'Disclose my e-mail address by default when sending e-mails to other users.', '2015-05-25 19:50:00');
 
 -- Table sys_trans_ref
 SET NAMES 'utf8';
@@ -5656,7 +5657,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('688', 'DE', 'Du musst einen Betreff angeben!', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('689', 'DE', 'Du musst einen Inhalt eingeben!', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('690', 'DE', 'Meine E-Mail-Adresse soll mit dieser E-Mail mitgesendet werden', '2010-08-28 11:48:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('691', 'DE', 'Damit kennt der Empfänger deine E-Mail-Adresse und hat die Möglichkeit, direkt auf die E-Mail zu antworten.', '2010-08-28 11:48:06');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('691', 'DE', 'Damit kennt der Empfänger deine E-Mail-Adresse und hat die Möglichkeit, direkt auf die E-Mail zu antworten. Diese Option kannst du in deinem <a href=\"myprofile.php\">Benutzerprofil</a> standardmäßig einschalten.', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('692', 'DE', 'Um Missbrauch zu verhindern, müssen wir zu eurem und auch unserem Schutz folgende Maßnahmen treffen:', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('693', 'DE', 'Es dürfen nur Emails zum Thema versendet werden; jede Form nicht notwendiger Belästigung \&ndash; z.B. Spam \&ndash; ist nicht erlaubt.', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('694', 'DE', 'Es werden alle relevanten Informationen protokolliert (Datum/Uhrzeit, Absender/Empfänger und IP-Adresse).', '2010-08-28 11:48:06');
@@ -6687,6 +6688,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2172', 'DE', 'Ja, ich möchte Informationen zu Neuigkeiten und Aktionen auf opencaching.de per Email erhalten. (max. 2-5 pro Jahr)', '2013-11-03 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2173', 'DE', 'Nein, ich möchte keine Informationen zu Neuigkeiten und Aktionen auf opencaching.de per Email erhalten.', '2013-11-03 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2174', 'DE', 'Newsletter:', '2013-11-03 10:09:14');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2175', 'DE', 'Wenn ich andere Benutzer anschreibe, wird standardmäßig meine E-Mail-Adresse mitgeschickt.', '2015-05-25 19:50:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'EN', 'Reorder IDs', '2010-09-02 00:15:30');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'EN', 'The database could not be reconnected.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'EN', 'Testing – please do not login', '2010-08-28 11:48:07');
@@ -7347,7 +7349,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('688', 'EN', 'You have to enter a subject!', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('689', 'EN', 'You have to enter a content!', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('690', 'EN', 'Send my e-mail address with this message', '2010-08-28 11:48:08');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('691', 'EN', 'This enables the receiver to answer your e-mail directly using his e-mail client.', '2010-08-28 11:48:08');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('691', 'EN', 'This enables the receiver to answer your e-mail directly using his e-mail client. You may enable this option by default in your <a href="myprofile.php">user profile</a>.', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('692', 'EN', 'To protect you and us from abuse:', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('693', 'EN', 'Only e-mails concerning geocaching are allowed. Spamming is prohibited!', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('694', 'EN', 'All relevant information will be logged (date/time, sender/receiver and IP address).', '2010-08-28 11:48:08');
@@ -8345,6 +8347,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2150', 'EN', 'This geocache is probably placed within the following protection areas:', '2011-05-23 22:19:23');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2151', 'EN', 'Also listed as', '2011-05-23 22:19:23');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2162', 'EN', 'Your log entries', '2010-08-28 11:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2175', 'EN', 'Disclose my e-mail address by default when sending e-mails to other users.', '2015-05-25 19:50:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'ES', 'Reordenar ID', '2010-12-09 00:17:55');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'ES', 'La base de datos no se pudo conectar.', '2010-12-09 00:17:55');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'ES', 'En pruebas - por favor, no entre.', '2010-12-09 00:17:55');

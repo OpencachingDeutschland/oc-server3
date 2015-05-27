@@ -44,7 +44,7 @@ class autoarchive
 		// modification date.
 		$rs = sql("SELECT `caches`.`cache_id`
 		             FROM `caches`
-		            WHERE `caches`.`status`=2 AND `caches`.`type`<>6
+		            WHERE `caches`.`status`=2
 								  AND IFNULL((SELECT MAX(`date_modified`) FROM `cache_status_modified` `csm` WHERE `csm`.`cache_id`=`caches`.`cache_id`),`caches`.`listing_last_modified`) < NOW() - INTERVAL 366 DAY
 						 GROUP BY `caches`.`cache_id`
 						 ORDER BY `caches`.`listing_last_modified`

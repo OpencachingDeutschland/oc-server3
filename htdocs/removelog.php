@@ -51,13 +51,16 @@
 						`log_types`.`icon_small` AS `icon_small`,
 						`user`.`username` as `log_username`,
 						`caches`.`wp_oc`,
-						`cache_status`.`allow_user_view`
-					 FROM `log_types`, `cache_logs`, `caches`, `user`, `cache_status`
+						`cache_status`.`allow_user_view`,
+						IFNULL(`sys_trans_text`.`text`,`log_types`.`en`) AS `logtype_name`
+					 FROM `cache_logs`, `caches`, `user`, `cache_status`, `log_types`
+			LEFT JOIN `sys_trans_text` ON `sys_trans_text`.`trans_id`=`log_types`.`trans_id` AND `sys_trans_text`.`lang`='&2'
 					WHERE `cache_logs`.`id`='&1'
 					  AND `cache_logs`.`user_id`=`user`.`user_id`
 					  AND `caches`.`cache_id`=`cache_logs`.`cache_id`
 					  AND `caches`.`status`=`cache_status`.`id`
-					  AND `log_types`.`id`=`cache_logs`.`type`", $log_id);
+					  AND `log_types`.`id`=`cache_logs`.`type`
+						", $log_id, $opt['template']['locale']);
 
 			//log exists?
 			if (mysql_num_rows($log_rs) == 1)
@@ -131,6 +134,8 @@
 							$email_content = mb_ereg_replace('%cache_owner%', $cache_owner_record['username'], $email_content);
 							$email_content = mb_ereg_replace('%cache_name%', $log_record['cache_name'], $email_content);
 							$email_content = mb_ereg_replace('%cache_wp%', $log_record['wp_oc'], $email_content);
+							$email_content = mb_ereg_replace('%log_date%', date($opt['locale'][$locale]['format']['phpdate'], strtotime($log_record['log_date'])), $email_content);
+							$email_content = mb_ereg_replace('%log_type%', $log_record['logtype_name'], $email_content);
 							$email_content = mb_ereg_replace('%log_text%', $logtext, $email_content);
 							$email_content = mb_ereg_replace('%comment%', $message, $email_content);
 

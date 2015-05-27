@@ -3,6 +3,8 @@ Hallo %log_owner%,
 %cache_owner% hat deinen Logeintrag für den Cache "%cache_name%" gelöscht
 (http://opencaching.de/%cache_wp%).
 
+%log_date%: %log_type%
+
 %log_text%
 
 %comment%

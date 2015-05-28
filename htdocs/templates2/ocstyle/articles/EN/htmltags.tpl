@@ -10,7 +10,7 @@
 	<div class="content-txtbox-noshade" style="padding-right: 25px;">
 
 
-			<p>All tags and attributes not listed here will be filtered out by the editor. Contents of this list may change, but existing cache listings will not be affected by that.</p>
+			<p><b>Caution -> these informations are outdated and the update is in work. The recent status can be seen <a href="http://forum.opencaching-network.org/index.php?topic=4135.0" target="_blank">here</a>.</b><br /><br />All tags and attributes not listed here will be filtered out by the editor. Contents of this list may change, but existing cache listings will not be affected by that.</p>
 
 
 			<p><b>The following HTML tags are allowed:</b></p>

@@ -14,8 +14,8 @@
 
 	<p>Eine redaktionell aufbereitete Erläuterung neuer OC-Versionen gibt es auch im <em>Altmetall-Blog</em>:</p>
 	<ul>
-		<li><a href="http://blog.dafb-o.de/opencaching-3-0-version-11-veroeffentlicht/">Version 11</a>: Automatische Verkleinerung von Bildern, Links zu Logseinträgen, Kleinigkeiten ...</li>
-		<li><a href="http://blog.dafb-o.de/opencaching-de-version-10-freigegeben/">Version 10</a>: Nachladen von Logeinträgen, ausführliche Statistik im Benutzerprofil, Detailänderungen ...</li>
+		<li><a href="http://blog.dafb-o.de/opencaching-3-0-version-11-veroeffentlicht/">Version 11</a>: Automatische Verkleinerung von Bildern, Links zu Logeinträgen ...</li>
+		<li><a href="http://blog.dafb-o.de/opencaching-de-version-10-freigegeben/">Version 10</a>: Nachladen von Logeinträgen, ausführliche Statistik im Benutzerprofil ...</li>
 		<li><a href="http://blog.dafb-o.de/alle-neune-oder-ein-update-fuer-opencachingde/">Version 9</a>: Suchfunktion, OConly-Features, Liste der eigenen Caches + Loghistorie, Schutzgebiete ...</li>
 		<li><a href="http://blog.dafb-o.de/opencaching-3-0-version-8-veroeffentlicht/">Version 8</a>: Statuslogs, Listinglayout, Koordinaten für zusätzliche Wegpunkte, Safari-Caches, Kartenfilteroptionen speichern, automatische Archivierung</li>
 		<li><a href="http://blog.dafb-o.de/okapi-jetzt-auch-fuer-opencaching-de/">Version 7</a>: OKAPI</li>
@@ -27,13 +27,41 @@
 
 	<div class="changelog-changes">
 
+	<p id="v3.0.12"><strong>OC 3.0 Version 12</strong> &ndash; 31. Mai 2015</p>
+	<p>Neu:</p>
+	<ul>
+		<li>Link „mehr...“ in der Eventliste auf der Startseite, falls mehr als zehn Events oder Events in anderen Ländern vorhanden sind</li>
+		<li>Der Link „andere Koordinatensysteme“ im Listing zeigt auch <i>what3words</i>-Koordinaten an.</i></li>
+		<li>Suche nach <i>what3words</i>-Koordinaten auf der Karte</li>
+		<li>In den <a href="myprofile.php">Profildaten</a> kann man festlegen, dass beim Anschreiben anderer Benutzer standardmäßig die eigene Mailadresse mitgeschickt wird (pro Mail einzeln abschaltbar).</li>
+		<li><a href="okapi">OKAPI</a>: experimentelle Unterstützung des neuen Garmin-GGZ-Datenformats</li>
+	</ul>
+
+	<p>Geändert / verbessert:</p>
+	<ul>
+		<li>versehentliche Doppellistings des gleichen Caches werden verhindert</li>
+		<li>Plausibiltitätsprüfung für GC-Wegpunkteingabe im Listing</li>
+		<li>Benachrichtigungsmails über gelöschte Logs enthalten nun auch Logdatum und -typ</li>
+		<li>zuletzt eingegebenes Logdatum wird nur noch 12 Stunden lang für neue Logs vorgeschlagen, danach wieder das aktuelle Datum</li>
+		<li>Persönliche Notiz wird auch bei Eingabe einer ungültigen Koordinate gespeichert</li>
+	</ul>
+
+	<p>Korrigiert (Bugfixes):</p>
+	<ul>
+		<li>deaktivierte Events werden wie deaktivierte Caches nach einem Jahr automatisch archiviert [Bug von Version 9]</li>
+		<li>fehlende eigene Mailadresse beim Anschrieb anderer Benutzer ergänzt</li>
+		<li>Fehler bei der Sprachumschaltung auf www.opencaching.it und www.opencachingspain.es behoben</li>
+		<li>kleinere Korrekturen in der OKAPI (&rarr; <a href="https://code.google.com/p/opencaching-api/source/list">Changelog</a>)</li>
+	</ul>
+	</p>
+
 	<p id="v3.0.11"><strong>OC 3.0 Version 11</strong> &ndash; 21. Juni 2014</p>
 	<p>Neu:</p>
 	<ul>
-		<li>direkter Link auf ein bestimmtes Log per Rechtsklick auf das zugeh&ouml;rige Symbol und "Link kopieren"</li>
+		<li>direkter Link auf ein bestimmtes Log per Rechtsklick auf das zugeh&ouml;rige Symbol und „Link kopieren“</li>
 		<li>Bilder beim Upload automatisch verkleinern</li>
 		<li>R&uuml;ckfrage bevor ein Bild gel&ouml;scht wird</li>
-		<li>Link "Umkreissuche auf geocaching.com" im Adminbereich f&uuml;r gemeldete Caches</li>
+		<li>Link „Umkreissuche auf geocaching.com“ im Adminbereich f&uuml;r gemeldete Caches</li>
 		<li>Benutzeroption um den OC Newsletter zu erhalten (oder nicht)</li>
 	</ul>
 

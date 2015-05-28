@@ -44,6 +44,7 @@
 		<li>Benachrichtigungsmails über gelöschte Logs enthalten nun auch Logdatum und -typ</li>
 		<li>zuletzt eingegebenes Logdatum wird nur noch 12 Stunden lang für neue Logs vorgeschlagen, danach wieder das aktuelle Datum</li>
 		<li>Persönliche Notiz wird auch bei Eingabe einer ungültigen Koordinate gespeichert</li>
+		<li>Informationen zum Opencaching Deutschland e.V. aktualisiert</li>
 	</ul>
 
 	<p>Korrigiert (Bugfixes):</p>

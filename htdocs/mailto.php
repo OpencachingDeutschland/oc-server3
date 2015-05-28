@@ -30,7 +30,10 @@
 	if (isset($_REQUEST['emailaddress']))
 		$bEmailaddress = ($_REQUEST['emailaddress']==1);
 	else
-		$bEmailaddress = $user->getUsermailSendAddress();
+	{
+		$own_user = new user($login->userid);
+		$bEmailaddress = $own_user->getUsermailSendAddress();
+	}
 
 	if (isset($_REQUEST['ok']))
 	{

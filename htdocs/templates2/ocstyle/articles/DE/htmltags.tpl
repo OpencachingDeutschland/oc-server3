@@ -10,7 +10,7 @@
 	<div class="content-txtbox-noshade" style="padding-right: 25px;">
 
 
-			<p>Alle hier nicht aufgeführten Tags und Attribute werden gefiltert.<br />
+			<p><b>Achtung -> diese Angaben sind veraltet und werden derzeit überarbeitet. Den aktuellen Stand kann man <a href="http://forum.opencaching-network.org/index.php?topic=4135.0" target="_blank">hier</a> verfolgen.</b><br /><br />Alle hier nicht aufgeführten Tags und Attribute werden gefiltert.<br />
 			Gegebenenfalls wird die Liste erweitert oder um das eine oder andere Element gekürzt.<br />
 			Alle bereits eingestellten Beschreibungen bleiben davon jedoch unberührt.</p>
 

@@ -49,10 +49,11 @@
 
 	<p>Korrigiert (Bugfixes):</p>
 	<ul>
-		<li>deaktivierte Events werden wie deaktivierte Caches nach einem Jahr automatisch archiviert [Bug von Version 9]</li>
+		<li>Der An-GPS-Gerät-Senden-Knopf im Listing funktioniert wieder.</li>
+		<li>Deaktivierte Events werden wie deaktivierte Caches nach einem Jahr automatisch archiviert. [Bug von Version 9]</li>
 		<li>fehlende eigene Mailadresse beim Anschrieb anderer Benutzer ergänzt</li>
-		<li>Fehler bei der Sprachumschaltung auf www.opencaching.it und www.opencachingspain.es behoben</li>
-		<li>kleinere Korrekturen in der OKAPI (&rarr; <a href="https://code.google.com/p/opencaching-api/source/list">Changelog</a>)</li>
+		<li>Fehler bei der Sprachumschaltung auf www.opencaching.it und www.opencachingspain.es behoben [Problem seit Version 10]</li>
+		<li>kleinere Korrekturen an der OKAPI (&rarr; <a href="https://code.google.com/p/opencaching-api/source/list">Changelog</a>)</li>
 	</ul>
 	</p>
 

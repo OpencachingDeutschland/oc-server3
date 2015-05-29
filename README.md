@@ -1,6 +1,8 @@
 Opencaching.de Code Repository
 ==============================
 
+[![Join the chat at https://gitter.im/OpencachingDeutschland/oc-server3](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/OpencachingDeutschland/oc-server3?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 [Opencaching.de](http://www.opencaching.de) is a major Geocaching website in Germany.
 This repository contains the website's code, including all third-party libraries
 needed to run it. It is one of two major

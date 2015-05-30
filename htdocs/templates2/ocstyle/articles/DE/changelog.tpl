@@ -33,7 +33,7 @@
 		<li>Link „mehr...“ in der Eventliste auf der Startseite, falls mehr als zehn Events oder Events in anderen Ländern vorhanden sind</li>
 		<li>Der Link „andere Koordinatensysteme“ im Listing zeigt auch <i>what3words</i>-Koordinaten an.</i></li>
 		<li>Suche nach <i>what3words</i>-Koordinaten auf der Karte</li>
-		<li>In den <a href="myprofile.php">Profildaten</a> kann man festlegen, dass beim Anschreiben anderer Benutzer standardmäßig die eigene Mailadresse mitgeschickt wird (pro Mail einzeln abschaltbar).</li>
+		<li>In den <a href="myprofile.php">Profildaten</a> kann man festlegen, dass beim Anschreiben anderer Benutzer standardmäßig die eigene Mailadresse mitgeschickt wird.</li>
 		<li><a href="okapi">OKAPI</a>: experimentelle Unterstützung des neuen Garmin-GGZ-Datenformats</li>
 	</ul>
 

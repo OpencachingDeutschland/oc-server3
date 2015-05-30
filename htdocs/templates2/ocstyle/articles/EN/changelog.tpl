@@ -15,6 +15,36 @@
 
 	<div class="changelog-changes">
 
+	<p id="v3.0.12"><strong>OC 3.0 Release 12</strong> &ndash; May 31, 2015</p>
+	<p>New:</p>
+	<ul>
+		<li>"more..." link in the start page event list, if there are more than ten events or events in other countries</li>
+		<li>The "Convert coordinates" link in cache listings shows <i>what3words</i> coordinates.</i></li>
+		<li>search for <i>what3words</i> coordinates on the map</li>
+		<li>new <a href="myprofile.php">user profile setting</a> to include the own e-mail address by default when writing to other users</li>
+		<li><a href="okapi">OKAPI</a>: added experimental support for the new Garmin GGZ data format</li>
+	</ul>
+
+	<p>Changed / improved:</p>
+	<ul>
+		<li>protection against accidential duplicate cache listings</li>
+		<li>GC waypoint input in cache listings checks for valid waypoint format</li>
+		<li>Notification e-mails for deleted logs now include the log date and type.</li>
+		<li>The last entered log date will be used as default for only 12 hours; then the current date is proposed for new logs.</li>
+		<li>Personal cache notes are saved even if the entered coordinate is invalid.</li>
+		<li>updated information on Opencaching Deutschland e.V.</li>
+	</ul>
+
+	<p>Fixed:</p>
+	<ul>
+		<li>fixed "Send to GPS device" button in cache listings</li>
+		<li>Disabled events are automatically archived after one year like all caches. [bug of release 9]</li>
+		<li>added missing e-mail address in e-mails to other users</li>
+		<li>fixed language switch on www.opencaching.it and www.opencachingspain.es [problem since release 10]</li>
+		<li>some OKAPI fixes (&rarr; <a href="https://code.google.com/p/opencaching-api/source/list">changelog</a>)</li>
+	</ul>
+	</p>
+
 	<p id="v3.0.11"><strong>OC 3.0 Release 11</strong> &ndash; June 21, 2014</p>
 	<p>New:</p>
 	<ul>

@@ -156,6 +156,8 @@ function getWaypoints($cacheid)
 								// somebody messed up the POST-data, so we do not publish the cache, since he isn't published right now (status=5)
 								$publish = 'notnow';
 							}
+							if ($publish == 'now')
+								$status = 1;
 						}
 						else
 						{

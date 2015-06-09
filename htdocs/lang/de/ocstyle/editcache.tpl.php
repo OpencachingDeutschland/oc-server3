@@ -224,9 +224,9 @@ function toggleAttr(id)
 	<tr>
 		<td>{t}Waypoints (optional):{/t}</td>
 		<!-- allow wp_gc copy&paste with leading spaces; will be trimmed later -->
-		<td>geocaching.com: <input type="text" name="wp_gc" value="{wp_gc}" maxlength="12" class="input70" style="text-transform: uppercase;" />
+		<td>geocaching.com: <input type="text" name="wp_gc" value="{wp_gc}" maxlength="12" class="input70 waypoint" />
 			{wpgc_message}
-			navicache.com: <input type="text" name="wp_nc" value="{wp_nc}" maxlength="6" class="input50" style="text-transform: uppercase" />
+			navicache.com: <input type="text" name="wp_nc" value="{wp_nc}" maxlength="6" class="input50 waypoint" />
 		</td>
 	</tr>
 	<tr>

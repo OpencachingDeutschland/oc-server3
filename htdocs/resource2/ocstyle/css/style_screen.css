@@ -663,6 +663,8 @@ textarea.removelogs {	width:620px; height:200px; }  /* log removal */
 label.disabled { color:grey; }
 .formlabel { color:#555; font-weight:bold; line-height:1.5em !important}
 
+input.waypoint { text-transform: uppercase; }
+
 
 /********************************/
 /* SECTION 9 - "BUSINESS LOGIC" */

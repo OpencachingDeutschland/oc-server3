@@ -206,7 +206,7 @@
 					<div id="breadcrumb_fullsize">{include file="sys_breadcrumb.tpl" items="$breadcrumb"}</div>
 				{else}
 					<div id="breadcrumb">{include file="sys_breadcrumb.tpl" items="$breadcrumb"}</div>
-					<div id="suchbox"><form action="searchplugin.php" method="post"><b>{t}Waypoint-Search{/t}:</b>&nbsp;<input type="hidden" name="sourceid" value="waypoint-search" /> <input type="text" name="userinput" size="10" /> <input type="submit" name="wpsearch" class="formbutton" style="width:auto" value="&nbsp;{t}Go{/t}&nbsp;" onclick="submitbutton('wpsearch')" /></form></div>
+					<div id="suchbox"><form action="searchplugin.php" method="post"><b>{t}Waypoint-Search{/t}:</b>&nbsp;<input type="hidden" name="sourceid" value="waypoint-search" /> <input type="text" name="userinput" size="10" class="waypoint" /> <input type="submit" name="wpsearch" class="formbutton" style="width:auto" value="&nbsp;{t}Go{/t}&nbsp;" onclick="submitbutton('wpsearch')" /></form></div>
 				{/if}
 			</div>
 

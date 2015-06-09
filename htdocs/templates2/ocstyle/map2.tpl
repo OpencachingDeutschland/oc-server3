@@ -2567,8 +2567,10 @@ function toggle_attribselection(bSaveCookies)
 	{/if}
 
 	{* Safari search link *}
-	<div class="mapboxframe mapboxshadow" style="position:absolute; top: 138px; right:0px; margin: 0px; padding:2px 0px 2px 1px; background:#fff; opacity: .9; z-index:1" >
-		<a class="jslink nofocus" href="search.php?searchto=searchall&showresult=1&expert=0&output=HTML&utf8=1&sort=bycreated&orderRatingFirst=0&f_inactive=1&f_disabled=1&f_ignored=1&cache_attribs=61&submit_all=Suchen" style="width: 32px; height: 32px"><img src="resource2/{$opt.template.style}/images/attributes/safari.png" /></a>
-	</div>
+	{if $queryid==0}
+		<div class="mapboxframe mapboxshadow" style="position:absolute; {if $bFullscreen}top: 138px; right:0px; margin: 0px;{else}top: {if $msie}272{else}248{/if}px; right:26px; margin: 0px;{/if} padding:2px 0px 2px 1px; background:#fff; opacity: .9; z-index:1" >
+			<a class="jslink nofocus" href="search.php?searchto=searchall&showresult=1&expert=0&output=HTML&utf8=1&sort=bycreated&orderRatingFirst=0&f_inactive=1&f_disabled=1&f_ignored=1&cache_attribs=61&submit_all=Suchen" style="width: 32px; height: 32px"><img src="resource2/{$opt.template.style}/images/attributes/safari.png" title="{t}Safari caches list{/t}" /></a>
+		</div>
+	{/if}
 
 </div>

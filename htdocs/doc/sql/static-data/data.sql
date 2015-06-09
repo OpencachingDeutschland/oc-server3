@@ -2603,6 +2603,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2175', 'Disclos
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2176', 'Planned events', '2013-11-03 10:09:14');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2177', 'Another cache (<a href=\"viewcache.php?wp=%1\">%1</a>) exists at these coords. Maybe you pressed \"submit cache\" twice. To publish a cache with identical coords, enter other coords first, then edit the listing and change coords.', '2013-11-03 10:09:14');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2178', 'GC waypoint is invalid, must be GCXXX...', '2013-11-03 10:09:14');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2179', 'Safari caches list', '2013-11-03 10:09:14');
 
 -- Table sys_trans_ref
 SET NAMES 'utf8';
@@ -6695,6 +6696,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2176', 'DE', 'Geplante Events', '2013-11-03 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2177', 'DE', 'An diesen Koordinaten befindet sich bereits der Cache <a href=\"viewcache.php?wp=%1\">%1</a>. Vielleicht hast du mehrfach auf \"Cache senden\" geklickt. Wenn du tatsächlich einen weiteren Cache mit identischen Koordinaten veröffentlichen möchtest, lege ihn zunächst mit abweichenden Koordinaten an, bearbeite dann das Listing und ändere die Koordinaten.', '2013-11-03 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2178', 'DE', 'ungültiger GC-Wegpunkt, Format ist GCXXX...', '2013-11-03 10:09:14');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2179', 'DE', 'Safari-Cache-Liste', '2013-11-03 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'EN', 'Reorder IDs', '2010-09-02 00:15:30');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'EN', 'The database could not be reconnected.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'EN', 'Testing – please do not login', '2010-08-28 11:48:07');

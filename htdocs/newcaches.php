@@ -33,6 +33,7 @@
 		if ($bEvents)
 			$cachetype_condition .= " AND `date_hidden` >= curdate()";
 		$date_field = ($bEvents ? 'date_hidden' : 'date_created');
+		$sort_order = ($bEvents ? 'ASC' : 'DESC');
 		$newCaches = array();
 
 		$rsNewCaches = sql_slave(
@@ -50,7 +51,7 @@
 			 LEFT JOIN `caches_attributes` `ca` ON `ca`.`cache_id`=`caches`.`cache_id` AND `ca`.`attrib_id`=6
 			     WHERE `caches`.`status` = 1" . ($country ? " AND `caches`.`country`='" . sql_escape($country) . "'" : "") .
 			           $cachetype_condition . "
-			  ORDER BY `caches`.`date_created` DESC
+			  ORDER BY `caches`.`$date_field` $sort_order
 				   LIMIT " . ($startat+0) . ', ' . ($perpage+0));
 			// see also write_newcaches_urls() in sitemap.class.php
 		while ($rNewCache = sql_fetch_assoc($rsNewCaches))

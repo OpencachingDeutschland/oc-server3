@@ -154,6 +154,16 @@
 				$tpl->assign('cachexternal', $opt['logic']['adminreports']['cachexternal']);
 			else
 				$tpl->assign('cachexternal', array());
+
+			if (isset($opt['logic']['adminreports']['external_maintainer']))
+			{
+				$external_maintainer = @file_get_contents(mb_ereg_replace('%1', $record['cacheid'], $opt['logic']['adminreports']['external_maintainer']['url']));
+				if ($external_maintainer)
+					$tpl->assign('external_maintainer_msg', mb_ereg_replace('%1', htmlspecialchars($external_maintainer),
+					             $opt['logic']['adminreports']['external_maintainer']['msg']));
+				else
+					$tpl->assign('external_maintainer_msg', false);
+			}
 		}
 		sql_free_result($rs);
 

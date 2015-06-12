@@ -61,6 +61,7 @@
 		{foreach from=$cachexternal key=extname item=exturl}
 			[<a href="{$exturl|replace:_cache_id_:$cacheid}" target="_blank">{$extname}</a>] &nbsp;
 		{/foreach}
+		{$external_maintainer_msg}
 		</p>
 		{if $created != null}
 			<p style="line-height: 1.6em;"><b>{t}Created at{/t}:</b>&nbsp;{$created|date_format:$opt.format.datelong}</p>

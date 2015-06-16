@@ -149,6 +149,10 @@ function search_output()
 		$tpl->assign('search_in_gm_zip', $search_in_gm_zip);
 	}
 
+	// disable "edit options" for internally generated searches
+	if ($options['searchtype'] == 'bylist')
+	  $tpl->assign('disable_edit_options',true);
+
 	$tpl->display();
 }
 

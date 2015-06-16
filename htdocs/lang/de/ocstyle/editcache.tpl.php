@@ -349,6 +349,10 @@ function toggleAttr(id)
 			{t}Please note the <a href="articles.php?page=cacheinfo#logpw" target="_blank">description</a>{/t}
 		</td>
 	</tr>
+	<tr>
+		<td><label for="showlists">{t}Show cache lists{/t}</label></td>
+		<td><input type="checkbox" id="showlists" name="showlists" value="1" {showlists_checked} /></td>
+	</tr>
 
 	<tr><td class="spacer" colspan="2"></td></tr>
 	<tr><td class="spacer" colspan="2"></td></tr>

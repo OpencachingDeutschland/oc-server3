@@ -29,7 +29,7 @@
 		{/if}
 		<td style="text-align:right; padding-bottom:2px"><p class="inheader">
 			<span style="white-space:nowrap">[<a href="query.php?action=save&queryid={$queryid}">{t}Save options{/t}</a>]</span>
-			&nbsp;<span style="white-space:nowrap">[<a href="search.php?queryid={$queryid}&showresult=0">{t}Edit options{/t}</a>]</span></p>
+			{if !$disable_edit_options}&nbsp;<span style="white-space:nowrap">[<a href="search.php?queryid={$queryid}&showresult=0">{t}Edit options{/t}</a>]</span>{/if}</p>
 		</td>
 	</tr></table>
 </div>

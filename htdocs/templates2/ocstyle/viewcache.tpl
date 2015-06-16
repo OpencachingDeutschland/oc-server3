@@ -110,7 +110,7 @@
 					{else}
 						<li class="group"><a style="background-image: url(resource2/{$opt.template.style}/images/viewcache/ignore-18.png);background-repeat:no-repeat;" href="ignore.php?cacheid={$cache.cacheid|urlencode}&amp;action=addignore">{t}Ignore{/t}</a></li>
 					{/if}
-
+					<li class="group"><a style="background-image: url(resource2/{$opt.template.style}/images/viewcache/list-18.png);background-repeat:no-repeat;" href="addtolist.php?cacheid={$cache.cacheid|urlencode}">{t}Add to list{/t}</a></li>
 					{if $login.userid==$cache.userid || $listing_admin }
 						<li class="group"><a style="background-image: url(resource2/{$opt.template.style}/images/viewcache/page.png);background-repeat:no-repeat;" href="editcache.php?cacheid={$cache.cacheid|urlencode}">{t}Edit{/t}</a></li>
 					{/if}
@@ -281,21 +281,32 @@
 </div>
 <!-- End Cachedetails -->
 
-<!-- Attributes -->
-{if count($attributes)>0}
+<!-- Attributes & cache lists -->
+{if $attributes|@count || $cachelists|@count}
 	<div class="content2-container line-box" style="height:0px"></div> {* MSIE needs explicit height *}
 	<div class="content2-container">
-		<div style="padding-left:2px">
-			<p style="line-height: 1.6em;">
-				{include file="res_attribgroup.tpl" attriblist=$attributes}
-			</p>
-		</div>
+		{if $cachelists|@count}
+			<div style="float:right; max-width:350px">
+				{foreach from=$cachelists item=cachelist}
+					<p style="text-indent:-22px; padding:0"><a href="cachelists.php"><img src="resource2/{$opt.template.style}/images/viewcache/list-18.png" title="{t}Cache list{/t}"/></a>
+					{include file="res_cachelist_link.tpl"} {if $cachelist.is_public}{t}by{/t} <a href="viewprofile.php?userid={$cachelist.user_id}">{$cachelist.username|escape}</a>{else} ({t}private{/t}){/if}
+					</p>
+				{/foreach}
+			</div>
+		{/if}
+		{if $attributes|@count}
+			<div style="padding-left:2px">
+				<p style="line-height: 1.6em;">
+					{include file="res_attribgroup.tpl" attriblist=$attributes}
+				</p>
+			</div>
+		{/if}
 	</div>
-	<div style="height:2px"></div>
+	<div style="clear:both; height:2px"></div>
 {else}
 	<br />
 {/if}
-<!-- End Attributes -->
+<!-- End Attributes & cache lists-->
 
 <!-- Description -->
 <div class="content2-container bg-blue02">

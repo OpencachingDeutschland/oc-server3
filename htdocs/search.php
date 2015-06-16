@@ -32,6 +32,7 @@
 		searchbynofilter
 		searchbycacheid
 		searchbywp
+		searchbylist
 		searchall  (needs login)
 
 	output options:
@@ -379,6 +380,11 @@
 		elseif (isset($_REQUEST['searchbynofilter']))
 		{
 			$options['searchtype'] = 'bynofilter';
+		}
+		elseif (isset($_REQUEST['searchbylist']))
+		{
+			$options['searchtype'] = 'bylist';
+			$options['listid'] = isset($_REQUEST['listid']) ? $_REQUEST['listid'] + 0 : 0;
 		}
 		elseif (isset($_REQUEST['searchall']))
 		{
@@ -965,6 +971,22 @@
 			{
 				$sql_select[] = '`caches`.`cache_id` `cache_id`';
 				$sql_from = '`caches`';
+			}
+			elseif ($options['searchtype'] == 'bylist')
+			{
+				sql_temp_table_slave('result_caches');
+				$cachesFilter =
+									 "CREATE TEMPORARY TABLE &result_caches ENGINE=MEMORY
+										SELECT `cache_id` FROM `cache_list_items`
+										LEFT JOIN `cache_lists` ON `cache_lists`.`id`=`cache_list_items`.`cache_list_id`
+									  WHERE `cache_list_id`=" . sql_escape($options['listid']) . "
+									  AND (`is_public` OR `cache_lists`.`user_id`=" . sql_escape($login->userid) . ")";
+				sql_slave($cachesFilter);
+				sql_slave('ALTER TABLE &result_caches ADD PRIMARY KEY ( `cache_id` )');
+
+				$sql_select[] = '&result_caches.`cache_id`';
+				$sql_from = '&result_caches';
+				$sql_innerjoin[] = '`caches` ON `caches`.`cache_id`=&result_caches.`cache_id`';
 			}
 			else if ($options['searchtype'] == 'all')
 			{

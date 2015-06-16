@@ -170,4 +170,27 @@
 		</tr>
 		<tr><td class="spacer"></td></tr>
 	{/if}
+
 </table>
+
+
+{* personal cache lists *}
+{if $cachelists|@count}
+	<div class="content2-container bg-blue02" id="cachelists">
+		<p class="content-title-noshade-size2">
+			<img src="resource2/{$opt.template.style}/images/misc/32x32-list.png" style="align: left; margin-right: 10px;" />
+		{t}Cache lists{/t}
+		</p>
+	</div>
+	<p>
+		<ul class="default">
+			{foreach from=$cachelists item=cachelist}
+				<li>
+					{include file="res_cachelist_link.tpl"} &nbsp;
+					[<a href="viewprofile.php?userid={$userid}&{if $cachelist.watched_by_me}dont{/if}watchlist={$cachelist.id}&dummy={$tdummy}#eocl">{if $cachelist.watched_by_me}{t}do not watch{/t}{else}{t}watch{/t}{/if}</a>]
+				</li>
+			{/foreach}
+		</ul>
+		<br id="eocl" />
+	</p>
+{/if}

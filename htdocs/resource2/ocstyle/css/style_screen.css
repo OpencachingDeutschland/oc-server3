@@ -264,7 +264,7 @@ div.tplhelp
 
 .nav4 li {float: left; list-style: none; margin: 0px; padding: 0px;padding-bottom: 5px;}
 .nav4 li.title {display: none; margin: 0px 0px 0px 0px; padding: 3px 5px 2px 5px; background-color: rgb(156,186,214); color: rgb(255,255,255); text-transform: uppercase; font-weight: bold; font-size: 120%;}
-.nav4 li.group a {background-color: rgb(219,230,241);display: block; min-height: 1.7em; height: auto !important; height: 1.7em; line-height: 1.7em; margin: 0px; margin-right: 3px; padding: 0px 7px 0px 20px; border-top: solid 1px rgb(200,200,200); border-left: solid 7px rgb(219,230,241); color: rgb(75,75,75); font-weight: bold; font-size: 115%;}
+.nav4 li.group a {background-color: rgb(219,230,241);display: block; min-height: 1.7em; height: auto !important; height: 1.7em; line-height: 1.7em; margin: 0px; margin-right: 3px; padding: 0px 7px 0px 20px; border-top: solid 1px rgb(200,200,200); border-left: solid 7px rgb(219,230,241); color: rgb(75,75,75); font-weight: bold; font-size: 100%;}
 .nav4 li.group_active a {border-left: solid 7px rgb(156,186,214); background-color: rgb(156,186,214);}
 .nav4 li.group2 a {display: block; min-height: 1.7em; height: auto !important; height: 1.7em; line-height: 1.7em; margin: 0px; padding: 0px 7px 0px 0px; border-top: solid 1px rgb(200,200,200); border-left: solid 14px rgb(219,230,241); color: rgb(75,75,75); font-weight: normal; font-size: 120%;}
 .nav4 li.group2_active a {border-left: solid 14px rgb(156,186,214); background-color: rgb(156,186,214);}
@@ -388,6 +388,7 @@ ul.linklist-indent {margin: -0.3em 0px 0.5em 0px; padding: 0px 0px 0px 10px; lis
 ul.nodot {font-size: 11px; }
 ul.nodot li { list-style-type: none; }
 ul.col4 { column-count:4; -moz-column-count:4; -webkit-column-count:4; line-height:1.7em; } /* does not work in MSIE */
+ul.default li { line-height: 1.7em; }
 
 ol {margin: 0px 0px 0px 9px; padding: 0px 0px 0px 25px; list-style-type: decimal; list-style-position: outside; font-size: 120%;}
 ol.col4 { column-count:4; -moz-column-count:4; -webkit-column-count:4; line-height:1.7em; } /* does not work in MSIE */
@@ -409,8 +410,8 @@ ol.col4 { column-count:4; -moz-column-count:4; -webkit-column-count:4; line-heig
 
 td.odd { background: #fff; padding-top:2px; }
 td.even { background: #eee; padding-top:2px; }
-td.listcolor1 { background:#fff; line-height:1.7em; }
-td.listcolor2 { background:#f0f0f0; line-height:1.7em; }
+td.listcolor1 { background:#fff; }
+td.listcolor2 { background:#f0f0f0; }
 
 td div.mediumspacer { height:6px; }
 
@@ -561,6 +562,7 @@ input {	border:1px solid #555;	background-color:white;	padding:1px 2px 1px 2px; 
 *.input300 {width:300px;}
 *.input350 {width:350px;}	/* overwrite saved query */
 *.input400 {width:400px;}	/* short cachedescription */
+*.input450 {width:450px;}	/* cache list wp inputs */
 
 input.checkbox {width:12px; height:12px; font-size:12px; border:0;}
 
@@ -606,6 +608,10 @@ input.formbutton_active {
 	box-shadow: 0px 0px 1px #555;
 	-moz-box-shadow: 0px 0px 1px #555;
 	-webkit-box-shadow: 0px 0px 1px #555;
+}
+
+input.widebutton {
+	width:160px !important;
 }
 
 .menuBar
@@ -665,6 +671,8 @@ label.disabled { color:grey; }
 
 input.waypoint { text-transform: uppercase; }
 
+.radiolist { line-height:1.5em; }
+
 
 /********************************/
 /* SECTION 9 - "BUSINESS LOGIC" */
@@ -689,12 +697,18 @@ td.listicon {
 	vertical-align:middle;
 }
 
-tr.searchresult td {
+tr.cachelistheader td {
 	padding-top: 5px;
 	padding-bottom: 5px;
 	border-bottom: solid 1px black;
 	border-top: solid 1px black;
 	margin-bottom: 5px;
+}
+
+tr.cachelistitem td {
+	padding-top: 0.3em;
+	padding-bottom: 0.3em;
+	line-height: 1.4em;
 }
 
 /*---------------------------*/

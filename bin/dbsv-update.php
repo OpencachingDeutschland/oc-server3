@@ -373,6 +373,61 @@
 		}
 	}
 
+	function dbv_123()  // add tables, fields and procs for cache lists and list watches
+	{
+		if (!sql_table_exists('cache_lists'))
+		{
+			sql("
+				CREATE TABLE `cache_lists` (
+				  `id` int(10) NOT NULL auto_increment,
+				  `uuid` varchar(36) NOT NULL,
+				  `user_id` int(10) NOT NULL,
+				  `date_created` datetime NOT NULL,
+				  `last_modified` datetime NOT NULL,
+				  `last_added` datetime default NULL,
+				  `name` varchar(80) NOT NULL,
+				  `is_public` tinyint(1) NOT NULL default '0',
+				  `entries` int(6) NOT NULL default '0' COMMENT 'via trigger in cache_list_items',
+				  `watchers` int(10) NOT NULL default '0' COMMENT 'via trigger in cache_list_watches',
+				  PRIMARY KEY  (`id`),
+				  UNIQUE KEY `uuid` (`uuid`),
+				  KEY `name` (`name`),
+				  KEY `user_id` (`user_id`)
+				) ENGINE=MyISAM DEFAULT CHARSET=utf8");
+		}
+		if (!sql_table_exists('cache_list_items'))
+		{
+			sql("
+				CREATE TABLE `cache_list_items` (
+				  `cache_list_id` int(10) NOT NULL,
+				  `cache_id` int(10) NOT NULL,
+				  UNIQUE KEY `cache_list_id` (`cache_list_id`,`cache_id`),
+				  KEY `cache_id` (`cache_id`)
+				) ENGINE=MyISAM DEFAULT CHARSET=utf8");
+		}
+		if (!sql_table_exists('cache_list_watches'))
+		{
+			sql("
+				CREATE TABLE `cache_list_watches` (
+				  `cache_list_id` int(10) NOT NULL,
+				  `user_id` int(10) NOT NULL,
+				  UNIQUE KEY `cache_list_id` (`cache_list_id`,`user_id`),
+				  KEY `user_id` (`user_id`)
+				) ENGINE=MyISAM DEFAULT CHARSET=utf8");
+		}
+
+		if (!sql_field_exists('caches','show_cachelists'))
+		{
+			sql("ALTER TABLE `caches` ADD COLUMN `show_cachelists` tinyint(1) NOT NULL default '1'");
+		}
+		if (sql_field_exists('cache_watches','last_executed'))  // obsolete pre-OC3 field
+		{
+			sql("ALTER TABLE `cache_watches` DROP COLUMN `last_executed`"); 
+		}
+
+		update_triggers();		// runs maintain-123.inc.php
+	}
+
 
 	// When adding new mutations, take care that they behave well if run multiple
 	// times. This improves robustness of database versioning.

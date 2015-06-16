@@ -32,10 +32,18 @@
 
 		$modules_dir = $opt['rootpath'] . 'util2/cron/modules/';
 
-		$hDir = opendir($modules_dir);
-		while (false !== ($file = readdir($hDir)))
-			if (substr($file, -10) == '.class.php')
-				require($modules_dir . $file);
+		if (count($argv) == 2 && !strstr("/", $argv[1]))
+		{
+			// run one job manually for debugging purpose
+			require($modules_dir . $argv[1] . ".class.php");
+		}
+		else
+		{
+			$hDir = opendir($modules_dir);
+			while (false !== ($file = readdir($hDir)))
+				if (substr($file, -10) == '.class.php')
+					require($modules_dir . $file);
+		}
 
 		$process_sync->Leave();
 	}

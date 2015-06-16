@@ -31,7 +31,7 @@
 
 function search_output()
 {
-	global $opt, $tpl, $login, $NEWCACHES_DAYS;
+	global $opt, $tpl, $login;
 	global $enable_mapdisplay, $search_in_gm, $search_in_gm_zip;
 	global $called_by_search, $called_by_profile_query, $options, $lat_rad, $lon_rad, $distance_unit;
 	global $startat, $caches_per_page, $sql;
@@ -75,8 +75,8 @@ function search_output()
 		$rCache['desclangs'] = mb_split(',', $rCache['desc_languages']);
 
 		// decide if the cache is new
-		$dDiff = abs(dateDiff('d', $rCache['date_created'], date('Y-m-d')));
-		$rCache['isnew'] = ($dDiff <= $NEWCACHES_DAYS);
+		$dDiff = dateDiff('d', $rCache['date_created'], date('Y-m-d'));
+		$rCache['isnew'] = ($dDiff <= NEWCACHES_DAYS);
 		
 		// get last logs
 		if ($options['sort'] != 'bymylastlog' || !$login->logged_in())

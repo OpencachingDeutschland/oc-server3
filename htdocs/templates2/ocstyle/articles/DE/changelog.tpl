@@ -21,7 +21,7 @@
 		<li><a href="http://blog.dafb-o.de/okapi-jetzt-auch-fuer-opencaching-de/">Version 7</a>: OKAPI</li>
 		<li><a href="http://blog.dafb-o.de/oc-3-0-6-loggen-mit-uhrzeit/">Version 6</a>: Loggen mit Uhrzeit, Schutz vor Listingvandalismus</li>
 		<li><a href="http://blog.dafb-o.de/opencaching-3-0-5-veroeffentlicht/">Version 5</a>: neue Karte, Vorschaubilder, Bildgalerien, Online-Hilfe ...; vorab: <a href="http://blog.dafb-o.de/neue-icons-auf-der-cachekarte/">neue Kartensymbole</a></li>
-		<li><a href="http://blog.dafb-o.de/page/2/">Version 4</a>: GPX-Wegpunkte und -Bildeinbettung, Nano-Caches, neue Datenlizenz</li>
+		<li><a href="http://blog.dafb-o.de/neues-aus-dem-hause-opencaching-de/">Version 4</a>: GPX-Wegpunkte und -Bildeinbettung, Nano-Caches, neue Datenlizenz</li>
 	</ul>
 	<br />
 

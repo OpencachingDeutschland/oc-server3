@@ -12,19 +12,6 @@
 
 	<p>Im Folgenden sind alle Veränderungen ab OC Version&nbsp;3.0 aufgelistet. Manche Kleinigkeiten wurden zur besseren Übersicht weggelassen; sie sind im <a href="http://redmine.opencaching.de/projects/oc-dev/roadmap">Issue-Tracker</a>, in der <a href="https://github.com/OpencachingDeutschland/oc-server3/commits/stable">Codehistorie</a> und im <a href="http://forum.opencaching-network.org/index.php?board=43.0">Entwicklerforum</a> nachlesbar. Neue Funktionen werden manchmal schon vorab freigegeben.</p>
 
-	<p>Eine redaktionell aufbereitete Erläuterung neuer OC-Versionen gibt es auch im <em>Altmetall-Blog</em>:</p>
-	<ul>
-		<li><a href="http://blog.dafb-o.de/opencaching-3-0-version-11-veroeffentlicht/">Version 11</a>: Automatische Verkleinerung von Bildern, Links zu Logeinträgen ...</li>
-		<li><a href="http://blog.dafb-o.de/opencaching-de-version-10-freigegeben/">Version 10</a>: Nachladen von Logeinträgen, ausführliche Statistik im Benutzerprofil ...</li>
-		<li><a href="http://blog.dafb-o.de/alle-neune-oder-ein-update-fuer-opencachingde/">Version 9</a>: Suchfunktion, OConly-Features, Liste der eigenen Caches + Loghistorie, Schutzgebiete ...</li>
-		<li><a href="http://blog.dafb-o.de/opencaching-3-0-version-8-veroeffentlicht/">Version 8</a>: Statuslogs, Listinglayout, Koordinaten für zusätzliche Wegpunkte, Safari-Caches, Kartenfilteroptionen speichern, automatische Archivierung</li>
-		<li><a href="http://blog.dafb-o.de/okapi-jetzt-auch-fuer-opencaching-de/">Version 7</a>: OKAPI</li>
-		<li><a href="http://blog.dafb-o.de/oc-3-0-6-loggen-mit-uhrzeit/">Version 6</a>: Loggen mit Uhrzeit, Schutz vor Listingvandalismus</li>
-		<li><a href="http://blog.dafb-o.de/opencaching-3-0-5-veroeffentlicht/">Version 5</a>: neue Karte, Vorschaubilder, Bildgalerien, Online-Hilfe ...; vorab: <a href="http://blog.dafb-o.de/neue-icons-auf-der-cachekarte/">neue Kartensymbole</a></li>
-		<li><a href="http://blog.dafb-o.de/page/2/">Version 4</a>: GPX-Wegpunkte und -Bildeinbettung, Nano-Caches, neue Datenlizenz</li>
-	</ul>
-	<br />
-
 	<div class="changelog-changes">
 
 	<p id="v3.0.12"><strong>OC 3.0 Version 12</strong> &ndash; 31. Mai 2015</p>

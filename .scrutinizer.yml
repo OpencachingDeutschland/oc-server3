@@ -112,14 +112,7 @@ tools:
     php_code_sniffer:
         config:
             standard: "PSR2"
-    php_pdepend: true
     php_cs_fixer:
         enabled: true
         config: { level: psr2 }
-    php_loc:
-        enabled: true
-        excluded_dirs: []
-    php_cpd:
-        enabled: true
-        excluded_dirs: []
 

@@ -109,7 +109,7 @@ class picture
 		if (strpos($sFilename, '.') === false)
 			return;
 
-		$sExtension = 'jpg';//mb_strtolower(substr($sFilename, strrpos($sFilename, '.') + 1));
+		$sExtension = mb_strtolower(substr($sFilename, strrpos($sFilename, '.') + 1));
 		$this->sFileExtension = $sExtension;
 
 		$sUUID = $this->getUUID();
@@ -401,12 +401,12 @@ class picture
 		$this->setArchiveFlag($restore);
 		sql("DELETE FROM `pictures` WHERE `id`='&1'", $this->nPictureId);
 		$this->resetArchiveFlag();
+		$filename = $this->getFilename();
 
 		// archive picture if picture record has been archived
 		if (sql_value("SELECT `id` FROM `pictures_modified` WHERE `id`='&1'",
 		              0, $this->getPictureId()) != 0)
 		{
-			$filename = $this->getFilename();
 			@rename($filename, $this->deleted_filename($filename));
 		}
 		else

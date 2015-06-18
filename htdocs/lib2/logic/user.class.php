@@ -457,12 +457,12 @@ class user
 	{
 		$bNeedStatpicClear = $this->reUser->getChanged('username');
 
+		sql_slave_exclude();
 		if ($this->reUser->save())
 		{
 			if ($this->getUserId() == ID_NEW)
 				$this->nUserId = $this->reUser->getValue('user_id');
 			$this->getStatpic()->invalidate();
-			sql_slave_exclude();
 			return true;
 		}
 		else

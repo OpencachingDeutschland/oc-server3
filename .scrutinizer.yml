@@ -12,6 +12,7 @@ checks:
     php:
         fix_php_opening_tag: false
         remove_php_closing_tag: false
+        avoid_closing_tag: true
         one_class_per_file: true
         side_effects_or_types: true
         no_mixed_inline_html: false

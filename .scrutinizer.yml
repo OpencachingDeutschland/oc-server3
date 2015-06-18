@@ -52,6 +52,27 @@ checks:
         avoid_multiple_statements_on_same_line: true
         avoid_fixme_comments: true
 
+    javascript:
+        valid_typeof: true
+        yoda:
+            setting: 'Disallow Yoda Conditions'
+        wrap_iife: true
+        no_use_before_define: true
+        no_unused_vars: true
+        no_unreachable: true
+        no_undef: true
+        no_trailing_spaces: true
+        no_space_before_semi: true
+        no_shadow: true
+        no_self_compare: true
+        no_script_url: true
+        no_return_assign: true
+        no_reserved_keys: true
+        no_redeclare: true
+        no_mixed_spaces_and_tabs: true
+        no_loop_func: true
+        no_irregular_whitespace: true
+
 coding_style:
     php:
         spaces:
@@ -88,10 +109,9 @@ coding_style:
                 true_false_null: lower
 
 tools:
-    php_mess_detector: true
-    php_code_sniffer: true
-    sensiolabs_security_checker: true
-    php_code_coverage: false
+    php_code_sniffer:
+        config:
+            standard: "PSR2"
     php_pdepend: true
     php_cs_fixer:
         enabled: true

@@ -1,4 +1,6 @@
 filter:
+    paths:
+        - 'htdocs/*'
     excluded_paths:
         - 'bin/*'
         - 'doc/*'

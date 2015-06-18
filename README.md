@@ -1,6 +1,10 @@
 Opencaching.de Code Repository
 ==============================
 
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/mbirth/oc-server3/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/mbirth/oc-server3/?branch=master)
+[![Code Coverage](https://scrutinizer-ci.com/g/mbirth/oc-server3/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/mbirth/oc-server3/?branch=master)
+[![Build Status](https://scrutinizer-ci.com/g/mbirth/oc-server3/badges/build.png?b=master)](https://scrutinizer-ci.com/g/mbirth/oc-server3/build-status/master)
+
 [Opencaching.de](http://www.opencaching.de) is a major Geocaching website in Germany.
 This repository contains the website's code, including all third-party libraries
 needed to run it. It is one of two major

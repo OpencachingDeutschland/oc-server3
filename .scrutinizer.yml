@@ -7,6 +7,7 @@ filter:
         - 'local/*'
     dependency_paths:
         - 'htdocs/vendor/*'
+
 checks:
     php:
         fix_php_opening_tag: false
@@ -16,7 +17,7 @@ checks:
         no_mixed_inline_html: false
         require_braces_around_control_structures: false
         php5_style_constructor: true
-        no_global_keyword: false
+        no_global_keyword: true
         avoid_usage_of_logical_operators: true
         psr2_class_declaration: true
         no_underscore_prefix_in_properties: false
@@ -86,4 +87,19 @@ coding_style:
             constants:
                 true_false_null: lower
 
+tools:
+    php_mess_detector: true
+    php_code_sniffer: true
+    sensiolabs_security_checker: true
+    php_code_coverage: false
+    php_pdepend: true
+    php_cs_fixer:
+        enabled: true
+        config: { level: psr2 }
+    php_loc:
+        enabled: true
+        excluded_dirs: []
+    php_cpd:
+        enabled: true
+        excluded_dirs: []
 

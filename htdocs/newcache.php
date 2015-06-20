@@ -275,10 +275,10 @@
 
 			// gc- and nc-waypoints
 			// fix #4356: gc waypoints are frequently copy&pasted with leading spaces
-			$wp_gc = isset($_POST['wp_gc']) ? trim($_POST['wp_gc']) : '';  // Ocprop
+			$wp_gc = isset($_POST['wp_gc']) ? strtoupper(trim($_POST['wp_gc'])) : '';  // Ocprop
 			tpl_set_var('wp_gc', htmlspecialchars($wp_gc, ENT_COMPAT, 'UTF-8'));
 
-			$wp_nc = isset($_POST['wp_nc']) ? trim($_POST['wp_nc']) : '';
+			$wp_nc = isset($_POST['wp_nc']) ? strtoupper(trim($_POST['wp_nc'])) : '';
 			tpl_set_var('wp_nc', htmlspecialchars($wp_nc, ENT_COMPAT, 'UTF-8'));
 
 			//difficulty

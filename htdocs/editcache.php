@@ -217,8 +217,8 @@ function getWaypoints($cacheid)
 
 					$log_pw = isset($_POST['log_pw']) ? mb_substr($_POST['log_pw'], 0, 20) : $cache_record['logpw'];
 					// fix #4356: gc waypoints are frequently copy&pasted with leading spaces
-					$wp_gc = isset($_POST['wp_gc']) ? trim($_POST['wp_gc']) : $cache_record['wp_gc'];  // Ocprop
-					$wp_nc = isset($_POST['wp_nc']) ? trim($_POST['wp_nc']) : $cache_record['wp_nc'];
+					$wp_gc = isset($_POST['wp_gc']) ? strtoupper(trim($_POST['wp_gc'])) : $cache_record['wp_gc'];  // Ocprop
+					$wp_nc = isset($_POST['wp_nc']) ? strtoupper(trim($_POST['wp_nc'])) : $cache_record['wp_nc'];
 
 					// name
 					$name_not_ok = false;

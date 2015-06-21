@@ -562,7 +562,7 @@ input {	border:1px solid #555;	background-color:white;	padding:1px 2px 1px 2px; 
 *.input300 {width:300px;}
 *.input350 {width:350px;}	/* overwrite saved query */
 *.input400 {width:400px;}	/* short cachedescription */
-*.input450 {width:450px;}	/* cache list wp inputs */
+*.input500 {width:500px;}	/* cache list wp inputs */
 
 input.checkbox {width:12px; height:12px; font-size:12px; border:0;}
 
@@ -663,6 +663,8 @@ textarea { font-family: Arial, sans-serif, Tahoma, Verdana; font-size: 8pt; }
 textarea.cachedesc { width:750px; height:500px; }  /* only cacheeditor */
 textarea.hint {	width:750px; height:100px; }  /* only cacheditor */
 textarea.logs {	width:640px; height:300px; }  /* only logeditor */
+textarea.listdesc2 { width:580px; height:120px; }  /* only list desc editor */
+textarea.listdesc3 { width:580px; height:220px; }  /* only list desc editor */
 textarea.userdesc { width:750px; height:400px; }  /* only user desc editor */
 textarea.removelogs {	width:620px; height:200px; }  /* log removal */
 
@@ -829,6 +831,9 @@ p.editlog { font-weight: 400; display:inline; }
   border: 1px solid #a9a9a9;
   padding: 2px;
 }
+
+/* cache lists */
+div.cachelistinfo { border:1px solid #a0a0a0; }
 
 /* Pager */
 .pager { font-size:14px; }

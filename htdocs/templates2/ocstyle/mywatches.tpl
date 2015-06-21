@@ -116,7 +116,7 @@
 	</div>
 
 	{if $cachelists|@count}
-		<p><b>{t}Single caches{/t}:</b></p>
+		<p>{t}Single caches{/t}:</p>
 	{/if}
 
 	<table class="null" border="0" cellspacing="0" width="98%">
@@ -154,7 +154,7 @@
 	</table>
 
 	{if $cachelists|@count}
-		<p><br /><b>{t}Lists{/t}:</b></p>
+		<p><br />{t}Lists{/t}:</p>
 		{include file="res_cachelists.tpl"}
 	{/if}
 {/if}

@@ -428,6 +428,31 @@
 		update_triggers();		// runs maintain-123.inc.php
 	}
 
+	function dbv_124()  // update cache lists implementation
+	{
+		if (!sql_table_exists('stat_cache_lists'))
+		{
+			sql("
+				CREATE TABLE `stat_cache_lists` (
+				  `cache_list_id` int(10) NOT NULL,
+				  `entries` int(6) NOT NULL default '0' COMMENT 'via trigger in cache_list_items',
+				  `watchers` int(6) NOT NULL default '0' COMMENT 'via trigger in cache_list_watches',
+				  PRIMARY KEY (`cache_list_id`)
+				) ENGINE=MyISAM DEFAULT CHARSET=utf8
+				SELECT `id` `cache_list_id`, `entries`, `watchers` FROM `cache_lists`");
+		}
+		if (sql_field_exists('cache_lists','entries'))
+			sql("ALTER TABLE `cache_lists` DROP COLUMN `entries`");
+		if (sql_field_exists('cache_lists','watchers'))
+			sql("ALTER TABLE `cache_lists` DROP COLUMN `watchers`");
+		if (!sql_field_exists('cache_lists','description'))
+			sql("ALTER TABLE `cache_lists` ADD COLUMN `description` mediumtext NOT NULL");
+		if (!sql_field_exists('cache_lists','desc_htmledit'))
+			sql("ALTER TABLE `cache_lists` ADD COLUMN `desc_htmledit` tinyint(1) unsigned NOT NULL default '1'");
+
+		update_triggers();		// runs maintain-124.inc.php
+	}
+
 
 	// When adding new mutations, take care that they behave well if run multiple
 	// times. This improves robustness of database versioning.

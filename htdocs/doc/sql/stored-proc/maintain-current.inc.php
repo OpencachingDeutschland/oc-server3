@@ -254,11 +254,11 @@
 	sql_dropProcedure('sp_updateall_cachelist_counts');
 	sql("CREATE PROCEDURE sp_updateall_cachelist_counts (OUT nModified INT)
 	     BEGIN
-				UPDATE `cache_lists` SET `entries`=
-					(SELECT COUNT(*) from `cache_list_items` WHERE `cache_list_items`.`cache_list_id`=`cache_lists`.`id`); 
+				UPDATE `stat_cache_lists` SET `entries`=
+					(SELECT COUNT(*) from `cache_list_items` WHERE `cache_list_items`.`cache_list_id`=`stat_cache_lists`.`cache_list_id`); 
 				SET nModified = ROW_COUNT();
-				UPDATE `cache_lists` SET `watchers`=
-					(SELECT COUNT(*) from `cache_list_watches` WHERE `cache_list_watches`.`cache_list_id`=`cache_lists`.`id`); 
+				UPDATE `stat_cache_lists` SET `watchers`=
+					(SELECT COUNT(*) from `cache_list_watches` WHERE `cache_list_watches`.`cache_list_id`=`stat_cache_lists`.`cache_list_id`); 
 				SET nModified = nModified + ROW_COUNT();
 	     END;");
 
@@ -1151,12 +1151,21 @@
 						END IF;
 					END;");
 
+	sql_dropTrigger('cacheListsAfterInsert');
+	sql("CREATE TRIGGER `cacheListsAfterInsert` AFTER INSERT ON `cache_lists` 
+				FOR EACH ROW
+					BEGIN
+						INSERT IGNORE INTO `stat_cache_lists` (`cache_list_id`) VALUES (NEW.`id`);
+					END;");
+
 	sql_dropTrigger('cacheListsBeforeUpdate');
 	sql("CREATE TRIGGER `cacheListsBeforeUpdate` BEFORE UPDATE ON `cache_lists` 
 				FOR EACH ROW 
 					BEGIN 
-					  IF NEW.`id` != OLD.`id` OR
-					     NEW.`uuid` != OLD.`uuid` OR
+					  IF NEW.`id` != OLD.`id` THEN
+							CALL error_cache_list_id_must_not_be_changed();
+						END IF;
+						IF NEW.`uuid` != OLD.`uuid` OR
 						   NEW.`user_id` != OLD.`user_id` OR
 						   NEW.`name` != OLD.`name` OR 
 							 NEW.`is_public` != OLD.`is_public` THEN
@@ -1177,6 +1186,7 @@
 						SET @DELETING_CACHELIST=TRUE;
 						DELETE FROM `cache_list_watches` WHERE `cache_list_watches`.`cache_list_id`=OLD.`id`;
 						DELETE FROM `cache_list_items` WHERE `cache_list_items`.`cache_list_id`=OLD.`id`;
+						DELETE FROM `stat_cache_lists` WHERE `cache_list_id`=OLD.`id`;
 						SET @DELETING_CACHELIST=FALSE;
 					END;");
 
@@ -1186,7 +1196,8 @@
 					BEGIN
 						/* dont overwrite date values while XML client is running */
 						IF ISNULL(@XMLSYNC) OR @XMLSYNC!=1 THEN
-							UPDATE `cache_lists` SET `last_modified`=NOW(), `last_added`=NOW(), `entries`=`entries`+1 WHERE `cache_lists`.`id`=NEW.`cache_list_id`;
+							UPDATE `cache_lists` SET `last_modified`=NOW(), `last_added`=NOW() WHERE `cache_lists`.`id`=NEW.`cache_list_id`;
+							UPDATE `stat_cache_lists` SET `entries`=`entries`+1 WHERE `stat_cache_lists`.`cache_list_id`=NEW.`cache_list_id`;
 							IF (SELECT `user_id` FROM `cache_list_watches` `clw` WHERE `clw`.`cache_list_id`=NEW.`cache_list_id` LIMIT 1) IS NOT NULL THEN
 								CALL sp_update_watchstat(NEW.`cache_id`);
 							END IF;
@@ -1201,11 +1212,9 @@
 						IF ISNULL(@XMLSYNC) OR @XMLSYNC!=1 THEN
 							UPDATE `cache_lists` SET `last_modified`=NOW() WHERE `cache_lists`.`id`=OLD.`cache_list_id`;
 							IF NEW.`cache_list_id` != OLD.`cache_list_id` THEN
-								UPDATE `cache_lists` SET `entries`=`entries`-1 WHERE `cache_lists`.`id`=OLD.`cache_list_id`;  
-								UPDATE `cache_lists` SET `last_modified`=NOW(), `last_added`=NOW(), `entries`=`entries`+1 WHERE `cache_lists`.`id`=NEW.`cache_list_id`;
-							END IF;
-							IF NEW.`cache_id` != OLD.`cache_id` THEN
-								UPDATE `cache_lists` SET `last_added`=NOW() WHERE `cache_lists`.`id`=NEW.`cache_list_id`;
+								UPDATE `stat_cache_lists` SET `entries`=`entries`-1 WHERE `stat_cache_lists`.`cache_list_id`=OLD.`cache_list_id`;  
+								UPDATE `stat_cache_lists` SET `entries`=`entries`+1 WHERE `stat_cache_lists`.`cache_list_id`=NEW.`cache_list_id`;
+								UPDATE `cache_lists` SET `last_modified`=NOW(), `last_added`=NOW() WHERE `cache_lists`.`id`=NEW.`cache_list_id`;
 							END IF;
 							IF (SELECT `user_id` FROM `cache_list_watches` `clw` WHERE `clw`.`cache_list_id`=OLD.`cache_list_id` LIMIT 1) IS NOT NULL THEN
 								CALL sp_update_watchstat(OLD.`cache_id`);
@@ -1220,14 +1229,15 @@
 	sql("CREATE TRIGGER `cacheListItemsAfterDelete` AFTER DELETE ON `cache_list_items` 
 				FOR EACH ROW 
 					BEGIN
-						/* avoid recursive access to cache_lists */
+						/* avoid recursive access to cache_lists; optimization */
 						IF NOT IFNULL(@DELETING_CACHELIST,FALSE) THEN
 							/* dont overwrite date values while XML client is running */
 							IF ISNULL(@XMLSYNC) OR @XMLSYNC!=1 THEN
-								UPDATE `cache_lists` SET `last_modified`=NOW(), `entries`=`entries`-1 WHERE `cache_lists`.`id`=OLD.`cache_list_id`;
-							IF (SELECT `user_id` FROM `cache_list_watches` `clw` WHERE `clw`.`cache_list_id`=OLD.`cache_list_id` LIMIT 1) IS NOT NULL THEN
-								CALL sp_update_watchstat(OLD.`cache_id`);
-							END IF;
+								UPDATE `stat_cache_lists` SET `entries`=`entries`-1 WHERE `stat_cache_lists`.`cache_list_id`=OLD.`cache_list_id`;
+								UPDATE `cache_lists` SET `last_modified`=NOW() WHERE `cache_lists`.`id`=OLD.`cache_list_id`;
+								IF (SELECT `user_id` FROM `cache_list_watches` `clw` WHERE `clw`.`cache_list_id`=OLD.`cache_list_id` LIMIT 1) IS NOT NULL THEN
+									CALL sp_update_watchstat(OLD.`cache_id`);
+								END IF;
 							END IF;
 						END IF;
 					END;");
@@ -1238,7 +1248,7 @@
 					BEGIN
 						/* dont overwrite date values while XML client is running */
 						IF ISNULL(@XMLSYNC) OR @XMLSYNC!=1 THEN
-							UPDATE `cache_lists` SET `watchers`=`watchers`+1 WHERE `cache_lists`.`id`=NEW.`cache_list_id`;
+							UPDATE `stat_cache_lists` SET `watchers`=`watchers`+1 WHERE `stat_cache_lists`.`cache_list_id`=NEW.`cache_list_id`;
 							CALL sp_update_list_watchstat(NEW.`cache_list_id`);
 						END IF; 
 					END;");
@@ -1250,8 +1260,8 @@
 						/* dont overwrite date values while XML client is running */
 						IF ISNULL(@XMLSYNC) OR @XMLSYNC!=1 THEN
 							IF NEW.`cache_list_id` != OLD.`cache_list_id` THEN
-								UPDATE `cache_lists` SET `watchers`=`watchers`-1 WHERE `cache_lists`.`id`=OLD.`cache_list_id`;  
-								UPDATE `cache_lists` SET `watchers`=`watchers`+1 WHERE `cache_lists`.`id`=NEW.`cache_list_id`;
+								UPDATE `stat_cache_lists` SET `watchers`=`watchers`-1 WHERE `stat_cache_lists`.`cache_list_id`=OLD.`cache_list_id`;  
+								UPDATE `stat_cache_lists` SET `watchers`=`watchers`+1 WHERE `stat_cache_lists`.`cache_list_id`=NEW.`cache_list_id`;
 							END IF;
 							CALL sp_update_list_watchstat(OLD.`cache_list_id`);
 							CALL sp_update_list_watchstat(NEW.`cache_list_id`);
@@ -1262,12 +1272,12 @@
 	sql("CREATE TRIGGER `cacheListWatchesAfterDelete` AFTER DELETE ON `cache_list_watches` 
 				FOR EACH ROW 
 					BEGIN
-						/* avoid recursive access to cache_lists */
+						/* avoid recursive access to cache_lists; optimization */
 						IF NOT IFNULL(@DELETING_CACHELIST,FALSE) THEN
 							/* dont overwrite date values while XML client is running */
 							IF ISNULL(@XMLSYNC) OR @XMLSYNC!=1 THEN
-								UPDATE `cache_lists` SET `watchers`=`watchers`-1 WHERE `cache_lists`.`id`=OLD.`cache_list_id`;
-							CALL sp_update_list_watchstat(OLD.`cache_list_id`);
+								UPDATE `stat_cache_lists` SET `watchers`=`watchers`-1 WHERE `stat_cache_lists`.`cache_list_id`=OLD.`cache_list_id`;
+								CALL sp_update_list_watchstat(OLD.`cache_list_id`);
 							END IF;
 						END IF;
 					END;");

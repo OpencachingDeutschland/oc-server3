@@ -385,6 +385,7 @@
 		{
 			$options['searchtype'] = 'bylist';
 			$options['listid'] = isset($_REQUEST['listid']) ? $_REQUEST['listid'] + 0 : 0;
+			$options['cachelist'] = cachelist::getListById($options['listid']);  // null for invalid ID
 		}
 		elseif (isset($_REQUEST['searchall']))
 		{

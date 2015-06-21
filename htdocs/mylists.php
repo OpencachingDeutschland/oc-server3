@@ -19,6 +19,9 @@
 	$list_public = isset($_REQUEST['list_public']) ? $_REQUEST['list_public'] + 0 : 0;
 	$list_caches = isset($_REQUEST['list_caches']) ? strtoupper(trim($_REQUEST['list_caches'])) : '';
 	$watch = isset($_REQUEST['watch']);
+	$desctext = isset($_REQUEST['desctext']) ? $_REQUEST['desctext'] : '';
+	$descMode = isset($_REQUEST['descMode']) ? min(3,max(2,$_REQUEST['descMode']+0)) : 3;
+	$edit_list = false;
 
 	if (isset($_REQUEST['create']))
 	{
@@ -46,13 +49,34 @@
 		$list = new cachelist($_REQUEST['edit'] + 0);
 		if ($list->exist() && $list->getUserId() == $login->userid)
 		{
-			$tpl->assign('edit_list', true);
-			$tpl->assign('listid', $list->getId());
-			$tpl->assign('caches', $list->getCaches());
-			$tpl->assign('watch', $list->isWatchedByMe());
+			$edit_list = true;
 			$list_name = $list->getName();
 			$list_public = $list->isPublic();
+			$watch = $list->isWatchedByMe();
+			$desctext = $list->getDescription();
+			$descMode = $list->getDescHtmledit() ? 3 : 2;
 			$list_caches = '';
+		}
+	}
+
+	if (isset($_REQUEST['switchDescMode']) && 
+	    isset($_REQUEST['switchDescMode']) && $_REQUEST['switchDescMode'] == 1)
+	{
+		if (isset($_REQUEST['listid']))
+		{
+			// switching editor mode while editing existing list
+			$list = new cachelist($_REQUEST['listid'] + 0);
+			if ($list->exist() && $list->getUserId() == $login->userid)
+			{
+				$edit_list = true;
+				$tpl->assign('show_editor', true);
+			}
+		}
+		else
+		{
+			// switching desc mode while creating new list
+			$tpl->assign('newlist_mode', true);
+			$tpl->assign('show_editor', true);
 		}
 	}
 
@@ -64,13 +88,12 @@
 			if (!$list->setName($list_name))
 			{
 				$tpl->assign('name_error', true);
-				$tpl->assign('edit_list', true);
-				$tpl->assign('listid', $list->getId());
-				$tpl->assign('caches', $list->getCaches());
+				$edit_list = true;
 			}
 			else
 			{
 				$list->setPublic($list_public);
+				$list->setDescription($desctext, $descMode == 3);
 				$list->save();
 			}
 			$list->watch($watch);
@@ -92,15 +115,42 @@
 		// All dependent deletion and cleanup is done via trigger.
 	}
 
+	if ($descMode == 3)
+	{
+		$tpl->add_header_javascript('resource2/tinymce/tiny_mce_gzip.js');
+		$tpl->add_header_javascript('resource2/tinymce/config/list.js.php?lang='.strtolower($opt['template']['locale']));
+	}
+
+	if ($edit_list)
+	{
+		$tpl->assign('edit_list', true);
+		$tpl->assign('listid', $list->getId());
+		$tpl->assign('caches', $list->getCaches());
+	}
+	else
+	{
+		// set defaults for creating a new list
+		$list_name = '';
+		$list_public = false;
+		$watch = false;
+		$desctext = '';
+		// keep descMode of previous operation
+		$list_caches = '';
+	}
+
 	$tpl->assign('cachelists', cachelist::getMyLists());
 	$tpl->assign('show_status', true);
 	$tpl->assign('show_user', false);
 	$tpl->assign('show_watchers', true);
 	$tpl->assign('show_edit', true);
 	$tpl->assign('togglewatch', false);
+	$tpl->assign('fromsearch', isset($_REQUEST['fromsearch']) && $_REQUEST['fromsearch'] == 1);
 
 	$tpl->assign('list_name', $list_name);
 	$tpl->assign('list_public', $list_public);
+	$tpl->assign('watch', $watch);
+	$tpl->assign('desctext', $desctext);
+	$tpl->assign('descMode', $descMode);
 	$tpl->assign('list_caches', $list_caches);
 
 	$tpl->display();

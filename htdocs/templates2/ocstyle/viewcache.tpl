@@ -282,13 +282,27 @@
 <!-- End Cachedetails -->
 
 <!-- Attributes & cache lists -->
+<script type="text/javascript">
+function showalllists()
+{literal}{{/literal}
+	document.getElementById('morelists').style.display = 'none';
+	for (n=5; n<={$cachelists|@count}; ++n)
+		document.getElementById('cachelist' + n.toString()).style.display = '';
+{literal}}{/literal}
+</script>
+
 {if $attributes|@count || $cachelists|@count}
 	<div class="content2-container line-box" style="height:0px"></div> {* MSIE needs explicit height *}
 	<div class="content2-container">
 		{if $cachelists|@count}
 			<div style="float:right; max-width:350px">
+				{assign var="n" value="0"}
 				{foreach from=$cachelists item=cachelist}
-					<p style="text-indent:-22px; padding:0"><a href="cachelists.php"><img src="resource2/{$opt.template.style}/images/viewcache/list-18.png" title="{t}Cache list{/t}"/></a>
+					{assign var="n" value=$n+1}
+					{if $n==5 && $cachelists|@count > 5}
+						<p id="morelists" style="padding:0; line-height:1em"><a href="javascript:showalllists()">{t}mehr{/t} ...</a></p>
+					{/if}
+					<p id="cachelist{$n}" style="text-indent:-22px; padding:0; line-height:1em; {if $n>=5 && $cachelists|@count > 5}display:none{/if}"><a href="cachelists.php"><img src="resource2/{$opt.template.style}/images/misc/16x16-list.png" title="{t}Cache list{/t}" style="padding-right:1px"/></a>
 					{include file="res_cachelist_link.tpl"} {if $cachelist.is_public}{t}by{/t} <a href="viewprofile.php?userid={$cachelist.user_id}">{$cachelist.username|escape}</a>{else} ({t}private{/t}){/if}
 					</p>
 				{/foreach}

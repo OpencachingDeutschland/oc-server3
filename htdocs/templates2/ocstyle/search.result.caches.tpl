@@ -9,6 +9,25 @@
 
 <script type="text/javascript" src="resource2/{$opt.template.style}/js/wz_tooltip.js"></script>
 
+{if $cachelist}
+	<div class="content2-container cachelistinfo" style="margin-top:10px" >
+	<p style="margin-top:0.5em; padding-left:10px; padding-right:8px">
+		<img src="resource2/ocstyle/images/misc/16x16-list.png" />
+		<a href="cachelists.php">{t}Cache list{/t}</a> <b>{$cachelist.name|escape}</b>
+		{if $cachelist.watched_by_me}<img src="resource2/{$opt.template.style}/images/viewcache/16x16-watch.png" title="{t}I am watching this list.{/t}" />{/if}
+		{if $cachelist.is_public}{t}by{/t} <a href="viewprofile.php?userid={$cachelist.user_id}">{$cachelist.username|escape}</a>{else}({t}private{/t}){/if}
+		&nbsp;
+		{if $cachelist.user_id==$login.userid}[<a href="mylists.php?edit={$cachelist.id}&fromsearch=1">{t}edit{/t}</a>]{/if}
+		[<a href="cachelist.php?id={$cachelist.id}&{if $cachelist.watched_by_me}dont{/if}watch">{if $cachelist.watched_by_me}{t}nicht beobachten{/t}{else}{t}beobachten{/t}{/if}</a>]
+	</p>
+	{if $cachelist.description != ''}
+	<div style="padding: 0 8px 4px 10px">
+		{$cachelist.description}
+	</div>
+	{/if}
+	</div>
+{/if}
+
 <div class="content2-container bg-blue02" style="margin-top:20px;">
 	<table cellspacing="0" cellpadding="0" width="100%" border="0"><tr>
 		<td style="white-space:nowrap; min-width:150px">

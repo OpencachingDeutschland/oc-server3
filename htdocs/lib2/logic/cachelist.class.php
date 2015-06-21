@@ -10,6 +10,7 @@
 
 require_once($opt['rootpath'] . 'lib2/logic/rowEditor.class.php');
 require_once($opt['rootpath'] . 'lib2/translate.class.php');
+require_once($opt['rootpath'] . 'lib2/OcHTMLPurifier.class.php');
 
 
 class cachelist
@@ -30,7 +31,8 @@ class cachelist
 		$this->reCachelist->addDate('last_added', null, true);
 		$this->reCachelist->addString('name', '', false);
 		$this->reCachelist->addInt('is_public', 0, false);
-		$this->reCachelist->addInt('entries', 0, false);
+		$this->reCachelist->addString('description', '', false);
+		$this->reCachelist->addInt('desc_htmledit', 0, false);
 
 		$this->nCachelistId = $nNewCachelistId + 0;
 
@@ -83,14 +85,40 @@ class cachelist
 		return $this->reCachelist->setValue('is_public', $value ? 1 : 0); 
 	}
 
+	// return description in HTML format
+	function getDescription()
+	{
+		return $this->reCachelist->getValue('description');
+	}
+
+	function getDescHtmledit()
+	{
+		return $this->reCachelist->getValue('desc_htmledit');
+	}
+
+	// set description in HTML format
+	function setDescription($desc, $htmledit)
+	{
+		global $opt;
+		$this->reCachelist->setValue('desc_htmledit', $htmledit ? 1 : 0);
+		$purifier = new OcHTMLPurifier($opt);
+		return $this->reCachelist->setValue('description', $purifier->purify($desc));
+	}
+
 	function getCachesCount()
 	{
-		return $this->reCachelist->getValue('entries');
+		return sql_value("
+			SELECT `entries` FROM `stat_cache_lists` 
+			WHERE `stat_cache_lists`.`cache_list_id`=" . sql_escape($this->getId()),
+			0);
 	}
 
 	function getWatchersCount()
 	{
-		return $this->reCachelist->getValue('watchers');
+		return sql_value("
+			SELECT `watchers` FROM `stat_cache_lists` 
+			WHERE `stat_cache_lists`.`cache_list_id`=" . sql_escape($this->getId()),
+			0);
 	}
 
 	function save()
@@ -169,7 +197,7 @@ class cachelist
 
 	function addCacheByID($cache_id)
 	{
-		return $this->addCache(new Cache($cache_id));
+		return $this->addCache(new cache($cache_id));
 	}
 
 	function addCache($cache)
@@ -245,23 +273,36 @@ class cachelist
 
 	static function getPublicListCount()
 	{
-		return sql_value("SELECT COUNT(*) FROM `cache_lists` WHERE `is_public` AND `entries`>0", 0);
+		return sql_value("
+			SELECT COUNT(*) 
+			FROM `cache_lists`
+			LEFT JOIN `stat_cache_lists` ON  `stat_cache_lists`.`cache_list_id`=`cache_lists`.`id`
+			WHERE `is_public` AND `entries`>0", 0);
 	}
 
 	static function getPublicLists($startat=0, $maxitems=PHP_INT_MAX)
 	{
-		return cachelist::getLists("is_public AND entries>0", $startat, $maxitems);
+		return cachelist::getLists("`is_public` AND `entries`>0", $startat, $maxitems);
 	}
 
 	static function getPublicListsOf($userid)
 	{
-		return cachelist::getLists("is_public AND entries>0 AND `cache_lists`.`user_id`=" . sql_escape($userid));
+		return cachelist::getLists("`is_public` AND `entries`>0 AND `cache_lists`.`user_id`=" . sql_escape($userid));
 	}
 
-	static function getListsByCacheId($cacheid)
+	static function getListsByCacheId($cacheid, $ownlists_only)
 	{
 		global $login;
-		return cachelist::getLists("`id` IN (SELECT DISTINCT `cache_list_id` FROM `cache_list_items` WHERE `cache_id`=" . sql_escape($cacheid) . ") AND (is_public OR `cache_lists`.`user_id`=" . sql_escape($login->userid) . ")");
+		return cachelist::getLists("`id` IN (SELECT `cache_list_id` FROM `cache_list_items` WHERE `cache_id`=" . sql_escape($cacheid) . ") AND (" . ($ownlists_only ? "" : "is_public OR ") . "`cache_lists`.`user_id`=" . sql_escape($login->userid) . ")");
+	}
+
+	static function getListById($listid)
+	{
+		$lists = cachelist::getLists("`id`=" . sql_escape($listid));
+		if (count($lists))
+			return $lists[0];
+		else
+			return false;
 	}
 
 	private function getLists($condition, $startat=0, $maxitems=PHP_INT_MAX)
@@ -271,11 +312,13 @@ class cachelist
 
 		$rs = sql("
 			SELECT `cache_lists`.`id`, `cache_lists`.`user_id`, `user`.`username`, 
-			       `cache_lists`.`name`, `cache_lists`.`is_public`, 
-						 `cache_lists`.`entries`, `cache_lists`.`watchers`,
+			       `cache_lists`.`name`, `cache_lists`.`is_public`,
+			       `cache_lists`.`description`, `cache_lists`.`desc_htmledit`,
 			       `cache_lists`.`user_id`='&1' `own_list`,
+			       `stat_cache_lists`.`entries`, `stat_cache_lists`.`watchers`,
 			       `w`.`user_id` IS NOT NULL `watched_by_me`
 			FROM `cache_lists`
+			LEFT JOIN `stat_cache_lists` ON `stat_cache_lists`.`cache_list_id`=`cache_lists`.`id`
 			LEFT JOIN `user` ON `user`.`user_id`=`cache_lists`.`user_id`
 			LEFT JOIN `cache_list_watches` `w` ON `w`.`cache_list_id`=`cache_lists`.`id` AND `w`.`user_id`='&1'
 			WHERE $condition

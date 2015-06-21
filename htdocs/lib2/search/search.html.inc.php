@@ -149,6 +149,12 @@ function search_output()
 		$tpl->assign('search_in_gm_zip', $search_in_gm_zip);
 	}
 
+	// cachelist data
+	if (isset($options['cachelist']))
+		$tpl->assign('cachelist', $options['cachelist']);
+	else
+		$tpl->assign('cachelist', false);
+
 	// disable "edit options" for internally generated searches
 	if ($options['searchtype'] == 'bylist')
 	  $tpl->assign('disable_edit_options',true);

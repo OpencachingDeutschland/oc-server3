@@ -26,27 +26,39 @@
 	<script type="text/javascript">
 	function newlist()
 	{
-	  document.getElementById('createnewlist').style.display='none';
-		document.getElementById('addlist').style.display='block';
-		document.getElementById('name_error').style.display='none';
-		document.getElementById('list_name').value='';
-		document.getElementById('list_caches').value='';
+	  document.getElementById('createnewlist').style.display = 'none';
+		document.getElementById('addlist').style.display = 'block';
+		document.getElementById('name_error').style.display = 'none';
+		document.getElementById('list_name').value = '';
+		document.getElementById('list_caches').value = '';
 		document.getElementById('list_name').focus();
 	}
 
 	function cancel_newlist()
 	{
-		document.getElementById('addlist').style.display='none';
-		document.getElementById('createnewlist').style.display='block';
+		document.getElementById('addlist').style.display = 'none';
+		document.getElementById('createnewlist').style.display = 'block';
+	}
+
+	function showdesc()
+	{
+		document.getElementById('desc0').style.display = 'none';
+		document.getElementById('desc1').style.display = '';
+		document.getElementById('desc2').style.display = '';
+		document.getElementById('desc3').style.display = '';
+		document.getElementById('desc3').style.width = '580px';
 	}
 	</script>
 	{/literal}
 
-	<br />
-	<form method="post" action="mylists.php">
+	<br id="enternewlist" />
+	<form method="post" action="{if $fromsearch}cachelist{else}mylists{/if}.php?id={$listid}" name="editdesc" id="editlist_form">
 		{if $edit_list}<input type="hidden" name="listid" value="{$listid}" />{/if}
-		<span id="createnewlist" {if $name_error || $edit_list}style="display:none"{/if}>&nbsp;<input type="button" name="new" value="{t}Create new list{/t}" class="formbutton widebutton" onclick="newlist()" /></span>
-		<table class="table" id="addlist" {if !($name_error || $edit_list)}style="display:none"{/if}>
+		<input id="descMode" type="hidden" name="descMode" value="3" />
+		<input type="hidden" id="switchDescMode" name="switchDescMode" value="0" />
+		{if $fromsearch}<input type="hidden" name="fromsearch" value="{$fromsearch}" />{/if}
+		<span id="createnewlist" {if $name_error || $edit_list || $newlist_mode}style="display:none"{/if}>&nbsp;<input type="button" name="new" value="{t}Create new list{/t}" class="formbutton widebutton" onclick="newlist()" /></span>
+		<table class="table" id="addlist" {if !($name_error || $edit_list || $newlist_mode)}style="display:none"{/if}>
 			{if !$edit_list}
 			<tr>
 				<td colspan="2"><b>{t}Create new list{/t}:</b></td>
@@ -55,8 +67,8 @@
 			{/if}
 			<tr>
 				<td>{t}Name{/t}:</td>
-				<td><input type="text" id="list_name" name="list_name" maxlength="80" value="{$list_name}" class="input450" />
-				<span id="name_error">{if $name_error}&nbsp;<span class="errormsg"><nobr>{t}Invalid name{/t}</nobr></span>{/if}</span></td>
+				<td><input type="text" id="list_name" name="list_name" maxlength="80" value="{$list_name}" class="input500" />
+				<nobr><span id="name_error">{if $name_error}&nbsp;<span class="errormsg">{t}Invalid name{/t}</span></nobr>{/if}</span></td>
 			</tr>
 			<tr>
 				<td style="vertical-align:top">{t}Status{/t}:</td>
@@ -68,9 +80,36 @@
 				<td><input type="checkbox" id="watch" name="watch" value="1" {if $watch}checked="checked"{/if} /> <label for="watch">{t}I want to receive notifications about any logs for caches in this list.{/t}</label></td>
 			</tr>
 			<tr><td class="separator"></td></tr>
+
+			<tr id="desc1" style="{if $desctext=='' && !$show_editor}display:none{/if}" >
+				<td></td>
+				<td><span id="scriptwarning" class="errormsg">{t}JavaScript is disabled in your browser, you can enter (HTML) text only. To use the editor, please enable JavaScript.{/t}</span></td>
+			</tr>
+			<tr>
+				<td style="vertical-align:top; padding-top:0.2em;">
+					{t}Description{/t}:<br />
+					<div id="desc2" class="menuBar" style="margin-top:12px; {if $desctext=='' && !$show_editor}display:none{/if}" >
+						<nobr>
+						<span id="descHtml" class="buttonNormal" onclick="btnSelect(2)" onmouseover="btnMouseOver(2)" onmouseout="btnMouseOut(2)">{t}&lt;html&gt;{/t}</span>
+						<span class="buttonSplitter">|</span>
+						<span id="descHtmlEdit" class="buttonNormal" onclick="btnSelect(3)" onmouseover="btnMouseOver(3)" onmouseout="btnMouseOut(3)">{t}Editor{/t}</span>
+						</nobr>
+					</div>
+				</td>
+				<td id="desc0" style="{if $desctext!='' || $show_editor}display:none{/if}" >
+					<input type="button" value="{t}Add{/t}" onclick="javascript:showdesc()" class="formbutton" />
+				</td>
+				<td id="desc3" style="{if $desctext=='' && !$show_editor && !$newlist_mode}display:none{/if}" >
+					<textarea name="desctext" id="desctext" cols="70" rows="7" class="listdesc{$descMode}" >{$desctext}</textarea>
+					{if $descMode==2}<br />{/if}
+					<small>{t}By submitting I accept the <a href="articles.php?page=impressum#tos" target="_blank">Opencaching.de Terms of Service</a> and the <a href="articles.php?page=impressum#datalicense" target="_blank">Opencaching.de Datalicense</a>{/t}</small>
+				</td>
+			</tr>
+			<tr><td class="separator"></td></tr>
+			<tr><td class="separator"></td></tr>
 			<tr>
 				<td style="vertical-align:top; white-space:nowrap">{if $edit_list}{t}Add caches{/t}{else}{t}Caches{/t}{/if}:</td>
-				<td><input type="text" id="list_caches" name="list_caches" maxlength="60" value="{$list_caches}" class="input450 waypoint" /><br /></td>
+				<td><input type="text" id="list_caches" name="list_caches" maxlength="60" value="{$list_caches}" class="input500 waypoint" /><br /></td>
 			</tr>
 			<tr>
 				<td></td>
@@ -105,8 +144,13 @@
 		</table>
 	</form>
 
-	{if $name_error}
+	{include file="js/editor.inc.tpl"}
+
 	<script type="text/javascript">
-		document.getElementById('list_name').focus();
-	</script>
+	{if $newlist_mode}
+		document.getElementById('enternewlist').scrollIntoView();
 	{/if}
+	{if $name_error}
+		document.getElementById('list_name').focus();
+	{/if}
+	</script>

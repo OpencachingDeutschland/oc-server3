@@ -30,8 +30,12 @@
 	$MAXITEMS = 25;
 	$startat = isset($_REQUEST['startat']) ? $_REQUEST['startat']+0 : 0;
 	$listcount = cachelist::getPublicListCount();
+	$name_filter = isset($_REQUEST['name']) ? $_REQUEST['name'] : '';
+	$by_filter = isset($_REQUEST['by']) ? $_REQUEST['by'] : '';
 
-	$tpl->assign('cachelists', cachelist::getPublicLists($startat, $MAXITEMS));
+	$tpl->assign('name_filter', $name_filter);
+	$tpl->assign('by_filter', $by_filter);
+	$tpl->assign('cachelists', cachelist::getPublicLists($startat, $MAXITEMS, $name_filter, $by_filter));
 	$tpl->assign('show_status', false);
 	$tpl->assign('show_user', true);
 	// Do not show watchers because this would allow conclusions on what the list owner watches. 

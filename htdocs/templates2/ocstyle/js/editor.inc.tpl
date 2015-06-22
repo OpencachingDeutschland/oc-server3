@@ -41,7 +41,11 @@
 	function SwitchToHtmlDesc()
 	{
 		document.getElementById("descMode").value = 2;
-		CachelistSwitchHack();
+
+		switchfield = document.getElementById("switchDescMode");
+		if (switchfield != null)
+			switchfield.value = "1";
+
 		if (use_tinymce == 1)
 			document.editdesc.submit();
 	}
@@ -49,20 +53,13 @@
 	function SwitchToHtmlEditDesc()
 	{
 		document.getElementById("descMode").value = 3;
-		CachelistSwitchHack();
-		if (use_tinymce == 0)
-			document.editdesc.submit();
-	}
 
-	function CachelistSwitchHack()
-	{
 		switchfield = document.getElementById("switchDescMode");
 		if (switchfield != null)
-		{
 			switchfield.value = "1";
-			lform = document.getElementById("editlist_form");
-			lform.action = lform.action.replace('cachelist.php', 'mylists.php');
-		}
+
+		if (use_tinymce == 0)
+			document.editdesc.submit();
 	}
 
 	function mnuSelectElement(e)

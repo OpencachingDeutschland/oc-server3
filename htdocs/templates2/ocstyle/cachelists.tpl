@@ -10,9 +10,51 @@
 		{t}Cache lists{/t}
 	</div>
 
-	<p>
-		{t}Since July 2015, all registered Opencaching users can create and publish own geocache lists via their <a href="mylists.php">user profile</a>. The following lists have been published so far:{/t}
-	</p>
+	{literal}
+	<script type="text/javascript">
+	function resetfilter()
+	{
+		document.getElementById('name_filter').value = '';
+		document.getElementById('by_filter').value = '';
+		submitbutton('reset');
+	}
+	</script>
+	{/literal}
+
+	<div class="content2-container">
+		<div class="floatbox">
+			<form method="get" action="cachelists.php">
+				<table class="table" >
+					<tr>
+						<td>{t}List name{/t}:</td>
+						<td><input id="name_filter" name="name" value="{$name_filter}" class="input170" /></td>
+					</tr>
+					<tr>
+						<td>{t}By{/t}:</td>
+						<td><input id="by_filter" name="by" value="{$by_filter}" class="input170" /></td>
+					</tr>
+					<tr><td class="separator"></td></tr>
+					<tr>
+						<td colspan="2">
+							<input type="submit" name="filter" value="{t}Search{/t}" class="formbutton" onclick="submitbutton('filter')" />&nbsp;							
+							<input type="submit" name="reset" value="{t}Reset{/t}" class="formbutton" onclick="resetfilter()" />
+						</td>
+					</tr>
+					<tr><td class="separator"></td></tr>
+					<tr><td class="separator"></td></tr>
+				</table>
+			</form>
+		</div>
+
+		<div>
+			<div style="height:4px"></div>
+			<p>
+				{t}Since July 2015, all registered Opencaching users can create and publish own geocache lists via their <a href="mylists.php">user profile</a>. The following lists have been published so far:{/t}
+			</p>
+		</div>
+	</div>
+
+	<div style="height:6px"></div>
 
 	<table>
 		<tr>

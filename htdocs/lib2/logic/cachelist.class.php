@@ -280,9 +280,14 @@ class cachelist
 			WHERE `is_public` AND `entries`>0", 0);
 	}
 
-	static function getPublicLists($startat=0, $maxitems=PHP_INT_MAX)
+	static function getPublicLists($startat=0, $maxitems=PHP_INT_MAX, $namelike='', $userlike='')
 	{
-		return cachelist::getLists("`is_public` AND `entries`>0", $startat, $maxitems);
+		return cachelist::getLists(
+			"`is_public` AND `entries`>0"
+			. ($namelike ? " AND `name` LIKE '%" . sql_escape($namelike) ."%'" : '')
+			. ($userlike ? " AND `username` LIKE '%" . sql_escape($userlike) . "%'" : ''),
+			$startat,
+			$maxitems);
 	}
 
 	static function getPublicListsOf($userid)

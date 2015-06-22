@@ -2645,6 +2645,8 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2211', 'Lists',
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2212', 'edit', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2213', 'delete', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2214', 'do not ignore', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2215', 'List name', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2216', 'By', '2015-06-17 10:09:14');
 
 -- Table sys_trans_ref
 SET NAMES 'utf8';
@@ -6773,6 +6775,8 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2212', 'DE', 'bearbeiten', '2013-11-03 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2213', 'DE', 'löschen', '2013-11-03 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2214', 'DE', 'nicht ignorieren', '2013-11-03 10:09:14');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2215', 'DE', 'Listenname', '2013-11-03 10:09:14');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2216', 'DE', 'Von', '2013-11-03 10:09:14');
 
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'EN', 'Reorder IDs', '2010-09-02 00:15:30');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'EN', 'The database could not be reconnected.', '2010-08-28 11:48:07');

@@ -558,6 +558,7 @@ input {	border:1px solid #555;	background-color:white;	padding:1px 2px 1px 2px; 
 *.input70  {width:70px;}
 *.input100 {width:100px;}	/* log-password */
 *.input120 {width:120px;}	/* emailadress */
+*.input170 {width:170px;}	/* cache lists filter */
 *.input200 {width:200px;}
 *.input300 {width:300px;}
 *.input350 {width:350px;}	/* overwrite saved query */
@@ -875,6 +876,9 @@ div.changelog ul li ul {font-size: 83%; margin:0}
 .stattable th.h0 { background-color: #fff; text-align:center; font-weight:normal;}
 .stattable th.nodatacell { width:auto; }
 span.percent { font-size: 11px; }
+
+/* floating box right of text */
+div.floatbox { float:right; margin-left:12px; padding-left:16px;}
 
 /* Admin functions */
 .adminrestore {	color: #819ac1; }

@@ -21,13 +21,31 @@
 	$watch = isset($_REQUEST['watch']);
 	$desctext = isset($_REQUEST['desctext']) ? $_REQUEST['desctext'] : '';
 	$descMode = isset($_REQUEST['descMode']) ? min(3,max(2,$_REQUEST['descMode']+0)) : 3;
+	$fromsearch = isset($_REQUEST['fromsearch']) && $_REQUEST['fromsearch'] == 1;
 	$edit_list = false;
 
+	// open a 'create new list' form
+	if (isset($_REQUEST['new']))
+	{
+		$tpl->assign('newlist_mode', true);
+		$tpl->assign('show_editor', false);
+		$list_name = '';
+		$list_public = false;
+		$watch = false;
+		$desctext = '';
+		// keep descMode of previous operation
+		$list_caches = '';
+	}
+
+	// save the data entered in the 'create new list' form
 	if (isset($_REQUEST['create']))
 	{
 		$list = new cachelist(ID_NEW, $login->userid);
 		if (!$list->setName($list_name))
+		{
+			$tpl->assign('newlist_mode', true);
 			$tpl->assign('name_error', true);
+		}
 		else
 		{
 			$list->setPublic($list_public);
@@ -44,6 +62,7 @@
 		}
 	}
 
+	// open an 'edit list' form
 	if (isset($_REQUEST['edit']))
 	{
 		$list = new cachelist($_REQUEST['edit'] + 0);
@@ -59,6 +78,7 @@
 		}
 	}
 
+	// switch between HTML and Wysiwyg editor mode
 	if (isset($_REQUEST['switchDescMode']) && 
 	    isset($_REQUEST['switchDescMode']) && $_REQUEST['switchDescMode'] == 1)
 	{
@@ -80,6 +100,7 @@
 		}
 	}
 
+	// save data entered in the 'edit list' form
 	if (isset($_REQUEST['save']) && isset($_REQUEST['listid']))
 	{
 		$list = new cachelist($_REQUEST['listid'] + 0);
@@ -108,6 +129,7 @@
 		}
 	}
 
+	// delete a list
 	if (isset($_REQUEST['delete']))
 	{
 		sql("DELETE FROM `cache_lists` WHERE `user_id`='&1' AND `id`='&2'",
@@ -115,36 +137,33 @@
 		// All dependent deletion and cleanup is done via trigger.
 	}
 
+	// redirect to list search output after editing a list from the search output page
+	if ($fromsearch && isset($_REQUEST['listid']))
+	{
+		$tpl->redirect('cachelist.php?id=' . ($_REQUEST['listid'] + 0));
+	}
+
+	// prepare editor and editing
 	if ($descMode == 3)
 	{
 		$tpl->add_header_javascript('resource2/tinymce/tiny_mce_gzip.js');
 		$tpl->add_header_javascript('resource2/tinymce/config/list.js.php?lang='.strtolower($opt['template']['locale']));
 	}
-
 	if ($edit_list)
 	{
 		$tpl->assign('edit_list', true);
 		$tpl->assign('listid', $list->getId());
 		$tpl->assign('caches', $list->getCaches());
 	}
-	else
-	{
-		// set defaults for creating a new list
-		$list_name = '';
-		$list_public = false;
-		$watch = false;
-		$desctext = '';
-		// keep descMode of previous operation
-		$list_caches = '';
-	}
 
+	// prepare rest of template
 	$tpl->assign('cachelists', cachelist::getMyLists());
 	$tpl->assign('show_status', true);
 	$tpl->assign('show_user', false);
 	$tpl->assign('show_watchers', true);
 	$tpl->assign('show_edit', true);
 	$tpl->assign('togglewatch', false);
-	$tpl->assign('fromsearch', isset($_REQUEST['fromsearch']) && $_REQUEST['fromsearch'] == 1);
+	$tpl->assign('fromsearch', $fromsearch);
 
 	$tpl->assign('list_name', $list_name);
 	$tpl->assign('list_public', $list_public);

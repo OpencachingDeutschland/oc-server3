@@ -14,32 +14,19 @@
 		<p class="errormsg">{t}The following waypoints are invalid and could not be added to the list:{/t}&nbsp; {$invalid_waypoints}</p>
 	{/if}
 
-	{if !$edit_list}
+	{if !$edit_list && !$newlist_mode && !$name_error}
 		{include file="res_cachelists.tpl"}
 		{if $cachelists|@count}
 			<p><br />{t 1=$login.userid}Public lists are displayed in your <a href="viewprofile.php?userid=%1">public user profile</a>, on the <a href="cachelists.php">lists overwiew page</a> and in the cache listings.{/t}</p>
 		{/if}
 		<br />
-	{/if}
+		<form method="post" action="mylists.php">
+			&nbsp;<input type="submit" name="new" value="{t}Create new list{/t}" class="formbutton widebutton" />
+		</form>
+	{else}
 
 	{literal}
 	<script type="text/javascript">
-	function newlist()
-	{
-	  document.getElementById('createnewlist').style.display = 'none';
-		document.getElementById('addlist').style.display = 'block';
-		document.getElementById('name_error').style.display = 'none';
-		document.getElementById('list_name').value = '';
-		document.getElementById('list_caches').value = '';
-		document.getElementById('list_name').focus();
-	}
-
-	function cancel_newlist()
-	{
-		document.getElementById('addlist').style.display = 'none';
-		document.getElementById('createnewlist').style.display = 'block';
-	}
-
 	function showdesc()
 	{
 		document.getElementById('desc0').style.display = 'none';
@@ -51,13 +38,13 @@
 	</script>
 	{/literal}
 
-	<br id="enternewlist" />
-	<form method="post" action="{if $fromsearch}cachelist{else}mylists{/if}.php?id={$listid}" name="editdesc" id="editlist_form">
+	<br />
+	<form method="post" action="mylists.php?id={$listid}" name="editdesc" id="editlist_form">
 		{if $edit_list}<input type="hidden" name="listid" value="{$listid}" />{/if}
 		<input id="descMode" type="hidden" name="descMode" value="3" />
 		<input type="hidden" id="switchDescMode" name="switchDescMode" value="0" />
 		{if $fromsearch}<input type="hidden" name="fromsearch" value="{$fromsearch}" />{/if}
-		<span id="createnewlist" {if $name_error || $edit_list || $newlist_mode}style="display:none"{/if}>&nbsp;<input type="button" name="new" value="{t}Create new list{/t}" class="formbutton widebutton" onclick="newlist()" /></span>
+
 		<table class="table" id="addlist" {if !($name_error || $edit_list || $newlist_mode)}style="display:none"{/if}>
 			{if !$edit_list}
 			<tr>
@@ -99,7 +86,7 @@
 				<td id="desc0" style="{if $desctext!='' || $show_editor}display:none{/if}" >
 					<input type="button" value="{t}Add{/t}" onclick="javascript:showdesc()" class="formbutton" />
 				</td>
-				<td id="desc3" style="{if $desctext=='' && !$show_editor && !$newlist_mode}display:none{/if}" >
+				<td id="desc3" style="{if $desctext=='' && !$show_editor}display:none{/if}" >
 					<textarea name="desctext" id="desctext" cols="70" rows="7" class="listdesc{$descMode}" >{$desctext}</textarea>
 					{if $descMode==2}<br />{/if}
 					<small>{t}By submitting I accept the <a href="articles.php?page=impressum#tos" target="_blank">Opencaching.de Terms of Service</a> and the <a href="articles.php?page=impressum#datalicense" target="_blank">Opencaching.de Datalicense</a>{/t}</small>
@@ -134,10 +121,11 @@
 			{/if}
 			<tr>
 				<td colspan="2"><br />
-				{if $edit_list}
-					<input type="submit" name="cancel" value="{t}Cancel{/t}" class="formbutton" onclick="submitbutton('cancel')" />&nbsp;&nbsp; <input type="submit" name="save" value="{t}Save{/t}" class="formbutton" onclick="submitbutton('save')" />
+				<input type="submit" name="cancel" value="{t}Cancel{/t}" class="formbutton" onclick="submitbutton('cancel')" />&nbsp;&nbsp; 
+				{if $newlist_mode}
+					<input type="submit" name="create" value="{t}Create list{/t}" class="formbutton" onclick="submitbutton('create')" />
 				{else}
-					<input type="button" name="cancel" value="{t}Cancel{/t}" class="formbutton" onclick="cancel_newlist()" />&nbsp;&nbsp; <input type="submit" name="create" value="{t}Create list{/t}" class="formbutton" onclick="submitbutton('create')" />
+					<input type="submit" name="save" value="{t}Save{/t}" class="formbutton" onclick="submitbutton('save')" />
 				{/if}
 			</tr>
 			<tr><td>&nbsp;</td></tr>
@@ -147,10 +135,9 @@
 	{include file="js/editor.inc.tpl"}
 
 	<script type="text/javascript">
-	{if $newlist_mode}
-		document.getElementById('enternewlist').scrollIntoView();
-	{/if}
-	{if $name_error}
+	{if $name_error || $newlist_mode}
 		document.getElementById('list_name').focus();
 	{/if}
 	</script>
+
+	{/if}   {* edit_list *}

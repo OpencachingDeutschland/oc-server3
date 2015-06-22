@@ -3,8 +3,6 @@
  *  For license information see doc/license.txt
  *
  *  Unicode Reminder メモ
- *
- *  Display some status information about the server and Opencaching
  ***************************************************************************/
 
 	$disable_verifyemail = true;

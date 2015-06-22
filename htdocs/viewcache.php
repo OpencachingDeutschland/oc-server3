@@ -277,7 +277,7 @@ function getChildWaypoints($cacheid)
 	/* attributes and cache lists
 	 */
 	$tpl->assign('attributes', attribute::getAttrbutesListArrayByCacheId($cacheid));
-	$tpl->assign('cachelists', cachelist::getListsByCacheId($cacheid, !$rCache['show_cachelists']));
+	$tpl->assign('cachelists', cachelist::getListsByCacheId($cacheid, $rCache['show_cachelists']));
 
 	/* geokrets
 	 */

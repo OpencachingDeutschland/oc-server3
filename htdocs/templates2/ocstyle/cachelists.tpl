@@ -35,7 +35,7 @@
 					</tr>
 					<tr><td class="separator"></td></tr>
 					<tr>
-						<td colspan="2">
+						<td colspan="2" style="text-align:right">
 							<input type="submit" name="filter" value="{t}Search{/t}" class="formbutton" onclick="submitbutton('filter')" />&nbsp;							
 							<input type="submit" name="reset" value="{t}Reset{/t}" class="formbutton" onclick="resetfilter()" />
 						</td>
@@ -58,7 +58,7 @@
 
 	<table>
 		<tr>
-			<td colspan="3" class="header-small">
+			<td class="header-small">
 				{include file="res_pager.tpl"}
 			</td>
 		</tr>
@@ -66,3 +66,13 @@
 	</table>
 
 	{include file="res_cachelists.tpl"}
+
+	<table>
+		<tr><td class="spacer"></td></tr>
+		<tr>
+			<td class="header-small">
+				{include file="res_pager.tpl"}
+			</td>
+		</tr>
+	</table>
+

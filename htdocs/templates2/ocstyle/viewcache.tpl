@@ -297,7 +297,7 @@ function showalllists()
 	<div class="content2-container line-box" style="height:0px"></div> {* MSIE needs explicit height *}
 	<div class="content2-container">
 		{if $cachelists|@count}
-			<div style="float:right; max-width:350px">
+			<div style="float:right; max-width:350px; margin-left:32px">
 				{assign var="n" value="0"}
 				{foreach from=$cachelists item=cachelist}
 					{assign var="n" value=$n+1}

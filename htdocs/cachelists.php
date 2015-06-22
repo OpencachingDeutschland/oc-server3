@@ -27,11 +27,11 @@
 			$list->watch(false);
 	}
 
-	$MAXITEMS = 25;
+	$MAXITEMS = 30;
 	$startat = isset($_REQUEST['startat']) ? $_REQUEST['startat']+0 : 0;
-	$listcount = cachelist::getPublicListCount();
 	$name_filter = isset($_REQUEST['name']) ? $_REQUEST['name'] : '';
 	$by_filter = isset($_REQUEST['by']) ? $_REQUEST['by'] : '';
+	$listcount = cachelist::getPublicListCount($name_filter, $by_filter);
 
 	$tpl->assign('name_filter', $name_filter);
 	$tpl->assign('by_filter', $by_filter);

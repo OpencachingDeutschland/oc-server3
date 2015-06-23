@@ -27,12 +27,12 @@
     <tr><td><img src="http://www.opencaching.de/images/team/dummy.jpg" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=266420">Cyberturm</a><br />Kassenwart</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/danlex.png" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=222261">Danlex</a><br />Pressesprecher; Anwendersupport, Datenpflege</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/dummy.jpg" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=137473">bohrsty</a><br />Leiter Technik/Systemadministration</td></tr>
+    <tr><td><img src="http://www.opencaching.de/images/team/mambofive.png" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=298124">mambofive</a><br />Entwicklungsbeauftragter</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/pirate77.jpg" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=152708">pirate77</a><br />Leiter Anwendersupport und Datenpflege; Wiki</td></tr>
     <tr><td></td><td></td><td></td></tr>
     <tr><th colspan="3"><br /><span class="content-title-noshade-size1">Weitere Teammitglieder</span></th></tr>
     <tr><td></td><td></td><td></td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/bundy609.jpg" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=189552">Bundy609</a><br />Anwendersupport, Datenpflege</td></tr>
-    <tr><td><img src="http://www.opencaching.de/images/team/cmanie.jpg" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=222664">cmanie</a><br />Softwareentwicklung</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/dl6hbo.jpg" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=148310">dl6hbo</a><br />Systemadministration, Dokumentation</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/flopp.png" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=126329">Flopp</a><br />Softwareentwicklung, Anwendersupport, Datenpflege</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/following.png" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=150360">following</a><br />Datenpflege, Softwareentwicklung, Wiki</td></tr>

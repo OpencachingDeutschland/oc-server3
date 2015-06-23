@@ -22,12 +22,12 @@
     <tr><td><img src="http://www.opencaching.de/images/team/dummy.jpg" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=266420">Cyberturm</a><br />treasurer</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/danlex.png" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=222261">Danlex</a><br />press spokesman; user support, data maintenance</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/dummy.jpg" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=137473">bohrsty</a><br />head of system administration</td></tr>
+    <tr><td><img src="http://www.opencaching.de/images/team/mambofive.png" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=298124">mambofive</a><br />development commissioner</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/pirate77.jpg" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=152708">pirate77</a><br />head of user support and data maintenance, wiki</td></tr>
     <tr><td></td></tr>
     <tr><th colspan="3"><br /><span class="content-title-noshade-size1">Team members</span></th>
     <tr><td></td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/bundy609.jpg" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=189552">Bundy609</a><br />user support, data maintenance</td></tr>
-    <tr><td><img src="http://www.opencaching.de/images/team/cmanie.jpg" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=222664">cmanie</a><br />software development</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/dl6hbo.jpg" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=148310">dl6hbo</a><br />system administration, documentation</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/flopp.png" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=126329">Flopp</a><br />software development, user support, data maintenance</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/following.png" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=150360">following</a><br />data maintenance, software development, wiki</td></tr>

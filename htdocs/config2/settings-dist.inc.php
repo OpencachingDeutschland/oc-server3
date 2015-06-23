@@ -462,6 +462,10 @@
 	$opt['logic']['admin']['enable_listing_admins'] = false;
 	$opt['logic']['admin']['listingadmin_notification'] = '';  // Email address(es), comma separated
 
+	/* optional APIs
+	 */
+	$opt['logic']['api']['email_problems']['key'] = '';   // must be set to enable
+
   /* Database charset
 	 *   frontend and php charsets are UTF-8
 	 *   here you can set a different charset for the MySQL-Engine

@@ -21,6 +21,7 @@
 	$watch = isset($_REQUEST['watch']);
 	$desctext = isset($_REQUEST['desctext']) ? $_REQUEST['desctext'] : '';
 	$descMode = isset($_REQUEST['descMode']) ? min(3,max(2,$_REQUEST['descMode']+0)) : 3;
+	$switchDescMode = isset($_REQUEST['switchDescMode']) && $_REQUEST['switchDescMode'] == 1;
 	$fromsearch = isset($_REQUEST['fromsearch']) && $_REQUEST['fromsearch'] == 1;
 	$edit_list = false;
 
@@ -79,8 +80,7 @@
 	}
 
 	// switch between HTML and Wysiwyg editor mode
-	if (isset($_REQUEST['switchDescMode']) && 
-	    isset($_REQUEST['switchDescMode']) && $_REQUEST['switchDescMode'] == 1)
+	if ($switchDescMode)
 	{
 		if (isset($_REQUEST['listid']))
 		{
@@ -138,7 +138,7 @@
 	}
 
 	// redirect to list search output after editing a list from the search output page
-	if ($fromsearch && isset($_REQUEST['listid']))
+	if ($fromsearch && !$switchDescMode && isset($_REQUEST['listid']))
 	{
 		$tpl->redirect('cachelist.php?id=' . ($_REQUEST['listid'] + 0));
 	}

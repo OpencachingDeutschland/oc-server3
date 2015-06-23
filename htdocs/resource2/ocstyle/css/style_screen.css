@@ -878,7 +878,7 @@ div.changelog ul li ul {font-size: 83%; margin:0}
 span.percent { font-size: 11px; }
 
 /* floating box right of text */
-div.floatbox { float:right; margin-left:12px; padding-left:16px;}
+div.floatbox { float:right; margin-left:16px; padding-left:16px;}
 
 /* Admin functions */
 .adminrestore {	color: #819ac1; }

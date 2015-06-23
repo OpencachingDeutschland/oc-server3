@@ -187,7 +187,7 @@
 			{foreach from=$cachelists item=cachelist}
 				<li>
 					{include file="res_cachelist_link.tpl"} &nbsp;
-					[<a href="viewprofile.php?userid={$userid}&{if $cachelist.watched_by_me}dont{/if}watchlist={$cachelist.id}&dummy={$tdummy}#eocl">{if $cachelist.watched_by_me}{t}do not watch{/t}{else}{t}watch{/t}{/if}</a>]
+					{if $login.userid}[<a href="viewprofile.php?userid={$userid}&{if $cachelist.watched_by_me}dont{/if}watchlist={$cachelist.id}&dummy={$tdummy}#eocl">{if $cachelist.watched_by_me}{t}do not watch{/t}{else}{t}watch{/t}{/if}</a>]{/if}
 				</li>
 			{/foreach}
 		</ul>

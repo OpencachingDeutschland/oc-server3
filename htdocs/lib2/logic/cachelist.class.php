@@ -271,13 +271,17 @@ class cachelist
 		return cachelist::getLists("`id` IN (SELECT `cache_list_id` FROM `cache_list_watches` WHERE `user_id`=" . sql_escape($login->userid) . ")");
 	}
 
-	static function getPublicListCount()
+	static function getPublicListCount($namelike='', $userlike='')
 	{
 		return sql_value("
 			SELECT COUNT(*) 
 			FROM `cache_lists`
 			LEFT JOIN `stat_cache_lists` ON  `stat_cache_lists`.`cache_list_id`=`cache_lists`.`id`
-			WHERE `is_public` AND `entries`>0", 0);
+			LEFT JOIN `user` ON `user`.`user_id`=`cache_lists`.`user_id`
+			WHERE `is_public` AND `entries`>0"
+			. ($namelike ? " AND `name` LIKE '%" . sql_escape($namelike) ."%'" : '')
+			. ($userlike ? " AND `username` LIKE '%" . sql_escape($userlike) . "%'" : ''),
+			0);
 	}
 
 	static function getPublicLists($startat=0, $maxitems=PHP_INT_MAX, $namelike='', $userlike='')
@@ -295,10 +299,31 @@ class cachelist
 		return cachelist::getLists("`is_public` AND `entries`>0 AND `cache_lists`.`user_id`=" . sql_escape($userid));
 	}
 
-	static function getListsByCacheId($cacheid, $ownlists_only)
+	// If $all is false, only own lists and public lists of the cache owner will be returned.
+	static function getListsByCacheId($cacheid, $all)
 	{
 		global $login;
-		return cachelist::getLists("`id` IN (SELECT `cache_list_id` FROM `cache_list_items` WHERE `cache_id`=" . sql_escape($cacheid) . ") AND (" . ($ownlists_only ? "" : "is_public OR ") . "`cache_lists`.`user_id`=" . sql_escape($login->userid) . ")");
+
+		if ($all)
+			$cache_owner_id = 0;   // dummy
+		else
+			$cache_owner_id = sql_value("
+				SELECT `user_id`
+				FROM `caches`
+				WHERE `cache_id`=" . sql_escape($cacheid),
+				0);
+
+		return cachelist::getLists("
+			`cache_lists`.`id` IN
+				(SELECT `cache_list_id`
+				 FROM `cache_list_items`
+				 WHERE `cache_id`=" . sql_escape($cacheid) . ")
+			AND
+			(" .
+				($all ? "is_public OR " : "") . "
+			  `cache_lists`.`user_id`=" . sql_escape($login->userid) . " OR
+			  (is_public AND `cache_lists`.`user_id`=" . sql_escape($cache_owner_id) . ")
+			)");
 	}
 
 	static function getListById($listid)

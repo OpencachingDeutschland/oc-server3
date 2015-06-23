@@ -18,7 +18,7 @@
 		{if $cachelist.is_public}{t}by{/t} <a href="viewprofile.php?userid={$cachelist.user_id}">{$cachelist.username|escape}</a>{else}({t}private{/t}){/if}
 		&nbsp;
 		{if $cachelist.user_id==$login.userid}[<a href="mylists.php?edit={$cachelist.id}&fromsearch=1">{t}edit{/t}</a>]{/if}
-		[<a href="cachelist.php?id={$cachelist.id}&{if $cachelist.watched_by_me}dont{/if}watch">{if $cachelist.watched_by_me}{t}nicht beobachten{/t}{else}{t}beobachten{/t}{/if}</a>]
+		{if $login.userid}[<a href="cachelist.php?id={$cachelist.id}&{if $cachelist.watched_by_me}dont{/if}watch">{if $cachelist.watched_by_me}{t}don't watch{/t}{else}{t}watch{/t}{/if}</a>]{/if}
 	</p>
 	{if $cachelist.description != ''}
 	<div style="padding: 0 8px 4px 10px">

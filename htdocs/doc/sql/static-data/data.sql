@@ -505,12 +505,12 @@ INSERT INTO `countries_options` (`country`, `display`, `gmLat`, `gmLon`, `gmZoom
 INSERT INTO `countries_options` (`country`, `display`, `gmLat`, `gmLon`, `gmZoom`, `nodeId`) VALUES ('ME', '1', '44.3631331138077', '16.76513671875', '7', '0');
 INSERT INTO `countries_options` (`country`, `display`, `gmLat`, `gmLon`, `gmZoom`, `nodeId`) VALUES ('MT', '1', '35.9324286833512', '14.3879699707031', '11', '0');
 INSERT INTO `countries_options` (`country`, `display`, `gmLat`, `gmLon`, `gmZoom`, `nodeId`) VALUES ('NL', '1', '51.4471603469801', '5.44921875', '7', '14');
-INSERT INTO `countries_options` (`country`, `display`, `gmLat`, `gmLon`, `gmZoom`, `nodeId`) VALUES ('NO', '1', '62.5731057844998', '14.9853515625', '5', '8');
+INSERT INTO `countries_options` (`country`, `display`, `gmLat`, `gmLon`, `gmZoom`, `nodeId`) VALUES ('NO', '1', '62.5731057844998', '14.9853515625', '5', '0');
 INSERT INTO `countries_options` (`country`, `display`, `gmLat`, `gmLon`, `gmZoom`, `nodeId`) VALUES ('PL', '1', '52.1199986576382', '18.74267578125', '6', '2');
 INSERT INTO `countries_options` (`country`, `display`, `gmLat`, `gmLon`, `gmZoom`, `nodeId`) VALUES ('PT', '1', '40.3632883409158', '-2.98828125', '6', '0');
-INSERT INTO `countries_options` (`country`, `display`, `gmLat`, `gmLon`, `gmZoom`, `nodeId`) VALUES ('RO', '1', '45.8747122489048', '24.93896484375', '7', '0');
+INSERT INTO `countries_options` (`country`, `display`, `gmLat`, `gmLon`, `gmZoom`, `nodeId`) VALUES ('RO', '1', '45.8747122489048', '24.93896484375', '7', '16');
 INSERT INTO `countries_options` (`country`, `display`, `gmLat`, `gmLon`, `gmZoom`, `nodeId`) VALUES ('RU', '1', '59.1759282492714', '92.109375', '3', '0');
-INSERT INTO `countries_options` (`country`, `display`, `gmLat`, `gmLon`, `gmZoom`, `nodeId`) VALUES ('SE', '1', '62.5731057844998', '14.9853515625', '5', '6');
+INSERT INTO `countries_options` (`country`, `display`, `gmLat`, `gmLon`, `gmZoom`, `nodeId`) VALUES ('SE', '1', '62.5731057844998', '14.9853515625', '5', '0');
 INSERT INTO `countries_options` (`country`, `display`, `gmLat`, `gmLon`, `gmZoom`, `nodeId`) VALUES ('SI', '1', '46.0160387383342', '14.798583984375', '8', '0');
 INSERT INTO `countries_options` (`country`, `display`, `gmLat`, `gmLon`, `gmZoom`, `nodeId`) VALUES ('SK', '1', '48.6220164284684', '18.907470703125', '8', '0');
 INSERT INTO `countries_options` (`country`, `display`, `gmLat`, `gmLon`, `gmZoom`, `nodeId`) VALUES ('TR', '1', '38.0307856938229', '33.90380859375', '6', '0');
@@ -666,9 +666,10 @@ INSERT INTO `nodes` (`id`, `name`, `url`, `waypoint_prefix`) VALUES ('8', 'Openc
 INSERT INTO `nodes` (`id`, `name`, `url`, `waypoint_prefix`) VALUES ('9', 'Opencaching Latvian', 'www.opencaching.lv', 'OV');
 INSERT INTO `nodes` (`id`, `name`, `url`, `waypoint_prefix`) VALUES ('10', 'Opencaching United States', 'www.opencaching.us', 'OU');
 INSERT INTO `nodes` (`id`, `name`, `url`, `waypoint_prefix`) VALUES ('11', 'Opencaching Japan', 'www.opencaching.jp', 'OJ');
-INSERT INTO `nodes` (`id`, `name`, `url`, `waypoint_prefix`) VALUES ('12', 'Opencaching Russia', 'www.opencaching.su', 'OR');
+INSERT INTO `nodes` (`id`, `name`, `url`, `waypoint_prefix`) VALUES ('12', 'Opencaching Russia', 'www.opencaching.su', 'O?');
 INSERT INTO `nodes` (`id`, `name`, `url`, `waypoint_prefix`) VALUES ('13', 'Opencaching Garmin', 'www.opencaching.com', 'OX');
 INSERT INTO `nodes` (`id`, `name`, `url`, `waypoint_prefix`) VALUES ('14', 'Opencaching Benelux', 'www.opencaching.nl', 'OB');
+INSERT INTO `nodes` (`id`, `name`, `url`, `waypoint_prefix`) VALUES ('16', 'Opencaching Romania', 'www.opencaching.nl', 'OR');
 
 -- Table object_types
 SET NAMES 'utf8';

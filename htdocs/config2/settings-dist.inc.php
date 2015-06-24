@@ -308,6 +308,7 @@
 	 * 12 Opencaching Russland  (?)
 	 * 13 Garmin (www.opencaching.com)
 	 * 14 Opencaching Niederlande (www.opencaching.nl)
+	 * 16 Opencaching Rumänien (www.opencaching.ro)
 	 */
 	$opt['logic']['node']['id'] = 4;
 

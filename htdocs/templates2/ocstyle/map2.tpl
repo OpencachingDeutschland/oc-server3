@@ -217,6 +217,7 @@ function eval_filtercookies(aValues)
 			document.getElementById('f_inactive').checked  = fs[1].indexOf('D') >= 0;
 				// disabled and archived options have strange names and IDs for backward compatibility
 			document.getElementById('f_otherPlatforms').checked = fs[1].indexOf('M') >= 0;
+			document.getElementById('f_geokrets').checked = fs[1].indexOf('G') >= 0;
 		}
 		else if (fs[0] == 'rated')
 		{
@@ -304,6 +305,7 @@ function cookieSave(permanent_filter)
 	if (document.getElementById('f_disabled').checked)  sFilter += 'T';
 	if (document.getElementById('f_inactive').checked)  sFilter += 'D';
 	if (document.getElementById('f_otherPlatforms').checked) sFilter += 'M';
+	if (document.getElementById('f_geokrets').checked) sFilter += 'G';
 
 	sFilter += '/rated:' +
 		document.getElementById('terrainmin').value + ',' +
@@ -1928,6 +1930,7 @@ function reset_filter_values()
 	document.getElementById('f_disabled').checked = "";
 	document.getElementById('f_inactive').checked = "checked";
 	document.getElementById('f_otherPlatforms').checked = "";
+	document.getElementById('f_geokrets').checked = "";
 
 	document.getElementById('terrainmin').value = "0";
 	document.getElementById('terrainmax').value = "0";
@@ -2019,6 +2022,7 @@ function get_searchfilter_params(output, skipqueryid, zip)
 	sPostBody += document.getElementById('f_disabled').checked ? '&f_disabled=1' : '&f_disabled=0';
 	sPostBody += document.getElementById('f_inactive').checked ? '&f_inactive=1' : '&f_inactive=0';
 	sPostBody += document.getElementById('f_otherPlatforms').checked ? '&f_otherPlatforms=1' : '&f_otherPlatforms=0';
+	sPostBody += document.getElementById('f_geokrets').checked ? '&f_geokrets=1' : '&f_geokrets=0';
 
 	/* rating options
 	 */
@@ -2434,6 +2438,12 @@ function toggle_attribselection(bSaveCookies)
 							<label for="f_otherPlatforms">{t}GC listings{/t}</label>
 							{* the id is still "f_otherPlatforms" though it only applies to GC
 							   for compatiblity with old stored or external queries *}
+						</td>
+					</tr>
+					<tr>
+						<td style="white-space:nowrap">
+							<input type="checkbox" id="f_geokrets" name="f_geokrets" value="1" onchange="filter_changed()" class="checkbox" />
+							<label for="f_geokrets">{t}without Geokrets{/t}</label>
 						</td>
 					</tr>
 				</table>

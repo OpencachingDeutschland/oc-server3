@@ -193,6 +193,7 @@ function sync_options(element)
 		document.forms[formnames[i]].f_disabled.value = document.optionsform.f_disabled.checked ? 1 : 0;
 		document.forms[formnames[i]].f_ignored.value = document.optionsform.f_ignored.checked ? 1 : 0;
 		document.forms[formnames[i]].f_otherPlatforms.value = document.optionsform.f_otherPlatforms.checked ? 1 : 0;
+		document.forms[formnames[i]].f_geokrets.value = document.optionsform.f_geokrets.checked ? 1 : 0;
 		document.forms[formnames[i]].country.value = document.optionsform.country.value;
 		document.forms[formnames[i]].difficultymin.value = document.optionsform.difficultymin.value;
 		document.forms[formnames[i]].difficultymax.value = document.optionsform.difficultymax.value;
@@ -321,7 +322,8 @@ function switchAttributeCat2()
 				<input type="checkbox" name="f_disabled" value="1" id="l_disabled" class="checkbox" onclick="sync_options(this)" {if $f_disabled_checked}checked="checked"{/if} /> <label for="l_disabled">{t}disabled[pl]{/t}</label> &nbsp;
 				<nobr><input type="checkbox" name="f_inactive" value="1" id="l_inactive" class="checkbox" onclick="sync_options(this)" {if $f_inactive_checked}checked="checked"{/if} /> <label for="l_inactive">{t}archived[pl]{/t}</label></nobr> &nbsp;
 				<br />
-				<nobr><input type="checkbox" name="f_otherPlatforms" value="1" id="l_otherPlatforms" class="checkbox" onclick="sync_options(this)" {if $f_otherPlatforms_checked}checked="checked"{/if} /> <label for="l_otherPlatforms">{t}also listed at GC.com{/t}</label></nobr>
+				<nobr><input type="checkbox" name="f_otherPlatforms" value="1" id="l_otherPlatforms" class="checkbox" onclick="sync_options(this)" {if $f_otherPlatforms_checked}checked="checked"{/if} /> <label for="l_otherPlatforms">{t}also listed at GC.com{/t}</label></nobr> &nbsp;
+				<nobr><input type="checkbox" name="f_geokrets" value="1" id="l_geokrets" class="checkbox" onclick="sync_options(this)" {if $f_geokrets_checked}checked="checked"{/if} /> <label for="l_geokrets">{t}without Geokrets{/t}</label></nobr>
 			</td>
 		</tr>
 
@@ -488,6 +490,7 @@ function switchAttributeCat2()
 		<input type="hidden" name="f_disabled" value="{$hidopt_disabled}" />
 		<input type="hidden" name="f_ignored" value="{$hidopt_ignored}" />
 		<input type="hidden" name="f_otherPlatforms" value="{$hidopt_otherPlatforms}" />
+		<input type="hidden" name="f_geokrets" value="{$hidopt_geokrets}" />
 		<input type="hidden" name="country" value="{$country}" />
 		<input type="hidden" name="difficultymin" value="{$difficultymin}" />
 		<input type="hidden" name="difficultymax" value="{$difficultymax}" />
@@ -521,6 +524,7 @@ function switchAttributeCat2()
 		<input type="hidden" name="f_disabled" value="{$hidopt_disabled}" />
 		<input type="hidden" name="f_ignored" value="{$hidopt_ignored}" />
 		<input type="hidden" name="f_otherPlatforms" value="{$hidopt_otherPlatforms}" />
+		<input type="hidden" name="f_geokrets" value="{$hidopt_geokrets}" />
 		<input type="hidden" name="country" value="{$country}" />
 		<input type="hidden" name="cachetype" value="{$cachetype}" />
 		<input type="hidden" name="cachesize" value="{$cachesize}" />
@@ -556,6 +560,7 @@ function switchAttributeCat2()
 		<input type="hidden" name="f_disabled" value="{$hidopt_disabled}" />
 		<input type="hidden" name="f_ignored" value="{$hidopt_ignored}" />
 		<input type="hidden" name="f_otherPlatforms" value="{$hidopt_otherPlatforms}" />
+		<input type="hidden" name="f_geokrets" value="{$hidopt_geokrets}" />
 		<input type="hidden" name="country" value="{$country}" />
 		<input type="hidden" name="cachetype" value="{$cachetype}" />
 		<input type="hidden" name="cachesize" value="{$cachesize}" />
@@ -615,6 +620,7 @@ function switchAttributeCat2()
 		<input type="hidden" name="f_disabled" value="{$hidopt_disabled}" />
 		<input type="hidden" name="f_ignored" value="{$hidopt_ignored}" />
 		<input type="hidden" name="f_otherPlatforms" value="{$hidopt_otherPlatforms}" />
+		<input type="hidden" name="f_geokrets" value="{$hidopt_geokrets}" />
 		<input type="hidden" name="country" value="{$country}" />
 		<input type="hidden" name="cachetype" value="{$cachetype}" />
 		<input type="hidden" name="cachesize" value="{$cachesize}" />
@@ -649,6 +655,7 @@ function switchAttributeCat2()
 		<input type="hidden" name="f_disabled" value="{$hidopt_disabled}" />
 		<input type="hidden" name="f_ignored" value="{$hidopt_ignored}" />
 		<input type="hidden" name="f_otherPlatforms" value="{$hidopt_otherPlatforms}" />
+		<input type="hidden" name="f_geokrets" value="{$hidopt_geokrets}" />
 		<input type="hidden" name="country" value="{$country}" />
 		<input type="hidden" name="difficultymin" value="{$difficultymin}" />
 		<input type="hidden" name="difficultymax" value="{$difficultymax}" />
@@ -693,6 +700,7 @@ function switchAttributeCat2()
 		<input type="hidden" name="f_disabled" value="{$hidopt_disabled}" />
 		<input type="hidden" name="f_ignored" value="{$hidopt_ignored}" />
 		<input type="hidden" name="f_otherPlatforms" value="{$hidopt_otherPlatforms}" />
+		<input type="hidden" name="f_geokrets" value="{$hidopt_geokrets}" />
 		<input type="hidden" name="country" value="{$country}" />
 		<input type="hidden" name="difficultymin" value="{$difficultymin}" />
 		<input type="hidden" name="difficultymax" value="{$difficultymax}" />
@@ -727,6 +735,7 @@ function switchAttributeCat2()
 		<input type="hidden" name="f_disabled" value="{$hidopt_disabled}" />
 		<input type="hidden" name="f_ignored" value="{$hidopt_ignored}" />
 		<input type="hidden" name="f_otherPlatforms" value="{$hidopt_otherPlatforms}" />
+		<input type="hidden" name="f_geokrets" value="{$hidopt_geokrets}" />
 		<input type="hidden" name="country" value="{$country}" />
 		<input type="hidden" name="difficultymin" value="{$difficultymin}" />
 		<input type="hidden" name="difficultymax" value="{$difficultymax}" />
@@ -772,6 +781,7 @@ function switchAttributeCat2()
 		<input type="hidden" name="f_disabled" value="{$hidopt_disabled}" />
 		<input type="hidden" name="f_ignored" value="{$hidopt_ignored}" />
 		<input type="hidden" name="f_otherPlatforms" value="{$hidopt_otherPlatforms}" />
+		<input type="hidden" name="f_geokrets" value="{$hidopt_geokrets}" />
 		<input type="hidden" name="country" value="{$country}" />
 		<input type="hidden" name="difficultymin" value="{$difficultymin}" />
 		<input type="hidden" name="difficultymax" value="{$difficultymax}" />

@@ -241,6 +241,7 @@
 			// external searches.
 		$options['f_ignored'] = isset($_REQUEST['f_ignored']) ? $_REQUEST['f_ignored'] : 1;
 		$options['f_otherPlatforms'] = isset($_REQUEST['f_otherPlatforms']) ? $_REQUEST['f_otherPlatforms'] : 0;
+		$options['f_geokrets'] = isset($_REQUEST['f_geokrets']) ? $_REQUEST['f_geokrets'] : 0;
 		$options['expert'] = isset($_REQUEST['expert']) ? $_REQUEST['expert'] : 0;  // Ocprop: 0
 		$options['showresult'] = isset($_REQUEST['showresult']) ? $_REQUEST['showresult'] : 0;
 		$options['output'] = isset($_REQUEST['output']) ? $_REQUEST['output'] : 'HTML';  // Ocprop: HTML
@@ -479,6 +480,7 @@
 	if (!isset($options['cachesize'])) $options['cachesize'] = '';
 	if (!isset($options['bbox'])) $options['bbox'] = false;
 	if (!isset($options['f_disabled'])) $options['f_disabled'] = 0;
+	if (!isset($options['f_geokrets'])) $options['f_geokrets'] = 0;
 
 	if (!isset($options['showresult'])) $options['showresult'] = 0;
 	if ($options['showresult'] == 1)
@@ -1017,6 +1019,12 @@
 				$sql_where[] = "`caches`.`wp_gc_maintained`=''";
 			}
 
+			if (!isset($options['f_geokrets'])) $options['f_geokrets']='0';
+			if ($options['f_geokrets'] != 0)
+			{
+				$sql_where[] = "(SELECT COUNT(*) FROM `gk_item_waypoint` WHERE `wp`=`caches`.`wp_oc`)";
+			}
+
 			if (!isset($options['country'])) $options['country']='';
 			if ($options['country'] != '')
 			{
@@ -1477,6 +1485,9 @@ function outputSearchForm($options)
 
 	$tpl->assign('f_otherPlatforms_checked', $options['f_otherPlatforms'] == 1);
 	$tpl->assign('hidopt_otherPlatforms', ($options['f_otherPlatforms'] == 1) ? '1' : '0');
+
+	$tpl->assign('f_geokrets_checked', $options['f_geokrets'] == 1);
+	$tpl->assign('hidopt_geokrets', ($options['f_geokrets'] == 1) ? '1' : '0');
 
 	if (isset($options['country']))
 	{

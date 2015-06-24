@@ -683,6 +683,7 @@ INSERT INTO `object_types` (`id`, `name`) VALUES ('4', 'user');
 INSERT INTO `object_types` (`id`, `name`) VALUES ('5', 'Traveler');
 INSERT INTO `object_types` (`id`, `name`) VALUES ('6', 'Picture');
 INSERT INTO `object_types` (`id`, `name`) VALUES ('7', 'Removed Object');
+INSERT INTO `object_types` (`id`, `name`) VALUES ('8', 'cache list');
 
 -- Table profile_options
 SET NAMES 'utf8';
@@ -2648,6 +2649,9 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2214', 'do not 
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2215', 'List name', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2216', 'By', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2217', 'don\'t watch', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2218', 'Another of your cache lists already has this name.', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2219', 'minimum length for public lists is 10 characters', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2220', 'You are still watching this geocache via one or more cache lists.', '2015-06-17 10:09:14');
 
 -- Table sys_trans_ref
 SET NAMES 'utf8';
@@ -6779,6 +6783,9 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2215', 'DE', 'Listenname', '2013-11-03 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2216', 'DE', 'Von', '2013-11-03 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2217', 'DE', 'nicht beobachten', '2013-11-03 10:09:14');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2218', 'DE', 'Eine andere deiner Cachelisten hat bereits den gleichen Name.', '2013-11-03 10:09:14');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2219', 'DE', 'Mindestlänge für öffentliche Listen ist 10 Zeichen', '2013-11-03 10:09:14');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2220', 'DE', 'Du beobachtest diesen Geocache weiterhin über eine oder mehrere Cachelisten.', '2013-11-03 10:09:14');
 
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'EN', 'Reorder IDs', '2010-09-02 00:15:30');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'EN', 'The database could not be reconnected.', '2010-08-28 11:48:07');

@@ -4,6 +4,9 @@
 *  Unicode Reminder メモ
 ***************************************************************************}
 {* OCSTYLE *}
+{* JS for cache list description tooltips *}
+<script type="text/javascript" src="resource2/{$opt.template.style}/js/wz_tooltip.js"></script>
+
 <div class="content2-pagetitle">
 	<img src="resource2/{$opt.template.style}/images/misc/32x32-home.png" style="align: left; margin-right: 10px;" width="32" height="32" />
 	{t 1=$username}Userprofile of %1{/t}

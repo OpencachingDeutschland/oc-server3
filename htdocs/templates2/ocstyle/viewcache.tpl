@@ -114,7 +114,7 @@
 				<li class="group"><a style="background-image: url(resource2/{$opt.template.style}/images/viewcache/list-18.png);background-repeat:no-repeat;" href="addtolist.php?cacheid={$cache.cacheid|urlencode}">{t}Add to list{/t}</a></li>
 				{if $login.userid!=0}
 					{if $login.userid==$cache.userid || $listing_admin }
-						<li class="group"><a style="background-image: url(resource2/{$opt.template.style}/images/viewcache/page.png);background-repeat:no-repeat;" href="editcache.php?cacheid={$cache.cacheid|urlencode}">{t}Edit{/t}</a></li>
+						<li class="group {if $login.userid!=$cache.userid}hilite{/if}"><a style="background-image: url(resource2/{$opt.template.style}/images/viewcache/page.png);background-repeat:no-repeat;" href="editcache.php?cacheid={$cache.cacheid|urlencode}">{t}Edit{/t}</a></li>
 					{/if}
 				{/if}	
 

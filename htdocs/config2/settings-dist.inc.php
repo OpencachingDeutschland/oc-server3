@@ -308,6 +308,7 @@
 	 * 12 Opencaching Russland  (?)
 	 * 13 Garmin (www.opencaching.com)
 	 * 14 Opencaching Niederlande (www.opencaching.nl)
+	 * 16 Opencaching Rumänien (www.opencaching.ro)
 	 */
 	$opt['logic']['node']['id'] = 4;
 
@@ -316,6 +317,7 @@
 	$opt['logic']['pictures']['dir'] = $opt['rootpath'] . 'images/uploads';  // Ocprop
 	$opt['logic']['pictures']['url'] = 'http://devel.opencaching.de/images/uploads';
 	$opt['logic']['pictures']['maxsize'] = 6000*1024;
+	$opt['logic']['pictures']['unchg_size'] = 250*1024;
     if (extension_loaded('imagick'))
     $opt['logic']['pictures']['extensions'] = 'jpg;jpeg;gif;png;bmp;tif;psd;pcx;svg;xpm';
     else
@@ -461,6 +463,10 @@
 	$opt['logic']['admin']['team_comments_only_for_reports'] = true;
 	$opt['logic']['admin']['enable_listing_admins'] = false;
 	$opt['logic']['admin']['listingadmin_notification'] = '';  // Email address(es), comma separated
+
+	/* optional APIs
+	 */
+	$opt['logic']['api']['email_problems']['key'] = '';   // must be set to enable
 
   /* Database charset
 	 *   frontend and php charsets are UTF-8

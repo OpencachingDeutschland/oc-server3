@@ -453,6 +453,21 @@
 		update_triggers();		// runs maintain-124.inc.php
 	}
 
+	function dbv_125()  // update cache lists implementation; preparation of XML interface export
+	{
+		global $opt;
+
+		if (!sql_field_exists('cache_lists','node'))
+		{
+			sql("ALTER TABLE `cache_lists` ADD COLUMN `node` tinyint(3) unsigned NOT NULL default '0' AFTER `uuid`");
+			sql("UPDATE `cache_lists` SET `node`='&1'", $opt['logic']['node']['id']);
+		}
+		if (!sql_field_exists('cache_lists','last_state_change'))
+			sql("ALTER TABLE `cache_lists` ADD COLUMN `last_state_change` datetime default NULL AFTER `last_added`");
+
+		update_triggers();		// runs maintain-125.inc.php
+	}
+
 
 	// When adding new mutations, take care that they behave well if run multiple
 	// times. This improves robustness of database versioning.

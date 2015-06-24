@@ -4,6 +4,10 @@
  *  Unicode Reminder メモ
  ***************************************************************************}
 {* OCSTYLE *}
+
+{* JS for cache list description tooltips *}
+<script type="text/javascript" src="resource2/{$opt.template.style}/js/wz_tooltip.js"></script>
+
 {if $action=='edit'}
 	<script type="text/javascript">
 		{literal}

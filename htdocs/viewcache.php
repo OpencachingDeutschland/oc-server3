@@ -278,6 +278,8 @@ function getChildWaypoints($cacheid)
 	 */
 	$tpl->assign('attributes', attribute::getAttrbutesListArrayByCacheId($cacheid));
 	$tpl->assign('cachelists', cachelist::getListsByCacheId($cacheid, $rCache['show_cachelists']));
+	$tpl->assign('watchclinfo', isset($_REQUEST['watchinfo']) && $_REQUEST['watchinfo'] == 1 && 
+	                            cachelist::watchingCacheByListsCount($login->userid, $cacheid) > 0);
 
 	/* geokrets
 	 */

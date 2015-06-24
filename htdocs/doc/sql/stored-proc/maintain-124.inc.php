@@ -7,6 +7,10 @@
 
 	***************************************************************************/
 
+	// We run this via maintain.php instead of dbsv-update.php because the
+	// latter one has no sufficient privileges yet for updating functions
+	// (should be changed / may have been changed when you are reading this.)
+
 	sql_dropProcedure('sp_updateall_cachelist_counts');
 	sql("CREATE PROCEDURE sp_updateall_cachelist_counts (OUT nModified INT)
 	     BEGIN

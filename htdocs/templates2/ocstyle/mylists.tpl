@@ -5,6 +5,9 @@
  ***************************************************************************}
 {* OCSTYLE *}
 
+{* JS for cache list description tooltips *}
+<script type="text/javascript" src="resource2/{$opt.template.style}/js/wz_tooltip.js"></script>
+
 	<div class="content2-pagetitle">
 		<img src="resource2/{$opt.template.style}/images/misc/32x32-list.png" style="align: left; margin-right: 10px;" width="32" height="32" />
 		{if $edit_list}{t}Edit cache list{/t}{else}{t}My cache lists{/t}{/if}
@@ -54,9 +57,14 @@
 			{/if}
 			<tr>
 				<td>{t}Name{/t}:</td>
-				<td><input type="text" id="list_name" name="list_name" maxlength="80" value="{$list_name}" class="input500" />
-				<nobr><span id="name_error">{if $name_error}&nbsp;<span class="errormsg">{t}Invalid name{/t}</span></nobr>{/if}</span></td>
+				<td><input type="text" id="list_name" name="list_name" maxlength="80" value="{$list_name}" class="input500" /></td>
 			</tr>
+			{if $name_error}
+				<tr><td></td>
+				<td><nobr><span id="name_error">{if $name_error}&nbsp;<span class="errormsg">{if $name_error==ERROR_DUPLICATE_LISTNAME}{t}Another of your cache lists already has this name.{/t}{else}{if $name_error==ERROR_BAD_LISTNAME}{t}Invalid name{/t}{if $list_public}; {t}minimum length for public lists is 10 characters{/t}{/if}{/if}{/if}</span></nobr>{/if}</span></td>
+				</tr>
+				<tr><td class="separator"></td></tr>
+			{/if}
 			<tr>
 				<td style="vertical-align:top">{t}Status{/t}:</td>
 				<td><input type="radio" id="s_private" name="list_public" value="0" {if !$list_public}checked="checked"{/if} /><label for="s_private">{t}private{/t}</label> &nbsp; <input type="radio" id="s_public" name="list_public" value="1" {if $list_public}checked="checked"{/if} /><label for="s_public">{t}public{/t}</label><br />				

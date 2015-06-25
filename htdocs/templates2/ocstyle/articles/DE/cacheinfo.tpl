@@ -168,6 +168,8 @@
 		Finder ein falsches Kennwort eingeben, kann er seinen Fund nicht online loggen. Falls kein Kennwort gew&uuml;nscht wird, muss dieses Feld leer gelassen werden.
 		Die Gro&szlig;- und Kleinschreibung wird nicht ber&uuml;cksichtigt. Vorsicht ist bei Kennw&ouml;rtern geboten, die 0, O, i oder j enthalten, da diese Buchtaben leicht zu verwechseln sind.</p>
 
+		<p><b>Alle Cachelisten anzeigen:</b> Diese Option ist für neue Caches zunächst eingeschaltet und kann nachträglich geändert werden. Wenn sie aktiv ist, erscheinen oberhalb des Beschreibungstextes &ndash; rechts neben den Attributen &ndash; alle <a href="cachelists.php">öffentlichen Cachelisten</a>, in denen dieser Cache enthalten ist. Ansonsten werden nur Listen des Cachebesitzers und des jeweiligen Benutzers, der sich den Cache anschaut, angezeigt.</p>
+
 		<p><b>Nutzungsbedinungen:</b> Lies dir bitte die Nutzungsbedinungen genau durch! Wir haben versucht, diese m&ouml;glichst kurz und fair zu halten.</p>
 
 		<p><b>Bilder:</b> Bilder k&ouml;nnen erst hochgeladen werden, wenn der Cache erstellt wurde. Dazu rufst du deinen Cache auf und klickst rechts oben auf &bdquo;Bearbeiten&ldquo;. Weiter unten findet du den Abschnitt &bdquo;Bilder&ldquo; mit dem Link &bdquo;Neues Bild hinzuf&uuml;gen&ldquo;.</p>

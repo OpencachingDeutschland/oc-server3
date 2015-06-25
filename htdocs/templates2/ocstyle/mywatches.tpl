@@ -4,6 +4,10 @@
  *  Unicode Reminder メモ
  ***************************************************************************}
 {* OCSTYLE *}
+
+{* JS for cache list description tooltips *}
+<script type="text/javascript" src="resource2/{$opt.template.style}/js/wz_tooltip.js"></script>
+
 {if $action=='edit'}
 	<script type="text/javascript">
 		{literal}
@@ -115,20 +119,24 @@
 		{t}Watched Geocaches{/t}
 	</div>
 
+	{if $cachelists|@count}
+		<p>{t}Single caches{/t}:</p>
+	{/if}
+
 	<table class="null" border="0" cellspacing="0" width="98%">
 		<tr>
 			<td colspan="2">
 				<table class="table">
-					<tr class="searchresult">
+					<tr class="cachelistheader">
 						<th width="50px">{t}Type{/t}</th>
 						<th width="50px">{t}State{/t}</th>
-						<th width="500px">{t}Name{/t}</th>
+						<th width="350px">{t}Name{/t}</th>
 						<th width="100px"><nobr>{t}Last found{/t}</nobr></th>
 						<th></th>
 					</tr>
 					{foreach from=$watches item=watchItem}
 						{cycle assign=listcolor values="listcolor1,listcolor2"}
-						<tr>
+						<tr class="cachelistitem">
 							<td class="{$listcolor}">{include file="res_cacheicon_22.tpl" cachetype=$watchItem.type|escape}</td>
 							<td class="{$listcolor}">{include file="res_cachestatus.tpl" status=$watchItem.status}</td>
 							<td class="{$listcolor}"><span style="{include file="res_cachestatus_span.tpl" status=$watchItem.status}"><a href="viewcache.php?wp={$watchItem.wp}">{$watchItem.name|escape}</a></span> {include file="res_oconly.tpl" oconly=$watchItem.oconly}</td>
@@ -139,7 +147,7 @@
 									{$watchItem.lastfound|date_format:$opt.format.date}
 								{/if}
 							</td>
-							<td class="{$listcolor}">[<a href="javascript:if(confirm('{t escape=js}Do you really want to delete this entry?{/t}'))location.href='mywatches.php?action=remove&cacheid={$watchItem.cacheid}&target=mywatches.php'">{t}remove{/t}</a>]</td>
+							<td class="{$listcolor}"><nobr>[<a href="javascript:if(confirm('{t escape=js}Do you really want to delete this entry?{/t}'))location.href='mywatches.php?action=remove&cacheid={$watchItem.cacheid}&target=mywatches.php'">{t}do not watch{/t}</a>]</nobr></td>
 						</tr>
 					{foreachelse}
 						<tr><td colspan="5"><br />{t}No Geocaches watched.{/t}</td></tr>
@@ -148,4 +156,9 @@
 			</td>
 		</tr>
 	</table>
+
+	{if $cachelists|@count}
+		<p><br />{t}Lists{/t}:</p>
+		{include file="res_cachelists.tpl"}
+	{/if}
 {/if}

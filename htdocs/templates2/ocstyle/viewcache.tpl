@@ -99,9 +99,9 @@
 				{/if}
 
 				{if $watched==1}  {* is always false of not logged in *}
-					<li class="group"><a style="background-image: url(resource2/{$opt.template.style}/images/viewcache/watch-18.png);background-repeat:no-repeat;" href="mywatches.php?action=remove&amp;cacheid={$cache.cacheid|urlencode}&amp;target=viewcache.php%3Fcacheid%3D{$cache.cacheid|urlencode}">{t}Don't watch{/t}</a></li>
+					<li class="group"><a style="background-image: url(resource2/{$opt.template.style}/images/viewcache/watch-18.png);background-repeat:no-repeat;" href="mywatches.php?action=remove&amp;cacheid={$cache.cacheid|urlencode}&amp;target=viewcache.php%3Fcacheid%3D{$cache.cacheid|urlencode}%26watchinfo=1">{t}Don't watch{/t}</a></li>
 				{else}
-					<li class="group"><a style="background-image: url(resource2/{$opt.template.style}/images/viewcache/watch-18.png);background-repeat:no-repeat;" href="{if $login.userid!=0}mywatches.php?action=add&amp;cacheid={$cache.cacheid|urlencode}&amp;target=viewcache.php%3Fcacheid%3D{$cache.cacheid|urlencode}{else}login.php?target=mywatches.php%3Faction%3Dadd%26cacheid%3D{$cache.cacheid|urlencode|urlencode}%26target%3Dviewcache.php%253Fcacheid%253D{$cache.cacheid|urlencode|urlencode}{/if}">{t}Watch{/t}</a></li>
+					<li class="group"><a style="background-image: url(resource2/{$opt.template.style}/images/viewcache/watch-18.png);background-repeat:no-repeat;" href="{if $login.userid!=0}mywatches.php?action=add&amp;cacheid={$cache.cacheid|urlencode}&amp;target=viewcache.php%3Fcacheid%3D{$cache.cacheid|urlencode}%26watchinfo=1{else}login.php?target=mywatches.php%3Faction%3Dadd%26cacheid%3D{$cache.cacheid|urlencode|urlencode}%26target%3Dviewcache.php%253Fcacheid%253D{$cache.cacheid|urlencode|urlencode}{/if}">{t}Watch{/t}</a></li>
 				{/if}
 
 				{if $login.userid!=0}
@@ -110,7 +110,9 @@
 					{else}
 						<li class="group"><a style="background-image: url(resource2/{$opt.template.style}/images/viewcache/ignore-18.png);background-repeat:no-repeat;" href="ignore.php?cacheid={$cache.cacheid|urlencode}&amp;action=addignore">{t}Ignore{/t}</a></li>
 					{/if}
-
+				{/if}
+				<li class="group"><a style="background-image: url(resource2/{$opt.template.style}/images/viewcache/list-18.png);background-repeat:no-repeat;" href="addtolist.php?cacheid={$cache.cacheid|urlencode}">{t}Add to list{/t}</a></li>
+				{if $login.userid!=0}
 					{if $login.userid==$cache.userid || $listing_admin }
 						<li class="group {if $login.userid!=$cache.userid}hilite{/if}"><a style="background-image: url(resource2/{$opt.template.style}/images/viewcache/page.png);background-repeat:no-repeat;" href="editcache.php?cacheid={$cache.cacheid|urlencode}">{t}Edit{/t}</a></li>
 					{/if}
@@ -119,6 +121,14 @@
 				<li class="group"><a style="background-image: url(resource2/{$opt.template.style}/images/viewcache/report-problem-18.png);background-repeat:no-repeat;" href="{if $login.userid!=0}reportcache.php?cacheid={$cache.cacheid|urlencode}{else}login.php?target=reportcache.php%3Fcacheid%3D{$cache.cacheid|urlencode|urlencode}{/if}">{t}Report this cache{/t}</a></li>
 			</ul>
 		</div>
+		{if $watchclinfo && $watched==0}
+			<div style="clear:both; padding-top:4px">
+				<p>
+					<img src="resource2/{$opt.template.style}/images/viewcache/16x16-info.png" class="icon16" alt="Info" />
+					{t}You are still watching this geocache via one or more cache lists.{/t}
+				</p>
+			</div>
+		{/if}
 		<div class="buffer" style="width: 500px;">&nbsp;</div>
 
 		<div class="content2-container-2col-left" style="width:60px; clear: left;">
@@ -281,21 +291,47 @@
 </div>
 <!-- End Cachedetails -->
 
-<!-- Attributes -->
-{if count($attributes)>0}
+<!-- Attributes & cache lists -->
+<script type="text/javascript">
+function showalllists()
+{literal}{{/literal}
+	document.getElementById('morelists').style.display = 'none';
+	for (n=5; n<={$cachelists|@count}; ++n)
+		document.getElementById('cachelist' + n.toString()).style.display = '';
+{literal}}{/literal}
+</script>
+
+{if $attributes|@count || $cachelists|@count}
 	<div class="content2-container line-box" style="height:0px"></div> {* MSIE needs explicit height *}
 	<div class="content2-container">
-		<div style="padding-left:2px">
-			<p style="line-height: 1.6em;">
-				{include file="res_attribgroup.tpl" attriblist=$attributes}
-			</p>
-		</div>
+		{if $cachelists|@count}
+			<div style="float:right; max-width:350px; margin-left:32px; margin-bottom:12px; padding-left:16px; {if $attributes|@count}border-left:1px solid #c0c0c0{/if}">
+				<p><a href="cachelists.php"><img src="resource2/{$opt.template.style}/images/misc/16x16-list.png" title="{t}Cache list{/t}" style="padding-right:1px"/></a> <b>{t}Cache lists{/t}</b></p>
+				{assign var="n" value="0"}
+				{foreach from=$cachelists item=cachelist}
+					{assign var="n" value=$n+1}
+					{if $n==5 && $cachelists|@count > 5}
+						<p id="morelists" style="padding:0; line-height:1em"><a href="javascript:showalllists()">{t}mehr{/t} ...</a></p>
+					{/if}
+					<p id="cachelist{$n}" style="padding:0; line-height:1em; {if $n>=5 && $cachelists|@count > 5}display:none{/if}">
+					{include file="res_cachelist_link.tpl"} {if $cachelist.is_public}{t}by{/t} <a href="viewprofile.php?userid={$cachelist.user_id}">{$cachelist.username|escape}</a>{else} ({t}private{/t}){/if}
+					</p>
+				{/foreach}
+			</div>
+		{/if}
+		{if $attributes|@count}
+			<div style="padding-left:2px">
+				<p style="line-height: 1.6em;">
+					{include file="res_attribgroup.tpl" attriblist=$attributes}
+				</p>
+			</div>
+		{/if}
 	</div>
-	<div style="height:2px"></div>
+	<div style="clear:both; height:2px"></div>
 {else}
 	<br />
 {/if}
-<!-- End Attributes -->
+<!-- End Attributes & cache lists-->
 
 <!-- Description -->
 <div class="content2-container bg-blue02">

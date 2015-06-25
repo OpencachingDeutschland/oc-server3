@@ -21,7 +21,7 @@
 	<tr>
 		<td colspan="2">
 			<table class="table">
-				<tr class="searchresult">
+				<tr class="cachelistheader">
 					<th width="50px">{t}Type{/t}</th>
 					<th width="50px">{t}State{/t}</th>
 					<th width="500px">{t}Name{/t}</th>
@@ -30,7 +30,7 @@
 				</tr>
 				{foreach from=$ratings item=ratingItem}
 					{cycle assign=listcolor values="listcolor1,listcolor2"}
-					<tr>
+					<tr class="cachelistitem">
 						<td class="{$listcolor}">{include file="res_cacheicon_22.tpl" cachetype=$ratingItem.type|escape}</td>
 						<td class="{$listcolor}">{include file="res_cachestatus.tpl" status=$ratingItem.status}</td>
 						<td class="{$listcolor}"><span style="{include file="res_cachestatus_span.tpl" status=$ratingItem.status}"><a href="viewcache.php?wp={$ratingItem.wp}">{$ratingItem.cachename|escape}</a></span> {include file="res_oconly.tpl" oconly=$ratingItem.oconly}</td>

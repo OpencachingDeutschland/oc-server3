@@ -141,11 +141,19 @@
 		<p><a href="#attributedesc">See below</a> for a complete explanation of cache attributes.</p>
 
 		<p><b>Short description:</b> Try to subsume your cache by a few words!</p>
+
 		<p><b>Description:</b> Enter any information which is needed to find the cache, but avoid spoiling it by telling too much! Additionally you can explain why you hide the cache here or e. g. what this monument is about.</p>
+
 		<p><b>Hint:</b> For the case the geocacher has no clue how to find it, give her a final aid to unhide it! </p>
+
 		<p><b>Hidden on:</b> The date when you did hide the cache. If you enter a future date, the cache will be listed as "temporarily not available", and you will have to change the state to "available" when the cache is hidden. For an event cache, enter the planned date of the event.</p>
+
 		<p><a name="logpw"></a><b>Password to log:</b> If specified, every finder has to enter this password when logging online. He will not be able to log "found it" without password. Case does not matter. Be careful when using 0, O, i or j, because these characters may be confused.</p>
+
+		<p><b>Show all cache lists:</b> This setting is enabled by default for new caches and can be changed afterwards. If enabled, all <a href="cachelists.php">public cache lists</a> that contain this cache are displayed above the cache description text, right of the attributes. Otherwise, only lists of the viewing user and of the cache owner are displayed.</p>
+
 		<p><b>Terms of use:</b> Please read our terms of use carefully! We tried hard to make them brief and fair.</p>
+
 		<p><b>Pictures:</b> Pictures may be uploaded after entering and saving the cache listing: Open the listing and click "Edit" at the second-to-top menu. Look for the section "Pictures" and click on "Upload a picture".</p>
 
 		<br id="attributedesc" />

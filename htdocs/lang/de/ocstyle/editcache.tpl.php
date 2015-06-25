@@ -340,7 +340,7 @@ function toggleAttr(id)
 
 	<tr><td class="spacer" colspan="2"></td></tr>
 	<tr>
-		<td nowrap="nowrap">{t}password for 'found' logs{/t}:</td>
+		<td><nobr>{t}password for 'found' logs{/t}:</nobr></td>
 		<td><input class="input100" type="text" name="log_pw" value="{log_pw}" maxlength="20"/> &nbsp; {t}(leave blank for no password){/t}</td>
 	</tr>
 	<tr>
@@ -348,6 +348,10 @@ function toggleAttr(id)
 			<img src="lang/de/ocstyle/images/misc/hint-link.gif" border="0" width="15" height="11" alt="{t}Notice{/t}" title="{t}Notice{/t}" />
 			{t}Please note the <a href="articles.php?page=cacheinfo#logpw" target="_blank">description</a>{/t}
 		</td>
+	</tr>
+	<tr>
+		<td><nobr><label for="showlists">{t}Show all cache lists{/t}</label></nobr></td>
+		<td><input type="checkbox" id="showlists" name="showlists" value="1" {showlists_checked} /></td>
 	</tr>
 
 	<tr><td class="spacer" colspan="2"></td></tr>

@@ -35,10 +35,12 @@
 		if (count($argv) == 2 && !strstr("/", $argv[1]))
 		{
 			// run one job manually for debugging purpose
+			$ignore_interval = true;
 			require($modules_dir . $argv[1] . ".class.php");
 		}
 		else
 		{
+			$ignore_interval = false;
 			$hDir = opendir($modules_dir);
 			while (false !== ($file = readdir($hDir)))
 				if (substr($file, -10) == '.class.php')
@@ -51,8 +53,10 @@
 
 function checkJob(&$job)
 {
-	$last_run = strftime(DB_DATE_FORMAT, time() - $job->interval);
-	$count = sqll_value("SELECT COUNT(*) FROM `sys_cron` WHERE `name`='&1' AND `last_run`>'&2' AND `last_run`<=NOW()", 0, $job->name, $last_run);
+	global $ignore_interval;
+
+	$max_last_run = strftime(DB_DATE_FORMAT, time() - ($ignore_interval ? 0 : $job->interval));
+	$count = sqll_value("SELECT COUNT(*) FROM `sys_cron` WHERE `name`='&1' AND `last_run`>'&2' AND `last_run`<=NOW()", 0, $job->name, $max_last_run);
 	if ($count != 1)
 	{
 		$job->run();

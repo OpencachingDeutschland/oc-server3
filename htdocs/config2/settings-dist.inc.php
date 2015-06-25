@@ -627,6 +627,11 @@
 	 */
 	$opt['html_purifier']['cache_path'] = dirname(__FILE__).'/../cache2/html_purifier/';
 
+	/*
+	 * OKAPI
+	 */
+	$opt['okapi']['var_dir'] = $opt['rootpath'] . 'var/okapi';
+
 	/* Opencaching Node Daemon
 	 *
 	 */

@@ -6747,7 +6747,6 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2177', 'DE', 'An diesen Koordinaten befindet sich bereits der Cache <a href=\"viewcache.php?wp=%1\">%1</a>. Vielleicht hast du mehrfach auf \"Cache senden\" geklickt. Wenn du tatsächlich einen weiteren Cache mit identischen Koordinaten veröffentlichen möchtest, lege ihn zunächst mit abweichenden Koordinaten an, bearbeite dann das Listing und ändere die Koordinaten.', '2013-11-03 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2178', 'DE', 'ungültiger GC-Wegpunkt, Format ist GCXXX...', '2013-11-03 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2179', 'DE', 'Safari-Cache-Liste', '2013-11-03 10:09:14');
-<<<<<<< HEAD
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2180', 'DE', 'Merken', '2013-11-03 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2181', 'DE', 'Geocache zu Liste hinzufügen', '2013-11-03 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2182', 'DE', 'Den Geocache <b>%1</b> zu folgender Liste hinzufügen:', '2013-11-03 10:09:14');
@@ -6789,9 +6788,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2218', 'DE', 'Eine andere deiner Cachelisten hat bereits den gleichen Name.', '2013-11-03 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2219', 'DE', 'Mindestlänge für öffentliche Listen ist 10 Zeichen', '2013-11-03 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2220', 'DE', 'Du beobachtest diesen Geocache weiterhin über eine oder mehrere Cachelisten.', '2013-11-03 10:09:14');
-=======
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2250', 'DE', 'ohne Geokrets', '2013-11-03 10:09:14');
->>>>>>> master
 
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'EN', 'Reorder IDs', '2010-09-02 00:15:30');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'EN', 'The database could not be reconnected.', '2010-08-28 11:48:07');

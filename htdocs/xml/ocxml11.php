@@ -387,6 +387,7 @@ function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $z
 	$objecttypes['3'] = 'cachedesc';
 	$objecttypes['1'] = 'cachelog';
 	$objecttypes['6'] = 'picture';
+	$objecttypes['8'] = 'cachelist';    // not implemented yet
 
 	/* end now a few dynamically loaded constants */
 	
@@ -811,7 +812,7 @@ function startXmlSession($sModifiedSince, $bCache, $bCachedesc, $bCachelog, $bUs
 		if ($bRemovedObject == 1)
 		{
 			sql("INSERT INTO `xmlsession_data` (`session_id`, `object_type`, `object_id`)
-			     SELECT &1, 7, `id` FROM `removed_objects` WHERE `removed_date` >= '&2'",
+			     SELECT &1, 7, `id` FROM `removed_objects` WHERE `removed_date` >= '&2' AND `type`<>8",
 			     $sessionid,
 			     $sModifiedSince);
 			$recordcount['removedobjects'] = mysql_affected_rows();

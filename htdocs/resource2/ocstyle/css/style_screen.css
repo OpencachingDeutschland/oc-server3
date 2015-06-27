@@ -48,9 +48,6 @@ body.popup {
 	position: relative;
 }
 
-/* MSIE hacks */
-* html .page-container-1 {top: 29px;}
-*+html .page-container-1 {top: 29px;}
 
 #ocmain {
 	height:100%;
@@ -928,30 +925,13 @@ div.attribgroup td {
 	font-size: 120%;
 }
 
- /* Hack for Firefox */
-:root div.attribgroup {
+div.attribgroup {
 	display: inline-block; 
 	margin: 0px; 
 	padding-right: 0.6em; 
 	padding-bottom: 0.6em;
 }
 
- /* Hack for Chrome & Safari */
-@media screen and (-webkit-min-device-pixel-ratio:0) {
-div.attribgroup { 
-	display: inline-block; 
-	margin: 0px; 
-	padding-right: 0.6em; 
-	padding-bottom: 0.6em;
-}
-}
-
-/* Hack for IE */
-*div.attribgroup {
-	display: inline; 
-	margin: 0px; 
-	padding-right: 0.6em; 
-}
 
 /*---------------------------*/
 /* 9.4  Search               */

@@ -468,6 +468,12 @@
 		update_triggers();		// runs maintain-125.inc.php
 	}
 
+	function dbv_126()  // clean up data of disabled accounts
+	{
+		sql("DELETE FROM `cache_adoption` WHERE `user_id` IN (SELECT `user_id` FROM `user` WHERE `is_active_flag`=0)");
+		sql("DELETE FROM `cache_ignore`   WHERE `user_id` IN (SELECT `user_id` FROM `user` WHERE `is_active_flag`=0)");
+		sql("DELETE FROM `cache_watches`  WHERE `user_id` IN (SELECT `user_id` FROM `user` WHERE `is_active_flag`=0)");
+	}
 
 	// When adding new mutations, take care that they behave well if run multiple
 	// times. This improves robustness of database versioning.

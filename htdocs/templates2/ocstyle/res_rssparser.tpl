@@ -16,7 +16,7 @@
 		<div class="rsstext">{$rss.description}</div>
 {else}
 			<tr>
-				<td style="text-align:right">{$rss.pubDate}</td>
+				<td style="text-align:right; white-space:nowrap;">{$rss.pubDate}</td>
 				<td><a class="links" href="{$rss.link}">{$rss.title}</a></td>
 			</tr>
 {/if}

@@ -36,11 +36,11 @@
 	{message_start}<tr><td colspan="2" class="message">{message}</td></tr><tr><td class="spacer" colspan="2"></td></tr>{message_end}
 	<tr>
 		<td>{t}Username:{/t}</td>
-		<td><input name="email" maxlength="80" type="text" class="textboxes" value="{username}" class="input200" /></td>
+		<td><input name="email" maxlength="80" type="text"  value="{username}" class="input200" /></td>
 	</tr>
 	<tr>
 		<td>{t}Password:{/t}</td>
-		<td><input name="password" maxlength="60" type="password" class="textboxes" value="" class="input200" /></td>
+		<td><input name="password" maxlength="60" type="password"  value="" class="input200" /></td>
 	</tr>
 	<tr><td class="spacer" colspan="2"></td></tr>
 

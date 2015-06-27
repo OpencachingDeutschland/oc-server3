@@ -61,14 +61,14 @@
 		<meta http-equiv="Content-Language" content="{lang}" />
 		<meta http-equiv="gallerimg" content="no" />
 		<meta http-equiv="cache-control" content="no-cache" />
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
 		<link rel="SHORTCUT ICON" href="favicon.ico" />
 		<link rel="apple-touch-icon" href="resource2/{style}/images/oclogo/apple-touch-icon-iphone.png" />
 		<link rel="apple-touch-icon" sizes="72x72" href="resource2/{style}/images/oclogo/apple-touch-icon-ipad.png" />
 		<link rel="apple-touch-icon" sizes="114x114" href="resource2/{style}/images/oclogo/apple-touch-icon-iphone-retina.png" />
 		<link rel="apple-touch-icon" sizes="144x144" href="resource2/{style}/images/oclogo/apple-touch-icon-ipad-retina.png" />
 		<link rel="stylesheet" type="text/css" media="screen,projection" href="resource2/{style}/css/style_screen.css?ft={screen_css_time}" />
-		<!--[if lte IE 9]>
-			<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+		<!--[if lt IE 9]>
 			<link rel="stylesheet" type="text/css" media="screen,projection" href="resource2/{style}/css/style_screen_msie.css?ft={screen_msie_css_time}" />
 		<![endif]-->
       <script type="text/javascript">

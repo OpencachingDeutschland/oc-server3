@@ -925,22 +925,11 @@ div.attribgroup td {
 	font-size: 120%;
 }
 
-
 div.attribgroup {
 	display: inline-block; 
 	margin: 0px; 
 	padding-right: 0.6em; 
 	padding-bottom: 0.6em;
-}
-
- /* Hack for Chrome & Safari */
-@media screen and (-webkit-min-device-pixel-ratio:0) {
-div.attribgroup { 
-	display: inline-block; 
-	margin: 0px; 
-	padding-right: 0.6em; 
-	padding-bottom: 0.6em;
-}
 }
 
 

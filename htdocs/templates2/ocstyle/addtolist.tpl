@@ -35,7 +35,7 @@
 		{foreach from=$cachelists item=cachelist}
 			<input type="radio" id="list{$cachelist.id}" name="listid" value="{$cachelist.id}" {if $default_list==$cachelist.id}checked="checked"{/if} />
 			<label for="list{$cachelist.id}">{$cachelist.name|escape}
-			&nbsp;({if $cachelist.is_public}{t}public{/t}{else}{t}private{/t}{/if})</label>
+			&nbsp;<span class="greytext">({if $cachelist.is_public}{t}public{/t}{else}{t}private{/t}{/if})</span></label>
 			<br />
 		{/foreach}
 		</span>

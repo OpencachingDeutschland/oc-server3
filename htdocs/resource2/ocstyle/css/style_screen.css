@@ -192,7 +192,8 @@ div#langstripe {
 .nav3 {overflow: hidden; clear: both; float: left; width: 160px; min-height: 500px; margin: 0px; padding: 0px; color: rgb(75,75,75); font-size: 1.0em; }
 .nav3 ul {width: 160px; margin: 0px 0px 20px 0px; padding: 0px; border-bottom: solid 1px white; background-color: rgb(219,230,241);}
 .nav3 li {list-style: none; margin: 0px; padding: 0px;}
-.nav3 li.title {margin: 2px 0px 0px 0px; padding: 3px 5px 2px 15px; background-color: rgb(156,186,214); color: rgb(255,255,255); text-transform: uppercase; font-weight: bold; font-size: 120%; background: #95cb66 url(../images/page/nav3-title.png) repeat-x; background-size:contain; }
+.nav3 li.title {margin: 2px 0px 0px 0px; padding: 3px 5px 2px 15px; color: rgb(255,255,255); text-transform: uppercase; font-weight: bold; font-size: 120%; background: #95cb66 url(../images/page/nav3-title.png) repeat-x; background-size:contain; }
+.nav3 li.secondtitle { margin-top:0; }
 .nav3 li.group1 a {display: block; min-height: 1.7em; height: auto !important; height: 1.7em; line-height: 1.7em; margin: 0px; padding: 0px 7px 0px 15px; border-top: solid 1px white; border-left: solid 7px rgb(219,230,241); color: rgb(75,75,75); font-weight: bold; font-size: 120%;}
 .nav3 li.group_active a {border-left: solid 7px rgb(156,186,214); background-color: rgb(156,186,214);}
 .nav3 li.group2 a {display: block; min-height: 1.7em; height: auto !important; height: 1.7em; line-height: 1.7em; margin: 0px; padding: 0px 7px 0px 15px; border-top: solid 1px white; border-left: solid 14px rgb(219,230,241); color: rgb(75,75,75); font-weight: normal; font-size: 120%;}
@@ -680,6 +681,7 @@ input.waypoint { text-transform: uppercase; }
 .errormsg {color: rgb(240,100,100); font-weight: bold;}
 .okmsg {color: rgb(0,191,0); font-weight: bold;}
 .redtext {color: rgb(198,0,0);}
+.greytext { color: rgb(140,140,140); }
 
 img#viewcache-cacheicon { float: left; }
 
@@ -962,7 +964,7 @@ div.searchdiv2 td.fieldlabel {
 	vertical-align: top;
 }
 
-.searchtable th {margin: 0px; background-color: #deebcd; color: #404040; padding: 4px 0px 4px 0px; empty-cells: show; text-align: left; font-size: 12px;  background: #95cb66 url(../images/page/listheader-bg.png) repeat-x; background-size:contain; }
+.searchtable th {margin: 0px; color: #404040; padding: 4px 0px 4px 0px; empty-cells: show; text-align: left; font-size: 12px;  background: #d8e5c6 url(../images/page/listheader-bg.png) repeat-x; background-size:contain; }
 .searchtable td { padding-top:2px; }
 td.search_listcolor1 { background:#fff; }
 td.search_listcolor2 { background:#f0f0f0; }

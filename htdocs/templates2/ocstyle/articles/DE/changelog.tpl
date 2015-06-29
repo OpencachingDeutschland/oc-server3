@@ -27,6 +27,34 @@
 
 	<div class="changelog-changes">
 
+	<p id="v3.0.13"><strong>OC 3.0 Version 13</strong> &ndash; xx. Juli 2015</p>
+	<p>Neu:</p>
+	<ul>
+		<li><a href="cachelists.php">Cachelisten</a></li>
+		<li>Filtermöglichkeit für Caches mit Geokrets bei der Suche und auf der Karte</i></li>
+		<li>Link zur Safari-Cache-Liste auf der Karte</li>
+	</ul>
+
+	<p>Geändert / verbessert:</p>
+	<ul>
+		<li>Bilder bis zu 250 KB Größe bleiben unverändert, erst bei &gt; 250 KB wird verkleinert</li>
+		<li>Um einen noch nicht veröffentlichten Cache zu veröffentlichen genügt es, unten im Listing „sofort veröffentlichen“ zu wählen.
+		<li>Beobachtungs- und Ignorierlisten deaktivierter Benutzer werden gelöscht</li>
+		<li>kleine Design-Verbesserungen</li>
+		<li>Liste der OC-Länderseiten aktualisiert: Rumänien ist neu, Schweden/Norwegen wurde eingestellt</li>
+		<li>interne Verbesserungen für das Datenpflegeteam</li>
+	</ul>
+
+	<p>Korrigiert (Bugfixes):</p>
+	<ul>
+		<li>zuverlässigeres Ausblenden von GC-Doppellistings bei der Cachesuche und auf der Karte [seit v3.0.9]</li>
+		<li>Kennzeichnung neuer Caches in der Suchergebnisliste korrigiert [Bug von v3.0.9]</li>
+		<li>Attributanzeige im Internet Explorer korrigiert [Bug von v3.0.11]</li>
+		<li>Event-Icons in der Logstatistik korrigiert</li>
+		<li>GC- und NC-Wegpunkteingabe korrigiert [Bug von v3.0.12]</li>
+	</ul>
+	</p>
+
 	<p id="v3.0.12"><strong>OC 3.0 Version 12</strong> &ndash; 31. Mai 2015</p>
 	<p>Neu:</p>
 	<ul>

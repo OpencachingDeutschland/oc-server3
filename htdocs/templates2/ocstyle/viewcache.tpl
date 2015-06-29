@@ -95,30 +95,30 @@
 			<ul id="cachemenu">
 				<li class="title" >Cache Menu</li>
 				{if $cache.log_allowed || $cache.adminlog}
-					<li class="group {if $cache.adminlog}hilite{/if}"><a style="background-image: url(resource2/{$opt.template.style}/images/viewcache/new-entry-18.png);background-repeat:no-repeat;" href="{if $login.userid!=0}log.php?cacheid={$cache.cacheid|urlencode}{else}login.php?target=log.php%3Fcacheid%3D{$cache.cacheid|urlencode|urlencode}{/if}">{t}Log this cache{/t}</a></li>
+					<li class="group {if $cache.adminlog}hilite{/if}"><a style="background-image: url(resource2/{$opt.template.style}/images/viewcache/new-entry-18.png);background-repeat:no-repeat;background-position:left center;" href="{if $login.userid!=0}log.php?cacheid={$cache.cacheid|urlencode}{else}login.php?target=log.php%3Fcacheid%3D{$cache.cacheid|urlencode|urlencode}{/if}">{t}Log this cache{/t}</a></li>
 				{/if}
 
 				{if $watched==1}  {* is always false of not logged in *}
-					<li class="group"><a style="background-image: url(resource2/{$opt.template.style}/images/viewcache/watch-18.png);background-repeat:no-repeat;" href="mywatches.php?action=remove&amp;cacheid={$cache.cacheid|urlencode}&amp;target=viewcache.php%3Fcacheid%3D{$cache.cacheid|urlencode}%26watchinfo=1">{t}Don't watch{/t}</a></li>
+					<li class="group"><a style="background-image: url(resource2/{$opt.template.style}/images/viewcache/watch-18.png);background-repeat:no-repeat;background-position:left center;" href="mywatches.php?action=remove&amp;cacheid={$cache.cacheid|urlencode}&amp;target=viewcache.php%3Fcacheid%3D{$cache.cacheid|urlencode}%26watchinfo=1">{t}Don't watch{/t}</a></li>
 				{else}
-					<li class="group"><a style="background-image: url(resource2/{$opt.template.style}/images/viewcache/watch-18.png);background-repeat:no-repeat;" href="{if $login.userid!=0}mywatches.php?action=add&amp;cacheid={$cache.cacheid|urlencode}&amp;target=viewcache.php%3Fcacheid%3D{$cache.cacheid|urlencode}%26watchinfo=1{else}login.php?target=mywatches.php%3Faction%3Dadd%26cacheid%3D{$cache.cacheid|urlencode|urlencode}%26target%3Dviewcache.php%253Fcacheid%253D{$cache.cacheid|urlencode|urlencode}{/if}">{t}Watch{/t}</a></li>
+					<li class="group"><a style="background-image: url(resource2/{$opt.template.style}/images/viewcache/watch-18.png);background-repeat:no-repeat;background-position:left center;" href="{if $login.userid!=0}mywatches.php?action=add&amp;cacheid={$cache.cacheid|urlencode}&amp;target=viewcache.php%3Fcacheid%3D{$cache.cacheid|urlencode}%26watchinfo=1{else}login.php?target=mywatches.php%3Faction%3Dadd%26cacheid%3D{$cache.cacheid|urlencode|urlencode}%26target%3Dviewcache.php%253Fcacheid%253D{$cache.cacheid|urlencode|urlencode}{/if}">{t}Watch{/t}</a></li>
 				{/if}
 
 				{if $login.userid!=0}
 					{if $ignored==1}
-						<li class="group"><a style="background-image: url(resource2/{$opt.template.style}/images/viewcache/ignore-18.png);background-repeat:no-repeat;" href="ignore.php?cacheid={$cache.cacheid|urlencode}&amp;action=removeignore">{t}Don't ignore{/t}</a></li>
+						<li class="group"><a style="background-image: url(resource2/{$opt.template.style}/images/viewcache/ignore-18.png);background-repeat:no-repeat;background-position:left center;" href="ignore.php?cacheid={$cache.cacheid|urlencode}&amp;action=removeignore">{t}Don't ignore{/t}</a></li>
 					{else}
-						<li class="group"><a style="background-image: url(resource2/{$opt.template.style}/images/viewcache/ignore-18.png);background-repeat:no-repeat;" href="ignore.php?cacheid={$cache.cacheid|urlencode}&amp;action=addignore">{t}Ignore{/t}</a></li>
+						<li class="group"><a style="background-image: url(resource2/{$opt.template.style}/images/viewcache/ignore-18.png);background-repeat:no-repeat;background-position:left center;" href="ignore.php?cacheid={$cache.cacheid|urlencode}&amp;action=addignore">{t}Ignore{/t}</a></li>
 					{/if}
 				{/if}
-				<li class="group"><a style="background-image: url(resource2/{$opt.template.style}/images/viewcache/list-18.png);background-repeat:no-repeat;" href="addtolist.php?cacheid={$cache.cacheid|urlencode}">{t}Add to list{/t}</a></li>
+				<li class="group"><a style="background-image: url(resource2/{$opt.template.style}/images/viewcache/list-18.png);background-repeat:no-repeat;background-position:left center;" href="addtolist.php?cacheid={$cache.cacheid|urlencode}">{t}Add to list{/t}</a></li>
 				{if $login.userid!=0}
 					{if $login.userid==$cache.userid || $listing_admin }
-						<li class="group {if $login.userid!=$cache.userid}hilite{/if}"><a style="background-image: url(resource2/{$opt.template.style}/images/viewcache/page.png);background-repeat:no-repeat;" href="editcache.php?cacheid={$cache.cacheid|urlencode}">{t}Edit{/t}</a></li>
+						<li class="group {if $login.userid!=$cache.userid}hilite{/if}"><a style="background-image: url(resource2/{$opt.template.style}/images/viewcache/page.png);background-repeat:no-repeat;background-position:left center;" href="editcache.php?cacheid={$cache.cacheid|urlencode}">{t}Edit{/t}</a></li>
 					{/if}
 				{/if}	
 
-				<li class="group"><a style="background-image: url(resource2/{$opt.template.style}/images/viewcache/report-problem-18.png);background-repeat:no-repeat;" href="{if $login.userid!=0}reportcache.php?cacheid={$cache.cacheid|urlencode}{else}login.php?target=reportcache.php%3Fcacheid%3D{$cache.cacheid|urlencode|urlencode}{/if}">{t}Report this cache{/t}</a></li>
+				<li class="group"><a style="background-image: url(resource2/{$opt.template.style}/images/viewcache/report-problem-18.png);background-repeat:no-repeat;background-position:left center;" href="{if $login.userid!=0}reportcache.php?cacheid={$cache.cacheid|urlencode}{else}login.php?target=reportcache.php%3Fcacheid%3D{$cache.cacheid|urlencode|urlencode}{/if}">{t}Report this cache{/t}</a></li>
 			</ul>
 		</div>
 		{if $watchclinfo && $watched==0}

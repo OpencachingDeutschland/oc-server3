@@ -19,6 +19,7 @@
 						{if $show_watchers}<th width="60px">{t}Watchers{/t}</th>{/if}
 						{if $show_edit || ($togglewatch && $login.userid)}<th width="{if $show_edit}160px{else}140px{/if}"></th>{/if}
 					</tr>
+					{cycle assign=listcolor values="listcolor2" reset=true}
 					{foreach from=$cachelists item=cachelist}
 						{cycle assign=listcolor values="listcolor1,listcolor2"}
 						<tr class="cachelistitem">

@@ -435,6 +435,15 @@ class SearchAssistant
                     from cache_watches
                     where user_id = '".mysql_real_escape_string($this->request->token->user_id)."'
                 ");
+                if (Settings::get('OC_BRANCH') == 'oc.de')
+                {
+                    $watched_cache_ids = array_merge($watched_cache_ids, Db::select_column("
+                        select cache_id
+                        from cache_list_items cli, cache_list_watches clw
+                        where cli.cache_list_id = clw.cache_list_id
+                        and clw.user_id = '".mysql_real_escape_string($this->request->token->user_id)."'
+                    "));
+                }
                 $where_conds[] = "caches.cache_id in ('".implode("','", array_map('mysql_real_escape_string', $watched_cache_ids))."')";
             }
         }

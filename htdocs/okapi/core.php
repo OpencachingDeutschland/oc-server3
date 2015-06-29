@@ -894,7 +894,7 @@ class Okapi
 {
     public static $data_store;
     public static $server;
-    public static $revision = 1075; # This gets replaced in automatically deployed packages
+    public static $revision = 1077; # This gets replaced in automatically deployed packages
     private static $okapi_vars = null;
 
     /** Get a variable stored in okapi_vars. If variable not found, return $default. */
@@ -2005,9 +2005,13 @@ class OkapiInternalRequest extends OkapiRequest
         $this->consumer = $consumer;
         $this->token = $token;
         $this->parameters = array();
-        foreach ($parameters as $key => $value)
+        foreach ($parameters as $key => $value){
             if ($value !== null)
                 $this->parameters[$key] = $value;
+            if ($key == "i_want_okapi_response" && $value == 'true'){
+                $this->i_want_okapi_response = true;
+            }
+        }
     }
 
     public function get_parameter($name)

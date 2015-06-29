@@ -10,7 +10,7 @@
 
 	<div class="content2-pagetitle">
 		<img src="resource2/{$opt.template.style}/images/misc/32x32-list.png" style="align: left; margin-right: 10px;" width="32" height="32" />
-		{if $edit_list}{t}Edit cache list{/t}{else}{t}My cache lists{/t}{/if}
+		{if $newlist_mode}{t}Create new cachelist{/t}{elseif $edit_list}{t}Edit cache list{/t}{else}{t}My cache lists{/t}{/if}
 	</div>
 
 	{if $invalid_waypoints}
@@ -26,6 +26,7 @@
 		<form method="post" action="mylists.php">
 			&nbsp;<input type="submit" name="new" value="{t}Create new list{/t}" class="formbutton widebutton" />
 		</form>
+		<br />
 	{else}
 
 	{literal}
@@ -41,7 +42,6 @@
 	</script>
 	{/literal}
 
-	<br />
 	<form method="post" action="mylists.php?id={$listid}" name="editdesc" id="editlist_form">
 		{if $edit_list}<input type="hidden" name="listid" value="{$listid}" />{/if}
 		<input id="descMode" type="hidden" name="descMode" value="3" />
@@ -49,12 +49,8 @@
 		{if $fromsearch}<input type="hidden" name="fromsearch" value="{$fromsearch}" />{/if}
 
 		<table class="table" id="addlist" {if !($name_error || $edit_list || $newlist_mode)}style="display:none"{/if}>
-			{if !$edit_list}
-			<tr>
-				<td colspan="2"><b>{t}Create new list{/t}:</b></td>
-			</tr>
 			<tr><td class="separator"></td></tr>
-			{/if}
+			<tr><td class="separator"></td></tr>
 			<tr>
 				<td>{t}Name{/t}:</td>
 				<td><input type="text" id="list_name" name="list_name" maxlength="80" value="{$list_name}" class="input500" /></td>

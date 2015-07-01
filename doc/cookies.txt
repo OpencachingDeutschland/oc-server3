@@ -38,7 +38,7 @@ Contents:  flag for hiding archived caches in user profile
 File:      myhome.tpl
 
 Name:      'oclogdate'
-Type:      temporary, discarded when browser closes
+Type:      temporary, expires 12 hours after last log
 Contents:  date of last submitted log
 File:      log.php
 

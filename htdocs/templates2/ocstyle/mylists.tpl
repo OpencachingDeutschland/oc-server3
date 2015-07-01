@@ -20,7 +20,7 @@
 	{if !$edit_list && !$newlist_mode && !$name_error}
 		{include file="res_cachelists.tpl"}
 		{if $cachelists|@count}
-			<p><br />{t 1=$login.userid}Public lists are displayed in your <a href="viewprofile.php?userid=%1">public user profile</a>, on the <a href="cachelists.php">lists overwiew page</a> and in the cache listings.{/t}</p>
+			<p><br />{t 1=$login.userid}Public lists are displayed in your <a href="viewprofile.php?userid=%1">public user profile</a>, on the <a href="cachelists.php">lists overwiew page</a> and (if enabled) in the cache listings.{/t}</p>
 		{/if}
 		<br />
 		<form method="post" action="mylists.php">
@@ -57,18 +57,18 @@
 			</tr>
 			{if $name_error}
 				<tr><td></td>
-				<td><nobr><span id="name_error">{if $name_error}&nbsp;<span class="errormsg">{if $name_error==ERROR_DUPLICATE_LISTNAME}{t}Another of your cache lists already has this name.{/t}{else}{if $name_error==ERROR_BAD_LISTNAME}{t}Invalid name{/t}{if $list_public}; {t}minimum length for public lists is 10 characters{/t}{/if}{/if}{/if}</span></nobr>{/if}</span></td>
+				<td><nobr><span id="name_error">{if $name_error}&nbsp;<span class="errormsg">{if $name_error==ERROR_DUPLICATE_LISTNAME}{t}Another of your cache lists already has this name.{/t}{else}{if $name_error==ERROR_BAD_LISTNAME}{t}Invalid name{/t}{if $list_visibility>=2}; {t}minimum length for public lists is 10 characters{/t}{/if}{/if}{/if}</span></nobr>{/if}</span></td>
 				</tr>
 				<tr><td class="separator"></td></tr>
 			{/if}
 			<tr>
 				<td style="vertical-align:top">{t}Status{/t}:</td>
-				<td><input type="radio" id="s_private" name="list_public" value="0" {if !$list_public}checked="checked"{/if} /><label for="s_private">{t}private{/t}</label> &nbsp; <input type="radio" id="s_public" name="list_public" value="1" {if $list_public}checked="checked"{/if} /><label for="s_public">{t}public{/t}</label><br />				
+				<td><input type="radio" class="radio" id="s_private" name="list_visibility" value="0" {if $list_visibility==0}checked="checked"{/if} /><label for="s_private">{t}private{/t}</label> &nbsp; {* visibility 2 is reserve for friends *}<input type="radio" class="radio" id="s_public" name="list_visibility" value="2" {if $list_visibility==2}checked="checked"{/if} /><label for="s_public">{t}public{/t}</label> &nbsp; <input type="radio" class="radio" id="s_public3" name="list_visibility" value="3" {if $list_visibility==3}checked="checked"{/if} /><label for="s_public3" >{t}public{/t} + {t}visible for all users in cache listings{/t}</label><br />				
 				</td>
 			</tr>
 			<tr>
 				<td>{t}Watch{/t}:</td>
-				<td><input type="checkbox" id="watch" name="watch" value="1" {if $watch}checked="checked"{/if} /> <label for="watch">{t}I want to receive notifications about any logs for caches in this list.{/t}</label></td>
+				<td><input type="checkbox" class="checkbox" id="watch" name="watch" value="1" {if $watch}checked="checked"{/if} /> <label for="watch">{t}I want to receive notifications about any logs for caches in this list.{/t}</label></td>
 			</tr>
 			<tr><td class="separator"></td></tr>
 

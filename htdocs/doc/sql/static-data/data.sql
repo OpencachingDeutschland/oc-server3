@@ -2628,7 +2628,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2192', 'There a
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2193', 'My cache lists', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2194', 'Do you really want to delete the list \\\'%1\\\'?', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2195', 'Create new list', '2015-06-17 10:09:14');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2196', 'Public lists are displayed in your <a href=\"viewprofile.php?userid=%1\">public user profile</a>, on the <a href=\"cachelists.php\">lists overwiew page</a> and in the cache listings.', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2196', 'Public lists are displayed in your <a href=\"viewprofile.php?userid=%1\">public user profile</a>, on the <a href=\"cachelists.php\">lists overwiew page</a> and (if enabled) in the cache listings.', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2197', 'Space-separated list of OC waypoints.', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2198', 'You may also add caches via \"Add to list\" button in cache listings.', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2199', 'This is optional, caches may be added to the list later.', '2015-06-17 10:09:14');
@@ -2654,7 +2654,11 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2218', 'Another
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2219', 'minimum length for public lists is 10 characters', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2220', 'You are still watching this geocache via one or more cache lists.', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2221', 'Create new cachelist', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2222', 'visible for all users in cache listings', '2013-11-03 10:09:14');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2223', 'semi-public', '2013-11-03 10:09:14');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2224', 'listing display', '2013-11-03 10:09:14');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2225', 'without Geokrets', '2013-11-03 10:09:14');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2226', 'hidden[cachelist]', '2013-11-03 10:09:14');
 
 -- Table sys_trans_ref
 SET NAMES 'utf8';
@@ -6764,7 +6768,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2193', 'DE', 'Meine Cachelisten', '2013-11-03 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2194', 'DE', 'Möchtest du die Liste \\\'%1\\\' wirklich löschen?', '2013-11-03 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2195', 'DE', 'Neue Liste anlegen', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2196', 'DE', 'Öffentliche Listen werden in deinem <a href=\"viewprofile.php?userid=%1\">öffentlichen Profil</a>, auf der <a href=\"cachelists.php\">Listen-Sammelseite</a> und in den Cachelistings angezeigt.', '2013-11-03 10:09:14');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2196', 'DE', 'Öffentliche Listen werden in deinem <a href=\"viewprofile.php?userid=%1\">öffentlichen Profil</a>, auf der <a href=\"cachelists.php\">Listen-Sammelseite</a> und (falls eingeschaltet) in den Cachelistings angezeigt.', '2013-11-03 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2197', 'DE', 'Mit Leerzeichen getrennte Liste von OC-Wegpunkten.', '2013-11-03 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2198', 'DE', 'Wahlweise kannst du auch Caches mit dem „Merken“-Knopf im Listing hinzufügen.', '2013-11-03 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2199', 'DE', 'Diese Angabe ist optional; Caches können auch später zur Liste hinzugefügt werden.', '2013-11-03 10:09:14');
@@ -6790,7 +6794,11 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2219', 'DE', 'Mindestlänge für öffentliche Listen ist 10 Zeichen', '2013-11-03 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2220', 'DE', 'Du beobachtest diesen Geocache weiterhin über eine oder mehrere Cachelisten.', '2013-11-03 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2221', 'DE', 'Neue Cacheliste anlegen', '2013-11-03 10:09:14');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2222', 'DE', 'für Alle in Cachelistings sichtbar', '2013-11-03 10:09:14');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2223', 'DE', 'halböffentlich', '2013-11-03 10:09:14');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2224', 'DE', 'Listinganzeige', '2013-11-03 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2225', 'DE', 'ohne Geokrets', '2013-11-03 10:09:14');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2226', 'DE', 'ausgeblendet', '2013-11-03 10:09:14');
 
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'EN', 'Reorder IDs', '2010-09-02 00:15:30');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'EN', 'The database could not be reconnected.', '2010-08-28 11:48:07');
@@ -8451,6 +8459,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2151', 'EN', 'Also listed as', '2011-05-23 22:19:23');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2162', 'EN', 'Your log entries', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2175', 'EN', 'Disclose my e-mail address by default when sending e-mails to other users.', '2015-05-25 19:50:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2226', 'EN', 'hidden', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'ES', 'Reordenar ID', '2010-12-09 00:17:55');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'ES', 'La base de datos no se pudo conectar.', '2010-12-09 00:17:55');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'ES', 'En pruebas - por favor, no entre.', '2010-12-09 00:17:55');

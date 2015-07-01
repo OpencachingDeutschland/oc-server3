@@ -305,7 +305,7 @@ function showalllists()
 	<div class="content2-container line-box" style="height:0px"></div> {* MSIE needs explicit height *}
 	<div class="content2-container">
 		{if $cachelists|@count}
-			<div style="float:right; max-width:350px; margin-left:32px; margin-bottom:12px; padding-left:16px; {if $attributes|@count}border-left:1px solid #c0c0c0{/if}">
+			<div style="float:right; min-width:183px; max-width:350px; margin-left:32px; margin-bottom:12px; padding-left:16px; {if $attributes|@count}border-left:1px solid #c0c0c0{/if}">
 				<p><a href="cachelists.php"><img src="resource2/{$opt.template.style}/images/misc/16x16-list.png" title="{t}Cache list{/t}" style="padding-right:1px"/></a> <b>{t}Cache lists{/t}</b></p>
 				{assign var="n" value="0"}
 				{foreach from=$cachelists item=cachelist}
@@ -314,7 +314,7 @@ function showalllists()
 						<p id="morelists" style="padding:0; line-height:1em"><a href="javascript:showalllists()">{t}mehr{/t} ...</a></p>
 					{/if}
 					<p id="cachelist{$n}" style="padding:0; line-height:1em; {if $n>=5 && $cachelists|@count > 5}display:none{/if}">
-					{include file="res_cachelist_link.tpl"} {if $cachelist.is_public}{t}by{/t} <a href="viewprofile.php?userid={$cachelist.user_id}">{$cachelist.username|escape}</a>{else} ({t}private{/t}){/if}
+					{include file="res_cachelist_link.tpl"}{if $cachelist.user_id != $login.userid || ($cachelist.visibility==3 && $cache.show_cachelists)} {t}by{/t} <a href="viewprofile.php?userid={$cachelist.user_id}">{$cachelist.username|escape}</a>{else}<span class="greytext"> ({if $cachelist.visibility==3}{t}hidden[cachelist]{/t}{elseif $cachelist.visibility==2}{t}semi-public{/t}{else}{t}private{/t}{/if})</span>{/if}
 					</p>
 				{/foreach}
 			</div>

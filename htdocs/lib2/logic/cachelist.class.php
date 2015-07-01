@@ -70,13 +70,14 @@ class cachelist
 		return $this->reCachelist->getValue('name');
 	}
 
-	function isPublic()
+	// 0 = private, 1 = private & friends (not impl.), 2 = public, 3 = public + listing display
+	function getVisibility()
 	{
 		return $this->reCachelist->getValue('is_public');
 	}
 
 	// !! This method returns an error state instead of a success flag; false means "no error".
-	function setNameAndPublic($name, $public)
+	function setNameAndVisibility($name, $visibility)
 	{
 		$name = trim($name);
 		if ($name == '')
@@ -88,11 +89,14 @@ class cachelist
 			              false, $this->getUserId(), $this->getId(), $name))
 			              // $this->getId() is 0 when creating a new list -> condition has no effect
 				return ERROR_DUPLICATE_LISTNAME;
-			else if ($public && strlen($name) < 10)
+			else if ($visibility >= 2 && strlen($name) < 10)
 				return ERROR_BAD_LISTNAME;
 		}
-		return !$this->reCachelist->setValue('name', trim($name)) ||
-		       !$this->reCachelist->setValue('is_public', $public ? 1 : 0); 
+
+		$error = !$this->reCachelist->setValue('name', trim($name));
+		if ($visibility == 0 || $visibility == 2 || $visibility == 3)
+			$error |= !$this->reCachelist->setValue('is_public', $visibility);
+		return $error;
 	}
 
 	// return description in HTML format
@@ -241,7 +245,7 @@ class cachelist
 		{
 			if ($watch)
 			{
-				if ($this->isPublic() || $this->getUserId() == $login->userid)
+				if ($this->getVisibility() >= 2 || $this->getUserId() == $login->userid)
 					sql("
 						INSERT IGNORE INTO `cache_list_watches` (`cache_list_id`, `user_id`) 
 						VALUES ('&1','&2')",
@@ -288,7 +292,7 @@ class cachelist
 			FROM `cache_lists`
 			LEFT JOIN `stat_cache_lists` ON  `stat_cache_lists`.`cache_list_id`=`cache_lists`.`id`
 			LEFT JOIN `user` ON `user`.`user_id`=`cache_lists`.`user_id`
-			WHERE `is_public` AND `entries`>0"
+			WHERE `is_public`>=2 AND `entries`>0"
 			. ($namelike ? " AND `name` LIKE '%" . sql_escape($namelike) ."%'" : '')
 			. ($userlike ? " AND `username` LIKE '%" . sql_escape($userlike) . "%'" : ''),
 			0);
@@ -297,7 +301,7 @@ class cachelist
 	static function getPublicLists($startat=0, $maxitems=PHP_INT_MAX, $namelike='', $userlike='')
 	{
 		return cachelist::getLists(
-			"`is_public` AND `entries`>0"
+			"`is_public`>=2 AND `entries`>0"
 			. ($namelike ? " AND `name` LIKE '%" . sql_escape($namelike) ."%'" : '')
 			. ($userlike ? " AND `username` LIKE '%" . sql_escape($userlike) . "%'" : ''),
 			0,
@@ -307,7 +311,7 @@ class cachelist
 
 	static function getPublicListsOf($userid)
 	{
-		return cachelist::getLists("`is_public` AND `entries`>0 AND `cache_lists`.`user_id`='" . sql_escape($userid) . "'");
+		return cachelist::getLists("`is_public`>=2 AND `entries`>0 AND `cache_lists`.`user_id`='" . sql_escape($userid) . "'");
 	}
 
 	// If $all is false, only own lists and public lists of the cache owner will be returned.
@@ -320,11 +324,8 @@ class cachelist
 			FROM `caches`
 			WHERE `cache_id`='" . sql_escape($cacheid) . "'",
 			0);
-		if (!$all)
-		{
-			$my_watches = sql_fetch_column(
-				sql("SELECT `cache_list_id` FROM `cache_list_watches` WHERE `user_id`='&1'", $login->userid));
-		}
+		$my_watches = sql_fetch_column(
+			sql("SELECT `cache_list_id` FROM `cache_list_watches` WHERE `user_id`='&1'", $login->userid));
 
 		return cachelist::getLists("
 			`id` IN
@@ -333,12 +334,10 @@ class cachelist
 				 WHERE `cache_id`='" . sql_escape($cacheid) . "')
 			AND
 			(
-				`cache_lists`.`user_id`='" . sql_escape($login->userid) . "' OR
-				(`is_public`" .
-					($all ? "" : "AND
-						(`cache_lists`.`user_id`='" . sql_escape($cache_owner_id) . "' OR
-						 `id` IN ('" . implode("','", array_map('sql_escape', $my_watches)) . "'))") . "
-				)
+				`cache_lists`.`user_id`='" . sql_escape($login->userid) . "' " .
+				($all ? "OR `is_public`= 3 " : "") .
+				"OR (`is_public`> 0 AND
+			       `cache_lists`.`id` IN ('" . implode("','", array_map('sql_escape', $my_watches)) . "'))
 			)",
 			"`cache_lists`.`user_id`<>'" . sql_escape($cache_owner_id) . "'"); 
 	}
@@ -359,18 +358,18 @@ class cachelist
 
 		$rs = sql("
 			SELECT `cache_lists`.`id`, `cache_lists`.`user_id`, `user`.`username`, 
-			       `cache_lists`.`name`, `cache_lists`.`is_public`,
+			       `cache_lists`.`name`, `cache_lists`.`is_public` `visibility`,
 			       `cache_lists`.`description`, `cache_lists`.`desc_htmledit`,
 			       `cache_lists`.`user_id`='&1' `own_list`,
 			       `stat_cache_lists`.`entries`, `stat_cache_lists`.`watchers`,
 			       `w`.`user_id` IS NOT NULL `watched_by_me`,
-			       $prio AS `prio`
+			       $prio `prio`
 			FROM `cache_lists`
 			LEFT JOIN `stat_cache_lists` ON `stat_cache_lists`.`cache_list_id`=`cache_lists`.`id`
 			LEFT JOIN `user` ON `user`.`user_id`=`cache_lists`.`user_id`
 			LEFT JOIN `cache_list_watches` `w` ON `w`.`cache_list_id`=`cache_lists`.`id` AND `w`.`user_id`='&1'
 			WHERE $condition
-			ORDER BY `prio`, `name`
+			ORDER BY `prio`,`cache_lists`.`name`
 			LIMIT &2,&3", 
 			$login->userid, $startat, $maxitems);
 		return sql_fetch_assoc_table($rs);

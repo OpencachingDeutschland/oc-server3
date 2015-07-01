@@ -32,11 +32,11 @@
 		if ($listid == 0)
 		{
 			$cachelist = new cachelist(ID_NEW, $login->userid);
-			if (!$cachelist->setName($newlist_name))
-				$tpl->assign('name_error', true);
+			$name_error = $cachelist->setNameAndVisibility($newlist_name, $newlist_public ? 2 : 0);
+			if ($name_error)
+				$tpl->assign('name_error', $name_error);
 			else
 			{
-				$cachelist->setPublic($newlist_public);
 				if ($cachelist->save())
 				{
 					$cachelist->addCacheByID($cacheid);

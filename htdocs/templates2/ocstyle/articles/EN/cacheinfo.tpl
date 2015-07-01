@@ -150,7 +150,7 @@
 
 		<p><a name="logpw"></a><b>Password to log:</b> If specified, every finder has to enter this password when logging online. He will not be able to log "found it" without password. Case does not matter. Be careful when using 0, O, i or j, because these characters may be confused.</p>
 
-		<p><b>Show all cache lists:</b> This setting is enabled by default for new caches and can be changed afterwards. If enabled, all <a href="cachelists.php">public cache lists</a> that contain this cache are displayed above the cache description text, right of the attributes. Otherwise, only lists of the viewing user and of the cache owner are displayed.</p>
+		<p><b>Show all cache lists:</b> This setting is enabled by default for new caches and can be changed afterwards. If enabled, all <a href="cachelists.php">public cache lists</a> that contain this cache and which are set to "visible for all users in cache listings" are displayed above the cache description text, right of the attributes. Otherwise, only lists of the viewing user and of the cache owner are displayed.</p>
 
 		<p><b>Terms of use:</b> Please read our terms of use carefully! We tried hard to make them brief and fair.</p>
 

@@ -16,7 +16,7 @@
 		$tpl->redirect('login.php?target=' . urlencode($tpl->target));
 
 	$list_name = isset($_REQUEST['list_name']) ? trim($_REQUEST['list_name']) : '';
-	$list_public = isset($_REQUEST['list_public']) ? $_REQUEST['list_public'] + 0 : 0;
+	$list_visibility = isset($_REQUEST['list_visibility']) ? $_REQUEST['list_visibility'] + 0 : 0;
 	$list_caches = isset($_REQUEST['list_caches']) ? strtoupper(trim($_REQUEST['list_caches'])) : '';
 	$watch = isset($_REQUEST['watch']);
 	$desctext = isset($_REQUEST['desctext']) ? $_REQUEST['desctext'] : '';
@@ -33,7 +33,7 @@
 		$tpl->assign('newlist_mode', true);
 		$tpl->assign('show_editor', false);
 		$list_name = '';
-		$list_public = false;
+		$list_visibility = 0;
 		$watch = false;
 		$desctext = '';
 		// keep descMode of previous operation
@@ -44,7 +44,7 @@
 	if (isset($_REQUEST['create']))
 	{
 		$list = new cachelist(ID_NEW, $login->userid);
-		$name_error = $list->setNameAndPublic($list_name, $list_public);
+		$name_error = $list->setNameAndVisibility($list_name, $list_visibility);
 		if ($name_error)
 			$tpl->assign('newlist_mode', true);
 		else
@@ -71,7 +71,7 @@
 		{
 			$edit_list = true;
 			$list_name = $list->getName();
-			$list_public = $list->isPublic();
+			$list_visibility = $list->getVisibility();
 			$watch = $list->isWatchedByMe();
 			$desctext = $list->getDescription();
 			$descMode = $list->getDescHtmledit() ? 3 : 2;
@@ -106,7 +106,7 @@
 		$list = new cachelist($_REQUEST['listid'] + 0);
 		if ($list->exist() && $list->getUserId() == $login->userid)
 		{
-			$name_error = $list->setNameAndPublic($list_name, $list_public);
+			$name_error = $list->setNameAndVisibility($list_name, $list_visibility);
 			if ($name_error)
 				$edit_list = true;
 			$list->setDescription($desctext, $descMode == 3);
@@ -134,7 +134,7 @@
 	}
 
 	// redirect to list search output after editing a list from the search output page
-	if ($fromsearch && !$switchDescMode && isset($_REQUEST['listid']))
+	if ($fromsearch && !$switchDescMode && !$name_error && isset($_REQUEST['listid']))
 	{
 		$tpl->redirect('cachelist.php?id=' . ($_REQUEST['listid'] + 0));
 	}
@@ -163,7 +163,7 @@
 	$tpl->assign('name_error', $name_error);
 
 	$tpl->assign('list_name', $list_name);
-	$tpl->assign('list_public', $list_public);
+	$tpl->assign('list_visibility', $list_visibility);
 	$tpl->assign('watch', $watch);
 	$tpl->assign('desctext', $desctext);
 	$tpl->assign('descMode', $descMode);

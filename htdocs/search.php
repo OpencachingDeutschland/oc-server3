@@ -983,7 +983,7 @@
 										SELECT `cache_id` FROM `cache_list_items`
 										LEFT JOIN `cache_lists` ON `cache_lists`.`id`=`cache_list_items`.`cache_list_id`
 									  WHERE `cache_list_id`=" . sql_escape($options['listid']) . "
-									  AND (`is_public` OR `cache_lists`.`user_id`=" . sql_escape($login->userid) . ")";
+									  AND (`is_public`>=2 OR `cache_lists`.`user_id`=" . sql_escape($login->userid) . ")";
 				sql_slave($cachesFilter);
 				sql_slave('ALTER TABLE &result_caches ADD PRIMARY KEY ( `cache_id` )');
 

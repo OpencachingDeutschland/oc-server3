@@ -25,7 +25,7 @@
 						<tr class="cachelistitem">
 							<td class="{$listcolor}">{include file="res_cachelist_link.tpl"}</td>
 							{if $show_user}<td class="{$listcolor}"><a href="viewprofile.php?userid={$cachelist.user_id}">{$cachelist.username|escape}</a></td>{/if}
-							{if $show_status}<td class="{$listcolor}">{if $cachelist.is_public}{t}public{/t}{else}{t}private{/t}{/if}</td>{/if}
+							{if $show_status}<td class="{$listcolor}"><nobr>{if $cachelist.visibility>=2}{t}public{/t}{if $cachelist.visibility==3} <img src="resource2/{$opt.template.style}/images/action/16x16-adddesc.png" title="{t}visible for all users in cache listings{/t}" />{/if}{else}{t}private{/t}{/if}</nobr></td>{/if}
 							<td class="{$listcolor}" style="text-align:center">{$cachelist.entries}</td>
 							{if $show_watchers}<td class="{$listcolor}" style="text-align:center">{if $cachelist.watchers}{$cachelist.watchers}{/if}</td>{/if}
 							{if $show_edit || ($togglewatch && $login.userid)}

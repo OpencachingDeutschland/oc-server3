@@ -654,8 +654,8 @@
 					$duplicate_wpoc =
 					  sqlValue("SELECT MIN(wp_oc) FROM `caches`
 						                           WHERE `status`=1
-						                             AND `longitude`=" . sql_escape($longitude) . "
-						                             AND `latitude`=" . sql_escape($latitude), null);
+						                             AND ROUND(`longitude`,6)=ROUND('" . sql_escape($longitude) . "',6)
+						                             AND ROUND(`latitude`,6)=ROUND('" . sql_escape($latitude) . "',6)", null);
 					if ($duplicate_wpoc)
 					{
 						tpl_set_var('lon_message', mb_ereg_replace('%1', $duplicate_wpoc, $error_duplicate_coords));

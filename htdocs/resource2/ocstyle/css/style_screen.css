@@ -394,7 +394,7 @@ ol.col4 { column-count:4; -moz-column-count:4; -webkit-column-count:4; line-heig
 .narrowtable {font-size: 10px; line-height: 2.0em; clear: left; padding: 0px; margin: 0.5em 0px 0.2em 0px; border: solid 0px rgb(150,150,150); empty-cells: show; border-collapse: collapse; background-color: rgb(255,255,255);}
 .narrowtable tr {margin: 0px; padding: 0px;}
 .narrowtable td {padding: 0 7px 0 7px; border: solid 0px rgb(150,150,150); text-align: left; font-size: 120%;}
-.narrowtable th {margin: 0px; background-color: #deebcd; color: #404040; padding: 2px 7px 2px 7px; border-top: solid 1px #404040; border-bottom: solid 1px #404040; empty-cells: show; text-align: left; font-size: 120%; }
+.narrowtable th {margin: 0px; color: #404040; background: #d8e5c6 url(../images/page/listheader-bg.png) repeat-x; background-size:contain; padding: 0px 7px 0px 7px; empty-cells: show; text-align: left; font-size: 120%; }
 .narrowtable-caption {margin: 0.5em 0px 1.0em 30px; padding: 0px; clear: both; text-align: left; font-size: 120%;}
 
 .table-like-font { font-size:120%; }

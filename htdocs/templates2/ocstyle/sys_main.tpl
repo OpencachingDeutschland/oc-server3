@@ -49,7 +49,7 @@
 
 				function usercountry_change()
 				{
-					var sCurrentOption = "{/literal}{$opt.template.country|xescapejs}{literal}";
+					var sCurrentOption = "{/literal}{$opt.template.country|escapejs}{literal}";
 					var oUserCountryCombo = document.getElementById('usercountry');
 
 					if (sCurrentOption!=oUserCountryCombo.value)

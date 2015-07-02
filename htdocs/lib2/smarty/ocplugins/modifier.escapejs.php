@@ -7,14 +7,13 @@
 
 
 /**
- * Smarty escape modifier plugin; replacement for ../plugins/modifier.escpapejs.php;
- * see also block.t.php
+ * Smarty escape modifier plugin; see also block.t.php
  *
  * Type:     modifier<br>
- * Name:     xescapejs<br>
+ * Name:     escapejs<br>
  * @return string
  */
-function smarty_modifier_xescapejs($string)
+function smarty_modifier_escapejs($string)
 {
 	$string = str_replace('\\', '\\\\', $string);
 	$string = str_replace('\'', '\\\'', $string);

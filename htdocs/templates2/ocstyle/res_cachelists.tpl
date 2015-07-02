@@ -30,7 +30,7 @@
 							{if $show_watchers}<td class="{$listcolor}" style="text-align:center">{if $cachelist.watchers}{$cachelist.watchers}{/if}</td>{/if}
 							{if $show_edit || ($togglewatch && $login.userid)}
 							<td class="{$listcolor}" style="text-align:right" >
-								{if $show_edit}[<a href="mylists.php?edit={$cachelist.id}">{t}edit{/t}</a>]&nbsp;[<a href="javascript:if(confirm('{t 1=$cachelist.name escape=js}Do you really want to delete the list \'%1\'?{/t}'))location.href='mylists.php?delete={$cachelist.id}'">{t}delete{/t}</a>]{/if}
+								{if $show_edit}[<a href="mylists.php?edit={$cachelist.id}">{t}edit{/t}</a>]&nbsp;[<a href="javascript:if(confirm('{t 1=$cachelist.name|xescapejs}Do you really want to delete the list \'%1\'?{/t}'))location.href='mylists.php?delete={$cachelist.id}'">{t}delete{/t}</a>]{/if}
 								{if $togglewatch}<nobr>[<a href="{if $cachelist.watched_by_me && $removewatch_confirm}javascript:if(confirm('{t escape=js}Do you really want to delete this entry?{/t}'))location.href='{$togglewatch}?dontwatchlist={$cachelist.id}'{else}{$togglewatch}?{if $cachelist.watched_by_me}dont{/if}watchlist={$cachelist.id}{/if}">{if $cachelist.watched_by_me}{t}do not watch{/t}{else}{t}watch{/t}{/if}</a>]</nobr>{/if}
 							</td>
 							{/if}

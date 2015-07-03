@@ -3,7 +3,7 @@
 *
 *  Unicode Reminder メモ
 ***************************************************************************}
-<div id="log{$logItem.id}">
+<div id="log{$logItem.id}" style="clear:both">
 <div class="content-txtbox-noshade">  {* Ocprop: <div class="content-txtbox-noshade">(.*?)<\/div> *}
 	<div class="logs">
 	<p class="content-title-noshade-size1 {if $print}printlogheader{/if}" style="display:inline; margin-right:0">
@@ -98,6 +98,8 @@
 		{/if}
 
 	</div>
+	<div style="clear:both"></div>
 	</div>
 </div>
 </div>
+

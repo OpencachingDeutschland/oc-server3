@@ -7,7 +7,7 @@
 
 
 /**
- * Smarty escape modifier plugin
+ * Smarty escape modifier plugin; see also block.t.php
  *
  * Type:     modifier<br>
  * Name:     escapejs<br>
@@ -15,6 +15,7 @@
  */
 function smarty_modifier_escapejs($string)
 {
+	$string = str_replace('\\', '\\\\', $string);
 	$string = str_replace('\'', '\\\'', $string);
 	$string = str_replace('"', '&quot;', $string);
 	return $string;

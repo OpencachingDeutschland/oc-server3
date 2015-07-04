@@ -176,10 +176,11 @@ div#langstripe {
 /* Main menu bar              */
 /*----------------------------*/
 .nav2 {clear: both; margin: 0px; padding: 0px; font-family: verdana, arial, sans serif; font-size: 1.0em;}
-.nav2 ul {float: left; width: 970px; margin: 0px; padding: 0px; border-top: solid 1px rgb(54,83,151); border-bottom: solid 1px rgb(54,83,151); background-color: rgb(127,162,202); font-weight: bold;}	
+.nav2 ul {float: left; width: 970px; margin: 0px; padding: 0px; border-top: solid 1px rgb(54,83,151); border-bottom: solid 1px rgb(54,83,151); font-weight: bold; background: #7ba4c8 url(../images/page/nav2-bg.png) repeat-x; background-size:contain; }
 .nav2 li {display: inline; list-style: none; margin: 0px; padding: 0px;}
 .nav2 li a {display: block; float: left; margin: 0px 0px 0px 0px; padding: 5px 10px 5px 10px; border-right: solid 1px rgb(54,83,151); color: rgb(255,255,255); text-transform: uppercase; text-decoration: none; font-size: 100%;}
-.nav2 a:hover, .nav2 a.selected {color: rgb(50,50,50); text-decoration: none;}
+.nav2 a:hover {color: rgb(50,50,50); text-decoration: none;}
+.nav2 a.selected {color: rgb(50,50,50); text-decoration: none; background: #95cb66 url(../images/page/nav2-sel-bg.png) repeat-x;  background-size:contain; }
 .buffer {clear: both; width: 1px; height: 15px; margin: 0px; padding: 0px; background-color: rgb(255,255,255);}
 
 .nav2 .bg-green06 {background-color: rgb(149,203,102);}
@@ -189,14 +190,14 @@ div#langstripe {
 /* Sidebar menu               */
 /*----------------------------*/
 .nav3 {overflow: hidden; clear: both; float: left; width: 160px; min-height: 500px; margin: 0px; padding: 0px; color: rgb(75,75,75); font-size: 1.0em; }
-.nav3 ul {width: 160px; margin: 0px 0px 20px 0px; padding: 0px; border-bottom: solid 1px rgb(216,206,159); background-color: rgb(219,230,241);}	
+.nav3 ul {width: 160px; margin: 0px 0px 20px 0px; padding: 0px; border-bottom: solid 1px white; background-color: rgb(219,230,241);}
 .nav3 li {list-style: none; margin: 0px; padding: 0px;}
-.nav3 li.title {margin: 2px 0px 0px 0px; padding: 3px 5px 2px 15px; background-color: rgb(156,186,214); color: rgb(255,255,255); text-transform: uppercase; font-weight: bold; font-size: 120%;}
-.nav3 li.group1 a {display: block; min-height: 1.7em; height: auto !important; height: 1.7em; line-height: 1.7em; margin: 0px; padding: 0px 7px 0px 15px; border-top: solid 1px rgb(200,200,200); border-left: solid 7px rgb(219,230,241); color: rgb(75,75,75); font-weight: bold; font-size: 120%;}
+.nav3 li.title {margin: 2px 0px 0px 0px; padding: 3px 5px 2px 15px; color: rgb(255,255,255); text-transform: uppercase; font-weight: bold; font-size: 120%; background: #96b4ce url(../images/page/nav3-title-bg.png) repeat-x; background-size:contain; }
+.nav3 li.secondtitle { margin-top:0; }
+.nav3 li.group1 a {display: block; min-height: 1.7em; height: auto !important; height: 1.7em; line-height: 1.7em; margin: 0px; padding: 0px 7px 0px 15px; border-top: solid 1px white; border-left: solid 7px rgb(219,230,241); color: rgb(75,75,75); font-weight: bold; font-size: 120%;}
 .nav3 li.group_active a {border-left: solid 7px rgb(156,186,214); background-color: rgb(156,186,214);}
-.nav3 li.group2 a {display: block; min-height: 1.7em; height: auto !important; height: 1.7em; line-height: 1.7em; margin: 0px; padding: 0px 7px 0px 15px; border-top: solid 1px rgb(200,200,200); border-left: solid 14px rgb(219,230,241); color: rgb(75,75,75); font-weight: normal; font-size: 120%;}
+.nav3 li.group2 a {display: block; min-height: 1.7em; height: auto !important; height: 1.7em; line-height: 1.7em; margin: 0px; padding: 0px 7px 0px 15px; border-top: solid 1px white; border-left: solid 14px rgb(219,230,241); color: rgb(75,75,75); font-weight: normal; font-size: 120%;}
 .nav3 li.group2_active a {border-left: solid 14px rgb(156,186,214); background-color: rgb(156,186,214);}
-
 .nav3 li a {display: block; min-height: 1.7em; height: auto !important; height: 1.7em; line-height: 1.7em; margin: 0px; padding: 0px 7px 0px 20px; border-left: solid 7px rgb(219,230,241); color: rgb(75,75,75); text-decoration: none; font-size: 120%;}
 .nav3 li a:hover, .nav3 li a.selected {border-left: solid 7px rgb(156,186,214);  color: rgb(100,100,100); text-decoration: none;}
 .nav3 li.group2 a:hover, .nav3 li a.selected {border-left: solid 14px rgb(156,186,214);  color: rgb(100,100,100); text-decoration: none;}
@@ -211,12 +212,12 @@ div#langstripe {
 {
 	position:relative;
 	top:4px;
-	margin-left:180px;
+	margin-left:174px;
 	width:520px;
 	color:#505050;
 	font-size:10px; /* x-small has different size in different browsers */
 	font-family:sans-serif;
-	border-bottom:1px solid #AAAAAA;
+/* 	border-bottom:1px solid #AAAAAA; */
 	text-align:left;
 	margin-top:0.5ex;
 	margin-bottom:1ex;
@@ -259,9 +260,9 @@ div.tplhelp
 
 .nav4 li.hilite a { background-color:#ffb9b5 !important; }
 
-.nav4 li {float: left; list-style: none; margin: 0px; padding: 0px;padding-bottom: 5px;}
+.nav4 li {float: left; list-style: none; margin: 0px; padding: 2px 0 3px 0; }
 .nav4 li.title {display: none; margin: 0px 0px 0px 0px; padding: 3px 5px 2px 5px; background-color: rgb(156,186,214); color: rgb(255,255,255); text-transform: uppercase; font-weight: bold; font-size: 120%;}
-.nav4 li.group a {background-color: rgb(219,230,241);display: block; min-height: 1.7em; height: auto !important; height: 1.7em; line-height: 1.7em; margin: 0px; margin-right: 3px; padding: 0px 7px 0px 20px; border-top: solid 1px rgb(200,200,200); border-left: solid 7px rgb(219,230,241); color: rgb(75,75,75); font-weight: bold; font-size: 115%;}
+.nav4 li.group a {background-color: rgb(219,230,241);display: block; min-height: 1.7em; height: auto !important; height: 1.7em; line-height: 1.7em; margin: 0px; margin-right: 3px; padding: 0px 7px 0px 20px;  border-left: solid 7px rgb(219,230,241); color: rgb(75,75,75); font-weight: bold; font-size: 100%;}
 .nav4 li.group_active a {border-left: solid 7px rgb(156,186,214); background-color: rgb(156,186,214);}
 .nav4 li.group2 a {display: block; min-height: 1.7em; height: auto !important; height: 1.7em; line-height: 1.7em; margin: 0px; padding: 0px 7px 0px 0px; border-top: solid 1px rgb(200,200,200); border-left: solid 14px rgb(219,230,241); color: rgb(75,75,75); font-weight: normal; font-size: 120%;}
 .nav4 li.group2_active a {border-left: solid 14px rgb(156,186,214); background-color: rgb(156,186,214);}
@@ -299,17 +300,10 @@ ul#statmenu { padding: 0px; margin: 0px;}
 
 /* Titles */
 .bg-blue02 {
-	background-color: #e4edf4;
-	padding: 2px 0px 2px 4px;
+	background: #e8eff2 url(../images/page/section-bg.png) repeat-x; background-size:contain;
+	background-color: #e8eff2;
+	padding: 2px 0px 2px 6px;
 	margin: 2px 0 14px 0;  /* see adjustment in style_screen_msie.css */
-	border-radius: 5px; -webkit-border-radius: 5px; -moz-border-radius: 5px;
-	border:1px solid #c0d3e4;	
-	/*	
-	margin: 2px 0 16px 0;
-	box-shadow: 1px 1px 2px #676767;
-	-moz-box-shadow: 1px 1px 2px #676767;
-	-webkit-box-shadow: 1px 1px 2px #676767;
-	*/	
 }
 .content2-pagetitle, .content3-pagetitle {overflow: hidden; width: 773px; min-height:32px; margin: 0px 0px 10px 0px; padding: 0px 0px 2px 0px; border-bottom: solid 3px rgb(88,144,168); color: rgb(88,144,168); font-weight: bold; font-size: 180%;}
 
@@ -385,6 +379,7 @@ ul.linklist-indent {margin: -0.3em 0px 0.5em 0px; padding: 0px 0px 0px 10px; lis
 ul.nodot {font-size: 11px; }
 ul.nodot li { list-style-type: none; }
 ul.col4 { column-count:4; -moz-column-count:4; -webkit-column-count:4; line-height:1.7em; } /* does not work in MSIE */
+ul.default li { line-height: 1.7em; }
 
 ol {margin: 0px 0px 0px 9px; padding: 0px 0px 0px 25px; list-style-type: decimal; list-style-position: outside; font-size: 120%;}
 ol.col4 { column-count:4; -moz-column-count:4; -webkit-column-count:4; line-height:1.7em; } /* does not work in MSIE */
@@ -393,21 +388,21 @@ ol.col4 { column-count:4; -moz-column-count:4; -webkit-column-count:4; line-heig
 .table {font-size: 10px; line-height: 1.8em; clear: left; padding: 0px; margin: 0.5em 0px 0.2em 0px; border: solid 0px rgb(150,150,150); empty-cells: show; border-collapse: collapse; background-color: rgb(255,255,255);}
 .table tr {margin: 0px; padding:0; }
 .table td {padding: 2px 7px 4px 7px; border: solid 0px rgb(150,150,150); text-align: left; font-size: 120%;}
-.table th, .searchtable th {margin: 0px; background-color: #deebcd; color: #404040; padding: 2px 7px 2px 7px; border-top: solid 1px #404040; border-bottom: solid 1px #404040; empty-cells: show; text-align: left; font-size: 120%; }
+.table th, .searchtable th {margin: 0px; color: #404040; padding: 3px 7px 2px 7px; empty-cells: show; text-align: left; font-size: 120%;  background: #d8e5c6 url(../images/page/listheader-bg.png) repeat-x; background-size:contain; }
 .table-caption {margin: 0.5em 0px 1.0em 30px; padding: 0px; clear: both; text-align: left; font-size: 120%;}
 
 .narrowtable {font-size: 10px; line-height: 2.0em; clear: left; padding: 0px; margin: 0.5em 0px 0.2em 0px; border: solid 0px rgb(150,150,150); empty-cells: show; border-collapse: collapse; background-color: rgb(255,255,255);}
 .narrowtable tr {margin: 0px; padding: 0px;}
 .narrowtable td {padding: 0 7px 0 7px; border: solid 0px rgb(150,150,150); text-align: left; font-size: 120%;}
-.narrowtable th {margin: 0px; background-color: #deebcd; color: #404040; padding: 2px 7px 2px 7px; border-top: solid 1px #404040; border-bottom: solid 1px #404040; empty-cells: show; text-align: left; font-size: 120%; }
+.narrowtable th {margin: 0px; color: #404040; background: #d8e5c6 url(../images/page/listheader-bg.png) repeat-x; background-size:contain; padding: 0px 7px 0px 7px; empty-cells: show; text-align: left; font-size: 120%; }
 .narrowtable-caption {margin: 0.5em 0px 1.0em 30px; padding: 0px; clear: both; text-align: left; font-size: 120%;}
 
 .table-like-font { font-size:120%; }
 
 td.odd { background: #fff; padding-top:2px; }
 td.even { background: #eee; padding-top:2px; }
-td.listcolor1 { background:#fff; line-height:1.7em; }
-td.listcolor2 { background:#f0f0f0; line-height:1.7em; }
+td.listcolor1 { background:#fff; }
+td.listcolor2 { background:#f0f0f0; }
 
 td div.mediumspacer { height:6px; }
 
@@ -425,7 +420,7 @@ td.default { font-size:12px; }
 /* 3.2 - Sidebar Area */
 /*--------------------*/
 .sidebar {overflow: hidden; float: right; width: 160px; min-height: 500px; margin: 0px; padding: 0px 0px 10px 0px; text-align: left; color: rgb(75,75,75);}
-.sidebar-maintitle {margin:4px 0px 10px 0px; padding: 3px 10px 2px 10px; background-color: rgb(156,186,214); color: rgb(255,255,255); text-transform: uppercase; font-weight: bold; font-size: 120%;}
+.sidebar-maintitle {margin:4px 0px 10px 0px; padding: 3px 10px 2px 10px; color: rgb(255,255,255); text-transform: uppercase; font-weight: bold; font-size: 120%; background: #96b4ce url(../images/page/nav3-title-bg.png) repeat-x; background-size:contain; }
 .sidebar-title-noshade {margin: 0px; padding: 2px 10px 3px 10px; border-top: solid 1px rgb(215,215,215); color: rgb(75,75,75); font-weight: bold; font-size: 120%;}
 .sidebar-title-shade {margin: 0px; padding: 2px 10px 3px 10px; background-color: rgb(215,215,215); color: rgb(75,75,75); font-weight: bold; font-size: 120%;}
 .sidebar-txtbox-noshade {margin: 0px 0px 10px 0px; padding: 2px 10px 3px 10px;}
@@ -554,10 +549,12 @@ input {	border:1px solid #555;	background-color:white;	padding:1px 2px 1px 2px; 
 *.input70  {width:70px;}
 *.input100 {width:100px;}	/* log-password */
 *.input120 {width:120px;}	/* emailadress */
+*.input170 {width:170px;}	/* cache lists filter */
 *.input200 {width:200px;}
 *.input300 {width:300px;}
 *.input350 {width:350px;}	/* overwrite saved query */
 *.input400 {width:400px;}	/* short cachedescription */
+*.input500 {width:500px;}	/* cache list wp inputs */
 
 input.checkbox {width:12px; height:12px; font-size:12px; border:0;}
 
@@ -603,6 +600,10 @@ input.formbutton_active {
 	box-shadow: 0px 0px 1px #555;
 	-moz-box-shadow: 0px 0px 1px #555;
 	-webkit-box-shadow: 0px 0px 1px #555;
+}
+
+input.widebutton {
+	width:160px !important;
 }
 
 .menuBar
@@ -654,6 +655,8 @@ textarea { font-family: Arial, sans-serif, Tahoma, Verdana; font-size: 8pt; }
 textarea.cachedesc { width:750px; height:500px; }  /* only cacheeditor */
 textarea.hint {	width:750px; height:100px; }  /* only cacheditor */
 textarea.logs {	width:640px; height:300px; }  /* only logeditor */
+textarea.listdesc2 { width:580px; height:120px; }  /* only list desc editor */
+textarea.listdesc3 { width:580px; height:220px; }  /* only list desc editor */
 textarea.userdesc { width:750px; height:400px; }  /* only user desc editor */
 textarea.removelogs {	width:620px; height:200px; }  /* log removal */
 
@@ -661,6 +664,8 @@ label.disabled { color:grey; }
 .formlabel { color:#555; font-weight:bold; line-height:1.5em !important}
 
 input.waypoint { text-transform: uppercase; }
+
+.radiolist { line-height:1.5em; }
 
 
 /********************************/
@@ -676,6 +681,7 @@ input.waypoint { text-transform: uppercase; }
 .errormsg {color: rgb(240,100,100); font-weight: bold;}
 .okmsg {color: rgb(0,191,0); font-weight: bold;}
 .redtext {color: rgb(198,0,0);}
+.greytext { color: rgb(140,140,140); }
 
 img#viewcache-cacheicon { float: left; }
 
@@ -686,12 +692,18 @@ td.listicon {
 	vertical-align:middle;
 }
 
-tr.searchresult td {
+tr.cachelistheader td {
 	padding-top: 5px;
 	padding-bottom: 5px;
 	border-bottom: solid 1px black;
 	border-top: solid 1px black;
 	margin-bottom: 5px;
+}
+
+tr.cachelistitem td {
+	padding-top: 0.3em;
+	padding-bottom: 0.3em;
+	line-height: 1.4em;
 }
 
 /*---------------------------*/
@@ -813,6 +825,11 @@ p.editlog { font-weight: 400; display:inline; }
   padding: 2px;
 }
 
+/* cache lists */
+div.cachelistinfo { border:1px solid #a0a0a0; }
+.cachelist-tooltip { padding: 0 0.2em 0 0.2em; max-width:700px; }
+.cachelist-tooltip p { margin:0; padding:0 }
+
 /* Pager */
 .pager { font-size:14px; }
 .smallpager { }
@@ -848,11 +865,14 @@ div.changelog ul li ul {font-size: 83%; margin:0}
 
 /* Statistics */
 .stattable { font-size:10px; line-height:1.4em; padding:0; background-color: white; }
-.stattable th { background-color: #deebcd; color: #404040; border:0; width:3.3em; line-height:1.4em; padding:0}
+.stattable th { background-color: #deebcd; background-image:none; color: #404040; border:0; width:3.3em; line-height:1.4em; padding:0; }
 .stattable th.h1 { background-color: #fff; text-align:center; }
 .stattable th.h0 { background-color: #fff; text-align:center; font-weight:normal;}
 .stattable th.nodatacell { width:auto; }
 span.percent { font-size: 11px; }
+
+/* floating box right of text */
+div.floatbox { float:right; margin-left:16px; padding-left:16px;}
 
 /* Admin functions */
 .adminrestore {	color: #819ac1; }
@@ -944,7 +964,7 @@ div.searchdiv2 td.fieldlabel {
 	vertical-align: top;
 }
 
-.searchtable th {margin: 0px; background-color: #deebcd; color: #404040; padding: 4px 0px 4px 0px; border-top: solid 1px #404040; border-bottom: solid 1px #404040; empty-cells: show; text-align: left; font-size: 12px; }
+.searchtable th {margin: 0px; color: #404040; padding: 4px 0px 4px 0px; empty-cells: show; text-align: left; font-size: 12px;  background: #d8e5c6 url(../images/page/listheader-bg.png) repeat-x; background-size:contain; }
 .searchtable td { padding-top:2px; }
 td.search_listcolor1 { background:#fff; }
 td.search_listcolor2 { background:#f0f0f0; }

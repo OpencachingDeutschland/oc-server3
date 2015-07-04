@@ -3,8 +3,6 @@
  *  For license information see doc/license.txt
  *
  *  Unicode Reminder メモ
- *
- *  Display some status information about the server and Opencaching
  ***************************************************************************/
 
 	require('./lib2/web.inc.php');
@@ -102,6 +100,25 @@
 
 		$tpl->assign_rs('watches', $rs);
 		sql_free_result($rs);
+
+		if (isset($_REQUEST['dontwatchlist']))
+		{
+			$list = new cachelist($_REQUEST['dontwatchlist'] + 0);
+			if ($list->exist())
+				$list->watch(false);
+		}
+
+		// The following parameter and variable names are suboptimal; they refer only the the 
+		// cache lists and are evaluated by res_cachelists.tpl.
+		$tpl->assign('cachelists', cachelist::getListsWatchedByMe());
+		$tpl->assign('show_status', false);
+		$tpl->assign('show_user', true);
+		// Do not show watchers because this would allow conclusions on what the list owner watches. 
+		$tpl->assign('show_watchers', false);
+		$tpl->assign('show_edit', false);
+		$tpl->assign('togglewatch', 'mywatches.php');
+		$tpl->assign('removewatch_confirm', true);
+		$tpl->assign('disable_listwatchicon', true);
 	}
 
 	$tpl->assign('action', $action);

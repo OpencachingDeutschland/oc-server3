@@ -11,6 +11,7 @@
 	require_once('./lib2/logic/labels.inc.php');
 	require_once('./lib2/logic/cache.class.php');
 	require_once('./lib2/logic/attribute.class.php');
+	require_once('./lib2/logic/cachelist.class.php');
 	require_once('./lib2/logic/coordinate.class.php');
 	require_once('./lib2/logic/useroptions.class.php');
 	require_once('./lib2/logic/logpics.inc.php');
@@ -107,6 +108,7 @@ function getChildWaypoints($cacheid)
 				`caches`.`is_publishdate` AS `is_publishdate`,
 				`caches`.`difficulty` AS `difficulty`,
 				`caches`.`terrain` AS `terrain`,
+				`caches`.`show_cachelists` AS `show_cachelists`,
 				`cache_desc`.`language` AS `desclanguage`,
 				`cache_desc`.`short_desc` AS `shortdesc`,
 				`cache_desc`.`desc` AS `desc`,
@@ -272,9 +274,12 @@ function getChildWaypoints($cacheid)
 	$tpl->assign_rs('npaareasNoWarning', $rs);
 	sql_free_result($rs);
 
-	/* attributes
+	/* attributes and cache lists
 	 */
 	$tpl->assign('attributes', attribute::getAttrbutesListArrayByCacheId($cacheid));
+	$tpl->assign('cachelists', cachelist::getListsByCacheId($cacheid, $rCache['show_cachelists']));
+	$tpl->assign('watchclinfo', isset($_REQUEST['watchinfo']) && $_REQUEST['watchinfo'] == 1 && 
+	                            cachelist::watchingCacheByListsCount($login->userid, $cacheid) > 0);
 
 	/* geokrets
 	 */

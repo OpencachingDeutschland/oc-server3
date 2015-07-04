@@ -193,13 +193,20 @@ $menu = array(
 				'filename' => 'tops.php',
 				'siteid' => 'tops'
 			),
-				array(
-					'title' => 'OConly-81',
-					'menustring' => 'OConly-81',
-					'visible' => true,
-					'filename' => 'oconly81.php',
-					'siteid' => 'oconly81'
-				)
+			array(
+				'title' => 'Cache lists',
+				'menustring' => 'Cache lists',
+				'visible' => true,
+				'filename' => 'cachelists.php',
+				'siteid' => 'cachelists'
+			),
+			array(
+				'title' => 'OConly-81',
+				'menustring' => 'OConly-81',
+				'visible' => true,
+				'filename' => 'oconly81.php',
+				'siteid' => 'oconly81'
+			)
 		)
 	),
 	array(

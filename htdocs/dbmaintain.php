@@ -28,6 +28,7 @@
 	$procedures[] = 'sp_updateall_cache_listingdates';
 	$procedures[] = 'sp_updateall_cachelog_logdates';
 	$procedures[] = 'sp_updateall_rating_dates';
+	$procedures[] = 'sp_updateall_cachelist_counts';
 
 	$tpl->assign('procedures', $procedures);
 
@@ -61,6 +62,8 @@
 			sql("CALL sp_updateall_cachelog_logdates(@c)");
 		else if ($proc == 'sp_updateall_rating_dates')
 			sql("CALL sp_updateall_rating_dates(@c)");
+		else if ($proc == 'sp_updateall_cachelist_counts')
+			sql("CALL sp_updateall_cachelist_counts(@c)");
 		else
 		{
 			$bError = true;

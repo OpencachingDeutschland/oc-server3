@@ -9,6 +9,25 @@
 
 <script type="text/javascript" src="resource2/{$opt.template.style}/js/wz_tooltip.js"></script>
 
+{if $cachelist}
+	<div class="content2-container cachelistinfo" style="margin-top:10px" >
+	<p style="margin-top:0.5em; padding-left:10px; padding-right:8px">
+		<img src="resource2/ocstyle/images/misc/16x16-list.png" />
+		<a class="systemlink" href="cachelists.php">{t}Cache list{/t}</a> <b>{$cachelist.name|escape}</b>
+		{if $cachelist.watched_by_me}<img src="resource2/{$opt.template.style}/images/viewcache/16x16-watch.png" title="{t}I am watching this list.{/t}" />{/if}
+		{if $cachelist.visibility>0}{t}by{/t} <a href="viewprofile.php?userid={$cachelist.user_id}">{$cachelist.username|escape}</a>{else}({t}private{/t}){/if}
+		&nbsp;
+		{if $cachelist.user_id==$login.userid}[<a class="systemlink" href="mylists.php?edit={$cachelist.id}&fromsearch=1">{t}edit{/t}</a>]{/if}
+		{if $login.userid}[<a class="systemlink" href="cachelist.php?id={$cachelist.id}&{if $cachelist.watched_by_me}dont{/if}watch">{if $cachelist.watched_by_me}{t}don't watch{/t}{else}{t}watch{/t}{/if}</a>]{/if}
+	</p>
+	{if $cachelist.description != ''}
+	<div style="padding: 0 8px 4px 10px">
+		{$cachelist.description}
+	</div>
+	{/if}
+	</div>
+{/if}
+
 <div class="content2-container bg-blue02" style="margin-top:20px;">
 	<table cellspacing="0" cellpadding="0" width="100%" border="0"><tr>
 		<td style="white-space:nowrap; min-width:150px">
@@ -29,7 +48,7 @@
 		{/if}
 		<td style="text-align:right; padding-bottom:2px"><p class="inheader">
 			<span style="white-space:nowrap">[<a href="query.php?action=save&queryid={$queryid}">{t}Save options{/t}</a>]</span>
-			&nbsp;<span style="white-space:nowrap">[<a href="search.php?queryid={$queryid}&showresult=0">{t}Edit options{/t}</a>]</span></p>
+			{if !$disable_edit_options}&nbsp;<span style="white-space:nowrap">[<a href="search.php?queryid={$queryid}&showresult=0">{t}Edit options{/t}</a>]</span>{/if}</p>
 		</td>
 	</tr></table>
 </div>

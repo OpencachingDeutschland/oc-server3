@@ -30,7 +30,7 @@
 								<a href="search.php?queryid={$queriesItem.id}&output=ovl&count=max&zip=1">OVL</a>
 								</nobr>
 							</td>
-							<td class="{$listcolor}"><span style="float: right;"><nobr>[<a href="search.php?queryid={$queriesItem.id}&showresult=0">{t}Edit{/t}</a>] [<a href="javascript:if(confirm('{t escape=js}Do you really want to delete the saved search?{/t}'))location.href='query.php?queryid={$queriesItem.id}&action=delete'">{t}Delete{/t}</a>]</span></nobr></td>
+							<td class="{$listcolor}"><span style="float: right;"><nobr>[<a href="search.php?queryid={$queriesItem.id}&showresult=0">{t}edit{/t}</a>] [<a href="javascript:if(confirm('{t escape=js}Do you really want to delete the saved search?{/t}'))location.href='query.php?queryid={$queriesItem.id}&action=delete'">{t}delete{/t}</a>]</span></nobr></td>
 						</tr>
 					{foreachelse}
 						<tr><td colspan="2"><br />{t}No stored queries found{/t}</td></tr>

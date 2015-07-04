@@ -31,6 +31,7 @@ CREATE TABLE `caches` (
   `default_desclang` char(2) NOT NULL,
   `date_activate` datetime default NULL,
   `need_npa_recalc` tinyint(1) NOT NULL,
+  `show_cachelists` tinyint(1) NOT NULL default '1',
   PRIMARY KEY  (`cache_id`),
   UNIQUE KEY `uuid` (`uuid`),
   UNIQUE KEY `wp_oc` (`wp_oc`),

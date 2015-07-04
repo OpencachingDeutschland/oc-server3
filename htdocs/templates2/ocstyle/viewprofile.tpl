@@ -4,6 +4,9 @@
 *  Unicode Reminder メモ
 ***************************************************************************}
 {* OCSTYLE *}
+{* JS for cache list description tooltips *}
+<script type="text/javascript" src="resource2/{$opt.template.style}/js/wz_tooltip.js"></script>
+
 <div class="content2-pagetitle">
 	<img src="resource2/{$opt.template.style}/images/misc/32x32-home.png" style="align: left; margin-right: 10px;" width="32" height="32" />
 	{t 1=$username}Userprofile of %1{/t}
@@ -170,4 +173,27 @@
 		</tr>
 		<tr><td class="spacer"></td></tr>
 	{/if}
+
 </table>
+
+
+{* personal cache lists *}
+{if $cachelists|@count}
+	<div class="content2-container bg-blue02" id="cachelists">
+		<p class="content-title-noshade-size2">
+			<img src="resource2/{$opt.template.style}/images/misc/32x32-list.png" style="align: left; margin-right: 10px;" />
+		{t}Cache lists{/t}
+		</p>
+	</div>
+	<p>
+		<ul class="default">
+			{foreach from=$cachelists item=cachelist}
+				<li>
+					{include file="res_cachelist_link.tpl"} &nbsp;
+					{if $login.userid}[<a href="viewprofile.php?userid={$userid}&{if $cachelist.watched_by_me}dont{/if}watchlist={$cachelist.id}&dummy={$tdummy}#eocl">{if $cachelist.watched_by_me}{t}do not watch{/t}{else}{t}watch{/t}{/if}</a>]{/if}
+				</li>
+			{/foreach}
+		</ul>
+		<br id="eocl" />
+	</p>
+{/if}

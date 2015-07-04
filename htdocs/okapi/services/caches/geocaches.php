@@ -442,6 +442,25 @@ class WebService
             $tmp2 = array();
             foreach ($tmp as $cache_code)
                 $tmp2[$cache_code] = true;
+
+            # OCDE caches can also be indirectly watched by watching cache lists:
+            if (Settings::get('OC_BRANCH') == 'oc.de')
+            {
+              $tmp = Db::select_column("
+                  select c.wp_oc
+                  from
+                      caches c,
+                      cache_list_items cli,
+                      cache_list_watches clw
+                  where
+                      cli.cache_id = c.cache_id
+                      and clw.cache_list_id = cli.cache_list_id
+                      and clw.user_id = '".mysql_real_escape_string($request->token->user_id)."'
+              ");
+              foreach ($tmp as $cache_code)
+                  $tmp2[$cache_code] = true;
+            }
+
             foreach ($results as $cache_code => &$result_ref)
                 $result_ref['is_watched'] = isset($tmp2[$cache_code]);
         }

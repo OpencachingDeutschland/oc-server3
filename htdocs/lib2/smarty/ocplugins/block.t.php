@@ -69,8 +69,10 @@ function smarty_block_t($params, $text, &$smarty, &$repeat)
 		$text = smarty_gettext_strarg($text, $params);
 
 	// escape the string, now
+	// see also modifier.escpapejs.php
 	if ($escape == 'js')
 	{
+		$text = str_replace('\\', '\\\\', $text);
 		$text = str_replace('\'', '\\\'', $text);
 		$text = str_replace('"', '&quot;', $text);
 	}

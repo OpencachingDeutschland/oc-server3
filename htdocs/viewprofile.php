@@ -3,13 +3,12 @@
  *  For license information see doc/license.txt
  *
  *  Unicode Reminder メモ
- *
- *  Display some status information about the server and Opencaching
  ***************************************************************************/
 
 	require('./lib2/web.inc.php');
 	require_once('./lib2/logic/user.class.php');
 	require_once('./lib2/logic/useroptions.class.php');
+	require_once('./lib2/logic/cachelist.class.php');
 	require_once('./lib2/logic/logpics.inc.php');
 
 	$tpl->name = 'viewprofile';
@@ -331,6 +330,23 @@
 	$tpl->assign('license_passively_declined', $record['data_license'] == NEW_DATA_LICENSE_PASSIVELY_DECLINED);
 	$tpl->assign('accMailing', $record['accept_mailing']);
 	$tpl->assign('pmr', $record['pmr_flag']);
+
+	if (isset($_REQUEST['watchlist']))
+	{
+		$list = new cachelist($_REQUEST['watchlist'] + 0);
+		if ($list->exist())
+			$list->watch(true);
+	}
+	else if (isset($_REQUEST['dontwatchlist']))
+	{
+		$list = new cachelist($_REQUEST['dontwatchlist'] + 0);
+		if ($list->exist())
+			$list->watch(false);
+	}
+
+	$tpl->assign('cachelists', cachelist::getPublicListsOf($userid));
+	$tpl->assign('tdummy', time());
+		// Dummy counter is needed to make consecutive clicks on the same link work.
 
 	$tpl->display();
 ?>

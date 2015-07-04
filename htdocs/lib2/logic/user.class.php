@@ -761,6 +761,13 @@ class user
 		sql("DELETE FROM `user_options` WHERE `user_id`='&1'", $this->nUserId);
 		$this->reload();
 
+		sql("DELETE FROM `cache_lists`     WHERE `user_id`='&1'", $this->nUserId);  // Triggers will do all the dependent clean-up.
+		sql("DELETE FROM `cache_adoption`  WHERE `user_id`='&1'", $this->nUserId);
+		sql("DELETE FROM `cache_ignore`    WHERE `user_id`='&1'", $this->nUserId);
+		sql("DELETE FROM `cache_watches`   WHERE `user_id`='&1'", $this->nUserId);
+		sql("DELETE FROM `watches_waiting` WHERE `user_id`='&1'", $this->nUserId);
+		sql("DELETE FROM `notify_waiting`  WHERE `user_id`='&1'", $this->nUserId);
+
 		// lock the user's caches
 		$error = false;
 		$rs = sql("SELECT `cache_id` FROM `caches` WHERE `user_id`='&1' AND `status` IN (1,2,3)", $this->nUserId);

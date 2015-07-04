@@ -15,6 +15,34 @@
 
 	<div class="changelog-changes">
 
+	<p id="v3.0.13"><strong>OC 3.0 Release 13</strong> &ndash; July 4, 2015</p>
+	<p>New:</p>
+	<ul>
+		<li><a href="cachelists.php">Cache lists</a></li>
+		<li>Filtering option for Caches with Geokrets in cache search and on the map</i></li>
+		<li>Link to Safari caches list on the map</li>
+	</ul>
+
+	<p>Changed / improved:</p>
+	<ul>
+		<li>Pictures up to 250 KB size stay unchanged; only pictures &gt; 250 KB will be resized.</li>
+		<li>To publish an unplished cache, only the "publish now" option at the bottom of the listing needs to be changed.</li>
+		<li>Watch and ignore lists of disabled user accounts are deleted.</li>
+		<li>some design improvements</li>
+		<li>Update OC countries list: The Rumanian site is new, Sweden/Norway was shut down.</li>
+		<li>internal improvements for the data maintenance team</li>
+	</ul>
+
+	<p>Fixed:</p>
+	<ul>
+		<li>more reliable hiding of GC crosslistings in the cache search and on the map [bug of release 9]</li>
+		<li>fixed new cache marks in the search results lists [bug of release 9]</li>
+		<li>fixed attributes display in Internet Explorer [bug of release 11]</li>
+		<li>fixed event icons in log statistics</li>
+		<li>fixed GC and NC waypoint input [bug of release 12]</li>
+	</ul>
+	</p>
+
 	<p id="v3.0.12"><strong>OC 3.0 Release 12</strong> &ndash; May 31, 2015</p>
 	<p>New:</p>
 	<ul>

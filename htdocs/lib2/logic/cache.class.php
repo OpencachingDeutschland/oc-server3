@@ -108,6 +108,7 @@ class cache
 		$this->reCache->addString('default_desclang', '', false);
 		$this->reCache->addDate('date_activate', null, true);
 		$this->reCache->addInt('need_npa_recalc', 1, false, RE_INSERT_IGNORE);
+		$this->reCache->addInt('show_cachelists', 1, false);
 
 		$this->nCacheId = $nNewCacheId+0;
 

@@ -828,7 +828,7 @@ p.editlog { font-weight: 400; display:inline; }
 /* cache lists */
 div.cachelistinfo { border:1px solid #a0a0a0; }
 .cachelist-tooltip { padding: 0 0.2em 0 0.2em; max-width:700px; }
-.cachelist-tooltip p { margin:0; padding:0 }
+.cachelist-tooltip p { margin:0; padding:0; color:rgb(50,50,50); font-size:11px; }
 
 /* Pager */
 .pager { font-size:14px; }

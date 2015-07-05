@@ -386,6 +386,9 @@
 		{
 			$options['searchtype'] = 'bylist';
 			$options['listid'] = isset($_REQUEST['listid']) ? $_REQUEST['listid'] + 0 : 0;
+			$list = new cachelist($options['listid']);
+			if (!$list->exist() || (!$list->isMyList() && $list->getVisibility() == 0))
+				$tpl->redirect("cachelists.php");
 			$options['cachelist'] = cachelist::getListById($options['listid']);  // null for invalid ID
 		}
 		elseif (isset($_REQUEST['searchall']))

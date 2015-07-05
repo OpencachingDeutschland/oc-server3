@@ -65,6 +65,12 @@ class cachelist
 		return $this->reCachelist->getValue('user_id');
 	}
 
+	function isMyList()
+	{
+		global $login;
+		return $this->getUserId() == $login->userid;
+	}
+
 	function getName()
 	{
 		return $this->reCachelist->getValue('name');

@@ -35,7 +35,7 @@ class cachelist
 		$this->reCachelist->addString('name', '', false);
 		$this->reCachelist->addInt('is_public', 0, false);
 		$this->reCachelist->addString('description', '', false);
-		$this->reCachelist->addInt('desc_htmledit', 0, false);
+		$this->reCachelist->addInt('desc_htmledit', 1, false);
 
 		$this->nCachelistId = $nNewCachelistId + 0;
 

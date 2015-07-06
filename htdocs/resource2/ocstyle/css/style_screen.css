@@ -850,7 +850,7 @@ div.cachelistinfo { border:1px solid #a0a0a0; }
 #cachedescinfo p { margin-bottom:12px; }
 table.cachedesctable p { margin-bottom: 6px !important; }
 
-table.teamlist th { background-color:white; border:0; padding:0 0 6px 0; text-align:left; }
+table.teamlist th { background-color:white !important; background-image:none !important; border:0; padding:0 0 6px 0; text-align:left; }
 table.teamlist td { padding: 4px 0px 4px 34px; }
 table.teamlist img { margin-left: 32px; }
 table.teamlist a { font-weight:bold; }

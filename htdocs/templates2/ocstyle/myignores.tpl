@@ -26,7 +26,7 @@
 						<td class="{$listcolor}">{include file="res_cacheicon_22.tpl" cachetype=$ignoreItem.type|escape}</td>
 						<td class="{$listcolor}">{include file="res_cachestatus.tpl" status=$ignoreItem.status}</td>
 						<td class="{$listcolor}"><span style="{include file="res_cachestatus_span.tpl" status=$ignoreItem.status}"><a href="viewcache.php?wp={$ignoreItem.wp}">{$ignoreItem.name|escape}</a></span> {include file="res_oconly.tpl" oconly=$ignoreItem.oconly}</td>
-						<td class="{$listcolor}"><nobr>[<a href="javascript:if(confirm('{t escape=js}Do you really want to delete this entry?{/t}'))location.href='ignore.php?cacheid={$ignoreItem.cacheid}&action=removeignore'">{t}do not ignore{/t}</a>]</nobr></td>
+						<td class="{$listcolor}"><nobr>[<a href="javascript:if(confirm('{t escape=js}Do you really want to delete this entry?{/t}'))location.href='ignore.php?cacheid={$ignoreItem.cacheid}&action=removeignore&target=myignores.php'">{t}do not ignore{/t}</a>]</nobr></td>
 					</tr>
 				{foreachelse}
 					<tr><td colspan="4"><br />{t}You do not ignore any geocaches now.{/t}</td></tr>

@@ -531,7 +531,7 @@ INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('editlog', 'D
 INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('error', 'DE', 'Fehlermeldungen');
 INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('log_cache', 'DE', 'Das Onlinelog');
 INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('login', 'DE', 'Login');
-INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('login', 'EN', 'How to log in at the Opencaching website');
+INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('login', 'EN', 'EN/Login');
 INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('mailto', 'DE', 'Benutzerprofil#Emailversand');
 INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('*map2', 'DE', 'Cachekarte');
 INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('mydetails', 'DE', 'Benutzerprofil#Einstellungen');
@@ -552,7 +552,7 @@ INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('picture', 'D
 INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('previewpics', 'DE', 'Vorschaubilder');
 INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('query', 'DE', 'Gespeicherte Suchen');
 INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('register', 'DE', 'Registrierung');
-INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('register', 'EN', 'How to register at the Opencaching website');
+INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('register', 'EN', 'Registration');
 INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('removelog_logowner', 'DE', 'Logeintrag löschen');
 INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('removelog_cacheowner', 'DE', 'Logeintrag löschen');
 INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('reportcache', 'DE', 'Cache melden');

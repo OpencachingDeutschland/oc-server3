@@ -531,6 +531,7 @@ INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('editlog', 'D
 INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('error', 'DE', 'Fehlermeldungen');
 INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('log_cache', 'DE', 'Das Onlinelog');
 INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('login', 'DE', 'Login');
+INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('login', 'EN', 'How to log in at the Opencaching website');
 INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('mailto', 'DE', 'Benutzerprofil#Emailversand');
 INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('*map2', 'DE', 'Cachekarte');
 INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('mydetails', 'DE', 'Benutzerprofil#Einstellungen');
@@ -551,6 +552,7 @@ INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('picture', 'D
 INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('previewpics', 'DE', 'Vorschaubilder');
 INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('query', 'DE', 'Gespeicherte Suchen');
 INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('register', 'DE', 'Registrierung');
+INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('register', 'EN', 'How to register at the Opencaching website');
 INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('removelog_logowner', 'DE', 'Logeintrag löschen');
 INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('removelog_cacheowner', 'DE', 'Logeintrag löschen');
 INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('reportcache', 'DE', 'Cache melden');
@@ -7672,7 +7674,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('954', 'EN', 'Default', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('957', 'EN', 'Chat/IRC', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1059', 'EN', 'An account with that username already exists.', '2010-08-28 11:48:08');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1060', 'EN', 'Opencaching-Wiki', '2010-08-28 11:48:08');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1060', 'EN', 'Opencaching Wiki', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1061', 'EN', 'Terms of use and legal information', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1062', 'EN', 'Page performance', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1063', 'EN', 'Page creation', '2010-08-28 11:48:08');

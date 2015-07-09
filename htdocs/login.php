@@ -66,6 +66,7 @@
 		$tpl->assign('username', $username);
 		$tpl->assign('error', $retval);
 	}
+	$tpl->assign('loginhelplink', helppagelink('login'));
 	$tpl->assign('target', $target);
 
 	$tpl->display();

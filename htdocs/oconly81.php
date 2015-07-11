@@ -23,7 +23,7 @@
 		CREATE TEMPORARY TABLE &oconly81 ENGINE=MEMORY
 		SELECT DISTINCT `user`.`user_id`, `caches`.`terrain`, `caches`.`difficulty`
 		FROM `user`
-		INNER JOIN `cache_logs` ON `cache_logs`.`user_id`=`user`.`user_id` AND `cache_logs`.`type` IN (1,7)
+		INNER JOIN `cache_logs` ON `cache_logs`.`user_id`=`user`.`user_id` AND `cache_logs`.`type`=1
 		INNER JOIN `caches` ON `caches`.`cache_id`=`cache_logs`.`cache_id`
 		INNER JOIN `caches_attributes` ON `caches_attributes`.`cache_id`=`cache_logs`.`cache_id` AND `caches_attributes`.`attrib_id`=6
 		INNER JOIN `user_options` ON `user_options`.`user_id`=`user`.`user_id`

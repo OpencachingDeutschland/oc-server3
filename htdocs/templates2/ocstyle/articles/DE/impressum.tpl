@@ -30,7 +30,7 @@
 	</p>
 	<p>
 		Um die Entwicklung von Anwendungen und Diensten f&uuml;r das Geocaching zu 
-		f&ouml;rdern, bietet Opencaching alle Stammdaten in einer einfach zu 
+		f&ouml;rdern, bietet Opencaching.de alle Stammdaten in einer einfach zu 
 		verarbeitenden Form zum Download an. Dabei sind die geltenden Datenschutzhinweise 
 		sowie Nutzungsbedingungen zu beachten.
 	</p>

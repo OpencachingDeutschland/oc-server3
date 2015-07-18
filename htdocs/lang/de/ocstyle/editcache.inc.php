@@ -33,7 +33,7 @@
 	$status_change = '<br /><div style="margin-top:6px"><img src="lang/de/ocstyle/images/misc/hint.gif" border="0" width="15" height="11" >' . t('To change the state, you need to <a href="log.php?cacheid=%1">log</a> the new state.') . '</div>';
 	$diff_not_ok_message = '&nbsp;<span class="errormsg">' . t('Choose both valuations!') . '</span>';
 	$safari_not_allowed_message = '<span class="errormsg">' . t('Only virtual caches can be safari caches.') . '</span>';
-	$bad_wpgc_message = '<span class="errormsg">' . t('GC waypoint is invalid, must be GCXXX...') . '</span>';
+	$bad_wpgc_message = '<span class="errormsg">' . t('GC waypoint is invalid, must be GCxxxxx') . '</span>';
 	$nopictures = '<tr><td colspan="2">' . t('No pictures available') . '</td></tr>';
 	$pictureline = '<tr><td colspan="2"><a href="{link}">{title}</a> [<a href="picture.php?action=edit&uuid={uuid}">' . t('Edit') . '</a>] [<a href="picture.php?action=delete&uuid={uuid}">' . t('Delete') . '</a>]</td></tr>';
 	  // Ocprop: <a href=\"http://.*?\.opencaching\.de/images/uploads/.*?\">(.*?)<\/a>.*?\[<a href=\"picture\.php\?action=[a-z]*?\&uuid=(.*?)\">

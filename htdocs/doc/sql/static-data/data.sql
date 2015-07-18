@@ -2610,7 +2610,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2174', 'Newslet
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2175', 'Disclose my e-mail address by default when sending e-mails to other users.', '2015-05-25 19:50:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2176', 'Planned events', '2013-11-03 10:09:14');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2177', 'Another cache (<a href=\"viewcache.php?wp=%1\">%1</a>) exists at these coords. Maybe you pressed \"submit cache\" twice. To publish a cache with identical coords, enter other coords first, then edit the listing and change coords.', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2178', 'GC waypoint is invalid, must be GCXXX...', '2013-11-03 10:09:14');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2178', 'GC waypoint is invalid, must be GCxxxxx', '2013-11-03 10:09:14');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2179', 'Safari caches list', '2013-11-03 10:09:14');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2180', 'Add to list', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2181', 'Add geocache to list', '2015-06-17 10:09:14');
@@ -6750,7 +6750,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2175', 'DE', 'Wenn ich andere Benutzer anschreibe, wird standardmäßig meine E-Mail-Adresse mitgeschickt.', '2015-05-25 19:50:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2176', 'DE', 'Geplante Events', '2013-11-03 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2177', 'DE', 'An diesen Koordinaten befindet sich bereits der Cache <a href=\"viewcache.php?wp=%1\">%1</a>. Vielleicht hast du mehrfach auf \"Cache senden\" geklickt. Wenn du tatsächlich einen weiteren Cache mit identischen Koordinaten veröffentlichen möchtest, lege ihn zunächst mit abweichenden Koordinaten an, bearbeite dann das Listing und ändere die Koordinaten.', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2178', 'DE', 'ungültiger GC-Wegpunkt, Format ist GCXXX...', '2013-11-03 10:09:14');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2178', 'DE', 'ungültiger GC-Wegpunkt, Format ist GCxxxxx', '2013-11-03 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2179', 'DE', 'Safari-Cache-Liste', '2013-11-03 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2180', 'DE', 'Merken', '2013-11-03 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2181', 'DE', 'Geocache zu Liste hinzufügen', '2013-11-03 10:09:14');

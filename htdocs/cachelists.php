@@ -36,6 +36,7 @@
 	$tpl->assign('name_filter', $name_filter);
 	$tpl->assign('by_filter', $by_filter);
 	$tpl->assign('cachelists', cachelist::getPublicLists($startat, $MAXITEMS, $name_filter, $by_filter));
+	$tpl->assign('show_bookmarks', true);
 	$tpl->assign('show_status', false);
 	$tpl->assign('show_user', true);
 	// Do not show watchers because this would allow conclusions on what the list owner watches. 

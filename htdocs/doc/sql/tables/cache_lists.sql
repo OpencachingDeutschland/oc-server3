@@ -13,6 +13,7 @@ CREATE TABLE `cache_lists` (
   `is_public` tinyint(1) NOT NULL default '0',
   `description` mediumtext NOT NULL,
   `desc_htmledit` tinyint(1) unsigned NOT NULL default '1',
+  `password` varchar(80) NOT NULL,
   PRIMARY KEY  (`id`),
   UNIQUE KEY `uuid` (`uuid`),
   KEY `name` (`name`),

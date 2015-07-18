@@ -386,10 +386,13 @@
 		{
 			$options['searchtype'] = 'bylist';
 			$options['listid'] = isset($_REQUEST['listid']) ? $_REQUEST['listid'] + 0 : 0;
+
+			$password = isset($_REQUEST['listkey']) ? $_REQUEST['listkey'] : '';
 			$list = new cachelist($options['listid']);
-			if (!$list->exist() || (!$list->isMyList() && $list->getVisibility() == 0))
+			if (!$list->allowView($password))
 				$tpl->redirect("cachelists.php");
 			$options['cachelist'] = cachelist::getListById($options['listid']);  // null for invalid ID
+			$options['cachelist_pw'] = $password;
 		}
 		elseif (isset($_REQUEST['searchall']))
 		{
@@ -981,18 +984,28 @@
 			elseif ($options['searchtype'] == 'bylist')
 			{
 				sql_temp_table_slave('result_caches');
-				$cachesFilter =
+				$list = new cachelist($options['listid']);
+				if ($list->allowView($options['cachelist_pw']))
+				{
+					$cachesFilter =
 									 "CREATE TEMPORARY TABLE &result_caches ENGINE=MEMORY
 										SELECT `cache_id` FROM `cache_list_items`
 										LEFT JOIN `cache_lists` ON `cache_lists`.`id`=`cache_list_items`.`cache_list_id`
-									  WHERE `cache_list_id`=" . sql_escape($options['listid']) . "
-									  AND (`is_public`>=2 OR `cache_lists`.`user_id`=" . sql_escape($login->userid) . ")";
-				sql_slave($cachesFilter);
-				sql_slave('ALTER TABLE &result_caches ADD PRIMARY KEY ( `cache_id` )');
+									  WHERE `cache_list_id`=" . sql_escape($options['listid']);
+					sql_slave($cachesFilter);
+					sql_slave('ALTER TABLE &result_caches ADD PRIMARY KEY ( `cache_id` )');
 
-				$sql_select[] = '&result_caches.`cache_id`';
-				$sql_from = '&result_caches';
-				$sql_innerjoin[] = '`caches` ON `caches`.`cache_id`=&result_caches.`cache_id`';
+					$sql_select[] = '&result_caches.`cache_id`';
+					$sql_from = '&result_caches';
+					$sql_innerjoin[] = '`caches` ON `caches`.`cache_id`=&result_caches.`cache_id`';
+				}
+				else
+				{
+					// should not happen, but just for the case ...
+					$sql_select[] = '`caches`.`cache_id` `cache_id`';
+					$sql_from = '`caches`';
+					$sql_where[] = 'FALSE';
+				}
 			}
 			else if ($options['searchtype'] == 'all')
 			{

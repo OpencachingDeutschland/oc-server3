@@ -35,6 +35,7 @@ class cachelist
 		$this->reCachelist->addInt('is_public', 0, false);
 		$this->reCachelist->addString('description', '', false);
 		$this->reCachelist->addInt('desc_htmledit', 1, false);
+		$this->reCachelist->addString('password', '', false);
 
 		$this->nCachelistId = $nNewCachelistId + 0;
 
@@ -123,6 +124,16 @@ class cachelist
 		return $this->reCachelist->setValue('description', $desc);
 	}
 
+	function setPassword($pw)
+	{
+		$this->reCachelist->setValue('password', $pw);
+	}
+
+	function getPassword()
+	{
+		return $this->reCachelist->getValue('password');
+	}
+
 	function getCachesCount()
 	{
 		return sql_value("
@@ -141,6 +152,8 @@ class cachelist
 
 	function save()
 	{
+		if ($this->getVisibility() > 0)
+			$this->setPassword("");
 		sql_slave_exclude();
 		if ($this->reCachelist->save())
 		{
@@ -240,6 +253,9 @@ class cachelist
 		    $this->nCachelistId, $cache_id);
 	}
 
+
+	// watching, bookmarking and access tests
+
 	function watch($watch)
 	{
 		global $login;
@@ -249,7 +265,7 @@ class cachelist
 		{
 			if ($watch)
 			{
-				if ($this->getVisibility() >= 2 || $this->getUserId() == $login->userid)
+				if ($this->allowView())
 					sql("
 						INSERT IGNORE INTO `cache_list_watches` (`cache_list_id`, `user_id`) 
 						VALUES ('&1','&2')",
@@ -274,6 +290,50 @@ class cachelist
 			0, $this->getId(), $login->userid) != 0;
 	}
 
+	function bookmark($pw)
+	{
+		global $login;
+
+		if ($login->userid != 0 &&
+				!$this->isMyList() &&
+				($this->getVisibility() >= 2 || ($this->getPassword() != "" && $pw == $this->getPassword()))
+			 )
+		{
+			sql("INSERT IGNORE INTO `cache_list_bookmarks` (`cache_list_id`, `user_id`, `password`)
+			     VALUES('&1','&2','&3')
+			     ON DUPLICATE KEY UPDATE `password`='&3'",
+			    $this->getId(), $login->userid, $pw);
+		}
+	}
+
+	function unbookmark()
+	{
+		global $login;
+
+		sql("DELETE FROM `cache_list_bookmarks`
+		     WHERE `cache_list_id`='&1' AND `user_id`='&2'",
+				$this->getId(), $login->userid);
+	}
+
+	function allowView($pw='')
+	{
+		global $login;
+
+		if (!$this->exist())
+			return false;
+
+		return $this->isMyList() ||
+		       $this->getVisibility() >= 2 ||
+		       ($this->getPassword() != '' && $pw == $this->getPassword()) ||
+		       sql_value("
+						 SELECT COUNT(*)
+						 FROM `cache_lists` `cl`
+						 LEFT JOIN `cache_list_bookmarks` `clb` ON `clb`.`cache_list_id`=`cl`.`id`
+						 WHERE `cl`.`id`='&1' AND `cl`.`password`<>''
+						   AND `clb`.`user_id`='&2' AND `clb`.`password`=`cl`.`password`",
+		         0, $this->getId(), $login->userid);
+	}
+
 
 	// get list of lists -- static functions
 
@@ -287,6 +347,12 @@ class cachelist
 	{
 		global $login;
 		return cachelist::getLists("`id` IN (SELECT `cache_list_id` FROM `cache_list_watches` WHERE `user_id`='" . sql_escape($login->userid) . "')");
+	}
+
+	static function getBookmarkedLists()
+	{
+		global $login;
+		return cachelist::getLists("`id` IN (SELECT `cache_list_id` FROM `cache_list_bookmarks` WHERE `user_id`='" . sql_escape($login->userid) . "')");
 	}
 
 	static function getPublicListCount($namelike='', $userlike='')
@@ -362,16 +428,18 @@ class cachelist
 
 		$rs = sql("
 			SELECT `cache_lists`.`id`, `cache_lists`.`user_id`, `user`.`username`, 
-			       `cache_lists`.`name`, `cache_lists`.`is_public` `visibility`,
-			       `cache_lists`.`description`, `cache_lists`.`desc_htmledit`,
+			       `cache_lists`.`name`, `cache_lists`.`is_public` `visibility`, `cache_lists`.`password`, 
+						 `cache_lists`.`description`, `cache_lists`.`desc_htmledit`,
 			       `cache_lists`.`user_id`='&1' `own_list`,
 			       `stat_cache_lists`.`entries`, `stat_cache_lists`.`watchers`,
 			       `w`.`user_id` IS NOT NULL `watched_by_me`,
+			       `b`.`user_id` IS NOT NULL `bookmarked`,
 			       $prio `prio`
 			FROM `cache_lists`
 			LEFT JOIN `stat_cache_lists` ON `stat_cache_lists`.`cache_list_id`=`cache_lists`.`id`
 			LEFT JOIN `user` ON `user`.`user_id`=`cache_lists`.`user_id`
 			LEFT JOIN `cache_list_watches` `w` ON `w`.`cache_list_id`=`cache_lists`.`id` AND `w`.`user_id`='&1'
+			LEFT JOIN `cache_list_bookmarks` `b` ON `b`.`cache_list_id`=`cache_lists`.`id` AND `b`.`user_id`='&1'
 			WHERE $condition
 			ORDER BY `prio`,`cache_lists`.`name`
 			LIMIT &2,&3", 

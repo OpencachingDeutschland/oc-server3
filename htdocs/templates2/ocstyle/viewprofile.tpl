@@ -181,7 +181,7 @@
 {if $cachelists|@count}
 	<div class="content2-container bg-blue02" id="cachelists">
 		<p class="content-title-noshade-size2">
-			<img src="resource2/{$opt.template.style}/images/misc/32x32-list.png" style="margin-right: 10px;" />
+			<img src="resource2/{$opt.template.style}/images/misc/32x32-list.png" style="margin-right: 10px; height:22px" />
 		{t}Cache lists{/t}
 		</p>
 	</div>

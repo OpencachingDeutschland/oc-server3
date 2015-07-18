@@ -20,7 +20,7 @@
 		&nbsp;
 		{if $cachelist.user_id==$login.userid}[<a class="systemlink" href="mylists.php?edit={$cachelist.id}&fromsearch=1">{t}edit{/t}</a>]{/if}
 		{if $login.userid}[<a class="systemlink" href="cachelist.php?id={$cachelist.id}&{if $cachelist.watched_by_me}dont{/if}watch">{if $cachelist.watched_by_me}{t}don't watch{/t}{else}{t}watch{/t}{/if}</a>]{/if}
-		{if !$cachelist.bookmarked && $cachelist.user_id!=$login.userid}[<a class="systemlink" href="cachelist.php?id={$cachelist.id}&key={$cachelist_pw|urlencode}&bookmark">{t}bookmark{/t}</a>]{/if}
+		{if $login.userid && !$cachelist.bookmarked && $cachelist.user_id!=$login.userid}[<a class="systemlink" href="cachelist.php?id={$cachelist.id}&key={$cachelist_pw|urlencode}&bookmark">{t}bookmark{/t}</a>]{/if}
 	</p>
 	{if $cachelist.description != ''}
 	<div style="padding: 0 8px 4px 10px">

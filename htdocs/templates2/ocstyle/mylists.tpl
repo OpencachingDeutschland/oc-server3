@@ -109,7 +109,7 @@
 			<tr><td class="separator"></td></tr>
 			<tr>
 				<td style="vertical-align:top; white-space:nowrap">{if $edit_list}{t}Add caches{/t}{else}{t}Caches{/t}{/if}:</td>
-				<td><input type="text" id="list_caches" name="list_caches" maxlength="60" value="{$list_caches}" class="input500 waypoint" /><br /></td>
+				<td><input type="text" id="list_caches" name="list_caches" maxlength="1000" value="{$list_caches}" class="input500 waypoint" /><br /></td>
 			</tr>
 			<tr>
 				<td></td>

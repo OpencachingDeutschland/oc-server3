@@ -69,9 +69,9 @@
 			<tr><td class="separator"></td></tr>
 			<tr>
 				<td style="vertical-align:top">{t}Status{/t}:</td>
-				<td><input type="radio" class="radio" id="s_private" name="list_visibility" value="0" {if $list_visibility==0}checked="checked"{/if} onchange="state_changed()" /><label for="s_private">{t}private{/t}</label><span id="list_password_data" > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {t}Password for sharing{/t}: &nbsp;<input type="text" id="list_password" name="list_password" maxlength="80" value="{$list_password}" class="input200" /></span><br /> 
-				{* visibility 2 is reserve for friends *}<input type="radio" class="radio" id="s_public" name="list_visibility" value="2" {if $list_visibility==2}checked="checked"{/if} onchange="state_changed()" /><label for="s_public">{t}public{/t}</label><br />
-				<input type="radio" class="radio" id="s_public3" name="list_visibility" value="3" {if $list_visibility==3}checked="checked"{/if} onchange="state_changed()" /><label for="s_public3" >{t}public{/t} + {t}visible for all users in cache listings{/t}</label><br />				
+				<td><input type="radio" class="radio" id="s_private" name="list_visibility" value="0" {if $list_visibility==0}checked="checked"{/if} onchange="state_changed()" onfocus="state_changed()" {* old MSIE versions need onfocus(), onchange() wont work properly *} /><label for="s_private">{t}private{/t}</label><span id="list_password_data" > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {t}Password for sharing{/t}: &nbsp;<input type="text" id="list_password" name="list_password" maxlength="80" value="{$list_password}" class="input200" /></span><br /> 
+				{* visibility 2 is reserve for friends *}<input type="radio" class="radio" id="s_public" name="list_visibility" value="2" {if $list_visibility==2}checked="checked"{/if} onchange="state_changed()" onfocus="state_changed()"  /><label for="s_public">{t}public{/t}</label><br />
+				<input type="radio" class="radio" id="s_public3" name="list_visibility" value="3" {if $list_visibility==3}checked="checked"{/if} onchange="state_changed()" onfocus="state_changed()" /><label for="s_public3" >{t}public{/t} + {t}visible for all users in cache listings{/t}</label><br />				
 				</td>
 			</tr>
 			<tr><td class="separator"></td></tr>

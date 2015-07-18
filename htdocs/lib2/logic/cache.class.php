@@ -551,6 +551,28 @@ class cache
 		$tpl->assign_rs('status_changes',$rs);
 		sql_free_result($rs);
 
+		// coordinate changes
+		$rs = sql("SELECT `cc`.`date_created`, `cc`.`longitude`, `cc`.`latitude`,
+		                  IFNULL(`admin`.`user_id`, `owner`.`user_id`) AS `user_id`,
+		                  IFNULL(`admin`.`username`, `owner`.`username`) AS `username`
+		             FROM `cache_coordinates` `cc`
+		        LEFT JOIN `caches` ON `caches`.`cache_id`=`cc`.`cache_id`
+		        LEFT JOIN `user` `owner` ON `owner`.`user_id`=`caches`.`user_id`
+		        LEFT JOIN `user` `admin` ON `admin`.`user_id`=`cc`.`restored_by`
+		            WHERE `cc`.`cache_id`='&1'
+		         ORDER BY `cc`.`date_created` DESC", $this->getCacheId());
+		$coords = array();
+		while ($rCoord = sql_fetch_assoc($rs))
+		{
+			$coord = new coordinate($rCoord['latitude'], $rCoord['longitude']);
+			$coords[] = array('date' => $rCoord['date_created'], 
+			                  'coord' => $coord->getDecimalMinutes(),
+			                  'user_id' => $rCoord['user_id'],
+			                  'username' => $rCoord['username']);
+		}
+		sql_free_result($rs);
+		$tpl->assign('coordinates', $coords);
+
 		// Adoptions
 		$rs = sql("SELECT `cache_adoptions`.`date`,
 		                  `cache_adoptions`.`from_user_id`,

@@ -7872,7 +7872,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1486', 'EN', 'If your browser does not support automatic forwarding please click here.', '2010-09-11 02:34:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1489', 'EN', 'EN', '2010-09-11 02:33:05');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1490', 'EN', 'Password', '2010-09-11 02:33:52');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1491', 'EN', 'edit cache description for <a href=\"viewcache.php?cacheid={cacheid}\";> cache (name) </a;>', '2010-09-11 02:32:49');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1491', 'EN', 'edit cache description for <a href=\"viewcache.php?cacheid={cacheid}\">{cachename}</a>', '2010-09-11 02:32:49');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1494', 'EN', 'Add', '2010-09-11 02:33:11');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1495', 'EN', 'Enter a name, please!', '2010-09-11 02:32:57');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1496', 'EN', 'Fill out the text field, please!', '2010-09-11 02:32:39');
@@ -9530,7 +9530,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1486', 'ES', 'Si su navegador no soporta redirección automática, por favor haga clic aquí.', '2010-12-09 00:18:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1489', 'ES', 'DE', '2010-12-09 00:18:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1490', 'ES', 'Password', '2010-12-09 00:18:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1491', 'ES', 'Editada descripción del cache por <a href=\"viewcache.php?cacheid={cacheid}\";> cache (name) </a;>', '2010-12-09 00:18:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1491', 'ES', 'Editada descripción del cache por <a href=\"viewcache.php?cacheid={cacheid}\">{cachename}</a>', '2010-12-09 00:18:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1494', 'ES', 'Añadir', '2010-12-09 00:18:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1495', 'ES', 'Insertar un nombre, Por favor.', '2010-12-09 00:18:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1496', 'ES', '¡Completa el campo de texto, por favor!', '2010-12-09 00:18:00');

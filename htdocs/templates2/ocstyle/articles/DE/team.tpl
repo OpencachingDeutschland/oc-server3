@@ -25,7 +25,7 @@
     <tr><td><img src="http://www.opencaching.de/images/team/4_vs.jpg" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=162754">4_Vs</a><br />Vorsitzender</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/clanfamily.jpg" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=244244">ClanFamily</a><br />stellvertetender Vorsitzender; Systemadministration</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/dummy.jpg" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=266420">Cyberturm</a><br />Kassenwart</td></tr>
-    <tr><td><img src="http://www.opencaching.de/images/team/danlex.png" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=222261">Danlex</a><br />Pressesprecher; Anwendersupport, Datenpflege</td></tr>
+    <tr><td><img src="http://www.opencaching.de/images/team/mic@.jpg" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=103599">mic@</a><br />Pressesprecher; Anwendersupport, Datenpflege, Forenmoderation</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/dummy.jpg" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=137473">bohrsty</a><br />Leiter Technik/Systemadministration</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/mambofive.png" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=298124">mambofive</a><br />Entwicklungsbeauftragter</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/pirate77.jpg" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=152708">pirate77</a><br />Leiter Anwendersupport und Datenpflege; Wiki</td></tr>
@@ -33,6 +33,7 @@
     <tr><th colspan="3"><br /><span class="content-title-noshade-size1">Weitere Teammitglieder</span></th></tr>
     <tr><td></td><td></td><td></td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/bundy609.jpg" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=189552">Bundy609</a><br />Anwendersupport, Datenpflege</td></tr>
+    <tr><td><img src="http://www.opencaching.de/images/team/danlex.png" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=222261">Danlex</a><br />Anwendersupport, Datenpflege</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/dl6hbo.jpg" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=148310">dl6hbo</a><br />Systemadministration, Dokumentation</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/flopp.png" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=126329">Flopp</a><br />Softwareentwicklung, Anwendersupport, Datenpflege</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/following.png" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=150360">following</a><br />Datenpflege, Softwareentwicklung, Wiki</td></tr>
@@ -40,7 +41,6 @@
     <tr><td><img src="http://www.opencaching.de/images/team/hanekju.png" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=205779">Hanekju</a><br />Datenpflege</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/joerg.jpg" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=102153">Jörg</a><br />Berater für Naturschutz und Kontakte zu Behörden und Verbänden</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/metrax.png" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=212145">Metrax</a><br />Berater für Webhosting</td></tr>
-    <tr><td><img src="http://www.opencaching.de/images/team/mic@.jpg" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=103599">mic@</a><br />Anwendersupport, Datenpflege, Forenmoderation</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/mrspommelhorst.jpg" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=144252">Mrs.Pommelhorst</a><br />Anwendersupport, Datenpflege, Wiki</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/ralf20.png" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=165920">Ralf20</a><br />Datenpflege</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/dummy.jpg" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=159941">Slini11</a><br />Datenpflege</td></tr>

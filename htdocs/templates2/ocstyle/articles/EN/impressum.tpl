@@ -258,7 +258,8 @@
 		The date refers to the day when the data was downloaded from www.opencaching.de, and it may be omitted for photos and log entries.
 		<br />
 		<br />
-		Due to some questions from users, we would like to point out that the Opencaching.de
+		More explanations on the data license are available in the <a href="http://wiki.opencaching.de/index.php/Data_license" target="_blank">Wiki</a>.</p>
+		<p>Due to some questions from users, we would like to point out that the Opencaching.de
 		data license is, of course, no "exclusive" license. This means that every user may
 		publish her contents &ndash; on the Opencaching.de website or somewhere else &ndash; under
 		additional licenses (<em>multiple licensing</em>). This may be noted in the geocache

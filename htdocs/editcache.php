@@ -79,6 +79,7 @@ function getWaypoints($cacheid)
 			tpl_set_var('message_start', "");
 			tpl_set_var('message_end', "");
 			tpl_set_var('message', $login_required);
+			tpl_set_var('helplink', helppagelink('login'));
 		}
 		else
 		{

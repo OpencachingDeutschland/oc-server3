@@ -36,5 +36,6 @@
 		sql_free_result($rs);
 	}
 
+	$tpl->assign('helppagelink', helppagelink('tops'));
 	$tpl->display();
 ?>

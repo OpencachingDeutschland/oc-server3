@@ -183,7 +183,6 @@ class OcSmarty extends Smarty
 		$optn['format'] = $opt['locale'][$opt['template']['locale']]['format'];
 		$optn['mail'] = $opt['mail'];
 		$optn['lib'] = $opt['lib'];
-		$optn['cms'] = $opt['cms'];
 		$optn['geokrety'] = $opt['geokrety'];
 		$optn['template']['usercountrieslist'] = labels::getLabels('usercountrieslist');
 		$optn['help']['oconly'] = helppagelink('oconly','OConly');

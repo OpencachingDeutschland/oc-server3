@@ -65,7 +65,12 @@ class Menu
 			$aMenu[$r['id']]['authlevel'] = ($r['access']==0) ? AUTH_LEVEL_ALL : AUTH_LEVEL_ADMIN;
 			if (substr($r['href'],0,1) == '!')
 			{
-				$aMenu[$r['id']]['href'] = substr($r['href'],1);
+				$aMenu[$r['id']]['href'] = str_replace('%LANG', strtolower($opt['template']['locale']), substr($r['href'],1));
+				$aMenu[$r['id']]['target'] = 'target="_blank"';
+			}
+			else if (strstr($r['href'],'&wiki'))
+			{
+				$aMenu[$r['id']]['href'] = $r['href'];
 				$aMenu[$r['id']]['target'] = 'target="_blank"';
 			}
 			else

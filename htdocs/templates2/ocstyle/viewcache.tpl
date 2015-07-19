@@ -475,7 +475,7 @@ function showalllists()
 		<div style="border: solid 1px red; padding:10px 10px 0px 10px; margin: 3px 0 8px 0">
 			<p style="line-height: 1.6em;">
 				<img src="resource2/{$opt.template.style}/images/viewcache/npa.gif" align="left" style="margin-right: 25px;" width="32" height="32" alt="NSG/NPA" />
-				{t 1=$opt.cms.npa}This geocache is probably placed within a nature protection area! See <a href="%1">here</a> for further informations, please.{/t}<br />
+				{t 1=$npahelplink}This geocache is probably placed within a nature protection area! See %1here</a> for further informations, please.{/t}<br />
 				{foreach from=$npaareasWarning item=npaItem name=npaareas}
 					{$npaItem.npaTypeName|escape} 
 					{$npaItem.npaName|escape} (<a href="http://www.google.de/search?q={$npaItem.npaTypeName|urlencode}+{$npaItem.npaName|urlencode}" target="_blank">{t}Info{/t}</a>){if !$smarty.foreach.npaareas.last},{/if}
@@ -486,7 +486,7 @@ function showalllists()
 
 	{if count($npaareasNoWarning) > 0}
 		<p style="line-height: 1.6em;">
-			{t 1=$opt.cms.npa}This geocache is probably placed within the following protection areas (<a href="%1">Info</a>):{/t}
+			{t 1=$npahelplink}This geocache is probably placed within the following protected areas (%1Info</a>):{/t}
 			{foreach from=$npaareasNoWarning item=npaItem name=npaareas}
 				{$npaItem.npaTypeName|escape} 
 				{$npaItem.npaName|escape} (<a href="http://www.google.de/search?q={$npaItem.npaTypeName|urlencode}+{$npaItem.npaName|urlencode}" target="_blank">{t}Info{/t}</a>){if !$smarty.foreach.npaareas.last},{/if}

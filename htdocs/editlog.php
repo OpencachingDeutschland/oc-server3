@@ -48,6 +48,7 @@
 			tpl_set_var('message_end', '');
 			tpl_set_var('target', 'editlog.php?logid=' . urlencode($log_id));
 			tpl_set_var('message', $login_required);
+			tpl_set_var('helplink', helppagelink('login'));
 		}
 		else
 		{

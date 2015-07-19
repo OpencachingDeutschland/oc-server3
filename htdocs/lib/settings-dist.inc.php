@@ -156,6 +156,7 @@
   // see config2/settings-dist.inc.php
 	$opt['template']['default']['locale'] = 'DE';      // may be overwritten by $opt['domain'][...]['locale']
 	$opt['template']['default']['country'] = 'DE';     // may be overwritten by $opt['domain'][...]['country']
+	$opt['template']['default']['fallback_locale'] = 'EN';   // may be overwritten by $opt['domain'][...]['article_locale']
 
   // include all locale settings
   require_once($rootpath . 'config2/locale.inc.php');
@@ -219,9 +220,6 @@
 	// (e.g. xml-interface and mapserver-results)
 	// you can use -1 to use the master (not recommended, because replicated to slaves)
 	$opt['db']['slave']['primary'] = -1;
-
-	// info on nature protection areas
-	$opt['cms']['npa'] = 'http://wiki.opencaching.de/index.php/Schutzgebiete';
 
 
 /* post_config() is invoked directly before the first HTML line of the main.tpl.php is sent to the client.

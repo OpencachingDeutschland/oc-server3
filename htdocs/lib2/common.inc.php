@@ -361,9 +361,9 @@ function fix_magic_quotes_gpc()
 // pay attention to use only ' quotes in $text (escape other ')
 //
 // see corresponding function in lib/common.inc.php
-function helppagelink($ocpage, $title='Instructions')
+function helppageurl($ocpage)
 {
-	global $opt, $translate;
+	global $opt;
 
 	$help_locale = $opt['template']['locale'];
 	$helppage = sql_value("SELECT `helppage` FROM `helppages`
@@ -385,17 +385,27 @@ function helppagelink($ocpage, $title='Instructions')
 	if ($helppage == "" && isset($opt['locale'][$opt['template']['locale']]['help'][$ocpage]))
 		$helppage = $opt['locale'][$opt['template']['locale']]['help'][$ocpage];
 
-	$imgtitle = $translate->t($title, '', basename(__FILE__), __LINE__);
-	$imgtitle = "alt='" . $imgtitle . "' title='" . $imgtitle  . "'";
-
 	if (substr($helppage,0,1) == "!")
-		return "<a class='nooutline' href='" . substr($helppage,1) . "' " . $imgtitle . " target='_blank'>";
+		substr($helppage,1);
+	else if ($helppage != "" && isset($opt['locale'][$help_locale]['helpwiki']))
+		return $opt['locale'][$help_locale]['helpwiki'] . str_replace(' ','_',$helppage);
 	else
-		if ($helppage != "" && isset($opt['locale'][$help_locale]['helpwiki']))
-			return "<a class='nooutline' href='" . $opt['locale'][$help_locale]['helpwiki'] .
-			       str_replace(' ','_',$helppage) . "' " . $imgtitle . " target='_blank'>";
+		return "";
+}
 
-	return "";
+function helppagelink($ocpage, $title='Instructions')
+{
+	global $translate;
+
+	$helpurl = helppageurl($ocpage);
+	if ($helpurl == "")
+		return "";
+	else
+	{
+		$imgtitle = $translate->t($title, '', basename(__FILE__), __LINE__);
+		$imgtitle = "alt='" . $imgtitle . "' title='" . $imgtitle  . "'";
+		return "<a class='nooutline' href='" . $helpurl . "' " . $imgtitle . " target='_blank'>";
+	}
 }
 
 

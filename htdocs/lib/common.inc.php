@@ -1270,14 +1270,24 @@ function helppagelink($ocpage)
 {
 	global $opt, $locale, $translate;
 
+	$help_locale = $locale;
 	$rs = sql("SELECT `helppage` FROM `helppages` WHERE `ocpage`='&1' AND `language`='&2'",
-             $ocpage, $locale);
+             $ocpage, $help_locale);
 	if (mysql_num_rows($rs) == 0)
 	{
 		mysql_free_result($rs);
 		$rs = sql("SELECT `helppage` FROM `helppages` WHERE `ocpage`='&1' AND `language`='*'",
 		          $ocpage);
 	}
+	if (mysql_num_rows($rs) == 0)
+	{
+		mysql_free_result($rs);
+		$rs = sql("SELECT `helppage` FROM `helppages` WHERE `ocpage`='&1' AND `language`='&2'",
+		          $ocpage, $opt['template']['default']['fallback_locale']);
+		if (mysql_num_rows($rs) > 0)
+			$help_locale = $opt['template']['default']['fallback_locale'];
+	}
+
 	if (mysql_num_rows($rs) > 0)
 	{
 		$record = sql_fetch_array($rs);
@@ -1293,8 +1303,8 @@ function helppagelink($ocpage)
 	if (substr($helppage,0,1) == "!")
 		return "<a class='nooutline' href='" . substr($helppage,1) . "' " . $imgtitle . " target='_blank'>";
 	else
-		if ($helppage != "" && isset($opt['locale'][$locale]['helpwiki']))
-			return "<a class='nooutline' href='" . $opt['locale'][$locale]['helpwiki'] .
+		if ($helppage != "" && isset($opt['locale'][$help_locale]['helpwiki']))
+			return "<a class='nooutline' href='" . $opt['locale'][$help_locale]['helpwiki'] .
 			       str_replace(' ','_',$helppage) . "' " . $imgtitle . " target='_blank'>";
 
 	return "";

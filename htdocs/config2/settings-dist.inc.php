@@ -665,12 +665,4 @@
   $opt['httpd']['user'] = 'apache';
   $opt['httpd']['group'] = 'apache';
 
-	/* CMS links for external pages
-	 */
-
-	// explanation of common login errors
-	$opt['cms']['login'] = 'http://wiki.opencaching.de/index.php/Login_auf_Opencaching.de';
-
-	// explanation of nature protection areas
-	$opt['cms']['npa'] = 'http://wiki.opencaching.de/index.php/Schutzgebiete';
 ?>

@@ -349,6 +349,7 @@ function getChildWaypoints($cacheid)
 
 	$tpl->assign('shortlink_domain', $opt['logic']['shortlink_domain']);
 	$tpl->assign('listing_admin', $login->listingAdmin());
+	$tpl->assign('npahelplink', helppagelink('npa'));
 
 	// display the page
 	$tpl->display();

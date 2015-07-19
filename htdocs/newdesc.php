@@ -38,6 +38,7 @@
 			tpl_set_var('username', '');
 			tpl_set_var('target', htmlspecialchars('newdesc.php?cacheid=' . urlencode($cache_id), ENT_COMPAT, 'UTF-8'));
 			tpl_set_var('message', $login_required);
+			tpl_set_var('helplink', helppagelink('login'));
 		}
 		else
 		{

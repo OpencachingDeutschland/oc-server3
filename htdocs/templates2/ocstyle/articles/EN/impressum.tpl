@@ -68,7 +68,7 @@
 		<ul class="indent narrowlist">
 			<li>Michael Vaahsen, chairman</li>
 			<li>Mirco Baumann, vice chairman</li>
-			<li>Christoph Convent, treasurer (acting)</li>
+			<li>Christoph Convent, treasurer</li>
 		</ul>
 	</p>
 

@@ -86,7 +86,7 @@
 		<ul class="indent narrowlist">
 			<li>Michael Vaahsen, Vorsitzender</li>
 			<li>Mirco Baumann, 2. Vorsitzender</li>
-			<li>Christoph Convent, Kassenwart (kommissarisch)</li>
+			<li>Christoph Convent, Kassenwart</li>
 		</ul>
 	</p>
 	

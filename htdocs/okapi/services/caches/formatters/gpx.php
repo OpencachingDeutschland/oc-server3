@@ -315,8 +315,8 @@ class WebService
                         if (!$has_gc_equivs && $vars['gc_ocde_attrs'])
                         {
                             # Generate an OCDE pseudo-GS attribute;
-                            # see http://code.google.com/p/opencaching-api/issues/detail?id=190 and
-                            # http://code.google.com/p/opencaching-api/issues/detail?id=271.
+                            # see https://github.com/opencaching/okapi/issues/190 and
+                            # https://github.com/opencaching/okapi/issues/271.
                             #
                             # Groundspeak uses ID 1..65 (as of June, 2013), and OCDE makeshift
                             # IDs start at 106, so there is space for 40 new GS attributes.

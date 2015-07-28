@@ -106,7 +106,7 @@ class View
                     "IMPORTANT: If you're trying to install OKAPI on an empty database then\n".
                     "you will fail. OKAPI is not a standalone application, it is a plugin\n".
                     "for Opencaching sites. Please read this:\n\n".
-                    "https://code.google.com/p/opencaching-api/issues/detail?id=299"
+                    "https://github.com/opencaching/okapi/issues/299"
                 );
             }
             return;
@@ -257,7 +257,7 @@ class View
         # In fact, this should be "alter cache_logs add column okapi_consumer_key...", but
         # I don't want for OKAPI to mess with the rest of DB. Keeping it separete for now.
         # One day, this table could come in handy. See:
-        # http://code.google.com/p/opencaching-api/issues/detail?id=64
+        # https://github.com/opencaching/okapi/issues/64
         Db::execute("
             CREATE TABLE okapi_cache_logs (
                 log_id int(11) NOT NULL,
@@ -456,14 +456,14 @@ class View
 
     private static function ver51()
     {
-        # Before revision 417, OKAPI used to make the following change:
+        # Before SVN revision 417, OKAPI used to make the following change:
         # - Db::execute("alter table cache_logs modify column last_modified timestamp not null;");
         # It doesn't do that anymore. Instead, it adds a separate column for itself (okapi_syncbase).
     }
 
     private static function ver52()
     {
-        # Before revision 417, OKAPI used to make the following change (on OCDE branch):
+        # Before SVN revision 417, OKAPI used to make the following change (on OCDE branch):
         # - Db::execute("alter table cache_logs_archived modify column last_modified timestamp not null;");
         # It doesn't do that anymore. Instead, it adds a separate column for itself (okapi_syncbase).
     }
@@ -507,7 +507,7 @@ class View
     private static function ver58()
     {
         #
-        # Starting with revision 417, OKAPI hides all caches with statuses > 3.
+        # Starting with SVN revision 417, OKAPI hides all caches with statuses > 3.
         # Hence, we need such caches to be removed from external databases replicated
         # via the "replicate" module. By reseting the "okapi_syncbase" timestamp,
         # we force changelog generator cronjob to issue proper "delete" statements

@@ -64,7 +64,7 @@ class View
             'site_url' => Settings::get('SITE_URL'),
             'site_name' => Okapi::get_normalized_site_name(),
             'installations' => OkapiMenu::get_installations(),
-            'okapi_rev' => Okapi::$revision,
+            'okapi_rev' => Okapi::$version_number,
             'data_license_html' => Settings::get('DATA_LICENSE_URL')
                 ? "<a href='".Settings::get('DATA_LICENSE_URL')."'>Data License</a>"
                 : "Data License",

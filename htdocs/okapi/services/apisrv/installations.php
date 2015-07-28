@@ -43,7 +43,7 @@ class WebService
                     )
                 );
                 $context = stream_context_create($opts);
-                $xml = file_get_contents("http://opencaching-api.googlecode.com/svn/trunk/etc/installations.xml",
+                $xml = file_get_contents("https://raw.githubusercontent.com/opencaching/okapi/master/etc/installations.xml",
                     false, $context);
                 $doc = simplexml_load_string($xml);
                 if (!$doc) {
@@ -52,7 +52,7 @@ class WebService
             }
             catch (ErrorException $e)
             {
-                # Google failed on us. Try to respond with a backup list.
+                # GitHub failed on us. Try to respond with a backup list.
 
                 $results = Cache::get($backupkey);
                 if ($results)

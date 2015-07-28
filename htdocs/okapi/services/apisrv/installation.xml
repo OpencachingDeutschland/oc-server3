@@ -23,9 +23,35 @@
             <li>
                 <b>site_name</b> - international name of the Opencaching site,
             </li>
-            <li><b>okapi_revision</b> - integer, an SVN revision of the OKAPI project
-                installed on this Opencaching site, <b>or null</b>, when could not
-                determine revision number.</li>
+            <li>
+                <p><b>okapi_version_number</b> - integer; the version number of
+                the OKAPI instance installed on this Opencaching site, <b>or
+                null</b>, if the version number could not be determined.</p>
+
+                <p>The version number will be incremented with each new
+                revision of OKAPI (that is, after every commit to OKAPI
+                repository).</p>
+
+                <p>You can use it to check if this OKAPI installation will be
+                compatbile with your client application: if the number is
+                equal to or higher than the one you have expected, then it will
+                be compatible.</p>
+            </li>
+            <li>
+                <p><b>okapi_revision</b> - this is an older alias of
+                <b>okapi_version_number</b>.</p>
+
+                <p>For a number of years, OKAPI used SVN for version control.
+                SVN uses integers for commit IDs. Hence, version numbers and
+                revision numbers were exactly the same thing. (In fact, the
+                <b>okapi_version_number</b> field has been introduced only
+                <i>after</i> OKAPI has been migrated to Git.)</p>
+            </li>
+            <li>
+                <b>git_revision</b> - string, the Git revision of the OKAPI
+                project installed on this Opencaching site, <b>or null</b>,
+                when it could not be determined.
+            </li>
         </ul>
     </returns>
 </xml>

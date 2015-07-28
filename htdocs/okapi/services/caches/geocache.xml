@@ -42,7 +42,7 @@
                 <b>static</b> - OKAPI will append a "static" attribution note to the descriptions
                 of the geocache. This might equal the "full" attribution note, but not necessarilly,
                 since the "full" note may contain a current date
-                (<a href='https://code.google.com/p/opencaching-api/issues/detail?id=178'>why?</a>),
+                (<a href='https://github.com/opencaching/okapi/issues/178'>why?</a>),
                 and the "static" note will not. This is implemented primarily for internal use
                 (i.e. the replicate module). Usually you should not use it, because on some
                 installations the static note will not be sufficient to meet the data license
@@ -193,12 +193,12 @@
             <li>
                 <p><b>willattends</b> - in case of Event Caches, this is the number of
                 "Will attend" log entries. In case of any other cache type, it will
-                be <b>zero</b> (not null, for <a href='https://code.google.com/p/opencaching-api/issues/detail?id=233'>backward
+                be <b>zero</b> (not null, for <a href='https://github.com/opencaching/okapi/issues/233'>backward
                 compatibility</a>),</p>
             </li>
             <li class='deprecated'>
                 <b>size</b> - deprecated
-                (<a href='http://code.google.com/p/opencaching-api/issues/detail?id=155'>why?</a>),
+                (<a href='https://github.com/opencaching/okapi/issues/155'>why?</a>),
                 use <b>size2</b> instead. Float (between 1 and 5), size rating of the container, or
                 <b>null</b> if geocache does not have a container,
             </li>
@@ -253,7 +253,7 @@
                 <a href='%OKAPI:docurl:html%'>HTML string</a>) of cache descriptions,</li>
             <li class="deprecated"><b>hint</b> - <a href='%OKAPI:docurl:html%'>HTML-encoded</a>
                 string, cache hints/spoilers; deprecated
-                (<a href="http://code.google.com/p/opencaching-api/issues/detail?id=261">why?</a>),
+                (<a href="https://github.com/opencaching/okapi/issues/261">why?</a>),
                 use <b>hint2</b> instead,</li>
             <li class="deprecated"><b>hints</b> - a dictionary (language code =&gt;
                 <a href='%OKAPI:docurl:html%'>HTML-encoded</a> string) of cache hints/spoilers;

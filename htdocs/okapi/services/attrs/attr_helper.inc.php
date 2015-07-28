@@ -67,7 +67,7 @@ class AttrHelper
                 # That's bad! We don't have ANY copy of the data AND we failed
                 # to parse it. We will use a fake, empty data.
 
-                $cache_key = "attrhelper/dict#".Okapi::$revision.self::cache_key_suffix();
+                $cache_key = "attrhelper/dict#".Okapi::$git_revision.self::cache_key_suffix();
                 $cachedvalue = array(
                     'attr_dict' => array(),
                 );
@@ -80,7 +80,7 @@ class AttrHelper
 
     /**
      * Refresh all attributes from the given XML. Usually, this file is
-     * downloaded from Google Code (using refresh_now).
+     * downloaded from GitHub (using refresh_now).
      */
     public static function refresh_from_string($xml)
     {
@@ -158,7 +158,7 @@ class AttrHelper
             $cachedvalue['attr_dict'][$attr['acode']] = $attr;
         }
 
-        $cache_key = "attrhelper/dict#".Okapi::$revision.self::cache_key_suffix();
+        $cache_key = "attrhelper/dict#".Okapi::$git_revision.self::cache_key_suffix();
         Cache::set($cache_key, $cachedvalue, self::ttl());
         self::$attr_dict = $cachedvalue['attr_dict'];
     }
@@ -199,11 +199,11 @@ class AttrHelper
             /* Already initialized. */
             return;
         }
-        $cache_key = "attrhelper/dict#".Okapi::$revision.self::cache_key_suffix();
+        $cache_key = "attrhelper/dict#".Okapi::$git_revision.self::cache_key_suffix();
         $cachedvalue = Cache::get($cache_key);
         if ($cachedvalue === null)
         {
-            # I.e. after Okapi::$revision is changed, or cache got invalidated.
+            # I.e. after Okapi::$git_revision is changed, or cache got invalidated.
 
             if ($allow_refreshing)
             {
@@ -247,7 +247,7 @@ class AttrHelper
         if ($mapping !== null)
             return $mapping;
 
-        $cache_key = "attrhelper/id2acode/".Okapi::$revision.self::cache_key_suffix();
+        $cache_key = "attrhelper/id2acode/".Okapi::$git_revision.self::cache_key_suffix();
         $mapping = Cache::get($cache_key);
         if (!$mapping)
         {
@@ -271,7 +271,7 @@ class AttrHelper
             return $mapping;
 
         $cache_key = md5(serialize(array("attrhelper/acode2name", $langpref,
-            Okapi::$revision, self::cache_key_suffix())));
+            Okapi::$git_revision, self::cache_key_suffix())));
         $mapping = Cache::get($cache_key);
         if (!$mapping)
         {

@@ -60,7 +60,7 @@
     <opt name='size' class='deprecated'>
         <p>Deprecated. Please use <b>size2</b> instead - this will allow you to
         differentiate "nano" vs. "micro" and "none" vs. "other" sizes
-        (<a href='http://code.google.com/p/opencaching-api/issues/detail?id=155'>details</a>).</p>
+        (<a href='https://github.com/opencaching/okapi/issues/155'>details</a>).</p>
         <p>A string "X-Y", where X and Y are integers between 1 and 5, and X &lt;= Y.
         Only caches with size attribute between these numbers (inclusive) will be returned
         (1 - micro, 5 - very big).</p>

@@ -7,7 +7,7 @@ use okapi\Okapi;
 echo '<?xml version="1.0" encoding="utf-8"?>'."\n";
 
 ?>
-<gpx xmlns="http://www.topografix.com/GPX/1/0" version="1.0" creator="OKAPI r<?= $vars['installation']['okapi_revision'] ?>"
+<gpx xmlns="http://www.topografix.com/GPX/1/0" version="1.0" creator="OKAPI ver. <?= $vars['installation']['okapi_version_number'] ?> (rev. <?= $vars['installation']['okapi_git_revision'] ?>)"
 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 xsi:schemaLocation="
 http://www.topografix.com/GPX/1/0 http://www.topografix.com/GPX/1/0/gpx.xsd

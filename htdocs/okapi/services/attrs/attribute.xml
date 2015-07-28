@@ -47,7 +47,7 @@
 
                 <p>If you think your language is missing, then feel free to add missing
                 translations directly to OKAPI repository. See
-                <a href='https://code.google.com/p/opencaching-api/source/browse/trunk/okapi/services/attrs/attribute-definitions.xml'>here</a>.</p>
+                <a href='https://github.com/opencaching/okapi/blob/master/okapi/services/attrs/attribute-definitions.xml'>here</a>.</p>
             </li>
             <li>
                 <p><b>names</b> - a dictionary of all known names of the attribute, in
@@ -56,7 +56,7 @@
 
                 <p>If you think your language is missing, then feel free to add missing
                 translations directly to OKAPI repository. See
-                <a href='https://code.google.com/p/opencaching-api/source/browse/trunk/okapi/services/attrs/attribute-definitions.xml'>here</a>.</p>
+                <a href='https://github.com/opencaching/okapi/blob/master/okapi/services/attrs/attribute-definitions.xml'>here</a>.</p>
             </li>
             <li>
                 <b>description</b> - HTML string, description of the attribute (language is
@@ -64,7 +64,7 @@
 
                 <p>If you think your language is missing, then feel free to add missing
                 translations directly to OKAPI repository. See
-                <a href='https://code.google.com/p/opencaching-api/source/browse/trunk/okapi/services/attrs/attribute-definitions.xml'>here</a>.</p>
+                <a href='https://github.com/opencaching/okapi/blob/master/okapi/services/attrs/attribute-definitions.xml'>here</a>.</p>
             </li>
             <li>
                 <p><b>descriptions</b> - a dictionary of all known descriptions of the
@@ -73,7 +73,7 @@
 
                 <p>If you think your language is missing, then feel free to add missing
                 translations directly to OKAPI repository. See
-                <a href='https://code.google.com/p/opencaching-api/source/browse/trunk/okapi/services/attrs/attribute-definitions.xml'>here</a>.</p>
+                <a href='https://github.com/opencaching/okapi/blob/master/okapi/services/attrs/attribute-definitions.xml'>here</a>.</p>
             </li>
             <li>
                 <p><b>gc_equivs</b> - a list of Geocaching.com (Groundspeak)

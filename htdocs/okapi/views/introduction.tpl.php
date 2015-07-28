@@ -53,7 +53,7 @@ Here is the list of other OKAPI installations:</p>
 <p>Other links you might want to check out:</p>
 
 <ul>
-    <li>OKAPI Project Homepage - <a href='http://code.google.com/p/opencaching-api/'>http://code.google.com/p/opencaching-api/</a></li>
+    <li>OKAPI Project Homepage - <a href='https://github.com/opencaching/okapi/'>https://github.com/opencaching/okapi/</a></li>
     <li>OKAPI News blog - <a href='http://opencaching-api.blogspot.com/'>http://opencaching-api.blogspot.com/</a></li>
 </ul>
 
@@ -192,7 +192,7 @@ formatting parameters</i> in your request:</p>
                 <b>callback</b> parameter too),
             </li>
             <li class='deprecated'>
-                <b>xmlmap</b> - deprecated (<a href='http://code.google.com/p/opencaching-api/issues/detail?id=128'>why?</a>),
+                <b>xmlmap</b> - deprecated (<a href='https://github.com/opencaching/okapi/issues/128'>why?</a>),
             </li>
             <li>
                 <b>xmlmap2</b> - XML format. This is produced by mapping JSON
@@ -300,7 +300,7 @@ an Access Token).</p>
     <li>Sometimes, due to invalid server configuration, you may receive <b>HTTP
     200</b> instead of <b>HTTP 500</b>. We know that's "unprofessional", but we
     cannot guarantee that all OC servers are configured properly
-    (<a href='https://code.google.com/p/opencaching-api/issues/detail?id=293'>example</a>).
+    (<a href='https://github.com/opencaching/okapi/issues/293'>example</a>).
     If you get <b>HTTP 200</b> <u>and</u> you cannot parse the server response,
     you should treat it as <b>HTTP 500</b>.</li>
 </ul>
@@ -416,7 +416,7 @@ dictionary may contain additional keys. Currently possible values of the
                         <b>yours</b> - UNIX timestamp you have supplied (this
                         used to be a string, but now it is being casted to an
                         integer, see
-                        <a href='https://code.google.com/p/opencaching-api/issues/detail?id=314'>here</a>),
+                        <a href='https://github.com/opencaching/okapi/issues/314'>here</a>),
                     </li>
                     <li><b>ours</b> - UNIX timestamp on our server,</li>
                     <li>
@@ -465,13 +465,13 @@ rather use <code>if ("z" in reason_stack) { ... }</code>.</p>
 
 <p>OKAPI is Open Source and everyone is welcome to participate in the development.</p>
 
-<p>We have our <a href='http://code.google.com/p/opencaching-api/issues/list'>Issue tracker</a>.
+<p>We have our <a href='https://github.com/opencaching/okapi/issues/'>Issue tracker</a>.
 You can use it to contact us!<br>You may also contact some of
-<a href='http://code.google.com/p/opencaching-api/people/list'>the developers</a>
+<a href='https://github.com/opencaching/okapi/graphs/contributors'>the developers</a>
 directly, if you want.</p>
 
 <p>Visit <b>project homepage</b> for details:
-<a href='http://code.google.com/p/opencaching-api/'>http://code.google.com/p/opencaching-api/</a></p>
+<a href='https://github.com/opencaching/okapi/'>https://github.com/opencaching/okapi/</a></p>
 
 
 <h2 id='method_index'>List of available methods</h2>

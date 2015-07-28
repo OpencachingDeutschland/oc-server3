@@ -23,8 +23,9 @@ class OkapiMenu
     public static function get_menu_html($current_path = null)
     {
         $chunks = array();
-        if (Okapi::$revision)
-            $chunks[] = "<div class='revision'>rev. ".Okapi::$revision."</div>";
+        if (Okapi::$version_number)
+            $chunks[] = "<div class='revision'>ver. ".Okapi::$version_number.
+                " (".substr(Okapi::$git_revision, 0, 7).")</div>";
         $chunks[] = "<div class='main'>";
         $chunks[] = self::link($current_path, "introduction.html", "Introduction");
         $chunks[] = self::link($current_path, "signup.html", "Sign up");

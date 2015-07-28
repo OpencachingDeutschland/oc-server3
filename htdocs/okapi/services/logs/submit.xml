@@ -28,11 +28,11 @@
         <b>auto</b>, <b>html</b> or <b>plaintext</b>. Usually, you should <b>not</b>
         use the <b>auto</b> option, because its exact behavior is unspecified
         and may depend on the installation
-        (<a href='https://code.google.com/p/opencaching-api/issues/detail?id=124'>more info</a>).</p>
+        (<a href='https://github.com/opencaching/okapi/issues/124'>more info</a>).</p>
 
         <p><b>Important note:</b> Unfortunatelly, some OC nodes don't support this
         parameter properly - regardless of what you choose, you may end up with
-        <a href='https://code.google.com/p/opencaching-api/issues/detail?id=324'>unexpected
+        <a href='https://github.com/opencaching/okapi/issues/324'>unexpected
         results</a>. Currently, there is nothing OKAPI developers can do
         to fix this, but you should use this parameter either way (to indicate how
         you <b>expect</b> it to behave) - we hope this will be fixed, eventually.</p>

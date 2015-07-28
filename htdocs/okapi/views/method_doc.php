@@ -36,7 +36,7 @@ class View
             'menu' => OkapiMenu::get_menu_html($methodname.".html"),
             'okapi_base_url' => Settings::get('SITE_URL')."okapi/",
             'installations' => OkapiMenu::get_installations(),
-            'okapi_rev' => Okapi::$revision,
+            'okapi_rev' => Okapi::$version_number,
         );
 
         $response = new OkapiHttpResponse();

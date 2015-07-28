@@ -35,7 +35,7 @@
         generated using the <b>attribution_append=static</b> parameter (see the
         geocache method). This is because the full attributions are not always suitable
         for replication, since they may contain dynamically changing dates on some
-        installations (<a href='https://code.google.com/p/opencaching-api/issues/detail?id=178'>why?</a>).
+        installations (<a href='https://github.com/opencaching/okapi/issues/178'>why?</a>).
         To make sure that static attributions are enough, consult the local Data
         Licence (the Sign Up page).</p>
     </desc>

@@ -2,14 +2,11 @@
     <brief>Retrieve information on given issue</brief>
     <issue-id>11</issue-id>
     <desc>
-        <p><b>Important:</b> This method stopped working properly in October 2013.
-        Now, it returns a simple placeholder.
-        <a href='https://code.google.com/p/opencaching-api/issues/detail?id=288'>Read more</a>.</p>
-
         <p>OKAPI is trying to be as <b>integrated</b> with its
-        <a href='http://code.google.com/p/opencaching-api/'>Main Project Page</a> as it can.
+        <a href='https://github.com/opencaching/okapi/'>Main Project Page</a> as it can.
         This method retrieves basic information on a given issue from our project
-        <a href='http://code.google.com/p/opencaching-api/issues/list'>Issue Tracker</a>.
+        <a href='https://github.com/opencaching/okapi/issues/'>Issue Tracker</a>
+        (currently GitHub).
         In future, it <b>might</b> also return some of the latest comments (we're not yet
         sure if we want them displayed on our documentation pages).</p>
     </desc>
@@ -27,7 +24,7 @@
             <li><b>url</b> - URL of the issue page,</li>
             <li><b>comment_count</b> - total number of submitted comments <b>or null</b> if unknown.</li>
         </ul>
-        <p>Note, that this will respond with HTTP 400 if we fail to retrieve data from
-        the Google Code site.</p>
+        <p>Note, that this might respond with HTTP 400 if we fail to retrieve data from
+        GitHub.</p>
     </returns>
 </xml>

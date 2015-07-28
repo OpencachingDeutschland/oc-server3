@@ -489,7 +489,7 @@ class SearchAssistant
         if ($tmp = $this->request->get_parameter('name'))
         {
             # WRTODO: Make this more user-friendly. See:
-            # http://code.google.com/p/opencaching-api/issues/detail?id=121
+            # https://github.com/opencaching/okapi/issues/121
 
             if (strlen($tmp) > 100)
                 throw new InvalidParam('name', "Maximum length of 'name' parameter is 100 characters");

@@ -6,7 +6,7 @@
         OKAPI installations might differ slightly. If you plan on using
         multiple OKAPI installations in your application (which is a very
         good thing!) you should test it against the one with the <b>lowest</b>
-        OKAPI revision number.
+        OKAPI version number.
     </desc>
     <common-format-params/>
     <returns>

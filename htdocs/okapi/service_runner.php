@@ -134,7 +134,7 @@ class OkapiServiceRunner
             require_once($GLOBALS['rootpath']."okapi/$service_name.php");
             $response = call_user_func(array('\\okapi\\'.
                 str_replace('/', '\\', $service_name).'\\WebService', 'call'), $request);
-            if ($options['min_auth_level'] >= 3)
+            if ($options['min_auth_level'] >= 3 && $request->token->token_type == "access")
             {
                 Db::execute("
                     update user set last_login=now()

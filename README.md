@@ -60,6 +60,6 @@ Related Websites
 * [Opencaching.de Team Blog](http://blog.opencaching.de/) (German)
 * [Opencaching Network Forum](http://forum.opencaching-network.org/) (German and English) -> [Development](http://forum.opencaching-network.org/index.php?board=43.0)
 * [Opencaching API project](https://github.com/opencaching/okapi)
-* [Opencaching.pl project](http://code.google.com/p/opencaching-pl/)
+* [Opencaching.pl project](https://github.com/opencaching/opencaching-pl)
 * [Git explained](http://gitref.org/index.html)
 * [old Opencaching.de/se Git Repository](https://github.com/OpencachingTeam/opencaching/)

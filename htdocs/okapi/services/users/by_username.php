@@ -27,6 +27,13 @@ class WebService
     {
         $username = $request->get_parameter('username');
         if (!$username) throw new ParamMissing('username');
+
+        # Fix for issue 339:
+        # Catch pipe chars here, because services/users/by_usernames would split up the name.
+        # OC databases do not contain user names with pipe chars.
+
+        if (strstr($username,'|'))
+            throw new InvalidParam('username', "There is no user by this username.");
         $fields = $request->get_parameter('fields');
 
         # There's no need to validate the fields parameter.

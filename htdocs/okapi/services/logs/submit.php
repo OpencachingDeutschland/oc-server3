@@ -64,7 +64,7 @@ class WebService
         if ($tmp)
         {
             $when = strtotime($tmp);
-            if (!$when)
+            if ($when < 1)
                 throw new InvalidParam('when', "'$tmp' is not in a valid format or is not a valid date.");
             if ($when > time() + 5*60)
                 throw new CannotPublishException(_("You are trying to publish a log entry with a date in future. ".
@@ -619,23 +619,12 @@ class WebService
         }
     }
 
-    private static function create_uuid()
-    {
-        return sprintf('%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
-            mt_rand(0, 0xffff), mt_rand(0, 0xffff),
-            mt_rand(0, 0xffff),
-            mt_rand(0, 0x0fff) | 0x4000,
-            mt_rand(0, 0x3fff) | 0x8000,
-            mt_rand(0, 0xffff), mt_rand(0, 0xffff), mt_rand(0, 0xffff)
-        );
-    }
-
     private static function insert_log_row(
         $consumer_key, $cache_internal_id, $user_internal_id, $logtype, $when,
         $formatted_comment, $text_html
     )
     {
-        $log_uuid = self::create_uuid();
+        $log_uuid = Okapi::create_uuid();
         Db::execute("
             insert into cache_logs (uuid, cache_id, user_id, type, date, text, text_html, last_modified, date_created, node)
             values (

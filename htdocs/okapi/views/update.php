@@ -705,4 +705,6 @@ class View
         );
         ReplicateCommon::verify_clog_consistency(true, $new_geocache_fields);
     }
+
+    private static function ver90() { Db::execute("alter table okapi_consumers change column admin bflags tinyint not null default 0;"); }
 }

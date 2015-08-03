@@ -468,7 +468,45 @@ class Db
         $rs = mysql_query($query);
         if (!$rs)
         {
-            throw new DbException("SQL Error ".mysql_errno().": ".mysql_error()."\n\nThe query was:\n".$query."\n");
+            $errno = mysql_errno();
+            $msg = mysql_error();
+
+            /* Detect issue #340 and try to repair... */
+
+            if (in_array($errno, array(144, 130)) && strstr($msg, "okapi_cache")) {
+
+                /* MySQL claims that is tries to repair it automatically. We'll
+                 * try outselves. */
+
+                try {
+                    self::execute("repair table okapi_cache");
+                    Okapi::mail_admins(
+                        "okapi_cache - Automatic repair",
+                        "Hi.\n\nOkapi detected that okapi_cache table needed ".
+                        "repairs and it has performed such\nrepairs automatically. ".
+                        "However, this should not happen regularly!"
+                    );
+                } catch (Exception $e) {
+
+                    /* Last resort. */
+
+                    try {
+                        self::execute("truncate okapi_cache");
+                        Okapi::mail_admins(
+                            "okapi_cache was truncated",
+                            "Hi.\n\nOkapi detected that okapi_cache table needed ".
+                            "repairs, but it failed to repair\nthe table automatically. ".
+                            "In order to counteract more severe errors, \nwe have ".
+                            "truncated the okapi_cache table to make it alive.\n".
+                            "However, this should not happen regularly!"
+                        );
+                    } catch (Exception $e) {
+                        # pass
+                    }
+                }
+            }
+
+            throw new DbException("SQL Error $errno: $msg\n\nThe query was:\n".$query."\n");
         }
         return $rs;
     }
@@ -512,16 +550,47 @@ class OkapiConsumer extends OAuthConsumer
     public $name;
     public $url;
     public $email;
-    public $admin;
 
-    public function __construct($key, $secret, $name, $url, $email, $admin=false)
+    /**
+     * A set of binary flags indicating "special permissions".
+     *
+     * Some chosen Consumers gain special permissions within OKAPI. These
+     * permissions are set by direct SQL UPDATEs in the database, and are not
+     * part of the official documentation, nor are they backward-compatible.
+     *
+     * Before you grant any of these permissions to any Consumer, make him
+     * aware, that he may loose them at any time (e.g. after OKAPI update)!
+     */
+    private $bflags;
+
+    /**
+     * Allows the consumer to set higher values on the "limit" parameters of
+     * some methods.
+     */
+    const FLAG_SKIP_LIMITS = 1;
+
+    /**
+     * Allows the consumer to call the "services/caches/map/tile" method.
+     */
+    const FLAG_MAPTILE_ACCESS = 2;
+
+    public function __construct($key, $secret, $name, $url, $email, $bflags=0)
     {
         $this->key = $key;
         $this->secret = $secret;
         $this->name = $name;
         $this->url = $url;
         $this->email = $email;
-        $this->admin = $admin;
+        $this->bflags = $bflags;
+    }
+
+    /**
+     * Returns true if the consumer has the given flag set. See class contants
+     * for the list of available flags.
+     */
+    public function hasFlag($flag)
+    {
+        return ($this->bflags & $flag) > 0;
     }
 
     public function __toString()
@@ -897,10 +966,32 @@ class Okapi
     public static $server;
 
     /* These two get replaced in automatically deployed packages. */
-    public static $version_number = 1095;
-    public static $git_revision = 'edd77fc50411cae12fe0e3b851facaf9ea3e5d1f';
+    public static $version_number = 1103;
+    public static $git_revision = '0528714d0df18e3b7fe6afaa14dd3a6b64cae3fb';
 
     private static $okapi_vars = null;
+
+    /** Return a new, random UUID. */
+    public static function create_uuid()
+    {
+        /* If we're on Linux, then we'll use a system function for that. */
+
+        if (file_exists("/proc/sys/kernel/random/uuid")) {
+            return trim(file_get_contents("/proc/sys/kernel/random/uuid"));
+        }
+
+        /* On other systems (as well as on some other Linux distributions)
+         * fall back to the original implementation (which is NOT safe - we had
+         * one duplicate during 3 years of its running). */
+
+        return sprintf('%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
+            mt_rand(0, 0xffff), mt_rand(0, 0xffff),
+            mt_rand(0, 0xffff),
+            mt_rand(0, 0x0fff) | 0x4000,
+            mt_rand(0, 0x3fff) | 0x8000,
+            mt_rand(0, 0xffff), mt_rand(0, 0xffff), mt_rand(0, 0xffff)
+        );
+    }
 
     /** Get a variable stored in okapi_vars. If variable not found, return $default. */
     public static function get_var($varname, $default = null)
@@ -964,8 +1055,13 @@ class Okapi
         try {
             $counter = Cache::get($cache_key);
         } catch (DbException $e) {
-            # Why catching exceptions here? See bug#156.
-            $counter = null;
+            # This exception can occur during OKAPI update (#156), or when
+            # the cache table is broken (#340). I am not sure which option is
+            # better: 1. notify the admins about the error and risk spamming
+            # them, 2. don't notify and don't risk spamming them. Currently,
+            # I choose option 2.
+
+            return;
         }
         if ($counter === null)
             $counter = 0;
@@ -973,7 +1069,8 @@ class Okapi
         try {
             Cache::set($cache_key, $counter, 3600);
         } catch (DbException $e) {
-            # Why catching exceptions here? See bug#156.
+            # If `get` suceeded and `set` did not, then probably we're having
+            # issue #156 scenario. We can ignore it here.
         }
         if ($counter <= 5)
         {
@@ -1364,7 +1461,7 @@ class Okapi
      */
     public static function formatted_response(OkapiRequest $request, &$object)
     {
-        if ($request instanceof OkapiInternalRequest && ($request->i_want_okapi_response == false))
+        if ($request instanceof OkapiInternalRequest && (!$request->i_want_OkapiResponse))
         {
             # If you call a method internally, then you probably expect to get
             # the actual object instead of it's formatted representation.
@@ -1996,10 +2093,12 @@ class OkapiInternalRequest extends OkapiRequest
     public $perceive_as_http_request = false;
 
     /**
-     * Set this to true, if you want to receive OkapiResponse instead of
-     * the actual object.
+     * By default, OkapiInsernalRequests work differently than OkapiRequests -
+     * they TRY to return PHP objects (like arrays), instead of OkapiResponse
+     * objects. Set this to true, if you want this request to work as a regular
+     * one - and receive OkapiResponse instead of the PHP object.
      */
-    public $i_want_okapi_response = false;
+    public $i_want_OkapiResponse = false;
 
     /**
      * You may use "null" values in parameters if you want them skipped
@@ -2010,13 +2109,9 @@ class OkapiInternalRequest extends OkapiRequest
         $this->consumer = $consumer;
         $this->token = $token;
         $this->parameters = array();
-        foreach ($parameters as $key => $value){
+        foreach ($parameters as $key => $value)
             if ($value !== null)
                 $this->parameters[$key] = $value;
-            if ($key == "i_want_okapi_response" && $value == 'true'){
-                $this->i_want_okapi_response = true;
-            }
-        }
     }
 
     public function get_parameter($name)
@@ -2146,13 +2241,8 @@ class OkapiHttpRequest extends OkapiRequest
             }
         }
 
-        if (is_object($this->consumer) && $this->consumer->admin)
+        if (is_object($this->consumer) && $this->consumer->hasFlag(OkapiConsumer::FLAG_SKIP_LIMITS))
         {
-            /* Some chosen Consumers gain special permissions within OKAPI.
-             * Currently, there's only a single "admin" flag in the okapi_consumers
-             * table, and there's just a single extra permission to gain, but
-             * the this set of permissions may grow in time. */
-
             $this->skip_limits = true;
         }
 

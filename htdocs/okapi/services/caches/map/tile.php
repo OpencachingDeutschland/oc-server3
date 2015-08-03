@@ -22,6 +22,7 @@ use okapi\OkapiLock;
 use okapi\services\caches\map\TileTree;
 use okapi\services\caches\map\DefaultTileRenderer;
 use okapi\services\caches\search\SearchAssistant;
+use okapi\OkapiConsumer;
 
 require_once('tiletree.inc.php');
 require_once('tilerenderer.inc.php');
@@ -71,8 +72,14 @@ class WebService
 
         # Make sure the request is internal.
 
-        if (!in_array($request->consumer->key, array('internal', 'facade')))
+        if (in_array($request->consumer->key, array('internal', 'facade'))) {
+            /* Okay, these two consumers can always access it. */
+        } elseif ($request->consumer->hasFlag(OkapiConsumer::FLAG_MAPTILE_ACCESS)) {
+            /* If the Consumer is aware that it is not backward-compatible, then
+             * he may be granted permission to access it. */
+        } else {
             throw new BadRequest("Your Consumer Key has not been allowed to access this method.");
+        }
 
         # zoom, x, y - required tile-specific parameters.
 
@@ -91,7 +98,13 @@ class WebService
         # the current request directly. We can do that, because we inherit all
         # of the "save" method's parameters.
 
-        $search_set = OkapiServiceRunner::call('services/caches/search/save', $request);
+        $search_set = OkapiServiceRunner::call(
+            'services/caches/search/save',
+            new OkapiInternalRequest(
+                $request->consumer, $request->token,
+                $request->get_all_parameters_including_unknown()
+            )
+        );
         $set_id = $search_set['set_id'];
 
         # Get caches which are present in the result set AND within the tile

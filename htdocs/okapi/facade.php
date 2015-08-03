@@ -76,6 +76,7 @@ class Facade
             ($user_id_or_null !== null) ? new OkapiFacadeAccessToken($user_id_or_null) : null,
             $parameters
         );
+        $request->i_want_OkapiResponse = true;
         $request->perceive_as_http_request = true;
         if (isset($_SERVER['HTTP_IF_NONE_MATCH']))
             $request->etag = $_SERVER['HTTP_IF_NONE_MATCH'];

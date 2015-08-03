@@ -2,7 +2,7 @@
  /***************************************************************************
  *  For license information see doc/license.txt
  *
- *	This script replicates the current OKAPI revision into the current 
+ *  This script replicates the current OKAPI revision into the current
  *  OC code branch (Git -> Git). Please do not confuse with OKAPI's internal 
  *  update mechanism, which is called via bin/dbupdate.php.
  *

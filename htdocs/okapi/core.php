@@ -966,8 +966,8 @@ class Okapi
     public static $server;
 
     /* These two get replaced in automatically deployed packages. */
-    public static $version_number = 1103;
-    public static $git_revision = '0528714d0df18e3b7fe6afaa14dd3a6b64cae3fb';
+    public static $version_number = 1104;
+    public static $git_revision = 'a6bcf018d7b19b0f0a346a22a41dd19204d7f51a';
 
     private static $okapi_vars = null;
 
@@ -976,7 +976,7 @@ class Okapi
     {
         /* If we're on Linux, then we'll use a system function for that. */
 
-        if (file_exists("/proc/sys/kernel/random/uuid")) {
+        if (@file_exists("/proc/sys/kernel/random/uuid")) {
             return trim(file_get_contents("/proc/sys/kernel/random/uuid"));
         }
 

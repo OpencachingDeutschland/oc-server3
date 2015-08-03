@@ -149,7 +149,7 @@ class ReplicateCommon
     /**
      * Scan the database and compare the current values of old entries to
      * the cached values of the same entries. If differences found, update
-     * okapi_syncbase accordingly, and email the OKAPI developers.
+     * okapi_syncbase accordingly.
      *
      * Currently, only caches are checked (log entries are not).
      */
@@ -160,7 +160,7 @@ class ReplicateCommon
         set_time_limit(0);
         ignore_user_abort(true);
 
-        # We will SKIP the entries which have been modified SINCE one day ago.
+        # We will SKIP the entries which have been modified AFTER one day AGO.
         # Such entries might have not been seen by the update_clog_table() yet
         # (e.g. other long-running cronjob is preventing update_clog_table from
         # running).
@@ -226,6 +226,7 @@ class ReplicateCommon
                 $sum += 1;
             }
         }
+        /*
         if ($sum > 0)
         {
             $message = (
@@ -239,6 +240,7 @@ class ReplicateCommon
                 $message, true
             );
         }
+        */
     }
 
 

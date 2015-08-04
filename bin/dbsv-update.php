@@ -475,6 +475,12 @@
 		sql("DELETE FROM `cache_watches`  WHERE `user_id` IN (SELECT `user_id` FROM `user` WHERE `is_active_flag`=0)");
 	}
 
+	function dbv_127()  // fix name of Dessau-Köthen
+	{
+		sql("UPDATE `nuts_codes` SET `name`='Köthen' WHERE `code`='DEE15'");
+		sql("UPDATE `cache_location` SET `adm4`='Köthen' WHERE `code4`='DEE15'");
+	}
+
 	// When adding new mutations, take care that they behave well if run multiple
 	// times. This improves robustness of database versioning.
 	//

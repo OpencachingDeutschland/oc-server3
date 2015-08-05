@@ -41,7 +41,7 @@
 			$rFirstOtherFound = sql_fetch_assoc($rsFirstOtherFound);
 			sql_free_result($rsFirstOtherFound);
 
-			if ($rLog['is_rating_log'] && $rsFirstOtherFound)
+			if ($rLog['is_rating_log'] && $rFirstOtherFound)
 			{
 				sql("
 					UPDATE `cache_rating`
@@ -52,7 +52,7 @@
 						// log, so that XML interface will resend it with the updated
 						// "recommendation" flag.
 			}
-			else if (!$rsFirstOtherFound)
+			else if (!$rFirstOtherFound)
 			{
 				// This is also called for $rLog['is_rating_log'] == false, so that
 				// even a rating record with inconsistent date gets deleted. 

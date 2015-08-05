@@ -24,13 +24,14 @@
 	{
 		$simpletexts = search_text2sort($r['full_name_nd'], true);
 		$simpletextsarray = explode_multi($simpletexts, ' -/,');
+		  // ^^ This should be obsolete, as search_text2sort() removes all non-a..z chars.
 
 		foreach ($simpletextsarray AS $text)
 		{
 			if ($text != '')
 			{
 				if (nonalpha($text))
-					die($r['uni'] . ' ' . $text . "\n");
+					die($r['uni'] . ' ' . $text . "\n");  // obsolete for the same reason as above
 				
 				$simpletext = search_text2simple($text);
 

@@ -20,6 +20,7 @@
 	if (!isset($opt['rootpath']))
 		$opt['rootpath'] = dirname(__FILE__) . '/../htdocs/';
 	require_once($opt['rootpath'] . 'lib2/cli.inc.php');
+	require_once($opt['rootpath'] . 'lib2/search/search.inc.php');
 
 	if (!sql_field_exists('cache_attrib','gc_id'))
 	{
@@ -480,6 +481,27 @@
 		sql("UPDATE `nuts_codes` SET `name`='Köthen' WHERE `code`='DEE15'");
 		sql("UPDATE `cache_location` SET `adm4`='Köthen' WHERE `code4`='DEE15'");
 	}
+
+	function dbv_128()  // see util2/gns/mksearchindex.php; fix for #175/3
+	{
+		sql('DELETE FROM `gns_search`');
+		if (sql_field_exists('gns_search','id'))
+			sql("ALTER TABLE `gns_search` DROP COLUMN `id`");
+			// unused, does not make sense; will also drop primary index
+
+		$rs = sql("SELECT `uni`, `full_name_nd` FROM `gns_locations` WHERE `dsg` LIKE 'PPL%'");
+		while ($r = sql_fetch_array($rs))
+		{
+			$text = search_text2sort($r['full_name_nd'], true);
+			if (preg_match("/[a-z]+/", $text))
+			{
+				$simpletext = search_text2simple($text);
+				sql("INSERT INTO `gns_search` (`uni_id`, `sort`, `simple`, `simplehash`) VALUES ('&1', '&2', '&3', '&4')", $r['uni'], $text, $simpletext, sprintf("%u", crc32($simpletext)));
+			}
+		}
+		mysql_free_result($rs);
+	}
+
 
 	// When adding new mutations, take care that they behave well if run multiple
 	// times. This improves robustness of database versioning.

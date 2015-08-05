@@ -65,7 +65,7 @@ function search_text2simple($str)
 	return $str;
 }
 
-function search_text2sort($str)
+function search_text2sort($str, $gns_syntax=false)
 {
 	$str = mb_strtolower($str);
 
@@ -82,12 +82,24 @@ function search_text2sort($str)
 	$str = mb_ereg_replace('9', '', $str);
 
 	// deutsches
-  $str = mb_ereg_replace('ä', 'ae', $str);
-	$str = mb_ereg_replace('ö', 'oe', $str);
-	$str = mb_ereg_replace('ü', 'ue', $str);
-  $str = mb_ereg_replace('Ä', 'ae', $str);
-	$str = mb_ereg_replace('Ö', 'oe', $str);
-	$str = mb_ereg_replace('Ü', 'ue', $str);
+	if ($gns_syntax)
+	{
+		$str = mb_ereg_replace('ä', 'a', $str);
+		$str = mb_ereg_replace('ö', 'o', $str);
+		$str = mb_ereg_replace('ü', 'u', $str);
+		$str = mb_ereg_replace('Ä', 'a', $str);
+		$str = mb_ereg_replace('Ö', 'o', $str);
+		$str = mb_ereg_replace('Ü', 'u', $str);
+	}
+	else
+	{
+		$str = mb_ereg_replace('ä', 'ae', $str);
+		$str = mb_ereg_replace('ö', 'oe', $str);
+		$str = mb_ereg_replace('ü', 'ue', $str);
+		$str = mb_ereg_replace('Ä', 'ae', $str);
+		$str = mb_ereg_replace('Ö', 'oe', $str);
+		$str = mb_ereg_replace('Ü', 'ue', $str);
+	}
 	$str = mb_ereg_replace('ß', 'ss', $str);
 
   // akzente usw.

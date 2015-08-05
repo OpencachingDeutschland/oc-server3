@@ -640,7 +640,7 @@
 					if ($locid == 0)
 					{
 						$ort = $options['ort'];
-						$simpletexts = search_text2sort($ort);
+						$simpletexts = search_text2sort($ort,true);
 						$simpletextsarray = explode_multi($simpletexts, ' -/,');
 
 						$sqlhashes = '';

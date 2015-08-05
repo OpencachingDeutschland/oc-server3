@@ -7,12 +7,16 @@
 
 	Dieses Script liest Dateien von GEOnet Names Server (GNS) ein und importiert 
 	diese in die Table gns_locations.
-	Homepage:		http://earth-info.nga.mil/gns/html/
-	Downloadseite:	http://earth-info.nga.mil/gns/html/cntry_files.html
+
+	Homepage:       http://geonames.nga.mil/gns/html/
+	Downloadseite:  http://geonames.nga.mil/gns/html/namefiles.html
 	Aktuell eingelesene Dateien:
-					http://earth-info.nga.mil/gns/html/cntyfile/au.zip
-					http://earth-info.nga.mil/gns/html/cntyfile/gm.zip
-					http://earth-info.nga.mil/gns/html/cntyfile/sz.zip
+	                alte Daten von http://earth-info.nga.mil/gns/html/cntry_files.html
+  Aktuell einzulesende Daten:
+	                http://geonames.nga.mil/gns/html/cntyfile/au.zip
+	                http://geonames.nga.mil/gns/html/cntyfile/gm.zip
+	                http://geonames.nga.mil/gns/html/cntyfile/sz.zip
+	                (Datenformat hat sich geändert, braucht Anpassungen)
 	***************************************************************************/
 
 	// ported from lib1 to lib2 / untested!

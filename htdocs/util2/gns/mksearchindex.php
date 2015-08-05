@@ -22,7 +22,7 @@
 	$rs = sql("SELECT `uni`, `full_name_nd` FROM `gns_locations` WHERE `dsg` LIKE 'PPL%'");
 	while ($r = sql_fetch_array($rs))
 	{
-		$simpletexts = search_text2sort($r['full_name_nd']);
+		$simpletexts = search_text2sort($r['full_name_nd'], true);
 		$simpletextsarray = explode_multi($simpletexts, ' -/,');
 
 		foreach ($simpletextsarray AS $text)

@@ -10,7 +10,6 @@
 
 require_once($opt['rootpath'] . 'lib2/logic/rowEditor.class.php');
 require_once($opt['rootpath'] . 'lib2/translate.class.php');
-require_once($opt['rootpath'] . 'lib2/OcHTMLPurifier.class.php');
 
 define('ERROR_BAD_LISTNAME', 1);
 define('ERROR_DUPLICATE_LISTNAME', 2);
@@ -116,13 +115,12 @@ class cachelist
 		return $this->reCachelist->getValue('desc_htmledit');
 	}
 
-	// set description in HTML format
+	// set description in HTML format, must be purified!
 	function setDescription($desc, $htmledit)
 	{
 		global $opt;
 		$this->reCachelist->setValue('desc_htmledit', $htmledit ? 1 : 0);
-		$purifier = new OcHTMLPurifier($opt);
-		return $this->reCachelist->setValue('description', $purifier->purify($desc));
+		return $this->reCachelist->setValue('description', $desc);
 	}
 
 	function getCachesCount()

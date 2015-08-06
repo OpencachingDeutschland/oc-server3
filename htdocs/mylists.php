@@ -5,8 +5,9 @@
  *  Unicode Reminder メモ
  ***************************************************************************/
 
-	require('./lib2/web.inc.php');
-	require_once('./lib2/logic/cachelist.class.php');
+	require('lib2/web.inc.php');
+	require_once('lib2/logic/cachelist.class.php');
+	require_once('lib2/OcHTMLPurifier.class.php');
 
 	$tpl->name = 'mylists';
 	$tpl->menuitem = MNU_MYPROFILE_LISTS;
@@ -49,7 +50,8 @@
 			$tpl->assign('newlist_mode', true);
 		else
 		{
-			$list->setDescription($desctext, $descMode == 3);
+			$purifier = new OcHTMLPurifier($opt);
+			$list->setDescription($purifier->purify($desctext), $descMode == 3);
 			if ($list->save())
 			{
 				if ($list_caches != '')
@@ -109,7 +111,8 @@
 			$name_error = $list->setNameAndVisibility($list_name, $list_visibility);
 			if ($name_error)
 				$edit_list = true;
-			$list->setDescription($desctext, $descMode == 3);
+			$purifier = new OcHTMLPurifier($opt);
+			$list->setDescription($purifier->purify($desctext), $descMode == 3);
 			$list->save();
 
 			$list->watch($watch);

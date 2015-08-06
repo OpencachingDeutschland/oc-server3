@@ -96,7 +96,7 @@ PHP libraries
         License : "freely available to all" (http://alistapart.com/about)
 
     9.  HTML Purifier
-        Path    : htdocs/lib2/HTMLPurifier
+        Path    : htdocs/lib2/HTMLPurifier/
         URI     : http://htmlpurifier.org/
         License : LGPL
 
@@ -110,6 +110,11 @@ PHP libraries
         URI     : http://code.google.com/p/opencaching-api/
         License : MIT, with exception of okapi/res/attribute icons which
                   are under Opencaching-GPL license
+
+   12.  Net_IDNA2
+        Path    : htdocs/lib2/Net/
+        URI     : https://pear.php.net/package/Net_IDNA2
+        Licens  : LGPL 2.1
 
 
 The following PHP libraries are currently not in use and may be discarded.

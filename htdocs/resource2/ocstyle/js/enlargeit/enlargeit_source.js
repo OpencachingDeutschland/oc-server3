@@ -433,6 +433,7 @@ function enlarge(enl_img)
   if (enl_firstcall == 1 || enl_img.isenlarged) return false;
   if (enl_inprogress) 
   {
+    enl_stopload = 1;
     setTimeout('enl_openthepic("'+enl_img.id+'")',99);
     return false;
   }

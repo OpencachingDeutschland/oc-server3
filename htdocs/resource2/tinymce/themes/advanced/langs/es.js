@@ -58,5 +58,7 @@ clipboard_msg:"Copiar/Cortar/Pegar no se encuentra disponible en Mozilla y Firef
 path:"Ruta",
 newdocument:" \u00BFSeguro que desea limpiar todo el contenido?",
 toolbar_focus:"Ir a los botones de herramientas - Alt+Q, Ir al editor - Alt-Z, Ir a la ruta del elemento - Alt-X",
-more_colors:"M\u00E1s colores"
+more_colors:"M\u00E1s colores",
+link_delta_width:"80",
+image_delta_width:"70"
 });

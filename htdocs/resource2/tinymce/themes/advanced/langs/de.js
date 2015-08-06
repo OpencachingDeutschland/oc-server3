@@ -59,5 +59,7 @@ path:"Pfad",
 newdocument:"Wollen Sie wirklich den ganzen Inhalt l\u00F6schen?",
 toolbar_focus:"Zur Werkzeugleiste springen: Alt+Q; Zum Editor springen: Alt-Z; Zum Elementpfad springen: Alt-X",
 more_colors:"Weitere Farben",
-anchor_delta_width:"13"
+anchor_delta_width:"13",
+link_delta_width:"45",
+image_delta_width:"45"
 });

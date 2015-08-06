@@ -153,6 +153,11 @@
 	$opt['logic']['admin']['enable_listing_admins'] = false;
 	$opt['logic']['admin']['listingadmin_notification'] = 'contact@opencaching.xx';
 
+	/*
+	 * html purifier
+	 */
+	$opt['html_purifier']['cache_path'] = dirname(__FILE__).'/../cache2/html_purifier/';
+
   // see config2/settings-dist.inc.php
 	$opt['template']['default']['locale'] = 'DE';      // may be overwritten by $opt['domain'][...]['locale']
 	$opt['template']['default']['country'] = 'DE';     // may be overwritten by $opt['domain'][...]['country']

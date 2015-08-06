@@ -5,12 +5,14 @@
  *  Unicode Reminder メモ
  ***************************************************************************/
 
-require_once($opt['rootpath'] . 'lib2/HTMLPurifier/library/HTMLPurifier.auto.php');
+require_once(__DIR__ . '/HTMLPurifier/library/HTMLPurifier.auto.php');
 
 
 // !! THIS CODE IS ALSO USED IN OKAPI !!
 // Any changes must be tested with OKAPI services/logs/submit method.
 // Avoid to include any other OC.de code here.
+
+// Also used for lib1 code.
 
 
 class OcHTMLPurifier extends HTMLPurifier

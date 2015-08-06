@@ -10,7 +10,7 @@
 /****************************************************************************
 	    
    Unicode Reminder メモ
-                                     				                                
+
 	 edit a cache listing
 	
 	 used template(s): editcache
@@ -21,7 +21,7 @@
  
 	//prepare the templates and include all neccessary
 	require_once('./lib/common.inc.php');
-	require_once($opt['rootpath'] . '../lib/htmlpurifier-4.2.0/library/HTMLPurifier.auto.php');
+	require_once('./lib2/OcHTMLPurifier.class.php');
 	
 	//Preprocessing
 	if ($error == false)
@@ -142,7 +142,7 @@
 							}
 
 							// Filter Input
-							$purifier = new HTMLPurifier();
+							$purifier = new OcHTMLPurifier($opt);
 							$desc = $purifier->purify($desc);
 						}
 						else

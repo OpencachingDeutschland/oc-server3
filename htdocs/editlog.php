@@ -26,7 +26,7 @@
 	require_once('./lib/common.inc.php');
 	require_once('./lib2/logic/logtypes.inc.php');
 	require($stylepath.'/smilies.inc.php');
-  require_once($opt['rootpath'] . '../lib/htmlpurifier-4.2.0/library/HTMLPurifier.auto.php');
+	require_once('./lib2/OcHTMLPurifier.class.php');
 	require_once('./lib/recommendation.inc.php');
 
 	//Preprocessing
@@ -179,7 +179,7 @@
 						}
 
 						// check input
-						$purifier = new HTMLPurifier();
+						$purifier = new OcHTMLPurifier($opt);
 						$log_text = $purifier->purify($log_text);
 					}
 					else

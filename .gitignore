@@ -27,13 +27,13 @@
 /htdocs/download/*
 /htdocs/images/statpics/*
 /htdocs/images/uploads/*
+/htdocs/lib2/HTMLPurifier/library/HTMLPurifier/DefinitionCache/Serializer/CSS/*
+/htdocs/lib2/HTMLPurifier/library/HTMLPurifier/DefinitionCache/Serializer/HTML/*
+/htdocs/lib2/HTMLPurifier/library/HTMLPurifier/DefinitionCache/Serializer/URI/*
 /htdocs/resource2/tinymce/tiny_mce_*.gz
 /htdocs/robots.txt
 /htdocs/sitemap*xml*
 /htdocs/var/*
-/lib/htmlpurifier-4.2.0/library/HTMLPurifier/DefinitionCache/Serializer/CSS/*
-/lib/htmlpurifier-4.2.0/library/HTMLPurifier/DefinitionCache/Serializer/HTML/*
-/lib/htmlpurifier-4.2.0/library/HTMLPurifier/DefinitionCache/Serializer/URI/*
 /local/ocxml11client/data-files
 /local/ocxml11client/tmp
 /local/ocxml11client/settings.php

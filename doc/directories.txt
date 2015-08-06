@@ -29,10 +29,6 @@ doc         documentaion
 
 htdocs      everything which regularly runs on the Opencaching website
 
-lib/htmlpurifier-4.2.0
-            Old HTML purifier version used by lib1 and OKAPI code.
-            Is being replaced by htdocs/lib2/HTMLPurifier.
-
 local       Special-purpose tools which may be used on development or
             productive systems.
 

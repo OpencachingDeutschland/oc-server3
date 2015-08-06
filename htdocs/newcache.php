@@ -19,7 +19,7 @@
 
   //prepare the templates and include all neccessary
 	require_once('./lib/common.inc.php');
-  require_once($opt['rootpath'] . '../lib/htmlpurifier-4.2.0/library/HTMLPurifier.auto.php');
+	require_once('./lib2/OcHTMLPurifier.class.php');
 
 	$no_tpl_build = false;
 
@@ -754,7 +754,7 @@
 				if ($descMode != 1)
 				{
           // Filter Input
-          $purifier = new HTMLPurifier();
+          $purifier = new OcHTMLPurifier($opt);
           $desc = $purifier->purify($desc);
 
 					tpl_set_var('desc', htmlspecialchars($desc, ENT_COMPAT, 'UTF-8'));

@@ -186,4 +186,9 @@
 	$opt['template']['locales']['PT']['show'] = false;
 	$opt['template']['locales']['RU']['show'] = false;
 
+	/*
+	 * html purifier
+	 */
+	$opt['html_purifier']['cache_path'] = dirname(__FILE__).'/../cache2/html_purifier/';
+
 ?>

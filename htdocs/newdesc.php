@@ -185,6 +185,13 @@
 						$langoptions .= '<option value="' . htmlspecialchars($rLanguage['short'], ENT_COMPAT, 'UTF-8') . '"' . $sSelected . '>' . htmlspecialchars($rLanguage['name'], ENT_COMPAT, 'UTF-8') . '</option>' . "\n";
 					}
 					sql_free_result($rsLanguages);
+					if ($langoptions == '')
+					{
+						// We get here if someone has added descriptions for all avaiable languages, which
+						// is very unlikely to happen ever. Just for completeness (see issue #108):
+						tpl_redirect('editcache.php?cacheid=' . urlencode($cache_id));
+					}
+
 					tpl_set_var('langoptions', $langoptions);
 
 					//here we set the template vars

@@ -6,6 +6,7 @@
  ***************************************************************************/
 
 require_once(__DIR__ . '/HTMLPurifier/library/HTMLPurifier.auto.php');
+require_once('Net/IDNA2.php');
 
 
 // !! THIS CODE IS ALSO USED IN OKAPI !!
@@ -28,6 +29,9 @@ class OcHTMLPurifier extends HTMLPurifier
 
 		// set cache directory
 		$config->set('Cache.SerializerPath', $opt['html_purifier']['cache_path']);
+
+		// adjust URI filtering to fix issue #89 (enable special chars in URIs)
+		$config->set('Core.EnableIDNA', true);
 
 		// create parent object with config
 		parent::__construct($config);

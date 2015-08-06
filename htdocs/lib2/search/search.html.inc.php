@@ -32,7 +32,7 @@
 function search_output()
 {
 	global $opt, $tpl, $login;
-	global $enable_mapdisplay, $search_in_gm, $search_in_gm_zip;
+	global $enable_mapdisplay;
 	global $called_by_search, $called_by_profile_query, $options, $lat_rad, $lon_rad, $distance_unit;
 	global $startat, $caches_per_page, $sql;
 
@@ -137,17 +137,6 @@ function search_output()
 	$tpl->assign('displayownlogs', $options['sort'] == 'bymylastlog');
 	$tpl->assign('search_headline_caches', $called_by_search);
 	$tpl->assign('enable_mapdisplay', $enable_mapdisplay);
-
-	if ($called_by_profile_query)
-	{
-		$tpl->assign('search_in_gm', '');
-		$tpl->assign('search_in_gm_zip', '');
-	}
-	else
-	{
-		$tpl->assign('search_in_gm', $search_in_gm);
-		$tpl->assign('search_in_gm_zip', $search_in_gm_zip);
-	}
 
 	// cachelist data
 	if (isset($options['cachelist']))

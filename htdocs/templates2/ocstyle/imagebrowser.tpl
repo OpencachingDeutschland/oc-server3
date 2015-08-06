@@ -26,9 +26,9 @@
 {/literal}
 </script>
 <br />
-<table width="100%">
+<table width="100%" class="table">
 	<tr>
-		<td class="header-small"><img src="resource2/{$opt.template.style}/images/description/22x22-image.png" height="22px" width="22px" alt="{t}Picture selection{/t}" /> {t 1=$cachename|escape}Picture selection for %1{/t}</td>
+		<td><img src="resource2/{$opt.template.style}/images/description/22x22-image.png" height="22px" width="22px" alt="{t}Picture selection{/t}" /> {t 1=$cachename|escape}Picture selection for %1{/t}</td>
 	</tr>
 </table>
 <table class="table">
@@ -46,4 +46,4 @@
 	{/foreach}
 </table>
 <p><input type="checkbox" id="insertthumb" style="border:0;" /> <label for="insertthumb">{t}As preview picture{/t}</label></p>
-<a href="javascript:CancelSelect();"><img border="0" height="16px" width="16px" src="resource2/{$opt.template.style}/images/log/16x16-stop.png" alt="{t}Cancel{/t}" /></a> <a href="javascript:CancelSelect();">{t}Cancel{/t}</a>
+<p><a href="javascript:CancelSelect();"><a href="javascript:CancelSelect();">{t}Cancel{/t}</a></p>

@@ -728,30 +728,31 @@
 						/* dont overwrite date values while XML client is running */
 						IF ISNULL(@XMLSYNC) OR @XMLSYNC!=1 THEN
 							IF OLD.`cache_id`!=NEW.`cache_id` OR 
-							   OLD.`uuid`!=NEW.`uuid` OR 
+							   OLD.`uuid`!=BINARY NEW.`uuid` OR 
 							   OLD.`node`!=NEW.`node` OR 
 							   OLD.`date_created`!=NEW.`date_created` OR 
 							   OLD.`is_publishdate`!=NEW.`is_publishdate` OR 
 							   OLD.`user_id`!=NEW.`user_id` OR 
-							   OLD.`name`!=NEW.`name` OR 
+							   OLD.`name`!=BINARY NEW.`name` OR 
 							   OLD.`longitude`!=NEW.`longitude` OR 
 							   OLD.`latitude`!=NEW.`latitude` OR 
 							   OLD.`type`!=NEW.`type` OR 
 							   OLD.`status`!=NEW.`status` OR 
-							   OLD.`country`!=NEW.`country` OR 
+							   OLD.`country`!=BINARY NEW.`country` OR 
 							   OLD.`date_hidden`!=NEW.`date_hidden` OR 
 							   OLD.`size`!=NEW.`size` OR 
 							   OLD.`difficulty`!=NEW.`difficulty` OR 
 							   OLD.`terrain`!=NEW.`terrain` OR 
-							   OLD.`logpw`!=NEW.`logpw` OR 
+							   OLD.`logpw`!=BINARY NEW.`logpw` OR 
 							   OLD.`search_time`!=NEW.`search_time` OR 
 							   OLD.`way_length`!=NEW.`way_length` OR 
-							   OLD.`wp_gc`!=NEW.`wp_gc` OR
+							   OLD.`wp_gc`!=BINARY NEW.`wp_gc` OR
 								 /* See notes on wp_gc_maintained in modification-dates.txt. */
-							   OLD.`wp_nc`!=NEW.`wp_nc` OR 
-							   OLD.`wp_oc`!=NEW.`wp_oc` OR 
-							   OLD.`default_desclang`!=NEW.`default_desclang` OR 
-							   OLD.`date_activate`!=NEW.`date_activate` THEN
+							   OLD.`wp_nc`!=BINARY NEW.`wp_nc` OR 
+							   OLD.`wp_oc`!=BINARY NEW.`wp_oc` OR 
+							   OLD.`default_desclang`!=BINARY NEW.`default_desclang` OR 
+							   OLD.`date_activate`!=NEW.`date_activate` OR
+								 OLD.`show_cachelists`!=NEW.`show_cachelists` THEN
 
 								SET NEW.`last_modified`=NOW();
 							END IF;
@@ -883,7 +884,7 @@
 	sql("CREATE TRIGGER `cacheDescAfterUpdate` AFTER UPDATE ON `cache_desc` 
 				FOR EACH ROW 
 					BEGIN 
-						IF OLD.`language`!=NEW.`language` OR OLD.`cache_id`!=NEW.`cache_id` THEN
+						IF OLD.`language`!=BINARY NEW.`language` OR OLD.`cache_id`!=NEW.`cache_id` THEN
 							IF OLD.`cache_id`!=NEW.`cache_id` THEN
 								CALL sp_update_caches_descLanguages(OLD.`cache_id`);
 								CALL sp_update_cache_listingdate(OLD.`cache_id`);
@@ -897,7 +898,7 @@
 							IF (OLD.`date_created` < LEFT(NOW(),10)) THEN
 								INSERT IGNORE INTO `cache_desc_modified` (`cache_id`, `language`, `date_modified`, `date_created`, `desc`, `desc_html`, `desc_htmledit`, `hint`, `short_desc`, `restored_by`) VALUES (OLD.`cache_id`, OLD.`language`, NOW(), OLD.`date_created`, OLD.`desc`, OLD.`desc_html`, OLD.`desc_htmledit`, OLD.`hint`, OLD.`short_desc`, IFNULL(@restoredby,0));
 							END IF;
-							IF NEW.`language`!=OLD.`language` THEN
+							IF NEW.`language`!=BINARY OLD.`language` THEN
 								INSERT IGNORE INTO `cache_desc_modified` (`cache_id`, `language`, `date_modified`, `desc`) VALUES (NEW.`cache_id`, NEW.`language`, NOW(), NULL);
 							END IF;
 						END IF;
@@ -1021,7 +1022,7 @@
 						/* dont overwrite `last_modified` while XML client is running */
 						IF ISNULL(@XMLSYNC) OR @XMLSYNC!=1 THEN
 							IF NEW.`id`!=OLD.`id` OR
-							   NEW.`uuid`!=OLD.`uuid` OR
+							   NEW.`uuid`!=BINARY OLD.`uuid` OR
 							   NEW.`node`!=OLD.`node` OR
 							   NEW.`date_created`!=OLD.`date_created` OR
 							   NEW.`cache_id`!=OLD.`cache_id` OR
@@ -1029,7 +1030,7 @@
 							   NEW.`type`!=OLD.`type` OR
 							   NEW.`oc_team_comment`!=OLD.`oc_team_comment` OR
 							   NEW.`date`!=OLD.`date` OR
-							   NEW.`text`!=OLD.`text` OR
+							   NEW.`text`!=BINARY OLD.`text` OR
 							   NEW.`text_html`!=OLD.`text_html` THEN
 								SET NEW.`last_modified`=NOW();
 							END IF;
@@ -1046,7 +1047,10 @@
 	sql("CREATE TRIGGER `cacheLogsAfterUpdate` AFTER UPDATE ON `cache_logs` 
 				FOR EACH ROW 
 					BEGIN 
-						IF OLD.`cache_id`!=NEW.`cache_id` OR OLD.`user_id`!=NEW.`user_id` OR OLD.`type`!=NEW.`type` OR OLD.`date`!=NEW.`date` THEN
+						IF OLD.`cache_id`!=NEW.`cache_id` OR 
+						   OLD.`user_id`!=NEW.`user_id` OR 
+							 OLD.`type`!=NEW.`type` OR 
+							 OLD.`date`!=NEW.`date` THEN
 							CALL sp_update_logstat(OLD.`cache_id`, OLD.`user_id`, OLD.`type`, TRUE);
 							CALL sp_update_logstat(NEW.`cache_id`, NEW.`user_id`, NEW.`type`, FALSE);
 						END IF;
@@ -1165,12 +1169,12 @@
 					  IF NEW.`id` != OLD.`id` THEN
 							CALL error_cache_list_id_must_not_be_changed();
 						END IF;
-						IF NEW.`uuid` != OLD.`uuid` OR
+						IF NEW.`uuid` != BINARY OLD.`uuid` OR
 						   NEW.`node` != OLD.`node` OR
 						   NEW.`user_id` != OLD.`user_id` OR
-						   NEW.`name` != OLD.`name` OR 
+						   NEW.`name` != BINARY OLD.`name` OR 
 							 NEW.`is_public` != OLD.`is_public` OR
-							 NEW.`description` != OLD.`description` OR
+							 NEW.`description` != BINARY OLD.`description` OR
 							 NEW.`desc_htmledit` != OLD.`desc_htmledit` THEN
 							/* dont overwrite date values while XML client is running */
 							IF ISNULL(@XMLSYNC) OR @XMLSYNC!=1 THEN
@@ -1356,7 +1360,19 @@
 					BEGIN 
 						/* dont overwrite date values while XML client is running */
 						IF ISNULL(@XMLSYNC) OR @XMLSYNC!=1 THEN
-							IF NEW.`id`!=OLD.`id` OR NEW.`uuid`!=OLD.`uuid` OR NEW.`node`!=OLD.`node` OR NEW.`date_created`!=OLD.`date_created` OR NEW.`url`!=OLD.`url` OR NEW.`title`!=OLD.`title` OR NEW.`object_id`!=OLD.`object_id` OR NEW.`object_type`!=OLD.`object_type` OR NEW.`spoiler`!=OLD.`spoiler` OR NEW.`local`!=OLD.`local` OR NEW.`unknown_format`!=OLD.`unknown_format` OR NEW.`display`!=OLD.`display` OR NEW.`mappreview`!=OLD.`mappreview` THEN
+							IF NEW.`id`!=OLD.`id` OR 
+							   NEW.`uuid`!=BINARY OLD.`uuid` OR 
+								 NEW.`node`!=OLD.`node` OR 
+								 NEW.`date_created`!=OLD.`date_created` OR 
+								 NEW.`url`!=BINARY OLD.`url` OR 
+								 NEW.`title`!=BINARY OLD.`title` OR 
+								 NEW.`object_id`!=OLD.`object_id` OR 
+								 NEW.`object_type`!=OLD.`object_type` OR 
+								 NEW.`spoiler`!=OLD.`spoiler` OR 
+								 NEW.`local`!=OLD.`local` OR 
+								 NEW.`unknown_format`!=OLD.`unknown_format` OR 
+								 NEW.`display`!=OLD.`display` OR 
+								 NEW.`mappreview`!=OLD.`mappreview` THEN
 								/* everything except last_url_check, thumb_url and thumb_last_generated */
 								SET NEW.`last_modified`=NOW();
 							END IF;
@@ -1529,13 +1545,13 @@
 						/* dont overwrite date values while XML client is running */
 						IF ISNULL(@XMLSYNC) OR @XMLSYNC!=1 THEN
 							IF NEW.`user_id`!=OLD.`user_id` OR 
-							   NEW.`uuid`!=OLD.`uuid` OR 
+							   NEW.`uuid`!=BINARY OLD.`uuid` OR 
 							   NEW.`node`!=OLD.`node` OR 
 							   NEW.`date_created`!=OLD.`date_created` OR 
-							   NEW.`username`!=OLD.`username` OR 
-							   NEW.`country`!=OLD.`country` OR 
+							   NEW.`username`!=BINARY OLD.`username` OR 
+							   NEW.`country`!=BINARY OLD.`country` OR 
 							   NEW.`pmr_flag`!=OLD.`pmr_flag` OR
-							   NEW.`description`!=OLD.`description` THEN
+							   NEW.`description`!=BINARY OLD.`description` THEN
 							   
 								SET NEW.`last_modified`=NOW();
 							END IF;

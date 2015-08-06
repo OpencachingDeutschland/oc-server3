@@ -42,9 +42,6 @@
 	$cache_attrib_img_line1 = '<img id="attrimg1_{id}" src="{icon}" onmousedown="switchAttribute({id})" onmouseover="Tip(\'{html_desc}\', TITLE, \'{name}\', TITLEBGCOLOR, \'{color}\', TITLEFONTCOLOR, \'#000000\', BGCOLOR, \'#FFFFFF\', BORDERCOLOR, \'{color}\', CLICKCLOSE, true, DELAY, 0, FADEIN, false, FADEOUT, false, FONTCOLOR, \'#000080\', WIDTH, 500)" onmouseout="UnTip()" />&nbsp;';
 	$cache_attrib_img_line2 = '<img id="attrimg2_{id}" src="{icon}" onmousedown="switchAttribute({id})" onmouseover="Tip(\'{html_desc}\', TITLE, \'{name}\', TITLEBGCOLOR, \'{color}\', TITLEFONTCOLOR, \'#000000\', BGCOLOR, \'#FFFFFF\', BORDERCOLOR, \'{color}\', CLICKCLOSE, true, DELAY, 0, FADEIN, false, FADEOUT, false, FONTCOLOR, \'#000080\', WIDTH, 500)" onmouseout="UnTip()" />&nbsp;';
 
-	$search_in_gm = '<a href="http://maps.google.de/maps?f=q&hl=de&q=' . urlencode("http://".$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI']."&output=kml") . '" title="' . $translate->t('Show in Google Maps','','',0) . '">' . $translate->t('(in GM)','','',0) . '</a>';
-	$search_in_gm_zip = '<a href="http://maps.google.de/maps?f=q&hl=de&q=' . urlencode("http://".$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI']."&output=kml&zip=1&count=max") . '" title="' . $translate->t('Show in Google Maps','','',0) . '">' . $translate->t('(in GM)','','',0) . '</a>';
-
 	// search.*.inc.php (TXT, KML, LOC, GPX ...)
 	$converted_from_html = _('converted from HTML');
 	$state_temporarily_na = _('Temporary not available');

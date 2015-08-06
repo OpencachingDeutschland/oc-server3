@@ -179,12 +179,13 @@
 	$opt['db']['slave']['primary'] = -1;
 
 	$opt['template']['locales']['DA']['show'] = false;
-	$opt['template']['locales']['FR']['show'] = false;
 	$opt['template']['locales']['JA']['show'] = false;
 	$opt['template']['locales']['NL']['show'] = false;
 	$opt['template']['locales']['PL']['show'] = false;
 	$opt['template']['locales']['PT']['show'] = false;
 	$opt['template']['locales']['RU']['show'] = false;
+	$opt['template']['locales']['SV']['show'] = false;
+	$opt['template']['locales']['NO']['show'] = false;
 
 	/*
 	 * html purifier

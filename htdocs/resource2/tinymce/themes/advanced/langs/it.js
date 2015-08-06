@@ -58,5 +58,7 @@ clipboard_msg:"Copia/Taglia/Incolla non \u00E8 disponibile in Mozilla e Firefox.
 path:"Percorso",
 newdocument:"Sei sicuro di voler cancellare tutti i contenuti?",
 toolbar_focus:"Vai ai pulsanti strumento - Alt+Q, Vai all'editor - Alt-Z, Vai al percorso dell'elemento - Alt-X",
-more_colors:"Colori aggiuntivi"
+more_colors:"Colori aggiuntivi",
+link_delta_width:"30",
+image_delta_width:"25"
 });

@@ -53,7 +53,7 @@
 			tpl_set_var('hidden_since_message', '');
 			tpl_set_var('activate_on_message', '');
 			tpl_set_var('lon_message', '');
-			tpl_set_var('lat_message', '');
+			tpl_set_var('lat_message', '&nbsp;&nbsp;');
 			tpl_set_var('tos_message', '');
 			tpl_set_var('name_message', '');
 			tpl_set_var('desc_message', '');
@@ -532,7 +532,7 @@
 				{
 					if (!mb_ereg_match('^[0-9]{1,2}$', $lat_h))
 					{
-						tpl_set_var('lat_message', $error_coords_not_ok);
+						tpl_set_var('lat_message', $error_lat_not_ok);
 						$error = true;
 						$lat_h_not_ok = true;
 					}
@@ -544,7 +544,7 @@
 						}
 						else
 						{
-							tpl_set_var('lat_message', $error_coords_not_ok);
+							tpl_set_var('lat_message', $error_lat_not_ok);
 							$error = true;
 							$lat_h_not_ok = true;
 						}
@@ -558,14 +558,14 @@
 						}
 						else
 						{
-							tpl_set_var('lat_message', $error_coords_not_ok);
+							tpl_set_var('lat_message', $error_lat_not_ok);
 							$error = true;
 							$lat_min_not_ok = true;
 						}
 					}
 					else
 					{
-						tpl_set_var('lat_message', $error_coords_not_ok);
+						tpl_set_var('lat_message', $error_lat_not_ok);
 						$error = true;
 						$lat_min_not_ok = true;
 					}
@@ -575,23 +575,23 @@
 
 					if ($latitude == 0)
 					{
-						tpl_set_var('lon_message', $error_coords_not_ok);
+						tpl_set_var('lat_message', $error_lat_not_ok);
 						$error = true;
 						$lat_min_not_ok = true;
 					}
 				}
 				else
 				{
-					$latitude = NULL;
-					$lat_h_not_ok = false;
-					$lat_min_not_ok = false;
+					tpl_set_var('lat_message', $error_lat_not_ok);
+					$lat_h_not_ok = true;
+					$lat_min_not_ok = true;
 				}
 
 				if ($lon_h!='' || $lon_min!='')
 				{
 					if (!mb_ereg_match('^[0-9]{1,3}$', $lon_h))
 					{
-						tpl_set_var('lon_message', $error_coords_not_ok);
+						tpl_set_var('lon_message', $error_long_not_ok);
 						$error = true;
 						$lon_h_not_ok = true;
 					}
@@ -603,7 +603,7 @@
 						}
 						else
 						{
-							tpl_set_var('lon_message', $error_coords_not_ok);
+							tpl_set_var('lon_message', $error_long_not_ok);
 							$error = true;
 							$lon_h_not_ok = true;
 						}
@@ -617,14 +617,14 @@
 						}
 						else
 						{
-							tpl_set_var('lon_message', $error_coords_not_ok);
+							tpl_set_var('lon_message', $error_long_not_ok);
 							$error = true;
 							$lon_min_not_ok = true;
 						}
 					}
 					else
 					{
-						tpl_set_var('lon_message', $error_coords_not_ok);
+						tpl_set_var('lon_message', $error_long_not_ok);
 						$error = true;
 						$lon_min_not_ok = true;
 					}
@@ -634,16 +634,16 @@
 
 					if ($longitude == 0)
 					{
-						tpl_set_var('lon_message', $error_coords_not_ok);
+						tpl_set_var('lon_message', $error_long_not_ok);
 						$error = true;
 						$lon_min_not_ok = true;
 					}
 				}
 				else
 				{
-					$longitude = NULL;
-					$lon_h_not_ok = false;
-					$lon_min_not_ok = false;
+					tpl_set_var('lon_message', $error_long_not_ok);
+					$lon_h_not_ok = true;
+					$lon_min_not_ok = true;
 				}
 
 				$lon_not_ok = $lon_min_not_ok || $lon_h_not_ok;

@@ -106,9 +106,9 @@ class getNew
 									`caches`.`longitude` `longitude`, 
 									`caches`.`latitude` `latitude`, 
 									IFNULL(`sys_trans_text`.`text`,`countries`.`en`) AS `adm1`,
-									IF(`caches`.`country`=`cache_location`.`code1`,`cache_location`.`adm2`,''),
-									IF(`caches`.`country`=`cache_location`.`code1`,`cache_location`.`adm3`,''),
-									IF(`caches`.`country`=`cache_location`.`code1`,`cache_location`.`adm4`,''),
+									IF(`caches`.`country`=`cache_location`.`code1`,`cache_location`.`adm2`,'') `adm2`,
+									IF(`caches`.`country`=`cache_location`.`code1`,`cache_location`.`adm3`,'') `adm3`,
+									IF(`caches`.`country`=`cache_location`.`code1`,`cache_location`.`adm4`,'') `adm4`,
 									`ca`.`attrib_id` IS NOT NULL AS `oconly`
 								FROM `caches`
 									INNER JOIN `user` ON `user`.`user_id`=`caches`.`user_id`
@@ -150,9 +150,9 @@ class getNew
 								`caches`.`name` `name`,
 								`caches`.`date_hidden`,
 								IFNULL(`sys_trans_text`.`text`,`countries`.`en`) AS `adm1`,
-								IF(`caches`.`country`=`cache_location`.`code1`,`cache_location`.`adm2`,''),
-								IF(`caches`.`country`=`cache_location`.`code1`,`cache_location`.`adm3`,''),
-								IF(`caches`.`country`=`cache_location`.`code1`,`cache_location`.`adm4`,''),
+								IF(`caches`.`country`=`cache_location`.`code1`,`cache_location`.`adm2`,'') `adm2`,
+								IF(`caches`.`country`=`cache_location`.`code1`,`cache_location`.`adm3`,'') `adm3`,
+								IF(`caches`.`country`=`cache_location`.`code1`,`cache_location`.`adm4`,'') `adm4`,
 								`ca`.`attrib_id` IS NOT NULL AS `oconly`
 							FROM `caches`
 								INNER JOIN `user` ON `user`.`user_id`=`caches`.`user_id`
@@ -224,9 +224,9 @@ class getNew
 								`caches`.`name` AS `name`,
 								`caches`.`type`,
 								IFNULL(`sys_trans_text`.`text`,`countries`.`en`) AS `adm1`,
-								IF(`caches`.`country`=`cache_location`.`code1`,`cache_location`.`adm2`,''),
-								IF(`caches`.`country`=`cache_location`.`code1`,`cache_location`.`adm3`,''),
-								IF(`caches`.`country`=`cache_location`.`code1`,`cache_location`.`adm4`,''),
+								IF(`caches`.`country`=`cache_location`.`code1`,`cache_location`.`adm2`,'') `adm2`,
+								IF(`caches`.`country`=`cache_location`.`code1`,`cache_location`.`adm3`,'') `adm3`,
+								IF(`caches`.`country`=`cache_location`.`code1`,`cache_location`.`adm4`,'') `adm4`,
 								`ca`.`attrib_id` IS NOT NULL AS `oconly`
 							FROM `cache_rating`
 								INNER JOIN `caches` ON `caches`.`cache_id`=`cache_rating`.`cache_id`

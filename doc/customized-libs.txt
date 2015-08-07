@@ -25,7 +25,10 @@ OKAPI
 EnlargeIt!
 - see Git log of resource2/ocstyle/js/enlargeit/enlargeit_source.js
 
-TinyMCE
+TinyMCE*
 - configuration files in resource2/tinymce/config
 - window width adjustments in resource2/tinymce/themes/advanced/langs/de,en,es,fr,it.js
     (see Git logs)
+
+* After changing TinyMCE source files, you may need to delete the *.gz cache file(s)
+  in the TinyMCE directory. A new cache file will be generated.

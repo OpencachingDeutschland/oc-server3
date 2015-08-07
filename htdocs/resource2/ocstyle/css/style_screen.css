@@ -369,6 +369,7 @@ h5 {margin: 1.0em 0px 0.5em 0px; font-weight: bold; font-size: 120%;}
 p {margin: 0px 0px 0.5em 0px; padding: 0px; line-height: 1.3em; font-family: arial, sans serif; font-size: 12px; }
 p.inheader {margin:4px; font-size:125%;}
 p.spacer_before {margin-top:12px;}
+p.indent {margin-left:2em; margin-bottom:1.3em !important;}
 
 /* Lists */
 ul.noindent {margin: 0px 0px 7px 15px; padding: 0px; list-style-type: disc; list-style-position: outside; font-size: 120%;}
@@ -886,6 +887,12 @@ div.floatbox { float:right; margin-left:16px; padding-left:16px;}
 #forum div.rsstext {margin: 0px 30px 0.5em 0px; padding: 0px; line-height: 1.3em; font-family: arial, sans serif; font-size: 12px; }
 .quoteheader, .topslice_quote, .bbc_standard_quote  { display:none; }
 #forum div.rsstext img {max-width:200px; max-height:120px;}
+
+/* HTML code list */
+span.html_replacetags  { display:inline-block; width:4.3em; }
+span.html_attributes   { display:inline-block; width:5.6em; }
+span.html_replaceattrs { display:inline-block; width:4em; }
+
 
 /*---------------------------*/
 /* 9.3  Attributes           */

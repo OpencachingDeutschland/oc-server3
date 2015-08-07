@@ -32,6 +32,34 @@ class OcHTMLPurifier extends HTMLPurifier
 		// adjust URI filtering to fix issue #89 (enable special chars in URIs)
 		$config->set('Core.EnableIDNA', true);
 
+		// allow comments
+		$config->set('HTML.AllowedCommentsRegexp', '/.*/');
+
+		// enable href target='_blank'
+		$config->set('Attr.AllowedFrameTargets', array('_blank','blank'));
+
+		// enable ids/names with namespace 'custom_'
+		$config->set('Attr.EnableID', true);
+		$config->set('Attr.IDPrefix', 'custom_');
+
+		// enable 'display' and 'visibility' styles for mystery descriptions
+		$config->set('CSS.AllowTricky', true);                // + display, visibility, overflow
+		$config->set('CSS.ForbiddenProperties', 'overflow');  // - overflow 
+
+		// prepare additional definitions
+		$def = $config->getHTMLDefinition(true);
+
+		// add tags
+		$def->addElement('fieldset', 'Block', 'Flow', 'Common' /* ,array('disabled' => 'Enum#disabled', 'name' => 'ID') */ ); //  HTML5 attribs currently not supported by TinyMCE
+		$def->addElement('legend', 'Inline', 'Flow', 'Common');
+		$def->addElement('q', 'Inline', 'Inline', 'Common', array('cite' => 'URI'));
+		$def->addElement('strike', 'Inline', 'Inline', 'Common');   // -> wird in CSS umgewandelt
+		$def->addElement('area', 'Inline', 'Empty', 'Common', array('alt' => 'CDATA', 'coords' => 'CDATA', 'href' => 'URI', 'shape' => 'Enum#default,rect,circle,poly', 'target' => 'Enum#_blank,blank'));
+		$def->addElement('map', 'Block', new HTMLPurifier_ChildDef_Optional('area'), 'Common', array('name' => 'ID'));
+
+		// add attributes
+		$def->addAttribute('img', 'usemap', 'CDATA');
+
 		// create parent object with config
 		parent::__construct($config);
 	}

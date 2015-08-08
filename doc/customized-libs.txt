@@ -11,7 +11,6 @@ Smarty
 
 HTML Purifier
 - wrapper class in lib2/OcHTMLPurifier.class.php
-- to do: configuration file for HTML element and attribute adjustments
 
 Net_IDNA2
 - include path adjustments in lib2/Net/...

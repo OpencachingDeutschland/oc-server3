@@ -77,5 +77,8 @@
 				{include file="res_pager.tpl"}
 			</td>
 		</tr>
+		<tr>
+			<td>&nbsp;</td>
+		</tr>
 	</table>
 

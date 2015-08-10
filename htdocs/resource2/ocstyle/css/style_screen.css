@@ -441,7 +441,7 @@ td.default { font-size:12px; }
 /*********************************/
 
 /* standard links */
-.nav3 a, .content1 a, .content2 a, .content3 a, .sidebar-txtbox-noshade a, .sidebar-txtbox-shade a, .popup a {color: rgb(75,75,175); text-decoration: none;}
+.nav3 a, .content1 a, .content2 a, .content3 a, .sidebar-txtbox-noshade a, .sidebar-txtbox-shade a, .popup a, .cachelist-tooltip a {color: rgb(75,75,175); text-decoration: none;}
 #langstripe a, .mapform a { color:rgb(60,60,140); text-decoration: none; }
   /* the mapform area is also popup -> declare mapform link style after popup */
 #langstripe a:hover, .nav3 a:hover, .content1 a:hover, .content2 a:hover, .content3 a:hover, .sidebar-txtbox-noshade a:hover, .sidebar-txtbox-shade a:hover, .footer a:hover, .popup a:hover {text-decoration: underline;}
@@ -827,7 +827,7 @@ p.editlog { font-weight: 400; display:inline; }
 
 /* cache lists */
 div.cachelistinfo { border:1px solid #a0a0a0; }
-.cachelist-tooltip { padding: 0 0.2em 0 0.2em; max-width:700px; }
+.cachelist-tooltip { padding: 0 0.2em 0 0.2em; max-width:700px; overflow:hidden; }
 .cachelist-tooltip p { margin:0; padding:0; color:rgb(50,50,50); font-size:11px; }
 
 /* Pager */

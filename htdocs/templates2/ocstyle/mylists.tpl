@@ -42,7 +42,7 @@
 	</script>
 	{/literal}
 
-	<form method="post" action="mylists.php?id={$listid}" name="editdesc" id="editlist_form">
+	<form method="post" action="mylists.php?id={$listid}" name="editform" id="editlist_form">
 		{if $edit_list}<input type="hidden" name="listid" value="{$listid}" />{/if}
 		<input id="descMode" type="hidden" name="descMode" value="3" />
 		<input type="hidden" id="switchDescMode" name="switchDescMode" value="0" />
@@ -81,9 +81,9 @@
 					{t}Description{/t}:<br />
 					<div id="desc2" class="menuBar" style="margin-top:12px; {if $desctext=='' && !$show_editor}display:none{/if}" >
 						<nobr>
-						<span id="descHtml" class="buttonNormal" onclick="btnSelect(2)" onmouseover="btnMouseOver(2)" onmouseout="btnMouseOut(2)">{t}&lt;html&gt;{/t}</span>
-						<span class="buttonSplitter">|</span>
 						<span id="descHtmlEdit" class="buttonNormal" onclick="btnSelect(3)" onmouseover="btnMouseOver(3)" onmouseout="btnMouseOut(3)">{t}Editor{/t}</span>
+						<span class="buttonSplitter">|</span>
+						<span id="descHtml" class="buttonNormal" onclick="btnSelect(2)" onmouseover="btnMouseOver(2)" onmouseout="btnMouseOut(2)">{t}&lt;html&gt;{/t}</span>
 						</nobr>
 					</div>
 				</td>
@@ -136,9 +136,8 @@
 		</table>
 	</form>
 
-	{include file="js/editor.inc.tpl"}
-
 	<script type="text/javascript">
+	OcInitEditor();
 	{if $name_error || $newlist_mode}
 		document.getElementById('list_name').focus();
 	{/if}

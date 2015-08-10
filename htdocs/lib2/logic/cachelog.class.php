@@ -93,8 +93,7 @@ class cachelog
 		$this->reCacheLog->addInt('oc_team_comment', 0, false);
 		$this->reCacheLog->addDate('date', time(), false);
 		$this->reCacheLog->addString('text', '', false);
-		$this->reCacheLog->addInt('text_html', 0, false);
-		$this->reCacheLog->addInt('text_htmledit', 0, false);
+		$this->reCacheLog->addInt('text_htmledit', 1, false);
 		$this->reCacheLog->addInt('owner_notified', 0, false);
 		$this->reCacheLog->addInt('picture', 0, false);
 
@@ -172,14 +171,6 @@ class cachelog
 	function setText($value)
 	{
 		return $this->reCacheLog->setValue('text', $value);
-	}
-	function getTextHtml()
-	{
-		return $this->reCacheLog->getValue('text_html');
-	}
-	function setTextHtml($value)
-	{
-		return $this->reCacheLog->setValue('text_html', $value ? 1 : 0);
 	}
 	function getTextHtmlEdit()
 	{

@@ -36,7 +36,7 @@ CREATE TABLE `user` (
   `activation_code` varchar(13) NOT NULL,
   `statpic_logo` tinyint(3) unsigned NOT NULL default '0',
   `statpic_text` varchar(30) NOT NULL default 'Opencaching',
-  `no_htmledit_flag` tinyint(1) NOT NULL default '0',
+  `no_htmledit_flag` tinyint(1) NOT NULL default '0' COMMENT 'inverted meaning',
   `notify_radius` int(10) unsigned NOT NULL default '0',
   `notify_oconly` tinyint(1) NOT NULL default '1',
   `admin` smallint(5) unsigned NOT NULL default '0',

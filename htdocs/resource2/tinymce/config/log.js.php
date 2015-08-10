@@ -36,7 +36,7 @@ tinyMCE.init({
 	language : "<?php echo $lang; ?>",
 	preformatted : true,
 	remove_linebreaks : false,
-	oninit : "postInit",
+	oninit : "postEditorInit",
 	
 	content_css : "resource2/tinymce/config/content.css"
 });

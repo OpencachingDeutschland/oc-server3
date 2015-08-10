@@ -273,11 +273,11 @@ class user
 	{
 		return $this->reUser->setValue('usermail_send_addr', $value);
 	}
-	function getNoHTMLEditor()
+	function getNoWysiwygEditor()
 	{
 		return $this->reUser->getValue('no_htmledit_flag');
 	}
-	function setNoHTMLEditor($value)
+	function setNoWysiwygEditor($value)
 	{
 		return $this->reUser->setValue('no_htmledit_flag', $value);
 	}

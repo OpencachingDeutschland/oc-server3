@@ -182,12 +182,12 @@
 						{/if}
 					{/if}
 					{if $edit==true}
-						<input type="checkbox" name="noHTMLEditor" value="1" {if $noHTMLEditor==true}checked="checked"{/if} id="l_no_htmledit" class="checkbox" /> 
-						<label for="l_no_htmledit">{t}Don't use an HTML editor by default.{/t}</label>
+						<input type="checkbox" name="noWysiwygEditor" value="1" {if $noWysiwygEditor==true}checked="checked"{/if} id="l_no_wysiwyg_edit" class="checkbox" /> 
+						<label for="l_no_wysiwyg_edit">{t}Use simple HTML editor by default.{/t}</label>
 						<br />
 					{else}
-						{if $noHTMLEditor}
-							{t}Don't use an HTML editor by default.{/t}
+						{if $noWysiwygEditor}
+							{t}Use simple HTML editor by default.{/t}
 						{/if}
 					{/if}
 					{if $edit==true}

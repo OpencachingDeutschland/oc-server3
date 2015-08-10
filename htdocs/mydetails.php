@@ -102,7 +102,12 @@ function changetext()
 	{
 		$purifier = new OcHTMLPurifier($opt);
 		$desctext = isset($_REQUEST['desctext']) ? $purifier->purify($_REQUEST['desctext']) : "";
-		sql("UPDATE `user` SET `description`='&2' WHERE `user_id`='&1'", $login->userid, $desctext);
+		$desc_htmledit = isset($_REQUEST['descMode']) && $_REQUEST['descMode'] == '2' ? '0' : '1';
+		sql("
+			UPDATE `user`
+			SET `description`='&2', `desc_htmledit`='&3'
+			WHERE `user_id`='&1'",
+			$login->userid, $desctext, $desc_htmledit);
 	  $tpl->redirect('mydetails.php');
 	}
 	else

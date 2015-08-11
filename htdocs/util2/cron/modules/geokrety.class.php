@@ -28,7 +28,8 @@ class geokrety
 			if ($xmlfile == false) return;
 
 			$this->importXML($xmlfile);
-			$this->removeXML($xmlfile);
+			if (!$opt['cron']['geokrety']['xml_archive'])
+				$this->removeXML($xmlfile);
 		}
 	}
 
@@ -41,9 +42,7 @@ class geokrety
 		global $opt;
 		
 		@mkdir($opt['rootpath'] . 'cache2/geokrety');
-		$path = $opt['rootpath'] . 'cache2/geokrety/import.xml';
-
-		$this->removeXML($path);
+		$path = $opt['rootpath'] . 'cache2/geokrety/import-' . date('Ymd-His') . '.xml';
 
 		// Changed default-value for getSysConfig() from '2005-01-01 00:00:00' to 'NOW - 9d 12h'
 		// to safely stay in api-limit, even when client and server are in different time zones.

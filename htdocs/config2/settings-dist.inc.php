@@ -519,6 +519,7 @@
 	 */
 
 	$opt['cron']['geokrety']['run'] = true;
+	$opt['cron']['geokrety']['xml_archive'] = false;
 	$opt['cron']['autoarchive']['run'] = false;
 	$opt['cron']['gcwp']['sources'] = array();
 

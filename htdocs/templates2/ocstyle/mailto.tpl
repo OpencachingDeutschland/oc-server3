@@ -9,7 +9,7 @@
 {/capture}
 {if $success==true}
 	<div class="content2-pagetitle">
-		<img src="resource2/{$opt.template.style}/images/misc/22x22-email.png" style="align: left; margin-right: 10px;" width="32" height="32" alt="" />
+		<img src="resource2/{$opt.template.style}/images/misc/22x22-email.png" style="margin-right: 10px;" width="32" height="32" alt="" />
 		{t 1=$smarty.capture.userlink}E-Mail to %1 was sent{/t}
 	</div>
 
@@ -32,7 +32,7 @@
 	<form action="mailto.php" method="post">
 		<input type="hidden" name="userid" value="{$userid}"/>
 		<div class="content2-pagetitle">
-			<img src="resource2/{$opt.template.style}/images/misc/22x22-email.png" style="align: left; margin-right: 10px;" width="32" height="32" alt="" />
+			<img src="resource2/{$opt.template.style}/images/misc/22x22-email.png" style="margin-right: 10px;" width="32" height="32" alt="" />
 			{t 1=$smarty.capture.userlink}Send E-Mail to %1{/t}
 		</div>
 

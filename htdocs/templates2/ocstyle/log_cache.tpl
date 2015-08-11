@@ -58,7 +58,7 @@ function _chkFound () {
 </script>
 
 <div class="content2-pagetitle">
-	<img src="resource2/{$opt.template.style}/images/description/22x22-logs.png" style="align: left; margin-right: 10px;" width="22" height="22" alt="{t}New log-entry{/t}" />
+	<img src="resource2/{$opt.template.style}/images/description/22x22-logs.png" style="margin-right: 10px;" width="22" height="22" alt="{t}New log-entry{/t}" />
 	{t 1=$cachelink}Add log-entry for the cache %1{/t}
 </div>
 <form action="log.php" method="post" enctype="application/x-www-form-urlencoded" name="logform" dir="ltr">

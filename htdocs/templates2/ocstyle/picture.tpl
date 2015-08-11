@@ -42,7 +42,7 @@
 	{/if}
 
 	<div class="content2-pagetitle">
-		<img src="resource2/{$opt.template.style}/images/description/22x22-image.png" style="align: left; margin-right: 10px;" width="22" height="22" alt="{t}Edit picture{/t}" title="{t}Edit picture{/t}" />
+		<img src="resource2/{$opt.template.style}/images/description/22x22-image.png" style="margin-right: 10px;" width="22" height="22" alt="{t}Edit picture{/t}" title="{t}Edit picture{/t}" />
 		{capture name="name"}
 			<a href="viewcache.php?wp={$cachewp|escape}">{$cachename|escape}</a>
 		{/capture}

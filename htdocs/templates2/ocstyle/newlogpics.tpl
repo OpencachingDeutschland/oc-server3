@@ -5,7 +5,7 @@
 ***************************************************************************}
 {* OCSTYLE *}
 <div class="content2-pagetitle">
-	<img src="resource2/{$opt.template.style}/images/misc/32x32-pictures.gif" style="align: left; margin-right: 10px;" width="24" height="24" alt="" />
+	<img src="resource2/{$opt.template.style}/images/misc/32x32-pictures.gif" style="margin-right: 10px;" width="24" height="24" alt="" />
 	{t}New log pictures{/t}
 </div>
 

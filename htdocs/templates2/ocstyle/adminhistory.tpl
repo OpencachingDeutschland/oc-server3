@@ -6,7 +6,7 @@
 {* OCSTYLE *}
 {if !$reportdisplay}
 <div class="content2-pagetitle">
-	<img src="resource2/{$opt.template.style}/images/misc/32x32-tools.png" style="align: left; margin-right: 10px;" width="32" height="32" alt="World" />
+	<img src="resource2/{$opt.template.style}/images/misc/32x32-tools.png" style="margin-right: 10px;" width="32" height="32" alt="World" />
 	{t}Cache history{/t}
 </div>
 
@@ -32,7 +32,7 @@
 	{if !$reportdisplay || $reports|@count}
 		<div class="content2-container bg-blue02">
 			<p class="content-title-noshade-size2">
-				<img src="resource2/{$opt.template.style}/images/misc/32x32-tools.png" style="align: left; margin-right: 10px;" width="22" height="22" alt="" /> 
+				<img src="resource2/{$opt.template.style}/images/misc/32x32-tools.png" style="margin-right: 10px;" width="22" height="22" alt="" /> 
 				{if $reportdisplay}	{t}Other reports for this cache{/t}{else}{t}Cache reports{/t}{/if}
 			</p>
 		</div>
@@ -70,7 +70,7 @@
 	{if !$reportdisplay || $deleted_logs|@count}
 		<div class="content2-container bg-blue02">
 			<p class="content-title-noshade-size2">
-				<img src="resource2/{$opt.template.style}/images/description/22x22-logs.png" style="align: left; margin-right: 10px;" width="22" height="22" alt="" /> 
+				<img src="resource2/{$opt.template.style}/images/description/22x22-logs.png" style="margin-right: 10px;" width="22" height="22" alt="" /> 
 				{t}Deleted logs{/t} <small>{t}since deletion date February 2012{/t}</small>
 			</p>
 		</div>
@@ -83,7 +83,7 @@
 	{if !$reportdisplay || $status_changes|@count}
 		<div class="content2-container bg-blue02">
 			<p class="content-title-noshade-size2">
-				<img src="resource2/{$opt.template.style}/images/viewcache/16x16-maintenance.png" style="align: left; margin-right: 10px;" width="16" height="16" alt="" /> 
+				<img src="resource2/{$opt.template.style}/images/viewcache/16x16-maintenance.png" style="margin-right: 10px;" width="16" height="16" alt="" /> 
 				{t}Status changes{/t} <small>{t}since June 2013{/t}</small>
 			</p>
 		</div>
@@ -112,7 +112,7 @@
 	{if !$reportdisplay || $coordinates|@count > 1}
 		<div class="content2-container bg-blue02">
 			<p class="content-title-noshade-size2">
-				<img src="resource2/{$opt.template.style}/images/description/20x20-compass.png" style="align: left; margin-right: 10px;" width="20" height="20" alt="" /> 
+				<img src="resource2/{$opt.template.style}/images/description/20x20-compass.png" style="margin-right: 10px;" width="20" height="20" alt="" /> 
 				{t}Coordinate changes{/t}
 			</p>
 		</div>
@@ -145,7 +145,7 @@
 	{if !$reportdisplay || $adoptions|@count}
 		<div class="content2-container bg-blue02">
 			<p class="content-title-noshade-size2">
-				<img src="resource2/{$opt.template.style}/images/profile/32x32-adopt.png" style="align: left; margin-right: 10px;" width="22" height="22" alt="" /> 
+				<img src="resource2/{$opt.template.style}/images/profile/32x32-adopt.png" style="margin-right: 10px;" width="22" height="22" alt="" /> 
 				{t}Adoptions_{/t} <small>{t}since September 2012{/t}</small>
 			</p>
 		</div>

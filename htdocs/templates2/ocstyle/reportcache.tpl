@@ -10,7 +10,7 @@
 
 {if $success==true}
 	<div class="content2-pagetitle">
-		<img src="resource2/{$opt.template.style}/images/profile/22x22-email.png" style="align: left; margin-right: 10px;" width="22" height="22" alt="Report submitted" />
+		<img src="resource2/{$opt.template.style}/images/profile/22x22-email.png" style="margin-right: 10px;" width="22" height="22" alt="Report submitted" />
 		{t 1=$smarty.capture.cachelink}Report for %1 submitted{/t}
 	</div>
 
@@ -34,7 +34,7 @@
 		<input type="hidden" name="cacheid" value="{$cacheid}"/>
 
 	  <div class="content2-pagetitle">
-			<img src="resource2/{$opt.template.style}/images/profile/22x22-email.png" style="align: left; margin-right: 10px;" width="22" height="22" alt="" />
+			<img src="resource2/{$opt.template.style}/images/profile/22x22-email.png" style="margin-right: 10px;" width="22" height="22" alt="" />
 			{t 1=$smarty.capture.cachelink}Report %1{/t}
 		</div>
 

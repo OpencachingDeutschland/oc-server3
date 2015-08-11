@@ -27,7 +27,7 @@
  ****************************************************************************/
 ?>
 
-<div class="content2-pagetitle"><img src="lang/de/ocstyle/images/description/22x22-description.png" style="align: left; margin-right: 10px;" width="22" height="22" alt="{t}New cache{/t}" />
+<div class="content2-pagetitle"><img src="lang/de/ocstyle/images/description/22x22-description.png" style="margin-right: 10px;" width="22" height="22" alt="{t}New cache{/t}" />
 	{t}Add new cache description to <a href="viewcache.php?cacheid={cacheid}">{name}</a>{/t}
 </div>
 

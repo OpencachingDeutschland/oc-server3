@@ -7,7 +7,7 @@
 {* webchat for freenode irc using qwebirc embedded via iframe *}
 
 <div class="content2-pagetitle">
-	<img src="resource2/{$opt.template.style}/images/misc/32x32-news.png" style="align: left; margin-right: 10px;" width="24" height="24" alt="" />
+	<img src="resource2/{$opt.template.style}/images/misc/32x32-news.png" style="margin-right: 10px;" width="24" height="24" alt="" />
 	{t}Chat/IRC{/t}
 </div>
 <div style="padding:2px 0 6px 0">

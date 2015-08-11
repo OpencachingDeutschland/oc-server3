@@ -4,7 +4,7 @@
 *  Unicode Reminder メモ
 ***************************************************************************}
 	<div class="content2-pagetitle">
-		<img src="resource2/{$opt.template.style}/images/misc/32x32-checked.png" style="align: left; margin-right: 10px;" width="32" height="32" alt="" />So kannst Du uns unterst&uuml;tzen
+		<img src="resource2/{$opt.template.style}/images/misc/32x32-checked.png" style="margin-right: 10px;" width="32" height="32" alt="" />So kannst Du uns unterst&uuml;tzen
 	</div>
 	<div class="content-txtbox-noshade" style="padding-right: 25px;">
 
@@ -47,7 +47,7 @@
 			<br />
 			<div class="content2-container bg-blue02">
 			<p class="content-title-noshade-size3">
-			<img src="resource2/{$opt.template.style}/images/misc/32x32-news.png" style="align: left; margin-right: 10px;" width="32" height="32" alt="Bekanntmachung" />
+			<img src="resource2/{$opt.template.style}/images/misc/32x32-news.png" style="margin-right: 10px;" width="32" height="32" alt="Bekanntmachung" />
 			Bekanntmachung vom 09.06.2012 (aktualisiert am 09.02.2013)
 			</p>
 			</div>

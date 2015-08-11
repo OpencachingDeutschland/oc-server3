@@ -5,7 +5,7 @@
  ***************************************************************************}
  {* OCSTYLE *}
 <div class="content2-pagetitle">
-	<img src="resource2/{$opt.template.style}/images/description/22x22-description.png" style="align: left; margin-right: 10px;" width="22" height="22" alt="{t}News{/t}" title="{t}News{/t}" />
+	<img src="resource2/{$opt.template.style}/images/description/22x22-description.png" style="margin-right: 10px;" width="22" height="22" alt="{t}News{/t}" title="{t}News{/t}" />
 	{t}News{/t}
 </div> 
  

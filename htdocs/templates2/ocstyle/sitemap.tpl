@@ -4,7 +4,7 @@
 *  Unicode Reminder メモ
 ***************************************************************************}
 {* OCSTYLE *}
-<div class="content2-pagetitle"><img src="resource2/{$opt.template.style}/images/misc/32x32-world.png" style="align: left; margin-right: 10px;" width="32" height="32" alt="World" />{t}Sitemap{/t}</div>
+<div class="content2-pagetitle"><img src="resource2/{$opt.template.style}/images/misc/32x32-world.png" style="margin-right: 10px;" width="32" height="32" alt="World" />{t}Sitemap{/t}</div>
 	
 <ul style="list-style-type: none; font-size: 120%">
 	{foreach from=$sites item=siteItem}

@@ -4,7 +4,7 @@
 *  Unicode Reminder メモ
 ***************************************************************************}
 <div class="content2-pagetitle">
-	<img src="resource2/{$opt.template.style}/images/misc/32x32-impressum.png" style="align: left; margin-right: 10px;" width="32" height="32" alt="" /> Legal information
+	<img src="resource2/{$opt.template.style}/images/misc/32x32-impressum.png" style="margin-right: 10px;" width="32" height="32" alt="" /> Legal information
 </div>
 <div class="content-txtbox-noshade" style="padding-right: 25px;">
 	<p>
@@ -19,7 +19,7 @@
 
 <div class="content2-container bg-blue02">
 	<p class="content-title-noshade-size3">
-		<img src="resource2/ocstyle/images/misc/32x32-news.png" style="align: left; margin-right: 10px;" width="32" height="32" alt="Lizenz" />
+		<img src="resource2/ocstyle/images/misc/32x32-news.png" style="margin-right: 10px;" width="32" height="32" alt="Lizenz" />
 		Operator of this website
 	</p>
 </div>
@@ -92,7 +92,7 @@
 
 <div class="content2-container bg-blue02">
 	<p class="content-title-noshade-size3">
-		<img src="resource2/ocstyle/images/misc/32x32-news.png" style="align: left; margin-right: 10px;" width="32" height="32" alt="Lizenz" />
+		<img src="resource2/ocstyle/images/misc/32x32-news.png" style="margin-right: 10px;" width="32" height="32" alt="Lizenz" />
 		Responsibility for extenal Links
 	</p>
 </div>
@@ -111,7 +111,7 @@
 
 <div class="content2-container bg-blue02">
 	<p class="content-title-noshade-size3">
-		<img src="resource2/ocstyle/images/misc/32x32-news.png" style="align: left; margin-right: 10px;" width="32" height="32" alt="Lizenz" />
+		<img src="resource2/ocstyle/images/misc/32x32-news.png" style="margin-right: 10px;" width="32" height="32" alt="Lizenz" />
 		<a name="tos"></a>Terms of use
 	</p>
 </div>
@@ -233,7 +233,7 @@
 
 <div class="content2-container bg-blue02">
 	<p class="content-title-noshade-size3">
-		<img src="resource2/ocstyle/images/misc/32x32-news.png" style="align: left; margin-right: 10px;" width="32" height="32" alt="Lizenz" />
+		<img src="resource2/ocstyle/images/misc/32x32-news.png" style="margin-right: 10px;" width="32" height="32" alt="Lizenz" />
 		<a name="datalicense"></a>Data license
 	</p>
 </div>
@@ -269,7 +269,7 @@
 
 <div class="content2-container bg-blue02">
 	<p class="content-title-noshade-size3">
-		<img src="resource2/ocstyle/images/misc/32x32-news.png" style="align: left; margin-right: 10px;" width="32" height="32" alt="Lizenz" />
+		<img src="resource2/ocstyle/images/misc/32x32-news.png" style="margin-right: 10px;" width="32" height="32" alt="Lizenz" />
 		<a name="codelicense"></a>Source code license
 	</p>
 </div>
@@ -296,7 +296,7 @@
 
 <div class="content2-container bg-blue02">
 	<p class="content-title-noshade-size3">
-		<img src="resource2/ocstyle/images/misc/32x32-news.png" style="align: left; margin-right: 10px;" width="32" height="32" alt="Lizenz" />
+		<img src="resource2/ocstyle/images/misc/32x32-news.png" style="margin-right: 10px;" width="32" height="32" alt="Lizenz" />
 		Data privacy
 	</p>
 </div>

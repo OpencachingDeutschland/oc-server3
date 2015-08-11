@@ -11,7 +11,7 @@
 {if $header_footer}
   <div class="content2-container bg-blue02" id="logentries">
 	  <p class="content-title-noshade-size2">
-			<img src="resource2/{$opt.template.style}/images/description/22x22-logs.png" style="align: left; margin-right: 10px;" width="22" height="22" alt="Logs" />
+			<img src="resource2/{$opt.template.style}/images/description/22x22-logs.png" style="margin-right: 10px;" width="22" height="22" alt="Logs" />
 			{capture name=cachename}<a href="viewcache.php?wp={$cache.wpoc|urlencode}">{$cache.name|escape}</a>{/capture}
 			{t 1=$smarty.capture.cachename}Logentries for %1{/t}
 			<span style="font-weight: 400;">&nbsp;&nbsp;

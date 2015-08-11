@@ -11,7 +11,7 @@
 	<input type="hidden" name="ownerid" value="{$ownerid}" />
 
 	<div class="content2-pagetitle">
-		<img src="resource2/{$opt.template.style}/images/misc/32x32-tools.png" style="align: left; margin-right: 10px;" width="32" height="32" alt="World" />
+		<img src="resource2/{$opt.template.style}/images/misc/32x32-tools.png" style="margin-right: 10px;" width="32" height="32" alt="World" />
 		{t}Reported caches{/t}
 	</div>
 
@@ -75,7 +75,7 @@
 
 		<div class="content2-container bg-blue02">
   		<p class="content-title-noshade-size2">
-				<img src="resource2/{$opt.template.style}/images/description/22x22-misc.png" style="align: left; margin-right: 10px;" width="22" height="22" alt="" /> 
+				<img src="resource2/{$opt.template.style}/images/description/22x22-misc.png" style="margin-right: 10px;" width="22" height="22" alt="" /> 
 	  		{t}Action{/t}
 	  	</p>
 	  </div>
@@ -89,7 +89,7 @@
 
 			<div class="content2-container bg-blue02">
 				<p class="content-title-noshade-size2">
-					<img src="resource2/{$opt.template.style}/images/description/22x22-utility.png" style="align: left; margin-right: 10px;" width="22" height="22" alt="" /> 
+					<img src="resource2/{$opt.template.style}/images/description/22x22-utility.png" style="margin-right: 10px;" width="22" height="22" alt="" /> 
 					{t}Set state{/t}
 				</p>
 			</div>

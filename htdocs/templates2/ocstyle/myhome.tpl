@@ -182,7 +182,7 @@ function myHomeLoad()
 	{*
 	<div class="content2-container bg-blue02" style="margin-top:20px;">
 		<p class="content-title-noshade-size3">
-			<img src="resource2/{$opt.template.style}/images/misc/25x25-world.png" width="25" height="25" style="align: left; margin-right: 10px;" />&nbsp;
+			<img src="resource2/{$opt.template.style}/images/misc/25x25-world.png" width="25" height="25" style="margin-right: 10px;" />&nbsp;
 			{t}Other information{/t}
 		</p>
 	</div>

@@ -9,7 +9,7 @@
   <input type="hidden" name="deleteid" value="{$deleteid|escape}" />
 
   <div class="content2-pagetitle">
-    <img src="resource2/{$opt.template.style}/images/description/20x20-compass.png" style="align: left; margin-right: 10px;" alt="{t}Child waypoint{/t}" title="{t}Child waypoint{/t}" />
+    <img src="resource2/{$opt.template.style}/images/description/20x20-compass.png" style="margin-right: 10px;" alt="{t}Child waypoint{/t}" title="{t}Child waypoint{/t}" />
     {$pagetitle|escape}
   </div>
 

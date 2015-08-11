@@ -9,7 +9,7 @@
 <script type="text/javascript" src="resource2/{$opt.template.style}/js/wz_tooltip.js"></script>
 
 	<div class="content2-pagetitle">
-		<img src="resource2/{$opt.template.style}/images/misc/32x32-list.png" style="align: left; margin-right: 10px;" width="32" height="32" />
+		<img src="resource2/{$opt.template.style}/images/misc/32x32-list.png" style="margin-right: 10px;" width="32" height="32" />
 		{if $newlist_mode}{t}Create new cachelist{/t}{elseif $edit_list}{t}Edit cache list{/t}{else}{t}My cache lists{/t}{/if}
 	</div>
 

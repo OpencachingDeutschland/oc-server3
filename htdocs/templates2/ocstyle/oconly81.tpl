@@ -5,7 +5,7 @@
 ***************************************************************************}
 {* OCSTYLE *}
 <div class="content2-pagetitle">
-	<img src="resource2/{$opt.template.style}/images/misc/is_oconly_small.png" style="align: left; margin-right: 10px;" />
+	<img src="resource2/{$opt.template.style}/images/misc/is_oconly_small.png" style="margin-right: 10px;" />
 	{t}OConly-81{/t}
 </div>
 
@@ -18,7 +18,7 @@
 
 	<div class="content2-container bg-blue02">
 		<p class="content-title-noshade-size2">
-			<img src="resource2/{$opt.template.style}/images/profile/32x22-profile.png" style="align: left; margin-right: 10px;" width="32" height="22"  /> 
+			<img src="resource2/{$opt.template.style}/images/profile/32x22-profile.png" style="margin-right: 10px;" width="32" height="22"  /> 
 			{t}Participants{/t}
 			{if !$showall && ($users|@count > $default_maxusers)}
 				&nbsp; <span class="content-title-link">[<a href="oconly81.php?showall=1">{t}Show all{/t}</a>]</span>
@@ -44,7 +44,7 @@
 
 	<div class="content2-container bg-blue02">
 		<p class="content-title-noshade-size2">
-			<img src="resource2/{$opt.template.style}/images/cacheicon/22x20-traditional.png" style="align: left; margin-right: 10px;" width="22" height="20"  /> 
+			<img src="resource2/{$opt.template.style}/images/cacheicon/22x20-traditional.png" style="margin-right: 10px;" width="22" height="20"  /> 
 			{t}Statistics{/t}
 		</p>
 	</div>

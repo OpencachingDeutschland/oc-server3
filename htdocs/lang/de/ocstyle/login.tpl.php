@@ -24,7 +24,7 @@
  ****************************************************************************/
 ?>
 
-<div class="content2-pagetitle"><img src="lang/de/ocstyle/images/profile/32x32-profile.png" style="align: left; margin-right: 10px;" width="32" height="32" alt="{t}Login{/t}" />{t}Login{/t}</div>
+<div class="content2-pagetitle"><img src="lang/de/ocstyle/images/profile/32x32-profile.png" style="margin-right: 10px;" width="32" height="32" alt="{t}Login{/t}" />{t}Login{/t}</div>
 
 <form action="login.php" method="post" enctype="application/x-www-form-urlencoded" name="login_form" dir="ltr" style="display: inline;">
 <input type="hidden" name="target" value="{target}" />

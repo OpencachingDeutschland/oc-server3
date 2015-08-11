@@ -21,7 +21,7 @@
 			<tr>
 				<td>
 					<p class="content-title-noshade-size3">
-						<img src="resource2/{$opt.template.style}/images/misc/32x32-news.png" style="align: left; margin-right: 10px;" width="24" height="24" alt="" />
+						<img src="resource2/{$opt.template.style}/images/misc/32x32-news.png" style="margin-right: 10px;" width="24" height="24" alt="" />
 						<a href="http://blog.opencaching.de/" style="color:rgb(88,144,168); text-decoration: none;">{t}News{/t}</a>
 						&nbsp; <span class="content-title-link">[<a href="http://blog.opencaching.de/">{t}more{/t}...</a>]</span>
 					</p>
@@ -66,7 +66,7 @@
 {elseif $section == 'events'}
 <div class="content2-container bg-blue02 content2-section-no-p">
 	<p class="content-title-noshade-size3">
-		<img src="resource2/{$opt.template.style}/images/cacheicon/event.gif" style="align: left; margin-right: 10px;" width="24" height="24" alt="" />
+		<img src="resource2/{$opt.template.style}/images/cacheicon/event.gif" style="margin-right: 10px;" width="24" height="24" alt="" />
 		{t 1=$usercountry|escape}The next events in %1{/t}
 		{if $total_events > $events|@count}
 			&nbsp; <span class="content-title-link">[<a href="newcaches.php?cachetype=6">{t}more{/t}...</a>]</span>
@@ -81,7 +81,7 @@
 {elseif $section == 'logpics'}
 <div class="content2-container bg-blue02" style="margin-bottom:6px">
 	<p class="content-title-noshade-size3">
-		<img src="resource2/{$opt.template.style}/images/misc/32x32-pictures.gif" style="align: left; margin-right: 10px;" width="24" height="24" />
+		<img src="resource2/{$opt.template.style}/images/misc/32x32-pictures.gif" style="margin-right: 10px;" width="24" height="24" />
 		<a href="newlogpics.php" style="color:rgb(88,144,168); text-decoration: none;">{t}New log pictures{/t}</a>
 	&nbsp; <span class="content-title-link">[<a href="newlogpics.php">{t}more{/t}...</a>]</span>
 	</p>
@@ -93,7 +93,7 @@
 {elseif $section == 'recommendations'}
 <div class="content2-container bg-blue02">
 	<p class="content-title-noshade-size3">
-		<img src="resource2/{$opt.template.style}/images/misc/32x32-winner.png" style="align: left; margin-right: 10px;" width="24" height="24" alt="" />
+		<img src="resource2/{$opt.template.style}/images/misc/32x32-winner.png" style="margin-right: 10px;" width="24" height="24" alt="" />
 		<a href="tops.php" style="color:rgb(88,144,168); text-decoration: none;">{t}Current top ratings{/t}</a>
 	</p>
 </div>
@@ -145,7 +145,7 @@
 {elseif $section == 'newcaches'}
 <div class="content2-container bg-blue02">
 	<p class="content-title-noshade-size3">
-		<img src="resource2/{$opt.template.style}/images/cacheicon/traditional.gif" style="align: left; margin-right: 10px;" width="24" height="24" alt="" />
+		<img src="resource2/{$opt.template.style}/images/cacheicon/traditional.gif" style="margin-right: 10px;" width="24" height="24" alt="" />
 		<a href="newcaches.php" style="color:rgb(88,144,168); text-decoration: none;">{t 1=$usercountry|escape}Newest caches in %1{/t}</a>
 	&nbsp; <span class="content-title-link">[<a href="newcaches.php?country={$usercountryCode}">{t}more{/t}...</a>]</span>
 	</p>

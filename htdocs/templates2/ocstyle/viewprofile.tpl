@@ -8,7 +8,7 @@
 <script type="text/javascript" src="resource2/{$opt.template.style}/js/wz_tooltip.js"></script>
 
 <div class="content2-pagetitle">
-	<img src="resource2/{$opt.template.style}/images/misc/32x32-home.png" style="align: left; margin-right: 10px;" width="32" height="32" />
+	<img src="resource2/{$opt.template.style}/images/misc/32x32-home.png" style="margin-right: 10px;" width="32" height="32" />
 	{t 1=$username}Userprofile of %1{/t}
 </div>
 
@@ -23,7 +23,7 @@
 {* profile data *}
 <div class="content2-container bg-blue02">
 	<p class="content-title-noshade-size2">
-		<img src="resource2/{$opt.template.style}/images/profile/32x22-profile.png" style="align: left; margin-right: 10px;" width="32" height="22"  /> 
+		<img src="resource2/{$opt.template.style}/images/profile/32x22-profile.png" style="margin-right: 10px;" width="32" height="22"  /> 
 		{t}User data{/t}
 	</p>
 </div>
@@ -100,7 +100,7 @@
 {* all-caches statistics *}
 <div class="content2-container bg-blue02">
 	<p class="content-title-noshade-size2">
-		<img src="resource2/{$opt.template.style}/images/cacheicon/20x20-3.png" style="align: left; margin-right: 10px;" />
+		<img src="resource2/{$opt.template.style}/images/cacheicon/20x20-3.png" style="margin-right: 10px;" />
 		{t}User statistics{/t}
 	</p>
 </div>
@@ -129,7 +129,7 @@
 {* OConly statistics *}
 <div class="content2-container bg-blue02">
 	<p class="content-title-noshade-size2">
-		<img src="resource2/{$opt.template.style}/images/misc/40x22-oconly.png" style="align: left; margin-right: 10px;" />
+		<img src="resource2/{$opt.template.style}/images/misc/40x22-oconly.png" style="margin-right: 10px;" />
 		{t}OConly statistics{/t}
 	</p>
 </div>
@@ -181,7 +181,7 @@
 {if $cachelists|@count}
 	<div class="content2-container bg-blue02" id="cachelists">
 		<p class="content-title-noshade-size2">
-			<img src="resource2/{$opt.template.style}/images/misc/32x32-list.png" style="align: left; margin-right: 10px;" />
+			<img src="resource2/{$opt.template.style}/images/misc/32x32-list.png" style="margin-right: 10px;" />
 		{t}Cache lists{/t}
 		</p>
 	</div>

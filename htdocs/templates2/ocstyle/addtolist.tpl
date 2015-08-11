@@ -10,7 +10,7 @@
 	<input type="hidden" name="cacheid" value="{$cacheid}" />
 
 	<div class="content2-pagetitle">
-		<img src="resource2/{$opt.template.style}/images/misc/32x32-list.png" style="align: left; margin-right: 10px;" width="32" height="32" alt="" />
+		<img src="resource2/{$opt.template.style}/images/misc/32x32-list.png" style="margin-right: 10px;" width="32" height="32" alt="" />
 		{t}Add geocache to list{/t}
 	</div>
 

@@ -5,7 +5,7 @@
 ***************************************************************************}
 
 	<div class="content2-pagetitle">
-		<img src="resource2/{$opt.template.style}/images/misc/32x32-tools.png" style="align: left; margin-right: 10px;" width="32" height="32" alt="" />Information on cache descriptions
+		<img src="resource2/{$opt.template.style}/images/misc/32x32-tools.png" style="margin-right: 10px;" width="32" height="32" alt="" />Information on cache descriptions
 	</div>
 	<div id="cachedescinfo" class="content-txtbox-noshade" style="padding-right: 25px;">
 	

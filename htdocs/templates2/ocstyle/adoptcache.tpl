@@ -11,7 +11,7 @@
 		<input type="hidden" name="cacheid" value="{$cacheid}" />
 
 		<div class="content2-pagetitle">
-			<img src="resource2/{$opt.template.style}/images/profile/32x32-adopt.png" style="align: left; margin-right: 10px;" width="32" height="32" alt="" />
+			<img src="resource2/{$opt.template.style}/images/profile/32x32-adopt.png" style="margin-right: 10px;" width="32" height="32" alt="" />
 			{t 1=$cachename|escape}List of users you offered %1 for adoption{/t}
 		</div>
 
@@ -101,7 +101,7 @@
 {elseif $action=='listbyuser'}
 
 	<div class="content2-pagetitle">
-		<img src="resource2/{$opt.template.style}/images/profile/32x32-adopt.png" style="align: left; margin-right: 10px;" width="32" height="32" alt="" />
+		<img src="resource2/{$opt.template.style}/images/profile/32x32-adopt.png" style="margin-right: 10px;" width="32" height="32" alt="" />
 		{t}Geocaches the owner offers you for adoption{/t}
 	</div>
 
@@ -141,7 +141,7 @@
 		<input type="hidden" name="submit" value="1" />
 		<input type="hidden" name="cacheid" value="{$cacheid}" />
 
-		<div class="content2-pagetitle"><img src="resource2/{$opt.template.style}/images/profile/22x22-email.png" style="align: left; margin-right: 10px;" width="22" height="22" alt="" />{t 1=$cache.name|escape}Commit the adoption of %1{/t}</div>
+		<div class="content2-pagetitle"><img src="resource2/{$opt.template.style}/images/profile/22x22-email.png" style="margin-right: 10px;" width="22" height="22" alt="" />{t 1=$cache.name|escape}Commit the adoption of %1{/t}</div>
 
 		<p style="line-height: 1.6em;">
 			{t 1=$cache.name|escape}Thank you for adopting <strong>%1</strong>.{/t}<br />

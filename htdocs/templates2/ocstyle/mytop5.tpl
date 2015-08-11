@@ -6,7 +6,7 @@
 {* OCSTYLE *}
 
 <div class="content2-pagetitle">
-	<img src="resource2/{$opt.template.style}/images/misc/32x32-winner.png" style="align: left; margin-right: 10px;" width="32" height="32" />
+	<img src="resource2/{$opt.template.style}/images/misc/32x32-winner.png" style="margin-right: 10px;" width="32" height="32" />
 	{t}My recommendations{/t}
 </div>
   

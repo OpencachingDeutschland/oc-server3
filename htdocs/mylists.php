@@ -52,13 +52,9 @@
 			$tpl->assign('newlist_mode', true);
 		else
 		{
-<<<<<<< HEAD
+			$list->setPassword($list_password);
 			$purifier = new OcHTMLPurifier($opt);
 			$list->setDescription($purifier->purify($desctext), $descMode == 3);
-=======
-			$list->setPassword($list_password);
-			$list->setDescription($desctext, $descMode == 3);
->>>>>>> added private cache list sharing and cache list bookmarking; updates #748
 			if ($list->save())
 			{
 				if ($list_caches != '')
@@ -119,13 +115,9 @@
 			$name_error = $list->setNameAndVisibility($list_name, $list_visibility);
 			if ($name_error)
 				$edit_list = true;
-<<<<<<< HEAD
+			$list->setPassword($list_password);
 			$purifier = new OcHTMLPurifier($opt);
 			$list->setDescription($purifier->purify($desctext), $descMode == 3);
-=======
-			$list->setPassword($list_password);
-			$list->setDescription($desctext, $descMode == 3);
->>>>>>> added private cache list sharing and cache list bookmarking; updates #748
 			$list->save();
 
 			$list->watch($watch);

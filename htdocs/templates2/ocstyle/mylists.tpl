@@ -161,5 +161,5 @@
 	{if $bookmarked_lists|@count && !$edit_list && !$newlist_mode && !$name_error}
 		<br id="bookmarks" />
 		{include file="res_cachelists.tpl" cachelists=$bookmarked_lists title_bookmarks=true
-		 show_user=tre show_watchers=false show_edit=false show_unbookmark=true}
+		 show_bookmarks=true show_user=tre show_watchers=false show_edit=false show_unbookmark=true}
 	{/if}

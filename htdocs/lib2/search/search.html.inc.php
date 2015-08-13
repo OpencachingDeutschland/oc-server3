@@ -140,7 +140,10 @@ function search_output()
 
 	// cachelist data
 	if (isset($options['cachelist']))
+	{
 		$tpl->assign('cachelist', $options['cachelist']);
+		$tpl->assign('cachelist_pw', $options['cachelist_pw']);
+	}
 	else
 		$tpl->assign('cachelist', false);
 

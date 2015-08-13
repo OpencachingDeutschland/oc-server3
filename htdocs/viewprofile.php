@@ -345,6 +345,8 @@
 	}
 
 	$tpl->assign('cachelists', cachelist::getPublicListsOf($userid));
+	$tpl->assign('show_bookmarks', true);
+
 	$tpl->assign('tdummy', time());
 		// Dummy counter is needed to make consecutive clicks on the same link work.
 

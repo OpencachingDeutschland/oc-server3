@@ -503,6 +503,24 @@
 	}
 
 
+	function dbv_129()  // cache list passwords & bookmarking
+	{
+		if (!sql_field_exists('cache_lists','password'))
+			sql("ALTER TABLE `cache_lists` ADD COLUMN `password` varchar(80) NOT NULL");
+		if (!sql_table_exists('cache_list_bookmarks'))
+		{
+			sql("
+				CREATE TABLE `cache_list_bookmarks` (
+				  `cache_list_id` int(10) NOT NULL,
+				  `user_id` int(10) NOT NULL,
+				  `password` varchar(80) NOT NULL,
+				  UNIQUE KEY `cache_list_id` (`cache_list_id`,`user_id`),
+				  KEY `user_id` (`user_id`)
+				) ENGINE=MyISAM DEFAULT CHARSET=utf8");
+		}
+	}
+
+
 	// When adding new mutations, take care that they behave well if run multiple
 	// times. This improves robustness of database versioning.
 	//

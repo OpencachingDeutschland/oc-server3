@@ -188,10 +188,11 @@ Icons
         License : Creative Commons BY-SA 3.0
         Author  : Oxygen
 
-    4.  16x16 Icons 'flag-checker', 'footprints', 'clock select', lock, list
+    4.  16x16 Icons 'flag-checker', 'footprints', 'clock select', lock, list, offer
         Path    : htdocs/resource2/ocstyle/images/misc/
                   htdocs/resource2/ocstyle/images/map/caches2/
                   htdocs/resource2/ocstyle/images/cachestatus/
+                  htdocs/resource2/ocstyle/images/action/
         URI     : http://www.softicons.com/free-icons/toolbar-icons/fugue-16px-additional-icons-2-by-yusuke-kamiyamane
         License : Creative Commons BY 3.0
         Author  : Yusuke Kamiyamane

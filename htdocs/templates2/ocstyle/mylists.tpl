@@ -18,7 +18,7 @@
 	{/if}
 
 	{if !$edit_list && !$newlist_mode && !$name_error}
-		{include file="res_cachelists.tpl"}
+		{include file="res_cachelists.tpl" title_ownlists=true}
 		{if $cachelists|@count}
 			<p><br />{t 1=$login.userid}Public lists are displayed in your <a href="viewprofile.php?userid=%1">public user profile</a>, on the <a href="cachelists.php">lists overwiew page</a> and (if enabled) in the cache listings.{/t}</p>
 		{/if}
@@ -38,6 +38,12 @@
 		document.getElementById('desc2').style.display = '';
 		document.getElementById('desc3').style.display = '';
 		document.getElementById('desc3').style.width = '580px';
+	}
+	function state_changed()
+	{
+		var lkd =  document.getElementById("list_password_data");
+		if (typeof(lkd) !== 'undefined' && lkd != null)
+			lkd.style.display = (document.getElementById("s_private").checked ? "inline" : "none");
 	}
 	</script>
 	{/literal}
@@ -59,13 +65,16 @@
 				<tr><td></td>
 				<td><nobr><span id="name_error">{if $name_error}&nbsp;<span class="errormsg">{if $name_error==ERROR_DUPLICATE_LISTNAME}{t}Another of your cache lists already has this name.{/t}{else}{if $name_error==ERROR_BAD_LISTNAME}{t}Invalid name{/t}{if $list_visibility>=2}; {t}minimum length for public lists is 10 characters{/t}{/if}{/if}{/if}</span></nobr>{/if}</span></td>
 				</tr>
-				<tr><td class="separator"></td></tr>
 			{/if}
+			<tr><td class="separator"></td></tr>
 			<tr>
 				<td style="vertical-align:top">{t}Status{/t}:</td>
-				<td><input type="radio" class="radio" id="s_private" name="list_visibility" value="0" {if $list_visibility==0}checked="checked"{/if} /><label for="s_private">{t}private{/t}</label> &nbsp; {* visibility 2 is reserve for friends *}<input type="radio" class="radio" id="s_public" name="list_visibility" value="2" {if $list_visibility==2}checked="checked"{/if} /><label for="s_public">{t}public{/t}</label> &nbsp; <input type="radio" class="radio" id="s_public3" name="list_visibility" value="3" {if $list_visibility==3}checked="checked"{/if} /><label for="s_public3" >{t}public{/t} + {t}visible for all users in cache listings{/t}</label><br />				
+				<td><input type="radio" class="radio" id="s_private" name="list_visibility" value="0" {if $list_visibility==0}checked="checked"{/if} onchange="state_changed()" onfocus="state_changed()" {* old MSIE versions need onfocus(), onchange() wont work properly *} /><label for="s_private">{t}private{/t}</label><span id="list_password_data" > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {t}Password for sharing{/t}: &nbsp;<input type="text" id="list_password" name="list_password" maxlength="80" value="{$list_password}" class="input200" /></span><br /> 
+				{* visibility 2 is reserve for friends *}<input type="radio" class="radio" id="s_public" name="list_visibility" value="2" {if $list_visibility==2}checked="checked"{/if} onchange="state_changed()" onfocus="state_changed()"  /><label for="s_public">{t}public{/t}</label><br />
+				<input type="radio" class="radio" id="s_public3" name="list_visibility" value="3" {if $list_visibility==3}checked="checked"{/if} onchange="state_changed()" onfocus="state_changed()" /><label for="s_public3" >{t}public{/t} + {t}visible for all users in cache listings{/t}</label><br />				
 				</td>
 			</tr>
+			<tr><td class="separator"></td></tr>
 			<tr>
 				<td>{t}Watch{/t}:</td>
 				<td><input type="checkbox" class="checkbox" id="watch" name="watch" value="1" {if $watch}checked="checked"{/if} /> <label for="watch">{t}I want to receive notifications about any logs for caches in this list.{/t}</label></td>
@@ -100,7 +109,7 @@
 			<tr><td class="separator"></td></tr>
 			<tr>
 				<td style="vertical-align:top; white-space:nowrap">{if $edit_list}{t}Add caches{/t}{else}{t}Caches{/t}{/if}:</td>
-				<td><input type="text" id="list_caches" name="list_caches" maxlength="60" value="{$list_caches}" class="input500 waypoint" /><br /></td>
+				<td><input type="text" id="list_caches" name="list_caches" maxlength="1000" value="{$list_caches}" class="input500 waypoint" /><br /></td>
 			</tr>
 			<tr>
 				<td></td>
@@ -142,6 +151,15 @@
 	{if $name_error || $newlist_mode}
 		document.getElementById('list_name').focus();
 	{/if}
+	{* Initially hide password input field for non-private setting. Doing it this way
+	   ensures that it is visible if Javascript is not available: *}
+	state_changed();
 	</script>
 
 	{/if}   {* edit_list *}
+
+	{if $bookmarked_lists|@count && !$edit_list && !$newlist_mode && !$name_error}
+		<br id="bookmarks" />
+		{include file="res_cachelists.tpl" cachelists=$bookmarked_lists title_bookmarks=true
+		 show_bookmarks=true show_user=tre show_watchers=false show_edit=false show_unbookmark=true}
+	{/if}

@@ -502,7 +502,7 @@
 		mysql_free_result($rs);
 	}
 
-	function dbv_129()  // discarded text editor mode (#236)
+	function dbv_130()  // discarded text editor mode (#236)
 	{
 		sql("ALTER TABLE `cache_desc` CHANGE COLUMN `desc_html` `desc_html` tinyint(1) NOT NULL default '1' COMMENT 'obsolete'");
 		sql("ALTER TABLE `cache_desc` CHANGE COLUMN `desc_htmledit` `desc_htmledit` tinyint(1) NOT NULL default '1'");

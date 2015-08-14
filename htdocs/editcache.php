@@ -612,7 +612,7 @@ function getWaypoints($cacheid)
 						$rs = sql("SELECT `cache_attrib`.`id`, IFNULL(`ttname`.`text`, `cache_attrib`.`name`) AS `name`, `cache_attrib`.`icon_undef`, `cache_attrib`.`icon_large`, 
 						                  IFNULL(`ttdesc`.`text`, `cache_attrib`.`html_desc`) AS `html_desc` 
 						             FROM `cache_attrib` 
-						        LEFT JOIN `caches_attributes` ON `cache_attrib`.`id`=`caches_attributes`.`attrib_id` AND `caches_attributes`.`cache_id`='&1' 
+						        LEFT JOIN `caches_attributes` ON `cache_attrib`.`id`=`caches_attributes`.`attrib_id` AND `caches_attributes`.`cache_id`='&2'
 		                LEFT JOIN `sys_trans` AS `tname` ON `cache_attrib`.`trans_id`=`tname`.`id` AND `cache_attrib`.`name`=`tname`.`text`
 		                LEFT JOIN `sys_trans_text` AS `ttname` ON `tname`.`id`=`ttname`.`trans_id` AND `ttname`.`lang`='&1'
 		                LEFT JOIN `sys_trans` AS `tdesc` ON `cache_attrib`.`html_desc_trans_id`=`tdesc`.`id` AND `cache_attrib`.`html_desc`=`tdesc`.`text`

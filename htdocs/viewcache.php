@@ -242,7 +242,7 @@ function getChildWaypoints($cacheid)
 	if (isset($logs[$rscount])) 
 	{
 		unset($logs[$rscount]);
-		$tpl->assign('showalllogs', true);
+		$tpl->assign('morelogs', true);
 	}
 	$loganz = sizeof($logs);
 	$tpl->assign('logs', $logs);
@@ -326,7 +326,7 @@ function getChildWaypoints($cacheid)
 	}
 	else
 	{
-		$autoload_logs = false;
+		$autoload_logs = true;
 	}
 	$tpl->assign('userzoom', $userzoom);
 	$tpl->assign('autoload_logs', $autoload_logs);

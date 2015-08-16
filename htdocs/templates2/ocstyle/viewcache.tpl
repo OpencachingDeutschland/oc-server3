@@ -555,7 +555,7 @@ function showalllists()
 <div id="logblock">
 	{include file="res_logentry.tpl" header_footer=true footbacklink=false logs=$logs cache=$cache}
 
-	{if $showalllogs}
+	{if $morelogs}
 		<div class="content2-container bg-blue02">
 			<p id="showalllogs" class="content-title-noshade-size2">
 				<img id="showalllogs_img" src="resource2/{$opt.template.style}/images/action/16x16-showall.png" style="margin-right: 10px;" width="16" height="16" alt="{t}Show all logentries{/t}" />  
@@ -566,7 +566,7 @@ function showalllists()
 	{/if}
 </div>
 
-{if $showalllogs && $autoload_logs}
+{if $morelogs && $autoload_logs}
 <script type="text/javascript">
 	window.onscroll = onScroll;
 </script>

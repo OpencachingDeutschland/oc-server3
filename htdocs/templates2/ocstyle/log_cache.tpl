@@ -8,24 +8,26 @@
 {literal}
 <!--
 function insertSmiley(parSmiley) {
-  var myText = document.logform.logtext;
+  var myText = document.editform.logtext;
+  var smileyHtml = '<img src="resource2/tinymce/plugins/emotions/img/smiley-' + parSmiley + '.gif" alt="" border="0" width="18px" height="18px" />';
   myText.focus();
-  /* InternetExplorer */
+
+  /* fuer IE */
   if(typeof document.selection != 'undefined') {
     var range = document.selection.createRange();
     var selText = range.text;
-    range.text = parSmiley + selText;
+    range.text = smileyHtml + selText;
   }
-  /* Firefox/Mozilla-Browser */
+  /* fuer Firefox/Mozilla-Browser */
   else if(typeof myText.selectionStart != 'undefined')
   {
     var start = myText.selectionStart;
     var end = myText.selectionEnd;
     var selText = myText.value.substring(start, end);
-    myText.value = myText.value.substr(0, start) + parSmiley + selText + myText.value.substr(end);
+    myText.value = myText.value.substr(0, start) + smileyHtml + selText + myText.value.substr(end);
     /* Cursorposition hinter Smiley setzen */
-    myText.selectionStart = start + parSmiley.length;
-    myText.selectionEnd = start + parSmiley.length;
+    myText.selectionStart = start + smileyHtml.length;
+    myText.selectionEnd = start + smileyHtml.length;
   }
   /* other Browser */
   else
@@ -35,15 +37,15 @@ function insertSmiley(parSmiley) {
 }
 
 function _chkFound () {
-  if (document.logform.logtype.value == "1" || document.logform.logtype.value == "7")
+  if (document.editform.logtype.value == "1" || document.editform.logtype.value == "7")
 	{
-		if (document.logform.rating)
-	    document.logform.rating.disabled = false;
+		if (document.editform.rating)
+	    document.editform.rating.disabled = false;
   }
   else
   {
-		if (document.logform.rating)
-	    document.logform.rating.disabled = true;
+		if (document.editform.rating)
+	    document.editform.rating.disabled = true;
   }
   return false;
 }
@@ -61,7 +63,7 @@ function _chkFound () {
 	<img src="resource2/{$opt.template.style}/images/description/22x22-logs.png" style="margin-right: 10px;" width="22" height="22" alt="{t}New log-entry{/t}" />
 	{t 1=$cachelink}Add log-entry for the cache %1{/t}
 </div>
-<form action="log.php" method="post" enctype="application/x-www-form-urlencoded" name="logform" dir="ltr">
+<form action="log.php" method="post" enctype="application/x-www-form-urlencoded" name="editform" dir="ltr">
 {if $masslog==true}
 <p class="redtext"> 
 	{t 1=$masslogCount}You submitted more than %1 identical logs. Please make sure that you are entering the date of your cache visit, not the current date - also when "late logging" old finds.{/t} 
@@ -80,7 +82,7 @@ function _chkFound () {
 {/if}
 <input type="hidden" name="cacheid" value="{$cacheid}"/>
 <input type="hidden" name="version3" value="1"/>
-<input id="descMode" type="hidden" name="descMode" value="1" />
+<input id="descMode" type="hidden" name="descMode" value="3" />
 <table class="table">
 	<tr><td class="spacer" colspan="2"></td></tr>
 	<tr><td colspan="2"></td></tr>
@@ -139,11 +141,9 @@ function _chkFound () {
 	<tr>
 		<td colspan="2">
 			<div class="menuBar">
-				<span id="descText" class="buttonNormal" onclick="btnSelect(1)" onmouseover="btnMouseOver(1)" onmouseout="btnMouseOut(1)">{t}Text{/t}</span>
+				<span id="descHtmlEdit" class="buttonNormal" onclick="btnSelect(3)" onmouseover="btnMouseOver(3)" onmouseout="btnMouseOut(3)">{t}Editor{/t}</span>
 				<span class="buttonSplitter">|</span>
 				<span id="descHtml" class="buttonNormal" onclick="btnSelect(2)" onmouseover="btnMouseOver(2)" onmouseout="btnMouseOut(2)">{t}&lt;html&gt;{/t}</span>
-				<span class="buttonSplitter">|</span>
-				<span id="descHtmlEdit" class="buttonNormal" onclick="btnSelect(3)" onmouseover="btnMouseOver(3)" onmouseout="btnMouseOut(3)">{t}Editor{/t}</span>
 			</div>
 		</td>
 	</tr>
@@ -157,22 +157,22 @@ function _chkFound () {
 			<textarea name="logtext" id="logtext" cols="68" rows="25" class="logs">{$logtext|escape}</textarea>
     </td>
 	</tr>
-	{if $descMode!=3}
+	{if $descMode==2}
 	<tr>
 		<td colspan="2">
-			<a href="javascript:insertSmiley('  :)  ')"><img src="resource2/tinymce/plugins/emotions/img/smiley-smile.gif" alt="" height="18px" width="18px" border="0" /></a>&nbsp;
-			<a href="javascript:insertSmiley('  ;)  ')"><img src="resource2/tinymce/plugins/emotions/img/smiley-wink.gif" alt="" height="18px" width="18px" border="0" /></a>&nbsp;
-			<a href="javascript:insertSmiley('  :D  ')"><img src="resource2/tinymce/plugins/emotions/img/smiley-laughing.gif" alt="" height="18px" width="18px" border="0" /></a>&nbsp;
-			<a href="javascript:insertSmiley('  8)  ')"><img src="resource2/tinymce/plugins/emotions/img/smiley-cool.gif" alt="" height="18px" width="18px" border="0" /></a>&nbsp;
-			<a href="javascript:insertSmiley('  O:)  ')"><img src="resource2/tinymce/plugins/emotions/img/smiley-innocent.gif" alt="" height="18px" width="18px" border="0" /></a>&nbsp;
-			<a href="javascript:insertSmiley('  :o  ')"><img src="resource2/tinymce/plugins/emotions/img/smiley-surprised.gif" alt="" height="18px" width="18px" border="0" /></a>&nbsp;
-			<a href="javascript:insertSmiley('  :(  ')"><img src="resource2/tinymce/plugins/emotions/img/smiley-frown.gif" alt="" height="18px" width="18px" border="0" /></a>&nbsp;
-			<a href="javascript:insertSmiley('  ::|  ')"><img src="resource2/tinymce/plugins/emotions/img/smiley-embarassed.gif" alt="" height="18px" width="18px" border="0" /></a>&nbsp;
-			<a href="javascript:insertSmiley('  :,-(  ')"><img src="resource2/tinymce/plugins/emotions/img/smiley-cry.gif" alt="" height="18px" width="18px" border="0" /></a>&nbsp;
-			<a href="javascript:insertSmiley('  :-*  ')"><img src="resource2/tinymce/plugins/emotions/img/smiley-kiss.gif" alt="" height="18px" width="18px" border="0" /></a>&nbsp;
-			<a href="javascript:insertSmiley('  :P  ')"><img src="resource2/tinymce/plugins/emotions/img/smiley-tongue-out.gif" alt="" height="18px" width="18px" border="0" /></a>&nbsp;
-			<a href="javascript:insertSmiley('  :/  ')"><img src="resource2/tinymce/plugins/emotions/img/smiley-undecided.gif" alt="" height="18px" width="18px" border="0" /></a>&nbsp;
-			<a href="javascript:insertSmiley('  XO  ')"><img src="resource2/tinymce/plugins/emotions/img/smiley-yell.gif" alt="" height="18px" width="18px" border="0" /></a>
+			<a href="javascript:insertSmiley('smile')"><img src="resource2/tinymce/plugins/emotions/img/smiley-smile.gif" alt="" height="18px" width="18px" border="0" /></a>&nbsp;
+			<a href="javascript:insertSmiley('wink')"><img src="resource2/tinymce/plugins/emotions/img/smiley-wink.gif" alt="" height="18px" width="18px" border="0" /></a>&nbsp;
+			<a href="javascript:insertSmiley('laughing')"><img src="resource2/tinymce/plugins/emotions/img/smiley-laughing.gif" alt="" height="18px" width="18px" border="0" /></a>&nbsp;
+			<a href="javascript:insertSmiley('cool')"><img src="resource2/tinymce/plugins/emotions/img/smiley-cool.gif" alt="" height="18px" width="18px" border="0" /></a>&nbsp;
+			<a href="javascript:insertSmiley('innocent')"><img src="resource2/tinymce/plugins/emotions/img/smiley-innocent.gif" alt="" height="18px" width="18px" border="0" /></a>&nbsp;
+			<a href="javascript:insertSmiley('surprised')"><img src="resource2/tinymce/plugins/emotions/img/smiley-surprised.gif" alt="" height="18px" width="18px" border="0" /></a>&nbsp;
+			<a href="javascript:insertSmiley('frown')"><img src="resource2/tinymce/plugins/emotions/img/smiley-frown.gif" alt="" height="18px" width="18px" border="0" /></a>&nbsp;
+			<a href="javascript:insertSmiley('embarassed')"><img src="resource2/tinymce/plugins/emotions/img/smiley-embarassed.gif" alt="" height="18px" width="18px" border="0" /></a>&nbsp;
+			<a href="javascript:insertSmiley('cry')"><img src="resource2/tinymce/plugins/emotions/img/smiley-cry.gif" alt="" height="18px" width="18px" border="0" /></a>&nbsp;
+			<a href="javascript:insertSmiley('kiss')"><img src="resource2/tinymce/plugins/emotions/img/smiley-kiss.gif" alt="" height="18px" width="18px" border="0" /></a>&nbsp;
+			<a href="javascript:insertSmiley('toungue-out')"><img src="resource2/tinymce/plugins/emotions/img/smiley-tongue-out.gif" alt="" height="18px" width="18px" border="0" /></a>&nbsp;
+			<a href="javascript:insertSmiley('undecided')"><img src="resource2/tinymce/plugins/emotions/img/smiley-undecided.gif" alt="" height="18px" width="18px" border="0" /></a>&nbsp;
+			<a href="javascript:insertSmiley('yell')"><img src="resource2/tinymce/plugins/emotions/img/smiley-yell.gif" alt="" height="18px" width="18px" border="0" /></a>
 		</td>
 	</tr>
 	{/if}
@@ -199,210 +199,10 @@ function _chkFound () {
 	</tr>
 </table>
 </form>
+
 <script language="javascript" type="text/javascript">
 <!--
 	_chkFound();
-
-	/*
-		1 = Text
-		2 = HTML
-		3 = HTML-Editor
-	*/
-	var use_tinymce = 0;
-	var descMode = {$descMode};
-	document.getElementById("scriptwarning").firstChild.nodeValue = "";
-{literal}
-	// set descMode to 1 or 2 ... when editor is loaded set to 3
-	if (descMode == 3)
-	{
-		if (document.getElementById("logtext").value == '')
-			descMode = 1;
-		else
-			descMode = 2;
-	}
-
-	document.getElementById("descMode").value = descMode;
-	mnuSetElementsNormal();
-
-	function postInit()
-	{
-		descMode = 3;
-		use_tinymce = 1;
-		document.getElementById("descMode").value = descMode;
-		mnuSetElementsNormal();
-	}
-
-	function SwitchToTextDesc()
-	{
-		document.getElementById("descMode").value = 1;
-
-		if (use_tinymce == 1)
-			document.logform.submit();
-	}
-
-	function SwitchToHtmlDesc()
-	{
-		document.getElementById("descMode").value = 2;
-
-		if (use_tinymce == 1)
-			document.logform.submit();
-	}
-
-	function SwitchToHtmlEditDesc()
-	{
-		document.getElementById("descMode").value = 3;
-
-		if (use_tinymce == 0)
-			document.logform.submit();
-	}
-
-	function mnuSelectElement(e)
-	{
-		e.backgroundColor = '#D4D5D8';
-		e.borderColor = '#6779AA';
-		e.borderWidth = '1px';
-		e.borderStyle = 'solid';
-	}
-
-	function mnuNormalElement(e)
-	{
-		e.backgroundColor = '#F0F0EE';
-		e.borderColor = '#F0F0EE';
-		e.borderWidth = '1px';
-		e.borderStyle = 'solid';
-	}
-
-	function mnuHoverElement(e)
-	{
-		e.backgroundColor = '#B6BDD2';
-		e.borderColor = '#0A246A';
-		e.borderWidth = '1px';
-		e.borderStyle = 'solid';
-	}
-
-	function mnuUnhoverElement(e)
-	{
-		mnuSetElementsNormal();
-	}
-
-	function mnuSetElementsNormal()
-	{
-		var descText = document.getElementById("descText").style;
-		var descHtml = document.getElementById("descHtml").style;
-		var descHtmlEdit = document.getElementById("descHtmlEdit").style;
-
-		switch (descMode)
-		{
-			case 1:
-				mnuSelectElement(descText);
-				mnuNormalElement(descHtml);
-				mnuNormalElement(descHtmlEdit);
-
-				break;
-			case 2:
-				mnuNormalElement(descText);
-				mnuSelectElement(descHtml);
-				mnuNormalElement(descHtmlEdit);
-
-				break;
-			case 3:
-				mnuNormalElement(descText);
-				mnuNormalElement(descHtml);
-				mnuSelectElement(descHtmlEdit);
-
-				break;
-		}
-	}
-
-	function btnSelect(mode)
-	{
-		var descText = document.getElementById("descText").style;
-		var descHtml = document.getElementById("descHtml").style;
-		var descHtmlEdit = document.getElementById("descHtmlEdit").style;
-
-		var oldMode = descMode;
-		descMode = mode;
-		mnuSetElementsNormal();
-
-		if ((oldMode == 1) && (descMode != 1))
-		{
-			// convert text to HTML
-			var desc = document.getElementById("logtext").value;
-
-			if ((desc.indexOf('&amp;') == -1) &&
-			    (desc.indexOf('&quot;') == -1) &&
-			    (desc.indexOf('&lt;') == -1) &&
-			    (desc.indexOf('&gt;') == -1) &&
-			    (desc.indexOf('<p>') == -1) &&
-			    (desc.indexOf('<i>') == -1) &&
-			    (desc.indexOf('<strong>') == -1) &&
-			    (desc.indexOf('<br />') == -1))
-			{
-				desc = desc.replace(/&/g, "&amp;");
-				desc = desc.replace(/"/g, "&quot;");
-				desc = desc.replace(/</g, "&lt;");
-				desc = desc.replace(/>/g, "&gt;");
-				desc = desc.replace(/\r\n/g, "\<br />");
-				desc = desc.replace(/\n/g, "<br />");
-				desc = desc.replace(/<br \/>/g, "<br />\n");
-			}
-
-			document.getElementById("logtext").value = desc;
-		}
-
-		switch (mode)
-		{
-			case 1:
-				SwitchToTextDesc();
-				break;
-			case 2:
-				SwitchToHtmlDesc();
-				break;
-			case 3:
-				SwitchToHtmlEditDesc();
-				break;
-		}
-	}
-
-	function btnMouseOver(id)
-	{
-		var descText = document.getElementById("descText").style;
-		var descHtml = document.getElementById("descHtml").style;
-		var descHtmlEdit = document.getElementById("descHtmlEdit").style;
-
-		switch (id)
-		{
-			case 1:
-				mnuHoverElement(descText);
-				break;
-			case 2:
-				mnuHoverElement(descHtml);
-				break;
-			case 3:
-				mnuHoverElement(descHtmlEdit);
-				break;
-		}
-	}
-
-	function btnMouseOut(id)
-	{
-		var descText = document.getElementById("descText").style;
-		var descHtml = document.getElementById("descHtml").style;
-		var descHtmlEdit = document.getElementById("descHtmlEdit").style;
-
-		switch (id)
-		{
-			case 1:
-				mnuUnhoverElement(descText);
-				break;
-			case 2:
-				mnuUnhoverElement(descHtml);
-				break;
-			case 3:
-				mnuUnhoverElement(descHtmlEdit);
-				break;
-		}
-	}
+	OcInitEditor();
 //-->
-{/literal}
 </script>

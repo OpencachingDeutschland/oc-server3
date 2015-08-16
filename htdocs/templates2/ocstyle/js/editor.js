@@ -1,36 +1,26 @@
-{***************************************************************************
+/***************************************************************************
  *  You can find the license in the docs directory
  *
  *  Unicode Reminder メモ
- ***************************************************************************}
+ ***************************************************************************/
 
-{* common Javascript code for including a switchable HTML/TinyMCE editor in templates;
-   currently used for user profile descriptions and cache list descriptions
+/* common Javascript code for including a switchable HTML/TinyMCE editor
 
-   TODO: use also for cache descriptions and logs, while discarding plaintext option *} 
+		descMode 2 = direct HTML input
+		descMode 3 = Wysywyg HTML editor
+*/
 
-{literal}
-<script type="text/javascript">
-<!--
-	/*
-		2 = direct HTML input
-		3 = Wysywyg HTML editor
-	*/
 	var use_tinymce = 0;
-	{/literal}
-	var descMode = {$descMode};
+	var descMode = 2;
 
-	{literal}
-	document.getElementById("scriptwarning").firstChild.nodeValue = "";
+	function OcInitEditor()
+	{
+		document.getElementById("scriptwarning").firstChild.nodeValue = "";
+		document.getElementById("descMode").value = descMode;
+		mnuSetElementsNormal();
+	}
 
-	// set descMode to 2 ... when editor is loaded, set back to 3
-	descMode = 2;
-
-	document.getElementById("descMode").value = descMode;
-	mnuSetElementsNormal();
-
-
-	function postInit()
+	function postEditorInit()    // called after TinyMCE initialization
 	{
 		descMode = 3;
 		use_tinymce = 1;
@@ -38,7 +28,7 @@
 		mnuSetElementsNormal();
 	}
 
-	function SwitchToHtmlDesc()
+	function SwitchToHtmlMode()
 	{
 		document.getElementById("descMode").value = 2;
 
@@ -47,10 +37,10 @@
 			switchfield.value = "1";
 
 		if (use_tinymce == 1)
-			document.editdesc.submit();
+			document.editform.submit();
 	}
 
-	function SwitchToHtmlEditDesc()
+	function SwitchToTinyMCE()
 	{
 		document.getElementById("descMode").value = 3;
 
@@ -59,7 +49,7 @@
 			switchfield.value = "1";
 
 		if (use_tinymce == 0)
-			document.editdesc.submit();
+			document.editform.submit();
 	}
 
 	function mnuSelectElement(e)
@@ -111,20 +101,15 @@
 
 	function btnSelect(mode)
 	{
-		var descHtml = document.getElementById("descHtml").style;
-		var descHtmlEdit = document.getElementById("descHtmlEdit").style;
-
-		var oldMode = descMode;
-		descMode = mode;
 		mnuSetElementsNormal();
 
 		switch (mode)
 		{
 			case 2:
-				SwitchToHtmlDesc();
+				SwitchToHtmlMode();
 				break;
 			case 3:
-				SwitchToHtmlEditDesc();
+				SwitchToTinyMCE();
 				break;
 		}
 	}
@@ -160,7 +145,3 @@
 				break;
 		}
 	}
-
-//-->
-</script>
-{/literal}

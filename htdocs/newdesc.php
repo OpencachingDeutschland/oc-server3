@@ -63,7 +63,21 @@
 					$hints = isset($_POST['hints']) ? $_POST['hints'] : '';  // Ocprop
 					$sel_lang = isset($_POST['desc_lang']) ? $_POST['desc_lang'] : $default_lang;  // Ocprop
 					$desc = isset($_POST['desc']) ? $_POST['desc'] : '';  // Ocprop
-					$descMode = isset($_POST['descMode']) ? ($_POST['descMode']+0) : 3;  // Ocprop
+
+					// descMode auslesen, falls nicht gesetzt aus dem Profil laden
+					if (isset($_POST['descMode']))  // Ocprop
+					{
+						$descMode = $_POST['descMode']+0;
+						if (($descMode < 1) || ($descMode > 3)) $descMode = 3;
+					}
+					else
+					{
+						if (sqlValue("SELECT `no_htmledit_flag` FROM `user` WHERE `user_id`='" .  sql_escape($usr['userid']) . "'", 1) == 1)
+							$descMode = 2;
+						else
+							$descMode = 3;
+					}
+
 					if (($descMode < 1) || ($descMode > 3)) $descMode = 3;
 
 					// fuer alte Versionen von OCProp
@@ -98,56 +112,32 @@
 						if ($desc_lang_exists == false)
 						{
 							//add to DB
-							if ($descMode != 1)
-							{
-								sql("INSERT INTO `cache_desc` ( 
-															`id`, 
-															`cache_id`, 
-															`language`, 
-															`desc`, 
-															`desc_html`, 
-															`desc_htmledit`, 
-															`hint`, 
-															`short_desc`,
-															`last_modified`,
-															`node`
-														) VALUES ('', '&1', '&2', '&3', 1, '&4', '&5', '&6', NOW(), '&7')",
-															$cache_id,
-															$sel_lang,
-															$desc,
-															($descMode == 3) ? '1' : '0',
-															nl2br(htmlspecialchars($hints, ENT_COMPAT, 'UTF-8')),
-															$short_desc,
-															$oc_nodeid);
-							}
-							else
-							{
-								sql("INSERT INTO `cache_desc` ( 
-															`id`, 
-															`cache_id`, 
-															`language`, 
-															`desc`, 
-															`desc_html`, 
-															`desc_htmledit`, 
-															`hint`, 
-															`short_desc`,
-															`last_modified`,
-															`node`
-														) VALUES ('', '&1', '&2', '&3', 0, 0, '&4', '&5', NOW(), '&6')", 
+							sql("INSERT INTO `cache_desc` ( 
+														`id`, 
+														`cache_id`, 
+														`language`, 
+														`desc`, 
+														`desc_html`, 
+														`desc_htmledit`, 
+														`hint`, 
+														`short_desc`,
+														`last_modified`,
+														`node`
+													) VALUES ('', '&1', '&2', '&3', 1, '&4', '&5', '&6', NOW(), '&7')",
 														$cache_id,
 														$sel_lang,
-														nl2br(htmlspecialchars($desc, ENT_COMPAT, 'UTF-8')),
+														$desc,
+														($descMode == 3) ? '1' : '0',
 														nl2br(htmlspecialchars($hints, ENT_COMPAT, 'UTF-8')),
 														$short_desc,
 														$oc_nodeid);
-							}
-
-							// do not use slave server for the next time ...
-							db_slave_exclude();
-
-							tpl_redirect('editcache.php?cacheid=' . urlencode($cache_id));
-							exit;
 						}
+
+						// do not use slave server for the next time ...
+						db_slave_exclude();
+
+						tpl_redirect('editcache.php?cacheid=' . urlencode($cache_id));
+						exit;
 					}
 					elseif (isset($_POST['show_all_langs_submit']))
 					{
@@ -206,23 +196,17 @@
 					tpl_set_var('desc', htmlspecialchars($desc, ENT_COMPAT, 'UTF-8'));
 					tpl_set_var('hints', htmlspecialchars($hints, ENT_COMPAT, 'UTF-8'));
 
-					// Text / normal HTML / HTML editor
-					tpl_set_var('use_tinymce', (($descMode == 3) ? 1 : 0));
-
-					if ($descMode == 1)
-						tpl_set_var('descMode', 1);
-					else if ($descMode == 2)
-						tpl_set_var('descMode', 2);
-					else
+					// plain HTML or Wysiwyg editor
+					tpl_set_var('descMode', $descMode);
+					$headers = tpl_get_var('htmlheaders') . "\n";
+					if ($descMode == 3)
 					{
 						// TinyMCE
-						$headers = tpl_get_var('htmlheaders') . "\n";
 						$headers .= '<script language="javascript" type="text/javascript" src="resource2/tinymce/tiny_mce_gzip.js"></script>' . "\n";
 						$headers .= '<script language="javascript" type="text/javascript" src="resource2/tinymce/config/desc.js.php?cacheid=' . ($cache_id+0) . '&lang=' .  strtolower($locale) . '"></script>' . "\n";
-						tpl_set_var('htmlheaders', $headers);
-
-						tpl_set_var('descMode', 3);
 					}
+					$headers .= '<script language="javascript" type="text/javascript" src="templates2/ocstyle/js/editor.js"></script>' . "\n";
+					tpl_set_var('htmlheaders', $headers);
 
 					tpl_set_var('reset', $reset);  // obsolete
 					tpl_set_var('submit', $submit);

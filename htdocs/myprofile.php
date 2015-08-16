@@ -140,9 +140,9 @@ function change()
 	$tpl->assign('permanentLogin', $bPermanentLogin);
 	$user->setPermanentLogin($bPermanentLogin);
 
-	$bNoHTMLEditor = isset($_REQUEST['save']) ? isset($_REQUEST['noHTMLEditor']) : $user->getNoHTMLEditor();
-	$tpl->assign('noHTMLEditor', $bNoHTMLEditor);
-	$user->setNoHTMLEditor($bNoHTMLEditor);
+	$bNoWysiwygEditor = isset($_REQUEST['save']) ? isset($_REQUEST['noWysiwygEditor']) : $user->getNoWysiwygEditor();
+	$tpl->assign('noWysiwygEditor', $bNoWysiwygEditor);
+	$user->setNoWysiwygEditor($bNoWysiwygEditor);
 
 	$bUsermailSendAddress = isset($_REQUEST['save']) ? isset($_REQUEST['sendUsermailAddress']) : $user->getUsermailSendAddress();
 	$tpl->assign('sendUsermailAddress', $bUsermailSendAddress);
@@ -225,7 +225,7 @@ function assignFromUser($user)
 
 	$tpl->assign('usePMR', $user->getUsePMR());
 	$tpl->assign('permanentLogin', $user->getPermanentLogin());
-	$tpl->assign('noHTMLEditor', $user->getNoHTMLEditor());
+	$tpl->assign('noWysiwygEditor', $user->getNoWysiwygEditor());
 	$tpl->assign('sendUsermailAddress', $user->getUsermailSendAddress());
 }
 

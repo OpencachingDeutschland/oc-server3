@@ -531,6 +531,7 @@ class picture
 				$image->readImage($tmpFile);
 				if ($this->imagick_rotate($image))
 				{
+					$image->stripImage(); // clears exif, private data
 					$image->writeImage($this->getFilename());
 					$image->clear();
 					return true;

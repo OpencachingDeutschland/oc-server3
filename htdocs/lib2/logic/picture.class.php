@@ -463,14 +463,14 @@ class picture
         $longSideSize:  if longer side of picture > $longSideSize, then it will be prop. shrinked to
         returns: true if no error occur, otherwise false
     */
-    public function shrink($tmpFile,$longSideSize)
+    public function rotate_and_shrink($tmpFile,$longSideSize)
     {
         global $opt;
         if (extension_loaded('imagick')) {
             try {
-
                 $image = new Imagick();
                 $image->readImage($tmpFile);
+                $this->imagick_rotate($image);
                 $w=$image->getImageWidth();
                 $h=$image->getImageHeight();
                 $image->setImageResolution(PICTURE_RESOLUTION,PICTURE_RESOLUTION);
@@ -519,5 +519,45 @@ class picture
         }
         else return false;
     }
+
+	// rotate image according to EXIF orientation
+	public function rotate($tmpFile)
+	{
+		if (extension_loaded('imagick'))
+		{
+			try
+			{
+				$image = new Imagick();
+				$image->readImage($tmpFile);
+				if ($this->imagick_rotate($image))
+				{
+					$image->writeImage($this->getFilename());
+					$image->clear();
+					return true;
+				}
+				else
+					$image->clear();
+			}
+			catch (Exception $e)
+			{
+				if ($image) $image->clear();
+			}
+		}
+		return move_uploaded_file($tmpFile, $this->getFilename());
+	}
+
+	function imagick_rotate(&$image)
+	{
+		$exif = $image->getImageProperties();
+		if (isset($exif['exif:Orientation']))
+			switch ($exif['exif:Orientation'])
+			{
+				case 3: return $image->rotateImage(new ImagickPixel(), 180);
+				case 6: return $image->rotateImage(new ImagickPixel(), 90);
+				case 8: return $image->rotateImage(new ImagickPixel(), -90);
+			}
+		return false;
+	}
+
 }
 ?>

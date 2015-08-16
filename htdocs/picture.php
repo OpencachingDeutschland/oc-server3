@@ -122,23 +122,26 @@
 			if ($bError == false)
 			{
 				$picture->setLocal(1);
-				list($fname,$ext)=explode('.',$_FILES['file']['name'],2);
+				$fname = pathinfo($_FILES['file']['name'], PATHINFO_FILENAME);
+				$ext = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
+
 				// try saving file if smaller unchg_size and browser native format
 				if (in_array(mb_strtolower($ext), array('gif','png','jpg','jpeg'))
-				  &&($_FILES['file']['size'] < $opt['logic']['pictures']['unchg_size'])){
+				    && ($_FILES['file']['size'] <= $opt['logic']['pictures']['unchg_size']))
+				{
 					$picture->setFilenames($_FILES['file']['name']);
-				  	if (!move_uploaded_file($_FILES['file']['tmp_name'], $picture->getFilename()))
-					{
-							$bError = true;
-					}
+					if (!$picture->rotate($_FILES['file']['tmp_name']))
+						$bError = true;
 				}
 				// try saving as jpg and shrinking if > PICTURE_MAX_LONG_SIDE file
-				else {
+				else
+				{
 					$picture->setFilenames(mb_strtolower($fname).'.jpg');
-					if (!$picture->shrink($_FILES['file']['tmp_name'],PICTURE_MAX_LONG_SIDE)) $bError = true;
+					if (!$picture->rotate_and_shrink($_FILES['file']['tmp_name'], PICTURE_MAX_LONG_SIDE))
+					  $bError = true;
 				}
-				//try to save in db
-				if ( !$bError && $picture->save())
+				// try to save in db
+				if (!$bError && $picture->save())
 				{
 					if ($redirect == '')
 						$redirect = $picture->getPageLink();

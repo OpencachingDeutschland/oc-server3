@@ -37,6 +37,29 @@ $smileyimage = array(
 );
 
 
+$smileyname = array(
+	'smile',
+	'smile',
+	'wink',
+	'wink',
+	'laughing',
+	'cool',
+	'innocent',
+	'surprised',
+	'surprised',
+	'frown',
+	'frown',
+	'embarassed',
+	'cry',
+	'kiss',
+	'tongue-out',
+	'tongue-out',
+	'undecided',
+	'undecided',
+	'yell'
+);
+
+
 $smileytext = array(
 	" :) ",
 	" :-) ",

@@ -101,16 +101,14 @@
 		$rateOption = ($logType == 1 || $logType == 7) + 0;
 		
 		// get logtext editormode (from form or from userprofile)
-		// 1 = text; 2 = HTML; 3 = tinyMCE 
+		// 2 = HTML; 3 = tinyMCE 
 		if (isset($_POST['descMode']))
 			$descMode = $_POST['descMode']+0;  // Ocprop: 2
 		else
-		{
-			if ($user->getNoHTMLEditor() == 1)
-				$descMode = 1;
+			if ($user->getNoWysiwygEditor() == 1)
+				$descMode = 2;
 			else
 				$descMode = 3;
-		}
 		if (($descMode < 1) || ($descMode > 3))
 			$descMode = 3;
 		// add javascript-header if editor
@@ -119,6 +117,7 @@
 			$tpl->add_header_javascript('resource2/tinymce/tiny_mce_gzip.js');
 			$tpl->add_header_javascript('resource2/tinymce/config/log.js.php?lang='.strtolower($opt['template']['locale']));
 		}
+		$tpl->add_header_javascript('templates2/' . $opt['template']['style'] . '/js/editor.js');
 		
 		// check and prepare log text
 		if ($descMode != 1)
@@ -204,7 +203,6 @@
 				$cacheLog->setType($logType);
 				$cacheLog->setDate($logDate);
 				$cacheLog->setText($logText);
-				$cacheLog->setTextHtml(($descMode != 1) ? 1 : 0);
 				$cacheLog->setTextHtmlEdit(($descMode == 3) ? 1 : 0);
 				$cacheLog->setOcTeamComment($ocTeamComment);
 				

@@ -15,6 +15,7 @@
 	$login->verify();
 	if ($login->userid == 0)
 		$tpl->redirect('login.php?target=' . urlencode($tpl->target));
+	$user = new user($login->userid);
 
 	$list_name = isset($_REQUEST['list_name']) ? trim($_REQUEST['list_name']) : '';
 	$list_visibility = isset($_REQUEST['list_visibility']) ? $_REQUEST['list_visibility'] + 0 : 0;
@@ -22,9 +23,13 @@
 	$list_caches = isset($_REQUEST['list_caches']) ? strtoupper(trim($_REQUEST['list_caches'])) : '';
 	$watch = isset($_REQUEST['watch']);
 	$desctext = isset($_REQUEST['desctext']) ? $_REQUEST['desctext'] : '';
-	$descMode = isset($_REQUEST['descMode']) ? min(3,max(2,$_REQUEST['descMode']+0)) : 3;
 	$switchDescMode = isset($_REQUEST['switchDescMode']) && $_REQUEST['switchDescMode'] == 1;
 	$fromsearch = isset($_REQUEST['fromsearch']) && $_REQUEST['fromsearch'] == 1;
+
+	if (isset($_REQUEST['descMode']))
+		$descMode = min(3,max(2,$_REQUEST['descMode']+0));
+	else
+		$descMode = $user->getNoWysiwygEditor() ? 2 : 3;
 
 	$edit_list = false;
 	$name_error = false;
@@ -161,6 +166,7 @@
 		$tpl->add_header_javascript('resource2/tinymce/tiny_mce_gzip.js');
 		$tpl->add_header_javascript('resource2/tinymce/config/list.js.php?lang='.strtolower($opt['template']['locale']));
 	}
+	$tpl->add_header_javascript('templates2/' . $opt['template']['style'] . '/js/editor.js');
 	if ($edit_list)
 	{
 		$tpl->assign('edit_list', true);

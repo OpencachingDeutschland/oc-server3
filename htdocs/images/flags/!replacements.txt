@@ -1,5 +1,0 @@
-Languages are currently symbolized by national flags in OC software, which
-are then accessed via ISO 639-1 country codes. As workaround for this, 
-"language flags" like da.gif (Danisch) and ja.gif (Japanese) are present here.
-
-See ticket #4011 for more explanations.

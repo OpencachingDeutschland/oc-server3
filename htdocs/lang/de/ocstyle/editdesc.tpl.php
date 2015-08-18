@@ -43,7 +43,8 @@
 		<td>
 			<select name="desclang">
 				{desclangs}
-			</select>{show_all_langs_submit}
+			</select>
+			{show_all_langs_submit}
 		</td>
 	</tr>
 	<tr><td class="spacer" colspan="2"></td></tr>

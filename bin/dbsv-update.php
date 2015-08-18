@@ -528,6 +528,12 @@
 		sql("ALTER TABLE `user` CHANGE COLUMN `no_htmledit_flag` `no_htmledit_flag` tinyint(1) NOT NULL default '0' COMMENT 'inverted meaning'");
 	}
 
+	function dbv_131()  // add native language names (#109)
+	{
+		if (!sql_field_exists('languages','native'))
+			sql("ALTER TABLE `languages` ADD COLUMN `native_name` VARCHAR(60) NOT NULL AFTER `trans_id`");
+	}
+
 
 	// When adding new mutations, take care that they behave well if run multiple
 	// times. This improves robustness of database versioning.

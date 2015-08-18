@@ -336,22 +336,20 @@ function showalllists()
 <!-- Description -->
 <div class="content2-container bg-blue02">
 	<p class="content-title-noshade-size2">
-		<img src="resource2/{$opt.template.style}/images/description/22x22-description.png" style="margin-right: 10px;" width="22" height="22" alt="{t}Description{/t}" /> {t}Description{/t}&nbsp;&nbsp;
+		<img src="resource2/{$opt.template.style}/images/description/22x22-description.png" style="margin-right: 10px;" width="22" height="22" alt="{t}Description{/t}" /> {t}Description{/t}&nbsp;&nbsp;&nbsp;
+		<span class="content-title-link" style="font-weight:bold" >
 		{foreach from=$cache.desclanguages item=desclanguagesItem name=desclanguagesItem}
-			{strip}
-				{if $smarty.foreach.desclanguagesItem.first==false},&nbsp;{/if}
-				<img src="images/flags/{$desclanguagesItem|lower}.gif" style="vertical-align:middle" />&nbsp;
-				<a href="viewcache.php?wp={$cache.wpoc}&desclang={$desclanguagesItem|escape}">
-					{if $cache.desclanguage==$desclanguagesItem}
-						<i>{$desclanguagesItem|escape}</i>
-					{else}
-						{$desclanguagesItem|escape}
+				{if $smarty.foreach.desclanguagesItem.first==false} &nbsp;&middot;&nbsp; {/if}
+				{if $cache.desclanguage==$desclanguagesItem.code}
+					<span class="txt-black" >{$desclanguagesItem.native_name|escape}</span>
+					{if $desclanguagesItem.name != $desclanguagesItem.native_name}
+						<span style="font-weight:normal" class="txt-black">({$desclanguagesItem.name})</span>
 					{/if}
-				</a>
-			{/strip}
-		{foreachelse}
-			<b>{$cache.desclanguage|escape}</b>
-		{/foreach}  		
+				{else}
+					<a href="viewcache.php?wp={$cache.wpoc}&desclang={$desclanguagesItem.code|escape}" class="systemlink" title="{$desclanguagesItem.name}" >{$desclanguagesItem.native_name|escape}</a>
+				{/if}
+		{/foreach}
+		</span>
   </p>
 </div>
 

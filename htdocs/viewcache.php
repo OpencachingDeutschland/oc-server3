@@ -175,7 +175,18 @@ function getChildWaypoints($cacheid)
 
 	$rCache['adminlog'] = !$rCache['log_allowed'] && ($login->admin & ADMIN_USER);
 
-	$rCache['desclanguages'] = explode(',', $rCache['desclanguages']);
+	$rs = sql("
+		SELECT `short` `code`, `native_name`, `stt`.`text` AS `name`
+		FROM `languages`
+		JOIN `cache_desc` ON `cache_desc`.`language`=`languages`.`short`
+		LEFT JOIN `sys_trans_text` `stt` ON `stt`.`trans_id`=`languages`.`trans_id` AND `stt`.`lang`='&2'
+		WHERE `cache_desc`.`cache_id`='&1'",
+		$cacheid, $opt['template']['locale']);
+	$desclanguages = sql_fetch_assoc_table($rs);
+	if (count($desclanguages) == 1 && $desclanguages[0]['code'] == $opt['template']['locale'])
+		$rCache['desclanguages'] = array();
+	else
+		$rCache['desclanguages'] = $desclanguages;
 
 	$rCache['sizeName'] = labels::getLabelValue('cache_size', $rCache['size']);
 	$rCache['statusName'] = labels::getLabelValue('cache_status', $rCache['status']);

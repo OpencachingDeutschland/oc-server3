@@ -502,15 +502,6 @@
 		mysql_free_result($rs);
 	}
 
-	function dbv_130()  // discarded text editor mode (#236)
-	{
-		sql("ALTER TABLE `cache_desc` CHANGE COLUMN `desc_html` `desc_html` tinyint(1) NOT NULL default '1' COMMENT 'obsolete'");
-		sql("ALTER TABLE `cache_desc` CHANGE COLUMN `desc_htmledit` `desc_htmledit` tinyint(1) NOT NULL default '1'");
-		sql("ALTER TABLE `cache_logs` CHANGE COLUMN `text_html` `text_html` tinyint(1) NOT NULL default '1' COMMENT 'obsolete'");
-		sql("ALTER TABLE `cache_logs` CHANGE COLUMN `text_htmledit` `text_htmledit` tinyint(1) NOT NULL default '1'");
-		sql("ALTER TABLE `user` CHANGE COLUMN `no_htmledit_flag` `no_htmledit_flag` tinyint(1) NOT NULL default '0' COMMENT 'inverted meaning'");
-	}
-
 	function dbv_129()  // cache list passwords & bookmarking
 	{
 		if (!sql_field_exists('cache_lists','password'))
@@ -526,6 +517,15 @@
 				  KEY `user_id` (`user_id`)
 				) ENGINE=MyISAM DEFAULT CHARSET=utf8");
 		}
+	}
+
+	function dbv_130()  // discarded text editor mode (#236)
+	{
+		sql("ALTER TABLE `cache_desc` CHANGE COLUMN `desc_html` `desc_html` tinyint(1) NOT NULL default '1' COMMENT 'obsolete'");
+		sql("ALTER TABLE `cache_desc` CHANGE COLUMN `desc_htmledit` `desc_htmledit` tinyint(1) NOT NULL default '1'");
+		sql("ALTER TABLE `cache_logs` CHANGE COLUMN `text_html` `text_html` tinyint(1) NOT NULL default '1' COMMENT 'obsolete'");
+		sql("ALTER TABLE `cache_logs` CHANGE COLUMN `text_htmledit` `text_htmledit` tinyint(1) NOT NULL default '1'");
+		sql("ALTER TABLE `user` CHANGE COLUMN `no_htmledit_flag` `no_htmledit_flag` tinyint(1) NOT NULL default '0' COMMENT 'inverted meaning'");
 	}
 
 

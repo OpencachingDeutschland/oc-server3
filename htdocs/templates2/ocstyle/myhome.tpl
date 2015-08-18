@@ -140,7 +140,9 @@ function myHomeLoad()
 			{/foreach}
 			<tr>
 				<td colspan="4"><b><span style="line-height:2em">{t}Your geocaches hidden{/t}</b><span id="toggle_archived_option" style="display:none">{if $archived>0} (<a href="javascript:toggle_archived()" style="outline:none"><span id="hide_archived">{t}hide archived{/t}</span><span id="show_archived" style="display:none">{t}show archived{/t}</span></a>){/if}</span>:</span></td>
-				<td colspan="2" style="text-align:right"><span style="line-height:2em"><b>{t}Finds{/t} / {t}Last log{/t}</b></span></td>
+				<td style="text-align:right"><span style="line-height:2em"><img src="images/rating-star.gif" width="17" height="16" title="{t}with recommendation{/t}" /></td>
+				<td style="text-align:right"><span style="line-height:2em"><img src="resource2/{$opt.template.style}/images/log/16x16-found.png" alt="{t}Found{/t}" title="{t}Found{/t}"  /></td>
+				<td style="text-align:left"><span style="line-height:2em"><b>{t}Last log{/t}</b></span></td>
 			</tr>
 			{foreach from=$caches item=cacheItem}
 				{if $dotfill == ''}
@@ -153,7 +155,9 @@ function myHomeLoad()
 					<td class="{$listcolor}" style="text-align:center"><nobr>{$cacheItem.date_hidden|date_format:$opt.format.datelong}&nbsp;</nobr></td>
 					<td class="{$listcolor}">{include file="res_cachestatus.tpl" status=$cacheItem.status}</td>
 					<td class="{$listcolor}" style="{if strlen($cacheItem.name) < 45}white-space:nowrap;{/if}min-width:300px;max-width:{if $dotfill==''}400{else}300{/if}px;overflow:hidden;"><a href="viewcache.php?wp={$cacheItem.wp_oc}">{$cacheItem.name|escape}</a>{if strlen($cacheItem.name) < 45} &nbsp;&nbsp; <span style="color:#b0b0b0">{$dotfill}</span>{/if}</td>
-					<td class="{$listcolor}" style="text-align:right;" align="right"><nobr>&nbsp;&nbsp;{if $cacheItem.found>0}{$cacheItem.found}{/if} &nbsp;&nbsp; <a href="viewcache.php?cacheid={$cacheItem.cache_id}#logentries">{$cacheItem.lastlog|date_format:$opt.format.date}</a>&nbsp; {include file="res_logtype.tpl" type=$cacheItem.lastlog_type}</nobr></td>
+					<td class="{$listcolor}" style="text-align:right;" align="right"><nobr>{if $cacheItem.found>0}{$cacheItem.toprating}{/if}</nobr></td>
+					<td class="{$listcolor}" style="text-align:right;" align="right"><nobr>{if $cacheItem.found>0}{$cacheItem.found}{/if}</nobr></td>
+					<td class="{$listcolor}" style="text-align:right;" align="right"><nobr><a href="viewcache.php?cacheid={$cacheItem.cache_id}#logentries">{$cacheItem.lastlog|date_format:$opt.format.date}</a>&nbsp; {include file="res_logtype.tpl" type=$cacheItem.lastlog_type}</nobr></td>
 				</tr>
 			{/foreach}
 			<tr><td class="spacer" colspan="3"></td></tr>

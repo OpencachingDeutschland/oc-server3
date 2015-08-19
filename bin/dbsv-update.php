@@ -530,7 +530,7 @@
 
 	function dbv_131()  // add native language names (#109)
 	{
-		if (!sql_field_exists('languages','native'))
+		if (!sql_field_exists('languages','native_name'))
 			sql("ALTER TABLE `languages` ADD COLUMN `native_name` VARCHAR(60) NOT NULL AFTER `trans_id`");
 	}
 

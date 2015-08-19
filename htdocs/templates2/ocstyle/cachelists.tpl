@@ -29,11 +29,11 @@
 			<form method="get" action="cachelists.php">
 				<table class="table" >
 					<tr>
-						<td>{t}List name{/t}:</td>
+						<td>{t}List name:{/t}</td>
 						<td><input id="name_filter" name="name" value="{$name_filter}" class="input170" /></td>
 					</tr>
 					<tr>
-						<td>{t}By{/t}:</td>
+						<td>{t}By:{/t}</td>
 						<td><input id="by_filter" name="by" value="{$by_filter}" class="input170" /></td>
 					</tr>
 					<tr><td class="separator"></td></tr>

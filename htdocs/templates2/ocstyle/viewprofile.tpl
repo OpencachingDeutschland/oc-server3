@@ -33,17 +33,17 @@
 
 	{if $showcountry==true}
 		<tr>
-			<td><b>{t}Country{/t}:</b></td>
+			<td><b>{t}Country:{/t}</b></td>
 			<td>{$country|escape}</td>
 		</tr>
 	{/if}
 
 	<tr>
-		<td><b>{t}Registered&nbsp;since{/t}:</b></td>
+		<td><b>{t}Registered&nbsp;since:{/t}</b></td>
 		<td>{$registered|date_format:$opt.format.date}</td>
 	</tr>
 	<tr>
-		<td style="vertical-align:top"><b>{t}Last&nbsp;login{/t}:</b></td>
+		<td style="vertical-align:top"><b>{t}Last&nbsp;login:{/t}</b></td>
 		{if $lastlogin==1}
 			<td>{t}Within the last month{/t}</td>
 		{elseif $lastlogin==2}
@@ -68,7 +68,7 @@
 	{foreach from=$useroptions item=optionItem}
 		<tr>
 			{if $optionItem.option_id != 3}
-				<td style="vertical-align:top;"><b>{$optionItem.name|escape}:</b></td>
+				<td style="vertical-align:top;"><b>{$optionItem.name|escape}{t}#colonspace#{/t}:</b></td>
 				<td style="vertical-align:top;">{$optionItem.option_value|escape|nl2br}</td>
 			{/if}
 		</tr>
@@ -76,7 +76,7 @@
 
 	{if $pmr==1}
 		<tr>
-			<td style="vertical-align:top;"><b>{t}Others{/t}:</b></td>
+			<td style="vertical-align:top;"><b>{t}Others:{/t}</b></td>
 			<td>
 				{t}I'm taking an PMR radio on channel 2 with me{/t}<br />
 			</td>
@@ -152,10 +152,9 @@
 	         logpics=$oconly_logpics
 	         regionstat=$oconly_regionstat}
 
-	<tr><td class="spacer"></td></tr>
-	<tr><td class="spacer"></td></tr>
-
 	{if $show_oconly81}
+		<tr><td class="spacer"></td></tr>
+		<tr><td class="spacer"></td></tr>
 		<tr id="oconly81">
 			<td colspan="3">
 				{include file="res_oconly81.tpl" userid=$userid}
@@ -165,14 +164,17 @@
 		<tr>
 			<td valign="middle" class="header-small" style="white-space:nowrap" width="1%">
 				<img src="resource2/ocstyle/images/log/16x16-found.png" style="padding-right:2px"  />
-				&nbsp;<b>{t}OConly-81 statistics{/t}:</b>
+				&nbsp;<b>{t}OConly-81 statistics:{/t}</b>
 			</td>
 			<td valign="middle">
 				{t}inactive{/t} (<a href="oconly81.php">{t}Info{/t}</a>)
 			</td>
 		</tr>
 		<tr><td class="spacer"></td></tr>
+		<tr><td class="spacer"></td></tr>
 	{/if}
+	<tr><td class="spacer"></td></tr>
+	<tr><td class="spacer"></td></tr>
 
 </table>
 

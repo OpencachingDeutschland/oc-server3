@@ -11,7 +11,7 @@
 	{/foreach}
 {else}
 	<p>
-		{t}Languages{/t}:&nbsp; 
+		{t}Languages:{/t}&nbsp; 
 		{foreach from=$languages item=languageItem}
 			{if $languageItem==$translang}
 				<b>{$languageItem}</b>

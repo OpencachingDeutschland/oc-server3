@@ -205,7 +205,7 @@
 			{/if}
 
 			<tr>
-				<td class="public-setting">{t}Registered since{/t}:</td>
+				<td class="public-setting">{t}Registered since:{/t}</td>
 				<td class="public-setting">{$registeredSince|date_format:$opt.format.datelong}</td>
 			</tr>
 

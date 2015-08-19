@@ -11,10 +11,10 @@
 
 <div class="content-txtbox-noshade">
 	<p style="line-height: 1.6em;">{t}An error occured while processing the page. If you've called this page from an hyperlink on our site and this error persists some time, please contact us via E-Mail.{/t}</p>
-	<p style="line-height: 1.6em;"><strong>{t}The following error occured{/t}:</strong></p>
+	<p style="line-height: 1.6em;"><strong>{t}The following error occured:{/t}</strong></p>
 	<p style="line-height: 1.6em;">
-		{t}Site{/t}: {$page|escape}<br/>
-		{t}Error message{/t}:
+		{t}Page:{/t} {$page|escape}<br/>
+		{t}Error message:{/t}
 
 		{if $id==ERROR_UNKNOWN}
 			({$id}) {t}An unkown error occured.{/t}
@@ -31,7 +31,7 @@
 		{elseif $id==ERROR_INVALID_OPERATION}
 			({$id}) {t}Sorry, the requested operation cannot be performed.{/t}
 		{elseif $id==ERROR_LOGIN_REQUIRED}
-			({$id}) {t}Sorry, the requested operation cannot be performed because you are not logged in with an user account.{/t}
+			({$id}) {t}Please login to continue:{/t}
 		{elseif $id==ERROR_USER_NOT_EXISTS}
 			({$id}) {t}Sorry, the requested user does not exist.{/t}
 		{elseif $id==ERROR_USER_NOT_ACTIVE}

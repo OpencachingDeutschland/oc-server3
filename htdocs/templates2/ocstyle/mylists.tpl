@@ -58,7 +58,7 @@
 			<tr><td class="separator"></td></tr>
 			<tr><td class="separator"></td></tr>
 			<tr>
-				<td>{t}Name{/t}:</td>
+				<td>{t}Name:{/t}</td>
 				<td><input type="text" id="list_name" name="list_name" maxlength="80" value="{$list_name}" class="input500" /></td>
 			</tr>
 			{if $name_error}
@@ -68,15 +68,15 @@
 			{/if}
 			<tr><td class="separator"></td></tr>
 			<tr>
-				<td style="vertical-align:top">{t}Status{/t}:</td>
-				<td><input type="radio" class="radio" id="s_private" name="list_visibility" value="0" {if $list_visibility==0}checked="checked"{/if} onchange="state_changed()" onfocus="state_changed()" {* old MSIE versions need onfocus(), onchange() wont work properly *} /><label for="s_private">{t}private{/t}</label><span id="list_password_data" > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {t}Password for sharing{/t}: &nbsp;<input type="text" id="list_password" name="list_password" maxlength="80" value="{$list_password}" class="input200" /></span><br /> 
+				<td style="vertical-align:top">{t}State:{/t}</td>
+				<td><input type="radio" class="radio" id="s_private" name="list_visibility" value="0" {if $list_visibility==0}checked="checked"{/if} onchange="state_changed()" onfocus="state_changed()" {* old MSIE versions need onfocus(), onchange() wont work properly *} /><label for="s_private">{t}private{/t}</label><span id="list_password_data" > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {t}Password for sharing:{/t} &nbsp;<input type="text" id="list_password" name="list_password" maxlength="80" value="{$list_password}" class="input200" /></span><br /> 
 				{* visibility 2 is reserve for friends *}<input type="radio" class="radio" id="s_public" name="list_visibility" value="2" {if $list_visibility==2}checked="checked"{/if} onchange="state_changed()" onfocus="state_changed()"  /><label for="s_public">{t}public{/t}</label><br />
 				<input type="radio" class="radio" id="s_public3" name="list_visibility" value="3" {if $list_visibility==3}checked="checked"{/if} onchange="state_changed()" onfocus="state_changed()" /><label for="s_public3" >{t}public{/t} + {t}visible for all users in cache listings{/t}</label><br />				
 				</td>
 			</tr>
 			<tr><td class="separator"></td></tr>
 			<tr>
-				<td>{t}Watch{/t}:</td>
+				<td>{t}Watch:{/t}</td>
 				<td><input type="checkbox" class="checkbox" id="watch" name="watch" value="1" {if $watch}checked="checked"{/if} /> <label for="watch">{t}I want to receive notifications about any logs for caches in this list.{/t}</label></td>
 			</tr>
 			<tr><td class="separator"></td></tr>
@@ -87,7 +87,7 @@
 			</tr>
 			<tr>
 				<td style="vertical-align:top; padding-top:0.2em;">
-					{t}Description{/t}:<br />
+					{t}Description:{/t}<br />
 					<div id="desc2" class="menuBar" style="margin-top:12px; {if $desctext=='' && !$show_editor}display:none{/if}" >
 						<nobr>
 						<span id="descHtmlEdit" class="buttonNormal" onclick="btnSelect(3)" onmouseover="btnMouseOver(3)" onmouseout="btnMouseOut(3)">{t}Editor{/t}</span>
@@ -102,13 +102,13 @@
 				<td id="desc3" style="{if $desctext=='' && !$show_editor}display:none{/if}" >
 					<textarea name="desctext" id="desctext" cols="70" rows="7" class="listdesc{$descMode}" >{$desctext}</textarea>
 					{if $descMode==2}<br />{/if}
-					<small>{t}By submitting I accept the <a href="articles.php?page=impressum#tos" target="_blank">Opencaching.de Terms of Service</a> and the <a href="articles.php?page=impressum#datalicense" target="_blank">Opencaching.de Datalicense</a>{/t}</small>
+					<span class="smalltext">{t}By submitting I accept the <a href="articles.php?page=impressum#tos" target="_blank">Opencaching.de Terms of Service</a> and the <a href="articles.php?page=impressum#datalicense" target="_blank">Opencaching.de Datalicense</a>{/t}</span>
 				</td>
 			</tr>
 			<tr><td class="separator"></td></tr>
 			<tr><td class="separator"></td></tr>
 			<tr>
-				<td style="vertical-align:top; white-space:nowrap">{if $edit_list}{t}Add caches{/t}{else}{t}Caches{/t}{/if}:</td>
+				<td style="vertical-align:top; white-space:nowrap">{if $edit_list}{t}Add caches:{/t}{else}{t}Caches:{/t}{/if}</td>
 				<td><input type="text" id="list_caches" name="list_caches" maxlength="1000" value="{$list_caches}" class="input500 waypoint" /><br /></td>
 			</tr>
 			<tr>
@@ -118,7 +118,7 @@
 			{if $edit_list && $caches|@count}
 				<tr><td class="separator"></td></tr>
 				<tr>
-					<td style="vertical-align:top; padding-top:0.6em">{t}Remove caches{/t}:</td>
+					<td style="vertical-align:top; padding-top:0.6em">{t}Remove caches:{/t}</td>
 					<td>
 						<table class="narrowtable">
 						{foreach from=$caches item=cache}

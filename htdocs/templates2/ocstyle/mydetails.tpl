@@ -34,7 +34,7 @@
 
 	{foreach from=$useroptions item=useropt}
 		<tr>
-			<td style="vertical-align:top; width:10px"><nobr>{$useropt.name|escape}:</nobr></td>
+			<td style="vertical-align:top; width:10px"><nobr>{$useropt.name|escape}{t}#colonspace#{/t}:</nobr></td>
 			<td>
 				{if $edit==true}
 					{if $useropt.option_input=="text"}

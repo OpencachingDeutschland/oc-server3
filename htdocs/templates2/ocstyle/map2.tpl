@@ -1170,11 +1170,11 @@ function parseXML_GetHTML(xmlobject)
 	if (sName.length > 60)
 		sHtml += "; white-space:normal";
 	sHtml += apos+"><a href=" +apos+"viewcache.php?wp="+encodeURI(sWPOC)+apos +" target='_blank'><font size='2'>" + xmlentities(sName) + "</font></a></td><td align='right' vertical-align:'top'><font size='2'><b>&nbsp;" + xmlentities(sWPOC) + "</b></font></td></tr>";
-	sHtml += "<tr><td colspan='2' style='vertical-align:top;'>{t escape=js}by{/t} <a href=" +apos+"viewprofile.php?userid="+encodeURI(nUserId)+apos+ " target='_blank'>" + xmlentities(sUsername) + "</a></td><td align='right'><a class='nooutline' href='articles.php?page=cacheinfo#difficulty' target='_blank'><img src=" + apos+"resource2/{$opt.template.style}/images/difficulty/diff-"+String(nDifficulty*10)+".gif"+apos + " border='0' width='19' height='16' hspace='2' onmouseover=" +apos+"Tip(\"{t}Difficulty{/t}: " + String(nDifficulty) + " {t}of{/t} 5\", DELAY, 0, FADEIN, false, FADEOUT, false, BGCOLOR, \"#fffedf\", BORDERCOLOR, \"grey\")"+apos+ " onmouseout='UnTip()' /><img src=" +apos+"resource2/{$opt.template.style}/images/difficulty/terr-"+String(nTerrain*10)+".gif"+apos + " border='0' width='19' height='16' hspace='2' onmouseover=" +apos+"Tip(\"{t}Terrain{/t}: " + String(nTerrain) + " {t}of{/t} 5\", DELAY, 0, FADEIN, false, FADEOUT, false, BGCOLOR, \"#fffedf\", BORDERCOLOR, \"grey\")"+apos+ " onmouseout='UnTip()' /></a></td></tr>";
+	sHtml += "<tr><td colspan='2' style='vertical-align:top;'>{t escape=js}by{/t} <a href=" +apos+"viewprofile.php?userid="+encodeURI(nUserId)+apos+ " target='_blank'>" + xmlentities(sUsername) + "</a></td><td align='right'><a class='nooutline' href='articles.php?page=cacheinfo#difficulty' target='_blank'><img src=" + apos+"resource2/{$opt.template.style}/images/difficulty/diff-"+String(nDifficulty*10)+".gif"+apos + " border='0' width='19' height='16' hspace='2' onmouseover=" +apos+"Tip(\"{t}Difficulty:{/t} " + String(nDifficulty) + " {t}of{/t} 5\", DELAY, 0, FADEIN, false, FADEOUT, false, BGCOLOR, \"#fffedf\", BORDERCOLOR, \"grey\")"+apos+ " onmouseout='UnTip()' /><img src=" +apos+"resource2/{$opt.template.style}/images/difficulty/terr-"+String(nTerrain*10)+".gif"+apos + " border='0' width='19' height='16' hspace='2' onmouseover=" +apos+"Tip(\"{t}Terrain:{/t} " + String(nTerrain) + " {t}of{/t} 5\", DELAY, 0, FADEIN, false, FADEOUT, false, BGCOLOR, \"#fffedf\", BORDERCOLOR, \"grey\")"+apos+ " onmouseout='UnTip()' /></a></td></tr>";
 	sHtml += "<tr><td colspan='3' height='3px'></td></tr>";
 
 	sHtml += "<tr><td colspan='2'>" + xmlentities(sTypeText) + " (" + xmlentities(sSizeText) + ")</td><td align='right' rowspan='2'>" + (bOconly==1 ? "{$help_oconly}<img src='resource2/ocstyle/images/misc/is_oconly_small.png' alt='OConly' title='OConly' /></a>" : "") + "</td></tr>";
-	sHtml += "<tr><td colspan='2'>" + (bIsPublishdate == true ? "{t escape=js}Published on{/t}:" : "{t escape=js}Listed since:{/t}") + " " + xmlentities(sListedSince) + "</td></tr>";
+	sHtml += "<tr><td colspan='2'>" + (bIsPublishdate == true ? "{t escape=js}Published on:{/t}" : "{t escape=js}Listed since:{/t}") + " " + xmlentities(sListedSince) + "</td></tr>";
 
 	sAddHtml = "";
 	if (bOwner==1)
@@ -2138,7 +2138,7 @@ function toggle_attribselection(bSaveCookies)
 		{* fullscreen header line *}
 		<div id="maplangstripe" class="maplangstripe mapboxshadow" style="position:absolute; left:0; right:0; height:41px; border-bottom:solid 1px grey; z-index:5;">
 			<div id="coordbox" class="mapcoord_fullscreen" style="z-index:10"></div>
-			<div id="mapstat_caches" class="mapstat_fullscreen" style="z-index:5">{t}Caches displayed{/t}: <span id="statCachesCount">0</span><span id="statLoadTime" style="display:none">0</span></div>
+			<div id="mapstat_caches" class="mapstat_fullscreen" style="z-index:5">{t}Caches displayed:{/t} <span id="statCachesCount">0</span><span id="statLoadTime" style="display:none">0</span></div>
 			<div style="position:absolute; top:0px; left:10px; right:180px; height:36px; z-index:15">
 	{else}
 		{* normal screen coords display *}
@@ -2217,7 +2217,7 @@ function toggle_attribselection(bSaveCookies)
 	{* popup box for permalink *}
 	<div id="permalink_box" class="mappermalink mapboxframe mapboxshadow" style="display:none">
 		<table>
-			<tr><td><img src="resource2/ocstyle/images/viewcache/link.png" alt="" height="16" width="16" /> {t}Link to this map view{/t}:</td><td align="right"><a href="javascript:permalinkbox_hide()"><img src="resource2/ocstyle/images/navigation/19x19-close.png" style="opacity:0.7" /></a></td></tr>
+			<tr><td><img src="resource2/ocstyle/images/viewcache/link.png" alt="" height="16" width="16" /> {t}Link to this map view:{/t}</td><td align="right"><a href="javascript:permalinkbox_hide()"><img src="resource2/ocstyle/images/navigation/19x19-close.png" style="opacity:0.7" /></a></td></tr>
 			<tr><td><input id="permalink_text" type="text" value="" size="55"/></td></tr>
 			<tr id="permalink_addFavorites"><td align="right"><input type="button" value="{t}Add to favorites...{/t}" onclick="addFavorites_click()" /></td></tr>
 		</table>
@@ -2248,17 +2248,17 @@ function toggle_attribselection(bSaveCookies)
 					<input type="hidden" name="submit" value="1" />
 					<table>
 						<tr><td><span style="font-size:1.2em; font-weight:bold">{t}Settings{/t}</strong></td><td style="text-align:right"><a href="javascript:toggle_settings()"><img src="resource2/ocstyle/images/navigation/19x19-close.png" style="opacity:0.7" /></a></tr>
-						<tr><td>{t}Menu option 'Map' shows{/t}:</td><td><select name="opt_menumap"><option id="opt_menumap0" value="0">{t}small map{/t}</option><option id="opt_menumap1" value="1">{t}fullscreen map{/t}</option></select></td></tr>
-						<tr><td>{t}Show overview map{/t}:</td><td><input type="checkbox" id="opt_overview" name="opt_overview" value="1" /></td></tr>
-						<tr><td>{t 1=$min_maxrecords 2=$max_maxrecords}Maximum caches on map<br />(%1-%2, 0=automatic){/t}:</td><td><input type="text" id="opt_maxcaches" name="opt_maxcaches" size="6" /></td></tr>
+						<tr><td>{t}Menu option 'Map' shows:{/t}</td><td><select name="opt_menumap"><option id="opt_menumap0" value="0">{t}small map{/t}</option><option id="opt_menumap1" value="1">{t}fullscreen map{/t}</option></select></td></tr>
+						<tr><td>{t}Show overview map:{/t}</td><td><input type="checkbox" id="opt_overview" name="opt_overview" value="1" /></td></tr>
+						<tr><td>{t 1=$min_maxrecords 2=$max_maxrecords}Maximum caches on map<br />(%1-%2, 0=automatic):{/t}</td><td><input type="text" id="opt_maxcaches" name="opt_maxcaches" size="6" /></td></tr>
 						{if $msie}
 							<tr><td colspan="2" style="padding-top:0; white-space:normal">
 								<img src="resource2/{$opt.template.style}/images/misc/hint.gif" alt="" />
 								<small>{t 1=$maxrecords}Max. %1 caches can be displayed with Microsoft Internet Explorer.{/t}
 							</td></tr>
 						{/if} 
-						<tr><td>{t}Cache icons{/t}:</td><td><select name="opt_cacheicons"><option id="opt_cacheicons1" value="1">{t}classic OC{/t}<option id="opt_cacheicons2" value="2">{t}OKAPI style{/t}</option></select></td></tr>
-						<tr><td>{t 1=$help_previewpics}Show %1preview pictures</a><br />(% of map area, 0=off){/t}:</td><td><input type="text" id="opt_pictures" name="opt_pictures" size="2" maxlength="2" /></td></tr>
+						<tr><td>{t}Cache icons:{/t}</td><td><select name="opt_cacheicons"><option id="opt_cacheicons1" value="1">{t}classic OC{/t}<option id="opt_cacheicons2" value="2">{t}OKAPI style{/t}</option></select></td></tr>
+						<tr><td>{t 1=$help_previewpics}Show %1preview pictures</a><br />(% of map area, 0=off):{/t}</td><td><input type="text" id="opt_pictures" name="opt_pictures" size="2" maxlength="2" /></td></tr>
 						<tr><td colspan="2">{if $login.userid>0}<input type="button" class="formbutton" value="{t}Cancel{/t}" onclick="toggle_settings()"/>&nbsp; <input type="submit" name="submitsettings" class="formbutton" value="{t}OK{/t}" onclick="submitbutton('submitsettings')" />{else}<em>{t}You must be logged in to change map settings.{/t}</em>{/if}</td></tr>
 					</table>
 				</form>
@@ -2338,7 +2338,7 @@ function toggle_attribselection(bSaveCookies)
 		</table>
 	{else}
 		<div class="buffer" style="width: 500px; height: 2px;">&nbsp;</div>
-		<div style="width:770px;text-align:right;"><span id="mapstat_caches">{t}Caches displayed{/t} <span id="statCachesCount">0</span></span>, {t}Time to load{/t} <span id="statLoadTime">0</span> {t}Sec.{/t}</div>
+		<div style="width:770px;text-align:right;"><span id="mapstat_caches">{t}Caches displayed:{/t} <span id="statCachesCount">0</span></span>, {t}Time to load:{/t} <span id="statLoadTime">0</span> {t}Sec.{/t}</div>
 		<div style="{if $queryid > 0}display:none{/if}">
 		<p id="filterboxtitle" class="content-title-noshade-size1">{t}Only show Geocaches with the following properties:{/t}</p>
 		<div class="buffer" style="width: 500px; height: 5px;">&nbsp;</div>
@@ -2458,7 +2458,7 @@ function toggle_attribselection(bSaveCookies)
 					<tr><td colspan="2"><span style="line-height: 5px;">&nbsp;</span></td></tr>
 					</tr>
 					<tr>
-						<td {if $bFullscreen}colspan="2"{/if}>{t}Difficulty{/t}:</td>
+						<td {if $bFullscreen}colspan="2"{/if}>{t}Difficulty:{/t}</td>
 						{if $bFullscreen}</tr><tr><td colspan="2" style="white-space:nowrap; text-align:right">{else}<td>{/if}
 							<select id="difficultymin" name="difficultymin" onchange="filter_changed()">
 								<option value="0" selected="selected">-</option>
@@ -2489,7 +2489,7 @@ function toggle_attribselection(bSaveCookies)
 					</tr>
 					{if $bFullscreen}<tr><td style="height:4px"></td></tr>{/if}
 					<tr>
-						<td {if $bFullscreen}colspan="2"{/if}>{t}Terrain{/t}:</td>
+						<td {if $bFullscreen}colspan="2"{/if}>{t}Terrain:{/t}</td>
 							{if $bFullscreen}</tr><tr><td colspan="2" style="white-space:nowrap; text-align:right">{else}<td>{/if}
 							<select id="terrainmin" name="terrainmin" onchange="filter_changed()">
 								<option value="0" selected="selected">-</option>
@@ -2520,7 +2520,7 @@ function toggle_attribselection(bSaveCookies)
 					</tr>
 					{if $bFullscreen}<tr><td>&nbsp;</td></tr>{/if}
 					<tr>
-						<td>{t}Min. recommendations{/t}:</td>
+						<td>{t}Min. recommendations:{/t}</td>
 						<td>
 							<select id="recommendationmin" name="recommendationmin" onchange="filter_changed()">
 								<option value="0" selected="selected">-</option>

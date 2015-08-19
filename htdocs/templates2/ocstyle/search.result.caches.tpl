@@ -65,7 +65,7 @@
 				<table width="98.5%">
 					<tr>
 						<td rowspan="1" style="width:300px; padding:0; margin:0">{include file="res_pager.tpl" smallnumbers=true}</td>
-						<td style="text-align:right; padding:0; margin:0">{t}Download{/t}:&nbsp;</td>
+						<td style="text-align:right; padding:0; margin:0">{t}Download{/t}{t}#colonspace#{/t}:&nbsp;</td>
 						<td><nobr>
 							<select class="exportlist" onChange="location.href=this.options[this.selectedIndex].value">
 								<option value="#">{t}Results on this page{/t}</option>
@@ -129,7 +129,7 @@
 	{if $caches|@count}
 	<table width="100%">
 		<tr>
-			<td style="text-align:right; width:50%">{t}Download{/t}:&nbsp;&nbsp;</td>
+			<td style="text-align:right; width:50%">{t}Download{/t}{t}#colonspace#{/t}:&nbsp;&nbsp;</td>
 			<td align="right" style="padding-right:20px; white-space:nowrap">
 				<b>{t}Results on this page:{/t}</b>
 				<a href="search.php?queryid={$queryid}&output=gpx&startat={$startat}" title="{t}GPS Exchange Format .gpx{/t}">GPX</a>
@@ -139,7 +139,7 @@
 				<a href="search.php?queryid={$queryid}&output=ovl&startat={$startat}" title="{t}TOP50-Overlay .ovl{/t}">OVL</a>
 				<a href="search.php?queryid={$queryid}&output=txt&startat={$startat}" title="{t}Textfile .txt{/t}">TXT</a>
 				<br />
-				<b>{t 1=$startatp1 2=$endat}Result %1 to %2 (as zip){/t}:</b>
+				<b>{t 1=$startatp1 2=$endat}Result %1 to %2 (as zip):{/t}</b>
 				<a href="search.php?queryid={$queryid}&output=gpx&startat={$startat}&count=max&zip=1" title="{t}GPS Exchange Format .gpx{/t}">GPX</a>
 				<a href="search.php?queryid={$queryid}&output=loc&startat={$startat}&count=max&zip=1" title="{t}Waypointfile .loc{/t}">LOC</a>
 				<a href="search.php?queryid={$queryid}&output=kml&startat={$startat}&count=max&zip=1" title="{t}Google Earth .kml{/t}">KML</a>

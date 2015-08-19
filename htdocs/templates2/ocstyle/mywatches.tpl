@@ -52,7 +52,7 @@
 			<tr>
 				<td>{t}Delivery:{/t}</td>
 				<td>
-					<select id="interval" name="interval" onChange="intervalChanged();" class="input100">
+					<select id="interval" name="interval" onChange="intervalChanged();">
 						<option value="0" {if $interval==0}selected="selected"{/if}>{t}Immediate{/t}</option>
 						<option value="1" {if $interval==1}selected="selected"{/if}>{t}Daily{/t}</option>
 						<option value="2" {if $interval==2}selected="selected"{/if}>{t}Weekly{/t}</option>
@@ -76,7 +76,7 @@
 			<tr>
 				<td>{t}Sent day:{/t}</td>
 				<td>
-					<select id="weekday" name="weekday" class="input100">
+					<select id="weekday" name="weekday">
 						{foreach from=$weekdays item=weekdayItem}
 							<option value="{$weekdayItem.value}" {if $weekdayItem.value==$weekday}selected="selected"{/if}>{$weekdayItem.time|date_format:"%A"}</option>
 						{/foreach}
@@ -120,7 +120,7 @@
 	</div>
 
 	{if $cachelists|@count}
-		<p>{t}Single caches{/t}:</p>
+		<p>{t}Single caches:{/t}</p>
 	{/if}
 
 	<table class="null" border="0" cellspacing="0" width="98%">
@@ -158,7 +158,7 @@
 	</table>
 
 	{if $cachelists|@count}
-		<p><br />{t}Lists{/t}:</p>
+		<p><br />{t}Lists:{/t}</p>
 		{include file="res_cachelists.tpl"}
 	{/if}
 {/if}

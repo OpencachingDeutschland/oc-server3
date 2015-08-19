@@ -11,7 +11,7 @@
 
 <form method="post" action="adminuser.php">
 	<input type="hidden" name="action" value="searchuser" />
-		<p style="line-height: 1.6em;"><strong>{t}Username or email address{/t}:</strong> &nbsp;<input type="text" name="username" size="30" value="{$username|escape}" /></p>
+		<p style="line-height: 1.6em;"><strong>{t}Username or email address:{/t}</strong> &nbsp;<input type="text" name="username" size="30" value="{$username|escape}" /></p>
 		
 		{if $error=='userunknown'}
 			<p style="line-height: 1.6em; color: red; font-weight: bold;">{t}Username unknown{/t}</p>
@@ -52,7 +52,7 @@
 				<td>{$user.date_created|date_format:$opt.format.date}</td>
 			</tr>
 			<tr>
-				<td>{t}Last modified{/t}:</td>
+				<td>{t}Last modified{/t}{t}#colonspace#{/t}:</td>
 				<td>{$user.last_modified|date_format:$opt.format.date}</td>
 			</tr>
 			<tr>
@@ -84,7 +84,7 @@
 				<td>{$user.last_name|escape}</td>
 			</tr>
 			<tr>
-				<td>{t}Logentries:{/t}</td>
+				<td>{t}Log entries:{/t}</td>
 				<td>{$user.logentries}
 				    {if $user.deleted_logentries > 0}&nbsp;(+ {$user.deleted_logentries} {t}deleted{/t} / {t}archived{/t}){/if}
 				</td>
@@ -98,7 +98,7 @@
 				<td>{$user.hidden_active|escape} &nbsp; &ndash; &nbsp; <a href="ownerlogs.php?userid={$user.user_id|escape}">{t}Show log history{/t}</a></td>
 			</tr>
 			<tr>
-				<td>{t}Cache reports{/t}:</td>
+				<td>{t}Cache reports{/t}{t}#colonspace#{/t}:</td>
 				<td>{$user.reports|escape}</td>
 			</tr>
 			<tr>

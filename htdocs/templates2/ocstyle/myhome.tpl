@@ -67,7 +67,7 @@ function myHomeLoad()
 	</div>
 
 	{* Ocprop: (find|us|own)erid=([0-9]+) *}
-	<p style="line-height: 1.6em;"><b>{t}Your latest log entries{/t}{if $morelogs} </b>(<a class="systemlink" href="ownlogs.php">{t}more{/t}</a>):{else}:</b>{/if}</p>
+	<p style="line-height: 1.6em;"><b>{t}Your latest log entries{/t}{if $morelogs} </b>(<a class="systemlink" href="ownlogs.php">{t}more{/t}</a>){t}#colonspace#{/t}:{else}{t}#colonspace#{/t}:</b>{/if}</p>
 
 	<table class="table">
 		{foreach from=$logs item=logItem}
@@ -102,10 +102,10 @@ function myHomeLoad()
 {else}
 	<p style="line-height: 1.6em;">
 		{if !$allpics}
-			 <b>{t}Your latest log pictures{/t}:</b></p>
+			 <b>{t}Your latest log pictures:{/t}</b></p>
 			{assign var=maxlines value=1}
 		{else}
-			{assign var=subtitle value="{t}Your log pictures{/t}:"}
+			{assign var=subtitle value="{t}Your log pictures:{/t}"}
 			{assign var=maxlines value=0}
 		{/if}
 	</p>
@@ -139,7 +139,7 @@ function myHomeLoad()
 				{/if}
 			{/foreach}
 			<tr>
-				<td colspan="4"><b><span style="line-height:2em">{t}Your geocaches hidden{/t}</b><span id="toggle_archived_option" style="display:none">{if $archived>0} (<a href="javascript:toggle_archived()" style="outline:none"><span id="hide_archived">{t}hide archived{/t}</span><span id="show_archived" style="display:none">{t}show archived{/t}</span></a>){/if}</span>:</span></td>
+				<td colspan="4"><b><span style="line-height:2em">{t}Your geocaches hidden{/t}</b><span id="toggle_archived_option" style="display:none">{if $archived>0} (<a href="javascript:toggle_archived()" style="outline:none"><span id="hide_archived">{t}hide archived{/t}</span><span id="show_archived" style="display:none">{t}show archived{/t}</span></a>){/if}</span>{t}#colonspace#{/t}:</span></td>
 				<td style="text-align:right"><span style="line-height:2em"><img src="images/rating-star.gif" width="17" height="16" title="{t}with recommendation{/t}" /></td>
 				<td style="text-align:right"><span style="line-height:2em"><img src="resource2/{$opt.template.style}/images/log/16x16-found.png" alt="{t}Found{/t}" title="{t}Found{/t}"  /></td>
 				<td style="text-align:left"><span style="line-height:2em"><b>{t}Last log{/t}</b></span></td>

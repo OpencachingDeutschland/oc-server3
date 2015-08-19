@@ -411,8 +411,8 @@ td div.mediumspacer { height:6px; }
 .txt-white {color: rgb(255,255,255);}
 .txt-black {color: rgb(75,75,75);}
 .boldtext { font-weight:bold; color:#505050; }
-.smalltext { font-size:10px !important }
-.mediumsmalltext { font-size:11px !important }
+.smalltext { font-size:10px !important; line-height:1.4em; }
+.mediumsmalltext { font-size:11px !important; }
 
 div.default { font-size:110%; }
 td.default { font-size:12px; }

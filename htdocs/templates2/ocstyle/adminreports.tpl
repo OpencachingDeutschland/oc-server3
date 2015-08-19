@@ -64,10 +64,10 @@
 		{$external_maintainer_msg}
 		</p>
 		{if $created != null}
-			<p style="line-height: 1.6em;"><b>{t}Created at{/t}:</b>&nbsp;{$created|date_format:$opt.format.datelong}</p>
+			<p style="line-height: 1.6em;"><b>{t}Created at:{/t}</b>&nbsp;{$created|date_format:$opt.format.datelong}</p>
 		{/if}
 		{if $lastmodified != $created}
-			<p style="line-height: 1.6em;"><b>{t}Last modified{/t}:</b>&nbsp;{$lastmodified|date_format:$opt.format.datelong}</p>
+			<p style="line-height: 1.6em;"><b>{t}Last modified{/t}{t}#colonspace#{/t}</b>&nbsp;{$lastmodified|date_format:$opt.format.datelong}</p>
 		{/if}
 		<p style="line-height: 1.6em;"><b>{t}State:{/t}</b>&nbsp;{$status}&nbsp;&nbsp;<b>Admin:</b>&nbsp;{if $adminnick==''}{t}not assigned{/t}{else}{if $otheradmin}<font color="red"><b>{/if}{$adminnick|escape}{if $otheradmin}</b></font>{/if}{/if}</p>
 		<p style="line-height: 1.6em;"><b>{t}Reason:{/t}</b>&nbsp;{$reason|escape|nl2br}</p>

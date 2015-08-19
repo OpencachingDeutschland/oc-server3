@@ -375,7 +375,7 @@ function toggleAttr(id)
 
 	<tr><td class="spacer" colspan="2"></td></tr>
 	<tr>
-		<td><nobr>{t}password for 'found' logs{/t}:</nobr></td>
+		<td><nobr>{t}Password for 'found' logs:{/t}</nobr></td>
 		<td><input class="input100" type="text" name="log_pw" value="{log_pw}" maxlength="20"/> &nbsp; {t}(leave blank for no password){/t}</td>
 	</tr>
 	<tr>

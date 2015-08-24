@@ -25,7 +25,15 @@
 						<tr class="cachelistitem">
 							<td class="{$listcolor}">{include file="res_cachelist_link.tpl"}</td>
 							{if $show_user}<td class="{$listcolor}"><a href="viewprofile.php?userid={$cachelist.user_id}">{$cachelist.username|escape}</a></td>{/if}
-							{if $show_status}<td class="{$listcolor}"><nobr>{if $cachelist.visibility>=2}{t}public{/t}{if $cachelist.visibility==3} <img src="resource2/{$opt.template.style}/images/action/16x16-adddesc.png" title="{t}visible for all users in cache listings{/t}" />{/if}{else}{t}private{/t}{if $cachelist.password} <a href="cachelist.php?id={$cachelist.id}&key={$cachelist.password|urlencode}"><img src="resource2/{$opt.template.style}/images/action/18x16-offer.png" {if $cachelist.user_id==$login.userid}title="{t}list has password; copy this link to share it{/t}"{/if} /></a>{/if}{/if}</nobr></td>{/if}
+							{if $show_status}<td class="{$listcolor}"><nobr>{if $cachelist.visibility>=2}{t}public{/t}{if $cachelist.visibility==3} <img src="resource2/{$opt.template.style}/images/action/16x16-adddesc.png" title="{t}visible for all users in cache listings{/t}" />{/if}{else}{if $cachelist.password}<a class="jslink" onclick="cl = getElementById('sharelist_{$cachelist.id}'); cl.style.display = (cl.style.display=='none'?'block':'none'); getElementById('permalink_text_{$cachelist.id}').select();" {if $cachelist.user_id==$login.userid}title="{t}list has password; click to share it{/t}"{/if} >{t}private{/t} <img src="resource2/{$opt.template.style}/images/action/18x16-offer.png" /></a>{else}{t}private{/t}{/if}{/if}</nobr> 
+							{if $cachelist.password}
+								<div id="sharelist_{$cachelist.id}" class="cachelist-popup mapboxframe mapboxshadow" style="display:none" >
+									<table>
+										<tr><td><img src="resource2/ocstyle/images/viewcache/link.png" alt="" height="16" width="16" /> {t}Link to share this cache list:{/t}</td><td align="right"><a class="jslink" onclick="getElementById('sharelist_{$cachelist.id}').style.display='none'"><img src="resource2/ocstyle/images/navigation/19x19-close.png" style="opacity:0.7" /></a></td></tr>
+										<tr><td><input id="permalink_text_{$cachelist.id}" type="text" value="{$opt.page.absolute_url}cachelist.php?id={$cachelist.id}&key={$cachelist.password|urlencode}" size="65" /></td></tr>
+									</table>
+								</div>{/if}</td>
+							{/if}
 							<td class="{$listcolor}" style="text-align:center">{$cachelist.entries}</td>
 							{if $show_watchers}<td class="{$listcolor}" style="text-align:center">{if $cachelist.watchers}{$cachelist.watchers}{/if}</td>{/if}
 							{if $show_edit || $show_unbookmark || ($togglewatch && $login.userid)}

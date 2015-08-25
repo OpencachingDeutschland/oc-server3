@@ -112,7 +112,7 @@
 	else
 		$tpl->error($translate->t('There is no google maps key registered for this domain.', '', '', 0));
 
-  $tpl->add_header_javascript('http://maps.googleapis.com/maps/api/js?sensor=false&key=' . urlencode($sGMKey));
+  $tpl->add_header_javascript('http://maps.googleapis.com/maps/api/js?sensor=false&key=' . urlencode($sGMKey) . '&language=' . strtolower($opt['template']['locale']));
   	// https is supported by google, but may make problems in some environments,
   	// e.g. does not work with MSIE 7 on WinXP
 	$tpl->add_header_javascript('resource2/misc/map/dragzoom_packed.js');

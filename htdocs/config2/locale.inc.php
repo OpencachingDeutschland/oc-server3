@@ -64,7 +64,7 @@
 	// geokrety language key association
 	$opt['geokrety']['locales']['DE'] = 'de_DE.UTF-8';
 	$opt['geokrety']['locales']['EN'] = 'en_EN';
-	$opt['geokrety']['locales']['IT'] = 'en_EN';
+	$opt['geokrety']['locales']['IT'] = 'it_IT.UTF-8';
 	$opt['geokrety']['locales']['ES'] = 'es_ES.UTF-8';
 	$opt['geokrety']['locales']['SV'] = 'sv_SE.UTF-8';
 	$opt['geokrety']['locales']['NO'] = 'no_NO.UTF-8';

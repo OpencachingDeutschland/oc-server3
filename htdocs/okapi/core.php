@@ -96,9 +96,13 @@ class OkapiExceptionHandler
             # Consumer (aka external developer) had something wrong with his
             # request and we want him to know that.
 
-            header("HTTP/1.0 400 Bad Request");
-            header("Access-Control-Allow-Origin: *");
-            header("Content-Type: application/json; charset=utf-8");
+            # headers may have been sent e.g. by views/update
+            if (!headers_sent())
+            {
+                header("HTTP/1.0 400 Bad Request");
+                header("Access-Control-Allow-Origin: *");
+                header("Content-Type: application/json; charset=utf-8");
+            }
 
             print $e->getOkapiJSON();
         }
@@ -966,8 +970,8 @@ class Okapi
     public static $server;
 
     /* These two get replaced in automatically deployed packages. */
-    public static $version_number = 1105;
-    public static $git_revision = '69bb1a7be72b7a52621532626e5c6813fb26e354';
+    public static $version_number = 1107;
+    public static $git_revision = '23e3fae23553cb58ceeadd0f7288033a444173cc';
 
     private static $okapi_vars = null;
 

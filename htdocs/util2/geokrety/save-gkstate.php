@@ -18,7 +18,7 @@
 		    "then run this script with\n".
 		    "\n".
 				"   php save-gkstate.php init      to initialize or reset GK archive\n".
-				"   php save-gkstate.php discard   to discard GL archive\n".
+				"   php save-gkstate.php discard   to discard GK archive\n".
 				"\n".
 		    "Don't forget to re-enable cronjobs afterwards!\n".
 		    "\n");

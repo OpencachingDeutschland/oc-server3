@@ -25,7 +25,7 @@
 <!--n-->
 <tr>
   <td width="25" class="{$listcolor}">&nbsp;</td>
-  <td width="32" class="{$listcolor}" valign="top">{if $cache.direction_deg !== false}<img src="resource2/ocstyle/images/direction/16x16-{$cache.direction_deg}deg.png" title="{t}Cardinal direction{/t}: {$cache.direction_txt}" />&nbsp;{/if}</td>
+  <td width="32" class="{$listcolor}" valign="top">{if $cache.direction_deg !== false}<img src="resource2/ocstyle/images/direction/16x16-{$cache.direction_deg}deg.png" title="{t}Cardinal direction:{/t} {$cache.direction_txt}" />&nbsp;{/if}</td>
   <td width="448" class="{$listcolor}" valign="top">
 		<p>{strip}
 		{if $cache.topratings>0}<img src="images/rating-star.gif" title="{t}Recommendations{/t}" width="17" height="16" />{/if}

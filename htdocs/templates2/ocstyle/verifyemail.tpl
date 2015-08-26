@@ -14,7 +14,7 @@
 	</div>
 
 	<br />
-	<p>{t}One or more e-mails could not be delivered to the address you specified in your user profile{/t}:</p>
+	<p>{t}One or more e-mails could not be delivered to the address you specified in your user profile:{/t}</p>
 	<p><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>{$emailadr}</strong></p>
 	<p><br />{t}Please confirm that this email address is correct, or enter a new one.{/t}</p>
 	<br />

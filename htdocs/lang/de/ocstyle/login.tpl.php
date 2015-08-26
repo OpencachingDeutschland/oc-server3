@@ -57,9 +57,10 @@
 
 <div class="content-txtbox-noshade systemlink">
 	<p style="line-height: 1.6em;">
-		{t}Not registered?{/t} <a href="register.php">{t}Register{/t}</a><br />
-		{t}Forgotten your password?{/t} <a href="newpw.php">{t}Create a new password{/t}</a><br />
-		{t}Forgotten your E-Mail-Address?{/t} <a href="remindemail.php">{t}Remind me{/t}</a>
+		<br />
+		{t}Not registered?{/t} &nbsp;&rarr;&nbsp; <a href="register.php">{t}Register{/t}</a><br />
+		{t}Forgotten your password?{/t} &nbsp;&rarr;&nbsp; <a href="newpw.php">{t}Create a new password{/t}</a><br />
+		{t}Forgotten your E-Mail-Address?{/t} &nbsp;&rarr;&nbsp; <a href="remindemail.php">{t}Remind me{/t}</a>
 	</p>
 	<p>
 		{t}Here you can find more troubleshooting:{/t} {helplink}{t}Problems with login{/t}</a>.

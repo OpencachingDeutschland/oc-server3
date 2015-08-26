@@ -38,7 +38,7 @@
 							</td>
 							<td {if $lastadm1!=$topItem.adm1}style="padding-top:12px"{/if}>
 								{if $topItem.adm3==null}
-									<a href="#{$topItem.adm1|urlencode}null"><i>(ohne geogr. Bezug)</i><br /></a>
+									<a href="#{$topItem.adm1|urlencode}null"><i>({t}without regional reference{/t})</i><br /></a>
 								{else}
 									<a href="#{$topItem.adm1|urlencode}{$topItem.adm3|urlencode}">{$topItem.adm3|escape}</a><br />
 								{/if}
@@ -73,7 +73,7 @@
 			{$topItem.adm1|escape}
 			&gt;
 			{if $topItem.adm3==null}
-				(ohne geogr. Bezug)
+				({t}without regional reference{/t})
 			{else}
 				{$topItem.adm3|escape}
 			{/if}

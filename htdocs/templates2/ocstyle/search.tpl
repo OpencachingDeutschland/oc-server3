@@ -632,7 +632,7 @@ function switchAttributeCat2()
 		<input type="hidden" name="cache_attribs_not" value="{$hidopt_attribs_not}" />
 
 		<tr>
-			<td class="formlabel">{t}Cachename{/t}:</td>
+			<td class="formlabel">{t}Cachename{/t}{t}#colonspace#{/t}:</td>
 			<td><input type="text" name="cachename" value="{$cachename}" class="input200" /></td>
 			<td><input type="submit" name="submit_cachename" value="{t}Search{/t}" class="formbutton" onclick="submitbutton('submit_cachename')" /></td>
 		</tr>
@@ -667,12 +667,12 @@ function switchAttributeCat2()
 		<input type="hidden" name="cache_attribs_not" value="{$hidopt_attribs_not}" />
 
 		<tr>
-			<td class="formlabel">Text:</td>
+			<td class="formlabel">{t}Text{/t}{t}#colonspace#{/t}:</td>
 			<td><input type="text" name="fulltext" value="{$fulltext}" class="input200" /></td>
 			<td><input type="submit" name="submit_ft" value="{t}Search{/t}" class="formbutton" onclick="submitbutton('submit_ft')" /></td>
 		</tr>
 		<tr>
-			<td>... {t}in{/t}:</td>
+			<td>... {t}in{/t}{t}#colonspace#{/t}:</td>
 			<td colspan="4">
 				<input type="checkbox" name="ft_desc" id="ft_desc" class="checkbox" value="1" {if $ft_desc_checked}checked="checked"{/if} /> <label for="ft_desc">{t}Description{/t}</label> &nbsp;
 				<input type="checkbox" name="ft_name" id="ft_name" class="checkbox" value="1" {if $ft_name_checked}checked="checked"{/if} /> <label for="ft_name">{t}Cachename{/t}</label> &nbsp;
@@ -747,7 +747,7 @@ function switchAttributeCat2()
 		<input type="hidden" name="cache_attribs_not" value="{$hidopt_attribs_not}" />
 
 		<tr>
-			<td class="formlabel">{t}Log entries{/t}:</td>
+			<td class="formlabel">{t}Log entries:{/t}</td>
 			<td colspan="2">
 				<select name="logtype">
 					{foreach from=$logtype_options item=logtype_option}

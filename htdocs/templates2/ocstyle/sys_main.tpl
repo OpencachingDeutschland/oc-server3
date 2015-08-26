@@ -135,7 +135,7 @@
 							{nocache}
 								&nbsp;
 								{if $login.userid==0}
-									<b><form action="login.php" method="post" enctype="application/x-www-form-urlencoded" name="login" dir="ltr" style="display: inline;">{t}User{/t}:&nbsp;&nbsp;<input name="email" size="10" type="text" class="textboxes" value="" />&nbsp;&nbsp;&nbsp;{t}Password{/t}:&nbsp;&nbsp;<input name="password" size="10" type="password" class="textboxes" value="" />&nbsp;<input type="hidden" name="action" value="login" /><input type="hidden" name="target" value="{$opt.page.target|escape}" /><input type="hidden" name="source" value="titlebar" />&nbsp;<input name="LogMeIn" value="{t}Login{/t}" class="formbutton" style="width: 68px;" type="submit" onclick="submitbutton('LogMeIn')" /></form></b>	
+									<b><form action="login.php" method="post" enctype="application/x-www-form-urlencoded" name="login" dir="ltr" style="display: inline;">{t}User:{/t}&nbsp;&nbsp;<input name="email" size="10" type="text" class="textboxes" value="" />&nbsp;&nbsp;&nbsp;{t}Password:{/t}&nbsp;&nbsp;<input name="password" size="10" type="password" class="textboxes" value="" />&nbsp;<input type="hidden" name="action" value="login" /><input type="hidden" name="target" value="{$opt.page.target|escape}" /><input type="hidden" name="source" value="titlebar" />&nbsp;<input name="LogMeIn" value="{t}Login{/t}" class="formbutton" style="width: 74px;" type="submit" onclick="submitbutton('LogMeIn')" /></form></b>	
 								{else}  {* Ocprop: <a href="myhome.php">(.*?)<\/a>.*?<a href="login.php
 								                   <a href="myhome.php">.*?<a href="login.php\?action=logout"> *}
 									<b>{t}Logged in as{/t} <a href="myhome.php">{$login.username|escape}</a></b> - <a href="login.php?action=logout">{t}Logout{/t}</a>
@@ -213,7 +213,7 @@
 					<div id="breadcrumb_fullsize">{include file="sys_breadcrumb.tpl" items="$breadcrumb"}</div>
 				{else}
 					<div id="breadcrumb">{include file="sys_breadcrumb.tpl" items="$breadcrumb"}</div>
-					<div id="suchbox"><form action="searchplugin.php" method="post"><b>{t}Waypoint-Search{/t}:</b>&nbsp;<input type="hidden" name="sourceid" value="waypoint-search" /> <input type="text" name="userinput" size="10" class="waypoint" /> <input type="submit" name="wpsearch" class="formbutton" style="width:auto" value="&nbsp;{t}Go{/t}&nbsp;" onclick="submitbutton('wpsearch')" /></form></div>
+					<div id="suchbox"><form action="searchplugin.php" method="post"><b>{t}Waypoint-Search:{/t}</b>&nbsp;<input type="hidden" name="sourceid" value="waypoint-search" /> <input type="text" name="userinput" size="10" class="waypoint" /> <input type="submit" name="wpsearch" class="formbutton" style="width:auto" value="&nbsp;{t}Go{/t}&nbsp;" onclick="submitbutton('wpsearch')" /></form></div>
 				{/if}
 			</div>
 
@@ -295,18 +295,18 @@
 					<p class="content-txtbox-noshade-size5">
 						<small>
 							{nocache}
-								{t}Page timing{/t}: {$sys_runtime|sprintf:"%1.3f"} {t}sec{/t}<br />
+								{t}Page timing:{/t} {$sys_runtime|sprintf:"%1.3f"} {t}sec{/t}<br />
 								{if ($opt.template.caching == true)}
-									{t}Page cached{/t}: {if $sys_cached==true}{t}Yes{/t}{else}{t}No{/t}{/if}<br />
+									{t}Page cached:{/t} {if $sys_cached==true}{t}Yes{/t}{else}{t}No{/t}{/if}<br />
 								{/if}
 								{*
-								{t}DB connected{/t}: 
+								{t}DB connected:{/t} 
 								{if $sys_dbconnected==true}{t}Yes{/t}{else}{t}No{/t}{/if}
 								{if $sys_dbslave==true}, {t}Slave{/t}{/if}
 								<br />
 								*}
 							{/nocache}
-							{t}Created at{/t}: {"0"|date_format:$opt.format.datetime}
+							{t}Created at:{/t} {"0"|date_format:$opt.format.datetime}
 						</small>
 					</p>
 				</div>

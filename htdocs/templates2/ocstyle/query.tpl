@@ -63,7 +63,7 @@
 				<td class="header-small" colspan="2">{t}Store options as new search{/t}</td>
 			</tr>
 			<tr>
-				<td>{t}Name of the search{/t}:</td>
+				<td>{t}Name of the search:{/t}</td>
 				<td>
 					<input type="text" name="queryname" class="input300" maxlength="60" value="{$queryname}" /> 
 				</td>
@@ -93,7 +93,7 @@
 				<td class="header-small" colspan="2">{t}Overwrite old search options{/t}</td>
 			</tr>
 			<tr>
-				<td>{t}Name of the search{/t}:</td>
+				<td>{t}Name of the search:{/t}</td>
 				<td>
 					<select name="oldqueryid" class="input350">
 						{foreach from=$queries item=queriesItem name="queries"}

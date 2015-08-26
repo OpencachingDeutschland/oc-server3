@@ -7,13 +7,13 @@
 
 {t}The following data has been stored for your account:{/t}
 
-{t}Username{/t}: {$username}
-{t}E-Mail address{/t}: {$to}
-{if $first_name != ''}{t}First name{/t}: {$first_name}
+{t}Username{/t}{$opt.format.colonspace}: {$username}
+{t}E-Mail address{/t}{$opt.format.colonspace}: {$to}
+{if $first_name != ''}{t}First name{/t}{$opt.format.colonspace}: {$first_name}
 {/if}
-{if $last_name != ''}{t}Last name{/t}: {$last_name}
+{if $last_name != ''}{t}Last name{/t}{$opt.format.colonspace}: {$last_name}
 {/if}
-{if $country != ''}{t}Country{/t}: {$country}
+{if $country != ''}{t}Country{/t}{$opt.format.colonspace}: {$country}
 {/if}
 
 {t}Before you can login for the first time, you have to activate your account by clicking on the following link:{/t}

@@ -14,21 +14,18 @@
 	<input type="hidden" name="target" value="{$target|escape}" />
 	<input type="hidden" name="action" value="login" />
 	<input type="hidden" name="source" value="loginpage" />
-	{if $error!=LOGIN_OK}
-		<div class="content-txtbox-noshade">
-			<p style="line-height: 1.6em;">
+	<div class="content-txtbox-noshade">
+		<p style="line-height: 1.6em;">
+			{if $error!=LOGIN_OK}
 				{if $error==LOGIN_BADUSERPW}
 					{t}The login was not successfull.{/t}<br />
 					{t}The entered username/e-mail or the specified password did not match.{/t}<br />
-          {t}Here you can find more troubleshooting:{/t} <a href="{$opt.cms.login}">{t}Problems with login{/t}</a>
 				{elseif $error==LOGIN_TOOMUCHLOGINS}
 					{t}The login was not successfull.{/t}<br />
 					{t 1=$opt.page.max_logins_per_hour}Your tried to login more than %1 times in the last hour. The next login will not be allowed before one hour since the first try has passed.{/t}<br />
-          {t}Here you can find more troubleshooting:{/t} <a href="{$opt.cms.login}">{t}Problems with login{/t}</a>
 				{elseif $error==LOGIN_USERNOTACTIVE}
 					{t}Your account is not acivated.{/t}<br />
 					{t}&gt;<a href="activation.php">Here</a>&lt; you can activate your account.{/t}<br />
-          {t}Here you can find more troubleshooting:{/t} <a href="{$opt.cms.login}">{t}Problems with login{/t}</a>
 				{elseif $error==LOGIN_EMPTY_USERPASSWORD}
 					{t}Please fill in username and password!{/t}
 				{elseif $error==LOGIN_LOGOUT_OK}
@@ -36,20 +33,21 @@
 				{else}
 					{t}The login was not successfull.{/t}<br />
 					{t 1=$opt.mail.contact}If this problem persists over a longer time, please contact us at <a href="mailto:%1">%1</a>.{/t}<br />
-          {t}Here you can find more troubleshooting:{/t} <a href="{$opt.cms.login}">{t}Problems with login{/t}</a>
 				{/if}
-			</p>
-			<div class="buffer" style="width: 500px;">&nbsp;</div>
-		</div> 
-	{/if}
+			{else}
+				{t}Please login to continue:{/t}
+			{/if}
+		</p>
+		<div class="buffer" style="width: 500px;">&nbsp;</div>
+	</div> 
 
 	<table class="table">
 		<tr>
-			<td>{t}Username{/t}:</td>
+			<td>{t}Username:{/t}</td>
 			<td><input name="email" maxlength="80" type="text" value="{$username}" class="input200" /></td>
 		</tr>
 		<tr>
-			<td>{t}Password{/t}:</td>
+			<td>{t}Password:{/t}</td>
 			<td><input name="password" maxlength="60" type="password" value="" class="input200" /></td>
 		</tr>
 		<tr><td class="spacer" colspan="2"></td></tr>
@@ -67,9 +65,10 @@
 
 <div class="content-txtbox-noshade">
 	<p style="line-height: 1.6em;">
-		{t}Not registered?{/t} <a href="register.php">{t}Register{/t}</a><br />
-		{t}Forgotten your password?{/t} <a href="newpw.php">{t}Create a new password{/t}</a><br />
-		{t}Forgotten your E-Mail-Address?{/t} <a href="remindemail.php">{t}Remind me{/t}</a><br />
+		<br />
+		{t}Not registered?{/t} &nbsp;&rarr;&nbsp; <a href="register.php">{t}Register{/t}</a><br />
+		{t}Forgotten your password?{/t} &nbsp;&rarr;&nbsp; <a href="newpw.php">{t}Create a new password{/t}</a><br />
+		{t}Forgotten your E-Mail-Address?{/t} &nbsp;&rarr;&nbsp; <a href="remindemail.php">{t}Remind me{/t}</a><br />
 	</p>
 	<p>
 		{t}Here you can find more troubleshooting:{/t} {$loginhelplink}{t}Problems with login{/t}</a>.

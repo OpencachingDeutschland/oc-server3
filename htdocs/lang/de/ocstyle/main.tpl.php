@@ -299,8 +299,8 @@
 					<div class="sidebar-txtbox-noshade">
 						<p class="content-txtbox-noshade-size5">
 							<small>
-								{t}Page performance{/t}: {scripttime} {t}sec{/t}<br />
-								{t}Page creation{/t}: <?php $bTemplateBuild->Stop(); echo sprintf('%1.3f', $bTemplateBuild->Diff()); ?> {t}sec{/t}
+								{t}Page performance:{/t} {scripttime} {t}sec{/t}<br />
+								{t}Page creation:{/t} <?php $bTemplateBuild->Stop(); echo sprintf('%1.3f', $bTemplateBuild->Diff()); ?> {t}sec{/t}
 							</small>
 						</p>
 					</div>

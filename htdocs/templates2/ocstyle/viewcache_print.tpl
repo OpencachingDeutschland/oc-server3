@@ -14,7 +14,7 @@
 						<img src="images/newlogo.png" height="66" border="0" alt="" align="left" />
 					</td>
 					<td align="center">
-						<font size="4">{if $shortlink_domain !== false}{$shortlink_domain}/{else}{t}Waypoint{/t}: {/if}{$cache.wpoc}</font>
+						<font size="4">{if $shortlink_domain !== false}{$shortlink_domain}/{else}{t}Waypoint:{/t} {/if}{$cache.wpoc}</font>
 					</td>
 					<td class="null" border="0">
 						{if $opt.page.sponsor.popup!=''}
@@ -37,9 +37,9 @@
 						{/if}
 					</td>
 					<td valign="top" nowrap="1" width="1%" style="text-align:right"><nobr>
-						{t}Difficulty{/t}:
+						{t}Difficulty:{/t}
 						<img src="./resource2/{$opt.template.style}/images/difficulty/diff-{$cache.difficulty*5}.gif" border="0" width="19" height="16" hspace="2" /><br />
-						{t}Terrain{/t}:
+						{t}Terrain:{/t}
 						<img src="./resource2/{$opt.template.style}/images/difficulty/terr-{$cache.terrain*5}.gif" border="0" width="19" height="16" hspace="2" />
 						</nobr>
 					</td>
@@ -68,26 +68,26 @@
 						<font size="3"><b><nobr>{$coordinates.lat|escape}</nobr> <nobr>{$coordinates.lon|escape}</nobr></b></font> <font size="1">(WGS84)</font><br />
 						<div style="height:0.5em"></div>
 						<table class="print-cachemeta" cellspacing="0" cellpadding="0">
-							<tr><td>{t}Size{/t}:</td><td>{$cache.sizeName|escape}<br /></td></tr>
+							<tr><td>{t}Size:{/t}</td><td>{$cache.sizeName|escape}<br /></td></tr>
 						{if $cache.searchtime>0}
-							<tr><td><nobr>{t}Time required{/t}:</td><td>{$cache.searchtime|format_hour}
-								h{if $cache.waylength>0}, &nbsp;{t}Distance{/t}: {$cache.waylength} km{/if}
+							<tr><td><nobr>{t}Time required:{/t}</td><td>{$cache.searchtime|format_hour}
+								h{if $cache.waylength>0}, &nbsp;{t}Distance:{/t} {$cache.waylength} km{/if}
 							</nobr></td>
 						{elseif $cache.waylength>0}
-							<tr><td><nobr>{t}Distance{/t}:</td><td>{$cache.waylength} km</nobr></td></tr>
+							<tr><td><nobr>{t}Waylength:{/t}</td><td>{$cache.waylength} km</nobr></td></tr>
 						{/if}
 						{if $cache.status!=1}
-							<tr><td>{t}State{/t}:</td><td><span class="errormsg">{$cache.statusName|escape}</span></td></tr>
+							<tr><td>{t}State:{/t}</td><td><span class="errormsg">{$cache.statusName|escape}</span></td></tr>
 						{else}
-							<tr><td>{t}State{/t}:</td><td>{$cache.statusName|escape}</td></tr>
+							<tr><td>{t}State:{/t}</td><td>{$cache.statusName|escape}</td></tr>
 						{/if}
-						<tr><td>{t}Hidden at{/t}:</td><td>{$cache.datehidden|date_format:$opt.format.datelong}</td></tr>
-						<tr><td>{if $cache.is_publishdate==0}{t}Listed since{/t}{else}{t}Published on{/t}{/if}:</td><td>{$cache.datecreated|date_format:$opt.format.datelong}</td></tr>
-						<tr><td>{t}Last update{/t}:</td><td>{$cache.lastmodified|date_format:$opt.format.datelong}</td></tr>
+						<tr><td>{t}Hidden on:{/t}</td><td>{$cache.datehidden|date_format:$opt.format.datelong}</td></tr>
+						<tr><td>{if $cache.is_publishdate==0}{t}Listed since:{/t}{else}{t}Published on:{/t}{/if}</td><td>{$cache.datecreated|date_format:$opt.format.datelong}</td></tr>
+						<tr><td>{t}Last update:{/t}</td><td>{$cache.lastmodified|date_format:$opt.format.datelong}</td></tr>
 						
 						{if $cache.wpgc!='' || $cache.wpnc!=''}
 							<tr>
-							<td>{t}Also listed as{/t}:</td>
+							<td>{t}Also listed as:{/t}</td>
 							<td>
 								{if $cache.wpgc!=''}{$cache.wpgc}{if $cache.wpnc!=''}, {/if}{/if}
 								{if $cache.wpnc!=''}{$cache.wpnc}{/if}
@@ -348,7 +348,7 @@
 								<img src="./images/npa.gif" alt="{t}Nature protection area{/t}" />
 							</td>
 							<td style="text-align:left; vertical-align:top">
-								{t 1=$opt.cms.npa}This geocache is probably placed within a nature protection area! See <a href="%1">here</a> for further informations, please.{/t}<br />
+								{t 1=$opt.cms.npa}This geocache is probably placed within a nature protection area! See %1here</a> for further informations, please.{/t}<br />
 								<font size="2">
 									{foreach from=$npaareasWarning item=npaItem name=npaareas}
 										{$npaItem.npaTypeName|escape} 

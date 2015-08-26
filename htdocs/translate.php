@@ -132,7 +132,7 @@
 
 		$action = 'listnew';
 
-		$trans = sql("SELECT DISTINCT `sys_trans`.`id`, `sys_trans`.`text` FROM `sys_trans` LEFT JOIN `sys_trans_text` ON `sys_trans`.`id`=`sys_trans_text`.`trans_id` AND `sys_trans_text`.`lang`='&1' LEFT JOIN `sys_trans_ref` ON `sys_trans`.`id`=`sys_trans_ref`.`trans_id` WHERE (ISNULL(`sys_trans_text`.`trans_id`) OR `sys_trans_text`.`text`='') AND NOT ISNULL(`sys_trans_ref`.`trans_id`) ORDER BY `sys_trans`.`id` DESC", $translang);
+		$trans = sql("SELECT DISTINCT `sys_trans`.`id`, `sys_trans`.`text` FROM `sys_trans` LEFT JOIN `sys_trans_text` ON `sys_trans`.`id`=`sys_trans_text`.`trans_id` AND `sys_trans_text`.`lang`='&1' LEFT JOIN `sys_trans_ref` ON `sys_trans`.`id`=`sys_trans_ref`.`trans_id` WHERE (ISNULL(`sys_trans_text`.`trans_id`) OR `sys_trans_text`.`text`='') ORDER BY `sys_trans`.`id` DESC", $translang);
 		$tpl->assign_rs('trans', $trans);
 		sql_free_result($trans);
 	}
@@ -730,7 +730,7 @@ function textimport($lang)
 
 		if ($sCodeText . $sLangText != '')
 		{
-			$transId = sql_value("SELECT `id` FROM `sys_trans` WHERE `text`='&1'", 0, $sCodeText);
+			$transId = sql_value("SELECT `id` FROM `sys_trans` WHERE BINARY `text`='&1'", 0, $sCodeText);
 			if ($transId == 0)
 			{
 				if ($sLangText != '')

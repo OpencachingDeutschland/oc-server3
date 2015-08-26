@@ -12,7 +12,7 @@
 
 <form method="POST" action="adminhistory.php">
 	<p>
-		<b>{t}Cache code{/t}:</b> &nbsp;
+		<b>{t}Cache code:{/t}</b> &nbsp;
 		<input type="text" width="10" name="wp" /> &nbsp;
 		<input type="submit" name="submitform" value="{t}Show{/t}" class="formbutton" onclick="submitbutton('submitform')" />
 	</p>

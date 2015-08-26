@@ -27,11 +27,18 @@
   <td width="25" class="{$listcolor}">&nbsp;</td>
   <td width="32" class="{$listcolor}" valign="top">{if $cache.direction_deg !== false}<img src="resource2/ocstyle/images/direction/16x16-{$cache.direction_deg}deg.png" title="{t}Cardinal direction{/t}: {$cache.direction_txt}" />&nbsp;{/if}</td>
   <td width="448" class="{$listcolor}" valign="top">
-		<p>{strip}
-		{if $cache.topratings>0}<img src="images/rating-star.gif" title="{t}Recommendations{/t}" width="17" height="16" />{/if}
-		{if $cache.topratings>1}<img src="images/rating-star.gif" title="{t}Recommendations{/t}" width="17" height="16" />{/if}
-		{if $cache.topratings>2}<img src="images/rating-plus.gif" title="{t}Recommendations{/t}" width="17" height="16" />{/if}
-		{/strip}		
+		<p>
+			{strip}
+				{if $cache.topratings<4}
+					{if $cache.topratings>0}<img src="images/rating-star.gif" title="{t}Recommendations{/t}" width="14" height="13" style="margin-top: -3px;"/>{/if}
+					{if $cache.topratings>1}<img src="images/rating-star.gif" title="{t}Recommendations{/t}" width="14" height="13" style="margin-top: -3px;"/>{/if}
+					{if $cache.topratings>2}<img src="images/rating-star.gif" title="{t}Recommendations{/t}" width="14" height="13" style="margin-top: -3px;"/>{/if}
+				{/if}
+				{if $cache.topratings>3}
+					<b><span class="txtblack" style="color:#02c602; font-size: 13px;">{$cache.topratings}x</span></b>
+					<img src="images/rating-star.gif" title="{t}Recommendations{/t}" width="14" height="13" style="margin-top: -3px;"/>
+				{/if}
+			{/strip}
 		{foreach from=$cache.desclangs item=desclang}
 			<a href="viewcache.php?cacheid={$cache.cache_id}&desclang={$desclang|escape}" style="text-decoration:none"><b><span style="color:blue">{$desclang|escape}</span></b></a>
 		{/foreach}

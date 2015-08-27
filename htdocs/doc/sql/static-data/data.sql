@@ -1071,7 +1071,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('128', 'Userprof
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('129', 'An error occured while processing the page', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('130', 'An error occured while processing the page. If you\'ve called this page from an hyperlink on our site and this error persists some time, please contact us via E-Mail.', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('131', 'The following error occured:', '2010-08-28 11:48:03');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('133', 'Error message:', '2010-08-28 11:48:03');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('133', 'Error message', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('134', '%2 found %1', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('135', '%2 didn\'t find %1', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('136', '%2 wrote a note for %1', '2010-08-28 11:48:03');
@@ -1956,7 +1956,6 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1405', 'error w
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1406', 'In an attempt to create the page, an error has occurred. If you pass through a hyperlink on our side and the problem persists do not hesitate to contact us by email.', '2010-09-07 20:19:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1407', 'The following error occurred:', '2010-09-07 20:19:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1408', 'Page:', '2010-09-07 20:19:03');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1409', 'error message:', '2010-09-07 20:19:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1411', 'are you sure that this log entry shall be removed?', '2010-09-07 20:19:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1412', 'do you want to send {log_user_name} a note?', '2010-09-07 20:19:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1413', 'Remove log entry', '2010-09-07 20:19:03');
@@ -1990,7 +1989,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1441', 'The cac
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1442', 'Choose both valuations!', '2010-09-07 20:19:06');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1443', 'No pictures available', '2010-09-07 20:19:06');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1444', '%1 caches<span style=\"%2\"> matched</span>', '2010-09-07 20:19:07');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1445', 'Result %1 to %2 (as zip):', '2010-09-07 20:19:07');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1445', 'Result %1 to %2 (as zip)', '2010-09-07 20:19:07');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1446', 'this description was created on another Opencaching-webserver and can only be deleted there.', '2010-09-07 20:19:07');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1447', 'the cache description has been deleted', '2010-09-07 20:19:07');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1448', 'delete this cache-description', '2010-09-07 20:19:07');
@@ -2174,7 +2173,6 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1645', 'This ca
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1646', 'You must pay an access or parking fee to access this cache, e.g. if the cache is located within a theme park. If there are alternative free parking areas nearby, please include them in the cache description. Please note our current terms of use regarding \"commercial geocaches\".', '2010-09-12 23:39:51');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1647', 'This cache cannot be done within a single day or a single night. You will have to visit the location for more than one time, or you must stay overnight. Preparation time is not included in this calculation, but only the time on site.', '2010-09-12 23:39:51');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1648', 'A newsentry was created on opencaching', '2010-09-13 00:14:41');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1649', 'Runtime: {time} seconds', '2010-09-13 00:14:45');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1650', 'The called page does not exist!', '2010-09-13 00:14:45');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1651', 'Search by cachename', '2010-09-13 00:14:48');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1652', 'Redirect - opencaching', '2010-09-13 00:14:51');
@@ -2252,7 +2250,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1733', 'Geokret
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1735', 'For Events: The date of event!', '2011-02-12 20:06:37');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1736', 'User-ID:', '2011-02-12 20:08:11');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1737', 'List', '2011-02-12 20:08:14');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1738', 'Event date', '2011-02-12 20:08:14');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1738', 'Event date:', '2011-02-12 20:08:14');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1739', 'Finds: %1 Hidden: %2', '2011-04-04 20:44:22');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1740', '<User not known>', '2011-04-04 20:44:22');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1745', 'Standardlogo', '2011-04-24 22:18:08');
@@ -2696,7 +2694,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2225', 'without
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2226', 'hidden[cachelist]', '2013-11-03 10:09:14');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2227', 'Coordinate changes', '2013-11-03 10:09:14');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2228', 'Password for sharing:', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2229', 'list has password; click to share it', '2013-11-03 10:09:14');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2229', 'List has password; click here to share it', '2013-11-03 10:09:14');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2230', 'Own lists', '2013-11-03 10:09:14');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2231', 'Bookmarked lists', '2013-11-03 10:09:14');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2232', 'Do you really want to unbookmark the list \\\'%1\\\'?', '2013-11-03 10:09:14');
@@ -4326,7 +4324,6 @@ INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1405'
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1406', './lang/de/ocstyle/error.tpl.php', '24');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1407', './lang/de/ocstyle/error.tpl.php', '25');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1408', './lang/de/ocstyle/error.tpl.php', '27');
-INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1409', './lang/de/ocstyle/error.tpl.php', '28');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1411', './lang/de/ocstyle/removelog_cacheowner.tpl.php', '24');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1412', './lang/de/ocstyle/removelog_cacheowner.tpl.php', '38');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1413', './lang/de/ocstyle/removelog_cacheowner.tpl.php', '49');
@@ -4570,7 +4567,6 @@ INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1645'
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1646', 'table:cache_attrib;field=html_desc', '0');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1647', 'table:cache_attrib;field=html_desc', '0');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1648', './newstopic.php', '61');
-INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1649', './lang/de/expressions.inc.php', '21');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1650', './lang/de/expressions.inc.php', '33');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1652', './lang/de/ocstyle/redirect.tpl.php', '12');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1653', './templates2/ocstyle/query.tpl', '33');
@@ -5344,7 +5340,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('129', 'DE', 'Beim Aufruf der Seite ist ein Fehler aufgetreten.', '2010-10-04 00:22:41');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('130', 'DE', 'Bei dem Versuch die Seite zu erstellen ist ein Fehler aufgetreten. Sollten Sie durch einen Link auf unserer Seite hierher gekommen sein und dieses Problem längere Zeit bestehen, weisen Sie uns bitte per E-Mail darauf hin.', '2010-10-04 00:22:41');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('131', 'DE', 'Der folgende Fehler ist aufgetreten:', '2010-08-28 11:48:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('133', 'DE', 'Fehlermeldung:', '2010-08-28 11:48:06');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('133', 'DE', 'Fehlermeldung', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('134', 'DE', '%2 hat %1 gefunden', '2010-08-29 18:00:23');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('135', 'DE', '%2 hat %1 nicht gefunden', '2010-08-29 18:00:13');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('136', 'DE', '%2 hat %1 kommentiert', '2010-08-29 17:59:56');
@@ -6230,7 +6226,6 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1406', 'DE', 'Bei dem Versuch, die Seite zu erstellen, ist ein Fehler aufgetreten. Solltest du durch einen Link auf unserer Seite hierher gekommen sein und dieses Problem l\&auml;ngere Zeit bestehen, weise uns bitte per E-Mail darauf hin.', '2010-09-10 23:48:34');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1407', 'DE', 'Folgender Fehler ist aufgetreten:', '2010-09-10 23:48:25');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1408', 'DE', 'Seite:', '2010-09-10 23:48:10');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1409', 'DE', 'Fehlermeldung:', '2010-09-10 23:47:40');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1411', 'DE', 'Bist du sicher, dass dieser Logeintrag entfernt werden soll?', '2010-09-10 23:47:01');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1412', 'DE', 'M\&ouml;chtest du {log_user_name} eine Bemerkung dazu senden?', '2010-09-10 23:46:49');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1413', 'DE', 'Logeintrag entfernen', '2010-09-10 23:46:43');
@@ -6264,7 +6259,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1442', 'DE', 'Wähle beide Bewertungsangaben aus!', '2010-09-10 23:33:56');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1443', 'DE', 'Keine Bilder vorhanden', '2010-09-10 23:32:13');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1444', 'DE', '%1 Caches<span style=\"%2\"> gefunden</span>', '2010-09-10 23:33:47');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1445', 'DE', 'Einträge %1 bis %2 (als zip):', '2010-09-10 23:33:33');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1445', 'DE', 'Einträge %1 bis %2 (als zip)', '2010-09-10 23:33:33');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1446', 'DE', 'Diese Beschreibung wurde auf einem anderen Opencaching-Webserver erstellt und kann nur auf diesem gelöscht werden.', '2010-09-10 23:31:28');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1447', 'DE', 'Die Cache Beschreibung wurde gel\&ouml;scht.', '2010-09-10 23:31:10');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1448', 'DE', 'Cachebeschreibung l\&ouml;schen', '2010-09-10 23:30:52');
@@ -6448,7 +6443,6 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1646', 'DE', 'Um zum Cache zu gelangen, müsst ihr entweder einen Eintritt oder eine Parkgebühr bezahlen. Ein Eintrittsgeld könnte z.B. in einem Freizeitpark anfallen. Falls es trotzdem nahegelegene, entgeltfreie Parkmöglichkeiten gibt, möchten wie euch bitten darauf in der Beschreibung hinzuweisen. Bitte beachtet auch die aktuellen Nutzungsbedingungen zum Thema \&bdquo;kommerzielle Geocaches\&ldquo;.', '2010-09-12 23:44:25');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1647', 'DE', 'Der Geocache kann nicht mit einer einzigen Tages- oder Nachttour gel\&ouml;st werden. Er muss entweder mehrmals angefahren werden oder es muss vor Ort \&uuml;bernachtet werden. Bei diesem Attribut soll die Zeit f\&uuml;r Recherchen vorab nicht ber\&uuml;cksichtigt werden, sondern nur die Zeit vor Ort.', '2010-09-12 23:41:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1648', 'DE', 'Ein Newseintrag wurde auf Opencaching erstellt', '2010-09-13 00:17:01');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1649', 'DE', 'Laufzeit: {time} Sekunden', '2010-09-13 00:17:23');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1650', 'DE', 'Die aufgerufene Seite existiert nicht!', '2010-09-13 00:17:45');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1651', 'DE', 'Suche nach Cachename', '2010-09-13 00:17:41');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1652', 'DE', 'Weiterleitung - opencaching', '2010-09-13 00:17:34');
@@ -6527,7 +6521,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1735', 'DE', 'Bei Events: Eventdatum!', '2011-02-12 20:09:40');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1736', 'DE', 'User-ID:', '2011-02-12 20:11:53');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1737', 'DE', 'Liste', '2011-02-12 20:11:41');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1738', 'DE', 'Eventdatum', '2011-02-12 20:09:17');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1738', 'DE', 'Eventdatum:', '2011-02-12 20:09:17');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1739', 'DE', 'Gefunden: %1  Versteckt: %2', '2011-04-04 20:49:57');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1740', 'DE', '<Benutzer unbekannt>', '2011-04-04 21:27:10');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1745', 'DE', 'Standardlogo', '2011-04-24 22:21:24');
@@ -7105,7 +7099,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('129', 'EN', 'An error occurred while processing the page.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('130', 'EN', 'An error occurred while processing the page. If you have called this page by a hyperlink on our site and this error persists for some time, please contact us via e-mail. ', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('131', 'EN', 'The following error occurred:', '2010-08-28 11:48:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('133', 'EN', 'Error message:', '2010-08-28 11:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('133', 'EN', 'Error message', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('134', 'EN', '%2 found %1', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('135', 'EN', '%2 didn\'t find %1', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('136', 'EN', '%2 wrote a note for %1', '2010-08-28 11:48:07');
@@ -7990,7 +7984,6 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1406', 'EN', 'In an attempt to create the page, an error has occurred. If you pass through a hyperlink on our side and the problem persists do not hesitate to contact us by email.', '2010-09-10 23:48:34');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1407', 'EN', 'The following error occurred:', '2010-09-10 23:48:25');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1408', 'EN', 'Page:', '2010-09-10 23:48:10');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1409', 'EN', 'Error message:', '2010-09-10 23:47:47');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1411', 'EN', 'Are you sure that this log entry shall be removed?', '2010-09-10 23:47:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1412', 'EN', 'do you want to send {log_user_name} a note? ', '2010-09-10 23:46:49');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1413', 'EN', 'Remove log entry', '2010-09-10 23:46:43');
@@ -8024,7 +8017,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1442', 'EN', 'Choose both valuations!', '2010-09-10 23:33:56');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1443', 'EN', 'No pictures available', '2010-09-10 23:32:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1444', 'EN', '%1 caches<span style=\"%2\"> matched</span>', '2010-09-10 23:33:47');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1445', 'EN', 'Result %1 to %2 (as zip):', '2010-09-10 23:33:37');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1445', 'EN', 'Result %1 to %2 (as zip)', '2010-09-10 23:33:37');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1446', 'EN', 'This description was created on another Opencaching-webserver and can only be deleted there.', '2010-09-10 23:31:36');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1447', 'EN', 'The cache description has been deleted', '2010-09-10 23:31:16');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1448', 'EN', 'Delete this cache description', '2010-09-10 23:31:02');
@@ -8208,7 +8201,6 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1646', 'EN', 'You must pay an access or parking fee to access this cache, e.g. if the cache is located within a theme park. If there are alternative free parking areas nearby, please include them in the cache description. Please note our current terms of use regarding \"commercial geocaches\".', '2010-09-12 23:41:20');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1647', 'EN', 'This cache cannot be done within a single day or a single night. You will have to visit the location for more than one time, or you must stay overnight. Preparation time is not included in this calculation, but only the time on site.', '2010-09-12 23:41:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1648', 'EN', 'A newsentry was created on opencaching', '2010-09-13 00:18:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1649', 'EN', 'Runtime: {time} seconds', '2010-09-13 00:18:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1650', 'EN', 'The called page does not exist!', '2010-09-13 00:17:45');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1651', 'EN', 'Search by cachename', '2010-09-13 00:17:41');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1652', 'EN', 'Redirect - opencaching', '2010-09-13 00:18:01');
@@ -8286,7 +8278,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1735', 'EN', 'For Event Caches: The date of event!', '2012-08-24 17:35:49');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1736', 'EN', 'User-ID:', '2012-08-24 17:35:49');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1737', 'EN', 'List', '2012-08-24 17:35:49');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1738', 'EN', 'Event date', '2012-08-24 17:35:49');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1738', 'EN', 'Event date:', '2012-08-24 17:35:49');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1739', 'EN', 'Found: %1   Hidden: %2', '2012-08-24 17:35:49');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1740', 'EN', '<Unknown user>', '2012-08-24 17:35:49');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1745', 'EN', 'Default logo', '2012-08-24 17:35:49');
@@ -8731,7 +8723,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2226', 'EN', 'hidden', '2013-11-03 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2227', 'EN', 'Coordinate changes', '2013-11-03 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2228', 'EN', 'Password for sharing:', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2229', 'EN', 'list has password; copy this link to share it', '2013-11-03 10:09:14');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2229', 'EN', 'List has password; click here to share it', '2013-11-03 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2230', 'EN', 'Own lists', '2013-11-03 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2231', 'EN', 'Bookmarked lists', '2013-11-03 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2232', 'EN', 'Do you really want to unbookmark the list \\\'%1\\\'?', '2013-11-03 10:09:14');
@@ -8864,7 +8856,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('129', 'ES', 'Al llamar a la página se ha producido un error.', '2010-12-09 00:17:56');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('130', 'ES', 'Se ha producido un error al cargar la página. Si llegó a esta página desde un enlace en nuestra página web y este error se repite desde hace algún tiempo, por favor comuníquese con nosotros a través del correo electrónico.', '2010-12-09 00:17:56');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('131', 'ES', 'Ocurrió el siguiente error:', '2010-12-09 00:17:56');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('133', 'ES', 'Mensaje de error:', '2010-12-09 00:17:56');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('133', 'ES', 'Mensaje de error', '2010-12-09 00:17:56');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('134', 'ES', '%2 encontrados %1', '2010-12-09 00:17:56');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('135', 'ES', '%2 no encontrados %1', '2010-12-09 00:17:56');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('136', 'ES', '%2 escrito una nota por %1', '2010-12-09 00:17:56');
@@ -9748,7 +9740,6 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1406', 'ES', 'En un intento de crear la página, se ha producido un error. Si pasa a través de un hipervínculo a nuestro lado y el problema persiste, no dude en contactar con nosotros por correo electrónico.', '2010-12-09 00:17:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1407', 'ES', 'Ocurrió el siguiente error:', '2010-12-09 00:17:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1408', 'ES', 'Página', '2010-12-09 00:17:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1409', 'ES', 'Mensaje de error:', '2010-12-09 00:18:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1411', 'ES', '¿Estás seguro de que quieres eliminar este log?', '2010-12-09 00:18:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1412', 'ES', '¿Deseas enviar una nota a {log_user_name}?', '2010-12-09 00:18:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1413', 'ES', 'Borrar el long de entrada', '2010-12-09 00:18:00');
@@ -9782,7 +9773,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1442', 'ES', '¡Seleccione la revisión de los datos de ambos!', '2010-12-09 00:18:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1443', 'ES', 'No hay fotos disponibles', '2010-12-09 00:18:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1444', 'ES', ' %1 caches<span style=\"%2\"> encontrados</span>', '2010-12-09 00:18:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1445', 'ES', 'Resultado %1 a %2 (como zip):', '2010-12-09 00:18:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1445', 'ES', 'Resultado %1 a %2 (como zip)', '2010-12-09 00:18:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1446', 'ES', 'su descripción fue creado en otro Opencaching-servidor web y sólo puede ser eliminado allí.', '2010-12-09 00:18:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1447', 'ES', 'La descripción del caché ha sido eliminada.', '2010-12-09 00:18:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1448', 'ES', 'Borrar la descripción del cache', '2010-12-09 00:18:00');
@@ -9963,7 +9954,6 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1646', 'ES', 'Deberas pagar un acceso o estacionamiento para acceder a esta cache, por ejemplo, si la cache está situado en un parque temático. Si no hay aparcamiento gratuito alternativa cercana, por favor incluya en la descripción. Por favor, tenga en cuenta nuestras condiciones de uso sobre geocaches comerciales.', '2010-12-09 00:18:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1647', 'ES', 'No puedrá encontrar este cache en un solo día o durante la noche. Usted tendrá que visitar el lugar más de una vez, o necesitará pasar la noche. El tiempo de preparación no está incluido en este cálculo, sólo el tiempo en el sitio.', '2010-12-09 00:18:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1648', 'ES', 'Una nueva entrada se ha creado en Opencaching', '2010-12-09 00:18:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1649', 'ES', 'Tiempo de ejecutición: {time} segundos', '2010-12-09 00:18:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1650', 'ES', '¡La página llamada no existe!', '2010-12-09 00:18:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1651', 'ES', 'Buscar por nombre de cache', '2010-12-09 00:18:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1652', 'ES', 'Redireccionar - opencaching', '2010-12-09 00:18:00');
@@ -10043,7 +10033,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1735', 'ES', 'Para Eventos: ¡Fecha del evento!', '2012-08-24 17:43:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1736', 'ES', 'ID de Usuario', '2012-08-24 17:43:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1737', 'ES', 'Lista', '2012-08-24 17:43:19');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1738', 'ES', 'Fecha del Evento', '2012-08-24 17:43:19');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1738', 'ES', 'Fecha del Evento:', '2012-08-24 17:43:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1739', 'ES', 'Encontrados: %1  Puestos: %2', '2011-04-04 22:05:42');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1740', 'ES', '<Usuario no conocido>', '2012-08-24 17:43:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1745', 'ES', 'Logo standard', '2012-08-24 17:43:19');
@@ -10237,7 +10227,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('4', 'FR', 'Utilisateur', '2015-08-25 01:28:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('5', 'FR', '(vide)', '2015-08-25 01:28:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('6', 'FR', 'Connecté en tant que', '2010-08-28 11:48:08');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('7', 'FR', 'Quite', '2010-10-04 00:17:39');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('7', 'FR', 'Déconnexion', '2010-10-04 00:17:39');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('8', 'FR', 'Recherche de Waypoint\&nbsp;:', '2015-08-25 01:28:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('9', 'FR', 'Durée page\&nbsp;:', '2015-08-25 01:28:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('10', 'FR', 'seconde', '2015-08-25 01:28:59');
@@ -10332,7 +10322,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('114', 'FR', 'Description', '2010-10-04 00:17:40');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('115', 'FR', 'Créez un cache', '2015-08-25 01:28:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('116', 'FR', 'Admin', '2010-10-04 00:17:40');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('117', 'FR', 'Information', '2010-10-04 00:17:40');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('117', 'FR', 'Informations', '2010-10-04 00:17:40');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('118', 'FR', 'Caches', '2010-10-04 00:17:40');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('119', 'FR', 'Mon profil', '2015-08-25 01:28:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('120', 'FR', 'Nouveaux logs', '2015-08-25 01:28:59');
@@ -10346,8 +10336,8 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('128', 'FR', 'Profil de l\'utilisateur', '2015-08-25 01:28:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('129', 'FR', 'Une erreur est survenue lors du traitement de la page.', '2015-08-25 01:28:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('130', 'FR', 'Une erreur est survenue lors du traitement de la page. Si vous avez appelé cette page d\'un lien hypertexte sur notre site et cette erreur persiste un certain temps, s\'il vous plaît nous contacter par e-mail.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('131', 'FR', 'L\'erreur suivante est survenue\&nbsp;:', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('133', 'FR', 'Indication d\'erreur\&nbsp;:', '2010-10-04 00:17:40');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('131', 'FR', 'L\'Erreur suivante est survenue\&nbsp;:', '2015-08-25 01:28:59');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('133', 'FR', 'Indication d\'erreur', '2010-10-04 00:17:40');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('134', 'FR', '%2 a trouvé %1', '2010-10-04 00:17:40');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('135', 'FR', '%2 ne pas trouvé %1', '2010-10-04 00:17:40');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('136', 'FR', '%2 ont écrit une note de %1', '2015-08-25 01:28:59');
@@ -10897,16 +10887,16 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('697', 'FR', 'Afficher tous les logs', '2015-08-25 01:28:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('698', 'FR', 'Afficher cette Geocache', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('699', 'FR', 'Vous êtes déjà connecté.<br /> S\'il vous plaît <a href=\"login.php?action=logout\">déconnecter</a> pour se connecter à nouveau.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('701', 'FR', 'Difficulté:\&nbsp;%1\&nbsp;of\&nbsp;5', '2010-08-28 11:48:08');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('702', 'FR', 'Terrain\&nbsp;:\&nbsp;%1\&nbsp;de\&nbsp;5', '2015-08-25 01:28:59');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('701', 'FR', 'Difficulté\&nbsp;:\&nbsp;%1\&nbsp;des\&nbsp;5', '2010-08-28 11:48:08');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('702', 'FR', 'Terrain\&nbsp;:\&nbsp;%1\&nbsp;des\&nbsp;5', '2015-08-25 01:28:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('703', 'FR', 'Liste des participants', '2015-08-25 01:28:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('704', 'FR', 'Enregistrer un log', '2015-08-25 01:28:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('705', 'FR', 'Ne regardez pas', '2015-08-25 01:29:13');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('706', 'FR', 'Regardez', '2015-08-25 01:29:13');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('707', 'FR', 'N\'ignorez pas', '2015-08-25 01:28:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('708', 'FR', 'Ignorer', '2010-08-28 11:48:08');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('709', 'FR', 'Imprimer', '2010-08-28 11:48:08');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('710', 'FR', 'Convertir les coordonnées', '2010-08-28 11:48:08');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('709', 'FR', 'Vue d\'impression', '2010-08-28 11:48:08');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('710', 'FR', 'Autres systèmes de coordonnées', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('711', 'FR', 'Taille', '2015-08-25 01:28:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('712', 'FR', 'Temps nécessaire\&nbsp;:', '2015-08-25 01:28:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('713', 'FR', 'Distance', '2010-08-28 11:48:08');
@@ -10928,7 +10918,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('730', 'FR', 'Chercher des Geocaches prés:', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('731', 'FR', 'tous', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('732', 'FR', 'trouvable', '2010-08-28 11:48:08');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('733', 'FR', 'Télécharger en fichier vers l\'aval:', '2010-08-28 11:48:08');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('733', 'FR', 'Télécharger en fichier&nbsp;:', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('734', 'FR', 'GPS Exchange Format .gpx', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('735', 'FR', 'Fichier waypoint .loc', '2015-08-25 01:28:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('736', 'FR', 'Google Earth .kml', '2010-08-28 11:48:08');
@@ -11232,7 +11222,6 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1406', 'FR', 'Dans une tentative de créer la page, une erreur est survenue. Si vous passez par un lien hypertexte sur notre page et si le problème persiste, ne pas hésiter à nous contacter par e-mail.', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1407', 'FR', 'L\'erreur suivante est survenue\&nbsp;:', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1408', 'FR', 'Page\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1409', 'FR', 'message d\'erreur\&nbsp;:', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1411', 'FR', 'êtes-vous sûr que cette entrée du log doit être supprimé\&nbsp;?', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1412', 'FR', 'voulez-vous envoyer à {log_user_name} une note\&nbsp;?', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1413', 'FR', 'Retirer entrée du log', '2015-08-25 01:29:00');
@@ -11266,7 +11255,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1442', 'FR', 'Choisissez les deux valorisations\&nbsp;!', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1443', 'FR', 'Aucune photo disponible', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1444', 'FR', '%1 caches <span style=\"%2\">assorti</span>', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1445', 'FR', 'Résultat %1 à %2 (comme zip)\&nbsp;:', '2015-08-25 01:29:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1445', 'FR', 'Résultat %1 à %2 (comme zip)', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1446', 'FR', 'cette description a été créé sur un autre serveur d\'Opencaching et ne peut pas y être supprimée.', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1447', 'FR', 'la description de cache a été supprimé', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1448', 'FR', 'Supprimer cette description de cache', '2015-08-25 01:29:00');
@@ -11450,8 +11439,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1646', 'FR', 'Vous devez payer un frais d\'accès ou de stationnement pour accéder à ce cache, par exemple, si le cache est situé dans un parc d\'attractions. Si il y a des zones de stationnement gratuit à proximité de rechange, s\'il vous plaît de les inclure dans la description de cache. S\'il vous plaît noter nos conditions d\'utilisation actuelles concernant les «&nbsp;geocaches commerciales&nbsp;».', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1647', 'FR', 'Ce cache ne peut pas être fait en un seul jour ou une seule nuit. Vous devrez visiter l\'emplacement pour plus d\'une fois ou vous devez passer la nuit. Le temps de préparation n\'est pas inclus dans ce calcul, seulement le temps sur le site.', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1648', 'FR', 'Un newsentry a été créé sur Opencaching', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1649', 'FR', 'Durée\&nbsp;: {time} secondes', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1650', 'FR', 'La page appelée n\'existe pas\&nbsp;!', '2015-08-25 01:29:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1650', 'FR', 'La page appelée n\'existe pas !', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1651', 'FR', 'Recherche par nom de cache', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1652', 'FR', 'Rediriger - Opencaching', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1653', 'FR', 'Voulez-vous vraiment supprimer la recherche enregistrée\&nbsp;?', '2015-08-25 01:29:00');
@@ -11529,7 +11517,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1735', 'FR', 'Pour des caches événementielle\&nbsp;: La date de l\'événement\&nbsp;!', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1736', 'FR', 'ID de l\'utilisateur\&nbsp;:', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1737', 'FR', 'Liste', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1738', 'FR', 'Date de l\'événement', '2015-08-25 01:29:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1738', 'FR', 'Date de l\'événement\&nbsp;:', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1739', 'FR', 'Trouvé : %1   Caché : %2', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1740', 'FR', '<Utilisateur inconnu>', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1745', 'FR', 'Standardlogo', '2015-08-25 01:29:00');
@@ -11974,7 +11962,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2226', 'FR', 'caché [cachelist]', '2015-08-25 01:29:13');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2227', 'FR', 'les coordonner changements', '2015-08-25 01:29:13');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2228', 'FR', 'Mot de passe pour le partage:', '2015-08-25 01:29:13');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2229', 'FR', 'la liste a un mot de passe; pour partager cliquez', '2015-08-25 01:29:13');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2229', 'FR', 'La liste a un mot de passe; pour partager cliquez ici', '2015-08-25 01:29:13');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2230', 'FR', 'Listes propres', '2015-08-25 01:29:13');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2231', 'FR', 'Listes signet', '2015-08-25 01:29:13');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2232', 'FR', 'Voulez-vous vraiment supprimer la liste des signets \\\'%1\\\' ?', '2015-08-25 01:29:13');
@@ -12993,7 +12981,6 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1406', 'IT', 'Nel tentativo di creare la pagina, si è verificato un errore. Se il problema si ripresenta, segnalalo con una email tramite il link qui a fianco.', '2010-10-27 18:49:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1407', 'IT', 'Si è verificato il seguente errore:', '2010-09-10 23:48:25');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1408', 'IT', 'Pagina:', '2010-09-10 23:48:10');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1409', 'IT', 'Rapporto errore:', '2010-09-10 23:47:40');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1411', 'IT', 'Vuoi veramente cancellare questo log?', '2010-09-10 23:47:01');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1412', 'IT', 'Vuoi inviare un commento a {log_user_name}?', '2010-09-10 23:46:49');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1413', 'IT', 'Cancella il log', '2010-09-10 23:46:43');
@@ -13027,7 +13014,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1442', 'IT', 'Seleziona la revisione dei dati di entrambi!', '2010-09-10 23:33:56');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1443', 'IT', 'Nessuna foto disponibile', '2010-09-10 23:32:13');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1444', 'IT', '%1 cache <span style=\"%2\">trovate</span>', '2010-09-10 23:33:47');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1445', 'IT', 'Risultati %1 a %2 (come zip):', '2010-09-10 23:33:33');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1445', 'IT', 'Risultati %1 a %2 (come zip)', '2010-09-10 23:33:33');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1446', 'IT', 'Questa descrizione è stata creata su un server Web Opencaching diverso e può essere cancellata solo su quello.', '2010-10-27 18:49:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1447', 'IT', 'La descrizione della cache è stata eliminata.', '2010-09-10 23:31:10');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1448', 'IT', 'Cancella descrizione cache', '2010-09-10 23:30:52');
@@ -13211,7 +13198,6 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1646', 'IT', 'Devi pagare un accesso o parcheggio a pagamento per accedere a questa cache, ad esempio se la cache si trova all\'interno di un parco a tema. Se ci sono alternative di parcheggio gratuiti nelle vicinanze, si prega di includerli nella descrizione. Per favore tieni presenti le nostre condizioni d\'uso a proposito di geocache commerciali.', '2010-09-13 15:05:45');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1647', 'IT', 'Non è possibile trovare questa cache in un solo giorno o una sola notte. Dovrete visitare il percorso per più di una volta, oppure è necessario il pernottamento. Il tempo di preparazione non è incluso in questo calcolo, ma solo il tempo sul sito.', '2010-09-12 23:41:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1648', 'IT', 'Una nuova notizia è stata creata su opencaching', '2010-10-27 18:49:19');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1649', 'IT', 'Runtime: {time} secondi', '2010-09-13 22:10:04');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1650', 'IT', 'La pagina invocata non esiste!', '2010-09-13 00:17:45');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1651', 'IT', 'Ricerca per nome cache', '2010-09-13 00:17:41');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1652', 'IT', 'Redirezione - opencaching', '2010-09-13 22:10:04');
@@ -13291,7 +13277,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1735', 'IT', 'Per gli eventi: La data dell\'evento!', '2012-08-26 02:39:48');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1736', 'IT', 'Identificativo utente:', '2012-08-26 02:39:48');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1737', 'IT', 'List', '2012-08-26 02:39:48');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1738', 'IT', 'Data evento', '2012-08-26 02:39:48');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1738', 'IT', 'Data evento:', '2012-08-26 02:39:48');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1739', 'IT', 'Trovate: %1   Nascoste: %2', '2012-08-26 02:39:48');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1740', 'IT', '<Utente sconosciuto>', '2012-08-26 02:39:48');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1745', 'IT', 'logo standard', '2012-08-26 02:39:48');
@@ -14521,7 +14507,6 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1400', 'NL', 'Plaats:', '2011-02-04 19:50:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1401', 'NL', 'Zoek op tekst', '2011-02-04 19:50:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1404', 'NL', 'Logsoort:', '2011-02-04 19:50:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1409', 'NL', 'Foutmelding:', '2011-02-04 19:50:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1420', 'NL', 'Taal:', '2011-02-04 19:50:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1586', 'NL', 'Kompas', '2011-02-04 19:50:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1587', 'NL', 'Zaklamp', '2011-02-04 19:50:08');
@@ -14559,7 +14544,6 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1646', 'NL', 'Er dient parkeergeld en/of entree betaald te worden om deze cache te doen, bijvoorbeeld in een themapark. Als er een alternative gratis parkeerplaats in de buurt is dient dat ook in de cachebeschrijving vermeld te worden. Let op onze huidige voorwaarden voor het gebruik met betrekking tot \"commerciële caches\".', '2011-02-04 19:50:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1647', 'NL', 'Deze cache kan niet in één dag of nacht gedaan worden. De locatie zal verschillende keren bezocht moeten worden of moeten overnachten. Voorbereidingstijd is niet berekend, alleen de tijd tijdens het cachen.', '2011-02-04 19:50:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1648', 'NL', 'Een nieuwsbericht is gemaakt op opencaching', '2011-02-04 19:50:08');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1649', 'NL', 'Looptijd: {time} Seconden', '2011-02-04 19:50:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1650', 'NL', 'De opgeroepen site bestaat niet!', '2011-02-04 19:50:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1651', 'NL', 'Zoek op cachenaam', '2011-02-04 19:50:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1652', 'NL', 'Redirect - opencaching', '2011-02-04 19:50:08');

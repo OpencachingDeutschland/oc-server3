@@ -17,9 +17,6 @@
 
 	global $locale, $opt;
 
-	//only debugging
- 	$runtime = t('Runtime: {time} seconds');
-
 	// set Date/Time language
 	setlocale(LC_TIME, 'de_DE.utf8');
 

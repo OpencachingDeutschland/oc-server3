@@ -5,9 +5,17 @@
  ***************************************************************************}
 {* OCSTYLE *}
 <div class="content2-pagetitle">
-	<img src="resource2/{$opt.template.style}/images/cacheicon/traditional.gif" style="margin-right: 10px;" width="32" height="32" alt="{t}Latest caches without germany{/t}" />
-	{t}Latest caches without germany{/t}
+	<img src="resource2/{$opt.template.style}/images/cacheicon/traditional.gif" style="margin-right: 10px;" width="32" height="32" alt="" />
+	{t}{t 1=$countryName}Latest caches without %1{/t}
 </div>
+
+<p class="subtitle-select">
+	[<a href="newcaches.php" class="systemlink">{t}All caches{/t}</a>]
+	&nbsp;&ndash;&nbsp;
+	[<a href="newcaches.php?country={$opt.template.country}" class="systemlink">{t 1=$countryName}Caches in %1{/t}</a>]
+	&nbsp;&ndash;&nbsp;
+	[<b>{t 1=$countryName}Caches without %1{/t}</b>]
+</p>
 
 <table width="100%" class="table">
 	{assign var='lastCountry' value=''}

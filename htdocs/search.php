@@ -391,8 +391,11 @@
 			$list = new cachelist($options['listid']);
 			if (!$list->allowView($password))
 				$tpl->redirect("cachelists.php");
+			$list_visibility = $list->getVisibility();
 			$options['cachelist'] = cachelist::getListById($options['listid']);  // null for invalid ID
 			$options['cachelist_pw'] = $password;
+			$options['list_visibility'] = $list_visibility;
+			;
 		}
 		elseif (isset($_REQUEST['searchall']))
 		{

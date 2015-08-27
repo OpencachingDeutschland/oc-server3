@@ -14,7 +14,7 @@
 	<ul>
 		<li class="group noicon {if $countryCode == ''}selected{/if}"><a href="newcaches.php">{t}All caches{/t}</a></li>
 		<li class="group noicon {if $countryCode != ''}selected{/if}"><a href="newcaches.php?country={$opt.template.country}">{t 1=$countryName}Caches in %1{/t}</a></li>
-		<li class="group noicon"><a href="newcachesrest.php{if $countryCode != ''}?country={$countryCode}{/if}">{t 1=$countryName}Caches without %1{/t}</a></li>
+		<li class="group noicon"><a href="newcachesrest.php?country={$opt.page.main_country}">{t 1=$mainCountryName}Caches without %1{/t}</a></li>
 	</ul>
 </div>
 <div style="height:3.2em"></div>

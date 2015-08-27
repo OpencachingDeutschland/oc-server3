@@ -47,7 +47,8 @@
 		// latest logs for all countries but Germany
 		$tpl->name = 'newlogsrest';
 		$tpl->menuitem = MNU_START_NEWLOGS;
-		$country = $exclude_country = $login->getUserCountry();
+		$country = $login->getUserCountry();
+		$exclude_country = $opt['page']['main_country'];
 		$include_country = '%';
 		// As nearly all logs are from Germany, retrieving non-German logs is
 		// expensive -> longer cache lifetime.
@@ -217,6 +218,17 @@
 	               WHERE `countries`.`short`='&1'",
 	              '',
 	              $country ? $country : $login->getUserCountry(),
+	              $opt['template']['locale'])
+			);
+		$tpl->assign(
+			'mainCountryName',
+			sql_value("SELECT IFNULL(`sys_trans_text`.`text`, `countries`.`name`) 
+	                FROM `countries`
+	           LEFT JOIN `sys_trans` ON `countries`.`trans_id`=`sys_trans`.`id`
+	           LEFT JOIN `sys_trans_text` ON `sys_trans`.`id`=`sys_trans_text`.`trans_id` AND `sys_trans_text`.`lang`='&2'
+	               WHERE `countries`.`short`='&1'",
+	              '',
+	              $opt['page']['main_country'],
 	              $opt['template']['locale'])
 			);
 

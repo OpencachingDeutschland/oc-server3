@@ -7,7 +7,7 @@
 <div class="nav4">
 	<ul>
 		<li class="group noicon"><a href="newcaches.php">{t}All caches{/t}</a></li>
-		<li class="group noicon"><a href="newcaches.php?country={$opt.template.country}">{t 1=$countryName}Caches in %1{/t}</a></li>
+		<li class="group noicon"><a href="newcaches.php?country={$userCountryCode}">{t 1=$userCountryName}Caches in %1{/t}</a></li>
 		<li class="group noicon selected"><a href="newcachesrest.php">{t 1=$countryName}Caches without %1{/t}</a></li>
 	</ul>
 </div>

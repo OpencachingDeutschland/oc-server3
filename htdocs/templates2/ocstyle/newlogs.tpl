@@ -23,7 +23,7 @@
 		<ul>
 			<li class="group noicon {if $countryCode === ''}selected{/if}"><a href="newlogs.php">{t}All new logs{/t}</a></li>
 			<li class="group noicon {if !$rest && $countryCode}selected{/if}"><a href="newlogs.php?country={$opt.template.country}">{t 1=$countryName}New logs in %1{/t}</a>
-			<li class="group noicon {if $rest}selected{/if}"><a href="newlogsrest.php">{t 1=$countryName}New logs without %1{/t}</a></li>
+			<li class="group noicon {if $rest}selected{/if}"><a href="newlogsrest.php">{t 1=$mainCountryName}New logs without %1{/t}</a></li>
 		</ul>
 	</div>
 	<div style="height:{if !$rest && $countryCode}3{else}2.7{/if}em"></div>

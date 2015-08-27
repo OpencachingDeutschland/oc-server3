@@ -12,7 +12,7 @@
 	$tpl->caching = true;
 	$tpl->cache_lifetime = 3600;
 
-	$country = isset($_REQUEST['country']) ? $_REQUEST['country'] : $login->getUserCountry();
+	$country = isset($_REQUEST['country']) ? $_REQUEST['country'] : $opt['page']['main_country'];
 
 	if (!$tpl->is_cached())
 	{
@@ -58,7 +58,19 @@
 	              $country,
 	              $opt['template']['locale'])
 			);
-	}
+		$tpl->assign('userCountryCode', $login->getUserCountry()); 
+		$tpl->assign(
+			'userCountryName',
+			sql_value("SELECT IFNULL(`sys_trans_text`.`text`, `countries`.`name`) 
+	                FROM `countries`
+	           LEFT JOIN `sys_trans` ON `countries`.`trans_id`=`sys_trans`.`id`
+	           LEFT JOIN `sys_trans_text` ON `sys_trans`.`id`=`sys_trans_text`.`trans_id` AND `sys_trans_text`.`lang`='&2'
+	               WHERE `countries`.`short`='&1'",
+	              '',
+	              $login->getUserCountry(),
+	              $opt['template']['locale'])
+			);
+}
 
 	$tpl->display();
 ?>

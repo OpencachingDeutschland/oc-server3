@@ -146,8 +146,8 @@
 <div class="content2-container bg-blue02">
 	<p class="content-title-noshade-size3">
 		<img src="resource2/{$opt.template.style}/images/cacheicon/traditional.gif" style="margin-right: 10px;" width="24" height="24" alt="" />
-		<a href="newcaches.php" style="color:rgb(88,144,168); text-decoration: none;">{t 1=$usercountry|escape}Newest caches in %1{/t}</a>
-	&nbsp; <span class="content-title-link">[<a href="newcaches.php?country={$usercountryCode}">{t}more{/t}...</a>]</span>
+		<a href="newcaches.php?country={$usercountryCode}" style="color:rgb(88,144,168); text-decoration: none;">{t 1=$usercountry|escape}Newest caches in %1{/t}</a>
+	&nbsp; <span class="content-title-link">[<a href="newcaches.php">{t}more{/t}...</a>]</span>
 	</p>
 </div>
 <p style="line-height: 1.6em;">({t 1=$count_hiddens 2=$count_founds 3=$count_users}Total of %1 active Caches and %2 founds by %3 users{/t})</p>

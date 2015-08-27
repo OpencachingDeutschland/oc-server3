@@ -339,6 +339,7 @@ td.content-title-flag {
 .content-subtitle { color: #426d7e; } 
 .subtitle { font-weight:bold; }
 .subtitle-header { font-weight:bold; line-height: 1.6em }
+p.subtitle-select { line-height:2.5em; }
 
 /* Headings */
 h1 {margin: 1.0em 0px 0.5em 0px; font-weight: bold; font-size: 160%;}

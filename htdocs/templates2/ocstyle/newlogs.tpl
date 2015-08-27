@@ -4,38 +4,29 @@
  *  Unicode Reminder メモ
  ***************************************************************************}
 {* OCSTYLE *}
-<div class="content2-pagetitle">
-	<img src="resource2/{$opt.template.style}/images/cacheicon/traditional.gif" style="margin-right: 10px;" width="32" height="32" alt="" />
-	{if $ownerlogs}
-		{if $ownlogs}
-			{t}Log entries for your geocaches{/t}
-		{else}
-			{capture name=ownerlink}<a href="viewprofile.php?userid={$ownerid}">{$ownername|escape}</a>{/capture}
-			{t 1=$smarty.capture.ownerlink}Newest log entries for caches of %1{/t}
+{if $ownerlogs || $ownlogs}
+	<div class="content2-pagetitle">
+		<img src="resource2/{$opt.template.style}/images/cacheicon/traditional.gif" style="margin-right: 10px;" width="32" height="32" alt="" />
+		{if $ownerlogs}
+			{if $ownlogs}
+				{t}Log entries for your geocaches{/t}
+			{else}
+				{capture name=ownerlink}<a href="viewprofile.php?userid={$ownerid}">{$ownername|escape}</a>{/capture}
+				{t 1=$smarty.capture.ownerlink}Newest log entries for caches of %1{/t}
+			{/if}
+		{else $ownlogs}
+			{t}Your log entries{/t}
 		{/if}
-	{elseif $ownlogs}
-		{t}Your log entries{/t}
-	{else}
-		{if $rest}{t 1=$countryName}Latest log entries without %1{/t}{elseif $countryCode}{t 1=$countryName}Latest log entries in %1{/t}{else}{t}Latest logs entries{/t}{/if}
-	{/if}
-</div>
-
-{if $rest}
-	<p class="subtitle-select">
-		[<a href="newlogs.php" class="systemlink">{t}All logs{/t}</a>]
-		&nbsp;&ndash;&nbsp;
-		[<a href="newlogs.php?country={$opt.template.country}" class="systemlink">{t 1=$countryName}Logs in %1{/t}</a>]
-		&nbsp;&ndash;&nbsp;
-		[<b>{t 1=$countryName}Logs without %1{/t}</b>]
-	</p>
-{elseif $countryCode !== false}
-	<p class="subtitle-select">
-		[{if $countryCode == ''}<b>{else}<a href="newlogs.php" class="systemlink">{/if}{t}All logs{/t}{if $countryCode == ''}</b>{else}</a>{/if}]
-		&nbsp;&ndash;&nbsp;
-		[{if $countryCode != ''}<b>{else}<a href="newlogs.php?country={$opt.template.country}" class="systemlink">{/if}{t 1=$countryName}Logs in %1{/t}{if $countryCode != ''}</b>{else}</a>{/if}]
-		&nbsp;&ndash;&nbsp;
-		[<a href="newlogsrest.php" class="systemlink">{t 1=$countryName}Logs without %1{/t}</a>]
-	</p>
+	</div>
+{else}
+	<div class="nav4">
+		<ul>
+			<li class="group noicon {if $countryCode === ''}selected{/if}"><a href="newlogs.php">{t}All new logs{/t}</a></li>
+			<li class="group noicon {if !$rest && $countryCode}selected{/if}"><a href="newlogs.php?country={$opt.template.country}">{t 1=$countryName}New logs in %1{/t}</a>
+			<li class="group noicon {if $rest}selected{/if}"><a href="newlogsrest.php">{t 1=$countryName}New logs without %1{/t}</a></li>
+		</ul>
+	</div>
+	<div style="height:{if !$rest && $countryCode}3{else}2.7{/if}em"></div>
 {/if}
 
 {if !$rest && $countryCode}

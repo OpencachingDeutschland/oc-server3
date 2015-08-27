@@ -4,19 +4,20 @@
  *  Unicode Reminder メモ
  ***************************************************************************}
 {* OCSTYLE *}
+{if $events}
 <div class="content2-pagetitle">
 	<img src="resource2/{$opt.template.style}/images/cacheicon/traditional.gif" style="margin-right: 10px;" width="32" height="32" alt="" />
-	{if $events}{t}Planned events{/t}{elseif $countryCode == ''}{t}Latest caches{/t}{else}{t 1=$countryName|escape}Newest caches in %1{/t}{/if}
+	{t}Planned events{/t}
 </div>
-
-{if !$events}
-<p class="subtitle-select">
-	[{if $countryCode == ''}<b>{else}<a href="newcaches.php" class="systemlink">{/if}{t}All caches{/t}{if $countryCode == ''}</b>{else}</a>{/if}]
-	&nbsp;&ndash;&nbsp;
-	[{if $countryCode != ''}<b>{else}<a href="newcaches.php?country={$opt.template.country}" class="systemlink">{/if}{t 1=$countryName}Caches in %1{/t}{if $countryCode != ''}</b>{else}</a>{/if}]
-	&nbsp;&ndash;&nbsp;
-	[<a href="newcachesrest.php{if $countryCode != ''}?country={$countryCode}{/if}" class="systemlink">{t 1=$countryName}Caches without %1{/t}</a>]
-</p>
+{else}
+<div class="nav4">
+	<ul>
+		<li class="group noicon {if $countryCode == ''}selected{/if}"><a href="newcaches.php">{t}All caches{/t}</a></li>
+		<li class="group noicon {if $countryCode != ''}selected{/if}"><a href="newcaches.php?country={$opt.template.country}">{t 1=$countryName}Caches in %1{/t}</a></li>
+		<li class="group noicon"><a href="newcachesrest.php{if $countryCode != ''}?country={$countryCode}{/if}">{t 1=$countryName}Caches without %1{/t}</a></li>
+	</ul>
+</div>
+<div style="height:3.2em"></div>
 {/if}
 
 <table width="100%" class="table">

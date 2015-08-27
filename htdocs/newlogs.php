@@ -48,7 +48,7 @@
 		$tpl->name = 'newlogsrest';
 		$tpl->menuitem = MNU_START_NEWLOGS;
 		$country = $exclude_country = $login->getUserCountry();
-    $include_country = '%';
+		$include_country = '%';
 		// As nearly all logs are from Germany, retrieving non-German logs is
 		// expensive -> longer cache lifetime.
 		$tpl->caching = true;

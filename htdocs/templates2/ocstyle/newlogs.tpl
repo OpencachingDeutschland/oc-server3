@@ -16,10 +16,31 @@
 	{elseif $ownlogs}
 		{t}Your log entries{/t}
 	{else}
-		{t}Latest logs entries{/t} {if $rest}{t}Without Germany{/t}{/if}
+		{if $rest}{t 1=$countryName}Latest log entries without %1{/t}{elseif $countryCode}{t 1=$countryName}Latest log entries in %1{/t}{else}{t}Latest logs entries{/t}{/if}
 	{/if}
 </div>
 
+{if $rest}
+	<p class="subtitle-select">
+		[<a href="newlogs.php" class="systemlink">{t}All logs{/t}</a>]
+		&nbsp;&ndash;&nbsp;
+		[<a href="newlogs.php?country={$opt.template.country}" class="systemlink">{t 1=$countryName}Logs in %1{/t}</a>]
+		&nbsp;&ndash;&nbsp;
+		[<b>{t 1=$countryName}Logs without %1{/t}</b>]
+	</p>
+{elseif $countryCode !== false}
+	<p class="subtitle-select">
+		[{if $countryCode == ''}<b>{else}<a href="newlogs.php" class="systemlink">{/if}{t}All logs{/t}{if $countryCode == ''}</b>{else}</a>{/if}]
+		&nbsp;&ndash;&nbsp;
+		[{if $countryCode != ''}<b>{else}<a href="newlogs.php?country={$opt.template.country}" class="systemlink">{/if}{t 1=$countryName}Logs in %1{/t}{if $countryCode != ''}</b>{else}</a>{/if}]
+		&nbsp;&ndash;&nbsp;
+		[<a href="newlogsrest.php" class="systemlink">{t 1=$countryName}Logs without %1{/t}</a>]
+	</p>
+{/if}
+
+{if !$rest && $countryCode}
+	<div style="height:4px"></div>
+{/if}
 <p style="line-height:2em">
 	{if $paging}
 		{include file="res_pager.tpl"}
@@ -38,7 +59,7 @@
 	{assign var='lastCountry' value=''}
 
 	{foreach name=newLogs from=$newLogs item=newLog}
-		{if $newLogsPerCountry}
+		{if $newLogsPerCountry && ($rest || !$countryCode)}
 			{if $newLog.country_name!=$lastCountry}
 				<tr><td class="spacer"></td></tr>
 				<tr><td colspan="3">

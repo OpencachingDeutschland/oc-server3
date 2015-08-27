@@ -5,4 +5,4 @@
 ***************************************************************************}
 {* OCSTYLE *}
 
-{include file="newlogs.tpl" ownlogs=true}
+{include file="newlogs.tpl" ownlogs=true countryCode=false}

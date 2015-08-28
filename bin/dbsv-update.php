@@ -534,6 +534,12 @@
 			sql("ALTER TABLE `languages` ADD COLUMN `native_name` VARCHAR(60) NOT NULL AFTER `trans_id`");
 	}
 
+	function dbv_132()  // fix cache list node IDs
+	{
+		global $opt;
+		sql("UPDATE `cache_lists` SET `node`='&1' WHERE `node`=0", $opt['logic']['node']['id']);
+	}
+
 
 	// When adding new mutations, take care that they behave well if run multiple
 	// times. This improves robustness of database versioning.

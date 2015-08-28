@@ -14,7 +14,7 @@
 	<p style="line-height: 1.6em;"><strong>{t}The following error occured:{/t}</strong></p>
 	<p style="line-height: 1.6em;">
 		{t}Page:{/t} {$page|escape}<br/>
-		{t}Error message:{/t}
+		{t}Error message{/t}{t}#colonspace#{/t}:
 
 		{if $id==ERROR_UNKNOWN}
 			({$id}) {t}An unkown error occured.{/t}

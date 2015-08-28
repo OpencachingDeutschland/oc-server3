@@ -25,5 +25,5 @@
 <p style="font-size:x-small;margin-bottom:0px;margin-left:15px;">{t}The following error occurred:{/t}</p>
 <p style="margin-top:0px;margin-left:15px;margin-right:20px;background-color:#e5e5e5;border:1px solid black;text-align:left;padding:3px 8px 3px 8px;">
 {t}Page:{/t} {tplname}<br/>
-{t}error message:{/t} {error_msg}
+{t}Error message{/t}{t}#colonspace#{/t}: {error_msg}
 </p>

@@ -27,6 +27,7 @@ class cachelist
 		$this->reCachelist = new rowEditor('cache_lists');
 		$this->reCachelist->addPKInt('id', null, false, RE_INSERT_AUTOINCREMENT);
 		$this->reCachelist->addString('uuid', '', false, RE_INSERT_AUTOUUID);
+		$this->reCachelist->addInt('node', 0, false);
 		$this->reCachelist->addInt('user_id', $nUserId, false);
 		$this->reCachelist->addDate('date_created', time(), true, RE_INSERT_IGNORE);
 		$this->reCachelist->addDate('last_modified', time(), true, RE_INSERT_IGNORE);
@@ -58,6 +59,16 @@ class cachelist
 	function getUUID()
 	{
 		return $this->reCachelist->getValue('uuid');
+	}
+
+	function setNode($value)
+	{
+		return $this->reCachelist->setValue('node', $value);
+	}
+
+	function getNode()
+	{
+		return $this->reCachelist->getValue('node');
 	}
 
 	function getUserId()

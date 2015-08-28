@@ -282,7 +282,7 @@ INSERT INTO `countries` (`short`, `name`, `trans_id`, `de`, `en`, `list_default_
 INSERT INTO `countries` (`short`, `name`, `trans_id`, `de`, `en`, `list_default_de`, `sort_de`, `list_default_en`, `sort_en`) VALUES ('FO', 'Faroe Islands', '379', 'Färöer (zu Dänemark)', 'Faroe Islands', '0', 'faeroeer (zu daenemark)', '0', 'faroe islands');
 INSERT INTO `countries` (`short`, `name`, `trans_id`, `de`, `en`, `list_default_de`, `sort_de`, `list_default_en`, `sort_en`) VALUES ('FR', 'France', '378', 'Frankreich', 'France', '1', 'frankreich', '0', 'france');
 INSERT INTO `countries` (`short`, `name`, `trans_id`, `de`, `en`, `list_default_de`, `sort_de`, `list_default_en`, `sort_en`) VALUES ('GA', 'Gabon', '377', 'Gabun', 'Gabon', '0', 'gabun', '0', 'gabon');
-INSERT INTO `countries` (`short`, `name`, `trans_id`, `de`, `en`, `list_default_de`, `sort_de`, `list_default_en`, `sort_en`) VALUES ('GB', 'United Kingdom (UK)', '376', 'Großbritannien', 'United Kingdom (UK)', '0', 'grossbritannien', '1', 'united kingdom (uk)');
+INSERT INTO `countries` (`short`, `name`, `trans_id`, `de`, `en`, `list_default_de`, `sort_de`, `list_default_en`, `sort_en`) VALUES ('GB', 'United Kingdom', '376', 'Großbritannien', 'United Kingdom', '0', 'grossbritannien', '1', 'united kingdom');
 INSERT INTO `countries` (`short`, `name`, `trans_id`, `de`, `en`, `list_default_de`, `sort_de`, `list_default_en`, `sort_en`) VALUES ('GD', 'Grenada', '375', 'Granada', 'Grenada', '0', 'granada', '0', 'grenada');
 INSERT INTO `countries` (`short`, `name`, `trans_id`, `de`, `en`, `list_default_de`, `sort_de`, `list_default_en`, `sort_en`) VALUES ('GE', 'Georgia', '374', 'Georgien', 'Georgia', '0', 'georgien', '0', 'georgia');
 INSERT INTO `countries` (`short`, `name`, `trans_id`, `de`, `en`, `list_default_de`, `sort_de`, `list_default_en`, `sort_en`) VALUES ('GF', 'French Guiana', '373', 'Guayana', 'French Guiana', '0', 'guayana', '0', 'french guiana');
@@ -1304,7 +1304,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('372', 'Ghana', 
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('373', 'French Guiana', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('374', 'Georgia', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('375', 'Grenada', '2010-08-28 11:48:03');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('376', 'United Kingdom (UK)', '2010-08-28 11:48:03');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('376', 'United Kingdom', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('377', 'Gabon', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('378', 'France', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('379', 'Faroe Islands', '2010-08-28 11:48:03');
@@ -7344,7 +7344,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('373', 'EN', 'French Guiana', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('374', 'EN', 'Georgia', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('375', 'EN', 'Grenada', '2010-08-28 11:48:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('376', 'EN', 'United Kingdom (UK)', '2010-08-28 11:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('376', 'EN', 'United Kingdom', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('377', 'EN', 'Gabon', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('378', 'EN', 'France', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('379', 'EN', 'Faroe Islands', '2010-08-28 11:48:07');
@@ -9107,7 +9107,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('373', 'ES', 'Guayana francesa', '2010-12-09 00:17:57');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('374', 'ES', 'Georgia', '2010-12-09 00:17:57');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('375', 'ES', 'Granada', '2010-12-09 00:17:57');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('376', 'ES', 'Reino Unido (UK)', '2010-12-09 00:17:57');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('376', 'ES', 'Reino Unido', '2010-12-09 00:17:57');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('377', 'ES', 'Gabón', '2010-12-09 00:17:57');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('378', 'ES', 'Francia', '2010-12-09 00:17:57');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('379', 'ES', 'Faroe, Islas', '2010-12-09 00:17:57');
@@ -10594,7 +10594,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('373', 'FR', 'Guyane française', '2015-08-25 01:28:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('374', 'FR', 'Géorgie', '2015-08-25 01:28:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('375', 'FR', 'Grenade', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('376', 'FR', 'Royaume-Uni (UK)', '2015-08-25 01:28:59');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('376', 'FR', 'Royaume-Uni', '2015-08-25 01:28:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('377', 'FR', 'Gabon', '2015-08-25 01:28:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('378', 'FR', 'France', '2015-08-25 01:28:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('379', 'FR', 'Îles Féroé', '2015-08-25 01:28:59');
@@ -12359,7 +12359,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('373', 'IT', 'Guiana francese', '2010-08-30 12:12:03');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('374', 'IT', 'Georgia', '2010-08-30 12:10:53');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('375', 'IT', 'Grenada', '2010-08-30 12:12:16');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('376', 'IT', 'Regno Unito (UK)', '2010-08-30 12:12:27');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('376', 'IT', 'Regno Unito', '2010-08-30 12:12:27');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('377', 'IT', 'Gabon', '2010-08-31 20:06:23');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('378', 'IT', 'Francia', '2010-09-01 23:48:28');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('379', 'IT', 'Faroe, Isole', '2010-08-31 20:06:23');

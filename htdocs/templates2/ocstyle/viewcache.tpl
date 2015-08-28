@@ -342,7 +342,8 @@ function showalllists()
 				{if $smarty.foreach.desclanguagesItem.first==false} &nbsp;&middot;&nbsp; {/if}
 				{if $cache.desclanguage==$desclanguagesItem.code}
 					<span class="txt-black" >{$desclanguagesItem.native_name|escape}</span>
-					{if $desclanguagesItem.name != $desclanguagesItem.native_name}
+					{if $desclanguagesItem.name != $desclanguagesItem.native_name &&
+					    !($desclanguagesItem.name == 'Englisch' && $desclanguagesItem.native_name == 'English')}
 						<span style="font-weight:normal" class="txt-black">({$desclanguagesItem.name})</span>
 					{/if}
 				{else}

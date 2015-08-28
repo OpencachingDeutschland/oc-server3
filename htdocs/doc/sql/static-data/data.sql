@@ -584,7 +584,7 @@ INSERT INTO `languages` (`short`, `name`, `trans_id`, `native_name`, `de`, `en`,
 INSERT INTO `languages` (`short`, `name`, `trans_id`, `native_name`, `de`, `en`, `list_default_de`, `list_default_en`) VALUES ('DA', 'Danish', '104', 'Dansk', 'Dänisch', 'Danish', '1', '1');
 INSERT INTO `languages` (`short`, `name`, `trans_id`, `native_name`, `de`, `en`, `list_default_de`, `list_default_en`) VALUES ('DE', 'German', '160', 'Deutsch', 'Deutsch', 'German', '1', '1');
 INSERT INTO `languages` (`short`, `name`, `trans_id`, `native_name`, `de`, `en`, `list_default_de`, `list_default_en`) VALUES ('EL', 'Greek', '103', 'Ελληνικά', 'Griechisch', 'Greek', '0', '0');
-INSERT INTO `languages` (`short`, `name`, `trans_id`, `native_name`, `de`, `en`, `list_default_de`, `list_default_en`) VALUES ('EN', 'English', '159', 'Englisch', 'Englisch', 'English', '1', '1');
+INSERT INTO `languages` (`short`, `name`, `trans_id`, `native_name`, `de`, `en`, `list_default_de`, `list_default_en`) VALUES ('EN', 'English', '159', 'English', 'Englisch', 'English', '1', '1');
 INSERT INTO `languages` (`short`, `name`, `trans_id`, `native_name`, `de`, `en`, `list_default_de`, `list_default_en`) VALUES ('EO', 'Esperanto', '102', 'Esperanto', 'Esperanto', 'Esperanto', '0', '0');
 INSERT INTO `languages` (`short`, `name`, `trans_id`, `native_name`, `de`, `en`, `list_default_de`, `list_default_en`) VALUES ('ES', 'Spanish', '157', 'Español', 'Spanisch', 'Spanish', '1', '1');
 INSERT INTO `languages` (`short`, `name`, `trans_id`, `native_name`, `de`, `en`, `list_default_de`, `list_default_en`) VALUES ('ET', 'Estonian', '101', 'Eesti', 'Estnisch', 'Estonian', '0', '0');
@@ -2712,6 +2712,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2244', 'Waypoin
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2245', 'without regional reference', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2246', '#colonspace#', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2247', 'User:', '2010-08-28 11:48:03');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2248', 'All languages', '2010-08-28 11:48:03');
 
 -- Table sys_trans_ref
 SET NAMES 'utf8';
@@ -6983,6 +6984,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2245', 'DE', 'ohne Regionalbezug', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2246', 'DE', '<span></span>', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2247', 'DE', 'Benutzer:', '2010-08-28 11:48:06');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2248', 'DE', 'Alle Sprachen', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'EN', 'Reorder IDs', '2010-09-02 00:15:30');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'EN', 'The database could not be reconnected.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'EN', 'Testing – please do not login', '2010-08-28 11:48:07');
@@ -8741,6 +8743,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2245', 'EN', 'without regional reference', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2246', 'EN', '<span></span>', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2247', 'EN', 'User:', '2010-08-28 11:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2248', 'EN', 'All languages', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'ES', 'La base de datos no se pudo conectar.', '2010-12-09 00:17:55');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'ES', 'En pruebas - por favor, no entre.', '2010-12-09 00:17:55');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('4', 'ES', 'Usuario', '2010-12-09 00:17:55');
@@ -10221,6 +10224,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2244', 'ES', 'Waypoint:', '2010-12-09 00:17:58');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2246', 'ES', '<span></span>', '2010-12-09 00:17:58');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2247', 'ES', 'Usuario:', '2010-12-09 00:17:55');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2248', 'ES', 'Todos los idiomas', '2010-12-09 00:18:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'FR', 'Réorganiser des IDs', '2015-08-25 01:28:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'FR', 'La base de données n\'a pas pu être connecté.', '2015-08-25 01:28:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'FR', 'Test - Ne vous connectez pas, s\'il vous plaît', '2015-08-25 01:28:59');
@@ -11980,6 +11984,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2245', 'FR', 'sans référence régionale', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2246', 'FR', '\&nbsp;', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2247', 'FR', 'Utilisateur\&nbsp;:', '2015-08-25 01:28:59');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2248', 'FR', 'Tous les langues', '2015-08-25 01:28:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'IT', 'Riordina gli ID', '2010-10-27 18:49:18');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'IT', 'Impossibile riconnettersi al database', '2010-08-28 20:28:01');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'IT', 'Test - per favore non connettersi', '2010-08-28 20:36:53');
@@ -12221,7 +12226,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('263', 'IT', 'Singapore', '2010-08-30 11:31:29');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('264', 'IT', 'Svezia', '2010-08-30 11:31:35');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('265', 'IT', 'Sudan', '2010-08-30 11:31:40');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('266', 'IT', 'Seicelle (Repubblica delle Seychelles)', '2010-08-30 11:32:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('266', 'IT', 'Seicelle', '2010-08-30 11:32:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('267', 'IT', 'Salomone, Isole', '2010-08-30 11:32:24');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('268', 'IT', 'Arabia Saudita', '2010-08-30 11:32:36');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('269', 'IT', 'Ruanda', '2010-08-30 11:32:47');
@@ -13670,6 +13675,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2244', 'IT', 'Waypoint:', '2010-09-01 23:49:03');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2246', 'IT', '<span></span>', '2010-12-09 00:17:58');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2247', 'IT', 'Utente:', '2010-08-28 20:29:29');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2248', 'IT', 'Tutte le linguaggi', '2010-08-28 20:29:29');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('922', 'JA', 'JA', '2011-05-15 16:04:51');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'NL', 'ID\'s opnieuw sorteren', '2011-02-04 19:49:56');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'NL', 'De verbinding met de database kon niet hersteld worden.', '2011-02-04 19:49:56');

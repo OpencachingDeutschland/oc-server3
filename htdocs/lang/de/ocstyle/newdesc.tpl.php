@@ -42,6 +42,7 @@
 		<td>{t}Language:{/t}</td>
 		<td>
 			<select name="desc_lang">
+				<option value="0" {nolangselected}>{t}-- Please select --{/t}</option>
 				{langoptions}
 			</select>
 			{show_all_langs_submit} {lang_message}

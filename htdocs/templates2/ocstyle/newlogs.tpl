@@ -26,7 +26,12 @@
 			<li class="group noicon {if $rest}selected{/if}"><a href="newlogsrest.php">{t 1=$mainCountryName}New logs without %1{/t}</a></li>
 		</ul>
 	</div>
-	<div style="height:{if !$rest && $countryCode}3{else}2.7{/if}em"></div>
+	<p style="clear:both;" >
+		{if $rest || !$countryCode}
+			<br />
+			{include file="res_countrylinks.tpl" newCaches=$newLogs}
+		{/if}
+	</p>
 {/if}
 
 {if !$rest && $countryCode}
@@ -47,12 +52,13 @@
 </p>
 
 <table width="100%" class="table"> 
+	<tr><td class="spacer"></td></tr>
 	{assign var='lastCountry' value=''}
 
 	{foreach name=newLogs from=$newLogs item=newLog}
 		{if $newLogsPerCountry && ($rest || !$countryCode)}
 			{if $newLog.country_name!=$lastCountry}
-				<tr><td class="spacer"></td></tr>
+				<tr><td class="spacer" id="country_{$newLog.country}"></td></tr>
 				<tr><td colspan="3">
 					<table cellspacing="0" cellpadding="0"><tr>
 						<td class="content-title-flag" ><img src="images/flags/{$newLog.country|lower}.gif" /></td>

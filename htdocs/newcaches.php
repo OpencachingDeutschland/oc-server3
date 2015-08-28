@@ -10,7 +10,8 @@
 	$tpl->menuitem = MNU_START_NEWCACHES;
 
 	$startat = isset($_REQUEST['startat']) ? $_REQUEST['startat']+0 : 0;
-	$country = isset($_REQUEST['country']) ? $_REQUEST['country'] : '';
+	$country = isset($_REQUEST['country']) ? $_REQUEST['country'] :
+	           (isset($_REQUEST['usercountry']) ? $_REQUEST['usercountry'] : '');
 	$cachetype = isset($_REQUEST['cachetype']) ? $_REQUEST['cachetype']+0 : 0;
 	$bEvents = ($cachetype == 6);
 
@@ -75,17 +76,28 @@
 
 		$tpl->assign('defaultcountry', $opt['template']['default']['country']);
 		$tpl->assign('countryCode', $country);
-		if ($country != '')
-		{
-			$tpl->assign(
-				'countryName',
-				sql_value("SELECT IFNULL(`sys_trans_text`.`text`, `countries`.`name`) 
-		                FROM `countries`
-		           LEFT JOIN `sys_trans` ON `countries`.`trans_id`=`sys_trans`.`id`
-		           LEFT JOIN `sys_trans_text` ON `sys_trans`.`id`=`sys_trans_text`.`trans_id` AND `sys_trans_text`.`lang`='&2'
-		               WHERE `countries`.`short`='&1'", '', $country, $opt['template']['locale'])
+		$tpl->assign(
+			'countryName',
+			sql_value("SELECT IFNULL(`sys_trans_text`.`text`, `countries`.`name`) 
+	                FROM `countries`
+	           LEFT JOIN `sys_trans` ON `countries`.`trans_id`=`sys_trans`.`id`
+	           LEFT JOIN `sys_trans_text` ON `sys_trans`.`id`=`sys_trans_text`.`trans_id` AND `sys_trans_text`.`lang`='&2'
+	               WHERE `countries`.`short`='&1'",
+	              '',
+	              $country ? $country : $login->getUserCountry(),
+	              $opt['template']['locale'])
 			);
-   	}
+		$tpl->assign(
+			'mainCountryName',
+			sql_value("SELECT IFNULL(`sys_trans_text`.`text`, `countries`.`name`) 
+	                FROM `countries`
+	           LEFT JOIN `sys_trans` ON `countries`.`trans_id`=`sys_trans`.`id`
+	           LEFT JOIN `sys_trans_text` ON `sys_trans`.`id`=`sys_trans_text`.`trans_id` AND `sys_trans_text`.`lang`='&2'
+	               WHERE `countries`.`short`='&1'",
+	              '',
+	              $opt['page']['main_country'],
+	              $opt['template']['locale'])
+			);
 
 		$tpl->assign('events', $bEvents);
 	}

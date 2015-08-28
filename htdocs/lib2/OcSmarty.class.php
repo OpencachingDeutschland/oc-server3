@@ -176,6 +176,8 @@ class OcSmarty extends Smarty
 		$optn['page']['body_unload'] = $this->body_unload;
 		$optn['page']['sponsor'] = $opt['page']['sponsor'];
 		$optn['page']['showsocialmedia'] = $opt['page']['showsocialmedia'];
+		$optn['page']['main_country'] = $opt['page']['main_country'];
+		$optn['page']['main_locale'] = $opt['page']['main_locale'];
 		$optn['template']['title'] = $this->title;
 		$optn['template']['caching'] = $this->caching;
 		$optn['template']['popup'] = $this->popup;
@@ -229,24 +231,26 @@ class OcSmarty extends Smarty
 			$optn['template']['title'] = $menu->GetMenuTitle();
 
 		// build address for switching locales
-		$locale_pageadr = $_SERVER['REQUEST_URI'];
+		$base_pageadr = $_SERVER['REQUEST_URI'];
 		// workaround for http://redmine.opencaching.de/issues/703
-		$strange_things_pos = strpos($locale_pageadr,".php/");
+		$strange_things_pos = strpos($base_pageadr,".php/");
 		if ($strange_things_pos)
-			$locale_pageadr = substr($locale_pageadr,0,$strange_things_pos + 4);
-		$lpos = strpos($locale_pageadr,"locale=");
+			$base_pageadr = substr($base_pageadr,0,$strange_things_pos + 4);
+		$lpos = strpos($base_pageadr,"locale=");
+		if (!$lpos) $lpos = strpos($base_pageadr,"usercountry=");
+		if (!$lpos) $lpos = strpos($base_pageadr,"country=");
 		if ($lpos)
-			$locale_pageadr = substr($locale_pageadr,0,$lpos);
+			$base_pageadr = substr($base_pageadr,0,$lpos);
 		else
 		{
-			$urx = explode('#', $locale_pageadr);
-			$locale_pageadr = $urx[0];
-			if (strpos($locale_pageadr,'?') == 0)
-				$locale_pageadr .= '?';
+			$urx = explode('#', $base_pageadr);
+			$base_pageadr = $urx[0];
+			if (strpos($base_pageadr,'?') == 0)
+				$base_pageadr .= '?';
 			else
-				$locale_pageadr .= '&';
+				$base_pageadr .= '&';
 		}
-		$this->assign('locale_pageadr', $locale_pageadr);
+		$this->assign('base_pageadr', $base_pageadr);
 
 		if ($opt['logic']['license']['disclaimer'])
 		{

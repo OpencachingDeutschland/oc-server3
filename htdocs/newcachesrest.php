@@ -7,10 +7,12 @@
 
 	require('./lib2/web.inc.php');
 	$tpl->name = 'newcachesrest';
-	$tpl->menuitem = MNU_START_NEWCACHESREST;
+	$tpl->menuitem = MNU_START_NEWCACHES;
 
 	$tpl->caching = true;
 	$tpl->cache_lifetime = 3600;
+
+	$country = isset($_REQUEST['country']) ? $_REQUEST['country'] : $opt['page']['main_country'];
 
 	if (!$tpl->is_cached())
 	{
@@ -19,7 +21,7 @@
 		$newCaches = array();
 
 		sql_temp_table_slave('cachelist');
-		sql_slave("CREATE TEMPORARY TABLE &cachelist (`cache_id` INT(11) PRIMARY KEY) SELECT `cache_id` FROM `caches` INNER JOIN `cache_status` ON `caches`.`status`=`cache_status`.`id` WHERE `cache_status`.`allow_user_view`=1 AND `country`!='DE' ORDER BY `date_created` DESC LIMIT 200");
+		sql_slave("CREATE TEMPORARY TABLE &cachelist (`cache_id` INT(11) PRIMARY KEY) SELECT `cache_id` FROM `caches` INNER JOIN `cache_status` ON `caches`.`status`=`cache_status`.`id` WHERE `cache_status`.`allow_user_view`=1 AND `country`!='". sql_escape($country) . "' ORDER BY `date_created` DESC LIMIT 200");
 
 		$rsNewCaches = sql_slave("SELECT IFNULL(`sys_trans_text`.`text`, `countries`.`name`) `country_name`, `caches`.`cache_id` `cacheid`, `caches`.`wp_oc` `wpoc`, `user`.`user_id` `userid`, `caches`.`country` `country`, `caches`.`name` `cachename`, `caches`.`type`, `caches`.`country` `country`, `user`.`username` `username`, `caches`.`date_created` `date_created`, `cache_type`.`icon_large` `icon_large`, `ca`.`attrib_id` IS NOT NULL AS `oconly`
 		                            FROM `caches`
@@ -43,7 +45,32 @@
 		sql_drop_temp_table_slave('cachelist');
 
 		$tpl->assign('newCaches', $newCaches);
-	}
+
+		$tpl->assign('countryCode',  $country);
+		$tpl->assign(
+			'countryName',
+			sql_value("SELECT IFNULL(`sys_trans_text`.`text`, `countries`.`name`) 
+	                FROM `countries`
+	           LEFT JOIN `sys_trans` ON `countries`.`trans_id`=`sys_trans`.`id`
+	           LEFT JOIN `sys_trans_text` ON `sys_trans`.`id`=`sys_trans_text`.`trans_id` AND `sys_trans_text`.`lang`='&2'
+	               WHERE `countries`.`short`='&1'",
+	              '',
+	              $country,
+	              $opt['template']['locale'])
+			);
+		$tpl->assign('userCountryCode', $login->getUserCountry()); 
+		$tpl->assign(
+			'userCountryName',
+			sql_value("SELECT IFNULL(`sys_trans_text`.`text`, `countries`.`name`) 
+	                FROM `countries`
+	           LEFT JOIN `sys_trans` ON `countries`.`trans_id`=`sys_trans`.`id`
+	           LEFT JOIN `sys_trans_text` ON `sys_trans`.`id`=`sys_trans_text`.`trans_id` AND `sys_trans_text`.`lang`='&2'
+	               WHERE `countries`.`short`='&1'",
+	              '',
+	              $login->getUserCountry(),
+	              $opt['template']['locale'])
+			);
+}
 
 	$tpl->display();
 ?>

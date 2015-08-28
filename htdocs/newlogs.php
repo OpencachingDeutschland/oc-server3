@@ -15,7 +15,9 @@
 	if (isset($ownerid))
 	{
 		// all logs for caches of one owner
+		$country = false;
 		$exclude_country = '*';
+		$include_country = '%';
 		$add_where = "AND `caches`.`user_id`='" . sql_escape($ownerid) . "' ";
 		if (!$show_own_logs)
 			$add_where .= "AND `cache_logs`.`user_id`<>'" . sql_escape($login->userid) . "' ";
@@ -30,7 +32,9 @@
 	elseif (isset($userid))
 	{
 		// all logs by one user
+		$country = false;
 		$exclude_country = '*';
+		$include_country = '%';
 		$add_where = "AND `cache_logs`.`user_id`='" . sql_escape($userid) . "' ";
 		$tpl->caching = false;
 		$logcount = 100;
@@ -42,9 +46,10 @@
 	{
 		// latest logs for all countries but Germany
 		$tpl->name = 'newlogsrest';
-		$tpl->menuitem = MNU_START_NEWLOGSREST;
-		$exclude_country = 'DE';
-
+		$tpl->menuitem = MNU_START_NEWLOGS;
+		$country = $login->getUserCountry();
+		$exclude_country = $opt['page']['main_country'];
+		$include_country = '%';
 		// As nearly all logs are from Germany, retrieving non-German logs is
 		// expensive -> longer cache lifetime.
 		$tpl->caching = true;
@@ -55,10 +60,19 @@
 	}
 	else
 	{
-		// latest logs for all countries
+		// latest logs for all countries or for one country
 		$tpl->name = 'newlogs';
 		$tpl->menuitem = MNU_START_NEWLOGS;
 		$exclude_country = '*';
+		if (isset($_REQUEST['country']))
+			$country = $include_country = $_REQUEST['country'];
+		else if (isset($_REQUEST['usercountry']))
+			$country = $include_country = $_REQUEST['usercountry'];
+		else
+		{
+			$country = '';
+			$include_country = '%';
+		}
 		$tpl->caching = true;
 		$tpl->cache_lifetime = 300;
 		$logcount = 250;
@@ -79,11 +93,13 @@
 			     INNER JOIN `cache_status` ON `caches`.`status`=`cache_status`.`id`
 			     INNER JOIN `user` ON `cache_logs`.`user_id`=`user`.`user_id`
 			          WHERE `cache_status`.`allow_user_view`=1
-			                AND `caches`.`country`<>'&1'
-			                AND `username`<>'&2'".
+			                AND `caches`.`country` LIKE '&1'
+			                AND `caches`.`country`<>'&2'
+			                AND `username`<>'&3'".
 			                $add_where."
 			       ORDER BY " . $orderByDate . "`cache_logs`.`date_created` DESC
-			          LIMIT &3, &4",
+			          LIMIT &4, &5",
+			                $include_country,
 			                $exclude_country,
 			                isset($_GET['showsyslogs']) ? '' : $opt['logic']['systemuser']['user'],
 			                $startat,
@@ -191,6 +207,30 @@
 		$tpl->assign('newLogs', $newLogs);
 		$tpl->assign('addpiclines', max($pics-1,0));
 		$tpl->assign('newLogsPerCountry', $newLogsPerCountry);
+
+		$tpl->assign('countryCode', $country);
+		$tpl->assign(
+			'countryName',
+			sql_value("SELECT IFNULL(`sys_trans_text`.`text`, `countries`.`name`) 
+	                FROM `countries`
+	           LEFT JOIN `sys_trans` ON `countries`.`trans_id`=`sys_trans`.`id`
+	           LEFT JOIN `sys_trans_text` ON `sys_trans`.`id`=`sys_trans_text`.`trans_id` AND `sys_trans_text`.`lang`='&2'
+	               WHERE `countries`.`short`='&1'",
+	              '',
+	              $country ? $country : $login->getUserCountry(),
+	              $opt['template']['locale'])
+			);
+		$tpl->assign(
+			'mainCountryName',
+			sql_value("SELECT IFNULL(`sys_trans_text`.`text`, `countries`.`name`) 
+	                FROM `countries`
+	           LEFT JOIN `sys_trans` ON `countries`.`trans_id`=`sys_trans`.`id`
+	           LEFT JOIN `sys_trans_text` ON `sys_trans`.`id`=`sys_trans_text`.`trans_id` AND `sys_trans_text`.`lang`='&2'
+	               WHERE `countries`.`short`='&1'",
+	              '',
+	              $opt['page']['main_country'],
+	              $opt['template']['locale'])
+			);
 
 		$tpl->assign('paging', $paging);
 		if ($paging)

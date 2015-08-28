@@ -57,6 +57,7 @@
 			$tpl->assign('newlist_mode', true);
 		else
 		{
+			$list->setNode($opt['logic']['node']['id']);
 			$list->setPassword($list_password);
 			$purifier = new OcHTMLPurifier($opt);
 			$list->setDescription($purifier->purify($desctext), $descMode == 3);

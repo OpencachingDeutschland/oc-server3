@@ -4,10 +4,14 @@
  *  Unicode Reminder メモ
  ***************************************************************************}
 {* OCSTYLE *}
-<div class="content2-pagetitle">
-	<img src="resource2/{$opt.template.style}/images/cacheicon/traditional.gif" style="margin-right: 10px;" width="32" height="32" alt="{t}Latest caches without germany{/t}" />
-	{t}Latest caches without germany{/t}
+<div class="nav4">
+	<ul>
+		<li class="group noicon"><a href="newcaches.php">{t}All caches{/t}</a></li>
+		<li class="group noicon"><a href="newcaches.php?country={$userCountryCode}">{t 1=$userCountryName}Caches in %1{/t}</a></li>
+		<li class="group noicon selected"><a href="newcachesrest.php">{t 1=$countryName}Caches without %1{/t}</a></li>
+	</ul>
 </div>
+<br /><br />
 
 <table width="100%" class="table">
 	{assign var='lastCountry' value=''}

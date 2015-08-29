@@ -92,7 +92,7 @@
 <div class="content2-container line-box" style="float:left">  {* div height will be wroing without float:left - why *}  
 	<div class="">
 		<div class="nav4">
-			<ul id="cachemenu">
+			<ul>
 				<li class="title" >Cache Menu</li>
 				{if $cache.log_allowed || $cache.adminlog}
 					<li class="group {if $cache.adminlog}hilite{/if}"><a style="background-image: url(resource2/{$opt.template.style}/images/viewcache/new-entry-18.png);background-repeat:no-repeat;background-position:left center;" href="{if $login.userid!=0}log.php?cacheid={$cache.cacheid|urlencode}{else}login.php?target=log.php%3Fcacheid%3D{$cache.cacheid|urlencode|urlencode}{/if}">{t}Log this cache{/t}</a></li>

@@ -4,22 +4,34 @@
  *  Unicode Reminder メモ
  ***************************************************************************}
 {* OCSTYLE *}
-<div class="content2-pagetitle">
-	<img src="resource2/{$opt.template.style}/images/cacheicon/traditional.gif" style="margin-right: 10px;" width="32" height="32" alt="" />
-	{if $ownerlogs}
-		{if $ownlogs}
-			{t}Log entries for your geocaches{/t}
-		{else}
-			{capture name=ownerlink}<a href="viewprofile.php?userid={$ownerid}">{$ownername|escape}</a>{/capture}
-			{t 1=$smarty.capture.ownerlink}Newest log entries for caches of %1{/t}
+{if $ownerlogs || $ownlogs}
+	<div class="content2-pagetitle">
+		<img src="resource2/{$opt.template.style}/images/cacheicon/traditional.gif" style="margin-right: 10px;" width="32" height="32" alt="" />
+		{if $ownerlogs}
+			{if $ownlogs}
+				{t}Log entries for your geocaches{/t}
+			{else}
+				{capture name=ownerlink}<a href="viewprofile.php?userid={$ownerid}">{$ownername|escape}</a>{/capture}
+				{t 1=$smarty.capture.ownerlink}Newest log entries for caches of %1{/t}
+			{/if}
+		{else $ownlogs}
+			{t}Your log entries{/t}
 		{/if}
-	{elseif $ownlogs}
-		{t}Your log entries{/t}
-	{else}
-		{t}Latest logs entries{/t} {if $rest}{t}Without Germany{/t}{/if}
-	{/if}
-</div>
+	</div>
+{else}
+	<div class="nav4">
+		<ul>
+			<li class="group noicon {if $countryCode === ''}selected{/if}"><a href="newlogs.php">{t}All new logs{/t}</a></li>
+			<li class="group noicon {if !$rest && $countryCode}selected{/if}"><a href="newlogs.php?country={$opt.template.country}">{t 1=$countryName}New logs in %1{/t}</a>
+			<li class="group noicon {if $rest}selected{/if}"><a href="newlogsrest.php">{t 1=$mainCountryName}New logs without %1{/t}</a></li>
+		</ul>
+	</div>
+	<div style="height:{if !$rest && $countryCode}3{else}2.7{/if}em"></div>
+{/if}
 
+{if !$rest && $countryCode}
+	<div style="height:4px"></div>
+{/if}
 <p style="line-height:2em">
 	{if $paging}
 		{include file="res_pager.tpl"}
@@ -38,7 +50,7 @@
 	{assign var='lastCountry' value=''}
 
 	{foreach name=newLogs from=$newLogs item=newLog}
-		{if $newLogsPerCountry}
+		{if $newLogsPerCountry && ($rest || !$countryCode)}
 			{if $newLog.country_name!=$lastCountry}
 				<tr><td class="spacer"></td></tr>
 				<tr><td colspan="3">

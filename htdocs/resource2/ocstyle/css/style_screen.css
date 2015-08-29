@@ -267,12 +267,14 @@ div.tplhelp
 .nav4 li.group2 a {display: block; min-height: 1.7em; height: auto !important; height: 1.7em; line-height: 1.7em; margin: 0px; padding: 0px 7px 0px 0px; border-top: solid 1px rgb(200,200,200); border-left: solid 14px rgb(219,230,241); color: rgb(75,75,75); font-weight: normal; font-size: 120%;}
 .nav4 li.group2_active a {border-left: solid 14px rgb(156,186,214); background-color: rgb(156,186,214);}
 
+.nav4 li.noicon a {padding: 0px 10px 0px 3px; }
+.nav4 li.selected a {background-color: #cae5af; border-left: solid 7px #cae5af;}
+
 .nav4 li a {display: block; min-height: 1.7em; height: auto !important; height: 1.7em; line-height: 1.7em; margin: 0px; border-left: solid 40px rgb(219,230,241); color: rgb(75,75,75); text-decoration: none; font-size: 120%;}
 .nav4 li a:hover, .nav4 li a.selected {border-left: solid 7px rgb(156,186,214);  color: rgb(100,100,100); text-decoration: none;}
 .nav4 li.group2 a:hover, .nav4 li a.selected {border-left: solid 14px rgb(156,186,214);  color: rgb(100,100,100); text-decoration: none;}
 
-ul#cachemenu { padding: 0px; margin: 0px;}
-ul#statmenu { padding: 0px; margin: 0px;}
+.nav4 ul { padding: 0px; margin: 0px;}
 
 .notlogged-cacheview { display: block; min-height: 1.7em; height: auto !important; height: 1.7em; line-height: 1.7em; margin: 0px; padding: 0px 0px 6px 7px; color: rgb(150,75,75); font-size: 120%; }
 
@@ -339,6 +341,7 @@ td.content-title-flag {
 .content-subtitle { color: #426d7e; } 
 .subtitle { font-weight:bold; }
 .subtitle-header { font-weight:bold; line-height: 1.6em }
+p.subtitle-select { line-height:2.5em; }
 
 /* Headings */
 h1 {margin: 1.0em 0px 0.5em 0px; font-weight: bold; font-size: 160%;}

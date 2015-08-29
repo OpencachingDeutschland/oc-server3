@@ -143,7 +143,6 @@ function search_output()
 	{
 		$tpl->assign('cachelist', $options['cachelist']);
 		$tpl->assign('cachelist_pw', $options['cachelist_pw']);
-		$tpl->assign('list_visibility', $options['list_visibility']);
 	}
 	else
 		$tpl->assign('cachelist', false);

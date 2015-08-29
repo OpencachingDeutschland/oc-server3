@@ -16,7 +16,7 @@
 		<a class="systemlink" href="cachelists.php">{t}Cache list{/t}</a> <b>{$cachelist.name|escape}</b>
 		{if $cachelist.bookmarked}<a href="mylists.php#bookmarks"><img src="resource2/{$opt.template.style}/images/viewcache/cache-rate.png" title="{t}I have bookmarked this list.{/t}" /></a>{/if}
 		{if $cachelist.watched_by_me}<img src="resource2/{$opt.template.style}/images/viewcache/16x16-watch.png" title="{t}I am watching this list.{/t}" />{/if}
-		{if $cachelist.user_id != $login.userid}{t}by{/t} <a href="viewprofile.php?userid={$cachelist.user_id}">{$cachelist.username|escape}</a>{elseif $list_visibility<=1}({t}private{/t}{if $cachelist.password} <a href="cachelist.php?id={$cachelist.id}&key={$cachelist.password|urlencode}"><img src="resource2/{$opt.template.style}/images/action/18x16-offer.png" title="{t}list has password; copy this link to share it{/t}" /></a>{/if}){/if}
+		{if $cachelist.user_id != $login.userid}{t}by{/t} <a href="viewprofile.php?userid={$cachelist.user_id}">{$cachelist.username|escape}</a>{else}({t}private{/t}{if $cachelist.password} <a href="cachelist.php?id={$cachelist.id}&key={$cachelist.password|urlencode}"><img src="resource2/{$opt.template.style}/images/action/18x16-offer.png" title="{t}list has password; copy this link to share it{/t}" /></a>{/if}){/if}
 		&nbsp;
 		{if $cachelist.user_id==$login.userid}[<a class="systemlink" href="mylists.php?edit={$cachelist.id}&fromsearch=1">{t}edit{/t}</a>]{/if}
 		{if $login.userid}[<a class="systemlink" href="cachelist.php?id={$cachelist.id}&{if $cachelist.watched_by_me}dont{/if}watch">{if $cachelist.watched_by_me}{t}don't watch{/t}{else}{t}watch{/t}{/if}</a>]{/if}

@@ -262,7 +262,7 @@ function toggleAttr(id)
 					<img src="lang/de/ocstyle/images/description/22x22-description.png" width="22" height="22" align="middle" border="0" />
 					{t}Descriptions{/t}&nbsp;&nbsp;
 					<img src="lang/de/ocstyle/images/action/16x16-adddesc.png" width="16" height="16" align="middle" border="0" alt="{t}Create a new description{/t}" title="{t}Create a new description{/t}">
-					<span style="font-weight: 400;font-size: small;">[<a href="newdesc.php?cacheid={cacheid_urlencode}">{t}Add an additional description{/t}</a>]</span>
+					<span style="font-weight: 400;font-size: small;">[<a href="newdesc.php?cacheid={cacheid_urlencode}">{t}Add description in another language{/t}</a>]</span>
 				</p>
 			</div>
 		</td>

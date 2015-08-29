@@ -22,6 +22,7 @@
 	// needs absolute rootpath because called as cronjob
 	$rootpath = dirname(__FILE__) . '/../../';
 	require_once($rootpath . 'lib/clicompatbase.inc.php');
+	require_once($rootpath . 'lib2/translate.class.php');
 	require_once('settings.inc.php');
 	require_once($rootpath . 'lib/consts.inc.php');
 	require_once($rootpath . 'lib2/html2text.class.php');
@@ -94,14 +95,16 @@
 /* begin send out everything that has to be sent */
 	
 	$email_headers = 'From: "' . $mailfrom . '" <' . $mailfrom . '>';
-	
-	$rsUsers = sql('SELECT `user`.`user_id`, `user`.`username`, `user`.`email`, `user`.`watchmail_mode`, `user`.`watchmail_hour`, `user`.`watchmail_day`, `user`.`watchmail_nextmail` FROM `user` INNER JOIN `watches_waiting` ON `user`.`user_id`=`watches_waiting`.`user_id` WHERE `user`.`watchmail_nextmail`<NOW()');
+
+	$rsUsers = sql("SELECT `user`.`user_id`, `user`.`username`, `user`.`email`, `user`.`watchmail_mode`, `user`.`watchmail_hour`, `user`.`watchmail_day`, `user`.`watchmail_nextmail`, IFNULL(`user`.`language`,'&1') `language` FROM `user` INNER JOIN `watches_waiting` ON `user`.`user_id`=`watches_waiting`.`user_id` WHERE `user`.`watchmail_nextmail`<NOW()", $opt['template']['default']['locale']);
 	for ($i = 0; $i < mysql_num_rows($rsUsers); $i++)
 	{
 		$rUser = sql_fetch_array($rsUsers);
 
 		if ($rUser['watchmail_nextmail'] != '0000-00-00 00:00:00')
 		{
+			$nologs = $translate->t('No new log entries.', '', basename(__FILE__), __LINE__, '', 1, $rUser['language']);
+
 			$rsWatches = sql("SELECT COUNT(*) count FROM watches_waiting WHERE user_id='&1'", $rUser['user_id']);
 			if (mysql_num_rows($rsWatches) > 0)
 			{
@@ -109,7 +112,7 @@
 				if ($r['count'] > 0)
 				{
 					// ok, eine mail ist fäig
-					$mailbody = read_file($rootpath . 'util/watchlist/watchlist.email');
+					$mailbody = fetch_email_template('watchlist', $rUser['language']);
 					$mailbody = mb_ereg_replace('{username}', $rUser['username'], $mailbody);
 
 					$rsWatchesOwner = sql("SELECT id, watchtext FROM watches_waiting WHERE user_id='&1' AND watchtype=1 ORDER BY id DESC", $rUser['user_id']);
@@ -164,6 +167,8 @@
 					{
 						if (is_existent_maildomain(getToMailDomain($mailadr)))
 						{
+							$language = $rUser['language'] ? $rUser['language'] : $opt['template']['default']['locale'];
+							$mailsubject = '[' . $maildomain . '] ' . $translate->t('Your watchlist of', '', basename(__FILE__), __LINE__, '', 1, $language) . ' ' . date($opt['locale'][$language]['format']['phpdate']);
 							mb_send_mail($mailadr, $mailsubject, $mailbody, $email_headers);
 					
 							// logentry($module, $eventid, $userid, $objectid1, $objectid2, $logtext, $details)																
@@ -205,7 +210,7 @@
  
 function process_owner_log($user_id, $log_id)
 {
-	global $dblink, $logowner_text, $absolute_server_URI;
+	global $opt, $dblink, $absolute_server_URI, $translate;
 
 //	echo "process_owner_log($user_id, $log_id)\n";
 	
@@ -213,14 +218,13 @@ function process_owner_log($user_id, $log_id)
 	$rLog = sql_fetch_array($rsLog);
 	mysql_free_result($rsLog);
 	
-	$watchtext = $logowner_text;
 	$logtext = $rLog['text'];
 	if ($rLog['text_html'] != 0)
 	{
 		$logtext = html_entity_decode($logtext, ENT_COMPAT, 'UTF-8');
 		$h2t = new html2text($logtext);
 		$h2t->set_base_url($absolute_server_URI);
-		$logtext = $h2t->get_text();
+		$logtext = trim($h2t->get_text());
 /*
 		$logtext = html_entity_decode($logtext, ENT_COMPAT, 'UTF-8');
 		$logtext = mb_ereg_replace("\r", '', $logtext);
@@ -232,16 +236,22 @@ function process_owner_log($user_id, $log_id)
 */
 	}
 
+	$language = sqlValue("SELECT `language` FROM `user` WHERE `user_id`='" . sql_escape($user_id) . "'", null);
+	if (!$language)
+		$language = $opt['template']['default']['locale'];
 	if (strpos($rLog['logdate'],'00:00:00') > 0)
-		$dateformat = 'd.m.Y';
+		$dateformat = $opt['locale'][$language]['format']['phpdate'];
 	else
-		$dateformat = 'd.m.Y, H:i';
+		$dateformat = $opt['locale'][$language]['format']['phpdatetime'];
+
+	$watchtext = '{date} ' . $translate->t('{user} has logged your cache "{cachename}":', '', basename(__FILE__), __LINE__, '', 1, $language) . ' {action}' . "\n" . 'http://opencaching.de/{wp_oc}' . "\n\n" . '{text}' . "\n\n\n\n";
+
 	$watchtext = mb_ereg_replace('{date}', date($dateformat, strtotime($rLog['logdate'])), $watchtext);
 	$watchtext = mb_ereg_replace('{wp_oc}', $rLog['wp_oc'], $watchtext);
 	$watchtext = mb_ereg_replace('{text}', $logtext, $watchtext);
 	$watchtext = mb_ereg_replace('{user}', $rLog['username'], $watchtext);
 	$watchtext = mb_ereg_replace('{cachename}', $rLog['cachename'], $watchtext);
-	$watchtext = mb_ereg_replace('{action}', get_log_action($rLog['type']), $watchtext);
+	$watchtext = mb_ereg_replace('{action}', get_log_action($rLog['type'], $language), $watchtext);
 	
 	sql("INSERT IGNORE INTO watches_waiting (`user_id`, `object_id`, `object_type`, `date_created`, `watchtext`, `watchtype`) VALUES (
 																		'&1', '&2', 1, NOW(), '&3', 1)", $user_id, $log_id, $watchtext);
@@ -252,7 +262,7 @@ function process_owner_log($user_id, $log_id)
 
 function process_log_watch($user_id, $log_id)
 {
-	global $dblink, $logwatch_text, $absolute_server_URI;
+	global $opt, $dblink, $logwatch_text, $absolute_server_URI, $translate;
 
 //	echo "process_log_watch($user_id, $log_id)\n";
 	
@@ -260,14 +270,13 @@ function process_log_watch($user_id, $log_id)
 	$rLog = sql_fetch_array($rsLog);
 	mysql_free_result($rsLog);
 	
-	$watchtext = $logwatch_text;
 	$logtext = $rLog['text'];
 	if ($rLog['text_html'] != 0)
 	{
 		$logtext = html_entity_decode($logtext, ENT_COMPAT, 'UTF-8');
 		$h2t = new html2text($logtext);
 		$h2t->set_base_url($absolute_server_URI);
-		$logtext = $h2t->get_text();
+		$logtext = trim($h2t->get_text());
 /*
 		$logtext = html_entity_decode($logtext, ENT_COMPAT, 'UTF-8');
 		$logtext = mb_ereg_replace("\r", '', $logtext);
@@ -279,38 +288,36 @@ function process_log_watch($user_id, $log_id)
 */
 	}
 	
+	$language = sqlValue("SELECT `language` FROM `user` WHERE `user_id`='" . sql_escape($user_id) . "'", null);
+	if (!$language)
+		$language = $opt['template']['default']['locale'];
 	if (strpos($rLog['logdate'],'00:00:00') > 0)
-		$dateformat = 'd.m.Y';
+		$dateformat = $opt['locale'][$language]['format']['phpdate'];
 	else
-		$dateformat = 'd.m.Y, H:i';
+		$dateformat = $opt['locale'][$language]['format']['phpdatetime'];
+
+	$watchtext = '{date} ' . $translate->t('{user} has logged the cache "{cachename}":', '', basename(__FILE__), __LINE__, '', 1, $language) . ' {action}' . "\n" . 'http://opencaching.de/{wp_oc}' . "\n\n" . '{text}' . "\n\n\n\n";
+
 	$watchtext = mb_ereg_replace('{date}', date($dateformat, strtotime($rLog['logdate'])), $watchtext);
 	$watchtext = mb_ereg_replace('{wp_oc}', $rLog['wp_oc'], $watchtext);
 	$watchtext = mb_ereg_replace('{text}', $logtext, $watchtext);
 	$watchtext = mb_ereg_replace('{user}', $rLog['username'], $watchtext);
 	$watchtext = mb_ereg_replace('{cachename}', $rLog['cachename'], $watchtext);
-	$watchtext = mb_ereg_replace('{action}', get_log_action($rLog['type']), $watchtext);
+	$watchtext = mb_ereg_replace('{action}', get_log_action($rLog['type'], $language), $watchtext);
 	
 	sql("INSERT IGNORE INTO watches_waiting (`user_id`, `object_id`, `object_type`, `date_created`, `watchtext`, `watchtype`) VALUES (
 																		'&1', '&2', 1, NOW(), '&3', 2)", $user_id, $log_id, $watchtext);
 }
 
 
-function get_log_action($logtype)
+function get_log_action($logtype, $language)
 {
-	switch ($logtype)
-	{
-		case 1: return "gefunden";
-		case 2: return "nicht gefunden";
-		case 3: return "Hinweis";
-		case 7: return "teilgenommen";
-		case 8: return "möchte teilnehmen";
-		case 9: return "archiviert";
-		case 10: return "kann gesucht werden";
-		case 11: return "momentan nicht verfügbar";
-		case 13: return "gesperrt";
-		case 14: return "gesperrt, versteckt";
-		default: return "";
-	}
+	return sqlValue("
+		SELECT IFNULL(`stt`.`text`, `log_types`.`en`)
+		FROM `log_types`
+		LEFT JOIN `sys_trans_text` `stt` ON `stt`.`trans_id`=`log_types`.`trans_id`
+		WHERE `log_types`.`id`='" . sql_escape($logtype) . "' AND `stt`.`lang`='" . sql_escape($language) . "'",
+		'');
 }
 
 

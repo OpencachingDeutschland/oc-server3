@@ -1,8 +1,9 @@
 Hallo {username},
 
-soeben wurde in deinem Suchradius ein neuer {oconly}Cache gemeldet:
+in deinem Suchradius gibt es einen neuen OConly-Cache:
+
 ---
-{user} hat am {date} den Cache "{cachename}" versteckt.
+{user} hat den Cache "{cachename}" als OConly markiert.
 Entfernung: {distance} {unit} Richtung {bearing}
 Typ: {cachetype}
 Größe: {cachesize}
@@ -11,8 +12,8 @@ Link: http://opencaching.de/{wp_oc}
 ---
 
 
-Die Einstellungen für deinen Suchradius kannst du unter
-http://www.opencaching.de/myprofile.php ansehen und bearbeiten.
+Die Einstellungen für deinen Suchradius und die OConly-Benachrichtigungen
+kannst du unter http://www.opencaching.de/myprofile.php einsehen und ändern.
 
 Happy Geocaching,
 das Opencaching.de-Team

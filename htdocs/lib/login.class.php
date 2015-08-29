@@ -89,6 +89,8 @@ class login
 
 	function verify()
 	{
+		global $locale;
+
 		if ($this->verified == true)
 			return;
 
@@ -117,8 +119,10 @@ class login
 				$rUser['last_login'] = date('Y-m-d H:i:s');
 			}
 
-			// user.last_login is used for statics, so we keep it up2date
-			sql("UPDATE `user` SET `user`.`last_login`=NOW() WHERE `user`.`user_id`='&1'", $this->userid);
+			if (isset($locale))
+				sql("UPDATE `user` SET `last_login`=NOW(), `language`='&2' WHERE `user_id`='&1'", $this->userid, $locale);
+			else
+				sql("UPDATE `user` SET `last_login`=NOW() WHERE `user_id`='&1'", $this->userid);
 
 			$this->lastlogin = $rUser['last_login'];
 			$this->admin = $rUser['admin'];

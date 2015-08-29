@@ -7932,7 +7932,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1353', 'EN', 'Your description contains at least one link to a picture hosted on geocaching.com!', '2010-09-11 00:00:31');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1354', 'EN', 'To prevent any problems with geocaching.com we want to please you to upload all linked pictures to opencaching.de as well and link the pictures in the HTML code to these on opencaching.de', '2010-09-11 00:00:11');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1355', 'EN', 'Upload a picture', '2010-09-10 23:59:58');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1356', 'EN', '<br />Listed since:', '2010-09-10 23:59:46');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1356', 'EN', 'Listed since:', '2010-09-10 23:59:46');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1357', 'EN', 'This cache is yours', '2010-09-10 23:57:34');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1358', 'EN', 'You found this cache', '2010-09-10 23:59:21');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1359', 'EN', 'You havn\'t found this cache, yet', '2010-09-10 23:59:03');
@@ -7986,7 +7986,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1407', 'EN', 'The following error occurred:', '2010-09-10 23:48:25');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1408', 'EN', 'Page:', '2010-09-10 23:48:10');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1411', 'EN', 'Are you sure that this log entry shall be removed?', '2010-09-10 23:47:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1412', 'EN', 'do you want to send {log_user_name} a note? ', '2010-09-10 23:46:49');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1412', 'EN', 'Do you want to send {log_user_name} a note? ', '2010-09-10 23:46:49');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1413', 'EN', 'Remove log entry', '2010-09-10 23:46:43');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1414', 'EN', 'Date is invalid', '2012-08-26 09:10:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1415', 'EN', 'only for found logs', '2010-09-10 23:44:54');
@@ -11252,7 +11252,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1429', 'FR', 'Publier sur', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1430', 'FR', 'Ne pas publier maintenant.', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1431', 'FR', 'Je l\'ai lu et accepté les <a href=\"articles.php?page=impressum#tos\" target=\"_blank\">conditions de service d\'Opencaching.de</a> et la <a href=\"articles.php?page=impressum#datalicense\" target=\"_blank\">licence de données d\'Opencaching.de</a>.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1432', 'FR', 'Info\&nbsp;: Votre log a été retiré par le propriétaire de la cache.', '2015-08-25 01:29:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1432', 'FR', 'Info : Votre log a été retiré par le propriétaire de la cache.', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1433', 'FR', 'Sélection de ville', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1434', 'FR', 'Total de %1 villes correspondent', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1435', 'FR', 'Pour le critère de recherche aucun résultat clair a été trouvé. S\'il vous plaît choisir l\'emplacement désiré\&nbsp;:', '2015-08-25 01:29:00');
@@ -11338,7 +11338,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1529', 'FR', 'Avec le téléchargement, vous acceptez les <a href=\"articles.php?page=impressum#tos\">conditions d\'usage</a> d\'Opencaching.de.\&nbsp;\&nbsp;', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1530', 'FR', 'Cette entrée de log a été créé sur un autre site d\'Opencaching. Le cache ne peut pas y être modifié.', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1531', 'FR', 'Cette description a été créé sur un autre site d\'Opencaching. Le cache ne peut pas y être modifié.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1532', 'FR', 'Le propriétaire de le vous a écrit le commentaire suivant\&nbsp;:', '2015-08-25 01:29:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1532', 'FR', 'Le propriétaire de le cache a écrit le commentaire suivant :', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1533', 'FR', 'Pour des caches virtuelles et webcam, la taille du cache doit être -no boité-\&nbsp;!', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1537', 'FR', 'Votre code HTML sera à nouveau modifié par un filtre spécial. Cela est nécessaire pour éviter les balises HTML dangereux, tels que\&lt;script\&gt;. Une liste avec des balises HTML autorisés, vous pouvez trouver <a href=\"http://www.opencaching.de/articles.php?page=htmltags\">ici</a>.', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1538', 'FR', 'Langue', '2015-08-25 01:29:00');
@@ -11789,7 +11789,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2037', 'FR', '%1 a désactivé la géocache', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2038', 'FR', '%1 a verrouillé la géocache', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2039', 'FR', '%1 a verrouillé et caché la géocache', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2040', 'FR', 'Le texte supprimé\&nbsp;:', '2015-08-25 01:29:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2040', 'FR', 'Le texte supprimé :', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2041', 'FR', 'total', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2042', 'FR', 'Le texte suivant est affiché dans votre <a href=\"viewprofile.php\">profile public</a>\&nbsp;:', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2043', 'FR', 'aucun texte entré jusqu\'à maintenant', '2015-08-25 01:29:00');

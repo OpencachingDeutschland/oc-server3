@@ -51,7 +51,7 @@
 			<tr>
 				<td colspan="2">{t}Reason:{/t} 
 					<select name="reason">
-						<option value="0" {if $reason==0}selected="selected"{/if}>{t}=== Please select ==={/t}</option>
+						<option value="0" {if $reason==0}selected="selected"{/if}>{t}-- Please select --{/t}</option>
 						{foreach from=$reasons item=reasonItem}
 							<option value="{$reasonItem.id}" {if $reason==$reasonItem.id}selected="selected"{/if}>{$reasonItem.name|escape}</option>
 						{foreachelse}

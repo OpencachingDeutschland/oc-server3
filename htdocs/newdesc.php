@@ -102,7 +102,7 @@
 					$desc_lang_exists = false;
 
 					//save to db?
-					if (isset($_POST['submitform']))  // Ocprop
+					if (isset($_POST['submitform']) && $sel_lang != '0')  // Ocprop
 					{
 						//check if the entered language already exists
 						$desc_rs = sql("SELECT `id` FROM `cache_desc` WHERE `cache_id`='&1' AND `language`='&2'", $cache_id, $sel_lang);
@@ -158,6 +158,7 @@
 					
 					//build langslist
 					$langoptions = '';
+					$selected = false;
 					$rsLanguages = sql("SELECT `short`, IFNULL(`sys_trans_text`.`text`, `languages`.`name`) AS `name` 
 					                      FROM `languages` 
 					                 LEFT JOIN `languages_list_default` ON `languages`.`short`=`languages_list_default`.`show` AND `languages_list_default`.`lang`='&1'
@@ -172,6 +173,7 @@
 					while ($rLanguage = sql_fetch_assoc($rsLanguages))
 					{
 						$sSelected = ($rLanguage['short'] == $sel_lang) ? ' selected="selected"' : '';
+						if ($sSelected != '') $selected = true;
 						$langoptions .= '<option value="' . htmlspecialchars($rLanguage['short'], ENT_COMPAT, 'UTF-8') . '"' . $sSelected . '>' . htmlspecialchars($rLanguage['name'], ENT_COMPAT, 'UTF-8') . '</option>' . "\n";
 					}
 					sql_free_result($rsLanguages);
@@ -183,12 +185,14 @@
 					}
 
 					tpl_set_var('langoptions', $langoptions);
+					tpl_set_var('nolangselected', $selected ? '' : 'selected="selected"');
 
 					//here we set the template vars
 					tpl_set_var('name', htmlspecialchars($cache_record['name'], ENT_COMPAT, 'UTF-8'));
 					tpl_set_var('cacheid', htmlspecialchars($cache_id, ENT_COMPAT, 'UTF-8'));
 					
-					tpl_set_var('lang_message', $desc_lang_exists ? $lang_message : '');
+					tpl_set_var('lang_message', $desc_lang_exists ? $lang_message :
+					            (isset($_POST['submitform']) && $sel_lang == '0' ? $error_no_lang_selected : ''));
 					
 					tpl_set_var('show_all_langs', $show_all_langs);
 					tpl_set_var('show_all_langs_submit', ($show_all_langs == 0) ? $show_all_langs_submit : '');

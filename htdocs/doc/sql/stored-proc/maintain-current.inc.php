@@ -604,17 +604,15 @@
 	sql("CREATE PROCEDURE sp_notify_new_cache (IN nCacheId INT(10) UNSIGNED, IN nLongitude DOUBLE, IN nLatitude DOUBLE, IN nType INT(1))
 	     BEGIN
 	       /* type 1 = new cache, 2 = new OConly attribute */
-	       IF (nType=1 OR
-	           (nType=2 AND (SELECT `notify_oconly` FROM `user`,`caches` WHERE `user`.`user_id`=`caches`.`user_id` AND `caches`.`cache_id`=nCacheId))) THEN
-		       INSERT IGNORE INTO `notify_waiting` (`cache_id`, `user_id`, `type`)
-		       SELECT nCacheId, `user`.`user_id`, nType /* notify_new_cache */
-		         FROM `user`
-	          /* Throttle email sending after undeliverable mails. See also runwatch.php. */
-		        WHERE (`email_problems` = 0 OR DATEDIFF(NOW(),`last_email_problem`) > 1+DATEDIFF(`last_email_problem`,`first_email_problem`))
-		          AND `user`.`latitude`+`user`.`longitude` <> 0
-		          AND `user`.`notify_radius`>0
-		          AND (acos(cos((90-nLatitude) * 3.14159 / 180) * cos((90-`user`.`latitude`) * 3.14159 / 180) + sin((90-nLatitude) * 3.14159 / 180) * sin((90-`user`.`latitude`) * 3.14159 / 180) * cos((nLongitude-`user`.`longitude`) * 3.14159 / 180)) * 6370) <= `user`.`notify_radius`;
-         END IF;
+	       INSERT IGNORE INTO `notify_waiting` (`cache_id`, `user_id`, `type`)
+	       SELECT nCacheId, `user`.`user_id`, nType /* notify_new_cache */
+	         FROM `user`
+          /* Throttle email sending after undeliverable mails. See also runwatch.php. */
+	        WHERE (`email_problems` = 0 OR DATEDIFF(NOW(),`last_email_problem`) > 1+DATEDIFF(`last_email_problem`,`first_email_problem`))
+	          AND (nType=1 OR `user`.`notify_oconly`)
+	          AND `user`.`latitude`+`user`.`longitude` <> 0
+	          AND `user`.`notify_radius`>0
+	          AND (acos(cos((90-nLatitude) * 3.14159 / 180) * cos((90-`user`.`latitude`) * 3.14159 / 180) + sin((90-nLatitude) * 3.14159 / 180) * sin((90-`user`.`latitude`) * 3.14159 / 180) * cos((nLongitude-`user`.`longitude`) * 3.14159 / 180)) * 6370) <= `user`.`notify_radius`;
 	     END;");
 
 	// recreate the user statpic on next request

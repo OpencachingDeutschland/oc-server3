@@ -13,6 +13,7 @@
 	$rootpath = dirname(__FILE__) . '/../../';
 
 	require_once($rootpath . 'lib/clicompatbase.inc.php');
+	require_once($rootpath . 'lib2/translate.class.php');
 	require_once('settings.inc.php');
 	require_once($rootpath . 'lib/consts.inc.php');
 	require_once($rootpath . 'lib2/ProcessSync.class.php');
@@ -33,10 +34,10 @@
 				SELECT
 					`notify_waiting`.`id`, `notify_waiting`.`cache_id`, `notify_waiting`.`type`,
 					`user`.`username`,
-					`user2`.`email`, `user2`.`username` as `recpname`, `user2`.`latitude` as `lat1`, `user2`.`longitude` as `lon1`, `user2`.`user_id` as `recid`,
-					`caches`.`name` as `cachename`, `caches`.`date_hidden`, `caches`.`latitude` as `lat2`, `caches`.`longitude` as `lon2`, `caches`.`wp_oc`,
-					`cache_type`.`de` as `cachetype`,
-					`cache_size`.`de` as `cachesize`,
+					`user2`.`email`, `user2`.`username` as `recpname`, `user2`.`latitude` AS `lat1`, `user2`.`longitude` as `lon1`, `user2`.`user_id` as `recid`, IFNULL(`user2`.`language`,'&1') as `recp_lang`,
+					`caches`.`name` as `cachename`, `caches`.`latitude` AS `lat2`, `caches`.`longitude` as `lon2`, `caches`.`wp_oc`, `caches`.`date_hidden`,
+					IFNULL(`stt_type`.`text`, `cache_type`.`en`) AS `cachetype`,
+					IFNULL(`stt_size`.`text`, `cache_size`.`en`) AS `cachesize`,
 					`cache_status`.`allow_user_view`,
 					`ca`.`attrib_id` IS NOT NULL AS `oconly`
 				FROM `notify_waiting`
@@ -45,8 +46,13 @@
 				INNER JOIN `user` `user2` ON `notify_waiting`.`user_id`=`user2`.`user_id`
 				INNER JOIN `cache_type` ON `caches`.`type`=`cache_type`.`id`
 				INNER JOIN `cache_size` ON `caches`.`size`=`cache_size`.`id`
+				LEFT JOIN `sys_trans_text` `stt_type` ON `stt_type`.`trans_id`=`cache_type`.`trans_id`
+				LEFT JOIN `sys_trans_text` `stt_size` ON `stt_size`.`trans_id`=`cache_size`.`trans_id`
 				INNER JOIN `cache_status` ON `caches`.`status`=`cache_status`.`id`
-				LEFT JOIN `caches_attributes` `ca` ON `ca`.`cache_id`=`caches`.`cache_id` AND `ca`.`attrib_id`=6");
+				LEFT JOIN `caches_attributes` `ca` ON `ca`.`cache_id`=`caches`.`cache_id` AND `ca`.`attrib_id`=6
+				WHERE `stt_type`.`lang`=IFNULL(`user2`.`language`,'&1') AND
+				      `stt_size`.`lang`=IFNULL(`user2`.`language`,'&1')",
+  			$opt['template']['default']['locale']);
 
 	  while ($rNotify = sql_fetch_array($rsNotify))
 	  {
@@ -63,23 +69,27 @@
 
 function process_new_cache($notify)
 {
-	global $debug, $debug_mailto, $rootpath;
-	global $mailfrom, $new_cache_subject, $new_oconly_subject;
+	global $opt, $debug, $debug_mailto, $rootpath, $translate;
+	global $maildomain, $mailfrom;
 
 	//echo "process_new_cache(".$notify['id'].")\n";
 	$error = false;
 
-	// mail-template lesen
+	// fetch email template
 	switch ($notify['type'])
 	{
 		case notify_new_cache: // Type: new cache
-			$mailbody = read_file($rootpath . 'util/notification/notify_newcache.email');
-			$mailsubject = $new_cache_subject;
+			$mailbody = fetch_email_template('notify_newcache', $notify['recp_lang']);
+			$mailsubject = '[' . $maildomain . '] ' .
+			               $translate->t($notify['oconly'] ? 'New OConly cache:' : 'New cache:', '', basename(__FILE__), __LINE__, '', 1, $notify['recp_lang']) .
+										 ' ' . $notify['cachename'];
 			break;
 
 		case notify_new_oconly: // Type: new OConly flag
-			$mailbody = read_file($rootpath . 'util/notification/notify_newoconly.email');
-			$mailsubject = $new_oconly_subject;
+			$mailbody = fetch_email_template('notify_newoconly', $notify['recp_lang']);
+			$mailsubject = '[' . $maildomain . '] ' .
+			               $translate->t('Cache was marked as OConly:', '', basename(__FILE__), __LINE__, '', 1, $notify['recp_lang']) .
+										 ' ' . $notify['cachename'];
 			break;
 
 		default:
@@ -90,7 +100,7 @@ function process_new_cache($notify)
 	if (!$error)
 	{
 		$mailbody = mb_ereg_replace('{username}', $notify['recpname'], $mailbody);
-		$mailbody = mb_ereg_replace('{date}', date('d.m.Y', strtotime($notify['date_hidden'])), $mailbody);
+		$mailbody = mb_ereg_replace('{date}', date($opt['locale'][$notify['recp_lang']]['format']['phpdate'], strtotime($notify['date_hidden'])), $mailbody);
 		$mailbody = mb_ereg_replace('{cacheid}', $notify['cache_id'], $mailbody);
 		$mailbody = mb_ereg_replace('{wp_oc}', $notify['wp_oc'], $mailbody);
 		$mailbody = mb_ereg_replace('{user}', $notify['username'], $mailbody);
@@ -100,26 +110,23 @@ function process_new_cache($notify)
 		$mailbody = mb_ereg_replace('{bearing}', Bearing2Text(calcBearing($notify['lat1'], $notify['lon1'], $notify['lat2'], $notify['lon2'])), $mailbody);
 		$mailbody = mb_ereg_replace('{cachetype}', $notify['cachetype'], $mailbody);
 		$mailbody = mb_ereg_replace('{cachesize}', $notify['cachesize'], $mailbody);
-		$mailbody = mb_ereg_replace('{oconly}', $notify['oconly'] ? 'OConly-' : '', $mailbody);
-
-		$subject = mb_ereg_replace('{cachename}', $notify['cachename'], $mailsubject);
-		$subject = mb_ereg_replace('{oconly}', $notify['oconly'] ? 'OConly-' : '', $subject);
+		$mailbody = mb_ereg_replace('{oconly-}', $notify['oconly'] ? $translate->t('OConly-', '', basename(__FILE__), __LINE__, '', 1, $notify['recp_lang']) : '', $mailbody);
 
 		/* begin send out everything that has to be sent */
 		$email_headers = 'From: "' . $mailfrom . '" <' . $mailfrom . '>';
 
-		// mail versenden
+		// send email
 		if ($debug == true)
 		    $mailadr = $debug_mailto;
 		else
 		    $mailadr = $notify['email'];
 
 		if (is_existent_maildomain(getToMailDomain($mailadr)))
-			mb_send_mail($mailadr, $subject, $mailbody, $email_headers);
+			mb_send_mail($mailadr, $mailsubject, $mailbody, $email_headers);
 	}
 	else
 	{
-		echo "Unbekannter Notification-Typ: " . $notify['type'] . "<br />";
+		echo "Unknown notification type: " . $notify['type'] . "<br />";
 	}
 
 	// logentry($module, $eventid, $userid, $objectid1, $objectid2, $logtext, $details)

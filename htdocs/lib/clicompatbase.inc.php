@@ -678,4 +678,16 @@
 		else
 			sql_error();
 	}
+
+	function fetch_email_template($filename, $language)
+	{
+		global $opt, $rootpath;
+
+		if (!$language) $language = $opt['template']['default']['locale'];
+		$language = strtolower($language);
+		if (!file_exists("$rootpath/lang/de/ocstyle/email/$language/$filename.email"))
+			$language = 'en';
+		return read_file("$rootpath/lang/de/ocstyle/email/$language/$filename.email");
+	}
+
 ?>

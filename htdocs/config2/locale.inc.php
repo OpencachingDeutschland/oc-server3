@@ -170,6 +170,8 @@
 	$opt['locale']['FR']['format']['phpdate'] = 'd-m-Y';
 	$opt['locale']['FR']['format']['colonspace'] = ' ';
 	$opt['locale']['FR']['country'] = 'FR';
+	$opt['locale']['FR']['page']['subtitle1'] = 'Geocaching avec Opencaching';
+	$opt['locale']['FR']['page']['subtitle2'] = '';
 	$opt['locale']['FR']['page']['license_url'] = 'http://creativecommons.org/licenses/by-nc-nd/3.0/de/deed.fr';
 	$opt['locale']['FR']['page']['license'] = '<a rel="license" href="%1"><img alt="Creative Commons License Terms" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-nd/3.0/de/88x31.png" /></a><div style="text-align:center; margin:8px 0 0 6px;">Le<a  href="articles.php?page=impressum#datalicense">contenu</a> de Opencaching.de sont sous licence Creative Commons <a rel="license" href="%1" target="_blank">BY-BC-ND 3.0 DE</a>.</div>';
 	$opt['locale']['FR']['helpwiki'] = "http://wiki.opencaching.de/index.php/";
@@ -249,7 +251,7 @@
 	$opt['locale']['DA']['format']['time'] = '%H:%M';
 	$opt['locale']['DA']['format']['timesec'] = '%X';
 	$opt['locale']['DA']['format']['phpdate'] = 'd-m-Y';
-	$opt['locale']['DE']['format']['colonspace'] = '';
+	$opt['locale']['DA']['format']['colonspace'] = '';
 	$opt['locale']['DA']['country'] = 'DK';
 	$opt['locale']['DA']['page']['subtitle1'] = 'Geocaching med Opencaching';
 	$opt['locale']['DA']['page']['subtitle2'] = '';

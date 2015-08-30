@@ -81,6 +81,7 @@ class user
 		$this->reUser->addBoolean('usermail_send_addr', false, false);
 		$this->reUser->addInt('notify_radius', 0, false);
 		$this->reUser->addInt('notify_oconly', 1, false);
+		$this->reUser->addString('language', null, true);
 		$this->reUser->addInt('admin', 0, false);
 		$this->reUser->addInt('data_license', $opt['logic']['license']['newusers'], false);
 		$this->reUser->addInt('node', 0, false);
@@ -206,8 +207,19 @@ class user
 	{
 		if ($value !== null && (sql_value("SELECT COUNT(*) FROM countries WHERE short='&1'", 0, $value) == 0))
 			return false;
-
-		return $this->reUser->setValue('country', $value);
+		else
+			return $this->reUser->setValue('country', $value);
+	}
+	function getLanguageCode()
+	{
+		return $this->reUser->getValue('language');
+	}
+	function setLanguageCode($value)
+	{
+		if ($value !== null && (sql_value("SELECT COUNT(*) FROM languages WHERE short='&1'", 0, $value) == 0))
+			return false;
+		else
+			return $this->reUser->setValue('language', $value);
 	}
 	function getLatitude()
 	{
@@ -664,6 +676,9 @@ class user
 		if ($fromUser->getEMail() === null || $fromUser->getEMail() == '')
 			return false;
 
+		$language = $this->getLanguageCode();
+		if (!$language) $language = $opt['template']['locale'];
+
 		// ok, we can send ...
 		$mail = new mail();
 		$mail->name = 'usercontactmail';
@@ -677,7 +692,7 @@ class user
 			$mail->returnPath = $fromUser->getEMail();
 		}
 
-		$mail->subject = $translate->t('E-Mail from', '', basename(__FILE__), __LINE__) . ' ' . $fromUser->getUsername() . ': ' . $sSubject;
+		$mail->subject = $translate->t('E-Mail from', '', basename(__FILE__), __LINE__, '', 1, $language) . ' ' . $fromUser->getUsername() . ': ' . $sSubject;
 		$mail->assign('usersubject', $sSubject);
 		$mail->assign('text', $sText);
 		$mail->assign('username', $this->getUsername());

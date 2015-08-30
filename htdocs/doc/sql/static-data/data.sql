@@ -1972,7 +1972,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1428', 'Publish
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1429', 'Publish on', '2010-09-07 20:19:05');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1430', 'Do not publish now.', '2010-09-07 20:19:05');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1431', 'I have read and agree to the <a href=\"articles.php?page=impressum#tos\" target=\"_blank\">Opencaching.de Terms of Service</a> and the <a href=\"articles.php?page=impressum#datalicense\" target=\"_blank\">Opencaching.de Datalicense</a>', '2010-09-07 20:19:05');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1432', 'Info: Your log entry has been removed from the cache owner', '2010-09-07 20:19:05');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1432', 'Info: Your log entry has been removed by the cache owner.', '2010-09-07 20:19:05');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1433', 'Selection of city', '2010-09-07 20:19:05');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1434', 'Total of %1 cities matched', '2010-09-07 20:19:05');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1435', 'For the search criterion no clear result was found. Please choose the desired location:', '2010-09-07 20:19:05');
@@ -2058,7 +2058,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1528', 'Downloa
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1529', 'With the download you accept the <a href=\"articles.php?page=impressum#tos\">terms of use</a> from opencaching.de.\&nbsp;\&nbsp;', '2010-09-11 02:13:38');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1530', 'This log entry has been created on another Opencaching website. The cache can only be edited there.', '2010-09-11 02:17:13');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1531', 'This description has been created on another Opencaching website. The cache can only be edited there.', '2010-09-11 02:17:19');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1532', 'The owner of the has written you the following comment:', '2010-09-11 02:21:06');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1532', 'The owner of the cache has written the following comment to you:', '2010-09-11 02:21:06');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1533', 'For virtual and webcam caches, the cache size has to be -no container-!', '2010-09-11 02:26:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1537', 'Your HTML code will be changed again by a special filter. This is necessary to avoid dangerous HTML-tags, such as \&lt;script\&gt;. A list of allowed HTML tags, you can find <a href=\"http://www.opencaching.de/articles.php?page=htmltags\">here</a>', '2010-09-11 02:55:48');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1538', 'Language', '2010-09-11 02:56:20');
@@ -2715,6 +2715,14 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2251', 'All new
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2252', 'New logs in %1', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2253', 'New logs without %1', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2254', 'Please select a language.', '2010-08-28 11:48:03');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2255', 'OConly-', '2010-08-28 11:48:03');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2256', 'New cache:', '2010-08-28 11:48:03');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2257', 'New OConly cache:', '2010-08-28 11:48:03');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2258', 'No new log entries.', '2010-08-28 11:48:03');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2259', '{user} has logged your cache "{cachename}":', '2010-08-28 11:48:03');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2260', '{user} has logged the cache "{cachename}":', '2010-08-28 11:48:03');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2261', 'Your watchlist of', '2010-08-28 11:48:03');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2262', 'Cache was marked as OConly:', '2010-08-28 11:48:03');
 
 -- Table sys_trans_ref
 SET NAMES 'utf8';
@@ -6986,6 +6994,14 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2252', 'DE', 'Neue Logs in %1', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2253', 'DE', 'Neue Logs ohne %1', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2254', 'DE', 'Bitte Sprache auswählen', '2010-08-28 11:48:06');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2255', 'DE', 'OConly-', '2010-08-28 11:48:06');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2256', 'DE', 'Neuer Cache:', '2010-08-28 11:48:03');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2257', 'DE', 'Neuer OConly-Cache:', '2010-08-28 11:48:03');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2258', 'DE', 'Keine neuen Logeinträge.', '2010-08-28 11:48:03');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2259', 'DE', '{user} hat einen Logeintrag für deinen Cache "{cachename}" gemacht:', '2010-08-28 11:48:03');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2260', 'DE', '{user} hat einen Logeintrag für den Cache "{cachename}" gemacht:', '2010-08-28 11:48:03');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2261', 'DE', 'Deine Watchlist vom', '2010-08-28 11:48:03');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2262', 'DE', 'Cache wurde als OConly markiert:', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'EN', 'Reorder IDs', '2010-09-02 00:15:30');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'EN', 'The database could not be reconnected.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'EN', 'Testing – please do not login', '2010-08-28 11:48:07');
@@ -8005,7 +8021,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1429', 'EN', 'Publish on', '2010-09-10 23:40:38');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1430', 'EN', 'Do not publish now.', '2010-09-10 23:40:30');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1431', 'EN', 'I have read and agree to the <a href=\"articles.php?page=impressum#tos\" target=\"_blank\">Opencaching.de Terms of Service</a> and <a href=\"articles.php?page=impressum#datalicense\" target=\"_blank\">Opencaching.de Data license</a>.', '2010-09-10 23:39:25');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1432', 'EN', 'Info: Your log entry has been removed from the cache owner.', '2010-09-10 23:39:09');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1432', 'EN', 'Info: Your log entry has been removed by the cache owner.', '2010-09-10 23:39:09');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1433', 'EN', 'Selection of city', '2010-09-10 23:39:01');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1434', 'EN', 'Total of %1 cities matched', '2010-09-10 23:38:52');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1435', 'EN', 'For the search criterion no clear result was found. Please choose the desired location:', '2010-09-10 23:38:27');
@@ -8091,7 +8107,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1529', 'EN', 'With the download you accept the <a href=\"articles.php?page=impressum#tos\">terms of use</a> from opencaching.de.\&nbsp;\&nbsp;', '2010-09-11 02:27:43');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1530', 'EN', 'This log entry has been created on another Opencaching website. It can only be edited there.', '2010-09-11 02:18:51');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1531', 'EN', 'This description has been created on another Opencaching website. It can only be edited there.', '2010-09-11 02:18:20');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1532', 'EN', 'The owner of the has written you the following comment:', '2010-09-11 02:23:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1532', 'EN', 'The owner of the cache has written you the following comment to you:', '2010-09-11 02:23:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1533', 'EN', 'For virtual and webcam caches, the cache size has to be -no container-!', '2010-09-11 02:45:28');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1537', 'EN', 'Your HTML code will be changed again by a special filter. This is necessary to avoid dangerous HTML-tags, such as \&lt;script\&gt;. A list of allowed HTML tags can be find <a href=\"http://www.opencaching.de/articles.php?page=htmltags\">here</a>.', '2010-09-11 02:56:58');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1538', 'EN', 'Language:', '2010-09-11 02:57:12');
@@ -8749,6 +8765,14 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2252', 'EN', 'New logs in %1', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2253', 'EN', 'New logs without %1', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2254', 'EN', 'Please select a language.', '2010-08-28 11:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2255', 'EN', 'OConly ', '2010-08-28 11:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2256', 'EN', 'New cache:', '2010-08-28 11:48:03');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2257', 'EN', 'New OConly cache:', '2010-08-28 11:48:03');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2258', 'EN', 'No new log entries.', '2010-08-28 11:48:03');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2259', 'EN', '{user} has logged your cache "{cachename}":', '2010-08-28 11:48:03');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2260', 'EN', '{user} has logged the cache "{cachename}":', '2010-08-28 11:48:03');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2261', 'EN', 'Your watchlist of', '2010-08-28 11:48:03');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2262', 'EN', 'Cache was marked as OConly:', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'ES', 'La base de datos no se pudo conectar.', '2010-12-09 00:17:55');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'ES', 'En pruebas - por favor, no entre.', '2010-12-09 00:17:55');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('4', 'ES', 'Usuario', '2010-12-09 00:17:55');
@@ -10233,6 +10257,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2251', 'ES', 'Todos los nuevo logs', '2010-12-09 00:17:55');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2252', 'ES', 'Nuevo logs en %1', '2010-12-09 00:17:55');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2253', 'ES', 'Nuevo logs sin %1', '2010-12-09 00:17:55');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2255', 'ES', 'OConly ', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'FR', 'Réorganiser des IDs', '2015-08-25 01:28:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'FR', 'La base de données n\'a pas pu être connecté.', '2015-08-25 01:28:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'FR', 'Test - Ne vous connectez pas, s\'il vous plaît', '2015-08-25 01:28:59');
@@ -11997,6 +12022,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2252', 'FR', 'Nouveaux logs à %1', '2015-08-25 01:28:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2253', 'FR', 'Nouveaux logs sans %1', '2015-08-25 01:28:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2254', 'FR', 'S\'il vous plaît sélectionner une langue.', '2015-08-25 01:29:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2255', 'FR', 'OConly ', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'IT', 'Riordina gli ID', '2010-10-27 18:49:18');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'IT', 'Impossibile riconnettersi al database', '2010-08-28 20:28:01');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'IT', 'Test - per favore non connettersi', '2010-08-28 20:36:53');
@@ -13691,6 +13717,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2251', 'IT', 'Tutto nuovi logs', '2010-08-28 20:29:29');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2252', 'IT', 'Nuovi logs in %1', '2010-08-28 20:29:29');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2253', 'IT', 'Nuovi logs senza %1', '2010-08-28 20:29:29');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2255', 'IT', 'OConly ', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('922', 'JA', 'JA', '2011-05-15 16:04:51');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'NL', 'ID\'s opnieuw sorteren', '2011-02-04 19:49:56');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'NL', 'De verbinding met de database kon niet hersteld worden.', '2011-02-04 19:49:56');

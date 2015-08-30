@@ -33,7 +33,7 @@ class translate
 	 */
 	function t($message, $style, $resource_name, $line, $plural='', $count=1, $lang=null)
 	{
-		global $opt;
+		global $opt, $locale;    // $locale is for lib1 compatibility
 
 		if ($message == '')
 			return '';
@@ -42,7 +42,8 @@ class translate
 			$message = $plural;
 		$search = $this->prepare_text($message);
 
-		if (($lang === null) || ($lang == $opt['template']['locale']))
+		$loc = isset($opt['template']['locale']) ? $opt['template']['locale'] : $locale;
+		if (!$lang || ($lang == $loc))
 			$trans = gettext($search);
 		else
 		{

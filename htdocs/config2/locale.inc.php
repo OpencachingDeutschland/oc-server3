@@ -101,6 +101,7 @@
 	$opt['locale']['EN']['format']['time'] = '%I:%M %p';
 	$opt['locale']['EN']['format']['timesec'] = '%X';
 	$opt['locale']['EN']['format']['phpdate'] = 'm/d/Y';
+	$opt['locale']['EN']['format']['phpdatetime'] = 'm/d/Y h:i A';
 	$opt['locale']['EN']['format']['dot1000'] = ',';
 	$opt['locale']['EN']['format']['colonspace'] = '';
 	$opt['locale']['EN']['country'] = 'UK';
@@ -119,6 +120,7 @@
 	$opt['locale']['DE']['format']['time'] = '%H:%M';
 	$opt['locale']['DE']['format']['timesec'] = '%X';
 	$opt['locale']['DE']['format']['phpdate'] = 'd.m.Y';
+	$opt['locale']['EN']['format']['phpdatetime'] = 'd.m.Y H:i';
 	$opt['locale']['DE']['format']['colonspace'] = '';
 	$opt['locale']['DE']['country'] = 'DE';
 	$opt['locale']['DE']['page']['subtitle1'] = 'Geocaching mit Opencaching';
@@ -136,6 +138,7 @@
 	$opt['locale']['IT']['format']['time'] = '%H:%M';
 	$opt['locale']['IT']['format']['timesec'] = '%X';
 	$opt['locale']['IT']['format']['phpdate'] = 'd/m/Y';
+	$opt['locale']['IT']['format']['phpdatetime'] = 'd/m/Y H:i';
 	$opt['locale']['IT']['format']['colonspace'] = '';
 	$opt['locale']['IT']['country'] = 'IT';
 	$opt['locale']['IT']['page']['subtitle1'] = 'Geocaching con Opencaching';
@@ -152,6 +155,7 @@
 	$opt['locale']['ES']['format']['time'] = '%H:%M';
 	$opt['locale']['ES']['format']['timesec'] = '%X';
 	$opt['locale']['ES']['format']['phpdate'] = 'd/m/Y';
+	$opt['locale']['ES']['format']['phpdatetime'] = 'd/m/Y H:i';
 	$opt['locale']['ES']['format']['colonspace'] = '';
 	$opt['locale']['ES']['country'] = 'ES';
 	$opt['locale']['ES']['page']['subtitle1'] = 'Geocaching con Opencaching';
@@ -168,6 +172,7 @@
 	$opt['locale']['FR']['format']['time'] = '%H:%M';
 	$opt['locale']['FR']['format']['timesec'] = '%X';
 	$opt['locale']['FR']['format']['phpdate'] = 'd-m-Y';
+	$opt['locale']['FR']['format']['phpdatetime'] = 'd-m-Y H:i';
 	$opt['locale']['FR']['format']['colonspace'] = ' ';
 	$opt['locale']['FR']['country'] = 'FR';
 	$opt['locale']['FR']['page']['subtitle1'] = 'Geocaching avec Opencaching';
@@ -185,6 +190,7 @@
 	$opt['locale']['SV']['format']['time'] = '%H:%M';
 	$opt['locale']['SV']['format']['timesec'] = '%X';
 	$opt['locale']['SV']['format']['phpdate'] = 'Y-m-d';
+	$opt['locale']['SV']['format']['phpdatetime'] = 'Y-m-d H:i';
 	$opt['locale']['SV']['format']['colonspace'] = '';
 	$opt['locale']['SV']['country'] = 'SE';
 	$opt['locale']['SV']['page']['subtitle1'] = 'Geocaching med Opencaching';
@@ -199,6 +205,7 @@
 	$opt['locale']['NO']['format']['time'] = '%H:%M';
 	$opt['locale']['NO']['format']['timesec'] = '%X';
 	$opt['locale']['NO']['format']['phpdate'] = 'd.m.Y';
+	$opt['locale']['NO']['format']['phpdatetime'] = 'd.m.Y H:i';
 	$opt['locale']['NO']['format']['colonspace'] = '';
 	$opt['locale']['NO']['country'] = 'NO';
 	$opt['locale']['NO']['page']['subtitle1'] = 'Geocaching med Opencaching';
@@ -213,6 +220,7 @@
 	$opt['locale']['PL']['format']['time'] = '%H:%M';
 	$opt['locale']['PL']['format']['timesec'] = '%X';
 	$opt['locale']['PL']['format']['phpdate'] = 'd-m-Y';
+	$opt['locale']['PL']['format']['phpdatetime'] = 'd-m-Y H:i';
 	$opt['locale']['PL']['format']['colonspace'] = '';
 	$opt['locale']['PL']['country'] = 'PL';
 
@@ -225,6 +233,7 @@
 	$opt['locale']['NL']['format']['time'] = '%H:%M';
 	$opt['locale']['NL']['format']['timesec'] = '%X';
 	$opt['locale']['NL']['format']['phpdate'] = 'd-m-Y';
+	$opt['locale']['NL']['format']['phpdatetime'] = 'd-m-Y H:i';
 	$opt['locale']['NL']['format']['colonspace'] = '';
 	$opt['locale']['NL']['page']['subtitle1'] = 'Geocaching met Opencaching';
 	$opt['locale']['NL']['page']['subtitle2'] = '';
@@ -239,6 +248,7 @@
 	$opt['locale']['RU']['format']['time'] = '%H:%M';
 	$opt['locale']['RU']['format']['timesec'] = '%X';
 	$opt['locale']['RU']['format']['phpdate'] = 'd-m-Y';
+	$opt['locale']['RU']['format']['phpdatetime'] = 'd-m-Y H:i';
 	$opt['locale']['RU']['format']['colonspace'] = '';
 	$opt['locale']['RU']['country'] = 'RU';
 
@@ -251,6 +261,7 @@
 	$opt['locale']['DA']['format']['time'] = '%H:%M';
 	$opt['locale']['DA']['format']['timesec'] = '%X';
 	$opt['locale']['DA']['format']['phpdate'] = 'd-m-Y';
+	$opt['locale']['DA']['format']['phpdatetime'] = 'd-m-Y H:i';
 	$opt['locale']['DA']['format']['colonspace'] = '';
 	$opt['locale']['DA']['country'] = 'DK';
 	$opt['locale']['DA']['page']['subtitle1'] = 'Geocaching med Opencaching';
@@ -265,6 +276,7 @@
 	$opt['locale']['PT']['format']['time'] = '%H:%M';
 	$opt['locale']['PT']['format']['timesec'] = '%X';
 	$opt['locale']['PT']['format']['phpdate'] = 'd-m-Y';
+	$opt['locale']['PT']['format']['phpdatetime'] = 'd-m-Y H:i';
 	$opt['locale']['PT']['format']['colonspace'] = '';
 	$opt['locale']['PT']['country'] = 'PT';
 	$opt['locale']['PT']['page']['subtitle1'] = 'Geocaching com Opencaching';
@@ -279,6 +291,7 @@
 	$opt['locale']['JA']['format']['time'] = '%H:%M';
 	$opt['locale']['JA']['format']['timesec'] = '%X';
 	$opt['locale']['JA']['format']['phpdate'] = 'd-m-Y';
+	$opt['locale']['JA']['format']['phpdatetime'] = 'd-m-Y H:i';
 	$opt['locale']['JA']['format']['colonspace'] = '';
 	$opt['locale']['JA']['country'] = 'JP';
 	$opt['locale']['JA']['page']['subtitle1'] = 'Opencachingとジオキャッシング';

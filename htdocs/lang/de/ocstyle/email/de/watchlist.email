@@ -1,17 +1,21 @@
-Hallo {username},
+Hallo {username}!
 
 Neue Logeinträge deiner Caches:
+
 ---
 {ownerlogs}
 ---
 
+
 Neue Logeinträge deiner beobachteten Caches:
+
 ---
 {watchlogs}
 ---
 
+
 Die Einstellungen deiner Watchlist kannst du unter
-http://www.opencaching.de/mywatches.php ansehen und bearbeiten.
+http://www.opencaching.de/mywatches.php?action=edit einsehen und ändern.
 
 Happy Geocaching,
 das Opencaching.de-Team

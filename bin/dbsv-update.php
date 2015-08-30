@@ -540,6 +540,12 @@
 		sql("UPDATE `cache_lists` SET `node`='&1' WHERE `node`=0", $opt['logic']['node']['id']);
 	}
 
+	function dbv_133()  // add user language for notification emails (#141)
+	{
+		if (!sql_field_exists('user','language'))
+			sql("ALTER TABLE `user` ADD COLUMN `language` char(2) default NULL AFTER `notify_oconly`");
+	}
+
 
 	// When adding new mutations, take care that they behave well if run multiple
 	// times. This improves robustness of database versioning.

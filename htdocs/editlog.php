@@ -300,7 +300,7 @@
 						db_slave_exclude();
 
 						//display cache page
-						tpl_redirect('viewcache.php?cacheid=' . urlencode($log_record['cache_id']));
+						tpl_redirect('viewcache.php?cacheid=' . urlencode($log_record['cache_id']) . '&log=A#log' . urlencode($log_id));
 						exit;
 					}
 

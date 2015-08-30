@@ -31,7 +31,7 @@
 		// system needs to be re-initialized. We do this by running the rest
 		// of the script in a separate php process. This fixes issue #807.
 
-		system($opt['rootpath'] . '../bin/clear-webcache.php pass2');
+		system('php ' . $opt['rootpath'] . '../bin/clear-webcache.php pass2');
 	}
 	else
 	{

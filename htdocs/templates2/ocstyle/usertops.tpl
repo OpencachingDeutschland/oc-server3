@@ -9,13 +9,14 @@
 	{t 1=$userid 2=$username|escape}Recommendations of <a href="viewprofile.php?userid=%1">%2</a>{/t}
 </div>
 
-<table class="table">
+<table class="null" border="0" cellspacing="0" width="98%">
 	<tr>
 		<td colspan="2">
 			<table class="table" border="0" cellspacing="0" width="100%">
 				<tr class="cachelistheader">
 					<th width="30px">{t}Type{/t}</th>
-					<th width="620px">{t}Name{/t}</th>
+					<th width="570px">{t}Name{/t}</th>
+					<th width="50px" style="text-align:center"><img src="images/rating-star-shadow.png" title="{t}total recommendations{/t}" width="14" height="13" style="margin-top: -3px; "/></th>
 					<th width="50px">{t}State{/t}</th>
 				</tr>
 				{foreach from=$ratings item=ratingItem}
@@ -23,6 +24,7 @@
 					<tr class="cachelistitem">
 						<td class="{$listcolor}">{include file="res_cacheicon_22.tpl" cachetype=$ratingItem.type|escape}</td>
 						<td class="{$listcolor}"><span style="{include file="res_cachestatus_span.tpl" status=$ratingItem.status}"><a href="viewcache.php?cacheid={$ratingItem.cacheid}">{$ratingItem.cachename|escape}</a></span> {include file="res_oconly.tpl" oconly=$ratingItem.oconly} {t 1=$ratingItem.ownername|escape}by %1{/t}</td>
+						<td class="{$listcolor}" style="text-align:center">{$ratingItem.countrating}</td>
 						<td class="{$listcolor}">{include file="res_cachestatus.tpl" status=$ratingItem.status}</td>
 					</tr>
 				{foreachelse}

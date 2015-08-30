@@ -10,34 +10,43 @@
 	 *
 	 *  stop/start apache
 	 *  delete/recreate cached files 
-	 *
-	 *  TODO: quick&dirty to test functionality
 	 */
 
 	if (!isset($opt['rootpath']))
 		$opt['rootpath'] = dirname(__FILE__) . '/../htdocs/';
 	require_once($opt['rootpath'] . 'lib2/cli.inc.php');
 
-	// stop apache
-	system($opt['httpd']['stop']);
+	if ($argc != 2 || $argv[1] != 'pass2')
+	{
+		// stop apache
+		system($opt['httpd']['stop']);
 
-	echo "Delete cached files\n";
-	clearCache();
+		echo "Delete cached files\n";
+		clearCache();
 
-	echo "Create translation files for gettext()\n";
-	$translationHandler->createMessageFiles();
+		echo "Create translation files for gettext()\n";
+		$translationHandler->createMessageFiles();
 
-	echo "Create menu cache file\n";
-	createMenuCache();
+		// After recreation of the message files (.mo files), the translation
+		// system needs to be re-initialized. We do this by running the rest
+		// of the script in a separate php process. This fixes issue #807.
 
-	echo "Create label cache file\n";
-	createLabelCache();
+		system($opt['rootpath'] . '../bin/clear-webcache.php pass2');
+	}
+	else
+	{
+		echo "Create menu cache file\n";
+		createMenuCache();
 
-	echo "Precompiling template files\n";
-	precompileAllTemplates();
+		echo "Create label cache file\n";
+		createLabelCache();
 
-	// start apache
-	system($opt['httpd']['start']);
+		echo "Precompiling template files\n";
+		precompileAllTemplates();
+
+		// start apache
+		system($opt['httpd']['start']);
+	}
 
 
 function clearCache()

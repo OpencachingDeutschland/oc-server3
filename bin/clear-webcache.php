@@ -39,6 +39,85 @@
 	// start apache
 	system($opt['httpd']['start']);
 
+
+function clearCache()
+{
+	global $tpl, $translang, $translate;
+
+	unlinkFiles('cache2', 'php');
+
+	unlinkFiles('cache2/smarty/cache', 'tpl');
+	unlinkFiles('cache2/smarty/compiled', 'inc');
+	unlinkFiles('cache2/smarty/compiled', 'php');
+	unlinkFiles('cache2/captcha', 'jpg');
+	unlinkFiles('cache2/captcha', 'txt');
+}
+
+function unlinkFiles($relbasedir, $ext)
+{
+	global $opt;
+
+	if (substr($relbasedir, -1, 1) != '/')
+		$relbasedir .= '/';
+
+	if ($opt['rootpath'] . $relbasedir)
+	{
+		if ($dh = opendir($opt['rootpath'] . $relbasedir))
+		{
+			while (($file = readdir($dh)) !== false)
+				if ($file != '.' && $file != '..' && is_file($opt['rootpath'] . $relbasedir . $file))
+					if (substr($file, -(strlen($ext)+1), strlen($ext)+1) == '.' . $ext)
+						unlink($opt['rootpath'] . $relbasedir . $file);
+			closedir($dh);
+		}
+	}
+}
+
+function createMenuCache()
+{
+	global $opt, $translate;
+
+	foreach ($opt['locale'] AS $sLanguage => $v)
+	{
+		// cheating a little bit
+		$opt['template']['locale'] = $sLanguage;
+		setlocale(LC_MONETARY, $opt['locale'][$opt['template']['locale']]['locales']);
+		setlocale(LC_TIME, $opt['locale'][$opt['template']['locale']]['locales']);
+		if (defined('LC_MESSAGES'))
+			setlocale(LC_MESSAGES, $opt['locale'][$opt['template']['locale']]['locales']);
+
+		if ($translate->t('INTERNAL_LANG', 'all', 'OcSmarty.class.php', '') != $sLanguage)
+		{
+			die("setlocale() failed to set language to " . $sLanguage . ". Is the translation of INTERNAL_LANG correct?\n");
+		}
+
+		// this will create the cache file
+		$menu = new Menu();
+
+		// change to file owner
+		chown($menu->sMenuFilename, $opt['httpd']['user']);
+		chgrp($menu->sMenuFilename, $opt['httpd']['group']);
+	}
+}
+
+function createLabelCache()
+{
+	global $opt;
+
+	foreach ($opt['locale'] AS $sLanguage => $v)
+	{
+                // cheating a little bit
+                $opt['template']['locale'] = $sLanguage;
+
+		labels::CreateCacheFile();
+
+		// change to file owner
+		$sFilename = $opt['rootpath'] . 'cache2/labels-' . $opt['template']['locale'] . '.inc.php';
+		chown($sFilename, $opt['httpd']['user']);
+		chgrp($sFilename, $opt['httpd']['group']);
+	}
+}
+
 function precompileAllTemplates()
 {
 	global $opt;
@@ -103,88 +182,5 @@ function precompileTemplateWithLanguage($sTemplate, $sLanguage)
 	$preTemplate->compile($sTemplate . '.tpl', $preTemplate->get_compile_id());
 }
 
-function createMenuCache()
-{
-	global $opt, $translate;
 
-	foreach ($opt['locale'] AS $sLanguage => $v)
-	{
-		// cheating a little bit
-		$opt['template']['locale'] = $sLanguage;
-		setlocale(LC_MONETARY, $opt['locale'][$opt['template']['locale']]['locales']);
-		setlocale(LC_TIME, $opt['locale'][$opt['template']['locale']]['locales']);
-		if (defined('LC_MESSAGES'))
-			setlocale(LC_MESSAGES, $opt['locale'][$opt['template']['locale']]['locales']);
-
-		if ($translate->t('INTERNAL_LANG', 'all', 'OcSmarty.class.php', '') != $sLanguage)
-		{
-			die("setlocale() failed to set language to " . $sLanguage . ". Is the translation of INTERNAL_LANG correct?\n");
-		}
-
-		// this will create the cache file
-		$menu = new Menu();
-
-		// change to file owner
-		chown($menu->sMenuFilename, $opt['httpd']['user']);
-		chgrp($menu->sMenuFilename, $opt['httpd']['group']);
-	}
-}
-
-function createLabelCache()
-{
-	global $opt;
-
-	foreach ($opt['locale'] AS $sLanguage => $v)
-	{
-                // cheating a little bit
-                $opt['template']['locale'] = $sLanguage;
-
-		labels::CreateCacheFile();
-
-		// change to file owner
-		$sFilename = $opt['rootpath'] . 'cache2/labels-' . $opt['template']['locale'] . '.inc.php';
-		chown($sFilename, $opt['httpd']['user']);
-		chgrp($sFilename, $opt['httpd']['group']);
-	}
-}
-
-function clearCache()
-{
-	global $tpl, $translang, $translate;
-
-	unlinkFiles('cache2', 'php');
-
-	unlinkFiles('cache2/smarty/cache', 'tpl');
-	unlinkFiles('cache2/smarty/compiled', 'inc');
-	unlinkFiles('cache2/smarty/compiled', 'php');
-	unlinkFiles('cache2/captcha', 'jpg');
-	unlinkFiles('cache2/captcha', 'txt');
-
-}
-
-function unlinkFiles($relbasedir, $ext)
-{
-	global $opt;
-
-	if (substr($relbasedir, -1, 1) != '/')
-		$relbasedir .= '/';
-
-	if ($opt['rootpath'] . $relbasedir)
-	{
-		if ($dh = opendir($opt['rootpath'] . $relbasedir))
-		{
-			while (($file = readdir($dh)) !== false)
-			{
-				if ($file != '.' && $file != '..' && is_file($opt['rootpath'] . $relbasedir . $file))
-				{
-					if (substr($file, -(strlen($ext)+1), strlen($ext)+1) == '.' . $ext)
-					{
-						unlink($opt['rootpath'] . $relbasedir . $file);
-					}
-				}
-			}
-		}
-		closedir($dh);
-	}
-}
 ?>

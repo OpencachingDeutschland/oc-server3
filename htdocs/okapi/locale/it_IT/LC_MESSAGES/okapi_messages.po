@@ -27,12 +27,12 @@ msgstr "Passo"
 
 #: D:\PRIV\Projekty\EclipseWorkspace\opencaching-api\okapi/services/caches/geocaches.php:986
 msgid "User location"
-msgstr ""
+msgstr "Locazione utente"
 
 #: D:\PRIV\Projekty\EclipseWorkspace\opencaching-api\okapi/services/caches/geocaches.php:989
 #, php-format
 msgid "Your own custom coordinates for the %s geocache"
-msgstr ""
+msgstr "Le tue coordinate personali per la geocache %s"
 
 #: D:\PRIV\Projekty\EclipseWorkspace\opencaching-api\okapi/services/caches/geocaches.php:1148
 msgid "National Park / Landscape"
@@ -54,6 +54,9 @@ msgid ""
 "creativecommons.org/licenses/by-nc-nd/3.0/de/deed.en'>CC-BY-NC-ND</a>, as of "
 "%s; all log entries &copy; their authors"
 msgstr ""
+"&copy; <a href='%s'>%s</a>, <a href='%s'>%s</a>, <a href='http://"
+"creativecommons.org/licenses/by-nc-nd/3.0/de/deed.en'>CC-BY-NC-ND</a>, as of "
+"%s; tutti i log &copy; dei relativi autori"
 
 #: D:\PRIV\Projekty\EclipseWorkspace\opencaching-api\okapi/services/caches/geocaches.php:1323
 #, php-format
@@ -62,27 +65,34 @@ msgid ""
 "creativecommons.org/licenses/by-nc-nd/3.0/de/deed.en'>CC-BY-NC-ND</a>; all "
 "log entries &copy; their authors"
 msgstr ""
+"&copy; <a href='%s'>%s</a>, <a href='%s'>%s</a>, <a href='http://"
+"creativecommons.org/licenses/by-nc-nd/3.0/de/deed.en'>CC-BY-NC-ND</a>; tutti i "
+"log &copy; dei relativi autori"
 
 #: D:\PRIV\Projekty\EclipseWorkspace\opencaching-api\okapi/services/caches/formatters/gpx.php:360
 msgid ""
 "<b>Geocache coordinates have been changed.</b> They have been replaced with "
 "your own custom coordinates which you have provided for this geocache."
 msgstr ""
+"<b>Le coordinate geocache sono state cambiate.</b> Sono state sostituite con "
+"le tue coordinate personali che hai fornito per questa geocache."
 
 #: D:\PRIV\Projekty\EclipseWorkspace\opencaching-api\okapi/services/caches/formatters/gpx.php:366
 msgid ""
 "<b>Geocache coordinates have been changed.</b> Currently they point to one "
 "of the alternate waypoints originally described as:"
 msgstr ""
+"<b>Le coordinate geocache sono state cambiate.</b> Attualmente puntano a uno "
+"dei waypoint alternativi originariamente descritto come:"
 
 #: D:\PRIV\Projekty\EclipseWorkspace\opencaching-api\okapi/services/caches/formatters/gpx.php:379
 msgid "Original geocache location"
-msgstr ""
+msgstr "Locazione originale geocache"
 
 #: D:\PRIV\Projekty\EclipseWorkspace\opencaching-api\okapi/services/caches/formatters/gpx.php:381
 #, php-format
 msgid "Original (owner-supplied) location of the %s geocache"
-msgstr ""
+msgstr "Locazione originale di (owner-supplied) per la geocache %s"
 
 #: D:\PRIV\Projekty\EclipseWorkspace\opencaching-api\okapi/services/caches/formatters/gpxfile.tpl.php:30
 #: D:\PRIV\Projekty\EclipseWorkspace\opencaching-api\okapi/services/caches/formatters/gpxfile.tpl.php:62
@@ -221,7 +231,7 @@ msgstr "Sei il proprietario della cache. Puoi inserire solamente \"Commenti\"!"
 #: D:\PRIV\Projekty\EclipseWorkspace\opencaching-api\okapi/services/logs/submit.php:328
 msgid "You have already rated this cache once. Your rating cannot be changed."
 msgstr ""
-"Hai giàvalutato questa cache. La tua valutazione non può essere cambiata."
+"Hai già valutato questa cache. La tua valutazione non può essere cambiata."
 
 #: D:\PRIV\Projekty\EclipseWorkspace\opencaching-api\okapi/services/logs/submit.php:345
 msgid "You have already recommended this cache once."
@@ -296,7 +306,7 @@ msgstr ""
 "OKAPI</a>.\n"
 "Se permetti questa richiesta, l'applicazione potrà accedere a tutti i metodi "
 "forniti\n"
-"dal framework OKAPI, per es. postare i log delle geocache a tuo nome..\n"
+"dal framework OKAPI, per es. postare i log delle geocache a tuo nome.\n"
 "Puoi revocare questo permesso in qualsiasi momento.</p>"
 
 #: D:\PRIV\Projekty\EclipseWorkspace\opencaching-api\okapi/views/apps/authorized.tpl.php:5
@@ -320,7 +330,7 @@ msgstr ""
 "\n"
 "<p><b>Hai appena concesso all'applicazione \"%s\"  l'accesso al tuo account "
 "%s.</b>\n"
-"Per completare l'operazione, riorna a %s e inserisci il seguente codice  PIN:"
+"Per completare l'operazione, riorna a %s e inserisci il seguente codice PIN:"
 "</p>"
 
 #: D:\PRIV\Projekty\EclipseWorkspace\opencaching-api\okapi/views/apps/index.tpl.php:5

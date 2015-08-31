@@ -231,6 +231,25 @@
 				),
  		);
 
+	/* Well known node id's - required for synchronization
+	 *  1 Opencaching Deutschland (www.opencaching.de)
+	 *  2 Opencaching Polen (www.opencaching.pl)
+	 *  3 Opencaching Tschechien (www.opencaching.cz)
+	 *  4 Local Development
+	 *  5 Opencaching Entwicklung Deutschland (devel.opencaching.de)
+	 *  6 Opencaching Schweden (www.opencaching.se)
+	 *  7 Opencaching Großbritannien (www.opencacing.org.uk)
+	 *  8 Opencaching Norwegen (www.opencaching.no)
+	 *  9 Opencaching Lettland (?)
+	 * 10 Opencaching USA (www.opencaching.us)
+	 * 11 Opencaching Japan (eingestellt)
+	 * 12 Opencaching Russland  (?)
+	 * 13 Garmin (www.opencaching.com)
+	 * 14 Opencaching Niederlande (www.opencaching.nl)
+	 * 16 Opencaching Rumänien (www.opencaching.ro)
+	 */
+	$opt['logic']['node']['id'] = 0;
+
 	/* multi-domain settings
 	 *
 	 * if one of the domains matches $_SERVER['SERVER_NAME'], the default values will be overwritten

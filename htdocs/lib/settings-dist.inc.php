@@ -31,8 +31,8 @@
 	// include common settings of lib1 and lib2
 	require_once($rootpath . 'config2/common-settings.inc.php');
 
-	//id of the node
-	$oc_nodeid = $opt['logic']['node']['id'];
+	//id of the node; see list in config2/settings-dist.inc.php
+	$opt['logic']['node']['id'] = 0;
 	
 	//name of the cookie
 	$opt['cookie']['name'] = 'oc_devel';

@@ -1292,8 +1292,7 @@
 							 `caches`.`longitude`, `caches`.`latitude`,
 							 `caches`.`user_id`,
 							 IFNULL(`stat_caches`.`toprating`, 0) `ratingvalue`'.
-
-							 $sAddFields
+			  				 $sAddFields
 			 . ' FROM `caches`
 		  LEFT JOIN `stat_caches` ON `caches`.`cache_id`=`stat_caches`.`cache_id`' .
 			          $sAddJoin

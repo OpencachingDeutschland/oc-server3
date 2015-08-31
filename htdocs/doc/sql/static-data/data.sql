@@ -2273,7 +2273,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1771', 'Text Do
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1772', 'Text Download (all)', '2011-07-10 18:02:33');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1773', 'Text Import', '2011-07-10 18:02:33');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1774', 'Text file containing the translations:', '2011-07-10 18:02:33');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1775', 'Child waypoint', '2011-07-10 18:02:37');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1775', 'Child waypoints', '2011-07-10 18:02:37');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1776', 'Waypoint type:', '2011-07-10 18:02:37');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1777', 'Please select type', '2011-07-10 18:02:37');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1778', 'Coordinate:', '2011-07-10 18:02:37');
@@ -8322,7 +8322,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1772', 'EN', 'Text download (all)', '2012-08-24 17:35:49');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1773', 'EN', 'Text import', '2012-08-24 17:35:49');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1774', 'EN', 'Text file containing the translations:', '2012-08-24 17:35:49');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1775', 'EN', 'Child waypoint', '2012-08-24 17:35:49');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1775', 'EN', 'Child waypoints', '2012-08-24 17:35:49');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1776', 'EN', 'Waypoint type:', '2012-08-24 17:35:49');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1777', 'EN', 'Please select type', '2012-08-24 17:35:49');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1778', 'EN', 'Coordinate:', '2012-08-24 17:35:49');
@@ -11580,7 +11580,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1772', 'FR', 'Télécharger de texte (tous)', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1773', 'FR', 'Importation de texte', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1774', 'FR', 'fichier de texte contient les traductions\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1775', 'FR', 'Child waypoint', '2015-08-25 01:29:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1775', 'FR', 'Waypoints supplémentaires', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1776', 'FR', 'Type de waypoint\&nbsp;:', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1777', 'FR', 'Sélectionner le type s\'il vous plaît', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1778', 'FR', 'Coordonner\&nbsp;:', '2015-08-25 01:29:00');

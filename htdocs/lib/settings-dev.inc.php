@@ -33,9 +33,6 @@
 	// include common settings of lib1 and lib2
 	require_once($rootpath . 'config2/common-settings.inc.php');
 
-	//pagetitle
-	$pagetitle = 'local.opencaching.de';
-	
 	//id of the node
 	$oc_nodeid = $opt['logic']['node']['id'];
 	

@@ -48,14 +48,17 @@
 	}
 
 	if ($tplname != 'start')
-		$tpl_subtitle .= htmlspecialchars($mnu_selmenuitem['title'] . ' - ', ENT_COMPAT, 'UTF-8');
+		$tpl_subtitle .= htmlspecialchars($mnu_selmenuitem['title'], ENT_COMPAT, 'UTF-8');
+	$tpl_subtitle .= ' - ' . htmlspecialchars($opt['locale'][$locale]['page']['subtitle1'], ENT_COMPAT, 'UTF-8');
+	$meta_keywords = htmlspecialchars($opt['page']['meta']['keywords'], ENT_COMPAT, 'UTF-8');
+	$meta_description = htmlspecialchars($opt['page']['meta']['description'], ENT_COMPAT, 'UTF-8');
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
-		<title><?php echo $tpl_subtitle; ?>{title}</title>
-		<meta name="keywords" content="Geocaching, Geocache, Cache, Geocashing, Schnitzeljagd, Schatzsuche, GPS, Openstreetmap, kostenlos, GPX, GPX download, Koordinaten, Hobby, Natur" />
-		<meta name="description" content="Opencaching.de ist das freie Portal für Geocaching, ein GPS-Schatzsuche-Spiel: Es werden kleine Behälter versteckt, die anhand von GPS-Koordinaten zu finden sind." />
+		<title><?php echo $tpl_subtitle; ?></title>
+		<meta name="keywords" content="<?php echo $meta_keywords; ?>" />
+		<meta name="description" content="<?php echo $meta_description; ?>" />
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 		<meta http-equiv="Content-Style-Type" content="text/css" />
 		<meta http-equiv="Content-Language" content="{lang}" />

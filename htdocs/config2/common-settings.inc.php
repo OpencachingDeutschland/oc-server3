@@ -8,6 +8,12 @@
  * See also locale.inc.php, which is included in both lib1 and lib2.
  ***************************************************************************/
 
+	// page meta
+	// see http://forum.opencaching-network.org/index.php?topic=3065.0
+	// and http://forum.opencaching-network.org/index.php?topic=3065.0
+	$opt['page']['meta']['keywords'] = 'Geocaching, Geocache, Cache, Schatzsuche, GPS, kostenlos, GPX, Koordinaten, Hobby, Natur';  // 5-10 keywords are recommended
+	$opt['page']['meta']['description'] = 'Opencaching.de ist das freie Portal für Geocaching, ein Schatzsuche-Spiel. Mittels GPS-Koordinaten sind Behälter oder Objekte zu finden.';
+
 	// page title
 	$opt['page']['title'] = 'OPENCACHING';
 	$opt['page']['subtitle1'] = 'Geocaching with Opencaching';

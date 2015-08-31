@@ -457,7 +457,6 @@ function __autoload($class_name)
 		else
 			tpl_set_var('scripttime', sprintf('%1.3f', 0));
 
-		tpl_set_var('sponsortopright', $opt['page']['sponsor']['topright']);
 		tpl_set_var('sponsorbottom', $opt['page']['sponsor']['bottom']);
 
 		if (isset($opt['locale'][$locale]['page']['subtitle1'])) $opt['page']['subtitle1'] = $opt['locale'][$locale]['page']['subtitle1'];

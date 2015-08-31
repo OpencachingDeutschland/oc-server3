@@ -14,6 +14,7 @@
 	$watch = isset($_REQUEST['watch']);
 	$dontwatch = isset($_REQUEST['dontwatch']);
 	$bookmark = isset($_REQUEST['bookmark']);
+	$unbookmark = isset($_REQUEST['unbookmark']);
 
 	if ($id)
 	{
@@ -26,6 +27,8 @@
 				$list->watch($watch);
 			if ($bookmark)
 				$list->bookmark($password);
+			if ($unbookmark)
+				$list->unbookmark();
 		}
 
 		$tpl->redirect("search.php?searchto=searchbylist&listid=" . $id .

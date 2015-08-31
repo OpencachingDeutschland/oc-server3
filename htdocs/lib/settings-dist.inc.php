@@ -28,11 +28,14 @@
 	//default used style
 	if (!isset($style)) $style = 'ocstyle';
 
+	// include common settings of lib1 and lib2
+	require_once($rootpath . 'config2/common-settings.inc.php');
+
 	//pagetitle
 	if (!isset($pagetitle)) $pagetitle = 'www.opencaching.de';
 	
 	//id of the node
-	$oc_nodeid = 4;
+	$oc_nodeid = $opt['logic']['node']['id'];
 	
 	//name of the cookie
 	$opt['cookie']['name'] = 'oc_devel';
@@ -70,10 +73,6 @@
 	// news settings
 	$use_news_approving = true;
 	$news_approver_email = 'news-approver@devel.opencaching.de';
-
-	$opt['page']['showdonations'] = false;
-	$opt['page']['showsocialmedia'] = false;
-	$opt['page']['headoverlay'] = 'oc_head_alpha3_generic';
 
 	//local database settings
 	$dbusername = 'username';
@@ -121,61 +120,8 @@
 
 	$opt['translate']['debug'] = false;
   
-  /* maximum number of failed logins per hour before that IP address is blocked
-   * (used to prevent brute-force-attacks)
-   */
-	$opt['page']['max_logins_per_hour'] = 25;
-
-	// block troublemakers
-	$opt['page']['banned_user_agents'] = array();
-
-  // copy of config2/settings-dist.inc.php
-  /* pregenerated waypoint list for new caches
-   * - Waypoint prefix (OC, OP, OZ etc.)
-   * - When pool contains less than min_count, generation process starts
-   *   and fills up the pool until max_count is reached.
-   */
-  $opt['logic']['waypoint_pool']['prefix'] = 'AA';
-  $opt['logic']['waypoint_pool']['min_count'] = 1000;
-  $opt['logic']['waypoint_pool']['max_count'] = 2000;
-  // chars used for waypoints. Remember to reinstall triggers and clear cache_waypoint_pool after changing
-  $opt['logic']['waypoint_pool']['valid_chars'] = '0123456789ABCDEF';
-  // fill_gaps = true: search for gaps between used waypoints and fill up these gaps
-  //                   (fill_gaps is slow and CPU intensive on database server. For
-  //                    productive servers you may want to generate some waypoints
-  //                    without fill_gaps first)
-  // fill_gaps = false: continue with the last waypoint
-  $opt['logic']['waypoint_pool']['fill_gaps'] = false;
-
-	// admin may use OC-team-comment log flag only when processing a cache report
-	// see also setting in config2/settings.inc.php!
-	$opt['logic']['admin']['team_comments_only_for_reports'] = true;
-	$opt['logic']['admin']['enable_listing_admins'] = false;
-	$opt['logic']['admin']['listingadmin_notification'] = 'contact@opencaching.xx';
-
-	/*
-	 * html purifier
-	 */
-	$opt['html_purifier']['cache_path'] = dirname(__FILE__).'/../cache2/html_purifier/';
-
-  // see config2/settings-dist.inc.php
-	$opt['template']['default']['locale'] = 'DE';      // may be overwritten by $opt['domain'][...]['locale']
-	$opt['template']['default']['country'] = 'DE';     // may be overwritten by $opt['domain'][...]['country']
-	$opt['template']['default']['fallback_locale'] = 'EN';   // may be overwritten by $opt['domain'][...]['article_locale']
-
   // include all locale settings
   require_once($rootpath . 'config2/locale.inc.php');
-
-	$opt['page']['title'] = 'OPENCACHING';
-	$opt['page']['subtitle1'] = 'Geocaching with Opencaching';
-	$opt['page']['subtitle2'] = '';
-	$opt['page']['headimagepath'] = '';
-
-  /* Sponsoring advertisements
-   * (plain HTML)
-   */
-
-  $opt['page']['sponsor']['bottom'] = 'Driven by the Opencaching Community';
 
 	/* multi-domain settings
 	 *

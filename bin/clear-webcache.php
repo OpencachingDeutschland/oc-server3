@@ -90,10 +90,7 @@ function createMenuCache()
 	{
 		// cheating a little bit
 		$opt['template']['locale'] = $sLanguage;
-		setlocale(LC_MONETARY, $opt['locale'][$opt['template']['locale']]['locales']);
-		setlocale(LC_TIME, $opt['locale'][$opt['template']['locale']]['locales']);
-		if (defined('LC_MESSAGES'))
-			setlocale(LC_MESSAGES, $opt['locale'][$opt['template']['locale']]['locales']);
+		set_php_locale();
 
 		if ($translate->t('INTERNAL_LANG', 'all', 'OcSmarty.class.php', '') != $sLanguage)
 		{
@@ -176,10 +173,7 @@ function precompileTemplateWithLanguage($sTemplate, $sLanguage)
 
 	// cheating a little bit
 	$opt['template']['locale'] = $sLanguage;
-	setlocale(LC_MONETARY, $opt['locale'][$opt['template']['locale']]['locales']);
-	setlocale(LC_TIME, $opt['locale'][$opt['template']['locale']]['locales']);
-	if (defined('LC_MESSAGES'))
-		setlocale(LC_MESSAGES, $opt['locale'][$opt['template']['locale']]['locales']);
+	set_php_locale();
 
 	if ($translate->t('INTERNAL_LANG', 'all', 'OcSmarty.class.php', '') != $sLanguage)
 	{

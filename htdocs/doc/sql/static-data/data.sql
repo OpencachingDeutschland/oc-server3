@@ -981,7 +981,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('25', 'Last name
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('26', 'Country', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('27', 'Register new user', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('28', 'Uzbek', '2010-08-28 11:48:03');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('29', 'The username is not valid.', '2010-08-28 11:48:03');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('29', 'The username contains invalid characters.', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('30', 'Print last logs', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('31', 'The last name is not valid.', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('32', 'The first name is not valid.', '2010-08-28 11:48:03');
@@ -1756,8 +1756,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('844', 'You cann
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('845', 'Sorry, you have to read and accept the above to proceed!', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('846', 'Sorry, you have to read and accept the terms of use to proceed!', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('847', 'This rules ensures that your password cannot be guessed by an automated script.', '2010-08-28 11:48:04');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('848', 'a-z A-Z 0-9 and .-_ @\&auml;\&uuml;\&ouml;\&Auml;\&Uuml;\&Ouml;=)(/\\\&amp;*+~#', '2010-08-28 11:48:04');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('849', 'Not all special characters are allowed. You may only use', '2010-08-28 11:48:04');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('849', 'Not all characters are allowed. You may only use latin-European letters, 0-9 and .-_ @=)(/\\\&amp;*+~#.', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('850', 'Do not use dictionary words like \'master\'', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('851', 'Do not use common geocaching words', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('852', 'Do not use parts of your username, name or email', '2010-08-28 11:48:04');
@@ -4040,7 +4039,6 @@ INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('844',
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('845', './templates2/ocstyle/adoptcache.tpl', '89');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('846', './templates2/ocstyle/adoptcache.tpl', '164');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('847', './templates2/ocstyle/res_passworderror.tpl', '19');
-INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('848', './templates2/ocstyle/res_passworderror.tpl', '17');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('849', './templates2/ocstyle/res_passworderror.tpl', '16');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('850', './templates2/ocstyle/res_passworderror.tpl', '14');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('851', './templates2/ocstyle/res_passworderror.tpl', '13');
@@ -5258,7 +5256,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('26', 'DE', 'Land', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('27', 'DE', 'Neuen Benutzer registrieren', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('28', 'DE', 'Usbekisch', '2010-08-28 11:48:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('29', 'DE', 'Der Benutzername ist nicht gültig.', '2010-08-28 11:48:06');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('29', 'DE', 'Der Benutzername enthält ungültige Zeichen.', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('30', 'DE', 'Druck 5 Logs', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('31', 'DE', 'Der Nachname enthält ungültige Zeichen.', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('32', 'DE', 'Der Vorname enthält ungültige Zeichen.', '2010-08-28 11:48:06');
@@ -6034,8 +6032,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('845', 'DE', 'Entschuldigung, du musst dies lesen und akzeptieren, um fortzufahren!', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('846', 'DE', 'Entschuldigung, du musst die Nutzungsbedingungen lesen und akzeptieren, um fortzufahren!', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('847', 'DE', 'Durch diese Regeln ist dein Passwort sicher und kann nicht durch automatisierte Programme oder andere Benutzer erraten werden.', '2010-08-28 11:48:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('848', 'DE', 'a-z A-Z 0-9 und .-_ @\&auml;\&uuml;\&ouml;\&Auml;\&Uuml;\&Ouml;=)(/\\\&amp;*+~# \r\n', '2010-08-28 11:48:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('849', 'DE', 'Es sind nicht alle Sonderzeichen erlaubt. Verwende nur die Folgenden:', '2010-08-28 11:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('849', 'DE', 'Es sind nicht alle Zeichen erlaubt. Verwende nur lateinisch-europäische Buchstaben, 0-9 und .-_ @=)(/\\\&amp;*+~#.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('850', 'DE', 'Verwende keine Wörter aus dem Wörterbuch z.B. \&bdquo;geheim\&ldquo;.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('851', 'DE', 'Verwende keine Begriffe aus dem Geocaching.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('852', 'DE', 'Verwende keine Teile deines Benutzernamen, deines Namens oder deiner E-Mail.', '2010-08-28 11:48:07');
@@ -7030,7 +7027,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('26', 'EN', 'Country', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('27', 'EN', 'Register new user', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('28', 'EN', 'Uzbek', '2010-08-28 11:48:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('29', 'EN', 'The username is not valid.', '2010-08-28 11:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('29', 'EN', 'The username contains invalid characters.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('30', 'EN', 'Print last logs', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('31', 'EN', 'The last name is not valid.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('32', 'EN', 'The first name is not valid.', '2010-08-28 11:48:07');
@@ -7805,8 +7802,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('845', 'EN', 'Sorry, you have to read and accept the above to proceed!', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('846', 'EN', 'Sorry, you have to read and accept the terms of use to proceed!', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('847', 'EN', 'This rules ensures that your password cannot be guessed by an automated script.', '2010-08-28 11:48:08');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('848', 'EN', 'a-z A-Z 0-9 and .-_ @\&auml;\&uuml;\&ouml;\&Auml;\&Uuml;\&Ouml;=)(/\\\&amp;*+~#', '2010-08-28 11:48:08');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('849', 'EN', 'Not all special characters are allowed. You may only use', '2010-08-28 11:48:08');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('849', 'EN', 'Not all characters are allowed. You may only use latin-european letters, 0-9 and .-_ @=)(/\\\&amp;*+~#.', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('850', 'EN', 'Do not use dictionary words like \'master\'.', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('851', 'EN', 'Do not use common geocaching words.', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('852', 'EN', 'Do not use parts of your username, real name or e-mail address.', '2010-08-28 11:48:08');
@@ -8800,7 +8796,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('26', 'ES', 'País', '2010-12-09 00:17:56');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('27', 'ES', 'Registro de Nuevo Usuario', '2010-12-09 00:17:56');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('28', 'ES', 'Uzbekistán', '2010-12-09 00:17:56');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('29', 'ES', 'El Usuario no es valido', '2010-12-09 00:17:56');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('29', 'ES', 'El Usuario no es valido.', '2010-12-09 00:17:56');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('30', 'ES', 'Imprimir últimos Logs', '2010-12-09 00:17:56');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('31', 'ES', 'El Apellido no es valido', '2010-12-09 00:17:56');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('32', 'ES', 'El Nombre no es valido', '2010-12-09 00:17:56');
@@ -9575,8 +9571,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('845', 'ES', '¡Lo sentimos, usted tiene que leer y aceptar la parte superior para continuar!', '2010-12-09 00:17:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('846', 'ES', '¡Lo sentimos, usted debe leer y aceptar las condiciones de uso para continuar!', '2010-12-09 00:17:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('847', 'ES', 'Esta regla asegura que su contraseña no se puede adivinar por un script automatizado.', '2010-12-09 00:17:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('848', 'ES', 'a-z A-Z 0-9 y .-_ @\&auml;\&uuml;\&ouml;\&Auml;\&Uuml;\&Ouml;=)(/\\\&amp;*+~#', '2010-12-09 00:17:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('849', 'ES', 'No todos los caracteres especiales se permiten. Sólo se puede utilizar:', '2010-12-09 00:17:59');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('849', 'ES', 'No todos los caracteres se permiten. Sólo se puede utilizar letras latino-europea, 0-9 y .-_ @=)(/\\\&amp;*+~#.', '2010-12-09 00:17:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('850', 'ES', 'No utilice palabras de un diccionario como \"master\".', '2010-12-09 00:17:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('851', 'ES', 'No utilice palabras comunes en geocaching.', '2010-12-09 00:17:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('852', 'ES', 'No usar partes de su nombre de usuario, su verdadero nombre o su dirección de correo electrónico.', '2010-12-09 00:17:59');
@@ -11061,8 +11056,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('845', 'FR', 'Désolé, il faut lire et accepter le dessus pour continuer\&nbsp;!', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('846', 'FR', 'Désolé, il faut lire et accepter les conditions d\'utilisation pour continuer\&nbsp;!', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('847', 'FR', 'Cette règle garantit que votre mot de passe ne peut pas être deviné par un script automatisé.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('848', 'FR', 'a-z A-Z 0-9 and .-_ @\&auml;\&uuml;\&ouml;\&Auml;\&Uuml;\&Ouml;=)(/\\\&amp;*+~#', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('849', 'FR', 'Pas tous les caractères spéciaux sont autorisés. Vous ne pouvez qu\'utiliser', '2015-08-25 01:29:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('849', 'FR', 'Pas tous les caractères sont autorisés. Vous ne pouvez qu\'utiliser lettres latino-européennes, 0-9 et .-_ @=)(/\\\&amp;*+~#.', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('850', 'FR', 'Ne pas utiliser les mots du dictionnaire comme «&nbsp;master&nbsp;».', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('851', 'FR', 'Ne pas utiliser des mots de geocaching communs.', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('852', 'FR', 'Ne pas utiliser des parties de votre nom d\'utilisateur, nom ou adresse e-mail.', '2015-08-25 01:29:00');
@@ -12051,7 +12045,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('26', 'IT', 'Nazione', '2010-08-28 20:55:20');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('27', 'IT', 'Registra nuovo utente', '2010-08-28 20:55:43');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('28', 'IT', 'Uzbeco', '2010-08-28 20:56:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('29', 'IT', 'Il nome utente non è valido', '2010-08-28 20:56:34');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('29', 'IT', 'Il nome utente non è valido.', '2010-08-28 20:56:34');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('30', 'IT', 'Stampa gli ultimi log', '2010-08-28 20:56:56');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('31', 'IT', 'Il Cognome non è valido', '2010-08-28 20:57:32');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('32', 'IT', 'Il Nome non è valido', '2010-08-28 20:58:03');
@@ -12826,8 +12820,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('845', 'IT', 'Spiacente, devi leggere e accettare quanto sopra per continuare!', '2010-09-01 23:49:32');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('846', 'IT', 'Spiacente, devi leggere e accettare le condizioni d\'uso per continuare!', '2010-10-27 18:49:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('847', 'IT', 'Questa regola assicura che la tua password non possa essere indovinata da uno script automatico.', '2010-10-27 18:49:19');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('848', 'IT', 'a-z A-Z 0-9 e .-_ @\&auml;\&uuml;\&ouml;\&Auml;\&Uuml;\&Ouml;=)(/\\\&amp;*+~#', '2010-09-10 23:15:35');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('849', 'IT', 'Non tutti i caratteri speciali sono ammessi. Puoi usare solamente:', '2010-09-10 23:15:35');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('849', 'IT', 'Non tutti i caratteri sono ammessi. Puoi usare solamente caratteri latin-europei, 0-9 e .-_ @=)(/\\\&amp;*+~#.', '2010-09-10 23:15:35');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('850', 'IT', 'Non usare parole contenute in un dizionario come ad esempio \'master\'.', '2010-09-10 23:15:35');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('851', 'IT', 'Non usare parole comuni nel geocaching.', '2010-09-10 23:15:35');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('852', 'IT', 'Non usare parti del tuo nome utente, del tuo nome vero o del tuo indirizzo di email.', '2010-10-27 18:49:19');
@@ -14466,7 +14459,6 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('839', 'NL', '<b>%1</b> ter adoptie aanbieden', '2011-02-04 19:50:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('841', 'NL', 'Adoptie afwijzen', '2011-02-04 19:50:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('843', 'NL', 'Gebruikersnaam onbekend', '2011-02-04 19:50:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('848', 'NL', 'a-z A-Z 0-9 en .-_ @\&auml;\&uuml;\&ouml;\&Auml;\&Uuml;\&Ouml;=)(/\\\&amp;*+~# \r\n', '2011-02-04 19:50:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('853', 'NL', 'Tussen 6 en 60 tekens lang', '2011-02-04 19:50:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('856', 'NL', 'Montenegro', '2011-02-04 19:50:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('857', 'NL', 'Serbië', '2011-02-04 19:50:07');
@@ -15148,7 +15140,6 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('757', 'RU', 'Название:', '2010-12-06 22:17:36');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('797', 'RU', 'Координаты', '2010-12-06 22:17:36');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('847', 'RU', 'Выполнение этих требований повышает стойкость вашего пароля.', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('849', 'RU', 'Допустимые символы:', '2010-12-06 22:17:36');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('850', 'RU', 'Не используйте распространёные слова.', '2010-12-06 22:17:36');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('851', 'RU', 'Не используйте распространённые геокешерские слова.', '2010-12-06 22:17:36');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('852', 'RU', 'Не используйте части вашего имени пользователя, настоящего имени или электронного адреса.', '2010-12-06 22:17:36');

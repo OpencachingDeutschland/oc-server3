@@ -29,7 +29,7 @@
 					{if $edit==true}
 						<input type="text" name="username" class="public-setting" value="{$username|escape}" maxlength="60" size="30" />
 						{if $usernameErrorInvalidChars==true}
-							<span class="errormsg">{t}The username is not valid.{/t}</span>
+							<span class="errormsg">{t}The username contains invalid characters.{/t}</span>
 						{elseif $errorUsernameExist==true}
 							<span class="errormsg">{t}There already exists an account with that username.{/t}</span>
 						{/if}

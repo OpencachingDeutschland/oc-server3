@@ -51,8 +51,8 @@ function change()
 	// set user properties
 	if (isset($_REQUEST['username']))
 	{
-		$tpl->assign('username', $_REQUEST['username']);
-		if (!$user->setUsername($_REQUEST['username']))
+		$tpl->assign('username', trim($_REQUEST['username']));
+		if (!$user->setUsername(trim($_REQUEST['username'])))
 		{
 			$tpl->assign('usernameErrorInvalidChars', true);
 			$bError = true;
@@ -61,8 +61,8 @@ function change()
 
 	if (isset($_REQUEST['firstName']))
 	{
-		$tpl->assign('firstName', $_REQUEST['firstName']);
-		if (!$user->setFirstName($_REQUEST['firstName']))
+		$tpl->assign('firstName', trim($_REQUEST['firstName']));
+		if (!$user->setFirstName(trim($_REQUEST['firstName'])))
 		{
 			$tpl->assign('firstNameError', true);
 			$bError = true;
@@ -71,8 +71,8 @@ function change()
 
 	if (isset($_REQUEST['lastName']))
 	{
-		$tpl->assign('lastName', $_REQUEST['lastName']);
-		if (!$user->setLastName($_REQUEST['lastName']))
+		$tpl->assign('lastName', trim($_REQUEST['lastName']));
+		if (!$user->setLastName(trim($_REQUEST['lastName'])))
 		{
 			$tpl->assign('lastNameError', true);
 			$bError = true;

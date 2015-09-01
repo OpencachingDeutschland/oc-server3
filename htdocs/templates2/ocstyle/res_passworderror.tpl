@@ -13,8 +13,7 @@
 		<li>{t}Do not use common geocaching words{/t}</li>
 		<li>{t}Do not use dictionary words like 'master'{/t}</li>
 		<li>{t}Do not use easy-to-guess number and letter sequences like '123456' or 'qwerty'{/t}</i>
-		<li>{t}Not all special characters are allowed. You may only use{/t}<br />
-		    {t}a-z A-Z 0-9 and .-_ @&auml;&uuml;&ouml;&Auml;&Uuml;&Ouml;=)(/\&amp;*+~#{/t}</li>
+		<li>{t}Not all characters are allowed. You may only use latin-European letters, 0-9 and .-_ @=)(/\&amp;*+~#.{/t}</li>
 	</ul>
 	{t}This rules ensures that your password cannot be guessed by an automated script.{/t}
 </span>

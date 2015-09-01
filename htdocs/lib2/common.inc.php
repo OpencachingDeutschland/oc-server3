@@ -230,18 +230,7 @@ function set_language()
 	$cookie->set('locale', $opt['template']['locale'], $opt['template']['default']['locale']);
 
 	bindtextdomain('messages', $opt['rootpath'] . 'cache2/translate');
-
-	// setup the PHP locale
-	setlocale(LC_MONETARY, $opt['locale'][$opt['template']['locale']]['locales']);
-	setlocale(LC_TIME, $opt['locale'][$opt['template']['locale']]['locales']);
-	if (defined('LC_MESSAGES'))
-		setlocale(LC_MESSAGES, $opt['locale'][$opt['template']['locale']]['locales']);
-
-	// no localisation!
-	setlocale(LC_COLLATE, $opt['locale']['EN']['locales']);
-	setlocale(LC_CTYPE, $opt['locale']['EN']['locales']);
-	setlocale(LC_NUMERIC, $opt['locale']['EN']['locales']); // important for mysql-queries!
-
+	set_php_locale();
   textdomain('messages');
 }
 

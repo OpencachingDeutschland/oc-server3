@@ -10,7 +10,7 @@
  *  ATTENTION: This file is also used in old template system.
  *             (this means any call to framework functions may be incompatible)
  *
- *             Only set the following keys in $opt[]
+ *             Only set the following keys in $opt[]:
  *
  *                 $opt['template']['locales']
  *                 $opt['geokrety']['locales']
@@ -36,6 +36,9 @@
 	$opt['template']['locales']['FR']['flag'] = 'images/flag/FR.png';
 	$opt['template']['locales']['FR']['name'] = 'Français';
 
+/*
+	Disabling unused locales speeds up template precompilation (clear-webcache.php).
+
 	$opt['template']['locales']['SV']['show'] = true; // sv_SE
 	$opt['template']['locales']['SV']['flag'] = 'images/flag/SE.png';
 	$opt['template']['locales']['SV']['name'] = 'Svenska';
@@ -60,6 +63,7 @@
 	$opt['template']['locales']['JA']['show'] = true; // ja_JP
 	$opt['template']['locales']['JA']['flag'] = 'images/flag/JP.png';
 	$opt['template']['locales']['JA']['name'] = '日本語';
+*/
 
 	// geokrety language key association
 	$opt['geokrety']['locales']['DE'] = 'de_DE.UTF-8';
@@ -68,6 +72,7 @@
 	$opt['geokrety']['locales']['ES'] = 'es_ES.UTF-8';
 	$opt['geokrety']['locales']['FR'] = 'fr_FR.UTF-8';
 
+/*
 	$opt['geokrety']['locales']['SV'] = 'sv_SE.UTF-8';
 	$opt['geokrety']['locales']['NO'] = 'no_NO.UTF-8';
 	$opt['geokrety']['locales']['NL'] = 'en_EN';
@@ -76,6 +81,7 @@
 	$opt['geokrety']['locales']['DA'] = 'da_DK.UTF-8';
 	$opt['geokrety']['locales']['PT'] = 'pt_PT.UTF-8';
 	$opt['geokrety']['locales']['JA'] = 'ja_JP.UTF-8';
+*/
 
 	$opt['locale']['DE']['locales'] = array('de_DE.utf8', 'de_DE@euro', 'de_DE', 'de', 'ge');
 	$opt['locale']['EN']['locales'] = array('en_US.utf8', 'en_US', 'en');
@@ -83,6 +89,7 @@
 	$opt['locale']['ES']['locales'] = array('es_ES.utf8', 'es_ES', 'es');
 	$opt['locale']['FR']['locales'] = array('fr_FR.utf8', 'fr_FR@euro', 'fr_FR', 'french', 'fr');
 
+/*
 	$opt['locale']['SV']['locales'] = array('sv_SE.utf8', 'sv_SE', 'se');
 	$opt['locale']['NO']['locales'] = array('no_NO.utf8', 'no_NO', 'no');
 	$opt['locale']['PL']['locales'] = array('pl_PL.utf8', 'pl_PL', 'pl');
@@ -91,6 +98,7 @@
 	$opt['locale']['DA']['locales'] = array('da_DK.utf8', 'da_DK', 'dk');
 	$opt['locale']['PT']['locales'] = array('pt_PT.utf8', 'pt_PT', 'pt');
 	$opt['locale']['JA']['locales'] = array('ja_JP.utf8', 'ja_JP', 'jp');
+*/
 
 	$opt['locale']['EN']['format']['dm'] = '%m/%d';
 	$opt['locale']['EN']['format']['dateshort'] = '%m/%d/%y';
@@ -181,6 +189,7 @@
 	$opt['locale']['FR']['page']['license'] = '<a rel="license" href="%1"><img alt="Creative Commons License Terms" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-nd/3.0/de/88x31.png" /></a><div style="text-align:center; margin:8px 0 0 6px;">Le<a  href="articles.php?page=impressum#datalicense">contenu</a> de Opencaching.de sont sous licence Creative Commons <a rel="license" href="%1" target="_blank">BY-BC-ND 3.0 DE</a>.</div>';
 	$opt['locale']['FR']['helpwiki'] = "http://wiki.opencaching.de/index.php/";
 
+/*
 	$opt['locale']['SV']['format']['dateshort'] = '%y-%m-%d';
 	$opt['locale']['SV']['format']['dm'] = '%d/%m';
 	$opt['locale']['SV']['format']['date'] = '%Y-%m-%d';
@@ -296,5 +305,21 @@
 	$opt['locale']['JA']['country'] = 'JP';
 	$opt['locale']['JA']['page']['subtitle1'] = 'Opencachingとジオキャッシング';
 	$opt['locale']['JA']['page']['subtitle2'] = '';
+*/
+
+function set_php_locale()
+{
+	global $opt;
+
+	setlocale(LC_MONETARY, $opt['locale'][$opt['template']['locale']]['locales']);
+	setlocale(LC_TIME, $opt['locale'][$opt['template']['locale']]['locales']);
+	if (defined('LC_MESSAGES'))
+		setlocale(LC_MESSAGES, $opt['locale'][$opt['template']['locale']]['locales']);
+
+	// no localisation!
+	setlocale(LC_COLLATE, $opt['locale']['EN']['locales']);
+	setlocale(LC_CTYPE, $opt['locale']['EN']['locales']);
+	setlocale(LC_NUMERIC, $opt['locale']['EN']['locales']); // important for mysql-queries!
+}
 
 ?>

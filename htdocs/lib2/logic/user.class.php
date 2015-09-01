@@ -683,6 +683,7 @@ class user
 		$mail = new mail();
 		$mail->name = 'usercontactmail';
 		$mail->to = $this->getEMail();
+		$mail->recipient_locale = $this->getLanguageCode();
 
 		$mail->from = $opt['mail']['usermail'];
 

@@ -28,7 +28,7 @@
 	if (!isset($timezone)) $timezone = 'Europe/Berlin';
 
 	//default used style
-	if (!isset($style)) $style = 'ocstyle';
+	$style = 'ocstyle';
 
 	// include common settings of lib1 and lib2
 	require_once($rootpath . 'config2/common-settings.inc.php');

@@ -250,22 +250,6 @@
 	 */
 	$opt['logic']['node']['id'] = 0;
 
-	/* multi-domain settings
-	 *
-	 * if one of the domains matches $_SERVER['SERVER_NAME'], the default values will be overwritten
-	 * can be used to host more than one locale on one server with multiple default-locales
-	 */
-	//$opt['domain']['www.opencaching.de']['url'] = 'http://www.opencaching.de/';
-	//$opt['domain']['www.opencaching.de']['locale'] = 'DE';
-	//$opt['domain']['www.opencaching.de']['style'] = 'ocstyle';
-	//$opt['domain']['www.opencaching.de']['cookiedomain'] = '.opencaching.de';
-	//$opt['domain']['www.opencaching.de']['country'] = 'DE';
-	//$opt['domain']['www.opencaching.pl']['url'] = 'http://www.opencaching.pl/';
-	//$opt['domain']['www.opencaching.pl']['locale'] = 'PL';
-	//$opt['domain']['www.opencaching.pl']['style'] = 'ocstyle';
-	//$opt['domain']['www.opencaching.pl']['cookiedomain'] = '.opencaching.pl';
-	//$opt['domain']['www.opencaching.pl']['country'] = 'PL';
-
 	/* settings for business layer
 	 *
 	 */
@@ -425,7 +409,7 @@
 	 */
 	$opt['cron']['username'] = 'apache';   // system username for cronjobs
 
-	/* phpbb news integration (index.php)
+	/* phpbb news integration (index.php, outdated)
 	 *
 	 * Set url='' to disable the cronjob task and hide the section on start page.
 	 * Topics from different subforum will be merged and sorted by date.
@@ -479,13 +463,8 @@
 	// contact address
 	$opt['mail']['contact'] = 'contact@devel.opencaching.de';
 
- 	/* News configuration
- 	 *
- 	 * filename to the include file containing the newscontent
- 	 * (e.g. prepared blog-feed in HTML format)
- 	 * if no filename is given, the own news-code is used
- 	 * (table news and newstopic.php)
- 	 * You can use '{style}' as placeholder for the current style-name
+	/* index.php news section configuration
+	 * include '' => from table 'news', else from RSS feed
  	 */
  	$opt['news']['include'] = '';
   $opt['news']['count'] = 3;

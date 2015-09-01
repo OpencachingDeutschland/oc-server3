@@ -12,7 +12,7 @@
 
 	if (!$opt['logic']['node']['id'])
 	{
-		die("Node ID must be set.\n");
+		die("Node ID must be set. Also check \$oc_nodeid in lib/settings.inc.php.\n");
 	}
 
 ?>

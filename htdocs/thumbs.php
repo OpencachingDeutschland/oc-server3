@@ -7,24 +7,12 @@
 
 	require('./lib2/web.inc.php');
 
-	// define image paths
-	$imgpath = "resource2/".$opt['template']['style']."/images/thumb/";
-	$imgurl_404[1]     = $imgpath.'thumb404_1.gif';
-	$imgurl_404[2]     = $imgpath.'thumb404_2.gif';
-	$imgurl_intern[1]  = $imgpath.'thumbintern_1.gif';
-	$imgurl_intern[2]  = $imgpath.'thumbintern_2.gif';
-	$imgurl_extern[1]  = $imgpath.'thumbextern_1.gif';
-	$imgurl_extern[2]  = $imgpath.'thumbextern_2.gif';
-	$imgurl_spoiler[1] = $imgpath.'thumbspoiler_1.gif';
-	$imgurl_spoiler[2] = $imgpath.'thumbspoiler_2.gif';
-	$imgurl_format[1]  = $imgpath.'thumbunknown_1.gif';
-	$imgurl_format[2]  = $imgpath.'thumbunknown_2.gif';
-
 	$login->verify();
 
 	$uuid = isset($_REQUEST['uuid']) ? $_REQUEST['uuid'] : '';
 	$debug = isset($_REQUEST['debug']) ? $_REQUEST['debug']+0 : 0;
 	$showspoiler = isset($_REQUEST['showspoiler']) ? $_REQUEST['showspoiler']+0 : 0;
+	$default_object_type = isset($_REQUEST['type']) && ($_REQUEST['type'] == 1 || $_REQUEST['type'] == 2) ? $_REQUEST['type'] + 0 : 1;
 
 	if (($opt['debug'] & DEBUG_DEVELOPER) != DEBUG_DEVELOPER)
 		$debug = 0;
@@ -41,31 +29,39 @@
 				if ($debug == 1)
 					die('Debug: line ' . __LINE__);
 				else
-					$tpl->redirect($imgurl_extern[$r['object_type']]);
+					$tpl->redirect(thumbpath('extern', 1));
 			}
 		}
-		else if ($r['object_type'] == 2)
+		elseif ($r['object_type'] == 2)
 		{
 			if (sql_value("SELECT COUNT(*) FROM `caches` INNER JOIN `cache_status` ON `caches`.`status`=`cache_status`.`id` WHERE `caches`.`cache_id`='&1' AND (`cache_status`.`allow_user_view`=1 OR `caches`.`user_id`='&2' OR '&3')", 0, $r['object_id'], $login->userid, $login->hasAdminPriv(ADMIN_USER) ? 1 : 0) == 0)
 			{
 				if ($debug == 1)
 					die('Debug: line ' . __LINE__);
 				else
-					$tpl->redirect($imgurl_extern[$r['object_type']]);
+					$tpl->redirect(thumbpath('extern', 2));
 			}
+		}
+		else
+		{
+			if ($debug == 1)
+				die('Debug: line ' . __LINE__);
+			else
+				$tpl->redirect(thumbpath('intern', $default_object_type));
 		}
 
 		if ($r['local'] == 0)
 			if ($debug == 1)
 				die('Debug: line ' . __LINE__);
 			else
-				$tpl->redirect($imgurl_extern[$r['object_type']]);
+				$tpl->redirect(thumbpath('extern', $r['object_type']));
 
 		if (($r['spoiler'] == 1) && ($showspoiler != 1))
 			if ($debug == 1)
 				die('Debug: line ' . __LINE__);
 			else
-				$tpl->redirect($imgurl_spoiler[$r['object_type']]);
+				$tpl->redirect(thumbpath('spoiler', $r['object_type']));
+
 		$imgurl = $r['url'];
 		$urlparts = mb_split('/', $imgurl);
 
@@ -73,9 +69,9 @@
 			if ($debug == 1)
 				die('Debug: line ' . __LINE__);
 			else
-				$tpl->redirect($imgurl_intern[$r['object_type']]);
+				$tpl->redirect(thumbpath('intern', $r['object_type']));
 
-		// thumb neu erstellen?
+		// generate new thumb?
 		$bGenerate = false;
 		if (strtotime($r['thumb_last_generated']) < strtotime($r['last_modified']))
 			$bGenerate = true;
@@ -85,15 +81,13 @@
 
 		if ($bGenerate)
 		{
-			// Bild erstellen
-
 			if ($r['unknown_format'] == 1)
 				if ($debug == 1)
 					die('Debug: line ' . __LINE__);
 				else
-					$tpl->redirect($imgurl_format[$r['object_type']]);
+					$tpl->redirect(thumbpath('format', $r['object_type']));
 
-			// ok, mal kucken ob das Dateiformat unterstützt wird
+			// ok, let's see if the file format is supported
 			$filename = $urlparts[count($urlparts) - 1];
 			$filenameparts = mb_split('\\.', $filename);
 			$extension = mb_strtolower($filenameparts[count($filenameparts) - 1]);
@@ -105,7 +99,7 @@
 				if ($debug == 1)
 					die('Debug: line ' . __LINE__);
 				else
-					$tpl->redirect($imgurl_format[$r['object_type']]);
+					$tpl->redirect(thumbpath('format', $r['object_type']));
 			}
 
 			if ($extension == 'jpeg') $extension = 'jpg';
@@ -136,7 +130,7 @@
 				if ($debug == 1)
 					die('Debug: line ' . __LINE__);
 				else
-					$tpl->redirect($imgurl_format[$r['object_type']]);
+					$tpl->redirect(thumbpath('format', $r['object_type']));
 			}
 
 			$imheight = imagesy($im);
@@ -174,11 +168,11 @@
 				$thumbheight = $imheight;
 			}
 
-			// Thumb erstellen und speichern
+			// Create and save thumb
 			$thumbimage = imagecreatetruecolor($thumbwidth, $thumbheight);
 			imagecopyresampled($thumbimage, $im, 0, 0, 0, 0, $thumbwidth, $thumbheight, $imwidth, $imheight);
 
-			// verzeichnis erstellen
+			// Create directory
 			if (!file_exists($opt['logic']['pictures']['thumb_dir'] . '/' . mb_substr($filename, 0, 1)))
 				mkdir($opt['logic']['pictures']['thumb_dir'] . '/' . mb_substr($filename, 0, 1));
 			if (!file_exists($opt['logic']['pictures']['thumb_dir'] . '/' . mb_substr($filename, 0, 1) . '/' . mb_substr($filename, 1, 1)))
@@ -225,6 +219,32 @@
 		if ($debug == 1)
 			die('Debug: line ' . __LINE__);
 		else
-			$tpl->redirect($imgurl_404[$r['object_type']]);
+			$tpl->redirect(thumbpath('404', $default_object_type));
 	}
+
+
+function thumbpath($name, $object_type)
+{
+	global $opt, $default_object_type;
+
+	if (!in_array($name, array('404', 'intern', 'extern', 'spoiler', 'unknown'))
+	    || ($object_type != 1 && $object_type != 2))
+	{
+		if ($debug == 1)
+			die('Debug: line ' . __LINE__);
+		else
+		{
+			$name = 'intern';
+			$object_type = $default_object_type;
+		}
+	}
+
+	$imgdir = 'resource2/'.$opt['template']['style'].'/images/thumb/';
+	$filename = 'thumb'.$name.'_'.$object_type.'.gif';
+	$thumbpath = $imgdir . strtolower($opt['template']['locale']) . '/'. $filename;
+	if (!file_exists($thumbpath))
+		$thumbpath = $imgdir.'en/'.$filename;
+	return $thumbpath;
+}
+
 ?>

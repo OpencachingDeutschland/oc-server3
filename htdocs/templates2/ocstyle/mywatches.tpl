@@ -43,7 +43,7 @@
 		<input type="hidden" name="action" value="edit" />
 
 		<div class="content2-pagetitle">
-			<img src="resource2/{$opt.template.style}/images/misc/32x32-watched.png" style="margin-right: 10px;" width="32" height="32" alt="Watched Caches" />
+			<img src="resource2/{$opt.template.style}/images/misc/32x32-watched.png" style="margin-right: 10px;" width="32" height="32" alt="" />
 			{t}Watched Geocaches - Settings{/t}
 		</div>
 

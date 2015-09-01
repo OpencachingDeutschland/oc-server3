@@ -54,7 +54,7 @@ function test_encoding($path)
 	);
 
 	$contents = file_get_contents($path, false, null, 0, 2048);
-	$ur = stripos($contents, "Unicode Reminder");
+	$ur = mb_stripos($contents, "Unicode Reminder");
 	if ($ur)
 	{
 		if (mb_trim(mb_substr($contents, $ur+17,2)) != "メモ")

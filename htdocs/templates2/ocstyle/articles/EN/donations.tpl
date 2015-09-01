@@ -27,7 +27,7 @@
 					<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
 						<input type="hidden" name="cmd" value="_s-xclick" />
 						<input type="hidden" name="hosted_button_id" value="EP7T62APWTCU6" />
-						<input type="image" src="https://www.paypalobjects.com/de_DE/DE/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="donate by PayPal" />
+						<input type="image" src="https://www.paypalobjects.com/de_DE/DE/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="Donate by PayPal" />
 
 							<img alt="" border="0" src="https://www.paypalobjects.com/de_DE/i/scr/pixel.gif" width="1" height="1" />
 
@@ -42,7 +42,7 @@
 			<br />
 			<div class="content2-container bg-blue02">
 			<p class="content-title-noshade-size3">
-			<img src="resource2/{$opt.template.style}/images/misc/32x32-news.png" style="margin-right: 10px;" width="32" height="32" alt="Bekanntmachung" />
+			<img src="resource2/{$opt.template.style}/images/misc/32x32-news.png" style="margin-right: 10px;" width="32" height="32" alt="" />
 			Announcement of June 9, 2012 (updated Feb 9, 2013)
 			</p>
 			</div>

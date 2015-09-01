@@ -28,7 +28,7 @@
 <br />
 <table width="100%" class="table">
 	<tr>
-		<td><img src="resource2/{$opt.template.style}/images/description/22x22-image.png" height="22px" width="22px" alt="{t}Picture selection{/t}" /> {t 1=$cachename|escape}Picture selection for %1{/t}</td>
+		<td><img src="resource2/{$opt.template.style}/images/description/22x22-image.png" height="22px" width="22px" alt="" /> {t 1=$cachename|escape}Picture selection for %1{/t}</td>
 	</tr>
 </table>
 <table class="table">

@@ -145,7 +145,7 @@
 <?php
 							foreach ($opt['template']['locales'] AS $k => $lang)
 								if ($lang['show'] == true)
-									echo '<a style="text-decoration: none;" href="index.php?locale=' . $k . '"><img src="' . $lang['flag'] . '" alt="' . $lang['name'] . '" width="24px" height="18px" /></a> '; 
+									echo '<a style="text-decoration: none;" href="index.php?locale=' . $k . '"><img src="' . $lang['flag'] . '" alt="' . $lang['name'] . '" title="' . $lang['name'] . '" width="24px" height="18px" /></a> ';
 ?>
 						</td>
 						<td>&nbsp;&nbsp;&nbsp;&nbsp;<strong>{t}Country:{/t}&nbsp;</strong></td>

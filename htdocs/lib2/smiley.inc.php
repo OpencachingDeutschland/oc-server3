@@ -35,11 +35,6 @@ if (!isset($smiley))
 											'smiley-yell.gif'
 										);
 
-	foreach ($smiley['image'] AS $k => $v)
-	{
-		$smiley['image'][$k] = ' <img src="' . $opt['template']['smiley'] . $v . '" alt="" border="0" width="18px" height="18px" /> ';
-	}
-
 	$smiley['text'] = array(
 											" :) ",
 											" :-) ",
@@ -62,7 +57,14 @@ if (!isset($smiley))
 											" XO "
 										);
 
-	// This array is not used anywhere.
+	$smiley_counter = 0;
+	foreach ($smiley['image'] AS $k => $v)
+	{
+		$smiley['image'][$k] = ' <img src="' . $opt['template']['smiley'] . $v . '" alt="' . $smiley['text'][$smiley_counter] . '" border="0" width="18px" height="18px" /> ';
+		++$smiley_counter;
+	}
+
+	// This array currently is not used in lib2 code.
 	$smiley['show'] = array(
 											'1',
 											'0',

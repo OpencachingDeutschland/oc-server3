@@ -14,8 +14,7 @@
 						{if $cacheitem.cRatings>0}<img src="images/rating-star.gif" border="0" alt="{t 1=$cacheitem.cRatings}%1 Recommendations in the last 30 days{/t}" style="margin-top: -2px;"/>{/if}
 						{if $cacheitem.cRatings>1}<img src="images/rating-star.gif" border="0" alt="{t 1=$cacheitem.cRatings}%1 Recommendations in the last 30 days{/t}" style="margin-top: -2px;"/>{/if}
 						{if $cacheitem.cRatings>2}<img src="images/rating-star.gif" border="0" alt="{t 1=$cacheitem.cRatings}%1 Recommendations in the last 30 days{/t}" style="margin-top: -2px;"/>{/if}
-					{/if}
-					{if $cacheitem.cRatings>3}
+					{else}
 						<b><span style="color:#02c602; font-size: 14px;" >{$cacheitem.cRatings}x</span></b><img src="images/rating-star.gif" border="0" alt="{t 1=$cacheitem.cRatings}%1 Recommendations in the last 30 days{/t}" style="margin-top: -2px;" />
 					{/if}
 					<b><a class="links" href="viewcache.php?cacheid={$cacheitem.cache_id}">{$cacheitem.name|escape}</a></b> {include file="res_oconly.tpl" oconly=$cacheitem.oconly}

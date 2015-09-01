@@ -308,7 +308,7 @@ function switchAttributeCat2()
 </script>
 {/literal}
 
-<div class="content2-pagetitle"><img src="resource2/ocstyle/images/misc/32x32-search.png" style="margin-right: 10px;" width="32" height="32" alt="{t}Search for caches{/t}" />{t}Search for caches{/t}</div>
+<div class="content2-pagetitle"><img src="resource2/ocstyle/images/misc/32x32-search.png" style="margin-right: 10px;" width="32" height="32" alt="" />{t}Search for caches{/t}</div>
 
 <form name="optionsform" style="display:inline;">
 

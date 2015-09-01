@@ -15,44 +15,44 @@
 		<p><b id="cachetype">Cacheart:</b> Es gibt mehrere M&ouml;glichkeiten, einen Cache zu gestalten:
 			<table class="table cachedesctable">
 				<tr>
-					<td valign="top" style="padding-top:5px"><img src="resource2/ocstyle/images/cacheicon/traditional.gif" width="32" border="0" height="32" align="left" alt="Normaler Cache" title="Normaler Cache" /></td>
+					<td valign="top" style="padding-top:5px"><img src="resource2/ocstyle/images/cacheicon/traditional.gif" width="32" border="0" height="32" align="left" alt="" title="Normaler Cache" /></td>
 					<td><p><span class="subtitle">Normaler Cache</span> (&bdquo;Tradi&ldquo;): Die eingetragenen Koordinaten geben m&ouml;glichst genau die Cacheposition an. Der Cache ist z.&nbsp;B. eine Dose mit Logbuch darin, und zum Finden und &Ouml;ffnen des Caches sind keine R&auml;tsel oder Aufgaben zu l&ouml;sen.</p>
 					</td>
 				</tr>
 				<tr>
-					<td valign="top" style="padding-top:5px"><img src="resource2/ocstyle/images/cacheicon/drivein.gif" width="32" border="0" height="32" align="left" alt="Drive-In" title="Drive-In" /></td>
+					<td valign="top" style="padding-top:5px"><img src="resource2/ocstyle/images/cacheicon/drivein.gif" width="32" border="0" height="32" align="left" alt="" title="Drive-In" /></td>
 					<td><p><span class="subtitle">Drive-In</span>: Wie ein normaler Cache, jedoch gibt es sehr nahe beim Cache einen Parkplatz. Es wird keine Spezialausr&uuml;stung ben&ouml;tigt.</p></td>
 				</tr>
 				<tr>
-					<td valign="top" style="padding-top:5px"><img src="resource2/ocstyle/images/cacheicon/multi.gif" width="32" border="0" height="32" align="left" alt="Multi Cache" title="Multi Cache" /></td>
+					<td valign="top" style="padding-top:5px"><img src="resource2/ocstyle/images/cacheicon/multi.gif" width="32" border="0" height="32" align="left" alt="" title="Multicache" /></td>
 					<td><p><span class="subtitle">Multicache</span> (&bdquo;Multi&ldquo;): Die angegebenen Koordinaten geben nicht die Cacheposition, sondern den Startpunkt f&uuml;r die Suche nach dem Cache an. Von dort aus kann er durch das L&ouml;sen von Aufgaben oder R&auml;tseln und/oder durch das Finden von Zwischenstationen erreicht werden. Die L&ouml;sung der Aufgaben und R&auml;tsel muss vor Ort m&ouml;glich sein.</p></td>
 				</tr>
 				<tr>
-					<td valign="top" style="padding-top:5px"><img src="resource2/ocstyle/images/cacheicon/mystery.gif" width="32" border="0" height="32" align="left" alt="R&auml;tsel Cache" title="R&auml;tsel Cache" /></td>
+					<td valign="top" style="padding-top:5px"><img src="resource2/ocstyle/images/cacheicon/mystery.gif" width="32" border="0" height="32" align="left" alt="" title="R&auml;tselcache" /></td>
 					<td><p><span class="subtitle">R&auml;tselcache</span> (&bdquo;Mystery&ldquo;): Um die Koordinaten des Caches herauszufinden, muss zuerst ein R&auml;tsel gel&ouml;st werden. Im weiteren Verlauf kann es sich um jede Art von Cache (normal, multi, virtuell usw.) handeln.</p></td>
 				</tr>
 				<tr>
-					<td valign="top" style="padding-top:5px"><img src="resource2/ocstyle/images/cacheicon/mathe.gif" width="32" border="0" height="32" align="left" alt="Mathe-/Physikcache" title="Mathe-/Physikcache" /></td>
+					<td valign="top" style="padding-top:5px"><img src="resource2/ocstyle/images/cacheicon/mathe.gif" width="32" border="0" height="32" align="left" alt="" title="Mathe-/Physikcache" /></td>
 					<td><p><span class="subtitle">Mathe-/Physikcache</span>: Zur L&ouml;sung des Caches m&uuml;ssen eine oder mehrere Mathe- oder Physikaufgaben gel&ouml;st werden, die &uuml;ber das kleine Geocacher-1x1 hinaus gehen.</p></td>
 				</tr>
 				<tr>
-					<td valign="top" style="padding-top:5px"><img src="resource2/ocstyle/images/cacheicon/moving.gif" width="32" border="0" height="32" align="left" alt="Beweglicher Cache" title="Beweglicher Cache" /></td>
+					<td valign="top" style="padding-top:5px"><img src="resource2/ocstyle/images/cacheicon/moving.gif" width="32" border="0" height="32" align="left" alt="" title="Beweglicher Cache" /></td>
 					<td><p><span class="subtitle">Beweglicher Cache</span>: Der Cache wechselt seine Position. Er kann z.&nbsp;B. von jedem Finder an einem neuen Ort versteckt werden; die neuen Koordinaten und ggf. eine neue Aufgabe werden dann im Logeintrag ver&ouml;ffentlicht. Oder der Cache befindet sich an einem Verkehrsmittel, dessen Koordinaten herauszufinden sind.</p></td>
 				</tr>
 				<tr>
-					<td valign="top" style="padding-top:5px"><img src="resource2/ocstyle/images/cacheicon/virtual.gif" width="32" border="0" height="32" align="left" alt="Virtueller Cache" title="Virtueller Cache" /></td>
+					<td valign="top" style="padding-top:5px"><img src="resource2/ocstyle/images/cacheicon/virtual.gif" width="32" border="0" height="32" align="left" alt="" title="Virtueller Cache" /></td>
 					<td><p><span class="subtitle">Virtueller Cache</span>: Am Ziel befindet sich weder ein Beh&auml;lter noch ein Logbuch. Stattdessen ist dort eine Aufgabe zu l&ouml;sen, bevor man den Cache loggen kann &ndash; z.&nbsp;B. indem man etwas abliest, ein Foto macht usw. Eine besondere Form von virtuellen Caches sind <a href="#attr61">Safari-Caches</a>.</p></td>
 				</tr>
 				<tr>
-					<td valign="top" style="padding-top:5px"><img src="resource2/ocstyle/images/cacheicon/webcam.gif" width="32" border="0" height="32" align="left" alt="Webcam" title="Webcam"></td>
+					<td valign="top" style="padding-top:5px"><img src="resource2/ocstyle/images/cacheicon/webcam.gif" width="32" border="0" height="32" align="left" alt="" title="Webcam"></td>
 					<td><p><span class="subtitle">Webcam-Cache</span>: Zum L&ouml;sen des Caches wird eine &ouml;ffentliche Webcam genutzt. Meist muss die Webcam an den angegebenen Koordinaten gefunden werden, um von dieser ein Bild mit sich selbst zu machen. Das Bild wird dann beim Logeintrag hinzugef&uuml;gt. Es gibt keinen Tauschbeh&auml;lter oder Logbuch.</p></td>
 				</tr>
 				<tr>
-					<td valign="top" style="padding-top:5px"><img src="resource2/ocstyle/images/cacheicon/event.gif" width="32" border="0" height="32" align="left" alt="Event" title="Event" /></td>
+					<td valign="top" style="padding-top:5px"><img src="resource2/ocstyle/images/cacheicon/event.gif" width="32" border="0" height="32" align="left" alt="" title="Event-Cache" /></td>
 					<td><p><span class="subtitle">Event-Cache</span>: Treffen von Geocachern zum gemeinsamen Plausch. Es darf jeder Geocacher teilnehmen, der Lust hat. Vor dem Treffen loggt man, dass man teilnehmen m&ouml;chte, und danach dass man teilgenommen hat.</p></td>
 				</tr>
 				<tr>
-					<td valign="top" style="padding-top:5px"><img src="resource2/ocstyle/images/cacheicon/unknown.gif" width="32" border="0" height="32" align="left" alt="Unbekannter Cachetyp" title="Unbekannter Cachetyp" /></td>
+					<td valign="top" style="padding-top:5px"><img src="resource2/ocstyle/images/cacheicon/unknown.gif" width="32" border="0" height="32" align="left" alt="" title="Unbekannter Cachetyp" /></td>
 					<td><p><span class="subtitle">Unbekannter Cachetyp</span>: Alles was nicht zu den oben aufgelisteten Cachetypen passt.</p></td>
 				</tr>
 			</table>

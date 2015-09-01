@@ -451,7 +451,7 @@ function showalllists()
 			<div class="viewcache-pictureblock">
 				<div class="img-shadow">
 					<!-- a href="{$pictureItem.url|escape}" target="_blank" -->
-						<img src="thumbs.php?uuid={$pictureItem.uuid|urlencode}" alt="{$pictureItem.title|escape}" title="{$pictureItem.title|escape}" longdesc="{$pictureItem.url|escape}" border="0" align="bottom" onclick="enlarge(this)" />
+						<img src="thumbs.php?type=2&uuid={$pictureItem.uuid|urlencode}" alt="{$pictureItem.title|escape}" title="{$pictureItem.title|escape}" longdesc="{$pictureItem.url|escape}" border="0" align="bottom" onclick="enlarge(this)" />
 					<!-- /a -->
 				</div>
 				<span class="title">{$pictureItem.title|escape}</span>

@@ -1120,18 +1120,7 @@ function __autoload($class_name)
 		$opt['template']['locale'] = $locale;
 
 		bindtextdomain('messages', $rootpath . '/cache2/translate');
-
-		// setup the PHP locale
-		setlocale(LC_MONETARY, $opt['locale'][$locale]['locales']);
-		setlocale(LC_TIME, $opt['locale'][$locale]['locales']);
-		if (defined('LC_MESSAGES'))
-			setlocale(LC_MESSAGES, $opt['locale'][$locale]['locales']);
-
-		// no localisation!
-		setlocale(LC_COLLATE, $opt['locale']['EN']['locales']);
-		setlocale(LC_CTYPE, $opt['locale']['EN']['locales']);
-		setlocale(LC_NUMERIC, $opt['locale']['EN']['locales']); // important for mysql-queries!
-
+		set_php_locale();
 		textdomain('messages');
 	}
 

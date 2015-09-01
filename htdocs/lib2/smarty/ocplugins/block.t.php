@@ -6,6 +6,10 @@
  *
  *  For more information about this smarty-extension see
  *  prefilter.t.php
+ *
+ *  This extension probably is OBSOLETE: {t} blocks are handled by
+ *  prefilter.t.php when precompiling the templates via clear-webcache.php.
+ *  smarty_block_t() probably never gets called.
  ***************************************************************************/
  
 /**

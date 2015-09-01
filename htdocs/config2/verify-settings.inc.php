@@ -10,4 +10,9 @@
 		die("ERROR: db maintenance password must not be configured in production enviroment!\n");
 	}
 
+	if (!$opt['logic']['node']['id'])
+	{
+		die("Node ID must be set. Also check \$oc_nodeid in lib/settings.inc.php.\n");
+	}
+
 ?>

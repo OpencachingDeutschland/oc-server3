@@ -546,6 +546,12 @@
 			sql("ALTER TABLE `user` ADD COLUMN `language` char(2) default NULL AFTER `notify_oconly`");
 	}
 
+	function dbv_134()  // fix removed cache list node IDs
+	{
+		global $opt;
+		sql("UPDATE `removed_objects` SET `node`='&1' WHERE `type`=8 AND `node`=0", $opt['logic']['node']['id']);
+	}
+
 
 	// When adding new mutations, take care that they behave well if run multiple
 	// times. This improves robustness of database versioning.

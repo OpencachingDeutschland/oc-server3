@@ -28,19 +28,14 @@
 	if (!isset($timezone)) $timezone = 'Europe/Berlin';
 
 	//default used style
-	if (!isset($style)) $style = 'ocstyle';
+	$style = 'ocstyle';
 
-	//pagetitle
-	$pagetitle = 'local.opencaching.de';
-	$opt['page']['title'] = 'OPENCACHING';
-	$opt['page']['subtitle1'] = 'Geocaching with Opencaching';
-	$opt['page']['subtitle2'] = '';
-	$opt['page']['headimagepath'] = '';
-  $opt['page']['headoverlay'] = 'oc_head_alpha3';
-	
-	//id of the node
+	// include common settings of lib1 and lib2
+	require_once($rootpath . 'config2/common-settings.inc.php');
+
+	//id of the node; see config2/settings-dist.inc.php
 	$oc_nodeid = 4;
-	$opt['logic']['node']['id'] = 4;
+	$opt['logic']['node']['id'] = $oc_nodeid;
 	
 	//name of the cookie
 	$opt['cookie']['name'] = 'oc_devel';
@@ -125,48 +120,14 @@
    */
 	$opt['page']['max_logins_per_hour'] = 1000;    // for development ... 
 
-	// block troublemakers
-	$opt['page']['banned_user_agents'] = array();
-
-  // copy of config2/settings-dist.inc.php
-  /* pregenerated waypoint list for new caches
-   * - Waypoint prefix (OC, OP, OZ etc.)
-   * - When pool contains less than min_count, generation process starts
-   *   and fills up the pool until max_count is reached.
-   */
-  $opt['logic']['waypoint_pool']['prefix'] = 'AA';
-  $opt['logic']['waypoint_pool']['min_count'] = 1000;
-  $opt['logic']['waypoint_pool']['max_count'] = 2000;
-  // chars used for waypoints. Remember to reinstall triggers and clear cache_waypoint_pool after changing
-  $opt['logic']['waypoint_pool']['valid_chars'] = '0123456789ABCDEF';
-  // fill_gaps = true: search for gaps between used waypoints and fill up these gaps
-  //                   (fill_gaps is slow and CPU intensive on database server. For
-  //                    productive servers you may want to generate some waypoints
-  //                    without fill_gaps first)
-  // fill_gaps = false: continue with the last waypoint
-  $opt['logic']['waypoint_pool']['fill_gaps'] = false;
-  
   // data license
 	$opt['logic']['license']['disclaimer'] = true;   // also in lib2/settings-dist.inc.php
 	$opt['logic']['license']['terms'] = $absolute_server_URI . 'articles.php?page=impressum#datalicense';
 
-	// admin may use OC-team-comment log flag only when processing a cache report 
-	$opt['logic']['admin']['team_comments_only_for_reports'] = true;
-	$opt['logic']['admin']['enable_listing_admins'] = false;
 	$opt['logic']['admin']['listingadmin_notification'] = 'root';
-
-  // see config2/settings-dist.inc.php
-	$opt['template']['default']['locale'] = 'DE';      // may be overwritten by $opt['domain'][...]['locale']
-	$opt['template']['default']['fallback_locale'] = 'EN';   // may be overwritten by $opt['domain'][...]['article_locale']
 
   // include all locale settings
   require_once($rootpath . 'config2/locale.inc.php');
-
-	/* Sponsoring advertisements
-	 * (plain HTML)
-	 */
-	$opt['page']['sponsor']['topright'] = '';
-	$opt['page']['sponsor']['bottom'] = '';
 
 	/* replicated slave databases
 	 * use same config as in config2/settings.inc.php (!)
@@ -187,10 +148,5 @@
 	$opt['template']['locales']['RU']['show'] = false;
 	$opt['template']['locales']['SV']['show'] = false;
 	$opt['template']['locales']['NO']['show'] = false;
-
-	/*
-	 * html purifier
-	 */
-	$opt['html_purifier']['cache_path'] = dirname(__FILE__).'/../cache2/html_purifier/';
 
 ?>

@@ -2,18 +2,14 @@
 /****************************************************************************
 														 ./lib/settings.inc.php
 															-------------------
-		begin                : Mon June 14 2004
-
 		For license information see doc/license.txt
- ****************************************************************************/
-
-/****************************************************************************
 
 		Unicode Reminder メモ
 	                                         				                                
-		server specific settings
+		sample settings for an OC production system;
+		see header of config2/settings.inc.php for more setting files 
 	
-		this file may be outdated and should be reviewed
+		this file may be outdated
  ****************************************************************************/
  
  	//relative path to the root directory
@@ -26,22 +22,24 @@
 	if (!isset($timezone)) $timezone = 'Europe/Berlin';
 
 	//default used style
-	if (!isset($style)) $style = 'ocstyle';
+	$style = 'ocstyle';
 
-	//pagetitle
-	if (!isset($pagetitle)) $pagetitle = 'www.opencaching.de';
-	
-	//id of the node
-	$oc_nodeid = 4;
-	
+	// include common settings of lib1 and lib2
+	require_once($rootpath . 'config2/common-settings.inc.php');
+
+	//id of the node; see list in config2/settings-dist.inc.php
+	$oc_nodeid = 0;
+	$opt['logic']['node']['id'] = $oc_nodeid;
+
 	//name of the cookie
-	$opt['cookie']['name'] = 'oc_devel';
+	$opt['cookie']['name'] = 'oc_deu';
 	$opt['cookie']['path'] = '/';
-	$opt['cookie']['domain'] = '';
+	$opt['cookie']['domain'] = '<.do.main>';
 
 	//Debug?
-	if (!isset($debug_page)) $debug_page = true;
-	$develwarning = '<div id="debugoc"><font size="5" face="arial" color="red"><center>Entwicklersystem - nur Testdaten!</center></font></div>';
+	if (!isset($debug_page)) $debug_page = false;
+	// $develwarning = '<div id="debugoc"><font size="5" face="arial" color="red"><center>Entwicklersystem - nur Testdaten!</center></font></div>';
+	$develwarning = '';
 	
 	//site in service? Set to false when doing bigger work on the database to prevent error's
 	if (!isset($site_in_service)) $site_in_service = true;
@@ -55,7 +53,7 @@
 	
 	// location of cache images
 	if (!isset($picdir)) $picdir = $rootpath . 'images/uploads';  // Ocprop
-	if (!isset($picurl)) $picurl = 'http://www.opencaching.de/images/uploads';
+	if (!isset($picurl)) $picurl = $absolute_server_URI . 'images/uploads';
 
 	// Thumbsize
 	$thumb_max_width = 175;
@@ -69,11 +67,7 @@
 	
 	// news settings
 	$use_news_approving = true;
-	$news_approver_email = 'news-approver@devel.opencaching.de';
-
-	$opt['page']['showdonations'] = false;
-	$opt['page']['showsocialmedia'] = false;
-	$opt['page']['headoverlay'] = 'oc_head_alpha3_generic';
+	$news_approver_email = 'news-approver@<do.main>';
 
 	//local database settings
 	$dbusername = 'username';
@@ -82,20 +76,18 @@
 	$dbpasswd = 'password';
 	$dbpconnect = false;
 
-	$tmpdbname = 'test'; // empty db with CREATE and DROP priviledges
+	$tmpdbname = 'temp'; // empty db with CREATE and DROP priviledges
 
 	// date format
 	$opt['db']['dateformat'] = 'Y-m-d H:i:s';
 
 	// warnlevel for sql-execution
-	$sql_errormail = 'sqlerror@somewhere.net';
-	$dberrormail = $sql_errormail;
-	$sql_warntime = 0.1;
+	$sql_errormail = 'root';
+	$sql_warntime = 180;
 
+	// sql debugging
 	$sql_allow_debug = 0;
-	
-	// minimum of 24 chars
-	$sql_debug_cryptkey = 'this is my very, very secret \'secret key\'';
+	$sql_debug_cryptkey = 'this is my very, very secret \'secret key\'';  // min. 24 chars
 
 	// replacements for sql()
 	$sql_replacements['db'] = $dbname;
@@ -106,76 +98,31 @@
 	$zip_basedir = '/path/to/html/download/zip/';
 	$zip_wwwdir = 'download/zip/';
 
-	$googlemap_key = "<key>";
-	$googlemap_type = "G_MAP_TYPE"; // alternativ: _HYBRID_TYPE
-
-  // cache_maps-settings
-  //$cachemap_wms_url = 'http://www.top-sectret.oc/{min_lat},{min_lon},{max_lat},{max_lon}';
-  $cachemap_wms_url = 'http://www.opencaching.de/cachemaps.php?wp={wp_oc}';
-  $cachemap_size_lat = 0.2;
-  $cachemap_size_lon = 0.2;
-  $cachemap_pixel_x = 200;
-  $cachemap_pixel_y = 200;
-  $cachemap_url = 'images/cachemaps/';
-  $cachemap_dir = $rootpath . $cachemap_url;
+	// cache_maps-settings (not in use)
+	//$cachemap_wms_url = 'http://www.top-sectret.oc/{min_lat},{min_lon},{max_lat},{max_lon}';
+	$cachemap_wms_url = 'http://www.opencaching.de/cachemaps.php?wp={wp_oc}';
+	$cachemap_size_lat = 0.2;
+	$cachemap_size_lon = 0.2;
+	$cachemap_pixel_x = 200;
+	$cachemap_pixel_y = 200;
+	$cachemap_url = 'images/cachemaps/';
+	$cachemap_dir = $rootpath . $cachemap_url;
 
 	$opt['translate']['debug'] = false;
   
-  /* maximum number of failed logins per hour before that IP address is blocked
-   * (used to prevent brute-force-attacks)
-   */
-	$opt['page']['max_logins_per_hour'] = 25;
-
-	// block troublemakers
-	$opt['page']['banned_user_agents'] = array();
-
-  // copy of config2/settings-dist.inc.php
-  /* pregenerated waypoint list for new caches
-   * - Waypoint prefix (OC, OP, OZ etc.)
-   * - When pool contains less than min_count, generation process starts
-   *   and fills up the pool until max_count is reached.
-   */
-  $opt['logic']['waypoint_pool']['prefix'] = 'AA';
-  $opt['logic']['waypoint_pool']['min_count'] = 1000;
-  $opt['logic']['waypoint_pool']['max_count'] = 2000;
-  // chars used for waypoints. Remember to reinstall triggers and clear cache_waypoint_pool after changing
-  $opt['logic']['waypoint_pool']['valid_chars'] = '0123456789ABCDEF';
-  // fill_gaps = true: search for gaps between used waypoints and fill up these gaps
-  //                   (fill_gaps is slow and CPU intensive on database server. For
-  //                    productive servers you may want to generate some waypoints
-  //                    without fill_gaps first)
-  // fill_gaps = false: continue with the last waypoint
-  $opt['logic']['waypoint_pool']['fill_gaps'] = false;
-
-	// admin may use OC-team-comment log flag only when processing a cache report
-	// see also setting in config2/settings.inc.php!
-	$opt['logic']['admin']['team_comments_only_for_reports'] = true;
-	$opt['logic']['admin']['enable_listing_admins'] = false;
-	$opt['logic']['admin']['listingadmin_notification'] = 'contact@opencaching.xx';
-
-	/*
-	 * html purifier
+	/* data license settings
+	 * The text and licsense link are determined by $opt['locale'][<locale>]['page']['license']
+	 * and $opt['locale'][<locale>]['page']['license_url'].
 	 */
-	$opt['html_purifier']['cache_path'] = dirname(__FILE__).'/../cache2/html_purifier/';
+	$opt['logic']['license']['disclaimer'] = false;
+	$opt['logic']['license']['terms'] = 'articles.php?page=impressum#datalicense';
 
-  // see config2/settings-dist.inc.php
-	$opt['template']['default']['locale'] = 'DE';      // may be overwritten by $opt['domain'][...]['locale']
-	$opt['template']['default']['country'] = 'DE';     // may be overwritten by $opt['domain'][...]['country']
-	$opt['template']['default']['fallback_locale'] = 'EN';   // may be overwritten by $opt['domain'][...]['article_locale']
+	/* default locale
+	 */
+	$opt['template']['default']['locale'] = 'DE';   // can be overwritten by $opt['domain'][<domain>]['locale'] 
 
   // include all locale settings
   require_once($rootpath . 'config2/locale.inc.php');
-
-	$opt['page']['title'] = 'OPENCACHING';
-	$opt['page']['subtitle1'] = 'Geocaching with Opencaching';
-	$opt['page']['subtitle2'] = '';
-	$opt['page']['headimagepath'] = '';
-
-  /* Sponsoring advertisements
-   * (plain HTML)
-   */
-
-  $opt['page']['sponsor']['bottom'] = 'Driven by the Opencaching Community';
 
 	/* multi-domain settings
 	 *

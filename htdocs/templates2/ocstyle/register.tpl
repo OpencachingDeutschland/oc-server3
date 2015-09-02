@@ -75,7 +75,7 @@
 				<td valign="top">
 					<input type="text" name="username" maxlength="60" value="{$username|escape}" class="input200" /> *
 					{if $error_username_not_ok==1}
-						<span class="errormsg">{t}The username is not valid.{/t}</span>
+						<span class="errormsg">{t}The username contains invalid characters.{/t}</span>
 					{elseif $error_username_exists==1}
 						<span class="errormsg">{t}There already exists an account with that username.{/t}</span>
 					{/if}

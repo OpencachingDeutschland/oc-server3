@@ -11,6 +11,7 @@ CREATE TABLE `cache_type` (
   `icon_large` varchar(60) NOT NULL,
   `short2` varchar(15) NOT NULL,
   `short2_trans_id` int(10) NOT NULL,
+  `kml_name` varchar(10) NOT NULL,
   PRIMARY KEY  (`id`),
   UNIQUE KEY `name` (`name`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='static content' ;

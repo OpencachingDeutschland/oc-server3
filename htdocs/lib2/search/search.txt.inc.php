@@ -15,39 +15,11 @@
 
 function search_output()
 {
-	global $opt;
+	global $opt, $txt_record;
 	global $converted_from_html;
 	global $phpzip, $bUseZip;
 
-	$txtLine = "Name: {cachename} von {owner}
-Koordinaten: {lon} {lat}
-Status: {status}
-
-Versteckt am: {time}
-Wegpunkt: {waypoint}
-Land: {country}
-Cacheart: {type}
-Behälter: {container}
-D/T: {difficulty}/{terrain}
-Online: " . $opt['page']['absolute_url'] . "viewcache.php?wp={waypoint}
-
-Kurzbeschreibung: {shortdesc}
-
-Beschreibung{htmlwarn}:
-<===================>
-{desc}
-<===================>
-
-Zusätzliche Hinweise:
-<===================>
-{hints}
-<===================>
-A|B|C|D|E|F|G|H|I|J|K|L|M
-N|O|P|Q|R|S|T|U|V|W|X|Y|Z
-
-Logeinträge:
-{logs}
-";
+	$txtLine = $txt_record;
 
 	$txtLogs = "<===================>
 {username} / {date} / {type}
@@ -66,10 +38,10 @@ Logeinträge:
 			`caches`.`terrain` `terrain`,
 			`caches`.`difficulty` `difficulty`,
 			`caches`.`desc_languages` `desc_languages`,
-			`sys_trans_text`.`text` AS `country`,
-			`cache_size`.`de` `size`,
-			`cache_type`.`de` `type`,
-			`cache_status`.`de` `status`,
+			IFNULL(`stt_country`.`text`,`countries`.`en`) AS `country`,
+			IFNULL(`stt_size`.`text`,`cache_size`.`name`) `size`,
+			IFNULL(`stt_type`.`text`,`cache_type`.`en`) `type`,
+			IFNULL(`stt_status`.`text`,`cache_status`.`name`) `status`,
 			`user`.`username` `username`,
 			`cache_desc`.`desc` `desc`,
 			`cache_desc`.`short_desc` `short_desc`,
@@ -88,8 +60,10 @@ Logeinträge:
  			INNER JOIN `cache_status` ON `cache_status`.`id`=`caches`.`status`
  			INNER JOIN `user` ON `user`.`user_id`=`caches`.`user_id`
  			 LEFT JOIN `countries` ON `countries`.`short`=`caches`.`country`
- 			 LEFT JOIN `sys_trans_text` ON `sys_trans_text`.`trans_id`=`countries`.`trans_id`
- 			       AND `sys_trans_text`.`lang`=\'&1\'',
+			 LEFT JOIN `sys_trans_text` `stt_type` ON `stt_type`.`trans_id`=`cache_type`.`trans_id` AND `stt_type`.`lang`=\'&1\'
+			 LEFT JOIN `sys_trans_text` `stt_size` ON `stt_size`.`trans_id`=`cache_size`.`trans_id` AND `stt_size`.`lang`=\'&1\'
+			 LEFT JOIN `sys_trans_text` `stt_status` ON `stt_status`.`trans_id`=`cache_size`.`trans_id` AND `stt_status`.`lang`=\'&1\'
+			 LEFT JOIN `sys_trans_text` `stt_country` ON `stt_country`.`trans_id`=`countries`.`trans_id` AND `stt_country`.`lang`=\'&1\'',
      $opt['template']['locale']);
 
 	while ($r = sql_fetch_array($rs))
@@ -142,11 +116,29 @@ Logeinträge:
 		$terrain = sprintf('%01.1f', $r['terrain'] / 2);
 		$thisline = mb_ereg_replace('{terrain}', $terrain, $thisline);
 
+		$thisline = mb_ereg_replace('{siteurl}', $opt['page']['absolute_url'], $thisline);
 		$thisline = mb_ereg_replace('{owner}', $r['username'], $thisline);
 
 		// logs ermitteln
 		$logentries = '';
-		$rsLogs = sql_slave("SELECT `cache_logs`.`id`, `cache_logs`.`text_html`, `log_types`.`de` `type`, `cache_logs`.`date`, `cache_logs`.`text`, `user`.`username` FROM `cache_logs`, `user`, `log_types` WHERE `cache_logs`.`user_id`=`user`.`user_id` AND `cache_logs`.`type`=`log_types`.`id` AND `cache_logs`.`cache_id`=&1 ORDER BY `cache_logs`.`date` DESC LIMIT 20", $r['cacheid']);
+		$rsLogs = sql_slave("
+			SELECT
+				`cache_logs`.`id`,
+				`cache_logs`.`text_html`,
+				IFNULL(`stt`.`text`, `log_types`.`en`) `type`,
+				`cache_logs`.`date`,
+				`cache_logs`.`text`,
+				`user`.`username`
+			FROM `cache_logs`
+			JOIN `user` ON `cache_logs`.`user_id`=`user`.`user_id`
+			JOIN `log_types` ON `cache_logs`.`type`=`log_types`.`id`
+			LEFT JOIN `sys_trans_text` `stt` ON `stt`.`trans_id`=`log_types`.`trans_id` AND `stt`.`lang`='&2'
+			WHERE
+				`cache_logs`.`cache_id`=&1
+			ORDER BY
+				`cache_logs`.`date` DESC LIMIT 20",
+			$r['cacheid'], $opt['template']['locale']);
+
 		while ($rLog = sql_fetch_array($rsLogs))
 		{
 			$thislog = $txtLogs;

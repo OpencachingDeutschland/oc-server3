@@ -8,11 +8,13 @@
 	require('./lib2/web.inc.php');
 	$tpl->name = 'newcachesrest';
 	$tpl->menuitem = MNU_START_NEWCACHES;
+	$tpl->strip_country_from_baseadr = true;
 
 	$tpl->caching = true;
 	$tpl->cache_lifetime = 3600;
 
-	$country = isset($_REQUEST['country']) ? $_REQUEST['country'] : $opt['page']['main_country'];
+	$country = isset($_REQUEST['usercountry']) ? $_REQUEST['usercountry'] :
+	           (isset($_REQUEST['country']) ? $_REQUEST['country'] : $opt['page']['main_country']);
 
 	if (!$tpl->is_cached())
 	{

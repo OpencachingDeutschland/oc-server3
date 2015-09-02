@@ -157,7 +157,7 @@
 				</span>
 			</p>
 			{if $cache.type==6}
-				<span class="participants"><img src="resource2/{$opt.template.style}/images/cacheicon/16x16-event.gif" width="16" height="16" alt="{t}List of participants{/t}" />&nbsp;<a href="#" onclick="window.open('event_attendance.php?id={$cache.cacheid}&popup=y','{t escape=js}List{/t}','width=320,height=440,resizable=no,scrollbars=1')">{t}List of participants{/t}</a></span>
+				<span class="participants"><img src="resource2/{$opt.template.style}/images/cacheicon/16x16-event.gif" width="16" height="16" alt="" />&nbsp;<a href="#" onclick="window.open('event_attendance.php?id={$cache.cacheid}&popup=y','{t escape=js}List{/t}','width=320,height=440,resizable=no,scrollbars=1')">{t}List of participants{/t}</a></span>
 			{/if}
 		</div>
 	</div>
@@ -336,7 +336,7 @@ function showalllists()
 <!-- Description -->
 <div class="content2-container bg-blue02">
 	<p class="content-title-noshade-size2">
-		<img src="resource2/{$opt.template.style}/images/description/22x22-description.png" style="margin-right: 10px;" width="22" height="22" alt="{t}Description{/t}" /> {t}Description{/t}&nbsp;&nbsp;&nbsp;
+		<img src="resource2/{$opt.template.style}/images/description/22x22-description.png" style="margin-right: 10px;" width="22" height="22" alt="" /> {t}Description{/t}&nbsp;&nbsp;&nbsp;
 		<span class="content-title-link" style="font-weight:bold" >
 		{foreach from=$cache.desclanguages item=desclanguagesItem name=desclanguagesItem}
 				{if $smarty.foreach.desclanguagesItem.first==false} &nbsp;&middot;&nbsp; {/if}
@@ -368,7 +368,7 @@ function showalllists()
 {if $enableCacheNote}
 	<div class="content2-container bg-blue02" id="personal_note">
 		<p class="content-title-noshade-size2">
-			<img src="resource2/{$opt.template.style}/images/description/20x20-cache-note.png" style="margin-right: 10px;" alt="{t}Personal cache note{/t}" /> 
+			<img src="resource2/{$opt.template.style}/images/description/20x20-cache-note.png" style="margin-right: 10px;" alt="" /> 
 			{t}Personal cache note{/t}
 		</p>
 	</div>
@@ -385,7 +385,7 @@ function showalllists()
 {if count($childWaypoints)>0}
 	<div class="content2-container bg-blue02 content2-section-no-p">
 		<p class="content-title-noshade-size2">
-			<img src="resource2/{$opt.template.style}/images/description/20x20-compass.png" style="margin-right: 10px;" alt="{t}Additional waypoints{/t}" /> 
+			<img src="resource2/{$opt.template.style}/images/description/20x20-compass.png" style="margin-right: 10px;" alt="" /> 
 			{t}Additional waypoints{/t}
 		</p>
 	</div>
@@ -412,7 +412,7 @@ function showalllists()
 {if $cache.hint!=''}
 	<div class="content2-container bg-blue02">
   	<p class="content-title-noshade-size2">
-  		<img src="resource2/{$opt.template.style}/images/description/22x22-encrypted.png" style="margin-right: 10px;" width="22" height="22" alt="{t}Additional hint{/t}" /> {t}Additional hint{/t}&nbsp;&nbsp;
+  		<img src="resource2/{$opt.template.style}/images/description/22x22-encrypted.png" style="margin-right: 10px;" width="22" height="22" alt="" /> {t}Additional hint{/t}&nbsp;&nbsp;
   		<span id="decrypt-info">{if $crypt}
 				<img src="resource2/{$opt.template.style}/images/viewcache/decrypt.png" class="icon32" width="22" height="22" alt="" />
 				<span style="font-weight: 400;"><a href="viewcache.php?wp={$cache.wpoc}&nocrypt=1&desclang={$cache.desclanguage|urlencode}#decrypt-info" {literal}onclick="var ch = document.getElementById('decrypt-hints').childNodes;for(var i=0;i < ch.length;++i) {var e = ch[i]; decrypt(e);} document.getElementById('decrypt-info').style.display = 'none';
@@ -441,7 +441,7 @@ function showalllists()
 {if count($pictures)>0}
 	<div class="content2-container bg-blue02">
 		<p class="content-title-noshade-size2">
-			<img src="resource2/{$opt.template.style}/images/description/22x22-image.png" style="margin-right: 10px;" width="22" height="22" alt="{t}Pictures{/t}" /> 
+			<img src="resource2/{$opt.template.style}/images/description/22x22-image.png" style="margin-right: 10px;" width="22" height="22" alt="" /> 
 			{t}Pictures{/t}
 		</p>
 	</div>
@@ -464,7 +464,7 @@ function showalllists()
 <!-- Utilities -->
 <div class="content2-container bg-blue02">
 	<p class="content-title-noshade-size2">
-		<img src="resource2/{$opt.template.style}/images/description/22x22-utility.png" style="margin-right: 10px;" width="22" height="22" alt="{t}Utilities{/t}" /> 
+		<img src="resource2/{$opt.template.style}/images/description/22x22-utility.png" style="margin-right: 10px;" width="22" height="22" alt="" /> 
 		{t}Utilities{/t}
 	</p>
 </div>
@@ -473,7 +473,7 @@ function showalllists()
 	{if count($npaareasWarning) > 0}
 		<div style="border: solid 1px red; padding:10px 10px 0px 10px; margin: 3px 0 8px 0">
 			<p style="line-height: 1.6em;">
-				<img src="resource2/{$opt.template.style}/images/viewcache/npa.gif" align="left" style="margin-right: 25px;" width="32" height="32" alt="NSG/NPA" />
+				<img src="resource2/{$opt.template.style}/images/viewcache/npa.gif" align="left" style="margin-right: 25px;" width="32" height="32" alt="" />
 				{t 1=$npahelplink}This geocache is probably placed within a nature protection area! See %1here</a> for further informations, please.{/t}<br />
 				{foreach from=$npaareasWarning item=npaItem name=npaareas}
 					{$npaItem.npaTypeName|escape} 
@@ -519,7 +519,7 @@ function showalllists()
 			<br />
 
 			<small>
-				<img src="resource2/{$opt.template.style}/images/viewcache/16x16-info.png" class="icon16" alt="Terms of use" /> 
+				<img src="resource2/{$opt.template.style}/images/viewcache/16x16-info.png" class="icon16" alt="" /> 
 				{t}When downloading this file, you accept our <a href="articles.php?page=impressum#tos">terms of use</a> and <a href="articles.php?page=impressum#datalicense" target="_blank">Datalicense</a>.{/t}			</small>
 			<br />
 		</p>
@@ -531,7 +531,7 @@ function showalllists()
 {if $geokret_count!=0}
 	<div class="content2-container bg-blue02">
 		<p class="content-title-noshade-size2">
-			<img src="resource2/{$opt.template.style}/images/description/22x22-geokret.gif" style="margin-right: 10px;" width="22" height="22" alt="{t}Geokrets{/t}" />
+			<img src="resource2/{$opt.template.style}/images/description/22x22-geokret.gif" style="margin-right: 10px;" width="22" height="22" alt="" />
 			{t}Geokrets{/t}
 		</p>
 	</div>
@@ -557,7 +557,7 @@ function showalllists()
 	{if $morelogs}
 		<div class="content2-container bg-blue02">
 			<p id="showalllogs" class="content-title-noshade-size2">
-				<img id="showalllogs_img" src="resource2/{$opt.template.style}/images/action/16x16-showall.png" style="margin-right: 10px;" width="16" height="16" alt="{t}Show all logentries{/t}" />  
+				<img id="showalllogs_img" src="resource2/{$opt.template.style}/images/action/16x16-showall.png" style="margin-right: 10px;" width="16" height="16" alt="" />  
 				<span id="showalllogs_text">[<a href="viewcache.php?cacheid={$cache.cacheid}&log=A#logentries">{t}Show all logentries{/t}</a>]</span>
 			</p>
 		</div>

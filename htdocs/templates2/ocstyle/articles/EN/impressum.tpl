@@ -1,4 +1,4 @@
-﻿{***************************************************************************
+{***************************************************************************
 *  You can find the license in the docs directory
 *
 *  Unicode Reminder メモ
@@ -19,7 +19,7 @@
 
 <div class="content2-container bg-blue02">
 	<p class="content-title-noshade-size3">
-		<img src="resource2/ocstyle/images/misc/32x32-news.png" style="margin-right: 10px;" width="32" height="32" alt="Lizenz" />
+		<img src="resource2/ocstyle/images/misc/32x32-news.png" style="margin-right: 10px;" width="32" height="32" alt="" />
 		Operator of this website
 	</p>
 </div>
@@ -92,7 +92,7 @@
 
 <div class="content2-container bg-blue02">
 	<p class="content-title-noshade-size3">
-		<img src="resource2/ocstyle/images/misc/32x32-news.png" style="margin-right: 10px;" width="32" height="32" alt="Lizenz" />
+		<img src="resource2/ocstyle/images/misc/32x32-news.png" style="margin-right: 10px;" width="32" height="32" alt="" />
 		Responsibility for extenal Links
 	</p>
 </div>
@@ -111,7 +111,7 @@
 
 <div class="content2-container bg-blue02">
 	<p class="content-title-noshade-size3">
-		<img src="resource2/ocstyle/images/misc/32x32-news.png" style="margin-right: 10px;" width="32" height="32" alt="Lizenz" />
+		<img src="resource2/ocstyle/images/misc/32x32-news.png" style="margin-right: 10px;" width="32" height="32" alt="" />
 		<a name="tos"></a>Terms of use
 	</p>
 </div>
@@ -233,7 +233,7 @@
 
 <div class="content2-container bg-blue02">
 	<p class="content-title-noshade-size3">
-		<img src="resource2/ocstyle/images/misc/32x32-news.png" style="margin-right: 10px;" width="32" height="32" alt="Lizenz" />
+		<img src="resource2/ocstyle/images/misc/32x32-news.png" style="margin-right: 10px;" width="32" height="32" alt="" />
 		<a name="datalicense"></a>Data license
 	</p>
 </div>
@@ -269,7 +269,7 @@
 
 <div class="content2-container bg-blue02">
 	<p class="content-title-noshade-size3">
-		<img src="resource2/ocstyle/images/misc/32x32-news.png" style="margin-right: 10px;" width="32" height="32" alt="Lizenz" />
+		<img src="resource2/ocstyle/images/misc/32x32-news.png" style="margin-right: 10px;" width="32" height="32" alt="" />
 		<a name="codelicense"></a>Source code license
 	</p>
 </div>
@@ -296,7 +296,7 @@
 
 <div class="content2-container bg-blue02">
 	<p class="content-title-noshade-size3">
-		<img src="resource2/ocstyle/images/misc/32x32-news.png" style="margin-right: 10px;" width="32" height="32" alt="Lizenz" />
+		<img src="resource2/ocstyle/images/misc/32x32-news.png" style="margin-right: 10px;" width="32" height="32" alt="" />
 		Data privacy
 	</p>
 </div>

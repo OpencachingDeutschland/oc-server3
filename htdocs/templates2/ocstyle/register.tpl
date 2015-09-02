@@ -6,7 +6,7 @@
 {* OCSTYLE *}
 {if $confirm==1}
 	<div class="content2-pagetitle">
-		<img src="resource2/{$opt.template.style}/images/profile/32x32-profile.png" style="margin-right: 10px;" width="32" height="32" alt="{t}Register{/t}" />
+		<img src="resource2/{$opt.template.style}/images/profile/32x32-profile.png" style="margin-right: 10px;" width="32" height="32" alt="" />
 		{t}New user registered{/t}
 	</div>
 
@@ -50,7 +50,7 @@
 	<form name="register" action="register.php" method="post" enctype="application/x-www-form-urlencoded" style="display: inline;">
 		<input type="hidden" name="show_all_countries" value="{$show_all_countries}" />
 		<div class="content2-pagetitle">
-			<img src="resource2/{$opt.template.style}/images/profile/32x32-profile.png" style="margin-right: 10px;" width="32" height="32" alt="{t}Register{/t}" />
+			<img src="resource2/{$opt.template.style}/images/profile/32x32-profile.png" style="margin-right: 10px;" width="32" height="32" alt="" />
 			{t}Register new user{/t}
 		</div>
 

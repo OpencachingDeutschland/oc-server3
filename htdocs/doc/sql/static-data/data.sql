@@ -189,16 +189,16 @@ INSERT INTO `cache_status` (`id`, `name`, `trans_id`, `de`, `en`, `allow_user_vi
 -- Table cache_type
 SET NAMES 'utf8';
 TRUNCATE TABLE `cache_type`;
-INSERT INTO `cache_type` (`id`, `name`, `trans_id`, `ordinal`, `short`, `de`, `en`, `icon_large`, `short2`, `short2_trans_id`) VALUES ('1', 'unknown cachetyp', '535', '10', 'Other', 'unbekannter Cachetyp', 'unknown cachetyp', 'cache/unknown.gif', 'Unknown', '862');
-INSERT INTO `cache_type` (`id`, `name`, `trans_id`, `ordinal`, `short`, `de`, `en`, `icon_large`, `short2`, `short2_trans_id`) VALUES ('2', 'Traditional Cache', '536', '1', 'Trad.', 'normaler Cache', 'Traditional Cache', 'cache/traditional.gif', 'Traditional', '1855');
-INSERT INTO `cache_type` (`id`, `name`, `trans_id`, `ordinal`, `short`, `de`, `en`, `icon_large`, `short2`, `short2_trans_id`) VALUES ('3', 'Multicache', '514', '3', 'Multi', 'Multicache', 'Multicache', 'cache/multi.gif', 'Multicache', '514');
-INSERT INTO `cache_type` (`id`, `name`, `trans_id`, `ordinal`, `short`, `de`, `en`, `icon_large`, `short2`, `short2_trans_id`) VALUES ('4', 'virtual Cache', '537', '7', 'Virt.', 'virtueller Cache', 'virtual Cache', 'cache/virtual.gif', 'Virtual', '1857');
-INSERT INTO `cache_type` (`id`, `name`, `trans_id`, `ordinal`, `short`, `de`, `en`, `icon_large`, `short2`, `short2_trans_id`) VALUES ('5', 'Webcam Cache', '538', '8', 'ICam.', 'Webcam-Cache', 'Webcam Cache', 'cache/webcam.gif', 'Webcam', '1858');
-INSERT INTO `cache_type` (`id`, `name`, `trans_id`, `ordinal`, `short`, `de`, `en`, `icon_large`, `short2`, `short2_trans_id`) VALUES ('6', 'Event Cache', '539', '9', 'Event', 'Event-Cache', 'Event Cache', 'cache/event.gif', 'Event', '1859');
-INSERT INTO `cache_type` (`id`, `name`, `trans_id`, `ordinal`, `short`, `de`, `en`, `icon_large`, `short2`, `short2_trans_id`) VALUES ('7', 'Quizcache', '518', '4', 'Quiz', 'Rätselcache', 'Quizcache', 'cache/mystery.gif', 'Quiz', '1860');
-INSERT INTO `cache_type` (`id`, `name`, `trans_id`, `ordinal`, `short`, `de`, `en`, `icon_large`, `short2`, `short2_trans_id`) VALUES ('8', 'Math/Physics-Cache', '540', '5', 'Math', 'Mathe-/Physikcache', 'Math/Physics Cache', 'cache/mathe.gif', 'Math/Physics', '1861');
-INSERT INTO `cache_type` (`id`, `name`, `trans_id`, `ordinal`, `short`, `de`, `en`, `icon_large`, `short2`, `short2_trans_id`) VALUES ('9', 'Moving Cache', '541', '6', 'Moving', 'beweglicher Cache', 'Moving Cache', 'cache/moving.gif', 'Moving', '1862');
-INSERT INTO `cache_type` (`id`, `name`, `trans_id`, `ordinal`, `short`, `de`, `en`, `icon_large`, `short2`, `short2_trans_id`) VALUES ('10', 'Drive-In', '542', '2', 'Driv.', 'Drive-In', 'Drive-In', 'cache/drivein.gif', 'Drive-in', '1863');
+INSERT INTO `cache_type` (`id`, `name`, `trans_id`, `ordinal`, `short`, `de`, `en`, `icon_large`, `short2`, `short2_trans_id`, `kml_name`) VALUES ('1', 'unknown cachetyp', '535', '10', 'Other', 'unbekannter Cachetyp', 'Unknown cache type', 'unknown.gif', 'Unknown', '862', 'other');
+INSERT INTO `cache_type` (`id`, `name`, `trans_id`, `ordinal`, `short`, `de`, `en`, `icon_large`, `short2`, `short2_trans_id`, `kml_name`) VALUES ('2', 'Traditional Cache', '536', '1', 'Trad.', 'normaler Cache', 'Traditional Cache', 'traditional.gif', 'Traditional', '1855', 'tradi');
+INSERT INTO `cache_type` (`id`, `name`, `trans_id`, `ordinal`, `short`, `de`, `en`, `icon_large`, `short2`, `short2_trans_id`, `kml_name`) VALUES ('3', 'Multicache', '514', '3', 'Multi', 'Multicache', 'Multicache', 'multi.gif', 'Multicache', '514', 'multi');
+INSERT INTO `cache_type` (`id`, `name`, `trans_id`, `ordinal`, `short`, `de`, `en`, `icon_large`, `short2`, `short2_trans_id`, `kml_name`) VALUES ('4', 'virtual Cache', '537', '7', 'Virt.', 'virtueller Cache', 'Virtual Cache', 'virtual.gif', 'Virtual', '1857', 'virtual');
+INSERT INTO `cache_type` (`id`, `name`, `trans_id`, `ordinal`, `short`, `de`, `en`, `icon_large`, `short2`, `short2_trans_id`, `kml_name`) VALUES ('5', 'Webcam Cache', '538', '8', 'ICam.', 'Webcam-Cache', 'Webcam Cache', 'webcam.gif', 'Webcam', '1858', 'webcam');
+INSERT INTO `cache_type` (`id`, `name`, `trans_id`, `ordinal`, `short`, `de`, `en`, `icon_large`, `short2`, `short2_trans_id`, `kml_name`) VALUES ('6', 'Event Cache', '539', '9', 'Event', 'Event-Cache', 'Event Cache', 'event.gif', 'Event', '1859', 'event');
+INSERT INTO `cache_type` (`id`, `name`, `trans_id`, `ordinal`, `short`, `de`, `en`, `icon_large`, `short2`, `short2_trans_id`, `kml_name`) VALUES ('7', 'Quizcache', '518', '4', 'Quiz', 'Rätselcache', 'Quiz Cache', 'mystery.gif', 'Quiz', '1860', 'mystery');
+INSERT INTO `cache_type` (`id`, `name`, `trans_id`, `ordinal`, `short`, `de`, `en`, `icon_large`, `short2`, `short2_trans_id`, `kml_name`) VALUES ('8', 'Math/Physics-Cache', '540', '5', 'Math', 'Mathe-/Physikcache', 'Math/Physics Cache', 'mathe.gif', 'Math/Physics', '1861', 'mathe');
+INSERT INTO `cache_type` (`id`, `name`, `trans_id`, `ordinal`, `short`, `de`, `en`, `icon_large`, `short2`, `short2_trans_id`, `kml_name`) VALUES ('9', 'Moving Cache', '541', '6', 'Moving', 'beweglicher Cache', 'Moving Cache', 'moving.gif', 'Moving', '1862', 'moving');
+INSERT INTO `cache_type` (`id`, `name`, `trans_id`, `ordinal`, `short`, `de`, `en`, `icon_large`, `short2`, `short2_trans_id`, `kml_name`) VALUES ('10', 'Drive-In', '542', '2', 'Driv.', 'Drive-In', 'Drive-In Cache', 'drivein.gif', 'Drive-in', '1863', 'drivein');
 
 -- Table coordinates_type
 SET NAMES 'utf8';
@@ -2722,6 +2722,9 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2259', '{user} 
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2260', '{user} has logged the cache "{cachename}":', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2261', 'Your watchlist of', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2262', 'Cache was marked as OConly:', '2010-08-28 11:48:03');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2263', 'View description', '2010-08-28 11:48:03');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2264', 'Type:', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2265', 'Name: {cachename} by {owner} Coordinates: {lon} {lat} Status: {status} Hidden on: {time} Waypoint: {waypoint} Country: {country} Cache type: {type} Container: {container} D/T: {difficulty}/{terrain} Online: {siteurl}viewcache.php?wp={waypoint} Short description: {shortdesc} Description{htmlwarn}: <===================> {desc} <===================> Additional hint: <===================> {hints} <===================> A|B|C|D|E|F|G|H|I|J|K|L|M N|O|P|Q|R|S|T|U|V|W|X|Y|Z Log entries: {logs} ', '2015-06-17 10:09:14');
 
 -- Table sys_trans_ref
 SET NAMES 'utf8';
@@ -6999,6 +7002,9 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2260', 'DE', '{user} hat einen Logeintrag für den Cache "{cachename}" gemacht:', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2261', 'DE', 'Deine Watchlist vom', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2262', 'DE', 'Cache wurde als OConly markiert:', '2010-08-28 11:48:03');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2263', 'DE', 'Beschreibung ansehen', '2010-08-28 11:48:03');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2264', 'DE', 'Art:', '2013-11-03 10:09:14');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2265', 'DE', 'Name: {cachename} von {owner}\r\nKoordinaten: {lon} {lat}\r\nStatus: {status}\r\n\r\nVersteckt am: {time}\r\nWegpunkt: {waypoint}\r\nLand: {country}\r\nCacheart: {type}\r\nBehälter: {container}\r\nD/T: {difficulty}/{terrain}\r\nOnline: {siteurl}viewcache.php?wp={waypoint}\r\n\r\nKurzbeschreibung: {shortdesc}\r\n\r\nBeschreibung{htmlwarn}:\r\n<===================>\r\n{desc}\r\n<===================>\r\n\r\nZusätzliche Hinweise:\r\n<===================>\r\n{hints}\r\n<===================>\r\nA|B|C|D|E|F|G|H|I|J|K|L|M\r\nN|O|P|Q|R|S|T|U|V|W|X|Y|Z\r\n\r\nLogeinträge:\r\n{logs}\r\n', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'EN', 'Reorder IDs', '2010-09-02 00:15:30');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'EN', 'The database could not be reconnected.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'EN', 'Testing – please do not login', '2010-08-28 11:48:07');
@@ -7488,7 +7494,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('515', 'EN', 'Virtual Geocache', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('516', 'EN', 'Webcam Geocache', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('517', 'EN', 'Event Geocache', '2010-08-28 11:48:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('518', 'EN', 'Quiz cache', '2010-08-28 11:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('518', 'EN', 'Quiz Cache', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('519', 'EN', 'Math/Physics Geocache', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('520', 'EN', 'Moving Geocache', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('521', 'EN', 'Drive-In Geocache', '2010-08-28 11:48:07');
@@ -8769,6 +8775,9 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2260', 'EN', '{user} has logged the cache "{cachename}":', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2261', 'EN', 'Your watchlist of', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2262', 'EN', 'Cache was marked as OConly:', '2010-08-28 11:48:03');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2263', 'EN', 'View description', '2010-08-28 11:48:03');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2264', 'EN', 'Type:', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2265', 'EN', 'Name: {cachename} by {owner}\r\nCoordinates: {lon} {lat}\r\nStatus: {status}\r\n\r\nHidden on: {time}\r\nWaypoint: {waypoint}\r\nCountry: {country}\r\nType: {type}\r\nContainer: {container}\r\nD/T: {difficulty}/{terrain}\r\nOnline: {siteurl}viewcache.php?wp={waypoint}\r\n\r\nShort description: {shortdesc}\r\n\r\nDescription{htmlwarn}:\r\n<===================>\r\n{desc}\r\n<===================>\r\n\r\nAdditional hint:\r\n<===================>\r\n{hints}\r\n<===================>\r\nA|B|C|D|E|F|G|H|I|J|K|L|M\r\nN|O|P|Q|R|S|T|U|V|W|X|Y|Z\r\n\r\nLog entries: {logs}\r\n', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'ES', 'La base de datos no se pudo conectar.', '2010-12-09 00:17:55');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'ES', 'En pruebas - por favor, no entre.', '2010-12-09 00:17:55');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('4', 'ES', 'Usuario', '2010-12-09 00:17:55');
@@ -9862,7 +9871,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1521', 'ES', 'Esta cache se ha creado en otro servidor Web Opencaching y sólo se puede cambiar en ese servidor web Opencaching.', '2010-12-09 00:18:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1522', 'ES', 'Salvar opción', '2010-12-09 00:18:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1523', 'ES', 'Editar opción', '2010-12-09 00:18:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1524', 'ES', 'tipo', '2010-12-09 00:18:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1524', 'ES', 'Tipo', '2010-12-09 00:18:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1525', 'ES', 'Últimos logs', '2010-12-09 00:18:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1526', 'ES', 'Descargas', '2010-12-09 00:18:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1527', 'ES', 'Resultados en la página:', '2010-12-09 00:18:00');
@@ -10253,6 +10262,8 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2252', 'ES', 'Nuevo logs en %1', '2010-12-09 00:17:55');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2253', 'ES', 'Nuevo logs sin %1', '2010-12-09 00:17:55');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2255', 'ES', 'OConly ', '2010-08-28 11:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2264', 'ES', 'Tipo:', '2010-12-09 00:17:59');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2265', 'ES', 'Nombre: {cachename} por {owner}\r\nCoordenadas: {lon} {lat}\r\nEstado: {status}\r\n\r\nOcultos en: {time}\r\nWaypoint: {waypoint}\r\nPaís: {country}\r\nTipo: {type}\r\nContenedor: {container}\r\nD/T: {difficulty}/{terrain}\r\nOnline: {siteurl}viewcache.php?wp={waypoint}\r\n\r\nDescripción corta: {shortdesc}\r\n\r\nDescripción{htmlwarn}:\r\n<===================>\r\n{desc}\r\n<===================>\r\n\r\nAyuda adicional:\r\n<===================>\r\n{hints}\r\n<===================>\r\nA|B|C|D|E|F|G|H|I|J|K|L|M\r\nN|O|P|Q|R|S|T|U|V|W|X|Y|Z\r\n\r\nEntradas de registro: {logs}\r\n', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'FR', 'Réorganiser des IDs', '2015-08-25 01:28:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'FR', 'La base de données n\'a pas pu être connecté.', '2015-08-25 01:28:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'FR', 'Test - Ne vous connectez pas, s\'il vous plaît', '2015-08-25 01:28:59');
@@ -12017,6 +12028,8 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2253', 'FR', 'Nouveaux logs sans %1', '2015-08-25 01:28:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2254', 'FR', 'S\'il vous plaît sélectionner une langue.', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2255', 'FR', 'OConly ', '2010-08-28 11:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2264', 'FR', 'Type\&nbsp;:', '2015-08-25 01:29:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2265', 'FR', 'Nom : {cachename} par {owner}\r\nCoordonnées : {lon} {lat}\r\nStatut : {status}\r\n\nCaché en : {time}\r\nWaypoint : {waypoint}\r\nPays : {country}\r\nType : {type}\r\nBoîte : {container}\r\nD/T : {difficulty}/{terrain}\r\nOnline : {siteurl}viewcache.php?wp={waypoint}\r\n\r\nBrève description : {shortdesc}\r\n\r\nDescription{htmlwarn}:\r\n<===================>\r\n{desc}\r\n<===================>\r\n\r\nIndice additionnels :\r\n<===================>\r\n{hints}\r\n<===================>\r\nA|B|C|D|E|F|G|H|I|J|K|L|M\r\nN|O|P|Q|R|S|T|U|V|W|X|Y|Z\r\n\r\nEntrées du log:\r\n{logs}\r\n', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'IT', 'Riordina gli ID', '2010-10-27 18:49:18');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'IT', 'Impossibile riconnettersi al database', '2010-08-28 20:28:01');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'IT', 'Test - per favore non connettersi', '2010-08-28 20:36:53');
@@ -13711,6 +13724,9 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2252', 'IT', 'Nuovi logs in %1', '2010-08-28 20:29:29');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2253', 'IT', 'Nuovi logs senza %1', '2010-08-28 20:29:29');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2255', 'IT', 'OConly ', '2010-08-28 11:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2263', 'IT', 'Visualizza descrizione', '2010-09-11 00:06:36');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2264', 'IT', 'Tipo:', '2010-09-11 00:06:36');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2265', 'IT', 'Nome: {cachename} di {owner}\r\nCoordinate: {lon} {lat}\r\nStato: {status}\r\n\r\nNascosta il: {time}\r\nWaypoint: {waypoint}\r\nNazione: {country}\r\nTipo: {type}\r\nContenitore: {container}\r\nD/T: {difficulty}/{terrain}\r\nOnline: {siteurl}viewcache.php?wp={waypoint}\r\n\r\nDescrizione breve: {shortdesc}\r\n\r\nDescrizione{htmlwarn}:\r\n<===================>\r\n{desc}\r\n<===================>\r\n\r\nSuggerimenti addizionali:\r\n<===================>\r\n{hints}\r\n<===================>\r\nA|B|C|D|E|F|G|H|I|J|K|L|M\r\nN|O|P|Q|R|S|T|U|V|W|X|Y|Z\r\n\r\nNumero di log: {logs}\r\n', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('922', 'JA', 'JA', '2011-05-15 16:04:51');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'NL', 'ID\'s opnieuw sorteren', '2011-02-04 19:49:56');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'NL', 'De verbinding met de database kon niet hersteld worden.', '2011-02-04 19:49:56');

@@ -11,16 +11,16 @@
 	$content_type_plain = 'vnd.google-earth.kml';
 	$content_type_zipped = 'vnd.google-earth.kmz';
 
-
 function search_output()
 {
 	global $opt;
 	global $state_temporarily_na, $state_archived, $state_locked;
+	global $t_showdesc, $t_by, $t_type, $t_size, $t_difficulty, $t_terrain;
 
 	$kmlLine =
 '
 <Placemark>
-  <description><![CDATA[<a href="'.$opt['page']['absolute_url'].'viewcache.php?cacheid={cacheid}">Beschreibung ansehen</a><br>Von {username}<br>&nbsp;<br><table cellspacing="0" cellpadding="0" border="0"><tr><td>{typeimgurl} </td><td>Art: {type}<br>Größe: {size}</td></tr><tr><td colspan="2">Schwierigkeit: {difficulty} von 5.0<br>Gelände: {terrain} von 5.0</td></tr></table>]]></description>
+  <description><![CDATA['.$t_by.' {username}<br><br><a href="'.$opt['page']['absolute_url'].'viewcache.php?cacheid={cacheid}">'.$t_showdesc.'</a><br>&nbsp;<br><table cellspacing="0" cellpadding="0" border="0"><tr><td>{typeimgurl} </td><td>'.$t_type.' {type}<br>'.$t_size.' {size}</td></tr><tr><td colspan="2">'.$t_difficulty.'<br>'.$t_terrain.'</td></tr></table>]]></description>
   <name>{name}{archivedflag}</name>
   <LookAt>
     <longitude>{lon}</longitude>
@@ -33,7 +33,7 @@ function search_output()
   <Point>
     <coordinates>{lon},{lat},0</coordinates>
   </Point>
-  <Snippet>D: {difficulty}/T: {terrain} {size}  von {username}</Snippet>
+  <Snippet>D: {difficulty}/T: {terrain} {size}  '.$t_by.' {username}</Snippet>
 </Placemark>
 ';
 
@@ -62,18 +62,7 @@ function search_output()
 
 	append_output($kmlDetailHead);
 
-	/*
-		wp
-		name
-		username
-		type
-		size
-		lon
-		lat
-		icon
-	*/
-
-	$rs = sql_slave('
+	$rs = sql_slave("
 		SELECT SQL_BUFFER_RESULT
 			&searchtmp.`cache_id` `cacheid`,
 			&searchtmp.`longitude`,
@@ -82,72 +71,29 @@ function search_output()
 			`caches`.`date_hidden`,
 			`caches`.`name`,
 			`caches`.`status`,
-			`cache_type`.`de` `typedesc`,
-			`cache_size`.`de` `sizedesc`,
+			IFNULL(`stt_type`.`text`, `cache_type`.`en`) `typedesc`,
+			`cache_type`.`kml_name`,
+			`cache_type`.`icon_large`,
+			IFNULL(`stt_size`.`text`, `cache_size`.`en`) `sizedesc`,
 			`caches`.`terrain`,
 			`caches`.`difficulty`,
 			`user`.`username`
-		FROM
-			&searchtmp,
-			`caches`,
-			`cache_type`,
-			`cache_size`,
-			`user`
-		WHERE
-			&searchtmp.`cache_id`=`caches`.`cache_id` AND
-			&searchtmp.`type`=`cache_type`.`id` AND
-			&searchtmp.`size`=`cache_size`.`id` AND
-			&searchtmp.`user_id`=`user`.`user_id`');
+		FROM &searchtmp
+		JOIN `caches` ON &searchtmp.`cache_id`=`caches`.`cache_id`
+		JOIN `cache_type` ON &searchtmp.`type`=`cache_type`.`id`
+		JOIN `cache_size` ON &searchtmp.`type`=`cache_size`.`id`
+		LEFT JOIN `user` ON &searchtmp.`user_id`=`user`.`user_id`
+		LEFT JOIN `sys_trans_text` `stt_type` ON `stt_type`.`trans_id`=`cache_type`.`trans_id`
+		LEFT JOIN `sys_trans_text` `stt_size` ON `stt_size`.`trans_id`=`cache_size`.`trans_id`
+		WHERE `stt_type`.`lang`='&1' and `stt_size`.`lang`='&1'",
+		$opt['template']['locale']);
 
 	while ($r = sql_fetch_array($rs))
 	{
 		$thisline = $kmlLine;
+		$typeimgurl = '<img src="http://www.opencaching.de/resource2/'.$style.'/images/cacheicon/'.$r['icon_large'].'" alt="'.$r['typedesc'].'" title="'.$r['typedesc'].'" />';
 
-		// icon suchen
-		switch ($r['type'])
-		{
-			case 2:
-				$icon = 'tradi';
-				$typeimgurl = '<img src="http://www.opencaching.de/resource2/'.$style.'/images/cacheicon/traditional.gif" alt="Normaler Cache" title="Normaler Cache" />';
-				break;
-			case 3:
-				$icon = 'multi';
-				$typeimgurl = '<img src="http://www.opencaching.de/resource2/'.$style.'/images/cacheicon/multi.gif" alt="Multicache" title="Multicache" />';
-				break;
-			case 4:
-				$icon = 'virtual';
-				$typeimgurl = '<img src="http://www.opencaching.de/resource2/'.$style.'/images/cacheicon/virtual.gif" alt="virtueller Cache" title="virtueller Cache" />';
-				break;
-			case 5:
-				$icon = 'webcam';
-				$typeimgurl = '<img src="http://www.opencaching.de/resource2/'.$style.'/images/cacheicon/webcam.gif" alt="Webcam Cache" title="Webcam Cache" />';
-				break;
-			case 6:
-				$icon = 'event';
-				$typeimgurl = '<img src="http://www.opencaching.de/resource2/'.$style.'/images/cacheicon/event.gif" alt="Event Cache" title="Event Cache" />';
-				break;
-			case 7:
-				$icon = 'mystery';
-				$typeimgurl = '<img src="http://www.opencaching.de/resource2/'.$style.'/images/cacheicon/mystery.gif" alt="Rätselcache" title="Event Cache" />';
-				break;
-			case 8:
-				$icon = 'mathe';
-				$typeimgurl = '<img src="http://www.opencaching.de/resource2/'.$style.'/images/cacheicon/mathe.gif" alt="Mathe-/Physik-Cache" title="Event Cache" />';
-				break;
-			case 9:
-				$icon = 'moving';
-				$typeimgurl = '<img src="http://www.opencaching.de/resource2/'.$style.'/images/cacheicon/moving.gif" alt="Moving Cache" title="Event Cache" />';
-				break;
-			case 10:
-				$icon = 'drivein';
-				$typeimgurl = '<img src="http://www.opencaching.de/resource2/'.$style.'/images/cacheicon/drivein.gif" alt="Drive-In Cache" title="Event Cache" />';
-				break;
-			default:
-				$icon = 'other';
-				$typeimgurl = '<img src="http://www.opencaching.de/resource2/'.$style.'/images/cacheicon/unknown.gif" alt="unbekannter Cachetyp" title="unbekannter Cachetyp" />';
-				break;
-		}
-		$thisline = mb_ereg_replace('{icon}', $icon, $thisline);
+		$thisline = mb_ereg_replace('{icon}', $r['kml_name'], $thisline);
 		$thisline = mb_ereg_replace('{typeimgurl}', $typeimgurl, $thisline);
 
 		$lat = sprintf('%01.5f', $r['latitude']);

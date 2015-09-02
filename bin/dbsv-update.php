@@ -562,6 +562,12 @@
 		sql("UPDATE `removed_objects` SET `node`='&1' WHERE `type`=8 AND `node`=0", $opt['logic']['node']['id']);
 	}
 
+	function dbv_135()  // move KML cache type names from search.kml.inc.php to database
+	{
+		if (!sql_field_exists('cache_type','kml_name'))
+			sql("ALTER TABLE `cache_type` ADD COLUMN `kml_name` varchar(10) NOT NULL");
+	}
+
 
 	// When adding new mutations, take care that they behave well if run multiple
 	// times. This improves robustness of database versioning.

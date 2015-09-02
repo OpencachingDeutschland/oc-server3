@@ -17,6 +17,7 @@ function search_output()
 	global $state_temporarily_na, $state_archived, $state_locked;
 	global $t_showdesc, $t_by, $t_type, $t_size, $t_difficulty, $t_terrain;
 
+	// see also util2/google-earth/caches.php
 	$kmlLine =
 '
 <Placemark>
@@ -91,7 +92,7 @@ function search_output()
 	while ($r = sql_fetch_array($rs))
 	{
 		$thisline = $kmlLine;
-		$typeimgurl = '<img src="http://www.opencaching.de/resource2/'.$style.'/images/cacheicon/'.$r['icon_large'].'" alt="'.$r['typedesc'].'" title="'.$r['typedesc'].'" />';
+		$typeimgurl = '<img src="{urlbase}resource2/'.$style.'/images/cacheicon/'.$r['icon_large'].'" alt="'.$r['typedesc'].'" title="'.$r['typedesc'].'" />';
 
 		$thisline = mb_ereg_replace('{icon}', $r['kml_name'], $thisline);
 		$thisline = mb_ereg_replace('{typeimgurl}', $typeimgurl, $thisline);
@@ -133,6 +134,8 @@ function search_output()
 
 		$thisline = mb_ereg_replace('{username}', xmlentities($r['username']), $thisline);
 		$thisline = mb_ereg_replace('{cacheid}', xmlentities($r['cacheid']), $thisline);
+
+		$thisline = mb_ereg_replace('{urlbase}', xmlentities($opt['page']['absolute_url']), $thisline);
 
 		append_output($thisline);
 	}

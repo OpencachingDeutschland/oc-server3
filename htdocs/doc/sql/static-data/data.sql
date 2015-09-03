@@ -5386,7 +5386,6 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('173', 'DE', 'Samoa', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('174', 'DE', 'Go', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('175', 'DE', 'Entwicklersystem - nur Testdaten', '2010-08-28 11:48:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('176', 'DE', 'Die <a target=\"_blank\" href=\"articles.php?page=dsb\">Datenschutzbelehrung</a> und <a href=\"articles.php?page=impressum#tos\" target=\"_blank\">Nutzungsbedingungen</a> habe ich gelesen und bin damit einverstanden.', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('179', 'DE', 'Wallis und Futuna', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('180', 'DE', 'Neuen Newseintrag erstellen', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('181', 'DE', 'Vanuatu', '2010-08-28 11:48:06');
@@ -6509,7 +6508,6 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1714', 'DE', 'Die Empfehlung zurückziehen', '2010-12-18 23:17:28');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1717', 'DE', 'Bitte auswählen!', '2010-12-18 23:16:20');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1718', 'DE', 'Ergebnisse auf dieser Seite', '2010-12-18 23:16:02');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1719', 'DE', 'Ergebnis {startatp1} bis {endat} (als zip)', '2010-12-18 23:16:43');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1722', 'DE', 'Möchtest du diesen Eintrag wirklich entfernen?', '2010-12-18 23:15:41');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1723', 'DE', 'Möchtest du wirklich die Empfehlung widerrufen?', '2010-12-18 23:15:12');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1724', 'DE', 'Strecke:', '2010-12-18 23:14:35');
@@ -8439,7 +8437,6 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1896', 'EN', 'Go on', '2012-10-11 00:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1897', 'EN', 'to the date selection', '2012-10-11 00:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1898', 'EN', 'Please select the date from which on all changes are to be reverted.<br />The listing will be reset to the contents it had on that day at 00:00:00.', '2012-10-11 00:00:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1899', 'EN', 'Changes', '2012-10-11 00:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1900', 'EN', 'Changes', '2012-10-11 00:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1901', 'EN', 'Warning: If you revert any owner-made listing changes of <em>today</em>, your revert will be final. It cannot be corrected / undone afterwards. Only reverts of coords \&amp; country, logs and pictures will be logged in this case, so all other changes will not be comprehensible. Therefore <span style=\"text-decoration:underline\">it is strongly recommended to revert vandalism not before the next day!</span>', '2012-10-11 00:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1902', 'EN', 'coordinates and country', '2012-10-11 00:00:00');
@@ -10050,7 +10047,6 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1714', 'ES', 'Revocar la recomendación', '2012-08-24 17:43:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1717', 'ES', '¡Por favor selelecciona!', '2012-08-24 17:43:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1718', 'ES', 'Resultados de esta página', '2012-08-24 17:43:19');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1719', 'ES', 'Resultado {startatp1} a {endat} (como zip)', '2012-08-24 17:43:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1722', 'ES', '¿Estás seguro que quieres eliminar esta entrada?', '2012-08-24 17:43:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1723', 'ES', '¿Estás seguro que quieres eliminar esta recomendación?', '2012-08-24 17:43:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1724', 'ES', 'Distancia del camino:', '2012-08-24 17:43:19');
@@ -10063,7 +10059,6 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1731', 'ES', 'Teamblog', '2012-08-24 17:43:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1732', 'ES', 'Foro', '2012-08-24 17:43:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1733', 'ES', 'Geokrety', '2012-08-24 17:43:19');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1734', 'ES', 'Importar GPX', '2012-08-24 17:43:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1735', 'ES', 'Para Eventos: ¡Fecha del evento!', '2012-08-24 17:43:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1736', 'ES', 'ID de Usuario', '2012-08-24 17:43:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1737', 'ES', 'Lista', '2012-08-24 17:43:19');
@@ -10082,7 +10077,6 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1759', 'ES', 'Nota:', '2012-08-24 17:43:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1760', 'ES', 'Incluir coordenadas en la nota', '2012-08-24 17:43:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1761', 'ES', 'La nota no es visible para otros usuarios. La nota y la coordenada opcional se incluye en la descarga de archivos GPX y se envía al dispositivo GPS.', '2013-02-21 00:32:43');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1762', 'ES', 'Suscribirse a los feeds de opencaching', '2012-08-24 17:43:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1763', 'ES', 'Su navegador ha rechazado nuestra cookie.<br /> Para obtener más información sobre este tema, véase <a href=\"%1\">Opencaching.de-help</a>.', '2011-05-23 22:26:26');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1764', 'ES', 'Nota persona del cache', '2012-08-24 17:43:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1765', 'ES', '¡Este geocache está probablemente situado dentro de una zona de protección de la naturaleza! Mira %1aqui</a> para obtener más información, por favor.', '2012-08-24 17:43:19');
@@ -11553,7 +11547,6 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1731', 'FR', 'Teamblog', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1732', 'FR', 'Forum', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1733', 'FR', 'Geokrety', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1734', 'FR', 'Importer GPX', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1735', 'FR', 'Pour des caches événementielle\&nbsp;: La date de l\'événement\&nbsp;!', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1736', 'FR', 'ID de l\'utilisateur\&nbsp;:', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1737', 'FR', 'Liste', '2015-08-25 01:29:00');
@@ -11572,7 +11565,6 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1759', 'FR', 'Remarque\&nbsp;:', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1760', 'FR', 'Coordonnées&nbsp;', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1761', 'FR', 'La note n\'est pas visible aux autres utilisateurs. La note et les coordonnées facultatives seront inclus dans les téléchargements de fichiers GPX-et envoyés à l\'appareil GPS.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1762', 'FR', 'Abonnez-vous à des feeds d\'Opencaching', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1763', 'FR', 'Votre navigateur a rejeté notre cookie.<br />Vous pouvez trouver plus d\'informations sur ce sujet dans le <a href=\"%1\">Opencaching.de-help</a>.', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1764', 'FR', 'Note de cache personnelle', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1765', 'FR', 'Cette géocache est probablement placé dans une zone de protection de la nature\&nbsp;! Voir <a href=\"%1\">ici</a> pour plus d\'informations, s\'il vous plaît.', '2015-08-25 01:29:00');
@@ -13307,7 +13299,6 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1714', 'IT', 'Ritira la raccomandazione', '2012-08-26 02:39:48');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1717', 'IT', 'Per favore seleziona!', '2012-08-26 02:39:48');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1718', 'IT', 'Risultati su questa pagina', '2010-12-05 00:03:28');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1719', 'IT', 'Risultati {startatp1} in {endat} (come zip)', '2010-12-05 00:03:28');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1722', 'IT', 'Vuoi veramente cancellare?', '2010-12-05 00:03:28');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1723', 'IT', 'Vuoi veramente rimuovere questa raccomandazione?', '2010-12-05 00:03:28');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1724', 'IT', 'Lunghezza percorso:', '2010-12-05 00:03:28');
@@ -13320,7 +13311,6 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1731', 'IT', 'Teamblog', '2012-08-26 02:39:48');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1732', 'IT', 'Forum', '2012-08-26 02:39:48');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1733', 'IT', 'Geoketry', '2012-08-26 02:39:48');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1734', 'IT', 'Importa GPX', '2012-08-26 02:39:48');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1735', 'IT', 'Per gli eventi: La data dell\'evento!', '2012-08-26 02:39:48');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1736', 'IT', 'Identificativo utente:', '2012-08-26 02:39:48');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1737', 'IT', 'List', '2012-08-26 02:39:48');
@@ -13339,7 +13329,6 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1759', 'IT', 'Nota:', '2012-08-26 02:39:48');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1760', 'IT', 'Includi una coordinata nella nota', '2012-08-26 02:39:48');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1761', 'IT', 'La nota non è visibile ad altri utenti. La nota e le coordinate opzionali vengono incluse nei file GPX ed inviate al tuo dispositivo GPS.', '2013-02-20 01:27:31');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1762', 'IT', 'Sottoscrivi i feeds di opencaching', '2012-08-26 02:39:48');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1763', 'IT', 'Il tuo browser ha rifiutato il nostro cookie.<br/> Puoi trovare ulteriori informazioni su questo argomento in <a href=\"%1\">Opencaching.de-help</a>.', '2011-05-23 22:26:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1764', 'IT', 'Nota personale per la cache', '2012-08-26 02:39:48');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1765', 'IT', 'Questa geocache è probabilmente situata all\'interno di un\'area naturale protetta! Per favore, vedi %1qui</a> per ulteriori informazioni.', '2012-08-26 02:39:48');
@@ -14627,7 +14616,6 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1678', 'NL', 'Voer een zoektekst in, alstublieft!', '2011-02-04 19:50:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1680', 'NL', 'Waypoint %1 niet gevonden!', '2011-02-04 19:50:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1681', 'NL', 'D/T:', '2011-02-04 19:50:08');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1682', 'NL', 'Kaartgegevens \&copy; 2009 <a href=\"http://www.openstreetmap.org/\">OpenStreetMap</a> Contributors', '2011-02-04 19:50:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1683', 'NL', 'Fout: Het zoek resultaat kan niet weergegeven worden (HTTP fout code %1)', '2011-02-04 19:50:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1684', 'NL', 'Fout: Het zoek resultaat kan niet weergegeven worden. De gegevens zijn niet beschikbaar op de server.', '2011-02-04 19:50:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1685', 'NL', 'Er zijn %1 caches gevonden. Vergroot de kaart om de caches te zien.', '2011-02-04 19:50:08');
@@ -14660,7 +14648,6 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1714', 'NL', 'Aanbeveling terug halen', '2011-02-04 19:50:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1717', 'NL', 'Alstublieft kiezen!', '2011-02-04 19:50:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1718', 'NL', 'Resultaat op deze pagina', '2011-02-04 19:50:08');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1719', 'NL', 'Resultaat {startatp1} tot {endat} (als zip)', '2011-02-04 19:50:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1722', 'NL', 'Wilt u de log werkelijk verwijderen?', '2011-02-04 19:50:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1723', 'NL', 'Wilt u werkelijk de aanbeveling verwijderen?', '2011-02-04 19:50:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1724', 'NL', 'Lengte:', '2011-02-04 19:50:08');

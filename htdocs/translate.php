@@ -295,12 +295,12 @@ function resetIds()
 
 	// clean up dead refs
 	sql_temp_table('transDeadIds');
-	sql("CREATE TEMPORARY TABLE &transDeadIds (`trans_id` INT(11) PRIMARY KEY) SELECT `sys_trans_ref`.`trans_id` FROM `sys_trans_ref` LEFT JOIN `sys_trans` ON `sys_trans_ref`.`trans_id`=`sys_trans`.`id` WHERE ISNULL(`sys_trans`.`id`)");
+	sql("CREATE TEMPORARY TABLE &transDeadIds (`trans_id` INT(11) PRIMARY KEY) SELECT DISTINCT `sys_trans_ref`.`trans_id` FROM `sys_trans_ref` LEFT JOIN `sys_trans` ON `sys_trans_ref`.`trans_id`=`sys_trans`.`id` WHERE ISNULL(`sys_trans`.`id`)");
 	sql("DELETE `sys_trans_ref` FROM `sys_trans_ref`, &transDeadIds WHERE `sys_trans_ref`.`trans_id`=&transDeadIds.`trans_id`");
 	sql_drop_temp_table('transDeadIds');
 
 	sql_temp_table('transDeadIds');
-	sql("CREATE TEMPORARY TABLE &transDeadIds (`trans_id` INT(11) PRIMARY KEY) SELECT `sys_trans_text`.`trans_id` FROM `sys_trans_text` LEFT JOIN `sys_trans` ON `sys_trans_text`.`trans_id`=`sys_trans`.`id` WHERE ISNULL(`sys_trans`.`id`)");
+	sql("CREATE TEMPORARY TABLE &transDeadIds (`trans_id` INT(11) PRIMARY KEY) SELECT DISTINCT `sys_trans_text`.`trans_id` FROM `sys_trans_text` LEFT JOIN `sys_trans` ON `sys_trans_text`.`trans_id`=`sys_trans`.`id` WHERE ISNULL(`sys_trans`.`id`)");
 	sql("DELETE `sys_trans_text` FROM `sys_trans_text`, &transDeadIds WHERE `sys_trans_text`.`trans_id`=&transDeadIds.`trans_id`");
 	sql_drop_temp_table('transDeadIds');
 

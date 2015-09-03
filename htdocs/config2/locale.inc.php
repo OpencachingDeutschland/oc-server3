@@ -102,7 +102,7 @@
 	$opt['locale']['EN']['format']['timesec'] = '%X';
 	$opt['locale']['EN']['format']['phpdate'] = 'm/d/Y';
 	$opt['locale']['EN']['format']['dot1000'] = ',';
-	$opt['locale']['EN']['country'] = 'UK';
+	$opt['locale']['EN']['country'] = 'GB';
 	$opt['locale']['EN']['page']['subtitle1'] = 'Geocaching with Opencaching';
 	$opt['locale']['EN']['page']['subtitle2'] = '';
 	$opt['locale']['EN']['page']['license_url'] = 'http://creativecommons.org/licenses/by-nc-nd/3.0/de/deed.en';

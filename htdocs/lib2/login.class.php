@@ -307,7 +307,7 @@ class login
 				return $sCountry;
 		}
 
-		// user specified a language?
+		// user specified a country?
 		if ($this->userid != 0)
 		{
 			$sCountry = sql_value("SELECT `country` FROM `user` WHERE `user_id`='&1'", null, $this->userid);
@@ -316,8 +316,12 @@ class login
 		}
 
 		// default country of this language
-		if (isset($opt['locale'][$opt['template']['locale']]['country']))
-			return $opt['locale'][$opt['template']['locale']]['country'];
+		//
+		// disabled: produces unexpected results on multi-domains without translation,
+		// and will confusingly switch country when switching language  -- following 3.9.2015
+		//
+		// if (isset($opt['locale'][$opt['template']['locale']]['country']))
+		// 	return $opt['locale'][$opt['template']['locale']]['country'];
 
 		// default country of installation (or domain)
 		return $opt['template']['default']['country'];

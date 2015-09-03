@@ -1239,7 +1239,7 @@ function __autoload($class_name)
 				return $sCountry;
 		}
 
-		// user specified a language?
+		// user specified a country?
 		if (isset($usr) && ($usr !== false))
 		{
 			$sCountry = sqlValue("SELECT `country` FROM `user` WHERE `user_id`='" . ($usr['userid']+0) . "'", null);
@@ -1248,13 +1248,17 @@ function __autoload($class_name)
 		}
 
 		// default country of this language
-		if (isset($opt['template']['locale']) && isset($opt['locale'][$opt['template']['locale']]['country']))
-			return $opt['locale'][$opt['template']['locale']]['country'];
+		//
+		// disabled: produces unexpected results on multi-domains without translation,
+		// and will confusingly switch country when switching language  -- following 3.9.2015
+		//
+		// if (isset($opt['template']['locale']) && isset($opt['locale'][$opt['template']['locale']]['country']))
+		// 	return $opt['locale'][$opt['template']['locale']]['country'];
 
 		// default country of installation (or domain)
 		if (isset($opt['template']['default']['country']))
 			return $opt['template']['default']['country'];
-		
+
 		// country could not be determined by the above checks -> return "GB"
 		return 'GB';
 	}

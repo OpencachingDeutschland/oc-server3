@@ -579,4 +579,50 @@
   $opt['httpd']['user'] = 'apache';
   $opt['httpd']['group'] = 'apache';
 
+	/*
+	 * small map town list default settings (adjusted for OC.de)
+	 *
+	 * set zoom to 0 to disable a town
+	 */
+	$opt['map']['towns']['enable'] = true;
+	$opt['map']['towns']['DE']['enable'] = true;
+	$opt['map']['towns']['DE']['zoom'] = 11;
+	$opt['map']['towns']['AT']['enable'] = true;
+	$opt['map']['towns']['AT']['zoom'] = 10;
+	$opt['map']['towns']['CH']['enable'] = true;
+	$opt['map']['towns']['CH']['zoom'] = 10;
+	$opt['map']['towns']['IT']['enable'] = true;
+	$opt['map']['towns']['IT']['zoom'] = 8;
+	$opt['map']['towns']['IT']['Bolzano']['zoom'] = 9;
+	$opt['map']['towns']['IT']['Udine']['zoom'] = 9;
+	$opt['map']['towns']['ES']['enable'] = true;
+	$opt['map']['towns']['ES']['zoom'] = 9;
+	$opt['map']['towns']['FR']['enable'] = true;
+	$opt['map']['towns']['FR']['zoom'] = 9;
+	$opt['map']['towns']['FR']['Strasbourg']['zoom'] = 10;
+
+	// example for completely overriding small-map town list for a country:
+	/*
+		$opt['map']['towns']['IT']['enable'] = false;
+		$mapmenu = 2001;
+		$menuitem[$mapmenu+0] = array('title' => 'Bologna',
+		                              'menustring' => 'Bologna',
+		                              'authlevel' => 0,
+		                              'href' => 'map2.php?mode=normalscreen&lat=44.497&lon=11.343&zoom=8',
+		                              'visible' => 1,
+		                              'sublevel' => 1,
+		                              'parent' => MNU_MAP
+		                              );
+		$menuitem[$mapmenu+1] = array('title' => 'Bolzano',
+		                              'menustring' => 'Bolzano',
+		                              'authlevel' => 0,
+		                              'href' => 'map2.php?lat=46.502&lon=11.354&zoom=10',
+		                              'visible' => 1,
+		                              'sublevel' => 1,
+		                              'parent' => MNU_MAP
+		                              );
+		$menuitem[MNU_MAP]['subitems'][] = $mapmenu+0;
+		$menuitem[MNU_MAP]['subitems'][] = $mapmenu+1;
+	*/
+
 ?>

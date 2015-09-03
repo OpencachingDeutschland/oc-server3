@@ -568,6 +568,23 @@
 			sql("ALTER TABLE `cache_type` ADD COLUMN `kml_name` varchar(10) NOT NULL");
 	}
 
+	function dbv_136()  // move main town table from settings into database
+	{
+		if (!sql_table_exists('towns'))
+		{
+			sql("
+				CREATE TABLE `towns` (
+				  `country` char(2) NOT NULL,
+				  `name` varchar(40) NOT NULL,
+				  `trans_id` int(10) unsigned NOT NULL,
+				  `coord_lat` double NOT NULL,
+				  `coord_long` double NOT NULL,
+				  `maplist` tinyint(1) NOT NULL default '0',
+				  KEY `country` (`country`)
+				) ENGINE=MyISAM DEFAULT CHARSET=utf8;");
+		}
+	}
+
 
 	// When adding new mutations, take care that they behave well if run multiple
 	// times. This improves robustness of database versioning.

@@ -265,10 +265,17 @@ function __autoload($class_name)
 
 		if (isset($opt['domain'][$sHost]))
 		{
-			$style = $opt['domain'][$sHost]['style'];
-			$opt['cookie']['domain'] = $opt['domain'][$sHost]['cookiedomain'];
-			$absolute_server_URI = $opt['domain'][$sHost]['url'];
-			$opt['template']['default']['locale'] = $opt['domain'][$sHost]['locale'];
+			if (isset($opt['domain'][$sHost]['style']))
+				$style = $opt['domain'][$sHost]['style'];
+
+			if (isset($opt['domain'][$sHost]['cookiedomain']))
+				$opt['cookie']['domain'] = $opt['domain'][$sHost]['cookiedomain'];
+
+			if (isset($opt['domain'][$sHost]['url']))
+				$absolute_server_URI = $opt['domain'][$sHost]['url'];
+
+			if (isset($opt['domain'][$sHost]['locale']))
+				$opt['template']['default']['locale'] = $opt['domain'][$sHost]['locale'];
 
 			if (isset($opt['domain'][$sHost]['country']))
 				$opt['template']['default']['country'] = $opt['domain'][$sHost]['country'];

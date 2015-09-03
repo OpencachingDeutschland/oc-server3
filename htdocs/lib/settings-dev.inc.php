@@ -119,6 +119,7 @@
    * (used to prevent brute-force-attacks)
    */
 	$opt['page']['max_logins_per_hour'] = 1000;    // for development ... 
+	$opt['page']['headoverlay'] = 'oc_head_alpha3';
 
   // data license
 	$opt['logic']['license']['disclaimer'] = true;   // also in lib2/settings-dist.inc.php

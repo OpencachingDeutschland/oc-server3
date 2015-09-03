@@ -277,8 +277,17 @@ function __autoload($class_name)
 			if (isset($opt['domain'][$sHost]['locale']))
 				$opt['template']['default']['locale'] = $opt['domain'][$sHost]['locale'];
 
+			if (isset($opt['domain'][$sHost]['fallback_locale']))
+				$opt['template']['default']['fallback_locale'] = $opt['domain'][$sHost]['fallback_locale'];
 			if (isset($opt['domain'][$sHost]['country']))
 				$opt['template']['default']['country'] = $opt['domain'][$sHost]['country'];
+
+			if (isset($opt['domain'][$sHost]['keywords']))
+				$opt['page']['meta']['keywords'] = $opt['domain'][$sHost]['keywords'];
+			if (isset($opt['domain'][$sHost]['description']))
+				$opt['page']['meta']['description'] = $opt['domain'][$sHost]['description'];
+			if (isset($opt['domain'][$sHost]['headoverlay']))
+				$opt['page']['headoverlay'] = $opt['domain'][$sHost]['headoverlay'];
 		}
 	}
 

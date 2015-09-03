@@ -194,6 +194,8 @@ function set_domain()
 
 		if (isset($opt['domain'][$domain]['locale']))
 			$opt['template']['default']['locale'] = $opt['domain'][$domain]['locale'];
+		if (isset($opt['domain'][$domain]['fallback_locale']))
+			$opt['template']['default']['fallback_locale'] = $opt['domain'][$domain]['fallback_locale'];
 
 		if (isset($opt['domain'][$domain]['country']))
 			$opt['template']['default']['country'] = $opt['domain'][$domain]['country'];
@@ -203,6 +205,14 @@ function set_domain()
 
 		if (isset($opt['domain'][$domain]['cookiedomain']))
 			$opt['session']['domain'] = $opt['domain'][$domain]['cookiedomain'];
+
+		if (isset($opt['domain'][$domain]['keywords']))
+			$opt['page']['meta']['keywords'] = $opt['domain'][$domain]['keywords'];
+		if (isset($opt['domain'][$domain]['description']))
+			$opt['page']['meta']['description'] = $opt['domain'][$domain]['description'];
+
+		if (isset($opt['domain'][$domain]['headoverlay']))
+			$opt['page']['headoverlay'] = $opt['domain'][$domain]['headoverlay'];
 	}
 }
 

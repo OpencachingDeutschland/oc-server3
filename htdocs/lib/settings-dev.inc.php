@@ -31,7 +31,7 @@
 	$style = 'ocstyle';
 
 	// include common settings of lib1 and lib2
-	require_once($rootpath . 'config2/common-settings.inc.php');
+	require_once($rootpath . 'config2/settings-dist-common.inc.php');
 
 	//id of the node; see config2/settings-dist.inc.php
 	$oc_nodeid = 4;

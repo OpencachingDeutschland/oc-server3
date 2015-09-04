@@ -5,6 +5,8 @@
  *  Unicode Reminder メモ
  ***************************************************************************/
 
+	$build_map_towns_menu = true;
+
 	require('./lib2/web.inc.php');
 	require_once('./lib2/logic/cache.class.php');
 	require_once('./lib2/logic/user.class.php');

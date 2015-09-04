@@ -1,8 +1,11 @@
 Unicode Reminder: メモ
 
 The following static data is used by the OC code. Only some of this data is
-included in the Git repo distribution, but it is all included in Opencaching.de
-developer VMs and databases (see http://wiki.opencaching.de/index.php/Entwicklung/Entwicklersystem).
+included in the Git repo distribution, but for certain countries (as specified)
+it is all included in Opencaching.de developer VMs and databases
+(see http://wiki.opencaching.de/index.php/Entwicklung/Entwicklersystem).
+This is total some hundred MB of SQL dump.
+
 
 See also /doc/license.txt on license terms.
 
@@ -11,12 +14,12 @@ Tables:  geodb_coordinates
          geodb_hierarchies
          geodb_locations
          geodb_textdata
-Content: political geographic data
+Content: political geographic data (de, at, ch)
 Purpose: searching for caches by city (Ortschaften)
 Used by: lang/de/ocstyle/selectlocid.inc.php
          lib2/logic/geodb.inc.php  (not in use)
 				 search.php
-         util/gns/mkadmtxt.php
+         util2/gns/mkadmtxt.php
 Source:  OpenGeoDb
 Import:  ?
 License: GNU Free Documentation License
@@ -25,7 +28,7 @@ geodb_locations is only referenced by lib2/logic/geodb.inc.php i.e. it is
 not used (yet) by OC production code.
 
 Tables:  geodb_search
-Content: searching for caches by city
+Content: searching for caches by city (de, at, ch)
 Used by: (not in use)
 Source:  geodb_textdata
 Import:  util2/geodb/make_searchindex.php
@@ -38,11 +41,11 @@ Probably some unfinished experiment.
 
 Tables:  gns_locations
          gns_search
-Content: political geographical data
+Content: political geographical data (de, at, ch)
 Purpose: searching for caches by city (Ortschaften)
 Used by: search.php
-Source:  http://earth-info.nga.mil/gns/html/
-Import:  util2/gns/gns_import.php
+Source:  http://geonames.nga.mil/gns/html/namefiles.html, all countries
+Import:  util2/gns/gns_import.php - outdated
 License: Public Domain
 
 
@@ -59,7 +62,7 @@ Docs:    http://wiki.opencaching.de/index.php/Schutzgebiete
 
 Tables:  nuts_codes
          nuts_layers
-Content: NUTS data for adm1..adm4 levels
+Content: NUTS data for adm1..adm4 levels (all EU countries)
 Purpose: assigning country, state, district, city to cache listings
 Used by: util2/cron/modules/cache_location.class.php
 Source:  http://epp.eurostat.ec.europa.eu/portal/page/portal/gisco_Geographical_information_maps/popups/references/administrative_units_statistical_units_1

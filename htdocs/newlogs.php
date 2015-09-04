@@ -113,7 +113,7 @@
 		}
 
 		if ($newLogsPerCountry)
-			$orderByCountry = '`countries`.`de` ASC, ';
+			$orderByCountry = '`country_name` ASC, ';
 		else
 			$orderByCountry = '';
 		

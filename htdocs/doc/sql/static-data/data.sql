@@ -189,7 +189,7 @@ INSERT INTO `cache_status` (`id`, `name`, `trans_id`, `de`, `en`, `allow_user_vi
 -- Table cache_type
 SET NAMES 'utf8';
 TRUNCATE TABLE `cache_type`;
-INSERT INTO `cache_type` (`id`, `name`, `trans_id`, `ordinal`, `short`, `de`, `en`, `icon_large`, `short2`, `short2_trans_id`, `kml_name`) VALUES ('1', 'unknown cachetyp', '535', '10', 'Other', 'unbekannter Cachetyp', 'Unknown cache type', 'unknown.gif', 'Unknown', '862', 'other');
+INSERT INTO `cache_type` (`id`, `name`, `trans_id`, `ordinal`, `short`, `de`, `en`, `icon_large`, `short2`, `short2_trans_id`, `kml_name`) VALUES ('1', 'unknown cachetyp', '535', '10', 'Other', 'unbekannter Cachetyp', 'Unknown cache type', 'unknown.gif', 'Unknown', '862', 'unknown');
 INSERT INTO `cache_type` (`id`, `name`, `trans_id`, `ordinal`, `short`, `de`, `en`, `icon_large`, `short2`, `short2_trans_id`, `kml_name`) VALUES ('2', 'Traditional Cache', '536', '1', 'Trad.', 'normaler Cache', 'Traditional Cache', 'traditional.gif', 'Traditional', '1855', 'tradi');
 INSERT INTO `cache_type` (`id`, `name`, `trans_id`, `ordinal`, `short`, `de`, `en`, `icon_large`, `short2`, `short2_trans_id`, `kml_name`) VALUES ('3', 'Multicache', '514', '3', 'Multi', 'Multicache', 'Multicache', 'multi.gif', 'Multicache', '514', 'multi');
 INSERT INTO `cache_type` (`id`, `name`, `trans_id`, `ordinal`, `short`, `de`, `en`, `icon_large`, `short2`, `short2_trans_id`, `kml_name`) VALUES ('4', 'virtual Cache', '537', '7', 'Virt.', 'virtueller Cache', 'Virtual Cache', 'virtual.gif', 'Virtual', '1857', 'virtual');

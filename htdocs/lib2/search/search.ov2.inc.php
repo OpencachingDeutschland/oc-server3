@@ -40,7 +40,7 @@ function search_output()
 			`caches`.`terrain`,
 			`caches`.`difficulty`,
 			`cache_type`.`short` `typedesc`,
-			`cache_size`.`de` `sizedesc`,
+			`cache_size`.`name` `sizedesc`,
 			`user`.`username`
 		FROM
 			&searchtmp,

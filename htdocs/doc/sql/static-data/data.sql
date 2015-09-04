@@ -617,6 +617,7 @@ INSERT INTO `languages` (`short`, `name`, `trans_id`, `native_name`, `de`, `en`,
 -- Table languages_list_default
 SET NAMES 'utf8';
 TRUNCATE TABLE `languages_list_default`;
+INSERT INTO `languages_list_default` (`lang`, `show`) VALUES ('DE', 'CS');
 INSERT INTO `languages_list_default` (`lang`, `show`) VALUES ('DE', 'DA');
 INSERT INTO `languages_list_default` (`lang`, `show`) VALUES ('DE', 'DE');
 INSERT INTO `languages_list_default` (`lang`, `show`) VALUES ('DE', 'EN');
@@ -625,6 +626,7 @@ INSERT INTO `languages_list_default` (`lang`, `show`) VALUES ('DE', 'FR');
 INSERT INTO `languages_list_default` (`lang`, `show`) VALUES ('DE', 'IT');
 INSERT INTO `languages_list_default` (`lang`, `show`) VALUES ('DE', 'NL');
 INSERT INTO `languages_list_default` (`lang`, `show`) VALUES ('DE', 'PL');
+INSERT INTO `languages_list_default` (`lang`, `show`) VALUES ('EN', 'CS');
 INSERT INTO `languages_list_default` (`lang`, `show`) VALUES ('EN', 'DA');
 INSERT INTO `languages_list_default` (`lang`, `show`) VALUES ('EN', 'DE');
 INSERT INTO `languages_list_default` (`lang`, `show`) VALUES ('EN', 'EN');

@@ -34,6 +34,9 @@ class translate_filescan
 	function scanTranslateFunctionCalls()
 	{
 		$nNextPos = strpos($this->msContent, "t"."('");
+		$nNext_ = strpos($this->msContent, "_"."('");
+		if ($nNext_ !== false && ($nNextPos === false || $nNext_ < $nNextPos))
+			$nNextPos = $nNext_;
 		while ($nNextPos !== false)
 		{
 			// check for match
@@ -61,7 +64,10 @@ class translate_filescan
 				$this->textlist[] = array('text' => $sText, 'line' => $nLine);
 			}
 
+			$nNext_ = strpos($this->msContent, "_"."('", $nNextPos+1);
 			$nNextPos = strpos($this->msContent, "t"."('", $nNextPos+1);
+			if ($nNext_ !== false && ($nNextPos === false || $nNext_ < $nNextPos))
+				$nNextPos = $nNext_;
 		}
 	}
 

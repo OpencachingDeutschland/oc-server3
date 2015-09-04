@@ -9,7 +9,7 @@
  ***************************************************************************/
 
 	require_once('locale.inc.php');
-	require_once('common-settings.inc.php');
+	require_once('settings-dist-common.inc.php');
 
 	/* PHP settings
 	 *
@@ -189,8 +189,6 @@
 	$opt['page']['absolute_url'] = 'http://devel.opencaching.de/'; // may be overwritten by $opt['domain'][...]['uri']
 	$opt['page']['develsystem'] = false;
 	$opt['page']['origin_url'] = 'http://www.opencaching.de/';  // reference productive installation for this OC code fork
-
-	// $opt['page']['meta']: see common-settings.inc.php
 
  	/* disable or enable https access to the main site
  	 * if false and connection is https, redirect to $opt['page']['absolute_url']

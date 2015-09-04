@@ -5,7 +5,7 @@
  ***************************************************************************}
  {* OCSTYLE *}
 <div class="content2-pagetitle">
-	<img src="resource2/{$opt.template.style}/images/misc/32x32-winner.png" style="margin-right: 10px;" width="32" height="32" alt="{t}Special caches{/t}" />
+	<img src="resource2/{$opt.template.style}/images/misc/32x32-winner.png" style="margin-right: 10px;" width="32" height="32" alt="" />
 	{t}Special caches{/t}
 </div>
 

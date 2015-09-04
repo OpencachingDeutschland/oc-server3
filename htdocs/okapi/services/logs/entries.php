@@ -125,13 +125,18 @@ class WebService
                     and unknown_format = 0
                 order by date_created
             ");
+            if (Settings::get('OC_BRANCH') == 'oc.de') {
+                $object_type_param = 'type=1&';
+            } else {
+                $object_type_param = '';
+            }
             while ($row = mysql_fetch_assoc($rs))
             {
                 $results[$log_id2uuid[$row['object_id']]]['images'][] =
                     array(
                         'uuid' => $row['uuid'],
                         'url' => $row['url'],
-                        'thumb_url' => Settings::get('SITE_URL') . 'thumbs.php?uuid=' . $row['uuid'],
+                        'thumb_url' => Settings::get('SITE_URL') . 'thumbs.php?'.$object_type_param.'uuid=' . $row['uuid'],
                         'caption' => $row['title'],
                         'is_spoiler' => ($row['spoiler'] ? true : false),
                     );

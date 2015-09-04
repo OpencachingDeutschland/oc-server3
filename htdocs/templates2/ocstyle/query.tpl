@@ -54,7 +54,7 @@
 		<input type="hidden" name="submit" value="1" />
 
 		<div class="content2-pagetitle">
-			<img src="resource2/{$opt.template.style}/images/misc/32x32-search.png" style="margin-right: 10px;" width="32" height="32" alt="{t}Store query{/t}" />
+			<img src="resource2/{$opt.template.style}/images/misc/32x32-search.png" style="margin-right: 10px;" width="32" height="32" alt="" />
 			{t}Store query{/t}
 		</div>
 

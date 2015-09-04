@@ -278,7 +278,7 @@ function output_cachexml($sWaypoint)
 	                             `caches`.`longitude`, `caches`.`latitude`, 
 	                             `caches`.`status`>1 AS `inactive`,
 	                             IFNULL(`trans_status_text`.`text`, `cache_status`.`name`) AS `statustext`,
-	                             IFNULL(`trans_type_text`.`text`, `cache_type`.`name`) AS `type_text`, `cache_type`.`id` AS `type_id`, 
+	                             IFNULL(`trans_type_text`.`text`, `cache_type`.`en`) AS `type_text`, `cache_type`.`id` AS `type_id`, 
 	                             IFNULL(`trans_size_text`.`text`, `cache_size`.`name`) AS `size`, 
 	                             `caches`.`difficulty`, `caches`.`terrain`, 
 	                             `caches`.`date_created`, `caches`.`is_publishdate`,

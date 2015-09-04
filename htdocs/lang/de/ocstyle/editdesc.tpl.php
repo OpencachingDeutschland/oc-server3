@@ -29,7 +29,7 @@
 ?>
 
 
-<div class="content2-pagetitle"><img src="lang/de/ocstyle/images/description/22x22-description.png" style="margin-right: 10px;" width="22" height="22" alt="{t}New cache{/t}" />{t}Edit cache description for <a href="viewcache.php?cacheid={cacheid}">{cachename}</a>{/t}</div>
+<div class="content2-pagetitle"><img src="lang/de/ocstyle/images/description/22x22-description.png" style="margin-right: 10px;" width="22" height="22" alt="" />{t}Edit cache description for <a href="viewcache.php?cacheid={cacheid}">{cachename}</a>{/t}</div>
 
 <form name="editform" action="editdesc.php" method="post" enctype="application/x-www-form-urlencoded" id="editcache_form" dir="ltr">
 <input type="hidden" name="post" value="1"/>

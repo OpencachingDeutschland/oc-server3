@@ -320,7 +320,7 @@ function getChildWaypoints($cacheid)
 	{
 		set_paged_pics(LOGPICS_FOR_CACHE_GALLERY, 0, $cacheid, "viewcache.php?cacheid=" . $cacheid . "&logpics=1");
 		$tpl->assign('subtitle',"&lt;&lt; <a href='viewcache.php?cacheid=" . $cacheid . "'>" .
-		             $translate->t("Back to the cache description", "", "", 0) . "</a>");
+		             $translate->t('Back to the cache description', '', basename(__FILE__), __LINE__) . "</a>");
 
 	}
 	else

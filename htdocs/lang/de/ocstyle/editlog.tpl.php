@@ -76,7 +76,7 @@ function _chkFound () {
 //-->
 </script>
 
-		  <div class="content2-pagetitle"><img src="lang/de/ocstyle/images/description/22x22-logs.png" style="margin-right: 10px;" width="22" height="22" alt="{t}Register{/t}" />{t}Edit log entry for the cache <a href="viewcache.php?cacheid={cacheid}">{cachename}</a>{/t}</div>
+		  <div class="content2-pagetitle"><img src="lang/de/ocstyle/images/description/22x22-logs.png" style="margin-right: 10px;" width="22" height="22" alt="" />{t}Edit log entry for the cache <a href="viewcache.php?cacheid={cacheid}">{cachename}</a>{/t}</div>
 
 <form action="editlog.php" method="post" enctype="application/x-www-form-urlencoded" name="editform" dir="ltr">
 <input type="hidden" name="logid" value="{logid}"/>

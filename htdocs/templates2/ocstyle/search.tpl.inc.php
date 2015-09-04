@@ -49,4 +49,41 @@
 	$state_locked = _('Locked');
 	$cache_note_text = _('Personal cache note');
 
+	$t_showdesc = _('View description');
+	$t_by = _('by');
+	$t_type = _('Type:');
+	$t_size = _('Size:');
+	$t_difficulty = str_replace('%1', '{difficulty}', _('Difficulty:&nbsp;%1&nbsp;of&nbsp;5'));
+	$t_terrain = str_replace('%1', '{terrain}', _('Terrain:&nbsp;%1&nbsp;of&nbsp;5'));
+
+	$txt_record = $translate->t("Name: {cachename} by {owner}
+Coordinates: {lon} {lat}
+Status: {status}
+
+Hidden on: {time}
+Waypoint: {waypoint}
+Country: {country}
+Cache type: {type}
+Container: {container}
+D/T: {difficulty}/{terrain}
+Online: {siteurl}viewcache.php?wp={waypoint}
+
+Short description: {shortdesc}
+
+Description{htmlwarn}:
+<===================>
+{desc}
+<===================>
+
+Additional hint:
+<===================>
+{hints}
+<===================>
+A|B|C|D|E|F|G|H|I|J|K|L|M
+N|O|P|Q|R|S|T|U|V|W|X|Y|Z
+
+Log entries:
+{logs}
+", '', basename(__FILE__), __LINE__);
+
 ?>

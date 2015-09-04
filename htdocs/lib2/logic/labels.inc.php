@@ -56,7 +56,7 @@ class labels
 		fwrite($f, 'labels::addLabels("cache_status", "' . str_replace('"', '\\"', serialize($a)) . '");' . "\n");
 
 		$a = array();
-		$rs = sql("SELECT `cache_type`.`id`, IFNULL(`sys_trans_text`.`text`, `cache_type`.`name`) AS `name`
+		$rs = sql("SELECT `cache_type`.`id`, IFNULL(`sys_trans_text`.`text`, `cache_type`.`en`) AS `name`
 		             FROM `cache_type`
 		        LEFT JOIN `sys_trans` ON `cache_type`.`trans_id`=`sys_trans`.`id` AND `cache_type`.`name`=`sys_trans`.`text`
 		        LEFT JOIN `sys_trans_text` ON `sys_trans`.`id`=`sys_trans_text`.`trans_id` AND `sys_trans_text`.`lang`='&1'", 

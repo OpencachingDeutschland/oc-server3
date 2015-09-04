@@ -6,7 +6,7 @@
 {* OCSTYLE *}
 {if !$reportdisplay}
 <div class="content2-pagetitle">
-	<img src="resource2/{$opt.template.style}/images/misc/32x32-tools.png" style="margin-right: 10px;" width="32" height="32" alt="World" />
+	<img src="resource2/{$opt.template.style}/images/misc/32x32-tools.png" style="margin-right: 10px;" width="32" height="32" alt="" />
 	{t}Cache history{/t}
 </div>
 

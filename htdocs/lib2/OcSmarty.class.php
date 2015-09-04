@@ -21,6 +21,7 @@ class OcSmarty extends Smarty
 	var $title = '';
 	var $menuitem = null;
 	var $nowpsearch = false;
+	var $strip_country_from_baseadr = false;
 
 	// no header, menu or footer
 	var $popup = false;
@@ -231,7 +232,7 @@ class OcSmarty extends Smarty
 		if ($this->title == '')
 			$optn['template']['title'] = $menu->GetMenuTitle();
 
-		// build address for switching locales
+		// build address for switching locales and countries
 		$base_pageadr = $_SERVER['REQUEST_URI'];
 		// workaround for http://redmine.opencaching.de/issues/703
 		$strange_things_pos = strpos($base_pageadr,".php/");
@@ -239,7 +240,8 @@ class OcSmarty extends Smarty
 			$base_pageadr = substr($base_pageadr,0,$strange_things_pos + 4);
 		$lpos = strpos($base_pageadr,"locale=");
 		if (!$lpos) $lpos = strpos($base_pageadr,"usercountry=");
-		if (!$lpos) $lpos = strpos($base_pageadr,"country=");
+		if (!$lpos && $this->strip_country_from_baseadr)
+			$lpos = strpos($base_pageadr,"country=");
 		if ($lpos)
 			$base_pageadr = substr($base_pageadr,0,$lpos);
 		else

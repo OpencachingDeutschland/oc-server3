@@ -17,8 +17,14 @@
 	$msDirlist[] = './lib';
 	$msDirlist[] = './lib2';
 	$msDirlist[] = './lib2/logic';
+	$msDirlist[] = './lib2/old';
+	$msDirlist[] = './lib2/search';
+	$msDirlist[] = './old';
 	$msDirlist[] = './templates2/mail';
 	$msDirlist[] = './templates2/ocstyle';
+	$msDirlist[] = './util/notification';
+	$msDirlist[] = './util/watchlist';
+	$msDirlist[] = './util2/cron/modules';
 	
 	// directory libse needs to be added recursive
 	addClassesDirecotriesToDirlist('libse');
@@ -289,12 +295,12 @@ function resetIds()
 
 	// clean up dead refs
 	sql_temp_table('transDeadIds');
-	sql("CREATE TEMPORARY TABLE &transDeadIds (`trans_id` INT(11) PRIMARY KEY) SELECT `sys_trans_ref`.`trans_id` FROM `sys_trans_ref` LEFT JOIN `sys_trans` ON `sys_trans_ref`.`trans_id`=`sys_trans`.`id` WHERE ISNULL(`sys_trans`.`id`)");
+	sql("CREATE TEMPORARY TABLE &transDeadIds (`trans_id` INT(11) PRIMARY KEY) SELECT DISTINCT `sys_trans_ref`.`trans_id` FROM `sys_trans_ref` LEFT JOIN `sys_trans` ON `sys_trans_ref`.`trans_id`=`sys_trans`.`id` WHERE ISNULL(`sys_trans`.`id`)");
 	sql("DELETE `sys_trans_ref` FROM `sys_trans_ref`, &transDeadIds WHERE `sys_trans_ref`.`trans_id`=&transDeadIds.`trans_id`");
 	sql_drop_temp_table('transDeadIds');
 
 	sql_temp_table('transDeadIds');
-	sql("CREATE TEMPORARY TABLE &transDeadIds (`trans_id` INT(11) PRIMARY KEY) SELECT `sys_trans_text`.`trans_id` FROM `sys_trans_text` LEFT JOIN `sys_trans` ON `sys_trans_text`.`trans_id`=`sys_trans`.`id` WHERE ISNULL(`sys_trans`.`id`)");
+	sql("CREATE TEMPORARY TABLE &transDeadIds (`trans_id` INT(11) PRIMARY KEY) SELECT DISTINCT `sys_trans_text`.`trans_id` FROM `sys_trans_text` LEFT JOIN `sys_trans` ON `sys_trans_text`.`trans_id`=`sys_trans`.`id` WHERE ISNULL(`sys_trans`.`id`)");
 	sql("DELETE `sys_trans_text` FROM `sys_trans_text`, &transDeadIds WHERE `sys_trans_text`.`trans_id`=&transDeadIds.`trans_id`");
 	sql_drop_temp_table('transDeadIds');
 
@@ -450,23 +456,23 @@ function scanStart()
 
 	$translationHandler->clearReferences();
 
-	$translationHandler->importFromTable('countries', 'name', 'trans_id');
-	$translationHandler->importFromTable('languages', 'name', 'trans_id');
+	$translationHandler->importFromTable('attribute_categories', 'name', 'trans_id');
+	$translationHandler->importFromTable('attribute_groups', 'name', 'trans_id');
+	$translationHandler->importFromTable('cache_attrib', 'name', 'trans_id');
+	$translationHandler->importFromTable('cache_attrib', 'html_desc', 'html_desc_trans_id');
+	$translationHandler->importFromTable('cache_report_reasons', 'name', 'trans_id');
+	$translationHandler->importFromTable('cache_report_status', 'name', 'trans_id');
 	$translationHandler->importFromTable('cache_size', 'name', 'trans_id');
 	$translationHandler->importFromTable('cache_status', 'name', 'trans_id');
 	$translationHandler->importFromTable('cache_type', 'name', 'trans_id');
 	$translationHandler->importFromTable('coordinates_type', 'name', 'trans_id');
+	$translationHandler->importFromTable('countries', 'name', 'trans_id');
+	$translationHandler->importFromTable('languages', 'name', 'trans_id');
 	$translationHandler->importFromTable('log_types', 'name', 'trans_id');
-	$translationHandler->importFromTable('sys_menu', 'title', 'title_trans_id');
-	$translationHandler->importFromTable('sys_menu', 'menustring', 'menustring_trans_id');
-	$translationHandler->importFromTable('cache_report_status', 'name', 'trans_id');
-	$translationHandler->importFromTable('cache_report_reasons', 'name', 'trans_id');
 	$translationHandler->importFromTable('profile_options', 'name', 'trans_id');
-	$translationHandler->importFromTable('attribute_groups', 'name', 'trans_id');
-	$translationHandler->importFromTable('attribute_categories', 'name', 'trans_id');
-	$translationHandler->importFromTable('cache_attrib', 'name', 'trans_id');
-	$translationHandler->importFromTable('cache_attrib', 'html_desc', 'html_desc_trans_id');
 	$translationHandler->importFromTable('statpics', 'description', 'trans_id');
+	$translationHandler->importFromTable('sys_menu', 'menustring', 'menustring_trans_id');
+	$translationHandler->importFromTable('sys_menu', 'title', 'title_trans_id');
 }
 
 function scanFile($filename)

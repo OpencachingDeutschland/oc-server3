@@ -64,10 +64,10 @@
 		$tpl->name = 'newlogs';
 		$tpl->menuitem = MNU_START_NEWLOGS;
 		$exclude_country = '*';
-		if (isset($_REQUEST['country']))
-			$country = $include_country = $_REQUEST['country'];
-		else if (isset($_REQUEST['usercountry']))
+		if (isset($_REQUEST['usercountry']))
 			$country = $include_country = $_REQUEST['usercountry'];
+		else if (isset($_REQUEST['country']))
+			$country = $include_country = $_REQUEST['country'];
 		else
 		{
 			$country = '';
@@ -80,6 +80,7 @@
 		$orderByDate = '';
 	}
 
+	$tpl->strip_country_from_baseadr = true;
 	$tpl->assign('creation_date', $orderByDate == '');
 
 	if (!$tpl->is_cached())

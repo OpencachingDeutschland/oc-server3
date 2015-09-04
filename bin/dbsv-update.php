@@ -103,6 +103,8 @@
 	// - must be consecutively numbered
 	// - should behave well if run multiple times
 
+	/***** OC release 3.0.8 *****/
+
 	function dbv_100()  // expands log date to datetime, to enable time logging
 	{
 		if (sql_field_type('cache_logs','date') != 'DATETIME')
@@ -228,6 +230,8 @@
 			sql("ALTER TABLE `cache_reports` ADD INDEX `userid` (`userid`)");
 	}
 
+	/***** OC release 3.0.9 *****/
+
 	function dbv_108()  // automatic email-bounce processing
 	{
 		if (!sql_field_exists('user','last_email_problem'))
@@ -342,6 +346,8 @@
 		}
 	}
 
+	/***** OC release 3.0.10 *****/
+
 	function dbv_118()	// resize field password to fit to the new hashed passwords
 	{
 		sql("ALTER TABLE `user` MODIFY COLUMN `password` VARCHAR(128) default NULL");
@@ -358,6 +364,8 @@
 		sql("DROP TABLE IF EXISTS `mapresult_data`");
 	}
 	
+	/***** OC release 3.0.11 *****/
+
 	function dbv_121()	// add user profile flag for receiving newsletter
 	{
 		if (!sql_field_exists('user','accept_mailing'))
@@ -366,6 +374,8 @@
 		}
 	}
 
+	/***** OC release 3.0.12 *****/
+
 	function dbv_122()	// add user profile flag for default setting of send-my-email option
 	{
 		if (!sql_field_exists('user','usermail_send_addr'))
@@ -373,6 +383,8 @@
 			sql("ALTER TABLE `user` ADD COLUMN `usermail_send_addr` tinyint(1) NOT NULL default '0' AFTER `accept_mailing`");
 		}
 	}
+
+	/***** OC release 3.0.13 *****/
 
 	function dbv_123()  // add tables, fields and procs for cache lists and list watches
 	{
@@ -425,8 +437,6 @@
 		{
 			sql("ALTER TABLE `cache_watches` DROP COLUMN `last_executed`"); 
 		}
-
-		update_triggers();		// runs maintain-123.inc.php
 	}
 
 	function dbv_124()  // update cache lists implementation
@@ -450,8 +460,6 @@
 			sql("ALTER TABLE `cache_lists` ADD COLUMN `description` mediumtext NOT NULL");
 		if (!sql_field_exists('cache_lists','desc_htmledit'))
 			sql("ALTER TABLE `cache_lists` ADD COLUMN `desc_htmledit` tinyint(1) unsigned NOT NULL default '1'");
-
-		update_triggers();		// runs maintain-124.inc.php
 	}
 
 	function dbv_125()  // update cache lists implementation; preparation of XML interface export
@@ -465,8 +473,6 @@
 		}
 		if (!sql_field_exists('cache_lists','last_state_change'))
 			sql("ALTER TABLE `cache_lists` ADD COLUMN `last_state_change` datetime default NULL AFTER `last_added`");
-
-		update_triggers();		// runs maintain-125.inc.php
 	}
 
 	function dbv_126()  // clean up data of disabled accounts
@@ -475,6 +481,8 @@
 		sql("DELETE FROM `cache_ignore`   WHERE `user_id` IN (SELECT `user_id` FROM `user` WHERE `is_active_flag`=0)");
 		sql("DELETE FROM `cache_watches`  WHERE `user_id` IN (SELECT `user_id` FROM `user` WHERE `is_active_flag`=0)");
 	}
+
+	/***** Hotfixes *****/
 
 	function dbv_127()  // fix name of Dessau-Köthen
 	{
@@ -501,6 +509,8 @@
 		}
 		mysql_free_result($rs);
 	}
+
+	/***** OC release 3.0.14 *****/
 
 	function dbv_129()  // cache list passwords & bookmarking
 	{
@@ -550,6 +560,12 @@
 	{
 		global $opt;
 		sql("UPDATE `removed_objects` SET `node`='&1' WHERE `type`=8 AND `node`=0", $opt['logic']['node']['id']);
+	}
+
+	function dbv_135()  // move KML cache type names from search.kml.inc.php to database
+	{
+		if (!sql_field_exists('cache_type','kml_name'))
+			sql("ALTER TABLE `cache_type` ADD COLUMN `kml_name` varchar(10) NOT NULL");
 	}
 
 

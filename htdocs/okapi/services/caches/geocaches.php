@@ -588,7 +588,7 @@ class WebService
                     and object_type = 2
                     and unknown_format = 0
             ";
-            if (Settings::get('OC_BRANCH') == 'oc.pl'){
+            if (Settings::get('OC_BRANCH') == 'oc.pl') {
                 // oc.pl installation allows arbitrary order of the geocache's images
                 $sql .= "order by object_id, seq, date_created";
             } else {
@@ -606,10 +606,15 @@ class WebService
                     self::reset_unique_captions();
                     $prev_cache_code = $cache_code;
                 }
+                if (Settings::get('OC_BRANCH') == 'oc.de') {
+                    $object_type_param = 'type=2&';
+                } else {
+                    $object_type_param = '';
+                }
                 $image = array(
                     'uuid' => $row['uuid'],
                     'url' => $row['url'],
-                    'thumb_url' => Settings::get('SITE_URL') . 'thumbs.php?uuid=' . $row['uuid'],
+                    'thumb_url' => Settings::get('SITE_URL') . 'thumbs.php?'.$object_type_param.'uuid=' . $row['uuid'],
                     'caption' => $row['title'],
                     'unique_caption' => self::get_unique_caption($row['title']),
                     'is_spoiler' => ($row['spoiler'] ? true : false),

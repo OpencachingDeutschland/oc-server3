@@ -5,7 +5,7 @@
 ***************************************************************************}
 {* OCSTYLE *}
 <div class="content2-pagetitle">
-	<img src="resource2/{$opt.template.style}/images/misc/{if $oconly}is_oconly_small.png{else}32x32-winner.png{/if}" style="margin-right: 10px;" {if !$oconly}width="32" height="32" alt="{t}Recommendations{/t}"{/if} />
+	<img src="resource2/{$opt.template.style}/images/misc/{if $oconly}is_oconly_small.png{else}32x32-winner.png{/if}" style="margin-right: 10px;" {if !$oconly}width="32" height="32" alt=""{/if} />
 	{t 1=$userid 2=$username|escape}Recommendations of <a href="viewprofile.php?userid=%1">%2</a>{/t}
 </div>
 

@@ -15,6 +15,37 @@
 
 	<div class="changelog-changes">
 
+	<p id="v3.0.14"><strong>OC 3.0 Version 14</strong> &ndash; September 5, 2015</p>
+	<p>New:</p>
+	<ul>
+	<li>Share private cachelists using a password</li>
+	<li>New bookmark functionality for cachelists</li>
+	<li>Display of number of recommendations changed</li>
+	<li>Französische Übersetzung </li>
+	<li>Automatically rotate pictures using EXIF-data</li>
+	<li>History of changes of coordinates in the administration history (internal)</li>
+	</ul>
+
+	<p>Changed / improved:</p>
+	<ul>
+	<li>Links to Wiki and geokrety.org call localized target</li>
+	<li>Changed OC logo (on blog)</li>
+	<li>Automatically load log entries for logged-off users</li>
+	<li>Smilies in HTML editor mode</li>
+	</ul>
+
+	<p>Fixed:</p>
+	<ul>
+	<li>Fixed typos of some city names</li>
+	<li>Missing flags for different languages in cache description</li>
+	<li>Recommendation show correct date now</li>
+	<li>JavaScript-problem in map2.tpl fixed</li>
+	<li>Filter function in HTML-Purifier and TinyMCE corrected</li>
+	<li>Removed text mod of TinyMCE (removed buggy switching between HTML <-> Text)</li>
+	<li>... several other smaller bugs</li>
+	</ul>
+
+
 	<p id="v3.0.13"><strong>OC 3.0 Release 13</strong> &ndash; July 4, 2015</p>
 	<p>New:</p>
 	<ul>

@@ -31,8 +31,8 @@
 	// block troublemakers
 	$opt['page']['banned_user_agents'] = array();
 
-	/* Main locale and style: The country and language with most content on this site.
-	 *
+	/*
+	 * Main locale and style: The country and language with most content on this site.
 	 */
 	$opt['page']['main_country'] = 'DE';
 	$opt['page']['main_locale'] = 'DE';
@@ -83,7 +83,8 @@
 	 */
 	$opt['html_purifier']['cache_path'] = dirname(__FILE__).'/../cache2/html_purifier/';
 
-	/* CMS links for external pages
+	/*
+	 * CMS links for external pages
 	 */
 
 	// explanation of common login errors

@@ -11,6 +11,7 @@ There are three library framworks:
 - the Opencaching.se library which we call "libse".
 
 lib1 code is being ported to lib2 and will completely disappear.
+libse hopefully, too (see http://redmine.opencaching.de/issues/733).
 
 
 When adding or renaming code directories, add them also to file scanning in
@@ -69,14 +70,15 @@ lib2        OC 2.0+ library, including 3rd party libraries
 libse       Opencaching.se library, used for additional waypoints and "personal notes"
             in cache listings
 
+okapi       replicated from https://github.com/opencaching/okapi/tree/master/okapi, with
+            core.php:$version_number and $git_revision replaced by current Git commit
+            count + 318 (adjusted to the old svn repo) and current commit ID.
+
 old         obsolete files which are included for reference only and will be removed
             later. There are also some 'old' subdirectories at lower levels.
 
-okapi       replicated from http://code.google.com/p/opencaching-api/source/browse/trunk/#trunk%2Fokapi
-            with core.php:$revision replaced by current svn revision number
-
-resource2   all lib2 files which are no PHP or Smarty code
-templates2  all lib2 Smarty templates
+resource2   all lib2 files which are no PHP or template code
+templates2  all lib2 Smarty-processed templates
 
 statipcs    redirect source for statistics pictures, see images/statpics
 

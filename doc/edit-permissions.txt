@@ -10,25 +10,27 @@ z.B. Beschreibung und Bilder.
 
 Für Caches
 
-              Jeder      Besitzer   ADMIN_USER
-Anzeigen        *1          X           X
+              Jeder      Besitzer   ADMIN_USER    ADMIN_LISTING
+Anzeigen        *1          X           X              X
 Anlegen                     X
-Bearbeiten                  X           *2
+Bearbeiten                  X           *2             *3
 Löschen
 
  *1 wenn Status 1-3
  *2 Status ändern
+ *3 wenn $opt['logic']['admin']['enable_listing_admins'] == true
 
 
 Für Cachebeschreibungen und Bilder
 
-              Jeder      Besitzer   ADMIN_USER
-Anzeigen        *1          X           X
+              Jeder      Besitzer   ADMIN_USER    ADMIN_LISTING
+Anzeigen        *1          X           X               X
 Anlegen                     X           
-Bearbeiten                  X                              
+Bearbeiten                  X                           *3
 Löschen                     X           
 
  *1 wenn Cache-Status 1-3
+ *3 wenn $opt['logic']['admin']['enable_listing_admins'] == true
 
 
 Für Cachelogs
@@ -43,3 +45,9 @@ Löschen                    X               *3
  *2 geplant: Spoierflag setzen (siehe Todo #97)
  *3 mit Löschkommentar der an den Owner geschickt wird
  *4 mit OC-Team-Flag beim Abarbeiten einer Cachemeldung
+
+
+Die ADMIN_LISTING-Funktion wird bei Opencaching.de nur zur Reparatur
+von defekten altem HTML-Code (bis 2010) verwendet, der die
+Seitendarstellung stört. Der Owner wird darüber informiert, ebenso
+zur Kontrolle der OC-Support.

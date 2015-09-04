@@ -15,6 +15,39 @@
 
 	<div class="changelog-changes">
 
+	<p id="v3.0.14"><strong>OC 3.0 Version 14</strong> &ndash; September 5, 2015</p>
+	<p>New:</p>
+	<ul>
+	<li>Share private cachelists using a password</li>
+	<li>New bookmark functionality for cachelists</li>
+	<li>Display of number of recommendations changed</li>
+	<li>Preparation of the french translation </li>
+	<li>Automatically rotate pictures using EXIF-data</li>
+	<li>History of changes of coordinates in the administration history (internal)</li>
+	</ul>
+
+	<p>Changed / improved:</p>
+	<ul>
+	<li>Links to Wiki and geokrety.org call localized target</li>
+	<li>Sending of notification emails in the language of the user</li>
+	<li>Automatically load log entries for logged-off users</li>
+	<li>Smilies in HTML editor mode</li>
+	<li>Avoid the erroneous creation of danish cache descriptions</li>
+	</ul>
+
+	<p>Fixed:</p>
+	<ul>
+	<li>Fixed typos of some city names</li>
+	<li>Missing flags for different languages in cache description</li>
+	<li>Recommendations show correct date now</li>
+	<li>JavaScript-problem in map2.tpl fixed</li>
+	<li>Filter function in HTML-Purifier and TinyMCE corrected</li>
+	<li>Removed text mode of TinyMCE (removed buggy switching between HTML &lt;&gt; Text)</li>
+	<li>Furthermore, many smaller bugs were fixed, see <a href="http://redmine.opencaching.de/versions/10">here</a>
+	for a complete list.</li>
+	</ul>
+
+
 	<p id="v3.0.13"><strong>OC 3.0 Release 13</strong> &ndash; July 4, 2015</p>
 	<p>New:</p>
 	<ul>

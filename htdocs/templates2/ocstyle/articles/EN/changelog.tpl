@@ -23,14 +23,14 @@
 	<li>Show the number of recommendations in the list of own caches, changed
 	display of recommendations in several list views
 	</li>
-	<li>Prepared french translation</li>
+	<li>Prepared French translation</li>
 	<li>Automatically rotate uploaded pictures
 	(<a href="http://redmine.opencaching.de/issues/732">#732</a>)
 	</li>
 	<li>
 	Selection criterea for cache search now allow searching for listings in
-	a specified language
-	<a href="http://redmine.opencaching.de/issues/48">#48</a>
+	a specified language.
+	(<a href="http://redmine.opencaching.de/issues/48">#48</a>)
 	</li>
 	<li>
 	Display the newest logs for the selected country
@@ -49,12 +49,12 @@
 	(<a href="http://redmine.opencaching.de/issues/785">#785</a>)
 	</li>
 	<li>Add smileys in the HTML editor mode</li>
-	<li>Avoid creation of danish cache descriptions by mistake</li>
-	<li>Allow more european special characters in the user name
+	<li>Avoid creation of Danish cache descriptions by mistake</li>
+	<li>Allow more European special characters in the user name
 	(<a href="http://redmine.opencaching.de/issues/212">#212</a>)
 	</li>
 	<li>
-	Improved the english translation (
+	Improved the English translation (
 	<a href="http://redmine.opencaching.de/issues/163">#163</a>,
 	<a href="http://redmine.opencaching.de/issues/184">#184</a>,
 	<a href="http://redmine.opencaching.de/issues/817">#817</a>)
@@ -70,7 +70,7 @@
 	<li>Corrected the (in rare cases) wrong date for recommendations
 	(<a href="http://redmine.opencaching.de/issues/713">#713</a>)</li>
 	<li>JavaScript improvement: Icons in popups on the map are now displayed in
-	broken browsers (<a href="http://redmine.opencaching.de/issues/11">#11</a>)
+	broken browsers. (<a href="http://redmine.opencaching.de/issues/11">#11</a>)
 	</li>
 	<li>Improved HTML filters for logs and cache descriptions
 	(<a href="http://redmine.opencaching.de/issues/79">#79</a>),
@@ -79,12 +79,12 @@
 	</li>
 	<li>Removed text mode for editing logs and cache descriptions</li>
 	<li>
-	Popups of the HTML-editor are not cropped any more when using large fonts
+	Popups of the HTML-editor are not cropped any more when using large fonts.
 	(<a href="http://redmine.opencaching.de/issues/300">#300</a>)
 	</li>
 	<li>
 	After removing an entry of the list of ignored caches, the correct page is displayed now
-	(<a href="http://forum.opencaching-network.org/index.php?topic=4214">see forum</a>)
+	(<a href="http://forum.opencaching-network.org/index.php?topic=4214">see forum</a>).
 	</li>
 	<li>
 	Corrected error when adding hints in english or spanish language
@@ -109,7 +109,7 @@
 	<li>Furthermore, many smaller bugs were fixed, see <a href="http://redmine.opencaching.de/versions/10">here</a>
 	for a complete list.</li>
 	</ul>
-
+	<br />
 
 	<p id="v3.0.13"><strong>OC 3.0 Release 13</strong> &ndash; July 4, 2015</p>
 	<p>New:</p>
@@ -137,7 +137,7 @@
 		<li>fixed event icons in log statistics</li>
 		<li>fixed GC and NC waypoint input [bug of release 12]</li>
 	</ul>
-	</p>
+	<br />
 
 	<p id="v3.0.12"><strong>OC 3.0 Release 12</strong> &ndash; May 31, 2015</p>
 	<p>New:</p>
@@ -167,7 +167,7 @@
 		<li>fixed language switch on www.opencaching.it and www.opencachingspain.es [problem since release 10]</li>
 		<li>some OKAPI fixes (&rarr; <a href="https://code.google.com/p/opencaching-api/source/list">changelog</a>)</li>
 	</ul>
-	</p>
+	<br />
 
 	<p id="v3.0.11"><strong>OC 3.0 Release 11</strong> &ndash; June 21, 2014</p>
 	<p>New:</p>

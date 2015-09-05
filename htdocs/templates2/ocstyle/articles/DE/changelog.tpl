@@ -42,7 +42,7 @@
 	<li>
 	Suchselektion nach Sprache in der Cachebeschreibung ermöglicht gezielte Suche
 	nach Listings in einer bestimmten Sprache
-	<a href="http://redmine.opencaching.de/issues/48">#48</a>
+	(<a href="http://redmine.opencaching.de/issues/48">#48</a>)
 	</li>
 	<li>
 	Anzeige der neuen Logs für das gewählte Land
@@ -61,9 +61,9 @@
 	(<a href="http://redmine.opencaching.de/issues/785">#785</a>)
 	</li>
 	<li>Smilies im HTML-Editormodus einfügen</li>
-	<li>Irrtümliches Anlegen dänischer Cachebeschreibunten vermeiden</li>
+	<li>Irrtümliches Anlegen dänischer Cachebeschreibungen vermeiden</li>
 	<li>Neben deutschen Umlauten sind nun weitere europäische Buchstaben
-	in Benutzernamen erlaubt
+	in Benutzernamen erlaubt.
 	(<a href="http://redmine.opencaching.de/issues/212">#212</a>)
 	</li>
 	<li>
@@ -84,7 +84,7 @@
 	Empfehlung
 	(<a href="http://redmine.opencaching.de/issues/713">#713</a>)</li>
 	<li>JavaScript-Verbesserung: Icons in der Karten-Popups erscheinen jetzt auch
-	in defekten Browsern (<a href="http://redmine.opencaching.de/issues/11">#11</a>)
+	in defekten Browsern. (<a href="http://redmine.opencaching.de/issues/11">#11</a>)
 	</li>
 	<li>HTML-Filterfunktionen für Logs und Cachebeschreibungen verbessert
 	(<a href="http://redmine.opencaching.de/issues/79">#79</a>),
@@ -96,13 +96,13 @@
 	(fehlerhafte Umschaltung HTML &lt;&gt; Text)</li>
 	<li>
 	Popup-Fenster des HTML-Editors werden bei großer Browser-Schrift nicht
-	mehr abgeschnitten
+	mehr abgeschnitten.
 	(<a href="http://redmine.opencaching.de/issues/300">#300</a>)
 	</li>
 	<li>
 	Nach dem Entfernen eines Eintrags aus der Liste ignorierter Caches landet man wieder
 	auf der richtigen Seite
-	(<a href="http://forum.opencaching-network.org/index.php?topic=4214">siehe Forum</a>)
+	(<a href="http://forum.opencaching-network.org/index.php?topic=4214">siehe Forum</a>).
 	</li>
 	<li>
 	Fehler bei Hint-Eingabe in englischer und spanischer Sprache behoben
@@ -127,6 +127,7 @@
 	<li>Außerdem wurde viele weitere, kleinere Fehler behoben - vollständige Liste
 	<a href="http://redmine.opencaching.de/versions/10">hier</a>.</li>
 	</ul>
+	</br>
 
 	<p id="v3.0.13"><strong>OC 3.0 Version 13</strong> &ndash; 4. Juli 2015</p>
 	<p>Neu:</p>
@@ -154,7 +155,7 @@
 		<li>Event-Icons in der Logstatistik korrigiert</li>
 		<li>GC- und NC-Wegpunkteingabe korrigiert [Bug von Version 12]</li>
 	</ul>
-	</p>
+	<br />
 
 	<p id="v3.0.12"><strong>OC 3.0 Version 12</strong> &ndash; 31. Mai 2015</p>
 	<p>Neu:</p>
@@ -184,7 +185,7 @@
 		<li>Fehler bei der Sprachumschaltung auf www.opencaching.it und www.opencachingspain.es behoben [Problem seit Version 10]</li>
 		<li>kleinere Korrekturen an der OKAPI (&rarr; <a href="https://code.google.com/p/opencaching-api/source/list">Changelog</a>)</li>
 	</ul>
-	</p>
+	<br />
 
 	<p id="v3.0.11"><strong>OC 3.0 Version 11</strong> &ndash; 21. Juni 2014</p>
 	<p>Neu:</p>

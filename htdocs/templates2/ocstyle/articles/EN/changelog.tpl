@@ -15,6 +15,102 @@
 
 	<div class="changelog-changes">
 
+	<p id="v3.0.14"><strong>OC 3.0 Version 14</strong> &ndash; September 5, 2015</p>
+	<p>New:</p>
+	<ul>
+	<li>Sharing of personal cachelists using passwords</li>
+	<li>Bookmarks for public and private cachelists</li>
+	<li>Show the number of recommendations in the list of own caches, changed
+	display of recommendations in several list views
+	</li>
+	<li>Prepared french translation</li>
+	<li>Automatically rotate uploaded pictures
+	(<a href="http://redmine.opencaching.de/issues/732">#732</a>)
+	</li>
+	<li>
+	Selection criterea for cache search now allow searching for listings in
+	a specified language
+	<a href="http://redmine.opencaching.de/issues/48">#48</a>
+	</li>
+	<li>
+	Display the newest logs for the selected country
+	(<a href="http://redmine.opencaching.de/issues/183">#183</a>)
+	</li>
+	<li>History of coordinate changes in the admin view (internal)</li>
+	</ul>
+
+	<p>Changed / improved:</p>
+	<ul>
+	<li>Links to Wiki and Geokrety.org now call the localized target</li>
+	<li>Notification emails in the language of the user
+	(<a href="http://redmine.opencaching.de/issues/813">#813</a>)
+	</li>
+	<li>Automatically load log entries for logged-off users
+	(<a href="http://redmine.opencaching.de/issues/785">#785</a>)
+	</li>
+	<li>Add smileys in the HTML editor mode</li>
+	<li>Avoid creation of danish cache descriptions by mistake</li>
+	<li>Allow more european special characters in the user name
+	(<a href="http://redmine.opencaching.de/issues/212">#212</a>)
+	</li>
+	<li>
+	Improved the english translation (
+	<a href="http://redmine.opencaching.de/issues/163">#163</a>,
+	<a href="http://redmine.opencaching.de/issues/184">#184</a>,
+	<a href="http://redmine.opencaching.de/issues/817">#817</a>)
+	</li>
+	</ul>
+
+	<p>Fixed:</p>
+	<ul>
+	<li>Corrected typos in several city names
+	(<a href="http://redmine.opencaching.de/issues/175">#175</a>)</li>
+	<li>Language names instead of flags in the cache listing
+	</li>
+	<li>Corrected the (in rare cases) wrong date for recommendations
+	(<a href="http://redmine.opencaching.de/issues/713">#713</a>)</li>
+	<li>JavaScript improvement: Icons in popups on the map are now displayed in
+	broken browsers (<a href="http://redmine.opencaching.de/issues/11">#11</a>)
+	</li>
+	<li>Improved HTML filters for logs and cache descriptions
+	(<a href="http://redmine.opencaching.de/issues/79">#79</a>),
+	a list of allowed HTML elements can be found 
+	<a href="http://www.opencaching.de/articles.php?page=htmltags&locale=EN">here</a>.
+	</li>
+	<li>Removed text mode for editing logs and cache descriptions</li>
+	<li>
+	Popups of the HTML-editor are not cropped any more when using large fonts
+	(<a href="http://redmine.opencaching.de/issues/300">#300</a>)
+	</li>
+	<li>
+	After removing an entry of the list of ignored caches, the correct page is displayed now
+	(<a href="http://forum.opencaching-network.org/index.php?topic=4214">see forum</a>)
+	</li>
+	<li>
+	Corrected error when adding hints in english or spanish language
+	(<a href="http://redmine.opencaching.de/issues/746">#746</a>, Ticket)
+	</li>
+	<li>
+	OKAPI now updates the login date
+	(<a href="http://forum.opencaching-network.org/index.php?topic=4260.0">see forum</a>)
+	</li>
+	<li>
+	OKAPI now handles pipe ('|') in user names correctly
+	(<a href="https://github.com/opencaching/okapi/issues/339">see github-issue</a>)
+	</li>
+	<li>
+	Dispaying the search result in Google Maps has been removed
+	(<a href="http://redmine.opencaching.de/issues/31">#31</a>)
+	</li>
+	<li>
+	Corrected notifications for newly set OConly attributes
+	(<a href="http://redmine.opencaching.de/issues/810">#810</a>)
+	</li>
+	<li>Furthermore, many smaller bugs were fixed, see <a href="http://redmine.opencaching.de/versions/10">here</a>
+	for a complete list.</li>
+	</ul>
+
+
 	<p id="v3.0.13"><strong>OC 3.0 Release 13</strong> &ndash; July 4, 2015</p>
 	<p>New:</p>
 	<ul>

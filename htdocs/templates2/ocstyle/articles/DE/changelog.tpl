@@ -28,6 +28,106 @@
 
 	<div class="changelog-changes">
 
+	<p id="v3.0.14"><strong>OC 3.0 Version 14</strong> &ndash; 5. September 2015</p>
+	<p>Neu:</p>
+	<ul>
+	<li>Weitergabe privater Cachelisten mit Kennwort</li>
+	<li>Lesezeichen- und Favoritenfunktion für Cachelisten</li>
+	<li>Anzahl der Empfehlungen in der Übersicht der eigenen Caches hinzugefügt,
+	Anzeige der Empfehlungen in verschiedenen Listenanzeigen angepasst</li>
+	<li>Französische Übersetzung vorbereitet</li>
+	<li>Automatisches Drehen von Hochkant-Bilder beim Hochladen
+	(<a href="http://redmine.opencaching.de/issues/732">#732</a>)
+	</li>
+	<li>
+	Suchselektion nach Sprache in der Cachebeschreibung ermöglicht gezielte Suche
+	nach Listings in einer bestimmten Sprache
+	<a href="http://redmine.opencaching.de/issues/48">#48</a>
+	</li>
+	<li>
+	Anzeige der neuen Logs für das gewählte Land
+	(<a href="http://redmine.opencaching.de/issues/183">#183</a>)
+	</li>
+	<li>Koordinatenänderungen in der Admin-Cache-Historie (intern)</li>
+	</ul>
+
+	<p>Geändert / verbessert:</p>
+	<ul>
+	<li>Links auf Wiki und Geokrety.org rufen jetzt lokalisiertes Ziel auf</li>
+	<li>Versand von Benachrichtigungs-Emails in der Sprache des Benutzers
+	(<a href="http://redmine.opencaching.de/issues/813">#813</a>)
+	</li>
+	<li>Automatisches Nachladen von Logeinträgen für nicht eingeloggte Benutzer
+	(<a href="http://redmine.opencaching.de/issues/785">#785</a>)
+	</li>
+	<li>Smilies im HTML-Editormodus einfügen</li>
+	<li>Irrtümliches Anlegen dänischer Cachebeschreibunten vermeiden</li>
+	<li>Neben deutschen Umlauten sind nun weitere europäische Buchstaben
+	in Benutzernamen erlaubt
+	(<a href="http://redmine.opencaching.de/issues/212">#212</a>)
+	</li>
+	<li>
+	Englische Übersetzung vervollständigt (
+	<a href="http://redmine.opencaching.de/issues/163">#163</a>,
+	<a href="http://redmine.opencaching.de/issues/184">#184</a>,
+	<a href="http://redmine.opencaching.de/issues/817">#817</a>)
+	</li>
+	</ul>
+
+	<p>Korrigiert (Bugfixes):</p>
+	<ul>
+	<li>Falschschreibung von Ortsnamen korrigiert
+	(<a href="http://redmine.opencaching.de/issues/175">#175</a>)</li>
+	<li>Flaggen in den Cachebeschreibungen durch Bezeichnungen der Sprache
+	ersetzt</li>
+	<li>Korrektur des in seltenen Fällen falsch angezeigten Datums einer
+	Empfehlung
+	(<a href="http://redmine.opencaching.de/issues/713">#713</a>)</li>
+	<li>JavaScript-Verbesserung: Icons in der Karten-Popups erscheinen jetzt auch
+	in defekten Browsern (<a href="http://redmine.opencaching.de/issues/11">#11</a>)
+	</li>
+	<li>HTML-Filterfunktionen für Logs und Cachebeschreibungen verbessert
+	(<a href="http://redmine.opencaching.de/issues/79">#79</a>),
+	eine Liste der jetzt verwendbaren HTML-Elemente ist
+	<a href="http://www.opencaching.de/articles.php?page=htmltags">hier</a>
+	zu finden.
+	</li>
+	<li>Texteingabemodus für Logs und Listings entfernt
+	(fehlerhafte Umschaltung HTML &lt;&gt; Text)</li>
+	<li>
+	Popup-Fenster des HTML-Editors werden bei großer Browser-Schrift nicht
+	mehr abgeschnitten
+	(<a href="http://redmine.opencaching.de/issues/300">#300</a>)
+	</li>
+	<li>
+	Nach dem Entfernen eines Eintrags aus der Liste ignorierter Caches landet man wieder
+	auf der richtigen Seite
+	(<a href="http://forum.opencaching-network.org/index.php?topic=4214">siehe Forum</a>)
+	</li>
+	<li>
+	Fehler bei Hint-Eingabe in englischer und spanischer Sprache behoben
+	(<a href="http://redmine.opencaching.de/issues/746">#746</a>, Ticket)
+	</li>
+	<li>
+	OKAPI aktualisiert jetzt Login-Datum
+	(<a href="http://forum.opencaching-network.org/index.php?topic=4260.0">siehe Forum</a>)
+	</li>
+	<li>
+	OKAPI-Absturz bei '|' im Benutzernamen behoben
+	(<a href="https://github.com/opencaching/okapi/issues/339">siehe github-Issue</a>)
+	</li>
+	<li>
+	Direktanzeige von Suchergebnissen in Google Maps entfällt
+	(<a href="http://redmine.opencaching.de/issues/31">#31</a>)
+	</li>
+	<li>
+	Benachtichtiungsfunktion für neu gesetzte OConly-Attribute korrigiert
+	(<a href="http://redmine.opencaching.de/issues/810">#810</a>)
+	</li>
+	<li>Außerdem wurde viele weitere, kleinere Fehler behoben - vollständige Liste
+	<a href="http://redmine.opencaching.de/versions/10">hier</a>.</li>
+	</ul>
+
 	<p id="v3.0.13"><strong>OC 3.0 Version 13</strong> &ndash; 4. Juli 2015</p>
 	<p>Neu:</p>
 	<ul>

@@ -11,6 +11,7 @@
 	$newLogsPerCountry = $opt['logic']['new_logs_per_country'];
 	$startat = isset($_GET['startat']) ? $_GET['startat']+0 : 0;
 	$urlparams = '';
+	$optimize_for_main_country = false;
 
 	if (isset($ownerid))
 	{
@@ -50,7 +51,7 @@
 		$country = $login->getUserCountry();
 		$exclude_country = $opt['page']['main_country'];
 		$include_country = '%';
-		// As most logs are from the main country, retrieving the other logs is
+		// As most logs are from the main country, retrieving the other logs may be
 		// expensive -> longer cache lifetime.
 		$tpl->caching = true;
 		$tpl->cache_lifetime = 900;
@@ -80,6 +81,7 @@
 		$logcount = 250;
 		$paging = false;  // paging would have poor performance for all logs
 		$orderByDate = '';
+		$optimize_for_main_country = ($country == $opt['page']['main_country']);
 	}
 
 	$tpl->strip_country_from_baseadr = true;
@@ -88,19 +90,37 @@
 	if (!$tpl->is_cached())
 	{
 		if ($paging) sql_enable_foundrows();
+		if ($optimize_for_main_country)
+		{
+			// filtering a large number of logs is very expensive;
+			// therefore we preselect the newest logs if the main country is selected
+			sql_temp_table_slave('loglist0');
+			sql_slave("
+				CREATE TEMPORARY TABLE &loglist0
+				(SELECT `id`, `cache_id`, `user_id`, `date_created`
+				 FROM `cache_logs`
+				 ORDER BY `date_created` DESC
+				 LIMIT " . (4*$logcount) . "
+				)");
+			$fromtable = '`&loglist0`';
+		}
+		else
+		{
+			$fromtable = '`cache_logs`';
+		}
 		sql_temp_table_slave('loglist');
 		sql_slave("CREATE TEMPORARY TABLE &loglist (`id` INT(11) PRIMARY KEY)
-			         SELECT " . ($paging ? "SQL_CALC_FOUND_ROWS" : "") . " `cache_logs`.`id`
-			           FROM `cache_logs`
-			     INNER JOIN `caches` ON `cache_logs`.`cache_id`=`caches`.`cache_id`
+			         SELECT " . ($paging ? "SQL_CALC_FOUND_ROWS" : "") . " ".$fromtable.".`id`
+			           FROM ".$fromtable."
+			     INNER JOIN `caches` ON ".$fromtable.".`cache_id`=`caches`.`cache_id`
 			     INNER JOIN `cache_status` ON `caches`.`status`=`cache_status`.`id`
-			     INNER JOIN `user` ON `cache_logs`.`user_id`=`user`.`user_id`
+			     INNER JOIN `user` ON ".$fromtable.".`user_id`=`user`.`user_id`
 			          WHERE `cache_status`.`allow_user_view`=1
 			                AND `caches`.`country` LIKE '&1'
 			                AND `caches`.`country`<>'&2'
-			                AND `username`<>'&3'".
-			                $add_where."
-			       ORDER BY " . $orderByDate . "`cache_logs`.`date_created` DESC
+			                AND `username`<>'&3'
+			                ".$add_where."
+			       ORDER BY " . $orderByDate . $fromtable.".`date_created` DESC
 			          LIMIT &4, &5",
 			                $include_country,
 			                $exclude_country,
@@ -206,6 +226,8 @@
 		sql_free_result($rsLogs);
 
 		sql_drop_temp_table_slave('loglist');
+		if ($optimize_for_main_country)
+			sql_drop_temp_table_slave('loglist0');
 
 		$tpl->assign('newLogs', $newLogs);
 		$tpl->assign('addpiclines', max($pics-1,0));

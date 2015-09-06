@@ -204,9 +204,17 @@
 	}
 	mysql_free_result($rsUsers);
 
-/* end send out everything that has to be sent */
+/* cleanup */
+
+	// Discard old queue entries of users who disabled notifications.
+	// This is done *after* processing so nothing is lost on systems without
+	// periodical runwatch processing (e.g. developer systems).
+	// Do NOT move this into CleanupAndExit(), which may be run without processing!
+
+	sql("DELETE FROM `watches_waiting` WHERE DATEDIFF(NOW(),`date_created`) > 35");
 
 	CleanupAndExit($watchpid);
+
  
 function process_owner_log($user_id, $log_id)
 {

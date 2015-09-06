@@ -9,7 +9,7 @@
 <script type="text/javascript" src="resource2/{$opt.template.style}/js/wz_tooltip.js"></script>
 
 	<div class="content2-pagetitle">
-		<img src="resource2/{$opt.template.style}/images/misc/32x32-list.png" style="align: left; margin-right: 10px;" width="32" height="32" />
+		<img src="resource2/{$opt.template.style}/images/misc/32x32-list.png" style="margin-right: 10px;" width="32" height="32" />
 		{t}Cache lists{/t}
 	</div>
 
@@ -29,11 +29,11 @@
 			<form method="get" action="cachelists.php">
 				<table class="table" >
 					<tr>
-						<td>{t}List name{/t}:</td>
+						<td>{t}List name:{/t}</td>
 						<td><input id="name_filter" name="name" value="{$name_filter}" class="input170" /></td>
 					</tr>
 					<tr>
-						<td>{t}By{/t}:</td>
+						<td>{t}By:{/t}</td>
 						<td><input id="by_filter" name="by" value="{$by_filter}" class="input170" /></td>
 					</tr>
 					<tr><td class="separator"></td></tr>

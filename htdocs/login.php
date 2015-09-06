@@ -64,8 +64,12 @@
 			$tpl->redirect('login.php?action=cookieverify&target=' . urlencode($target));
 
 		$tpl->assign('username', $username);
-		$tpl->assign('error', $retval);
+		if  (isset($_POST['password']))
+			$tpl->assign('error', $retval);
+		else
+			$tpl->assign('error', LOGIN_OK);
 	}
+	$tpl->assign('loginhelplink', helppagelink('login'));
 	$tpl->assign('target', $target);
 
 	$tpl->display();

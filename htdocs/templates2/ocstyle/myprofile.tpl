@@ -5,7 +5,7 @@
  ***************************************************************************}
 {* OCSTYLE *}
 <div class="content2-pagetitle">
-	<img src="resource2/{$opt.template.style}/images/profile/32x32-profile.png" style="align: left; margin-right: 10px;" width="32" height="32" alt="" />
+	<img src="resource2/{$opt.template.style}/images/profile/32x32-profile.png" style="margin-right: 10px;" width="32" height="32" alt="" />
 	{t}My profile data{/t}
 </div>
 
@@ -29,7 +29,7 @@
 					{if $edit==true}
 						<input type="text" name="username" class="public-setting" value="{$username|escape}" maxlength="60" size="30" />
 						{if $usernameErrorInvalidChars==true}
-							<span class="errormsg">{t}The username is not valid.{/t}</span>
+							<span class="errormsg">{t}The username contains invalid characters.{/t}</span>
 						{elseif $errorUsernameExist==true}
 							<span class="errormsg">{t}There already exists an account with that username.{/t}</span>
 						{/if}
@@ -182,12 +182,12 @@
 						{/if}
 					{/if}
 					{if $edit==true}
-						<input type="checkbox" name="noHTMLEditor" value="1" {if $noHTMLEditor==true}checked="checked"{/if} id="l_no_htmledit" class="checkbox" /> 
-						<label for="l_no_htmledit">{t}Don't use an HTML editor by default.{/t}</label>
+						<input type="checkbox" name="noWysiwygEditor" value="1" {if $noWysiwygEditor==true}checked="checked"{/if} id="l_no_wysiwyg_edit" class="checkbox" /> 
+						<label for="l_no_wysiwyg_edit">{t}Use simple HTML editor by default.{/t}</label>
 						<br />
 					{else}
-						{if $noHTMLEditor}
-							{t}Don't use an HTML editor by default.{/t}
+						{if $noWysiwygEditor}
+							{t}Use simple HTML editor by default.{/t}
 						{/if}
 					{/if}
 					{if $edit==true}
@@ -205,7 +205,7 @@
 			{/if}
 
 			<tr>
-				<td class="public-setting">{t}Registered since{/t}:</td>
+				<td class="public-setting">{t}Registered since:{/t}</td>
 				<td class="public-setting">{$registeredSince|date_format:$opt.format.datelong}</td>
 			</tr>
 

@@ -318,8 +318,9 @@ function mnu_EchoMainMenu($selmenuid)
 	{
 		if ($menu[$i]['visible'] == true)
 		{
-			$sItem = '<a href="' . $menu[$i]['filename'] . '">' . htmlspecialchars(t($menu[$i]['menustring']), ENT_COMPAT, 'UTF-8') . '</a>';
-			$sItemSel = '<a href="' . $menu[$i]['filename'] . '" class=\'selected bg-green06\'>' . htmlspecialchars(t($menu[$i]['menustring']), ENT_COMPAT, 'UTF-8') . '</a>'; 
+			$sTarget = isset($menu[$i]['target']) ? $menu[$i]['target'] : '';
+			$sItem = '<a href="' . $menu[$i]['filename'] . '" ' . $sTarget . '>' . htmlspecialchars(t($menu[$i]['menustring']), ENT_COMPAT, 'UTF-8') . '</a>';
+			$sItemSel = '<a href="' . $menu[$i]['filename'] . '" ' . $sTarget . ' class=\'selected bg-green06\'>' . htmlspecialchars(t($menu[$i]['menustring']), ENT_COMPAT, 'UTF-8') . '</a>';
 
 			if ($menu[$i]['siteid'] == $selmenuid)
 				/* $sItem = '<li>TODO:selected' . $sItem . '</li>'; */

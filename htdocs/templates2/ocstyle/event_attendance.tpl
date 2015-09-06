@@ -12,13 +12,13 @@
 	</div>
 	<div style="margin-top:16px;">
 		<p style="color: 5890a8"><b>{t}Will attend{/t}</b></p>
-		<p style="color: 5890a8">({t}total{/t}: {count array=$willattend})</p>
+		<p style="color: 5890a8">({t}total:{/t} {count array=$willattend})</p>
 		<p>{foreach from=$willattend item=attendantsItem}
 			{$attendantsItem.username|escape}<br />
 		{/foreach}</p>
 	<div style="margin-top:16px;">
 		<p style="color: 5890a8"><b>{t}Attended{/t}</b></p>
-		<p style="color: 5890a8">({t}total{/t}: {count array=$attended})</p>
+		<p style="color: 5890a8">({t}total:{/t} {count array=$attended})</p>
 		<p>{foreach from=$attended item=attendantsItem}
 			{$attendantsItem.username|escape}<br />
 		{/foreach}</p>

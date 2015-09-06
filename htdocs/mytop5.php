@@ -37,9 +37,10 @@
 			}
 	}
 
-	$rs = sql("SELECT `cache_rating`.`cache_id` AS `cacheid`, `cache_rating`.`rating_date`, `caches`.`wp_oc` AS `wp`, `caches`.`name` AS `cachename`, `caches`.`type` AS `type`, `caches`.`status` AS `status`, `ca`.`attrib_id` IS NOT NULL AS `oconly`
+	$rs = sql("SELECT `cache_rating`.`cache_id` AS `cacheid`, `cache_rating`.`rating_date`, `caches`.`wp_oc` AS `wp`, `caches`.`name` AS `cachename`, `caches`.`type` AS `type`, `caches`.`status` AS `status`, `ca`.`attrib_id` IS NOT NULL AS `oconly`, `stat_caches`.`toprating` AS `countrating`
 	             FROM `cache_rating`
 				 INNER JOIN `caches` ON `cache_rating`.`cache_id`=`caches`.`cache_id`
+			LEFT JOIN `stat_caches` ON `stat_caches`.`cache_id`=`cache_rating`.`cache_id`
 	        LEFT JOIN `caches_attributes` `ca` ON `ca`.`cache_id`=`caches`.`cache_id` AND `ca`.`attrib_id`=6
 	            WHERE `cache_rating`.`user_id`='&1'
 	         ORDER BY `rating_date` DESC", $login->userid);

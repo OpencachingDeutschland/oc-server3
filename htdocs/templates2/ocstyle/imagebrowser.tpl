@@ -28,7 +28,7 @@
 <br />
 <table width="100%" class="table">
 	<tr>
-		<td><img src="resource2/{$opt.template.style}/images/description/22x22-image.png" height="22px" width="22px" alt="{t}Picture selection{/t}" /> {t 1=$cachename|escape}Picture selection for %1{/t}</td>
+		<td><img src="resource2/{$opt.template.style}/images/description/22x22-image.png" height="22px" width="22px" alt="" /> {t 1=$cachename|escape}Picture selection for %1{/t}</td>
 	</tr>
 </table>
 <table class="table">
@@ -37,7 +37,7 @@
 		{if $cc==1}
 			<tr>
 		{/if}
-			<td valign="middle" align="center" width="{$thumbwidth+5}px"><a href="javascript:SelectFile('{$pictureItem.url|escape:'js'}', '{$opt.page.absolute_url}thumbs.php?showspoiler=1&uuid={$pictureItem.uuid|escape:'js'}');"><img border="0" src="thumbs.php?showspoiler=1&uuid={$pictureItem.uuid|escape}" title="{$pictureItem.title|escape}" alt="{$pictureItem.title|escape}" /></a></td>
+			<td valign="middle" align="center" width="{$thumbwidth+5}px"><a href="javascript:SelectFile('{$pictureItem.url|escape:'js'}', '{$opt.page.absolute_url}thumbs.php?type=2&showspoiler=1&uuid={$pictureItem.uuid|escape:'js'}');"><img border="0" src="thumbs.php?type=2&showspoiler=1&uuid={$pictureItem.uuid|escape}" title="{$pictureItem.title|escape}" alt="{$pictureItem.title|escape}" /></a></td>
 		{if $cc==2 || $smarty.foreach.pictures.last}
 			</tr>
 		{/if}

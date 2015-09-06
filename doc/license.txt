@@ -46,7 +46,7 @@ see http://www.opencaching.de/doc/xml and http://www.opencaching.de/okapi.
 
 A different license may apply to third party components being used.
 
-List of third party components:
+List of third party components (cmp. customized-libs.txt):
 
 
 PHP libraries
@@ -96,8 +96,7 @@ PHP libraries
         License : "freely available to all" (http://alistapart.com/about)
 
     9.  HTML Purifier
-        Path    : lib/htmlpurifier-4.2.0
-                  htdocs/lib2/HTMLPurifier
+        Path    : htdocs/lib2/HTMLPurifier/
         URI     : http://htmlpurifier.org/
         License : LGPL
 
@@ -112,17 +111,22 @@ PHP libraries
         License : MIT, with exception of okapi/res/attribute icons which
                   are under Opencaching-GPL license
 
+   12.  Net_IDNA2
+        Path    : htdocs/lib2/Net/
+        URI     : https://pear.php.net/package/Net_IDNA2
+        Licens  : LGPL 2.1
+
 
 The following PHP libraries are currently not in use and may be discarded.
 Note that they need to be properly licensed as long they are included in
 the distrubution!
 
-   12.  b2evo captcha
+   13.  b2evo captcha
         Path    : htdocs/lib2/b2evo-captcha/
         URI     : http://sourceforge.net/projects/b2evo-captcha
         License : GPL
 
-   13.  InputFilter (modified)
+   14.  InputFilter (modified)
         Path    : htdocs/lib2/logic/old/class.inputfilter.php
         URI     : http://freshmeat.net/projects/inputfilter/
                   http://cyberai.users.phpclasses.org/package/2189-PHP-Filter-out-unwanted-PHP-Javascript-HTML-tags-.html
@@ -184,10 +188,11 @@ Icons
         License : Creative Commons BY-SA 3.0
         Author  : Oxygen
 
-    4.  16x16 Icons 'flag-checker', 'footprints', 'clock select', lock, list
+    4.  16x16 Icons 'flag-checker', 'footprints', 'clock select', lock, list, offer
         Path    : htdocs/resource2/ocstyle/images/misc/
                   htdocs/resource2/ocstyle/images/map/caches2/
                   htdocs/resource2/ocstyle/images/cachestatus/
+                  htdocs/resource2/ocstyle/images/action/
         URI     : http://www.softicons.com/free-icons/toolbar-icons/fugue-16px-additional-icons-2-by-yusuke-kamiyamane
         License : Creative Commons BY 3.0
         Author  : Yusuke Kamiyamane

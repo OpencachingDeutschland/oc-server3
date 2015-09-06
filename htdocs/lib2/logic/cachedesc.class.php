@@ -26,8 +26,7 @@ class user
 		$this->reUser->addInt('cache_id', 0, false);
 		$this->reUser->addString('language', '', false);
 		$this->reUser->addString('desc', '', false);
-		$this->reUser->addInt('desc_html', 0, false);
-		$this->reUser->addInt('desc_htmledit', 0, false);
+		$this->reUser->addInt('desc_htmledit', 1, false);
 		$this->reUser->addString('hint', '', false);
 		$this->reUser->addString('short_desc', '', false);
 
@@ -83,10 +82,6 @@ class user
 	function getDescAsHtml()
 	{
 		return $this->reCacheDesc->getValue('desc');
-	}
-	function getIsDescHtml()
-	{
-		return ($this->reCacheDesc->getValue('desc_html')!=0);
 	}
 	function getDescHtmlEdit()
 	{

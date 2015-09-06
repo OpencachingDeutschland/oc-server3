@@ -105,15 +105,15 @@ class getNew
 									`caches`.`type`,
 									`caches`.`longitude` `longitude`, 
 									`caches`.`latitude` `latitude`, 
-									IFNULL(`sys_trans_text`.`text`,`cache_location`.`adm1`) AS `adm1`,
-									`cache_location`.`adm2`,
-									`cache_location`.`adm3`,
-									`cache_location`.`adm4`,
+									IFNULL(`sys_trans_text`.`text`,`countries`.`en`) AS `adm1`,
+									IF(`caches`.`country`=`cache_location`.`code1`,`cache_location`.`adm2`,'') `adm2`,
+									IF(`caches`.`country`=`cache_location`.`code1`,`cache_location`.`adm3`,'') `adm3`,
+									IF(`caches`.`country`=`cache_location`.`code1`,`cache_location`.`adm4`,'') `adm4`,
 									`ca`.`attrib_id` IS NOT NULL AS `oconly`
 								FROM `caches`
 									INNER JOIN `user` ON `user`.`user_id`=`caches`.`user_id`
 									LEFT JOIN `cache_location` ON `caches`.`cache_id`=`cache_location`.`cache_id`
-									LEFT JOIN `countries` ON `countries`.`short`=`cache_location`.`code1`
+									LEFT JOIN `countries` ON `countries`.`short`=`caches`.`country`
 									LEFT JOIN `sys_trans_text` ON `sys_trans_text`.`trans_id`=`countries`.`trans_id` AND `sys_trans_text`.`lang`='&2'
 									LEFT JOIN `caches_attributes` `ca` ON `ca`.`cache_id`=`caches`.`cache_id` AND `ca`.`attrib_id`=6
 								WHERE `caches`.`country`='&1' AND
@@ -149,15 +149,15 @@ class getNew
 								`caches`.`cache_id` `cache_id`,
 								`caches`.`name` `name`,
 								`caches`.`date_hidden`,
-								IFNULL(`sys_trans_text`.`text`,`cache_location`.`adm1`) AS `adm1`,
-								`cache_location`.`adm2`,
-								`cache_location`.`adm3`,
-								`cache_location`.`adm4`,
-									`ca`.`attrib_id` IS NOT NULL AS `oconly`
+								IFNULL(`sys_trans_text`.`text`,`countries`.`en`) AS `adm1`,
+								IF(`caches`.`country`=`cache_location`.`code1`,`cache_location`.`adm2`,'') `adm2`,
+								IF(`caches`.`country`=`cache_location`.`code1`,`cache_location`.`adm3`,'') `adm3`,
+								IF(`caches`.`country`=`cache_location`.`code1`,`cache_location`.`adm4`,'') `adm4`,
+								`ca`.`attrib_id` IS NOT NULL AS `oconly`
 							FROM `caches`
 								INNER JOIN `user` ON `user`.`user_id`=`caches`.`user_id`
 								LEFT JOIN `cache_location` ON `caches`.`cache_id`=`cache_location`.`cache_id`
-								LEFT JOIN `countries` ON `countries`.`short`=`cache_location`.`code1`
+								LEFT JOIN `countries` ON `countries`.`short`=`caches`.`country`
 								LEFT JOIN `sys_trans_text` ON `sys_trans_text`.`trans_id`=`countries`.`trans_id` AND `sys_trans_text`.`lang`='&2'
 								LEFT JOIN `caches_attributes` `ca` ON `ca`.`cache_id`=`caches`.`cache_id` AND `ca`.`attrib_id`=6
 							WHERE `caches`.`country`='&1' AND
@@ -223,16 +223,16 @@ class getNew
 								`caches`.`cache_id` AS `cache_id`,
 								`caches`.`name` AS `name`,
 								`caches`.`type`,
-								IFNULL(`sys_trans_text`.`text`,`cache_location`.`adm1`) AS `adm1`,
-								`cache_location`.`adm2`,
-								`cache_location`.`adm3`,
-								`cache_location`.`adm4`,
+								IFNULL(`sys_trans_text`.`text`,`countries`.`en`) AS `adm1`,
+								IF(`caches`.`country`=`cache_location`.`code1`,`cache_location`.`adm2`,'') `adm2`,
+								IF(`caches`.`country`=`cache_location`.`code1`,`cache_location`.`adm3`,'') `adm3`,
+								IF(`caches`.`country`=`cache_location`.`code1`,`cache_location`.`adm4`,'') `adm4`,
 								`ca`.`attrib_id` IS NOT NULL AS `oconly`
 							FROM `cache_rating`
 								INNER JOIN `caches` ON `caches`.`cache_id`=`cache_rating`.`cache_id`
 								INNER JOIN `user` ON `user`.`user_id`=`caches`.`user_id`
 								LEFT JOIN `cache_location` ON `cache_rating`.`cache_id`=`cache_location`.`cache_id`
-								LEFT JOIN `countries` ON `countries`.`short`=`cache_location`.`code1`
+								LEFT JOIN `countries` ON `countries`.`short`=`caches`.`country`
 								LEFT JOIN `sys_trans_text` ON `sys_trans_text`.`trans_id`=`countries`.`trans_id` AND `sys_trans_text`.`lang`='&2'
 								LEFT JOIN `caches_attributes` `ca` ON `ca`.`cache_id`=`caches`.`cache_id` AND `ca`.`attrib_id`=6
 							WHERE `caches`.`country`='&1' AND

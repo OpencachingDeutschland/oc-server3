@@ -5,6 +5,12 @@
  *  Unicode Reminder メモ
  ***************************************************************************/
 
+	require('./lib2/web.inc.php');
+	require_once('./lib2/translate.class.php');
+	require_once('./lib2/translationHandler.class.php');
+	require_once('./lib2/translate_filescan.class.php');
+	require_once('./lib2/translateAccess.php');
+
 	/* config section
 	 */
 	global $msDirlist;
@@ -17,17 +23,38 @@
 	$msDirlist[] = './lib';
 	$msDirlist[] = './lib2';
 	$msDirlist[] = './lib2/logic';
+	$msDirlist[] = './lib2/old';
+	$msDirlist[] = './lib2/search';
+	$msDirlist[] = './old';
 	$msDirlist[] = './templates2/mail';
 	$msDirlist[] = './templates2/ocstyle';
+	$msDirlist[] = './util/notification';
+	$msDirlist[] = './util/watchlist';
+	$msDirlist[] = './util2/cron/modules';
+
+	$transIdCols = array(
+		array( 'table' => 'attribute_categories', 'text' => 'name',        'trans_id' => 'trans_id' ),
+		array( 'table' => 'attribute_groups',     'text' => 'name',        'trans_id' => 'trans_id' ),
+		array( 'table' => 'cache_attrib',         'text' => 'name',        'trans_id' => 'trans_id' ),
+		array( 'table' => 'cache_attrib',         'text' => 'html_desc',   'trans_id' => 'html_desc_trans_id' ),
+		array( 'table' => 'cache_report_reasons', 'text' => 'name',        'trans_id' => 'trans_id' ),
+		array( 'table' => 'cache_report_status',  'text' => 'name',        'trans_id' => 'trans_id' ),
+		array( 'table' => 'cache_size',           'text' => 'name',        'trans_id' => 'trans_id' ),
+		array( 'table' => 'cache_status',         'text' => 'name',        'trans_id' => 'trans_id' ),
+		array( 'table' => 'cache_type',           'text' => 'name',        'trans_id' => 'trans_id' ),
+		array( 'table' => 'coordinates_type',     'text' => 'name',        'trans_id' => 'trans_id' ),
+		array( 'table' => 'countries',            'text' => 'name',        'trans_id' => 'trans_id' ),
+		array( 'table' => 'languages',            'text' => 'name',        'trans_id' => 'trans_id' ),
+		array( 'table' => 'log_types',            'text' => 'name',        'trans_id' => 'trans_id' ),
+		array( 'table' => 'profile_options',      'text' => 'name',        'trans_id' => 'trans_id' ),
+		array( 'table' => 'statpics',             'text' => 'description', 'trans_id' => 'trans_id' ),
+		array( 'table' => 'sys_menu',             'text' => 'menustring',  'trans_id' => 'menustring_trans_id' ),
+		array( 'table' => 'sys_menu',             'text' => 'title',       'trans_id' => 'title_trans_id' ),
+		array( 'table' => 'towns',                'text' => 'name',        'trans_id' => 'trans_id' ),
+	);
 	
 	// directory libse needs to be added recursive
 	addClassesDirecotriesToDirlist('libse');
-
-	require('./lib2/web.inc.php');
-	require_once('./lib2/translate.class.php');
-	require_once('./lib2/translationHandler.class.php');
-	require_once('./lib2/translate_filescan.class.php');
-	require_once('./lib2/translateAccess.php');
 
 	$tpl->name = 'translate';
 	$tpl->menuitem = MNU_ADMIN_TRANSLATE;
@@ -132,7 +159,7 @@
 
 		$action = 'listnew';
 
-		$trans = sql("SELECT DISTINCT `sys_trans`.`id`, `sys_trans`.`text` FROM `sys_trans` LEFT JOIN `sys_trans_text` ON `sys_trans`.`id`=`sys_trans_text`.`trans_id` AND `sys_trans_text`.`lang`='&1' LEFT JOIN `sys_trans_ref` ON `sys_trans`.`id`=`sys_trans_ref`.`trans_id` WHERE (ISNULL(`sys_trans_text`.`trans_id`) OR `sys_trans_text`.`text`='') AND NOT ISNULL(`sys_trans_ref`.`trans_id`) ORDER BY `sys_trans`.`id` DESC", $translang);
+		$trans = sql("SELECT DISTINCT `sys_trans`.`id`, `sys_trans`.`text` FROM `sys_trans` LEFT JOIN `sys_trans_text` ON `sys_trans`.`id`=`sys_trans_text`.`trans_id` AND `sys_trans_text`.`lang`='&1' LEFT JOIN `sys_trans_ref` ON `sys_trans`.`id`=`sys_trans_ref`.`trans_id` WHERE (ISNULL(`sys_trans_text`.`trans_id`) OR `sys_trans_text`.`text`='') ORDER BY `sys_trans`.`id` DESC", $translang);
 		$tpl->assign_rs('trans', $trans);
 		sql_free_result($trans);
 	}
@@ -289,12 +316,12 @@ function resetIds()
 
 	// clean up dead refs
 	sql_temp_table('transDeadIds');
-	sql("CREATE TEMPORARY TABLE &transDeadIds (`trans_id` INT(11) PRIMARY KEY) SELECT `sys_trans_ref`.`trans_id` FROM `sys_trans_ref` LEFT JOIN `sys_trans` ON `sys_trans_ref`.`trans_id`=`sys_trans`.`id` WHERE ISNULL(`sys_trans`.`id`)");
+	sql("CREATE TEMPORARY TABLE &transDeadIds (`trans_id` INT(11) PRIMARY KEY) SELECT DISTINCT `sys_trans_ref`.`trans_id` FROM `sys_trans_ref` LEFT JOIN `sys_trans` ON `sys_trans_ref`.`trans_id`=`sys_trans`.`id` WHERE ISNULL(`sys_trans`.`id`)");
 	sql("DELETE `sys_trans_ref` FROM `sys_trans_ref`, &transDeadIds WHERE `sys_trans_ref`.`trans_id`=&transDeadIds.`trans_id`");
 	sql_drop_temp_table('transDeadIds');
 
 	sql_temp_table('transDeadIds');
-	sql("CREATE TEMPORARY TABLE &transDeadIds (`trans_id` INT(11) PRIMARY KEY) SELECT `sys_trans_text`.`trans_id` FROM `sys_trans_text` LEFT JOIN `sys_trans` ON `sys_trans_text`.`trans_id`=`sys_trans`.`id` WHERE ISNULL(`sys_trans`.`id`)");
+	sql("CREATE TEMPORARY TABLE &transDeadIds (`trans_id` INT(11) PRIMARY KEY) SELECT DISTINCT `sys_trans_text`.`trans_id` FROM `sys_trans_text` LEFT JOIN `sys_trans` ON `sys_trans_text`.`trans_id`=`sys_trans`.`id` WHERE ISNULL(`sys_trans`.`id`)");
 	sql("DELETE `sys_trans_text` FROM `sys_trans_text`, &transDeadIds WHERE `sys_trans_text`.`trans_id`=&transDeadIds.`trans_id`");
 	sql_drop_temp_table('transDeadIds');
 
@@ -327,24 +354,14 @@ function useId($freeId)
 
 function setId($oldId, $newId)
 {
+	global $transIdCols;
+
 	sql("UPDATE `sys_trans` SET `id`='&1' WHERE `id`='&2'", $newId, $oldId);
 	sql("UPDATE `sys_trans_ref` SET `trans_id`='&1' WHERE `trans_id`='&2'", $newId, $oldId);
 	sql("UPDATE `sys_trans_text` SET `trans_id`='&1' WHERE `trans_id`='&2'", $newId, $oldId);
-	sql("UPDATE `countries` SET `trans_id`='&1' WHERE `trans_id`='&2'", $newId, $oldId);
-	sql("UPDATE `languages` SET `trans_id`='&1' WHERE `trans_id`='&2'", $newId, $oldId);
-	sql("UPDATE `cache_size` SET `trans_id`='&1' WHERE `trans_id`='&2'", $newId, $oldId);
-	sql("UPDATE `cache_status` SET `trans_id`='&1' WHERE `trans_id`='&2'", $newId, $oldId);
-	sql("UPDATE `cache_type` SET `trans_id`='&1' WHERE `trans_id`='&2'", $newId, $oldId);
-	sql("UPDATE `log_types` SET `trans_id`='&1' WHERE `trans_id`='&2'", $newId, $oldId);
-	sql("UPDATE `sys_menu` SET `title_trans_id`='&1' WHERE `title_trans_id`='&2'", $newId, $oldId);
-	sql("UPDATE `sys_menu` SET `menustring_trans_id`='&1' WHERE `menustring_trans_id`='&2'", $newId, $oldId);
-	sql("UPDATE `profile_options` SET `trans_id`='&1' WHERE `trans_id`='&2'", $newId, $oldId);
-	sql("UPDATE `attribute_categories` SET `trans_id`='&1' WHERE `trans_id`='&2'", $newId, $oldId);
-	sql("UPDATE `attribute_groups` SET `trans_id`='&1' WHERE `trans_id`='&2'", $newId, $oldId);
-	sql("UPDATE `cache_attrib` SET `trans_id`='&1' WHERE `trans_id`='&2'", $newId, $oldId);
-	sql("UPDATE `cache_attrib` SET `html_desc_trans_id`='&1' WHERE `html_desc_trans_id`='&2'", $newId, $oldId);
-	sql("UPDATE `statpics` SET `trans_id`='&1' WHERE `trans_id`='&2'", $newId, $oldId);
-	sql("UPDATE `coordinates_type` SET `trans_id`='&1' WHERE `trans_id`='&2'", $newId, $oldId);
+
+	foreach ($transIdCols as $col)
+		sql("UPDATE `".$col['table']."` SET `".$col['trans_id']."`='&1' WHERE `".$col['trans_id']."`='&2'", $newId, $oldId);
 }
 
 function export()
@@ -385,6 +402,7 @@ function export()
 	$stab[] = 'sys_trans';
 	$stab[] = 'sys_trans_ref';
 	$stab[] = 'sys_trans_text';
+	$stab[] = 'towns';
 	$stab[] = 'watches_waitingtypes';
 
 	sql_export_tables_to_file($opt['rootpath'] . 'doc/sql/static-data/data.sql', $stab);
@@ -446,27 +464,12 @@ function scan()
 
 function scanStart()
 {
-	global $translationHandler;
+	global $translationHandler, $transIdCols;
 
 	$translationHandler->clearReferences();
 
-	$translationHandler->importFromTable('countries', 'name', 'trans_id');
-	$translationHandler->importFromTable('languages', 'name', 'trans_id');
-	$translationHandler->importFromTable('cache_size', 'name', 'trans_id');
-	$translationHandler->importFromTable('cache_status', 'name', 'trans_id');
-	$translationHandler->importFromTable('cache_type', 'name', 'trans_id');
-	$translationHandler->importFromTable('coordinates_type', 'name', 'trans_id');
-	$translationHandler->importFromTable('log_types', 'name', 'trans_id');
-	$translationHandler->importFromTable('sys_menu', 'title', 'title_trans_id');
-	$translationHandler->importFromTable('sys_menu', 'menustring', 'menustring_trans_id');
-	$translationHandler->importFromTable('cache_report_status', 'name', 'trans_id');
-	$translationHandler->importFromTable('cache_report_reasons', 'name', 'trans_id');
-	$translationHandler->importFromTable('profile_options', 'name', 'trans_id');
-	$translationHandler->importFromTable('attribute_groups', 'name', 'trans_id');
-	$translationHandler->importFromTable('attribute_categories', 'name', 'trans_id');
-	$translationHandler->importFromTable('cache_attrib', 'name', 'trans_id');
-	$translationHandler->importFromTable('cache_attrib', 'html_desc', 'html_desc_trans_id');
-	$translationHandler->importFromTable('statpics', 'description', 'trans_id');
+	foreach ($transIdCols as $col)
+		$translationHandler->importFromTable($col['table'], $col['text'], $col['trans_id']);
 }
 
 function scanFile($filename)
@@ -730,7 +733,7 @@ function textimport($lang)
 
 		if ($sCodeText . $sLangText != '')
 		{
-			$transId = sql_value("SELECT `id` FROM `sys_trans` WHERE `text`='&1'", 0, $sCodeText);
+			$transId = sql_value("SELECT `id` FROM `sys_trans` WHERE BINARY `text`='&1'", 0, $sCodeText);
 			if ($transId == 0)
 			{
 				if ($sLangText != '')

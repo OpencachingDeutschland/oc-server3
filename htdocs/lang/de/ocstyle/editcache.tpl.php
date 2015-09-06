@@ -107,7 +107,7 @@ function toggleAttr(id)
 </script>
 
 <div class="content2-pagetitle">
-	<img src="resource2/ocstyle/images/cacheicon/traditional.gif" style="align: left; margin-right: 10px;" width="32" height="32" alt="{t}New cache{/t}" />
+	<img src="resource2/ocstyle/images/cacheicon/traditional.gif" style="margin-right: 10px;" width="32" height="32" alt="" />
 	{t}Edit cache <a href="viewcache.php?cacheid={cacheid}">{name}</a>{/t}
 </div>
 
@@ -261,8 +261,8 @@ function toggleAttr(id)
 				<p class="content-title-noshade-size2">
 					<img src="lang/de/ocstyle/images/description/22x22-description.png" width="22" height="22" align="middle" border="0" />
 					{t}Descriptions{/t}&nbsp;&nbsp;
-					<img src="lang/de/ocstyle/images/action/16x16-adddesc.png" width="16" height="16" align="middle" border="0" alt="{t}Create a new description{/t}" title="{t}Create a new description{/t}">
-					<span style="font-weight: 400;font-size: small;">[<a href="newdesc.php?cacheid={cacheid_urlencode}">{t}Add an additional description{/t}</a>]</span>
+					<img src="lang/de/ocstyle/images/action/16x16-adddesc.png" width="16" height="16" align="middle" border="0" alt="" >
+					<span style="font-weight: 400;font-size: small;">[<a href="newdesc.php?cacheid={cacheid_urlencode}">{t}Add description in another language{/t}</a>]</span>
 				</p>
 			</div>
 		</td>
@@ -340,7 +340,7 @@ function toggleAttr(id)
 
 	<tr><td class="spacer" colspan="2"></td></tr>
 	<tr>
-		<td><nobr>{t}password for 'found' logs{/t}:</nobr></td>
+		<td><nobr>{t}Password for 'found' logs:{/t}</nobr></td>
 		<td><input class="input100" type="text" name="log_pw" value="{log_pw}" maxlength="20"/> &nbsp; {t}(leave blank for no password){/t}</td>
 	</tr>
 	<tr>

@@ -1,10 +1,10 @@
-﻿{***************************************************************************
+{***************************************************************************
 *  You can find the license in the docs directory
 *
 *  Unicode Reminder メモ
 ***************************************************************************}
 <div class="content2-pagetitle">
-	<img src="resource2/{$opt.template.style}/images/misc/32x32-impressum.png" style="align: left; margin-right: 10px;" width="32" height="32" alt="" /> Impressum
+	<img src="resource2/{$opt.template.style}/images/misc/32x32-impressum.png" style="margin-right: 10px;" width="32" height="32" alt="" /> Impressum
 </div>
 
 <p><em>(Anbieterkennzeichnungspflicht)</em></p>
@@ -86,7 +86,7 @@
 		<ul class="indent narrowlist">
 			<li>Michael Vaahsen, Vorsitzender</li>
 			<li>Mirco Baumann, 2. Vorsitzender</li>
-			<li>Christoph Convent, Kassenwart (kommissarisch)</li>
+			<li>Christoph Convent, Kassenwart</li>
 		</ul>
 	</p>
 	

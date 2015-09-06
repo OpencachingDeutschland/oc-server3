@@ -2,18 +2,14 @@
 /****************************************************************************
 														 ./lib/settings.inc.php
 															-------------------
-		begin                : Mon June 14 2004
-
 		For license information see doc/license.txt
- ****************************************************************************/
-
-/****************************************************************************
 
 		Unicode Reminder メモ
 	                                         				                                
-		server specific settings
+		sample settings for an OC production system;
+		see header of config2/settings.inc.php for more setting files 
 	
-		this file may be outdated and should be reviewed
+		this file may be outdated
  ****************************************************************************/
  
  	//relative path to the root directory
@@ -26,25 +22,24 @@
 	if (!isset($timezone)) $timezone = 'Europe/Berlin';
 
 	//default used style
-	if (!isset($style)) $style = 'ocstyle';
+	$style = 'ocstyle';
 
 	// include common settings of lib1 and lib2
 	require_once($rootpath . 'config2/settings-dist-common.inc.php');
 
-	//pagetitle
-	if (!isset($pagetitle)) $pagetitle = 'www.opencaching.de';
-	
-	//id of the node
-	$oc_nodeid = $opt['logic']['node']['id'];
-	
+	//id of the node; see list in config2/settings-dist.inc.php
+	$oc_nodeid = 0;
+	$opt['logic']['node']['id'] = $oc_nodeid;
+
 	//name of the cookie
-	$opt['cookie']['name'] = 'oc_devel';
+	$opt['cookie']['name'] = 'oc_deu';
 	$opt['cookie']['path'] = '/';
-	$opt['cookie']['domain'] = '';
+	$opt['cookie']['domain'] = '<.do.main>';
 
 	//Debug?
-	if (!isset($debug_page)) $debug_page = true;
-	$develwarning = '<div id="debugoc"><font size="5" face="arial" color="red"><center>Entwicklersystem - nur Testdaten!</center></font></div>';
+	if (!isset($debug_page)) $debug_page = false;
+	// $develwarning = '<div id="debugoc"><font size="5" face="arial" color="red"><center>Entwicklersystem - nur Testdaten!</center></font></div>';
+	$develwarning = '';
 	
 	//site in service? Set to false when doing bigger work on the database to prevent error's
 	if (!isset($site_in_service)) $site_in_service = true;
@@ -58,7 +53,7 @@
 	
 	// location of cache images
 	if (!isset($picdir)) $picdir = $rootpath . 'images/uploads';  // Ocprop
-	if (!isset($picurl)) $picurl = 'http://www.opencaching.de/images/uploads';
+	if (!isset($picurl)) $picurl = $absolute_server_URI . 'images/uploads';
 
 	// Thumbsize
 	$thumb_max_width = 175;
@@ -72,7 +67,7 @@
 	
 	// news settings
 	$use_news_approving = true;
-	$news_approver_email = 'news-approver@devel.opencaching.de';
+	$news_approver_email = 'news-approver@<do.main>';
 
 	//local database settings
 	$dbusername = 'username';
@@ -81,20 +76,18 @@
 	$dbpasswd = 'password';
 	$dbpconnect = false;
 
-	$tmpdbname = 'test'; // empty db with CREATE and DROP priviledges
+	$tmpdbname = 'temp'; // empty db with CREATE and DROP priviledges
 
 	// date format
 	$opt['db']['dateformat'] = 'Y-m-d H:i:s';
 
 	// warnlevel for sql-execution
-	$sql_errormail = 'sqlerror@somewhere.net';
-	$dberrormail = $sql_errormail;
-	$sql_warntime = 0.1;
+	$sql_errormail = 'root';
+	$sql_warntime = 180;
 
+	// sql debugging
 	$sql_allow_debug = 0;
-	
-	// minimum of 24 chars
-	$sql_debug_cryptkey = 'this is my very, very secret \'secret key\'';
+	$sql_debug_cryptkey = 'this is my very, very secret \'secret key\'';  // min. 24 chars
 
 	// replacements for sql()
 	$sql_replacements['db'] = $dbname;
@@ -105,39 +98,58 @@
 	$zip_basedir = '/path/to/html/download/zip/';
 	$zip_wwwdir = 'download/zip/';
 
-	$googlemap_key = "<key>";
-	$googlemap_type = "G_MAP_TYPE"; // alternativ: _HYBRID_TYPE
-
-  // cache_maps-settings
-  //$cachemap_wms_url = 'http://www.top-sectret.oc/{min_lat},{min_lon},{max_lat},{max_lon}';
-  $cachemap_wms_url = 'http://www.opencaching.de/cachemaps.php?wp={wp_oc}';
-  $cachemap_size_lat = 0.2;
-  $cachemap_size_lon = 0.2;
-  $cachemap_pixel_x = 200;
-  $cachemap_pixel_y = 200;
-  $cachemap_url = 'images/cachemaps/';
-  $cachemap_dir = $rootpath . $cachemap_url;
+	// cache_maps-settings (not in use)
+	//$cachemap_wms_url = 'http://www.top-sectret.oc/{min_lat},{min_lon},{max_lat},{max_lon}';
+	$cachemap_wms_url = 'http://www.opencaching.de/cachemaps.php?wp={wp_oc}';
+	$cachemap_size_lat = 0.2;
+	$cachemap_size_lon = 0.2;
+	$cachemap_pixel_x = 200;
+	$cachemap_pixel_y = 200;
+	$cachemap_url = 'images/cachemaps/';
+	$cachemap_dir = $rootpath . $cachemap_url;
 
 	$opt['translate']['debug'] = false;
   
+	/* data license settings
+	 * The text and licsense link are determined by $opt['locale'][<locale>]['page']['license']
+	 * and $opt['locale'][<locale>]['page']['license_url'].
+	 */
+	$opt['logic']['license']['disclaimer'] = false;
+	$opt['logic']['license']['terms'] = 'articles.php?page=impressum#datalicense';
+
+	/* default locale
+	 */
+	$opt['template']['default']['locale'] = 'DE';   // can be overwritten by $opt['domain'][<domain>]['locale'] 
+
   // include all locale settings
   require_once($rootpath . 'config2/locale.inc.php');
 
 	/* multi-domain settings
 	 *
-	 * if one of the domains matches $_SERVER['SERVER_NAME'], the default values will be overwritten
-	 * can be used to host more than one locale on one server with multiple default-locales
+	 * If one of the domains matches $_SERVER['SERVER_NAME'], the default values (in
+	 * config2/common-settings.inc.php) will be overwritten. Can be used to host more
+	 * than one locale on one server with multiple default-locales.
+	 * Must be overwritten in BOTH lib1 and lib2 settings.inc.php!!
 	 */
 	//$opt['domain']['www.opencaching.de']['url'] = 'http://www.opencaching.de/';
 	//$opt['domain']['www.opencaching.de']['locale'] = 'DE';
+	//$opt['domain']['www.opencaching.de']['fallback_locale'] = 'EN';
 	//$opt['domain']['www.opencaching.de']['style'] = 'ocstyle';
 	//$opt['domain']['www.opencaching.de']['cookiedomain'] = '.opencaching.de';
 	//$opt['domain']['www.opencaching.de']['country'] = 'DE';
+	//$opt['domain']['www.opencaching.de']['keywords'] = 'Geocaching, Geocache, Cache, Schatzsuche, GPS, kostenlos, GPX, Koordinaten, Hobby, Natur';  // 5-10 keywords are recommended
+	//$opt['domain']['www.opencaching.de']['description'] = 'Opencaching.de ist das freie Portal für Geocaching, ein Schatzsuche-Spiel. Mittels GPS-Koordinaten sind Behälter oder Objekte zu finden.';
+	//$opt['domain']['www.opencaching.de']['headoverlay'] = 'oc_head_alpha3';
+
 	//$opt['domain']['www.opencaching.pl']['url'] = 'http://www.opencaching.pl/';
 	//$opt['domain']['www.opencaching.pl']['locale'] = 'PL';
+	//$opt['domain']['www.opencaching.de']['fallback_locale'] = 'EN';
 	//$opt['domain']['www.opencaching.pl']['style'] = 'ocstyle';
 	//$opt['domain']['www.opencaching.pl']['cookiedomain'] = '.opencaching.pl';
 	//$opt['domain']['www.opencaching.pl']['country'] = 'PL';
+	//$opt['domain']['www.opencaching.de']['keywords'] = 'geocaching, geocache, cache, poszukiwanie skarbów, GPS, wolne, GPX, koordynować, hobby, natura';  // 5-10 keywords are recommended
+	//$opt['domain']['www.opencaching.de']['description'] = 'Opencaching.pl jest darmowy portal dla Geocaching, gry Treasure Hunt. Za pomocą współrzędnych GPS można znaleźć pojemniki lub obiektów.';
+	//$opt['domain']['www.opencaching.de']['headoverlay'] = 'oc_head_alpha3_pl';
 
 	/* replicated slave databases
 	 * use same config as in config2/settings.inc.php (!)

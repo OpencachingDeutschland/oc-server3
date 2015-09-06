@@ -67,7 +67,7 @@ function myHomeLoad()
 	</div>
 
 	{* Ocprop: (find|us|own)erid=([0-9]+) *}
-	<p style="line-height: 1.6em;"><b>{t}Your latest log entries{/t}{if $morelogs} </b>(<a class="systemlink" href="ownlogs.php">{t}more{/t}</a>):{else}:</b>{/if}</p>
+	<p style="line-height: 1.6em;"><b>{t}Your latest log entries{/t}{if $morelogs} </b>(<a class="systemlink" href="ownlogs.php">{t}more{/t}</a>){t}#colonspace#{/t}:{else}{t}#colonspace#{/t}:</b>{/if}</p>
 
 	<table class="table">
 		{foreach from=$logs item=logItem}
@@ -102,10 +102,10 @@ function myHomeLoad()
 {else}
 	<p style="line-height: 1.6em;">
 		{if !$allpics}
-			 <b>{t}Your latest log pictures{/t}:</b></p>
+			 <b>{t}Your latest log pictures:{/t}</b></p>
 			{assign var=maxlines value=1}
 		{else}
-			{assign var=subtitle value="{t}Your log pictures{/t}:"}
+			{assign var=subtitle value="{t}Your log pictures:{/t}"}
 			{assign var=maxlines value=0}
 		{/if}
 	</p>
@@ -139,8 +139,10 @@ function myHomeLoad()
 				{/if}
 			{/foreach}
 			<tr>
-				<td colspan="4"><b><span style="line-height:2em">{t}Your geocaches hidden{/t}</b><span id="toggle_archived_option" style="display:none">{if $archived>0} (<a href="javascript:toggle_archived()" style="outline:none"><span id="hide_archived">{t}hide archived{/t}</span><span id="show_archived" style="display:none">{t}show archived{/t}</span></a>){/if}</span>:</span></td>
-				<td colspan="2" style="text-align:right"><span style="line-height:2em"><b>{t}Finds{/t} / {t}Last log{/t}</b></span></td>
+				<td colspan="4"><b><span style="line-height:2em">{t}Your geocaches hidden{/t}</b><span id="toggle_archived_option" style="display:none">{if $archived>0} (<a href="javascript:toggle_archived()" style="outline:none"><span id="hide_archived">{t}hide archived{/t}</span><span id="show_archived" style="display:none">{t}show archived{/t}</span></a>){/if}</span>{t}#colonspace#{/t}:</span></td>
+				<td style="text-align:right"><span style="line-height:2em"><img src="images/rating-star.gif" width="17" height="16" title="{t}with recommendation{/t}" /></td>
+				<td style="text-align:right"><span style="line-height:2em"><img src="resource2/{$opt.template.style}/images/log/16x16-found.png" alt="{t}Found{/t}" title="{t}Found{/t}"  /></td>
+				<td style="text-align:left"><span style="line-height:2em"><b>{t}Last log{/t}</b></span></td>
 			</tr>
 			{foreach from=$caches item=cacheItem}
 				{if $dotfill == ''}
@@ -153,7 +155,9 @@ function myHomeLoad()
 					<td class="{$listcolor}" style="text-align:center"><nobr>{$cacheItem.date_hidden|date_format:$opt.format.datelong}&nbsp;</nobr></td>
 					<td class="{$listcolor}">{include file="res_cachestatus.tpl" status=$cacheItem.status}</td>
 					<td class="{$listcolor}" style="{if strlen($cacheItem.name) < 45}white-space:nowrap;{/if}min-width:300px;max-width:{if $dotfill==''}400{else}300{/if}px;overflow:hidden;"><a href="viewcache.php?wp={$cacheItem.wp_oc}">{$cacheItem.name|escape}</a>{if strlen($cacheItem.name) < 45} &nbsp;&nbsp; <span style="color:#b0b0b0">{$dotfill}</span>{/if}</td>
-					<td class="{$listcolor}" style="text-align:right;" align="right"><nobr>&nbsp;&nbsp;{if $cacheItem.found>0}{$cacheItem.found}{/if} &nbsp;&nbsp; <a href="viewcache.php?cacheid={$cacheItem.cache_id}#logentries">{$cacheItem.lastlog|date_format:$opt.format.date}</a>&nbsp; {include file="res_logtype.tpl" type=$cacheItem.lastlog_type}</nobr></td>
+					<td class="{$listcolor}" style="text-align:right;" align="right"><nobr>{if $cacheItem.toprating>0}{$cacheItem.toprating}{/if}</nobr></td>
+					<td class="{$listcolor}" style="text-align:right;" align="right"><nobr>{if $cacheItem.found>0}{$cacheItem.found}{/if}</nobr></td>
+					<td class="{$listcolor}" style="text-align:right;" align="right"><nobr><a href="viewcache.php?cacheid={$cacheItem.cache_id}#logentries">{$cacheItem.lastlog|date_format:$opt.format.date}</a>&nbsp; {include file="res_logtype.tpl" type=$cacheItem.lastlog_type}</nobr></td>
 				</tr>
 			{/foreach}
 			<tr><td class="spacer" colspan="3"></td></tr>
@@ -182,7 +186,7 @@ function myHomeLoad()
 	{*
 	<div class="content2-container bg-blue02" style="margin-top:20px;">
 		<p class="content-title-noshade-size3">
-			<img src="resource2/{$opt.template.style}/images/misc/25x25-world.png" width="25" height="25" style="align: left; margin-right: 10px;" />&nbsp;
+			<img src="resource2/{$opt.template.style}/images/misc/25x25-world.png" width="25" height="25" style="margin-right: 10px;" />&nbsp;
 			{t}Other information{/t}
 		</p>
 	</div>

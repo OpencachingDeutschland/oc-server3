@@ -37,6 +37,7 @@
 				$tpl->assign('name_error', $name_error);
 			else
 			{
+				$cachelist->setNode($opt['logic']['node']['id']);
 				if ($cachelist->save())
 				{
 					$cachelist->addCacheByID($cacheid);

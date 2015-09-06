@@ -40,7 +40,7 @@
 										`user`.`latitude`, 
 										`user`.`longitude`,
 										`user`.`data_license`, 
-										IFNULL(`sys_trans_text`.`text`,`countries`.`de`) AS `country`,
+										IFNULL(`sys_trans_text`.`text`,`countries`.`name`) AS `country`,
 										`stat_user`.`hidden`, 
 										`stat_user`.`found`, 
 										`stat_user`.`notfound`, 
@@ -345,6 +345,8 @@
 	}
 
 	$tpl->assign('cachelists', cachelist::getPublicListsOf($userid));
+	$tpl->assign('show_bookmarks', true);
+
 	$tpl->assign('tdummy', time());
 		// Dummy counter is needed to make consecutive clicks on the same link work.
 

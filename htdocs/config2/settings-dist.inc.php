@@ -229,21 +229,24 @@
 				),
  		);
 
-	/* multi-domain settings
-	 *
-	 * if one of the domains matches $_SERVER['SERVER_NAME'], the default values will be overwritten
-	 * can be used to host more than one locale on one server with multiple default-locales
+	/* Well known node id's - required for synchronization
+	 *  1 Opencaching Deutschland (www.opencaching.de)
+	 *  2 Opencaching Polen (www.opencaching.pl)
+	 *  3 Opencaching Tschechien (www.opencaching.cz)
+	 *  4 Local Development
+	 *  5 Opencaching Entwicklung Deutschland (devel.opencaching.de)
+	 *  6 Opencaching Schweden (www.opencaching.se)
+	 *  7 Opencaching Großbritannien (www.opencacing.org.uk)
+	 *  8 Opencaching Norwegen (www.opencaching.no)
+	 *  9 Opencaching Lettland (?)
+	 * 10 Opencaching USA (www.opencaching.us)
+	 * 11 Opencaching Japan (eingestellt)
+	 * 12 Opencaching Russland  (?)
+	 * 13 Garmin (www.opencaching.com)
+	 * 14 Opencaching Niederlande (www.opencaching.nl)
+	 * 16 Opencaching Rumänien (www.opencaching.ro)
 	 */
-	//$opt['domain']['www.opencaching.de']['url'] = 'http://www.opencaching.de/';
-	//$opt['domain']['www.opencaching.de']['locale'] = 'DE';
-	//$opt['domain']['www.opencaching.de']['style'] = 'ocstyle';
-	//$opt['domain']['www.opencaching.de']['cookiedomain'] = '.opencaching.de';
-	//$opt['domain']['www.opencaching.de']['country'] = 'DE';
-	//$opt['domain']['www.opencaching.pl']['url'] = 'http://www.opencaching.pl/';
-	//$opt['domain']['www.opencaching.pl']['locale'] = 'PL';
-	//$opt['domain']['www.opencaching.pl']['style'] = 'ocstyle';
-	//$opt['domain']['www.opencaching.pl']['cookiedomain'] = '.opencaching.pl';
-	//$opt['domain']['www.opencaching.pl']['country'] = 'PL';
+	$opt['logic']['node']['id'] = 0;
 
 	/* settings for business layer
 	 *
@@ -404,7 +407,7 @@
 	 */
 	$opt['cron']['username'] = 'apache';   // system username for cronjobs
 
-	/* phpbb news integration (index.php)
+	/* phpbb news integration (index.php, outdated)
 	 *
 	 * Set url='' to disable the cronjob task and hide the section on start page.
 	 * Topics from different subforum will be merged and sorted by date.
@@ -458,13 +461,8 @@
 	// contact address
 	$opt['mail']['contact'] = 'contact@devel.opencaching.de';
 
- 	/* News configuration
- 	 *
- 	 * filename to the include file containing the newscontent
- 	 * (e.g. prepared blog-feed in HTML format)
- 	 * if no filename is given, the own news-code is used
- 	 * (table news and newstopic.php)
- 	 * You can use '{style}' as placeholder for the current style-name
+	/* index.php news section configuration
+	 * include '' => from table 'news', else from RSS feed
  	 */
  	$opt['news']['include'] = '';
   $opt['news']['count'] = 3;
@@ -544,11 +542,6 @@
 	$opt['map']['min_maxrecords'] = 100;
 	$opt['map']['max_maxrecords'] = 4000;
 
- 	/*
-	 * html purifier
-	 */
-	$opt['html_purifier']['cache_path'] = dirname(__FILE__).'/../cache2/html_purifier/';
-
 	/*
 	 * OKAPI
 	 */
@@ -585,5 +578,51 @@
    */
   $opt['httpd']['user'] = 'apache';
   $opt['httpd']['group'] = 'apache';
+
+	/*
+	 * small map town list default settings (adjusted for OC.de)
+	 *
+	 * set zoom to 0 to disable a town
+	 */
+	$opt['map']['towns']['enable'] = true;
+	$opt['map']['towns']['DE']['enable'] = true;
+	$opt['map']['towns']['DE']['zoom'] = 11;
+	$opt['map']['towns']['AT']['enable'] = true;
+	$opt['map']['towns']['AT']['zoom'] = 10;
+	$opt['map']['towns']['CH']['enable'] = true;
+	$opt['map']['towns']['CH']['zoom'] = 10;
+	$opt['map']['towns']['IT']['enable'] = true;
+	$opt['map']['towns']['IT']['zoom'] = 8;
+	$opt['map']['towns']['IT']['Bolzano']['zoom'] = 9;
+	$opt['map']['towns']['IT']['Udine']['zoom'] = 9;
+	$opt['map']['towns']['ES']['enable'] = true;
+	$opt['map']['towns']['ES']['zoom'] = 9;
+	$opt['map']['towns']['FR']['enable'] = true;
+	$opt['map']['towns']['FR']['zoom'] = 9;
+	$opt['map']['towns']['FR']['Strasbourg']['zoom'] = 10;
+
+	// example for completely overriding small-map town list for a country:
+	/*
+		$opt['map']['towns']['IT']['enable'] = false;
+		$mapmenu = 2001;
+		$menuitem[$mapmenu+0] = array('title' => 'Bologna',
+		                              'menustring' => 'Bologna',
+		                              'authlevel' => 0,
+		                              'href' => 'map2.php?mode=normalscreen&lat=44.497&lon=11.343&zoom=8',
+		                              'visible' => 1,
+		                              'sublevel' => 1,
+		                              'parent' => MNU_MAP
+		                              );
+		$menuitem[$mapmenu+1] = array('title' => 'Bolzano',
+		                              'menustring' => 'Bolzano',
+		                              'authlevel' => 0,
+		                              'href' => 'map2.php?lat=46.502&lon=11.354&zoom=10',
+		                              'visible' => 1,
+		                              'sublevel' => 1,
+		                              'parent' => MNU_MAP
+		                              );
+		$menuitem[MNU_MAP]['subitems'][] = $mapmenu+0;
+		$menuitem[MNU_MAP]['subitems'][] = $mapmenu+1;
+	*/
 
 ?>

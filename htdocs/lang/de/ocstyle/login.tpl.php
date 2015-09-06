@@ -24,7 +24,7 @@
  ****************************************************************************/
 ?>
 
-<div class="content2-pagetitle"><img src="lang/de/ocstyle/images/profile/32x32-profile.png" style="align: left; margin-right: 10px;" width="32" height="32" alt="{t}Login{/t}" />{t}Login{/t}</div>
+<div class="content2-pagetitle"><img src="lang/de/ocstyle/images/profile/32x32-profile.png" style="margin-right: 10px;" width="32" height="32" alt="" />{t}Login{/t}</div>
 
 <form action="login.php" method="post" enctype="application/x-www-form-urlencoded" name="login_form" dir="ltr" style="display: inline;">
 <input type="hidden" name="target" value="{target}" />
@@ -57,12 +57,13 @@
 
 <div class="content-txtbox-noshade systemlink">
 	<p style="line-height: 1.6em;">
-		{t}Not registered?{/t} <a href="register.php">{t}Register{/t}</a><br />
-		{t}Forgotten your password?{/t} <a href="newpw.php">{t}Create a new password{/t}</a><br />
-		{t}Forgotten your E-Mail-Address?{/t} <a href="remindemail.php">{t}Remind me{/t}</a>
+		<br />
+		{t}Not registered?{/t} &nbsp;&rarr;&nbsp; <a href="register.php">{t}Register{/t}</a><br />
+		{t}Forgotten your password?{/t} &nbsp;&rarr;&nbsp; <a href="newpw.php">{t}Create a new password{/t}</a><br />
+		{t}Forgotten your E-Mail-Address?{/t} &nbsp;&rarr;&nbsp; <a href="remindemail.php">{t}Remind me{/t}</a>
 	</p>
 	<p>
-		{t}Here you can find more troubleshooting:{/t} <a href="http://wiki.opencaching.de/index.php/Login_auf_Opencaching.de" target="_blank">{t}Problems with login{/t}</a>.
+		{t}Here you can find more troubleshooting:{/t} {helplink}{t}Problems with login{/t}</a>.
 	</p>
 	<div class="buffer" style="width: 500px;">&nbsp;</div>
 </div>

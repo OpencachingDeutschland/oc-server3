@@ -6,7 +6,7 @@
 {* OCSTYLE *} 
 {if $action=='view'}
 	<div class="content2-pagetitle">
-		<img src="resource2/{$opt.template.style}/images/misc/32x32-search.png" style="align: left; margin-right: 10px;" width="32" height="32" />
+		<img src="resource2/{$opt.template.style}/images/misc/32x32-search.png" style="margin-right: 10px;" width="32" height="32" />
 		{t}Stored queries{/t}
 	</div>
 
@@ -54,7 +54,7 @@
 		<input type="hidden" name="submit" value="1" />
 
 		<div class="content2-pagetitle">
-			<img src="resource2/{$opt.template.style}/images/misc/32x32-search.png" style="align: left; margin-right: 10px;" width="32" height="32" alt="{t}Store query{/t}" />
+			<img src="resource2/{$opt.template.style}/images/misc/32x32-search.png" style="margin-right: 10px;" width="32" height="32" alt="" />
 			{t}Store query{/t}
 		</div>
 
@@ -63,7 +63,7 @@
 				<td class="header-small" colspan="2">{t}Store options as new search{/t}</td>
 			</tr>
 			<tr>
-				<td>{t}Name of the search{/t}:</td>
+				<td>{t}Name of the search:{/t}</td>
 				<td>
 					<input type="text" name="queryname" class="input300" maxlength="60" value="{$queryname}" /> 
 				</td>
@@ -93,7 +93,7 @@
 				<td class="header-small" colspan="2">{t}Overwrite old search options{/t}</td>
 			</tr>
 			<tr>
-				<td>{t}Name of the search{/t}:</td>
+				<td>{t}Name of the search:{/t}</td>
 				<td>
 					<select name="oldqueryid" class="input350">
 						{foreach from=$queries item=queriesItem name="queries"}

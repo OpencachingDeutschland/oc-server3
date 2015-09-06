@@ -5,7 +5,7 @@
 ***************************************************************************}
 
 	<div class="content2-pagetitle">
-		<img src="resource2/{$opt.template.style}/images/misc/32x32-tools.png" style="align: left; margin-right: 10px;" width="32" height="32" alt="" />Information on cache descriptions
+		<img src="resource2/{$opt.template.style}/images/misc/32x32-tools.png" style="margin-right: 10px;" width="32" height="32" alt="" />Information on cache descriptions
 	</div>
 	<div id="cachedescinfo" class="content-txtbox-noshade" style="padding-right: 25px;">
 	
@@ -14,44 +14,44 @@
 		<p><b id="cachetype">Cache type:</b> There are several ways to design a cache:
 			<table  class="table cachedesctable">
 				<tr>
-					<td valign="top" style="padding-top:5px"><img src="resource2/ocstyle/images/cacheicon/traditional.gif" width="32" border="0" height="32" align="left" alt="Traditional Cache" title="Traditional Cache" /></td>
+					<td valign="top" style="padding-top:5px"><img src="resource2/ocstyle/images/cacheicon/traditional.gif" width="32" border="0" height="32" align="left" alt="" title="Traditional Cache" /></td>
 					<td><p><span class="subtitle">Traditional Cache</span>: The coordinates point directly to the cache stash. The cache is a container with a logbook, and no puzzles or quests must be done to find and open it.</p>
 					</td>
 				</tr>
 				<tr>
-					<td valign="top" style="padding-top:5px"><img src="resource2/ocstyle/images/cacheicon/drivein.gif" width="32" border="0" height="32" align="left" alt="Drive-In" title="Drive-In" /></td>
+					<td valign="top" style="padding-top:5px"><img src="resource2/ocstyle/images/cacheicon/drivein.gif" width="32" border="0" height="32" align="left" alt="" title="Drive-In" /></td>
 					<td><p><span class="subtitle">Drive-In</span>: A traditional cache with a parking area very nearby. No special equipment is needed to find and retrieve the cache.</p></td>
 				</tr>
 				<tr>
-					<td valign="top" style="padding-top:5px"><img src="resource2/ocstyle/images/cacheicon/multi.gif" width="32" border="0" height="32" align="left" alt="Multicache" title="Multicache" /></td>
+					<td valign="top" style="padding-top:5px"><img src="resource2/ocstyle/images/cacheicon/multi.gif" width="32" border="0" height="32" align="left" alt="" title="Multicache" /></td>
 					<td><p><span class="subtitle">Multicache</span>: The coordinates do not point to the stash, but at the trailhead for seeking the cache. Starting there, the cache can be reached by finding intermediate stages and/or solving puzzles. The solutions must be possible on site.</p></td>
 				</tr>
 				<tr>
-					<td valign="top" style="padding-top:5px"><img src="resource2/ocstyle/images/cacheicon/mystery.gif" width="32" border="0" height="32" align="left" alt="Quiz cache" title="Quiz cache" /></td>
+					<td valign="top" style="padding-top:5px"><img src="resource2/ocstyle/images/cacheicon/mystery.gif" width="32" border="0" height="32" align="left" alt="" title="Quiz cache" /></td>
 					<td><p><span class="subtitle">Quiz cache</span> (&bdquo;Mystery&ldquo;): A puzzle must be solved to determine the (starting) location of the cache. From there on, it may continue like any other type of cache.</p></td>
 				</tr>
 				<tr>
-					<td valign="top" style="padding-top:5px"><img src="resource2/ocstyle/images/cacheicon/mathe.gif" width="32" border="0" height="32" align="left" alt="Math or physics cache" title="Math or physics cache" /></td>
+					<td valign="top" style="padding-top:5px"><img src="resource2/ocstyle/images/cacheicon/mathe.gif" width="32" border="0" height="32" align="left" alt="" title="Math or physics cache" /></td>
 					<td><p><span class="subtitle">Math or physics cache</span>: To find the cache, you have to solve one or more sophisticated math or physics problems.</p></td>
 				</tr>
 				<tr>
-					<td valign="top" style="padding-top:5px"><img src="resource2/ocstyle/images/cacheicon/moving.gif" width="32" border="0" height="32" align="left" alt="Moving Cache" title="Moving Cache" /></td>
+					<td valign="top" style="padding-top:5px"><img src="resource2/ocstyle/images/cacheicon/moving.gif" width="32" border="0" height="32" align="left" alt="" title="Moving Cache" /></td>
 					<td><p><span class="subtitle">Moving Cache</span>: The cache is changing positions. For example, it will be placed at a new location by each finder, who logs the new coordinates and maybe a new quest or puzzle at Opencaching.de. Or the cache is attached to a vehicle, whose coordinates have to be determined.</p></td>
 				</tr>
 				<tr>
-					<td valign="top" style="padding-top:5px"><img src="resource2/ocstyle/images/cacheicon/virtual.gif" width="32" border="0" height="32" align="left" alt="Virtual cache" title="Virtual cache" /></td>
+					<td valign="top" style="padding-top:5px"><img src="resource2/ocstyle/images/cacheicon/virtual.gif" width="32" border="0" height="32" align="left" alt="" title="Virtual cache" /></td>
 					<td><p><span class="subtitle">Virtual cache</span>: There is no container at the cache site and no logbook. Instead a puzzle or quest must be done on site &ndash; e.g. taking a picture or finding somthing written on a plate &ndash;, before the cache can be logged online.</p></td>
 				</tr>
 				<tr>
-					<td valign="top" style="padding-top:5px"><img src="resource2/ocstyle/images/cacheicon/webcam.gif" width="32" border="0" height="32" align="left" alt="Webcam" title="Webcam" /></td>
+					<td valign="top" style="padding-top:5px"><img src="resource2/ocstyle/images/cacheicon/webcam.gif" width="32" border="0" height="32" align="left" alt="" title="Webcam" /></td>
 					<td><p><span class="subtitle">Webcam cache</span>: A public webcam is utilized to solve the cache. Usually the webcam must be found and a picture of the geocacher be taken. The picture will then be appended to the online log. There is no container or logbook.</p></td>
 				</tr>
 				<tr>
-					<td valign="top" style="padding-top:5px"><img src="resource2/ocstyle/images/cacheicon/event.gif" width="32" border="0" height="32" align="left" alt="Event" title="Event" /></td>
+					<td valign="top" style="padding-top:5px"><img src="resource2/ocstyle/images/cacheicon/event.gif" width="32" border="0" height="32" align="left" alt="" title="Event cache" /></td>
 					<td><p><span class="subtitle">Event cache</span>: A meeting of geocachers; anyone may attend.</p></td>
 				</tr>
 				<tr>
-					<td valign="top" style="padding-top:5px"><img src="resource2/ocstyle/images/cacheicon/unknown.gif" width="32" border="0" height="32" align="left" alt="Unknown cache type" title="Unknown cache type" /></td>
+					<td valign="top" style="padding-top:5px"><img src="resource2/ocstyle/images/cacheicon/unknown.gif" width="32" border="0" height="32" align="left" alt="" title="Unknown cache type" /></td>
 					<td><p><span class="subtitle">Unknown cache type</span>: The geocache does not fit any of the types listed above.</p></td>
 				</tr>
 			</table>

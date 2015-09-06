@@ -64,44 +64,6 @@ class login
 			$this->pClear();
 	}
 
-	// return true on success
-	function restoreSession($sid)
-	{
-		$min_lastlogin = date('Y-m-d H:i:s', time() - LOGIN_TIME);
-
-		if ($this->checkLoginsCount() == false)
-		{
-			$this->pClear();
-			return false;
-		}
-
-		$rs = sqlf("SELECT `sys_sessions`.`uuid` `sid`, `user`.`user_id`, `sys_sessions`.`last_login`, `user`.`admin`, `user`.`username` FROM &db.`sys_sessions`, &db.`user` WHERE `sys_sessions`.`user_id`=`user`.`user_id` AND `user`.`is_active_flag`=1 AND `sys_sessions`.`uuid`='&1' AND `sys_sessions`.`permanent`=0 AND `sys_sessions`.`last_login`>'&2'", $sid, $min_lastlogin);
-		$r = sql_fetch_assoc($rs);
-		sql_free_result($rs);
-
-		if ($r)
-		{
-			sqlf("UPDATE `sys_sessions` SET `sys_sessions`.`last_login`=NOW() WHERE `sys_sessions`.`uuid`='&1' AND `sys_sessions`.`user_id`='&2'", $r['sid'], $r['user_id']);
-			sqlf("UPDATE `user` SET `user`.`last_login`=NOW() WHERE `user`.`user_id`='&1'", $r['user_id']);
-
-			$this->userid = $r['user_id'];
-			$this->username = $r['username'];
-			$this->permanent = false;
-			$this->lastlogin = $r['last_login'];
-			$this->sessionid = $r['sid'];
-			$this->admin = $r['admin'];
-			$this->verified = true;
-
-			return true;
-		}
-		else
-		{
-			// prevent bruteforce
-			sql("INSERT INTO `sys_logins` (`remote_addr`, `success`) VALUES ('&1', 0)", $_SERVER['REMOTE_ADDR']);
-			return false;
-		}
-	}
-
 	function pClear()
 	{
 		// set to no valid login
@@ -129,6 +91,8 @@ class login
 
 	function verify()
 	{
+		global $opt;
+
 		if ($this->verified == true)
 			return;
 
@@ -157,8 +121,10 @@ class login
 				$rUser['last_login'] = date('Y-m-d H:i:s');
 			}
 
-			// user.last_login is used for statics, so we keep it up2date
-			sqlf("UPDATE `user` SET `user`.`last_login`=NOW() WHERE `user`.`user_id`='&1'", $this->userid);
+			if (isset($opt['template']['locale']))
+				sqlf("UPDATE `user` SET `last_login`=NOW(), `language`='&2' WHERE `user_id`='&1'", $this->userid, $opt['template']['locale']);
+			else
+				sqlf("UPDATE `user` SET `last_login`=NOW() WHERE `user_id`='&1'", $this->userid);
 
 			$this->lastlogin = $rUser['last_login'];
 			$this->username = $rUser['username'];

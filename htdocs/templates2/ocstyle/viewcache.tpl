@@ -92,7 +92,7 @@
 <div class="content2-container line-box" style="float:left">  {* div height will be wroing without float:left - why *}  
 	<div class="">
 		<div class="nav4">
-			<ul id="cachemenu">
+			<ul>
 				<li class="title" >Cache Menu</li>
 				{if $cache.log_allowed || $cache.adminlog}
 					<li class="group {if $cache.adminlog}hilite{/if}"><a style="background-image: url(resource2/{$opt.template.style}/images/viewcache/new-entry-18.png);background-repeat:no-repeat;background-position:left center;" href="{if $login.userid!=0}log.php?cacheid={$cache.cacheid|urlencode}{else}login.php?target=log.php%3Fcacheid%3D{$cache.cacheid|urlencode|urlencode}{/if}">{t}Log this cache{/t}</a></li>
@@ -157,7 +157,7 @@
 				</span>
 			</p>
 			{if $cache.type==6}
-				<span class="participants"><img src="resource2/{$opt.template.style}/images/cacheicon/16x16-event.gif" width="16" height="16" alt="{t}List of participants{/t}" />&nbsp;<a href="#" onclick="window.open('event_attendance.php?id={$cache.cacheid}&popup=y','{t escape=js}List{/t}','width=320,height=440,resizable=no,scrollbars=1')">{t}List of participants{/t}</a></span>
+				<span class="participants"><img src="resource2/{$opt.template.style}/images/cacheicon/16x16-event.gif" width="16" height="16" alt="" />&nbsp;<a href="#" onclick="window.open('event_attendance.php?id={$cache.cacheid}&popup=y','{t escape=js}List{/t}','width=320,height=440,resizable=no,scrollbars=1')">{t}List of participants{/t}</a></span>
 			{/if}
 		</div>
 	</div>
@@ -197,27 +197,27 @@
 		<p style="line-height: 1.6em;">
 			<img src="resource2/{$opt.template.style}/images/viewcache/map.png" class="icon16" alt="" title="" align="middle" />&nbsp;<a href="#" onclick="window.open('coordinates.php?lat={$cache.latitude}&lon={$cache.longitude}&popup=y&wp={$cache.wpoc}','{t escape=js}Coordinates{/t}','width=280,height=500,resizable=no,scrollbars=1')">{t}Convert coordinates{/t}</a><br />
 			<!-- <img src="resource2/{$opt.template.style}/images/viewcache/box.png" class="icon16" alt="" title="" align="middle" />&nbsp;Cache type: <b>Traditional</b><br /> -->
-			<img src="resource2/{$opt.template.style}/images/viewcache/package_green.png" class="icon16" alt="" title="" align="middle" />&nbsp;{t}Size{/t}: <b>{$cache.sizeName|escape}</b><br />
+			<img src="resource2/{$opt.template.style}/images/viewcache/package_green.png" class="icon16" alt="" title="" align="middle" />&nbsp;{t}Size:{/t} <b>{$cache.sizeName|escape}</b><br />
 			<img src="resource2/{$opt.template.style}/images/viewcache/page.png" class="icon16" alt="" title="" align="middle" />
 			{if $cache.status!=1}  {* Ocprop: Status: <span class=\"errormsg\">Gesperrt<\/span> *}
-				{t}State{/t}: <span class="errormsg">{$cache.statusName|escape}</span>
+				{t}State:{/t} <span class="errormsg">{$cache.statusName|escape}</span>
 			{else}
-				{t}State{/t}: {$cache.statusName|escape}
+				{t}State:{/t} {$cache.statusName|escape}
 			{/if}<br />
 			{if $cache.searchtime>0}
-			<img src="resource2/{$opt.template.style}/images/viewcache/time.png" class="icon16" alt="" title="" align="middle" />&nbsp;{t}Time required{/t}: {$cache.searchtime|format_hour} h
+			<img src="resource2/{$opt.template.style}/images/viewcache/time.png" class="icon16" alt="" title="" align="middle" />&nbsp;{t}Time required:{/t} {$cache.searchtime|format_hour} h&nbsp;
 			{/if}
 			{if $cache.waylength>0}
-				<img src="resource2/{$opt.template.style}/images/viewcache/arrow_roundtrip.png" class="icon16" alt="" title="" align="middle" />&nbsp;{t}Waylength{/t}: {$cache.waylength} km
+				<span style="white-space:nowrap"><img src="resource2/{$opt.template.style}/images/viewcache/arrow_roundtrip.png" class="icon16" alt="" title="" align="middle" />&nbsp;{t}Waylength:{/t} {$cache.waylength} km</span>
 			{/if}
 			{if $cache.searchtime>0 || $cache.waylength>0}<br />{/if}
-			<img src="resource2/{$opt.template.style}/images/viewcache/date.png" class="icon16" alt="" title="" align="middle" />&nbsp;{if $cache.type==6}{t}Event date{/t}{else}{t}Hidden at{/t}{/if}: {$cache.datehidden|date_format:$opt.format.datelong}<br />
-			<img src="resource2/{$opt.template.style}/images/viewcache/date.png" class="icon16" alt="" title="" align="middle" />&nbsp;{if $cache.is_publishdate==0}{t}Listed since{/t}{else}{t}Published on{/t}{/if}: {$cache.datecreated|date_format:$opt.format.datelong}<br />
-			<img src="resource2/{$opt.template.style}/images/viewcache/date.png" class="icon16" alt="" title="" align="middle" />&nbsp;{t}Last update{/t}: {$cache.lastmodified|date_format:$opt.format.datelong}<br />  {* Ocprop: <br />\s*Wegpunkt: (OC[A-Z0-9]+)\s*<br /> -- Waypoint: <b>(OC[A-Z0-9]+)<\/b><br \/> *}
+			<img src="resource2/{$opt.template.style}/images/viewcache/date.png" class="icon16" alt="" title="" align="middle" />&nbsp;{if $cache.type==6}{t}Event date:{/t}{else}{t}Hidden on:{/t}{/if} {$cache.datehidden|date_format:$opt.format.datelong}<br />
+			<img src="resource2/{$opt.template.style}/images/viewcache/date.png" class="icon16" alt="" title="" align="middle" />&nbsp;{if $cache.is_publishdate==0}{t}Listed since:{/t}{else}{t}Published on:{/t}{/if} {$cache.datecreated|date_format:$opt.format.datelong}<br />
+			<img src="resource2/{$opt.template.style}/images/viewcache/date.png" class="icon16" alt="" title="" align="middle" />&nbsp;{t}Last update:{/t} {$cache.lastmodified|date_format:$opt.format.datelong}<br />  {* Ocprop: <br />\s*Wegpunkt: (OC[A-Z0-9]+)\s*<br /> -- Waypoint: <b>(OC[A-Z0-9]+)<\/b><br \/> *}
 			<!-- Ocprop: <br /> Wegpunkt: <b>{$cache.wpoc}</b><br /> -->
-			<img src="resource2/{$opt.template.style}/images/viewcache/arrow_in.png" class="icon16" alt="" title="" align="middle" />&nbsp;{t}Listing{/t}: {if $shortlink_domain !== false}{$shortlink_domain}/{/if}<b>{$cache.wpoc}</b><br />
+			<img src="resource2/{$opt.template.style}/images/viewcache/arrow_in.png" class="icon16" alt="" title="" align="middle" />&nbsp;{t}Listing{/t}{t}#colonspace#{/t}: {if $shortlink_domain !== false}{$shortlink_domain}/{/if}<b>{$cache.wpoc}</b><br />
 			{if $cache.wpgc!='' || $cache.wpnc!=''}<img src="resource2/{$opt.template.style}/images/viewcache/link.png" class="icon16" alt="" title="" align="middle" />
-				{t}Also listed at{/t}:  {* Ocprop: Auch gelistet auf: <a href=\"http://www\.geocaching\.com/seek/cache_details\.aspx\?wp=(GC[0-9A-Z]{1,5})\" target=\"_blank\">geocaching.com</a> *}
+				{t}Also listed at:{/t}  {* Ocprop: Auch gelistet auf: <a href=\"http://www\.geocaching\.com/seek/cache_details\.aspx\?wp=(GC[0-9A-Z]{1,5})\" target=\"_blank\">geocaching.com</a> *}
 				{if $cache.wpgc!=''}
 					<a href="http://www.geocaching.com/seek/cache_details.aspx?wp={$cache.wpgc}" target="_blank">geocaching.com&nbsp;</a>
 				{/if}
@@ -237,7 +237,7 @@
 							<img src="resource2/{$opt.template.style}/images/viewcache/ignore-16.png" class="icon16" alt="" /> {$cache.ignorercount} {if $cache.ignorecount==1}{t}Ignorer{/t}{else}{t}Ignorers{/t}{/if}<br />
 							<img src="resource2/{$opt.template.style}/images/viewcache/16x16-visitors.png" class="icon16" alt="" /> {$cache.visits} {if $cache.visits==1}{t}Page visit{/t}{else}{t}Page visits{/t}{/if}<br />
 							<span style="white-space:nowrap;"><img src="resource2/{$opt.template.style}/images/viewcache/16x16-pictures.png" class="icon16" alt="" /> {$logpics} {if $logpics>0}<a class="link" href="viewcache.php?cacheid={$cache.cacheid|urlencode}&logpics=1">{/if}{if $logpics==1}{t}Log picture{/t}{else}{t}Log pictures{/t}{/if}{if $logpics>0}</a>{/if}</span><br />
-							<span style="white-space:nowrap;"><img src="resource2/{$opt.template.style}/images/viewcache/gk.png" class="icon16" alt="" title="GeoKrety visited" /> <a href="http://geokrety.org/szukaj.php?lang=de_DE.UTF-8&wpt={$cache.wpoc}" target="_blank">{t}Geokrety history{/t}</a></span><br />
+							<span style="white-space:nowrap;"><img src="resource2/{$opt.template.style}/images/viewcache/gk.png" class="icon16" alt="" title="" /> <a href="http://geokrety.org/szukaj.php?lang={$opt.geokrety.locales[$opt.template.locale]}&wpt={$cache.wpoc}" target="_blank">{t}Geokrety history{/t}</a></span><br />
 							{if $cache.topratings>0}
 								<img src="resource2/{$opt.template.style}/images/viewcache/rating-star.gif" class="icon16" alt="" /> {$cache.topratings} {t}Recommendations{/t}<br />
 							{/if}
@@ -311,7 +311,7 @@ function showalllists()
 				{foreach from=$cachelists item=cachelist}
 					{assign var="n" value=$n+1}
 					{if $n==5 && $cachelists|@count > 5}
-						<p id="morelists" style="padding:0; line-height:1em"><a href="javascript:showalllists()">{t}mehr{/t} ...</a></p>
+						<p id="morelists" style="padding:0; line-height:1em"><a href="javascript:showalllists()">{t}more{/t} ...</a></p>
 					{/if}
 					<p id="cachelist{$n}" style="padding:0; line-height:1em; {if $n>=5 && $cachelists|@count > 5}display:none{/if}">
 					{include file="res_cachelist_link.tpl"}{if $cachelist.user_id != $login.userid || ($cachelist.visibility==3 && $cache.show_cachelists)} {t}by{/t} <a href="viewprofile.php?userid={$cachelist.user_id}">{$cachelist.username|escape}</a>{else}<span class="greytext"> ({if $cachelist.visibility==3}{t}hidden[cachelist]{/t}{elseif $cachelist.visibility==2}{t}semi-public{/t}{else}{t}private{/t}{/if})</span>{/if}
@@ -336,22 +336,21 @@ function showalllists()
 <!-- Description -->
 <div class="content2-container bg-blue02">
 	<p class="content-title-noshade-size2">
-		<img src="resource2/{$opt.template.style}/images/description/22x22-description.png" style="align: left; margin-right: 10px;" width="22" height="22" alt="{t}Description{/t}" /> {t}Description{/t}&nbsp;&nbsp;
+		<img src="resource2/{$opt.template.style}/images/description/22x22-description.png" style="margin-right: 10px;" width="22" height="22" alt="" /> {t}Description{/t}&nbsp;&nbsp;&nbsp;
+		<span class="content-title-link" style="font-weight:bold" >
 		{foreach from=$cache.desclanguages item=desclanguagesItem name=desclanguagesItem}
-			{strip}
-				{if $smarty.foreach.desclanguagesItem.first==false},&nbsp;{/if}
-				<img src="images/flags/{$desclanguagesItem|lower}.gif" style="vertical-align:middle" />&nbsp;
-				<a href="viewcache.php?wp={$cache.wpoc}&desclang={$desclanguagesItem|escape}">
-					{if $cache.desclanguage==$desclanguagesItem}
-						<i>{$desclanguagesItem|escape}</i>
-					{else}
-						{$desclanguagesItem|escape}
+				{if $smarty.foreach.desclanguagesItem.first==false} &nbsp;&middot;&nbsp; {/if}
+				{if $cache.desclanguage==$desclanguagesItem.code}
+					<span class="txt-black" >{$desclanguagesItem.native_name|escape}</span>
+					{if $desclanguagesItem.name != $desclanguagesItem.native_name &&
+					    !($desclanguagesItem.name == 'Englisch' && $desclanguagesItem.native_name == 'English')}
+						<span style="font-weight:normal" class="txt-black">({$desclanguagesItem.name})</span>
 					{/if}
-				</a>
-			{/strip}
-		{foreachelse}
-			<b>{$cache.desclanguage|escape}</b>
-		{/foreach}  		
+				{else}
+					<a href="viewcache.php?wp={$cache.wpoc}&desclang={$desclanguagesItem.code|escape}" class="systemlink" title="{$desclanguagesItem.name}" >{$desclanguagesItem.native_name|escape}</a>
+				{/if}
+		{/foreach}
+		</span>
   </p>
 </div>
 
@@ -369,7 +368,7 @@ function showalllists()
 {if $enableCacheNote}
 	<div class="content2-container bg-blue02" id="personal_note">
 		<p class="content-title-noshade-size2">
-			<img src="resource2/{$opt.template.style}/images/description/20x20-cache-note.png" style="align: left; margin-right: 10px;" alt="{t}Personal cache note{/t}" /> 
+			<img src="resource2/{$opt.template.style}/images/description/20x20-cache-note.png" style="margin-right: 10px;" alt="" /> 
 			{t}Personal cache note{/t}
 		</p>
 	</div>
@@ -386,7 +385,7 @@ function showalllists()
 {if count($childWaypoints)>0}
 	<div class="content2-container bg-blue02 content2-section-no-p">
 		<p class="content-title-noshade-size2">
-			<img src="resource2/{$opt.template.style}/images/description/20x20-compass.png" style="align: left; margin-right: 10px;" alt="{t}Additional waypoints{/t}" /> 
+			<img src="resource2/{$opt.template.style}/images/description/20x20-compass.png" style="margin-right: 10px;" alt="" /> 
 			{t}Additional waypoints{/t}
 		</p>
 	</div>
@@ -413,7 +412,7 @@ function showalllists()
 {if $cache.hint!=''}
 	<div class="content2-container bg-blue02">
   	<p class="content-title-noshade-size2">
-  		<img src="resource2/{$opt.template.style}/images/description/22x22-encrypted.png" style="align: left; margin-right: 10px;" width="22" height="22" alt="{t}Additional hint{/t}" /> {t}Additional hint{/t}&nbsp;&nbsp;
+  		<img src="resource2/{$opt.template.style}/images/description/22x22-encrypted.png" style="margin-right: 10px;" width="22" height="22" alt="" /> {t}Additional hint{/t}&nbsp;&nbsp;
   		<span id="decrypt-info">{if $crypt}
 				<img src="resource2/{$opt.template.style}/images/viewcache/decrypt.png" class="icon32" width="22" height="22" alt="" />
 				<span style="font-weight: 400;"><a href="viewcache.php?wp={$cache.wpoc}&nocrypt=1&desclang={$cache.desclanguage|urlencode}#decrypt-info" {literal}onclick="var ch = document.getElementById('decrypt-hints').childNodes;for(var i=0;i < ch.length;++i) {var e = ch[i]; decrypt(e);} document.getElementById('decrypt-info').style.display = 'none';
@@ -442,7 +441,7 @@ function showalllists()
 {if count($pictures)>0}
 	<div class="content2-container bg-blue02">
 		<p class="content-title-noshade-size2">
-			<img src="resource2/{$opt.template.style}/images/description/22x22-image.png" style="align: left; margin-right: 10px;" width="22" height="22" alt="{t}Pictures{/t}" /> 
+			<img src="resource2/{$opt.template.style}/images/description/22x22-image.png" style="margin-right: 10px;" width="22" height="22" alt="" /> 
 			{t}Pictures{/t}
 		</p>
 	</div>
@@ -452,7 +451,7 @@ function showalllists()
 			<div class="viewcache-pictureblock">
 				<div class="img-shadow">
 					<!-- a href="{$pictureItem.url|escape}" target="_blank" -->
-						<img src="thumbs.php?uuid={$pictureItem.uuid|urlencode}" alt="{$pictureItem.title|escape}" title="{$pictureItem.title|escape}" longdesc="{$pictureItem.url|escape}" border="0" align="bottom" onclick="enlarge(this)" />
+						<img src="thumbs.php?type=2&uuid={$pictureItem.uuid|urlencode}" alt="{$pictureItem.title|escape}" title="{$pictureItem.title|escape}" longdesc="{$pictureItem.url|escape}" border="0" align="bottom" onclick="enlarge(this)" />
 					<!-- /a -->
 				</div>
 				<span class="title">{$pictureItem.title|escape}</span>
@@ -465,7 +464,7 @@ function showalllists()
 <!-- Utilities -->
 <div class="content2-container bg-blue02">
 	<p class="content-title-noshade-size2">
-		<img src="resource2/{$opt.template.style}/images/description/22x22-utility.png" style="align: left; margin-right: 10px;" width="22" height="22" alt="{t}Utilities{/t}" /> 
+		<img src="resource2/{$opt.template.style}/images/description/22x22-utility.png" style="margin-right: 10px;" width="22" height="22" alt="" /> 
 		{t}Utilities{/t}
 	</p>
 </div>
@@ -474,8 +473,8 @@ function showalllists()
 	{if count($npaareasWarning) > 0}
 		<div style="border: solid 1px red; padding:10px 10px 0px 10px; margin: 3px 0 8px 0">
 			<p style="line-height: 1.6em;">
-				<img src="resource2/{$opt.template.style}/images/viewcache/npa.gif" align="left" style="margin-right: 25px;" width="32" height="32" alt="NSG/NPA" />
-				{t 1=$opt.cms.npa}This geocache is probably placed within a nature protection area! See <a href="%1">here</a> for further informations, please.{/t}<br />
+				<img src="resource2/{$opt.template.style}/images/viewcache/npa.gif" align="left" style="margin-right: 25px;" width="32" height="32" alt="" />
+				{t 1=$npahelplink}This geocache is probably placed within a nature protection area! See %1here</a> for further informations, please.{/t}<br />
 				{foreach from=$npaareasWarning item=npaItem name=npaareas}
 					{$npaItem.npaTypeName|escape} 
 					{$npaItem.npaName|escape} (<a href="http://www.google.de/search?q={$npaItem.npaTypeName|urlencode}+{$npaItem.npaName|urlencode}" target="_blank">{t}Info{/t}</a>){if !$smarty.foreach.npaareas.last},{/if}
@@ -486,7 +485,7 @@ function showalllists()
 
 	{if count($npaareasNoWarning) > 0}
 		<p style="line-height: 1.6em;">
-			{t 1=$opt.cms.npa}This geocache is probably placed within the following protection areas (<a href="%1">Info</a>):{/t}
+			{t 1=$npahelplink}This geocache is probably placed within the following protected areas (%1Info</a>):{/t}
 			{foreach from=$npaareasNoWarning item=npaItem name=npaareas}
 				{$npaItem.npaTypeName|escape} 
 				{$npaItem.npaName|escape} (<a href="http://www.google.de/search?q={$npaItem.npaTypeName|urlencode}+{$npaItem.npaName|urlencode}" target="_blank">{t}Info{/t}</a>){if !$smarty.foreach.npaareas.last},{/if}
@@ -520,7 +519,7 @@ function showalllists()
 			<br />
 
 			<small>
-				<img src="resource2/{$opt.template.style}/images/viewcache/16x16-info.png" class="icon16" alt="Terms of use" /> 
+				<img src="resource2/{$opt.template.style}/images/viewcache/16x16-info.png" class="icon16" alt="" /> 
 				{t}When downloading this file, you accept our <a href="articles.php?page=impressum#tos">terms of use</a> and <a href="articles.php?page=impressum#datalicense" target="_blank">Datalicense</a>.{/t}			</small>
 			<br />
 		</p>
@@ -532,7 +531,7 @@ function showalllists()
 {if $geokret_count!=0}
 	<div class="content2-container bg-blue02">
 		<p class="content-title-noshade-size2">
-			<img src="resource2/{$opt.template.style}/images/description/22x22-geokret.gif" style="align: left; margin-right: 10px;" width="22" height="22" alt="{t}Geokrets{/t}" />
+			<img src="resource2/{$opt.template.style}/images/description/22x22-geokret.gif" style="margin-right: 10px;" width="22" height="22" alt="" />
 			{t}Geokrets{/t}
 		</p>
 	</div>
@@ -555,10 +554,10 @@ function showalllists()
 <div id="logblock">
 	{include file="res_logentry.tpl" header_footer=true footbacklink=false logs=$logs cache=$cache}
 
-	{if $showalllogs}
+	{if $morelogs}
 		<div class="content2-container bg-blue02">
 			<p id="showalllogs" class="content-title-noshade-size2">
-				<img id="showalllogs_img" src="resource2/{$opt.template.style}/images/action/16x16-showall.png" style="align: left; margin-right: 10px;" width="16" height="16" alt="{t}Show all logentries{/t}" />  
+				<img id="showalllogs_img" src="resource2/{$opt.template.style}/images/action/16x16-showall.png" style="margin-right: 10px;" width="16" height="16" alt="" />  
 				<span id="showalllogs_text">[<a href="viewcache.php?cacheid={$cache.cacheid}&log=A#logentries">{t}Show all logentries{/t}</a>]</span>
 			</p>
 		</div>
@@ -566,7 +565,7 @@ function showalllists()
 	{/if}
 </div>
 
-{if $showalllogs && $autoload_logs}
+{if $morelogs && $autoload_logs}
 <script type="text/javascript">
 	window.onscroll = onScroll;
 </script>

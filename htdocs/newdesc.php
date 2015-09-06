@@ -19,7 +19,7 @@
 
   //prepare the templates and include all neccessary
 	require_once('./lib/common.inc.php');
-  require_once($opt['rootpath'] . '../lib/htmlpurifier-4.2.0/library/HTMLPurifier.auto.php');
+	require_once('./lib2/OcHTMLPurifier.class.php');
 
 	//Preprocessing
 	if ($error == false)
@@ -38,6 +38,7 @@
 			tpl_set_var('username', '');
 			tpl_set_var('target', htmlspecialchars('newdesc.php?cacheid=' . urlencode($cache_id), ENT_COMPAT, 'UTF-8'));
 			tpl_set_var('message', $login_required);
+			tpl_set_var('helplink', helppagelink('login'));
 		}
 		else
 		{
@@ -62,7 +63,21 @@
 					$hints = isset($_POST['hints']) ? $_POST['hints'] : '';  // Ocprop
 					$sel_lang = isset($_POST['desc_lang']) ? $_POST['desc_lang'] : $default_lang;  // Ocprop
 					$desc = isset($_POST['desc']) ? $_POST['desc'] : '';  // Ocprop
-					$descMode = isset($_POST['descMode']) ? ($_POST['descMode']+0) : 3;  // Ocprop
+
+					// descMode auslesen, falls nicht gesetzt aus dem Profil laden
+					if (isset($_POST['descMode']))  // Ocprop
+					{
+						$descMode = $_POST['descMode']+0;
+						if (($descMode < 1) || ($descMode > 3)) $descMode = 3;
+					}
+					else
+					{
+						if (sqlValue("SELECT `no_htmledit_flag` FROM `user` WHERE `user_id`='" .  sql_escape($usr['userid']) . "'", 1) == 1)
+							$descMode = 2;
+						else
+							$descMode = 3;
+					}
+
 					if (($descMode < 1) || ($descMode > 3)) $descMode = 3;
 
 					// fuer alte Versionen von OCProp
@@ -79,7 +94,7 @@
 					if ($descMode != 1)
 					{
             // Filter Input
-            $purifier = new HTMLPurifier();
+            $purifier = new OcHTMLPurifier($opt);
             $desc = $purifier->purify($desc);
 
 					}
@@ -87,7 +102,7 @@
 					$desc_lang_exists = false;
 
 					//save to db?
-					if (isset($_POST['submitform']))  // Ocprop
+					if (isset($_POST['submitform']) && $sel_lang != '0')  // Ocprop
 					{
 						//check if the entered language already exists
 						$desc_rs = sql("SELECT `id` FROM `cache_desc` WHERE `cache_id`='&1' AND `language`='&2'", $cache_id, $sel_lang);
@@ -97,56 +112,32 @@
 						if ($desc_lang_exists == false)
 						{
 							//add to DB
-							if ($descMode != 1)
-							{
-								sql("INSERT INTO `cache_desc` ( 
-															`id`, 
-															`cache_id`, 
-															`language`, 
-															`desc`, 
-															`desc_html`, 
-															`desc_htmledit`, 
-															`hint`, 
-															`short_desc`,
-															`last_modified`,
-															`node`
-														) VALUES ('', '&1', '&2', '&3', 1, '&4', '&5', '&6', NOW(), '&7')",
-															$cache_id,
-															$sel_lang,
-															$desc,
-															($descMode == 3) ? '1' : '0',
-															nl2br(htmlspecialchars($hints, ENT_COMPAT, 'UTF-8')),
-															$short_desc,
-															$oc_nodeid);
-							}
-							else
-							{
-								sql("INSERT INTO `cache_desc` ( 
-															`id`, 
-															`cache_id`, 
-															`language`, 
-															`desc`, 
-															`desc_html`, 
-															`desc_htmledit`, 
-															`hint`, 
-															`short_desc`,
-															`last_modified`,
-															`node`
-														) VALUES ('', '&1', '&2', '&3', 0, 0, '&4', '&5', NOW(), '&6')", 
+							sql("INSERT INTO `cache_desc` ( 
+														`id`, 
+														`cache_id`, 
+														`language`, 
+														`desc`, 
+														`desc_html`, 
+														`desc_htmledit`, 
+														`hint`, 
+														`short_desc`,
+														`last_modified`,
+														`node`
+													) VALUES ('', '&1', '&2', '&3', 1, '&4', '&5', '&6', NOW(), '&7')",
 														$cache_id,
 														$sel_lang,
-														nl2br(htmlspecialchars($desc, ENT_COMPAT, 'UTF-8')),
+														$desc,
+														($descMode == 3) ? '1' : '0',
 														nl2br(htmlspecialchars($hints, ENT_COMPAT, 'UTF-8')),
 														$short_desc,
 														$oc_nodeid);
-							}
-
-							// do not use slave server for the next time ...
-							db_slave_exclude();
-
-							tpl_redirect('editcache.php?cacheid=' . urlencode($cache_id));
-							exit;
 						}
+
+						// do not use slave server for the next time ...
+						db_slave_exclude();
+
+						tpl_redirect('editcache.php?cacheid=' . urlencode($cache_id));
+						exit;
 					}
 					elseif (isset($_POST['show_all_langs_submit']))
 					{
@@ -167,6 +158,7 @@
 					
 					//build langslist
 					$langoptions = '';
+					$selected = false;
 					$rsLanguages = sql("SELECT `short`, IFNULL(`sys_trans_text`.`text`, `languages`.`name`) AS `name` 
 					                      FROM `languages` 
 					                 LEFT JOIN `languages_list_default` ON `languages`.`short`=`languages_list_default`.`show` AND `languages_list_default`.`lang`='&1'
@@ -181,16 +173,26 @@
 					while ($rLanguage = sql_fetch_assoc($rsLanguages))
 					{
 						$sSelected = ($rLanguage['short'] == $sel_lang) ? ' selected="selected"' : '';
+						if ($sSelected != '') $selected = true;
 						$langoptions .= '<option value="' . htmlspecialchars($rLanguage['short'], ENT_COMPAT, 'UTF-8') . '"' . $sSelected . '>' . htmlspecialchars($rLanguage['name'], ENT_COMPAT, 'UTF-8') . '</option>' . "\n";
 					}
 					sql_free_result($rsLanguages);
+					if ($langoptions == '')
+					{
+						// We get here if someone has added descriptions for all avaiable languages, which
+						// is very unlikely to happen ever. Just for completeness (see issue #108):
+						tpl_redirect('editcache.php?cacheid=' . urlencode($cache_id));
+					}
+
 					tpl_set_var('langoptions', $langoptions);
+					tpl_set_var('nolangselected', $selected ? '' : 'selected="selected"');
 
 					//here we set the template vars
 					tpl_set_var('name', htmlspecialchars($cache_record['name'], ENT_COMPAT, 'UTF-8'));
 					tpl_set_var('cacheid', htmlspecialchars($cache_id, ENT_COMPAT, 'UTF-8'));
 					
-					tpl_set_var('lang_message', $desc_lang_exists ? $lang_message : '');
+					tpl_set_var('lang_message', $desc_lang_exists ? $lang_message :
+					            (isset($_POST['submitform']) && $sel_lang == '0' ? $error_no_lang_selected : ''));
 					
 					tpl_set_var('show_all_langs', $show_all_langs);
 					tpl_set_var('show_all_langs_submit', ($show_all_langs == 0) ? $show_all_langs_submit : '');
@@ -198,23 +200,17 @@
 					tpl_set_var('desc', htmlspecialchars($desc, ENT_COMPAT, 'UTF-8'));
 					tpl_set_var('hints', htmlspecialchars($hints, ENT_COMPAT, 'UTF-8'));
 
-					// Text / normal HTML / HTML editor
-					tpl_set_var('use_tinymce', (($descMode == 3) ? 1 : 0));
-
-					if ($descMode == 1)
-						tpl_set_var('descMode', 1);
-					else if ($descMode == 2)
-						tpl_set_var('descMode', 2);
-					else
+					// plain HTML or Wysiwyg editor
+					tpl_set_var('descMode', $descMode);
+					$headers = tpl_get_var('htmlheaders') . "\n";
+					if ($descMode == 3)
 					{
 						// TinyMCE
-						$headers = tpl_get_var('htmlheaders') . "\n";
 						$headers .= '<script language="javascript" type="text/javascript" src="resource2/tinymce/tiny_mce_gzip.js"></script>' . "\n";
 						$headers .= '<script language="javascript" type="text/javascript" src="resource2/tinymce/config/desc.js.php?cacheid=' . ($cache_id+0) . '&lang=' .  strtolower($locale) . '"></script>' . "\n";
-						tpl_set_var('htmlheaders', $headers);
-
-						tpl_set_var('descMode', 3);
 					}
+					$headers .= '<script language="javascript" type="text/javascript" src="templates2/ocstyle/js/editor.js"></script>' . "\n";
+					tpl_set_var('htmlheaders', $headers);
 
 					tpl_set_var('reset', $reset);  // obsolete
 					tpl_set_var('submit', $submit);

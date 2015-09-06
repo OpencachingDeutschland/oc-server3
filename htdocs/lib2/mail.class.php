@@ -12,6 +12,7 @@ class mail extends Smarty
 	var $name = 'sys_nothing';
 	var $main_template = 'sys_main';
 	var $compile_id = null;
+	var $recipient_locale = null;
 
 	var $from = '';
 	var $to = '';
@@ -59,25 +60,43 @@ class mail extends Smarty
 
 	function send()
 	{
-		global $tpl, $opt, $login;
+		global $tpl, $opt;
 
 		if (!$this->template_exists($this->name . '.tpl'))
 			$tpl->error(ERROR_MAIL_TEMPLATE_NOT_FOUND);
 		$this->assign('template', $this->name);
+		if (!$this->recipient_locale)
+			$this->recipient_locale = $opt['template']['locale'];
 
 		$optn['mail']['contact'] = $opt['mail']['contact'];
 		$optn['page']['absolute_url'] = $opt['page']['absolute_url'];
-		$optn['format'] = $opt['locale'][$opt['template']['locale']]['format'];
+		$optn['format'] = $opt['locale'][$this->recipient_locale]['format'];
 		$this->assign('opt', $optn);
 
 		$this->assign('to', $this->to);
 		$this->assign('from', $this->from);
 		$this->assign('subject', $this->subject);
 
-		$llogin['username'] = isset($login) ? $login->username : '';
-		$this->assign('login', $llogin);
+		// This is nasty, but as there is only a global translation system
+		// (based on gettext) and there are no precompiled, language-dependend email
+		// templates available, we must temporarily change the locale according to
+		// the recipient's locale. If some error occurs while running fetch(),
+		// the error message may be displayed in the recipient's language.
+
+		$sender_locale = $opt['template']['locale'];
+		if ($this->recipient_locale != $sender_locale)
+		{
+			$opt['template']['locale'] = $this->recipient_locale;
+			set_php_locale();
+		}
 
 		$body = $this->fetch($this->main_template . '.tpl', '', $this->get_compile_id());
+
+		if ($this->recipient_locale != $sender_locale)
+		{
+			$opt['template']['locale'] = $sender_locale;
+			set_php_locale();
+		}
 
 		// check if the target domain exists if the domain does not
 		// exist, the mail is sent to the own domain (?!)

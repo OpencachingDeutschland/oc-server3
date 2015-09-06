@@ -28,16 +28,14 @@
 	if (!isset($timezone)) $timezone = 'Europe/Berlin';
 
 	//default used style
-	if (!isset($style)) $style = 'ocstyle';
+	$style = 'ocstyle';
 
 	// include common settings of lib1 and lib2
 	require_once($rootpath . 'config2/settings-dist-common.inc.php');
 
-	//pagetitle
-	$pagetitle = 'local.opencaching.de';
-	
-	//id of the node
-	$oc_nodeid = $opt['logic']['node']['id'];
+	//id of the node; see config2/settings-dist.inc.php
+	$oc_nodeid = 4;
+	$opt['logic']['node']['id'] = $oc_nodeid;
 	
 	//name of the cookie
 	$opt['cookie']['name'] = 'oc_devel';
@@ -56,7 +54,8 @@
 	$absolute_server_URI = $dev_baseurl . '/';
 	
 	// EMail address of the sender
-	if (!isset($emailaddr)) $emailaddr = 'root@local.opencaching.de';
+	if (!isset($maildomain)) $maildomain  = 'local.opencaching.de';
+	if (!isset($emailaddr)) $emailaddr = 'root@' . $maildomain;
 	
 	// location of cache images
 	if (!isset($picdir)) $picdir = $rootpath . 'images/uploads';
@@ -120,6 +119,7 @@
    * (used to prevent brute-force-attacks)
    */
 	$opt['page']['max_logins_per_hour'] = 1000;    // for development ... 
+	$opt['page']['headoverlay'] = 'oc_head_alpha3';
 
   // data license
 	$opt['logic']['license']['disclaimer'] = true;   // also in lib2/settings-dist.inc.php

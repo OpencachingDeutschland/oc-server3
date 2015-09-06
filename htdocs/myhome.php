@@ -46,7 +46,7 @@
 	//get last hidden caches
 	$tpl->assign_rs('caches', sql("SELECT `caches`.`cache_id`, `caches`.`name`, `caches`.`type`,
 		                                    `caches`.`date_hidden`, `caches`.`status`, `caches`.`wp_oc`,
-		                                    `found`,
+		                                    `found`,`stat_caches`.`toprating`,
 		                                    `ca`.`attrib_id` IS NOT NULL AS `oconly`,
 		                                    MAX(`cache_logs`.`date`) AS `lastlog`,
 		                                    (SELECT `type` FROM `cache_logs` `cl2`

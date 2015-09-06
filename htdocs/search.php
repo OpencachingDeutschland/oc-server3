@@ -386,14 +386,19 @@
 		{
 			$options['searchtype'] = 'bylist';
 			$options['listid'] = isset($_REQUEST['listid']) ? $_REQUEST['listid'] + 0 : 0;
+
+			$password = isset($_REQUEST['listkey']) ? $_REQUEST['listkey'] : '';
 			$list = new cachelist($options['listid']);
-			if (!$list->exist() || (!$list->isMyList() && $list->getVisibility() == 0))
+			if (!$list->allowView($password))
 				$tpl->redirect("cachelists.php");
 			$options['cachelist'] = cachelist::getListById($options['listid']);  // null for invalid ID
+			$options['cachelist_pw'] = $password;
 		}
 		elseif (isset($_REQUEST['searchall']))
 		{
-			if (!$login->logged_in())
+			if (!$login->logged_in() &&
+			    !(isset($_REQUEST['country']) && $_REQUEST['country'] != '') &&
+			    !(isset($_REQUEST['language']) && $_REQUEST['language'] != ''))
 			{
 				// This operation is very expensive and therefore available only
 				// for logged-in users.
@@ -421,6 +426,7 @@
 			$options['orderRatingFirst'] = true;
 
 		$options['country'] = isset($_REQUEST['country']) ? $_REQUEST['country'] : '';
+		$options['language'] = isset($_REQUEST['language']) ? $_REQUEST['language'] : '';
 		$options['adm2'] = isset($_REQUEST['adm2']) ? $_REQUEST['adm2'] : '';
 		$options['cachetype'] = isset($_REQUEST['cachetype']) ? $_REQUEST['cachetype'] : '';
 
@@ -981,18 +987,28 @@
 			elseif ($options['searchtype'] == 'bylist')
 			{
 				sql_temp_table_slave('result_caches');
-				$cachesFilter =
+				$list = new cachelist($options['listid']);
+				if ($list->allowView($options['cachelist_pw']))
+				{
+					$cachesFilter =
 									 "CREATE TEMPORARY TABLE &result_caches ENGINE=MEMORY
 										SELECT `cache_id` FROM `cache_list_items`
 										LEFT JOIN `cache_lists` ON `cache_lists`.`id`=`cache_list_items`.`cache_list_id`
-									  WHERE `cache_list_id`=" . sql_escape($options['listid']) . "
-									  AND (`is_public`>=2 OR `cache_lists`.`user_id`=" . sql_escape($login->userid) . ")";
-				sql_slave($cachesFilter);
-				sql_slave('ALTER TABLE &result_caches ADD PRIMARY KEY ( `cache_id` )');
+									  WHERE `cache_list_id`=" . sql_escape($options['listid']);
+					sql_slave($cachesFilter);
+					sql_slave('ALTER TABLE &result_caches ADD PRIMARY KEY ( `cache_id` )');
 
-				$sql_select[] = '&result_caches.`cache_id`';
-				$sql_from = '&result_caches';
-				$sql_innerjoin[] = '`caches` ON `caches`.`cache_id`=&result_caches.`cache_id`';
+					$sql_select[] = '&result_caches.`cache_id`';
+					$sql_from = '&result_caches';
+					$sql_innerjoin[] = '`caches` ON `caches`.`cache_id`=&result_caches.`cache_id`';
+				}
+				else
+				{
+					// should not happen, but just for the case ...
+					$sql_select[] = '`caches`.`cache_id` `cache_id`';
+					$sql_from = '`caches`';
+					$sql_where[] = 'FALSE';
+				}
 			}
 			else if ($options['searchtype'] == 'all')
 			{
@@ -1055,6 +1071,17 @@
 			if ($options['country'] != '')
 			{
 				$sql_where[] = '`caches`.`country`=\'' . sql_escape($options['country']) . '\'';
+			}
+
+			if (!isset($options['language'])) $options['language']='';
+			if ($options['language'] != '')
+			{
+				/*
+				$sql_innerjoin[] = '`cache_desc` ON `cache_desc`.`cache_id`=`caches`.`cache_id`';
+				$sql_where[] = '`cache_desc`.`language`=\'' . sql_escape($options['language']) . '\'';
+				*/
+				// optimized query:
+				$sql_where[] = 'INSTR(`caches`.`desc_languages`,\'' . sql_escape($options['language']) . '\')';
 			}
 
 			if (!isset($options['adm2'])) $options['adm2']='';
@@ -1264,8 +1291,8 @@
 							 `caches`.`size`,
 							 `caches`.`longitude`, `caches`.`latitude`,
 							 `caches`.`user_id`,
-							 IF(IFNULL(`stat_caches`.`toprating`,0)>3, 4, IFNULL(`stat_caches`.`toprating`, 0)) `ratingvalue`' .
-							 $sAddFields
+							 IFNULL(`stat_caches`.`toprating`, 0) `ratingvalue`'.
+			  				 $sAddFields
 			 . ' FROM `caches`
 		  LEFT JOIN `stat_caches` ON `caches`.`cache_id`=`stat_caches`.`cache_id`' .
 			          $sAddJoin
@@ -1524,6 +1551,15 @@ function outputSearchForm($options)
 		$tpl->assign('country', '');
 	}
 
+	if (isset($options['language']))
+	{
+		$tpl->assign('language', htmlspecialchars($options['language'], ENT_COMPAT, 'UTF-8'));
+	}
+	else
+	{
+		$tpl->assign('language', '');
+	}
+
 	if (isset($options['cachetype']))
 	{
 		$tpl->assign('cachetype', htmlspecialchars($options['cachetype'], ENT_COMPAT, 'UTF-8'));
@@ -1630,6 +1666,21 @@ function outputSearchForm($options)
 			`countries`.`short` IN (SELECT DISTINCT `country` FROM `caches`) ORDER BY `name` ASC",
 		$opt['template']['locale'], $options['country']);
 	$tpl->assign_rs('countryoptions',$rs);
+	sql_free_result($rs);
+
+	// language options
+	$rs = sql("
+		SELECT
+			IFNULL(`sys_trans_text`.`text`,`languages`.`name`) AS `name`,
+			`short`,
+			`short`='&2' AS `selected`
+		FROM
+			`languages`
+			LEFT JOIN `sys_trans` ON `sys_trans`.`text`=`languages`.`name`
+			LEFT JOIN `sys_trans_text` ON `sys_trans_text`.`trans_id`=`sys_trans`.`id` AND `sys_trans_text`.`lang`='&1'
+			ORDER BY `name`",
+		$opt['template']['locale'], $options['language']);
+	$tpl->assign_rs('languageoptions',$rs);
 	sql_free_result($rs);
 
 	// cachetype

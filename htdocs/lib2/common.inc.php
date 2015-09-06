@@ -194,6 +194,8 @@ function set_domain()
 
 		if (isset($opt['domain'][$domain]['locale']))
 			$opt['template']['default']['locale'] = $opt['domain'][$domain]['locale'];
+		if (isset($opt['domain'][$domain]['fallback_locale']))
+			$opt['template']['default']['fallback_locale'] = $opt['domain'][$domain]['fallback_locale'];
 
 		if (isset($opt['domain'][$domain]['country']))
 			$opt['template']['default']['country'] = $opt['domain'][$domain]['country'];
@@ -203,6 +205,14 @@ function set_domain()
 
 		if (isset($opt['domain'][$domain]['cookiedomain']))
 			$opt['session']['domain'] = $opt['domain'][$domain]['cookiedomain'];
+
+		if (isset($opt['domain'][$domain]['keywords']))
+			$opt['page']['meta']['keywords'] = $opt['domain'][$domain]['keywords'];
+		if (isset($opt['domain'][$domain]['description']))
+			$opt['page']['meta']['description'] = $opt['domain'][$domain]['description'];
+
+		if (isset($opt['domain'][$domain]['headoverlay']))
+			$opt['page']['headoverlay'] = $opt['domain'][$domain]['headoverlay'];
 	}
 }
 
@@ -230,18 +240,7 @@ function set_language()
 	$cookie->set('locale', $opt['template']['locale'], $opt['template']['default']['locale']);
 
 	bindtextdomain('messages', $opt['rootpath'] . 'cache2/translate');
-
-	// setup the PHP locale
-	setlocale(LC_MONETARY, $opt['locale'][$opt['template']['locale']]['locales']);
-	setlocale(LC_TIME, $opt['locale'][$opt['template']['locale']]['locales']);
-	if (defined('LC_MESSAGES'))
-		setlocale(LC_MESSAGES, $opt['locale'][$opt['template']['locale']]['locales']);
-
-	// no localisation!
-	setlocale(LC_COLLATE, $opt['locale']['EN']['locales']);
-	setlocale(LC_CTYPE, $opt['locale']['EN']['locales']);
-	setlocale(LC_NUMERIC, $opt['locale']['EN']['locales']); // important for mysql-queries!
-
+	set_php_locale();
   textdomain('messages');
 }
 
@@ -361,31 +360,51 @@ function fix_magic_quotes_gpc()
 // pay attention to use only ' quotes in $text (escape other ')
 //
 // see corresponding function in lib/common.inc.php
-function helppagelink($ocpage, $title='Instructions')
+function helppageurl($ocpage)
 {
-	global $opt, $translate;
+	global $opt;
 
+	$help_locale = $opt['template']['locale'];
 	$helppage = sql_value("SELECT `helppage` FROM `helppages`
 	                        WHERE `ocpage`='&1' AND `language`='&2'",
-                         "", $ocpage, $opt['template']['locale']);
-  if ($helppage == "")
+                         "", $ocpage, $help_locale);
+	if ($helppage == "")
 		$helppage = sql_value("SELECT `helppage` FROM `helppages`
 		                        WHERE `ocpage`='&1' AND `language`='*'",
                           "", $ocpage);
+	if ($helppage == "")
+	{
+		$helppage = sql_value("SELECT `helppage` FROM `helppages`
+		                        WHERE `ocpage`='&1' AND `language`='&2'",
+                          "", $ocpage, $opt['template']['default']['fallback_locale']);
+		if ($helppage != "")
+			$help_locale = $opt['template']['default']['fallback_locale'];
+	}
+
 	if ($helppage == "" && isset($opt['locale'][$opt['template']['locale']]['help'][$ocpage]))
 		$helppage = $opt['locale'][$opt['template']['locale']]['help'][$ocpage];
 
-	$imgtitle = $translate->t($title, '', basename(__FILE__), __LINE__);
-	$imgtitle = "alt='" . $imgtitle . "' title='" . $imgtitle  . "'";
-
 	if (substr($helppage,0,1) == "!")
-		return "<a class='nooutline' href='" . substr($helppage,1) . "' " . $imgtitle . " target='_blank'>";
+		substr($helppage,1);
+	else if ($helppage != "" && isset($opt['locale'][$help_locale]['helpwiki']))
+		return $opt['locale'][$help_locale]['helpwiki'] . str_replace(' ','_',$helppage);
 	else
-		if ($helppage != "" && isset($opt['locale'][$opt['template']['locale']]['helpwiki']))
-			return "<a class='nooutline' href='" . $opt['locale'][$opt['template']['locale']]['helpwiki'] .
-			       str_replace(' ','_',$helppage) . "' " . $imgtitle . " target='_blank'>";
+		return "";
+}
 
-	return "";
+function helppagelink($ocpage, $title='Instructions')
+{
+	global $translate;
+
+	$helpurl = helppageurl($ocpage);
+	if ($helpurl == "")
+		return "";
+	else
+	{
+		$imgtitle = $translate->t($title, '', basename(__FILE__), __LINE__);
+		$imgtitle = "alt='" . $imgtitle . "' title='" . $imgtitle  . "'";
+		return "<a class='nooutline' href='" . $helpurl . "' " . $imgtitle . " target='_blank'>";
+	}
 }
 
 

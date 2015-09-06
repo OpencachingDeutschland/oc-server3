@@ -4,23 +4,23 @@
  *
  *  Unicode Reminder メモ
  *
- *  Sample of settings.inc.php - all lib2 settings needed to run the website.
- *  In addition to this, you must create settings.inc.php files from 
- *  .dist files at the following places:
+ *  Production system sample of settings.inc.php - all lib2 settings needed
+ *  to run the website. In addition to this, you must create settings.inc.php
+ *  files from .dist files at the following places:
  *
  *    lib
  *    util/notifications
  *    util/publish_caches
  *    util/watchlist
  *
- *  This file may be outdated and should be reviewed.
+ *  This file may be outdated.
  *
  ***************************************************************************/
 
 	/* PHP settings
 	 * see settings-dist.inc.php for explanation
 	 */
-	$opt['php']['debug'] = PHP_DEBUG_ON;
+	$opt['php']['debug'] = PHP_DEBUG_OFF;
 	$opt['php']['timezone'] = 'Europe/Berlin';
 
 	/* database settings
@@ -32,13 +32,13 @@
 	$opt['db']['maintenance_user'] = '<priviledged_user>';
 
 	// ... how long a query can take without warning (0 <= disabled)
-	$opt['db']['warn']['time'] = 1;
-	$opt['db']['warn']['mail'] = '<admin email>';
+	$opt['db']['warn']['time'] = 180;
+	$opt['db']['warn']['mail'] = 'root';
 	$opt['db']['warn']['subject'] = 'sql_warn';
 	
 	// display mysql error messages on the website - not recommended for productive use!
-	$opt['db']['error']['display'] = true;
-	$opt['db']['error']['mail'] = '<admin email>';
+	$opt['db']['error']['display'] = false;
+	$opt['db']['error']['mail'] = 'root';
 	$opt['db']['error']['subject'] = 'sql_error';
 
 	// database names
@@ -67,7 +67,7 @@
 	 */
 	$opt['session']['mode'] = SAVE_COOKIE;
 	$opt['session']['cookiename'] = '<cookiename>';   // e.g. 'ocde'
-	$opt['session']['domain'] = '<do.main>';  // may be overwritten by $opt['domain'][...]['cookiedomain']
+	$opt['session']['domain'] = '<.do.main>';  // may be overwritten by $opt['domain'][...]['cookiedomain']
 
 	/* If the Referer was sent by the client and the substring was not found,
 	 * the embedded session id will be marked as invalid.
@@ -86,7 +86,8 @@
 	 *  DEBUG_FORCE_TRANSLATE = force read of translate messages
 	 *  DEBUG_CLI             = print debug messages of cli scripts
 	 */
-	$opt['debug'] = DEBUG_DEVELOPER|DEBUG_TEMPLATES|DEBUG_SQLDEBUGGER|DEBUG_TRANSLATE|DEBUG_FORCE_TRANSLATE;
+	$opt['debug'] = DEBUG_NO;
+	//$opt['debug'] = DEBUG_DEVELOPER|DEBUG_TEMPLATES|DEBUG_SQLDEBUGGER|DEBUG_TRANSLATE|DEBUG_FORCE_TRANSLATE;
 	//$opt['debug'] = DEBUG_DEVELOPER|DEBUG_TEMPLATES|DEBUG_SQLDEBUGGER;
 	//$opt['debug'] = DEBUG_DEVELOPER|DEBUG_SQLDEBUGGER;
 
@@ -94,9 +95,51 @@
 	 *
 	 */
 	$opt['page']['name'] = 'Geocaching mit Opencaching';
-	$opt['page']['absolute_url'] = 'http://<domain>';
-	$opt['mail']['from'] = '<admin email>';
+	$opt['page']['absolute_url'] = 'http://<domain>/';
+	$opt['mail']['from'] = '<notification email from address>';
 	$opt['page']['max_logins_per_hour'] = 250;
+
+	/* default locale
+	 */
+	$opt['template']['default']['locale'] = 'DE';   // can be overwritten by $opt['domain'][<domain>]['locale'] 
+
+	/* multi-domain settings
+	 *
+	 * If one of the domains matches $_SERVER['SERVER_NAME'], the default values (in
+	 * common-settings.inc.php) will be overwritten. Can be used to host more than one
+	 * locale on one server with multiple default-locales.
+	 * Must be overwritten in BOTH lib1 and lib2 settings.inc.php!!
+	 */
+	//$opt['domain']['www.opencaching.de']['url'] = 'http://www.opencaching.de/';
+	//$opt['domain']['www.opencaching.de']['locale'] = 'DE';
+	//$opt['domain']['www.opencaching.de']['fallback_locale'] = 'EN';
+	//$opt['domain']['www.opencaching.de']['style'] = 'ocstyle';
+	//$opt['domain']['www.opencaching.de']['cookiedomain'] = '.opencaching.de';
+	//$opt['domain']['www.opencaching.de']['country'] = 'DE';
+	//$opt['domain']['www.opencaching.de']['keywords'] = 'Geocaching, Geocache, Cache, Schatzsuche, GPS, kostenlos, GPX, Koordinaten, Hobby, Natur';  // 5-10 keywords are recommended
+	//$opt['domain']['www.opencaching.de']['description'] = 'Opencaching.de ist das freie Portal für Geocaching, ein Schatzsuche-Spiel. Mittels GPS-Koordinaten sind Behälter oder Objekte zu finden.';
+	//$opt['domain']['www.opencaching.de']['headoverlay'] = 'oc_head_alpha3';
+
+	//$opt['domain']['www.opencaching.pl']['url'] = 'http://www.opencaching.pl/';
+	//$opt['domain']['www.opencaching.pl']['locale'] = 'PL';
+	//$opt['domain']['www.opencaching.de']['fallback_locale'] = 'EN';
+	//$opt['domain']['www.opencaching.pl']['style'] = 'ocstyle';
+	//$opt['domain']['www.opencaching.pl']['cookiedomain'] = '.opencaching.pl';
+	//$opt['domain']['www.opencaching.pl']['country'] = 'PL';
+	//$opt['domain']['www.opencaching.de']['keywords'] = 'geocaching, geocache, cache, poszukiwanie skarbów, GPS, wolne, GPX, koordynować, hobby, natura';  // 5-10 keywords are recommended
+	//$opt['domain']['www.opencaching.de']['description'] = 'Opencaching.pl jest darmowy portal dla Geocaching, gry Treasure Hunt. Za pomocą współrzędnych GPS można znaleźć pojemniki lub obiektów.';
+	//$opt['domain']['www.opencaching.de']['headoverlay'] = 'oc_head_alpha3_pl';
+
+	/* The OC site's ID; see settings-dist.inc.php for known IDs.
+	 */ 
+	$opt['logic']['node']['id'] = 0;
+
+	/* data license settings
+	 * The text and licsense link are determined by $opt['locale'][<locale>]['page']['license']
+	 * and $opt['locale'][<locale>]['page']['license_url'].
+	 */
+	$opt['logic']['license']['disclaimer'] = false;
+	$opt['logic']['license']['terms'] = 'articles.php?page=impressum#datalicense';
 
 	/* location of uploaded images
 	 */
@@ -104,7 +147,7 @@
 	$opt['logic']['pictures']['url'] = 'http://<domain>/images/uploads';
 	$opt['logic']['pictures']['thumb_url'] = $opt['logic']['pictures']['url'] . '/thumbs';
 
-	/* location of uploaded mp3
+	/* location of uploaded mp3 (unused)
 	 */
 	$opt['logic']['podcasts']['url'] = 'http://<domain>/podcasts/uploads';
 
@@ -112,6 +155,11 @@
 	 * (true means extra hash on the digested password)
 	 */
 	$opt['logic']['password_hash'] = false;
+
+	/* password salt
+	 * is a random generated String that is appended to the password
+	 */
+	$opt['logic']['password_salt'] = '';
 
  	/* E-Mail for notification about news (newstopic.php)
  	 */
@@ -135,20 +183,25 @@
 	// fill_gaps = false: continue with the last waypoint
 	$opt['logic']['waypoint_pool']['fill_gaps'] = false;
 
+	/* OC Username for cronjobs or CLI tools
+	 * is used e.g. for cache auto-archiving and auto-publishing
+	 */
+	$opt['logic']['systemuser']['user'] = '';
+
  	/* 3rd party library options
  	 * see https://my.garmin.com/api/communicator/key-generator.jsp
  	 */
+	$opt['lib']['garmin']['domain'] = '<domain>';
  	$opt['lib']['garmin']['key'] = '00112233445566778899AABBCCDDEEFF00';
- 	$opt['lib']['garmin']['url'] = 'http://www.site.org/';
+	$opt['lib']['garmin']['url'] = 'http://' . $opt['lib']['garmin']['domain'] . '/';
+	$opt['lib']['garmin']['redirect'] = 'http://<domain>/garmin.php?redirect=1&cacheid={cacheid}';
 
-    // developer.what3words.com API Key
-    $opt['lib']['w3w']['apikey'] = 'YOURAPIKEY';
-
-	$opt['logic']['node']['id'] = 4;
+	// developer.what3words.com API Key
+	$opt['lib']['w3w']['apikey'] = 'YOURAPIKEY';
 
 	// Google Maps API key
 	// http://code.google.com/intl/de/apis/maps/signup.html
-	// $opt['lib']['google']['mapkey']['<domain>'] = 'EEFFGGHH...';
+	$opt['lib']['google']['mapkey']['<domain>'] = 'EEFFGGHH...';
 
 	// email address for user contact emails
 	// has to be an autoresponder informing about wrong mail usage
@@ -159,6 +212,26 @@
 
 	$opt['page']['showdonations'] = true;
 	$opt['page']['showsocialmedia'] = true;
+
+	/* index.php news section configuration
+	 * include '' => from table 'news', else from RSS feed
+	 */
+	// $opt['news']['include'] = 'http://blog.opencaching.de/feed';
+	// $opt['news']['count'] = 8;
+
+	/* forum RSS integration (index.php)
+	 */
+	// $opt['forum']['url'] = ''http://forum.opencaching-network.org/index.php?action=.xml;type=rss;limit=50';
+	// $opt['forum']['count'] = 8;
+
+	/* old news integration (index.php)
+	 */
+	$opt['cron']['phpbbtopics']['url'] = '';
+	$opt['cron']['phpbbtopics']['forumids'] = array();
+	$opt['cron']['phpbbtopics']['name'] = '';
+	$opt['cron']['phpbbtopics']['link'] = '';
+	$opt['cron']['phpbbtopics']['count'] = 5;
+	$opt['cron']['phpbbtopics']['maxcontentlength'] = 230;
 
 
 function post_config()

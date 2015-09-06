@@ -11,7 +11,7 @@
 	<input type="hidden" name="ownerid" value="{$ownerid}" />
 
 	<div class="content2-pagetitle">
-		<img src="resource2/{$opt.template.style}/images/misc/32x32-tools.png" style="align: left; margin-right: 10px;" width="32" height="32" alt="World" />
+		<img src="resource2/{$opt.template.style}/images/misc/32x32-tools.png" style="margin-right: 10px;" width="32" height="32" alt="" />
 		{t}Reported caches{/t}
 	</div>
 
@@ -64,10 +64,10 @@
 		{$external_maintainer_msg}
 		</p>
 		{if $created != null}
-			<p style="line-height: 1.6em;"><b>{t}Created at{/t}:</b>&nbsp;{$created|date_format:$opt.format.datelong}</p>
+			<p style="line-height: 1.6em;"><b>{t}Created at:{/t}</b>&nbsp;{$created|date_format:$opt.format.datelong}</p>
 		{/if}
 		{if $lastmodified != $created}
-			<p style="line-height: 1.6em;"><b>{t}Last modified{/t}:</b>&nbsp;{$lastmodified|date_format:$opt.format.datelong}</p>
+			<p style="line-height: 1.6em;"><b>{t}Last modified{/t}{t}#colonspace#{/t}</b>&nbsp;{$lastmodified|date_format:$opt.format.datelong}</p>
 		{/if}
 		<p style="line-height: 1.6em;"><b>{t}State:{/t}</b>&nbsp;{$status}&nbsp;&nbsp;<b>Admin:</b>&nbsp;{if $adminnick==''}{t}not assigned{/t}{else}{if $otheradmin}<font color="red"><b>{/if}{$adminnick|escape}{if $otheradmin}</b></font>{/if}{/if}</p>
 		<p style="line-height: 1.6em;"><b>{t}Reason:{/t}</b>&nbsp;{$reason|escape|nl2br}</p>
@@ -75,7 +75,7 @@
 
 		<div class="content2-container bg-blue02">
   		<p class="content-title-noshade-size2">
-				<img src="resource2/{$opt.template.style}/images/description/22x22-misc.png" style="align: left; margin-right: 10px;" width="22" height="22" alt="" /> 
+				<img src="resource2/{$opt.template.style}/images/description/22x22-misc.png" style="margin-right: 10px;" width="22" height="22" alt="" /> 
 	  		{t}Action{/t}
 	  	</p>
 	  </div>
@@ -89,7 +89,7 @@
 
 			<div class="content2-container bg-blue02">
 				<p class="content-title-noshade-size2">
-					<img src="resource2/{$opt.template.style}/images/description/22x22-utility.png" style="align: left; margin-right: 10px;" width="22" height="22" alt="" /> 
+					<img src="resource2/{$opt.template.style}/images/description/22x22-utility.png" style="margin-right: 10px;" width="22" height="22" alt="" /> 
 					{t}Set state{/t}
 				</p>
 			</div>

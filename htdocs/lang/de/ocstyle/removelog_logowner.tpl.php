@@ -19,7 +19,7 @@
 
  ****************************************************************************/
 ?>
-<div class="content2-pagetitle"><img src="lang/de/ocstyle/images/description/22x22-logs.png" style="align: left; margin-right: 10px;" width="22" height="22"/>{t}remove log entry for <a href="viewcache.php?cacheid={cacheid}">{cachename}</a>{/t}</div>
+<div class="content2-pagetitle"><img src="lang/de/ocstyle/images/description/22x22-logs.png" style="margin-right: 10px;" width="22" height="22"/>{t}remove log entry for <a href="viewcache.php?cacheid={cacheid}">{cachename}</a>{/t}</div>
 <form action="removelog.php" method="post" enctype="application/x-www-form-urlencoded" name="removelog_form" dir="ltr">
 <input type="hidden" name="commit" value="1"/>
 <input type="hidden" name="logid" value="{logid}"/>

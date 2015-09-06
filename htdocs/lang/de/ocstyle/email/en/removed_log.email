@@ -1,0 +1,24 @@
+Hello %log_owner%,
+
+%cache_owner% has deleted your log entry for the cache "%cache_name%"
+(http://opencaching.de/%cache_wp%).
+
+%log_date%: %log_type%
+
+Deleted text:
+---
+%log_text%
+---
+
+%comment%
+
+
+You may contact %cache_owner% by this link:
+http://www.opencaching.de/mailto.php?userid=%cache_owner_id%
+
+
+---
+This E-Mail was generated automatically - please do not answer. If you would
+like to contact Opencaching.de, please refer to 
+http://www.opencaching.de/articles.php?page=contact. In urgent cases you
+may send an e-mail to contact@opencaching.de.

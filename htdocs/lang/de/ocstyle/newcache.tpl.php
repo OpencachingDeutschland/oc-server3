@@ -60,13 +60,13 @@
 var maAttributes = new Array({jsattributes_array});
 
 function _chkVirtual () {
-  if (document.newcacheform.type.value == "4" || document.newcacheform.type.value == "5") {
-    document.newcacheform.size.value = "7";
-    document.newcacheform.size.disabled = true;
+  if (document.editform.type.value == "4" || document.editform.type.value == "5") {
+    document.editform.size.value = "7";
+    document.editform.size.disabled = true;
   }
   else
   {
-    document.newcacheform.size.disabled = false;
+    document.editform.size.disabled = false;
   }
   return false;
 }
@@ -115,11 +115,11 @@ function toggleAttr(id)
 </script>
 
 <div class="content2-pagetitle">
-	<img src="resource2/ocstyle/images/cacheicon/traditional.gif" style="align: left; margin-right: 10px;" width="32" height="32" alt="{t}New cache{/t}" />
+	<img src="resource2/ocstyle/images/cacheicon/traditional.gif" style="margin-right: 10px;" width="32" height="32" alt="" />
 	{t}Submit a new cache{/t}
 </div>
 
-<form action="newcache.php" method="post" enctype="application/x-www-form-urlencoded" name="newcacheform" dir="ltr">
+<form action="newcache.php" method="post" enctype="application/x-www-form-urlencoded" name="editform" dir="ltr">
 <input type="hidden" name="show_all_countries" value="{show_all_countries}"/>
 <input type="hidden" name="show_all_langs" value="{show_all_langs}"/>
 <input type="hidden" name="version2" value="1"/>
@@ -167,7 +167,6 @@ function toggleAttr(id)
 			&nbsp;<input type="text" name="lat_h" maxlength="2" value="{lat_h}" class="input30" />
 			°&nbsp;<input type="text" name="lat_min" maxlength="6" value="{lat_min}" class="input50" />&nbsp;'&nbsp;
 			{lat_message}
-			&nbsp;&nbsp;
 			<select name="lonEW">
 				<option value="E"{lonEsel}>{t}E{/t}</option>
 				<option value="W"{lonWsel}>{t}W{/t}</option>
@@ -197,7 +196,7 @@ function toggleAttr(id)
 			{t}Terrain:{/t}
 			<select name="terrain" class="input60">
 				{terrain_options}
-			</select>{diff_message}
+			</select> {diff_message}
 		</td>
 	</tr>
 	<tr><td>{t}Time and effort (optional):{/t}</td>
@@ -287,11 +286,9 @@ function toggleAttr(id)
 	<tr>
 		<td colspan="2">
 			<div class="menuBar">
-				<span id="descText" class="buttonNormal" onclick="btnSelect(1)" onmouseover="btnMouseOver(1)" onmouseout="btnMouseOut(1)">{t}Text{/t}</span>
+				<span id="descHtmlEdit" class="buttonNormal" onclick="btnSelect(3)" onmouseover="btnMouseOver(3)" onmouseout="btnMouseOut(3)">{t}Editor{/t}</span>
 				<span class="buttonSplitter">|</span>
 				<span id="descHtml" class="buttonNormal" onclick="btnSelect(2)" onmouseover="btnMouseOver(2)" onmouseout="btnMouseOut(2)">{t}&lt;html&gt;{/t}</span>
-				<span class="buttonSplitter">|</span>
-				<span id="descHtmlEdit" class="buttonNormal" onclick="btnSelect(3)" onmouseover="btnMouseOver(3)" onmouseout="btnMouseOut(3)">{t}Editor{/t}</span>
 			</div>
 		</td>
 	</tr>
@@ -378,7 +375,7 @@ function toggleAttr(id)
 
 	<tr><td class="spacer" colspan="2"></td></tr>
 	<tr>
-		<td><nobr>{t}password for 'found' logs{/t}:</nobr></td>
+		<td><nobr>{t}Password for 'found' logs:{/t}</nobr></td>
 		<td><input class="input100" type="text" name="log_pw" value="{log_pw}" maxlength="20"/> &nbsp; {t}(leave blank for no password){/t}</td>
 	</tr>
 	<tr>
@@ -407,207 +404,10 @@ function toggleAttr(id)
 	<tr><td class="spacer"></td></tr>
 </table>
 </form>
-<script language="javascript" type="text/javascript">
+
+
+<script type="text/javascript">
 <!--
-	/*
-		1 = Text
-		2 = HTML
-		3 = HTML-Editor
-	*/
-	var use_tinymce = 0;
-	var descMode = {descMode};
-	document.getElementById("scriptwarning").firstChild.nodeValue = "";
-
-	// set descMode to 1 oder 2 ... when the editor is loaded, set back to 3
-	if (descMode == 3)
-	{
-		if (document.getElementById("desc").value == '')
-			descMode = 1;
-		else
-			descMode = 2;
-	}
-
-	document.getElementById("descMode").value = descMode;
-	mnuSetElementsNormal();
-
-	function postInit()
-	{
-		descMode = 3;
-		use_tinymce = 1;
-		document.getElementById("descMode").value = descMode;
-		mnuSetElementsNormal();
-	}
-
-	function SwitchToTextDesc()
-	{
-		document.getElementById("descMode").value = 1;
-
-		if (use_tinymce == 1)
-			document.newcacheform.submit();
-	}
-
-	function SwitchToHtmlDesc()
-	{
-		document.getElementById("descMode").value = 2;
-
-		if (use_tinymce == 1)
-			document.newcacheform.submit();
-	}
-
-	function SwitchToHtmlEditDesc()
-	{
-		document.getElementById("descMode").value = 3;
-
-		if (use_tinymce == 0)
-			document.newcacheform.submit();
-	}
-
-	function mnuSelectElement(e)
-	{
-		e.backgroundColor = '#D4D5D8';
-		e.borderColor = '#6779AA';
-		e.borderWidth = '1px';
-		e.borderStyle = 'solid';
-	}
-
-	function mnuNormalElement(e)
-	{
-		e.backgroundColor = '#F0F0EE';
-		e.borderColor = '#F0F0EE';
-		e.borderWidth = '1px';
-		e.borderStyle = 'solid';
-	}
-
-	function mnuHoverElement(e)
-	{
-		e.backgroundColor = '#B6BDD2';
-		e.borderColor = '#0A246A';
-		e.borderWidth = '1px';
-		e.borderStyle = 'solid';
-	}
-
-	function mnuUnhoverElement(e)
-	{
-		mnuSetElementsNormal();
-	}
-
-	function mnuSetElementsNormal()
-	{
-		var descText = document.getElementById("descText").style;
-		var descHtml = document.getElementById("descHtml").style;
-		var descHtmlEdit = document.getElementById("descHtmlEdit").style;
-
-		switch (descMode)
-		{
-			case 1:
-				mnuSelectElement(descText);
-				mnuNormalElement(descHtml);
-				mnuNormalElement(descHtmlEdit);
-
-				break;
-			case 2:
-				mnuNormalElement(descText);
-				mnuSelectElement(descHtml);
-				mnuNormalElement(descHtmlEdit);
-
-				break;
-			case 3:
-				mnuNormalElement(descText);
-				mnuNormalElement(descHtml);
-				mnuSelectElement(descHtmlEdit);
-
-				break;
-		}
-	}
-
-	function btnSelect(mode)
-	{
-		var descText = document.getElementById("descText").style;
-		var descHtml = document.getElementById("descHtml").style;
-		var descHtmlEdit = document.getElementById("descHtmlEdit").style;
-
-		var oldMode = descMode;
-		descMode = mode;
-		mnuSetElementsNormal();
-
-		if ((oldMode == 1) && (descMode != 1))
-		{
-			// convert text to HTML
-			var desc = document.getElementById("desc").value;
-
-			if ((desc.indexOf('&amp;') == -1) &&
-			    (desc.indexOf('&quot;') == -1) &&
-			    (desc.indexOf('&lt;') == -1) &&
-			    (desc.indexOf('&gt;') == -1) &&
-			    (desc.indexOf('<p>') == -1) &&
-			    (desc.indexOf('<i>') == -1) &&
-			    (desc.indexOf('<strong>') == -1) &&
-			    (desc.indexOf('<br />') == -1))
-			{
-				desc = desc.replace(/&/g, "&amp;");
-				desc = desc.replace(/"/g, "&quot;");
-				desc = desc.replace(/</g, "&lt;");
-				desc = desc.replace(/>/g, "&gt;");
-				desc = desc.replace(/\r\n/g, "\<br />");
-				desc = desc.replace(/\n/g, "<br />");
-				desc = desc.replace(/<br \/>/g, "<br />\n");
-			}
-
-			document.getElementById("desc").value = desc;
-		}
-
-		switch (mode)
-		{
-			case 1:
-				SwitchToTextDesc();
-				break;
-			case 2:
-				SwitchToHtmlDesc();
-				break;
-			case 3:
-				SwitchToHtmlEditDesc();
-				break;
-		}
-	}
-
-	function btnMouseOver(id)
-	{
-		var descText = document.getElementById("descText").style;
-		var descHtml = document.getElementById("descHtml").style;
-		var descHtmlEdit = document.getElementById("descHtmlEdit").style;
-
-		switch (id)
-		{
-			case 1:
-				mnuHoverElement(descText);
-				break;
-			case 2:
-				mnuHoverElement(descHtml);
-				break;
-			case 3:
-				mnuHoverElement(descHtmlEdit);
-				break;
-		}
-	}
-
-	function btnMouseOut(id)
-	{
-		var descText = document.getElementById("descText").style;
-		var descHtml = document.getElementById("descHtml").style;
-		var descHtmlEdit = document.getElementById("descHtmlEdit").style;
-
-		switch (id)
-		{
-			case 1:
-				mnuUnhoverElement(descText);
-				break;
-			case 2:
-				mnuUnhoverElement(descHtml);
-				break;
-			case 3:
-				mnuUnhoverElement(descHtmlEdit);
-				break;
-		}
-	}
+	OcInitEditor();
 //-->
 </script>

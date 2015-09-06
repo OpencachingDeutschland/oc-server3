@@ -16,9 +16,8 @@
 				{$opt.template.title|escape} - {$opt.page.subtitle1|escape} {$opt.page.subtitle2|escape}
 			{/if}
 		</title>
-		<meta name="keywords" content="Geocaching, Geocache, Cache, Geocashing, Schnitzeljagd, Schatzsuche, GPS, Openstreetmap, kostenlos, GPX, GPX download, Koordinaten, Hobby, Natur" />
-			{* siehe http://forum.opencaching-network.org/index.php?topic=3065.0 *}
-		<meta name="description" content="Opencaching.de ist das freie Portal für Geocaching, ein GPS-Schatzsuche-Spiel: Es werden kleine Behälter versteckt, die anhand von GPS-Koordinaten zu finden sind." />
+		<meta name="keywords" content="{$opt.page.meta.keywords|escape}" />
+		<meta name="description" content="{$opt.page.meta.description|escape}" />
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 		<meta http-equiv="Content-Style-Type" content="text/css" />
 		<meta http-equiv="Content-Language" content="{$opt.template.locale}" />
@@ -54,7 +53,7 @@
 
 					if (sCurrentOption!=oUserCountryCombo.value)
 					{
-						window.location = 'index.php?usercountry=' + oUserCountryCombo.value;
+						window.location = '{/literal}{$base_pageadr}{literal}usercountry=' + oUserCountryCombo.value;
 					}
 				}
 
@@ -135,7 +134,7 @@
 							{nocache}
 								&nbsp;
 								{if $login.userid==0}
-									<b><form action="login.php" method="post" enctype="application/x-www-form-urlencoded" name="login" dir="ltr" style="display: inline;">{t}User{/t}:&nbsp;&nbsp;<input name="email" size="10" type="text" class="textboxes" value="" />&nbsp;&nbsp;&nbsp;{t}Password{/t}:&nbsp;&nbsp;<input name="password" size="10" type="password" class="textboxes" value="" />&nbsp;<input type="hidden" name="action" value="login" /><input type="hidden" name="target" value="{$opt.page.target|escape}" /><input type="hidden" name="source" value="titlebar" />&nbsp;<input name="LogMeIn" value="{t}Login{/t}" class="formbutton" style="width: 68px;" type="submit" onclick="submitbutton('LogMeIn')" /></form></b>	
+									<b><form action="login.php" method="post" enctype="application/x-www-form-urlencoded" name="login" dir="ltr" style="display: inline;">{t}User:{/t}&nbsp;&nbsp;<input name="email" size="10" type="text" class="textboxes" value="" />&nbsp;&nbsp;&nbsp;{t}Password:{/t}&nbsp;&nbsp;<input name="password" size="10" type="password" class="textboxes" value="" />&nbsp;<input type="hidden" name="action" value="login" /><input type="hidden" name="target" value="{$opt.page.target|escape}" /><input type="hidden" name="source" value="titlebar" />&nbsp;<input name="LogMeIn" value="{t}Login{/t}" class="formbutton" style="width: 74px;" type="submit" onclick="submitbutton('LogMeIn')" /></form></b>	
 								{else}  {* Ocprop: <a href="myhome.php">(.*?)<\/a>.*?<a href="login.php
 								                   <a href="myhome.php">.*?<a href="login.php\?action=logout"> *}
 									<b>{t}Logged in as{/t} <a href="myhome.php">{$login.username|escape}</a></b> - <a href="login.php?action=logout">{t}Logout{/t}</a>
@@ -146,7 +145,7 @@
 						<td>
 							{foreach from=$opt.template.locales key=localeKey item=localeItem}
 								{if $localeItem.show}
-								<a style="text-decoration: none;" href="{$locale_pageadr}locale={$localeKey}"><img src="{$localeItem.flag}" alt="{$localeItem.name|escape}" width="24px" height="18px" /></a>
+								<a style="text-decoration: none;" href="{$base_pageadr}locale={$localeKey}"><img src="{$localeItem.flag}" alt="{$localeItem.name|escape}" title="{$localeItem.name|escape}" width="24px" height="18px" /></a>
 							{/if}
 							{/foreach}
 						</td>
@@ -213,7 +212,7 @@
 					<div id="breadcrumb_fullsize">{include file="sys_breadcrumb.tpl" items="$breadcrumb"}</div>
 				{else}
 					<div id="breadcrumb">{include file="sys_breadcrumb.tpl" items="$breadcrumb"}</div>
-					<div id="suchbox"><form action="searchplugin.php" method="post"><b>{t}Waypoint-Search{/t}:</b>&nbsp;<input type="hidden" name="sourceid" value="waypoint-search" /> <input type="text" name="userinput" size="10" class="waypoint" /> <input type="submit" name="wpsearch" class="formbutton" style="width:auto" value="&nbsp;{t}Go{/t}&nbsp;" onclick="submitbutton('wpsearch')" /></form></div>
+					<div id="suchbox"><form action="searchplugin.php" method="post"><b>{t}Waypoint-Search:{/t}</b>&nbsp;<input type="hidden" name="sourceid" value="waypoint-search" /> <input type="text" name="userinput" size="10" class="waypoint" /> <input type="submit" name="wpsearch" class="formbutton" style="width:auto" value="&nbsp;{t}Go{/t}&nbsp;" onclick="submitbutton('wpsearch')" /></form></div>
 				{/if}
 			</div>
 
@@ -295,18 +294,18 @@
 					<p class="content-txtbox-noshade-size5">
 						<small>
 							{nocache}
-								{t}Page timing{/t}: {$sys_runtime|sprintf:"%1.3f"} {t}sec{/t}<br />
+								{t}Page timing:{/t} {$sys_runtime|sprintf:"%1.3f"} {t}sec{/t}<br />
 								{if ($opt.template.caching == true)}
-									{t}Page cached{/t}: {if $sys_cached==true}{t}Yes{/t}{else}{t}No{/t}{/if}<br />
+									{t}Page cached:{/t} {if $sys_cached==true}{t}Yes{/t}{else}{t}No{/t}{/if}<br />
 								{/if}
 								{*
-								{t}DB connected{/t}: 
+								{t}DB connected:{/t} 
 								{if $sys_dbconnected==true}{t}Yes{/t}{else}{t}No{/t}{/if}
 								{if $sys_dbslave==true}, {t}Slave{/t}{/if}
 								<br />
 								*}
 							{/nocache}
-							{t}Created at{/t}: {"0"|date_format:$opt.format.datetime}
+							{t}Created at:{/t} {"0"|date_format:$opt.format.datetime}
 						</small>
 					</p>
 				</div>

@@ -24,7 +24,8 @@
  $date_time_format_message = '&nbsp;' . t('Format:&nbsp;DD-MM-YYYY');
 
  $error_general = "<tr><td class='error' colspan='2'><b>" . t('Some errors occured, please check the marked fields.') . "</b></td></tr>";
- $error_coords_not_ok = '<span class="errormsg">' . t('Your chosen coordinated are invalid') . '</span>';
+ $error_long_not_ok = '<span class="errormsg">' . t('Your chosen coordinated are invalid') . '</span>';
+ $error_lat_not_ok = $error_long_not_ok . "<br />";
  $error_duplicate_coords = '<span class="errormsg">' . t('Another cache (<a href="viewcache.php?wp=%1">%1</a>) exists at these coords. Maybe you pressed "submit cache" twice. To publish a cache with identical coords, enter other coords first, then edit the listing and change coords.') . '</span>';
  $time_not_ok_message = '<span class="errormsg">' . t('The entered time is invalid.') . '</span>';
  $way_length_not_ok_message = '<span class="errormsg">' . t('The entered distance is invalid, Format: aa.aaa') . '</span>';

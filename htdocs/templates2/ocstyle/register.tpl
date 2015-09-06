@@ -6,7 +6,7 @@
 {* OCSTYLE *}
 {if $confirm==1}
 	<div class="content2-pagetitle">
-		<img src="resource2/{$opt.template.style}/images/profile/32x32-profile.png" style="align: left; margin-right: 10px;" width="32" height="32" alt="{t}Register{/t}" />
+		<img src="resource2/{$opt.template.style}/images/profile/32x32-profile.png" style="margin-right: 10px;" width="32" height="32" alt="" />
 		{t}New user registered{/t}
 	</div>
 
@@ -19,27 +19,27 @@
 
 	<table class="table">
 		<tr>
-			<td>{t}Username{/t}:</td>
+			<td>{t}Username:{/t}</td>
 			<td>{$username|escape}</td>
 		</tr>
 
 		<tr>
-			<td>{t}E-Mail{/t}:</td>
+			<td>{t}E-Mail:{/t}</td>
 			<td>{$email|escape}</td>
 		</tr>
 
 		<tr>
-			<td>{t}First name{/t}:</td>
+			<td>{t}First name:{/t}</td>
 			<td>{$first_name|escape}</td>
 		</tr>
 
 		<tr>
-			<td>{t}Last name{/t}:</td>
+			<td>{t}Last name:{/t}</td>
 			<td>{$last_name|escape}</td>
 		</tr>
 
 		<tr>
-			<td>{t}Country{/t}:</td>
+			<td>{t}Country:{/t}</td>
 			<td>{$country_full|escape}</td>
 		</tr>
 		<tr><td class="spacer" colspan="2"></td></tr>
@@ -50,7 +50,7 @@
 	<form name="register" action="register.php" method="post" enctype="application/x-www-form-urlencoded" style="display: inline;">
 		<input type="hidden" name="show_all_countries" value="{$show_all_countries}" />
 		<div class="content2-pagetitle">
-			<img src="resource2/{$opt.template.style}/images/profile/32x32-profile.png" style="align: left; margin-right: 10px;" width="32" height="32" alt="{t}Register{/t}" />
+			<img src="resource2/{$opt.template.style}/images/profile/32x32-profile.png" style="margin-right: 10px;" width="32" height="32" alt="" />
 			{t}Register new user{/t}
 		</div>
 
@@ -71,11 +71,11 @@
 			<tr><td class="spacer" colspan="2"></td></tr>
 
 			<tr>
-				<td width="145" valign="top">{t}Username{/t}:</td>
+				<td width="145" valign="top">{t}Username:{/t}</td>
 				<td valign="top">
 					<input type="text" name="username" maxlength="60" value="{$username|escape}" class="input200" /> *
 					{if $error_username_not_ok==1}
-						<span class="errormsg">{t}The username is not valid.{/t}</span>
+						<span class="errormsg">{t}The username contains invalid characters.{/t}</span>
 					{elseif $error_username_exists==1}
 						<span class="errormsg">{t}There already exists an account with that username.{/t}</span>
 					{/if}
@@ -84,7 +84,7 @@
 			<tr><td class="spacer" colspan="2"><div class="mediumspacer"></td></tr>
 
 			<tr>
-				<td width="145" valign="top">{t}First name{/t}:</td>
+				<td width="145" valign="top">{t}First name:{/t}</td>
 				<td valign="top">
 					<input type="text" name="first_name" maxlength="60" value="{$first_name|escape}" class="input200" /> 
 					{if $error_first_name_not_ok==1}
@@ -93,7 +93,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td width="145" valign="top">{t}Last name{/t}:</td>
+				<td width="145" valign="top">{t}Last name:{/t}</td>
 				<td valign="top">
 					<input type="text" name="last_name" maxlength="60" value="{$last_name|escape}" class="input200" />
 					{if $error_last_name_not_ok==1}
@@ -102,7 +102,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td valign="top">{t}Country{/t}:</td>
+				<td valign="top">{t}Country:{/t}</td>
 				<td valign="top">
 					<select name="country" class="input200" >
 						<option value="XX" {if $country=="XX"}selected="selected"{/if}>{t}Not specified{/t}</option>
@@ -118,7 +118,7 @@
 			<tr><td class="spacer" colspan="2"><div class="mediumspacer"></td></tr>
 
 			<tr>
-				<td width="145" valign="top">{t}E-Mail{/t}:</td>
+				<td width="145" valign="top">{t}E-Mail:{/t}</td>
 				<td valign="top">
 					<input type="text" name="email" maxlength="80" value="{$email|escape}" class="input200" /> *&nbsp;
 					{if $error_email_not_ok==1}
@@ -130,13 +130,13 @@
 				</td>
 			</tr>
 			<tr>
-				<td width="145" valign="top">{t}Your password{/t}:</td>
+				<td width="145" valign="top">{t}Your password:{/t}</td>
 				<td valign="top">
 					<input type="password" name="password1" maxlength="80" value="" class="input200" /> *&nbsp;
 				</td>
 			</tr>
 			<tr>
-				<td width="145" valign="top">{t}Please repeat{/t}:</td>
+				<td width="145" valign="top">{t}Please repeat:{/t}</td>
 				<td valign="top">
 					<input type="password" name="password2" maxlength="80" value="" class="input200" /> *
 				</td>

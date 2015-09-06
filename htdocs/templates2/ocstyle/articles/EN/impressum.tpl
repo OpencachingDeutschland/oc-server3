@@ -1,10 +1,10 @@
-﻿{***************************************************************************
+{***************************************************************************
 *  You can find the license in the docs directory
 *
 *  Unicode Reminder メモ
 ***************************************************************************}
 <div class="content2-pagetitle">
-	<img src="resource2/{$opt.template.style}/images/misc/32x32-impressum.png" style="align: left; margin-right: 10px;" width="32" height="32" alt="" /> Legal information
+	<img src="resource2/{$opt.template.style}/images/misc/32x32-impressum.png" style="margin-right: 10px;" width="32" height="32" alt="" /> Legal information
 </div>
 <div class="content-txtbox-noshade" style="padding-right: 25px;">
 	<p>
@@ -19,7 +19,7 @@
 
 <div class="content2-container bg-blue02">
 	<p class="content-title-noshade-size3">
-		<img src="resource2/ocstyle/images/misc/32x32-news.png" style="align: left; margin-right: 10px;" width="32" height="32" alt="Lizenz" />
+		<img src="resource2/ocstyle/images/misc/32x32-news.png" style="margin-right: 10px;" width="32" height="32" alt="" />
 		Operator of this website
 	</p>
 </div>
@@ -68,7 +68,7 @@
 		<ul class="indent narrowlist">
 			<li>Michael Vaahsen, chairman</li>
 			<li>Mirco Baumann, vice chairman</li>
-			<li>Christoph Convent, treasurer (acting)</li>
+			<li>Christoph Convent, treasurer</li>
 		</ul>
 	</p>
 
@@ -92,7 +92,7 @@
 
 <div class="content2-container bg-blue02">
 	<p class="content-title-noshade-size3">
-		<img src="resource2/ocstyle/images/misc/32x32-news.png" style="align: left; margin-right: 10px;" width="32" height="32" alt="Lizenz" />
+		<img src="resource2/ocstyle/images/misc/32x32-news.png" style="margin-right: 10px;" width="32" height="32" alt="" />
 		Responsibility for extenal Links
 	</p>
 </div>
@@ -111,7 +111,7 @@
 
 <div class="content2-container bg-blue02">
 	<p class="content-title-noshade-size3">
-		<img src="resource2/ocstyle/images/misc/32x32-news.png" style="align: left; margin-right: 10px;" width="32" height="32" alt="Lizenz" />
+		<img src="resource2/ocstyle/images/misc/32x32-news.png" style="margin-right: 10px;" width="32" height="32" alt="" />
 		<a name="tos"></a>Terms of use
 	</p>
 </div>
@@ -233,7 +233,7 @@
 
 <div class="content2-container bg-blue02">
 	<p class="content-title-noshade-size3">
-		<img src="resource2/ocstyle/images/misc/32x32-news.png" style="align: left; margin-right: 10px;" width="32" height="32" alt="Lizenz" />
+		<img src="resource2/ocstyle/images/misc/32x32-news.png" style="margin-right: 10px;" width="32" height="32" alt="" />
 		<a name="datalicense"></a>Data license
 	</p>
 </div>
@@ -258,7 +258,8 @@
 		The date refers to the day when the data was downloaded from www.opencaching.de, and it may be omitted for photos and log entries.
 		<br />
 		<br />
-		Due to some questions from users, we would like to point out that the Opencaching.de
+		More explanations on the data license are available in the <a href="http://wiki.opencaching.de/index.php/Data_license" target="_blank">Wiki</a>.</p>
+		<p>Due to some questions from users, we would like to point out that the Opencaching.de
 		data license is, of course, no "exclusive" license. This means that every user may
 		publish her contents &ndash; on the Opencaching.de website or somewhere else &ndash; under
 		additional licenses (<em>multiple licensing</em>). This may be noted in the geocache
@@ -268,7 +269,7 @@
 
 <div class="content2-container bg-blue02">
 	<p class="content-title-noshade-size3">
-		<img src="resource2/ocstyle/images/misc/32x32-news.png" style="align: left; margin-right: 10px;" width="32" height="32" alt="Lizenz" />
+		<img src="resource2/ocstyle/images/misc/32x32-news.png" style="margin-right: 10px;" width="32" height="32" alt="" />
 		<a name="codelicense"></a>Source code license
 	</p>
 </div>
@@ -295,7 +296,7 @@
 
 <div class="content2-container bg-blue02">
 	<p class="content-title-noshade-size3">
-		<img src="resource2/ocstyle/images/misc/32x32-news.png" style="align: left; margin-right: 10px;" width="32" height="32" alt="Lizenz" />
+		<img src="resource2/ocstyle/images/misc/32x32-news.png" style="margin-right: 10px;" width="32" height="32" alt="" />
 		Data privacy
 	</p>
 </div>

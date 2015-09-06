@@ -8,7 +8,7 @@
 {if $sucess==true}
 
 	<div class="content2-pagetitle">
-		<img src="resource2/{$opt.template.style}/images/profile/32x32-profile.png" style="align: left; margin-right: 10px;" width="32" height="32" alt="{t}Activation{/t}" />
+		<img src="resource2/{$opt.template.style}/images/profile/32x32-profile.png" style="margin-right: 10px;" width="32" height="32" alt="" />
 		{t}Activate account{/t}
 	</div>
 	<div class="content-txtbox-noshade">
@@ -24,7 +24,7 @@
 	<form action="activation.php" method="post" enctype="application/x-www-form-urlencoded" style="display: inline;">
 		<input type="hidden" name="submit" value="1" /> 
 	  <div class="content2-pagetitle">
-			<img src="resource2/{$opt.template.style}/images/profile/32x32-profile.png" style="align: left; margin-right: 10px;" width="32" height="32" alt="{t}Activation{/t}" />
+			<img src="resource2/{$opt.template.style}/images/profile/32x32-profile.png" style="margin-right: 10px;" width="32" height="32" alt="" />
 			{t}Activate account{/t}
 		</div>
 
@@ -35,7 +35,7 @@
 
 		<table class="table">
 	  	<tr>
-				<td>{t}E-Mail{/t}:</td>
+				<td>{t}E-Mail:{/t}</td>
 				<td><input type="text" name="email" maxlength="60" value="{$email|escape}" class="input200" />{if $errorEMail==true} &nbsp;<span class="errormsg">{t}E-Mail-Adress is not valid.{/t}</span>{/if}</td>
 	  	</tr>
 	  	<tr>

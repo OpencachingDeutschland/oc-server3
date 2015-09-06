@@ -10,7 +10,7 @@
 
 {if $success==true}
 	<div class="content2-pagetitle">
-		<img src="resource2/{$opt.template.style}/images/profile/22x22-email.png" style="align: left; margin-right: 10px;" width="22" height="22" alt="Report submitted" />
+		<img src="resource2/{$opt.template.style}/images/profile/22x22-email.png" style="margin-right: 10px;" width="22" height="22" alt="" />
 		{t 1=$smarty.capture.cachelink}Report for %1 submitted{/t}
 	</div>
 
@@ -34,7 +34,7 @@
 		<input type="hidden" name="cacheid" value="{$cacheid}"/>
 
 	  <div class="content2-pagetitle">
-			<img src="resource2/{$opt.template.style}/images/profile/22x22-email.png" style="align: left; margin-right: 10px;" width="22" height="22" alt="" />
+			<img src="resource2/{$opt.template.style}/images/profile/22x22-email.png" style="margin-right: 10px;" width="22" height="22" alt="" />
 			{t 1=$smarty.capture.cachelink}Report %1{/t}
 		</div>
 
@@ -51,7 +51,7 @@
 			<tr>
 				<td colspan="2">{t}Reason:{/t} 
 					<select name="reason">
-						<option value="0" {if $reason==0}selected="selected"{/if}>{t}=== Please select ==={/t}</option>
+						<option value="0" {if $reason==0}selected="selected"{/if}>{t}-- Please select --{/t}</option>
 						{foreach from=$reasons item=reasonItem}
 							<option value="{$reasonItem.id}" {if $reason==$reasonItem.id}selected="selected"{/if}>{$reasonItem.name|escape}</option>
 						{foreachelse}

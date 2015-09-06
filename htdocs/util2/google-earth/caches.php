@@ -10,6 +10,7 @@
   $opt['rootpath'] = '../../';
   header('Content-type: text/html; charset=utf-8');
   require($opt['rootpath'] . 'lib2/web.inc.php');
+  require($opt['rootpath'] . 'templates2/ocstyle/search.tpl.inc.php');
 
   $bbox = isset($_REQUEST['BBOX']) ? $_REQUEST['BBOX'] : '0,0,0,0';
   $abox = mb_split(',', $bbox);
@@ -30,10 +31,11 @@
    kml processing
   */
 
+  // see also lib2/search/search.kml.inc.php
   $kmlLine = 
 '
 <Placemark>
-  <description><![CDATA[<a href="{urlbase}viewcache.php?cacheid={cacheid}">Beschreibung ansehen</a><br>Von {username}<br>&nbsp;<br><table cellspacing="0" cellpadding="0" border="0"><tr><td>{typeimgurl} </td><td>Art: {type}<br>Gr&ouml;&szlig;e: {size}</td></tr><tr><td colspan="2">Schwierigkeit: {difficulty} von 5.0<br>Gel&auml;nde: {terrain} von 5.0</td></tr></table>]]></description>
+  <description><![CDATA['.$t_by.' {username}<br><br><a href="{urlbase}viewcache.php?cacheid={cacheid}">'.$t_showdesc.'</a><br>&nbsp;<br><table cellspacing="0" cellpadding="0" border="0"><tr><td>{typeimgurl} </td><td>'.$t_type.' {type}<br>'.$t_size.' {size}</td></tr><tr><td colspan="2">'.$t_difficulty.'<br>'.$t_terrain.'</td></tr></table>]]></description>
   <name>{name}</name>
   <LookAt>
     <longitude>{lon}</longitude>
@@ -49,79 +51,120 @@
 </Placemark>
 ';
 
+	// see also resource2/misc/google-earth/search.result.caches.kml.head.xml
   $kmlHead =
 '<?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://earth.google.com/kml/2.0">
 	<Document>
 		<Style id="tradi">
 			<IconStyle>
+				<scale>1</scale>
 				<Icon>
-					<href>{urlbase}resource2/misc/google-earth/tradi.png</href>
+					<href>{urlbase}resource2/ocstyle/images/map/caches2/cachetype-2.png</href>
 				</Icon>
 			</IconStyle>
+			<LabelStyle>
+				<scale>0.6</scale>
+			</LabelStyle>
 		</Style>
 		<Style id="multi">
 			<IconStyle>
+				<scale>1</scale>
 				<Icon>
-					<href>{urlbase}resource2/misc/google-earth/multi.png</href>
+					<href>{urlbase}resource2/ocstyle/images/map/caches2/cachetype-3.png</href>
 				</Icon>
 			</IconStyle>
-		</Style>
-		<Style id="myst">
-			<IconStyle>
-				<Icon>
-					<href>{urlbase}resource2/misc/google-earth/myst.png</href>
-				</Icon>
-			</IconStyle>
-		</Style>
-		<Style id="math">
-			<IconStyle>
-				<Icon>
-					<href>{urlbase}resource2/misc/google-earth/math.png</href>
-				</Icon>
-			</IconStyle>
-		</Style>
-		<Style id="drivein">
-			<IconStyle>
-				<Icon>
-					<href>{urlbase}resource2/misc/google-earth/drivein.png</href>
-				</Icon>
-			</IconStyle>
+			<LabelStyle>
+				<scale>0.6</scale>
+			</LabelStyle>
 		</Style>
 		<Style id="virtual">
 			<IconStyle>
+				<scale>1</scale>
 				<Icon>
-					<href>{urlbase}resource2/misc/google-earth/virtual.png</href>
+					<href>{urlbase}resource2/ocstyle/images/map/caches2/cachetype-4.png</href>
 				</Icon>
 			</IconStyle>
+			<LabelStyle>
+				<scale>0.6</scale>
+			</LabelStyle>
 		</Style>
 		<Style id="webcam">
 			<IconStyle>
+				<scale>1</scale>
 				<Icon>
-					<href>{urlbase}resource2/misc/google-earth/webcam.png</href>
+					<href>{urlbase}resource2/ocstyle/images/map/caches2/cachetype-5.png</href>
 				</Icon>
 			</IconStyle>
+			<LabelStyle>
+				<scale>0.6</scale>
+			</LabelStyle>
 		</Style>
 		<Style id="event">
 			<IconStyle>
+				<scale>1</scale>
 				<Icon>
-					<href>{urlbase}resource2/misc/google-earth/event.png</href>
+					<href>{urlbase}resource2/ocstyle/images/map/caches2/cachetype-6.png</href>
 				</Icon>
 			</IconStyle>
+			<LabelStyle>
+				<scale>0.6</scale>
+			</LabelStyle>
+		</Style>
+		<Style id="mystery">
+			<IconStyle>
+				<scale>1</scale>
+				<Icon>
+					<href>{urlbase}resource2/ocstyle/images/map/caches2/cachetype-7.png</href>
+				</Icon>
+			</IconStyle>
+			<LabelStyle>
+				<scale>0.6</scale>
+			</LabelStyle>
+		</Style>
+		<Style id="mathe">
+			<IconStyle>
+				<scale>1</scale>
+				<Icon>
+					<href>{urlbase}resource2/ocstyle/images/map/caches2/cachetype-8.png</href>
+				</Icon>
+			</IconStyle>
+			<LabelStyle>
+				<scale>0.6</scale>
+			</LabelStyle>
+		</Style>
+		<Style id="drivein">
+			<IconStyle>
+				<scale>1</scale>
+				<Icon>
+					<href>{urlbase}resource2/ocstyle/images/map/caches2/cachetype-10.png</href>
+				</Icon>
+			</IconStyle>
+			<LabelStyle>
+				<scale>0.6</scale>
+			</LabelStyle>
 		</Style>
 		<Style id="moving">
 			<IconStyle>
-				<Icon>
-					<href>{urlbase}resource2/misc/google-earth/moving.png</href>
+				<scale>1</scale>
+				q<Icon>
+					<href>{urlbase}resource2/ocstyle/images/map/caches2/cachetype-9.png</href>
 				</Icon>
 			</IconStyle>
+			<LabelStyle>
+				<scale>0.6</scale>
+			</LabelStyle>
 		</Style>
 		<Style id="unknown">
 			<IconStyle>
+				<scale>1</scale>
 				<Icon>
-					<href>{urlbase}resource2/misc/google-earth/unknown.png</href>
+					<href>{urlbase}resource2/ocstyle/images/map/caches2/cachetype-1.png</href>
 				</Icon>
 			</IconStyle>
+			<LabelStyle>
+				<scale>0.6</scale>
+			</LabelStyle>
 		</Style>
 		<Folder>
 			<name>Geocaches (Opencaching)</name>
@@ -146,17 +189,34 @@
 	}
 	else
 	{
-		$rs = sql("SELECT `caches`.`cache_id` AS `cacheid`, `caches`.`longitude` AS `longitude`, `caches`.`latitude` AS `latitude`, `caches`.`type` AS `type`, `caches`.`date_hidden` AS `date_hidden`, `caches`.`name` AS `name`, `cache_type`.`de` AS `typedesc`, `cache_size`.`de` AS `sizedesc`, `caches`.`terrain` AS `terrain`, `caches`.`difficulty` AS `difficulty`, `user`.`username` AS `username`
+		$rs = sql("SELECT `caches`.`cache_id` AS `cacheid`,
+		                  `caches`.`longitude` AS `longitude`,
+		                  `caches`.`latitude` AS `latitude`,
+		                  `caches`.`type` AS `type`,
+		                  `caches`.`status`,
+		                  `caches`.`date_hidden` AS `date_hidden`,
+		                  `caches`.`name` AS `name`,
+		                  IFNULL(`stt_type`.`text`, `cache_type`.`en`) `typedesc`,
+		                  `cache_type`.`kml_name`,
+		                  `cache_type`.`icon_large`,
+		                  IFNULL(`stt_size`.`text`, `cache_size`.`en`) `sizedesc`,
+		                  `caches`.`terrain` AS `terrain`,
+		                  `caches`.`difficulty` AS `difficulty`,
+		                  `user`.`username` AS `username`
 		             FROM `caches`
 		       INNER JOIN `cache_type` ON `caches`.`type`=`cache_type`.`id`
 		       INNER JOIN `cache_size` ON `caches`.`size`=`cache_size`.`id`
 		       INNER JOIN `user` ON `caches`.`user_id`=`user`.`user_id`
+		        LEFT JOIN `sys_trans_text` `stt_type` ON `stt_type`.`trans_id`=`cache_type`.`trans_id`
+		        LEFT JOIN `sys_trans_text` `stt_size` ON `stt_size`.`trans_id`=`cache_size`.`trans_id`
 		            WHERE `caches`.`status`=1 AND
 		                  `caches`.`longitude`>='&1' AND 
 											`caches`.`longitude`<='&2' AND 
 											`caches`.`latitude`>='&3' AND 
-											`caches`.`latitude`<='&4'",
-											$lon_from, $lon_to, $lat_from, $lat_to);
+											`caches`.`latitude`<='&4' AND
+											`stt_type`.`lang`='&5' and `stt_size`.`lang`='&5'",
+											$lon_from, $lon_to, $lat_from, $lat_to,
+											$opt['template']['locale']);
 
 		$nCount = 0;
 		while ($r = sql_fetch_array($rs))
@@ -164,51 +224,9 @@
 			$nCount = $nCount + 1;
 			$thisline = $kmlLine;
 			
-			// icon suchen
-			switch ($r['type'])
-			{
-				case 2:
-					$icon = 'tradi';
-					$typeimgurl = '<img src="{urlbase}lang/de/ocstyle/images/cache/traditional.gif" alt="Normaler Cache" title="Normaler Cache" />';
-					break;
-				case 3:
-					$icon = 'multi';
-					$typeimgurl = '<img src="{urlbase}lang/de/ocstyle/images/cache/multi.gif" alt="Multicache" title="Multicache" />';
-					break;
-				case 4:
-					$icon = 'virtual';
-					$typeimgurl = '<img src="{urlbase}lang/de/ocstyle/images/cache/virtual.gif" alt="virtueller Cache" title="virtueller Cache" />';
-					break;
-				case 5:
-					$icon = 'webcam';
-					$typeimgurl = '<img src="{urlbase}lang/de/ocstyle/images/cache/webcam.gif" alt="Webcam Cache" title="Webcam Cache" />';
-					break;
-				case 6:
-					$icon = 'event';
-					$typeimgurl = '<img src="{urlbase}lang/de/ocstyle/images/cache/event.gif" alt="Event Cache" title="Event Cache" />';
-					break;
-				case 7:
-					$icon = 'myst';
-					$typeimgurl = '<img src="{urlbase}lang/de/ocstyle/images/cache/mystery.gif" alt="Event Cache" title="Event Cache" />';
-					break;
-				case 8:
-					$icon = 'math';
-					$typeimgurl = '<img src="{urlbase}lang/de/ocstyle/images/cache/mathe.gif" alt="Event Cache" title="Event Cache" />';
-					break;
-				case 9:
-					$icon = 'moving';
-					$typeimgurl = '<img src="{urlbase}lang/de/ocstyle/images/cache/moving.gif" alt="Event Cache" title="Event Cache" />';
-					break;
-				case 10:
-					$icon = 'drivein';
-					$typeimgurl = '<img src="{urlbase}lang/de/ocstyle/images/cache/drivein.gif" alt="Event Cache" title="Event Cache" />';
-					break;
-				default:
-					$icon = 'unknown';
-					$typeimgurl = '<img src="{urlbase}lang/de/ocstyle/images/cache/unknown.gif" alt="unbekannter Cachetyp" title="unbekannter Cachetyp" />';
-					break;
-			}
-			$thisline = mb_ereg_replace('{icon}', $icon, $thisline);
+			$typeimgurl = '<img src="'.$opt['page']['absolute_url'].'resource2/'.$opt['template']['style'].'/images/cacheicon/'.$r['icon_large'].'" alt="'.$r['typedesc'].'" title="'.$r['typedesc'].'" />';
+
+			$thisline = mb_ereg_replace('{icon}', $r['kml_name'], $thisline);
 			$thisline = mb_ereg_replace('{typeimgurl}', $typeimgurl, $thisline);
 			
 			$lat = sprintf('%01.5f', $r['latitude']);
@@ -221,16 +239,6 @@
 			$thisline = mb_ereg_replace('{time}', $time, $thisline);
 
 			$thisline = mb_ereg_replace('{name}', xmlentities($r['name']), $thisline);
-			
-			if (($r['status'] == 2) || ($r['status'] == 3))
-			{
-				if ($r['status'] == 2)
-					$thisline = mb_ereg_replace('{archivedflag}', 'Momentan nicht verf&uuml;gbar', $thisline);
-				else
-					$thisline = mb_ereg_replace('{archivedflag}', 'Archiviert!, ', $thisline);
-			}
-			else
-				$thisline = mb_ereg_replace('{archivedflag}', '', $thisline);
 			
 			$thisline = mb_ereg_replace('{type}', xmlentities($r['typedesc']), $thisline);
 			$thisline = mb_ereg_replace('{size}', xmlentities($r['sizedesc']), $thisline);

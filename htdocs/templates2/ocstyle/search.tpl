@@ -195,6 +195,7 @@ function sync_options(element)
 		document.forms[formnames[i]].f_otherPlatforms.value = document.optionsform.f_otherPlatforms.checked ? 1 : 0;
 		document.forms[formnames[i]].f_geokrets.value = document.optionsform.f_geokrets.checked ? 1 : 0;
 		document.forms[formnames[i]].country.value = document.optionsform.country.value;
+		document.forms[formnames[i]].language.value = document.optionsform.language.value;
 		document.forms[formnames[i]].difficultymin.value = document.optionsform.difficultymin.value;
 		document.forms[formnames[i]].difficultymax.value = document.optionsform.difficultymax.value;
 		document.forms[formnames[i]].terrainmin.value = document.optionsform.terrainmin.value;
@@ -307,7 +308,7 @@ function switchAttributeCat2()
 </script>
 {/literal}
 
-<div class="content2-pagetitle"><img src="resource2/ocstyle/images/misc/32x32-search.png" style="align: left; margin-right: 10px;" width="32" height="32" alt="{t}Search for caches{/t}" />{t}Search for caches{/t}</div>
+<div class="content2-pagetitle"><img src="resource2/ocstyle/images/misc/32x32-search.png" style="margin-right: 10px;" width="32" height="32" alt="" />{t}Search for caches{/t}</div>
 
 <form name="optionsform" style="display:inline;">
 
@@ -398,10 +399,18 @@ function switchAttributeCat2()
 		<tr>
 			<td class="formlabel">{t}Country:{/t}&nbsp;&nbsp;</td>
 			<td>
-				<select name="country" class="input200" onchange="sync_options(this)">
+				<select name="country" onchange="sync_options(this)">
 					<option value="" selected="selected">{t}All countries{/t}</option>
 					{foreach from=$countryoptions item=countryoption}
 						<option value="{$countryoption.short|escape}" {if $countryoption.selected}selected="selected"{/if}>{$countryoption.name|escape}</option> 
+					{/foreach}
+				</select>
+				&nbsp; &nbsp; &nbsp; &nbsp;
+				<span class="formlabel">{t}Language:{/t}&nbsp;&nbsp;</span>
+				<select name="language" onchange="sync_options(this)">
+					<option value="" selected="selected">{t}All languages{/t}</option>
+					{foreach from=$languageoptions item=languageoption}
+						<option value="{$languageoption.short|escape}" {if $languageoption.selected}selected="selected"{/if}>{$languageoption.name|escape}</option> 
 					{/foreach}
 				</select>
 			</td>
@@ -492,6 +501,7 @@ function switchAttributeCat2()
 		<input type="hidden" name="f_otherPlatforms" value="{$hidopt_otherPlatforms}" />
 		<input type="hidden" name="f_geokrets" value="{$hidopt_geokrets}" />
 		<input type="hidden" name="country" value="{$country}" />
+		<input type="hidden" name="language" value="{$language}" />
 		<input type="hidden" name="difficultymin" value="{$difficultymin}" />
 		<input type="hidden" name="difficultymax" value="{$difficultymax}" />
 		<input type="hidden" name="terrainmin" value="{$terrainmin}" />
@@ -526,6 +536,7 @@ function switchAttributeCat2()
 		<input type="hidden" name="f_otherPlatforms" value="{$hidopt_otherPlatforms}" />
 		<input type="hidden" name="f_geokrets" value="{$hidopt_geokrets}" />
 		<input type="hidden" name="country" value="{$country}" />
+		<input type="hidden" name="language" value="{$language}" />
 		<input type="hidden" name="cachetype" value="{$cachetype}" />
 		<input type="hidden" name="cachesize" value="{$cachesize}" />
 		<input type="hidden" name="difficultymin" value="{$difficultymin}" />
@@ -562,6 +573,7 @@ function switchAttributeCat2()
 		<input type="hidden" name="f_otherPlatforms" value="{$hidopt_otherPlatforms}" />
 		<input type="hidden" name="f_geokrets" value="{$hidopt_geokrets}" />
 		<input type="hidden" name="country" value="{$country}" />
+		<input type="hidden" name="language" value="{$language}" />
 		<input type="hidden" name="cachetype" value="{$cachetype}" />
 		<input type="hidden" name="cachesize" value="{$cachesize}" />
 		<input type="hidden" name="difficultymin" value="{$difficultymin}" />
@@ -622,6 +634,7 @@ function switchAttributeCat2()
 		<input type="hidden" name="f_otherPlatforms" value="{$hidopt_otherPlatforms}" />
 		<input type="hidden" name="f_geokrets" value="{$hidopt_geokrets}" />
 		<input type="hidden" name="country" value="{$country}" />
+		<input type="hidden" name="language" value="{$language}" />
 		<input type="hidden" name="cachetype" value="{$cachetype}" />
 		<input type="hidden" name="cachesize" value="{$cachesize}" />
 		<input type="hidden" name="difficultymin" value="{$difficultymin}" />
@@ -632,7 +645,7 @@ function switchAttributeCat2()
 		<input type="hidden" name="cache_attribs_not" value="{$hidopt_attribs_not}" />
 
 		<tr>
-			<td class="formlabel">{t}Cachename{/t}:</td>
+			<td class="formlabel">{t}Cachename{/t}{t}#colonspace#{/t}:</td>
 			<td><input type="text" name="cachename" value="{$cachename}" class="input200" /></td>
 			<td><input type="submit" name="submit_cachename" value="{t}Search{/t}" class="formbutton" onclick="submitbutton('submit_cachename')" /></td>
 		</tr>
@@ -657,6 +670,7 @@ function switchAttributeCat2()
 		<input type="hidden" name="f_otherPlatforms" value="{$hidopt_otherPlatforms}" />
 		<input type="hidden" name="f_geokrets" value="{$hidopt_geokrets}" />
 		<input type="hidden" name="country" value="{$country}" />
+		<input type="hidden" name="language" value="{$language}" />
 		<input type="hidden" name="difficultymin" value="{$difficultymin}" />
 		<input type="hidden" name="difficultymax" value="{$difficultymax}" />
 		<input type="hidden" name="terrainmin" value="{$terrainmin}" />
@@ -667,12 +681,12 @@ function switchAttributeCat2()
 		<input type="hidden" name="cache_attribs_not" value="{$hidopt_attribs_not}" />
 
 		<tr>
-			<td class="formlabel">Text:</td>
+			<td class="formlabel">{t}Text{/t}{t}#colonspace#{/t}:</td>
 			<td><input type="text" name="fulltext" value="{$fulltext}" class="input200" /></td>
 			<td><input type="submit" name="submit_ft" value="{t}Search{/t}" class="formbutton" onclick="submitbutton('submit_ft')" /></td>
 		</tr>
 		<tr>
-			<td>... {t}in{/t}:</td>
+			<td>... {t}in{/t}{t}#colonspace#{/t}:</td>
 			<td colspan="4">
 				<input type="checkbox" name="ft_desc" id="ft_desc" class="checkbox" value="1" {if $ft_desc_checked}checked="checked"{/if} /> <label for="ft_desc">{t}Description{/t}</label> &nbsp;
 				<input type="checkbox" name="ft_name" id="ft_name" class="checkbox" value="1" {if $ft_name_checked}checked="checked"{/if} /> <label for="ft_name">{t}Cachename{/t}</label> &nbsp;
@@ -702,6 +716,7 @@ function switchAttributeCat2()
 		<input type="hidden" name="f_otherPlatforms" value="{$hidopt_otherPlatforms}" />
 		<input type="hidden" name="f_geokrets" value="{$hidopt_geokrets}" />
 		<input type="hidden" name="country" value="{$country}" />
+		<input type="hidden" name="language" value="{$language}" />
 		<input type="hidden" name="difficultymin" value="{$difficultymin}" />
 		<input type="hidden" name="difficultymax" value="{$difficultymax}" />
 		<input type="hidden" name="terrainmin" value="{$terrainmin}" />
@@ -737,6 +752,7 @@ function switchAttributeCat2()
 		<input type="hidden" name="f_otherPlatforms" value="{$hidopt_otherPlatforms}" />
 		<input type="hidden" name="f_geokrets" value="{$hidopt_geokrets}" />
 		<input type="hidden" name="country" value="{$country}" />
+		<input type="hidden" name="language" value="{$language}" />
 		<input type="hidden" name="difficultymin" value="{$difficultymin}" />
 		<input type="hidden" name="difficultymax" value="{$difficultymax}" />
 		<input type="hidden" name="terrainmin" value="{$terrainmin}" />
@@ -747,7 +763,7 @@ function switchAttributeCat2()
 		<input type="hidden" name="cache_attribs_not" value="{$hidopt_attribs_not}" />
 
 		<tr>
-			<td class="formlabel">{t}Log entries{/t}:</td>
+			<td class="formlabel">{t}Log entries:{/t}</td>
 			<td colspan="2">
 				<select name="logtype">
 					{foreach from=$logtype_options item=logtype_option}
@@ -783,6 +799,7 @@ function switchAttributeCat2()
 		<input type="hidden" name="f_otherPlatforms" value="{$hidopt_otherPlatforms}" />
 		<input type="hidden" name="f_geokrets" value="{$hidopt_geokrets}" />
 		<input type="hidden" name="country" value="{$country}" />
+		<input type="hidden" name="language" value="{$language}" />
 		<input type="hidden" name="difficultymin" value="{$difficultymin}" />
 		<input type="hidden" name="difficultymax" value="{$difficultymax}" />
 		<input type="hidden" name="terrainmin" value="{$terrainmin}" />

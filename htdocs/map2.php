@@ -5,6 +5,8 @@
  *  Unicode Reminder メモ
  ***************************************************************************/
 
+	$build_map_towns_menu = true;
+
 	require('./lib2/web.inc.php');
 	require_once('./lib2/logic/cache.class.php');
 	require_once('./lib2/logic/user.class.php');
@@ -112,7 +114,7 @@
 	else
 		$tpl->error($translate->t('There is no google maps key registered for this domain.', '', '', 0));
 
-  $tpl->add_header_javascript('http://maps.googleapis.com/maps/api/js?sensor=false&key=' . urlencode($sGMKey));
+  $tpl->add_header_javascript('http://maps.googleapis.com/maps/api/js?sensor=false&key=' . urlencode($sGMKey) . '&language=' . strtolower($opt['template']['locale']));
   	// https is supported by google, but may make problems in some environments,
   	// e.g. does not work with MSIE 7 on WinXP
 	$tpl->add_header_javascript('resource2/misc/map/dragzoom_packed.js');
@@ -278,7 +280,7 @@ function output_cachexml($sWaypoint)
 	                             `caches`.`longitude`, `caches`.`latitude`, 
 	                             `caches`.`status`>1 AS `inactive`,
 	                             IFNULL(`trans_status_text`.`text`, `cache_status`.`name`) AS `statustext`,
-	                             IFNULL(`trans_type_text`.`text`, `cache_type`.`name`) AS `type_text`, `cache_type`.`id` AS `type_id`, 
+	                             IFNULL(`trans_type_text`.`text`, `cache_type`.`en`) AS `type_text`, `cache_type`.`id` AS `type_id`, 
 	                             IFNULL(`trans_size_text`.`text`, `cache_size`.`name`) AS `size`, 
 	                             `caches`.`difficulty`, `caches`.`terrain`, 
 	                             `caches`.`date_created`, `caches`.`is_publishdate`,

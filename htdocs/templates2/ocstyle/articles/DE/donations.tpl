@@ -4,7 +4,7 @@
 *  Unicode Reminder メモ
 ***************************************************************************}
 	<div class="content2-pagetitle">
-		<img src="resource2/{$opt.template.style}/images/misc/32x32-checked.png" style="align: left; margin-right: 10px;" width="32" height="32" alt="" />So kannst Du uns unterst&uuml;tzen
+		<img src="resource2/{$opt.template.style}/images/misc/32x32-checked.png" style="margin-right: 10px;" width="32" height="32" alt="" />So kannst Du uns unterst&uuml;tzen
 	</div>
 	<div class="content-txtbox-noshade" style="padding-right: 25px;">
 
@@ -31,7 +31,7 @@
 					<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
 						<input type="hidden" name="cmd" value="_s-xclick" />
 						<input type="hidden" name="hosted_button_id" value="EP7T62APWTCU6" />
-						<input type="image" src="https://www.paypalobjects.com/de_DE/DE/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="Jetzt einfach, schnell und sicher online bezahlen – mit PayPal." />
+						<input type="image" src="https://www.paypalobjects.com/de_DE/DE/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="Mit PayPal bezahlen" />
 
 							<img alt="" border="0" src="https://www.paypalobjects.com/de_DE/i/scr/pixel.gif" width="1" height="1" />
 
@@ -47,7 +47,7 @@
 			<br />
 			<div class="content2-container bg-blue02">
 			<p class="content-title-noshade-size3">
-			<img src="resource2/{$opt.template.style}/images/misc/32x32-news.png" style="align: left; margin-right: 10px;" width="32" height="32" alt="Bekanntmachung" />
+			<img src="resource2/{$opt.template.style}/images/misc/32x32-news.png" style="margin-right: 10px;" width="32" height="32" alt="" />
 			Bekanntmachung vom 09.06.2012 (aktualisiert am 09.02.2013)
 			</p>
 			</div>

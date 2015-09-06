@@ -14,12 +14,23 @@
 	<p style="margin-top:0.5em; padding-left:10px; padding-right:8px">
 		<img src="resource2/ocstyle/images/misc/16x16-list.png" />
 		<a class="systemlink" href="cachelists.php">{t}Cache list{/t}</a> <b>{$cachelist.name|escape}</b>
+		{if $cachelist.bookmarked}<a href="mylists.php#bookmarks"><img src="resource2/{$opt.template.style}/images/viewcache/cache-rate.png" title="{t}I have bookmarked this list.{/t}" /></a>{/if}
 		{if $cachelist.watched_by_me}<img src="resource2/{$opt.template.style}/images/viewcache/16x16-watch.png" title="{t}I am watching this list.{/t}" />{/if}
-		{if $cachelist.visibility>0}{t}by{/t} <a href="viewprofile.php?userid={$cachelist.user_id}">{$cachelist.username|escape}</a>{else}({t}private{/t}){/if}
+		{if $cachelist.user_id != $login.userid}{t}by{/t} <a href="viewprofile.php?userid={$cachelist.user_id}">{$cachelist.username|escape}</a>{elseif $cachelist.visibility<=1}({if $cachelist.password}<a class="jslink" onclick="cl = getElementById('sharelist_{$cachelist.id}'); cl.style.display = (cl.style.display=='none'?'block':'none'); getElementById('permalink_text_{$cachelist.id}').select();" {if $cachelist.user_id==$login.userid}title="{t}List has password; click here to share it{/t}"{/if} >{t}private{/t} <img src="resource2/{$opt.template.style}/images/action/18x16-offer.png" /></a>{else}{t}private{/t}{/if}){/if}
+		{if $cachelist.visibility>=2}(<a class="jslink" onclick="cl = getElementById('sharelist_{$cachelist.id}'); cl.style.display = (cl.style.display=='none'?'block':'none'); getElementById('permalink_text_{$cachelist.id}').select();" title="{t}click here to share the cachelist{/t}" >{t}share public list{/t} <img src="resource2/{$opt.template.style}/images/viewcache/link.png" /></a>){/if}
 		&nbsp;
 		{if $cachelist.user_id==$login.userid}[<a class="systemlink" href="mylists.php?edit={$cachelist.id}&fromsearch=1">{t}edit{/t}</a>]{/if}
 		{if $login.userid}[<a class="systemlink" href="cachelist.php?id={$cachelist.id}&{if $cachelist.watched_by_me}dont{/if}watch">{if $cachelist.watched_by_me}{t}don't watch{/t}{else}{t}watch{/t}{/if}</a>]{/if}
+		{if $login.userid && !$cachelist.bookmarked && $cachelist.user_id!=$login.userid}[<a class="systemlink" href="cachelist.php?id={$cachelist.id}&key={$cachelist_pw|urlencode}&bookmark">{t}bookmark{/t}</a>]{/if}
+		{if $login.userid && $cachelist.bookmarked && $cachelist.user_id!=$login.userid}[<a class="systemlink" href="javascript:if(confirm('{t 1=$cachelist.name|escapejs}Do you really want to unbookmark the list \'%1\'?{/t}'))location.href='cachelist.php?id={$cachelist.id}&unbookmark'">{t}unbookmark{/t}</a>]{/if}
 	</p>
+		<div id="sharelist_{$cachelist.id}" class="cachelist-popup mapboxframe mapboxshadow" style="display:none" >
+			<table>
+				<tr><td><img src="resource2/ocstyle/images/viewcache/link.png" alt="" height="16" width="16" /> {t}Link to share this cache list:{/t}</td><td align="right"><a class="jslink" onclick="getElementById('sharelist_{$cachelist.id}').style.display='none'"><img src="resource2/ocstyle/images/navigation/19x19-close.png" style="opacity:0.7" /></a></td></tr>
+				<tr><td><input id="permalink_text_{$cachelist.id}" type="text" value="{$opt.page.absolute_url}cachelist.php?id={$cachelist.id}{if $cachelist.password}&key={$cachelist.password|urlencode}{/if}" size="65" /></td></tr>
+			</table>
+		</div>
+
 	{if $cachelist.description != ''}
 	<div style="padding: 0 8px 4px 10px">
 		{$cachelist.description}
@@ -63,7 +74,7 @@
 				<table width="98.5%">
 					<tr>
 						<td rowspan="1" style="width:300px; padding:0; margin:0">{include file="res_pager.tpl" smallnumbers=true}</td>
-						<td style="text-align:right; padding:0; margin:0">{t}Download{/t}:&nbsp;</td>
+						<td style="text-align:right; padding:0; margin:0">{t}Download{/t}{t}#colonspace#{/t}:&nbsp;</td>
 						<td><nobr>
 							<select class="exportlist" onChange="location.href=this.options[this.selectedIndex].value">
 								<option value="#">{t}Results on this page{/t}</option>
@@ -127,7 +138,7 @@
 	{if $caches|@count}
 	<table width="100%">
 		<tr>
-			<td style="text-align:right; width:50%">{t}Download{/t}:&nbsp;&nbsp;</td>
+			<td style="text-align:right; width:50%">{t}Download{/t}{t}#colonspace#{/t}:&nbsp;&nbsp;</td>
 			<td align="right" style="padding-right:20px; white-space:nowrap">
 				<b>{t}Results on this page:{/t}</b>
 				<a href="search.php?queryid={$queryid}&output=gpx&startat={$startat}" title="{t}GPS Exchange Format .gpx{/t}">GPX</a>
@@ -137,7 +148,7 @@
 				<a href="search.php?queryid={$queryid}&output=ovl&startat={$startat}" title="{t}TOP50-Overlay .ovl{/t}">OVL</a>
 				<a href="search.php?queryid={$queryid}&output=txt&startat={$startat}" title="{t}Textfile .txt{/t}">TXT</a>
 				<br />
-				<b>{t 1=$startatp1 2=$endat}Result %1 to %2 (as zip){/t}:</b>
+				<b>{t 1=$startatp1 2=$endat}Result %1 to %2 (as zip){/t}{t}#colonspace#{/t}:</b>
 				<a href="search.php?queryid={$queryid}&output=gpx&startat={$startat}&count=max&zip=1" title="{t}GPS Exchange Format .gpx{/t}">GPX</a>
 				<a href="search.php?queryid={$queryid}&output=loc&startat={$startat}&count=max&zip=1" title="{t}Waypointfile .loc{/t}">LOC</a>
 				<a href="search.php?queryid={$queryid}&output=kml&startat={$startat}&count=max&zip=1" title="{t}Google Earth .kml{/t}">KML</a>

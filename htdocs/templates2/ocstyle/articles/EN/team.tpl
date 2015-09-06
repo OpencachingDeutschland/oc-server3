@@ -4,7 +4,7 @@
 *  Unicode Reminder メモ
 ***************************************************************************}
 	<div class="content2-pagetitle">
-		<img src="resource2/{$opt.template.style}/images/misc/32x32-world.png" style="align: left; margin-right: 10px;" width="32" height="32" alt="" />The Opencaching.de team
+		<img src="resource2/{$opt.template.style}/images/misc/32x32-world.png" style="margin-right: 10px;" width="32" height="32" alt="" />The Opencaching.de team
 	</div>
 	<div class="content-txtbox-noshade" style="padding-right: 25px;">
 
@@ -19,7 +19,7 @@
     <tr><td></td><td></td><td></td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/4_vs.jpg" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=162754">4_Vs</a><br />chairman</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/clanfamily.jpg" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=244244">ClanFamily</a><br />vice chairman; system administration</td></tr>
-    <tr><td><img src="http://www.opencaching.de/images/team/dummy.jpg" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=266420">Cyberturm</a><br />treasurer</td></tr>
+    <tr><td><img src="http://www.opencaching.de/images/team/cyberturm.png" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=266420">Cyberturm</a><br />treasurer</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/mic@.jpg" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=103599">mic@</a><br />press spokesman; user support, data maintenance, message board moderation</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/dummy.jpg" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=137473">bohrsty</a><br />head of system administration</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/mambofive.png" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=298124">mambofive</a><br />development commissioner</td></tr>

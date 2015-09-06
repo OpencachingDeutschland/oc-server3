@@ -5,7 +5,7 @@
  ***************************************************************************}
 {* OCSTYLE *}
 <div class="content2-pagetitle">
-	<img src="resource2/{$opt.template.style}/images/profile/32x32-profile.png" border="0" width="32" height="32" style="align: left; margin-right: 10px;" alt="" />
+	<img src="resource2/{$opt.template.style}/images/profile/32x32-profile.png" border="0" width="32" height="32" style="margin-right: 10px;" alt="" />
 	{t}Choose logo{/t}
 </div>
 

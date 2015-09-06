@@ -50,6 +50,7 @@ function test_encoding($path)
 		'lib2/HTMLPurifier',
 		'lib2/html2text.class.php',
 		'lib2/imagebmp.inc.php',
+		'lib2/Net/IDNA2',
 		'lib2/smarty',
 	);
 
@@ -58,14 +59,20 @@ function test_encoding($path)
 	if ($ur)
 	{
 		if (mb_trim(mb_substr($contents, $ur+17,2)) != "メモ")
-			echo "Bad Unicode Reminder found in $path: ".mb_trim(mb_substr($contents, $ur+17,2))."\n";
+		{
+			$ur = mb_stripos($contents, "Unicode Reminder");
+			if (mb_trim(mb_substr($contents, $ur+17,2)) != "メモ")
+				echo "Bad Unicode Reminder found in $path: ".mb_trim(mb_substr($contents, $ur+17,2))."\n";
+			else
+				echo "Unexpected non-ASCII chars (BOMs?) in header of $path\n";
+		}
 	}
 	else
 	{
 		$ok = false;
 		foreach ($ur_exclude as $exclude)
 		{
-			if (strpos($path,$exclude) === 0)
+			if (mb_strpos($path,$exclude) === 0)
 				$ok = true;
 		}
 		if (!$ok)

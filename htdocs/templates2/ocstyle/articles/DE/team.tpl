@@ -4,7 +4,7 @@
 *  Unicode Reminder メモ
 ***************************************************************************}
 	<div class="content2-pagetitle">
-		<img src="resource2/{$opt.template.style}/images/misc/32x32-globi.png" style="align: left; margin-right: 10px;" width="32" height="32" alt="" />Unser Team
+		<img src="resource2/{$opt.template.style}/images/misc/32x32-globi.png" style="margin-right: 10px;" width="32" height="32" alt="" />Unser Team
 	</div>
 	<div class="content-txtbox-noshade" style="padding-right: 25px;">
 
@@ -24,7 +24,7 @@
     <tr><td></td><td></td><td></td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/4_vs.jpg" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=162754">4_Vs</a><br />Vorsitzender</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/clanfamily.jpg" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=244244">ClanFamily</a><br />stellvertetender Vorsitzender; Systemadministration</td></tr>
-    <tr><td><img src="http://www.opencaching.de/images/team/dummy.jpg" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=266420">Cyberturm</a><br />Kassenwart</td></tr>
+    <tr><td><img src="http://www.opencaching.de/images/team/cyberturm.png" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=266420">Cyberturm</a><br />Kassenwart</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/mic@.jpg" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=103599">mic@</a><br />Pressesprecher; Anwendersupport, Datenpflege, Forenmoderation</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/dummy.jpg" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=137473">bohrsty</a><br />Leiter Technik/Systemadministration</td></tr>
     <tr><td><img src="http://www.opencaching.de/images/team/mambofive.png" /></td><td><a href="http://www.opencaching.de/viewprofile.php?userid=298124">mambofive</a><br />Entwicklungsbeauftragter</td></tr>

@@ -1,0 +1,33 @@
+﻿
+The following included libraries (cmp. license.txt) have been customized.
+Take care that these customizations stay intact when upgrading libaries.
+
+This list may be incomplete.
+
+
+Smarty
+- Plugins in lib2/smarty/ocplugins
+- wrapper class in lib2/OcSmarty.class.php
+
+HTML Purifier
+- wrapper class in lib2/OcHTMLPurifier.class.php
+
+Net_IDNA2
+- include path adjustments in lib2/Net/...
+
+Automatic Image Rotator
+- see Git log of resource2/ocstyle/images/head/rotator.php
+
+OKAPI
+- local settings in okapi_settings.php
+
+EnlargeIt!
+- see Git log of resource2/ocstyle/js/enlargeit/enlargeit_source.js
+
+TinyMCE*
+- configuration files in resource2/tinymce/config
+- window width adjustments in resource2/tinymce/themes/advanced/langs/de,en,es,fr,it.js
+    (see Git logs)
+
+* After changing TinyMCE source files, you may need to delete the *.gz cache file(s)
+  in the TinyMCE directory. A new cache file will be generated.

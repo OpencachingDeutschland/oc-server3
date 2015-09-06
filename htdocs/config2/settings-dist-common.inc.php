@@ -12,7 +12,6 @@
 	$opt['page']['title'] = 'OPENCACHING';
 	$opt['page']['subtitle1'] = 'Geocaching with Opencaching';
 	$opt['page']['subtitle2'] = '';
-	$opt['page']['headoverlay'] = 'oc_head_alpha3_generic';
 
 	// directory of rotator pictures and script, relative to head images dir
 	$opt['page']['headimagepath'] = '';
@@ -32,38 +31,27 @@
 	// block troublemakers
 	$opt['page']['banned_user_agents'] = array();
 
-	/* Main locale and style: The country and language with most content on this site.
-	 *
+	/*
+	 * Main locale and style: The country and language with most content on this site.
 	 */
 	$opt['page']['main_country'] = 'DE';
 	$opt['page']['main_locale'] = 'DE';
 
-	/* Default locale and style
-	 *
+	/* Domain-dependend default settings;
+	 * can all be overwritten by corresponding $opt['domain'][<domain>['...'] settings.
+	 * Additionally, the cookie domain (different vor lib1 and lib2) can be overwritten.
+	 * See examples for overriding in settings-sample.inc.php.
 	 */
-	$opt['template']['default']['locale'] = 'DE';      // may be overwritten by $opt['domain'][...]['locale']
-	$opt['template']['default']['article_locale'] = 'EN';    // may be overwritten by $opt['domain'][...]['article_locale']
-	$opt['template']['default']['style'] = 'ocstyle';  // may be overwritten by $opt['domain'][...]['style']
-	$opt['template']['default']['country'] = 'DE';     // may be overwritten by $opt['domain'][...]['country']
-
-	/* Well known node id's - required for synchronization
-	 *  1 Opencaching Deutschland (www.opencaching.de)
-	 *  2 Opencaching Polen (www.opencaching.pl)
-	 *  3 Opencaching Tschechien (www.opencaching.cz)
-	 *  4 Local Development
-	 *  5 Opencaching Entwicklung Deutschland (devel.opencaching.de)
-	 *  6 Opencaching Schweden (www.opencaching.se)
-	 *  7 Opencaching Großbritannien (www.opencacing.org.uk)
-	 *  8 Opencaching Norwegen (www.opencaching.no)
-	 *  9 Opencaching Lettland (?)
-	 * 10 Opencaching USA (www.opencaching.us)
-	 * 11 Opencaching Japan (eingestellt)
-	 * 12 Opencaching Russland  (?)
-	 * 13 Garmin (www.opencaching.com)
-	 * 14 Opencaching Niederlande (www.opencaching.nl)
-	 * 16 Opencaching Rumänien (www.opencaching.ro)
-	 */
-	$opt['logic']['node']['id'] = 4;
+	$opt['page']['meta']['keywords'] = 'Geocaching, Geocache, Cache, Schatzsuche, GPS, kostenlos, GPX, Koordinaten, Hobby, Natur';  // 5-10 keywords are recommended
+	// see http://forum.opencaching-network.org/index.php?topic=3065.0
+	// and http://forum.opencaching-network.org/index.php?topic=3065.0 regarding description
+	$opt['page']['meta']['description'] = 'Opencaching.de ist das freie Portal für Geocaching, ein Schatzsuche-Spiel. Mittels GPS-Koordinaten sind Behälter oder Objekte zu finden.';
+	$opt['page']['headoverlay'] = 'oc_head_alpha3_generic';
+	$opt['template']['default']['locale'] = 'DE';
+	$opt['template']['default']['article_locale'] = 'EN';
+	$opt['template']['default']['fallback_locale'] = 'EN';
+	$opt['template']['default']['style'] = 'ocstyle';
+	$opt['template']['default']['country'] = 'DE';
 
 	/* pregenerated waypoint list for new caches
 	 * - Waypoint prefix (OC, OP, OZ ... AA=local development)
@@ -90,7 +78,13 @@
 	$opt['logic']['admin']['enable_listing_admins'] = false;
 	$opt['logic']['admin']['listingadmin_notification'] = '';  // Email address(es), comma separated
 
-	/* CMS links for external pages
+	/*
+	 * html purifier
+	 */
+	$opt['html_purifier']['cache_path'] = dirname(__FILE__).'/../cache2/html_purifier/';
+
+	/*
+	 * CMS links for external pages
 	 */
 
 	// explanation of common login errors

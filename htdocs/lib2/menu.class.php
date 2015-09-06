@@ -21,14 +21,60 @@ class Menu
 
 	function Menu()
 	{
-		global $opt;
+		global $opt, $login, $build_map_towns_menu;
 
 		$this->sMenuFilename = $opt['rootpath'] . 'cache2/menu-' . $opt['template']['locale'] . '.inc.php';
 
 		if (!file_exists($this->sMenuFilename))
 			$this->CreateCacheFile();
 
+		// read static menu
 		require_once($this->sMenuFilename);
+
+		// add country-dependent town list for small map
+		$country = $login->getUserCountry();
+		if ($opt['map']['towns']['enable'] &&
+		    isset($build_map_towns_menu) && $build_map_towns_menu &&   // optimization
+		    isset($opt['map']['towns'][$country]['enable']) && $opt['map']['towns'][$country]['enable'])
+		{
+			$rsTowns = sqlf("
+				SELECT
+					IFNULL(`stt`.`text`,`towns`.`name`) AS `name`,
+					`towns`.`name` AS `native_name`,
+					coord_lat, coord_long
+				FROM
+					`towns`
+					LEFT JOIN `sys_trans_text` `stt` ON `stt`.`trans_id`=`towns`.`trans_id` AND `stt`.`lang`='&2'
+				WHERE `towns`.`country`='&1' AND `towns`.`maplist` > 0
+				ORDER BY `name`",
+				$country, $opt['template']['locale']);
+
+			$menu_map = 2001;
+			while ($rTown = sql_fetch_assoc($rsTowns))
+			{
+				if (isset($opt['map']['towns'][$country][$rTown['native_name']]['zoom']))
+					$zoom = $opt['map']['towns'][$country][$rTown['native_name']]['zoom'];
+				else if (isset($opt['map']['towns'][$country]['zoom']))
+					$zoom = $opt['map']['towns'][$country]['zoom'];
+				else
+					$zoom = 11;
+
+				if ($zoom > 0)
+				{
+					$menuitem[$menu_map] = array(
+						'title' => $rTown['name'],
+						'menustring' => $rTown['name'],
+						'authlevel' => 0,
+						'href' => 'map2.php?mode=normalscreen&lat=' . $rTown['coord_lat'] . '&lon=' . $rTown['coord_long'] . 
+						          '&zoom=' . $zoom,
+						'visible' => 1,
+						'sublevel' => 1,
+						'parent' => MNU_MAP);
+					$menuitem[MNU_MAP]['subitems'][] = $menu_map;
+					++$menu_map;
+				}
+			}
+		}
 	}
 
 	function CreateCacheFile()
@@ -65,7 +111,12 @@ class Menu
 			$aMenu[$r['id']]['authlevel'] = ($r['access']==0) ? AUTH_LEVEL_ALL : AUTH_LEVEL_ADMIN;
 			if (substr($r['href'],0,1) == '!')
 			{
-				$aMenu[$r['id']]['href'] = substr($r['href'],1);
+				$aMenu[$r['id']]['href'] = str_replace('%LANG', strtolower($opt['template']['locale']), substr($r['href'],1));
+				$aMenu[$r['id']]['target'] = 'target="_blank"';
+			}
+			else if (strstr($r['href'],'&wiki'))
+			{
+				$aMenu[$r['id']]['href'] = $r['href'];
 				$aMenu[$r['id']]['target'] = 'target="_blank"';
 			}
 			else

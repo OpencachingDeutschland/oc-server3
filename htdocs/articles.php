@@ -23,6 +23,10 @@
 		//no article specified
 		$tpl->redirect('index.php');
 	}
+	else if (isset($_REQUEST['wiki']))
+	{
+		$tpl->redirect(helppageurl($article));
+	}
 	else if (!file_exists($opt['stylepath'] . '/articles/' . $language . '/' . $article . '.tpl'))
 	{
 		// does article exist in default-language?

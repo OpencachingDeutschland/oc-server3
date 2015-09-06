@@ -21,6 +21,7 @@ class OcSmarty extends Smarty
 	var $title = '';
 	var $menuitem = null;
 	var $nowpsearch = false;
+	var $strip_country_from_baseadr = false;
 
 	// no header, menu or footer
 	var $popup = false;
@@ -176,6 +177,9 @@ class OcSmarty extends Smarty
 		$optn['page']['body_unload'] = $this->body_unload;
 		$optn['page']['sponsor'] = $opt['page']['sponsor'];
 		$optn['page']['showsocialmedia'] = $opt['page']['showsocialmedia'];
+		$optn['page']['main_country'] = $opt['page']['main_country'];
+		$optn['page']['main_locale'] = $opt['page']['main_locale'];
+		$optn['page']['meta'] = $opt['page']['meta'];
 		$optn['template']['title'] = $this->title;
 		$optn['template']['caching'] = $this->caching;
 		$optn['template']['popup'] = $this->popup;
@@ -183,7 +187,6 @@ class OcSmarty extends Smarty
 		$optn['format'] = $opt['locale'][$opt['template']['locale']]['format'];
 		$optn['mail'] = $opt['mail'];
 		$optn['lib'] = $opt['lib'];
-		$optn['cms'] = $opt['cms'];
 		$optn['geokrety'] = $opt['geokrety'];
 		$optn['template']['usercountrieslist'] = labels::getLabels('usercountrieslist');
 		$optn['help']['oconly'] = helppagelink('oconly','OConly');
@@ -229,25 +232,28 @@ class OcSmarty extends Smarty
 		if ($this->title == '')
 			$optn['template']['title'] = $menu->GetMenuTitle();
 
-		// build address for switching locales
-		$locale_pageadr = $_SERVER['REQUEST_URI'];
+		// build address for switching locales and countries
+		$base_pageadr = $_SERVER['REQUEST_URI'];
 		// workaround for http://redmine.opencaching.de/issues/703
-		$strange_things_pos = strpos($locale_pageadr,".php/");
+		$strange_things_pos = strpos($base_pageadr,".php/");
 		if ($strange_things_pos)
-			$locale_pageadr = substr($locale_pageadr,0,$strange_things_pos + 4);
-		$lpos = strpos($locale_pageadr,"locale=");
+			$base_pageadr = substr($base_pageadr,0,$strange_things_pos + 4);
+		$lpos = strpos($base_pageadr,"locale=");
+		if (!$lpos) $lpos = strpos($base_pageadr,"usercountry=");
+		if (!$lpos && $this->strip_country_from_baseadr)
+			$lpos = strpos($base_pageadr,"country=");
 		if ($lpos)
-			$locale_pageadr = substr($locale_pageadr,0,$lpos);
+			$base_pageadr = substr($base_pageadr,0,$lpos);
 		else
 		{
-			$urx = explode('#', $locale_pageadr);
-			$locale_pageadr = $urx[0];
-			if (strpos($locale_pageadr,'?') == 0)
-				$locale_pageadr .= '?';
+			$urx = explode('#', $base_pageadr);
+			$base_pageadr = $urx[0];
+			if (strpos($base_pageadr,'?') == 0)
+				$base_pageadr .= '?';
 			else
-				$locale_pageadr .= '&';
+				$base_pageadr .= '&';
 		}
-		$this->assign('locale_pageadr', $locale_pageadr);
+		$this->assign('base_pageadr', $base_pageadr);
 
 		if ($opt['logic']['license']['disclaimer'])
 		{

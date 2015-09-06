@@ -5,19 +5,19 @@
  ***************************************************************************}
  {* OCSTYLE *}
 <div class="content2-pagetitle">
-	<img src="resource2/{$opt.template.style}/images/misc/32x32-winner.png" style="align: left; margin-right: 10px;" width="32" height="32" alt="{t}Special caches{/t}" />
+	<img src="resource2/{$opt.template.style}/images/misc/32x32-winner.png" style="margin-right: 10px;" width="32" height="32" alt="" />
 	{t}Special caches{/t}
 </div>
 
 <table class="table">
 	<tr>
 		<td style="padding-bottom:20px;">
-			{t 1=$opt.template.style}The following list is generated automatically by the given recommendations of the users. You can find more informations on
-			regional classification in the <a href="http://wiki.opencaching.de/index.php/Empfehlungen">Wiki</a>.<br />
+			{t 1=$helppagelink 2=$opt.template.style}The following list is generated automatically by the given recommendations of the users. You can find more informations on
+			regional classification in the %1Wiki</a>.<br />
 			<br />
 			The numbers in the list below means:<br />
 			<img src="images/rating-star.gif" border="0" alt="Recommendations" /> Number of users that recommend this cache<br />
-			<img src="resource2/%1/images/log/16x16-found.png" width="16" height="16" border="0" alt="Found" /> Checks = Number of time the cache was found<br />
+			<img src="resource2/%2/images/log/16x16-found.png" width="16" height="16" border="0" alt="Found" /> Checks = Number of time the cache was found<br />
 			Index tries to take the number of recommendations and founds in an order to show 'the best' geocache first.<br />
 			<img src="images/tops-formula.png" border="0" alt="Formula" />{/t}
 		</td>
@@ -38,7 +38,7 @@
 							</td>
 							<td {if $lastadm1!=$topItem.adm1}style="padding-top:12px"{/if}>
 								{if $topItem.adm3==null}
-									<a href="#{$topItem.adm1|urlencode}null"><i>(ohne geogr. Bezug)</i><br /></a>
+									<a href="#{$topItem.adm1|urlencode}null"><i>({t}without regional reference{/t})</i><br /></a>
 								{else}
 									<a href="#{$topItem.adm1|urlencode}{$topItem.adm3|urlencode}">{$topItem.adm3|escape}</a><br />
 								{/if}
@@ -73,7 +73,7 @@
 			{$topItem.adm1|escape}
 			&gt;
 			{if $topItem.adm3==null}
-				(ohne geogr. Bezug)
+				({t}without regional reference{/t})
 			{else}
 				{$topItem.adm3|escape}
 			{/if}

@@ -4,17 +4,25 @@
  *  Unicode Reminder メモ
  ***************************************************************************}
 {* OCSTYLE *}
-<div class="content2-pagetitle">
-	<img src="resource2/{$opt.template.style}/images/cacheicon/traditional.gif" style="align: left; margin-right: 10px;" width="32" height="32" alt="{t}Latest caches without germany{/t}" />
-	{t}Latest caches without germany{/t}
+<div class="nav4">
+	<ul>
+		<li class="group noicon"><a href="newcaches.php">{t}All caches{/t}</a></li>
+		<li class="group noicon"><a href="newcaches.php?country={$userCountryCode}">{t 1=$userCountryName}Caches in %1{/t}</a></li>
+		<li class="group noicon selected"><a href="newcachesrest.php">{t 1=$countryName}New caches without %1{/t}</a></li>
+	</ul>
 </div>
+<p style="clear:both;" >
+	<br />
+	{include file="res_countrylinks.tpl" newCaches=$newCaches}
+</p>
 
 <table width="100%" class="table">
+	<tr><td class="spacer"></td></tr>
 	{assign var='lastCountry' value=''}
 
 	{foreach name=newCaches from=$newCaches item=newCache}
 		{if $newCache.country_name!=$lastCountry}
-			<tr><td class="spacer"></td></tr>
+			<tr><td class="spacer" id="country_{$newCache.country}"></td></tr>
 			<tr>
 				<td colspan="3">
 					<table cellspacing="0" cellpadding="0"><tr>

@@ -16,14 +16,20 @@ class translateAccess
   {
     global $login;
 
-    return $login->hasAdminPriv(ADMIN_TRANSLATE);
+    if (isset($login))
+      return $login->hasAdminPriv(ADMIN_TRANSLATE);
+    else
+      return false;
   }
 
   public function mayTranslate($language)
   {
     global $login;
 
-    return $login->hasAdminPriv(ADMIN_ROOT) || in_array($language, $this->getLanguages());
+    if (isset($login))
+      return $login->hasAdminPriv(ADMIN_ROOT) || in_array($language, $this->getLanguages());
+    else
+      return false;
   }
 
   private function getLanguages()

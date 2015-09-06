@@ -6,11 +6,11 @@
 {* OCSTYLE *}
 
 <div class="content2-pagetitle">
-	<img src="resource2/{$opt.template.style}/images/profile/32x32-profile.png" style="align: left; margin-right: 10px;" width="32" height="32" alt="" />
+	<img src="resource2/{$opt.template.style}/images/profile/32x32-profile.png" style="margin-right: 10px;" width="32" height="32" alt="" />
 	{t}My profile details{/t}
 </div>
 
-<form action="mydetails.php" method="post" enctype="application/x-www-form-urlencoded" name="editdesc" dir="ltr">
+<form action="mydetails.php" method="post" enctype="application/x-www-form-urlencoded" name="editform" dir="ltr">
 	<input type="hidden" name="action" value="changetext" />
 	<input id="descMode" type="hidden" name="descMode" value="3" />
 
@@ -20,9 +20,9 @@
 	<tr>
 		<td colspan="2">
 			<div class="menuBar">
-				<span id="descHtml" class="buttonNormal" onclick="btnSelect(2)" onmouseover="btnMouseOver(2)" onmouseout="btnMouseOut(2)">{t}&lt;html&gt;{/t}</span>
-				<span class="buttonSplitter">|</span>
 				<span id="descHtmlEdit" class="buttonNormal" onclick="btnSelect(3)" onmouseover="btnMouseOver(3)" onmouseout="btnMouseOut(3)">{t}Editor{/t}</span>
+				<span class="buttonSplitter">|</span>
+				<span id="descHtml" class="buttonNormal" onclick="btnSelect(2)" onmouseover="btnMouseOver(2)" onmouseout="btnMouseOut(2)">{t}&lt;html&gt;{/t}</span>
 			</div>
 		</td>
 	</tr>
@@ -53,4 +53,8 @@
 
 </form>
 
-{include file="js/editor.inc.tpl"}
+<script type="text/javascript">
+<!--
+	OcInitEditor();
+//-->
+</script>

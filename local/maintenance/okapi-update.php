@@ -14,7 +14,7 @@ require_once(__DIR__ . '/okapi-update-settings.inc.php');
 
 function git($args)
 {
-	return exec('git ' . $args);
+  return exec('git ' . $args);
 }
 
 
@@ -25,14 +25,14 @@ echo "[okapi-update] validating settings and local OKAPI repo\n";
 if (!@chdir(OKAPI_SOURCE_PATH))
   die("[okapi-update] bad OKAPI_SOURCE_PATH setting");
 if (git('rev-list HEAD --count') < 700)
-	die("[okapi-update] bad git configuration");
+  die("[okapi-update] bad git configuration");
 if (git("diff HEAD"))
   die("[okapi-update] OKAPI working branch is dirty");
 
 $current_okapi_branch = git('rev-parse --abbrev-ref HEAD');
 if ($current_okapi_branch != 'master')
 {
-	echo "[okapi-update] checking out OKAPI master branch\n";
+  echo "[okapi-update] checking out OKAPI master branch\n";
   echo okapi_git('checkout master');
 }
 $changes = git("log upstream/master..master");
@@ -70,3 +70,4 @@ echo git('add .') . "\n";
 echo git('commit -m "OKAPI r' . $okapi_version_number . '"') . "\n";
 
 ?>
+

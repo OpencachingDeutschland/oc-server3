@@ -5,7 +5,7 @@
 ***************************************************************************}
 {* OCSTYLE *}
 <div class="content2-pagetitle">
-	<img src="resource2/{$opt.template.style}/images/profile/32x32-profile.png" style="align: left; margin-right: 10px;" width="32" height="32" alt="{t}Change password{/t}" />
+	<img src="resource2/{$opt.template.style}/images/profile/32x32-profile.png" style="margin-right: 10px;" width="32" height="32" alt="" />
 	{t}Change password{/t}
 </div>
 
@@ -93,7 +93,7 @@
 			<tr><td width="150px">&nbsp;</td><td><span class="errormsg">{t}The security code does not match.{/t}</span></td></tr>
 		{/if}
 		<tr>
-			<td style="vertical-align:top">{t}New password{/t}:</td>
+			<td style="vertical-align:top">{t}New password:{/t}</td>
 			<td>
 				<input name="password1" type="password" value="" maxlength="60" class="input120" />
 			</td>

@@ -26,7 +26,7 @@
 	require_once('./lib/common.inc.php');
 	require_once('./lib2/logic/logtypes.inc.php');
 	require($stylepath.'/smilies.inc.php');
-  require_once($opt['rootpath'] . '../lib/htmlpurifier-4.2.0/library/HTMLPurifier.auto.php');
+	require_once('./lib2/OcHTMLPurifier.class.php');
 	require_once('./lib/recommendation.inc.php');
 
 	//Preprocessing
@@ -48,6 +48,7 @@
 			tpl_set_var('message_end', '');
 			tpl_set_var('target', 'editlog.php?logid=' . urlencode($log_id));
 			tpl_set_var('message', $login_required);
+			tpl_set_var('helplink', helppagelink('login'));
 		}
 		else
 		{
@@ -61,7 +62,6 @@
 														`cache_logs`.`user_id` AS `user_id`, 
 														`cache_logs`.`type` AS `logtype`,
 														`cache_logs`.`oc_team_comment` AS `oc_team_comment`,
-														`cache_logs`.`text_html` AS `text_html`, 
 														`cache_logs`.`text_htmledit` AS `text_htmledit`, 
 														`caches`.`name` AS `cachename`, 
 														`caches`.`type` AS `cachetype`, 
@@ -150,13 +150,10 @@
 					}
 					else
 					{
-						if ($log_record['text_html'] == 1)
-							if ($log_record['text_htmledit'] == 1)
-								$descMode = 3;
-							else
-								$descMode = 2;
+						if ($log_record['text_htmledit'] == 1)
+							$descMode = 3;
 						else
-							$descMode = 1;
+							$descMode = 2;
 					}
 
 					// fuer alte Versionen von OCProp
@@ -178,7 +175,7 @@
 						}
 
 						// check input
-						$purifier = new HTMLPurifier();
+						$purifier = new OcHTMLPurifier($opt);
 						$log_text = $purifier->purify($log_text);
 					}
 					else
@@ -261,7 +258,7 @@
 						                             $oc_team_comment,
 						                             $log_date,
 						                             (($descMode != 1) ? $log_text : nl2br($log_text)),
-						                             (($descMode != 1) ? 1 : 0),
+						                             '1',
 						                             (($descMode == 3) ? 1 : 0),
 						                             $log_id);
 
@@ -303,7 +300,7 @@
 						db_slave_exclude();
 
 						//display cache page
-						tpl_redirect('viewcache.php?cacheid=' . urlencode($log_record['cache_id']));
+						tpl_redirect('viewcache.php?cacheid=' . urlencode($log_record['cache_id']) . '&log=A#log' . urlencode($log_id));
 						exit;
 					}
 
@@ -342,23 +339,17 @@
 					else
 						tpl_set_var('logtext', $log_text);
 
-					// Text / normal HTML / HTML editor
-					tpl_set_var('use_tinymce', (($descMode == 3) ? 1 : 0));
-
-					if ($descMode == 1)
-						tpl_set_var('descMode', 1);
-					else if ($descMode == 2)
-						tpl_set_var('descMode', 2);
-					else
+					// normal HTML / HTML editor
+					tpl_set_var('descMode', $descMode);
+					$headers = tpl_get_var('htmlheaders') . "\n";
+					if ($descMode == 3)
 					{
 						// TinyMCE
-						$headers = tpl_get_var('htmlheaders') . "\n";
 						$headers .= '<script language="javascript" type="text/javascript" src="resource2/tinymce/tiny_mce_gzip.js"></script>' . "\n";
 						$headers .= '<script language="javascript" type="text/javascript" src="resource2/tinymce/config/log.js.php?logid=0&lang='.strtolower($locale).'"></script>' . "\n";
-						tpl_set_var('htmlheaders', $headers);
-
-						tpl_set_var('descMode', 3);
 					}
+					$headers .= '<script language="javascript" type="text/javascript" src="templates2/ocstyle/js/editor.js"></script>' . "\n";
+					tpl_set_var('htmlheaders', $headers);
 
 					if ($use_log_pw == true && $log_pw != '')
 						if (!$pw_ok && isset($_POST['submitform']))
@@ -378,7 +369,7 @@
 							{
 								$tmp_smiley = $smiley_link;
 								$tmp_smiley = mb_ereg_replace('{smiley_image}', $smileyimage[$i], $tmp_smiley);
-								$smilies = $smilies.mb_ereg_replace('{smiley_text}', ' '.$smileytext[$i].' ', $tmp_smiley).'&nbsp;';
+								$smilies = $smilies.mb_ereg_replace('{smiley_text}', $smileyname[$i], $tmp_smiley).'&nbsp;';
 							}
 						}
 					}

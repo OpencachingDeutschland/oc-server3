@@ -42,6 +42,7 @@
 			tpl_set_var('message', $login_required);
 			tpl_set_var('message_start', '');
 			tpl_set_var('message_end', '');
+			tpl_set_var('helplink', helppagelink('login'));
 		}
 		else
 		{
@@ -50,17 +51,19 @@
 						`cache_logs`.`user_id` AS `log_user_id`, `cache_logs`.`date` AS `log_date`,
 						`log_types`.`icon_small` AS `icon_small`,
 						`user`.`username` as `log_username`,
+						IFNULL(`user`.`language`,'&2') AS `log_user_language`,
 						`caches`.`wp_oc`,
 						`cache_status`.`allow_user_view`,
 						IFNULL(`sys_trans_text`.`text`,`log_types`.`en`) AS `logtype_name`
 					 FROM `cache_logs`, `caches`, `user`, `cache_status`, `log_types`
-			LEFT JOIN `sys_trans_text` ON `sys_trans_text`.`trans_id`=`log_types`.`trans_id` AND `sys_trans_text`.`lang`='&2'
+			LEFT JOIN `sys_trans_text` ON `sys_trans_text`.`trans_id`=`log_types`.`trans_id`
 					WHERE `cache_logs`.`id`='&1'
 					  AND `cache_logs`.`user_id`=`user`.`user_id`
 					  AND `caches`.`cache_id`=`cache_logs`.`cache_id`
 					  AND `caches`.`status`=`cache_status`.`id`
 					  AND `log_types`.`id`=`cache_logs`.`type`
-						", $log_id, $opt['template']['locale']);
+					  AND `sys_trans_text`.`lang`=IFNULL(`user`.`language`,'&2')
+						", $log_id, $opt['template']['default']['locale']);
 
 			//log exists?
 			if (mysql_num_rows($log_rs) == 1)
@@ -99,13 +102,15 @@
 
 						if ($commit == 1)
 						{
-							//send email to logowner
-							$email_content = read_file($stylepath . '/email/removed_log.email');
+							//send email to logger
+							$removed_log_subject = removed_log_subject($log_record['log_user_language']);
+							$removed_message_title = removed_message_title($log_record['log_user_language']);
+							$email_content = fetch_email_template('removed_log', $log_record['log_user_language']);
 
 							$message = isset($_POST['logowner_message']) ? $_POST['logowner_message'] : '';
 							if ($message != '')
 							{
-								//message to logowner
+								//message to logger
 								$message = $removed_message_title . "\n" . $message . "\n" . $removed_message_end;
 							}
 
@@ -115,9 +120,8 @@
 								$logtext = html_entity_decode($logtext, ENT_COMPAT, 'UTF-8');
 								$h2t = new html2text($logtext);
 								$h2t->set_base_url($absolute_server_URI);
-								$logtext = $h2t->get_text();
+								$logtext = trim($h2t->get_text());
 							}
-							$logtext = $removed_text_title . "\n" . trim($logtext) . "\n" . $removed_text_end;
 
 							//get cache owner name
 							$cache_owner_rs = sql("SELECT `username` FROM `user` WHERE `user_id`='&1'", $log_record['cache_owner_id']);
@@ -132,6 +136,7 @@
 							// insert log data
 							$email_content = mb_ereg_replace('%log_owner%', $log_user_record['username'], $email_content);
 							$email_content = mb_ereg_replace('%cache_owner%', $cache_owner_record['username'], $email_content);
+							$email_content = mb_ereg_replace('%cache_owner_id%', $log_record['cache_owner_id'], $email_content);
 							$email_content = mb_ereg_replace('%cache_name%', $log_record['cache_name'], $email_content);
 							$email_content = mb_ereg_replace('%cache_wp%', $log_record['wp_oc'], $email_content);
 							$email_content = mb_ereg_replace('%log_date%', date($opt['locale'][$locale]['format']['phpdate'], strtotime($log_record['log_date'])), $email_content);
@@ -140,7 +145,7 @@
 							$email_content = mb_ereg_replace('%comment%', $message, $email_content);
 
 							//send email
-							mb_send_mail($log_user_record['email'], $removed_log_title, $email_content, $emailheaders);
+							mb_send_mail($log_user_record['email'], $removed_log_subject, $email_content, $emailheaders);
 						}
 					}
 

@@ -79,6 +79,7 @@ function getWaypoints($cacheid)
 			tpl_set_var('message_start', "");
 			tpl_set_var('message_end', "");
 			tpl_set_var('message', $login_required);
+			tpl_set_var('helplink', helppagelink('login'));
 		}
 		else
 		{
@@ -717,7 +718,7 @@ function getWaypoints($cacheid)
 
 					//build typeoptions
 					$types = '';
-					$rsTypes = sql("SELECT `cache_type`.`id`, IFNULL(`sys_trans_text`.`text`, `cache_type`.`name`) AS `name` 
+					$rsTypes = sql("SELECT `cache_type`.`id`, IFNULL(`sys_trans_text`.`text`, `cache_type`.`en`) AS `name` 
 														FROM `cache_type` 
 											 LEFT JOIN `sys_trans` ON `cache_type`.`trans_id`=`sys_trans`.`id` 
 											 LEFT JOIN `sys_trans_text` ON `sys_trans`.`id`=`sys_trans_text`.`trans_id` AND 

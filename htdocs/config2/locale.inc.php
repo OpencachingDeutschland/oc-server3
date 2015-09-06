@@ -128,7 +128,7 @@
 	$opt['locale']['DE']['format']['time'] = '%H:%M';
 	$opt['locale']['DE']['format']['timesec'] = '%X';
 	$opt['locale']['DE']['format']['phpdate'] = 'd.m.Y';
-	$opt['locale']['EN']['format']['phpdatetime'] = 'd.m.Y H:i';
+	$opt['locale']['DE']['format']['phpdatetime'] = 'd.m.Y H:i';
 	$opt['locale']['DE']['format']['colonspace'] = '';
 	$opt['locale']['DE']['country'] = 'DE';
 	$opt['locale']['DE']['page']['subtitle1'] = 'Geocaching mit Opencaching';

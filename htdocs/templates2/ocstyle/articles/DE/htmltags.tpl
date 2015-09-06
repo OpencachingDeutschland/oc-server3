@@ -5,7 +5,7 @@
 ***************************************************************************}
 
 <div class="content2-pagetitle">
-	<img src="resource2/{$opt.template.style}/images/misc/32x32-tools.png" style="margin-right: 10px;" width="32" height="32" alt="" />Erlaubte HTML-Tags und Attribute
+	<img src="resource2/{$opt.template.style}/images/misc/32x32-tools.png" style="margin-right: 10px;" width="32" height="32" alt="" />Erlaubte HTML-Elemente
 </div>
 <div class="content-txtbox-noshade" style="padding-right: 25px;">
 
@@ -84,5 +84,12 @@
 		<sup>2</sup> Die IDs bzw. Namen müssen mit <code>custom_</code> beginnen.
 		<br /><br />
 	</p>
+
+	<div class="content2-container bg-blue02">
+	  <p class="content-title-noshade-size2" style="margin:0 !important">&nbsp;CSS-Stile</p>
+	</div>
+
+	<p>Alle CSS-Stile außer "overflow" sind erlaubt.</p>
+	<p>&nbsp;</p>
 
 </div>

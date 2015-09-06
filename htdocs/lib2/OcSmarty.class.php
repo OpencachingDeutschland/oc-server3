@@ -17,7 +17,7 @@ class OcSmarty extends Smarty
 	var $main_template = 'sys_main';
 	var $bench = null;
 	var $compile_id = null;
-	var $cache_id = null;
+	var $cache_id = null;    // This is a smarty caching ID, not a caches.cache_id.
 	var $title = '';
 	var $menuitem = null;
 	var $nowpsearch = false;
@@ -377,7 +377,12 @@ class OcSmarty extends Smarty
 	function get_cache_id()
 	{
 		global $opt;
-		return $this->name . '|' . $this->cache_id;
+
+		// $cache_id can be directly supplied from unverified user input (URL params).
+		// Probably this is no safety or stability issue, but to be sure we restrict
+		// the ID to a reasonable set of characters:
+
+		return $this->name . '|' . mb_ereg_replace('/[^A-Za-z0-9_\|\-\.]/', '', $this->cache_id);
 	}
 	
 	function get_compile_id()

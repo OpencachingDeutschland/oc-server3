@@ -44,16 +44,17 @@
 	}
 	elseif (@$newlogs_rest)
 	{
-		// latest logs for all countries but Germany
+		// latest logs for all countries but the site's main country
 		$tpl->name = 'newlogsrest';
 		$tpl->menuitem = MNU_START_NEWLOGS;
 		$country = $login->getUserCountry();
 		$exclude_country = $opt['page']['main_country'];
 		$include_country = '%';
-		// As nearly all logs are from Germany, retrieving non-German logs is
+		// As most logs are from the main country, retrieving the other logs is
 		// expensive -> longer cache lifetime.
 		$tpl->caching = true;
 		$tpl->cache_lifetime = 900;
+		$tpl->cache_id = $exclude_country;
 		$logcount = 250;
 		$paging = false;  // paging would have poor performance for all logs
 		$orderByDate = '';
@@ -75,6 +76,7 @@
 		}
 		$tpl->caching = true;
 		$tpl->cache_lifetime = 300;
+		$tpl->cache_id = $country;
 		$logcount = 250;
 		$paging = false;  // paging would have poor performance for all logs
 		$orderByDate = '';

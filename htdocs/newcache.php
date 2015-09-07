@@ -138,7 +138,7 @@
 			else
 			{
 				if (sqlValue("SELECT `no_htmledit_flag` FROM `user` WHERE `user_id`='" .  sql_escape($usr['userid']) . "'", 1) == 1)
-					$descMode = 2;
+					$descMode = 1;
 				else
 					$descMode = 3;
 			}
@@ -155,15 +155,20 @@
 					$name = iconv("ISO-8859-1", "UTF-8", $name);
 			}
 
-			// normal HTML / HTML editor
-			tpl_set_var('descMode', $descMode);
-			$headers = tpl_get_var('htmlheaders') . "\n";
+			// Text / normal HTML / HTML editor
+			tpl_set_var('use_tinymce', ($descMode == 3) ? 1 : 0);
 
-			if ($descMode == 3)
+			$headers = tpl_get_var('htmlheaders') . "\n";
+			if ($descMode == 1)
+				tpl_set_var('descMode', 1);
+			else if ($descMode == 2)
+				tpl_set_var('descMode', 2);
+			else
 			{
 				// TinyMCE
 				$headers .= '<script language="javascript" type="text/javascript" src="resource2/tinymce/tiny_mce_gzip.js"></script>' . "\n";
         $headers .= '<script language="javascript" type="text/javascript" src="resource2/tinymce/config/desc.js.php?cacheid=0&lang='.strtolower($locale).'"></script>' . "\n";
+				tpl_set_var('descMode', 3);
 			}
 			$headers .= '<script language="javascript" type="text/javascript" src="templates2/ocstyle/js/editor.js"></script>' . "\n";
 			tpl_set_var('htmlheaders', $headers);
@@ -745,10 +750,15 @@
 					$tos_not_ok = false;
 				}
 
-        // Filter Input
-        $purifier = new OcHTMLPurifier($opt);
-        $desc = $purifier->purify($desc);
-				tpl_set_var('desc', htmlspecialchars($desc, ENT_COMPAT, 'UTF-8'));
+				//html-desc?
+				if ($descMode != 1)
+				{
+					// Filter Input
+					$purifier = new OcHTMLPurifier($opt);
+					$desc = $purifier->purify($desc);
+
+					tpl_set_var('desc', htmlspecialchars($desc, ENT_COMPAT, 'UTF-8'));
+				}
 
 				//cache-size
 				$size_not_ok = false;
@@ -900,6 +910,27 @@
 												nl2br(htmlspecialchars($hints, ENT_COMPAT, 'UTF-8')),
 												$short_desc,
 												(($descMode == 3) ? 1 : 0),
+												$oc_nodeid);
+					}
+					else
+					{
+						sql("INSERT INTO `cache_desc` (
+													`id`,
+													`cache_id`,
+													`language`,
+													`desc`,
+													`desc_html`,
+													`hint`,
+													`short_desc`,
+													`last_modified`,
+													`desc_htmledit`,
+													`node`
+												) VALUES ('', '&1', '&2', '&3', '0', '&4', '&5', NOW(), 0, '&6')",
+												$cache_id,
+												$sel_lang,
+												nl2br(htmlspecialchars($desc, ENT_COMPAT, 'UTF-8')),
+												nl2br(htmlspecialchars($hints, ENT_COMPAT, 'UTF-8')),
+												$short_desc,
 												$oc_nodeid);
 					}
 

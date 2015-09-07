@@ -67,7 +67,7 @@
 		else
 		{
 
-			$desc_rs = sql("SELECT `cache_desc`.`cache_id` `cache_id`, `cache_desc`.`node` `node`, `cache_desc`.`language` `language`, `caches`.`name` `name`, `caches`.`user_id` `user_id`, `caches`.`wp_oc`, `cache_desc`.`desc` `desc`, `cache_desc`.`hint` `hint`, `cache_desc`.`short_desc` `short_desc`, `cache_desc`.`desc_htmledit` `desc_htmledit` FROM `caches`, `cache_desc` WHERE (`caches`.`cache_id` = `cache_desc`.`cache_id`) AND `cache_desc`.`id`='&1'", $descid);
+			$desc_rs = sql("SELECT `cache_desc`.`cache_id` `cache_id`, `cache_desc`.`node` `node`, `cache_desc`.`language` `language`, `caches`.`name` `name`, `caches`.`user_id` `user_id`, `caches`.`wp_oc`, `cache_desc`.`desc` `desc`, `cache_desc`.`hint` `hint`, `cache_desc`.`short_desc` `short_desc`, `cache_desc`.`desc_html` `desc_html`, `cache_desc`.`desc_htmledit` `desc_htmledit` FROM `caches`, `cache_desc` WHERE (`caches`.`cache_id` = `cache_desc`.`cache_id`) AND `cache_desc`.`id`='&1'", $descid);
 			$desc_record = sql_fetch_array($desc_rs);
 			sql_free_result($desc_rs);
 
@@ -104,20 +104,17 @@
 
 						switch ($descMode)
 						{
-							case 1:
-								// plain text mode -- no longer supported, see issue #236;
-								// descMode 1 is only retained for Ocprop compatibility
-								$desc_html = 0;
-								$desc_htmledit = 0;
 							case 2:
-								// edit HTML as plain text
-								$desc_html = 1;
 								$desc_htmledit = 0;
+								$desc_html = 1;
+								break;
+							case 3:
+								$desc_htmledit = 1;
+								$desc_html = 1;
 								break;
 							default:
-								// edit HTML in TinyMCE
-								$desc_html = 1;
-								$desc_htmledit = 1;
+								$desc_htmledit = 0;
+								$desc_html = 0;
 								break;
 						}
 						$short_desc = $_POST['short_desc'];  // Ocprop
@@ -177,7 +174,7 @@
 							            `hint`='&5',
 							            `language`='&6'
 							      WHERE `id`='&7'",
-							            '1', 
+							            (($desc_html == 1) ? '1' : '0'), 
 							            (($desc_htmledit == 1) ? '1' : '0'),
 							            (($desc_html == 1) ? $desc : nl2br($desc)),
 							            $short_desc,
@@ -215,14 +212,22 @@
 						$short_desc = strip_tags($desc_record['short_desc']);
 						$hint = strip_tags($desc_record['hint']);
 						$desc_htmledit = $desc_record['desc_htmledit'];
+						$desc_html = $desc_record['desc_html'];
 						$desc_lang = $desc_record['language'];
 
-						$desc = $desc_record['desc'];
+						if ($desc_html == 1)
+							$desc = $desc_record['desc'];
+						else{
+							$desc = strip_tags($desc_record['desc']);
+						}
 					}
 					
 					//here we only set up the template variables
 					
-					tpl_set_var('desc', htmlspecialchars($desc, ENT_COMPAT, 'UTF-8'), true);
+					if ($desc_html == 1)
+						tpl_set_var('desc', htmlspecialchars($desc, ENT_COMPAT, 'UTF-8'), true);
+					else
+						tpl_set_var('desc', $desc, true);
 			
 					// ok ... die desclang zusammenbauen
 					if ($show_all_langs == false)
@@ -272,16 +277,21 @@
 					tpl_set_var('submit', $submit);
 
 					// Text / normal HTML / HTML editor
+					tpl_set_var('use_tinymce', ($desc_htmledit == 1) ? 1 : 0);
+
 					$headers = tpl_get_var('htmlheaders') . "\n";
-					if ($desc_htmledit == 1)
+					if (($desc_html == 1) && ($desc_htmledit == 1))
 					{
 						// TinyMCE
+						$headers = tpl_get_var('htmlheaders') . "\n";
 						$headers .= '<script language="javascript" type="text/javascript" src="resource2/tinymce/tiny_mce_gzip.js"></script>' . "\n";
             $headers .= '<script language="javascript" type="text/javascript" src="resource2/tinymce/config/desc.js.php?cacheid=' .  ($desc_record['cache_id']+0) . '&lang=' .  strtolower($locale) . '"></script>' . "\n";
 						tpl_set_var('descMode', 3);
 					}
-					else
+					else if ($desc_html == 1)
 						tpl_set_var('descMode', 2);
+					else
+						tpl_set_var('descMode', 1);
 					$headers .= '<script language="javascript" type="text/javascript" src="templates2/ocstyle/js/editor.js"></script>' . "\n";
 					tpl_set_var('htmlheaders', $headers);
 				}

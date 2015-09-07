@@ -585,6 +585,13 @@
 		}
 	}
 
+	function dbv_137()  // partial revert of mutation 130
+	{
+		sql("ALTER TABLE `cache_desc` CHANGE COLUMN `desc_html` `desc_html` tinyint(1) NOT NULL default '1' COMMENT ''");
+		sql("ALTER TABLE `cache_logs` CHANGE COLUMN `text_html` `text_html` tinyint(1) NOT NULL default '1' COMMENT ''");
+		sql("ALTER TABLE `user` CHANGE COLUMN `no_htmledit_flag` `no_htmledit_flag` tinyint(1) NOT NULL default '0' COMMENT ''");
+	}
+
 
 	// When adding new mutations, take care that they behave well if run multiple
 	// times. This improves robustness of database versioning.

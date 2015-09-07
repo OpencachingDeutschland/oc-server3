@@ -62,6 +62,7 @@
 														`cache_logs`.`user_id` AS `user_id`, 
 														`cache_logs`.`type` AS `logtype`,
 														`cache_logs`.`oc_team_comment` AS `oc_team_comment`,
+														`cache_logs`.`text_html` AS `text_html`, 
 														`cache_logs`.`text_htmledit` AS `text_htmledit`, 
 														`caches`.`name` AS `cachename`, 
 														`caches`.`type` AS `cachetype`, 
@@ -150,10 +151,13 @@
 					}
 					else
 					{
-						if ($log_record['text_htmledit'] == 1)
-							$descMode = 3;
+						if ($log_record['text_html'] == 1)
+							if ($log_record['text_htmledit'] == 1)
+								$descMode = 3;
+							else
+								$descMode = 2;
 						else
-							$descMode = 2;
+							$descMode = 1;
 					}
 
 					// fuer alte Versionen von OCProp
@@ -258,7 +262,7 @@
 						                             $oc_team_comment,
 						                             $log_date,
 						                             (($descMode != 1) ? $log_text : nl2br($log_text)),
-						                             '1',
+						                             (($descMode != 1) ? 1 : 0),
 						                             (($descMode == 3) ? 1 : 0),
 						                             $log_id);
 
@@ -339,14 +343,20 @@
 					else
 						tpl_set_var('logtext', $log_text);
 
-					// normal HTML / HTML editor
-					tpl_set_var('descMode', $descMode);
+					// Text / normal HTML / HTML editor
+					tpl_set_var('use_tinymce', (($descMode == 3) ? 1 : 0));
+
 					$headers = tpl_get_var('htmlheaders') . "\n";
-					if ($descMode == 3)
+					if ($descMode == 1)
+						tpl_set_var('descMode', 1);
+					else if ($descMode == 2)
+						tpl_set_var('descMode', 2);
+					else
 					{
 						// TinyMCE
 						$headers .= '<script language="javascript" type="text/javascript" src="resource2/tinymce/tiny_mce_gzip.js"></script>' . "\n";
 						$headers .= '<script language="javascript" type="text/javascript" src="resource2/tinymce/config/log.js.php?logid=0&lang='.strtolower($locale).'"></script>' . "\n";
+						tpl_set_var('descMode', 3);
 					}
 					$headers .= '<script language="javascript" type="text/javascript" src="templates2/ocstyle/js/editor.js"></script>' . "\n";
 					tpl_set_var('htmlheaders', $headers);
@@ -369,7 +379,8 @@
 							{
 								$tmp_smiley = $smiley_link;
 								$tmp_smiley = mb_ereg_replace('{smiley_image}', $smileyimage[$i], $tmp_smiley);
-								$smilies = $smilies.mb_ereg_replace('{smiley_text}', $smileyname[$i], $tmp_smiley).'&nbsp;';
+								$tmp_smiley = mb_ereg_replace('{smiley_symbol}', $smileytext[$i], $tmp_smiley);
+								$smilies = $smilies.'&nbsp;'.mb_ereg_replace('{smiley_name}', $smileyname[$i], $tmp_smiley).'&nbsp;';
 							}
 						}
 					}

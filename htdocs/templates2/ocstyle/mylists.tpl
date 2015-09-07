@@ -146,6 +146,7 @@
 	</form>
 
 	<script type="text/javascript">
+	var descMode = 2;
 	OcInitEditor();
 	{if $name_error || $newlist_mode}
 		document.getElementById('list_name').focus();

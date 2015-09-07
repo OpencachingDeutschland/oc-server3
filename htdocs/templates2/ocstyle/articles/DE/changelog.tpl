@@ -14,7 +14,7 @@
 
 	<p>Eine redaktionell aufbereitete Erläuterung neuer OC-Versionen gibt es auch im <em>Altmetall-Blog</em>:</p>
 	<ul>
-		<li><a href="https://blog.dafb-o.de/opencaching-3v14/">Version 14</a>: Ausbau der Cachelistenfunktionen, Zähmung des HTML-Purifier, Sprachsuche ...</li>
+		<li><a href="https://blog.dafb-o.de/opencaching-3v14/">Version 14</a>: Ausbau der Cachelistenfunktionen, Zähmung des HTML-Purifiers, Sprachsuche ...</li>
 		<li><a href="https://blog.dafb-o.de/oc-3-0v13-listen-neue-suchoption-und-mehr/">Version 13</a>: Listen, neue Suchoption und mehr ...</li>
 		<li><a href="https://blog.dafb-o.de/opencaching-3-0-version-11-veroeffentlicht/">Version 11</a>: Automatische Verkleinerung von Bildern, Links zu Logeinträgen ...</li>
 		<li><a href="https://blog.dafb-o.de/opencaching-de-version-10-freigegeben/">Version 10</a>: Nachladen von Logeinträgen, ausführliche Statistik im Benutzerprofil ...</li>
@@ -93,8 +93,6 @@
 	<a href="http://www.opencaching.de/articles.php?page=htmltags">hier</a>
 	zu finden.
 	</li>
-	<li>Texteingabemodus für Logs und Listings entfernt
-	(fehlerhafte Umschaltung HTML &lt;&gt; Text)</li>
 	<li>
 	Popup-Fenster des HTML-Editors werden bei großer Browser-Schrift nicht
 	mehr abgeschnitten.

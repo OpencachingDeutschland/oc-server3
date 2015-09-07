@@ -7,7 +7,7 @@
 
 	require('lib2/web.inc.php');
 	require_once('lib2/logic/cachelist.class.php');
-	require_once('lib2/OcHTMLPurifier.class.php');
+	require_once('lib2/edithelper.inc.php');
 
 	$tpl->name = 'mylists';
 	$tpl->menuitem = MNU_MYPROFILE_LISTS;
@@ -167,7 +167,7 @@
 		$tpl->add_header_javascript('resource2/tinymce/tiny_mce_gzip.js');
 		$tpl->add_header_javascript('resource2/tinymce/config/list.js.php?lang='.strtolower($opt['template']['locale']));
 	}
-	$tpl->add_header_javascript('templates2/' . $opt['template']['style'] . '/js/editor.js');
+	$tpl->add_header_javascript(editorJsPath());
 	if ($edit_list)
 	{
 		$tpl->assign('edit_list', true);

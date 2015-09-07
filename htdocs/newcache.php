@@ -19,7 +19,7 @@
 
   //prepare the templates and include all neccessary
 	require_once('./lib/common.inc.php');
-	require_once('./lib2/OcHTMLPurifier.class.php');
+	require_once('lib2/edithelper.inc.php');
 
 	$no_tpl_build = false;
 
@@ -128,21 +128,27 @@
 			$short_desc = isset($_POST['short_desc']) ? $_POST['short_desc'] : '';
 			tpl_set_var('short_desc', htmlspecialchars($short_desc, ENT_COMPAT, 'UTF-8'));
 
-			//desc
-			$desc = isset($_POST['desc']) ? $_POST['desc'] : '';
-			tpl_set_var('desc', htmlspecialchars($desc, ENT_COMPAT, 'UTF-8'));
-
 			// descMode auslesen, falls nicht gesetzt aus dem Profil laden
 			if (isset($_POST['descMode']))  // Ocprop
+			{
 				$descMode = $_POST['descMode']+0;
+				if (($descMode < 1) || ($descMode > 3)) $descMode = 3;
+				if (isset($_POST['oldDescMode']))
+				{
+					$oldDescMode = $_POST['oldDescMode'];
+					if (($oldDescMode < 1) || ($oldDescMode > 3)) $oldDescMode = $descMode;
+				}
+				else
+					$oldDescMode = $descMode;
+			}
 			else
 			{
 				if (sqlValue("SELECT `no_htmledit_flag` FROM `user` WHERE `user_id`='" .  sql_escape($usr['userid']) . "'", 1) == 1)
 					$descMode = 1;
 				else
 					$descMode = 3;
+				$oldDescMode = $descMode;
 			}
-			if (($descMode < 1) || ($descMode > 3)) $descMode = 3;
 
 			// fuer alte Versionen von OCProp
 			if (isset($_POST['submit']) && !isset($_POST['version2']))
@@ -157,20 +163,25 @@
 
 			// Text / normal HTML / HTML editor
 			tpl_set_var('use_tinymce', ($descMode == 3) ? 1 : 0);
+			tpl_set_var('descMode', $descMode);
+			tpl_set_var('htmlnotice', $descMode == 2 ? $htmlnotice : '');
+
+			//desc
+			if (isset($_POST['desc']))
+				$desc = processEditorInput($oldDescMode, $descMode, $_POST['desc']);
+			else
+				$desc = '';
+
+			tpl_set_var('desc', htmlspecialchars($desc, ENT_COMPAT, 'UTF-8'));
 
 			$headers = tpl_get_var('htmlheaders') . "\n";
-			if ($descMode == 1)
-				tpl_set_var('descMode', 1);
-			else if ($descMode == 2)
-				tpl_set_var('descMode', 2);
-			else
+			if ($descMode == 3)
 			{
 				// TinyMCE
 				$headers .= '<script language="javascript" type="text/javascript" src="resource2/tinymce/tiny_mce_gzip.js"></script>' . "\n";
         $headers .= '<script language="javascript" type="text/javascript" src="resource2/tinymce/config/desc.js.php?cacheid=0&lang='.strtolower($locale).'"></script>' . "\n";
-				tpl_set_var('descMode', 3);
 			}
-			$headers .= '<script language="javascript" type="text/javascript" src="templates2/ocstyle/js/editor.js"></script>' . "\n";
+			$headers .= '<script language="javascript" type="text/javascript" src="' . editorJsPath() . '"></script>' . "\n";	
 			tpl_set_var('htmlheaders', $headers);
 
 			//effort
@@ -750,16 +761,6 @@
 					$tos_not_ok = false;
 				}
 
-				//html-desc?
-				if ($descMode != 1)
-				{
-					// Filter Input
-					$purifier = new OcHTMLPurifier($opt);
-					$desc = $purifier->purify($desc);
-
-					tpl_set_var('desc', htmlspecialchars($desc, ENT_COMPAT, 'UTF-8'));
-				}
-
 				//cache-size
 				$size_not_ok = false;
 				if ($sel_size == -1)
@@ -890,49 +891,26 @@
 					db_slave_exclude();
 
 					//add record to cache_desc table
-					if ($descMode != 1)
-					{
-						sql("INSERT INTO `cache_desc` (
-													`id`,
-													`cache_id`,
-													`language`,
-													`desc`,
-													`desc_html`,
-													`hint`,
-													`short_desc`,
-													`last_modified`,
-													`desc_htmledit`,
-													`node`
-												) VALUES ('', '&1', '&2', '&3', '1', '&4', '&5', NOW(), '&6', '&7')",
-												$cache_id,
-												$sel_lang,
-												$desc,
-												nl2br(htmlspecialchars($hints, ENT_COMPAT, 'UTF-8')),
-												$short_desc,
-												(($descMode == 3) ? 1 : 0),
-												$oc_nodeid);
-					}
-					else
-					{
-						sql("INSERT INTO `cache_desc` (
-													`id`,
-													`cache_id`,
-													`language`,
-													`desc`,
-													`desc_html`,
-													`hint`,
-													`short_desc`,
-													`last_modified`,
-													`desc_htmledit`,
-													`node`
-												) VALUES ('', '&1', '&2', '&3', '0', '&4', '&5', NOW(), 0, '&6')",
-												$cache_id,
-												$sel_lang,
-												nl2br(htmlspecialchars($desc, ENT_COMPAT, 'UTF-8')),
-												nl2br(htmlspecialchars($hints, ENT_COMPAT, 'UTF-8')),
-												$short_desc,
-												$oc_nodeid);
-					}
+					sql("INSERT INTO `cache_desc` (
+												`id`,
+												`cache_id`,
+												`language`,
+												`desc`,
+												`desc_html`,
+												`hint`,
+												`short_desc`,
+												`last_modified`,
+												`desc_htmledit`,
+												`node`
+											) VALUES ('', '&1', '&2', '&3', '&4', '&5', '&6', NOW(), '&7', '&8')",
+											$cache_id,
+											$sel_lang,
+											$desc,
+											($descMode != 1) ? 1 : 0,
+											nl2br(htmlspecialchars($hints, ENT_COMPAT, 'UTF-8')),
+											$short_desc,
+											($descMode == 3) ? 1 : 0,
+											$oc_nodeid);
 
 					// insert cache-attributes
 					for($i=0; $i<count($cache_attribs); $i++)

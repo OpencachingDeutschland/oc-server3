@@ -25,7 +25,7 @@
 	require_once($rootpath . 'lib2/translate.class.php');
 	require_once('settings.inc.php');
 	require_once($rootpath . 'lib/consts.inc.php');
-	require_once($rootpath . 'lib2/html2text.class.php');
+	require_once($rootpath . 'lib2/edithelper.inc.php');
 
 	// use posix pid-files to lock process 
 	if (!CreatePidFile($watchpid))
@@ -218,7 +218,7 @@
  
 function process_owner_log($user_id, $log_id)
 {
-	global $opt, $dblink, $absolute_server_URI, $translate;
+	global $opt, $dblink, $translate;
 
 //	echo "process_owner_log($user_id, $log_id)\n";
 	
@@ -226,20 +226,7 @@ function process_owner_log($user_id, $log_id)
 	$rLog = sql_fetch_array($rsLog);
 	mysql_free_result($rsLog);
 	
-	$logtext = $rLog['text'];
-	$logtext = html_entity_decode($logtext, ENT_COMPAT, 'UTF-8');
-	$h2t = new html2text($logtext);
-	$h2t->set_base_url($absolute_server_URI);
-	$logtext = trim($h2t->get_text());
-/*
-	$logtext = html_entity_decode($logtext, ENT_COMPAT, 'UTF-8');
-	$logtext = mb_ereg_replace("\r", '', $logtext);
-	$logtext = mb_ereg_replace("\n", '', $logtext);
-	$logtext = mb_ereg_replace('</p>', "</p>\n", $logtext);
-	$logtext = mb_ereg_replace('<br/>', "<br/>\n", $logtext);
-	$logtext = mb_ereg_replace('<br />', "<br />\n", $logtext);
-	$logtext = strip_tags($logtext);
-*/
+	$logtext = html2plaintext($rLog['text'], $rLog['text_html'] == 0);
 
 	$language = sqlValue("SELECT `language` FROM `user` WHERE `user_id`='" . sql_escape($user_id) . "'", null);
 	if (!$language)
@@ -267,7 +254,7 @@ function process_owner_log($user_id, $log_id)
 
 function process_log_watch($user_id, $log_id)
 {
-	global $opt, $dblink, $logwatch_text, $absolute_server_URI, $translate;
+	global $opt, $dblink, $logwatch_text, $translate;
 
 //	echo "process_log_watch($user_id, $log_id)\n";
 	
@@ -275,20 +262,7 @@ function process_log_watch($user_id, $log_id)
 	$rLog = sql_fetch_array($rsLog);
 	mysql_free_result($rsLog);
 	
-	$logtext = $rLog['text'];
-	$logtext = html_entity_decode($logtext, ENT_COMPAT, 'UTF-8');
-	$h2t = new html2text($logtext);
-	$h2t->set_base_url($absolute_server_URI);
-	$logtext = trim($h2t->get_text());
-/*
-	$logtext = html_entity_decode($logtext, ENT_COMPAT, 'UTF-8');
-	$logtext = mb_ereg_replace("\r", '', $logtext);
-	$logtext = mb_ereg_replace("\n", '', $logtext);
-	$logtext = mb_ereg_replace('</p>', "</p>\n", $logtext);
-	$logtext = mb_ereg_replace('<br/>', "<br/>\n", $logtext);
-	$logtext = mb_ereg_replace('<br />', "<br />\n", $logtext);
-	$logtext = strip_tags($logtext);
-*/
+	$logtext = html2plaintext($rLog['text'], $rLog['text_html'] == 0);
 	
 	$language = sqlValue("SELECT `language` FROM `user` WHERE `user_id`='" . sql_escape($user_id) . "'", null);
 	if (!$language)

@@ -8,7 +8,7 @@
 	require_once('lib2/web.inc.php');
 	require_once('lib2/logic/user.class.php');
 	require_once('lib2/logic/useroptions.class.php');
-	require_once('lib2/OcHTMLPurifier.class.php');
+	require_once('lib2/edithelper.inc.php');
 
 	$tpl->name = 'mydetails';
 	$tpl->menuitem = MNU_MYPROFILE_DETAILS;
@@ -166,7 +166,7 @@ function assignFromDB($userid,$include_editor)
 			$tpl->add_header_javascript('resource2/tinymce/tiny_mce_gzip.js');
 			$tpl->add_header_javascript('resource2/tinymce/config/user.js.php?lang='.strtolower($opt['template']['locale']));
 		}
-		$tpl->add_header_javascript('templates2/' . $opt['template']['style'] . '/js/editor.js');
+		$tpl->add_header_javascript(editorJsPath());
 		$tpl->assign('descMode',$descMode);
 	}
 }

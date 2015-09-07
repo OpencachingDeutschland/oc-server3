@@ -13,6 +13,7 @@
 <form action="mydetails.php" method="post" enctype="application/x-www-form-urlencoded" name="editform" dir="ltr">
 	<input type="hidden" name="action" value="changetext" />
 	<input id="descMode" type="hidden" name="descMode" value="3" />
+	<input id="oldDescMode" type="hidden" name="oldDescMode" value="3" />
 
 <p>{t}The following text is displayed in your <a href="viewprofile.php">public profile</a>:{/t}</p>
 

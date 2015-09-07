@@ -10,11 +10,11 @@
 		die('Your client may be outdated!');
 	
 	// include librarys
-	require('./lib2/web.inc.php');
-	require_once('./lib2/logic/cache.class.php');
-	require_once('./lib2/logic/user.class.php');
-	require_once('./lib2/logic/cachelog.class.php');
-	require_once('./lib2/OcHTMLPurifier.class.php');
+	require('lib2/web.inc.php');
+	require_once('lib2/logic/cache.class.php');
+	require_once('lib2/logic/user.class.php');
+	require_once('lib2/logic/cachelog.class.php');
+	require_once('lib2/edithelper.inc.php');
 	
 	// prepare template and menue
 	$tpl->name = 'log_cache';
@@ -103,32 +103,37 @@
 		// get logtext editormode (from form or from userprofile)
 		// 1 = text; 2 = HTML; 3 = tinyMCE 
 		if (isset($_POST['descMode']))
+		{
 			$descMode = $_POST['descMode']+0;  // Ocprop: 2
+			if (($descMode < 1) || ($descMode > 3))
+				$descMode = 3;
+			if (isset($_POST['oldDescMode']))
+			{
+				$oldDescMode = $_POST['oldDescMode'];
+				if (($oldDescMode < 1) || ($oldDescMode > 3)) $oldDescMode = $descMode;
+			}
+			else
+				$oldDescMode = $descMode;
+		}
 		else
 		{
 			if ($user->getNoHTMLEditor() == 1)
 				$descMode = 1;
 			else
 				$descMode = 3;
+			$oldDescMode = $descMode;
 		}
-		if (($descMode < 1) || ($descMode > 3))
-			$descMode = 3;
+
 		// add javascript-header if editor
 		if ($descMode == 3)
 		{
 			$tpl->add_header_javascript('resource2/tinymce/tiny_mce_gzip.js');
 			$tpl->add_header_javascript('resource2/tinymce/config/log.js.php?lang='.strtolower($opt['template']['locale']));
 		}
-		$tpl->add_header_javascript('templates2/' . $opt['template']['style'] . '/js/editor.js');
+		$tpl->add_header_javascript(editorJsPath());
 
 		// check and prepare log text
-		if ($descMode != 1)
-		{
-			$ocPurifier = new OcHTMLPurifier($opt);
-			$logText = $ocPurifier->purify($logText);
-		}
-		else
-			$logText = nl2br(htmlspecialchars($logText, ENT_COMPAT, 'UTF-8'));
+		$logText = processEditorInput($oldDescMode, $descMode, $logText);
 		
 		// validate date
 		if (is_numeric($logDateMonth)
@@ -235,8 +240,6 @@
 		}
 		
 		// assign values to template
-		// error
-		$tpl->assign('validate', $validate);
 		// user info
 		$tpl->assign('userFound', $user->getStatFound());
 		// cache infos
@@ -265,6 +268,9 @@
 		// show number of found on log page
 		$tpl->assign('showstatfounds', $user->showStatFounds());
 		$tpl->assign('logpw', $cache->requireLogPW());
+
+		$tpl->assign('smilies', $smiley_a);
+		$tpl->assign('smileypath', $opt['template']['smiley']);
 	}
 	else
 	{

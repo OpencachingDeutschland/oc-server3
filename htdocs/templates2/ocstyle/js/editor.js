@@ -17,6 +17,7 @@
 	function OcInitEditor()
 	{
 		document.getElementById("scriptwarning").firstChild.nodeValue = "";
+		document.getElementById("oldDescMode").value = descMode;
 		if (descMode == 3)
 		{
 			// For the case that TinyMCE does not work, we first fall back to a simple editor mode:
@@ -47,45 +48,6 @@
 		if (descElem == null)
 			var descElem = document.getElementById("logtext");
 		return descElem;
-	}
-
-	function SwitchToTextMode()
-	{
-		descMode = 1;
-		document.getElementById("descMode").value = descMode;
-
-		switchfield = document.getElementById("switchDescMode");
-		if (switchfield != null)
-			switchfield.value = "1";
-
-		if (use_tinymce == 1)
-			document.editform.submit();
-	}
-
-	function SwitchToHtmlMode()
-	{
-		descMode = 2;
-		document.getElementById("descMode").value = descMode;
-
-		switchfield = document.getElementById("switchDescMode");
-		if (switchfield != null)
-			switchfield.value = "1";
-
-		if (use_tinymce == 1)
-			document.editform.submit();
-	}
-
-	function SwitchToTinyMCE()
-	{
-		descMode = 3;
-		document.getElementById("descMode").value = descMode;
-
-		switchfield = document.getElementById("switchDescMode");
-		if (switchfield != null)
-			switchfield.value = "1";
-
-		if (use_tinymce == 0)
-			document.editform.submit();
 	}
 
 	function mnuSelectElement(e)
@@ -150,86 +112,51 @@
 
 	function btnSelect(mode)
 	{
-		var oldMode = descMode;
-		descMode = mode;
-		mnuSetElementsNormal();
-
-		if ((oldMode == 1) && (descMode != 1))
+		if (mode != descMode)
 		{
-			// convert text to HTML
-			var desc = getDescElement().value;
+			descMode = mode;
+			document.getElementById("descMode").value = descMode;
+			mnuSetElementsNormal();
 
-			if ((desc.indexOf('&amp;') == -1) &&
-			    (desc.indexOf('&quot;') == -1) &&
-			    (desc.indexOf('&lt;') == -1) &&
-			    (desc.indexOf('&gt;') == -1) &&
-			    (desc.indexOf('<p>') == -1) &&
-			    (desc.indexOf('<i>') == -1) &&
-			    (desc.indexOf('<strong>') == -1) &&
-			    (desc.indexOf('<br />') == -1))
-			{
-				desc = desc.replace(/&/g, "&amp;");
-				desc = desc.replace(/"/g, "&quot;");
-				desc = desc.replace(/</g, "&lt;");
-				desc = desc.replace(/>/g, "&gt;");
-				desc = desc.replace(/\r\n/g, "\<br />");
-				desc = desc.replace(/\n/g, "<br />");
-				desc = desc.replace(/<br \/>/g, "<br />\n");
-			}
+			switchfield = document.getElementById("switchDescMode");
+			if (switchfield != null)
+				switchfield.value = "1";
 
-			getDescElement().value = desc;
-		}
+			if (document.getElementById("editor"))
+				document.editform.action += '#editor';
 
-		switch (mode)
-		{
-			case 1:
-				SwitchToTextMode();
-				break;
-			case 2:
-				SwitchToHtmlMode();
-				break;
-			case 3:
-				SwitchToTinyMCE();
-				break;
+			document.editform.submit();
 		}
 	}
 
 	function btnMouseOver(id)
 	{
-		var descText = document.getElementById("descText").style;
-		var descHtml = document.getElementById("descHtml").style;
-		var descHtmlEdit = document.getElementById("descHtmlEdit").style;
-
 		switch (id)
 		{
 			case 1:
-				mnuHoverElement(descText);
+				mnuHoverElement(document.getElementById("descText").style);
 				break;
 			case 2:
-				mnuHoverElement(descHtml);
+				mnuHoverElement(document.getElementById("descHtml").style);
 				break;
 			case 3:
-				mnuHoverElement(descHtmlEdit);
+				mnuHoverElement(document.getElementById("descHtmlEdit").style);
 				break;
 		}
 	}
 
 	function btnMouseOut(id)
 	{
-		var descText = document.getElementById("descText").style;
-		var descHtml = document.getElementById("descHtml").style;
-		var descHtmlEdit = document.getElementById("descHtmlEdit").style;
-
 		switch (id)
 		{
 			case 1:
-				mnuUnhoverElement(descText);
+				mnuUnhoverElement(document.getElementById("descText").style);
 				break;
 			case 2:
-				mnuUnhoverElement(descHtml);
+				mnuUnhoverElement(document.getElementById("descHtml").style);
 				break;
 			case 3:
-				mnuUnhoverElement(descHtmlEdit);
+				mnuUnhoverElement(document.getElementById("descHtmlEdit").style);
 				break;
 		}
 	}

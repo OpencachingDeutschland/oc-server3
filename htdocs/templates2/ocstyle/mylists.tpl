@@ -51,6 +51,7 @@
 	<form method="post" action="mylists.php?id={$listid}" name="editform" id="editlist_form">
 		{if $edit_list}<input type="hidden" name="listid" value="{$listid}" />{/if}
 		<input id="descMode" type="hidden" name="descMode" value="3" />
+		<input id="oldDescMode" type="hidden" name="oldDescMode" value="3" />
 		<input type="hidden" id="switchDescMode" name="switchDescMode" value="0" />
 		{if $fromsearch}<input type="hidden" name="fromsearch" value="{$fromsearch}" />{/if}
 

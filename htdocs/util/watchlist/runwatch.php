@@ -227,22 +227,19 @@ function process_owner_log($user_id, $log_id)
 	mysql_free_result($rsLog);
 	
 	$logtext = $rLog['text'];
-	if ($rLog['text_html'] != 0)
-	{
-		$logtext = html_entity_decode($logtext, ENT_COMPAT, 'UTF-8');
-		$h2t = new html2text($logtext);
-		$h2t->set_base_url($absolute_server_URI);
-		$logtext = trim($h2t->get_text());
+	$logtext = html_entity_decode($logtext, ENT_COMPAT, 'UTF-8');
+	$h2t = new html2text($logtext);
+	$h2t->set_base_url($absolute_server_URI);
+	$logtext = trim($h2t->get_text());
 /*
-		$logtext = html_entity_decode($logtext, ENT_COMPAT, 'UTF-8');
-		$logtext = mb_ereg_replace("\r", '', $logtext);
-		$logtext = mb_ereg_replace("\n", '', $logtext);
-		$logtext = mb_ereg_replace('</p>', "</p>\n", $logtext);
-		$logtext = mb_ereg_replace('<br/>', "<br/>\n", $logtext);
-		$logtext = mb_ereg_replace('<br />', "<br />\n", $logtext);
-		$logtext = strip_tags($logtext);
+	$logtext = html_entity_decode($logtext, ENT_COMPAT, 'UTF-8');
+	$logtext = mb_ereg_replace("\r", '', $logtext);
+	$logtext = mb_ereg_replace("\n", '', $logtext);
+	$logtext = mb_ereg_replace('</p>', "</p>\n", $logtext);
+	$logtext = mb_ereg_replace('<br/>', "<br/>\n", $logtext);
+	$logtext = mb_ereg_replace('<br />', "<br />\n", $logtext);
+	$logtext = strip_tags($logtext);
 */
-	}
 
 	$language = sqlValue("SELECT `language` FROM `user` WHERE `user_id`='" . sql_escape($user_id) . "'", null);
 	if (!$language)
@@ -279,22 +276,19 @@ function process_log_watch($user_id, $log_id)
 	mysql_free_result($rsLog);
 	
 	$logtext = $rLog['text'];
-	if ($rLog['text_html'] != 0)
-	{
-		$logtext = html_entity_decode($logtext, ENT_COMPAT, 'UTF-8');
-		$h2t = new html2text($logtext);
-		$h2t->set_base_url($absolute_server_URI);
-		$logtext = trim($h2t->get_text());
+	$logtext = html_entity_decode($logtext, ENT_COMPAT, 'UTF-8');
+	$h2t = new html2text($logtext);
+	$h2t->set_base_url($absolute_server_URI);
+	$logtext = trim($h2t->get_text());
 /*
-		$logtext = html_entity_decode($logtext, ENT_COMPAT, 'UTF-8');
-		$logtext = mb_ereg_replace("\r", '', $logtext);
-		$logtext = mb_ereg_replace("\n", '', $logtext);
-		$logtext = mb_ereg_replace('</p>', "</p>\n", $logtext);
-		$logtext = mb_ereg_replace('<br/>', "<br/>\n", $logtext);
-		$logtext = mb_ereg_replace('<br />', "<br />\n", $logtext);
-		$logtext = strip_tags($logtext);
+	$logtext = html_entity_decode($logtext, ENT_COMPAT, 'UTF-8');
+	$logtext = mb_ereg_replace("\r", '', $logtext);
+	$logtext = mb_ereg_replace("\n", '', $logtext);
+	$logtext = mb_ereg_replace('</p>', "</p>\n", $logtext);
+	$logtext = mb_ereg_replace('<br/>', "<br/>\n", $logtext);
+	$logtext = mb_ereg_replace('<br />', "<br />\n", $logtext);
+	$logtext = strip_tags($logtext);
 */
-	}
 	
 	$language = sqlValue("SELECT `language` FROM `user` WHERE `user_id`='" . sql_escape($user_id) . "'", null);
 	if (!$language)

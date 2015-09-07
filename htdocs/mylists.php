@@ -29,7 +29,7 @@
 	if (isset($_REQUEST['descMode']))
 		$descMode = min(3,max(2,$_REQUEST['descMode']+0));
 	else
-		$descMode = $user->getNoWysiwygEditor() ? 2 : 3;
+		$descMode = $user->getNoHTMLEditor() ? 2 : 3;
 
 	$edit_list = false;
 	$name_error = false;

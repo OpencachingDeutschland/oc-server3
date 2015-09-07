@@ -55,6 +55,7 @@
 
 <script type="text/javascript">
 <!--
+	var descMode = 2;
 	OcInitEditor();
 //-->
 </script>

@@ -33,14 +33,12 @@
 <!--
 function insertSmiley(parSmiley) {
   var myText = document.editform.logtext;
-  var smileyHtml = '<img src="resource2/tinymce/plugins/emotions/img/smiley-' + parSmiley + '.gif" alt="" border="0" width="18px" height="18px" />';
   myText.focus();
-
   /* fuer IE */
   if(typeof document.selection != 'undefined') {
     var range = document.selection.createRange();
     var selText = range.text;
-    range.text = smileyHtml + selText;
+    range.text = parSmiley + selText;
   }
   /* fuer Firefox/Mozilla-Browser */
   else if(typeof myText.selectionStart != 'undefined')
@@ -48,10 +46,10 @@ function insertSmiley(parSmiley) {
     var start = myText.selectionStart;
     var end = myText.selectionEnd;
     var selText = myText.value.substring(start, end);
-    myText.value = myText.value.substr(0, start) + smileyHtml + selText + myText.value.substr(end);
+    myText.value = myText.value.substr(0, start) + parSmiley + selText + myText.value.substr(end);
     /* Cursorposition hinter Smiley setzen */
-    myText.selectionStart = start + smileyHtml.length;
-    myText.selectionEnd = start + smileyHtml.length;
+    myText.selectionStart = start + parSmiley.length;
+    myText.selectionEnd = start + parSmiley.length;
   }
   /* fuer die anderen Browser */
   else
@@ -125,6 +123,8 @@ function _chkFound () {
 				<span id="descHtmlEdit" class="buttonNormal" onclick="btnSelect(3)" onmouseover="btnMouseOver(3)" onmouseout="btnMouseOut(3)">{t}Editor{/t}</span>
 				<span class="buttonSplitter">|</span>
 				<span id="descHtml" class="buttonNormal" onclick="btnSelect(2)" onmouseover="btnMouseOver(2)" onmouseout="btnMouseOut(2)">{t}&lt;html&gt;{/t}</span>
+				<span class="buttonSplitter">|</span>
+				<span id="descText" class="buttonNormal" onclick="btnSelect(1)" onmouseover="btnMouseOver(1)" onmouseout="btnMouseOut(1)">{t}Text{/t}</span>
 			</div>
 		</td>
 	</tr>
@@ -165,6 +165,7 @@ function _chkFound () {
 
 <script type="text/javascript">
 <!--
+	var descMode = {descMode};
 	OcInitEditor();
 	_chkFound();
 //-->

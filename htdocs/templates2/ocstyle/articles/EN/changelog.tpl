@@ -48,7 +48,6 @@
 	<li>Automatically load log entries for logged-off users
 	(<a href="http://redmine.opencaching.de/issues/785">#785</a>)
 	</li>
-	<li>Add smileys in the HTML editor mode</li>
 	<li>Avoid creation of Danish cache descriptions by mistake</li>
 	<li>Allow more European special characters in the user name
 	(<a href="http://redmine.opencaching.de/issues/212">#212</a>)
@@ -77,7 +76,6 @@
 	a list of allowed HTML elements can be found 
 	<a href="http://www.opencaching.de/articles.php?page=htmltags&locale=EN">here</a>.
 	</li>
-	<li>Removed text mode for editing logs and cache descriptions</li>
 	<li>
 	Popups of the HTML-editor are not cropped any more when using large fonts.
 	(<a href="http://redmine.opencaching.de/issues/300">#300</a>)

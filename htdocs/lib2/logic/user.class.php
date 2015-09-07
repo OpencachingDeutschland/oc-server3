@@ -285,11 +285,11 @@ class user
 	{
 		return $this->reUser->setValue('usermail_send_addr', $value);
 	}
-	function getNoWysiwygEditor()
+	function getNoHTMLEditor()
 	{
 		return $this->reUser->getValue('no_htmledit_flag');
 	}
-	function setNoWysiwygEditor($value)
+	function setNoHTMLEditor($value)
 	{
 		return $this->reUser->setValue('no_htmledit_flag', $value);
 	}

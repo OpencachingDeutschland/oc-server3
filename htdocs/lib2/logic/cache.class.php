@@ -305,6 +305,10 @@ class cache
 	{
 		global $login;
 
+		// negative or abornally high numbers like 1.0E+15 can crash the LIMIT selection
+		if ($count <= 0 || $count > 10000)
+			return array();
+
 		//prepare the logs
 		if ($deleted && ($login->admin && ADMIN_USER)>0)
 		{

@@ -195,6 +195,9 @@
 	$tpl->assign('descMode', $descMode);
 	$tpl->assign('list_caches', $list_caches);
 
+	$tpl->assign('scrollposx', isset($_REQUEST['scrollposx']) ? $_REQUEST['scrollposx'] + 0 : 0);
+	$tpl->assign('scrollposy', isset($_REQUEST['scrollposy']) ? $_REQUEST['scrollposy'] + 0 : 0);
+
 	$tpl->display();
 
 ?>

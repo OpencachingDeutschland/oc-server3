@@ -395,6 +395,9 @@
 		}
 	}
 
+	tpl_set_var('scrollposx', isset($_REQUEST['scrollposx']) ? $_REQUEST['scrollposx'] + 0 : 0);
+	tpl_set_var('scrollposy', isset($_REQUEST['scrollposy']) ? $_REQUEST['scrollposy'] + 0 : 0);
+
 	//make the template and send it out
 	tpl_BuildTemplate();
 ?>

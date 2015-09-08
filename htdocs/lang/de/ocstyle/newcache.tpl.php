@@ -126,6 +126,8 @@ function toggleAttr(id)
 <input type="hidden" id="cache_attribs" name="cache_attribs" value="{cache_attribs}" />
 <input id="descMode" type="hidden" name="descMode" value="1" />
 <input id="oldDescMode" type="hidden" name="oldDescMode" value="1" />
+<input type="hidden" name="scrollposx" value="{scrollposx}" />
+<input type="hidden" name="scrollposy" value="{scrollposy}" />
 <table class="table">
 	{general_message}
 	<tr><td class="spacer" colspan="2"></td></tr>
@@ -248,7 +250,7 @@ function toggleAttr(id)
 		<td colspan="2">{cache_attrib_list}{safari_message}</td>
 	</tr>
 	<tr><td class="spacer" colspan="2">&nbsp;</td></tr>
-	<tr id="editor">
+	<tr>
 		<td class="header-small" colspan="2">
 			<div class="content2-container bg-blue02">
 				<p class="content-title-noshade-size2">

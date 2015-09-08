@@ -16,6 +16,9 @@
 
 	function OcInitEditor()
 	{
+		if (document.editform.scrollposx.value + document.editform.scrollposy.value != 0)
+			window.scrollTo(document.editform.scrollposx.value, document.editform.scrollposy.value);
+
 		document.getElementById("scriptwarning").firstChild.nodeValue = "";
 		document.getElementById("oldDescMode").value = descMode;
 		if (descMode == 3)
@@ -122,10 +125,23 @@
 			if (switchfield != null)
 				switchfield.value = "1";
 
-			if (document.getElementById("editor"))
-				document.editform.action += '#editor';
-
+			saveScrollPos();
 			document.editform.submit();
+		}
+	}
+
+	function saveScrollPos()
+	{
+		if (window.pageXOffset != undefined)
+		{
+			document.editform.scrollposx.value = window.pageXOffset;
+			document.editform.scrollposy.value = window.pageYOffset;
+		}
+		else
+		{
+			var d = document, r = d.documentElement, b = d.body;
+			d.editform.scrollposx.value = r.scrollLeft || b.scrollLeft || 0;
+			d.editform.scrollposy.value = r.scrollTop || b.scrollTop || 0;
 		}
 	}
 

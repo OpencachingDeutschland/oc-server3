@@ -38,6 +38,8 @@
 <input type="hidden" name="version2" value="1"/>
 <input id="descMode" type="hidden" name="descMode" value="1" />
 <input id="oldDescMode" type="hidden" name="oldDescMode" value="1" />
+<input type="hidden" name="scrollposx" value="{scrollposx}" />
+<input type="hidden" name="scrollposy" value="{scrollposy}" />
 <table class="table">
 	<tr>
 		<td>{t}Language:{/t}</td>

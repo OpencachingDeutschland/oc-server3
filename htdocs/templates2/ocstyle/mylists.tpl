@@ -54,6 +54,8 @@
 		<input id="oldDescMode" type="hidden" name="oldDescMode" value="3" />
 		<input type="hidden" id="switchDescMode" name="switchDescMode" value="0" />
 		{if $fromsearch}<input type="hidden" name="fromsearch" value="{$fromsearch}" />{/if}
+		<input type="hidden" name="scrollposx" value="{$scrollposx}" />
+		<input type="hidden" name="scrollposy" value="{$scrollposy}" />
 
 		<table class="table" id="addlist" {if !($name_error || $edit_list || $newlist_mode)}style="display:none"{/if}>
 			<tr><td class="separator"></td></tr>

@@ -51,8 +51,11 @@
 	<form method="post" action="mylists.php?id={$listid}" name="editform" id="editlist_form">
 		{if $edit_list}<input type="hidden" name="listid" value="{$listid}" />{/if}
 		<input id="descMode" type="hidden" name="descMode" value="3" />
+		<input id="oldDescMode" type="hidden" name="oldDescMode" value="3" />
 		<input type="hidden" id="switchDescMode" name="switchDescMode" value="0" />
 		{if $fromsearch}<input type="hidden" name="fromsearch" value="{$fromsearch}" />{/if}
+		<input type="hidden" name="scrollposx" value="{$scrollposx}" />
+		<input type="hidden" name="scrollposy" value="{$scrollposy}" />
 
 		<table class="table" id="addlist" {if !($name_error || $edit_list || $newlist_mode)}style="display:none"{/if}>
 			<tr><td class="separator"></td></tr>

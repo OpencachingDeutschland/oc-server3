@@ -36,6 +36,9 @@
 <input type="hidden" name="show_all_langs" value="{show_all_langs}"/>
 <input type="hidden" name="version2" value="1"/>
 <input id="descMode" type="hidden" name="descMode" value="1" />
+<input id="oldDescMode" type="hidden" name="oldDescMode" value="1" />
+<input type="hidden" name="scrollposx" value="{scrollposx}" />
+<input type="hidden" name="scrollposy" value="{scrollposy}" />
 <table class="table">
 	<tr><td class="spacer" colspan="2"></td></tr>
 	<tr>
@@ -79,16 +82,7 @@
 			<textarea id="desc" class="cachedesc" name="desc" cols="90" rows="25">{desc}</textarea>
     </td>	
 	</tr>
-	<tr><td class="spacer" colspan="2"></td></tr>
-	<tr>
-		<td class="help" colspan="2">
-			<img src="lang/de/ocstyle/images/misc/hint.gif" border="0" width="15" height="11" alt="{t}Notice{/t}" title="{t}Notice{/t}" />
-			{t}Your HTML code will be changed again by a special filter. This is nacessary to avoid dangerous HTML-tags, such as &lt;script&gt;.
-				 A list of allowed HTML tags can be find <a href="http://www.opencaching.de/articles.php?page=htmltags">here</a>.{/t}<br />
-			<img src="lang/de/ocstyle/images/misc/hint.gif" border="0" width="15" height="11" alt="{t}Notice{/t}" title="{t}Notice{/t}" />
-			{t}Please do not use any images that are hosted on geocaching.com. Upload your fotos instead on our server as well.{/t}
-		</td>
-	</tr>
+	{htmlnotice}
 	<tr><td class="spacer" colspan="2"></td></tr>
 
 	<tr>

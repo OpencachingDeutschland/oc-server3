@@ -18,10 +18,10 @@
  ****************************************************************************/
 
    //prepare the templates and include all neccessary
-	require_once('./lib/common.inc.php');
+	require_once('lib/common.inc.php');
 	require_once($stylepath . '/lib/icons.inc.php');
-	require_once($rootpath . 'lib2/html2text.class.php');
-	require_once('./lib/recommendation.inc.php');
+	require_once('lib2/edithelper.inc.php');
+	require_once('lib/recommendation.inc.php');
 
 	//Preprocessing
 	if ($error == false)
@@ -114,14 +114,7 @@
 								$message = $removed_message_title . "\n" . $message . "\n" . $removed_message_end;
 							}
 
-							$logtext = $log_record['log_text'];
-							if ($log_record['text_html'] != 0)
-							{
-								$logtext = html_entity_decode($logtext, ENT_COMPAT, 'UTF-8');
-								$h2t = new html2text($logtext);
-								$h2t->set_base_url($absolute_server_URI);
-								$logtext = trim($h2t->get_text());
-							}
+							$logtext = html2plaintext($log_record['log_text'], $log_record['text_html'] == 0);
 
 							//get cache owner name
 							$cache_owner_rs = sql("SELECT `username` FROM `user` WHERE `user_id`='&1'", $log_record['cache_owner_id']);

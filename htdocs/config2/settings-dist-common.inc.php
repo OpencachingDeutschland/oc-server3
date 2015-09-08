@@ -53,6 +53,9 @@
 	$opt['template']['default']['style'] = 'ocstyle';
 	$opt['template']['default']['country'] = 'DE';
 
+	// smiley path
+	$opt['template']['smiley'] = 'resource2/tinymce/plugins/emotions/img/';
+
 	/* pregenerated waypoint list for new caches
 	 * - Waypoint prefix (OC, OP, OZ ... AA=local development)
 	 * - When pool contains less than min_count, generation process starts

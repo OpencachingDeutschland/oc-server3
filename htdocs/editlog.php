@@ -23,11 +23,10 @@
  ****************************************************************************/
 
   //prepare the templates and include all neccessary
-	require_once('./lib/common.inc.php');
-	require_once('./lib2/logic/logtypes.inc.php');
-	require($stylepath.'/smilies.inc.php');
-	require_once('./lib2/OcHTMLPurifier.class.php');
-	require_once('./lib/recommendation.inc.php');
+	require_once('lib/common.inc.php');
+	require_once('lib2/logic/logtypes.inc.php');
+	require_once('lib/recommendation.inc.php');
+	require_once('lib2/edithelper.inc.php');
 
 	//Preprocessing
 	if ($error == false)
@@ -144,10 +143,17 @@
 
 					tpl_set_var('rating_message', mb_ereg_replace('{rating_msg}', $rating_msg, $rating_tpl));
 
-					if (isset($_POST['descMode']))  // Ocprop: 2
+					if (isset($_POST['descMode']))
 					{
-						$descMode = $_POST['descMode']+0;
+						$descMode = $_POST['descMode']+0;  // Ocprop: 2
 						if (($descMode < 1) || ($descMode > 3)) $descMode = 3;
+						if (isset($_POST['oldDescMode']))
+						{
+							$oldDescMode = $_POST['oldDescMode'];
+							if (($oldDescMode < 1) || ($oldDescMode > 3)) $oldDescMode = $descMode;
+						}
+						else
+							$oldDescMode = $descMode;
 					}
 					else
 					{
@@ -158,6 +164,7 @@
 								$descMode = 2;
 						else
 							$descMode = 1;
+						$oldDescMode = $descMode;
 					}
 
 					// fuer alte Versionen von OCProp
@@ -167,32 +174,21 @@
 						$_POST['submitform'] = $_POST['submit'];
 					}
 
-					if ($descMode != 1)
-					{
-						// Text from textarea; Ocprop
-						$log_text = isset($_POST['logtext']) ? ($_POST['logtext']) : ($log_record['text']);
-
-						// fuer alte Versionen von OCProp
-						if (isset($_POST['submit']) && !isset($_POST['version2']))
-						{
-							$log_text = iconv("ISO-8859-1", "UTF-8", $log_text);
-						}
-
-						// check input
-						$purifier = new OcHTMLPurifier($opt);
-						$log_text = $purifier->purify($log_text);
-					}
+					// Text from textarea; Ocprop
+					if (isset($_POST['logtext']))
+						$log_text = $_POST['logtext'];
 					else
 					{
-						// escape text
-						$log_text = isset($_POST['logtext']) ? htmlspecialchars($_POST['logtext'], ENT_COMPAT, 'UTF-8') : strip_tags($log_record['text']);
-
-						// fuer alte Versionen von OCProp
-						if (isset($_POST['submit']) && !isset($_POST['version2']))
-						{
-							$log_text = iconv("ISO-8859-1", "UTF-8", $log_text);
-						}
+						$log_text = $log_record['text'];
+						if ($descMode == 1)
+							$oldDescMode = 0;   // plain text with encoded HTML entities
 					}
+
+					// fuer alte Versionen von OCProp
+					if ($descMode != 1 && isset($_POST['submit']) && !isset($_POST['version2']))
+						$log_text = iconv("ISO-8859-1", "UTF-8", $log_text);
+
+					$log_text = processEditorInput($oldDescMode, $descMode, $log_text);
 
 					//validate date
 					$date_ok = false;
@@ -261,7 +257,7 @@
 						                             $log_type,
 						                             $oc_team_comment,
 						                             $log_date,
-						                             (($descMode != 1) ? $log_text : nl2br($log_text)),
+						                             $log_text,
 						                             (($descMode != 1) ? 1 : 0),
 						                             (($descMode == 3) ? 1 : 0),
 						                             $log_id);
@@ -358,7 +354,7 @@
 						$headers .= '<script language="javascript" type="text/javascript" src="resource2/tinymce/config/log.js.php?logid=0&lang='.strtolower($locale).'"></script>' . "\n";
 						tpl_set_var('descMode', 3);
 					}
-					$headers .= '<script language="javascript" type="text/javascript" src="templates2/ocstyle/js/editor.js"></script>' . "\n";
+					$headers .= '<script language="javascript" type="text/javascript" src="' . editorJsPath() . '"></script>' . "\n";	
 					tpl_set_var('htmlheaders', $headers);
 
 					if ($use_log_pw == true && $log_pw != '')
@@ -373,16 +369,17 @@
 					$smilies = '';
 					if ($descMode != 3)
 					{
-						for ($i=0; $i<count($smileyshow); $i++)
+						for ($i=0; $i<count($smiley['show']); $i++)
 						{
-							if($smileyshow[$i] == '1')
+							if ($smiley['show'][$i] == '1')
 							{
 								$tmp_smiley = $smiley_link;
-								$tmp_smiley = mb_ereg_replace('{smiley_image}', $smileyimage[$i], $tmp_smiley);
-								$tmp_smiley = mb_ereg_replace('{smiley_symbol}', $smileytext[$i], $tmp_smiley);
-								$smilies = $smilies.'&nbsp;'.mb_ereg_replace('{smiley_name}', $smileyname[$i], $tmp_smiley).'&nbsp;';
+								$tmp_smiley = mb_ereg_replace('{smiley_image}', $smiley['image'][$i], $tmp_smiley);
+								$tmp_smiley = mb_ereg_replace('{smiley_symbol}', $smiley['text'][$i], $tmp_smiley);
+								$smilies = $smilies.'&nbsp;'.mb_ereg_replace('{smiley_file}', $smiley['file'][$i], $tmp_smiley).'&nbsp;';
 							}
 						}
+						tpl_set_var('smileypath', $opt['template']['smiley']);
 					}
 					tpl_set_var('smilies', $smilies);
 				}
@@ -397,6 +394,9 @@
 			}
 		}
 	}
+
+	tpl_set_var('scrollposx', isset($_REQUEST['scrollposx']) ? $_REQUEST['scrollposx'] + 0 : 0);
+	tpl_set_var('scrollposy', isset($_REQUEST['scrollposy']) ? $_REQUEST['scrollposy'] + 0 : 0);
 
 	//make the template and send it out
 	tpl_BuildTemplate();

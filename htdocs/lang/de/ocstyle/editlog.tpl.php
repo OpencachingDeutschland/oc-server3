@@ -31,9 +31,9 @@
 ?>
 <script type="text/javascript">
 <!--
-function insertSmiley(smileySymbol, smileyName) {
+function insertSmiley(smileySymbol, smileyFile) {
   var myText = document.editform.logtext;
-  var insertText = (descMode == 1 ? smileySymbol : '<img src="resource2/tinymce/plugins/emotions/img/smiley-' + smileyName + '.gif" alt="" border="0" width="18px" height="18px" />');
+  var insertText = (descMode == 1 ? smileySymbol : '<img src="{smileypath}' + smileyFile + '" alt="" border="0" width="18px" height="18px" />');
   myText.focus();
 
   /* for IE and Webkit */
@@ -76,12 +76,15 @@ function _chkFound () {
 //-->
 </script>
 
-		  <div class="content2-pagetitle"><img src="lang/de/ocstyle/images/description/22x22-logs.png" style="margin-right: 10px;" width="22" height="22" alt="" />{t}Edit log entry for the cache <a href="viewcache.php?cacheid={cacheid}">{cachename}</a>{/t}</div>
+<div class="content2-pagetitle"><img src="lang/de/ocstyle/images/description/22x22-logs.png" style="margin-right: 10px;" width="22" height="22" alt="" />{t}Edit log entry for the cache <a href="viewcache.php?cacheid={cacheid}">{cachename}</a>{/t}</div>
 
 <form action="editlog.php" method="post" enctype="application/x-www-form-urlencoded" name="editform" dir="ltr">
 <input type="hidden" name="logid" value="{logid}"/>
 <input type="hidden" name="version2" value="1"/>
+<input id="oldDescMode" type="hidden" name="oldDescMode" value="1" />
 <input id="descMode" type="hidden" name="descMode" value="1" />
+<input type="hidden" name="scrollposx" value="{scrollposx}" />
+<input type="hidden" name="scrollposy" value="{scrollposy}" />
 
 <table class="table">
 	<tr><td class="spacer" colspan="2"></td></tr>

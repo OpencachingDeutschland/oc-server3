@@ -63,6 +63,22 @@ class OcHTMLPurifier extends HTMLPurifier
 		// create parent object with config
 		parent::__construct($config);
 	}
+
+
+	function purify($text, $config=null)
+	{
+		// HTMLPurifier deletes spaces between images; apply space protection:
+		do
+		{
+			$text0 = $text;
+			$text = mb_ereg_replace(">[\s\t]+<img", ">[s[p[a[c[e]]]]]<img", $text);
+		} while ($text != $text0);
+
+		$text = parent::purify($text, $config);
+
+		return str_replace("[s[p[a[c[e]]]]]<img", " <img", $text);
+	}
+
 }
 
 

@@ -3,7 +3,11 @@
  *  For license information see doc/license.txt
  *
  *  Unicode Reminder メモ
+ *
+ *  In lib2 this file is always included via common.inc.php.
+ *  Also used in lib1.
  ***************************************************************************/
+
 class geomath
 {
 	static function calcBearing($lat1, $lon1, $lat2, $lon2)
@@ -45,7 +49,7 @@ class geomath
 	{
 		if ($parShortText == 0)
 		{
-			if ($parBearing == '-')
+			if ($parBearing === false)
 			{
 				return 'N/A';
 			}
@@ -85,7 +89,7 @@ class geomath
 		}
 		else
 		{
-			if ($parBearing == '-')
+			if ($parBearing === false)
 			{
 				return 'N/A';
 			}

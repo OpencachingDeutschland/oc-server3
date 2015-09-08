@@ -48,7 +48,6 @@
 
 	//load default webserver-settings and common includes
 	require_once($opt['rootpath'] . 'lib/settings.inc.php');
-	require_once($opt['rootpath'] . 'lib/calculation.inc.php');
 	require_once($opt['rootpath'] . 'lib/consts.inc.php');
 	require_once($opt['rootpath'] . 'lib2/errorhandler.inc.php');
 
@@ -427,6 +426,13 @@
 		global $dblink;
 		$value = mysql_real_escape_string($value, $dblink);
 		$value = mb_ereg_replace('&', '\&', $value);
+		return $value;
+	}
+
+	function sql_escape_backtick($value)
+	{
+		$value = sql_escape($value);
+		$value = str_replace('`', '``', $value);
 		return $value;
 	}
 

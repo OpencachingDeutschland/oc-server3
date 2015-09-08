@@ -21,6 +21,7 @@
 	require_once($opt['rootpath'] . 'lib2/const.inc.php');
 	require_once($opt['rootpath'] . 'lib2/logic/data-license.inc.php');
 	require_once($opt['rootpath'] . 'lib2/logic/npas.inc.php');
+	require_once($opt['rootpath'] . 'lib2/logic/geomath.class.php');
 
   if ($error == true)
 	{
@@ -262,7 +263,7 @@
 			$rs = sql('SELECT `users`, `caches`, `cachedescs`, `cachelogs`, `pictures`, `removedobjects` FROM `xmlsession` WHERE id=&1', $sessionid);
 			$recordcount = sql_fetch_array($rs);
 			mysql_free_result($rs);
-		
+
 			if ($sCharset == 'iso-8859-1')
 				header('Content-Type: application/xml; charset=ISO-8859-1');
 			else if ($sCharset == 'utf-8')
@@ -521,13 +522,13 @@ function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $z
 				fwrite($f, $t3 . '<wpt id="' . ($rWaypoint['id']+0) . '" type="' . ($rWaypoint['type']+0) . '" typename="' . xmlentities($rWaypoint['type_name']) . '" longitude="' . sprintf('%01.5f',$rWaypoint['longitude']) . '" latitude="' . sprintf('%01.5f',$rWaypoint['latitude']) . '">' . xmlcdata($rWaypoint['description']) . '</wpt>' . "\n");
 			}
 			fwrite($f, $t2 . '</wpts>' . "\n");
-			sql_free_result($rsAttributes);
+			sql_free_result($rsWaypoints);
 		}
 
 		fwrite($f, $t1 . '</cache>' . "\n");
 	}
 	mysql_free_result($rs);
-	
+
 	$rs = sql('SELECT SQL_BUFFER_RESULT `cache_desc`.`id` `id`, `cache_desc`.`uuid` `uuid`, `cache_desc`.`cache_id` `cache_id`, 
 	                                    `cache_desc`.`language` `language`, `cache_desc`.`short_desc` `short_desc`,
 	                                    `cache_desc`.`desc` `desc`, `cache_desc`.`desc_html` `desc_html`, `cache_desc`.`hint` `hint`, 
@@ -832,14 +833,14 @@ function startXmlSession($sModifiedSince, $bCache, $bCachedesc, $bCachelog, $bUs
 		{
 			$sql = 'CREATE TEMPORARY TABLE `tmpxmlSesssionCaches` (`cache_id` int(11), `distance` double, KEY (`cache_id`)) ENGINE=MEMORY ';
 			$sql .= 'SELECT `cache_coordinates`.`cache_id`, ';
-			$sql .= getSqlDistanceFormula($selection['lon'], $selection['lat'], $selection['distance'], 1, 'longitude', 'latitude', 'cache_coordinates') . ' `distance` ';
+			$sql .= geomath::getSqlDistanceFormula($selection['lon'], $selection['lat'], $selection['distance'], 1, 'longitude', 'latitude', 'cache_coordinates') . ' `distance` ';
 			$sql .= 'FROM `caches`, `cache_coordinates` WHERE ';
 			$sql .= '`cache_coordinates`.`cache_id`=`caches`.`cache_id`';
 			$sql .= ' AND `caches`.`status`!=5';
-			$sql .= ' AND `cache_coordinates`.`latitude` > ' . getMinLat($selection['lon'], $selection['lat'], $selection['distance']);
-			$sql .= ' AND `cache_coordinates`.`latitude` < ' . getMaxLat($selection['lon'], $selection['lat'], $selection['distance']);
-			$sql .= ' AND `cache_coordinates`.`longitude` >' . getMinLon($selection['lon'], $selection['lat'], $selection['distance']);
-			$sql .= ' AND `cache_coordinates`.`longitude` < ' . getMaxLon($selection['lon'], $selection['lat'], $selection['distance']);
+			$sql .= ' AND `cache_coordinates`.`latitude` > ' . geomath::getMinLat($selection['lon'], $selection['lat'], $selection['distance']);
+			$sql .= ' AND `cache_coordinates`.`latitude` < ' . geomath::getMaxLat($selection['lon'], $selection['lat'], $selection['distance']);
+			$sql .= ' AND `cache_coordinates`.`longitude` >' . geomath::getMinLon($selection['lon'], $selection['lat'], $selection['distance']);
+			$sql .= ' AND `cache_coordinates`.`longitude` < ' . geomath::getMaxLon($selection['lon'], $selection['lat'], $selection['distance']);
 			$sql .= ' HAVING `distance` < ' . ($selection['distance'] + 0);
 
 			sql($sql);

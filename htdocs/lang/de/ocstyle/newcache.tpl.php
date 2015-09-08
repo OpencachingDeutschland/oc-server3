@@ -125,6 +125,9 @@ function toggleAttr(id)
 <input type="hidden" name="version2" value="1"/>
 <input type="hidden" id="cache_attribs" name="cache_attribs" value="{cache_attribs}" />
 <input id="descMode" type="hidden" name="descMode" value="1" />
+<input id="oldDescMode" type="hidden" name="oldDescMode" value="1" />
+<input type="hidden" name="scrollposx" value="{scrollposx}" />
+<input type="hidden" name="scrollposy" value="{scrollposy}" />
 <table class="table">
 	{general_message}
 	<tr><td class="spacer" colspan="2"></td></tr>
@@ -304,17 +307,7 @@ function toggleAttr(id)
 			<textarea id="desc" name="desc" class="cachedesc">{desc}</textarea>
 		</td>
 	</tr>
-
-	<tr><td class="spacer" colspan="2"></td></tr>
-	<tr>
-		<td class="help" colspan="2">
-			<img src="lang/de/ocstyle/images/misc/hint.gif" border="0" width="15" height="11" alt="{t}Notice{/t}" title="{t}Notice{/t}" />
-			{t}Your HTML code will be changed again by a special filter. This is necessary to avoid dangerous HTML-tags, 
-				 such as &lt;script&gt;. A list of allowed HTML tags, you can find 
-				 <a href="http://www.opencaching.de/articles.php?page=htmltags">here</a>{/t}
-		</td>
-	</tr>
-
+	{htmlnotice}
 	<tr><td class="spacer" colspan="2"></td></tr>
 	<tr>
 		<td colspan="2">{t}Additional note:{/t}</td>

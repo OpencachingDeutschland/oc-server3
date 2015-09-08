@@ -11,7 +11,7 @@ function smarty_modifier_smiley($string)
 {
 	global $smiley;
 
-	return str_replace($smiley['text'], $smiley['image'], $string);
+	return str_replace($smiley['text'], $smiley['spaced_image'], $string);
 }
 
 ?>

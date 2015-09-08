@@ -29,7 +29,9 @@
  *                                                                       *
  * Author(s): Jon Abernathy <jon@chuggnutt.com>                          *
  *                                                                       *
- * Last modified: 08/08/07                                               *
+ * (Original Last modified: 08/08/07)                                    *
+ *                                                                       *
+ * With OCDE modifications for paragraph, newline and entity handling.   *
  *                                                                       *
  *************************************************************************/
 
@@ -147,6 +149,8 @@ class html2text
      */
     var $search = array(
         "/\r/",                                  // Non-legal carriage return
+        "/(<\/p[^>]*>|<br[^>]*>|<\/ul[^>]*>|<\/ol[^>]*>|<\/table[^>]*>)\n+/i",
+				                                         // OCDE: <p> <br> <ul> <li> + \n
         "/[\n\t]+/",                             // Newlines and tabs
         '/[ ]{2,}/',                             // Runs of spaces, pre-handling
         '/<script[^>]*>.*?<\/script>/i',         // <script>s -- which strip_tags supposedly has problems with
@@ -154,7 +158,7 @@ class html2text
         //'/<!-- .* -->/',                         // Comments -- which strip_tags might have problem a with
         '/<h[123][^>]*>(.*?)<\/h[123]>/ie',      // H1 - H3
         '/<h[456][^>]*>(.*?)<\/h[456]>/ie',      // H4 - H6
-        '/<p[^>]*>/i',                           // <P>
+        '/<\/p[^>]*>/i',                         // OCDE: </p>
         '/<br[^>]*>/i',                          // <br>
         '/<b[^>]*>(.*?)<\/b>/ie',                // <b>
         '/<strong[^>]*>(.*?)<\/strong>/ie',      // <strong>
@@ -171,6 +175,9 @@ class html2text
         '/(<tr[^>]*>|<\/tr>)/i',                 // <tr> and </tr>
         '/<td[^>]*>(.*?)<\/td>/i',               // <td> and </td>
         '/<th[^>]*>(.*?)<\/th>/ie',              // <th> and </th>
+/*
+	OCDE: html_entity_decode() will do a better job than this
+
         '/&(nbsp|#160);/i',                      // Non-breaking space
         '/&(quot|rdquo|ldquo|#8220|#8221|#147|#148);/i',
 		                                         // Double quotes
@@ -187,6 +194,7 @@ class html2text
         '/&(pound|#163);/i',                     // Pound sign
         '/&(euro|#8364);/i',                     // Euro sign
         '/&[^&;]+;/i',                           // Unknown/unhandled entities
+*/
         '/[ ]{2,}/'                              // Runs of spaces, post-handling
     );
 
@@ -199,6 +207,7 @@ class html2text
      */
     var $replace = array(
         '',                                     // Non-legal carriage return
+        '\\1',                                  // OCDE: <p> <br> <ul> <li>: strip trailing \n
         ' ',                                    // Newlines and tabs
         ' ',                                    // Runs of spaces, pre-handling
         '',                                     // <script>s -- which strip_tags supposedly has problems with
@@ -206,7 +215,7 @@ class html2text
         //'',                                     // Comments -- which strip_tags might have problem a with
         "strtoupper(\"\n\n\\1\n\n\")",          // H1 - H3
         "ucwords(\"\n\n\\1\n\n\")",             // H4 - H6
-        "\n\n\t",                               // <P>
+        "\n\n",                                 // OCDE: </p>
         "\n",                                   // <br>
         'strtoupper("\\1")',                    // <b>
         'strtoupper("\\1")',                    // <strong>
@@ -221,8 +230,9 @@ class html2text
         "\n-------------------------\n",        // <hr>
         "\n\n",                                 // <table> and </table>
         "\n",                                   // <tr> and </tr>
-        "\t\t\\1\n",                            // <td> and </td>
+        "\t\\1\n",                              // <td> and </td>  (OCDE: removed one tab)
         "strtoupper(\"\t\t\\1\n\")",            // <th> and </th>
+/*
         ' ',                                    // Non-breaking space
         '"',                                    // Double quotes
         "'",                                    // Single quotes
@@ -238,6 +248,7 @@ class html2text
         '£',
         'EUR',                                  // Euro sign. € ?
         '',                                     // Unknown/unhandled entities
+*/
         ' '                                     // Runs of spaces, post-handling
     );
 
@@ -445,7 +456,8 @@ class html2text
         	$text = wordwrap($text, $this->width);
         }
 
-        $this->text = $text;
+				// OCDE - added this:
+        $this->text = html_entity_decode($text, ENT_COMPAT, 'UTF-8');
 
         $this->_converted = true;
     }

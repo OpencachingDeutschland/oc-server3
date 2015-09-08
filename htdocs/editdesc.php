@@ -20,8 +20,8 @@
  ****************************************************************************/
  
 	//prepare the templates and include all neccessary
-	require_once('./lib/common.inc.php');
-	require_once('./lib2/OcHTMLPurifier.class.php');
+	require_once('lib/common.inc.php');
+	require_once('lib2/edithelper.inc.php');
 	
 	//Preprocessing
 	if ($error == false)
@@ -93,7 +93,7 @@
 					if (isset($_POST['post']))  // Ocprop
 					{
 						//here we read all used information from the form if submitted
-						$descMode = isset($_POST['descMode']) ? $_POST['descMode'] : 1;  // Ocprop
+						$descMode = isset($_POST['descMode']) ? $_POST['descMode'] + 0 : 1;  // Ocprop
 
 						// fuer alte Versionen von OCProp
 						if (isset($_POST['submit']) && !isset($_POST['version2']))
@@ -104,19 +104,29 @@
 
 						switch ($descMode)
 						{
+							case 1:
+								$desc_htmledit = 0;
+								$desc_html = 0;
+								break;
 							case 2:
 								$desc_htmledit = 0;
 								$desc_html = 1;
 								break;
-							case 3:
+							default:
+								$descMode = 3;
 								$desc_htmledit = 1;
 								$desc_html = 1;
 								break;
-							default:
-								$desc_htmledit = 0;
-								$desc_html = 0;
-								break;
 						}
+
+						if (isset($_POST['oldDescMode']))
+						{
+							$oldDescMode = $_POST['oldDescMode'];
+							if (($oldDescMode < 1) || ($oldDescMode > 3)) $oldDescMode = $descMode;
+						}
+						else
+							$oldDescMode = $descMode;
+
 						$short_desc = $_POST['short_desc'];  // Ocprop
 						$hint = htmlspecialchars($_POST['hints'], ENT_COMPAT, 'UTF-8');
 						$desclang = $_POST['desclang'];
@@ -130,32 +140,16 @@
 							$hint = iconv("ISO-8859-1", "UTF-8", $hint);
 						}
 
-						if ($desc_html == 1)
-						{
-							// Text from textarea
-							$desc = $_POST['desc'];  // Ocprop
+						// Text from textarea
+						$desc = $_POST['desc'];  // Ocprop
 						
-							// fuer alte Versionen von OCProp
-							if (isset($_POST['submit']) && !isset($_POST['version2']))
-							{
-								$desc = iconv("ISO-8859-1", "UTF-8", $desc);
-							}
-
-							// Filter Input
-							$purifier = new OcHTMLPurifier($opt);
-							$desc = $purifier->purify($desc);
-						}
-						else
+						// fuer alte Versionen von OCProp
+						if (isset($_POST['submit']) && !isset($_POST['version2']))
 						{
-							// escape text
-							$desc = htmlspecialchars($_POST['desc'], ENT_COMPAT, 'UTF-8');
-
-							// fuer alte Versionen von OCProp
-							if (isset($_POST['submit']) && !isset($_POST['version2']))
-							{
-								$desc = iconv("ISO-8859-1", "UTF-8", $desc);
-							}
+							$desc = iconv("ISO-8859-1", "UTF-8", $desc);
 						}
+
+						$desc = processEditorInput($oldDescMode, $descMode, $desc);
 
 						if (isset($_POST['submitform']))  // Ocprop
 						{
@@ -176,7 +170,7 @@
 							      WHERE `id`='&7'",
 							            (($desc_html == 1) ? '1' : '0'), 
 							            (($desc_htmledit == 1) ? '1' : '0'),
-							            (($desc_html == 1) ? $desc : nl2br($desc)),
+							            $desc,
 							            $short_desc,
 							            nl2br($hint),
 							            $desclang,
@@ -214,20 +208,17 @@
 						$desc_htmledit = $desc_record['desc_htmledit'];
 						$desc_html = $desc_record['desc_html'];
 						$desc_lang = $desc_record['language'];
+						$descMode = ($desc_html == 0 ? 1 : ($desc_htmledit ? 3 : 2));
+						$oldDescMode = ($desc_html == 0 ? 0 : ($desc_htmledit ? 3 : 2));
 
-						if ($desc_html == 1)
-							$desc = $desc_record['desc'];
-						else{
-							$desc = strip_tags($desc_record['desc']);
-						}
+						$desc = processEditorInput($oldDescMode, $descMode, $desc_record['desc']);
 					}
 					
 					//here we only set up the template variables
 					
-					if ($desc_html == 1)
-						tpl_set_var('desc', htmlspecialchars($desc, ENT_COMPAT, 'UTF-8'), true);
-					else
-						tpl_set_var('desc', $desc, true);
+					tpl_set_var('desc', htmlspecialchars($desc, ENT_COMPAT, 'UTF-8'), true);
+					tpl_set_var('descMode', $descMode);
+					tpl_set_var('htmlnotice', $descMode == 2 ? $htmlnotice : '');
 			
 					// ok ... die desclang zusammenbauen
 					if ($show_all_langs == false)
@@ -286,13 +277,8 @@
 						$headers = tpl_get_var('htmlheaders') . "\n";
 						$headers .= '<script language="javascript" type="text/javascript" src="resource2/tinymce/tiny_mce_gzip.js"></script>' . "\n";
             $headers .= '<script language="javascript" type="text/javascript" src="resource2/tinymce/config/desc.js.php?cacheid=' .  ($desc_record['cache_id']+0) . '&lang=' .  strtolower($locale) . '"></script>' . "\n";
-						tpl_set_var('descMode', 3);
 					}
-					else if ($desc_html == 1)
-						tpl_set_var('descMode', 2);
-					else
-						tpl_set_var('descMode', 1);
-					$headers .= '<script language="javascript" type="text/javascript" src="templates2/ocstyle/js/editor.js"></script>' . "\n";
+					$headers .= '<script language="javascript" type="text/javascript" src="' . editorJsPath() . '"></script>' . "\n";
 					tpl_set_var('htmlheaders', $headers);
 				}
 				else
@@ -305,6 +291,9 @@
 		}
 	}
 	
+	tpl_set_var('scrollposx', isset($_REQUEST['scrollposx']) ? $_REQUEST['scrollposx'] + 0 : 0);
+	tpl_set_var('scrollposy', isset($_REQUEST['scrollposy']) ? $_REQUEST['scrollposy'] + 0 : 0);
+
 	//make the template and send it out
 	tpl_BuildTemplate();
 ?>

@@ -180,9 +180,6 @@
 	 */
 	$opt['debug'] = DEBUG_DEVELOPER;
 
-	// smiley path
-	$opt['template']['smiley'] = 'resource2/tinymce/plugins/emotions/img/';
-
 	/* other template options
 	 *
 	 */

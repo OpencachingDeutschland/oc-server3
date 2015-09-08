@@ -7,9 +7,9 @@
 <script type="text/javascript">
 {literal}
 <!--
-function insertSmiley(smileySymbol, smileyName) {
+function insertSmiley(smileySymbol, smileyPath) {
   var myText = document.editform.logtext;
-  var insertText = (descMode == 1 ? smileySymbol : '<img src="resource2/tinymce/plugins/emotions/img/smiley-' + smileyName + '.gif" alt="" border="0" width="18px" height="18px" />');
+  var insertText = (descMode == 1 ? smileySymbol : '<img src="' + smileyPath + '" alt="" border="0" width="18px" height="18px" />');
   myText.focus();
 
   /* for IE and Webkit */
@@ -82,7 +82,10 @@ function _chkFound () {
 {/if}
 <input type="hidden" name="cacheid" value="{$cacheid}"/>
 <input type="hidden" name="version3" value="1"/>
-<input id="descMode" type="hidden" name="descMode" value="3" />
+<input id="descMode" type="hidden" name="descMode" value="1" />
+<input id="oldDescMode" type="hidden" name="oldDescMode" value="1" />
+<input type="hidden" name="scrollposx" value="{$scrollposx}" />
+<input type="hidden" name="scrollposy" value="{$scrollposy}" />
 <table class="table">
 	<tr><td class="spacer" colspan="2"></td></tr>
 	<tr><td colspan="2"></td></tr>
@@ -162,19 +165,13 @@ function _chkFound () {
 	{if $descMode!=3}
 	<tr>
 		<td colspan="2">
-			<a href="javascript:insertSmiley('  :)  ','smile')"><img src="resource2/tinymce/plugins/emotions/img/smiley-smile.gif" alt="" height="18px" width="18px" border="0" /></a>&nbsp;
-			<a href="javascript:insertSmiley('  ;)  ','wink')"><img src="resource2/tinymce/plugins/emotions/img/smiley-wink.gif" alt="" height="18px" width="18px" border="0" /></a>&nbsp;
-			<a href="javascript:insertSmiley('  :D  ','laughing')"><img src="resource2/tinymce/plugins/emotions/img/smiley-laughing.gif" alt="" height="18px" width="18px" border="0" /></a>&nbsp;
-			<a href="javascript:insertSmiley('  8)  ','cool')"><img src="resource2/tinymce/plugins/emotions/img/smiley-cool.gif" alt="" height="18px" width="18px" border="0" /></a>&nbsp;
-			<a href="javascript:insertSmiley('  O:)  ','innocent')"><img src="resource2/tinymce/plugins/emotions/img/smiley-innocent.gif" alt="" height="18px" width="18px" border="0" /></a>&nbsp;
-			<a href="javascript:insertSmiley('  :o  ','surprised')"><img src="resource2/tinymce/plugins/emotions/img/smiley-surprised.gif" alt="" height="18px" width="18px" border="0" /></a>&nbsp;
-			<a href="javascript:insertSmiley('  :(  ','frown')"><img src="resource2/tinymce/plugins/emotions/img/smiley-frown.gif" alt="" height="18px" width="18px" border="0" /></a>&nbsp;
-			<a href="javascript:insertSmiley('  ::|  ','embarassed')"><img src="resource2/tinymce/plugins/emotions/img/smiley-embarassed.gif" alt="" height="18px" width="18px" border="0" /></a>&nbsp;
-			<a href="javascript:insertSmiley('  :,-(  ','cry')"><img src="resource2/tinymce/plugins/emotions/img/smiley-cry.gif" alt="" height="18px" width="18px" border="0" /></a>&nbsp;
-			<a href="javascript:insertSmiley('  :-*  ,'kiss')"><img src="resource2/tinymce/plugins/emotions/img/smiley-kiss.gif" alt="" height="18px" width="18px" border="0" /></a>&nbsp;
-			<a href="javascript:insertSmiley('  :P  ','toungue-out')"><img src="resource2/tinymce/plugins/emotions/img/smiley-tongue-out.gif" alt="" height="18px" width="18px" border="0" /></a>&nbsp;
-			<a href="javascript:insertSmiley('  :/  ','undecided')"><img src="resource2/tinymce/plugins/emotions/img/smiley-undecided.gif" alt="" height="18px" width="18px" border="0" /></a>&nbsp;
-			<a href="javascript:insertSmiley('  XO  ','yell')"><img src="resource2/tinymce/plugins/emotions/img/smiley-yell.gif" alt="" height="18px" width="18px" border="0" /></a>
+			{strip}
+			{foreach from=$smilies item=smiley}
+				{if $smiley.show}
+					<a href="javascript:insertSmiley('{$smiley.text}','{$smileypath}{$smiley.file}')">{$smiley.image}</a> &nbsp;
+				{/if}
+			{/foreach}
+			{/strip}
 		</td>
 	</tr>
 	{/if}

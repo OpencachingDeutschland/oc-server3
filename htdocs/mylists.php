@@ -7,7 +7,7 @@
 
 	require('lib2/web.inc.php');
 	require_once('lib2/logic/cachelist.class.php');
-	require_once('lib2/OcHTMLPurifier.class.php');
+	require_once('lib2/edithelper.inc.php');
 
 	$tpl->name = 'mylists';
 	$tpl->menuitem = MNU_MYPROFILE_LISTS;
@@ -167,7 +167,7 @@
 		$tpl->add_header_javascript('resource2/tinymce/tiny_mce_gzip.js');
 		$tpl->add_header_javascript('resource2/tinymce/config/list.js.php?lang='.strtolower($opt['template']['locale']));
 	}
-	$tpl->add_header_javascript('templates2/' . $opt['template']['style'] . '/js/editor.js');
+	$tpl->add_header_javascript(editorJsPath());
 	if ($edit_list)
 	{
 		$tpl->assign('edit_list', true);
@@ -194,6 +194,9 @@
 	$tpl->assign('desctext', $desctext);
 	$tpl->assign('descMode', $descMode);
 	$tpl->assign('list_caches', $list_caches);
+
+	$tpl->assign('scrollposx', isset($_REQUEST['scrollposx']) ? $_REQUEST['scrollposx'] + 0 : 0);
+	$tpl->assign('scrollposy', isset($_REQUEST['scrollposy']) ? $_REQUEST['scrollposy'] + 0 : 0);
 
 	$tpl->display();
 

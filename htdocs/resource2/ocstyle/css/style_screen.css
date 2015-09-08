@@ -837,7 +837,7 @@ div.cachelistinfo { border:1px solid #a0a0a0; }
 .cachelist-popup {
 	position: absolute;
 	background-color: white;
-	font-size: 10px;
+	font-size: 12px;
 	right: 72px;
 	padding: 5px 5px 10px 5px;
 	opacity: 0.9;

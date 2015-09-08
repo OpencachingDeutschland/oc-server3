@@ -113,32 +113,26 @@
 			<a href="{$phpbb_link|escape}" style="color: rgb(88, 144, 168); text-decoration: none;">{t 1=$phpbb_name|escape}New forum topcis (%1){/t}</a>
 		</p> 
 	</div>
-{* adapted by bohrsty for forums-posts on homepage using RSS-feed
-        <div class="content-txtbox-noshade">
-                <p style="line-height: 1.6em;">Unser neues Forum findest du unter <a href="http://forum.geocaching-network.org">forum.geocaching-network.org</a>.</p>
-                <div class="buffer" style="width: 500px;">&nbsp;</div>
-        </div>
-*}
-<div id="forum">
-{if $forum|@count}
-	{include file="res_rssparser.tpl" rss=$forum}
-{else}
-	<p><em>{t}currently not available{/t}</em></p>
-{/if}
-</div>
-<div class="buffer" style="width: 500px;">&nbsp;</div>
-{*
-	<ul class="nodot">
-		{foreach from=$phpbb_topics item=phpbbItem}
-			<li class="newcache_list_multi" style="margin-bottom: 8px;">
-				<img src="resource2/ocstyle/images/cacheicon/event-rand1.gif" alt="" style="margin-right: 5px;" width="22" height="22" align="left" border="0" /> 
-				{$phpbbItem.updated|date_format:$opt.format.datetime}&nbsp;
-				<b><a href="{$phpbbItem.link|escape}" target="thegreenhell">{$phpbbItem.title|escape}</a></b>
-				von {$phpbbItem.username|escape}
-			</li>
-		{/foreach}
-	</ul>
-*}
+	<div id="forum">
+	{if $forum|@count}
+		{include file="res_rssparser.tpl" rss=$forum}
+	{else}
+		<p><em>{t}currently not available{/t}</em></p>
+	{/if}
+	</div>
+	<div class="buffer" style="width: 500px;">&nbsp;</div>
+	{*
+		<ul class="nodot">
+			{foreach from=$phpbb_topics item=phpbbItem}
+				<li class="newcache_list_multi" style="margin-bottom: 8px;">
+					<img src="resource2/ocstyle/images/cacheicon/event-rand1.gif" alt="" style="margin-right: 5px;" width="22" height="22" align="left" border="0" /> 
+					{$phpbbItem.updated|date_format:$opt.format.datetime}&nbsp;
+					<b><a href="{$phpbbItem.link|escape}" target="thegreenhell">{$phpbbItem.title|escape}</a></b>
+					von {$phpbbItem.username|escape}
+				</li>
+			{/foreach}
+		</ul>
+	*}
 {/if}
 
 {* new caches *}

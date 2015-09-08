@@ -27,4 +27,13 @@
 	$opt['db']['placeholder']['db'] = 'opencaching';
 	$opt['db']['placeholder']['tmpdb'] = 'octmp';
 
+	// Blog news on start page
+	// $opt['news']['count'] = 6;
+	// $opt['news']['include'] = 'http://blog.opencaching.de/feed';
+
+	// Forum topics on start page
+	// $opt['forum']['count'] = 8;
+	// $opt['forum']['url'] = 'http://forum.opencaching.de/index.php?action=.xml;type=rss;limit=25';
+	// $opt['cron']['phpbbtopics']['name'] = 'forum.forum.opencaching.de';
+
 ?>

@@ -100,7 +100,7 @@ function search_output()
 		{
 			$direction = geomath::calcBearing($lat_rad / 3.14159 * 180, $lon_rad / 3.14159 * 180, $rCache['latitude'], $rCache['longitude']);
 			$rCache['direction_deg'] = round($direction / 22.5) * 22.5;
-			$rCache['direction_txt'] = geomath::Bearing2Text($direction, 1);
+			$rCache['direction_txt'] = geomath::Bearing2Text($direction, 0, $opt['template']['locale']);
 		}
 		else 		
 			$rCache['direction_deg'] = false;

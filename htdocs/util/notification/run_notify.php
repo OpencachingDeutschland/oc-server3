@@ -105,7 +105,7 @@ function process_new_cache($notify)
 		$mailbody = mb_ereg_replace('{cachename}', $notify['cachename'], $mailbody);
 		$mailbody = mb_ereg_replace('{distance}', round(geomath::calcDistance($notify['lat1'], $notify['lon1'], $notify['lat2'], $notify['lon2'], 1), 1), $mailbody);
 		$mailbody = mb_ereg_replace('{unit}', 'km', $mailbody);
-		$mailbody = mb_ereg_replace('{bearing}', geomath::Bearing2Text(geomath::calcBearing($notify['lat1'], $notify['lon1'], $notify['lat2'], $notify['lon2'])), $mailbody);
+		$mailbody = mb_ereg_replace('{bearing}', geomath::Bearing2Text(geomath::calcBearing($notify['lat1'], $notify['lon1'], $notify['lat2'], $notify['lon2']), 0, $notify['recp_lang']), $mailbody);
 		$mailbody = mb_ereg_replace('{cachetype}', get_cachetype_name($notify['cachetype'], $notify['recp_lang']), $mailbody);
 		$mailbody = mb_ereg_replace('{cachesize}', get_cachesize_name($notify['cachesize'], $notify['recp_lang']), $mailbody);
 		$mailbody = mb_ereg_replace('{oconly-}', $notify['oconly'] ? $translate->t('OConly-', '', basename(__FILE__), __LINE__, '', 1, $notify['recp_lang']) : '', $mailbody);

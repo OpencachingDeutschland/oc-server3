@@ -45,87 +45,94 @@ class geomath
 		}
 	}
 
-	static function Bearing2Text($parBearing, $parShortText = 0)
+	static function Bearing2Text($parBearing, $parShortText, $language)
 	{
+		global $opt, $translate;
+
 		if ($parShortText == 0)
 		{
 			if ($parBearing === false)
-			{
 				return 'N/A';
-			}
 			elseif (($parBearing < 11.25) || ($parBearing > 348.75))
-				return 'Nord';
+				$bearing = 'north';
 			elseif ($parBearing < 33.75)
-				return 'Nord/Nordost';
+				$bearing = 'north-northeast';
 			elseif ($parBearing < 56.25)
-				return 'Nordost';
+				$bearing = 'northeast';
 			elseif ($parBearing < 78.75)
-				return 'Ost/Nordost';
+				$bearing = 'east-northeast';
 			elseif ($parBearing < 101.25)
-				return 'Ost';
+				$bearing = 'east';
 			elseif ($parBearing < 123.75)
-				return 'Ost/Südost';
+				$bearing = 'east-southeast';
 			elseif ($parBearing < 146.25)
-				return 'Südost';
+				$bearing = 'southeast';
 			elseif ($parBearing < 168.75)
-				return 'Süd/Südost';
+				$bearing = 'south-southeast';
 			elseif ($parBearing < 191.25)
-				return 'Süd';
+				$bearing = 'south';
 			elseif ($parBearing < 213.75)
-				return 'Süd/Südwest';
+				$bearing = 'south-southwest';
 			elseif ($parBearing < 236.25)
-				return 'Südwest';
+				$bearing = 'southwest';
 			elseif ($parBearing < 258.75)
-				return 'West/Südwest';
+				$bearing = 'west-southwest';
 			elseif ($parBearing < 281.25)
-				return 'West';
+				$bearing = 'west';
 			elseif ($parBearing < 303.75)
-				return 'West/Nordwest';
+				$bearing = 'west-northwest';
 			elseif ($parBearing < 326.25)
-				return 'Nordwest';
+				$bearing = 'northwest';
 			elseif ($parBearing <= 348.75)
-				return 'Nord/Nordwest';
-			else return 'N/A';
+				$bearing = 'north-northwest';
+			else
+				return 'N/A';
+			return $translate->t($bearing, '', '', 0, '', 1, $language);
 		}
 		else
 		{
 			if ($parBearing === false)
-			{
 				return 'N/A';
-			}
 			elseif (($parBearing < 11.25) || ($parBearing > 348.75))
-				return 'N';
+				$bearing = 'N';
 			elseif ($parBearing < 33.75)
-				return 'NNO';
+				$bearing = 'NNE';
 			elseif ($parBearing < 56.25)
-				return 'NO';
+				$bearing = 'NE';
 			elseif ($parBearing < 78.75)
-				return 'ONO';
+				$bearing = 'ENE';
 			elseif ($parBearing < 101.25)
-				return 'O';
+				$bearing = 'E';
 			elseif ($parBearing < 123.75)
-				return 'OSO';
+				$bearing = 'ESE';
 			elseif ($parBearing < 146.25)
-				return 'SO';
+				$bearing = 'SE';
 			elseif ($parBearing < 168.75)
-				return 'SSO';
+				$bearing = 'SSE';
 			elseif ($parBearing < 191.25)
-				return 'S';
+				$bearing = 'S';
 			elseif ($parBearing < 213.75)
-				return 'SSW';
+				$bearing = 'SSW';
 			elseif ($parBearing < 236.25)
-				return 'SW';
+				$bearing = 'SW';
 			elseif ($parBearing < 258.75)
-				return 'WSW';
+				$bearing = 'WSW';
 			elseif ($parBearing < 281.25)
-				return 'W';
+				$bearing = 'W';
 			elseif ($parBearing < 303.75)
-				return 'WNW';
+				$bearing = 'WNW';
 			elseif ($parBearing < 326.25)
-				return 'NW';
+				$bearing = 'NW';
 			elseif ($parBearing <= 348.75)
-				return 'NNW';
-			else return 'N/A';
+				$bearing = 'NNW';
+			else
+				return 'N/A';
+			$tb = '';
+			for ($i=0; $i<strlen($bearing); ++$i)
+				$tb .= $translate->t($bearing[$i], '', '', 0, '', 1, $language);
+			// Translation of N S W E does not work, for whatever reason.
+			// But this is currently not in use.
+			return $tb;
 		}
 	}
 

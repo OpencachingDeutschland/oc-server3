@@ -68,7 +68,6 @@ function search_output()
 			&searchtmp.`cache_id` `cacheid`,
 			&searchtmp.`longitude`,
 			&searchtmp.`latitude`,
-			&searchtmp.`type`,
 			`caches`.`date_hidden`,
 			`caches`.`name`,
 			`caches`.`status`,
@@ -81,12 +80,12 @@ function search_output()
 			`user`.`username`
 		FROM &searchtmp
 		JOIN `caches` ON &searchtmp.`cache_id`=`caches`.`cache_id`
-		JOIN `cache_type` ON &searchtmp.`type`=`cache_type`.`id`
-		JOIN `cache_size` ON &searchtmp.`type`=`cache_size`.`id`
+		JOIN `cache_type` ON `caches`.`type`=`cache_type`.`id`
+		JOIN `cache_size` ON `caches`.`size`=`cache_size`.`id`
 		LEFT JOIN `user` ON &searchtmp.`user_id`=`user`.`user_id`
-		LEFT JOIN `sys_trans_text` `stt_type` ON `stt_type`.`trans_id`=`cache_type`.`trans_id`
-		LEFT JOIN `sys_trans_text` `stt_size` ON `stt_size`.`trans_id`=`cache_size`.`trans_id`
-		WHERE `stt_type`.`lang`='&1' and `stt_size`.`lang`='&1'",
+		LEFT JOIN `sys_trans_text` `stt_type` ON `stt_type`.`trans_id`=`cache_type`.`trans_id` AND `stt_type`.`lang`='&1'
+		LEFT JOIN `sys_trans_text` `stt_size` ON `stt_size`.`trans_id`=`cache_size`.`trans_id` AND `stt_size`.`lang`='&1'
+		",
 		$opt['template']['locale']);
 
 	while ($r = sql_fetch_array($rs))

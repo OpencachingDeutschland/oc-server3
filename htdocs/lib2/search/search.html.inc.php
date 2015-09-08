@@ -26,9 +26,8 @@
 	               INNER JOIN `cache_type` ON `cache_type`.`id`=`caches`.`type`
 	                LEFT JOIN `caches_attributes` AS `tbloconly`
 	                       ON `caches`.`cache_id`=`tbloconly`.`cache_id` AND `tbloconly`.`attrib_id`=6
-	                LEFT JOIN `sys_trans_text` `stt` ON `stt`.`trans_id`=`cache_type`.`trans_id`';
-
-	$sAddWhere .= ' AND `stt`.`lang`=\'' . sql_escape($opt['template']['locale']) . '\'';
+	                LEFT JOIN `sys_trans_text` `stt` ON `stt`.`trans_id`=`cache_type`.`trans_id`
+	                      AND `stt`.`lang`=\'' . sql_escape($opt['template']['locale']) . '\'';
 
 
 function search_output()

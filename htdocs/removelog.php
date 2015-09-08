@@ -18,10 +18,11 @@
  ****************************************************************************/
 
    //prepare the templates and include all neccessary
-	require_once('./lib/common.inc.php');
+	require_once('lib/common.inc.php');
 	require_once($stylepath . '/lib/icons.inc.php');
-	require_once($rootpath . 'lib2/html2text.class.php');
-	require_once('./lib/recommendation.inc.php');
+	require_once('lib2/html2text.class.php');
+	require_once('lib/recommendation.inc.php');
+	require_once('lib/logic.inc.php');
 
 	//Preprocessing
 	if ($error == false)
@@ -53,16 +54,13 @@
 						`user`.`username` as `log_username`,
 						IFNULL(`user`.`language`,'&2') AS `log_user_language`,
 						`caches`.`wp_oc`,
-						`cache_status`.`allow_user_view`,
-						IFNULL(`sys_trans_text`.`text`,`log_types`.`en`) AS `logtype_name`
+						`cache_status`.`allow_user_view`
 					 FROM `cache_logs`, `caches`, `user`, `cache_status`, `log_types`
-			LEFT JOIN `sys_trans_text` ON `sys_trans_text`.`trans_id`=`log_types`.`trans_id`
 					WHERE `cache_logs`.`id`='&1'
 					  AND `cache_logs`.`user_id`=`user`.`user_id`
 					  AND `caches`.`cache_id`=`cache_logs`.`cache_id`
 					  AND `caches`.`status`=`cache_status`.`id`
 					  AND `log_types`.`id`=`cache_logs`.`type`
-					  AND `sys_trans_text`.`lang`=IFNULL(`user`.`language`,'&2')
 						", $log_id, $opt['template']['default']['locale']);
 
 			//log exists?
@@ -140,7 +138,7 @@
 							$email_content = mb_ereg_replace('%cache_name%', $log_record['cache_name'], $email_content);
 							$email_content = mb_ereg_replace('%cache_wp%', $log_record['wp_oc'], $email_content);
 							$email_content = mb_ereg_replace('%log_date%', date($opt['locale'][$locale]['format']['phpdate'], strtotime($log_record['log_date'])), $email_content);
-							$email_content = mb_ereg_replace('%log_type%', $log_record['logtype_name'], $email_content);
+							$email_content = mb_ereg_replace('%log_type%', get_logtype_name($log_record['log_type'], $log_record['log_user_language']), $email_content);
 							$email_content = mb_ereg_replace('%log_text%', $logtext, $email_content);
 							$email_content = mb_ereg_replace('%comment%', $message, $email_content);
 

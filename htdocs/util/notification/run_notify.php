@@ -17,6 +17,7 @@
 	require_once('settings.inc.php');
 	require_once($rootpath . 'lib/consts.inc.php');
 	require_once($rootpath . 'lib2/ProcessSync.class.php');
+	require_once($rootpath . 'lib/logic.inc.php');
 
 	// db connect
 	db_connect();
@@ -34,10 +35,10 @@
 				SELECT
 					`notify_waiting`.`id`, `notify_waiting`.`cache_id`, `notify_waiting`.`type`,
 					`user`.`username`,
-					`user2`.`email`, `user2`.`username` as `recpname`, `user2`.`latitude` AS `lat1`, `user2`.`longitude` as `lon1`, `user2`.`user_id` as `recid`, IFNULL(`user2`.`language`,'&1') as `recp_lang`,
+					`user2`.`email`, `user2`.`username` as `recpname`, `user2`.`latitude` AS `lat1`,
+					`user2`.`longitude` as `lon1`, `user2`.`user_id` as `recid`, IFNULL(`user2`.`language`,'&1') as `recp_lang`,
 					`caches`.`name` as `cachename`, `caches`.`latitude` AS `lat2`, `caches`.`longitude` as `lon2`, `caches`.`wp_oc`, `caches`.`date_hidden`,
-					IFNULL(`stt_type`.`text`, `cache_type`.`en`) AS `cachetype`,
-					IFNULL(`stt_size`.`text`, `cache_size`.`en`) AS `cachesize`,
+					`caches`.`type` AS `cachetype`, `caches`.`size` AS `cachesize`,
 					`cache_status`.`allow_user_view`,
 					`ca`.`attrib_id` IS NOT NULL AS `oconly`
 				FROM `notify_waiting`
@@ -46,12 +47,8 @@
 				INNER JOIN `user` `user2` ON `notify_waiting`.`user_id`=`user2`.`user_id`
 				INNER JOIN `cache_type` ON `caches`.`type`=`cache_type`.`id`
 				INNER JOIN `cache_size` ON `caches`.`size`=`cache_size`.`id`
-				LEFT JOIN `sys_trans_text` `stt_type` ON `stt_type`.`trans_id`=`cache_type`.`trans_id`
-				LEFT JOIN `sys_trans_text` `stt_size` ON `stt_size`.`trans_id`=`cache_size`.`trans_id`
 				INNER JOIN `cache_status` ON `caches`.`status`=`cache_status`.`id`
-				LEFT JOIN `caches_attributes` `ca` ON `ca`.`cache_id`=`caches`.`cache_id` AND `ca`.`attrib_id`=6
-				WHERE `stt_type`.`lang`=IFNULL(`user2`.`language`,'&1') AND
-				      `stt_size`.`lang`=IFNULL(`user2`.`language`,'&1')",
+				LEFT JOIN `caches_attributes` `ca` ON `ca`.`cache_id`=`caches`.`cache_id` AND `ca`.`attrib_id`=6",
   			$opt['template']['default']['locale']);
 
 	  while ($rNotify = sql_fetch_array($rsNotify))
@@ -108,8 +105,8 @@ function process_new_cache($notify)
 		$mailbody = mb_ereg_replace('{distance}', round(calcDistance($notify['lat1'], $notify['lon1'], $notify['lat2'], $notify['lon2'], 1), 1), $mailbody);
 		$mailbody = mb_ereg_replace('{unit}', 'km', $mailbody);
 		$mailbody = mb_ereg_replace('{bearing}', Bearing2Text(calcBearing($notify['lat1'], $notify['lon1'], $notify['lat2'], $notify['lon2'])), $mailbody);
-		$mailbody = mb_ereg_replace('{cachetype}', $notify['cachetype'], $mailbody);
-		$mailbody = mb_ereg_replace('{cachesize}', $notify['cachesize'], $mailbody);
+		$mailbody = mb_ereg_replace('{cachetype}', get_cachetype_name($notify['cachetype'], $notify['recp_lang']), $mailbody);
+		$mailbody = mb_ereg_replace('{cachesize}', get_cachesize_name($notify['cachesize'], $notify['recp_lang']), $mailbody);
 		$mailbody = mb_ereg_replace('{oconly-}', $notify['oconly'] ? $translate->t('OConly-', '', basename(__FILE__), __LINE__, '', 1, $notify['recp_lang']) : '', $mailbody);
 
 		/* begin send out everything that has to be sent */

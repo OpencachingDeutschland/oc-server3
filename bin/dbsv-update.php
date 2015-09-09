@@ -594,6 +594,25 @@
 		sql("ALTER TABLE `user` CHANGE COLUMN `no_htmledit_flag` `no_htmledit_flag` tinyint(1) NOT NULL default '0' COMMENT ''");
 	}
 
+	function dbv_138()  // add some reasonable indices, e.g. to optimize special-purpose deletion functions
+	{
+		if (!sql_index_exists('cache_reports', 'cacheid'))
+			sql("ALTER TABLE `cache_reports` ADD INDEX `cacheid` (`cacheid`)");
+
+		if (!sql_index_exists('cache_adoptions', 'from_user_id'))
+			sql("ALTER TABLE `cache_adoptions` ADD INDEX `from_user_id` (`from_user_id`)");
+		if (!sql_index_exists('cache_adoptions', 'to_user_id'))
+			sql("ALTER TABLE `cache_adoptions` ADD INDEX `to_user_id` (`to_user_id`)");
+		if (!sql_index_exists('cache_watches', 'user_id'))
+			sql("ALTER TABLE `cache_watches` ADD INDEX `user_id` (`user_id`)");
+		if (!sql_index_exists('notify_waiting', 'user_id'))
+			sql("ALTER TABLE `notify_waiting` ADD INDEX `user_id` (`user_id`)");
+		if (!sql_index_exists('stat_cache_logs', 'user_id'))
+			sql("ALTER TABLE `stat_cache_logs` ADD INDEX `user_id` (`user_id`)");
+		if (!sql_index_exists('watches_logqueue', 'user_id'))
+			sql("ALTER TABLE `watches_logqueue` ADD INDEX `user_id` (`user_id`)");
+	}
+
 
 	// When adding new mutations, take care that they behave well if run multiple
 	// times. This improves robustness of database versioning.

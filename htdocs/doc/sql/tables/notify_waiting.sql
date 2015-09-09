@@ -6,5 +6,6 @@ CREATE TABLE `notify_waiting` (
   `user_id` int(10) unsigned NOT NULL default '0',
   `type` tinyint(1) NOT NULL default '0',
   PRIMARY KEY  (`id`),
-  UNIQUE KEY `cache_user` (`cache_id`,`user_id`)
+  UNIQUE KEY `cache_user` (`cache_id`,`user_id`),
+  KEY `user_id` (`user_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ;

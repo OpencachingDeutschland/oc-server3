@@ -31,6 +31,19 @@
 	*   vandalism-restorable.
 	* @original_picid
 	*   original ID of a restored picture
+	*
+	* @deleting_cache
+	* @deleting_log
+	* @deleting_user
+	*   Prevents recursive write access to the base tables while deleting
+	*   from a dependent table.
+	*
+	* @dbdebug
+	* @fastdelete
+	*   'dbdebug' enables deleting cache and user records. Use only on test and
+	*   development systems, or to delete bad replicated data from other nodes;
+	*   never delete local caches or users on production systems !!
+	*   'fastdelete' will skip deleting any dependent data.
 	*/ 
 
 
@@ -187,7 +200,7 @@
 	sql_dropProcedure('sp_touch_cache');
 	sql("CREATE PROCEDURE sp_touch_cache (IN nCacheId INT(10) UNSIGNED, IN bUpdateCacheRecord BOOL)
 	     BEGIN
-				 IF bUpdateCacheRecord = TRUE THEN
+				 IF bUpdateCacheRecord = TRUE AND IFNULL(@deleting_cache,0)=0 THEN
 					 UPDATE `caches` SET `last_modified`=NOW() WHERE `cache_id`=nCacheId;
 				 END IF;
 
@@ -211,7 +224,7 @@
 	sql_dropProcedure('sp_update_cache_listingdate');
 	sql("CREATE PROCEDURE sp_update_cache_listingdate (IN nCacheId INT(10) UNSIGNED)
 	     BEGIN
-	       IF (ISNULL(@XMLSYNC) OR @XMLSYNC!=1) AND IFNULL(@dont_update_listingdate,0)=0 THEN
+	       IF (ISNULL(@XMLSYNC) OR @XMLSYNC!=1) AND IFNULL(@dont_update_listingdate,0)=0 AND IFNULL(@deleting_cache,0)=0 THEN
 	         /* @dont_update_listingdate avoids illegal update recursions in caches table, e.g.
 					      update caches.status -> sp_touch_cache -> update coordinates 
 								  -> sp_update_cache_listingdate -> update caches  */
@@ -267,7 +280,7 @@
 	sql_dropProcedure('sp_update_cachelog_rating');
 	sql("CREATE PROCEDURE sp_update_cachelog_rating (IN nCacheId INT, IN nUserID INT, IN dRatingDate DATETIME)
 	     BEGIN
-	       IF (ISNULL(@XMLSYNC) OR @XMLSYNC!=1) THEN
+	       IF (ISNULL(@XMLSYNC) OR @XMLSYNC!=1) AND IFNULL(@deleting_cache,0)=0 THEN
 	         UPDATE `cache_logs` SET `last_modified`=NOW()
 	          WHERE `cache_logs`.`cache_id`=nCacheId AND `cache_logs`.`user_id`=nUserID AND `cache_logs`.`date`=dRatingDate;
 	       END IF;
@@ -279,8 +292,10 @@
 	     BEGIN
 	       DECLARE dl VARCHAR(60);
 
-	       SELECT GROUP_CONCAT(DISTINCT `language` ORDER BY `language` SEPARATOR ',') INTO dl FROM `cache_desc` WHERE `cache_id`=nCacheId GROUP BY `cache_id` ;
-	       UPDATE `caches` SET `desc_languages`=dl, default_desclang=PREFERED_LANG(dl, '&1') WHERE `cache_id`=nCacheId LIMIT 1;
+	       IF IFNULL(@deleting_cache,0)=0 THEN
+	         SELECT GROUP_CONCAT(DISTINCT `language` ORDER BY `language` SEPARATOR ',') INTO dl FROM `cache_desc` WHERE `cache_id`=nCacheId GROUP BY `cache_id` ;
+	         UPDATE `caches` SET `desc_languages`=dl, default_desclang=PREFERED_LANG(dl, '&1') WHERE `cache_id`=nCacheId LIMIT 1;
+	       END IF;
 	     END;", strtoupper($lang . ',EN'));
 
 	// set caches.desc_languages of all caches, fill cache_desc_prefered and return number of modified rows
@@ -317,27 +332,29 @@
 				   SET nMaintenance = -nMaintenance;
 	       END IF;
 
-	       UPDATE `stat_cache_logs` SET `found`=IF(`found`+nFound>0, `found`+nFound, 0), `notfound`=IF(`notfound`+nNotFound>0, `notfound`+nNotFound, 0), `note`=IF(`note`+nNote>0, `note`+nNote, 0), `will_attend`=IF(`will_attend`+nWillAttend>0, `will_attend`+nWillAttend, 0), `maintenance`=IF(`maintenance`+nMaintenance>0, `maintenance`+nMaintenance, 0) WHERE `cache_id`=nCacheId AND `user_id`=nUserId;
-	       IF ROW_COUNT() = 0 THEN
-				   INSERT IGNORE INTO `stat_cache_logs` (`cache_id`, `user_id`, `found`, `notfound`, `note`, `will_attend`, `maintenance`) VALUES (nCacheId, nUserId, IF(nFound>0, nFound, 0), IF(nNotFound>0, nNotFound, 0), IF(nNote>0, nNote, 0), IF(nWillAttend>0, nWillAttend, 0), IF(nMaintenance>0, nMaintenance, 0));
-	       END IF;
+	       IF IFNULL(@deleting_cache,0)=0 THEN
+		       UPDATE `stat_cache_logs` SET `found`=IF(`found`+nFound>0, `found`+nFound, 0), `notfound`=IF(`notfound`+nNotFound>0, `notfound`+nNotFound, 0), `note`=IF(`note`+nNote>0, `note`+nNote, 0), `will_attend`=IF(`will_attend`+nWillAttend>0, `will_attend`+nWillAttend, 0), `maintenance`=IF(`maintenance`+nMaintenance>0, `maintenance`+nMaintenance, 0) WHERE `cache_id`=nCacheId AND `user_id`=nUserId;
+		       IF ROW_COUNT() = 0 THEN
+					   INSERT IGNORE INTO `stat_cache_logs` (`cache_id`, `user_id`, `found`, `notfound`, `note`, `will_attend`, `maintenance`) VALUES (nCacheId, nUserId, IF(nFound>0, nFound, 0), IF(nNotFound>0, nNotFound, 0), IF(nNote>0, nNote, 0), IF(nWillAttend>0, nWillAttend, 0), IF(nMaintenance>0, nMaintenance, 0));
+		       END IF;
 
-	       UPDATE `stat_caches` SET `found`=IF(`found`+nFound>0, `found`+nFound, 0), `notfound`=IF(`notfound`+nNotFound>0, `notfound`+nNotFound, 0), `note`=IF(`note`+nNote>0, `note`+nNote, 0), `will_attend`=IF(`will_attend`+nWillAttend>0, `will_attend`+nWillAttend, 0), `maintenance`=IF(`maintenance`+nMaintenance>0, `maintenance`+nMaintenance, 0) WHERE `cache_id`=nCacheId;
-	       IF ROW_COUNT() = 0 THEN
-				   INSERT IGNORE INTO `stat_caches` (`cache_id`, `found`, `notfound`, `note`, `will_attend`, `maintenance`) VALUES (nCacheId, IF(nFound>0, nFound, 0), IF(nNotFound>0, nNotFound, 0), IF(nNote>0, nNote, 0), IF(nWillAttend>0, nWillAttend, 0), IF(nMaintenance>0, nMaintenance, 0));
-	       END IF;
+		       UPDATE `stat_caches` SET `found`=IF(`found`+nFound>0, `found`+nFound, 0), `notfound`=IF(`notfound`+nNotFound>0, `notfound`+nNotFound, 0), `note`=IF(`note`+nNote>0, `note`+nNote, 0), `will_attend`=IF(`will_attend`+nWillAttend>0, `will_attend`+nWillAttend, 0), `maintenance`=IF(`maintenance`+nMaintenance>0, `maintenance`+nMaintenance, 0) WHERE `cache_id`=nCacheId;
+		       IF ROW_COUNT() = 0 THEN
+					   INSERT IGNORE INTO `stat_caches` (`cache_id`, `found`, `notfound`, `note`, `will_attend`, `maintenance`) VALUES (nCacheId, IF(nFound>0, nFound, 0), IF(nNotFound>0, nNotFound, 0), IF(nNote>0, nNote, 0), IF(nWillAttend>0, nWillAttend, 0), IF(nMaintenance>0, nMaintenance, 0));
+		       END IF;
 
-	       IF nFound!=0 THEN
-           SELECT LEFT(`date`,10) INTO nDate FROM `cache_logs` WHERE `cache_id`=nCacheId AND `type` IN (1, 7) ORDER BY `date` DESC LIMIT 1;
-           UPDATE `stat_caches` SET `last_found`=nDate WHERE `cache_id`=nCacheId;
+		       IF nFound!=0 THEN
+		         SELECT LEFT(`date`,10) INTO nDate FROM `cache_logs` WHERE `cache_id`=nCacheId AND `type` IN (1, 7) ORDER BY `date` DESC LIMIT 1;
+		         UPDATE `stat_caches` SET `last_found`=nDate WHERE `cache_id`=nCacheId;
+		       END IF;
 	       END IF;
-
-	       UPDATE `stat_user` SET `found`=IF(`found`+nFound>0, `found`+nFound, 0), `notfound`=IF(`notfound`+nNotFound>0, `notfound`+nNotFound, 0), `note`=IF(`note`+nNote>0, `note`+nNote, 0), `will_attend`=IF(`will_attend`+nWillAttend>0, `will_attend`+nWillAttend, 0), `maintenance`=IF(`maintenance`+nMaintenance>0, `maintenance`+nMaintenance, 0) WHERE `user_id`=nUserId;
-	       IF ROW_COUNT() = 0 THEN
-				   INSERT IGNORE INTO `stat_user` (`user_id`, `found`, `notfound`, `note`, `will_attend`, `maintenance`) VALUES (nUserId, IF(nFound>0, nFound, 0), IF(nNotFound>0, nNotFound, 0), IF(nNote>0, nNote, 0), IF(nWillAttend>0, nWillAttend, 0), IF(nMaintenance>0, nMaintenance, 0));
+	       IF IFNULL(@deleting_user,0)=0 THEN
+		       UPDATE `stat_user` SET `found`=IF(`found`+nFound>0, `found`+nFound, 0), `notfound`=IF(`notfound`+nNotFound>0, `notfound`+nNotFound, 0), `note`=IF(`note`+nNote>0, `note`+nNote, 0), `will_attend`=IF(`will_attend`+nWillAttend>0, `will_attend`+nWillAttend, 0), `maintenance`=IF(`maintenance`+nMaintenance>0, `maintenance`+nMaintenance, 0) WHERE `user_id`=nUserId;
+		       IF ROW_COUNT() = 0 THEN
+					   INSERT IGNORE INTO `stat_user` (`user_id`, `found`, `notfound`, `note`, `will_attend`, `maintenance`) VALUES (nUserId, IF(nFound>0, nFound, 0), IF(nNotFound>0, nNotFound, 0), IF(nNote>0, nNote, 0), IF(nWillAttend>0, nWillAttend, 0), IF(nMaintenance>0, nMaintenance, 0));
+		       END IF;
+		       CALL sp_refresh_statpic(nUserId);
 	       END IF;
-
-	       CALL sp_refresh_statpic(nUserId);
 	     END;");
 
 	// recalc found, last_found, notfound and note of stat_cache_logs, stat_caches and stat_user for all entries
@@ -389,15 +406,17 @@
 	sql("CREATE PROCEDURE sp_update_hiddenstat (IN nUserId INT, IN iStatus INT, IN bRemoved BOOLEAN)
 	     BEGIN
 			   DECLARE nHidden INT DEFAULT 1;
-				 IF (SELECT `allow_user_view` FROM `cache_status` WHERE `id`=iStatus) THEN
-				   IF bRemoved = TRUE THEN SET nHidden = -1; END IF;
-				   UPDATE `stat_user` SET `stat_user`.`hidden`=IF(`stat_user`.`hidden`+nHidden>0, `stat_user`.`hidden`+nHidden, 0) WHERE `stat_user`.`user_id`=nUserId;
-				   IF ROW_COUNT() = 0 THEN
-				     INSERT IGNORE INTO `stat_user` (`user_id`, `hidden`) VALUES (nUserId, IF(nHidden>0, nHidden, 0));
-				   END IF;
+			   IF IFNULL(@deleting_user,0)=0 THEN
+			     IF (SELECT `allow_user_view` FROM `cache_status` WHERE `id`=iStatus) THEN
+			       IF bRemoved = TRUE THEN SET nHidden = -1; END IF;
+			       UPDATE `stat_user` SET `stat_user`.`hidden`=IF(`stat_user`.`hidden`+nHidden>0, `stat_user`.`hidden`+nHidden, 0) WHERE `stat_user`.`user_id`=nUserId;
+			       IF ROW_COUNT() = 0 THEN
+			         INSERT IGNORE INTO `stat_user` (`user_id`, `hidden`) VALUES (nUserId, IF(nHidden>0, nHidden, 0));
+			       END IF;
 
-		       CALL sp_refresh_statpic(nUserId);
-				 END IF;
+			       CALL sp_refresh_statpic(nUserId);
+			     END IF;
+			   END IF;
 	     END;");
 
 	// recalc hidden of stat_user for all entries
@@ -420,16 +439,18 @@
 	sql("CREATE PROCEDURE sp_update_watchstat (IN nCacheId INT)
 	     BEGIN
 			   DECLARE nWatches INT DEFAULT 0;
-				 SET nWatches =
-					(SELECT COUNT(*) FROM
-						(SELECT `cache_list_watches`.`user_id` 
-						 FROM `cache_list_watches`, `cache_lists`, `cache_list_items`
-						 WHERE `cache_list_items`.`cache_id`=nCacheId AND `cache_lists`.`id`=`cache_list_items`.`cache_list_id` AND `cache_list_watches`.`cache_list_id`=`cache_lists`.`id`
-						 UNION   /* UNION discards duplicates */
-						 SELECT `user_id` FROM `cache_watches` WHERE `cache_id`=nCacheId) AS `wu`); 
-			   UPDATE `stat_caches` SET `stat_caches`.`watch` = nWatches WHERE `cache_id`=nCacheId;
-			   IF ROW_COUNT() = 0 THEN
-			     INSERT IGNORE INTO `stat_caches` (`cache_id`, `watch`) VALUES (nCacheId, nWatches);
+			   IF IFNULL(@deleting_cache,0)=0 THEN
+					 SET nWatches =
+						(SELECT COUNT(*) FROM
+							(SELECT `cache_list_watches`.`user_id` 
+							 FROM `cache_list_watches`, `cache_lists`, `cache_list_items`
+							 WHERE `cache_list_items`.`cache_id`=nCacheId AND `cache_lists`.`id`=`cache_list_items`.`cache_list_id` AND `cache_list_watches`.`cache_list_id`=`cache_lists`.`id`
+							 UNION   /* UNION discards duplicates */
+							 SELECT `user_id` FROM `cache_watches` WHERE `cache_id`=nCacheId) AS `wu`); 
+				   UPDATE `stat_caches` SET `stat_caches`.`watch` = nWatches WHERE `cache_id`=nCacheId;
+				   IF ROW_COUNT() = 0 THEN
+				     INSERT IGNORE INTO `stat_caches` (`cache_id`, `watch`) VALUES (nCacheId, nWatches);
+				   END IF;
 			   END IF;
 	     END;");
 
@@ -495,10 +516,12 @@
 	sql("CREATE PROCEDURE sp_update_ignorestat (IN nCacheId INT, IN bRemoved BOOLEAN)
 	     BEGIN
 			   DECLARE nIgnore INT DEFAULT 1;
+			   IF IFNULL(@deleting_cache,0)=0 THEN
 			   IF bRemoved = TRUE THEN SET nIgnore = -1; END IF;
-			   UPDATE `stat_caches` SET `stat_caches`.`ignore`=IF(`stat_caches`.`ignore`+nIgnore>0, `stat_caches`.`ignore`+nIgnore, 0) WHERE `stat_caches`.`cache_id`=nCacheId;
-			   IF ROW_COUNT() = 0 THEN
-			     INSERT IGNORE INTO `stat_caches` (`cache_id`, `ignore`) VALUES (nCacheId, IF(nIgnore>0, nIgnore, 0));
+			     UPDATE `stat_caches` SET `stat_caches`.`ignore`=IF(`stat_caches`.`ignore`+nIgnore>0, `stat_caches`.`ignore`+nIgnore, 0) WHERE `stat_caches`.`cache_id`=nCacheId;
+			     IF ROW_COUNT() = 0 THEN
+			       INSERT IGNORE INTO `stat_caches` (`cache_id`, `ignore`) VALUES (nCacheId, IF(nIgnore>0, nIgnore, 0));
+			     END IF;
 			   END IF;
 	     END;");
 
@@ -520,10 +543,12 @@
 	sql("CREATE PROCEDURE sp_update_topratingstat (IN nCacheId INT, IN bRemoved BOOLEAN)
 	     BEGIN
 			   DECLARE nTopRating INT DEFAULT 1;
-			   IF bRemoved = TRUE THEN SET nTopRating = -1; END IF;
-			   UPDATE `stat_caches` SET `stat_caches`.`toprating`=IF(`stat_caches`.`toprating`+nTopRating>0, `stat_caches`.`toprating`+nTopRating, 0) WHERE `stat_caches`.`cache_id`=nCacheId;
-			   IF ROW_COUNT() = 0 THEN
-			     INSERT IGNORE INTO `stat_caches` (`cache_id`, `toprating`) VALUES (nCacheId, IF(nTopRating>0, nTopRating, 0));
+			   IF IFNULL(@deleting_cache,0)=0 THEN
+			     IF bRemoved = TRUE THEN SET nTopRating = -1; END IF;
+			     UPDATE `stat_caches` SET `stat_caches`.`toprating`=IF(`stat_caches`.`toprating`+nTopRating>0, `stat_caches`.`toprating`+nTopRating, 0) WHERE `stat_caches`.`cache_id`=nCacheId;
+			     IF ROW_COUNT() = 0 THEN
+			       INSERT IGNORE INTO `stat_caches` (`cache_id`, `toprating`) VALUES (nCacheId, IF(nTopRating>0, nTopRating, 0));
+			     END IF;
 			   END IF;
 	     END;");
 
@@ -546,10 +571,12 @@
 	sql("CREATE PROCEDURE sp_update_cache_picturestat (IN nCacheId INT, IN bRemoved BOOLEAN)
 	     BEGIN
 			   DECLARE nPicture INT DEFAULT 1;
-			   IF bRemoved = TRUE THEN SET nPicture = -1; END IF;
-			   UPDATE `stat_caches` SET `stat_caches`.`picture`=IF(`stat_caches`.`picture`+nPicture>0, `stat_caches`.`picture`+nPicture, 0) WHERE `stat_caches`.`cache_id`=nCacheId;
-			   IF ROW_COUNT() = 0 THEN
-			     INSERT IGNORE INTO `stat_caches` (`cache_id`, `picture`) VALUES (nCacheId, IF(nPicture>0, nPicture, 0));
+			   IF IFNULL(@deleting_cache,0)=0 THEN
+			     IF bRemoved = TRUE THEN SET nPicture = -1; END IF;
+			     UPDATE `stat_caches` SET `stat_caches`.`picture`=IF(`stat_caches`.`picture`+nPicture>0, `stat_caches`.`picture`+nPicture, 0) WHERE `stat_caches`.`cache_id`=nCacheId;
+			     IF ROW_COUNT() = 0 THEN
+			       INSERT IGNORE INTO `stat_caches` (`cache_id`, `picture`) VALUES (nCacheId, IF(nPicture>0, nPicture, 0));
+			     END IF;
 			   END IF;
 	     END;");
 
@@ -571,8 +598,10 @@
 	sql("CREATE PROCEDURE sp_update_cachelog_picturestat (IN nLogId INT, IN bRemoved BOOLEAN)
 	     BEGIN
 			   DECLARE nPicture INT DEFAULT 1;
-			   IF bRemoved = TRUE THEN SET nPicture = -1; END IF;
-			   UPDATE `cache_logs` SET `cache_logs`.`picture`=IF(`cache_logs`.`picture`+nPicture>0, `cache_logs`.`picture`+nPicture, 0) WHERE `cache_logs`.`id`=nLogId;
+			   IF IFNULL(@deleting_log,0)=0 THEN
+				   IF bRemoved = TRUE THEN SET nPicture = -1; END IF;
+				   UPDATE `cache_logs` SET `cache_logs`.`picture`=IF(`cache_logs`.`picture`+nPicture>0, `cache_logs`.`picture`+nPicture, 0) WHERE `cache_logs`.`id`=nLogId;
+			   END IF;
 	     END;");
 
 	// recalc picture of cache_logs for all entries
@@ -822,23 +851,79 @@
 						SET @dont_update_listingdate=0;
 					END;");
 
+	sql_dropTrigger('cachesBeforeDelete');
+	sql("CREATE TRIGGER `cachesBeforeDelete` BEFORE DELETE ON `caches` 
+				FOR EACH ROW 
+					BEGIN 
+						IF IFNULL(@dbdebug,0) = 0 THEN
+							CALL error_set_debugmode_to_delete_caches();
+							/*
+							    There are exactly three reasons to delete a cache record:
+
+							    1. Get rid of obsolete data on a test or developer machine.
+							    2. Get rid of a bad cache record which was left over by a cache creating bug.
+							    3. Remove replicated data from other nodes which are no longer useful.
+
+							    Do NOT delete a cache record for any other reason!
+							*/
+						ELSEIF IFNULL(@fastdelete,0) = 0 THEN
+							/*
+									use 'fastdelete' only to delete bulk data and if you are sure that
+									you can handle all dependent data on your own
+							*/
+							SET @dont_update_listingdate=1;
+							SET @deleting_cache=1;
+							DELETE FROM `cache_adoption` WHERE `cache_id`=OLD.`cache_id`;
+							DELETE FROM `cache_adoptions` WHERE `cache_id`=OLD.`cache_id`;
+							DELETE FROM `cache_coordinates` WHERE `cache_id`=OLD.`cache_id`;
+							DELETE FROM `cache_countries` WHERE `cache_id`=OLD.`cache_id`;
+							DELETE FROM `cache_desc` WHERE `cache_id`=OLD.`cache_id`;
+							DELETE FROM `cache_desc_modified` WHERE `cache_id`=OLD.`cache_id`;
+							DELETE FROM `cache_ignore` WHERE `cache_id`=OLD.`cache_id`;
+							DELETE FROM `cache_list_items` WHERE `cache_id`=OLD.`cache_id`;
+							DELETE FROM `cache_location` WHERE `cache_id`=OLD.`cache_id`;
+							DELETE FROM `cache_logs` WHERE `cache_id`=OLD.`cache_id`;
+							DELETE FROM `cache_logs_archived` WHERE `cache_id`=OLD.`cache_id`;
+							DELETE FROM `cache_maps` WHERE `cache_id`=OLD.`cache_id`;
+							DELETE FROM `cache_npa_areas` WHERE `cache_id`=OLD.`cache_id`;
+							DELETE FROM `cache_rating` WHERE `cache_id`=OLD.`cache_id`;
+							DELETE FROM `cache_reports` WHERE `cacheid`=OLD.`cache_id`;   /* cacheid ! */
+							DELETE FROM `cache_status_modified` WHERE `cache_id`=OLD.`cache_id`;
+							DELETE FROM `cache_visits` WHERE `cache_id`=OLD.`cache_id`;
+							DELETE FROM `cache_watches` WHERE `cache_id`=OLD.`cache_id`;
+							DELETE FROM `caches_attributes` WHERE `cache_id`=OLD.`cache_id`;
+							DELETE FROM `caches_attributes_modified` WHERE `cache_id`=OLD.`cache_id`;
+							DELETE FROM `caches_modified` WHERE `cache_id`=OLD.`cache_id`;
+							DELETE FROM `coordinates` WHERE `cache_id`=OLD.`cache_id`;
+							/*
+							  DELETE FROM `map2_data` WHERE `cache_id`=OLD.`cache_id`;
+
+							  Adding an cache_id index to map2_data would be performance-critical.
+							  The leftover data won't hurt and will be deleted by a cronjob.
+							*/
+							DELETE FROM `notify_waiting` WHERE `cache_id`=OLD.`cache_id`;
+							DELETE FROM `pictures` WHERE `object_type`=2 AND `object_id`=OLD.`cache_id`;
+							DELETE FROM `rating_tops` WHERE `cache_id`=OLD.`cache_id`;
+							/*
+							  DELETE FROM `search_index` WHERE `cache_id`=OLD.`cache_id`;
+							  DELETE FROM `search_index_times` WHERE `object_type`=2 AND `object_id`=OLD.`cache_id`;
+
+								Deleting this would be performance critical.
+								The leftover data won't hurt and will be automaticall rebuilt via cronjob. 
+							*/
+							DELETE FROM `stat_cache_logs` WHERE `cache_id`=OLD.`cache_id`;
+							DELETE FROM `stat_caches` WHERE `cache_id`=OLD.`cache_id`;
+							SET @dont_update_listingdate=0;
+							SET @deleting_cache=0;
+						END IF;
+					END;");
+
 	sql_dropTrigger('cachesAfterDelete');
 	sql("CREATE TRIGGER `cachesAfterDelete` AFTER DELETE ON `caches` 
 				FOR EACH ROW 
 					BEGIN 
-						SET @dont_update_listingdate=1;
-
-						/* lots of things are missing here - descs, logs, pictures ...
-						   also, the depending deletions should be done BEFORE deleting from caches! */
-
-						DELETE FROM `cache_coordinates` WHERE `cache_id`=OLD.`cache_id`;
-						DELETE FROM `cache_countries` WHERE `cache_id`=OLD.`cache_id`;
-						DELETE FROM `cache_npa_areas` WHERE `cache_id`=OLD.`cache_id`;
-						DELETE FROM `caches_modified` WHERE `cache_id`=OLD.`cache_id`;
-						CALL sp_update_hiddenstat(OLD.`user_id`, OLD.`status`, TRUE);
 						INSERT IGNORE INTO `removed_objects` (`localId`, `uuid`, `type`, `node`) VALUES (OLD.`cache_id`, OLD.`uuid`, 2, OLD.`node`);
-
-						SET @dont_update_listingdate=0;
+						CALL sp_update_hiddenstat(OLD.`user_id`, OLD.`status`, TRUE);
 					END;");
 
 	sql_dropTrigger('cacheDescBeforeInsert');
@@ -906,14 +991,16 @@
 	sql("CREATE TRIGGER `cacheDescAfterDelete` AFTER DELETE ON `cache_desc` 
 				FOR EACH ROW 
 					BEGIN 
-						CALL sp_update_cache_listingdate(OLD.`cache_id`);
 						INSERT IGNORE INTO `removed_objects` (`localId`, `uuid`, `type`, `node`) VALUES (OLD.`id`, OLD.`uuid`, 3, OLD.`node`);
-						/* changes at date of creation are ignored to save archive space */
-						IF (OLD.`date_created` < LEFT(NOW(),10)) AND
-						   (SELECT `status` FROM `caches` WHERE `caches`.`cache_id`=OLD.`cache_id`) != 5 THEN
-							INSERT IGNORE INTO `cache_desc_modified` (`cache_id`, `language`, `date_modified`, `date_created`, `desc`, `desc_html`, `desc_htmledit`, `hint`, `short_desc`, `restored_by`) VALUES (OLD.`cache_id`, OLD.`language`, NOW(), OLD.`date_created`, OLD.`desc`, OLD.`desc_html`, OLD.`desc_htmledit`, OLD.`hint`, OLD.`short_desc`, IFNULL(@restoredby,0));
+						IF IFNULL(@deleting_cache,0)=0 THEN
+							CALL sp_update_cache_listingdate(OLD.`cache_id`);
+							/* changes at date of creation are ignored to save archive space */
+							IF (OLD.`date_created` < LEFT(NOW(),10)) AND
+							   (SELECT `status` FROM `caches` WHERE `caches`.`cache_id`=OLD.`cache_id`) != 5 THEN
+								INSERT IGNORE INTO `cache_desc_modified` (`cache_id`, `language`, `date_modified`, `date_created`, `desc`, `desc_html`, `desc_htmledit`, `hint`, `short_desc`, `restored_by`) VALUES (OLD.`cache_id`, OLD.`language`, NOW(), OLD.`date_created`, OLD.`desc`, OLD.`desc_html`, OLD.`desc_htmledit`, OLD.`hint`, OLD.`short_desc`, IFNULL(@restoredby,0));
+							END IF;
+							CALL sp_update_caches_descLanguages(OLD.`cache_id`);
 						END IF;
-						CALL sp_update_caches_descLanguages(OLD.`cache_id`);
 					END;");
 
 	sql_dropTrigger('cacheIgnoreAfterInsert');
@@ -960,7 +1047,9 @@
 	sql("CREATE TRIGGER `cacheLocationAfterDelete` AFTER DELETE ON `cache_location`
 				FOR EACH ROW
 					BEGIN
-						UPDATE `caches` SET `meta_last_modified`=NOW() WHERE `caches`.`cache_id`=OLD.`cache_id`;
+						IF IFNULL(@deleting_cache,0)=0 THEN
+							UPDATE `caches` SET `meta_last_modified`=NOW() WHERE `caches`.`cache_id`=OLD.`cache_id`;
+						END IF;
 					END;");
 
 	sql_dropTrigger('cacheLogsBeforeInsert');
@@ -1052,6 +1141,21 @@
 							CALL sp_update_logstat(OLD.`cache_id`, OLD.`user_id`, OLD.`type`, TRUE);
 							CALL sp_update_logstat(NEW.`cache_id`, NEW.`user_id`, NEW.`type`, FALSE);
 						END IF;
+					END;");
+
+	sql_dropTrigger('cacheLogsBeforeDelete');
+	sql("CREATE TRIGGER `cacheLogsBeforeDelete` BEFORE DELETE ON `cache_logs` 
+				FOR EACH ROW 
+					BEGIN
+						/* Pictures normally are deleted via removelog.php, which may save the
+						   picture file for vandalism restore. This is only for debugging or
+						   for deleting imported data from other nodes.
+						   Ratings may be leftover in cache_rating and need to be cleaned up elswhere
+						*/
+						SET @deleting_log=1;
+						DELETE FROM `pictures` WHERE `object_type`=1 AND `object_id`=OLD.`id`;
+						DELETE FROM `cache_logs_restored` WHERE `cache_logs_restored`.`id`=OLD.`id`;
+						SET @deleting_log=0;
 					END;");
 
 	sql_dropTrigger('cacheLogsAfterDelete');
@@ -1565,16 +1669,61 @@
 	sql("CREATE TRIGGER `userBeforeDelete` BEFORE DELETE ON `user` 
 				FOR EACH ROW 
 					BEGIN
-						DELETE FROM `cache_adoption` WHERE `user_id`=OLD.user_id;
-						DELETE FROM `cache_ignore` WHERE `user_id`=OLD.user_id;
-						DELETE FROM `cache_rating` WHERE `user_id`=OLD.user_id;
-						DELETE FROM `cache_watches` WHERE `user_id`=OLD.user_id;
-						DELETE FROM `cache_lists` WHERE `user_id`=OLD.user_id;
-						DELETE FROM `stat_user` WHERE `user_id`=OLD.user_id;
-						DELETE FROM `user_options` WHERE `user_id`=OLD.user_id;
-						DELETE FROM `user_statpic` WHERE `user_id`=OLD.user_id;
-						DELETE FROM `watches_waiting` WHERE `user_id`=OLD.user_id;
-						DELETE FROM `notify_waiting` WHERE `user_id`=OLD.user_id;
+						IF IFNULL(@dbdebug,0)=0 THEN
+							CALL error_set_debugmode_to_delete_users();
+							/*
+							    There are exactly three reasons to delete a user record:
+
+							    1. Get rid of obsolete data on a test or developer machine.
+							    2. Get rid of a bad user record which was left over by a user creating bug.
+							    3. Remove replicated data from other nodes which are no longer useful.
+
+							    Do NOT delete a user record for any other reason!
+							*/
+						ELSEIF IFNULL(@fastdelete,0) = 0 THEN
+							/*
+									use 'fastdelete' only to delete bulk data and if you are sure that
+									you can handle all dependent data on your own
+							*/
+							SET @deleting_user=1;
+							DELETE FROM `cache_adoption` WHERE `user_id`=OLD.user_id;
+							DELETE FROM `cache_adoptions` WHERE `from_user_id`=OLD.user_id;
+							DELETE FROM `cache_adoptions` WHERE `to_user_id`=OLD.user_id;
+							DELETE FROM `cache_ignore` WHERE `user_id`=OLD.user_id;
+							DELETE FROM `cache_list_bookmarks` WHERE `user_id`=OLD.user_id;
+							DELETE FROM `cache_list_watches` WHERE `user_id`=OLD.user_id;
+							DELETE FROM `cache_lists` WHERE `user_id`=OLD.user_id;
+							DELETE FROM `cache_logs` WHERE `user_id`=OLD.user_id;
+							DELETE FROM `cache_logs_archived` WHERE `user_id`=OLD.user_id;
+							DELETE FROM `cache_rating` WHERE `user_id`=OLD.user_id;
+							DELETE FROM `cache_reports` WHERE `userid`=OLD.user_id;  /* userid ! */ 
+							DELETE FROM `cache_watches` WHERE `user_id`=OLD.user_id;
+							DELETE FROM `caches` WHERE `user_id`=OLD.user_id;
+							DELETE FROM `coordinates` WHERE `user_id`=OLD.user_id;
+							/*
+								no deletion from protocols `email_user` and from `logentries`
+							*/
+							DELETE FROM `notify_waiting` WHERE `user_id`=OLD.user_id;
+							DELETE FROM `queries` WHERE `user_id`=OLD.user_id;
+							DELETE FROM `stat_cache_logs` WHERE `user_id`=OLD.user_id;
+							DELETE FROM `stat_user` WHERE `user_id`=OLD.user_id;
+							DELETE FROM `sys_repl_exclude` WHERE `user_id`=OLD.user_id;
+							/*
+								DELETE FROM `sys_sessions` WHERE `user_id`=OLD.user_id;
+								Will be cleand up by cronjob, no index on user_id
+							*/
+							DELETE FROM `user_delegates` WHERE `user_id`=OLD.user_id;
+							DELETE FROM `user_options` WHERE `user_id`=OLD.user_id;
+							DELETE FROM `user_statpic` WHERE `user_id`=OLD.user_id;
+							DELETE FROM `watches_logqueue` WHERE `user_id`=OLD.user_id;
+							DELETE FROM `watches_notified` WHERE `user_id`=OLD.user_id;
+							DELETE FROM `watches_waiting` WHERE `user_id`=OLD.user_id;
+							SET @deleting_user=0;
+
+							/* 'deleted_by' / 'restored_by' entries in archiving tables are not
+							   deleted to avoid creating inconsistencies there, as well as
+							   cache reports with this adminid and cache_status_modified entries */
+						END IF;
 					END;");
 
 	sql_dropTrigger('userAfterDelete');
@@ -1702,13 +1851,15 @@
 	sql("CREATE TRIGGER `cacheAttributesAfterDelete` AFTER DELETE ON `caches_attributes` 
 				FOR EACH ROW 
 					BEGIN 
-						IF ISNULL(@XMLSYNC) OR @XMLSYNC!=1 THEN
-							UPDATE `caches` SET `last_modified`=NOW() WHERE `cache_id`=OLD.`cache_id`;
-							CALL sp_update_cache_listingdate(OLD.`cache_id`);
-						END IF;
-						IF (SELECT `status` FROM `caches` WHERE `cache_id`=OLD.`cache_id`) != 5 AND 
-						   (SELECT `date_created` FROM `caches` WHERE `cache_id`=OLD.`cache_id`) < LEFT(NOW(),10) THEN
-							INSERT IGNORE INTO `caches_attributes_modified` (`cache_id`, `attrib_id`, `date_modified`, `was_set`, `restored_by`) VALUES (OLD.`cache_id`, OLD.`attrib_id`, NOW(), 1, IFNULL(@restoredby,0));
+						IF IFNULL(@deleting_cache,0)=0 THEN
+							IF (ISNULL(@XMLSYNC) OR @XMLSYNC!=1) THEN
+								UPDATE `caches` SET `last_modified`=NOW() WHERE `cache_id`=OLD.`cache_id`;
+								CALL sp_update_cache_listingdate(OLD.`cache_id`);
+							END IF;
+							IF (SELECT `status` FROM `caches` WHERE `cache_id`=OLD.`cache_id`) != 5 AND 
+							   (SELECT `date_created` FROM `caches` WHERE `cache_id`=OLD.`cache_id`) < LEFT(NOW(),10) THEN
+								INSERT IGNORE INTO `caches_attributes_modified` (`cache_id`, `attrib_id`, `date_modified`, `was_set`, `restored_by`) VALUES (OLD.`cache_id`, OLD.`attrib_id`, NOW(), 1, IFNULL(@restoredby,0));
+							END IF;
 						END IF;
 					END;");
 
@@ -1773,7 +1924,7 @@
 	sql("CREATE TRIGGER `coordinatesAfterDelete` AFTER DELETE ON `coordinates`
 				FOR EACH ROW
 					BEGIN
-						IF OLD.`type`=1 THEN
+						IF OLD.`type`=1 AND IFNULL(@deleting_cache,0)=0 THEN
 							IF (ISNULL(@XMLSYNC) OR @XMLSYNC!=1) THEN
 							  /* update caches modification date for XML interface handling */
 								UPDATE `caches` SET `last_modified`=NOW() WHERE `cache_id`=OLD.`cache_id`;
@@ -1845,8 +1996,10 @@
 	sql("CREATE TRIGGER `gkItemWaypointAfterDelete` AFTER DELETE ON `gk_item_waypoint`
 				FOR EACH ROW
 					BEGIN
-						/* this triggers an update of okapi_syncbase, if OKAPI is installed */
-						UPDATE caches SET meta_last_modified=NOW() WHERE caches.wp_oc=OLD.wp;
+						IF IFNULL(@deleting_cache,0)=0 THEN 
+							/* this triggers an update of okapi_syncbase, if OKAPI is installed */
+							UPDATE caches SET meta_last_modified=NOW() WHERE caches.wp_oc=OLD.wp;
+						END IF;
 					END;");
 
 

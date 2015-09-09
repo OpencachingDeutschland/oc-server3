@@ -13,5 +13,6 @@ CREATE TABLE `cache_reports` (
   PRIMARY KEY  (`id`),
   KEY `status` (`status`,`adminid`),
   KEY `status_2` (`adminid`,`status`),
-  KEY `userid` (`userid`)
+  KEY `userid` (`userid`),
+  KEY `cacheid` (`cacheid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='submitted reports on caches' ;

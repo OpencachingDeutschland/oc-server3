@@ -7,5 +7,7 @@ CREATE TABLE `cache_adoptions` (
   `from_user_id` int(10) unsigned NOT NULL,
   `to_user_id` int(10) unsigned NOT NULL,
   PRIMARY KEY  (`id`),
-  KEY `cache_id` (`cache_id`,`date`)
+  KEY `cache_id` (`cache_id`,`date`),
+  KEY `from_user_id` (`from_user_id`),
+  KEY `to_user_id` (`to_user_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ;

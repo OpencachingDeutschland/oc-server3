@@ -120,7 +120,7 @@ class login
 			}
 
 			if (isset($locale))
-				sql("UPDATE `user` SET `last_login`=NOW(), `language`='&2' WHERE `user_id`='&1'", $this->userid, $locale);
+				sql("UPDATE `user` SET `last_login`=NOW(), `language`='&2', `language_guessed`=0 WHERE `user_id`='&1'", $this->userid, $locale);
 			else
 				sql("UPDATE `user` SET `last_login`=NOW() WHERE `user_id`='&1'", $this->userid);
 

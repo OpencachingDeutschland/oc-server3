@@ -12,8 +12,13 @@ $error_handled = false;
 
 function register_errorhandlers()
 {
-	set_error_handler('errorhandler', E_ERROR);
-	register_shutdown_function('shutdownhandler');
+	global $opt;
+
+	if ($opt['gui'] == GUI_HTML)
+	{
+		set_error_handler('errorhandler', E_ERROR);
+		register_shutdown_function('shutdownhandler');
+	}
 }
 
 function errorhandler($errno, $errstr, $errfile, $errline)

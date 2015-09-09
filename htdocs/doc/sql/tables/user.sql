@@ -40,6 +40,7 @@ CREATE TABLE `user` (
   `notify_radius` int(10) unsigned NOT NULL default '0',
   `notify_oconly` tinyint(1) NOT NULL default '1',
   `language` char(2) default NULL,
+  `language_guessed` tinyint(1) NOT NULL default '0',
   `admin` smallint(5) unsigned NOT NULL default '0',
   `data_license` tinyint(1) NOT NULL default '0',
   `description` mediumtext NOT NULL,

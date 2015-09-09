@@ -1336,5 +1336,55 @@ class user
 		// TODO: make customisable in user profile, see #241
 		return false;
 	}
+
+	function guessLanguage()
+	{
+		global $opt;
+
+		$language = false;
+
+		// If the user has selected a country and a translation is available for
+		// that country's primary language, use this language.
+
+		$country = $this->getCountryCode();
+		if ($country)
+		{
+			foreach ($opt['locale'] as $code => $props)
+				if ($props['mostly_translated'] && in_array($country, $props['primary_lang_of']))
+					$language = $code;
+		}
+
+		if (!$language)
+		{
+			// If the user has logged caches with at least three descriptions,
+			// at least 65% of those descriptions have the same language,
+			// and a translation is available for that language, use it.
+
+			$rs = sql("
+				SELECT COUNT(*) AS `count`, `cache_desc`.`language`
+				FROM `cache_logs`
+				JOIN `cache_desc` ON `cache_desc`.`cache_id`=`cache_logs`.`cache_id`
+				WHERE `cache_logs`.`user_id`='&1'
+				GROUP BY `cache_desc`.`language`
+				ORDER BY `count` DESC",
+				$this->nUserId
+				);
+			$total = 0;
+			while ($r = sql_fetch_assoc($rs))
+			{
+				if ($total == 0)
+					$first = $r;
+				$total += $r['count'];
+			}
+			sql_free_result($rs);
+
+			if ($total >= 3 && $first['count'] / $total >= 0.65)
+				if (isset($opt['locale'][$first['language']])
+				    && $opt['locale'][$first['language']]['mostly_translated'])
+							$language = $first['language'];
+		}
+
+		return $language;
+	}
 }
 ?>

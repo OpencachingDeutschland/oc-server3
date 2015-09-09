@@ -613,6 +613,12 @@
 			sql("ALTER TABLE `watches_logqueue` ADD INDEX `user_id` (`user_id`)");
 	}
 
+	function dbv_139()
+	{
+		if (!sql_field_exists('user', 'language_guessed'))
+			sql("ALTER TABLE `user` ADD COLUMN `language_guessed` tinyint(1) NOT NULL default '0' AFTER `language`");
+	}
+
 
 	// When adding new mutations, take care that they behave well if run multiple
 	// times. This improves robustness of database versioning.

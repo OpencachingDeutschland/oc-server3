@@ -1,0 +1,42 @@
+Setting files in the Git distribution
+-------------------------------------
+
+config2/locale.inc.php
+config2/settings-dist-common.inc.php
+
+    Global default settings; automatically included in all lib2 code. Must be
+		included in local lib1 settings. Can be locally overridden in local settings.
+
+config2/settings-dist.inc.php
+
+    lib2 default settings; automatically included in all lib2 code.
+    Can be overridden in settings.inc.php.
+
+config2/settings-dev.inc.php
+lib/settings-dev.inc.php
+
+    lib2 and lib1 default settings for OC.de developer system. Must be
+    included in local settings and can be overridden there.
+
+config2/settings-sample.inc.php         production
+config2/settings-sample-dev.inc.php     OC.de development
+lib/settings-dist.inc.php               production
+lib/settings-dev.inc.php                OC.de development
+util/notification/settings-dist.inc.php
+util/publish_caches/settings-dist.inc.php
+util/watchlist/settings-dist.inc.php
+
+    sample local settings; copy each of them to settings.inc.php and customize
+
+
+Local settings files
+--------------------
+
+config2/settings.inc.php
+config2/setting-common.inc.php          optional, use for common lib1/lib settings
+                                        and include manually in both settings.inc.php
+lib/settings.inc.php
+util/notification/settings.inc.php
+util/publish_caches/settings.inc.php
+util/watchlist/settings.inc.php
+

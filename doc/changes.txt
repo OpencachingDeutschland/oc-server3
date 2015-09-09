@@ -1,7 +1,7 @@
 
 for Version 3.0 changelog, see htdocs/templates2/ocstyle/articles/EN/changelog.tpl
 
-for Database changelog, see htdocs/doc/sql/db-changes.txt
+for Database changelog, see htdocs/doc/sql/db-changes.txt and bin/dbsv-update.php
 
 
 

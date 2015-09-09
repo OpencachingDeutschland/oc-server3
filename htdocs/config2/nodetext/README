@@ -1,0 +1,11 @@
+
+These files allow node- and language-dependent replacement of sys_trans_text
+variables, e.g. %site_title% => name of the site. This system is not capable yet
+of replacing menu links and was never used.
+
+Other mechanisms - that are in use - are domain-dependent config variables
+($opt['domain'][...]), local domain-dependent settings (settings.inc.php)
+and language-dependent article links via helppageurl() / helppagelink().
+
+None of these currently allows a complete customization of the site.
+Further discussion: http://redmine.opencaching.de/issues/831

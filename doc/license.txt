@@ -2,11 +2,11 @@
              Opencaching Implementation Version 3
 
 
-                                                                  July 25, 2013
+                                                                  July 18, 2015
 
 License Information
 
-Copyright (C) 2006-2013  Opencaching Deutschland and Contributors
+Copyright (C) 2006-2015  Opencaching Deutschland and Contributors
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by

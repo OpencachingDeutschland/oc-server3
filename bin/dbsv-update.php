@@ -585,6 +585,8 @@
 		}
 	}
 
+	/***** Hotfixes *****/
+
 	function dbv_137()  // partial revert of mutation 130
 	{
 		sql("ALTER TABLE `cache_desc` CHANGE COLUMN `desc_html` `desc_html` tinyint(1) NOT NULL default '1' COMMENT ''");

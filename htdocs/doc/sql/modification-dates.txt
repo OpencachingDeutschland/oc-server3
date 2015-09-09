@@ -70,7 +70,7 @@ cache_logs
 
 last_modified
 	Is updated when
-		- any user-provided log content fields changes
+		- any user-provided log content field changes
 		- the status of the cache changes, via sp_touch_cache()
 	This triggers an XML interface update (resending) of the log record, and an
 	update of listing_last_modified and okapi_syncbase.
@@ -105,6 +105,16 @@ mp3
 last_modified
 	like cache_logs.last_modified;
 	mp3 implementation is incomplete
+
+
+cache_lists
+-----------
+
+last_modified
+	Is updated when any user-provided field or the list content changes.
+
+last_state_change
+  Is updated when the list visibility ("is_public") changes.
 
 
 coordinates

@@ -41,7 +41,7 @@ class ReplicateListener
         }
     }
 
-    public static function reset($mail_admins = true)
+    public static function reset()
     {
         # This will be called when there are "too many" entries in the changelog
         # and the replicate module thinks it better to just reset the entire TileTree.
@@ -69,7 +69,7 @@ class ReplicateListener
         # Fetch our copy of the cache.
 
         $ours = mysql_fetch_row(Db::query("
-            select cache_id, z21x, z21y, status, type, rating, flags
+            select cache_id, z21x, z21y, status, type, rating, flags, name_crc
             from okapi_tile_caches
             where
                 z=0
@@ -204,7 +204,7 @@ class ReplicateListener
         {
             Db::execute("
                 replace into okapi_tile_caches (
-                    z, x, y, cache_id, z21x, z21y, status, type, rating, flags
+                    z, x, y, cache_id, z21x, z21y, status, type, rating, flags, name_crc
                 )
                 select
                     z, x, y,
@@ -214,7 +214,8 @@ class ReplicateListener
                     '".mysql_real_escape_string($row[3])."',
                     '".mysql_real_escape_string($row[4])."',
                     ".(($row[5] === null) ? "null" : "'".mysql_real_escape_string($row[5])."'").",
-                    '".mysql_real_escape_string($row[6])."'
+                    '".mysql_real_escape_string($row[6])."',
+                    '".mysql_real_escape_string($row[7])."'
                 from okapi_tile_status
                 where
                     (".implode(" or ", $alternatives_escaped).")
@@ -248,7 +249,8 @@ class ReplicateListener
                 status = '".mysql_real_escape_string($row[3])."',
                 type = '".mysql_real_escape_string($row[4])."',
                 rating = ".(($row[5] === null) ? "null" : "'".mysql_real_escape_string($row[5])."'").",
-                flags = '".mysql_real_escape_string($row[6])."'
+                flags = '".mysql_real_escape_string($row[6])."',
+                name_crc = '".mysql_real_escape_string($row[7])."'
             where
                 cache_id = '".mysql_real_escape_string($row[0])."'
         ");

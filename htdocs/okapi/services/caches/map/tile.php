@@ -20,7 +20,7 @@ use okapi\OkapiServiceRunner;
 use okapi\OkapiLock;
 
 use okapi\services\caches\map\TileTree;
-use okapi\services\caches\map\DefaultTileRenderer;
+use okapi\services\caches\map\TileRenderer;
 use okapi\services\caches\search\SearchAssistant;
 use okapi\OkapiConsumer;
 
@@ -191,7 +191,7 @@ class WebService
         # Compute the image hash/fingerprint. This will be used both for ETags
         # and internal cache ($cache_key).
 
-        $tile = new DefaultTileRenderer($zoom, $rows);
+        $tile = new TileRenderer($zoom, $rows);
         $image_fingerprint = $tile->get_unique_hash();
 
         # Start creating response.

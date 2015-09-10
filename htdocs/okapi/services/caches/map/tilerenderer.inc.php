@@ -9,32 +9,14 @@ use okapi\Cache;
 use okapi\Db;
 use okapi\FileCache; // WRTODO
 
-interface TileRenderer
-{
-    /**
-     * Return the unique hash of the tile being rendered. This method will be
-     * called only once, prior the render method. You may (but don't have to)
-     * throw an Exception on every subsequent call.
-     */
-    public function get_unique_hash();
 
-    /** Get the content type of the data returned by the render method. */
-    public function get_content_type();
-
-    /**
-     * Render the image. This function will be called only once, after calling
-     * get_unique_hash method.
-     */
-    public function render();
-}
-
-class DefaultTileRenderer implements TileRenderer
+class TileRenderer
 {
     /**
      * Changing this will affect all generated hashes. You should increment it
      * whenever you alter anything in the drawing algorithm.
      */
-    private static $VERSION = 59;
+    private static $VERSION = 61;
 
     /**
      * Should be always true. You may temporarily set it to false, when you're
@@ -63,21 +45,31 @@ class DefaultTileRenderer implements TileRenderer
         $this->rows_ref = &$rows_ref;
     }
 
+    /**
+     * Return the unique hash of the tile being rendered. This method will be
+     * called only once, prior the render method. You may (but don't have to)
+     * throw an Exception on every subsequent call.
+     */
     public function get_unique_hash()
     {
         return md5(json_encode(array(
-            "DefaultTileRenderer",
+            "TileRenderer",
             self::$VERSION,
             $this->zoom,
             $this->rows_ref
         )));
     }
 
+    /** Get the content type of the data returned by the render method. */
     public function get_content_type()
     {
         return "image/png";
     }
 
+    /**
+     * Render the image. This function will be called only once, after calling
+     * get_unique_hash method.
+     */
     public function render()
     {
         # Preprocess the rows.
@@ -189,6 +181,7 @@ class DefaultTileRenderer implements TileRenderer
     private function draw_cache(&$cache_struct)
     {
         $capt = ($cache_struct[6] & TileTree::$FLAG_DRAW_CAPTION);
+
         if (($this->zoom <= 8) && (!$capt))
             $this->draw_cache_tiny($cache_struct);
         elseif (($this->zoom <= 13) && (!$capt))
@@ -198,9 +191,9 @@ class DefaultTileRenderer implements TileRenderer
 
         # Put caption (this flag is set only when there is plenty of space around).
 
-        if ($cache_struct[6] & TileTree::$FLAG_DRAW_CAPTION)
+        if ($capt)
         {
-            $caption = $this->get_caption($cache_struct[0]);
+            $caption = $this->get_caption($cache_struct[0], $cache_struct[7]);
             imagecopy($this->im, $caption, $cache_struct[1] - 32, $cache_struct[2] + 6, 0, 0, 64, 26);
         }
 
@@ -209,7 +202,7 @@ class DefaultTileRenderer implements TileRenderer
 
     private function draw_cache_large(&$cache_struct)
     {
-        list($cache_id, $px, $py, $status, $type, $rating, $flags, $count) = $cache_struct;
+        list($cache_id, $px, $py, $status, $type, $rating, $flags, $name_crc, $count) = $cache_struct;
 
         $found = $flags & TileTree::$FLAG_FOUND;
         $own = $flags & TileTree::$FLAG_OWN;
@@ -339,11 +332,11 @@ class DefaultTileRenderer implements TileRenderer
     /**
      * Return 64x26 bitmap with the caption (name) for the given geocache.
      */
-    private function get_caption($cache_id)
+    private function get_caption($cache_id, $name_crc)
     {
         # Check cache.
 
-        $cache_key = "tilecaption/".self::$VERSION."/".$cache_id;
+        $cache_key = "tilecaption/".self::$VERSION."/".$cache_id."/".$name_crc;
         $gd2 = self::$USE_CAPTIONS_CACHE ? Cache::get($cache_key) : null;
         if ($gd2 === null)
         {
@@ -428,7 +421,7 @@ class DefaultTileRenderer implements TileRenderer
 
     private function draw_cache_medium(&$cache_struct)
     {
-        list($cache_id, $px, $py, $status, $type, $rating, $flags, $count) = $cache_struct;
+        list($cache_id, $px, $py, $status, $type, $rating, $flags, $name_crc, $count) = $cache_struct;
 
         $found = $flags & TileTree::$FLAG_FOUND;
         $own = $flags & TileTree::$FLAG_OWN;
@@ -533,7 +526,7 @@ class DefaultTileRenderer implements TileRenderer
 
     private function draw_cache_tiny(&$cache_struct)
     {
-        list($cache_id, $px, $py, $status, $type, $rating, $flags, $count) = $cache_struct;
+        list($cache_id, $px, $py, $status, $type, $rating, $flags, $name_crc, $count) = $cache_struct;
 
         $found = $flags & TileTree::$FLAG_FOUND;
         $own = $flags & TileTree::$FLAG_OWN;
@@ -592,7 +585,7 @@ class DefaultTileRenderer implements TileRenderer
             $mx = ($row_ref[1] + 64) >> 5;
             $my = ($row_ref[2] + 64) >> 5;
             if (($mx >= 12) || ($my >= 12)) continue;
-            if (($matrix[$mx][$my] === 0) && ($row_ref[7] == 1))  # 7 is count
+            if (($matrix[$mx][$my] === 0) && ($row_ref[8] == 1))  # 8 is count
                 $matrix[$mx][$my] = $row_ref[0];  # 0 is cache_id
             else
                 $matrix[$mx][$my] = -1;

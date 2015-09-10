@@ -187,7 +187,11 @@ class WebService
 
             if ($comment_format == 'plaintext')
             {
-                $formatted_comment = htmlspecialchars($comment, ENT_QUOTES);
+                # This code is identical to the plaintext processing in OCDE code,
+                # including a space handling bug: Multiple consecutive spaces will
+                # get semantically lost in the generated HTML.
+
+                $formatted_comment = htmlspecialchars($comment, ENT_COMPAT);
                 $formatted_comment = nl2br($formatted_comment);
                 $value_for_text_html_field = 0;
             }

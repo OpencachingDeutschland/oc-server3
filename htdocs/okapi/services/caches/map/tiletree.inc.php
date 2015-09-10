@@ -52,7 +52,7 @@ class TileTree
      * in the given result set AND in the given tile.
      *
      * Each row is an array of the following format:
-     * list(cache_id, $pixel_x, $pixel_y, status, type, rating, flags, count).
+     * list(cache_id, $pixel_x, $pixel_y, status, type, rating, flags, name_crc, [count]).
      *
      * Note that $pixels can also be negative or >=256 (up to a margin of 32px).
      * Count is the number of other caches "eclipsed" by this geocache (such
@@ -91,7 +91,7 @@ class TileTree
                 otc.cache_id,
                 cast(otc.z21x >> (21 - $zoom_escaped) as signed) - $tile_upper_x_escaped as px,
                 cast(otc.z21y >> (21 - $zoom_escaped) as signed) - $tile_leftmost_y_escaped as py,
-                otc.status, otc.type, otc.rating, otc.flags, count(*)
+                otc.status, otc.type, otc.rating, otc.flags, otc.name_crc, count(*)
             from
                 okapi_tile_caches otc,
                 okapi_search_results osr
@@ -160,7 +160,7 @@ class TileTree
                 }
                 Db::execute("
                     replace into okapi_tile_caches (
-                        z, x, y, cache_id, z21x, z21y, status, type, rating, flags
+                        z, x, y, cache_id, z21x, z21y, status, type, rating, flags, name_crc
                     ) values (
                         0, 0, 0,
                         '".mysql_real_escape_string($row[0])."',
@@ -169,7 +169,8 @@ class TileTree
                         '".mysql_real_escape_string($row[3])."',
                         '".mysql_real_escape_string($row[4])."',
                         ".(($row[5] === null) ? "null" : "'".mysql_real_escape_string($row[5])."'").",
-                        '".mysql_real_escape_string($row[6])."'
+                        '".mysql_real_escape_string($row[6])."',
+                        '".mysql_real_escape_string($row[7])."'
                     );
                 ");
             }
@@ -222,13 +223,15 @@ class TileTree
 
                 Db::execute("
                     replace into okapi_tile_caches (
-                        z, x, y, cache_id, z21x, z21y, status, type, rating, flags
+                        z, x, y, cache_id, z21x, z21y, status, type, rating,
+                        flags, name_crc
                     )
                     select
                         '".mysql_real_escape_string($zoom)."',
                         '".mysql_real_escape_string($x)."',
                         '".mysql_real_escape_string($y)."',
-                        cache_id, z21x, z21y, status, type, rating, flags
+                        cache_id, z21x, z21y, status, type, rating,
+                        flags, name_crc
                     from okapi_tile_caches
                     where
                         z = '".mysql_real_escape_string($parent_zoom)."'
@@ -271,7 +274,8 @@ class TileTree
     /**
      * Convert OKAPI's cache object to a short database row to be inserted
      * into okapi_tile_caches table. Returns the list of the following attributes:
-     * cache_id, z21x, z21y, status, type, rating, flags (rating might be null!).
+     * cache_id, z21x, z21y, status, type, rating, flags, name_crc
+     * (rating may be null!).
      */
     public static function generate_short_row($cache)
     {
@@ -290,7 +294,18 @@ class TileTree
         if ($cache['founds'] == 0)
             $flags |= self::$FLAG_NOT_YET_FOUND;
         return array($cache['internal_id'], $z21x, $z21y, Okapi::cache_status_name2id($cache['status']),
-            Okapi::cache_type_name2id($cache['type']), $cache['rating'], $flags);
+            Okapi::cache_type_name2id($cache['type']), $cache['rating'], $flags,
+            self::compute_name_crc($cache['name']));
+    }
+
+    private static function compute_name_crc($name)
+    {
+        /* Unfortunatelly, crc32 behaves differently on different platforms
+         * (returned signed integers on 32bit, unsigned on 64bit). In order to
+         * avoid MySQL casting negative values to 0, we'll do an additional
+         * abs on it. */
+
+         return abs(crc32($name));
     }
 
     private static function latlon_to_z21xy($lat, $lon)

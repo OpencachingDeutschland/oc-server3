@@ -544,7 +544,6 @@ class TileTreeUpdater extends Cron5Job
                         # is installed (and this is the first time this cronjob
                         # if being run).
 
-                        $mail_admins = ($tiletree_revision > 0);
                         \okapi\services\caches\map\ReplicateListener::reset();
                         Okapi::set_var('clog_followup_revision', $current_clog_revision);
                         break;

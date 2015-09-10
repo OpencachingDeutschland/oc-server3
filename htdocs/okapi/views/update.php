@@ -707,4 +707,7 @@ class View
     }
 
     private static function ver90() { Db::execute("alter table okapi_consumers change column admin bflags tinyint not null default 0;"); }
+    private static function ver91() { Db::execute("delete from okapi_tile_status"); }
+    private static function ver92() { Db::execute("delete from okapi_tile_caches"); }
+    private static function ver93() { Db::execute("alter table okapi_tile_caches add column name_crc int(10) unsigned not null default 0;"); }
 }

@@ -145,7 +145,11 @@ final class Settings
          */
         'ORIGIN_URL' => null,
 
-        /** OKAPI needs this when inserting new data to cache_logs table. */
+        /**
+         * OKAPI needs this when inserting new data to cache_logs table. Node
+         * IDs serve a similar purpose for OC sites that ORIGIN_URL does for
+         * OKAPI.
+         */
         'OC_NODE_ID' => null,
 
         /**

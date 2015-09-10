@@ -41,7 +41,8 @@ function processEditorInput($oldDescMode, $descMode, $text)
 		}
 		else
 		{
-			// save HTML input => verify / tidy / filter
+			// save HTML input => verify / tidy / filter;
+			// also implemented in okapi/services/logs/submit.php
 			$purifier = new OcHTMLPurifier($opt);
 			$text = $purifier->purify($text);
 		}
@@ -50,7 +51,8 @@ function processEditorInput($oldDescMode, $descMode, $text)
 	{
 		if ($oldDescMode == 1)
 		{
-			// save plain text input => convert to HTML
+			// save plain text input => convert to HTML;
+			// also implemented in okapi/services/logs/submit.php
 			$text = nl2br(htmlspecialchars($text, ENT_COMPAT, 'UTF-8'));
 		}
 		else

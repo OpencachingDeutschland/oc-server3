@@ -531,26 +531,41 @@ class SearchAssistant
         }
 
         #
-        # powertrail_only
+        # powertrail_only, powertrail_ids
         #
-        if (!is_null($tmp = $this->request->get_parameter('powertrail_only')))
+
+        $join_powertrails = false;
+        if ($tmp = $this->request->get_parameter('powertrail_only'))
         {
-            if (!in_array($tmp, array('true', 'false'), 1))
-                throw new InvalidParam('powertrail_only', "'$tmp'");
-            if ($tmp == 'true')
-            {
-                if (Settings::get('OC_BRANCH') == 'oc.pl') {
-                    $extra_joins[] = 'inner join powerTrail_caches on powerTrail_caches.cacheId = caches.cache_id';
-                    #
-                    # Filter out caches from inactive powerTrails as well
-                    #
-                    $extra_joins[] = 'inner join PowerTrail on PowerTrail.id = powerTrail_caches.powerTrailId';
-                    $where_conds[] = 'PowerTrail.status = 1';
-                } else {
-                    $where_conds[] = "0=1";
-                }
+            if ($tmp === 'true') {
+                $join_powertrails = true;
+            } elseif ($tmp === 'false') {
+                $join_powertrails = false;
+            } else {
+                throw new InvalidParam('powertrail_only', "Boolean expected, '$tmp' found.");
             }
         }
+        $powertrail_ids = $this->request->get_parameter('powertrail_ids');
+        if ($powertrail_ids) {
+            $join_powertrails = true;
+        }
+        if ($join_powertrails) {
+            if (Settings::get('OC_BRANCH') == 'oc.pl') {
+                $extra_tables[] = "powerTrail_caches";
+                $extra_tables[] = "PowerTrail";
+                $where_conds[] = "powerTrail_caches.cacheId = caches.cache_id";
+                $where_conds[] = "PowerTrail.id = powerTrail_caches.powerTrailId";
+                $where_conds[] = 'PowerTrail.status = 1';
+                if ($powertrail_ids) {
+                    $where_conds[] = "PowerTrail.id in ('".implode(
+                        "','", array_map('mysql_real_escape_string', explode("|", $powertrail_ids))
+                    )."')";
+                }
+            } else {
+                $where_conds[] = "0=1";
+            }
+        }
+        unset($powertrail_ids, $join_powertrails);
 
         #
         # set_and

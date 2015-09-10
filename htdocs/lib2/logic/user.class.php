@@ -1244,6 +1244,7 @@ class user
 		                       'User ' . sql_escape($this->getUsername()) . ' deleted',
 		                       serialize($backup));
 
+		sql("set @allowdelete=1");
 		sql("DELETE FROM `user` WHERE `user_id`='&1'", $this->nUserId);
 		// all data in depending tables is cleared via trigger 
 

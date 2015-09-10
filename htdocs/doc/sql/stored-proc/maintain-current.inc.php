@@ -38,9 +38,9 @@
 	*   Prevents recursive write access to the base tables while deleting
 	*   from a dependent table.
 	*
-	* @dbdebug
+	* @allowdelete
 	* @fastdelete
-	*   'dbdebug' enables deleting cache and user records. Use only on test and
+	*   'allowdelete' enables deleting cache and user records. Use only on test and
 	*   development systems, or to delete bad replicated data from other nodes;
 	*   never delete local caches or users on production systems !!
 	*   'fastdelete' will skip deleting any dependent data.
@@ -855,8 +855,8 @@
 	sql("CREATE TRIGGER `cachesBeforeDelete` BEFORE DELETE ON `caches` 
 				FOR EACH ROW 
 					BEGIN 
-						IF IFNULL(@dbdebug,0) = 0 THEN
-							CALL error_set_debugmode_to_delete_caches();
+						IF IFNULL(@allowdelete,0) = 0 THEN
+							CALL error_set_allowdelete_to_delete_caches();
 							/*
 							    There are exactly three reasons to delete a cache record:
 
@@ -1669,14 +1669,15 @@
 	sql("CREATE TRIGGER `userBeforeDelete` BEFORE DELETE ON `user` 
 				FOR EACH ROW 
 					BEGIN
-						IF IFNULL(@dbdebug,0)=0 THEN
-							CALL error_set_debugmode_to_delete_users();
+						IF IFNULL(@allowdelete,0)=0 THEN
+							CALL error_set_allowdelete_to_delete_users();
 							/*
-							    There are exactly three reasons to delete a user record:
+							    There are exactly four reasons to delete a user record:
 
-							    1. Get rid of obsolete data on a test or developer machine.
-							    2. Get rid of a bad user record which was left over by a user creating bug.
-							    3. Remove replicated data from other nodes which are no longer useful.
+							    1. account was not activated -> see user_delete.class.php
+							    2. Get rid of obsolete data on a test or developer machine.
+							    3. Get rid of a bad user record which was left over by a user creating bug.
+							    4. Remove replicated data from other nodes which are no longer useful.
 
 							    Do NOT delete a user record for any other reason!
 							*/

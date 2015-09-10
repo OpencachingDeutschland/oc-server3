@@ -7,9 +7,8 @@
  *  Constant definitions
  ***************************************************************************/
 
-	define('GUI_HTML', 0);
+	define('GUI_HTML', 0);   // also defined in lib/consts.inc.php
 	define('GUI_TEXT', 1);
-	define('GUI_NUSOAP', 2);
 
 	define('DEBUG_NO', 0);
 	define('DEBUG_DEVELOPER', 1);

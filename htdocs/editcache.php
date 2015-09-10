@@ -20,6 +20,8 @@
  ****************************************************************************/
 
   //prepare the templates and include all neccessary
+	require_once('lib/consts.inc.php');
+	$opt['gui'] = GUI_HTML;
 	require_once('./lib/common.inc.php');
 
 function getWaypoints($cacheid)

@@ -15,6 +15,9 @@
 
  ****************************************************************************/
 
+	define('GUI_HTML', 0);   // also defined in lib2/const.inc.php
+	define('GUI_TEXT', 1);
+
 	// for cachelists
 	define('cachelist_type_ignore', 1);
 	define('cachelist_type_watch', 2);

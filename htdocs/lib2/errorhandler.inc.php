@@ -14,7 +14,7 @@ function register_errorhandlers()
 {
 	global $opt;
 
-	if ($opt['gui'] == GUI_HTML)
+	if (isset($opt['gui']) && $opt['gui'] == GUI_HTML)
 	{
 		set_error_handler('errorhandler', E_ERROR);
 		register_shutdown_function('shutdownhandler');

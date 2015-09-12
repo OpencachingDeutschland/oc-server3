@@ -554,9 +554,9 @@ class coordinate
 		return $lon;
 	}
 
-	function getW3W($language = "de")
+	function getW3W($language)
 	{
-        global $opt;
+		global $opt;
 
 		if (!$opt['lib']['w3w']['apikey'])
 			return false;
@@ -564,7 +564,7 @@ class coordinate
 		$params = array(
 			'key' => $opt['lib']['w3w']['apikey'],
 			'position' => sprintf('%f,%f', $this->nLat, $this->nLon),
-			'lang' => $language,
+			'lang' => strtolower($language),
 		);
 		$params_str = http_build_query($params);
 		$context = stream_context_create( array(

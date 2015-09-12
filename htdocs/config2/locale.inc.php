@@ -120,6 +120,7 @@
 	$opt['locale']['EN']['page']['license'] = '<a rel="license" href="%1"><img alt="Creative Commons License Terms" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-nd/3.0/de/88x31.png" /></a><div style="text-align:center; margin:8px 0 0 6px;">The Opencaching.de <a href="articles.php?page=impressum#datalicense">content</a> is licensed under Creative Commons <a rel="license" href="%1" target="_blank">BY-BC-ND 3.0 DE</a>.</div>';
 	$opt['locale']['EN']['helpwiki'] = "http://wiki.opencaching.de/index.php/";
 	$opt['locale']['EN']['mostly_translated'] = true;
+	$opt['locale']['EN']['what3words'] = true;
 
 	$opt['locale']['DE']['format']['dm'] = '%d.%m.';
 	$opt['locale']['DE']['format']['dateshort'] = '%d.%m.%y';
@@ -140,6 +141,7 @@
 	$opt['locale']['DE']['page']['license'] = '<a rel="license" href="%1"><img alt="Creative Commons Lizenzvertrag" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-nd/3.0/de/88x31.png" /></a><div style="text-align:center; margin:8px 0 0 6px;">Die <a href="articles.php?page=impressum#datalicense">Inhalte</a> von Opencaching.de stehen unter der Creative-Commons-Lizenz <a rel="license" href="%1">BY-NC-ND 3.0 DE</a>.</div>';
 	$opt['locale']['DE']['helpwiki'] = "http://wiki.opencaching.de/index.php/";
 	$opt['locale']['DE']['mostly_translated'] = true;
+	$opt['locale']['DE']['what3words'] = true;  // "beta"
 
 	$opt['locale']['IT']['format']['dateshort'] = '%d/%m/%y';
 	$opt['locale']['IT']['format']['dm'] = '%d/%m';
@@ -159,6 +161,7 @@
 	$opt['locale']['IT']['page']['license_url'] = 'http://creativecommons.org/licenses/by-nc-nd/3.0/de/deed.it';
 	$opt['locale']['IT']['page']['license'] = '<a rel="license" href="%1" target="_blank"><img alt="Creative Commons License Terms" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-nd/3.0/de/88x31.png" /></a><div style="text-align:center; margin:8px 0 0 6px;">Il <a href="articles.php?page=impressum#datalicense">contenuto</a> di Opencaching.de è rilasciato sotto licenza Creative Commons <a rel="license" href="%1" target="_blank">BY-NC-ND 3.0 DE</a>.</div>';
 	$opt['locale']['IT']['mostly_translated'] = true;
+	$opt['locale']['IT']['what3words'] = false;
 
 	$opt['locale']['ES']['format']['dateshort'] = '%d/%m/%y';
 	$opt['locale']['ES']['format']['dm'] = '%d/%m';
@@ -178,6 +181,7 @@
 	$opt['locale']['ES']['page']['license_url'] = 'http://creativecommons.org/licenses/by-nc-nd/3.0/de/deed.es_ES';
 	$opt['locale']['ES']['page']['license'] = '<a rel="license" href="%1" target="_blank"><img alt="Creative Commons License Terms" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-nd/3.0/de/88x31.png" /></a><div style="text-align:center; margin:8px 0 0 6px;">El <a href="articles.php?page=impressum#datalicense">contenido</a> está disponible bajo Creative Commons <a rel="license" href="%1" target="_blank">BY-NC-ND 3.0 DE</a> licencia.</div>';
 	$opt['locale']['ES']['mostly_translated'] = true;
+	$opt['locale']['ES']['what3words'] = true;
 
 	$opt['locale']['FR']['format']['dm'] = '%d.%m.';
 	$opt['locale']['FR']['format']['dateshort'] = '%d.%m.%y';
@@ -198,6 +202,7 @@
 	$opt['locale']['FR']['page']['license'] = '<a rel="license" href="%1"><img alt="Creative Commons License Terms" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-nd/3.0/de/88x31.png" /></a><div style="text-align:center; margin:8px 0 0 6px;">Le<a  href="articles.php?page=impressum#datalicense">contenu</a> de Opencaching.de sont sous licence Creative Commons <a rel="license" href="%1" target="_blank">BY-BC-ND 3.0 DE</a>.</div>';
 	$opt['locale']['FR']['helpwiki'] = "http://wiki.opencaching.de/index.php/";
 	$opt['locale']['FR']['mostly_translated'] = true;
+	$opt['locale']['FR']['what3words'] = true;
 
 /*
 	$opt['locale']['SV']['format']['dateshort'] = '%y-%m-%d';
@@ -214,6 +219,8 @@
 	$opt['locale']['SV']['country'] = 'SE';
 	$opt['locale']['SV']['page']['subtitle1'] = 'Geocaching med Opencaching';
 	$opt['locale']['SV']['page']['subtitle2'] = '';
+	$opt['locale']['SV']['mostly_translated'] = false;
+	$opt['locale']['SV']['what3words'] = true;  // "beta"
 
 	$opt['locale']['NO']['format']['dateshort'] = '%d.%m.%y';
 	$opt['locale']['NO']['format']['dm'] = '%d.%m.';
@@ -229,6 +236,8 @@
 	$opt['locale']['NO']['country'] = 'NO';
 	$opt['locale']['NO']['page']['subtitle1'] = 'Geocaching med Opencaching';
 	$opt['locale']['NO']['page']['subtitle2'] = '';
+	$opt['locale']['NO']['mostly_translated'] = false;
+	$opt['locale']['NO']['what3words'] = false;
 
 	$opt['locale']['PL']['format']['dm'] = '%d.%m.';
 	$opt['locale']['PL']['format']['dateshort'] = '%d.%m.%y';
@@ -242,6 +251,8 @@
 	$opt['locale']['PL']['format']['phpdatetime'] = 'd-m-Y H:i';
 	$opt['locale']['PL']['format']['colonspace'] = '';
 	$opt['locale']['PL']['country'] = 'PL';
+	$opt['locale']['PL']['mostly_translated'] = false;
+	$opt['locale']['PL']['what3words'] = false;
 
 	$opt['locale']['NL']['format']['dm'] = '%d.%m.';
 	$opt['locale']['NL']['format']['dateshort'] = '%d.%m.%y';
@@ -257,6 +268,8 @@
 	$opt['locale']['NL']['page']['subtitle1'] = 'Geocaching met Opencaching';
 	$opt['locale']['NL']['page']['subtitle2'] = '';
 	$opt['locale']['NL']['country'] = 'NL';
+	$opt['locale']['NL']['mostly_translated'] = false;
+	$opt['locale']['NL']['what3words'] = false;
 
 	$opt['locale']['RU']['format']['dateshort'] = '%d.%m.%y';
 	$opt['locale']['RU']['format']['dm'] = '%d.%m.';
@@ -270,6 +283,8 @@
 	$opt['locale']['RU']['format']['phpdatetime'] = 'd-m-Y H:i';
 	$opt['locale']['RU']['format']['colonspace'] = '';
 	$opt['locale']['RU']['country'] = 'RU';
+	$opt['locale']['RU']['mostly_translated'] = false;
+	$opt['locale']['RU']['what3words'] = true;   // "beta"
 
 	$opt['locale']['DA']['format']['dateshort'] = '%d.%m.%y';
 	$opt['locale']['DA']['format']['dm'] = '%d.%m.';
@@ -285,6 +300,8 @@
 	$opt['locale']['DA']['country'] = 'DK';
 	$opt['locale']['DA']['page']['subtitle1'] = 'Geocaching med Opencaching';
 	$opt['locale']['DA']['page']['subtitle2'] = '';
+	$opt['locale']['DA']['mostly_translated'] = false;
+	$opt['locale']['DA']['what3words'] = false;
 
 	$opt['locale']['PT']['format']['dateshort'] = '%d.%m.%y';
 	$opt['locale']['PT']['format']['dm'] = '%d.%m.';
@@ -300,6 +317,8 @@
 	$opt['locale']['PT']['country'] = 'PT';
 	$opt['locale']['PT']['page']['subtitle1'] = 'Geocaching com Opencaching';
 	$opt['locale']['PT']['page']['subtitle2'] = '';
+	$opt['locale']['PT']['mostly_translated'] = false;
+	$opt['locale']['PT']['what3words'] = true;
 
 	$opt['locale']['JA']['format']['dateshort'] = '%d.%m.%y';
 	$opt['locale']['JA']['format']['dm'] = '%d.%m.';
@@ -315,6 +334,8 @@
 	$opt['locale']['JA']['country'] = 'JP';
 	$opt['locale']['JA']['page']['subtitle1'] = 'Opencachingとジオキャッシング';
 	$opt['locale']['JA']['page']['subtitle2'] = '';
+	$opt['locale']['JA']['mostly_translated'] = false;
+	$opt['locale']['JA']['what3words'] = false;
 */
 
 function set_php_locale()

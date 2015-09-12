@@ -19,6 +19,9 @@
 	if (isset($_REQUEST['lon']))
 		$lon_float += $_REQUEST['lon'];
 
+	$cache_country = isset($_REQUEST['country']) ? $_REQUEST['country'] : false;
+	$cache_desclang = isset($_REQUEST['desclang']) ? $_REQUEST['desclang'] : false;
+
 	$coord = new coordinate($lat_float, $lon_float);
 
 	$tpl->assign('coordDeg', $coord->getDecimal());
@@ -30,8 +33,65 @@
 	$tpl->assign('showRD', ($coord->nLat >= 45 && $coord->nLat <= 57 && $coord->nLon >= 0 && $coord->nLon <= 15));
 	$tpl->assign('coordQTH', $coord->getQTH());
 	$tpl->assign('coordSwissGrid', $coord->getSwissGrid());
-	$tpl->assign('coordW3Wde', $coord->getW3W('de'));
-	$tpl->assign('coordW3Wen', $coord->getW3W('en'));
+
+	// build priority list of W3W languages to display
+
+	// 1. current page locale
+	$w3w_langs = array();
+	if ($opt['locale'][$opt['template']['locale']]['what3words'])
+	{
+		$w3w_langs[] = $opt['template']['locale'];
+	}
+
+	// 2. language of the cache description
+	if ($cache_desclang && !in_array($cache_desclang, $w3w_langs))
+		$w3w_langs[] = $cache_desclang;
+
+	// 3. primary language of the cache's country
+	if ($cache_country)
+	{
+		foreach ($opt['locale'] as $l => $data)
+			if ($data['what3words'] &&
+			    in_array($cache_country, $data['primary_lang_of']) &&
+			    !in_array($l, $w3w_langs))
+				{
+					$w3w_langs[] = $l;
+					break;
+				}
+	}
+
+	// 4. fallback locale of the site (usually English)
+	if ($opt['locale'][$opt['template']['default']['fallback_locale']]['what3words'] &&
+	    !in_array($opt['template']['default']['fallback_locale'], $w3w_langs))
+	{
+		$w3w_langs[] = $opt['template']['default']['fallback_locale'];
+	}
+
+	// 5. main locale of the site
+	if ($opt['locale'][$opt['page']['main_locale']]['what3words'] &&
+	    !in_array($opt['page']['main_locale'], $w3w_langs))
+	{
+		$w3w_langs[] = $opt['page']['main_locale'];
+	}
+
+	// 6. English
+	if (!in_array('EN', $w3w_langs))
+	{
+		$w3w_langs[] = 'EN';
+	}
+
+	$tpl->assign('coordW3W1', $coord->getW3W($w3w_langs[0]));
+	$lang1_name = sql_value("SELECT `name` FROM `languages` WHERE `short`='&1'", '', $w3w_langs[0]);
+	$tpl->assign('W3Wlang1', $translate->t($lang1_name, '', '', 0));
+
+	if (isset($w3w_langs[1]))
+	{
+		$tpl->assign('coordW3W2', $coord->getW3W($w3w_langs[1]));
+		$lang2_name = sql_value("SELECT `name` FROM `languages` WHERE `short`='&1'", '', $w3w_langs[1]); 
+		$tpl->assign('W3Wlang2', $translate->t($lang2_name, '', '', 0));
+	}
+	else
+		$tpl->assign('coordW3W2', false);
 
 	// wp gesetzt?
 	$wp = isset($_REQUEST['wp']) ? $_REQUEST['wp'] : '';

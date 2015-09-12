@@ -84,7 +84,7 @@
 		$optimize_for_main_country = ($country == $opt['page']['main_country']);
 	}
 
-	$tpl->strip_country_from_baseadr = true;
+	$tpl->change_country_inpage = true;
 	$tpl->assign('creation_date', $orderByDate == '');
 
 	if (!$tpl->is_cached())

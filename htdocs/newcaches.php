@@ -8,7 +8,7 @@
 	require('./lib2/web.inc.php');
 	$tpl->name = 'newcaches';
 	$tpl->menuitem = MNU_START_NEWCACHES;
-	$tpl->strip_country_from_baseadr = true;
+	$tpl->change_country_inpage = true;
 
 	$startat = isset($_REQUEST['startat']) ? $_REQUEST['startat']+0 : 0;
 	$country = isset($_REQUEST['usercountry']) ? $_REQUEST['usercountry'] :

@@ -21,7 +21,7 @@ class OcSmarty extends Smarty
 	var $title = '';
 	var $menuitem = null;
 	var $nowpsearch = false;
-	var $strip_country_from_baseadr = false;
+	var $change_country_inpage = false;
 
 	// no header, menu or footer
 	var $popup = false;
@@ -139,7 +139,7 @@ class OcSmarty extends Smarty
 	function display($dummy1=null, $dummy2=null, $dummy3=null)
 	{
 		global $opt, $db, $cookie, $login, $menu, $sqldebugger, $translate;
-		global $useragent_msie;
+		global $useragent_msie, $change_country_inpage;
 		$cookie->close();
 
 		// if the user is an admin, dont cache the content
@@ -228,6 +228,7 @@ class OcSmarty extends Smarty
 		$this->assign('breadcrumb', $menu->getBreadcrumb());
 		$this->assign('menucolor', $menu->getMenuColor());
 		$this->assign('helplink', helppagelink($this->name));
+		$this->assign('change_country_inpage', $this->change_country_inpage);
 
 		if ($this->title == '')
 			$optn['template']['title'] = $menu->GetMenuTitle();
@@ -239,9 +240,11 @@ class OcSmarty extends Smarty
 		if ($strange_things_pos)
 			$base_pageadr = substr($base_pageadr,0,$strange_things_pos + 4);
 		$lpos = strpos($base_pageadr,"locale=");
-		if (!$lpos) $lpos = strpos($base_pageadr,"usercountry=");
-		if (!$lpos && $this->strip_country_from_baseadr)
-			$lpos = strpos($base_pageadr,"country=");
+		if ($this->change_country_inpage)
+		{
+			if (!$lpos) $lpos = strpos($base_pageadr,"usercountry=");
+			if (!$lpos) $lpos = strpos($base_pageadr,"country=");
+		}
 		if ($lpos)
 			$base_pageadr = substr($base_pageadr,0,$lpos);
 		else

@@ -8,7 +8,7 @@
 	require('./lib2/web.inc.php');
 	$tpl->name = 'newcachesrest';
 	$tpl->menuitem = MNU_START_NEWCACHES;
-	$tpl->strip_country_from_baseadr = true;
+	$tpl->change_country_inpage = true;
 
 	$tpl->caching = true;
 	$tpl->cache_lifetime = 3600;

@@ -53,7 +53,9 @@
 
 					if (sCurrentOption!=oUserCountryCombo.value)
 					{
-						window.location = '{/literal}{$base_pageadr}{literal}usercountry=' + oUserCountryCombo.value;
+						{/literal}
+						window.location = '{if $change_country_inpage}{$base_pageadr}{else}index.php?{/if}usercountry=' + oUserCountryCombo.value;
+						{literal}
 					}
 				}
 

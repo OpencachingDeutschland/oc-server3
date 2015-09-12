@@ -28,7 +28,7 @@
 		{$coordUTM.zone|escape}{$coordUTM.letter|escape} {$coordUTM.north|escape} {$coordUTM.east|escape} </p>
 	</div>
 	<div style="margin-top:4px;">
-		<p style="color: 5890a8"><b>Gau&szlig;-Kr&uuml;ger</b> <small>(Potsdam-Datum)</small><br />
+		<p style="color: 5890a8"><b>{t}Gauss-Krüger{/t}</b>{if $opt.template.locale=='DE'} <small>(Potsdam-Datum)</small>{/if}<br />
 		{$coordGK|escape}</p>
 	</div>
 	<div style="margin-top:4px;">
@@ -45,15 +45,15 @@
 		{$coordRD|escape}</p>
 	</div>
     {/if}
-	{if $coordW3Wde}
+	{if $coordW3W1}
 	<div style="margin-top:4px;">
-		<p style="color: 5890a8"><b>what3words</b> <small>(deutsch)</small><br />
-		<a href="http://what3words.com/{$coordW3Wde|escape}" target="w3w">{$coordW3Wde|escape}</a></p>
+		<p style="color: 5890a8"><b>what3words</b> <small>({$W3Wlang1})</small><br />
+		<a href="http://what3words.com/{$coordW3W1|escape}" target="w3w">{$coordW3W1|escape}</a></p>
 	</div>
 	{/if}
-	{if $coordW3Wen}
+	{if $coordW3W2}
 	<div style="margin-top:4px;">
-		<p style="color: 5890a8"><b>what3words</b> <small>(english)</small><br />
-		<a href="http://what3words.com/{$coordW3Wen|escape}" target="w3w">{$coordW3Wen|escape}</a></p>
+		<p style="color: 5890a8"><b>what3words</b> <small>({$W3Wlang2})</small><br />
+		<a href="http://what3words.com/{$coordW3W2|escape}" target="w3w">{$coordW3W2|escape}</a></p>
 	</div>
 	{/if}

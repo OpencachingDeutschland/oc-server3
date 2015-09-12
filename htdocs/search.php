@@ -1542,23 +1542,13 @@ function outputSearchForm($options)
 	$tpl->assign('f_geokrets_checked', $options['f_geokrets'] == 1);
 	$tpl->assign('hidopt_geokrets', ($options['f_geokrets'] == 1) ? '1' : '0');
 
-	if (isset($options['country']))
-	{
-		$tpl->assign('country', htmlspecialchars($options['country'], ENT_COMPAT, 'UTF-8'));
-	}
-	else
-	{
-		$tpl->assign('country', '');
-	}
+	if (!isset($options['country']))
+		$options['country'] = '';
+	$tpl->assign('country', htmlspecialchars($options['country'], ENT_COMPAT, 'UTF-8'));
 
-	if (isset($options['language']))
-	{
-		$tpl->assign('language', htmlspecialchars($options['language'], ENT_COMPAT, 'UTF-8'));
-	}
-	else
-	{
-		$tpl->assign('language', '');
-	}
+	if (!isset($options['language']))
+		$options['language'] = '';
+	$tpl->assign('language', htmlspecialchars($options['language'], ENT_COMPAT, 'UTF-8'));
 
 	if (isset($options['cachetype']))
 	{
@@ -1667,6 +1657,7 @@ function outputSearchForm($options)
 		$opt['template']['locale'], $options['country']);
 	$tpl->assign_rs('countryoptions',$rs);
 	sql_free_result($rs);
+	$tpl->assign('all_countries', $options['country'] == '');
 
 	// language options
 	$rs = sql("
@@ -1682,6 +1673,7 @@ function outputSearchForm($options)
 		$opt['template']['locale'], $options['language']);
 	$tpl->assign_rs('languageoptions',$rs);
 	sql_free_result($rs);
+	$tpl->assign('all_languages', $options['language'] == '');
 
 	// cachetype
 	$rs = sql("SELECT `id` FROM `cache_type` ORDER BY `ordinal`");

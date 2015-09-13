@@ -194,7 +194,7 @@
 	$opt['lib']['garmin']['domain'] = '<domain>';
  	$opt['lib']['garmin']['key'] = '00112233445566778899AABBCCDDEEFF00';
 	$opt['lib']['garmin']['url'] = 'http://' . $opt['lib']['garmin']['domain'] . '/';
-	$opt['lib']['garmin']['redirect'] = 'http://<domain>/garmin.php?redirect=1&cacheid={cacheid}';
+	$opt['lib']['garmin']['page_url'] = 'http://<domain>/';
 
 	// developer.what3words.com API Key
 	$opt['lib']['w3w']['apikey'] = 'YOURAPIKEY';

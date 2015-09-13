@@ -363,6 +363,7 @@ function getChildWaypoints($cacheid)
 	$tpl->assign('shortlink_domain', $opt['logic']['shortlink_domain']);
 	$tpl->assign('listing_admin', $login->listingAdmin());
 	$tpl->assign('npahelplink', helppagelink('npa'));
+	$tpl->assign('garmin_url', $opt['lib']['garmin']['page_url']);
 
 	// display the page
 	$tpl->display();

@@ -220,8 +220,14 @@ function set_language()
 {
 	global $opt, $cookie;
 
+	$savelocale = true;
 	if (isset($_REQUEST['locale']))
 		$opt['template']['locale'] = strtoupper($_REQUEST['locale']);
+	elseif (isset($_REQUEST['templocale']))
+	{
+		$opt['template']['locale'] = strtoupper($_REQUEST['templocale']);
+		$savelocale = false;
+	}
 	else
 		$opt['template']['locale'] = strtoupper($cookie->get('locale', $opt['template']['default']['locale']));
 
@@ -237,7 +243,8 @@ function set_language()
 	else
 		$opt['template']['locale'] = $opt['template']['default']['locale'];
 
-	$cookie->set('locale', $opt['template']['locale'], $opt['template']['default']['locale']);
+	if ($savelocale)
+		$cookie->set('locale', $opt['template']['locale'], $opt['template']['default']['locale']);
 
 	bindtextdomain('messages', $opt['rootpath'] . 'cache2/translate');
 	set_php_locale();

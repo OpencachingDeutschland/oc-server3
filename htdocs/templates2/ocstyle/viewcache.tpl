@@ -283,7 +283,7 @@
 					<option value="search.php?searchto=searchbycacheid&showresult=1&f_inactive=0&f_ignored=0&startat=0&cacheid={$cache.cacheid}&output=txt">TXT</option>
 				</select>&nbsp;
 				<img src="resource2/{$opt.template.style}/images/viewcache/14x19-gps-device.png" class="icon16" alt="" />
-				<input type="button" class="exportbutton" value="{t}Send to GPS device{/t}" onclick="window.open('garmin.php?lat={$cache.latitude}&lon={$cache.longitude}&wp={$cache.wpoc}','{t escape=js}Send{/t}','width=640,height=320,resizable=no,scrollbars=1')" />
+				<input type="button" class="exportbutton" value="{t}Send to GPS device{/t}" onclick="window.open('{$garmin_url}garmin.php?lat={$cache.latitude}&lon={$cache.longitude}&wp={$cache.wpoc}&templocale={$opt.template.locale}','{t escape=js}Send{/t}','width=640,height=320,resizable=no,scrollbars=1')" />
 			</p></td>	
 		</tr>
 	</table>
@@ -508,7 +508,7 @@ function showalllists()
 			<a href="search.php?searchto=searchbydistance&showresult=1&expert=0&output=HTML&sort=bydistance&f_userowner=1&f_userfound=1&f_inactive=1&lat={$cache.latitude}&lon={$cache.longitude}&distance=150&unit=km&cachetype={$cache.type}" rel="nofollow">{t}same type{/t}</a>
 			<br />
 
-			<img src="resource2/{$opt.template.style}/images/viewcache/16x16-search.png" class="icon16" alt="" /> {t}Send this waypoint to GPS device:{/t} <a href="#" onclick="window.open('garmin.php?&lat={$cache.latitude}&lon={$cache.longitude}&wp={$cache.wpoc}','{t escape=js}Send{/t}','width=640,height=290,resizable=no,scrollbars=1')">Garmin</a><br />
+			<img src="resource2/{$opt.template.style}/images/viewcache/16x16-search.png" class="icon16" alt="" /> {t}Send this waypoint to GPS device:{/t} <a href="#" onclick="window.open('{$garmin_url}garmin.php?&lat={$cache.latitude}&lon={$cache.longitude}&wp={$cache.wpoc}&templocale={$opt.template.locale}','{t escape=js}Send{/t}','width=640,height=320,resizable=no,scrollbars=1')">Garmin</a><br />
 			<img src="resource2/{$opt.template.style}/images/viewcache/16x16-save.png" class="icon16" alt="" /> {t}Download as file:{/t} 
 			<a href="search.php?searchto=searchbycacheid&showresult=1&f_inactive=0&f_ignored=0&startat=0&cacheid={$cache.cacheid}&output=gpx" rel="nofollow" title="{t}GPS Exchange Format .gpx{/t}">GPX</a> - 
 			<a href="search.php?searchto=searchbycacheid&showresult=1&f_inactive=0&f_ignored=0&startat=0&cacheid={$cache.cacheid}&output=loc" rel="nofollow" title="{t}Waypointfile .loc{/t}">LOC</a> - 

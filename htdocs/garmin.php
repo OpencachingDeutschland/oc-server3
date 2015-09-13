@@ -23,11 +23,16 @@
 	else if (isset($_REQUEST['wp']))
 		$cacheid = cache::cacheIdFromWP($_REQUEST['wp']);
 
-	// important: when the domain does not fit the api key, you must be redirected to the correct domain
+	// When the domain does not fit the api key, you must be redirected to the correct domain.
+	// As this not all browses reliably redirect popup window locations, the settings meanwhile 
+	// allow to directly link to the registered domain, so the following code should no longer 
+	// be needed.
+
 	if (($opt['lib']['garmin']['domain'] != $_SERVER['HTTP_HOST']) && !isset($_REQUEST['redirect']))
 	{
-		$redirect = $opt['lib']['garmin']['redirect'];
-		$redirect = str_replace('{cacheid}', $cacheid, $redirect);
+		$redirect = $opt['lib']['garmin']['page_url'] . 'garmin.php?redirect=1&cacheid=' . $cacheid;
+		if (isset($_REQUEST['templocale']))
+			$redirect .= '&templocale=' . $_REQUEST['templocale'];
 		$tpl->redirect($redirect);
 		exit;
 	}

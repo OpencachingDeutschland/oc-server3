@@ -108,7 +108,7 @@
  	$opt['lib']['garmin']['key'] = '00112233445566778899AABBCCDDEEFF00';
 	$opt['lib']['garmin']['domain'] = 'local.opencaching.de';
 	$opt['lib']['garmin']['url'] = 'http://local.opencaching.de/';
-	$opt['lib']['garmin']['redirect'] = $opt['lib']['garmin']['url'] . 'garmin.php?redirect=1&cacheid={cacheid}';
+	$opt['lib']['garmin']['page_url'] = $opt['lib']['garmin']['url'] . $dev_codepath . 'htdocs/';
 
     // developer.what3words.com API Key
     $opt['lib']['w3w']['apikey'] = 'YOURAPIKEY';

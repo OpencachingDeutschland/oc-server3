@@ -52,6 +52,8 @@
 	 * Must be overwritten in BOTH lib1 and lib2 settings.inc.php!!
 	 */
 	//$opt['domain']['www.opencaching.de']['url'] = 'http://www.opencaching.de/';
+	//$opt['domain']['www.opencaching.de']['shortlink_domain'] = 'opencaching.de';
+	//$opt['domain']['www.opencaching.de']['sitename'] = 'Opencaching.de';
 	//$opt['domain']['www.opencaching.de']['locale'] = 'DE';
 	//$opt['domain']['www.opencaching.de']['fallback_locale'] = 'EN';
 	//$opt['domain']['www.opencaching.de']['style'] = 'ocstyle';
@@ -67,8 +69,9 @@
 	//$opt['domain']['www.opencaching.de']['https']['force_login'] = true;
 
 	//$opt['domain']['www.opencaching.pl']['url'] = 'http://www.opencaching.pl/';
+	//$opt['domain']['www.opencaching.pl']['sitename'] = 'Opencaching.PL';
 	//$opt['domain']['www.opencaching.pl']['locale'] = 'PL';
-	//$opt['domain']['www.opencaching.de']['fallback_locale'] = 'EN';
+	//$opt['domain']['www.opencaching.pl']['fallback_locale'] = 'EN';
 	//$opt['domain']['www.opencaching.pl']['style'] = 'ocstyle';
 	//$opt['domain']['www.opencaching.pl']['cookiedomain'] = '.opencaching.pl';
 	//$opt['domain']['www.opencaching.pl']['country'] = 'PL';
@@ -76,8 +79,10 @@
 	//$opt['domain']['www.opencaching.pl']['description'] = 'Opencaching.pl jest darmowy portal dla Geocaching, gry Treasure Hunt. Za pomocą współrzędnych GPS można znaleźć pojemniki lub obiektów.';
 	//$opt['domain']['www.opencaching.pl']['headoverlay'] = 'oc_head_alpha3_pl';
 	
-	// Supply the site's primary URL here. Can be overriden by domain settings.
-	set_absolute_urls($opt, 'http://www.opencaching.de/', 1);
+	// Supply the site's primary URL and the shortlink domain here.
+	// Can be overriden by domain settings.
+	// Set shortlink domain to false if not available.
+	set_absolute_urls($opt, 'http://www.opencaching.de/', 'opencaching.de', 1);
 	
 	// 'From' EMail address for admin error messages and log removals
 	if (!isset($emailaddr)) $emailaddr = 'noreply@opencaching.de';

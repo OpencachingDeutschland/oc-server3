@@ -8,7 +8,7 @@
 	</div>
 	<div class="content-txtbox-noshade" style="padding-right: 25px;">
 
-<p>We would like to introduce our team of volunteers, which is restlessly working behind the scenery for you.</p>
+<p>We would like to introduce our team of volunteers, which is restlessly working behind the scenery for you, the users of opencaching.de, opencaching.it, opencachingspain.es and opencaching.fr.</p>
 
 <p>We appreciate your suggetions and comments. On the <a href="http://www.opencaching.de/articles.php?page=contact">contact page</a>, you will find information on how to contact us. Of course, you may also send Emails directly to the team members by their Opencaching.de user profiles.</p>
 

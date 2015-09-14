@@ -185,7 +185,6 @@
 	 */
 	$opt['page']['origin_url'] = 'http://www.opencaching.de/';  // production installation for this OC site 
 	$opt['page']['develsystem'] = false;
-	$opt['page']['shortlink_domain'] = false;
 
  	/*
  	 * configure infos on 404.php

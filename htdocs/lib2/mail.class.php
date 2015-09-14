@@ -70,6 +70,7 @@ class mail extends Smarty
 
 		$optn['mail']['contact'] = $opt['mail']['contact'];
 		$optn['page']['absolute_url'] = ($page_url ? $page_url : $opt['page']['absolute_url']);
+		$optn['page']['sitename'] = $opt['page']['sitename'];
 		$optn['format'] = $opt['locale'][$this->recipient_locale]['format'];
 		$this->assign('opt', $optn);
 

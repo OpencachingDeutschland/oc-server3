@@ -8,12 +8,12 @@ Distance: {distance} {unit} to the {bearing}
 Type: {cachetype}
 Size: {cachesize}
 
-Link: http://opencaching.de/{wp_oc}
+Link: {shortlink_url}{wp_oc}
 ---
 
 
 You can view and change the settings for your search radius at
-http://www.opencaching.de/myprofile.php.
+{site_url}myprofile.php.
 
 Happy Geocaching,
 the Opencaching.de Team
@@ -21,5 +21,5 @@ the Opencaching.de Team
 ---
 This E-Mail was generated automatically - please do not answer. If you would
 like to contact Opencaching.de, please refer to 
-http://www.opencaching.de/articles.php?page=contact. In urgent cases you
+{site_url}articles.php?page=contact. In urgent cases you
 may send an e-mail to contact@opencaching.de.

@@ -122,7 +122,7 @@ class login
 			}
 
 			if (isset($opt['template']['locale']))
-				sqlf("UPDATE `user` SET `last_login`=NOW(), `language`='&2', `language_guessed`=0 WHERE `user_id`='&1'", $this->userid, $opt['template']['locale']);
+				sqlf("UPDATE `user` SET `last_login`=NOW(), `language`='&2', `language_guessed`=0, `domain`='&3' WHERE `user_id`='&1'", $this->userid, $opt['template']['locale'], $opt['page']['domain']);
 			else
 				sqlf("UPDATE `user` SET `last_login`=NOW() WHERE `user_id`='&1'", $this->userid);
 

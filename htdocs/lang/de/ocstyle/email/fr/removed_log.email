@@ -1,7 +1,7 @@
 Bonjour %log_owner%,
 
 %cache_owner% a supprimé votre entrée de journal pour le cache
-"%cache_name%" (http://opencaching.de/%cache_wp%).
+"%cache_name%" ({shortlink_url}%cache_wp%).
 
 %log_date%: %log_type%
 
@@ -14,11 +14,11 @@ Le texte supprimé:
 
 
 Vous pouvez contacter %cache_owner% via le lien suivant:
-http://www.opencaching.de/mailto.php?userid=%cache_owner_id%
+{site_url}mailto.php?userid=%cache_owner_id%
 
 
 ---
 Cet e-mail a été généré automatiquement. Merci de ne pas y répondre. 
-Si tu veux contacter Opencaching.de, tu trouveras toutes les options sur
-http://www.opencaching.de/articles.php?page=contact
+Si tu veux contacter Opencaching.de/.fr, tu trouveras toutes les options sur
+{site_url}articles.php?page=contact
 En cas d'urgence, tu peux utiliser l'adresse e-mail contact@opencaching.de.

@@ -55,6 +55,7 @@
 						`log_types`.`icon_small` AS `icon_small`,
 						`user`.`username` as `log_username`,
 						IFNULL(`user`.`language`,'&2') AS `log_user_language`,
+						`user`.`domain` AS `log_user_domain`,
 						`caches`.`wp_oc`,
 						`cache_status`.`allow_user_view`
 					 FROM `cache_logs`, `caches`, `user`, `cache_status`, `log_types`
@@ -105,7 +106,7 @@
 							//send email to logger
 							$removed_log_subject = removed_log_subject($log_record['log_user_language']);
 							$removed_message_title = removed_message_title($log_record['log_user_language']);
-							$email_content = fetch_email_template('removed_log', $log_record['log_user_language']);
+							$email_content = fetch_email_template('removed_log', $log_record['log_user_language'], $log_record['log_user_domain']);
 
 							$message = isset($_POST['logowner_message']) ? $_POST['logowner_message'] : '';
 							if ($message != '')

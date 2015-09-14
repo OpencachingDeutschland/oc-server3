@@ -163,6 +163,7 @@ class OcSmarty extends Smarty
 		$optn['template']['country'] = $login->getUserCountry();
 		$optn['page']['subtitle1'] = isset($opt['locale'][$locale]['page']['subtitle1']) ? $opt['locale'][$locale]['page']['subtitle1'] : $opt['page']['subtitle1'];
 		$optn['page']['subtitle2'] = isset($opt['locale'][$locale]['page']['subtitle2']) ? $opt['locale'][$locale]['page']['subtitle2'] : $opt['page']['subtitle2'];
+		$optn['page']['sitename'] = $opt['page']['sitename'];
 		$optn['page']['headimagepath'] = $opt['page']['headimagepath'];
 		$optn['page']['headoverlay'] = $opt['page']['headoverlay'];
 		$optn['page']['max_logins_per_hour'] = $opt['page']['max_logins_per_hour'];
@@ -269,7 +270,7 @@ class OcSmarty extends Smarty
 				$lurl = $opt['locale']['EN']['page']['license_url'];
 
 			if (isset($opt['locale'][$locale]['page']['license']))
-				$ltext = $opt['locale'][$locale]['page']['license'];
+				$ltext = mb_ereg_replace('{site}', $opt['page']['sitename'], $opt['locale'][$locale]['page']['license']);
 			else
 				$ltext = $opt['locale']['EN']['page']['license'];
 

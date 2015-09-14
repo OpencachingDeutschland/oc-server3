@@ -49,7 +49,11 @@
 	//site in service? Set to false when doing bigger work on the database to prevent error's
 	if (!isset($site_in_service)) $site_in_service = true;
 
-	set_absolute_urls($opt, $dev_baseurl, 1);
+	set_absolute_urls(
+		$opt,
+		$dev_baseurl,
+		isset($dev_shortlink_domain) ? $dev_shortlink_domain : 'opencaching.de',
+		1);
 	
 	// EMail address of the sender
 	if (!isset($maildomain)) $maildomain  = 'local.opencaching.de';

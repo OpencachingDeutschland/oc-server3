@@ -536,6 +536,8 @@
 			tpl_set_var('jsattributes_array', $cache_attrib_array);
 			tpl_set_var('cache_attribs', $cache_attribs_string);
 
+			tpl_set_var('firstcache_note', mb_ereg_replace('%1', $opt['page']['sitename'], $firstcache_note));
+
 			if (isset($_POST['submitform']))  // Ocprop
 			{
 				//check the entered data

@@ -67,13 +67,14 @@
 	$opt['logic']['node']['id'] = 4;
   $opt['logic']['waypoint_pool']['prefix'] = 'OC';
 
-	if (!$opt['page']['shortlink_domain'])
-		$opt['page']['shortlink_domain'] = 'opencaching.de';
-
 	/* server options
 	 *
 	 */
-	set_absolute_urls($opt, $dev_baseurl, 2);
+	set_absolute_urls(
+		$opt,
+		$dev_baseurl,
+		isset($dev_shortlink_domain) ? $dev_shortlink_domain : 'opencaching.de',
+		2);
 
 	$opt['page']['develsystem'] = true;
 	$opt['page']['max_logins_per_hour'] = 1000;    // for development ...

@@ -142,13 +142,13 @@
 				<td valign="top">
 					{if $edit==true}
 						<input type="checkbox" name="accMailing" value="1" {if $accMailing==true}checked="checked"{/if} id="acc_Mailing" class="checkbox" /> 
-						<label for="acc_Mailing">{t}Please send me mailings about news and actions on opencaching.de. (max. 2-5 per year){/t}</label>
+						<label for="acc_Mailing">{t 1=$opt.page.sitename}Please send me mailings about news and campaigns on %1. (max. 2-5 per year){/t}</label>
 						<br />
 					{else}
 						{if $accMailing==true}
-							{t}Yes, I want to recieve mailings about news and actions on opencaching.de. (max. 2-5 per year){/t}<br />
+							{t 1=$opt.page.sitename}Yes, I want to recieve mailings about news and campaigns on %1. (max. 2-5 per year){/t}<br />
 						{else}
-							{t}No, I dont't want any mailings about news and actions on opencaching.de.{/t}
+							{t 1=$opt.page.sitename}No, I dont't want any mailings about news and campaigns on %1.{/t}
 						{/if}
 					{/if}
 				</td>

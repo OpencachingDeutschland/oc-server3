@@ -15,6 +15,8 @@
 
  ****************************************************************************/
 
+ $firstcache_note = t('If this is your first cache on %1, be sure to check out the <a href="articles.php?page=cacheinfo">description</a> of the individual fields.');
+
  $submit = t('Submit cache');
  $default_country = t('EN');
  $default_lang = t('EN');

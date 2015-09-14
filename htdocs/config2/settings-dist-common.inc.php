@@ -12,6 +12,8 @@
 	$opt['page']['title'] = 'OPENCACHING';
 	$opt['page']['subtitle1'] = 'Geocaching with Opencaching';
 	$opt['page']['subtitle2'] = '';
+	$opt['page']['sitename'] = 'Opencaching.de';
+	$opt['page']['slogan'] = 'Opencaching.de - Geocaching in Deutschland, Oesterreich und der Schweiz';
 
 	// directory of rotator pictures and script, relative to head images dir
 	$opt['page']['headimagepath'] = '';
@@ -94,7 +96,7 @@
 	$opt['cms']['login'] = 'http://wiki.opencaching.de/index.php/Login_auf_Opencaching.de';
 
 	// explanation of nature protection areas
-	$opt['cms']['npa'] = 'http://wiki.opencaching.de/index.php/Schutzgebiete';
+	$opt['cms']['npa'] = 'articles.php?page=npa&wiki';
 
 	/* HTTPS settings
 	 *
@@ -123,6 +125,7 @@
  * $opt['page']['default_primary_url']    the default-protocol base URL of the primary domain of this site
  * $opt['page']['shortlink_url']          shortlink URL of the current protocol or false
  * $opt['page']['default_shortlink_url']  default-protocol shortlink URL or false
+ * $opt['page']['default_primary_shortlink_url']  default-protocol shortlink URL of primary domain of this site, or false
  * $opt['page']['https']['active']        true if the current request is https, else false
  * $opt['page']['protocol']               the protocol of the current request, 'http' or 'https'
  *
@@ -130,7 +133,7 @@
  * All generated URls end on '/'.
  */
 
-function set_absolute_urls(&$opt, $primary_site_url, $lib)
+function set_absolute_urls(&$opt, $primary_site_url, $primary_shortlink_domain, $lib)
 {
 	// $opt is passed as parameter because it is *local* in okapi_settings.php.
 
@@ -145,10 +148,10 @@ function set_absolute_urls(&$opt, $primary_site_url, $lib)
 		$primary_site_url .= '/';
 
 	if (isset($opt['domain'][$primary_domain]['https']['is_default']))
-		$httpsdefault = $opt['domain'][$primary_domain]['https']['is_default'];
+		$primary_httpsdefault = $opt['domain'][$primary_domain]['https']['is_default'];
 	else
-		$httpsdefault = $opt['page']['https']['is_default'];
-	if ($httpsdefault)
+		$primary_httpsdefault = $opt['page']['https']['is_default'];
+	if ($primary_httpsdefault)
 		$opt['page']['default_primary_url'] = 'https' . strstr($primary_site_url, '://');
 	else
 		$opt['page']['default_primary_url'] = 'http' . strstr($primary_site_url, '://');
@@ -191,29 +194,49 @@ function set_absolute_urls(&$opt, $primary_site_url, $lib)
 		$absolute_server_URI = $opt['page']['absolute_url'];
 
 	if ($opt['page']['https']['is_default'])
-		$opt['page']['default_absolute_url'] = $opt['page']['absolute_https_url'];
-	else
-		$opt['page']['default_absolute_url'] = $opt['page']['absolute_http_url'];
-
-	// 3. create shortlink URLs
-
-	if (isset($opt['domain'][$current_domain]['shortlink_domain']))
-		$opt['page']['shortlink_domain'] = $opt['domain'][$current_domain]['shortlink_domain'];
-
-	if (!isset($opt['page']['shortlink_domain']) || !$opt['page']['shortlink_domain'])
 	{
-		$opt['page']['shortlink_url'] = false;
-		$opt['page']['default_shortlink_url'] = false;
+		$opt['page']['default_absolute_url'] = $opt['page']['absolute_https_url'];
+		$opt['page']['default_protocol'] = 'https';
 	}
 	else
 	{
-		if (strpos($opt['page']['shortlink_domain'], '://') !== false)
-			$opt['page']['shortlink_domain'] = parse_url($opt['page']['shortlink_domain'], PHP_URL_HOST);
-		$opt['page']['shortlink_url'] = $opt['page']['protocol'] . '://' . $opt['page']['shortlink_domain'] . '/';
-		if ($opt['page']['https']['is_default'])
-			$opt['page']['default_shortlink_url'] = 'https://' .  $opt['page']['shortlink_domain'] . '/';
+		$opt['page']['default_absolute_url'] = $opt['page']['absolute_http_url'];
+		$opt['page']['default_protocol'] = 'http';
+	}
+
+	// 3. create shortlink URLs
+
+	if (!$primary_shortlink_domain)
+	{
+		$opt['page']['shortlink_url'] = false;
+		$opt['page']['default_shortlink_url'] = false;
+		$opt['page']['default_primary_shortlink_url'] = false;
+	}
+	else
+	{
+		if ($primary_httpsdefault)
+			$opt['page']['default_primary_shortlink_url'] = 'https://' . $primary_shortlink_domain . '/';
 		else
-			$opt['page']['default_shortlink_url'] = 'http://' .  $opt['page']['shortlink_domain'] . '/';
+			$opt['page']['default_primary_shortlink_url'] = 'http://' . $primary_shortlink_domain . '/';
+
+		if (isset($opt['domain'][$current_domain]['shortlink_domain']) && $opt['domain'][$current_domain]['shortlink_domain'])
+		{
+			$opt['page']['shortlink_url'] = $opt['page']['protocol'] . '://' . $opt['domain'][$current_domain]['shortlink_domain'] . '/';
+			$opt['page']['default_shortlink_url'] = $opt['page']['default_protocol'] . '://' . $opt['domain'][$current_domain]['shortlink_domain'] . '/';
+		}
+		else
+		{
+			if ($current_domain == $primary_domain)
+			{
+				$opt['page']['default_shortlink_url'] = $opt['page']['default_primary_shortlink_url'];
+				$opt['page']['shortlink_url'] = $opt['page']['protocol'] . strstr($opt['page']['default_shortlink_url'], '://');
+			}
+			else
+			{
+				$opt['page']['shortlink_url'] = false;
+				$opt['page']['default_shortlink_url'] = false;
+			}
+		}
 	}
 
 	// 4. set location of uploaded images
@@ -242,6 +265,8 @@ function set_common_domain_config(&$opt)
 		if (isset($opt['domain'][$domain]['country']))
 			$opt['template']['default']['country'] = $opt['domain'][$domain]['country'];
 
+		if (isset($opt['domain'][$domain]['sitename']))
+			$opt['page']['sitename'] = $opt['domain'][$domain]['sitename'];
 		if (isset($opt['domain'][$domain]['keywords']))
 			$opt['page']['meta']['keywords'] = $opt['domain'][$domain]['keywords'];
 		if (isset($opt['domain'][$domain]['description']))
@@ -249,6 +274,8 @@ function set_common_domain_config(&$opt)
 
 		if (isset($opt['domain'][$domain]['headoverlay']))
 			$opt['page']['headoverlay'] = $opt['domain'][$domain]['headoverlay'];
+		if (isset($opt['domain'][$domain]['slogan']))
+			$opt['page']['slogan'] = $opt['domain'][$domain]['slogan'];
 	}
 }
 

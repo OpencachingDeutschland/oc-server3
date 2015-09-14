@@ -619,6 +619,12 @@
 			sql("ALTER TABLE `user` ADD COLUMN `language_guessed` tinyint(1) NOT NULL default '0' AFTER `language`");
 	}
 
+	function dbv_140()   // last-used user domain, for email contents
+	{
+		if (!sql_field_exists('user', 'domain'))
+			sql("ALTER TABLE `user` ADD COLUMN `domain` varchar(40) default NULL AFTER `language_guessed`");
+	}
+
 
 	// When adding new mutations, take care that they behave well if run multiple
 	// times. This improves robustness of database versioning.

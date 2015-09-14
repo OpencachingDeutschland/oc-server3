@@ -8,7 +8,7 @@
 	</div>
 	<div class="content-txtbox-noshade" style="padding-right: 25px;">
 
-	<p><i>This is a tentative English translation of the German privacy statement for this website, which is available by selecting German language and choosing "Datenschutzbelehrung" at the very bottom of the page. When in doubt, or the translation is incomplete or contradicting, the German version is always the valid reference for legal issues.</i></p>
+	<p><i>This is a tentative English translation of the German privacy statement for this website, which is available by selecting German language and choosing "Datenschutzbelehrung" at the very bottom of the page. When in doubt, or the translation is incomplete or contradicting, the German version is always the valid reference for legal issues. This explanation refers to all Geocaching listing sites operated by Opencaching Deutschland: www.opencaching.de, www.opencaching.it, www.opencachingspain.es and www.opencaching.fr.</i></p>
 
 			<p>We respect your right of informational self-determination. According to German TMG, title 13, and BDSG, title 33, part 1 we explain here which data will be stored by us for which purpose, and how you can inspect the data or have it deleted.</p>
 			

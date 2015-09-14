@@ -1,7 +1,7 @@
 Ciao %log_owner%,
 
 %cache_owner% ha cancellato il tuo log per la cache "%cache_name%"
-(http://opencaching.de/%cache_wp%).
+({shortlink_url}%cache_wp%).
 
 %log_date%: %log_type%
 
@@ -14,11 +14,11 @@ Testo cancellato:
 
 
 Puoi contattare %cache_owner% tramite questo link:
-http://www.opencaching.de/mailto.php?userid=%cache_owner_id%
+{site_url}mailto.php?userid=%cache_owner_id%
 
 
 ---
 Questa E-Mail è stata generata automaticamente - per favore non rispondere.
 Se vuoi contattare Opencaching.de/.it, fai riferimento alla pagina 
-http://www.opencaching.de/articles.php?page=contact. 
+{site_url}articles.php?page=contact.
 In casi urgenti puoi inviare una e-mail a: contact@opencaching.de.

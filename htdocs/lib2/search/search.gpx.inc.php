@@ -214,10 +214,12 @@ function search_output()
 		if ($r['hint'] == '')
 			$thisline = mb_ereg_replace('{hints}', '', $thisline);
 		else
-		  // Ocprop:  <groundspeak:encoded_hints>(.*?)<\/groundspeak:encoded_hints>
+		{
+			// Ocprop:  <groundspeak:encoded_hints>(.*?)<\/groundspeak:encoded_hints>
 			$hint = html_entity_decode(strip_tags($r['hint']), ENT_COMPAT, "UTF-8");
 			$thisline = mb_ereg_replace('{hints}', '      <groundspeak:encoded_hints>' . text_xmlentities($hint) . '</groundspeak:encoded_hints>
 ', $thisline);
+		}
 
 		$thisline = mb_ereg_replace('{shortdesc}', text_xmlentities($r['short_desc']), $thisline);
 
@@ -266,7 +268,7 @@ function search_output()
 
 		// clear cache specific data
 		$logentries = '';
-		$cache_note = false;
+		$cacheNote = false;
 		$attribentries = '';
 		$waypoints = '';
 		$gkentries = '';

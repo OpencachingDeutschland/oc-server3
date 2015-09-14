@@ -90,8 +90,7 @@ function send_errormail($errmsg)
 	}
 	else if (isset($sql_errormail) && $sql_errormail != '')
 	{
-		$url = parse_url($absolute_server_URI);
-		@mb_send_mail($sql_errormail, "[" . $url['host'] . "] PHP error", $errmsg);
+		@mb_send_mail($sql_errormail, "[" . $opt['page']['domain'] . "] PHP error", $errmsg);
 	}
 }
 

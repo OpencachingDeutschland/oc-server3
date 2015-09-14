@@ -16,8 +16,8 @@ function search_output()
 	global $opt;
 	global $state_temporarily_na, $state_archived, $state_locked;
 
-	$server_address = $opt['page']['absolute_url'];
-	$server_domain = parse_url($server_address, PHP_URL_HOST);
+	$server_domain = $opt['page']['domain'];
+	$server_address = $opt['page']['default_absolute_url'];
 
 	$locHead = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><loc version="1.0" src="'.$server_domain.'">' . "\n";
 

@@ -24,6 +24,10 @@
 	define('PHP_DEBUG_ON', 1);
 	define('PHP_DEBUG_SKIP', -1);
 
+	define('HTTPS_DISABLED', 0);   // also defined in lib/consts.inc.php
+	define('HTTPS_ENABLED', 1);
+	define('HTTPS_ENFORCED', 2);
+
 	define('SAVE_COOKIE', 0);
 	define('SAVE_SESSION', 1);
 

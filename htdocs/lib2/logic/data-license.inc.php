@@ -21,14 +21,11 @@
 function getLicenseDisclaimer($userid, $username, $userlicense, $cacheid, $language,
                               $for_cachedesc, $html, $twolines=false)
 {
-	global $opt, $translate, $absolute_server_URI;
+	global $opt, $translate;
 
 	$ltext = "";
 	$language = strtoupper($language);
-	if (isset($absolute_server_URI))
-		$server_address = $absolute_server_URI;
-	else
-		$server_address = $opt['page']['absolute_url'];
+	$server_address = $opt['page']['default_absolute_url'];
 
 	if ($opt['logic']['license']['disclaimer'])
 	{

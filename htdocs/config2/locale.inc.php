@@ -117,7 +117,7 @@
 	$opt['locale']['EN']['page']['subtitle1'] = 'Geocaching with Opencaching';
 	$opt['locale']['EN']['page']['subtitle2'] = '';
 	$opt['locale']['EN']['page']['license_url'] = 'http://creativecommons.org/licenses/by-nc-nd/3.0/de/deed.en';
-	$opt['locale']['EN']['page']['license'] = '<a rel="license" href="%1"><img alt="Creative Commons License Terms" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-nd/3.0/de/88x31.png" /></a><div style="text-align:center; margin:8px 0 0 6px;">The Opencaching.de <a href="articles.php?page=impressum#datalicense">content</a> is licensed under Creative Commons <a rel="license" href="%1" target="_blank">BY-BC-ND 3.0 DE</a>.</div>';
+	$opt['locale']['EN']['page']['license'] = '<a rel="license" href="%1"><img alt="Creative Commons License Terms" style="border-width:0" src="resource2/ocstyle/images/media/cc-by-nc-nd-small.png" /></a><div style="text-align:center; margin:8px 0 0 6px;">The Opencaching.de <a href="articles.php?page=impressum#datalicense">content</a> is licensed under Creative Commons <a rel="license" href="%1" target="_blank">BY-BC-ND 3.0 DE</a>.</div>';
 	$opt['locale']['EN']['helpwiki'] = "http://wiki.opencaching.de/index.php/";
 	$opt['locale']['EN']['mostly_translated'] = true;
 	$opt['locale']['EN']['what3words'] = true;
@@ -138,7 +138,7 @@
 	$opt['locale']['DE']['page']['subtitle1'] = 'Geocaching mit Opencaching';
 	$opt['locale']['DE']['page']['subtitle2'] = '';
 	$opt['locale']['DE']['page']['license_url'] = 'http://creativecommons.org/licenses/by-nc-nd/3.0/de/';
-	$opt['locale']['DE']['page']['license'] = '<a rel="license" href="%1"><img alt="Creative Commons Lizenzvertrag" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-nd/3.0/de/88x31.png" /></a><div style="text-align:center; margin:8px 0 0 6px;">Die <a href="articles.php?page=impressum#datalicense">Inhalte</a> von Opencaching.de stehen unter der Creative-Commons-Lizenz <a rel="license" href="%1">BY-NC-ND 3.0 DE</a>.</div>';
+	$opt['locale']['DE']['page']['license'] = '<a rel="license" href="%1"><img alt="Creative Commons Lizenzvertrag" style="border-width:0" src="resource2/ocstyle/images/media/cc-by-nc-nd-small.png" /></a><div style="text-align:center; margin:8px 0 0 6px;">Die <a href="articles.php?page=impressum#datalicense">Inhalte</a> von Opencaching.de stehen unter der Creative-Commons-Lizenz <a rel="license" href="%1">BY-NC-ND 3.0 DE</a>.</div>';
 	$opt['locale']['DE']['helpwiki'] = "http://wiki.opencaching.de/index.php/";
 	$opt['locale']['DE']['mostly_translated'] = true;
 	$opt['locale']['DE']['what3words'] = true;  // "beta"
@@ -159,7 +159,7 @@
 	$opt['locale']['IT']['page']['subtitle1'] = 'Geocaching con Opencaching';
 	$opt['locale']['IT']['page']['subtitle2'] = '';
 	$opt['locale']['IT']['page']['license_url'] = 'http://creativecommons.org/licenses/by-nc-nd/3.0/de/deed.it';
-	$opt['locale']['IT']['page']['license'] = '<a rel="license" href="%1" target="_blank"><img alt="Creative Commons License Terms" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-nd/3.0/de/88x31.png" /></a><div style="text-align:center; margin:8px 0 0 6px;">Il <a href="articles.php?page=impressum#datalicense">contenuto</a> di Opencaching.de è rilasciato sotto licenza Creative Commons <a rel="license" href="%1" target="_blank">BY-NC-ND 3.0 DE</a>.</div>';
+	$opt['locale']['IT']['page']['license'] = '<a rel="license" href="%1" target="_blank"><img alt="Creative Commons License Terms" style="border-width:0" src="resource2/ocstyle/images/media/cc-by-nc-nd-small.png" /></a><div style="text-align:center; margin:8px 0 0 6px;">Il <a href="articles.php?page=impressum#datalicense">contenuto</a> di Opencaching.de è rilasciato sotto licenza Creative Commons <a rel="license" href="%1" target="_blank">BY-NC-ND 3.0 DE</a>.</div>';
 	$opt['locale']['IT']['mostly_translated'] = true;
 	$opt['locale']['IT']['what3words'] = false;
 
@@ -179,7 +179,7 @@
 	$opt['locale']['ES']['page']['subtitle1'] = 'Geocaching con Opencaching';
 	$opt['locale']['ES']['page']['subtitle2'] = '';
 	$opt['locale']['ES']['page']['license_url'] = 'http://creativecommons.org/licenses/by-nc-nd/3.0/de/deed.es_ES';
-	$opt['locale']['ES']['page']['license'] = '<a rel="license" href="%1" target="_blank"><img alt="Creative Commons License Terms" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-nd/3.0/de/88x31.png" /></a><div style="text-align:center; margin:8px 0 0 6px;">El <a href="articles.php?page=impressum#datalicense">contenido</a> está disponible bajo Creative Commons <a rel="license" href="%1" target="_blank">BY-NC-ND 3.0 DE</a> licencia.</div>';
+	$opt['locale']['ES']['page']['license'] = '<a rel="license" href="%1" target="_blank"><img alt="Creative Commons License Terms" style="border-width:0" src="resource2/ocstyle/images/media/cc-by-nc-nd-small.png" /></a><div style="text-align:center; margin:8px 0 0 6px;">El <a href="articles.php?page=impressum#datalicense">contenido</a> está disponible bajo Creative Commons <a rel="license" href="%1" target="_blank">BY-NC-ND 3.0 DE</a> licencia.</div>';
 	$opt['locale']['ES']['mostly_translated'] = true;
 	$opt['locale']['ES']['what3words'] = true;
 
@@ -199,7 +199,7 @@
 	$opt['locale']['FR']['page']['subtitle1'] = 'Geocaching avec Opencaching';
 	$opt['locale']['FR']['page']['subtitle2'] = '';
 	$opt['locale']['FR']['page']['license_url'] = 'http://creativecommons.org/licenses/by-nc-nd/3.0/de/deed.fr';
-	$opt['locale']['FR']['page']['license'] = '<a rel="license" href="%1"><img alt="Creative Commons License Terms" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-nd/3.0/de/88x31.png" /></a><div style="text-align:center; margin:8px 0 0 6px;">Le<a  href="articles.php?page=impressum#datalicense">contenu</a> de Opencaching.de sont sous licence Creative Commons <a rel="license" href="%1" target="_blank">BY-BC-ND 3.0 DE</a>.</div>';
+	$opt['locale']['FR']['page']['license'] = '<a rel="license" href="%1"><img alt="Creative Commons License Terms" style="border-width:0" src="resource2/ocstyle/images/media/cc-by-nc-nd-small.png" /></a><div style="text-align:center; margin:8px 0 0 6px;">Le<a  href="articles.php?page=impressum#datalicense">contenu</a> de Opencaching.de sont sous licence Creative Commons <a rel="license" href="%1" target="_blank">BY-BC-ND 3.0 DE</a>.</div>';
 	$opt['locale']['FR']['helpwiki'] = "http://wiki.opencaching.de/index.php/";
 	$opt['locale']['FR']['mostly_translated'] = true;
 	$opt['locale']['FR']['what3words'] = true;

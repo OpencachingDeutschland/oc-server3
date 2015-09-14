@@ -19,8 +19,8 @@ function search_output()
 	global $opt, $login;
 	global $cache_note_text;
 
-	$server_address = $opt['page']['absolute_url'];
-	$server_domain = parse_url($server_address, PHP_URL_HOST);
+	$server_domain = $opt['page']['domain'];
+	$server_address = $opt['page']['default_absolute_url'];
 
 	$gpxHead =
 '<?xml version="1.0" encoding="utf-8"?>

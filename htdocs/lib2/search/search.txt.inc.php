@@ -116,7 +116,7 @@ function search_output()
 		$terrain = sprintf('%01.1f', $r['terrain'] / 2);
 		$thisline = mb_ereg_replace('{terrain}', $terrain, $thisline);
 
-		$thisline = mb_ereg_replace('{siteurl}', $opt['page']['absolute_url'], $thisline);
+		$thisline = mb_ereg_replace('{siteurl}', $opt['page']['default_absolute_url'], $thisline);
 		$thisline = mb_ereg_replace('{owner}', $r['username'], $thisline);
 
 		// logs ermitteln

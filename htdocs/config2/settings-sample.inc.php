@@ -95,7 +95,6 @@
 	 *
 	 */
 	$opt['page']['name'] = 'Geocaching mit Opencaching';
-	$opt['page']['absolute_url'] = 'http://<domain>/';
 	$opt['mail']['from'] = '<notification email from address>';
 	$opt['page']['max_logins_per_hour'] = 250;
 
@@ -108,9 +107,11 @@
 	 * If one of the domains matches $_SERVER['SERVER_NAME'], the default values (in
 	 * common-settings.inc.php) will be overwritten. Can be used to host more than one
 	 * locale on one server with multiple default-locales.
-	 * Must be overwritten in BOTH lib1 and lib2 settings.inc.php!!
+	 * Must be overwritten in BOTH lib1 and lib2 settings.inc.php,
+	 * and BEFORE calling set_absolute_urls!
 	 */
 	//$opt['domain']['www.opencaching.de']['url'] = 'http://www.opencaching.de/';
+	//$opt['domain']['www.opencaching.de']['shortlink_domain'] = 'opencaching.de';
 	//$opt['domain']['www.opencaching.de']['locale'] = 'DE';
 	//$opt['domain']['www.opencaching.de']['fallback_locale'] = 'EN';
 	//$opt['domain']['www.opencaching.de']['style'] = 'ocstyle';
@@ -119,6 +120,11 @@
 	//$opt['domain']['www.opencaching.de']['keywords'] = 'Geocaching, Geocache, Cache, Schatzsuche, GPS, kostenlos, GPX, Koordinaten, Hobby, Natur';  // 5-10 keywords are recommended
 	//$opt['domain']['www.opencaching.de']['description'] = 'Opencaching.de ist das freie Portal für Geocaching, ein Schatzsuche-Spiel. Mittels GPS-Koordinaten sind Behälter oder Objekte zu finden.';
 	//$opt['domain']['www.opencaching.de']['headoverlay'] = 'oc_head_alpha3';
+	//
+	// When overriding HTTPS settings, you must override *all* of them!
+	//$opt['domain']['www.opencaching.de']['https']['mode'] = HTTPS_ENABLED;
+	//$opt['domain']['www.opencaching.de']['https']['is_default'] = false;
+	//$opt['domain']['www.opencaching.de']['https']['force_login'] = true;
 
 	//$opt['domain']['www.opencaching.pl']['url'] = 'http://www.opencaching.pl/';
 	//$opt['domain']['www.opencaching.pl']['locale'] = 'PL';
@@ -126,9 +132,12 @@
 	//$opt['domain']['www.opencaching.pl']['style'] = 'ocstyle';
 	//$opt['domain']['www.opencaching.pl']['cookiedomain'] = '.opencaching.pl';
 	//$opt['domain']['www.opencaching.pl']['country'] = 'PL';
-	//$opt['domain']['www.opencaching.de']['keywords'] = 'geocaching, geocache, cache, poszukiwanie skarbów, GPS, wolne, GPX, koordynować, hobby, natura';  // 5-10 keywords are recommended
-	//$opt['domain']['www.opencaching.de']['description'] = 'Opencaching.pl jest darmowy portal dla Geocaching, gry Treasure Hunt. Za pomocą współrzędnych GPS można znaleźć pojemniki lub obiektów.';
-	//$opt['domain']['www.opencaching.de']['headoverlay'] = 'oc_head_alpha3_pl';
+	//$opt['domain']['www.opencaching.pl']['keywords'] = 'geocaching, geocache, cache, poszukiwanie skarbów, GPS, wolne, GPX, koordynować, hobby, natura';  // 5-10 keywords are recommended
+	//$opt['domain']['www.opencaching.pl']['description'] = 'Opencaching.pl jest darmowy portal dla Geocaching, gry Treasure Hunt. Za pomocą współrzędnych GPS można znaleźć pojemniki lub obiektów.';
+	//$opt['domain']['www.opencaching.pl']['headoverlay'] = 'oc_head_alpha3_pl';
+
+	// Supply the site's primary URL here. Can be overriden by domain settings.
+	set_absolute_urls($opt, 'http://www.opencaching.de/', 2);
 
 	/* The OC site's ID; see settings-dist.inc.php for known IDs.
 	 */ 
@@ -140,16 +149,6 @@
 	 */
 	$opt['logic']['license']['disclaimer'] = false;
 	$opt['logic']['license']['terms'] = 'articles.php?page=impressum#datalicense';
-
-	/* location of uploaded images
-	 */
-	$opt['logic']['pictures']['dir'] = '/srv/www/html/images/uploads';
-	$opt['logic']['pictures']['url'] = 'http://<domain>/images/uploads';
-	$opt['logic']['pictures']['thumb_url'] = $opt['logic']['pictures']['url'] . '/thumbs';
-
-	/* location of uploaded mp3 (unused)
-	 */
-	$opt['logic']['podcasts']['url'] = 'http://<domain>/podcasts/uploads';
 
 	/* password authentication method
 	 * (true means extra hash on the digested password)
@@ -244,6 +243,9 @@ function post_config()
 
 	switch (mb_strtolower($domain))
 	{
+		case 'www.opencaching.de':
+			config_domain_www_opencaching_de();
+			break;
 		case 'www.opencaching.it':
 			config_domain_www_opencaching_it();
 			break;
@@ -251,7 +253,7 @@ function post_config()
 			config_domain_www_opencachingspain_es();
 			break;
 		default:
-			$tpl->redirect($opt['page']['absolute_url'] . 'index.php');
+			$tpl->redirect('http://www.opencaching.de/index.php');
 	}
 }
 ?>

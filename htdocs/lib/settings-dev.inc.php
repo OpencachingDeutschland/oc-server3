@@ -48,19 +48,13 @@
 	
 	//site in service? Set to false when doing bigger work on the database to prevent error's
 	if (!isset($site_in_service)) $site_in_service = true;
-	
-	//if you are running this site on a other domain than staging.opencaching.de, you can set
-	//this in private_db.inc.php, but don't forget the ending /
-	$absolute_server_URI = $dev_baseurl . '/';
+
+	set_absolute_urls($opt, $dev_baseurl, 1);
 	
 	// EMail address of the sender
 	if (!isset($maildomain)) $maildomain  = 'local.opencaching.de';
 	if (!isset($emailaddr)) $emailaddr = 'root@' . $maildomain;
 	
-	// location of cache images
-	if (!isset($picdir)) $picdir = $rootpath . 'images/uploads';
-	if (!isset($picurl)) $picurl = $absolute_server_URI . 'images/uploads';
-
 	// Thumbsize
 	$thumb_max_width = 175;
 	$thumb_max_height = 175;
@@ -102,16 +96,6 @@
 
 	$googlemap_key = "<key>";
 	$googlemap_type = "G_MAP_TYPE"; // alternativ: _HYBRID_TYPE
-
-  // cache_maps-settings
-  //$cachemap_wms_url = 'http://www.top-sectret.oc/{min_lat},{min_lon},{max_lat},{max_lon}';
-  $cachemap_wms_url = 'http://www.opencaching.de/cachemaps.php?wp={wp_oc}';
-  $cachemap_size_lat = 0.2;
-  $cachemap_size_lon = 0.2;
-  $cachemap_pixel_x = 200;
-  $cachemap_pixel_y = 200;
-  $cachemap_url = 'images/cachemaps/';
-  $cachemap_dir = $rootpath . $cachemap_url;
 
 	$opt['translate']['debug'] = false;
 

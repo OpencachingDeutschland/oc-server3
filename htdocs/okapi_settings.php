@@ -43,11 +43,12 @@ function get_okapi_settings()
 		'TIMEZONE'         => $opt['php']['timezone'],  # BTW, OCPL doesn't have it in settings.inc.php
 		'SITE_URL'         => $opt['page']['absolute_url'],
 		'ORIGIN_URL'       => $opt['page']['origin_url'],
+		'HTTPS'            => $opt['page']['https']['mode'] == HTTPS_DISABLED ? 'unavailable' : ($opt['page']['https']['is_default'] ? 'recommended' : 'available'),
 		'VAR_DIR'          => $opt['okapi']['var_dir'],
 		'IMAGES_DIR'       => rtrim($opt['logic']['pictures']['dir'], '/'),
 		'SITE_LOGO'        => $opt['page']['absolute_url'] . 'resource2/' . $opt['template']['default']['style'] . '/images/oclogo/oc_logo_alpha3.png',
 		'OC_NODE_ID'       => $opt['logic']['node']['id'],
-		'OC_COOKIE_NAME'   => $opt['session']['cookiename'].'data',
+		'OC_COOKIE_NAME'   => $opt['session']['cookiename'] . 'data',
 		'OCDE_HTML_PURIFIER_SETTINGS'
 		                   => $opt['html_purifier'],
 	);

@@ -47,8 +47,8 @@
 	define('regex_statpic_text', '^[a-zA-Z0-9\.\-_ @äüöÄÜÖß=)(\/\\\&*\$+~#!§%;,-?:\[\]{}¹²³\'\"`\|µ°]{0,29}$');
 
 	//load default webserver-settings and common includes
-	require_once($opt['rootpath'] . 'lib/settings.inc.php');
 	require_once($opt['rootpath'] . 'lib/consts.inc.php');
+	require_once($opt['rootpath'] . 'lib/settings.inc.php');
 	require_once($opt['rootpath'] . 'lib2/errorhandler.inc.php');
 
 	// check for banned UAs

@@ -18,6 +18,10 @@
 	define('GUI_HTML', 0);   // also defined in lib2/const.inc.php
 	define('GUI_TEXT', 1);
 
+	define('HTTPS_DISABLED', 0);   // also defined in lib2/const.inc.php
+	define('HTTPS_ENABLED', 1);
+	define('HTTPS_ENFORCED', 2);
+
 	// for cachelists
 	define('cachelist_type_ignore', 1);
 	define('cachelist_type_watch', 2);

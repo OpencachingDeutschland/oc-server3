@@ -21,13 +21,13 @@
 
 		<tr>
 			<td style="vertical-align:top;">{t}HTML-Code:{/t}</td>
-			<td class="help">&lt;img src="{$opt.page.absolute_url|escape|escape}statpics/{$opt.template.locale}/{$login.userid}.jpg" alt="{t 1=$login.username|escape|escape}Opencaching.de-statstic of %1{/t}" title="{t 1=$login.username|escape|escape}Opencaching.de-statstic of %1{/t}" /></td>
+			<td class="help">&lt;img src="{$opt.page.default_absolute_url|escape|escape}statpics/{$opt.template.locale}/{$login.userid}.jpg" alt="{t 1=$login.username|escape|escape}Opencaching.de-statstic of %1{/t}" title="{t 1=$login.username|escape|escape}Opencaching.de-statstic of %1{/t}" /></td>
 		</tr>
 		<tr><td class="spacer" colspan="2"></td></tr>
 
 		<tr>
 			<td style="vertical-align:top;">{t}BBCode for webforums:{/t}</td>
-			<td class="help">[url={$opt.page.absolute_url|escape|escape}viewprofile.php?userid={$login.userid}][img]{$opt.page.absolute_url|escape|escape}statpics/{$opt.template.locale}/{$login.userid}.jpg[/img][/url]</td>
+			<td class="help">[url={$opt.page.default_absolute_url|escape|escape}viewprofile.php?userid={$login.userid}][img]{$opt.page.default_absolute_url|escape|escape}statpics/{$opt.template.locale}/{$login.userid}.jpg[/img][/url]</td>
 		</tr>
 		<tr><td class="spacer" colspan="3">&nbsp;</td></tr>
 

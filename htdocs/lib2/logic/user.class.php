@@ -62,7 +62,7 @@ class user
 		$this->reUser->addString('last_name', '', false);
 		$this->reUser->addString('first_name', '', false);
 		$this->reUser->addString('country', null, true);
-		$this->reUser->addBoolean('accept_mailing', false, false);
+		$this->reUser->addBoolean('accept_mailing', 1, false);
 		$this->reUser->addBoolean('pmr_flag', false, false);
 		$this->reUser->addString('new_pw_code', null, true);
 		$this->reUser->addDate('new_pw_date', null, true);

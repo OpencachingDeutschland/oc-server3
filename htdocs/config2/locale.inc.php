@@ -35,6 +35,9 @@
 	$opt['template']['locales']['FR']['show'] = true;
 	$opt['template']['locales']['FR']['flag'] = 'images/flag/FR.png';
 	$opt['template']['locales']['FR']['name'] = 'Français';
+	$opt['template']['locales']['NL']['show'] = false;
+	$opt['template']['locales']['NL']['flag'] = 'images/flag/NL.png';
+	$opt['template']['locales']['NL']['name'] = 'Nederlands';
 
 /*
 	Disabling unused locales speeds up template precompilation (clear-webcache.php).
@@ -45,9 +48,6 @@
 	$opt['template']['locales']['NO']['show'] = true; // no_NO
 	$opt['template']['locales']['NO']['flag'] = 'images/flag/NO.png';
 	$opt['template']['locales']['NO']['name'] = 'Norsk';
-	$opt['template']['locales']['NL']['show'] = true;
-	$opt['template']['locales']['NL']['flag'] = 'images/flag/NL.png';
-	$opt['template']['locales']['NL']['name'] = 'Nederlands';
 	$opt['template']['locales']['PL']['show'] = true;
 	$opt['template']['locales']['PL']['flag'] = 'images/flag/PL.png';
 	$opt['template']['locales']['PL']['name'] = 'Polski';
@@ -71,11 +71,11 @@
 	$opt['geokrety']['locales']['IT'] = 'it_IT.UTF-8';
 	$opt['geokrety']['locales']['ES'] = 'es_ES.UTF-8';
 	$opt['geokrety']['locales']['FR'] = 'fr_FR.UTF-8';
+	$opt['geokrety']['locales']['NL'] = 'en_EN';
 
 /*
 	$opt['geokrety']['locales']['SV'] = 'sv_SE.UTF-8';
 	$opt['geokrety']['locales']['NO'] = 'no_NO.UTF-8';
-	$opt['geokrety']['locales']['NL'] = 'en_EN';
 	$opt['geokrety']['locales']['PL'] = 'pl_PL.UTF-8';
 	$opt['geokrety']['locales']['RU'] = 'en_EN';
 	$opt['geokrety']['locales']['DA'] = 'da_DK.UTF-8';
@@ -88,12 +88,12 @@
 	$opt['locale']['IT']['locales'] = array('it_IT.utf8', 'it_IT', 'it');
 	$opt['locale']['ES']['locales'] = array('es_ES.utf8', 'es_ES', 'es');
 	$opt['locale']['FR']['locales'] = array('fr_FR.utf8', 'fr_FR@euro', 'fr_FR', 'french', 'fr');
+	$opt['locale']['NL']['locales'] = array('nl_NL.utf8', 'nl_NL', 'nl');
 
 /*
 	$opt['locale']['SV']['locales'] = array('sv_SE.utf8', 'sv_SE', 'se');
 	$opt['locale']['NO']['locales'] = array('no_NO.utf8', 'no_NO', 'no');
 	$opt['locale']['PL']['locales'] = array('pl_PL.utf8', 'pl_PL', 'pl');
-	$opt['locale']['NL']['locales'] = array('nl_NL.utf8', 'nl_NL', 'nl');
 	$opt['locale']['RU']['locales'] = array('ru_RU.utf8', 'ru_RU', 'ru');
 	$opt['locale']['DA']['locales'] = array('da_DK.utf8', 'da_DK', 'dk');
 	$opt['locale']['PT']['locales'] = array('pt_PT.utf8', 'pt_PT', 'pt');
@@ -204,6 +204,28 @@
 	$opt['locale']['FR']['mostly_translated'] = true;
 	$opt['locale']['FR']['what3words'] = true;
 
+	$opt['locale']['NL']['format']['dm'] = '%d.%m.';
+	$opt['locale']['NL']['format']['dateshort'] = '%d.%m.%y';
+	$opt['locale']['NL']['format']['date'] = '%x';
+	$opt['locale']['NL']['format']['datelong'] = '%d. %B %Y';
+	$opt['locale']['NL']['format']['datetime'] = '%x %H:%M';
+	$opt['locale']['NL']['format']['datetimesec'] = '%x %X';
+	$opt['locale']['NL']['format']['time'] = '%H:%M';
+	$opt['locale']['NL']['format']['timesec'] = '%X';
+	$opt['locale']['NL']['format']['phpdate'] = 'd-m-Y';
+	$opt['locale']['NL']['format']['phpdatetime'] = 'd-m-Y H:i';
+	$opt['locale']['NL']['format']['colonspace'] = '';
+	$opt['locale']['NL']['country'] = 'NL';
+	$opt['locale']['NL']['primary_lang_of'] = array('NL');
+	$opt['locale']['NL']['page']['subtitle1'] = 'Geocaching met Opencaching';
+	$opt['locale']['NL']['page']['subtitle2'] = '';
+	$opt['locale']['NL']['page']['license_url'] = 'http://creativecommons.org/licenses/by-nc-nd/3.0/de/';
+	$opt['locale']['NL']['page']['license'] = '<a rel="license" href="%1"><img alt="Creative Commons Lizenzvertrag" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-nd/3.0/de/88x31.png" /></a><div style="text-align:center; margin:8px 0 0 6px;">Die <a href="articles.php?page=impressum#datalicense">Inhalte</a> von Opencaching.de stehen unter der Creative-Commons-Lizenz <a rel="license" href="%1">BY-NC-ND 3.0 DE</a>.</div>';
+	$opt['locale']['NL']['helpwiki'] = "http://wiki.opencaching.de/index.php/";
+	$opt['locale']['NL']['country'] = 'NL';
+	$opt['locale']['NL']['mostly_translated'] = false;
+	$opt['locale']['NL']['what3words'] = false;
+
 /*
 	$opt['locale']['SV']['format']['dateshort'] = '%y-%m-%d';
 	$opt['locale']['SV']['format']['dm'] = '%d/%m';
@@ -253,23 +275,6 @@
 	$opt['locale']['PL']['country'] = 'PL';
 	$opt['locale']['PL']['mostly_translated'] = false;
 	$opt['locale']['PL']['what3words'] = false;
-
-	$opt['locale']['NL']['format']['dm'] = '%d.%m.';
-	$opt['locale']['NL']['format']['dateshort'] = '%d.%m.%y';
-	$opt['locale']['NL']['format']['date'] = '%x';
-	$opt['locale']['NL']['format']['datelong'] = '%d. %B %Y';
-	$opt['locale']['NL']['format']['datetime'] = '%x %H:%M';
-	$opt['locale']['NL']['format']['datetimesec'] = '%x %X';
-	$opt['locale']['NL']['format']['time'] = '%H:%M';
-	$opt['locale']['NL']['format']['timesec'] = '%X';
-	$opt['locale']['NL']['format']['phpdate'] = 'd-m-Y';
-	$opt['locale']['NL']['format']['phpdatetime'] = 'd-m-Y H:i';
-	$opt['locale']['NL']['format']['colonspace'] = '';
-	$opt['locale']['NL']['page']['subtitle1'] = 'Geocaching met Opencaching';
-	$opt['locale']['NL']['page']['subtitle2'] = '';
-	$opt['locale']['NL']['country'] = 'NL';
-	$opt['locale']['NL']['mostly_translated'] = false;
-	$opt['locale']['NL']['what3words'] = false;
 
 	$opt['locale']['RU']['format']['dateshort'] = '%d.%m.%y';
 	$opt['locale']['RU']['format']['dm'] = '%d.%m.';

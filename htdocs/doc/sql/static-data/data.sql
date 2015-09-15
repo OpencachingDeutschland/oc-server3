@@ -1157,7 +1157,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('223', 'Tonga', 
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('224', 'Please fill in username and password!', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('225', 'Logout was successful.', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('226', 'The login was not successfull.', '2010-08-28 11:48:03');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('227', 'The entered username/e-mail or the specified password did not match.', '2010-08-28 11:48:03');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('227', 'The entered username or password did not match.', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('228', 'Your tried to login more than %1 times in the last hour. The next login will not be allowed before one hour since the first try has passed.', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('229', 'Your account is not acivated.', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('230', '\&gt;<a href=\"activation.php\">Here</a>\&lt; you can activate your account.', '2010-08-28 11:48:03');
@@ -5578,7 +5578,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('224', 'DE', 'Bitte die Felder Benutzername und Passwort ausfüllen!', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('225', 'DE', 'Logout war erfolgreich.', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('226', 'DE', 'Der Login war nicht erfolgreich.', '2010-08-28 11:48:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('227', 'DE', 'Die eingegebene Benutzername/E-Mail-Adresse war ungültig.', '2010-08-28 11:48:06');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('227', 'DE', 'Der eingegebene Benutzername oder das Passwort war ungültig.', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('228', 'DE', 'Du hast versucht, dich in der letzten Stunde %1 mal auf Opencaching.de einzuloggen. Weitere Loginversuche sind erst wieder möglich, wenn eine Stunde seit dem ersten Login vergangen ist.', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('229', 'DE', 'Dein Account wurde noch nicht aktiviert oder wieder deaktiviert.', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('230', 'DE', 'Du kannst deinen Account \&gt;<a href=\"activation.php\">hier</a>\&lt; aktivieren.', '2010-08-28 11:48:06');
@@ -7492,8 +7492,8 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('223', 'EN', 'Tonga', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('224', 'EN', 'Please fill in username and password!', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('225', 'EN', 'Logout was successful.', '2010-08-28 11:48:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('226', 'EN', 'login failed', '2010-08-28 11:48:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('227', 'EN', 'The entered username/e-mail or the specified password did not match.', '2010-08-28 11:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('226', 'EN', 'Login failed', '2010-08-28 11:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('227', 'EN', 'The entered username or password did not match.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('228', 'EN', 'Your tried to login more than %1 times within the last hour. The next login will not be allowed before one hour since the first try has passed.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('229', 'EN', 'Your account is not acivated.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('230', 'EN', '\&gt;<a href=\"activation.php\">Here</a>\&lt; you can activate your account.', '2010-08-28 11:48:07');
@@ -9387,7 +9387,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('224', 'ES', '¡Por favor, introduzca el nombre de usuario y una contraseña!', '2010-12-09 00:17:57');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('225', 'ES', 'Cerrar sesión fue un éxito.', '2010-12-09 00:17:57');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('226', 'ES', 'Autentificación fallida', '2010-12-09 00:17:57');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('227', 'ES', 'El nombre de usuario introducido / e-mail o la contraseña especificada no coincide.', '2010-12-09 00:17:57');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('227', 'ES', 'El nombre de usuario introducido o la contraseña no coincide.', '2010-12-09 00:17:57');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('228', 'ES', 'Ha intentado %1 veces iniciar sesión en la última hora. El próximo inicio de sesión no se permitirá una hora antes desde el primer intento haya pasado.', '2010-12-09 00:17:57');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('229', 'ES', 'Su cuenta no esta activada.', '2010-12-09 00:17:57');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('230', 'ES', '\&gt;<a href=\"activation.php\">Qui</a>\&lt; puedes activar tu cuenta.', '2010-12-09 00:17:57');
@@ -10995,7 +10995,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('224', 'FR', 'Remplir le nom d\'utilisateur et le mot de passe, s\'il vous plaît\&nbsp;!', '2015-08-25 01:28:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('225', 'FR', 'Déconnexion réussie.', '2015-08-25 01:28:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('226', 'FR', 'La connexion n\'est pas réussie.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('227', 'FR', 'Le nom d\'utilisateur / l\'e-mail ou le mot de passe indiqué ne correspondent pas.', '2015-08-25 01:28:59');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('227', 'FR', 'Le nom d\'utilisateur ou le mot de passe ne correspondent pas.', '2015-08-25 01:28:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('228', 'FR', 'Vous avez essayé de vous connecter plus de %1 fois pendant la dernière heure. La prochaine connexion ne sera pas autorisé avant qu\'une heure que le premier essai a passé.', '2015-08-25 01:28:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('229', 'FR', 'Votre compte n\'est pas actif.', '2015-08-25 01:28:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('230', 'FR', '\&gt;<a href=\"activation.php\">Voici</a>\&lt; vous pouvez activer votre compte.', '2015-08-25 01:28:59');
@@ -12910,7 +12910,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('224', 'IT', 'Per favore riempi i campi Nome Utente e Password', '2010-08-30 09:36:51');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('225', 'IT', 'Autenticazione riuscita.', '2010-08-30 09:37:03');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('226', 'IT', 'L\'autenticazione non ha avuto successo.', '2010-10-27 18:49:19');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('227', 'IT', 'Il Nome Utente o la email o la password specificata non coincidono.', '2010-08-30 09:38:15');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('227', 'IT', 'Il Nome Utente o la password non coincidono.', '2010-08-30 09:38:15');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('228', 'IT', 'Hai tentato di autenticarti più di %1 volte nell\'ultima ora. La prossima autenticazione sarà permessa solamente quando sarà trascorsa un\'ora dall\'ultimo tentativo.', '2010-08-30 09:40:02');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('229', 'IT', 'Il tuo utente non è attivato.', '2010-08-30 11:29:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('230', 'IT', '\&gt;<a href=\"activation.php\">Qui</a>\&lt; puoi attivare il tuo utente.', '2010-08-30 09:41:24');
@@ -14743,7 +14743,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('224', 'NL', 'Altublieft Gebruikersnaam en Wachtwoord invullen!', '2011-02-04 19:49:57');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('225', 'NL', 'Succesvol uitgelogt.', '2011-02-04 19:49:57');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('226', 'NL', 'Inloggen mislukt.', '2011-02-04 19:49:57');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('227', 'NL', 'De opgegeven gebruikersnaam/E-Mailadres of het wachtwoord komen niet overeen.', '2011-02-04 19:49:57');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('227', 'NL', 'De opgegeven gebruikersnaam of het wachtwoord komen niet overeen.', '2011-02-04 19:49:57');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('228', 'NL', 'In het laatste uur is er meer dan %1 keer proberen in te loggen. De volgende poging kan pas na een uur vanaf de eerste poging gedaan worden.', '2011-02-04 19:49:57');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('229', 'NL', 'Jouw account is niet geactiveerd.', '2011-02-04 19:49:57');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('230', 'NL', 'Je kunt jouw account \&gt;<a href=\"activation.php\">hier</a>\&lt; activeren.', '2011-02-04 19:49:57');

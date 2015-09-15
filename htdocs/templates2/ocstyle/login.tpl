@@ -19,7 +19,7 @@
 			{if $error!=LOGIN_OK}
 				{if $error==LOGIN_BADUSERPW}
 					{t}The login was not successfull.{/t}<br />
-					{t}The entered username/e-mail or the specified password did not match.{/t}<br />
+					{t}The entered username or password did not match.{/t}<br />
 				{elseif $error==LOGIN_TOOMUCHLOGINS}
 					{t}The login was not successfull.{/t}<br />
 					{t 1=$opt.page.max_logins_per_hour}Your tried to login more than %1 times in the last hour. The next login will not be allowed before one hour since the first try has passed.{/t}<br />

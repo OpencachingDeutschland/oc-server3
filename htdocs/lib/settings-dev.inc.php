@@ -55,9 +55,10 @@
 		isset($dev_shortlink_domain) ? $dev_shortlink_domain : 'opencaching.de',
 		1);
 	
-	// EMail address of the sender
+	// EMail address of the sender and team
 	if (!isset($maildomain)) $maildomain  = 'local.opencaching.de';
 	if (!isset($emailaddr)) $emailaddr = 'root@' . $maildomain;
+	if (!isset($opt['mail']['contact'])) $opt['mail']['contact'] = 'contact@' . $maildomain;
 	
 	// Thumbsize
 	$thumb_max_width = 175;

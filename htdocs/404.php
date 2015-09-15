@@ -81,9 +81,6 @@
 	// assign $opt404
 	$tpl->assign('opt404', $opt404);
 	
-	// assign contact
-	$tpl->assign('contact', $opt['mail']['contact']);
-
 	// show page
 	$tpl->display();
 ?>

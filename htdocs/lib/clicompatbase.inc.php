@@ -731,6 +731,8 @@
 		else
 			$mailtext = mb_ereg_replace("{shortlink_url}", $urls['site_url'], $mailtext);
 
+		$mailtext = mb_ereg_replace("{email_contact}", $opt['mail']['contact'], $mailtext);
+
 		return $mailtext;
 	}
 

@@ -85,8 +85,11 @@
 	set_absolute_urls($opt, 'http://www.opencaching.de/', 'opencaching.de', 1);
 	
 	// 'From' EMail address for admin error messages and log removals
-	if (!isset($emailaddr)) $emailaddr = 'noreply@opencaching.de';
-	
+	if (!isset($emailaddr)) $emailaddr = 'noreply@do.main';
+
+	// team contact email address 
+	if (!isset($opt['mail']['contact'])) $opt['mail']['contact'] = 'contact@do.main';
+
 	// Thumbsize
 	$thumb_max_width = 175;
 	$thumb_max_height = 175;

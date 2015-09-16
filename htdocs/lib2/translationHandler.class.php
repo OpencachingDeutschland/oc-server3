@@ -46,7 +46,20 @@ class TranslationHandler
 		fwrite($f, '"Content-Transfer-Encoding: 8bit\n"' . "\n");
 		fwrite($f, "\n");
 
-		$rs = sqlf("SELECT `sys_trans`.`text` AS `text`, `sys_trans_text`.`text` AS `trans` FROM `sys_trans` INNER JOIN `sys_trans_text` ON `sys_trans`.`id`=`sys_trans_text`.`trans_id` AND `sys_trans_text`.`lang`='&1' WHERE `sys_trans`.`text`!=''", $language_upper);
+		// English texts in sys_trans_text are more up-to-date than the original translation
+		// strings in sys_trans. Therefore sys_trans_text/EN is used whenever a translation
+		// is missing and sys_trans_text/EN differs from sys_trans.
+
+		$rs = sqlf("
+			SELECT
+				`sys_trans`.`text` AS `text`,
+				IFNULL(`stt`.`text`, `stt_en`.`text`) AS `trans`
+			FROM
+				`sys_trans`
+				LEFT JOIN `sys_trans_text` `stt` ON `stt`.`trans_id`=`sys_trans`.`id` AND `stt`.`lang`='&1'
+				LEFT JOIN `sys_trans_text` `stt_en` ON `stt_en`.`trans_id`=`sys_trans`.`id` AND `stt_en`.`lang`='EN'
+				WHERE `sys_trans`.`text`!=''",
+			$language_upper);
 
 		$variables = array();
 		$this->loadNodeTextFile($variables, $opt['logic']['node']['id'].'.txt', $language_lower);
@@ -55,11 +68,14 @@ class TranslationHandler
 		while ($r = sql_fetch_assoc($rs))
 		{
 			$trans = $r['trans'];
-			$trans = $this->substitueVariables($variables, $language_lower, $trans);
+			if ($trans !== null && $trans != $r['text'])
+			{
+				$trans = $this->substitueVariables($variables, $language_lower, $trans);
 
-			fwrite($f, 'msgid "' . $this->escape_text($r['text']) . '"' . "\n");
-			fwrite($f, 'msgstr "' . $this->escape_text($trans) . '"' . "\n");
-			fwrite($f, "\n");
+				fwrite($f, 'msgid "' . $this->escape_text($r['text']) . '"' . "\n");
+				fwrite($f, 'msgstr "' . $this->escape_text($trans) . '"' . "\n");
+				fwrite($f, "\n");
+			}
 		}
 		sql_free_result($rs);
 

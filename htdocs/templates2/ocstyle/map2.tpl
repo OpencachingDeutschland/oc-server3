@@ -357,7 +357,7 @@ function mapLoad()
 		backgroundColor: "#d0dccc",
 
 		mapTypeControl: true,
-		mapTypeControlOptions: { mapTypeIds: maptypes },
+		mapTypeControlOptions: { mapTypeIds: maptypes, position: google.maps.ControlPosition.TOP_RIGHT },
 
 		panControl: false,
 		zoomControl: true,
@@ -2159,7 +2159,7 @@ function toggle_attribselection(bSaveCookies)
 			<tr>
 				{if $bFullscreen}
 					{* login status *}
-					<td rowspan="2">&nbsp;&nbsp;</td>
+					<td rowspan="2">&nbsp;</td>
 					<td rowspan="2" class="maplogin">
 						{if $username != ""}{t}Logged in as{/t}<br /><a href="myhome.php"><b>{$username}</b></a> &nbsp;<a href="map2.php?action=logout&mode=fullscreen{if $queryid>0}&queryid={$queryid}{/if}"><img src="resource2/ocstyle/images/action/15x13-logout.png" style="margin-bottom:2px" alt="{t}Logout{/t}" title="{t}Logout{/t}" /></a>{else}<a href="login.php?target=map2.php%3Fmode%3Dfullscreen{if $queryid>0}%26queryid%3D{$queryid}{/if}">{t}Login{/t}...</a>{/if}
 					</td>
@@ -2280,7 +2280,7 @@ function toggle_attribselection(bSaveCookies)
 
 	{if $bFullscreen}
 		{* the logo *}
-		<a href="index.php"><img id="oclogo" src="resource2/ocstyle/images/oclogo/oc_logo_alpha3.png" style="position:absolute; left:32px; top:50px; z-index:2; border:0" /></a>
+		<a href="index.php"><img id="oclogo" src="resource2/ocstyle/images/oclogo/oc_logo_alpha3.png" style="position:absolute; left:8px; top:50px; z-index:2; border:0" /></a>
 
 		{* back-to-searchoptions link *}
 		{if $queryid>0}
@@ -2319,7 +2319,7 @@ function toggle_attribselection(bSaveCookies)
 		{/literal}
 
 		{* frame for all sidebar contents: *}
-		<div class="mapboxframe mapboxshadow" style="position:absolute; top: 80px; right:0px; margin: 0px; padding: 4px; background:#fff; opacity: .9; z-index:2; {if $queryid > 0}display:none;{/if}">
+		<div class="mapboxframe mapboxshadow" style="position:absolute; top: {if $msie}98px{else}104px{/if}; right:0px; margin: 0px; padding: 4px; background:#fff; opacity: .9; z-index:2; {if $queryid > 0}display:none;{/if}">
 			{* sidebar hidden: '<' icon to open *}
 			<a class="jslink nofocus" onclick="toggle_sidebar(true);" id='sidebar-toggle' style="width: 32px; height: 32px"><img id="sidbar-toggle-img" src="resource2/{$opt.template.style}/images/map/32x32-left.png" /></a>
 			{* sidebar visible: filter options table & '>' icon to close *}
@@ -2579,7 +2579,7 @@ function toggle_attribselection(bSaveCookies)
 
 	{* Safari search link *}
 	{if $queryid==0}
-		<div class="mapboxframe mapboxshadow" style="position:absolute; {if $bFullscreen}top: 138px; right:0px; margin: 0px;{else}top: {if $msie}272{else}248{/if}px; right:26px; margin: 0px;{/if} padding:2px 0px 2px 1px; background:#fff; opacity: .9; z-index:1" >
+		<div class="mapboxframe mapboxshadow" style="position:absolute; {if $bFullscreen}top: {if $msie}156px{else}160px{/if}; right:0px; margin: 0px;{else}top: {if $msie}274{else}266{/if}px; right:30px; margin: 0px;{/if} padding:2px 0px 2px 1px; background:#fff; opacity: .9; z-index:1" >
 			<a class="jslink nofocus" href="search.php?searchto=searchall&showresult=1&expert=0&output=HTML&utf8=1&sort=bycreated&orderRatingFirst=0&f_inactive=1&f_disabled=1&f_ignored=1&cache_attribs=61&submit_all=Suchen" style="width: 32px; height: 32px"><img src="resource2/{$opt.template.style}/images/attributes/safari.png" title="{t}Safari caches list{/t}" /></a>
 		</div>
 	{/if}

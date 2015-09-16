@@ -8,12 +8,12 @@ Entfernung: {distance} {unit} Richtung {bearing}
 Typ: {cachetype}
 Größe: {cachesize}
 
-Link: http://opencaching.de/{wp_oc}
+Link: {shortlink_url}{wp_oc}
 ---
 
 
 Die Einstellungen für deinen Suchradius kannst du unter
-http://www.opencaching.de/myprofile.php einsehen und ändern.
+{site_url}myprofile.php einsehen und ändern.
 
 Happy Geocaching,
 das Opencaching.de-Team
@@ -21,6 +21,6 @@ das Opencaching.de-Team
 ---
 Diese E-Mail wurde automatisch generiert - bitte nicht antworten. Falls du
 Kontakt mit Opencaching.de aufnehmen möchtest, kannst unter
-http://www.opencaching.de/articles.php?page=contact alle Möglichkeiten
+{site_url}articles.php?page=contact alle Möglichkeiten
 nachlesen. In dringenden Fällen kannst du die E-Mail-Adresse
-contact@opencaching.de verwenden.
+{email_contact} verwenden.

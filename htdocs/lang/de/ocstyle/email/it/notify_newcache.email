@@ -8,18 +8,18 @@ Distanza: {distance} {unit} in direzione {bearing}
 Tipo: {cachetype}
 Dimensione: {cachesize}
 
-Link: http://opencaching.de/{wp_oc}
+Link: {shortlink_url}{wp_oc}
 ---
 
 
 Puoi vedere e modificare i settaggi del tuo raggio di ricerca qui: 
-http://www.opencaching.de/myprofile.php.
+{site_url}myprofile.php.
 
 Happy Geocaching,
-the Opencaching.de Team
+the Opencaching.de / Opencaching.it Team
 
 ---
 Questa E-Mail è stata generata automaticamente - per favore non rispondere.
 Se vuoi contattare Opencaching.de/.it, fai riferimento alla pagina 
-http://www.opencaching.de/articles.php?page=contact. 
-In casi urgenti puoi inviare una e-mail a: contact@opencaching.de.
+{site_url}articles.php?page=contact.
+In casi urgenti puoi inviare una e-mail a: {email_contact}.

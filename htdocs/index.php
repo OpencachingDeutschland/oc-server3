@@ -111,7 +111,7 @@
 				$gmkey = $opt['lib']['google']['mapkey'][$sHost];
 			
 			// build static maps url by inserting api key
-			$url = $opt['logic']['minimapurl'];
+			$url = $opt['page']['protocol'] . strstr($opt['logic']['minimapurl'], '://');
 			$url = mb_ereg_replace('{gmkey}', $gmkey, $url);
 			
 			// put into template

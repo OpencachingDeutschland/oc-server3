@@ -42,7 +42,7 @@ function search_output()
 		<terrain>{terrain}</terrain>
 		<size id=\"{sizeid}\">{container}</size>
 		<country id=\"{countryid}\">{country}</country>
-		<link><![CDATA[http://www.opencaching.de/viewcache.php?wp={waypoint}]]></link>
+		<link><![CDATA[".$opt['page']['default_absolute_url']."viewcache.php?wp={waypoint}]]></link>
 		<desc><![CDATA[{shortdesc}]]></desc>
 		<hints><![CDATA[{hints}]]></hints>
 	</cache>

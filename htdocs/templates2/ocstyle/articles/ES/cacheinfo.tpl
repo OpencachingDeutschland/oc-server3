@@ -15,43 +15,43 @@
   <p id="cachetype"><strong>Tipo de caches:</strong> Hay varios tipo de caches.
   <table class="table cachedesctable">
       <tr>
-        <td valign="top"><img src="http://www.opencaching.de/resource2/ocstyle/images/cacheicon/traditional.gif" width="32" border="0" height="32" align="left" alt="" title="Cache Tradicional" /></td>
+        <td valign="top"><img src="resource2/ocstyle/images/cacheicon/traditional.gif" width="32" border="0" height="32" align="left" alt="" title="Cache Tradicional" /></td>
         <td><span class="subtitle">Cache Tradicional</span>: Las coordenadas son la ubicación de la cache que está disponible como una caja de tupperware encuentralá y abrir el contenedor hay obsequios, etc.</td>
       </tr>
       <tr>
-        <td valign="top"><img src="http://www.opencaching.de/resource2/ocstyle/images/cacheicon/drivein.gif" width="32" border="0" height="32" align="left" alt="" title="Drive-In" /></td>
+        <td valign="top"><img src="resource2/ocstyle/images/cacheicon/drivein.gif" width="32" border="0" height="32" align="left" alt="" title="Drive-In" /></td>
         <td><span class="subtitle">Drive-In</span>: como un cache normal, pero hay muy cerca de un parking. Para encontrar el cache no se requerire ningún equipo especial.</td>
       </tr>
       <tr>
-        <td valign="top"><img src="http://www.opencaching.de/resource2/ocstyle/images/cacheicon/multi.gif" width="32" border="0" height="32" align="left" alt="" title="Multi-Cache" /></td>
+        <td valign="top"><img src="resource2/ocstyle/images/cacheicon/multi.gif" width="32" border="0" height="32" align="left" alt="" title="Multi-Cache" /></td>
         <td><span class="subtitle">Multi-Cache</span>: Las coordenadas dadas no representan la ubicación de la cache, pero si un posible punto de partida para encontrar el caché. Esto puede lograrse mediante la resolución de problemas o rompecabezas, sino también por el encontrar estaciones o puntos intermedios. </td>
       </tr>
       <tr>
-        <td valign="top"><img src="http://www.opencaching.de/resource2/ocstyle/images/cacheicon/mystery.gif" width="32" border="0" height="32" align="left" alt="" title="Puzzle Cache" /></td>
+        <td valign="top"><img src="resource2/ocstyle/images/cacheicon/mystery.gif" width="32" border="0" height="32" align="left" alt="" title="Puzzle Cache" /></td>
         <td><p><span class="subtitle">Puzzle Cache</span>: Un puzzle  puede ser cualquier cache (normal, varios, etc virtual). La solución del puzzle te permitira encontrar el contenedor.</p></td>
       </tr>
       <tr>
-        <td valign="top"><img src="http://www.opencaching.de/resource2/ocstyle/images/cacheicon/mathe.gif" width="32" border="0" height="32" align="left" alt="" title="Matemática-/Físicache" /></td>
+        <td valign="top"><img src="resource2/ocstyle/images/cacheicon/mathe.gif" width="32" border="0" height="32" align="left" alt="" title="Matemática-/Físicache" /></td>
         <td><p><span class="subtitle">Matemática-/Físicache</span>: Para resolver el cache, tendra uno o más problemas de matemáticas o la física que ser resueltos.</p></td>
       </tr>
       <tr>
-        <td valign="top"><img src="http://www.opencaching.de/resource2/ocstyle/images/cacheicon/moving.gif" width="32" border="0" height="32" align="left" alt="" title="Cache Móvil" /></td>
+        <td valign="top"><img src="resource2/ocstyle/images/cacheicon/moving.gif" width="32" border="0" height="32" align="left" alt="" title="Cache Móvil" /></td>
         <td><p><span class="subtitle">Cache Móvil</span>: Este tipo de cache está escondido, y a lo largo de su vida tendra varias nuevas ubicaciones e incluso tareas. Las nuevas coordenadas y la nueva tarea se publicará en la entrada del registro.</p></td>
       </tr>
       <tr>
-        <td valign="top"><img src="http://www.opencaching.de/resource2/ocstyle/images/cacheicon/virtual.gif" width="32" border="0" height="32" align="left" alt="" title="Cache Virtual" /></td>
+        <td valign="top"><img src="resource2/ocstyle/images/cacheicon/virtual.gif" width="32" border="0" height="32" align="left" alt="" title="Cache Virtual" /></td>
         <td><p><span class="subtitle">Cache Virtual</span>: El objetivo no es una caja de Tupperware y no hay ningún libro de registro. Dependiendo de la tarea, es necesario responder a una pregunta que propondra el propietario del cache o para hacer una foto para demostrar que ha estado en ese  sitio.</p></td>
       </tr>
       <tr>
-        <td valign="top"><img src="http://www.opencaching.de/resource2/ocstyle/images/cacheicon/webcam.gif" width="32" border="0" height="32" align="left" alt="" title="Webcam Cache" /></td>
+        <td valign="top"><img src="resource2/ocstyle/images/cacheicon/webcam.gif" width="32" border="0" height="32" align="left" alt="" title="Webcam Cache" /></td>
         <td><p><span class="subtitle">Webcam Cache</span>: A menudo se encuentra como la cámara web en las coordenadas y donde tendrá que tomarse una  imagen de sí mismo. La imagen se añade a la entrada del registro. No hay contenedores o un libro de registro.</p></td>
       </tr>
       <tr>
-        <td valign="top"><img src="http://www.opencaching.de/resource2/ocstyle/images/cacheicon/event.gif" width="32" border="0" height="32" align="left" alt="" title="Evento" /></td>
+        <td valign="top"><img src="resource2/ocstyle/images/cacheicon/event.gif" width="32" border="0" height="32" align="left" alt="" title="Evento" /></td>
         <td><p><span class="subtitle">Evento</span>: Reunión de geobuscadores..</p></td>
       </tr>
       <tr>
-        <td valign="top"><img src="http://www.opencaching.de/resource2/ocstyle/images/cacheicon/unknown.gif" width="32" border="0" height="32" align="left" alt="" title="Cache de tipo desconocido" /></td>
+        <td valign="top"><img src="resource2/ocstyle/images/cacheicon/unknown.gif" width="32" border="0" height="32" align="left" alt="" title="Cache de tipo desconocido" /></td>
         <td><p><span class="subtitle">Cache de tipo desconocido</span>: Todo lo que no encaja en los tipos de caché de otros.</p></td>
       </tr>
     </tbody>

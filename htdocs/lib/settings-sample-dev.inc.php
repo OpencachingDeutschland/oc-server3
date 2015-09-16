@@ -8,7 +8,6 @@
 	// installation paths
 	$dev_basepath = '/var/www/html/';
 	$dev_codepath = 'oc-server/server-3.0/';
-	$dev_domain   = 'local.opencaching.de';
 	$dev_baseurl  = 'http://local.opencaching.de/oc-server/server-3.0/htdocs';
 
 	// database acccess

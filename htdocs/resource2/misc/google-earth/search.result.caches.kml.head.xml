@@ -5,7 +5,7 @@
 		<IconStyle>
 			<scale>1</scale>
 			<Icon>
-				<href>http://www.opencaching.de/resource2/ocstyle/images/map/caches2/cachetype-2.png</href>
+				<href>{site_url}resource2/ocstyle/images/map/caches2/cachetype-2.png</href>
 			</Icon>
 		</IconStyle>
 		<LabelStyle>
@@ -16,7 +16,7 @@
 		<IconStyle>
 			<scale>1</scale>
 			<Icon>
-				<href>http://www.opencaching.de/resource2/ocstyle/images/map/caches2/cachetype-3.png</href>
+				<href>{site_url}resource2/ocstyle/images/map/caches2/cachetype-3.png</href>
 			</Icon>
 		</IconStyle>
 		<LabelStyle>
@@ -27,7 +27,7 @@
 		<IconStyle>
 			<scale>1</scale>
 			<Icon>
-				<href>http://www.opencaching.de/resource2/ocstyle/images/map/caches2/cachetype-4.png</href>
+				<href>{site_url}resource2/ocstyle/images/map/caches2/cachetype-4.png</href>
 			</Icon>
 		</IconStyle>
 		<LabelStyle>
@@ -38,7 +38,7 @@
 		<IconStyle>
 			<scale>1</scale>
 			<Icon>
-				<href>http://www.opencaching.de/resource2/ocstyle/images/map/caches2/cachetype-5.png</href>
+				<href>{site_url}resource2/ocstyle/images/map/caches2/cachetype-5.png</href>
 			</Icon>
 		</IconStyle>
 		<LabelStyle>
@@ -49,7 +49,7 @@
 		<IconStyle>
 			<scale>1</scale>
 			<Icon>
-				<href>http://www.opencaching.de/resource2/ocstyle/images/map/caches2/cachetype-6.png</href>
+				<href>{site_url}resource2/ocstyle/images/map/caches2/cachetype-6.png</href>
 			</Icon>
 		</IconStyle>
 		<LabelStyle>
@@ -60,7 +60,7 @@
 		<IconStyle>
 			<scale>1</scale>
 			<Icon>
-				<href>http://www.opencaching.de/resource2/ocstyle/images/map/caches2/cachetype-7.png</href>
+				<href>{site_url}resource2/ocstyle/images/map/caches2/cachetype-7.png</href>
 			</Icon>
 		</IconStyle>
 		<LabelStyle>
@@ -71,7 +71,7 @@
 		<IconStyle>
 			<scale>1</scale>
 			<Icon>
-				<href>http://www.opencaching.de/resource2/ocstyle/images/map/caches2/cachetype-8.png</href>
+				<href>{site_url}resource2/ocstyle/images/map/caches2/cachetype-8.png</href>
 			</Icon>
 		</IconStyle>
 		<LabelStyle>
@@ -82,7 +82,7 @@
 		<IconStyle>
 			<scale>1</scale>
 			<Icon>
-				<href>http://www.opencaching.de/resource2/ocstyle/images/map/caches2/cachetype-10.png</href>
+				<href>{site_url}resource2/ocstyle/images/map/caches2/cachetype-10.png</href>
 			</Icon>
 		</IconStyle>
 		<LabelStyle>
@@ -93,7 +93,7 @@
 		<IconStyle>
 			<scale>1</scale>
 			<Icon>
-				<href>http://www.opencaching.de/resource2/ocstyle/images/map/caches2/cachetype-9.png</href>
+				<href>{site_url}resource2/ocstyle/images/map/caches2/cachetype-9.png</href>
 			</Icon>
 		</IconStyle>
 		<LabelStyle>
@@ -104,7 +104,7 @@
 		<IconStyle>
 			<scale>1</scale>
 			<Icon>
-				<href>http://www.opencaching.de/resource2/ocstyle/images/map/caches2/cachetype-1.png</href>
+				<href>{site_url}resource2/ocstyle/images/map/caches2/cachetype-1.png</href>
 			</Icon>
 		</IconStyle>
 		<LabelStyle>

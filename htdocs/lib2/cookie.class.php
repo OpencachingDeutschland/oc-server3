@@ -58,7 +58,7 @@ class cookie
 
 			if ($opt['session']['check_referer'])
 				if (isset($_SERVER['REFERER']))
-					if (strtolower(substr($_SERVER['REFERER'], 0, strlen($opt['page']['absolute_url']))) != strtolower($opt['page']['absolute_url']))
+					if (strtolower(substr('http' + strstr($_SERVER['REFERER'], '://'), 0, strlen($opt['page']['absolute_http_url']))) != strtolower($opt['page']['absolute_http_url']))
 						$this->createNewSession();
 
 			if ((isset($_GET['SESSION']) || isset($_POST['SESSION'])) && count($_SESSION) > 0)

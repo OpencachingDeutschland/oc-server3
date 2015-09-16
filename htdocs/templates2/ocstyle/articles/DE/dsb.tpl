@@ -14,7 +14,10 @@
 			§ 13 TMG, § 33 Abs. 1 BDSG und darüber hinaus erklären wir nachfolgend, welche Daten wir 
 			zu welchen Zwecken speichern und wie du Einsicht in die gespeicherten Daten nehmen bzw. eine 
 			Löschung veranlassen kannst.</p>
-			
+
+			<p>Diese Erklärung gilt für alle von Opencaching Deutschland betrieben Geocache-Listingseiten:
+			www.opencaching.de, www.opencaching.it, www.opencachingspain.es und www.opencaching.fr.</p>
+
 			<h2>Benutzerkonto</h2>
 			
 			<p>Einige Dienste der Opencaching-Internetseite erfordern eine Registrierung.

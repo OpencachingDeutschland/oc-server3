@@ -12,6 +12,8 @@
 	$opt['page']['title'] = 'OPENCACHING';
 	$opt['page']['subtitle1'] = 'Geocaching with Opencaching';
 	$opt['page']['subtitle2'] = '';
+	$opt['page']['sitename'] = 'Opencaching.de';
+	$opt['page']['slogan'] = 'Opencaching.de - Geocaching in Deutschland, Oesterreich und der Schweiz';
 
 	// directory of rotator pictures and script, relative to head images dir
 	$opt['page']['headimagepath'] = '';
@@ -94,6 +96,187 @@
 	$opt['cms']['login'] = 'http://wiki.opencaching.de/index.php/Login_auf_Opencaching.de';
 
 	// explanation of nature protection areas
-	$opt['cms']['npa'] = 'http://wiki.opencaching.de/index.php/Schutzgebiete';
+	$opt['cms']['npa'] = 'articles.php?page=npa&wiki';
+
+	/* HTTPS settings
+	 *
+	 * mode:  HTTPS_DISABLED:  https requests will be redirected to http
+	 *        HTTPS_ENABLED:   all requests will stay within the same protocol
+	 *        HTTPS_ENFORCED:  http requests will be redirected to https
+	 *
+	 * is_default:   true:     links in exported data will point to https:
+	 *               false:    links in exported data will point to http:
+	 *
+	 * force_login:  true:     login forms submit to https:
+	 *               false     login forms submit to the current protocol
+	 */
+	if (!isset($opt['page']['https']['mode']))        $opt['page']['https']['mode'] = HTTPS_DISABLED;
+	if (!isset($opt['page']['https']['is_default']))  $opt['page']['https']['is_default'] = false;
+	if (!isset($opt['page']['https']['force_login'])) $opt['page']['https']['force_login'] = false;
+
+
+/* The following additional variables are generated:
+ *
+ * $opt['page']['absolute_url']           the base URL of the current request, http or https + current domain
+ *   $absolute_server_URI                   ... the same, only in lib1
+ * $opt['page']['absolute_http_url']      the http:// base URL of the current domain
+ * $opt['page']['absolute_https_url']     the https:// base URL of the currenbt domain
+ * $opt['page']['default_absolute_url']   the default-protocol base URL of the current domain (used in exported data)
+ * $opt['page']['default_primary_url']    the default-protocol base URL of the primary domain of this site
+ * $opt['page']['shortlink_url']          shortlink URL of the current protocol or false
+ * $opt['page']['default_shortlink_url']  default-protocol shortlink URL or false
+ * $opt['page']['default_primary_shortlink_url']  default-protocol shortlink URL of primary domain of this site, or false
+ * $opt['page']['https']['active']        true if the current request is https, else false
+ * $opt['page']['protocol']               the protocol of the current request, 'http' or 'https'
+ *
+ * These settings allow to run a consistently multi-protocol and multi-domain OC site.
+ * All generated URls end on '/'.
+ */
+
+function set_absolute_urls(&$opt, $primary_site_url, $primary_shortlink_domain, $lib)
+{
+	// $opt is passed as parameter because it is *local* in okapi_settings.php.
+
+	global $absolute_server_URI, $rootpath;
+
+	// 1. create settings for the primary domain, which was passed in $site_url
+
+	$primary_domain = parse_url($primary_site_url, PHP_URL_HOST);
+	if (isset($opt['domain'][$primary_domain]['url']))
+		$primary_site_url = $opt['domain'][$primary_domain]['url'];
+	if (substr($primary_site_url, -1, 1) != '/')
+		$primary_site_url .= '/';
+
+	if (isset($opt['domain'][$primary_domain]['https']['is_default']))
+		$primary_httpsdefault = $opt['domain'][$primary_domain]['https']['is_default'];
+	else
+		$primary_httpsdefault = $opt['page']['https']['is_default'];
+	if ($primary_httpsdefault)
+		$opt['page']['default_primary_url'] = 'https' . strstr($primary_site_url, '://');
+	else
+		$opt['page']['default_primary_url'] = 'http' . strstr($primary_site_url, '://');
+
+	// 2. create settings for the current domain
+
+	$current_domain = isset($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : $primary_domain;
+	$opt['page']['domain'] = $current_domain;
+
+	if (isset($opt['domain'][$current_domain]['url']))
+		$current_site_url = $opt['domain'][$current_domain]['url'];
+	else
+		$current_site_url = 'x://' . $current_domain . parse_url($primary_site_url, PHP_URL_PATH);
+	if (substr($current_site_url, -1, 1) != '/')
+		$current_site_url .= '/';
+
+	if (isset($opt['domain'][$current_domain]['https']))
+	{
+		// This overwrites *all* https settings.
+		$opt['page']['https'] = $opt['domain'][$current_domain]['https'];
+	}
+
+	$adr = strstr($current_site_url, '://');
+	$opt['page']['absolute_http_url'] = 'http' . $adr;
+	$opt['page']['absolute_https_url'] = 'https' . $adr;
+	$opt['page']['https']['active'] = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off');
+
+	if ($opt['page']['https']['active'])
+	{
+		$opt['page']['absolute_url'] = $opt['page']['absolute_https_url'];
+		$opt['page']['protocol'] = 'https';
+	}
+	else
+	{
+		$opt['page']['absolute_url'] = $opt['page']['absolute_http_url'];
+		$opt['page']['protocol'] = 'http';
+	}
+
+	if ($lib == 1)
+		$absolute_server_URI = $opt['page']['absolute_url'];
+
+	if ($opt['page']['https']['is_default'])
+	{
+		$opt['page']['default_absolute_url'] = $opt['page']['absolute_https_url'];
+		$opt['page']['default_protocol'] = 'https';
+	}
+	else
+	{
+		$opt['page']['default_absolute_url'] = $opt['page']['absolute_http_url'];
+		$opt['page']['default_protocol'] = 'http';
+	}
+
+	// 3. create shortlink URLs
+
+	if (!$primary_shortlink_domain)
+	{
+		$opt['page']['shortlink_url'] = false;
+		$opt['page']['default_shortlink_url'] = false;
+		$opt['page']['default_primary_shortlink_url'] = false;
+	}
+	else
+	{
+		if ($primary_httpsdefault)
+			$opt['page']['default_primary_shortlink_url'] = 'https://' . $primary_shortlink_domain . '/';
+		else
+			$opt['page']['default_primary_shortlink_url'] = 'http://' . $primary_shortlink_domain . '/';
+
+		if (isset($opt['domain'][$current_domain]['shortlink_domain']) && $opt['domain'][$current_domain]['shortlink_domain'])
+		{
+			$opt['page']['shortlink_url'] = $opt['page']['protocol'] . '://' . $opt['domain'][$current_domain]['shortlink_domain'] . '/';
+			$opt['page']['default_shortlink_url'] = $opt['page']['default_protocol'] . '://' . $opt['domain'][$current_domain]['shortlink_domain'] . '/';
+		}
+		else
+		{
+			if ($current_domain == $primary_domain)
+			{
+				$opt['page']['default_shortlink_url'] = $opt['page']['default_primary_shortlink_url'];
+				$opt['page']['shortlink_url'] = $opt['page']['protocol'] . strstr($opt['page']['default_shortlink_url'], '://');
+			}
+			else
+			{
+				$opt['page']['shortlink_url'] = false;
+				$opt['page']['default_shortlink_url'] = false;
+			}
+		}
+	}
+
+	// 4. set location of uploaded images
+
+	$rp = isset($opt['rootpath']) ? $opt['rootpath'] : $rootpath;
+	if (!isset($opt['logic']['pictures']['dir']))       $opt['logic']['pictures']['dir'] = $rp . 'images/uploads';  // Ocprop !
+	if (!isset($opt['logic']['pictures']['url']))       $opt['logic']['pictures']['url'] = $opt['page']['default_primary_url'] . 'images/uploads';
+	if (!isset($opt['logic']['pictures']['thumb_dir'])) $opt['logic']['pictures']['thumb_dir'] = $opt['logic']['pictures']['dir'] . '/thumbs';
+	if (!isset($opt['logic']['pictures']['thumb_url'])) $opt['logic']['pictures']['thumb_url'] = $opt['logic']['pictures']['url'] . '/thumbs';
+}
+
+
+function set_common_domain_config(&$opt)
+{
+	// $opt is passed as parameter because it is *local* in okapi_settings.php.
+
+	$domain = $opt['page']['domain'];
+
+	if (isset($opt['domain'][$domain]))
+	{
+		if (isset($opt['domain'][$domain]['locale']))
+			$opt['template']['default']['locale'] = $opt['domain'][$domain]['locale'];
+		if (isset($opt['domain'][$domain]['fallback_locale']))
+			$opt['template']['default']['fallback_locale'] = $opt['domain'][$domain]['fallback_locale'];
+
+		if (isset($opt['domain'][$domain]['country']))
+			$opt['template']['default']['country'] = $opt['domain'][$domain]['country'];
+
+		if (isset($opt['domain'][$domain]['sitename']))
+			$opt['page']['sitename'] = $opt['domain'][$domain]['sitename'];
+		if (isset($opt['domain'][$domain]['keywords']))
+			$opt['page']['meta']['keywords'] = $opt['domain'][$domain]['keywords'];
+		if (isset($opt['domain'][$domain]['description']))
+			$opt['page']['meta']['description'] = $opt['domain'][$domain]['description'];
+
+		if (isset($opt['domain'][$domain]['headoverlay']))
+			$opt['page']['headoverlay'] = $opt['domain'][$domain]['headoverlay'];
+		if (isset($opt['domain'][$domain]['slogan']))
+			$opt['page']['slogan'] = $opt['domain'][$domain]['slogan'];
+	}
+}
 
 ?>

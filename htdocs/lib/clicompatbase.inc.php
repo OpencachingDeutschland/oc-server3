@@ -47,8 +47,8 @@
 	define('regex_statpic_text', '^[a-zA-Z0-9\.\-_ @äüöÄÜÖß=)(\/\\\&*\$+~#!§%;,-?:\[\]{}¹²³\'\"`\|µ°]{0,29}$');
 
 	//load default webserver-settings and common includes
-	require_once($opt['rootpath'] . 'lib/settings.inc.php');
 	require_once($opt['rootpath'] . 'lib/consts.inc.php');
+	require_once($opt['rootpath'] . 'lib/settings.inc.php');
 	require_once($opt['rootpath'] . 'lib2/errorhandler.inc.php');
 
 	// check for banned UAs
@@ -685,15 +685,55 @@
 			sql_error();
 	}
 
-	function fetch_email_template($filename, $language)
+	function get_site_urls($domain)
+	{
+		global $opt;
+
+		if (!$domain)
+			$domain = parse_url($opt['page']['default_primary_url'], PHP_URL_HOST);
+		if ($domain == parse_url($opt['page']['default_primary_url'], PHP_URL_HOST) ||
+		    !isset($opt['domain'][$domain]['url']))
+		{
+			$site_url = $opt['page']['default_primary_url'];
+			$shortlink_url = $opt['page']['default_primary_shortlink_url'];
+		}
+		else
+		{
+			if (isset($opt['domain'][$domain]['https']['is_default']) && $opt['domain'][$domain]['https']['is_default'])
+				$protocol = 'https';
+			else
+				$protocol = 'http';
+
+			$site_url = $protocol . strstr($opt['domain'][$domain]['url'], '://');
+			if (isset($opt['domain'][$domain]['shortlink_domain']) && $opt['domain'][$domain]['shortlink_domain'])
+				$shortlink_url = $protocol . '://' . $opt['domain'][$domain]['shortlink_domain'] . '/';
+			else
+				$shortlink_url =  false;
+		}
+
+		return array('site_url' => $site_url, 'shortlink_url' => $shortlink_url);
+	}
+
+	function fetch_email_template($filename, $language, $domain)
 	{
 		global $opt, $rootpath;
 
 		if (!$language) $language = $opt['template']['default']['locale'];
 		$language = strtolower($language);
-		if (!file_exists("$rootpath/lang/de/ocstyle/email/$language/$filename.email"))
+		if (!file_exists($rootpath.'/lang/de/ocstyle/email/'.$language.'/'.$filename.'.email'))
 			$language = 'en';
-		return read_file("$rootpath/lang/de/ocstyle/email/$language/$filename.email");
+		$mailtext = read_file($rootpath.'/lang/de/ocstyle/email/'.$language.'/'.$filename.'.email');
+
+		$urls = get_site_urls($domain);
+		$mailtext = mb_ereg_replace("{site_url}", $urls['site_url'], $mailtext);
+		if ($urls['shortlink_url'])
+			$mailtext = mb_ereg_replace("{shortlink_url}", $urls['shortlink_url'], $mailtext);
+		else
+			$mailtext = mb_ereg_replace("{shortlink_url}", $urls['site_url'], $mailtext);
+
+		$mailtext = mb_ereg_replace("{email_contact}", $opt['mail']['contact'], $mailtext);
+
+		return $mailtext;
 	}
 
 ?>

@@ -355,6 +355,7 @@ class cache
 				$pictures[] = $rPicture;
 			sql_free_result($rsPictures);
 			$rLog['pictures'] = $pictures;
+			$rLog['text'] = use_current_protocol_in_html($rLog['text']);
 
 			$logs[] = $rLog;
 		}

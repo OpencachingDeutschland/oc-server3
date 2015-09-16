@@ -21,7 +21,7 @@ function search_output()
 	$kmlLine =
 '
 <Placemark>
-  <description><![CDATA['.$t_by.' {username}<br><br><a href="'.$opt['page']['absolute_url'].'viewcache.php?cacheid={cacheid}">'.$t_showdesc.'</a><br>&nbsp;<br><table cellspacing="0" cellpadding="0" border="0"><tr><td>{typeimgurl} </td><td>'.$t_type.' {type}<br>'.$t_size.' {size}</td></tr><tr><td colspan="2">'.$t_difficulty.'<br>'.$t_terrain.'</td></tr></table>]]></description>
+  <description><![CDATA['.$t_by.' {username}<br><br><a href="'.$opt['page']['default_absolute_url'].'viewcache.php?cacheid={cacheid}">'.$t_showdesc.'</a><br>&nbsp;<br><table cellspacing="0" cellpadding="0" border="0"><tr><td>{typeimgurl} </td><td>'.$t_type.' {type}<br>'.$t_size.' {size}</td></tr><tr><td colspan="2">'.$t_difficulty.'<br>'.$t_terrain.'</td></tr></table>]]></description>
   <name>{name}{archivedflag}</name>
   <LookAt>
     <longitude>{lon}</longitude>
@@ -43,6 +43,7 @@ function search_output()
 	$kmlTimeFormat = 'Y-m-d\TH:i:s\Z';
 	$style = $opt['template']['style'];
 	$kmlDetailHead = file_get_contents("resource2/misc/google-earth/search.result.caches.kml.head.xml");
+	$kmlDetailHead = mb_ereg_replace("{site_url}", $opt['page']['default_absolute_url'], $kmlDetailHead);
 
 	$rsMinMax = sql_slave('
 		SELECT
@@ -134,7 +135,7 @@ function search_output()
 		$thisline = mb_ereg_replace('{username}', xmlentities($r['username']), $thisline);
 		$thisline = mb_ereg_replace('{cacheid}', xmlentities($r['cacheid']), $thisline);
 
-		$thisline = mb_ereg_replace('{urlbase}', xmlentities($opt['page']['absolute_url']), $thisline);
+		$thisline = mb_ereg_replace('{urlbase}', xmlentities($opt['page']['default_absolute_url']), $thisline);
 
 		append_output($thisline);
 	}

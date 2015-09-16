@@ -15,13 +15,13 @@ Nuovi log per le cache che osservi:
 
 
 Puoi vedere e modificare la tua lista delle cache osservate qui: 
-http://www.opencaching.de/mywatches.php?action=edit.
+{site_url}mywatches.php?action=edit.
 
 Happy Geocaching,
-the Opencaching.de Team
+the Opencaching.de / Opencaching.it Team
 
 ---
 Questa E-Mail è stata generata automaticamente - per favore non rispondere.
 Se vuoi contattare Opencaching.de/.it, fai riferimento alla pagina 
-http://www.opencaching.de/articles.php?page=contact. 
-In casi urgenti puoi inviare una e-mail a: contact@opencaching.de.
+{site_url}articles.php?page=contact.
+In casi urgenti puoi inviare una e-mail a: {email_contact}.

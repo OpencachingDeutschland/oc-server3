@@ -25,11 +25,20 @@
 	// include the main library
 	require($opt['rootpath'] . 'lib2/common.inc.php');
 
-	// https protection?
-	if ($opt['page']['allowhttps'] == false)
+	// enforce http or https?
+	if ($opt['page']['https']['mode'] == HTTPS_DISABLED)
 	{
-		if (isset($_SERVER['HTTPS']))
-			$tpl->redirect($opt['page']['absolute_url']);
+		if ($opt['page']['https']['active'])
+			$tpl->redirect('http://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI']);
+		$opt['page']['force_https_login'] = false;
+	}
+	else if ($opt['page']['https']['mode'] == HTTPS_ENFORCED)
+	{
+		if (!$opt['page']['https']['active'])
+		{
+			$tpl->redirect('https://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI']);
+		}
+		$opt['page']['force_https_login'] = true;
 	}
 
 

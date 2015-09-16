@@ -22,11 +22,13 @@ class sitemaps
 	function run()
 	{
 		global $opt;
-
 		if ($opt['cron']['sitemaps']['generate'] == true)
 		{
 			$this->oSitemapXML = new sitemapxml();
-			$this->oSitemapXML->open($opt['rootpath'], $opt['page']['absolute_url']);
+			$this->oSitemapXML->open(
+				$opt['rootpath'], 
+				$opt['page']['https']['mode'] == HTTPS_ENFORCED ? $opt['page']['absolute_https_url'] : $opt['page']['absolute_http_url']
+				);
 
 			$this->oSitemapXML->write('index.php', time(), 'always');
 			$this->write_viewacache_urls();
@@ -51,7 +53,7 @@ class sitemaps
 	{
 		global $opt;
 
-		$url = urlencode($opt['page']['absolute_url'] . 'sitemap.xml');
+		$url = urlencode(($opt['page']['https']['mode'] == HTTPS_ENFORCED ? $opt['page']['absolute_https_url'] : $opt['page']['absolute_http_url']) . 'sitemap.xml');
 
 		$this->ping_searchengine('http://www.google.com/webmasters/tools/ping?sitemap=' . $url);
 		$this->ping_searchengine('http://search.yahooapis.com/SiteExplorerService/V1/updateNotification?appid=USERID&url=' . $url);

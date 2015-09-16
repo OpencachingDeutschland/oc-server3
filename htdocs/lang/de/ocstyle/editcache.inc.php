@@ -38,6 +38,7 @@
 	$pictureline = '<tr><td colspan="2"><a href="{link}">{title}</a> [<a href="picture.php?action=edit&uuid={uuid}">' . t('Edit') . '</a>] [<a href="picture.php?action=delete&uuid={uuid}">' . t('Delete') . '</a>]</td></tr>';
 	  // Ocprop: <a href=\"http://.*?\.opencaching\.de/images/uploads/.*?\">(.*?)<\/a>.*?\[<a href=\"picture\.php\?action=[a-z]*?\&uuid=(.*?)\">
 	$picturelines = '{lines}<tr><td colspan="2">&nbsp;</td></tr>';
+	$gc_com_msg2 = t('To prevent any problems with geocaching.com we want to please you to upload all linked pictures to %1 as well and link the pictures in the HTML code to these on %1');
 
 	$nowaypoints = '<tr><td colspan="2">' . t('No waypoints available') . '</td></tr>';
 	$waypointline = '<tr bgcolor="#ffffff"><td><table class="narrowtable" cellspacing="0" cellpadding="0"><tr><td><img src="{wp_image}" /></td><td>{wp_type}</td></tr></table></td><td><table class="narrowtable"><tr><td style="white-space:nowrap">{wp_coordinate}</td></tr></table></tp><td>{wp_show_description}</td><td>[<a href="childwp.php?cacheid={cacheid}&childid={childid}">' . t('Edit') . '</a>] [<a href="childwp.php?cacheid={cacheid}&deleteid={childid}">' . t('Delete') . '</a>]</td></tr>';

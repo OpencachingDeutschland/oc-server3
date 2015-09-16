@@ -43,17 +43,52 @@
 	
 	//site in service? Set to false when doing bigger work on the database to prevent error's
 	if (!isset($site_in_service)) $site_in_service = true;
+
+	/* multi-domain settings
+	 *
+	 * If one of the domains matches $_SERVER['SERVER_NAME'], the default values (in
+	 * config2/common-settings.inc.php) will be overwritten. Can be used to host more
+	 * than one locale on one server with multiple default-locales.
+	 * Must be overwritten in BOTH lib1 and lib2 settings.inc.php!!
+	 */
+	//$opt['domain']['www.opencaching.de']['url'] = 'http://www.opencaching.de/';
+	//$opt['domain']['www.opencaching.de']['shortlink_domain'] = 'opencaching.de';
+	//$opt['domain']['www.opencaching.de']['sitename'] = 'Opencaching.de';
+	//$opt['domain']['www.opencaching.de']['locale'] = 'DE';
+	//$opt['domain']['www.opencaching.de']['fallback_locale'] = 'EN';
+	//$opt['domain']['www.opencaching.de']['style'] = 'ocstyle';
+	//$opt['domain']['www.opencaching.de']['cookiedomain'] = '.opencaching.de';
+	//$opt['domain']['www.opencaching.de']['country'] = 'DE';
+	//$opt['domain']['www.opencaching.de']['keywords'] = 'Geocaching, Geocache, Cache, Schatzsuche, GPS, kostenlos, GPX, Koordinaten, Hobby, Natur';  // 5-10 keywords are recommended
+	//$opt['domain']['www.opencaching.de']['description'] = 'Opencaching.de ist das freie Portal für Geocaching, ein Schatzsuche-Spiel. Mittels GPS-Koordinaten sind Behälter oder Objekte zu finden.';
+	//$opt['domain']['www.opencaching.de']['headoverlay'] = 'oc_head_alpha3';
+	//
+	// When overriding HTTPS settings, you must override *all* of them!
+	//$opt['domain']['www.opencaching.de']['https']['mode'] = HTTPS_ENABLED;
+	//$opt['domain']['www.opencaching.de']['https']['is_default'] = false;
+	//$opt['domain']['www.opencaching.de']['https']['force_login'] = true;
+
+	//$opt['domain']['www.opencaching.pl']['url'] = 'http://www.opencaching.pl/';
+	//$opt['domain']['www.opencaching.pl']['sitename'] = 'Opencaching.PL';
+	//$opt['domain']['www.opencaching.pl']['locale'] = 'PL';
+	//$opt['domain']['www.opencaching.pl']['fallback_locale'] = 'EN';
+	//$opt['domain']['www.opencaching.pl']['style'] = 'ocstyle';
+	//$opt['domain']['www.opencaching.pl']['cookiedomain'] = '.opencaching.pl';
+	//$opt['domain']['www.opencaching.pl']['country'] = 'PL';
+	//$opt['domain']['www.opencaching.pl']['keywords'] = 'geocaching, geocache, cache, poszukiwanie skarbów, GPS, wolne, GPX, koordynować, hobby, natura';  // 5-10 keywords are recommended
+	//$opt['domain']['www.opencaching.pl']['description'] = 'Opencaching.pl jest darmowy portal dla Geocaching, gry Treasure Hunt. Za pomocą współrzędnych GPS można znaleźć pojemniki lub obiektów.';
+	//$opt['domain']['www.opencaching.pl']['headoverlay'] = 'oc_head_alpha3_pl';
 	
-	//if you are running this site on a other domain than staging.opencaching.de, you can set
-	//this in private_db.inc.php, but don't forget the ending /
-	$absolute_server_URI = 'http://www.opencaching.de/';
+	// Supply the site's primary URL and the shortlink domain here.
+	// Can be overriden by domain settings.
+	// Set shortlink domain to false if not available.
+	set_absolute_urls($opt, 'http://www.opencaching.de/', 'opencaching.de', 1);
 	
 	// 'From' EMail address for admin error messages and log removals
-	if (!isset($emailaddr)) $emailaddr = 'noreply@opencaching.de';
-	
-	// location of cache images
-	if (!isset($picdir)) $picdir = $rootpath . 'images/uploads';  // Ocprop
-	if (!isset($picurl)) $picurl = $absolute_server_URI . 'images/uploads';
+	if (!isset($emailaddr)) $emailaddr = 'noreply@do.main';
+
+	// team contact email address 
+	if (!isset($opt['mail']['contact'])) $opt['mail']['contact'] = 'contact@do.main';
 
 	// Thumbsize
 	$thumb_max_width = 175;
@@ -98,16 +133,6 @@
 	$zip_basedir = '/path/to/html/download/zip/';
 	$zip_wwwdir = 'download/zip/';
 
-	// cache_maps-settings (not in use)
-	//$cachemap_wms_url = 'http://www.top-sectret.oc/{min_lat},{min_lon},{max_lat},{max_lon}';
-	$cachemap_wms_url = 'http://www.opencaching.de/cachemaps.php?wp={wp_oc}';
-	$cachemap_size_lat = 0.2;
-	$cachemap_size_lon = 0.2;
-	$cachemap_pixel_x = 200;
-	$cachemap_pixel_y = 200;
-	$cachemap_url = 'images/cachemaps/';
-	$cachemap_dir = $rootpath . $cachemap_url;
-
 	$opt['translate']['debug'] = false;
   
 	/* data license settings
@@ -123,33 +148,6 @@
 
   // include all locale settings
   require_once($rootpath . 'config2/locale.inc.php');
-
-	/* multi-domain settings
-	 *
-	 * If one of the domains matches $_SERVER['SERVER_NAME'], the default values (in
-	 * config2/common-settings.inc.php) will be overwritten. Can be used to host more
-	 * than one locale on one server with multiple default-locales.
-	 * Must be overwritten in BOTH lib1 and lib2 settings.inc.php!!
-	 */
-	//$opt['domain']['www.opencaching.de']['url'] = 'http://www.opencaching.de/';
-	//$opt['domain']['www.opencaching.de']['locale'] = 'DE';
-	//$opt['domain']['www.opencaching.de']['fallback_locale'] = 'EN';
-	//$opt['domain']['www.opencaching.de']['style'] = 'ocstyle';
-	//$opt['domain']['www.opencaching.de']['cookiedomain'] = '.opencaching.de';
-	//$opt['domain']['www.opencaching.de']['country'] = 'DE';
-	//$opt['domain']['www.opencaching.de']['keywords'] = 'Geocaching, Geocache, Cache, Schatzsuche, GPS, kostenlos, GPX, Koordinaten, Hobby, Natur';  // 5-10 keywords are recommended
-	//$opt['domain']['www.opencaching.de']['description'] = 'Opencaching.de ist das freie Portal für Geocaching, ein Schatzsuche-Spiel. Mittels GPS-Koordinaten sind Behälter oder Objekte zu finden.';
-	//$opt['domain']['www.opencaching.de']['headoverlay'] = 'oc_head_alpha3';
-
-	//$opt['domain']['www.opencaching.pl']['url'] = 'http://www.opencaching.pl/';
-	//$opt['domain']['www.opencaching.pl']['locale'] = 'PL';
-	//$opt['domain']['www.opencaching.de']['fallback_locale'] = 'EN';
-	//$opt['domain']['www.opencaching.pl']['style'] = 'ocstyle';
-	//$opt['domain']['www.opencaching.pl']['cookiedomain'] = '.opencaching.pl';
-	//$opt['domain']['www.opencaching.pl']['country'] = 'PL';
-	//$opt['domain']['www.opencaching.de']['keywords'] = 'geocaching, geocache, cache, poszukiwanie skarbów, GPS, wolne, GPX, koordynować, hobby, natura';  // 5-10 keywords are recommended
-	//$opt['domain']['www.opencaching.de']['description'] = 'Opencaching.pl jest darmowy portal dla Geocaching, gry Treasure Hunt. Za pomocą współrzędnych GPS można znaleźć pojemniki lub obiektów.';
-	//$opt['domain']['www.opencaching.de']['headoverlay'] = 'oc_head_alpha3_pl';
 
 	/* replicated slave databases
 	 * use same config as in config2/settings.inc.php (!)
@@ -189,14 +187,14 @@
  */
 function post_config()
 {
-	global $menu;
+	global $menu, $locale;
 
 	$menu[] = array(
 		'title' => t('Geokrety'),
 		'menustring' => t('Geokrety'),
 		'siteid' => 'geokrety',
 		'visible' => true,
-		'filename' => 'http://geokrety.org/index.php?lang=de_DE.UTF-8'
+		'filename' => 'http://geokrety.org/index.php?lang=' . (isset($locale) ? strtolower($locale) : 'de')
 	);
 
 	$menu[] = array(

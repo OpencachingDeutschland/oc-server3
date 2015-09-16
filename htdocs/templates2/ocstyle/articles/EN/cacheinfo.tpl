@@ -36,7 +36,7 @@
 				</tr>
 				<tr>
 					<td valign="top" style="padding-top:5px"><img src="resource2/ocstyle/images/cacheicon/moving.gif" width="32" border="0" height="32" align="left" alt="" title="Moving Cache" /></td>
-					<td><p><span class="subtitle">Moving Cache</span>: The cache is changing positions. For example, it will be placed at a new location by each finder, who logs the new coordinates and maybe a new quest or puzzle at Opencaching.de. Or the cache is attached to a vehicle, whose coordinates have to be determined.</p></td>
+					<td><p><span class="subtitle">Moving Cache</span>: The cache is changing positions. For example, it will be placed at a new location by each finder, who logs the new coordinates and maybe a new quest or puzzle at Opencaching. Or the cache is attached to a vehicle, whose coordinates have to be determined.</p></td>
 				</tr>
 				<tr>
 					<td valign="top" style="padding-top:5px"><img src="resource2/ocstyle/images/cacheicon/virtual.gif" width="32" border="0" height="32" align="left" alt="" title="Virtual cache" /></td>

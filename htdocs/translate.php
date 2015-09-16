@@ -42,6 +42,7 @@
 		array( 'table' => 'cache_size',           'text' => 'name',        'trans_id' => 'trans_id' ),
 		array( 'table' => 'cache_status',         'text' => 'name',        'trans_id' => 'trans_id' ),
 		array( 'table' => 'cache_type',           'text' => 'name',        'trans_id' => 'trans_id' ),
+		array( 'table' => 'cache_type',           'text' => 'short2',      'trans_id' => 'short2_trans_id' ),
 		array( 'table' => 'coordinates_type',     'text' => 'name',        'trans_id' => 'trans_id' ),
 		array( 'table' => 'countries',            'text' => 'name',        'trans_id' => 'trans_id' ),
 		array( 'table' => 'languages',            'text' => 'name',        'trans_id' => 'trans_id' ),

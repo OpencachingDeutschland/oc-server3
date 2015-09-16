@@ -699,10 +699,9 @@ function textexport($translang, $all)
 		$translated = sql_value("SELECT `text` FROM `sys_trans_text` WHERE `trans_id`='&1' AND `lang`='&2'", '', $r['id'], $translang);
 		if (($all) || (mb_strlen($translated)==0))
 		{
-			$thisline = $r['text'];
-			$thisline .= "\r\n";
-			$thisline .= $translated;
-			$thisline .= "\r\n";
+			$thisline = $r['id'] . "\r\n";
+			$thisline .= $r['text'] . "\r\n";
+			$thisline .= $translated . "\r\n";
 			$thisline .= "\r\n";
 			echo($thisline);
 		}
@@ -722,32 +721,25 @@ function textimport($lang)
 	$data = file_get_contents($_FILES['textfile']['tmp_name']);
 	$lines = explode("\n", $data);
 
-	/* $saTexts[code_text]['id']
-	* $saTexts[code_text]['code']
-	* $saTexts[code_text]['de']['old']
-	* $saTexts[code_text]['de']['new']
-	* $saTexts[code_text]['en']['old']
-	* $saTexts[code_text]['en']['new']
-	* $saTexts[code_text]['...']
-	*/
 	$saTexts = array();
 
-	for ($i=0; $i+1 < count($lines); $i += 3)
+	for ($i=0; $i+1 < count($lines); $i += 4)
 	{
-		$sEnText = trim($lines[$i]);
-		$sLangText = trim($lines[$i+1]);
+		$nId = trim($lines[$i]);
+		$sEnText = trim($lines[$i+1]);
+		$sLangText = trim($lines[$i+2]);
 
-		if ($sEnText . $sLangText != '')
+		if ($nId != '')
 		{
-			$transId = sql_value("SELECT `trans_id` FROM `sys_trans_text` WHERE `lang`='EN' AND BINARY `text`='&1'", 0, $sEnText);
+			$transId = sql_value("SELECT `trans_id` FROM `sys_trans_text` WHERE `trans_id`='&1' AND `lang`='EN' AND BINARY `text`='&2'", 0, $nId, $sEnText);
 			if ($transId == 0)
-				$transId = sql_value("SELECT `id` FROM `sys_trans` WHERE BINARY `text`='&1'", 0, $sEnText);
+				$transId = sql_value("SELECT `id` FROM `sys_trans` WHERE `id`='&1' AND BINARY `text`='&2'", 0, $nId, $sEnText);
 			if ($transId == 0)
 			{
 				if ($sLangText != '')
 				{
 					// text not in sys_trans => code changed while translation has been done
-					$saTexts[$sEnText]['id'] = 0;
+					$saTexts[$sEnText]['id'] = $nId;
 					$saTexts[$sEnText]['count'] = count($saTexts);
 					$saTexts[$sEnText]['type'] = 1;
 					$saTexts[$sEnText]['code'] = '';

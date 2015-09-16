@@ -183,6 +183,10 @@
 							<input type="hidden" name="code{$textItem.count}" value="{$textItem.code|base64encode}" />
 						</td>
 					</tr>
+					<tr>
+						<td></td>
+						<td><b>ID</b> {$textItem.id|escape}</td>
+					</tr>
 					{if $textItem.code}
 					<tr>
 						<td></td>

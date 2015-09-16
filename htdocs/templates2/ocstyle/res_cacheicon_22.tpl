@@ -20,7 +20,7 @@
 {elseif $cachetype==6}
 	<img src="{$opt.page.absolute_urlpath}resource2/{$opt.template.style}/images/cacheicon/event.gif" alt="{t}Event Geocache{/t}" title="{t}Event Geocache{/t}" border="0" width="22" height="22" align="{$alignicon}" style="margin-right: 5px;" />
 {elseif $cachetype==7}
-	<img src="{$opt.page.absolute_urlpath}resource2/{$opt.template.style}/images/cacheicon/mystery.gif" alt="{t}Quizcache{/t}" title="{t}Quizcache{/t}" border="0" width="22" height="22" align="{$alignicon}" style="margin-right: 5px;" />
+	<img src="{$opt.page.absolute_urlpath}resource2/{$opt.template.style}/images/cacheicon/mystery.gif" alt="{t}Quiz Cache{/t}" title="{t}Quiz Cache{/t}" border="0" width="22" height="22" align="{$alignicon}" style="margin-right: 5px;" />
 {elseif $cachetype==8}
 	<img src="{$opt.page.absolute_urlpath}resource2/{$opt.template.style}/images/cacheicon/mathe.gif" alt="{t}Math/Physics Geocache{/t}" title="{t}Math/Physics Geocache{/t}" border="0" width="22" height="22" align="{$alignicon}" style="margin-right: 5px;" />
 {elseif $cachetype==9}

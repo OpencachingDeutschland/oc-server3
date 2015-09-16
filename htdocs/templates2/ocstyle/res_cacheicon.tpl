@@ -19,7 +19,7 @@
 {elseif $cachetype==6}
 	<img src="resource2/{$opt.template.style}/images/cacheicon/event{if $greyed}-grey{/if}.gif" alt="{t}Event Geocache{/t}" title="{t}Event Geocache{/t}" border="0" width="32" height="32" class="icon32" id="{if $typeid}cacheicon{$cachetype}{else}viewcache-cacheicon{/if}" onclick="{$onclick}" />
 {elseif $cachetype==7}
-	<img src="resource2/{$opt.template.style}/images/cacheicon/mystery{if $greyed}-grey{/if}.gif" alt="{t}Quizcache{/t}" title="{t}Quizcache{/t}" border="0" width="32" height="32" class="icon32" id="{if $typeid}cacheicon{$cachetype}{else}viewcache-cacheicon{/if}" onclick="{$onclick}" />
+	<img src="resource2/{$opt.template.style}/images/cacheicon/mystery{if $greyed}-grey{/if}.gif" alt="{t}Quiz Cache{/t}" title="{t}Quiz Cache{/t}" border="0" width="32" height="32" class="icon32" id="{if $typeid}cacheicon{$cachetype}{else}viewcache-cacheicon{/if}" onclick="{$onclick}" />
 {elseif $cachetype==8}
 	<img src="resource2/{$opt.template.style}/images/cacheicon/mathe{if $greyed}-grey{/if}.gif" alt="{t}Math/Physics Geocache{/t}" title="{t}Math/Physics Geocache{/t}" border="0" width="32" height="32" class="icon32" id="{if $typeid}cacheicon{$cachetype}{else}viewcache-cacheicon{/if}" onclick="{$onclick}" />
 {elseif $cachetype==9}

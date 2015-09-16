@@ -737,7 +737,7 @@ INSERT INTO `profile_options` (`id`, `name`, `trans_id`, `internal_use`, `defaul
 INSERT INTO `profile_options` (`id`, `name`, `trans_id`, `internal_use`, `default_value`, `check_regex`, `option_order`, `option_input`, `optionset`) VALUES ('3', 'Description', '114', '0', '', NULL, '100', 'textarea', '3');
 INSERT INTO `profile_options` (`id`, `name`, `trans_id`, `internal_use`, `default_value`, `check_regex`, `option_order`, `option_input`, `optionset`) VALUES ('4', 'Age', '745', '0', '', '^[[0-9]+$', '80', 'text', '1');
 INSERT INTO `profile_options` (`id`, `name`, `trans_id`, `internal_use`, `default_value`, `check_regex`, `option_order`, `option_input`, `optionset`) VALUES ('5', 'Show statistics', '744', '1', '1', '^[0-1]$', '50', 'checkbox', '1');
-INSERT INTO `profile_options` (`id`, `name`, `trans_id`, `internal_use`, `default_value`, `check_regex`, `option_order`, `option_input`, `optionset`) VALUES ('6', 'Menu option \'Map\' shows', '1867', '1', '1', '^[0-1]$', '110', 'select:0=small map,1', '2');
+INSERT INTO `profile_options` (`id`, `name`, `trans_id`, `internal_use`, `default_value`, `check_regex`, `option_order`, `option_input`, `optionset`) VALUES ('6', 'Menu option \'Map\' shows:', '1867', '1', '1', '^[0-1]$', '110', 'select:0=small map,1', '2');
 INSERT INTO `profile_options` (`id`, `name`, `trans_id`, `internal_use`, `default_value`, `check_regex`, `option_order`, `option_input`, `optionset`) VALUES ('7', 'Show overview map:', '1870', '1', '0', '^[0-1]$', '120', 'checkbox', '2');
 INSERT INTO `profile_options` (`id`, `name`, `trans_id`, `internal_use`, `default_value`, `check_regex`, `option_order`, `option_input`, `optionset`) VALUES ('8', 'Maximum caches on map<br />(%1-%2, 0=automatic):', '1871', '1', '0', '^[0-9]{1,4}$', '130', 'text', '2');
 INSERT INTO `profile_options` (`id`, `name`, `trans_id`, `internal_use`, `default_value`, `check_regex`, `option_order`, `option_input`, `optionset`) VALUES ('9', 'Cache icons:', '1872', '1', '1', '^[1-9]$', '140', 'select:1=classic OC,', '2');
@@ -2355,7 +2355,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1862', 'Moving'
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1863', 'Drive-In ', '2013-02-28 00:00:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1865', 'Loading map', '2013-02-28 00:00:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1866', 'Instructions', '2013-02-28 00:00:00');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1867', 'Menu option \'Map\' shows', '2013-03-03 00:00:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1867', 'Menu option \'Map\' shows:', '2013-03-03 00:00:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1868', 'small map', '2013-03-03 00:00:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1869', 'fullscreen map', '2013-03-03 00:00:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1870', 'Show overview map:', '2013-03-03 00:00:00');
@@ -8429,7 +8429,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1577', 'EN', 'Overnight stay necessary', '2010-09-12 23:15:47');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1578', 'EN', 'Available 24 hours', '2010-09-12 23:15:05');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1579', 'EN', 'Only available at specified times', '2010-09-12 23:16:10');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1580', 'EN', 'by day only', '2010-09-12 23:15:41');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1580', 'EN', 'By day only', '2010-09-12 23:15:41');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1581', 'EN', 'Not at high water level', '2010-09-12 23:15:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1582', 'EN', 'All seasons', '2010-09-12 23:14:41');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1583', 'EN', 'Breeding season / protected nature', '2010-09-12 23:15:14');
@@ -8685,7 +8685,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1863', 'EN', 'Drive-In', '2012-10-11 00:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1865', 'EN', 'Loading map', '2012-10-11 00:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1866', 'EN', 'Instructions', '2012-10-11 00:00:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1867', 'EN', 'Menu option \'Map\' shows', '2012-10-11 00:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1867', 'EN', 'Menu option \'Map\' shows:', '2012-10-11 00:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1868', 'EN', 'small map', '2012-10-11 00:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1869', 'EN', 'fullscreen map', '2012-10-11 00:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1870', 'EN', 'Show overview map:', '2012-10-11 00:00:00');
@@ -10572,7 +10572,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1863', 'ES', 'Drive-In', '2012-10-11 00:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1865', 'ES', 'Cargando mapa', '2013-03-16 17:23:42');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1866', 'ES', 'Instrucciones', '2013-03-16 17:23:42');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1867', 'ES', '\'Map\' opción de menu', '2013-03-16 17:23:42');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1867', 'ES', '\'Map\' opción de menu:', '2013-03-16 17:23:42');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1868', 'ES', 'pequeño mapa', '2013-03-16 17:23:42');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1869', 'ES', 'mapa en pantalla completa', '2013-03-16 17:23:42');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1870', 'ES', 'Mostrar mapa general:', '2013-03-16 17:23:42');
@@ -12183,12 +12183,12 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1866', 'FR', 'Instructions', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1867', 'FR', 'L\'option de menu «\&nbsp;carte\&nbsp;» affiches\&nbsp;:', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1868', 'FR', 'Petite carte', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1869', 'FR', 'carte en plein écran', '2015-08-25 01:29:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1869', 'FR', 'Carte en plein écran', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1870', 'FR', 'Voir la carte d\'aperçu\&nbsp;:', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1871', 'FR', 'Maximum de caches sur la carte<br />(%1-%2, 0=automatique)\&nbsp;:', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1872', 'FR', 'Icônes de cache\&nbsp;:', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1873', 'FR', 'OC classique', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1874', 'FR', 'style OKAPI', '2015-08-25 01:29:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1874', 'FR', 'Style OKAPI', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1875', 'FR', 'Vous devez être connecté pour modifier les paramètres de la carte.', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1876', 'FR', 'Carte de données \&copy;<a href=\"http://www.openstreetmap.org/copyright\" target=\"_blank\">OpenStreetMap</a> contributors', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1877', 'FR', 'tiles fournies par <a href=\"http://www.mapquest.com/\" target=\"_blank\">MapQuest</a>', '2015-08-25 01:29:00');

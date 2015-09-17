@@ -69,7 +69,7 @@ function processEditorInput($oldDescMode, $descMode, $text)
 			}
 
 			// ... and HTML to plain text
-			$text = html2plaintext($text, $oldDescMode = 0);
+			$text = html2plaintext($text, $oldDescMode = 0, 0);
 
 			$text = str_replace(array('[s![',']!s]'), '', $text);
 		}
@@ -81,8 +81,10 @@ function processEditorInput($oldDescMode, $descMode, $text)
 
 // $texthtml0 is set if the text is from cache_desc.desc or cache_logs.text
 // and text_html is 0, i.e. the text was edited in the "text" editor mode.
+//
+// If $wrap is > 0, longer lines will be wrapped to new lines.
 
-function html2plaintext($text, $texthtml0)
+function html2plaintext($text, $texthtml0, $wrap)
 {
 	global $opt, $absolute_server_URI;
 
@@ -95,6 +97,7 @@ function html2plaintext($text, $texthtml0)
 	else
 	{
 		$h2t = new html2text($text);
+		$h2t->width = $wrap;
 		$h2t->set_base_url(isset($opt['page']['absolute_url']) ? $opt['page']['absolute_url'] : $absolute_server_URI);
 		$text = $h2t->get_text();
 

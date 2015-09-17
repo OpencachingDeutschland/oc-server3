@@ -114,7 +114,7 @@
 								$message = $removed_message_title . "\n" . $message . "\n" . $removed_message_end;
 							}
 
-							$logtext = html2plaintext($log_record['log_text'], $log_record['text_html'] == 0);
+							$logtext = html2plaintext($log_record['log_text'], $log_record['text_html'] == 0, EMAIL_LINEWRAP);
 
 							//get cache owner name
 							$cache_owner_rs = sql("SELECT `username` FROM `user` WHERE `user_id`='&1'", $log_record['cache_owner_id']);

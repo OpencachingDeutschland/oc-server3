@@ -137,7 +137,7 @@ class html2text
      *  @var integer $width
      *  @access public
      */
-    var $width = 70;
+    var $width = 72;
 
     /**
      *  List of preg* regular expression patterns to search for,

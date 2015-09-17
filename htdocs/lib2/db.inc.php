@@ -1126,7 +1126,8 @@
 		sql_free_result($rs);
 
 		$sTableSql = $r[1];
-		$sTableSql = preg_replace('/ AUTO_INCREMENT=[0-9]{1,} /', ' ', $sTableSql);
+		$sTableSql = preg_replace("/ AUTO_INCREMENT=[0-9]{1,} /", ' ', $sTableSql);
+		$sTableSql = preg_replace("/,\n +?(KEY )?`okapi_syncbase`.+?(,)?\n/", "\\2\n", $sTableSql);
 
 		fwrite($f, "SET NAMES 'utf8';\n");
 		fwrite($f, "DROP TABLE IF EXISTS `" . sql_escape($table) . "`;\n");

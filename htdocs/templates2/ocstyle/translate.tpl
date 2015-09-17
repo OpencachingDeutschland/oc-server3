@@ -38,10 +38,11 @@
 		<a href="translate.php?translang={$translang}&action=scan">{t}Scan source codes{/t}</a><br />
 		<br />
 		<a href="translate.php?translang={$translang}&action=listnew">{t}Show new translations{/t}</a><br />
-		<a href="translate.php?translang={$translang}&action=clearcache">{t}Clear smarty cache{/t}</a><br />
-		<a href="translate.php?translang={$translang}&action=listfaults">{t}Show translations no longer referenced{/t}</a><br />
 		<a href="translate.php?translang={$translang}&action=listall">{t}Show all translations{/t}</a><br />
+		<a href="translate.php?translang={$translang}&action=listfaults">{t}Show translations no longer referenced{/t}</a><br />
+		<br />
 		<a href="translate.php?translang={$translang}&action=verify">{t}Show inconsistencies{/t}</a> (EN)<br />
+		<a href="translate.php?translang={$translang}&action=clearcache">{t}Clear smarty cache{/t}</a><br />
 		<a href="translate.php?translang={$translang}&action=resetids">{t}Reorder ID's{/t}</a> {t}(before an export){/t}<br />
 		<a href="translate.php?translang={$translang}&action=export">{t}SQL Export{/t}</a><br />
 		<br />
@@ -71,8 +72,8 @@
 		{elseif $action=="listall"}
 			<p>{t}All translations:{/t}</p>
 		{/if}
-		<br />
 		<table class="table">
+			<tr><td></td></td></tr>
 			{foreach from=$trans item=transItem}
 				<tr>
 					<td valign="top"><a href="translate.php?translang={$translang}&action=edit&id={$transItem.id}">{$transItem.id}</a></td>

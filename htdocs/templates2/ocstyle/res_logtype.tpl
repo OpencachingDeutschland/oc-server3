@@ -18,9 +18,9 @@
 {elseif $type==9}
 	<img src="resource2/{$opt.template.style}/images/log/16x16-archived.png" alt="{t}Archived{/t}" title="{t}Archived{/t}" />
 {elseif $type==10}
-	<img src="resource2/{$opt.template.style}/images/log/16x16-active.png" alt="{t}Ready for search{/t}" title="{t}Ready for search{/t}" />
+	<img src="resource2/{$opt.template.style}/images/log/16x16-active.png" alt="{t}Available{/t}" title="{t}Available{/t}" />
 {elseif $type==11}
-	<img src="resource2/{$opt.template.style}/images/log/16x16-disabled.png" alt="{t}Temporary not available{/t}" title="{t}Temporary not available{/t}" />
+	<img src="resource2/{$opt.template.style}/images/log/16x16-disabled.png" alt="{t}Temporarily not available{/t}" title="{t}Temporarily not available{/t}" />
 {elseif $type==13}
 	<img src="resource2/{$opt.template.style}/images/log/16x16-locked.png" alt="{t}Locked{/t}" title="{t}Locked{/t}" />
 {elseif $type==14}

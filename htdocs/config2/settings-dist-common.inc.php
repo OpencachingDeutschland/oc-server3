@@ -13,7 +13,7 @@
 	$opt['page']['subtitle1'] = 'Geocaching with Opencaching';
 	$opt['page']['subtitle2'] = '';
 	$opt['page']['sitename'] = 'Opencaching.de';
-	$opt['page']['slogan'] = 'Opencaching.de - Geocaching in Deutschland, Oesterreich und der Schweiz';
+	$opt['page']['slogan'] = 'Opencaching.de - Geocaching in Deutschland, Österreich und der Schweiz';
 
 	// directory of rotator pictures and script, relative to head images dir
 	$opt['page']['headimagepath'] = '';

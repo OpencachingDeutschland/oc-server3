@@ -163,16 +163,18 @@
 							$archived = (sqlValue("SELECT `id` FROM `pictures_modified` WHERE `id`=" . $r['id'], 0) > 0);
 							$fna = mb_split('\\/', $r['url']);
 							$filename = end($fna);
-							if (mb_substr($picdir, -1, 1) != '/')
-								$path = $picdir . "/";
-							else
-								$path = $picdir;
+							$path = $opt['logic']['pictures']['dir'];
+							if (mb_substr($path, -1, 1) != '/')
+								$path .= '/';
 
 							if ($archived)
 								@rename($path . $filename, $path . "deleted/" . $filename);
 							else
 								@unlink($path . $filename);
 
+							$path = $opt['logic']['pictures']['thumb_dir'];
+							if (mb_substr($path, -1, 1) != '/')
+								$path .= '/';
 							$path .= mb_strtoupper(mb_substr($filename, 0, 1)) . '/' .
 							         mb_strtoupper(mb_substr($filename, 1, 1)) . '/';
 							@unlink($path . $filename);  // Thumb

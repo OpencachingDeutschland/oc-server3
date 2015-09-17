@@ -51,7 +51,7 @@ function __autoload($class_name)
 		if (strpos($useragent, $ua) !== false)
 			die();
 
-	set_domain();
+	set_domain_config();
 
 	if (!(isset($_REQUEST['sqldebug']) && $_REQUEST['sqldebug']=='1'))
 		$opt['debug'] = $opt['debug'] & ~DEBUG_SQLDEBUGGER;
@@ -120,22 +120,24 @@ function __autoload($class_name)
 		exit;
 	}
 
-// normalize important settings
+// normalize paths and urls
 function normalize_settings()
 {
 	global $opt;
 
 	$opt['charset']['iconv'] = strtoupper($opt['charset']['iconv']);
-	if (substr($opt['page']['absolute_url'], -1, 1) != '/')
-		$opt['page']['absolute_url'] .= '/';
+
 	if (substr($opt['logic']['pictures']['url'], -1, 1) != '/')
 		$opt['logic']['pictures']['url'] .= '/';
 	if (substr($opt['logic']['pictures']['dir'], -1, 1) != '/')
 		$opt['logic']['pictures']['dir'] .= '/';
-	if (substr($opt['logic']['podcasts']['url'], -1, 1) != '/')
-		$opt['logic']['podcasts']['url'] .= '/';
-	if (substr($opt['logic']['podcasts']['dir'], -1, 1) != '/')
-		$opt['logic']['podcasts']['dir'] .= '/';
+	if (substr($opt['logic']['pictures']['thumb_url'], -1, 1) != '/')
+		$opt['logic']['pictures']['thumb_url'] .= '/';
+	if (substr($opt['logic']['pictures']['thumb_dir'], -1, 1) != '/')
+		$opt['logic']['pictures']['thumb_dir'] .= '/';
+
+	if (isset($opt['logic']['cachemaps']['wmsurl']) && strstr($opt['logic']['cachemaps']['wmsurl'], '://'))
+		$opt['logic']['cachemaps']['wmsurl'] = $opt['page']['protocol'] . strstr($opt['logic']['cachemaps']['wmsurl'], '://');
 }
 
 function configure_php()
@@ -177,43 +179,18 @@ function sql_foundrows_done()
 		ini_set('mysql.trace_mode', true);
 }
 
-function set_domain()
+function set_domain_config()
 {
 	global $opt;
 
-	$domain = isset($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : '';
-	$opt['page']['domain'] = $domain;
+	$domain = $opt['page']['domain'];
 
-	if (!isset($opt['domain']) || $domain == '')
-		return;
+	if (isset($opt['domain'][$domain]['style']))
+		$opt['template']['default']['style'] = $opt['domain'][$domain]['style'];
+	if (isset($opt['domain'][$domain]['cookiedomain']))
+		$opt['session']['domain'] = $opt['domain'][$domain]['cookiedomain'];
 
-	if (isset($opt['domain'][$domain]))
-	{
-		if (isset($opt['domain'][$domain]['url']))
-			$opt['page']['absolute_url'] = $opt['domain'][$domain]['url'];
-
-		if (isset($opt['domain'][$domain]['locale']))
-			$opt['template']['default']['locale'] = $opt['domain'][$domain]['locale'];
-		if (isset($opt['domain'][$domain]['fallback_locale']))
-			$opt['template']['default']['fallback_locale'] = $opt['domain'][$domain]['fallback_locale'];
-
-		if (isset($opt['domain'][$domain]['country']))
-			$opt['template']['default']['country'] = $opt['domain'][$domain]['country'];
-
-		if (isset($opt['domain'][$domain]['style']))
-			$opt['template']['default']['style'] = $opt['domain'][$domain]['style'];
-
-		if (isset($opt['domain'][$domain]['cookiedomain']))
-			$opt['session']['domain'] = $opt['domain'][$domain]['cookiedomain'];
-
-		if (isset($opt['domain'][$domain]['keywords']))
-			$opt['page']['meta']['keywords'] = $opt['domain'][$domain]['keywords'];
-		if (isset($opt['domain'][$domain]['description']))
-			$opt['page']['meta']['description'] = $opt['domain'][$domain]['description'];
-
-		if (isset($opt['domain'][$domain]['headoverlay']))
-			$opt['page']['headoverlay'] = $opt['domain'][$domain]['headoverlay'];
-	}
+	set_common_domain_config($opt);
 }
 
 function set_language()
@@ -268,7 +245,7 @@ function set_timezone()
 
 function check_useragent()
 {
-	global $_SERVER, $ocpropping;
+	global $ocpropping;
 
 	// are we Ocprop?
 	$ocpropping = isset($_SERVER['HTTP_USER_AGENT']) && strpos($_SERVER['HTTP_USER_AGENT'],"Ocprop/");
@@ -362,5 +339,41 @@ function fix_magic_quotes_gpc()
 		}
 	}
 }
+
+
+// Exchange the protocol (http or https) in an URL to *this* website to the
+// protocol of the current request. Do not change external links.
+// This prevents i.e. Internet Explorer nag screens when embedding images
+// into a https-requested page.
+
+function use_current_protocol($url)
+{
+	global $opt;
+
+	if (strtolower(substr($url, 0, strlen($opt['page']['absolute_http_url']))) == $opt['page']['absolute_http_url']
+	    && $opt['page']['https']['active'])
+	{
+		return 'https' . strstr($url,'://');
+	}
+	else if (strtolower(substr($url, 0, strlen($opt['page']['absolute_https_url']))) == $opt['page']['absolute_https_url']
+	         && !$opt['page']['https']['active'])
+	{
+		return 'http' . strstr($url,'://');
+	}
+	else
+		return $url;
+}
+
+
+function use_current_protocol_in_html($url)
+{
+	global $opt;
+
+	if ($opt['page']['https']['active'])
+		return str_replace($opt['page']['absolute_http_url'], $opt['page']['absolute_https_url'], $url);
+	else
+		return $url;
+}
+
 
 ?>

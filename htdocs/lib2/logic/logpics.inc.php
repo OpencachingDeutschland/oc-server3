@@ -168,7 +168,11 @@ function get_logpics($purpose, $userid=0, $cacheid=0)
 	}
 	
 	if ($rs !== false)
+	{
 		$result = sql_fetch_assoc_table($rs);
+		foreach ($result as &$logpic)
+			$logpic['pic_url'] = use_current_protocol($logpic['pic_url']);
+	}
 	
 	return $result;
 }

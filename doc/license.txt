@@ -228,6 +228,12 @@ Icons
         License : Creative Commons BY-SA 3.0
         Autor   : Paul Robert Lloyd (and other contributors)
 
+   10.  Creative Commons Button
+        Path    : htdocs/resource2/ocstyle/images/media/
+        URI     : https://creativecommons.org/about/downloads
+        License : Creative Commons BY 3.0
+        Autor   : Creative Commons
+
 
 Other resources
 ---------------

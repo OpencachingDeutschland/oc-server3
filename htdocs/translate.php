@@ -42,6 +42,7 @@
 		array( 'table' => 'cache_size',           'text' => 'name',        'trans_id' => 'trans_id' ),
 		array( 'table' => 'cache_status',         'text' => 'name',        'trans_id' => 'trans_id' ),
 		array( 'table' => 'cache_type',           'text' => 'name',        'trans_id' => 'trans_id' ),
+		array( 'table' => 'cache_type',           'text' => 'short2',      'trans_id' => 'short2_trans_id' ),
 		array( 'table' => 'coordinates_type',     'text' => 'name',        'trans_id' => 'trans_id' ),
 		array( 'table' => 'countries',            'text' => 'name',        'trans_id' => 'trans_id' ),
 		array( 'table' => 'languages',            'text' => 'name',        'trans_id' => 'trans_id' ),
@@ -52,7 +53,7 @@
 		array( 'table' => 'sys_menu',             'text' => 'title',       'trans_id' => 'title_trans_id' ),
 		array( 'table' => 'towns',                'text' => 'name',        'trans_id' => 'trans_id' ),
 	);
-	
+
 	// directory libse needs to be added recursive
 	addClassesDirecotriesToDirlist('libse');
 
@@ -81,6 +82,8 @@
 	if ($action == 'selectlang')
 	{
 	}
+	else if ($action == 'verify')
+		verify();
 	else if ($action == 'resetids')
 		resetIds();
 	else if ($action == 'clearcache')
@@ -677,8 +680,6 @@ function xmlimport3()
 	$tpl->redirect('translate.php?translang=' . $translang);
 }
 
-// 2012-08-24 following - changed output format from tab-separated lines to multiple lines
-//                        for better readability, and delimiter from *nix \n to canonical \r\n
 function textexport($translang, $all)
 {
 	global $opt;
@@ -686,16 +687,22 @@ function textexport($translang, $all)
 	header('Content-type: text/plain');
 	header('Content-Disposition: attachment; filename="translation.txt"');
 
-	$rs = sql("SELECT `id`, `text` FROM `sys_trans` ORDER BY `id` ASC");
+	$rs = sql("
+		SELECT
+			`id`,
+			IFNULL(`sys_trans_text`.`text`, `sys_trans`.`text`) AS `text`
+		FROM
+			`sys_trans`
+			LEFT JOIN `sys_trans_text` ON `sys_trans_text`.`trans_id`=`sys_trans`.`id` AND `sys_trans_text`.`lang`='EN'
+		ORDER BY `id` ASC");
 	while ($r = sql_fetch_assoc($rs))
 	{
 		$translated = sql_value("SELECT `text` FROM `sys_trans_text` WHERE `trans_id`='&1' AND `lang`='&2'", '', $r['id'], $translang);
 		if (($all) || (mb_strlen($translated)==0))
 		{
-			$thisline = $r['text'];
-			$thisline .= "\r\n";
-			$thisline .= $translated;
-			$thisline .= "\r\n";
+			$thisline = $r['id'] . "\r\n";
+			$thisline .= $r['text'] . "\r\n";
+			$thisline .= $translated . "\r\n";
 			$thisline .= "\r\n";
 			echo($thisline);
 		}
@@ -705,7 +712,6 @@ function textexport($translang, $all)
 	exit;
 }
 
-// 2012-08-24 following - changed input format from tab-separated lines to multiple lines
 function textimport($lang)
 {
 	global $translate, $tpl, $opt;
@@ -716,40 +722,37 @@ function textimport($lang)
 	$data = file_get_contents($_FILES['textfile']['tmp_name']);
 	$lines = explode("\n", $data);
 
-	/* $saTexts[code_text]['id']
-	* $saTexts[code_text]['code']
-	* $saTexts[code_text]['de']['old']
-	* $saTexts[code_text]['de']['new']
-	* $saTexts[code_text]['en']['old']
-	* $saTexts[code_text]['en']['new']
-	* $saTexts[code_text]['...']
-	*/
 	$saTexts = array();
 
-	for ($i=0; $i+1 < count($lines); $i += 3)
+	for ($i=0; $i+1 < count($lines); $i += 4)
 	{
-		$sCodeText = trim($lines[$i]);
-		$sLangText = trim($lines[$i+1]);
+		$nId = trim($lines[$i]);
+		$sEnText = trim($lines[$i+1]);
+		$sLangText = trim($lines[$i+2]);
 
-		if ($sCodeText . $sLangText != '')
+		if ($nId != '')
 		{
-			$transId = sql_value("SELECT `id` FROM `sys_trans` WHERE BINARY `text`='&1'", 0, $sCodeText);
+			$transId = sql_value("SELECT `trans_id` FROM `sys_trans_text` WHERE `trans_id`='&1' AND `lang`='EN' AND BINARY `text`='&2'", 0, $nId, $sEnText);
+			if ($transId == 0)
+				$transId = sql_value("SELECT `id` FROM `sys_trans` WHERE `id`='&1' AND BINARY `text`='&2'", 0, $nId, $sEnText);
 			if ($transId == 0)
 			{
 				if ($sLangText != '')
 				{
 					// text not in sys_trans => code changed while translation has been done
-					$saTexts[$sCodeText]['id'] = 0;
-					$saTexts[$sCodeText]['count'] = count($saTexts);
-					$saTexts[$sCodeText]['type'] = 1;
-					$saTexts[$sCodeText]['code'] = $sCodeText;
-					$saTexts[$sCodeText][$lang]['new'] = $sLangText;
-					$saTexts[$sCodeText][$lang]['old'] = '';
+					$saTexts[$sEnText]['id'] = $nId;
+					$saTexts[$sEnText]['count'] = count($saTexts);
+					$saTexts[$sEnText]['type'] = 1;
+					$saTexts[$sEnText]['code'] = '';
+					$saTexts[$sEnText]['en'] = $sEnText;
+					$saTexts[$sEnText][$lang]['new'] = $sLangText;
+					$saTexts[$sEnText][$lang]['old'] = '';
 				}
 			}
 			else
 			{
 				$sOldText = sql_value("SELECT `text` FROM `sys_trans_text` WHERE `trans_id`='&1' AND `lang`='&2'", '', $transId, $lang);
+				$sCodeText = sql_value("SELECT `text` FROM `sys_trans` WHERE `id`='&1'", '', $transId);
 				if (($sOldText == '') && ($sLangText != ''))
 				{
 					// new translation
@@ -757,6 +760,7 @@ function textimport($lang)
 					$saTexts[$sCodeText]['count'] = count($saTexts);
 					$saTexts[$sCodeText]['type'] = 2;
 					$saTexts[$sCodeText]['code'] = $sCodeText;
+					$saTexts[$sCodeText]['en'] = $sEnText;
 					$saTexts[$sCodeText][$lang]['new'] = $sLangText;
 					$saTexts[$sCodeText][$lang]['old'] = $sOldText;
 				}
@@ -767,6 +771,7 @@ function textimport($lang)
 					$saTexts[$sCodeText]['count'] = count($saTexts);
 					$saTexts[$sCodeText]['type'] = 3;
 					$saTexts[$sCodeText]['code'] = $sCodeText;
+					$saTexts[$sCodeText]['en'] = $sEnText;
 					$saTexts[$sCodeText][$lang]['new'] = $sLangText;
 					$saTexts[$sCodeText][$lang]['old'] = $sOldText;
 				}
@@ -811,6 +816,34 @@ function addClassesDirecotriesToDirlist($basedir)
 		}
 	}
   closedir($hDir);
+}
+
+function verify()
+{
+	global $tpl, $transIdCols;
+
+	$inconsistencies = array();
+	foreach ($transIdCols as $col)
+	{
+		if (!isset($col['verify']) || $col['verify'])
+		{
+			$rs = sql("SELECT `".$col['text']."` `text`, `".$col['trans_id']."` `trans_id` FROM `".$col['table'] . "`");
+			while ($r = sql_fetch_assoc($rs))
+			{
+				$st = sql_value("SELECT `text` FROM `sys_trans` WHERE `id`='&1'", false, $r['trans_id']);
+				$en = sql_value("SELECT `text` FROM `sys_trans_text` WHERE `trans_id`='&1' AND `lang`='EN'", false, $r['trans_id']);
+				if ($en != $r['text'] || $st != $r['text'])
+					$inconsistencies[] = array(
+						'id' => $r['trans_id'],
+						'col' => $col['table'] . '.' . $col['text'],
+						'org_text' => $r['text'],
+						'sys_trans' => $st,
+						'en_text' => $en,
+						);
+			}
+		}
+	}
+	$tpl->assign('inconsistencies', $inconsistencies);
 }
 
 ?>

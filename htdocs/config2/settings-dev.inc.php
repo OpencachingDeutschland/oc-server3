@@ -66,25 +66,21 @@
 	// see settings-dist.inc.php for known node IDs
 	$opt['logic']['node']['id'] = 4;
   $opt['logic']['waypoint_pool']['prefix'] = 'OC';
-	$opt['logic']['shortlink_domain'] = 'opencaching.de';
-  
-	/* cachemaps
-	*/
-	$opt['logic']['cachemaps']['url'] = 'http://maps.google.com/maps/api/staticmap?center={latitude},{longitude}&zoom={userzoom}&size=200x200&maptype=hybrid&markers=color:blue|label:|{latitude},{longitude}&sensor=false';
 
-	/* other template options
+	/* server options
 	 *
 	 */
-	$opt['page']['absolute_url'] = $dev_baseurl . "/";
+	set_absolute_urls(
+		$opt,
+		$dev_baseurl,
+		isset($dev_shortlink_domain) ? $dev_shortlink_domain : 'opencaching.de',
+		2);
+
 	$opt['page']['develsystem'] = true;
+	$opt['page']['max_logins_per_hour'] = 1000;    // for development ...
+
 	$opt['mail']['from'] = 'root';
 	$opt['mail']['subject'] = '[local.opencaching.de] ';
-
-	/* location of uploaded images
-	 */
-	$opt['logic']['pictures']['dir'] = $dev_basepath . $dev_codepath . 'htdocs/images/uploads';
-	$opt['logic']['pictures']['url'] = $opt['page']['absolute_url'] . 'images/uploads';
-	$opt['logic']['pictures']['thumb_url'] = $opt['logic']['pictures']['url'] . '/thumbs';
 
 	/* disable cronjobs which are not needed on devel site
 	 */
@@ -110,8 +106,8 @@
 	$opt['lib']['garmin']['url'] = 'http://local.opencaching.de/';
 	$opt['lib']['garmin']['page_url'] = $opt['lib']['garmin']['url'] . $dev_codepath . 'htdocs/';
 
-    // developer.what3words.com API Key
-    $opt['lib']['w3w']['apikey'] = 'YOURAPIKEY';
+	// developer.what3words.com API Key
+	$opt['lib']['w3w']['apikey'] = 'YOURAPIKEY';
 
 	// other settings
 	$opt['page']['showdonations'] = true;

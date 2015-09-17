@@ -82,7 +82,7 @@ class OcSmarty extends Smarty
 		if (isset($_REQUEST['target']))
 		{
 			$this->target = trim($_REQUEST['target']);
-			if (strtolower(substr($this->target, 0, 7)) == 'http://')
+			if (preg_match("/^https?:/i", $this->target))
 				$this->target = '';
 		}
 		else
@@ -163,11 +163,15 @@ class OcSmarty extends Smarty
 		$optn['template']['country'] = $login->getUserCountry();
 		$optn['page']['subtitle1'] = isset($opt['locale'][$locale]['page']['subtitle1']) ? $opt['locale'][$locale]['page']['subtitle1'] : $opt['page']['subtitle1'];
 		$optn['page']['subtitle2'] = isset($opt['locale'][$locale]['page']['subtitle2']) ? $opt['locale'][$locale]['page']['subtitle2'] : $opt['page']['subtitle2'];
+		$optn['page']['sitename'] = $opt['page']['sitename'];
 		$optn['page']['headimagepath'] = $opt['page']['headimagepath'];
 		$optn['page']['headoverlay'] = $opt['page']['headoverlay'];
 		$optn['page']['max_logins_per_hour'] = $opt['page']['max_logins_per_hour'];
 		$optn['page']['absolute_url'] = $opt['page']['absolute_url'];
 		$optn['page']['absolute_urlpath'] = parse_url($opt['page']['absolute_url'], PHP_URL_PATH);
+		$optn['page']['absolute_http_url'] = $opt['page']['absolute_http_url'];
+		$optn['page']['default_absolute_url'] = $opt['page']['default_absolute_url'];
+		$optn['page']['login_url'] = ($opt['page']['https']['force_login'] ? $opt['page']['absolute_https_url'] : '') . 'login.php';
 		$optn['page']['target'] = $this->target;
 		$optn['page']['showdonations'] = $opt['page']['showdonations'];
 		$optn['page']['title'] = $opt['page']['title'];
@@ -266,7 +270,7 @@ class OcSmarty extends Smarty
 				$lurl = $opt['locale']['EN']['page']['license_url'];
 
 			if (isset($opt['locale'][$locale]['page']['license']))
-				$ltext = $opt['locale'][$locale]['page']['license'];
+				$ltext = mb_ereg_replace('{site}', $opt['page']['sitename'], $opt['locale'][$locale]['page']['license']);
 			else
 				$ltext = $opt['locale']['EN']['page']['license'];
 
@@ -408,7 +412,7 @@ class OcSmarty extends Smarty
 			$page = substr($page, 0, strpos($page, "\n"));
 
 		// redirect
-		if (substr($page, 0, 7) != 'http://')
+		if (!preg_match("/^https?:/i", $page))
 		{
 			if (substr($page, 0, 1) == '/') $page = substr($page, 1);
 			$page = $opt['page']['absolute_url'] . $page;
@@ -433,12 +437,15 @@ class OcSmarty extends Smarty
 
 	function redirect_login()
 	{
+		global $opt;
+
 		// we cannot redirect the POST-data
 		if (count($_POST) > 0)
 			$this->error(ERROR_LOGIN_REQUIRED);
 
 		// ok ... redirect the get-data
-		$target = 'http://' . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"];
+		$target = ($opt['page']['https']['force_login'] ? 'https' :  $opt['page']['protocol'])
+		        . '://' . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"];
 		$this->redirect('login.php?target=' . urlencode($target));
 	}
 

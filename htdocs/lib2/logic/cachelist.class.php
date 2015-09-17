@@ -122,6 +122,11 @@ class cachelist
 		return $this->reCachelist->getValue('description');
 	}
 
+	function getDescriptionForDisplay()
+	{
+		return use_current_protocol_in_html(getDescription());
+	}
+
 	function getDescHtmledit()
 	{
 		return $this->reCachelist->getValue('desc_htmledit');
@@ -427,7 +432,10 @@ class cachelist
 	{
 		$lists = cachelist::getLists("`id`='" . sql_escape($listid) . "'");
 		if (count($lists))
+		{
+			$lists[0]['description_for_display'] = use_current_protocol_in_html($lists[0]['description']);
 			return $lists[0];
+		}
 		else
 			return false;
 	}
@@ -455,7 +463,12 @@ class cachelist
 			ORDER BY `prio`,`cache_lists`.`name`
 			LIMIT &2,&3", 
 			$login->userid, $startat, $maxitems);
-		return sql_fetch_assoc_table($rs);
+
+		$lists = sql_fetch_assoc_table($rs);
+		foreach($lists as &$list)
+			$list['description_for_display'] = use_current_protocol_in_html($list['description']);
+
+		return $lists;
 	}
 
 

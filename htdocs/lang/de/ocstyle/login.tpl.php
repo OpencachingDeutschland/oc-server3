@@ -26,7 +26,7 @@
 
 <div class="content2-pagetitle"><img src="lang/de/ocstyle/images/profile/32x32-profile.png" style="margin-right: 10px;" width="32" height="32" alt="" />{t}Login{/t}</div>
 
-<form action="login.php" method="post" enctype="application/x-www-form-urlencoded" name="login_form" dir="ltr" style="display: inline;">
+<form action="{login_url}" method="post" enctype="application/x-www-form-urlencoded" name="login_form" dir="ltr" style="display: inline;">
 <input type="hidden" name="target" value="{target}" />
 <input type="hidden" name="action" value="login" />
 <input type="hidden" name="source" value="loginpage" />

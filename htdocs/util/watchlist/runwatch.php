@@ -97,7 +97,7 @@
 	
 	$email_headers = 'From: "' . $mailfrom . '" <' . $mailfrom . '>';
 
-	$rsUsers = sql("SELECT `user`.`user_id`, `user`.`username`, `user`.`email`, `user`.`watchmail_mode`, `user`.`watchmail_hour`, `user`.`watchmail_day`, `user`.`watchmail_nextmail`, IFNULL(`user`.`language`,'&1') `language` FROM `user` INNER JOIN `watches_waiting` ON `user`.`user_id`=`watches_waiting`.`user_id` WHERE `user`.`watchmail_nextmail`<NOW()", $opt['template']['default']['locale']);
+	$rsUsers = sql("SELECT `user`.`user_id`, `user`.`username`, `user`.`email`, `user`.`watchmail_mode`, `user`.`watchmail_hour`, `user`.`watchmail_day`, `user`.`watchmail_nextmail`, IFNULL(`user`.`language`,'&1') `language`, `domain` FROM `user` INNER JOIN `watches_waiting` ON `user`.`user_id`=`watches_waiting`.`user_id` WHERE `user`.`watchmail_nextmail`<NOW()", $opt['template']['default']['locale']);
 	for ($i = 0; $i < mysql_num_rows($rsUsers); $i++)
 	{
 		$rUser = sql_fetch_array($rsUsers);
@@ -113,7 +113,7 @@
 				if ($r['count'] > 0)
 				{
 					// ok, eine mail ist fäig
-					$mailbody = fetch_email_template('watchlist', $rUser['language']);
+					$mailbody = fetch_email_template('watchlist', $rUser['language'], $rUser['domain']);
 					$mailbody = mb_ereg_replace('{username}', $rUser['username'], $mailbody);
 
 					$rsWatchesOwner = sql("SELECT id, watchtext FROM watches_waiting WHERE user_id='&1' AND watchtype=1 ORDER BY id DESC", $rUser['user_id']);
@@ -237,7 +237,7 @@ function process_owner_log($user_id, $log_id)
 	else
 		$dateformat = $opt['locale'][$language]['format']['phpdatetime'];
 
-	$watchtext = '{date} ' . $translate->t('{user} has logged your cache "{cachename}":', '', basename(__FILE__), __LINE__, '', 1, $language) . ' {action}' . "\n" . 'http://opencaching.de/{wp_oc}' . "\n\n" . '{text}' . "\n\n\n\n";
+	$watchtext = '{date} ' . $translate->t('{user} has logged your cache "{cachename}":', '', basename(__FILE__), __LINE__, '', 1, $language) . ' {action}' . "\n" . '{shortlink_url}{wp_oc}' . "\n\n" . '{text}' . "\n\n\n\n";
 
 	$watchtext = mb_ereg_replace('{date}', date($dateformat, strtotime($rLog['logdate'])), $watchtext);
 	$watchtext = mb_ereg_replace('{wp_oc}', $rLog['wp_oc'], $watchtext);
@@ -246,6 +246,13 @@ function process_owner_log($user_id, $log_id)
 	$watchtext = mb_ereg_replace('{cachename}', $rLog['cachename'], $watchtext);
 	$watchtext = mb_ereg_replace('{action}', get_logtype_name($rLog['type'], $language), $watchtext);
 	
+	$domain = sqlValue("SELECT `domain` FROM `user` WHERE `user_id`='" . sql_escape($user_id) . "'", null);
+	$urls = get_site_urls($domain);
+	if ($urls['shortlink_url'])
+		$watchtext = mb_ereg_replace("{shortlink_url}", $urls['shortlink_url'], $watchtext);
+	else
+		$watchtext = mb_ereg_replace("{shortlink_url}", $urls['site_url'], $watchtext);
+
 	sql("INSERT IGNORE INTO watches_waiting (`user_id`, `object_id`, `object_type`, `date_created`, `watchtext`, `watchtype`) VALUES (
 																		'&1', '&2', 1, NOW(), '&3', 1)", $user_id, $log_id, $watchtext);
 	
@@ -273,7 +280,7 @@ function process_log_watch($user_id, $log_id)
 	else
 		$dateformat = $opt['locale'][$language]['format']['phpdatetime'];
 
-	$watchtext = '{date} ' . $translate->t('{user} has logged the cache "{cachename}":', '', basename(__FILE__), __LINE__, '', 1, $language) . ' {action}' . "\n" . 'http://opencaching.de/{wp_oc}' . "\n\n" . '{text}' . "\n\n\n\n";
+	$watchtext = '{date} ' . $translate->t('{user} has logged the cache "{cachename}":', '', basename(__FILE__), __LINE__, '', 1, $language) . ' {action}' . "\n" . '{shortlink_url}{wp_oc}' . "\n\n" . '{text}' . "\n\n\n\n";
 
 	$watchtext = mb_ereg_replace('{date}', date($dateformat, strtotime($rLog['logdate'])), $watchtext);
 	$watchtext = mb_ereg_replace('{wp_oc}', $rLog['wp_oc'], $watchtext);
@@ -282,6 +289,13 @@ function process_log_watch($user_id, $log_id)
 	$watchtext = mb_ereg_replace('{cachename}', $rLog['cachename'], $watchtext);
 	$watchtext = mb_ereg_replace('{action}', get_logtype_name($rLog['type'], $language), $watchtext);
 	
+	$domain = sqlValue("SELECT `domain` FROM `user` WHERE `user_id`='" . sql_escape($user_id) . "'", null);
+	$urls = get_site_urls($domain);
+	if ($urls['shortlink_url'])
+		$watchtext = mb_ereg_replace("{shortlink_url}", $urls['shortlink_url'], $watchtext);
+	else
+		$watchtext = mb_ereg_replace("{shortlink_url}", $urls['site_url'], $watchtext);
+
 	sql("INSERT IGNORE INTO watches_waiting (`user_id`, `object_id`, `object_type`, `date_created`, `watchtext`, `watchtype`) VALUES (
 																		'&1', '&2', 1, NOW(), '&3', 2)", $user_id, $log_id, $watchtext);
 }

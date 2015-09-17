@@ -271,7 +271,7 @@ function toggleAttr(id)
 	{cache_descs}
 	{gc_com_refs_start}
 	<tr><td class="help" colspan="2"><img src="lang/de/ocstyle/images/misc/hint.gif" border="0" width="15" height="11" alt="{t}Notice{/t}" title="{t}Notice{/t}" /><span style="color:red">{t}Your description contains at least one link to a picture hosted on geocaching.com!{/t}<br />
-	{t}To prevent any problems with geocaching.com we want to please you to upload all linked pictures to opencaching.de as well and link the pictures in the HTML code to these on opencaching.de{/t}</span>
+	{gc_com_msg2}</span>
 	</td></tr>
 	{gc_com_refs_end}
 	<tr><td colspan="2">&nbsp;</td></tr>

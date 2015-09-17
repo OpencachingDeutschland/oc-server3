@@ -38,6 +38,7 @@
 					`user`.`username`,
 					`user2`.`email`, `user2`.`username` as `recpname`, `user2`.`latitude` AS `lat1`,
 					`user2`.`longitude` as `lon1`, `user2`.`user_id` as `recid`, IFNULL(`user2`.`language`,'&1') as `recp_lang`,
+					`user2`.`domain` AS `recp_domain`,
 					`caches`.`name` as `cachename`, `caches`.`latitude` AS `lat2`, `caches`.`longitude` as `lon2`, `caches`.`wp_oc`, `caches`.`date_hidden`,
 					`caches`.`type` AS `cachetype`, `caches`.`size` AS `cachesize`,
 					`cache_status`.`allow_user_view`,
@@ -77,14 +78,14 @@ function process_new_cache($notify)
 	switch ($notify['type'])
 	{
 		case notify_new_cache: // Type: new cache
-			$mailbody = fetch_email_template('notify_newcache', $notify['recp_lang']);
+			$mailbody = fetch_email_template('notify_newcache', $notify['recp_lang'], $notify['recp_domain']);
 			$mailsubject = '[' . $maildomain . '] ' .
 			               $translate->t($notify['oconly'] ? 'New OConly cache:' : 'New cache:', '', basename(__FILE__), __LINE__, '', 1, $notify['recp_lang']) .
 										 ' ' . $notify['cachename'];
 			break;
 
 		case notify_new_oconly: // Type: new OConly flag
-			$mailbody = fetch_email_template('notify_newoconly', $notify['recp_lang']);
+			$mailbody = fetch_email_template('notify_newoconly', $notify['recp_lang'], $notify['recp_domain']);
 			$mailsubject = '[' . $maildomain . '] ' .
 			               $translate->t('Cache was marked as OConly:', '', basename(__FILE__), __LINE__, '', 1, $notify['recp_lang']) .
 										 ' ' . $notify['cachename'];

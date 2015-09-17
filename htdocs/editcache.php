@@ -881,6 +881,7 @@ function getWaypoints($cacheid)
 					}
 					else
 						tpl_set_var('pictures', $nopictures);
+					tpl_set_var('gc_com_msg2', mb_ereg_replace('%1', $opt['page']['sitename'], $gc_com_msg2));
 
 					tpl_set_var('waypoints', getWaypoints($cache_id));
 

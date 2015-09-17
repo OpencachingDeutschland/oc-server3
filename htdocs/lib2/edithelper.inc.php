@@ -86,7 +86,7 @@ function processEditorInput($oldDescMode, $descMode, $text)
 
 function html2plaintext($text, $texthtml0, $wrap)
 {
-	global $opt, $absolute_server_URI;
+	global $opt;
 
 	if ($texthtml0)
 	{
@@ -97,8 +97,8 @@ function html2plaintext($text, $texthtml0, $wrap)
 	else
 	{
 		$h2t = new html2text($text);
+		$h2t->set_base_url($opt['page']['default_absolute_url']);
 		$h2t->width = $wrap;
-		$h2t->set_base_url(isset($opt['page']['absolute_url']) ? $opt['page']['absolute_url'] : $absolute_server_URI);
 		$text = $h2t->get_text();
 
 		// remove e.g. trailing \n created from </p> by html2text

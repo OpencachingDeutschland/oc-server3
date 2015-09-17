@@ -74,8 +74,9 @@
 	$tpl->assign_rs('useroptions', $rs);
 	sql_free_result($rs);
 
-	$tpl->assign('description',
-		sql_value("SELECT `description` FROM `user` WHERE `user_id`='&1'", "", $userid));
+	$user_desc = sql_value("SELECT `description` FROM `user` WHERE `user_id`='&1'", "", $userid);
+	$user_desc = use_current_protocol_in_html($user_desc);
+	$tpl->assign('description', $user_desc);
 
 	$useropt = new useroptions($userid);
 	$show_statistics = $useropt->getOptValue(USR_OPT_SHOWSTATS);

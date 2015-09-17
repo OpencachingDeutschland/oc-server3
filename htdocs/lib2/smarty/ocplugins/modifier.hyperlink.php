@@ -10,8 +10,8 @@
  * Smarty plugin
  *
  * Type:     modifier<br>
- * Name:     nbsp<br>
- * Example:  {$text|nsbp}
+ * Name:     hyperlink<br>
+ * Example:  {$text|hyperlink}
  * @version  1.0
  * @param string
  * @return string
@@ -22,6 +22,9 @@ function smarty_modifier_hyperlink($text)
 	$retval = '';
 	$curpos = 0;
 	$starthttp = mb_strpos($texti, 'http://', $curpos);
+	$starthttps = mb_strpos($texti, 'https://', $curpos);
+	if ($starthttp === false || ($starthttps !== false && $starthttps < $starthttp))
+		$starthttp = $starthttps;
 	$endhttp = false;
 	while (($starthttp !== false) || ($endhttp >= mb_strlen($text)))
 	{
@@ -42,6 +45,9 @@ function smarty_modifier_hyperlink($text)
 		$curpos = $endhttp ;
 		if ($curpos >= mb_strlen($text)) break;
 		$starthttp = mb_strpos(mb_strtolower($text), 'http://', $curpos);
+		$starthttps = mb_strpos($texti, 'https://', $curpos);
+		if ($starthttp === false || ($starthttps !== false && $starthttps < $starthttp))
+			$starthttp = $starthttps;
 	}
 
 	$retval .= mb_substr($text, $curpos);

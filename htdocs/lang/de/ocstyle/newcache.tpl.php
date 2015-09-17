@@ -134,7 +134,7 @@ function toggleAttr(id)
 	<tr>
 		<td class="help" colspan="2">
 			<img src="lang/de/ocstyle/images/misc/hint.gif" border="0" width="15" height="11" alt="{t}Notice{/t}" title="{t}Notice{/t}" />
-			{t}If this is your first cache on Opencaching.de, be sure to check out the <a href="articles.php?page=cacheinfo">description</a> of the individual fields.{/t}
+			{firstcache_note}
 		</td>
 	</tr>
 	<tr><td class="spacer" colspan="2"></td></tr>

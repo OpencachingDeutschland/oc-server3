@@ -8,6 +8,8 @@
  *
  * Copyright 2007 Opencaching.de
  *
+ * This looks like an unfinished experiment, the filter is not loaded anywhere.
+ *
  ***************************************************************************/
 
 function smarty_outputfilter_session($tpl_output, &$smarty)
@@ -39,9 +41,10 @@ function html_insert_sid_callback($match)
 	 */
 
 	// dont add to absolute hyperlinks
-	if (preg_match('/^(http:\\/\\/|ftp:\\/\\/|https:\\/\\/)/', $match[2]))
+	if (preg_match('/^(https?:\\/\\/|ftp:\\/\\/)/', $match[2]))
 	{
-		if (substr($match[2], 0, strlen($opt['page']['absolute_url'])) != $opt['page']['absolute_url'])
+		if (substr($match[2], 0, strlen($opt['page']['absolute_http_url'])) != $opt['page']['absolute_http_url'] &&
+		    substr($match[2], 0, strlen($opt['page']['absolute_https_url'])) != $opt['page']['absolute_https_url'])
 			return $match[0];
 	}
 

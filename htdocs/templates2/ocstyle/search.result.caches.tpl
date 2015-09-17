@@ -31,9 +31,9 @@
 			</table>
 		</div>
 
-	{if $cachelist.description != ''}
+	{if $cachelist.description_for_display != ''}
 	<div style="padding: 0 8px 4px 10px">
-		{$cachelist.description}
+		{$cachelist.description_for_display}
 	</div>
 	{/if}
 	</div>

@@ -15,7 +15,7 @@ New log entries for caches watched by you:
 
 
 You can view and change your watchlist settings at 
-http://www.opencaching.de/mywatches.php?action=edit.
+{site_url}mywatches.php?action=edit.
 
 Happy Geocaching,
 the Opencaching.de Team
@@ -23,5 +23,5 @@ the Opencaching.de Team
 ---
 This E-Mail was generated automatically - please do not answer. If you would
 like to contact Opencaching.de, please refer to 
-http://www.opencaching.de/articles.php?page=contact. In urgent cases you
-may send an e-mail to contact@opencaching.de.
+{site_url}articles.php?page=contact. In urgent cases you
+may send an e-mail to {email_contact}.

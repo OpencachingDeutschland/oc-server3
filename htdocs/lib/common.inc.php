@@ -124,6 +124,23 @@ function __autoload($class_name)
 	if (!isset($rootpath)) $rootpath = './';
 	require_once($rootpath . 'lib/clicompatbase.inc.php');
 
+	// enforce http or https?
+	if (isset($opt['gui']) && $opt['gui'] == GUI_HTML)
+	{
+		if ($opt['page']['https']['mode'] == HTTPS_DISABLED)
+		{
+			if ($opt['page']['https']['active'])
+				header('Location: http://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI']);
+			$opt['page']['force_https_login'] = false;
+		}
+		else if ($opt['page']['https']['mode'] == HTTPS_ENFORCED)
+		{
+			if (!$opt['page']['https']['active'])
+				header('Location: https://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI']);
+			$opt['page']['force_https_login'] = true;
+		}
+	}
+
 	// load domain specific settings
 	load_domain_settings();
 
@@ -188,10 +205,6 @@ function __autoload($class_name)
 	//load gettext translation
 	load_gettext();
 
-	// thumbs-dir/url
-	if (!isset($thumbdir)) $thumbdir = $picdir . '/thumbs';
-	if (!isset($thumburl)) $thumburl = $picurl . '/thumbs';
-
 	//open a databse connection
 	db_connect();
 
@@ -239,6 +252,7 @@ function __autoload($class_name)
 			}
 			$sLoggedOut = mb_ereg_replace('{target}', $target, $sLoggedOut);
 			tpl_set_var('loginbox', $sLoggedOut);
+			tpl_set_var('login_url', ($opt['page']['https']['force_login'] ? $opt['page']['absolute_https_url'] : '') . 'login.php');
 		}
 		else
 		{
@@ -259,36 +273,16 @@ function __autoload($class_name)
 
 	function load_domain_settings()
 	{
-		global $opt, $style, $absolute_server_URI;
+		global $opt, $style;
 
-		$sHost = strtolower($_SERVER['HTTP_HOST']);
+		$domain = $opt['page']['domain'];
 
-		if (isset($opt['domain'][$sHost]))
-		{
-			if (isset($opt['domain'][$sHost]['style']))
-				$style = $opt['domain'][$sHost]['style'];
+		if (isset($opt['domain'][$domain]['style']))
+			$style = $opt['domain'][$domain]['style'];
+		if (isset($opt['domain'][$domain]['cookiedomain']))
+			$opt['cookie']['domain'] = $opt['domain'][$domain]['cookiedomain'];
 
-			if (isset($opt['domain'][$sHost]['cookiedomain']))
-				$opt['cookie']['domain'] = $opt['domain'][$sHost]['cookiedomain'];
-
-			if (isset($opt['domain'][$sHost]['url']))
-				$absolute_server_URI = $opt['domain'][$sHost]['url'];
-
-			if (isset($opt['domain'][$sHost]['locale']))
-				$opt['template']['default']['locale'] = $opt['domain'][$sHost]['locale'];
-
-			if (isset($opt['domain'][$sHost]['fallback_locale']))
-				$opt['template']['default']['fallback_locale'] = $opt['domain'][$sHost]['fallback_locale'];
-			if (isset($opt['domain'][$sHost]['country']))
-				$opt['template']['default']['country'] = $opt['domain'][$sHost]['country'];
-
-			if (isset($opt['domain'][$sHost]['keywords']))
-				$opt['page']['meta']['keywords'] = $opt['domain'][$sHost]['keywords'];
-			if (isset($opt['domain'][$sHost]['description']))
-				$opt['page']['meta']['description'] = $opt['domain'][$sHost]['description'];
-			if (isset($opt['domain'][$sHost]['headoverlay']))
-				$opt['page']['headoverlay'] = $opt['domain'][$sHost]['headoverlay'];
-		}
+		set_common_domain_config($opt);
 	}
 
 	// get the language from a given shortage
@@ -587,22 +581,14 @@ function __autoload($class_name)
 	{
 		global $absolute_server_URI;
 
-		//page has to be the filename without domain i.e. 'viecache.php?cacheid=1'
 		write_cookie_settings();
 		http_write_no_cache();
 
-		header("Location: " . $absolute_server_URI . $page);
-		exit;
-	}
+		if (!preg_match('/^https?:/i', $page))
+			header("Location: " . $absolute_server_URI . $page);
+		else
+			header("Location: " . $page);
 
-	//redirect to another absolute url
-	function tpl_redirect_absolute($absolute_server_URI)
-	{
-		//page has to be the filename with domain i.e. 'http://abc.de/viecache.php?cacheid=1'
-		write_cookie_settings();
-		http_write_no_cache();
-
-		header("Location: " . $absolute_server_URI);
 		exit;
 	}
 

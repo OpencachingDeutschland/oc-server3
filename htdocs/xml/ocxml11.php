@@ -316,7 +316,7 @@
 function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $ziptype)
 {
 	global $zip_basedir, $zip_wwwdir, $sDateformat, $sDateshort, $t1, $t2, $t3, $safemode_zip, $safemode_zip, $sCharset, $bAttrlist;
-	global $absolute_server_URI, $bLicense, $sLanguage;
+	global $opt, $bLicense, $sLanguage;
 	global $ocxmlversion;
 	// alle records aus tmpxml_* übertragen
 	
@@ -427,7 +427,7 @@ function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $z
 		fwrite($f, $t1 . '<attrlist>' . "\n");
 		while ($r = sql_fetch_assoc($rs))
 		{
-			fwrite($f, $t2 . '<attr id="' . $r['id'] . '" icon_large="' . xmlentities($absolute_server_URI . $r['icon_large']) . '" icon_no="' . xmlentities($absolute_server_URI . $r['icon_no']) . '" icon_undef="' . xmlentities($absolute_server_URI . $r['icon_undef']) . '">' . xmlcdata($r['name']) . '</attr>' . "\n");
+			fwrite($f, $t2 . '<attr id="' . $r['id'] . '" icon_large="' . xmlentities($opt['page']['default_absolute_url'] . $r['icon_large']) . '" icon_no="' . xmlentities($opt['page']['default_absolute_url'] . $r['icon_no']) . '" icon_undef="' . xmlentities($opt['page']['default_absolute_url'] . $r['icon_undef']) . '">' . xmlcdata($r['name']) . '</attr>' . "\n");
 		}
 		fwrite($f, $t1 . '</attrlist>' . "\n");
 		sql_free_result($rs);

@@ -95,9 +95,9 @@
 			</div>
 
 			<p style="line-height: 1.6em;">
-				<a href="log.php?cacheid={$cacheid}&logtype=10&teamcomment=1" target="_blank"><img src="resource2/{$opt.template.style}/images/log/16x16-active.png" />{t}Ready for search{/t}</a>
+				<a href="log.php?cacheid={$cacheid}&logtype=10&teamcomment=1" target="_blank"><img src="resource2/{$opt.template.style}/images/log/16x16-active.png" />{t}Available{/t}</a>
 				&nbsp; &nbsp;
-				<a href="log.php?cacheid={$cacheid}&logtype=11&teamcomment=1" target="_blank"><img src="resource2/{$opt.template.style}/images/log/16x16-disabled.png" />{t}Temporary not available{/t}</a>
+				<a href="log.php?cacheid={$cacheid}&logtype=11&teamcomment=1" target="_blank"><img src="resource2/{$opt.template.style}/images/log/16x16-disabled.png" />{t}Temporarily not available{/t}</a>
 				&nbsp; &nbsp;
 				<a href="log.php?cacheid={$cacheid}&logtype=9&teamcomment=1" target="_blank"><img src="resource2/{$opt.template.style}/images/log/16x16-archived.png" />{t}Archived{/t}</a>
 				&nbsp; &nbsp;

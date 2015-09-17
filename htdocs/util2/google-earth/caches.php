@@ -181,7 +181,7 @@
 	//  header("Content-type: application/vnd.google-earth.kml");
 	//  header("Content-Disposition: attachment; filename=ge.kml");
 
-	echo mb_ereg_replace('{urlbase}', xmlentities($opt['page']['absolute_url']), $kmlHead);
+	echo mb_ereg_replace('{urlbase}', xmlentities($opt['page']['default_absolute_url']), $kmlHead);
 
 	if ((abs($lon_from - $lon_to) > 2) || (abs($lat_from - $lat_to) > 2))
 	{
@@ -224,7 +224,7 @@
 			$nCount = $nCount + 1;
 			$thisline = $kmlLine;
 			
-			$typeimgurl = '<img src="'.$opt['page']['absolute_url'].'resource2/'.$opt['template']['style'].'/images/cacheicon/'.$r['icon_large'].'" alt="'.$r['typedesc'].'" title="'.$r['typedesc'].'" />';
+			$typeimgurl = '<img src="'.$opt['page']['default_absolute_url'].'resource2/'.$opt['template']['style'].'/images/cacheicon/'.$r['icon_large'].'" alt="'.$r['typedesc'].'" title="'.$r['typedesc'].'" />';
 
 			$thisline = mb_ereg_replace('{icon}', $r['kml_name'], $thisline);
 			$thisline = mb_ereg_replace('{typeimgurl}', $typeimgurl, $thisline);
@@ -255,7 +255,7 @@
 			$thisline = mb_ereg_replace('{username}', xmlentities($r['username']), $thisline);
 			$thisline = mb_ereg_replace('{cacheid}', xmlentities($r['cacheid']), $thisline);
 
-			$thisline = mb_ereg_replace('{urlbase}', xmlentities($opt['page']['absolute_url']), $thisline);
+			$thisline = mb_ereg_replace('{urlbase}', xmlentities($opt['page']['default_absolute_url']), $thisline);
 
 			echo $thisline;
 		}

@@ -12,7 +12,7 @@
 	<img src="images/ueber_oc.jpg" alt="" />
 </div>
 
-<p>Geocaching is a form of modern treasure hunt. Simplified and generally speaking: There are people who hide containers with nice things and a logbook somewhere, preferrably at nice places, and publish the stash location by means of GPS coordinates on the internet (preferrably at Opencaching.de). Other people read this <em>geocache listings</em>, note the coordinates and use their GPS device to find the treasures. They log their visit in the on-site logbook, maybe exchange items stored in the cache, hide the container at the same place and log their visit online at the geocaching website.</p>
+<p>Geocaching is a form of modern treasure hunt. Simplified and generally speaking: There are people who hide containers with nice things and a logbook somewhere, preferrably at nice places, and publish the stash location by means of GPS coordinates on the internet (preferrably at Opencaching). Other people read this <em>geocache listings</em>, note the coordinates and use their GPS device to find the treasures. They log their visit in the on-site logbook, maybe exchange items stored in the cache, hide the container at the same place and log their visit online at the geocaching website.</p>
 
 <p>So far for the basics. Of course geocaching is much more. For example, there are different types of caches, from simple ones which you can nearly grab driving by with your car, up to sophisticated caches which need special equipment (like climbing gear or wetsuit). There are multistage caches and quiz caches which include solving puzzles. </p>
 

@@ -146,8 +146,18 @@ function getChildWaypoints($cacheid)
 		    WHERE `caches`.`cache_id`='&1'", $cacheid, $opt['template']['locale'], $sPreferedDescLang, $login->userid);
 	$rCache = sql_fetch_assoc($rs);
 	sql_free_result($rs);
+
 	if ($rCache === false)
 		$tpl->error(ERROR_CACHE_NOT_EXISTS);
+
+	// not published?
+	if ($rCache['status'] == 5)
+	{
+		$tpl->caching = false;
+		$login->verify();
+		if ($rCache['userid'] != $login->userid)
+			$tpl->error(ERROR_CACHE_NOT_PUBLISHED);
+	}
 
 	// format waylength
 	if ($rCache['waylength'] < 5)
@@ -164,14 +174,8 @@ function getChildWaypoints($cacheid)
 		$digits = 0;
 	$rCache['waylength'] = sprintf('%.'.$digits.'f', $rCache['waylength']);
 
-	// not published?
-	if ($rCache['status'] == 5)
-	{
-		$tpl->caching = false;
-		$login->verify();
-		if ($rCache['userid'] != $login->userid)
-			$tpl->error(ERROR_CACHE_NOT_PUBLISHED);
-	}
+	// replace links
+	$rCache['desc'] = use_current_protocol_in_html($rCache['desc']);
 
 	$rCache['adminlog'] = !$rCache['log_allowed'] && ($login->admin & ADMIN_USER);
 
@@ -352,7 +356,7 @@ function getChildWaypoints($cacheid)
 		$sGMKey = $opt['lib']['google']['mapkey'][$sHost];
 
   $cachemap['iframe'] = $opt['logic']['cachemaps']['iframe'];
-	$url = $opt['logic']['cachemaps']['url'];
+	$url = $opt['page']['protocol'] . strstr($opt['logic']['cachemaps']['url'], '://');
 	$url = str_replace('{userzoom}', $userzoom, $url);
 	$url = str_replace('{latitude}', $rCache['latitude'], $url);
 	$url = str_replace('{longitude}', $rCache['longitude'], $url);
@@ -360,7 +364,7 @@ function getChildWaypoints($cacheid)
 	$cachemap['url'] = $url;
 	$tpl->assign('cachemap', $cachemap);
 
-	$tpl->assign('shortlink_domain', $opt['logic']['shortlink_domain']);
+	$tpl->assign('shortlink_url', $opt['page']['shortlink_url']);
 	$tpl->assign('listing_admin', $login->listingAdmin());
 	$tpl->assign('npahelplink', helppagelink('npa'));
 	$tpl->assign('garmin_url', $opt['lib']['garmin']['page_url']);

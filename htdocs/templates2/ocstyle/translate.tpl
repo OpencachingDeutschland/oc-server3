@@ -38,9 +38,11 @@
 		<a href="translate.php?translang={$translang}&action=scan">{t}Scan source codes{/t}</a><br />
 		<br />
 		<a href="translate.php?translang={$translang}&action=listnew">{t}Show new translations{/t}</a><br />
-		<a href="translate.php?translang={$translang}&action=clearcache">{t}Clear smarty cache{/t}</a><br />
-		<a href="translate.php?translang={$translang}&action=listfaults">{t}Show translations no longer referenced{/t}</a><br />
 		<a href="translate.php?translang={$translang}&action=listall">{t}Show all translations{/t}</a><br />
+		<a href="translate.php?translang={$translang}&action=listfaults">{t}Show translations no longer referenced{/t}</a><br />
+		<br />
+		<a href="translate.php?translang={$translang}&action=verify">{t}Show inconsistencies{/t}</a> (EN)<br />
+		<a href="translate.php?translang={$translang}&action=clearcache">{t}Clear smarty cache{/t}</a><br />
 		<a href="translate.php?translang={$translang}&action=resetids">{t}Reorder ID's{/t}</a> {t}(before an export){/t}<br />
 		<a href="translate.php?translang={$translang}&action=export">{t}SQL Export{/t}</a><br />
 		<br />
@@ -58,14 +60,20 @@
 
 	{if $action=="listnew" || $action=="listfaults" || $action=="listall"}
 		{if $action=="listnew"}
-			{t}New translations:{/t}<br/>
+			<p>{t}New translations:{/t}</p>
 		{elseif $action=="listfaults"}
-			{t}Translations no longer referenced:{/t}<br/>
+			<p>{t}Translations no longer referenced:{/t}</p>
+			<p><small>{t}This table contains some false positives. References from the "libse" code
+				(personal cache notes, additional waypoints) are not detected, as well as textes which
+				are passed by variable to translation functions and multiline texts. "Help", "Forum",
+				"Teamblog" and "Informations" are referenced in local configuration files. So be very
+				careful before deleting anything.{/t}
+			  </small></p>
 		{elseif $action=="listall"}
-			{t}All translations:{/t}<br/>
+			<p>{t}All translations:{/t}</p>
 		{/if}
-		<br />
 		<table class="table">
+			<tr><td></td></td></tr>
 			{foreach from=$trans item=transItem}
 				<tr>
 					<td valign="top"><a href="translate.php?translang={$translang}&action=edit&id={$transItem.id}">{$transItem.id}</a></td>
@@ -178,13 +186,26 @@
 								{t}Modified translation{/t}
 							{/if}
 						</td>
-					</tr>
-					<tr>
 						<td>
 							<input type="hidden" name="code{$textItem.count}" value="{$textItem.code|base64encode}" />
 						</td>
+					</tr>
+					<tr>
+						<td></td>
+						<td><b>ID</b> {$textItem.id|escape}</td>
+					</tr>
+					{if $textItem.code}
+					<tr>
+						<td></td>
 						<td><b>CODE</b> {$textItem.code|escape}</td>
 					</tr>
+					{/if}
+					{if $textItem.en && (!$textItem.code || $textItem.en != $textItem.code)}
+					<tr>
+						<td></td>
+						<td><b>EN</b> {$textItem.en|escape}</td>
+					</tr>
+					{/if}
 					{foreach from=$languages item=languageItem}
 						{if $textItem.$languageItem}
 							{if $textItem.type==3}
@@ -298,5 +319,33 @@
 			//-->
 			</script>
 		{/literal}
+	{elseif $action=="verify"}
+		<p>Discrepancies in <code>sys_menu</code> are uncritical, because the original
+			strings never get displayed. Discrepancies in <code>towns</code> can be intentionally,
+			because the default name to be displayed is the local name, not the English.</p>
+		<p>Before changing any original text in <code>cache_type</code>,
+			<code>cache_status</code>, <code>log_type</code> etc., take care that this will not
+			break the downward compatibility of any API.
+			When changing <code>sys_trans</code> entries, grep the source code (especially
+			templates) for these text and adjust the original text there, too.
+			<br /><br /></p>
+		<table class="table">
+			<tr>
+				<th>column</th>
+				<th>ID</th>
+				<th>original text</th>
+				<th>sys_trans</th>
+				<th>sys_trans_text/EN</th>
+			</tr>
+			{foreach from=$inconsistencies item=problem}
+				<tr>
+					<td style="vertical-align:top;">{$problem.col|escape}</td>
+					<td style="vertical-align:top; text-align:right">{$problem.id|escape}</td>
+					<td style="vertical-align:top;">{$problem.org_text|escape}</td>
+					<td style="vertical-align:top;">{if $problem.sys_trans != $problem.org_text}{$problem.sys_trans|escape}{/if}</td>
+					<td style="vertical-align:top;">{if $problem.en_text != $problem.org_text}{$problem.en_text|escape}{/if}</td>
+				</tr>
+			{/foreach}
+		</table>
 	{/if}
 {/if}

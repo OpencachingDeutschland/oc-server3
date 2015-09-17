@@ -58,7 +58,7 @@ class mail extends Smarty
 		$this->assign($name, $items);
 	}
 
-	function send()
+	function send($page_url = false)
 	{
 		global $tpl, $opt;
 
@@ -69,7 +69,8 @@ class mail extends Smarty
 			$this->recipient_locale = $opt['template']['locale'];
 
 		$optn['mail']['contact'] = $opt['mail']['contact'];
-		$optn['page']['absolute_url'] = $opt['page']['absolute_url'];
+		$optn['page']['absolute_url'] = ($page_url ? $page_url : $opt['page']['absolute_url']);
+		$optn['page']['sitename'] = $opt['page']['sitename'];
 		$optn['format'] = $opt['locale'][$this->recipient_locale]['format'];
 		$this->assign('opt', $optn);
 

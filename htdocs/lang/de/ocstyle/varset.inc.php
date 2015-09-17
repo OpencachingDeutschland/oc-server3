@@ -25,7 +25,7 @@
 	tpl_set_var('runtime', '');
 
 	//set up main template specific string
-	$sLoggedOut = '<form action="login.php" method="post" enctype="application/x-www-form-urlencoded" name="login" dir="ltr" style="display: inline;"><b>' . t('User:') . '</b>&nbsp;&nbsp;<input name="email" size="10" type="text" class="textboxes" value="" />&nbsp;&nbsp;&nbsp;<b>' . t('Password:') . '</b>&nbsp;&nbsp;<input name="password" size="10" type="password" class="textboxes" value="" />&nbsp;<input type="hidden" name="action" value="login" /><input type="hidden" name="target" value="{target}" /><input type="hidden" name="source" value="titlebar" />&nbsp;<input type="submit" name="LogMeIn" value="' . t('Login') . '" class="formbutton" style="width: 74px;" onclick="submitbutton(\'LogMeIn\')" /></form>';
+	$sLoggedOut = '<form action="' . ($opt['page']['https']['force_login'] ? $opt['page']['absolute_https_url'] : '') . 'login.php" method="post" enctype="application/x-www-form-urlencoded" name="login" dir="ltr" style="display: inline;"><b>' . t('User:') . '</b>&nbsp;&nbsp;<input name="email" size="10" type="text" class="textboxes" value="" />&nbsp;&nbsp;&nbsp;<b>' . t('Password:') . '</b>&nbsp;&nbsp;<input name="password" size="10" type="password" class="textboxes" value="" />&nbsp;<input type="hidden" name="action" value="login" /><input type="hidden" name="target" value="{target}" /><input type="hidden" name="source" value="titlebar" />&nbsp;<input type="submit" name="LogMeIn" value="' . t('Login') . '" class="formbutton" style="width: 74px;" onclick="submitbutton(\'LogMeIn\')" /></form>';
 	$sLoggedIn = "<b>" . t('Logged in as') . ' <a href="myhome.php">{username}</a></b> - <a href="login.php?action=logout">' . t('Logout') . '</a>';
 
 	// target in Loginbox setzen
@@ -65,7 +65,7 @@
 			<img src="lang/de/ocstyle/images/misc/hint.gif" border="0" width="15" height="11" alt="' . t('Notice') . '" title="' . t('Notice') . '" />
 			' . t('Your HTML code will be changed again by a special filter. This is necessary to avoid dangerous HTML-tags, 
 				 such as &lt;script&gt;. A list of allowed HTML tags, you can find 
-				 <a href="http://www.opencaching.de/articles.php?page=htmltags">here</a>') . '
+				 <a href="articles.php?page=htmltags">here</a>') . '
 		</td>
 	</tr>
 	';

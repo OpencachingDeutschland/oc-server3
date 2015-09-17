@@ -60,7 +60,7 @@
 				<td colspan="2" class="help">
 					<p>
 						<img src="resource2/{$opt.template.style}/images/misc/hint.gif" border="0" width="15" height="11" alt="{t}Note{/t}" align="middle" />
-						{t}To create an account on Opencaching.de, you have to enter a vaild E-Mail address and an username.
+						{t 1=$opt.page.sitename}To create an account on %1, you have to enter a vaild E-Mail address and an username.
 						An E-Mail will be sent to the address you supplied with an activation code.{/t}
 					</p>
 					<p>
@@ -184,7 +184,7 @@
 					<input type="checkbox" name="TOS" value="ON" style="border:0;" />
 						{t}I've  read and understand the <a target="_blank" href="articles.php?page=dsb">privacy statement</a>, the <a target="_blank" href="articles.php?page=impressum#tos">terms of service</a> and the <a href="articles.php?page=impressum#datalicense" target="_blank">Datalicense</a> and accept them.{/t}
 					{if $error_tos_not_ok==1}
-						<br /><span class="errormsg">{t}You have to accept the privacy statement, terms of service and the datalicense to register at opencaching.de{/t}</span>
+						<br /><span class="errormsg">{t 1=$opt.page.sitename}You have to accept the privacy statement, terms of service and the datalicense to register at %1.{/t}</span>
 					{/if}
 				</td>
 			</tr>

@@ -44,7 +44,7 @@
 
 	// search.*.inc.php (TXT, KML, LOC, GPX ...)
 	$converted_from_html = _('converted from HTML');
-	$state_temporarily_na = _('Temporary not available');
+	$state_temporarily_na = _('Temporarily not available');
 	$state_archived = _('Archived');
 	$state_locked = _('Locked');
 	$cache_note_text = _('Personal cache note');

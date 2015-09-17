@@ -55,6 +55,7 @@
 						`log_types`.`icon_small` AS `icon_small`,
 						`user`.`username` as `log_username`,
 						IFNULL(`user`.`language`,'&2') AS `log_user_language`,
+						`user`.`domain` AS `log_user_domain`,
 						`caches`.`wp_oc`,
 						`cache_status`.`allow_user_view`
 					 FROM `cache_logs`, `caches`, `user`, `cache_status`, `log_types`
@@ -105,7 +106,7 @@
 							//send email to logger
 							$removed_log_subject = removed_log_subject($log_record['log_user_language']);
 							$removed_message_title = removed_message_title($log_record['log_user_language']);
-							$email_content = fetch_email_template('removed_log', $log_record['log_user_language']);
+							$email_content = fetch_email_template('removed_log', $log_record['log_user_language'], $log_record['log_user_domain']);
 
 							$message = isset($_POST['logowner_message']) ? $_POST['logowner_message'] : '';
 							if ($message != '')
@@ -162,16 +163,18 @@
 							$archived = (sqlValue("SELECT `id` FROM `pictures_modified` WHERE `id`=" . $r['id'], 0) > 0);
 							$fna = mb_split('\\/', $r['url']);
 							$filename = end($fna);
-							if (mb_substr($picdir, -1, 1) != '/')
-								$path = $picdir . "/";
-							else
-								$path = $picdir;
+							$path = $opt['logic']['pictures']['dir'];
+							if (mb_substr($path, -1, 1) != '/')
+								$path .= '/';
 
 							if ($archived)
 								@rename($path . $filename, $path . "deleted/" . $filename);
 							else
 								@unlink($path . $filename);
 
+							$path = $opt['logic']['pictures']['thumb_dir'];
+							if (mb_substr($path, -1, 1) != '/')
+								$path .= '/';
 							$path .= mb_strtoupper(mb_substr($filename, 0, 1)) . '/' .
 							         mb_strtoupper(mb_substr($filename, 1, 1)) . '/';
 							@unlink($path . $filename);  // Thumb

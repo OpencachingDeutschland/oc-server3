@@ -183,18 +183,8 @@
 	/* other template options
 	 *
 	 */
-	$opt['page']['absolute_url'] = 'http://devel.opencaching.de/'; // may be overwritten by $opt['domain'][...]['uri']
+	$opt['page']['origin_url'] = 'http://www.opencaching.de/';  // production installation for this OC site 
 	$opt['page']['develsystem'] = false;
-	$opt['page']['origin_url'] = 'http://www.opencaching.de/';  // reference productive installation for this OC code fork
-
- 	/* disable or enable https access to the main site
- 	 * if false and connection is https, redirect to $opt['page']['absolute_url']
- 	 * access to /xml/ocapi10 (SOAP interface) is allowed nevertheless
- 	 */
- 	$opt['page']['allowhttps'] = false;
-
- 	// require SSL for SOAP access
- 	$opt['page']['nusoap_require_https'] = false;
 
  	/*
  	 * configure infos on 404.php
@@ -260,21 +250,17 @@
 
 	/* location of uploaded images
 	 */
-	$opt['logic']['pictures']['dir'] = $opt['rootpath'] . 'images/uploads';  // Ocprop
-	$opt['logic']['pictures']['url'] = 'http://devel.opencaching.de/images/uploads';
 	$opt['logic']['pictures']['maxsize'] = 6000*1024;
 	$opt['logic']['pictures']['unchg_size'] = 250*1024;
-    if (extension_loaded('imagick'))
-    $opt['logic']['pictures']['extensions'] = 'jpg;jpeg;gif;png;bmp;tif;psd;pcx;svg;xpm';
-    else
-    $opt['logic']['pictures']['extensions'] = 'jpg;jpeg;gif;png';
+	if (extension_loaded('imagick'))
+		$opt['logic']['pictures']['extensions'] = 'jpg;jpeg;gif;png;bmp;tif;psd;pcx;svg;xpm';
+	else
+		$opt['logic']['pictures']['extensions'] = 'jpg;jpeg;gif;png';
 
 	/* Thumbnail sizes
 	 */
 	$opt['logic']['pictures']['thumb_max_width'] = 175;
 	$opt['logic']['pictures']['thumb_max_height'] = 175;
-	$opt['logic']['pictures']['thumb_url'] = $opt['logic']['pictures']['url'] . '/thumbs';
-	$opt['logic']['pictures']['thumb_dir'] = $opt['rootpath'] . 'images/uploads/thumbs';
 
 	/* Defaults for picture replacement on declined license
 	 *
@@ -285,22 +271,17 @@
 	$opt['logic']['pictures']['dummy']['textcolor'] = array(0,0,0);
 	$opt['logic']['pictures']['dummy']['replacepic'] = $opt['rootpath'] . 'images/';  	   
 
-	/* location of uploaded podcasts
+	/* cachemaps (obsolete)
 	 */
-	$opt['logic']['podcasts']['dir'] = $opt['rootpath'] . 'podcasts/uploads';
-	$opt['logic']['podcasts']['url'] = 'http://devel.opencaching.de/podcasts/uploads';
-	$opt['logic']['podcasts']['maxsize'] = 1536000;
-	$opt['logic']['podcasts']['extensions'] = 'mp3';
-
-	/* cachemaps (old, see cachemaps.php)
-	 */
+/*
 	$opt['logic']['cachemaps']['url'] = 'images/cachemaps/';
 	$opt['logic']['cachemaps']['dir'] = $opt['rootpath'] . $opt['logic']['cachemaps']['url'];
-	$opt['logic']['cachemaps']['wmsurl'] = 'http://www.opencaching.de/cachemaps.php?wp={wp_oc}';
+	$opt['logic']['cachemaps']['wmsurl'] = 'cachemaps.php?wp={wp_oc}';
 	$opt['logic']['cachemaps']['size']['lat'] = 0.2;
 	$opt['logic']['cachemaps']['size']['lon'] = 0.2;
 	$opt['logic']['cachemaps']['pixel']['y'] = 200;
 	$opt['logic']['cachemaps']['pixel']['x'] = 200;
+*/
 
 	/* cachemaps (new)
 	 * how to display the cache map on viewcache.php (200x200 pixel)
@@ -365,7 +346,6 @@
 	/* opencaching prefixes in database available to search for
 	 */
 	$opt['logic']['ocprefixes'] = 'oc';
-	$opt['logic']['shortlink_domain'] = false;
 
   /* Username for cronjobs or CLI tools
    * is used e.g. for cache auto-archiving and auto-publishing
@@ -504,8 +484,8 @@
  	// (e.g. domain called without www. prefix) - must match domain of $opt['lib']['garmin']['url']
  	$opt['lib']['garmin']['redirect'] = 'http://www.site.org/garmin.php?redirect=1&cacheid={cacheid}';
 
-    // developer.what3words.com API key
-    $opt['lib']['w3w']['apikey'] = 'YOURAPIKEY';
+	// developer.what3words.com API key
+	$opt['lib']['w3w']['apikey'] = 'YOURAPIKEY';
 
 	// Google Maps API key
 	// http://code.google.com/intl/de/apis/maps/signup.html

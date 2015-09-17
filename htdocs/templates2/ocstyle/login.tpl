@@ -10,7 +10,7 @@
 </div>
 
 <div class="systemlink">
-<form action="login.php" method="post" enctype="application/x-www-form-urlencoded" style="display: inline;">
+<form action="{$opt.page.login_url}" method="post" enctype="application/x-www-form-urlencoded" style="display: inline;">
 	<input type="hidden" name="target" value="{$target|escape}" />
 	<input type="hidden" name="action" value="login" />
 	<input type="hidden" name="source" value="loginpage" />

@@ -702,7 +702,7 @@ class user
 		$mail->assign('fromuserid', $fromUser->getUserId());
 		$mail->assign('fromuseremail', $fromUser->getEMail());
 
-		if ($mail->send())
+		if ($mail->send($opt['page']['default_absolute_url']))
 		{
 			// send copy to fromUser
 			$mail->assign('copy', true);

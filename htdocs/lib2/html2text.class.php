@@ -401,6 +401,9 @@ class html2text
     {
         if ( empty($url) ) {
         	if ( !empty($_SERVER['HTTP_HOST']) ) {
+	          if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off')
+	            $this->url = 'https://' . $_SERVER['HTTP_HOST'];
+	          else
 	            $this->url = 'http://' . $_SERVER['HTTP_HOST'];
         	} else {
 	            $this->url = '';

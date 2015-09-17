@@ -35,4 +35,6 @@
 	define('DB_MODE_BUSINESSLAYER', 1);
 	define('DB_MODE_USER', 2);
 	define('DB_DATE_FORMAT', '%Y-%m-%d %H:%M:%S');
+
+	define('EMAIL_LINEWRAP', 72);
 ?>

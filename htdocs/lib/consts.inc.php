@@ -22,6 +22,8 @@
 	define('HTTPS_ENABLED', 1);
 	define('HTTPS_ENFORCED', 2);
 
+	define('EMAIL_LINEWRAP', 72);
+
 	// for cachelists
 	define('cachelist_type_ignore', 1);
 	define('cachelist_type_watch', 2);

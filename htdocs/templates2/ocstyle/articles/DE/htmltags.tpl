@@ -89,7 +89,29 @@
 	  <p class="content-title-noshade-size2" style="margin:0 !important">&nbsp;CSS-Stile</p>
 	</div>
 
-	<p>Alle CSS-Stile außer "overflow" sind erlaubt.</p>
-	<p>&nbsp;</p>
+	<p><b>Die folgenden CSS-Stile sind erlaubt:</b></p>
+
+	<p class="html_css">background, background-attachment, background-color, background-image, <span class="nowrap">background-position,</span> <span class="nowrap">background-repeat</span></p>
+	<p class="html_css">border, border-bottom, border-bottom-color, border-bottom-style, <span class="nowrap">border-bottom-width,</span> <span class="nowrap">border-collapse,</span> <span class="nowrap">border-left,</span> <span class="nowrap">border-left-color,</span> <span class="nowrap">border-left-style,</span> <span class="nowrap">border-left-width,</span> <span class="nowrap">border-right,</span> <span class="nowrap">border-right-color,</span> <span class="nowrap">border-right-style,</span> <span class="nowrap">border-right-width,</span> <span class="nowrap">border-spacing</p>
+	<p class="html_css">caption-side<br />
+	<p class="html_css">clear</p>
+	<p class="html_css">color</p>
+	<p class="html_css">display</p>
+	<p class="html_css">float</p>
+	<p class="html_css">font, font-family, font-size, font-variant, font-weight</p>
+	<p class="html_css">height</p>
+	<p class="html_css">letter-spacing</p>
+	<p class="html_css">line-height</p>
+	<p class="html_css">list-style, list-style-image, list-style-position, list-style-type</p>
+	<p class="html_css">margin, margin-bottom, margin-left, margin-right, margin-top</p>
+	<p class="html_css">padding, padding-bottom, padding-left, padding-right, padding-top</p>
+	<p class="html_css">table-layout</p>
+	<p class="html_css">text-align, text-decoration, text-indent, text-transform</p>
+	<p class="html_css">vertical-align</p>
+	<p class="html_css">visibility</p>
+	<p class="html_css">white-space</p>
+	<p class="html_css">width</p>
+	<p class="html_css">word-spacing</p>
+	<br />
 
 </div>

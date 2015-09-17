@@ -97,6 +97,7 @@ img {
 
 .clear {clear: both;}
 .hide {display: none;}
+.nowrap { white-space: nowrap; }
 
 
 /*************************************/
@@ -904,6 +905,7 @@ div.floatbox { float:right; margin-left:16px; padding-left:16px;}
 span.html_replacetags  { display:inline-block; width:4.3em; }
 span.html_attributes   { display:inline-block; width:5.6em; }
 span.html_replaceattrs { display:inline-block; width:4em; }
+p.html_css             { text-indent:-1.4em; margin-left:3.4em; margin-bottom:0.2em; }
 
 
 /*---------------------------*/

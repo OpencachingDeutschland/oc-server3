@@ -83,7 +83,7 @@
 
     // Throttle email sending after undeliverable mails. See also runwatch.php.
     // See also stored procedure sp_notify_new_cache().
-    // See http://forum.opencaching-network.org/index.php?topic=3123.0 on AOL.
+    // See http://forum.opencaching.de/index.php?topic=3123.0 on AOL.
     if (sqlValue("SELECT `email_problems` = 0 OR DATEDIFF(NOW(),`last_email_problem`) > 1+DATEDIFF(`last_email_problem`,`first_email_problem`)
 		                FROM `user` WHERE `user_id`='" . sql_escape($rcw['user_id']) . "'", 1))
       process_log_watch($rcw['user_id'], $rcw['log_id']);

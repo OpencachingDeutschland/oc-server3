@@ -151,7 +151,7 @@
 				}
 				else if ($login->hasAdminPriv(ADMIN_USER) && in_array($rCache['status'], array(6,7)))
 				{
-					// allowed for admins && locked caches, see http://forum.opencaching-network.org/index.php?topic=3102.msg39517#msg39517
+					// allowed for admins && locked caches, see http://forum.opencaching.de/index.php?topic=3102.msg39517#msg39517
 					$allowed = true;
 				}
 				else

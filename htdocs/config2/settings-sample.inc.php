@@ -224,7 +224,7 @@
 
 	/* forum RSS integration (index.php)
 	 */
-	// $opt['forum']['url'] = ''http://forum.opencaching-network.org/index.php?action=.xml;type=rss;limit=50';
+	// $opt['forum']['url'] = ''http://forum.opencaching.de/index.php?action=.xml;type=rss;limit=50';
 	// $opt['forum']['count'] = 8;
 
 	/* old news integration (index.php)

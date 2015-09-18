@@ -83,7 +83,7 @@
 	</li>
 	<li>
 	After removing an entry of the list of ignored caches, the correct page is displayed now
-	(<a href="http://forum.opencaching-network.org/index.php?topic=4214">see forum</a>).
+	(<a href="http://forum.opencaching.de/index.php?topic=4214">see forum</a>).
 	</li>
 	<li>
 	Corrected error when adding hints in english or spanish language
@@ -91,7 +91,7 @@
 	</li>
 	<li>
 	OKAPI now updates the login date
-	(<a href="http://forum.opencaching-network.org/index.php?topic=4260.0">see forum</a>)
+	(<a href="http://forum.opencaching.de/index.php?topic=4260.0">see forum</a>)
 	</li>
 	<li>
 	OKAPI now handles pipe ('|') in user names correctly

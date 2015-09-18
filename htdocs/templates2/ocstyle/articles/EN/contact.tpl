@@ -17,7 +17,7 @@
 	<tr>
 		<td>
 		  <p>For general questions, you will find lots of information at the German websites <a href="http://wiki.opencaching.de">wiki.opencaching.de</a> and <a href="http://www.geocaching.de">www.geocaching.de</a>.</p>
-			<p>If you encounter a special problem, you may ask your questions in one of the German or international discussion boards at <a href="http://forum.opencaching-network.org/">forum.opencaching-network.org</a>.</p>
+			<p>If you encounter a special problem, you may ask your questions in one of the German or international discussion boards at <a href="http://forum.opencaching.de/">forum.opencaching.de</a>.</p>
 		</td>
 	</tr>
 
@@ -29,7 +29,7 @@
 	<tr>
 		<td>
 		  There is a board for this purpose at  
-			<a href="http://forum.opencaching-network.org/index.php?board=33.0">forum.opencaching-network.org</a> (<em>Opencaching 3.0 &ndash; Ideen und Gedanken</em>). It also conatains (German) information on joining our team.
+			<a href="http://forum.opencaching.de/index.php?board=33.0">forum.opencaching.de</a> (<em>Opencaching 3.0 &ndash; Ideen und Gedanken</em>). It also conatains (German) information on joining our team.
 		</td>
 	</tr>
 

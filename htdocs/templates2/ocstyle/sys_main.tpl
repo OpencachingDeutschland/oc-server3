@@ -276,7 +276,7 @@
 							</tr>
 						</table>
 						<table style="margin-left: auto; margin-right: auto;">
-							<tr><td><a href="http://forum.opencaching-network.org/"><img src="resource2/{$opt.template.style}/images/oclogo/16x16-oc_logo.png" /></a></td><td style="text-align: left"><a href="http://forum.opencaching-network.org/">{t}Opencaching Forum{/t}</a></td></tr>
+							<tr><td><a href="http://forum.opencaching.de/"><img src="resource2/{$opt.template.style}/images/oclogo/16x16-oc_logo.png" /></a></td><td style="text-align: left"><a href="http://forum.opencaching.de/">{t}Opencaching Forum{/t}</a></td></tr>
 							<tr><td><a href="https://plus.google.com/communities/115824614741379300945"><img src="resource2/{$opt.template.style}/images/media/16x16-google+.png" /></a></td><td style="text-align: left"><a href="https://plus.google.com/communities/115824614741379300945">{t}Google+ Community{/t}</a></td></tr>
 							<tr><td><a href="https://www.facebook.com/groups/198752500146032/"><img src="resource2/{$opt.template.style}/images/media/16x16-facebook.png" /></a></td><td style="text-align: left"><a href="https://www.facebook.com/groups/198752500146032/">{t}Facebook Group{/t}</a></td></tr>
 						</table>

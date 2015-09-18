@@ -12,7 +12,7 @@
 
 <h5>Wo ist der Sitz des Vereins?</h5>
 <p>Der Sitz des Vereins ist Bad Homburg vor der Höhe. Wir haben diesen Sitz gewählt, da er zentral gelegen ist. Letztenendes ist der Sitz von Opencaching Deutschland aber zweitrangig, denn es handelt sich um einen online agierenden Verein, der das Vereinsleben (fast) komplett online abbildet.</p>
-<p>Mitgliederversammlungen, Vorstandssitzungen und Konferenzen zur weiteren Entwicklung von Opencaching werden per TeamSpeak abgehalten und dokumentiert. Wir arbeiten viel mit E-Mail und natürlich in unserem <a href="http://forum.opencaching-network.org" target="_blank">Forum</a>.</p>
+<p>Mitgliederversammlungen, Vorstandssitzungen und Konferenzen zur weiteren Entwicklung von Opencaching werden per TeamSpeak abgehalten und dokumentiert. Wir arbeiten viel mit E-Mail und natürlich in unserem <a href="http://forum.opencaching.de" target="_blank">Forum</a>.</p>
 
 <h5>Was kostet die Mitgliedschaft im Verein?</h5>
 <p>Für ordentliche Mitglieder, die Opencaching.de mitgestalten, ist die Mitgliedschaft kostenfrei. Wir sind immer auf der Suche nach Entwicklern, Grafikern, Fotografen, Lektoren, Supportlern, Dokumentatoren etc.! Wer nicht die Zeit hat, um sich bei Opencaching einzubringen, kann stattdessen Fördermitglied werden. Der Mindestbeitrag für Fördermitglieder beträgt derzeit 1 Euro / Monat.</p>

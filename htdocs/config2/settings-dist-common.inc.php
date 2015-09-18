@@ -45,8 +45,8 @@
 	 * See examples for overriding in settings-sample.inc.php.
 	 */
 	$opt['page']['meta']['keywords'] = 'Geocaching, Geocache, Cache, Schatzsuche, GPS, kostenlos, GPX, Koordinaten, Hobby, Natur';  // 5-10 keywords are recommended
-	// see http://forum.opencaching-network.org/index.php?topic=3065.0
-	// and http://forum.opencaching-network.org/index.php?topic=3065.0 regarding description
+	// see http://forum.opencaching.de/index.php?topic=3065.0
+	// and http://forum.opencaching.de/index.php?topic=3065.0 regarding description
 	$opt['page']['meta']['description'] = 'Opencaching.de ist das freie Portal für Geocaching, ein Schatzsuche-Spiel. Mittels GPS-Koordinaten sind Behälter oder Objekte zu finden.';
 	$opt['page']['headoverlay'] = 'oc_head_alpha3_generic';
 	$opt['template']['default']['locale'] = 'DE';

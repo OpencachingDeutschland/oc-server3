@@ -11,7 +11,7 @@ for setting up your own open and free Geocaching listing service! The code can e
 translated to other languages.
 
 Your contributions to this project are welcome - you may contact the team in the
-[Opencaching network forum](http://forum.opencaching-network.org/) if you like to
+[Opencaching.de forum](http://forum.opencaching.de/) if you like to
 join us. Development is usually done on a VirtualBox Linux system that you can run on your
 Linux, Windows or Mac workstation, but you may also try to set up the code directly
 on your Linux machine.
@@ -58,7 +58,7 @@ Related Websites
 * [Opencaching.de Git tutorial](http://wiki.opencaching.de/index.php/Entwicklung/Git) (German)
 * [Opencaching.de Wiki](http://wiki.opencaching.de/index.php/Hauptseite) (German) -> [Development](http://wiki.opencaching.de/index.php/Entwicklung)
 * [Opencaching.de Team Blog](http://blog.opencaching.de/) (German)
-* [Opencaching Network Forum](http://forum.opencaching-network.org/) (German and English) -> [Development](http://forum.opencaching-network.org/index.php?board=43.0)
+* [Opencaching.de Forum](http://forum.opencaching.de/) (German and English) -> [Development](http://forum.opencaching-network.org/index.php?board=43.0)
 * [Opencaching API project](https://github.com/opencaching/okapi)
 * [Opencaching.pl project](https://github.com/opencaching/opencaching-pl)
 * [Git explained](http://gitref.org/index.html)

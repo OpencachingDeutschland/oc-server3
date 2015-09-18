@@ -625,6 +625,12 @@
 			sql("ALTER TABLE `user` ADD COLUMN `domain` varchar(40) default NULL AFTER `language_guessed`");
 	}
 
+	function dbv_141()   // adjust some comments
+	{
+		sql("ALTER TABLE `cache_logs` MODIFY `log_last_modified` datetime NOT NULL COMMENT 'via Triggers'");
+		sql("ALTER TABLE `log_types` MODIFY `icon_small` varchar(255) NOT NULL COMMENT ''");
+	}
+
 
 	// When adding new mutations, take care that they behave well if run multiple
 	// times. This improves robustness of database versioning.

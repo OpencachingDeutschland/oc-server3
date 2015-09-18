@@ -6,7 +6,7 @@ CREATE TABLE `cache_logs` (
   `node` tinyint(3) unsigned NOT NULL default '0',
   `date_created` datetime NOT NULL COMMENT 'via Trigger (cache_logs)',
   `last_modified` datetime NOT NULL COMMENT 'via Trigger (cache_logs)',
-  `log_last_modified` datetime NOT NULL COMMENT 'via Trigger (cache_logs)',
+  `log_last_modified` datetime NOT NULL COMMENT 'via Triggers',
   `cache_id` int(10) unsigned NOT NULL,
   `user_id` int(10) unsigned NOT NULL,
   `type` tinyint(3) unsigned NOT NULL,

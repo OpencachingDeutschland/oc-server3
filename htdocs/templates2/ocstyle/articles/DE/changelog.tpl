@@ -29,6 +29,28 @@
 
 	<div class="changelog-changes">
 
+	<p id="v3.0.15"><strong>OC 3.0 Version 15</strong> &ndash; 19. September 2015</p>
+	<p>Neu:</p>
+	<ul>
+		<li>französische Übersetzung fertiggstellt; Relaunch von <a href="http://www.opencaching.fr">Opencaching.fr</a></li>
+		<li>volle Unterstützung von HTTPS (auf Opencaching.de noch nicht aktiv)</li>
+		<li>erlaubte CSS-Stile <a href="articles.php?page=htmltags#cssstyles">dokumentiert</a></li>
+	</ul>
+
+	<p>Geändert / verbessert:</p>
+	<ul>
+		<li>bessere Präsentation der Seiten <a href="http://www.opencaching.it" target="_blank">www.opencaching.it</a> und <a href="http://www.opencachingspain.es" target="_blank">www.opencachingspain.es</a> (<a href="http://redmine.opencaching.de/issues/816">#816</a>, <a href="http://redmine.opencaching.de/issues/818">#818</a>)</li>
+		<li>Verbesserungen im Übersetzungssystem</li>
+	</ul>
+
+	<p>Korrigiert (Bugfixes):</p>
+	<ul>
+		<li>sinnvolle Textkonvertierung beim Umschalten zwischen Text- und HTML-Editor (<a href="http://redmine.opencaching.de/issues/236">#236</a>)</li>
+		<li>HTML-Code in Logbenachrichtigungen beseitigt</li>
+		<li>&bdquo;An GPS-Gerät senden&ldquo; auf www.opencaching.it, www.opencachingspain.es und www.opencaching.fr repariert.</li>
+	</ul>
+	<br />
+
 	<p id="v3.0.14"><strong>OC 3.0 Version 14</strong> &ndash; 5. September 2015</p>
 	<p>Neu:</p>
 	<ul>
@@ -126,7 +148,7 @@
 	<li>Außerdem wurde viele weitere, kleinere Fehler behoben - vollständige Liste
 	<a href="http://redmine.opencaching.de/versions/10">hier</a>.</li>
 	</ul>
-	</br>
+	<br />
 
 	<p id="v3.0.13"><strong>OC 3.0 Version 13</strong> &ndash; 4. Juli 2015</p>
 	<p>Neu:</p>

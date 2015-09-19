@@ -15,7 +15,29 @@
 
 	<div class="changelog-changes">
 
-	<p id="v3.0.14"><strong>OC 3.0 Version 14</strong> &ndash; September 5, 2015</p>
+	<p id="v3.0.15"><strong>OC 3.0 Release 15</strong> &ndash; September 19, 2015</p>
+	<p>New:</p>
+	<ul>
+		<li>finished French translation; relaunch of <a href="http://www.opencaching.fr">Opencaching.fr</a></li>
+		<li>full HTTPS support (not enabled yet at Opencaching.de)</li>
+		<li>added <a href="articles.php?page=htmltags#cssstyles">Documentation</a> on allowed CSS styles</li>
+	</ul>
+
+	<p>Changed / improved:</p>
+	<ul>
+		<li>better presentation of <a href="http://www.opencaching.it" target="_blank">www.opencaching.it</a> and <a href="http://www.opencachingspain.es" target="_blank">www.opencachingspain.es</a> (<a href="http://redmine.opencaching.de/issues/816">#816</a>, <a href="http://redmine.opencaching.de/issues/818">#818</a>)</li>
+		<li>improved translation system</li>
+	</ul>
+
+	<p>Fixed:</p>
+	<ul>
+		<li>reasonable text conversions when switching between text and HTML editor (<a href="http://redmine.opencaching.de/issues/236">#236</a>)</li>
+		<li>removed HTML code from log notifications</li>
+		<li>Fixed &bdquo;Send to GPS devices&ldquo; at www.opencaching.it, www.opencachingspain.es and www.opencaching.fr.</li>
+	</ul>
+	<br />
+
+	<p id="v3.0.14"><strong>OC 3.0 Release 14</strong> &ndash; September 5, 2015</p>
 	<p>New:</p>
 	<ul>
 	<li>Sharing of personal cachelists using passwords</li>

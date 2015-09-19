@@ -37,7 +37,7 @@
 		<br />
 	</p>
 
-	<div class="content2-container bg-blue02">
+	<div id="htmlattributes" class="content2-container bg-blue02">
 	  <p class="content-title-noshade-size2" style="margin:0 !important">&nbsp;Attribute</p>
 	</div>
 
@@ -85,7 +85,7 @@
 		<br /><br />
 	</p>
 
-	<div class="content2-container bg-blue02">
+	<div id="cssstyles" class="content2-container bg-blue02">
 	  <p class="content-title-noshade-size2" style="margin:0 !important">&nbsp;CSS-Stile</p>
 	</div>
 

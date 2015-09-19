@@ -15,7 +15,7 @@
 
 	<div class="changelog-changes">
 
-	<p id="v3.0.15"><strong>OC 3.0 Release 15</strong> &ndash; September 19, 2015</p>
+	<p id="v3.0.15"><strong>OC 3.0 Release 15</strong> &ndash; 19 September 2015</p>
 	<p>New:</p>
 	<ul>
 		<li>finished French translation; relaunch of <a href="http://www.opencaching.fr">Opencaching.fr</a></li>
@@ -37,7 +37,7 @@
 	</ul>
 	<br />
 
-	<p id="v3.0.14"><strong>OC 3.0 Release 14</strong> &ndash; September 5, 2015</p>
+	<p id="v3.0.14"><strong>OC 3.0 Release 14</strong> &ndash; 5 September 2015</p>
 	<p>New:</p>
 	<ul>
 	<li>Sharing of personal cachelists using passwords</li>
@@ -132,7 +132,7 @@
 	</ul>
 	<br />
 
-	<p id="v3.0.13"><strong>OC 3.0 Release 13</strong> &ndash; July 4, 2015</p>
+	<p id="v3.0.13"><strong>OC 3.0 Release 13</strong> &ndash; 4 July 2015</p>
 	<p>New:</p>
 	<ul>
 		<li><a href="cachelists.php">Cache lists</a></li>
@@ -160,7 +160,7 @@
 	</ul>
 	<br />
 
-	<p id="v3.0.12"><strong>OC 3.0 Release 12</strong> &ndash; May 31, 2015</p>
+	<p id="v3.0.12"><strong>OC 3.0 Release 12</strong> &ndash; 31 May 2015</p>
 	<p>New:</p>
 	<ul>
 		<li>"more..." link in the start page event list, if there are more than ten events or events in other countries</li>
@@ -190,7 +190,7 @@
 	</ul>
 	<br />
 
-	<p id="v3.0.11"><strong>OC 3.0 Release 11</strong> &ndash; June 21, 2014</p>
+	<p id="v3.0.11"><strong>OC 3.0 Release 11</strong> &ndash; 21 June 2014</p>
 	<p>New:</p>
 	<ul>
 		<li>get direct link to a specific log entry by right-clicking on its symbol and choosing "copy hyperlink"</li>
@@ -214,7 +214,7 @@
 	</ul>
 	<br />
 
-	<p id="v3.0.10"><strong>OC 3.0 Release 10</strong> &ndash; August 24, 2013</p>
+	<p id="v3.0.10"><strong>OC 3.0 Release 10</strong> &ndash; 24 August 2013</p>
 	<p>New:</p>
 	<ul>
 		<li>automatically load rest of log entries, when scrolling to the end of a cache page and more than 5 logs are present</li>
@@ -247,7 +247,7 @@
 	</ul>
 	<br />
 
-	<p id="v3.0.9"><strong>OC 3.0 Release 9</strong> &ndash; July 25, 2013</p>
+	<p id="v3.0.9"><strong>OC 3.0 Release 9</strong> &ndash; 25 July 2013</p>
 	<p>Reworked <a href="search.php">searching for geocaches</a>:</p>
 	<ul>
 		<li>new, clearer design</li>
@@ -310,7 +310,7 @@
   </ul>
 	<br />
 
-	<p id="v3.0.8"><strong>OC 3.0 Release 8</strong> &ndash; June 1, 2013</p>
+	<p id="v3.0.8"><strong>OC 3.0 Release 8</strong> &ndash; 1 June 2013</p>
 	<p>New:</p>
 	<ul>
 		<li>The geocache listing status can now (only) be changed by logging the new state. New log types <em>temporarily unavailable</em>, <em>archived</em>, <em>locked </em> und <em>ready for search</em> have been added. Unchanged states may be logged, too, e.g. to confirm that the cache is still searchable. The type of old logs can be changed afterwards.</li>
@@ -371,7 +371,7 @@
   </ul>
 	<br />
 
-	<p id="v3.0.7"><strong>OC 3.0 Release 7</strong> &ndash; April 19, 2013</p>
+	<p id="v3.0.7"><strong>OC 3.0 Release 7</strong> &ndash; 19 April 2013</p>
 	<ul>
 		<li>New: <a href="okapi">OKAPI</a></li>
 		<li>"Apple Touch Icons" for Smartphones</li>
@@ -379,7 +379,7 @@
 	</ul>
 	<br />
 
-	<p id="v3.0.6"><strong>OC 3.0 Release 6</strong> &ndash; April 12, 2013</p>
+	<p id="v3.0.6"><strong>OC 3.0 Release 6</strong> &ndash; 12 April 2013</p>
 	<p>New:</p>
 	<ul>
 		<li>logging with time</li>
@@ -420,7 +420,7 @@
   </ul>
 	<br />
 
-	<p id="v3.0.5"><strong>OC 3.0 Release 5</strong> &ndash; March 16, 2013</p>
+	<p id="v3.0.5"><strong>OC 3.0 Release 5</strong> &ndash; 16 March 2013</p>
 	<p>Completely reworked map:</p>
 	<ul>
 		<li>Own, found, not found and <a href="http://wiki.opencaching.de/index.php/OConly" target="_blank">OConly</a> caches are marked</li>
@@ -469,7 +469,7 @@
 		<li>fixed nano size selection in search form</li>
 	</ul>
 
-	 <p id="v3.0.4"><strong>OC 3.0 Release 4</strong> &ndash; February 17, 2013
+	 <p id="v3.0.4"><strong>OC 3.0 Release 4</strong> &ndash; 17 February 2013
    <p>New:</p>
 	 <ul>
      <li>new cache size "nano"</li>
@@ -499,7 +499,7 @@
    </ul>
 	<br />
 
-	 <p id="v3.0.3"><strong>OC 3.0 Release 3</strong> &ndash; November 18, 2012</p>
+	 <p id="v3.0.3"><strong>OC 3.0 Release 3</strong> &ndash; 18 November 2012</p>
    <p>New:</p>
 	 <ul>
      <li>attribute "only at certain seasons"</li>
@@ -524,7 +524,7 @@
    </ul>
 	<br />
 
-	 <p id="v3.0.2"><strong>OC 3.0 Release 2</strong> &ndash; August 26, 2012</p>
+	 <p id="v3.0.2"><strong>OC 3.0 Release 2</strong> &ndash; 26 August 2012</p>
    <p>New:</p>
 	 <ul>
 	   <li><a href="./articles.php?page=cacheinfo#difficulty">Difficulty ratings</a> explained, including tooltips and links within the cache listings</li>
@@ -563,7 +563,7 @@
    </ul>
 	 <br />
 
-	 <p id="v3.0.1"><strong>OC 3.0 Release 1</strong> &ndash; August 8, 2012</p>
+	 <p id="v3.0.1"><strong>OC 3.0 Release 1</strong> &ndash; 8 August 2012</p>
    <p>New:</p>
 	 <ul>
 	   <li>URL shortener for direct cache listing access, e.g. <a href="http://www.opencaching.de/OCD93B">http://www.opencaching.de/OCD93B</a></li>

@@ -100,16 +100,16 @@
 	$opt['locale']['JA']['locales'] = array('ja_JP.utf8', 'ja_JP', 'jp');
 */
 
-	$opt['locale']['EN']['format']['dm'] = '%m/%d';
-	$opt['locale']['EN']['format']['dateshort'] = '%m/%d/%y';
-	$opt['locale']['EN']['format']['date'] = '%x';
-	$opt['locale']['EN']['format']['datelong'] = '%B %d, %Y';
-	$opt['locale']['EN']['format']['datetime'] = '%x %I:%M %p';
-	$opt['locale']['EN']['format']['datetimesec'] = '%x %X';
+	$opt['locale']['EN']['format']['dm'] = '%d/%m';
+	$opt['locale']['EN']['format']['dateshort'] = '%d/%m/%y';
+	$opt['locale']['EN']['format']['date'] = '%Y-%d-%m';
+	$opt['locale']['EN']['format']['datelong'] = '%d %B %Y';
+	$opt['locale']['EN']['format']['datetime'] = '%Y-%d-%m %I:%M %p';
+	$opt['locale']['EN']['format']['datetimesec'] = '%Y-%d-%m %X';
 	$opt['locale']['EN']['format']['time'] = '%I:%M %p';
 	$opt['locale']['EN']['format']['timesec'] = '%X';
-	$opt['locale']['EN']['format']['phpdate'] = 'm/d/Y';
-	$opt['locale']['EN']['format']['phpdatetime'] = 'm/d/Y h:i A';
+	$opt['locale']['EN']['format']['phpdate'] = 'Y-m-d';
+	$opt['locale']['EN']['format']['phpdatetime'] = 'Y-m-d h:i A';
 	$opt['locale']['EN']['format']['dot1000'] = ',';
 	$opt['locale']['EN']['format']['colonspace'] = '';
 	$opt['locale']['EN']['country'] = 'GB';

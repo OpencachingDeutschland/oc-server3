@@ -17,7 +17,7 @@ class RSSParser {
 	 */
 	public static function parse($items,$url,$includetext)
 	{
-		global $tpl;
+		global $opt, $tpl;
 
     if ($items <= 0)
       return '';
@@ -57,7 +57,7 @@ class RSSParser {
 							{
 								// fill array
 								$rss[] = array(
-										'pubDate' => strftime('%e. %B %Y',strtotime($item->pubDate)),
+										'pubDate' => date('Y-m-d', strtotime($item->pubDate)),
 										'title' => $item->title,
 										'link' => $item->link,
 										'description' => $item->description
@@ -72,7 +72,7 @@ class RSSParser {
 							{
 								// fill array
 								$rss[] = array(
-										'pubDate' => strftime('%e. %B %Y',strtotime($item->pubDate)),
+										'pubDate' => date('Y-m-d', strtotime($item->pubDate)),
 										'title' => $item->title,
 										'link' => $item->link
 									);

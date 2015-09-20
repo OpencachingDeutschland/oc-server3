@@ -5,6 +5,7 @@ namespace okapi\services\caches\geocache;
 use okapi\OkapiInternalRequest;
 use okapi\OkapiServiceRunner;
 use okapi\Okapi;
+use okapi\Settings;
 use okapi\OkapiRequest;
 use okapi\ParamMissing;
 use okapi\InvalidParam;
@@ -25,7 +26,7 @@ class WebService
         if (!$cache_code) throw new ParamMissing('cache_code');
         if (strpos($cache_code, "|") !== false) throw new InvalidParam('cache_code');
         $langpref = $request->get_parameter('langpref');
-        if (!$langpref) $langpref = "en";
+        if (!$langpref) $langpref = "en|" . Settings::get('SITELANG');
         $fields = $request->get_parameter('fields');
         if (!$fields) $fields = "code|name|location|type|status";
         $log_fields = $request->get_parameter('log_fields');

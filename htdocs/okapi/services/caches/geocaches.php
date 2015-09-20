@@ -57,7 +57,7 @@ class WebService
             throw new InvalidParam('cache_codes', "Duplicate codes detected (make sure each cache is referenced only once).");
 
         $langpref = $request->get_parameter('langpref');
-        if (!$langpref) $langpref = "en";
+        if (!$langpref) $langpref = "en|" . Settings::get('SITELANG');
         $langpref = explode("|", $langpref);
 
         $fields = $request->get_parameter('fields');

@@ -95,7 +95,7 @@ class WebService
         # All of the queries below have to be ready for $cache_codes to be empty!
 
         $langpref = $request->get_parameter('langpref');
-        if (!$langpref) $langpref = "en";
+        if (!$langpref) $langpref = "en|" . Settings::get('SITELANG');
         foreach (array('ns_ground', 'ns_gsak', 'ns_ox', 'latest_logs', 'alt_wpts', 'mark_found') as $param)
         {
             $val = $request->get_parameter($param);

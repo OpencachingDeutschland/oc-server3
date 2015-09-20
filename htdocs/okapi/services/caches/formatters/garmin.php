@@ -38,7 +38,7 @@ class WebService
         # All of the queries below have to be ready for $cache_codes to be empty!
 
         $langpref = $request->get_parameter('langpref');
-        if (!$langpref) $langpref = "en";
+        if (!$langpref) $langpref = "en|" . Settings::get('SITELANG');
         $images = $request->get_parameter('images');
         if (!$images) $images = "all";
         if (!in_array($images, array("none", "all", "spoilers", "nonspoilers")))

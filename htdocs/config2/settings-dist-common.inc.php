@@ -241,8 +241,7 @@ function set_absolute_urls(&$opt, $primary_site_url, $primary_shortlink_domain, 
 
 	// 4. set location of uploaded images
 
-	$rp = isset($opt['rootpath']) ? $opt['rootpath'] : $rootpath;
-	if (!isset($opt['logic']['pictures']['dir']))       $opt['logic']['pictures']['dir'] = $rp . 'images/uploads';  // Ocprop !
+	if (!isset($opt['logic']['pictures']['dir']))       $opt['logic']['pictures']['dir'] = __DIR__ . '/../images/uploads';  // Ocprop, OKAPI !
 	if (!isset($opt['logic']['pictures']['url']))       $opt['logic']['pictures']['url'] = $opt['page']['default_primary_url'] . 'images/uploads';
 	if (!isset($opt['logic']['pictures']['thumb_dir'])) $opt['logic']['pictures']['thumb_dir'] = $opt['logic']['pictures']['dir'] . '/thumbs';
 	if (!isset($opt['logic']['pictures']['thumb_url'])) $opt['logic']['pictures']['thumb_url'] = $opt['logic']['pictures']['url'] . '/thumbs';

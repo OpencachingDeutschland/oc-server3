@@ -32,6 +32,7 @@
 	<p>Fixed:</p>
 	<ul>
 		<li>reasonable text conversions when switching between text and HTML editor (<a href="http://redmine.opencaching.de/issues/236">#236</a>)</li>
+		<li>GPX and TXT download will return cache descriptions preferably in the selected language (<a href="http://redmine.opencaching.de/issues/852">#852</a>)</li>
 		<li>removed HTML code from log notifications</li>
 		<li>Fixed &bdquo;Send to GPS devices&ldquo; at www.opencaching.it, www.opencachingspain.es and www.opencaching.fr.</li>
 	</ul>

@@ -153,4 +153,44 @@ function search_text2sort($str, $gns_syntax=false)
 	return $str;
 }
 
+
+// select the preferable description language for the cache in $rCache
+// and replace the desc texts in $rCache by the prefered description's data;
+// see http://redmine.opencaching.de/issues/852
+
+function get_locale_desc($rCache)
+{
+	global $opt;
+
+	$desclangs = ','.$rCache['desc_languages'].',';
+	$desclang = $rCache['desc_language'];
+
+	if (strpos($desclangs, ','.$opt['template']['locale'].',') !== false)
+		$desclang = $opt['template']['locale'];
+	elseif (strpos($desclangs, ','.$opt['template']['default']['locale'].',') !== false)
+		$desclang = $opt['template']['default']['locale'];
+	elseif (strpos($desclangs, ','.$opt['template']['default']['fallback_locale'].',') !== false)
+		$desclang = $opt['template']['default']['fallback_locale'];
+	elseif (strpos($desclangs, ',EN,') !== false)
+		$desclang = 'EN';
+
+	if ($desclang != $rCache['desc_language'])
+	{
+		$rs = sql("
+			SELECT `desc`, `short_desc`, `hint`
+			FROM `cache_desc`
+			WHERE `cache_id`='&1' AND `language`='&2'",
+			$rCache['cacheid'], $desclang);
+		if ($r = sql_fetch_assoc($rs))
+		{
+			$rCache['desc'] = $r['desc'];
+			$rCache['short_desc'] = $r['short_desc'];
+			$rCache['hint'] = $r['hint'];
+		}
+		sql_free_result($rs);
+	}
+
+	return $rCache;
+}
+
 ?>

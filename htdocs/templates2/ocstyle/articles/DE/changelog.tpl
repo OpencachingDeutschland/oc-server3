@@ -46,6 +46,7 @@
 	<p>Korrigiert (Bugfixes):</p>
 	<ul>
 		<li>sinnvolle Textkonvertierung beim Umschalten zwischen Text- und HTML-Editor (<a href="http://redmine.opencaching.de/issues/236">#236</a>)</li>
+		<li>GPX- und TXT-Download liefert Cachebeschreibungen möglichst in der gewählten Sprache (<a href="http://redmine.opencaching.de/issues/852">#852</a>)</li>
 		<li>HTML-Code in Logbenachrichtigungen beseitigt</li>
 		<li>&bdquo;An GPS-Gerät senden&ldquo; auf www.opencaching.it, www.opencachingspain.es und www.opencaching.fr repariert.</li>
 	</ul>

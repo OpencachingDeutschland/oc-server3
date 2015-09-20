@@ -114,6 +114,9 @@ function search_output()
 
 	while ($r = sql_fetch_array($rs))
 	{
+		if (strlen($r['desc_languages']) > 2)
+			$r = get_locale_desc($r);
+
 		$thisline = $xmlLine;
 
 		$lat = sprintf('%01.5f', $r['latitude']);

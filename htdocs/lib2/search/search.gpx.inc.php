@@ -184,7 +184,7 @@ function search_output()
 							`cache_location`.`adm2` `state`, `caches`.`wp_oc` `waypoint`, `caches`.`date_hidden` `date_hidden`, `caches`.`name` `name`,
 							`caches`.`country` `country`, `countries`.`name` AS `country_name`, `caches`.`terrain` `terrain`, `caches`.`difficulty` `difficulty`, `caches`.`desc_languages` `desc_languages`,
 							`caches`.`size` `size`, `caches`.`type` `type`, `caches`.`status` `status`, `user`.`username` `username`, `caches`.`user_id` `userid`, `user`.`data_license`,
-							`cache_desc`.`desc` `desc`, `cache_desc`.`short_desc` `short_desc`, `cache_desc`.`hint` `hint`,
+							`cache_desc`.`desc` `desc`, `cache_desc`.`short_desc` `short_desc`, `cache_desc`.`hint` `hint`, `cache_desc`.`language` AS `desc_language`,
 							IFNULL(`stat_cache_logs`.`found`, 0) AS `found`
 						FROM &searchtmp
 							INNER JOIN `caches` ON &searchtmp.`cache_id`=`caches`.`cache_id`
@@ -196,6 +196,9 @@ function search_output()
 
 	while ($r = sql_fetch_array($rs))
 	{
+		if (strlen($r['desc_languages']) > 2)
+			$r = get_locale_desc($r);
+
 		$thisline = $gpxLine;
 
 		$lat = sprintf('%01.5f', $r['latitude']);

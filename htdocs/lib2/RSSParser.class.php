@@ -30,8 +30,12 @@ class RSSParser {
 		{
 			$tpl->assign('includetext',$includetext);
 			
-			// get xml-data
-			$data = @file_get_contents($url);
+			// get xml-data;
+			// set short timeout to avoid that the start page gets blocked
+			$timeout = ini_get('default_socket_timeout');
+			ini_set('default_socket_timeout', 15);
+			$data = @file_get_contents($url, false, $ctx);
+			ini_set('default_socket_timeout', $timeout);
 			
 			// check data
 			if ($data !== false && strpos($data, 'rss version=') !== false)

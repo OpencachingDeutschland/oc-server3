@@ -112,7 +112,7 @@ function html2plaintext($text, $texthtml0, $wrap)
 
 function editorJsPath()
 {
-	return 'templates2/ocstyle/js/editor.js?ft=' . filemtime('templates2/ocstyle/js/editor.js');
+	return 'resource2/ocstyle/js/editor.js?ft=' . filemtime('resource2/ocstyle/js/editor.js');
 }
 
 ?>

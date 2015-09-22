@@ -33,6 +33,12 @@ function toggle_archived()
 
 function myHomeLoad()
 {
+	{/literal}{*
+		The body onload attribute used to call this functions somehow disables the
+		enlargit init, called via window.onload. Do an explicit init instead:
+	*}{literal}
+	enl_init();
+
 	var archived = document.getElementsByName("row_archived");
 	if (archived.length > 0)  // is 0 for MSIE due to getElementsByName() bug 
 	{

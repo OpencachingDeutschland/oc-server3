@@ -194,18 +194,21 @@
  					'show' => false,
  					'feedurl'  => '',
  					'url' => '',
+					'timeout' => null,
  					'urlname' => '',
  				),
  			'forum' => array(
  					'show' => false,
  					'feedurl'  => '',
  					'url' => '',
+					'timeout' => null,
  					'urlname' => '',
  				),
  			'wiki' => array(
  					'show' => false,
  					'feedurl'  => '',
  					'url' => '',
+					'timeout' => null,
  					'urlname' => '',
  				),
  			
@@ -442,7 +445,8 @@
 	 * include '' => from table 'news', else from RSS feed
  	 */
  	$opt['news']['include'] = '';
-  $opt['news']['count'] = 3;
+	$opt['news']['count'] = 3;
+	$opt['news']['timeout'] = 20;
 
  	// redirect news.php to the following url
  	$opt['news']['redirect'] = '';
@@ -461,7 +465,13 @@
    * -> show the number of 'count' topics from rss feed
    */
   $opt['forum']['url'] = '';
-  $opt['forum']['count'] = 5;
+	$opt['forum']['count'] = 5;
+	$opt['forum']['timeout'] = 20;
+
+	// settings for Wiki news on the 404 page
+	$opt['wikinews']['url'] = 'http://wiki.opencaching.de/index.php/Spezial:Neue_Seiten?feed=rss';
+	$opt['wikinews']['count'] = 5;
+	$opt['wikinews']['timeout'] = 20;
 
   // settings for webchat.php
   $opt['chat']['url'] = 'http://webchat.freenode.net/?nick={chatusername}&amp;channels=opencaching.de&amp;prompt=1';

@@ -15,7 +15,7 @@ class RSSParser {
 	 * @param string $url url of the feed to parse
 	 * @return string $item feeditems as HTML-string
 	 */
-	public static function parse($items,$url,$includetext)
+	public static function parse($items,$url,$timeout,$includetext)
 	{
 		global $opt, $tpl;
 
@@ -32,10 +32,10 @@ class RSSParser {
 			
 			// get xml-data;
 			// set short timeout to avoid that the start page gets blocked
-			$timeout = ini_get('default_socket_timeout');
-			ini_set('default_socket_timeout', 15);
-			$data = @file_get_contents($url, false, $ctx);
+			$save_timeout = ini_get('default_socket_timeout');
 			ini_set('default_socket_timeout', $timeout);
+			$data = @file_get_contents($url, false, $ctx);
+			ini_set('default_socket_timeout', $save_timeout);
 			
 			// check data
 			if ($data !== false && strpos($data, 'rss version=') !== false)

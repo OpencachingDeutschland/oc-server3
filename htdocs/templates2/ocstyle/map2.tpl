@@ -2284,7 +2284,7 @@ function toggle_attribselection(bSaveCookies)
 
 		{* back-to-searchoptions link *}
 		{if $queryid>0}
-			<div class="mapboxframe mapboxshadow" style="position:absolute; top:80px; right:5px; background:#fff; z-index:2">
+			<div class="mapboxframe mapboxshadow" style="position:absolute; top:100px; right:10px; background:#fff; z-index:2">
 				<a class="nooutline" href="search.php?queryid={$queryid}&showresult=0"><img src="resource2/{$opt.template.style}/images/misc/32x32-search.png" style="padding:2px" alt="{t}Search options{/t}" title="{t}Search options{/t}" /></a>
 			</div>
 		{/if}
@@ -2579,7 +2579,7 @@ function toggle_attribselection(bSaveCookies)
 
 	{* Safari search link *}
 	{if $queryid==0}
-		<div class="mapboxframe mapboxshadow" style="position:absolute; {if $bFullscreen}top: {if $msie}156px{else}160px{/if}; right:0px; margin: 0px;{else}top: {if $msie}274{else}266{/if}px; right:30px; margin: 0px;{/if} padding:2px 0px 2px 1px; background:#fff; opacity: .9; z-index:1" >
+		<div class="mapboxframe mapboxshadow" style="position:absolute; {if $bFullscreen}top: {if $msie}158px{else}164px{/if}; right:0px; margin: 0px;{else}top: {if $msie}274{else}266{/if}px; right:30px; margin: 0px;{/if} padding:2px 0px 2px 1px; background:#fff; opacity: .9; z-index:1" >
 			<a class="jslink nofocus" href="search.php?searchto=searchall&showresult=1&expert=0&output=HTML&utf8=1&sort=bycreated&orderRatingFirst=0&f_inactive=1&f_disabled=1&f_ignored=1&cache_attribs=61&submit_all=Suchen" style="width: 32px; height: 32px"><img src="resource2/{$opt.template.style}/images/attributes/safari.png" title="{t}Safari caches list{/t}" /></a>
 		</div>
 	{/if}

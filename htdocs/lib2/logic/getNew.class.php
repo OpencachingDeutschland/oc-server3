@@ -65,15 +65,16 @@ class getNew
 	 * @param string $type type of the "new"-information, i.e. cache, event, rating, etc
 	 * @param int $items number of feeditems to parse from feed (RSSParser)
 	 * @param string $url url of the feed to parse (RSSParser)
+	 * @param int $timeout maximum seconds to wait for the requested page
 	 * @param boolean $includetext ???following??? add table-tag?
 	 * @return string HTML string used for smarty assign method
 	 */
-	public function feedForSmarty($type,$items=null,$url=null,$includetext=null)
+	public function feedForSmarty($type,$items=null,$url=null,$timeout=null,$includetext=null)
 	{
 		// check type
 		if (method_exists($this,strtolower($type).'Feed'))
 		{
-			return call_user_func(array($this,$type.'Feed'),$items,$url,$includetext);
+			return call_user_func(array($this,$type.'Feed'),$items,$url,$timeout,$includetext);
 		}
 	}
 
@@ -253,10 +254,11 @@ class getNew
 	 *
 	 * @param int $items number of feeditems to parse from feed (RSSParser)
 	 * @param string $url url of the feed to parse (RSSParser)
+	 * @param int $timeout maximum seconds to wait for the requested page
 	 * @param boolean $includetext ???following??? add table-tag?
 	 * @return string HTML string used for smarty assign method
 	 */
-	private function blogFeed($items=null,$url=null,$includetext=null)
+	private function blogFeed($items=null,$url=null,$timeout=null,$includetext=null)
 	{
 		// global
 		global $opt;
@@ -264,13 +266,17 @@ class getNew
 		// check $items and set defaults
 		if (is_null($items) || !is_numeric($items))
 		{
-    	$items = $opt['news']['count'];
+			$items = $opt['news']['count'];
 		}
 
 		// check $url and set defaults
 		if (is_null($url) || !is_string($url))
 		{
 			$url = $opt['news']['include'];
+		}
+		if (is_null($timeout) || !is_numeric($timeout))
+		{
+			$timeout = $opt['news']['timeout'];
 		}
 
 		// check $includetext and set defaults
@@ -280,7 +286,7 @@ class getNew
 		}
 
 		// execute RSSParser
-		return RSSParser::parse($items,$url,$includetext);
+		return RSSParser::parse($items,$url,$timeout,$includetext);
 	}
 
 
@@ -289,10 +295,11 @@ class getNew
 	 *
 	 * @param int $items number of feeditems to parse from feed (RSSParser)
 	 * @param string $url url of the feed to parse (RSSParser)
+	 * @param int $timeout maximum seconds to wait for the requested page
 	 * @param boolean $includetext ???following??? add table-tag?
 	 * @return string HTML string used for smarty assign method
 	 */
-	private function forumFeed($items=null,$url=null,$includetext=null)
+	private function forumFeed($items=null,$url=null,$timeout=null,$includetext=null)
 	{
 		// global
 		global $opt;
@@ -308,6 +315,10 @@ class getNew
 		{
 			$url = $opt['forum']['url'];
 		}
+		if (is_null($timeout) || !is_numeric($timeout))
+		{
+			$timeout = $opt['forum']['timeout'];
+		}
 
 		// check $includetext and set defaults
 		if (is_null($includetext) || !is_bool($includetext))
@@ -316,7 +327,7 @@ class getNew
 		}
 
 		// execute RSSParser
-		return RSSParser::parse($items,$url,$includetext);
+		return RSSParser::parse($items,$url,$timeout,$includetext);
 	}
 
 
@@ -326,9 +337,10 @@ class getNew
 	 * @param int $items number of feeditems to parse from feed (RSSParser)
 	 * @param string $url url of the feed to parse (RSSParser)
 	 * @param boolean $includetext ???following??? add table-tag?
+	 * @param int $timeout maximum seconds to wait for the requested page
 	 * @return string HTML string used for smarty assign method
 	 */
-	private function wikiFeed($items=null,$url=null,$includetext=null)
+	private function wikiFeed($items=null,$url=null,$timeout=null,$includetext=null)
 	{
 		// global
 		global $opt;
@@ -336,13 +348,17 @@ class getNew
 		// check $items and set defaults
 		if (is_null($items) || !is_numeric($items))
 		{
-			$items = 10;
+			$items = $opt['wikinews']['count'];
 		}
 
 		// check $url and set defaults
 		if (is_null($url) || !is_string($url))
 		{
-			$url = 'http://wiki.opencaching.de/index.php/Spezial:Neue_Seiten?feed=rss';
+			$url = $opt['wikinews']['url'];
+		}
+		if (is_null($timeout) || !is_numeric($timeout))
+		{
+			$timeout = $opt['wikinews']['timeout'];
 		}
 
 		// check $includetext and set defaults
@@ -352,7 +368,7 @@ class getNew
 		}
 
 		// execute RSSParser
-		return RSSParser::parse($items,$url,$includetext);
+		return RSSParser::parse($items,$url,$timeout,$includetext);
 	}
 
 }

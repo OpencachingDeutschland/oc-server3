@@ -467,7 +467,7 @@ class SearchAssistant
             if ($this->request->token == null)
                 throw new InvalidParam('ignored_status', "Might be used only for requests signed with an Access Token.");
             if (!in_array($tmp, array('ignored_only', 'notignored_only', 'either')))
-                throw new InvalidParam('exclude_ignored', "'$tmp'");
+                throw new InvalidParam('ignored_status', "'$tmp'");
             if ($tmp != 'either') {
                 if ($tmp == 'ignored_only' && $ignored_status == 'notignored_only')
                     $ignored_status = 'none';

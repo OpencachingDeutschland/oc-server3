@@ -139,11 +139,23 @@
         will be included in the result. This might be used to temporarily mark geocaches
         of particular interest (e.g. "all the caches I plan to find today").</p>
     </opt>
-    <opt name='exclude_ignored' default='false'>
+    <opt name='exclude_ignored' default='false' class='deprecated'>
+        <p>Deprecated (<a href="https://github.com/opencaching/okapi/issues/349">why?</a>),
+        please use <b>ignored_status</b> instead.</p>
         <p><b>Notice:</b> This parameter may be used only for requests signed
         with an Access Token (you will need to use <b>Level 3</b> Authentication).</p>
         <p>Boolean. If set to <b>true</b>, caches which the user has marked as ignored
         will not be included in the result.</p>
+    </opt>
+    <opt name='ignored_status' default='either'>
+        <p><b>Notice:</b> This parameter may be used only for requests signed with an Access Token
+        (you will need to use <b>Level 3</b> Authentication).</p>
+        <p>Should be one of the following:</p>
+        <ul>
+            <li><b>ignored_only</b> - only caches which the user has marked as ignored will be returned,</li>
+            <li><b>notignored_only</b> - only caches which the user has <b>not</b> marked as ignored will be returned,</li>
+            <li><b>either</b> - all caches will be returned.</li>
+        </ul>
     </opt>
     <opt name='exclude_my_own' default='false'>
         <p><b>Notice:</b> This parameter may be used only for requests signed

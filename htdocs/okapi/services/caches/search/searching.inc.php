@@ -449,23 +449,44 @@ class SearchAssistant
         }
 
         #
-        # exclude_ignored
+        # exclude_ignored and ignored_status
         #
 
+        $ignored_status = 'either';
         if ($tmp = $this->request->get_parameter('exclude_ignored'))
         {
             if ($this->request->token == null)
                 throw new InvalidParam('exclude_ignored', "Might be used only for requests signed with an Access Token.");
-            if (!in_array($tmp, array('true', 'false')))
+            if ($tmp == 'true')
+                $ignored_status = 'notignored_only';
+            elseif ($tmp != 'false')
                 throw new InvalidParam('exclude_ignored', "'$tmp'");
-            if ($tmp == 'true') {
-                $ignored_cache_ids = Db::select_column("
-                    select cache_id
-                    from cache_ignore
-                    where user_id = '".mysql_real_escape_string($this->request->token->user_id)."'
-                ");
-                $where_conds[] = "caches.cache_id not in ('".implode("','", array_map('mysql_real_escape_string', $ignored_cache_ids))."')";
-            }
+        }
+        if ($tmp = $this->request->get_parameter('ignored_status'))
+        {
+            if ($this->request->token == null)
+                throw new InvalidParam('ignored_status', "Might be used only for requests signed with an Access Token.");
+            if (!in_array($tmp, array('ignored_only', 'notignored_only', 'either')))
+                throw new InvalidParam('exclude_ignored', "'$tmp'");
+            if ($tmp != 'either') {
+                if ($tmp == 'ignored_only' && $ignored_status == 'notignored_only')
+                    $ignored_status = 'none';
+                else
+                    $ignored_status = $tmp;
+                }
+        }
+
+        if ($ignored_status == 'none')
+            $where_conds[] = 'false';
+        elseif ($ignored_status != 'either')
+        {
+            $ignored_cache_ids = Db::select_column("
+                select cache_id
+                from cache_ignore
+                where user_id = '".mysql_real_escape_string($this->request->token->user_id)."'
+            ");
+            $not = ($ignored_status == 'notignored_only' ? 'not' : '');
+            $where_conds[] = "caches.cache_id ".$not." in ('".implode("','", array_map('mysql_real_escape_string', $ignored_cache_ids))."')";
         }
 
         #

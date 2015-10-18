@@ -57,7 +57,9 @@ function processEditorInput($oldDescMode, $descMode, $text)
 		}
 		else
 		{
-			// mode switch from HTML editor to plain text => convert smilies ...
+			// mode switch from HTML editor to plain text, or decode HTML-encoded plain text
+
+			// convert smilies ...
 			for ($n=0; $n < count($smiley['image']); $n++)
 			{
 				do

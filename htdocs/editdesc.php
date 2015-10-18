@@ -213,7 +213,10 @@
 						$descMode = ($desc_html == 0 ? 1 : ($desc_htmledit ? 3 : 2));
 						$oldDescMode = ($desc_html == 0 ? 0 : ($desc_htmledit ? 3 : 2));
 
-						$desc = processEditorInput($oldDescMode, $descMode, $desc_record['desc']);
+						if ($oldDescMode == 0)
+							$desc = processEditorInput($oldDescMode, $descMode, $desc_record['desc']);
+						else
+							$desc = $desc_record['desc'];
 					}
 					
 					//here we only set up the template variables

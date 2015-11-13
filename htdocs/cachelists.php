@@ -28,7 +28,7 @@
 	}
 
 	$MAXITEMS = 30;
-	$startat = isset($_REQUEST['startat']) ? $_REQUEST['startat']+0 : 0;
+	$startat = isset($_REQUEST['startat']) ? max(0, $_REQUEST['startat']+0) : 0;
 	$name_filter = isset($_REQUEST['name']) ? $_REQUEST['name'] : '';
 	$by_filter = isset($_REQUEST['by']) ? $_REQUEST['by'] : '';
 	$listcount = cachelist::getPublicListCount($name_filter, $by_filter);

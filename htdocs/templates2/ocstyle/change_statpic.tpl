@@ -14,7 +14,7 @@
 
 		<tr>
 			<td colspan="2">
-				{t}The following settings are stored for your logo:{/t}<br />
+				<b>{t}The following settings are stored for your logo:{/t}</b><br />
 			</td>
 		</tr>
 		<tr><td class="spacer" colspan="2"></td></tr>
@@ -33,7 +33,7 @@
 		<tr><td class="spacer" colspan="2"></td></tr>
 
 		<tr>
-			<td>{t}Available logos:{/t}</td>
+			<td><b>{t}Official OC logos (up-to-date):{/t}</b></td>
 			<td class="help"></td>
 			<td style="width:15%"></td>
 			<td style="width:15%"></td>
@@ -41,12 +41,36 @@
 		<tr><td class="spacer" colspan="2"></td></tr>
 
 		{foreach from=$statpics item=statpicItem}
+			{if $statpicItem.id >= 9}
 			<tr>
 				<td>{$statpicItem.description|escape}</td>
 				<td><input type="radio" name="statpic_style" class="radio" value="{$statpicItem.id}" {if $statpic_style==$statpicItem.id}checked="checked"{/if} /><img src="{$statpicItem.previewpath}" align="middle"></td>
 			</tr>
 			<tr><td class="spacer" colspan="2"></td></tr>
+			{/if}
 		{foreachelse}
+			<tr><td></td><td>No logos available</td></tr>
+		{/foreach}
+
+		<tr><td class="spacer" colspan="2"></td></tr>
+
+		<tr>
+			<td><b>{t}Alternavite logos (partly outdated):{/t}</b></td>
+			<td class="help"></td>
+			<td style="width:15%"></td>
+			<td style="width:15%"></td>
+		</tr>
+		<tr><td class="spacer" colspan="2"></td></tr>
+
+		{foreach from=$statpics item=statpicItem}
+			{if $statpicItem.id <= 8}
+				<tr>
+					<td>{$statpicItem.description|escape}</td>
+					<td><input type="radio" name="statpic_style" class="radio" value="{$statpicItem.id}" {if $statpic_style==$statpicItem.id}checked="checked"{/if} /><img src="{$statpicItem.previewpath}" align="middle"></td>
+				</tr>
+				<tr><td class="spacer" colspan="2"></td></tr>
+			{/if}
+			{foreachelse}
 			<tr><td></td><td>No logos available</td></tr>
 		{/foreach}
 

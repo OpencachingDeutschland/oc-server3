@@ -970,8 +970,8 @@ class Okapi
     public static $server;
 
     /* These two get replaced in automatically deployed packages. */
-    public static $version_number = 1118;
-    public static $git_revision = 'cb25b4a137f8bb33b93f9e9dbb41c8fa5e42751f';
+    public static $version_number = 1119;
+    public static $git_revision = 'b2d31a34c05a362e73700a16c8b8d58dc9c68c50';
 
     private static $okapi_vars = null;
 
@@ -1392,7 +1392,9 @@ class Okapi
     {
         $x1 = (90-$lat1) * 3.14159 / 180;
         $x2 = (90-$lat2) * 3.14159 / 180;
-        $d = acos(cos($x1) * cos($x2) + sin($x1) * sin($x2) * cos(($lon1-$lon2) * 3.14159 / 180)) * 6371000;
+        # least(1, ...) prevents values > 1 due to floating point precision limits;
+        # see issue #351.
+        $d = acos(least(1, cos($x1) * cos($x2) + sin($x1) * sin($x2) * cos(($lon1-$lon2) * 3.14159 / 180))) * 6371000;
         if ($d < 0) $d = 0;
         return $d;
     }
@@ -1405,7 +1407,7 @@ class Okapi
     {
         $x1 = "(90-$lat1) * 3.14159 / 180";
         $x2 = "(90-$lat2) * 3.14159 / 180";
-        $d = "acos(cos($x1) * cos($x2) + sin($x1) * sin($x2) * cos(($lon1-$lon2) * 3.14159 / 180)) * 6371000";
+        $d = "acos(least(1, cos($x1) * cos($x2) + sin($x1) * sin($x2) * cos(($lon1-$lon2) * 3.14159 / 180))) * 6371000";
         return $d;
     }
 

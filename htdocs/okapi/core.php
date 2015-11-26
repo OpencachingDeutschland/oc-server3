@@ -970,8 +970,8 @@ class Okapi
     public static $server;
 
     /* These two get replaced in automatically deployed packages. */
-    public static $version_number = 1119;
-    public static $git_revision = 'b2d31a34c05a362e73700a16c8b8d58dc9c68c50';
+    public static $version_number = 1120;
+    public static $git_revision = 'b3f2dc55ce36b4a0b7f12b448253378bdad04c4d';
 
     private static $okapi_vars = null;
 
@@ -1392,9 +1392,9 @@ class Okapi
     {
         $x1 = (90-$lat1) * 3.14159 / 180;
         $x2 = (90-$lat2) * 3.14159 / 180;
-        # least(1, ...) prevents values > 1 due to floating point precision limits;
+        # min(1, ...) prevents values > 1 due to floating point precision limits;
         # see issue #351.
-        $d = acos(least(1, cos($x1) * cos($x2) + sin($x1) * sin($x2) * cos(($lon1-$lon2) * 3.14159 / 180))) * 6371000;
+        $d = acos(min(1, cos($x1) * cos($x2) + sin($x1) * sin($x2) * cos(($lon1-$lon2) * 3.14159 / 180))) * 6371000;
         if ($d < 0) $d = 0;
         return $d;
     }

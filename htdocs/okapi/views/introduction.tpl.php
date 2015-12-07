@@ -44,7 +44,7 @@ Here is the list of other OKAPI installations:</p>
 <ul>
     <?php foreach ($vars['installations'] as $inst) { ?>
         <li>
-            <?= $inst['site_name'] ?><? if ($inst['site_name'] == "Opencaching.DE") { print "*"; } ?>
+            <?= $inst['site_name'] ?><?php if ($inst['site_name'] == "Opencaching.DE") { print "*"; } ?>
             - <a href='<?= $inst['okapi_base_url'] ?>'><?= $inst['okapi_base_url'] ?></a>
         </li>
     <?php } ?>

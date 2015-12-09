@@ -11,7 +11,7 @@
 	$newLogsPerCountry = $opt['logic']['new_logs_per_country'];
 	$startat = isset($_GET['startat']) ? $_GET['startat']+0 : 0;
 	$urlparams = '';
-	$optimize_for_main_country = false;
+	$optimize_for_latest_logs = false;
 
 	if (isset($ownerid))
 	{
@@ -81,7 +81,7 @@
 		$logcount = 250;
 		$paging = false;  // paging would have poor performance for all logs
 		$orderByDate = '';
-		$optimize_for_main_country = ($country == $opt['page']['main_country']);
+		$optimize_for_latest_logs = ($country == '' || $country == $opt['page']['main_country']);
 	}
 
 	$tpl->change_country_inpage = true;
@@ -90,7 +90,7 @@
 	if (!$tpl->is_cached())
 	{
 		if ($paging) sql_enable_foundrows();
-		if ($optimize_for_main_country)
+		if ($optimize_for_latest_logs)
 		{
 			// filtering a large number of logs is very expensive;
 			// therefore we preselect the newest logs if the main country is selected
@@ -226,7 +226,7 @@
 		sql_free_result($rsLogs);
 
 		sql_drop_temp_table_slave('loglist');
-		if ($optimize_for_main_country)
+		if ($optimize_for_latest_logs)
 			sql_drop_temp_table_slave('loglist0');
 
 		$tpl->assign('newLogs', $newLogs);

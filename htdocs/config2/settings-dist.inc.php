@@ -372,17 +372,6 @@
 	 */
 	$opt['logic']['api']['email_problems']['key'] = '';   // must be set to enable
 
-  /* Database charset
-	 *   frontend and php charsets are UTF-8
-	 *   here you can set a different charset for the MySQL-Engine
-	 *   usefull if your database is not UTF-8.
-	 *   Should only be used for step by step migration.
-	 *
-	 *   Both charsets must be the same!
-	 */
-	$opt['charset']['iconv'] = 'UTF-8'; // 'ISO-8859-1'; // use iconv compatible charset-name
-	$opt['charset']['mysql'] = 'utf8';     // use mysql compatible charset-name
-
 	/* cronjob
 	 */
 	$opt['cron']['username'] = 'apache';   // system username for cronjobs

@@ -30,6 +30,7 @@ class WebService
 
         $acode = $request->get_parameter('acode');
         if ($acode === null) throw new ParamMissing('acode');
+        if (strstr($acode,'|')) throw new InvalidParam('acode', "Only one A-code must be supplied.");
 
         $langpref = $request->get_parameter('langpref');
         if (!$langpref) $langpref = "en";

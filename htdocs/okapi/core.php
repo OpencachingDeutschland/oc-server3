@@ -364,7 +364,7 @@ class Db
         if (mysql_connect(Settings::get('DB_SERVER'), Settings::get('DB_USERNAME'), Settings::get('DB_PASSWORD')))
         {
             mysql_select_db(Settings::get('DB_NAME'));
-            mysql_query("set names 'utf8'");
+            mysql_query("set names '" . Settings::get('DB_CHARSET') . "'");
             self::$connected = true;
         }
         else
@@ -970,8 +970,8 @@ class Okapi
     public static $server;
 
     /* These two get replaced in automatically deployed packages. */
-    public static $version_number = 1121;
-    public static $git_revision = 'afb266214f9a55337ed2869fd6dff6cba1e2bc95';
+    public static $version_number = 1125;
+    public static $git_revision = '288253968746bf2e9fc9b50c8d49fb113d377667';
 
     private static $okapi_vars = null;
 

@@ -580,6 +580,7 @@
 	function db_connect()
 	{
 		global $dblink, $dbpconnect, $dbusername, $dbname, $dbserver, $dbpasswd, $dbpconnect;
+		global $opt;
 
 		//connect to the database by the given method - no php error reporting!
 		if ($dbpconnect == true)
@@ -593,7 +594,7 @@
 
 		if ($dblink != false)
 		{
-			mysql_query("SET NAMES 'utf8'", $dblink);
+			mysql_query("SET NAMES '" . mysql_real_escape_string($opt['charset']['mysql'], $dblink) . "'", $dblink);
 
 			//database connection established ... set the used database
 			if (@mysql_select_db($dbname, $dblink) == false)

@@ -1200,6 +1200,8 @@ class WebService
                 # Current OCPL table definitions use collation 'latin1' for parkipl
                 # and 'utf8' for np_areas. Union needs identical collations.
                 # To be sure, we convert both to utf8.
+                #
+                # TODO: use DB_CHARSET setting instead of literal 'utf8'
                 $rs = Db::query("
                     select
                         c.wp_oc as cache_code,

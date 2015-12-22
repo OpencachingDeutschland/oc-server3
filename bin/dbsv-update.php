@@ -61,6 +61,52 @@
 			$db_version = -1;
 	} while ($db_version > 0);
 
+	// Ensure that all tables have the right charset, including added tables:
+	check_tables_charset($opt['db']['placeholder']['db']);
+
+	exit;
+
+
+	// Check if the tables' charset is consistent with $opt['charset']['mysql'].
+	// Do an upgrade from utf8 to utf8mb4 if necessary.
+	// OKAPI tables upgrade is done by a similar function in OKAPI's update module.
+
+	function check_tables_charset($database)
+	{
+		global $opt;
+
+		$rs = sql("
+			SELECT TABLE_NAME, TABLE_COLLATION
+			FROM INFORMATION_SCHEMA.TABLES
+			WHERE TABLE_SCHEMA='&1' AND TABLE_NAME NOT LIKE 'okapi_%'",
+			$database);
+
+		while ($table = sql_fetch_assoc($rs))
+		{
+			$table_collation = explode('_', $table['TABLE_COLLATION']);
+			if ($table_collation[0] != $opt['charset']['mysql'])
+			{
+				$migrate = "table `" . $table['TABLE_NAME'] . "` from charset " .
+					     $table_collation[0] . " to " .  $opt['charset']['mysql'];
+
+				if ($table_collation[0] == 'utf8' && $opt['charset']['mysql'] == 'utf8mb4')
+				{
+					echo "migrating " . $migrate . "\n";
+					$table_collation[0] = $opt['charset']['mysql'];
+					sql("
+						ALTER TABLE `&1`
+						CONVERT TO CHARACTER SET '&2'
+						COLLATE '&3'",
+						$table['TABLE_NAME'],
+						$table_collation[0],
+						implode('_', $table_collation));
+				}
+				else
+					echo "Warning: cannot migrate " . $migrate . "\n";
+			}
+		}
+		sql_free_result($rs);
+	}
 
 	// Now and then a maintain.php update should be inserted, because multiple
 	// mutations may be run in one batch, and future mutations may depend on
@@ -219,7 +265,7 @@
 					`new_state` tinyint(2) unsigned NOT NULL,
 					`user_id` int(10) unsigned NOT NULL default '0',
 				UNIQUE KEY `cache_id` (`cache_id`,`date_modified`)
-				) ENGINE=MyISAM DEFAULT CHARSET=utf8");
+				) ENGINE=MyISAM");
 	}
 
 	function dbv_107()  // sync of table definitions, developer and production system	
@@ -259,7 +305,7 @@
 					`to_user_id` int(10) unsigned NOT NULL,
 					PRIMARY KEY (`id`),
 					KEY `cache_id` (`cache_id`,`date`)
-				) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1");
+				) ENGINE=MyISAM AUTO_INCREMENT=1");
 
 			// Up to commit d15ee5f9, new cache notification logs were erronously stored with
 			// event ID 5 (instead of 8). Therefore we need to check for the module, too:
@@ -406,7 +452,7 @@
 				  UNIQUE KEY `uuid` (`uuid`),
 				  KEY `name` (`name`),
 				  KEY `user_id` (`user_id`)
-				) ENGINE=MyISAM DEFAULT CHARSET=utf8");
+				) ENGINE=MyISAM");
 		}
 		if (!sql_table_exists('cache_list_items'))
 		{
@@ -416,7 +462,7 @@
 				  `cache_id` int(10) NOT NULL,
 				  UNIQUE KEY `cache_list_id` (`cache_list_id`,`cache_id`),
 				  KEY `cache_id` (`cache_id`)
-				) ENGINE=MyISAM DEFAULT CHARSET=utf8");
+				) ENGINE=MyISAM");
 		}
 		if (!sql_table_exists('cache_list_watches'))
 		{
@@ -426,7 +472,7 @@
 				  `user_id` int(10) NOT NULL,
 				  UNIQUE KEY `cache_list_id` (`cache_list_id`,`user_id`),
 				  KEY `user_id` (`user_id`)
-				) ENGINE=MyISAM DEFAULT CHARSET=utf8");
+				) ENGINE=MyISAM");
 		}
 
 		if (!sql_field_exists('caches','show_cachelists'))
@@ -449,7 +495,7 @@
 				  `entries` int(6) NOT NULL default '0' COMMENT 'via trigger in cache_list_items',
 				  `watchers` int(6) NOT NULL default '0' COMMENT 'via trigger in cache_list_watches',
 				  PRIMARY KEY (`cache_list_id`)
-				) ENGINE=MyISAM DEFAULT CHARSET=utf8
+				) ENGINE=MyISAM
 				SELECT `id` `cache_list_id`, `entries`, `watchers` FROM `cache_lists`");
 		}
 		if (sql_field_exists('cache_lists','entries'))
@@ -525,7 +571,7 @@
 				  `password` varchar(80) NOT NULL,
 				  UNIQUE KEY `cache_list_id` (`cache_list_id`,`user_id`),
 				  KEY `user_id` (`user_id`)
-				) ENGINE=MyISAM DEFAULT CHARSET=utf8");
+				) ENGINE=MyISAM");
 		}
 	}
 
@@ -581,7 +627,7 @@
 				  `coord_long` double NOT NULL,
 				  `maplist` tinyint(1) NOT NULL default '0',
 				  KEY `country` (`country`)
-				) ENGINE=MyISAM DEFAULT CHARSET=utf8;");
+				) ENGINE=MyISAM");
 		}
 	}
 
@@ -629,6 +675,16 @@
 	{
 		sql("ALTER TABLE `cache_logs` MODIFY `log_last_modified` datetime NOT NULL COMMENT 'via Triggers'");
 		sql("ALTER TABLE `log_types` MODIFY `icon_small` varchar(255) NOT NULL COMMENT ''");
+	}
+
+	function dbv_142()   // drop obsolete table
+	{
+		// This table has/had an index over a 255 chars column, which would produce
+		// the error "index too long (maximum is 1000 chars)" when trying to convert
+		// to utf8mb4 charset. We drop it here before an utf8 migration may be run.
+
+		if (sql_table_exists('search_words'))
+			sql("DROP TABLE `search_words`");
 	}
 
 

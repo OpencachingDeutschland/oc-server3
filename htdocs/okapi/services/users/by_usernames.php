@@ -10,6 +10,7 @@ use okapi\InvalidParam;
 use okapi\services\caches\search\SearchAssistant;
 use okapi\OkapiServiceRunner;
 use okapi\OkapiInternalRequest;
+use okapi\Settings;
 
 class WebService
 {
@@ -38,7 +39,7 @@ class WebService
         $rs = Db::query("
             select username, uuid
             from user
-            where username collate utf8_general_ci in ('".implode("','", array_map('mysql_real_escape_string', $usernames))."')
+            where username collate ".Settings::get('DB_CHARSET')."_general_ci in ('".implode("','", array_map('mysql_real_escape_string', $usernames))."')
         ");
         $lower_username2useruuid = array();
         while ($row = mysql_fetch_assoc($rs))

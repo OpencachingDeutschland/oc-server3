@@ -39,6 +39,7 @@ function get_okapi_settings()
 		'DB_NAME'          => $opt['db']['placeholder']['db'],
 		'DB_USERNAME'      => $opt['db']['username'],
 		'DB_PASSWORD'      => $opt['db']['password'],
+		'DB_CHARSET'       => $opt['charset']['mysql'],
 		'SITELANG'         => strtolower($opt['template']['default']['locale']),
 		'TIMEZONE'         => $opt['php']['timezone'],  # BTW, OCPL doesn't have it in settings.inc.php
 		'SITE_URL'         => $opt['page']['absolute_url'],

@@ -129,6 +129,7 @@ final class Settings
         'DB_NAME' => null,
         'DB_USERNAME' => null,
         'DB_PASSWORD' => null,
+        'DB_CHARSET' => 'utf8',
 
         /**
          * URL of this site (with slash, and without "/okapi"). If this is a
@@ -252,6 +253,10 @@ final class Settings
                 throw new Exception("$key must end with a slash.");
         if ($dict['SITE_LOGO'] === null)
             $dict['SITE_LOGO'] = $dict['SITE_URL'] . 'okapi/static/oc_logo.png';
+
+        # The OKAPI code is only compatible with utf8 and utf8mb4 charsets.
+        if (!in_array($dict['DB_CHARSET'], array('utf8', 'utf8mb4')))
+          throw new exception("DB_CHARSET must be utf8 or utf8mb4.");
     }
 
     /**

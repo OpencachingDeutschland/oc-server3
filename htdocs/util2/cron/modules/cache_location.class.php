@@ -28,7 +28,7 @@ class cache_location
 		{
 			$sCode = '';
 
-			$rsLayers = sql("SELECT `level`, `code`, AsText(`shape`) AS `geometry` FROM `nuts_layer` WHERE WITHIN(GeomFromText('&1'), `shape`) ORDER BY `level` DESC", 'POINT(' . $rCache['longitude'] . ' ' . $rCache['latitude'] . ')');
+			$rsLayers = sql("SELECT `level`, `code`, AsText(`shape`) AS `geometry` FROM `nuts_layer` WHERE MBRWITHIN(GeomFromText('&1'), `shape`) ORDER BY `level` DESC", 'POINT(' . $rCache['longitude'] . ' ' . $rCache['latitude'] . ')');
 			while ($rLayers = sql_fetch_assoc($rsLayers))
 			{
 				if (gis::ptInLineRing($rLayers['geometry'], 'POINT(' . $rCache['longitude'] . ' ' . $rCache['latitude'] . ')'))

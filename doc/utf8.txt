@@ -1,0 +1,39 @@
+
+The Opencaching code is stored in UTF-8 files, and it is fully UTF-8 enabled.
+Pay attention to the Unicode disclaimer at the source file headers, which
+indicates that the file encoding is intact.
+
+The database charset of MySQL / MariaDB needs special attention. Prior to
+version 5.5, there was unly an 'utf8' charset which is limited to 16-bit
+Unicode characters; UTF-8 codes are 1 to 3 bytes per character. Starting
+with MySQL 5.5, the additional 'utf8mb4' charset was introduced, which supports
+full 21-bit Unicode and UTF-8 codes of 1 to 4 bytes (therefore 'mb4').
+
+PHP code uses always the full 21-bit Unicode. If you try to store Unicode chars
+> 65535 into an 'utf8' database field, the SQL server will produce a warning
+and cripple the stored data somehow - replacing mb4 chars by '?', removing them
+or even cutting off the rest of the string.
+
+If you set up a new OC installation, you usually will start with 'utf8' charset.
+Table templates in htdocs/sql/doc/tables have 'utf8' charset; provided database
+dumps probably are 'utf8', too. If your server supports 'utf8mb4', you may
+migrate your database to this charset (attention, this may be a one-way road;
+see the warning below). The migration involves the following steps:
+
+- Set the database default charset to utf8mb4:
+  ALTER DATABASE oc_db DEFAULT CHARACTER SET utf8mb4 DEFAULT COLLATE utf8mb4_general_ci
+  (or use phpMyAdmin to change the database collation)
+    
+- Change the OC settings to utf8mb4 by adding this to lib1 and lib2 settings:
+  $opt['charset']['mysql'] = 'utf8mb4';
+  
+- Migrate the tables by running bin/dbupdate.
+
+This will enable full Unicode for both OC and OKAPI operation.
+
+WARNING: There is no way to automatically migrate back to 'utf8', because
+that will lose any non-16-bit Unicode characters (probably being replaced
+by question marks). If you are absolutely sure that you want to do this,
+you may temporarily alter the check_tables_charset() function in bin/dbsv-update.php
+to accomplish it.
+

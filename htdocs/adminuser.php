@@ -132,6 +132,8 @@ function searchUser()
 	$r['reports'] = sql_value("SELECT COUNT(*) FROM `cache_reports` WHERE `userid`='&1'", 0, $r['user_id']);
 	
 	$r['last_known_login'] = sql_value("SELECT MAX(`last_login`) FROM `sys_sessions` WHERE `user_id`='&1'", 0, $r['user_id']);
+	if (!$r['last_known_login'])
+		$r['last_known_login'] = sql_value("SELECT `last_login` FROM `user` WHERE `user_id`='&1'", 0, $r['user_id']);
 
 	$tpl->assign('user', $r);
 

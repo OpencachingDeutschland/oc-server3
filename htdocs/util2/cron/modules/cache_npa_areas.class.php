@@ -26,7 +26,7 @@ class cache_npa_areas
 		{
 			sql("DELETE FROM `cache_npa_areas` WHERE `cache_id`='&1' AND `calculated`=1", $rCache['cache_id']);
 
-			$rsLayers = sql("SELECT `id`, `type_id`, AsText(`shape`) AS `geometry` FROM `npa_areas` WHERE `exclude`=0 AND WITHIN(GeomFromText('&1'), `shape`)", 'POINT(' . $rCache['longitude'] . ' ' . $rCache['latitude'] . ')');
+			$rsLayers = sql("SELECT `id`, `type_id`, AsText(`shape`) AS `geometry` FROM `npa_areas` WHERE `exclude`=0 AND MBRWITHIN(GeomFromText('&1'), `shape`)", 'POINT(' . $rCache['longitude'] . ' ' . $rCache['latitude'] . ')');
 			while ($rLayers = sql_fetch_assoc($rsLayers))
 			{
 				if (gis::ptInLineRing($rLayers['geometry'], 'POINT(' . $rCache['longitude'] . ' ' . $rCache['latitude'] . ')'))
@@ -34,7 +34,7 @@ class cache_npa_areas
 					$bExclude = false;
 
 					// prüfen, ob in ausgesparter Fläche
-					$rsExclude = sql("SELECT `id`, AsText(`shape`) AS `geometry` FROM `npa_areas` WHERE `exclude`=1 AND `type_id`='&1' AND WITHIN(GeomFromText('&2'), `shape`)", $rLayers['type_id'], 'POINT(' . $rCache['longitude'] . ' ' . $rCache['latitude'] . ')');
+					$rsExclude = sql("SELECT `id`, AsText(`shape`) AS `geometry` FROM `npa_areas` WHERE `exclude`=1 AND `type_id`='&1' AND MBRWITHIN(GeomFromText('&2'), `shape`)", $rLayers['type_id'], 'POINT(' . $rCache['longitude'] . ' ' . $rCache['latitude'] . ')');
 					while (($rExclude = sql_fetch_assoc($rsExclude)) && ($bExclude==false))
 					{
 						if (gis::ptInLineRing($rExclude['geometry'], 'POINT(' . $rCache['longitude'] . ' ' . $rCache['latitude'] . ')'))

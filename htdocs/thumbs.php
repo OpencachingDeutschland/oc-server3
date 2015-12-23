@@ -204,14 +204,14 @@
 			if ($debug == 1)
 			  die($opt['logic']['pictures']['thumb_url'] . '/' . $filename);
 			else
-				$tpl->redirect($opt['logic']['pictures']['thumb_url'] . '/' . mb_substr($filename, 0, 1) . '/' . mb_substr($filename, 1, 1) . '/' . $filename);
+				$tpl->redirect(use_current_protocol($opt['logic']['pictures']['thumb_url'] . '/' . mb_substr($filename, 0, 1) . '/' . mb_substr($filename, 1, 1) . '/' . $filename));
 		}
 		else
 		{
 			if ($debug == 1)
 			  die($r['thumb_url']);
 			else
-				$tpl->redirect($r['thumb_url']);
+				$tpl->redirect(use_current_protocol($r['thumb_url']));
 		}
 	}
 	else

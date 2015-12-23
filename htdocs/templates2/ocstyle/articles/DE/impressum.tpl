@@ -281,7 +281,7 @@
 <div class="content-txtbox-noshade" style="padding-right: 25px;">
 	<p>
 		<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/3.0/de/" >
-		<img alt="Creative Commons Lizenzvertrag" style="border: 0; padding-right: 15px; padding-bottom: 15px; float: left;" src="http://i.creativecommons.org/l/by-nc-nd/3.0/de/88x31.png" /></a>
+		<img alt="Creative Commons Lizenzvertrag" style="border: 0; padding-right: 15px; padding-bottom: 15px; float: left;" src="https://i.creativecommons.org/l/by-nc-nd/3.0/de/88x31.png" /></a>
 		Alle durch die Benutzer auf Opencaching.de eingebrachten Inhalte stehen unter 
 		der Lizenz &bdquo;Creative Commons Attribution-NonCommercial-NoDerivs 3.0&ldquo;, auf Deutsch: 
 		&bdquo;Namensnennung-NichtKommerziell-KeineBearbeitung 3.0&ldquo; (CC BY-NC-ND 3.0).

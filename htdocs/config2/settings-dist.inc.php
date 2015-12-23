@@ -185,6 +185,8 @@
 	 */
 	$opt['page']['origin_url'] = 'http://www.opencaching.de/';  // production installation for this OC site 
 	$opt['page']['develsystem'] = false;
+	$opt['page']['teampic_url'] = 'http://www.opencaching.de/images/team/';
+	$opt['page']['teammember_url'] = 'http://www.opencaching.de/';
 
  	/*
  	 * configure infos on 404.php

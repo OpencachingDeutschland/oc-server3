@@ -241,7 +241,7 @@
 <div class="content-txtbox-noshade" style="padding-right: 25px;">
 	<p>
 		<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/3.0/de/deed.en">
-		<img alt="Creative Commons License Terms" style="border: 0; padding-right: 15px; padding-bottom: 15px; float: left;" src="http://i.creativecommons.org/l/by-nc-nd/3.0/de/88x31.png" /></a>
+		<img alt="Creative Commons License Terms" style="border: 0; padding-right: 15px; padding-bottom: 15px; float: left;" src="https://i.creativecommons.org/l/by-nc-nd/3.0/de/88x31.png" /></a>
 		All Opencaching.de content which has been contributed by users is licensed under 
 		the terms of "Creative Commons Attribution-NonCommercial-NoDerivs 3.0 Germany", which means 
 		that you may reproduce, distribute and publish it. When doing this, the author has to 

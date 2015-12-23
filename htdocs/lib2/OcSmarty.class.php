@@ -184,6 +184,8 @@ class OcSmarty extends Smarty
 		$optn['page']['main_country'] = $opt['page']['main_country'];
 		$optn['page']['main_locale'] = $opt['page']['main_locale'];
 		$optn['page']['meta'] = $opt['page']['meta'];
+		$optn['page']['teampic_url'] = $opt['page']['teampic_url'];
+		$optn['page']['teammember_url'] = $opt['page']['teammember_url'];
 		$optn['template']['title'] = $this->title;
 		$optn['template']['caching'] = $this->caching;
 		$optn['template']['popup'] = $this->popup;

@@ -4,8 +4,8 @@ Pay attention to the Unicode disclaimer at the source file headers, which
 indicates that the file encoding is intact.
 
 The database charset of MySQL / MariaDB needs special attention. Prior to
-version 5.5, there was unly an 'utf8' charset which is limited to 16-bit
-Unicode characters; UTF-8 codes are 1 to 3 bytes per character. Starting
+version 5.5, there was only an 'utf8' charset which is limited to 16-bit
+Unicode characters, with UTF-8 codes of 1 to 3 bytes per character. Starting
 with MySQL 5.5, the additional 'utf8mb4' charset was introduced, which supports
 full 21-bit Unicode and UTF-8 codes of 1 to 4 bytes (therefore 'mb4').
 
@@ -29,11 +29,12 @@ see the warning below). The migration involves the following steps:
   
 - Migrate the tables by running bin/dbupdate.
 
-This will enable full Unicode for both OC and OKAPI operation.
+This will enable full Unicode for both OC and OKAPI operation. Note that the
+okapi_ tables stay with 'utf8' charset (see
+https://github.com/opencaching/okapi/issues/352 for explanation).
 
 WARNING: There is no way to automatically migrate back to 'utf8', because
 that will lose any non-16-bit Unicode characters (probably being replaced
 by question marks). If you are absolutely sure that you want to do this,
-you may temporarily alter the check_tables_charset() function in bin/dbsv-update.php
-to accomplish it.
-
+you may temporarily alter the check_tables_charset() function in
+bin/dbsv-update.php to accomplish it.

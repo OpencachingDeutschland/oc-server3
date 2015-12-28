@@ -17,7 +17,7 @@
 
 	$tpl->caching = true;
 	$tpl->cache_lifetime = 300;
-	$tpl->cache_id = $sUserCountry;
+	$tpl->cache_id = $sUserCountry . '|' . $opt['page']['protocol'];
 
 	if (!$tpl->is_cached())
 	{

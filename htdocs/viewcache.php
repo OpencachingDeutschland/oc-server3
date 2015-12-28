@@ -77,7 +77,7 @@ function getChildWaypoints($cacheid)
 
 	//$tpl->caching = true;
 	//$tpl->cache_lifetime = 31*24*60*60;
-	//$tpl->cache_id = $cacheid . '|' . $sPreferedDescLang;
+	//$tpl->cache_id = $cacheid . '|' . $sPreferedDescLang . '|' . $opt['page']['protocol'];
 
 	if ($login->userid!=0)
 	{

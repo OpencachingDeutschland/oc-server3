@@ -85,13 +85,10 @@
 						<tr><td>{if $cache.is_publishdate==0}{t}Listed since:{/t}{else}{t}Published on:{/t}{/if}</td><td>{$cache.datecreated|date_format:$opt.format.datelong}</td></tr>
 						<tr><td>{t}Last update:{/t}</td><td>{$cache.lastmodified|date_format:$opt.format.datelong}</td></tr>
 						
-						{if $cache.wpgc!='' || $cache.wpnc!=''}
+						{if $cache.wpgc!=''}
 							<tr>
 							<td>{t}Also listed as:{/t}</td>
-							<td>
-								{if $cache.wpgc!=''}{$cache.wpgc}{if $cache.wpnc!=''}, {/if}{/if}
-								{if $cache.wpnc!=''}{$cache.wpnc}{/if}
-							</td>
+							<td>{$cache.wpgc}</td>
 						{/if}
 
 						<tr><td class="spacer-print"></td></td>

@@ -754,6 +754,9 @@ class user
 		$backup['email'] = $this->getEMail();
 		$backup['last_name'] = $this->getLastName();
 		$backup['first_name'] = $this->getFirstName();
+		$backup['country'] = $this->getCountryCode();
+		$backup['latitude'] = $this->getLatitude();
+		$backup['longitude'] = $this->getLongitude();
 
 		sql("INSERT INTO `logentries` (`module`, `eventid`, `userid`, `objectid1`, `objectid2`, `logtext`, `details`)
 		                       VALUES ('user', 6, '&1', '&2', '&3', '&4', '&5')",
@@ -761,28 +764,26 @@ class user
 		                       'User ' . sql_escape($this->getUsername()) . ' disabled',
 		                       serialize($backup));
 
-		// delete private data
-		sql("UPDATE `user` SET `password`=NULL, `email`=NULL, 
-		                       `is_active_flag`=0, 
-		                       `latitude`=0, `longitude`=0, 
-		                       `last_name`='', `first_name`='', `country`=NULL, `accept_mailing`=0, `pmr_flag`=0,
+		// delete private and system data
+		sql("UPDATE `user` SET `password`=NULL, `email`=NULL,
+		                       `last_name`='', `first_name`='',
+													 `country`=NULL, `latitude`=0, `longitude`=0,
+		                       `is_active_flag`=0, `activation_code`='',
 		                       `new_pw_code`=NULL, `new_pw_date`=NULL,
 		                       `new_email`=NULL, `new_email_code`=NULL, `new_email_date`=NULL,
-		                       `email_problems`=0, `first_email_problem`=NULL, `last_email_problem`=NULL,
-		                       `permanent_login_flag`=0, `activation_code`='',
-		                       `notify_radius`=0
-		                 WHERE `user_id`='&1'", $this->nUserId);
-			// Statpic and profile description texts are published under the data license
-			// terms and therefore need not to be deleted.
-		sql("DELETE FROM `user_options` WHERE `user_id`='&1'", $this->nUserId);
-		$this->reload();
+		                       `email_problems`=0, `first_email_problem`=NULL, `last_email_problem`=NULL
+		     WHERE `user_id`='&1'", $this->nUserId);
 
-		sql("DELETE FROM `cache_lists`     WHERE `user_id`='&1'", $this->nUserId);  // Triggers will do all the dependent clean-up.
-		sql("DELETE FROM `cache_adoption`  WHERE `user_id`='&1'", $this->nUserId);
-		sql("DELETE FROM `cache_ignore`    WHERE `user_id`='&1'", $this->nUserId);
-		sql("DELETE FROM `cache_watches`   WHERE `user_id`='&1'", $this->nUserId);
-		sql("DELETE FROM `watches_waiting` WHERE `user_id`='&1'", $this->nUserId);
-		sql("DELETE FROM `notify_waiting`  WHERE `user_id`='&1'", $this->nUserId);
+		// non-private data which need not to be deleted:
+		//
+		//   - Statpic and profile description texts - published under the data license
+		//   - profile settings: accept_mailing, pmr_flag, permanent_login_flag, notify_radius,
+		//                       user_options entries
+		//   - watch and ignore lists
+		//   - adoptions: may still be executed if offered to another user
+
+		// Handling of cache lists is unclear. They may be deleted by the Opencaching team
+		// if not considered useful.
 
 		// lock the user's caches
 		$error = false;

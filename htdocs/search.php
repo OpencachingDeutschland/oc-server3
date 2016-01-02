@@ -1307,7 +1307,7 @@
 
 		if ($sortby == 'bylastlog' || $options['sort'] == 'bymylastlog')
 		{
-			$sql .= '`lastLog` DESC, ';
+			$sql .= '`lastLog` DESC, `caches`.`date_created` DESC, ';
 			$sortby = 'bydistance';
 		}
 

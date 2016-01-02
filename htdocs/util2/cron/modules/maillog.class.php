@@ -20,13 +20,7 @@ class maillog
 	{
 		global $opt;
 		if ($opt['system']['maillog']['syslog_db_host'] != '')
-			if ($opt['system']['maillog']['syslog_mta'] != 'postfix/smtp')
-			{
-				echo $this->name.": unknown MTA '".$opt['system']['maillog']['syslog_mta']."'\n";
-				return;
-			}
-			else
-				$this->process_syslog();
+			$this->process_syslog();
 	}
 
 
@@ -34,7 +28,7 @@ class maillog
 	{
 		global $opt;
 
-		$dbc = @mysql_connect($opt['system']['maillog']['syslog_db_host'],
+		$dbc = mysql_connect($opt['system']['maillog']['syslog_db_host'],
 		                     $opt['system']['maillog']['syslog_db_user'],
 		                     $opt['system']['maillog']['syslog_db_password'],
 		                     TRUE);  // use separate connection even if on same DB host
@@ -49,17 +43,40 @@ class maillog
 			return;
 		}
 
+		$col_id = mysql_real_escape_string($opt['system']['maillog']['column']['id']);
+		$col_message = mysql_real_escape_string($opt['system']['maillog']['column']['message']);
+		$col_created = mysql_real_escape_string($opt['system']['maillog']['column']['created']);
+		$col_hostname = mysql_real_escape_string($opt['system']['maillog']['column']['host_name']);
+		$col_program = mysql_real_escape_string($opt['system']['maillog']['column']['program']);
+
+		$maillog_where =
+			"`".$col_hostname."`='" . mysql_real_escape_string($opt['system']['maillog']['syslog_oc_host']) . "' AND
+			`".$col_program."` like '" . mysql_real_escape_string($opt['system']['maillog']['syslog_mta']) . "'";
+
+		$rs = @mysql_query("
+			SELECT DATEDIFF(NOW(), MAX(" . $col_created . "))
+			FROM `" . mysql_real_escape_string($opt['system']['maillog']['syslog_db_table']) . "`
+			WHERE ". $maillog_where);
+		$r = mysql_fetch_row($rs);
+		mysql_free_result($rs);
+		if ($r[0] >= $opt['system']['maillog']['inactivity_warning'])
+		{
+			echo "email syslog has stalled\n";
+			return;
+		}
+
 		$last_id = sql_value("SELECT `value` FROM `sysconfig` WHERE `name`='syslog_maillog_lastid'", 0);
 		$last_date = sql_value("SELECT `value` FROM `sysconfig` WHERE `name`='syslog_maillog_lastdate'", "");
 
 		// We check for both, new IDs and new creation dates, so that it still works
 		// if the syslog DB is re-setup and IDs restarted from 1 (dates are not unique).
 		$rs = @mysql_query(
-			  "SELECT `id`, `message`, `created`
-			     FROM `event`
-			    WHERE  (`id`>'" . mysql_real_escape_string($last_id) . "' OR `created`>'" . mysql_real_escape_string($last_date) . "')  
-			      AND `host_name`='" . mysql_real_escape_string($opt['system']['maillog']['syslog_oc_host']) . "'
-			      AND `program`='" . mysql_real_escape_string($opt['system']['maillog']['syslog_mta']) . "'
+			  "SELECT `" . $col_id . "` `id`,
+			          `" . $col_message . "` `message`,
+			          `" . $col_created . "` `created`
+			     FROM `" . mysql_real_escape_string($opt['system']['maillog']['syslog_db_table']) . "`
+			    WHERE  (`".$col_id."`>'" . mysql_real_escape_string($last_id) . "' OR `".$col_created."`>'" . mysql_real_escape_string($last_date) . "')
+			      AND  " . $maillog_where . "
 			 ORDER BY `id`", $dbc);
 		if ($rs === FALSE)
 		{

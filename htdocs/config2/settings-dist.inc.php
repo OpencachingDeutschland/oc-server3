@@ -121,13 +121,20 @@
 	// date format
 	$opt['db']['dateformat'] = 'Y-m-d H:i:s';
 
-	// email delivery processing from syslog-ng eventlog DB
+	// email delivery processing from syslog-ng eventlog DB; all fields must be set
 	$opt['system']['maillog']['syslog_db_host'] = '';
 	$opt['system']['maillog']['syslog_db_name'] = '';
 	$opt['system']['maillog']['syslog_db_user'] = '';
 	$opt['system']['maillog']['syslog_db_password'] = '';
+	$opt['system']['maillog']['syslog_db_table'] = '';
 	$opt['system']['maillog']['syslog_oc_host'] = '';  // 'host_name' column in syslog DB
-	$opt['system']['maillog']['syslog_mta'] = 'postfix/smtp';  // 'program' column in syslog DB 
+	$opt['system']['maillog']['syslog_mta'] = 'postfix/smtp%';  // 'program' column in syslog DB
+	$opt['system']['maillog']['column']['id'] = 'id';               // 'ID'
+	$opt['system']['maillog']['column']['created'] = 'created';     // 'ReceivedAt'
+	$opt['system']['maillog']['column']['host_name'] = 'host_name'; // 'FromHost'
+	$opt['system']['maillog']['column']['message'] = 'message';     // 'Message'
+	$opt['system']['maillog']['column']['program'] = 'program';     // 'SysLogTag'
+	$opt['system']['maillog']['inactivity_warning'] = 30;   // warn after N days without new entries
 
 	/* cookie or session
 	 *

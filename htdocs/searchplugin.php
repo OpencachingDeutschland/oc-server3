@@ -91,12 +91,10 @@
 						$target = 'oc';
 					}
 					
-					if ((($target == 'oc') || ($target == 'nc') || ($target == 'gc')) && mb_ereg_match('(('.$opt['logic']['ocprefixes'].'|gc)([a-z0-9]){4,5}|n([a-f0-9]){5,5})$', mb_strtolower($searchfor)))
+					if ((($target == 'oc') || ($target == 'gc')) && mb_ereg_match('(('.$opt['logic']['ocprefixes'].'|gc)([a-z0-9]){4,5}|n([a-f0-9]){5,5})$', mb_strtolower($searchfor)))
 					{
 						if ($target == 'gc')
 							$wpfield = "IF(`wp_gc_maintained`='',`wp_gc`,`wp_gc_maintained`)";
-						else if ($target == 'nc')
-							$wpfield = "`wp_nc`";
 						else
 							$wpfield = "`wp_oc`";
 						// get cache_id from DB

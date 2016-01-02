@@ -689,7 +689,7 @@ function ImportCacheArray($r)
 			                         `status`=&7, `country`='&8', `date_hidden`='&9', 
 			                         `size`=&10, `difficulty`=&11, `terrain`=&12, 
 			                         `search_time`=&13, `way_length`=&14, `wp_gc`='&15', 
-			                         `wp_nc`='&16', `wp_oc`='&17' WHERE `uuid`='&18' LIMIT 1",
+			                         `wp_oc`='&16' WHERE `uuid`='&17' LIMIT 1",
 			                     $r['NAME']['__DATA'],
 			                     $r['LONGITUDE']['__DATA'],
 			                     $r['LATITUDE']['__DATA'],
@@ -705,7 +705,6 @@ function ImportCacheArray($r)
 			                     $r['RATING']['__ATTR']['NEEDTIME'],
 			                     $r['RATING']['__ATTR']['WAYLENGTH'],
 			                     $r['WAYPOINTS']['__ATTR']['GCCOM'],
-			                     $r['WAYPOINTS']['__ATTR']['NCCOM'],
 			                     $r['WAYPOINTS']['__ATTR']['OC'],
 			                     $r['ID']['__DATA']);
 
@@ -738,7 +737,7 @@ function ImportCacheArray($r)
 		                         `date_hidden`,  
 		                         `size`, `difficulty`, 
 		                         `terrain`, `uuid`, `search_time`, 
-		                         `way_length`, `wp_gc`, `wp_nc`, 
+		                         `way_length`, `wp_gc`,
 		                         `wp_oc`) 
 		                 VALUES (  &1 ,  '&2',   &3 ,
 		                           &4 ,  '&5',  '&6',
@@ -746,14 +745,14 @@ function ImportCacheArray($r)
 		                         '&10', 
 		                          &11 ,  &12 ,
 		                          &13 , '&14',  &15 ,
-		                          &16 , '&17', '&18',
-		                         '&19')",
+		                          &16 , '&17',
+		                         '&18')",
 		                         $rUser['user_id'], $r['NAME']['__DATA'], $r['LONGITUDE']['__DATA'],
 		                         $r['LATITUDE']['__DATA'], $r['LASTMODIFIED']['__DATA'], $r['DATECREATED']['__DATA'],
 		                         $r['TYPE']['__ATTR']['ID'], $r['STATUS']['__ATTR']['ID'], $r['COUNTRY']['__ATTR']['ID'],
 		                         $r['DATEHIDDEN']['__DATA'], $r['SIZE']['__ATTR']['ID'], $r['DIFFICULTY']['__DATA'] * 2,
 		                         $r['TERRAIN']['__DATA'] * 2, $r['ID']['__DATA'], $r['RATING']['__ATTR']['NEEDTIME'],
-		                         $r['RATING']['__ATTR']['WAYLENGTH'], $r['WAYPOINTS']['__ATTR']['GCCOM'], $r['WAYPOINTS']['__ATTR']['NCCOM'],
+		                         $r['RATING']['__ATTR']['WAYLENGTH'], $r['WAYPOINTS']['__ATTR']['GCCOM'],
 		                         $r['WAYPOINTS']['__ATTR']['OC']);
 	}
 	mysql_free_result($rs);

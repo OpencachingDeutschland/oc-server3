@@ -225,14 +225,12 @@ function toggleAttr(id)
 		<!-- allow wp_gc copy&paste with leading spaces; will be trimmed later -->
 		<td>geocaching.com: <input type="text" name="wp_gc" value="{wp_gc}" maxlength="12" class="input70w waypoint" />
 			{wpgc_message}
-			navicache.com: <input type="text" name="wp_nc" value="{wp_nc}" maxlength="6" class="input50 waypoint" />
 		</td>
 	</tr>
 	<tr>
 		<td>&nbsp;</td>
 		<td class="help"><img src="lang/de/ocstyle/images/misc/hint.gif" border="0" width="15" height="11" alt="{t}Notice{/t}" title="{t}Notice{/t}" />
-		{t}This waypoints will be used to show links in the view cache and the log page.{/t}<br />
-		{t}No data will be imported automatically from these listing services.{/t}
+			{t}If the cache was published at another geocaching website, enter the corresponding waypoint here.{/t}<br />
 		</td>
 	</tr>
 	<tr><td class="spacer" colspan="2">&nbsp;</td></tr>

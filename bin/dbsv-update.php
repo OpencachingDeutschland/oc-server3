@@ -687,6 +687,11 @@
 			sql("DROP TABLE `search_words`");
 	}
 
+	function dbv_143()   // navicache WP is obsolete
+	{
+		sql("ALTER TABLE `caches` MODIFY `wp_nc` varchar(6) NOT NULL COMMENT 'obsolete'");
+	}
+
 
 	// When adding new mutations, take care that they behave well if run multiple
 	// times. This improves robustness of database versioning.

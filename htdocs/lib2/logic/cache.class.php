@@ -33,19 +33,6 @@ class cache
 
 			$cacheid = $r['cache_id'];
 		}
-		else if (mb_strtoupper(mb_substr($wp, 0, 1)) == 'N')
-		{
-			$rs = sql("SELECT `cache_id` FROM `caches` WHERE `wp_nc`='&1'", $wp);
-			if (sql_num_rows($rs) != 1)
-			{
-				sql_free_result($rs);
-				return null;
-			}
-			$r = sql_fetch_assoc($rs);
-			sql_free_result($rs);
-
-			$cacheid = $r['cache_id'];
-		}
 		else
 		{
 			$cacheid = sql_value("SELECT `cache_id` FROM `caches` WHERE `wp_oc`='&1'", 0, $wp);
@@ -166,10 +153,6 @@ class cache
 	function getWPGC()
 	{
 		return $this->reCache->getValue('wp_gc');
-	}
-	function getWPNC()
-	{
-		return $this->reCache->getValue('wp_nc');
 	}
 
 	function getUUID()

@@ -37,7 +37,7 @@
 		// We need a consistent starting point including triggers & functions, and it's
 		// safer not to decide HERE which trigger version to install.
 		echo "Triggers / DB functions are not installed (yet) - skipping DB versioning.\n";
-		exit;
+		return;
 			// continue with dbupdate.php if called from there and let's hope
 			// maintain.php matches the installed tables' DB version ...
 	}
@@ -64,7 +64,7 @@
 	// Ensure that all tables have the right charset, including added tables:
 	check_tables_charset($opt['db']['placeholder']['db']);
 
-	exit;
+	return;
 
 
 	// Check if the tables' charset is consistent with $opt['charset']['mysql'].

@@ -85,7 +85,7 @@ function getWaypoints($cacheid)
 		}
 		else
 		{
-			$cache_rs = sql("SELECT `caches`.`uuid`, `caches`.`user_id`, `caches`.`name`, `stat_caches`.`picture`, `caches`.`type`, `caches`.`size`, `caches`.`date_hidden`, `caches`.`date_activate`, `caches`.`longitude`, `caches`.`latitude`, `caches`.`country`, `caches`.`terrain`, `caches`.`difficulty`, `caches`.`desc_languages`, `caches`.`status`, `caches`.`search_time`, `caches`.`way_length`, `caches`.`logpw`, `caches`.`wp_oc`, `caches`.`wp_gc`, `caches`.`wp_nc`, `caches`.`show_cachelists`, `caches`.`node`, `user`.`username` FROM `caches` INNER JOIN `user` ON `caches`.`user_id`=`user`.`user_id` LEFT JOIN `stat_caches` ON `caches`.`cache_id`=`stat_caches`.`cache_id` WHERE `caches`.`cache_id`='&1'", $cache_id);
+			$cache_rs = sql("SELECT `caches`.`uuid`, `caches`.`user_id`, `caches`.`name`, `stat_caches`.`picture`, `caches`.`type`, `caches`.`size`, `caches`.`date_hidden`, `caches`.`date_activate`, `caches`.`longitude`, `caches`.`latitude`, `caches`.`country`, `caches`.`terrain`, `caches`.`difficulty`, `caches`.`desc_languages`, `caches`.`status`, `caches`.`search_time`, `caches`.`way_length`, `caches`.`logpw`, `caches`.`wp_oc`, `caches`.`wp_gc`, `caches`.`show_cachelists`, `caches`.`node`, `user`.`username` FROM `caches` INNER JOIN `user` ON `caches`.`user_id`=`user`.`user_id` LEFT JOIN `stat_caches` ON `caches`.`cache_id`=`stat_caches`.`cache_id` WHERE `caches`.`cache_id`='&1'", $cache_id);
 			$cache_record = sql_fetch_array($cache_rs);
 			sql_free_result($cache_rs);
 
@@ -221,7 +221,6 @@ function getWaypoints($cacheid)
 					$log_pw = isset($_POST['log_pw']) ? mb_substr($_POST['log_pw'], 0, 20) : $cache_record['logpw'];
 					// fix #4356: gc waypoints are frequently copy&pasted with leading spaces
 					$wp_gc = isset($_POST['wp_gc']) ? strtoupper(trim($_POST['wp_gc'])) : $cache_record['wp_gc'];  // Ocprop
-					$wp_nc = isset($_POST['wp_nc']) ? strtoupper(trim($_POST['wp_nc'])) : $cache_record['wp_nc'];
 					$showlists = isset($_POST['showlists']) ? 1 : $cache_record['show_cachelists'] + 0;
 
 					// name
@@ -492,7 +491,7 @@ function getWaypoints($cacheid)
 							// Status change via editcache.php is no longer available via the user interface,
 							// but still used by Ocprop and maybe other tools.
 							sql("SET @STATUS_CHANGE_USER_ID='&1'", $usr['userid']);
-							sql("UPDATE `caches` SET `name`='&1', `longitude`='&2', `latitude`='&3', `type`='&4', `date_hidden`='&5', `country`='&6', `size`='&7', `difficulty`='&8', `terrain`='&9', `status`='&10', `search_time`='&11', `way_length`='&12', `logpw`='&13', `wp_gc`='&14', `wp_nc`='&15', `show_cachelists`='&16', `date_activate` = $activation_date WHERE `cache_id`='&17'", $cache_name, $cache_lon, $cache_lat, $cache_type, date('Y-m-d', mktime(0, 0, 0, $cache_hidden_month, $cache_hidden_day, $cache_hidden_year)), $cache_country, $sel_size, $cache_difficulty, $cache_terrain, $status, $search_time, $way_length, $log_pw, $wp_gc, $wp_nc, $showlists, $cache_id);
+							sql("UPDATE `caches` SET `name`='&1', `longitude`='&2', `latitude`='&3', `type`='&4', `date_hidden`='&5', `country`='&6', `size`='&7', `difficulty`='&8', `terrain`='&9', `status`='&10', `search_time`='&11', `way_length`='&12', `logpw`='&13', `wp_gc`='&14', `show_cachelists`='&15', `date_activate` = $activation_date WHERE `cache_id`='&16'", $cache_name, $cache_lon, $cache_lat, $cache_type, date('Y-m-d', mktime(0, 0, 0, $cache_hidden_month, $cache_hidden_day, $cache_hidden_year)), $cache_country, $sel_size, $cache_difficulty, $cache_terrain, $status, $search_time, $way_length, $log_pw, $wp_gc, $showlists, $cache_id);
 
 							// send notification on admin intervention
 							if ($cache_record['user_id'] != $usr['userid'] &&
@@ -928,7 +927,6 @@ function getWaypoints($cacheid)
 					tpl_set_var('way_length', $way_length);
 					tpl_set_var('log_pw', htmlspecialchars($log_pw, ENT_COMPAT, 'UTF-8'));
 					tpl_set_var('wp_gc', htmlspecialchars($wp_gc, ENT_COMPAT, 'UTF-8'));
-					tpl_set_var('wp_nc', htmlspecialchars($wp_nc, ENT_COMPAT, 'UTF-8'));
 					tpl_set_var('showlists_checked', $showlists ? 'checked="checked"' : '');
 
 					tpl_set_var('reset', $reset);  // obsolete

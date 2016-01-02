@@ -25,7 +25,7 @@ CREATE TABLE `caches` (
   `way_length` float unsigned NOT NULL default '0',
   `wp_gc` varchar(7) NOT NULL,
   `wp_gc_maintained` varchar(7) NOT NULL,
-  `wp_nc` varchar(6) NOT NULL,
+  `wp_nc` varchar(6) NOT NULL COMMENT 'obsolete',
   `wp_oc` varchar(7) NOT NULL,
   `desc_languages` varchar(60) NOT NULL COMMENT 'via Trigger (cache_desc)',
   `default_desclang` char(2) NOT NULL,

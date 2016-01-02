@@ -453,7 +453,7 @@ function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $z
 	                                    `caches`.`longitude` `longitude`, `caches`.`latitude` `latitude`, `caches`.`type` `type`, 
 	                                    `caches`.`country` `country`, `caches`.`size` `size`, `caches`.`desc_languages` `desclanguages`,
 	                                    `caches`.`difficulty` `difficulty`, `caches`.`terrain` `terrain`, `caches`.`way_length` `way_length`, 
-	                                    `caches`.`search_time` `search_time`, `caches`.`wp_gc` `wp_gc`, `caches`.`wp_nc` `wp_nc`,
+	                                    `caches`.`search_time` `search_time`, `caches`.`wp_gc` `wp_gc`,
 	                                    /* we deliberatly do not use gc_wp_maintained here */
 	                                    `caches`.`wp_oc` `wp_oc`, `caches`.`date_hidden` `date_hidden`, `caches`.`date_created` `date_created`, `caches`.`is_publishdate` `is_publishdate`, 
 	                                    `caches`.`last_modified` `last_modified`, `caches`.`status` `status`, `caches`.`node` `node`,
@@ -484,7 +484,7 @@ function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $z
 		fwrite($f, $t2 . '<difficulty>' . sprintf('%01.1f', $r['difficulty'] / 2) . '</difficulty>' . "\n");
 		fwrite($f, $t2 . '<terrain>' . sprintf('%01.1f', $r['terrain'] / 2) . '</terrain>' . "\n");
 		fwrite($f, $t2 . '<rating waylength="' . $r['way_length'] . '" needtime="' . $r['search_time'] . '" />' . "\n");
-		fwrite($f, $t2 . '<waypoints gccom="' . xmlentities($r['wp_gc']) . '" nccom="' . xmlentities($r['wp_nc']) . '" oc="' . xmlentities($r['wp_oc']) . '" />' . "\n");
+		fwrite($f, $t2 . '<waypoints gccom="' . xmlentities($r['wp_gc']) . '" nccom="" oc="' . xmlentities($r['wp_oc']) . '" />' . "\n");
 		fwrite($f, $t2 . '<datehidden>' . date($sDateformat, strtotime($r['date_hidden'])) . '</datehidden>' . "\n");
 		if ($ocxmlversion >= 12) $pd = ' ispublishdate="' . $r['is_publishdate'] . '"';
 		else $pd = "";

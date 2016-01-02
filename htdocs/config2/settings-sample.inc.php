@@ -208,10 +208,10 @@
 
 	// email address for user contact emails
 	// has to be an autoresponder informing about wrong mail usage
-	$opt['mail']['usermail'] = 'usermail@opencaching.de';
+	$opt['mail']['usermail'] = 'usermail@<domain>';
 
 	// contact address
-	$opt['mail']['contact'] = 'contact@opencaching.de';
+	$opt['mail']['contact'] = 'contact@<domain>';
 
 	$opt['page']['showdonations'] = true;
 	$opt['page']['showsocialmedia'] = true;

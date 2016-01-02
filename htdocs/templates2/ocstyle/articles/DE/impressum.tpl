@@ -45,7 +45,7 @@
 </div>
 <div class="content-txtbox-noshade" style="padding-right: 25px;">
 	<p>	<b>ACHTUNG</b>: Fragen und Hinweise zu Schatzverstecken oder den Nutzungsbedingungen von 
-		opencaching.de richten Sie bitte an <b>contact@opencaching.de</b><br />
+		opencaching.de richten Sie bitte an <b>{$opt.mail.contact}</b><br />
 	</p>
 	<p>
 		Angaben gem. &sect;5 Telemediengesetz<br />
@@ -156,7 +156,7 @@
 		Einhaltung dieser Vorschriften nur durch Stichproben kontrollieren und ist deshalb 
 		darauf angewiesen, dass fragw&uuml;rdige oder rechtswidrige Inhalte von den 
 		Benutzern gemeldet werden. Die Meldung kann direkt &uuml;ber den Melde-Hyperlink 
-		in jedem Cachelisting oder per E-Mail an <a href="mailto:contact@opencaching.de">contact@opencaching.de</a> 
+		in jedem Cachelisting oder per E-Mail an <a href="mailto:{$opt.mail.contact}">{$opt.mail.contact}</a> 
 		erfolgen. Die entsprechenden Inhalte werden dann schnellstm&ouml;glich vom 
 		Verein Opencaching Deutschland kontrolliert und bei Bedarf unverz&uuml;glich 
 		entfernt.
@@ -257,7 +257,7 @@
 			Geocaches, die gegen die oben genannten Richtlinien f&uuml;r das 
 			Verstecken eines Geocaches versto&szlig;en, sind unverz&uuml;glich 
 			&uuml;ber den Melde-Hyperlink im Cachelisting oder per E-Mail an 
-			<a href="mailto:contact@opencaching.de">contact@opencaching.de</a> 
+			<a href="mailto:{$opt.mail.contact}">{$opt.mail.contact}</a> 
 			zu melden. Damit hilft jeder Benutzer die Qualit&auml;t dieser Geocaching 
 			Seite auf hohem Niveau zu halten und so den langfristigen Betrieb zu 
 			erm&ouml;glichen.

@@ -26,7 +26,7 @@
 
 <div class="content-txtbox-noshade" style="padding-right: 25px;">
 	<p>	<b>NOTE</b>: As for questions and information on cache locations and hides or the 
-		terms of use of opencaching.de please refer to <b>contact@opencaching.de</b><br /><p>
+		terms of use of opencaching.de please refer to <b>{$opt.mail.contact}</b><br /><p>
 	<p>
 		Information according to &sect;5 German Teleservices Act<br />
 		Responsible as of German remote services statue / value added tax law<br />
@@ -133,7 +133,7 @@
 		violate any applicable law. Opencaching.de may check if users will comply with 
 		these terms and encourages you to report any doubtful or illegal contents. You 
 		may use the "report" button within the cache listings or send email to 
-		<a href="mailto:contact@opencaching.de">contact@opencaching.de</a>. The reported 
+		<a href="mailto:{$opt.mail.contact}">{$opt.mail.contact}</a>. The reported 
 		contents will then be checked by us and removed if necessary.
 	</p>
 			
@@ -223,7 +223,7 @@
 			If you encounter a geocache violating the terms given above for hiding and 
 			listing a cache, you are obliged to report it by using the report button within 
 			the cache listing or by sending an email to 
-			<a href="mailto:contact@opencaching.de">contact@opencaching.de</a>. This will 
+			<a href="mailto:{$opt.mail.contact}">{$opt.mail.contact}</a>. This will 
 			help to ensure a good quality of website contents.
 		</li>
 	</ul>

@@ -120,6 +120,6 @@
 			<p>Die gespeicherten Cookies kannst du in deinem Webbrowser löschen.</p>
 			
 			<p>Bei Unklarheiten oder im Zweifelsfall kontaktiere bitte
-			<a href="mailto:contact@opencaching.de">contact@opencaching.de</a>. Danke!</p>
+			<a href="mailto:{$opt.mail.contact}">{$opt.mail.contact}</a>. Danke!</p>
 		</div>
 		<br />

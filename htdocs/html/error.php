@@ -31,13 +31,13 @@
 			echo "<h1>" . $errtitle . "</h1>";
 			echo '<p>Entschuldigung, bei der Darstellung der Seite ist ein intener Fehler aufgetreten.
 			      Falls dieses Problem für längere Zeit bestehen sollte, informiere uns bitte per
-			      <a href="mailto:contact@opencaching.de">Email</a>.</p>
+			      <a href="mailto:kontakt@opencaching.de">Email</a>.</p>
 			      <p class="errormsg">' . $errmsg  . '</p>
 			      <p><a href="index.php">Zurück zur Startseite</a></p>
 
 			      <p><br /><br /><em>An error occured while displaying the requested page.
 			      If this problem persists for a longer time, please inform us via
-			      <a href="mailto:contact@opencaching.de">email</a>.</em></p>';
+			      <a href="mailto:kontakt@opencaching.de">email</a>.</em></p>';
 		?>
   </div>
 	</body>

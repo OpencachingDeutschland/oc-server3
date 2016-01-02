@@ -1860,7 +1860,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1345', 'Only lo
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1346', 'Time and effort (optional):', '2010-09-07 19:19:44');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1347', 'Of course, this effort can only be estimated and can vary depending on enviromental influences. If you cannot make sufficiently detailed information, fill both fields up with a O (zero).', '2010-09-07 19:19:44');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1348', 'Waypoints (optional):', '2010-09-07 19:19:44');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1349', 'This waypoints will be used to show links in the view cache and the log page.', '2010-09-07 19:19:44');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1349', 'If the cache was published at another geocaching website, enter the corresponding waypoint here.', '2010-09-07 19:19:44');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1350', 'No data will be imported automatically from these listing services.', '2010-09-07 19:19:44');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1351', 'Descriptions', '2010-09-07 19:19:44');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1352', 'Add description in another language', '2010-09-07 19:19:44');
@@ -6396,7 +6396,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1346', 'DE', 'Aufwand (optional):', '2010-09-11 00:02:20');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1347', 'DE', 'Der Aufwand kann natürlich nur geschätzt werden und kann auch je nach Umwelteinflüssen sehr verschieden sein. Solltest du keine ausreichend genauen Angaben machen können, schreibe in beide Felder 0 (Null).', '2010-09-11 00:02:12');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1348', 'DE', 'Wegpunkte (optional):', '2010-09-11 00:02:03');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1349', 'DE', 'Diese Wegpunkte dienen zur Generierung entsprechender Links in der Cacheansicht bzw. beim Loggen.', '2010-09-11 00:01:54');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1349', 'DE', 'Falls der Cache auch auf einer anderen Website veröffentlicht wurde, gib hier den entsprechenden Wegpunkt an.', '2010-09-11 00:01:54');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1350', 'DE', 'Es werden keine Daten automatisch von diesen Cachedatenbanken übernommen.', '2010-09-11 00:00:58');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1351', 'DE', 'Beschreibungen', '2010-09-11 00:00:49');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1352', 'DE', 'Beschreibung in anderer Sprache hinzuf\&uuml;gen', '2010-09-11 00:00:39');
@@ -8247,7 +8247,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1346', 'EN', 'Time and effort (optional):', '2010-09-11 00:02:20');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1347', 'EN', 'Of course, this effort can only be estimated and can vary depending on enviromental influences. If you cannot make sufficiently detailed information, fill both fields up with a O (zero)', '2010-09-11 00:02:12');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1348', 'EN', 'Waypoints (optional):', '2010-09-11 00:02:03');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1349', 'EN', 'This waypoints will be used to show links in the view cache and the log page.', '2010-09-11 00:01:54');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1349', 'EN', 'If the cache was published at another geocaching website, enter the corresponding waypoint here.', '2010-09-11 00:01:54');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1350', 'EN', 'No data will be imported automatically from these listing services.', '2010-09-11 00:00:58');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1351', 'EN', 'Descriptions', '2010-09-11 00:00:49');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1352', 'EN', 'Add description in another language', '2010-09-11 00:00:39');

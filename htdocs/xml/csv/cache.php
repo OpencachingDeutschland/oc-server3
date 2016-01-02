@@ -45,6 +45,6 @@
 		echo ';';
 		echo '"' . mb_ereg_replace('"', '\"', $cache->getWPGC()) . '"';
 		echo ';';
-		echo '"' . mb_ereg_replace('"', '\"', $cache->getWPNC()) . '"';
+		echo '""';  // obsolete Navicache WP
 	}
 ?>

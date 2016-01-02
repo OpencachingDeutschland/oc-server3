@@ -70,7 +70,6 @@
 				`caches`.`date_hidden` AS `datehidden`,
 				`caches`.`wp_oc` AS `wpoc`,
 				`caches`.`wp_gc` AS `wpgc`,
-				`caches`.`wp_nc` AS `wpnc`,
 				`caches`.`date_created` AS `datecreated`,
 				`caches`.`difficulty` AS `difficulty`,
 				`caches`.`terrain` AS `terrain`,

@@ -66,7 +66,6 @@
 
 	return;
 
-
 	// Check if the tables' charset is consistent with $opt['charset']['mysql'].
 	// Do an upgrade from utf8 to utf8mb4 if necessary.
 	// OKAPI tables upgrade is done by a similar function in OKAPI's update module.
@@ -685,6 +684,11 @@
 
 		if (sql_table_exists('search_words'))
 			sql("DROP TABLE `search_words`");
+	}
+
+	function dbv_143()   // navicache WP is obsolete
+	{
+		sql("ALTER TABLE `caches` MODIFY `wp_nc` varchar(6) NOT NULL COMMENT 'obsolete'");
 	}
 
 

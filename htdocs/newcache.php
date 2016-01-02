@@ -292,9 +292,6 @@
 			$wp_gc = isset($_POST['wp_gc']) ? strtoupper(trim($_POST['wp_gc'])) : '';  // Ocprop
 			tpl_set_var('wp_gc', htmlspecialchars($wp_gc, ENT_COMPAT, 'UTF-8'));
 
-			$wp_nc = isset($_POST['wp_nc']) ? strtoupper(trim($_POST['wp_nc'])) : '';
-			tpl_set_var('wp_nc', htmlspecialchars($wp_nc, ENT_COMPAT, 'UTF-8'));
-
 			//difficulty
 			$difficulty = isset($_POST['difficulty']) ? $_POST['difficulty'] : 1;  // Ocprop
 			$difficulty_options = '<option value="1">'.$sel_message.'</option>';
@@ -867,11 +864,10 @@
 												`search_time`,
 												`way_length`,
 												`wp_gc`,
-												`wp_nc`,
 												`node`
 											) VALUES (
 												'', '&1', '&2', '&3', '&4', '&5', '&6', '&7', '&8', $activation_date, 
-												'&9', '&10', '&11', '&12', '&13', '&14', '&15', '&16', '&17')",
+												'&9', '&10', '&11', '&12', '&13', '&14', '&15', '&16')",
 											$usr['userid'],
 											$name,
 											$longitude,
@@ -887,7 +883,6 @@
 											$search_time,
 											$way_length,
 											$wp_gc,
-											$wp_nc,
 											$oc_nodeid);
 					$cache_id = mysql_insert_id($dblink);
 

@@ -40,7 +40,7 @@
 	<tr><td class="spacer"></td></tr>
 	<tr>
 		<td>
-		  For the case that the contact places mentioned above do not meet your requirements, you may contact the Opencaching.de operator or send an email to our support team at <a href="mailto:contact@opencaching.de">contact@opencaching.de</a>. We will try to answer your request promptly, but please keep in mind that we are a team of volunteers who are not permanently and immediately available.<br />
+		  For the case that the contact places mentioned above do not meet your requirements, you may contact the Opencaching.de operator or send an email to our support team at <a href="mailto:{$opt.mail.contact}">{$opt.mail.contact}</a>. We will try to answer your request promptly, but please keep in mind that we are a team of volunteers who are not permanently and immediately available.<br />
 		</td>
 	</tr>
 </table>

@@ -78,7 +78,7 @@
 			<p>You can always delete all optional data from your user profile, and you can change
 			the mandantory user name, email address and password as you like (as long as the email address stays valid).</p>
 	
-			<p>Accounts of users who did find or log caches cannot be deleted. Hovever, they can be disabled. Disabling includes deletion of all data, including the email address, from the user profile. The user name, cache listings and logs will be retained and stay visible, but the listings will be locked and cannot be logged from thereon. If you desire to disable your Opencaching.de account, please send an email to <a href="mailto:contact@opencaching.de">contact@opencaching.de</a> and using the email address specified in your profile. We then will disable your account.</p>
+			<p>Accounts of users who did find or log caches cannot be deleted. Hovever, they can be disabled. Disabling includes deletion of all data, including the email address, from the user profile. The user name, cache listings and logs will be retained and stay visible, but the listings will be locked and cannot be logged from thereon. If you desire to disable your Opencaching.de account, please send an email to <a href="mailto:{$opt.mail.contact}">{$opt.mail.contact}</a> and using the email address specified in your profile. We then will disable your account.</p>
 			
 			<p>To allow for fixing operating errors, the personal data will be kept for two weeks after user deactivation, before they are finally deleted.</p>
 			
@@ -87,6 +87,6 @@
 			
 			<p>You may delete the cookies in your web browser.</p>
 						
-			<p>For questions or when in doubt, please contact us at <a href="mailto:contact@opencaching.de">contact@opencaching.de</a>!</p>
+			<p>For questions or when in doubt, please contact us at <a href="mailto:{$opt.mail.contact}">{$opt.mail.contact}</a>!</p>
 		</div>
 		<br />

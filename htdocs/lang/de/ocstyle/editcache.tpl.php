@@ -272,7 +272,7 @@ function toggleAttr(id)
 	{gc_com_msg2}</span>
 	</td></tr>
 	{gc_com_refs_end}
-	<tr><td colspan="2">&nbsp;</td></tr>
+	<tr><td colspan="2" id="pictures">&nbsp;</td></tr>
 
 	<tr>
 		<td class="header-small" colspan="2">

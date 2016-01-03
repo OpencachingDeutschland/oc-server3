@@ -9,6 +9,9 @@
  *
  ***************************************************************************/
 
+/*
+  Bilder werden nicht gelöscht!
+
 $opt['rootpath'] = '../../';
 
 // chdir to proper directory (needed for cronjobs)
@@ -23,4 +26,6 @@ while ($r = sql_fetch_assoc($rs))
 	sql("DELETE FROM `cache_logs` WHERE `id`='&1' LIMIT 1", $r['id']);
 }
 sql_free_result($rs);
+
+*/
 ?>

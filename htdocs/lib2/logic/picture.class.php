@@ -444,12 +444,20 @@ class picture
 
 	function getPageLink()
 	{
-		$pl = 'viewcache.php?cacheid=' . urlencode($this->getCacheId());
 		if ($this->getObjectType() == OBJECT_CACHELOG)
 		{
+			$pl = 'viewcache.php?cacheid=' . urlencode($this->getCacheId());
 			if (!$this->isVisibleOnCachePage())
 				$pl .= "&log=A";
 			$pl .= "#log" . urlencode($this->getLogId());
+		}
+		else if ($this->getObjectType() == OBJECT_CACHE)
+		{
+			$pl = 'editcache.php?cacheid=' . urlencode($this->getCacheId()) . '#pictures';
+		}
+		else
+		{
+			$pl = false;
 		}
 		return $pl;
 	}

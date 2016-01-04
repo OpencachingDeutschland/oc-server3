@@ -54,7 +54,7 @@ class maillog
 			`".$col_program."` like '" . mysql_real_escape_string($opt['system']['maillog']['syslog_mta']) . "'";
 
 		$rs = @mysql_query("
-			SELECT DATEDIFF(NOW(), MAX(" . $col_created . "))
+			SELECT TIMESTAMPDIFF(DAY, MAX(" . $col_created . "), NOW())
 			FROM `" . mysql_real_escape_string($opt['system']['maillog']['syslog_db_table']) . "`
 			WHERE ". $maillog_where);
 		$r = mysql_fetch_row($rs);

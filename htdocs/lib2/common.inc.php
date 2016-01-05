@@ -248,7 +248,7 @@ function check_useragent()
 	global $ocpropping;
 
 	// are we Ocprop?
-	$ocpropping = isset($_SERVER['HTTP_USER_AGENT']) && strpos($_SERVER['HTTP_USER_AGENT'],"Ocprop/");
+	$ocpropping = isset($_SERVER['HTTP_USER_AGENT']) && strpos($_SERVER['HTTP_USER_AGENT'], "Ocprop/") !== false;
 }
 
 function fix_magic_quotes_gpc()

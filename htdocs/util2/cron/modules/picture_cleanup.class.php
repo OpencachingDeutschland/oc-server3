@@ -44,10 +44,10 @@ class picture_cleanup
 			}
 
 			for ($n = 1; $n < count($instances); ++$n)
-				if ($instances[$n]['filesize'] !== FALSE)  // ensure that pic is stored locally
+				if ($instances[$n]['filesize'] !== false)  // ensure that pic is stored locally
 				{
 					for ($nn = $n-1; $nn >= 0; --$nn)
-						if ($instances[$nn]['filesize'] == $instances[$n]['filesize'])
+						if ($instances[$nn]['filesize'] === $instances[$n]['filesize'])
 							if (file_get_contents($instances[$nn]['pic']->getFilename())
 							    == file_get_contents($instances[$n]['pic']->getFilename()))
 							{
@@ -56,6 +56,7 @@ class picture_cleanup
 								     ' from log ' . $rDuplicatePic['object_id'] .
 								     ' of cache ' . $instances[$n]['cache_id'] . "\n";
 								$picture->delete(false);
+								$instances[$n]['filesize'] = false;
 								break;
 							}
 				}

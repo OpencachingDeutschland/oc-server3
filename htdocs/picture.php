@@ -88,6 +88,10 @@
 			else
 				$picture->setTitle($title);
 
+			// ignore duplicates (http://redmine.opencaching.de/issues/251)
+			if ($picture->is_duplicate())
+				$tpl->redirect($picture->getPageLink());
+
 			if (!isset($_FILES['file']))  // Ocprop
 			{
 				$tpl->assign('errorfile', ERROR_UPLOAD_ERR_NO_FILE);

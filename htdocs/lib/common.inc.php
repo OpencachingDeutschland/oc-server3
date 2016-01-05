@@ -264,7 +264,7 @@ function __autoload($class_name)
 	}
 
 	// are we Ocprop?
-	$ocpropping = isset($_SERVER['HTTP_USER_AGENT']) && strpos($_SERVER['HTTP_USER_AGENT'],"Ocprop/");
+	$ocpropping = isset($_SERVER['HTTP_USER_AGENT']) && strpos($_SERVER['HTTP_USER_AGENT'], "Ocprop/") !== false;
 
 	// zeitmessung
 	require_once($rootpath . 'lib/bench.inc.php');

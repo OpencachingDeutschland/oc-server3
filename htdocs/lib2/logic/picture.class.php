@@ -355,6 +355,23 @@ class picture
 		return $this->rePicture->getAnyChanged();
 	}
 
+	// Test if the picture can be discarded as duplicate.
+	// This is a quick test for Ocprop dups and may be extended for any
+	// picture uploads by comparing the file sizes and contents.
+
+	function is_duplicate()
+	{
+		global $ocpropping;
+		return $ocpropping &&
+			     sql_value("
+						SELECT COUNT(*) FROM `pictures`
+						WHERE `object_type`='&1' AND `object_id`='&2' AND `title`='&3'",
+						0,
+						$this->getObjectType(),
+						$this->getObjectId(),
+						$this->getTitle()) > 0;
+	}
+
 	// return true if successful (with insert)
 	function save($restore=false, $original_id=0, $original_url="")
 	{

@@ -692,6 +692,31 @@
 		sql("ALTER TABLE `caches` MODIFY `wp_nc` varchar(6) NOT NULL COMMENT 'obsolete'");
 	}
 
+	function dbv_144()   // add log versioning to allow log vandalism restore
+	{
+		if (!sql_table_exists('cache_logs_modified'))
+		{
+			sql("
+				CREATE TABLE `cache_logs_modified` (
+				  `id` int(10) unsigned NOT NULL,
+				  `uuid` varchar(36) NOT NULL,
+				  `node` tinyint(3) unsigned NOT NULL,
+				  `date_created` datetime NOT NULL,
+				  `last_modified` datetime NOT NULL,
+				  `log_last_modified` datetime NOT NULL,
+				  `cache_id` int(10) unsigned NOT NULL,
+				  `user_id` int(10) unsigned NOT NULL,
+				  `type` tinyint(3) unsigned NOT NULL,
+				  `oc_team_comment` tinyint(1) NOT NULL,
+				  `date` datetime NOT NULL,
+				  `text` mediumtext NOT NULL,
+				  `text_html` tinyint(1) NOT NULL,
+				  `modify_date` datetime default NULL,
+				  KEY `id` (`id`, `modify_date`)
+				) ENGINE=MyISAM");
+		}
+	}
+
 
 	// When adding new mutations, take care that they behave well if run multiple
 	// times. This improves robustness of database versioning.

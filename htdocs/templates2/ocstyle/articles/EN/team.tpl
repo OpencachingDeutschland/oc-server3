@@ -28,17 +28,16 @@
     <tr><th colspan="3"><br /><span class="content-title-noshade-size1">Team members</span></th>
     <tr><td></td></tr>
     <tr><td><img src="{$opt.page.teampic_url}bundy609.jpg" /></td><td><a href="{$opt.page.teammember_url}viewprofile.php?userid=189552">Bundy609</a><br />user support, data maintenance</td></tr>
-    <tr><td><img src="{$opt.page.teampic_url}danlex.png" /></td><td><a href="{$opt.page.teammember_url}viewprofile.php?userid=222261">Danlex</a><br />user support, data maintenance</td></tr>
     <tr><td><img src="{$opt.page.teampic_url}dl6hbo.jpg" /></td><td><a href="{$opt.page.teammember_url}viewprofile.php?userid=148310">dl6hbo</a><br />system administration, documentation</td></tr>
+    <tr><td><img src="{$opt.page.teampic_url}dummy.jpg" /></td><td><a href="{$opt.page.teammember_url}viewprofile.php?userid=167651">dogesu</a><br />data maintenance</td></tr>
     <tr><td><img src="{$opt.page.teampic_url}flopp.png" /></td><td><a href="{$opt.page.teammember_url}viewprofile.php?userid=126329">Flopp</a><br />software development, user support, data maintenance</td></tr>
     <tr><td><img src="{$opt.page.teampic_url}following.png" /></td><td><a href="{$opt.page.teammember_url}viewprofile.php?userid=150360">following</a><br />data maintenance, software development, wiki</td></tr>
     <tr><td><img src="{$opt.page.teampic_url}friedrichfroebel.jpg" /></td><td><a href="{$opt.page.teammember_url}viewprofile.php?userid=234947">FriedrichFröbel</a><br />wiki, message board moderation</td></tr>
     <tr><td><img src="{$opt.page.teampic_url}hanekju.png" /></td><td><a href="{$opt.page.teammember_url}viewprofile.php?userid=205779">Hanekju</a><br />data maintenance</td></tr>
     <tr><td><img src="{$opt.page.teampic_url}joerg.jpg" /></td><td><a href="{$opt.page.teammember_url}viewprofile.php?userid=102153">Jörg</a><br />advisor for nature protection and authority relations</td></tr>
-    <tr><td><img src="{$opt.page.teampic_url}metrax.png" /></td><td><a href="{$opt.page.teammember_url}viewprofile.php?userid=212145">Metrax</a><br />advisor for webhosting</td></tr>
     <tr><td><img src="{$opt.page.teampic_url}mrspommelhorst.jpg" /></td><td><a href="{$opt.page.teammember_url}viewprofile.php?userid=144252">Mrs.Pommelhorst</a><br />user support, data maintenance, wiki</td></tr>
     <tr><td><img src="{$opt.page.teampic_url}ralf20.png" /></td><td><a href="{$opt.page.teammember_url}viewprofile.php?userid=165920">Ralf20</a><br />data maintenance</td></tr>
-    <tr><td><img src="{$opt.page.teampic_url}dummy.jpg" /></td><td><a href="{$opt.page.teammember_url}viewprofile.php?userid=159941">Slini11</a><br />data maintenance</td></tr>
+    <tr><td><img src="{$opt.page.teampic_url}slini11.png" /></td><td><a href="{$opt.page.teammember_url}viewprofile.php?userid=159941">Slini11</a><br />data maintenance</td></tr>
     <tr><td><img src="{$opt.page.teampic_url}spike05de.png" /></td><td><a href="{$opt.page.teammember_url}viewprofile.php?userid=130977">Spike05de</a><br />user support, data maintenance</td></tr>
     <tr><td><img src="{$opt.page.teampic_url}steingesicht.jpg" /></td><td><a href="{$opt.page.teammember_url}viewprofile.php?userid=165774">Steingesicht</a><br />data maintenance, message board moderation</td></tr>
     <tr><td></td><td></td><td></td></tr>

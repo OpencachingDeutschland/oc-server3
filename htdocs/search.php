@@ -1325,15 +1325,14 @@
 		}
 
 		// range of output
-		$startat = isset($_REQUEST['startat']) ? $_REQUEST['startat'] : 0;
+		$startat = isset($_REQUEST['startat']) ? floor($_REQUEST['startat']+0) : 0;
 		if (!is_numeric($startat)) $startat = 0;
 
 		if (isset($_REQUEST['count']))  // Ocprop
-			$count = $_REQUEST['count'];
+			$count = floor($_REQUEST['count']+0);
 		else
 			$count = $caches_per_page;
 		if ($count == 'max') $count = 500;
-		if (!is_numeric($count)) $count = 0;
 		if ($count < 1) $count = 1;
 		if ($count > 500) $count = 500;
 

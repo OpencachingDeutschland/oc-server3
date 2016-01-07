@@ -10,7 +10,7 @@
 	$tpl->menuitem = MNU_START_NEWCACHES;
 	$tpl->change_country_inpage = true;
 
-	$startat = isset($_REQUEST['startat']) ? $_REQUEST['startat']+0 : 0;
+	$startat = isset($_REQUEST['startat']) ? floor($_REQUEST['startat']+0) : 0;
 	$country = isset($_REQUEST['usercountry']) ? $_REQUEST['usercountry'] :
 	           (isset($_REQUEST['country']) ? $_REQUEST['country'] : '');
 	$cachetype = isset($_REQUEST['cachetype']) ? $_REQUEST['cachetype']+0 : 0;

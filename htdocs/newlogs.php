@@ -9,7 +9,7 @@
 
 	$add_where = '';
 	$newLogsPerCountry = $opt['logic']['new_logs_per_country'];
-	$startat = isset($_GET['startat']) ? $_GET['startat']+0 : 0;
+	$startat = isset($_GET['startat']) ? floor($_GET['startat']+0) : 0;
 	$urlparams = '';
 	$optimize_for_latest_logs = false;
 

@@ -17,6 +17,8 @@ CREATE TABLE `cache_logs` (
   `text_htmledit` tinyint(1) NOT NULL default '1',
   `owner_notified` tinyint(1) NOT NULL default '0',
   `picture` smallint(5) unsigned NOT NULL COMMENT 'via Trigger (picture)',
+  /* Attention: modifications to this table may need to be applied also to
+     cache_logs_archived, cache_logs_modified and trigger cacheLogsBeforeUpdate! */
   PRIMARY KEY  (`id`),
   UNIQUE KEY `uuid` (`uuid`),
   KEY `owner_notified` (`owner_notified`),

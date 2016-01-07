@@ -1119,6 +1119,21 @@
 							   NEW.`date`!=OLD.`date` OR
 							   NEW.`text`!=BINARY OLD.`text` OR
 							   NEW.`text_html`!=OLD.`text_html` THEN
+
+								/* log versioning to allow log vandalism restore (except pictures);
+								 * optimize storage space by ignoring quick-corrections of logs
+								 */
+								IF DATEDIFF(NOW(), OLD.`date_created`) > 1 THEN
+									INSERT INTO `cache_logs_modified`
+										(`id`, `uuid`, `node`, `date_created`, `last_modified`, `log_last_modified`,
+										 `cache_id`, `user_id`, `type`, `oc_team_comment`, `date`,
+										 `text`, `text_html`, `modify_date`)
+									VALUES
+										(OLD.`id`, OLD.`uuid`, OLD.`node`, OLD.`date_created`, OLD.`last_modified`,
+										 OLD.`log_last_modified`, OLD.`cache_id`, OLD.`user_id`, OLD.`type`,
+										 OLD.`oc_team_comment`, OLD.`date`, OLD.`text`, OLD.`text_html`, NOW());
+								END IF;
+
 								SET NEW.`last_modified`=NOW();
 							END IF;
 							IF NEW.`picture`!=OLD.`picture` THEN

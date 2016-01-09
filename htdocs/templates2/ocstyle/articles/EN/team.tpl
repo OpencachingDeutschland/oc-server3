@@ -35,6 +35,7 @@
     <tr><td><img src="{$opt.page.teampic_url}friedrichfroebel.jpg" /></td><td><a href="{$opt.page.teammember_url}viewprofile.php?userid=234947">FriedrichFröbel</a><br />wiki, message board moderation</td></tr>
     <tr><td><img src="{$opt.page.teampic_url}hanekju.png" /></td><td><a href="{$opt.page.teammember_url}viewprofile.php?userid=205779">Hanekju</a><br />data maintenance</td></tr>
     <tr><td><img src="{$opt.page.teampic_url}joerg.jpg" /></td><td><a href="{$opt.page.teammember_url}viewprofile.php?userid=102153">Jörg</a><br />advisor for nature protection and authority relations</td></tr>
+    <tr><td><img src="{$opt.page.teampic_url}dummy.jpg" /></td><td><a href="{$opt.page.teammember_url}viewprofile.php?userid=208441">Kirstenko</a><br />software development</td></tr>
     <tr><td><img src="{$opt.page.teampic_url}mrspommelhorst.jpg" /></td><td><a href="{$opt.page.teammember_url}viewprofile.php?userid=144252">Mrs.Pommelhorst</a><br />user support, data maintenance, wiki</td></tr>
     <tr><td><img src="{$opt.page.teampic_url}ralf20.png" /></td><td><a href="{$opt.page.teammember_url}viewprofile.php?userid=165920">Ralf20</a><br />data maintenance</td></tr>
     <tr><td><img src="{$opt.page.teampic_url}slini11.png" /></td><td><a href="{$opt.page.teammember_url}viewprofile.php?userid=159941">Slini11</a><br />data maintenance</td></tr>

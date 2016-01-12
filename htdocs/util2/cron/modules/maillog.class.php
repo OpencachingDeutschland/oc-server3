@@ -70,14 +70,20 @@ class maillog
 
 		// We check for both, new IDs and new creation dates, so that it still works
 		// if the syslog DB is re-setup and IDs restarted from 1 (dates are not unique).
+		//
+		// It happened that old log entries were re-added as duplicates to the syslog table.
+		// We solve this problem by ignoring entries with higher ID and older timestamp. Worst
+		// case some entries with same timestamp as $last_date will be processed redundantly.
+
 		$rs = @mysql_query(
 			  "SELECT `" . $col_id . "` `id`,
 			          `" . $col_message . "` `message`,
 			          `" . $col_created . "` `created`
 			     FROM `" . mysql_real_escape_string($opt['system']['maillog']['syslog_db_table']) . "`
-			    WHERE  (`".$col_id."`>'" . mysql_real_escape_string($last_id) . "' OR `".$col_created."`>'" . mysql_real_escape_string($last_date) . "')
+			    WHERE `" . $col_created . "`>='" . mysql_real_escape_string($last_date) . "'
+			      AND (`". $col_id."`>'" . mysql_real_escape_string($last_id) . "' OR `".$col_created."`>'" . mysql_real_escape_string($last_date) . "')
 			      AND  " . $maillog_where . "
-			 ORDER BY `id`", $dbc);
+			 ORDER BY `" . $col_created . "`,`" . $col_id . "`", $dbc);
 		if ($rs === FALSE)
 		{
 			echo $this->name.": syslog query error (".mysql_errno()."): ".mysql_error()."\n";

@@ -501,8 +501,8 @@ function showalllists()
 			<img src="resource2/{$opt.template.style}/images/viewcache/16x16-search.png" class="icon16" alt="" />
 			{t}Search geocaches nearby:{/t} 
 			<a href="search.php?searchto=searchbydistance&showresult=1&expert=0&output=HTML&sort=bydistance&f_userowner=0&f_userfound=0&f_inactive=1&lat={$cache.latitude}&lon={$cache.longitude}&distance=150&unit=km" rel="nofollow">{t}all{/t}</a> - 
-			<a href="search.php?searchto=searchbydistance&showresult=1&expert=0&output=HTML&sort=bydistance&f_userowner=1&f_userfound=1&f_inactive=1&lat={$cache.latitude}&lon={$cache.longitude}&distance=150&unit=km" rel="nofollow">{t}searchable{/t}</a> - 
-			<a href="search.php?searchto=searchbydistance&showresult=1&expert=0&output=HTML&sort=bydistance&f_userowner=1&f_userfound=1&f_inactive=1&lat={$cache.latitude}&lon={$cache.longitude}&distance=150&unit=km&cachetype={$cache.type}" rel="nofollow">{t}same type{/t}</a>
+			<a href="search.php?searchto=searchbydistance&showresult=1&expert=0&output=HTML&sort=bydistance&f_userowner=1&f_userfound=1&f_inactive=1&f_disabled=1&lat={$cache.latitude}&lon={$cache.longitude}&distance=150&unit=km" rel="nofollow">{t}searchable{/t}</a> - 
+			<a href="search.php?searchto=searchbydistance&showresult=1&expert=0&output=HTML&sort=bydistance&f_userowner=1&f_userfound=1&f_inactive=1&f_disabled=1&lat={$cache.latitude}&lon={$cache.longitude}&distance=150&unit=km&cachetype={$cache.type}" rel="nofollow">{t}same type{/t}</a>
 			<br />
 
 			<img src="resource2/{$opt.template.style}/images/viewcache/16x16-search.png" class="icon16" alt="" /> {t}Send this waypoint to GPS device:{/t} <a href="#" onclick="window.open('{$garmin_url}garmin.php?&lat={$cache.latitude}&lon={$cache.longitude}&wp={$cache.wpoc}&templocale={$opt.template.locale}','{t escape=js}Send{/t}','width=640,height=320,resizable=no,scrollbars=1')">Garmin</a><br />

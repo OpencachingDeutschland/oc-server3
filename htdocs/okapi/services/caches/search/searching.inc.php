@@ -398,7 +398,7 @@ class SearchAssistant
             } catch (InvalidParam $e) { # invalid uuid
                 throw new InvalidParam('found_by', $e->whats_wrong_about_it);
             }
-            $internal_user_ids = array_map(create_function('$internalid', 'return $internalid["internal_id"];'), $users);
+            $internal_user_ids = array_map(create_function('$user', 'return $user["internal_id"];'), $users);
             $found_cache_ids = self::get_found_cache_ids($internal_user_ids);
             $where_conds[] = "caches.cache_id in ('".implode("','", array_map('mysql_real_escape_string', $found_cache_ids))."')";
         }
@@ -415,7 +415,7 @@ class SearchAssistant
             } catch (InvalidParam $e) { # invalid uuid
                 throw new InvalidParam('not_found_by', $e->whats_wrong_about_it);
             }
-            $internal_user_ids = array_map(create_function('$internalid', 'return $internalid["internal_id"];'), $users);
+            $internal_user_ids = array_map(create_function('$user', 'return $user["internal_id"];'), $users);
             $found_cache_ids = self::get_found_cache_ids($internal_user_ids);
             $where_conds[] = "caches.cache_id not in ('".implode("','", array_map('mysql_real_escape_string', $found_cache_ids))."')";
         }

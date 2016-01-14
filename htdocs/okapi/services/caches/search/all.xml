@@ -107,7 +107,7 @@
     </opt>
     <opt name='modified_since'>
         <p>A date and time string. This should be in ISO 8601 format (currently any
-        format acceptable by PHP's <a href='http://pl2.php.net/strtotime'>strtotime</a>
+        format acceptable by PHP's <a href='http://php.net/manual/function.strtotime.php'>strtotime</a>
         function also will do, but most of them don't handle time zones properly,
         try to use ISO 8601!).</p>
         <p>If given, the list of returned geocaches will be limited to those which were
@@ -125,12 +125,12 @@
         </ul>
     </opt>
     <opt name='found_by'>
-        <p>User UUID. If given, the response will only include geocaches found by
-        the given user.</p>
+        <p>Pipe-separated list of user IDs. If given, the response will only include
+        geocaches found by one or more of the given users.</p>
     </opt>
     <opt name='not_found_by'>
-        <p>User UUID. If given, the response will only include geocaches not found by
-        the given user.</p>
+        <p>Pipe-separated list of user IDs. If given, the response will only include
+        geocaches not found by any of the given users.</p>
     </opt>
     <opt name='watched_only' default='false'>
         <p><b>Notice:</b> This parameter may be used only for requests signed with an Access Token

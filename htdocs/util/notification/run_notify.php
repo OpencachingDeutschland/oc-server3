@@ -20,6 +20,9 @@
 	require_once($rootpath . 'lib/logic.inc.php');
 	require_once($rootpath . 'lib2/logic/geomath.class.php');
 
+	if (!cronjobs_enabled())
+		exit;
+
 	// db connect
 	db_connect();
 	if ($dblink === false)

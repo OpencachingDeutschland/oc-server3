@@ -18,6 +18,9 @@
 	require $opt['rootpath'] . 'lib2/cli.inc.php';
 	require $opt['rootpath'] . 'lib2/search/ftsearch.inc.php';
 
+	if (!cronjobs_enabled())
+		exit;
+
 	$process_sync = new ProcessSync('fill_searchindex');
 	if ($process_sync->Enter())
 	{

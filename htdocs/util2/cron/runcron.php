@@ -38,7 +38,7 @@
 			$ignore_interval = true;
 			require($modules_dir . $argv[1] . ".class.php");
 		}
-		else
+		else if (cronjobs_enabled())
 		{
 			$ignore_interval = false;
 			$hDir = opendir($modules_dir);

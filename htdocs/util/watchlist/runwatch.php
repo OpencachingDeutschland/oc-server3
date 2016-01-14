@@ -28,6 +28,9 @@
 	require_once($rootpath . 'lib/logic.inc.php');
 	require_once($rootpath . 'lib2/edithelper.inc.php');
 
+	if (!cronjobs_enabled())
+		exit;
+
 	// use posix pid-files to lock process 
 	if (!CreatePidFile($watchpid))
 	{

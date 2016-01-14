@@ -287,4 +287,17 @@ function set_common_domain_config(&$opt)
 	}
 }
 
+
+$opt['cron']['debug'] = false;
+
+// Ensure that cronjobs are halted if website is down (for maintenance).
+// For performance reasons, this is not static setting but called on demand:
+
+function cronjobs_enabled()
+{
+	global $opt;
+	return $opt['cron']['debug'] ||
+	       @file_get_contents($opt['page']['absolute_http_url'] . 'register.php') !== false;
+}
+
 ?>

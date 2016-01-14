@@ -380,7 +380,7 @@ class SearchAssistant
                 throw new InvalidParam('found_status', "'$tmp'");
             if ($tmp != 'either')
             {
-                $found_cache_ids = self::get_found_cache_ids($this->request->token->user_id);
+                $found_cache_ids = self::get_found_cache_ids(array($this->request->token->user_id));
                 $operator = ($tmp == 'found_only') ? "in" : "not in";
                 $where_conds[] = "caches.cache_id $operator ('".implode("','", array_map('mysql_real_escape_string', $found_cache_ids))."')";
             }
@@ -393,12 +393,13 @@ class SearchAssistant
         if ($tmp = $this->request->get_parameter('found_by'))
         {
             try {
-                $user = OkapiServiceRunner::call("services/users/user", new OkapiInternalRequest(
-                    $this->request->consumer, null, array('user_uuid' => $tmp, 'fields' => 'internal_id')));
+                $users = OkapiServiceRunner::call("services/users/users", new OkapiInternalRequest(
+                    $this->request->consumer, null, array('user_uuids' => $tmp, 'fields' => 'internal_id')));
             } catch (InvalidParam $e) { # invalid uuid
                 throw new InvalidParam('found_by', $e->whats_wrong_about_it);
             }
-            $found_cache_ids = self::get_found_cache_ids($user['internal_id']);
+            $internal_user_ids = array_map(create_function('$internalid', 'return $internalid["internal_id"];'), $users);
+            $found_cache_ids = self::get_found_cache_ids($internal_user_ids);
             $where_conds[] = "caches.cache_id in ('".implode("','", array_map('mysql_real_escape_string', $found_cache_ids))."')";
         }
 
@@ -409,12 +410,13 @@ class SearchAssistant
         if ($tmp = $this->request->get_parameter('not_found_by'))
         {
             try {
-                $user = OkapiServiceRunner::call("services/users/user", new OkapiInternalRequest(
-                    $this->request->consumer, null, array('user_uuid' => $tmp, 'fields' => 'internal_id')));
+                $users = OkapiServiceRunner::call("services/users/users", new OkapiInternalRequest(
+                    $this->request->consumer, null, array('user_uuids' => $tmp, 'fields' => 'internal_id')));
             } catch (InvalidParam $e) { # invalid uuid
                 throw new InvalidParam('not_found_by', $e->whats_wrong_about_it);
             }
-            $found_cache_ids = self::get_found_cache_ids($user['internal_id']);
+            $internal_user_ids = array_map(create_function('$internalid', 'return $internalid["internal_id"];'), $users);
+            $found_cache_ids = self::get_found_cache_ids($internal_user_ids);
             $where_conds[] = "caches.cache_id not in ('".implode("','", array_map('mysql_real_escape_string', $found_cache_ids))."')";
         }
 
@@ -846,13 +848,13 @@ class SearchAssistant
      * Get the list of cache IDs which were found by given user.
      * Parameter needs to be *internal* user id, not uuid.
      */
-    private static function get_found_cache_ids($internal_user_id)
+    private static function get_found_cache_ids($internal_user_ids)
     {
         return Db::select_column("
             select cache_id
             from cache_logs
             where
-                user_id = '".mysql_real_escape_string($internal_user_id)."'
+                user_id in ('".implode("','", array_map('mysql_real_escape_string', $internal_user_ids))."')
                 and type in (
                     '".mysql_real_escape_string(Okapi::logtypename2id("Found it"))."',
                     '".mysql_real_escape_string(Okapi::logtypename2id("Attended"))."'

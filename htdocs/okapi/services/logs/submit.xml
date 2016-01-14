@@ -43,7 +43,7 @@
     </opt>
     <opt name='when'>
         <p>A date and time string. This should be in ISO 8601 format (currently any
-        format acceptable by PHP's <a href='http://pl2.php.net/strtotime'>strtotime</a>
+        format acceptable by PHP's <a href='http://php.net/manual/function.strtotime.php'>strtotime</a>
         function also will do, but most of them don't handle time zones properly,
         try to use ISO 8601!).</p>
         <p>Indicates when the cache was found. If given, the log will be published

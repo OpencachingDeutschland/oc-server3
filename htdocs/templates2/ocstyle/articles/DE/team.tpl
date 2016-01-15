@@ -37,10 +37,10 @@
     <tr><td><img src="{$opt.page.teampic_url}dummy.jpg" /></td><td><a href="{$opt.page.teammember_url}viewprofile.php?userid=167651">dogesu</a><br />Datenpflege</td></tr>
     <tr><td><img src="{$opt.page.teampic_url}flopp.png" /></td><td><a href="{$opt.page.teammember_url}viewprofile.php?userid=126329">Flopp</a><br />Softwareentwicklung, Anwendersupport, Datenpflege</td></tr>
     <tr><td><img src="{$opt.page.teampic_url}following.png" /></td><td><a href="{$opt.page.teammember_url}viewprofile.php?userid=150360">following</a><br />Datenpflege, Softwareentwicklung, Wiki</td></tr>
-    <tr><td><img src="{$opt.page.teampic_url}friedrichfroebel.jpg" /></td><td><a href="{$opt.page.teammember_url}viewprofile.php?userid=234947">FriedrichFröbel</a><br />Wiki, Forenmoderation</td></tr>
+    <tr><td><img src="{$opt.page.teampic_url}friedrichfroebel.png" /></td><td><a href="{$opt.page.teammember_url}viewprofile.php?userid=234947">FriedrichFröbel</a><br />Wiki, Forenmoderation</td></tr>
     <tr><td><img src="{$opt.page.teampic_url}hanekju.png" /></td><td><a href="{$opt.page.teammember_url}viewprofile.php?userid=205779">Hanekju</a><br />Datenpflege</td></tr>
     <tr><td><img src="{$opt.page.teampic_url}joerg.jpg" /></td><td><a href="{$opt.page.teammember_url}viewprofile.php?userid=102153">Jörg</a><br />Berater für Naturschutz und Kontakte zu Behörden und Verbänden</td></tr>
-    <tr><td><img src="{$opt.page.teampic_url}dummy.jpg" /></td><td><a href="{$opt.page.teammember_url}viewprofile.php?userid=208441">Kirstenko</a><br />Softwareentwicklung</td></tr>
+    <tr><td><img src="{$opt.page.teampic_url}kirstenko.png" /></td><td><a href="{$opt.page.teammember_url}viewprofile.php?userid=208441">Kirstenko</a><br />Softwareentwicklung</td></tr>
     <tr><td><img src="{$opt.page.teampic_url}mrspommelhorst.jpg" /></td><td><a href="{$opt.page.teammember_url}viewprofile.php?userid=144252">Mrs.Pommelhorst</a><br />Anwendersupport, Datenpflege, Wiki</td></tr>
     <tr><td><img src="{$opt.page.teampic_url}ralf20.png" /></td><td><a href="{$opt.page.teammember_url}viewprofile.php?userid=165920">Ralf20</a><br />Datenpflege</td></tr>
     <tr><td><img src="{$opt.page.teampic_url}slini11.png" /></td><td><a href="{$opt.page.teammember_url}viewprofile.php?userid=159941">Slini11</a><br />Softwareentwicklung, Datenpflege</td></tr>

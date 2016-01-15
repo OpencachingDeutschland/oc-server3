@@ -11,7 +11,7 @@ echo '<?xml version="1.0" encoding="utf-8"?>'."\n";
 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 xsi:schemaLocation="
 http://www.topografix.com/GPX/1/0 http://www.topografix.com/GPX/1/0/gpx.xsd
-http://www.opencaching.com/xmlschemas/opencaching/1/0 http://www.opencaching.com/xmlschemas/opencaching/1/0/opencaching.xsd
+http://www.opencaching.com/xmlschemas/opencaching/1/0 https://raw.githubusercontent.com/opencaching/okapi/master/etc/nsox.xsd
 http://www.groundspeak.com/cache/1/0/1 http://www.groundspeak.com/cache/1/0/1/cache.xsd
 http://geocaching.com.au/geocache/1 http://geocaching.com.au/geocache/1/geocache.xsd
 http://www.gsak.net/xmlv1/5 http://www.gsak.net/xmlv1/5/gsak.xsd

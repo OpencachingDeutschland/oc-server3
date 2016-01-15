@@ -45,10 +45,14 @@
         <p>A date and time string. This should be in ISO 8601 format (currently any
         format acceptable by PHP's <a href='http://php.net/manual/function.strtotime.php'>strtotime</a>
         function also will do, but most of them don't handle time zones properly,
-        try to use ISO 8601!).</p>
+        try to use ISO 8601!). You MAY and are encouraged to omit the time and just
+        submit a date (yyyy-mm-dd) if the time is unknown or shall not be disclosed.</p>
+
         <p>Indicates when the cache was found. If given, the log will be published
         with the given date and time. If not, log will be published using the current
-        date and time.</p>
+        date and time. If only the date is given, OKAPI will publish the log in a way
+        which most closely resembles "no time given"
+        (<a href="https://github.com/opencaching/okapi/issues/358">more info</a>).</p>
     </opt>
     <opt name='password'>
         <p>Some caches require a password in order to submit a "Found it" log entry.

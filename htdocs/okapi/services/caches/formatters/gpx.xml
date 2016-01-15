@@ -43,9 +43,9 @@
     </opt>
     <opt name='ns_ox' default='false'>
         Boolean. If <b>true</b> then response will include Garmin's
-        <a href='http://www.opencaching.com/xmlschemas/opencaching/1/0/opencaching.xsd'>OpenCaching.com
+        <a href='https://raw.githubusercontent.com/opencaching/okapi/master/etc/nsox.xsd'>OpenCaching.com
         GPX extension</a>. This namespace declares an extra &lt;opencaching&gt; element
-        used by <a href='http://www.opencaching.com/'>Garmin's Opencaching.com</a>.
+        used by Garmin's former OpenCaching.com.
         The element includes information on cache difficulty, ratings, tags and images.
         It is used within Garmin's Geocaching-enabled handheld GPS devices.
     </opt>

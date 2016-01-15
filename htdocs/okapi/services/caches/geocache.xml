@@ -209,7 +209,7 @@
             </li>
             <li>
                 <p><b>oxsize</b> - float (between 1 and 5) or null, this is a size rating
-                variant, compatible with the one used by opencaching.com (and lately,
+                variant, compatible with the one used by former OpenCaching.com (and lately,
                 Garmin GPS devices).</p>
                 <p><b>Note:</b> The mapping is undocumented and may change without notice.</p>
                 <p><b>Note:</b> Some of OC's size values cannot be properly mapped to <b>oxsize</b>,

@@ -84,6 +84,13 @@
 		$optimize_for_latest_logs = ($country == '' || $country == $opt['page']['main_country']);
 	}
 
+	if (isset($_GET['for_maintenance']))
+	{
+	  $add_where = "AND {fromtable}.`type` IN (2,3) AND DATEDIFF({fromtable}.`date_created`, {fromtable}.`date`) < 7 ";
+	  $tpl->cache_id .= "|fm";
+	  $logcount *= 2;
+	}
+
 	$tpl->change_country_inpage = true;
 	$tpl->assign('creation_date', $orderByDate == '');
 
@@ -97,7 +104,7 @@
 			sql_temp_table_slave('loglist0');
 			sql_slave("
 				CREATE TEMPORARY TABLE &loglist0
-				(SELECT `id`, `cache_id`, `user_id`, `date_created`
+				(SELECT `id`, `cache_id`, `user_id`, `date_created`, `date`, `type`
 				 FROM `cache_logs`
 				 ORDER BY `date_created` DESC
 				 LIMIT " . (4*$logcount) . "
@@ -108,6 +115,8 @@
 		{
 			$fromtable = '`cache_logs`';
 		}
+		$add_where = str_replace("{fromtable}", $fromtable, $add_where);
+
 		sql_temp_table_slave('loglist');
 		sql_slave("CREATE TEMPORARY TABLE &loglist (`id` INT(11) PRIMARY KEY)
 			         SELECT " . ($paging ? "SQL_CALC_FOUND_ROWS" : "") . " ".$fromtable.".`id`

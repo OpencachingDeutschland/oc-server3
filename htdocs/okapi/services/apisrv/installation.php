@@ -29,6 +29,8 @@ class WebService
         $result['okapi_version_number'] = Okapi::$version_number;
         $result['okapi_revision'] = Okapi::$version_number; /* Important for backward-compatibility! */
         $result['okapi_git_revision'] = Okapi::$git_revision;
+        $result['registration_url'] = $result['site_url']."register.php";
+        $result['mobile_registration_url'] = null;
         return Okapi::formatted_response($request, $result);
     }
 }

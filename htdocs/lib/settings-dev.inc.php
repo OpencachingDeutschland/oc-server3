@@ -60,16 +60,6 @@
 	if (!isset($emailaddr)) $emailaddr = 'root@' . $maildomain;
 	if (!isset($opt['mail']['contact'])) $opt['mail']['contact'] = 'contact@' . $maildomain;
 	
-	// Thumbsize
-	$thumb_max_width = 175;
-	$thumb_max_height = 175;
-
-	// maximal size of images
-	if (!isset($maxpicsize)) $maxpicsize = 153600;
-	
-	// allowed extensions of images
-	if (!isset($picextensions)) $picextensions = ';jpg;jpeg;gif;png;bmp;';
-	
 	// news settings
 	$use_news_approving = true;
 	$news_approver_email = 'root';

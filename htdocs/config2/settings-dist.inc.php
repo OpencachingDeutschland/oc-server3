@@ -423,6 +423,7 @@
 	$opt['cron']['geokrety']['xml_archive'] = false;
 	$opt['cron']['autoarchive']['run'] = false;
 	$opt['cron']['gcwp']['sources'] = array();
+	$opt['cron']['gcwp']['fulllist'] = '';
 
 	/* E-Mail settings
 	 *

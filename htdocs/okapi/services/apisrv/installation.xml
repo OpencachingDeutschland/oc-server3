@@ -52,6 +52,16 @@
                 project installed on this Opencaching site, <b>or null</b>,
                 when it could not be determined.
             </li>
+            <li>
+                <b>registration_url</b> - URL of the Opencaching site's general
+                page for registering a new user account.
+            </li>
+            <li>
+                <b>mobile_registration_url</b> - URL of the Opencaching site's
+                page for registering a new user account, which is optimized
+                for small mobile displays, <b>or null</b> if no separate
+                mobile-optimized page exists.
+            </li>
         </ul>
     </returns>
 </xml>

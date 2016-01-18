@@ -161,6 +161,7 @@
 																`cacheloguser`.`username`,
 																`cache_logs`.`cache_id`,
 																`cache_rating`.`rating_date` IS NOT NULL AS `recommended`,
+																`caches_attributes`.`attrib_id` IS NOT NULL as `oconly`,
 																'' AS `pic_uuid`,
 																0 AS `picshown`,
 																(SELECT COUNT(*) FROM `pictures` WHERE `object_type`=1 AND `object_id`=`cache_logs`.`id`) AS `pics`
@@ -172,6 +173,7 @@
 										  LEFT JOIN `sys_trans_text` ON `countries`.`trans_id`=`sys_trans_text`.`trans_id` AND `sys_trans_text`.`lang`='&1'
 										  LEFT JOIN `cache_logs_restored` ON `cache_logs_restored`.`id`=`cache_logs`.`id`
 										  LEFT JOIN `cache_rating` ON `cache_rating`.`cache_id`=`caches`.`cache_id` AND `cache_rating`.`user_id`=`cache_logs`.`user_id` AND `cache_rating`.`rating_date`=`cache_logs`.`date`
+										  LEFT JOIN `caches_attributes` ON `caches_attributes`.`cache_id`=`caches`.`cache_id` AND `caches_attributes`.`attrib_id`=6
 										      WHERE IFNULL(`cache_logs_restored`.`restored_by`,0)=0
 										   ORDER BY " . $orderByCountry . $orderByDate . "`cache_logs`.`date_created` DESC",
 											          $opt['template']['locale']);

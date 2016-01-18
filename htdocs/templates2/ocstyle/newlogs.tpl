@@ -98,6 +98,7 @@
 				{if $newLog.oc_team_comment}<img src="resource2/{$opt.template.style}/images/oclogo/oc-team-comment.png" alt="OC-Team" title="{t}OC team comment{/t}" />{/if}
 				{capture name=cachename}
 					<a href="viewcache.php?wp={$newLog.wp_oc}&log=A#log{$newLog.id}">{if $newLog.first}<b>{$newLog.cachename|escape}</b>{else}{$newLog.cachename|escape}{/if}</a>
+					{include file="res_oconly.tpl" oconly=$newLog.oconly}
 				{/capture}
 				{capture name=username}
 					<a href="viewprofile.php?userid={$newLog.user_id}">{$newLog.username|escape}</a>

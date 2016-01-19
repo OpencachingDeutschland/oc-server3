@@ -17,7 +17,7 @@
 {elseif $status==6}
 	<img src="resource2/{$opt.template.style}/images/cachestatus/16x16-locked.png" alt="{t}Locked, visible{/t}" title="{t}Locked, visible{/t}" />
 {elseif $status==7}
-	<img src="resource2/{$opt.template.style}/images/cachestatus/16x16-locked.png" alt="{t}Locked, invisible{/t}" title="{t}Locked, invisible{/t}" />	
+	<img src="resource2/{$opt.template.style}/images/cachestatus/16x16-locked-invisible.png" alt="{t}Locked, invisible{/t}" title="{t}Locked, invisible{/t}" />
 {else}
 	&nbsp;
 {/if}

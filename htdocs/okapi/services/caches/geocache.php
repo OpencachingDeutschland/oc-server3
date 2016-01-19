@@ -5,6 +5,7 @@ namespace okapi\services\caches\geocache;
 use okapi\OkapiInternalRequest;
 use okapi\OkapiServiceRunner;
 use okapi\Okapi;
+use okapi\Db;
 use okapi\Settings;
 use okapi\OkapiRequest;
 use okapi\ParamMissing;
@@ -57,7 +58,14 @@ class WebService
             $request->consumer, $request->token, $params));
         $result = $results[$cache_code];
         if ($result === null)
-            throw new InvalidParam('cache_code', "This cache does not exist.");
+        {
+            if (Db::select_value("
+                    select wp_oc from caches where wp_oc='" . mysql_real_escape_string($cache_code) . "'
+                ") === null)
+                throw new InvalidParam('cache_code', "This cache does not exist.");
+            else
+                throw new InvalidParam('cache_code', "This cache is not accessible via OKAPI.");
+        }
         return Okapi::formatted_response($request, $result);
     }
 }

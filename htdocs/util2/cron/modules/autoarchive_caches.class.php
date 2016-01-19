@@ -16,7 +16,7 @@ checkJob(new autoarchive());
 class autoarchive
 {
 	var $name = 'autoarchive';
-	var $interval = 3600;  // once per hour
+	var $interval = 43200;  // twice per day
 
 
 	function run()
@@ -42,20 +42,51 @@ class autoarchive
 		// Logging of status changes in cache_status_modified has started on June 1, 2013.
 		// For archiving caches that were disabled earlier, we also check the listing
 		// modification date.
-		$rs = sql("SELECT `caches`.`cache_id`
-		             FROM `caches`
-		            WHERE `caches`.`status`=2
-								  AND IFNULL((SELECT MAX(`date_modified`) FROM `cache_status_modified` `csm` WHERE `csm`.`cache_id`=`caches`.`cache_id`),`caches`.`listing_last_modified`) < NOW() - INTERVAL 366 DAY
-						 GROUP BY `caches`.`cache_id`
-						 ORDER BY `caches`.`listing_last_modified`
-						    LIMIT 3");   // limit to avoid mass emails and spam-filter triggers
+
+		// This statement shout be optimized. It typically runs for ~20 seconds at OC.de.
+		$rs = sql("
+			SELECT `cache_id`,
+			       `caches`.`user_id`,
+			       DATEDIFF(NOW(), `listing_last_modified`) AS `listing_age`,
+			       (SELECT MAX(`date_modified`) FROM `cache_status_modified` `csm`
+			        WHERE `csm`.`cache_id`=`caches`.`cache_id` AND `csm`.`new_state`=2)
+			       `disable_date`,
+			       (SELECT MAX(`user_id`) FROM `cache_status_modified` `csm`
+			        WHERE `csm`.`cache_id`=`cache_id` AND `csm`.`date_modified`=`disable_date`)
+			       `disabled_by`,
+			       IFNULL(DATEDIFF(NOW(), `user`.`last_login`), 150) `login_lag`
+			FROM `caches`
+			LEFT JOIN `user` ON `user`.`user_id`=`caches`.`user_id`
+			WHERE `status`=2 AND DATEDIFF(NOW(), `listing_last_modified`) > 184
+			ORDER BY `listing_last_modified`");
+
+		$archived = 0;
 		while ($rCache = sql_fetch_assoc($rs))
 		{
-			$this->archive_cache(
-					$rCache['cache_id'],
-				  'This cache has been "temporarily unavailable" for more than one year now; ' .
-					'therefore it is being archived automatically. The owner may decide to ' .
-					'maintain the cache and re-enable the listing.');
+			if ($rCache['listing_age'] > 366 ||
+			    ($rCache['listing_age'] > 184 &&
+			     (sql_value("SELECT DATEDIFF(NOW(),'&1')", 0, $rCache['disable_date']) > 366 ||
+			      ((($rCache['disabled_by'] != 0 && $rCache['disabled_by'] != $rCache['user_id'] && $rCache['login_lag'] > 45)
+			        ||
+			        ($rCache['disabled_by'] == $rCache['user_id'] && $rCache['login_lag'] >= $rCache['listing_age']))
+						 &&
+			       sql_value("SELECT MAX(`date`) FROM `cache_logs` WHERE `cache_logs`.`cache_id`='&1'", "", $rCache['cache_id']) < $rCache['disable_date']
+			      )
+			     )
+			    )
+			   )
+			{
+				$months = ($rCache['listing_age'] > 366 ? 12 : 6);
+				$this->archive_cache(
+						$rCache['cache_id'],
+						'This cache has been "temporarily unavailable" for more than %1 months now; ' .
+						'therefore it is being archived automatically. The owner may decide to ' .
+						'maintain the cache and re-enable the listing.',
+						$months);
+				++$archived;
+				// if ($archived >= 3)
+				// 	break;
+			}
 		}
 		sql_free_result($rs);
 	}
@@ -82,7 +113,7 @@ class autoarchive
 		sql_free_result($rs);
 	}
 
-	function archive_cache($cache_id, $comment)
+	function archive_cache($cache_id, $comment, $months=0)
 	{
 		global $opt, $login, $translate;
 
@@ -105,6 +136,7 @@ class autoarchive
 
 				// create log text in appropriate language
 				$translated_comment = $translate->t($comment, '','',0,'',1, $cache->getDefaultDescLanguage());
+				$translated_comment = str_replace('%1', $months, $translated_comment);
 				$log->setText('<p>'.$translated_comment.'</p>');
 				$log->setTextHtml(1);
 

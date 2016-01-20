@@ -9,11 +9,16 @@
 
 <script type="text/javascript" src="resource2/{$opt.template.style}/js/wz_tooltip.js"></script>
 
-{if $cachelist}
+{if $cachelist || $userid}
 	<div class="content2-container cachelistinfo" style="margin-top:10px" >
 	<p style="margin-top:0.5em; padding-left:10px; padding-right:8px">
-		<img src="resource2/ocstyle/images/misc/16x16-list.png" />
-		<a class="systemlink" href="cachelists.php">{t}Cache list{/t}</a> <b>{$cachelist.name|escape}</b>
+		{if $userid}
+			<img src="resource2/ocstyle/images/misc/32x32-search.png" width="16px" height="16px" />
+			<a class="systemlink" href="query.php">{t}Stored querie{/t}</a> <b>{$query_name|escape}</b> {* TODO: Translation Stored querie *}
+		{/if}
+		{if $cachelist}
+			<img src="resource2/ocstyle/images/misc/16x16-list.png" />
+			<a class="systemlink" href="cachelists.php">{t}Cache list{/t}</a> <b>{$cachelist.name|escape}</b>
 		{if $cachelist.bookmarked}<a href="mylists.php#bookmarks"><img src="resource2/{$opt.template.style}/images/viewcache/cache-rate.png" title="{t}I have bookmarked this list.{/t}" /></a>{/if}
 		{if $cachelist.watched_by_me}<img src="resource2/{$opt.template.style}/images/viewcache/16x16-watch.png" title="{t}I am watching this list.{/t}" />{/if}
 		{if $cachelist.user_id != $login.userid}{t}by{/t} <a href="viewprofile.php?userid={$cachelist.user_id}">{$cachelist.username|escape}</a>{elseif $cachelist.visibility<=1}({if $cachelist.password}<a class="jslink" onclick="cl = getElementById('sharelist_{$cachelist.id}'); cl.style.display = (cl.style.display=='none'?'block':'none'); getElementById('permalink_text_{$cachelist.id}').select();" {if $cachelist.user_id==$login.userid}title="{t}List has password; click here to share it{/t}"{/if} >{t}private{/t} <img src="resource2/{$opt.template.style}/images/action/18x16-offer.png" /></a>{else}{t}private{/t}{/if}){/if}
@@ -23,6 +28,7 @@
 		{if $login.userid}[<a class="systemlink" href="cachelist.php?id={$cachelist.id}&{if $cachelist.watched_by_me}dont{/if}watch">{if $cachelist.watched_by_me}{t}don't watch{/t}{else}{t}watch{/t}{/if}</a>]{/if}
 		{if $login.userid && !$cachelist.bookmarked && $cachelist.user_id!=$login.userid}[<a class="systemlink" href="cachelist.php?id={$cachelist.id}&key={$cachelist_pw|urlencode}&bookmark">{t}bookmark{/t}</a>]{/if}
 		{if $login.userid && $cachelist.bookmarked && $cachelist.user_id!=$login.userid}[<a class="systemlink" href="cachelist.php?id={$cachelist.id}&unbookmark">{t}unbookmark{/t}</a>]{/if}
+		{/if}
 	</p>
 		<div id="sharelist_{$cachelist.id}" class="cachelist-popup mapboxframe mapboxshadow" style="display:none" >
 			<table>
@@ -106,21 +112,71 @@
 			<td colspan="2" style="padding-left: 0px; padding-right: 0px;">
 				<table class="searchtable" border="0" cellspacing="0" cellpadding="0" width="98.5%">
 					<tr>
-					<th width="18">&nbsp;#&nbsp;</th>
-					<th width="45">{$distanceunit|escape}</th>
-					<th width="32">{t}Type{/t}</th>
-					<th width="46">&nbsp;{t}D/T{/t}</th>
-					<th width="460">{t}Name{/t}</th>
-					<th width="48">&nbsp;</th>
-					<th width="106">{if $displayownlogs}{t}Own logs{/t}{else}{t}Last logs{/t}{/if}</th>
+					<th width="10">&nbsp;</th>
+					<th width="40">
+						{if $bydistance}
+							<a href="search.php?queryid={$queryid}&showresult=1&sortby=bydistance&sortorder=ASC{if $startat}&startat={$startat}{/if}{if $sbycreated}&bycreated=true{/if}">
+							{else}<a href="search.php?queryid={$queryid}&showresult=1&sortby=bydistance&sortorder=DESC{if $startat}&startat={$startat}{/if}{if $sbycreated}&bycreated=true{/if}">
+						{/if}
+						{$distanceunit|escape}
+						{if $sortby=='bydistance'}
+							{if $sortorder=='DESC'}&#x25B2;{else}&#x25BC;{/if}
+						{/if}</a>
+					</th>
+					<th width="40">{t}Type{/t}</th>
+					<th width="25">&nbsp;{t}D{/t}</th>
+					<th width="28">&nbsp;{t}T{/t}</th>
+					<th width="450" colspan="2">
+						{if $byname}
+							<a href="search.php?queryid={$queryid}&showresult=1&sortby=byname&sortorder=ASC{if $startat}&startat={$startat}{/if}{if $sbycreated}&bycreated=true{/if}">
+							{else}<a href="search.php?queryid={$queryid}&showresult=1&sortby=byname&sortorder=DESC{if $startat}&startat={$startat}{/if}{if $sbycreated}&bycreated=true{/if}">
+						{/if}
+						{t}Name{/t}
+						{if $sortby=='byname'}
+							{if $sortorder=='DESC'}&#x25B2;{else}&#x25BC;{/if}
+						{/if}</a>
+					</th>
+					<th width="90">
+						{if $sbycreated}
+							{if $bycreated}
+								<a href="search.php?queryid={$queryid}&showresult=1&sortby=bycreated&sortorder=DESC{if $startat}&startat={$startat}{/if}{if $sbycreated}&bycreated=true{/if}">
+								{else}<a href="search.php?queryid={$queryid}&showresult=1&sortby=bycreated&sortorder=ASC&bycreated=true{if $startat}&startat={$startat}{/if}{if $sbycreated}&bycreated=true{/if}">
+							{/if}
+							{t}Listed since{/t}
+							{if $sortby=='bycreated'}
+								{if $sortorder=='DESC'||$sortorder==""}&#x25B2;{else}&#x25BC;{/if}
+							{/if}</a>
+						{else}
+							&nbsp;
+						{/if}
+					</th>
+					<th width="90">
+						{if $displayownlogs}
+							{if $bymylastlog}
+								<a href="search.php?queryid={$queryid}&showresult=1&sortby=bymylastlog&sortorder=DESC{if $startat}&startat={$startat}{/if}{if $sbycreated}&bycreated=true{/if}">
+								{else}<a href="search.php?queryid={$queryid}&showresult=1&sortby=bymylastlog&sortorder=ASC{if $startat}&startat={$startat}{/if}{if $sbycreated}&bycreated=true{/if}">
+							{/if}
+							{t}Own logs{/t}
+							{if $sortby=='bymylastlog'}
+								{if $sortorder=='DESC'}&#x25B2;{else}&#x25BC;{/if}
+							{/if}</a>
+						{else}
+							{if $bylastlog}
+								<a href="search.php?queryid={$queryid}&showresult=1&sortby=bylastlog&sortorder=DESC{if $startat}&startat={$startat}{/if}{if $sbycreated}&bycreated=true{/if}">
+								{else}<a href="search.php?queryid={$queryid}&showresult=1&sortby=bylastlog&sortorder=ASC{if $startat}&startat={$startat}{/if}{if $sbycreated}&bycreated=true{/if}">
+							{/if}
+							{t}Last logs{/t}
+							{if $sortby=='bylastlog'}
+								{if $sortorder=='DESC'}&#x25B2;{else}&#x25BC;{/if}
+							{/if}</a>
+						{/if}
+					</th>
 					</tr>
 					<tr><td></td></tr>
 					<!--a-->
-					{assign var=position value=$startat+1}
 					{foreach from=$caches item=cache}
 						{cycle assign=listcolor values="search_listcolor1,search_listcolor2"}
 						{include file="search.result.caches.row.tpl"}
-						{assign var=position value=$position+1}
 					{/foreach}
 					<!--z-->
 				</table>

@@ -35,7 +35,7 @@ function search_output()
 	global $opt, $tpl, $login;
 	global $enable_mapdisplay;
 	global $called_by_search, $called_by_profile_query, $options, $lat_rad, $lon_rad, $distance_unit;
-	global $startat, $caches_per_page, $sql;
+	global $startat, $caches_per_page, $sql, $sortarray;
 
 	$tpl->name = 'search.result.caches';
 	$tpl->menuitem = MNU_CACHES_SEARCH_RESULT;
@@ -49,11 +49,10 @@ function search_output()
 	$resultcount = sql_value_slave('SELECT FOUND_ROWS()', 0);
 	sql_foundrows_done();
 	$tpl->assign('results_count', $resultcount);
-	$tpl->assign('startat',$startat);
+	$tpl->assign('startat', $startat);
 
 	$caches = array();
-	while ($rCache = sql_fetch_array($rs_caches))
-	{
+	while ($rCache = sql_fetch_array($rs_caches)) {
 		// select best-fitting short desc for active language
 		$rCache['short_desc'] = sql_value_slave("
 				SELECT `short_desc`
@@ -78,7 +77,7 @@ function search_output()
 		// decide if the cache is new
 		$dDiff = dateDiff('d', $rCache['date_created'], date('Y-m-d'));
 		$rCache['isnew'] = ($dDiff <= NEWCACHES_DAYS);
-		
+
 		// get last logs
 		if ($options['sort'] != 'bymylastlog' || !$login->logged_in())
 			$ownlogs = "";
@@ -90,25 +89,23 @@ function search_output()
 				WHERE `cache_logs`.`cache_id`='" . sql_escape($rCache['cache_id']) . "'
 				      AND `log_types`.`id`=`cache_logs`.`type`" . $ownlogs . "
 				ORDER BY `cache_logs`.`date` DESC, `cache_logs`.`date_created` DESC
-				LIMIT 6";
+				LIMIT 5";
 		$rs = sql_slave($sql);
 		$rCache['logs'] = sql_fetch_assoc_table($rs);
 		$rCache['firstlog'] = array_shift($rCache['logs']);
 
 		// get direction from search coordinate 
-		if ($rCache['distance'] > 0)
-		{
+		if ($rCache['distance'] > 0) {
 			$direction = geomath::calcBearing($lat_rad / 3.14159 * 180, $lon_rad / 3.14159 * 180, $rCache['latitude'], $rCache['longitude']);
 			$rCache['direction_deg'] = round($direction / 22.5) * 22.5;
 			$rCache['direction_txt'] = geomath::Bearing2Text($direction, 0, $opt['template']['locale']);
-		}
-		else 		
+		} else
 			$rCache['direction_deg'] = false;
-		
+
 		// other data
 		$rCache['icon'] = getCacheIcon($login->userid, $rCache['cache_id'], $rCache['status'], $rCache['user_id'], $rCache['icon_large']);
-		$rCache['redname'] = ($rCache['status']==5 || $rCache['status']==7); 
-			
+		$rCache['redname'] = ($rCache['status'] == 5 || $rCache['status'] == 7);
+
 		$caches[] = $rCache;
 	}
 	mysql_free_result($rs_caches);
@@ -120,8 +117,12 @@ function search_output()
 
 	// downloads
 	$tpl->assign('queryid', $options['queryid']);
+	if (isset($options['userid'])) {
+		$tpl->assign('userid', $options['userid']);
+		$tpl->assign('query_name', $options['query_name']);
+	}
 
-	$tpl->assign('startatp1', min($resultcount,$startat + 1));
+	$tpl->assign('startatp1', min($resultcount, $startat + 1));
 	if (($resultcount - $startat) < 500)
 		$tpl->assign('endat', $startat + $resultcount - $startat);
 	else
@@ -139,6 +140,34 @@ function search_output()
 	$tpl->assign('search_headline_caches', $called_by_search);
 	$tpl->assign('enable_mapdisplay', $enable_mapdisplay);
 
+	// sort results by
+	$tpl->assign('sortby', $options['sort']);
+	if (isset($options['sortorder'])) {
+		$tpl->assign('sortorder', $options['sortorder']);
+	}else{
+		$options['sortorder']="";
+	}
+
+	if (($options['sort']=='bydistance' && $options['sortorder']=='DESC') || (!isset($_REQUEST['queryid']) && $options['sort']!='bydistance') || (isset($_REQUEST['queryid']) && $options['sort']!='bydistance')) {
+		$tpl->assign('bydistance', true);
+	}
+	if (($options['sort']=='byname' && $options['sortorder']=='DESC') || (!isset($_REQUEST['queryid']) && $options['sort']!='byname') || (isset($_REQUEST['queryid']) && $options['sort']!='byname')){
+		$tpl->assign('byname', true);
+	}
+	if (($options['sort']=='bycreated' && $options['sortorder']=='ASC') || (!isset($_REQUEST['queryid']) && $options['sort']!='bycreated') || (isset($_REQUEST['queryid']) && $options['sort']!='bycreated')){
+		$tpl->assign('bycreated', true);
+	}
+	if (($options['sort']=='bymylastlog' && $options['sortorder']=='ASC') || (!isset($_REQUEST['queryid']) && $options['sort']!='bymylastlog') || (isset($_REQUEST['queryid']) && $options['sort']!='bymylastlog')){
+		$tpl->assign('bymylastlog', true);
+	}
+	if (($options['sort']=='bylastlog' && $options['sortorder']=='ASC') || (!isset($_REQUEST['queryid']) && $options['sort']!='bylastlog') || (isset($_REQUEST['queryid']) && $options['sort']!='bylastlog')){
+		$tpl->assign('bylastlog', true);
+	}
+	if (isset($options['bycreated'])||$options['sort']=='bycreated'){
+		$tpl->assign('sbycreated', true);
+	}
+
+
 	// cachelist data
 	if (isset($options['cachelist']))
 	{
@@ -150,7 +179,8 @@ function search_output()
 
 	// disable "edit options" for internally generated searches
 	if ($options['searchtype'] == 'bylist')
-	  $tpl->assign('disable_edit_options',true);
+	  	$tpl->assign('disable_edit_options',true);
+
 
 	$tpl->display();
 }

@@ -143,7 +143,7 @@
 		// load search options from stored query
 
 		$query_rs = sql("
-			SELECT `user_id`, `options`
+			SELECT `user_id`, `options`, `name`
 			FROM `queries`
 			WHERE id='&1' AND (`user_id`=0 OR `user_id`='&2')",
 			$queryid, $login->userid);
@@ -161,8 +161,10 @@
 		{
 			$record = sql_fetch_array($query_rs);
 			$options = unserialize($record['options']);
-			if ($record['user_id'] != 0)
+			if ($record['user_id'] != 0) {
 				$options['userid'] = $record['user_id'];
+				$options['query_name'] = $record['name'];
+			}
 			sql_free_result($query_rs);
 
 			$options['queryid'] = $queryid;
@@ -181,6 +183,24 @@
 			{
 				if ($bCookieQueryid)
 					$options['showresult'] = 0;
+			}
+
+			// overwrite variable options for sort direction & sort type
+			if (isset($_REQUEST['sortby'])){
+				$options['sort'] = $_REQUEST['sortby'];
+				$saveopt = serialize($options);
+				sql("UPDATE queries SET `options`='&1' WHERE `id`='&2'", $saveopt, $options['queryid']);
+			}
+
+			if (isset($_REQUEST['sortorder'])){
+				$options['sortorder'] = $_REQUEST['sortorder'];
+				$saveopt = serialize($options);
+				sql("UPDATE queries SET `options`='&1' WHERE `id`='&2'", $saveopt, $options['queryid']);
+			}
+
+			//check if user searched "bycreated" first --> display "bycreated"
+			if(isset($_REQUEST['bycreated'])){
+				$options['bycreated'] = $_REQUEST['bycreated'];
 			}
 
 			// get findername from finderid
@@ -299,7 +319,7 @@
 		{
 			$options['searchtype'] = 'byname';
 			$options['cachename'] = isset($_REQUEST['cachename']) ? stripslashes($_REQUEST['cachename']) : '';
-       if (!isset($_REQUEST['utf8']))
+        if (!isset($_REQUEST['utf8']))
          $options['cachename'] = iconv("ISO-8859-1", "UTF-8", $options['cachename']);
 		}
 		elseif (isset($_REQUEST['searchbyowner']))  // Ocprop
@@ -1305,21 +1325,45 @@
 
 		if ($sortby == 'bylastlog' || $options['sort'] == 'bymylastlog')
 		{
-			$sql .= '`lastLog` DESC, `caches`.`date_created` DESC, ';
+			$sql .= '`lastLog`';
+			if(isset($options['sortorder'])&&$options['sortorder']=='ASC'){
+				$sql .= ' ASC, ';
+			}
+			else{
+				$sql .= ' DESC, ';
+			}
 			$sortby = 'bydistance';
 		}
 
 		if (isset($lat_rad) && isset($lon_rad) && $sortby == 'bydistance')  
 		{
-			$sql .= '`distance` ASC';
+			$sql .= '`distance`';
+			if(isset($options['sortorder'])&&$options['sortorder']=='DESC'){
+				$sql .= ' DESC';
+			}
+			else{
+				$sql .= ' ASC';
+			}
 		}
 		else if ($sortby == 'bycreated')
 		{
-			$sql .= '`caches`.`date_created` DESC';
+			$sql .= '`caches`.`date_created`';
+			if(isset($options['sortorder'])&&$options['sortorder']=='ASC'){
+				$sql .= ' ASC';
+			}
+			else{
+				$sql .= ' DESC';
+			}
 		}
 		else // by name
 		{
-			$sql .= '`caches`.`name` ASC';
+			$sql .= '`caches`.`name`';
+			if(isset($options['sortorder'])&&$options['sortorder']=='DESC'){
+				$sql .= ' DESC';
+			}
+			else{
+				$sql .= ' ASC';
+			}
 		}
 
 		// range of output
@@ -1435,7 +1479,9 @@
 			//    $sql
 			//    $sqlLimit
 			//    $options['sort']
+			//	  $options['sortorder']
 			//    $options['queryid']
+			//	  $options['query_name']
 			//    $enable_mapdisplay
 			//=================================================================
 

@@ -43,7 +43,7 @@ class autoarchive
 		// For archiving caches that were disabled earlier, we also check the listing
 		// modification date.
 
-		// This statement shout be optimized. It typically runs for ~20 seconds at OC.de.
+		// This statement may be optimized. It typically runs for ~15 seconds at OC.de.
 		$rs = sql("
 			SELECT `cache_id`,
 			       `caches`.`user_id`,
@@ -84,8 +84,11 @@ class autoarchive
 						'maintain the cache and re-enable the listing.',
 						$months);
 				++$archived;
-				// if ($archived >= 3)
-				// 	break;
+
+				// This limit throttles archiving. If something goes wrong, it won't
+				// produce too much trouble.
+				if ($archived >= 10)
+					break;
 			}
 		}
 		sql_free_result($rs);

@@ -40,7 +40,7 @@
 {if $total_found + $total_attended + $total_dnf + $total_recommended}
 	<div style="float:right">
 		<p style="line-height:2em">
-			{t}total{/t}&nbsp;
+			&nbsp;&nbsp;{t}total{/t}&nbsp;
 			{if $total_recommended}
 				{$total_recommended}  <img src="images/rating-star.gif" width="17" height="16" title="{t}recommended{/t}" />&nbsp;
 			{/if}

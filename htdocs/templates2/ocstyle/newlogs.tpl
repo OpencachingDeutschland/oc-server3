@@ -37,6 +37,25 @@
 {if !$rest && $countryCode}
 	<div style="height:4px"></div>
 {/if}
+{if $total_found + $total_attended + $total_dnf + $total_recommended}
+	<div style="float:right">
+		<p style="line-height:2em">
+			&nbsp;&nbsp;{t}total{/t}&nbsp;
+			{if $total_recommended}
+				{$total_recommended}  <img src="images/rating-star.gif" width="17" height="16" title="{t}recommended{/t}" />&nbsp;
+			{/if}
+			{if $total_found}
+				{$total_found} <img src="resource2/{$opt.template.style}/images/log/16x16-found.png" alt="{t}found{/t}" title="{t}found{/t}"  />&nbsp;
+			{/if}
+			{if $total_dnf}
+				{$total_dnf} <img src="resource2/{$opt.template.style}/images/log/16x16-dnf.png" alt="{t}not&nbsp;found{/t}" title="{t}not&nbsp;found{/t}"  />&nbsp;
+			{/if}
+			{if $total_attended}
+				{$total_attended} <img src="resource2/{$opt.template.style}/images/log/16x16-attended.png" alt="{t}attended{/t}" title="{t}attended{/t}"  />&nbsp;
+			{/if}
+		</p>
+	</div>
+{/if}
 <p style="line-height:2em">
 	{if $paging}
 		{include file="res_pager.tpl"}

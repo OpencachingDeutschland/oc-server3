@@ -2806,6 +2806,10 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2520', 'Show in
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2521', 'This table contains some false positives. References from the \"libse\" code (personal cache notes, additional waypoints) are not detected, as well as textes which are passed by variable to translation functions and multiline texts. \"Help\", \"Forum\", \"Teamblog\" and \"Informations\" are referenced in local configuration files. So be very careful before deleting anything.', '2013-11-03 10:09:14');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2522', 'OConly', '2013-11-03 10:09:14');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2523', 'Official OC logos (up-to-date):', '2015-11-24 23:30:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2524', 'found', '2013-11-03 10:09:14');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2525', 'not\&nbsp;found', '2013-11-03 10:09:14');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2526', 'attended', '2013-11-03 10:09:14');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2527', 'recommended', '2013-11-03 10:09:14');
 
 -- Table sys_trans_ref
 SET NAMES 'utf8';
@@ -7342,6 +7346,10 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2521', 'DE', 'Diese Tabelle enthält einige Fehleinträge. Referenzen aus dem \"libse\"-Code (persönliche Cachenotizen, zusätzliche Wegpunkte) werden nicht erkannt, ebenso wie Texte, die als Variable an Übersetzungsfunktionen übergeben werden, und mehrzeilige Texte. \"Help\", \"Forum\", \"Teamblog\" and \"Informations\" werden in lokalen Konfigurationsdateien verwendet. Daher ist beim Löschen von Einträgen Vorsicht geboten.', '2013-11-03 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2522', 'DE', 'OConly', '2013-11-03 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2523', 'DE', 'Offizielle OC logos (up-to-date):', '2015-11-24 23:30:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2524', 'DE', 'gefunden', '2016-01-21 10:09:14');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2525', 'DE', 'nicht\&nbsp;gefunden', '2016-01-21 10:09:14');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2526', 'DE', 'teilgenommen', '2016-01-21 10:09:14');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2527', 'DE', 'empfohlen', '2016-01-21 10:09:14');
 
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'EN', 'Reorder IDs', '2010-09-02 00:15:30');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'EN', 'The database could not be reconnected.', '2010-08-28 11:48:07');
@@ -9171,6 +9179,10 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2392', 'EN', 'Zürich', '2013-11-03 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2522', 'EN', 'OConly', '2013-11-03 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2523', 'EN', 'Official OC logos (up-to-date):', '2015-11-24 23:30:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2524', 'EN', 'found', '2016-01-21 10:09:14');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2525', 'EN', 'not\&nbsp;found', '2016-01-21 10:09:14');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2526', 'EN', 'attended', '2016-01-21 10:09:14');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2527', 'EN', 'recommended', '2016-01-21 10:09:14');
 
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'ES', 'La base de datos no se pudo conectar.', '2010-12-09 00:17:55');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'ES', 'En pruebas - por favor, no entre.', '2010-12-09 00:17:55');
@@ -12562,6 +12574,10 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2518', 'FR', 'recommandations total', '2013-11-03 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2519', 'FR', 'Gauß-Krüger', '2013-11-03 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2522', 'FR', 'OConly', '2013-11-03 10:09:14');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2524', 'FR', 'trouvé', '2010-10-04 00:17:39');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2525', 'FR', 'non\&nbsp;trouvé', '2010-10-04 00:17:39');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2526', 'FR', 'participation', '2010-10-04 00:17:39');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2527', 'FR', 'recommandé', '2010-10-04 00:17:39');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'IT', 'Riordina gli ID', '2010-10-27 18:49:18');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'IT', 'Impossibile riconnettersi al database', '2010-08-28 20:28:01');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'IT', 'Test - per favore non connettersi', '2010-08-28 20:36:53');

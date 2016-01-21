@@ -89,7 +89,7 @@ function search_output()
 				WHERE `cache_logs`.`cache_id`='" . sql_escape($rCache['cache_id']) . "'
 				      AND `log_types`.`id`=`cache_logs`.`type`" . $ownlogs . "
 				ORDER BY `cache_logs`.`date` DESC, `cache_logs`.`date_created` DESC
-				LIMIT 5";
+				LIMIT 6";
 		$rs = sql_slave($sql);
 		$rCache['logs'] = sql_fetch_assoc_table($rs);
 		$rCache['firstlog'] = array_shift($rCache['logs']);

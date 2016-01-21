@@ -23,7 +23,7 @@
 	{/if}
 	<td class="{$listcolor}" valign="top"><nobr>
 		{if $cache.firstlog}
-			<nobr><a href="viewcache.php?cacheid={$cache.cache_id}&log=A#log{$cache.firstlog.id}">{include file="res_logtype.tpl" type=$cache.firstlog.type}</a>&nbsp;<a href="viewcache.php?cacheid={$cache.cache_id}&log=A#log{$cache.firstlog.id}">{$cache.firstlog.date|date_format:$opt.format.date}</a>&nbsp;&nbsp;&nbsp;&nbsp;</nobr>
+			<nobr><a href="viewcache.php?cacheid={$cache.cache_id}&log=A#log{$cache.firstlog.id}">{include file="res_logtype.tpl" type=$cache.firstlog.type}</a>&nbsp;<a href="viewcache.php?cacheid={$cache.cache_id}&log=A#log{$cache.firstlog.id}">{$cache.firstlog.date|date_format:$opt.format.date}</a>&nbsp;&nbsp;&nbsp;</nobr>
 		{else}
 			<img src="resource2/{$opt.template.style}/images/log/16x16-none.png" width="16" height="16" />&nbsp;--.--.----&nbsp;
 		{/if}
@@ -50,10 +50,10 @@
 		{foreach from=$cache.desclangs item=desclang}
 			<a href="viewcache.php?cacheid={$cache.cache_id}&desclang={$desclang|escape}" style="text-decoration:none"><b><span style="color:blue">{$desclang|escape}</span></b></a>
 		{/foreach}
-		{$cache.short_desc} &nbsp;</p>
+		{$cache.short_desc|escape} &nbsp;</p>
 	</td>
 	{if $sbycreated}
 		<td  class="{$listcolor}" valign="top">{if $cache.oconly}<img src="resource2/ocstyle/images/misc/15x15-oc.png"/>{/if}&nbsp;</td>
 	{/if}
-  	<td  class="{$listcolor}" valign="top"><nobr>{foreach from=$cache.logs item=log}<a href="viewcache.php?cacheid={$cache.cache_id}&log=A#log{$log.id}">{include file="res_logtype.tpl" type=$log.type}</a>&nbsp;{/foreach}&nbsp;&nbsp;&nbsp;</nobr></td>
+  	<td  class="{$listcolor}" valign="top"><nobr>{foreach from=$cache.logs item=log}<a href="viewcache.php?cacheid={$cache.cache_id}&log=A#log{$log.id}">{include file="res_logtype.tpl" type=$log.type}</a>&nbsp;{/foreach}&nbsp;&nbsp;</nobr></td>
 </tr>

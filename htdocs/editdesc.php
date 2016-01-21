@@ -129,7 +129,7 @@
 						else
 							$oldDescMode = $descMode;
 
-						$short_desc = strip_tags($_POST['short_desc']);  // Ocprop
+						$short_desc = htmlspecialchars($_POST['short_desc']);  // Ocprop
 						$hint = htmlspecialchars($_POST['hints'], ENT_COMPAT, 'UTF-8');
 						$desclang = $_POST['desclang'];
 						$show_all_langs = isset($_POST['show_all_langs_value']) ? $_POST['show_all_langs_value'] : 0;

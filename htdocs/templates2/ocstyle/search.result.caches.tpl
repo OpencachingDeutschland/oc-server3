@@ -14,7 +14,7 @@
 	<p style="margin-top:0.5em; padding-left:10px; padding-right:8px">
 		{if $userid}
 			<img src="resource2/ocstyle/images/misc/32x32-search.png" width="16px" height="16px" />
-			<a class="systemlink" href="query.php">{t}Stored querie{/t}</a> <b>{$query_name|escape}</b> {* TODO: Translation Stored querie *}
+			<a class="systemlink" href="query.php">{t}Stored query{/t}</a> <b>{$query_name|escape}</b>
 		{/if}
 		{if $cachelist}
 			<img src="resource2/ocstyle/images/misc/16x16-list.png" />
@@ -140,11 +140,11 @@
 						{if $sbycreated}
 							{if $bycreated}
 								<a href="search.php?queryid={$queryid}&showresult=1&sortby=bycreated&sortorder=DESC{if $startat}&startat={$startat}{/if}{if $sbycreated}&bycreated=true{/if}">
-								{else}<a href="search.php?queryid={$queryid}&showresult=1&sortby=bycreated&sortorder=ASC&bycreated=true{if $startat}&startat={$startat}{/if}{if $sbycreated}&bycreated=true{/if}">
+								{else}<a href="search.php?queryid={$queryid}&showresult=1&sortby=bycreated&sortorder=ASC{if $startat}&startat={$startat}{/if}{if $sbycreated}&bycreated=true{/if}">
 							{/if}
 							{t}Listed since{/t}
 							{if $sortby=='bycreated'}
-								{if $sortorder=='DESC'||$sortorder==""}&#x25B2;{else}&#x25BC;{/if}
+								{if $sortorder=='DESC'||$sortorder==''}&#x25B2;{else}&#x25BC;{/if}
 							{/if}</a>
 						{else}
 							&nbsp;
@@ -158,7 +158,7 @@
 							{/if}
 							{t}Own logs{/t}
 							{if $sortby=='bymylastlog'}
-								{if $sortorder=='DESC'}&#x25B2;{else}&#x25BC;{/if}
+								{if $sortorder=='DESC'||$sortorder==''}&#x25B2;{else}&#x25BC;{/if}
 							{/if}</a>
 						{else}
 							{if $bylastlog}
@@ -167,7 +167,7 @@
 							{/if}
 							{t}Last logs{/t}
 							{if $sortby=='bylastlog'}
-								{if $sortorder=='DESC'}&#x25B2;{else}&#x25BC;{/if}
+								{if $sortorder=='DESC'||$sortorder==''}&#x25B2;{else}&#x25BC;{/if}
 							{/if}</a>
 						{/if}
 					</th>

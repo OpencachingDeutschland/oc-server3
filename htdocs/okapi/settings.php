@@ -255,8 +255,9 @@ final class Settings
             $dict['SITE_LOGO'] = $dict['SITE_URL'] . 'okapi/static/oc_logo.png';
 
         # The OKAPI code is only compatible with utf8 and utf8mb4 charsets.
-        if (!in_array($dict['DB_CHARSET'], array('utf8', 'utf8mb4')))
-          throw new exception("DB_CHARSET must be utf8 or utf8mb4.");
+        if (!in_array($dict['DB_CHARSET'], array('utf8', 'utf8mb4'))) {
+            throw new exception("DB_CHARSET must be utf8 or utf8mb4.");
+        }
     }
 
     /**

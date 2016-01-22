@@ -126,11 +126,11 @@
     </opt>
     <opt name='found_by'>
         <p>Pipe-separated list of user IDs. If given, the response will only include
-        geocaches found by one or more of the given users.</p>
+        geocaches <b>found by at least one</b> of the given users.</p>
     </opt>
     <opt name='not_found_by'>
         <p>Pipe-separated list of user IDs. If given, the response will only include
-        geocaches not found by any of the given users.</p>
+        geocaches <b>not found by any</b> of the given users.</p>
     </opt>
     <opt name='watched_only' default='false'>
         <p><b>Notice:</b> This parameter may be used only for requests signed with an Access Token
@@ -152,8 +152,14 @@
         (you will need to use <b>Level 3</b> Authentication).</p>
         <p>Should be one of the following:</p>
         <ul>
-            <li><b>ignored_only</b> - only caches which the user has marked as ignored will be returned,</li>
-            <li><b>notignored_only</b> - only caches which the user has <b>not</b> marked as ignored will be returned,</li>
+            <li>
+                <b>ignored_only</b> - only caches which the user has marked as ignored
+                will be returned,
+            </li>
+            <li>
+                <b>notignored_only</b> - only caches which the user has <b>not</b> marked
+                as ignored will be returned,
+            </li>
             <li><b>either</b> - all caches will be returned.</li>
         </ul>
     </opt>

@@ -27,7 +27,8 @@ class WebService
         if (!$cache_code) throw new ParamMissing('cache_code');
         if (strpos($cache_code, "|") !== false) throw new InvalidParam('cache_code');
         $langpref = $request->get_parameter('langpref');
-        if (!$langpref) $langpref = "en|" . Settings::get('SITELANG');
+        if (!$langpref) $langpref = "en";
+        $langpref .= "|".Settings::get('SITELANG');
         $fields = $request->get_parameter('fields');
         if (!$fields) $fields = "code|name|location|type|status";
         $log_fields = $request->get_parameter('log_fields');
@@ -59,12 +60,18 @@ class WebService
         $result = $results[$cache_code];
         if ($result === null)
         {
-            if (Db::select_value("
-                    select wp_oc from caches where wp_oc='" . mysql_real_escape_string($cache_code) . "'
-                ") === null)
-                throw new InvalidParam('cache_code', "This cache does not exist.");
-            else
+            # Two errors messages (for OCDE). Makeshift solution for issue #350.
+
+            $exists = Db::select_value("
+                select 1
+                from caches
+                where wp_oc='".mysql_real_escape_string($cache_code)."'
+            ");
+            if ($exists) {
                 throw new InvalidParam('cache_code', "This cache is not accessible via OKAPI.");
+            } else {
+                throw new InvalidParam('cache_code', "This cache does not exist.");
+            }
         }
         return Okapi::formatted_response($request, $result);
     }

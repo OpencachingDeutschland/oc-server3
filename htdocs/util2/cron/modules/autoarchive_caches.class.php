@@ -43,9 +43,9 @@ class autoarchive
 		// For archiving caches that were disabled earlier, we also check the listing
 		// modification date.
 
-		// This statement shout be optimized. It typically runs for ~20 seconds at OC.de.
+		// This statement may be optimized. It typically runs for ~15 seconds at OC.de.
 		$rs = sql("
-			SELECT `cache_id`,
+			SELECT `caches`.`cache_id`,
 			       `caches`.`user_id`,
 			       DATEDIFF(NOW(), `listing_last_modified`) AS `listing_age`,
 			       (SELECT MAX(`date_modified`) FROM `cache_status_modified` `csm`
@@ -54,9 +54,11 @@ class autoarchive
 			       (SELECT MAX(`user_id`) FROM `cache_status_modified` `csm`
 			        WHERE `csm`.`cache_id`=`cache_id` AND `csm`.`date_modified`=`disable_date`)
 			       `disabled_by`,
-			       IFNULL(DATEDIFF(NOW(), `user`.`last_login`), 150) `login_lag`
+			       IFNULL(DATEDIFF(NOW(), `user`.`last_login`), 150) `login_lag`,
+			       `ca`.`attrib_id` IS NOT NULL `seasonal_cache`
 			FROM `caches`
 			LEFT JOIN `user` ON `user`.`user_id`=`caches`.`user_id`
+			LEFT JOIN `caches_attributes` `ca` ON `ca`.`cache_id`=`caches`.`cache_id` AND `ca`.`attrib_id`=60
 			WHERE `status`=2 AND DATEDIFF(NOW(), `listing_last_modified`) > 184
 			ORDER BY `listing_last_modified`");
 
@@ -66,10 +68,11 @@ class autoarchive
 			if ($rCache['listing_age'] > 366 ||
 			    ($rCache['listing_age'] > 184 &&
 			     (sql_value("SELECT DATEDIFF(NOW(),'&1')", 0, $rCache['disable_date']) > 366 ||
-			      ((($rCache['disabled_by'] != 0 && $rCache['disabled_by'] != $rCache['user_id'] && $rCache['login_lag'] > 45)
+			      (!$rCache['seasonal_cache'] &&
+			       (($rCache['disabled_by'] != 0 && $rCache['disabled_by'] != $rCache['user_id'] && $rCache['login_lag'] > 45)
 			        ||
 			        ($rCache['disabled_by'] == $rCache['user_id'] && $rCache['login_lag'] >= $rCache['listing_age']))
-						 &&
+			       &&
 			       sql_value("SELECT MAX(`date`) FROM `cache_logs` WHERE `cache_logs`.`cache_id`='&1'", "", $rCache['cache_id']) < $rCache['disable_date']
 			      )
 			     )
@@ -84,8 +87,11 @@ class autoarchive
 						'maintain the cache and re-enable the listing.',
 						$months);
 				++$archived;
-				// if ($archived >= 3)
-				// 	break;
+
+				// This limit throttles archiving. If something goes wrong, it won't
+				// produce too much trouble.
+				if ($archived >= 10)
+					break;
 			}
 		}
 		sql_free_result($rs);

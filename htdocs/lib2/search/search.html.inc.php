@@ -35,7 +35,7 @@ function search_output()
 	global $opt, $tpl, $login;
 	global $enable_mapdisplay;
 	global $called_by_search, $called_by_profile_query, $options, $lat_rad, $lon_rad, $distance_unit;
-	global $startat, $caches_per_page, $sql, $sortarray;
+	global $startat, $caches_per_page, $sql, $query_userid, $query_name;
 
 	$tpl->name = 'search.result.caches';
 	$tpl->menuitem = MNU_CACHES_SEARCH_RESULT;
@@ -117,9 +117,9 @@ function search_output()
 
 	// downloads
 	$tpl->assign('queryid', $options['queryid']);
-	if (isset($options['userid'])) {
-		$tpl->assign('userid', $options['userid']);
-		$tpl->assign('query_name', $options['query_name']);
+	if (isset($query_userid)) {
+		$tpl->assign('userid', $query_userid);
+		$tpl->assign('query_name', $query_name);
 	}
 
 	$tpl->assign('startatp1', min($resultcount, $startat + 1));

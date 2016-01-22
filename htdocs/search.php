@@ -162,8 +162,8 @@
 			$record = sql_fetch_array($query_rs);
 			$options = unserialize($record['options']);
 			if ($record['user_id'] != 0) {
-				$options['userid'] = $record['user_id'];
-				$options['query_name'] = $record['name'];
+				$query_userid = $record['user_id'];
+				$query_name = $record['name'];
 			}
 			sql_free_result($query_rs);
 

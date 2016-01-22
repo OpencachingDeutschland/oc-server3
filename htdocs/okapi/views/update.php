@@ -710,4 +710,21 @@ class View
     private static function ver91() { Db::execute("delete from okapi_tile_status"); }
     private static function ver92() { Db::execute("delete from okapi_tile_caches"); }
     private static function ver93() { Db::execute("alter table okapi_tile_caches add column name_crc int(10) unsigned not null default 0;"); }
+
+    private static function ver94()
+    {
+        Db::execute("
+            CREATE TABLE okapi_stats_monthly (
+                consumer_key varchar(32) NOT NULL,
+                user_id int(10) NOT NULL,
+                period_start datetime NOT NULL,
+                service_name varchar(80) NOT NULL,
+                total_calls int(10) NOT NULL,
+                http_calls int(10) NOT NULL,
+                total_runtime float NOT NULL DEFAULT '0',
+                http_runtime float NOT NULL DEFAULT '0',
+                PRIMARY KEY (consumer_key,user_id,period_start,service_name)
+            ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+        ");
+    }
 }

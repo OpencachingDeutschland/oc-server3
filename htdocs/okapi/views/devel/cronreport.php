@@ -43,17 +43,17 @@ class View
                 return $by_type;
             return $cmp($a->get_name(), $b->get_name());
         });
-        print str_pad("TYPE", 11)."  ".str_pad("NAME", 35)."  SCHEDULE\n";
-        print str_pad("----", 11)."  ".str_pad("----", 35)."  --------\n";
+        print str_pad("TYPE", 11)."  ".str_pad("NAME", 40)."  SCHEDULE\n";
+        print str_pad("----", 11)."  ".str_pad("----", 40)."  --------\n";
         foreach ($cronjobs as $cronjob)
         {
             $type = $cronjob->get_type();
             $name = $cronjob->get_name();
-            print str_pad($type, 11)."  ".str_pad($name, 35)."  ";
+            print str_pad($type, 11)."  ".str_pad($name, 40)."  ";
             if (!isset($schedule[$name]))
                 print "NOT YET SCHEDULED\n";
             elseif ($schedule[$name] <= time())
-                print "PAST: should be run ".(time() - $schedule[$name])." seconds ago\n";
+                print "DELAYED: should be run ".(time() - $schedule[$name])." seconds ago\n";
             else
                 print "scheduled to run in ".str_pad($schedule[$name] - time(), 6, " ", STR_PAD_LEFT)." seconds\n";
         }

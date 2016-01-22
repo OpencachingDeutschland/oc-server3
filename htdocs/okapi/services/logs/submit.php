@@ -231,8 +231,6 @@ class WebService
             #
             # OCPL doesn't require HTML purification prior to the database insertion.
             # HTML seems to be purified dynamically, before it is displayed.
-            ## When $value_for_text_html_field = 1; for 'plaintext' it filters the HTML
-            ## codes like <br />. Now c:geo logs are shown correct without HTML tags.
 
             if ($comment_format == 'plaintext')
             {
@@ -241,7 +239,14 @@ class WebService
                 $formatted_comment = str_replace("&amp;", "&amp;#38;", $formatted_comment);
                 $formatted_comment = str_replace("&lt;", "&amp;#60;", $formatted_comment);
                 $formatted_comment = str_replace("&gt;", "&amp;#62;", $formatted_comment);
-                $value_for_text_html_field = 1; // WRTODO: get rid of
+                #
+                # The following was changed from 0 to 1 by Harrie Klomp. The discussion
+                # regarding this change was exchanged via emails. This is an ID of the
+                # appropriate email thread:
+                #
+                # Message-ID: <22b643093838b151b300f969f699aa04@harrieklomp.be>
+                #
+                $value_for_text_html_field = 1;
             }
             elseif ($comment_format == 'auto')
             {

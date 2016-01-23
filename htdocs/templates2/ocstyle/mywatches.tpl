@@ -52,7 +52,7 @@
 			<tr>
 				<td>{t}Delivery:{/t}</td>
 				<td>
-					<select id="interval" name="interval" onChange="intervalChanged();">
+					<select id="interval" name="interval" onchange="intervalChanged();">
 						<option value="0" {if $interval==0}selected="selected"{/if}>{t}Immediate{/t}</option>
 						<option value="1" {if $interval==1}selected="selected"{/if}>{t}Daily{/t}</option>
 						<option value="2" {if $interval==2}selected="selected"{/if}>{t}Weekly{/t}</option>

@@ -13,6 +13,24 @@
 	$urlparams = '';
 	$optimize_for_latest_logs = false;
 
+	if (isset($_GET['logselection']))
+	{
+		$logselection = max(1, min($_GET['logselection']+0, 3));
+		if ($login->userid != 0)
+		{
+			$useroptions = new useroptions($login->userid);
+			$useroptions->setOptValue(USR_OPT_LOGLIST_SELECTION, $logselection);
+			$useroptions->save();
+		}
+	}
+	else if ($login->userid != 0)
+	{
+		$useroptions = new useroptions($login->userid);
+		$logselection = $useroptions->getOptValue(USR_OPT_LOGLIST_SELECTION);
+	}
+	else
+		$logselection = 2;
+
 	if (isset($ownerid))
 	{
 		// all logs for caches of one owner
@@ -58,7 +76,7 @@
 		$tpl->cache_id = $exclude_country;
 		$logcount = 250;
 		$paging = false;  // paging would have poor performance for all logs
-		$orderByDate = '';
+		$orderByDate = $logselection == 3 ? "{fromtable}.`date` DESC, " : "";
 	}
 	else
 	{
@@ -80,7 +98,7 @@
 		$tpl->cache_id = $country;
 		$logcount = 250;
 		$paging = false;  // paging would have poor performance for all logs
-		$orderByDate = '';
+		$orderByDate = $logselection == 3 ? "{fromtable}.`date` DESC, " : "";
 		$optimize_for_latest_logs = ($country == '' || $country == $opt['page']['main_country']);
 	}
 
@@ -90,9 +108,13 @@
 	  $tpl->cache_id .= "|fm";
 	  $logcount *= 2;
 	}
+	if ($logselection == 1)
+	{
+		$add_where .= "AND DATEDIFF(NOW(), {fromtable}.`date`) < 30 ";
+	}
+	$tpl->cache_id .= "|".$logselection;
 
 	$tpl->change_country_inpage = true;
-	$tpl->assign('creation_date', $orderByDate == '');
 
 	if (!$tpl->is_cached())
 	{
@@ -127,13 +149,11 @@
 			          WHERE `cache_status`.`allow_user_view`=1
 			                AND `caches`.`country` LIKE '&1'
 			                AND `caches`.`country`<>'&2'
-			                AND `username`<>'&3'
 			                ".$add_where."
-			       ORDER BY " . $orderByDate . $fromtable.".`date_created` DESC
-			          LIMIT &4, &5",
+			       ORDER BY " . str_replace("{fromtable}", $fromtable, $orderByDate) . $fromtable.".`date_created` DESC
+			          LIMIT &3, &4",
 			                $include_country,
 			                $exclude_country,
-			                isset($_GET['showsyslogs']) ? '' : $opt['logic']['systemuser']['user'],
 			                $startat,
 			                $logcount);
 		if ($paging)
@@ -175,7 +195,7 @@
 										  LEFT JOIN `cache_rating` ON `cache_rating`.`cache_id`=`caches`.`cache_id` AND `cache_rating`.`user_id`=`cache_logs`.`user_id` AND `cache_rating`.`rating_date`=`cache_logs`.`date`
 										  LEFT JOIN `caches_attributes` ON `caches_attributes`.`cache_id`=`caches`.`cache_id` AND `caches_attributes`.`attrib_id`=6
 										      WHERE IFNULL(`cache_logs_restored`.`restored_by`,0)=0
-										   ORDER BY " . $orderByCountry . $orderByDate . "`cache_logs`.`date_created` DESC",
+										   ORDER BY " . $orderByCountry . str_replace("{fromtable}", "`cache_logs`", $orderByDate) . "`cache_logs`.`date_created` DESC",
 											          $opt['template']['locale']);
 
 		$newLogs = array();
@@ -243,6 +263,7 @@
 		$tpl->assign('newLogs', $newLogs);
 		$tpl->assign('addpiclines', max($pics-1,0));
 		$tpl->assign('newLogsPerCountry', $newLogsPerCountry);
+		$tpl->assign('logselection', $logselection);
 
 		$tpl->assign('countryCode', $country);
 		$tpl->assign(

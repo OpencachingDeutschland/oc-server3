@@ -19,14 +19,43 @@
 		{/if}
 	</div>
 {else}
-	<div class="nav4">
-		<ul>
-			<li class="group noicon {if $countryCode === ''}selected{/if}"><a href="newlogs.php">{t}All new logs{/t}</a></li>
-			<li class="group noicon {if !$rest && $countryCode}selected{/if}"><a href="newlogs.php?country={$opt.template.country}">{t 1=$countryName}New logs in %1{/t}</a>
-			<li class="group noicon {if $rest}selected{/if}"><a href="newlogsrest.php">{t 1=$mainCountryName}New logs without %1{/t}</a></li>
-		</ul>
-	</div>
-	<p style="clear:both;" >
+	<script type="text/javascript">
+		{literal}
+		<!--
+		function logSelectionChanged()
+		{
+			var new_logselection = document.getElementById('logselection').value;
+			var url = window.location.href;
+			url = url.replace(/[&?]logselection=[123]/, "");
+			if (url.indexOf('?') > 0)
+				url += "&";
+			else
+				url += "?";
+			url += "logselection=" + new_logselection;
+			window.location.href = url;
+		}
+		//-->
+		{/literal}
+	</script>
+	<table cellspacing="0" cellpadding="0" style="width:98.1%">
+		<tr>
+			<td class="nav4">
+				<ul>
+					<li class="group noicon {if $countryCode === ''}selected{/if}"><a href="newlogs.php?logselection={$logselection}">{t}All new logs{/t}</a></li>
+					<li class="group noicon {if !$rest && $countryCode}selected{/if}"><a href="newlogs.php?country={$opt.template.country}&logselection={$logselection}">{t 1=$countryName}New logs in %1{/t}</a>
+					<li class="group noicon {if $rest}selected{/if}"><a href="newlogsrest.php?logselection={$logselection}">{t 1=$mainCountryName}New logs without %1{/t}</a></li>
+				</ul>
+			</td>
+			<td class="default" style="text-align:right; vertical-align:top; padding-top:0.2em">
+				<select id="logselection" onchange="logSelectionChanged()" >
+					<option value="1" {if $logselection==1}selected="selected"{/if}>{t}Current new entries{/t}</option>
+					<option value="2" {if $logselection==2}selected="selected"{/if}>{t}All new entries{/t}</option>
+					<option value="3" {if $logselection==3}selected="selected"{/if}>{t}... by log date{/t}</option>
+				</select>
+			</td>
+		</tr>
+	</table>
+	<p>
 		{if $rest || !$countryCode}
 			<br />
 			{include file="res_countrylinks.tpl" newCaches=$newLogs}
@@ -88,7 +117,7 @@
 		{/if}
 		<tr>
 			<td style="width:1px">
-				{if $creation_date}{$newLog.date_created|date_format:$opt.format.date}{else}{$newLog.date|date_format:$opt.format.date}{/if}
+				{$newLog.date|date_format:$opt.format.date}
 			</td>
 			<td class="listicon">
 				{if $newLog.type==1}

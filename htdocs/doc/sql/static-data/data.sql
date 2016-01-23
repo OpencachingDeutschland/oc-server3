@@ -744,7 +744,8 @@ INSERT INTO `profile_options` (`id`, `name`, `trans_id`, `internal_use`, `defaul
 INSERT INTO `profile_options` (`id`, `name`, `trans_id`, `internal_use`, `default_value`, `check_regex`, `option_order`, `option_input`, `optionset`) VALUES ('10', 'Show %1preview pictures</a><br />(% of map area, 0=off):', '1928', '1', '7', '^[0-5]?[0-9]$', '150', 'text', '2');
 INSERT INTO `profile_options` (`id`, `name`, `trans_id`, `internal_use`, `default_value`, `check_regex`, `option_order`, `option_input`, `optionset`) VALUES ('11', 'Show picture stats and gallery', '1944', '1', '1', '^[0-1]$', '60', 'checkbox', '1');
 INSERT INTO `profile_options` (`id`, `name`, `trans_id`, `internal_use`, `default_value`, `check_regex`, `option_order`, `option_input`, `optionset`) VALUES ('13', 'Show OConly-81 stats', '2135', '1', '0', '^[0-1]$', '65', 'checkbox', '1');
-INSERT INTO `profile_options` (`id`, `name`, `trans_id`, `internal_use`, `default_value`, `check_regex`, `option_order`, `option_input`, `optionset`) VALUES ('14', 'Auto-load log entries', '2153', '1', '1', '^[0-1]$', '15', 'checkbox', '1');
+INSERT INTO `profile_options` (`id`, `name`, `trans_id`, `internal_use`, `default_value`, `check_regex`, `option_order`, `option_input`, `optionset`) VALUES ('14', 'Auto-load log entries', '2153', '1', '1', '^[0-1]$', '15', 'text', '1');
+INSERT INTO `profile_options` (`id`, `name`, `trans_id`, `internal_use`, `default_value`, `check_regex`, `option_order`, `option_input`, `optionset`) VALUES ('15', 'New logs list selection', '2533', '1', '2', '^[1-3]$', '16', 'text', '1');
 
 -- Table replication_overwritetypes
 SET NAMES 'utf8';
@@ -2812,6 +2813,10 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2526', 'found',
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2527', 'not\&nbsp;found', '2013-11-03 10:09:14');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2528', 'attended', '2013-11-03 10:09:14');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2529', 'recommended', '2013-11-03 10:09:14');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2530', 'Current new entries', '2015-01-20 20:37:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2531', 'All new entries', '2015-01-20 20:37:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2532', '... by log date', '2015-01-20 20:37:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2533', 'New logs list selection', '2015-01-20 20:37:00');
 
 -- Table sys_trans_ref
 SET NAMES 'utf8';
@@ -7354,7 +7359,9 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2527', 'DE', 'nicht\&nbsp;gefunden', '2016-01-21 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2528', 'DE', 'teilgenommen', '2016-01-21 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2529', 'DE', 'empfohlen', '2016-01-21 10:09:14');
-
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2530', 'DE', 'Aktuelle Neueinträge', '2015-01-20 20:37:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2531', 'DE', 'Alle Neueinträge', '2015-01-20 20:37:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2532', 'DE', '... nach Logdatum', '2015-01-20 20:37:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'EN', 'Reorder IDs', '2010-09-02 00:15:30');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'EN', 'The database could not be reconnected.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'EN', 'Testing – please do not login', '2010-08-28 11:48:07');
@@ -9189,7 +9196,9 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2527', 'EN', 'not\&nbsp;found', '2016-01-21 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2528', 'EN', 'attended', '2016-01-21 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2529', 'EN', 'recommended', '2016-01-21 10:09:14');
-
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2530', 'EN', 'Current new entries', '2015-01-20 20:37:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2531', 'EN', 'All new entries', '2015-01-20 20:37:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2532', 'EN', '... by log date', '2015-01-20 20:37:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'ES', 'La base de datos no se pudo conectar.', '2010-12-09 00:17:55');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'ES', 'En pruebas - por favor, no entre.', '2010-12-09 00:17:55');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('4', 'ES', 'Usuario', '2010-12-09 00:17:55');

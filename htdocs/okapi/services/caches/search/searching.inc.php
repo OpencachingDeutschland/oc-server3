@@ -692,6 +692,7 @@ class SearchAssistant
             'offset' => (int)$offset,
             'limit' => (int)$limit,
             'order_by' => $order_clauses,
+            'caches_indexhint' => '',
             'extra_tables' => $extra_tables,
             'extra_joins' => $extra_joins,
         );
@@ -717,7 +718,7 @@ class SearchAssistant
     public function get_common_search_result()
     {
         $tables = array_merge(
-            array('caches'),
+            array('caches '.$this->search_params['caches_indexhint']),
             $this->search_params['extra_tables']
         );
         $where_conds = array_merge(

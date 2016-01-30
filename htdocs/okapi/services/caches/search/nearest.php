@@ -69,15 +69,32 @@ class WebService
         {
             if (!preg_match("/^-?[0-9]+(\.?[0-9]*)$/", $tmp))
                 throw new InvalidParam('radius', "'$tmp' is not a valid float number.");
-            $radius = floatval($tmp);
+            $radius = floatval($tmp);  # is given in kilometers
             if ($radius <= 0)
                 throw new InvalidParam('radius', "Has to be a positive number.");
-            $radius *= 1000; # this one is given in kilemeters, converting to meters!
+
+            # Apply a latitude-range prefilter if it looks promising.
+            # See https://github.com/opencaching/okapi/issues/363 for more info.
+
+            $optimization_radius = 100;  # in kilometers, optimized for Opencaching.de
+            $km2degrees_upper_estimate_factor = 0.01;
+
+            if ($radius <= $optimization_radius)
+            {
+                $radius_degrees = $radius * $km2degrees_upper_estimate_factor;
+                $where_conds[] = "
+                    latitude >= '".mysql_real_escape_string($center_lat - $radius_degrees)."'
+                    and latitude <= '".mysql_real_escape_string($center_lat + $radius_degrees)."'
+                    ";
+            }
+
+            $radius *= 1000;  # convert from kilometers to meters
             $where_conds[] = "$distance_formula <= '".mysql_real_escape_string($radius)."'";
         }
 
         $search_params = $search_assistant->get_search_params();
         $search_params['where_conds'] = array_merge($where_conds, $search_params['where_conds']);
+        $search_params['caches_indexhint'] = "use index (latitude)";
         $search_params['order_by'][] = $distance_formula; # not replaced; added to the end!
         $search_assistant->set_search_params($search_params);
 

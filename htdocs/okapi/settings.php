@@ -182,6 +182,9 @@ final class Settings
          * GitHub access token. If given, it will allow OKAPI to make more
          * frequent queries to the GitHub API (e.g. in the services/apiref/issue
          * method). Providing this is not required, but it is highly recommended.
+         *
+         * Get it here (we don't need any scopes):
+         * https://help.github.com/articles/creating-an-access-token-for-command-line-use/
          */
         'GITHUB_ACCESS_TOKEN' => null,
     );

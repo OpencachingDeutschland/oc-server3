@@ -22,7 +22,6 @@
     <tr><td><img src="{$opt.page.teampic_url}cyberturm.png" /></td><td><a href="{$opt.page.teammember_url}viewprofile.php?userid=266420">Cyberturm</a><br />treasurer</td></tr>
     <tr><td><img src="{$opt.page.teampic_url}mic@.jpg" /></td><td><a href="{$opt.page.teammember_url}viewprofile.php?userid=103599">mic@</a><br />press spokesman; user support, data maintenance, message board moderation</td></tr>
     <tr><td><img src="{$opt.page.teampic_url}dummy.jpg" /></td><td><a href="{$opt.page.teammember_url}viewprofile.php?userid=137473">bohrsty</a><br />head of system administration</td></tr>
-    <tr><td><img src="{$opt.page.teampic_url}mambofive.png" /></td><td><a href="{$opt.page.teammember_url}viewprofile.php?userid=298124">mambofive</a><br />development commissioner</td></tr>
     <tr><td><img src="{$opt.page.teampic_url}pirate77.jpg" /></td><td><a href="{$opt.page.teammember_url}viewprofile.php?userid=152708">pirate77</a><br />head of user support and data maintenance, wiki</td></tr>
     <tr><td></td></tr>
     <tr><th colspan="3"><br /><span class="content-title-noshade-size1">Team members</span></th>
@@ -38,7 +37,7 @@
     <tr><td><img src="{$opt.page.teampic_url}kirstenko.png" /></td><td><a href="{$opt.page.teammember_url}viewprofile.php?userid=208441">Kirstenko</a><br />software development</td></tr>
     <tr><td><img src="{$opt.page.teampic_url}mrspommelhorst.jpg" /></td><td><a href="{$opt.page.teammember_url}viewprofile.php?userid=144252">Mrs.Pommelhorst</a><br />user support, data maintenance, wiki</td></tr>
     <tr><td><img src="{$opt.page.teampic_url}ralf20.png" /></td><td><a href="{$opt.page.teammember_url}viewprofile.php?userid=165920">Ralf20</a><br />data maintenance</td></tr>
-    <tr><td><img src="{$opt.page.teampic_url}slini11.png" /></td><td><a href="{$opt.page.teammember_url}viewprofile.php?userid=159941">Slini11</a><br />data maintenance</td></tr>
+    <tr><td><img src="{$opt.page.teampic_url}slini11.png" /></td><td><a href="{$opt.page.teammember_url}viewprofile.php?userid=159941">Slini11</a><br />software development</td></tr>
     <tr><td><img src="{$opt.page.teampic_url}spike05de.png" /></td><td><a href="{$opt.page.teammember_url}viewprofile.php?userid=130977">Spike05de</a><br />user support, data maintenance</td></tr>
     <tr><td><img src="{$opt.page.teampic_url}steingesicht.jpg" /></td><td><a href="{$opt.page.teammember_url}viewprofile.php?userid=165774">Steingesicht</a><br />data maintenance, message board moderation</td></tr>
     <tr><td></td><td></td><td></td></tr>

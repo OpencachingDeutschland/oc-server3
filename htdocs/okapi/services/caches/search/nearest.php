@@ -83,8 +83,8 @@ class WebService
             {
                 $radius_degrees = $radius * $km2degrees_upper_estimate_factor;
                 $where_conds[] = "
-                    latitude >= '".mysql_real_escape_string($center_lat - $radius_degrees)."'
-                    and latitude <= '".mysql_real_escape_string($center_lat + $radius_degrees)."'
+                    caches.latitude >= '".mysql_real_escape_string($center_lat - $radius_degrees)."'
+                    and caches.latitude <= '".mysql_real_escape_string($center_lat + $radius_degrees)."'
                     ";
             }
 

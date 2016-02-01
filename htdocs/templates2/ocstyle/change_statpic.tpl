@@ -30,10 +30,9 @@
 				{/if}
 			</td>
 		</tr>
-		<tr><td class="spacer" colspan="2"></td></tr>
 
 		<tr>
-			<td><b>{t}Official OC logos (up-to-date):{/t}</b></td>
+			<td colspan="2"><br /><b>{t}Official OC logos (up-to-date):{/t}</b></td>
 			<td class="help"></td>
 			<td style="width:15%"></td>
 			<td style="width:15%"></td>
@@ -52,10 +51,8 @@
 			<tr><td></td><td>No logos available</td></tr>
 		{/foreach}
 
-		<tr><td class="spacer" colspan="2"></td></tr>
-
 		<tr>
-			<td><b>{t}Alternavite logos (partly outdated):{/t}</b></td>
+			<td colspan="2"><br /><b>{t}Alternavite logos (partly outdated):{/t}</b></td>
 			<td class="help"></td>
 			<td style="width:15%"></td>
 			<td style="width:15%"></td>

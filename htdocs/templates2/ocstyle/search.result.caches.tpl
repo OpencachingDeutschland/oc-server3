@@ -115,37 +115,44 @@
 					<th width="10">&nbsp;</th>
 					<th width="40">
 						{if $bydistance}
-							<a href="search.php?queryid={$queryid}&showresult=1&sortby=bydistance&sortorder=ASC{if $startat}&startat={$startat}{/if}{if $sbycreated}&bycreated=true{/if}">
-							{else}<a href="search.php?queryid={$queryid}&showresult=1&sortby=bydistance&sortorder=DESC{if $startat}&startat={$startat}{/if}{if $sbycreated}&bycreated=true{/if}">
+							<a href="search.php?queryid={$queryid}&showresult=1&sortby=bydistance&sortorder=asc{if $startat}&startat={$startat}{/if}{if $sbycreated}&bycreated=true{/if}">
+						{else}
+							<a href="search.php?queryid={$queryid}&showresult=1&sortby=bydistance&sortorder=desc{if $startat}&startat={$startat}{/if}{if $sbycreated}&bycreated=true{/if}">
 						{/if}
+						<nobr>
 						{$distanceunit|escape}
 						{if $sortby=='bydistance'}
-							{if $sortorder=='DESC'}&#x25B2;{else}&#x25BC;{/if}
-						{/if}</a>
+							{if $sortorder=='desc'}&#x25B2;{else}&#x25BC;{/if}
+						{/if}
+						</nobr></a>&nbsp;
 					</th>
 					<th width="40">{t}Type{/t}</th>
 					<th width="25">&nbsp;{t}D{/t}</th>
 					<th width="28">&nbsp;{t}T{/t}</th>
 					<th width="450" colspan="2">
 						{if $byname}
-							<a href="search.php?queryid={$queryid}&showresult=1&sortby=byname&sortorder=ASC{if $startat}&startat={$startat}{/if}{if $sbycreated}&bycreated=true{/if}">
-							{else}<a href="search.php?queryid={$queryid}&showresult=1&sortby=byname&sortorder=DESC{if $startat}&startat={$startat}{/if}{if $sbycreated}&bycreated=true{/if}">
+							<a href="search.php?queryid={$queryid}&showresult=1&sortby=byname&sortorder=asc{if $startat}&startat={$startat}{/if}{if $sbycreated}&bycreated=true{/if}">
+						{else}
+							<a href="search.php?queryid={$queryid}&showresult=1&sortby=byname&sortorder=desc{if $startat}&startat={$startat}{/if}{if $sbycreated}&bycreated=true{/if}">
 						{/if}
 						{t}Name{/t}
 						{if $sortby=='byname'}
-							{if $sortorder=='DESC'}&#x25B2;{else}&#x25BC;{/if}
+							{if $sortorder=='desc'}&#x25B2;{else}&#x25BC;{/if}
 						{/if}</a>
 					</th>
 					<th width="90">
 						{if $sbycreated}
 							{if $bycreated}
-								<a href="search.php?queryid={$queryid}&showresult=1&sortby=bycreated&sortorder=DESC{if $startat}&startat={$startat}{/if}{if $sbycreated}&bycreated=true{/if}">
-								{else}<a href="search.php?queryid={$queryid}&showresult=1&sortby=bycreated&sortorder=ASC{if $startat}&startat={$startat}{/if}{if $sbycreated}&bycreated=true{/if}">
+								<a href="search.php?queryid={$queryid}&showresult=1&sortby=bycreated&sortorder=desc{if $startat}&startat={$startat}{/if}{if $sbycreated}&bycreated=true{/if}">
+							{else}
+								<a href="search.php?queryid={$queryid}&showresult=1&sortby=bycreated&sortorder=asc{if $startat}&startat={$startat}{/if}{if $sbycreated}&bycreated=true{/if}">
 							{/if}
+							<nobr>
 							{t}Listed since{/t}
 							{if $sortby=='bycreated'}
-								{if $sortorder=='DESC'||$sortorder==''}&#x25B2;{else}&#x25BC;{/if}
-							{/if}</a>
+								{if $sortorder=='desc' || $sortorder==''}&#x25B2;{else}&#x25BC;{/if}
+							{/if}
+							</nobr></a>&nbsp;&nbsp;
 						{else}
 							&nbsp;
 						{/if}
@@ -153,22 +160,27 @@
 					<th width="90">
 						{if $displayownlogs}
 							{if $bymylastlog}
-								<a href="search.php?queryid={$queryid}&showresult=1&sortby=bymylastlog&sortorder=DESC{if $startat}&startat={$startat}{/if}{if $sbycreated}&bycreated=true{/if}">
-								{else}<a href="search.php?queryid={$queryid}&showresult=1&sortby=bymylastlog&sortorder=ASC{if $startat}&startat={$startat}{/if}{if $sbycreated}&bycreated=true{/if}">
+								<a href="search.php?queryid={$queryid}&showresult=1&sortby=bymylastlog&sortorder=desc{if $startat}&startat={$startat}{/if}{if $sbycreated}&bycreated=true{/if}">
+							{else}
+								<a href="search.php?queryid={$queryid}&showresult=1&sortby=bymylastlog&sortorder=asc{if $startat}&startat={$startat}{/if}{if $sbycreated}&bycreated=true{/if}">
 							{/if}
+							<nobr>
 							{t}Own logs{/t}
 							{if $sortby=='bymylastlog'}
-								{if $sortorder=='DESC'||$sortorder==''}&#x25B2;{else}&#x25BC;{/if}
-							{/if}</a>
+								{if $sortorder=='desc'||$sortorder==''}&#x25B2;{else}&#x25BC;{/if}
+							{/if}
+							</nobr></a>
 						{else}
 							{if $bylastlog}
-								<a href="search.php?queryid={$queryid}&showresult=1&sortby=bylastlog&sortorder=DESC{if $startat}&startat={$startat}{/if}{if $sbycreated}&bycreated=true{/if}">
-								{else}<a href="search.php?queryid={$queryid}&showresult=1&sortby=bylastlog&sortorder=ASC{if $startat}&startat={$startat}{/if}{if $sbycreated}&bycreated=true{/if}">
+								<a href="search.php?queryid={$queryid}&showresult=1&sortby=bylastlog&sortorder=desc{if $startat}&startat={$startat}{/if}{if $sbycreated}&bycreated=true{/if}">
+								{else}<a href="search.php?queryid={$queryid}&showresult=1&sortby=bylastlog&sortorder=asc{if $startat}&startat={$startat}{/if}{if $sbycreated}&bycreated=true{/if}">
 							{/if}
+							<nobr>
 							{t}Last logs{/t}
 							{if $sortby=='bylastlog'}
-								{if $sortorder=='DESC'||$sortorder==''}&#x25B2;{else}&#x25BC;{/if}
-							{/if}</a>
+								{if $sortorder=='desc'||$sortorder==''}&#x25B2;{else}&#x25BC;{/if}
+							{/if}
+							</nobr></a>
 						{/if}
 					</th>
 					</tr>

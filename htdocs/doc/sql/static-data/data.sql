@@ -7347,7 +7347,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2520', 'DE', 'Inkonsistenzen anzeigen', '2013-11-03 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2521', 'DE', 'Diese Tabelle enthält einige Fehleinträge. Referenzen aus dem \"libse\"-Code (persönliche Cachenotizen, zusätzliche Wegpunkte) werden nicht erkannt, ebenso wie Texte, die als Variable an Übersetzungsfunktionen übergeben werden, und mehrzeilige Texte. \"Help\", \"Forum\", \"Teamblog\" and \"Informations\" werden in lokalen Konfigurationsdateien verwendet. Daher ist beim Löschen von Einträgen Vorsicht geboten.', '2013-11-03 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2522', 'DE', 'OConly', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2523', 'DE', 'Offizielle OC logos (up-to-date):', '2015-11-24 23:30:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2523', 'DE', 'Offizielle OC-Logos (up-to-date):', '2015-11-24 23:30:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2524', 'DE', 'Gespeicherte Suche', '2015-01-20 20:37:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2525', 'DE', 'Alternative Logos (teilweise veraltet):', '2015-11-24 22:36:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2526', 'DE', 'gefunden', '2016-01-21 10:09:14');

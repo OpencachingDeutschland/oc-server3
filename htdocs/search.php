@@ -1323,7 +1323,7 @@
 		if ($sortby == 'bylastlog' || $options['sort'] == 'bymylastlog')
 		{
 			$sql .= '`lastLog`';
-			if(isset($options['sortorder'])&&$options['sortorder']=='ASC'){
+			if (isset($options['sortorder']) && $options['sortorder']=='asc') {
 				$sql .= ' ASC, `caches`.`date_created` DESC,';
 			}
 			else{
@@ -1332,33 +1332,33 @@
 			$sortby = 'bydistance';
 		}
 
-		if (isset($lat_rad) && isset($lon_rad) && $sortby == 'bydistance')  
+		if (isset($lat_rad) && isset($lon_rad) && $sortby=='bydistance')
 		{
 			$sql .= '`distance`';
-			if(isset($options['sortorder'])&&$options['sortorder']=='DESC'){
+			if (isset($options['sortorder']) && $options['sortorder']=='desc') {
 				$sql .= ' DESC';
 			}
-			else{
+			else {
 				$sql .= ' ASC';
 			}
 		}
 		else if ($sortby == 'bycreated')
 		{
 			$sql .= '`caches`.`date_created`';
-			if(isset($options['sortorder'])&&$options['sortorder']=='ASC'){
+			if (isset($options['sortorder']) && $options['sortorder']=='asc') {
 				$sql .= ' ASC';
 			}
-			else{
+			else {
 				$sql .= ' DESC';
 			}
 		}
 		else // by name
 		{
 			$sql .= '`caches`.`name`';
-			if(isset($options['sortorder'])&&$options['sortorder']=='DESC'){
+			if(isset($options['sortorder']) && $options['sortorder']=='desc') {
 				$sql .= ' DESC';
 			}
-			else{
+			else {
 				$sql .= ' ASC';
 			}
 		}

@@ -148,22 +148,22 @@ function search_output()
 		$options['sortorder']="";
 	}
 
-	if (($options['sort']=='bydistance' && $options['sortorder']=='DESC') || (!isset($_REQUEST['queryid']) && $options['sort']!='bydistance') || (isset($_REQUEST['queryid']) && $options['sort']!='bydistance')) {
+	if (($options['sort']=='bydistance' && $options['sortorder']=='desc') || (!isset($_REQUEST['queryid']) && $options['sort']!='bydistance') || (isset($_REQUEST['queryid']) && $options['sort']!='bydistance')) {
 		$tpl->assign('bydistance', true);
 	}
-	if (($options['sort']=='byname' && $options['sortorder']=='DESC') || (!isset($_REQUEST['queryid']) && $options['sort']!='byname') || (isset($_REQUEST['queryid']) && $options['sort']!='byname')){
+	if (($options['sort']=='byname' && $options['sortorder']=='desc') || (!isset($_REQUEST['queryid']) && $options['sort']!='byname') || (isset($_REQUEST['queryid']) && $options['sort']!='byname')) {
 		$tpl->assign('byname', true);
 	}
-	if (($options['sort']=='bycreated' && $options['sortorder']=='ASC') || (!isset($_REQUEST['queryid']) && $options['sort']!='bycreated') || (isset($_REQUEST['queryid']) && $options['sort']!='bycreated')){
+	if (($options['sort']=='bycreated' && $options['sortorder']=='asc') || (!isset($_REQUEST['queryid']) && $options['sort']!='bycreated') || (isset($_REQUEST['queryid']) && $options['sort']!='bycreated')) {
 		$tpl->assign('bycreated', true);
 	}
-	if (($options['sort']=='bymylastlog' && $options['sortorder']=='ASC') || (!isset($_REQUEST['queryid']) && $options['sort']!='bymylastlog') || (isset($_REQUEST['queryid']) && $options['sort']!='bymylastlog')){
+	if (($options['sort']=='bymylastlog' && $options['sortorder']=='asc') || (!isset($_REQUEST['queryid']) && $options['sort']!='bymylastlog') || (isset($_REQUEST['queryid']) && $options['sort']!='bymylastlog')) {
 		$tpl->assign('bymylastlog', true);
 	}
-	if (($options['sort']=='bylastlog' && $options['sortorder']=='ASC') || (!isset($_REQUEST['queryid']) && $options['sort']!='bylastlog') || (isset($_REQUEST['queryid']) && $options['sort']!='bylastlog')){
+	if (($options['sort']=='bylastlog' && $options['sortorder']=='asc') || (!isset($_REQUEST['queryid']) && $options['sort']!='bylastlog') || (isset($_REQUEST['queryid']) && $options['sort']!='bylastlog')) {
 		$tpl->assign('bylastlog', true);
 	}
-	if (isset($options['bycreated'])||$options['sort']=='bycreated'){
+	if (isset($options['bycreated']) || $options['sort']=='bycreated') {
 		$tpl->assign('sbycreated', true);
 	}
 

@@ -162,8 +162,8 @@
 			$record = sql_fetch_array($query_rs);
 			$options = unserialize($record['options']);
 			if ($record['user_id'] != 0) {
-				$options['userid'] = $record['user_id'];
-				$options['query_name'] = $record['name'];
+				$query_userid = $record['user_id'];
+				$query_name = $record['name'];
 			}
 			sql_free_result($query_rs);
 
@@ -186,16 +186,13 @@
 			}
 
 			// overwrite variable options for sort direction & sort type
+
 			if (isset($_REQUEST['sortby'])){
 				$options['sort'] = $_REQUEST['sortby'];
-				$saveopt = serialize($options);
-				sql("UPDATE queries SET `options`='&1' WHERE `id`='&2'", $saveopt, $options['queryid']);
 			}
 
 			if (isset($_REQUEST['sortorder'])){
 				$options['sortorder'] = $_REQUEST['sortorder'];
-				$saveopt = serialize($options);
-				sql("UPDATE queries SET `options`='&1' WHERE `id`='&2'", $saveopt, $options['queryid']);
 			}
 
 			//check if user searched "bycreated" first --> display "bycreated"
@@ -1327,10 +1324,10 @@
 		{
 			$sql .= '`lastLog`';
 			if(isset($options['sortorder'])&&$options['sortorder']=='ASC'){
-				$sql .= ' ASC, ';
+				$sql .= ' ASC, `caches`.`date_created` DESC,';
 			}
 			else{
-				$sql .= ' DESC, ';
+				$sql .= ' DESC, `caches`.`date_created` DESC,';
 			}
 			$sortby = 'bydistance';
 		}

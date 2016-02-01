@@ -129,7 +129,7 @@
 						else
 							$oldDescMode = $descMode;
 
-						$short_desc = strip_tags($_POST['short_desc']);  // Ocprop
+						$short_desc = $_POST['short_desc'];  // Ocprop
 						$hint = htmlspecialchars($_POST['hints'], ENT_COMPAT, 'UTF-8');
 						$desclang = $_POST['desclang'];
 						$show_all_langs = isset($_POST['show_all_langs_value']) ? $_POST['show_all_langs_value'] : 0;
@@ -205,7 +205,7 @@
 					else
 					{
 						//here we read all used information from the DB
-						$short_desc = strip_tags($desc_record['short_desc']);
+						$short_desc = $desc_record['short_desc'];
 						$hint = strip_tags($desc_record['hint']);
 						$desc_htmledit = $desc_record['desc_htmledit'];
 						$desc_html = $desc_record['desc_html'];

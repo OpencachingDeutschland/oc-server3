@@ -40,7 +40,7 @@
 /lib/htmlpurifier-4.2.0/library/HTMLPurifier/DefinitionCache/Serializer/URI/*
 
 # local tools
+/local/devel/okapi-update-settings.inc.php
 /local/ocxml11client/data-files
 /local/ocxml11client/tmp
 /local/ocxml11client/settings.php
-/local/tools/okapi-update-settings.inc.php

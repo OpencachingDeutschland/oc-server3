@@ -163,7 +163,7 @@
 		if ($validate['dateOk'])
 			setcookie('oclogdate',
 			          sprintf('%04d%02d%02d',$logDateYear, $logDateMonth, $logDateDay),
-			          time() + 12*60*60);   // expiration time
+			          time() + 6*60*60);   // expiration time; see Redmine #205, #704, #894
 		
 		// check log type
 		$validate['logType'] = $cache->logTypeAllowed($logType);

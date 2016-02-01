@@ -16,20 +16,16 @@
 	if (isset($_GET['logselection']))
 	{
 		$logselection = max(1, min($_GET['logselection']+0, 3));
-		if ($login->userid != 0)
-		{
-			$useroptions = new useroptions($login->userid);
-			$useroptions->setOptValue(USR_OPT_LOGLIST_SELECTION, $logselection);
-			$useroptions->save();
-		}
-	}
-	else if ($login->userid != 0)
-	{
-		$useroptions = new useroptions($login->userid);
-		$logselection = $useroptions->getOptValue(USR_OPT_LOGLIST_SELECTION);
+		$cookie->set('newlogs',$logselection);
 	}
 	else
-		$logselection = 2;
+	{
+		$logselection = $cookie->get('newlogs');
+		if ($logselection === false)
+			$logselection = 2;
+		else
+			$logselection = max(1, min($cookie->get('newlogs'), 3));
+	}
 
 	if (isset($ownerid))
 	{

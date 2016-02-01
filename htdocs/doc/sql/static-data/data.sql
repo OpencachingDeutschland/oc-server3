@@ -745,7 +745,6 @@ INSERT INTO `profile_options` (`id`, `name`, `trans_id`, `internal_use`, `defaul
 INSERT INTO `profile_options` (`id`, `name`, `trans_id`, `internal_use`, `default_value`, `check_regex`, `option_order`, `option_input`, `optionset`) VALUES ('11', 'Show picture stats and gallery', '1944', '1', '1', '^[0-1]$', '60', 'checkbox', '1');
 INSERT INTO `profile_options` (`id`, `name`, `trans_id`, `internal_use`, `default_value`, `check_regex`, `option_order`, `option_input`, `optionset`) VALUES ('13', 'Show OConly-81 stats', '2135', '1', '0', '^[0-1]$', '65', 'checkbox', '1');
 INSERT INTO `profile_options` (`id`, `name`, `trans_id`, `internal_use`, `default_value`, `check_regex`, `option_order`, `option_input`, `optionset`) VALUES ('14', 'Auto-load log entries', '2153', '1', '1', '^[0-1]$', '15', 'text', '1');
-INSERT INTO `profile_options` (`id`, `name`, `trans_id`, `internal_use`, `default_value`, `check_regex`, `option_order`, `option_input`, `optionset`) VALUES ('15', 'New logs list selection', '2533', '1', '2', '^[1-3]$', '16', 'text', '1');
 
 -- Table replication_overwritetypes
 SET NAMES 'utf8';
@@ -2816,7 +2815,6 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2529', 'recomme
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2530', 'Current new entries', '2015-01-20 20:37:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2531', 'All new entries', '2015-01-20 20:37:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2532', '... by log date', '2015-01-20 20:37:00');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2533', 'New logs list selection', '2015-01-20 20:37:00');
 
 -- Table sys_trans_ref
 SET NAMES 'utf8';

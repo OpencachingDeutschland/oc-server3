@@ -77,7 +77,7 @@
 	define('USR_OPT_TRANSLANG', 12);
 	define('USR_OPT_OCONLY81', 13);
 	define('USR_OPT_LOG_AUTOLOAD', 14);
-	define('USR_OPT_LOGLIST_SELECTION', 15);
+	// ID 15 was temporarily used and is reserved, see commit dda7ef0. Continue with 16.
 
 	// user.data_license values
 	define('OLD_DATA_LICSENSE',0);                       // before deadline

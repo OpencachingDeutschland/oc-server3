@@ -29,6 +29,10 @@
 
 	<div class="changelog-changes">
 
+	<p id="v3.0.16"><strong>OC 3.0 Version 16</strong> &ndash; 1. Februar 2016</p>
+	<p><i>(Das Changelog ist in Arbeit.)</i></p>
+	<br />
+
 	<p id="v3.0.15"><strong>OC 3.0 Version 15</strong> &ndash; 19. September 2015</p>
 	<p>Neu:</p>
 	<ul>

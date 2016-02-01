@@ -30,7 +30,40 @@
 	<div class="changelog-changes">
 
 	<p id="v3.0.16"><strong>OC 3.0 Version 16</strong> &ndash; 1. Februar 2016</p>
-	<p><i>(Das Changelog ist in Arbeit.)</i></p>
+	<p>Neu:</p>
+	<ul>
+		<li>Die Ergebnisse der <a href="search.php">Cachesuche</a> sind per Klick auf die Spaltenüberschriften sortierbar.</li>
+		<li>Bei der Suchsortierung nach Versteckdatum wird dieses auch in den Ergebnissen angezeigt.</li>
+		<li>In der Loghistorie für die eigenen Caches erscheint eine Statistik nach Logtyp.</li>
+		<li>Die <a href="newlogs.php">Liste der neuen Logs</a> ist nun nach verschiedenen Kriterien filter- bzw. sortierbar.</li>
+		<li>Anzeige von OConly-Markierungen (<img src="http://www.opencaching.de/resource2/ocstyle/images/misc/15x15-oc.png">) in der Liste der neuen Logs.</li>
+		<li>Es können nun auch erweiterte Unicode-Zeichen in Cachebeschreibungen, Logs, Profiltexten und Cachelistenbeschreibungen verwendet werden, zum Beispiel die Smileys (&rarr; <a href="http://forum.opencaching.de/index.php?topic=4342.0">weitere Informationen</a>).</li>
+		<li>OKAPI: Abfrage der eigenen Liste der ignorierten Caches</li>
+		<li>Start des HTTPS-Betriebs &rarr; <a href="https://www.opencaching.de">https://www.opencaching.de</a>; noch nicht stabil verfügbar für die OKAPI (&rarr; <a href="https://github.com/opencaching/okapi/issues/343">weitere Informationen</a>)</li>
+	</ul>
+
+	<p>Geändert / verbessert:</p>
+	<ul>
+		<li>Die Liste der neuen Logs zeigt nun das Logdatum an statt des Datums, zu dem das Log eingestellt wurde.</li>
+		<li>Bei der Wahl des Statistikbildes wird zwischen aktuellen und sonstigen OC-Logs unterschieden.</li>
+		<li>Die Links aus der Cachebeschreibung zu navicache.com wurden entfernt; es können keine Navicache-Wegpunkte mehr eingetragen werden.</li>
+		<li>Nach dem Bearbeiten von Bildern in einem Cachelisting geht es zurück zur Bearbeitungsseite statt zur Listinganzeige.</li>
+		<li>Deaktivierte Listings werden nun bereits nach 6 statt 12 Monaten automatisch archiviert, falls sie vom OC-Team deaktiviert wurden, oder falls der Cachebesitzer seit der Deaktivierung nicht mehr eingeloggt war. Ausgenommen davon sind Listings mit dem Attribut „Nur zu bestimmten Jahreszeiten suchbar“ und Listings mit einem neuen Log seit der Deaktivierung; hier bleibt es bei der 12-Monatsfrist. Eine Änderung des Listings durch den Besitzer setzt den „Countdown“ wieder zurück. Der Besitzer kann die Archivierung jederzeit rückgängig machen.</li>
+		<li>Das Einstellen von Bildduplikaten per Ocprop wird (weitgehend) verhindert.</li>
+		<li>OKAPI: Umkreissuche bei kleinem Radius (&lt;&lt; 100 km) stark beschleunigt</li>
+		<li>Portierung von MySQL 5.1 auf MariaDB 5.5</li>
+	</ul>
+
+	<p>Korrigiert (Bugfixes):</p>
+	<ul>
+		<li>Anzeige des Lupensymbols, wenn man über die eigene Logbildgallerie fährt [Bug von Version 5]</li>
+		<li>Anzeige des korrekten Symbols für Cachelistings, die vom Opencaching-Team gesperrt/versteckt wurden  (<img src="http://www.opencaching.de/resource2/ocstyle/images/cachestatus/16x16-locked-invisible.png">) [Bug von Version 6]</li>
+		<li>Behandlung von HTML-Code in Cache-Kurzbeschreibungen korrigiert</li>
+		<li>Ausblendung deaktivierter Caches bei der Umkreissuche nach „suchbaren“ Caches aus einem Cachelisting heraus [Bug von Version 9]</li>
+		<li>englische Datumsdarstellung in der Liste der neuen Caches korrigiert</li>
+		<li>Zurücksetzen der Cachetypen <i>Drive-In</i> und <i>Mathe/Physik</i> sowie der Größen <i>nano</i> und <i>extrem groß</i> durch Ocprop auf GC-Werte wird verhindert. [Bug von Version 6]</li>
+		<li>OKAPI: Fehlermeldung beim Abruf gesperrter Caches korrigiert; weitere kleine Korrekturen</li>
+	</ul>
 	<br />
 
 	<p id="v3.0.15"><strong>OC 3.0 Version 15</strong> &ndash; 19. September 2015</p>
@@ -94,6 +127,9 @@
 	in Benutzernamen erlaubt.
 	(<a href="http://redmine.opencaching.de/issues/212">#212</a>)
 	</li>
+	<li>JavaScript-Verbesserung: Icons in der Karten-Popups erscheinen jetzt auch
+	in defekten Browsern. (<a href="http://redmine.opencaching.de/issues/11">#11</a>)
+	</li>
 	<li>
 	Englische Übersetzung vervollständigt (
 	<a href="http://redmine.opencaching.de/issues/163">#163</a>,
@@ -110,10 +146,7 @@
 	ersetzt</li>
 	<li>Korrektur des in seltenen Fällen falsch angezeigten Datums einer
 	Empfehlung
-	(<a href="http://redmine.opencaching.de/issues/713">#713</a>)</li>
-	<li>JavaScript-Verbesserung: Icons in der Karten-Popups erscheinen jetzt auch
-	in defekten Browsern. (<a href="http://redmine.opencaching.de/issues/11">#11</a>)
-	</li>
+	(<a href="http://redmine.opencaching.de/issues/713">#713</a>) [Bug von Version 9]</li>
 	<li>HTML-Filterfunktionen für Logs und Cachebeschreibungen verbessert
 	(<a href="http://redmine.opencaching.de/issues/79">#79</a>),
 	eine Liste der jetzt verwendbaren HTML-Elemente ist
@@ -148,7 +181,7 @@
 	</li>
 	<li>
 	Benachtichtiungsfunktion für neu gesetzte OConly-Attribute korrigiert
-	(<a href="http://redmine.opencaching.de/issues/810">#810</a>)
+	(<a href="http://redmine.opencaching.de/issues/810">#810</a>) [Bug von Version 9]
 	</li>
 	<li>Außerdem wurde viele weitere, kleinere Fehler behoben - vollständige Liste
 	<a href="http://redmine.opencaching.de/versions/10">hier</a>.</li>

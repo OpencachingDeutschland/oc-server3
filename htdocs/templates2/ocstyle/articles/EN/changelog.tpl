@@ -15,8 +15,41 @@
 
 	<div class="changelog-changes">
 
-	<p id="v3.0.16"><strong>OC 3.0 Version 16</strong> &ndash; 1 February 2016</p>
-	<p><i>work in progress</i></p>
+	<p id="v3.0.16"><strong>OC 3.0 Release 16</strong> &ndash; 1 February 2016</p>
+	<p>New:</p>
+	<ul>
+		<li>The <a href="search.php">cache search</a> results can be sorted by clicking on the table headers.</li>
+		<li>When chosing search result order by hide date, this date is displayed in the results list.</li>
+		<li>Added statistics by log type to the <a href="ownerlogs.php">log statistics for own caches</a>.</li>
+		<li>Old late logs can be hidden in the <a href="newlogs.php">list of new logs</a>; list now is sortable by either log date or log submit date.</li>
+		<li>OConly marks (<img src="resource2/ocstyle/images/misc/15x15-oc.png">) are shown in the lists of new logs and of own logs.</li>
+		<li>Special Unicode symbols (character codes &gt; 65535, e.g. smileys) can be entered in cache descriptions, logs, user profile texts and cache list descriptions.</li>
+		<li>OKAPI: own list of ignored caches can be retrieved</li>
+	</ul>
+
+	<p>Changed / improved:</p>
+	<ul>
+		<li>The list of new logs now shows the log dates instead of log submit dates.</li>
+		<li>Removed the links to navicache.com from cache descriptions; Navicache waypoints can no longer be entered.</li>
+		<li>Return to the cache listing edit page instead to the listing page after adding/modifying pictures.</li>
+		<li>Statistics picture selection now distinguishes between current OC logos and other logos.</li>
+		<li>Disabled listings ("temporarily not available") now are archived automatically after 6 instead of 12 months, if they have been disabled by OC admins or if the owner has not been logged in since disabling the cache. Caches with attribute "Only available during specified seasons" are excempt from this rule, as well as caches with new logs after disabling; the 12 months period applies here. Any listing modifications by the owner reset the archiving "countdown". The owner may arbitrarily change the state back to "temporarily not available".</li>
+		<li>Prevented upload of (most) duplicate log pictures by Ocprop.</li>
+		<li>OKAPI: greatly improved proformance of cache search by radius for small radiuses (&lt;&lt; 100 km)</li>
+		<li>Ported SQL code from MySQL 5.1 to MariaDB 5.5</li>
+	</ul>
+
+	<p>Fixed:</p>
+	<ul>
+		<li>Show the magnifyer symbol when hovering over the own log pictures gallery [bug of release 5]</li>
+		<li>Show the correct symbol for cache listings which have been locked/hidden by the Opencaching team (<img src="resource2/ocstyle/images/cachestatus/16x16-locked-invisible.png">) [bug of release 6]</li>
+		<li>fixed handling of HTML code in cache short-descriptions</li>
+		<li>When chosing "search geocaches nearby: searchable" in a cache listing, disabled caches will be hidden. [bug of release 9]</li>
+		<li>fixed english date layout in the list of new caches</li>
+		<li>prevented resetting of the chache types <i>Drive-in</i> and <i>Maths/Physics</i> as well as the sizes <i>nano</i> and <i>extremely large</i> by Ocprop to GC values. [bug of release 6]</li>
+		<li>final adjustments for the start of HTTPS &rarr; <a href="https://www.opencaching.de">https://www.opencaching.de</a>; not yet stable implemented for OKAPI (&rarr; <a href="https://github.com/opencaching/okapi/issues/343">more info</a>)</li>
+		<li>OKAPI: corrected error message when accessing locked caches; some other small fixes</li>
+	</ul>
 	<br />
 
 	<p id="v3.0.15"><strong>OC 3.0 Release 15</strong> &ndash; 19 September 2015</p>
@@ -95,7 +128,7 @@
 	<li>Language names instead of flags in the cache listing
 	</li>
 	<li>Corrected the (in rare cases) wrong date for recommendations
-	(<a href="http://redmine.opencaching.de/issues/713">#713</a>)</li>
+	(<a href="http://redmine.opencaching.de/issues/713">#713</a>) [bug of release 9]</li>
 	<li>JavaScript improvement: Icons in popups on the map are now displayed in
 	broken browsers. (<a href="http://redmine.opencaching.de/issues/11">#11</a>)
 	</li>
@@ -130,7 +163,7 @@
 	</li>
 	<li>
 	Corrected notifications for newly set OConly attributes
-	(<a href="http://redmine.opencaching.de/issues/810">#810</a>)
+	(<a href="http://redmine.opencaching.de/issues/810">#810</a>) [bug of release 9]
 	</li>
 	<li>Furthermore, many smaller bugs were fixed, see <a href="http://redmine.opencaching.de/versions/10">here</a>
 	for a complete list.</li>

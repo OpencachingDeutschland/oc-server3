@@ -34,21 +34,20 @@
 	<ul>
 		<li>Die Ergebnisse der <a href="search.php">Cachesuche</a> sind per Klick auf die Spaltenüberschriften sortierbar.</li>
 		<li>Bei der Suchsortierung nach Versteckdatum wird dieses auch in den Ergebnissen angezeigt.</li>
-		<li>In der Loghistorie für die eigenen Caches erscheint eine Statistik nach Logtyp.</li>
-		<li>Die <a href="newlogs.php">Liste der neuen Logs</a> ist nun nach verschiedenen Kriterien filter- bzw. sortierbar.</li>
-		<li>Anzeige von OConly-Markierungen (<img src="http://www.opencaching.de/resource2/ocstyle/images/misc/15x15-oc.png">) in der Liste der neuen Logs.</li>
-		<li>Es können nun auch erweiterte Unicode-Zeichen in Cachebeschreibungen, Logs, Profiltexten und Cachelistenbeschreibungen verwendet werden, zum Beispiel die Smileys (&rarr; <a href="http://forum.opencaching.de/index.php?topic=4342.0">weitere Informationen</a>).</li>
+		<li>In der <a href="ownerlogs.php">Loghistorie für die eigenen Caches</a> erscheint eine Statistik nach Logtyp.</li>
+		<li>Alte Nachlogs können in der <a href="newlogs.php">Liste der neuen Logs</a> ausgeblendet werden; Liste nun wahlweise sortierbar nach Logdatum oder Einstelldatum.</li>
+		<li>Anzeige von OConly-Markierungen (<img src="resource2/ocstyle/images/misc/15x15-oc.png">) in der Liste der neuen und der eigenen Logs.</li>
+		<li>Es können nun auch erweiterte Unicode-Zeichen in Cachebeschreibungen, Logs, Profiltexten und Cachelistenbeschreibungen verwendet werden, zum Beispiel Smileys (&rarr; <a href="http://forum.opencaching.de/index.php?topic=4342.0">weitere Informationen</a>).</li>
 		<li>OKAPI: Abfrage der eigenen Liste der ignorierten Caches</li>
-		<li>Start des HTTPS-Betriebs &rarr; <a href="https://www.opencaching.de">https://www.opencaching.de</a>; noch nicht stabil verfügbar für die OKAPI (&rarr; <a href="https://github.com/opencaching/okapi/issues/343">weitere Informationen</a>)</li>
 	</ul>
 
 	<p>Geändert / verbessert:</p>
 	<ul>
-		<li>Die Liste der neuen Logs zeigt nun das Logdatum an statt des Datums, zu dem das Log eingestellt wurde.</li>
-		<li>Bei der Wahl des Statistikbildes wird zwischen aktuellen und sonstigen OC-Logs unterschieden.</li>
-		<li>Die Links aus der Cachebeschreibung zu navicache.com wurden entfernt; es können keine Navicache-Wegpunkte mehr eingetragen werden.</li>
+		<li>Die Liste der neuen Logs zeigt nun das Logdatum an statt des Datums, an dem das Log eingetragen wurde.</li>
+		<li>Die Links zu navicache.com wurden aus der Cachebeschreibung entfernt; es können keine Navicache-Wegpunkte mehr eingetragen werden.</li>
 		<li>Nach dem Bearbeiten von Bildern in einem Cachelisting geht es zurück zur Bearbeitungsseite statt zur Listinganzeige.</li>
-		<li>Deaktivierte Listings werden nun bereits nach 6 statt 12 Monaten automatisch archiviert, falls sie vom OC-Team deaktiviert wurden, oder falls der Cachebesitzer seit der Deaktivierung nicht mehr eingeloggt war. Ausgenommen davon sind Listings mit dem Attribut „Nur zu bestimmten Jahreszeiten suchbar“ und Listings mit einem neuen Log seit der Deaktivierung; hier bleibt es bei der 12-Monatsfrist. Eine Änderung des Listings durch den Besitzer setzt den „Countdown“ wieder zurück. Der Besitzer kann die Archivierung jederzeit rückgängig machen.</li>
+		<li>Bei der Wahl des Statistikbildes wird zwischen aktuellen und sonstigen OC-Logos unterschieden.</li>
+		<li>Deaktivierte Listings („momentan nicht verfügbar“) werden nun bereits nach 6 statt 12 Monaten automatisch archiviert, falls sie vom OC-Team deaktiviert wurden, oder falls der Cachebesitzer seit der Deaktivierung nicht mehr eingeloggt war. Ausgenommen davon sind Listings mit dem Attribut „Nur zu bestimmten Jahreszeiten suchbar“ und Listings mit Logs nach der Deaktivierung; hier bleibt es bei der 12-Monatsfrist. Eine Änderung des Listings durch den Besitzer setzt den „Countdown“ wieder zurück. Der Besitzer kann die Archivierung jederzeit rückgängig machen.</li>
 		<li>Das Einstellen von Bildduplikaten per Ocprop wird (weitgehend) verhindert.</li>
 		<li>OKAPI: Umkreissuche bei kleinem Radius (&lt;&lt; 100 km) stark beschleunigt</li>
 		<li>Portierung von MySQL 5.1 auf MariaDB 5.5</li>
@@ -56,12 +55,13 @@
 
 	<p>Korrigiert (Bugfixes):</p>
 	<ul>
-		<li>Anzeige des Lupensymbols, wenn man über die eigene Logbildgallerie fährt [Bug von Version 5]</li>
-		<li>Anzeige des korrekten Symbols für Cachelistings, die vom Opencaching-Team gesperrt/versteckt wurden  (<img src="http://www.opencaching.de/resource2/ocstyle/images/cachestatus/16x16-locked-invisible.png">) [Bug von Version 6]</li>
+		<li>Anzeige des Lupensymbols, wenn man über die eigene Logbildgalerie fährt [Bug von Version 5]</li>
+		<li>Anzeige des korrekten Symbols für Cachelistings, die vom Opencaching-Team gesperrt/versteckt wurden (<img src="resource2/ocstyle/images/cachestatus/16x16-locked-invisible.png">) [Bug von Version 6]</li>
 		<li>Behandlung von HTML-Code in Cache-Kurzbeschreibungen korrigiert</li>
-		<li>Ausblendung deaktivierter Caches bei der Umkreissuche nach „suchbaren“ Caches aus einem Cachelisting heraus [Bug von Version 9]</li>
+		<li>Bei der Umkreissuche nach „suchbaren“ Caches aus einem Cachelisting heraus werden deaktivierte Caches ausgeblendet. [Bug von Version 9]</li>
 		<li>englische Datumsdarstellung in der Liste der neuen Caches korrigiert</li>
 		<li>Zurücksetzen der Cachetypen <i>Drive-In</i> und <i>Mathe/Physik</i> sowie der Größen <i>nano</i> und <i>extrem groß</i> durch Ocprop auf GC-Werte wird verhindert. [Bug von Version 6]</li>
+		<li>Abschließende Korrekturen für den Start des HTTPS-Betriebs &rarr; <a href="https://www.opencaching.de">https://www.opencaching.de</a>; noch nicht stabil verfügbar für die OKAPI (&rarr; <a href="https://github.com/opencaching/okapi/issues/343">weitere Informationen</a>)</li>
 		<li>OKAPI: Fehlermeldung beim Abruf gesperrter Caches korrigiert; weitere kleine Korrekturen</li>
 	</ul>
 	<br />

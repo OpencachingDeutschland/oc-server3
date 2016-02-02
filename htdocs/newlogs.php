@@ -43,6 +43,7 @@
 		$caches_logged = array();
 		$orderByDate = '`cache_logs`.`date` DESC, ';
 		if ($show_own_logs) $urlparams = '&ownlogs=1';
+		$logselection = 3;
 	}
 	elseif (isset($userid))
 	{
@@ -56,6 +57,7 @@
 		$paging = true;
 		$newLogsPerCountry = false;
 		$orderByDate = '`cache_logs`.`date` DESC, ';
+		$logselection = 3;
 	}
 	elseif (@$newlogs_rest)
 	{

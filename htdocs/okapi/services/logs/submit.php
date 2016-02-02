@@ -10,9 +10,7 @@ use okapi\ParamMissing;
 use okapi\InvalidParam;
 use okapi\OkapiInternalRequest;
 use okapi\OkapiServiceRunner;
-use okapi\OkapiAccessToken;
 use okapi\Settings;
-use okapi\services\caches\search\SearchAssistant;
 use okapi\BadRequest;
 
 
@@ -40,17 +38,20 @@ class WebService
     private static function _call(OkapiRequest $request)
     {
         # Developers! Please notice the fundamental difference between throwing
-        # CannotPublishException and standard BadRequest/InvalidParam exceptions!
-        # Notice, that this is "_call" method, not the usual "call" (see below
-        # for "call").
+        # CannotPublishException and the "standard" BadRequest/InvalidParam
+        # exceptions. You're reading the "_call" method now (see below for
+        # "call").
 
         $cache_code = $request->get_parameter('cache_code');
         if (!$cache_code) throw new ParamMissing('cache_code');
 
         $logtype = $request->get_parameter('logtype');
         if (!$logtype) throw new ParamMissing('logtype');
-        if (!in_array($logtype, array('Found it', "Didn't find it", 'Comment', 'Will attend', 'Attended')))
+        if (!in_array($logtype, array(
+            'Found it', "Didn't find it", 'Comment', 'Will attend', 'Attended'
+        ))) {
             throw new InvalidParam('logtype', "'$logtype' in not a valid logtype code.");
+        }
 
         $comment = $request->get_parameter('comment');
         if (!$comment) $comment = "";
@@ -64,33 +65,52 @@ class WebService
         if ($tmp)
         {
             $when = strtotime($tmp);
-            if ($when < 1)
-                throw new InvalidParam('when', "'$tmp' is not in a valid format or is not a valid date.");
-            if ($when > time() + 5*60)
-                throw new CannotPublishException(_("You are trying to publish a log entry with a date in future. ".
-                    "Cache log entries are allowed to be published in the past, but NOT in the future."));
+            if ($when < 1) {
+                throw new InvalidParam(
+                    'when', "'$tmp' is not in a valid format or is not a valid date."
+                );
+            }
+            if ($when > time() + 5*60) {
+                throw new CannotPublishException(_(
+                    "You are trying to publish a log entry with a date in ".
+                    "future. Cache log entries are allowed to be published in ".
+                    "the past, but NOT in the future."
+                ));
+            }
         }
-        else
+        else {
             $when = time();
+        }
 
         $on_duplicate = $request->get_parameter('on_duplicate');
-        if (!$on_duplicate) $on_duplicate = "silent_success";
-        if (!in_array($on_duplicate, array('silent_success', 'user_error', 'continue')))
+        if (!$on_duplicate) { $on_duplicate = "silent_success"; }
+        if (!in_array($on_duplicate, array(
+            'silent_success', 'user_error', 'continue'
+        ))) {
             throw new InvalidParam('on_duplicate', "Unknown option: '$on_duplicate'.");
+        }
 
         $rating = $request->get_parameter('rating');
-        if ($rating !== null && (!in_array($rating, array(1,2,3,4,5))))
-            throw new InvalidParam('rating', "If present, it must be an integer in the 1..5 scale.");
-        if ($rating && $logtype != 'Found it' && $logtype != 'Attended')
-            throw new BadRequest("Rating is allowed only for 'Found it' and 'Attended' logtypes.");
+        if ($rating !== null && (!in_array($rating, array(1,2,3,4,5)))) {
+            throw new InvalidParam(
+                'rating', "If present, it must be an integer in the 1..5 scale."
+            );
+        }
+        if ($rating && $logtype != 'Found it' && $logtype != 'Attended') {
+            throw new BadRequest(
+                "Rating is allowed only for 'Found it' and 'Attended' logtypes."
+            );
+        }
         if ($rating !== null && (Settings::get('OC_BRANCH') == 'oc.de'))
         {
             # We will remove the rating request and change the success message
             # (which will be returned IF the rest of the query will meet all the
             # requirements).
 
-            self::$success_message .= " ".sprintf(_("However, your cache rating was ignored, because %s does not have a rating system."),
-                Okapi::get_normalized_site_name());
+            self::$success_message .= " ".sprintf(_(
+                "However, your cache rating was ignored, because %s does not ".
+                "have a rating system."
+            ), Okapi::get_normalized_site_name());
             $rating = null;
         }
 
@@ -101,58 +121,92 @@ class WebService
         $recommend = ($recommend == 'true');
         if ($recommend && $logtype != 'Found it')
         {
-            if ($logtype != 'Attended')
-                throw new BadRequest("Recommending is allowed only for 'Found it' and 'Attended' logs.");
-            else if (Settings::get('OC_BRANCH') == 'oc.pl')
-            {
+            if ($logtype != 'Attended') {
+                throw new BadRequest(
+                    "Recommending is allowed only for 'Found it' and 'Attended' logs."
+                );
+            }
+            else if (Settings::get('OC_BRANCH') == 'oc.pl') {
+
                 # We will remove the recommendation request and change the success message
                 # (which will be returned IF the rest of the query will meet all the
                 # requirements).
-                self::$success_message .= " ".sprintf(_("However, your cache recommendation was ignored, because %s does not allow recommending event caches."),
-                    Okapi::get_normalized_site_name());
+
+                self::$success_message .= " ".sprintf(_(
+                    "However, your cache recommendation was ignored, because ".
+                    "%s does not allow recommending event caches."
+                ), Okapi::get_normalized_site_name());
                 $recommend = null;
             }
         }
 
         $needs_maintenance = $request->get_parameter('needs_maintenance');
-        if (!$needs_maintenance) $needs_maintenance = 'false';
-        if (!in_array($needs_maintenance, array('true', 'false')))
-            throw new InvalidParam('needs_maintenance', "Unknown option: '$needs_maintenance'.");
+        if (!$needs_maintenance) { $needs_maintenance = 'false'; }
+        if (!in_array($needs_maintenance, array('true', 'false'))) {
+            throw new InvalidParam(
+                'needs_maintenance', "Unknown option: '$needs_maintenance'."
+            );
+        }
         $needs_maintenance = ($needs_maintenance == 'true');
-        if ($needs_maintenance && (!Settings::get('SUPPORTS_LOGTYPE_NEEDS_MAINTENANCE')))
-        {
+        if (
+            $needs_maintenance
+            && (!Settings::get('SUPPORTS_LOGTYPE_NEEDS_MAINTENANCE'))
+        ) {
             # If not supported, just ignore it.
-            self::$success_message .= " ".sprintf(_("However, your \"needs maintenance\" flag was ignored, because %s does not support this feature."),
-                Okapi::get_normalized_site_name());
+
+            self::$success_message .= " ".sprintf(_(
+                "However, your \"needs maintenance\" flag was ignored, because ".
+                "%s does not support this feature."
+            ), Okapi::get_normalized_site_name());
             $needs_maintenance = false;
         }
 
         # Check if cache exists and retrieve cache internal ID (this will throw
         # a proper exception on invalid cache_code). Also, get the user object.
 
-        $cache = OkapiServiceRunner::call('services/caches/geocache', new OkapiInternalRequest(
-            $request->consumer, null, array('cache_code' => $cache_code,
-            'fields' => 'internal_id|status|owner|type|req_passwd')));
-        $user = OkapiServiceRunner::call('services/users/by_internal_id', new OkapiInternalRequest(
-            $request->consumer, $request->token, array('internal_id' => $request->token->user_id,
-            'fields' => 'is_admin|uuid|internal_id|caches_found|rcmds_given')));
+        $cache = OkapiServiceRunner::call(
+            'services/caches/geocache',
+            new OkapiInternalRequest($request->consumer, null, array(
+                'cache_code' => $cache_code,
+                'fields' => 'internal_id|status|owner|type|req_passwd'
+            ))
+        );
+        $user = OkapiServiceRunner::call(
+            'services/users/by_internal_id',
+            new OkapiInternalRequest($request->consumer, $request->token, array(
+                'internal_id' => $request->token->user_id,
+                'fields' => 'is_admin|uuid|internal_id|caches_found|rcmds_given'
+            ))
+        );
 
         # Various integrity checks.
 
         if ($cache['type'] == 'Event')
         {
-            if (!in_array($logtype, array('Will attend', 'Attended', 'Comment')))
-                throw new CannotPublishException(_('This cache is an Event cache. You cannot "Find" it (but you can attend it, or comment on it)!'));
+            if (!in_array($logtype, array('Will attend', 'Attended', 'Comment'))) {
+                throw new CannotPublishException(_(
+                    'This cache is an Event cache. You cannot "Find" it (but '.
+                    'you can attend it, or comment on it)!'
+                ));
+            }
         }
         else  # type != event
         {
-            if (in_array($logtype, array('Will attend', 'Attended')))
-                throw new CannotPublishException(_('This cache is NOT an Event cache. You cannot "Attend" it (but you can find it, or comment on it)!'));
-            else if (!in_array($logtype, array('Found it', "Didn't find it", 'Comment')))
+            if (in_array($logtype, array('Will attend', 'Attended'))) {
+                throw new CannotPublishException(_(
+                    'This cache is NOT an Event cache. You cannot "Attend" it '.
+                    '(but you can find it, or comment on it)!'
+                ));
+            }
+            else if (!in_array($logtype, array('Found it', "Didn't find it", 'Comment'))) {
                 throw new Exception("Unknown log entry - should be documented here.");
+            }
         }
-        if ($logtype == 'Comment' && strlen(trim($comment)) == 0)
-            throw new CannotPublishException(_("Your have to supply some text for your comment."));
+        if ($logtype == 'Comment' && strlen(trim($comment)) == 0) {
+            throw new CannotPublishException(_(
+                "Your have to supply some text for your comment."
+            ));
+        }
 
         # Password check.
 
@@ -164,10 +218,14 @@ class WebService
                 where cache_id = '".mysql_real_escape_string($cache['internal_id'])."'
             ");
             $supplied_password = $request->get_parameter('password');
-            if (!$supplied_password)
-                throw new CannotPublishException(_("This cache requires a password. You didn't provide one!"));
-            if (strtolower($supplied_password) != strtolower($valid_password))
+            if (!$supplied_password) {
+                throw new CannotPublishException(_(
+                    "This cache requires a password. You didn't provide one!"
+                ));
+            }
+            if (strtolower($supplied_password) != strtolower($valid_password)) {
                 throw new CannotPublishException(_("Invalid password!"));
+            }
         }
 
         # Prepare our comment to be inserted into the database. This may require
@@ -261,6 +319,23 @@ class WebService
         }
         unset($comment);
 
+        # Prevent bug #367. Start the transaction and lock all the rows of this
+        # (user, cache) pair. In theory, we want to lock even smaller number of
+        # rows here (user, cache, type=1), but this wouldn't work, because there's
+        # no index for this.
+        #
+        # http://stackoverflow.com/questions/17068686/
+
+        Db::execute("start transaction");
+        Db::select_column("
+            select 1
+            from cache_logs
+            where
+                user_id = '".mysql_real_escape_string($request->token->user_id)."'
+                and cache_id = '".mysql_real_escape_string($cache['internal_id'])."'
+            for update
+        ");
+
         # Duplicate detection.
 
         if ($on_duplicate != 'continue')
@@ -293,7 +368,10 @@ class WebService
                 }
                 elseif ($on_duplicate == 'user_error')
                 {
-                    throw new CannotPublishException(_("You have already submitted a log entry with exactly the same contents."));
+                    throw new CannotPublishException(_(
+                        "You have already submitted a log entry with exactly ".
+                        "the same contents."
+                    ));
                 }
             }
         }
@@ -303,9 +381,10 @@ class WebService
         # OCPL forbids logging 'Found it' or "Didn't find" for an already found cache,
         # while OCDE allows all kinds of duplicate logs.
 
-        if (Settings::get('OC_BRANCH') == 'oc.pl'
-            && (($logtype == 'Found it') || ($logtype == "Didn't find it")))
-        {
+        if (
+            Settings::get('OC_BRANCH') == 'oc.pl'
+            && (($logtype == 'Found it') || ($logtype == "Didn't find it"))
+        ) {
             $has_already_found_it = Db::select_value("
                 select 1
                 from cache_logs
@@ -315,10 +394,18 @@ class WebService
                     and type = '".mysql_real_escape_string(Okapi::logtypename2id("Found it"))."'
                     and ".((Settings::get('OC_BRANCH') == 'oc.pl') ? "deleted = 0" : "true")."
             ");
-            if ($has_already_found_it)
-                throw new CannotPublishException(_("You have already submitted a \"Found it\" log entry once. Now you may submit \"Comments\" only!"));
-            if ($user['uuid'] == $cache['owner']['uuid'])
-                throw new CannotPublishException(_("You are the owner of this cache. You may submit \"Comments\" only!"));
+            if ($has_already_found_it) {
+                throw new CannotPublishException(_(
+                    "You have already submitted a \"Found it\" log entry once. ".
+                    "Now you may submit \"Comments\" only!"
+                ));
+            }
+            if ($user['uuid'] == $cache['owner']['uuid']) {
+                throw new CannotPublishException(_(
+                    "You are the owner of this cache. You may submit ".
+                    "\"Comments\" only!"
+                ));
+            }
         }
 
         # Check if the user has already rated the cache. BTW: I don't get this one.
@@ -335,8 +422,12 @@ class WebService
                     user_id = '".mysql_real_escape_string($user['internal_id'])."'
                     and cache_id = '".mysql_real_escape_string($cache['internal_id'])."'
             ");
-            if ($has_already_rated)
-                throw new CannotPublishException(_("You have already rated this cache once. Your rating cannot be changed."));
+            if ($has_already_rated) {
+                throw new CannotPublishException(_(
+                    "You have already rated this cache once. Your rating ".
+                    "cannot be changed."
+                ));
+            }
         }
 
         # If user wants to recommend...
@@ -352,32 +443,43 @@ class WebService
                     user_id = '".mysql_real_escape_string($user['internal_id'])."'
                     and cache_id = '".mysql_real_escape_string($cache['internal_id'])."'
             ");
-            if ($already_recommended)
-                throw new CannotPublishException(_("You have already recommended this cache once."));
+            if ($already_recommended) {
+                throw new CannotPublishException(_(
+                    "You have already recommended this cache once."
+                ));
+            }
 
             # Check the number of recommendations.
 
-            $founds = $user['caches_found'] + 1;  // +1, because he'll find THIS ONE in a moment, right?
-                # Note: caches_found includes event attendance on both, OCDE and OCPL.
-                # Though OCPL does not allow recommending events, for each 10 event
-                # attendances the user may recommend a non-event cache.
+            $founds = $user['caches_found'] + 1;  // +1, because he'll find THIS ONE in a moment
+
+            # Note: caches_found includes the number of attended events (both on
+            # OCDE and OCPL). OCPL does not allow recommending events, but the
+            # number of attended events influences $rcmds_left the same way a
+            # normal "Fount it" log does.
+
             $rcmds_left = floor($founds / 10.0) - $user['rcmds_given'];
-            if ($rcmds_left <= 0)
-                throw new CannotPublishException(_("You don't have any recommendations to give. Find more caches first!"));
+            if ($rcmds_left <= 0) {
+                throw new CannotPublishException(_(
+                    "You don't have any recommendations to give. Find more ".
+                    "caches first!"
+                ));
+            }
         }
 
-        # If user checked the "needs_maintenance" flag, we will shuffle things a little...
+        # If user checked the "needs_maintenance" flag, we will shuffle things
+        # a little...
 
         if ($needs_maintenance)
         {
-            # If we're here, then we also know that the "Needs maintenance" log type is supported
-            # by this OC site. However, it's a separate log type, so we might have to submit
-            # two log types together:
+            # If we're here, then we also know that the "Needs maintenance" log
+            # type is supported by this OC site. However, it's a separate log
+            # type, so we might have to submit two log types together:
 
             if ($logtype == 'Comment')
             {
-                # If user submits a "Comment", we'll just change its type to "Needs maintenance".
-                # Only one log entry will be issued.
+                # If user submits a "Comment", we'll just change its type to
+                # "Needs maintenance". Only one log entry will be issued.
 
                 $logtype = 'Needs maintenance';
                 $second_logtype = null;
@@ -385,8 +487,9 @@ class WebService
             }
             elseif ($logtype == 'Found it')
             {
-                # If "Found it", then we'll issue two log entries: one "Found it" with the
-                # original comment, and second one "Needs maintenance" with empty comment.
+                # If "Found it", then we'll issue two log entries: one "Found
+                # it" with the original comment, and second one "Needs
+                # maintenance" with empty comment.
 
                 $second_logtype = 'Needs maintenance';
                 $second_formatted_comment = "";
@@ -405,16 +508,21 @@ class WebService
             }
             else if ($logtype == 'Will attend' || $logtype == 'Attended')
             {
-                # OC branches which know maintenance logs do not allow them on event caches.
-                throw new CannotPublishException(_("Event caches cannot \"need maintenance\"."));
+                # OC branches which allow maintenance logs, still don't allow them on
+                # event caches.
+
+                throw new CannotPublishException(_(
+                    "Event caches cannot \"need maintenance\"."
+                ));
             }
-            else
+            else {
                 throw new Exception();
+            }
         }
         else
         {
-            # User didn't check the "Needs maintenance" flag OR "Needs maintenance" log type
-            # isn't supported by this server.
+            # User didn't check the "Needs maintenance" flag OR "Needs maintenance"
+            # log type isn't supported by this server.
 
             $second_logtype = null;
             $second_formatted_comment = null;
@@ -424,17 +532,21 @@ class WebService
         # cache stats and user stats.
 
         $log_uuid = self::insert_log_row(
-            $request->consumer->key, $cache['internal_id'], $user['internal_id'], $logtype,
-            $when, $formatted_comment, $value_for_text_html_field);
+            $request->consumer->key, $cache['internal_id'], $user['internal_id'],
+            $logtype, $when, $formatted_comment, $value_for_text_html_field
+        );
         self::increment_cache_stats($cache['internal_id'], $when, $logtype);
         self::increment_user_stats($user['internal_id'], $logtype);
         if ($second_logtype != null)
         {
-            # Reminder: This will never be called while SUPPORTS_LOGTYPE_NEEDS_MAINTENANCE is off.
+            # Reminder: This will never be called while SUPPORTS_LOGTYPE_NEEDS_MAINTENANCE
+            # is off.
 
             self::insert_log_row(
-                $request->consumer->key, $cache['internal_id'], $user['internal_id'], $second_logtype,
-                $when + 1, $second_formatted_comment, $value_for_text_html_field);
+                $request->consumer->key, $cache['internal_id'], $user['internal_id'],
+                $second_logtype, $when + 1, $second_formatted_comment,
+                $value_for_text_html_field
+            );
             self::increment_cache_stats($cache['internal_id'], $when + 1, $second_logtype);
             self::increment_user_stats($user['internal_id'], $second_logtype);
         }
@@ -468,7 +580,9 @@ class WebService
             Db::execute("
                 update caches
                 set
-                    score = (score*votes + '".mysql_real_escape_string($db_score)."')/(votes + 1),
+                    score = (
+                        score*votes + '".mysql_real_escape_string($db_score)."'
+                    ) / (votes + 1),
                     votes = votes + 1
                 where cache_id = '".mysql_real_escape_string($cache['internal_id'])."'
             ");
@@ -509,12 +623,17 @@ class WebService
             }
         }
 
+        # Finalize the transaction.
+
+        Db::execute("commit");
+
         # We need to delete the copy of stats-picture for this user. Otherwise,
         # the legacy OC code won't detect that the picture needs to be refreshed.
 
         $filepath = Okapi::get_var_dir().'/images/statpics/statpic'.$user['internal_id'].'.jpg';
-        if (file_exists($filepath))
+        if (file_exists($filepath)) {
             unlink($filepath);
+        }
 
         # Success. Return the uuid.
 
@@ -575,7 +694,10 @@ class WebService
                     update caches
                     set
                         founds = founds + 1,
-                        last_found = greatest(ifnull(last_found, 0), from_unixtime('".mysql_real_escape_string($when)."'))
+                        last_found = greatest(
+                            ifnull(last_found, 0),
+                            from_unixtime('".mysql_real_escape_string($when)."')
+                        )
                     where cache_id = '".mysql_real_escape_string($cache_internal_id)."'
                 ");
             }
@@ -637,8 +759,10 @@ class WebService
     {
         $log_uuid = Okapi::create_uuid();
         Db::execute("
-            insert into cache_logs (uuid, cache_id, user_id, type, date, text, text_html, last_modified, date_created, node)
-            values (
+            insert into cache_logs (
+                uuid, cache_id, user_id, type, date, text, text_html,
+                last_modified, date_created, node
+            ) values (
                 '".mysql_real_escape_string($log_uuid)."',
                 '".mysql_real_escape_string($cache_internal_id)."',
                 '".mysql_real_escape_string($user_internal_id)."',

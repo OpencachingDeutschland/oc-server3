@@ -10,7 +10,7 @@ use okapi\Locales;
 #
 # HOW TO MODIFY OKAPI SETTINGS: If you want a setting X to have a value of Y,
 # create/edit the "<rootpath>/okapi_settings.php" file. See example here:
-# http://code.google.com/p/opencaching-pl/source/browse/trunk/okapi_settings.php
+# https://github.com/opencaching/opencaching-pl/blob/master/okapi_settings.php
 #
 # This file provides documentation and DEFAULT values for those settings.
 #

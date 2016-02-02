@@ -15,5 +15,5 @@ CREATE TABLE `cache_logs_modified` (
   `text` mediumtext NOT NULL,
   `text_html` tinyint(1) NOT NULL,
   `modify_date` datetime default NULL,
-  KEY `id` (`id`, `modify_date`)
+  UNIQUE `id` (`id`, `modify_date`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ;

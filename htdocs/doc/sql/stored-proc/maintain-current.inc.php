@@ -1124,7 +1124,7 @@
 								 * optimize storage space by ignoring quick-corrections of logs
 								 */
 								IF DATEDIFF(NOW(), OLD.`date_created`) > 1 THEN
-									INSERT INTO `cache_logs_modified`
+									INSERT IGNORE INTO `cache_logs_modified`
 										(`id`, `uuid`, `node`, `date_created`, `last_modified`, `log_last_modified`,
 										 `cache_id`, `user_id`, `type`, `oc_team_comment`, `date`,
 										 `text`, `text_html`, `modify_date`)

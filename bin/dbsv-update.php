@@ -717,6 +717,16 @@
 		}
 	}
 
+	function dbv_145()   // optimize log change recording
+	{
+		sql("ALTER TABLE `cache_logs_modified` DROP INDEX `id`,
+		     ADD UNIQUE INDEX `id` (`id`, `modify_date`)");
+		sql("ALTER TABLE `cache_logs_modified` MODIFY `modify_date` date default NULL");
+			// This may produce an error for duplicate dates.
+			// You may just delete the old `cache_logs_modified` contents
+			// (the feature was started just a few days befor this change).
+	}
+
 
 	// When adding new mutations, take care that they behave well if run multiple
 	// times. This improves robustness of database versioning.

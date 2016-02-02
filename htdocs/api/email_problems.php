@@ -8,6 +8,8 @@
 	$opt['rootpath'] = '../';
 	require($opt['rootpath'] . 'lib2/web.inc.php');
 
+	header('Content-type: text/plain; charset=utf-8');
+
 	if ($opt['logic']['api']['email_problems']['key'] &&
 	    isset($_REQUEST['key']) &&
 	    $opt['logic']['api']['email_problems']['key'] == $_REQUEST['key'])

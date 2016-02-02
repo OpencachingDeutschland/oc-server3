@@ -10,7 +10,7 @@
 	$opt['rootpath'] = '../';
 	require($opt['rootpath'] . 'lib2/web.inc.php');
 
-	header('Content-type: text/html; charset=utf-8');
+	header('Content-type: text/plain; charset=utf-8');
 
 	/*
 	 * caches.wp_gc_maintained is intended for map and search filtering and

@@ -51,6 +51,9 @@
 	<form action="query.php" method="post">
 		<input type="hidden" name="action" value="save" />
 		<input type="hidden" name="queryid" value="{$queryid}" />
+		<input type="hidden" name="sortby" value="{$sortby}" />
+		<input type="hidden" name="sortorder" value="{$sortorder}" />
+		<input type="hidden" name="creationdate" value="{$creationdate}" />
 		<input type="hidden" name="submit" value="1" />
 
 		<div class="content2-pagetitle">
@@ -87,6 +90,9 @@
 	<form action="query.php" method="post">
 		<input type="hidden" name="action" value="saveas" />
 		<input type="hidden" name="queryid" value="{$queryid}" />
+		<input type="hidden" name="sortby" value="{$sortby}" />
+		<input type="hidden" name="sortorder" value="{$sortorder}" />
+		<input type="hidden" name="creationdate" value="{$creationdate}" />
 		<input type="hidden" name="submit" value="1" />
 		<table class="table">
 			<tr>

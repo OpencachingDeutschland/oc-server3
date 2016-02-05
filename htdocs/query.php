@@ -18,19 +18,25 @@
 	if ($action == 'save')
 	{
 		$queryid = isset($_REQUEST['queryid']) ? $_REQUEST['queryid']+0 : 0;
+		$sortby = isset($_REQUEST['sortby']) ? $_REQUEST['sortby'] : false;
+		$sortorder = isset($_REQUEST['sortorder']) ? $_REQUEST['sortorder'] : false;
+		$creationdate = isset($_REQUEST['creationdate']) ? $_REQUEST['creationdate'] : false;
 		$queryname = isset($_REQUEST['queryname']) ? $_REQUEST['queryname'] : '';
 		$submit = isset($_REQUEST['submit']) ? ($_REQUEST['submit'] == '1') : false;
 
-		savequery($queryid, $queryname, false, $submit, 0);
+		savequery($queryid, $queryname, false, $submit, 0, $sortby, $sortorder, $creationdate);
 	}
 	else if ($action == 'saveas')
 	{
 		$queryid = isset($_REQUEST['queryid']) ? $_REQUEST['queryid']+0 : 0;
+		$sortby = isset($_REQUEST['sortby']) ? $_REQUEST['sortby'] : false;
+		$sortorder = isset($_REQUEST['sortorder']) ? $_REQUEST['sortorder'] : false;
+		$creationdate = isset($_REQUEST['creationdate']) ? $_REQUEST['creationdate'] : false;
 		$queryname = isset($_REQUEST['queryname']) ? $_REQUEST['queryname'] : '';
 		$submit = isset($_REQUEST['submit']) ? ($_REQUEST['submit'] == '1') : false;
 		$oldqueryid = isset($_REQUEST['oldqueryid']) ? $_REQUEST['oldqueryid']+0 : 0;
 
-		savequery($queryid, $queryname, true, $submit, $oldqueryid);
+		savequery($queryid, $queryname, true, $submit, $oldqueryid, $sortby, $sortorder, $creationdate);
 	}
 	else if ($action == 'delete')
 	{
@@ -64,15 +70,25 @@ function viewqueries()
 	$tpl->display();
 }
 
-function savequery($queryid, $queryname, $saveas, $submit, $saveas_queryid)
+function savequery($queryid, $queryname, $saveas, $submit, $saveas_queryid, $sortby, $sortorder, $creationdate)
 {
 	global $login, $tpl;
 
 	if ($submit == true)
 	{
-		// check if query exists
-		if (sql_value("SELECT COUNT(*) FROM `queries` WHERE `id`='&1'", 0, $queryid) == 0)
-			$tpl->error(ERROR_UNKNOWN);
+		$options = sql_value("SELECT `options` FROM `queries` WHERE `id`='&1'", false, $queryid);
+		if (!$options)
+		{
+			$tpl->error(ERROR_UNKNOWN);   // query does not exist
+		}
+		else if ($sortby || $sortorder || $creationdate)
+		{
+			$oa = unserialize($options);
+			if ($sortby) $oa['sort'] = $sortby;
+			if ($sortorder) $oa['sortorder'] = $sortorder;
+			if ($creationdate) $oa['creationdate'] = $creationdate;
+			$options = serialize($oa);
+		}
 
 		if ($saveas == false)
 		{
@@ -92,20 +108,18 @@ function savequery($queryid, $queryname, $saveas, $submit, $saveas_queryid)
 			if ($bError == false)
 			{
 				// save
-				sql("UPDATE `queries` SET `user_id`='&1', `name`='&2' WHERE `id`='&3'", $login->userid, $queryname, $queryid);
+				sql("UPDATE `queries` SET `user_id`='&1', `name`='&2', `options`='&4' WHERE `id`='&3'", $login->userid, $queryname, $queryid, $options);
 				$tpl->redirect('query.php?action=view');
 			}
 		}
 		else
 		{
+			// save as
 			if (sql_value("SELECT COUNT(*) FROM `queries` WHERE `id`='&1' AND `user_id`='&2'", 0, $saveas_queryid, $login->userid) == 0)
 				$tpl->assign('errorMustSelectQuery',true);
 			else
 			{
-				// save as
-				$oOptions = sql_value("SELECT `options` FROM `queries` WHERE `id`='&1'", array(), $queryid);
-				sql("UPDATE `queries` SET `options`='&1' WHERE `id`='&2'", $oOptions, $saveas_queryid);
-
+				sql("UPDATE `queries` SET `options`='&1' WHERE `id`='&2'", $options, $saveas_queryid);
 				$tpl->redirect('query.php?action=view');
 			}
 		}
@@ -117,6 +131,9 @@ function savequery($queryid, $queryname, $saveas, $submit, $saveas_queryid)
 
 	$tpl->assign('queryid', $queryid);
 	$tpl->assign('queryname', $queryname);
+	$tpl->assign('sortby', $sortby);
+	$tpl->assign('sortorder', $sortorder);
+	$tpl->assign('creationdate', $creationdate);
 
 	$tpl->assign('action', 'save');
 	$tpl->display();

@@ -144,29 +144,11 @@ function search_output()
 	$tpl->assign('sortby', $options['sort']);
 	if (isset($options['sortorder'])) {
 		$tpl->assign('sortorder', $options['sortorder']);
-	}else{
+	} else {
 		$options['sortorder']="";
 	}
-
-	if (($options['sort']=='bydistance' && $options['sortorder']=='desc') || (!isset($_REQUEST['queryid']) && $options['sort']!='bydistance') || (isset($_REQUEST['queryid']) && $options['sort']!='bydistance')) {
-		$tpl->assign('bydistance', true);
-	}
-	if (($options['sort']=='byname' && $options['sortorder']=='desc') || (!isset($_REQUEST['queryid']) && $options['sort']!='byname') || (isset($_REQUEST['queryid']) && $options['sort']!='byname')) {
-		$tpl->assign('byname', true);
-	}
-	if (($options['sort']=='bycreated' && $options['sortorder']=='asc') || (!isset($_REQUEST['queryid']) && $options['sort']!='bycreated') || (isset($_REQUEST['queryid']) && $options['sort']!='bycreated')) {
-		$tpl->assign('bycreated', true);
-	}
-	if (($options['sort']=='bymylastlog' && $options['sortorder']=='asc') || (!isset($_REQUEST['queryid']) && $options['sort']!='bymylastlog') || (isset($_REQUEST['queryid']) && $options['sort']!='bymylastlog')) {
-		$tpl->assign('bymylastlog', true);
-	}
-	if (($options['sort']=='bylastlog' && $options['sortorder']=='asc') || (!isset($_REQUEST['queryid']) && $options['sort']!='bylastlog') || (isset($_REQUEST['queryid']) && $options['sort']!='bylastlog')) {
-		$tpl->assign('bylastlog', true);
-	}
-	if (isset($options['bycreated']) || $options['sort']=='bycreated') {
-		$tpl->assign('sbycreated', true);
-	}
-
+	if ($options['sort']=='bycreated' || isset($options['creationdate']))
+		$tpl->assign('creationdate', true);
 
 	// cachelist data
 	if (isset($options['cachelist']))

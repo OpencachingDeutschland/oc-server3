@@ -64,8 +64,8 @@
 			</td>
 		{/if}
 		<td style="text-align:right; padding-bottom:2px"><p class="inheader">
-			<span style="white-space:nowrap">[<a href="query.php?action=save&queryid={$queryid}">{t}Save options{/t}</a>]</span>
-			{if !$disable_edit_options}&nbsp;<span style="white-space:nowrap">[<a href="search.php?queryid={$queryid}&showresult=0">{t}Edit options{/t}</a>]</span>{/if}</p>
+			<span style="white-space:nowrap">[<a href="query.php?action=save&queryid={$queryid}&sortby={$sortby}{if $sortorder}&sortorder={$sortorder}{/if}{if $creationdate}$&creationdate=1{/if}">{t}Save options{/t}</a>]</span>
+			{if !$disable_edit_options}&nbsp;<span style="white-space:nowrap">[<a href="search.php?queryid={$queryid}&showresult=0&sortby={$sortby}">{t}Edit options{/t}</a>]</span>{/if}</p>
 		</td>
 	</tr></table>
 </div>
@@ -114,74 +114,58 @@
 					<tr>
 					<th width="10">&nbsp;</th>
 					<th width="40">
-						{if $bydistance}
-							<a href="search.php?queryid={$queryid}&showresult=1&sortby=bydistance&sortorder=asc{if $startat}&startat={$startat}{/if}{if $sbycreated}&bycreated=true{/if}">
-						{else}
-							<a href="search.php?queryid={$queryid}&showresult=1&sortby=bydistance&sortorder=desc{if $startat}&startat={$startat}{/if}{if $sbycreated}&bycreated=true{/if}">
-						{/if}
+						{strip}
+						<a href="search.php?queryid={$queryid}&showresult=1&sortby=bydistance&sortorder={if $sortby!='bydistance' || $sortorder=='desc'}asc{else}desc{/if}{if $startat}&startat={$startat}{/if}{if $creationdate}&creationdate=1{/if}">
 						<nobr>
-						{$distanceunit|escape}
+						{$distanceunit|escape}&nbsp;
 						{if $sortby=='bydistance'}
 							{if $sortorder=='desc'}&#x25B2;{else}&#x25BC;{/if}
 						{/if}
-						</nobr></a>&nbsp;
+						</nobr></a>&nbsp;&nbsp;
+						{/strip}
 					</th>
 					<th width="40">{t}Type{/t}</th>
 					<th width="25">&nbsp;{t}D{/t}</th>
 					<th width="28">&nbsp;{t}T{/t}</th>
 					<th width="450" colspan="2">
-						{if $byname}
-							<a href="search.php?queryid={$queryid}&showresult=1&sortby=byname&sortorder=asc{if $startat}&startat={$startat}{/if}{if $sbycreated}&bycreated=true{/if}">
-						{else}
-							<a href="search.php?queryid={$queryid}&showresult=1&sortby=byname&sortorder=desc{if $startat}&startat={$startat}{/if}{if $sbycreated}&bycreated=true{/if}">
-						{/if}
+							<a href="search.php?queryid={$queryid}&showresult=1&sortby=byname&sortorder={if $sortby!='byname' || $sortorder=='desc'}asc{else}desc{/if}{if $startat}&startat={$startat}{/if}{if $creationdate}&creationdate=1{/if}">
 						{t}Name{/t}
 						{if $sortby=='byname'}
 							{if $sortorder=='desc'}&#x25B2;{else}&#x25BC;{/if}
 						{/if}</a>
 					</th>
 					<th width="90">
-						{if $sbycreated}
-							{if $bycreated}
-								<a href="search.php?queryid={$queryid}&showresult=1&sortby=bycreated&sortorder=desc{if $startat}&startat={$startat}{/if}{if $sbycreated}&bycreated=true{/if}">
-							{else}
-								<a href="search.php?queryid={$queryid}&showresult=1&sortby=bycreated&sortorder=asc{if $startat}&startat={$startat}{/if}{if $sbycreated}&bycreated=true{/if}">
-							{/if}
+						{if $creationdate}
+							{strip}
+							<a href="search.php?queryid={$queryid}&showresult=1&sortby=bycreated&sortorder={if $sortby != 'bycreated' || $sortorder=='asc'}desc{else}asc{/if}{if $startat}&startat={$startat}{/if}">
 							<nobr>
-							{t}Listed since{/t}
+							{t}Listed since{/t}&nbsp;
 							{if $sortby=='bycreated'}
 								{if $sortorder=='desc' || $sortorder==''}&#x25B2;{else}&#x25BC;{/if}
 							{/if}
 							</nobr></a>&nbsp;&nbsp;
+							{/strip}
 						{else}
 							&nbsp;
 						{/if}
 					</th>
 					<th width="90">
+						{strip}
 						{if $displayownlogs}
-							{if $bymylastlog}
-								<a href="search.php?queryid={$queryid}&showresult=1&sortby=bymylastlog&sortorder=desc{if $startat}&startat={$startat}{/if}{if $sbycreated}&bycreated=true{/if}">
-							{else}
-								<a href="search.php?queryid={$queryid}&showresult=1&sortby=bymylastlog&sortorder=asc{if $startat}&startat={$startat}{/if}{if $sbycreated}&bycreated=true{/if}">
-							{/if}
+							<a href="search.php?queryid={$queryid}&showresult=1&sortby=bymylastlog&sortorder={if ($sortby!='bymylastlog' && $sortby!='bylastlog') || $sortorder=='asc'}desc{else}asc{/if}{if $startat}&startat={$startat}{/if}{if $creationdate}&creationdate=1{/if}">
 							<nobr>
-							{t}Own logs{/t}
+							{t}Own logs{/t}&nbsp;
 							{if $sortby=='bymylastlog'}
 								{if $sortorder=='desc'||$sortorder==''}&#x25B2;{else}&#x25BC;{/if}
 							{/if}
 							</nobr></a>
 						{else}
-							{if $bylastlog}
-								<a href="search.php?queryid={$queryid}&showresult=1&sortby=bylastlog&sortorder=desc{if $startat}&startat={$startat}{/if}{if $sbycreated}&bycreated=true{/if}">
-								{else}<a href="search.php?queryid={$queryid}&showresult=1&sortby=bylastlog&sortorder=asc{if $startat}&startat={$startat}{/if}{if $sbycreated}&bycreated=true{/if}">
-							{/if}
+							<a href="search.php?queryid={$queryid}&showresult=1&sortby=bylastlog&sortorder={if $sortorder=='asc'}desc{else}asc{/if}{if $startat}&startat={$startat}{/if}{if $creationdate}&creationdate=1{/if}">
 							<nobr>
-							{t}Last logs{/t}
-							{if $sortby=='bylastlog'}
-								{if $sortorder=='desc'||$sortorder==''}&#x25B2;{else}&#x25BC;{/if}
-							{/if}
-							</nobr></a>
+							{t}Last logs{/t}&nbsp;
+							{if $sortby=='bylastlog'}{if $sortorder=='desc'||$sortorder==''}&#x25B2;{else}&#x25BC;{/if}{/if}</nobr></a>&nbsp;
 						{/if}
+						{/strip}&nbsp;
 					</th>
 					</tr>
 					<tr><td></td></tr>

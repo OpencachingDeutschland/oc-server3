@@ -187,17 +187,17 @@
 
 			// overwrite variable options for sort direction & sort type
 
-			if (isset($_REQUEST['sortby'])){
+			if (isset($_REQUEST['sortby'])) {
 				$options['sort'] = $_REQUEST['sortby'];
 			}
 
-			if (isset($_REQUEST['sortorder'])){
+			if (isset($_REQUEST['sortorder'])) {
 				$options['sortorder'] = $_REQUEST['sortorder'];
 			}
 
-			//check if user searched "bycreated" first --> display "bycreated"
-			if(isset($_REQUEST['bycreated'])){
-				$options['bycreated'] = $_REQUEST['bycreated'];
+			// display creation date?
+			if (isset($_REQUEST['creationdate'])) {
+				$options['creationdate'] = $_REQUEST['creationdate'];
 			}
 
 			// get findername from finderid
@@ -438,6 +438,7 @@
 		}
 
 		$options['sort'] = isset($_REQUEST['sort']) ? $_REQUEST['sort'] : ($homecoords ? 'bydistance' : 'byname');
+		$options['sortorder'] = isset($_REQUEST['sortorder']) ? $_REQUEST['sortorder'] : false;
 
 		if (isset($_REQUEST['orderRatingFirst']) && $_REQUEST['orderRatingFirst']==1)
 			$options['orderRatingFirst'] = true;
@@ -1476,7 +1477,8 @@
 			//    $sql
 			//    $sqlLimit
 			//    $options['sort']
-			//	  $options['sortorder']
+			//    $options['sortorder']
+			//    $options['creationdate']
 			//    $options['queryid']
 			//	  $options['query_name']
 			//    $enable_mapdisplay

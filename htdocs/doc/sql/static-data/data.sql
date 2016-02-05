@@ -564,6 +564,7 @@ INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('register', '
 INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('removelog_logowner', 'DE', 'Logeintrag löschen');
 INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('removelog_cacheowner', 'DE', 'Logeintrag löschen');
 INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('reportcache', 'DE', 'Cache melden');
+INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('report_reasons', 'DE', 'Cache melden#Wann melden?');
 INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('search', 'DE', 'Suchformular');
 INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('tops', 'DE', 'Empfehlungen');
 INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('tops', 'EN', 'Recommendations');
@@ -2815,6 +2816,9 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2529', 'recomme
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2530', 'Current new entries', '2015-01-20 20:37:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2531', 'All new entries', '2015-01-20 20:37:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2532', '... by log date', '2015-01-20 20:37:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2533', 'Good and inappropriate reasons to report a cache', '2015-01-20 20:37:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2534', '%1 reports are being processed, %2 reports are pending', '2015-01-20 20:37:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2535', 'estimated queuing time for new reports: about %1 to %2 days', '2015-01-20 20:37:00');
 
 -- Table sys_trans_ref
 SET NAMES 'utf8';
@@ -6209,10 +6213,10 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('762', 'DE', 'Es sind nur die Bildformate %1 erlaubt; für Fotos wird JPEG empfohlen.', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('763', 'DE', 'Außerdem ist eine maximale Dateigröße von %1 KB zu beachten. Als Bildgröße sind 640 Pixel Breite und 480 Pixel Höhe empfohlen.', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('764', 'DE', 'Meldebericht für %1 eingetragen', '2010-08-28 11:48:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('765', 'DE', 'Ursache:', '2010-08-28 11:48:06');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('765', 'DE', 'Grund:', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('766', 'DE', 'Kommentar:', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('767', 'DE', '%1 melden', '2010-08-28 11:48:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('768', 'DE', 'Es muss eine Ursache angegeben werden!', '2010-08-28 11:48:06');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('768', 'DE', 'Es muss ein Grund angegeben werden!', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('769', 'DE', 'Kommentar: (muss eingetragen werden)', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('770', 'DE', 'Es muss ein Kommentar eingetragen werden, um einen Geocache zu melden.', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('771', 'DE', 'Ein Fehler ist aufgetreten und der Meldebericht konnte nicht erstellt werden.', '2010-08-28 11:48:06');
@@ -7360,6 +7364,9 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2530', 'DE', 'Aktuelle Neueinträge', '2015-01-20 20:37:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2531', 'DE', 'Alle Neueinträge', '2015-01-20 20:37:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2532', 'DE', '... nach Logdatum', '2015-01-20 20:37:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2533', 'DE', 'Gute und unpassende Gründe für eine Cachemeldung', '2015-01-20 20:37:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2534', 'DE', '%1 Meldungen sind in Bearbeitung, %2 Meldungen sind offen', '2015-01-20 20:37:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2535', 'DE', 'geschätzte Wartezeit für neue Meldungen: ca. %1&ndash;%2 Tage', '2015-01-20 20:37:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'EN', 'Reorder IDs', '2010-09-02 00:15:30');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'EN', 'The database could not be reconnected.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'EN', 'Testing – please do not login', '2010-08-28 11:48:07');

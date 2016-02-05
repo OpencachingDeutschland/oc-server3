@@ -47,9 +47,27 @@
 					in a way, that requires immediate action of an Opencaching administrator.{/t}
 				</td>
 			</tr>
+			{if $help_reportreasons}
+				<tr>
+					<td colspan="2" class="info">
+					<img src="resource2/{$opt.template.style}/images/viewcache/16x16-info.png" class="icon16" alt="Info" />
+					{$help_reportreasons}{t}Good and inappropriate reasons to report a cache{/t}</a>
+				</tr>
+			{/if}
+			<tr>
+				<td class="spacer" colspan="2"></td>
+			</tr>
+			<tr>
+				<td colspan="2" class="info">
+					{t 1=$processing_reports 2=$open_reports}%1 reports are being processed, %2 reports are pending{/t}{if $waitdays_min};
+						<br />
+						{t 1=$waitdays_min 2=$waitdays_max}estimated queuing time for new reports: about %1 to %2 days{/t}
+					{/if}
+				</td>
+			</tr>
 			<tr><td colspan="2">&nbsp;</td></tr>
 			<tr>
-				<td colspan="2">{t}Reason:{/t} 
+				<td colspan="2">{t}Reason:{/t}&nbsp;
 					<select name="reason">
 						<option value="0" {if $reason==0}selected="selected"{/if}>{t}-- Please select --{/t}</option>
 						{foreach from=$reasons item=reasonItem}
@@ -71,7 +89,7 @@
 			</tr>
 			<tr>
 				<td colspan="2">
-					<textarea class="logs" name="note" cols="68" rows="15">{$note|escape}</textarea>
+					<textarea class="reports" name="note" cols="68" rows="15">{$note|escape}</textarea>
 				</td>
 			</tr>
 			<tr><td class="spacer" colspan="2"></td></tr>

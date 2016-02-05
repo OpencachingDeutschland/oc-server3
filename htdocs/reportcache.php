@@ -74,9 +74,24 @@
 
 	$tpl->assign('reason', $reportreason);
 	$tpl->assign('note', $reportnote);
-
 	$tpl->assign('cacheid', $cacheid);
 	$tpl->assign('cachename', $cache->getName());
+	$tpl->assign('help_reportreasons', helppagelink('report_reasons'));
 
+	$open_reports = sql_value("SELECT COUNT(*) FROM `cache_reports` WHERE `status`=1", 0);
+	$processing_reports = sql_value("SELECT COUNT(*) FROM `cache_reports` WHERE `status`=2 AND DATEDIFF(NOW(),`lastmodified`) <= 180", 0);
+	$tpl->assign('open_reports', $open_reports);
+	$tpl->assign('processing_reports', $processing_reports);
+
+	if ($opt['logic']['cache_reports']['min_processperday'] > 0)
+	{
+		$waitdays_min = 1 + floor(($open_reports + $opt['logic']['cache_reports']['max_processperday'] - 1) / $opt['logic']['cache_reports']['max_processperday']);
+		$waitdays_max = 1 + $opt['logic']['cache_reports']['delaydays'] + floor(($open_reports + $opt['logic']['cache_reports']['min_processperday'] - 1) / $opt['logic']['cache_reports']['min_processperday']);
+		$tpl->assign('waitdays_min', $waitdays_min);
+		$tpl->assign('waitdays_max', $waitdays_max);
+	}
+	else
+		$tpl->assign('waitdays_min', false);
+	
 	$tpl->display();
 ?>

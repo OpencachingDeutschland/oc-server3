@@ -381,6 +381,12 @@
 	 */
 	$opt['logic']['api']['email_problems']['key'] = '';   // must be set to enable
 
+	/* cache report info settings
+	 */
+	$opt['logic']['cache_reports']['delaydays'] = 2;
+	$opt['logic']['cache_reports']['min_processperday'] = 5;   // set to 0 to disable
+	$opt['logic']['cache_reports']['max_processperday'] = 20;  // set to 0 to disable
+
 	/* cronjob
 	 */
 	$opt['cron']['username'] = 'apache';   // system username for cronjobs

@@ -660,6 +660,7 @@ textarea { font-family: Arial, sans-serif, Tahoma, Verdana; font-size: 8pt; }
 textarea.cachedesc { width:750px; height:500px; }  /* only cacheeditor */
 textarea.hint {	width:750px; height:100px; }  /* only cacheditor */
 textarea.logs {	width:640px; height:300px; }  /* only logeditor */
+textarea.reports {	width:640px; height:250px; }  /* only logeditor */
 textarea.listdesc2 { width:580px; height:120px; }  /* only list desc editor */
 textarea.listdesc3 { width:580px; height:220px; }  /* only list desc editor */
 textarea.userdesc { width:750px; height:400px; }  /* only user desc editor */

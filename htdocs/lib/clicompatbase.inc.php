@@ -525,6 +525,18 @@
 		return mysql_fetch_row($rs);
 	}
 
+	function sql_fetch_column($rs)
+	{
+		$col = array();
+		while ($r = sql_fetch_row($rs))
+			if (count($r) != 1)
+				return null;
+			else
+				$col[] = $r[0];
+		sql_free_result($rs);
+		return $col;
+	}
+
 	function sql_free_result($rs)
 	{
 		return mysql_free_result($rs);

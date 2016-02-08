@@ -2819,6 +2819,8 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2532', '... by 
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2533', 'Good and inappropriate reasons to report a cache', '2015-01-20 20:37:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2534', '%1 reports are being processed, %2 reports are pending', '2015-01-20 20:37:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2535', 'estimated queuing time for new reports: about %1 to %2 days', '2015-01-20 20:37:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2536', 'Cache list:', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2537', 'Cache lists:', '2015-06-17 10:09:14');
 
 -- Table sys_trans_ref
 SET NAMES 'utf8';
@@ -7367,6 +7369,8 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2533', 'DE', 'Gute und unpassende Gründe für eine Cachemeldung', '2015-01-20 20:37:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2534', 'DE', '%1 Meldungen sind in Bearbeitung, %2 Meldungen sind offen', '2015-01-20 20:37:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2535', 'DE', 'geschätzte Wartezeit für neue Meldungen: ca. %1&ndash;%2 Tage', '2015-01-20 20:37:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2536', 'DE', 'Cacheliste:', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2537', 'DE', 'Cachelisten:', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'EN', 'Reorder IDs', '2010-09-02 00:15:30');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'EN', 'The database could not be reconnected.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'EN', 'Testing – please do not login', '2010-08-28 11:48:07');
@@ -9204,6 +9208,8 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2530', 'EN', 'Current new entries', '2015-01-20 20:37:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2531', 'EN', 'All new entries', '2015-01-20 20:37:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2532', 'EN', '... by log date', '2015-01-20 20:37:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2536', 'EN', 'Cache list:', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2537', 'EN', 'Cache lists:', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'ES', 'La base de datos no se pudo conectar.', '2010-12-09 00:17:55');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'ES', 'En pruebas - por favor, no entre.', '2010-12-09 00:17:55');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('4', 'ES', 'Usuario', '2010-12-09 00:17:55');
@@ -12598,6 +12604,8 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2527', 'FR', 'non\&nbsp;trouvé', '2010-10-04 00:17:39');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2528', 'FR', 'participation', '2010-10-04 00:17:39');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2529', 'FR', 'recommandé', '2010-10-04 00:17:39');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2536', 'FR', 'Liste de cache :', '2015-08-25 01:29:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2537', 'FR', 'Listes de cache :', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'IT', 'Riordina gli ID', '2010-10-27 18:49:18');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'IT', 'Impossibile riconnettersi al database', '2010-08-28 20:28:01');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'IT', 'Test - per favore non connettersi', '2010-08-28 20:36:53');

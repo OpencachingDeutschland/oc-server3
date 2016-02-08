@@ -283,7 +283,7 @@ function process_log_watch($user_id, $log_id)
 	else
 		$dateformat = $opt['locale'][$language]['format']['phpdatetime'];
 
-	$watchtext = '{date} ' . $translate->t('{user} has logged the cache "{cachename}":', '', basename(__FILE__), __LINE__, '', 1, $language) . ' {action}' . "\n" . '{shortlink_url}{wp_oc}' . "\n\n" . '{text}' . "\n\n\n\n";
+	$watchtext = '{date} ' . $translate->t('{user} has logged the cache "{cachename}":', '', basename(__FILE__), __LINE__, '', 1, $language) . ' {action}' . "\n" . '{shortlink_url}{wp_oc}' . "\n{cachelists}\n" . '{text}' . "\n\n\n\n";
 
 	$watchtext = mb_ereg_replace('{date}', date($dateformat, strtotime($rLog['logdate'])), $watchtext);
 	$watchtext = mb_ereg_replace('{wp_oc}', $rLog['wp_oc'], $watchtext);
@@ -291,6 +291,22 @@ function process_log_watch($user_id, $log_id)
 	$watchtext = mb_ereg_replace('{user}', $rLog['username'], $watchtext);
 	$watchtext = mb_ereg_replace('{cachename}', $rLog['cachename'], $watchtext);
 	$watchtext = mb_ereg_replace('{action}', get_logtype_name($rLog['type'], $language), $watchtext);
+
+	$rsLists = sql("
+		SELECT `name` FROM `cache_lists` cl
+		JOIN `cache_list_watches` clw ON clw.`cache_list_id`=cl.`id` AND clw.`user_id`='&1'
+		JOIN `cache_list_items` cli ON cli.`cache_list_id`=cl.`id` AND cli.`cache_id`='&2'
+		ORDER BY `name`",
+		$user_id, $rLog['cache_id']
+		);
+	$cachelist_names = sql_fetch_column($rsLists);
+	switch (count($cachelist_names))
+	{
+		case 0:  $cachelists = ''; break;
+		case 1:  $cachelists = $translate->t('Cache list:', '', basename(__FILE__), __LINE__, '', 1, $language) . ' ' . $cachelist_names[0] . "\n"; break;
+		default: $cachelists = $translate->t('Cache lists:', '', basename(__FILE__), __LINE__, '', 1, $language) . ' ' . implode(', ', $cachelist_names) . "\n";
+	}
+	$watchtext = mb_ereg_replace('{cachelists}', $cachelists, $watchtext);
 	
 	$domain = sqlValue("SELECT `domain` FROM `user` WHERE `user_id`='" . sql_escape($user_id) . "'", null);
 	$urls = get_site_urls($domain);

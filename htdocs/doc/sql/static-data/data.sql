@@ -564,7 +564,7 @@ INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('register', '
 INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('removelog_logowner', 'DE', 'Logeintrag löschen');
 INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('removelog_cacheowner', 'DE', 'Logeintrag löschen');
 INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('reportcache', 'DE', 'Cache melden');
-INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('report_reasons', 'DE', 'Cache melden#Wann melden?');
+INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('report_reasons', 'DE', 'Cache melden#Wann melden%3F');
 INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('search', 'DE', 'Suchformular');
 INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('tops', 'DE', 'Empfehlungen');
 INSERT INTO `helppages` (`ocpage`, `language`, `helppage`) VALUES ('tops', 'EN', 'Recommendations');

@@ -74,7 +74,7 @@ function helppageurl($ocpage)
 	if (substr($helppage,0,1) == "!")
 		substr($helppage,1);
 	else if ($helppage != "" && isset($opt['locale'][$help_locale]['helpwiki']))
-		return $opt['locale'][$help_locale]['helpwiki'] . urlencode(str_replace(' ','_',$helppage));
+		return $opt['locale'][$help_locale]['helpwiki'] . str_replace(' ','_',$helppage);
 	else
 		return "";
 }

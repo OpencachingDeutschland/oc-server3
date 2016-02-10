@@ -21,7 +21,7 @@ class WebService
     }
 
     private static $valid_field_names = array('uuid', 'username', 'profile_url', 'internal_id', 'is_admin',
-        'caches_found', 'caches_notfound', 'caches_hidden', 'rcmds_given');
+        'caches_found', 'caches_notfound', 'caches_hidden', 'rcmds_given', 'home_location');
 
     public static function call(OkapiRequest $request)
     {
@@ -39,7 +39,7 @@ class WebService
             if (!in_array($field, self::$valid_field_names))
                 throw new InvalidParam('fields', "'$field' is not a valid field code.");
         $rs = Db::query("
-            select user_id, uuid, username, admin
+            select user_id, uuid, username, admin, latitude, longitude
             from user
             where uuid in ('".implode("','", array_map('mysql_real_escape_string', $user_uuids))."')
         ");
@@ -72,6 +72,20 @@ class WebService
                     case 'caches_notfound': /* handled separately */ break;
                     case 'caches_hidden': /* handled separately */ break;
                     case 'rcmds_given': /* handled separately */ break;
+                    case 'home_location':
+                        if (!$request->token) {
+                            $entry['home_location'] = null;
+                        } elseif ($request->token->user_id != $row['user_id']) {
+                            $entry['home_location'] = null;
+                        } elseif (!$row['latitude'] && !$row['longitude']) {
+                            # OCPL sets NULL/NULL for unknown location, OCDE sets 0/0.
+                            # It is safe to return null also for OCPL 0/0, as this value
+                            # does not make sense.
+                            $entry['home_location'] = null;
+                        } else {
+                            $entry['home_location'] = round($row['latitude'], 6)."|".round($row['longitude'], 6);
+                        }
+                        break;
                     default: throw new Exception("Missing field case: ".$field);
                 }
             }

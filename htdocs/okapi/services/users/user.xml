@@ -38,6 +38,12 @@
             <li><b>caches_notfound</b> - number of "Didn't find it" log entries,</li>
             <li><b>caches_hidden</b> - number of caches owned,</li>
             <li><b>rcmds_given</b> - number of recommendations given.</li>
+            <li><p><b>home_location</b> - home location of the user in the "lat|lon" format
+                (lat and lon are in full degrees with a dot as a decimal point);
+                <b>null</b> if no home location is given in the user's Opencaching profile.</p>
+                <p>This value can be accessed only with <b>Level 3</b> Authentication
+                and only for the user of your Access Token. For all other reads,
+                home_location will equal <b>null</b>.</p></li>
         </ul>
 
         <p>If given user does not exist, the method will respond with an HTTP 400 error.</p>

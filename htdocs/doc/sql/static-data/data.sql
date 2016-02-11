@@ -745,7 +745,7 @@ INSERT INTO `profile_options` (`id`, `name`, `trans_id`, `internal_use`, `defaul
 INSERT INTO `profile_options` (`id`, `name`, `trans_id`, `internal_use`, `default_value`, `check_regex`, `option_order`, `option_input`, `optionset`) VALUES ('10', 'Show %1preview pictures</a><br />(% of map area, 0=off):', '1928', '1', '7', '^[0-5]?[0-9]$', '150', 'text', '2');
 INSERT INTO `profile_options` (`id`, `name`, `trans_id`, `internal_use`, `default_value`, `check_regex`, `option_order`, `option_input`, `optionset`) VALUES ('11', 'Show picture stats and gallery', '1944', '1', '1', '^[0-1]$', '60', 'checkbox', '1');
 INSERT INTO `profile_options` (`id`, `name`, `trans_id`, `internal_use`, `default_value`, `check_regex`, `option_order`, `option_input`, `optionset`) VALUES ('13', 'Show OConly-81 stats', '2135', '1', '0', '^[0-1]$', '65', 'checkbox', '1');
-INSERT INTO `profile_options` (`id`, `name`, `trans_id`, `internal_use`, `default_value`, `check_regex`, `option_order`, `option_input`, `optionset`) VALUES ('14', 'Auto-load log entries', '2153', '1', '1', '^[0-1]$', '15', 'text', '1');
+INSERT INTO `profile_options` (`id`, `name`, `trans_id`, `internal_use`, `default_value`, `check_regex`, `option_order`, `option_input`, `optionset`) VALUES ('14', 'Auto-load log entries', '2153', '1', '1', '^[0-1]$', '15', 'checkbox', '1');
 
 -- Table replication_overwritetypes
 SET NAMES 'utf8';

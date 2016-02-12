@@ -33,7 +33,7 @@
     <tr><td></td><td></td><td></td></tr>
     <tr><td><img src="{$opt.page.teampic_url}bundy609.jpg" /></td><td><a href="{$opt.page.teammember_url}viewprofile.php?userid=189552">Bundy609</a><br />Anwendersupport, Datenpflege</td></tr>
     <tr><td><img src="{$opt.page.teampic_url}dl6hbo.jpg" /></td><td><a href="{$opt.page.teammember_url}viewprofile.php?userid=148310">dl6hbo</a><br />Systemadministration, Dokumentation</td></tr>
-    <tr><td><img src="{$opt.page.teampic_url}dummy.jpg" /></td><td><a href="{$opt.page.teammember_url}viewprofile.php?userid=167651">dogesu</a><br />Datenpflege</td></tr>
+    <tr><td><img src="{$opt.page.teampic_url}dogesu.jpg" /></td><td><a href="{$opt.page.teammember_url}viewprofile.php?userid=167651">dogesu</a><br />Datenpflege, Anwendersupport</td></tr>
     <tr><td><img src="{$opt.page.teampic_url}flopp.png" /></td><td><a href="{$opt.page.teammember_url}viewprofile.php?userid=126329">Flopp</a><br />Softwareentwicklung, Anwendersupport, Datenpflege</td></tr>
     <tr><td><img src="{$opt.page.teampic_url}following.png" /></td><td><a href="{$opt.page.teammember_url}viewprofile.php?userid=150360">following</a><br />Datenpflege, Softwareentwicklung, Wiki</td></tr>
     <tr><td><img src="{$opt.page.teampic_url}friedrichfroebel.png" /></td><td><a href="{$opt.page.teammember_url}viewprofile.php?userid=234947">FriedrichFröbel</a><br />Wiki, Forenmoderation</td></tr>

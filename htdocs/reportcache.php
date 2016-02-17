@@ -85,8 +85,8 @@
 
 	if ($opt['logic']['cache_reports']['min_processperday'] > 0)
 	{
-		$waitdays_min = 1 + floor(($open_reports + $opt['logic']['cache_reports']['max_processperday'] - 1) / $opt['logic']['cache_reports']['max_processperday']);
-		$waitdays_max = 1 + $opt['logic']['cache_reports']['delaydays'] + floor(($open_reports + $opt['logic']['cache_reports']['min_processperday'] - 1) / $opt['logic']['cache_reports']['min_processperday']);
+		$waitdays_min = 1 + floor(($open_reports + $opt['logic']['cache_reports']['max_processperday']/2) / $opt['logic']['cache_reports']['max_processperday']);
+		$waitdays_max = 1 + $opt['logic']['cache_reports']['delaydays'] + floor(($open_reports + $opt['logic']['cache_reports']['min_processperday']/2) / $opt['logic']['cache_reports']['min_processperday']);
 		$tpl->assign('waitdays_min', $waitdays_min);
 		$tpl->assign('waitdays_max', $waitdays_max);
 	}

@@ -2818,7 +2818,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2531', 'All new
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2532', '... by log date', '2015-01-20 20:37:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2533', 'Good and inappropriate reasons to report a cache', '2015-01-20 20:37:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2534', '%1 reports are being processed, %2 reports are pending', '2015-01-20 20:37:00');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2535', 'estimated queuing time for new reports: about %1 to %2 days', '2015-01-20 20:37:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2535', 'queuing time for new reports: about %1 to %2 days', '2015-01-20 20:37:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2536', 'Cache list:', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2537', 'Cache lists:', '2015-06-17 10:09:14');
 
@@ -7368,7 +7368,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2532', 'DE', '... nach Logdatum', '2015-01-20 20:37:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2533', 'DE', 'Gute und unpassende Gründe für eine Cachemeldung', '2015-01-20 20:37:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2534', 'DE', '%1 Meldungen sind in Bearbeitung, %2 Meldungen sind offen', '2015-01-20 20:37:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2535', 'DE', 'geschätzte Wartezeit für neue Meldungen: ca. %1&ndash;%2 Tage', '2015-01-20 20:37:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2535', 'DE', 'Wartezeit für neue Meldungen: ca. %1&ndash;%2 Tage', '2015-01-20 20:37:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2536', 'DE', 'Cacheliste:', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2537', 'DE', 'Cachelisten:', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'EN', 'Reorder IDs', '2010-09-02 00:15:30');

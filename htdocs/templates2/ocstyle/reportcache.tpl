@@ -60,8 +60,7 @@
 			<tr>
 				<td colspan="2" class="info">
 					{t 1=$processing_reports 2=$open_reports}%1 reports are being processed, %2 reports are pending{/t}{if $waitdays_min};
-						<br />
-						{t 1=$waitdays_min 2=$waitdays_max}estimated queuing time for new reports: about %1 to %2 days{/t}
+						{t 1=$waitdays_min 2=$waitdays_max}queuing time for new reports: about %1 to %2 days{/t}
 					{/if}
 				</td>
 			</tr>

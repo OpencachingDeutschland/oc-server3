@@ -152,7 +152,7 @@
 					<th width="90">
 						{strip}
 						{if $displayownlogs}
-							<a href="search.php?queryid={$queryid}&showresult=1&sortby=bymylastlog&sortorder={if ($sortby!='bymylastlog' && $sortby!='bylastlog') || $sortorder=='desc'}asc{else}desc{/if}{if $startat}&startat={$startat}{/if}{if $creationdate}&creationdate=1{/if}">
+							<a href="search.php?queryid={$queryid}&showresult=1&sortby=bymylastlog&sortorder={if ($sortby!='bymylastlog' && $sortby!='bylastlog') || $sortorder=='asc'}desc{else}asc{/if}{if $startat}&startat={$startat}{/if}{if $creationdate}&creationdate=1{/if}">
 							<nobr>
 							{t}Own logs{/t}
 							{if $sortby=='bymylastlog'}
@@ -160,7 +160,7 @@
 							{/if}
 							</nobr></a>
 						{else}
-							<a href="search.php?queryid={$queryid}&showresult=1&sortby=bylastlog&sortorder={if $sortorder=='desc'}asc{else}desc{/if}{if $startat}&startat={$startat}{/if}{if $creationdate}&creationdate=1{/if}">
+							<a href="search.php?queryid={$queryid}&showresult=1&sortby=bylastlog&sortorder={if ($sortby!='bymylastlog' && $sortby!='bylastlog') || $sortorder=='asc'}desc{else}asc{/if}{if $startat}&startat={$startat}{/if}{if $creationdate}&creationdate=1{/if}">
 							<nobr>
 							{t}Last logs{/t}
 							{if $sortby=='bylastlog'}

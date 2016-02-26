@@ -659,7 +659,7 @@ input.widebutton {
 textarea { font-family: Arial, sans-serif, Tahoma, Verdana; font-size: 8pt; }
 textarea.cachedesc { width:750px; height:500px; }  /* only cacheeditor */
 textarea.hint {	width:750px; height:100px; }  /* only cacheditor */
-textarea.logs {	width:640px; height:300px; }  /* only logeditor */
+textarea.logs {	width:640px; height:280px; }  /* only logeditor */
 textarea.reports {	width:640px; height:250px; }  /* only logeditor */
 textarea.listdesc2 { width:580px; height:120px; }  /* only list desc editor */
 textarea.listdesc3 { width:580px; height:220px; }  /* only list desc editor */
@@ -765,10 +765,22 @@ div.isarchived {
 	width: 735px;
 	margin: 0px 0px 10px 0px;
 	padding: 15px;
- 	border: solid 2px red;
 	border-radius: 5px;
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
+	background-color:#ffeaea;
+}
+
+div.isannotated {
+	clear: both;
+	float: left;
+	width: 735px;
+	margin: 0px 0px 10px 0px;
+	padding: 15px;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	background-color:#f0f0f0;
 }
 
 div#havefound {
@@ -776,7 +788,6 @@ div#havefound {
 	z-index: 25;
 	top: 180px;
 	right: 20px;
-	width: 35px;
 	padding: 5px 5px 5px 0px;
 	font-weight: bold;
 	height: 35px;

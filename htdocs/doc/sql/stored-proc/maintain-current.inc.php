@@ -306,7 +306,8 @@
 	       SET nModified = ROW_COUNT() ;
 	     END;", strtoupper($lang . ',EN'));
 
-	// update found, last_found, notfound and note of stat_cache_logs, stat_caches and stat_user
+	// update found, last_found, notfound and note of stat_cache_logs, stat_caches and stat_user,
+	// and caches.needs_maintenance and .listing_outdated
 	sql_dropProcedure('sp_update_logstat');
 	sql("CREATE PROCEDURE sp_update_logstat (IN nCacheId INT(10) UNSIGNED, IN nUserId INT(10) UNSIGNED, IN nLogType INT, IN bLogRemoved BOOLEAN)
 	     BEGIN
@@ -347,6 +348,11 @@
 		         SELECT LEFT(`date`,10) INTO nDate FROM `cache_logs` WHERE `cache_id`=nCacheId AND `type` IN (1, 7) ORDER BY `date` DESC LIMIT 1;
 		         UPDATE `stat_caches` SET `last_found`=nDate WHERE `cache_id`=nCacheId;
 		       END IF;
+
+		       UPDATE `caches` SET
+		         `needs_maintenance` = (SELECT GREATEST(0,`needs_maintenance`-1) FROM `cache_logs` WHERE `cache_logs`.`cache_id`=nCacheID AND (`cache_logs`.`needs_maintenance`>0 OR `cache_logs`.`type` In (9,13,14)) ORDER BY `date` DESC, `date_created` DESC LIMIT 1),
+		         `listing_outdated` = (SELECT GREATEST(0,`listing_outdated`-1) FROM `cache_logs` WHERE `cache_logs`.`cache_id`=nCacheID AND (`cache_logs`.`listing_outdated`>0 OR `cache_logs`.`type` In (9,13,14)) ORDER BY `date` DESC, `date_created` DESC LIMIT 1)
+		       WHERE `caches`.`cache_id`=nCacheId;
 	       END IF;
 	       IF IFNULL(@deleting_user,0)=0 THEN
 		       UPDATE `stat_user` SET `found`=IF(`found`+nFound>0, `found`+nFound, 0), `notfound`=IF(`notfound`+nNotFound>0, `notfound`+nNotFound, 0), `note`=IF(`note`+nNote>0, `note`+nNote, 0), `will_attend`=IF(`will_attend`+nWillAttend>0, `will_attend`+nWillAttend, 0), `maintenance`=IF(`maintenance`+nMaintenance>0, `maintenance`+nMaintenance, 0) WHERE `user_id`=nUserId;
@@ -752,6 +758,11 @@
 					BEGIN 
 						SET @dont_update_listingdate=1;
 
+						IF NEW.`status` IN (4,5,6,7) THEN
+							SET NEW.`needs_maintenance`=0;
+							SET NEW.`listing_outdated`=0;
+						END IF;
+
 						/* dont overwrite date values while XML client is running */
 						IF ISNULL(@XMLSYNC) OR @XMLSYNC!=1 THEN
 							IF OLD.`cache_id`!=NEW.`cache_id` OR 
@@ -782,6 +793,10 @@
 								 OLD.`show_cachelists`!=NEW.`show_cachelists` THEN
 
 								SET NEW.`last_modified`=NOW();
+							END IF;
+
+							IF OLD.`needs_maintenance`!=NEW.`needs_maintenance` OR OLD.`listing_outdated`!=NEW.`listing_outdated` THEN
+								SET NEW.`flags_last_modified`=NOW();
 							END IF;
 
 							IF NEW.`last_modified` != OLD.`last_modified` THEN
@@ -1117,6 +1132,8 @@
 							   NEW.`type`!=OLD.`type` OR
 							   NEW.`oc_team_comment`!=OLD.`oc_team_comment` OR
 							   NEW.`date`!=OLD.`date` OR
+							   NEW.`needs_maintenance`!=OLD.`needs_maintenance` OR
+							   NEW.`listing_outdated`!=OLD.`listing_outdated` OR
 							   NEW.`text`!=BINARY OLD.`text` OR
 							   NEW.`text_html`!=OLD.`text_html` THEN
 
@@ -1127,10 +1144,12 @@
 									INSERT IGNORE INTO `cache_logs_modified`
 										(`id`, `uuid`, `node`, `date_created`, `last_modified`, `log_last_modified`,
 										 `cache_id`, `user_id`, `type`, `oc_team_comment`, `date`,
+										 `needs_maintenance`, `listing_outdated`,
 										 `text`, `text_html`, `modify_date`)
 									VALUES
 										(OLD.`id`, OLD.`uuid`, OLD.`node`, OLD.`date_created`, OLD.`last_modified`,
 										 OLD.`log_last_modified`, OLD.`cache_id`, OLD.`user_id`, OLD.`type`,
+										 OLD.`needs_maintenance`, OLD.`listing_outdated`,
 										 OLD.`oc_team_comment`, OLD.`date`, OLD.`text`, OLD.`text_html`, NOW());
 								END IF;
 

@@ -38,7 +38,7 @@
 	
 	// prepare array to indicate errors in template
 	$validate = array();
-	
+
 	// proceed loggable, if valid cache_id
 	$validate['logAllowed'] = true;
 	if ($cacheId != 0)
@@ -92,10 +92,20 @@
 		$logDateYear            = (isset($_POST['logyear']))                   ? trim($_POST['logyear'])             : ($datesaved ? $defaultLogYear  : date('Y'));
 		$logTimeHour            = (isset($_POST['loghour']))                   ? trim($_POST['loghour'])             : "";
 		$logTimeMinute          = (isset($_POST['logminute']))                 ? trim($_POST['logminute'])           : "";
+		$needsMaintenance       = (isset($_POST['needs_maintenance']))         ? ($_POST['needs_maintenance'])+0     : 0;
+		$listingOutdated        = (isset($_POST['listing_outdated']))          ? ($_POST['listing_outdated'])+0      : 0;
 		$rateOption             = (isset($_POST['ratingoption']))              ? $_POST['ratingoption']+0            : 0;
 		$rateCache              = (isset($_POST['rating']))                    ? $_POST['rating']+0                  : 0;
 		$ocTeamComment          = (isset($_REQUEST['teamcomment']))            ? $_REQUEST['teamcomment'] != 0       : 0;
 		$suppressMasslogWarning = (isset($_REQUEST['suppressMasslogWarning'])) ? $_REQUEST['suppressMasslogWarning'] : ($masslogCookieSet ? $masslogCookieContent : 0);
+
+		if (!in_array($logType, array(1,2,3,10,11)) || $cache->getType() == 6)
+			$needsMaintenance = $listingOutdated = 0;
+		else
+		{
+			if ($needsMaintenance != 1 && $needsMaintenance != 2) $needsMaintenance = 0;
+			if ($listingOutdated != 1 && $listingOutdated != 2) $listingOutdated = 0;
+		}
 		
 		// if not a found log, ignore the rating
 		$rateOption = ($logType == 1 || $logType == 7) + 0;
@@ -210,6 +220,8 @@
 				$cacheLog->setType($logType);
 				$cacheLog->setDate($logDate);
 				$cacheLog->setText($logText);
+				$cacheLog->setNeedsMaintenance($needsMaintenance);
+				$cacheLog->setListingOutdated($listingOutdated);
 				$cacheLog->setTextHtml(($descMode != 1) ? 1 : 0);
 				$cacheLog->setTextHtmlEdit(($descMode == 3) ? 1 : 0);
 				$cacheLog->setOcTeamComment($ocTeamComment);
@@ -252,11 +264,18 @@
 		$tpl->assign('logyear', $logDateYear);
 		$tpl->assign('loghour', $logTimeHour);
 		$tpl->assign('logminute', $logTimeMinute);
+		// cache condition flags
+		$tpl->assign('cache_needs_maintenance', $cache->getNeedsMaintenance());
+		$tpl->assign('needs_maintenance', $needsMaintenance);
+		$tpl->assign('listing_outdated', $listingOutdated);
+		$tpl->assign('condition_history', $cache->getConditionHistory());
+		$tpl->assign('has_gc_listing', $cache->getWPGC_maintained() != '');
 		// log text
 		$tpl->assign('logtext', $logText);
 		// text, <html> or editor
 		$tpl->assign('descMode', $descMode);
 		// logtypes
+		$tpl->assign('logtype', $logType);
 		$tpl->assign('logtypes', $cache->getUserLogTypes($logType));
 		// teamcomment
 		$tpl->assign('octeamcommentallowed', $cache->teamcommentAllowed(3));

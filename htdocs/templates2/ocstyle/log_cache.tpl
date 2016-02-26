@@ -4,10 +4,17 @@
 *  Unicode Reminder メモ
 ***************************************************************************}
 {* OCSTYLE *}
+<script type="text/javascript" src="resource2/{$opt.template.style}/js/wz_tooltip.js"></script>
+<script type="text/javascript" src="resource2/{$opt.template.style}/js/tip_balloon.js"></script>
+<script type="text/javascript" src="resource2/{$opt.template.style}/js/tip_centerwindow.js"></script>
 <script type="text/javascript">
-{literal}
 <!--
-function insertSmiley(smileySymbol, smileyPath) {
+var cache_needs_maintenance = {$cache_needs_maintenance + 0};
+var cachetype = {$cachetype};
+{literal}
+
+function insertSmiley(smileySymbol, smileyPath)
+{
   var myText = document.editform.logtext;
   var insertText = (descMode == 1 ? smileySymbol : '<img src="' + smileyPath + '" alt="" border="0" width="18px" height="18px" />');
   myText.focus();
@@ -36,8 +43,22 @@ function insertSmiley(smileySymbol, smileyPath) {
   }
 }
 
-function _chkFound () {
-  if (document.editform.logtype.value == "1" || document.editform.logtype.value == "7")
+function logtype_changed()
+{
+	{/literal}
+	var logtype = document.editform.logtype.value;
+	var datecomment = document.getElementById('datecomment');
+	var hint = '<img src="resource2/{$opt.template.style}/images/misc/hint.gif" border="0" width="15" height="11" />';
+
+	if (logtype == "1")
+		datecomment.innerHTML = hint + "{t}When did you find the geocache?{/t}";
+	else if (logtype == "2")
+		datecomment.innerHTML = hint + "{t}When did you abort the cache search?{/t}";
+	else
+		datecomment.innerHTML = "";
+	{literal}
+
+  if (logtype == "1" || logtype == "7")
 	{
 		if (document.editform.rating)
 	    document.editform.rating.disabled = false;
@@ -47,9 +68,23 @@ function _chkFound () {
 		if (document.editform.rating)
 	    document.editform.rating.disabled = true;
   }
+  if (cachetype != 6 && (logtype == 1 || logtype == 2 || logtype == 3 || logtype == 10 || logtype == 11))
+  {
+		document.getElementById('cache_condition').style.display = '';
+		document.getElementById('cache_condition_spacer').style.display = '';
+	}
+	else
+	{
+		document.getElementById('cache_condition').style.display = 'none';
+		document.getElementById('cache_condition_spacer').style.display = 'none';
+	}
+	if (cache_needs_maintenance && (document.editform.logtype.value == "10") != (old_logtype == 10))
+	{
+		document.getElementById('needs_maintenance').value = (old_logtype == 10 ? 0 : 1);
+		old_logtype = document.editform.logtype.value;
+	}
   return false;
 }
-
 //-->
 {/literal}
 {* 
@@ -92,7 +127,7 @@ function _chkFound () {
 	<tr>
 		<td width="180px">{t}Type of log-entry:{/t}</td>
 		<td>
-			<select name="logtype" onChange="return _chkFound()">
+			<select name="logtype" onChange="return logtype_changed()">
 				{foreach from=$logtypes item=logtypeoption}
 				<option value="{$logtypeoption.id}"{if $logtypeoption.selected} selected="selected"{/if}>{$logtypeoption.name|escape}</option>
 				{/foreach}
@@ -106,28 +141,44 @@ function _chkFound () {
 	<tr>
 		<td width="180px">{t}Date / time:{/t}</td>
 		<td>
-			<input class="input20" type="text" name="logday" maxlength="2" value="{$logday}"/>.
-			<input class="input20" type="text" name="logmonth" maxlength="2" value="{$logmonth}"/>.
-			<input class="input40" type="text" name="logyear" maxlength="4" value="{$logyear}"/>
+			<input class="input20" type="text" id="logday" name="logday" maxlength="2" value="{$logday}" onchange="condition_init()" />.
+			<input class="input20" type="text" id="logmonth" name="logmonth" maxlength="2" value="{$logmonth}" onchange="condition_init()" />.
+			<input class="input40" type="text" id="logyear" name="logyear" maxlength="4" value="{$logyear}" onchange="condition_init()" />
 		  &nbsp;&nbsp;&nbsp;
-			<input class="input20" type="text" name="loghour" maxlength="2" value="{$loghour}" /> :
-			<input class="input20" type="text" name="logminute" maxlength="2" value="{$logminute}" />
-			&nbsp;&nbsp;{if $validate.dateOk==false}<span class="errormsg">{t}date or time is invalid{/t}</span>{/if}
-		</td>
-	</tr>
-	<tr>
-		<td></td>
-		<td>
-			<img src="resource2/{$opt.template.style}/images/misc/hint.gif" border="0" width="15" height="11" />
-			{t}For 'Found' and 'Not found' logs: Date and (optional) time of the cache search.{/t}
+			<input class="input20" type="text" id="loghour" name="loghour" maxlength="2" value="{$loghour}" onchange="condition_init()" /> :
+			<input class="input20" type="text" id="logminute" name="logminute" maxlength="2" value="{$logminute}" onchange="condition_init()" />
+			&nbsp;&nbsp; <span id="datecomment"></span>
+			{if $validate.dateOk==false}<br /><span class="errormsg">{t}date or time is invalid{/t}</span>{/if}
 		</td>
 	</tr>
 	<tr><td class="spacer" colspan="2"></td></tr>
+	<tr id="cache_condition">
+		<td>{t}Geocache condition:{/t}</td>
+		<td>
+			<span onmouseover='Tip("{t}Select <i>needs maintenance</i> if the geocache was in poor condition at the<br />specified date and in urgent need of maintenance. Please explain why.{/t}", DELAY, 0, FADEIN, false, FADEOUT, false, BGCOLOR, "#fffedf", BORDERCOLOR, "grey")' onmouseout="UnTip()">
+			<select name="needs_maintenance" id="needs_maintenance">
+				<option value="0" {if $needs_maintenance==0}selected="selected"{/if}>{t}not specified{/t}</option>
+				<option value="2" {if $needs_maintenance==2}selected="selected"{/if}>{t}needs maintenance{/t}</option>
+				<option value="1" {if $needs_maintenance==1}selected="selected"{/if}>{t}ok{/t}</option>
+			</select>
+			</span>
+			&nbsp; &nbsp; &nbsp;
+			{t}Description:{/t}&nbsp;
+			<span onmouseover='Tip("{if $has_gc_listing}{t}Select <i>is outdated</i> if the geocache search is hampered by outdated information in<br />the description, e.g. the location has severely changed or the description lacks<br />important information which has been added at another geocaching website.<br />Please give details in your log.{/t}{else}{t}Select <i>is outdated</i> if the geocache search is hampered by outdated information<br />in the description, e.g. because the location has severely changed. Please give<br />details in your log.{/t}{/if}", DELAY, 0, FADEIN, false, FADEOUT, false, BGCOLOR, "#fffedf", BORDERCOLOR, "grey")' onmouseout="UnTip()">
+			<select name="listing_outdated" id="listing_outdated">
+				<option value="0" {if $listing_outdated==0}selected="selected"{/if}>{t}not specified{/t}</option>
+				<option value="2" {if $listing_outdated==2}selected="selected"{/if}>{t}outdated{/t}</option>
+				<option value="1" {if $listing_outdated==1}selected="selected"{/if}>{t}up to date{/t}</option>
+			</select>
+			</span>
+		</td>
+	</tr>
+	<tr id="cache_condition_spacer"><td class="spacer" colspan="2"></td></tr>
 	{if $isowner==false}
 	<tr>
 		<td valign="top">{t}Recommendations:{/t}</td>
 		<td valign="top">
-			{if ($ratingallowed==true || $israted==true)}<input type="hidden" name="ratingoption" value="1"><input type="checkbox" name="rating" value="1" class="checkbox" {if $israted==true}checked{/if}/>&nbsp;{t}This cache is one of my recommendations.{/t}<br />
+			{if ($ratingallowed==true || $israted==true)}<input type="hidden" name="ratingoption" value="1"><input type="checkbox" id="rating" name="rating" value="1" class="checkbox" {if $israted==true}checked{/if}/>&nbsp;<label for="rating">{t}This cache is one of my recommendations.{/t}</label><br />
 				{t 1=$givenratings 2=$maxratings}You have given %1 of %2 possible recommendations.{/t}
 			{else}
 				{t 1=$foundsuntilnextrating}You need additional %1 finds, to make another recommendation.{/t}
@@ -136,7 +187,6 @@ function _chkFound () {
 			<noscript><br />{t}A recommendation can only be made with a "found" or "attended" log!{/t}</noscript>
 		</td>
 	</tr>
-	<tr><td class="spacer" colspan="2"></td></tr>
 	{/if}
 </table>
 
@@ -159,7 +209,7 @@ function _chkFound () {
 	</tr>
 	<tr>
 		<td>
-			<textarea name="logtext" id="logtext" cols="68" rows="25" class="logs">{$logtext|escape}</textarea>
+			<textarea name="logtext" id="logtext" cols="68" rows="15" class="logs">{$logtext|escape}</textarea>
     </td>
 	</tr>
 	{if $descMode!=3}
@@ -201,8 +251,10 @@ function _chkFound () {
 
 <script language="javascript" type="text/javascript">
 <!--
-	_chkFound();
-	var descMode = {$descMode};
 	OcInitEditor();
+	logtype_changed();
+	condition_init();
+	var descMode = {$descMode};
+	var old_logtype = document.editform.logtype.value;
 //-->
 </script>

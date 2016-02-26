@@ -108,6 +108,8 @@ function getChildWaypoints($cacheid)
 				`caches`.`difficulty` AS `difficulty`,
 				`caches`.`terrain` AS `terrain`,
 				`caches`.`show_cachelists` AS `show_cachelists`,
+				`caches`.`needs_maintenance`,
+				`caches`.`listing_outdated`,
 				`cache_desc`.`language` AS `desclanguage`,
 				`cache_desc`.`short_desc` AS `shortdesc`,
 				`cache_desc`.`desc` AS `desc`,

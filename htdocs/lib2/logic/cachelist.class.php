@@ -440,7 +440,7 @@ class cachelist
 			return false;
 	}
 
-	private function getLists($condition, $prio=0, $startat=0, $maxitems=PHP_INT_MAX)
+	private static function getLists($condition, $prio=0, $startat=0, $maxitems=PHP_INT_MAX)
 	{
 		global $login;
 		$login->verify();

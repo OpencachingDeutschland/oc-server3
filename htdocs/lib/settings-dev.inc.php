@@ -86,7 +86,7 @@
 
 	// safemode_zip-binary
 	$safemode_zip = '/var/www/bin/phpzip.php';
-	$zip_basedir = $dev_basepath . $dev_codepath . 'htdocs/download/zip/';
+	$zip_basedir = $dev_basepath . ($dev_codepath == '*' ? '' : $dev_codepath.'htdocs/').'download/zip/';
 	$zip_wwwdir = 'download/zip/';
 
 	$googlemap_key = "<key>";

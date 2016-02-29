@@ -112,7 +112,12 @@ function search_output()
 
 	$tpl->assign('caches', $caches);
 
-	$pager = new pager('search.php?queryid=' . $options['queryid'] . '&startat={offset}', 2, 9);
+	$page = 'search.php?queryid=' . $options['queryid'] . '&startat={offset}&sortby='.$options['sort'];
+	if (isset($options['sortorder']) && $options['sortorder'])
+		$page .= "&sortorder=".$options['sortorder'];
+	if (isset($options['creationdate']) && $options['creationdate'])
+		$page .= "&creationdate=".$options['creationdate'];
+	$pager = new pager($page, 2, 9);
 	$pager->make_from_offset($startat, $resultcount, $caches_per_page);
 
 	// downloads
@@ -144,11 +149,10 @@ function search_output()
 	$tpl->assign('sortby', $options['sort']);
 	if (isset($options['sortorder'])) {
 		$tpl->assign('sortorder', $options['sortorder']);
-	} else {
-		$options['sortorder']="";
 	}
-	if ($options['sort']=='bycreated' || isset($options['creationdate']))
+	if ($options['sort']=='bycreated' || isset($options['creationdate'])) {
 		$tpl->assign('creationdate', true);
+	}
 
 	// cachelist data
 	if (isset($options['cachelist']))

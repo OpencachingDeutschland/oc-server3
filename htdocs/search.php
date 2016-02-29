@@ -185,19 +185,9 @@
 					$options['showresult'] = 0;
 			}
 
-			// overwrite variable options for sort direction & sort type
-
+			// overwrite variable options; see 'set common variable options' for more
 			if (isset($_REQUEST['sortby'])) {
 				$options['sort'] = $_REQUEST['sortby'];
-			}
-
-			if (isset($_REQUEST['sortorder'])) {
-				$options['sortorder'] = $_REQUEST['sortorder'];
-			}
-
-			// display creation date?
-			if (isset($_REQUEST['creationdate'])) {
-				$options['creationdate'] = $_REQUEST['creationdate'];
 			}
 
 			// get findername from finderid
@@ -438,10 +428,9 @@
 		}
 
 		$options['sort'] = isset($_REQUEST['sort']) ? $_REQUEST['sort'] : ($homecoords ? 'bydistance' : 'byname');
-		$options['sortorder'] = isset($_REQUEST['sortorder']) ? $_REQUEST['sortorder'] : false;
-
-		if (isset($_REQUEST['orderRatingFirst']) && $_REQUEST['orderRatingFirst']==1)
+		if (isset($_REQUEST['orderRatingFirst']) && $_REQUEST['orderRatingFirst']==1) {
 			$options['orderRatingFirst'] = true;
+		}
 
 		$options['country'] = isset($_REQUEST['country']) ? $_REQUEST['country'] : '';
 		$options['language'] = isset($_REQUEST['language']) ? $_REQUEST['language'] : '';
@@ -473,6 +462,13 @@
 		$options['queryid'] = 0;
 	}  // $queryid == 0
 
+	// set common variable options
+	if (isset($_REQUEST['sortorder'])) {
+		$options['sortorder'] = $_REQUEST['sortorder'];
+	}
+	if (isset($_REQUEST['creationdate'])) {
+		$options['creationdate'] = $_REQUEST['creationdate'];
+	}
 
 	//=========================================================
 	//  3. query caching

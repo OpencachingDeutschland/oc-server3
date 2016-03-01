@@ -68,12 +68,12 @@ class ReplicateListener
 
         # Fetch our copy of the cache.
 
-        $ours = mysql_fetch_row(Db::query("
+        $ours = Db::fetch_row(Db::query("
             select cache_id, z21x, z21y, status, type, rating, flags, name_crc
             from okapi_tile_caches
             where
                 z=0
-                and cache_id = '".mysql_real_escape_string($cache['internal_id'])."'
+                and cache_id = '".Db::escape_string($cache['internal_id'])."'
         "));
 
         # Caches near the poles caused our computations to break here. We will
@@ -122,7 +122,7 @@ class ReplicateListener
 
         Db::execute("
             delete from okapi_tile_caches
-            where cache_id = '".mysql_real_escape_string($cache_id)."'
+            where cache_id = '".Db::escape_string($cache_id)."'
         ");
 
         # Note, that after this operation, okapi_tile_status may be out-of-date.
@@ -195,9 +195,9 @@ class ReplicateListener
         {
             list($z, $x, $y) = $coords;
             $alternatives_escaped[] = "(
-                z = '".mysql_real_escape_string($z)."'
-                and x = '".mysql_real_escape_string($x)."'
-                and y = '".mysql_real_escape_string($y)."'
+                z = '".Db::escape_string($z)."'
+                and x = '".Db::escape_string($x)."'
+                and y = '".Db::escape_string($y)."'
             )";
         }
         if (count($alternatives_escaped) > 0)
@@ -208,14 +208,14 @@ class ReplicateListener
                 )
                 select
                     z, x, y,
-                    '".mysql_real_escape_string($row[0])."',
-                    '".mysql_real_escape_string($row[1])."',
-                    '".mysql_real_escape_string($row[2])."',
-                    '".mysql_real_escape_string($row[3])."',
-                    '".mysql_real_escape_string($row[4])."',
-                    ".(($row[5] === null) ? "null" : "'".mysql_real_escape_string($row[5])."'").",
-                    '".mysql_real_escape_string($row[6])."',
-                    '".mysql_real_escape_string($row[7])."'
+                    '".Db::escape_string($row[0])."',
+                    '".Db::escape_string($row[1])."',
+                    '".Db::escape_string($row[2])."',
+                    '".Db::escape_string($row[3])."',
+                    '".Db::escape_string($row[4])."',
+                    ".(($row[5] === null) ? "null" : "'".Db::escape_string($row[5])."'").",
+                    '".Db::escape_string($row[6])."',
+                    '".Db::escape_string($row[7])."'
                 from okapi_tile_status
                 where
                     (".implode(" or ", $alternatives_escaped).")
@@ -246,13 +246,13 @@ class ReplicateListener
         Db::execute("
             update okapi_tile_caches
             set
-                status = '".mysql_real_escape_string($row[3])."',
-                type = '".mysql_real_escape_string($row[4])."',
-                rating = ".(($row[5] === null) ? "null" : "'".mysql_real_escape_string($row[5])."'").",
-                flags = '".mysql_real_escape_string($row[6])."',
-                name_crc = '".mysql_real_escape_string($row[7])."'
+                status = '".Db::escape_string($row[3])."',
+                type = '".Db::escape_string($row[4])."',
+                rating = ".(($row[5] === null) ? "null" : "'".Db::escape_string($row[5])."'").",
+                flags = '".Db::escape_string($row[6])."',
+                name_crc = '".Db::escape_string($row[7])."'
             where
-                cache_id = '".mysql_real_escape_string($row[0])."'
+                cache_id = '".Db::escape_string($row[0])."'
         ");
     }
 
@@ -263,7 +263,7 @@ class ReplicateListener
         $cache_id = Db::select_value("
             select cache_id
             from caches
-            where wp_oc='".mysql_real_escape_string($c['object_key']['code'])."'
+            where wp_oc='".Db::escape_string($c['object_key']['code'])."'
         ");
         self::remove_geocache_from_cached_tiles($cache_id);
     }

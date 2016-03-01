@@ -11,7 +11,7 @@ class OkapiDataStore extends OAuthDataStore
         $row = Db::select_row("
             select `key`, secret, name, url, email, bflags
             from okapi_consumers
-            where `key` = '".mysql_real_escape_string($consumer_key)."'
+            where `key` = '".Db::escape_string($consumer_key)."'
         ");
         if (!$row)
             return null;
@@ -25,9 +25,9 @@ class OkapiDataStore extends OAuthDataStore
             select `key`, consumer_key, secret, token_type, user_id, verifier, callback
             from okapi_tokens
             where
-                consumer_key = '".mysql_real_escape_string($consumer->key)."'
-                and token_type = '".mysql_real_escape_string($token_type)."'
-                and `key` = '".mysql_real_escape_string($token)."'
+                consumer_key = '".Db::escape_string($consumer->key)."'
+                and token_type = '".Db::escape_string($token_type)."'
+                and `key` = '".Db::escape_string($token)."'
         ");
         if (!$row)
             return null;
@@ -65,9 +65,9 @@ class OkapiDataStore extends OAuthDataStore
             Db::execute("
                 insert into okapi_nonces (consumer_key, nonce_hash, timestamp)
                 values (
-                    '".mysql_real_escape_string($consumer->key)."',
-                    '".mysql_real_escape_string($nonce_hash)."',
-                    '".mysql_real_escape_string($timestamp)."'
+                    '".Db::escape_string($consumer->key)."',
+                    '".Db::escape_string($nonce_hash)."',
+                    '".Db::escape_string($timestamp)."'
                 );
             ");
             return null;
@@ -93,16 +93,16 @@ class OkapiDataStore extends OAuthDataStore
                 (`key`, secret, token_type, timestamp,
                 user_id, consumer_key, verifier, callback)
             values (
-                '".mysql_real_escape_string($token->key)."',
-                '".mysql_real_escape_string($token->secret)."',
+                '".Db::escape_string($token->key)."',
+                '".Db::escape_string($token->secret)."',
                 'request',
                 unix_timestamp(),
                 null,
-                '".mysql_real_escape_string($consumer->key)."',
-                '".mysql_real_escape_string($token->verifier)."',
+                '".Db::escape_string($consumer->key)."',
+                '".Db::escape_string($token->verifier)."',
                 ".(($token->callback_url == 'oob')
                     ? "null"
-                    : "'".mysql_real_escape_string($token->callback_url)."'"
+                    : "'".Db::escape_string($token->callback_url)."'"
                 )."
             );
         ");
@@ -122,7 +122,7 @@ class OkapiDataStore extends OAuthDataStore
 
         Db::execute("
             delete from okapi_tokens
-            where `key` = '".mysql_real_escape_string($token->key)."'
+            where `key` = '".Db::escape_string($token->key)."'
         ");
 
         # In OKAPI, all Access Tokens are long lived. Therefore, we don't want
@@ -135,8 +135,8 @@ class OkapiDataStore extends OAuthDataStore
             from okapi_tokens
             where
                 token_type = 'access'
-                and user_id = '".mysql_real_escape_string($token->authorized_by_user_id)."'
-                and consumer_key = '".mysql_real_escape_string($consumer->key)."'
+                and user_id = '".Db::escape_string($token->authorized_by_user_id)."'
+                and consumer_key = '".Db::escape_string($consumer->key)."'
         ");
         if ($row)
         {
@@ -155,12 +155,12 @@ class OkapiDataStore extends OAuthDataStore
                 insert into okapi_tokens
                     (`key`, secret, token_type, timestamp, user_id, consumer_key)
                 values (
-                    '".mysql_real_escape_string($access_token->key)."',
-                    '".mysql_real_escape_string($access_token->secret)."',
+                    '".Db::escape_string($access_token->key)."',
+                    '".Db::escape_string($access_token->secret)."',
                     'access',
                     unix_timestamp(),
-                    '".mysql_real_escape_string($access_token->user_id)."',
-                    '".mysql_real_escape_string($consumer->key)."'
+                    '".Db::escape_string($access_token->user_id)."',
+                    '".Db::escape_string($consumer->key)."'
                 );
             ");
         }

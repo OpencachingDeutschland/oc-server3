@@ -354,9 +354,9 @@ class WebService
         $rs = Db::query("
             select uuid, user_id
             from user
-            where uuid in ('".implode("','", array_map('mysql_real_escape_string', array_keys($dict)))."')
+            where uuid in ('".implode("','", array_map('\okapi\Db::escape_string', array_keys($dict)))."')
         ");
-        while ($row = mysql_fetch_assoc($rs))
+        while ($row = Db::fetch_assoc($rs))
             $dict[$row['uuid']] = $row['user_id'];
         $vars['user_uuid_to_internal_id'] = &$dict;
         unset($dict);

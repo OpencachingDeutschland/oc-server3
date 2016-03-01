@@ -46,16 +46,16 @@ class WebService
                 Db::execute("
                     insert ignore into cache_watches (cache_id, user_id)
                     values (
-                        '".mysql_real_escape_string($geocache['internal_id'])."',
-                        '".mysql_real_escape_string($request->token->user_id)."'
+                        '".Db::escape_string($geocache['internal_id'])."',
+                        '".Db::escape_string($request->token->user_id)."'
                     );
                 ");
             elseif ($tmp == 'false')
                 Db::execute("
                     delete from cache_watches
                     where
-                        cache_id = '".mysql_real_escape_string($geocache['internal_id'])."'
-                        and user_id = '".mysql_real_escape_string($request->token->user_id)."';
+                        cache_id = '".Db::escape_string($geocache['internal_id'])."'
+                        and user_id = '".Db::escape_string($request->token->user_id)."';
                 ");
         }
 
@@ -69,16 +69,16 @@ class WebService
                 Db::execute("
                     insert ignore into cache_ignore (cache_id, user_id)
                     values (
-                        '".mysql_real_escape_string($geocache['internal_id'])."',
-                        '".mysql_real_escape_string($request->token->user_id)."'
+                        '".Db::escape_string($geocache['internal_id'])."',
+                        '".Db::escape_string($request->token->user_id)."'
                     );
                 ");
             elseif ($tmp == 'false')
                 Db::execute("
                     delete from cache_ignore
                     where
-                        cache_id = '".mysql_real_escape_string($geocache['internal_id'])."'
-                        and user_id = '".mysql_real_escape_string($request->token->user_id)."'
+                        cache_id = '".Db::escape_string($geocache['internal_id'])."'
+                        and user_id = '".Db::escape_string($request->token->user_id)."'
                 ");
         }
 

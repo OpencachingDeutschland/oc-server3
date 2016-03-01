@@ -29,7 +29,7 @@ class View
                 okapi_consumers c,
                 okapi_tokens t
             where
-                t.`key` = '".mysql_real_escape_string($token_key)."'
+                t.`key` = '".Db::escape_string($token_key)."'
                 and t.consumer_key = c.`key`
         ");
 

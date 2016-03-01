@@ -153,7 +153,7 @@ class SearchAssistant
                 }
             }
             if (count($types) > 0)
-                $where_conds[] = "caches.type $operator ('".implode("','", array_map('mysql_real_escape_string', $types))."')";
+                $where_conds[] = "caches.type $operator ('".implode("','", array_map('\okapi\Db::escape_string', $types))."')";
             else if ($operator == "in")
                 $where_conds[] = "false";
         }
@@ -183,7 +183,7 @@ class SearchAssistant
                     throw new InvalidParam('size2', "'$name' is not a valid cache size.");
                 }
             }
-            $where_conds[] = "caches.size $operator ('".implode("','", array_map('mysql_real_escape_string', $types))."')";
+            $where_conds[] = "caches.size $operator ('".implode("','", array_map('\okapi\Db::escape_string', $types))."')";
         }
 
         #
@@ -204,7 +204,7 @@ class SearchAssistant
                 throw new InvalidParam('status', "'$name' is not a valid cache status.");
             }
         }
-        $where_conds[] = "caches.status in ('".implode("','", array_map('mysql_real_escape_string', $codes))."')";
+        $where_conds[] = "caches.status in ('".implode("','", array_map('\okapi\Db::escape_string', $codes))."')";
 
         #
         # owner_uuid
@@ -230,7 +230,7 @@ class SearchAssistant
             $user_ids = array();
             foreach ($users as $user)
                 $user_ids[] = $user['internal_id'];
-            $where_conds[] = "caches.user_id $operator ('".implode("','", array_map('mysql_real_escape_string', $user_ids))."')";
+            $where_conds[] = "caches.user_id $operator ('".implode("','", array_map('\okapi\Db::escape_string', $user_ids))."')";
         }
 
         #
@@ -324,12 +324,12 @@ class SearchAssistant
                 if ($tmp > 100 || $tmp < 0)
                     throw new InvalidParam('min_rcmds', "'$tmp'");
                 $tmp = floatval($tmp) / 100.0;
-                $where_conds[] = "$X_TOPRATINGS >= $X_FOUNDS * '".mysql_real_escape_string($tmp)."'";
+                $where_conds[] = "$X_TOPRATINGS >= $X_FOUNDS * '".Db::escape_string($tmp)."'";
                 $where_conds[] = "$X_FOUNDS > 0";
             }
             if (!is_numeric($tmp))
                 throw new InvalidParam('min_rcmds', "'$tmp'");
-            $where_conds[] = "$X_TOPRATINGS >= '".mysql_real_escape_string($tmp)."'";
+            $where_conds[] = "$X_TOPRATINGS >= '".Db::escape_string($tmp)."'";
         }
 
         #
@@ -340,7 +340,7 @@ class SearchAssistant
         {
             if (!is_numeric($tmp))
                 throw new InvalidParam('min_founds', "'$tmp'");
-            $where_conds[] = "$X_FOUNDS >= '".mysql_real_escape_string($tmp)."'";
+            $where_conds[] = "$X_FOUNDS >= '".Db::escape_string($tmp)."'";
         }
 
         #
@@ -352,7 +352,7 @@ class SearchAssistant
         {
             if (!is_numeric($tmp))
                 throw new InvalidParam('max_founds', "'$tmp'");
-            $where_conds[] = "$X_FOUNDS <= '".mysql_real_escape_string($tmp)."'";
+            $where_conds[] = "$X_FOUNDS <= '".Db::escape_string($tmp)."'";
         }
 
         #
@@ -363,7 +363,7 @@ class SearchAssistant
         {
             $timestamp = strtotime($tmp);
             if ($timestamp)
-                $where_conds[] = "unix_timestamp(caches.last_modified) > '".mysql_real_escape_string($timestamp)."'";
+                $where_conds[] = "unix_timestamp(caches.last_modified) > '".Db::escape_string($timestamp)."'";
             else
                 throw new InvalidParam('modified_since', "'$tmp' is not in a valid format or is not a valid date.");
         }
@@ -382,7 +382,7 @@ class SearchAssistant
             {
                 $found_cache_ids = self::get_found_cache_ids(array($this->request->token->user_id));
                 $operator = ($tmp == 'found_only') ? "in" : "not in";
-                $where_conds[] = "caches.cache_id $operator ('".implode("','", array_map('mysql_real_escape_string', $found_cache_ids))."')";
+                $where_conds[] = "caches.cache_id $operator ('".implode("','", array_map('\okapi\Db::escape_string', $found_cache_ids))."')";
             }
         }
 
@@ -400,7 +400,7 @@ class SearchAssistant
             }
             $internal_user_ids = array_map(create_function('$user', 'return $user["internal_id"];'), $users);
             $found_cache_ids = self::get_found_cache_ids($internal_user_ids);
-            $where_conds[] = "caches.cache_id in ('".implode("','", array_map('mysql_real_escape_string', $found_cache_ids))."')";
+            $where_conds[] = "caches.cache_id in ('".implode("','", array_map('\okapi\Db::escape_string', $found_cache_ids))."')";
         }
 
         #
@@ -417,7 +417,7 @@ class SearchAssistant
             }
             $internal_user_ids = array_map(create_function('$user', 'return $user["internal_id"];'), $users);
             $found_cache_ids = self::get_found_cache_ids($internal_user_ids);
-            $where_conds[] = "caches.cache_id not in ('".implode("','", array_map('mysql_real_escape_string', $found_cache_ids))."')";
+            $where_conds[] = "caches.cache_id not in ('".implode("','", array_map('\okapi\Db::escape_string', $found_cache_ids))."')";
         }
 
         #
@@ -435,7 +435,7 @@ class SearchAssistant
                 $watched_cache_ids = Db::select_column("
                     select cache_id
                     from cache_watches
-                    where user_id = '".mysql_real_escape_string($this->request->token->user_id)."'
+                    where user_id = '".Db::escape_string($this->request->token->user_id)."'
                 ");
                 if (Settings::get('OC_BRANCH') == 'oc.de')
                 {
@@ -443,10 +443,10 @@ class SearchAssistant
                         select cache_id
                         from cache_list_items cli, cache_list_watches clw
                         where cli.cache_list_id = clw.cache_list_id
-                        and clw.user_id = '".mysql_real_escape_string($this->request->token->user_id)."'
+                        and clw.user_id = '".Db::escape_string($this->request->token->user_id)."'
                     "));
                 }
-                $where_conds[] = "caches.cache_id in ('".implode("','", array_map('mysql_real_escape_string', $watched_cache_ids))."')";
+                $where_conds[] = "caches.cache_id in ('".implode("','", array_map('\okapi\Db::escape_string', $watched_cache_ids))."')";
             }
         }
 
@@ -485,10 +485,10 @@ class SearchAssistant
             $ignored_cache_ids = Db::select_column("
                 select cache_id
                 from cache_ignore
-                where user_id = '".mysql_real_escape_string($this->request->token->user_id)."'
+                where user_id = '".Db::escape_string($this->request->token->user_id)."'
             ");
             $not = ($ignored_status == 'notignored_only' ? 'not' : '');
-            $where_conds[] = "caches.cache_id ".$not." in ('".implode("','", array_map('mysql_real_escape_string', $ignored_cache_ids))."')";
+            $where_conds[] = "caches.cache_id ".$not." in ('".implode("','", array_map('\okapi\Db::escape_string', $ignored_cache_ids))."')";
         }
 
         #
@@ -502,7 +502,7 @@ class SearchAssistant
             if (!in_array($tmp, array('true', 'false')))
                 throw new InvalidParam('exclude_my_own', "'$tmp'");
             if ($tmp == 'true')
-                $where_conds[] = "caches.user_id != '".mysql_real_escape_string($this->request->token->user_id)."'";
+                $where_conds[] = "caches.user_id != '".Db::escape_string($this->request->token->user_id)."'";
         }
 
         #
@@ -517,7 +517,7 @@ class SearchAssistant
             if (strlen($tmp) > 100)
                 throw new InvalidParam('name', "Maximum length of 'name' parameter is 100 characters");
             $tmp = str_replace("*", "%", str_replace("%", "%%", $tmp));
-            $where_conds[] = "caches.name LIKE '".mysql_real_escape_string($tmp)."'";
+            $where_conds[] = "caches.name LIKE '".Db::escape_string($tmp)."'";
         }
 
         #
@@ -581,7 +581,7 @@ class SearchAssistant
                 $where_conds[] = 'PowerTrail.status = 1';
                 if ($powertrail_ids) {
                     $where_conds[] = "PowerTrail.id in ('".implode(
-                        "','", array_map('mysql_real_escape_string', explode("|", $powertrail_ids))
+                        "','", array_map('\okapi\Db::escape_string', explode("|", $powertrail_ids))
                     )."')";
                 }
             } else {
@@ -601,13 +601,13 @@ class SearchAssistant
             $exists = Db::select_value("
                 select 1
                 from okapi_search_sets
-                where id = '".mysql_real_escape_string($tmp)."'
+                where id = '".Db::escape_string($tmp)."'
             ");
             if (!$exists)
                 throw new InvalidParam('set_and', "Couldn't find a set by given ID.");
             $extra_tables[] = "okapi_search_results osr_and";
             $where_conds[] = "osr_and.cache_id = caches.cache_id";
-            $where_conds[] = "osr_and.set_id = '".mysql_real_escape_string($tmp)."'";
+            $where_conds[] = "osr_and.set_id = '".Db::escape_string($tmp)."'";
         }
 
         #
@@ -800,7 +800,7 @@ class SearchAssistant
                 $extra_joins = array("
                     left join cache_mod_cords
                         on cache_mod_cords.cache_id = caches.cache_id
-                        and cache_mod_cords.user_id = '".mysql_real_escape_string($this->request->token->user_id)."'
+                        and cache_mod_cords.user_id = '".Db::escape_string($this->request->token->user_id)."'
                 ");
             } else {
                 # oc.de
@@ -809,7 +809,7 @@ class SearchAssistant
                 $extra_joins = array("
                     left join coordinates
                         on coordinates.cache_id = caches.cache_id
-                        and coordinates.user_id = '".mysql_real_escape_string($this->request->token->user_id)."'
+                        and coordinates.user_id = '".Db::escape_string($this->request->token->user_id)."'
                         and coordinates.type = 2
                         and coordinates.longitude != 0
                         and coordinates.latitude != 0
@@ -855,10 +855,10 @@ class SearchAssistant
             select cache_id
             from cache_logs
             where
-                user_id in ('".implode("','", array_map('mysql_real_escape_string', $internal_user_ids))."')
+                user_id in ('".implode("','", array_map('\okapi\Db::escape_string', $internal_user_ids))."')
                 and type in (
-                    '".mysql_real_escape_string(Okapi::logtypename2id("Found it"))."',
-                    '".mysql_real_escape_string(Okapi::logtypename2id("Attended"))."'
+                    '".Db::escape_string(Okapi::logtypename2id("Found it"))."',
+                    '".Db::escape_string(Okapi::logtypename2id("Attended"))."'
                 )
                 and ".((Settings::get('OC_BRANCH') == 'oc.pl') ? "deleted = 0" : "true")."
         ");

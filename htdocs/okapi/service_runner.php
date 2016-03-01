@@ -138,7 +138,7 @@ class OkapiServiceRunner
             {
                 Db::execute("
                     update user set last_login=now()
-                    where user_id='".mysql_real_escape_string($request->token->user_id)."'
+                    where user_id='".Db::escape_string($request->token->user_id)."'
                 ");
             }
             Okapi::gettext_domain_restore();
@@ -189,11 +189,11 @@ class OkapiServiceRunner
             insert into okapi_stats_temp (`datetime`, consumer_key, user_id, service_name, calltype, runtime)
             values (
                 now(),
-                '".mysql_real_escape_string($consumer_key)."',
-                '".mysql_real_escape_string($user_id)."',
-                '".mysql_real_escape_string($service_name)."',
-                '".mysql_real_escape_string($calltype)."',
-                '".mysql_real_escape_string($runtime)."'
+                '".Db::escape_string($consumer_key)."',
+                '".Db::escape_string($user_id)."',
+                '".Db::escape_string($service_name)."',
+                '".Db::escape_string($calltype)."',
+                '".Db::escape_string($runtime)."'
             );
         ");
     }

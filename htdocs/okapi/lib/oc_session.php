@@ -25,6 +25,6 @@ class OCSession
         if (!$OC_sessionid)
             return null;
 
-        return Db::select_value("select user_id from sys_sessions where uuid='".mysql_real_escape_string($OC_sessionid)."'");
+        return Db::select_value("select user_id from sys_sessions where uuid='".Db::escape_string($OC_sessionid)."'");
     }
 }

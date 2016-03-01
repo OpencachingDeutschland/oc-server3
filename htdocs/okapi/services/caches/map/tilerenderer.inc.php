@@ -353,7 +353,7 @@ class TileRenderer
             $name = Db::select_value("
                 select name
                 from caches
-                where cache_id = '".mysql_real_escape_string($cache_id)."'
+                where cache_id = '".Db::escape_string($cache_id)."'
             ");
 
             # Split the name into a couple of lines.

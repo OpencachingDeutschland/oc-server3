@@ -130,7 +130,7 @@ class View
         }
 
         $dict = array();
-        while ($row = mysql_fetch_assoc($rs)) {
+        while ($row = Db::fetch_assoc($rs)) {
             $dict[$row['id']][strtolower($row['language'])] = $row['text_long'];
         }
         return $dict;
@@ -165,7 +165,7 @@ class View
         }
 
         $dict = array();
-        while ($row = mysql_fetch_assoc($rs)) {
+        while ($row = Db::fetch_assoc($rs)) {
             $dict[$row['id']] = $row['en'];
         }
         return $dict;
@@ -200,7 +200,7 @@ class View
         }
 
         $dict = array();
-        while ($row = mysql_fetch_assoc($rs)) {
+        while ($row = Db::fetch_assoc($rs)) {
             $dict[$row['id']] = $row['en'];
         }
         return $dict;

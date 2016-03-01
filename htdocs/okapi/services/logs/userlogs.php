@@ -52,7 +52,7 @@ class WebService
                 c.wp_oc as cache_code
             from cache_logs cl, caches c
             where
-                cl.user_id = '".mysql_real_escape_string($user['internal_id'])."'
+                cl.user_id = '".Db::escape_string($user['internal_id'])."'
                 and ".((Settings::get('OC_BRANCH') == 'oc.pl') ? "cl.deleted = 0" : "true")."
                 and c.status in (1,2,3)
                 and cl.cache_id = c.cache_id
@@ -60,7 +60,7 @@ class WebService
             limit $offset, $limit
         ");
         $results = array();
-        while ($row = mysql_fetch_assoc($rs))
+        while ($row = Db::fetch_assoc($rs))
         {
             $results[] = array(
                 'uuid' => $row['uuid'],

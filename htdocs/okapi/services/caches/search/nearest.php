@@ -5,6 +5,7 @@ namespace okapi\services\caches\search\nearest;
 require_once('searching.inc.php');
 
 use okapi\Okapi;
+use okapi\Db;
 use okapi\OkapiRequest;
 use okapi\ParamMissing;
 use okapi\InvalidParam;
@@ -83,13 +84,13 @@ class WebService
             {
                 $radius_degrees = $radius * $km2degrees_upper_estimate_factor;
                 $where_conds[] = "
-                    caches.latitude >= '".mysql_real_escape_string($center_lat - $radius_degrees)."'
-                    and caches.latitude <= '".mysql_real_escape_string($center_lat + $radius_degrees)."'
+                    caches.latitude >= '".Db::escape_string($center_lat - $radius_degrees)."'
+                    and caches.latitude <= '".Db::escape_string($center_lat + $radius_degrees)."'
                     ";
             }
 
             $radius *= 1000;  # convert from kilometers to meters
-            $where_conds[] = "$distance_formula <= '".mysql_real_escape_string($radius)."'";
+            $where_conds[] = "$distance_formula <= '".Db::escape_string($radius)."'";
         }
 
         $search_params = $search_assistant->get_search_params();

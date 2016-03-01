@@ -123,7 +123,7 @@ class Facade
         Db::execute("
             update caches
             set okapi_syncbase = now()
-            where wp_oc in ('".implode("','", array_map('mysql_real_escape_string', $cache_codes))."')
+            where wp_oc in ('".implode("','", array_map('\okapi\Db::escape_string', $cache_codes))."')
         ");
     }
 
@@ -140,8 +140,8 @@ class Facade
             update cache_logs
             set okapi_syncbase = now()
             where
-                cache_id = '".mysql_real_escape_string($cache_id)."'
-                and user_id = '".mysql_real_escape_string($user_id)."'
+                cache_id = '".Db::escape_string($cache_id)."'
+                and user_id = '".Db::escape_string($user_id)."'
         ");
     }
 

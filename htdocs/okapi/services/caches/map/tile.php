@@ -114,7 +114,7 @@ class WebService
         $rows = array();
         if ($rs !== null)
         {
-            while ($row = mysql_fetch_row($rs))
+            while ($row = Db::fetch_row($rs))
                 $rows[] = $row;
             unset($row);
         }
@@ -139,10 +139,10 @@ class WebService
                 $rs = Db::query("
                     select cache_id
                     from cache_ignore
-                    where user_id = '".mysql_real_escape_string($request->token->user_id)."'
+                    where user_id = '".Db::escape_string($request->token->user_id)."'
                 ");
                 $user['ignored'] = array();
-                while (list($cache_id) = mysql_fetch_row($rs))
+                while (list($cache_id) = Db::fetch_row($rs))
                     $user['ignored'][$cache_id] = true;
 
                 # Found caches.
@@ -151,12 +151,12 @@ class WebService
                     select distinct cache_id
                     from cache_logs
                     where
-                        user_id = '".mysql_real_escape_string($request->token->user_id)."'
+                        user_id = '".Db::escape_string($request->token->user_id)."'
                         and type = 1
                         and ".((Settings::get('OC_BRANCH') == 'oc.pl') ? "deleted = 0" : "true")."
                 ");
                 $user['found'] = array();
-                while (list($cache_id) = mysql_fetch_row($rs))
+                while (list($cache_id) = Db::fetch_row($rs))
                     $user['found'][$cache_id] = true;
 
                 # Own caches.
@@ -164,10 +164,10 @@ class WebService
                 $rs = Db::query("
                     select distinct cache_id
                     from caches
-                    where user_id = '".mysql_real_escape_string($request->token->user_id)."'
+                    where user_id = '".Db::escape_string($request->token->user_id)."'
                 ");
                 $user['own'] = array();
-                while (list($cache_id) = mysql_fetch_row($rs))
+                while (list($cache_id) = Db::fetch_row($rs))
                     $user['own'][$cache_id] = true;
 
                 Cache::set($cache_key, $user, 30);

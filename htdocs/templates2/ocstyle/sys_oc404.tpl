@@ -9,7 +9,7 @@
  *
  * This page is currently used only for external sites, e.g. invalid .opencaching.de
  * subdomains. If it shall be used for unknown www.opencaching.de/... pages,
- * id needs to be adapted for www.opencaching.it, www.opencachingspain.es etc.
+ * id needs to be adapted for www.opencaching.it, www.opencaching.fr etc.
  * (e.g. output the correct local domains, and omit Germany-specific things).
  *}
 

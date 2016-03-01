@@ -80,7 +80,7 @@ class WebService
                         ".Okapi::logtypename2id("Attended")."
                     )
             where
-                cl.uuid in ('".implode("','", array_map('mysql_real_escape_string', $log_uuids))."')
+                cl.uuid in ('".implode("','", array_map('\okapi\Db::escape_string', $log_uuids))."')
                 and ".((Settings::get('OC_BRANCH') == 'oc.pl') ? "cl.deleted = 0" : "true")."
                 and cl.user_id = u.user_id
                 and c.cache_id = cl.cache_id
@@ -88,7 +88,7 @@ class WebService
         ");
         $results = array();
         $log_id2uuid = array(); /* Maps logs' internal_ids to uuids */
-        while ($row = mysql_fetch_assoc($rs))
+        while ($row = Db::fetch_assoc($rs))
         {
             $results[$row['uuid']] = array(
                 'uuid' => $row['uuid'],
@@ -109,7 +109,7 @@ class WebService
                 $results[$row['uuid']]['oc_team_entry'] = $row['oc_team_entry'] ? true : false;
             $log_id2uuid[$row['id']] = $row['uuid'];
         }
-        mysql_free_result($rs);
+        Db::free_result($rs);
 
         # fetch images
 
@@ -120,7 +120,7 @@ class WebService
                 from pictures
                 where
                     object_type = 1
-                    and object_id in ('".implode("','", array_map('mysql_real_escape_string', array_keys($log_id2uuid)))."')
+                    and object_id in ('".implode("','", array_map('\okapi\Db::escape_string', array_keys($log_id2uuid)))."')
                     and display = 1   /* currently is always 1 for logpix */
                     and unknown_format = 0
                 order by date_created
@@ -130,7 +130,7 @@ class WebService
             } else {
                 $object_type_param = '';
             }
-            while ($row = mysql_fetch_assoc($rs))
+            while ($row = Db::fetch_assoc($rs))
             {
                 $results[$log_id2uuid[$row['object_id']]]['images'][] =
                     array(
@@ -141,7 +141,7 @@ class WebService
                         'is_spoiler' => ($row['spoiler'] ? true : false),
                     );
             }
-            mysql_free_result($rs);
+            Db::free_result($rs);
         }
 
         # Check which UUIDs were not found and mark them with null.

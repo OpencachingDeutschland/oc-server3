@@ -57,26 +57,26 @@ class OCPLAccessLogs
         {
             // TODO: can we use the _SERVER global here? or should we make them abstract, and
             // pass along with request object?
-            $remote_addr_escaped = "'" . mysql_real_escape_string($_SERVER['REMOTE_ADDR']) . "'";
+            $remote_addr_escaped = "'" . Db::escape_string($_SERVER['REMOTE_ADDR']) . "'";
             $user_agent_escaped = isset($_SERVER['HTTP_USER_AGENT']) ?
-                "'" . mysql_real_escape_string($_SERVER['HTTP_USER_AGENT']) . "'" : "null";
+                "'" . Db::escape_string($_SERVER['HTTP_USER_AGENT']) . "'" : "null";
             $forwarded_for_escaped = isset($_SERVER['HTTP_X_FORWARDED_FOR']) ?
-                "'" . mysql_real_escape_string($_SERVER['HTTP_X_FORWARDED_FOR']) . "'" : "null";
+                "'" . Db::escape_string($_SERVER['HTTP_X_FORWARDED_FOR']) . "'" : "null";
 
-            $consumer_key_escaped = "'" . mysql_real_escape_string($request->consumer->key) . "'";
-            $original_caller_escaped = "'" . mysql_real_escape_string(self::get_original_caller()) . "'";
+            $consumer_key_escaped = "'" . Db::escape_string($request->consumer->key) . "'";
+            $original_caller_escaped = "'" . Db::escape_string(self::get_original_caller()) . "'";
 
             $user_id = null;
             if ($request->token != null)
                 $user_id = $request->token->user_id;
-            $user_id_escaped = $user_id === null ? "null" : "'" . mysql_real_escape_string($user_id) . "'";
+            $user_id_escaped = $user_id === null ? "null" : "'" . Db::escape_string($user_id) . "'";
             if (is_array($cache_ids)){
                 if (count($cache_ids) == 1)
-                    $cache_ids_where = "= '" . mysql_real_escape_string($cache_ids[0]) . "'";
+                    $cache_ids_where = "= '" . Db::escape_string($cache_ids[0]) . "'";
                 else
-                    $cache_ids_where = "in ('" . implode("','", array_map('mysql_real_escape_string', $cache_ids)) . "')";
+                    $cache_ids_where = "in ('" . implode("','", array_map('\okapi\Db::escape_string', $cache_ids)) . "')";
             } else {
-                $cache_ids_where = "= '" . mysql_real_escape_string($cache_ids) . "'";
+                $cache_ids_where = "= '" . Db::escape_string($cache_ids) . "'";
             }
 
             $sql = "
@@ -120,11 +120,11 @@ class OCPLAccessLogs
 
             if (is_array($cache_ids_filterd)){
                 if (count($cache_ids_filterd) == 1)
-                    $cache_ids_where = "= '" . mysql_real_escape_string($cache_ids_filterd[0]) . "'";
+                    $cache_ids_where = "= '" . Db::escape_string($cache_ids_filterd[0]) . "'";
                 else
-                    $cache_ids_where = "in ('" . implode("','", array_map('mysql_real_escape_string', $cache_ids_filterd)) . "')";
+                    $cache_ids_where = "in ('" . implode("','", array_map('\okapi\Db::escape_string', $cache_ids_filterd)) . "')";
             } else {
-                $cache_ids_where = "= '" . mysql_real_escape_string($cache_ids_filterd) . "'";
+                $cache_ids_where = "= '" . Db::escape_string($cache_ids_filterd) . "'";
             }
 
             Db::execute("

@@ -41,9 +41,9 @@ class TileTree
             select status
             from okapi_tile_status
             where
-                z = '".mysql_real_escape_string($zoom)."'
-                and x = '".mysql_real_escape_string($x)."'
-                and y = '".mysql_real_escape_string($y)."'
+                z = '".Db::escape_string($zoom)."'
+                and x = '".Db::escape_string($x)."'
+                and y = '".Db::escape_string($y)."'
         ");
     }
 
@@ -83,9 +83,9 @@ class TileTree
         $tile_upper_x = $x << 8;
         $tile_leftmost_y = $y << 8;
 
-        $zoom_escaped = "'".mysql_real_escape_string($zoom)."'";
-        $tile_upper_x_escaped = "'".mysql_real_escape_string($tile_upper_x)."'";
-        $tile_leftmost_y_escaped = "'".mysql_real_escape_string($tile_leftmost_y)."'";
+        $zoom_escaped = "'".Db::escape_string($zoom)."'";
+        $tile_upper_x_escaped = "'".Db::escape_string($tile_upper_x)."'";
+        $tile_leftmost_y_escaped = "'".Db::escape_string($tile_leftmost_y)."'";
         return Db::query("
             select
                 otc.cache_id,
@@ -97,10 +97,10 @@ class TileTree
                 okapi_search_results osr
             where
                 z = $zoom_escaped
-                and x = '".mysql_real_escape_string($x)."'
-                and y = '".mysql_real_escape_string($y)."'
+                and x = '".Db::escape_string($x)."'
+                and y = '".Db::escape_string($y)."'
                 and otc.cache_id = osr.cache_id
-                and osr.set_id = '".mysql_real_escape_string($set_id)."'
+                and osr.set_id = '".Db::escape_string($set_id)."'
             group by
                 z21x >> (3 + (21 - $zoom_escaped)),
                 z21y >> (3 + (21 - $zoom_escaped))
@@ -163,14 +163,14 @@ class TileTree
                         z, x, y, cache_id, z21x, z21y, status, type, rating, flags, name_crc
                     ) values (
                         0, 0, 0,
-                        '".mysql_real_escape_string($row[0])."',
-                        '".mysql_real_escape_string($row[1])."',
-                        '".mysql_real_escape_string($row[2])."',
-                        '".mysql_real_escape_string($row[3])."',
-                        '".mysql_real_escape_string($row[4])."',
-                        ".(($row[5] === null) ? "null" : "'".mysql_real_escape_string($row[5])."'").",
-                        '".mysql_real_escape_string($row[6])."',
-                        '".mysql_real_escape_string($row[7])."'
+                        '".Db::escape_string($row[0])."',
+                        '".Db::escape_string($row[1])."',
+                        '".Db::escape_string($row[2])."',
+                        '".Db::escape_string($row[3])."',
+                        '".Db::escape_string($row[4])."',
+                        ".(($row[5] === null) ? "null" : "'".Db::escape_string($row[5])."'").",
+                        '".Db::escape_string($row[6])."',
+                        '".Db::escape_string($row[7])."'
                     );
                 ");
             }
@@ -227,16 +227,16 @@ class TileTree
                         flags, name_crc
                     )
                     select
-                        '".mysql_real_escape_string($zoom)."',
-                        '".mysql_real_escape_string($x)."',
-                        '".mysql_real_escape_string($y)."',
+                        '".Db::escape_string($zoom)."',
+                        '".Db::escape_string($x)."',
+                        '".Db::escape_string($y)."',
                         cache_id, z21x, z21y, status, type, rating,
                         flags, name_crc
                     from okapi_tile_caches
                     where
-                        z = '".mysql_real_escape_string($parent_zoom)."'
-                        and x = '".mysql_real_escape_string($parent_x)."'
-                        and y = '".mysql_real_escape_string($parent_y)."'
+                        z = '".Db::escape_string($parent_zoom)."'
+                        and x = '".Db::escape_string($parent_x)."'
+                        and y = '".Db::escape_string($parent_y)."'
                         and z21x between $left_z21x and $right_z21x
                         and z21y between $top_z21y and $bottom_z21y
                 ");
@@ -244,9 +244,9 @@ class TileTree
                     select 1
                     from okapi_tile_caches
                     where
-                        z = '".mysql_real_escape_string($zoom)."'
-                        and x = '".mysql_real_escape_string($x)."'
-                        and y = '".mysql_real_escape_string($y)."'
+                        z = '".Db::escape_string($zoom)."'
+                        and x = '".Db::escape_string($x)."'
+                        and y = '".Db::escape_string($y)."'
                     limit 1;
                 ");
                 if ($test)
@@ -261,10 +261,10 @@ class TileTree
         Db::execute("
             replace into okapi_tile_status (z, x, y, status)
             values (
-                '".mysql_real_escape_string($zoom)."',
-                '".mysql_real_escape_string($x)."',
-                '".mysql_real_escape_string($y)."',
-                '".mysql_real_escape_string($status)."'
+                '".Db::escape_string($zoom)."',
+                '".Db::escape_string($x)."',
+                '".Db::escape_string($y)."',
+                '".Db::escape_string($status)."'
             );
         ");
 

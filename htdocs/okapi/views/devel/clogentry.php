@@ -25,7 +25,7 @@ class View
         $tmp = Db::select_value("
             select data
             from okapi_clog
-            where id='".mysql_real_escape_string($_GET['id'])."'
+            where id='".Db::escape_string($_GET['id'])."'
         ");
         $data = unserialize(gzinflate($tmp));
 

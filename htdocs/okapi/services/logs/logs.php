@@ -50,7 +50,7 @@ class WebService
             select uuid
             from cache_logs
             where
-                cache_id = '".mysql_real_escape_string($cache['internal_id'])."'
+                cache_id = '".Db::escape_string($cache['internal_id'])."'
                 and ".((Settings::get('OC_BRANCH') == 'oc.pl') ? "deleted = 0" : "true")."
             order by date desc
             limit $offset, $limit

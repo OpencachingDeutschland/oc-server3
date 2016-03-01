@@ -36,14 +36,14 @@ class View
         Db::execute("
             delete from okapi_tokens
             where
-                user_id = '".mysql_real_escape_string($OC_user_id)."'
-                and consumer_key = '".mysql_real_escape_string($consumer_key)."'
+                user_id = '".Db::escape_string($OC_user_id)."'
+                and consumer_key = '".Db::escape_string($consumer_key)."'
         ");
         Db::execute("
             delete from okapi_authorizations
             where
-                user_id = '".mysql_real_escape_string($OC_user_id)."'
-                and consumer_key = '".mysql_real_escape_string($consumer_key)."'
+                user_id = '".Db::escape_string($OC_user_id)."'
+                and consumer_key = '".Db::escape_string($consumer_key)."'
         ");
 
         # Redirect back to the apps page.

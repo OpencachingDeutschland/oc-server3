@@ -104,7 +104,7 @@ class WebService
         $user_uuid = $request->get_parameter('user_uuid');
         if ($user_uuid != null)
         {
-            $user_id = Db::select_value("select user_id from user where uuid='".mysql_real_escape_string($user_uuid)."'");
+            $user_id = Db::select_value("select user_id from user where uuid='".Db::escape_string($user_uuid)."'");
             if ($user_id == null)
                 throw new InvalidParam('user_uuid', "User not found.");
             if (($request->token != null) && ($request->token->user_id != $user_id))
@@ -178,7 +178,7 @@ class WebService
                     caches c
                     left join stat_caches as sc on c.cache_id = sc.cache_id
                 where
-                    wp_oc in ('".implode("','", array_map('mysql_real_escape_string', $cache_codes))."')
+                    wp_oc in ('".implode("','", array_map('\okapi\Db::escape_string', $cache_codes))."')
                     and status in (1,2,3)
             ");
         }
@@ -209,7 +209,7 @@ class WebService
                 from
                     caches c
                 where
-                    wp_oc in ('".implode("','", array_map('mysql_real_escape_string', $cache_codes))."')
+                    wp_oc in ('".implode("','", array_map('\okapi\Db::escape_string', $cache_codes))."')
                     and c.status in (1,2,3)
             ");
         }
@@ -217,7 +217,7 @@ class WebService
         $results = new ArrayObject();
         $cacheid2wptcode = array();
         $owner_ids = array();
-        while ($row = mysql_fetch_assoc($rs))
+        while ($row = Db::fetch_assoc($rs))
         {
             $entry = array();
             $cacheid2wptcode[$row['cache_id']] = $row['wp_oc'];
@@ -349,7 +349,7 @@ class WebService
             }
             $results[$row['wp_oc']] = $entry;
         }
-        mysql_free_result($rs);
+        Db::free_result($rs);
 
         # owner
 
@@ -358,10 +358,10 @@ class WebService
             $rs = Db::query("
                 select user_id, uuid, username
                 from user
-                where user_id in ('".implode("','", array_map('mysql_real_escape_string', array_values($owner_ids)))."')
+                where user_id in ('".implode("','", array_map('\okapi\Db::escape_string', array_values($owner_ids)))."')
             ");
             $tmp = array();
-            while ($row = mysql_fetch_assoc($rs))
+            while ($row = Db::fetch_assoc($rs))
                 $tmp[$row['user_id']] = $row;
             foreach ($results as $cache_code => &$result_ref)
             {
@@ -388,10 +388,10 @@ class WebService
                 where
                     c.cache_id = cl.cache_id
                     and cl.type in (
-                        '".mysql_real_escape_string(Okapi::logtypename2id("Found it"))."',
-                        '".mysql_real_escape_string(Okapi::logtypename2id("Attended"))."'
+                        '".Db::escape_string(Okapi::logtypename2id("Found it"))."',
+                        '".Db::escape_string(Okapi::logtypename2id("Attended"))."'
                     )
-                    and cl.user_id = '".mysql_real_escape_string($user_id)."'
+                    and cl.user_id = '".Db::escape_string($user_id)."'
                     ".((Settings::get('OC_BRANCH') == 'oc.pl') ? "and cl.deleted = 0" : "")."
             ");
             $tmp2 = array();
@@ -414,8 +414,8 @@ class WebService
                     cache_logs cl
                 where
                     c.cache_id = cl.cache_id
-                    and cl.type = '".mysql_real_escape_string(Okapi::logtypename2id("Didn't find it"))."'
-                    and cl.user_id = '".mysql_real_escape_string($user_id)."'
+                    and cl.type = '".Db::escape_string(Okapi::logtypename2id("Didn't find it"))."'
+                    and cl.user_id = '".Db::escape_string($user_id)."'
                     ".((Settings::get('OC_BRANCH') == 'oc.pl') ? "and cl.deleted = 0" : "")."
             ");
             $tmp2 = array();
@@ -438,7 +438,7 @@ class WebService
                     cache_watches cw
                 where
                     c.cache_id = cw.cache_id
-                    and cw.user_id = '".mysql_real_escape_string($request->token->user_id)."'
+                    and cw.user_id = '".Db::escape_string($request->token->user_id)."'
             ");
             $tmp2 = array();
             foreach ($tmp as $cache_code)
@@ -456,7 +456,7 @@ class WebService
                   where
                       cli.cache_id = c.cache_id
                       and clw.cache_list_id = cli.cache_list_id
-                      and clw.user_id = '".mysql_real_escape_string($request->token->user_id)."'
+                      and clw.user_id = '".Db::escape_string($request->token->user_id)."'
               ");
               foreach ($tmp as $cache_code)
                   $tmp2[$cache_code] = true;
@@ -479,7 +479,7 @@ class WebService
                     cache_ignore ci
                 where
                     c.cache_id = ci.cache_id
-                    and ci.user_id = '".mysql_real_escape_string($request->token->user_id)."'
+                    and ci.user_id = '".Db::escape_string($request->token->user_id)."'
             ");
             $tmp2 = array();
             foreach ($tmp as $cache_code)
@@ -511,9 +511,9 @@ class WebService
             $rs = Db::query("
                 select cache_id, language, `desc`, short_desc, hint
                 from cache_desc
-                where cache_id in ('".implode("','", array_map('mysql_real_escape_string', array_keys($cacheid2wptcode)))."')
+                where cache_id in ('".implode("','", array_map('\okapi\Db::escape_string', array_keys($cacheid2wptcode)))."')
             ");
-            while ($row = mysql_fetch_assoc($rs))
+            while ($row = Db::fetch_assoc($rs))
             {
                 $cache_code = $cacheid2wptcode[$row['cache_id']];
                 // strtolower - ISO 639-1 codes are lowercase
@@ -584,7 +584,7 @@ class WebService
                 select object_id, uuid, url, title, spoiler, ".$preview_field." as preview
                 from pictures
                 where
-                    object_id in ('".implode("','", array_map('mysql_real_escape_string', array_keys($cacheid2wptcode)))."')
+                    object_id in ('".implode("','", array_map('\okapi\Db::escape_string', array_keys($cacheid2wptcode)))."')
                     and display = 1
                     and object_type = 2
                     and unknown_format = 0
@@ -598,7 +598,7 @@ class WebService
             $rs = Db::query($sql);
             unset($sql);
             $prev_cache_code = null;
-            while ($row = mysql_fetch_assoc($rs))
+            while ($row = Db::fetch_assoc($rs))
             {
                 $cache_code = $cacheid2wptcode[$row['object_id']];
                 if ($cache_code != $prev_cache_code)
@@ -649,9 +649,9 @@ class WebService
             $rs = Db::query("
                 select cache_id, attrib_id
                 from caches_attributes
-                where cache_id in ('".implode("','", array_map('mysql_real_escape_string', array_keys($cacheid2wptcode)))."')
+                where cache_id in ('".implode("','", array_map('\okapi\Db::escape_string', array_keys($cacheid2wptcode)))."')
             ");
-            while ($row = mysql_fetch_assoc($rs))
+            while ($row = Db::fetch_assoc($rs))
             {
                 $cache_code = $cacheid2wptcode[$row['cache_id']];
                 $attr_internal_id = $row['attrib_id'];
@@ -692,7 +692,7 @@ class WebService
                 select cache_id, uuid, date
                 from cache_logs
                 where
-                    cache_id in ('".implode("','", array_map('mysql_real_escape_string', array_keys($cacheid2wptcode)))."')
+                    cache_id in ('".implode("','", array_map('\okapi\Db::escape_string', array_keys($cacheid2wptcode)))."')
                     and ".((Settings::get('OC_BRANCH') == 'oc.pl') ? "deleted = 0" : "true")."
                 order by cache_id, date desc, date_created desc
             ");
@@ -702,7 +702,7 @@ class WebService
             {
                 # User wants some of the latest logs.
                 $tmp = array();
-                while ($row = mysql_fetch_assoc($rs))
+                while ($row = Db::fetch_assoc($rs))
                     $tmp[$row['cache_id']][] = $row;
                 foreach ($tmp as $cache_key => &$rowslist_ref)
                 {
@@ -720,7 +720,7 @@ class WebService
             else
             {
                 # User wants ALL logs.
-                while ($row = mysql_fetch_assoc($rs))
+                while ($row = Db::fetch_assoc($rs))
                 {
                     $loguuids[] = $row['uuid'];
                     $log2cache_map[$row['uuid']] = $cacheid2wptcode[$row['cache_id']];
@@ -780,8 +780,8 @@ class WebService
                     select cache_id, max(date) as date, group_concat(`desc`) as `desc`
                     from cache_notes
                     where
-                        cache_id in ('".implode("','", array_map('mysql_real_escape_string', array_keys($cacheid2wptcode)))."')
-                        and user_id = '".mysql_real_escape_string($request->token->user_id)."'
+                        cache_id in ('".implode("','", array_map('\okapi\Db::escape_string', array_keys($cacheid2wptcode)))."')
+                        and user_id = '".Db::escape_string($request->token->user_id)."'
                     group by cache_id
                 ");
             }
@@ -794,12 +794,12 @@ class WebService
                     from coordinates
                     where
                         type = 2  -- personal note
-                        and cache_id in ('".implode("','", array_map('mysql_real_escape_string', array_keys($cacheid2wptcode)))."')
-                        and user_id = '".mysql_real_escape_string($request->token->user_id)."'
+                        and cache_id in ('".implode("','", array_map('\okapi\Db::escape_string', array_keys($cacheid2wptcode)))."')
+                        and user_id = '".Db::escape_string($request->token->user_id)."'
                     group by cache_id
                 ");
             }
-            while ($row = mysql_fetch_assoc($rs))
+            while ($row = Db::fetch_assoc($rs))
             {
                 # This one is plain-text. We may add my_notes_html for those who want it in HTML.
                 $results[$cacheid2wptcode[$row['cache_id']]]['my_notes'] = strip_tags($row['desc']);
@@ -821,10 +821,10 @@ class WebService
                     gk_item gki
                 where
                     gkiw.id = gki.id
-                    and gkiw.wp in ('".implode("','", array_map('mysql_real_escape_string', $cache_codes))."')
+                    and gkiw.wp in ('".implode("','", array_map('\okapi\Db::escape_string', $cache_codes))."')
             ");
             $trs = array();
-            while ($row = mysql_fetch_assoc($rs))
+            while ($row = Db::fetch_assoc($rs))
                 $trs[$row['cache_code']][] = $row;
             foreach ($results as $cache_code => &$result_ref)
             {
@@ -855,11 +855,11 @@ class WebService
                 $rs = Db::query("
                     select wp as cache_code, count(*) as count
                     from gk_item_waypoint
-                    where wp in ('".implode("','", array_map('mysql_real_escape_string', $cache_codes))."')
+                    where wp in ('".implode("','", array_map('\okapi\Db::escape_string', $cache_codes))."')
                     group by wp
                 ");
                 $tr_counts = new ArrayObject();
-                while ($row = mysql_fetch_assoc($rs))
+                while ($row = Db::fetch_assoc($rs))
                     $tr_counts[$row['cache_code']] = $row['count'];
                 foreach ($results as $cache_code => &$result_ref)
                 {
@@ -888,9 +888,9 @@ class WebService
                         coordinates_type ct
                         left join sys_trans_text stt on stt.trans_id = ct.trans_id
                 ");
-                while ($row = mysql_fetch_assoc($rs))
+                while ($row = Db::fetch_assoc($rs))
                     $internal_wpt_type_id2names[$row['id']][$row['language']] = $row['text'];
-                mysql_free_result($rs);
+                Db::free_result($rs);
             }
             else
             {
@@ -899,7 +899,7 @@ class WebService
                     from waypoint_type
                     where id > 0
                 ");
-                while ($row = mysql_fetch_assoc($rs))
+                while ($row = Db::fetch_assoc($rs))
                 {
                     $internal_wpt_type_id2names[$row['id']]['pl'] = $row['pl'];
                     $internal_wpt_type_id2names[$row['id']]['en'] = $row['en'];
@@ -908,7 +908,7 @@ class WebService
 
             foreach ($results as &$result_ref)
                 $result_ref['alt_wpts'] = array();
-            $cache_codes_escaped_and_imploded = "'".implode("','", array_map('mysql_real_escape_string', array_keys($cacheid2wptcode)))."'";
+            $cache_codes_escaped_and_imploded = "'".implode("','", array_map('\okapi\Db::escape_string', array_keys($cacheid2wptcode)))."'";
 
             if (Settings::get('OC_BRANCH') == 'oc.pl')
             {
@@ -1017,7 +1017,7 @@ class WebService
                         from cache_mod_cords
                         where
                             cache_id in ($cache_codes_escaped_and_imploded)
-                            and user_id = '".mysql_real_escape_string($request->token->user_id)."'
+                            and user_id = '".Db::escape_string($request->token->user_id)."'
                     ");
                 } else {
                     # oc.de
@@ -1027,7 +1027,7 @@ class WebService
                         from coordinates
                         where
                             cache_id in ($cache_codes_escaped_and_imploded)
-                            and user_id = '".mysql_real_escape_string($request->token->user_id)."'
+                            and user_id = '".Db::escape_string($request->token->user_id)."'
                             and type = 2
                             and longitude != 0
                             and latitude != 0
@@ -1086,12 +1086,12 @@ class WebService
                         inner join countries on countries.short=c.country
                         inner join sys_trans_text stt on stt.trans_id = countries.trans_id
                     where
-                        c.wp_oc in ('".implode("','", array_map('mysql_real_escape_string', $cache_codes))."')
+                        c.wp_oc in ('".implode("','", array_map('\okapi\Db::escape_string', $cache_codes))."')
                 ");
                 $country_codes2names = array();
-                while ($row = mysql_fetch_assoc($rs))
+                while ($row = Db::fetch_assoc($rs))
                     $country_codes2names[$row['country']][$row['language']] = $row['text'];
-                mysql_free_result($rs);
+                Db::free_result($rs);
 
                 # get geocache countries and states
                 $rs = Db::query("
@@ -1103,9 +1103,9 @@ class WebService
                         caches c
                         left join cache_location cl on c.cache_id = cl.cache_id
                     where
-                        c.wp_oc in ('".implode("','", array_map('mysql_real_escape_string', $cache_codes))."')
+                        c.wp_oc in ('".implode("','", array_map('\okapi\Db::escape_string', $cache_codes))."')
                 ");
-                while ($row = mysql_fetch_assoc($rs))
+                while ($row = Db::fetch_assoc($rs))
                 {
                     if (!isset($country_codes2names[$row['country_code']]))
                         $countries[$row['cache_code']] = '';
@@ -1113,7 +1113,7 @@ class WebService
                         $countries[$row['cache_code']] = Okapi::pick_best_language($country_codes2names[$row['country_code']], $langpref);
                     $states[$row['cache_code']] = $row['state'];
                 }
-                mysql_free_result($rs);
+                Db::free_result($rs);
             }
             else
             {
@@ -1131,15 +1131,15 @@ class WebService
                         caches c,
                         cache_location cl
                     where
-                        c.wp_oc in ('".implode("','", array_map('mysql_real_escape_string', $cache_codes))."')
+                        c.wp_oc in ('".implode("','", array_map('\okapi\Db::escape_string', $cache_codes))."')
                         and c.cache_id = cl.cache_id
                 ");
-                while ($row = mysql_fetch_assoc($rs))
+                while ($row = Db::fetch_assoc($rs))
                 {
                     $countries[$row['cache_code']] = $row['country'];
                     $states[$row['cache_code']] = $row['state'];
                 }
-                mysql_free_result($rs);
+                Db::free_result($rs);
             }
 
             if (in_array('country', $fields))
@@ -1175,7 +1175,7 @@ class WebService
 
         if (in_array('protection_areas', $fields))
         {
-            $cache_ids_escaped_and_imploded = "'".implode("','", array_map('mysql_real_escape_string', array_keys($cacheid2wptcode)))."'";
+            $cache_ids_escaped_and_imploded = "'".implode("','", array_map('\okapi\Db::escape_string', array_keys($cacheid2wptcode)))."'";
 
             if (Settings::get('OC_BRANCH') == 'oc.de')
             {
@@ -1241,14 +1241,14 @@ class WebService
                 $result_ref['protection_areas'] = array();
             if ($rs)
             {
-                while ($row = mysql_fetch_assoc($rs))
+                while ($row = Db::fetch_assoc($rs))
                 {
                     $results[$row['cache_code']]['protection_areas'][] = array(
                         'type' => $row['type'],
                         'name' => $row['name'],
                     );
                 }
-                mysql_free_result($rs);
+                Db::free_result($rs);
             }
         }
 

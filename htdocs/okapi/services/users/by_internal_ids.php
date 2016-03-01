@@ -38,14 +38,14 @@ class WebService
         $rs = Db::query("
             select user_id, uuid
             from user
-            where user_id in ('".implode("','", array_map('mysql_real_escape_string', $internal_ids))."')
+            where user_id in ('".implode("','", array_map('\okapi\Db::escape_string', $internal_ids))."')
         ");
         $internalid2useruuid = array();
-        while ($row = mysql_fetch_assoc($rs))
+        while ($row = Db::fetch_assoc($rs))
         {
             $internalid2useruuid[$row['user_id']] = $row['uuid'];
         }
-        mysql_free_result($rs);
+        Db::free_result($rs);
 
         # Retrieve data on given user_uuids.
         $id_results = OkapiServiceRunner::call('services/users/users', new OkapiInternalRequest(

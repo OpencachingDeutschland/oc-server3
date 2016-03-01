@@ -10,6 +10,7 @@ namespace okapi;
 use Exception;
 use ErrorException;
 use ArrayObject;
+use Pdo;
 use OAuthServerException;
 use OAuthServer400Exception;
 use OAuthServer401Exception;
@@ -351,24 +352,67 @@ class InvalidParam extends BadRequest
 class DbException extends Exception {}
 
 #
-# Database access layer.
+# Database access abstraction layer.
 #
 
-/** Database access class. Use this instead of mysql_query, sql or sqlValue. */
+/**
+ * Database access abstraction layer class. Use this instead of "raw" mysql,
+ * mysqli or PDO functions.
+ *
+ * Currently, this class wraps the PDO class in a way which is backwards
+ * compatible with the previously used mysql_* functions (see issue #297 for
+ * details). This is perfectly safe if it is used correctly - and OKAPI was
+ * thoroughly reviewed in this matter, so we're quite confident there are no
+ * SQL injections anyware to be found.
+ *
+ * On the other hand, this is obviously not the way PDO was supposed to be
+ * used. We may choose to deprecate parts of this class in the future, and
+ * expose a PDO-compatible object instead. Until we do that, please use the Db
+ * class and Db::escape_string method, as you'd do in the old mysql-family
+ * functions.
+ */
 class Db
 {
     private static $connected = false;
+    private static $dbh = null;
 
     public static function connect()
     {
-        if (mysql_connect(Settings::get('DB_SERVER'), Settings::get('DB_USERNAME'), Settings::get('DB_PASSWORD')))
-        {
-            mysql_select_db(Settings::get('DB_NAME'));
-            mysql_query("set names '" . Settings::get('DB_CHARSET') . "'");
-            self::$connected = true;
+        $dsnarr = array(
+            'host' => Settings::get('DB_SERVER'),
+            'dbname' => Settings::get('DB_NAME'),
+            'charset' => Settings::get('DB_CHARSET')
+        );
+
+        $options = array(
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+            PDO::ATTR_EMULATE_PREPARES => false
+        );
+
+        /* Older PHP versions do not support the 'charset' DSN option. */
+
+        if ($dsnarr['charset'] and version_compare(PHP_VERSION, '5.3.6', '<')) {
+            $options[PDO::MYSQL_ATTR_INIT_COMMAND] = 'SET NAMES ' . $dsnarr['charset'];
         }
-        else
-            throw new Exception("Could not connect to MySQL: ".mysql_error());
+
+        $dsnpairs = array();
+        foreach ($dsnarr as $k => $v) {
+            if ($v === null) {
+                continue;
+            }
+            $dsnpairs[] = $k . "=" . $v;
+        }
+
+        $dsn = 'mysql:' . implode(';', $dsnpairs);
+        try {
+            self::$dbh = new PDO(
+                $dsn, Settings::get('DB_USERNAME'), Settings::get('DB_PASSWORD'), $options
+            );
+        } catch (PDOException $e) {
+            throw new DbException($e->getMessage());
+        }
+        self::$connected = true;
     }
 
     /** Fetch [{row}], return {row}. */
@@ -398,7 +442,7 @@ class Db
         $rs = self::query($query);
         while (true)
         {
-            $row = mysql_fetch_assoc($rs);
+            $row = Db::fetch_assoc($rs);
             if ($row === false)
                 break;
             if ($keyField == null)
@@ -406,7 +450,7 @@ class Db
             else
                 $arr[$row[$keyField]] = $row;
         }
-        mysql_free_result($rs);
+        Db::free_result($rs);
     }
 
     /** Fetch all [(A,A), (A,B), (B,A)], return {A: [{row}, {row}], B: [{row}]}. */
@@ -416,12 +460,12 @@ class Db
         $rs = self::query($query);
         while (true)
         {
-            $row = mysql_fetch_assoc($rs);
+            $row = Db::fetch_assoc($rs);
             if ($row === false)
                 break;
             $groups[$row[$keyField]][] = $row;
         }
-        mysql_free_result($rs);
+        Db::free_result($rs);
         return $groups;
     }
 
@@ -443,37 +487,72 @@ class Db
         $rs = self::query($query);
         while (true)
         {
-            $values = mysql_fetch_array($rs);
+            $values = Db::fetch_row($rs);
             if ($values === false)
                 break;
             array_push($column, $values[0]);
         }
-        mysql_free_result($rs);
+        Db::free_result($rs);
         return $column;
     }
 
     public static function last_insert_id()
     {
-        return mysql_insert_id();
+        return self::$dbh->lastInsertId();
     }
 
+    public static function fetch_assoc($rs)
+    {
+        return $rs->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public static function fetch_row($rs)
+    {
+        return $rs->fetch(PDO::FETCH_NUM);
+    }
+
+    public static function free_result($rs)
+    {
+        return $rs->closeCursor();
+    }
+
+    public static function escape_string($value)
+    {
+        if (!self::$connected)
+            self::connect();
+        return substr(self::$dbh->quote($value), 1, -1);  // soo ugly!
+    }
+
+    /**
+     * Execute a given *non-SELECT* SQL statement. Return number of affected
+     * rows (that is, rows updated, inserted or deleted by the statement).
+     */
     public static function execute($query)
     {
-        $rs = self::query($query);
-        if ($rs !== true)
-            throw new DbException("Db::execute returned a result set for your query. ".
-                "You should use Db::select_* or Db::query for SELECT queries!");
+        if (!self::$connected)
+            self::connect();
+        try {
+            return self::$dbh->exec($query);
+        } catch (PDOException $e) {
+            list($sqlstate, $errno, $msg) = $e->errorInfo;
+            throw new DbException("SQL Error $errno: $msg\n\nThe query was:\n".$query."\n");
+        }
     }
 
+    /**
+     * Execute a given SQL statement. Return a PDOStatement object.
+     */
     public static function query($query)
     {
         if (!self::$connected)
             self::connect();
-        $rs = mysql_query($query);
-        if (!$rs)
+        try
         {
-            $errno = mysql_errno();
-            $msg = mysql_error();
+            $rs = self::$dbh->query($query);
+        }
+        catch (PDOException $e)
+        {
+            list($sqlstate, $errno, $msg) = $e->errorInfo;
 
             /* Detect issue #340 and try to repair... */
 
@@ -486,7 +565,7 @@ class Db
                     self::execute("repair table okapi_cache");
                     Okapi::mail_admins(
                         "okapi_cache - Automatic repair",
-                        "Hi.\n\nOkapi detected that okapi_cache table needed ".
+                        "Hi.\n\nOKAPI detected that okapi_cache table needed ".
                         "repairs and it has performed such\nrepairs automatically. ".
                         "However, this should not happen regularly!"
                     );
@@ -498,7 +577,7 @@ class Db
                         self::execute("truncate okapi_cache");
                         Okapi::mail_admins(
                             "okapi_cache was truncated",
-                            "Hi.\n\nOkapi detected that okapi_cache table needed ".
+                            "Hi.\n\nOKAPI detected that okapi_cache table needed ".
                             "repairs, but it failed to repair\nthe table automatically. ".
                             "In order to counteract more severe errors, \nwe have ".
                             "truncated the okapi_cache table to make it alive.\n".
@@ -513,16 +592,6 @@ class Db
             throw new DbException("SQL Error $errno: $msg\n\nThe query was:\n".$query."\n");
         }
         return $rs;
-    }
-
-    /**
-     * Return number of rows actually updated, inserted or deleted by the last
-     * statement executed with execute(). It DOES NOT return number of rows
-     * returned by the last select statement.
-     */
-    public static function get_affected_row_count()
-    {
-        return mysql_affected_rows();
     }
 
     public static function field_exists($table, $field)
@@ -970,8 +1039,8 @@ class Okapi
     public static $server;
 
     /* These two get replaced in automatically deployed packages. */
-    public static $version_number = 1145;
-    public static $git_revision = 'a9a2a042125ed7cebd271ff5f5692cec6e6dee2c';
+    public static $version_number = 1151;
+    public static $git_revision = '743881c590d9d8a70e8cefa10ba0b33faaa7835b';
 
     private static $okapi_vars = null;
 
@@ -1007,7 +1076,7 @@ class Okapi
                 from okapi_vars
             ");
             self::$okapi_vars = array();
-            while ($row = mysql_fetch_assoc($rs))
+            while ($row = Db::fetch_assoc($rs))
                 self::$okapi_vars[$row['var']] = $row['value'];
         }
         if (isset(self::$okapi_vars[$varname]))
@@ -1026,8 +1095,8 @@ class Okapi
         Db::execute("
             replace into okapi_vars (var, value)
             values (
-                '".mysql_real_escape_string($varname)."',
-                '".mysql_real_escape_string($value)."');
+                '".Db::escape_string($varname)."',
+                '".Db::escape_string($value)."');
         ");
         self::$okapi_vars[$varname] = $value;
     }
@@ -1377,11 +1446,11 @@ class Okapi
         Db::execute("
             insert into okapi_consumers (`key`, name, secret, url, email, date_created)
             values (
-                '".mysql_real_escape_string($consumer->key)."',
-                '".mysql_real_escape_string($consumer->name)."',
-                '".mysql_real_escape_string($consumer->secret)."',
-                '".mysql_real_escape_string($consumer->url)."',
-                '".mysql_real_escape_string($consumer->email)."',
+                '".Db::escape_string($consumer->key)."',
+                '".Db::escape_string($consumer->name)."',
+                '".Db::escape_string($consumer->secret)."',
+                '".Db::escape_string($consumer->url)."',
+                '".Db::escape_string($consumer->email)."',
                 now()
             );
         ");
@@ -1894,9 +1963,9 @@ class Cache
         Db::execute("
             replace into okapi_cache (`key`, value, expires)
             values (
-                '".mysql_real_escape_string($key)."',
-                '".mysql_real_escape_string(gzdeflate(serialize($value)))."',
-                date_add(now(), interval '".mysql_real_escape_string($timeout)."' second)
+                '".Db::escape_string($key)."',
+                '".Db::escape_string(gzdeflate(serialize($value)))."',
+                date_add(now(), interval '".Db::escape_string($timeout)."' second)
             );
         ");
     }
@@ -1910,8 +1979,8 @@ class Cache
         Db::execute("
             replace into okapi_cache (`key`, value, expires, score)
             values (
-                '".mysql_real_escape_string($key)."',
-                '".mysql_real_escape_string(gzdeflate(serialize($value)))."',
+                '".Db::escape_string($key)."',
+                '".Db::escape_string(gzdeflate(serialize($value)))."',
                 date_add(now(), interval 120 day),
                 1.0
             );
@@ -1933,9 +2002,9 @@ class Cache
         foreach ($dict as $key => $value)
         {
             $entries_escaped[] = "(
-                '".mysql_real_escape_string($key)."',
-                '".mysql_real_escape_string(gzdeflate(serialize($value)))."',
-                date_add(now(), interval '".mysql_real_escape_string($timeout)."' second)
+                '".Db::escape_string($key)."',
+                '".Db::escape_string(gzdeflate(serialize($value)))."',
+                date_add(now(), interval '".Db::escape_string($timeout)."' second)
             )";
         }
         Db::execute("
@@ -1954,17 +2023,17 @@ class Cache
             select value, score
             from okapi_cache
             where
-                `key` = '".mysql_real_escape_string($key)."'
+                `key` = '".Db::escape_string($key)."'
                 and expires > now()
         ");
-        list($blob, $score) = mysql_fetch_array($rs);
+        list($blob, $score) = Db::fetch_row($rs);
         if (!$blob)
             return null;
         if ($score != null)  # Only non-null entries are scored.
         {
             Db::execute("
                 insert into okapi_cache_reads (`cache_key`)
-                values ('".mysql_real_escape_string($key)."')
+                values ('".Db::escape_string($key)."')
             ");
         }
         return unserialize(gzinflate($blob));
@@ -1978,10 +2047,10 @@ class Cache
             select `key`, value
             from okapi_cache
             where
-                `key` in ('".implode("','", array_map('mysql_real_escape_string', $keys))."')
+                `key` in ('".implode("','", array_map('\okapi\Db::escape_string', $keys))."')
                 and expires > now()
         ");
-        while ($row = mysql_fetch_assoc($rs))
+        while ($row = Db::fetch_assoc($rs))
         {
             try
             {
@@ -2019,7 +2088,7 @@ class Cache
             return;
         Db::execute("
             delete from okapi_cache
-            where `key` in ('".implode("','", array_map('mysql_real_escape_string', $keys))."')
+            where `key` in ('".implode("','", array_map('\okapi\Db::escape_string', $keys))."')
         ");
     }
 }
@@ -2274,7 +2343,7 @@ class OkapiHttpRequest extends OkapiRequest
             # developer might have issued.
 
             $debug_user_id = Db::select_value("select user_id from user where username='".
-                mysql_real_escape_string($options['DEBUG_AS_USERNAME'])."'");
+                Db::escape_string($options['DEBUG_AS_USERNAME'])."'");
             if ($debug_user_id == null)
                 throw new Exception("Invalid user name in DEBUG_AS_USERNAME: '".$options['DEBUG_AS_USERNAME']."'");
             $this->consumer = new OkapiDebugConsumer();

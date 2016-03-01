@@ -46,8 +46,8 @@ class View
                 sum(total_runtime)
             from okapi_stats_hourly
             where
-                period_start >= '".mysql_real_escape_string($start)."'
-                and period_start < '".mysql_real_escape_string($end)."'
+                period_start >= '".Db::escape_string($start)."'
+                and period_start < '".Db::escape_string($end)."'
                 and service_name like '%caches/map/tile%'
             group by service_name
         ");
@@ -57,7 +57,7 @@ class View
         $calls = array('A' => 0, 'B' => 0, 'C' => 0, 'D' => 0);
         $runtime = array('A' => 0.0, 'B' => 0.0, 'C' => 0.0, 'D' => 0.0);
 
-        while (list($name, $c, $r) = mysql_fetch_array($rs))
+        while (list($name, $c, $r) = Db::fetch_row($rs))
         {
             if ($name == 'services/caches/map/tile')
             {
@@ -151,7 +151,7 @@ class View
             where score is not null
             group by floor(log2(score))
         ");
-        while (list($log2, $count, $size) = mysql_fetch_array($rs))
+        while (list($log2, $count, $size) = Db::fetch_row($rs))
         {
             print $count." elements ($size bytes) with score between ".pow(2, $log2)." and ".pow(2, $log2 + 1).".\n";
         }

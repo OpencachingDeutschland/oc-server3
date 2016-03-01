@@ -123,11 +123,11 @@ class WebService
                 from coordinates
                 where
                     type = 2  -- personal note
-                    and cache_id = '".mysql_real_escape_string($cache_id)."'
-                    and user_id = '".mysql_real_escape_string($user_id)."'
+                    and cache_id = '".Db::escape_string($cache_id)."'
+                    and user_id = '".Db::escape_string($user_id)."'
             ");
             $id = null;
-            if($row = mysql_fetch_assoc($rs)) {
+            if($row = Db::fetch_assoc($rs)) {
                 $id = $row['id'];
             }
             if ($id == null) {
@@ -137,17 +137,17 @@ class WebService
                         description
                     ) values (
                         2, 0, 0,
-                        '".mysql_real_escape_string($cache_id)."',
-                        '".mysql_real_escape_string($user_id)."',
-                        '".mysql_real_escape_string($new_notes)."'
+                        '".Db::escape_string($cache_id)."',
+                        '".Db::escape_string($user_id)."',
+                        '".Db::escape_string($new_notes)."'
                     )
                 ");
             } else {
                 Db::query("
                     update coordinates
-                    set description = '".mysql_real_escape_string($new_notes)."'
+                    set description = '".Db::escape_string($new_notes)."'
                     where
-                        id = '".mysql_real_escape_string($id)."'
+                        id = '".Db::escape_string($id)."'
                         and type = 2
                 ");
             }
@@ -158,11 +158,11 @@ class WebService
                 select max(note_id) as id
                 from cache_notes
                 where
-                    cache_id = '".mysql_real_escape_string($cache_id)."'
-                    and user_id = '".mysql_real_escape_string($user_id)."'
+                    cache_id = '".Db::escape_string($cache_id)."'
+                    and user_id = '".Db::escape_string($user_id)."'
             ");
             $id = null;
-            if($row = mysql_fetch_assoc($rs)) {
+            if($row = Db::fetch_assoc($rs)) {
                 $id = $row['id'];
             }
             if ($id == null) {
@@ -170,20 +170,20 @@ class WebService
                     insert into cache_notes (
                         cache_id, user_id, date, desc_html, `desc`
                     ) values (
-                        '".mysql_real_escape_string($cache_id)."',
-                        '".mysql_real_escape_string($user_id)."',
+                        '".Db::escape_string($cache_id)."',
+                        '".Db::escape_string($user_id)."',
                         NOW(), 0,
-                        '".mysql_real_escape_string($new_notes)."'
+                        '".Db::escape_string($new_notes)."'
                     )
                 ");
             } else {
                 Db::query("
                     update cache_notes
                     set
-                        `desc` = '".mysql_real_escape_string($new_notes)."',
+                        `desc` = '".Db::escape_string($new_notes)."',
                         desc_html = 0,
                         date = NOW()
-                    where note_id = '".mysql_real_escape_string($id)."'
+                    where note_id = '".Db::escape_string($id)."'
                 ");
             }
         }
@@ -193,16 +193,16 @@ class WebService
     {
         if (Settings::get('OC_BRANCH') == 'oc.de') {
             # we can delete row if and only if there are no coords in it
-            Db::execute("
+            $affected_row_count = Db::execute("
                 delete from coordinates
                 where
                     type = 2  -- personal note
-                    and cache_id = '".mysql_real_escape_string($cache_id)."'
-                    and user_id = '".mysql_real_escape_string($user_id)."'
+                    and cache_id = '".Db::escape_string($cache_id)."'
+                    and user_id = '".Db::escape_string($user_id)."'
                     and longitude = 0
                     and latitude = 0
             ");
-            if (Db::get_affected_row_count() <= 0){
+            if ($affected_row_count <= 0){
                 # no rows deleted - record either doesn't exist, or has coords
                 # remove only description
                 Db::execute("
@@ -210,16 +210,16 @@ class WebService
                     set description = null
                     where
                         type = 2
-                        and cache_id = '".mysql_real_escape_string($cache_id)."'
-                        and user_id = '".mysql_real_escape_string($user_id)."'
+                        and cache_id = '".Db::escape_string($cache_id)."'
+                        and user_id = '".Db::escape_string($user_id)."'
                 ");
             }
         } else {  # oc.pl branch
             Db::execute("
                 delete from cache_notes
                 where
-                    cache_id = '".mysql_real_escape_string($cache_id)."'
-                    and user_id = '".mysql_real_escape_string($user_id)."'
+                    cache_id = '".Db::escape_string($cache_id)."'
+                    and user_id = '".Db::escape_string($user_id)."'
             ");
         }
     }

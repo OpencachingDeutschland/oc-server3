@@ -41,7 +41,7 @@ class View
                 okapi_consumers c,
                 okapi_tokens t
             where
-                t.`key` = '".mysql_real_escape_string($token_key)."'
+                t.`key` = '".Db::escape_string($token_key)."'
                 and t.consumer_key = c.`key`
                 and t.user_id is null
         ");
@@ -109,8 +109,8 @@ class View
             select 1
             from okapi_authorizations
             where
-                user_id = '".mysql_real_escape_string($OC_user_id)."'
-                and consumer_key = '".mysql_real_escape_string($token['consumer_key'])."'
+                user_id = '".Db::escape_string($OC_user_id)."'
+                and consumer_key = '".Db::escape_string($token['consumer_key'])."'
         ", 0);
 
         if (!$authorized)
@@ -125,8 +125,8 @@ class View
                     Db::execute("
                         insert ignore into okapi_authorizations (consumer_key, user_id)
                         values (
-                            '".mysql_real_escape_string($token['consumer_key'])."',
-                            '".mysql_real_escape_string($OC_user_id)."'
+                            '".Db::escape_string($token['consumer_key'])."',
+                            '".Db::escape_string($OC_user_id)."'
                         );
                     ");
                     $authorized = true;
@@ -174,8 +174,8 @@ class View
 
         Db::execute("
             update okapi_tokens
-            set user_id = '".mysql_real_escape_string($OC_user_id)."'
-            where `key` = '".mysql_real_escape_string($token_key)."';
+            set user_id = '".Db::escape_string($OC_user_id)."'
+            where `key` = '".Db::escape_string($token_key)."';
         ");
 
         # Redirect to the callback_url.

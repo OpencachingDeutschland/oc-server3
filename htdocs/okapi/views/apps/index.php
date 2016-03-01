@@ -38,7 +38,7 @@ class View
                 okapi_consumers c,
                 okapi_authorizations a
             where
-                a.user_id = '".mysql_real_escape_string($OC_user_id)."'
+                a.user_id = '".Db::escape_string($OC_user_id)."'
                 and c.`key` = a.consumer_key
             order by c.name
         ");
@@ -48,9 +48,9 @@ class View
         $vars['site_name'] = Okapi::get_normalized_site_name();
         $vars['site_logo'] = Settings::get('SITE_LOGO');
         $vars['apps'] = array();
-        while ($row = mysql_fetch_assoc($rs))
+        while ($row = Db::fetch_assoc($rs))
             $vars['apps'][] = $row;
-        mysql_free_result($rs);
+        Db::free_result($rs);
 
         $response = new OkapiHttpResponse();
         $response->content_type = "text/html; charset=utf-8";

@@ -215,7 +215,7 @@ class WebService
             $valid_password = Db::select_value("
                 select logpw
                 from caches
-                where cache_id = '".mysql_real_escape_string($cache['internal_id'])."'
+                where cache_id = '".Db::escape_string($cache['internal_id'])."'
             ");
             $supplied_password = $request->get_parameter('password');
             if (!$supplied_password) {
@@ -331,8 +331,8 @@ class WebService
             select 1
             from cache_logs
             where
-                user_id = '".mysql_real_escape_string($request->token->user_id)."'
-                and cache_id = '".mysql_real_escape_string($cache['internal_id'])."'
+                user_id = '".Db::escape_string($request->token->user_id)."'
+                and cache_id = '".Db::escape_string($cache['internal_id'])."'
             for update
         ");
 
@@ -351,11 +351,11 @@ class WebService
                 select uuid
                 from cache_logs
                 where
-                    user_id = '".mysql_real_escape_string($request->token->user_id)."'
-                    and cache_id = '".mysql_real_escape_string($cache['internal_id'])."'
-                    and type = '".mysql_real_escape_string(Okapi::logtypename2id($logtype))."'
-                    and date = from_unixtime('".mysql_real_escape_string($when)."')
-                    and text = '".mysql_real_escape_string($formatted_comment)."'
+                    user_id = '".Db::escape_string($request->token->user_id)."'
+                    and cache_id = '".Db::escape_string($cache['internal_id'])."'
+                    and type = '".Db::escape_string(Okapi::logtypename2id($logtype))."'
+                    and date = from_unixtime('".Db::escape_string($when)."')
+                    and text = '".Db::escape_string($formatted_comment)."'
                     ".((Settings::get('OC_BRANCH') == 'oc.pl') ? "and deleted = 0" : "")."
                 limit 1
             ");
@@ -389,9 +389,9 @@ class WebService
                 select 1
                 from cache_logs
                 where
-                    user_id = '".mysql_real_escape_string($user['internal_id'])."'
-                    and cache_id = '".mysql_real_escape_string($cache['internal_id'])."'
-                    and type = '".mysql_real_escape_string(Okapi::logtypename2id("Found it"))."'
+                    user_id = '".Db::escape_string($user['internal_id'])."'
+                    and cache_id = '".Db::escape_string($cache['internal_id'])."'
+                    and type = '".Db::escape_string(Okapi::logtypename2id("Found it"))."'
                     and ".((Settings::get('OC_BRANCH') == 'oc.pl') ? "deleted = 0" : "true")."
             ");
             if ($has_already_found_it) {
@@ -419,8 +419,8 @@ class WebService
                 select 1
                 from scores
                 where
-                    user_id = '".mysql_real_escape_string($user['internal_id'])."'
-                    and cache_id = '".mysql_real_escape_string($cache['internal_id'])."'
+                    user_id = '".Db::escape_string($user['internal_id'])."'
+                    and cache_id = '".Db::escape_string($cache['internal_id'])."'
             ");
             if ($has_already_rated) {
                 throw new CannotPublishException(_(
@@ -440,8 +440,8 @@ class WebService
                 select 1
                 from cache_rating
                 where
-                    user_id = '".mysql_real_escape_string($user['internal_id'])."'
-                    and cache_id = '".mysql_real_escape_string($cache['internal_id'])."'
+                    user_id = '".Db::escape_string($user['internal_id'])."'
+                    and cache_id = '".Db::escape_string($cache['internal_id'])."'
             ");
             if ($already_recommended) {
                 throw new CannotPublishException(_(
@@ -581,17 +581,17 @@ class WebService
                 update caches
                 set
                     score = (
-                        score*votes + '".mysql_real_escape_string($db_score)."'
+                        score*votes + '".Db::escape_string($db_score)."'
                     ) / (votes + 1),
                     votes = votes + 1
-                where cache_id = '".mysql_real_escape_string($cache['internal_id'])."'
+                where cache_id = '".Db::escape_string($cache['internal_id'])."'
             ");
             Db::execute("
                 insert into scores (user_id, cache_id, score)
                 values (
-                    '".mysql_real_escape_string($user['internal_id'])."',
-                    '".mysql_real_escape_string($cache['internal_id'])."',
-                    '".mysql_real_escape_string($db_score)."'
+                    '".Db::escape_string($user['internal_id'])."',
+                    '".Db::escape_string($cache['internal_id'])."',
+                    '".Db::escape_string($db_score)."'
                 );
             ");
         }
@@ -605,9 +605,9 @@ class WebService
                 Db::execute("
                     insert into cache_rating (user_id, cache_id, rating_date)
                     values (
-                        '".mysql_real_escape_string($user['internal_id'])."',
-                        '".mysql_real_escape_string($cache['internal_id'])."',
-                        from_unixtime('".mysql_real_escape_string($when)."')
+                        '".Db::escape_string($user['internal_id'])."',
+                        '".Db::escape_string($cache['internal_id'])."',
+                        from_unixtime('".Db::escape_string($when)."')
                     );
                 ");
             }
@@ -616,8 +616,8 @@ class WebService
                 Db::execute("
                     insert into cache_rating (user_id, cache_id)
                     values (
-                        '".mysql_real_escape_string($user['internal_id'])."',
-                        '".mysql_real_escape_string($cache['internal_id'])."'
+                        '".Db::escape_string($user['internal_id'])."',
+                        '".Db::escape_string($cache['internal_id'])."'
                     );
                 ");
             }
@@ -696,9 +696,9 @@ class WebService
                         founds = founds + 1,
                         last_found = greatest(
                             ifnull(last_found, 0),
-                            from_unixtime('".mysql_real_escape_string($when)."')
+                            from_unixtime('".Db::escape_string($when)."')
                         )
-                    where cache_id = '".mysql_real_escape_string($cache_internal_id)."'
+                    where cache_id = '".Db::escape_string($cache_internal_id)."'
                 ");
             }
             elseif ($logtype == "Didn't find it")
@@ -706,7 +706,7 @@ class WebService
                 Db::execute("
                     update caches
                     set notfounds = notfounds + 1
-                    where cache_id = '".mysql_real_escape_string($cache_internal_id)."'
+                    where cache_id = '".Db::escape_string($cache_internal_id)."'
                 ");
             }
             elseif ($logtype == 'Comment')
@@ -714,7 +714,7 @@ class WebService
                 Db::execute("
                     update caches
                     set notes = notes + 1
-                    where cache_id = '".mysql_real_escape_string($cache_internal_id)."'
+                    where cache_id = '".Db::escape_string($cache_internal_id)."'
                 ");
             }
             else
@@ -747,7 +747,7 @@ class WebService
             Db::execute("
                 update user
                 set $field_to_increment = $field_to_increment + 1
-                where user_id = '".mysql_real_escape_string($user_internal_id)."'
+                where user_id = '".Db::escape_string($user_internal_id)."'
             ");
         }
     }
@@ -763,16 +763,16 @@ class WebService
                 uuid, cache_id, user_id, type, date, text, text_html,
                 last_modified, date_created, node
             ) values (
-                '".mysql_real_escape_string($log_uuid)."',
-                '".mysql_real_escape_string($cache_internal_id)."',
-                '".mysql_real_escape_string($user_internal_id)."',
-                '".mysql_real_escape_string(Okapi::logtypename2id($logtype))."',
-                from_unixtime('".mysql_real_escape_string($when)."'),
-                '".mysql_real_escape_string($formatted_comment)."',
-                '".mysql_real_escape_string($text_html)."',
+                '".Db::escape_string($log_uuid)."',
+                '".Db::escape_string($cache_internal_id)."',
+                '".Db::escape_string($user_internal_id)."',
+                '".Db::escape_string(Okapi::logtypename2id($logtype))."',
+                from_unixtime('".Db::escape_string($when)."'),
+                '".Db::escape_string($formatted_comment)."',
+                '".Db::escape_string($text_html)."',
                 now(),
                 now(),
-                '".mysql_real_escape_string(Settings::get('OC_NODE_ID'))."'
+                '".Db::escape_string(Settings::get('OC_NODE_ID'))."'
             );
         ");
         $log_internal_id = Db::last_insert_id();
@@ -783,8 +783,8 @@ class WebService
         Db::execute("
             insert into okapi_cache_logs (log_id, consumer_key)
             values (
-                '".mysql_real_escape_string($log_internal_id)."',
-                '".mysql_real_escape_string($consumer_key)."'
+                '".Db::escape_string($log_internal_id)."',
+                '".Db::escape_string($consumer_key)."'
             );
         ");
 

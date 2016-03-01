@@ -4,6 +4,7 @@ namespace okapi\services\caches\search\bbox;
 
 require_once('searching.inc.php');
 
+use okapi\Db;
 use okapi\Okapi;
 use okapi\OkapiRequest;
 use okapi\ParamMissing;
@@ -60,15 +61,15 @@ class WebService
         $lat = $search_assistant->get_latitude_expr();
         $lon = $search_assistant->get_longitude_expr();
         $where_conds[] = "(
-            $lat >= '".mysql_real_escape_string($bbsouth)."'
-            and $lat < '".mysql_real_escape_string($bbnorth)."'
+            $lat >= '".Db::escape_string($bbsouth)."'
+            and $lat < '".Db::escape_string($bbnorth)."'
         )";
         if ($bbeast > $bbwest)
         {
             # Easy one.
             $where_conds[] = "(
-                $lon >= '".mysql_real_escape_string($bbwest)."'
-                and $lon < '".mysql_real_escape_string($bbeast)."'
+                $lon >= '".Db::escape_string($bbwest)."'
+                and $lon < '".Db::escape_string($bbeast)."'
             )";
         }
         else
@@ -76,8 +77,8 @@ class WebService
             # We'll have to assume that this bbox goes through the 180-degree meridian.
             # For example, $bbwest = 179 and $bbeast = -179.
             $where_conds[] = "(
-                $lon >= '".mysql_real_escape_string($bbwest)."'
-                or $lon < '".mysql_real_escape_string($bbeast)."'
+                $lon >= '".Db::escape_string($bbwest)."'
+                or $lon < '".Db::escape_string($bbeast)."'
             )";
         }
 

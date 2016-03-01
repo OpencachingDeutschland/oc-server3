@@ -121,11 +121,11 @@ class WebService
                 select cache_id, wp_oc
                 from caches
                 where
-                    cache_id in ('".implode("','", array_map('mysql_real_escape_string', $internal_ids))."')
+                    cache_id in ('".implode("','", array_map('\okapi\Db::escape_string', $internal_ids))."')
                     and status in (1,2,3)
             ");
             $dict = array();
-            while ($row = mysql_fetch_assoc($rs))
+            while ($row = Db::fetch_assoc($rs))
                 $dict[$row['cache_id']] = $row['wp_oc'];
             foreach ($urls_with['internal_id'] as $url => $internal_id)
             {
@@ -145,11 +145,11 @@ class WebService
                 select uuid, wp_oc
                 from caches
                 where
-                    uuid in ('".implode("','", array_map('mysql_real_escape_string', $uuids))."')
+                    uuid in ('".implode("','", array_map('\okapi\Db::escape_string', $uuids))."')
                     and status in (1,2,3)
             ");
             $dict = array();
-            while ($row = mysql_fetch_assoc($rs))
+            while ($row = Db::fetch_assoc($rs))
                 $dict[$row['uuid']] = $row['wp_oc'];
             foreach ($urls_with['uuid'] as $url => $uuid)
             {

@@ -88,7 +88,7 @@ class ReplicateCommon
         $cache_codes = Db::select_column("
             select wp_oc
             from caches
-            where okapi_syncbase > '".mysql_real_escape_string($last_update)."';
+            where okapi_syncbase > '".Db::escape_string($last_update)."';
         ");
         $cache_code_groups = Okapi::make_groups($cache_codes, 50);
         unset($cache_codes);
@@ -109,7 +109,7 @@ class ReplicateCommon
             $log_uuids = Db::select_column("
                 select uuid
                 from cache_logs
-                where okapi_syncbase > '".mysql_real_escape_string($last_update)."'
+                where okapi_syncbase > '".Db::escape_string($last_update)."'
                 limit $offset, 10000;
             ");
             if (count($log_uuids) == 0)
@@ -133,7 +133,7 @@ class ReplicateCommon
             $DELETED_uuids = Db::select_column("
                 select uuid
                 from cache_logs_archived
-                where okapi_syncbase > '".mysql_real_escape_string($last_update)."'
+                where okapi_syncbase > '".Db::escape_string($last_update)."'
             ");
             self::generate_changelog_entries('services/logs/entries', 'log', 'log_uuids',
                 'uuid', $DELETED_uuids, self::$logged_log_entry_fields, false, true, 3600);
@@ -221,7 +221,7 @@ class ReplicateCommon
                 Db::execute("
                     update caches
                     set okapi_syncbase = now()
-                    where wp_oc = '".mysql_real_escape_string($cache_code)."'
+                    where wp_oc = '".Db::escape_string($cache_code)."'
                 ");
                 $sum += 1;
             }
@@ -367,7 +367,7 @@ class ReplicateCommon
                     $data_values[] = gzdeflate(serialize($entry));
                 Db::execute("
                     insert into okapi_clog (data)
-                    values ('".implode("'),('", array_map('mysql_real_escape_string', $data_values))."');
+                    values ('".implode("'),('", array_map('\okapi\Db::escape_string', $data_values))."');
                 ");
             }
 
@@ -388,7 +388,7 @@ class ReplicateCommon
     public static function check_since_param($since)
     {
         $first_id = Db::select_value("
-            select id from okapi_clog where id > '".mysql_real_escape_string($since)."' limit 1
+            select id from okapi_clog where id > '".Db::escape_string($since)."' limit 1
         ");
         if ($first_id === null)
             return true; # okay, since points to the newest revision
@@ -447,11 +447,11 @@ class ReplicateCommon
             $rs = Db::query("
                 select id, data
                 from okapi_clog
-                where id between '".mysql_real_escape_string($from)."' and '".mysql_real_escape_string($to)."'
+                where id between '".Db::escape_string($from)."' and '".Db::escape_string($to)."'
                 order by id
             ");
             $chunk = array();
-            while ($row = mysql_fetch_assoc($rs))
+            while ($row = Db::fetch_assoc($rs))
             {
                 $chunk[] = unserialize(gzinflate($row['data']));
             }

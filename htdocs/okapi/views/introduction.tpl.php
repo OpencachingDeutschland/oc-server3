@@ -57,8 +57,7 @@ Here is the list of other OKAPI installations:</p>
     <li>OKAPI News blog - <a href='http://opencaching-api.blogspot.com/'>http://opencaching-api.blogspot.com/</a></li>
 </ul>
 
-<p>* - Opencaching.DE includes other sites - Opencaching.IT,
-OpencachingSpain.ES and Opencaching.FR - which are in fact the one site visible
+<p>* - Opencaching.DE includes other sites - Opencaching.IT and Opencaching.FR - which are in fact the one site visible
 on multiple domains. All three share one database, so you can access all their
 data through Opencaching.DE OKAPI installation.</p>
 

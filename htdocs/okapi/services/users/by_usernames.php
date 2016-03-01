@@ -39,14 +39,14 @@ class WebService
         $rs = Db::query("
             select username, uuid
             from user
-            where username collate ".Settings::get('DB_CHARSET')."_general_ci in ('".implode("','", array_map('mysql_real_escape_string', $usernames))."')
+            where username collate ".Settings::get('DB_CHARSET')."_general_ci in ('".implode("','", array_map('\okapi\Db::escape_string', $usernames))."')
         ");
         $lower_username2useruuid = array();
-        while ($row = mysql_fetch_assoc($rs))
+        while ($row = Db::fetch_assoc($rs))
         {
             $lower_username2useruuid[mb_strtolower($row['username'], 'utf-8')] = $row['uuid'];
         }
-        mysql_free_result($rs);
+        Db::free_result($rs);
 
         # Retrieve data for the found user_uuids.
 

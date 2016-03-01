@@ -309,7 +309,7 @@ class CacheCleanupCronJob extends Cron5Job
 
         Db::execute("
             update okapi_cache
-            set score = score * '".mysql_real_escape_string($multiplier)."'
+            set score = score * '".Db::escape_string($multiplier)."'
             where score is not null
         ");
         Db::execute("
@@ -334,7 +334,7 @@ class CacheCleanupCronJob extends Cron5Job
             delete from okapi_cache
             where
                 score is not null
-                and score < '".mysql_real_escape_string($limit)."'
+                and score < '".Db::escape_string($limit)."'
         ");
         Db::query("optimize table okapi_cache");
 
@@ -363,7 +363,7 @@ class StatsWriterCronJob extends PrerequestCronJob
     {
         if (Okapi::get_var('db_version', 0) + 0 < 32)
             return;
-        Db::query("lock tables okapi_stats_hourly write, okapi_stats_temp write;");
+        Db::execute("lock tables okapi_stats_hourly write, okapi_stats_temp write;");
         $rs = Db::query("
             select
                 consumer_key,
@@ -376,28 +376,28 @@ class StatsWriterCronJob extends PrerequestCronJob
             from okapi_stats_temp
             group by substr(`datetime`, 1, 13), consumer_key, user_id, service_name, calltype
         ");
-        while ($row = mysql_fetch_assoc($rs))
+        while ($row = Db::fetch_assoc($rs))
         {
             Db::execute("
                 insert into okapi_stats_hourly (consumer_key, user_id, period_start, service_name,
                     total_calls, http_calls, total_runtime, http_runtime)
                 values (
-                    '".mysql_real_escape_string($row['consumer_key'])."',
-                    '".mysql_real_escape_string($row['user_id'])."',
-                    '".mysql_real_escape_string($row['period_start'])."',
-                    '".mysql_real_escape_string($row['service_name'])."',
-                    '".mysql_real_escape_string($row['calls'])."',
-                    '".mysql_real_escape_string(($row['calltype'] == 'http') ? $row['calls'] : 0)."',
-                    '".mysql_real_escape_string($row['runtime'])."',
-                    '".mysql_real_escape_string(($row['calltype'] == 'http') ? $row['runtime'] : 0)."'
+                    '".Db::escape_string($row['consumer_key'])."',
+                    '".Db::escape_string($row['user_id'])."',
+                    '".Db::escape_string($row['period_start'])."',
+                    '".Db::escape_string($row['service_name'])."',
+                    '".Db::escape_string($row['calls'])."',
+                    '".Db::escape_string(($row['calltype'] == 'http') ? $row['calls'] : 0)."',
+                    '".Db::escape_string($row['runtime'])."',
+                    '".Db::escape_string(($row['calltype'] == 'http') ? $row['runtime'] : 0)."'
                 )
                 on duplicate key update
                     ".(($row['calltype'] == 'http') ? "
-                        http_calls = http_calls + '".mysql_real_escape_string($row['calls'])."',
-                        http_runtime = http_runtime + '".mysql_real_escape_string($row['runtime'])."',
+                        http_calls = http_calls + '".Db::escape_string($row['calls'])."',
+                        http_runtime = http_runtime + '".Db::escape_string($row['runtime'])."',
                     " : "")."
-                    total_calls = total_calls + '".mysql_real_escape_string($row['calls'])."',
-                    total_runtime = total_runtime + '".mysql_real_escape_string($row['runtime'])."'
+                    total_calls = total_calls + '".Db::escape_string($row['calls'])."',
+                    total_runtime = total_runtime + '".Db::escape_string($row['runtime'])."'
             ");
         }
         Db::execute("delete from okapi_stats_temp;");
@@ -458,7 +458,7 @@ class StatsCompressorCronJob extends Cron5Job
                         and m.user_id = h.user_id
                         and substr(m.period_start, 1, 7) = substr(h.period_start, 1, 7)
                         and m.service_name = h.service_name
-                where substr(h.period_start, 1, 7) = '".mysql_real_escape_string($month)."'
+                where substr(h.period_start, 1, 7) = '".Db::escape_string($month)."'
                 group by substr(h.period_start, 1, 7), h.consumer_key, h.user_id, h.service_name;
             ");
 
@@ -466,7 +466,7 @@ class StatsCompressorCronJob extends Cron5Job
 
             Db::execute("
                 delete from okapi_stats_hourly
-                where substr(period_start, 1, 7) = '".mysql_real_escape_string($month)."'
+                where substr(period_start, 1, 7) = '".Db::escape_string($month)."'
             ");
         }
         Db::execute("unlock tables;");
@@ -651,7 +651,7 @@ class ChangeLogCleanerJob extends Cron5Job
         }
         Db::execute("
             delete from okapi_clog
-            where id < '".mysql_real_escape_string($new_min_revision)."'
+            where id < '".Db::escape_string($new_min_revision)."'
         ");
         Cache::set($cache_key, $new_data, 10*86400);
         Db::query("optimize table okapi_clog");

@@ -28,7 +28,7 @@ class WebService
                 select count(*)
                 from okapi_stats_temp
                 where
-                    consumer_key = '".mysql_real_escape_string($consumer_key)."'
+                    consumer_key = '".Db::escape_string($consumer_key)."'
                     and service_name='services/replicate/fulldump'
             ")
             +
@@ -36,7 +36,7 @@ class WebService
                 select sum(total_calls)
                 from okapi_stats_hourly
                 where
-                    consumer_key = '".mysql_real_escape_string($consumer_key)."'
+                    consumer_key = '".Db::escape_string($consumer_key)."'
                     and service_name='services/replicate/fulldump'
                     and period_start > date_add(now(), interval -$days day)
                 limit 1

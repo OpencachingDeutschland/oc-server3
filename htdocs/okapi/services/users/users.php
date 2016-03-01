@@ -41,12 +41,12 @@ class WebService
         $rs = Db::query("
             select user_id, uuid, username, admin, latitude, longitude
             from user
-            where uuid in ('".implode("','", array_map('mysql_real_escape_string', $user_uuids))."')
+            where uuid in ('".implode("','", array_map('\okapi\Db::escape_string', $user_uuids))."')
         ");
         $results = array();
         $id2uuid = array();
         $uuid2id = array();
-        while ($row = mysql_fetch_assoc($rs))
+        while ($row = Db::fetch_assoc($rs))
         {
             $id2uuid[$row['user_id']] = $row['uuid'];
             $uuid2id[$row['uuid']] = $row['user_id'];
@@ -91,7 +91,7 @@ class WebService
             }
             $results[$row['uuid']] = $entry;
         }
-        mysql_free_result($rs);
+        Db::free_result($rs);
 
         # caches_found, caches_notfound, caches_hidden
 
@@ -110,7 +110,7 @@ class WebService
                 $rs = Db::query("
                     select user_id, founds_count, notfounds_count, hidden_count
                     from user
-                    where user_id in ('".implode("','", array_map('mysql_real_escape_string', array_keys($id2uuid)))."')
+                    where user_id in ('".implode("','", array_map('\okapi\Db::escape_string', array_keys($id2uuid)))."')
                 ");
             }
             else
@@ -127,11 +127,11 @@ class WebService
                         user u
                         left join stat_user su
                             on su.user_id = u.user_id
-                    where u.user_id in ('".implode("','", array_map('mysql_real_escape_string', array_keys($id2uuid)))."')
+                    where u.user_id in ('".implode("','", array_map('\okapi\Db::escape_string', array_keys($id2uuid)))."')
                 ");
             }
 
-            while ($row = mysql_fetch_assoc($rs))
+            while ($row = Db::fetch_assoc($rs))
             {
                 $extras[$row['user_id']] = array();;
                 $extra_ref = &$extras[$row['user_id']];
@@ -139,18 +139,18 @@ class WebService
                 $extra_ref['caches_notfound'] = 0 + $row['notfounds_count'];
                 $extra_ref['caches_hidden'] = 0 + $row['hidden_count'];
             }
-            mysql_free_result($rs);
+            Db::free_result($rs);
 
             if (in_array('rcmds_given', $fields))
             {
                 $rs = Db::query("
                     select user_id, count(*) as rcmds_given
                     from cache_rating
-                    where user_id in ('".implode("','", array_map('mysql_real_escape_string', array_keys($id2uuid)))."')
+                    where user_id in ('".implode("','", array_map('\okapi\Db::escape_string', array_keys($id2uuid)))."')
                     group by user_id
                 ");
                 $rcmds_counts = array();
-                while ($row = mysql_fetch_assoc($rs))
+                while ($row = Db::fetch_assoc($rs))
                     $rcmds_counts[$row['user_id']] = $row['rcmds_given'];
                 foreach ($extras as $user_id => &$extra_ref)
                 {

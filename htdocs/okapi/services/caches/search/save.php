@@ -34,8 +34,8 @@ class WebService
                 unix_timestamp(expires) as expires
             from okapi_search_sets
             where
-                params_hash = '".mysql_real_escape_string($params_hash)."'
-                and date_add(date_created, interval '".mysql_real_escape_string($ref_max_age)."' second) > now()
+                params_hash = '".Db::escape_string($params_hash)."'
+                and date_add(date_created, interval '".Db::escape_string($ref_max_age)."' second) > now()
             order by id desc
             limit 1
         ");
@@ -128,7 +128,7 @@ class WebService
                         values (
                             'processing in progress',
                             now(),
-                            date_add(now(), interval '".mysql_real_escape_string($min_store + 60)."' second)
+                            date_add(now(), interval '".Db::escape_string($min_store + 60)."' second)
                         )
                     ");
                     $set_id = Db::last_insert_id();
@@ -137,7 +137,7 @@ class WebService
                     Db::execute("
                         insert into okapi_search_results (set_id, cache_id)
                         select distinct
-                            '".mysql_real_escape_string($set_id)."',
+                            '".Db::escape_string($set_id)."',
                             caches.cache_id
                         from
                             ".implode(", ", $tables)."
@@ -153,8 +153,8 @@ class WebService
 
                     Db::execute("
                         update okapi_search_sets
-                        set params_hash = '".mysql_real_escape_string($params_hash)."'
-                        where id = '".mysql_real_escape_string($set_id)."'
+                        set params_hash = '".Db::escape_string($params_hash)."'
+                        where id = '".Db::escape_string($set_id)."'
                     ");
                 } else {
                     # Some other thread acquired the lock before us and it has
@@ -178,8 +178,8 @@ class WebService
         {
             Db::execute("
                 update okapi_search_sets
-                set expires = date_add(now(), interval '".mysql_real_escape_string($min_store + 60)."' second)
-                where id = '".mysql_real_escape_string($set_id)."'
+                set expires = date_add(now(), interval '".Db::escape_string($min_store + 60)."' second)
+                where id = '".Db::escape_string($set_id)."'
             ");
         }
 

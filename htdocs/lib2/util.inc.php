@@ -289,7 +289,8 @@ function text_xmlentities($str)
 function xmlfilterevilchars($str)
 {
 	// the same for for ISO-8859-1 and UTF-8
-	return mb_ereg_replace('[\x{00}-\x{09}\x{0B}\x{0C}\x{0E}-\x{1F}]*', '', $str);
+	// following 2016-3-1: allowed Tabs (\x{09})
+	return mb_ereg_replace('[\x{00}-\x{08}\x{0B}\x{0C}\x{0E}-\x{1F}]*', '', $str);
 }
 
 

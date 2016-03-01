@@ -751,6 +751,11 @@
 		if (!sql_field_exists('caches', 'flags_last_modified'))
 			sql("ALTER TABLE `caches` ADD COLUMN `flags_last_modified` datetime NOT NULL COMMENT 'via Trigger (caches)'");
 	}
+	function dbv_147()
+	{
+		if (!sql_field_exists('log_types', 'maintenance_logs'))
+			sql("ALTER TABLE `log_types` ADD COLUMN `maintenance_logs` tinyint(1) NOT NULL");
+	}
 
 
 	// When adding new mutations, take care that they behave well if run multiple

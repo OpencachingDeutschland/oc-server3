@@ -11,6 +11,7 @@ CREATE TABLE `log_types` (
   `icon_small` varchar(255) NOT NULL,
   `allow_rating` tinyint(1) NOT NULL,
   `require_password` tinyint(1) NOT NULL,
+  `maintenance_logs` tinyint(1) NOT NULL,
   PRIMARY KEY  (`id`),
   UNIQUE KEY `name` (`name`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='static content' ;

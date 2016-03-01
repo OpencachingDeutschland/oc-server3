@@ -39,6 +39,10 @@
 	// prepare array to indicate errors in template
 	$validate = array();
 
+	// log and cache type which can be combined with maintenance state flags
+	$rs = sql("SELECT `id` FROM `log_types` WHERE `maintenance_logs`");
+	$logtype_allows_nm = sql_fetch_column($rs);
+
 	// proceed loggable, if valid cache_id
 	$validate['logAllowed'] = true;
 	if ($cacheId != 0)
@@ -99,7 +103,7 @@
 		$ocTeamComment          = (isset($_REQUEST['teamcomment']))            ? $_REQUEST['teamcomment'] != 0       : 0;
 		$suppressMasslogWarning = (isset($_REQUEST['suppressMasslogWarning'])) ? $_REQUEST['suppressMasslogWarning'] : ($masslogCookieSet ? $masslogCookieContent : 0);
 
-		if (!in_array($logType, array(1,2,3,10,11)) || $cache->getType() == 6)
+		if (!in_array($logType, $logtype_allows_nm) || $cache->getType() == 6)
 			$needsMaintenance = $listingOutdated = 0;
 		else
 		{
@@ -298,6 +302,7 @@
 	}
 	
 	// prepare template and display
+	$tpl->assign('logtype_allows_nm', implode(',', $logtype_allows_nm));
 	$tpl->assign('scrollposx', isset($_REQUEST['scrollposx']) ? $_REQUEST['scrollposx'] + 0 : 0);
 	$tpl->assign('scrollposy', isset($_REQUEST['scrollposy']) ? $_REQUEST['scrollposy'] + 0 : 0);
 	$tpl->assign('validate', $validate);

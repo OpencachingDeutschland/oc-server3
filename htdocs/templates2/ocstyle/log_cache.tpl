@@ -11,6 +11,7 @@
 <!--
 var cache_needs_maintenance = {$cache_needs_maintenance + 0};
 var cachetype = {$cachetype};
+var logtype_allows_nm = [{$logtype_allows_nm}];
 {literal}
 
 function insertSmiley(smileySymbol, smileyPath)
@@ -26,7 +27,7 @@ function insertSmiley(smileySymbol, smileyPath)
     range.text = insertText + selText;
   }
   /* for Firefox/Mozilla */
-  else if(typeof myText.selectionStart != 'undefined')
+  else if (typeof myText.selectionStart != 'undefined')
   {
     var start = myText.selectionStart;
     var end = myText.selectionEnd;
@@ -46,30 +47,30 @@ function insertSmiley(smileySymbol, smileyPath)
 function logtype_changed()
 {
 	{/literal}
-	var logtype = document.editform.logtype.value;
+	var logtype = parseInt(document.editform.logtype.value);
 	var datecomment = document.getElementById('datecomment');
 	var hint = '<img src="resource2/{$opt.template.style}/images/misc/hint.gif" border="0" width="15" height="11" />';
 
-	if (logtype == "1")
+	if (logtype == 1)
 		datecomment.innerHTML = hint + "{t}When did you find the geocache?{/t}";
-	else if (logtype == "2")
+	else if (logtype == 2)
 		datecomment.innerHTML = hint + "{t}When did you abort the cache search?{/t}";
 	else
 		datecomment.innerHTML = "";
 	{literal}
 
-  if (logtype == "1" || logtype == "7")
+	if (logtype == 1 || logtype == 7)
 	{
 		if (document.editform.rating)
-	    document.editform.rating.disabled = false;
-  }
-  else
-  {
+	    	document.editform.rating.disabled = false;
+	}
+	else
+	{
 		if (document.editform.rating)
-	    document.editform.rating.disabled = true;
-  }
-  if (cachetype != 6 && (logtype == 1 || logtype == 2 || logtype == 3 || logtype == 10 || logtype == 11))
-  {
+	    	document.editform.rating.disabled = true;
+	}
+	if (cachetype != 6 && logtype_allows_nm.indexOf(logtype) >= 0)
+	{
 		document.getElementById('cache_condition').style.display = '';
 		document.getElementById('cache_condition_spacer').style.display = '';
 	}
@@ -83,7 +84,7 @@ function logtype_changed()
 		document.getElementById('needs_maintenance').value = (old_logtype == 10 ? 0 : 1);
 		old_logtype = document.editform.logtype.value;
 	}
-  return false;
+	return false;
 }
 //-->
 {/literal}
@@ -249,12 +250,12 @@ function logtype_changed()
 </table>
 </form>
 
-<script language="javascript" type="text/javascript">
+<script type="text/javascript">
 <!--
 	OcInitEditor();
 	logtype_changed();
 	condition_init();
 	var descMode = {$descMode};
-	var old_logtype = document.editform.logtype.value;
+	var old_logtype = parseInt(document.editform.logtype.value);
 //-->
 </script>

@@ -758,7 +758,11 @@
 					BEGIN 
 						SET @dont_update_listingdate=1;
 
-						IF NEW.`status` IN (4,5,6,7) THEN
+						/* The first IF condition is necessary so that the NM/LO flags
+						 * can be updated by a log which also changes the cache state,
+						 * independently of the order of log-insertion and cache-state-update.
+						 */
+						IF NEW.`status` != OLD.`status` AND NEW.`status` IN (4,5,6,7) THEN
 							SET NEW.`needs_maintenance`=0;
 							SET NEW.`listing_outdated`=0;
 						END IF;

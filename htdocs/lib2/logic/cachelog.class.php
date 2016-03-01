@@ -245,11 +245,17 @@ class cachelog
 	// return if successfull (with insert)
 	function save()
 	{
-		if (in_array($this->getType(), array(cachelog::LOGTYPE_ARCHIVED, cachelog::LOGTYPE_LOCKED, cachelog::LOGTYPE_LOCKED_INVISIBLE)))
+		// additional safeguard against setting unallowd log flags
+		if (!sql_value("
+			SELECT `maintenance_logs`
+			FROM `log_types`
+			WHERE `id`='&1'",
+			false, $this->getType()))
 		{
 			$this->setNeedsMaintenance(false);
 			$this->setListingOutdated(false);
 		}
+
 		sql_slave_exclude();
 		$saved = $this->reCacheLog->save();
 		if ($saved && $this->nLogId == ID_NEW)

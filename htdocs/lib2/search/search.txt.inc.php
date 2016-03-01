@@ -7,6 +7,8 @@
 		Plaintext search output, one file per cache
 	****************************************************************************/
 
+	require_once('lib2/translate.class.php');
+
 	$search_output_file_download = true;
 	$content_type_plain = 'text/plain';
 	$zip_threshold = 1;
@@ -15,7 +17,7 @@
 
 function search_output()
 {
-	global $opt, $txt_record;
+	global $opt, $translate, $txt_record;
 	global $converted_from_html;
 	global $phpzip, $bUseZip;
 
@@ -27,7 +29,7 @@ function search_output()
 {text}
 ";
 
-	$rs = sql_slave('
+	$rs = sql_slave("
 		SELECT SQL_BUFFER_RESULT
 			&searchtmp.`cache_id` `cacheid`,
 			&searchtmp.`longitude` `longitude`,
@@ -38,6 +40,8 @@ function search_output()
 			`caches`.`terrain` `terrain`,
 			`caches`.`difficulty` `difficulty`,
 			`caches`.`desc_languages` `desc_languages`,
+			`caches`.`needs_maintenance`,
+			`caches`.`listing_outdated`,
 			IFNULL(`stt_country`.`text`,`countries`.`en`) AS `country`,
 			IFNULL(`stt_size`.`text`,`cache_size`.`name`) `size`,
 			IFNULL(`stt_type`.`text`,`cache_type`.`en`) `type`,
@@ -60,10 +64,10 @@ function search_output()
  			INNER JOIN `cache_status` ON `cache_status`.`id`=`caches`.`status`
  			INNER JOIN `user` ON `user`.`user_id`=`caches`.`user_id`
  			 LEFT JOIN `countries` ON `countries`.`short`=`caches`.`country`
-			 LEFT JOIN `sys_trans_text` `stt_type` ON `stt_type`.`trans_id`=`cache_type`.`trans_id` AND `stt_type`.`lang`=\'&1\'
-			 LEFT JOIN `sys_trans_text` `stt_size` ON `stt_size`.`trans_id`=`cache_size`.`trans_id` AND `stt_size`.`lang`=\'&1\'
-			 LEFT JOIN `sys_trans_text` `stt_status` ON `stt_status`.`trans_id`=`cache_size`.`trans_id` AND `stt_status`.`lang`=\'&1\'
-			 LEFT JOIN `sys_trans_text` `stt_country` ON `stt_country`.`trans_id`=`countries`.`trans_id` AND `stt_country`.`lang`=\'&1\'',
+			 LEFT JOIN `sys_trans_text` `stt_type` ON `stt_type`.`trans_id`=`cache_type`.`trans_id` AND `stt_type`.`lang`='&1'
+			 LEFT JOIN `sys_trans_text` `stt_size` ON `stt_size`.`trans_id`=`cache_size`.`trans_id` AND `stt_size`.`lang`='&1'
+			 LEFT JOIN `sys_trans_text` `stt_status` ON `stt_status`.`trans_id`=`cache_status`.`trans_id` AND `stt_status`.`lang`='&1'
+			 LEFT JOIN `sys_trans_text` `stt_country` ON `stt_country`.`trans_id`=`countries`.`trans_id` AND `stt_country`.`lang`='&1'",
      $opt['template']['locale']);
 
 	while ($r = sql_fetch_array($rs))
@@ -121,6 +125,18 @@ function search_output()
 
 		$thisline = mb_ereg_replace('{siteurl}', $opt['page']['default_absolute_url'], $thisline);
 		$thisline = mb_ereg_replace('{owner}', $r['username'], $thisline);
+
+		$flags = array();
+		if ($r['needs_maintenance'] > 0 || $r['listing_outdated'])
+		{
+			if ($r['needs_maintenance'] > 0) $flags[] = 'geocache needs maintenance';
+			if ($r['listing_outdated'] > 0) $flags[] = 'description is outdated';
+		}
+		else
+			$flags[] = 'ok';
+		foreach ($flags as &$flag)
+			$flag = $translate->t($flag, '', basename(__FILE__), __LINE__);
+		$thisline = mb_ereg_replace('{condition}', implode(', ', $flags), $thisline);
 
 		// logs ermitteln
 		$logentries = '';

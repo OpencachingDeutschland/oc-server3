@@ -14,6 +14,6 @@
 	</div>
 {elseif $cache.listing_outdated>0}
 	<div class="isannotated">
-		<p>{t}<strong>This geocache description may be outdated.</strong> See the <span style="white-space:nowrap"><img src="resource2/ocstyle/images/log/16x16-listing-outdated.png"> <a href="#logentries" class="systemlink">log entries</a></span> for more information.{/t}</p>
+		<p><strong>{t}This geocache description may be outdated.{/t}</strong> {t}See the <span style="white-space:nowrap"><img src="resource2/ocstyle/images/log/16x16-listing-outdated.png"> <a href="#logentries" class="systemlink">log entries</a></span> for more information.{/t}</p>
 	</div>
 {/if}

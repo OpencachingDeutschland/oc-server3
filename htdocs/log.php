@@ -63,12 +63,12 @@
 		$tpl->assign('isowner', $isOwner);
 		
 		// check and prepare form values
-		$datesaved = isset($_COOKIE['oclogdate']);
+		$datesaved = isset($_COOKIE['oclogdate1']) && isset($_COOKIE['oclogdate2']);
 		if ($datesaved)
 		{
-			$defaultLogYear  = substr($_COOKIE['oclogdate'],0,4);
-			$defaultLogMonth = substr($_COOKIE['oclogdate'],4,2);
-			$defaultLogDay   = substr($_COOKIE['oclogdate'],6,2);
+			$defaultLogYear  = substr($_COOKIE['oclogdate1'],0,4);
+			$defaultLogMonth = substr($_COOKIE['oclogdate1'],4,2);
+			$defaultLogDay   = substr($_COOKIE['oclogdate1'],6,2);
 		}
 		
 		// check if masslog warning is accepted (in cookie)
@@ -159,11 +159,17 @@
 		else
 			$validate['dateOk'] = false;
 
-		// store valid date in temporary cookie; it will be the default for the next log
+		// Store valid date in temporary cookie; it will be the default for the next log.
+		// For a reliable expiration, we need two cookies: One which disappears when the
+		// browsr is closed, and one which disappears after N hours (for users who
+		// keep browsers open ...). See also Redmine #205, #704, #894.
+
 		if ($validate['dateOk'])
-			setcookie('oclogdate',
-			          sprintf('%04d%02d%02d',$logDateYear, $logDateMonth, $logDateDay),
-			          time() + 6*60*60);   // expiration time; see Redmine #205, #704, #894
+		{
+			$cookie_logdate = sprintf('%04d%02d%02d', $logDateYear, $logDateMonth, $logDateDay);
+			setcookie('oclogdate1', $cookie_logdate);
+			setcookie('oclogdate2', $cookie_logdate, time() + 4*60*60);
+		}
 		
 		// check log type
 		$validate['logType'] = $cache->logTypeAllowed($logType);

@@ -258,7 +258,7 @@
 						<p class="sidebar-maintitle">{t}Donations{/t}</p>
 						<div style="margin-top:16px;width:100%;text-align:center;">
 							<a href="articles.php?page=donations">
-								<img src="https://www.paypal.com/de_DE/DE/i/btn/btn_donateCC_LG.gif" alt="{t}Donations{/t}" style="border:0px;" />
+							<img src="resource2/ocstyle/images/misc/donate.gif" alt="{t}Donations{/t}" style="border:0px;" />
 							</a><br />
 							&nbsp;
 						</div>

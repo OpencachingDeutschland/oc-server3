@@ -29,7 +29,7 @@
 
 	// sponsor link on e.g. print preview and garmin-plugin
 	$opt['page']['sponsor']['popup'] = '';
-	$opt['page']['sponsor']['bottom'] = 'Driven by the Opencaching Community';
+	$opt['page']['sponsor']['bottom'] = 'Driven by the Opencaching community';
 
 	$opt['page']['showdonations'] = false; // Show donations button
 	$opt['page']['showsocialmedia'] = false;

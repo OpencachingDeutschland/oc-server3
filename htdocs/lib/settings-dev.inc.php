@@ -122,7 +122,7 @@
 
 	$opt['template']['locales']['DA']['show'] = false;
 	$opt['template']['locales']['JA']['show'] = false;
-	$opt['template']['locales']['NL']['show'] = false;
+	$opt['template']['locales']['NL']['show'] = true;
 	$opt['template']['locales']['PL']['show'] = false;
 	$opt['template']['locales']['PT']['show'] = false;
 	$opt['template']['locales']['RU']['show'] = false;

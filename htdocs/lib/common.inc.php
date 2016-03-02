@@ -462,12 +462,11 @@ function __autoload($class_name)
 			else
 				$ltext = $opt['locale']['EN']['page']['license'];
 
-			$ld = '<p class="sidebar-maintitle">' .
-			      $translate->t('Datalicense', '', '', 0) .
-						'</p>' .
-            '<div style="margin:20px 0 16px 0; width:100%; text-align:center;">' .
-            mb_ereg_replace('%1', $lurl, $ltext) .
-						'</div>';
+			$ltext = mb_ereg_replace('%1', $lurl, $ltext);
+			$ltext = mb_ereg_replace('{site}', $opt['page']['sitename'], $ltext);
+
+			$ld = '<p class="sidebar-maintitle">' . $translate->t('Datalicense', '', '', 0) . '</p>' .
+			      '<div style="margin:20px 0 16px 0; width:100%; text-align:center;">' .$ltext. '</div>';
 			tpl_set_var('license_disclaimer', $ld);
 		}
 		else

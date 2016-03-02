@@ -14,8 +14,8 @@ var cachetype = {$cachetype};
 var logtype_allows_nm = [{$logtype_allows_nm}];
 var tip_general_nm = "{t}Select <i>needs maintenance</i> if the geocache was in poor condition at the<br />specified date and in urgent need of maintenance. Please explain why.{/t}";
 var tip_general_lo = "{if $has_gc_listing}{t}Select <i>is outdated</i> if the geocache search is hampered by outdated information in<br />the description, e.g. the location has severely changed or the description lacks<br />important information which has been added at another geocaching website.<br />Please give details in your log.{/t}{else}{t}Select <i>is outdated</i> if the geocache search is hampered by outdated information<br />in the description, e.g. because the location has severely changed. Please give<br />details in your log.{/t}{/if}";
-var tip_activate_nm = '{t}By logging "Available", you confirm that the geocache is in good condition.{/t}'; 
-var tip_activate_lo = '{t}By logging "Available", you confirm that the geocache description is up-to-date.{/t}';
+var tip_activate_nm = '{t}By logging "Available", you also confirm that the geocache is in good condition.{/t}';
+var tip_activate_lo = '{t}By logging "Available", you also confirm that the geocache description is up-to-date.{/t}';
 var tip_disable_nm = "{t}You may indicate here what is the current maintenance state of the geocache.{/t}"; 
 var tip_disable_lo = "{t}You may indicate here if the cache description is up-to-date.{/t}"; 
 {literal}
@@ -85,21 +85,28 @@ function logtype_changed()
 		document.getElementById('cache_condition').style.display = 'none';
 		document.getElementById('cache_condition_spacer').style.display = 'none';
 	}
+
 	var new_logtype = parseInt(document.editform.logtype.value);
+	var nm = document.getElementById('needs_maintenance');
+	var lo = document.getElementById('listing_outdated');
+
 	if ((new_logtype == 10) != (old_logtype == 10))
 	{
-		var nm = document.getElementById('needs_maintenance');
-		nm.value = (old_logtype == 10 ? 0 : 1);
+		nm.value = (old_logtype == 10 ? "0" : "1");
 		nm.disabled = (new_logtype == 10);
 		nm.className = (new_logtype == 10 ? 'disabled' : '');
 
-		lo = document.getElementById('listing_outdated');
-		lo.value = (old_logtype == 10 ? 0 : 1);
+		lo.value = (old_logtype == 10 ? "0" : "1");
 		lo.disabled = (new_logtype == 10);
 		lo.className = (new_logtype == 10 ? 'disabled' : '');
 
 		old_logtype = new_logtype;
 	}
+
+	// This allows us to post also disabled fields' values:
+	document.getElementById('needs_maintenance2').value = nm.value;
+	document.getElementById('listing_outdated2').value = lo.value;
+
 	return false;
 }
 
@@ -164,6 +171,8 @@ function show_tip(text)
 <input id="oldDescMode" type="hidden" name="oldDescMode" value="1" />
 <input type="hidden" name="scrollposx" value="{$scrollposx}" />
 <input type="hidden" name="scrollposy" value="{$scrollposy}" />
+<input type="hidden" id="needs_maintenance2" name="needs_maintenance2" value="0" />
+<input type="hidden" id="listing_outdated2" name="listing_outdated2" value="0" />
 <table class="table">
 	<tr><td class="spacer" colspan="2"></td></tr>
 	<tr><td colspan="2"></td></tr>
@@ -199,7 +208,7 @@ function show_tip(text)
 		<td>{t}Geocache condition:{/t}</td>
 		<td>
 			<span id="nmtip" onmouseover='show_nm_tip()' onmouseout="UnTip()">
-			<select id="needs_maintenance" name="needs_maintenance">
+			<select id="needs_maintenance" name="needs_maintenance" onchange="logtype_changed()">
 				<option value="0" {if $needs_maintenance==0}selected="selected"{/if}>{t}not specified{/t}</option>
 				<option value="2" {if $needs_maintenance==2}selected="selected"{/if}>{t}needs maintenance{/t}</option>
 				<option value="1" {if $needs_maintenance==1}selected="selected"{/if}>{t}ok{/t}</option>
@@ -208,7 +217,7 @@ function show_tip(text)
 			&nbsp; &nbsp; &nbsp; &nbsp;
 			{t}Description:{/t}&nbsp;
 			<span id="lotip" onmouseover='show_lo_tip()' onmouseout="UnTip()">
-			<select id="listing_outdated" name="listing_outdated">
+			<select id="listing_outdated" name="listing_outdated" onchange="logtype_changed()">
 				<option value="0" {if $listing_outdated==0}selected="selected"{/if}>{t}not specified{/t}</option>
 				<option value="2" {if $listing_outdated==2}selected="selected"{/if}>{t}outdated{/t}</option>
 				<option value="1" {if $listing_outdated==1}selected="selected"{/if}>{t}up to date{/t}</option>

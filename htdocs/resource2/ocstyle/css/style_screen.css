@@ -566,6 +566,7 @@ input.checkbox {width:12px; height:12px; font-size:12px; border:0;}
 input.radio {border:0px; border-width: 0px; width:12px; height:12px; background-color: transparent;}
 
 select {border:1px solid #555; background-color:white; padding:1px; font-size:11px; color: black;}
+select.disabled {border:1px solid #a0a0a0; color:grey; }
 
 input.formbutton_header {
 	width:65px;

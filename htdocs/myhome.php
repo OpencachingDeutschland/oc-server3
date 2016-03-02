@@ -33,7 +33,7 @@
 	                                    `user`.`user_id` AS `userid`, `user`.`username`, `caches`.`wp_oc`, `ca`.`attrib_id` IS NOT NULL AS `oconly`,
 	                                    `cache_rating`.`rating_date` IS NOT NULL AS `recommended`,
 	                                    `cache_logs`.`needs_maintenance`,
-																			`cache_logs`.`listing_outdated`
+	                                    `cache_logs`.`listing_outdated`
 	                               FROM `cache_logs`
 	                         INNER JOIN `caches` ON `cache_logs`.`cache_id`=`caches`.`cache_id`
 	                         INNER JOIN `user` ON `caches`.`user_id`=`user`.`user_id`
@@ -41,7 +41,7 @@
 	                          LEFT JOIN `cache_rating` ON `cache_rating`.`cache_id`=`caches`.`cache_id` AND `cache_rating`.`user_id`=`cache_logs`.`user_id` AND `cache_rating`.`rating_date`=`cache_logs`.`date`
 	                              WHERE `cache_logs`.`user_id`='&1'
 	                           ORDER BY `cache_logs`.`date` DESC, `cache_logs`.`date_created` DESC
-														    LIMIT 10", $login->userid));
+	                              LIMIT 10", $login->userid));
 	$tpl->assign('morelogs', sql_value("SELECT FOUND_ROWS()", 0) > 10);
 	sql_foundrows_done();
 
@@ -49,13 +49,13 @@
 	$tpl->assign_rs('caches', sql("SELECT `caches`.`cache_id`, `caches`.`name`, `caches`.`type`,
 		                                    `caches`.`date_hidden`, `caches`.`status`, `caches`.`wp_oc`,
 		                                    IF(`caches`.`needs_maintenance`, 2, 0) AS `needs_maintenance`,
-																				IF(`caches`.`listing_outdated`, 2, 0) AS `listing_outdated`,
+		                                    IF(`caches`.`listing_outdated`, 2, 0) AS `listing_outdated`,
 		                                    `stat_caches`.`found`,`stat_caches`.`toprating`,
 		                                    `ca`.`attrib_id` IS NOT NULL AS `oconly`,
 		                                    MAX(`cache_logs`.`date`) AS `lastlog`,
 		                                    (SELECT `type` FROM `cache_logs` `cl2`
-																				 WHERE `cl2`.`cache_id`=`caches`.`cache_id`
-																			   ORDER BY `date` DESC,`id` DESC LIMIT 1) AS `lastlog_type` 
+	                                WHERE `cl2`.`cache_id`=`caches`.`cache_id`
+	                             ORDER BY `date` DESC,`id` DESC LIMIT 1) AS `lastlog_type`
 	                                 FROM `caches`
 	                            LEFT JOIN `stat_caches` ON `stat_caches`.`cache_id`=`caches`.`cache_id`
 	                            LEFT JOIN `cache_logs` ON `cache_logs`.`cache_id`=`caches`.`cache_id`
@@ -64,7 +64,7 @@
 	                                  AND `caches`.`status` != 5
 	                             GROUP BY `caches`.`cache_id`
 	                             ORDER BY `caches`.`date_hidden` DESC, `caches`.`date_created` DESC",
-															   $login->userid));
+	                            $login->userid));
 	if ($useragent_msie && $useragent_msie_version < 9)
 		$tpl->assign('dotfill','');
 	else

@@ -12,6 +12,12 @@
 var cache_needs_maintenance = {$cache_needs_maintenance + 0};
 var cachetype = {$cachetype};
 var logtype_allows_nm = [{$logtype_allows_nm}];
+var tip_general_nm = "{t}Select <i>needs maintenance</i> if the geocache was in poor condition at the<br />specified date and in urgent need of maintenance. Please explain why.{/t}";
+var tip_general_lo = "{if $has_gc_listing}{t}Select <i>is outdated</i> if the geocache search is hampered by outdated information in<br />the description, e.g. the location has severely changed or the description lacks<br />important information which has been added at another geocaching website.<br />Please give details in your log.{/t}{else}{t}Select <i>is outdated</i> if the geocache search is hampered by outdated information<br />in the description, e.g. because the location has severely changed. Please give<br />details in your log.{/t}{/if}";
+var tip_activate_nm = '{t}By logging "Available", you confirm that the geocache is in good condition.{/t}'; 
+var tip_activate_lo = '{t}By logging "Available", you confirm that the geocache description is up-to-date.{/t}';
+var tip_disable_nm = "{t}You may indicate here what is the current maintenance state of the geocache.{/t}"; 
+var tip_disable_lo = "{t}You may indicate here if the cache description is up-to-date.{/t}"; 
 {literal}
 
 function insertSmiley(smileySymbol, smileyPath)
@@ -79,13 +85,49 @@ function logtype_changed()
 		document.getElementById('cache_condition').style.display = 'none';
 		document.getElementById('cache_condition_spacer').style.display = 'none';
 	}
-	if (cache_needs_maintenance && (document.editform.logtype.value == "10") != (old_logtype == 10))
+	var new_logtype = parseInt(document.editform.logtype.value);
+	if ((new_logtype == 10) != (old_logtype == 10))
 	{
-		document.getElementById('needs_maintenance').value = (old_logtype == 10 ? 0 : 1);
-		old_logtype = document.editform.logtype.value;
+		var nm = document.getElementById('needs_maintenance');
+		nm.value = (old_logtype == 10 ? 0 : 1);
+		nm.disabled = (new_logtype == 10);
+		nm.className = (new_logtype == 10 ? 'disabled' : '');
+
+		lo = document.getElementById('listing_outdated');
+		lo.value = (old_logtype == 10 ? 0 : 1);
+		lo.disabled = (new_logtype == 10);
+		lo.className = (new_logtype == 10 ? 'disabled' : '');
+
+		old_logtype = new_logtype;
 	}
 	return false;
 }
+
+function show_nm_tip()
+{
+	if (document.editform.logtype.value == "10")
+		show_tip(tip_activate_nm);
+	else if (document.editform.logtype.value == "11")
+		show_tip(tip_disable_nm);
+	else
+		show_tip(tip_general_nm);
+}
+
+function show_lo_tip()
+{
+	if (document.editform.logtype.value == "10")
+		show_tip(tip_activate_lo);
+	else if (document.editform.logtype.value == "11")
+		show_tip(tip_disable_lo);
+	else
+		show_tip(tip_general_lo);
+}
+
+function show_tip(text)
+{
+	Tip(text, DELAY, 0, FADEIN, false, FADEOUT, false, BGCOLOR, "#fffedf", BORDERCOLOR, "grey");
+}
+
 //-->
 {/literal}
 {* 
@@ -145,10 +187,10 @@ function logtype_changed()
 			<input class="input20" type="text" id="logday" name="logday" maxlength="2" value="{$logday}" onchange="condition_init()" />.
 			<input class="input20" type="text" id="logmonth" name="logmonth" maxlength="2" value="{$logmonth}" onchange="condition_init()" />.
 			<input class="input40" type="text" id="logyear" name="logyear" maxlength="4" value="{$logyear}" onchange="condition_init()" />
-		  &nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;
 			<input class="input20" type="text" id="loghour" name="loghour" maxlength="2" value="{$loghour}" onchange="condition_init()" /> :
 			<input class="input20" type="text" id="logminute" name="logminute" maxlength="2" value="{$logminute}" onchange="condition_init()" />
-			&nbsp;&nbsp; <span id="datecomment"></span>
+			&nbsp;&nbsp;&nbsp; <span id="datecomment"></span>
 			{if $validate.dateOk==false}<br /><span class="errormsg">{t}date or time is invalid{/t}</span>{/if}
 		</td>
 	</tr>
@@ -156,17 +198,17 @@ function logtype_changed()
 	<tr id="cache_condition">
 		<td>{t}Geocache condition:{/t}</td>
 		<td>
-			<span onmouseover='Tip("{t}Select <i>needs maintenance</i> if the geocache was in poor condition at the<br />specified date and in urgent need of maintenance. Please explain why.{/t}", DELAY, 0, FADEIN, false, FADEOUT, false, BGCOLOR, "#fffedf", BORDERCOLOR, "grey")' onmouseout="UnTip()">
-			<select name="needs_maintenance" id="needs_maintenance">
+			<span id="nmtip" onmouseover='show_nm_tip()' onmouseout="UnTip()">
+			<select id="needs_maintenance" name="needs_maintenance">
 				<option value="0" {if $needs_maintenance==0}selected="selected"{/if}>{t}not specified{/t}</option>
 				<option value="2" {if $needs_maintenance==2}selected="selected"{/if}>{t}needs maintenance{/t}</option>
 				<option value="1" {if $needs_maintenance==1}selected="selected"{/if}>{t}ok{/t}</option>
 			</select>
 			</span>
-			&nbsp; &nbsp; &nbsp;
+			&nbsp; &nbsp; &nbsp; &nbsp;
 			{t}Description:{/t}&nbsp;
-			<span onmouseover='Tip("{if $has_gc_listing}{t}Select <i>is outdated</i> if the geocache search is hampered by outdated information in<br />the description, e.g. the location has severely changed or the description lacks<br />important information which has been added at another geocaching website.<br />Please give details in your log.{/t}{else}{t}Select <i>is outdated</i> if the geocache search is hampered by outdated information<br />in the description, e.g. because the location has severely changed. Please give<br />details in your log.{/t}{/if}", DELAY, 0, FADEIN, false, FADEOUT, false, BGCOLOR, "#fffedf", BORDERCOLOR, "grey")' onmouseout="UnTip()">
-			<select name="listing_outdated" id="listing_outdated">
+			<span id="lotip" onmouseover='show_lo_tip()' onmouseout="UnTip()">
+			<select id="listing_outdated" name="listing_outdated">
 				<option value="0" {if $listing_outdated==0}selected="selected"{/if}>{t}not specified{/t}</option>
 				<option value="2" {if $listing_outdated==2}selected="selected"{/if}>{t}outdated{/t}</option>
 				<option value="1" {if $listing_outdated==1}selected="selected"{/if}>{t}up to date{/t}</option>
@@ -253,9 +295,9 @@ function logtype_changed()
 <script type="text/javascript">
 <!--
 	OcInitEditor();
+	var old_logtype = parseInt(document.editform.logtype.value);
 	logtype_changed();
 	condition_init();
 	var descMode = {$descMode};
-	var old_logtype = parseInt(document.editform.logtype.value);
 //-->
 </script>

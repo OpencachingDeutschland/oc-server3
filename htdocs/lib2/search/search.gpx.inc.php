@@ -8,6 +8,7 @@
 		used by Ocprop
 	****************************************************************************/
 
+	require_once('lib2/translate.class.php');
 	require_once('lib2/logic/npas.inc.php');
 
 	$search_output_file_download = true;
@@ -16,7 +17,7 @@
 
 function search_output()
 {
-	global $opt, $login;
+	global $opt, $login, $translate;
 	global $cache_note_text;
 
 	$server_domain = $opt['page']['domain'];
@@ -29,7 +30,7 @@ function search_output()
   <name>Cache listing generated from '.$server_name.'</name>
   <desc>This is a waypoint file generated from '.$server_name.'{wpchildren}</desc>
   <author>Opencaching.de</author>
-  <email>'.$opt['mail']['contact'].'</email>
+  <email>'.text_xmlentities($opt['mail']['contact']).'</email>
   <url>'.$server_domain.'</url>
   <urlname>'.$opt['page']['slogan'].'</urlname>
   <time>{time}</time>
@@ -180,19 +181,46 @@ function search_output()
 
 	$user_id = $login->userid;
 
-	$rs = sql_slave("SELECT SQL_BUFFER_RESULT &searchtmp.`cache_id` `cacheid`, &searchtmp.`longitude` `longitude`, &searchtmp.`latitude` `latitude`,
-							`cache_location`.`adm2` `state`, `caches`.`wp_oc` `waypoint`, `caches`.`date_hidden` `date_hidden`, `caches`.`name` `name`,
-							`caches`.`country` `country`, `countries`.`name` AS `country_name`, `caches`.`terrain` `terrain`, `caches`.`difficulty` `difficulty`, `caches`.`desc_languages` `desc_languages`,
-							`caches`.`size` `size`, `caches`.`type` `type`, `caches`.`status` `status`, `user`.`username` `username`, `caches`.`user_id` `userid`, `user`.`data_license`,
-							`cache_desc`.`desc` `desc`, `cache_desc`.`short_desc` `short_desc`, `cache_desc`.`hint` `hint`, `cache_desc`.`language` AS `desc_language`,
-							IFNULL(`stat_cache_logs`.`found`, 0) AS `found`
-						FROM &searchtmp
-							INNER JOIN `caches` ON &searchtmp.`cache_id`=`caches`.`cache_id`
-							INNER JOIN `countries` ON `caches`.`country`=`countries`.`short`
-							INNER JOIN `user` ON &searchtmp.`user_id`=`user`.`user_id`
-							INNER JOIN `cache_desc` ON `caches`.`cache_id`=`cache_desc`.`cache_id`AND `caches`.`default_desclang`=`cache_desc`.`language`
-							LEFT JOIN `cache_location` ON &searchtmp.`cache_id`=`cache_location`.`cache_id`
-							LEFT JOIN `stat_cache_logs` ON &searchtmp.`cache_id`=`stat_cache_logs`.`cache_id` AND `stat_cache_logs`.`user_id`='&1'", $user_id);
+	$rs = sql_slave("
+		SELECT SQL_BUFFER_RESULT
+			&searchtmp.`cache_id` `cacheid`,
+			&searchtmp.`longitude` `longitude`,
+			&searchtmp.`latitude` `latitude`,
+			`caches`.`wp_oc` `waypoint`,
+			`caches`.`date_hidden` `date_hidden`,
+			`caches`.`name` `name`,
+			`caches`.`country` `country`,
+			`caches`.`terrain` `terrain`,
+			`caches`.`difficulty` `difficulty`,
+			`caches`.`desc_languages` `desc_languages`,
+			`caches`.`size` `size`,
+			`caches`.`type` `type`,
+			`caches`.`status` `status`,
+			`caches`.`user_id` `userid`,
+			`caches`.`needs_maintenance`,
+			`caches`.`listing_outdated`,
+			`countries`.`name` AS `country_name`,
+			`cache_location`.`adm2` `state`,
+			`cache_desc`.`desc` `desc`,
+			`cache_desc`.`short_desc` `short_desc`,
+			`cache_desc`.`hint` `hint`,
+			`cache_desc`.`language` `desc_language`,
+			`user`.`username` `username`,
+			`user`.`data_license`,
+			IFNULL(`stat_cache_logs`.`found`, 0) `found`
+		FROM &searchtmp
+		INNER JOIN `caches` ON &searchtmp.`cache_id`=`caches`.`cache_id`
+		INNER JOIN `countries` ON `caches`.`country`=`countries`.`short`
+		INNER JOIN `user` ON &searchtmp.`user_id`=`user`.`user_id`
+		INNER JOIN `cache_desc`
+			ON `caches`.`cache_id`=`cache_desc`.`cache_id`
+			AND `caches`.`default_desclang`=`cache_desc`.`language`
+		LEFT JOIN `cache_location` ON &searchtmp.`cache_id`=`cache_location`.`cache_id`
+		LEFT JOIN `stat_cache_logs`
+			ON &searchtmp.`cache_id`=`stat_cache_logs`.`cache_id`
+			AND `stat_cache_logs`.`user_id`='&1'",
+		$user_id
+	);
 
 	while ($r = sql_fetch_array($rs))
 	{
@@ -227,7 +255,13 @@ function search_output()
 
 		$thisline = mb_ereg_replace('{shortdesc}', text_xmlentities($r['short_desc']), $thisline);
 
-		$desc = str_replace(' src="images/uploads/',' src="' . $server_address . 'images/uploads/', $r['desc']);
+		$desc = $r['desc'];
+		$desc = str_replace(' src="images/uploads/',' src="' . $server_address . 'images/uploads/', $desc);
+		if ($r['listing_outdated'])
+			$desc = "<p style='color:#c00000'><strong>" .
+			        $translate->t('This geocache description may be outdated.', '', basename(__FILE__), __LINE__) . '</strong> ' .
+					$translate->t('See the log entries for more information.', '', basename(__FILE__), __LINE__) .
+			        "</p>\n" . $desc;
 		$license = getLicenseDisclaimer(
 			$r['userid'], $r['username'], $r['data_license'], $r['cacheid'], $opt['template']['locale'], true, true);
 		if ($license != "")
@@ -277,11 +311,9 @@ function search_output()
 		$waypoints = '';
 		$gkentries = '';
 
-		// fetch logs
-
+		// insert personal note
 		if ($user_id != 0)
 		{
-			// insert personal note
 			$cacheNote = getCacheNote($user_id, $r['cacheid']);
 			if ($cacheNote)
 			{
@@ -296,60 +328,95 @@ function search_output()
 
 				$logentries .= $thislog . "\n";
 			}
+		}
 
-			// current users logs
-			$rsLogs = sql_slave("SELECT `cache_logs`.`id`, `cache_logs`.`type`, `cache_logs`.`date`, `cache_logs`.`text`, `user`.`username`, `user`.`user_id` FROM `cache_logs`, `user` WHERE `cache_logs`.`user_id`=`user`.`user_id` AND `cache_logs`.`cache_id`=&1 AND `user`.`user_id`=&2 ORDER BY `cache_logs`.`date` DESC, `cache_logs`.`date_created` DESC", $r['cacheid'], $user_id);
+		// fetch all logs of the current user, then the last 20 other logs
+		for ($currentuser=($user_id != 0 ? 1 : 0); $currentuser>=0; --$currentuser)
+		{
+			if ($currentuser) {
+				$user_operator = '=';
+				$limit = '';
+			}
+			else {
+				$user_operator = '!=';
+				$limit = ' LIMIT 20';
+			}
+
+			$rsLogs = sql_slave("
+				SELECT
+					`cache_logs`.`id`,
+					`cache_logs`.`type`,
+					`cache_logs`.`date`,
+					`cache_logs`.`text`,
+					`cache_logs`.`needs_maintenance`,
+					`cache_logs`.`listing_outdated`,
+					`user`.`username`,
+					`user`.`user_id`
+				FROM
+					`cache_logs`,
+					`user`
+				WHERE
+					`cache_logs`.`user_id`=`user`.`user_id` AND
+					`cache_logs`.`cache_id`='&1' AND
+					`user`.`user_id`".$user_operator."'&2'
+				ORDER BY
+					`cache_logs`.`date` DESC,
+					`cache_logs`.`date_created` DESC"
+				. $limit,
+				$r['cacheid'], $user_id
+			);
+
 			while ($rLog = sql_fetch_array($rsLogs))
 			{
 				$thislog = $gpxLog;
-
 				$thislog = mb_ereg_replace('{id}', $rLog['id'], $thislog);
 				$thislog = mb_ereg_replace('{date}', date($gpxTimeFormat, strtotime($rLog['date'])), $thislog);
 				$thislog = mb_ereg_replace('{userid}', $rLog['user_id'], $thislog);
 				$thislog = mb_ereg_replace('{username}', text_xmlentities($rLog['username']), $thislog);
 
-				if (isset($gpxLogType[$rLog['type']]))
+				if ($rLog['type'] == 3 && $rLog['needs_maintenance'] == 2)
+					$logtype = 'Needs Maintenance';   // with capital M, other than cache attribute
+				else if (isset($gpxLogType[$rLog['type']]))
 					$logtype = $gpxLogType[$rLog['type']];
 				else
 					$logtype = $gpxLogType[0];
-
 				$thislog = mb_ereg_replace('{type}', $logtype, $thislog);
-				$thislog = mb_ereg_replace('{text}', text_xmlentities(decodeEntities($rLog['text'])), $thislog);
+
+				$logtext = decodeEntities($rLog['text']);
+				if ($rLog['needs_maintenance'] > 0 || $rLog['listing_outdated'] > 0)
+				{
+					$flags = array();
+					if ($rLog['needs_maintenance'] == 1) $flags[] = 'geocache is ok';
+					if ($rLog['needs_maintenance'] == 2) $flags[] = 'geocache needs maintenance';
+					if ($rLog['listing_outdated'] == 1)  $flags[] = 'description is ok';
+					if ($rLog['listing_outdated'] == 2)  $flags[] = 'description is outdated';
+					foreach ($flags as &$flag)
+					{
+						$ft = $translate->t($flag, '', basename(__FILE__), __LINE__);
+						if (strstr($flag, 'is ok') == false)
+							$flag = '<span style="color:#c00000">'.$ft.'</span>';
+						else
+							$flag = '<span style="color:#00c000">'.$ft.'</span>';
+					}
+					$logtext = "<p><i>" . implode(', ', $flags) . "</i></p>\n" . $logtext;
+				}
+				$thislog = mb_ereg_replace('{text}', text_xmlentities($logtext), $thislog);
 
 				$logentries .= $thislog . "\n";
 			}
-			mysql_free_result($rsLogs);
-		}
-
-		// newest 20 logs (except current users)
-		$rsLogs = sql_slave("SELECT `cache_logs`.`id`, `cache_logs`.`type`, `cache_logs`.`date`, `cache_logs`.`text`, `user`.`username`, `user`.`user_id` FROM `cache_logs`, `user` WHERE `cache_logs`.`user_id`=`user`.`user_id` AND `cache_logs`.`cache_id`=&1 AND `user`.`user_id`!=&2 ORDER BY `cache_logs`.`date` DESC, `cache_logs`.`date_created` DESC LIMIT 20", $r['cacheid'], $user_id);
-		while ($rLog = sql_fetch_array($rsLogs))
-		{
-			$thislog = $gpxLog;
-
-			$thislog = mb_ereg_replace('{id}', $rLog['id'], $thislog);
-			$thislog = mb_ereg_replace('{date}', date($gpxTimeFormat, strtotime($rLog['date'])), $thislog);
-			$thislog = mb_ereg_replace('{userid}', $rLog['user_id'], $thislog);
-			$thislog = mb_ereg_replace('{username}', text_xmlentities($rLog['username']), $thislog);
-
-			if (isset($gpxLogType[$rLog['type']]))
-				$logtype = $gpxLogType[$rLog['type']];
-			else
-				$logtype = $gpxLogType[0];
-
-			$thislog = mb_ereg_replace('{type}', $logtype, $thislog);
-			$thislog = mb_ereg_replace('{text}', text_xmlentities(decodeEntities($rLog['text'])), $thislog);
-
-			$logentries .= $thislog . "\n";
 		}
 		mysql_free_result($rsLogs);
+
 		$thisline = mb_ereg_replace('{logs}', $logentries, $thisline);
 
 		// attributes
-		$rsAttributes = sql_slave("SELECT `gc_id`, `gc_inc`, `gc_name`
-		                             FROM `caches_attributes`
-		                       INNER JOIN `cache_attrib` ON `cache_attrib`.`id`=`caches_attributes`.`attrib_id`
-		                            WHERE `caches_attributes`.`cache_id`=&1", $r['cacheid']);
+		$rsAttributes = sql_slave("
+			SELECT`gc_id`, `gc_inc`, `gc_name`
+			FROM `caches_attributes`
+			INNER JOIN `cache_attrib` ON `cache_attrib`.`id`=`caches_attributes`.`attrib_id`
+			WHERE `caches_attributes`.`cache_id`=&1",
+			$r['cacheid']
+		);
 		$gc_ids = array();
 		while ($rAttrib = sql_fetch_array($rsAttributes))
 		{
@@ -365,8 +432,17 @@ function search_output()
 				$gc_ids[$rAttrib['gc_id']] = true;
 			}
 		}
-
 		mysql_free_result($rsAttributes);
+
+		if ($r['needs_maintenance'] > 0)
+		{
+			$thisattribute = mb_ereg_replace('{attrib_id}', '42', $gpxAttributes);
+			$thisattribute = mb_ereg_replace('{attrib_inc}', '1', $thisattribute);
+			$thisattribute = mb_ereg_replace('{attrib_name}', 'Needs maintenance', $thisattribute); 
+			                                                  // with lowercase m, other than log type
+			$attribentries .= $thisattribute . "\n";
+		}
+
 		$thisline = mb_ereg_replace('{attributes}', $attribentries, $thisline);
 
 		// geokrety
@@ -483,10 +559,13 @@ function search_output()
 	function getPictures($cacheid, $server_address)
 	{
 		$retval = "";
-		$rs = sql_slave("SELECT uuid, title, url, spoiler FROM pictures
-		                 WHERE object_id='&1' AND object_type=2 AND display=1
-                     ORDER BY date_created", $cacheid);
-
+		$rs = sql_slave("
+			SELECT `uuid`, `title`, `url`, `spoiler`
+			FROM `pictures`
+			WHERE `object_id`='&1' AND `object_type`=2 AND `display`=1
+			ORDER BY `date_created`",
+			$cacheid
+		);
 		while ($r = sql_fetch_array($rs))
 		{
 			$retval .= '<div style="float:left; padding:8px"><a href="' . $r['url'] . '" target="_blank">' .

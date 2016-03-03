@@ -1051,7 +1051,7 @@
 				// caches, but keeps its name for compatibility with existing stored or
 				// external searches.
 			if (!isset($options['f_disabled'])) $options['f_disabled']='0';
-			if ($options['f_disabled'] != 0)  $sql_where[] = '`caches`.`status`<>2';
+			if ($options['f_disabled'] != 0) $sql_where[] = '`caches`.`status`<>2';
 
 			if ($login->logged_in())
 			{

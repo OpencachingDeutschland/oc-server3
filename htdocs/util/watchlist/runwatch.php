@@ -226,7 +226,27 @@ function process_owner_log($user_id, $log_id)
 
 //	echo "process_owner_log($user_id, $log_id)\n";
 	
-	$rsLog = sql("SELECT cache_logs.cache_id cache_id, cache_logs.type, cache_logs.text text, cache_logs.text_html text_html, cache_logs.date logdate, user.username username, caches.name cachename, caches.wp_oc wp_oc FROM `cache_logs`, `user`, `caches` WHERE (cache_logs.user_id = user.user_id) AND (cache_logs.cache_id = caches.cache_id) AND (cache_logs.id ='&1')", $log_id);
+	$rsLog = sql("
+		SELECT
+			`cache_logs`.`cache_id`,
+			`cache_logs`.`type`,
+			`cache_logs`.`text`,
+			`cache_logs`.`text_html`,
+			`cache_logs`.`date` `logdate`,
+			`cache_logs`.`needs_maintenance`,
+			`cache_logs`.`listing_outdated`,
+			`user`.`username`,
+			`caches`.`name` `cachename`,
+			`caches`.`wp_oc`
+		FROM
+			`cache_logs`,
+			`user`,
+			`caches`
+		WHERE
+			`cache_logs`.`user_id`=`user`.`user_id` AND
+			`cache_logs`.`cache_id`=`caches`.`cache_id` AND
+			`cache_logs`.`id` ='&1'",
+		$log_id);
 	$rLog = sql_fetch_array($rsLog);
 	mysql_free_result($rsLog);
 	
@@ -240,7 +260,7 @@ function process_owner_log($user_id, $log_id)
 	else
 		$dateformat = $opt['locale'][$language]['format']['phpdatetime'];
 
-	$watchtext = '{date} ' . $translate->t('{user} has logged your cache "{cachename}":', '', basename(__FILE__), __LINE__, '', 1, $language) . ' {action}' . "\n" . '{shortlink_url}{wp_oc}' . "\n\n" . '{text}' . "\n\n\n\n";
+	$watchtext = '{date} ' . $translate->t('{user} has logged your cache "{cachename}":', '', basename(__FILE__), __LINE__, '', 1, $language) . ' {action}{maintenance_flags}' . "\n" . '{shortlink_url}{wp_oc}' . "\n\n" . '{text}' . "\n\n\n\n";
 
 	$watchtext = mb_ereg_replace('{date}', date($dateformat, strtotime($rLog['logdate'])), $watchtext);
 	$watchtext = mb_ereg_replace('{wp_oc}', $rLog['wp_oc'], $watchtext);
@@ -248,6 +268,7 @@ function process_owner_log($user_id, $log_id)
 	$watchtext = mb_ereg_replace('{user}', $rLog['username'], $watchtext);
 	$watchtext = mb_ereg_replace('{cachename}', $rLog['cachename'], $watchtext);
 	$watchtext = mb_ereg_replace('{action}', get_logtype_name($rLog['type'], $language), $watchtext);
+	$watchtext = insert_maintenance_flags($rLog, $language, $watchtext);
 	
 	$domain = sqlValue("SELECT `domain` FROM `user` WHERE `user_id`='" . sql_escape($user_id) . "'", null);
 	$urls = get_site_urls($domain);
@@ -256,7 +277,7 @@ function process_owner_log($user_id, $log_id)
 	else
 		$watchtext = mb_ereg_replace("{shortlink_url}", $urls['site_url'], $watchtext);
 
-	sql("INSERT IGNORE INTO watches_waiting (`user_id`, `object_id`, `object_type`, `date_created`, `watchtext`, `watchtype`) VALUES (
+	sql("INSERT IGNORE INTO `watches_waiting` (`user_id`, `object_id`, `object_type`, `date_created`, `watchtext`, `watchtype`) VALUES (
 																		'&1', '&2', 1, NOW(), '&3', 1)", $user_id, $log_id, $watchtext);
 	
 	// logentry($module, $eventid, $userid, $objectid1, $objectid2, $logtext, $details)																
@@ -269,7 +290,27 @@ function process_log_watch($user_id, $log_id)
 
 //	echo "process_log_watch($user_id, $log_id)\n";
 	
-	$rsLog = sql("SELECT cache_logs.cache_id cache_id, cache_logs.type, cache_logs.text text, cache_logs.text_html text_html, cache_logs.date logdate, user.username username, caches.name cachename, caches.wp_oc wp_oc FROM `cache_logs`, `user`, `caches` WHERE (cache_logs.user_id = user.user_id) AND (cache_logs.cache_id = caches.cache_id) AND (cache_logs.id = '&1')", $log_id);
+	$rsLog = sql("
+		SELECT
+			`cache_logs`.`cache_id`,
+			`cache_logs`.`type`,
+			`cache_logs`.`text`,
+			`cache_logs`.`text_html`,
+			`cache_logs`.`date` `logdate`,
+			`cache_logs`.`needs_maintenance`,
+			`cache_logs`.`listing_outdated`,
+			`user`.`username`,
+			`caches`.`name` `cachename`,
+			`caches`.`wp_oc`
+		FROM
+			`cache_logs`,
+			`user`,
+			`caches`
+		WHERE
+			`cache_logs`.`user_id`=`user`.`user_id` AND
+			`cache_logs`.`cache_id`=`caches`.`cache_id` AND
+			`cache_logs`.`id` = '&1'",
+		$log_id);
 	$rLog = sql_fetch_array($rsLog);
 	mysql_free_result($rsLog);
 	
@@ -283,7 +324,7 @@ function process_log_watch($user_id, $log_id)
 	else
 		$dateformat = $opt['locale'][$language]['format']['phpdatetime'];
 
-	$watchtext = '{date} ' . $translate->t('{user} has logged the cache "{cachename}":', '', basename(__FILE__), __LINE__, '', 1, $language) . ' {action}' . "\n" . '{shortlink_url}{wp_oc}' . "\n{cachelists}\n" . '{text}' . "\n\n\n\n";
+	$watchtext = '{date} ' . $translate->t('{user} has logged the cache "{cachename}":', '', basename(__FILE__), __LINE__, '', 1, $language) . ' {action}{maintenance_flags}' . "\n" . '{shortlink_url}{wp_oc}' . "\n{cachelists}\n" . '{text}' . "\n\n\n\n";
 
 	$watchtext = mb_ereg_replace('{date}', date($dateformat, strtotime($rLog['logdate'])), $watchtext);
 	$watchtext = mb_ereg_replace('{wp_oc}', $rLog['wp_oc'], $watchtext);
@@ -291,6 +332,7 @@ function process_log_watch($user_id, $log_id)
 	$watchtext = mb_ereg_replace('{user}', $rLog['username'], $watchtext);
 	$watchtext = mb_ereg_replace('{cachename}', $rLog['cachename'], $watchtext);
 	$watchtext = mb_ereg_replace('{action}', get_logtype_name($rLog['type'], $language), $watchtext);
+	$watchtext = insert_maintenance_flags($rLog, $language, $watchtext);
 
 	$rsLists = sql("
 		SELECT `name` FROM `cache_lists` cl
@@ -317,6 +359,26 @@ function process_log_watch($user_id, $log_id)
 
 	sql("INSERT IGNORE INTO watches_waiting (`user_id`, `object_id`, `object_type`, `date_created`, `watchtext`, `watchtype`) VALUES (
 																		'&1', '&2', 1, NOW(), '&3', 2)", $user_id, $log_id, $watchtext);
+}
+
+
+function insert_maintenance_flags($rLog, $language, $watchtext)
+{
+	global $translate;
+
+	$flags = array('');
+	if ($rLog['needs_maintenance'] > 0) {
+		if ($rLog['needs_maintenance'] == 2) $mstate = 'geocache needs maintenance';
+		else $mstate = 'geocache is ok';
+		$flags[] = $translate->t($mstate, '', basename(__FILE__), __LINE__, '', 1, $language);
+	}
+	if ($rLog['listing_outdated'] > 0) {
+		if ($rLog['listing_outdated'] == 2) $mstate = 'description is outdated';
+		else $mstate = 'description is ok';
+		$flags[] = $translate->t($mstate, '', basename(__FILE__), __LINE__, '', 1, $language);
+	}
+	$flagtext = implode(', ', $flags);
+	return mb_ereg_replace('{maintenance_flags}', $flagtext, $watchtext);
 }
 
 

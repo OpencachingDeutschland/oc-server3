@@ -59,6 +59,7 @@
 	$txt_record = $translate->t("Name: {cachename} by {owner}
 Coordinates: {lon} {lat}
 Status: {status}
+Condition: {condition}
 
 Hidden on: {time}
 Waypoint: {waypoint}

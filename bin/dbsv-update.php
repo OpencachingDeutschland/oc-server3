@@ -727,6 +727,36 @@
 			// (the feature was started just a few days befor this change).
 	}
 
+	function dbv_146()   // NM flags
+	{
+		if (!sql_field_exists('cache_logs', 'needs_maintenance'))
+			sql("ALTER TABLE `cache_logs` ADD COLUMN `needs_maintenance` tinyint(1) NOT NULL default '0' AFTER `date`");
+		if (!sql_field_exists('cache_logs', 'listing_outdated'))
+			sql("ALTER TABLE `cache_logs` ADD COLUMN `listing_outdated` tinyint(1) NOT NULL default '0' AFTER `needs_maintenance`");
+
+		if (!sql_field_exists('cache_logs_modified', 'needs_maintenance'))
+			sql("ALTER TABLE `cache_logs_modified` ADD COLUMN `needs_maintenance` tinyint(1) NOT NULL default '0' AFTER `date`");
+		if (!sql_field_exists('cache_logs_modified', 'listing_outdated'))
+			sql("ALTER TABLE `cache_logs_modified` ADD COLUMN `listing_outdated` tinyint(1) NOT NULL default '0' AFTER `needs_maintenance`");
+
+		if (!sql_field_exists('cache_logs_archived', 'needs_maintenance'))
+			sql("ALTER TABLE `cache_logs_archived` ADD COLUMN `needs_maintenance` tinyint(1) NOT NULL default '0' AFTER `date`");
+		if (!sql_field_exists('cache_logs_archived', 'listing_outdated'))
+			sql("ALTER TABLE `cache_logs_archived` ADD COLUMN `listing_outdated` tinyint(1) NOT NULL default '0' AFTER `needs_maintenance`");
+
+		if (!sql_field_exists('caches', 'needs_maintenance'))
+			sql("ALTER TABLE `caches` ADD COLUMN `needs_maintenance` tinyint(1) NOT NULL default '0'");
+		if (!sql_field_exists('caches', 'listing_outdated'))
+			sql("ALTER TABLE `caches` ADD COLUMN `listing_outdated` tinyint(1) NOT NULL default '0'");
+		if (!sql_field_exists('caches', 'flags_last_modified'))
+			sql("ALTER TABLE `caches` ADD COLUMN `flags_last_modified` datetime NOT NULL COMMENT 'via Trigger (caches)'");
+	}
+	function dbv_147()
+	{
+		if (!sql_field_exists('log_types', 'maintenance_logs'))
+			sql("ALTER TABLE `log_types` ADD COLUMN `maintenance_logs` tinyint(1) NOT NULL");
+	}
+
 
 	// When adding new mutations, take care that they behave well if run multiple
 	// times. This improves robustness of database versioning.

@@ -23,16 +23,16 @@
 				case 0: // sofort
 					hour.options[0].selected = true;
 					weekday.options[0].selected = true;
-					weekday.disabled=true; weekday.style.color="grey";
-					hour.disabled=true; hour.style.color="grey";
+					weekday.disabled=true; weekday.className='disabled';
+					hour.disabled=true; hour.className='disabled';
 					break;
 				case 1:	// taeglich
-					weekday.disabled=true; weekday.style.color="grey";
-					hour.disabled=false; hour.style.color="";
+					weekday.disabled=true; weekday.className='disabled';
+					hour.disabled=false; hour.className='';
 					break;
 				case 2: // woechentlich
-					weekday.disabled=false; weekday.style.color="";
-					hour.disabled=false; hour.style.color="";
+					weekday.disabled=false; weekday.className='';
+					hour.disabled=false; hour.className='';
 					break;
 			}
 		}

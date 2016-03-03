@@ -92,6 +92,8 @@ class cachelog
 		$this->reCacheLog->addInt('type', 0, false);
 		$this->reCacheLog->addInt('oc_team_comment', 0, false);
 		$this->reCacheLog->addDate('date', time(), false);
+		$this->reCacheLog->addInt('needs_maintenance', 0, false);
+		$this->reCacheLog->addInt('listing_outdated', 0, false);
 		$this->reCacheLog->addString('text', '', false);
 		$this->reCacheLog->addInt('text_html', 1, false);
 		$this->reCacheLog->addInt('text_htmledit', 1, false);
@@ -165,6 +167,22 @@ class cachelog
 	{
 		return $this->reCacheLog->setValue('date', $value);
 	}
+	function getNeedsMaintenance()
+	{
+		return $this->reCacheLog->getValue('needs_maintenance');
+	}
+	function setNeedsMaintenance($value)
+	{
+		return $this->reCacheLog->setValue('needs_maintenance', $value);
+	}
+	function getListingOutdated()
+	{
+		return $this->reCacheLog->getValue('listing_outdated');
+	}
+	function setListingOutdated($value)
+	{
+		return $this->reCacheLog->setValue('listing_outdated', $value);
+	}
 	function getText()
 	{
 		return $this->reCacheLog->getValue('text');
@@ -227,6 +245,17 @@ class cachelog
 	// return if successfull (with insert)
 	function save()
 	{
+		// additional safeguard against setting unallowd log flags
+		if (!sql_value("
+			SELECT `maintenance_logs`
+			FROM `log_types`
+			WHERE `id`='&1'",
+			false, $this->getType()))
+		{
+			$this->setNeedsMaintenance(false);
+			$this->setListingOutdated(false);
+		}
+
 		sql_slave_exclude();
 		$saved = $this->reCacheLog->save();
 		if ($saved && $this->nLogId == ID_NEW)

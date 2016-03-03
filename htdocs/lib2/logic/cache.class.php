@@ -10,6 +10,7 @@
 
 require_once($opt['rootpath'] . 'lib2/logic/rowEditor.class.php');
 require_once($opt['rootpath'] . 'lib2/logic/logtypes.inc.php');
+require_once($opt['rootpath'] . 'lib/cache.inc.php');
 
 class cache
 {
@@ -90,12 +91,16 @@ class cache
 		$this->reCache->addFloat('way_length', 0, false);
 		$this->reCache->addString('wp_oc', null, true);
 		$this->reCache->addString('wp_gc', '', false);
+		$this->reCache->addString('wp_gc_maintained', '', false);
 		$this->reCache->addString('wp_nc', '', false);
 		$this->reCache->addString('desc_languages', '', false, RE_INSERT_IGNORE);
 		$this->reCache->addString('default_desclang', '', false);
 		$this->reCache->addDate('date_activate', null, true);
 		$this->reCache->addInt('need_npa_recalc', 1, false, RE_INSERT_IGNORE);
 		$this->reCache->addInt('show_cachelists', 1, false);
+		$this->reCache->addInt('needs_maintenance', 0, false);
+		$this->reCache->addInt('listing_outdated', 0, false);
+		$this->reCache->addDate('flags_last_modified', '0000-00-00 00:00:00', false);
 
 		$this->nCacheId = $nNewCacheId+0;
 
@@ -154,6 +159,10 @@ class cache
 	{
 		return $this->reCache->getValue('wp_gc');
 	}
+	function getWPGC_maintained()
+	{
+		return $this->reCache->getValue('wp_gc_maintained');
+	}
 
 	function getUUID()
 	{
@@ -203,6 +212,31 @@ class cache
 		return $this->reCache->getValue('default_desclang');
 	}
 
+	// cache condition flags
+	function getNeedsMaintenance()
+	{
+		return $this->reCache->getValue('needs_maintenance');
+	}
+	function setNeedsMaintenance($value)
+	{
+		return $this->reCache->setValue('needs_maintenance', $value);
+	}
+
+	function getListingOutdated()
+	{
+		return $this->reCache->getValue('listing_outdated');
+	}
+	function setListingOutdated($value)
+	{
+		return $this->reCache->setValue('listing_outdated', $value);
+	}
+
+	function getConditionHistory()
+	{
+		return get_cache_condition_history($this->nCacheId);
+	}
+
+	// other
 	function getAnyChanged()
 	{
 		return $this->reCache->getAnyChanged();
@@ -315,6 +349,8 @@ class cache
 				substr(`cache_logs`.`date`,12) AS `time`,  /* 00:00:01 = 00:00 logged, 00:00:00 = no time */
 				`cache_logs`.`type` AS `type`,
 				`cache_logs`.`oc_team_comment` AS `oc_team_comment`,
+				`cache_logs`.`needs_maintenance` AS `needs_maintenance`,
+				`cache_logs`.`listing_outdated` AS `listing_outdated`,
 				`cache_logs`.`text` AS `text`,
 				`cache_logs`.`text_html` AS `texthtml`,
 				`cache_logs`.`picture`,

@@ -12,6 +12,8 @@ CREATE TABLE `cache_logs_modified` (
   `type` tinyint(3) unsigned NOT NULL,
   `oc_team_comment` tinyint(1) NOT NULL,
   `date` datetime NOT NULL,
+  `needs_maintenance` tinyint(1) NOT NULL default '0',
+  `listing_outdated` tinyint(1) NOT NULL default '0',
   `text` mediumtext NOT NULL,
   `text_html` tinyint(1) NOT NULL,
   `modify_date` datetime default NULL,

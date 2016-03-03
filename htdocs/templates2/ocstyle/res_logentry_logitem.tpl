@@ -90,9 +90,14 @@
 			<br />
 		{/foreach}
 
+		{if $logItem.late_modified}
+			<p>{if $logItem.pictures}<br />{/if}
+			<small><em>{t}last modified on{/t} {$logItem.entry_last_modified|date_format:$opt.format.datelong}</em></small></p>
+		{/if}
+
 		{if $logItem.deleted_by_name != ""}
-			<span style="color:red">{t}Deleted by{/t} {$logItem.deleted_by_name},
-			{$logItem.deletion_date|date_format:$opt.format.date}</span>
+			<p><span style="color:red">{t}Deleted by{/t} {$logItem.deleted_by_name},
+			{$logItem.deletion_date|date_format:$opt.format.date}</span></p>
 		{/if}
 
 	</div>

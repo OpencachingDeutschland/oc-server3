@@ -5,6 +5,7 @@ CREATE TABLE `cache_logs_modified` (
   `uuid` varchar(36) NOT NULL,
   `node` tinyint(3) unsigned NOT NULL,
   `date_created` datetime NOT NULL,
+  `entry_last_modified` datetime NOT NULL,
   `last_modified` datetime NOT NULL,
   `log_last_modified` datetime NOT NULL,
   `cache_id` int(10) unsigned NOT NULL,

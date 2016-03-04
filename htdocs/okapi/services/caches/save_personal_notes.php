@@ -193,7 +193,7 @@ class WebService
     {
         if (Settings::get('OC_BRANCH') == 'oc.de') {
             # we can delete row if and only if there are no coords in it
-            $affected_row_count = Db::execute("
+            Db::execute("
                 delete from coordinates
                 where
                     type = 2  -- personal note
@@ -202,7 +202,7 @@ class WebService
                     and longitude = 0
                     and latitude = 0
             ");
-            if ($affected_row_count <= 0){
+            if (Db::get_affected_row_count() <= 0){
                 # no rows deleted - record either doesn't exist, or has coords
                 # remove only description
                 Db::execute("

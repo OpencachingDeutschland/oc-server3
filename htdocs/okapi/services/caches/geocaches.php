@@ -166,6 +166,7 @@ class WebService
                     c.terrain, c.wp_oc, c.wp_gc, c.logpw, c.user_id,
                     if(c.search_time=0, null, c.search_time) as trip_time,
                     if(c.way_length=0, null, c.way_length) as trip_distance,
+                    c.listing_outdated,
 
                     ifnull(sc.toprating, 0) as topratings,
                     ifnull(sc.found, 0) as founds,
@@ -198,6 +199,7 @@ class WebService
                     c.terrain, c.wp_oc, c.wp_gc, c.logpw, c.user_id,
                     if(c.search_time=0, null, c.search_time) as trip_time,
                     if(c.way_length=0, null, c.way_length) as trip_distance,
+                    0 as listing_outdated,
 
                     c.topratings,
                     c.founds,
@@ -217,6 +219,7 @@ class WebService
         $results = new ArrayObject();
         $cacheid2wptcode = array();
         $owner_ids = array();
+        $outdated_listings = array();
         while ($row = Db::fetch_assoc($rs))
         {
             $entry = array();
@@ -348,6 +351,8 @@ class WebService
                 }
             }
             $results[$row['wp_oc']] = $entry;
+            if ($row['listing_outdated'] > 0)
+                 $outdated_listings[] = $row['wp_oc'];
         }
         Db::free_result($rs);
 
@@ -523,6 +528,14 @@ class WebService
                      * whenever the cache description is included. */
 
                     $tmp = Okapi::fix_oc_html($row['desc']);
+
+                    if (in_array($cache_code, $outdated_listings))
+                    {
+                        $tmp = "<p style='color:#c00000'><strong>" .
+                               _('Parts of this geocache listing may be outdated.') . "</strong> " .
+                               _('See the log entries for more information.') . "</p>\n" .
+                               $tmp;
+                    }
 
                     if ($attribution_append != 'none')
                     {

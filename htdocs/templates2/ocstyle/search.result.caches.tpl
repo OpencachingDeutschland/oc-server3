@@ -38,9 +38,10 @@
 		</div>
 
 	{if $cachelist.description_for_display != ''}
-	<div style="padding: 0 8px 4px 10px">
-		{$cachelist.description_for_display}
-	</div>
+		<div style="padding: 0 8px 4px 10px">
+			{$cachelist.description_for_display}
+		</div>
+		<div style="clear:both; width:100%"></div>
 	{/if}
 	</div>
 {/if}

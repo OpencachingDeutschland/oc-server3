@@ -6,7 +6,7 @@
 >
 
 <!ELEMENT attrlist (attr*)>
-<!ELEMENT user (id, username, pmr, datecreated, lastmodified)>
+<!ELEMENT user (id, username, pmr, datecreated, lastmodified, lastlogin)>
 <!ELEMENT cache (id, userid, name, longitude, latitude, type, status, country, size, desclanguages, difficulty, terrain, rating, waypoints, datehidden, datecreated, lastmodified, listing_lastmodified, attributes, wpts)>
 <!ELEMENT cachedesc (id, cacheid, language, shortdesc, desc, hint, license?, lastmodified)>
 <!ELEMENT cachelog (id, cacheid, userid, logtype, date, text, license?, datecreated, lastmodified, log_lastmodified)>
@@ -38,6 +38,7 @@
 <!-- user -->
 <!ELEMENT username (#PCDATA)>
 <!ELEMENT pmr (#PCDATA)>
+<!ELEMENT lastlogin (#PCDATA)>
 
 <!-- cache -->
 <!ELEMENT userid (#PCDATA)>

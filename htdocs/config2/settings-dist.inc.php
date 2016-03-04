@@ -380,6 +380,7 @@
 	/* optional APIs
 	 */
 	$opt['logic']['api']['email_problems']['key'] = '';   // must be set to enable
+	$opt['logic']['api']['user_inactivity']['key'] = '';  // must be set to enable
 
 	/* cache report info settings
 	 */

@@ -230,7 +230,7 @@ function toggleAttr(id)
 	<tr>
 		<td>&nbsp;</td>
 		<td class="help"><img src="lang/de/ocstyle/images/misc/hint.gif" border="0" width="15" height="11" alt="{t}Notice{/t}" title="{t}Notice{/t}" />
-			{t}If the cache was published at another geocaching website, enter the corresponding waypoint here.{/t}<br />
+			{t}If the cache was published at another geocaching website, enter the corresponding waypoint here.{/t} <u>{t}Important:{/t}</u> {t}The geocache description at Opencaching must be kept up to date! Description changes on other websites must be applied to the Opencaching listing timely.{/t}<br />
 		</td>
 	</tr>
 	<tr><td class="spacer" colspan="2">&nbsp;</td></tr>

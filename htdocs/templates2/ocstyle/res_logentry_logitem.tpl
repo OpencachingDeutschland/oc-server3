@@ -4,6 +4,16 @@
 *  Unicode Reminder メモ
 ***************************************************************************}
 <div id="log{$logItem.id}" style="clear:both">
+{if isset($logItem.newcoord)}
+	<p>
+		&nbsp;<img src="resource2/{$opt.template.style}/images/log/16x16-moved.png" width="16" height="16" />
+		{if $logItem.type}{t}New coordinates:{/t}{else}{t}Original coordinates:{/t}{/if}&nbsp;
+		<strong>{$logItem.newcoord.lat} {$logItem.newcoord.lon}</strong>{if $logItem.movedbym},
+		{t 1=$logItem.movedbym}moved by %1 meters{/t}{elseif $logItem.movedbykm},
+		{t 1=$logItem.movedbykm}moved by %1 km{/t}{/if}
+	</p>
+{/if}
+{if $logItem.type}
 <div class="content-txtbox-noshade">  {* Ocprop: <div class="content-txtbox-noshade">(.*?)<\/div> *}
 	<div class="logs">
 	<p class="content-title-noshade-size1 {if $print}printlogheader{/if}" style="display:inline; margin-right:0">
@@ -104,5 +114,6 @@
 	<div style="clear:both"></div>
 	</div>
 </div>
+{/if}
 </div>
 

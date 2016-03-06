@@ -1,4 +1,4 @@
-﻿-- Content of tables:
+-- Content of tables:
 -- attribute_categories
 -- attribute_groups
 -- cache_attrib
@@ -817,8 +817,8 @@ INSERT INTO `search_ignore` (`word`) VALUES ('mein');
 INSERT INTO `search_ignore` (`word`) VALUES ('mich');
 INSERT INTO `search_ignore` (`word`) VALUES ('mir');
 INSERT INTO `search_ignore` (`word`) VALUES ('mit');
-INSERT INTO `search_ignore` (`word`) VALUES ('muss');
 INSERT INTO `search_ignore` (`word`) VALUES ('muß');
+INSERT INTO `search_ignore` (`word`) VALUES ('muss');
 INSERT INTO `search_ignore` (`word`) VALUES ('nach');
 INSERT INTO `search_ignore` (`word`) VALUES ('nicht');
 INSERT INTO `search_ignore` (`word`) VALUES ('noch');
@@ -7397,7 +7397,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2532', 'DE', '... nach Logdatum', '2015-01-20 20:37:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2533', 'DE', 'Gute und unpassende Gründe für eine Cachemeldung', '2015-01-20 20:37:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2534', 'DE', '%1 Meldungen sind in Bearbeitung, %2 Meldungen sind offen', '2015-01-20 20:37:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2535', 'DE', 'Wartezeit für neue Meldungen: ca. %1&ndash;%2 Tage', '2015-01-20 20:37:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2535', 'DE', 'Wartezeit für neue Meldungen: ca. %1\&ndash;%2 Tage', '2015-01-20 20:37:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2536', 'DE', 'Cacheliste:', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2537', 'DE', 'Cachelisten:', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2538', 'DE', 'Zustand des Caches:', '2015-06-17 10:09:14');
@@ -7411,19 +7411,19 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2546', 'DE', 'veraltet', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2547', 'DE', 'Die Cachebeschreibung ist veraltet.', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2548', 'DE', 'Die Cachebeschreibung ist in Ordnung.', '2015-06-17 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2549', 'DE', 'Wähle <i>veraltet</i>, wenn die Cachesuche durch veraltete Angaben in der Beschreibung<br />erheblich erschwert ist, z.&nbsp;B. weil der Ort sich stark verändert hat, oder weil wichtige<br />Informationen fehlen, die auf einer anderen Geocaching-Website vorhanden sind.<br />Bitte erkläre in deinem Logeintrag Genaueres.', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2549', 'DE', 'Wähle <i>veraltet</i>, wenn die Cachesuche durch veraltete Angaben in der Beschreibung<br />erheblich erschwert ist, z.\&nbsp;B. weil der Ort sich stark verändert hat, oder weil wichtige<br />Informationen fehlen, die auf einer anderen Geocaching-Website vorhanden sind.<br />Bitte erkläre in deinem Logeintrag Genaueres.', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2550', 'DE', 'Wähle <i>veraltet</i>, wenn die Cachesuche durch veraltete Angaben in der Beschreibung<br />erheblich erschwert ist, zum Beispiel weil der Ort sich stark verändert hat. Bitte<br />erkläre in deinem Logeintrag Genaueres.', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2551', 'DE', 'Wann hast du den Cache gefunden?', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2552', 'DE', 'Wann hast du die Suche abgebrochen?', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2553', 'DE', 'Diese Cachebeschreibung ist wahrscheinlich veraltet.', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2554', 'DE', 'Weitere Erläuterungen finden sich in den Logeinträgen.', '2015-06-17 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2555', 'DE', 'Weitere Erläuterungen finden sich in den <span style=\"white-space:nowrap\"><img src=\"resource2/ocstyle/images/log/16x16-listing-outdated.png\">-<a href=\"#logentries\" class="systemlink">Logeinträgen</a></span>.', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2555', 'DE', 'Weitere Erläuterungen finden sich in den <span style=\"white-space:nowrap\"><img src=\"resource2/ocstyle/images/log/16x16-listing-outdated.png\">-<a href=\"#logentries\" class=\"systemlink\">Logeinträgen</a></span>.', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2556', 'DE', 'Cache benötigt Wartung', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2557', 'DE', 'Cache ist ok', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2558', 'DE', 'Cachebeschreibung ist veraltet', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2559', 'DE', 'Cachebeschreibung ist ok', '2015-06-17 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2560', 'DE', 'Mit einem &bdquo;kann-gesucht-werden&ldquo;-Log bestätigst du auch,<br />dass der Cache in guten Zustand ist.', '2015-06-17 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2561', 'DE', 'Mit einem &bdquo;kann-gesucht-werden&ldquo;-Log bestätigst du auch,<br />dass die Cachebeschreibung aktuell ist.', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2560', 'DE', 'Mit einem \&bdquo;kann-gesucht-werden\&ldquo;-Log bestätigst du auch,<br />dass der Cache in guten Zustand ist.', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2561', 'DE', 'Mit einem \&bdquo;kann-gesucht-werden\&ldquo;-Log bestätigst du auch,<br />dass die Cachebeschreibung aktuell ist.', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2562', 'DE', 'Hier kannst du den aktuellen Wartungszustand des Caches angeben.', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2563', 'DE', 'Hier kannst du den aktuellen Zustand der Cachebeschreibung angeben.', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2564', 'DE', 'Wichtig:', '2015-06-17 10:09:14');
@@ -12658,6 +12658,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2518', 'FR', 'recommandations total', '2013-11-03 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2519', 'FR', 'Gauß-Krüger', '2013-11-03 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2522', 'FR', 'OConly', '2013-11-03 10:09:14');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2524', 'FR', 'requêtes stockées', '2015-08-25 01:28:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2526', 'FR', 'trouvé', '2010-10-04 00:17:39');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2527', 'FR', 'non\&nbsp;trouvé', '2010-10-04 00:17:39');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2528', 'FR', 'participation', '2010-10-04 00:17:39');
@@ -16036,4 +16037,4 @@ TRUNCATE TABLE `watches_waitingtypes`;
 INSERT INTO `watches_waitingtypes` (`id`, `watchtype`) VALUES ('1', 'ownerlog');
 INSERT INTO `watches_waitingtypes` (`id`, `watchtype`) VALUES ('2', 'cache_watches');
 
-INSERT INTO `sysconfig` (`name`, `value`) VALUES ('datasql_checksum', '7e39e939e33e383c439df033f09691dd') ON DUPLICATE KEY UPDATE `value`='7e39e939e33e383c439df033f09691dd';
+INSERT INTO `sysconfig` (`name`, `value`) VALUES ('datasql_checksum', '6f82e1b0ba6de2a5fe7de855f35e65f8') ON DUPLICATE KEY UPDATE `value`='6f82e1b0ba6de2a5fe7de855f35e65f8';

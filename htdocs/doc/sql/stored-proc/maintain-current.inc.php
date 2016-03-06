@@ -193,6 +193,17 @@
 			RETURN @LAST_UUID;
 		END;");
 
+	sql_dropFunction('STRIP_LEADING_NONALNUM');
+	sql("CREATE FUNCTION `STRIP_LEADING_NONALNUM` (s VARCHAR(255))
+	     RETURNS VARCHAR(255) DETERMINISTIC SQL SECURITY INVOKER
+		BEGIN
+			DECLARE n INT(10) DEFAULT 1;
+			WHILE n <= LENGTH(s) AND SUBSTR(s,n,1) REGEXP '[[:punct:][:space:]]' DO
+				SET n = n + 1;
+			END WHILE;
+			RETURN SUBSTR(s,n);
+		END;");
+
 	/* Stored procedures containing database logic
 	 */
 

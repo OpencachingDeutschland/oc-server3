@@ -41,8 +41,10 @@ class coordinate
 	}
 
 	// d° mm.mmm
-	function getDecimalMinutes()
+	function getDecimalMinutes($hideMinutFractions=false)
 	{
+		$minute_format = ($hideMinutFractions ? '%02.0f.***' : '%06.3f');
+
 		// Ocprop: ([N|S].*?)&#039;
 		$nLat = $this->nLat;
 		$bLatN = ($nLat < 0) ? false : true;
@@ -50,9 +52,9 @@ class coordinate
 		$nLatDeg = floor($nLat);
 		$nLatMin = ($nLat - $nLatDeg) * 60;
 		if ($bLatN)
-			$sLat = 'N ' . sprintf("%02d", $nLatDeg) . '° ' . sprintf("%06.3f", $nLatMin) . '\'';
+			$sLat = 'N ' . sprintf("%02d", $nLatDeg) . '° ' . sprintf($minute_format, $nLatMin) . '\'';
 		else
-			$sLat = 'S ' . sprintf("%02d", $nLatDeg) . '° ' . sprintf("%06.3f", $nLatMin) . '\'';
+			$sLat = 'S ' . sprintf("%02d", $nLatDeg) . '° ' . sprintf($minute_format, $nLatMin) . '\'';
 
 		// Ocprop: ([E|W].*?)&#039;
 		$nLon = $this->nLon;
@@ -61,9 +63,9 @@ class coordinate
 		$nLonDeg = floor($nLon);
 		$nLonMin = ($nLon - $nLonDeg) * 60;
 		if ($bLonE)
-			$sLon = 'E ' . sprintf("%03d", $nLonDeg) . '° ' . sprintf("%06.3f", $nLonMin) . '\'';
+			$sLon = 'E ' . sprintf("%03d", $nLonDeg) . '° ' . sprintf($minute_format, $nLonMin) . '\'';
 		else
-			$sLon = 'W ' . sprintf("%03d", $nLonDeg) . '° ' . sprintf("%06.3f", $nLonMin) . '\'';
+			$sLon = 'W ' . sprintf("%03d", $nLonDeg) . '° ' . sprintf($minute_format, $nLonMin) . '\'';
 
 		return array('lat' => $sLat, 'lon' => $sLon);
 	}

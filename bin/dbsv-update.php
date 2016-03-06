@@ -776,6 +776,11 @@
 		}
 	}
 
+	function dbv_149()   // add editcache flag to protect old coordinates
+	{
+		if (!sql_field_exists('caches', 'protect_old_coords'))
+			sql("ALTER TABLE `caches` ADD COLUMN `protect_old_coords` tinyint(1) NOT NULL default '0' AFTER `show_cachelists`");
+	}
 
 	// When adding new mutations, take care that they behave well if run multiple
 	// times. This improves robustness of database versioning.

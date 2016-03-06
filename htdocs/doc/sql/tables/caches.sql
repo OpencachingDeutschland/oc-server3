@@ -32,6 +32,7 @@ CREATE TABLE `caches` (
   `date_activate` datetime default NULL,
   `need_npa_recalc` tinyint(1) NOT NULL,
   `show_cachelists` tinyint(1) NOT NULL default '1',
+  `protect_old_coords` tinyint(1) NOT NULL default '0',
   `needs_maintenance` tinyint(1) NOT NULL default '0',
   `listing_outdated` tinyint(1) NOT NULL default '0',
   `flags_last_modified` datetime NOT NULL COMMENT 'via Trigger (caches)',

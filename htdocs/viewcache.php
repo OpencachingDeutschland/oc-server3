@@ -107,7 +107,8 @@ function getChildWaypoints($cacheid)
 				`caches`.`is_publishdate` AS `is_publishdate`,
 				`caches`.`difficulty` AS `difficulty`,
 				`caches`.`terrain` AS `terrain`,
-				`caches`.`show_cachelists` AS `show_cachelists`,
+				`caches`.`show_cachelists`,
+				`caches`.`protect_old_coords`,
 				`caches`.`needs_maintenance`,
 				`caches`.`listing_outdated`,
 				`cache_desc`.`language` AS `desclanguage`,
@@ -255,7 +256,7 @@ function getChildWaypoints($cacheid)
 									$rscount = $_REQUEST['log'] + 0;
 		}	
 
-	$logs = cache::getLogsArray($cacheid, 0, $rscount+1);
+	$logs = cache::getLogsArray($cacheid, 0, $rscount+1, false, $rCache['protect_old_coords']);
 	
 	if (isset($logs[$rscount])) 
 	{

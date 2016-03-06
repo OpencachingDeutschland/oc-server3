@@ -347,9 +347,14 @@ function toggleAttr(id)
 			{t}Please note the <a href="articles.php?page=cacheinfo#logpw" target="_blank">description</a>{/t}
 		</td>
 	</tr>
+	<tr><td class="spacer" colspan="2"></td></tr>
 	<tr>
 		<td><nobr><label for="showlists">{t}Show all cache lists{/t}</label></nobr></td>
 		<td><input type="checkbox" id="showlists" name="showlists" value="1" {showlists_checked} /></td>
+	</tr>
+	<tr>
+		<td><nobr><label for="protect_old_coords">{t}Protect old coordinates{/t}</label></nobr></td>
+		<td><input type="checkbox" id="protect_old_coords" name="protect_old_coords" value="1" {protectcoords_checked} /></td>
 	</tr>
 
 	<tr><td class="spacer" colspan="2"></td></tr>

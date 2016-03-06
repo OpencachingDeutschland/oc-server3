@@ -392,7 +392,8 @@ class cachelist
 			. ($userlike ? " AND `username` LIKE '%" . sql_escape($userlike) . "%'" : ''),
 			0,
 			$startat,
-			$maxitems);
+			$maxitems,
+			true);
 	}
 
 	static function getPublicListsOf($userid)
@@ -425,7 +426,8 @@ class cachelist
 				"OR (`is_public`> 0 AND
 			       `cache_lists`.`id` IN ('" . implode("','", array_map('sql_escape', $my_watches)) . "'))
 			)",
-			"`cache_lists`.`user_id`<>'" . sql_escape($cache_owner_id) . "'"); 
+			"`cache_lists`.`user_id`<>'" . sql_escape($cache_owner_id) . "'",
+			0, 20, true);
 	}
 
 	static function getListById($listid)
@@ -440,15 +442,17 @@ class cachelist
 			return false;
 	}
 
-	private static function getLists($condition, $prio=0, $startat=0, $maxitems=PHP_INT_MAX)
+	private static function getLists($condition, $prio=0, $startat=0, $maxitems=PHP_INT_MAX, $strip_nagchars=false)
 	{
 		global $login;
 		$login->verify();
 
+		$namefield = ($strip_nagchars ? 'STRIP_LEADING_NONALNUM(`cache_lists`.`name`)' : '`cache_lists`.`name`');
 		$rs = sql("
-			SELECT `cache_lists`.`id`, `cache_lists`.`user_id`, `user`.`username`, 
-			       `cache_lists`.`name`, `cache_lists`.`is_public` `visibility`, `cache_lists`.`password`, 
-						 `cache_lists`.`description`, `cache_lists`.`desc_htmledit`,
+			SELECT `cache_lists`.`id`, `cache_lists`.`user_id`, `user`.`username`,
+			       $namefield `name`,
+			       `cache_lists`.`is_public` `visibility`, `cache_lists`.`password`,
+			       `cache_lists`.`description`, `cache_lists`.`desc_htmledit`,
 			       `cache_lists`.`user_id`='&1' `own_list`,
 			       `stat_cache_lists`.`entries`, `stat_cache_lists`.`watchers`,
 			       `w`.`user_id` IS NOT NULL `watched_by_me`,
@@ -460,7 +464,7 @@ class cachelist
 			LEFT JOIN `cache_list_watches` `w` ON `w`.`cache_list_id`=`cache_lists`.`id` AND `w`.`user_id`='&1'
 			LEFT JOIN `cache_list_bookmarks` `b` ON `b`.`cache_list_id`=`cache_lists`.`id` AND `b`.`user_id`='&1'
 			WHERE $condition
-			ORDER BY `prio`,`cache_lists`.`name`
+			ORDER BY `prio`, $namefield
 			LIMIT &2,&3", 
 			$login->userid, $startat, $maxitems);
 

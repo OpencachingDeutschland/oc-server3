@@ -32,24 +32,20 @@
 	<p id="v3.0.17"><strong>OC 3.0 Version 17</strong> &ndash; 8. März 2016</p>
 	<p>Neu:</p>
 	<ul>
-		<li>Man kann jetzt bei jedem Log den Wartungszustand des Caches und der Cachebeschreibung mit angeben. Wenn „Cache benötigt Wartung“ bzw. „Cachebeschreibung ist veraltet“ gewählt wurde, erscheinen entsprechende Markierungen oben rechts im Cachelisting; bei veralteter Beschreibung zusätzlich noch ein Hinweistext. Neben dem Besitzer kann auch jeder andere Nutzer diese Markierungen auch wieder mit einem Log zurücksetzen, wenn er findet das der Cache bzw. die Beschreibung (wieder) in Ordnung ist. Diese Markierungen sollten nur gesetzt werden, wenn es größere Probleme mit dem Cache oder der Beschreibung gibt.</li>
-		<li>Koordinatenänderungen werden zwischen den Logs angezeigt. Der Cachebesitzer kann Altkoordinaten über eine Einstellung im Cachelisting schützen; die letzten drei Stellen werde dann nur noch als *** angezeigt.</li>
+		<li>Man kann jetzt bei jedem Log den Wartungszustand des Caches und der Cachebeschreibung mit angeben. Wenn „Cache benötigt Wartung“ bzw. „Cachebeschreibung ist veraltet“ gewählt wurde, erscheinen entsprechende Markierungen oben rechts im Cachelisting; bei veralteter Beschreibung zusätzlich noch ein Hinweistext. Neben dem Besitzer kann auch jeder andere Nutzer diese Markierungen auch wieder mit einem Log zurücksetzen, wenn er findet dass der Cache bzw. die Beschreibung (wieder) in Ordnung ist. Diese Markierungen sollten nur gesetzt werden, wenn es größere Probleme mit dem Cache oder der Beschreibung gibt.</li>
+		<li>Koordinatenänderungen werden zwischen den Logs angezeigt. Der Cachebesitzer kann Altkoordinaten über eine Einstellung im Cachelisting schützen; die letzten drei Stellen erscheinen dann nur noch als ***.</li>
 		<li>Wenn man Logs am nächsten Tag oder später ändert, erscheint unten im Log das letzte Änderungsdatum. Dies gilt nur für Änderungen ab Version 17.</li>
 		<li>In Logbenachrichtigungen sind ggf. auch die Namen von Cachelisten enthalten, über die man den Cache beobachtet.</li>
 		<li>Beim Melden von Caches wird der Status des Meldesystems angezeigt.</li>
 		<li>OKAPI: Die eigenen Heimkoordinaten können abgefragt werden.</li>
 	</ul>
 
-	<p>Geändert / verbessert:</p>
-	<ul>
-		<li>Beim der Eingabe von GC-Wegpunkten wird darauf hingewiesen, dass die Cachebeschreibung auf Opencaching immer auf dem aktuellen Stand gehalten werden muss.</li>
-	</ul>
-
 	<p>Korrigiert (Bugfixes):</p>
 	<ul>
-		<li>Bilder in Cachelistenbeschreibungen können nicht mehr über den Rahmen hinauslaufen. [Bug von Version 13]</li>
+		<li>Teile von Cachelistenbeschreibungen können nicht mehr über den Rahmen hinauslaufen. [Bug von Version 13]</li>
 		<li>kleine Korrekturen bei der Suchsortierung [Bugs von Version 16]</li>
 	</ul>
+	<br />
 
 	<p id="v3.0.16"><strong>OC 3.0 Version 16</strong> &ndash; 1. Februar 2016</p>
 	<p>Neu:</p>
@@ -74,6 +70,7 @@
 		<li>OKAPI: Umkreissuche bei kleinem Radius (&lt;&lt; 100 km) stark beschleunigt</li>
 		<li>Portierung von MySQL 5.1 auf MariaDB 5.5</li>
 	</ul>
+	<br />
 
 	<p>Korrigiert (Bugfixes):</p>
 	<ul>

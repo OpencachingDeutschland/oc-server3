@@ -757,6 +757,25 @@
 			sql("ALTER TABLE `log_types` ADD COLUMN `maintenance_logs` tinyint(1) NOT NULL");
 	}
 
+	function dbv_148()   // add log contents modification date
+	{
+		if (!sql_field_exists('cache_logs', 'entry_last_modified'))
+		{
+			sql("ALTER TABLE `cache_logs` ADD COLUMN `entry_last_modified` datetime NOT NULL COMMENT 'via Trigger (cache_logs)' AFTER `date_created`");
+			sql("UPDATE `cache_logs` SET `entry_last_modified`=`date_created`");
+		}
+		if (!sql_field_exists('cache_logs_archived', 'entry_last_modified'))
+		{
+			sql("ALTER TABLE `cache_logs_archived` ADD COLUMN `entry_last_modified` datetime NOT NULL AFTER `date_created`");
+			sql("UPDATE `cache_logs_archived` SET `entry_last_modified`=`date_created`");
+		}
+		if (!sql_field_exists('cache_logs_modified', 'entry_last_modified'))
+		{
+			sql("ALTER TABLE `cache_logs_modified` ADD COLUMN `entry_last_modified` datetime NOT NULL AFTER `date_created`");
+			sql("UPDATE `cache_logs_modified` SET `entry_last_modified`=`date_created`");
+		}
+	}
+
 
 	// When adding new mutations, take care that they behave well if run multiple
 	// times. This improves robustness of database versioning.

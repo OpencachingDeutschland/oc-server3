@@ -1089,6 +1089,7 @@
 						/* dont overwrite date values while XML client is running */
 						IF ISNULL(@XMLSYNC) OR @XMLSYNC!=1 THEN
 							SET NEW.`date_created`=NOW();
+							SET NEW.`entry_last_modified`=NOW();
 							SET NEW.`last_modified`=NOW();
 							SET NEW.`log_last_modified`=NEW.`last_modified`;
 						END IF;
@@ -1157,18 +1158,28 @@
 								 */
 								IF DATEDIFF(NOW(), OLD.`date_created`) > 1 THEN
 									INSERT IGNORE INTO `cache_logs_modified`
-										(`id`, `uuid`, `node`, `date_created`, `last_modified`, `log_last_modified`,
+										(`id`, `uuid`, `node`, `date_created`, `entry_last_modified`, `last_modified`, `log_last_modified`,
 										 `cache_id`, `user_id`, `type`, `oc_team_comment`, `date`,
 										 `needs_maintenance`, `listing_outdated`,
 										 `text`, `text_html`, `modify_date`)
 									VALUES
-										(OLD.`id`, OLD.`uuid`, OLD.`node`, OLD.`date_created`, OLD.`last_modified`,
+										(OLD.`id`, OLD.`uuid`, OLD.`node`, OLD.`date_created`, OLD.`entry_last_modified`, OLD.`last_modified`,
 										 OLD.`log_last_modified`, OLD.`cache_id`, OLD.`user_id`, OLD.`type`,
 										 OLD.`needs_maintenance`, OLD.`listing_outdated`,
 										 OLD.`oc_team_comment`, OLD.`date`, OLD.`text`, OLD.`text_html`, NOW());
 								END IF;
 
 								SET NEW.`last_modified`=NOW();
+							END IF;
+							/* entry_last_modified MUST ONLY be changed if the visible log entry changes! */
+							IF NEW.`type`!=OLD.`type` OR
+							   NEW.`oc_team_comment`!=OLD.`oc_team_comment` OR
+							   NEW.`date`!=OLD.`date` OR
+							   NEW.`needs_maintenance`!=OLD.`needs_maintenance` OR
+							   NEW.`listing_outdated`!=OLD.`listing_outdated` OR
+							   NEW.`text`!=BINARY OLD.`text` OR
+							   NEW.`picture`!=OLD.`picture` THEN
+							  SET NEW.`entry_last_modified`=NOW();
 							END IF;
 							IF NEW.`picture`!=OLD.`picture` THEN
 								SET NEW.`log_last_modified`=NOW();
@@ -1556,6 +1567,11 @@
 								ELSE
 									CALL sp_update_cache_listingdate(NEW.`object_id`);
 								END IF;
+							END IF;
+							/* cache_logs.entry_last_modified MUST ONLY be changed if the visible log entry changes! */
+							IF NEW.`object_type`=1 AND NOT IFNULL(@dont_update_logdate,FALSE) AND
+							   (NEW.`title`!=BINARY OLD.`title` OR NEW.`spoiler`!=OLD.`spoiler`) THEN
+								UPDATE `cache_logs` SET `entry_last_modified`=NEW.`last_modified` WHERE `id`=NEW.`object_id`;
 							END IF;
 							IF @archive_picop AND
 						       ( ( NEW.`object_type`=2 AND

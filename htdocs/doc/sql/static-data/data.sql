@@ -2849,6 +2849,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2562', 'You may
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2563', 'You may indicate here if the cache description is up-to-date.', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2564', 'Important:', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2565', 'The geocache description at Opencaching must be kept up to date! Description changes on other websites must be applied to the Opencaching listing timely.', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2566', 'last modified on', '2015-06-17 10:09:14');
 
 -- Table sys_trans_ref
 SET NAMES 'utf8';
@@ -7427,6 +7428,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2563', 'DE', 'Hier kannst du den aktuellen Zustand der Cachebeschreibung angeben.', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2564', 'DE', 'Wichtig:', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2565', 'DE', 'Die Cachebeschreibung bei Opencaching muss aktuell gehalten werden! Änderungen auf anderen Websites müssen zeitnah in die Opencaching-Beschreibung übernommen werden.', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2566', 'DE', 'zuletzt geändert am', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'EN', 'Reorder IDs', '2010-09-02 00:15:30');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'EN', 'The database could not be reconnected.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'EN', 'Testing – please do not login', '2010-08-28 11:48:07');

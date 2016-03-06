@@ -32,12 +32,12 @@
 	<p id="v3.0.17"><strong>OC 3.0 Version 17</strong> &ndash; 8. März 2016</p>
 	<p>Neu:</p>
 	<ul>
-		<li>Man kann jetzt bei jedem Log den Wartungszustand des Caches und der Cachebeschreibung mit angeben. Wenn „Cache benötigt Wartung“ bzw. „Cachebeschreibung ist veraltet“ gewählt wurde, erscheinen entsprechende Markierungen oben rechts im Cachelisting; bei veralteter Beschreibung zusätzlich noch ein Hinweistext. Neben dem Besitzer kann auch jeder andere Nutzer diese Markierungen auch wieder mit einem Log zurücksetzen, wenn er findet dass der Cache bzw. die Beschreibung (wieder) in Ordnung ist. Diese Markierungen sollten nur gesetzt werden, wenn es größere Probleme mit dem Cache oder der Beschreibung gibt.</li>
+		<li><a href="http://wiki.opencaching.de/index.php/Das_Onlinelog#Der_Wartungszustand" target="_blank">Wartungszustände loggen</a></li>
 		<li>Koordinatenänderungen werden zwischen den Logs angezeigt. Der Cachebesitzer kann Altkoordinaten über eine Einstellung im Cachelisting schützen; die letzten drei Stellen erscheinen dann nur noch als ***.</li>
 		<li>Wenn man Logs am nächsten Tag oder später ändert, erscheint unten im Log das letzte Änderungsdatum. Dies gilt nur für Änderungen ab Version 17.</li>
 		<li>In Logbenachrichtigungen sind ggf. auch die Namen von Cachelisten enthalten, über die man den Cache beobachtet.</li>
 		<li>Beim Melden von Caches wird der Status des Meldesystems angezeigt.</li>
-		<li>OKAPI: Die eigenen Heimkoordinaten können abgefragt werden.</li>
+		<li>OKAPI: Die eigenen Heimkoordinaten aus dem Benutzerprofil können abgefragt werden.</li>
 	</ul>
 
 	<p>Korrigiert (Bugfixes):</p>

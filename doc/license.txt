@@ -226,13 +226,19 @@ Icons
         Path    : htdocs/resource2/ocstyle/images/media/
         URI     : https://github.com/paulrobertlloyd/socialmediaicons
         License : Creative Commons BY-SA 3.0
-        Autor   : Paul Robert Lloyd (and other contributors)
+        Author  : Paul Robert Lloyd (and other contributors)
 
    10.  Creative Commons Button
         Path    : htdocs/resource2/ocstyle/images/media/
         URI     : https://creativecommons.org/about/downloads
         License : Creative Commons BY 3.0
-        Autor   : Creative Commons
+        Author  : Creative Commons
+
+   11.  32x32 Archived icon
+        Path    : htdocs/resource2/ocstyle/images/cachestatus/
+        URI     : http://www.softicons.com/toolbar-icons/mono-basic-blue-icons-by-double-j-design/archive-icon
+        License : Creative Commons BY 3.0
+        Author  : Double-J Design
 
 
 Other resources

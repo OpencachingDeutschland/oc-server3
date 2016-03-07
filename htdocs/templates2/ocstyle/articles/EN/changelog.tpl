@@ -23,7 +23,7 @@
 		<li>If logs entries are edited on the day after or later, the last modification date is displayed at the bottom of the log. This works only for changes since release 17.</li>
 		<li>If caches are watched via lists, the names of the lists are given in the notification emails.</li>
 		<li>When reporting caches, the status of the reporting system is shown.</li>
-		<li>OKAPI: The own home coordinates can be retrieved.</li>
+		<li>OKAPI: The own home coordinates from the user profile can be retrieved.</li>
 	</ul>
 
 	<p>Fixed:</p>

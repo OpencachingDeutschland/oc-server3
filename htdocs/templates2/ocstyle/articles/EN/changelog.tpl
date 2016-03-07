@@ -15,7 +15,7 @@
 
 	<div class="changelog-changes">
 
-	<p id="v3.0.17"><strong>OC 3.0 Release 17</strong> &ndash; 8 March 2016</p>
+	<p id="v3.0.17"><strong>OC 3.0 Release 17</strong> &ndash; 7 March 2016</p>
 	<p>New:</p>
 	<ul>
 		<li>With every log, the maintenance state of the cache and the cache description can be supplied. If "geocache needs maintenance" or "description is outdated" is chosen, this is indicated by corresponding symbols in the upper right area of the listing. The owner or any other user may reset these marks by another log, if he thinks that the geocache / the description is ok (now). The marks should be set only if there are substancial problems with the cache or the description.</li>
@@ -30,6 +30,7 @@
 	<ul>
 		<li>Parts of cache list descriptions can no longer overrun the frame. [bug of release 13]</li>
 		<li>small fixes for search result sorting [bugs of release 16]</li>
+		<li>fixed some page display glitches</li>
 	</ul>
 	<br />
 

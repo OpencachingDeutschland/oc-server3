@@ -123,7 +123,6 @@ function search_output()
 	// downloads
 	$tpl->assign('queryid', $options['queryid']);
 	if (isset($query_userid)) {
-		$tpl->assign('userid', $query_userid);
 		$tpl->assign('query_name', $query_name);
 	}
 

@@ -31,7 +31,7 @@
 	sql_enable_foundrows();
 	$tpl->assign_rs('logs', sql("SELECT SQL_CALC_FOUND_ROWS `cache_logs`.`cache_id` `cacheid`, `cache_logs`.`type` `type`, `cache_logs`.`date` `date`, `caches`.`name` `name`,
 	                                    `user`.`user_id` AS `userid`, `user`.`username`, `caches`.`wp_oc`, `ca`.`attrib_id` IS NOT NULL AS `oconly`,
-	                                    `cache_rating`.`rating_date` IS NOT NULL AS `recommended`,
+	                                    `cache_rating`.`rating_date` IS NOT NULL AND `cache_logs`.`type` IN (1,7) AS `recommended`,
 	                                    `cache_logs`.`needs_maintenance`,
 	                                    `cache_logs`.`listing_outdated`
 	                               FROM `cache_logs`

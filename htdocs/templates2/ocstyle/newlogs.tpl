@@ -141,7 +141,6 @@
 				{elseif $newLog.type==14}
 					<img src="resource2/{$opt.template.style}/images/log/16x16-locked-invisible.png" width="16" height="16" border="0" alt="" style="margin-top:4px;" /> 
 				{/if}
-				{include file="res_logflags.tpl" logItem=$newLog withRecommendation=false}
 			</nobr></td>
 			<td>
 				{if $newLog.oc_team_comment}<img src="resource2/{$opt.template.style}/images/oclogo/oc-team-comment.png" alt="OC-Team" title="{t}OC team comment{/t}" />{/if}
@@ -155,14 +154,12 @@
 
 				{if $newLog.type==1}
 					{t 1=$smarty.capture.cachename 2=$smarty.capture.username}%2 found %1{/t}
-					{if $newLog.recommended}<img src="images/rating-star.gif" width="17" height="16" title="{t}with recommendation{/t}" />{/if} 
 				{elseif $newLog.type==2}
 					{t 1=$smarty.capture.cachename 2=$smarty.capture.username}%2 didn't find %1{/t}
 				{elseif $newLog.type==3}
 					{t 1=$smarty.capture.cachename 2=$smarty.capture.username}%2 wrote a note for %1{/t}
 				{elseif $newLog.type==7}
 					{t 1=$smarty.capture.cachename 2=$smarty.capture.username}%2 visited %1{/t}
-					{if $newLog.recommended}<img src="images/rating-star.gif" width="17" height="16" title="{t}with recommendation{/t}" />{/if}
 				{elseif $newLog.type==8}
 					{t 1=$smarty.capture.cachename 2=$smarty.capture.username}%2 want's to visit %1{/t}
 				{elseif $newLog.type==9}
@@ -178,6 +175,7 @@
 				{elseif $newLog.type==13 || $newLog.type==14}
 					{t 1=$smarty.capture.cachename 2=$smarty.capture.username}%2 has locked %1{/t}
 				{/if}
+				{include file="res_logflags.tpl" logItem=$newLog withRecommendation=true}
 
 				{if $newLog.pics}
 					<img src="resource2/ocstyle/images/action/16x16-addimage.png" />

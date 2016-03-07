@@ -180,7 +180,7 @@
 																`cacheloguser`.`user_id`, 
 																`cacheloguser`.`username`,
 																`cache_logs`.`cache_id`,
-																`cache_rating`.`rating_date` IS NOT NULL AS `recommended`,
+																`cache_rating`.`rating_date` IS NOT NULL AND `cache_logs`.`type` IN (1,7) AS `recommended`,
 																`caches_attributes`.`attrib_id` IS NOT NULL as `oconly`,
 																'' AS `pic_uuid`,
 																0 AS `picshown`,

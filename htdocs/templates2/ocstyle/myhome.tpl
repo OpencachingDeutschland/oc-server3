@@ -80,14 +80,13 @@ function myHomeLoad()
 			<tr>
 				<td><nobr>
 					{include file="res_logtype.tpl" type=$logItem.type}
-					{include file="res_logflags.tpl" logItem=$logItem}
 				</nobr></td>
 				<td style="white-space:nowrap; text-align:center">{$logItem.date|date_format:$opt.format.datelong}</td>
 				<td>
 					<a href="viewcache.php?wp={$logItem.wp_oc}">{$logItem.name|escape}</a>
 					{include file="res_oconly.tpl" oconly=$logItem.oconly}
 					{t}by{/t} <a href="viewprofile.php?userid={$logItem.userid}">{$logItem.username|escape}</a>
-					{if $logItem.recommended}<img src="images/rating-star.gif" width="17" height="16" title="{t}with recommendation{/t}" />{/if}
+					{include file="res_logflags.tpl" logItem=$logItem withRecommendation=true}
 				</td>
 			</tr>
 		{foreachelse}

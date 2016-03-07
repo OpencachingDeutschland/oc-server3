@@ -135,8 +135,13 @@ class ReplicateCommon
                 from cache_logs_archived
                 where okapi_syncbase > '".Db::escape_string($last_update)."'
             ");
-            self::generate_changelog_entries('services/logs/entries', 'log', 'log_uuids',
-                'uuid', $DELETED_uuids, self::$logged_log_entry_fields, false, true, 3600);
+            $deleted_uuid_groups = Okapi::make_groups($DELETED_uuids, 100);
+            unset($DELETED_uuids);
+            foreach ($deleted_uuid_groups as $deleted_uuids)
+            {
+                self::generate_changelog_entries('services/logs/entries', 'log', 'log_uuids',
+                    'uuid', $deleted_uuids, self::$logged_log_entry_fields, false, true, 3600);
+            }
         }
 
         # Update state variables.

@@ -563,7 +563,7 @@ function showalllists()
 
 <!-- Logs -->
 <div id="logblock">
-	{include file="res_logentry.tpl" header_footer=true footbacklink=false logs=$logs cache=$cache}
+	{include file="res_logentry.tpl" header_footer=true footbacklink=false logs=$logs cache=$cache morelogs=$morelogs}
 
 	{if $morelogs}
 		<div class="content2-container bg-blue02">

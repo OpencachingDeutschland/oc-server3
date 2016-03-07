@@ -4,7 +4,7 @@
 *  Unicode Reminder メモ
 ***************************************************************************}
 <div id="log{$logItem.id}" style="clear:both">
-{if isset($logItem.newcoord)}
+{if isset($logItem.newcoord) && (!$morelogs || $logItem.type)}
 	<p>
 		&nbsp;<img src="resource2/{$opt.template.style}/images/log/16x16-moved.png" width="16" height="16" />
 		{if $logItem.type}{t}New coordinates:{/t}{else}{t}Original coordinates:{/t}{/if}&nbsp;

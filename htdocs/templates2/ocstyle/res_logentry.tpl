@@ -28,7 +28,7 @@
 {/if}
 
 {foreach from=$logs item=logItem name=log}
-	{include file="res_logentry_logitem.tpl" logs=$logs cache=$cache}
+	{include file="res_logentry_logitem.tpl" logs=$logs cache=$cache morelogs=$morelogs}
 {/foreach}
 
 {if $header_footer}

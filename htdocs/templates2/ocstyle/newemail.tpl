@@ -9,6 +9,8 @@
 	{t}Change E-Mail address{/t}
 </div>
 
+{include file="settingsmenu.tpl"}
+
 {if $codeChanged==true}
 	<br /><p>&nbsp;<span class="okmsg">{t}The E-Mail-Address was changed.{/t}</span></p>
 {else}

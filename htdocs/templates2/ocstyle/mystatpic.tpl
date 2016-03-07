@@ -9,6 +9,8 @@
 	{t}Statistic picture{/t}
 </div>
 
+{include file="settingsmenu.tpl"}
+
 <form action="change_statpic.php">
 
 	<table class="table">

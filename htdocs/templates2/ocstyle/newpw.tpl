@@ -9,6 +9,8 @@
 	{t}Change password{/t}
 </div>
 
+{include file="settingsmenu.tpl"}
+
 {if $passwordChanged==true}
 	<br /><p>&nbsp;<span class="okmsg">{t}The password has been changed.{/t}</span></p>
 	<p>&nbsp;{t}You can now <a href="login.php">login</a> with the new password.{/t}</p>

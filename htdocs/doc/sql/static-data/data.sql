@@ -2855,7 +2855,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2568', 'New coo
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2569', 'moved by %1 meters', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2570', 'moved by %1 km', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2571', 'Protect old coordinates', '2015-06-17 10:09:14');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2598', 'Select <i>ok</i> if you have found the cache and everything is in acceptable<br />condition.', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2598', 'Select <i>ok</i> if you have found or checked the cache and everything is in<br />acceptable condition.', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2599', 'Select <i>up to date</i> if you have checked the complete description \&ndash; from the<br />container size to encoded hints \&ndash; and can confirm that everything is up-to-date.', '2015-06-17 10:09:14');
 
 -- Table sys_trans_ref
@@ -7441,7 +7441,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2569', 'DE', 'verlegt um %1 Meter', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2570', 'DE', 'verlegt um %1 km', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2571', 'DE', 'Altkoordinaten schützen', '2015-06-17 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2598', 'DE', 'Wähle <i>ok</i>, wenn du den Cache gefunden hast und alles in akzeptablem<br />Zustand ist.', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2598', 'DE', 'Wähle <i>ok</i>, wenn du den Cache gefunden oder kontrolliert hast und alles in<br />akzeptablem Zustand ist.', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2599', 'DE', 'Wähle <i>in Ordnung</i>, wenn du die vollständige Beschreibung \&ndash; von der Behältergroße<br />bis zu verschlüsselten Hinweisen \&ndash; geprüft hast, und alles auf aktuellem Stand ist.', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'EN', 'Reorder IDs', '2010-09-02 00:15:30');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'EN', 'The database could not be reconnected.', '2010-08-28 11:48:07');

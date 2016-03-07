@@ -454,10 +454,11 @@ function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $z
 	                                    `caches`.`country` `country`, `caches`.`size` `size`, `caches`.`desc_languages` `desclanguages`,
 	                                    `caches`.`difficulty` `difficulty`, `caches`.`terrain` `terrain`, `caches`.`way_length` `way_length`, 
 	                                    `caches`.`search_time` `search_time`, `caches`.`wp_gc` `wp_gc`,
-	                                    /* we deliberatly do not use gc_wp_maintained here */
+	                                    `caches`.`wp_gc_maintained`,
 	                                    `caches`.`wp_oc` `wp_oc`, `caches`.`date_hidden` `date_hidden`, `caches`.`date_created` `date_created`, `caches`.`is_publishdate` `is_publishdate`, 
 	                                    `caches`.`last_modified` `last_modified`, `caches`.`status` `status`, `caches`.`node` `node`,
-	                                    `caches`.`listing_last_modified` `listing_last_modified`, `cache_status`.`allow_user_view`
+	                                    `caches`.`listing_last_modified` `listing_last_modified`, `cache_status`.`allow_user_view`,
+	                                    `caches`.`needs_maintenance`, `caches`.`listing_outdated`
 	                               FROM `tmpxml_caches`
 	                         INNER JOIN `caches` ON `tmpxml_caches`.`id`=`caches`.`cache_id`
 	                         INNER JOIN `user` ON `caches`.`user_id`=`user`.`user_id`
@@ -468,6 +469,19 @@ function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $z
 
 		if ($r['size'] == 8 && $ocxmlversion < 12)
 			$r['size'] = 2;   // return as micro in old interface version
+
+		if ($ocxmlversion >= 15)
+		{
+			$statusflags = ' needs_maintenance="'.$r['needs_maintenance'].'" listing_outdated="'.$r['listing_outdated'].'"';
+			$gccom2 = ' gccom2="'.xmlentities($r['wp_gc_maintained']).'"';
+			$nccom = '';
+		}
+		else
+		{
+			$statusflags = '';
+			$gccom2 = '';
+			$nccom = ' nccom=""';
+		}
 	
 		fwrite($f, $t1 . '<cache>' . "\n");
 		
@@ -477,14 +491,14 @@ function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $z
 		fwrite($f, $t2 . '<longitude>' . sprintf('%01.5f', ($bAllowView ? $r['longitude'] : 0)) . '</longitude>' . "\n");
 		fwrite($f, $t2 . '<latitude>' . sprintf('%01.5f', ($bAllowView ? $r['latitude'] : 0)) . '</latitude>' . "\n");
 		fwrite($f, $t2 . '<type id="' . $r['type'] . '" short="' . xmlentities($cachetypes[$r['type']]['short']) . '">' . xmlcdata($cachetypes[$r['type']]['de']) . '</type>' . "\n");
-		fwrite($f, $t2 . '<status id="' . $r['status'] . '">' . xmlcdata($cachestatus[$r['status']]['de']) . '</status>' . "\n");
+		fwrite($f, $t2 . '<status id="' . $r['status'] . '"' . $statusflags . '>' . xmlcdata($cachestatus[$r['status']]['de']) . '</status>' . "\n");
 		fwrite($f, $t2 . '<country id="' . $r['country'] . '">' . xmlcdata($counties[$r['country']]['de']) . '</country>' . "\n");
 		fwrite($f, $t2 . '<size id="' . $r['size'] . '">' . xmlcdata($cachesizes[$r['size']]['de']) . '</size>' . "\n");
 		fwrite($f, $t2 . '<desclanguages>' . $r['desclanguages'] . '</desclanguages>' . "\n");
 		fwrite($f, $t2 . '<difficulty>' . sprintf('%01.1f', $r['difficulty'] / 2) . '</difficulty>' . "\n");
 		fwrite($f, $t2 . '<terrain>' . sprintf('%01.1f', $r['terrain'] / 2) . '</terrain>' . "\n");
 		fwrite($f, $t2 . '<rating waylength="' . $r['way_length'] . '" needtime="' . $r['search_time'] . '" />' . "\n");
-		fwrite($f, $t2 . '<waypoints gccom="' . xmlentities($r['wp_gc']) . '" nccom="" oc="' . xmlentities($r['wp_oc']) . '" />' . "\n");
+		fwrite($f, $t2 . '<waypoints oc="' . xmlentities($r['wp_oc']) . '" gccom="' . xmlentities($r['wp_gc']) . '"' . $gccom2 . $nccom . ' />' . "\n");
 		fwrite($f, $t2 . '<datehidden>' . date($sDateformat, strtotime($r['date_hidden'])) . '</datehidden>' . "\n");
 		if ($ocxmlversion >= 12) $pd = ' ispublishdate="' . $r['is_publishdate'] . '"';
 		else $pd = "";
@@ -589,7 +603,8 @@ function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $z
 	                                    `cache_logs`.`oc_team_comment`,
 	                                    `cache_logs`.`date_created` `date_created`, `cache_logs`.`last_modified` `last_modified`,
 	                                    `cache_logs`.`log_last_modified` `log_last_modified`, 
-	                                    `cache_logs`.`uuid` `uuid`, `user`.`username` `username`, `caches`.`uuid` `cacheuuid`, 
+	                                    `cache_logs`.`uuid` `uuid`, `user`.`username` `username`, `caches`.`uuid` `cacheuuid`,
+	                                    `cache_logs`.`needs_maintenance`, `cache_logs`.`listing_outdated`,
 	                                    `user`.`uuid` `useruuid`, `cache_logs`.`node` `node`, IF(NOT ISNULL(`cache_rating`.`cache_id`) AND `cache_logs`.`type` IN (1,7), 1, 0) AS `recommended`,
 	                                    `cache_status`.`allow_user_view`,
 	                                    `user`.`data_license`,
@@ -618,11 +633,17 @@ function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $z
 			$teamcomment = '';
 			if ($r['type'] > 8) $r['type'] = 3;
 		}
+
+		if ($ocxmlversion >= 15)
+			$statusflags = ' needs_maintenance="'.$r['needs_maintenance'].'" listing_outdated="'.$r['listing_outdated'].'"';
+		else
+			$statusflags = '';
+
 		fwrite($f, $t1 . '<cachelog>' . "\n");
 		fwrite($f, $t2 . '<id id="' . $r['id'] . '" node="' . $r['node'] . '">' . $r['uuid'] . '</id>' . "\n");
 		fwrite($f, $t2 . '<cacheid id="' . $r['cache_id'] . '">' . $r['cacheuuid'] . '</cacheid>' . "\n");
 		fwrite($f, $t2 . '<userid id="' . $r['user_id'] . '" uuid="' . $r['useruuid'] . '">' . xmlcdata($r['username']) . '</userid>' . "\n");
-		fwrite($f, $t2 . '<logtype id="' . $r['type'] . '" recommended="' . $r['recommended'] . '"' . $teamcomment . '>' . xmlcdata($logtypes[$r['type']]) . '</logtype>' . "\n");
+		fwrite($f, $t2 . '<logtype id="' . $r['type'] . '" recommended="' . $r['recommended'] . '"' . $teamcomment . $statusflags . '>' . xmlcdata($logtypes[$r['type']]) . '</logtype>' . "\n");
 		fwrite($f, $t2 . '<date>' . date($ocxmlversion >= 13 ? $sDateformat : $sDateshort, strtotime($r['date'])) . '</date>' . "\n");
 		fwrite($f, $t2 . '<text html="' . $r['text_html'] . '">' . xmlcdata(($bAllowView ? $r['text'] : '')) . '</text>' . "\n");
 		fwrite($f, $t2 . '<datecreated>' . date($sDateformat, strtotime($r['date_created'])) . '</datecreated>' . "\n");
@@ -738,7 +759,7 @@ function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $z
 
 function startXmlSession($sModifiedSince, $bCache, $bCachedesc, $bCachelog, $bUser, $bPicture, $bRemovedObject, $bPictureFromCachelog, $selection, $sAgent)
 {
-	global $opt;
+	global $opt, $ocxmlversion;
 
 	// session anlegen
 	sql("INSERT INTO `xmlsession` (`last_use`, `modified_since`, `date_created`, `agent`) VALUES (NOW(), '&1', NOW(), '&2')", date('Y-m-d H:i:s', strtotime($sModifiedSince)), $sAgent);
@@ -756,8 +777,12 @@ function startXmlSession($sModifiedSince, $bCache, $bCachedesc, $bCachelog, $bUs
 		// ohne selection
 		if ($bCache == 1)
 		{
+			if ($ocxmlversion >= 15)
+				$wherefield = 'GREATEST(`last_modified`,`flags_last_modified`)';
+			else
+				$wherefield = '`last_modified`';
 			sql("INSERT INTO xmlsession_data (`session_id`, `object_type`, `object_id`)
-			     SELECT &1, 2, `cache_id` FROM `caches` WHERE `last_modified` >= '&2' AND `status`!=5",
+			     SELECT &1, 2, `cache_id` FROM `caches` WHERE ".$wherefield." >= '&2' AND `status`!=5",
 			     $sessionid,
 			     $sModifiedSince);
 			$recordcount['caches'] = mysql_affected_rows();

@@ -1,4 +1,4 @@
-﻿-- Content of tables:
+-- Content of tables:
 -- attribute_categories
 -- attribute_groups
 -- cache_attrib
@@ -682,16 +682,16 @@ INSERT INTO `logentries_types` (`id`, `module`, `eventname`) VALUES ('8', 'notif
 -- Table log_types
 SET NAMES 'utf8';
 TRUNCATE TABLE `log_types`;
-INSERT INTO `log_types` (`id`, `name`, `trans_id`, `permission`, `cache_status`, `de`, `en`, `icon_small`, `allow_rating`, `require_password`) VALUES ('1', 'Found', '56', 'C', '0', 'gefunden', 'found', 'log/16x16-found.png', '1', '1');
-INSERT INTO `log_types` (`id`, `name`, `trans_id`, `permission`, `cache_status`, `de`, `en`, `icon_small`, `allow_rating`, `require_password`) VALUES ('2', 'Not found', '497', 'C', '0', 'nicht gefunden', 'not found', 'log/16x16-dnf.png', '0', '0');
-INSERT INTO `log_types` (`id`, `name`, `trans_id`, `permission`, `cache_status`, `de`, `en`, `icon_small`, `allow_rating`, `require_password`) VALUES ('3', 'Note', '20', 'A', '0', 'Bemerkung', 'note', 'log/16x16-note.png', '0', '0');
-INSERT INTO `log_types` (`id`, `name`, `trans_id`, `permission`, `cache_status`, `de`, `en`, `icon_small`, `allow_rating`, `require_password`) VALUES ('7', 'Attended', '498', 'C', '0', 'teilgenommen', 'attended', 'log/16x16-attended.png', '1', '1');
-INSERT INTO `log_types` (`id`, `name`, `trans_id`, `permission`, `cache_status`, `de`, `en`, `icon_small`, `allow_rating`, `require_password`) VALUES ('8', 'Will attend', '499', 'C', '0', 'möchte teilnehmen', 'will attend', 'log/16x16-will_attend.png', '0', '0');
-INSERT INTO `log_types` (`id`, `name`, `trans_id`, `permission`, `cache_status`, `de`, `en`, `icon_small`, `allow_rating`, `require_password`) VALUES ('9', 'Archived', '496', 'C', '3', 'archiviert', 'Archived', 'log/16x16-archived.png', '0', '0');
-INSERT INTO `log_types` (`id`, `name`, `trans_id`, `permission`, `cache_status`, `de`, `en`, `icon_small`, `allow_rating`, `require_password`) VALUES ('10', 'Available', '531', 'C', '1', 'kann gesucht werden', 'Available', 'log/16x16-active.png', '0', '0');
-INSERT INTO `log_types` (`id`, `name`, `trans_id`, `permission`, `cache_status`, `de`, `en`, `icon_small`, `allow_rating`, `require_password`) VALUES ('11', 'Temporarily not available', '532', 'C', '2', 'momentan nicht verfügbar', 'Temporarily not available', 'log/16x16-disabled.png', '0', '0');
-INSERT INTO `log_types` (`id`, `name`, `trans_id`, `permission`, `cache_status`, `de`, `en`, `icon_small`, `allow_rating`, `require_password`) VALUES ('13', 'Locked', '2023', 'C', '6', 'gesperrt', 'Locked', 'log/16x16-locked.png', '0', '0');
-INSERT INTO `log_types` (`id`, `name`, `trans_id`, `permission`, `cache_status`, `de`, `en`, `icon_small`, `allow_rating`, `require_password`) VALUES ('14', 'Locked, invisible', '822', 'C', '7', 'gesperrt, versteckt', 'Locked, invisible', 'log/16x16-locked-invisible.png', '0', '0');
+INSERT INTO `log_types` (`id`, `name`, `trans_id`, `permission`, `cache_status`, `de`, `en`, `icon_small`, `allow_rating`, `require_password`, `maintenance_logs`) VALUES ('1', 'Found', '56', 'C', '0', 'gefunden', 'found', 'log/16x16-found.png', '1', '1', '1');
+INSERT INTO `log_types` (`id`, `name`, `trans_id`, `permission`, `cache_status`, `de`, `en`, `icon_small`, `allow_rating`, `require_password`, `maintenance_logs`) VALUES ('2', 'Not found', '497', 'C', '0', 'nicht gefunden', 'not found', 'log/16x16-dnf.png', '0', '0', '1');
+INSERT INTO `log_types` (`id`, `name`, `trans_id`, `permission`, `cache_status`, `de`, `en`, `icon_small`, `allow_rating`, `require_password`, `maintenance_logs`) VALUES ('3', 'Note', '20', 'A', '0', 'Bemerkung', 'note', 'log/16x16-note.png', '0', '0', '1');
+INSERT INTO `log_types` (`id`, `name`, `trans_id`, `permission`, `cache_status`, `de`, `en`, `icon_small`, `allow_rating`, `require_password`, `maintenance_logs`) VALUES ('7', 'Attended', '498', 'C', '0', 'teilgenommen', 'attended', 'log/16x16-attended.png', '1', '1', '0');
+INSERT INTO `log_types` (`id`, `name`, `trans_id`, `permission`, `cache_status`, `de`, `en`, `icon_small`, `allow_rating`, `require_password`, `maintenance_logs`) VALUES ('8', 'Will attend', '499', 'C', '0', 'möchte teilnehmen', 'will attend', 'log/16x16-will_attend.png', '0', '0', '0');
+INSERT INTO `log_types` (`id`, `name`, `trans_id`, `permission`, `cache_status`, `de`, `en`, `icon_small`, `allow_rating`, `require_password`, `maintenance_logs`) VALUES ('9', 'Archived', '496', 'C', '3', 'archiviert', 'Archived', 'log/16x16-archived.png', '0', '0', '0');
+INSERT INTO `log_types` (`id`, `name`, `trans_id`, `permission`, `cache_status`, `de`, `en`, `icon_small`, `allow_rating`, `require_password`, `maintenance_logs`) VALUES ('10', 'Available', '531', 'C', '1', 'kann gesucht werden', 'Available', 'log/16x16-active.png', '0', '0', '1');
+INSERT INTO `log_types` (`id`, `name`, `trans_id`, `permission`, `cache_status`, `de`, `en`, `icon_small`, `allow_rating`, `require_password`, `maintenance_logs`) VALUES ('11', 'Temporarily not available', '532', 'C', '2', 'momentan nicht verfügbar', 'Temporarily not available', 'log/16x16-disabled.png', '0', '0', '1');
+INSERT INTO `log_types` (`id`, `name`, `trans_id`, `permission`, `cache_status`, `de`, `en`, `icon_small`, `allow_rating`, `require_password`, `maintenance_logs`) VALUES ('13', 'Locked', '2023', 'C', '6', 'gesperrt', 'Locked', 'log/16x16-locked.png', '0', '0', '0');
+INSERT INTO `log_types` (`id`, `name`, `trans_id`, `permission`, `cache_status`, `de`, `en`, `icon_small`, `allow_rating`, `require_password`, `maintenance_logs`) VALUES ('14', 'Locked, invisible', '822', 'C', '7', 'gesperrt, versteckt', 'Locked, invisible', 'log/16x16-locked-invisible.png', '0', '0', '0');
 
 -- Table news_topics
 SET NAMES 'utf8';
@@ -817,8 +817,8 @@ INSERT INTO `search_ignore` (`word`) VALUES ('mein');
 INSERT INTO `search_ignore` (`word`) VALUES ('mich');
 INSERT INTO `search_ignore` (`word`) VALUES ('mir');
 INSERT INTO `search_ignore` (`word`) VALUES ('mit');
-INSERT INTO `search_ignore` (`word`) VALUES ('muss');
 INSERT INTO `search_ignore` (`word`) VALUES ('muß');
+INSERT INTO `search_ignore` (`word`) VALUES ('muss');
 INSERT INTO `search_ignore` (`word`) VALUES ('nach');
 INSERT INTO `search_ignore` (`word`) VALUES ('nicht');
 INSERT INTO `search_ignore` (`word`) VALUES ('noch');
@@ -2659,7 +2659,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2261', 'Your wa
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2262', 'Cache was marked as OConly:', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2263', 'View description', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2264', 'Type:', '2015-06-17 10:09:14');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2265', 'Name: {cachename} by {owner} Coordinates: {lon} {lat} Status: {status} Hidden on: {time} Waypoint: {waypoint} Country: {country} Cache type: {type} Container: {container} D/T: {difficulty}/{terrain} Online: {siteurl}viewcache.php?wp={waypoint} Short description: {shortdesc} Description{htmlwarn}: <===================> {desc} <===================> Additional hint: <===================> {hints} <===================> A|B|C|D|E|F|G|H|I|J|K|L|M N|O|P|Q|R|S|T|U|V|W|X|Y|Z Log entries: {logs} ', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2265', 'Name: {cachename} by {owner} Coordinates: {lon} {lat} Status: {status} Condition: {condition} Hidden on: {time} Waypoint: {waypoint} Country: {country} Cache type: {type} Container: {container} D/T: {difficulty}/{terrain} Online: {siteurl}viewcache.php?wp={waypoint} Short description: {shortdesc} Description{htmlwarn}: <===================> {desc} <===================> Additional hint: <===================> {hints} <===================> A|B|C|D|E|F|G|H|I|J|K|L|M N|O|P|Q|R|S|T|U|V|W|X|Y|Z Log entries: {logs} ', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2270', 'Berlin', '2013-11-03 10:09:14');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2271', 'Bremen', '2013-11-03 10:09:14');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2272', 'Dresden', '2013-11-03 10:09:14');
@@ -2821,6 +2821,40 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2534', '%1 repo
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2535', 'queuing time for new reports: about %1 to %2 days', '2015-01-20 20:37:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2536', 'Cache list:', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2537', 'Cache lists:', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2538', 'Geocache condition:', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2539', 'not specified', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2540', 'ok', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2541', 'needs maintenance', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2542', 'The geocache needs maintenance.', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2543', 'The geocache is in good or acceptable condition.', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2544', 'Select <i>needs maintenance</i> if the geocache was in poor condition at the<br />specified date and in urgent need of maintenance. Please explain why.', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2545', 'up to date', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2546', 'outdated', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2547', 'The geocache description is outdated.', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2548', 'The geocache description is ok.', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2549', 'Select <i>is outdated</i> if the geocache search is hampered by outdated information in<br />the description, e.g. the location has severely changed or the description lacks<br />important information which has been added at another geocaching website.<br />Please give details in your log.', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2550', 'Select <i>is outdated</i> if the geocache search is hampered by outdated information<br />in the description, e.g. because the location has severely changed. Please give<br />details in your log.', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2551', 'When did you find the geocache?', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2552', 'When did you abort the cache search?', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2553', 'This geocache description may be outdated.', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2554', 'See the log entries for more information.', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2555', 'See the <span style=\"white-space:nowrap\"><img src=\"resource2/ocstyle/images/log/16x16-listing-outdated.png\"> <a href=\"#logentries\" class=\"systemlink\">log entries</a></span> for more information.', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2556', 'geocache needs maintenance', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2557', 'geocache is ok', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2558', 'description is outdated', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2559', 'description is ok', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2560', 'By logging \"Available\", you also confirm that the geocache is in good condition.', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2561', 'By logging \"Available\", you also confirm that the geocache description is up-to-date.', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2562', 'You may indicate here what is the current maintenance state of the geocache.', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2563', 'You may indicate here if the cache description is up-to-date.', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2564', 'Important:', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2565', 'The geocache description at Opencaching must be kept up to date! Description changes on other websites must be applied to the Opencaching listing timely.', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2566', 'last modified on', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2567', 'Original coordinates:', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2568', 'New coordinates:', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2569', 'moved by %1 meters', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2570', 'moved by %1 km', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2571', 'Protect old coordinates', '2015-06-17 10:09:14');
 
 -- Table sys_trans_ref
 SET NAMES 'utf8';
@@ -6715,8 +6749,8 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1698', 'DE', 'Bild hinzufügen', '2010-10-03 20:23:10');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1699', 'DE', 'Meldung', '2010-10-03 19:30:02');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1700', 'DE', 'Es ist kein Google-Maps-Key für diese Domain registriert.', '2010-10-03 22:27:01');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1701', 'DE', 'Achtung! Dieser Geocache ist \&quot;<span class=\"errormsg\">%1</span>\&quot;!</strong> Es befindet sich kein Behälter an den angegebenen (oder zu ermittelnden) Koordinaten. Im Interesse des Ortes sollte von einer Suche unbedingt abgesehen werden!', '2010-10-06 22:30:35');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1702', 'DE', 'Achtung! Dieser Geocache ist \&quot;<span class=\"errormsg\">%1</span>\&quot;!</strong> Der Geocache selbst oder Teile davon sind nicht vorhanden oder es gibt andere Probleme, die eine erfolgreiche Suche unmöglich machen. Im Interesse des Ortes sollte von einer Suche unbedingt abgesehen werden!', '2010-10-06 22:29:56');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1701', 'DE', 'Achtung! Dieser Geocache ist \&bdquo;<span class=\"errormsg\">%1</span>\&ldquo;!</strong> Es befindet sich kein Behälter an den angegebenen (oder zu ermittelnden) Koordinaten. Im Interesse des Ortes sollte von einer Suche unbedingt abgesehen werden!', '2010-10-06 22:30:35');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1702', 'DE', 'Achtung! Dieser Geocache ist \&bdquo;<span class=\"errormsg\">%1</span>\&ldquo;!</strong> Der Geocache selbst oder Teile davon sind nicht vorhanden oder es gibt andere Probleme, die eine erfolgreiche Suche unmöglich machen. Im Interesse des Ortes sollte von einer Suche unbedingt abgesehen werden!', '2010-10-06 22:29:56');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1703', 'DE', 'Du hast dieses Event besucht!', '2010-10-06 22:30:56');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1704', 'DE', 'Du hast diesen Geocache bereits gefunden!', '2010-10-06 22:34:51');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1705', 'DE', '<i>Veraltet: Dieses Attribut kann bei neuen Geocaches nicht mehr verwendet werden, weil das Attribut unsere aktuellen Nutzungsbedingungen nicht erfüllt</i><br />Dieser Cache ist auf mehreren Geocaching-Seiten gelistet, und die Beschreibung bei Opencaching kann unvollständig sein. Die vollständige Beschreibung auf der/den externen Seiten sollte im Opencaching-Listing verlinkt sein. Wir weisen darauf hin, dass nach unseren aktuellen Nutzungsbedingungen auch stets auf Opencaching die Beschreibungen und der Cachestatus vom Eigentümer aktuell gehalten werden müssen. Dieses Attribut ermöglicht es z.B. PDA-Benutzern, Geocaches gezielt zu filtern, die keine vollständige Beschreibung enthalten und deshalb nicht unterwegs gelöst werden können. ', '2011-02-05 22:55:52');
@@ -7209,7 +7243,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2262', 'DE', 'Cache wurde als OConly markiert:', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2263', 'DE', 'Beschreibung ansehen', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2264', 'DE', 'Art:', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2265', 'DE', 'Name: {cachename} von {owner}\r\nKoordinaten: {lon} {lat}\r\nStatus: {status}\r\n\r\nVersteckt am: {time}\r\nWegpunkt: {waypoint}\r\nLand: {country}\r\nCacheart: {type}\r\nBehälter: {container}\r\nD/T: {difficulty}/{terrain}\r\nOnline: {siteurl}viewcache.php?wp={waypoint}\r\n\r\nKurzbeschreibung: {shortdesc}\r\n\r\nBeschreibung{htmlwarn}:\r\n<===================>\r\n{desc}\r\n<===================>\r\n\r\nZusätzliche Hinweise:\r\n<===================>\r\n{hints}\r\n<===================>\r\nA|B|C|D|E|F|G|H|I|J|K|L|M\r\nN|O|P|Q|R|S|T|U|V|W|X|Y|Z\r\n\r\nLogeinträge:\r\n{logs}\r\n', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2265', 'DE', 'Name: {cachename} von {owner}\r\nKoordinaten: {lon} {lat}\r\nStatus: {status}\r\nZustand: {condition}\r\n\r\nVersteckt am: {time}\r\nWegpunkt: {waypoint}\r\nLand: {country}\r\nCacheart: {type}\r\nBehälter: {container}\r\nD/T: {difficulty}/{terrain}\r\nOnline: {siteurl}viewcache.php?wp={waypoint}\r\n\r\nKurzbeschreibung: {shortdesc}\r\n\r\nBeschreibung{htmlwarn}:\r\n<===================>\r\n{desc}\r\n<===================>\r\n\r\nZusätzliche Hinweise:\r\n<===================>\r\n{hints}\r\n<===================>\r\nA|B|C|D|E|F|G|H|I|J|K|L|M\r\nN|O|P|Q|R|S|T|U|V|W|X|Y|Z\r\n\r\nLogeinträge:\r\n{logs}\r\n', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2270', 'DE', 'Berlin', '2013-11-03 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2271', 'DE', 'Bremen', '2013-11-03 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2272', 'DE', 'Dresden', '2013-11-03 10:09:14');
@@ -7368,9 +7402,43 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2532', 'DE', '... nach Logdatum', '2015-01-20 20:37:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2533', 'DE', 'Gute und unpassende Gründe für eine Cachemeldung', '2015-01-20 20:37:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2534', 'DE', '%1 Meldungen sind in Bearbeitung, %2 Meldungen sind offen', '2015-01-20 20:37:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2535', 'DE', 'Wartezeit für neue Meldungen: ca. %1&ndash;%2 Tage', '2015-01-20 20:37:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2535', 'DE', 'Wartezeit für neue Meldungen: ca. %1\&ndash;%2 Tage', '2015-01-20 20:37:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2536', 'DE', 'Cacheliste:', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2537', 'DE', 'Cachelisten:', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2538', 'DE', 'Zustand des Caches:', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2539', 'DE', 'keine Angabe', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2540', 'DE', 'ok', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2541', 'DE', 'benötigt Wartung', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2542', 'DE', 'Der Cache benötigt Wartung.', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2543', 'DE', 'Der Cache ist in gutem oder akzeptablem Zustand.', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2544', 'DE', 'Wähle <i>benötigt Wartung</i>, wenn der Cache zum angegebenen Zeitpunkt in<br />schlechtem Zustand war und dringend Wartung benötigte. Bitte erkläre<br />Genaueres in deinem Logeintrag.', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2545', 'DE', 'in Ordnung', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2546', 'DE', 'veraltet', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2547', 'DE', 'Die Cachebeschreibung ist veraltet.', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2548', 'DE', 'Die Cachebeschreibung ist in Ordnung.', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2549', 'DE', 'Wähle <i>veraltet</i>, wenn die Cachesuche durch veraltete Angaben in der Beschreibung<br />erheblich erschwert ist, z.\&nbsp;B. weil der Ort sich stark verändert hat, oder weil wichtige<br />Informationen fehlen, die auf einer anderen Geocaching-Website vorhanden sind.<br />Bitte erkläre in deinem Logeintrag Genaueres.', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2550', 'DE', 'Wähle <i>veraltet</i>, wenn die Cachesuche durch veraltete Angaben in der Beschreibung<br />erheblich erschwert ist, zum Beispiel weil der Ort sich stark verändert hat. Bitte<br />erkläre in deinem Logeintrag Genaueres.', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2551', 'DE', 'Wann hast du den Cache gefunden?', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2552', 'DE', 'Wann hast du die Suche abgebrochen?', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2553', 'DE', 'Diese Cachebeschreibung ist wahrscheinlich veraltet.', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2554', 'DE', 'Weitere Erläuterungen finden sich in den Logeinträgen.', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2555', 'DE', 'Weitere Erläuterungen finden sich in den <span style=\"white-space:nowrap\"><img src=\"resource2/ocstyle/images/log/16x16-listing-outdated.png\">-<a href=\"#logentries\" class=\"systemlink\">Logeinträgen</a></span>.', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2556', 'DE', 'Cache benötigt Wartung', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2557', 'DE', 'Cache ist ok', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2558', 'DE', 'Cachebeschreibung ist veraltet', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2559', 'DE', 'Cachebeschreibung ist ok', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2560', 'DE', 'Mit einem \&bdquo;kann-gesucht-werden\&ldquo;-Log bestätigst du auch,<br />dass der Cache in guten Zustand ist.', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2561', 'DE', 'Mit einem \&bdquo;kann-gesucht-werden\&ldquo;-Log bestätigst du auch,<br />dass die Cachebeschreibung aktuell ist.', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2562', 'DE', 'Hier kannst du den aktuellen Wartungszustand des Caches angeben.', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2563', 'DE', 'Hier kannst du den aktuellen Zustand der Cachebeschreibung angeben.', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2564', 'DE', 'Wichtig:', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2565', 'DE', 'Die Cachebeschreibung bei Opencaching muss aktuell gehalten werden! Änderungen auf anderen Websites müssen zeitnah in die Opencaching-Beschreibung übernommen werden.', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2566', 'DE', 'zuletzt geändert am', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2567', 'DE', 'Ursprüngliche Koordinaten:', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2568', 'DE', 'Neue Koordinaten:', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2569', 'DE', 'verlegt um %1 Meter', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2570', 'DE', 'verlegt um %1 km', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2571', 'DE', 'Altkoordinaten schützen', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'EN', 'Reorder IDs', '2010-09-02 00:15:30');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'EN', 'The database could not be reconnected.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'EN', 'Testing – please do not login', '2010-08-28 11:48:07');
@@ -9073,7 +9141,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2262', 'EN', 'Cache was marked as OConly:', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2263', 'EN', 'View description', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2264', 'EN', 'Type:', '2015-06-17 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2265', 'EN', 'Name: {cachename} by {owner}\r\nCoordinates: {lon} {lat}\r\nStatus: {status}\r\n\r\nHidden on: {time}\r\nWaypoint: {waypoint}\r\nCountry: {country}\r\nType: {type}\r\nContainer: {container}\r\nD/T: {difficulty}/{terrain}\r\nOnline: {siteurl}viewcache.php?wp={waypoint}\r\n\r\nShort description: {shortdesc}\r\n\r\nDescription{htmlwarn}:\r\n<===================>\r\n{desc}\r\n<===================>\r\n\r\nAdditional hint:\r\n<===================>\r\n{hints}\r\n<===================>\r\nA|B|C|D|E|F|G|H|I|J|K|L|M\r\nN|O|P|Q|R|S|T|U|V|W|X|Y|Z\r\n\r\nLog entries: {logs}\r\n', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2265', 'EN', 'Name: {cachename} by {owner}\r\nCoordinates: {lon} {lat}\r\nStatus: {status}\r\nCondition: {condition}\r\n\r\nHidden on: {time}\r\nWaypoint: {waypoint}\r\nCountry: {country}\r\nType: {type}\r\nContainer: {container}\r\nD/T: {difficulty}/{terrain}\r\nOnline: {siteurl}viewcache.php?wp={waypoint}\r\n\r\nShort description: {shortdesc}\r\n\r\nDescription{htmlwarn}:\r\n<===================>\r\n{desc}\r\n<===================>\r\n\r\nAdditional hint:\r\n<===================>\r\n{hints}\r\n<===================>\r\nA|B|C|D|E|F|G|H|I|J|K|L|M\r\nN|O|P|Q|R|S|T|U|V|W|X|Y|Z\r\n\r\nLog entries: {logs}\r\n', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2270', 'EN', 'Berlin', '2013-11-03 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2271', 'EN', 'Bremen', '2013-11-03 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2272', 'EN', 'Dresden', '2013-11-03 10:09:14');
@@ -10627,7 +10695,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2253', 'ES', 'Nuevo logs sin %1', '2010-12-09 00:17:55');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2255', 'ES', 'OConly ', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2264', 'ES', 'Tipo:', '2010-12-09 00:17:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2265', 'ES', 'Nombre: {cachename} por {owner}\r\nCoordenadas: {lon} {lat}\r\nEstado: {status}\r\n\r\nOcultos en: {time}\r\nWaypoint: {waypoint}\r\nPaís: {country}\r\nTipo: {type}\r\nContenedor: {container}\r\nD/T: {difficulty}/{terrain}\r\nOnline: {siteurl}viewcache.php?wp={waypoint}\r\n\r\nDescripción corta: {shortdesc}\r\n\r\nDescripción{htmlwarn}:\r\n<===================>\r\n{desc}\r\n<===================>\r\n\r\nAyuda adicional:\r\n<===================>\r\n{hints}\r\n<===================>\r\nA|B|C|D|E|F|G|H|I|J|K|L|M\r\nN|O|P|Q|R|S|T|U|V|W|X|Y|Z\r\n\r\nEntradas de registro: {logs}\r\n', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2265', 'ES', 'Nombre: {cachename} por {owner}\r\nCoordenadas: {lon} {lat}\r\nEstado: {status}\r\nCondición: {condition}\r\n\r\nOcultos en: {time}\r\nWaypoint: {waypoint}\r\nPaís: {country}\r\nTipo: {type}\r\nContenedor: {container}\r\nD/T: {difficulty}/{terrain}\r\nOnline: {siteurl}viewcache.php?wp={waypoint}\r\n\r\nDescripción corta: {shortdesc}\r\n\r\nDescripción{htmlwarn}:\r\n<===================>\r\n{desc}\r\n<===================>\r\n\r\nAyuda adicional:\r\n<===================>\r\n{hints}\r\n<===================>\r\nA|B|C|D|E|F|G|H|I|J|K|L|M\r\nN|O|P|Q|R|S|T|U|V|W|X|Y|Z\r\n\r\nEntradas de registro: {logs}\r\n', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2270', 'ES', 'Berlin', '2013-11-03 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2271', 'ES', 'Bremen', '2013-11-03 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2272', 'ES', 'Dresde', '2013-11-03 10:09:14');
@@ -12455,7 +12523,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2262', 'FR', 'Cache a été marquée comme OConly:', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2263', 'FR', 'Vue description', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2264', 'FR', 'Type\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2265', 'FR', 'Nom : {cachename} par {owner}\r\nCoordonnées : {lon} {lat}\r\nStatut : {status}\r\n\nCaché en : {time}\r\nWaypoint : {waypoint}\r\nPays : {country}\r\nType : {type}\r\nBoîte : {container}\r\nD/T : {difficulty}/{terrain}\r\nOnline : {siteurl}viewcache.php?wp={waypoint}\r\n\r\nBrève description : {shortdesc}\r\n\r\nDescription{htmlwarn}:\r\n<===================>\r\n{desc}\r\n<===================>\r\n\r\nIndice additionnels :\r\n<===================>\r\n{hints}\r\n<===================>\r\nA|B|C|D|E|F|G|H|I|J|K|L|M\r\nN|O|P|Q|R|S|T|U|V|W|X|Y|Z\r\n\r\nEntrées du log:\r\n{logs}\r\n', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2265', 'FR', 'Nom : {cachename} par {owner}\r\nCoordonnées : {lon} {lat}\r\nStatut : {status}\r\nCondition: {condition}\r\n\r\nCaché en : {time}\r\nWaypoint : {waypoint}\r\nPays : {country}\r\nType : {type}\r\nBoîte : {container}\r\nD/T : {difficulty}/{terrain}\r\nOnline : {siteurl}viewcache.php?wp={waypoint}\r\n\r\nBrève description : {shortdesc}\r\n\r\nDescription{htmlwarn}:\r\n<===================>\r\n{desc}\r\n<===================>\r\n\r\nIndice additionnels :\r\n<===================>\r\n{hints}\r\n<===================>\r\nA|B|C|D|E|F|G|H|I|J|K|L|M\r\nN|O|P|Q|R|S|T|U|V|W|X|Y|Z\r\n\r\nEntrées du log:\r\n{logs}\r\n', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2270', 'FR', 'Berlin', '2013-11-03 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2271', 'FR', 'Brême', '2013-11-03 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2272', 'FR', 'Dresde', '2013-11-03 10:09:14');
@@ -12600,6 +12668,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2518', 'FR', 'recommandations total', '2013-11-03 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2519', 'FR', 'Gauß-Krüger', '2013-11-03 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2522', 'FR', 'OConly', '2013-11-03 10:09:14');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2524', 'FR', 'requêtes stockées', '2015-08-25 01:28:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2526', 'FR', 'trouvé', '2010-10-04 00:17:39');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2527', 'FR', 'non\&nbsp;trouvé', '2010-10-04 00:17:39');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2528', 'FR', 'participation', '2010-10-04 00:17:39');
@@ -14230,7 +14299,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2255', 'IT', 'OConly ', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2263', 'IT', 'Visualizza descrizione', '2010-09-11 00:06:36');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2264', 'IT', 'Tipo:', '2010-09-11 00:06:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2265', 'IT', 'Nome: {cachename} di {owner}\r\nCoordinate: {lon} {lat}\r\nStato: {status}\r\n\r\nNascosta il: {time}\r\nWaypoint: {waypoint}\r\nNazione: {country}\r\nTipo: {type}\r\nContenitore: {container}\r\nD/T: {difficulty}/{terrain}\r\nOnline: {siteurl}viewcache.php?wp={waypoint}\r\n\r\nDescrizione breve: {shortdesc}\r\n\r\nDescrizione{htmlwarn}:\r\n<===================>\r\n{desc}\r\n<===================>\r\n\r\nSuggerimenti addizionali:\r\n<===================>\r\n{hints}\r\n<===================>\r\nA|B|C|D|E|F|G|H|I|J|K|L|M\r\nN|O|P|Q|R|S|T|U|V|W|X|Y|Z\r\n\r\nNumero di log: {logs}\r\n', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2265', 'IT', 'Nome: {cachename} di {owner}\r\nCoordinate: {lon} {lat}\r\nStato: {status}\r\nCondizione: {condition}\r\n\r\nNascosta il: {time}\r\nWaypoint: {waypoint}\r\nNazione: {country}\r\nTipo: {type}\r\nContenitore: {container}\r\nD/T: {difficulty}/{terrain}\r\nOnline: {siteurl}viewcache.php?wp={waypoint}\r\n\r\nDescrizione breve: {shortdesc}\r\n\r\nDescrizione{htmlwarn}:\r\n<===================>\r\n{desc}\r\n<===================>\r\n\r\nSuggerimenti addizionali:\r\n<===================>\r\n{hints}\r\n<===================>\r\nA|B|C|D|E|F|G|H|I|J|K|L|M\r\nN|O|P|Q|R|S|T|U|V|W|X|Y|Z\r\n\r\nNumero di log: {logs}\r\n', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2270', 'IT', 'Berlino', '2013-11-03 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2271', 'IT', 'Bremen', '2013-11-03 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2272', 'IT', 'Dresda', '2013-11-03 10:09:14');
@@ -15978,4 +16047,4 @@ TRUNCATE TABLE `watches_waitingtypes`;
 INSERT INTO `watches_waitingtypes` (`id`, `watchtype`) VALUES ('1', 'ownerlog');
 INSERT INTO `watches_waitingtypes` (`id`, `watchtype`) VALUES ('2', 'cache_watches');
 
-INSERT INTO `sysconfig` (`name`, `value`) VALUES ('datasql_checksum', '7e39e939e33e383c439df033f09691dd') ON DUPLICATE KEY UPDATE `value`='7e39e939e33e383c439df033f09691dd';
+INSERT INTO `sysconfig` (`name`, `value`) VALUES ('datasql_checksum', '6f82e1b0ba6de2a5fe7de855f35e65f8') ON DUPLICATE KEY UPDATE `value`='6f82e1b0ba6de2a5fe7de855f35e65f8';

@@ -10,6 +10,7 @@
 
 require_once($opt['rootpath'] . 'lib2/logic/rowEditor.class.php');
 require_once($opt['rootpath'] . 'lib2/logic/logtypes.inc.php');
+require_once($opt['rootpath'] . 'lib/cache.inc.php');
 
 class cache
 {
@@ -90,12 +91,17 @@ class cache
 		$this->reCache->addFloat('way_length', 0, false);
 		$this->reCache->addString('wp_oc', null, true);
 		$this->reCache->addString('wp_gc', '', false);
+		$this->reCache->addString('wp_gc_maintained', '', false);
 		$this->reCache->addString('wp_nc', '', false);
 		$this->reCache->addString('desc_languages', '', false, RE_INSERT_IGNORE);
 		$this->reCache->addString('default_desclang', '', false);
 		$this->reCache->addDate('date_activate', null, true);
 		$this->reCache->addInt('need_npa_recalc', 1, false, RE_INSERT_IGNORE);
 		$this->reCache->addInt('show_cachelists', 1, false);
+		$this->reCache->addInt('protect_old_coords', 0, false);
+		$this->reCache->addInt('needs_maintenance', 0, false);
+		$this->reCache->addInt('listing_outdated', 0, false);
+		$this->reCache->addDate('flags_last_modified', '0000-00-00 00:00:00', false);
 
 		$this->nCacheId = $nNewCacheId+0;
 
@@ -154,6 +160,10 @@ class cache
 	{
 		return $this->reCache->getValue('wp_gc');
 	}
+	function getWPGC_maintained()
+	{
+		return $this->reCache->getValue('wp_gc_maintained');
+	}
 
 	function getUUID()
 	{
@@ -203,6 +213,40 @@ class cache
 		return $this->reCache->getValue('default_desclang');
 	}
 
+	function getProtectOldCoords()
+	{
+		return $this->reCache->getValue('protect_old_coords');
+	}
+	function setProtectOldCoords($value)
+	{
+		return $this->reCache->setValue('protect_old_coords', $value);
+	}
+
+	// cache condition flags
+	function getNeedsMaintenance()
+	{
+		return $this->reCache->getValue('needs_maintenance');
+	}
+	function setNeedsMaintenance($value)
+	{
+		return $this->reCache->setValue('needs_maintenance', $value);
+	}
+
+	function getListingOutdated()
+	{
+		return $this->reCache->getValue('listing_outdated');
+	}
+	function setListingOutdated($value)
+	{
+		return $this->reCache->setValue('listing_outdated', $value);
+	}
+
+	function getConditionHistory()
+	{
+		return get_cache_condition_history($this->nCacheId);
+	}
+
+	// other
 	function getAnyChanged()
 	{
 		return $this->reCache->getAnyChanged();
@@ -284,15 +328,31 @@ class cache
 	}
 
 
-	static function getLogsArray($cacheid, $start, $count, $deleted=false)
+	static function getLogsArray($cacheid, $start, $count, $deleted=false, $protect_old_coords=false)
 	{
 		global $login;
 
-		// negative or abornally high numbers like 1.0E+15 can crash the LIMIT selection
+		// negative or abornally high numbers like 1.0E+15 can crash the LIMIT statement
 		if ($count <= 0 || $count > 10000)
 			return array();
 
-		//prepare the logs
+		$rsCoords = sql("
+			SELECT `date_created` `date`, `latitude`, `longitude`
+			FROM `cache_coordinates`
+			WHERE `cache_id`='&1'
+			ORDER BY `date_created` DESC",
+			$cacheid);
+		$coords = sql_fetch_assoc_table($rsCoords);
+
+		if ($coords)
+		{
+			$coords[] = array(
+				'date' => '0000-00-00',
+				'latitude' => $coords[count($coords)-1]['latitude'],
+				'longitude' => $coords[count($coords)-1]['longitude']);
+			$current_coord = new coordinate($coords[0]['latitude'], $coords[0]['longitude']);
+		}
+
 		if ($deleted && ($login->admin && ADMIN_USER)>0)
 		{
 			// admins may view owner-deleted logs
@@ -312,9 +372,13 @@ class cache
 				`cache_logs`.`id` AS `id`,
 				`cache_logs`.`uuid` AS `uuid`,
 				`cache_logs`.`date` AS `date`,
+				`cache_logs`.`entry_last_modified`,
+				DATEDIFF(`cache_logs`.`entry_last_modified`, `cache_logs`.`date_created`) >= 1 AS `late_modified`,
 				substr(`cache_logs`.`date`,12) AS `time`,  /* 00:00:01 = 00:00 logged, 00:00:00 = no time */
 				`cache_logs`.`type` AS `type`,
 				`cache_logs`.`oc_team_comment` AS `oc_team_comment`,
+				`cache_logs`.`needs_maintenance` AS `needs_maintenance`,
+				`cache_logs`.`listing_outdated` AS `listing_outdated`,
 				`cache_logs`.`text` AS `text`,
 				`cache_logs`.`text_html` AS `texthtml`,
 				`cache_logs`.`picture`,
@@ -330,6 +394,9 @@ class cache
 			LIMIT &2, &3", $cacheid, $start+0, $count+0);
 
 		$logs = array();
+		$coordpos = 0;
+		$coord_changes = false;
+
 		while ($rLog = sql_fetch_assoc($rsLogs))
 		{
 			$pictures = array();
@@ -340,9 +407,36 @@ class cache
 			$rLog['pictures'] = $pictures;
 			$rLog['text'] = use_current_protocol_in_html($rLog['text']);
 
+			$newcoord = false;
+			while ($coordpos < count($coords) && $coords[$coordpos]['date'] > $rLog['date']) {
+				if (!$newcoord) $newcoord = $coords[$coordpos];
+				++$coordpos;
+				}
+			if ($newcoord) {
+				$distance = geomath::calcDistance(
+					$newcoord['latitude'], $newcoord['longitude'],
+			        $coords[$coordpos]['latitude'], $coords[$coordpos]['longitude']);
+			    if (abs($distance) > 0.005) {
+					$new = new coordinate($newcoord['latitude'], $newcoord['longitude']);
+					$rLog['newcoord'] = $new->getDecimalMinutes($protect_old_coords && $new != $current_coord);
+					if ($distance <= 1)
+						$rLog['movedbym'] = floor($distance*1000);
+					else if ($distance < 10)
+						$rLog['movedbykm'] = sprintf('%1.1f',  $distance);
+					else
+						$rLog['movedbykm'] = round($distance);
+					$coord_changes = true;
+					}
+				}
+
 			$logs[] = $rLog;
 		}
 		sql_free_result($rsLogs);
+
+		if ($coord_changes) {
+			$coord = new coordinate($coords[count($coords)-1]['latitude'], $coords[count($coords)-1]['longitude']); 
+			$logs[] = array('newcoord' => $coord->getDecimalMinutes($protect_old_coords), 'movedby' => false);
+			}
 
 		return $logs;
 	}

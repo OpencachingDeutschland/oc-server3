@@ -4,14 +4,22 @@
 *  Unicode Reminder メモ
 ***************************************************************************}
 <div id="log{$logItem.id}" style="clear:both">
+{if isset($logItem.newcoord) && (!$morelogs || $logItem.type)}
+	<p>
+		&nbsp;<img src="resource2/{$opt.template.style}/images/log/16x16-moved.png" width="16" height="16" />
+		{if $logItem.type}{t}New coordinates:{/t}{else}{t}Original coordinates:{/t}{/if}&nbsp;
+		<strong>{$logItem.newcoord.lat} {$logItem.newcoord.lon}</strong>{if $logItem.movedbym},
+		{t 1=$logItem.movedbym}moved by %1 meters{/t}{elseif $logItem.movedbykm},
+		{t 1=$logItem.movedbykm}moved by %1 km{/t}{/if}
+	</p>
+{/if}
+{if $logItem.type}
 <div class="content-txtbox-noshade">  {* Ocprop: <div class="content-txtbox-noshade">(.*?)<\/div> *}
 	<div class="logs">
 	<p class="content-title-noshade-size1 {if $print}printlogheader{/if}" style="display:inline; margin-right:0">
 		{if $logItem.oc_team_comment}<img src="resource2/{$opt.template.style}/images/oclogo/oc-team-comment.png" alt="OC-Team" title="{t}OC team comment{/t}" />{/if}
-		<a href="viewcache.php?cacheid={$cache.cacheid}&log=A#log{$logItem.id|urlencode}">{include file="res_logtype.tpl" type=$logItem.type}</a>  
-		{if $logItem.recommended==1}  {* Ocprop: rating-star\.gif *}
-			<img src="images/rating-star.gif" border="0" alt="{t}Recommended{/t}" width="17px" height="16px" />
-		{/if}
+		<a href="viewcache.php?cacheid={$cache.cacheid}&log=A#log{$logItem.id|urlencode}">{include file="res_logtype.tpl" type=$logItem.type}</a>
+		{include file="res_logflags.tpl" logItem=$logItem withRecommendation=true}
 		{$logItem.date|date_format:$opt.format.datelong}{if $logItem.time!="00:00:00"}, {$logItem.time|substr:0:5}{/if}
 
 		{capture name=username}
@@ -92,14 +100,20 @@
 			<br />
 		{/foreach}
 
+		{if $logItem.late_modified}
+			<p>{if $logItem.pictures}<br />{/if}
+			<small><em>{t}last modified on{/t} {$logItem.entry_last_modified|date_format:$opt.format.datelong}</em></small></p>
+		{/if}
+
 		{if $logItem.deleted_by_name != ""}
-			<span style="color:red">{t}Deleted by{/t} {$logItem.deleted_by_name},
-			{$logItem.deletion_date|date_format:$opt.format.date}</span>
+			<p><span style="color:red">{t}Deleted by{/t} {$logItem.deleted_by_name},
+			{$logItem.deletion_date|date_format:$opt.format.date}</span></p>
 		{/if}
 
 	</div>
 	<div style="clear:both"></div>
 	</div>
 </div>
+{/if}
 </div>
 

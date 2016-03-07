@@ -78,7 +78,10 @@ function myHomeLoad()
 	<table class="table">
 		{foreach from=$logs item=logItem}
 			<tr>
-				<td>{include file="res_logtype.tpl" type=$logItem.type}</td>
+				<td><nobr>
+					{include file="res_logtype.tpl" type=$logItem.type}
+					{include file="res_logflags.tpl" logItem=$logItem}
+				</nobr></td>
 				<td style="white-space:nowrap; text-align:center">{$logItem.date|date_format:$opt.format.datelong}</td>
 				<td>
 					<a href="viewcache.php?wp={$logItem.wp_oc}">{$logItem.name|escape}</a>
@@ -160,7 +163,7 @@ function myHomeLoad()
 					<td>{include file="res_cacheicon_22.tpl" cachetype=$cacheItem.type} {include file="res_oconly.tpl" oconly=$cacheItem.oconly size="15x21"}</td>
 					<td class="{$listcolor}" style="text-align:center"><nobr>{$cacheItem.date_hidden|date_format:$opt.format.datelong}&nbsp;</nobr></td>
 					<td class="{$listcolor}">{include file="res_cachestatus.tpl" status=$cacheItem.status}</td>
-					<td class="{$listcolor}" style="{if strlen($cacheItem.name) < 45}white-space:nowrap;{/if}min-width:300px;max-width:{if $dotfill==''}400{else}300{/if}px;overflow:hidden;"><a href="viewcache.php?wp={$cacheItem.wp_oc}">{$cacheItem.name|escape}</a>{if strlen($cacheItem.name) < 45} &nbsp;&nbsp; <span style="color:#b0b0b0">{$dotfill}</span>{/if}</td>
+					<td class="{$listcolor}" style="{if strlen($cacheItem.name) < 45}white-space:nowrap;{/if}min-width:300px;max-width:{if $dotfill==''}400{else}300{/if}px;overflow:hidden;"><a href="viewcache.php?wp={$cacheItem.wp_oc}">{$cacheItem.name|escape}</a>{if strlen($cacheItem.name) < 45} {include file="res_logflags.tpl" logItem=$cacheItem lfSpace=true} &nbsp;&nbsp; <span style="color:#b0b0b0">{$dotfill}</span>{/if}</td>
 					<td class="{$listcolor}" style="text-align:right;" align="right"><nobr>{if $cacheItem.toprating>0}{$cacheItem.toprating}{/if}</nobr></td>
 					<td class="{$listcolor}" style="text-align:right;" align="right"><nobr>{if $cacheItem.found>0}{$cacheItem.found}{/if}</nobr></td>
 					<td class="{$listcolor}" style="text-align:right;" align="right"><nobr><a href="viewcache.php?cacheid={$cacheItem.cache_id}#logentries">{$cacheItem.lastlog|date_format:$opt.format.date}</a>&nbsp; {include file="res_logtype.tpl" type=$cacheItem.lastlog_type}</nobr></td>

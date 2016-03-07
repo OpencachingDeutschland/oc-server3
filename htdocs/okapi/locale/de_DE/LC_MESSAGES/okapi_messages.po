@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OKAPI\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-25 19:14+0100\n"
-"PO-Revision-Date: 2015-08-25 19:23+0100\n"
+"POT-Creation-Date: 2016-03-04 20:20+0100\n"
+"PO-Revision-Date: 2016-03-04 20:25+0100\n"
 "Last-Translator: following <following@online.de>\n"
 "Language-Team: following <following@online.de>\n"
 "Language: de\n"
@@ -17,24 +17,32 @@ msgstr ""
 "X-Generator: Poedit 1.5.5\n"
 "X-Poedit-SearchPath-0: c:\\source\\oc\\okapi\\okapi\n"
 
-#: c:\source\oc\okapi\okapi/services/caches/geocaches.php:996
+#: c:\source\oc\okapi\okapi/services/caches/geocaches.php:536
+msgid "Parts of this geocache listing may be outdated."
+msgstr "Teile dieser Cachebeschreibung sind wahrscheinlich veraltet."
+
+#: c:\source\oc\okapi\okapi/services/caches/geocaches.php:537
+msgid "See the log entries for more information."
+msgstr "Weitere Informationen dazu finden sich in den Logeinträgen."
+
+#: c:\source\oc\okapi\okapi/services/caches/geocaches.php:1016
 msgid "Stage"
 msgstr "Station"
 
-#: c:\source\oc\okapi\okapi/services/caches/geocaches.php:1040
+#: c:\source\oc\okapi\okapi/services/caches/geocaches.php:1060
 msgid "User location"
 msgstr "Benutzerkoordinaten"
 
-#: c:\source\oc\okapi\okapi/services/caches/geocaches.php:1043
+#: c:\source\oc\okapi\okapi/services/caches/geocaches.php:1063
 #, php-format
 msgid "Your own custom coordinates for the %s geocache"
 msgstr "Die Koordinaten für den Geocache %s aus deiner persönlichen Notiz"
 
-#: c:\source\oc\okapi\okapi/services/caches/geocaches.php:1201
+#: c:\source\oc\okapi\okapi/services/caches/geocaches.php:1223
 msgid "National Park / Landscape"
 msgstr "Nationalpark / Landschaft"
 
-#: c:\source\oc\okapi\okapi/services/caches/geocaches.php:1375
+#: c:\source\oc\okapi\okapi/services/caches/geocaches.php:1397
 #, php-format
 msgid ""
 "This <a href='%s'>geocache</a> description comes from the <a href='%s'>%s</"
@@ -42,7 +50,7 @@ msgid ""
 msgstr ""
 "Diese <a href='%s'>Cache</a>-Beschreibung stammt von <a href='%s'>%s</a>."
 
-#: c:\source\oc\okapi\okapi/services/caches/geocaches.php:1387
+#: c:\source\oc\okapi\okapi/services/caches/geocaches.php:1409
 #, php-format
 msgid ""
 "&copy; <a href='%s'>%s</a>, <a href='%s'>%s</a>, <a href='http://"
@@ -53,7 +61,7 @@ msgstr ""
 "creativecommons.org/licenses/by-nc-nd/3.0/de/'>CC-BY-NC-ND</a>, Stand: %s; "
 "alle Logeinträge &copy; jeweiliger Autor"
 
-#: c:\source\oc\okapi\okapi/services/caches/geocaches.php:1398
+#: c:\source\oc\okapi\okapi/services/caches/geocaches.php:1420
 #, php-format
 msgid ""
 "&copy; <a href='%s'>%s</a>, <a href='%s'>%s</a>, <a href='http://"
@@ -64,7 +72,7 @@ msgstr ""
 "creativecommons.org/licenses/by-nc-nd/3.0/de/'>CC-BY-NC-ND</a>; alle "
 "Logeinträge &copy; jeweiliger Autor"
 
-#: c:\source\oc\okapi\okapi/services/caches/formatters/gpx.php:388
+#: c:\source\oc\okapi\okapi/services/caches/formatters/gpx.php:408
 msgid ""
 "<b>Geocache coordinates have been changed.</b> They have been replaced with "
 "your own custom coordinates which you have provided for this geocache."
@@ -72,7 +80,7 @@ msgstr ""
 "<b>Die Koordinaten des Geocaches wurden geändert.</b> Sie wurden durch deine "
 "eigenen Koordinaten aus der persönlichen Notiz für diesen Cache ersetzt."
 
-#: c:\source\oc\okapi\okapi/services/caches/formatters/gpx.php:394
+#: c:\source\oc\okapi\okapi/services/caches/formatters/gpx.php:414
 msgid ""
 "<b>Geocache coordinates have been changed.</b> Currently they point to one "
 "of the alternate waypoints originally described as:"
@@ -80,11 +88,11 @@ msgstr ""
 "<b>Die Koordinaten des Geocaches wurden geändert.</b> Sie zeigen zurzeit auf "
 "einen der zusätzlichen Wegpunkte mit der ursprünglichen Beschreibung:"
 
-#: c:\source\oc\okapi\okapi/services/caches/formatters/gpx.php:407
+#: c:\source\oc\okapi\okapi/services/caches/formatters/gpx.php:427
 msgid "Original geocache location"
 msgstr "Originalposition des Caches"
 
-#: c:\source\oc\okapi\okapi/services/caches/formatters/gpx.php:409
+#: c:\source\oc\okapi\okapi/services/caches/formatters/gpx.php:429
 #, php-format
 msgid "Original (owner-supplied) location of the %s geocache"
 msgstr "Originale, vom Besitzer angegebene Position des Geocaches %s"
@@ -145,7 +153,7 @@ msgid "The cache probably is located in the following protection areas:"
 msgstr ""
 "Der Geocache befindet sich wahrscheinlich in den folgenden Schutzgebieten:"
 
-#: c:\source\oc\okapi\okapi/services/logs/submit.php:70
+#: c:\source\oc\okapi\okapi/services/logs/submit.php:75
 msgid ""
 "You are trying to publish a log entry with a date in future. Cache log "
 "entries are allowed to be published in the past, but NOT in the future."
@@ -153,7 +161,7 @@ msgstr ""
 "Das Datum deines Logeintrags liegt in der Zukunft. Cache-Logs können nur für "
 "die Vergangenheit oder für heute eingetragen werden."
 
-#: c:\source\oc\okapi\okapi/services/logs/submit.php:92
+#: c:\source\oc\okapi\okapi/services/logs/submit.php:111
 #, php-format
 msgid ""
 "However, your cache rating was ignored, because %s does not have a rating "
@@ -161,7 +169,7 @@ msgid ""
 msgstr ""
 "Deine Cachewertung wurde jedoch ignoriert, weil %s kein Bewertungssystem hat."
 
-#: c:\source\oc\okapi\okapi/services/logs/submit.php:111
+#: c:\source\oc\okapi\okapi/services/logs/submit.php:136
 #, php-format
 msgid ""
 "However, your cache recommendation was ignored, because %s does not allow "
@@ -170,7 +178,7 @@ msgstr ""
 "Deine Empfehlung wurde jedoch ignoriert, weil auf %s keine Event-Caches "
 "empfohlen werden können."
 
-#: c:\source\oc\okapi\okapi/services/logs/submit.php:125
+#: c:\source\oc\okapi\okapi/services/logs/submit.php:158
 #, php-format
 msgid ""
 "However, your \"needs maintenance\" flag was ignored, because %s does not "
@@ -179,7 +187,16 @@ msgstr ""
 "Deine Angabe \"benötigt Wartung\" wurde jedoch ignoriert, weil es diese "
 "Funktion bei %s nicht gibt."
 
-#: c:\source\oc\okapi\okapi/services/logs/submit.php:145
+#: c:\source\oc\okapi\okapi/services/logs/submit.php:171
+#, php-format
+msgid ""
+"However, your \"does not need maintenance\" flag was ignored, because %s "
+"does not support this feature."
+msgstr ""
+"Deine Angabe \"benötigt Wartung\" wurde jedoch ignoriert, weil es diese "
+"Funktion bei %s nicht gibt. "
+
+#: c:\source\oc\okapi\okapi/services/logs/submit.php:201
 msgid ""
 "This cache is an Event cache. You cannot \"Find\" it (but you can attend it, "
 "or comment on it)!"
@@ -187,7 +204,7 @@ msgstr ""
 "Dies ist ein Event-Cache. Du kannst ihn nicht \"finden\" (aber du kannst am "
 "Event teilnehmen oder einen Hinweis loggen)."
 
-#: c:\source\oc\okapi\okapi/services/logs/submit.php:150
+#: c:\source\oc\okapi\okapi/services/logs/submit.php:210
 msgid ""
 "This cache is NOT an Event cache. You cannot \"Attend\" it (but you can find "
 "it, or comment on it)!"
@@ -195,26 +212,26 @@ msgstr ""
 "Dies ist KEIN Event-Cache. Du kannst an ihm nicht \"teilnehmen\" (aber du "
 "kannst ihn finden oder kommentieren)."
 
-#: c:\source\oc\okapi\okapi/services/logs/submit.php:155
+#: c:\source\oc\okapi\okapi/services/logs/submit.php:220
 msgid "Your have to supply some text for your comment."
 msgstr "Du musst einen Text für dein Hinweislog eingeben!"
 
-#: c:\source\oc\okapi\okapi/services/logs/submit.php:168
+#: c:\source\oc\okapi\okapi/services/logs/submit.php:236
 msgid "This cache requires a password. You didn't provide one!"
 msgstr ""
 "Dieser Cache kann nur mit Kennwort geloggt werden, aber du hast keines "
 "angegeben."
 
-#: c:\source\oc\okapi\okapi/services/logs/submit.php:170
+#: c:\source\oc\okapi\okapi/services/logs/submit.php:240
 msgid "Invalid password!"
 msgstr "Ungültiges Kennwort!"
 
-#: c:\source\oc\okapi\okapi/services/logs/submit.php:285
+#: c:\source\oc\okapi\okapi/services/logs/submit.php:385
 msgid "You have already submitted a log entry with exactly the same contents."
 msgstr ""
 "Du hast bereits einen Logeintrag mit genau dem gleichen Inhalt gemacht."
 
-#: c:\source\oc\okapi\okapi/services/logs/submit.php:308
+#: c:\source\oc\okapi\okapi/services/logs/submit.php:412
 msgid ""
 "You have already submitted a \"Found it\" log entry once. Now you may submit "
 "\"Comments\" only!"
@@ -222,31 +239,31 @@ msgstr ""
 "Du hast diesen Cache bereits als gefunden geloggt. Ein zweites Fundlog ist "
 "nicht möglich, aber du kannst stattdessen einen Hinweis loggen."
 
-#: c:\source\oc\okapi\okapi/services/logs/submit.php:310
+#: c:\source\oc\okapi\okapi/services/logs/submit.php:418
 msgid "You are the owner of this cache. You may submit \"Comments\" only!"
 msgstr ""
 "Als Besitzer des Caches kannst du nur Hinweise loggen, keine Funde oder "
 "Nichtfunde."
 
-#: c:\source\oc\okapi\okapi/services/logs/submit.php:328
+#: c:\source\oc\okapi\okapi/services/logs/submit.php:440
 msgid "You have already rated this cache once. Your rating cannot be changed."
 msgstr ""
 "Du hast diesen Cache bereits bewertet. Deine Bewertung ist nicht änderbar."
 
-#: c:\source\oc\okapi\okapi/services/logs/submit.php:345
+#: c:\source\oc\okapi\okapi/services/logs/submit.php:461
 msgid "You have already recommended this cache once."
 msgstr "Du hast diesen Cache bereits empfohlen."
 
-#: c:\source\oc\okapi\okapi/services/logs/submit.php:355
+#: c:\source\oc\okapi\okapi/services/logs/submit.php:477
 msgid "You don't have any recommendations to give. Find more caches first!"
 msgstr ""
 "Du musst mehr Caches finden, um eine weitere Bewertung abgeben zu können!"
 
-#: c:\source\oc\okapi\okapi/services/logs/submit.php:398
+#: c:\source\oc\okapi\okapi/services/logs/submit.php:528
 msgid "Event caches cannot \"need maintenance\"."
 msgstr "Event-Caches können keine \"Wartung benötigen\"."
 
-#: c:\source\oc\okapi\okapi/services/logs/submit.php:528
+#: c:\source\oc\okapi\okapi/services/logs/submit.php:676
 msgid "Your cache log entry was posted successfully."
 msgstr "Dein Log wurde veröffentlicht."
 

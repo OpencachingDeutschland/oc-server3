@@ -119,15 +119,15 @@
 			<td style="width:1px">
 				{$newLog.date|date_format:$opt.format.date}
 			</td>
-			<td class="listicon">
+			<td class="listicon"><nobr>
 				{if $newLog.type==1}
-					<img src="resource2/{$opt.template.style}/images/log/16x16-found.png" width="16" height="16" border="0" alt="" style="margin-top:4px;" /> 
+					<img src="resource2/{$opt.template.style}/images/log/16x16-found.png" width="16" height="16" border="0" alt="" style="margin-top:4px;" />
 				{elseif $newLog.type==2}
 					<img src="resource2/{$opt.template.style}/images/log/16x16-dnf.png" width="16" height="16" border="0" alt="" style="margin-top:4px;" /> 
 				{elseif $newLog.type==3}
 					<img src="resource2/{$opt.template.style}/images/log/16x16-note.png" width="16" height="16" border="0" alt="" style="margin-top:4px;" /> 
 				{elseif $newLog.type==7}
-					<img src="resource2/{$opt.template.style}/images/log/16x16-attended.png" width="16" height="16" border="0" alt="" style="margin-top:4px;" /> 
+					<img src="resource2/{$opt.template.style}/images/log/16x16-attended.png" width="16" height="16" border="0" alt="" style="margin-top:4px;" />
 				{elseif $newLog.type==8}
 					<img src="resource2/{$opt.template.style}/images/log/16x16-will_attend.png" width="16" height="16" border="0" alt="" style="margin-top:4px;" /> 
 				{elseif $newLog.type==9}
@@ -141,7 +141,8 @@
 				{elseif $newLog.type==14}
 					<img src="resource2/{$opt.template.style}/images/log/16x16-locked-invisible.png" width="16" height="16" border="0" alt="" style="margin-top:4px;" /> 
 				{/if}
-			</td>
+				{include file="res_logflags.tpl" logItem=$newLog withRecommendation=false}
+			</nobr></td>
 			<td>
 				{if $newLog.oc_team_comment}<img src="resource2/{$opt.template.style}/images/oclogo/oc-team-comment.png" alt="OC-Team" title="{t}OC team comment{/t}" />{/if}
 				{capture name=cachename}
@@ -154,7 +155,7 @@
 
 				{if $newLog.type==1}
 					{t 1=$smarty.capture.cachename 2=$smarty.capture.username}%2 found %1{/t}
-					{if $newLog.recommended}<img src="images/rating-star.gif" width="17" height="16" title="{t}with recommendation{/t}" />{/if}
+					{if $newLog.recommended}<img src="images/rating-star.gif" width="17" height="16" title="{t}with recommendation{/t}" />{/if} 
 				{elseif $newLog.type==2}
 					{t 1=$smarty.capture.cachename 2=$smarty.capture.username}%2 didn't find %1{/t}
 				{elseif $newLog.type==3}

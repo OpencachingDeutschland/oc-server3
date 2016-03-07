@@ -9,27 +9,29 @@
 
 <script type="text/javascript" src="resource2/{$opt.template.style}/js/wz_tooltip.js"></script>
 
-{if $cachelist || $userid}
+{if $cachelist || $query_name}
 	<div class="content2-container cachelistinfo" style="margin-top:10px" >
-	<p style="margin-top:0.5em; padding-left:10px; padding-right:8px">
-		{if $userid}
+		{if $query_name}
+			<p style="margin-top:0.5em; padding-left:10px; padding-right:8px">
 			<img src="resource2/ocstyle/images/misc/32x32-search.png" width="16px" height="16px" />
 			<a class="systemlink" href="query.php">{t}Stored query{/t}</a> <b>{$query_name|escape}</b>
+			</p>
 		{/if}
 		{if $cachelist}
+			<p style="margin-top:0.5em; padding-left:10px; padding-right:8px">
 			<img src="resource2/ocstyle/images/misc/16x16-list.png" />
 			<a class="systemlink" href="cachelists.php">{t}Cache list{/t}</a> <b>{$cachelist.name|escape}</b>
-		{if $cachelist.bookmarked}<a href="mylists.php#bookmarks"><img src="resource2/{$opt.template.style}/images/viewcache/cache-rate.png" title="{t}I have bookmarked this list.{/t}" /></a>{/if}
-		{if $cachelist.watched_by_me}<img src="resource2/{$opt.template.style}/images/viewcache/16x16-watch.png" title="{t}I am watching this list.{/t}" />{/if}
-		{if $cachelist.user_id != $login.userid}{t}by{/t} <a href="viewprofile.php?userid={$cachelist.user_id}">{$cachelist.username|escape}</a>{elseif $cachelist.visibility<=1}({if $cachelist.password}<a class="jslink" onclick="cl = getElementById('sharelist_{$cachelist.id}'); cl.style.display = (cl.style.display=='none'?'block':'none'); getElementById('permalink_text_{$cachelist.id}').select();" {if $cachelist.user_id==$login.userid}title="{t}List has password; click here to share it{/t}"{/if} >{t}private{/t} <img src="resource2/{$opt.template.style}/images/action/18x16-offer.png" /></a>{else}{t}private{/t}{/if}){/if}
-		{if $cachelist.visibility>=2}(<a class="jslink" onclick="cl = getElementById('sharelist_{$cachelist.id}'); cl.style.display = (cl.style.display=='none'?'block':'none'); getElementById('permalink_text_{$cachelist.id}').select();" >{t}share public list{/t} <img src="resource2/{$opt.template.style}/images/viewcache/link.png" /></a>){/if}
-		&nbsp;
-		{if $cachelist.user_id==$login.userid}[<a class="systemlink" href="mylists.php?edit={$cachelist.id}&fromsearch=1">{t}edit{/t}</a>]{/if}
-		{if $login.userid}[<a class="systemlink" href="cachelist.php?id={$cachelist.id}&{if $cachelist.watched_by_me}dont{/if}watch">{if $cachelist.watched_by_me}{t}don't watch{/t}{else}{t}watch{/t}{/if}</a>]{/if}
-		{if $login.userid && !$cachelist.bookmarked && $cachelist.user_id!=$login.userid}[<a class="systemlink" href="cachelist.php?id={$cachelist.id}&key={$cachelist_pw|urlencode}&bookmark">{t}bookmark{/t}</a>]{/if}
-		{if $login.userid && $cachelist.bookmarked && $cachelist.user_id!=$login.userid}[<a class="systemlink" href="cachelist.php?id={$cachelist.id}&unbookmark">{t}unbookmark{/t}</a>]{/if}
+			{if $cachelist.bookmarked}<a href="mylists.php#bookmarks"><img src="resource2/{$opt.template.style}/images/viewcache/cache-rate.png" title="{t}I have bookmarked this list.{/t}" /></a>{/if}
+			{if $cachelist.watched_by_me}<img src="resource2/{$opt.template.style}/images/viewcache/16x16-watch.png" title="{t}I am watching this list.{/t}" />{/if}
+			{if $cachelist.user_id != $login.userid}{t}by{/t} <a href="viewprofile.php?userid={$cachelist.user_id}">{$cachelist.username|escape}</a>{elseif $cachelist.visibility<=1}({if $cachelist.password}<a class="jslink" onclick="cl = getElementById('sharelist_{$cachelist.id}'); cl.style.display = (cl.style.display=='none'?'block':'none'); getElementById('permalink_text_{$cachelist.id}').select();" {if $cachelist.user_id==$login.userid}title="{t}List has password; click here to share it{/t}"{/if} >{t}private{/t} <img src="resource2/{$opt.template.style}/images/action/18x16-offer.png" /></a>{else}{t}private{/t}{/if}){/if}
+			{if $cachelist.visibility>=2}(<a class="jslink" onclick="cl = getElementById('sharelist_{$cachelist.id}'); cl.style.display = (cl.style.display=='none'?'block':'none'); getElementById('permalink_text_{$cachelist.id}').select();" >{t}share public list{/t} <img src="resource2/{$opt.template.style}/images/viewcache/link.png" /></a>){/if}
+			&nbsp;
+			{if $cachelist.user_id==$login.userid}[<a class="systemlink" href="mylists.php?edit={$cachelist.id}&fromsearch=1">{t}edit{/t}</a>]{/if}
+			{if $login.userid}[<a class="systemlink" href="cachelist.php?id={$cachelist.id}&{if $cachelist.watched_by_me}dont{/if}watch">{if $cachelist.watched_by_me}{t}don't watch{/t}{else}{t}watch{/t}{/if}</a>]{/if}
+			{if $login.userid && !$cachelist.bookmarked && $cachelist.user_id!=$login.userid}[<a class="systemlink" href="cachelist.php?id={$cachelist.id}&key={$cachelist_pw|urlencode}&bookmark">{t}bookmark{/t}</a>]{/if}
+			{if $login.userid && $cachelist.bookmarked && $cachelist.user_id!=$login.userid}[<a class="systemlink" href="cachelist.php?id={$cachelist.id}&unbookmark">{t}unbookmark{/t}</a>]{/if}
+			</p>
 		{/if}
-	</p>
 		<div id="sharelist_{$cachelist.id}" class="cachelist-popup mapboxframe mapboxshadow" style="display:none" >
 			<table>
 				<tr><td><img src="resource2/ocstyle/images/viewcache/link.png" alt="" height="16" width="16" /> {t}Link to share this cache list:{/t}</td><td align="right"><a class="jslink" onclick="getElementById('sharelist_{$cachelist.id}').style.display='none'"><img src="resource2/ocstyle/images/navigation/19x19-close.png" style="opacity:0.7" /></a></td></tr>
@@ -38,7 +40,7 @@
 		</div>
 
 	{if $cachelist.description_for_display != ''}
-		<div style="padding: 0 8px 4px 10px">
+		<div style="padding: 0.3em 8px 4px 10px">
 			{$cachelist.description_for_display}
 		</div>
 		<div style="clear:both; width:100%"></div>

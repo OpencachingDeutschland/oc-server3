@@ -50,19 +50,24 @@
 	if ($cache_id != 0)
 	{ 
 		//get cache record
-		$rs = sql("SELECT `caches`.`cache_id`, `caches`.`wp_oc` AS `wpoc`, `caches`.`cache_id` AS `cacheid`, 
-											`caches`.`user_id` AS `userid`, `caches`.`name`, 
-											`caches`.`status` AS `status`,
-											`caches`.`type` AS `type`,
-											IFNULL(`stat_caches`.`found`, 0) AS `found`, 
-											IFNULL(`stat_caches`.`notfound`, 0) AS `notfound`, 
-											IFNULL(`stat_caches`.`will_attend`, 0) AS `willattend`,
-											IFNULL(`stat_caches`.`note`, 0) AS `note`, 
-											`cache_status`.`allow_user_view` 
-							 FROM `caches` 
-							 INNER JOIN `cache_status` ON `caches`.`status`=`cache_status`.`id` 
-							 LEFT JOIN `stat_caches` ON `caches`.`cache_id`=`stat_caches`.`cache_id` 
-							 WHERE `caches`.`cache_id`='&1'", $cache_id);
+		$rs = sql("
+			SELECT
+				`caches`.`cache_id`, `caches`.`wp_oc` AS `wpoc`, `caches`.`cache_id` AS `cacheid`, 
+				`caches`.`user_id` AS `userid`, `caches`.`name`, 
+				`caches`.`status` AS `status`,
+				`caches`.`type` AS `type`,
+				`caches`.`protect_old_coords` OR `user`.`is_active_flag`=0 AS `protect_old_coords`,
+				IFNULL(`stat_caches`.`found`, 0) AS `found`, 
+				IFNULL(`stat_caches`.`notfound`, 0) AS `notfound`, 
+				IFNULL(`stat_caches`.`will_attend`, 0) AS `willattend`,
+				IFNULL(`stat_caches`.`note`, 0) AS `note`, 
+				`cache_status`.`allow_user_view` 
+			FROM `caches` 
+			INNER JOIN `cache_status` ON `caches`.`status`=`cache_status`.`id` 
+			LEFT JOIN `stat_caches` ON `caches`.`cache_id`=`stat_caches`.`cache_id` 
+			INNER JOIN `user` ON `caches`.`user_id`=`user`.`user_id`
+			WHERE `caches`.`cache_id`='&1'",
+			$cache_id);
 		$rCache = sql_fetch_array($rs);
 		sql_free_result($rs);
 
@@ -80,7 +85,7 @@
 	$rCache['adminlog'] = ($login->admin & ADMIN_USER);
 	$tpl->assign('cache', $rCache);
 
-	$tpl->assign('logs', cache::getLogsArray($cache_id, $start, $count, $deleted));
+	$tpl->assign('logs', cache::getLogsArray($cache_id, $start, $count, $deleted, $rCache['protect_old_coords']));
 	$tpl->assign('tagloadlogs', $tagloadlogs);
 	
 

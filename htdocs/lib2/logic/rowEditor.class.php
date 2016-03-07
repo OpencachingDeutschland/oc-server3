@@ -355,7 +355,8 @@ class rowEditor
 		  // waylengths and time estimates, so using a fixed epsilon threshold is safe:
 		  $changed = (abs($sFormatedValue - $this->fields[$sField]['value'])  >= 1e-12);
 		else
-		  $changed = ($sFormatedValue != $this->fields[$sField]['value']);
+		  $changed = ($sFormatedValue != $this->fields[$sField]['value']) ||
+		             ($this->fields[$sField]['nullable'] && (($sFormatedValue === null) != ($this->fields[$sField]['value'] === null)));
 		if ($changed)
 		{
 			$this->fields[$sField]['value'] = $sFormatedValue;

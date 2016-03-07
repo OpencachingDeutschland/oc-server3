@@ -86,7 +86,8 @@ function getChildWaypoints($cacheid)
 	}
 
 	//get cache record
-	$rs = sql("SELECT	`caches`.`cache_id` AS `cacheid`,
+	$rs = sql("SELECT
+				`caches`.`cache_id` AS `cacheid`,
 				`caches`.`listing_last_modified` AS `lastmodified`,
 				`caches`.`user_id` AS `userid`,
 				`caches`.`status` AS `status`,
@@ -107,7 +108,10 @@ function getChildWaypoints($cacheid)
 				`caches`.`is_publishdate` AS `is_publishdate`,
 				`caches`.`difficulty` AS `difficulty`,
 				`caches`.`terrain` AS `terrain`,
-				`caches`.`show_cachelists` AS `show_cachelists`,
+				`caches`.`show_cachelists`,
+				`caches`.`protect_old_coords` OR `user`.`is_active_flag`=0 AS `protect_old_coords`,
+				`caches`.`needs_maintenance`,
+				`caches`.`listing_outdated`,
 				`cache_desc`.`language` AS `desclanguage`,
 				`cache_desc`.`short_desc` AS `shortdesc`,
 				`cache_desc`.`desc` AS `desc`,
@@ -142,7 +146,9 @@ function getChildWaypoints($cacheid)
 		     LEFT JOIN `sys_trans_text` `trans2` ON `trans2`.`trans_id`=`c2`.`trans_id` AND `trans2`.`lang`='&2'
 		     LEFT JOIN `cache_visits` ON `cache_visits`.`cache_id`=`caches`.`cache_id` AND `user_id_ip`='0'
 		     LEFT JOIN `stat_caches` ON `caches`.`cache_id`=`stat_caches`.`cache_id`
-		    WHERE `caches`.`cache_id`='&1'", $cacheid, $opt['template']['locale'], $sPreferedDescLang, $login->userid);
+		    WHERE `caches`.`cache_id`='&1'",
+			$cacheid, $opt['template']['locale'], $sPreferedDescLang, $login->userid);
+
 	$rCache = sql_fetch_assoc($rs);
 	sql_free_result($rs);
 
@@ -253,7 +259,7 @@ function getChildWaypoints($cacheid)
 									$rscount = $_REQUEST['log'] + 0;
 		}	
 
-	$logs = cache::getLogsArray($cacheid, 0, $rscount+1);
+	$logs = cache::getLogsArray($cacheid, 0, $rscount+1, false, $rCache['protect_old_coords']);
 	
 	if (isset($logs[$rscount])) 
 	{

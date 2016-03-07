@@ -175,6 +175,8 @@
 																`caches`.`country` AS `country`,
 																`cache_logs`.`type`,
 																`cache_logs`.`oc_team_comment`,
+																`cache_logs`.`needs_maintenance`,
+																`cache_logs`.`listing_outdated`,
 																`cacheloguser`.`user_id`, 
 																`cacheloguser`.`username`,
 																`cache_logs`.`cache_id`,

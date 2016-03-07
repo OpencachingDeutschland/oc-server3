@@ -167,7 +167,7 @@ function toggleAttr(id)
 				<option value="N"{latNsel}>{t}N{/t}</option>
 				<option value="S"{latSsel}>{t}S{/t}</option>
 			</select>
-			&nbsp;<input type="text" name="lat_h" maxlength="2" value="{lat_h}" class="input30" />
+			&nbsp;<input type="text" name="lat_h" maxlength="3" value="{lat_h}" class="input30" />
 			°&nbsp;<input type="text" name="lat_min" maxlength="6" value="{lat_min}" class="input50" />&nbsp;'&nbsp;
 			{lat_message}
 			<select name="lonEW">
@@ -230,7 +230,7 @@ function toggleAttr(id)
 	<tr>
 		<td>&nbsp;</td>
 		<td class="help"><img src="lang/de/ocstyle/images/misc/hint.gif" border="0" width="15" height="11" alt="{t}Notice{/t}" title="{t}Notice{/t}" />
-			{t}If the cache was published at another geocaching website, enter the corresponding waypoint here.{/t}<br />
+			{t}If the cache was published at another geocaching website, enter the corresponding waypoint here.{/t} <u>{t}Important:{/t}</u> {t}The geocache description at Opencaching must be kept up to date! Description changes on other websites must be applied to the Opencaching listing timely.{/t}<br />
 		</td>
 	</tr>
 	<tr><td class="spacer" colspan="2">&nbsp;</td></tr>

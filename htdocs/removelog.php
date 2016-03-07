@@ -25,6 +25,7 @@
 	require_once('lib/recommendation.inc.php');
 	require_once('lib/logic.inc.php');
 	require_once('lib2/edithelper.inc.php');
+	require_once('lib2/logic/cache.class.php');
 
 	//Preprocessing
 	if ($error == false)

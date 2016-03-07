@@ -81,9 +81,23 @@
 {/if}
 
 <!-- Already found this cache? -->
-{if $cache.userhasfound}
+{if $cache.userhasfound || $cache.needs_maintenance || $cache.listing_outdated ||
+    $cache.status==2 || $cache.status==3 || $cache.status==6 || $cache.status==7 }
 	<div id="havefound">
-		<p><img src="resource2/{$opt.template.style}/images/viewcache/have-found.png" width="35" height="35" align="left" style="padding-right: 5px;" alt="{if $cache.type==6}{t}You have attended this event!{/t}{else}{t}You have already found this cache!{/t}{/if}" title="{if $cache.type==6}{t}You have attended this event!{/t}{else}{t}You have already found this cache!{/t}{/if}" /></p>
+		{strip}
+		<p>
+			{if $cache.status==2}
+				<img src="resource2/{$opt.template.style}/images/cachestatus/32x32-disabled.png" width="32" height="32" style="padding-right: 6px;" alt="{t}Temporarily not available{/t}" title="{t}Temporarily not available{/t}" />
+			{elseif $cache.status==3}
+				<img src="resource2/{$opt.template.style}/images/cachestatus/32x32-archived.png" width="32" height="32" style="padding-right: 6px;" alt="{t}Archived{/t}" title="{t}Archived{/t}" />
+			{elseif $cache.status==6}
+				<img src="resource2/{$opt.template.style}/images/cachestatus/32x32-locked.png" width="32" height="32" style="padding-right: 6px;" alt="{t}Locked{/t}" title="{t}Locked{/t}" />
+			{/if}
+			{if $cache.needs_maintenance}<img src="resource2/{$opt.template.style}/images/cachestatus/needs-maintenance.png" width="32" height="32" style="padding-right: 5px;" alt="{t}The geocache needs maintenance.{/t}" title="{t}The geocache needs maintenance.{/t}" />{/if}
+			{if $cache.listing_outdated}<img src="resource2/{$opt.template.style}/images/cachestatus/listing-outdated.png" width="32" height="32" style="padding-right: 5px;" alt="{t}The geocache description is outdated.{/t}" title="{t}The geocache description is outdated.{/t}" />{/if}
+			{if $cache.userhasfound}&nbsp;<img src="resource2/{$opt.template.style}/images/viewcache/have-found.png" width="35" height="35" style="padding-right: 5px;" alt="{if $cache.type==6}{t}You have attended this event!{/t}{else}{t}You have already found this cache!{/t}{/if}" title="{if $cache.type==6}{t}You have attended this event!{/t}{else}{t}You have already found this cache!{/t}{/if}" />{/if}
+		</p>
+		{/strip}
 	</div>
 	<!--[if IE]><div></div><![endif]-->
 {/if}
@@ -549,7 +563,7 @@ function showalllists()
 
 <!-- Logs -->
 <div id="logblock">
-	{include file="res_logentry.tpl" header_footer=true footbacklink=false logs=$logs cache=$cache}
+	{include file="res_logentry.tpl" header_footer=true footbacklink=false logs=$logs cache=$cache morelogs=$morelogs}
 
 	{if $morelogs}
 		<div class="content2-container bg-blue02">

@@ -15,6 +15,25 @@
 
 	<div class="changelog-changes">
 
+	<p id="v3.0.17"><strong>OC 3.0 Release 17</strong> &ndash; 7 March 2016</p>
+	<p>New:</p>
+	<ul>
+		<li>With every log, the maintenance state of the cache and the cache description can be supplied. If "geocache needs maintenance" or "description is outdated" is chosen, this is indicated by corresponding symbols in the upper right area of the listing. The owner or any other user may reset these marks by another log, if he thinks that the geocache / the description is ok (now). The marks should be set only if there are substancial problems with the cache or the description.</li>
+		<li>Coordinate changes are displayed inbetween logs. The cache owner may protect old coordinates by a listing setting; then the last three digits will be replaced by ***.</li>
+		<li>If logs entries are edited on the day after or later, the last modification date is displayed at the bottom of the log. This works only for changes since release 17.</li>
+		<li>If caches are watched via lists, the names of the lists are given in the notification emails.</li>
+		<li>When reporting caches, the status of the reporting system is shown.</li>
+		<li>OKAPI: The own home coordinates from the user profile can be retrieved.</li>
+	</ul>
+
+	<p>Fixed:</p>
+	<ul>
+		<li>Parts of cache list descriptions can no longer overrun the frame. [bug of release 13]</li>
+		<li>small fixes for search result sorting [bugs of release 16]</li>
+		<li>fixed some page display glitches</li>
+	</ul>
+	<br />
+
 	<p id="v3.0.16"><strong>OC 3.0 Release 16</strong> &ndash; 1 February 2016</p>
 	<p>New:</p>
 	<ul>

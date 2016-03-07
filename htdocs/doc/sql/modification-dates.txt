@@ -17,14 +17,14 @@ caches
 
 last_modified
 	Is updated when any data of a caches record changes which is presented to
-	the user and/or output by export interfaces. This triggers an XML interface
-	update (resending) of the cache record, and an update of listing_last_modified
-	and okapi_syncbase.
+	the user and/or output by export interfaces, including attribures.
+	This triggers an XML interface update (resending) of the cache record,
+	and an update of listing_last_modified and okapi_syncbase.
 
 listing_last_modified
 	The listing modification date, as displayed by viewcache and output via OKAPI,
 	XML interface etc.; added with OC 3.0.6 to fix listing modification date.
-	Is updated when the user enters/changes/deletes any properties of the cache
+	Is updated when the owner enters/changes/deletes any properties of the cache
 	listing which may be presented to the user or exported via XML interface.
 	This triggers an update of okapi_syncbase.
 
@@ -59,6 +59,12 @@ meta_last_modified
 	replication does not include logs in geocaches records but treats them as
 	separate objects.
 
+flags_last_modified
+	Is updated when logger-supplied cache properties change, which do not update
+	the listing moficiation date but are exported through XML interface.
+	Currently this are the flags needs_maintenance and listing_outdated. Cache lists
+	associated with the cache may be added to update this date.
+
 An additional field may be needed in the future for listing data which is not
 provied by the owner (or admins), like wp_gc_maintained or "logger feedback"
 on cache properties. As soon as this data is output via XML interface, it must
@@ -67,6 +73,9 @@ be incorporated into some new modification date field.
 
 cache_logs
 ----------
+
+entry_last_modified
+	Is update when the user edits the log or adds/changes/removes log pictures.
 
 last_modified
 	Is updated when

@@ -102,7 +102,7 @@
 
 	if (isset($_GET['for_maintenance']))
 	{
-	  $add_where = "AND {fromtable}.`type` IN (2,3) AND DATEDIFF({fromtable}.`date_created`, {fromtable}.`date`) < 7 ";
+	  $add_where = "AND ({fromtable}.`type` IN (2,3) OR {fromtable}.`needs_maintenance`=2 OR {fromtable}.`listing_outdated`=2) AND DATEDIFF({fromtable}.`date_created`, {fromtable}.`date`) < 7 ";
 	  $tpl->cache_id .= "|fm";
 	  $logcount *= 2;
 	}
@@ -124,7 +124,9 @@
 			sql_temp_table_slave('loglist0');
 			sql_slave("
 				CREATE TEMPORARY TABLE &loglist0
-				(SELECT `id`, `cache_id`, `user_id`, `date_created`, `date`, `type`
+				(SELECT
+					`id`, `cache_id`, `user_id`, `date_created`, `date`, `type`,
+					`needs_maintenance`, `listing_outdated`
 				 FROM `cache_logs`
 				 ORDER BY `date_created` DESC
 				 LIMIT " . (4*$logcount) . "

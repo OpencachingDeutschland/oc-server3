@@ -16,6 +16,68 @@ var cachesizes = {$cachesizes|@count};
 
 {literal}
 
+function textonfocus(arrayid){
+	document.searchbydistance.searchto[arrayid].checked = "checked";
+}
+
+function _radio_click(){
+
+		if (isNaN(document.searchbydistance.distance.value))
+		{
+			alert("{/literal}{t}The maximum distance has to be a number!{/t}{literal}");
+			resetbutton('submit_dist');
+			return false;
+		}
+		else if (document.searchbydistance.distance.value <= 0 || document.searchbydistance.distance.value > 9999)
+		{
+			alert("{/literal}{t}The distance has to be between 0 and 9999{/t}{literal}");
+			resetbutton('submit_dist');
+			return false;
+		}
+
+		if (document.searchbydistance.searchto.value == "searchbyortplz") {
+			if(_sbort_click()==true||_sbplz_click()==true){
+				return true;
+			}
+			else {
+				resetbutton('submit_dist');
+				return false;
+			}
+		}
+		else if(document.searchbydistance.searchto.value == "searchbyplz") {
+			if(_sbplz_click()==true){
+				return true;
+			}
+			else {
+				resetbutton('submit_dist');
+				return false;
+			}
+		}
+		else if(document.searchbydistance.searchto.value == "searchbyocwp") {
+			if(_sbocwp_click()==true){
+				return true;
+			}
+			else {
+				resetbutton('submit_dist');
+				return false;
+			}
+		}
+		else if(document.searchbydistance.searchto.value == "searchbydistance") {
+			if(_sbd_click()==true){
+				return true;
+			}
+			else {
+				resetbutton('submit_dist');
+				return false;
+			}
+		}
+		else {
+			alert("Es wurde kein Button ausgewählt."); // Todo: Translation
+			return false;
+		}
+		return true;
+}
+
 function _sbn_click()
 {
 	if (document.searchbyname.cachename.value == "")
@@ -63,27 +125,15 @@ function _sbd_click()
 		resetbutton('submit_dist');
 		return false;
 	}
-	else if (isNaN(document.searchbydistance.distance.value))
-	{
-		alert("{/literal}{t}The maximum distance has to be a number!{/t}{literal}");
-		resetbutton('submit_dist');
-		return false;
-	}
-	else if (document.searchbydistance.distance.value <= 0 || document.searchbydistance.distance.value > 9999)
-	{
-		alert("{/literal}{t}The distance has to be between 0 and 9999{/t}{literal}");
-		resetbutton('submit_dist');
-		return false;
-	}
 	return true;
 }
 
 function _sbplz_click()
 {
-	if (document.searchbyplz.plz.value == "")
+	if (document.searchbydistance.ortplz.value == "")
 	{
 		alert("{/literal}{t}Enter the postal code, please!{/t}{literal}");
-		resetbutton('submit_plz');
+		resetbutton('submit_dist');
 		return false;
 	}
 	return true;
@@ -91,10 +141,21 @@ function _sbplz_click()
 
 function _sbort_click()
 {
-	if (document.searchbyort.ort.value == "")
+	if (document.searchbydistance.ortplz.value == "")
 	{
 		alert("{/literal}{t}Enter the city, please!{/t}{literal}");
-		resetbutton('submit_city');
+		resetbutton('submit_dist');
+		return false;
+	}
+	return true;
+}
+
+function _sbocwp_click()
+{
+	if (document.searchbydistance.ocwp.value == "" || !document.searchbydistance.ocwp.value.toLowerCase().startsWith("oc") || document.searchbydistance.ocwp.value.length<=5)
+	{
+		alert("{/literal}{t}Enter a Opencaching waypoint, please!{/t}{literal}"); // Todo: Translation
+		resetbutton('submit_dist');
 		return false;
 	}
 	return true;
@@ -129,8 +190,7 @@ function sync_options(element)
 		"searchbydistance",
 		"searchbyowner",
 		"searchbyfinder",
-		"searchbyplz",
-		"searchbyort",
+		"searchbyortplz",
 		"searchbyfulltext"
 		{/literal}{if $logged_in},"searchall"{/if}{literal}
 		);
@@ -484,80 +544,11 @@ function switchAttributeCat2()
 <div class="searchdiv2">
 	<table class="table">
 
-	<form action="search.php" onsubmit="return(_sbort_click());" method="{$formmethod}" enctype="application/x-www-form-urlencoded" name="searchbyort" dir="ltr" style="display:inline;">
-		<input type="hidden" name="searchto" value="searchbyort" />
-		<input type="hidden" name="showresult" value="1" />
-		<input type="hidden" name="expert" value="0" />
-		<input type="hidden" name="output" value="HTML" />
-		<input type="hidden" name="utf8" value="1" />
-
-		<input type="hidden" name="sort" value="{$hidopt_sort}" />
-		<input type="hidden" name="orderRatingFirst" value="{$hidopt_orderRatingFirst}" />
-		<input type="hidden" name="f_userowner" value="{$hidopt_userowner}" />
-		<input type="hidden" name="f_userfound" value="{$hidopt_userfound}" />
-		<input type="hidden" name="f_inactive" value="{$hidopt_inactive}" />
-		<input type="hidden" name="f_disabled" value="{$hidopt_disabled}" />
-		<input type="hidden" name="f_ignored" value="{$hidopt_ignored}" />
-		<input type="hidden" name="f_otherPlatforms" value="{$hidopt_otherPlatforms}" />
-		<input type="hidden" name="f_geokrets" value="{$hidopt_geokrets}" />
-		<input type="hidden" name="country" value="{$country}" />
-		<input type="hidden" name="language" value="{$language}" />
-		<input type="hidden" name="difficultymin" value="{$difficultymin}" />
-		<input type="hidden" name="difficultymax" value="{$difficultymax}" />
-		<input type="hidden" name="terrainmin" value="{$terrainmin}" />
-		<input type="hidden" name="terrainmax" value="{$terrainmax}" />
-		<input type="hidden" name="cachetype" value="{$cachetype}" />
-		<input type="hidden" name="cachesize" value="{$cachesize}" />
-		<input type="hidden" name="cache_attribs" value="{$hidopt_attribs}" />
-		<input type="hidden" name="cache_attribs_not" value="{$hidopt_attribs_not}" />
-
-		<tr>
-			<td class="formlabel">{t}City:{/t}</td>
-			<td><input type="text" name="ort" value="{$ort}" class="input200" /> &nbsp;</td>
-			<td><input type="submit" name="submit_city" value="{t}Search{/t}" class="formbutton" onclick="submitbutton('submit_city')" /></td>
-			<td></td>  {* creates empty fourth column which is used by text search options *}
-		</tr>
-	</form>
-		
-	<form action="search.php" onsubmit="return(_sbplz_click());" method="{$formmethod}" enctype="application/x-www-form-urlencoded" name="searchbyplz" dir="ltr" style="display:inline;">
-		<input type="hidden" name="searchto" value="searchbyplz" />
-		<input type="hidden" name="showresult" value="1" />
-		<input type="hidden" name="expert" value="0" />
-		<input type="hidden" name="output" value="HTML" />
-		<input type="hidden" name="utf8" value="1" />
-
-		<input type="hidden" name="sort" value="{$hidopt_sort}" />
-		<input type="hidden" name="orderRatingFirst" value="{$hidopt_orderRatingFirst}" />
-		<input type="hidden" name="f_userowner" value="{$hidopt_userowner}" />
-		<input type="hidden" name="f_userfound" value="{$hidopt_userfound}" />
-		<input type="hidden" name="f_inactive" value="{$hidopt_inactive}" />
-		<input type="hidden" name="f_disabled" value="{$hidopt_disabled}" />
-		<input type="hidden" name="f_ignored" value="{$hidopt_ignored}" />
-		<input type="hidden" name="f_otherPlatforms" value="{$hidopt_otherPlatforms}" />
-		<input type="hidden" name="f_geokrets" value="{$hidopt_geokrets}" />
-		<input type="hidden" name="country" value="{$country}" />
-		<input type="hidden" name="language" value="{$language}" />
-		<input type="hidden" name="cachetype" value="{$cachetype}" />
-		<input type="hidden" name="cachesize" value="{$cachesize}" />
-		<input type="hidden" name="difficultymin" value="{$difficultymin}" />
-		<input type="hidden" name="difficultymax" value="{$difficultymax}" />
-		<input type="hidden" name="terrainmin" value="{$terrainmin}" />
-		<input type="hidden" name="terrainmax" value="{$terrainmax}" />
-		<input type="hidden" name="cache_attribs" value="{$hidopt_attribs}" />
-		<input type="hidden" name="cache_attribs_not" value="{$hidopt_attribs_not}" />
-
-		<tr>
-			<td class="formlabel">{t}Postal code:{/t}</td>
-			<td><input type="text" name="plz" value="{$plz}" maxlength="5" class="input50" /></td>
-			<td><input type="submit" name="submit_plz" value="{t}Search{/t}" class="formbutton" onclick="submitbutton('submit_plz')" /></td>
-		</tr>
-	</form>
-
 	{$ortserror}
 	<tr><td class="separator"></td></tr>
 
-	<form action="search.php" onsubmit="return(_sbd_click());" method="{$formmethod}" enctype="application/x-www-form-urlencoded" name="searchbydistance" dir="ltr" style="display:inline;">
-		<input type="hidden" name="searchto" value="searchbydistance" />
+	<form action="search.php" onsubmit="return(_radio_click());" method="{$formmethod}" enctype="application/x-www-form-urlencoded" name="searchbydistance" dir="ltr" style="display:inline;">
+		<!-- <input type="hidden" name="searchto" value="searchbydistance" /> -->
 		<input type="hidden" name="showresult" value="1" />
 		<input type="hidden" name="expert" value="0" />
 		<input type="hidden" name="output" value="HTML" />
@@ -593,25 +584,34 @@ function switchAttributeCat2()
 					<option value="nm" {if $sel_nm}selected="selected"{/if}>{t}Seamiles{/t}</option>
 				</select>
 			</td>
+			<td><input type="submit" name="submit_dist" value="{t}Search{/t}" class="formbutton" onclick="submitbutton('submit_dist')" /></td>
 		</tr>
 		<tr>
-			<td valign="top">... {t}from coordinates:{/t}</td>
+			<td class=""><input type="radio" id="sboort" name="searchto" value="searchbyortplz" {if $dbyortplz_checked}checked="checked"{/if} > {t}from City / Postal Code:{/t}</td> <!-- Todo: Translation-->
+			<td><input type="text" name="ortplz" value="{$ortplz}" class="input200" onfocus="textonfocus(0)"/> &nbsp;</td>
+			<td></td>  {* creates empty fourth column which is used by text search options *}
+		</tr>
+		<tr>
+			<td class=""><input type="radio" id="sbocwp" name="searchto" value="searchbyocwp" {if $dbyocwp_checked}checked="checked"{/if} > {t}from OC Waypoint:{/t}</td> <!-- Todo: Translation -->
+			<td><input type="text" name="ocwp" value="{$ocwp}" maxlength="7" class="input50" onfocus="textonfocus(1)"/></td>
+		</tr>
+		<tr>
+			<td valign="top"><input type="radio" id="sbdis" name="searchto" value="searchbydistance" {if $dbydistance_checked}checked="checked"{/if} > {t}from coordinates:{/t}</td> <!-- Todo: German Translation -->
 			<td valign="top">
-				<select name="latNS">
+				<select name="latNS" onfocus="textonfocus(2)">
 					<option value="N" {if $latN_sel}selected="selected"{/if}>{t}N{/t}</option>
 					<option value="S" {if $latS_sel}selected="selected"{/if}>{t}S{/t}</option>
 				</select>&nbsp;
-				<input type="text" name="lat_h" maxlength="2" value="{$lat_h}" class="input30" />&nbsp;°&nbsp;
-				<input type="text" name="lat_min" maxlength="6" value="{$lat_min}" class="input50" />&nbsp;'&nbsp;
+				<input type="text" name="lat_h" maxlength="2" value="{$lat_h}" class="input30" onfocus="textonfocus(2)"/>&nbsp;°&nbsp;
+				<input type="text" name="lat_min" maxlength="6" value="{$lat_min}" class="input50" onfocus="textonfocus(2)"/>&nbsp;'&nbsp;
 				<br />
-				<select name="lonEW">
+				<select name="lonEW" onfocus="textonfocus(2)">
 					<option value="E" {if $lonE_sel}selected="selected"{/if}>{t}E{/t}</option>
 					<option value="W" {if $lonW_sel}selected="selected"{/if}>{t}W{/t}</option>
 				</select>&nbsp;
-				<input type="text" name="lon_h" maxlength="3" value="{$lon_h}" class="input30" />&nbsp;°&nbsp;
-				<input type="text" name="lon_min" maxlength="6" value="{$lon_min}" class="input50" />&nbsp;'&nbsp;
+				<input type="text" name="lon_h" maxlength="3" value="{$lon_h}" class="input30" onfocus="textonfocus(2)"/>&nbsp;°&nbsp;
+				<input type="text" name="lon_min" maxlength="6" value="{$lon_min}" class="input50" onfocus="textonfocus(2)"/>&nbsp;'&nbsp;
 			</td>
-			<td><input type="submit" name="submit_dist" value="{t}Search{/t}" class="formbutton" onclick="submitbutton('submit_dist')" /></td>
 		</tr>
 	</form>
 

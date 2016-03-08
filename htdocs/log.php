@@ -268,6 +268,7 @@
 		$tpl->assign('cachename', $cache->getName());
 		$tpl->assign('cacheid', $cache->getCacheId());
 		$tpl->assign('cachetype', $cache->getType());
+		$tpl->assign('gcwp', $cache->getWPGC_maintained());
 		// date/time
 		$tpl->assign('logday', $logDateDay);
 		$tpl->assign('logmonth', $logDateMonth);
@@ -279,7 +280,6 @@
 		$tpl->assign('needs_maintenance', $needsMaintenance);
 		$tpl->assign('listing_outdated', $listingOutdated);
 		$tpl->assign('condition_history', $cache->getConditionHistory());
-		$tpl->assign('has_gc_listing', $cache->getWPGC_maintained() != '');
 		// log text
 		$tpl->assign('logtext', $logText);
 		// text, <html> or editor

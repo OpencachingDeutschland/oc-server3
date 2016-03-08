@@ -236,6 +236,25 @@ class cache
 	{
 		return $this->reCache->getValue('listing_outdated');
 	}
+
+	function getListingOutdatedLogUrl()
+	{
+		$url = '';
+		$rs = sql("
+			SELECT `id`, `listing_outdated`
+			FROM `cache_logs`
+			WHERE `cache_id`='&1' AND `listing_outdated`>0
+			ORDER BY `date` DESC, `date_created` DESC, `id` DESC",
+			// same sorting order as in DB function sp_update_logstat() 
+			$this->getCacheId()
+		);
+		if ($r = sql_fetch_assoc($rs))
+			if ($r['listing_outdated'] == 2)
+				$url = 'viewlogs.php?cacheid='.$this->getCacheId().'#log'.$r['id'];
+		sql_free_result($rs);
+		return $url;
+	}
+
 	function setListingOutdated($value)
 	{
 		return $this->reCache->setValue('listing_outdated', $value);

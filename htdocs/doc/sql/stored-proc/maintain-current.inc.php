@@ -361,8 +361,9 @@
 		       END IF;
 
 		       UPDATE `caches` SET
-		         `needs_maintenance` = (SELECT GREATEST(0,`needs_maintenance`-1) FROM `cache_logs` WHERE `cache_logs`.`cache_id`=nCacheID AND (`cache_logs`.`needs_maintenance`>0 OR `cache_logs`.`type` In (9,13,14)) ORDER BY `date` DESC, `date_created` DESC LIMIT 1),
-		         `listing_outdated` = (SELECT GREATEST(0,`listing_outdated`-1) FROM `cache_logs` WHERE `cache_logs`.`cache_id`=nCacheID AND (`cache_logs`.`listing_outdated`>0 OR `cache_logs`.`type` In (9,13,14)) ORDER BY `date` DESC, `date_created` DESC LIMIT 1)
+		         `needs_maintenance` = (SELECT GREATEST(0,`needs_maintenance`-1) FROM `cache_logs` WHERE `cache_logs`.`cache_id`=nCacheID AND (`cache_logs`.`needs_maintenance`>0 OR `cache_logs`.`type` In (9,13,14)) ORDER BY `date` DESC, `date_created` DESC, `id` DESC LIMIT 1),
+		         `listing_outdated` = (SELECT GREATEST(0,`listing_outdated`-1) FROM `cache_logs` WHERE `cache_logs`.`cache_id`=nCacheID AND (`cache_logs`.`listing_outdated`>0 OR `cache_logs`.`type` In (9,13,14)) ORDER BY `date` DESC, `date_created` DESC, `id` DESC LIMIT 1)
+		         /* same sorting order as in caches::getListingOutdatedLogUrl() */
 		       WHERE `caches`.`cache_id`=nCacheId;
 	       END IF;
 	       IF IFNULL(@deleting_user,0)=0 THEN

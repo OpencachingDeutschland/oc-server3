@@ -98,6 +98,7 @@
 		$logTimeMinute          = (isset($_POST['logminute']))                 ? trim($_POST['logminute'])           : "";
 		$needsMaintenance       = (isset($_POST['needs_maintenance2']))        ? ($_POST['needs_maintenance2'])+0    : (isset($_POST['needs_maintenance']) ? ($_POST['needs_maintenance'])+0 : 0);
 		$listingOutdated        = (isset($_POST['listing_outdated2']))         ? ($_POST['listing_outdated2'])+0     : (isset($_POST['listing_outdated']) ? ($_POST['listing_outdated'])+0 : 0);
+		$confirmListingOk       = (isset($_POST['confirm_listing_ok']))        ? $_POST['confirm_listing_ok']+0      : 0;
 		$rateOption             = (isset($_POST['ratingoption']))              ? $_POST['ratingoption']+0            : 0;
 		$rateCache              = (isset($_POST['rating']))                    ? $_POST['rating']+0                  : 0;
 		$ocTeamComment          = (isset($_REQUEST['teamcomment']))            ? $_REQUEST['teamcomment'] != 0       : 0;
@@ -110,6 +111,8 @@
 			if ($needsMaintenance != 1 && $needsMaintenance != 2) $needsMaintenance = 0;
 			if ($listingOutdated != 1 && $listingOutdated != 2) $listingOutdated = 0;
 		}
+		if ($listingOutdated == 1 && !$confirmListingOk)
+			$listingOutdated = 0;
 		
 		// if not a found log, ignore the rating
 		$rateOption = ($logType == 1 || $logType == 7) + 0;
@@ -264,6 +267,7 @@
 		// assign values to template
 		// user info
 		$tpl->assign('userFound', $user->getStatFound());
+		$tpl->assign('ownerlog', $login->userid == $cache->getUserId());
 		// cache infos
 		$tpl->assign('cachename', $cache->getName());
 		$tpl->assign('cacheid', $cache->getCacheId());
@@ -277,6 +281,8 @@
 		$tpl->assign('logminute', $logTimeMinute);
 		// cache condition flags
 		$tpl->assign('cache_needs_maintenance', $cache->getNeedsMaintenance());
+		$tpl->assign('cache_listing_is_outdated', $cache->getListingOutdated());
+		$tpl->assign('cache_listing_outdated_log', $cache->getListingOutdatedLogUrl());
 		$tpl->assign('needs_maintenance', $needsMaintenance);
 		$tpl->assign('listing_outdated', $listingOutdated);
 		$tpl->assign('condition_history', $cache->getConditionHistory());

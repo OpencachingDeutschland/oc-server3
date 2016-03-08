@@ -2855,9 +2855,11 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2568', 'New coo
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2569', 'moved by %1 meters', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2570', 'moved by %1 km', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2571', 'Protect old coordinates', '2015-06-17 10:09:14');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2598', 'Select <i>ok</i> if you have found or checked the cache and everything is in<br />acceptable condition.', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2598', 'Select <i>ok</i> if you have found or checked the cache and everything is ok.', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2599', 'Select <i>up to date</i> if you have checked the complete description &ndash; from the<br />container size to encoded hints and additoional wayoints &ndash; and can confirm<br />that everything is up-to-date.', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2600', 'Select <i>up to date</i> if you have checked the complete description &ndash; from the<br />container size to encoded hints and additoional wayoints &ndash;, have compared<br />it to the geocaching.com listing (%1) and can confirm that everything is<br />up-to-date.', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2601', 'The problems of the cache description as mentioned in the <a href=\"%1\" target=\"_blank\"><img src=\"resource2/ocstyle/images/log/16x16-listing-outdated.png\" /> log entries</a> do no longer exist.', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2602', 'All information (coordinates, container size, difficulty, terrain, description text, encoded hints, additional waypoints) is at least up-to-date with', '2015-06-17 10:09:14');
 
 -- Table sys_trans_ref
 SET NAMES 'utf8';
@@ -7442,9 +7444,11 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2569', 'DE', 'verlegt um %1 Meter', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2570', 'DE', 'verlegt um %1 km', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2571', 'DE', 'Altkoordinaten schützen', '2015-06-17 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2598', 'DE', 'Wähle <i>ok</i>, wenn du den Cache gefunden oder kontrolliert hast und alles in<br />akzeptablem Zustand ist.', '2015-06-17 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2599', 'DE', 'Wähle <i>in Ordnung</i>, wenn du die vollständige Beschreibung \&ndash; von der Behältergroße<br />bis zu verschlüsselten Hinweisen und zusätzlichen Wegpunkten\&ndash; geprüft hast,<br >und alles auf aktuellem Stand ist.', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2598', 'DE', 'Wähle <i>ok</i>, wenn du den Cache gefunden oder kontrolliert hast und alles ok ist.', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2599', 'DE', 'Wähle <i>in Ordnung</i>, wenn du die vollständige Beschreibung \&ndash; von der Behältergroße<br />bis zu verschlüsselten Hinweisen und zusätzlichen Wegpunkten \&ndash; geprüft hast,<br >und alles auf aktuellem Stand ist.', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2600', 'DE', 'Wähle <i>in Ordnung</i>, wenn du die vollständige Beschreibung \&ndash; von der Behältergroße<br />bis zu verschlüsselten Hinweisen und zusätzlichen Wegpunkten \&ndash; geprüft und mit dem<br />GC-Listing (%1) verglichen hast, und alles auf aktuellem Stand ist.', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2601', 'DE', 'Die in den <a href=\"%1\" target=\"_blank\"><img src=\"resource2/ocstyle/images/log/16x16-listing-outdated.png\" />-Logeinträgen</a> erwähnten Probleme mit der Cachebeschreibung bestehen nicht mehr.', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2602', 'DE', 'Alle Angaben (Koordinaten, Behältergröße, Schwierigkeit, Geländewertung, Beschreibungstext, verschlüsselte Hinweise, zusätzliche Wegpunkte) sind mindestens auf dem Stand von', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'EN', 'Reorder IDs', '2010-09-02 00:15:30');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'EN', 'The database could not be reconnected.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'EN', 'Testing – please do not login', '2010-08-28 11:48:07');

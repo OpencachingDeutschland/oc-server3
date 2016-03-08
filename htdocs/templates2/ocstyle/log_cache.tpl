@@ -12,12 +12,16 @@
 var cache_needs_maintenance = {$cache_needs_maintenance + 0};
 var cachetype = {$cachetype};
 var logtype_allows_nm = [{$logtype_allows_nm}];
-var tip_general_nm = "{t}Select <i>needs maintenance</i> if the geocache was in poor condition at the<br />specified date and in urgent need of maintenance. Please explain why.{/t}<br /><div style='height:0.3em'></div>{t}Select <i>ok</i> if you have found or checked the cache and everything is in<br />acceptable condition.{/t}";
-var tip_general_lo = "{if $gcwp}{t}Select <i>is outdated</i> if the geocache search is hampered by outdated information<br />in the description, e.g. the location has severely changed or the description lacks<br />important information which has been added at another geocaching website.<br />Please give details in your log.{/t}{else}{t}Select <i>is outdated</i> if the geocache search is hampered by outdated information<br />in the description, e.g. because the location has severely changed. Please give<br />details in your log.{/t}{/if}<br /><div style='height:0.3em'></div>{if $gcwp}{t 1=$gcwp}Select <i>up to date</i> if you have checked the complete description &ndash; from the<br />container size to encoded hints and additoional wayoints &ndash;, have compared<br />it to the geocaching.com listing (%1) and can confirm that everything is<br />up-to-date.{/t}{else}{t}Select <i>up to date</i> if you have checked the complete description &ndash; from the<br />container size to encoded hints and additoional wayoints &ndash; and can confirm<br />that everything is up-to-date.{/t}{/if}";
+var tip_general_nm = "{t}Select <i>needs maintenance</i> if the geocache was in poor condition at the<br />specified date and in urgent need of maintenance. Please explain why.{/t}<br /><div style='height:0.3em'></div>{t}Select <i>ok</i> if you have found or checked the cache and everything is ok.{/t}";
+var tip_general_lo = "{if $gcwp}{t}Select <i>is outdated</i> if the geocache search is hampered by outdated information<br />in the description, e.g. the location has severely changed or the description lacks<br />important information which has been added at another geocaching website.<br />Please give details in your log.{/t}{else}{t}Select <i>is outdated</i> if the geocache search is hampered by outdated information<br />in the description, e.g. because the location has severely changed. Please give<br />details in your log.{/t}{/if}{if $ownerlog || $cache_listing_is_outdated}<br /><div style='height:0.3em'></div>{if $gcwp}{t 1=$gcwp}Select <i>up to date</i> if you have checked the complete description &ndash; from the<br />container size to encoded hints and additoional wayoints &ndash;, have compared<br />it to the geocaching.com listing (%1) and can confirm that everything is<br />up-to-date.{/t}{else}{t}Select <i>up to date</i> if you have checked the complete description &ndash; from the<br />container size to encoded hints and additoional wayoints &ndash; and can confirm<br />that everything is up-to-date.{/t}{/if}{/if}";
 var tip_activate_nm = '{t}By logging "Available", you also confirm that the geocache is in good condition.{/t}';
 var tip_activate_lo = '{t}By logging "Available", you also confirm that the geocache description is up-to-date.{/t}';
 var tip_disable_nm = "{t}You may indicate here what is the current maintenance state of the geocache.{/t}"; 
 var tip_disable_lo = "{t}You may indicate here if the cache description is up-to-date.{/t}"; 
+
+var cache_listing_is_outdated = {$cache_listing_is_outdated} + 0;
+var ownerlog = {$ownerlog} + 0;
+
 {literal}
 
 function insertSmiley(smileySymbol, smileyPath)
@@ -75,10 +79,13 @@ function logtype_changed()
 		if (document.editform.rating)
 	    	document.editform.rating.disabled = true;
 	}
+
+	var condition_logging = false;
 	if (cachetype != 6 && logtype_allows_nm.indexOf(logtype) >= 0)
 	{
 		document.getElementById('cache_condition').style.display = '';
 		document.getElementById('cache_condition_spacer').style.display = '';
+		condition_logging = true;
 	}
 	else
 	{
@@ -106,6 +113,20 @@ function logtype_changed()
 	// This allows us to post also disabled fields' values:
 	document.getElementById('needs_maintenance2').value = nm.value;
 	document.getElementById('listing_outdated2').value = lo.value;
+
+	var clo_spacer = document.getElementById('confirm_listing_ok_spacer');
+	var clo_row = document.getElementById('confirm_listing_ok_row');
+
+	if (!condition_logging || lo.value != 1 || ownerlog || !cache_listing_is_outdated)
+	{
+		clo_spacer.style.display = 'none';
+		clo_row.style.display = 'none';
+	}
+	else
+	{
+		clo_spacer.style.display = '';
+		clo_row.style.display = '';
+	}
 
 	return false;
 }
@@ -193,12 +214,12 @@ function show_tip(text)
 	<tr>
 		<td width="180px">{t}Date / time:{/t}</td>
 		<td>
-			<input class="input20" type="text" id="logday" name="logday" maxlength="2" value="{$logday}" onchange="condition_init()" />.
-			<input class="input20" type="text" id="logmonth" name="logmonth" maxlength="2" value="{$logmonth}" onchange="condition_init()" />.
-			<input class="input40" type="text" id="logyear" name="logyear" maxlength="4" value="{$logyear}" onchange="condition_init()" />
+			<input class="input20" type="text" id="logday" name="logday" maxlength="2" value="{$logday}" />.
+			<input class="input20" type="text" id="logmonth" name="logmonth" maxlength="2" value="{$logmonth}" />.
+			<input class="input40" type="text" id="logyear" name="logyear" maxlength="4" value="{$logyear}" />
 			&nbsp;&nbsp;&nbsp;
-			<input class="input20" type="text" id="loghour" name="loghour" maxlength="2" value="{$loghour}" onchange="condition_init()" /> :
-			<input class="input20" type="text" id="logminute" name="logminute" maxlength="2" value="{$logminute}" onchange="condition_init()" />
+			<input class="input20" type="text" id="loghour" name="loghour" maxlength="2" value="{$loghour}" /> :
+			<input class="input20" type="text" id="logminute" name="logminute" maxlength="2" value="{$logminute}" />
 			&nbsp;&nbsp;&nbsp; <span id="datecomment"></span>
 			{if $validate.dateOk==false}<br /><span class="errormsg">{t}date or time is invalid{/t}</span>{/if}
 		</td>
@@ -220,9 +241,16 @@ function show_tip(text)
 			<select id="listing_outdated" name="listing_outdated" onchange="logtype_changed()">
 				<option value="0" {if $listing_outdated==0}selected="selected"{/if}>{t}not specified{/t}</option>
 				<option value="2" {if $listing_outdated==2}selected="selected"{/if}>{t}outdated{/t}</option>
-				<option value="1" {if $listing_outdated==1}selected="selected"{/if}>{t}up to date{/t}</option>
+				{if $ownerlog || $cache_listing_is_outdated}<option value="1" {if $listing_outdated==1}selected="selected"{/if}>{t}up to date{/t}</option>{/if}
 			</select>
 			</span>
+		</td>
+	</tr>
+	<tr><td class="spacer" colspan="2" id="confirm_listing_ok_spacer" style="display:none"></td></tr>
+	<tr id="confirm_listing_ok_row" style="display:none">
+		<td></td>
+		<td>
+			<input type="checkbox" id="confirm_listing_ok" name="confirm_listing_ok" value="1" class="checkbox" {if $ownerlog}checked{/if}/> <label for="confirm_listing_ok">{t 1=$cache_listing_outdated_log}The problems of the cache description as mentioned in the <a href="%1" target="_blank"><img src="resource2/ocstyle/images/log/16x16-listing-outdated.png" /> log entries</a> do no longer exist.{/t} {if $gcwp}{t}All information (coordinates, container size, difficulty, terrain, description text, encoded hints, additional waypoints) is at least up-to-date with{/t} <a href="http://www.geocaching.com/seek/cache_details.aspx?wp={$gcwp}" target="_blank">{$gcwp}</a>.{/if}
 		</td>
 	</tr>
 	<tr id="cache_condition_spacer"><td class="spacer" colspan="2"></td></tr>
@@ -306,7 +334,6 @@ function show_tip(text)
 	OcInitEditor();
 	var old_logtype = parseInt(document.editform.logtype.value);
 	logtype_changed();
-	condition_init();
 	var descMode = {$descMode};
 //-->
 </script>

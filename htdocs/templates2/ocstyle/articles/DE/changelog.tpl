@@ -12,8 +12,11 @@
 
 	<p>Im Folgenden sind alle Veränderungen ab OC Version&nbsp;3.0 aufgelistet. Manche Kleinigkeiten wurden zur besseren Übersicht weggelassen; sie sind im <a href="http://redmine.opencaching.de/projects/oc-dev/roadmap">Issue-Tracker</a>, in der <a href="https://github.com/OpencachingDeutschland/oc-server3/commits/stable">Codehistorie</a> und im <a href="http://forum.opencaching.de/index.php?board=43.0">Entwicklerforum</a> nachlesbar. Neue Funktionen werden manchmal schon vorab freigegeben.</p>
 
-	<p>Eine redaktionell aufbereitete Erläuterung neuer OC-Versionen gibt es auch im <em>Altmetall-Blog</em>:</p>
+	<p>Eine redaktionell aufbereitete Erläuterung neuer OC-Versionen gibt es auch im Opencaching- und im <em>Altmetall</em>-Blog:</p>
 	<ul>
+		<li><a href="http://blog.opencaching.de/2016/03/oc-3-0v17-wartungszustand-loggen-koordinatenhistorien/">Version 17</a>: Wartungszustand loggen, Koordinatenhistorien</li>
+		<li><a href="http://blog.opencaching.de/2016/02/oc-30v16/">Version 16</a>: Sortierbare Suche, Unicode-Zeichen uvm.</li>
+		<li><a href="http://blog.opencaching.de/2015/09/oc-30v14/">Version 15</a>: Weitergabe privater Cachelisten, Lesezeichen für Cachelisten, Anzeige der Empfehlungen</li>
 		<li><a href="https://blog.dafb-o.de/opencaching-3v14/">Version 14</a>: Ausbau der Cachelistenfunktionen, Zähmung des HTML-Purifiers, Sprachsuche ...</li>
 		<li><a href="https://blog.dafb-o.de/oc-3-0v13-listen-neue-suchoption-und-mehr/">Version 13</a>: Listen, neue Suchoption und mehr ...</li>
 		<li><a href="https://blog.dafb-o.de/opencaching-3-0-version-11-veroeffentlicht/">Version 11</a>: Automatische Verkleinerung von Bildern, Links zu Logeinträgen ...</li>

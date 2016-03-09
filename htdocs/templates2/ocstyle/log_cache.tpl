@@ -331,9 +331,9 @@ function show_tip(text)
 
 <script type="text/javascript">
 <!--
+	var descMode = {$descMode};
 	OcInitEditor();
 	var old_logtype = parseInt(document.editform.logtype.value);
 	logtype_changed();
-	var descMode = {$descMode};
 //-->
 </script>

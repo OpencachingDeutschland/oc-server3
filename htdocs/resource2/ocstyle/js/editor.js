@@ -85,7 +85,7 @@
 	function mnuSetElementsNormal()
 	{
 		var descText = document.getElementById("descText");
-		// descText not present in user profile and cache list desc editors 
+		// descText is not present in user profile and cache list desc editors
 		if (descText) descText = descText.style;
 
 		var descHtml = document.getElementById("descHtml").style;

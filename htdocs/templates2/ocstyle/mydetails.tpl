@@ -6,7 +6,7 @@
 {* OCSTYLE *}
 <div class="content2-pagetitle">
 	<img src="resource2/{$opt.template.style}/images/profile/32x32-profile.png" style="margin-right: 10px;" width="32" height="32" alt="" />
-	{t}My public profile settings{/t} <!-- TODO: Translation -->
+	{t}My additional profile settings{/t}
 </div>
 
 {include file="settingsmenu.tpl"}
@@ -34,24 +34,8 @@
 		{/if}
 		<tr><td class="spacer" colspan="3"></td></tr>
 
-		{include file="displayuseroptions.tpl" dUseroptions=$useroptions1}
+        {include file="displayuseroptions.tpl" dUseroptions=$useroptions1}
 
-		<tr>
-			<td valign=top>{t}Use PMR:{/t}</td>  <!-- TODO: Translation -->
-			<td>
-				{if $edit==true}
-					<input type="checkbox" name="usePMR" class="public-setting" value="1" {if $usePMR==true}checked="checked"{/if} id="l_using_pmr" class="checkbox" />
-					<label for="l_using_pmr" class="public-setting">{t}I'm taking an PMR walkie talkie on channel 2 with me.{/t}</label>
-					<br />
-				{else}
-					{if $usePMR==true}
-						<span class="public-setting">{t}I'm taking an PMR walkie talkie on channel 2 with me.{/t}</span><br />
-					{else}
-						{t}No. I'm not taking an PMR walkie talkie on channel 2 with me.{/t}<br /> <!-- TODO: Translation -->
-					{/if}
-				{/if}
-			</td>
-		</tr>
 		<tr><td class="spacer" colspan="2"></td></tr>
 
 		{if $errorUnknown==true}

@@ -6,7 +6,7 @@
 {* OCSTYLE *}
 <div class="content2-pagetitle">
 	<img src="resource2/{$opt.template.style}/images/profile/32x32-profile.png" style="margin-right: 10px;" width="32" height="32" alt="" />
-	{t}Personal data{/t} <!-- TODO: Translation -->
+	{t}Personal data{/t}
 </div>
 
  {include file="settingsmenu.tpl"}

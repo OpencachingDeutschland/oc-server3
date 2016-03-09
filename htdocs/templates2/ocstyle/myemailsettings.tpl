@@ -5,19 +5,19 @@
  ***************************************************************************}
 {* OCSTYLE *}
 <div class="content2-pagetitle">
-    <img src="resource2/{$opt.template.style}/images/profile/32x32-profile.png" style="margin-right: 10px;" width="32" height="32" alt="" />
-    {t}My email settings{/t} <!-- TODO: Translation -->
+    <img src="resource2/{$opt.template.style}/images/profile/32x32-email.png" style="margin-right: 10px;" width="32" height="32" alt="" />
+    {t}My E-mail settings{/t}
 </div>
 
 {include file="settingsmenu.tpl"}
 
-<form action="emailsettings.php" method="post" style="display:inline;">
+<form action="myemailsettings.php" method="post" style="display:inline;">
     <input type="hidden" name="action" value="change" />
     <input type="hidden" name="showAllCountries" value="{$showAllCountries}" />
     <table class="table">
         <tr>
             <td colspan="3">
-                <span class="boldtext">{t}Your E-Mail settings:{/t}</span> <!-- TODO: Translation -->
+                <span class="boldtext">{t}Your E-mail settings:{/t}</span>
             </td>
         </tr>
         <tr>
@@ -74,7 +74,7 @@
         <tr><td class="spacer" colspan="2"></td></tr>
 
         <tr>
-            <td valign="top">{t}Contact Form:{/t}</td> <!-- TODO: Translation -->
+            <td valign="top">{t}Contact Form:{/t}</td>
             <td valign="top">
                 {if $edit==true}
                     <input type="checkbox" name="sendUsermailAddress" value="1" {if $sendUsermailAddress==true}checked="checked"{/if} id="l_send_usermail_address" class="checkbox" />
@@ -114,13 +114,13 @@
 </form>
 
 {if $edit==false}
-    <form action="emailsettings.php" method="post" style="display:inline;">
+    <form action="myemailsettings.php" method="post" style="display:inline;">
         <input type="hidden" name="action" value="changeemail" />
         <table class="table">
             <tr><td class="spacer" colspan="2">&nbsp;</td></tr>
             <tr>
                 <td colspan="3">
-                    <span class="boldtext">{t}Your E-Mail adress:{/t}</span> <!-- TODO: Translation -->
+                    <span class="boldtext">{t}Your E-mail adress:{/t}</span>
                 </td>
             </tr>
             <tr>

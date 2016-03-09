@@ -7,7 +7,7 @@
 {foreach from=$dUseroptions item=useropt}
     <tr>
         <td style="vertical-align:top; width:10px">
-            {if $useropt.option_visible==1}
+            {if $useropt.option_visible==1 || ($useropt.optionset=="1" && $useropt.option_value=="1")}
                 <span class="public-setting"><nobr>{$useropt.name|escape}{t}#colonspace#{/t}:</nobr></span>
             {else}
                 <nobr>{$useropt.name|escape}{t}#colonspace#{/t}:</nobr>

@@ -10,8 +10,8 @@
     require_once('lib2/editSettings.class.php');
     require_once('lib2/edithelper.inc.php');
 
-    $tpl->name = 'ocsettings';
-    $tpl->menuitem = MNU_MYPROFILE_DETAILS;
+    $tpl->name = 'myocsettings';
+    $tpl->menuitem = MNU_MYPROFILE_OCSETTINGS;
 
     $login->verify();
     if ($login->userid == 0)
@@ -20,7 +20,7 @@
     include('settingsmenu.php');
 
     if (isset($_REQUEST['cancel']))
-    $tpl->redirect('mydetails.php');
+        $tpl->redirect('myocsettings.php');
 
     $action = isset($_REQUEST['action']) ? mb_strtolower($_REQUEST['action']) : 'view';
     if ($action != 'change' && $action != 'changetext' && $action != 'view') $action = 'view';

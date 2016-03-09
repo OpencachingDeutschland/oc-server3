@@ -5,13 +5,13 @@
  ***************************************************************************}
 {* OCSTYLE *}
 <div class="content2-pagetitle">
-    <img src="resource2/{$opt.template.style}/images/profile/32x32-profile.png" style="margin-right: 10px;" width="32" height="32" alt="" />
-    {t}My OC-website settings{/t} <!-- TODO: Translation -->
+    <img src="resource2/{$opt.template.style}/images/misc/32x32-tools.png" style="margin-right: 10px;" width="32" height="32" alt="" />
+    {t}My OC-website settings{/t}
 </div>
 
 {include file="settingsmenu.tpl"}
 
-<form action="ocsettings.php" method="post" style="display:inline;">
+<form action="myocsettings.php" method="post" style="display:inline;">
     <input type="hidden" name="action" value="change" />
 
     <table class="table">
@@ -36,7 +36,7 @@
         {include file="displayuseroptions.tpl" dUseroptions=$useroptions4}
 
         <tr>
-            <td valign="top">{t}Auto-Logout:{/t} <!-- TODO: Translation -->
+            <td valign="top">{t}Auto-Logout:{/t}
             <td valign="top">
                 {if $edit==true}
                     <input type="checkbox" name="permanentLogin" value="1" {if $permanentLogin==true}checked="checked"{/if} id="l_using_permanent_login" class="checkbox" />
@@ -50,35 +50,27 @@
                     {if $permanentLogin==true}
                         {t}Don't log me out after 15 minutes inaktivity.{/t}
                     {else}
-                        {t}Log me out after 15 minutes inaktivity.{/t} <!-- TODO: Translation -->
+                        {t}Log me out after 15 minutes inaktivity.{/t}
                     {/if}
                 {/if}
             </td>
         </tr>
         <tr>
-            <td valign=top>{t}Listing-Editor:{/t}</td> <!-- TODO: Translation -->
+            <td valign=top>{t}Texteditor:{/t}</td>
             <td>
                 {if $edit==true}
                     <input type="checkbox" name="noHTMLEditor" value="1" {if $noHTMLEditor==true}checked="checked"{/if} id="l_no_htmledit" class="checkbox" />
-                    <label for="l_no_htmledit">{t}Don't use an HTML editor by default.{/t}</label>
+                    <label for="l_no_htmledit">{t}Use the plain editor by default.{/t}</label>
                     <br />
                 {else}
                     {if $noHTMLEditor}
-                        {t}Don't use an HTML editor by default.{/t}
+                        {t}Use the plain editor by default.{/t}
                     {else}
-                        {t}Use an HTML editor by default.{/t} <!-- TODO: Translation -->
+                        {t}Use an HTML editor by default.{/t}
                     {/if}
                 {/if}
             </td>
         </tr>
-        <tr><td class="spacer" colspan="3"></td></tr>
-
-        <tr>
-            <td colspan="3">
-                <span class="boldtext">{t}You can edit your map settings(<img src="resource2/ocstyle/images/map/35x35-configure.png" width="16px">) on the <a href="map2.php">map</a> directly.{/t}</span> <!-- TODO: Translation -->
-            </td>
-        </tr>
-
         <tr><td class="spacer" colspan="3"></td></tr>
 
         {if $errorUnknown==true}
@@ -99,7 +91,14 @@
                 {/if}
             </td>
         </tr>
-        <tr><td class="spacer">&nbsp;</td></tr>
+
+        <tr><td class="spacer" colspan="3"></td></tr>
+
+        <tr>
+            <td colspan="3">
+                <span class="boldtext">{t}You can edit your map settings(<img src="resource2/ocstyle/images/map/35x35-configure.png" width="16px">) on the <a href="map2.php">map</a> directly.{/t}</span> <!-- TODO: Translation -->
+            </td>
+        </tr>
     </table>
 
 </form>

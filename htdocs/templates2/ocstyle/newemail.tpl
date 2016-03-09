@@ -5,7 +5,7 @@
 ***************************************************************************}
 {* OCSTYLE *}
 <div class="content2-pagetitle">
-	<img src="resource2/{$opt.template.style}/images/profile/32x32-profile.png" style="margin-right: 10px;" width="32" height="32" alt="" />
+	<img src="resource2/{$opt.template.style}/images/profile/32x32-email.png" style="margin-right: 10px;" width="32" height="32" alt="" />
 	{t}Change E-Mail address{/t}
 </div>
 
@@ -39,7 +39,7 @@
 		<tr>
 			<td>&nbsp;</td>
 			<td>
-        <input type="submit" name="erequest" value="{t}Request{/t}" class="formbutton" onclick="submitbutton('erequest')" />
+        		<input type="submit" name="erequest" value="{t}Request{/t}" class="formbutton" onclick="submitbutton('erequest')" />
 			</td>
 		</tr>
 		{if $emailErrorSame==true}

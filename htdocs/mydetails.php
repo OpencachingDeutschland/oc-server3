@@ -11,7 +11,7 @@
 	require_once('lib2/edithelper.inc.php');
 
 	$tpl->name = 'mydetails';
-	$tpl->menuitem = MNU_MYPROFILE_DETAILS;
+	$tpl->menuitem = MNU_MYPROFILE_PUBLICSETTINGS;
 
 	$login->verify();
 	if ($login->userid == 0)
@@ -40,6 +40,5 @@
 		$settings->display($ocsettings_array);
 	}
 exit;
-
 
 ?>

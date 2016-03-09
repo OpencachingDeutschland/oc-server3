@@ -23,7 +23,7 @@ require_once('lib2/logic/useroptions.class.php');
             $tplname;
 
             /* start old change*/
-            if($tplname=="myprofile"||$tplname=="mydetails"||$tplname=="ocsettings"||$tplname == "emailsettings") {
+            if($tplname=="myprofile"||$tplname=="mydetails"||$tplname=="myocsettings"||$tplname == "myemailsettings") {
 
                 if (isset($_REQUEST['cancel']))
                     $tpl->redirect('myprofile.php');
@@ -75,7 +75,7 @@ require_once('lib2/logic/useroptions.class.php');
                     }
                 }
 
-                if($tplname=="emailsettings"){
+                if($tplname=="myemailsettings"){
                     if (isset($_REQUEST['notifyOconly'])) {
                         $tpl->assign('notifyOconly', $_REQUEST['notifyOconly'] + 0);
                         $user->setNotifyOconly($_REQUEST['notifyOconly'] != 0);
@@ -101,23 +101,19 @@ require_once('lib2/logic/useroptions.class.php');
                     }
                 }
 
-                $bAccMailing = $user->getAccMailing();
+                $bAccMailing = isset($_REQUEST['save'])&&$tplname=='myemailsettings' ? isset($_REQUEST['accMailing']) : $user->getAccMailing();
                 $tpl->assign('accMailing', $bAccMailing);
                 $user->setAccMailing($bAccMailing);
 
-                $bUsePMR = isset($_REQUEST['save'])&&$tplname=='mydetails' ? isset($_REQUEST['usePMR']) : $user->getUsePMR();
-                $tpl->assign('usePMR', $bUsePMR);
-                $user->setUsePMR($bUsePMR);
-
-                $bPermanentLogin = isset($_REQUEST['save'])&&$tplname=='ocsettings' ? isset($_REQUEST['permanentLogin']) : $user->getPermanentLogin();
+                $bPermanentLogin = isset($_REQUEST['save'])&&$tplname=='myocsettings' ? isset($_REQUEST['permanentLogin']) : $user->getPermanentLogin();
                 $tpl->assign('permanentLogin', $bPermanentLogin);
                 $user->setPermanentLogin($bPermanentLogin);
 
-                $bNoHTMLEditor = isset($_REQUEST['save'])&&$tplname=='ocsettings' ? isset($_REQUEST['noHTMLEditor']) : $user->getNoHTMLEditor();
+                $bNoHTMLEditor = isset($_REQUEST['save'])&&$tplname=='myocsettings' ? isset($_REQUEST['noHTMLEditor']) : $user->getNoHTMLEditor();
                 $tpl->assign('noHTMLEditor', $bNoHTMLEditor);
                 $user->setNoHTMLEditor($bNoHTMLEditor);
 
-                $bUsermailSendAddress = $user->getUsermailSendAddress();
+                $bUsermailSendAddress = isset($_REQUEST['save'])&&$tplname=='myemailsettings' ? isset($_REQUEST['sendUsermailAddress']) : $user->getUsermailSendAddress();
                 $tpl->assign('sendUsermailAddress', $bUsermailSendAddress);
                 $user->setUsermailSendAddress($bUsermailSendAddress);
 
@@ -156,7 +152,7 @@ require_once('lib2/logic/useroptions.class.php');
 
             /* end old change*/
 
-            if($tplname=="myprofile"||$tplname=="mydetails"||$tplname=="ocsettings") {
+            if($tplname=="myprofile"||$tplname=="mydetails"||$tplname=="myocsettings") {
 
                 foreach($display_settings as $options_type) {
 
@@ -174,6 +170,7 @@ require_once('lib2/logic/useroptions.class.php');
                             $vis = isset($_REQUEST['chk' . $id]) ? $_REQUEST['chk' . $id] + 0 : 0;
                             $value = isset($_REQUEST['inp' . $id]) ? $_REQUEST['inp' . $id] : '';
                             if ($vis != 1) $vis = 0;
+                            if (($value == '')&&(isset($vis)))$vis = 0;
 
                             $useroptions->setOptVisible($id, $vis);
                             if (strlen($value) > 2000) {

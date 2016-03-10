@@ -302,16 +302,17 @@
 	 *   1 = this month or last month
 	 *   2 = between one and 6 months
 	 *   3 = between 6 and 12 months
-	 *   4 = more than 12 months
-	 *   5 = unknown, we need this, because we dont
+	 *   4 = between 12 and 24 months
+	 *   5 = more than 12 months
+	 *   6 = unknown, we need this, because we dont
 	 *       know the last_login of all accounts.
 	 *       Can be removed after one year.
-	 *   6 = user account is not active
+	 *   7 = user account is not active (disabled)
 	 */
 	if ($record['password'] == null || $record['email'] == null || $record['is_active_flag'] != 1)
+		$tpl->assign('lastlogin', 7);
+	else if ($record['last_login'] === null)
 		$tpl->assign('lastlogin', 6);
-	else if ($record['last_login'] == null)
-		$tpl->assign('lastlogin', 5);
 	else
 	{
 		$record['last_login'] = strtotime($record['last_login']);
@@ -323,8 +324,10 @@
 			$tpl->assign('lastlogin', 2);
 		else if ($record['last_login'] >= mktime(0, 0, 0, date("m")-12, 1, date("Y")))
 			$tpl->assign('lastlogin', 3);
-		else
+		else if ($record['last_login'] >= mktime(0, 0, 0, date("m")-24, 1, date("Y")))
 			$tpl->assign('lastlogin', 4);
+		else
+			$tpl->assign('lastlogin', 5);
 	}
 
 	$tpl->assign('license_actively_declined', $record['data_license'] == NEW_DATA_LICENSE_ACTIVELY_DECLINED);

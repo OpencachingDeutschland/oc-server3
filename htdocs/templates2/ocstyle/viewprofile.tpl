@@ -51,8 +51,10 @@
 		{elseif $lastlogin==3}
 			<td>{t}Between 6 and 12 months{/t}</td>
 		{elseif $lastlogin==4}
-			<td>{t}More than 12 months ago{/t}</td>
-		{elseif $lastlogin==6}
+			<td>{t}Between 1 and 2 years{/t}</td>
+		{elseif $lastlogin==5}
+			<td>{t}More than 2 years ago{/t}</td>
+		{elseif $lastlogin==7}
 			{if $license_actively_declined}
 				<td>{t}The user account has been disabled, because the user declined the <a href="articles.php?page=impressum#datalicense">data license</a>. Cache descriptions, log texts and pictures have been deleted.{/t}</td>
 			{elseif $license_passively_declined}

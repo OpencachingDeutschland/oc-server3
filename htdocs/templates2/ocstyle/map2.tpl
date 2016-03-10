@@ -1686,6 +1686,9 @@ function mapsearch_click()
 	var lat = null;
 	var lon = null;
 	var searchupper = sSearchText.toUpperCase();
+	{/literal}{if $opt.template.locale == 'DE'}
+		searchupper = searchupper.replace('O', 'E');
+	{/if}{literal}
 
 	// 1. (N|S|-)[ ]degrees[,][ ](E|W|-)[ ]degrees
 	var deg = "\\s*(\\d{1,3}|\\d{1,3}\\.\\d{1,})\\s?°?\\s*"

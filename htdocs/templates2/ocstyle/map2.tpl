@@ -117,6 +117,9 @@ var mhPictureTimer = null;
 var mnMapWidth = 770;
 var mnMapHeight = 600;
 
+var searchString = '';
+var searchResultCoord = null;
+
 // id of search.php result
 var msURLSearchPHP = 'search.php';
 var msURLMapPHP = 'map2.php';
@@ -639,6 +642,20 @@ function data_load()
 	}
 	bResetFilterHeading = bFilterChanged;
 	bFilterChanged = false;
+
+	if (searchResultCoord != null)
+	{
+		var infowindow = new google.maps.InfoWindow({content: searchString});
+		var marker = new google.maps.Marker({
+				map:moMap,
+				position: searchResultCoord,
+				icon: new google.maps.MarkerImage('resource2/ocstyle/images/map/coordinate-marker.png'),
+				title: searchString});
+		marker.addListener('click', function() { infowindow.open(moMap, marker); });
+
+		infowindow.open(moMap, marker);
+		searchResultCoord = null;
+	}
 
 	window.clearTimeout(moDataLoadTimer);
 	moDataLoadTimer = null;
@@ -1662,6 +1679,60 @@ function mapsearch_click()
 	if (msSearchHint==sSearchText || sSearchText=='')
 	{
 		alert('{t escape=js}Enter a search text, please!{/t}');
+		return;
+	}
+
+	// coordinate search
+	var lat = null;
+	var lon = null;
+	var searchupper = sSearchText.toUpperCase();
+
+	// 1. (N|S|-)[ ]degrees[,][ ](E|W|-)[ ]degrees
+	var deg = "\\s*(\\d{1,3}|\\d{1,3}\\.\\d{1,})\\s?°?\\s*"
+	var rex = "^\\s*([NS]?|-?)" + deg + "[,]?\\s*([WE]?|-?)" + deg + "\\s*$";
+	var result = searchupper.match(new RegExp(rex));
+	if (result)
+	{ //}  // hack for phpDesigner syntax hilite bug
+		lat = parseFloat(result[2]);
+		if (result[1] == 'S' || result[1] == '-') lat = -lat;
+		lon = parseFloat(result[4]);
+		if (result[3] == 'W' || result[3] == '-') lon = -lon;
+	}
+	else
+	{ //}
+	    // 2. (N|S)[ ]degrees[°][ ]nn[.nnn]['][ ](E|W)[ ]degrees[°][ ]nnn[.nnn][']
+		deg = "\\s*(\\d{1,3})\\s?°?\\s*";
+		var min = "(\\d{1,2}(\\.\\d{1,})?)\\s?['´`]?";
+		var rex_dm = "^\\s*([NS])" + deg+min + "\\s*([WE])" + deg+min + "\\s*$";
+	    var result = searchupper.match(new RegExp(rex_dm));
+		if (result)
+	    { //}
+			lat = parseInt(result[2]) + parseFloat(result[3] + result[4]) / 60;
+			if (result[1] == 'S') lat = -lat;
+			lon = parseInt(result[6]) + parseFloat(result[7] + result[8] ) / 60;
+			if (result[5] == 'W') lon = -lon;
+	    }
+	    else
+	    { //}
+		    // 3. (N|S)[ ]degrees[°][ ]nn[ ]['| ]nn['][ ](E|W)[ ]degrees[°][ ]nn[ ]['| ]nn['']
+			var minsec = "(\\d{1,2})\\s?['´` ]\\s*(\\d{1,2})\\s?['´`]?['´`]?";
+			var rex_dms = "^\\s*([NS])" + deg+minsec + "\\s*([WE])" + deg+minsec + "\\s*$";
+			var result = searchupper.match(new RegExp(rex_dms));
+			if (result)
+			{ //}
+			    lat = parseInt(result[2]) + parseInt(result[3]) / 60 + parseInt(result[4]) / 3600;
+			    if (result[1] == 'S') lat = -lat;
+			    lon = parseInt(result[6]) + parseInt(result[7]) / 60 + parseInt(result[8]) / 3600;
+			    if (result[5] == 'S') lon = -lon;
+			}
+	    }
+	}
+
+	if (lat != null && lon != null)
+	{
+		searchString = searchupper;
+		searchResultCoord = new google.maps.LatLng(lat, lon);
+		moMap.setCenter(searchResultCoord);
 		return;
 	}
 

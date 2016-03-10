@@ -47,11 +47,11 @@
 		{if $lastlogin==1}
 			<td>{t}Within the last month{/t}</td>
 		{elseif $lastlogin==2}
-			<td>{t}Between 1 and 6 months{/t}</td>
+			<td>{t}1 to 6 months ago{/t}</td>
 		{elseif $lastlogin==3}
-			<td>{t}Between 6 and 12 months{/t}</td>
+			<td>{t}6 to 12 months ago{/t}</td>
 		{elseif $lastlogin==4}
-			<td>{t}Between 1 and 2 years{/t}</td>
+			<td>{t}1 to 2 years ago{/t}</td>
 		{elseif $lastlogin==5}
 			<td>{t}More than 2 years ago{/t}</td>
 		{elseif $lastlogin==7}

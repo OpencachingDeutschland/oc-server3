@@ -218,6 +218,9 @@
 	$tpl->assign('aAttributesDisabled', $aAttributesDisabled);
 	$tpl->assign('maxAttributeId', $maxaid);
 
+	// filters
+	$tpl->assign('nongc', isset($nongc) && $nongc);
+
 	// options
 	$useroptions = new useroptions($login->userid);
 	$tpl->assign('opt_menumap',    $useroptions->getOptValue(USR_OPT_MAP_MENU));

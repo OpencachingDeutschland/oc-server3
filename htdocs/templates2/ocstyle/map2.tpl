@@ -2022,7 +2022,14 @@ function get_searchfilter_params(output, skipqueryid, zip)
 	sPostBody += document.getElementById('f_ignored').checked ? '&f_ignored=1' : '&f_ignored=0';
 	sPostBody += document.getElementById('f_disabled').checked ? '&f_disabled=1' : '&f_disabled=0';
 	sPostBody += document.getElementById('f_inactive').checked ? '&f_inactive=1' : '&f_inactive=0';
-	sPostBody += document.getElementById('f_otherPlatforms').checked ? '&f_otherPlatforms=1' : '&f_otherPlatforms=0';
+	{/literal}
+	{if $nongc}
+		var f_otherplatforms = true;
+	{else}
+		var f_otherplatforms = document.getElementById('f_otherPlatforms').checked;
+	{/if}
+	{literal}
+	sPostBody += f_otherplatforms ? '&f_otherPlatforms=1' : '&f_otherPlatforms=0';
 	sPostBody += document.getElementById('f_geokrets').checked ? '&f_geokrets=1' : '&f_geokrets=0';
 
 	/* rating options
@@ -2433,7 +2440,7 @@ function toggle_attribselection(bSaveCookies)
 							<label for="f_disabled">{t}disabled[pl]{/t}</label>
 						</td>
 					</tr>
-					<tr>
+					<tr {if $nongc}style='display:none'{/if}>
 						<td style="white-space:nowrap">
 							<input type="checkbox" id="f_otherPlatforms" name="f_otherPlatforms" value="1" onchange="filter_changed()" class="checkbox" />
 							<label for="f_otherPlatforms">{t}GC listings{/t}</label>

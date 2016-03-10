@@ -431,6 +431,7 @@
 	$opt['cron']['autoarchive']['run'] = false;
 	$opt['cron']['gcwp']['sources'] = array();
 	$opt['cron']['gcwp']['fulllist'] = '';
+	$opt['cron']['gcwp']['report'] = '';
 	$opt['cron']['replicate']['delete_hidden_caches']['url'] = '';
 
 	/* E-Mail settings

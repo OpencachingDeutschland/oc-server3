@@ -4,7 +4,8 @@
  *
  *  Unicode Reminder メモ
  *
- *  returns GC -> OC waypoint translation table, if available
+ *  returns GC -> OC waypoint translation table, if available,
+ *  or reports a GC waypoint to the team
  *
  *  file format: gcwp,ocwp,checked
  *  checked = 1 if the GC waypoint has been verified,
@@ -12,9 +13,26 @@
  *
  ***************************************************************************/
 
-	$opt['rootpath'] = '../';
-	require($opt['rootpath'] . 'lib2/web.inc.php');
+$opt['rootpath'] = '../';
+require($opt['rootpath'] . 'lib2/web.inc.php');
 
+if (isset($_REQUEST['report']))
+{
+	header('Content-type: text/plain');
+
+	if ($opt['cron']['gcwp']['report'] &&
+	    isset($_REQUEST['ocwp']) && isset($_REQUEST['gcwp']) && isset($_REQUEST['source']))
+	{
+		$ocwp = $_REQUEST['ocwp'];
+		$gcwp = $_REQUEST['gcwp'];
+		$source = $_REQUEST['source'];
+
+		echo @file_get_contents($opt['cron']['gcwp']['report'] .
+		     '?ocwp='.urlencode($ocwp).'&gcwp='.urlencode($gcwp).'&source='.urlencode($source));
+	}
+}
+else
+{
 	header('Content-type: application/x-gzip');
 	header('Content-Disposition: attachment; filename=gc2oc.gz');
 
@@ -52,4 +70,5 @@
 
 		echo $gzipped_data;
 	}
+}
 ?>

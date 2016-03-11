@@ -55,7 +55,7 @@ else
 	{
 		$gzipped_data = '';
 		$cachefile = '../cache2/gc2oc.gz';
-		if (!file_exists($cachefile) || time() - filemtime($cachefile) > 3600)
+		if (!file_exists($cachefile) || time() - filemtime($cachefile) > 3600 * 4)
 		{
 			$gc2oc = file_get_contents($opt['cron']['gcwp']['fulllist']);
 			if ($gc2oc)

@@ -20,12 +20,16 @@ if (isset($_REQUEST['report']))
 {
 	header('Content-type: text/plain');
 
+	$logfile = '../var/log/oc2gc.log';
+
 	if ($opt['cron']['gcwp']['report'] &&
 	    isset($_REQUEST['ocwp']) && isset($_REQUEST['gcwp']) && isset($_REQUEST['source']))
 	{
 		$ocwp = $_REQUEST['ocwp'];
 		$gcwp = $_REQUEST['gcwp'];
 		$source = $_REQUEST['source'];
+
+		file_put_contents($logfile, date('Y-m-d H:m:s') . " $ocwp $gcwp $source\n", FILE_APPEND);
 
 		echo @file_get_contents($opt['cron']['gcwp']['report'] .
 		     '?ocwp='.urlencode($ocwp).'&gcwp='.urlencode($gcwp).'&source='.urlencode($source));

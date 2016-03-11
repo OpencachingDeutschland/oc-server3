@@ -16,23 +16,35 @@
 $opt['rootpath'] = '../';
 require($opt['rootpath'] . 'lib2/web.inc.php');
 
-if (isset($_REQUEST['report']))
+if (isset($_REQUEST['report']) && $_REQUEST['report'])
 {
 	header('Content-type: text/plain');
 
-	$logfile = '../var/log/oc2gc.log';
-
-	if ($opt['cron']['gcwp']['report'] &&
-	    isset($_REQUEST['ocwp']) && isset($_REQUEST['gcwp']) && isset($_REQUEST['source']))
+	if ($opt['cron']['gcwp']['report'])
 	{
-		$ocwp = $_REQUEST['ocwp'];
-		$gcwp = $_REQUEST['gcwp'];
-		$source = $_REQUEST['source'];
+		if (isset($_REQUEST['ocwp']) && isset($_REQUEST['gcwp']) && isset($_REQUEST['source']))
+		{
+			$ocwp = trim($_REQUEST['ocwp']);
+			$gcwp = trim($_REQUEST['gcwp']);
+			$source = trim($_REQUEST['source']);
 
-		file_put_contents($logfile, date('Y-m-d H:m:s') . " $ocwp $gcwp $source\n", FILE_APPEND);
-
-		echo @file_get_contents($opt['cron']['gcwp']['report'] .
-		     '?ocwp='.urlencode($ocwp).'&gcwp='.urlencode($gcwp).'&source='.urlencode($source));
+			if (!preg_match("/^OC[0-9A-F]{4,6}$/", $ocwp))
+				echo "error: invalid ocwp\n";
+			else if (!sql_value("SELECT 1 FROM `caches` WHERE `wp_oc`='&1'", 0, $ocwp))
+				echo "error: unknown ocwp\n";
+			else if (!preg_match("/^GC[0-9A-HJ-NPQRTVWXYZ]{3,7}$/", $gcwp))
+				echo "error: invalid gcwp\n";
+			else {
+				sql("
+					INSERT INTO `waypoint_reports`
+					(`date_reported`, `wp_oc`, `wp_external`, `source`)
+					VALUES (NOW(), '&1', '&2', '&3')",
+					$ocwp, $gcwp, $source);
+				echo "ok";
+			}
+		}
+		else
+			echo "error: missing parameter(s)";
 	}
 }
 else

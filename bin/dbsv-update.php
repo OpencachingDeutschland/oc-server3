@@ -782,6 +782,22 @@
 			sql("ALTER TABLE `caches` ADD COLUMN `protect_old_coords` tinyint(1) NOT NULL default '0' AFTER `show_cachelists`");
 	}
 
+	function dbv_150()   // add history of reported waypoints
+	{
+		if (!sql_table_exists('waypoint_reports'))
+			sql("
+				CREATE TABLE `waypoint_reports` (
+					`report_id` int(10) unsigned NOT NULL auto_increment,
+					`date_reported` datetime NOT NULL,
+					`wp_oc` varchar(7) NOT NULL,
+					`wp_external` varchar(8) NOT NULL,
+					`source` varchar(64) NOT NULL,
+					`gcwp_processed` tinyint(1) NOT NULL default '0',
+					PRIMARY KEY  (`report_id`),
+					KEY `gcwp_processed` (`gcwp_processed`,`date_reported`)
+				) ENGINE=MyISAM");
+	}
+
 	// When adding new mutations, take care that they behave well if run multiple
 	// times. This improves robustness of database versioning.
 	//

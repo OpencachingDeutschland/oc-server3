@@ -716,7 +716,7 @@ INSERT INTO `nodes` (`id`, `name`, `url`, `waypoint_prefix`) VALUES ('11', 'Open
 INSERT INTO `nodes` (`id`, `name`, `url`, `waypoint_prefix`) VALUES ('12', 'Opencaching Russia', 'www.opencaching.su', 'O?');
 INSERT INTO `nodes` (`id`, `name`, `url`, `waypoint_prefix`) VALUES ('13', 'Opencaching Garmin', 'www.opencaching.com', 'OX');
 INSERT INTO `nodes` (`id`, `name`, `url`, `waypoint_prefix`) VALUES ('14', 'Opencaching Benelux', 'www.opencaching.nl', 'OB');
-INSERT INTO `nodes` (`id`, `name`, `url`, `waypoint_prefix`) VALUES ('16', 'Opencaching Romania', 'www.opencaching.nl', 'OR');
+INSERT INTO `nodes` (`id`, `name`, `url`, `waypoint_prefix`) VALUES ('16', 'Opencaching Romania', 'www.opencaching.ro', 'OR');
 
 -- Table object_types
 SET NAMES 'utf8';

@@ -452,8 +452,12 @@ class cache
 		}
 		sql_free_result($rsLogs);
 
-		if ($coord_changes) {
-			$coord = new coordinate($coords[count($coords)-1]['latitude'], $coords[count($coords)-1]['longitude']); 
+		if ($coord_changes && count($logs)) {
+			$original = count($coords)-1;
+			$lastlogdate = $logs[count($logs)-1]['date'];
+			while ($original > 0 && $coords[$original-1]['date'] < $lastlogdate)
+				--$original;
+			$coord = new coordinate($coords[$original]['latitude'], $coords[$original]['longitude']);
 			$logs[] = array('newcoord' => $coord->getDecimalMinutes($protect_old_coords), 'movedby' => false);
 			}
 

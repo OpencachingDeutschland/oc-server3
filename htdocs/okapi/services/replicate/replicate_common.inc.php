@@ -128,7 +128,7 @@ class ReplicateCommon
             # On OCDE branch, deleted log entries are MOVED to another table.
             # So the above queries won't detect them. We need to run one more.
             # We will assume there are not so many of them and we don't have to
-            # split them in groups as we did above.
+            # split them in groups of 10000 as we did above.
 
             $DELETED_uuids = Db::select_column("
                 select uuid

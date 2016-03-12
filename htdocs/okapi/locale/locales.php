@@ -10,6 +10,7 @@ class Locales
         'nl' => array('lang' => 'nl', 'locale' => 'nl_NL.utf8', 'name' => 'Dutch'),
         'de' => array('lang' => 'de', 'locale' => 'de_DE.utf8', 'name' => 'German'),
         'it' => array('lang' => 'it', 'locale' => 'it_IT.utf8', 'name' => 'Italian'),
+        'ro' => array('lang' => 'ro', 'locale' => 'ro_RO.utf8', 'name' => 'Romanian'),
     );
 
     /**

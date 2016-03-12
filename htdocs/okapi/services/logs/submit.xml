@@ -97,14 +97,43 @@
         set on him by the OC site. If criteria are not met, the request will
         end with user error (HTTP 200, success=false).</p>
     </opt>
-    <opt name='needs_maintenance' default='false'>
-        <p>Set to <b>true</b> if the user thinks that the cache needs some special attension
-        of its owner. Users should describe the reason for maintenance in their comments.</p>
-        <p>Note: Depending on OC installation and user's log entry type, OKAPI may actually
-        publish two separate log entries when you check this flag (one of them with empty
-        comment). Even then, you will still receive only one UUID reference (pointing to
-        only one of those entries). Moreover, on some OC servers this flag might be
-        <b>completely ignored</b> (not all OC servers support this feature).</p>
+    <opt name='needs_maintenance' default='false' class='deprecated'>
+        <p>Deprecated (<a href='https://github.com/opencaching/okapi/issues/373'>why?</a>).
+        Use <b>needs_maintenance2</b> instead.</p>
+
+        <p>Passing <b>true</b> here will have exactly the same meaning as passing
+        <b>true</b> to <b>needs_maintenance2</b>. Passing <b>false</b> however has a
+        different meaning - it's the same as passing <b>null</b> (not <b>false</b>!)
+        to <b>needs_maintenance2</b>. Keep this in mind when upgrading your application
+        to <b>needs_maintenance2</b>!</p>
+    </opt>
+    <opt name='needs_maintenance2' default='null'>
+        <p>Valid options include:</p>
+
+        <ul>
+            <li>
+                <p><b>null</b> - indicates that the user doesn't want to include any report
+                on the current condition of the geocache.</p>
+            </li>
+            <li>
+                <p><b>true</b> - use this to indicate that your user thinks that the cache
+                needs some special attention of its owner. Such users should also describe
+                why it needs maintenance (in their comments).</p>
+
+                <p>Note: Depending on OC installation and user's log entry type, OKAPI may
+                actually publish two separate log entries when you set this option to
+                <b>true</b> (one of them with empty comment). Even then, you will still receive
+                only one UUID reference (pointing to only one of those entries).</p>
+            </li>
+            <li>
+                <p><b>false</b> - use this to indicate that your user thinks that the cache's
+                condition is fine.</p>
+
+                <p>Note: The <b>false</b> option is not evaluated by all OC nodes. Some will
+                just ignore it.</p>
+            </li>
+        </ul>
+
         <p>Note: Currently, this is not allowed for Event Caches (you will get a HTTP 200
         "user friendly" response).</p>
     </opt>

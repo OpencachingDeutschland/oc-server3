@@ -25,7 +25,6 @@ function get_okapi_settings()
 		# Settings which ARE NOT present in settings.inc.php:
 
 		'OC_BRANCH' => 'oc.de',  # Tell OKAPI to work in "OCDE mode".
-		'SUPPORTS_LOGTYPE_NEEDS_MAINTENANCE' => false,  # OCDE doesn't support it, see [2] for more info.
 		
 		# Settings which ARE present in settings.inc.php:
 		

@@ -140,25 +140,52 @@ class WebService
             }
         }
 
+        # We'll parse both 'needs_maintenance' and 'needs_maintenance2' here, but
+        # we'll use only the $needs_maintenance2 variable afterwards.
+
         $needs_maintenance = $request->get_parameter('needs_maintenance');
-        if (!$needs_maintenance) { $needs_maintenance = 'false'; }
-        if (!in_array($needs_maintenance, array('true', 'false'))) {
-            throw new InvalidParam(
-                'needs_maintenance', "Unknown option: '$needs_maintenance'."
+        $needs_maintenance2 = $request->get_parameter('needs_maintenance2');
+        if ($needs_maintenance && $needs_maintenance2) {
+            throw new BadRequest(
+                "You cannot use both of these parameters at the same time: ".
+                "needs_maintenance and needs_maintenance2."
             );
         }
-        $needs_maintenance = ($needs_maintenance == 'true');
+        if (!$needs_maintenance2) { $needs_maintenance2 = 'null'; }
+
+        # Parse $needs_maintenance and get rid of it.
+
+        if ($needs_maintenance) {
+            if (!in_array($needs_maintenance, array('true', 'false'))) {
+                throw new InvalidParam(
+                    'needs_maintenance', "Unknown option: '$needs_maintenance'."
+                );
+            }
+            if ($needs_maintenance == 'true') { $needs_maintenance2 = 'true'; }
+            else { $needs_maintenance2 = 'null'; }
+        }
+        unset($needs_maintenance);
+
+        # At this point, $needs_maintenance2 is set exactly as the user intended
+        # it to be set.
+
+        if (!in_array($needs_maintenance2, array('null', 'true', 'false'))) {
+            throw new InvalidParam(
+                'needs_maintenance2', "Unknown option: '$needs_maintenance2'."
+            );
+        }
+
         if (
-            $needs_maintenance
-            && (!Settings::get('SUPPORTS_LOGTYPE_NEEDS_MAINTENANCE'))
+            $needs_maintenance2 == 'false'
+            && Settings::get('OC_BRANCH') == 'oc.pl'
         ) {
             # If not supported, just ignore it.
 
             self::$success_message .= " ".sprintf(_(
-                "However, your \"needs maintenance\" flag was ignored, because ".
-                "%s does not support this feature."
+                "However, your \"does not need maintenance\" flag was ignored, because ".
+                "%s does not yet support this feature."
             ), Okapi::get_normalized_site_name());
-            $needs_maintenance = false;
+            $needs_maintenance2 = 'null';
         }
 
         # Check if cache exists and retrieve cache internal ID (this will throw
@@ -467,10 +494,10 @@ class WebService
             }
         }
 
-        # If user checked the "needs_maintenance" flag, we will shuffle things
+        # If user checked the "needs_maintenance(2)" flag for OCPL, we will shuffle things
         # a little...
 
-        if ($needs_maintenance)
+        if (Settings::get('OC_BRANCH') == 'oc.pl' && $needs_maintenance2 == 'true')
         {
             # If we're here, then we also know that the "Needs maintenance" log
             # type is supported by this OC site. However, it's a separate log
@@ -533,19 +560,24 @@ class WebService
 
         $log_uuid = self::insert_log_row(
             $request->consumer->key, $cache['internal_id'], $user['internal_id'],
-            $logtype, $when, $formatted_comment, $value_for_text_html_field
+            $logtype, $when, $formatted_comment, $value_for_text_html_field,
+            $needs_maintenance2
         );
         self::increment_cache_stats($cache['internal_id'], $when, $logtype);
         self::increment_user_stats($user['internal_id'], $logtype);
         if ($second_logtype != null)
         {
-            # Reminder: This will never be called while SUPPORTS_LOGTYPE_NEEDS_MAINTENANCE
-            # is off.
+            # Reminder: This will only be called for OCPL branch.
 
             self::insert_log_row(
                 $request->consumer->key, $cache['internal_id'], $user['internal_id'],
                 $second_logtype, $when + 1, $second_formatted_comment,
-                $value_for_text_html_field
+                $value_for_text_html_field, 'null'
+
+                # Yes, the second log is the "needs maintenance" one. But this code
+                # is only called for OCPL, while the last parameter of insert_log_row()
+                # is only evaulated for OCDE! The 'null' is a dummy here, and the
+                # "needs maintenance" information is in $second_logtype.
             );
             self::increment_cache_stats($cache['internal_id'], $when + 1, $second_logtype);
             self::increment_user_stats($user['internal_id'], $second_logtype);
@@ -754,14 +786,29 @@ class WebService
 
     private static function insert_log_row(
         $consumer_key, $cache_internal_id, $user_internal_id, $logtype, $when,
-        $formatted_comment, $text_html
+        $formatted_comment, $text_html, $needs_maintenance2
     )
     {
+        if (Settings::get('OC_BRANCH') == 'oc.de') {
+            $needs_maintenance_field_SQL = ', needs_maintenance';
+            if ($needs_maintenance2 == 'true') {
+                $needs_maintenance_SQL = ',2';
+            } else if ($needs_maintenance2 == 'false') {
+                $needs_maintenance_SQL = ',1';
+            } else {  // 'null'
+                $needs_maintenance_SQL = ',0';
+            }
+        } else {
+            $needs_maintenance_field_SQL = '';
+            $needs_maintenance_SQL = '';
+        }
+
         $log_uuid = Okapi::create_uuid();
+
         Db::execute("
             insert into cache_logs (
                 uuid, cache_id, user_id, type, date, text, text_html,
-                last_modified, date_created, node
+                last_modified, date_created, node".$needs_maintenance_field_SQL."
             ) values (
                 '".Db::escape_string($log_uuid)."',
                 '".Db::escape_string($cache_internal_id)."',
@@ -773,6 +820,7 @@ class WebService
                 now(),
                 now(),
                 '".Db::escape_string(Settings::get('OC_NODE_ID'))."'
+                ".$needs_maintenance_SQL."
             );
         ");
         $log_internal_id = Db::last_insert_id();

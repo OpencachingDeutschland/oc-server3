@@ -47,25 +47,43 @@
                 </ul>
 
                 <p>Types which indicate a change of state of the geocache or confirm the
-                current state (used only by some Opencaching installations):</p>
+                state at the given time (used only by some Opencaching installations):</p>
 
                 <ul>
-                    <li>"Temporarily unavailable" - probably the cache cannot be found,
-                        but it may be repaired (then, "Ready to search" will be submitted).</li>
-                    <li>"Ready to search" - the cache can be found again.</li>
-                    <li>"Archived" - the cache cannot be found and probably won't be
-                        repaired.</li>
-                    <li>"Locked" - the cache has been archived and can no longer be logged.</li>
+                    <li>
+                        "Temporarily unavailable" - log of this type indicates that the status
+                        of the cache was changed to "Temporarily unavailable" at that time, or it
+                        was confirmed as "Temporarily unavailable". Most probably the cache was
+                        not available to be found at that time, but it was expected to be
+                        repaired soon (and then, "Ready to search" log type would be submitted).
+                    </li>
+                    <li>
+                        "Ready to search" - log of this type indicates that the status of this
+                        cache was changed back to "Available", or it was confirmed as "Available".
+                        After some period of not being available the cache became ready to be found
+                        again.
+                    </li>
+                    <li>
+                        "Archived" - log of this type indicates that the status of this cache was
+                        changed to "Archived" at this point in time. This usually means that the
+                        cache could not be found anymore at this time, and it was not expected to
+                        be repaired any time soon.
+                    </li>
+                    <li>
+                        "Locked" - the status of this cache was changed to "Locked" (similar to
+                        "Archived", but no more "Found it" log entries are allowed on "Locked"
+                        caches).
+                    </li>
                 </ul>
 
                 <p>Other types (used only by some Opencaching installations):</p>
 
                 <ul>
-                    <li>"Needs maintenance" - a user states that the cache is
+                    <li>"Needs maintenance" - the user stated that the cache was
                         in need of maintenance.</li>
-                    <li>"Maintenance performed" - the cache owner states that he
-                        had performed the maintenance.</li>
-                    <li>"Moved" - the cache has been moved to a different location.</li>
+                    <li>"Maintenance performed" - the cache owner stated that he
+                        has performed the maintenance.</li>
+                    <li>"Moved" - the cache was moved to a different location.</li>
                     <li>"OC Team comment" - a comment made by the official OC Team
                         member.</li>
                     <li><i>(to be continued)</i> - this list MAY expand in time!
@@ -74,15 +92,40 @@
                 </ul>
             </li>
             <li>
-                <p><b>oc_team_entry</b> - <b>true</b> if the log entry has been made by an
+                <p><b>oc_team_entry</b> - <b>true</b> if the log entry was made by an
                 official OC team member and marked as administrative log; <b>false</b> if it has
                 not been marked.</p>
                 <p>Note: <b>false</b> does NOT mean that it is no administrative log,
                 because this flag can be missing for (mostly old) admin logs.</p>
             </li>
             <li>
-                <p><b>was_recommended</b> - <b>true</b>, if the author included his recommendation
+                <p><b>was_recommended</b> - <b>true</b> if the author included his recommendation
                 in this log entry,</p>
+            </li>
+            <li>
+                <p><b>needs_maintenance2</b> - log entry authors may include an
+                additional report on the condition of the geocache at the given date
+                (indicate if the cache needed maintenance).</p>
+
+                <p>You could say that the values of this field reflect the values of the
+                <b>needs_maintenance2</b> parameter used to submit the log entry (however,
+                the log itself might have been submitted through other means). Possible
+                values are:</p>
+
+                <ul>
+                    <li>
+                        <b>true</b> - in the author's opinion, the geocache was in poor
+                        condition and needed maintenance,
+                    </li>
+                    <li>
+                        <b>false</b> - in the author's opinion, the geocache was in good
+                        or acceptable condition and did not need maintenance (anymore),
+                    </li>
+                    <li>
+                        <b>null</b> - the author did not include any report on the
+                        condition of the geocache.
+                    </li>
+                </ul>
             </li>
             <li><b>comment</b> - <a href='%OKAPI:docurl:html%'>HTML string</a>, text entered
                 with the log entry,</li>

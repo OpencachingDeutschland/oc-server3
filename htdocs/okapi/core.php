@@ -998,8 +998,8 @@ class Okapi
     public static $server;
 
     /* These two get replaced in automatically deployed packages. */
-    public static $version_number = 1155;
-    public static $git_revision = '7991fedcc6699808a257be70348ad16a37641896';
+    public static $version_number = 1177;
+    public static $git_revision = '28f4cefdf8133cec1df418836a157104597d645d';
 
     private static $okapi_vars = null;
 
@@ -1835,8 +1835,7 @@ class Okapi
         if ($name == 'Comment') return 3;
         if ($name == 'Attended') return 7;
         if ($name == 'Will attend') return 8;
-        if (($name == 'Needs maintenance') && (Settings::get('SUPPORTS_LOGTYPE_NEEDS_MAINTENANCE')))
-            return 5;
+        if (($name == 'Needs maintenance') && (Settings::get('OC_BRANCH') == 'oc.pl')) return 5;
         throw new Exception("logtype2id called with invalid log type argument: $name");
     }
 

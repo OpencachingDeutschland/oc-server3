@@ -115,9 +115,18 @@
                 <p><b>status</b> - cache status. Valid cache status codes currently include:</p>
                 <ul>
                     <li><b>Available</b> - Cache is available and ready for search,</li>
-                    <li><b>Temporarily unavailable</b> - Cache is probably unavailable (i.e. in need of maintenance)</li>
+                    <li><b>Temporarily unavailable</b> - Cache is unavailable
+                    (probably cannot be found) but may be restored,</li>
                     <li><b>Archived</b> - Cache is permanently unavailable (moved to the archives).</li>
                 </ul>
+            </li>
+            <li>
+                <p><b>needs_maintenance</b> - boolean, <b>true</b> if the geocache is
+                known to be in poor condition, e.g. damaged. Usually there will be further
+                explanations in the log entries.</p>
+
+                <p>Please note that only some OC sites provide this information. Other sites
+                will always return <b>false</b> here.</p>
             </li>
             <li><b>url</b> - URL of the cache's web page,</li>
             <li>

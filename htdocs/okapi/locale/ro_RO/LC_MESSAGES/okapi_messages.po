@@ -1,0 +1,432 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: OKAPI\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-03-10 19:07+0200\n"
+"PO-Revision-Date: 2016-03-10 19:08+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ro_RO\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop\n"
+"X-Poedit-Basepath: ../../../..\n"
+"Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?"
+"2:1));\n"
+"X-Generator: Poedit 1.8.7\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: .git\n"
+
+#: okapi/services/caches/formatters/gpx.php:389
+msgid ""
+"<b>Geocache coordinates have been changed.</b> They have been replaced with "
+"your own custom coordinates which you have provided for this geocache."
+msgstr ""
+"<b>Coordonatele geocutiei au fost modificate.</b> Acestea au fost înlocuite "
+"cu coordonate alese de tine pentru această geocutie."
+
+#: okapi/services/caches/formatters/gpx.php:395
+msgid ""
+"<b>Geocache coordinates have been changed.</b> Currently they point to one "
+"of the alternate waypoints originally described as:"
+msgstr ""
+"<b>Coordonatele acestei geocutii au fost modificate.</b> Acestea indică unul "
+"din punctele suplimentare descris ca:"
+
+#: okapi/services/caches/formatters/gpx.php:408
+msgid "Original geocache location"
+msgstr "Coordonatele iniţiale ale geocutiei"
+
+#: okapi/services/caches/formatters/gpx.php:410
+#, php-format
+msgid "Original (owner-supplied) location of the %s geocache"
+msgstr ""
+"Coordonatele originale (aşa cum au fost publicate de proprietar) ale "
+"geocutiei %s"
+
+#: okapi/services/caches/formatters/gpxfile.tpl.php:38
+#: okapi/services/caches/formatters/gpxfile.tpl.php:73
+msgid "hidden by"
+msgstr "ascunsă de"
+
+#: okapi/services/caches/formatters/gpxfile.tpl.php:75
+#, php-format
+msgid "%d recommendation"
+msgid_plural "%d recommendations"
+msgstr[0] "o recomandare"
+msgstr[1] "%d recomandări"
+msgstr[2] "%d recomandări"
+
+#: okapi/services/caches/formatters/gpxfile.tpl.php:76
+#, php-format
+msgid "found %d time"
+msgid_plural "found %d times"
+msgstr[0] "găsită o singură dată"
+msgstr[1] "găsită de %d ori"
+msgstr[2] "găsită de %d ori"
+
+# Generic term for trackable items (like geocoins and travelbugs).
+# and geokrets?
+#: okapi/services/caches/formatters/gpxfile.tpl.php:79
+#, php-format
+msgid "%d trackable"
+msgid_plural "%d trackables"
+msgstr[0] "un obiect călător"
+msgstr[1] "%d obiecte călătoare"
+msgstr[2] "%d obiecte călătoare"
+
+#: okapi/services/caches/formatters/gpxfile.tpl.php:83
+msgid "Personal notes"
+msgstr "Note personale"
+
+#: okapi/services/caches/formatters/gpxfile.tpl.php:87
+msgid "Attributes"
+msgstr "Atribute"
+
+#: okapi/services/caches/formatters/gpxfile.tpl.php:91
+msgid "Trackables"
+msgstr "Obiecte călătoare"
+
+#: okapi/services/caches/formatters/gpxfile.tpl.php:101
+#: okapi/services/caches/formatters/gpxfile.tpl.php:117
+msgid "Images"
+msgstr "Imagini"
+
+#: okapi/services/caches/formatters/gpxfile.tpl.php:124
+msgid "Spoilers"
+msgstr "Imagini (indicii?)"
+
+#: okapi/services/caches/formatters/gpxfile.tpl.php:133
+msgid "Image descriptions"
+msgstr "Descriere imagine"
+
+#: okapi/services/caches/formatters/gpxfile.tpl.php:141
+msgid "The cache probably is located in the following protection areas:"
+msgstr "Geocutia probabil că se află undeva în următoarele arii protejate:"
+
+#: okapi/services/caches/geocaches.php:535
+msgid "Parts of this geocache listing may be outdated."
+msgstr ""
+"O parte din informaţiile despre această geocutie s-ar putea să fie vechi şi "
+"neactualizate."
+
+#: okapi/services/caches/geocaches.php:536
+msgid "See the log entries for more information."
+msgstr "Vezi însemnările pentru mai multe informaţii."
+
+# For additional waypoints. As in "Stage 1: Parking".
+#: okapi/services/caches/geocaches.php:1015
+msgid "Stage"
+msgstr "Etapă"
+
+#: okapi/services/caches/geocaches.php:1059
+msgid "User location"
+msgstr "Poziţia utilizatorului"
+
+#: okapi/services/caches/geocaches.php:1062
+#, php-format
+msgid "Your own custom coordinates for the %s geocache"
+msgstr "Coordonatele modificate de tine pentru geocutia %s"
+
+# Is this the attribute - Nature?
+#: okapi/services/caches/geocaches.php:1222
+msgid "National Park / Landscape"
+msgstr "Rezervaţie naturală"
+
+#: okapi/services/caches/geocaches.php:1396
+#, php-format
+msgid ""
+"This <a href='%s'>geocache</a> description comes from the <a href='%s'>%s</"
+"a> site."
+msgstr ""
+"Descrierea <a href='%s'>geocutiei</a> provine de pe site-ul <a href='%s'>%s</"
+"a>."
+
+# as of %s - what is this string replaced with?
+# I assumed a date or year so far.
+#: okapi/services/caches/geocaches.php:1408
+#, php-format
+msgid ""
+"&copy; <a href='%s'>%s</a>, <a href='%s'>%s</a>, <a href='http://"
+"creativecommons.org/licenses/by-nc-nd/3.0/de/deed.en'>CC-BY-NC-ND</a>, as of "
+"%s; all log entries &copy; their authors"
+msgstr ""
+"&copy; <a href='%s'>%s</a>, <a href='%s'>%s</a>, <a href='http://"
+"creativecommons.org/licenses/by-nc-nd/3.0/de/deed.en'>CC-BY-NC-ND</a>, din "
+"%s; toate însemnările &copy; autorii acestora"
+
+#: okapi/services/caches/geocaches.php:1419
+#, php-format
+msgid ""
+"&copy; <a href='%s'>%s</a>, <a href='%s'>%s</a>, <a href='http://"
+"creativecommons.org/licenses/by-nc-nd/3.0/de/deed.en'>CC-BY-NC-ND</a>; all "
+"log entries &copy; their authors"
+msgstr ""
+"&copy; <a href='%s'>%s</a>, <a href='%s'>%s</a>, <a href='http://"
+"creativecommons.org/licenses/by-nc-nd/3.0/de/deed.en'>CC-BY-NC-ND</a>; toate "
+"însemnările &copy; autorii acestora"
+
+#: okapi/services/logs/submit.php:75
+msgid ""
+"You are trying to publish a log entry with a date in future. Cache log "
+"entries are allowed to be published in the past, but NOT in the future."
+msgstr ""
+"Ai încercat să postezi o însemnare datată în viitor. Însemnările se pot data "
+"în trecut, dar în viitor NU este permis."
+
+#: okapi/services/logs/submit.php:111
+#, php-format
+msgid ""
+"However, your cache rating was ignored, because %s does not have a rating "
+"system."
+msgstr "Votul tău a fost ignorat pentru ca %s nu are suport pentru voturi."
+
+#: okapi/services/logs/submit.php:136
+#, php-format
+msgid ""
+"However, your cache recommendation was ignored, because %s does not allow "
+"recommending event caches."
+msgstr ""
+"Recomandarea ta a fost ignoratăpentru ca %s nu are suport pentru recomandări."
+
+#: okapi/services/logs/submit.php:158
+#, php-format
+msgid ""
+"However, your \"needs maintenance\" flag was ignored, because %s does not "
+"support this feature."
+msgstr ""
+"Indicatorul \"necesită întreţinere\" a fost ignorat pentru ca %s nu are "
+"suport pentru acest indicator."
+
+# Missing "you can attend it"
+#: okapi/services/logs/submit.php:188
+msgid ""
+"This cache is an Event cache. You cannot \"Find\" it (but you can attend it, "
+"or comment on it)!"
+msgstr ""
+"Această geocutie este un eveniment. Nu poate fi \"găsită\" (dar poţi anunţa "
+"că ai participat sau să scrii o notă)!"
+
+#: okapi/services/logs/submit.php:197
+msgid ""
+"This cache is NOT an Event cache. You cannot \"Attend\" it (but you can find "
+"it, or comment on it)!"
+msgstr ""
+"Această geocutie NU este un eveniment. Nu poţi \"participa\" (dar poţi să o "
+"găseşti sau să scrii o notă)!"
+
+# comment here means log text?
+#: okapi/services/logs/submit.php:207
+msgid "Your have to supply some text for your comment."
+msgstr "Trebuie să scrii ceva atunci când postezi o însemnare."
+
+#: okapi/services/logs/submit.php:223
+msgid "This cache requires a password. You didn't provide one!"
+msgstr "Această geocutie necesită o parolă. Nu ai furnizat nici o parolă!"
+
+#: okapi/services/logs/submit.php:227
+msgid "Invalid password!"
+msgstr "Parolă incorectă!"
+
+# This error will be shown to the user when he tries to submit a log entry which is EXACTLY the same as one he had submitted before.
+#: okapi/services/logs/submit.php:372
+msgid "You have already submitted a log entry with exactly the same contents."
+msgstr "Deja ai trimis o însemnare cu exact acelaşi conţinut."
+
+#: okapi/services/logs/submit.php:399
+msgid ""
+"You have already submitted a \"Found it\" log entry once. Now you may submit "
+"\"Comments\" only!"
+msgstr ""
+"Deja ai trimis odată o însemnare \"Am găsit\". De atunci încolo poţi doar să "
+"scrii însemnări de tipul \"Scrie o notă\"!"
+
+#: okapi/services/logs/submit.php:405
+msgid "You are the owner of this cache. You may submit \"Comments\" only!"
+msgstr ""
+"Eşti proprietarul acestei geocutii. Poţi doar să scrii însemnări de tipul "
+"\"Scrie o notă\"!"
+
+#: okapi/services/logs/submit.php:427
+msgid "You have already rated this cache once. Your rating cannot be changed."
+msgstr "Deja ai votat aceasta geocutie. Votul dat nu poate fi schimbat."
+
+#: okapi/services/logs/submit.php:448
+msgid "You have already recommended this cache once."
+msgstr "Deja ai recomandat această geocutie."
+
+#: okapi/services/logs/submit.php:464
+msgid "You don't have any recommendations to give. Find more caches first!"
+msgstr ""
+"Nu ai dreptul să dai recomandări în acest moment. Mai întâi trebuie să mai "
+"găseşti nişte geocutii!"
+
+#: okapi/services/logs/submit.php:515
+msgid "Event caches cannot \"need maintenance\"."
+msgstr ""
+"Geocutiile de tip eveniment nu pot fi marcate ca \"necesită întreţinere\""
+
+#: okapi/services/logs/submit.php:658
+msgid "Your cache log entry was posted successfully."
+msgstr "însemnarea ta a fost publicată."
+
+#: okapi/views/apps/authorize.tpl.php:5
+msgid "Authorization Form"
+msgstr "Formular de autorizare"
+
+#: okapi/views/apps/authorize.tpl.php:46
+msgid "Expired request"
+msgstr "Cerere expirată"
+
+#: okapi/views/apps/authorize.tpl.php:47
+msgid "Unfortunately, the request has expired. Please try again."
+msgstr "Din păcate cererea a expirat. Te rog încearcă din nou."
+
+#: okapi/views/apps/authorize.tpl.php:49
+msgid "External application is requesting access..."
+msgstr "O aplicaţie externă cere acces..."
+
+#: okapi/views/apps/authorize.tpl.php:50
+#, php-format
+msgid ""
+"<b>%s</b> wants to access your <b>%s</b> account. Do you agree to grant "
+"access to this application?"
+msgstr ""
+"<b>%s</b> solicită acces la contul tău: <b>%s</b>. Eşti de acord să permiţi "
+"accesul acestei aplicaţii?"
+
+#: okapi/views/apps/authorize.tpl.php:53
+msgid "I agree"
+msgstr "Sunt de acord"
+
+#: okapi/views/apps/authorize.tpl.php:54
+msgid "Decline"
+msgstr "Nu sunt de acord"
+
+# This should begin with "\n", but you may ignore the rest of \n characters.
+# This message is shown to the user when external application is trying to get user's permission to access his account.
+# Sample: http://i.imgur.com/ZCJNT.png
+#: okapi/views/apps/authorize.tpl.php:56
+#, php-format
+msgid ""
+"\n"
+"                    <p>Once permission is granted it is valid until its "
+"withdrawal on\n"
+"                    the <a href='%s'>applications management</a> page.</p>\n"
+"                    <p>The application will access your acount via <a "
+"href='%s'>the OKAPI Framework</a>.\n"
+"                    If you allow this request application will be able to "
+"access all methods delivered\n"
+"                    by the OKAPI Framework, i.e. post log entries on "
+"geocaches in your name.\n"
+"                    You can revoke this permission at any moment.</p>\n"
+"                "
+msgstr ""
+"\n"
+"                    <p>Odată ce a fost acordat accesul unei aplicaţii, "
+"acesta este \n"
+"                    valabil până la revocare din pagina <a "
+"href='%s'>gestiune aplicaţii</a>.</p>\n"
+"                    <p>Aplicaţia îţi va accesa contul prin <a "
+"href='%s'>Interfaţa OKAPI</a>.\n"
+"                    Dacă permiţi accesul, aplicaţia va putea utiliza toate "
+"funcţiile puse la dispoziţie\n"
+"                    de Interfaţa OKAPI, de exemplu să posteze însemnări în "
+"numele tău.\n"
+"                    Poţi revoca această permisiune oricând.</p>\n"
+"                "
+
+#: okapi/views/apps/authorized.tpl.php:5
+msgid "Authorization Succeeded"
+msgstr "Autorizarea s-a efectuat cu succes"
+
+#: okapi/views/apps/authorized.tpl.php:28
+msgid "Access successfully granted"
+msgstr "Acces permis"
+
+# This MIGHT be shown AFTER user grants external application permission to access his account.
+#: okapi/views/apps/authorized.tpl.php:29
+#, php-format
+msgid ""
+"\n"
+"                <p><b>You've just granted %s application access to your %s "
+"account.</b>\n"
+"                To complete the operation, go back to %s and enter the "
+"following PIN code:</p>\n"
+"            "
+msgstr ""
+"\n"
+"                <p><b>Tocmai ai permis acces aplicaţiei %s la contul tău: %s."
+"</b>\n"
+"                Pentru a finaliza operaţiunea, mergi înapoi la %s şi introdu "
+"următorul\n"
+"                cod PIN:</p>\n"
+"            "
+
+#: okapi/views/apps/index.tpl.php:5
+msgid "My Apps"
+msgstr "Aplicaţiile mele"
+
+#: okapi/views/apps/index.tpl.php:29
+msgid "Your external applications"
+msgstr "Aplicaţiile tale externe"
+
+# This will be shown when user visits /okapi/apps page.
+# To correct "abbility" in english
+#: okapi/views/apps/index.tpl.php:31
+#, php-format
+msgid ""
+"\n"
+"                    <p>This is the list of applications which you granted "
+"access to your <b>%s</b> account.\n"
+"                    This page gives you the abbility to revoke all "
+"previously granted privileges.\n"
+"                    Once you click \"remove\" the application will no longer "
+"be able to perform any\n"
+"                    actions on your behalf.</p>\n"
+"                "
+msgstr ""
+"\n"
+"                    <p>Aceasta este lista aplicaţiilor cărora le-ai acordat "
+"permisiunea de a-ţi\n"
+"                    accesa contul <b>%s</b>.\n"
+"                    Această pagină îţi dă posibilitatea de a revoca orice "
+"acces permis anterior.\n"
+"                    Un singur click pe \"şterge\" şi acea aplicaţie nu va "
+"mai putea face nimic în \n"
+"                    numele contului tău.</p>\n"
+"                "
+
+#: okapi/views/apps/index.tpl.php:45
+msgid "remove"
+msgstr "şterge"
+
+#: okapi/views/apps/index.tpl.php:50
+#, php-format
+msgid ""
+"\n"
+"                    <p>Thanks to the <a href='%s'>OKAPI Framework</a> you "
+"can grant external applications\n"
+"                    access to your <b>%s</b> account. Currently no "
+"applications are authorized to act\n"
+"                    on your behalf. Once you start using external "
+"Opencaching applications, they will appear here.</p>\n"
+"                "
+msgstr ""
+"\n"
+"                    <p>Datorită <a href='%s'>Interfeţei OKAPI</a> poţi "
+"permite unor aplicaţii externe\n"
+"                    acces la contul tău: <b>%s</b>. În acest moment nu "
+"există aplicaţii autorizate \n"
+"                    să acţioneze în numele contului tău. Odată ce vei începe "
+"să foloseşti aplicaţii externe,\n"
+"                    ele vor apărea aici.</p>\n"
+"                "
+
+#~ msgid ""
+#~ "This cache is archived. Only admins and the owner are allowed to add a "
+#~ "log entry."
+#~ msgstr ""
+#~ "Deze cache is gearchiveerd. Alleen admins en de eigenaar kunnen een log "
+#~ "toevoegen."

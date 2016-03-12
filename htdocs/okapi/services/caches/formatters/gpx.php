@@ -211,7 +211,7 @@ class WebService
         if ($vars['images'] != 'none')
             $fields .= "|images";
         if (count($vars['attrs']) > 0)
-            $fields .= "|attrnames|attr_acodes";
+            $fields .= "|attrnames|attr_acodes|needs_maintenance";
         if ($vars['trackables'] == 'desc:list')
             $fields .= "|trackables";
         elseif ($vars['trackables'] == 'desc:count')
@@ -329,6 +329,25 @@ class WebService
                             );
                         }
                     }
+                    if ($cache_ref['needs_maintenance'])
+                    {
+                        # export NM cache flag as GC attribute #42
+                        $cache_ref['gc_attrs']['42'] = array(
+                            'inc' => 1,
+                            'name' => 'Needs maintenance',
+                        );
+                    }
+                }
+            }
+
+            # As the 'needs maintenance' flag is usually transported as attribute in
+            # GPX files, we add it also to desc:text attribs.
+            if (in_array('desc:text', $vars['attrs']))
+            {
+                foreach ($vars['caches'] as &$cache_ref)
+                {
+                    if ($cache_ref['needs_maintenance'])
+                        $cache_ref['attrnames'][] = 'Needs maintenance';
                 }
             }
         }

@@ -35,7 +35,7 @@ class WebService
         'last_modified', 'date_created', 'date_hidden', 'internal_id', 'is_watched',
         'is_ignored', 'willattends', 'country', 'state', 'preview_image',
         'trip_time', 'trip_distance', 'attribution_note','gc_code', 'hint2', 'hints2',
-        'protection_areas', 'short_description', 'short_descriptions');
+        'protection_areas', 'short_description', 'short_descriptions', 'needs_maintenance');
 
     public static function call(OkapiRequest $request)
     {
@@ -166,8 +166,7 @@ class WebService
                     c.terrain, c.wp_oc, c.wp_gc, c.logpw, c.user_id,
                     if(c.search_time=0, null, c.search_time) as trip_time,
                     if(c.way_length=0, null, c.way_length) as trip_distance,
-                    c.listing_outdated,
-
+                    c.listing_outdated, c.needs_maintenance,
                     ifnull(sc.toprating, 0) as topratings,
                     ifnull(sc.found, 0) as founds,
                     ifnull(sc.notfound, 0) as notfounds,
@@ -199,8 +198,7 @@ class WebService
                     c.terrain, c.wp_oc, c.wp_gc, c.logpw, c.user_id,
                     if(c.search_time=0, null, c.search_time) as trip_time,
                     if(c.way_length=0, null, c.way_length) as trip_distance,
-                    0 as listing_outdated,
-
+                    0 as listing_outdated, 0 as needs_maintenance,
                     c.topratings,
                     c.founds,
                     c.notfounds,
@@ -242,6 +240,7 @@ class WebService
                     case 'location': $entry['location'] = round($row['latitude'], 6)."|".round($row['longitude'], 6); break;
                     case 'type': $entry['type'] = Okapi::cache_type_id2name($row['type']); break;
                     case 'status': $entry['status'] = Okapi::cache_status_id2name($row['status']); break;
+                    case 'needs_maintenance': $entry['needs_maintenance'] = $row['needs_maintenance'] > 0; break;
                     case 'url': $entry['url'] = Settings::get('SITE_URL')."viewcache.php?wp=".$row['wp_oc']; break;
                     case 'owner':
                         $owner_ids[$row['wp_oc']] = $row['user_id'];
@@ -352,7 +351,7 @@ class WebService
             }
             $results[$row['wp_oc']] = $entry;
             if ($row['listing_outdated'] > 0)
-                 $outdated_listings[] = $row['wp_oc'];
+                $outdated_listings[] = $row['wp_oc'];
         }
         Db::free_result($rs);
 
@@ -531,10 +530,16 @@ class WebService
 
                     if (in_array($cache_code, $outdated_listings))
                     {
-                        $tmp = "<p style='color:#c00000'><strong>" .
-                               _('Parts of this geocache listing may be outdated.') . "</strong> " .
-                               _('See the log entries for more information.') . "</p>\n" .
-                               $tmp;
+                        Okapi::gettext_domain_init(array_merge(array($row['language']), $langpref));
+                        $tmp = (
+                            "<p style='color:#c00000'><strong>".
+                            _('Parts of this geocache listing may be outdated.').
+                            "</strong> ".
+                            _('See the log entries for more information.').
+                            "</p>\n".
+                            $tmp
+                        );
+                        Okapi::gettext_domain_restore();
                     }
 
                     if ($attribution_append != 'none')

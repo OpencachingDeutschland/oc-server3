@@ -76,6 +76,7 @@ cache_logs
 
 entry_last_modified
 	Is update when the user edits the log or adds/changes/removes log pictures.
+	This is the real modification date of the user-supplied log contents.
 
 last_modified
 	Is updated when

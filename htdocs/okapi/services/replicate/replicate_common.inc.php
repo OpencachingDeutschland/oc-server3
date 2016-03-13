@@ -20,6 +20,11 @@ class ReplicateCommon
 {
     private static $chunk_size = 50;
     private static $logged_cache_fields = 'code|names|location|type|status|url|owner|founds|notfounds|size|size2|oxsize|difficulty|terrain|rating|rating_votes|recommendations|req_passwd|descriptions|hints|images|trackables_count|trackables|alt_wpts|last_found|last_modified|date_created|date_hidden|attr_acodes|willattends|country|state|preview_image|trip_time|trip_distance|gc_code|hints2|protection_areas';
+
+    # Consider https://github.com/opencaching/okapi/issues/382 before adding
+    # any new field to $logged_log_entry_fields! Care must be taken that
+    # changed values are reflected in cache_logs.okapi_syncbase.
+
     private static $logged_log_entry_fields = 'uuid|cache_code|date|user|type|was_recommended|comment';
 
     /** Return current (greatest) changelog revision number. */
@@ -156,7 +161,10 @@ class ReplicateCommon
      * the cached values of the same entries. If differences found, update
      * okapi_syncbase accordingly.
      *
-     * Currently, only caches are checked (log entries are not).
+     * Currently, only caches are checked; log entries are not. This works
+     * well as long as only log entry fields are replicated which update
+     * some cache_logs column when changed (by OKAPI or OC code). See
+     * https://github.com/opencaching/okapi/issues/382 for further discussion.
      */
     public static function verify_clog_consistency(
         $force_all=false, $geocache_ignored_fields = null

@@ -20,8 +20,10 @@ class WebService
         );
     }
 
-    private static $valid_field_names = array('uuid', 'username', 'profile_url', 'internal_id', 'is_admin',
-        'caches_found', 'caches_notfound', 'caches_hidden', 'rcmds_given', 'home_location');
+    private static $valid_field_names = array(
+        'uuid', 'username', 'profile_url', 'internal_id', 'date_registered', 'is_admin',
+        'caches_found', 'caches_notfound', 'caches_hidden', 'rcmds_given', 'home_location'
+    );
 
     public static function call(OkapiRequest $request)
     {
@@ -39,7 +41,7 @@ class WebService
             if (!in_array($field, self::$valid_field_names))
                 throw new InvalidParam('fields', "'$field' is not a valid field code.");
         $rs = Db::query("
-            select user_id, uuid, username, admin, latitude, longitude
+            select user_id, uuid, username, admin, latitude, longitude, date_created
             from user
             where uuid in ('".implode("','", array_map('\okapi\Db::escape_string', $user_uuids))."')
         ");
@@ -68,6 +70,7 @@ class WebService
                         }
                         break;
                     case 'internal_id': $entry['internal_id'] = $row['user_id']; break;
+                    case 'date_registered': $entry['date_registered'] = date("Y-m-d", strtotime($row['date_created']));
                     case 'caches_found': /* handled separately */ break;
                     case 'caches_notfound': /* handled separately */ break;
                     case 'caches_hidden': /* handled separately */ break;

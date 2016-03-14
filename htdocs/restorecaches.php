@@ -699,13 +699,49 @@ function restore_listings($cacheids, $rdate, $roptions, $simulate)
 		// ... before pictures, so that restored logpics have a parent
 		if (in_array('logs',$roptions))
 		{
-			$rs = sql("SELECT * FROM (
-		               SELECT `id`, -1 AS `node`, `date_modified`, `cache_id`, 0 AS `user_id`, 0 AS `type`, '0' as `oc_team_comment`, '0' as `date`, '' AS `text`, 0 AS `text_html`, 0 AS `text_htmledit`, `original_id` FROM `cache_logs_restored`
-								    WHERE `cache_id`='&1' AND `date_modified` >= '&2'
-								   UNION SELECT `id`, `node`, `deletion_date`, `cache_id`, `user_id`, `type`, `oc_team_comment`, `date`, `text`, `text_html`, `text_htmledit`, 0 AS `original_id` FROM `cache_logs_archived`
-			              WHERE `cache_id`='&1' AND `deletion_date` >= '&2' AND `deleted_by`='&3' AND `user_id` != '&3'
-			             ) `logs`
-								 ORDER BY `date_modified` ASC",
+			$rs = sql("
+				SELECT * FROM (
+					SELECT
+						`id`,
+						-1 AS `node`,
+						`date_modified`,
+						`cache_id`,
+						0 AS `user_id`,
+						0 AS `type`,
+						'0' as `oc_team_comment`,
+						'0' as `date`,
+						'' AS `text`,
+						0 AS `text_html`,
+						0 AS `text_htmledit`,
+						0 AS `needs_maintenance`,
+						0 AS `listing_outdated`,
+						`original_id`
+					FROM `cache_logs_restored`
+					WHERE `cache_id`='&1' AND `date_modified` >= '&2'
+					UNION
+					SELECT
+						`id`,
+						`node`,
+						`deletion_date`,
+						`cache_id`,
+						`user_id`,
+						`type`,
+						`oc_team_comment`,
+						`date`,
+						`text`,
+						`text_html`,
+						`text_htmledit`,
+						`needs_maintenance`,
+						`listing_outdated`,
+						0 AS `original_id`
+					FROM `cache_logs_archived`
+			        WHERE
+						`cache_id`='&1'
+						AND `deletion_date` >= '&2'
+						AND `deleted_by`='&3'
+						AND `user_id` != '&3'
+			    ) `logs`
+				ORDER BY `date_modified` ASC",
                 $cacheid, $rdate, $user_id);
 
 			// We start with the oldest entry and will touch each log ony once:
@@ -725,7 +761,7 @@ function restore_listings($cacheids, $rdate, $roptions, $simulate)
 				{
 					if ($r['node'] == -1)
 					{
-						if (sql_value("SELECT `id` FROM `cache_logs` WHERE `id`='&1'",0,$revert_logid) != 0)
+						if (sql_value("SELECT `id` FROM `cache_logs` WHERE `id`='&1'", 0, $revert_logid) != 0)
 						// if it was not already deleted by a later restore operation ...
 						{
 							if (!$simulate)
@@ -743,7 +779,7 @@ function restore_listings($cacheids, $rdate, $roptions, $simulate)
 							$logs_restored = true;
 						}
 					}
-					else if (sql_value("SELECT `id` FROM `cache_logs` WHERE `id`='&1'",0,$revert_logid) == 0)
+					else if (sql_value("SELECT `id` FROM `cache_logs` WHERE `id`='&1'", 0, $revert_logid) == 0)
 					     // if it was not already restored by a later restore operation ...
 					{
 						// id, uuid, date_created and last_modified are set automatically;
@@ -758,6 +794,8 @@ function restore_listings($cacheids, $rdate, $roptions, $simulate)
 						$log->setText($r['text']);
 						$log->setTextHtml($r['text_html']);
 						$log->setTextHtmlEdit($r['text_htmledit']);
+						$log->setNeedsMaintenance($r['needs_maintenance']);
+						$log->setListingOutdated($r['listing_outdated']);
 						$log->setOwnerNotified(1);
 
 						if ($simulate)

@@ -155,8 +155,8 @@ class geomath
 		if (!mb_ereg_match('^[a-zA-Z][a-zA-Z0-9_]{0,59}$', $tableName))
 			die('Fatal Error: invalid tableName');
 
-		$b1_rad = sprintf('%01.5f', (90 - $latFrom) * 3.14159 / 180);
-		$l1_deg = sprintf('%01.5f', $lonFrom);
+		$b1_rad = (90 - $latFrom) * 3.14159 / 180;
+		$l1_deg = $lonFrom;
 
 		$lonField = '`' . sql_escape_backtick($tableName) . '`.`' . sql_escape_backtick($lonField) . '`';
 		$latField = '`' . sql_escape_backtick($tableName) . '`.`' . sql_escape_backtick($latField) . '`';

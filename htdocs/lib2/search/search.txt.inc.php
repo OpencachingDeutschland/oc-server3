@@ -158,7 +158,7 @@ function search_output()
 				`cache_logs`.`order_date` DESC,
 				`cache_logs`.`date_created` DESC,
 				`cache_logs`.`id` DESC
-			DESC LIMIT 20",
+			LIMIT 20",
 			$r['cacheid'], $opt['template']['locale']);
 
 		while ($rLog = sql_fetch_array($rsLogs))

@@ -244,7 +244,7 @@ class cache
 			SELECT `id`, `listing_outdated`
 			FROM `cache_logs`
 			WHERE `cache_id`='&1' AND `listing_outdated`>0
-			ORDER BY `date` DESC, `date_created` DESC, `id` DESC",
+			ORDER BY `order_date` DESC, `date_created` DESC, `id` DESC",
 			// same sorting order as in DB function sp_update_logstat() 
 			$this->getCacheId()
 		);
@@ -391,6 +391,7 @@ class cache
 				`cache_logs`.`id` AS `id`,
 				`cache_logs`.`uuid` AS `uuid`,
 				`cache_logs`.`date` AS `date`,
+				`cache_logs`.`order_date` AS `order_date`,
 				`cache_logs`.`entry_last_modified`,
 				DATEDIFF(`cache_logs`.`entry_last_modified`, `cache_logs`.`date_created`) >= 1 AS `late_modified`,
 				substr(`cache_logs`.`date`,12) AS `time`,  /* 00:00:01 = 00:00 logged, 00:00:00 = no time */
@@ -409,7 +410,7 @@ class cache
 			LEFT JOIN `cache_rating` ON `cache_logs`.`cache_id`=`cache_rating`.`cache_id` AND `cache_logs`.`user_id`=`cache_rating`.`user_id` AND `cache_logs`.`date`=`cache_rating`.`rating_date`
 			".$addjoin."
 			WHERE `cache_logs`.`cache_id`='&1'
-			ORDER BY `cache_logs`.`date` DESC, `cache_logs`.`date_created` DESC
+			ORDER BY `cache_logs`.`order_date` DESC, `cache_logs`.`date_created` DESC, `id` DESC
 			LIMIT &2, &3", $cacheid, $start+0, $count+0);
 
 		$logs = array();
@@ -427,7 +428,7 @@ class cache
 			$rLog['text'] = use_current_protocol_in_html($rLog['text']);
 
 			$newcoord = false;
-			while ($coordpos < count($coords) && $coords[$coordpos]['date'] > $rLog['date']) {
+			while ($coordpos < count($coords) && $coords[$coordpos]['date'] > $rLog['order_date']) {
 				if (!$newcoord) $newcoord = $coords[$coordpos];
 				++$coordpos;
 				}
@@ -452,9 +453,9 @@ class cache
 		}
 		sql_free_result($rsLogs);
 
-		if ($coord_changes && count($logs)) {
+		if ($coord_changes) {
 			$original = count($coords)-1;
-			$lastlogdate = $logs[count($logs)-1]['date'];
+			$lastlogdate = $logs[count($logs)-1]['order_date'];
 			while ($original > 0 && $coords[$original-1]['date'] < $lastlogdate)
 				--$original;
 			$coord = new coordinate($coords[$original]['latitude'], $coords[$original]['longitude']);

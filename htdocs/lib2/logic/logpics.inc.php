@@ -117,7 +117,7 @@ function get_logpics($purpose, $userid=0, $cacheid=0)
 		                 $join_caches
 		                 $join_cachestatus
 		                WHERE `object_type`=1 AND `logs`.`user_id`='&1' AND NOT `spoiler`
-				         ORDER BY `logs`.`date` DESC", $userid);
+				         ORDER BY `logs`.`order_date` DESC", $userid);
 				break;
 				         
 			case LOGPICS_FOR_MYHOME_GALLERY:
@@ -128,7 +128,7 @@ function get_logpics($purpose, $userid=0, $cacheid=0)
 	                   FROM `pictures` AS `pics`
                      $join_logs
                     WHERE `object_type`=1 AND `logs`.`user_id`='&1' 
-                 ORDER BY `logs`.`date` DESC", $login->userid);
+                 ORDER BY `logs`.`order_date` DESC", $login->userid);
 
 				break;
 				
@@ -157,7 +157,7 @@ function get_logpics($purpose, $userid=0, $cacheid=0)
 	                   $join_user
                     WHERE `object_type`=1 AND `logs`.`cache_id`='&1'
 										  AND NOT (`data_license` IN ('&2','&3'))
-                 ORDER BY `logs`.`date` DESC",
+                 ORDER BY `logs`.`order_date` DESC",
 								  $cacheid, NEW_DATA_LICENSE_ACTIVELY_DECLINED, NEW_DATA_LICENSE_PASSIVELY_DECLINED);
 				break; 
 				

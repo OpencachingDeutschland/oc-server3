@@ -40,7 +40,7 @@
 	                          LEFT JOIN `caches_attributes` `ca` ON `ca`.`cache_id`=`caches`.`cache_id` AND `ca`.`attrib_id`=6
 	                          LEFT JOIN `cache_rating` ON `cache_rating`.`cache_id`=`caches`.`cache_id` AND `cache_rating`.`user_id`=`cache_logs`.`user_id` AND `cache_rating`.`rating_date`=`cache_logs`.`date`
 	                              WHERE `cache_logs`.`user_id`='&1'
-	                           ORDER BY `cache_logs`.`date` DESC, `cache_logs`.`date_created` DESC
+	                           ORDER BY `cache_logs`.`order_date` DESC, `cache_logs`.`date_created` DESC, `cache_logs`.`id` DESC
 	                              LIMIT 10", $login->userid));
 	$tpl->assign('morelogs', sql_value("SELECT FOUND_ROWS()", 0) > 10);
 	sql_foundrows_done();
@@ -55,7 +55,7 @@
 		                                    MAX(`cache_logs`.`date`) AS `lastlog`,
 		                                    (SELECT `type` FROM `cache_logs` `cl2`
 	                                WHERE `cl2`.`cache_id`=`caches`.`cache_id`
-	                             ORDER BY `date` DESC,`id` DESC LIMIT 1) AS `lastlog_type`
+	                             ORDER BY `order_date` DESC, `date_created` DESC, `id` DESC LIMIT 1) AS `lastlog_type`
 	                                 FROM `caches`
 	                            LEFT JOIN `stat_caches` ON `stat_caches`.`cache_id`=`caches`.`cache_id`
 	                            LEFT JOIN `cache_logs` ON `cache_logs`.`cache_id`=`caches`.`cache_id`

@@ -155,7 +155,10 @@ function search_output()
 			WHERE
 				`cache_logs`.`cache_id`=&1
 			ORDER BY
-				`cache_logs`.`date` DESC LIMIT 20",
+				`cache_logs`.`order_date` DESC,
+				`cache_logs`.`date_created` DESC,
+				`cache_logs`.`id` DESC
+			DESC LIMIT 20",
 			$r['cacheid'], $opt['template']['locale']);
 
 		while ($rLog = sql_fetch_array($rsLogs))

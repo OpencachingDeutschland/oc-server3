@@ -360,8 +360,9 @@ function search_output()
 					`cache_logs`.`cache_id`='&1' AND
 					`user`.`user_id`".$user_operator."'&2'
 				ORDER BY
-					`cache_logs`.`date` DESC,
-					`cache_logs`.`date_created` DESC"
+					`cache_logs`.`order_date` DESC,
+					`cache_logs`.`date_created` DESC,
+					`cache_logs`.`id` DESC"  
 				. $limit,
 				$r['cacheid'], $user_id
 			);

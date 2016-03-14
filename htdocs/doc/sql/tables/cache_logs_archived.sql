@@ -13,6 +13,7 @@ CREATE TABLE `cache_logs_archived` (
   `type` tinyint(3) unsigned NOT NULL,
   `oc_team_comment` tinyint(1) NOT NULL default '0',
   `date` datetime NOT NULL,
+  `order_date` datetime NOT NULL,
   `needs_maintenance` tinyint(1) NOT NULL default '0',
   `listing_outdated` tinyint(1) NOT NULL default '0',
   `text` mediumtext NOT NULL,

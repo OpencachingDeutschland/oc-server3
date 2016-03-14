@@ -13,6 +13,7 @@ CREATE TABLE `cache_logs` (
   `type` tinyint(3) unsigned NOT NULL,
   `oc_team_comment` tinyint(1) NOT NULL default '0',
   `date` datetime NOT NULL,
+  `order_date` datetime NOT NULL,
   `needs_maintenance` tinyint(1) NOT NULL default '0',
   `listing_outdated` tinyint(1) NOT NULL default '0',
   `text` mediumtext NOT NULL,
@@ -30,5 +31,6 @@ CREATE TABLE `cache_logs` (
   KEY `date_created` (`date_created`),
   KEY `user_id` (`user_id`,`cache_id`),
   KEY `cache_id` (`cache_id`,`user_id`),
-  KEY `date` (`cache_id`,`date`,`date_created`)
+  KEY `date` (`cache_id`,`date`,`date_created`),
+  KEY `order_date` (`cache_id`,`order_date`,`date_created`,`id`),
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ;

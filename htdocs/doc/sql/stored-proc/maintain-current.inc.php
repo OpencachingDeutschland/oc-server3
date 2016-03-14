@@ -361,8 +361,8 @@
 		       END IF;
 
 		       UPDATE `caches` SET
-		         `needs_maintenance` = (SELECT GREATEST(0,`needs_maintenance`-1) FROM `cache_logs` WHERE `cache_logs`.`cache_id`=nCacheID AND (`cache_logs`.`needs_maintenance`>0 OR `cache_logs`.`type` In (9,13,14)) ORDER BY `date` DESC, `date_created` DESC, `id` DESC LIMIT 1),
-		         `listing_outdated` = (SELECT GREATEST(0,`listing_outdated`-1) FROM `cache_logs` WHERE `cache_logs`.`cache_id`=nCacheID AND (`cache_logs`.`listing_outdated`>0 OR `cache_logs`.`type` In (9,13,14)) ORDER BY `date` DESC, `date_created` DESC, `id` DESC LIMIT 1)
+		         `needs_maintenance` = (SELECT GREATEST(0,`needs_maintenance`-1) FROM `cache_logs` WHERE `cache_logs`.`cache_id`=nCacheID AND (`cache_logs`.`needs_maintenance`>0 OR `cache_logs`.`type` In (9,13,14)) ORDER BY `order_date` DESC, `date_created` DESC, `id` DESC LIMIT 1),
+		         `listing_outdated` = (SELECT GREATEST(0,`listing_outdated`-1) FROM `cache_logs` WHERE `cache_logs`.`cache_id`=nCacheID AND (`cache_logs`.`listing_outdated`>0 OR `cache_logs`.`type` In (9,13,14)) ORDER BY `order_date` DESC, `date_created` DESC, `id` DESC LIMIT 1)
 		         /* same sorting order as in caches::getListingOutdatedLogUrl() */
 		       WHERE `caches`.`cache_id`=nCacheId;
 	       END IF;
@@ -1090,9 +1090,13 @@
 						/* dont overwrite date values while XML client is running */
 						IF ISNULL(@XMLSYNC) OR @XMLSYNC!=1 THEN
 							SET NEW.`date_created`=NOW();
-							SET NEW.`entry_last_modified`=NOW();
-							SET NEW.`last_modified`=NOW();
-							SET NEW.`log_last_modified`=NEW.`last_modified`;
+							SET NEW.`entry_last_modified`=NEW.`date_created`;
+							SET NEW.`last_modified`=NEW.`date_created`;
+							SET NEW.`log_last_modified`=NEW.`date_created`;
+							SET NEW.`order_date`=
+								IF(RIGHT(NEW.`date`, 8) <> '00:00:00' OR NEW.`date` > NEW.`date_created`, NEW.`date`,
+									IF(LEFT(NEW.`date_created`, 10) = LEFT(NEW.`date`, 10), NEW.`date_created`,
+										CONCAT(LEFT(NEW.`date`, 11), '23:59:58')));
 						END IF;
 
 						IF ISNULL(NEW.`uuid`) OR NEW.`uuid`='' THEN
@@ -1153,6 +1157,12 @@
 							   NEW.`listing_outdated`!=OLD.`listing_outdated` OR
 							   NEW.`text`!=BINARY OLD.`text` OR
 							   NEW.`text_html`!=OLD.`text_html` THEN
+
+							   SET NEW.`log_last_modified`=NEW.`date_created`;
+							   SET NEW.`order_date`=
+							       IF(RIGHT(NEW.`date`, 8) <> '00:00:00' OR NEW.`date` > NEW.`date_created`, NEW.`date`,
+							           IF(LEFT(NEW.`date_created`, 10) = LEFT(NEW.`date`, 10), NEW.`date_created`,
+							               CONCAT(LEFT(NEW.`date`, 11), '23:59:58')));
 
 								/* log versioning to allow log vandalism restore (except pictures);
 								 * optimize storage space by ignoring quick-corrections of logs

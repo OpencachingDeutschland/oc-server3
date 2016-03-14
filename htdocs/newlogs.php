@@ -41,7 +41,7 @@
 		$paging = true;
 		$newLogsPerCountry = false;
 		$caches_logged = array();
-		$orderByDate = '`cache_logs`.`date` DESC, ';
+		$orderByDate = '`cache_logs`.`order_date` DESC, ';
 		if ($show_own_logs) $urlparams = '&ownlogs=1';
 		$logselection = 3;
 	}
@@ -56,7 +56,7 @@
 		$logcount = 100;
 		$paging = true;
 		$newLogsPerCountry = false;
-		$orderByDate = '`cache_logs`.`date` DESC, ';
+		$orderByDate = '`cache_logs`.`order_date` DESC, ';
 		$logselection = 3;
 	}
 	elseif (@$newlogs_rest)
@@ -74,7 +74,7 @@
 		$tpl->cache_id = $exclude_country;
 		$logcount = 250;
 		$paging = false;  // paging would have poor performance for all logs
-		$orderByDate = $logselection == 3 ? "{fromtable}.`date` DESC, " : "";
+		$orderByDate = $logselection == 3 ? "{fromtable}.`order_date` DESC, " : "";
 	}
 	else
 	{
@@ -96,7 +96,7 @@
 		$tpl->cache_id = $country;
 		$logcount = 250;
 		$paging = false;  // paging would have poor performance for all logs
-		$orderByDate = $logselection == 3 ? "{fromtable}.`date` DESC, " : "";
+		$orderByDate = $logselection == 3 ? "{fromtable}.`order_date` DESC, " : "";
 		$optimize_for_latest_logs = ($country == '' || $country == $opt['page']['main_country']);
 	}
 
@@ -126,7 +126,7 @@
 				CREATE TEMPORARY TABLE &loglist0
 				(SELECT
 					`id`, `cache_id`, `user_id`, `date_created`, `date`, `type`,
-					`needs_maintenance`, `listing_outdated`
+					`needs_maintenance`, `listing_outdated`, `order_date`
 				 FROM `cache_logs`
 				 ORDER BY `date_created` DESC
 				 LIMIT " . (4*$logcount) . "

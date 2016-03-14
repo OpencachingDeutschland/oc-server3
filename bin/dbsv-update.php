@@ -798,6 +798,32 @@
 				) ENGINE=MyISAM");
 	}
 
+	function dbv_151()   // new date field for ordering logs
+	{
+		if (!sql_field_exists('cache_logs', 'order_date'))
+		{
+			sql("ALTER TABLE `cache_logs` ADD COLUMN `order_date` datetime NOT NULL AFTER `date`");
+			sql("
+				UPDATE `cache_logs`
+				SET `order_date` = IF(RIGHT(`date`, 8) <> '00:00:00' OR `date` > `date_created`, `date`,
+				                      IF(LEFT(`date_created`, 10) = LEFT(`date`, 10), `date_created`,
+				                         CONCAT(LEFT(`date`, 11), '23:59:58')))
+				");
+		}
+		if (!sql_index_exists('cache_logs', 'order_date'))
+			sql("ALTER TABLE `cache_logs` ADD INDEX `order_date` (`cache_id`,`order_date`,`date_created`,`id`)");
+		if (!sql_field_exists('cache_logs_archived', 'order_date'))
+		{
+			sql("ALTER TABLE `cache_logs_archived` ADD COLUMN `order_date` datetime NOT NULL AFTER `date`");
+			sql("
+				UPDATE `cache_logs_archived`
+				SET `order_date` = IF(RIGHT(`date`, 8) <> '00:00:00' OR `date` > `date_created`, `date`,
+				                      IF(LEFT(`date_created`, 10) = LEFT(`date`, 10), `date_created`,
+				                         CONCAT(LEFT(`date`, 11), '23:59:58')))
+				");
+		}
+	}
+
 	// When adding new mutations, take care that they behave well if run multiple
 	// times. This improves robustness of database versioning.
 	//

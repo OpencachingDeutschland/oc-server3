@@ -36,7 +36,7 @@ function _radio_click(){
 		}
 
 		if (document.searchbydistance.searchto.value == "searchbyortplz") {
-			if(_sbort_click()==true||_sbplz_click()==true){
+			if (_sbortplz_click() == true){
 				return true;
 			}
 			else {
@@ -44,8 +44,8 @@ function _radio_click(){
 				return false;
 			}
 		}
-		else if(document.searchbydistance.searchto.value == "searchbyplz") {
-			if(_sbplz_click()==true){
+		else if (document.searchbydistance.searchto.value == "searchbyocwp") {
+			if (_sbocwp_click() == true){
 				return true;
 			}
 			else {
@@ -53,17 +53,8 @@ function _radio_click(){
 				return false;
 			}
 		}
-		else if(document.searchbydistance.searchto.value == "searchbyocwp") {
-			if(_sbocwp_click()==true){
-				return true;
-			}
-			else {
-				resetbutton('submit_dist');
-				return false;
-			}
-		}
-		else if(document.searchbydistance.searchto.value == "searchbydistance") {
-			if(_sbd_click()==true){
+		else if (document.searchbydistance.searchto.value == "searchbydistance") {
+			if (_sbd_click() == true){
 				return true;
 			}
 			else {
@@ -72,7 +63,7 @@ function _radio_click(){
 			}
 		}
 		else {
-			alert("Es wurde kein Button ausgewählt."); // Todo: Translation
+			alert("Select a search button, please!");
 			return false;
 		}
 		return true;
@@ -113,13 +104,13 @@ function _sbft_click()
 
 function _sbd_click()
 {
-	if (isNaN(document.searchbydistance.lon_h.value) || isNaN(document.searchbydistance.lon_min.value))
+	if (isNaN(document.searchbydistance.lon_h.value) || isNaN(document.searchbydistance.lon_min.value) || document.searchbydistance.lon_h.value == "" || document.searchbydistance.lon_min.value == "")
 	{
 		alert("{/literal}{t}Longitude has to be a number!\nFormat: hh° mm.mmm{/t}{literal}");
 		resetbutton('submit_dist');
 		return false;
 	}
-	else if (isNaN(document.searchbydistance.lat_h.value) || isNaN(document.searchbydistance.lat_min.value))
+	else if (isNaN(document.searchbydistance.lat_h.value) || isNaN(document.searchbydistance.lat_min.value) || document.searchbydistance.lat_h.value == "" || document.searchbydistance.lat_min.value == "")
 	{
 		alert("{/literal}{t}Latitude has to be a number!\nFormat: hh° mm.mmm{/t}{literal}");
 		resetbutton('submit_dist');
@@ -128,22 +119,11 @@ function _sbd_click()
 	return true;
 }
 
-function _sbplz_click()
+function _sbortplz_click()
 {
 	if (document.searchbydistance.ortplz.value == "")
 	{
-		alert("{/literal}{t}Enter the postal code, please!{/t}{literal}");
-		resetbutton('submit_dist');
-		return false;
-	}
-	return true;
-}
-
-function _sbort_click()
-{
-	if (document.searchbydistance.ortplz.value == "")
-	{
-		alert("{/literal}{t}Enter the city, please!{/t}{literal}");
+		alert("{/literal}{t}Enter a postal code or city, please!{/t}{literal}");
 		resetbutton('submit_dist');
 		return false;
 	}
@@ -152,9 +132,15 @@ function _sbort_click()
 
 function _sbocwp_click()
 {
-	if (document.searchbydistance.ocwp.value == "" || !document.searchbydistance.ocwp.value.toLowerCase().startsWith("oc") || document.searchbydistance.ocwp.value.length<=5)
+	if (document.searchbydistance.ocwp.value == "")
 	{
-		alert("{/literal}{t}Enter a Opencaching waypoint, please!{/t}{literal}"); // Todo: Translation
+		alert("{/literal}{t}Enter a Opencaching waypoint, please!{/t}{literal}");
+		resetbutton('submit_dist');
+		return false;
+	}
+	else if (!document.searchbydistance.ocwp.value.toLowerCase().startsWith("oc") || document.searchbydistance.ocwp.value.length<=5)
+	{
+		alert("{/literal}{t}Enter a valid Opencaching waypoint, please!\nFormat: OCXXXX(X){/t}{literal}");
 		resetbutton('submit_dist');
 		return false;
 	}
@@ -587,16 +573,16 @@ function switchAttributeCat2()
 			<td><input type="submit" name="submit_dist" value="{t}Search{/t}" class="formbutton" onclick="submitbutton('submit_dist')" /></td>
 		</tr>
 		<tr>
-			<td class=""><input type="radio" id="sboort" name="searchto" value="searchbyortplz" {if $dbyortplz_checked}checked="checked"{/if} > {t}from City / Postal Code:{/t}</td> <!-- Todo: Translation-->
+			<td class=""><input type="radio" id="sbortplz" name="searchto" value="searchbyortplz" {if $dbyortplz_checked}checked="checked"{/if}><label for="sbortplz"> {t}from City / Postal Code:{/t}</label></td>
 			<td><input type="text" name="ortplz" value="{$ortplz}" class="input200" onfocus="textonfocus(0)"/> &nbsp;</td>
 			<td></td>  {* creates empty fourth column which is used by text search options *}
 		</tr>
 		<tr>
-			<td class=""><input type="radio" id="sbocwp" name="searchto" value="searchbyocwp" {if $dbyocwp_checked}checked="checked"{/if} > {t}from OC Waypoint:{/t}</td> <!-- Todo: Translation -->
+			<td class=""><input type="radio" id="sbocwp" name="searchto" value="searchbyocwp" {if $dbyocwp_checked}checked="checked"{/if}><label for="sbocwp"> {t}from OC Waypoint:{/t}</label></td>
 			<td><input type="text" name="ocwp" value="{$ocwp}" maxlength="7" class="input50" onfocus="textonfocus(1)"/></td>
 		</tr>
 		<tr>
-			<td valign="top"><input type="radio" id="sbdis" name="searchto" value="searchbydistance" {if $dbydistance_checked}checked="checked"{/if} > {t}from coordinates:{/t}</td> <!-- Todo: German Translation -->
+			<td valign="top"><input type="radio" id="sbdis" name="searchto" value="searchbydistance" {if $dbydistance_checked}checked="checked"{/if}><label for="sbdis"> {t}from coordinates:{/t}</label></td>
 			<td valign="top">
 				<select name="latNS" onfocus="textonfocus(2)">
 					<option value="N" {if $latN_sel}selected="selected"{/if}>{t}N{/t}</option>

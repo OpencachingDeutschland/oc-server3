@@ -904,12 +904,6 @@ div.floatbox { float:right; margin-left:16px; padding-left:16px;}
 
 /* Admin functions */
 .adminrestore {	color: #819ac1; }
-.report_comment {
-		background-color:#f0f0f0;
-		border-radius: 5px;
-		-webkit-border-radius: 5px;
-		-moz-border-radius: 5px;
-}
 
 /* RSS feeds */
 #blog div.newsblock { margin-left:20px }

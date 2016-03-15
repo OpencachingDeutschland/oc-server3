@@ -824,6 +824,12 @@
 		}
 	}
 
+	function dbv_152()
+	{
+		if (!sql_field_exists('cache_reports', 'comment'))
+			sql("ALTER TABLE `cache_reports` ADD COLUMN `comment` mediumtext NOT NULL");
+	}
+
 	// When adding new mutations, take care that they behave well if run multiple
 	// times. This improves robustness of database versioning.
 	//

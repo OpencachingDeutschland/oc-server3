@@ -21,7 +21,6 @@
 		$tpl->error(ERROR_NO_ACCESS);
 
 	$id = isset($_REQUEST['id']) ? $_REQUEST['id']+0 : 0;
-
 	$rid = isset($_REQUEST['rid']) ? $_REQUEST['rid']+0 : 0;
 	$cacheid = isset($_REQUEST['cacheid']) ? $_REQUEST['cacheid']+0 : 0;
 	$ownerid = isset($_REQUEST['ownerid']) ? $_REQUEST['ownerid']+0 : 0;
@@ -29,7 +28,18 @@
 	$adminid = sql_value("SELECT `adminid` FROM `cache_reports` WHERE `id`=&1", 0, $rid);
 	$age = sql_value("SELECT DATEDIFF(NOW(),`lastmodified`) FROM `cache_reports` WHERE `id`=&1", 0, $rid);
 
-	if (isset($_REQUEST['assign']) && $rid > 0 && 
+	if (isset($_REQUEST['savecomment']))
+	{
+		$comment = isset($_REQUEST['commenteditor']) ? $_REQUEST['commenteditor'] : '';
+		$id = $rid;
+		sql("
+			UPDATE `cache_reports`
+			SET `comment`='&2'
+			WHERE `id`='&1'",
+			$id,
+			$comment);
+	}
+	elseif (isset($_REQUEST['assign']) && $rid > 0 && 
 			($adminid == 0 || ($adminid != $login->userid && $age >= 14)))  
 	{
 		sql("UPDATE `cache_reports` SET `status`=2, `adminid`=&2 WHERE `id`=&1", $rid, $login->userid);
@@ -123,7 +133,8 @@
 				              IFNULL(tt.text, crs.name) AS `status`,
 				              `cr`.`date_created`, `cr`.`lastmodified`,
 				              `c`.`name` AS `cachename`,
-				              `c`.`user_id` AS `ownerid`
+				              `c`.`user_id` AS `ownerid`,
+				              `cr`.`comment`
 				         FROM `cache_reports` AS `cr`
 				    LEFT JOIN `cache_report_reasons` AS `crr` ON `cr`.`reason`=`crr`.`id`
 			      LEFT JOIN `caches` AS `c` ON `c`.`cache_id`=`cr`.`cacheid`
@@ -150,6 +161,7 @@
 			$tpl->assign('lastmodified', $record['lastmodified']);
 			$tpl->assign('cachename', $record['cachename']);
 			$tpl->assign('ownerid', $record['ownerid']);
+			$tpl->assign('admin_comment', $record['comment']);
 			if (isset($opt['logic']['adminreports']['cachexternal']))
 				$tpl->assign('cachexternal', $opt['logic']['adminreports']['cachexternal']);
 			else

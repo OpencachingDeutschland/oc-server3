@@ -2861,6 +2861,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2600', 'Select 
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2601', 'The problems of the cache description as mentioned in the <a href=\"%1\" target=\"_blank\"><img src=\"resource2/ocstyle/images/log/16x16-listing-outdated.png\" /> log entries</a> do no longer exist.', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2602', 'All information (coordinates, container size, difficulty, terrain, description text, encoded hints, additional waypoints) is at least up-to-date with', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2603', 'More than 2 years ago', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2604', 'Admin<br />comment:', '2015-06-17 10:09:14');
 
 -- Table sys_trans_ref
 SET NAMES 'utf8';
@@ -6275,9 +6276,9 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('782', 'DE', 'Du kannst diesen Bericht nicht bearbeiten, weil er bereits von einem anderen Admin bearbeitet wird.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('783', 'DE', 'Um einen Bericht zu bearbeiten, musst du ihn dir zuordnen!', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('784', 'DE', 'Keine Meldeberichte vorhanden', '2010-08-28 11:48:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('785', 'DE', 'Report von ', '2010-08-28 11:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('785', 'DE', 'Meldung von ', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('786', 'DE', 'von', '2010-08-28 11:48:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('787', 'DE', 'Nicht zugeordnet', '2010-08-28 11:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('787', 'DE', 'nicht zugeordnet', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('788', 'DE', 'Mir zuordnen', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('789', 'DE', 'E-Mail an Besitzer', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('792', 'DE', 'Als erledigt markieren', '2010-08-28 11:48:07');
@@ -7451,6 +7452,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2601', 'DE', 'Die in den <a href=\"%1\" target=\"_blank\"><img src=\"resource2/ocstyle/images/log/16x16-listing-outdated.png\" />-Logeinträgen</a> erwähnten Probleme mit der Cachebeschreibung bestehen nicht mehr.', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2602', 'DE', 'Alle Angaben (Koordinaten, Behältergröße, Schwierigkeit, Geländewertung, Beschreibungstext, verschlüsselte Hinweise, zusätzliche Wegpunkte) sind mindestens auf dem Stand von', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2603', 'DE', 'vor mehr als 2 Jahren', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2604', 'DE', 'Admin-<br />Kommentar:', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'EN', 'Reorder IDs', '2010-09-02 00:15:30');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'EN', 'The database could not be reconnected.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'EN', 'Testing – please do not login', '2010-08-28 11:48:07');

@@ -10,6 +10,7 @@ CREATE TABLE `cache_reports` (
   `status` tinyint(3) unsigned NOT NULL default '1',
   `adminid` int(11) default NULL,
   `lastmodified` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `comment` mediumtext NOT NULL,
   PRIMARY KEY  (`id`),
   KEY `status` (`status`,`adminid`),
   KEY `status_2` (`adminid`,`status`),

@@ -420,6 +420,7 @@ td div.mediumspacer { height:6px; }
 
 div.default { font-size:110%; }
 td.default { font-size:12px; }
+textarea.default { font-size:12px; }
 
 /*--------------------*/
 /* 3.2 - Sidebar Area */
@@ -903,6 +904,12 @@ div.floatbox { float:right; margin-left:16px; padding-left:16px;}
 
 /* Admin functions */
 .adminrestore {	color: #819ac1; }
+.report_comment {
+		background-color:#f0f0f0;
+		border-radius: 5px;
+		-webkit-border-radius: 5px;
+		-moz-border-radius: 5px;
+}
 
 /* RSS feeds */
 #blog div.newsblock { margin-left:20px }

@@ -28,7 +28,7 @@
 
 function processEditorInput($oldDescMode, $descMode, $text)
 {
-	global $opt, $smiley;
+	global $opt;
 
 	if ($descMode != 1)
 	{
@@ -58,22 +58,7 @@ function processEditorInput($oldDescMode, $descMode, $text)
 		else
 		{
 			// mode switch from HTML editor to plain text, or decode HTML-encoded plain text
-
-			// convert smilies ...
-			for ($n=0; $n < count($smiley['image']); $n++)
-			{
-				do
-				{
-					$logtext0 = $text;
-					$text = mb_ereg_replace("<img [^>]*?src=[^>]+?".str_replace('.','\.',$smiley['file'][$n])."[^>]+?>", "[s![".$smiley['text'][$n]."]!s]", $text);
-						// the [s[ ]s] is needed to protect the spaces around the smileys
-				} while ($text != $logtext0);
-			}
-
-			// ... and HTML to plain text
 			$text = html2plaintext($text, $oldDescMode = 0, 0);
-
-			$text = str_replace(array('[s![',']!s]'), '', $text);
 		}
 	}
 
@@ -88,7 +73,7 @@ function processEditorInput($oldDescMode, $descMode, $text)
 
 function html2plaintext($text, $texthtml0, $wrap)
 {
-	global $opt;
+	global $opt, $smiley;
 
 	if ($texthtml0)
 	{
@@ -98,10 +83,21 @@ function html2plaintext($text, $texthtml0, $wrap)
 	}
 	else
 	{
+		// convert smilies ...
+		for ($n=0; $n < count($smiley['image']); $n++) {
+			$text = mb_ereg_replace(
+				"<img [^>]*?src=[^>]+?".str_replace('.','\.', $smiley['file'][$n])."[^>]+?>",
+				"[s![".$smiley['text'][$n]."]!s]",
+				$text);
+			// the [s[ ]s] is needed to protect the spaces around the smileys
+		}
+
 		$h2t = new html2text($text);
 		$h2t->set_base_url($opt['page']['default_absolute_url']);
 		$h2t->width = $wrap;
 		$text = $h2t->get_text();
+
+		$text = str_replace(array('[s![',']!s]'), '', $text);
 
 		// remove e.g. trailing \n created from </p> by html2text
 		while (substr($text,-2) == "\n\n")

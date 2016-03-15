@@ -132,7 +132,7 @@ function editcomment(edit)
 			<tr><td class="spacer"></td></tr>
 			<tr><td class="spacer"></td></tr>
 			<tr>
-				<td style="vertical-align:text-top"><b><p>{t}Comment:{/t}</p></td>
+				<td style="vertical-align:text-top; padding-top:0.6em"><b><p>{t}Comment:{/t}</p></td>
 				<td colspan="3" style="padding-top: 0.6em; padding-left:0.7em;" class="report_comment"><p>{$note|escape|nl2br}</p></td>
 			</tr>
 			<tr><td class="spacer"></td></tr>

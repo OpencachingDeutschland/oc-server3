@@ -1,4 +1,4 @@
--- Content of tables:
+﻿-- Content of tables:
 -- attribute_categories
 -- attribute_groups
 -- cache_attrib
@@ -1987,7 +1987,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1498', 'Longitu
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1499', 'Latitude has to be a number!\\nFormat: hh° mm.mmm', '2010-09-11 02:13:32');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1500', 'The maximum distance has to be a number!', '2010-09-11 02:13:32');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1501', 'The distance has to be between 0 and 9999', '2010-09-11 02:13:32');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1502', 'Enter the postal code, please!', '2010-09-11 02:13:32');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1502', 'Enter a postal code or city, please!', '2016-03-14 04:00:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1503', 'Enter the city, please!', '2010-09-11 02:13:32');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1504', 'Enter the owner, please!', '2010-09-11 02:13:32');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1505', 'Enter the username, please!', '2010-09-11 02:13:32');
@@ -2861,6 +2861,13 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2600', 'Select 
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2601', 'The problems of the cache description as mentioned in the <a href=\"%1\" target=\"_blank\"><img src=\"resource2/ocstyle/images/log/16x16-listing-outdated.png\" /> log entries</a> do no longer exist.', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2602', 'All information (coordinates, container size, difficulty, terrain, description text, encoded hints, additional waypoints) is at least up-to-date with', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2603', 'More than 2 years ago', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2604', 'Select a search button, please!', '2016-03-14 04:00:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2605', 'Enter a Opencaching waypoint, please!', '2016-03-14 04:00:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2606', 'from City / Postal Code:', '2016-03-14 04:00:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2607', 'from OC Waypoint:', '2016-03-14 04:00:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2608', 'There does no cache exist with this waypoint', '2016-03-14 04:00:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2609', 'Enter a valid Opencaching waypoint, please!\\nFormat: OCXXXX(X)', '2016-03-14 04:00:00');
+
 
 -- Table sys_trans_ref
 SET NAMES 'utf8';
@@ -6577,7 +6584,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1499', 'DE', 'Der Breitengrad muss eine Zahl sein!\\nFormat: hh° mm.mmm', '2010-09-11 02:32:24');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1500', 'DE', 'Die maximale Entfernung muss eine Zahl sein!', '2010-09-11 02:32:18');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1501', 'DE', 'Zulässiger Wert für max. Entfernung: 0 - 9999', '2010-09-11 02:32:12');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1502', 'DE', 'Bitte im Feld für Postleitzahl etwas eingeben!', '2010-09-11 02:32:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1502', 'DE', 'Bitte im Feld für Ortsname/Postleitzahl etwas eingeben!', '2016-03-14 00:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1503', 'DE', 'Bitte im Feld für Ortsname etwas eingeben!', '2010-09-11 02:32:01');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1504', 'DE', 'Bitte im Feld für Besitzer etwas eingeben!', '2010-09-11 02:31:54');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1505', 'DE', 'Bitte im Feld für Finder etwas eingeben!', '2010-09-11 02:31:49');
@@ -7096,7 +7103,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2101', 'DE', 'Wahlweise kannst du auch auf %1 den folgenden Code von Hand eingeben:', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2102', 'DE', 'Vor dem ersten Einloggen musst du auf folgenden Link klicken, um deinen Account zu aktivieren:', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2103', 'DE', 'Umkreis:', '2013-04-25 23:00:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2104', 'DE', 'von Kooordinaten:', '2013-04-25 23:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2104', 'DE', 'von Koordinaten:', '2016-03-14 04:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2105', 'DE', 'Logeinträge', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2106', 'DE', 'von Benutzer:', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2107', 'DE', 'in', '2013-04-25 23:00:00');
@@ -7451,6 +7458,12 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2601', 'DE', 'Die in den <a href=\"%1\" target=\"_blank\"><img src=\"resource2/ocstyle/images/log/16x16-listing-outdated.png\" />-Logeinträgen</a> erwähnten Probleme mit der Cachebeschreibung bestehen nicht mehr.', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2602', 'DE', 'Alle Angaben (Koordinaten, Behältergröße, Schwierigkeit, Geländewertung, Beschreibungstext, verschlüsselte Hinweise, zusätzliche Wegpunkte) sind mindestens auf dem Stand von', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2603', 'DE', 'vor mehr als 2 Jahren', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2604', 'DE', 'Bitte wähle einen Suchbutton aus!', '2016-03-14 04:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2605', 'DE', 'Bitte in das Feld für OC-Wegpunkt etwas eingeben', '2016-03-14 04:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2606', 'DE', 'von Stadt / PLZ:', '2016-03-14 04:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2607', 'DE', 'vom OC-Wegpunkt:', '2016-03-14 04:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2608', 'DE', 'Es existiert kein Cache mit diesem Wegpunkt', '2016-03-14 04:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2609', 'DE', 'Gebe bitte einen gültigen OC-Wegpunkt ein.\\nFormat: OCXXXX(X)', '2016-03-14 04:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'EN', 'Reorder IDs', '2010-09-02 00:15:30');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'EN', 'The database could not be reconnected.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'EN', 'Testing – please do not login', '2010-08-28 11:48:07');

@@ -21,7 +21,6 @@ function editcomment(edit)
 	if (edit)
 	{
 		comment.style.display = 'none';
-		resetbutton('editcomment_btn');
 		editcomment_btn.style.display = 'none';
 
 		commenteditor.style.display = '';
@@ -116,32 +115,31 @@ function editcomment(edit)
 			<tr>
 				<td style="width:10px"><nobr><b>{t}Created at:{/t}</b></nobr></td>
 				<td style="width:250px">{$created|date_format:$opt.format.datelong}</td>
-				<td style="width:10px"><nobr><b>{t}State:{/t}</b></nobr></td>
-				<td style="width:440px">{$status}{if $adminnick!=''} &nbsp;&nbsp; <b>Admin</b>{t}#colonspace#{/t}: {if $otheradmin}<font color="red"><b>{/if}{$adminnick|escape}{if $otheradmin}</b></font>{/if}{/if}</td>
+				{if $lastmodified != $created}
+					<td style="width:10px"><nobr><b>{t}Last modified{/t}{t}#colonspace#{/t}:</b></nobr></td>
+					<td style="width:440px">{$lastmodified|date_format:$opt.format.datelong}</td>
+				{else}
+					<td style="width:10px"></td>
+					<td style="width:440px"></td>
+				{/if}
 			</tr>
 			<tr>
-				{if $lastmodified != $created}
-					<td><nobr><b>{t}Last modified{/t}{t}#colonspace#{/t}:</b></nobr></td>
-					<td>{$lastmodified|date_format:$opt.format.datelong}</td>
-				{else}
-					<td></td><td></td>
-				{/if}
 				<td><b>{t}Reason:{/t}</b></td>
 				<td>{$reason|escape|nl2br}</td>
+				<td><nobr><b>{t}State:{/t}</b></nobr></td>
+				<td>{$status}{if $adminnick!=''} &nbsp;&nbsp; <b>Admin</b>{t}#colonspace#{/t}: {if $otheradmin}<font color="red"><b>{/if}{$adminnick|escape}{if $otheradmin}</b></font>{/if}{/if}</td>
 			</tr>
-			<tr><td class="spacer"></td></tr>
 			<tr><td class="spacer"></td></tr>
 			<tr>
 				<td style="vertical-align:text-top; padding-top:0.6em"><b><p>{t}Comment:{/t}</p></td>
 				<td colspan="3" style="padding-top: 0.6em"><p>{$note|escape|nl2br}</p></td>
 			</tr>
 			<tr><td class="spacer"></td></tr>
-			<tr><td class="spacer"></td></tr>
 			<tr>
 				<td style="vertical-align:text-top"><b><p>{t}Admin<br />comment:{/t}</p></b></td>
 				<td colspan="4">
-					<p id="comment" style="margin-bottom:1em">{$admin_comment|escape|nl2br}</p>
-					<input id="editcomment_btn" type="button" name="editcomment_btn" value="{if $admin_comment}{t}Edit{/t}{else}{t}Add{/t}{/if}" class="formbutton" onclick="submitbutton('editcomment_btn'); editcomment(true);" />
+					<p id="comment">{$admin_comment|escape|nl2br}</p>
+					<span id="editcomment_btn">[<a href="javascript:editcomment(true)">{if $admin_comment}{t}Edit{/t}{else}{t}Add{/t}{/if}</a>]</span> 
 					<textarea id="commenteditor" name="commenteditor" cols="90" rows="7" style="margin-bottom:1em; display:none" class="default">{$admin_comment|escape}</textarea>
 					<br />
 					<input id="canceledit" type="button" name="canceledit" value="{t}Cancel{/t}" class="formbutton" onclick="submitbutton('canceledit'); editcomment(false)" style="display:none" />

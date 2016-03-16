@@ -54,7 +54,7 @@
 			     WHERE `caches`.`status` = 1" . ($country ? " AND `caches`.`country`='" . sql_escape($country) . "'" : "") .
 			           $cachetype_condition . "
 			  ORDER BY `caches`.`$date_field` $sort_order
-				   LIMIT " . ($startat+0) . ', ' . ($perpage+0));
+				   LIMIT " . sprintf("%d", $startat) . ', ' . ($perpage+0));
 			// see also write_newcaches_urls() in sitemap.class.php
 		while ($rNewCache = sql_fetch_assoc($rsNewCaches))
 			$newCaches[] = $rNewCache;

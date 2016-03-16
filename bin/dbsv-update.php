@@ -631,8 +631,6 @@
 		}
 	}
 
-	/***** Hotfixes *****/
-
 	function dbv_137()  // partial revert of mutation 130
 	{
 		sql("ALTER TABLE `cache_desc` CHANGE COLUMN `desc_html` `desc_html` tinyint(1) NOT NULL default '1' COMMENT ''");
@@ -687,6 +685,10 @@
 			sql("DROP TABLE `search_words`");
 	}
 
+	/***** OC release 3.0.15 *****/
+
+	/***** OC release 3.0.16 *****/
+
 	function dbv_143()   // navicache WP is obsolete
 	{
 		sql("ALTER TABLE `caches` MODIFY `wp_nc` varchar(6) NOT NULL COMMENT 'obsolete'");
@@ -726,6 +728,8 @@
 			// You may just delete the old `cache_logs_modified` contents
 			// (the feature was started just a few days befor this change).
 	}
+
+	/***** OC release 3.0.17 *****/
 
 	function dbv_146()   // NM flags
 	{
@@ -781,6 +785,8 @@
 		if (!sql_field_exists('caches', 'protect_old_coords'))
 			sql("ALTER TABLE `caches` ADD COLUMN `protect_old_coords` tinyint(1) NOT NULL default '0' AFTER `show_cachelists`");
 	}
+
+	/***** OC release 3.0.18 *****/
 
 	function dbv_150()   // add history of reported waypoints
 	{

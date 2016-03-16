@@ -127,6 +127,32 @@
                     </li>
                 </ul>
             </li>
+            <li>
+                <p><b>listing_is_outdated</b> - log entry authors may include an
+                additional report on the state of the geocache listing at the given
+                date (indicate if needs to be updated). This information currently
+                cannot be <em>submitted</em> through OKAPI but only retrieved.
+                Possible values are:</p>
+
+                <ul>
+                    <li>
+                        <b>true</b> - in the author's opinion, the listing was
+                        outdated and needed to be updated. E.g. the place where the
+                        geocache is hidden has changed, so that it no longer
+                        matches the information in the listing; or important
+                        information is missing that was published by the geocache
+                        owner at another website.
+                    </li>
+                    <li>
+                        <b>false</b> - in the author's opinion, the listing was
+                        up-to-date.
+                    </li>
+                    <li>
+                        <b>null</b> - the author did not include any report on the
+                        state of the geocache listing.
+                    </li>
+                </ul>
+            </li>
             <li><b>comment</b> - <a href='%OKAPI:docurl:html%'>HTML string</a>, text entered
                 with the log entry,</li>
             <li>

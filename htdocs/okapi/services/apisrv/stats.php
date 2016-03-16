@@ -37,7 +37,7 @@ class WebService
                         select distinct user_id
                         from cache_logs
                         where
-                            type in (1,2)
+                            type in (1,2,7)
                             and ".((Settings::get('OC_BRANCH') == 'oc.pl') ? "deleted = 0" : "true")."
                         UNION DISTINCT
                         select distinct user_id

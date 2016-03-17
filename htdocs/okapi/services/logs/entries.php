@@ -111,12 +111,11 @@ class WebService
                 'was_recommended' => $row['was_recommended'] ? true : false,
                 'needs_maintenance2' => $flag_options[$row['needs_maintenance2']],
                 'listing_is_outdated' => $flag_options[$row['listing_is_outdated']],
+                'oc_team_entry' => $row['oc_team_entry'] ? true : false,
                 'comment' => Okapi::fix_oc_html($row['text']),
                 'images' => array(),
                 'internal_id' => $row['id'],
             );
-            if (in_array('oc_team_entry',$fields))
-                $results[$row['uuid']]['oc_team_entry'] = $row['oc_team_entry'] ? true : false;
             $log_id2uuid[$row['id']] = $row['uuid'];
         }
         Db::free_result($rs);

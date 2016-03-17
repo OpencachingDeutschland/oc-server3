@@ -1003,8 +1003,8 @@ class Okapi
     public static $server;
 
     /* These two get replaced in automatically deployed packages. */
-    public static $version_number = 1196;
-    public static $git_revision = '0c38d6e30e79856862abed5436199691b8cb6365';
+    public static $version_number = 1200;
+    public static $git_revision = 'cf97cb2fb47da54bc9b588f57d3b47822bb45e3c';
 
     private static $okapi_vars = null;
 
@@ -2279,11 +2279,6 @@ class OkapiHttpRequest extends OkapiRequest
                     if (!$this->consumer) {
                         throw new InvalidParam('consumer_key', "Consumer does not exist.");
                     }
-                    if ($this->consumer->hasFlag(OkapiConsumer::FLAG_KEY_REVOKED)) {
-                        throw new BadRequest("Your application was denied access to the " .
-                            Okapi::get_normalized_site_name() . " site " .
-                            "(OKAPI consumer key was revoked).");
-                    }
                 }
                 if (($this->opt_min_auth_level == 1) && (!$this->consumer))
                     throw new BadRequest("This method requires the 'consumer_key' argument (Level 1 ".
@@ -2291,8 +2286,13 @@ class OkapiHttpRequest extends OkapiRequest
             }
         }
 
-        if (is_object($this->consumer) && $this->consumer->hasFlag(OkapiConsumer::FLAG_SKIP_LIMITS))
-        {
+        if (is_object($this->consumer) && $this->consumer->hasFlag(OkapiConsumer::FLAG_KEY_REVOKED)) {
+            throw new BadRequest("Your application was denied access to the " .
+                Okapi::get_normalized_site_name() . " site " .
+                "(OKAPI consumer key was revoked).");
+        }
+
+        if (is_object($this->consumer) && $this->consumer->hasFlag(OkapiConsumer::FLAG_SKIP_LIMITS)) {
             $this->skip_limits = true;
         }
 

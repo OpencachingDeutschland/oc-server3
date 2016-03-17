@@ -119,15 +119,15 @@ function editcomment(edit)
 					<td style="width:10px"><nobr><b>{t}Last modified{/t}{t}#colonspace#{/t}:</b></nobr></td>
 					<td style="width:440px">{$lastmodified|date_format:$opt.format.datelong}</td>
 				{else}
-					<td style="width:10px"></td>
-					<td style="width:440px"></td>
+					<td style="width:10px"><nobr><b>{t}State:{/t}</b></nobr></td>
+					<td style="width:440px">{$status}</td>
 				{/if}
 			</tr>
 			<tr>
 				<td><b>{t}Reason:{/t}</b></td>
 				<td>{$reason|escape|nl2br}</td>
-				<td><nobr><b>{t}State:{/t}</b></nobr></td>
-				<td>{$status}{if $adminnick!=''} &nbsp;&nbsp; <b>Admin</b>{t}#colonspace#{/t}: {if $otheradmin}<font color="red"><b>{/if}{$adminnick|escape}{if $otheradmin}</b></font>{/if}{/if}</td>
+				<td>{if $lastmodified != $created}<nobr><b>{t}State:{/t}</b></nobr>{/if}</td>
+				<td>{if $lastmodified != $created}{$status}{if $adminnick!=''} &nbsp;&nbsp; <b>Admin</b>{t}#colonspace#{/t}: {if $otheradmin}<font color="red"><b>{/if}{$adminnick|escape}{if $otheradmin}</b></font>{/if}{/if}{/if}</td>
 			</tr>
 			<tr><td class="spacer"></td></tr>
 			<tr>

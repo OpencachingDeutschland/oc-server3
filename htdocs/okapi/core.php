@@ -606,6 +606,11 @@ class OkapiConsumer extends OAuthConsumer
      */
     const FLAG_MAPTILE_ACCESS = 2;
 
+    /**
+     * Marks the consumer key as 'revoked', i.e. disables the consumer.
+     */
+    const FLAG_KEY_REVOKED = 4;
+
     public function __construct($key, $secret, $name, $url, $email, $bflags=0)
     {
         $this->key = $key;
@@ -998,8 +1003,8 @@ class Okapi
     public static $server;
 
     /* These two get replaced in automatically deployed packages. */
-    public static $version_number = 1195;
-    public static $git_revision = '48eef3501e6bd66a85fdafc5a82cbed28532c486';
+    public static $version_number = 1196;
+    public static $git_revision = '0c38d6e30e79856862abed5436199691b8cb6365';
 
     private static $okapi_vars = null;
 
@@ -2271,8 +2276,14 @@ class OkapiHttpRequest extends OkapiRequest
                 if ($consumer_key)
                 {
                     $this->consumer = Okapi::$data_store->lookup_consumer($consumer_key);
-                    if (!$this->consumer)
+                    if (!$this->consumer) {
                         throw new InvalidParam('consumer_key', "Consumer does not exist.");
+                    }
+                    if ($this->consumer->hasFlag(OkapiConsumer::FLAG_KEY_REVOKED)) {
+                        throw new BadRequest("Your application was denied access to the " .
+                            Okapi::get_normalized_site_name() . " site " .
+                            "(OKAPI consumer key was revoked).");
+                    }
                 }
                 if (($this->opt_min_auth_level == 1) && (!$this->consumer))
                     throw new BadRequest("This method requires the 'consumer_key' argument (Level 1 ".

@@ -49,6 +49,11 @@
 	{
 		$login->logout();
 		$tpl->assign('error', LOGIN_LOGOUT_OK);
+
+		// Now a login prompt will be shown, and if a target has been supplied,
+		// we will be redirected there after login. Note that OKAPI's
+		// oauth/authorize interactivity=confirm_user function relies on this
+		// "relogin" behavior!
 	}
 	else
 	{

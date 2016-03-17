@@ -81,22 +81,50 @@ class View
 
         if ($force_relogin || ($OC_user_id == null))
         {
-            if ($force_relogin)
-            {
-                # OC uses REAL MAGIC for session handling. I don't get ANY of it.
-                # The logout.php DOES NOT support the "target" parameter, so we
-                # can't just call it. The only thing that comes to mind is...
-                # Destroy EVERYTHING.
+            # TODO: confirm_user should first ask the user if he's "the proper one",
+            # and then offer to sign in as a different user.
 
-                $past = time() - 86400;
-                foreach ($_COOKIE as $key => $value)
-                    setcookie($key, $value, $past, '/');
+            $login_page = 'login.php?';
+
+            if ($OC_user_id !== null)
+            {
+                if (Settings::get('OC_BRANCH') == 'oc.de')
+                {
+                    # OCDE login.php?action=logout&target=... will NOT logout and
+                    # then redirect to the target, but it will log out, prompt for
+                    # login and then redirect to the target after logging in -
+                    # that's exactly the relogin that we want.
+
+                    $login_page .= 'action=logout&';
+                }
+                else
+                {
+                    # OCPL uses REAL MAGIC for session handling. I don't get ANY of it.
+                    # The logout.php DOES NOT support the "target" parameter, so we
+                    # can't just call it. The only thing that comes to mind is...
+                    # Try to destroy EVERYTHING. (This still won't necessarilly work,
+                    # because OC may store cookies in separate paths, but hopefully
+                    # they won't).
+
+                    if (isset($_SERVER['HTTP_COOKIE'])) {
+                        $cookies = explode(';', $_SERVER['HTTP_COOKIE']);
+                        foreach ($cookies as $cookie) {
+                            $parts = explode('=', $cookie);
+                            $name = trim($parts[0]);
+                            setcookie($name, '', time()-1000);
+                            setcookie($name, '', time()-1000, '/');
+                            foreach (self::getPossibleCookieDomains() as $domain) {
+                                setcookie($name, '', time()-1000, '/', $domain);
+                            }
+                        }
+                    }
+
+                    # We should be logged out now. Let's login again.
+                }
             }
 
-            # We should be logged out now. Let's login again.
-
             $after_login = "okapi/apps/authorize?oauth_token=$token_key".(($langpref != Settings::get('SITELANG'))?"&langpref=".$langpref:"");
-            $login_url = Settings::get('SITE_URL')."login.php?target=".urlencode($after_login)
+            $login_url = Settings::get('SITE_URL').$login_page."target=".urlencode($after_login)
                 ."&langpref=".$langpref;
             return new OkapiRedirectResponse($login_url);
         }
@@ -188,5 +216,22 @@ class View
             return new OkapiRedirectResponse(Settings::get('SITE_URL')."okapi/apps/authorized?oauth_token=".$token_key
                 ."&oauth_verifier=".$token['verifier']."&langpref=".$langpref);
         }
+    }
+
+    /**
+     * Return a list of all plausible cookie domains which OC developers might
+     * have used to store user session data.
+     */
+    private static function getPossibleCookieDomains()
+    {
+        $site_url = Settings::get('SITE_URL');
+        $domain = parse_url($site_url, PHP_URL_HOST);
+        $segments = explode(".", $domain);
+        $results = array();
+        for ($to_skip = 0; $to_skip <= count($segments) - 2; $to_skip++) {
+            $results[] = ".".implode(".", array_slice($segments, $to_skip));
+            $results[] = implode(".", array_slice($segments, $to_skip));
+        }
+        return $results;
     }
 }

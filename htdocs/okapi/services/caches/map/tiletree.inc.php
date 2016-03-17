@@ -118,8 +118,7 @@ class TileTree
         $time_started = microtime(true);
 
         # Note, that multiple threads may try to compute tiles simulatanously.
-        # For low-level tiles, this can be expensive. WRTODO: Think of some
-        # appropriate locks.
+        # For low-level tiles, this can be expensive.
 
         $status = self::get_tile_status($zoom, $x, $y);
         if ($status !== null)
@@ -221,6 +220,8 @@ class TileTree
 
                 # Cache the result.
 
+                # Avoid deadlocks, see https://github.com/opencaching/okapi/issues/388
+                Db::execute("lock tables okapi_tile_caches write, okapi_tile_caches tc2 read");
                 Db::execute("
                     replace into okapi_tile_caches (
                         z, x, y, cache_id, z21x, z21y, status, type, rating,
@@ -232,7 +233,7 @@ class TileTree
                         '".Db::escape_string($y)."',
                         cache_id, z21x, z21y, status, type, rating,
                         flags, name_crc
-                    from okapi_tile_caches
+                    from okapi_tile_caches tc2
                     where
                         z = '".Db::escape_string($parent_zoom)."'
                         and x = '".Db::escape_string($parent_x)."'
@@ -240,6 +241,7 @@ class TileTree
                         and z21x between $left_z21x and $right_z21x
                         and z21y between $top_z21y and $bottom_z21y
                 ");
+                Db::execute("unlock tables");
                 $test = Db::select_value("
                     select 1
                     from okapi_tile_caches

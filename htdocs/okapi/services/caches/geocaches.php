@@ -703,17 +703,32 @@ class WebService
             foreach ($results as &$result_ref)
                 $result_ref['latest_logs'] = array();
 
-            # Get all log IDs with dates. Sort in groups. Filter out latest ones. This is the fastest
-            # technique I could think of...
+            # Get all log IDs in proper order, then filter out the latest
+            # ones. This should be the fastest technique ...
+
+            # OCDE allows to submit logs without time. To minimize problems
+            # when ordering logs with and without time on the same day, there
+            # is a separate order_date field which is caluclated from 'date'
+            # and 'date_created'.
+            #
+            # OCPL log entries are all submitted with time, so the 'date'
+            # field is sufficient for ordering.
+
+            if (Settings::get('OC_BRANCH') == 'oc.de') {
+                $logs_order_field_SQL = 'order_date';
+            } else {
+                $logs_order_field_SQL = 'date';
+            }
 
             $rs = Db::query("
-                select cache_id, uuid, date
+                select cache_id, uuid
                 from cache_logs
                 where
                     cache_id in ('".implode("','", array_map('\okapi\Db::escape_string', array_keys($cacheid2wptcode)))."')
                     and ".((Settings::get('OC_BRANCH') == 'oc.pl') ? "deleted = 0" : "true")."
-                order by cache_id, date desc, date_created desc
+                order by cache_id, ".$logs_order_field_SQL." desc, date_created desc, id desc
             ");
+
             $loguuids = array();
             $log2cache_map = array();
             if ($lpc !== null)
@@ -724,10 +739,6 @@ class WebService
                     $tmp[$row['cache_id']][] = $row;
                 foreach ($tmp as $cache_key => &$rowslist_ref)
                 {
-                    usort($rowslist_ref, function($rowa, $rowb) {
-                        # (reverse order by date)
-                        return ($rowa['date'] < $rowb['date']) ? 1 : (($rowa['date'] == $rowb['date']) ? 0 : -1);
-                    });
                     for ($i = 0; $i < min(count($rowslist_ref), $lpc); $i++)
                     {
                         $loguuids[] = $rowslist_ref[$i]['uuid'];
@@ -744,6 +755,8 @@ class WebService
                     $log2cache_map[$row['uuid']] = $cacheid2wptcode[$row['cache_id']];
                 }
             }
+
+            Db::free_result($rs);
 
             # We need to retrieve logs/entry for each of the $logids. We do this in groups
             # (there is a limit for log uuids passed to logs/entries method).

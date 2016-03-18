@@ -17,7 +17,8 @@ var tip_general_lo = "{if $gcwp}{t}Select <i>is outdated</i> if the geocache sea
 var tip_activate_nm = '{t}By logging "Available", you also confirm that the geocache is in good condition.{/t}';
 var tip_activate_lo = '{t}By logging "Available", you also confirm that the geocache description is up-to-date.{/t}';
 var tip_disable_nm = "{t}You may indicate here what is the current maintenance state of the geocache.{/t}"; 
-var tip_disable_lo = "{t}You may indicate here if the cache description is up-to-date.{/t}"; 
+var tip_disable_lo = "{t}You may indicate here if the cache description is up-to-date.{/t}";
+var tip_dnf_nm = "{t}If you are sure that the geocache is gone, and the owner does not<br />react to your log entry, you may report it to the Opencaching team.<br />Use the 'Report this cache' button above the cache description.{/t}";
 
 var cache_listing_is_outdated = {$cache_listing_is_outdated} + 0;
 var ownerlog = {$ownerlog} + 0;
@@ -97,6 +98,17 @@ function logtype_changed()
 	var nm = document.getElementById('needs_maintenance');
 	var lo = document.getElementById('listing_outdated');
 
+	if ((new_logtype == 2) != (old_logtype == 2))
+	{
+		nm.value = "0";
+		nm.disabled = (new_logtype == 2);
+		nm.className = (new_logtype == 2 ? 'disabled' : '');
+
+		lo.value = "0";
+		lo.disabled = (new_logtype == 2);
+		lo.className = (new_logtype == 2 ? 'disabled' : '');
+	}
+
 	if ((new_logtype == 10) != (old_logtype == 10))
 	{
 		nm.value = (old_logtype == 10 ? "0" : "1");
@@ -106,9 +118,9 @@ function logtype_changed()
 		lo.value = (old_logtype == 10 ? "0" : "1");
 		lo.disabled = (new_logtype == 10);
 		lo.className = (new_logtype == 10 ? 'disabled' : '');
-
-		old_logtype = new_logtype;
 	}
+
+	old_logtype = new_logtype;
 
 	// This allows us to post also disabled fields' values:
 	document.getElementById('needs_maintenance2').value = nm.value;
@@ -137,6 +149,8 @@ function show_nm_tip()
 		show_tip(tip_activate_nm);
 	else if (document.editform.logtype.value == "11")
 		show_tip(tip_disable_nm);
+	else if (document.editform.logtype.value == "2")
+		show_tip(tip_dnf_nm);
 	else
 		show_tip(tip_general_nm);
 }
@@ -147,7 +161,7 @@ function show_lo_tip()
 		show_tip(tip_activate_lo);
 	else if (document.editform.logtype.value == "11")
 		show_tip(tip_disable_lo);
-	else
+	else if (document.editform.logtype.value != "2")
 		show_tip(tip_general_lo);
 }
 

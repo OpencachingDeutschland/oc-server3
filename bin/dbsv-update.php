@@ -836,6 +836,11 @@
 			sql("ALTER TABLE `cache_reports` ADD COLUMN `comment` mediumtext NOT NULL");
 	}
 
+	function dbv_153()  // generic trigger update, see notes on "maintain.php update"
+	{
+		update_triggers();
+	}
+
 	// When adding new mutations, take care that they behave well if run multiple
 	// times. This improves robustness of database versioning.
 	//

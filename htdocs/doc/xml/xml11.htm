@@ -56,7 +56,7 @@
 		</ul>
 		<h2>Änderungen in Version 1.4 (Juni 2013)</h2>
 		<ul>
-			<li>Bei Caches wird zusätzlich das Feld <em>listing_lastmodified</em> ausgegeben, das das Gesamt-Änderungsdatum des Listings inklusive hinzugefügten/geänderten/gelöschten Beschreibungen und Bildern enthält. Bei Logs gibt es entsprechend das zusätzliche Feld <em>log_last_modified</em>, das Bilder mit einschließt.</li>
+			<li>Bei Caches wird zusätzlich das Feld <em>listing_lastmodified</em> ausgegeben, das das Gesamt-Änderungsdatum des Listings inklusive hinzugefügten/geänderten/gelöschten Beschreibungen und Bildern enthält. Bei Logs gibt es entsprechend das zusätzliche Feld <em>log_last_modified</em>, das Bilder mit einschließt. Das heißt: Ab Version 1.4 werden &lt;cache&gt;- und &lt;cachelog&gt;-Einträge auch dann neu übertragen, wenn es nur Änderungen bei Beschreibungen oder Bildern gab.</li>
 			<li>Wenn ein User einen Cache empfohlen und diesen mehrfach als "Fund" geloggt hat, wurde bislang bei allen Fundlogs <em>recommended="1"</em> mitgeliefert (allerdings nicht rückwirkend - das war ein Bug. Auch zurückgezogene Empfehlungen wurden nicht immer sofort ausgeliefert).<br />
 			Dieses Verhalten wurde so geändert, dass <em>recommended="1"</em> nur noch bei genau dem Log mitgeliefert wird, mit dem die Empfehlung für den Cache gegeben wurde. Mehrfachempfehlungen sind nicht möglich (und waren es noch nie).<br />
 			Gleichzeitig wurde auch die Darstellung auf opencaching.de geändert: Bei Mehrfach-Fundlogs erscheint der grüne Stern nur noch an einem der Logs.<br /> 

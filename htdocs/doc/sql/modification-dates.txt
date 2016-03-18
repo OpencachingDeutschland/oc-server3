@@ -50,7 +50,7 @@ meta_last_modified
 	does not update any other fields of the caches table. This currently applies
 	to geokrets in the cache (gk_item_waypoint table), to log and recommendation
 	statistics (stat_caches table), and to the Cronjob-generated cache_location
-	information. Things like caches.wp_gc_maintained may be added.
+	information.
 
 	Updating this field triggers an update of okapi_syncbase. We don't update
 	okapi_syncbase directly, as it may be missing because OKAPI is not installed.
@@ -62,8 +62,9 @@ meta_last_modified
 flags_last_modified
 	Is updated when logger-supplied cache properties change, which do not update
 	the listing moficiation date but are exported through XML interface.
-	Currently this are the flags needs_maintenance and listing_outdated. Cache lists
-	associated with the cache may be added to update this date.
+	Currently this are the flags needs_maintenance and listing_outdated and the
+	field wp_gc_maintained. Cache lists associated with the cache may be added
+	to update this date.
 
 An additional field may be needed in the future for listing data which is not
 provied by the owner (or admins), like wp_gc_maintained or "logger feedback"

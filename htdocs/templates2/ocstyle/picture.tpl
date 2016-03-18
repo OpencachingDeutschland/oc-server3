@@ -65,7 +65,7 @@
 	<table class="table">
 		<tr><td class="spacer" colspan="2"></td></tr>
 		<tr>
-			<td valign="top">{t}Name:{/t}</td>
+			<td valign="top">{t}Title:{/t}</td>
 			<td colspan="2">
 				<input class="input300" name="title" type="text" value="{$title|escape}" size="43" />
 				{if $errortitle==true}

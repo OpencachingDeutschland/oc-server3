@@ -777,10 +777,19 @@ function startXmlSession($sModifiedSince, $bCache, $bCachedesc, $bCachelog, $bUs
 		// ohne selection
 		if ($bCache == 1)
 		{
-			if ($ocxmlversion >= 15)
-				$wherefield = 'GREATEST(`last_modified`,`flags_last_modified`)';
-			else
+			if ($ocxmlversion >= 15) {
+				// Starting with version 15, we include the 'needs maintenance' and
+				// 'listing is outdated' flags in the <cache> records.
+				$wherefield = 'GREATEST(`listing_last_modified`,`flags_last_modified`)';
+			}
+			else if ($ocxmlversion == 14) {
+				// Starting with version 14, we include listing_last_modified in the
+				// <caches> records, so this date is relevant for updates
+				$wherefield = '`listing_last_modified`';
+			}
+			else {
 				$wherefield = '`last_modified`';
+			}
 			sql("INSERT INTO xmlsession_data (`session_id`, `object_type`, `object_id`)
 			     SELECT &1, 2, `cache_id` FROM `caches` WHERE ".$wherefield." >= '&2' AND `status`!=5",
 			     $sessionid,

@@ -349,7 +349,7 @@ class cache
 
 	static function getLogsArray($cacheid, $start, $count, $deleted=false, $protect_old_coords=false)
 	{
-		global $login;
+		global $login, $translate;
 
 		// negative or abornally high numbers like 1.0E+15 can crash the LIMIT statement
 		if ($count <= 0 || $count > 10000)
@@ -420,9 +420,17 @@ class cache
 		while ($rLog = sql_fetch_assoc($rsLogs))
 		{
 			$pictures = array();
-			$rsPictures = sql("SELECT `url`, `title`, `uuid`, `id`, `spoiler` FROM `pictures` WHERE `object_id`='&1' AND `object_type`=1", $rLog['id']);
+			$rsPictures = sql("
+				SELECT `url`, `title`, `uuid`, `id`, `spoiler`
+				FROM `pictures`
+				WHERE `object_id`='&1' AND `object_type`=1",
+				$rLog['id']);
 			while ($rPicture = sql_fetch_assoc($rsPictures))
+			{
+				if (trim($rPicture['title']) == '')
+				    $rPicture['title'] = $translate->t('Picture', '', '', 0) . ' ' . (count($pictures)+1);
 				$pictures[] = $rPicture;
+			}
 			sql_free_result($rsPictures);
 			$rLog['pictures'] = $pictures;
 			$rLog['text'] = use_current_protocol_in_html($rLog['text']);

@@ -80,7 +80,8 @@
 			$picture->setMapPreview(isset($_REQUEST['mappreview']) && $_REQUEST['mappreview']=='1');
 
 			$title = isset($_REQUEST['title']) ? $_REQUEST['title'] : '';  // Ocprop
-			if ($title == '')
+			if ($title == '' ||
+			    ($picture->getObjectType() == OBJECT_CACHELOG && trim($title) == ''))
 			{
 				$tpl->assign('errortitle', true);
 				$bError = true;

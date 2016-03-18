@@ -2863,6 +2863,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2602', 'All inf
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2603', 'More than 2 years ago', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2604', 'Admin<br />comment:', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2605', 'If you are sure that the geocache is gone, and the owner does not<br />react to your log entry, you may report it to the Opencaching team.<br />Use the \'Report this cache\' button above the cache description.', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2606', 'Picture', '2015-06-17 10:09:14');
 
 -- Table sys_trans_ref
 SET NAMES 'utf8';
@@ -7455,6 +7456,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2603', 'DE', 'vor mehr als 2 Jahren', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2604', 'DE', 'Admin-<br />Kommentar:', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2605', 'DE', 'Wenn du sicher bist, dass der Cache nicht mehr da ist, und der Besitzer <br />nicht auf dein Log reagiert, kannst du eine Meldung an das Opencaching-<br />Team senden. Verwende dazu den Knopf \'Cache melden\' oberhalb der <br />Cachebeschreibung.', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2606', 'DE', 'Bild', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'EN', 'Reorder IDs', '2010-09-02 00:15:30');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'EN', 'The database could not be reconnected.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'EN', 'Testing – please do not login', '2010-08-28 11:48:07');

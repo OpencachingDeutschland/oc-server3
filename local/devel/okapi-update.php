@@ -33,7 +33,7 @@ $current_okapi_branch = git('rev-parse --abbrev-ref HEAD');
 if ($current_okapi_branch != 'master')
 {
   echo "[okapi-update] checking out OKAPI master branch\n";
-  echo okapi_git('checkout master');
+  echo git('checkout master');
 }
 $changes = git("log upstream/master..master");
 if ($changes)

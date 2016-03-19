@@ -95,8 +95,8 @@
 			{if $logItem.userid==$login.userid}
 				&nbsp;
 				[<a href="picture.php?action=edit&uuid={$pictureItem.uuid|escape}">{t}Edit{/t}</a>]
-				{if !$smarty.foreach.pictures.first}[<a href="picture.php?action=up&uuid={$pictureItem.uuid|escape}" title="{t}move up{/t}">&#x25B2;</a>]{/if}
 				[<a href="javascript:if(confirm('{t escape=js}Do you really want to delete this picture?{/t}'))location.href='picture.php?action=delete&uuid={$pictureItem.uuid|escape}'">{t}Delete{/t}</a>]
+				{if !$smarty.foreach.pictures.first}[<a href="picture.php?action=up&uuid={$pictureItem.uuid|escape}">{t}move up{/t}</a>]{/if}
 			{/if}
 			<br />
 		{/foreach}

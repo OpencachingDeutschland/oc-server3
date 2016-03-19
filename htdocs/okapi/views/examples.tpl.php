@@ -52,11 +52,12 @@ We may choose to post a link somewhere here.</p>
 
 <h2 id='php1'>PHP Example 1 - simple query</h2>
 
-<p>Please note that the examples below use very simple error checking routines.
-If you want to be "professional", you should catch HTTP 400 Responses, read their
-bodies (OKAPI error messages), and deal with them more gracefully.</p>
+<p>Please note that the examples below use extremely simplied error checking
+routines. If you want to be "professional", then you should catch all HTTP 400
+Responses, read their bodies (OKAPI error messages), and deal with them more
+gracefully.</p>
 
-<p>This will print the number of users in the <?= $vars['site_name'] ?> installation:
+<p>This will print the number of users in the <?= $vars['site_name'] ?> installation:</p>
 
 <script src="https://gist.github.com/4231796.js?file=users.php"></script>
 
@@ -69,17 +70,26 @@ bodies (OKAPI error messages), and deal with them more gracefully.</p>
 <h2 id='js1'>JavaScript Example</h2>
 
 <p>It is possible to access OKAPI directly from user's browser, without the
-need for server backend. OKAPI allows <a href='http://en.wikipedia.org/wiki/XMLHttpRequest#Cross-domain_requests'>Cross-domain
-XHR requests</a>. You can also use <a href='http://en.wikipedia.org/wiki/JSONP'>JSONP</a> output format.
+need for server backend. OKAPI allows
+<a href='http://en.wikipedia.org/wiki/XMLHttpRequest#Cross-domain_requests'>Cross-domain
+XHR requests</a>. You can also use
+<a href='http://en.wikipedia.org/wiki/JSONP'>JSONP</a> output format.
 There are some limitations of both these techniques though.</p>
 
 <p>This example does the following:</p>
+
 <ul>
-    <li>Pulls the <a href='<?= $vars['okapi_base_url'] ?>services/apisrv/installations.html'>list of all OKAPI installations</a>
-    from one of the OKAPI servers and displays it in a select-box. Note, that this method does not
-    require Consumer Key (Level 0 Authentication).</li>
+    <li>
+        Pulls the
+        <a href='<?= $vars['okapi_base_url'] ?>services/apisrv/installations.html'>list of all OKAPI installations</a>
+        from one of the OKAPI servers and displays it in a select-box. Note,
+        that this method does not require Consumer Key (Level 0 Authentication).
+    </li>
     <li>Asks you to share your location (modern browser can do that).</li>
-    <li>Retrieves a list of nearest geocaches. (This time, it uses the Consumer Key you have to supply.)</li>
+    <li>
+        Retrieves a list of nearest geocaches. (This time, it needs to use a
+        Consumer Key which you will have to supply.)
+    </li>
 </ul>
 
 <p><a href='<?= $vars['okapi_base_url'] ?>static/examples/javascript_nearest.html' style='font-size: 130%; font-weight: bold'>Run this example</a></p>

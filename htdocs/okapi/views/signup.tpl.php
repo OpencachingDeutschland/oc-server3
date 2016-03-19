@@ -79,12 +79,14 @@
                                 </tr>
                             </table>
                             <p>* - required fields</p>
+
                             <p>If you want to test OKAPI only, use your email address as application name.
                             You must provide a valid email address at which we may contact you later.</p>
-                            <p>Application homepage URL is optional and will be used for hyperlinks,
-                            to allow users to find your application more easily. If provided, it must
-                            be a "http://" web address. (In case you were wondering, it has nothing
-                            to do with OAuth callback.)</p>
+
+                            <p>Application homepage URL is optional and - if given - it may be published in
+                            various contextx on the Opencaching site, to allow users to find your
+                            application more easily. If provided, it must be a "http(s)://" web address.
+                            (In case you're wondering, it has nothing to do with OAuth callback.)</p>
                         </form>
 
                         <h2>Terms of Use</h2>
@@ -101,17 +103,22 @@
                         <p>You <b>must</b> comply with the requirements of the <?= $vars['site_name'] ?>
                         <?= $vars['data_license_html'] ?> when reproducing, displaying, copying,
                         formatting, compiling, or otherwise using Geocaching Data acquired through OKAPI.</p>
+
                         <p>When possible <?= $vars['site_name'] ?> <b>must</b> be a clickable link
                         to <?= $vars['site_name'] ?> site and if the information being displayed is
                         about a particular geocache, it should link to that geocache's page on
                         <?= $vars['site_name'] ?>.</p>
+
                         <p><b>You may not:</b></p>
+
                         <ul>
                             <li>Copy, publish, compile, print, display, format, assemble, or otherwise use Geocaching Data
                             acquired through OKAPI in a manner contrary to <?= $vars['site_name'] ?>
                             <?= $vars['data_license_html'] ?>.</li>
+
                             <li>Delete, obscure, modify, or in any manner alter any warning, notice, attribution, or link
                             that appears in OKAPI or the served content.</li>
+
                             <li>Hide, modify, or otherwise obscure your identity, your system's identity, or your user's
                             <?= $vars['site_name'] ?> account information, when using OKAPI.</li>
                         </ul>

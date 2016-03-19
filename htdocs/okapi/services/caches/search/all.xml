@@ -2,21 +2,27 @@
     <brief>Search for geocaches</brief>
     <issue-id>15</issue-id>
     <desc>
-        <p>Search for geocaches using some simple filters.
-        All of them are optional, but you surely want to use at least some of them.</p>
+        <p>Search for geocaches using some simple filters. All of them are
+        optional, but you surely want to use at least some of them.</p>
         <ul>
-            <li>If you're looking for a way to keep your geocaching database in sync with ours,
-            have a peek at the <b>replicate</b> module.</li>
-            <li>Usually you will want to use search_and_retrieve method instead of this one.
-            This way, you can get much more data in <b>one request</b>.</li>
+            <li>
+                If you're looking for a way to keep your geocaching database in
+                sync with ours, have a peek at the <b>replicate</b> module.
+            </li>
+            <li>
+                Usually you will want to use search_and_retrieve method instead
+                of this one. This way, you can get much more data in <b>one
+                request</b>.
+            </li>
         </ul>
     </desc>
     <opt name='type'>
         <p>Pipe-separated list of cache type codes. If given, the results will be limited
         to the given cache types. For a list of cache type codes, see services/caches/geocache
         method.</p>
+
         <p><b>Notice:</b> If you want to include all cache types <b>except</b>
-        given ones, prepend your list with the "-" sign.</p>
+        the given ones, prepend your list with the "-" sign.</p>
     </opt>
     <opt name='status' default='Available'>
         <p>Pipe-separated list of status codes. Only caches matching any of the given
@@ -26,19 +32,24 @@
     <opt name='owner_uuid'>
         <p>Pipe-separated list of user IDs. If given, the list of returned caches
         will be limited to those owned by the given users.</p>
+
         <p><b>Notice:</b> User ID and Username are two different things!</p>
+
         <p><b>Notice:</b> If you want to include all caches <b>except</b> the ones
         owned by the given users, prepend your list with the "-" sign.</p>
     </opt>
     <opt name='name'>
         <p>UTF-8 encoded string - the name (or part of the name) of the cache.</p>
+
         <p>Allowed wildcard characters:</p>
         <ul>
             <li>asterisk ("*") will match any string of characters,</li>
             <li>underscore ("_") will match any single character.</li>
         </ul>
-        <p>Name matching is case-insensitive. Maximum length for the <b>name</b> parameter
-        is 100 characters.</p>
+
+        <p>Name matching is case-insensitive. Maximum length for the
+        <b>name</b> parameter is 100 characters.</p>
+
         <p><b>Examples:</b></p>
         <ul>
             <li>"name=the *" returns caches which name starts with "the " (or "The ", etc.),</li>
@@ -46,6 +57,7 @@
             <li>"name=*water tower*" will match caches like "Beautiful Water Tower II",</li>
             <li>"name=*tower_" will match "Water Towers" but will <b>not</b> match "Water Tower".</li>
         </ul>
+
         <p><b>Notice:</b> Cache code and name are two different things - if you want to
         find a cache by its code, use the services/caches/geocache method.</p>
     </opt>
@@ -61,9 +73,11 @@
         <p>Deprecated. Please use <b>size2</b> instead - this will allow you to
         differentiate "nano" vs. "micro" and "none" vs. "other" sizes
         (<a href='https://github.com/opencaching/okapi/issues/155'>details</a>).</p>
+
         <p>A string "X-Y", where X and Y are integers between 1 and 5, and X &lt;= Y.
         Only caches with size attribute between these numbers (inclusive) will be returned
         (1 - micro, 5 - very big).</p>
+
         <p><b>Notice:</b> If you use this parameter, all caches which do not have a container
         (like Event or Virtual caches) will be excluded from the results. If you want caches
         with no container included, append "|X" suffix to the value of this parameter
@@ -73,6 +87,7 @@
         <p>Pipe-separated list of "size2 codes". Only matching caches will be
         included. The codes are: 'none', 'nano', 'micro', 'small', 'regular',
         'large', 'xlarge', 'other'.</p>
+
         <p><b>Note:</b> Not all OC servers use all of these. I.e. OCPL does not
         have 'nano' nor 'other' caches (but it might have them in the future).</p>
     </opt>
@@ -80,17 +95,20 @@
         <p>A string "X-Y", where X and Y are integers between 1 and 5, and X &lt;= Y.
         Only caches with an overall rating between these numbers (inclusive) will be returned
         (1 - poor, 5 - excellent).</p>
+
         <p><b>Notice:</b> If you use this parameter, all caches with too few votes will be
         excluded from results. If you still want unrated caches included, append "|X" suffix
         to the value of this parameter (e.g. "3-5|X").</p>
+
         <p><b>Notice:</b> Some OC installations do not provide ratings for their geocaches.
         On such installation, this parameter will be ignored.</p>
     </opt>
     <opt name='min_rcmds'>
         <p>There are two possible value-types for this argument:</p>
         <ul>
-            <li>Integer N. If <i>N</i> given, the result will contain only those caches which have
-            at least <i>N</i> recommendations.</li>
+            <li>Integer N. If <i>N</i> given, the result will contain only
+            those caches which have at least <i>N</i> recommendations.</li>
+
             <li>Integer N with a percent sign appended (e.g. "20%"). The result will contain
             only those caches which have at last <i>N%</i> ratio of recommendations/founds.
             Please note, that this is useful only with conjunction with <b>min_founds</b>
@@ -110,13 +128,16 @@
         format acceptable by PHP's <a href='http://php.net/manual/function.strtotime.php'>strtotime</a>
         function also will do, but most of them don't handle time zones properly,
         try to use ISO 8601!).</p>
+
         <p>If given, the list of returned geocaches will be limited to those which were
         created or modified since that date. (Note: currently caches do not get
         "modified" when user makes a log entry.)</p>
     </opt>
     <opt name='found_status' default='either'>
-        <p><b>Notice:</b> This parameter may be used only for requests signed with an Access Token
-        (you will need to use <b>Level 3</b> Authentication).</p>
+        <p><b>Notice:</b> This parameter may be used only for requests signed
+        with an Access Token (you will need to use <b>Level 3</b>
+        Authentication).</p>
+
         <p>Should be one of the following:</p>
         <ul>
             <li><b>found_only</b> - only caches found by the user will be returned,</li>
@@ -133,8 +154,10 @@
         geocaches <b>not found by any</b> of the given users.</p>
     </opt>
     <opt name='watched_only' default='false'>
-        <p><b>Notice:</b> This parameter may be used only for requests signed with an Access Token
-        (you will need to use <b>Level 3</b> Authentication).</p>
+        <p><b>Notice:</b> This parameter may be used only for requests signed
+        with an Access Token (you will need to use <b>Level 3</b>
+        Authentication).</p>
+
         <p>Boolean. If set to <b>true</b>, only caches which the user has marked as watched
         will be included in the result. This might be used to temporarily mark geocaches
         of particular interest (e.g. "all the caches I plan to find today").</p>
@@ -142,14 +165,17 @@
     <opt name='exclude_ignored' default='false' class='deprecated'>
         <p>Deprecated (<a href="https://github.com/opencaching/okapi/issues/349">why?</a>),
         please use <b>ignored_status</b> instead.</p>
+
         <p><b>Notice:</b> This parameter may be used only for requests signed
         with an Access Token (you will need to use <b>Level 3</b> Authentication).</p>
         <p>Boolean. If set to <b>true</b>, caches which the user has marked as ignored
         will not be included in the result.</p>
     </opt>
     <opt name='ignored_status' default='either'>
-        <p><b>Notice:</b> This parameter may be used only for requests signed with an Access Token
-        (you will need to use <b>Level 3</b> Authentication).</p>
+        <p><b>Notice:</b> This parameter may be used only for requests signed
+        with an Access Token (you will need to use <b>Level 3</b>
+        Authentication).</p>
+
         <p>Should be one of the following:</p>
         <ul>
             <li>
@@ -167,6 +193,7 @@
         <p><b>Notice:</b> This parameter may be used only for requests signed
         with an Access Token (you will need to use <b>Level 3</b> Authentication).
         See <b>owner_uuid</b> parameter if you don't want to use OAuth.</p>
+
         <p>Boolean. If set to <b>true</b>, caches which the user is an owner of will
         not be included in the result.</p>
     </opt>
@@ -179,7 +206,7 @@
         found <b>by anyone</b> will be included.
     </opt>
     <opt name='powertrail_only' default='false'>
-        <p>BETA. Boolean. If set to <b>true</b>, only caches which belong to at
+        <p>Boolean. If set to <b>true</b>, only caches which belong to at
         least one <b>active</b> Power Trail will be included.</p>
 
         <p>Power Trails are sets of geocaches. Only some Opencaching nodes
@@ -188,7 +215,7 @@
         receive an empty result.</p>
     </opt>
     <opt name='powertrail_ids'>
-        <p>BETA. Pipe-separated list of Power Trail IDs. If given, then only
+        <p>Pipe-separated list of Power Trail IDs. If given, then only
         the caches which belong to at least one of the referenced Power Trails
         will be included. Only <b>active</b> Power Trails are taken into
         consideration, IDs which reference inactive or nonexistent Power Trails
@@ -198,16 +225,19 @@
         implement this feature. If this node does not implement it, then
         whenever you use this parameter, you will <b>always</b> receive an
         empty result. Also, at the time of writing this, there is no method to
-        retrieve any Power Trails, or their IDs. So, this parameter is for
-        internal use only.</p>
+        retrieve any Power Trails, or their IDs. So, this parameter is
+        primarily for internal use only.</p>
     </opt>
     <opt name='set_and'>
         <p>ID of a set previously created with the <b>search/save</b> method.
-        If given, the results are <a href='http://en.wikipedia.org/wiki/Logical_conjunction'>AND</a>ed
+        If given, the results are
+        <a href='http://en.wikipedia.org/wiki/Logical_conjunction'>AND</a>ed
         together with this set.</p>
-        <p>If you want to list the set contents only, please note the default
-        value of the <b>status</b> parameter! You may want to override it
-        in order to include unavailable and/or archived geocaches within the set.</p>
+
+        <p>If you want to simply retrieve the contents of set, then please note
+        the default value of the <b>status</b> parameter! You may want to
+        override it in order to include unavailable and/or archived geocaches
+        within the set.</p>
     </opt>
     <opt name='limit' default='100'>
         <p>Integer in range 1..500. Maximum number of cache codes returned.</p>
@@ -221,17 +251,17 @@
     <opt name='order_by'>
         <p>Pipe separated list of fields to order the results by. Prefix the field name with
         a '-' sign to indicate a descending order.</p>
+
         <p>Currently, fields which you can order by include: <b>code</b>, <b>name</b>,
         <b>founds</b>, <b>rcmds</b>, <b>rcmds%</b> (tell us if you want more).</p>
+
         <p><b>Examples:</b></p>
         <ul>
             <li>to order by cache name use "order_by=name" or "order_by=+name",</li>
             <li>to have the most recommended caches in front, use "order_by=-rcmds%",</li>
             <li>multicolumn sorting is also allowed, ex. "order_by=-founds|name"</li>
         </ul>
-        <p><b>Note:</b> Try to avoid executing separate OKAPI request every time you
-        want to sort the data which you <b>already have</b>. Consider caching and
-        sorting on client side. This will speed up things for both sides.</p>
+
         <p><b>Note:</b> For most other methods (like <b>bbox</b> and <b>nearest</b>),
         the default order is <i>by the distance from the center</i>. If you supply
         custom <b>order_by</b> parameter, then we will try to order by your preference
@@ -242,9 +272,11 @@
         <p>A dictionary of the following structure:</p>
         <ul>
             <li><b>results</b> - a list of cache codes,</li>
-            <li><b>more</b> - boolean, <b>true</b> means that there were more
-            results for your query, but they were not returned because of the
-            <b>limit</b> parameter.</li>
+            <li>
+                <b>more</b> - boolean, <b>true</b> means that there were more
+                results for your query, but they were not returned because of the
+                <b>limit</b> parameter.
+            </li>
         </ul>
     </returns>
 </xml>

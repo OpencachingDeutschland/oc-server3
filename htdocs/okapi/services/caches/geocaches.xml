@@ -6,7 +6,7 @@
         with multiple geocaches (instead of only one).</p>
     </desc>
     <req name='cache_codes'>
-        <p>Pipe-separated list of cache cache codes. These represent the
+        <p>Pipe-separated list of geocache codes. These represent the
         geocaches you are interested in. No more than 500 codes are allowed.
         Unlike in the "geocache" method, this CAN be an empty string (it will
         result in an empty, but valid, response).</p>
@@ -15,6 +15,7 @@
         <p>Pipe-separated list of ISO 639-1 language codes. This indicates the
         order of preference in which language will be chosen for fields like
         <b>name</b> and <b>description</b>.</p>
+
         <p>Please note, that you may also access caches' descriptions in all
         available languages. If you want to do this, you should use fields
         <b>names</b>, <b>descriptions</b> (etc.) instead of <b>name</b> and
@@ -44,11 +45,14 @@
     <returns>
         <p>A dictionary. Cache codes you provide will be mapped to dictionary keys,
         and each value will be a dictionary of fields you have selected.</p>
+
         <p>For example, for <i>geocaches?cache_codes=OP3D96|OC124&amp;fields=type</i>
         query, the result might look something link this:</p>
+
         <pre>{"OP3D96": {"type": "Traditional"}, "OC124": null}</pre>
-        <p>Value of <b>null</b> means that the given cache haven't been found.
+
+        <p>Value of <b>null</b> means that no geocache by this code has been found.
         (This behavior is different than in the services/caches/geocache method, which
-        responds with an HTTP 400 error in such case.)</p>
+        responds with a HTTP 400 error in such case.)</p>
     </returns>
 </xml>

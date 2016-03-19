@@ -4,12 +4,14 @@
     <desc>
         <p>Find the nearest geocaches. Unless overriden, results are ordered by the distance from
         the given center point.</p>
+
         <p>Usually you will want to use search_and_retrieve method instead of this one.
         This way, you can get much more data in <b>one request</b>.</p>
     </desc>
     <req name='center'>
         <p>The center point (typically - the user's location), in the
         "lat|lon" format.</p>
+
         <p>Use positive numbers for latitudes in the northern hemisphere and
         longitudes in the eastern hemisphere (and negative for southern and
         western hemispheres accordingly). These are full degrees with a dot
@@ -19,7 +21,7 @@
         <p>Maximal distance (from the center point) for the cache to
         be included in the results. Unlike in most other places, this
         distance is given <b>in kilometers</b> instead of meters
-        (it can contain a floating point though).</p>
+        (it may contain a floating point though).</p>
     </opt>
     <opt name='location_source' default='default-coords'>
         <p>In general, this parameter should take the same value as in the

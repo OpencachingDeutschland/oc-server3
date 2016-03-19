@@ -5,22 +5,27 @@
         <p>This method is similar to the search/all method, but the results
         are restricted to the caches situated within a given bounding box
         (a rectangle on the map).</p>
-        <p>Unless overriden, results are ordered by the distance from the center of the bounding
-        box. This means, that if you hit the limit of geocaches
-        returned, you will receive the ones that are in the middle of your
+
+        <p>Unless overriden, results are ordered by the distance from the
+        center of the bounding box. This means, that if the number of geocaches
+        in the box exceeds the your limit (provided in the <b>limit</b>
+        parameter), you will receive the ones that are in the middle of your
         box, and miss the ones on the edges.</p>
+
         <p>Usually you will want to use search_and_retrieve method instead of this one.
         This way, you can get much more data in <b>one request</b>.</p>
     </desc>
     <req name='bbox'>
         <p>The bounding box within to search for caches. The box is defined
         by a string in "<b>S|W|N|E</b>" format, where:</p>
+
         <ul>
             <li><b>S</b> stands for southern edge latitude of the box,</li>
             <li><b>W</b> stands for western edge longitude of the box,</li>
             <li><b>N</b> stands for northern edge latitude of the box,</li>
             <li><b>E</b> stands for eastern edge longitude of the box.</li>
         </ul>
+
         <p>Use positive numbers for latitudes in the northern hemisphere and
         longitudes in the eastern hemisphere (and negative for southern and
         western hemispheres accordingly). These are full degrees with a dot

@@ -3,6 +3,7 @@
     <issue-id>116</issue-id>
     <desc>
         <p>Given a set of URLs, determine codes of geocaches referenced within them.</p>
+
         <p>This might be useful if you have a link to an Opencaching geocache page, but you're
         not able to extract cache code from such link (and you need the cache code to operate
         on a cache using OKAPI). Geocache pages may be referenced using various types of URLs,
@@ -14,6 +15,7 @@
     <opt name='as_dict' default='false'>
         <p>If <b>false</b>, then the result of this method will be compatible with
         search/all method (and therefore can be used with search_and_retrieve).</p>
+
         <p>If <b>true</b>, then the result will be a dictionary. Your URLs will be
         mapped to the keys of this dictionary. Each value will be either a string
         (cache code) or null (if no cache code was found for the given URL).</p>
@@ -21,12 +23,17 @@
     <common-format-params/>
     <returns>
         <p>As described in the <b>as_dict</b> parameter.</p>
+
         <p>Examples:</p>
+
         <p>For <i>by_urls?urls=url1|url2|url3</i>
         query, the result might look something link this:</p>
+
         <pre>{"results": ["OP28F9"]}</pre>
+
         <p>For <i>by_urls?urls=url1|url2|url3&amp;as_dict=true</i>
         query, the result might look something link this:</p>
+
         <pre>{"url1": "OP28F9", "url2": null, "url3": "OP28F9"}</pre>
     </returns>
 </xml>

@@ -9,6 +9,7 @@
         <p>Pipe-separated list of ISO 639-1 language codes. This indicates the
         order of preference in which language will be chosen for fields like
         <b>name</b> and <b>description</b>.</p>
+
         <p>Please note, that you may also access caches' descriptions in all
         available languages. If you want to do this, you should use fields
         <b>names</b>, <b>descriptions</b> (etc.) instead of <b>name</b> and
@@ -25,28 +26,28 @@
         you may use this parameter. Use one of the following values:</p>
         <ul>
             <li>
-                <b>full</b> - OKAPI will append the attribution note to the descriptions of the
+                <p><b>full</b> - OKAPI will append the attribution note to the descriptions of the
                 geocache. The language of the note will match the language of the description
                 (i.e. each value in <b>descriptions</b> may contain attribution notes in
-                a different language).
+                a different language).</p>
             </li>
             <li>
                 <p><b>none</b> - OKAPI will not append the attribution note to geocache
-                descriptions. You will use the <b>attribution_note</b> instead (which depends
-                on the <b>langpref</b> parameter).</p>
+                descriptions. You will need to use the <b>attribution_note</b> instead
+                (which also depends on the <b>langpref</b> parameter).</p>
 
                 <p><b>Important note:</b> You are still <b>required</b> to display the
                 <b>attribution_note</b> field in some other way.</p>
             </li>
             <li>
-                <b>static</b> - OKAPI will append a "static" attribution note to the descriptions
+                <p><b>static</b> - OKAPI will append a "static" attribution note to the descriptions
                 of the geocache. This might equal the "full" attribution note, but not necessarilly,
                 since the "full" note may contain a current date
                 (<a href='https://github.com/opencaching/okapi/issues/178'>why?</a>),
                 and the "static" note will not. This is implemented primarily for internal use
                 (i.e. the replicate module). Usually you should not use it, because on some
                 installations the static note will not be sufficient to meet the data license
-                requirements.
+                requirements.</p>
             </li>
         </ul>
     </opt>
@@ -63,6 +64,7 @@
         <p>The reference point for cache distance and bearing calculation (typically - the user's location),
         in the "lat|lon" format. This parameter is required when accessing <b>distance</b> and/or <b>bearing</b>
         fields.</p>
+
         <p>Use positive numbers for latitudes in the northern hemisphere and
         longitudes in the eastern hemisphere (and negative for southern and
         western hemispheres accordingly). These are full degrees with a dot
@@ -70,11 +72,14 @@
     </opt>
     <opt name="user_uuid">
         <p>User'd ID. Required to access fields like <b>is_found</b> using <b>Level 1</b> Authentication.</p>
+
         <p>Please note that if you want to access private fields (like <b>my_notes</b>), then
         this parameter won't help you. You have to use <b>Level 3</b> Authentication instead.</p>
+
         <p>If you use <b>Level 3</b> Authentication, you shouldn't use this parameter. Or, to be exact:</p>
         <ul>
             <li><b>user_uuid</b> will be extracted from the Access Token you use. You don't have to provide it.</li>
+
             <li>If you provide <b>user_uuid</b>, then it HAS TO match your Access Token. If it doesn't, OKAPI
             will respond with HTTP 400 error.</li>
         </ul>
@@ -86,9 +91,11 @@
         <ul>
             <li><b>code</b> - unique Opencaching code of the geocache,</li>
             <li><b>name</b> - name of the geocache,</li>
-            <li><b>names</b> - a dictionary (language code => plain-text string) of
+            <li>
+                <b>names</b> - a dictionary (language code => plain-text string) of
                 names of the geocache (at this time, there will be only one language,
-                but this may change in future),</li>
+                but this may change in future),
+            </li>
             <li>
                 <b>location</b> - location of the cache in the "lat|lon" format
                 (<i>lat</i> and <i>lon</i> are in full degrees with a dot as a decimal point),
@@ -96,7 +103,7 @@
             <li>
                 <p><b>type</b> - cache type. This might be <b>pretty much everything</b>,
                 but there are some predefined types that you might want to treat
-                in a special way (separate icons etc.). Primary types include: </p>
+                in a special way (separate icons etc.). Primary types include:</p>
                 <ul>
                     <li><b>Traditional</b>,</li>
                     <li><b>Multi</b>,</li>
@@ -107,7 +114,7 @@
                 </ul>
                 <p><b>Event</b> is a peculiar type of geocache which is NOT a geocache
                 at all, but it <b>is</b> stored as a geocache in OC database (this design
-                decision is old as the OC network itself!). Just keep in mind, that
+                decision is as old as the OC network itself!). Just keep in mind, that
                 in case of Event Caches, some fields may have a little different meaning
                 than you would tell by their name.</p>
             </li>
@@ -148,48 +155,68 @@
             <li>
                 <p><b>distance</b> - float, the distance to a cache, in meters.
                 This requires <b>my_location</b> parameter to be provided.</p>
-                <p>Please note, that sometimes it is faster to compute this yourself, on client-side, instead of querying OKAPI.</p>
+
+                <p>Please note, that sometimes it is faster to compute this
+                yourself, on client-side, instead of querying OKAPI.</p>
             </li>
             <li>
-                <p><b>bearing</b> - float, the absolute bearing to the cache, measured in degrees from north,
-                <b>or null</b> if it cannot be calculated (i.e. when you are exactly at the target's location).
-                This requires <b>my_location</b> parameter to be provided.</p>
-                <p>Please note, that sometimes it is faster to compute this yourself, on client-side, instead of querying OKAPI.</p>
+                <p><b>bearing</b> - float, the absolute bearing to the cache, measured in
+                degrees from north, <b>or null</b> if it cannot be calculated (i.e. when you
+                are exactly at the target's location). This requires <b>my_location</b>
+                parameter to be provided.</p>
+
+                <p>Please note, that sometimes it is faster to compute this
+                yourself, on client-side, instead of querying OKAPI.</p>
             </li>
             <li>
-                <p><b>bearing2</b> - string, the absolute bearing to the cache, represented as a typical direction
-                string of length of 1 or 2 characters (ex. "N", "NE", "E", "SE", etc.), or "n/a" if it cannot be calculated.
-                This requires <b>my_location</b> parameter to be provided.</p>
-                <p>Please note, that sometimes it is faster to compute this yourself, on client-side, instead of querying OKAPI.</p>
+                <p><b>bearing2</b> - string, the absolute bearing to the cache, represented as
+                a typical direction string of length of 1 or 2 characters (ex. "N", "NE", "E",
+                "SE", etc.), or "n/a" if it cannot be calculated. This requires
+                <b>my_location</b> parameter to be provided.</p>
+
+                <p>Please note, that sometimes it is faster to compute this
+                yourself, on client-side, instead of querying OKAPI.</p>
             </li>
             <li>
-                <p><b>bearing3</b> - string, the absolute bearing to the cache, represented as a typical direction
-                string of length of 1 or 2 or 3 characters (ex. "N", "NNE", "NE", "ENE", etc.), or "n/a" if it cannot be calculated.
-                This requires <b>my_location</b> parameter to be provided.</p>
-                <p>Please note, that sometimes it is faster to compute this yourself, on client-side, instead of querying OKAPI.</p>
+                <p><b>bearing3</b> - string, the absolute bearing to the cache, represented as
+                a typical direction string of length of 1 or 2 or 3 characters (ex. "N", "NNE",
+                "NE", "ENE", etc.), or "n/a" if it cannot be calculated. This requires
+                <b>my_location</b> parameter to be provided.</p>
+
+                <p>Please note, that sometimes it is faster to compute this
+                yourself, on client-side, instead of querying OKAPI.</p>
             </li>
             <li>
                 <p><b>is_found</b> - boolean, true if the user already found this cache.
                 See also <b>found_status</b> parameter of the services/caches/search/all
                 method.</p>
+
                 <p>This field requires you to use the <b>user_uuid</b> parameter
                 (or Level 3 Authentication). Please note, that this will also return <b>true</b>
                 for attended Event Caches.</p>
             </li>
             <li>
-                <p><b>is_not_found</b> - boolean, true if the user has submitted "Didn't find it" log entry for this cache.</p>
-                <p>This field requires you to use the <b>user_uuid</b> parameter (or Level 3 Authentication).</p>
+                <p><b>is_not_found</b> - boolean, true if the user has
+                submitted "Didn't find it" log entry for this cache.</p>
+
+                <p>This field requires you to use the <b>user_uuid</b>
+                parameter (or Level 3 Authentication).</p>
             </li>
             <li>
-                <p><b>is_watched</b> - boolean, true if the user is watching this cache. You may consider highlighting
-                such geocaches in some fashion, as the users may use this functionality to temporarily mark geocaches
-                of particular interest (i.e. geocaches they plan to find today).</p>
-                <p>This is private data. You will need Level 3 Authentication to access this field.</p>
+                <p><b>is_watched</b> - boolean, true if the user is watching this cache. You
+                may consider highlighting such geocaches in some fashion, as the users may use
+                this functionality to temporarily mark geocaches of particular interest (i.e.
+                geocaches they plan to find today).</p>
+
+                <p>This is private data. You will need Level 3 Authentication
+                to access this field.</p>
             </li>
             <li>
-                <p><b>is_ignored</b> - boolean, true if the user is ignoring this cache. (See also <b>exclude_ignored</b>
-                parameter of all search methods.)</p>
-                <p>This is private data. You will need Level 3 Authentication to access this field.</p>
+                <p><b>is_ignored</b> - boolean, true if the user is ignoring this cache. (See
+                also <b>exclude_ignored</b> parameter of all search methods.)</p>
+
+                <p>This is private data. You will need Level 3 Authentication
+                to access this field.</p>
             </li>
             <li>
                 <p><b>founds</b> - number of times the geocache was successfully found
@@ -220,6 +247,7 @@
                 <p><b>oxsize</b> - float (between 1 and 5) or null, this is a size rating
                 variant, compatible with the one used by (former) OpenCaching.com site (and many
                 Garmin GPS devices).</p>
+
                 <p><b>Note:</b> The mapping is undocumented and may change without notice.</p>
                 <p><b>Note:</b> Some of OC's size values cannot be properly mapped to <b>oxsize</b>,
                 i.e. the 'other' size.</p>
@@ -227,50 +255,74 @@
             <li><b>difficulty</b> - float (between 1 and 5), difficulty rating of the cache,</li>
             <li><b>terrain</b> - float (between 1 and 5), terrain rating of the cache,</li>
             <li>
-                <b>trip_time</b> - float, approximate total amount of time needed to
+                <p><b>trip_time</b> - float, approximate total amount of time needed to
                 find the cache, in hours; this will usually include the time to reach the
                 cache location <em>and</em> go back (from/to a parking spot, etc.);
-                <b>null</b> if unknown,
+                <b>null</b> if unknown,</p>
             </li>
-            <li><b>trip_distance</b> - float, approximate total distance needed to
+            <li>
+                <p><b>trip_distance</b> - float, approximate total distance needed to
                 find the cache, in kilometers; this will usually include the time to reach the
                 cache location <em>and</em> go back (from/to a parking spot, etc.);
-                <b>null</b> if unknown,
+                <b>null</b> if unknown,</p>
             </li>
             <li>
                 <p><b>rating</b> - float (between 1 and 5), an overall rating of the cache,
                 or <b>null</b> when the geocache does not have a sufficient amount of votes
                 to have a rating.</p>
-                <p>Please note: some OC installations do not use the rating/voting system. The <b>rating</b> will
-                always be <b>null</b> on such installations.</p>
+
+                <p>Please note: some OC installations do not use the
+                rating/voting system. The <b>rating</b> will always be
+                <b>null</b> on such installations.</p>
             </li>
             <li>
-                <p><b>rating_votes</b> - number of votes submitted for the rating of this cache.</p>
-                <p>Please note: some OC installations do not use the rating/voting system. The <b>rating_votes</b> will
-                always be <b>0</b> on such installations.</p>
+                <p><b>rating_votes</b> - number of votes submitted for the
+                rating of this cache.</p>
+
+                <p>Please note: some OC installations do not use the
+                rating/voting system. The <b>rating_votes</b> will always be
+                <b>0</b> on such installations.</p>
             </li>
             <li><b>recommendations</b> - number of recommendations for this cache,</li>
-            <li><b>req_passwd</b> - boolean; states if this cache requires a password
-                in order to submit a "Found it" log entry,</li>
-            <li><b>short_description</b> - a plaintext string with a single line (very short)
-                description of the cache (kind of a "tagline text"),</li>
-            <li><b>short_descriptions</b> - a dictionary (language code =&gt;
-                plaintext string) of short cache descriptions,</li>
-            <li><b>description</b> - <a href='%OKAPI:docurl:html%'>HTML string</a>,
-                description of the cache,</li>
-            <li><b>descriptions</b> - a dictionary (language code =&gt;
-                <a href='%OKAPI:docurl:html%'>HTML string</a>) of cache descriptions,</li>
-            <li class="deprecated"><b>hint</b> - <a href='%OKAPI:docurl:html%'>HTML-encoded</a>
+            <li>
+                <b>req_passwd</b> - boolean; states if this cache requires a password
+                in order to submit a "Found it" log entry,
+            </li>
+            <li>
+                <b>short_description</b> - a plaintext string with a single line (very short)
+                description of the cache (kind of a "tagline text"),
+            </li>
+            <li>
+                <b>short_descriptions</b> - a dictionary (language code =&gt;
+                plaintext string) of short cache descriptions,
+            </li>
+            <li>
+                <b>description</b> - <a href='%OKAPI:docurl:html%'>HTML string</a>,
+                description of the cache,
+            </li>
+            <li>
+                <b>descriptions</b> - a dictionary (language code =&gt;
+                <a href='%OKAPI:docurl:html%'>HTML string</a>) of cache descriptions,
+            </li>
+            <li class="deprecated">
+                <b>hint</b> - <a href='%OKAPI:docurl:html%'>HTML-encoded</a>
                 string, cache hints/spoilers; deprecated
                 (<a href="https://github.com/opencaching/okapi/issues/261">why?</a>),
-                use <b>hint2</b> instead,</li>
-            <li class="deprecated"><b>hints</b> - a dictionary (language code =&gt;
+                use <b>hint2</b> instead,
+            </li>
+            <li class="deprecated">
+                <b>hints</b> - a dictionary (language code =&gt;
                 <a href='%OKAPI:docurl:html%'>HTML-encoded</a> string) of cache hints/spoilers;
-                deprecated, use hints2 instead,</li>
-            <li><b>hint2</b> - plain-text string, cache hints/spoilers; in general, hints
-                should not be displayed to the user unless user specifically asks for them,</li>
-            <li><b>hints2</b> - a dictionary (language code =&gt;
-                plain-text string) of cache hints/spoilers,</li>
+                deprecated, use hints2 instead,
+            </li>
+            <li>
+                <b>hint2</b> - plain-text string, cache hints/spoilers; in general, hints
+                should not be displayed to the user unless user specifically asks for them,
+            </li>
+            <li>
+                <b>hints2</b> - a dictionary (language code =&gt;
+                plain-text string) of cache hints/spoilers,
+            </li>
             <li>
                 <p><b>images</b> - list of dictionaries, each dictionary represents one
                 image saved along the cache description; each dictionary has the
@@ -280,12 +332,16 @@
                     <li><b>url</b> - URL of the image,</li>
                     <li><b>thumb_url</b> - URL of a small (thumb) version of the image,</li>
                     <li><b>caption</b> - plain-text string, caption of the image,</li>
-                    <li><b>unique_caption</b> - plain-text string, to be used as a filename
+                    <li>
+                        <b>unique_caption</b> - plain-text string, to be used as a filename
                         for Garmin's crappy images implementation (currently, they get image
-                        caption from the image's filename itself),</li>
-                    <li><b>is_spoiler</b> - boolean, if <b>true</b> then the image is
+                        caption from the image's filename itself),
+                    </li>
+                    <li>
+                        <b>is_spoiler</b> - boolean, if <b>true</b> then the image is
                         a spoiler image and should not be displayed to the user unless
-                        the user explicitly asks for it,</li>
+                        the user explicitly asks for it,
+                    </li>
                 </ul>
             </li>
             <li>
@@ -317,11 +373,13 @@
             <li>
                 <p><b>latest_logs</b> - a couple of latest log entries in the cache.
                 The format is the same as the one returned by the services/logs/logs method.</p>
+
                 <p>Notice: The number of logs returned can be set with the <b>lpc</b> option.</p>
             </li>
             <li>
                 <p><b>my_notes</b> - user's notes on the cache, in plain-text, or <b>null</b>
                 if user hadn't defined any notes.</p>
+
                 <p>This field requires you to use the <b>Level 3</b> Authentication.</p>
             </li>
             <li><b>trackables_count</b> - a total number of trackables hidden within the cache.</li>
@@ -332,8 +390,10 @@
                 <ul>
                     <li><b>code</b> - code of the trackable,</li>
                     <li><b>name</b> - plain text name of the trackable,</li>
-                    <li><b>url</b> - trackable's own webpage address <b>or null</b>, if OKAPI
-                        cannot automatically determine this address.</li>
+                    <li>
+                        <b>url</b> - trackable's own webpage address <b>or null</b>, if OKAPI
+                        cannot automatically determine this address.
+                    </li>
                 </ul>
             </li>
             <li id="ret_alt_wpts">
@@ -384,6 +444,7 @@
             <li>
                 <p><b>country</b> - name of the country the cache is placed in;
                 may be empty ("") if the country is unknown.</p>
+
                 <p><b>Note:</b> This data is user-supplied and is not validated in
                 any way. Consider using external geocoding services instead. Also,
                 currently you have no way of knowing in which language it will appear
@@ -393,6 +454,7 @@
             <li>
                 <p><b>state</b> - name of the state the cache is placed in;
                 may be empty ("") if the state is unknown.</p>
+
                 <p><b>Note:</b> On some installations this data is user-supplied and
                 is not validated in any way. Other installations calculate it from
                 cache coordinates but may have problems in border regions.
@@ -413,20 +475,27 @@
                 </ul>
                 <p>The types and names currently are in a local language of the OC site but
                 may be translated depending on the <b>langpref</b> parameter in the future.</p>
+
                 <p>Note that this information is not authoritative. It may be outdated
                 or incomplete, and it is completely missing on some OC installations.</p>
             </li>
             <li>
                 <p><b>last_found</b> - date and time (ISO 8601) when the
                 geocache was last found <b>or null</b> when it hasn't been yet found.</p>
+
                 <p>Note, that some Opencaching servers don't store the exact times along
                 with the log entries.</p>
             </li>
-            <li><b>last_modified</b> - date and time (ISO 8601) when the
-                geocache was last modified (changed status, attributes, etc.),</li>
-            <li><b>date_created</b> - date and time (ISO 8601) when the
-                geocache was listed at the Opencaching site,</li>
-            <li><b>date_hidden</b> - date and time (ISO 8601) when
+            <li>
+                <b>last_modified</b> - date and time (ISO 8601) when the
+                geocache was last modified (changed status, attributes, etc.),
+            </li>
+            <li>
+                <b>date_created</b> - date and time (ISO 8601) when the
+                geocache was listed at the Opencaching site,
+            </li>
+            <li>
+                <p><b>date_hidden</b> - date and time (ISO 8601) when:</p>
                 <ul>
                     <li>the geocache was first hidden (for physical caches), or </li>
                     <li>the geocache was first published (for virtual caches), or</li>
@@ -436,13 +505,17 @@
             <!-- Note: I think cache uuids should not be ever revealed to the public.
             We have already one universally unique key - the cache code. It is uncommon
             to have multiple universally unique keys. -->
-            <li><b>internal_id</b> - internal ID of the cache (<b>do not</b> use
-                this, unless you know what you're doing; use the "code" as an identifier).</li>
+            <li>
+                <b>internal_id</b> - internal ID of the cache (<b>do not</b> use
+                this, unless you know what you're doing; use the "code" as an identifier).
+            </li>
         </ul>
 
         <p>For example, for <i>geocache?cache_code=OP3D96&amp;fields=type</i>
         query, the result might look something link this:</p>
+
         <pre>{"type": "Traditional"}</pre>
+
         <p>If given cache code does not exist, the method will
         respond with an HTTP 400 error.</p>
     </returns>

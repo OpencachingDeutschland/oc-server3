@@ -53,8 +53,14 @@ Here is the list of other OKAPI installations:</p>
 <p>Other links you might want to check out:</p>
 
 <ul>
-    <li>OKAPI Project Homepage - <a href='https://github.com/opencaching/okapi/'>https://github.com/opencaching/okapi/</a></li>
-    <li>OKAPI News blog - <a href='http://opencaching-api.blogspot.com/'>http://opencaching-api.blogspot.com/</a></li>
+    <li>
+        OKAPI Project Homepage -
+        <a href='https://github.com/opencaching/okapi/'>https://github.com/opencaching/okapi/</a>
+    </li>
+    <li>
+        OKAPI News blog -
+        <a href='http://opencaching-api.blogspot.com/'>http://opencaching-api.blogspot.com/</a>
+    </li>
 </ul>
 
 <p>* - Opencaching.DE includes other sites - Opencaching.IT and Opencaching.FR
@@ -78,6 +84,7 @@ list of all available methods:</p>
 <ul>
     <li>
         <p><a href='<?= $vars['site_url'] ?>okapi/services/apiref/method_index'><?= $vars['site_url'] ?>okapi/services/apiref/method_index</a></p>
+
         <p>Note: You might need to install a proper browser addon (like
         <a href='https://chrome.google.com/webstore/detail/chklaanhfefbnpoihckbnefhakgolnmc'>this one</a>
         or <a href='https://addons.mozilla.org/en-US/firefox/addon/jsonview/'>this one</a>)
@@ -85,21 +92,22 @@ list of all available methods:</p>
     </li>
 </ul>
 
-<p>You've made your first OKAPI request! This method was a simple one though.
-It didn't require any arguments and it didn't require you to use a Consumer Key.
-Other methods are more complex and require you to use
+<p>You've just made your first OKAPI request! This method was a simple one
+though. It didn't require any arguments and it didn't require you to use a
+Consumer Key. Other methods are more complex and require you to use
 <a href='<?= $vars['site_url'] ?>okapi/signup.html'>your own API key</a>.</p>
+
 
 <h2 id='auth_levels'>Authentication Levels</h2>
 
 <p>Each OKAPI method has a <b>minimum authentication level</b>.</p>
 
-<p>This means, that if you want to call a method which requires "Level 1"
+<p>"Minimum" means that if you want to call a method which requires "Level 1"
 authentication, you have to use "Level 1" authentication <b>or higher</b>
 ("Level 2" or "Level 3" will also work).</p>
 
-<p><b>Important:</b> Most developers will only need to use "Level 1"
-authentication and don't have learn OAuth.</p>
+<p>Most methods can be called with "Level 1" authentication, so for most
+applications you won't have learn OAuth.</p>
 
 <ul>
     <li>
@@ -118,7 +126,9 @@ authentication and don't have learn OAuth.</p>
     </li>
     <li>
         <p><b>Level 2.</b> OAuth Consumer Signature. You must call this method
-        with proper OAuth Consumer signature (based on your Consumer Secret).</p>
+        with proper OAuth Consumer signature (based on your Consumer Secret).
+        For most languages there are some <i>OAuth 1.0a</i> libraries which can
+        do this for you.</p>
 
         <p><code>some_method<br>
         ?arg=44<br>
@@ -132,7 +142,8 @@ authentication and don't have learn OAuth.</p>
     <li>
         <p><b>Level 3.</b> OAuth Consumer+Token Signature. You must call this
         method with proper OAuth Consumer+Token signature (based on both
-        Consumer Secret and Token Secret).</p>
+        Consumer Secret and Token Secret). For most languages there are some
+        <i>OAuth 1.0a</i> libraries which can do this for you.</p>
 
         <p><code>some_method<br>
         ?arg=44<br>
@@ -148,12 +159,14 @@ authentication and don't have learn OAuth.</p>
 
 <div class='issue-comments' issue_id='38'></div>
 
+
 <h2 id='http_methods'>GET or POST?</h2>
 
-<p>Whichever you want. OKAPI will treat GET and POST requests as equal. You may
+<p>Whichever you want. OKAPI will treat GET and POST requests equally. You may
 also use the HTTP <code>Authorization</code> header for passing OAuth
 arguments. OKAPI does not support other HTTP request types (such as PUT or
 DELETE).</p>
+
 
 <h2 id='html'>A warning about HTML fields</h2>
 
@@ -168,6 +181,7 @@ shouldn't count on it too.</p>
 invalid HTML markup, tracking images (pixels), or even
 <a href='http://en.wikipedia.org/wiki/Cross-site_scripting'>XSS vectors</a>.
 This also applies to the descriptions included in the GPX files.</p>
+
 
 <h2 id='common-formatting'>Common formatting parameters</h2>
 
@@ -258,8 +272,8 @@ an Access Token).</p>
 
         <p>For most OAuth client libraries, you just should provide
         "<i><?= $vars['site_url'] ?>okapi/services/oauth/request_token?oauth_callback=oob</i>"
-        as the request_token URL, to get it started. Later, probably you'd want
-        to switch "oob" to something more useful.</p>
+        as the request_token URL, to get it started. Later on, you'll probably
+        want to replace "oob" with something more useful (your own callback).</p>
     </li>
     <li>
         <p>The <b>oauth_verifier</b> argument of the <b>access_token</b> method
@@ -272,8 +286,8 @@ an Access Token).</p>
     <li>
         <p><b>Access Tokens do not expire</b> (but can be revoked). This means,
         that once the user authorizes your application, you receive a "lifetime
-        access" to his/her account. User may still <b>revoke access</b> to his
-        account from your application - when this happens, you will have to
+        access" to his/her account. The user may still <b>revoke access</b> to
+        his account from your application - when this happens, you will have to
         redo the authorization dance.</p>
     </li>
 </ul>

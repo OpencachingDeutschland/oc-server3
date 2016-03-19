@@ -6,41 +6,52 @@
         and that's why they were cleanly separated in the documentation (put in
         separate methods). This was done primarily to keep the docs clean.
         This method allows you to do a quick search+retrieve task in one request.</p>
+
         <p>All services/caches/search/* methods respond with a list of cache codes.
         Then you have to use other method (like services/caches/geocaches) to
         retrieve the names and locations, based on those cache codes. The
         <b>search_and_retrieve</b> method allows you to do these two steps in one
-        method call.</p>
+        method call. Permissions derived from your Access Token will be
+        <a href='https://github.com/opencaching/okapi/issues/391'>delegated</a>
+        to both of these methods.</p>
+
         <p>First, you have to choose both methods and their parameters - one method
-        which returns the cache codes, and the other one, that responds
-        with additional data for the given caches.</p>
+        which returns the cache codes, and the other one, which responds
+        with additional data for those cache codes.</p>
     </desc>
     <req name='search_method'>
         <p>Name of the search method (begin with "services/").</p>
+
         <p>E.g. <i>services/caches/search/nearest</i>.</p>
     </req>
     <req name='search_params'>
         <p>JSON-formatted dictionary of parameters to be passed on
         to the search method.</p>
+
         <p>E.g. <i>{"center": "49|19", "status": "Available"}</i>.</p>
     </req>
     <req name='retr_method'>
         <p>Name of the retrieval method (begin with "services/").</p>
+
         <p>E.g. <i>services/caches/geocaches</i>.</p>
     </req>
     <req name='retr_params'>
         <p>JSON-formatted dictionary of parameters to be passed on
         to the retrieval method.</p>
+
         <p>E.g. <i>{"fields": "name|location|type"}</i></p>
+
         <p>The method will be called with one additional parameter - <b>cache_codes</b>.
         These will be the cache codes collected from the results of the search method.</p>
     </req>
     <req name='wrap'>
         <p>Boolean.</p>
+
         <ul>
             <li>If <b>true</b>, then results will be wrapped in an additional
             object, in order to include any additional data received along with the
             search_method response (i.e. the <b>more</b> value).</li>
+
             <li>If <b>false</b>, then this method will return exactly what the
             <b>retr_method</b> will respond with.</li>
         </ul>
@@ -49,17 +60,24 @@
     <returns>
         <p>If <b>wrap</b> is <b>true</b>, then the method will return a
         dictionary of the following structure:</p>
+
         <ul>
             <li><b>results</b> - anything the retrival method
             responds with (as long as it's not an error).</li>
+
             <li>any extra keys and values received as a response of
             the search_method (i.e. the <b>more</b> variable).</li>
         </ul>
+
         <p>If <b>wrap</b> is <b>false</b>, then the method will return
         anything the retrieval methods responds with (along with its HTTP headers).</p>
+
         <p><b>Example:</b></p>
+
         <pre>search_and_retrieve<br/>?search_method=services/caches/search/bbox<br/>&amp;search_params={"bbox":"49|19|50|20","limit":"1"}<br/>&amp;retr_method=services/caches/geocaches<br/>&amp;retr_params={"fields":"location"}<br/>&amp;wrap=false</pre>
+
         <p>Possible output:<br/><code>{"OP205A": {"location": "49.572417|19.525867"}}</code></p>
+
         <p>The same example with <i>wrap=true</i> would return:<br/><code>{"results": {"OP205A": {"location": "49.572417|19.525867"}}, "more": true}</code></p>
     </returns>
 </xml>

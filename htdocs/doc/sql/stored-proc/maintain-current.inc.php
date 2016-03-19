@@ -1503,6 +1503,7 @@
 						IF ISNULL(@XMLSYNC) OR @XMLSYNC!=1 THEN
 							SET NEW.`date_created`=NOW();
 							SET NEW.`last_modified`=NOW();
+							SET NEW.`seq`= IFNULL((SELECT MAX(`seq`)+1 FROM `pictures` WHERE `object_type`=NEW.`object_type` AND `object_id`=NEW.`object_id`), 1);
 						END IF;
 
 						IF ISNULL(NEW.`uuid`) OR NEW.`uuid`='' THEN
@@ -1547,7 +1548,8 @@
 								 NEW.`local`!=OLD.`local` OR 
 								 NEW.`unknown_format`!=OLD.`unknown_format` OR 
 								 NEW.`display`!=OLD.`display` OR 
-								 NEW.`mappreview`!=OLD.`mappreview` THEN
+								 NEW.`mappreview`!=OLD.`mappreview` OR
+								 NEW.`seq`!=OLD.`seq` THEN
 								/* everything except last_url_check, thumb_url and thumb_last_generated */
 								SET NEW.`last_modified`=NOW();
 							END IF;

@@ -55,6 +55,7 @@ class picture
 		$this->rePicture->addInt('unknown_format', 0, false);
 		$this->rePicture->addInt('display', 1, false);
 		$this->rePicture->addInt('mappreview', 0, false);
+		$this->rePicture->addInt('seq', 1, false);
 
 		$this->nPictureId = $nNewPictureId+0;
 
@@ -350,6 +351,10 @@ class picture
 	{
 		return $this->rePicture->getValue('date_created');
 	}
+	function getPosition()
+	{
+		return $this->rePicture->getValue('seq');
+	}
 	function getAnyChanged()
 	{
 		return $this->rePicture->getAnyChanged();
@@ -582,6 +587,55 @@ class picture
 				case 6: return $image->rotateImage(new ImagickPixel(), 90);
 				case 8: return $image->rotateImage(new ImagickPixel(), -90);
 			}
+		return false;
+	}
+
+	function up()
+	{
+		$prevpos = sql_value("
+			SELECT MAX(`seq`)
+			FROM `pictures`
+			WHERE `object_type`='&1' AND `object_id`='&2' AND `seq`<'&3'",
+			0,
+			$this->getObjectType(),
+			$this->getObjectId(),
+			$this->getPosition());
+
+		if ($prevpos)
+		{
+			$maxpos = sql_value("
+				SELECT MAX(`seq`)
+				FROM `pictures`
+				WHERE `object_type`='&1' AND `object_id`='&2'",
+				0,
+				$this->getObjectType(),
+				$this->getObjectId());
+
+			// swap positions with the previous pic
+			sql("
+				UPDATE `pictures`
+				SET `seq`='&2'
+				WHERE `id`='&1'",
+				$this->getPictureId(),
+				$maxpos + 1);
+			sql("
+				UPDATE `pictures` SET `seq`='&4'
+				WHERE `object_type`='&1' AND `object_id`='&2' AND `seq`='&3'",
+				$this->getObjectType(),
+				$this->getObjectId(),
+				$prevpos,
+				$this->getPosition());
+			sql("
+				UPDATE `pictures`
+				SET `seq`='&2'
+				WHERE `id`='&1'",
+				$this->getPictureId(),
+				$prevpos);
+			$this->rePicture->setValue('seq', $prevpos);
+
+			return true;
+		}
+
 		return false;
 	}
 

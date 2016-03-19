@@ -423,7 +423,8 @@ class cache
 			$rsPictures = sql("
 				SELECT `url`, `title`, `uuid`, `id`, `spoiler`
 				FROM `pictures`
-				WHERE `object_id`='&1' AND `object_type`=1",
+				WHERE `object_id`='&1' AND `object_type`=1
+				ORDER BY `seq`",
 				$rLog['id']);
 			while ($rPicture = sql_fetch_assoc($rsPictures))
 			{

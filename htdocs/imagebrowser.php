@@ -22,7 +22,7 @@
 
 	$tpl->assign('cachename', $rCache['name']);
 
-	$rsPictures = sql('SELECT `uuid`, `url`, `title` FROM `pictures` WHERE `object_id`=&1 AND `object_type`=2', $cacheid);
+	$rsPictures = sql('SELECT `uuid`, `url`, `title` FROM `pictures` WHERE `object_id`=&1 AND `object_type`=2 ORDER BY `seq`', $cacheid);
 	$pictures = array();
 	while ($rPicture = sql_fetch_assoc($rsPictures))
 	{

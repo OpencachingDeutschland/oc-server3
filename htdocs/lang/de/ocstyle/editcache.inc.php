@@ -35,7 +35,8 @@
 	$safari_not_allowed_message = '<span class="errormsg">' . t('Only virtual caches can be safari caches.') . '</span>';
 	$bad_wpgc_message = '<span class="errormsg">' . t('GC waypoint is invalid, must be GCxxxxx') . '</span>';
 	$nopictures = '<tr><td colspan="2">' . t('No pictures available') . '</td></tr><tr><td colspan="2">&nbsp;</td></tr>';
-	$pictureline = '<tr><td colspan="2"><a href="{link}">{title}</a> [<a href="picture.php?action=edit&uuid={uuid}">' . t('Edit') . '</a>] [<a href="picture.php?action=delete&uuid={uuid}">' . t('Delete') . '</a>]</td></tr>';
+	$pictureline0 = '<tr><td colspan="2"><a href="{link}">{title}</a> [<a href="picture.php?action=edit&uuid={uuid}">' . t('edit') . '</a>] [<a href="picture.php?action=delete&uuid={uuid}">' . t('delete') . '</a>]</td></tr>';
+	$pictureline = '<tr><td colspan="2"><a href="{link}">{title}</a> [<a href="picture.php?action=edit&uuid={uuid}">' . t('edit') . '</a>] [<a href="picture.php?action=up&uuid={uuid}" title="' . t('move up') . '">&#x25B2;</a>] [<a href="picture.php?action=delete&uuid={uuid}">' . t('delete') . '</a>]</td></tr>';
 	  // Ocprop: <a href=\"http://.*?\.opencaching\.de/images/uploads/.*?\">(.*?)<\/a>.*?\[<a href=\"picture\.php\?action=[a-z]*?\&uuid=(.*?)\">
 	$picturelines = '{lines}<tr><td colspan="2">&nbsp;</td></tr>';
 	$gc_com_msg2 = t('To prevent any problems with geocaching.com we want to please you to upload all linked pictures to %1 as well and link the pictures in the HTML code to these on %1');

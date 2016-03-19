@@ -212,7 +212,7 @@ function getChildWaypoints($cacheid)
 	$tpl->assign('coordinates', $coord->getDecimalMinutes());
 
 	// pictures
-	$rs = sql("SELECT `id`, `uuid`, `url`, `title`, `thumb_url`, `spoiler`, `display` FROM `pictures` WHERE `object_type`=2 AND `object_id`='&1' AND `display`!=0 ORDER BY `date_created` ASC", $cacheid);
+	$rs = sql("SELECT `id`, `uuid`, `url`, `title`, `thumb_url`, `spoiler`, `display` FROM `pictures` WHERE `object_type`=2 AND `object_id`='&1' AND `display`!=0 ORDER BY `seq`", $cacheid);
 	$tpl->assign_rs('pictures', $rs);
 	sql_free_result($rs);
 

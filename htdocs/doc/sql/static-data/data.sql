@@ -2865,6 +2865,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2604', 'Admin<b
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2605', 'If you are sure that the geocache is gone, and the owner does not<br />react to your log entry, you may report it to the Opencaching team.<br />Use the \'Report this cache\' button above the cache description.', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2606', 'Picture', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2607', 'Title:', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2608', 'move up', '2015-06-17 10:09:14');
 
 -- Table sys_trans_ref
 SET NAMES 'utf8';
@@ -7459,6 +7460,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2605', 'DE', 'Wenn du sicher bist, dass der Cache nicht mehr da ist, und der Besitzer <br />nicht auf dein Log reagiert, kannst du eine Meldung an das Opencaching-<br />Team senden. Verwende dazu den Knopf \'Cache melden\' oberhalb der <br />Cachebeschreibung.', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2606', 'DE', 'Bild', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2607', 'DE', 'Titel:', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2608', 'DE', 'nach oben', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'EN', 'Reorder IDs', '2010-09-02 00:15:30');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'EN', 'The database could not be reconnected.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'EN', 'Testing – please do not login', '2010-08-28 11:48:07');

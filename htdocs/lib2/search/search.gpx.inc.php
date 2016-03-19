@@ -564,7 +564,7 @@ function search_output()
 			SELECT `uuid`, `title`, `url`, `spoiler`
 			FROM `pictures`
 			WHERE `object_id`='&1' AND `object_type`=2 AND `display`=1
-			ORDER BY `date_created`",
+			ORDER BY `seq`",
 			$cacheid
 		);
 		while ($r = sql_fetch_array($rs))

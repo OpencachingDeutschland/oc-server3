@@ -10,7 +10,7 @@
 <!ELEMENT cache (id, userid, name, longitude, latitude, type, status, country, size, desclanguages, difficulty, terrain, rating, waypoints, datehidden, datecreated, lastmodified, listing_lastmodified, attributes, wpts)>
 <!ELEMENT cachedesc (id, cacheid, language, shortdesc, desc, hint, license?, lastmodified)>
 <!ELEMENT cachelog (id, cacheid, userid, logtype, date, text, license?, datecreated, lastmodified, log_lastmodified)>
-<!ELEMENT picture (id, url, title, object, picattr, license?, datecreated, lastmodified)>
+<!ELEMENT picture (id, url, title, object, picattr, license?, datecreated, lastmodified, position)>
 <!ELEMENT removedobject (id, object, removeddate)>
 
 <!-- common elements -->
@@ -145,6 +145,7 @@
 	display CDATA #REQUIRED
 	preview CDATA #IMPLIED
 >
+<!ELEMENT position (#PCDATA)>
 
 <!-- removedobject -->
 

@@ -33,6 +33,8 @@
 	$tpl->assign('action', $action);
 	$tpl->assign('redirect', $redirect);
 
+	$uuid = isset($_REQUEST['uuid']) ? $_REQUEST['uuid'] : 0;
+
 	if ($action == 'add')  // Ocprop
 	{
 		$picture = new picture();
@@ -162,7 +164,6 @@
 	}
 	else if ($action == 'edit' || $action == 'delete')
 	{
-		$uuid = isset($_REQUEST['uuid']) ? $_REQUEST['uuid'] : 0;
 		$picture = picture::fromUUID($uuid);
 
 		if ($picture === null)
@@ -205,6 +206,19 @@
 		}
 		else
 			$tpl->error(ERROR_INVALID_OPERATION);
+	}
+	else if ($action == 'up')
+	{
+		$picture = picture::fromUUID($uuid);
+
+		if ($picture === null)
+			$tpl->error(ERROR_PICTURE_NOT_EXISTS);
+
+		if ($redirect == '')
+			$redirect = $picture->getPageLink();
+
+		$picture->up();
+		$tpl->redirect($redirect);
 	}
 	else
 		$tpl->error(ERROR_INVALID_OPERATION);

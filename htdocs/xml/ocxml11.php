@@ -667,7 +667,7 @@ function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $z
 	                                    `pictures`.`date_created` `date_created`, `pictures`.`uuid` `uuid`, 
 	                                    `pictures`.`last_modified` `last_modified`, `pictures`.`display` `display`, 
 	                                    `pictures`.`spoiler` `spoiler`, `pictures`.`node` `node`,
-	                                    `pictures`.`mappreview`,
+	                                    `pictures`.`mappreview`, `pictures`.`seq`,
 	                                    IFNULL(`c1`.`cache_id`,`c2`.`cache_id`) AS `cache_id`,
 	                                    IFNULL(`c1`.`country`,`c2`.`country`) AS `language`,  /* hack */
 	                                    IFNULL(`cs1`.`allow_user_view`, `cs2`.`allow_user_view`) AS `auv`,
@@ -698,6 +698,7 @@ function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $z
 			fwrite($f, $t2 . '<attributes spoiler="' . $r['spoiler'] . '" display="' . $r['display'] . '" />' . "\n");
 		fwrite($f, $t2 . '<datecreated>' . date($sDateformat, strtotime($r['date_created'])) . '</datecreated>' . "\n");
 		fwrite($f, $t2 . '<lastmodified>' . date($sDateformat, strtotime($r['last_modified'])) . '</lastmodified>' . "\n");
+		fwrite($f, $t2 . '<position>' . $r['seq'] . '</position>' . "\n");
 
 		if ($bLicense)
 		{

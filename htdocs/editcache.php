@@ -892,11 +892,11 @@ function getWaypoints($cacheid)
 					if ($cache_record['picture'] > 0)
 					{
 						$pictures = '';
-						$rspictures = sql("SELECT `url`, `title`, `uuid` FROM `pictures` WHERE `object_id`='&1' AND `object_type`=2", $cache_id);
+						$rspictures = sql("SELECT `url`, `title`, `uuid` FROM `pictures` WHERE `object_id`='&1' AND `object_type`=2 ORDER BY `seq`", $cache_id);
 
 						for ($i = 0; $i < mysql_num_rows($rspictures); $i++)
 						{
-							$tmpline = $pictureline;
+							$tmpline = ($i == 0 ? $pictureline0 : $pictureline);
 							$pic_record = sql_fetch_array($rspictures);
 
 							$tmpline = mb_ereg_replace('{link}', htmlspecialchars($pic_record['url'], ENT_COMPAT, 'UTF-8'), $tmpline);

@@ -841,6 +841,43 @@
 		update_triggers();
 	}
 
+	function dbv_154()  // add pictures order option
+	{
+		if (!sql_field_exists('pictures', 'seq')) {
+			sql("ALTER TABLE `pictures` ADD COLUMN `seq` smallint(5) NOT NULL default '0'");
+		}
+
+		// initialize the new ordering field
+		if (sql_value("SELECT COUNT(*) from `pictures` WHERE `seq`=0", 0))
+		{
+			$rs = sql("
+				SELECT `id`, `object_type`, `object_id`
+				FROM `pictures`
+				ORDER BY `object_type`, `object_id`, `date_created`");
+			$prev_object_type = -1;
+			$prev_object_id = -1;
+
+			// Prevent updating pictures.last_modified for the case that
+			// the new triggers are already installed:
+			sql("SET @XMLSYNC=1");
+			while ($r = sql_fetch_assoc($rs))
+			{
+				if ($r['object_type'] != $prev_object_type ||
+				    $r['object_id'] !=  $prev_object_id)
+				  $seq = 1;
+				sql("UPDATE `pictures` SET `seq`='&2' WHERE `id`='&1'", $r['id'], $seq);
+				++$seq;
+				$prev_object_type = $r['object_type'];
+				$prev_object_id = $r['object_id'];
+			}
+			sql("SET @XMLSYNC=0");
+			sql_free_result($rs);
+		}
+
+		sql("ALTER TABLE `pictures` DROP INDEX `object_type`,
+		     ADD UNIQUE INDEX `object_type` (`object_type`,`object_id`,`seq`)");
+	}
+
 	// When adding new mutations, take care that they behave well if run multiple
 	// times. This improves robustness of database versioning.
 	//

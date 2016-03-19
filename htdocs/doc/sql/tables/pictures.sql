@@ -18,8 +18,9 @@ CREATE TABLE `pictures` (
   `unknown_format` tinyint(1) NOT NULL default '0',
   `display` tinyint(1) NOT NULL default '1',
   `mappreview` tinyint(1) NOT NULL default '0',
+  `seq` smallint(5) NOT NULL default '0'
   PRIMARY KEY  (`id`),
   UNIQUE KEY `uuid` (`uuid`),
   KEY `last_modified` (`last_modified`),
-  KEY `object_type` (`object_type`,`object_id`)
+  UNIQUE KEY `object_type` (`object_type`,`object_id`,`seq`),
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ;

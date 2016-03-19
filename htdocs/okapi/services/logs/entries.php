@@ -124,6 +124,9 @@ class WebService
 
         if (in_array('images', $fields))
         {
+            # For OCPL log entry images, pictures.seq currently is always = 1,
+            # while OCDE uses it for ordering the images.
+
             $rs = Db::query("
                 select object_id, uuid, url, title, spoiler
                 from pictures
@@ -132,7 +135,7 @@ class WebService
                     and object_id in ('".implode("','", array_map('\okapi\Db::escape_string', array_keys($log_id2uuid)))."')
                     and display = 1   /* currently is always 1 for logpix */
                     and unknown_format = 0
-                order by date_created
+                order by seq, date_created
             ");
             if (Settings::get('OC_BRANCH') == 'oc.de') {
                 $object_type_param = 'type=1&';

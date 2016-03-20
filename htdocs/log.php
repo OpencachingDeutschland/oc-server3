@@ -303,9 +303,18 @@
 		// show number of found on log page
 		$tpl->assign('showstatfounds', $user->showStatFounds());
 		$tpl->assign('logpw', $cache->requireLogPW());
-
+		// smiley list
 		$tpl->assign('smilies', $smiley_a);
 		$tpl->assign('smileypath', $opt['template']['smiley']);
+
+		// DNF state
+		$dnf_by_logger = sql_value("
+			SELECT `type` FROM `cache_logs`
+			WHERE `cache_id`='&1' AND `user_id`='&2' AND `type` IN (1,2)
+			ORDER BY `order_date` DESC, `date_created` DESC, `id` DESC
+			LIMIT 1",
+			0, $cache->getCacheId(), $login->userid) == 2;
+		$tpl->assign('dnf_by_logger', $dnf_by_logger);
 	}
 	else
 	{

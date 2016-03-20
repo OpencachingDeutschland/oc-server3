@@ -22,6 +22,7 @@ var tip_dnf_nm = "{t}If you are sure that the geocache is gone, and the owner do
 
 var cache_listing_is_outdated = {$cache_listing_is_outdated} + 0;
 var ownerlog = {$ownerlog} + 0;
+var dnf_by_logger = {$dnf_by_logger+0} && !ownerlog;
 
 {literal}
 
@@ -98,15 +99,17 @@ function logtype_changed()
 	var nm = document.getElementById('needs_maintenance');
 	var lo = document.getElementById('listing_outdated');
 
-	if ((new_logtype == 2) != (old_logtype == 2))
+	if (((new_logtype == 2) != (old_logtype == 2)) ||
+	    (dnf_by_logger && (new_logtype == 3) != (old_logtype == 3)))
 	{
 		nm.value = "0";
-		nm.disabled = (new_logtype == 2);
-		nm.className = (new_logtype == 2 ? 'disabled' : '');
+		var nmdisable = !ownerlog && ((new_logtype == 2) || (new_logtype == 3 && dnf_by_logger));
+		nm.disabled = nmdisable;
+		nm.className = (nmdisable ? 'disabled' : '');
 
 		lo.value = "0";
-		lo.disabled = (new_logtype == 2);
-		lo.className = (new_logtype == 2 ? 'disabled' : '');
+		lo.disabled = (!ownerlog && new_logtype == 2);
+		lo.className = (!ownerlog && new_logtype == 2 ? 'disabled' : '');
 	}
 
 	if ((new_logtype == 10) != (old_logtype == 10))
@@ -145,11 +148,12 @@ function logtype_changed()
 
 function show_nm_tip()
 {
-	if (document.editform.logtype.value == "10")
+	var logtype = document.editform.logtype.value;
+	if (logtype == "10")
 		show_tip(tip_activate_nm);
-	else if (document.editform.logtype.value == "11")
+	else if (logtype == "11")
 		show_tip(tip_disable_nm);
-	else if (document.editform.logtype.value == "2")
+	else if (!ownerlog && (logtype == "2" || (dnf_by_logger && logtype == 3)))
 		show_tip(tip_dnf_nm);
 	else
 		show_tip(tip_general_nm);
@@ -157,11 +161,12 @@ function show_nm_tip()
 
 function show_lo_tip()
 {
-	if (document.editform.logtype.value == "10")
+	var logtype = document.editform.logtype.value;
+	if (logtype == "10")
 		show_tip(tip_activate_lo);
-	else if (document.editform.logtype.value == "11")
+	else if (logtype == "11")
 		show_tip(tip_disable_lo);
-	else if (document.editform.logtype.value != "2")
+	else if (logtype != "2" || ownerlog)
 		show_tip(tip_general_lo);
 }
 

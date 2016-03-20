@@ -55,7 +55,7 @@ class picture
 		$this->rePicture->addInt('unknown_format', 0, false);
 		$this->rePicture->addInt('display', 1, false);
 		$this->rePicture->addInt('mappreview', 0, false);
-		$this->rePicture->addInt('seq', 1, false);
+		$this->rePicture->addInt('seq', 0, false);
 
 		$this->nPictureId = $nNewPictureId+0;
 

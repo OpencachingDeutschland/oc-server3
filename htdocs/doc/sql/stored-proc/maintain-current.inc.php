@@ -1503,7 +1503,9 @@
 						IF ISNULL(@XMLSYNC) OR @XMLSYNC!=1 THEN
 							SET NEW.`date_created`=NOW();
 							SET NEW.`last_modified`=NOW();
-							SET NEW.`seq`= IFNULL((SELECT MAX(`seq`)+1 FROM `pictures` WHERE `object_type`=NEW.`object_type` AND `object_id`=NEW.`object_id`), 1);
+							IF NEW.`seq` = 0 THEN
+							    SET NEW.`seq` = IFNULL((SELECT MAX(`seq`)+1 FROM `pictures` WHERE `object_type`=NEW.`object_type` AND `object_id`=NEW.`object_id`), 1);
+							END IF;
 						END IF;
 
 						IF ISNULL(NEW.`uuid`) OR NEW.`uuid`='' THEN

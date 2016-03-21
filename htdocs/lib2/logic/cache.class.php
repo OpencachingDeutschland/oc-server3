@@ -448,7 +448,9 @@ class cache
 			    if (abs($distance) > 0.005) {
 					$new = new coordinate($newcoord['latitude'], $newcoord['longitude']);
 					$rLog['newcoord'] = $new->getDecimalMinutes($protect_old_coords && $new != $current_coord);
-					if ($distance <= 1)
+					if ($protect_old_coords)
+						$rLog['movedbykm'] = false;
+					else if ($distance <= 1)
 						$rLog['movedbym'] = floor($distance*1000);
 					else if ($distance < 10)
 						$rLog['movedbykm'] = sprintf('%1.1f',  $distance);

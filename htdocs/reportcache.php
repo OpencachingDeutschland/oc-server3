@@ -46,12 +46,12 @@
 		{
 			if ($cache->report($login->userid, $reportreason, $reportnote))
 			{
-				$reasontext = sql_value("SELECT IFNULL(`tt`.`text`, `crr`.`name`)
-							   FROM `cache_report_reasons` AS `crr`
-							  INNER JOIN `sys_trans_text` AS `tt` ON `tt`.`trans_id`=`crr`.`trans_id`
-							  WHERE `crr`.`id` =&1
-							    AND `tt`.`lang`='&2'",
-							    'unknown', $reportreason, $opt['template']['locale']);
+				$reasontext = sql_value("
+					SELECT IFNULL(`tt`.`text`, `crr`.`name`)
+					FROM `cache_report_reasons` AS `crr`
+					INNER JOIN `sys_trans_text` AS `tt` ON `tt`.`trans_id`=`crr`.`trans_id`
+					WHERE `crr`.`id` =&1 AND `tt`.`lang`='&2'",
+					'unknown', $reportreason, $opt['template']['locale']);
 
 				$tpl->assign('reasontext', $reasontext);
 				$tpl->assign('success', true);
@@ -63,11 +63,13 @@
 		}
 	}
 
-	$rs = sql("SELECT `cache_report_reasons`.`id`, IFNULL(`sys_trans_text`.`text`, `cache_report_reasons`.`name`) AS `name`
-	             FROM `cache_report_reasons`
-	        LEFT JOIN `sys_trans` ON `cache_report_reasons`.`trans_id`=`sys_trans`.`id` AND `cache_report_reasons`.`name`=`sys_trans`.`text`
-	        LEFT JOIN `sys_trans_text` ON `sys_trans`.`id`=`sys_trans_text`.`trans_id` AND `sys_trans_text`.`lang`='&1'",
-	          $opt['template']['locale']);
+	$rs = sql("
+		SELECT `cache_report_reasons`.`id`, IFNULL(`sys_trans_text`.`text`, `cache_report_reasons`.`name`) AS `name`
+	    FROM `cache_report_reasons`
+	    LEFT JOIN `sys_trans` ON `cache_report_reasons`.`trans_id`=`sys_trans`.`id` AND `cache_report_reasons`.`name`=`sys_trans`.`text`
+	    LEFT JOIN `sys_trans_text` ON `sys_trans`.`id`=`sys_trans_text`.`trans_id` AND `sys_trans_text`.`lang`='&1'
+		ORDER BY `order`",
+	    $opt['template']['locale']);
 
 	$tpl->assign_rs('reasons', $rs);
 	sql_free_result($rs);

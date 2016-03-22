@@ -152,10 +152,11 @@ INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('10', '3');
 -- Table cache_report_reasons
 SET NAMES 'utf8';
 TRUNCATE TABLE `cache_report_reasons`;
-INSERT INTO `cache_report_reasons` (`id`, `name`, `trans_id`) VALUES ('1', 'Cache on private property', '776');
-INSERT INTO `cache_report_reasons` (`id`, `name`, `trans_id`) VALUES ('2', 'Copyright violation', '777');
-INSERT INTO `cache_report_reasons` (`id`, `name`, `trans_id`) VALUES ('3', 'Cache is gone', '778');
-INSERT INTO `cache_report_reasons` (`id`, `name`, `trans_id`) VALUES ('4', 'Other reason', '779');
+INSERT INTO `cache_report_reasons` (`id`, `name`, `trans_id`, `order`) VALUES ('1', 'Cache on private property', '776', 2);
+INSERT INTO `cache_report_reasons` (`id`, `name`, `trans_id`, `order`) VALUES ('2', 'Copyright violation', '777', 3);
+INSERT INTO `cache_report_reasons` (`id`, `name`, `trans_id`, `order`) VALUES ('3', 'Cache is gone', '778', 1);
+INSERT INTO `cache_report_reasons` (`id`, `name`, `trans_id`, `order`) VALUES ('4', 'Other reason', '779', 5);
+INSERT INTO `cache_report_reasons` (`id`, `name`, `trans_id`, `order`) VALUES ('5', 'Description is unusable', '2609', 4);
 
 -- Table cache_report_status
 SET NAMES 'utf8';
@@ -2866,6 +2867,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2605', 'If you 
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2606', 'Picture', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2607', 'Title:', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2608', 'move up', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2609', 'Description is unusable', '2015-06-17 10:09:14');
 
 -- Table sys_trans_ref
 SET NAMES 'utf8';
@@ -7461,6 +7463,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2606', 'DE', 'Bild', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2607', 'DE', 'Titel:', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2608', 'DE', 'nach oben', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2609', 'DE', 'Beschreibung ist unbrauchbar', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'EN', 'Reorder IDs', '2010-09-02 00:15:30');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'EN', 'The database could not be reconnected.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'EN', 'Testing – please do not login', '2010-08-28 11:48:07');

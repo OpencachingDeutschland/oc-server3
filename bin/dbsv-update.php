@@ -878,6 +878,12 @@
 		     ADD UNIQUE INDEX `object_type` (`object_type`,`object_id`,`seq`)");
 	}
 
+	function dbv_155()
+	{
+		if (!sql_field_exists('cache_report_reasons', 'order'))
+			sql("ALTER TABLE `cache_report_reasons` ADD COLUMN `order` tinyint(2) unsigned NOT NULL");
+	}
+
 	// When adding new mutations, take care that they behave well if run multiple
 	// times. This improves robustness of database versioning.
 	//

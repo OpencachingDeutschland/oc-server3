@@ -46,7 +46,7 @@
 			{/if}
 
 			<tr>
-				<td colspan="2">{t}Subject:{/t} <input type="text" name="subject" value="{$subject|escape}" class="input400" /></td>
+				<td colspan="2">{t}Subject:{/t}&nbsp; <input type="text" name="subject" value="{$subject|escape}" class="input500" /></td>
 			</tr>
 			<tr><td class="spacer" colspan="2"></td></tr>
 

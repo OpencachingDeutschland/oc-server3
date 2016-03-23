@@ -560,7 +560,7 @@ input {	border:1px solid #555;	background-color:white;	padding:1px 2px 1px 2px; 
 *.input300 {width:300px;}
 *.input350 {width:350px;}	/* overwrite saved query */
 *.input400 {width:400px;}	/* short cachedescription */
-*.input500 {width:500px;}	/* cache list wp inputs */
+*.input500 {width:500px;}	/* cache list wp inputs, Email subject */
 
 input.checkbox {width:12px; height:12px; font-size:12px; border:0;}
 

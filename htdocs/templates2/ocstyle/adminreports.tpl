@@ -162,7 +162,7 @@ function editcomment(edit)
 		{if !$ownreport}
 			<input type="submit" name="assign" value="{t}Assign to me{/t}" class="formbutton" onclick="submitbutton('assign')" />
 		{else}
-			&nbsp;<input type="submit" name="contact" value="{t}Contact owner{/t}" class="formbutton" onclick="submitbutton('contact')" />&nbsp;<input type="submit" name="contact_reporter" value="{t}Contact reporter{/t}" class="formbutton" onclick="submitbutton('contact_reporter')" />&nbsp;&nbsp;<input type="submit" name="done" value="{t}Mark as finished{/t}" class="formbutton" onclick="submitbutton('done')" />
+			&nbsp;<input type="submit" name="contact" value="{t}Contact owner{/t}" class="formbutton" onclick="submitbutton('contact')" />&nbsp;&nbsp;<input type="submit" name="contact_reporter" value="{t}Contact reporter{/t}" class="formbutton" onclick="submitbutton('contact_reporter')" />&nbsp;&nbsp;<input type="submit" name="done" value="{t}Mark as finished{/t}" class="formbutton" onclick="submitbutton('done')" />
 			</p>
 
 			<div class="content2-container bg-blue02">

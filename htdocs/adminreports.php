@@ -47,11 +47,12 @@
 	}
 	elseif (isset($_REQUEST['contact']) && $ownerid > 0)
 	{
-		$tpl->redirect('mailto.php?userid=' . urlencode($ownerid));
+		$wp_oc = sql_value("SELECT `wp_oc` FROM `caches` WHERE `cache_id`='&1'", '', $cacheid);
+		$tpl->redirect('mailto.php?userid=' . urlencode($ownerid) . '&wp=' . $wp_oc);
 	}
 	elseif (isset($_REQUEST['contact_reporter']) && $reporterid > 0)
 	{
-		$tpl->redirect('mailto.php?userid=' . urlencode($reporterid));
+		$tpl->redirect('mailto.php?userid=' . urlencode($reporterid) . '&reportid=' . $rid);
 	}
 	elseif (isset($_REQUEST['done']) && $adminid == $login->userid)
 	{

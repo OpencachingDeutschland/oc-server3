@@ -25,7 +25,25 @@
 	if ($user->getEMail() === null || $user->getEMail() == '')
 		$tpl->error(ERROR_USER_NO_EMAIL);
 
-	$subject = isset($_REQUEST['subject']) ? $_REQUEST['subject'] : '';
+	$subject = '';
+	if (isset($_REQUEST['subject'])) {
+		$subject = $_REQUEST['subject'];
+	} elseif (isset($_REQUEST['wp'])) {
+		$wp = $_REQUEST['wp'];
+		$cachename = sql_value("SELECT `name` FROM `caches` WHERE `wp_oc`='&1'", '', $wp);
+		if ($cachename)
+			$subject = $translate->t('Your geocache', '', 0, 0) . ' "'.$cachename.'" ('.$wp.')';
+	} elseif (isset($_REQUEST['reportid']) && $login->admin) {
+		$rs = sql("
+			SELECT wp_oc, name FROM caches
+			JOIN cache_reports ON cache_reports.cacheid = caches.cache_id
+			WHERE cache_reports.id='&1'",
+			$_REQUEST['reportid']);
+		if ($r = sql_fetch_assoc($rs))
+			$subject = $translate->t('Your geocache report for', '', 0, 0) . ' '.$r['wp_oc'].' ('.$r['name'].')';
+		sql_free_result($rs);
+	}
+
 	$text = isset($_REQUEST['text']) ? $_REQUEST['text'] : '';
 	if (isset($_REQUEST['emailaddress']))
 		$bEmailaddress = ($_REQUEST['emailaddress']==1);

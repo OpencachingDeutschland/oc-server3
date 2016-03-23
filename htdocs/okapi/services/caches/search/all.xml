@@ -259,7 +259,7 @@
         <ul>
             <li>to order by cache name use "order_by=name" or "order_by=+name",</li>
             <li>to have the most recommended caches in front, use "order_by=-rcmds%",</li>
-            <li>multicolumn sorting is also allowed, ex. "order_by=-founds|name"</li>
+            <li>multicolumn sorting is also allowed, ex. "order_by=-founds|+name"</li>
         </ul>
 
         <p><b>Note:</b> For most other methods (like <b>bbox</b> and <b>nearest</b>),

@@ -66,6 +66,14 @@
 		}
 	}
 
+	function enable_wpt_conversion()
+	{
+		var wpt_convert_links = document.getElementsByName('wpt_convert');
+		for (var i=0; i<wpt_convert_links.length; ++i)
+			wpt_convert_links[i].style.display = '';
+		document.getElementById('convert_waypoints').style.display = 'none';
+	}
+
 //-->
 {/literal}
 </script>
@@ -171,7 +179,7 @@
 				</span>
 			</p>
 			{if $cache.type==6}
-				<span class="participants"><img src="resource2/{$opt.template.style}/images/cacheicon/16x16-event.gif" width="16" height="16" alt="" />&nbsp;<a href="#" onclick="window.open('event_attendance.php?id={$cache.cacheid}&popup=y','{t escape=js}List{/t}','width=320,height=440,resizable=no,scrollbars=1')">{t}List of participants{/t}</a></span>
+				<span class="participants"><img src="resource2/{$opt.template.style}/images/cacheicon/16x16-event.gif" width="16" height="16" alt="" />&nbsp;<a href="javascript:;" onclick="window.open('event_attendance.php?id={$cache.cacheid}&popup=y','{t escape=js}List{/t}','width=320,height=440,resizable=no,scrollbars=1')">{t}List of participants{/t}</a></span>
 			{/if}
 		</div>
 	</div>
@@ -397,7 +405,7 @@ function showalllists()
 	<div class="content2-container bg-blue02 content2-section-no-p">
 		<p class="content-title-noshade-size2">
 			<img src="resource2/{$opt.template.style}/images/description/20x20-compass.png" style="margin-right: 10px;" alt="" /> 
-			{t}Additional waypoints{/t}
+			{t}Additional waypoints{/t} <span id="convert_waypoints">&nbsp; <img src="resource2/{$opt.template.style}/images/viewcache/map.png" class="icon16" style="margin-right: 10px;" alt="" /><span class="content-title-link" ><a href="javascript:enable_wpt_conversion()">{t}Convert coordinates{/t}</a></span></span>
 		</p>
 	</div>
 
@@ -406,7 +414,7 @@ function showalllists()
 		{foreach from=$childWaypoints item=childWaypoint}
 			<tr bgcolor="{cycle values="#ffffff,#f4f4f4"}">
 				<td width="25%"><table cellspacing="0" cellpadding="0"><tr><td><img src="{$childWaypoint.image}" /></td><td>{$childWaypoint.name|escape}</td></tr></table></td>
-				<td class="wpt_text" width="18%">{$childWaypoint.coordinateHtml}</td>
+				<td class="wpt_text" width="18%">{$childWaypoint.coordinateHtml}<span name="wpt_convert" style="display:none"><br /><a href="javascript:;" onclick="window.open('coordinates.php?lat={$childWaypoint.coord.lat}&lon={$childWaypoint.coord.lon}&popup=y&wp={$cache.wpoc}&childwp={$childWaypoint.position}&country={$cache.countryCode}&desclang={$cache.desclanguage}','{t escape=js}Coordinates{/t}','width=280,height=550,resizable=no,scrollbars=1')">{t}convert{/t}</a></td>
 				<td class="wpt_text" >{$childWaypoint.description|escape|replace:"\r\n":"<br />"}</td>
 			</tr>
 		{/foreach}
@@ -426,7 +434,7 @@ function showalllists()
   		<img src="resource2/{$opt.template.style}/images/description/22x22-encrypted.png" style="margin-right: 10px;" width="22" height="22" alt="" /> {t}Additional hint{/t}&nbsp;&nbsp;
   		<span id="decrypt-info">{if $crypt}
 				<img src="resource2/{$opt.template.style}/images/viewcache/decrypt.png" class="icon32" width="22" height="22" alt="" />
-				<span style="font-weight: 400;"><a href="viewcache.php?wp={$cache.wpoc}&nocrypt=1&desclang={$cache.desclanguage|urlencode}#decrypt-info" {literal}onclick="var ch = document.getElementById('decrypt-hints').childNodes;for(var i=0;i < ch.length;++i) {var e = ch[i]; decrypt(e);} document.getElementById('decrypt-info').style.display = 'none';
+				<span class="content-title-link" ><a href="viewcache.php?wp={$cache.wpoc}&nocrypt=1&desclang={$cache.desclanguage|urlencode}#decrypt-info" {literal}onclick="var ch = document.getElementById('decrypt-hints').childNodes;for(var i=0;i < ch.length;++i) {var e = ch[i]; decrypt(e);} document.getElementById('decrypt-info').style.display = 'none';
 				bNoCrypt = 1;
 				return false;"{/literal}>{t}Decrypt{/t}</a>{/if}</span>
 			</span>

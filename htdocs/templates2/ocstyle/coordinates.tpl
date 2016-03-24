@@ -7,8 +7,9 @@
 
 	{if $wp!=''}
 		<div style="margin-top:4px;">
-			<p style="color: 5890a8"><b>{$cachename}</b><br />
-			<p style="color: 5890a8">{t}by{/t} {$owner}</p>
+			<p style="color: 5890a8"><b>{$cachename}</b>{if $childwp}, {t}waypoint{/t}&nbsp;{$childwp}<br />
+			<p style="color: 5890a8">{t}by{/t} {$owner}{/if}
+			</p>
 		</div>
 	{/if}
 	<div style="margin-top:16px;">

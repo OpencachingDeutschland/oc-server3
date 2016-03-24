@@ -30,8 +30,11 @@ function getChildWaypoints($cacheid)
 
     for ($i = 0; $i < $count; $i++)
     {
+      $waypoints[$i]['coord']['lat'] = $waypoints[$i]['coordinate']->latitude();
+      $waypoints[$i]['coord']['lon'] = $waypoints[$i]['coordinate']->longitude();
       $waypoints[$i]['coordinateHtml'] = $formatter->formatHtml($waypoints[$i]['coordinate'], '<br />');
       $waypoints[$i]['description'] = trim($waypoints[$i]['description']);
+      $waypoints[$i]['position'] = $i + 1;
     }
   }
 

@@ -106,6 +106,8 @@
 		sql_free_result($rs);
 	}
 	$tpl->assign('wp', $wp);
+	$childwp = isset($_REQUEST['childwp']) ? $_REQUEST['childwp'] : '';
+	$tpl->assign('childwp', $childwp);
 
 	$tpl->display();
 ?>

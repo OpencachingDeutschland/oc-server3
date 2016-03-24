@@ -414,7 +414,7 @@ function showalllists()
 		{foreach from=$childWaypoints item=childWaypoint}
 			<tr bgcolor="{cycle values="#ffffff,#f4f4f4"}">
 				<td width="25%"><table cellspacing="0" cellpadding="0"><tr><td><img src="{$childWaypoint.image}" /></td><td>{$childWaypoint.name|escape}</td></tr></table></td>
-				<td class="wpt_text" width="18%">{$childWaypoint.coordinateHtml}<span name="wpt_convert" style="display:none"><br /><a href="javascript:;" onclick="window.open('coordinates.php?lat={$childWaypoint.coord.lat}&lon={$childWaypoint.coord.lon}&popup=y&wp={$cache.wpoc}&childwp={$childWaypoint.position}&country={$cache.countryCode}&desclang={$cache.desclanguage}','{t escape=js}Coordinates{/t}','width=280,height=550,resizable=no,scrollbars=1')">{t}convert{/t}</a></td>
+				<td class="wpt_text" width="18%">{$childWaypoint.coordinateHtml}<span id="wpt_convert" name="wpt_convert" {* Firefox getElementsByName() needs "name", MSIE needs "id", Chrome accepts both *} style="display:none"><br /><a href="javascript:;" onclick="window.open('coordinates.php?lat={$childWaypoint.coord.lat}&lon={$childWaypoint.coord.lon}&popup=y&wp={$cache.wpoc}&childwp={$childWaypoint.position}&country={$cache.countryCode}&desclang={$cache.desclanguage}','{t escape=js}Coordinates{/t}','width=280,height=550,resizable=no,scrollbars=1')">{t}convert{/t}</a></td>
 				<td class="wpt_text" >{$childWaypoint.description|escape|replace:"\r\n":"<br />"}</td>
 			</tr>
 		{/foreach}

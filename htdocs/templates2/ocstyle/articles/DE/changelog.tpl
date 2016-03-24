@@ -32,6 +32,32 @@
 
 	<div class="changelog-changes">
 
+	<p id="current"><strong>Laufende Änderungen</strong>, Stand 24. März 2016</p>
+	<p>Neu:</p>
+	<ul>
+		<li>Anzeige von Markern bei der Koordinatensuche auf der Karte</li>
+		<li>Die Reihenfolge von Bildern in Cachbeschreibungen und Logs ist nachträglich änderbar.</li>
+		<li>Koordinatenumrechnung für zusätzliche Wegpunkte</li>
+		<li>OKAPI: &bdquo;Cache benötigt Wartung&ldquo; ist abfragbar und logbar</li>
+		<li>OKAPI: Consumer Keys können gesperrt werden (Admin-Funktion)</li>
+	</ul>
+
+	<p>Geändert / verbessert:</p>
+	<ul>
+		<li>Logs mit und ohne Uhrzeit am gleichen Tag werden sinnvoller geordnet.</li>
+		<li>Smiley-Icons auch in Benachrichtigungsmails (Ausgabe als Text-Smileys)</li>
+		<li>Komfortablere Abarbeitung von Cachemeldungen (Admin-Funktion)</li>
+		<li>Bei der Angabe &bdquo;letztes Login&ldquo; im Benutzerprofil wird nun zwischen 1&ndash;2 Jahren und &gt;2 Jahren unterschieden.</li>
+		<li>Detailverbesserungen und -Nachbesserungen bei den Wartungsstatus-Logs</li>
+	</ul>
+
+	<p>Korrigiert (Bugfixes):</p>
+	<ul>
+		<li>Koordinatensuche auf der Karte funktioniert wieder zuverlässig</li>
+		<li>Korrekturen in der <a href="doc/xml">XML-Schnittstelle</a></li>
+	</ul>
+	<br />
+
 	<p id="v3.0.17"><strong>OC 3.0 Version 17</strong> &ndash; 7. März 2016</p>
 	<p>Neu:</p>
 	<ul>

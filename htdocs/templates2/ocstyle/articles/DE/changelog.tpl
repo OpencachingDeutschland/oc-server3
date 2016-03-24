@@ -54,7 +54,7 @@
 	<p>Korrigiert (Bugfixes):</p>
 	<ul>
 		<li>Koordinatensuche auf der Karte funktioniert wieder zuverlässig</li>
-		<li>Korrekturen in der <a href="doc/xml">XML-Schnittstelle</a></li>
+		<li>Korrekturen in der <a href="doc/xml">XML-Schnittstelle</a>. Wer die Replikationsfunktion ab Version 1.4 nutzt, sollte ein Komplettupdate einschieben.</li>
 	</ul>
 	<br />
 

@@ -149,6 +149,19 @@
 
 		if ($record = sql_fetch_assoc($rs))
 		{
+			$note = trim($record['note']);
+			$note = nl2br(htmlentities($note));
+			$note = preg_replace(
+				"/\b(OC[0-9A-F]{4,6})\b/",
+				"<a href='https://opencaching.de/$1' target='_blank'>$1</a>",
+				$note
+			);
+			$note = preg_replace(
+				"/\b(GC[0-9A-Z]{3,7})\b/",
+				"<a href='https://www.geocaching.com/geocache/$1' target='_blank'>$1</a>",
+				$note
+			);
+
 			$tpl->assign('id', $record['id']);
 			$tpl->assign('cacheid', $record['cacheid']);
 			$tpl->assign('userid', $record['userid']);
@@ -156,7 +169,7 @@
 			$tpl->assign('adminid', $record['adminid']);
 			$tpl->assign('adminnick', $record['adminnick']);
 			$tpl->assign('reason', $record['reason']);
-			$tpl->assign('note', trim($record['note']));
+			$tpl->assign('note', $note);
 			$tpl->assign('status', $record['status']);
 			$tpl->assign('created', $record['date_created']);
 			$tpl->assign('lastmodified', $record['lastmodified']);

@@ -47,4 +47,3 @@
 	$tpl->assign('showall', $showall);
 
 	$tpl->display();
-?>

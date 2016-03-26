@@ -90,8 +90,8 @@ class attribute
 
 			if (count($attr) > 0)
 				$attributes[] = array('id' => $rAttrGroup['id'],
-															'name' => $rAttrGroup['name'], 
-															'color' => $rAttrGroup['color'], 
+															'name' => $rAttrGroup['name'],
+															'color' => $rAttrGroup['color'],
 															'category' => $rAttrGroup['category'],
 															'search_default' => $bSearchGroupDefault,
 															'attr' => $attr);
@@ -101,4 +101,3 @@ class attribute
 		return $attributes;
 	}
 }
-?>

@@ -43,5 +43,3 @@ sql('DELETE FROM result_caches WHERE status!=1');
 sql('DELETE FROM result_caches WHERE search_time>2');
 
 $tpl->display();
-
-?>

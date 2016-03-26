@@ -319,4 +319,3 @@ function ftsearch_strip_html($text)
 
 	return $text;
 }
-?>

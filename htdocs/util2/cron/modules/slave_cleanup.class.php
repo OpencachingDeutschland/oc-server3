@@ -73,4 +73,3 @@ class slave_cleanup
 			sql("DELETE FROM `map2_data` WHERE `result_id`<'&1'", $nMinId);
 	}
 }
-?>

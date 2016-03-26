@@ -48,4 +48,3 @@ function smarty_block_nocache($param, $content, &$smarty, &$repeat)
 
 	return $content;
 }
-?>

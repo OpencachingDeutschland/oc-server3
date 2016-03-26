@@ -39,7 +39,7 @@
 	$opt['php']['semaphores'] = true;
 
 	// database connection
-	
+
 	/* hostname or IP Address
 	 * to connect to mysql socket use ':/path/to/mysql.sock';
 	 */
@@ -281,7 +281,7 @@
 	$opt['logic']['pictures']['dummy']['bgcolor'] = array(255,255,255);
 	$opt['logic']['pictures']['dummy']['text'] = '';
 	$opt['logic']['pictures']['dummy']['textcolor'] = array(0,0,0);
-	$opt['logic']['pictures']['dummy']['replacepic'] = $opt['rootpath'] . 'images/';  	   
+	$opt['logic']['pictures']['dummy']['replacepic'] = $opt['rootpath'] . 'images/';
 
 	/* cachemaps (obsolete)
 	 */
@@ -314,7 +314,7 @@
 	 * If the url string is empty, no minimap is displayed on the front page. 
 	 * 
 	 * Coordinates of new caches are appended to the url.
-	 */ 
+	 */
 	$opt['logic']['minimapurl'] = 'http://maps.googleapis.com/maps/api/staticmap?sensor=false&key={gmkey}&size=220x220&maptype=roadmap&markers=color:blue|size:small';
 	
 	/* target vars
@@ -618,6 +618,4 @@
 		                              );
 		$menuitem[MNU_MAP]['subitems'][] = $mapmenu+0;
 		$menuitem[MNU_MAP]['subitems'][] = $mapmenu+1;
-	*/
-
-?>
+	*/;

@@ -31,7 +31,6 @@ class cleanup_temptables
 			if (!isset($nIds[$r['threadid']]))
 				sqlf("DELETE FROM `sys_temptables` WHERE `threadid`='&1'", $r['threadid']);
 		}
-		sql_free_result($rs);	
+		sql_free_result($rs);
 	}
 }
-?>

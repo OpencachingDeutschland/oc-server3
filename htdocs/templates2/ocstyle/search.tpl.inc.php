@@ -86,5 +86,3 @@ N|O|P|Q|R|S|T|U|V|W|X|Y|Z
 Log entries:
 {logs}
 ", '', basename(__FILE__), __LINE__);
-
-?>

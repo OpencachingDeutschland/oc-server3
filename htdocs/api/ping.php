@@ -10,5 +10,3 @@
 
 	header('Content-type: text/plain; charset=utf-8');
 	echo sql_value("SELECT NOW()","");
-
-?>

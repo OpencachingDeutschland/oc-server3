@@ -176,4 +176,3 @@ class login
 			return true;
 	}
 }
-?>

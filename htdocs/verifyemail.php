@@ -17,7 +17,7 @@
 	if ($login->userid == 0)
 		$tpl->redirect_login();
 
-	$orgpage = isset($_REQUEST['page']) ? $_REQUEST['page'] : 'index.php'; 
+	$orgpage = isset($_REQUEST['page']) ? $_REQUEST['page'] : 'index.php';
 	$user = new user($login->userid);
 
 	if (isset($_REQUEST['new']))
@@ -38,4 +38,3 @@
 	}
 
 	$tpl->display();
-?>

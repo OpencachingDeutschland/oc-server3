@@ -101,4 +101,3 @@ class replication_monitor
 			sql("UPDATE `sys_repl_slaves` SET `time_diff`='&1' WHERE `id`='&2'", $nTimeDiff, $id);
 	}
 }
-?>

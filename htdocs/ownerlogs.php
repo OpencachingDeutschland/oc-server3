@@ -53,5 +53,3 @@
 	                       0, $login->userid));
 
 	require 'newlogs.php';
-
-?>

@@ -53,5 +53,3 @@ class push_waypoint_reports
 		}
 	}
 }
-
-?>

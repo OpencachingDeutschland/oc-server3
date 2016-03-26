@@ -31,4 +31,3 @@
 		$cli->debug('exit because DEBUG_OUTOFSERVICE is set');
 		exit;
 	}
-?>

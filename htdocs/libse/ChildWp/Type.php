@@ -40,5 +40,3 @@ class ChildWp_Type
     return $this->image;
   }
 }
-
-?>

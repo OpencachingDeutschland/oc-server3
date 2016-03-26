@@ -32,7 +32,7 @@ function smarty_modifier_to_readable_size($size)
 	elseif ($size > 1048576)
 	{
 		$size /= 1048576;
-		$suffix = 'MB';    
+		$suffix = 'MB';
 	}
 	elseif ($size > 1024)
 	{
@@ -45,6 +45,4 @@ function smarty_modifier_to_readable_size($size)
 	return round($size, 2) . ' ' . $suffix;
 }
 
-/* vim: set expandtab: */
-
-?>
+/* vim: set expandtab: */;

@@ -118,4 +118,3 @@ class user
 		$this->reCacheDesc->reload();
 	}
 }
-?>

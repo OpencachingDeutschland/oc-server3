@@ -75,6 +75,4 @@ function smarty_core_get_php_resource(&$params, &$smarty)
     return true;
 }
 
-/* vim: set expandtab: */
-
-?>
+/* vim: set expandtab: */;

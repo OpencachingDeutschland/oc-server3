@@ -219,5 +219,3 @@ function search_output()
 
 		return $str;
 	}
-
-?>

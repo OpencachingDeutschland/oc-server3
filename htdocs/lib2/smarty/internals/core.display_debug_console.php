@@ -56,6 +56,4 @@ function smarty_core_display_debug_console($params, &$smarty)
     return $_results;
 }
 
-/* vim: set expandtab: */
-
-?>
+/* vim: set expandtab: */;

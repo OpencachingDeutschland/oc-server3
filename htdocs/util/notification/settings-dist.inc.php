@@ -13,4 +13,3 @@
 	$debug_mailto = 'abc@xyz.de';
 
 	$notifypid = $rootpath . 'cache/notify.pid';
-?>

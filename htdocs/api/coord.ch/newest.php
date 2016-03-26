@@ -45,4 +45,3 @@
   {
     return '"' . mb_ereg_replace('"', '\"', $str) . '"';
   }
-?>

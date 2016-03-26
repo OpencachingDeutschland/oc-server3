@@ -301,7 +301,7 @@ class Config_File {
                         $vars = array();
                         continue;
                     }
-                } else {                    
+                } else {
                     $section_name = $match[1];
                 }
                 if (!isset($config_data['sections'][$section_name]))
@@ -389,5 +389,3 @@ class Config_File {
     }
     /**#@-*/
 }
-
-?>

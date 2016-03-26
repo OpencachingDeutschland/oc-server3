@@ -30,5 +30,3 @@
 	$rating_too_few_founds = t('You need additional {anzahl} finds, to make another recommandation.');
 	$rating_maywithdraw = t('Alternatively, you can withdraw a <a href="mytop5.php">existing recommendation</a>.');
 	$rating_stat = t('You have given {curr} of {max} possible recommendations.');
-
-?>

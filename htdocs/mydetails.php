@@ -139,8 +139,8 @@ function assignFromDB($userid,$include_editor)
 		      LEFT JOIN `sys_trans` AS `st` ON `p`.`trans_id`=`st`.`id` AND `p`.`name`=`st`.`text`
 		      LEFT JOIN `sys_trans_text` AS `tt` ON `st`.`id`=`tt`.`trans_id` AND `tt`.`lang`='&2'
 		          WHERE `optionset`=1
-		       ORDER BY `p`.`internal_use` DESC, `p`.`option_order`", 
-		                $userid+0, 
+		       ORDER BY `p`.`internal_use` DESC, `p`.`option_order`",
+		                $userid+0,
 		                $opt['template']['locale']);
 	$tpl->assign_rs('useroptions', $rs);
 	sql_free_result($rs);
@@ -172,4 +172,3 @@ function assignFromDB($userid,$include_editor)
 		$tpl->assign('descMode',$descMode);
 	}
 }
-?>

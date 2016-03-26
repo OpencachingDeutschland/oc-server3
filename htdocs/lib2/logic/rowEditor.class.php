@@ -28,9 +28,9 @@ class rowEditor
 
 	function addPKInt($sField, $nDefault, $bNullable, $nInsertFunction=RE_INSERT_NOTHING)
 	{
-		$this->pk[$sField] = array('type' => RE_TYPE_INT, 
-		                           'default' => $nDefault, 
-		                           'nullable' => $bNullable, 
+		$this->pk[$sField] = array('type' => RE_TYPE_INT,
+		                           'default' => $nDefault,
+		                           'nullable' => $bNullable,
 		                           'value' => $nDefault,
 		                           'insertfunction' => $nInsertFunction);
 
@@ -40,18 +40,18 @@ class rowEditor
 
 	function addPKFloat($sField, $nDefault, $bNullable, $nInsertFunction=RE_INSERT_NOTHING)
 	{
-		$this->pk[$sField] = array('type' => RE_TYPE_FLOAT, 
-		                           'default' => $nDefault, 
-		                           'nullable' => $bNullable, 
+		$this->pk[$sField] = array('type' => RE_TYPE_FLOAT,
+		                           'default' => $nDefault,
+		                           'nullable' => $bNullable,
 		                           'value' => $nDefault,
 		                           'insertfunction' => $nInsertFunction);
 	}
 
 	function addPKDouble($sField, $nDefault, $bNullable, $nInsertFunction=RE_INSERT_NOTHING)
 	{
-		$this->pk[$sField] = array('type' => RE_TYPE_DOUBLE, 
-		                           'default' => $nDefault, 
-		                           'nullable' => $bNullable, 
+		$this->pk[$sField] = array('type' => RE_TYPE_DOUBLE,
+		                           'default' => $nDefault,
+		                           'nullable' => $bNullable,
 		                           'value' => $nDefault,
 		                           'insertfunction' => $nInsertFunction);
 	}
@@ -61,87 +61,87 @@ class rowEditor
     if (($nInsertFunction & RE_INSERT_AUTOUUID) == RE_INSERT_AUTOUUID)
       die('rowEditor: RE_INSERT_AUTOUUID not supported for primary key fields');
 
-		$this->pk[$sField] = array('type' => RE_TYPE_STRING, 
-		                           'default' => $sDefault, 
-		                           'nullable' => $bNullable, 
+		$this->pk[$sField] = array('type' => RE_TYPE_STRING,
+		                           'default' => $sDefault,
+		                           'nullable' => $bNullable,
 		                           'value' => $sDefault,
 		                           'insertfunction' => $nInsertFunction);
 	}
 
 	function addPKBoolean($sField, $bDefault, $bNullable, $nInsertFunction=RE_INSERT_NOTHING)
 	{
-		$this->pk[$sField] = array('type' => RE_TYPE_BOOLEAN, 
-		                           'default' => $bDefault, 
-		                           'nullable' => $bNullable, 
+		$this->pk[$sField] = array('type' => RE_TYPE_BOOLEAN,
+		                           'default' => $bDefault,
+		                           'nullable' => $bNullable,
 		                           'value' => $bDefault,
 		                           'insertfunction' => $nInsertFunction);
 	}
 
 	function addPKDate($sField, $dDefault, $bNullable, $nInsertFunction=RE_INSERT_NOTHING)
 	{
-		$this->pk[$sField] = array('type' => RE_TYPE_DATE, 
-		                           'default' => $dDefault, 
-		                           'nullable' => $bNullable, 
+		$this->pk[$sField] = array('type' => RE_TYPE_DATE,
+		                           'default' => $dDefault,
+		                           'nullable' => $bNullable,
 		                           'value' => $dDefault,
 		                           'insertfunction' => $nInsertFunction);
 	}
 
 	function addInt($sField, $nDefault, $bNullable, $nInsertFunction=RE_INSERT_NOTHING)
 	{
-		$this->fields[$sField] = array('type' => RE_TYPE_INT, 
-		                               'default' => $nDefault, 
-		                               'nullable' => $bNullable, 
-		                               'value' => $nDefault, 
+		$this->fields[$sField] = array('type' => RE_TYPE_INT,
+		                               'default' => $nDefault,
+		                               'nullable' => $bNullable,
+		                               'value' => $nDefault,
 		                               'changed => false',
 		                               'insertfunction' => $nInsertFunction);
 	}
 
 	function addFloat($sField, $nDefault, $bNullable, $nInsertFunction=RE_INSERT_NOTHING)
 	{
-		$this->fields[$sField] = array('type' => RE_TYPE_FLOAT, 
-		                               'default' => $nDefault, 
-		                               'nullable' => $bNullable, 
-		                               'value' => $nDefault, 
+		$this->fields[$sField] = array('type' => RE_TYPE_FLOAT,
+		                               'default' => $nDefault,
+		                               'nullable' => $bNullable,
+		                               'value' => $nDefault,
 		                               'changed => false',
 		                               'insertfunction' => $nInsertFunction);
 	}
 
 	function addDouble($sField, $nDefault, $bNullable, $nInsertFunction=RE_INSERT_NOTHING)
 	{
-		$this->fields[$sField] = array('type' => RE_TYPE_DOUBLE, 
-		                               'default' => $nDefault, 
-		                               'nullable' => $bNullable, 
-		                               'value' => $nDefault, 
+		$this->fields[$sField] = array('type' => RE_TYPE_DOUBLE,
+		                               'default' => $nDefault,
+		                               'nullable' => $bNullable,
+		                               'value' => $nDefault,
 		                               'changed => false',
 		                               'insertfunction' => $nInsertFunction);
 	}
 
 	function addString($sField, $sDefault, $bNullable, $nInsertFunction=RE_INSERT_NOTHING)
 	{
-		$this->fields[$sField] = array('type' => RE_TYPE_STRING, 
-		                               'default' => $sDefault, 
-		                               'nullable' => $bNullable, 
-		                               'value' => $sDefault, 
+		$this->fields[$sField] = array('type' => RE_TYPE_STRING,
+		                               'default' => $sDefault,
+		                               'nullable' => $bNullable,
+		                               'value' => $sDefault,
 		                               'changed => false',
 		                               'insertfunction' => $nInsertFunction);
 	}
 
 	function addBoolean($sField, $bDefault, $bNullable, $nInsertFunction=RE_INSERT_NOTHING)
 	{
-		$this->fields[$sField] = array('type' => RE_TYPE_BOOLEAN, 
-		                               'default' => $bDefault, 
-		                               'nullable' => $bNullable, 
-		                               'value' => $bDefault, 
+		$this->fields[$sField] = array('type' => RE_TYPE_BOOLEAN,
+		                               'default' => $bDefault,
+		                               'nullable' => $bNullable,
+		                               'value' => $bDefault,
 		                               'changed => false',
 		                               'insertfunction' => $nInsertFunction);
 	}
 
 	function addDate($sField, $dDefault, $bNullable, $nInsertFunction=RE_INSERT_NOTHING)
 	{
-		$this->fields[$sField] = array('type' => RE_TYPE_DATE, 
-		                               'default' => $dDefault, 
-		                               'nullable' => $bNullable, 
-		                               'value' => $dDefault, 
+		$this->fields[$sField] = array('type' => RE_TYPE_DATE,
+		                               'default' => $dDefault,
+		                               'nullable' => $bNullable,
+		                               'value' => $dDefault,
 		                               'changed => false',
 		                               'insertfunction' => $nInsertFunction);
 	}
@@ -559,4 +559,3 @@ class rowEditor
 		return true;
 	}
 }
-?>

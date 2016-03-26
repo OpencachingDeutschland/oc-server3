@@ -29,4 +29,3 @@
 	$listed_only_oc = t('only listed here!');
 
 	$smiley_link = '<a href="javascript:insertSmiley(\'{smiley_text}\')">{smiley_image}</a>';
-?>

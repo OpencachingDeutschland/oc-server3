@@ -27,6 +27,4 @@ function smarty_modifier_count_characters($string, $include_spaces = false)
     return preg_match_all("/[^\s]/",$string, $match);
 }
 
-/* vim: set expandtab: */
-
-?>
+/* vim: set expandtab: */;

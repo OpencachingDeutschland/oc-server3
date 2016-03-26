@@ -28,6 +28,4 @@ function smarty_modifier_count_words($string)
     return count($word_count);
 }
 
-/* vim: set expandtab: */
-
-?>
+/* vim: set expandtab: */;

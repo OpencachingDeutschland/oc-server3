@@ -29,5 +29,3 @@ class ChildWp_AddPresenter extends ChildWp_Presenter
     $this->childWpHandler->add($this->cacheId, $this->getType(), $coordinate->latitude(), $coordinate->longitude(), $description);
   }
 }
-
-?>

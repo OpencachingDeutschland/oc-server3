@@ -49,6 +49,4 @@ function smarty_core_rmdir($params, &$smarty)
 
 }
 
-/* vim: set expandtab: */
-
-?>
+/* vim: set expandtab: */;

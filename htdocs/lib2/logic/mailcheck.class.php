@@ -178,4 +178,3 @@ function mailcheck_cmp($a, $b)
   }
   return (($a['prio']+0) < ($b['prio']+0)) ? -1 : 1;
 }
-?>

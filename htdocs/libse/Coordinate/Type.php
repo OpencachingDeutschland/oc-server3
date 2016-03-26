@@ -12,4 +12,3 @@ class Coordinate_Type
 	const ChildWaypoint = COORDINATE_WAYPOINT;
 	const UserNote = COORDINATE_USERNOTE;
 }
-?>

@@ -27,6 +27,4 @@ function smarty_modifier_strip_tags($string, $replace_with_space = true)
         return strip_tags($string);
 }
 
-/* vim: set expandtab: */
-
-?>
+/* vim: set expandtab: */;

@@ -29,5 +29,3 @@ class okapi_cleanup
 		}
 	}
 }
-
-?>

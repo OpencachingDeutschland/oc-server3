@@ -18,5 +18,3 @@
 	$tpl->assign('ownlogs', true);
 
 	require 'newlogs.php';
-
-?>

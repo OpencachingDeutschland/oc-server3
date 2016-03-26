@@ -25,7 +25,7 @@
 
 	define('EUROPEAN_LETTERS', 'A-Za-zÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿ');
 		// ASCII + ISO-8859-1 0xC0..0xFF; if chars change, adjust webchat.php
-	define('REGEX_USERNAME', '^['.EUROPEAN_LETTERS.'0-9\.\-_@=)(\/\\\&*+~#]['.EUROPEAN_LETTERS.'0-9\.\-_ @=)(\/\\\&*+~#]{1,58}['.EUROPEAN_LETTERS.'0-9\.\-_@=)(\/\\\&*+~#]$'); 
+	define('REGEX_USERNAME', '^['.EUROPEAN_LETTERS.'0-9\.\-_@=)(\/\\\&*+~#]['.EUROPEAN_LETTERS.'0-9\.\-_ @=)(\/\\\&*+~#]{1,58}['.EUROPEAN_LETTERS.'0-9\.\-_@=)(\/\\\&*+~#]$');
 	define('REGEX_PASSWORD', '^['.EUROPEAN_LETTERS.'0-9\.\-_ @=)(\/\\\&*+~#]{3,60}$');
 	define('REGEX_LAST_NAME', '^['.EUROPEAN_LETTERS.']['.EUROPEAN_LETTERS.'0-9\.\- ]{0,58}['.EUROPEAN_LETTERS.'0-9\.]$');
 	define('REGEX_FIRST_NAME', REGEX_LAST_NAME);
@@ -90,4 +90,3 @@
     define('PICTURE_QUALITY',85);
     define('PICTURE_RESOLUTION',72);
     define('PICTURE_MAX_LONG_SIDE',1024);
-?>

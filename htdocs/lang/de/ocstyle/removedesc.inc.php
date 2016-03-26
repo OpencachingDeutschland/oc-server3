@@ -19,4 +19,3 @@
 
  $commit = t('the cache description has been deleted');
  $commit_title = t('delete this cache-description');
-?>

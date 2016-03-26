@@ -20,7 +20,7 @@ function git($args)
 
 // validate settings, Git health and OKAPI repo state
 
-echo "[okapi-update] validating settings and local OKAPI repo\n"; 
+echo "[okapi-update] validating settings and local OKAPI repo\n";
 
 if (!@chdir(OKAPI_SOURCE_PATH))
   die("[okapi-update] bad OKAPI_SOURCE_PATH setting");
@@ -56,7 +56,7 @@ echo "OKAPI rev. $okapi_git_revision\n";
 passthru(str_replace('%source', OKAPI_SOURCE_PATH . '/okapi',
          str_replace('%dest', $opt['rootpath'] . '/okapi', DIRECTORY_TREE_REPLICATOR)));
 $core = file_get_contents($opt['rootpath'] . '/okapi/core.php');
-$core = str_replace("\$version_number = null", "\$version_number = " . $okapi_version_number,  
+$core = str_replace("\$version_number = null", "\$version_number = " . $okapi_version_number,
         str_replace("\$git_revision = null", "\$git_revision = '" . $okapi_git_revision . "'",
 				$core));
 file_put_contents($opt['rootpath'] . '/okapi/core.php', $core);

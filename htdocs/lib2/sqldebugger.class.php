@@ -55,7 +55,7 @@ class sqldebugger
 
 		if (strtoupper(substr($sqlexplain, 0, 7)) == 'DELETE ')
 			$sqlexplain = $this->strip_from($sqlexplain);
-		else if ((strtoupper(substr($sqlexplain, 0, 12)) == 'INSERT INTO ') || 
+		else if ((strtoupper(substr($sqlexplain, 0, 12)) == 'INSERT INTO ') ||
 							(strtoupper(substr($sqlexplain, 0, 19)) == 'INSERT IGNORE INTO '))
 			$sqlexplain = $this->strip_temptable($sqlexplain);
 		else if (strtoupper(substr($sqlexplain, 0, 23)) == 'CREATE TEMPORARY TABLE ')
@@ -86,7 +86,7 @@ class sqldebugger
 		// dont use query cache!
 		$sql = $this->insert_nocache($sql);
 
-		$bSqlExecution = new Cbench; 
+		$bSqlExecution = new Cbench;
 		$bSqlExecution->start();
 		$rsResult = mysql_query($sql, $dblink);
 		$bSqlExecution->stop();
@@ -132,4 +132,3 @@ class sqldebugger
 		return $sql;
 	}
 }
-?>

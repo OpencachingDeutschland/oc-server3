@@ -1028,7 +1028,7 @@
 			{
 				$sql_select[] = '`caches`.`cache_id` `cache_id`';
 				$sql_from = '`caches`';
-				$sql_where[] = 'TRUE'; 
+				$sql_where[] = 'TRUE';
 			}
 			else
 			{
@@ -2193,5 +2193,3 @@ function outputLocidSelectionForm($locSql, $options)
 	$tpl->display();
 	exit;
 }
-
-?>

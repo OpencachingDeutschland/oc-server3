@@ -40,5 +40,3 @@ class Validator_Real extends Validator_Numeric
     return floatval($value);
   }
 }
-
-?>

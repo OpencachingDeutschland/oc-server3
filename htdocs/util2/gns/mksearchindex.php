@@ -32,7 +32,7 @@
 			{
 				if (nonalpha($text))
 					die($r['uni'] . ' ' . $text . "\n");  // obsolete for the same reason as above
-				
+
 				$simpletext = search_text2simple($text);
 
 				sql("INSERT INTO `gns_search` (`uni_id`, `sort`, `simple`, `simplehash`) VALUES ('&1', '&2', '&3', '&4')", $r['uni'], $text, $simpletext, sprintf("%u", crc32($simpletext)));

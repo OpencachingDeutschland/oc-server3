@@ -68,8 +68,8 @@
 		          WHERE `u`.`option_visible`=1
 		            AND `p`.`internal_use`=0
 		            AND `u`.`user_id`='&1'
-		       ORDER BY `p`.`option_order`", 
-		                $userid, 
+		       ORDER BY `p`.`option_order`",
+		                $userid,
 		                $opt['template']['locale']);
 	$tpl->assign_rs('useroptions', $rs);
 	sql_free_result($rs);
@@ -95,8 +95,8 @@
 			      LEFT JOIN `cache_status` ON `cache_status`.`id`=`c`.`status`
 			          WHERE `c`.`user_id`='&1' AND `allow_user_view`='1'
 			       GROUP BY `t`.`id`
-			       ORDER BY `anzahl` DESC, `t`.`ordinal` ASC", 
-			                $userid, 
+			       ORDER BY `anzahl` DESC, `t`.`ordinal` ASC",
+			                $userid,
 			                $opt['template']['locale']);
 		$tpl->assign_rs('userstatshidden', $rs);
 		sql_free_result($rs);
@@ -109,8 +109,8 @@
 			      LEFT JOIN `sys_trans_text` AS `tt` ON `st`.`id`=`tt`.`trans_id` AND `tt`.`lang`='&2'
 			          WHERE `l`.`user_id`='&1' AND (`l`.`type`=1 OR `l`.`type`=7)
 			       GROUP BY `t`.`id`
-			       ORDER BY `anzahl` DESC, `t`.`ordinal` ASC", 
-			                $userid, 
+			       ORDER BY `anzahl` DESC, `t`.`ordinal` ASC",
+			                $userid,
 			                $opt['template']['locale']);
 		$tpl->assign_rs('userstatsfound', $rs);
 		sql_free_result($rs);
@@ -157,7 +157,7 @@
 		INNER JOIN `caches_attributes` ON `caches_attributes`.`cache_id`=`cache_logs`.`cache_id` AND `caches_attributes`.`attrib_id`=6
 		INNER JOIN `cache_rating` ON `cache_rating`.`user_id`=`cache_logs`.`user_id` AND `cache_rating`.`cache_id`=`cache_logs`.`cache_id` AND `cache_rating`.`rating_date`=`cache_logs`.`date` 
 		WHERE `cache_logs`.`user_id`='&1' AND `cache_logs`.`type` IN (1,7)",
-		0, $userid); 
+		0, $userid);
 
 		$rs = sql("
 			SELECT
@@ -187,7 +187,7 @@
 		INNER JOIN `caches_attributes` ON `caches_attributes`.`cache_id`=`cache_logs`.`cache_id` AND `caches_attributes`.`attrib_id`=6
 		WHERE `user_id`='&1'
 		GROUP BY `cache_logs`.`type`",
-		$userid); 
+		$userid);
 	$oconly_found = 0;
 	$oconly_dnf = 0;
 	$oconly_note = 0;
@@ -224,8 +224,8 @@
 			     INNER JOIN `caches_attributes` ON `caches_attributes`.`cache_id`=`c`.`cache_id` AND `caches_attributes`.`attrib_id`=6
 			          WHERE `c`.`user_id`='&1' AND `allow_user_view`='1'
 			       GROUP BY `t`.`id`
-			       ORDER BY `anzahl` DESC, `t`.`ordinal` ASC", 
-			                $userid, 
+			       ORDER BY `anzahl` DESC, `t`.`ordinal` ASC",
+			                $userid,
 			                $opt['template']['locale']);
 		$tpl->assign_rs('oconly_userstatshidden', $rs);
 		sql_free_result($rs);
@@ -239,8 +239,8 @@
 			     INNER JOIN `caches_attributes` ON `caches_attributes`.`cache_id`=`c`.`cache_id` AND `caches_attributes`.`attrib_id`=6
 			          WHERE `l`.`user_id`='&1' AND (`l`.`type`=1 OR `l`.`type`=7)
 			       GROUP BY `t`.`id`
-			       ORDER BY `anzahl` DESC, `t`.`ordinal` ASC", 
-			                $userid, 
+			       ORDER BY `anzahl` DESC, `t`.`ordinal` ASC",
+			                $userid,
 			                $opt['template']['locale']);
 		$tpl->assign_rs('oconly_userstatsfound', $rs);
 		sql_free_result($rs);
@@ -316,7 +316,7 @@
 	else
 	{
 		$record['last_login'] = strtotime($record['last_login']);
-		$record['last_login'] = mktime(date('G', $record['last_login']), date('i', $record['last_login']), date('s', $record['last_login']), 
+		$record['last_login'] = mktime(date('G', $record['last_login']), date('i', $record['last_login']), date('s', $record['last_login']),
 																	 date('n', $record['last_login']), date(1, $record['last_login']), date('Y', $record['last_login']));
 		if ($record['last_login'] >= mktime(0, 0, 0, date("m")-1, 1, date("Y")))
 			$tpl->assign('lastlogin', 1);
@@ -355,4 +355,3 @@
 		// Dummy counter is needed to make consecutive clicks on the same link work.
 
 	$tpl->display();
-?>

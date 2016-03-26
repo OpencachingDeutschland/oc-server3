@@ -52,5 +52,3 @@ class gcwp_update
 				 );
 	}
 }
-
-?>

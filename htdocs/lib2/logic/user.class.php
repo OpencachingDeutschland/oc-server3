@@ -715,7 +715,7 @@ class user
 			                               `from_email`, 
 			                               `to_user_id`, 
 			                               `to_email`)
-			                       VALUES ('&1', '&2', '&3', '&4', '&5')", 
+			                       VALUES ('&1', '&2', '&3', '&4', '&5')",
 			                               $_SERVER["REMOTE_ADDR"],
 			                               $fromUser->getUserId(),
 			                               $fromUser->getEMail(),
@@ -760,7 +760,7 @@ class user
 
 		sql("INSERT INTO `logentries` (`module`, `eventid`, `userid`, `objectid1`, `objectid2`, `logtext`, `details`)
 		                       VALUES ('user', 6, '&1', '&2', '&3', '&4', '&5')",
-		                       $login->userid, $this->nUserId, 0, 
+		                       $login->userid, $this->nUserId, 0,
 		                       'User ' . sql_escape($this->getUsername()) . ' disabled',
 		                       serialize($backup));
 
@@ -849,7 +849,7 @@ class user
 					return 'disable user failed';
 
 		// remember that data license was declined
-		sql("UPDATE user SET data_license='&2' WHERE user_id='&1'", 
+		sql("UPDATE user SET data_license='&2' WHERE user_id='&1'",
 		    $this->getUserId(),
 		    $old_disabled ? NEW_DATA_LICENSE_PASSIVELY_DECLINED : NEW_DATA_LICENSE_ACTIVELY_DECLINED);
 
@@ -857,7 +857,7 @@ class user
 		 * set all cache_desc and hint to '', save old texts
 		 */
 		// check if there are caches
-		$num_caches = sql_value("SELECT COUNT(*) FROM `caches` WHERE `user_id`='&1'", 
+		$num_caches = sql_value("SELECT COUNT(*) FROM `caches` WHERE `user_id`='&1'",
 														0, $this->getUserId());
 		if ($num_caches > 0) {
 			$cache_descs = array();
@@ -867,13 +867,13 @@ class user
 								"AND `caches`.`user_id`='&1'",
 								$this->getUserId()
 					);
-			while ($cache_desc = sql_fetch_array($rs,MYSQL_ASSOC)) 
+			while ($cache_desc = sql_fetch_array($rs,MYSQL_ASSOC))
 				$cache_descs[] = $cache_desc;
-			sql_free_result($rs);	
+			sql_free_result($rs);
 
 			// walk through cache_descs and set message for each language
 			foreach ($cache_descs as $desc)
-			{ 
+			{
 				// save text - added 2013/03/18 to be enable restoring data on reactivation
 				// of accounts that were disabled before license transition
 				if ($desc['desc'] != "")
@@ -896,7 +896,7 @@ class user
 				sql("UPDATE `cache_desc` " .
 						"SET `desc`='&1',`hint`='&2' " .
 						"WHERE `id`='&3'",
-						"<em>" . $descmsg . "</em>", 
+						"<em>" . $descmsg . "</em>",
 						'',
 						$desc['id']
 					 );
@@ -904,7 +904,7 @@ class user
 
 			// replace pictures
 			$errmesg = $this->replace_pictures(OBJECT_CACHE);
-			if ($errmesg !== true) 
+			if ($errmesg !== true)
 				return "removing cache pictures: $errmesg";
 		}
 
@@ -986,27 +986,27 @@ class user
 		require_once($opt['rootpath'] . 'lib2/imagebmp.inc.php');
 		
 		// paths cleared by trailing '/'
-		if (substr($opt['logic']['pictures']['dir'],-1) != '/') 
+		if (substr($opt['logic']['pictures']['dir'],-1) != '/')
 			$picpath = $opt['logic']['pictures']['dir'];
-		else 
+		else
 			$picpath = substr($opt['logic']['pictures']['dir'],0,-1);
 
 		$thumbpath = "$picpath/thumbs";
 
-		$pdummy = isset($opt['logic']['pictures']['dummy']);		
-		if ($pdummy && isset($opt['logic']['pictures']['dummy']['bgcolor']) && is_array($opt['logic']['pictures']['dummy']['bgcolor'])) 
+		$pdummy = isset($opt['logic']['pictures']['dummy']);
+		if ($pdummy && isset($opt['logic']['pictures']['dummy']['bgcolor']) && is_array($opt['logic']['pictures']['dummy']['bgcolor']))
 			$dummybg = $opt['logic']['pictures']['dummy']['bgcolor'];
-		else 
+		else
 			$dummybg = array(255,255,255);
 		
-		if ($pdummy && isset($opt['logic']['pictures']['dummy']['text'])) 
+		if ($pdummy && isset($opt['logic']['pictures']['dummy']['text']))
 			$dummytext = $opt['logic']['pictures']['dummy']['text'];
-		else 
+		else
 			$dummytext = '';
 		
-		if ($pdummy && isset($opt['logic']['pictures']['dummy']['textcolor']) && is_array($opt['logic']['pictures']['dummy']['textcolor'])) 
+		if ($pdummy && isset($opt['logic']['pictures']['dummy']['textcolor']) && is_array($opt['logic']['pictures']['dummy']['textcolor']))
 			$dummytextcolor = $opt['logic']['pictures']['dummy']['textcolor'];
-		else 
+		else
 			$dummytextcolor = array(0,0,0);
 		
 		$tmh = 0;
@@ -1015,7 +1015,7 @@ class user
 		/*
 		 * check log or cache
 		 */
-		if ($object_type == OBJECT_CACHE) 
+		if ($object_type == OBJECT_CACHE)
 			// get filenames of the pictures of $this' caches
 			$rs = sql("SELECT `pictures`.`url` " .
 								"FROM `pictures`,`caches` " .
@@ -1024,7 +1024,7 @@ class user
 								OBJECT_CACHE, $this->getUserId()
 							);
 			
-		elseif ($object_type == OBJECT_CACHELOG) 
+		elseif ($object_type == OBJECT_CACHELOG)
 			// get filenames of the pictures of $this' logs
 			$rs = sql("SELECT `pictures`.`url` " .
 								"FROM `pictures`,`cache_logs` " .
@@ -1038,7 +1038,7 @@ class user
 		$tmw = $opt['logic']['pictures']['thumb_max_width'];
 				
 		$filenames = array();
-		while ($url = sql_fetch_array($rs,MYSQL_NUM)) 
+		while ($url = sql_fetch_array($rs,MYSQL_NUM))
 			$filenames[] = substr($url['url'],-40);
 		
 		// free result
@@ -1076,8 +1076,8 @@ class user
 				imagefill($im,0,0,$col_bg);
 				
 				// check for replacement-image
-				if ($pdummy && isset($opt['logic']['pictures']['dummy']['replacepic']) 
-			              && $opt['logic']['pictures']['dummy']['replacepic'] != $opt['rootpath'] . 'images/' 
+				if ($pdummy && isset($opt['logic']['pictures']['dummy']['replacepic'])
+			              && $opt['logic']['pictures']['dummy']['replacepic'] != $opt['rootpath'] . 'images/'
 										&& file_exists($opt['logic']['pictures']['dummy']['replacepic'])) {
 					
 					// get dimensions of the replacement
@@ -1121,13 +1121,13 @@ class user
 					}
 					
 					// copy image
-					if (!is_null($rim)) 
+					if (!is_null($rim))
 						imagecopyresampled($im, $rim, $dx, $dy, 0, 0, $rsize, $rsize, $rw, $rh);
 					
 				} else {
 				
 					// set text
-					if ($dummytext != '') 
+					if ($dummytext != '')
 						imagestring($im,1,10,$h/2,$dummytext,$col_text);
 					else {
 						imageline($im,0,0,$w,$h,0xff0000);
@@ -1137,16 +1137,16 @@ class user
 				
 				// save dummy
 				if ($ext == 'jpg') {
-					if (!imagejpeg($im,"$picpath/$fn",75)) 
+					if (!imagejpeg($im,"$picpath/$fn",75))
 						return "save dummy failed [$ext]";
 				} elseif ($ext == 'png') {
-					if (!imagepng($im,"$picpath/$fn",4)) 
+					if (!imagepng($im,"$picpath/$fn",4))
 						return "save dummy failed [$ext]";
 				} elseif ($ext == 'gif') {
-					if (!imagegif($im,"$picpath/$fn")) 
+					if (!imagegif($im,"$picpath/$fn"))
 						return "save dummy failed [$ext]";
 				} elseif ($ext == 'bmp') {
-					if (!imagebmp($im,"$picpath/$fn")) 
+					if (!imagebmp($im,"$picpath/$fn"))
 						return "save dummy failed [$ext]";
 				} else {
 					return "save dummy failed [$ext], unknown extension";
@@ -1182,22 +1182,22 @@ class user
 						return 'mkdir in thumbpath failed';
 				}
 				if (!file_exists("$thumbpath/$thumb_dir1/$thumb_dir2")){
-					if (!mkdir("$thumbpath/$thumb_dir1/$thumb_dir2")) 
+					if (!mkdir("$thumbpath/$thumb_dir1/$thumb_dir2"))
 						return 'mkdir in thumbpath failed';
 				}
 				
 				// save thumb
 				if ($ext == 'jpg') {
-					if (!imagejpeg($tim,"$thumbpath/$thumb_dir1/$thumb_dir2/$fn",75)) 
+					if (!imagejpeg($tim,"$thumbpath/$thumb_dir1/$thumb_dir2/$fn",75))
 						return "save thumb failed [$ext]";
 				} elseif ($ext == 'png') {
-					if (!imagepng($tim,"$thumbpath/$thumb_dir1/$thumb_dir2/$fn",4)) 
+					if (!imagepng($tim,"$thumbpath/$thumb_dir1/$thumb_dir2/$fn",4))
 						return "save thumb failed [$ext]";
 				} elseif($ext == 'gif') {
-					if (!imagegif($tim,"$thumbpath/$thumb_dir1/$thumb_dir2/$fn")) 
+					if (!imagegif($tim,"$thumbpath/$thumb_dir1/$thumb_dir2/$fn"))
 						return "save thumb failed [$ext]";
 				} elseif($ext == 'bmp') {
-					if (!imagebmp($tim,"$thumbpath/$thumb_dir1/$thumb_dir2/$fn")) 
+					if (!imagebmp($tim,"$thumbpath/$thumb_dir1/$thumb_dir2/$fn"))
 						return "save thumb failed [$ext]";
 				} else {
 					return "save thumb failed [$ext], unknown extension";
@@ -1217,7 +1217,7 @@ class user
 		if ($login->userid != $this->nUserId && ($login->admin & ADMIN_USER) != ADMIN_USER)
 			return false;
 
-		return 
+		return
 			sql_value("SELECT COUNT(*) FROM `caches` WHERE `user_id`='&1'", 0, $this->nUserId)
 		  + sql_value("SELECT COUNT(*) FROM `cache_logs` WHERE `user_id`='&1'", 0, $this->nUserId)
 			+ sql_value("SELECT COUNT(*) FROM `cache_logs_archived` WHERE `user_id`='&1'", 0, $this->nUserId)
@@ -1241,7 +1241,7 @@ class user
 
 		sql("INSERT INTO `logentries` (`module`, `eventid`, `userid`, `objectid1`, `objectid2`, `logtext`, `details`)
 		                       VALUES ('user', 7, '&1', '&2', '&3', '&4', '&5')",
-		                       $login->userid, $this->nUserId, 0, 
+		                       $login->userid, $this->nUserId, 0,
 		                       'User ' . sql_escape($this->getUsername()) . ' deleted',
 		                       serialize($backup));
 
@@ -1389,4 +1389,3 @@ class user
 		return $language;
 	}
 }
-?>

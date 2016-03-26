@@ -15,4 +15,3 @@
 	define('HTTPS_ENFORCED', 2);
 
 	define('EMAIL_LINEWRAP', 72);
-?>

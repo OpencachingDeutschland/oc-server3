@@ -20,4 +20,3 @@ function smarty_function_array_search($params, &$smarty)
 	$smarty->assign($params['var'], $retval);
 	return '';
 }
-?>

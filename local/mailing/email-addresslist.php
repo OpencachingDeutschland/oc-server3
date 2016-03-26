@@ -14,5 +14,3 @@
     echo $r['email'] . "\n";
   }
   sql_free_result($rs);
-
-?>

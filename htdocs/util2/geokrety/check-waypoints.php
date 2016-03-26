@@ -59,5 +59,3 @@
 					echo "item ".$itemid.": ".$wp." is not the current wp in gk_move_waypoint\n";
 			else if (isset($flags['movewp']) && !isset($flags['itemwp']))
 				echo "item ".$itemid.": ".$wp." is missing in gk_item_waypoint\n";
-
-?>

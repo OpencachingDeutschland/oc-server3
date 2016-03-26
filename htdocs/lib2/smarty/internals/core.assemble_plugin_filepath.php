@@ -62,6 +62,4 @@ function smarty_core_assemble_plugin_filepath($params, &$smarty)
     return $_return;
 }
 
-/* vim: set expandtab: */
-
-?>
+/* vim: set expandtab: */;

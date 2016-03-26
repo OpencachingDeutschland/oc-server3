@@ -20,5 +20,3 @@
 	{
 		die("inconsistent HTTPS settings\n");
 	}
-
-?>

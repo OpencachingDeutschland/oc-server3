@@ -79,4 +79,3 @@ class xml2Array {
        $this->pop_pos();
    }
 }
-?>

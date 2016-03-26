@@ -65,10 +65,10 @@ while ($cache = sql_fetch_assoc($rs))
 {
   $lat = floor($cache["latitude"] / $grid);
   $long = floor($cache["longitude"] / $grid);
-  $liste[$lat][$long]["caches"]["all"]++;  
-  $liste[$lat][$long]["logs"]["all"] += $cache["logs"];  
+  $liste[$lat][$long]["caches"]["all"]++;
+  $liste[$lat][$long]["logs"]["all"] += $cache["logs"];
 }
-mysql_free_result($rs);										
+mysql_free_result($rs);
 
 ksort ($liste);
 $lats = array_keys($liste);
@@ -86,11 +86,11 @@ echo "\r\n";
 foreach ($liste as $lat => $liste2)
   foreach ($liste2 as $long => $cachecounts)
   {
-    echo ($lat*$grid + 0.5*$grid) . "," . ($long*$grid + 0.5*$grid) . "," . 
+    echo ($lat*$grid + 0.5*$grid) . "," . ($long*$grid + 0.5*$grid) . "," .
          $cachecounts["caches"]["all"] . "," .
          $cachecounts["logs"]["all"];
 		foreach ($years as $year => $dummy)
-		  echo "," . $cachecounts["caches"][$year] . "," . $cachecounts["logs"][$year]; 
+		  echo "," . $cachecounts["caches"][$year] . "," . $cachecounts["logs"][$year];
 		echo  "\r\n";
 	}
 

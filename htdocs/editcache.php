@@ -567,7 +567,7 @@ function getWaypoints($cacheid)
 								if ($cache_attribs[$i]+0 > 0)
 								{
 									sql("INSERT IGNORE INTO `caches_attributes` (`cache_id`, `attrib_id`) VALUES('&1', '&2')", $cache_id, $cache_attribs[$i]+0);
-									$attriblist .= "," . ($cache_attribs[$i]+0); 
+									$attriblist .= "," . ($cache_attribs[$i]+0);
 								}
 							}
 
@@ -979,5 +979,3 @@ function getWaypoints($cacheid)
 
 	//make the template and send it out
 	tpl_BuildTemplate();
-
-?>

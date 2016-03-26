@@ -163,5 +163,3 @@
 			return $allowed;
 		}
 	}
-
-?>

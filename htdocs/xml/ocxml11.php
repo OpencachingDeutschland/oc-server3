@@ -58,10 +58,10 @@
 	$bLicense = isset($_REQUEST['license']) ? $_REQUEST['license'] : '0';
 	$sLanguage = isset($_REQUEST['language']) ? strtoupper($_REQUEST['language']) : '';
 	
-	if ((($bOcXmlTag != '0') && ($bOcXmlTag != '1')) || 
-			(($bDocType != '0') && ($bDocType != '1')) || 
-			(($bXmlCData != '0') && ($bXmlCData != '1')) || 
-			(($bAttrlist != '0') && ($bAttrlist != '1')) || 
+	if ((($bOcXmlTag != '0') && ($bOcXmlTag != '1')) ||
+			(($bDocType != '0') && ($bDocType != '1')) ||
+			(($bXmlCData != '0') && ($bXmlCData != '1')) ||
+			(($bAttrlist != '0') && ($bAttrlist != '1')) ||
 			(($bXmlDecl != '0') && ($bXmlDecl != '1')) ||
 			(($bLicense != '0') && ($bLicense != '1')))
 	{
@@ -170,7 +170,7 @@
 			exit;
 		}
 		
-		if (($nYear < 1970) || ($nYear > 2100) 
+		if (($nYear < 1970) || ($nYear > 2100)
 				|| ($nMonth < 1) || ($nMonth > 12)
 				|| ($nDay < 1) || ($nDay > 31)
 				|| ($nHour < 0) || ($nHour > 23)
@@ -279,11 +279,11 @@
 			}
 			if ($bOcXmlTag == '1') $xmloutput .= '<ocxmlsession>' . "\n";
 			$xmloutput .= '  <sessionid>' . $sessionid . '</sessionid>' . "\n";
-			$xmloutput .= '  <records user="' . $recordcount['users'] . 
-										        '" cache="' . $recordcount['caches'] . 
-										    '" cachedesc="' . $recordcount['cachedescs'] . 
-										     '" cachelog="' . $recordcount['cachelogs'] . 
-										      '" picture="' . $recordcount['pictures'] . 
+			$xmloutput .= '  <records user="' . $recordcount['users'] .
+										        '" cache="' . $recordcount['caches'] .
+										    '" cachedesc="' . $recordcount['cachedescs'] .
+										     '" cachelog="' . $recordcount['cachelogs'] .
+										      '" picture="' . $recordcount['pictures'] .
 										 '" removeobject="' . $recordcount['removedobjects'] . '" />' . "\n";
 			if ($bOcXmlTag == '1') $xmloutput .= '</ocxmlsession>';
 
@@ -319,7 +319,7 @@ function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $z
 	global $opt, $bLicense, $sLanguage;
 	global $ocxmlversion;
 	// alle records aus tmpxml_* übertragen
-	
+
 	if (!mb_ereg_match('^[0-9]{1,11}', $sessionid))
 		die('sessionid invalid');
 
@@ -1035,7 +1035,7 @@ function outputXmlSessionFile($sessionid, $filenr, $bOcXmlTag, $bDocType, $bXmlD
 //		echo '<tr><td>' . $limits[$i]['start'] . '</td><td>' . $limits[$i]['count'] . '</td><td>' . ($recordnr[$i + 1] - $recordnr[$i]) . '</td><td>' . $recordnr[$i] . '</td><td>' . $recordnr[$i + 1] . '</td></tr>';
 	}
 //	echo '</table>';
-	
+
 //	echo '<a href="ocxml11.php?sessionid=' . $sessionid . '&file=' . ($filenr - 1) . '">Zurück</a><br>';
 //	echo '<a href="ocxml11.php?sessionid=' . $sessionid . '&file=' . ($filenr + 1) . '">Vor</a>';
 
@@ -1167,9 +1167,9 @@ function unlinkrecursiv($path)
 				}
 				else
 				{
-					if ((mb_substr($file, -4) == '.zip') || 
-					    (mb_substr($file, -3) == '.gz') || 
-					    (mb_substr($file, -4) == '.bz2') || 
+					if ((mb_substr($file, -4) == '.zip') ||
+					    (mb_substr($file, -3) == '.gz') ||
+					    (mb_substr($file, -4) == '.bz2') ||
 					    (mb_substr($file, -4) == '.xml'))
 						@unlink($path . $file);
 					else
@@ -1203,4 +1203,3 @@ function output_convert($str)
 	else if ($sCharset == 'utf-8')
 		return $str;
 }
-?>

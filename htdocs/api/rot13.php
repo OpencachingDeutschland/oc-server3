@@ -52,6 +52,3 @@ function hint_rot13($in)
 
 	return $out;
 }
-
-
-?>

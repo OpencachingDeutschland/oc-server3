@@ -114,6 +114,4 @@ function smarty_function_popup($params, &$smarty)
     return $retval;
 }
 
-/* vim: set expandtab: */
-
-?>
+/* vim: set expandtab: */;

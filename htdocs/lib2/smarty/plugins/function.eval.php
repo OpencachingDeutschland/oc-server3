@@ -44,6 +44,4 @@ function smarty_function_eval($params, &$smarty)
     }
 }
 
-/* vim: set expandtab: */
-
-?>
+/* vim: set expandtab: */;

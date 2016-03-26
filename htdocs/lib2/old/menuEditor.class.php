@@ -120,4 +120,3 @@ class MenuEditor extends Menu
 		sql_free_result($rs);
 	}
 }
-?>

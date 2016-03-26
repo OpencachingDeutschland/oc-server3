@@ -24,6 +24,4 @@ function smarty_modifier_count_paragraphs($string)
     return count(preg_split('/[\r\n]+/', $string));
 }
 
-/* vim: set expandtab: */
-
-?>
+/* vim: set expandtab: */;

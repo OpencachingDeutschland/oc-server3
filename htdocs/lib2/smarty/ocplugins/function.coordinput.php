@@ -70,5 +70,3 @@ function smarty_function_coordinput($params, &$smarty)
 
 	return $retval;
 }
-
-?>

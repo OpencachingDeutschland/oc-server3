@@ -320,4 +320,3 @@ class login
 		return $this->userid > 0;
 	}
 }
-?>

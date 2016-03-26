@@ -151,4 +151,3 @@ class mail extends Smarty
 		return $domain;
 	}
 }
-?>

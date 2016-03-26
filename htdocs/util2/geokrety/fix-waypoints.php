@@ -46,5 +46,3 @@
 				$lastmove);
 	}
 	sql_free_result($rsItems);
-
-?>

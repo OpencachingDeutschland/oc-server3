@@ -66,4 +66,3 @@
 		echo $resultId;
 
 	exit;
-?>

@@ -63,5 +63,3 @@
 	$tpl->assign('newlist_public', $newlist_public);
 	$tpl->assign('newlist_watch', $newlist_watch);
 	$tpl->display();
-
-?>

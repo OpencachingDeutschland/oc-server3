@@ -83,5 +83,3 @@ function smarty_block_t($params, $text, &$smarty, &$repeat)
 
 	return $text;
 }
-
-?>

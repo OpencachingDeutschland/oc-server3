@@ -503,5 +503,3 @@ class html2text
     }
 
 }
-
-?>

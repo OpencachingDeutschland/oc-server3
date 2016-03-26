@@ -78,7 +78,7 @@
 	//$opt['domain']['www.opencaching.pl']['keywords'] = 'geocaching, geocache, cache, poszukiwanie skarbów, GPS, wolne, GPX, koordynować, hobby, natura';  // 5-10 keywords are recommended
 	//$opt['domain']['www.opencaching.pl']['description'] = 'Opencaching.pl jest darmowy portal dla Geocaching, gry Treasure Hunt. Za pomocą współrzędnych GPS można znaleźć pojemniki lub obiektów.';
 	//$opt['domain']['www.opencaching.pl']['headoverlay'] = 'oc_head_alpha3_pl';
-	
+
 	// Supply the site's primary URL and the shortlink domain here.
 	// Can be overriden by domain settings.
 	// Set shortlink domain to false if not available.
@@ -195,5 +195,3 @@ function post_config()
 		'filename' => 'okapi'
 	);
 }
-
-?>

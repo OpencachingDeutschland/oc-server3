@@ -59,10 +59,10 @@ class gis
 						}
 					}
 				}
-			} 
+			}
 			$poly1 = $poly2;
 		} // end of While each polygon
-		
+
 		if ($counter % 2 == 0)
 		{
 			return(false); // outside
@@ -75,4 +75,3 @@ class gis
 		return true;
 	}
 }
-?>

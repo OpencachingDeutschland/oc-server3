@@ -37,4 +37,3 @@
 	$tpl->assign('thumbwidth', $opt['logic']['pictures']['thumb_max_width']);
 
 	$tpl->display();
-?>

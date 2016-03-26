@@ -588,4 +588,3 @@ class coordinate
 		return implode('.', $json['words']);
 	}
 }
-?>

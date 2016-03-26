@@ -22,12 +22,12 @@ class purge_logs
 		{
 			sql("DELETE FROM `email_user` WHERE date_created < NOW() - INTERVAL &1 DAY",
 					$opt['logic']['logs']['purge_email']);
-			sql("DELETE FROM `logentries` WHERE date_created < NOW() - INTERVAL &1 DAY AND eventid IN (1,2,3,8)", 
+			sql("DELETE FROM `logentries` WHERE date_created < NOW() - INTERVAL &1 DAY AND eventid IN (1,2,3,8)",
 					$opt['logic']['logs']['purge_email']);
 		}
 
 		if ($opt['logic']['logs']['purge_userdata'] > 0)
-			sql("DELETE FROM `logentries` WHERE date_created < NOW() - INTERVAL &1 DAY AND eventid IN (6,7)", 
+			sql("DELETE FROM `logentries` WHERE date_created < NOW() - INTERVAL &1 DAY AND eventid IN (6,7)",
 					$opt['logic']['logs']['purge_userdata']);
 
 		// Type 5 events = adoptions are still recorded here and preliminary archived,
@@ -35,5 +35,3 @@ class purge_logs
 		// Adoptions are now in cache_adoptions table.
 	}
 }
-
-?>

@@ -48,6 +48,3 @@ function testforbom($path)
 	if (ord($filestart) > 126)
 		printf("%02X-%02X found in %s\n", ord($filestart), ord(substr($filestart,1)), $path);
 }
-
-
-?>

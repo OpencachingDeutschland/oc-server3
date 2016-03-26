@@ -61,7 +61,7 @@
 	foreach ($feeds as $feed)
 	{
 		if ($isRedirect404)
-		{ 
+		{
 			if ($opt404[$feed]['show'])
 				$tpl->assign($feed, $getNew->feedForSmarty($feed,3,$opt404[$feed]['feedurl'],$opt404[$feed]['timeout']));
 		}
@@ -83,4 +83,3 @@
 	
 	// show page
 	$tpl->display();
-?>

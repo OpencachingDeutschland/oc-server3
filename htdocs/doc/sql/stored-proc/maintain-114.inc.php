@@ -15,5 +15,3 @@
 	sql("
 		CREATE FUNCTION `dbsvTriggerVersion` () RETURNS INT
 		RETURN 114");
-
-?>

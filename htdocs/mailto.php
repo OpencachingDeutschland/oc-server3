@@ -86,4 +86,3 @@
 	$tpl->assign('username', $user->getUsername());
 
 	$tpl->display();
-?>

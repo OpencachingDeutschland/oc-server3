@@ -57,11 +57,9 @@
 				// This is also called for $rLog['is_rating_log'] == false, so that
 				// even a rating record with inconsistent date gets deleted. 
 				sql("
-					DELETE FROM `cache_rating` WHERE `cache_id` = '&1' AND `user_id` = '&2'", 
+					DELETE FROM `cache_rating` WHERE `cache_id` = '&1' AND `user_id` = '&2'",
 					$rLog['cache_id'], $rLog['user_id']);
 			}
 		}
 		sql_free_result($rsLog);
 	}
-
-?>

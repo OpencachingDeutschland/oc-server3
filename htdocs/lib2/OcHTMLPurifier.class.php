@@ -120,6 +120,4 @@ class OcHTMLPurifier extends HTMLPurifier
     return $clean_html;
   }
 }
-*/
-
-?>
+*/;

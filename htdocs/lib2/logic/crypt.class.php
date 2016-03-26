@@ -31,4 +31,3 @@ class crypt
 		return $password;
 	}
 }
-?>

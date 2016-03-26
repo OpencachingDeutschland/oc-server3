@@ -246,5 +246,3 @@ function thumbpath($name, $object_type)
 		$thumbpath = $imgdir.'en/'.$filename;
 	return $thumbpath;
 }
-
-?>

@@ -39,5 +39,3 @@ class CacheNote_Handler
     
   }
 }
-
-?>

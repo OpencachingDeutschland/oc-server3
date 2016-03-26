@@ -57,4 +57,3 @@ class cache_npa_areas
 		sql_free_result($rsCache);
 	}
 }
-?>

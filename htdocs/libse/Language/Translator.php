@@ -47,5 +47,3 @@ class Language_Translator
     return $lang_string;
   }
 }
-
-?>

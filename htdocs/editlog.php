@@ -71,13 +71,13 @@
 														`caches`.`logpw` as `logpw`, 
 														`caches`.`status` as `status` 
 											FROM `cache_logs` 
-											INNER JOIN `caches` ON (`caches`.`cache_id`=`cache_logs`.`cache_id`) WHERE `id`='&1'", 
+											INNER JOIN `caches` ON (`caches`.`cache_id`=`cache_logs`.`cache_id`) WHERE `id`='&1'",
 											$log_id);
 			$log_record = sql_fetch_array($log_rs);
 			sql_free_result($log_rs);
 
-			if ($log_record !== false && 
-					(($log_record['status'] != 6 || ($log_record['cache_user_id'] == $login->userid && $log_record['user_id'] == $login->userid)) &&   
+			if ($log_record !== false &&
+					(($log_record['status'] != 6 || ($log_record['cache_user_id'] == $login->userid && $log_record['user_id'] == $login->userid)) &&
 					 $log_record['status'] != 7) || $useradmin)
 			{
 				require($stylepath . '/editlog.inc.php');
@@ -199,7 +199,7 @@
 							($log_time_minute=="" || is_numeric($log_time_minute)))
 					{
 						$date_ok = checkdate($log_date_month, $log_date_day, $log_date_year)
-												&& ($log_date_year >= 2000) 
+												&& ($log_date_year >= 2000)
 												&& ($log_time_hour>=0) && ($log_time_hour<=23)
 												&& ($log_time_minute>=0) && ($log_time_minute<=59);
 						if ($date_ok)
@@ -356,7 +356,7 @@
 						$headers .= '<script language="javascript" type="text/javascript" src="resource2/tinymce/config/log.js.php?logid=0&lang='.strtolower($locale).'"></script>' . "\n";
 						tpl_set_var('descMode', 3);
 					}
-					$headers .= '<script language="javascript" type="text/javascript" src="' . editorJsPath() . '"></script>' . "\n";	
+					$headers .= '<script language="javascript" type="text/javascript" src="' . editorJsPath() . '"></script>' . "\n";
 					tpl_set_var('htmlheaders', $headers);
 
 					if ($use_log_pw == true && $log_pw != '')
@@ -402,4 +402,3 @@
 
 	//make the template and send it out
 	tpl_BuildTemplate();
-?>

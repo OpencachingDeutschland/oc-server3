@@ -48,5 +48,3 @@
 		sql("CREATE TABLE _backup_gk_move_waypoint (SELECT * FROM gk_move_waypoint)");
 		sql("CREATE TABLE _backup_gk_user (SELECT * FROM gk_user)");
 	}
-
-?>

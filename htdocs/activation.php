@@ -60,4 +60,3 @@
 	$tpl->assign('code', $code);
 
 	$tpl->display();
-?>

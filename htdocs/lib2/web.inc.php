@@ -93,5 +93,3 @@ function helppagelink($ocpage, $title='Instructions')
 		return "<a class='nooutline' href='" . $helpurl . "' " . $imgtitle . " target='_blank'>";
 	}
 }
-
-?>

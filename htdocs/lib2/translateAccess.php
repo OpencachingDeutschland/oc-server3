@@ -10,44 +10,45 @@ require_once($opt['rootpath'] . 'lib2/logic/useroptions.class.php');
 
 class translateAccess
 {
-  private $languages = false;
+    private $languages = false;
 
-  public function hasAccess()
-  {
-    global $login;
+    public function hasAccess()
+    {
+        global $login;
 
-    if (isset($login))
-      return $login->hasAdminPriv(ADMIN_TRANSLATE);
-    else
-      return false;
-  }
+        if (isset($login)) {
+            return $login->hasAdminPriv(ADMIN_TRANSLATE);
+        } else {
+            return false;
+        }
+    }
 
-  public function mayTranslate($language)
-  {
-    global $login;
+    public function mayTranslate($language)
+    {
+        global $login;
 
-    if (isset($login))
-      return $login->hasAdminPriv(ADMIN_ROOT) || in_array($language, $this->getLanguages());
-    else
-      return false;
-  }
+        if (isset($login)) {
+            return $login->hasAdminPriv(ADMIN_ROOT) || in_array($language, $this->getLanguages());
+        } else {
+            return false;
+        }
+    }
 
-  private function getLanguages()
-  {
-    if ($this->languages === false)
-      $this->loadLanguages();
+    private function getLanguages()
+    {
+        if ($this->languages === false) {
+            $this->loadLanguages();
+        }
 
-    return $this->languages;
-  }
+        return $this->languages;
+    }
 
-  private function loadLanguages()
-  {
-    global $login;
+    private function loadLanguages()
+    {
+        global $login;
 
-    $options = new useroptions($login->userid);
+        $options = new useroptions($login->userid);
 
-    $this->languages = explode(',', $options->getOptValue(USR_OPT_TRANSLANG));
-  }
+        $this->languages = explode(',', $options->getOptValue(USR_OPT_TRANSLANG));
+    }
 }
-
-?>

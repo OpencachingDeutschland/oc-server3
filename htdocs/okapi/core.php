@@ -25,18 +25,19 @@ use okapi\cronjobs\CronJobController;
 function get_admin_emails()
 {
     $emails = array();
-    if (class_exists("okapi\\Settings"))
-    {
-        try
-        {
-            foreach (Settings::get('ADMINS') as $email)
-                if (!in_array($email, $emails))
+    if (class_exists("okapi\\Settings")) {
+        try {
+            foreach (Settings::get('ADMINS') as $email) {
+                if (!in_array($email, $emails)) {
                     $emails[] = $email;
+                }
+            }
+        } catch (Exception $e) { /* pass */
         }
-        catch (Exception $e) { /* pass */ }
     }
-    if (count($emails) == 0)
+    if (count($emails) == 0) {
         $emails[] = 'root@localhost';
+    }
     return $emails;
 }
 
@@ -45,12 +46,15 @@ function get_admin_emails()
 #
 
 /** A base class for all bad request exceptions. */
-class BadRequest extends Exception {
-    protected function provideExtras(&$extras) {
+class BadRequest extends Exception
+{
+    protected function provideExtras(&$extras)
+    {
         $extras['reason_stack'][] = 'bad_request';
         $extras['status'] = 400;
     }
-    public function getOkapiJSON() {
+    public function getOkapiJSON()
+    {
         $extras = array(
             'developer_message' => $this->getMessage(),
             'reason_stack' => array(),
@@ -62,7 +66,9 @@ class BadRequest extends Exception {
 }
 
 /** Thrown on PHP's FATAL errors (detected in a shutdown function). */
-class FatalError extends ErrorException {}
+class FatalError extends ErrorException
+{
+}
 
 #
 # We'll try to make PHP into something more decent. Exception and
@@ -75,45 +81,41 @@ class OkapiExceptionHandler
     /** Handle exception thrown while executing OKAPI request. */
     public static function handle($e)
     {
-        if ($e instanceof OAuthServerException)
-        {
+        if ($e instanceof OAuthServerException) {
             # This is thrown on invalid OAuth requests. There are many subclasses
             # of this exception. All of them result in HTTP 400 or HTTP 401 error
             # code. See also: http://oauth.net/core/1.0a/#http_codes
 
-            if ($e instanceof OAuthServer400Exception)
+            if ($e instanceof OAuthServer400Exception) {
                 header("HTTP/1.0 400 Bad Request");
-            else
+            } else {
                 header("HTTP/1.0 401 Unauthorized");
+            }
             header("Access-Control-Allow-Origin: *");
             header("Content-Type: application/json; charset=utf-8");
 
             print $e->getOkapiJSON();
-        }
-        elseif ($e instanceof BadRequest)
-        {
+        } elseif ($e instanceof BadRequest) {
             # Intentionally thrown from within the OKAPI method code.
             # Consumer (aka external developer) had something wrong with his
             # request and we want him to know that.
 
             # headers may have been sent e.g. by views/update
-            if (!headers_sent())
-            {
+            if (!headers_sent()) {
                 header("HTTP/1.0 400 Bad Request");
                 header("Access-Control-Allow-Origin: *");
                 header("Content-Type: application/json; charset=utf-8");
             }
 
             print $e->getOkapiJSON();
-        }
-        else # (ErrorException, MySQL exception etc.)
-        {
+        } else {
+            # (ErrorException, MySQL exception etc.)
+
             # This one is thrown on PHP notices and warnings - usually this
             # indicates an error in OKAPI method. If thrown, then something
             # must be fixed on OUR part.
 
-            if (!headers_sent())
-            {
+            if (!headers_sent()) {
                 header("HTTP/1.0 500 Internal Server Error");
                 header("Access-Control-Allow-Origin: *");
                 header("Content-Type: text/plain; charset=utf-8");
@@ -127,19 +129,15 @@ class OkapiExceptionHandler
 
             $exception_info = self::get_exception_info($e);
 
-            if (class_exists("okapi\\Settings") && (Settings::get('DEBUG')))
-            {
+            if (class_exists("okapi\\Settings") && (Settings::get('DEBUG'))) {
                 print "\n\nBUT! Since the DEBUG flag is on, then you probably ARE a developer yourself.\n";
                 print "Let's cut to the chase then:";
                 print "\n\n".$exception_info;
             }
-            if (class_exists("okapi\\Settings") && (Settings::get('DEBUG_PREVENT_EMAILS')))
-            {
+            if (class_exists("okapi\\Settings") && (Settings::get('DEBUG_PREVENT_EMAILS'))) {
                 # Sending emails was blocked on admin's demand.
                 # This is possible only on development environment.
-            }
-            else
-            {
+            } else {
                 $subject = "OKAPI Method Error - ".substr(
                     $_SERVER['REQUEST_URI'], 0, strpos(
                     $_SERVER['REQUEST_URI'].'?', '?'));
@@ -150,19 +148,17 @@ class OkapiExceptionHandler
                     "developer of the module that threw this error. Thanks!\n\n".
                     $exception_info
                 );
-                try
-                {
+                try {
                     Okapi::mail_admins($subject, $message);
-                }
-                catch (Exception $e)
-                {
+                } catch (Exception $e) {
                     # Unable to use full-featured mail_admins version. We'll use a backup.
                     # We need to make sure we're not spamming.
 
                     $lock_file = "/tmp/okapi-fatal-error-mode";
                     $last_email = false;
-                    if (file_exists($lock_file))
+                    if (file_exists($lock_file)) {
                         $last_email = filemtime($lock_file);
+                    }
                     if ($last_email === false) {
                         # Assume this is the first email.
                         $last_email = 0;
@@ -212,16 +208,13 @@ class OkapiExceptionHandler
         $exception_info = "===== ERROR MESSAGE =====\n"
             .trim(self::removeSensitiveData($e->getMessage()))
             ."\n=========================\n\n";
-        if ($e instanceof FatalError)
-        {
+        if ($e instanceof FatalError) {
             # This one doesn't have a stack trace. It is fed directly to OkapiExceptionHandler::handle
             # by OkapiErrorHandler::handle_shutdown. Instead of printing trace, we will just print
             # the file and line.
 
             $exception_info .= "File: ".$e->getFile()."\nLine: ".$e->getLine()."\n\n";
-        }
-        else
-        {
+        } else {
             $exception_info .= "--- Stack trace ---\n".
                 self::removeSensitiveData($e->getTraceAsString())."\n\n";
         }
@@ -234,10 +227,9 @@ class OkapiExceptionHandler
         # This if-condition will solve some (but not all) problems when trying to execute
         # OKAPI code from command line;
         # see https://github.com/opencaching/okapi/issues/243.
-        if (function_exists('getallheaders'))
-        {
+        if (function_exists('getallheaders')) {
             $exception_info .= "--- Request headers ---\n".implode("\n", array_map(
-                function($k, $v) { return "$k: $v"; },
+                function ($k, $v) { return "$k: $v"; },
                 array_keys(getallheaders()), array_values(getallheaders())
             ));
         }
@@ -254,7 +246,9 @@ class OkapiErrorHandler
     /** Handle error encountered while executing OKAPI request. */
     public static function handle($severity, $message, $filename, $lineno)
     {
-        if ($severity == E_STRICT || $severity == E_DEPRECATED) return false;
+        if ($severity == E_STRICT || $severity == E_DEPRECATED) {
+            return false;
+        }
         if (($severity == E_NOTICE) && !self::$treat_notices_as_errors) {
             return false;
         }
@@ -283,8 +277,7 @@ class OkapiErrorHandler
         # correctly. The only error which cannot be recovered from is E_ERROR, we have
         # to check the type then.
 
-        if (($error !== null) && ($error['type'] == E_ERROR))
-        {
+        if (($error !== null) && ($error['type'] == E_ERROR)) {
             $e = new FatalError($error['message'], 0, $error['type'], $error['file'], $error['line']);
             OkapiExceptionHandler::handle($e);
         }
@@ -304,13 +297,16 @@ register_shutdown_function(array('\okapi\OkapiErrorHandler', 'handle_shutdown'))
 # the developer).
 #
 
-class Http404 extends BadRequest {}
+class Http404 extends BadRequest
+{
+}
 
 /** Common type of BadRequest: Required parameter is missing. */
 class ParamMissing extends BadRequest
 {
     private $paramName;
-    protected function provideExtras(&$extras) {
+    protected function provideExtras(&$extras)
+    {
         parent::provideExtras($extras);
         $extras['reason_stack'][] = 'missing_parameter';
         $extras['parameter'] = $this->paramName;
@@ -330,7 +326,8 @@ class InvalidParam extends BadRequest
     /** What was wrong about the param? */
     public $whats_wrong_about_it;
 
-    protected function provideExtras(&$extras) {
+    protected function provideExtras(&$extras)
+    {
         parent::provideExtras($extras);
         $extras['reason_stack'][] = 'invalid_parameter';
         $extras['parameter'] = $this->paramName;
@@ -340,15 +337,18 @@ class InvalidParam extends BadRequest
     {
         $this->paramName = $paramName;
         $this->whats_wrong_about_it = $whats_wrong_about_it;
-        if ($whats_wrong_about_it)
+        if ($whats_wrong_about_it) {
             parent::__construct("Parameter '$paramName' has invalid value: ".$whats_wrong_about_it, $code);
-        else
+        } else {
             parent::__construct("Parameter '$paramName' has invalid value.", $code);
+        }
     }
 }
 
 /** Thrown on invalid SQL queries. */
-class DbException extends Exception {}
+class DbException extends Exception
+{
+}
 
 #
 # Database access abstraction layer.
@@ -364,22 +364,20 @@ class Db
 
     public static function connect()
     {
-        if (mysql_connect(Settings::get('DB_SERVER'), Settings::get('DB_USERNAME'), Settings::get('DB_PASSWORD')))
-        {
+        if (mysql_connect(Settings::get('DB_SERVER'), Settings::get('DB_USERNAME'), Settings::get('DB_PASSWORD'))) {
             mysql_select_db(Settings::get('DB_NAME'));
             mysql_query("set names '" . Settings::get('DB_CHARSET') . "'");
             self::$connected = true;
-        }
-        else
+        } else {
             throw new Exception("Could not connect to MySQL: ".mysql_error());
+        }
     }
 
     /** Fetch [{row}], return {row}. */
     public static function select_row($query)
     {
         $rows = self::select_all($query);
-        switch (count($rows))
-        {
+        switch (count($rows)) {
             case 0: return null;
             case 1: return $rows[0];
             default:
@@ -399,15 +397,16 @@ class Db
     private static function select_and_push($query, & $arr, $keyField = null)
     {
         $rs = self::query($query);
-        while (true)
-        {
+        while (true) {
             $row = Db::fetch_assoc($rs);
-            if ($row === false)
+            if ($row === false) {
                 break;
-            if ($keyField == null)
+            }
+            if ($keyField == null) {
                 $arr[] = $row;
-            else
+            } else {
                 $arr[$row[$keyField]] = $row;
+            }
         }
         Db::free_result($rs);
     }
@@ -417,11 +416,11 @@ class Db
     {
         $groups = array();
         $rs = self::query($query);
-        while (true)
-        {
+        while (true) {
             $row = Db::fetch_assoc($rs);
-            if ($row === false)
+            if ($row === false) {
                 break;
+            }
             $groups[$row[$keyField]][] = $row;
         }
         Db::free_result($rs);
@@ -432,10 +431,12 @@ class Db
     public static function select_value($query)
     {
         $column = self::select_column($query);
-        if ($column == null)
+        if ($column == null) {
             return null;
-        if (count($column) == 1)
+        }
+        if (count($column) == 1) {
             return $column[0];
+        }
         throw new DbException("Invalid query. Db::select_value returned more than one row for:\n\n".$query."\n");
     }
 
@@ -444,11 +445,11 @@ class Db
     {
         $column = array();
         $rs = self::query($query);
-        while (true)
-        {
+        while (true) {
             $values = Db::fetch_row($rs);
-            if ($values === false)
+            if ($values === false) {
                 break;
+            }
             array_push($column, $values[0]);
         }
         Db::free_result($rs);
@@ -488,18 +489,19 @@ class Db
     public static function execute($query)
     {
         $rs = self::query($query);
-        if ($rs !== true)
+        if ($rs !== true) {
             throw new DbException("Db::execute returned a result set for your query. ".
                 "You should use Db::select_* or Db::query for SELECT queries!");
+        }
     }
 
     public static function query($query)
     {
-        if (!self::$connected)
+        if (!self::$connected) {
             self::connect();
+        }
         $rs = mysql_query($query);
-        if (!$rs)
-        {
+        if (!$rs) {
             $errno = mysql_errno();
             $msg = mysql_error();
 
@@ -555,8 +557,9 @@ class Db
 
     public static function field_exists($table, $field)
     {
-        if (!preg_match("/[a-z0-9_]+/", $table.$field))
+        if (!preg_match("/[a-z0-9_]+/", $table.$field)) {
             return false;
+        }
         try {
             $spec = self::select_all("desc ".$table.";");
         } catch (Exception $e) {
@@ -564,8 +567,9 @@ class Db
             return false;
         }
         foreach ($spec as &$row_ref) {
-            if (strtoupper($row_ref['Field']) == strtoupper($field))
+            if (strtoupper($row_ref['Field']) == strtoupper($field)) {
                 return true;
+            }
         }
         return false;
     }
@@ -765,10 +769,11 @@ class OkapiOAuthServer extends OAuthServer
         } catch (OAuthMissingParameterException $e) {
             # Note, that exception will be different if token is supplied
             # and is invalid. We catch only a completely MISSING token parameter.
-            if (($e->getParamName() == 'oauth_token') && (!$token_required))
+            if (($e->getParamName() == 'oauth_token') && (!$token_required)) {
                 $token = null;
-            else
+            } else {
                 throw $e;
+            }
         }
         $this->check_signature($request, $consumer, $token);
         return array($consumer, $token);
@@ -798,21 +803,22 @@ class OkapiHttpResponse
 
     public function get_length()
     {
-        if (is_resource($this->body))
+        if (is_resource($this->body)) {
             return $this->stream_length;
+        }
         return strlen($this->body);
     }
 
     /** Note: You can call this only once! */
     public function print_body()
     {
-        if (is_resource($this->body))
-        {
-            while (!feof($this->body))
+        if (is_resource($this->body)) {
+            while (!feof($this->body)) {
                 print fread($this->body, 1024*1024);
-        }
-        else
+            }
+        } else {
             print $this->body;
+        }
     }
 
     /**
@@ -821,14 +827,13 @@ class OkapiHttpResponse
      */
     public function get_body()
     {
-        if (is_resource($this->body))
-        {
+        if (is_resource($this->body)) {
             ob_start();
             fpassthru($this->body);
             return ob_get_clean();
-        }
-        else
+        } else {
             return $this->body;
+        }
     }
 
     /**
@@ -840,32 +845,33 @@ class OkapiHttpResponse
         header("Access-Control-Allow-Origin: *");
         header("Content-Type: ".$this->content_type);
         header("Cache-Control: ".$this->cache_control);
-        if ($this->connection_close)
+        if ($this->connection_close) {
             header("Connection: close");
-        if ($this->content_disposition)
+        }
+        if ($this->content_disposition) {
             header("Content-Disposition: ".$this->content_disposition);
-        if ($this->etag)
+        }
+        if ($this->etag) {
             header("ETag: $this->etag");
+        }
 
         # Make sure that gzip is supported by the client.
         $use_gzip = $this->allow_gzip;
-        if (empty($_SERVER["HTTP_ACCEPT_ENCODING"]) || (strpos($_SERVER["HTTP_ACCEPT_ENCODING"], "gzip") === false))
+        if (empty($_SERVER["HTTP_ACCEPT_ENCODING"]) || (strpos($_SERVER["HTTP_ACCEPT_ENCODING"], "gzip") === false)) {
             $use_gzip = false;
+        }
 
         # We will gzip the data ourselves, while disabling gziping by Apache. This way, we can
         # set the Content-Length correctly which is handy in some scenarios.
 
-        if ($use_gzip && is_string($this->body))
-        {
+        if ($use_gzip && is_string($this->body)) {
             # Apache won't gzip a response which is already gzipped.
 
             header("Content-Encoding: gzip");
             $gzipped = gzencode($this->body, 5);
             header("Content-Length: ".strlen($gzipped));
             print $gzipped;
-        }
-        else
-        {
+        } else {
             # We don't want Apache to gzip this response. Tell it so.
 
             if (function_exists('apache_setenv')) {
@@ -873,8 +879,9 @@ class OkapiHttpResponse
             }
 
             $length = $this->get_length();
-            if ($length)
+            if ($length) {
                 header("Content-Length: ".$length);
+            }
             $this->print_body();
         }
     }
@@ -883,7 +890,10 @@ class OkapiHttpResponse
 class OkapiRedirectResponse extends OkapiHttpResponse
 {
     public $url;
-    public function __construct($url) { $this->url = $url; }
+    public function __construct($url)
+    {
+        $this->url = $url;
+    }
     public function display()
     {
         header("HTTP/1.1 303 See Other");
@@ -891,7 +901,7 @@ class OkapiRedirectResponse extends OkapiHttpResponse
     }
 }
 
-require_once ($GLOBALS['rootpath'].'okapi/lib/tbszip.php');
+require_once($GLOBALS['rootpath'].'okapi/lib/tbszip.php');
 use \clsTbsZip;
 
 class OkapiZIPHttpResponse extends OkapiHttpResponse
@@ -949,14 +959,11 @@ class OkapiLock
 
     private function __construct($name)
     {
-        if (Settings::get('DEBUG_PREVENT_SEMAPHORES'))
-        {
+        if (Settings::get('DEBUG_PREVENT_SEMAPHORES')) {
             # Using semaphores is forbidden on this server by its admin.
             # This is possible only on development environment.
             $this->lock = null;
-        }
-        else
-        {
+        } else {
             $this->lockfile = Okapi::get_var_dir()."/okapi-lock-".$name;
             $this->lock = fopen($this->lockfile, "wb");
         }
@@ -964,22 +971,25 @@ class OkapiLock
 
     public function acquire()
     {
-        if ($this->lock !== null)
+        if ($this->lock !== null) {
             flock($this->lock, LOCK_EX);
+        }
     }
 
     public function try_acquire()
     {
-        if ($this->lock !== null)
+        if ($this->lock !== null) {
             return flock($this->lock, LOCK_EX | LOCK_NB);
-        else
-            return true;  # $lock can be null only when debugging
+        } else {
+            return true;
+        }  # $lock can be null only when debugging
     }
 
     public function release()
     {
-        if ($this->lock !== null)
+        if ($this->lock !== null) {
             flock($this->lock, LOCK_UN);
+        }
     }
 
     /**
@@ -988,8 +998,7 @@ class OkapiLock
      */
     public function remove()
     {
-        if ($this->lock !== null)
-        {
+        if ($this->lock !== null) {
             fclose($this->lock);
             unlink($this->lockfile);
         }
@@ -1033,18 +1042,19 @@ class Okapi
     /** Get a variable stored in okapi_vars. If variable not found, return $default. */
     public static function get_var($varname, $default = null)
     {
-        if (self::$okapi_vars === null)
-        {
+        if (self::$okapi_vars === null) {
             $rs = Db::query("
                 select var, value
                 from okapi_vars
             ");
             self::$okapi_vars = array();
-            while ($row = Db::fetch_assoc($rs))
+            while ($row = Db::fetch_assoc($rs)) {
                 self::$okapi_vars[$row['var']] = $row['value'];
+            }
         }
-        if (isset(self::$okapi_vars[$varname]))
+        if (isset(self::$okapi_vars[$varname])) {
             return self::$okapi_vars[$varname];
+        }
         return $default;
     }
 
@@ -1100,8 +1110,9 @@ class Okapi
 
             return;
         }
-        if ($counter === null)
+        if ($counter === null) {
             $counter = 0;
+        }
         $counter++;
         try {
             Cache::set($cache_key, $counter, 3600);
@@ -1109,20 +1120,16 @@ class Okapi
             # If `get` suceeded and `set` did not, then probably we're having
             # issue #156 scenario. We can ignore it here.
         }
-        if ($counter <= 5)
-        {
+        if ($counter <= 5) {
             # We're not spamming yet.
 
             self::mail_from_okapi(get_admin_emails(), $subject, $message);
-        }
-        else
-        {
+        } else {
             # We are spamming. Prevent sending more emails.
 
             $content_cache_key_prefix = 'mail_admins_spam/'.(floor(time() / 3600) * 3600).'/';
             $timeout = 86400;
-            if ($counter == 6)
-            {
+            if ($counter == 6) {
                 self::mail_from_okapi(get_admin_emails(), "Anti-spam mode activated for '$subject'",
                     "OKAPI has activated an \"anti-spam\" mode for the following subject:\n\n".
                     "\"$subject\"\n\n".
@@ -1142,14 +1149,14 @@ class Okapi
     /** Send an email message from OKAPI to the given recipients. */
     public static function mail_from_okapi($email_addresses, $subject, $message)
     {
-        if (class_exists("okapi\\Settings") && (Settings::get('DEBUG_PREVENT_EMAILS')))
-        {
+        if (class_exists("okapi\\Settings") && (Settings::get('DEBUG_PREVENT_EMAILS'))) {
             # Sending emails was blocked on admin's demand.
             # This is possible only on development environment.
             return;
         }
-        if (!is_array($email_addresses))
+        if (!is_array($email_addresses)) {
             $email_addresses = array($email_addresses);
+        }
         $sender_email = class_exists("okapi\\Settings") ? Settings::get('FROM_FIELD') : 'root@localhost';
         mail(implode(", ", $email_addresses), $subject, $message,
             "Content-Type: text/plain; charset=utf-8\n".
@@ -1162,16 +1169,18 @@ class Okapi
     public static function get_var_dir()
     {
         $dir = Settings::get('VAR_DIR');
-        if ($dir != null)
+        if ($dir != null) {
             return rtrim($dir, "/");
+        }
         throw new Exception("You need to set a valid VAR_DIR.");
     }
 
     /** Returns something like "Opencaching.PL" or "Opencaching.DE". */
     public static function get_normalized_site_name($site_url = null)
     {
-        if ($site_url == null)
+        if ($site_url == null) {
             $site_url = Settings::get('SITE_URL');
+        }
         $matches = null;
         if (preg_match("#^https?://(www.)?opencaching.([a-z.]+)/$#", $site_url, $matches)) {
             return "Opencaching.".strtoupper($matches[2]);
@@ -1194,11 +1203,14 @@ class Okapi
      */
     public static function pick_best_language($langdict, $langprefs)
     {
-        foreach ($langprefs as $pref)
-            if (isset($langdict[$pref]))
+        foreach ($langprefs as $pref) {
+            if (isset($langdict[$pref])) {
                 return $langdict[$pref];
-        foreach ($langdict as &$text_ref)
+            }
+        }
+        foreach ($langdict as &$text_ref) {
             return $text_ref;
+        }
         return "";
     }
 
@@ -1209,8 +1221,7 @@ class Okapi
     {
         $i = 0;
         $groups = array();
-        while ($i < count($array))
-        {
+        while ($i < count($array)) {
             $groups[] = array_slice($array, $i, $size);
             $i += $size;
         }
@@ -1224,8 +1235,7 @@ class Okapi
     public static function execute_prerequest_cronjobs()
     {
         $nearest_event = Okapi::get_var("cron_nearest_event");
-        if ($nearest_event + 0 <= time())
-        {
+        if ($nearest_event + 0 <= time()) {
             require_once($GLOBALS['rootpath']."okapi/cronjobs.php");
             $nearest_event = CronJobController::run_jobs('pre-request');
             Okapi::set_var("cron_nearest_event", $nearest_event);
@@ -1239,8 +1249,7 @@ class Okapi
     public static function execute_cron5_cronjobs()
     {
         $nearest_event = Okapi::get_var("cron_nearest_event");
-        if ($nearest_event + 0 <= time())
-        {
+        if ($nearest_event + 0 <= time()) {
             set_time_limit(0);
             ignore_user_abort(true);
             require_once($GLOBALS['rootpath']."okapi/cronjobs.php");
@@ -1258,8 +1267,7 @@ class Okapi
         # This way, we don't need to call the actual locale-switching code most
         # of the times.
 
-        if ($gettext_last_used_langprefs != $langprefs)
-        {
+        if ($gettext_last_used_langprefs != $langprefs) {
             $gettext_last_set_locale = call_user_func(Settings::get("GETTEXT_INIT"), $langprefs);
             $gettext_last_used_langprefs = $langprefs;
             textdomain(Settings::get("GETTEXT_DOMAIN"));
@@ -1279,12 +1287,12 @@ class Okapi
     {
         # Put the langprefs on the stack.
 
-        if ($langprefs == null)
+        if ($langprefs == null) {
             $langprefs = array(Settings::get('SITELANG'));
+        }
         self::$gettext_langprefs_stack[] = $langprefs;
 
-        if (count(self::$gettext_langprefs_stack) == 1)
-        {
+        if (count(self::$gettext_langprefs_stack) == 1) {
             # This is the first time gettext_domain_init is called. In order to
             # properly reinitialize the original settings after gettext_domain_restore
             # is called for the last time, we need to save current textdomain (which
@@ -1308,13 +1316,10 @@ class Okapi
         array_pop(self::$gettext_langprefs_stack);
 
         $size = count(self::$gettext_langprefs_stack);
-        if ($size > 0)
-        {
+        if ($size > 0) {
             $langprefs = self::$gettext_langprefs_stack[$size - 1];
             self::gettext_set_lang($langprefs);
-        }
-        else
-        {
+        } else {
             # The stack is empty. This means we're going out of OKAPI code and
             # we want the original textdomain reestablished.
 
@@ -1329,18 +1334,23 @@ class Okapi
     public static function init_internals($allow_cronjobs = true)
     {
         static $init_made = false;
-        if ($init_made)
+        if ($init_made) {
             return;
+        }
         ini_set('memory_limit', '256M');
         Db::connect();
-        if (Settings::get('TIMEZONE') !== null)
+        if (Settings::get('TIMEZONE') !== null) {
             date_default_timezone_set(Settings::get('TIMEZONE'));
-        if (!self::$data_store)
+        }
+        if (!self::$data_store) {
             self::$data_store = new OkapiDataStore();
-        if (!self::$server)
+        }
+        if (!self::$server) {
             self::$server = new OkapiOAuthServer(self::$data_store);
-        if ($allow_cronjobs)
+        }
+        if ($allow_cronjobs) {
             self::execute_prerequest_cronjobs();
+        }
         $init_made = true;
     }
 
@@ -1351,14 +1361,14 @@ class Okapi
      */
     public static function generate_key($length, $user_friendly = false)
     {
-        if ($user_friendly)
+        if ($user_friendly) {
             $chars = "0123456789";
-        else
+        } else {
             $chars = "abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+        }
         $max = strlen($chars);
         $key = "";
-        for ($i=0; $i<$length; $i++)
-        {
+        for ($i=0; $i<$length; $i++) {
             $key .= $chars[rand(0, $max-1)];
         }
         return $key;
@@ -1376,10 +1386,11 @@ class Okapi
             $appname, $appurl, $email);
         $sample_cache = OkapiServiceRunner::call("services/caches/search/all",
             new OkapiInternalRequest($consumer, null, array('limit', 1)));
-        if (count($sample_cache['results']) > 0)
+        if (count($sample_cache['results']) > 0) {
             $sample_cache_code = $sample_cache['results'][0];
-        else
+        } else {
             $sample_cache_code = "CACHECODE";
+        }
 
         # Message for the Consumer.
         ob_start();
@@ -1403,7 +1414,7 @@ class Okapi
         ob_start();
         print "Name: $consumer->name\n";
         print "Developer: $consumer->email\n";
-        print ($consumer->url ? "URL: $consumer->url\n" : "");
+        print($consumer->url ? "URL: $consumer->url\n" : "");
         print "Consumer Key: $consumer->key\n";
         Okapi::mail_admins("New OKAPI app registered!", ob_get_clean());
 
@@ -1430,7 +1441,9 @@ class Okapi
         # to floating point precision limits. See issue #351 for details.
         #
         $d = acos(min(1, cos($x1) * cos($x2) + sin($x1) * sin($x2) * cos(($lon1-$lon2) * 3.14159 / 180))) * 6371000;
-        if ($d < 0) $d = 0;
+        if ($d < 0) {
+            $d = 0;
+        }
         return $d;
     }
 
@@ -1453,10 +1466,15 @@ class Okapi
     /** Return bearing (float 0..360) from geopoint 1 to 2. */
     public static function get_bearing($lat1, $lon1, $lat2, $lon2)
     {
-        if ($lat1 == $lat2 && $lon1 == $lon2)
+        if ($lat1 == $lat2 && $lon1 == $lon2) {
             return null;
-        if ($lat1 == $lat2) $lat1 += 0.0000166;
-        if ($lon1 == $lon2) $lon1 += 0.0000166;
+        }
+        if ($lat1 == $lat2) {
+            $lat1 += 0.0000166;
+        }
+        if ($lon1 == $lon2) {
+            $lon1 += 0.0000166;
+        }
 
         $rad_lat1 = $lat1 / 180.0 * 3.14159;
         $rad_lon1 = $lon1 / 180.0 * 3.14159;
@@ -1467,7 +1485,9 @@ class Okapi
         $bearing = atan2(sin($delta_lon) * cos($rad_lat2),
             cos($rad_lat1) * sin($rad_lat2) - sin($rad_lat1) * cos($rad_lat2) * cos($delta_lon));
         $bearing = 180.0 * $bearing / 3.14159;
-        if ( $bearing < 0.0 ) $bearing = $bearing + 360.0;
+        if ($bearing < 0.0) {
+            $bearing = $bearing + 360.0;
+        }
 
         return $bearing;
     }
@@ -1476,7 +1496,9 @@ class Okapi
     public static function bearing_as_two_letters($b)
     {
         static $names = array('N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW');
-        if ($b === null) return 'n/a';
+        if ($b === null) {
+            return 'n/a';
+        }
         return $names[round(($b / 360.0) * 8.0) % 8];
     }
 
@@ -1485,7 +1507,9 @@ class Okapi
     {
         static $names = array('N', 'NNE', 'NE', 'ENE', 'E', 'ESE', 'SE', 'SSE',
             'S', 'SSW', 'SW', 'WSW', 'W', 'WNW', 'NW', 'NNW');
-        if ($b === null) return 'n/a';
+        if ($b === null) {
+            return 'n/a';
+        }
         return $names[round(($b / 360.0) * 16.0) % 16];
     }
 
@@ -1506,54 +1530,50 @@ class Okapi
      */
     public static function formatted_response(OkapiRequest $request, &$object)
     {
-        if ($request instanceof OkapiInternalRequest && (!$request->i_want_OkapiResponse))
-        {
+        if ($request instanceof OkapiInternalRequest && (!$request->i_want_OkapiResponse)) {
             # If you call a method internally, then you probably expect to get
             # the actual object instead of it's formatted representation.
             return $object;
         }
         $format = $request->get_parameter('format');
-        if ($format == null) $format = 'json';
-        if (!in_array($format, array('json', 'jsonp', 'xmlmap', 'xmlmap2')))
+        if ($format == null) {
+            $format = 'json';
+        }
+        if (!in_array($format, array('json', 'jsonp', 'xmlmap', 'xmlmap2'))) {
             throw new InvalidParam('format', "'$format'");
+        }
         $callback = $request->get_parameter('callback');
-        if ($callback && $format != 'jsonp')
+        if ($callback && $format != 'jsonp') {
             throw new BadRequest("The 'callback' parameter is reserved to be used with the JSONP output format.");
-        if ($format == 'json')
-        {
+        }
+        if ($format == 'json') {
             $response = new OkapiHttpResponse();
             $response->content_type = "application/json; charset=utf-8";
             $response->body = json_encode($object);
             return $response;
-        }
-        elseif ($format == 'jsonp')
-        {
-            if (!$callback)
+        } elseif ($format == 'jsonp') {
+            if (!$callback) {
                 throw new BadRequest("'callback' parameter is required for JSONP calls");
-            if (!preg_match("/^[a-zA-Z_][a-zA-Z0-9_]*$/", $callback))
+            }
+            if (!preg_match("/^[a-zA-Z_][a-zA-Z0-9_]*$/", $callback)) {
                 throw new InvalidParam('callback', "'$callback' doesn't seem to be a valid JavaScript function name (should match /^[a-zA-Z_][a-zA-Z0-9_]*\$/).");
+            }
             $response = new OkapiHttpResponse();
             $response->content_type = "application/javascript; charset=utf-8";
             $response->body = $callback."(".json_encode($object).");";
             return $response;
-        }
-        elseif ($format == 'xmlmap')
-        {
+        } elseif ($format == 'xmlmap') {
             # Deprecated (see issue 128). Keeping this for backward-compatibility.
             $response = new OkapiHttpResponse();
             $response->content_type = "text/xml; charset=utf-8";
             $response->body = self::xmlmap_dumps($object);
             return $response;
-        }
-        elseif ($format == 'xmlmap2')
-        {
+        } elseif ($format == 'xmlmap2') {
             $response = new OkapiHttpResponse();
             $response->content_type = "text/xml; charset=utf-8";
             $response->body = self::xmlmap2_dumps($object);
             return $response;
-        }
-        else
-        {
+        } else {
             # Should not happen (as we do a proper check above).
             throw new Exception();
         }
@@ -1561,58 +1581,40 @@ class Okapi
 
     private static function _xmlmap_add(&$chunks, &$obj)
     {
-        if (is_string($obj))
-        {
+        if (is_string($obj)) {
             $chunks[] = "<string>";
             $chunks[] = self::xmlescape($obj);
             $chunks[] = "</string>";
-        }
-        elseif (is_int($obj))
-        {
+        } elseif (is_int($obj)) {
             $chunks[] = "<int>$obj</int>";
-        }
-        elseif (is_float($obj))
-        {
+        } elseif (is_float($obj)) {
             $chunks[] = "<float>$obj</float>";
-        }
-        elseif (is_bool($obj))
-        {
+        } elseif (is_bool($obj)) {
             $chunks[] = $obj ? "<bool>true</bool>" : "<bool>false</bool>";
-        }
-        elseif (is_null($obj))
-        {
+        } elseif (is_null($obj)) {
             $chunks[] = "<null/>";
-        }
-        elseif (is_array($obj))
-        {
+        } elseif (is_array($obj)) {
             # Have to check if this is associative or not! Shit. I hate PHP.
-            if (array_keys($obj) === range(0, count($obj) - 1))
-            {
+            if (array_keys($obj) === range(0, count($obj) - 1)) {
                 # Not assoc.
                 $chunks[] = "<list>";
-                foreach ($obj as &$item_ref)
-                {
+                foreach ($obj as &$item_ref) {
                     $chunks[] = "<item>";
                     self::_xmlmap_add($chunks, $item_ref);
                     $chunks[] = "</item>";
                 }
                 $chunks[] = "</list>";
-            }
-            else
-            {
+            } else {
                 # Assoc.
                 $chunks[] = "<dict>";
-                foreach ($obj as $key => &$item_ref)
-                {
+                foreach ($obj as $key => &$item_ref) {
                     $chunks[] = "<item key=\"".self::xmlescape($key)."\">";
                     self::_xmlmap_add($chunks, $item_ref);
                     $chunks[] = "</item>";
                 }
                 $chunks[] = "</dict>";
             }
-        }
-        else
-        {
+        } else {
             # That's a bug.
             throw new Exception("Cannot encode as xmlmap: " + print_r($obj, true));
         }
@@ -1621,54 +1623,36 @@ class Okapi
     private static function _xmlmap2_add(&$chunks, &$obj, $key)
     {
         $attrs = ($key !== null) ? " key=\"".self::xmlescape($key)."\"" : "";
-        if (is_string($obj))
-        {
+        if (is_string($obj)) {
             $chunks[] = "<string$attrs>";
             $chunks[] = self::xmlescape($obj);
             $chunks[] = "</string>";
-        }
-        elseif (is_int($obj))
-        {
+        } elseif (is_int($obj)) {
             $chunks[] = "<number$attrs>$obj</number>";
-        }
-        elseif (is_float($obj))
-        {
+        } elseif (is_float($obj)) {
             $chunks[] = "<number$attrs>$obj</number>";
-        }
-        elseif (is_bool($obj))
-        {
+        } elseif (is_bool($obj)) {
             $chunks[] = $obj ? "<boolean$attrs>true</boolean>" : "<boolean$attrs>false</boolean>";
-        }
-        elseif (is_null($obj))
-        {
+        } elseif (is_null($obj)) {
             $chunks[] = "<null$attrs/>";
-        }
-        elseif (is_array($obj) || ($obj instanceof ArrayObject))
-        {
+        } elseif (is_array($obj) || ($obj instanceof ArrayObject)) {
             # Have to check if this is associative or not! Shit. I hate PHP.
-            if (is_array($obj) && (array_keys($obj) === range(0, count($obj) - 1)))
-            {
+            if (is_array($obj) && (array_keys($obj) === range(0, count($obj) - 1))) {
                 # Not assoc.
                 $chunks[] = "<array$attrs>";
-                foreach ($obj as &$item_ref)
-                {
+                foreach ($obj as &$item_ref) {
                     self::_xmlmap2_add($chunks, $item_ref, null);
                 }
                 $chunks[] = "</array>";
-            }
-            else
-            {
+            } else {
                 # Assoc.
                 $chunks[] = "<object$attrs>";
-                foreach ($obj as $key => &$item_ref)
-                {
+                foreach ($obj as $key => &$item_ref) {
                     self::_xmlmap2_add($chunks, $item_ref, $key);
                 }
                 $chunks[] = "</object>";
             }
-        }
-        else
-        {
+        } else {
             # That's a bug.
             throw new Exception("Cannot encode as xmlmap2: " . print_r($obj, true));
         }
@@ -1723,8 +1707,9 @@ class Okapi
     public static function cache_type_name2id($name)
     {
         $ref = &self::$cache_types[Settings::get('OC_BRANCH')];
-        if (isset($ref[$name]))
+        if (isset($ref[$name])) {
             return $ref[$name];
+        }
         throw new Exception("Method cache_type_name2id called with unsupported cache ".
             "type name '$name'. You should not allow users to submit caches ".
             "of non-primary type.");
@@ -1734,14 +1719,15 @@ class Okapi
     public static function cache_type_id2name($id)
     {
         static $reversed = null;
-        if ($reversed == null)
-        {
+        if ($reversed == null) {
             $reversed = array();
-            foreach (self::$cache_types[Settings::get('OC_BRANCH')] as $key => $value)
+            foreach (self::$cache_types[Settings::get('OC_BRANCH')] as $key => $value) {
                 $reversed[$value] = $key;
+            }
         }
-        if (isset($reversed[$id]))
+        if (isset($reversed[$id])) {
             return $reversed[$id];
+        }
         return "Other";
     }
 
@@ -1752,8 +1738,9 @@ class Okapi
     /** E.g. 'Available' => 1. For unknown names throws an Exception. */
     public static function cache_status_name2id($name)
     {
-        if (isset(self::$cache_statuses[$name]))
+        if (isset(self::$cache_statuses[$name])) {
             return self::$cache_statuses[$name];
+        }
         throw new Exception("Method cache_status_name2id called with invalid name '$name'.");
     }
 
@@ -1761,14 +1748,15 @@ class Okapi
     public static function cache_status_id2name($id)
     {
         static $reversed = null;
-        if ($reversed == null)
-        {
+        if ($reversed == null) {
             $reversed = array();
-            foreach (self::$cache_statuses as $key => $value)
+            foreach (self::$cache_statuses as $key => $value) {
                 $reversed[$value] = $key;
+            }
         }
-        if (isset($reversed[$id]))
+        if (isset($reversed[$id])) {
             return $reversed[$id];
+        }
         return 'Archived';
     }
 
@@ -1786,8 +1774,9 @@ class Okapi
     /** E.g. 'micro' => 2. For unknown names throw an Exception. */
     public static function cache_size2_to_sizeid($size2)
     {
-        if (isset(self::$cache_sizes[$size2]))
+        if (isset(self::$cache_sizes[$size2])) {
             return self::$cache_sizes[$size2];
+        }
         throw new Exception("Method cache_size2_to_sizeid called with invalid size2 '$size2'.");
     }
 
@@ -1795,14 +1784,15 @@ class Okapi
     public static function cache_sizeid_to_size2($id)
     {
         static $reversed = null;
-        if ($reversed == null)
-        {
+        if ($reversed == null) {
             $reversed = array();
-            foreach (self::$cache_sizes as $key => $value)
+            foreach (self::$cache_sizes as $key => $value) {
                 $reversed[$value] = $key;
+            }
         }
-        if (isset($reversed[$id]))
+        if (isset($reversed[$id])) {
             return $reversed[$id];
+        }
         return "other";
     }
 
@@ -1825,8 +1815,9 @@ class Okapi
      */
     public static function cache_size2_to_oxsize($size2)
     {
-        if (array_key_exists($size2, self::$cache_OX_sizes))
+        if (array_key_exists($size2, self::$cache_OX_sizes)) {
             return self::$cache_OX_sizes[$size2];
+        }
         throw new Exception("Method cache_size2_to_oxsize called with invalid size2 '$size2'.");
     }
 
@@ -1835,12 +1826,24 @@ class Okapi
      */
     public static function logtypename2id($name)
     {
-        if ($name == 'Found it') return 1;
-        if ($name == "Didn't find it") return 2;
-        if ($name == 'Comment') return 3;
-        if ($name == 'Attended') return 7;
-        if ($name == 'Will attend') return 8;
-        if (($name == 'Needs maintenance') && (Settings::get('OC_BRANCH') == 'oc.pl')) return 5;
+        if ($name == 'Found it') {
+            return 1;
+        }
+        if ($name == "Didn't find it") {
+            return 2;
+        }
+        if ($name == 'Comment') {
+            return 3;
+        }
+        if ($name == 'Attended') {
+            return 7;
+        }
+        if ($name == 'Will attend') {
+            return 8;
+        }
+        if (($name == 'Needs maintenance') && (Settings::get('OC_BRANCH') == 'oc.pl')) {
+            return 5;
+        }
         throw new Exception("logtype2id called with invalid log type argument: $name");
     }
 
@@ -1853,21 +1856,47 @@ class Okapi
         # These names are officially documented and may never change!
 
         # Primary.
-        if ($id == 1) return "Found it";
-        if ($id == 2) return "Didn't find it";
-        if ($id == 3) return "Comment";
-        if ($id == 7) return "Attended";
-        if ($id == 8) return "Will attend";
+        if ($id == 1) {
+            return "Found it";
+        }
+        if ($id == 2) {
+            return "Didn't find it";
+        }
+        if ($id == 3) {
+            return "Comment";
+        }
+        if ($id == 7) {
+            return "Attended";
+        }
+        if ($id == 8) {
+            return "Will attend";
+        }
 
         # Other.
-        if ($id == 4) return "Moved";
-        if ($id == 5) return "Needs maintenance";
-        if ($id == 6) return "Maintenance performed";
-        if ($id == 9) return "Archived";
-        if ($id == 10) return "Ready to search";
-        if ($id == 11) return "Temporarily unavailable";
-        if ($id == 12) return "OC Team comment";
-        if ($id == 13 || $id == 14) return "Locked";
+        if ($id == 4) {
+            return "Moved";
+        }
+        if ($id == 5) {
+            return "Needs maintenance";
+        }
+        if ($id == 6) {
+            return "Maintenance performed";
+        }
+        if ($id == 9) {
+            return "Archived";
+        }
+        if ($id == 10) {
+            return "Ready to search";
+        }
+        if ($id == 11) {
+            return "Temporarily unavailable";
+        }
+        if ($id == 12) {
+            return "OC Team comment";
+        }
+        if ($id == 13 || $id == 14) {
+            return "Locked";
+        }
 
         # Important: This set is not closed. Other types may be introduced
         # in the future. This has to be documented in the public method
@@ -1917,8 +1946,7 @@ class Cache
      */
     public static function set($key, $value, $timeout)
     {
-        if ($timeout == null)
-        {
+        if ($timeout == null) {
             # The current cache implementation is ALWAYS persistent, so we will
             # just replace it with a big value.
             $timeout = 100*365*86400;
@@ -1953,17 +1981,16 @@ class Cache
     /** Do 'set' on many keys at once. */
     public static function set_many($dict, $timeout)
     {
-        if (count($dict) == 0)
+        if (count($dict) == 0) {
             return;
-        if ($timeout == null)
-        {
+        }
+        if ($timeout == null) {
             # The current cache implementation is ALWAYS persistent, so we will
             # just replace it with a big value.
             $timeout = 100*365*86400;
         }
         $entries_escaped = array();
-        foreach ($dict as $key => $value)
-        {
+        foreach ($dict as $key => $value) {
             $entries_escaped[] = "(
                 '".Db::escape_string($key)."',
                 '".Db::escape_string(gzdeflate(serialize($value)))."',
@@ -1990,10 +2017,12 @@ class Cache
                 and expires > now()
         ");
         list($blob, $score) = Db::fetch_row($rs);
-        if (!$blob)
+        if (!$blob) {
             return null;
-        if ($score != null)  # Only non-null entries are scored.
-        {
+        }
+        if ($score != null) {
+            # Only non-null entries are scored.
+
             Db::execute("
                 insert into okapi_cache_reads (`cache_key`)
                 values ('".Db::escape_string($key)."')
@@ -2013,14 +2042,10 @@ class Cache
                 `key` in ('".implode("','", array_map('\okapi\Db::escape_string', $keys))."')
                 and expires > now()
         ");
-        while ($row = Db::fetch_assoc($rs))
-        {
-            try
-            {
+        while ($row = Db::fetch_assoc($rs)) {
+            try {
                 $dict[$row['key']] = unserialize(gzinflate($row['value']));
-            }
-            catch (ErrorException $e)
-            {
+            } catch (ErrorException $e) {
                 unset($dict[$row['key']]);
                 Okapi::mail_admins("Debug: Unserialize error",
                     "Could not unserialize key '".$row['key']."' from Cache.\n".
@@ -2029,10 +2054,13 @@ class Cache
                     "Length of data, compressed: ".strlen($row['value']));
             }
         }
-        if (count($dict) < count($keys))
-            foreach ($keys as $key)
-                if (!isset($dict[$key]))
+        if (count($dict) < count($keys)) {
+            foreach ($keys as $key) {
+                if (!isset($dict[$key])) {
                     $dict[$key] = null;
+                }
+            }
+        }
         return $dict;
     }
 
@@ -2047,8 +2075,9 @@ class Cache
     /** Do 'delete' on many keys at once. */
     public static function delete_many($keys)
     {
-        if (count($keys) == 0)
+        if (count($keys) == 0) {
             return;
+        }
         Db::execute("
             delete from okapi_cache
             where `key` in ('".implode("','", array_map('\okapi\Db::escape_string', $keys))."')
@@ -2066,8 +2095,9 @@ class FileCache
     public static function get_file_path($key)
     {
         $filename = Okapi::get_var_dir()."/okapi_filecache_".md5($key);
-        if (!file_exists($filename))
+        if (!file_exists($filename)) {
             return null;
+        }
         return $filename;
     }
 
@@ -2112,17 +2142,17 @@ abstract class OkapiRequest
      * Return request parameter, or NULL when not found. Use this instead of
      * $_GET or $_POST or $_REQUEST.
      */
-    public abstract function get_parameter($name);
+    abstract public function get_parameter($name);
 
     /**
      * Return the list of all request parameters. You should use this method
      * ONLY when you use <import-params/> in your documentation and you want
      * to pass all unknown parameters onto the other method.
      */
-    public abstract function get_all_parameters_including_unknown();
+    abstract public function get_all_parameters_including_unknown();
 
     /** Return true, if this requests is to be logged as HTTP request in okapi_stats. */
-    public abstract function is_http_request();
+    abstract public function is_http_request();
 }
 
 class OkapiInternalRequest extends OkapiRequest
@@ -2153,17 +2183,20 @@ class OkapiInternalRequest extends OkapiRequest
         $this->consumer = $consumer;
         $this->token = $token;
         $this->parameters = array();
-        foreach ($parameters as $key => $value)
-            if ($value !== null)
+        foreach ($parameters as $key => $value) {
+            if ($value !== null) {
                 $this->parameters[$key] = $value;
+            }
+        }
     }
 
     public function get_parameter($name)
     {
-        if (isset($this->parameters[$name]))
+        if (isset($this->parameters[$name])) {
             return $this->parameters[$name];
-        else
+        } else {
             return null;
+        }
     }
 
     public function get_all_parameters_including_unknown()
@@ -2171,7 +2204,10 @@ class OkapiInternalRequest extends OkapiRequest
         return $this->parameters;
     }
 
-    public function is_http_request() { return $this->perceive_as_http_request; }
+    public function is_http_request()
+    {
+        return $this->perceive_as_http_request;
+    }
 }
 
 class OkapiHttpRequest extends OkapiRequest
@@ -2188,20 +2224,16 @@ class OkapiHttpRequest extends OkapiRequest
         # Parsing options.
         #
         $DEBUG_AS_USERNAME = null;
-        foreach ($options as $key => $value)
-        {
-            switch ($key)
-            {
+        foreach ($options as $key => $value) {
+            switch ($key) {
                 case 'min_auth_level':
-                    if (!in_array($value, array(0, 1, 2, 3)))
-                    {
+                    if (!in_array($value, array(0, 1, 2, 3))) {
                         throw new Exception("'min_auth_level' option has invalid value: $value");
                     }
                     $this->opt_min_auth_level = $value;
                     break;
                 case 'token_type':
-                    if (!in_array($value, array("request", "access")))
-                    {
+                    if (!in_array($value, array("request", "access"))) {
                         throw new Exception("'token_type' option has invalid value: $value");
                     }
                     $this->opt_token_type = $value;
@@ -2214,15 +2246,15 @@ class OkapiHttpRequest extends OkapiRequest
                     break;
             }
         }
-        if ($this->opt_min_auth_level === null) throw new Exception("Required 'min_auth_level' option is missing.");
+        if ($this->opt_min_auth_level === null) {
+            throw new Exception("Required 'min_auth_level' option is missing.");
+        }
 
-        if ($DEBUG_AS_USERNAME != null)
-        {
+        if ($DEBUG_AS_USERNAME != null) {
             # Enables debugging Level 2 and Level 3 methods. Should not be committed
             # at any time! If run on production server, make it an error.
 
-            if (!Settings::get('DEBUG'))
-            {
+            if (!Settings::get('DEBUG')) {
                 throw new Exception("Attempted to use DEBUG_AS_USERNAME in ".
                     "non-debug environment. Accidental commit?");
             }
@@ -2237,8 +2269,7 @@ class OkapiHttpRequest extends OkapiRequest
         # It it's not, check if it isn't against the rules defined in the $options.
         #
 
-        if ($this->get_parameter('oauth_signature'))
-        {
+        if ($this->get_parameter('oauth_signature')) {
             # User is using OAuth.
 
             # Check for duplicate keys in the parameters. (Datastore doesn't
@@ -2253,36 +2284,31 @@ class OkapiHttpRequest extends OkapiRequest
 
             list($this->consumer, $this->token) = Okapi::$server->
                 verify_request2($this->request, $this->opt_token_type, $this->opt_min_auth_level == 3);
-            if ($this->get_parameter('consumer_key') && $this->get_parameter('consumer_key') != $this->get_parameter('oauth_consumer_key'))
+            if ($this->get_parameter('consumer_key') && $this->get_parameter('consumer_key') != $this->get_parameter('oauth_consumer_key')) {
                 throw new BadRequest("Inproper mixing of authentication types. You used both 'consumer_key' ".
                     "and 'oauth_consumer_key' parameters (Level 1 and Level 2), but they do not match with ".
                     "each other. Were you trying to hack me? ;)");
-            if ($this->opt_min_auth_level == 3 && !$this->token)
-            {
+            }
+            if ($this->opt_min_auth_level == 3 && !$this->token) {
                 throw new BadRequest("This method requires a valid Token to be included (Level 3 ".
                     "Authentication). You didn't provide one.");
             }
-        }
-        else
-        {
-            if ($this->opt_min_auth_level >= 2)
-            {
+        } else {
+            if ($this->opt_min_auth_level >= 2) {
                 throw new BadRequest("This method requires OAuth signature (Level ".
                     $this->opt_min_auth_level." Authentication). You didn't sign your request.");
-            }
-            else
-            {
+            } else {
                 $consumer_key = $this->get_parameter('consumer_key');
-                if ($consumer_key)
-                {
+                if ($consumer_key) {
                     $this->consumer = Okapi::$data_store->lookup_consumer($consumer_key);
                     if (!$this->consumer) {
                         throw new InvalidParam('consumer_key', "Consumer does not exist.");
                     }
                 }
-                if (($this->opt_min_auth_level == 1) && (!$this->consumer))
+                if (($this->opt_min_auth_level == 1) && (!$this->consumer)) {
                     throw new BadRequest("This method requires the 'consumer_key' argument (Level 1 ".
                         "Authentication). You didn't provide one.");
+                }
             }
         }
 
@@ -2309,31 +2335,31 @@ class OkapiHttpRequest extends OkapiRequest
 
         # When debugging, simulate as if been run using a proper Level 3 Authentication.
 
-        if ($DEBUG_AS_USERNAME != null)
-        {
+        if ($DEBUG_AS_USERNAME != null) {
             # Note, that this will override any other valid authentication the
             # developer might have issued.
 
             $debug_user_id = Db::select_value("select user_id from user where username='".
                 Db::escape_string($options['DEBUG_AS_USERNAME'])."'");
-            if ($debug_user_id == null)
+            if ($debug_user_id == null) {
                 throw new Exception("Invalid user name in DEBUG_AS_USERNAME: '".$options['DEBUG_AS_USERNAME']."'");
+            }
             $this->consumer = new OkapiDebugConsumer();
             $this->token = new OkapiDebugAccessToken($debug_user_id);
         }
 
         # Read the ETag.
 
-        if (isset($_SERVER['HTTP_IF_NONE_MATCH']))
+        if (isset($_SERVER['HTTP_IF_NONE_MATCH'])) {
             $this->etag = $_SERVER['HTTP_IF_NONE_MATCH'];
+        }
     }
 
     private function init_request()
     {
         $this->request = OAuthRequest::from_request();
         if (!in_array($this->request->get_normalized_http_method(),
-            array('GET', 'POST')))
-        {
+            array('GET', 'POST'))) {
             throw new BadRequest("Use GET and POST methods only.");
         }
     }
@@ -2351,8 +2377,9 @@ class OkapiHttpRequest extends OkapiRequest
         # in OKAPI and should be reported back. See issue 85:
         # https://github.com/opencaching/okapi/issues/85
 
-        if (is_array($value))
+        if (is_array($value)) {
             throw new InvalidParam($name, "Make sure you are using '$name' no more than ONCE in your URL.");
+        }
         return $value;
     }
 
@@ -2361,5 +2388,8 @@ class OkapiHttpRequest extends OkapiRequest
         return $this->request->get_parameters();
     }
 
-    public function is_http_request() { return true; }
+    public function is_http_request()
+    {
+        return true;
+    }
 }

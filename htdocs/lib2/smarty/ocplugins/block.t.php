@@ -22,22 +22,22 @@
  */
 function smarty_gettext_strarg($str)
 {
-	$tr = array();
-	$p = 0;
+    $tr = array();
+    $p = 0;
 
-	for ($i=1; $i < func_num_args(); $i++) {
-		$arg = func_get_arg($i);
-		
-		if (is_array($arg)) {
-			foreach ($arg as $aarg) {
-				$tr['%'.++$p] = $aarg;
-			}
-		} else {
-			$tr['%'.++$p] = $arg;
-		}
-	}
-	
-	return strtr($str, $tr);
+    for ($i=1; $i < func_num_args(); $i++) {
+        $arg = func_get_arg($i);
+        
+        if (is_array($arg)) {
+            foreach ($arg as $aarg) {
+                $tr['%'.++$p] = $aarg;
+            }
+        } else {
+            $tr['%'.++$p] = $arg;
+        }
+    }
+    
+    return strtr($str, $tr);
 }
 
 /**
@@ -53,35 +53,34 @@ function smarty_gettext_strarg($str)
  */
 function smarty_block_t($params, $text, &$smarty, &$repeat)
 {
-	global $opt;
+    global $opt;
 
-	if ($repeat) return;
+    if ($repeat) {
+        return;
+    }
 
-	$escape = isset($params['escape']) ? $params['escape'] : '';
-	unset($params['escape']);
+    $escape = isset($params['escape']) ? $params['escape'] : '';
+    unset($params['escape']);
 
-	// use plural if required parameters are set
-	if (isset($params['count']) && isset($params['plural']) && $params['count']!=1)
-	{
-		$text = $params['plural'];
-	}
-	unset($params['plural']);
-	unset($params['count']);
+    // use plural if required parameters are set
+    if (isset($params['count']) && isset($params['plural']) && $params['count']!=1) {
+        $text = $params['plural'];
+    }
+    unset($params['plural']);
+    unset($params['count']);
 
-	// run strarg if there are parameters
-	if (count($params))
-		$text = smarty_gettext_strarg($text, $params);
+    // run strarg if there are parameters
+    if (count($params)) {
+        $text = smarty_gettext_strarg($text, $params);
+    }
 
-	// escape the string, now
-	// see also modifier.escpapejs.php
-	if ($escape == 'js')
-	{
-		$text = str_replace('\\', '\\\\', $text);
-		$text = str_replace('\'', '\\\'', $text);
-		$text = str_replace('"', '&quot;', $text);
-	}
+    // escape the string, now
+    // see also modifier.escpapejs.php
+    if ($escape == 'js') {
+        $text = str_replace('\\', '\\\\', $text);
+        $text = str_replace('\'', '\\\'', $text);
+        $text = str_replace('"', '&quot;', $text);
+    }
 
-	return $text;
+    return $text;
 }
-
-?>

@@ -21,8 +21,7 @@ require_once($GLOBALS['rootpath'].'okapi/core.php');
 OkapiErrorHandler::$treat_notices_as_errors = true;
 require_once($GLOBALS['rootpath'].'okapi/urls.php');
 
-if (ob_list_handlers() == array('default output handler'))
-{
+if (ob_list_handlers() == array('default output handler')) {
     # We will assume that this one comes from "output_buffering" being turned on
     # in PHP config. This is very common and probably is good for most other OC
     # pages. But we don't need it in OKAPI. We will just turn this off.
@@ -31,26 +30,29 @@ if (ob_list_handlers() == array('default output handler'))
 }
 
 
-class OkapiScriptEntryPointController
+class controller
 {
     public static function dispatch_request($uri)
     {
         # Chop off the ?args=... part.
 
-        if (strpos($uri, '?') !== false)
+        if (strpos($uri, '?') !== false) {
             $uri = substr($uri, 0, strpos($uri, '?'));
+        }
 
         # Chop off everything before "/okapi/". This should work for okay for most "weird"
         # server configurations. It will also address a more subtle issue described here:
         # http://stackoverflow.com/questions/8040461/request-uri-unexpectedly-contains-fqdn
 
-        if (strpos($uri, "/okapi/") !== false)
+        if (strpos($uri, "/okapi/") !== false) {
             $uri = substr($uri, strpos($uri, "/okapi/"));
+        }
 
         # Make sure we're in the right directory (.htaccess should make sure of that).
 
-        if (strpos($uri, "/okapi/") !== 0)
+        if (strpos($uri, "/okapi/") !== 0) {
             throw new Exception("'$uri' is outside of the /okapi/ path.");
+        }
         $uri = substr($uri, 7);
 
         # Initializing internals and running pre-request cronjobs (we don't want
@@ -62,27 +64,23 @@ class OkapiScriptEntryPointController
 
         # Checking for allowed patterns...
 
-        try
-        {
-            foreach (OkapiUrls::$mapping as $pattern => $namespace)
-            {
+        try {
+            foreach (OkapiUrls::$mapping as $pattern => $namespace) {
                 $matches = null;
-                if (preg_match("#$pattern#", $uri, $matches))
-                {
+                if (preg_match("#$pattern#", $uri, $matches)) {
                     # Pattern matched! Moving on to the proper View...
 
                     array_shift($matches);
                     require_once($GLOBALS['rootpath']."okapi/views/$namespace.php");
                     $response = call_user_func_array(array('\\okapi\\views\\'.
                         str_replace('/', '\\', $namespace).'\\View', 'call'), $matches);
-                    if ($response)
+                    if ($response) {
                         $response->display();
+                    }
                     return;
                 }
             }
-        }
-        catch (Http404 $e)
-        {
+        } catch (Http404 $e) {
             /* pass */
         }
 

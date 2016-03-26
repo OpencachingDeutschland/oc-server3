@@ -5,10 +5,8 @@
  *  Unicode Reminder メモ
  ***************************************************************************/
 
-	$opt['rootpath'] = '../';
-	require($opt['rootpath'] . 'lib2/web.inc.php');
+    $opt['rootpath'] = '../';
+    require($opt['rootpath'] . 'lib2/web.inc.php');
 
-	header('Content-type: text/plain; charset=utf-8');
-	echo sql_value("SELECT NOW()","");
-
-?>
+    header('Content-type: text/plain; charset=utf-8');
+    echo sql_value("SELECT NOW()", "");

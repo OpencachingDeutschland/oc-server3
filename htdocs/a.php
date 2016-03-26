@@ -7,6 +7,4 @@
  *  Activation page shortcut to keep URLs in activation Emails short
  ***************************************************************************/
 
-	require "activation.php";
-
-?>
+    require "activation.php";

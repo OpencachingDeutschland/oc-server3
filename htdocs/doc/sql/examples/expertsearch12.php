@@ -7,11 +7,11 @@ require($opt['rootpath'] . 'lib2/web.inc.php');
 sql_enable_debugger();
 
 /*
-	Sortiert: nach Entfernung
-	Caches ausblenden: Eigene, Gefundene, Inaktive, Ignorierte
-	Cacheart: normaler Cache
-	Land: Deutschland
-	Alle Caches um N 48.0 E 9.0
+    Sortiert: nach Entfernung
+    Caches ausblenden: Eigene, Gefundene, Inaktive, Ignorierte
+    Cacheart: normaler Cache
+    Land: Deutschland
+    Alle Caches um N 48.0 E 9.0
 */
 
 /* SQL-Command Nr 4 */
@@ -55,5 +55,3 @@ sql("SELECT acos(cos(0.73304) * cos((90-`caches`.`latitude`) * 3.14159 / 180) + 
            `cache_type`.`id`=`caches`.`type` ORDER BY distance ASC LIMIT 0, 20");
 
 $tpl->display();
-
-?>

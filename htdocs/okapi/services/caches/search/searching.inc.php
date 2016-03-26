@@ -23,13 +23,13 @@ class SearchAssistant
      * Initializes an object with a content of the client request.
      * (The request should contain common geocache search parameters.)
      */
-    public  function __construct(OkapiRequest $request)
+    public function __construct(OkapiRequest $request)
     {
         $this->request = $request;
-        $this->longitude_expr = NULL;
-        $this->latitude_expr = NULL;
-        $this->location_extra_sql = NULL;
-        $this->search_params = NULL;
+        $this->longitude_expr = null;
+        $this->latitude_expr = null;
+        $this->location_extra_sql = null;
+        $this->search_params = null;
     }
 
     /**
@@ -95,8 +95,7 @@ class SearchAssistant
         # At the beginning we have to set up some "magic e$Xpressions".
         # We will use them to make our query run on both OCPL and OCDE databases.
 
-        if (Settings::get('OC_BRANCH') == 'oc.pl')
-        {
+        if (Settings::get('OC_BRANCH') == 'oc.pl') {
             # OCPL's 'caches' table contains some fields which OCDE's does not
             # (topratings, founds, notfounds, last_found, votes, score). If
             # we're being run on OCPL installation, we will simply use them.
@@ -107,9 +106,7 @@ class SearchAssistant
             $X_LAST_FOUND = 'caches.last_found';
             $X_VOTES = 'caches.votes';
             $X_SCORE = 'caches.score';
-        }
-        else
-        {
+        } else {
             # OCDE holds this data in a separate table. Additionally, OCDE
             # does not provide a rating system (votes and score fields).
             # If we're being run on OCDE database, we will include this
@@ -131,55 +128,44 @@ class SearchAssistant
         # type
         #
 
-        if ($tmp = $this->request->get_parameter('type'))
-        {
+        if ($tmp = $this->request->get_parameter('type')) {
             $operator = "in";
-            if ($tmp[0] == '-')
-            {
+            if ($tmp[0] == '-') {
                 $tmp = substr($tmp, 1);
                 $operator = "not in";
             }
             $types = array();
-            foreach (explode("|", $tmp) as $name)
-            {
-                try
-                {
+            foreach (explode("|", $tmp) as $name) {
+                try {
                     $id = Okapi::cache_type_name2id($name);
                     $types[] = $id;
-                }
-                catch (Exception $e)
-                {
+                } catch (Exception $e) {
                     throw new InvalidParam('type', "'$name' is not a valid cache type.");
                 }
             }
-            if (count($types) > 0)
+            if (count($types) > 0) {
                 $where_conds[] = "caches.type $operator ('".implode("','", array_map('\okapi\Db::escape_string', $types))."')";
-            else if ($operator == "in")
+            } elseif ($operator == "in") {
                 $where_conds[] = "false";
+            }
         }
 
         #
         # size2
         #
 
-        if ($tmp = $this->request->get_parameter('size2'))
-        {
+        if ($tmp = $this->request->get_parameter('size2')) {
             $operator = "in";
-            if ($tmp[0] == '-')
-            {
+            if ($tmp[0] == '-') {
                 $tmp = substr($tmp, 1);
                 $operator = "not in";
             }
             $types = array();
-            foreach (explode("|", $tmp) as $name)
-            {
-                try
-                {
+            foreach (explode("|", $tmp) as $name) {
+                try {
                     $id = Okapi::cache_size2_to_sizeid($name);
                     $types[] = $id;
-                }
-                catch (Exception $e)
-                {
+                } catch (Exception $e) {
                     throw new InvalidParam('size2', "'$name' is not a valid cache size.");
                 }
             }
@@ -191,16 +177,14 @@ class SearchAssistant
         #
 
         $tmp = $this->request->get_parameter('status');
-        if ($tmp == null) $tmp = "Available";
+        if ($tmp == null) {
+            $tmp = "Available";
+        }
         $codes = array();
-        foreach (explode("|", $tmp) as $name)
-        {
-            try
-            {
+        foreach (explode("|", $tmp) as $name) {
+            try {
                 $codes[] = Okapi::cache_status_name2id($name);
-            }
-            catch (Exception $e)
-            {
+            } catch (Exception $e) {
                 throw new InvalidParam('status', "'$name' is not a valid cache status.");
             }
         }
@@ -210,26 +194,24 @@ class SearchAssistant
         # owner_uuid
         #
 
-        if ($tmp = $this->request->get_parameter('owner_uuid'))
-        {
+        if ($tmp = $this->request->get_parameter('owner_uuid')) {
             $operator = "in";
-            if ($tmp[0] == '-')
-            {
+            if ($tmp[0] == '-') {
                 $tmp = substr($tmp, 1);
                 $operator = "not in";
             }
-            try
-            {
+            try {
                 $users = OkapiServiceRunner::call("services/users/users", new OkapiInternalRequest(
                     $this->request->consumer, null, array('user_uuids' => $tmp, 'fields' => 'internal_id')));
-            }
-            catch (InvalidParam $e) # invalid uuid
-            {
+            } catch (InvalidParam $e) {
+                # invalid uuid
+
                 throw new InvalidParam('owner_uuid', $e->whats_wrong_about_it);
             }
             $user_ids = array();
-            foreach ($users as $user)
+            foreach ($users as $user) {
                 $user_ids[] = $user['internal_id'];
+            }
             $where_conds[] = "caches.user_id $operator ('".implode("','", array_map('\okapi\Db::escape_string', $user_ids))."')";
         }
 
@@ -237,27 +219,26 @@ class SearchAssistant
         # terrain, difficulty, size, rating - these are similar, we'll do them in a loop
         #
 
-        foreach (array('terrain', 'difficulty', 'size', 'rating') as $param_name)
-        {
-            if ($tmp = $this->request->get_parameter($param_name))
-            {
-                if (!preg_match("/^[1-5]-[1-5](\|X)?$/", $tmp))
+        foreach (array('terrain', 'difficulty', 'size', 'rating') as $param_name) {
+            if ($tmp = $this->request->get_parameter($param_name)) {
+                if (!preg_match("/^[1-5]-[1-5](\|X)?$/", $tmp)) {
                     throw new InvalidParam($param_name, "'$tmp'");
+                }
                 list($min, $max) = explode("-", $tmp);
-                if (strpos($max, "|X") !== false)
-                {
+                if (strpos($max, "|X") !== false) {
                     $max = $max[0];
                     $allow_null = true;
                 } else {
                     $allow_null = false;
                 }
-                if ($min > $max)
+                if ($min > $max) {
                     throw new InvalidParam($param_name, "'$tmp'");
-                switch ($param_name)
-                {
+                }
+                switch ($param_name) {
                     case 'terrain':
-                        if ($allow_null)
+                        if ($allow_null) {
                             throw new InvalidParam($param_name, "The '|X' suffix is not allowed here.");
+                        }
                         if (($min == 1) && ($max == 5)) {
                             /* no extra condition necessary */
                         } else {
@@ -265,8 +246,9 @@ class SearchAssistant
                         }
                         break;
                     case 'difficulty':
-                        if ($allow_null)
+                        if ($allow_null) {
                             throw new InvalidParam($param_name, "The '|X' suffix is not allowed here.");
+                        }
                         if (($min == 1) && ($max == 5)) {
                             /* no extra condition necessary */
                         } else {
@@ -288,8 +270,7 @@ class SearchAssistant
                         }
                         break;
                     case 'rating':
-                        if (Settings::get('OC_BRANCH') == 'oc.pl')
-                        {
+                        if (Settings::get('OC_BRANCH') == 'oc.pl') {
                             if (($min == 1) && ($max == 5) && $allow_null) {
                                 /* no extra condition necessary */
                             } else {
@@ -299,9 +280,7 @@ class SearchAssistant
                                 $where_conds[] = "($X_SCORE >= $min and $X_SCORE < $max and $X_VOTES >= 3)".
                                     ($allow_null ? " or ($X_VOTES < 3)" : "");
                             }
-                        }
-                        else
-                        {
+                        } else {
                             # OCDE does not support rating. We will ignore this parameter.
                         }
                         break;
@@ -313,22 +292,23 @@ class SearchAssistant
         # min_rcmds
         #
 
-        if ($tmp = $this->request->get_parameter('min_rcmds'))
-        {
-            if ($tmp[strlen($tmp) - 1] == '%')
-            {
+        if ($tmp = $this->request->get_parameter('min_rcmds')) {
+            if ($tmp[strlen($tmp) - 1] == '%') {
                 $tmp = substr($tmp, 0, strlen($tmp) - 1);
-                if (!is_numeric($tmp))
+                if (!is_numeric($tmp)) {
                     throw new InvalidParam('min_rcmds', "'$tmp'");
+                }
                 $tmp = intval($tmp);
-                if ($tmp > 100 || $tmp < 0)
+                if ($tmp > 100 || $tmp < 0) {
                     throw new InvalidParam('min_rcmds', "'$tmp'");
+                }
                 $tmp = floatval($tmp) / 100.0;
                 $where_conds[] = "$X_TOPRATINGS >= $X_FOUNDS * '".Db::escape_string($tmp)."'";
                 $where_conds[] = "$X_FOUNDS > 0";
             }
-            if (!is_numeric($tmp))
+            if (!is_numeric($tmp)) {
                 throw new InvalidParam('min_rcmds', "'$tmp'");
+            }
             $where_conds[] = "$X_TOPRATINGS >= '".Db::escape_string($tmp)."'";
         }
 
@@ -336,10 +316,10 @@ class SearchAssistant
         # min_founds
         #
 
-        if ($tmp = $this->request->get_parameter('min_founds'))
-        {
-            if (!is_numeric($tmp))
+        if ($tmp = $this->request->get_parameter('min_founds')) {
+            if (!is_numeric($tmp)) {
                 throw new InvalidParam('min_founds', "'$tmp'");
+            }
             $where_conds[] = "$X_FOUNDS >= '".Db::escape_string($tmp)."'";
         }
 
@@ -348,10 +328,10 @@ class SearchAssistant
         # may be '0' for FTF hunts
         #
 
-        if (!is_null($tmp = $this->request->get_parameter('max_founds')))
-        {
-            if (!is_numeric($tmp))
+        if (!is_null($tmp = $this->request->get_parameter('max_founds'))) {
+            if (!is_numeric($tmp)) {
                 throw new InvalidParam('max_founds', "'$tmp'");
+            }
             $where_conds[] = "$X_FOUNDS <= '".Db::escape_string($tmp)."'";
         }
 
@@ -359,27 +339,27 @@ class SearchAssistant
         # modified_since
         #
 
-        if ($tmp = $this->request->get_parameter('modified_since'))
-        {
+        if ($tmp = $this->request->get_parameter('modified_since')) {
             $timestamp = strtotime($tmp);
-            if ($timestamp)
+            if ($timestamp) {
                 $where_conds[] = "unix_timestamp(caches.last_modified) > '".Db::escape_string($timestamp)."'";
-            else
+            } else {
                 throw new InvalidParam('modified_since', "'$tmp' is not in a valid format or is not a valid date.");
+            }
         }
 
         #
         # found_status
         #
 
-        if ($tmp = $this->request->get_parameter('found_status'))
-        {
-            if ($this->request->token == null)
+        if ($tmp = $this->request->get_parameter('found_status')) {
+            if ($this->request->token == null) {
                 throw new InvalidParam('found_status', "Might be used only for requests signed with an Access Token.");
-            if (!in_array($tmp, array('found_only', 'notfound_only', 'either')))
+            }
+            if (!in_array($tmp, array('found_only', 'notfound_only', 'either'))) {
                 throw new InvalidParam('found_status', "'$tmp'");
-            if ($tmp != 'either')
-            {
+            }
+            if ($tmp != 'either') {
                 $found_cache_ids = self::get_found_cache_ids(array($this->request->token->user_id));
                 $operator = ($tmp == 'found_only') ? "in" : "not in";
                 $where_conds[] = "caches.cache_id $operator ('".implode("','", array_map('\okapi\Db::escape_string', $found_cache_ids))."')";
@@ -390,8 +370,7 @@ class SearchAssistant
         # found_by
         #
 
-        if ($tmp = $this->request->get_parameter('found_by'))
-        {
+        if ($tmp = $this->request->get_parameter('found_by')) {
             try {
                 $users = OkapiServiceRunner::call("services/users/users", new OkapiInternalRequest(
                     $this->request->consumer, null, array('user_uuids' => $tmp, 'fields' => 'internal_id')));
@@ -407,8 +386,7 @@ class SearchAssistant
         # not_found_by
         #
 
-        if ($tmp = $this->request->get_parameter('not_found_by'))
-        {
+        if ($tmp = $this->request->get_parameter('not_found_by')) {
             try {
                 $users = OkapiServiceRunner::call("services/users/users", new OkapiInternalRequest(
                     $this->request->consumer, null, array('user_uuids' => $tmp, 'fields' => 'internal_id')));
@@ -424,21 +402,20 @@ class SearchAssistant
         # watched_only
         #
 
-        if ($tmp = $this->request->get_parameter('watched_only'))
-        {
-            if ($this->request->token == null)
+        if ($tmp = $this->request->get_parameter('watched_only')) {
+            if ($this->request->token == null) {
                 throw new InvalidParam('watched_only', "Might be used only for requests signed with an Access Token.");
-            if (!in_array($tmp, array('true', 'false')))
+            }
+            if (!in_array($tmp, array('true', 'false'))) {
                 throw new InvalidParam('watched_only', "'$tmp'");
-            if ($tmp == 'true')
-            {
+            }
+            if ($tmp == 'true') {
                 $watched_cache_ids = Db::select_column("
                     select cache_id
                     from cache_watches
                     where user_id = '".Db::escape_string($this->request->token->user_id)."'
                 ");
-                if (Settings::get('OC_BRANCH') == 'oc.de')
-                {
+                if (Settings::get('OC_BRANCH') == 'oc.de') {
                     $watched_cache_ids = array_merge($watched_cache_ids, Db::select_column("
                         select cache_id
                         from cache_list_items cli, cache_list_watches clw
@@ -455,33 +432,35 @@ class SearchAssistant
         #
 
         $ignored_status = 'either';
-        if ($tmp = $this->request->get_parameter('exclude_ignored'))
-        {
-            if ($this->request->token == null)
+        if ($tmp = $this->request->get_parameter('exclude_ignored')) {
+            if ($this->request->token == null) {
                 throw new InvalidParam('exclude_ignored', "Might be used only for requests signed with an Access Token.");
-            if ($tmp == 'true')
+            }
+            if ($tmp == 'true') {
                 $ignored_status = 'notignored_only';
-            elseif ($tmp != 'false')
+            } elseif ($tmp != 'false') {
                 throw new InvalidParam('exclude_ignored', "'$tmp'");
+            }
         }
-        if ($tmp = $this->request->get_parameter('ignored_status'))
-        {
-            if ($this->request->token == null)
+        if ($tmp = $this->request->get_parameter('ignored_status')) {
+            if ($this->request->token == null) {
                 throw new InvalidParam('ignored_status', "Might be used only for requests signed with an Access Token.");
-            if (!in_array($tmp, array('ignored_only', 'notignored_only', 'either')))
+            }
+            if (!in_array($tmp, array('ignored_only', 'notignored_only', 'either'))) {
                 throw new InvalidParam('ignored_status', "'$tmp'");
+            }
             if ($tmp != 'either') {
-                if ($tmp == 'ignored_only' && $ignored_status == 'notignored_only')
+                if ($tmp == 'ignored_only' && $ignored_status == 'notignored_only') {
                     $ignored_status = 'none';
-                else
+                } else {
                     $ignored_status = $tmp;
                 }
+            }
         }
 
-        if ($ignored_status == 'none')
+        if ($ignored_status == 'none') {
             $where_conds[] = 'false';
-        elseif ($ignored_status != 'either')
-        {
+        } elseif ($ignored_status != 'either') {
             $ignored_cache_ids = Db::select_column("
                 select cache_id
                 from cache_ignore
@@ -495,27 +474,29 @@ class SearchAssistant
         # exclude_my_own
         #
 
-        if ($tmp = $this->request->get_parameter('exclude_my_own'))
-        {
-            if ($this->request->token == null)
+        if ($tmp = $this->request->get_parameter('exclude_my_own')) {
+            if ($this->request->token == null) {
                 throw new InvalidParam('exclude_my_own', "Might be used only for requests signed with an Access Token.");
-            if (!in_array($tmp, array('true', 'false')))
+            }
+            if (!in_array($tmp, array('true', 'false'))) {
                 throw new InvalidParam('exclude_my_own', "'$tmp'");
-            if ($tmp == 'true')
+            }
+            if ($tmp == 'true') {
                 $where_conds[] = "caches.user_id != '".Db::escape_string($this->request->token->user_id)."'";
+            }
         }
 
         #
         # name
         #
 
-        if ($tmp = $this->request->get_parameter('name'))
-        {
+        if ($tmp = $this->request->get_parameter('name')) {
             # WRTODO: Make this more user-friendly. See:
             # https://github.com/opencaching/okapi/issues/121
 
-            if (strlen($tmp) > 100)
+            if (strlen($tmp) > 100) {
                 throw new InvalidParam('name', "Maximum length of 'name' parameter is 100 characters");
+            }
             $tmp = str_replace("*", "%", str_replace("%", "%%", $tmp));
             $where_conds[] = "caches.name LIKE '".Db::escape_string($tmp)."'";
         }
@@ -524,12 +505,11 @@ class SearchAssistant
         # with_trackables_only
         #
 
-        if ($tmp = $this->request->get_parameter('with_trackables_only'))
-        {
-            if (!in_array($tmp, array('true', 'false'), 1))
+        if ($tmp = $this->request->get_parameter('with_trackables_only')) {
+            if (!in_array($tmp, array('true', 'false'), 1)) {
                 throw new InvalidParam('with_trackables_only', "'$tmp'");
-            if ($tmp == 'true')
-            {
+            }
+            if ($tmp == 'true') {
                 $where_conds[] = "
                     caches.wp_oc in (
                         select distinct wp
@@ -543,12 +523,11 @@ class SearchAssistant
         # ftf_hunter
         #
 
-        if ($tmp = $this->request->get_parameter('ftf_hunter'))
-        {
-            if (!in_array($tmp, array('true', 'false'), 1))
+        if ($tmp = $this->request->get_parameter('ftf_hunter')) {
+            if (!in_array($tmp, array('true', 'false'), 1)) {
                 throw new InvalidParam('ftf_hunter', "'$tmp'");
-            if ($tmp == 'true')
-            {
+            }
+            if ($tmp == 'true') {
                 $where_conds[] = "$X_FOUNDS = 0";
             }
         }
@@ -558,8 +537,7 @@ class SearchAssistant
         #
 
         $join_powertrails = false;
-        if ($tmp = $this->request->get_parameter('powertrail_only'))
-        {
+        if ($tmp = $this->request->get_parameter('powertrail_only')) {
             if ($tmp === 'true') {
                 $join_powertrails = true;
             } elseif ($tmp === 'false') {
@@ -594,8 +572,7 @@ class SearchAssistant
         # set_and
         #
 
-        if ($tmp = $this->request->get_parameter('set_and'))
-        {
+        if ($tmp = $this->request->get_parameter('set_and')) {
             # Check if the set exists.
 
             $exists = Db::select_value("
@@ -603,8 +580,9 @@ class SearchAssistant
                 from okapi_search_sets
                 where id = '".Db::escape_string($tmp)."'
             ");
-            if (!$exists)
+            if (!$exists) {
                 throw new InvalidParam('set_and', "Couldn't find a set by given ID.");
+            }
             $extra_tables[] = "okapi_search_results osr_and";
             $where_conds[] = "osr_and.cache_id = caches.cache_id";
             $where_conds[] = "osr_and.set_id = '".Db::escape_string($tmp)."'";
@@ -615,34 +593,43 @@ class SearchAssistant
         #
 
         $limit = $this->request->get_parameter('limit');
-        if ($limit == null) $limit = "100";
-        if (!is_numeric($limit))
+        if ($limit == null) {
+            $limit = "100";
+        }
+        if (!is_numeric($limit)) {
             throw new InvalidParam('limit', "'$limit'");
-        if ($limit < 1 || (($limit > 500) && (!$this->request->skip_limits)))
+        }
+        if ($limit < 1 || (($limit > 500) && (!$this->request->skip_limits))) {
             throw new InvalidParam(
                 'limit',
                 $this->request->skip_limits
                     ? "Cannot be lower than 1."
                     : "Has to be between 1 and 500."
             );
+        }
 
         #
         # offset
         #
 
         $offset = $this->request->get_parameter('offset');
-        if ($offset == null) $offset = "0";
-        if (!is_numeric($offset))
+        if ($offset == null) {
+            $offset = "0";
+        }
+        if (!is_numeric($offset)) {
             throw new InvalidParam('offset', "'$offset'");
-        if (($offset + $limit > 500) && (!$this->request->skip_limits))
+        }
+        if (($offset + $limit > 500) && (!$this->request->skip_limits)) {
             throw new BadRequest("The sum of offset and limit may not exceed 500.");
-        if ($offset < 0 || (($offset > 499) && (!$this->request->skip_limits)))
+        }
+        if ($offset < 0 || (($offset > 499) && (!$this->request->skip_limits))) {
             throw new InvalidParam(
                 'offset',
                 $this->request->skip_limits
                     ? "Cannot be lower than 0."
                     : "Has to be between 0 and 499."
             );
+        }
 
         #
         # order_by
@@ -650,21 +637,17 @@ class SearchAssistant
 
         $order_clauses = array();
         $order_by = $this->request->get_parameter('order_by');
-        if ($order_by != null)
-        {
+        if ($order_by != null) {
             $order_by = explode('|', $order_by);
-            foreach ($order_by as $field)
-            {
+            foreach ($order_by as $field) {
                 $dir = 'asc';
-                if ($field[0] == '-')
-                {
+                if ($field[0] == '-') {
                     $dir = 'desc';
                     $field = substr($field, 1);
-                }
-                elseif ($field[0] == '+')
-                    $field = substr($field, 1); # ignore leading "+"
-                switch ($field)
-                {
+                } elseif ($field[0] == '+') {
+                    $field = substr($field, 1);
+                } # ignore leading "+"
+                switch ($field) {
                     case 'code': $cl = "caches.wp_oc"; break;
                     case 'name': $cl = "caches.name"; break;
                     case 'founds': $cl = "$X_FOUNDS"; break;
@@ -682,8 +665,9 @@ class SearchAssistant
         # To avoid join errors, put each of the $where_conds in extra paranthesis.
 
         $tmp = array();
-        foreach($where_conds as $cond)
+        foreach ($where_conds as $cond) {
             $tmp[] = "(".$cond.")";
+        }
         $where_conds = $tmp;
         unset($tmp);
 
@@ -697,8 +681,7 @@ class SearchAssistant
             'extra_joins' => $extra_joins,
         );
 
-        if ($this->search_params === NULL)
-        {
+        if ($this->search_params === null) {
             $this->search_params = $ret_array;
         } else {
             $this->search_params = array_merge_recursive($this->search_params, $ret_array);
@@ -738,8 +721,7 @@ class SearchAssistant
             limit ".($this->search_params['offset']).", ".($this->search_params['limit'] + 1).";
         ");
 
-        if (count($cache_codes) > $this->search_params['limit'])
-        {
+        if (count($cache_codes) > $this->search_params['limit']) {
             $more = true;
             array_pop($cache_codes); # get rid of the one above the limit
         } else {
@@ -767,18 +749,17 @@ class SearchAssistant
     public function prepare_location_search_params()
     {
         $location_source = $this->request->get_parameter('location_source');
-        if (!$location_source)
+        if (!$location_source) {
             $location_source = 'default-coords';
+        }
 
         # Make sure location_source has prefix alt_wpt:
-        if ($location_source != 'default-coords' && strncmp($location_source, 'alt_wpt:', 8) != 0)
-        {
+        if ($location_source != 'default-coords' && strncmp($location_source, 'alt_wpt:', 8) != 0) {
             throw new InvalidParam('location_source', '\''.$location_source.'\'');
         }
 
         # Make sure we have sufficient authorization
-        if ($location_source == 'alt_wpt:user-coords' && $this->request->token == null)
-        {
+        if ($location_source == 'alt_wpt:user-coords' && $this->request->token == null) {
             throw new BadRequest("Level 3 Authentication is required to access 'alt_wpt:user-coords'.");
         }
 
@@ -787,14 +768,12 @@ class SearchAssistant
             $location_source = 'default-coords';
         }
 
-        if ($location_source == 'default-coords')
-        {
+        if ($location_source == 'default-coords') {
             $this->longitude_expr = 'caches.longitude';
             $this->latitude_expr = 'caches.latitude';
         } else {
             $extra_joins = null;
-            if (Settings::get('OC_BRANCH') == 'oc.pl')
-            {
+            if (Settings::get('OC_BRANCH') == 'oc.pl') {
                 $this->longitude_expr = 'ifnull(cache_mod_cords.longitude, caches.longitude)';
                 $this->latitude_expr = 'ifnull(cache_mod_cords.latitude, caches.latitude)';
                 $extra_joins = array("
@@ -818,8 +797,7 @@ class SearchAssistant
             $location_extra_sql = array(
                 'extra_joins' => $extra_joins
             );
-            if ($this->search_params === NULL)
-            {
+            if ($this->search_params === null) {
                 $this->search_params = $location_extra_sql;
             } else {
                 $this->search_params = array_merge_recursive($this->search_params, $location_extra_sql);

@@ -9,7 +9,7 @@ namespace okapi;
  *
  * Maintainer: boguslaw.szczepanowski@gmail.com
  */
-class OCPLAccessLogs
+class ocpl_access_logs
 {
     /**
      * Return method name (without full path) which was originally called against OKAPI.
@@ -22,20 +22,18 @@ class OCPLAccessLogs
         // traverse PHP call stack to find out who originally called us
         // first, find first service_runner.php invocation
         // then, find previous class invocation
-        for($i = count($trace)-1; $i >= 0; $i--)
-        {
+        for ($i = count($trace)-1; $i >= 0; $i--) {
             $frame = $trace[$i];
-            if ($break_next && isset($frame['class']))
-            {
+            if ($break_next && isset($frame['class'])) {
                 $class_elems = explode('\\', $frame['class']);
-                if (count($class_elems) >= 2)
+                if (count($class_elems) >= 2) {
                     $org_caller = $class_elems[count($class_elems)-2];
+                }
                 break;
             }
             if (isset($frame['file']) &&
                     // test if file ends with service_runner.php
-                    substr($frame['file'], -strlen('service_runner.php')) === 'service_runner.php')
-            {
+                    substr($frame['file'], -strlen('service_runner.php')) === 'service_runner.php') {
                 $break_next = true;
             }
         }
@@ -50,11 +48,11 @@ class OCPLAccessLogs
      */
     public static function log_geocache_access(OkapiRequest $request, $cache_ids)
     {
-        if (Settings::get('OCPL_ENABLE_GEOCACHE_ACCESS_LOGS') !== true)
+        if (Settings::get('OCPL_ENABLE_GEOCACHE_ACCESS_LOGS') !== true) {
             return ;
+        }
 
-        if (Settings::get('OC_BRANCH') == 'oc.pl')
-        {
+        if (Settings::get('OC_BRANCH') == 'oc.pl') {
             // TODO: can we use the _SERVER global here? or should we make them abstract, and
             // pass along with request object?
             $remote_addr_escaped = "'" . Db::escape_string($_SERVER['REMOTE_ADDR']) . "'";
@@ -67,14 +65,16 @@ class OCPLAccessLogs
             $original_caller_escaped = "'" . Db::escape_string(self::get_original_caller()) . "'";
 
             $user_id = null;
-            if ($request->token != null)
+            if ($request->token != null) {
                 $user_id = $request->token->user_id;
+            }
             $user_id_escaped = $user_id === null ? "null" : "'" . Db::escape_string($user_id) . "'";
-            if (is_array($cache_ids)){
-                if (count($cache_ids) == 1)
+            if (is_array($cache_ids)) {
+                if (count($cache_ids) == 1) {
                     $cache_ids_where = "= '" . Db::escape_string($cache_ids[0]) . "'";
-                else
+                } else {
                     $cache_ids_where = "in ('" . implode("','", array_map('\okapi\Db::escape_string', $cache_ids)) . "')";
+                }
             } else {
                 $cache_ids_where = "= '" . Db::escape_string($cache_ids) . "'";
             }
@@ -99,30 +99,33 @@ class OCPLAccessLogs
 
             // check, if all the geocaches has already been logged
             if (is_array($cache_ids) && count($already_logged_cache_ids) == count($cache_ids)
-                || !is_array($cache_ids) && count($already_logged_cache_ids) == 1)
-            {
+                || !is_array($cache_ids) && count($already_logged_cache_ids) == 1) {
                 return ;
             }
 
-            if (is_array($cache_ids)){
+            if (is_array($cache_ids)) {
                 $tmp = array();
-                foreach ($cache_ids as $cache_id)
+                foreach ($cache_ids as $cache_id) {
                     $tmp[$cache_id] = true;
-                foreach ($already_logged_cache_ids as $cache_id)
+                }
+                foreach ($already_logged_cache_ids as $cache_id) {
                     unset($tmp[$cache_id]);
-                if (count($tmp) <= 0)
+                }
+                if (count($tmp) <= 0) {
                     return ;
+                }
                 $cache_ids_filterd = array_keys($tmp);
                 unset($tmp);
             } else {
                 $cache_ids_filterd = $cache_ids;
             }
 
-            if (is_array($cache_ids_filterd)){
-                if (count($cache_ids_filterd) == 1)
+            if (is_array($cache_ids_filterd)) {
+                if (count($cache_ids_filterd) == 1) {
                     $cache_ids_where = "= '" . Db::escape_string($cache_ids_filterd[0]) . "'";
-                else
+                } else {
                     $cache_ids_where = "in ('" . implode("','", array_map('\okapi\Db::escape_string', $cache_ids_filterd)) . "')";
+                }
             } else {
                 $cache_ids_where = "= '" . Db::escape_string($cache_ids_filterd) . "'";
             }

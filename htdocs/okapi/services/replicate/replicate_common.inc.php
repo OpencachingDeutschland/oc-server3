@@ -37,11 +37,11 @@ class ReplicateCommon
     public static function get_min_since()
     {
         static $cache = null;
-        if ($cache == null)
-        {
+        if ($cache == null) {
             $cache = Db::select_value("select min(id) from okapi_clog");
-            if ($cache === null)
+            if ($cache === null) {
                 $cache = 1;
+            }
             $cache -= 1;
         }
         return $cache;
@@ -54,19 +54,21 @@ class ReplicateCommon
      */
     private static function get_diff($old, $new)
     {
-        if (!$old)
+        if (!$old) {
             return $new;
+        }
         $changed_keys = array();
-        foreach ($new as $key => $value)
-        {
-            if (!array_key_exists($key, $old))
+        foreach ($new as $key => $value) {
+            if (!array_key_exists($key, $old)) {
                 $changed_keys[] = $key;
-            elseif ($old[$key] != $new[$key])
+            } elseif ($old[$key] != $new[$key]) {
                 $changed_keys[] = $key;
+            }
         }
         $changed = array();
-        foreach ($changed_keys as $key)
+        foreach ($changed_keys as $key) {
             $changed[$key] = $new[$key];
+        }
         return $changed;
     }
 
@@ -75,8 +77,9 @@ class ReplicateCommon
     {
         $now = Db::select_value("select date_add(now(), interval -1 minute)");  # See issue 157.
         $last_update = Okapi::get_var('last_clog_update');
-        if ($last_update === null)
+        if ($last_update === null) {
             $last_update = Db::select_value("select date_add(now(), interval -1 day)");
+        }
 
         # Usually this will be fast. But, for example, if admin changes ALL the
         # caches, this will take forever. But we still want it to finish properly
@@ -100,8 +103,7 @@ class ReplicateCommon
 
         # For each group, update the changelog table accordingly.
 
-        foreach ($cache_code_groups as $cache_codes)
-        {
+        foreach ($cache_code_groups as $cache_codes) {
             self::generate_changelog_entries('services/caches/geocaches', 'geocache', 'cache_codes',
                 'code', $cache_codes, self::$logged_cache_fields, false, true, null);
         }
@@ -109,27 +111,25 @@ class ReplicateCommon
         # Same as above, for log entries.
 
         $offset = 0;
-        while (true)
-        {
+        while (true) {
             $log_uuids = Db::select_column("
                 select uuid
                 from cache_logs
                 where okapi_syncbase > '".Db::escape_string($last_update)."'
                 limit $offset, 10000;
             ");
-            if (count($log_uuids) == 0)
+            if (count($log_uuids) == 0) {
                 break;
+            }
             $offset += 10000;
             $log_uuid_groups = Okapi::make_groups($log_uuids, 100);
             unset($log_uuids);
-            foreach ($log_uuid_groups as $log_uuids)
-            {
+            foreach ($log_uuid_groups as $log_uuids) {
                 self::generate_changelog_entries('services/logs/entries', 'log', 'log_uuids',
                     'uuid', $log_uuids, self::$logged_log_entry_fields, false, true, 3600);
             }
         }
-        if (Settings::get('OC_BRANCH') == 'oc.de')
-        {
+        if (Settings::get('OC_BRANCH') == 'oc.de') {
             # On OCDE branch, deleted log entries are MOVED to another table.
             # So the above queries won't detect them. We need to run one more.
             # We will assume there are not so many of them and we don't have to
@@ -142,8 +142,7 @@ class ReplicateCommon
             ");
             $deleted_uuid_groups = Okapi::make_groups($DELETED_uuids, 100);
             unset($DELETED_uuids);
-            foreach ($deleted_uuid_groups as $deleted_uuids)
-            {
+            foreach ($deleted_uuid_groups as $deleted_uuids) {
                 self::generate_changelog_entries('services/logs/entries', 'log', 'log_uuids',
                     'uuid', $deleted_uuids, self::$logged_log_entry_fields, false, true, 3600);
             }
@@ -168,8 +167,7 @@ class ReplicateCommon
      */
     public static function verify_clog_consistency(
         $force_all=false, $geocache_ignored_fields = null
-    )
-    {
+    ) {
         set_time_limit(0);
         ignore_user_abort(true);
 
@@ -194,16 +192,15 @@ class ReplicateCommon
 
         $sum = 0;
         $two_examples = array();
-        foreach ($cache_code_groups as $cache_codes)
-        {
+        foreach ($cache_code_groups as $cache_codes) {
             $entries = self::generate_changelog_entries(
                 'services/caches/geocaches', 'geocache', 'cache_codes',
                 'code', $cache_codes, self::$logged_cache_fields, true, true, null
             );
-            foreach ($entries as $entry)
-            {
-                if ($entry['object_type'] != 'geocache')
+            foreach ($entries as $entry) {
+                if ($entry['object_type'] != 'geocache') {
                     continue;
+                }
                 $cache_code = $entry['object_key']['code'];
 
                 if (($entry['change_type'] == 'replace') && ($geocache_ignored_fields != null)) {
@@ -227,8 +224,9 @@ class ReplicateCommon
                 # We will story the first and the last entry in the $two_examples
                 # vars which is to be emailed to OKAPI developers.
 
-                if (count($two_examples) == 0)
-                    $two_examples[0] = $entry;  /* The first entry */
+                if (count($two_examples) == 0) {
+                    $two_examples[0] = $entry;
+                }  /* The first entry */
                 $two_examples[1] = $entry;  /* The last entry */
 
                 Db::execute("
@@ -275,18 +273,18 @@ class ReplicateCommon
     {
         # Retrieve the previous versions of all objects from OKAPI cache.
 
-        if ($use_cache)
-        {
+        if ($use_cache) {
             $cache_keys1 = array();
             $cache_keys2 = array();
-            foreach ($key_values as $key)
+            foreach ($key_values as $key) {
                 $cache_keys1[] = 'clog#'.$object_type.'#'.$key;
-            foreach ($key_values as $key)
+            }
+            foreach ($key_values as $key) {
                 $cache_keys2[] = 'clogmd5#'.$object_type.'#'.$key;
+            }
             $cached_values1 = Cache::get_many($cache_keys1);
             $cached_values2 = Cache::get_many($cache_keys2);
-            if (!$fulldump_mode)
-            {
+            if (!$fulldump_mode) {
                 Cache::delete_many($cache_keys1);
                 Cache::delete_many($cache_keys2);
             }
@@ -305,25 +303,20 @@ class ReplicateCommon
                 'attribution_append' => 'static'  # currently, this is for the "geocaches" method only
             )));
         $entries = array();
-        foreach ($current_values as $key => $object)
-        {
-            if ($object !== null)
-            {
+        foreach ($current_values as $key => $object) {
+            if ($object !== null) {
                 # Currently, the object exists.
-                if ($use_cache)
-                {
+                if ($use_cache) {
                     # First, compare the cached hash. The hash has much longer lifetime
                     # than the actual cached object.
                     $cached_md5 = $cached_values2['clogmd5#'.$object_type.'#'.$key];
                     $current_md5 = md5(serialize($object));
-                    if ($cached_md5 == $current_md5)
-                    {
+                    if ($cached_md5 == $current_md5) {
                         # The object was not changed since it was last replaced.
                         continue;
                     }
                     $diff = self::get_diff($cached_values1['clog#'.$object_type.'#'.$key], $object);
-                    if (count($diff) == 0)
-                    {
+                    if (count($diff) == 0) {
                         # Md5 differs, but diff does not. Weird, but it can happen
                         # (e.g. just after the md5 extension was introduced, or if
                         # md5 somehow expired before the actual object did).
@@ -336,18 +329,14 @@ class ReplicateCommon
                     'change_type' => 'replace',
                     'data' => ($use_cache ? $diff : $object),
                 );
-                if ($use_cache)
-                {
+                if ($use_cache) {
                     # Save the last-published state of the object, for future comparison.
                     $cached_values2['clogmd5#'.$object_type.'#'.$key] = $current_md5;
                     $cached_values1['clog#'.$object_type.'#'.$key] = $object;
                 }
-            }
-            else
-            {
+            } else {
                 # Currently, the object does not exist.
-                if ($use_cache && ($cached_values1['clog#'.$object_type.'#'.$key] === false))
-                {
+                if ($use_cache && ($cached_values1['clog#'.$object_type.'#'.$key] === false)) {
                     # No need to delete, we have already published its deletion.
                     continue;
                 }
@@ -356,8 +345,7 @@ class ReplicateCommon
                     'object_key' => array($key_name => $key),
                     'change_type' => 'delete',
                 );
-                if ($use_cache)
-                {
+                if ($use_cache) {
                     # Cache the fact, that the object was deleted.
                     $cached_values2['clogmd5#'.$object_type.'#'.$key] = false;
                     $cached_values1['clog#'.$object_type.'#'.$key] = false;
@@ -365,19 +353,16 @@ class ReplicateCommon
             }
         }
 
-        if ($fulldump_mode)
-        {
+        if ($fulldump_mode) {
             return $entries;
-        }
-        else
-        {
+        } else {
             # Save the entries to the clog table.
 
-            if (count($entries) > 0)
-            {
+            if (count($entries) > 0) {
                 $data_values = array();
-                foreach ($entries as $entry)
+                foreach ($entries as $entry) {
                     $data_values[] = gzdeflate(serialize($entry));
+                }
                 Db::execute("
                     insert into okapi_clog (data)
                     values ('".implode("'),('", array_map('\okapi\Db::escape_string', $data_values))."');
@@ -386,8 +371,7 @@ class ReplicateCommon
 
             # Update the values kept in OKAPI cache.
 
-            if ($use_cache)
-            {
+            if ($use_cache) {
                 Cache::set_many($cached_values1, $cache_timeout);
                 Cache::set_many($cached_values2, null);  # make it persistent
             }
@@ -403,10 +387,12 @@ class ReplicateCommon
         $first_id = Db::select_value("
             select id from okapi_clog where id > '".Db::escape_string($since)."' limit 1
         ");
-        if ($first_id === null)
-            return true; # okay, since points to the newest revision
-        if ($first_id == $since + 1)
-            return true; # okay, revision $since + 1 is present
+        if ($first_id === null) {
+            return true;
+        } # okay, since points to the newest revision
+        if ($first_id == $since + 1) {
+            return true;
+        } # okay, revision $since + 1 is present
 
         # If we're here, then this means that $first_id > $since + 1.
         # Revision $since + 1 is already deleted, $since must be too old!
@@ -425,17 +411,17 @@ class ReplicateCommon
     {
         $current_revision = self::get_revision();
         $last_chunk_cut = $current_revision - ($current_revision % self::$chunk_size);
-        if ($since >= $last_chunk_cut)
-        {
+        if ($since >= $last_chunk_cut) {
             # If, for example, we have a choice to give user 50 items he wants, or 80 items
             # which we probably already have in cache (and this includes the 50 which the
             # user wants), then we'll give him 80. If user wants less than half of what we
             # have (ex. 30), then we'll give him only his 30.
 
-            if ($current_revision - $since > $since - $last_chunk_cut)
+            if ($current_revision - $since > $since - $last_chunk_cut) {
                 return array($last_chunk_cut + 1, $current_revision);
-            else
+            } else {
                 return array($since + 1, $current_revision);
+            }
         }
         $prev_chunk_cut = $since - ($since % self::$chunk_size);
         return array($prev_chunk_cut + 1, $prev_chunk_cut + self::$chunk_size);
@@ -446,17 +432,18 @@ class ReplicateCommon
      */
     public static function get_chunk($from, $to)
     {
-        if ($to < $from)
+        if ($to < $from) {
             return array();
-        if ($to - $from > self::$chunk_size)
+        }
+        if ($to - $from > self::$chunk_size) {
             throw new Exception("You should not get chunksize bigger than ".self::$chunk_size." entries at one time.");
+        }
 
         # Check if we already have this chunk in cache.
 
         $cache_key = 'clog_chunk#'.$from.'-'.$to;
         $chunk = Cache::get($cache_key);
-        if ($chunk === null)
-        {
+        if ($chunk === null) {
             $rs = Db::query("
                 select id, data
                 from okapi_clog
@@ -464,8 +451,7 @@ class ReplicateCommon
                 order by id
             ");
             $chunk = array();
-            while ($row = Db::fetch_assoc($rs))
-            {
+            while ($row = Db::fetch_assoc($rs)) {
                 $chunk[] = unserialize(gzinflate($row['data']));
             }
 
@@ -475,10 +461,11 @@ class ReplicateCommon
             # be ever accessed after the next revision appears, so there is not point
             # in storing them that long.
 
-            if (($from % self::$chunk_size === 0) && ($to % self::$chunk_size === 0))
+            if (($from % self::$chunk_size === 0) && ($to % self::$chunk_size === 0)) {
                 $timeout = 10 * 86400;
-            else
+            } else {
                 $timeout = 86400;
+            }
             Cache::set($cache_key, $chunk, $timeout);
         }
 
@@ -511,16 +498,17 @@ class ReplicateCommon
         $cache_codes = Db::select_column("select wp_oc from caches");
         $cache_code_groups = Okapi::make_groups($cache_codes, self::$chunk_size);
         unset($cache_codes);
-        foreach ($cache_code_groups as $cache_codes)
-        {
+        foreach ($cache_code_groups as $cache_codes) {
             $basename = "part".str_pad($i, 5, "0", STR_PAD_LEFT);
             $json_files[] = $basename.".json";
             $entries = self::generate_changelog_entries('services/caches/geocaches', 'geocache', 'cache_codes',
                 'code', $cache_codes, self::$logged_cache_fields, true, false);
             $filtered = array();
-            foreach ($entries as $entry)
-                if ($entry['change_type'] == 'replace')
+            foreach ($entries as $entry) {
+                if ($entry['change_type'] == 'replace') {
                     $filtered[] = $entry;
+                }
+            }
             unset($entries);
             file_put_contents("$dir/$basename.json", json_encode($filtered));
             unset($filtered);
@@ -532,8 +520,7 @@ class ReplicateCommon
         # too much memory. Hence the offset/limit loop.
 
         $offset = 0;
-        while (true)
-        {
+        while (true) {
             $log_uuids = Db::select_column("
                 select uuid
                 from cache_logs
@@ -541,21 +528,23 @@ class ReplicateCommon
                 order by uuid
                 limit $offset, 10000
             ");
-            if (count($log_uuids) == 0)
+            if (count($log_uuids) == 0) {
                 break;
+            }
             $offset += 10000;
             $log_uuid_groups = Okapi::make_groups($log_uuids, 500);
             unset($log_uuids);
-            foreach ($log_uuid_groups as $log_uuids)
-            {
+            foreach ($log_uuid_groups as $log_uuids) {
                 $basename = "part".str_pad($i, 5, "0", STR_PAD_LEFT);
                 $json_files[] = $basename.".json";
                 $entries = self::generate_changelog_entries('services/logs/entries', 'log', 'log_uuids',
                     'uuid', $log_uuids, self::$logged_log_entry_fields, true, false);
                 $filtered = array();
-                foreach ($entries as $entry)
-                    if ($entry['change_type'] == 'replace')
+                foreach ($entries as $entry) {
+                    if ($entry['change_type'] == 'replace') {
                         $filtered[] = $entry;
+                    }
+                }
                 unset($entries);
                 file_put_contents("$dir/$basename.json", json_encode($filtered));
                 unset($filtered);
@@ -581,8 +570,9 @@ class ReplicateCommon
         # Compute uncompressed size.
 
         $size = filesize("$dir/index.json");
-        foreach ($json_files as $filename)
+        foreach ($json_files as $filename) {
             $size += filesize("$dir/$filename");
+        }
 
         # Create JSON archive. We use tar options: -j for bzip2, -z for gzip
         # (bzip2 is MUCH slower).

@@ -4,61 +4,102 @@ class HTMLPurifier_DefinitionCache_Serializer extends
       HTMLPurifier_DefinitionCache
 {
 
-    public function add($def, $config) {
-        if (!$this->checkDefType($def)) return;
+    public function add($def, $config)
+    {
+        if (!$this->checkDefType($def)) {
+            return;
+        }
         $file = $this->generateFilePath($config);
-        if (file_exists($file)) return false;
-        if (!$this->_prepareDir($config)) return false;
+        if (file_exists($file)) {
+            return false;
+        }
+        if (!$this->_prepareDir($config)) {
+            return false;
+        }
         return $this->_write($file, serialize($def), $config);
     }
 
-    public function set($def, $config) {
-        if (!$this->checkDefType($def)) return;
+    public function set($def, $config)
+    {
+        if (!$this->checkDefType($def)) {
+            return;
+        }
         $file = $this->generateFilePath($config);
-        if (!$this->_prepareDir($config)) return false;
+        if (!$this->_prepareDir($config)) {
+            return false;
+        }
         return $this->_write($file, serialize($def), $config);
     }
 
-    public function replace($def, $config) {
-        if (!$this->checkDefType($def)) return;
+    public function replace($def, $config)
+    {
+        if (!$this->checkDefType($def)) {
+            return;
+        }
         $file = $this->generateFilePath($config);
-        if (!file_exists($file)) return false;
-        if (!$this->_prepareDir($config)) return false;
+        if (!file_exists($file)) {
+            return false;
+        }
+        if (!$this->_prepareDir($config)) {
+            return false;
+        }
         return $this->_write($file, serialize($def), $config);
     }
 
-    public function get($config) {
+    public function get($config)
+    {
         $file = $this->generateFilePath($config);
-        if (!file_exists($file)) return false;
+        if (!file_exists($file)) {
+            return false;
+        }
         return unserialize(file_get_contents($file));
     }
 
-    public function remove($config) {
+    public function remove($config)
+    {
         $file = $this->generateFilePath($config);
-        if (!file_exists($file)) return false;
+        if (!file_exists($file)) {
+            return false;
+        }
         return unlink($file);
     }
 
-    public function flush($config) {
-        if (!$this->_prepareDir($config)) return false;
+    public function flush($config)
+    {
+        if (!$this->_prepareDir($config)) {
+            return false;
+        }
         $dir = $this->generateDirectoryPath($config);
         $dh  = opendir($dir);
         while (false !== ($filename = readdir($dh))) {
-            if (empty($filename)) continue;
-            if ($filename[0] === '.') continue;
+            if (empty($filename)) {
+                continue;
+            }
+            if ($filename[0] === '.') {
+                continue;
+            }
             unlink($dir . '/' . $filename);
         }
     }
 
-    public function cleanup($config) {
-        if (!$this->_prepareDir($config)) return false;
+    public function cleanup($config)
+    {
+        if (!$this->_prepareDir($config)) {
+            return false;
+        }
         $dir = $this->generateDirectoryPath($config);
         $dh  = opendir($dir);
         while (false !== ($filename = readdir($dh))) {
-            if (empty($filename)) continue;
-            if ($filename[0] === '.') continue;
+            if (empty($filename)) {
+                continue;
+            }
+            if ($filename[0] === '.') {
+                continue;
+            }
             $key = substr($filename, 0, strlen($filename) - 4);
-            if ($this->isOld($key, $config)) unlink($dir . '/' . $filename);
+            if ($this->isOld($key, $config)) {
+                unlink($dir . '/' . $filename);
+            }
         }
     }
 
@@ -67,7 +108,8 @@ class HTMLPurifier_DefinitionCache_Serializer extends
      * the configuration and definition name
      * @todo Make protected
      */
-    public function generateFilePath($config) {
+    public function generateFilePath($config)
+    {
         $key = $this->generateKey($config);
         return $this->generateDirectoryPath($config) . '/' . $key . '.ser';
     }
@@ -77,7 +119,8 @@ class HTMLPurifier_DefinitionCache_Serializer extends
      * @note No trailing slash
      * @todo Make protected
      */
-    public function generateDirectoryPath($config) {
+    public function generateDirectoryPath($config)
+    {
         $base = $this->generateBaseDirectoryPath($config);
         return $base . '/' . $this->type;
     }
@@ -87,7 +130,8 @@ class HTMLPurifier_DefinitionCache_Serializer extends
      * serials
      * @todo Make protected
      */
-    public function generateBaseDirectoryPath($config) {
+    public function generateBaseDirectoryPath($config)
+    {
         $base = $config->get('Cache.SerializerPath');
         $base = is_null($base) ? HTMLPURIFIER_PREFIX . '/HTMLPurifier/DefinitionCache/Serializer' : $base;
         return $base;
@@ -100,7 +144,8 @@ class HTMLPurifier_DefinitionCache_Serializer extends
      * @param $config Config object
      * @return Number of bytes written if success, or false if failure.
      */
-    private function _write($file, $data, $config) {
+    private function _write($file, $data, $config)
+    {
         $result = file_put_contents($file, $data);
         if ($result !== false) {
             // set permissions of the new file (no execute)
@@ -119,7 +164,8 @@ class HTMLPurifier_DefinitionCache_Serializer extends
      * @param $config Config object
      * @return True if successful
      */
-    private function _prepareDir($config) {
+    private function _prepareDir($config)
+    {
         $directory = $this->generateDirectoryPath($config);
         $chmod = $config->get('Cache.SerializerPermissions');
         if (!$chmod) {
@@ -151,9 +197,12 @@ class HTMLPurifier_DefinitionCache_Serializer extends
      * @param $chmod Permissions
      * @return True if directory writable
      */
-    private function _testPermissions($dir, $chmod) {
+    private function _testPermissions($dir, $chmod)
+    {
         // early abort, if it is writable, everything is hunky-dory
-        if (is_writable($dir)) return true;
+        if (is_writable($dir)) {
+            return true;
+        }
         if (!is_dir($dir)) {
             // generally, you'll want to handle this beforehand
             // so a more specific error message can be given
@@ -166,7 +215,9 @@ class HTMLPurifier_DefinitionCache_Serializer extends
             if (fileowner($dir) === posix_getuid()) {
                 // we can chmod it ourselves
                 $chmod = $chmod | 0700;
-                if (chmod($dir, $chmod)) return true;
+                if (chmod($dir, $chmod)) {
+                    return true;
+                }
             } elseif (filegroup($dir) === posix_getgid()) {
                 $chmod = $chmod | 0070;
             } else {
@@ -185,7 +236,6 @@ class HTMLPurifier_DefinitionCache_Serializer extends
         }
         return false;
     }
-
 }
 
 // vim: et sw=4 sts=4

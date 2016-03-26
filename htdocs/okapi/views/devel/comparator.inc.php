@@ -52,20 +52,20 @@ DONE: move all options to $this->config
 */
 class dbStructUpdater
 {
-    var $sourceStruct = '';//structure dump of the reference database
-    var $destStruct = '';//structure dump of database to update
-    var $config = array();//updater configuration
+    public $sourceStruct = '';//structure dump of the reference database
+    public $destStruct = '';//structure dump of database to update
+    public $config = array();//updater configuration
 
     /**
     * Constructor
     * @access public
     */
-    function dbStructUpdater()
+    public function dbStructUpdater()
     {
         $this->init();
     }
 
-    function init()
+    public function init()
     {
         //table operations: create, drop; field operations: add, remove, modify
         $this->config['updateTypes'] = 'create, drop, add, remove, modify';
@@ -85,10 +85,9 @@ class dbStructUpdater
     * merges current updater config with the given one
     * @param assoc_array $config new configuration values
     */
-    function setConfig($config=array())
+    public function setConfig($config=array())
     {
-        if (is_array($config))
-        {
+        if (is_array($config)) {
             $this->config = array_merge($this->config, $config);
         }
     }
@@ -101,22 +100,19 @@ class dbStructUpdater
     * @param bool $asString if true - result will be a string, otherwise - array
     * @return array|string update sql statements - in array or string (separated with ';')
     */
-    function getUpdates($source, $dest, $asString=false)
+    public function getUpdates($source, $dest, $asString=false)
     {
         $result = $asString?'':array();
         $compRes = $this->compare($source, $dest);
-        if (empty($compRes))
-        {
+        if (empty($compRes)) {
             return $result;
         }
         $compRes = $this->filterDiffs($compRes);
-        if (empty($compRes))
-        {
+        if (empty($compRes)) {
             return $result;
         }
         $result = $this->getDiffSql($compRes);
-        if ($asString)
-        {
+        if ($asString) {
             $result = implode(";\r\n", $result).';';
         }
         return $result;
@@ -125,56 +121,38 @@ class dbStructUpdater
     /**
     * Filters comparison result and lefts only sync actions allowed by 'updateTypes' option
     */
-    function filterDiffs($compRes)
+    public function filterDiffs($compRes)
     {
         $result = array();
-        if (is_array($this->config['updateTypes']))
-        {
+        if (is_array($this->config['updateTypes'])) {
             $updateActions = $this->config['updateTypes'];
-        }
-        else
-        {
+        } else {
             $updateActions = array_map('trim', explode(',', $this->config['updateTypes']));
         }
         $allowedActions = array('create', 'drop', 'add', 'remove', 'modify');
         $updateActions = array_intersect($updateActions, $allowedActions);
-        foreach($compRes as $table=>$info)
-        {
-            if ($info['sourceOrphan'])
-            {
-                if (in_array('create', $updateActions))
-                {
+        foreach ($compRes as $table=>$info) {
+            if ($info['sourceOrphan']) {
+                if (in_array('create', $updateActions)) {
                     $result[$table] = $info;
                 }
-            }
-            elseif ($info['destOrphan'])
-            {
-                if (in_array('drop', $updateActions))
-                {
+            } elseif ($info['destOrphan']) {
+                if (in_array('drop', $updateActions)) {
                     $result[$table] = $info;
                 }
-            }
-            elseif($info['differs'])
-            {
+            } elseif ($info['differs']) {
                 $resultInfo = $info;
                 unset($resultInfo['differs']);
-                foreach ($info['differs'] as $diff)
-                {
-                    if (empty($diff['dest']) && in_array('add', $updateActions))
-                    {
+                foreach ($info['differs'] as $diff) {
+                    if (empty($diff['dest']) && in_array('add', $updateActions)) {
                         $resultInfo['differs'][] = $diff;
-                    }
-                    elseif (empty($diff['source']) && in_array('remove', $updateActions))
-                    {
+                    } elseif (empty($diff['source']) && in_array('remove', $updateActions)) {
                         $resultInfo['differs'][] = $diff;
-                    }
-                    elseif(in_array('modify', $updateActions))
-                    {
+                    } elseif (in_array('modify', $updateActions)) {
                         $resultInfo['differs'][] = $diff;
                     }
                 }
-                if (!empty($resultInfo['differs']))
-                {
+                if (!empty($resultInfo['differs'])) {
                     $result[$table] = $resultInfo;
                 }
             }
@@ -186,25 +164,18 @@ class dbStructUpdater
     * Gets structured general info about the databases diff :
     * array(sourceOrphans=>array(...), destOrphans=>array(...), different=>array(...))
     */
-    function getDiffInfo($compRes)
+    public function getDiffInfo($compRes)
     {
-        if (!is_array($compRes))
-        {
+        if (!is_array($compRes)) {
             return false;
         }
         $result = array('sourceOrphans'=>array(), 'destOrphans'=>array(), 'different'=>array());
-        foreach($compRes as $table=>$info)
-        {
-            if ($info['sourceOrphan'])
-            {
+        foreach ($compRes as $table=>$info) {
+            if ($info['sourceOrphan']) {
                 $result['sourceOrphans'][] = $table;
-            }
-            elseif ($info['destOrphan'])
-            {
+            } elseif ($info['destOrphan']) {
                 $result['destOrphans'][] = $table;
-            }
-            else
-            {
+            } else {
                 $result['different'][] = $table;
             }
         }
@@ -225,7 +196,7 @@ class dbStructUpdater
     *               - dest (string) structure definition line in the reference table
     *           - [1](array) ...
     */
-    function compare($source, $dest)
+    public function compare($source, $dest)
     {
         $this->sourceStruct = $source;
         $this->destStruct = $dest;
@@ -239,32 +210,26 @@ class dbStructUpdater
         $sourceOrphans = array_diff($sourceTabNames, $common);
         $all = array_unique(array_merge($destTabNames, $sourceTabNames));
         sort($all);
-        foreach ($all as $tab)
-        {
+        foreach ($all as $tab) {
             $info = array('destOrphan'=>false, 'sourceOrphan'=>false, 'differs'=>false);
-            if(in_array($tab, $destOrphans))
-            {
+            if (in_array($tab, $destOrphans)) {
                 $info['destOrphan'] = true;
-            }
-            elseif (in_array($tab, $sourceOrphans))
-            {
+            } elseif (in_array($tab, $sourceOrphans)) {
                 $info['sourceOrphan'] = true;
-            }
-            else
-            {
+            } else {
                 $destSql = $this->getTabSql($this->destStruct, $tab, true);
                 $sourceSql = $this->getTabSql($this->sourceStruct, $tab, true);
                 $diffs = $this->compareSql($sourceSql, $destSql);
-                if ($diffs===false)
-                {
+                if ($diffs===false) {
                     trigger_error('[WARNING] error parsing definition of table "'.$tab.'" - skipped');
                     continue;
-                }
-                elseif (!empty($diffs))//not empty array
-                {
+                } elseif (!empty($diffs)) {
+                    //not empty array
+
                     $info['differs'] = $diffs;
-                }
-                else continue;//empty array
+                } else {
+                    continue;
+                }//empty array
             }
             $result[$tab] = $info;
         }
@@ -276,13 +241,13 @@ class dbStructUpdater
     * @access private
     * @param string $struct database structure listing
     */
-    function getTableList($struct)
+    public function getTableList($struct)
     {
         $result = array();
-        if (preg_match_all('/CREATE(?:\s*TEMPORARY)?\s*TABLE\s*(?:IF NOT EXISTS\s*)?(?:`?(\w+)`?\.)?`?(\w+)`?/i', $struct, $m))
-        {
-            foreach($m[2] as $match)//m[1] is a database name if any
-            {
+        if (preg_match_all('/CREATE(?:\s*TEMPORARY)?\s*TABLE\s*(?:IF NOT EXISTS\s*)?(?:`?(\w+)`?\.)?`?(\w+)`?/i', $struct, $m)) {
+            foreach ($m[2] as $match) {
+                //m[1] is a database name if any
+
                 $result[] = $match;
             }
         }
@@ -297,30 +262,25 @@ class dbStructUpdater
     * @param bool $removeDatabase - either to remove database name in "CREATE TABLE database.tab"-like declarations
     * @return string table structure definition
     */
-    function getTabSql($struct, $tab, $removeDatabase=true)
+    public function getTabSql($struct, $tab, $removeDatabase=true)
     {
         $result = '';
         /* create table should be single line in this case*/
         //1 - part before database, 2-database name, 3 - part after database
-        if (preg_match('/(CREATE(?:\s*TEMPORARY)?\s*TABLE\s*(?:IF NOT EXISTS\s*)?)(?:`?(\w+)`?\.)?(`?('.$tab.')`?(\W|$))/i', $struct, $m, PREG_OFFSET_CAPTURE))
-        {
+        if (preg_match('/(CREATE(?:\s*TEMPORARY)?\s*TABLE\s*(?:IF NOT EXISTS\s*)?)(?:`?(\w+)`?\.)?(`?('.$tab.')`?(\W|$))/i', $struct, $m, PREG_OFFSET_CAPTURE)) {
             $tableDef = $m[0][0];
             $start = $m[0][1];
             $database = $m[2][0];
             $offset = $start+strlen($m[0][0]);
             $end = $this->getDelimPos($struct, $offset);
-            if ($end === false)
-            {
+            if ($end === false) {
                 $result = substr($struct, $start);
-            }
-            else
-            {
+            } else {
                 $result = substr($struct, $start, $end-$start);//already without ';'
             }
         }
         $result = trim($result);
-        if ($database && $removeDatabase)
-        {
+        if ($database && $removeDatabase) {
             $result = str_replace($tableDef, $m[1][0].$m[3][0], $result);
         }
         return $result;
@@ -330,13 +290,12 @@ class dbStructUpdater
     * Splits table sql into indexed array
     *
     */
-    function splitTabSql($sql)
+    public function splitTabSql($sql)
     {
         $result = array();
         //find opening bracket, get the prefix along with it
         $openBracketPos = $this->getDelimPos($sql, 0, '(');
-        if ($openBracketPos===false)
-        {
+        if ($openBracketPos===false) {
             trigger_error('[WARNING] can not find opening bracket in table definition');
             return false;
         }
@@ -344,19 +303,16 @@ class dbStructUpdater
         $result[] = trim($prefix);
         $body = substr($sql, strlen($prefix));//fields, indexes and part after closing bracket
         //split by commas, get part by part
-        while(($commaPos = $this->getDelimPos($body, 0, ',', true))!==false)
-        {
+        while (($commaPos = $this->getDelimPos($body, 0, ',', true))!==false) {
             $part = trim(substr($body, 0, $commaPos+1));//read another part and shorten $body
-            if ($part)
-            {
+            if ($part) {
                 $result[] = $part;
             }
             $body = substr($body, $commaPos+1);
         }
         //here we have last field (or index) definition + part after closing bracket (ENGINE, ect)
         $closeBracketPos = $this->getDelimRpos($body, 0, ')');
-        if ($closeBracketPos===false)
-        {
+        if ($closeBracketPos===false) {
             trigger_error('[WARNING] can not find closing bracket in table definition');
             return false;
         }
@@ -366,8 +322,7 @@ class dbStructUpdater
         //get the suffix part along with the closing bracket
         $suffix = substr($body, $closeBracketPos);
         $suffix = trim($suffix);
-        if ($suffix)
-        {
+        if ($suffix) {
             $result[] = $suffix;
         }
         return $result;
@@ -385,34 +340,36 @@ class dbStructUpdater
     *       - dest (string) reference table field definition
     *   - [1]...
     */
-    function compareSql($sourceSql, $destSql)//$sourceSql, $destSql
+    public function compareSql($sourceSql, $destSql)//$sourceSql, $destSql
     {
         $result = array();
         //split with comma delimiter, not line breaks
         $sourceParts =  $this->splitTabSql($sourceSql);
-        if ($sourceParts===false)//error parsing sql
-        {
+        if ($sourceParts===false) {
+            //error parsing sql
+
             trigger_error('[WARNING] error parsing source sql');
             return false;
         }
         $destParts = $this->splitTabSql($destSql);
-        if ($destParts===false)
-        {
+        if ($destParts===false) {
             trigger_error('[WARNING] error parsing destination sql');
             return false;
         }
         $sourcePartsIndexed = array();
         $destPartsIndexed = array();
-        foreach($sourceParts as $line)
-        {
+        foreach ($sourceParts as $line) {
             $lineInfo = $this->processLine($line);
-            if (!$lineInfo) continue;
+            if (!$lineInfo) {
+                continue;
+            }
             $sourcePartsIndexed[$lineInfo['key']] = $lineInfo['line'];
         }
-        foreach($destParts as $line)
-        {
+        foreach ($destParts as $line) {
             $lineInfo = $this->processLine($line);
-            if (!$lineInfo) continue;
+            if (!$lineInfo) {
+                continue;
+            }
             $destPartsIndexed[$lineInfo['key']] = $lineInfo['line'];
         }
         $sourceKeys = array_keys($sourcePartsIndexed);
@@ -420,8 +377,7 @@ class dbStructUpdater
         $all = array_unique(array_merge($sourceKeys, $destKeys));
         sort($all);//fields first, then indexes - because fields are prefixed with '!'
 
-        foreach ($all as $key)
-        {
+        foreach ($all as $key) {
             $info = array('source'=>'', 'dest'=>'');
             $inSource= in_array($key, $sourceKeys);
             $inDest= in_array($key, $destKeys);
@@ -429,20 +385,16 @@ class dbStructUpdater
             $destOrphan = $inDest && !$inSource;
             $different =  $inSource && $inDest &&
             strcasecmp($this->normalizeString($destPartsIndexed[$key]), $this->normalizeString($sourcePartsIndexed[$key]));
-            if ($sourceOrphan)
-            {
+            if ($sourceOrphan) {
                 $info['source'] = $sourcePartsIndexed[$key];
-            }
-            elseif ($destOrphan)
-            {
+            } elseif ($destOrphan) {
                 $info['dest'] = $destPartsIndexed[$key];
-            }
-            elseif ($different)
-            {
+            } elseif ($different) {
                 $info['source'] = $sourcePartsIndexed[$key];
                 $info['dest'] = $destPartsIndexed[$key];
+            } else {
+                continue;
             }
-            else continue;
             $result[] = $info;
         }
         return $result;
@@ -456,39 +408,36 @@ class dbStructUpdater
     * @return array array with single key=>value pair as described in the description
     * implements some options
     */
-    function processLine($line)
+    public function processLine($line)
     {
         $options = $this->config;
         $result = array('key'=>'', 'line'=>'');
         $line = rtrim(trim($line), ',');
-        if (preg_match('/^(CREATE\s+TABLE)|(\) ENGINE=)/i', $line))//first or last table definition line
-        {
+        if (preg_match('/^(CREATE\s+TABLE)|(\) ENGINE=)/i', $line)) {
+            //first or last table definition line
+
             return false;
         }
         //if (preg_match('/^(PRIMARY KEY)|(((UNIQUE )|(FULLTEXT ))?KEY `?\w+`?)/i', $line, $m))//key definition
-        if (preg_match('/^(PRIMARY\s+KEY)|(((UNIQUE\s+)|(FULLTEXT\s+))?KEY\s+`?\w+`?)/i', $line, $m))//key definition
-        {
+        if (preg_match('/^(PRIMARY\s+KEY)|(((UNIQUE\s+)|(FULLTEXT\s+))?KEY\s+`?\w+`?)/i', $line, $m)) {
+            //key definition
+
             $key = $m[0];
-        }
-        elseif (preg_match('/^`?\w+`?/i', $line, $m))//field definition
-        {
+        } elseif (preg_match('/^`?\w+`?/i', $line, $m)) {
+            //field definition
+
             $key = '!'.$m[0];//to make sure fields will be synchronised before the keys
-        }
-        else
-        {
+        } else {
             return false;//line has no valuable info (empty or comment)
         }
         //$key = str_replace('`', '', $key);
-        if (!empty($options['varcharDefaultIgnore']))
-        {
+        if (!empty($options['varcharDefaultIgnore'])) {
             $line = preg_replace("/(var)?char\(([0-9]+)\)\s+NOT\s+NULL\s+default\s+''/i", '$1char($2) NOT NULL', $line);
         }
-        if (!empty($options['intDefaultIgnore']))
-        {
+        if (!empty($options['intDefaultIgnore'])) {
             $line = preg_replace("/((?:big)|(?:tiny))?int\(([0-9]+)\)\s+NOT\s+NULL\s+default\s+'0'/i", '$1int($2) NOT NULL', $line);
         }
-        if (!empty($options['ignoreIncrement']))
-        {
+        if (!empty($options['ignoreIncrement'])) {
             $line = preg_replace("/ AUTO_INCREMENT=[0-9]+/i", '', $line);
         }
         $result['key'] = $this->normalizeString($key);
@@ -504,56 +453,44 @@ class dbStructUpdater
     * @return array list of sql statements
     * supports query generation options
     */
-    function getDiffSql($diff)//maybe add option to ommit or force 'IF NOT EXISTS', skip autoincrement
+    public function getDiffSql($diff)//maybe add option to ommit or force 'IF NOT EXISTS', skip autoincrement
     {
         $options = $this->config;
         $sqls = array();
-        if (!is_array($diff) || empty($diff))
-        {
+        if (!is_array($diff) || empty($diff)) {
             return $sqls;
         }
-        foreach($diff as $tab=>$info)
-        {
-            if ($info['sourceOrphan'])//delete it
-            {
+        foreach ($diff as $tab=>$info) {
+            if ($info['sourceOrphan']) {
+                //delete it
+
                 $sqls[] = 'DROP TABLE `'.$tab.'`';
-            }
-            elseif ($info['destOrphan'])//create destination table in source
-            {
+            } elseif ($info['destOrphan']) {
+                //create destination table in source
+
                 $database = '';
                 $destSql = $this->getTabSql($this->destStruct, $tab, $database);
-                if (!empty($options['ignoreIncrement']))
-                {
+                if (!empty($options['ignoreIncrement'])) {
                     $destSql = preg_replace("/\s*AUTO_INCREMENT=[0-9]+/i", '', $destSql);
                 }
-                if (!empty($options['ingoreIfNotExists']))
-                {
+                if (!empty($options['ingoreIfNotExists'])) {
                     $destSql = preg_replace("/IF NOT EXISTS\s*/i", '', $destSql);
                 }
-                if (!empty($options['forceIfNotExists']))
-                {
+                if (!empty($options['forceIfNotExists'])) {
                     $destSql = preg_replace('/(CREATE(?:\s*TEMPORARY)?\s*TABLE\s*)(?:IF\sNOT\sEXISTS\s*)?(`?\w+`?)/i', '$1IF NOT EXISTS $2', $destSql);
                 }
                 $sqls[] = $destSql;
-            }
-            else
-            {
-                foreach($info['differs'] as $finfo)
-                {
+            } else {
+                foreach ($info['differs'] as $finfo) {
                     $inDest = !empty($finfo['dest']);
                     $inSource = !empty($finfo['source']);
-                    if ($inSource && !$inDest)
-                    {
+                    if ($inSource && !$inDest) {
                         $sql = $finfo['source'];
                         $action = 'drop';
-                    }
-                    elseif ($inDest && !$inSource)
-                    {
+                    } elseif ($inDest && !$inSource) {
                         $sql = $finfo['dest'];
                         $action = 'add';
-                    }
-                    else
-                    {
+                    } else {
                         $sql = $finfo['dest'];
                         $action = 'modify';
                     }
@@ -573,71 +510,53 @@ class dbStructUpdater
     * @param string $sql definition of the element to change
     * @return string update sql
     */
-    function getActionSql($action, $tab, $sql)
+    public function getActionSql($action, $tab, $sql)
     {
         $result = 'ALTER TABLE `'.$tab.'` ';
         $action = strtolower($action);
         $keyField = '`?\w`?(?:\(\d+\))?';//matches `name`(10)
         $keyFieldList = '(?:'.$keyField.'(?:,\s?)?)+';//matches `name`(10),`desc`(255)
-        if (preg_match('/((?:PRIMARY )|(?:UNIQUE )|(?:FULLTEXT ))?KEY `?(\w+)?`?\s(\('.$keyFieldList.'\))/i', $sql, $m))
-        {   //key and index operations
+        if (preg_match('/((?:PRIMARY )|(?:UNIQUE )|(?:FULLTEXT ))?KEY `?(\w+)?`?\s(\('.$keyFieldList.'\))/i', $sql, $m)) {   //key and index operations
             $type = strtolower(trim($m[1]));
             $name = trim($m[2]);
             $fields = trim($m[3]);
-            switch($action)
-            {
+            switch ($action) {
                 case 'drop':
-                    if ($type=='primary')
-                    {
+                    if ($type=='primary') {
                         $result.= 'DROP PRIMARY KEY';
-                    }
-                    else
-                    {
+                    } else {
                         $result.= 'DROP INDEX `'.$name.'`';
                     }
                 break;
                 case 'add':
-                    if ($type=='primary')
-                    {
+                    if ($type=='primary') {
                         $result.= 'ADD PRIMARY KEY '.$fields;
-                    }
-                    elseif ($type=='')
-                    {
+                    } elseif ($type=='') {
                         $result.= 'ADD INDEX `'.$name.'` '.$fields;
-                    }
-                    else
-                    {
+                    } else {
                         $result .='ADD '.strtoupper($type).' `'.$name.'` '.$fields;//fulltext or unique
                     }
                 break;
                 case 'modify':
-                    if ($type=='primary')
-                    {
+                    if ($type=='primary') {
                         $result.='DROP PRIMARY KEY, ADD PRIMARY KEY '.$fields;
-                    }
-                    elseif ($type=='')
-                    {
+                    } elseif ($type=='') {
                         $result.='DROP INDEX `'.$name.'`, ADD INDEX `'.$name.'` '.$fields;
-                    }
-                    else
-                    {
+                    } else {
                         $result.='DROP INDEX `'.$name.'`, ADD '.strtoupper($type).' `'.$name.'` '.$fields;//fulltext or unique
                     }
                 break;
 
             }
-        }
-        else //fields operations
-        {
+        } else {
+            //fields operations
+
             $sql = rtrim(trim($sql), ',');
             $result.= strtoupper($action);
-            if ($action=='drop')
-            {
+            if ($action=='drop') {
                 $spacePos = strpos($sql, ' ');
                 $result.= ' '.substr($sql, 0, $spacePos);
-            }
-            else
-            {
+            } else {
                 $result.= ' '.$sql;
             }
         }
@@ -651,80 +570,65 @@ class dbStructUpdater
     * Handles escaped \" and \'. Also handles sql comments.
     * Actualy it is regex-based Finit State Machine (FSN)
     */
-    function getDelimPos($string, $offset=0, $delim=';', $skipInBrackets=false)
+    public function getDelimPos($string, $offset=0, $delim=';', $skipInBrackets=false)
     {
         $stack = array();
         $rbs = '\\\\';  //reg - escaped backslash
         $regPrefix = "(?<!$rbs)(?:$rbs{2})*";
         $reg = $regPrefix.'("|\')|(/\\*)|(\\*/)|(-- )|(\r\n|\r|\n)|';
-        if ($skipInBrackets)
-        {
+        if ($skipInBrackets) {
             $reg.='(\(|\))|';
-        }
-        else
-        {
+        } else {
             $reg.='()';
         }
         $reg .= '('.preg_quote($delim).')';
-        while (preg_match('%'.$reg.'%', $string, $m, PREG_OFFSET_CAPTURE, $offset))
-        {
+        while (preg_match('%'.$reg.'%', $string, $m, PREG_OFFSET_CAPTURE, $offset)) {
             $offset = $m[0][1]+strlen($m[0][0]);
-            if (end($stack)=='/*')
-            {
-                if (!empty($m[3][0]))
-                {
+            if (end($stack)=='/*') {
+                if (!empty($m[3][0])) {
                     array_pop($stack);
                 }
                 continue;//here we could also simplify regexp
             }
-            if (end($stack)=='-- ')
-            {
-                if (!empty($m[5][0]))
-                {
+            if (end($stack)=='-- ') {
+                if (!empty($m[5][0])) {
                     array_pop($stack);
                 }
                 continue;//here we could also simplify regexp
             }
 
-            if (!empty($m[7][0]))// ';' found
-            {
-                if (empty($stack))
-                {
+            if (!empty($m[7][0])) {
+                // ';' found
+
+                if (empty($stack)) {
                     return $m[7][1];
-                }
-                else
-                {
+                } else {
                     //var_dump($stack, substr($string, $offset-strlen($m[0][0])));
                 }
             }
-            if (!empty($m[6][0]))// '(' or ')' found
-            {
-                if (empty($stack) && $m[6][0]=='(')
-                {
+            if (!empty($m[6][0])) {
+                // '(' or ')' found
+
+                if (empty($stack) && $m[6][0]=='(') {
                     array_push($stack, $m[6][0]);
-                }
-                elseif($m[6][0]==')' && end($stack)=='(')
-                {
+                } elseif ($m[6][0]==')' && end($stack)=='(') {
                     array_pop($stack);
                 }
-            }
-            elseif (!empty($m[1][0]))// ' or " found
-            {
-                if (end($stack)==$m[1][0])
-                {
+            } elseif (!empty($m[1][0])) {
+                // ' or " found
+
+                if (end($stack)==$m[1][0]) {
                     array_pop($stack);
-                }
-                else
-                {
+                } else {
                     array_push($stack, $m[1][0]);
                 }
-            }
-            elseif (!empty($m[2][0])) // opening comment / *
-            {
+            } elseif (!empty($m[2][0])) {
+                // opening comment / *
+
                 array_push($stack, $m[2][0]);
-            }
-            elseif (!empty($m[4][0])) // opening comment --
-            {
+            } elseif (!empty($m[4][0])) {
+                // opening comment --
+
                 array_push($stack, $m[4][0]);
             }
         }
@@ -735,22 +639,18 @@ class dbStructUpdater
     * works the same as getDelimPos except returns position of the first occurence of the delimiter starting from
     * the end of the string
     */
-    function getDelimRpos($string, $offset=0, $delim=';', $skipInBrackets=false)
+    public function getDelimRpos($string, $offset=0, $delim=';', $skipInBrackets=false)
     {
         $pos = $this->getDelimPos($string, $offset, $delim, $skipInBrackets);
-        if ($pos===false)
-        {
+        if ($pos===false) {
             return false;
         }
-        do
-        {
+        do {
             $newPos=$this->getDelimPos($string, $pos+1, $delim, $skipInBrackets);
-            if ($newPos !== false)
-            {
+            if ($newPos !== false) {
                 $pos = $newPos;
             }
-        }
-        while($newPos!==false);
+        } while ($newPos!==false);
         return $pos;
     }
 
@@ -759,7 +659,7 @@ class dbStructUpdater
      * to be used for the comparison purposes only
      * @param string $str string to normaize
      */
-    function normalizeString($str)
+    public function normalizeString($str)
     {
         $str = strtolower($str);
         $str = preg_replace('/\s+/', ' ', $str);

@@ -16,7 +16,7 @@ use okapi\OkapiInternalConsumer;
 use okapi\OkapiServiceRunner;
 use okapi\services\replicate\ReplicateCommon;
 
-class WebService
+class info
 {
     public static function options()
     {
@@ -35,8 +35,7 @@ class WebService
             'revision' => ReplicateCommon::get_revision(),
         );
         $dump = Cache::get("last_fulldump");
-        if ($dump)
-        {
+        if ($dump) {
             $result['latest_fulldump'] = array(
                 'revision' => $dump['revision'],
                 'generated_at' => $dump['meta']['generated_at'],

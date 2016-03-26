@@ -30,6 +30,4 @@ function smarty_function_debug($params, &$smarty)
     return smarty_core_display_debug_console(null, $smarty);
 }
 
-/* vim: set expandtab: */
-
-?>
+/* vim: set expandtab: */;

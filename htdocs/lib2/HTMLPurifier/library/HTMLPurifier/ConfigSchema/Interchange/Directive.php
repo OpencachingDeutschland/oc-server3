@@ -71,7 +71,6 @@ class HTMLPurifier_ConfigSchema_Interchange_Directive
      * List of external projects this directive depends on, e.g. array('CSSTidy').
      */
     public $external = array();
-
 }
 
 // vim: et sw=4 sts=4

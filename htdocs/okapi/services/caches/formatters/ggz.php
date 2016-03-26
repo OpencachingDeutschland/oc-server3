@@ -15,13 +15,12 @@ use okapi\InvalidParam;
 use okapi\OkapiAccessToken;
 use okapi\OkapiZIPHttpResponse;
 use okapi\services\caches\search\SearchAssistant;
-
 use \ZipArchive;
 use \Exception;
 
 require_once($GLOBALS['rootpath']."okapi/services/caches/formatters/gpx.php");
 
-class WebService
+class ggz
 {
     public static function options()
     {
@@ -43,7 +42,7 @@ class WebService
         # Geocaching.com (groundspeak:) and Opencaching.com (ox:) extensions. It will
         # also include personal data (if the method was invoked using Level 3 Authentication).
 
-        $file_item_name = "data_".time()."_".rand(100000,999999).".gpx";
+        $file_item_name = "data_".time()."_".rand(100000, 999999).".gpx";
         $ggz_file = array(
             'name' => $file_item_name,
             'crc32' => sprintf('%08X', crc32($gpx_result['gpx'])),

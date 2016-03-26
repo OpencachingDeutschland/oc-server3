@@ -118,7 +118,7 @@ class html2text
      *  @var string $html
      *  @access public
      */
-    var $html;
+    public $html;
 
     /**
      *  Contains the converted, formatted text.
@@ -126,7 +126,7 @@ class html2text
      *  @var string $text
      *  @access public
      */
-    var $text;
+    public $text;
 
     /**
      *  Maximum width of the formatted text, in columns.
@@ -137,7 +137,7 @@ class html2text
      *  @var integer $width
      *  @access public
      */
-    var $width = 72;
+    public $width = 72;
 
     /**
      *  List of preg* regular expression patterns to search for,
@@ -147,10 +147,10 @@ class html2text
      *  @access public
      *  @see $replace
      */
-    var $search = array(
+    public $search = array(
         "/\r/",                                  // Non-legal carriage return
         "/(<\/p[^>]*>|<br[^>]*>|<\/ul[^>]*>|<\/ol[^>]*>|<\/table[^>]*>)\n+/i",
-				                                         // OCDE: <p> <br> <ul> <li> + \n
+                                                         // OCDE: <p> <br> <ul> <li> + \n
         "/[\n\t]+/",                             // Newlines and tabs
         '/[ ]{2,}/',                             // Runs of spaces, pre-handling
         '/<script[^>]*>.*?<\/script>/i',         // <script>s -- which strip_tags supposedly has problems with
@@ -176,11 +176,11 @@ class html2text
         '/<td[^>]*>(.*?)<\/td>/i',               // <td> and </td>
         '/<th[^>]*>(.*?)<\/th>/ie',              // <th> and </th>
 /*
-	OCDE: html_entity_decode() will do a better job than this
+    OCDE: html_entity_decode() will do a better job than this
 
         '/&(nbsp|#160);/i',                      // Non-breaking space
         '/&(quot|rdquo|ldquo|#8220|#8221|#147|#148);/i',
-		                                         // Double quotes
+                                                 // Double quotes
         '/&(apos|rsquo|lsquo|#8216|#8217);/i',   // Single quotes
         '/&gt;/i',                               // Greater-than
         '/&lt;/i',                               // Less-than
@@ -205,7 +205,7 @@ class html2text
      *  @access public
      *  @see $search
      */
-    var $replace = array(
+    public $replace = array(
         '',                                     // Non-legal carriage return
         '\\1',                                  // OCDE: <p> <br> <ul> <li>: strip trailing \n
         ' ',                                    // Newlines and tabs
@@ -259,7 +259,7 @@ class html2text
      *  @access public
      *  @see set_allowed_tags()
      */
-    var $allowed_tags = '';
+    public $allowed_tags = '';
 
     /**
      *  Contains the base URL that relative links should resolve to.
@@ -267,7 +267,7 @@ class html2text
      *  @var string $url
      *  @access public
      */
-    var $url;
+    public $url;
 
     /**
      *  Indicates whether content in the $html variable has been converted yet.
@@ -276,7 +276,7 @@ class html2text
      *  @access private
      *  @see $html, $text
      */
-    var $_converted = false;
+    public $_converted = false;
 
     /**
      *  Contains URL addresses from links to be rendered in plain text.
@@ -285,7 +285,7 @@ class html2text
      *  @access private
      *  @see _build_link_list()
      */
-    var $_link_list = '';
+    public $_link_list = '';
     
     /**
      *  Number of valid links detected in the text, used for plain text
@@ -295,7 +295,7 @@ class html2text
      *  @access private
      *  @see _build_link_list()
      */
-    var $_link_count = 0;
+    public $_link_count = 0;
 
     /**
      *  Constructor.
@@ -309,9 +309,9 @@ class html2text
      *  @access public
      *  @return void
      */
-    function html2text( $source = '', $from_file = false )
+    public function html2text($source = '', $from_file = false)
     {
-        if ( !empty($source) ) {
+        if (!empty($source)) {
             $this->set_html($source, $from_file);
         }
         $this->set_base_url();
@@ -325,11 +325,11 @@ class html2text
      *  @access public
      *  @return void
      */
-    function set_html( $source, $from_file = false )
+    public function set_html($source, $from_file = false)
     {
         $this->html = $source;
 
-        if ( $from_file && file_exists($source) ) {
+        if ($from_file && file_exists($source)) {
             $fp = fopen($source, 'r');
             $this->html = fread($fp, filesize($source));
             fclose($fp);
@@ -344,9 +344,9 @@ class html2text
      *  @access public
      *  @return string
      */
-    function get_text()
+    public function get_text()
     {
-        if ( !$this->_converted ) {
+        if (!$this->_converted) {
             $this->_convert();
         }
 
@@ -359,7 +359,7 @@ class html2text
      *  @access public
      *  @return void
      */
-    function print_text()
+    public function print_text()
     {
         print $this->get_text();
     }
@@ -371,7 +371,7 @@ class html2text
      *  @return void
      *  @see print_text()
      */
-    function p()
+    public function p()
     {
         print $this->get_text();
     }
@@ -384,9 +384,9 @@ class html2text
      *  @access public
      *  @return void
      */
-    function set_allowed_tags( $allowed_tags = '' )
+    public function set_allowed_tags($allowed_tags = '')
     {
-        if ( !empty($allowed_tags) ) {
+        if (!empty($allowed_tags)) {
             $this->allowed_tags = $allowed_tags;
         }
     }
@@ -397,21 +397,22 @@ class html2text
      *  @access public
      *  @return void
      */
-    function set_base_url( $url = '' )
+    public function set_base_url($url = '')
     {
-        if ( empty($url) ) {
-        	if ( !empty($_SERVER['HTTP_HOST']) ) {
-	          if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off')
-	            $this->url = 'https://' . $_SERVER['HTTP_HOST'];
-	          else
-	            $this->url = 'http://' . $_SERVER['HTTP_HOST'];
-        	} else {
-	            $this->url = '';
-	        }
+        if (empty($url)) {
+            if (!empty($_SERVER['HTTP_HOST'])) {
+                if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') {
+                    $this->url = 'https://' . $_SERVER['HTTP_HOST'];
+                } else {
+                    $this->url = 'http://' . $_SERVER['HTTP_HOST'];
+                }
+            } else {
+                $this->url = '';
+            }
         } else {
             // Strip any trailing slashes for consistency (relative
             // URLs may already start with a slash like "/file.html")
-            if ( substr($url, -1) == '/' ) {
+            if (substr($url, -1) == '/') {
                 $url = substr($url, 0, -1);
             }
             $this->url = $url;
@@ -429,7 +430,7 @@ class html2text
      *  @access private
      *  @return void
      */
-    function _convert()
+    public function _convert()
     {
         // Variables used for building the link list
         $this->_link_count = 0;
@@ -448,18 +449,18 @@ class html2text
         $text = preg_replace("/[\n]{3,}/", "\n\n", $text);
 
         // Add link list
-        if ( !empty($this->_link_list) ) {
+        if (!empty($this->_link_list)) {
             $text .= "\n\nLinks:\n------\n" . $this->_link_list;
         }
 
         // Wrap the text to a readable format
         // for PHP versions >= 4.0.2. Default width is 75
         // If width is 0 or less, don't wrap the text.
-        if ( $this->width > 0 ) {
-        	$text = wordwrap($text, $this->width);
+        if ($this->width > 0) {
+            $text = wordwrap($text, $this->width);
         }
 
-				// OCDE - added this:
+                // OCDE - added this:
         $this->text = html_entity_decode($text, ENT_COMPAT, 'UTF-8');
 
         $this->_converted = true;
@@ -478,21 +479,21 @@ class html2text
      *  @access private
      *  @return string
      */
-    function _build_link_list( $link, $display )
+    public function _build_link_list($link, $display)
     {
-		if ( substr($link, 0, 7) == 'http://' || substr($link, 0, 8) == 'https://' ||
-             substr($link, 0, 7) == 'mailto:' ) {
+        if (substr($link, 0, 7) == 'http://' || substr($link, 0, 8) == 'https://' ||
+             substr($link, 0, 7) == 'mailto:') {
             $this->_link_count++;
             $this->_link_list .= "[" . $this->_link_count . "] $link\n";
             $additional = ' [' . $this->_link_count . ']';
-		} elseif ( substr($link, 0, 11) == 'javascript:' ) {
-			// Don't count the link; ignore it
-			$additional = '';
-		// what about href="#anchor" ?
+        } elseif (substr($link, 0, 11) == 'javascript:') {
+            // Don't count the link; ignore it
+            $additional = '';
+        // what about href="#anchor" ?
         } else {
             $this->_link_count++;
             $this->_link_list .= "[" . $this->_link_count . "] " . $this->url;
-            if ( substr($link, 0, 1) != '/' ) {
+            if (substr($link, 0, 1) != '/') {
                 $this->_link_list .= '/';
             }
             $this->_link_list .= "$link\n";
@@ -501,7 +502,4 @@ class html2text
 
         return $display . $additional;
     }
-
 }
-
-?>

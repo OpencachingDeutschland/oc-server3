@@ -7,7 +7,7 @@ namespace okapi;
 # The "call" method should return OkapiResponse, or throw a BadRequest
 # exception.
 
-class OkapiUrls
+class urls
 {
     public static $mapping = array(
         '^(services/.*)\.html$' => 'method_doc',

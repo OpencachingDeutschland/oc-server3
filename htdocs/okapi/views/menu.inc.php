@@ -23,9 +23,10 @@ class OkapiMenu
     public static function get_menu_html($current_path = null)
     {
         $chunks = array();
-        if (Okapi::$version_number)
+        if (Okapi::$version_number) {
             $chunks[] = "<div class='revision'>ver. ".Okapi::$version_number.
                 " (".substr(Okapi::$git_revision, 0, 7).")</div>";
+        }
         $chunks[] = "<div class='main'>";
         $chunks[] = self::link($current_path, "introduction.html", "Introduction");
         $chunks[] = self::link($current_path, "signup.html", "Sign up");
@@ -42,24 +43,24 @@ class OkapiMenu
         # We'll break them up into modules, for readability.
 
         $module_methods = array();
-        foreach ($methodnames as $methodname)
-        {
+        foreach ($methodnames as $methodname) {
             $pos = strrpos($methodname, "/");
             $modulename = substr($methodname, 0, $pos);
             $method_short_name = substr($methodname, $pos + 1);
-            if (!isset($module_methods[$modulename]))
+            if (!isset($module_methods[$modulename])) {
                 $module_methods[$modulename] = array();
+            }
             $module_methods[$modulename][] = $method_short_name;
         }
         $modulenames = array_keys($module_methods);
         sort($modulenames);
 
-        foreach ($modulenames as $modulename)
-        {
+        foreach ($modulenames as $modulename) {
             $chunks[] = "<div class='module'>$modulename</div>";
             $chunks[] = "<div class='methods'>";
-            foreach ($module_methods[$modulename] as $method_short_name)
+            foreach ($module_methods[$modulename] as $method_short_name) {
                 $chunks[] = self::link($current_path, "$modulename/$method_short_name.html", "$method_short_name");
+            }
             $chunks[] = "</div>";
         }
         return implode("", $chunks);
@@ -69,8 +70,9 @@ class OkapiMenu
     {
         $installations = OkapiServiceRunner::call("services/apisrv/installations",
             new OkapiInternalRequest(new OkapiInternalConsumer(), null, array()));
-        foreach ($installations as &$inst_ref)
+        foreach ($installations as &$inst_ref) {
             $inst_ref['selected'] = ($inst_ref['site_url'] == Settings::get('SITE_URL'));
+        }
         return $installations;
     }
 }

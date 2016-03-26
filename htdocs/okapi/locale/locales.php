@@ -2,7 +2,7 @@
 
 namespace okapi;
 
-class Locales
+class locales
 {
     public static $languages = array(
         'pl' => array('lang' => 'pl', 'locale' => 'pl_PL.utf8', 'name' => 'Polish'),
@@ -20,8 +20,9 @@ class Locales
     public static function get_required_locales()
     {
         $arr = array('POSIX');
-        foreach (self::$languages as $key => $value)
+        foreach (self::$languages as $key => $value) {
             $arr[] = $value['locale'];
+        }
         return $arr;
     }
 
@@ -31,26 +32,29 @@ class Locales
     public static function get_installed_locales()
     {
         $arr = array();
-        foreach (explode("\n", shell_exec("locale -a")) as $item)
-            if ($item)
+        foreach (explode("\n", shell_exec("locale -a")) as $item) {
+            if ($item) {
                 $arr[] = $item;
+            }
+        }
         return $arr;
     }
 
     private static function get_locale_for_language($lang)
     {
-        if (isset(self::$languages[$lang]))
+        if (isset(self::$languages[$lang])) {
             return self::$languages[$lang]['locale'];
+        }
         return null;
     }
 
     public static function get_best_locale($langprefs)
     {
-        foreach ($langprefs as $lang)
-        {
+        foreach ($langprefs as $lang) {
             $locale = self::get_locale_for_language($lang);
-            if ($locale != null)
+            if ($locale != null) {
                 return $locale;
+            }
         }
         return self::$languages['en']['locale'];
     }

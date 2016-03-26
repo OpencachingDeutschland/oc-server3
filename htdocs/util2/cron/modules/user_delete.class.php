@@ -11,13 +11,12 @@ checkJob(new user_delete());
 
 class user_delete
 {
-	var $name = 'user_delete';
-	var $interval = 86400;
+    public $name = 'user_delete';
+    public $interval = 86400;
 
-	function run()
-	{
-		sql("set @allowdelete=1");
-		sql("DELETE FROM `user` WHERE `date_created`<DATE_ADD(NOW(), INTERVAL -21 DAY) AND `is_active_flag`=0 AND `activation_code`!=''");
-	}
+    public function run()
+    {
+        sql("set @allowdelete=1");
+        sql("DELETE FROM `user` WHERE `date_created`<DATE_ADD(NOW(), INTERVAL -21 DAY) AND `is_active_flag`=0 AND `activation_code`!=''");
+    }
 }
-?>

@@ -19,7 +19,8 @@ class HTMLPurifier_AttrCollections
      * @param $attr_types HTMLPurifier_AttrTypes instance
      * @param $modules Hash array of HTMLPurifier_HTMLModule members
      */
-    public function __construct($attr_types, $modules) {
+    public function __construct($attr_types, $modules)
+    {
         // load extensions from the modules
         foreach ($modules as $module) {
             foreach ($module->attr_collections as $coll_i => $coll) {
@@ -51,18 +52,27 @@ class HTMLPurifier_AttrCollections
      * all inclusions specified by the zero index.
      * @param &$attr Reference to attribute array
      */
-    public function performInclusions(&$attr) {
-        if (!isset($attr[0])) return;
+    public function performInclusions(&$attr)
+    {
+        if (!isset($attr[0])) {
+            return;
+        }
         $merge = $attr[0];
         $seen  = array(); // recursion guard
         // loop through all the inclusions
         for ($i = 0; isset($merge[$i]); $i++) {
-            if (isset($seen[$merge[$i]])) continue;
+            if (isset($seen[$merge[$i]])) {
+                continue;
+            }
             $seen[$merge[$i]] = true;
             // foreach attribute of the inclusion, copy it over
-            if (!isset($this->info[$merge[$i]])) continue;
+            if (!isset($this->info[$merge[$i]])) {
+                continue;
+            }
             foreach ($this->info[$merge[$i]] as $key => $value) {
-                if (isset($attr[$key])) continue; // also catches more inclusions
+                if (isset($attr[$key])) {
+                    continue;
+                } // also catches more inclusions
                 $attr[$key] = $value;
             }
             if (isset($this->info[$merge[$i]][0])) {
@@ -79,7 +89,8 @@ class HTMLPurifier_AttrCollections
      * @param &$attr Reference to attribute array
      * @param $attr_types HTMLPurifier_AttrTypes instance
      */
-    public function expandIdentifiers(&$attr, $attr_types) {
+    public function expandIdentifiers(&$attr, $attr_types)
+    {
 
         // because foreach will process new elements we add, make sure we
         // skip duplicates
@@ -87,9 +98,13 @@ class HTMLPurifier_AttrCollections
 
         foreach ($attr as $def_i => $def) {
             // skip inclusions
-            if ($def_i === 0) continue;
+            if ($def_i === 0) {
+                continue;
+            }
 
-            if (isset($processed[$def_i])) continue;
+            if (isset($processed[$def_i])) {
+                continue;
+            }
 
             // determine whether or not attribute is required
             if ($required = (strpos($def_i, '*') !== false)) {
@@ -120,9 +135,7 @@ class HTMLPurifier_AttrCollections
                 unset($attr[$def_i]);
             }
         }
-
     }
-
 }
 
 // vim: et sw=4 sts=4

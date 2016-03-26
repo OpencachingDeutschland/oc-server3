@@ -11,7 +11,7 @@ use okapi\OkapiRedirectResponse;
 use okapi\Settings;
 use okapi\OCSession;
 
-class View
+class index
 {
     public static function call()
     {
@@ -23,8 +23,7 @@ class View
         require_once($GLOBALS['rootpath']."okapi/lib/oc_session.php");
         $OC_user_id = OCSession::get_user_id();
 
-        if ($OC_user_id == null)
-        {
+        if ($OC_user_id == null) {
             $after_login = "okapi/apps/".(($langpref != Settings::get('SITELANG'))?"?langpref=".$langpref:"");
             $login_url = Settings::get('SITE_URL')."login.php?target=".urlencode($after_login);
             return new OkapiRedirectResponse($login_url);
@@ -48,8 +47,9 @@ class View
         $vars['site_name'] = Okapi::get_normalized_site_name();
         $vars['site_logo'] = Settings::get('SITE_LOGO');
         $vars['apps'] = array();
-        while ($row = Db::fetch_assoc($rs))
+        while ($row = Db::fetch_assoc($rs)) {
             $vars['apps'][] = $row;
+        }
         Db::free_result($rs);
 
         $response = new OkapiHttpResponse();

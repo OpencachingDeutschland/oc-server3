@@ -4,7 +4,7 @@ namespace okapi;
 
 use OAuthDataStore;
 
-class OkapiDataStore extends OAuthDataStore
+class datastore extends OAuthDataStore
 {
     public function lookup_consumer($consumer_key)
     {
@@ -13,8 +13,9 @@ class OkapiDataStore extends OAuthDataStore
             from okapi_consumers
             where `key` = '".Db::escape_string($consumer_key)."'
         ");
-        if (!$row)
+        if (!$row) {
             return null;
+        }
         return new OkapiConsumer($row['key'], $row['secret'], $row['name'],
             $row['url'], $row['email'], $row['bflags']);
     }
@@ -29,10 +30,10 @@ class OkapiDataStore extends OAuthDataStore
                 and token_type = '".Db::escape_string($token_type)."'
                 and `key` = '".Db::escape_string($token)."'
         ");
-        if (!$row)
+        if (!$row) {
             return null;
-        switch ($row['token_type'])
-        {
+        }
+        switch ($row['token_type']) {
             case 'request':
                 return new OkapiRequestToken($row['key'], $row['secret'],
                     $row['consumer_key'], $row['callback'], $row['user_id'],
@@ -57,8 +58,7 @@ class OkapiDataStore extends OAuthDataStore
             $timestamp,
             $nonce
         )));
-        try
-        {
+        try {
             # Time timestamp is saved separately, because we are periodically
             # removing older nonces from the database (see cronjobs).
 
@@ -71,9 +71,7 @@ class OkapiDataStore extends OAuthDataStore
                 );
             ");
             return null;
-        }
-        catch (\Exception $e)
-        {
+        } catch (\Exception $e) {
             # INSERT failed. This nonce was already used.
 
             return $nonce;
@@ -83,9 +81,10 @@ class OkapiDataStore extends OAuthDataStore
     public function new_request_token($consumer, $callback = null)
     {
         if ((preg_match("#^[a-z][a-z0-9_.-]*://#", $callback) > 0) ||
-            $callback == "oob")
-        { /* ok */ }
-        else { throw new BadRequest("oauth_callback should begin with lower case <scheme>://, or should equal 'oob'."); }
+            $callback == "oob") { /* ok */
+        } else {
+            throw new BadRequest("oauth_callback should begin with lower case <scheme>://, or should equal 'oob'.");
+        }
         $token = new OkapiRequestToken(Okapi::generate_key(20), Okapi::generate_key(40),
             $consumer->key, $callback, null, Okapi::generate_key(8, true));
         Db::execute("
@@ -111,12 +110,15 @@ class OkapiDataStore extends OAuthDataStore
 
     public function new_access_token($token, $consumer, $verifier = null)
     {
-        if ($token->consumer_key != $consumer->key)
+        if ($token->consumer_key != $consumer->key) {
             throw new BadRequest("Request Token given is not associated with the Consumer who signed the request.");
-        if (!$token->authorized_by_user_id)
+        }
+        if (!$token->authorized_by_user_id) {
             throw new BadRequest("Request Token given has not been authorized.");
-        if ($token->verifier != $verifier)
+        }
+        if ($token->verifier != $verifier) {
             throw new BadRequest("Invalid verifier.");
+        }
 
         # Invalidate the Request Token.
 
@@ -138,15 +140,12 @@ class OkapiDataStore extends OAuthDataStore
                 and user_id = '".Db::escape_string($token->authorized_by_user_id)."'
                 and consumer_key = '".Db::escape_string($consumer->key)."'
         ");
-        if ($row)
-        {
+        if ($row) {
             # Use existing Access Token
 
             $access_token = new OkapiAccessToken($row['key'], $row['secret'],
                 $consumer->key, $token->authorized_by_user_id);
-        }
-        else
-        {
+        } else {
             # Generate a new Access Token.
 
             $access_token = new OkapiAccessToken(Okapi::generate_key(20), Okapi::generate_key(40),

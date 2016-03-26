@@ -17,7 +17,7 @@ use okapi\OkapiAccessToken;
 use okapi\services\caches\search\SearchAssistant;
 use okapi\services\attrs\AttrHelper;
 
-class WebService
+class geocaches
 {
     public static function options()
     {
@@ -40,33 +40,42 @@ class WebService
     public static function call(OkapiRequest $request)
     {
         $cache_codes = $request->get_parameter('cache_codes');
-        if ($cache_codes === null) throw new ParamMissing('cache_codes');
-        if ($cache_codes === "")
-        {
+        if ($cache_codes === null) {
+            throw new ParamMissing('cache_codes');
+        }
+        if ($cache_codes === "") {
             # Issue 106 requires us to allow empty list of cache codes to be passed into this method.
             # All of the queries below have to be ready for $cache_codes to be empty!
             $cache_codes = array();
-        }
-        else
+        } else {
             $cache_codes = explode("|", $cache_codes);
+        }
 
-        if ((count($cache_codes) > 500) && (!$request->skip_limits))
+        if ((count($cache_codes) > 500) && (!$request->skip_limits)) {
             throw new InvalidParam('cache_codes', "Maximum allowed number of referenced ".
                 "caches is 500. You provided ".count($cache_codes)." cache codes.");
-        if (count($cache_codes) != count(array_unique($cache_codes)))
+        }
+        if (count($cache_codes) != count(array_unique($cache_codes))) {
             throw new InvalidParam('cache_codes', "Duplicate codes detected (make sure each cache is referenced only once).");
+        }
 
         $langpref = $request->get_parameter('langpref');
-        if (!$langpref) $langpref = "en";
+        if (!$langpref) {
+            $langpref = "en";
+        }
         $langpref .= "|".Settings::get('SITELANG');
         $langpref = explode("|", $langpref);
 
         $fields = $request->get_parameter('fields');
-        if (!$fields) $fields = "code|name|location|type|status";
+        if (!$fields) {
+            $fields = "code|name|location|type|status";
+        }
         $fields = explode("|", $fields);
-        foreach ($fields as $field)
-            if (!in_array($field, self::$valid_field_names))
+        foreach ($fields as $field) {
+            if (!in_array($field, self::$valid_field_names)) {
                 throw new InvalidParam('fields', "'$field' is not a valid field code.");
+            }
+        }
 
         # Some fields need to be temporarily included whenever the "description"
         # or "attribution_note" field are included. That's a little ugly, but
@@ -79,79 +88,87 @@ class WebService
             || in_array('hint', $fields) || in_array('hints', $fields)
             || in_array('hint2', $fields) || in_array('hints2', $fields)
             || in_array('attribution_note', $fields)
-        )
-        {
-            if (!in_array('owner', $fields))
-            {
+        ) {
+            if (!in_array('owner', $fields)) {
                 $fields[] = "owner";
                 $fields_to_remove_later[] = "owner";
             }
-            if (!in_array('internal_id', $fields))
-            {
+            if (!in_array('internal_id', $fields)) {
                 $fields[] = "internal_id";
                 $fields_to_remove_later[] = "internal_id";
             }
         }
 
         $attribution_append = $request->get_parameter('attribution_append');
-        if (!$attribution_append) $attribution_append = 'full';
-        if (!in_array($attribution_append, array('none', 'static', 'full')))
+        if (!$attribution_append) {
+            $attribution_append = 'full';
+        }
+        if (!in_array($attribution_append, array('none', 'static', 'full'))) {
             throw new InvalidParam('attribution_append');
+        }
 
         $log_fields = $request->get_parameter('log_fields');
-        if (!$log_fields) $log_fields = "uuid|date|user|type|comment";  // validation is done on call
+        if (!$log_fields) {
+            $log_fields = "uuid|date|user|type|comment";
+        }  // validation is done on call
 
         $user_uuid = $request->get_parameter('user_uuid');
-        if ($user_uuid != null)
-        {
+        if ($user_uuid != null) {
             $user_id = Db::select_value("select user_id from user where uuid='".Db::escape_string($user_uuid)."'");
-            if ($user_id == null)
+            if ($user_id == null) {
                 throw new InvalidParam('user_uuid', "User not found.");
-            if (($request->token != null) && ($request->token->user_id != $user_id))
+            }
+            if (($request->token != null) && ($request->token->user_id != $user_id)) {
                 throw new InvalidParam('user_uuid', "User does not match the Access Token used.");
-        }
-        elseif (($user_uuid == null) && ($request->token != null))
+            }
+        } elseif (($user_uuid == null) && ($request->token != null)) {
             $user_id = $request->token->user_id;
-        else
+        } else {
             $user_id = null;
+        }
 
         $lpc = $request->get_parameter('lpc');
-        if ($lpc === null) $lpc = 10;
-        if ($lpc == 'all')
+        if ($lpc === null) {
+            $lpc = 10;
+        }
+        if ($lpc == 'all') {
             $lpc = null;
-        else
-        {
-            if (!is_numeric($lpc))
+        } else {
+            if (!is_numeric($lpc)) {
                 throw new InvalidParam('lpc', "Invalid number: '$lpc'");
+            }
             $lpc = intval($lpc);
-            if ($lpc < 0)
+            if ($lpc < 0) {
                 throw new InvalidParam('lpc', "Must be a positive value.");
+            }
         }
 
         if (in_array('distance', $fields) || in_array('bearing', $fields) || in_array('bearing2', $fields)
-            || in_array('bearing3', $fields))
-        {
+            || in_array('bearing3', $fields)) {
             $tmp = $request->get_parameter('my_location');
-            if (!$tmp)
+            if (!$tmp) {
                 throw new BadRequest("When using 'distance' or 'bearing' fields, you have to supply 'my_location' parameter.");
+            }
             $parts = explode('|', $tmp);
-            if (count($parts) != 2)
+            if (count($parts) != 2) {
                 throw new InvalidParam('my_location', "Expecting 2 pipe-separated parts, got ".count($parts).".");
-            foreach ($parts as &$part_ref)
-            {
-                if (!preg_match("/^-?[0-9]+(\.?[0-9]*)$/", $part_ref))
+            }
+            foreach ($parts as &$part_ref) {
+                if (!preg_match("/^-?[0-9]+(\.?[0-9]*)$/", $part_ref)) {
                     throw new InvalidParam('my_location', "'$part_ref' is not a valid float number.");
+                }
                 $part_ref = floatval($part_ref);
             }
             list($center_lat, $center_lon) = $parts;
-            if ($center_lat > 90 || $center_lat < -90)
+            if ($center_lat > 90 || $center_lat < -90) {
                 throw new InvalidParam('current_position', "Latitudes have to be within -90..90 range.");
-            if ($center_lon > 180 || $center_lon < -180)
+            }
+            if ($center_lon > 180 || $center_lon < -180) {
                 throw new InvalidParam('current_position', "Longitudes have to be within -180..180 range.");
+            }
         }
 
-        if (Settings::get('OC_BRANCH') == 'oc.de')
-        {
+        if (Settings::get('OC_BRANCH') == 'oc.de') {
             # DE branch:
             # - Caches do not have ratings.
             # - Total numbers of founds and notfounds are kept in the "stat_caches" table.
@@ -181,9 +198,7 @@ class WebService
                     wp_oc in ('".implode("','", array_map('\okapi\Db::escape_string', $cache_codes))."')
                     and status in (1,2,3)
             ");
-        }
-        elseif (Settings::get('OC_BRANCH') == 'oc.pl')
-        {
+        } elseif (Settings::get('OC_BRANCH') == 'oc.pl') {
             # PL branch:
             # - Caches have ratings.
             # - Total numbers of found and notfounds are kept in the "caches" table.
@@ -218,22 +233,20 @@ class WebService
         $cacheid2wptcode = array();
         $owner_ids = array();
         $outdated_listings = array();
-        while ($row = Db::fetch_assoc($rs))
-        {
+        while ($row = Db::fetch_assoc($rs)) {
             $entry = array();
             $cacheid2wptcode[$row['cache_id']] = $row['wp_oc'];
-            foreach ($fields as $field)
-            {
-                switch ($field)
-                {
+            foreach ($fields as $field) {
+                switch ($field) {
                     case 'code': $entry['code'] = $row['wp_oc']; break;
                     case 'gc_code':
                         // OC software allows entering anything here, and that's what users do.
                         // We do a formal verification so that only a valid GC code is returned:
-                        if (preg_match('/^\s*[Gg][Cc][A-Za-z0-9]+\s*$/', $row['wp_gc']))
+                        if (preg_match('/^\s*[Gg][Cc][A-Za-z0-9]+\s*$/', $row['wp_gc'])) {
                             $entry['gc_code'] = strtoupper(trim($row['wp_gc']));
-                        else
+                        } else {
                             $entry['gc_code'] = null;
+                        }
                         break;
                     case 'name': $entry['name'] = $row['name']; break;
                     case 'names': $entry['names'] = array(Settings::get('SITELANG') => $row['name']); break; // for the future
@@ -282,8 +295,7 @@ class WebService
                         break;
                     case 'size':
                         # Deprecated. Leave it for backward-compatibility. See issue 155.
-                        switch (Okapi::cache_sizeid_to_size2($row['size']))
-                        {
+                        switch (Okapi::cache_sizeid_to_size2($row['size'])) {
                             case 'none': $entry['size'] = null; break;
                             case 'nano': $entry['size'] = 1.0; break;  # same as micro
                             case 'micro': $entry['size'] = 1.0; break;
@@ -302,20 +314,27 @@ class WebService
                     case 'trip_time':
                         # search time is entered in hours:minutes and converted to decimal hours,
                         # which can produce lots of unneeded decimal places; 2 of them are sufficient here
-                        $entry['trip_time'] = $row['trip_time'] === null ? null : round($row['trip_time'],2); break;
+                        $entry['trip_time'] = $row['trip_time'] === null ? null : round($row['trip_time'], 2); break;
                         break;
                     case 'trip_distance':
                         # way length is entered in km as decimal fraction, but number conversions can
                         # create fake digits which should be stripped; meter precision is sufficient here
-                        $entry['trip_distance'] = $row['trip_distance'] === null ? null : round($row['trip_distance'],3); break;
+                        $entry['trip_distance'] = $row['trip_distance'] === null ? null : round($row['trip_distance'], 3); break;
                         break;
                     case 'rating':
-                        if ($row['votes'] < 3) $entry['rating'] = null;
-                        elseif ($row['score'] >= 2.2) $entry['rating'] = 5.0;
-                        elseif ($row['score'] >= 1.4) $entry['rating'] = 4.0;
-                        elseif ($row['score'] >= 0.1) $entry['rating'] = 3.0;
-                        elseif ($row['score'] >= -1.0) $entry['rating'] = 2.0;
-                        else $entry['rating'] = 1.0;
+                        if ($row['votes'] < 3) {
+                            $entry['rating'] = null;
+                        } elseif ($row['score'] >= 2.2) {
+                            $entry['rating'] = 5.0;
+                        } elseif ($row['score'] >= 1.4) {
+                            $entry['rating'] = 4.0;
+                        } elseif ($row['score'] >= 0.1) {
+                            $entry['rating'] = 3.0;
+                        } elseif ($row['score'] >= -1.0) {
+                            $entry['rating'] = 2.0;
+                        } else {
+                            $entry['rating'] = 1.0;
+                        }
                         break;
                     case 'rating_votes': $entry['rating_votes'] = $row['votes'] + 0; break;
                     case 'recommendations': $entry['recommendations'] = $row['topratings'] + 0; break;
@@ -350,25 +369,25 @@ class WebService
                 }
             }
             $results[$row['wp_oc']] = $entry;
-            if ($row['listing_outdated'] > 0)
+            if ($row['listing_outdated'] > 0) {
                 $outdated_listings[] = $row['wp_oc'];
+            }
         }
         Db::free_result($rs);
 
         # owner
 
-        if (in_array('owner', $fields) && (count($results) > 0))
-        {
+        if (in_array('owner', $fields) && (count($results) > 0)) {
             $rs = Db::query("
                 select user_id, uuid, username
                 from user
                 where user_id in ('".implode("','", array_map('\okapi\Db::escape_string', array_values($owner_ids)))."')
             ");
             $tmp = array();
-            while ($row = Db::fetch_assoc($rs))
+            while ($row = Db::fetch_assoc($rs)) {
                 $tmp[$row['user_id']] = $row;
-            foreach ($results as $cache_code => &$result_ref)
-            {
+            }
+            foreach ($results as $cache_code => &$result_ref) {
                 $row = $tmp[$owner_ids[$cache_code]];
                 $result_ref['owner'] = array(
                     'uuid' => $row['uuid'],
@@ -380,10 +399,10 @@ class WebService
 
         # is_found
 
-        if (in_array('is_found', $fields))
-        {
-            if ($user_id == null)
+        if (in_array('is_found', $fields)) {
+            if ($user_id == null) {
                 throw new BadRequest("Either 'user_uuid' parameter OR Level 3 Authentication is required to access 'is_found' field.");
+            }
             $tmp = Db::select_column("
                 select c.wp_oc
                 from
@@ -399,18 +418,20 @@ class WebService
                     ".((Settings::get('OC_BRANCH') == 'oc.pl') ? "and cl.deleted = 0" : "")."
             ");
             $tmp2 = array();
-            foreach ($tmp as $cache_code)
+            foreach ($tmp as $cache_code) {
                 $tmp2[$cache_code] = true;
-            foreach ($results as $cache_code => &$result_ref)
+            }
+            foreach ($results as $cache_code => &$result_ref) {
                 $result_ref['is_found'] = isset($tmp2[$cache_code]);
+            }
         }
 
         # is_not_found
 
-        if (in_array('is_not_found', $fields))
-        {
-            if ($user_id == null)
+        if (in_array('is_not_found', $fields)) {
+            if ($user_id == null) {
                 throw new BadRequest("Either 'user_uuid' parameter OR Level 3 Authentication is required to access 'is_not_found' field.");
+            }
             $tmp = Db::select_column("
                 select c.wp_oc
                 from
@@ -423,18 +444,20 @@ class WebService
                     ".((Settings::get('OC_BRANCH') == 'oc.pl') ? "and cl.deleted = 0" : "")."
             ");
             $tmp2 = array();
-            foreach ($tmp as $cache_code)
+            foreach ($tmp as $cache_code) {
                 $tmp2[$cache_code] = true;
-            foreach ($results as $cache_code => &$result_ref)
+            }
+            foreach ($results as $cache_code => &$result_ref) {
                 $result_ref['is_not_found'] = isset($tmp2[$cache_code]);
+            }
         }
 
         # is_watched
 
-        if (in_array('is_watched', $fields))
-        {
-            if ($request->token == null)
+        if (in_array('is_watched', $fields)) {
+            if ($request->token == null) {
                 throw new BadRequest("Level 3 Authentication is required to access 'is_watched' field.");
+            }
             $tmp = Db::select_column("
                 select c.wp_oc
                 from
@@ -445,13 +468,13 @@ class WebService
                     and cw.user_id = '".Db::escape_string($request->token->user_id)."'
             ");
             $tmp2 = array();
-            foreach ($tmp as $cache_code)
+            foreach ($tmp as $cache_code) {
                 $tmp2[$cache_code] = true;
+            }
 
             # OCDE caches can also be indirectly watched by watching cache lists:
-            if (Settings::get('OC_BRANCH') == 'oc.de')
-            {
-              $tmp = Db::select_column("
+            if (Settings::get('OC_BRANCH') == 'oc.de') {
+                $tmp = Db::select_column("
                   select c.wp_oc
                   from
                       caches c,
@@ -462,20 +485,22 @@ class WebService
                       and clw.cache_list_id = cli.cache_list_id
                       and clw.user_id = '".Db::escape_string($request->token->user_id)."'
               ");
-              foreach ($tmp as $cache_code)
-                  $tmp2[$cache_code] = true;
+                foreach ($tmp as $cache_code) {
+                    $tmp2[$cache_code] = true;
+                }
             }
 
-            foreach ($results as $cache_code => &$result_ref)
+            foreach ($results as $cache_code => &$result_ref) {
                 $result_ref['is_watched'] = isset($tmp2[$cache_code]);
+            }
         }
 
         # is_ignored
 
-        if (in_array('is_ignored', $fields))
-        {
-            if ($request->token == null)
+        if (in_array('is_ignored', $fields)) {
+            if ($request->token == null) {
                 throw new BadRequest("Level 3 Authentication is required to access 'is_ignored' field.");
+            }
             $tmp = Db::select_column("
                 select c.wp_oc
                 from
@@ -486,10 +511,12 @@ class WebService
                     and ci.user_id = '".Db::escape_string($request->token->user_id)."'
             ");
             $tmp2 = array();
-            foreach ($tmp as $cache_code)
+            foreach ($tmp as $cache_code) {
                 $tmp2[$cache_code] = true;
-            foreach ($results as $cache_code => &$result_ref)
+            }
+            foreach ($results as $cache_code => &$result_ref) {
                 $result_ref['is_ignored'] = isset($tmp2[$cache_code]);
+            }
         }
 
         # Descriptions and hints.
@@ -497,13 +524,11 @@ class WebService
         if (in_array('description', $fields) || in_array('descriptions', $fields)
             || in_array('short_description', $fields) || in_array('short_descriptions', $fields)
             || in_array('hint', $fields) || in_array('hints', $fields)
-            || in_array('hint2', $fields) || in_array('hints2', $fields))
-        {
+            || in_array('hint2', $fields) || in_array('hints2', $fields)) {
             # At first, we will fill all those fields, even if user requested just one
             # of them. We will chop off the unwanted ones at the end.
 
-            foreach ($results as &$result_ref)
-            {
+            foreach ($results as &$result_ref) {
                 $result_ref['short_descriptions'] = new ArrayObject();
                 $result_ref['descriptions'] = new ArrayObject();
                 $result_ref['hints'] = new ArrayObject();
@@ -517,19 +542,16 @@ class WebService
                 from cache_desc
                 where cache_id in ('".implode("','", array_map('\okapi\Db::escape_string', array_keys($cacheid2wptcode)))."')
             ");
-            while ($row = Db::fetch_assoc($rs))
-            {
+            while ($row = Db::fetch_assoc($rs)) {
                 $cache_code = $cacheid2wptcode[$row['cache_id']];
                 // strtolower - ISO 639-1 codes are lowercase
-                if ($row['desc'])
-                {
+                if ($row['desc']) {
                     /* Note, that the "owner" and "internal_id" fields are automatically included,
                      * whenever the cache description is included. */
 
                     $tmp = Okapi::fix_oc_html($row['desc']);
 
-                    if (in_array($cache_code, $outdated_listings))
-                    {
+                    if (in_array($cache_code, $outdated_listings)) {
                         Okapi::gettext_domain_init(array_merge(array($row['language']), $langpref));
                         $tmp = (
                             "<p style='color:#c00000'><strong>".
@@ -542,8 +564,7 @@ class WebService
                         Okapi::gettext_domain_restore();
                     }
 
-                    if ($attribution_append != 'none')
-                    {
+                    if ($attribution_append != 'none') {
                         $tmp .= "\n<p><em>".
                             self::get_cache_attribution_note(
                                 $row['cache_id'], strtolower($row['language']), $langpref,
@@ -553,19 +574,16 @@ class WebService
                     }
                     $results[$cache_code]['descriptions'][strtolower($row['language'])] = $tmp;
                 }
-                if ($row['short_desc'])
-                {
+                if ($row['short_desc']) {
                     $results[$cache_code]['short_descriptions'][strtolower($row['language'])] = $row['short_desc'];
                 }
-                if ($row['hint'])
-                {
+                if ($row['hint']) {
                     $results[$cache_code]['hints'][strtolower($row['language'])] = $row['hint'];
                     $results[$cache_code]['hints2'][strtolower($row['language'])]
-                        = htmlspecialchars_decode(mb_ereg_replace("<br />", "" , $row['hint']), ENT_COMPAT);
+                        = htmlspecialchars_decode(mb_ereg_replace("<br />", "", $row['hint']), ENT_COMPAT);
                 }
             }
-            foreach ($results as &$result_ref)
-            {
+            foreach ($results as &$result_ref) {
                 $result_ref['short_description'] = Okapi::pick_best_language($result_ref['short_descriptions'], $langpref);
                 $result_ref['description'] = Okapi::pick_best_language($result_ref['descriptions'], $langpref);
                 $result_ref['hint'] = Okapi::pick_best_language($result_ref['hints'], $langpref);
@@ -577,27 +595,34 @@ class WebService
             foreach (array(
                 'short_description', 'short_descriptions', 'description', 'descriptions',
                 'hint', 'hints', 'hint2', 'hints2'
-            ) as $field)
-                if (!in_array($field, $fields))
-                    foreach ($results as &$result_ref)
+            ) as $field) {
+                if (!in_array($field, $fields)) {
+                    foreach ($results as &$result_ref) {
                         unset($result_ref[$field]);
+                    }
+                }
+            }
         }
 
         # Images.
 
-        if (in_array('images', $fields) || in_array('preview_image', $fields))
-        {
-            if (in_array('images', $fields))
-                foreach ($results as &$result_ref)
+        if (in_array('images', $fields) || in_array('preview_image', $fields)) {
+            if (in_array('images', $fields)) {
+                foreach ($results as &$result_ref) {
                     $result_ref['images'] = array();
-            if (in_array('preview_image', $fields))
-                foreach ($results as &$result_ref)
+                }
+            }
+            if (in_array('preview_image', $fields)) {
+                foreach ($results as &$result_ref) {
                     $result_ref['preview_image'] = null;
+                }
+            }
 
-            if (Db::field_exists('pictures', 'mappreview'))
+            if (Db::field_exists('pictures', 'mappreview')) {
                 $preview_field = "mappreview";
-            else
+            } else {
                 $preview_field = "0";
+            }
             $rs = Db::query("
                 select object_id, uuid, url, title, spoiler, ".$preview_field." as preview
                 from pictures
@@ -611,11 +636,9 @@ class WebService
 
             unset($sql);
             $prev_cache_code = null;
-            while ($row = Db::fetch_assoc($rs))
-            {
+            while ($row = Db::fetch_assoc($rs)) {
                 $cache_code = $cacheid2wptcode[$row['object_id']];
-                if ($cache_code != $prev_cache_code)
-                {
+                if ($cache_code != $prev_cache_code) {
                     # Group images together. Images must have unique captions within one cache.
                     self::reset_unique_captions();
                     $prev_cache_code = $cache_code;
@@ -633,26 +656,27 @@ class WebService
                     'unique_caption' => self::get_unique_caption($row['title']),
                     'is_spoiler' => ($row['spoiler'] ? true : false),
                 );
-                if (in_array('images', $fields))
+                if (in_array('images', $fields)) {
                     $results[$cache_code]['images'][] = $image;
-                if ($row['preview'] != 0 && in_array('preview_image', $fields))
+                }
+                if ($row['preview'] != 0 && in_array('preview_image', $fields)) {
                     $results[$cache_code]['preview_image'] = $image;
+                }
             }
         }
 
         # A-codes and attrnames
 
-        if (in_array('attr_acodes', $fields) || in_array('attrnames', $fields))
-        {
+        if (in_array('attr_acodes', $fields) || in_array('attrnames', $fields)) {
             # Either case, we'll need acodes. If the user didn't want them,
             # remember to remove them later.
 
-            if (!in_array('attr_acodes', $fields))
-            {
+            if (!in_array('attr_acodes', $fields)) {
                 $fields_to_remove_later[] = 'attr_acodes';
             }
-            foreach ($results as &$result_ref)
+            foreach ($results as &$result_ref) {
                 $result_ref['attr_acodes'] = array();
+            }
 
             # Load internal_attr_id => acode mapping.
 
@@ -664,12 +688,10 @@ class WebService
                 from caches_attributes
                 where cache_id in ('".implode("','", array_map('\okapi\Db::escape_string', array_keys($cacheid2wptcode)))."')
             ");
-            while ($row = Db::fetch_assoc($rs))
-            {
+            while ($row = Db::fetch_assoc($rs)) {
                 $cache_code = $cacheid2wptcode[$row['cache_id']];
                 $attr_internal_id = $row['attrib_id'];
-                if (!isset($internal2acode[$attr_internal_id]))
-                {
+                if (!isset($internal2acode[$attr_internal_id])) {
                     # Unknown attribute. Ignore.
                     continue;
                 }
@@ -679,24 +701,23 @@ class WebService
             # Now, each cache object has a list of its acodes. We can get
             # the attrnames now.
 
-            if (in_array('attrnames', $fields))
-            {
+            if (in_array('attrnames', $fields)) {
                 $acode2bestname = AttrHelper::get_acode_to_name_mapping($langpref);
-                foreach ($results as &$result_ref)
-                {
+                foreach ($results as &$result_ref) {
                     $result_ref['attrnames'] = array();
-                    foreach ($result_ref['attr_acodes'] as $acode)
+                    foreach ($result_ref['attr_acodes'] as $acode) {
                         $result_ref['attrnames'][] = $acode2bestname[$acode];
+                    }
                 }
             }
         }
 
         # Latest log entries.
 
-        if (in_array('latest_logs', $fields))
-        {
-            foreach ($results as &$result_ref)
+        if (in_array('latest_logs', $fields)) {
+            foreach ($results as &$result_ref) {
                 $result_ref['latest_logs'] = array();
+            }
 
             # Get all log IDs in proper order, then filter out the latest
             # ones. This should be the fastest technique ...
@@ -726,26 +747,21 @@ class WebService
 
             $loguuids = array();
             $log2cache_map = array();
-            if ($lpc !== null)
-            {
+            if ($lpc !== null) {
                 # User wants some of the latest logs.
                 $tmp = array();
-                while ($row = Db::fetch_assoc($rs))
+                while ($row = Db::fetch_assoc($rs)) {
                     $tmp[$row['cache_id']][] = $row;
-                foreach ($tmp as $cache_key => &$rowslist_ref)
-                {
-                    for ($i = 0; $i < min(count($rowslist_ref), $lpc); $i++)
-                    {
+                }
+                foreach ($tmp as $cache_key => &$rowslist_ref) {
+                    for ($i = 0; $i < min(count($rowslist_ref), $lpc); $i++) {
                         $loguuids[] = $rowslist_ref[$i]['uuid'];
                         $log2cache_map[$rowslist_ref[$i]['uuid']] = $cacheid2wptcode[$rowslist_ref[$i]['cache_id']];
                     }
                 }
-            }
-            else
-            {
+            } else {
                 # User wants ALL logs.
-                while ($row = Db::fetch_assoc($rs))
-                {
+                while ($row = Db::fetch_assoc($rs)) {
                     $loguuids[] = $row['uuid'];
                     $log2cache_map[$row['uuid']] = $cacheid2wptcode[$row['cache_id']];
                 }
@@ -756,10 +772,8 @@ class WebService
             # We need to retrieve logs/entry for each of the $logids. We do this in groups
             # (there is a limit for log uuids passed to logs/entries method).
 
-            try
-            {
-                foreach (Okapi::make_groups($loguuids, 500) as $subset)
-                {
+            try {
+                foreach (Okapi::make_groups($loguuids, 500) as $subset) {
                     $entries = OkapiServiceRunner::call(
                         "services/logs/entries",
                         new OkapiInternalRequest(
@@ -769,21 +783,16 @@ class WebService
                             )
                         )
                     );
-                    foreach ($subset as $log_uuid)
-                    {
-                        if ($entries[$log_uuid])
+                    foreach ($subset as $log_uuid) {
+                        if ($entries[$log_uuid]) {
                             $results[$log2cache_map[$log_uuid]]['latest_logs'][] = $entries[$log_uuid];
+                        }
                     }
                 }
-            }
-            catch (Exception $e)
-            {
-                if (($e instanceof InvalidParam) && ($e->paramName == 'fields'))
-                {
+            } catch (Exception $e) {
+                if (($e instanceof InvalidParam) && ($e->paramName == 'fields')) {
                     throw new InvalidParam('log_fields', $e->whats_wrong_about_it);
-                }
-                else
-                {
+                } else {
                     /* Something is wrong with OUR code. */
                     throw new Exception($e);
                 }
@@ -792,14 +801,14 @@ class WebService
 
         # My notes
 
-        if (in_array('my_notes', $fields))
-        {
-            if ($request->token == null)
+        if (in_array('my_notes', $fields)) {
+            if ($request->token == null) {
                 throw new BadRequest("Level 3 Authentication is required to access 'my_notes' field.");
-            foreach ($results as &$result_ref)
+            }
+            foreach ($results as &$result_ref) {
                 $result_ref['my_notes'] = null;
-            if (Settings::get('OC_BRANCH') == 'oc.pl')
-            {
+            }
+            if (Settings::get('OC_BRANCH') == 'oc.pl') {
                 # OCPL uses cache_notes table to store notes.
 
                 $rs = Db::query("
@@ -810,9 +819,7 @@ class WebService
                         and user_id = '".Db::escape_string($request->token->user_id)."'
                     group by cache_id
                 ");
-            }
-            else
-            {
+            } else {
                 # OCDE uses coordinates table (with type == 2) to store notes (this is somewhat weird).
 
                 $rs = Db::query("
@@ -825,15 +832,13 @@ class WebService
                     group by cache_id
                 ");
             }
-            while ($row = Db::fetch_assoc($rs))
-            {
+            while ($row = Db::fetch_assoc($rs)) {
                 # This one is plain-text. We may add my_notes_html for those who want it in HTML.
                 $results[$cacheid2wptcode[$row['cache_id']]]['my_notes'] = strip_tags($row['desc']);
             }
         }
 
-        if (in_array('trackables', $fields))
-        {
+        if (in_array('trackables', $fields)) {
             # Currently we support Geokrety only. But this interface should remain
             # compatible. In future, other trackables might be returned the same way.
 
@@ -850,15 +855,15 @@ class WebService
                     and gkiw.wp in ('".implode("','", array_map('\okapi\Db::escape_string', $cache_codes))."')
             ");
             $trs = array();
-            while ($row = Db::fetch_assoc($rs))
+            while ($row = Db::fetch_assoc($rs)) {
                 $trs[$row['cache_code']][] = $row;
-            foreach ($results as $cache_code => &$result_ref)
-            {
+            }
+            foreach ($results as $cache_code => &$result_ref) {
                 $result_ref['trackables'] = array();
-                if (!isset($trs[$cache_code]))
+                if (!isset($trs[$cache_code])) {
                     continue;
-                foreach ($trs[$cache_code] as $t)
-                {
+                }
+                foreach ($trs[$cache_code] as $t) {
                     $result_ref['trackables'][] = array(
                         'code' => 'GK'.str_pad(strtoupper(dechex($t['gk_id'])), 4, "0", STR_PAD_LEFT),
                         'name' => $t['name'],
@@ -868,16 +873,13 @@ class WebService
             }
             unset($trs);
         }
-        if (in_array('trackables_count', $fields))
-        {
-            if (in_array('trackables', $fields))
-            {
+        if (in_array('trackables_count', $fields)) {
+            if (in_array('trackables', $fields)) {
                 # We already got all trackables data, no need to query database again.
-                foreach ($results as $cache_code => &$result_ref)
+                foreach ($results as $cache_code => &$result_ref) {
                     $result_ref['trackables_count'] = count($result_ref['trackables']);
-            }
-            else
-            {
+                }
+            } else {
                 $rs = Db::query("
                     select wp as cache_code, count(*) as count
                     from gk_item_waypoint
@@ -885,14 +887,15 @@ class WebService
                     group by wp
                 ");
                 $tr_counts = new ArrayObject();
-                while ($row = Db::fetch_assoc($rs))
+                while ($row = Db::fetch_assoc($rs)) {
                     $tr_counts[$row['cache_code']] = $row['count'];
-                foreach ($results as $cache_code => &$result_ref)
-                {
-                    if (isset($tr_counts[$cache_code]))
+                }
+                foreach ($results as $cache_code => &$result_ref) {
+                    if (isset($tr_counts[$cache_code])) {
                         $result_ref['trackables_count'] = $tr_counts[$cache_code] + 0;
-                    else
+                    } else {
                         $result_ref['trackables_count'] = 0;
+                    }
                 }
                 unset($tr_counts);
             }
@@ -900,11 +903,9 @@ class WebService
 
         # Alternate/Additional waypoints.
 
-        if (in_array('alt_wpts', $fields))
-        {
+        if (in_array('alt_wpts', $fields)) {
             $internal_wpt_type_id2names = array();
-            if (Settings::get('OC_BRANCH') == 'oc.de')
-            {
+            if (Settings::get('OC_BRANCH') == 'oc.de') {
                 $rs = Db::query("
                     select
                         ct.id,
@@ -914,30 +915,28 @@ class WebService
                         coordinates_type ct
                         left join sys_trans_text stt on stt.trans_id = ct.trans_id
                 ");
-                while ($row = Db::fetch_assoc($rs))
+                while ($row = Db::fetch_assoc($rs)) {
                     $internal_wpt_type_id2names[$row['id']][$row['language']] = $row['text'];
+                }
                 Db::free_result($rs);
-            }
-            else
-            {
+            } else {
                 $rs = Db::query("
                     select id, pl, en
                     from waypoint_type
                     where id > 0
                 ");
-                while ($row = Db::fetch_assoc($rs))
-                {
+                while ($row = Db::fetch_assoc($rs)) {
                     $internal_wpt_type_id2names[$row['id']]['pl'] = $row['pl'];
                     $internal_wpt_type_id2names[$row['id']]['en'] = $row['en'];
                 }
             }
 
-            foreach ($results as &$result_ref)
+            foreach ($results as &$result_ref) {
                 $result_ref['alt_wpts'] = array();
+            }
             $cache_codes_escaped_and_imploded = "'".implode("','", array_map('\okapi\Db::escape_string', array_keys($cacheid2wptcode)))."'";
 
-            if (Settings::get('OC_BRANCH') == 'oc.pl')
-            {
+            if (Settings::get('OC_BRANCH') == 'oc.pl') {
                 # OCPL uses 'waypoints' table to store additional waypoints and defines
                 # waypoint types in 'waypoint_type' table.
                 # OCPL also have a special 'status' field to denote a hidden waypoint
@@ -968,9 +967,7 @@ class WebService
                         and status = 1
                     order by cache_id, stage, `desc`
                 ");
-            }
-            else
-            {
+            } else {
                 # OCDE uses 'coordinates' table (with type=1) to store additional waypoints
                 # and defines waypoint types in 'coordinates_type' table.
                 # All additional waypoints are public.
@@ -1005,15 +1002,12 @@ class WebService
                 ");
             }
 
-            foreach ($cacheid2waypoints as $cache_id => $waypoints)
-            {
+            foreach ($cacheid2waypoints as $cache_id => $waypoints) {
                 $cache_code = $cacheid2wptcode[$cache_id];
                 $wpt_format = $cache_code."-%0".strlen(count($waypoints))."d";
                 $index = 0;
-                foreach ($waypoints as $row)
-                {
-                    if (!isset($internal_wpt_type_id2names[$row['internal_type_id']]))
-                    {
+                foreach ($waypoints as $row) {
+                    if (!isset($internal_wpt_type_id2names[$row['internal_type_id']])) {
                         # Sanity check. Waypoints of undefined type won't be accessible via OKAPI.
                         # See issue 219.
                         continue;
@@ -1032,11 +1026,9 @@ class WebService
 
             # Issue #298 - User coordinates implemented in oc.pl
             # Issue #305 - User coordinates implemented in oc.de
-            if ($request->token != null)
-            {
+            if ($request->token != null) {
                 # Query DB for user provided coordinates
-                if (Settings::get('OC_BRANCH') == 'oc.pl')
-                {
+                if (Settings::get('OC_BRANCH') == 'oc.pl') {
                     $cacheid2user_coords = Db::select_group_by('cache_id', "
                         select
                             cache_id, longitude, latitude
@@ -1059,11 +1051,9 @@ class WebService
                             and latitude != 0
                     ");
                 }
-                foreach ($cacheid2user_coords as $cache_id => $waypoints)
-                {
+                foreach ($cacheid2user_coords as $cache_id => $waypoints) {
                     $cache_code = $cacheid2wptcode[$cache_id];
-                    foreach ($waypoints as $row)
-                    {
+                    foreach ($waypoints as $row) {
                         # there should be only one user waypoint per cache...
                         $results[$cache_code]['alt_wpts'][] = array(
                             'name' => $cache_code.'-USER-COORDS',
@@ -1083,13 +1073,11 @@ class WebService
 
         # Country and/or state.
 
-        if (in_array('country', $fields) || in_array('state', $fields))
-        {
+        if (in_array('country', $fields) || in_array('state', $fields)) {
             $countries = array();
             $states = array();
 
-            if (Settings::get('OC_BRANCH') == 'oc.de')
-            {
+            if (Settings::get('OC_BRANCH') == 'oc.de') {
                 # OCDE:
                 #  - cache_location entries are created by a cronjob *after* listing the
                 #      caches and may not yet exist.
@@ -1115,8 +1103,9 @@ class WebService
                         c.wp_oc in ('".implode("','", array_map('\okapi\Db::escape_string', $cache_codes))."')
                 ");
                 $country_codes2names = array();
-                while ($row = Db::fetch_assoc($rs))
+                while ($row = Db::fetch_assoc($rs)) {
                     $country_codes2names[$row['country']][$row['language']] = $row['text'];
+                }
                 Db::free_result($rs);
 
                 # get geocache countries and states
@@ -1131,18 +1120,16 @@ class WebService
                     where
                         c.wp_oc in ('".implode("','", array_map('\okapi\Db::escape_string', $cache_codes))."')
                 ");
-                while ($row = Db::fetch_assoc($rs))
-                {
-                    if (!isset($country_codes2names[$row['country_code']]))
+                while ($row = Db::fetch_assoc($rs)) {
+                    if (!isset($country_codes2names[$row['country_code']])) {
                         $countries[$row['cache_code']] = '';
-                    else
+                    } else {
                         $countries[$row['cache_code']] = Okapi::pick_best_language($country_codes2names[$row['country_code']], $langpref);
+                    }
                     $states[$row['cache_code']] = $row['state'];
                 }
                 Db::free_result($rs);
-            }
-            else
-            {
+            } else {
                 # OCPL:
                 #  - cache_location data is entered by the user.
                 #  - The state is in adm3 field.
@@ -1160,23 +1147,22 @@ class WebService
                         c.wp_oc in ('".implode("','", array_map('\okapi\Db::escape_string', $cache_codes))."')
                         and c.cache_id = cl.cache_id
                 ");
-                while ($row = Db::fetch_assoc($rs))
-                {
+                while ($row = Db::fetch_assoc($rs)) {
                     $countries[$row['cache_code']] = $row['country'];
                     $states[$row['cache_code']] = $row['state'];
                 }
                 Db::free_result($rs);
             }
 
-            if (in_array('country', $fields))
-            {
-                foreach ($results as $cache_code => &$row_ref)
+            if (in_array('country', $fields)) {
+                foreach ($results as $cache_code => &$row_ref) {
                     $row_ref['country'] = isset($countries[$cache_code]) ? $countries[$cache_code] : null;
+                }
             }
-            if (in_array('state', $fields))
-            {
-                foreach ($results as $cache_code => &$row_ref)
+            if (in_array('state', $fields)) {
+                foreach ($results as $cache_code => &$row_ref) {
                     $row_ref['state'] = isset($states[$cache_code]) ? $states[$cache_code] : null;
+                }
             }
             unset($countries);
             unset($states);
@@ -1184,27 +1170,25 @@ class WebService
 
         # Attribution note
 
-        if (in_array('attribution_note', $fields))
-        {
+        if (in_array('attribution_note', $fields)) {
             /* Note, that the "owner" and "internal_id" fields are automatically included,
              * whenever the attribution_note is included. */
 
-            foreach ($results as $cache_code => &$result_ref)
+            foreach ($results as $cache_code => &$result_ref) {
                 $result_ref['attribution_note'] =
                     self::get_cache_attribution_note(
                         $result_ref['internal_id'], $langpref[0], $langpref,
                         $results[$cache_code]['owner'], 'full'
                     );
+            }
         }
 
         # Protection areas
 
-        if (in_array('protection_areas', $fields))
-        {
+        if (in_array('protection_areas', $fields)) {
             $cache_ids_escaped_and_imploded = "'".implode("','", array_map('\okapi\Db::escape_string', array_keys($cacheid2wptcode)))."'";
 
-            if (Settings::get('OC_BRANCH') == 'oc.de')
-            {
+            if (Settings::get('OC_BRANCH') == 'oc.de') {
                 $rs = Db::query("
                     select
                         c.wp_oc as cache_code,
@@ -1220,10 +1204,8 @@ class WebService
                     group by npa_areas.type_id, npa_areas.name
                     order by npa_types.ordinal
                 ");
-            }
-            else if (Settings::get('ORIGIN_URL') == 'http://opencaching.pl/' ||
-                     Settings::get('ORIGIN_URL') == 'http://www.opencaching.nl/')
-            {
+            } elseif (Settings::get('ORIGIN_URL') == 'http://opencaching.pl/' ||
+                     Settings::get('ORIGIN_URL') == 'http://www.opencaching.nl/') {
                 # Current OCPL table definitions use collation 'latin1' for parkipl
                 # and 'utf8' for np_areas. Union needs identical collations.
                 # To be sure, we convert both to utf8.
@@ -1254,21 +1236,18 @@ class WebService
                         c.cache_id in (".$cache_ids_escaped_and_imploded.")
                         and cache_npa_areas.npa_id != 0
                     ");
-            }
-            else
-            {
+            } else {
                 # OC.US and .UK do not have a 'parkipl' table.
                 # OC.US has a 'us_parks' table instead.
                 # Natura 2000 is Europe-only.
                 $rs = null;
             }
 
-            foreach ($results as &$result_ref)
+            foreach ($results as &$result_ref) {
                 $result_ref['protection_areas'] = array();
-            if ($rs)
-            {
-                while ($row = Db::fetch_assoc($rs))
-                {
+            }
+            if ($rs) {
+                while ($row = Db::fetch_assoc($rs)) {
                     $results[$row['cache_code']]['protection_areas'][] = array(
                         'type' => $row['type'],
                         'name' => $row['name'],
@@ -1279,18 +1258,21 @@ class WebService
         }
 
         # Check which cache codes were not found and mark them with null.
-        foreach ($cache_codes as $cache_code)
-            if (!isset($results[$cache_code]))
+        foreach ($cache_codes as $cache_code) {
+            if (!isset($results[$cache_code])) {
                 $results[$cache_code] = null;
+            }
+        }
 
-        if (count($fields_to_remove_later) > 0)
-        {
+        if (count($fields_to_remove_later) > 0) {
             # Some of the fields in $results were added only temporarily
             # (the Consumer did not ask for them). We will remove these fields now.
 
-            foreach ($results as &$result_ref)
-                foreach ($fields_to_remove_later as $field)
+            foreach ($results as &$result_ref) {
+                foreach ($fields_to_remove_later as $field) {
                     unset($result_ref[$field]);
+                }
+            }
         }
 
         # Order the results in the same order as the input codes were given.
@@ -1300,8 +1282,9 @@ class WebService
         # so we just have to rewrite it (sequentially).
 
         $ordered_results = new ArrayObject();
-        foreach ($cache_codes as $cache_code)
+        foreach ($cache_codes as $cache_code) {
             $ordered_results[$cache_code] = $results[$cache_code];
+        }
 
         /* Handle OCPL's "access logs" feature. */
 
@@ -1401,21 +1384,17 @@ class WebService
         $cache_url = $site_url."viewcache.php?cacheid=$cache_id";
 
         Okapi::gettext_domain_init(array_merge(array($lang), $langpref));
-        if (Settings::get('OC_BRANCH') == 'oc.pl')
-        {
+        if (Settings::get('OC_BRANCH') == 'oc.pl') {
             # This does not vary on $type (yet).
 
             $note = sprintf(
                 _("This <a href='%s'>geocache</a> description comes from the <a href='%s'>%s</a> site."),
                 $cache_url, $site_url, $site_name
             );
-        }
-        else
-        {
+        } else {
             # OC.de wants the tld in lowercase here
             $site_name = ucfirst(strtolower($site_name));
-            if ($type == 'full')
-            {
+            if ($type == 'full') {
                 $note = sprintf(
                     _(
                         "&copy; <a href='%s'>%s</a>, <a href='%s'>%s</a>, ".
@@ -1424,9 +1403,7 @@ class WebService
                     ),
                     $owner['profile_url'], $owner['username'], $cache_url, $site_name, strftime('%x')
                 );
-            }
-            elseif ($type == 'static')
-            {
+            } elseif ($type == 'static') {
                 $note = sprintf(
                     _(
                         "&copy; <a href='%s'>%s</a>, <a href='%s'>%s</a>, ".

@@ -1,12 +1,13 @@
 <?php
-	// Unicode Reminder メモ
+    // Unicode Reminder メモ
 
-	if (!isset($maildomain)) $maildomain = 'opencaching.de';
+    if (!isset($maildomain)) {
+        $maildomain = 'opencaching.de';
+    }
 
-	$mailfrom = 'noreply@' . $maildomain;
+    $mailfrom = 'noreply@' . $maildomain;
 
-	$debug = false;
-	$debug_mailto = 'abc@xyz.de';
-	
-	$watchpid = $rootpath . 'cache/watch.pid';
-?>
+    $debug = false;
+    $debug_mailto = 'abc@xyz.de';
+    
+    $watchpid = $rootpath . 'cache/watch.pid';

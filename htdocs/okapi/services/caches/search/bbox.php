@@ -11,7 +11,7 @@ use okapi\ParamMissing;
 use okapi\InvalidParam;
 use okapi\services\caches\search\SearchAssistant;
 
-class WebService
+class bbox
 {
     public static function options()
     {
@@ -30,26 +30,32 @@ class WebService
         # It's much easier to grasp their meaning this way.
 
         $tmp = $request->get_parameter('bbox');
-        if (!$tmp)
+        if (!$tmp) {
             throw new ParamMissing('bbox');
+        }
         $parts = explode('|', $tmp);
-        if (count($parts) != 4)
+        if (count($parts) != 4) {
             throw new InvalidParam('bbox', "Expecting 4 pipe-separated parts, got ".count($parts).".");
-        foreach ($parts as &$part_ref)
-        {
-            if (!preg_match("/^-?[0-9]+(\.?[0-9]*)$/", $part_ref))
+        }
+        foreach ($parts as &$part_ref) {
+            if (!preg_match("/^-?[0-9]+(\.?[0-9]*)$/", $part_ref)) {
                 throw new InvalidParam('bbox', "'$part_ref' is not a valid float number.");
+            }
             $part_ref = floatval($part_ref);
         }
         list($bbsouth, $bbwest, $bbnorth, $bbeast) = $parts;
-        if ($bbnorth <= $bbsouth)
+        if ($bbnorth <= $bbsouth) {
             throw new InvalidParam('bbox', "Northern edge must be situated to the north of the southern edge.");
-        if ($bbeast == $bbwest)
+        }
+        if ($bbeast == $bbwest) {
             throw new InvalidParam('bbox', "Eastern edge longitude is the same as the western one.");
-        if ($bbnorth > 90 || $bbnorth < -90 || $bbsouth > 90 || $bbsouth < -90)
+        }
+        if ($bbnorth > 90 || $bbnorth < -90 || $bbsouth > 90 || $bbsouth < -90) {
             throw new InvalidParam('bbox', "Latitudes have to be within -90..90 range.");
-        if ($bbeast > 180 || $bbeast < -180 || $bbwest > 180 || $bbwest < -180)
+        }
+        if ($bbeast > 180 || $bbeast < -180 || $bbwest > 180 || $bbwest < -180) {
             throw new InvalidParam('bbox', "Longitudes have to be within -180..180 range.");
+        }
 
         # Construct SQL conditions for the specified bounding box.
 
@@ -64,16 +70,13 @@ class WebService
             $lat >= '".Db::escape_string($bbsouth)."'
             and $lat < '".Db::escape_string($bbnorth)."'
         )";
-        if ($bbeast > $bbwest)
-        {
+        if ($bbeast > $bbwest) {
             # Easy one.
             $where_conds[] = "(
                 $lon >= '".Db::escape_string($bbwest)."'
                 and $lon < '".Db::escape_string($bbeast)."'
             )";
-        }
-        else
-        {
+        } else {
             # We'll have to assume that this bbox goes through the 180-degree meridian.
             # For example, $bbwest = 179 and $bbeast = -179.
             $where_conds[] = "(

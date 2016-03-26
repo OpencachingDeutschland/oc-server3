@@ -25,11 +25,11 @@
 		</table>
   <div id="content">
 		<?php
-			// no references to any other PHP code here except $errtitle and $errmsg, to minimize 
-			// possibilities of error recursions
+            // no references to any other PHP code here except $errtitle and $errmsg, to minimize 
+            // possibilities of error recursions
 
-			echo "<h1>" . $errtitle . "</h1>";
-			echo '<p>Entschuldigung, bei der Darstellung der Seite ist ein intener Fehler aufgetreten.
+            echo "<h1>" . $errtitle . "</h1>";
+            echo '<p>Entschuldigung, bei der Darstellung der Seite ist ein intener Fehler aufgetreten.
 			      Falls dieses Problem für längere Zeit bestehen sollte, informiere uns bitte per
 			      <a href="mailto:kontakt@opencaching.de">Email</a>.</p>
 			      <p class="errormsg">' . $errmsg  . '</p>
@@ -38,7 +38,7 @@
 			      <p><br /><br /><em>An error occured while displaying the requested page.
 			      If this problem persists for a longer time, please inform us via
 			      <a href="mailto:kontakt@opencaching.de">email</a>.</em></p>';
-		?>
+        ?>
   </div>
 	</body>
 </html>

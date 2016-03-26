@@ -20,7 +20,6 @@ abstract class HTMLPurifier_Strategy
      * @returns Processed array of token objects.
      */
     abstract public function execute($tokens, $config, $context);
-
 }
 
 // vim: et sw=4 sts=4

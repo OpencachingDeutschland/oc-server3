@@ -13,7 +13,7 @@ use okapi\OkapiServiceRunner;
 use okapi\OkapiInternalRequest;
 use okapi\Settings;
 
-class WebService
+class stats
 {
     public static function options()
     {
@@ -26,8 +26,7 @@ class WebService
     {
         $cachekey = "apisrv/stats";
         $result = Cache::get($cachekey);
-        if (!$result)
-        {
+        if (!$result) {
             $result = array(
                 'cache_count' => 0 + Db::select_value("
                     select count(*) from caches where status in (1,2,3)

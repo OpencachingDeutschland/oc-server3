@@ -1,26 +1,26 @@
 <?php
 /****************************************************************************
-											./lang/de/ocstyle/log_cache.tpl.php
-															-------------------
-		begin                : July 4 2004
+                                            ./lang/de/ocstyle/log_cache.tpl.php
+                                                            -------------------
+        begin                : July 4 2004
 
-		For license information see doc/license.txt
+        For license information see doc/license.txt
  ****************************************************************************/
 
 /****************************************************************************
 
    Unicode Reminder メモ
 
-	 log a cache visit
+     log a cache visit
 
-	 template replacements:
+     template replacements:
 
-		cacheid
-		logtypeoptions
-		logdate
-		logtext
-		reset
-		submit
+        cacheid
+        logtypeoptions
+        logdate
+        logtext
+        reset
+        submit
 
  ****************************************************************************/
 ?>

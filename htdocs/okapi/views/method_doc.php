@@ -15,20 +15,17 @@ use okapi\OkapiServiceRunner;
 use okapi\OkapiInternalRequest;
 use okapi\views\menu\OkapiMenu;
 
-class View
+class method_doc
 {
     public static function call($methodname)
     {
         require_once($GLOBALS['rootpath'].'okapi/service_runner.php');
         require_once($GLOBALS['rootpath'].'okapi/views/menu.inc.php');
 
-        try
-        {
+        try {
             $method = OkapiServiceRunner::call('services/apiref/method', new OkapiInternalRequest(
                 null, null, array('name' => $methodname)));
-        }
-        catch (BadRequest $e)
-        {
+        } catch (BadRequest $e) {
             throw new Http404();
         }
         $vars = array(

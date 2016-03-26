@@ -1,51 +1,51 @@
 <?php
 /****************************************************************************
-											./lang/de/ocstyle/editcache.tpl.php
-															-------------------
-		begin                : Mon July 6 2004
+                                            ./lang/de/ocstyle/editcache.tpl.php
+                                                            -------------------
+        begin                : Mon July 6 2004
 
-		For license information see doc/license.txt
+        For license information see doc/license.txt
  ****************************************************************************/
 
 /****************************************************************************
 
    Unicode Reminder メモ
 
-	 edit a cache listing
+     edit a cache listing
 
-	 template replacement(s):
+     template replacement(s):
 
-			cacheid
-			show_all_countries
-			name
-			typeoptions
-			sizeoptions
-			selLatN
-			selLatS
-			selLonE
-			selLonW
-			lat_h
-			lat_min
-			lon_h
-			lon_min
-			lon_message
-			lat_message
-			countryoptions
-			show_all_countries_submit
-			difficultyoptions
-			terrainoptions
-			cache_descs
-			date_day
-			date_month
-			date_year
-			date_message
-			reset
-			submit
-			cacheid_urlencode
-			statusoptions
-			search_time
-			way_length
-			styleoptions
+            cacheid
+            show_all_countries
+            name
+            typeoptions
+            sizeoptions
+            selLatN
+            selLatS
+            selLonE
+            selLonW
+            lat_h
+            lat_min
+            lon_h
+            lon_min
+            lon_message
+            lat_message
+            countryoptions
+            show_all_countries_submit
+            difficultyoptions
+            terrainoptions
+            cache_descs
+            date_day
+            date_month
+            date_year
+            date_message
+            reset
+            submit
+            cacheid_urlencode
+            statusoptions
+            search_time
+            way_length
+            styleoptions
 
  ****************************************************************************/
 ?>

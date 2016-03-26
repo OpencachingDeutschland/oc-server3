@@ -11,14 +11,16 @@ class HTMLPurifier_AttrDef_CSS_ImportantDecorator extends HTMLPurifier_AttrDef
      * @param $def Definition to wrap
      * @param $allow Whether or not to allow !important
      */
-    public function __construct($def, $allow = false) {
+    public function __construct($def, $allow = false)
+    {
         $this->def = $def;
         $this->allow = $allow;
     }
     /**
      * Intercepts and removes !important if necessary
      */
-    public function validate($string, $config, $context) {
+    public function validate($string, $config, $context)
+    {
         // test for ! and important tokens
         $string = trim($string);
         $is_important = false;
@@ -32,7 +34,9 @@ class HTMLPurifier_AttrDef_CSS_ImportantDecorator extends HTMLPurifier_AttrDef
             }
         }
         $string = $this->def->validate($string, $config, $context);
-        if ($this->allow && $is_important) $string .= ' !important';
+        if ($this->allow && $is_important) {
+            $string .= ' !important';
+        }
         return $string;
     }
 }

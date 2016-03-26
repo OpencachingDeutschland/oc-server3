@@ -8,6 +8,4 @@
  *  downward compatibility
  ***************************************************************************/
 
-	include "../../util2/stats/rank.php";
-
-?>
+    include "../../util2/stats/rank.php";

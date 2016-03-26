@@ -11,7 +11,7 @@ use okapi\ParamMissing;
 use okapi\InvalidParam;
 use okapi\services\caches\search\SearchAssistant;
 
-class WebService
+class by_internal_ids
 {
     public static function options()
     {
@@ -23,14 +23,18 @@ class WebService
     public static function call(OkapiRequest $request)
     {
         $internal_ids = $request->get_parameter('internal_ids');
-        if (!$internal_ids) throw new ParamMissing('internal_ids');
+        if (!$internal_ids) {
+            throw new ParamMissing('internal_ids');
+        }
         $internal_ids = explode("|", $internal_ids);
-        if (count($internal_ids) > 500)
+        if (count($internal_ids) > 500) {
             throw new InvalidParam('internal_ids', "Maximum allowed number of referenced users ".
                 "is 500. You provided ".count($internal_ids)." references.");
+        }
         $fields = $request->get_parameter('fields');
-        if (!$fields)
+        if (!$fields) {
             throw new ParamMissing('fields');
+        }
 
         # There's no need to validate the fields parameter as the 'users'
         # method does this (it will raise a proper exception on invalid values).
@@ -41,8 +45,7 @@ class WebService
             where user_id in ('".implode("','", array_map('\okapi\Db::escape_string', $internal_ids))."')
         ");
         $internalid2useruuid = array();
-        while ($row = Db::fetch_assoc($rs))
-        {
+        while ($row = Db::fetch_assoc($rs)) {
             $internalid2useruuid[$row['user_id']] = $row['uuid'];
         }
         Db::free_result($rs);
@@ -55,12 +58,12 @@ class WebService
         # Map user_uuids to internal_ids. Also check which internal_ids were not found
         # and mark them with null.
         $results = array();
-        foreach ($internal_ids as $internal_id)
-        {
-            if (!isset($internalid2useruuid[$internal_id]))
+        foreach ($internal_ids as $internal_id) {
+            if (!isset($internalid2useruuid[$internal_id])) {
                 $results[$internal_id] = null;
-            else
+            } else {
                 $results[$internal_id] = $id_results[$internalid2useruuid[$internal_id]];
+            }
         }
 
         return Okapi::formatted_response($request, $results);

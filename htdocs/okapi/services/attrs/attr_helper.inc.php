@@ -15,7 +15,6 @@ use okapi\OkapiInternalRequest;
 use okapi\OkapiLock;
 use SimpleXMLElement;
 
-
 class AttrHelper
 {
     /**
@@ -49,21 +48,17 @@ class AttrHelper
      */
     public static function refresh_now()
     {
-        try
-        {
+        try {
             $path = $GLOBALS['rootpath']."okapi/services/attrs/attribute-definitions.xml";
             $xml = file_get_contents($path);
             self::refresh_from_string($xml);
-        }
-        catch (Exception $e)
-        {
+        } catch (Exception $e) {
             # Failed to read or parse the file (i.e. after a syntax error was
             # commited). Let's check when the last successful parse occured.
 
             self::init_from_cache(false);
 
-            if (self::$attr_dict === null)
-            {
+            if (self::$attr_dict === null) {
                 # That's bad! We don't have ANY copy of the data AND we failed
                 # to parse it. We will use a fake, empty data.
 
@@ -99,8 +94,7 @@ class AttrHelper
         # Build cache attributes dictionary
 
         $all_internal_ids = array();
-        foreach ($doc->attr as $attrnode)
-        {
+        foreach ($doc->attr as $attrnode) {
             $attr = array(
                 'acode' => (string)$attrnode['acode'],
                 'gc_equivs' => array(),
@@ -109,47 +103,45 @@ class AttrHelper
                 'descriptions' => array(),
                 'is_discontinued' => true
             );
-            foreach ($attrnode->groundspeak as $gsnode)
-            {
+            foreach ($attrnode->groundspeak as $gsnode) {
                 $attr['gc_equivs'][] = array(
                     'id' => (int)$gsnode['id'],
                     'inc' => in_array((string)$gsnode['inc'], array("true", "1")) ? 1 : 0,
                     'name' => (string)$gsnode['name']
                 );
             }
-            foreach ($attrnode->opencaching as $ocnode)
-            {
+            foreach ($attrnode->opencaching as $ocnode) {
                 /* If it is used by at least one OC node, then it's NOT discontinued. */
                 $attr['is_discontinued'] = false;
 
-                if ((string)$ocnode['schema'] == $my_schema)
-                {
+                if ((string)$ocnode['schema'] == $my_schema) {
                     /* It is used by THIS OC node. */
 
                     $internal_id = (int)$ocnode['id'];
-                    if (isset($all_internal_ids[$internal_id]))
+                    if (isset($all_internal_ids[$internal_id])) {
                         throw new Exception("The internal attribute ".$internal_id.
                             " has multiple assigments to OKAPI attributes.");
+                    }
                     $all_internal_ids[$internal_id] = true;
-                    if (!is_null($attr['internal_id']))
+                    if (!is_null($attr['internal_id'])) {
                         throw new Exception("There are multiple internal IDs for the ".
                             $attr['acode']." attribute.");
+                    }
                     $attr['internal_id'] = $internal_id;
                 }
             }
-            foreach ($attrnode->lang as $langnode)
-            {
+            foreach ($attrnode->lang as $langnode) {
                 $lang = (string)$langnode['id'];
-                foreach ($langnode->name as $namenode)
-                {
-                    if (isset($attr['names'][$lang]))
+                foreach ($langnode->name as $namenode) {
+                    if (isset($attr['names'][$lang])) {
                         throw new Exception("Duplicate ".$lang." name of attribute ".$attr['acode']);
+                    }
                     $attr['names'][$lang] = (string)$namenode;
                 }
-                foreach ($langnode->desc as $descnode)
-                {
-                    if (isset($attr['descriptions'][$lang]))
+                foreach ($langnode->desc as $descnode) {
+                    if (isset($attr['descriptions'][$lang])) {
                         throw new Exception("Duplicate ".$lang." description of attribute ".$attr['acode']);
+                    }
                     $xml = $descnode->asxml(); /* contains "<desc>" and "</desc>" */
                     $innerxml = preg_replace("/(^[^>]+>)|(<[^<]+$)/us", "", $xml);
                     $attr['descriptions'][$lang] = self::cleanup_string($innerxml);
@@ -194,25 +186,20 @@ class AttrHelper
      */
     private static function init_from_cache($allow_refreshing=true)
     {
-        if (self::$attr_dict !== null)
-        {
+        if (self::$attr_dict !== null) {
             /* Already initialized. */
             return;
         }
         $cache_key = "attrhelper/dict#".Okapi::$git_revision.self::cache_key_suffix();
         $cachedvalue = Cache::get($cache_key);
-        if ($cachedvalue === null)
-        {
+        if ($cachedvalue === null) {
             # I.e. after Okapi::$git_revision is changed, or cache got invalidated.
 
-            if ($allow_refreshing)
-            {
+            if ($allow_refreshing) {
                 self::refresh_now();
                 self::init_from_cache(false);
                 return;
-            }
-            else
-            {
+            } else {
                 $cachedvalue = array(
                     'attr_dict' => array(),
                 );
@@ -244,17 +231,18 @@ class AttrHelper
     public static function get_internal_id_to_acode_mapping()
     {
         static $mapping = null;
-        if ($mapping !== null)
+        if ($mapping !== null) {
             return $mapping;
+        }
 
         $cache_key = "attrhelper/id2acode/".Okapi::$git_revision.self::cache_key_suffix();
         $mapping = Cache::get($cache_key);
-        if (!$mapping)
-        {
+        if (!$mapping) {
             self::init_from_cache();
             $mapping = array();
-            foreach (self::$attr_dict as $acode => &$attr_ref)
+            foreach (self::$attr_dict as $acode => &$attr_ref) {
                 $mapping[$attr_ref['internal_id']] = $acode;
+            }
             Cache::set($cache_key, $mapping, self::ttl());
         }
         return $mapping;
@@ -267,18 +255,17 @@ class AttrHelper
     public static function get_acode_to_name_mapping($langpref)
     {
         static $mapping = null;
-        if ($mapping !== null)
+        if ($mapping !== null) {
             return $mapping;
+        }
 
         $cache_key = md5(serialize(array("attrhelper/acode2name", $langpref,
             Okapi::$git_revision, self::cache_key_suffix())));
         $mapping = Cache::get($cache_key);
-        if (!$mapping)
-        {
+        if (!$mapping) {
             self::init_from_cache();
             $mapping = array();
-            foreach (self::$attr_dict as $acode => &$attr_ref)
-            {
+            foreach (self::$attr_dict as $acode => &$attr_ref) {
                 $mapping[$acode] = Okapi::pick_best_language(
                     $attr_ref['names'], $langpref);
             }

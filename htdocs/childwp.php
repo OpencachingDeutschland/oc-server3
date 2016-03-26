@@ -12,8 +12,9 @@
 
   $login->verify();
 
-  if ($login->userid == 0)
-    $tpl->redirect_login();
+  if ($login->userid == 0) {
+      $tpl->redirect_login();
+  }
 
   $isSubmit = isset($_POST['submitform']);
   $redirect = isset($_POST['back']);
@@ -23,17 +24,15 @@
   $controller = new ChildWp_Controller();
   $presenter = $controller->createPresenter($tpl, $cacheManager, $handler);
 
-  if ($isSubmit && $presenter->validate())
-  {
-    $presenter->doSubmit();
-    $redirect = true;
+  if ($isSubmit && $presenter->validate()) {
+      $presenter->doSubmit();
+      $redirect = true;
   }
 
-  if ($redirect)
-    $tpl->redirect('editcache.php?cacheid=' . $presenter->getCacheId());
+  if ($redirect) {
+      $tpl->redirect('editcache.php?cacheid=' . $presenter->getCacheId());
+  }
 
   $presenter->prepare($tpl);
 
   $tpl->display();
-
-?>

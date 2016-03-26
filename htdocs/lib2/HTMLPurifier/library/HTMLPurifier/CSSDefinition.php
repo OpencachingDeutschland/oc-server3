@@ -17,8 +17,8 @@ class HTMLPurifier_CSSDefinition extends HTMLPurifier_Definition
     /**
      * Constructs the info array.  The meat of this class.
      */
-    protected function doSetup($config) {
-
+    protected function doSetup($config)
+    {
         $this->info['text-align'] = new HTMLPurifier_AttrDef_Enum(
             array('left', 'right', 'center', 'justify'), false);
 
@@ -233,7 +233,8 @@ class HTMLPurifier_CSSDefinition extends HTMLPurifier_Definition
         $this->setupConfigStuff($config);
     }
 
-    protected function doSetupProprietary($config) {
+    protected function doSetupProprietary($config)
+    {
         // Internet Explorer only scrollbar colors
         $this->info['scrollbar-arrow-color']        = new HTMLPurifier_AttrDef_CSS_Color();
         $this->info['scrollbar-base-color']         = new HTMLPurifier_AttrDef_CSS_Color();
@@ -252,12 +253,12 @@ class HTMLPurifier_CSSDefinition extends HTMLPurifier_Definition
 
         // more CSS3
         $this->info['page-break-after'] =
-        $this->info['page-break-before'] = new HTMLPurifier_AttrDef_Enum(array('auto','always','avoid','left','right'));
-        $this->info['page-break-inside'] = new HTMLPurifier_AttrDef_Enum(array('auto','avoid'));
-
+        $this->info['page-break-before'] = new HTMLPurifier_AttrDef_Enum(array('auto', 'always', 'avoid', 'left', 'right'));
+        $this->info['page-break-inside'] = new HTMLPurifier_AttrDef_Enum(array('auto', 'avoid'));
     }
 
-    protected function doSetupTricky($config) {
+    protected function doSetupTricky($config)
+    {
         $this->info['display'] = new HTMLPurifier_AttrDef_Enum(array(
             'inline', 'block', 'list-item', 'run-in', 'compact',
             'marker', 'table', 'inline-block', 'inline-table', 'table-row-group',
@@ -270,7 +271,8 @@ class HTMLPurifier_CSSDefinition extends HTMLPurifier_Definition
         $this->info['overflow'] = new HTMLPurifier_AttrDef_Enum(array('visible', 'hidden', 'auto', 'scroll'));
     }
 
-    protected function doSetupTrusted($config) {
+    protected function doSetupTrusted($config)
+    {
         $this->info['position'] = new HTMLPurifier_AttrDef_Enum(array(
             'static', 'relative', 'absolute', 'fixed'
         ));
@@ -294,7 +296,8 @@ class HTMLPurifier_CSSDefinition extends HTMLPurifier_Definition
      * @todo Refactor duplicate elements into common class (probably using
      *       composition, not inheritance).
      */
-    protected function setupConfigStuff($config) {
+    protected function setupConfigStuff($config)
+    {
 
         // setup allowed elements
         $support = "(for information on implementing this, see the ".
@@ -302,7 +305,9 @@ class HTMLPurifier_CSSDefinition extends HTMLPurifier_Definition
         $allowed_properties = $config->get('CSS.AllowedProperties');
         if ($allowed_properties !== null) {
             foreach ($this->info as $name => $d) {
-                if(!isset($allowed_properties[$name])) unset($this->info[$name]);
+                if (!isset($allowed_properties[$name])) {
+                    unset($this->info[$name]);
+                }
                 unset($allowed_properties[$name]);
             }
             // emit errors
@@ -321,7 +326,6 @@ class HTMLPurifier_CSSDefinition extends HTMLPurifier_Definition
                 }
             }
         }
-
     }
 }
 

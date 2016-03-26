@@ -12,7 +12,7 @@ use okapi\InvalidParam;
 use okapi\OkapiServiceRunner;
 use okapi\OkapiInternalRequest;
 
-class View
+class index
 {
     public static function call()
     {

@@ -14,34 +14,32 @@ use okapi\OkapiInternalRequest;
 use okapi\views\menu\OkapiMenu;
 use okapi\OkapiHttpRequest;
 
-class View
+class signup
 {
     public static function call()
     {
-        if (isset($_REQUEST['posted']))
-        {
+        if (isset($_REQUEST['posted'])) {
             $appname = isset($_REQUEST['appname']) ? $_REQUEST['appname'] : "";
             $appname = trim($appname);
             $appurl = isset($_REQUEST['appurl']) ? $_REQUEST['appurl'] : "";
             $email = isset($_REQUEST['email']) ? $_REQUEST['email'] : "";
             $accepted_terms = isset($_REQUEST['terms']) ? $_REQUEST['terms'] : "";
             $ok = false;
-            if (!$appname)
+            if (!$appname) {
                 $notice = "Please provide a valid application name.";
-            elseif (mb_strlen($appname) > 100)
+            } elseif (mb_strlen($appname) > 100) {
                 $notice = "Application name should be less than 100 characters long.";
-            elseif (mb_strlen($appurl) > 250)
+            } elseif (mb_strlen($appurl) > 250) {
                 $notice = "Application URL should be less than 250 characters long.";
-            elseif ($appurl && (substr($appurl, 0, 7) != "http://") && (substr($appurl, 0, 8) != "https://"))
+            } elseif ($appurl && (substr($appurl, 0, 7) != "http://") && (substr($appurl, 0, 8) != "https://")) {
                 $notice = "Application homepage URL should start with http(s)://. (Note: this URL is OPTIONAL and it is NOT for OAuth callback.)";
-            elseif (!$email)
+            } elseif (!$email) {
                 $notice = "Please provide a valid email address.";
-            elseif (mb_strlen($email) > 70)
+            } elseif (mb_strlen($email) > 70) {
                 $notice = "Email address should be less than 70 characters long.";
-            elseif (!$accepted_terms)
+            } elseif (!$accepted_terms) {
                 $notice = "You have to read and accept OKAPI Terms of Use.";
-            else
-            {
+            } else {
                 $ok = true;
                 Okapi::register_new_consumer($appname, $appurl, $email);
                 $notice = "Consumer Key generated successfully.\nCheck your email!";

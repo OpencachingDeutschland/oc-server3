@@ -8,7 +8,8 @@ class HTMLPurifier_HTMLModule_Hypertext extends HTMLPurifier_HTMLModule
 
     public $name = 'Hypertext';
 
-    public function setup($config) {
+    public function setup($config)
+    {
         $a = $this->addElement(
             'a', 'Inline', 'Inline', 'Common',
             array(
@@ -25,7 +26,6 @@ class HTMLPurifier_HTMLModule_Hypertext extends HTMLPurifier_HTMLModule
         $a->formatting = true;
         $a->excludes = array('a' => true);
     }
-
 }
 
 // vim: et sw=4 sts=4

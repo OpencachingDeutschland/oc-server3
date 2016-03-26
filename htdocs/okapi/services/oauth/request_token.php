@@ -8,7 +8,7 @@ use okapi\OkapiRequest;
 use okapi\ParamMissing;
 use okapi\InvalidParam;
 
-class WebService
+class request_token
 {
     public static function options()
     {
@@ -20,8 +20,7 @@ class WebService
     public static function call(OkapiRequest $request)
     {
         $callback = $request->get_parameter('oauth_callback');
-        if (!$callback)
-        {
+        if (!$callback) {
             # We require the 1.0a flow (throw an error when there is no oauth_callback).
             throw new ParamMissing("oauth_callback");
         }

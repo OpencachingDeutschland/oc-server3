@@ -16,7 +16,6 @@ use okapi\DoesNotExist;
 use okapi\OkapiInternalRequest;
 use okapi\OkapiInternalConsumer;
 use okapi\OkapiServiceRunner;
-
 use okapi\services\caches\map\TileTree;
 
 require_once 'tiletree.inc.php';
@@ -29,14 +28,13 @@ class ReplicateListener
         # changelog. The format of $changelog is described in the replicate module
         # (NOT the entire response, just the "changelog" key).
 
-        foreach ($changelog as $c)
-        {
-            if ($c['object_type'] == 'geocache')
-            {
-                if ($c['change_type'] == 'replace')
+        foreach ($changelog as $c) {
+            if ($c['object_type'] == 'geocache') {
+                if ($c['change_type'] == 'replace') {
                     self::handle_geocache_replace($c);
-                else
+                } else {
                     self::handle_geocache_delete($c);
+                }
             }
         }
     }
@@ -90,25 +88,20 @@ class ReplicateListener
         # Compute the new row for okapi_tile_caches. Compare with the old one.
 
         $theirs = TileTree::generate_short_row($cache);
-        if (!$ours)
-        {
+        if (!$ours) {
             # Aaah, a new geocache! How nice... ;)
 
             self::add_geocache_to_cached_tiles($theirs);
-        }
-        elseif (($ours[1] != $theirs[1]) || ($ours[2] != $theirs[2]))  # z21x & z21y fields
-        {
+        } elseif (($ours[1] != $theirs[1]) || ($ours[2] != $theirs[2])) {
+            # z21x & z21y fields
+
             # Location changed.
 
             self::remove_geocache_from_cached_tiles($ours[0]);
             self::add_geocache_to_cached_tiles($theirs);
-        }
-        elseif ($ours != $theirs)
-        {
+        } elseif ($ours != $theirs) {
             self::update_geocache_attributes_in_cached_tiles($theirs);
-        }
-        else
-        {
+        } else {
             # No need to update anything. This is very common (i.e. when the
             # cache was simply found, not actually changed). Replicate module generates
             # many updates which do not influence our cache.
@@ -147,20 +140,21 @@ class ReplicateListener
         $z21y = $row[2];
         $ex = $z21x >> 8;  # initially, z21x / <tile width>
         $ey = $z21y >> 8;  # initially, z21y / <tile height>
-        for ($zoom = 21; $zoom >= 0; $zoom--, $ex >>= 1, $ey >>= 1)
-        {
+        for ($zoom = 21; $zoom >= 0; $zoom--, $ex >>= 1, $ey >>= 1) {
             # ($ex, $ey) points to the "exact match" tile. We need to determine
             # tile-range to check for "just outside the border" tiles. We will
             # go with the simple approach and check all 1+8 bordering tiles.
 
             $tiles_in_this_region = array();
-            for ($x=$ex-1; $x<=$ex+1; $x++)
-                for ($y=$ey-1; $y<=$ey+1; $y++)
-                    if (($x >= 0) && ($x < 1<<$zoom) && ($y >= 0) && ($y < 1<<$zoom))
+            for ($x=$ex-1; $x<=$ex+1; $x++) {
+                for ($y=$ey-1; $y<=$ey+1; $y++) {
+                    if (($x >= 0) && ($x < 1<<$zoom) && ($y >= 0) && ($y < 1<<$zoom)) {
                         $tiles_in_this_region[] = array($x, $y);
+                    }
+                }
+            }
 
-            foreach ($tiles_in_this_region as $coords)
-            {
+            foreach ($tiles_in_this_region as $coords) {
                 list($x, $y) = $coords;
 
                 $scale = 8 + 21 - $zoom;
@@ -171,14 +165,18 @@ class ReplicateListener
                 $top_z21y = ($y << $scale) - $margin;
                 $bottom_z21y = (($y + 1) << $scale) + $margin;
 
-                if ($z21x < $left_z21x)
+                if ($z21x < $left_z21x) {
                     continue;
-                if ($z21x > $right_z21x)
+                }
+                if ($z21x > $right_z21x) {
                     continue;
-                if ($z21y < $top_z21y)
+                }
+                if ($z21y < $top_z21y) {
                     continue;
-                if ($z21y > $bottom_z21y)
+                }
+                if ($z21y > $bottom_z21y) {
                     continue;
+                }
 
                 # We found a match. Store it for later.
 
@@ -191,8 +189,7 @@ class ReplicateListener
         # only the cached ones.
 
         $alternatives_escaped = array();
-        foreach ($tiles_to_update as $coords)
-        {
+        foreach ($tiles_to_update as $coords) {
             list($z, $x, $y) = $coords;
             $alternatives_escaped[] = "(
                 z = '".Db::escape_string($z)."'
@@ -200,8 +197,7 @@ class ReplicateListener
                 and y = '".Db::escape_string($y)."'
             )";
         }
-        if (count($alternatives_escaped) > 0)
-        {
+        if (count($alternatives_escaped) > 0) {
             Db::execute("
                 replace into okapi_tile_caches (
                     z, x, y, cache_id, z21x, z21y, status, type, rating, flags, name_crc

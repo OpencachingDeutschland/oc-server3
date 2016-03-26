@@ -8,8 +8,8 @@ class HTMLPurifier_HTMLModule_SafeEmbed extends HTMLPurifier_HTMLModule
 
     public $name = 'SafeEmbed';
 
-    public function setup($config) {
-
+    public function setup($config)
+    {
         $max = $config->get('HTML.MaxImgLength');
         $embed = $this->addElement(
             'embed', 'Inline', 'Empty', 'Common',
@@ -26,9 +26,7 @@ class HTMLPurifier_HTMLModule_SafeEmbed extends HTMLPurifier_HTMLModule
             )
         );
         $embed->attr_transform_post[] = new HTMLPurifier_AttrTransform_SafeEmbed();
-
     }
-
 }
 
 // vim: et sw=4 sts=4

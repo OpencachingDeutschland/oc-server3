@@ -10,20 +10,20 @@
 
   header('Content-type: text/html; charset=utf-8');
 
-	echo "<h2>Top-Owner</h2>\n";
+    echo "<h2>Top-Owner</h2>\n";
 
-	showstats("min. 50 aktive Caches", "TRUE",50);
-	showstats("min. 50 aktive Dosen", "`caches`.`size`<>7 AND TRUE",50);
-	showstats("min. 10 aktive OConlies", "`ca`.`attrib_id` IS NOT NULL",10);
-	showstats("min. 10 aktive OConly-Dosen", "`caches`.`size`<>7 AND `ca`.`attrib_id` IS NOT NULL",10);
+    showstats("min. 50 aktive Caches", "TRUE", 50);
+    showstats("min. 50 aktive Dosen", "`caches`.`size`<>7 AND TRUE", 50);
+    showstats("min. 10 aktive OConlies", "`ca`.`attrib_id` IS NOT NULL", 10);
+    showstats("min. 10 aktive OConly-Dosen", "`caches`.`size`<>7 AND `ca`.`attrib_id` IS NOT NULL", 10);
 
 
-	function showstats($header, $condition,$limit)
-	{
-		echo "<h3>$header</h3>\n";
-		echo "<table>\n";
+    function showstats($header, $condition, $limit)
+    {
+        echo "<h3>$header</h3>\n";
+        echo "<table>\n";
 
-		$rs = sql("
+        $rs = sql("
 			SELECT
 				COUNT(*) as `count`,
 				`username` as `name`
@@ -35,12 +35,11 @@
 			HAVING COUNT(*) >= $limit
 			ORDER BY COUNT(*) DESC");
 
-		$n = 1;		
-		while ($r = sql_fetch_assoc($rs))
-			echo "  <tr><td style='text-align:right'>&nbsp;&nbsp;".($n++).".&nbsp;&nbsp;&nbsp;</td><td style='text-align:right'>". $r['count'] . "</td><td>&nbsp;&nbsp;". $r['name'] . "</td></tr>\n";
-		sql_free_result($rs);
-	
-		echo "</table>\n";
-	} 
-		
-?>
+        $n = 1;
+        while ($r = sql_fetch_assoc($rs)) {
+            echo "  <tr><td style='text-align:right'>&nbsp;&nbsp;".($n++).".&nbsp;&nbsp;&nbsp;</td><td style='text-align:right'>". $r['count'] . "</td><td>&nbsp;&nbsp;". $r['name'] . "</td></tr>\n";
+        }
+        sql_free_result($rs);
+    
+        echo "</table>\n";
+    }

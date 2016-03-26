@@ -16,7 +16,7 @@ use okapi\OkapiInternalRequest;
 use okapi\Settings;
 use okapi\services\attrs\AttrHelper;
 
-class View
+class attrlist
 {
     public static function call()
     {
@@ -26,33 +26,37 @@ class View
         ob_start();
 
         print "Cache Types:\n\n";
-        foreach (self::get_all_cachetypes() as $id => $name)
+        foreach (self::get_all_cachetypes() as $id => $name) {
             print "$id: $name\n";
+        }
 
         print "\nLog Types:\n\n";
-        foreach (self::get_all_logtypes() as $id => $name)
+        foreach (self::get_all_logtypes() as $id => $name) {
             print "$id: $name\n";
+        }
 
         print "\nAttributes:\n\n";
         require_once($GLOBALS['rootpath'].'okapi/services/attrs/attr_helper.inc.php');
         $internal2acode = AttrHelper::get_internal_id_to_acode_mapping();
         $dict = self::get_all_atribute_names();
-        foreach ($dict as $internal_id => $langs)
-        {
+        foreach ($dict as $internal_id => $langs) {
             print $internal_id.": ";
             $langkeys = array_keys($langs);
             sort($langkeys);
-            if (in_array('en', $langkeys))
+            if (in_array('en', $langkeys)) {
                 print strtoupper($langs['en']);
-            else
+            } else {
                 print ">>>> ENGLISH NAME UNSET! <<<<";
-            if (isset($internal2acode[$internal_id]))
+            }
+            if (isset($internal2acode[$internal_id])) {
                 print " - ".$internal2acode[$internal_id];
-            else
+            } else {
                 print " - >>>> MISSING A-CODE MAPPING <<<<";
+            }
             print "\n";
-            foreach ($langkeys as $langkey)
+            foreach ($langkeys as $langkey) {
                 print "        $langkey: ".$langs[$langkey]."\n";
+            }
         }
 
         print "\nAttribute notices:\n\n";
@@ -60,30 +64,24 @@ class View
         print "(the last one ( ) can be safely ignored)\n\n";
 
         $attrdict = AttrHelper::get_attrdict();
-        foreach ($dict as $internal_id => $langs)
-        {
-            if (!isset($internal2acode[$internal_id]))
-            {
+        foreach ($dict as $internal_id => $langs) {
+            if (!isset($internal2acode[$internal_id])) {
                 print "(!) Attribute ".$internal_id." is not mapped to any A-code.\n";
                 continue;
             }
             $acode = $internal2acode[$internal_id];
             $attr = $attrdict[$acode];
-            foreach ($langs as $lang => $value)
-            {
-                if ($lang == 'en')
-                {
+            foreach ($langs as $lang => $value) {
+                if ($lang == 'en') {
                     continue;
                 }
-                if (!isset($attr['names'][$lang]))
-                {
+                if (!isset($attr['names'][$lang])) {
                     print "(-) Attribute $acode is missing a name in the '$lang' language.\n";
                     print "    Local name: $value\n";
                     print "    OKAPI name: >> none <<\n";
                     continue;
                 }
-                if ($attr['names'][$lang] !== $value)
-                {
+                if ($attr['names'][$lang] !== $value) {
                     print "( ) Attribute $acode has a different name in the '$lang' language\n";
                     print "    Local name: $value\n";
                     print "    OKAPI name: ".$attr['names'][$lang]."\n";
@@ -103,16 +101,13 @@ class View
      */
     private static function get_all_atribute_names()
     {
-        if (Settings::get('OC_BRANCH') == 'oc.pl')
-        {
+        if (Settings::get('OC_BRANCH') == 'oc.pl') {
             # OCPL branch uses cache_attrib table to store attribute names. It has
             # different structure than the OCDE cache_attrib table. OCPL does not
             # have translation tables.
 
             $rs = Db::query("select id, language, text_long from cache_attrib order by id");
-        }
-        else
-        {
+        } else {
             # OCDE branch uses translation tables. Let's make a select which will
             # produce results compatible with the one above.
 
@@ -141,14 +136,11 @@ class View
      */
     private static function get_all_cachetypes()
     {
-        if (Settings::get('OC_BRANCH') == 'oc.pl')
-        {
+        if (Settings::get('OC_BRANCH') == 'oc.pl') {
             # OCPL branch does not store cache types in many languages (just two).
 
             $rs = Db::query("select id, en from cache_type order by id");
-        }
-        else
-        {
+        } else {
             # OCDE branch uses translation tables.
 
             $rs = Db::query("
@@ -176,14 +168,11 @@ class View
      */
     private static function get_all_logtypes()
     {
-        if (Settings::get('OC_BRANCH') == 'oc.pl')
-        {
+        if (Settings::get('OC_BRANCH') == 'oc.pl') {
             # OCPL branch does not store cache types in many languages (just two).
 
             $rs = Db::query("select id, en from log_types order by id");
-        }
-        else
-        {
+        } else {
             # OCDE branch uses translation tables.
 
             $rs = Db::query("

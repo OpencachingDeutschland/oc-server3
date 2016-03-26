@@ -5,228 +5,215 @@
  *  Unicode Reminder メモ
  ***************************************************************************/
 
-	require_once('./lib2/web.inc.php');
-	require_once('./lib2/logic/user.class.php');
-	require_once('./lib2/logic/coordinate.class.php');
-	require_once('./lib2/logic/countriesList.class.php');
+    require_once('./lib2/web.inc.php');
+    require_once('./lib2/logic/user.class.php');
+    require_once('./lib2/logic/coordinate.class.php');
+    require_once('./lib2/logic/countriesList.class.php');
 
-	$tpl->name = 'myprofile';
-	$tpl->menuitem = MNU_MYPROFILE_DATA;
+    $tpl->name = 'myprofile';
+    $tpl->menuitem = MNU_MYPROFILE_DATA;
 
-	$login->verify();
+    $login->verify();
 
-	$action = isset($_REQUEST['action']) ? mb_strtolower($_REQUEST['action']) : 'view';
-	if ($action != 'change' &&  $action != 'changeemail' && $action != 'view')
-		$action = 'view';
+    $action = isset($_REQUEST['action']) ? mb_strtolower($_REQUEST['action']) : 'view';
+    if ($action != 'change' &&  $action != 'changeemail' && $action != 'view') {
+        $action = 'view';
+    }
 
-	if ($login->userid == 0)
-	{
-		if ($action == 'change' || $action == 'changeemail')
-			$tpl->redirect('login.php?target=' . urlencode('myprofile.php?action=change'));
-		else
-			$tpl->redirect('login.php?target=myprofile.php');
-	}
+    if ($login->userid == 0) {
+        if ($action == 'change' || $action == 'changeemail') {
+            $tpl->redirect('login.php?target=' . urlencode('myprofile.php?action=change'));
+        } else {
+            $tpl->redirect('login.php?target=myprofile.php');
+        }
+    }
 
-	if ($action == 'changeemail')
-		$tpl->redirect('newemail.php');
-	else if ($action == 'change')
-		change();
-	else
-		display();
+    if ($action == 'changeemail') {
+        $tpl->redirect('newemail.php');
+    } elseif ($action == 'change') {
+        change();
+    } else {
+        display();
+    }
 
 exit;
 
 function change()
 {
-	global $tpl, $login;
+    global $tpl, $login;
 
-	if (isset($_REQUEST['cancel']))
-		$tpl->redirect('myprofile.php');
+    if (isset($_REQUEST['cancel'])) {
+        $tpl->redirect('myprofile.php');
+    }
 
-	$user = new user($login->userid);
-	assignFromUser($user);
+    $user = new user($login->userid);
+    assignFromUser($user);
 
-	$bError = false;
+    $bError = false;
 
-	// set user properties
-	if (isset($_REQUEST['username']))
-	{
-		$tpl->assign('username', trim($_REQUEST['username']));
-		if (!$user->setUsername(trim($_REQUEST['username'])))
-		{
-			$tpl->assign('usernameErrorInvalidChars', true);
-			$bError = true;
-		}
-	}
+    // set user properties
+    if (isset($_REQUEST['username'])) {
+        $tpl->assign('username', trim($_REQUEST['username']));
+        if (!$user->setUsername(trim($_REQUEST['username']))) {
+            $tpl->assign('usernameErrorInvalidChars', true);
+            $bError = true;
+        }
+    }
 
-	if (isset($_REQUEST['firstName']))
-	{
-		$tpl->assign('firstName', trim($_REQUEST['firstName']));
-		if (!$user->setFirstName(trim($_REQUEST['firstName'])))
-		{
-			$tpl->assign('firstNameError', true);
-			$bError = true;
-		}
-	}
+    if (isset($_REQUEST['firstName'])) {
+        $tpl->assign('firstName', trim($_REQUEST['firstName']));
+        if (!$user->setFirstName(trim($_REQUEST['firstName']))) {
+            $tpl->assign('firstNameError', true);
+            $bError = true;
+        }
+    }
 
-	if (isset($_REQUEST['lastName']))
-	{
-		$tpl->assign('lastName', trim($_REQUEST['lastName']));
-		if (!$user->setLastName(trim($_REQUEST['lastName'])))
-		{
-			$tpl->assign('lastNameError', true);
-			$bError = true;
-		}
-	}
+    if (isset($_REQUEST['lastName'])) {
+        $tpl->assign('lastName', trim($_REQUEST['lastName']));
+        if (!$user->setLastName(trim($_REQUEST['lastName']))) {
+            $tpl->assign('lastNameError', true);
+            $bError = true;
+        }
+    }
 
-	if (isset($_REQUEST['country']))
-	{
-		$tpl->assign('countryCode', $_REQUEST['country']);
-		if (!$user->setCountryCode(($_REQUEST['country']=='XX') ? null : $_REQUEST['country']))
-		{
-			$tpl->assign('countryError', true);
-			$bError = true;
-		}
-	}
+    if (isset($_REQUEST['country'])) {
+        $tpl->assign('countryCode', $_REQUEST['country']);
+        if (!$user->setCountryCode(($_REQUEST['country']=='XX') ? null : $_REQUEST['country'])) {
+            $tpl->assign('countryError', true);
+            $bError = true;
+        }
+    }
 
-	if (isset($_REQUEST['notifyRadius']))
-	{
-		$tpl->assign('notifyRadius', $_REQUEST['notifyRadius']+0);
-		if (!$user->setNotifyRadius($_REQUEST['notifyRadius']+0))
-		{
-			$tpl->assign('notifyRadiusError', true);
-			$bError = true;
-		}
-	}
+    if (isset($_REQUEST['notifyRadius'])) {
+        $tpl->assign('notifyRadius', $_REQUEST['notifyRadius']+0);
+        if (!$user->setNotifyRadius($_REQUEST['notifyRadius']+0)) {
+            $tpl->assign('notifyRadiusError', true);
+            $bError = true;
+        }
+    }
 
-	if (isset($_REQUEST['notifyOconly']))
-	{
-		$tpl->assign('notifyOconly', $_REQUEST['notifyOconly']+0);
-		$user->setNotifyOconly($_REQUEST['notifyOconly'] != 0);
-	}
-	else if (isset($_REQUEST['save']))
-		$user->setNotifyOconly(false);
+    if (isset($_REQUEST['notifyOconly'])) {
+        $tpl->assign('notifyOconly', $_REQUEST['notifyOconly']+0);
+        $user->setNotifyOconly($_REQUEST['notifyOconly'] != 0);
+    } elseif (isset($_REQUEST['save'])) {
+        $user->setNotifyOconly(false);
+    }
 
-	$oconly_helplink = helppagelink('oconly');
-	$tpl->assign('oconly_helpstart', $oconly_helplink);
-	$tpl->assign('oconly_helpend', $oconly_helplink != '' ? '</a>' : '');
+    $oconly_helplink = helppagelink('oconly');
+    $tpl->assign('oconly_helpstart', $oconly_helplink);
+    $tpl->assign('oconly_helpend', $oconly_helplink != '' ? '</a>' : '');
 
-	$coord['lat'] = coordinate::parseRequestLat('coord');
-	$coord['lon'] = coordinate::parseRequestLon('coord');
-	if (($coord['lat'] !== false) && ($coord['lon'] !== false))
-	{
-		$tpl->assign('coordsDecimal', $coord);
-		if (!$user->setLatitude($coord['lat']))
-		{
-			$tpl->assign('latitudeError', true);
-			$bError = true;
-		}
-		if (!$user->setLongitude($coord['lon']))
-		{
-			$tpl->assign('longitudeError', true);
-			$bError = true;
-		}
-	}
+    $coord['lat'] = coordinate::parseRequestLat('coord');
+    $coord['lon'] = coordinate::parseRequestLon('coord');
+    if (($coord['lat'] !== false) && ($coord['lon'] !== false)) {
+        $tpl->assign('coordsDecimal', $coord);
+        if (!$user->setLatitude($coord['lat'])) {
+            $tpl->assign('latitudeError', true);
+            $bError = true;
+        }
+        if (!$user->setLongitude($coord['lon'])) {
+            $tpl->assign('longitudeError', true);
+            $bError = true;
+        }
+    }
 
-	$bAccMailing = isset($_REQUEST['save']) ? isset($_REQUEST['accMailing']) : $user->getAccMailing();
-	$tpl->assign('accMailing', $bAccMailing);
-	$user->setAccMailing($bAccMailing);
+    $bAccMailing = isset($_REQUEST['save']) ? isset($_REQUEST['accMailing']) : $user->getAccMailing();
+    $tpl->assign('accMailing', $bAccMailing);
+    $user->setAccMailing($bAccMailing);
 
-	$bUsePMR = isset($_REQUEST['save']) ? isset($_REQUEST['usePMR']) : $user->getUsePMR();
-	$tpl->assign('usePMR', $bUsePMR);
-	$user->setUsePMR($bUsePMR);
+    $bUsePMR = isset($_REQUEST['save']) ? isset($_REQUEST['usePMR']) : $user->getUsePMR();
+    $tpl->assign('usePMR', $bUsePMR);
+    $user->setUsePMR($bUsePMR);
 
-	$bPermanentLogin = isset($_REQUEST['save']) ? isset($_REQUEST['permanentLogin']) : $user->getPermanentLogin();
-	$tpl->assign('permanentLogin', $bPermanentLogin);
-	$user->setPermanentLogin($bPermanentLogin);
+    $bPermanentLogin = isset($_REQUEST['save']) ? isset($_REQUEST['permanentLogin']) : $user->getPermanentLogin();
+    $tpl->assign('permanentLogin', $bPermanentLogin);
+    $user->setPermanentLogin($bPermanentLogin);
 
-	$bNoHTMLEditor = isset($_REQUEST['save']) ? isset($_REQUEST['noHTMLEditor']) : $user->getNoHTMLEditor();
-	$tpl->assign('noHTMLEditor', $bNoHTMLEditor);
-	$user->setNoHTMLEditor($bNoHTMLEditor);
+    $bNoHTMLEditor = isset($_REQUEST['save']) ? isset($_REQUEST['noHTMLEditor']) : $user->getNoHTMLEditor();
+    $tpl->assign('noHTMLEditor', $bNoHTMLEditor);
+    $user->setNoHTMLEditor($bNoHTMLEditor);
 
-	$bUsermailSendAddress = isset($_REQUEST['save']) ? isset($_REQUEST['sendUsermailAddress']) : $user->getUsermailSendAddress();
-	$tpl->assign('sendUsermailAddress', $bUsermailSendAddress);
-	$user->setUsermailSendAddress($bUsermailSendAddress);
+    $bUsermailSendAddress = isset($_REQUEST['save']) ? isset($_REQUEST['sendUsermailAddress']) : $user->getUsermailSendAddress();
+    $tpl->assign('sendUsermailAddress', $bUsermailSendAddress);
+    $user->setUsermailSendAddress($bUsermailSendAddress);
 
-	if (!$bError && isset($_REQUEST['save']))
-	{
-		if ($user->getAnyChanged())
-		{
-			if (!$user->save())
-			{
-				$bError = true;
+    if (!$bError && isset($_REQUEST['save'])) {
+        if ($user->getAnyChanged()) {
+            if (!$user->save()) {
+                $bError = true;
 
-				// check for duplicate username
-				if ($user->getUsernameChanged() && user::existUsername($_REQUEST['username']))
-					$tpl->assign('errorUsernameExist', true);
-				else
-					$tpl->assign('errorUnknown', true);
-			}
-			else
-				$tpl->redirect('myprofile.php');
-		}
-		else
-			$tpl->redirect('myprofile.php');
-	}
+                // check for duplicate username
+                if ($user->getUsernameChanged() && user::existUsername($_REQUEST['username'])) {
+                    $tpl->assign('errorUsernameExist', true);
+                } else {
+                    $tpl->assign('errorUnknown', true);
+                }
+            } else {
+                $tpl->redirect('myprofile.php');
+            }
+        } else {
+            $tpl->redirect('myprofile.php');
+        }
+    }
 
-	$showAllCountries = isset($_REQUEST['showAllCountries']) ? $_REQUEST['showAllCountries']+0 : 0;
-	if (isset($_REQUEST['showAllCountriesSubmit']))
-		$showAllCountries = 1;
+    $showAllCountries = isset($_REQUEST['showAllCountries']) ? $_REQUEST['showAllCountries']+0 : 0;
+    if (isset($_REQUEST['showAllCountriesSubmit'])) {
+        $showAllCountries = 1;
+    }
 
-	$countriesList = new countriesList();
-	$rs = $countriesList->getRS($user->getCountryCode(), $showAllCountries!=0);
-	$tpl->assign_rs('countries', $rs);
-	sql_free_result($rs);
-	if ($countriesList->defaultUsed() == true)
-		$showAllCountries = 0;
-	else
-		$showAllCountries = 1;
-	$tpl->assign('showAllCountries', $showAllCountries);
+    $countriesList = new countriesList();
+    $rs = $countriesList->getRS($user->getCountryCode(), $showAllCountries!=0);
+    $tpl->assign_rs('countries', $rs);
+    sql_free_result($rs);
+    if ($countriesList->defaultUsed() == true) {
+        $showAllCountries = 0;
+    } else {
+        $showAllCountries = 1;
+    }
+    $tpl->assign('showAllCountries', $showAllCountries);
 
-	$tpl->assign('edit', true);
-	$tpl->display();
+    $tpl->assign('edit', true);
+    $tpl->display();
 }
 
 function display()
 {
-	global $tpl, $login;
+    global $tpl, $login;
 
-	$user = new user($login->userid);
-	assignFromUser($user);
+    $user = new user($login->userid);
+    assignFromUser($user);
 
-	$tpl->display();
+    $tpl->display();
 }
 
 function assignFromUser($user)
 {
-	global $tpl;
+    global $tpl;
 
-	$tpl->assign('username', $user->getUsername());
-	$tpl->assign('email', $user->getEMail());
-	$tpl->assign('firstName', $user->getFirstName());
-	$tpl->assign('lastName', $user->getLastName());
-	$tpl->assign('country', $user->getCountry());
-	$tpl->assign('countryCode', $user->getCountryCode());
+    $tpl->assign('username', $user->getUsername());
+    $tpl->assign('email', $user->getEMail());
+    $tpl->assign('firstName', $user->getFirstName());
+    $tpl->assign('lastName', $user->getLastName());
+    $tpl->assign('country', $user->getCountry());
+    $tpl->assign('countryCode', $user->getCountryCode());
 
-	$coords = new coordinate($user->getLatitude(), $user->getLongitude());
-	$tpl->assign('coords', $coords->getDecimalMinutes());
-	$tpl->assign('coordsDecimal', $coords->getFloat());
+    $coords = new coordinate($user->getLatitude(), $user->getLongitude());
+    $tpl->assign('coords', $coords->getDecimalMinutes());
+    $tpl->assign('coordsDecimal', $coords->getFloat());
 
-	$tpl->assign('notifyRadius', $user->getNotifyRadius());
+    $tpl->assign('notifyRadius', $user->getNotifyRadius());
 
-	$tpl->assign('notifyOconly', $user->getNotifyOconly());
-	$oconly_helplink = helppagelink('oconly');
-	$tpl->assign('oconly_helpstart', $oconly_helplink);
-	$tpl->assign('oconly_helpend', $oconly_helplink != '' ? '</a>' : '');
+    $tpl->assign('notifyOconly', $user->getNotifyOconly());
+    $oconly_helplink = helppagelink('oconly');
+    $tpl->assign('oconly_helpstart', $oconly_helplink);
+    $tpl->assign('oconly_helpend', $oconly_helplink != '' ? '</a>' : '');
 
-	$tpl->assign('registeredSince', $user->getDateRegistered());
+    $tpl->assign('registeredSince', $user->getDateRegistered());
 
-	$tpl->assign('accMailing', $user->getAccMailing());
+    $tpl->assign('accMailing', $user->getAccMailing());
 
-	$tpl->assign('usePMR', $user->getUsePMR());
-	$tpl->assign('permanentLogin', $user->getPermanentLogin());
-	$tpl->assign('noHTMLEditor', $user->getNoHTMLEditor());
-	$tpl->assign('sendUsermailAddress', $user->getUsermailSendAddress());
+    $tpl->assign('usePMR', $user->getUsePMR());
+    $tpl->assign('permanentLogin', $user->getPermanentLogin());
+    $tpl->assign('noHTMLEditor', $user->getNoHTMLEditor());
+    $tpl->assign('sendUsermailAddress', $user->getUsermailSendAddress());
 }
-
-?>

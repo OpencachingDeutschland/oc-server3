@@ -17,7 +17,7 @@ use okapi\OkapiInternalRequest;
 use okapi\OkapiInternalConsumer;
 use okapi\BadRequest;
 
-class View
+class dbstruct
 {
     public static function call()
     {
@@ -39,13 +39,16 @@ class View
 
         ini_set('memory_limit', '16M');
         $shell_arguments = "mysqldump --no-data -h$dbserver -u$user -p$password $dbname";
-        if (!strpos($shell_arguments,"--no-data"))
+        if (!strpos($shell_arguments, "--no-data")) {
             throw new Exception("wrong database dump arguments");
+        }
         $struct = shell_exec($shell_arguments);
-        if (strlen($struct) > 1000000)
+        if (strlen($struct) > 1000000) {
             throw new Exception("something went terribly wrong while dumping table structures");
-        if (stripos($struct,"dumping data") !== FALSE)
+        }
+        if (stripos($struct, "dumping data") !== false) {
             throw new Exception("something went terribly wrong while dumping table structures");
+        }
 
         # Remove the "AUTO_INCREMENT=..." values. They break the diffs.
 
@@ -65,12 +68,10 @@ class View
 
         $response = new OkapiHttpResponse();
         $response->content_type = "text/plain; charset=utf-8";
-        if (isset($_GET['compare_to']))
-        {
+        if (isset($_GET['compare_to'])) {
             self::requireSafe($_GET['compare_to']);
             $scheme = parse_url($_GET['compare_to'], PHP_URL_SCHEME);
-            if (in_array($scheme, array('http', 'https')))
-            {
+            if (in_array($scheme, array('http', 'https'))) {
                 try {
                     $alternate_struct = @file_get_contents($_GET['compare_to']);
                 } catch (Exception $e) {
@@ -84,16 +85,13 @@ class View
                     "-- better to use manual diff instead.\n\n";
                 require_once("comparator.inc.php");
                 $updater = new \dbStructUpdater();
-                if (isset($_GET['reverse']) && ($_GET['reverse'] == 'true'))
-                {
+                if (isset($_GET['reverse']) && ($_GET['reverse'] == 'true')) {
                     $response->body .=
                         "-- REVERSE MODE. The following will alter [2], so that it has the structure of [1].\n".
                         "-- 1. ".Settings::get('SITE_URL')."okapi/devel/dbstruct (".md5($struct).")\n".
                         "-- 2. ".$_GET['compare_to']." (".md5($alternate_struct).")\n\n";
                     $alters = $updater->getUpdates($alternate_struct, $struct);
-                }
-                else
-                {
+                } else {
                     $response->body .=
                         "-- The following will alter [1], so that it has the structure of [2].\n".
                         "-- 1. ".Settings::get('SITE_URL')."okapi/devel/dbstruct (".md5($struct).")\n".
@@ -101,31 +99,27 @@ class View
                     $alters = $updater->getUpdates($struct, $alternate_struct);
                 }
                 # Add semicolons
-                foreach ($alters as &$alter_ref)
+                foreach ($alters as &$alter_ref) {
                     $alter_ref .= ";";
+                }
                 # Comment out all differences containing "okapi_". These should be executed
                 # by OKAPI update scripts.
-                foreach ($alters as &$alter_ref)
-                {
-                    if (strpos($alter_ref, "okapi_") !== false)
-                    {
+                foreach ($alters as &$alter_ref) {
+                    if (strpos($alter_ref, "okapi_") !== false) {
                         $lines = explode("\n", $alter_ref);
                         $alter_ref = "-- Probably you should NOT execute this one. Use okapi/update instead.\n-- {{{\n--   ".
                             implode("\n--   ", $lines)."\n-- }}}";
                     }
                 }
-                if (count($alters) > 0)
+                if (count($alters) > 0) {
                     $response->body .= implode("\n", $alters)."\n";
-                else
+                } else {
                     $response->body .= "-- No differences found\n";
-            }
-            else
-            {
+                }
+            } else {
                 $response->body = "HTTP(S) only!";
             }
-        }
-        else
-        {
+        } else {
             $response->body = $struct;
         }
         return $response;

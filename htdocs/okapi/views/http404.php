@@ -8,7 +8,7 @@ use okapi\Settings;
 use okapi\OkapiHttpResponse;
 use okapi\views\menu\OkapiMenu;
 
-class View
+class http404
 {
     public static function call()
     {

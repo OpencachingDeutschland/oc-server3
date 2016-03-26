@@ -1,15 +1,13 @@
 <?php
   if (isset($_REQUEST['cacheid'])) {
-    $cacheID = $_REQUEST['cacheid'];
-  }
-  else {
-    $cacheID = 0;
+      $cacheID = $_REQUEST['cacheid'];
+  } else {
+      $cacheID = 0;
   }
   if (isset($_REQUEST['lang'])) {
-    $lang = $_REQUEST['lang'];
-  }
-  else {
-    $lang = 'de';
+      $lang = $_REQUEST['lang'];
+  } else {
+      $lang = 'de';
   }
 ?>
 tinyMCE_GZ.init({

@@ -1,39 +1,39 @@
 <?php
  /***************************************************************************
 
-		Unicode Reminder メモ
+        Unicode Reminder メモ
 
-		Ggf. muss die Location des php-Binaries angepasst werden.
+        Ggf. muss die Location des php-Binaries angepasst werden.
 
-		Erstellt stored procedures.
+        Erstellt stored procedures.
 
-	***************************************************************************/
+    ***************************************************************************/
 
-	$opt['rootpath'] = '../../../';
+    $opt['rootpath'] = '../../../';
   require_once($opt['rootpath'] . 'lib/clicompatbase.inc.php');
 
-  if (!file_exists($opt['rootpath'] . 'util/mysql_root/sql_root.inc.php'))
-		die("\n" . 'install util/mysql_root/sql_root.inc.php' . "\n\n");
+  if (!file_exists($opt['rootpath'] . 'util/mysql_root/sql_root.inc.php')) {
+      die("\n" . 'install util/mysql_root/sql_root.inc.php' . "\n\n");
+  }
 
   require_once($opt['rootpath'] . 'util/mysql_root/sql_root.inc.php');
 
 /* begin db connect */
-	db_root_connect();
-	if ($dblink === false)
-	{
-		echo 'Unable to connect to database';
-		exit;
-	}
+    db_root_connect();
+    if ($dblink === false) {
+        echo 'Unable to connect to database';
+        exit;
+    }
 /* end db connect */
 
-	sql_dropFunction('distance');
-	sql("CREATE FUNCTION `distance` (lat1 DOUBLE, lon1 DOUBLE, lat2 DOUBLE, lon2 DOUBLE) RETURNS DOUBLE DETERMINISTIC
+    sql_dropFunction('distance');
+    sql("CREATE FUNCTION `distance` (lat1 DOUBLE, lon1 DOUBLE, lat2 DOUBLE, lon2 DOUBLE) RETURNS DOUBLE DETERMINISTIC
 	     BEGIN
 	       RETURN ACOS(COS((90-lat1) * 3.14159 / 180) * COS((90-lat2)* 3.14159 / 180) + SIN((90-lat1) * 3.14159 / 180) * SIN((90-lat2) * 3.14159 / 180) * COS((lon1-lon2) * 3.14159 / 180)) * 6370;
 			 END;");
 
-	sql_dropFunction('projLon');
-	sql("CREATE FUNCTION `projLon` (nLat DOUBLE, nLon DOUBLE, nDistance DOUBLE, nAngle DOUBLE) RETURNS DOUBLE DETERMINISTIC
+    sql_dropFunction('projLon');
+    sql("CREATE FUNCTION `projLon` (nLat DOUBLE, nLon DOUBLE, nDistance DOUBLE, nAngle DOUBLE) RETURNS DOUBLE DETERMINISTIC
 	     BEGIN
 			   DECLARE nLatProj DOUBLE DEFAULT 0;
 			   DECLARE nDeltaLon DOUBLE DEFAULT 0;
@@ -51,8 +51,8 @@
 	       return nLonProj * 180 / 3.141592654;
 			 END;");
 
-	sql_dropFunction('projLat');
-	sql("CREATE FUNCTION `projLat` (nLat DOUBLE, nLon DOUBLE, nDistance DOUBLE, nAngle DOUBLE) RETURNS DOUBLE DETERMINISTIC
+    sql_dropFunction('projLat');
+    sql("CREATE FUNCTION `projLat` (nLat DOUBLE, nLon DOUBLE, nDistance DOUBLE, nAngle DOUBLE) RETURNS DOUBLE DETERMINISTIC
 	     BEGIN
 					DECLARE nLatProj DOUBLE DEFAULT 0;
 
@@ -66,8 +66,8 @@
 					return nLatProj * 180 / 3.141592654;
 			 END;");
 
-	sql_dropFunction('angle');
-	sql("CREATE FUNCTION `angle` (nLat1 DOUBLE, nLon1 DOUBLE, nLat2 DOUBLE, nLon2 DOUBLE) RETURNS DOUBLE DETERMINISTIC
+    sql_dropFunction('angle');
+    sql("CREATE FUNCTION `angle` (nLat1 DOUBLE, nLon1 DOUBLE, nLat2 DOUBLE, nLon2 DOUBLE) RETURNS DOUBLE DETERMINISTIC
 	     BEGIN
 					DECLARE nDegCorrection DOUBLE DEFAULT 0;
 					DECLARE nEntfernungsWinkel DOUBLE DEFAULT 0;
@@ -112,8 +112,8 @@
 					RETURN 0;
 			 END;");
 
-	sql_dropFunction('ptonline');
-	sql("CREATE FUNCTION `ptonline` (nLat DOUBLE, nLon DOUBLE, nLatPt1 DOUBLE, nLonPt1 DOUBLE, nLatPt2 DOUBLE, nLonPt2 DOUBLE, nMaxDistance DOUBLE) RETURNS DOUBLE DETERMINISTIC
+    sql_dropFunction('ptonline');
+    sql("CREATE FUNCTION `ptonline` (nLat DOUBLE, nLon DOUBLE, nLatPt1 DOUBLE, nLonPt1 DOUBLE, nLatPt2 DOUBLE, nLonPt2 DOUBLE, nMaxDistance DOUBLE) RETURNS DOUBLE DETERMINISTIC
 	     BEGIN
 					DECLARE nTmpLon DOUBLE DEFAULT 0;
 					DECLARE nTmpLat DOUBLE DEFAULT 0;
@@ -218,4 +218,3 @@
 						RETURN 0;
 					END IF;
 			 END;");
-?>

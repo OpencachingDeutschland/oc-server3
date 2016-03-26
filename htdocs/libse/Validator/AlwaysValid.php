@@ -7,10 +7,8 @@
 
 class Validator_AlwaysValid
 {
-  public function isValid($value)
-  {
-    return true;
-  }
+    public function isValid($value)
+    {
+        return true;
+    }
 }
-
-?>

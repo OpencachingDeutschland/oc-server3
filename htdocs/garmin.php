@@ -5,56 +5,60 @@
   Unicode Reminder メモ
  ****************************************************************************/
 
-	require('./lib2/web.inc.php');
-	require_once('./lib2/logic/labels.inc.php');
-	require_once('./lib2/logic/cache.class.php');
+    require('./lib2/web.inc.php');
+    require_once('./lib2/logic/labels.inc.php');
+    require_once('./lib2/logic/cache.class.php');
  
-	$tpl->name = 'garmin';
-	$tpl->popup = 1;
-	$tpl->assign('popup', true);
-	$tpl->assign('garmin', true);
+    $tpl->name = 'garmin';
+    $tpl->popup = 1;
+    $tpl->assign('popup', true);
+    $tpl->assign('garmin', true);
 
-	// get cacheid
-	$cacheid = 0;
-	if (isset($_REQUEST['cacheid']))
-		$cacheid = $_REQUEST['cacheid']+0;
-	else if (isset($_REQUEST['uuid']))
-		$cacheid = cache::cacheIdFromUUID($_REQUEST['uuid']);
-	else if (isset($_REQUEST['wp']))
-		$cacheid = cache::cacheIdFromWP($_REQUEST['wp']);
+    // get cacheid
+    $cacheid = 0;
+    if (isset($_REQUEST['cacheid'])) {
+        $cacheid = $_REQUEST['cacheid']+0;
+    } elseif (isset($_REQUEST['uuid'])) {
+        $cacheid = cache::cacheIdFromUUID($_REQUEST['uuid']);
+    } elseif (isset($_REQUEST['wp'])) {
+        $cacheid = cache::cacheIdFromWP($_REQUEST['wp']);
+    }
 
-	// When the domain does not fit the api key, you must be redirected to the correct domain.
-	// As this not all browses reliably redirect popup window locations, the settings meanwhile 
-	// allow to directly link to the registered domain, so the following code should no longer 
-	// be needed.
+    // When the domain does not fit the api key, you must be redirected to the correct domain.
+    // As this not all browses reliably redirect popup window locations, the settings meanwhile 
+    // allow to directly link to the registered domain, so the following code should no longer 
+    // be needed.
 
-	if (($opt['lib']['garmin']['domain'] != $_SERVER['HTTP_HOST']) && !isset($_REQUEST['redirect']))
-	{
-		$redirect = $opt['lib']['garmin']['page_url'] . 'garmin.php?redirect=1&cacheid=' . $cacheid;
-		if (isset($_REQUEST['templocale']))
-			$redirect .= '&templocale=' . $_REQUEST['templocale'];
-		$tpl->redirect($redirect);
-		exit;
-	}
+    if (($opt['lib']['garmin']['domain'] != $_SERVER['HTTP_HOST']) && !isset($_REQUEST['redirect'])) {
+        $redirect = $opt['lib']['garmin']['page_url'] . 'garmin.php?redirect=1&cacheid=' . $cacheid;
+        if (isset($_REQUEST['templocale'])) {
+            $redirect .= '&templocale=' . $_REQUEST['templocale'];
+        }
+        $tpl->redirect($redirect);
+        exit;
+    }
 
-	$cache = new cache($cacheid);
+    $cache = new cache($cacheid);
 
-	if ($cache->exist() == false)
-		$tpl->error(ERROR_CACHE_NOT_EXISTS);
+    if ($cache->exist() == false) {
+        $tpl->error(ERROR_CACHE_NOT_EXISTS);
+    }
 
-	if ($cache->allowView() == false)
-		$tpl->error(ERROR_NO_ACCESS);
+    if ($cache->allowView() == false) {
+        $tpl->error(ERROR_NO_ACCESS);
+    }
 
-	$bCrypt = isset($_REQUEST['nocrypt']) ? ($_REQUEST['nocrypt']!=1) : true;
-	$tpl->assign('crypt', $bCrypt);
+    $bCrypt = isset($_REQUEST['nocrypt']) ? ($_REQUEST['nocrypt']!=1) : true;
+    $tpl->assign('crypt', $bCrypt);
 
-	if (isset($_REQUEST['desclang']))
-		$sPreferedDescLang = $_REQUEST['desclang'] . ',' . $opt['template']['locale'] . ',EN';
-	else
-		$sPreferedDescLang = $opt['template']['locale'] . ',EN';
+    if (isset($_REQUEST['desclang'])) {
+        $sPreferedDescLang = $_REQUEST['desclang'] . ',' . $opt['template']['locale'] . ',EN';
+    } else {
+        $sPreferedDescLang = $opt['template']['locale'] . ',EN';
+    }
 
-	//get cache record
-	$rs = sql("SELECT	`caches`.`cache_id` AS `cacheid`,
+    //get cache record
+    $rs = sql("SELECT	`caches`.`cache_id` AS `cacheid`,
 				`caches`.`user_id` AS `userid`,
 				`caches`.`status` AS `status`,
 				`caches`.`latitude` AS `latitude`,
@@ -103,26 +107,26 @@
 		     LEFT JOIN `stat_caches` ON `caches`.`cache_id`=`stat_caches`.`cache_id`
 		     LEFT JOIN `cache_location` ON `caches`.`cache_id` = `cache_location`.`cache_id`
 		    WHERE `caches`.`cache_id`='&1'", $cacheid, $opt['template']['locale'], $sPreferedDescLang, $login->userid);
-	$rCache = sql_fetch_assoc($rs);
-	sql_free_result($rs);
-	if ($rCache === false)
-		$tpl->error(ERROR_CACHE_NOT_EXISTS);
+    $rCache = sql_fetch_assoc($rs);
+    sql_free_result($rs);
+    if ($rCache === false) {
+        $tpl->error(ERROR_CACHE_NOT_EXISTS);
+    }
 
-	// not published?
-	if ($rCache['status'] == 5)
-	{
-		$tpl->caching = false;
-		$login->verify();
-		if ($rCache['userid'] != $login->userid)
-			$tpl->error(ERROR_CACHE_NOT_PUBLISHED);
-	}
+    // not published?
+    if ($rCache['status'] == 5) {
+        $tpl->caching = false;
+        $login->verify();
+        if ($rCache['userid'] != $login->userid) {
+            $tpl->error(ERROR_CACHE_NOT_PUBLISHED);
+        }
+    }
 
-	$rCache['sizeName'] = labels::getLabelValue('cache_size', $rCache['size']);
-	$rCache['statusName'] = labels::getLabelValue('cache_status', $rCache['status']);
-	$rCache['typeName'] = labels::getLabelValue('cache_type', $rCache['type']);
+    $rCache['sizeName'] = labels::getLabelValue('cache_size', $rCache['size']);
+    $rCache['statusName'] = labels::getLabelValue('cache_status', $rCache['status']);
+    $rCache['typeName'] = labels::getLabelValue('cache_type', $rCache['type']);
 
-	$tpl->assign('cache', $rCache);
-	$tpl->title = $rCache['name'];
+    $tpl->assign('cache', $rCache);
+    $tpl->title = $rCache['name'];
 
-	$tpl->display();
-?>
+    $tpl->display();

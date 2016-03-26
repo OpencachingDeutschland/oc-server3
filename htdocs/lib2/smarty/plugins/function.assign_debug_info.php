@@ -35,6 +35,4 @@ function smarty_function_assign_debug_info($params, &$smarty)
     $smarty->assign("_debug_tpls", $included_templates);
 }
 
-/* vim: set expandtab: */
-
-?>
+/* vim: set expandtab: */;

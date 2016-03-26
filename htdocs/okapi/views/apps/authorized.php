@@ -10,7 +10,7 @@ use okapi\OkapiHttpRequest;
 use okapi\OkapiRedirectResponse;
 use okapi\Settings;
 
-class View
+class authorized
 {
     public static function call()
     {
@@ -33,8 +33,7 @@ class View
                 and t.consumer_key = c.`key`
         ");
 
-        if (!$token)
-        {
+        if (!$token) {
             # Probably Request Token has expired or it was already used. We'll
             # just redirect to the Opencaching main page.
             return new OkapiRedirectResponse(Settings::get('SITE_URL'));

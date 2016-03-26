@@ -1,26 +1,26 @@
 <?php
  /***************************************************************************
 
-		Unicode Reminder メモ
+        Unicode Reminder メモ
 
-		trigger and stored procedure definitions for DB version 113
+        trigger and stored procedure definitions for DB version 113
 
-		This update includes ALL triggers and procedures, to make sure that we
-		have a defined starting point. Further updates need not to include
-		everything but may be restriced to functions which have actually changed.
-		However, it may be easier and safer to do a complete update. Hard disk
-		and repository space is cheap, and performance is no issue here.
+        This update includes ALL triggers and procedures, to make sure that we
+        have a defined starting point. Further updates need not to include
+        everything but may be restriced to functions which have actually changed.
+        However, it may be easier and safer to do a complete update. Hard disk
+        and repository space is cheap, and performance is no issue here.
 
-	***************************************************************************/
+    ***************************************************************************/
 
-	sql_dropFunction('distance');
-	sql("CREATE FUNCTION `distance` (lat1 DOUBLE, lon1 DOUBLE, lat2 DOUBLE, lon2 DOUBLE) RETURNS DOUBLE DETERMINISTIC 
+    sql_dropFunction('distance');
+    sql("CREATE FUNCTION `distance` (lat1 DOUBLE, lon1 DOUBLE, lat2 DOUBLE, lon2 DOUBLE) RETURNS DOUBLE DETERMINISTIC 
 	     BEGIN
 	       RETURN ACOS(COS((90-lat1) * 3.14159 / 180) * COS((90-lat2)* 3.14159 / 180) + SIN((90-lat1) * 3.14159 / 180) * SIN((90-lat2) * 3.14159 / 180) * COS((lon1-lon2) * 3.14159 / 180)) * 6370;
 			 END;");
 
-	sql_dropFunction('projLon');
-	sql("CREATE FUNCTION `projLon` (nLat DOUBLE, nLon DOUBLE, nDistance DOUBLE, nAngle DOUBLE) RETURNS DOUBLE DETERMINISTIC 
+    sql_dropFunction('projLon');
+    sql("CREATE FUNCTION `projLon` (nLat DOUBLE, nLon DOUBLE, nDistance DOUBLE, nAngle DOUBLE) RETURNS DOUBLE DETERMINISTIC 
 	     BEGIN
 			   DECLARE nLatProj DOUBLE DEFAULT 0;
 			   DECLARE nDeltaLon DOUBLE DEFAULT 0;
@@ -38,8 +38,8 @@
 	       return nLonProj * 180 / 3.141592654;
 			 END;");
 
-	sql_dropFunction('projLat');
-	sql("CREATE FUNCTION `projLat` (nLat DOUBLE, nLon DOUBLE, nDistance DOUBLE, nAngle DOUBLE) RETURNS DOUBLE DETERMINISTIC 
+    sql_dropFunction('projLat');
+    sql("CREATE FUNCTION `projLat` (nLat DOUBLE, nLon DOUBLE, nDistance DOUBLE, nAngle DOUBLE) RETURNS DOUBLE DETERMINISTIC 
 	     BEGIN
 					DECLARE nLatProj DOUBLE DEFAULT 0;
 
@@ -53,8 +53,8 @@
 					return nLatProj * 180 / 3.141592654;
 			 END;");
 
-	sql_dropFunction('angle');
-	sql("CREATE FUNCTION `angle` (nLat1 DOUBLE, nLon1 DOUBLE, nLat2 DOUBLE, nLon2 DOUBLE) RETURNS DOUBLE DETERMINISTIC 
+    sql_dropFunction('angle');
+    sql("CREATE FUNCTION `angle` (nLat1 DOUBLE, nLon1 DOUBLE, nLat2 DOUBLE, nLon2 DOUBLE) RETURNS DOUBLE DETERMINISTIC 
 	     BEGIN
 					DECLARE nDegCorrection DOUBLE DEFAULT 0;
 					DECLARE nEntfernungsWinkel DOUBLE DEFAULT 0;
@@ -99,8 +99,8 @@
 					RETURN 0;
 			 END;");
 
-	sql_dropFunction('ptonline');
-	sql("CREATE FUNCTION `ptonline` (nLat DOUBLE, nLon DOUBLE, nLatPt1 DOUBLE, nLonPt1 DOUBLE, nLatPt2 DOUBLE, nLonPt2 DOUBLE, nMaxDistance DOUBLE) RETURNS DOUBLE DETERMINISTIC 
+    sql_dropFunction('ptonline');
+    sql("CREATE FUNCTION `ptonline` (nLat DOUBLE, nLon DOUBLE, nLatPt1 DOUBLE, nLonPt1 DOUBLE, nLatPt2 DOUBLE, nLonPt2 DOUBLE, nMaxDistance DOUBLE) RETURNS DOUBLE DETERMINISTIC 
 	     BEGIN
 					DECLARE nTmpLon DOUBLE DEFAULT 0;
 					DECLARE nTmpLat DOUBLE DEFAULT 0;
@@ -206,10 +206,10 @@
 					END IF;
 			 END;");
 
-	/* get prefered language from string
-	 */
-	sql_dropFunction('PREFERED_LANG');
-	sql("CREATE FUNCTION `PREFERED_LANG` (sExistingTokens VARCHAR(60), sPreferedTokens VARCHAR(60)) RETURNS CHAR(2) DETERMINISTIC SQL SECURITY INVOKER
+    /* get prefered language from string
+     */
+    sql_dropFunction('PREFERED_LANG');
+    sql("CREATE FUNCTION `PREFERED_LANG` (sExistingTokens VARCHAR(60), sPreferedTokens VARCHAR(60)) RETURNS CHAR(2) DETERMINISTIC SQL SECURITY INVOKER
 	     BEGIN
 			   DECLARE nPreferedIndex INT DEFAULT 1;
 			   DECLARE sPrefered CHAR(2) DEFAULT '';
@@ -246,9 +246,9 @@
          END IF;
 			 END;");
 
-	// get decimal value of waypoint
-	sql_dropFunction('WPTODEC');
-	sql("CREATE FUNCTION `WPTODEC` (wp VARCHAR(7), prefix VARCHAR(2)) RETURNS INT DETERMINISTIC SQL SECURITY INVOKER
+    // get decimal value of waypoint
+    sql_dropFunction('WPTODEC');
+    sql("CREATE FUNCTION `WPTODEC` (wp VARCHAR(7), prefix VARCHAR(2)) RETURNS INT DETERMINISTIC SQL SECURITY INVOKER
 		BEGIN
 		  -- all used chars in waypoint, in their ascending order
 		  DECLARE WP_ORDER CHAR(36) DEFAULT '&1';
@@ -291,11 +291,11 @@
 		  RETURN CONV(B36_VALUE, LENGTH(WP_ORDER), 10);
 
 		END;",
-		$opt['logic']['waypoint_pool']['valid_chars']);
+        $opt['logic']['waypoint_pool']['valid_chars']);
 
-	// inverse function of WPTODEC
-	sql_dropFunction('DECTOWP');
-	sql("CREATE FUNCTION `DECTOWP` (wp INT, prefix VARCHAR(2)) RETURNS VARCHAR(7) DETERMINISTIC SQL SECURITY INVOKER
+    // inverse function of WPTODEC
+    sql_dropFunction('DECTOWP');
+    sql("CREATE FUNCTION `DECTOWP` (wp INT, prefix VARCHAR(2)) RETURNS VARCHAR(7) DETERMINISTIC SQL SECURITY INVOKER
 		BEGIN
 		  -- all used chars in waypoint, in their ascending order
 		  DECLARE WP_ORDER CHAR(36) DEFAULT '&1';
@@ -337,27 +337,27 @@
 			RETURN CONCAT(prefix, WP_VALUE);
 		  END IF;
 		END;",
-		$opt['logic']['waypoint_pool']['valid_chars']);
+        $opt['logic']['waypoint_pool']['valid_chars']);
 
-	sql_dropFunction('CREATE_UUID');
-	sql("CREATE FUNCTION `CREATE_UUID` () RETURNS VARCHAR(36) DETERMINISTIC SQL SECURITY INVOKER
+    sql_dropFunction('CREATE_UUID');
+    sql("CREATE FUNCTION `CREATE_UUID` () RETURNS VARCHAR(36) DETERMINISTIC SQL SECURITY INVOKER
 		BEGIN
 			SET @LAST_UUID = UUID();
 			RETURN @LAST_UUID;
 		END;");
 
-	sql_dropFunction('GET_LAST_UUID');
-	sql("CREATE FUNCTION `GET_LAST_UUID` () RETURNS VARCHAR(36) DETERMINISTIC SQL SECURITY INVOKER
+    sql_dropFunction('GET_LAST_UUID');
+    sql("CREATE FUNCTION `GET_LAST_UUID` () RETURNS VARCHAR(36) DETERMINISTIC SQL SECURITY INVOKER
 		BEGIN
 			RETURN @LAST_UUID;
 		END;");
 
-	/* Stored procedures containing database logic
-	 */
+    /* Stored procedures containing database logic
+     */
 
-	// update all last_modified dates of related records
-	sql_dropProcedure('sp_touch_cache');
-	sql("CREATE PROCEDURE sp_touch_cache (IN nCacheId INT(10) UNSIGNED, IN bUpdateCacheRecord BOOL)
+    // update all last_modified dates of related records
+    sql_dropProcedure('sp_touch_cache');
+    sql("CREATE PROCEDURE sp_touch_cache (IN nCacheId INT(10) UNSIGNED, IN bUpdateCacheRecord BOOL)
 	     BEGIN
 				 IF bUpdateCacheRecord = TRUE THEN
 					 UPDATE `caches` SET `last_modified`=NOW() WHERE `cache_id`=nCacheId;
@@ -379,9 +379,9 @@
 				 UPDATE `mp3` SET `last_modified`=NOW() WHERE `object_id`=nCacheId;
 	     END;");
 
-	// update listing modification date
-	sql_dropProcedure('sp_update_cache_listingdate');
-	sql("CREATE PROCEDURE sp_update_cache_listingdate (IN nCacheId INT(10) UNSIGNED)
+    // update listing modification date
+    sql_dropProcedure('sp_update_cache_listingdate');
+    sql("CREATE PROCEDURE sp_update_cache_listingdate (IN nCacheId INT(10) UNSIGNED)
 	     BEGIN
 	       IF (ISNULL(@XMLSYNC) OR @XMLSYNC!=1) AND IFNULL(@dont_update_listingdate,0)=0 THEN
 	         /* @dont_update_listingdate avoids illegal update recursions in caches table, e.g.
@@ -391,8 +391,8 @@
 	       END IF;
 	     END;");
 
-	sql_dropProcedure('sp_updateall_cache_listingdates');
-	sql("CREATE PROCEDURE sp_updateall_cache_listingdates (OUT nModified INT)
+    sql_dropProcedure('sp_updateall_cache_listingdates');
+    sql("CREATE PROCEDURE sp_updateall_cache_listingdates (OUT nModified INT)
 	     BEGIN
 			   UPDATE `caches` SET `listing_last_modified` =
 			      /* listing_last_modified can be greater then all the other dates, if a description,
@@ -407,8 +407,8 @@
 	       SET nModified = ROW_COUNT();
 	     END;");
 
-	sql_dropProcedure('sp_updateall_cachelog_logdates');
-	sql("CREATE PROCEDURE sp_updateall_cachelog_logdates (OUT nModified INT)
+    sql_dropProcedure('sp_updateall_cachelog_logdates');
+    sql("CREATE PROCEDURE sp_updateall_cachelog_logdates (OUT nModified INT)
 	     BEGIN
 			   UPDATE `cache_logs` SET `log_last_modified` =
 			      /* log_last_modified can be greater then all the other dates, if a picture was deleted.
@@ -423,10 +423,10 @@
 	       SET nModified = nModified + ROW_COUNT();
 	     END;");
 
-	/* update log modification date when rating changed, so that it is resent via
-	   XML interface; see issue #244 */
-	sql_dropProcedure('sp_update_cachelog_rating');
-	sql("CREATE PROCEDURE sp_update_cachelog_rating (IN nCacheId INT, IN nUserID INT, IN dRatingDate DATETIME)
+    /* update log modification date when rating changed, so that it is resent via
+       XML interface; see issue #244 */
+    sql_dropProcedure('sp_update_cachelog_rating');
+    sql("CREATE PROCEDURE sp_update_cachelog_rating (IN nCacheId INT, IN nUserID INT, IN dRatingDate DATETIME)
 	     BEGIN
 	       IF (ISNULL(@XMLSYNC) OR @XMLSYNC!=1) THEN
 	         UPDATE `cache_logs` SET `last_modified`=NOW()
@@ -434,9 +434,9 @@
 	       END IF;
 	     END;");
 
-	// set caches.desc_languages of given cacheid and fill cache_desc_prefered
-	sql_dropProcedure('sp_update_caches_descLanguages');
-	sql("CREATE PROCEDURE sp_update_caches_descLanguages (IN nCacheId INT(10) UNSIGNED)
+    // set caches.desc_languages of given cacheid and fill cache_desc_prefered
+    sql_dropProcedure('sp_update_caches_descLanguages');
+    sql("CREATE PROCEDURE sp_update_caches_descLanguages (IN nCacheId INT(10) UNSIGNED)
 	     BEGIN
 	       DECLARE dl VARCHAR(60);
 
@@ -444,17 +444,17 @@
 	       UPDATE `caches` SET `desc_languages`=dl, default_desclang=PREFERED_LANG(dl, '&1') WHERE `cache_id`=nCacheId LIMIT 1;
 	     END;", strtoupper($lang . ',EN'));
 
-	// set caches.desc_languages of all caches, fill cache_desc_prefered and return number of modified rows
-	sql_dropProcedure('sp_updateall_caches_descLanguages');
-	sql("CREATE PROCEDURE sp_updateall_caches_descLanguages (OUT nModified INT)
+    // set caches.desc_languages of all caches, fill cache_desc_prefered and return number of modified rows
+    sql_dropProcedure('sp_updateall_caches_descLanguages');
+    sql("CREATE PROCEDURE sp_updateall_caches_descLanguages (OUT nModified INT)
 	     BEGIN
 	       UPDATE `caches`, (SELECT `cache_id`, GROUP_CONCAT(DISTINCT `language` ORDER BY `language` SEPARATOR ',') AS `dl` FROM `cache_desc` GROUP BY `cache_id`) AS `tbl` SET `caches`.`desc_languages`=`tbl`.`dl`, `caches`.`default_desclang`=PREFERED_LANG(`tbl`.`dl`, '&1') WHERE `caches`.`cache_id`=`tbl`.`cache_id`;
 	       SET nModified = ROW_COUNT() ;
 	     END;", strtoupper($lang . ',EN'));
 
-	// update found, last_found, notfound and note of stat_cache_logs, stat_caches and stat_user
-	sql_dropProcedure('sp_update_logstat');
-	sql("CREATE PROCEDURE sp_update_logstat (IN nCacheId INT(10) UNSIGNED, IN nUserId INT(10) UNSIGNED, IN nLogType INT, IN bLogRemoved BOOLEAN)
+    // update found, last_found, notfound and note of stat_cache_logs, stat_caches and stat_user
+    sql_dropProcedure('sp_update_logstat');
+    sql("CREATE PROCEDURE sp_update_logstat (IN nCacheId INT(10) UNSIGNED, IN nUserId INT(10) UNSIGNED, IN nLogType INT, IN bLogRemoved BOOLEAN)
 	     BEGIN
 	       DECLARE nFound INT DEFAULT 0;
 	       DECLARE nNotFound INT DEFAULT 0;
@@ -501,9 +501,9 @@
 	       CALL sp_refresh_statpic(nUserId);
 	     END;");
 
-	// recalc found, last_found, notfound and note of stat_cache_logs, stat_caches and stat_user for all entries
-	sql_dropProcedure('sp_updateall_logstat');
-	sql("CREATE PROCEDURE sp_updateall_logstat (OUT nModified INT)
+    // recalc found, last_found, notfound and note of stat_cache_logs, stat_caches and stat_user for all entries
+    sql_dropProcedure('sp_updateall_logstat');
+    sql("CREATE PROCEDURE sp_updateall_logstat (OUT nModified INT)
 	     BEGIN
 	       SET nModified=0;
 
@@ -545,9 +545,9 @@
 	       CALL sp_refreshall_statpic();
 	     END;");
 
-	// increment/decrement stat_user.hidden
-	sql_dropProcedure('sp_update_hiddenstat');
-	sql("CREATE PROCEDURE sp_update_hiddenstat (IN nUserId INT, IN iStatus INT, IN bRemoved BOOLEAN)
+    // increment/decrement stat_user.hidden
+    sql_dropProcedure('sp_update_hiddenstat');
+    sql("CREATE PROCEDURE sp_update_hiddenstat (IN nUserId INT, IN iStatus INT, IN bRemoved BOOLEAN)
 	     BEGIN
 			   DECLARE nHidden INT DEFAULT 1;
 				 IF (SELECT `allow_user_view` FROM `cache_status` WHERE `id`=iStatus) THEN
@@ -561,9 +561,9 @@
 				 END IF;
 	     END;");
 
-	// recalc hidden of stat_user for all entries
-	sql_dropProcedure('sp_updateall_hiddenstat');
-	sql("CREATE PROCEDURE sp_updateall_hiddenstat (OUT nModified INT)
+    // recalc hidden of stat_user for all entries
+    sql_dropProcedure('sp_updateall_hiddenstat');
+    sql("CREATE PROCEDURE sp_updateall_hiddenstat (OUT nModified INT)
 	     BEGIN
 	       SET nModified=0;
 
@@ -576,9 +576,9 @@
 	       CALL sp_refreshall_statpic();
 	     END;");
 
-	// increment/decrement stat_caches.watch
-	sql_dropProcedure('sp_update_watchstat');
-	sql("CREATE PROCEDURE sp_update_watchstat (IN nCacheId INT, IN bRemoved BOOLEAN)
+    // increment/decrement stat_caches.watch
+    sql_dropProcedure('sp_update_watchstat');
+    sql("CREATE PROCEDURE sp_update_watchstat (IN nCacheId INT, IN bRemoved BOOLEAN)
 	     BEGIN
 			   DECLARE nWatch INT DEFAULT 1;
 			   IF bRemoved = TRUE THEN SET nWatch = -1; END IF;
@@ -588,9 +588,9 @@
 			   END IF;
 	     END;");
 
-	// recalc watch of stat_caches for all entries
-	sql_dropProcedure('sp_updateall_watchstat');
-	sql("CREATE PROCEDURE sp_updateall_watchstat (OUT nModified INT)
+    // recalc watch of stat_caches for all entries
+    sql_dropProcedure('sp_updateall_watchstat');
+    sql("CREATE PROCEDURE sp_updateall_watchstat (OUT nModified INT)
 	     BEGIN
 	       SET nModified=0;
 
@@ -601,9 +601,9 @@
 	       SET nModified=nModified+ROW_COUNT();
 	     END;");
 
-	// increment/decrement stat_caches.ignore
-	sql_dropProcedure('sp_update_ignorestat');
-	sql("CREATE PROCEDURE sp_update_ignorestat (IN nCacheId INT, IN bRemoved BOOLEAN)
+    // increment/decrement stat_caches.ignore
+    sql_dropProcedure('sp_update_ignorestat');
+    sql("CREATE PROCEDURE sp_update_ignorestat (IN nCacheId INT, IN bRemoved BOOLEAN)
 	     BEGIN
 			   DECLARE nIgnore INT DEFAULT 1;
 			   IF bRemoved = TRUE THEN SET nIgnore = -1; END IF;
@@ -613,9 +613,9 @@
 			   END IF;
 	     END;");
 
-	// recalc ignore of stat_caches for all entries
-	sql_dropProcedure('sp_updateall_ignorestat');
-	sql("CREATE PROCEDURE sp_updateall_ignorestat (OUT nModified INT)
+    // recalc ignore of stat_caches for all entries
+    sql_dropProcedure('sp_updateall_ignorestat');
+    sql("CREATE PROCEDURE sp_updateall_ignorestat (OUT nModified INT)
 	     BEGIN
 	       SET nModified=0;
 
@@ -626,9 +626,9 @@
 	       SET nModified=nModified+ROW_COUNT();
 	     END;");
 
-	// increment/decrement stat_caches.toprating
-	sql_dropProcedure('sp_update_topratingstat');
-	sql("CREATE PROCEDURE sp_update_topratingstat (IN nCacheId INT, IN bRemoved BOOLEAN)
+    // increment/decrement stat_caches.toprating
+    sql_dropProcedure('sp_update_topratingstat');
+    sql("CREATE PROCEDURE sp_update_topratingstat (IN nCacheId INT, IN bRemoved BOOLEAN)
 	     BEGIN
 			   DECLARE nTopRating INT DEFAULT 1;
 			   IF bRemoved = TRUE THEN SET nTopRating = -1; END IF;
@@ -638,9 +638,9 @@
 			   END IF;
 	     END;");
 
-	// recalc toprating of stat_caches for all entries
-	sql_dropProcedure('sp_updateall_topratingstat');
-	sql("CREATE PROCEDURE sp_updateall_topratingstat (OUT nModified INT)
+    // recalc toprating of stat_caches for all entries
+    sql_dropProcedure('sp_updateall_topratingstat');
+    sql("CREATE PROCEDURE sp_updateall_topratingstat (OUT nModified INT)
 	     BEGIN
 	       SET nModified=0;
 
@@ -652,9 +652,9 @@
 	       SET nModified=nModified+ROW_COUNT();
 	     END;");
 
-	// increment/decrement stat_caches.picture
-	sql_dropProcedure('sp_update_cache_picturestat');
-	sql("CREATE PROCEDURE sp_update_cache_picturestat (IN nCacheId INT, IN bRemoved BOOLEAN)
+    // increment/decrement stat_caches.picture
+    sql_dropProcedure('sp_update_cache_picturestat');
+    sql("CREATE PROCEDURE sp_update_cache_picturestat (IN nCacheId INT, IN bRemoved BOOLEAN)
 	     BEGIN
 			   DECLARE nPicture INT DEFAULT 1;
 			   IF bRemoved = TRUE THEN SET nPicture = -1; END IF;
@@ -664,9 +664,9 @@
 			   END IF;
 	     END;");
 
-	// recalc picture of stat_caches for all entries
-	sql_dropProcedure('sp_updateall_cache_picturestat');
-	sql("CREATE PROCEDURE sp_updateall_cache_picturestat (OUT nModified INT)
+    // recalc picture of stat_caches for all entries
+    sql_dropProcedure('sp_updateall_cache_picturestat');
+    sql("CREATE PROCEDURE sp_updateall_cache_picturestat (OUT nModified INT)
 	     BEGIN
 	       SET nModified=0;
 
@@ -677,18 +677,18 @@
 	       SET nModified=nModified+ROW_COUNT();
 	     END;");
 
-	// increment/decrement cache_logs.picture
-	sql_dropProcedure('sp_update_cachelog_picturestat');
-	sql("CREATE PROCEDURE sp_update_cachelog_picturestat (IN nLogId INT, IN bRemoved BOOLEAN)
+    // increment/decrement cache_logs.picture
+    sql_dropProcedure('sp_update_cachelog_picturestat');
+    sql("CREATE PROCEDURE sp_update_cachelog_picturestat (IN nLogId INT, IN bRemoved BOOLEAN)
 	     BEGIN
 			   DECLARE nPicture INT DEFAULT 1;
 			   IF bRemoved = TRUE THEN SET nPicture = -1; END IF;
 			   UPDATE `cache_logs` SET `cache_logs`.`picture`=IF(`cache_logs`.`picture`+nPicture>0, `cache_logs`.`picture`+nPicture, 0) WHERE `cache_logs`.`id`=nLogId;
 	     END;");
 
-	// recalc picture of cache_logs for all entries
-	sql_dropProcedure('sp_updateall_cachelog_picturestat');
-	sql("CREATE PROCEDURE sp_updateall_cachelog_picturestat (OUT nModified INT)
+    // recalc picture of cache_logs for all entries
+    sql_dropProcedure('sp_updateall_cachelog_picturestat');
+    sql("CREATE PROCEDURE sp_updateall_cachelog_picturestat (OUT nModified INT)
 	     BEGIN
 	       SET nModified=0;
 
@@ -697,11 +697,11 @@
 	       SET nModified=nModified+ROW_COUNT();
 	     END;");
 
-	// Update out-of-sync rating dates. These probably were caused by rating-related
-	// bugs when deleting one of multiple found logs and when changing the log type
-	// (9 mismatches within ~9 months up to June 2013).
-	sql_dropProcedure('sp_updateall_rating_dates');
-	sql("CREATE PROCEDURE sp_updateall_rating_dates (OUT nModified INT)
+    // Update out-of-sync rating dates. These probably were caused by rating-related
+    // bugs when deleting one of multiple found logs and when changing the log type
+    // (9 mismatches within ~9 months up to June 2013).
+    sql_dropProcedure('sp_updateall_rating_dates');
+    sql("CREATE PROCEDURE sp_updateall_rating_dates (OUT nModified INT)
 	     BEGIN
 	       UPDATE `cache_rating` SET `rating_date` =
 	        (SELECT `date` FROM `cache_logs` WHERE `cache_logs`.`cache_id`=`cache_rating`.`cache_id` AND `cache_logs`.`user_id`=`cache_rating`.`user_id` AND `cache_logs`.`type` IN (1,7) ORDER BY `date` LIMIT 1)
@@ -710,9 +710,9 @@
 	       SET nModified=ROW_COUNT();
 	     END;");
 
-	// notify users with matching watch radius about this cache
-	sql_dropProcedure('sp_notify_new_cache');
-	sql("CREATE PROCEDURE sp_notify_new_cache (IN nCacheId INT(10) UNSIGNED, IN nLongitude DOUBLE, IN nLatitude DOUBLE)
+    // notify users with matching watch radius about this cache
+    sql_dropProcedure('sp_notify_new_cache');
+    sql("CREATE PROCEDURE sp_notify_new_cache (IN nCacheId INT(10) UNSIGNED, IN nLongitude DOUBLE, IN nLatitude DOUBLE)
 	     BEGIN
 	       INSERT IGNORE INTO `notify_waiting` (`id`, `cache_id`, `user_id`, `type`)
 	       SELECT NULL, nCacheId, `user`.`user_id`, 1 /* notify_new_cache */
@@ -725,24 +725,24 @@
 	          AND (acos(cos((90-nLatitude) * 3.14159 / 180) * cos((90-`user`.`latitude`) * 3.14159 / 180) + sin((90-nLatitude) * 3.14159 / 180) * sin((90-`user`.`latitude`) * 3.14159 / 180) * cos((nLongitude-`user`.`longitude`) * 3.14159 / 180)) * 6370) <= `user`.`notify_radius`;
 	     END;");
 
-	// recreate the user statpic on next request
-	sql_dropProcedure('sp_refresh_statpic');
-	sql("CREATE PROCEDURE sp_refresh_statpic (IN nUserId INT(10) UNSIGNED)
+    // recreate the user statpic on next request
+    sql_dropProcedure('sp_refresh_statpic');
+    sql("CREATE PROCEDURE sp_refresh_statpic (IN nUserId INT(10) UNSIGNED)
 	     BEGIN
 			   DELETE FROM `user_statpic` WHERE `user_id`=nUserId;
 	     END;");
 
-	// recreate all user statpic on next request
-	sql_dropProcedure('sp_refreshall_statpic');
-	sql("CREATE PROCEDURE sp_refreshall_statpic ()
+    // recreate all user statpic on next request
+    sql_dropProcedure('sp_refreshall_statpic');
+    sql("CREATE PROCEDURE sp_refreshall_statpic ()
 	     BEGIN
 			   DELETE FROM `user_statpic`;
 	     END;");
 
-	/* Triggers
-	 */
-	sql_dropTrigger('cachesBeforeInsert');
-	sql("CREATE TRIGGER `cachesBeforeInsert` BEFORE INSERT ON `caches` 
+    /* Triggers
+     */
+    sql_dropTrigger('cachesBeforeInsert');
+    sql("CREATE TRIGGER `cachesBeforeInsert` BEFORE INSERT ON `caches` 
 				FOR EACH ROW 
 					BEGIN 
 						SET @dont_update_listingdate=1;
@@ -801,11 +801,11 @@
 
 						SET @dont_update_listingdate=0;
 					END;",
-					$opt['logic']['waypoint_pool']['prefix'],
-					'^' . $opt['logic']['waypoint_pool']['prefix'] . '[' . $opt['logic']['waypoint_pool']['valid_chars'] . ']{1,}$');
+                    $opt['logic']['waypoint_pool']['prefix'],
+                    '^' . $opt['logic']['waypoint_pool']['prefix'] . '[' . $opt['logic']['waypoint_pool']['valid_chars'] . ']{1,}$');
 
-	sql_dropTrigger('cachesAfterInsert');
-	sql("CREATE TRIGGER `cachesAfterInsert` AFTER INSERT ON `caches` 
+    sql_dropTrigger('cachesAfterInsert');
+    sql("CREATE TRIGGER `cachesAfterInsert` AFTER INSERT ON `caches` 
 				FOR EACH ROW 
 					BEGIN 
 						SET @dont_update_listingdate=1;
@@ -827,8 +827,8 @@
 						SET @dont_update_listingdate=0;
 					END;");
 
-	sql_dropTrigger('cachesBeforeUpdate');
-	sql("CREATE TRIGGER `cachesBeforeUpdate` BEFORE UPDATE ON `caches` 
+    sql_dropTrigger('cachesBeforeUpdate');
+    sql("CREATE TRIGGER `cachesBeforeUpdate` BEFORE UPDATE ON `caches` 
 				FOR EACH ROW 
 					BEGIN 
 						SET @dont_update_listingdate=1;
@@ -891,8 +891,8 @@
 						SET @dont_update_listingdate=0;
 					END;");
 
-	sql_dropTrigger('cachesAfterUpdate');
-	sql("CREATE TRIGGER `cachesAfterUpdate` AFTER UPDATE ON `caches` 
+    sql_dropTrigger('cachesAfterUpdate');
+    sql("CREATE TRIGGER `cachesAfterUpdate` AFTER UPDATE ON `caches` 
 				FOR EACH ROW 
 					BEGIN 
 						SET @dont_update_listingdate=1;
@@ -931,8 +931,8 @@
 						SET @dont_update_listingdate=0;
 					END;");
 
-	sql_dropTrigger('cachesAfterDelete');
-	sql("CREATE TRIGGER `cachesAfterDelete` AFTER DELETE ON `caches` 
+    sql_dropTrigger('cachesAfterDelete');
+    sql("CREATE TRIGGER `cachesAfterDelete` AFTER DELETE ON `caches` 
 				FOR EACH ROW 
 					BEGIN 
 						SET @dont_update_listingdate=1;
@@ -950,8 +950,8 @@
 						SET @dont_update_listingdate=0;
 					END;");
 
-	sql_dropTrigger('cacheDescBeforeInsert');
-	sql("CREATE TRIGGER `cacheDescBeforeInsert` BEFORE INSERT ON `cache_desc` 
+    sql_dropTrigger('cacheDescBeforeInsert');
+    sql("CREATE TRIGGER `cacheDescBeforeInsert` BEFORE INSERT ON `cache_desc` 
 				FOR EACH ROW 
 					BEGIN 
 						/* dont overwrite date values while XML client is running */
@@ -965,8 +965,8 @@
 						END IF;
 					END;");
 
-	sql_dropTrigger('cacheDescAfterInsert');
-	sql("CREATE TRIGGER `cacheDescAfterInsert` AFTER INSERT ON `cache_desc` 
+    sql_dropTrigger('cacheDescAfterInsert');
+    sql("CREATE TRIGGER `cacheDescAfterInsert` AFTER INSERT ON `cache_desc` 
 				FOR EACH ROW 
 					BEGIN 
 						CALL sp_update_cache_listingdate(NEW.`cache_id`);
@@ -977,8 +977,8 @@
 						CALL sp_update_caches_descLanguages(NEW.`cache_id`);
 					END;");
 
-	sql_dropTrigger('cacheDescBeforeUpdate');
-	sql("CREATE TRIGGER `cacheDescBeforeUpdate` BEFORE UPDATE ON `cache_desc` 
+    sql_dropTrigger('cacheDescBeforeUpdate');
+    sql("CREATE TRIGGER `cacheDescBeforeUpdate` BEFORE UPDATE ON `cache_desc` 
 				FOR EACH ROW 
 					BEGIN 
 						/* dont overwrite `last_modified` while XML client is running */
@@ -987,8 +987,8 @@
 						END IF;
 					END;");
 
-	sql_dropTrigger('cacheDescAfterUpdate');
-	sql("CREATE TRIGGER `cacheDescAfterUpdate` AFTER UPDATE ON `cache_desc` 
+    sql_dropTrigger('cacheDescAfterUpdate');
+    sql("CREATE TRIGGER `cacheDescAfterUpdate` AFTER UPDATE ON `cache_desc` 
 				FOR EACH ROW 
 					BEGIN 
 						IF OLD.`language`!=NEW.`language` OR OLD.`cache_id`!=NEW.`cache_id` THEN
@@ -1011,8 +1011,8 @@
 						END IF;
 					END;");
 
-	sql_dropTrigger('cacheDescAfterDelete');
-	sql("CREATE TRIGGER `cacheDescAfterDelete` AFTER DELETE ON `cache_desc` 
+    sql_dropTrigger('cacheDescAfterDelete');
+    sql("CREATE TRIGGER `cacheDescAfterDelete` AFTER DELETE ON `cache_desc` 
 				FOR EACH ROW 
 					BEGIN 
 						CALL sp_update_cache_listingdate(OLD.`cache_id`);
@@ -1025,15 +1025,15 @@
 						CALL sp_update_caches_descLanguages(OLD.`cache_id`);
 					END;");
 
-	sql_dropTrigger('cacheIgnoreAfterInsert');
-	sql("CREATE TRIGGER `cacheIgnoreAfterInsert` AFTER INSERT ON `cache_ignore` 
+    sql_dropTrigger('cacheIgnoreAfterInsert');
+    sql("CREATE TRIGGER `cacheIgnoreAfterInsert` AFTER INSERT ON `cache_ignore` 
 				FOR EACH ROW 
 					BEGIN 
 						CALL sp_update_ignorestat(NEW.`cache_id`, FALSE);
 					END;");
 
-	sql_dropTrigger('cacheIgnoreAfterUpdate');
-	sql("CREATE TRIGGER `cacheIgnoreAfterUpdate` AFTER UPDATE ON `cache_ignore` 
+    sql_dropTrigger('cacheIgnoreAfterUpdate');
+    sql("CREATE TRIGGER `cacheIgnoreAfterUpdate` AFTER UPDATE ON `cache_ignore` 
 				FOR EACH ROW 
 					BEGIN 
 						IF NEW.`cache_id`!=OLD.`cache_id` THEN
@@ -1042,29 +1042,29 @@
 						END IF;
 					END;");
 
-	sql_dropTrigger('cacheIgnoreAfterDelete');
-	sql("CREATE TRIGGER `cacheIgnoreAfterDelete` AFTER DELETE ON `cache_ignore` 
+    sql_dropTrigger('cacheIgnoreAfterDelete');
+    sql("CREATE TRIGGER `cacheIgnoreAfterDelete` AFTER DELETE ON `cache_ignore` 
 				FOR EACH ROW 
 					BEGIN 
 						CALL sp_update_ignorestat(OLD.`cache_id`, TRUE);
 					END;");
 
-	sql_dropTrigger('cacheLocationBeforeInsert');
-	sql("CREATE TRIGGER `cacheLocationBeforeInsert` BEFORE INSERT ON `cache_location` 
+    sql_dropTrigger('cacheLocationBeforeInsert');
+    sql("CREATE TRIGGER `cacheLocationBeforeInsert` BEFORE INSERT ON `cache_location` 
 				FOR EACH ROW 
 					BEGIN 
 						SET NEW.`last_modified`=NOW();
 					END;");
 
-	sql_dropTrigger('cacheLocationBeforeUpdate');
-	sql("CREATE TRIGGER `cacheLocationBeforeUpdate` BEFORE UPDATE ON `cache_location` 
+    sql_dropTrigger('cacheLocationBeforeUpdate');
+    sql("CREATE TRIGGER `cacheLocationBeforeUpdate` BEFORE UPDATE ON `cache_location` 
 				FOR EACH ROW 
 					BEGIN 
 						SET NEW.`last_modified`=NOW();
 					END;");
 
-	sql_dropTrigger('cacheLogsBeforeInsert');
-	sql("CREATE TRIGGER `cacheLogsBeforeInsert` BEFORE INSERT ON `cache_logs` 
+    sql_dropTrigger('cacheLogsBeforeInsert');
+    sql("CREATE TRIGGER `cacheLogsBeforeInsert` BEFORE INSERT ON `cache_logs` 
 				FOR EACH ROW 
 					BEGIN 
 						/* dont overwrite date values while XML client is running */
@@ -1079,8 +1079,8 @@
 						END IF;
 					END;");
 
-	sql_dropTrigger('cacheLogsAfterInsert');
-	sql("CREATE TRIGGER `cacheLogsAfterInsert` AFTER INSERT ON `cache_logs` 
+    sql_dropTrigger('cacheLogsAfterInsert');
+    sql("CREATE TRIGGER `cacheLogsAfterInsert` AFTER INSERT ON `cache_logs` 
 				FOR EACH ROW 
 					BEGIN 
 						DECLARE done INT DEFAULT 0;
@@ -1100,8 +1100,8 @@
 						CLOSE cur1;
 					END;");
 
-	sql_dropTrigger('cacheLogsBeforeUpdate');
-	sql("CREATE TRIGGER `cacheLogsBeforeUpdate` BEFORE UPDATE ON `cache_logs` 
+    sql_dropTrigger('cacheLogsBeforeUpdate');
+    sql("CREATE TRIGGER `cacheLogsBeforeUpdate` BEFORE UPDATE ON `cache_logs` 
 				FOR EACH ROW 
 					BEGIN 
 						/* dont overwrite `last_modified` while XML client is running */
@@ -1128,8 +1128,8 @@
 						END IF;
 					END;");
 
-	sql_dropTrigger('cacheLogsAfterUpdate');
-	sql("CREATE TRIGGER `cacheLogsAfterUpdate` AFTER UPDATE ON `cache_logs` 
+    sql_dropTrigger('cacheLogsAfterUpdate');
+    sql("CREATE TRIGGER `cacheLogsAfterUpdate` AFTER UPDATE ON `cache_logs` 
 				FOR EACH ROW 
 					BEGIN 
 						IF OLD.`cache_id`!=NEW.`cache_id` OR OLD.`user_id`!=NEW.`user_id` OR OLD.`type`!=NEW.`type` OR OLD.`date`!=NEW.`date` THEN
@@ -1138,17 +1138,17 @@
 						END IF;
 					END;");
 
-	sql_dropTrigger('cacheLogsAfterDelete');
-	sql("CREATE TRIGGER `cacheLogsAfterDelete` AFTER DELETE ON `cache_logs` 
+    sql_dropTrigger('cacheLogsAfterDelete');
+    sql("CREATE TRIGGER `cacheLogsAfterDelete` AFTER DELETE ON `cache_logs` 
 				FOR EACH ROW 
 					BEGIN 
 						CALL sp_update_logstat(OLD.`cache_id`, OLD.`user_id`, OLD.`type`, TRUE);
 						INSERT IGNORE INTO `removed_objects` (`localId`, `uuid`, `type`, `node`) VALUES (OLD.`id`, OLD.`uuid`, 1, OLD.`node`);
 					END;");
 
-	// IF condition is defined to work with both, rating_date field may be NULL or not
-	sql_dropTrigger('cacheRatingBeforeInsert');
-	sql("CREATE TRIGGER `cacheRatingBeforeInsert` BEFORE INSERT ON `cache_rating`
+    // IF condition is defined to work with both, rating_date field may be NULL or not
+    sql_dropTrigger('cacheRatingBeforeInsert');
+    sql("CREATE TRIGGER `cacheRatingBeforeInsert` BEFORE INSERT ON `cache_rating`
 				FOR EACH ROW
 					BEGIN
 						IF ISNULL(NEW.`rating_date`) OR NEW.`rating_date` < '2000' THEN
@@ -1156,16 +1156,16 @@
 						END IF;
 					END;");
 
-	sql_dropTrigger('cacheRatingAfterInsert');
-	sql("CREATE TRIGGER `cacheRatingAfterInsert` AFTER INSERT ON `cache_rating` 
+    sql_dropTrigger('cacheRatingAfterInsert');
+    sql("CREATE TRIGGER `cacheRatingAfterInsert` AFTER INSERT ON `cache_rating` 
 				FOR EACH ROW 
 					BEGIN 
 						CALL sp_update_topratingstat(NEW.`cache_id`, FALSE);
 						CALL sp_update_cachelog_rating(NEW.`cache_id`, NEW.`user_id`, NEW.`rating_date`);
 					END;");
 
-	sql_dropTrigger('cacheRatingAfterUpdate');
-	sql("CREATE TRIGGER `cacheRatingAfterUpdate` AFTER UPDATE ON `cache_rating` 
+    sql_dropTrigger('cacheRatingAfterUpdate');
+    sql("CREATE TRIGGER `cacheRatingAfterUpdate` AFTER UPDATE ON `cache_rating` 
 				FOR EACH ROW 
 					BEGIN 
 						IF NEW.`cache_id`!=OLD.`cache_id` THEN
@@ -1176,37 +1176,37 @@
 						END IF;
 					END;");
 
-	sql_dropTrigger('cacheRatingAfterDelete');
-	sql("CREATE TRIGGER `cacheRatingAfterDelete` AFTER DELETE ON `cache_rating` 
+    sql_dropTrigger('cacheRatingAfterDelete');
+    sql("CREATE TRIGGER `cacheRatingAfterDelete` AFTER DELETE ON `cache_rating` 
 				FOR EACH ROW 
 					BEGIN 
 						CALL sp_update_topratingstat(OLD.`cache_id`, TRUE);
 						CALL sp_update_cachelog_rating(OLD.`cache_id`, OLD.`user_id`, OLD.`rating_date`);
 					END;");
 
-	sql_dropTrigger('cacheVisitsBeforeInsert');
-	sql("CREATE TRIGGER `cacheVisitsBeforeInsert` BEFORE INSERT ON `cache_visits` 
+    sql_dropTrigger('cacheVisitsBeforeInsert');
+    sql("CREATE TRIGGER `cacheVisitsBeforeInsert` BEFORE INSERT ON `cache_visits` 
 				FOR EACH ROW 
 					BEGIN 
 						SET NEW.`last_modified`=NOW();
 					END;");
 
-	sql_dropTrigger('cacheVisitsBeforeUpdate');
-	sql("CREATE TRIGGER `cacheVisitsBeforeUpdate` BEFORE UPDATE ON `cache_visits` 
+    sql_dropTrigger('cacheVisitsBeforeUpdate');
+    sql("CREATE TRIGGER `cacheVisitsBeforeUpdate` BEFORE UPDATE ON `cache_visits` 
 				FOR EACH ROW 
 					BEGIN 
 						SET NEW.`last_modified`=NOW();
 					END;");
 
-	sql_dropTrigger('cacheWatchesAfterInsert');
-	sql("CREATE TRIGGER `cacheWatchesAfterInsert` AFTER INSERT ON `cache_watches` 
+    sql_dropTrigger('cacheWatchesAfterInsert');
+    sql("CREATE TRIGGER `cacheWatchesAfterInsert` AFTER INSERT ON `cache_watches` 
 				FOR EACH ROW 
 					BEGIN 
 						CALL sp_update_watchstat(NEW.`cache_id`, FALSE);
 					END;");
 
-	sql_dropTrigger('cacheWatchesAfterUpdate');
-	sql("CREATE TRIGGER `cacheWatchesAfterUpdate` AFTER UPDATE ON `cache_watches` 
+    sql_dropTrigger('cacheWatchesAfterUpdate');
+    sql("CREATE TRIGGER `cacheWatchesAfterUpdate` AFTER UPDATE ON `cache_watches` 
 				FOR EACH ROW 
 					BEGIN 
 						IF NEW.`cache_id`!=OLD.`cache_id` THEN
@@ -1215,36 +1215,36 @@
 						END IF;
 					END;");
 
-	sql_dropTrigger('cacheWatchesAfterDelete');
-	sql("CREATE TRIGGER `cacheWatchesAfterDelete` AFTER DELETE ON `cache_watches` 
+    sql_dropTrigger('cacheWatchesAfterDelete');
+    sql("CREATE TRIGGER `cacheWatchesAfterDelete` AFTER DELETE ON `cache_watches` 
 				FOR EACH ROW 
 					BEGIN 
 						CALL sp_update_watchstat(OLD.`cache_id`, TRUE);
 					END;");
 
-	sql_dropTrigger('emailUserBeforeInsert');
-	sql("CREATE TRIGGER `emailUserBeforeInsert` BEFORE INSERT ON `email_user` 
+    sql_dropTrigger('emailUserBeforeInsert');
+    sql("CREATE TRIGGER `emailUserBeforeInsert` BEFORE INSERT ON `email_user` 
 				FOR EACH ROW 
 					BEGIN 
 						SET NEW.`date_created`=NOW();
 					END;");
 
-	sql_dropTrigger('logentriesBeforeInsert');
-	sql("CREATE TRIGGER `logentriesBeforeInsert` BEFORE INSERT ON `logentries` 
+    sql_dropTrigger('logentriesBeforeInsert');
+    sql("CREATE TRIGGER `logentriesBeforeInsert` BEFORE INSERT ON `logentries` 
 				FOR EACH ROW 
 					BEGIN 
 						SET NEW.`date_created`=NOW();
 					END;");
 
-	sql_dropTrigger('newsBeforeInsert');
-	sql("CREATE TRIGGER `newsBeforeInsert` BEFORE INSERT ON `news` 
+    sql_dropTrigger('newsBeforeInsert');
+    sql("CREATE TRIGGER `newsBeforeInsert` BEFORE INSERT ON `news` 
 				FOR EACH ROW 
 					BEGIN 
 						SET NEW.`date_created`=NOW();
 					END;");
 
-	sql_dropTrigger('picturesBeforeInsert');
-	sql("CREATE TRIGGER `picturesBeforeInsert` BEFORE INSERT ON `pictures` 
+    sql_dropTrigger('picturesBeforeInsert');
+    sql("CREATE TRIGGER `picturesBeforeInsert` BEFORE INSERT ON `pictures` 
 				FOR EACH ROW 
 					BEGIN 
 						/* dont overwrite date values while XML client is running */
@@ -1258,8 +1258,8 @@
 						END IF;
 					END;");
 
-	sql_dropTrigger('picturesAfterInsert');
-	sql("CREATE TRIGGER `picturesAfterInsert` AFTER INSERT ON `pictures` 
+    sql_dropTrigger('picturesAfterInsert');
+    sql("CREATE TRIGGER `picturesAfterInsert` AFTER INSERT ON `pictures` 
 				FOR EACH ROW 
 					BEGIN 
 						IF @archive_picop AND
@@ -1277,8 +1277,8 @@
 						END IF;
 					END;");
 
-	sql_dropTrigger('picturesBeforeUpdate');
-	sql("CREATE TRIGGER `picturesBeforeUpdate` BEFORE UPDATE ON `pictures` 
+    sql_dropTrigger('picturesBeforeUpdate');
+    sql("CREATE TRIGGER `picturesBeforeUpdate` BEFORE UPDATE ON `pictures` 
 				FOR EACH ROW 
 					BEGIN 
 						/* dont overwrite date values while XML client is running */
@@ -1290,8 +1290,8 @@
 						END IF;
 					END;");
 
-	sql_dropTrigger('picturesAfterUpdate');
-	sql("CREATE TRIGGER `picturesAfterUpdate` AFTER UPDATE ON `pictures` 
+    sql_dropTrigger('picturesAfterUpdate');
+    sql("CREATE TRIGGER `picturesAfterUpdate` AFTER UPDATE ON `pictures` 
 				FOR EACH ROW 
 					BEGIN 
 						IF OLD.`object_type`!=NEW.`object_type` OR OLD.`object_id`!=NEW.`object_id` THEN
@@ -1330,8 +1330,8 @@
 						END IF;
 					END;");
 
-	sql_dropTrigger('picturesAfterDelete');
-	sql("CREATE TRIGGER `picturesAfterDelete` AFTER DELETE ON `pictures` 
+    sql_dropTrigger('picturesAfterDelete');
+    sql("CREATE TRIGGER `picturesAfterDelete` AFTER DELETE ON `pictures` 
 				FOR EACH ROW 
 					BEGIN 
 						INSERT IGNORE INTO `removed_objects` (`localId`, `uuid`, `type`, `node`) VALUES (OLD.`id`, OLD.`uuid`, 6, OLD.`node`);
@@ -1353,8 +1353,8 @@
 						END IF;
 					END;");
 
-	sql_dropTrigger('mp3BeforeInsert');
-	sql("CREATE TRIGGER `mp3BeforeInsert` BEFORE INSERT ON `mp3` 
+    sql_dropTrigger('mp3BeforeInsert');
+    sql("CREATE TRIGGER `mp3BeforeInsert` BEFORE INSERT ON `mp3` 
 				FOR EACH ROW 
 					BEGIN 
 						/* dont overwrite date values while XML client is running */
@@ -1364,12 +1364,12 @@
 						END IF;
 					END;");
 
-	// Triggers for updating listing date (sp_update_cache_listingdate) on mp3 changes
-	// are missing. We can't add them because there is only an object_id field and no
-	// object_type, so we don't know which mp3 belongs to a cache.
+    // Triggers for updating listing date (sp_update_cache_listingdate) on mp3 changes
+    // are missing. We can't add them because there is only an object_id field and no
+    // object_type, so we don't know which mp3 belongs to a cache.
 
-	sql_dropTrigger('mp3BeforeUpdate');
-	sql("CREATE TRIGGER `mp3BeforeUpdate` BEFORE UPDATE ON `mp3` 
+    sql_dropTrigger('mp3BeforeUpdate');
+    sql("CREATE TRIGGER `mp3BeforeUpdate` BEFORE UPDATE ON `mp3` 
 				FOR EACH ROW 
 					BEGIN 
 						/* dont overwrite date values while XML client is running */
@@ -1378,15 +1378,15 @@
 						END IF;
 					END;");
 
-	sql_dropTrigger('mp3AfterDelete');
-	sql("CREATE TRIGGER `mp3AfterDelete` AFTER DELETE ON `mp3` 
+    sql_dropTrigger('mp3AfterDelete');
+    sql("CREATE TRIGGER `mp3AfterDelete` AFTER DELETE ON `mp3` 
 				FOR EACH ROW 
 					BEGIN 
 						INSERT IGNORE INTO `removed_objects` (`localId`, `uuid`, `type`, `node`) VALUES (OLD.`id`, OLD.`uuid`, 8, OLD.`node`);
 					END;");
 
-	sql_dropTrigger('removedObjectsBeforeInsert');
-	sql("CREATE TRIGGER `removedObjectsBeforeInsert` BEFORE INSERT ON `removed_objects` 
+    sql_dropTrigger('removedObjectsBeforeInsert');
+    sql("CREATE TRIGGER `removedObjectsBeforeInsert` BEFORE INSERT ON `removed_objects` 
 				FOR EACH ROW 
 					BEGIN 
 						/* dont overwrite date values while XML client is running */
@@ -1395,15 +1395,15 @@
 						END IF;
 					END;");
 
-	sql_dropTrigger('sysLoginsBeforeInsert');
-	sql("CREATE TRIGGER `sysLoginsBeforeInsert` BEFORE INSERT ON `sys_logins` 
+    sql_dropTrigger('sysLoginsBeforeInsert');
+    sql("CREATE TRIGGER `sysLoginsBeforeInsert` BEFORE INSERT ON `sys_logins` 
 				FOR EACH ROW 
 					BEGIN 
 						SET NEW.`date_created`=NOW();
 					END;");
 
-	sql_dropTrigger('sysTransBeforeInsert');
-	sql("CREATE TRIGGER `sysTransBeforeInsert` BEFORE INSERT ON `sys_trans` 
+    sql_dropTrigger('sysTransBeforeInsert');
+    sql("CREATE TRIGGER `sysTransBeforeInsert` BEFORE INSERT ON `sys_trans` 
 				FOR EACH ROW 
 					BEGIN 
 						IF NEW.`last_modified` < '2000' THEN  
@@ -1411,15 +1411,15 @@
 						END IF;
 					END;");
 
-	sql_dropTrigger('sysTransBeforeUpdate');
-	sql("CREATE TRIGGER `sysTransBeforeUpdate` BEFORE UPDATE ON `sys_trans` 
+    sql_dropTrigger('sysTransBeforeUpdate');
+    sql("CREATE TRIGGER `sysTransBeforeUpdate` BEFORE UPDATE ON `sys_trans` 
 				FOR EACH ROW 
 					BEGIN 
 						SET NEW.`last_modified`=NOW();
 					END;");
 
-	sql_dropTrigger('sysTransTextBeforeInsert');
-	sql("CREATE TRIGGER `sysTransTextBeforeInsert` BEFORE INSERT ON `sys_trans_text` 
+    sql_dropTrigger('sysTransTextBeforeInsert');
+    sql("CREATE TRIGGER `sysTransTextBeforeInsert` BEFORE INSERT ON `sys_trans_text` 
 				FOR EACH ROW 
 					BEGIN
 						IF NEW.`last_modified` < '2000' THEN  
@@ -1427,15 +1427,15 @@
 						END IF;
 					END;");
 
-	sql_dropTrigger('sysTransTextBeforeUpdate');
-	sql("CREATE TRIGGER `sysTransTextBeforeUpdate` BEFORE UPDATE ON `sys_trans_text` 
+    sql_dropTrigger('sysTransTextBeforeUpdate');
+    sql("CREATE TRIGGER `sysTransTextBeforeUpdate` BEFORE UPDATE ON `sys_trans_text` 
 				FOR EACH ROW 
 					BEGIN 
 						SET NEW.`last_modified`=NOW();
 					END;");
 
-	sql_dropTrigger('userBeforeInsert');
-	sql("CREATE TRIGGER `userBeforeInsert` BEFORE INSERT ON `user` 
+    sql_dropTrigger('userBeforeInsert');
+    sql("CREATE TRIGGER `userBeforeInsert` BEFORE INSERT ON `user` 
 				FOR EACH ROW 
 					BEGIN 
 						/* dont overwrite date values while XML client is running */
@@ -1449,8 +1449,8 @@
 						END IF;
 					END;");
 
-	sql_dropTrigger('userBeforeUpdate');
-	sql("CREATE TRIGGER `userBeforeUpdate` BEFORE UPDATE ON `user` 
+    sql_dropTrigger('userBeforeUpdate');
+    sql("CREATE TRIGGER `userBeforeUpdate` BEFORE UPDATE ON `user` 
 				FOR EACH ROW 
 					BEGIN 
 						/* dont overwrite date values while XML client is running */
@@ -1473,8 +1473,8 @@
 						END IF;
 					END;");
 
-	sql_dropTrigger('userBeforeDelete');
-	sql("CREATE TRIGGER `userBeforeDelete` BEFORE DELETE ON `user` 
+    sql_dropTrigger('userBeforeDelete');
+    sql("CREATE TRIGGER `userBeforeDelete` BEFORE DELETE ON `user` 
 				FOR EACH ROW 
 					BEGIN
 						DELETE FROM `cache_adoption` WHERE `user_id`=OLD.user_id;
@@ -1488,85 +1488,85 @@
 						DELETE FROM `notify_waiting` WHERE `user_id`=OLD.user_id;
 					END;");
 
-	sql_dropTrigger('userAfterDelete');
-	sql("CREATE TRIGGER `userAfterDelete` AFTER DELETE ON `user` 
+    sql_dropTrigger('userAfterDelete');
+    sql("CREATE TRIGGER `userAfterDelete` AFTER DELETE ON `user` 
 				FOR EACH ROW 
 					BEGIN 
 						INSERT IGNORE INTO `removed_objects` (`localId`, `uuid`, `type`, `node`) VALUES (OLD.`user_id`, OLD.`uuid`, 4, OLD.`node`);
 					END;");
 
-	sql_dropTrigger('userDelegatesBeforeInsert');
-	sql("CREATE TRIGGER `userDelegatesBeforeInsert` BEFORE INSERT ON `user_delegates` 
+    sql_dropTrigger('userDelegatesBeforeInsert');
+    sql("CREATE TRIGGER `userDelegatesBeforeInsert` BEFORE INSERT ON `user_delegates` 
 				FOR EACH ROW 
 					BEGIN 
 						SET NEW.`date_created`=NOW();
 					END;");
 
-	sql_dropTrigger('userDelegatesBeforeUpdate');
-	sql("CREATE TRIGGER `userDelegatesBeforeUpdate` BEFORE UPDATE ON `user_delegates` 
+    sql_dropTrigger('userDelegatesBeforeUpdate');
+    sql("CREATE TRIGGER `userDelegatesBeforeUpdate` BEFORE UPDATE ON `user_delegates` 
 				FOR EACH ROW 
 					BEGIN 
 						SET NEW.`date_created`=NOW();
 					END;");
 
-	sql_dropTrigger('watchesNotifiedBeforeInsert');
-	sql("CREATE TRIGGER `watchesNotifiedBeforeInsert` BEFORE INSERT ON `watches_notified` 
+    sql_dropTrigger('watchesNotifiedBeforeInsert');
+    sql("CREATE TRIGGER `watchesNotifiedBeforeInsert` BEFORE INSERT ON `watches_notified` 
 				FOR EACH ROW 
 					BEGIN 
 						SET NEW.`date_created`=NOW();
 					END;");
 
-	sql_dropTrigger('watchesWaitingBeforeInsert');
-	sql("CREATE TRIGGER `watchesWaitingBeforeInsert` BEFORE INSERT ON `watches_waiting` 
+    sql_dropTrigger('watchesWaitingBeforeInsert');
+    sql("CREATE TRIGGER `watchesWaitingBeforeInsert` BEFORE INSERT ON `watches_waiting` 
 				FOR EACH ROW 
 					BEGIN 
 						SET NEW.`date_created`=NOW();
 					END;");
 
-	sql_dropTrigger('xmlsessionBeforeInsert');
-	sql("CREATE TRIGGER `xmlsessionBeforeInsert` BEFORE INSERT ON `xmlsession` 
+    sql_dropTrigger('xmlsessionBeforeInsert');
+    sql("CREATE TRIGGER `xmlsessionBeforeInsert` BEFORE INSERT ON `xmlsession` 
 				FOR EACH ROW 
 					BEGIN 
 						SET NEW.`date_created`=NOW();
 					END;");
 
-	sql_dropTrigger('cacheAdoptionBeforeInsert');
-	sql("CREATE TRIGGER `cacheAdoptionBeforeInsert` BEFORE INSERT ON `cache_adoption` 
+    sql_dropTrigger('cacheAdoptionBeforeInsert');
+    sql("CREATE TRIGGER `cacheAdoptionBeforeInsert` BEFORE INSERT ON `cache_adoption` 
 				FOR EACH ROW 
 					BEGIN 
 						SET NEW.`date_created`=NOW();
 					END;");
 
-	sql_dropTrigger('cacheAdoptionBeforeUpdate');
-	sql("CREATE TRIGGER `cacheAdoptionBeforeUpdate` BEFORE UPDATE ON `cache_adoption` 
+    sql_dropTrigger('cacheAdoptionBeforeUpdate');
+    sql("CREATE TRIGGER `cacheAdoptionBeforeUpdate` BEFORE UPDATE ON `cache_adoption` 
 				FOR EACH ROW 
 					BEGIN 
 						SET NEW.`date_created`=NOW();
 					END;");
 
-	sql_dropTrigger('userStatpicBeforeInsert');
-	sql("CREATE TRIGGER `userStatpicBeforeInsert` BEFORE INSERT ON `user_statpic` 
+    sql_dropTrigger('userStatpicBeforeInsert');
+    sql("CREATE TRIGGER `userStatpicBeforeInsert` BEFORE INSERT ON `user_statpic` 
 				FOR EACH ROW 
 					BEGIN 
 						SET NEW.`date_created`=NOW();
 					END;");
 
-	sql_dropTrigger('sysSessionsBeforeInsert');
-	sql("CREATE TRIGGER `sysSessionsBeforeInsert` BEFORE INSERT ON `sys_sessions` 
+    sql_dropTrigger('sysSessionsBeforeInsert');
+    sql("CREATE TRIGGER `sysSessionsBeforeInsert` BEFORE INSERT ON `sys_sessions` 
 				FOR EACH ROW 
 					BEGIN 
 						SET NEW.`last_login`=NOW();
 					END;");
 
-	sql_dropTrigger('sysSessionsAfterInsert');
-	sql("CREATE TRIGGER `sysSessionsAfterInsert` AFTER INSERT ON `sys_sessions` 
+    sql_dropTrigger('sysSessionsAfterInsert');
+    sql("CREATE TRIGGER `sysSessionsAfterInsert` AFTER INSERT ON `sys_sessions` 
 				FOR EACH ROW 
 					BEGIN 
 						UPDATE `user` SET `user`.`last_login`=NEW.`last_login` WHERE `user`.`user_id`=NEW.`user_id`;
 					END;");
 
-	sql_dropTrigger('cacheAttributesAfterInsert');
-	sql("CREATE TRIGGER `cacheAttributesAfterInsert` AFTER INSERT ON `caches_attributes` 
+    sql_dropTrigger('cacheAttributesAfterInsert');
+    sql("CREATE TRIGGER `cacheAttributesAfterInsert` AFTER INSERT ON `caches_attributes` 
 				FOR EACH ROW 
 					BEGIN 
 						IF ISNULL(@XMLSYNC) OR @XMLSYNC!=1 THEN
@@ -1579,8 +1579,8 @@
 						END IF;
 					END;");
 
-	sql_dropTrigger('cacheAttributesAfterUpdate');
-	sql("CREATE TRIGGER `cacheAttributesAfterUpdate` AFTER UPDATE ON `caches_attributes` 
+    sql_dropTrigger('cacheAttributesAfterUpdate');
+    sql("CREATE TRIGGER `cacheAttributesAfterUpdate` AFTER UPDATE ON `caches_attributes` 
 				FOR EACH ROW 
 					BEGIN 
 						IF ISNULL(@XMLSYNC) OR @XMLSYNC!=1 THEN
@@ -1594,8 +1594,8 @@
 						/* is not called, otherweise cache_attributes_modified would have to be updated */
 					END;");
 
-	sql_dropTrigger('cacheAttributesAfterDelete');
-	sql("CREATE TRIGGER `cacheAttributesAfterDelete` AFTER DELETE ON `caches_attributes` 
+    sql_dropTrigger('cacheAttributesAfterDelete');
+    sql("CREATE TRIGGER `cacheAttributesAfterDelete` AFTER DELETE ON `caches_attributes` 
 				FOR EACH ROW 
 					BEGIN 
 						IF ISNULL(@XMLSYNC) OR @XMLSYNC!=1 THEN
@@ -1608,15 +1608,15 @@
 						END IF;
 					END;");
 
-	sql_dropTrigger('map2resultAfterDelete');
-	sql("CREATE TRIGGER `map2resultAfterDelete` AFTER DELETE ON `map2_result` 
+    sql_dropTrigger('map2resultAfterDelete');
+    sql("CREATE TRIGGER `map2resultAfterDelete` AFTER DELETE ON `map2_result` 
 				FOR EACH ROW 
 					BEGIN 
 						DELETE FROM `map2_data` WHERE `result_id`=OLD.`result_id`;
 					END;");
 
-	sql_dropTrigger('coordinatesBeforeInsert');
-	sql("CREATE TRIGGER `coordinatesBeforeInsert` BEFORE INSERT ON `coordinates`
+    sql_dropTrigger('coordinatesBeforeInsert');
+    sql("CREATE TRIGGER `coordinatesBeforeInsert` BEFORE INSERT ON `coordinates`
 				FOR EACH ROW
 					BEGIN
 						/* dont overwrite date values while XML client is running */
@@ -1626,8 +1626,8 @@
 						END IF;
 					END;");
 
-	sql_dropTrigger('coordinatesAfterInsert');
-	sql("CREATE TRIGGER `coordinatesAfterInsert` AFTER INSERT ON `coordinates`
+    sql_dropTrigger('coordinatesAfterInsert');
+    sql("CREATE TRIGGER `coordinatesAfterInsert` AFTER INSERT ON `coordinates`
 				FOR EACH ROW
 					BEGIN
 						IF NEW.`type`=1 THEN
@@ -1639,8 +1639,8 @@
 						END IF;
 					END;");
 
-	sql_dropTrigger('coordinatesBeforeUpdate');
-	sql("CREATE TRIGGER `coordinatesBeforeUpdate` BEFORE UPDATE ON `coordinates`
+    sql_dropTrigger('coordinatesBeforeUpdate');
+    sql("CREATE TRIGGER `coordinatesBeforeUpdate` BEFORE UPDATE ON `coordinates`
 				FOR EACH ROW
 					BEGIN
 						/* dont overwrite `last_modified` while XML client is running */
@@ -1649,8 +1649,8 @@
 						END IF;
 					END;");
 
-	sql_dropTrigger('coordinatesAfterUpdate');
-	sql("CREATE TRIGGER `coordinatesAfterUpdate` AFTER UPDATE ON `coordinates`
+    sql_dropTrigger('coordinatesAfterUpdate');
+    sql("CREATE TRIGGER `coordinatesAfterUpdate` AFTER UPDATE ON `coordinates`
 				FOR EACH ROW
 					BEGIN
 						IF NEW.`type`=1 THEN
@@ -1665,8 +1665,8 @@
 						END IF;
 					END;");
 
-	sql_dropTrigger('coordinatesAfterDelete');
-	sql("CREATE TRIGGER `coordinatesAfterDelete` AFTER DELETE ON `coordinates`
+    sql_dropTrigger('coordinatesAfterDelete');
+    sql("CREATE TRIGGER `coordinatesAfterDelete` AFTER DELETE ON `coordinates`
 				FOR EACH ROW
 					BEGIN
 						IF OLD.`type`=1 THEN
@@ -1678,8 +1678,8 @@
 						END IF;
 					END;");
 
-	sql_dropTrigger('savedTextsBeforeInsert');
-	sql("CREATE TRIGGER `savedTextsBeforeInsert` BEFORE INSERT ON `saved_texts`
+    sql_dropTrigger('savedTextsBeforeInsert');
+    sql("CREATE TRIGGER `savedTextsBeforeInsert` BEFORE INSERT ON `saved_texts`
 				FOR EACH ROW
 					BEGIN
 						/* dont overwrite creation date while XML client is running */
@@ -1688,8 +1688,8 @@
 						END IF;
 					END;");
 
-	sql_dropTrigger('cacheReportsBeforeInsert');
-	sql("CREATE TRIGGER `cacheReportsBeforeInsert` BEFORE INSERT ON `cache_reports`
+    sql_dropTrigger('cacheReportsBeforeInsert');
+    sql("CREATE TRIGGER `cacheReportsBeforeInsert` BEFORE INSERT ON `cache_reports`
 				FOR EACH ROW
 					BEGIN
 						/* dont overwrite creation date while XML client is running */
@@ -1698,8 +1698,8 @@
 						END IF;
 					END;");
 
-	sql_dropTrigger('statCachesAfterInsert');
-	sql("CREATE TRIGGER `statCachesAfterInsert` AFTER INSERT ON `stat_caches`
+    sql_dropTrigger('statCachesAfterInsert');
+    sql("CREATE TRIGGER `statCachesAfterInsert` AFTER INSERT ON `stat_caches`
 				FOR EACH ROW
 					BEGIN
 						/* meta_last_modified=NOW() is used to trigger an update of okapi_syncbase,
@@ -1707,8 +1707,8 @@
 						UPDATE caches SET meta_last_modified=NOW() WHERE caches.cache_id=NEW.cache_id;
 					END;");
 
-	sql_dropTrigger('statCachesAfterUpdate');
-	sql("CREATE TRIGGER `statCachesAfterUpdate` AFTER UPDATE ON `stat_caches`
+    sql_dropTrigger('statCachesAfterUpdate');
+    sql("CREATE TRIGGER `statCachesAfterUpdate` AFTER UPDATE ON `stat_caches`
 				FOR EACH ROW
 					BEGIN
 						IF NEW.found<>OLD.found OR NEW.notfound<>OLD.notfound OR NEW.note<>OLD.note OR
@@ -1720,16 +1720,16 @@
 						END IF;
 					END;");
 
-	sql_dropTrigger('gkItemWaypointAfterInsert');
-	sql("CREATE TRIGGER `gkItemWaypointAfterInsert` AFTER INSERT ON `gk_item_waypoint`
+    sql_dropTrigger('gkItemWaypointAfterInsert');
+    sql("CREATE TRIGGER `gkItemWaypointAfterInsert` AFTER INSERT ON `gk_item_waypoint`
 				FOR EACH ROW
 					BEGIN
 						/* this triggers an update of okapi_syncbase, if OKAPI is installed */
 						UPDATE caches SET meta_last_modified=NOW() WHERE caches.wp_oc=NEW.wp;
 					END;");
 
-	sql_dropTrigger('gkItemWaypointAfterUpdate');
-	sql("CREATE TRIGGER `gkItemWaypointAfterUpdate` AFTER UPDATE ON `gk_item_waypoint`
+    sql_dropTrigger('gkItemWaypointAfterUpdate');
+    sql("CREATE TRIGGER `gkItemWaypointAfterUpdate` AFTER UPDATE ON `gk_item_waypoint`
 				FOR EACH ROW
 					BEGIN
 						/* this triggers an update of okapi_syncbase, if OKAPI is installed */
@@ -1737,19 +1737,17 @@
 						UPDATE caches SET meta_last_modified=NOW() WHERE caches.wp_oc=NEW.wp;
 					END;");
 
-	sql_dropTrigger('gkItemWaypointAfterDelete');
-	sql("CREATE TRIGGER `gkItemWaypointAfterDelete` AFTER DELETE ON `gk_item_waypoint`
+    sql_dropTrigger('gkItemWaypointAfterDelete');
+    sql("CREATE TRIGGER `gkItemWaypointAfterDelete` AFTER DELETE ON `gk_item_waypoint`
 				FOR EACH ROW
 					BEGIN
 						/* this triggers an update of okapi_syncbase, if OKAPI is installed */
 						UPDATE caches SET meta_last_modified=NOW() WHERE caches.wp_oc=OLD.wp;
 					END;");
 
-	// Update trigger version.
-	// Keep this at the end of this file.
-	sql_dropFunction('dbsvTriggerVersion');
-	sql("
+    // Update trigger version.
+    // Keep this at the end of this file.
+    sql_dropFunction('dbsvTriggerVersion');
+    sql("
 		CREATE FUNCTION `dbsvTriggerVersion` () RETURNS INT
 		RETURN 113");
-
-?>

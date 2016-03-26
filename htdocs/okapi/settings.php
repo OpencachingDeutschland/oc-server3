@@ -17,7 +17,7 @@ use okapi\Locales;
 # Please note: These settings WILL mutate. Some of them might get deprecated,
 # others might change their meaning and/or possible values.
 
-final class Settings
+final class settings
 {
     /** Default values for setting keys. */
     private static $DEFAULT_SETTINGS = array(
@@ -201,15 +201,12 @@ final class Settings
             require_once($GLOBALS['rootpath']."okapi_settings.php");
             $ref = get_okapi_settings();
             OkapiErrorHandler::reenable();
-
         } catch (Exception $e) {
             throw new Exception("Could not import <rootpath>/okapi_settings.php:\n".$e->getMessage());
         }
         self::$SETTINGS = self::$DEFAULT_SETTINGS;
-        foreach (self::$SETTINGS as $key => $_)
-        {
-            if (isset($ref[$key]))
-            {
+        foreach (self::$SETTINGS as $key => $_) {
+            if (isset($ref[$key])) {
                 self::$SETTINGS[$key] = $ref[$key];
             }
         }
@@ -218,37 +215,54 @@ final class Settings
 
     private static function verify(&$dict)
     {
-        if (!in_array($dict['OC_BRANCH'], array('oc.pl', 'oc.de')))
+        if (!in_array($dict['OC_BRANCH'], array('oc.pl', 'oc.de'))) {
             throw new Exception("Currently, OC_BRANCH has to be either 'oc.pl' or 'oc.de'. Hint: Whom did you get your code from?");
+        }
         $boolean_keys = array('DEBUG', 'DEBUG_PREVENT_EMAILS', 'DEBUG_PREVENT_SEMAPHORES');
-        foreach ($boolean_keys as $key)
-            if (!in_array($dict[$key], array(true, false)))
+        foreach ($boolean_keys as $key) {
+            if (!in_array($dict[$key], array(true, false))) {
                 throw new Exception("Invalid value for $key.");
-        if (count($dict['ADMINS']) == 0)
+            }
+        }
+        if (count($dict['ADMINS']) == 0) {
             throw new Exception("ADMINS array has to filled (e.g. array('root@localhost')).");
-        if ($dict['DEBUG'] == false)
-            foreach ($dict as $k => $v)
-                if ((strpos($k, 'DEBUG_') === 0) && $v == true)
+        }
+        if ($dict['DEBUG'] == false) {
+            foreach ($dict as $k => $v) {
+                if ((strpos($k, 'DEBUG_') === 0) && $v == true) {
                     throw new Exception("When DEBUG is false, $k has to be false too.");
-        if ($dict['VAR_DIR'] == null)
+                }
+            }
+        }
+        if ($dict['VAR_DIR'] == null) {
             throw new Exception("VAR_DIR cannot be null. Please provide a valid directory.");
-        if ($dict['IMAGES_DIR'] == null)
+        }
+        if ($dict['IMAGES_DIR'] == null) {
             throw new Exception("IMAGES_DIR cannot be null. Please provide a valid directory.");
-        foreach ($dict as $k => $v)
-            if ((strpos($k, '_DIR') !== false) && ($k[strlen($k) - 1] == '/'))
+        }
+        foreach ($dict as $k => $v) {
+            if ((strpos($k, '_DIR') !== false) && ($k[strlen($k) - 1] == '/')) {
                 throw new Exception("None of the *_DIR settings may end with a slash. Check $k.");
+            }
+        }
         $notnull = array('OC_COOKIE_NAME', 'DB_SERVER', 'DB_NAME', 'DB_USERNAME', 'SITE_URL', 'OC_NODE_ID');
-        foreach ($notnull as $k)
-            if ($dict[$k] === null)
+        foreach ($notnull as $k) {
+            if ($dict[$k] === null) {
                 throw new Exception("$k cannot be null.");
-        if ($dict['ORIGIN_URL'] === null)
+            }
+        }
+        if ($dict['ORIGIN_URL'] === null) {
             $dict['ORIGIN_URL'] = $dict['SITE_URL'];
+        }
         $slash_keys = array('SITE_URL', 'ORIGIN_URL');
-        foreach ($slash_keys as $key)
-            if ($dict[$key][strlen($dict[$key]) - 1] != '/')
+        foreach ($slash_keys as $key) {
+            if ($dict[$key][strlen($dict[$key]) - 1] != '/') {
                 throw new Exception("$key must end with a slash.");
-        if ($dict['SITE_LOGO'] === null)
+            }
+        }
+        if ($dict['SITE_LOGO'] === null) {
             $dict['SITE_LOGO'] = $dict['SITE_URL'] . 'okapi/static/oc_logo.png';
+        }
 
         # The OKAPI code is only compatible with utf8 and utf8mb4 charsets.
         if (!in_array($dict['DB_CHARSET'], array('utf8', 'utf8mb4'))) {
@@ -261,11 +275,13 @@ final class Settings
      */
     public static function get($key)
     {
-        if (self::$SETTINGS == null)
+        if (self::$SETTINGS == null) {
             self::load_settings();
+        }
 
-        if (!array_key_exists($key, self::$SETTINGS))
+        if (!array_key_exists($key, self::$SETTINGS)) {
             throw new Exception("Tried to access an invalid settings key: '$key'");
+        }
 
         return self::$SETTINGS[$key];
     }

@@ -15,8 +15,7 @@ use okapi\OkapiInternalRequest;
 use okapi\services\attrs\AttrHelper;
 use okapi\Db;
 
-
-class WebService
+class attributes
 {
     public static function options()
     {
@@ -35,26 +34,35 @@ class WebService
         # Read the parameters.
 
         $acodes = $request->get_parameter('acodes');
-        if (!$acodes) throw new ParamMissing('acodes');
+        if (!$acodes) {
+            throw new ParamMissing('acodes');
+        }
         $acodes = explode("|", $acodes);
 
         $langpref = $request->get_parameter('langpref');
-        if (!$langpref) $langpref = "en";
+        if (!$langpref) {
+            $langpref = "en";
+        }
         $langpref = explode("|", $langpref);
 
         $fields = $request->get_parameter('fields');
-        if (!$fields) $fields = "name";
+        if (!$fields) {
+            $fields = "name";
+        }
         $fields = explode("|", $fields);
-        foreach ($fields as $field)
-        {
-            if (!in_array($field, self::$valid_field_names))
+        foreach ($fields as $field) {
+            if (!in_array($field, self::$valid_field_names)) {
                 throw new InvalidParam('fields', "'$field' is not a valid field code.");
+            }
         }
 
         $forward_compatible = $request->get_parameter('forward_compatible');
-        if (!$forward_compatible) $forward_compatible = "true";
-        if (!in_array($forward_compatible, array("true", "false")))
+        if (!$forward_compatible) {
+            $forward_compatible = "true";
+        }
+        if (!in_array($forward_compatible, array("true", "false"))) {
             throw new InvalidParam('forward_compatible');
+        }
         $forward_compatible = ($forward_compatible == "true");
 
         # Load the attributes (all of them).
@@ -66,8 +74,7 @@ class WebService
         # to the results.
 
         $results = array();
-        foreach ($acodes as $acode)
-        {
+        foreach ($acodes as $acode) {
             /* Please note, that the $attr variable from the $attrdict dictionary
              * below is NOT fully compatible with the interface of the "attribute"
              * method. Some of $attr's fields are private and should not be exposed,
@@ -101,8 +108,7 @@ class WebService
         # in the $attrdict because currently we have no way of knowing then they
         # change.)
 
-        if (in_array('local_icon_url', $fields))
-        {
+        if (in_array('local_icon_url', $fields)) {
             $tmp = Db::select_all("
                 select id, icon_large
                 from cache_attrib
@@ -133,8 +139,9 @@ class WebService
                 continue;
             }
             $clean_row = array();
-            foreach ($fields as $field)
+            foreach ($fields as $field) {
                 $clean_row[$field] = $attr_ref[$field];
+            }
             $attr_ref = $clean_row;
         }
 

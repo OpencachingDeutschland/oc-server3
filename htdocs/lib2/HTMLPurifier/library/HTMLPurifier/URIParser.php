@@ -12,7 +12,8 @@ class HTMLPurifier_URIParser
      */
     protected $percentEncoder;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->percentEncoder = new HTMLPurifier_PercentEncoder();
     }
 
@@ -22,8 +23,8 @@ class HTMLPurifier_URIParser
      * @return HTMLPurifier_URI representation of URI. This representation has
      *         not been validated yet and may not conform to RFC.
      */
-    public function parse($uri) {
-
+    public function parse($uri)
+    {
         $uri = $this->percentEncoder->normalize($uri);
 
         // Regexp is as per Appendix B.
@@ -40,7 +41,9 @@ class HTMLPurifier_URIParser
         $matches = array();
         $result = preg_match($r_URI, $uri, $matches);
 
-        if (!$result) return false; // *really* invalid URI
+        if (!$result) {
+            return false;
+        } // *really* invalid URI
 
         // seperate out parts
         $scheme     = !empty($matches[1]) ? $matches[2] : null;
@@ -64,7 +67,6 @@ class HTMLPurifier_URIParser
         return new HTMLPurifier_URI(
             $scheme, $userinfo, $host, $port, $path, $query, $fragment);
     }
-
 }
 
 // vim: et sw=4 sts=4

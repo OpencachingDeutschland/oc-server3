@@ -42,12 +42,17 @@ Opencaching.<i>xx</i> sites. This OKAPI installation provides services for the
 Here is the list of other OKAPI installations:</p>
 
 <ul>
-    <?php foreach ($vars['installations'] as $inst) { ?>
+    <?php foreach ($vars['installations'] as $inst) {
+    ?>
         <li>
-            <?= $inst['site_name'] ?><?php if ($inst['site_name'] == "Opencaching.DE") { print "*"; } ?>
+            <?= $inst['site_name'] ?><?php if ($inst['site_name'] == "Opencaching.DE") {
+    print "*";
+}
+    ?>
             - <a href='<?= $inst['okapi_base_url'] ?>'><?= $inst['okapi_base_url'] ?></a>
         </li>
-    <?php } ?>
+    <?php 
+} ?>
 </ul>
 
 <p>Other links you might want to check out:</p>
@@ -493,9 +498,11 @@ directly, if you want.</p>
 <p>OKAPI web services (methods) currently available on this server:</p>
 
 <ul>
-    <?php foreach ($vars['method_index'] as $method_info) { ?>
+    <?php foreach ($vars['method_index'] as $method_info) {
+    ?>
         <li><a href='<?= $vars['site_url']."okapi/".$method_info['name'].".html" ?>'><?= $method_info['name'] ?></a> - <?= $method_info['brief_description'] ?></li>
-    <?php } ?>
+    <?php 
+} ?>
 </ul>
 
 

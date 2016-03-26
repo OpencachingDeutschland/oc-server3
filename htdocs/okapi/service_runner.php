@@ -4,7 +4,7 @@ namespace okapi;
 
 use Exception;
 
-class OkapiServiceRunner
+class service_runner
 {
     #
     # This the list of all available OKAPI methods. All methods on this list become
@@ -68,15 +68,14 @@ class OkapiServiceRunner
     /** Get method options (is consumer required etc.). */
     public static function options($service_name)
     {
-        if (!self::exists($service_name))
+        if (!self::exists($service_name)) {
             throw new Exception();
+        }
         require_once($GLOBALS['rootpath']."okapi/$service_name.php");
-        try
-        {
+        try {
             return call_user_func(array('\\okapi\\'.
                 str_replace('/', '\\', $service_name).'\\WebService', 'options'));
-        } catch (Exception $e)
-        {
+        } catch (Exception $e) {
             throw new Exception("Make sure you've declared your WebService class ".
                 "in an valid namespace (".'okapi\\'.str_replace('/', '\\', $service_name)."); ".
                 $e->getMessage());
@@ -89,8 +88,9 @@ class OkapiServiceRunner
      */
     public static function docs($service_name)
     {
-        if (!self::exists($service_name))
+        if (!self::exists($service_name)) {
             throw new Exception();
+        }
         try {
             return file_get_contents("$service_name.xml", true);
         } catch (Exception $e) {
@@ -111,31 +111,28 @@ class OkapiServiceRunner
     {
         Okapi::init_internals();
 
-        if (!self::exists($service_name))
+        if (!self::exists($service_name)) {
             throw new Exception("Method does not exist: '$service_name'");
+        }
 
         $options = self::options($service_name);
-        if ($options['min_auth_level'] >= 2 && $request->consumer == null)
-        {
+        if ($options['min_auth_level'] >= 2 && $request->consumer == null) {
             throw new Exception("Method '$service_name' called with mismatched OkapiRequest: ".
                 "\$request->consumer MAY NOT be empty for Level 2 and Level 3 methods. Provide ".
                 "a dummy Consumer if you have to.");
         }
-        if ($options['min_auth_level'] >= 3 && $request->token == null)
-        {
+        if ($options['min_auth_level'] >= 3 && $request->token == null) {
             throw new Exception("Method '$service_name' called with mismatched OkapiRequest: ".
                 "\$request->token MAY NOT be empty for Level 3 methods.");
         }
 
         $time_started = microtime(true);
         Okapi::gettext_domain_init();
-        try
-        {
+        try {
             require_once($GLOBALS['rootpath']."okapi/$service_name.php");
             $response = call_user_func(array('\\okapi\\'.
                 str_replace('/', '\\', $service_name).'\\WebService', 'call'), $request);
-            if ($options['min_auth_level'] >= 3 && $request->token->token_type == "access")
-            {
+            if ($options['min_auth_level'] >= 3 && $request->token->token_type == "access") {
                 Db::execute("
                     update user set last_login=now()
                     where user_id='".Db::escape_string($request->token->user_id)."'
@@ -175,10 +172,11 @@ class OkapiServiceRunner
         if ($request !== null) {
             $consumer_key = ($request->consumer != null) ? $request->consumer->key : 'anonymous';
             $user_id = (($request->token != null) && ($request->token instanceof OkapiAccessToken)) ? $request->token->user_id : -1;
-            if ($request->is_http_request() && ($service_name[0] == 's'))  # 's' for "services/", we don't want "extra/" included
+            if ($request->is_http_request() && ($service_name[0] == 's')) {  # 's' for "services/", we don't want "extra/" included
                 $calltype = 'http';
-            else
+            } else {
                 $calltype = 'internal';
+            }
         } else {
             $consumer_key = 'internal';
             $user_id = -1;

@@ -1,8 +1,8 @@
 <?php
   /*
-		For license information see doc/license.txt
+        For license information see doc/license.txt
 
-		Unicode Reminder メモ
+        Unicode Reminder メモ
 
     BBOX=2.38443,45.9322,20.7053,55.0289
   */
@@ -15,12 +15,22 @@
   $bbox = isset($_REQUEST['BBOX']) ? $_REQUEST['BBOX'] : '0,0,0,0';
   $abox = mb_split(',', $bbox);
 
-  if (count($abox) != 4) exit;
+  if (count($abox) != 4) {
+      exit;
+  }
 
-  if (!is_numeric($abox[0])) exit;
-  if (!is_numeric($abox[1])) exit;
-  if (!is_numeric($abox[2])) exit;
-  if (!is_numeric($abox[3])) exit;
+  if (!is_numeric($abox[0])) {
+      exit;
+  }
+  if (!is_numeric($abox[1])) {
+      exit;
+  }
+  if (!is_numeric($abox[2])) {
+      exit;
+  }
+  if (!is_numeric($abox[3])) {
+      exit;
+  }
 
   $lat_from = $abox[1];
   $lon_from = $abox[0];
@@ -32,7 +42,7 @@
   */
 
   // see also lib2/search/search.kml.inc.php
-  $kmlLine = 
+  $kmlLine =
 '
 <Placemark>
   <description><![CDATA['.$t_by.' {username}<br><br><a href="{urlbase}viewcache.php?cacheid={cacheid}">'.$t_showdesc.'</a><br>&nbsp;<br><table cellspacing="0" cellpadding="0" border="0"><tr><td>{typeimgurl} </td><td>'.$t_type.' {type}<br>'.$t_size.' {size}</td></tr><tr><td colspan="2">'.$t_difficulty.'<br>'.$t_terrain.'</td></tr></table>]]></description>
@@ -51,7 +61,7 @@
 </Placemark>
 ';
 
-	// see also resource2/misc/google-earth/search.result.caches.kml.head.xml
+    // see also resource2/misc/google-earth/search.result.caches.kml.head.xml
   $kmlHead =
 '<?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://earth.google.com/kml/2.0">
@@ -171,25 +181,22 @@
 			<open>0</open>
 			';
 
-	$kmlFoot = '
+    $kmlFoot = '
 			</Folder>
 		</Document>
 	</kml>';
 
-	$kmlTimeFormat = 'Y-m-d\TH:i:s\Z';
+    $kmlTimeFormat = 'Y-m-d\TH:i:s\Z';
 
-	//  header("Content-type: application/vnd.google-earth.kml");
-	//  header("Content-Disposition: attachment; filename=ge.kml");
+    //  header("Content-type: application/vnd.google-earth.kml");
+    //  header("Content-Disposition: attachment; filename=ge.kml");
 
-	echo mb_ereg_replace('{urlbase}', xmlentities($opt['page']['default_absolute_url']), $kmlHead);
+    echo mb_ereg_replace('{urlbase}', xmlentities($opt['page']['default_absolute_url']), $kmlHead);
 
-	if ((abs($lon_from - $lon_to) > 2) || (abs($lat_from - $lat_to) > 2))
-	{
-		echoZoomIn($lon_from, $lon_to, $lat_from, $lat_to);
-	}
-	else
-	{
-		$rs = sql("SELECT `caches`.`cache_id` AS `cacheid`,
+    if ((abs($lon_from - $lon_to) > 2) || (abs($lat_from - $lat_to) > 2)) {
+        echoZoomIn($lon_from, $lon_to, $lat_from, $lat_to);
+    } else {
+        $rs = sql("SELECT `caches`.`cache_id` AS `cacheid`,
 		                  `caches`.`longitude` AS `longitude`,
 		                  `caches`.`latitude` AS `latitude`,
 		                  `caches`.`type` AS `type`,
@@ -215,61 +222,60 @@
 											`caches`.`latitude`>='&3' AND 
 											`caches`.`latitude`<='&4' AND
 											`stt_type`.`lang`='&5' and `stt_size`.`lang`='&5'",
-											$lon_from, $lon_to, $lat_from, $lat_to,
-											$opt['template']['locale']);
+                                            $lon_from, $lon_to, $lat_from, $lat_to,
+                                            $opt['template']['locale']);
 
-		$nCount = 0;
-		while ($r = sql_fetch_array($rs))
-		{
-			$nCount = $nCount + 1;
-			$thisline = $kmlLine;
-			
-			$typeimgurl = '<img src="'.$opt['page']['default_absolute_url'].'resource2/'.$opt['template']['style'].'/images/cacheicon/'.$r['icon_large'].'" alt="'.$r['typedesc'].'" title="'.$r['typedesc'].'" />';
+        $nCount = 0;
+        while ($r = sql_fetch_array($rs)) {
+            $nCount = $nCount + 1;
+            $thisline = $kmlLine;
+            
+            $typeimgurl = '<img src="'.$opt['page']['default_absolute_url'].'resource2/'.$opt['template']['style'].'/images/cacheicon/'.$r['icon_large'].'" alt="'.$r['typedesc'].'" title="'.$r['typedesc'].'" />';
 
-			$thisline = mb_ereg_replace('{icon}', $r['kml_name'], $thisline);
-			$thisline = mb_ereg_replace('{typeimgurl}', $typeimgurl, $thisline);
-			
-			$lat = sprintf('%01.5f', $r['latitude']);
-			$thisline = mb_ereg_replace('{lat}', $lat, $thisline);
-			
-			$lon = sprintf('%01.5f', $r['longitude']);
-			$thisline = mb_ereg_replace('{lon}', $lon, $thisline);
+            $thisline = mb_ereg_replace('{icon}', $r['kml_name'], $thisline);
+            $thisline = mb_ereg_replace('{typeimgurl}', $typeimgurl, $thisline);
+            
+            $lat = sprintf('%01.5f', $r['latitude']);
+            $thisline = mb_ereg_replace('{lat}', $lat, $thisline);
+            
+            $lon = sprintf('%01.5f', $r['longitude']);
+            $thisline = mb_ereg_replace('{lon}', $lon, $thisline);
 
-			$time = date($kmlTimeFormat, strtotime($r['date_hidden']));
-			$thisline = mb_ereg_replace('{time}', $time, $thisline);
+            $time = date($kmlTimeFormat, strtotime($r['date_hidden']));
+            $thisline = mb_ereg_replace('{time}', $time, $thisline);
 
-			$thisline = mb_ereg_replace('{name}', xmlentities($r['name']), $thisline);
-			
-			$thisline = mb_ereg_replace('{type}', xmlentities($r['typedesc']), $thisline);
-			$thisline = mb_ereg_replace('{size}', xmlentities($r['sizedesc']), $thisline);
-			
-			$difficulty = sprintf('%01.1f', $r['difficulty'] / 2);
-			$thisline = mb_ereg_replace('{difficulty}', $difficulty, $thisline);
+            $thisline = mb_ereg_replace('{name}', xmlentities($r['name']), $thisline);
+            
+            $thisline = mb_ereg_replace('{type}', xmlentities($r['typedesc']), $thisline);
+            $thisline = mb_ereg_replace('{size}', xmlentities($r['sizedesc']), $thisline);
+            
+            $difficulty = sprintf('%01.1f', $r['difficulty'] / 2);
+            $thisline = mb_ereg_replace('{difficulty}', $difficulty, $thisline);
 
-			$terrain = sprintf('%01.1f', $r['terrain'] / 2);
-			$thisline = mb_ereg_replace('{terrain}', $terrain, $thisline);
+            $terrain = sprintf('%01.1f', $r['terrain'] / 2);
+            $thisline = mb_ereg_replace('{terrain}', $terrain, $thisline);
 
-			$time = date($kmlTimeFormat, strtotime($r['date_hidden']));
-			$thisline = mb_ereg_replace('{time}', $time, $thisline);
+            $time = date($kmlTimeFormat, strtotime($r['date_hidden']));
+            $thisline = mb_ereg_replace('{time}', $time, $thisline);
 
-			$thisline = mb_ereg_replace('{username}', xmlentities($r['username']), $thisline);
-			$thisline = mb_ereg_replace('{cacheid}', xmlentities($r['cacheid']), $thisline);
+            $thisline = mb_ereg_replace('{username}', xmlentities($r['username']), $thisline);
+            $thisline = mb_ereg_replace('{cacheid}', xmlentities($r['cacheid']), $thisline);
 
-			$thisline = mb_ereg_replace('{urlbase}', xmlentities($opt['page']['default_absolute_url']), $thisline);
+            $thisline = mb_ereg_replace('{urlbase}', xmlentities($opt['page']['default_absolute_url']), $thisline);
 
-			echo $thisline;
-		}
-		sql_free_result($rs);
-	}
+            echo $thisline;
+        }
+        sql_free_result($rs);
+    }
 
   echo $kmlFoot;
   exit;
 
 function echoZoomIn($lon_from, $lon_to, $lat_from, $lat_to)
 {
-	$nColumnsCount = 60;
-	$sZoomIn =
-	'
+    $nColumnsCount = 60;
+    $sZoomIn =
+    '
 
 		
 		
@@ -298,25 +304,23 @@ function echoZoomIn($lon_from, $lon_to, $lat_from, $lat_to)
 		
 ';
 
-	// prepare lines
-	$sZoomIn = str_replace("\r", "", $sZoomIn);
-	$sLines = split("\n", $sZoomIn);
-	for ($i = 0; $i < count($sLines); $i++)
-		$sLines[$i] = str_pad($sLines[$i], ($nColumnsCount-1), ' ');
+    // prepare lines
+    $sZoomIn = str_replace("\r", "", $sZoomIn);
+    $sLines = split("\n", $sZoomIn);
+    for ($i = 0; $i < count($sLines); $i++) {
+        $sLines[$i] = str_pad($sLines[$i], ($nColumnsCount-1), ' ');
+    }
 
-	$nDegreePerLine = ($lat_to - $lat_from) / count($sLines);
-	$nDegreePerColumn = ($lon_to - $lon_from) / $nColumnsCount;
+    $nDegreePerLine = ($lat_to - $lat_from) / count($sLines);
+    $nDegreePerColumn = ($lon_to - $lon_from) / $nColumnsCount;
 
-	for ($nLine = 0; $nLine < count($sLines); $nLine++)
-	{
-		for ($nColumn = 0; $nColumn < $nColumnsCount; $nColumn++)
-		{
-			if (substr($sLines[$nLine], $nColumn, 1) == '#')
-			{
-				$nLat = $lat_to - $nDegreePerLine * $nLine;
-				$nLon = $lon_from + $nDegreePerColumn * $nColumn;
-				
-				echo '
+    for ($nLine = 0; $nLine < count($sLines); $nLine++) {
+        for ($nColumn = 0; $nColumn < $nColumnsCount; $nColumn++) {
+            if (substr($sLines[$nLine], $nColumn, 1) == '#') {
+                $nLat = $lat_to - $nDegreePerLine * $nLine;
+                $nLon = $lon_from + $nDegreePerColumn * $nColumn;
+                
+                echo '
 				<Placemark>
 					<description><![CDATA[You have to zoom in to see the Geocaches]]></description>
 					<name></name>
@@ -332,10 +336,7 @@ function echoZoomIn($lon_from, $lon_to, $lat_from, $lat_to)
 					</Point>
 				</Placemark>
 				';
-				
-			}
-		}
-	}
+            }
+        }
+    }
 }
-
-?>

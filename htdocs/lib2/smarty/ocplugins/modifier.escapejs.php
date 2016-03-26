@@ -15,9 +15,8 @@
  */
 function smarty_modifier_escapejs($string)
 {
-	$string = str_replace('\\', '\\\\', $string);
-	$string = str_replace('\'', '\\\'', $string);
-	$string = str_replace('"', '&quot;', $string);
-	return $string;
+    $string = str_replace('\\', '\\\\', $string);
+    $string = str_replace('\'', '\\\'', $string);
+    $string = str_replace('"', '&quot;', $string);
+    return $string;
 }
-?>

@@ -6,7 +6,7 @@ use Exception;
 use okapi\Okapi;
 use okapi\OkapiHttpResponse;
 
-class View
+class sysinfo
 {
     public static function call()
     {

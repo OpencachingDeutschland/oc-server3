@@ -5,6 +5,4 @@
  *  Unicode Reminder メモ
  ***************************************************************************/
 
-	require '../../util2/google-earth/caches.php';
-
-?>
+    require '../../util2/google-earth/caches.php';

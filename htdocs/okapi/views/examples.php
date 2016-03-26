@@ -13,7 +13,7 @@ use okapi\OkapiServiceRunner;
 use okapi\OkapiInternalRequest;
 use okapi\views\menu\OkapiMenu;
 
-class View
+class examples
 {
     public static function call()
     {

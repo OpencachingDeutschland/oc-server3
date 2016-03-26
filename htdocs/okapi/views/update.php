@@ -3,7 +3,6 @@
 namespace okapi\views\update;
 
 use Exception;
-
 use okapi\Okapi;
 use okapi\Cache;
 use okapi\Db;
@@ -21,18 +20,16 @@ use okapi\services\replicate\ReplicateCommon;
 
 require_once($GLOBALS['rootpath']."okapi/cronjobs.php");
 
-class View
+class update
 {
     public static function get_current_version()
     {
-        try
-        {
+        try {
             return Okapi::get_var('db_version', 0) + 0;
-        }
-        catch (Exception $e)
-        {
-            if (strpos($e->getMessage(), "okapi_vars' doesn't exist") !== false)
+        } catch (Exception $e) {
+            if (strpos($e->getMessage(), "okapi_vars' doesn't exist") !== false) {
                 return 0;
+            }
             throw $e;
         }
     }
@@ -40,13 +37,12 @@ class View
     public static function get_max_version()
     {
         $max_db_version = 0;
-        foreach (get_class_methods(__CLASS__) as $name)
-        {
-            if (strpos($name, "ver") === 0)
-            {
+        foreach (get_class_methods(__CLASS__) as $name) {
+            if (strpos($name, "ver") === 0) {
                 $ver = substr($name, 3) + 0;
-                if ($ver > $max_db_version)
+                if ($ver > $max_db_version) {
                     $max_db_version = $ver;
+                }
             }
         }
         return $max_db_version;
@@ -67,13 +63,10 @@ class View
         $lock = OkapiLock::get('db-update');
         $lock->acquire();
 
-        try
-        {
+        try {
             self::_call();
             $lock->release();
-        }
-        catch (Exception $e)
-        {
+        } catch (Exception $e) {
             # Error occured. Make sure the lock is released and rethrow.
 
             $lock->release();
@@ -91,16 +84,12 @@ class View
         $current_ver = self::get_current_version();
         $max_ver = self::get_max_version();
         self::out("Current OKAPI database version: $current_ver\n");
-        if ($current_ver == 0 && ((!isset($_GET['install'])) || ($_GET['install'] != 'true')))
-        {
+        if ($current_ver == 0 && ((!isset($_GET['install'])) || ($_GET['install'] != 'true'))) {
             self::out("Current OKAPI settings are:\n\n".Settings::describe_settings()."\n\n".
                 "Make sure they are correct, then append '?install=true' to your query.");
-            try
-            {
+            try {
                 Db::select_value("select 1 from caches limit 1");
-            }
-            catch (Exception $e)
-            {
+            } catch (Exception $e) {
                 self::out(
                     "\n\n".
                     "IMPORTANT: If you're trying to install OKAPI on an empty database then\n".
@@ -110,19 +99,14 @@ class View
                 );
             }
             return;
-        }
-        elseif ($max_ver == $current_ver)
-        {
+        } elseif ($max_ver == $current_ver) {
             self::out("It is up-to-date.\n\n");
-        }
-        elseif ($max_ver < $current_ver)
+        } elseif ($max_ver < $current_ver) {
             throw new Exception();
-        else
-        {
+        } else {
             self::out("Updating to version $max_ver... PLEASE WAIT\n\n");
 
-            while ($current_ver < $max_ver)
-            {
+            while ($current_ver < $max_ver) {
                 $version_to_apply = $current_ver + 1;
                 self::out("Applying mutation #$version_to_apply...");
                 try {
@@ -280,29 +264,95 @@ class View
         ");
     }
 
-    private static function ver9() { Db::execute("alter table okapi_consumers modify column `key` varchar(20) not null"); }
-    private static function ver10() { Db::execute("alter table okapi_consumers modify column secret varchar(40) not null"); }
-    private static function ver11() { Db::execute("alter table okapi_tokens modify column `key` varchar(20) not null"); }
-    private static function ver12() { Db::execute("alter table okapi_tokens modify column secret varchar(40) not null"); }
-    private static function ver13() { Db::execute("alter table okapi_tokens modify column consumer_key varchar(20) not null"); }
-    private static function ver14() { Db::execute("alter table okapi_tokens modify column verifier varchar(10) default null"); }
-    private static function ver15() { Db::execute("alter table okapi_authorizations modify column consumer_key varchar(20) not null"); }
-    private static function ver16() { Db::execute("alter table okapi_nonces modify column consumer_key varchar(20) not null"); }
-    private static function ver17() { Db::execute("alter table okapi_nonces modify column `key` varchar(255) not null"); }
-    private static function ver18() { Db::execute("alter table okapi_cache_logs modify column consumer_key varchar(20) not null"); }
-    private static function ver19() { Db::execute("alter table okapi_vars modify column `var` varchar(32) not null"); }
+    private static function ver9()
+    {
+        Db::execute("alter table okapi_consumers modify column `key` varchar(20) not null");
+    }
+    private static function ver10()
+    {
+        Db::execute("alter table okapi_consumers modify column secret varchar(40) not null");
+    }
+    private static function ver11()
+    {
+        Db::execute("alter table okapi_tokens modify column `key` varchar(20) not null");
+    }
+    private static function ver12()
+    {
+        Db::execute("alter table okapi_tokens modify column secret varchar(40) not null");
+    }
+    private static function ver13()
+    {
+        Db::execute("alter table okapi_tokens modify column consumer_key varchar(20) not null");
+    }
+    private static function ver14()
+    {
+        Db::execute("alter table okapi_tokens modify column verifier varchar(10) default null");
+    }
+    private static function ver15()
+    {
+        Db::execute("alter table okapi_authorizations modify column consumer_key varchar(20) not null");
+    }
+    private static function ver16()
+    {
+        Db::execute("alter table okapi_nonces modify column consumer_key varchar(20) not null");
+    }
+    private static function ver17()
+    {
+        Db::execute("alter table okapi_nonces modify column `key` varchar(255) not null");
+    }
+    private static function ver18()
+    {
+        Db::execute("alter table okapi_cache_logs modify column consumer_key varchar(20) not null");
+    }
+    private static function ver19()
+    {
+        Db::execute("alter table okapi_vars modify column `var` varchar(32) not null");
+    }
 
-    private static function ver20() { Db::execute("alter table okapi_consumers modify column `key` varchar(20) collate utf8_bin not null"); }
-    private static function ver21() { Db::execute("alter table okapi_consumers modify column secret varchar(40) collate utf8_bin not null"); }
-    private static function ver22() { Db::execute("alter table okapi_tokens modify column `key` varchar(20) collate utf8_bin not null"); }
-    private static function ver23() { Db::execute("alter table okapi_tokens modify column secret varchar(40) collate utf8_bin not null"); }
-    private static function ver24() { Db::execute("alter table okapi_tokens modify column consumer_key varchar(20) collate utf8_bin not null"); }
-    private static function ver25() { Db::execute("alter table okapi_tokens modify column verifier varchar(10) collate utf8_bin default null"); }
-    private static function ver26() { Db::execute("alter table okapi_authorizations modify column consumer_key varchar(20) collate utf8_bin not null"); }
-    private static function ver27() { Db::execute("alter table okapi_nonces modify column consumer_key varchar(20) collate utf8_bin not null"); }
-    private static function ver28() { Db::execute("alter table okapi_nonces modify column `key` varchar(255) collate utf8_bin not null"); }
-    private static function ver29() { Db::execute("alter table okapi_cache_logs modify column consumer_key varchar(20) collate utf8_bin not null"); }
-    private static function ver30() { Db::execute("alter table okapi_vars modify column `var` varchar(32) collate utf8_bin not null"); }
+    private static function ver20()
+    {
+        Db::execute("alter table okapi_consumers modify column `key` varchar(20) collate utf8_bin not null");
+    }
+    private static function ver21()
+    {
+        Db::execute("alter table okapi_consumers modify column secret varchar(40) collate utf8_bin not null");
+    }
+    private static function ver22()
+    {
+        Db::execute("alter table okapi_tokens modify column `key` varchar(20) collate utf8_bin not null");
+    }
+    private static function ver23()
+    {
+        Db::execute("alter table okapi_tokens modify column secret varchar(40) collate utf8_bin not null");
+    }
+    private static function ver24()
+    {
+        Db::execute("alter table okapi_tokens modify column consumer_key varchar(20) collate utf8_bin not null");
+    }
+    private static function ver25()
+    {
+        Db::execute("alter table okapi_tokens modify column verifier varchar(10) collate utf8_bin default null");
+    }
+    private static function ver26()
+    {
+        Db::execute("alter table okapi_authorizations modify column consumer_key varchar(20) collate utf8_bin not null");
+    }
+    private static function ver27()
+    {
+        Db::execute("alter table okapi_nonces modify column consumer_key varchar(20) collate utf8_bin not null");
+    }
+    private static function ver28()
+    {
+        Db::execute("alter table okapi_nonces modify column `key` varchar(255) collate utf8_bin not null");
+    }
+    private static function ver29()
+    {
+        Db::execute("alter table okapi_cache_logs modify column consumer_key varchar(20) collate utf8_bin not null");
+    }
+    private static function ver30()
+    {
+        Db::execute("alter table okapi_vars modify column `var` varchar(32) collate utf8_bin not null");
+    }
 
     private static function ver31()
     {
@@ -337,12 +387,9 @@ class View
 
     private static function ver33()
     {
-        try
-        {
+        try {
             Db::execute("alter table cache_logs add key `uuid` (`uuid`)");
-        }
-        catch (Exception $e)
-        {
+        } catch (Exception $e) {
             // key exists
         }
     }
@@ -373,11 +420,26 @@ class View
         );
     }
 
-    private static function ver36() { Db::execute("alter table okapi_cache modify column `key` varchar(64) not null"); }
-    private static function ver37() { Db::execute("delete from okapi_vars where var='last_clog_update'"); }
-    private static function ver38() { Db::execute("alter table okapi_clog modify column data mediumblob"); }
-    private static function ver39() { Db::execute("delete from okapi_clog"); }
-    private static function ver40() { Db::execute("alter table okapi_cache modify column value mediumblob"); }
+    private static function ver36()
+    {
+        Db::execute("alter table okapi_cache modify column `key` varchar(64) not null");
+    }
+    private static function ver37()
+    {
+        Db::execute("delete from okapi_vars where var='last_clog_update'");
+    }
+    private static function ver38()
+    {
+        Db::execute("alter table okapi_clog modify column data mediumblob");
+    }
+    private static function ver39()
+    {
+        Db::execute("delete from okapi_clog");
+    }
+    private static function ver40()
+    {
+        Db::execute("alter table okapi_cache modify column value mediumblob");
+    }
 
     private static function ver41()
     {
@@ -389,7 +451,10 @@ class View
         Cache::delete('cron_schedule');
     }
 
-    private static function ver42() { Db::execute("delete from okapi_cache where length(value) = 65535"); }
+    private static function ver42()
+    {
+        Db::execute("delete from okapi_cache where length(value) = 65535");
+    }
 
     private static function ver43()
     {
@@ -408,9 +473,17 @@ class View
         Okapi::mail_from_okapi($emails, "A change in the 'replicate' module.", ob_get_clean());
     }
 
-    private static function ver44() { Db::execute("alter table caches add column okapi_syncbase timestamp not null after last_modified;"); }
-    private static function ver45() { Db::execute("update caches set okapi_syncbase=last_modified;"); }
-    private static function ver46() { /* no longer necessary */ }
+    private static function ver44()
+    {
+        Db::execute("alter table caches add column okapi_syncbase timestamp not null after last_modified;");
+    }
+    private static function ver45()
+    {
+        Db::execute("update caches set okapi_syncbase=last_modified;");
+    }
+    private static function ver46()
+    { /* no longer necessary */
+    }
 
     private static function ver47()
     {
@@ -451,8 +524,13 @@ class View
         print "on this procedure, please submit them to our issue tracker.\n\n";
     }
 
-    private static function ver49() { Db::execute("alter table caches add key okapi_syncbase (okapi_syncbase);"); }
-    private static function ver50() { /* no longer necessary */ }
+    private static function ver49()
+    {
+        Db::execute("alter table caches add key okapi_syncbase (okapi_syncbase);");
+    }
+    private static function ver50()
+    { /* no longer necessary */
+    }
 
     private static function ver51()
     {
@@ -468,13 +546,18 @@ class View
         # It doesn't do that anymore. Instead, it adds a separate column for itself (okapi_syncbase).
     }
 
-    private static function ver53() { Db::execute("alter table cache_logs add column okapi_syncbase timestamp not null after last_modified;"); }
-    private static function ver54() { Db::execute("update cache_logs set okapi_syncbase=last_modified;"); }
+    private static function ver53()
+    {
+        Db::execute("alter table cache_logs add column okapi_syncbase timestamp not null after last_modified;");
+    }
+    private static function ver54()
+    {
+        Db::execute("update cache_logs set okapi_syncbase=last_modified;");
+    }
 
     private static function ver55()
     {
-        if (Settings::get('OC_BRANCH') == 'oc.pl')
-        {
+        if (Settings::get('OC_BRANCH') == 'oc.pl') {
             # OCPL does not have cache_logs_archived table.
             return;
         }
@@ -483,8 +566,7 @@ class View
 
     private static function ver56()
     {
-        if (Settings::get('OC_BRANCH') == 'oc.pl')
-        {
+        if (Settings::get('OC_BRANCH') == 'oc.pl') {
             # OCPL does not have cache_logs_archived table.
             return;
         }
@@ -544,13 +626,11 @@ class View
         #
         $row = Db::select_row("show create table cache_logs");
         $stmt = $row["Create Table"];
-        if (strpos($stmt, "timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'") > 0)
-        {
+        if (strpos($stmt, "timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'") > 0) {
             Db::execute("alter table cache_logs modify column last_modified datetime not null;");
             Db::execute("alter table cache_logs modify column okapi_syncbase timestamp not null;");
             Db::execute("update cache_logs set okapi_syncbase=now() where okapi_syncbase='0000-00-00 00:00:00';");
-            if (Settings::get('OC_BRANCH') == 'oc.de')
-            {
+            if (Settings::get('OC_BRANCH') == 'oc.de') {
                 Db::execute("alter table cache_logs_archived modify column last_modified datetime not null;");
                 Db::execute("alter table cache_logs_archived modify column okapi_syncbase timestamp not null;");
                 Db::execute("update cache_logs_archived set okapi_syncbase=now() where okapi_syncbase='0000-00-00 00:00:00';");
@@ -558,12 +638,14 @@ class View
         }
     }
 
-    private static function ver61() { Db::execute("alter table cache_logs add key okapi_syncbase (okapi_syncbase);"); }
+    private static function ver61()
+    {
+        Db::execute("alter table cache_logs add key okapi_syncbase (okapi_syncbase);");
+    }
 
     private static function ver62()
     {
-        if (Settings::get('OC_BRANCH') == 'oc.pl')
-        {
+        if (Settings::get('OC_BRANCH') == 'oc.pl') {
             # OCPL does not have cache_logs_archived table.
             return;
         }
@@ -602,34 +684,41 @@ class View
         ");
     }
 
-    private static function ver65() { Db::execute("alter table okapi_tile_status engine=innodb;"); }
-    private static function ver66() { Db::execute("alter table okapi_tile_caches engine=innodb;"); }
+    private static function ver65()
+    {
+        Db::execute("alter table okapi_tile_status engine=innodb;");
+    }
+    private static function ver66()
+    {
+        Db::execute("alter table okapi_tile_caches engine=innodb;");
+    }
 
     private static function ver67()
     {
         # Remove unused locks (these might have been created in previous versions of OKAPI).
 
-        for ($z=0; $z<=2; $z++)
-            for ($x=0; $x<(1<<$z); $x++)
-                for ($y=0; $y<(1<<$z); $y++)
-                {
+        for ($z=0; $z<=2; $z++) {
+            for ($x=0; $x<(1<<$z); $x++) {
+                for ($y=0; $y<(1<<$z); $y++) {
                     $lockname = "tile-computation-$z-$x-$y";
-                    if (OkapiLock::exists($lockname))
+                    if (OkapiLock::exists($lockname)) {
                         OkapiLock::get($lockname)->remove();
+                    }
                 }
+            }
+        }
     }
 
     private static function ver68()
     {
         # Once again, remove unused locks.
 
-        for ($z=0; $z<=21; $z++)
-        {
-            foreach (array("", "-0", "-1") as $suffix)
-            {
+        for ($z=0; $z<=21; $z++) {
+            foreach (array("", "-0", "-1") as $suffix) {
                 $lockname = "tile-$z$suffix";
-                if (OkapiLock::exists($lockname))
+                if (OkapiLock::exists($lockname)) {
                     OkapiLock::get($lockname)->remove();
+                }
             }
         }
     }
@@ -652,12 +741,30 @@ class View
         ");
     }
 
-    private static function ver71() { Db::execute("alter table okapi_cache add column score float(4,2) default null after `key`"); }
-    private static function ver72() { Db::execute("alter table okapi_cache change column expires expires datetime after score"); }
-    private static function ver73() { Db::execute("update okapi_cache set score=1, expires=date_add(now(), interval 360 day) where `key` like 'tile/%'"); }
-    private static function ver74() { Db::execute("update okapi_cache set score=1, expires=date_add(now(), interval 360 day) where `key` like 'tilecaption/%'"); }
-    private static function ver75() { Db::execute("alter table okapi_cache modify column score float default null"); }
-    private static function ver76() { Db::execute("update okapi_cache set expires=date_add(now(), interval 100 year) where `key` like 'clog#geocache#%'"); }
+    private static function ver71()
+    {
+        Db::execute("alter table okapi_cache add column score float(4,2) default null after `key`");
+    }
+    private static function ver72()
+    {
+        Db::execute("alter table okapi_cache change column expires expires datetime after score");
+    }
+    private static function ver73()
+    {
+        Db::execute("update okapi_cache set score=1, expires=date_add(now(), interval 360 day) where `key` like 'tile/%'");
+    }
+    private static function ver74()
+    {
+        Db::execute("update okapi_cache set score=1, expires=date_add(now(), interval 360 day) where `key` like 'tilecaption/%'");
+    }
+    private static function ver75()
+    {
+        Db::execute("alter table okapi_cache modify column score float default null");
+    }
+    private static function ver76()
+    {
+        Db::execute("update okapi_cache set expires=date_add(now(), interval 100 year) where `key` like 'clog#geocache#%'");
+    }
 
     private static function ver77()
     {
@@ -682,16 +789,46 @@ class View
         ");
     }
 
-    private static function ver79() { Db::execute("alter table okapi_search_results engine=MyISAM"); }
-    private static function ver80() { Db::execute("alter table okapi_search_sets add column date_created datetime not null"); }
-    private static function ver81() { Db::execute("alter table okapi_search_sets add column expires datetime not null"); }
-    private static function ver82() { CronJobController::reset_job_schedule("FulldumpGeneratorJob"); }
-    private static function ver83() { Db::execute("alter table okapi_stats_temp engine=InnoDB"); }
-    private static function ver84() { Db::execute("truncate okapi_nonces;"); }
-    private static function ver85() { Db::execute("alter table okapi_nonces drop primary key;"); }
-    private static function ver86() { Db::execute("alter table okapi_nonces change column `key` nonce_hash varchar(32) character set utf8 collate utf8_bin not null;"); }
-    private static function ver87() { Db::execute("alter table okapi_nonces add primary key (consumer_key, nonce_hash);"); }
-    private static function ver88() { Db::execute("alter table okapi_consumers add column admin tinyint not null default 0;"); }
+    private static function ver79()
+    {
+        Db::execute("alter table okapi_search_results engine=MyISAM");
+    }
+    private static function ver80()
+    {
+        Db::execute("alter table okapi_search_sets add column date_created datetime not null");
+    }
+    private static function ver81()
+    {
+        Db::execute("alter table okapi_search_sets add column expires datetime not null");
+    }
+    private static function ver82()
+    {
+        CronJobController::reset_job_schedule("FulldumpGeneratorJob");
+    }
+    private static function ver83()
+    {
+        Db::execute("alter table okapi_stats_temp engine=InnoDB");
+    }
+    private static function ver84()
+    {
+        Db::execute("truncate okapi_nonces;");
+    }
+    private static function ver85()
+    {
+        Db::execute("alter table okapi_nonces drop primary key;");
+    }
+    private static function ver86()
+    {
+        Db::execute("alter table okapi_nonces change column `key` nonce_hash varchar(32) character set utf8 collate utf8_bin not null;");
+    }
+    private static function ver87()
+    {
+        Db::execute("alter table okapi_nonces add primary key (consumer_key, nonce_hash);");
+    }
+    private static function ver88()
+    {
+        Db::execute("alter table okapi_consumers add column admin tinyint not null default 0;");
+    }
 
     private static function ver89()
     {
@@ -706,10 +843,22 @@ class View
         ReplicateCommon::verify_clog_consistency(true, $new_geocache_fields);
     }
 
-    private static function ver90() { Db::execute("alter table okapi_consumers change column admin bflags tinyint not null default 0;"); }
-    private static function ver91() { Db::execute("delete from okapi_tile_status"); }
-    private static function ver92() { Db::execute("delete from okapi_tile_caches"); }
-    private static function ver93() { Db::execute("alter table okapi_tile_caches add column name_crc int(10) unsigned not null default 0;"); }
+    private static function ver90()
+    {
+        Db::execute("alter table okapi_consumers change column admin bflags tinyint not null default 0;");
+    }
+    private static function ver91()
+    {
+        Db::execute("delete from okapi_tile_status");
+    }
+    private static function ver92()
+    {
+        Db::execute("delete from okapi_tile_caches");
+    }
+    private static function ver93()
+    {
+        Db::execute("alter table okapi_tile_caches add column name_crc int(10) unsigned not null default 0;");
+    }
 
     private static function ver94()
     {

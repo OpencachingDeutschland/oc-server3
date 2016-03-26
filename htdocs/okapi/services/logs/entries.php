@@ -13,7 +13,7 @@ use okapi\OkapiServiceRunner;
 use okapi\Settings;
 use okapi\services\caches\search\SearchAssistant;
 
-class WebService
+class entries
 {
     public static function options()
     {
@@ -31,35 +31,39 @@ class WebService
     public static function call(OkapiRequest $request)
     {
         $log_uuids = $request->get_parameter('log_uuids');
-        if ($log_uuids === null) throw new ParamMissing('log_uuids');
-        if ($log_uuids === "")
-        {
-            $log_uuids = array();
+        if ($log_uuids === null) {
+            throw new ParamMissing('log_uuids');
         }
-        else
+        if ($log_uuids === "") {
+            $log_uuids = array();
+        } else {
             $log_uuids = explode("|", $log_uuids);
+        }
 
-        if ((count($log_uuids) > 500) && (!$request->skip_limits))
+        if ((count($log_uuids) > 500) && (!$request->skip_limits)) {
             throw new InvalidParam('log_uuids', "Maximum allowed number of referenced ".
                 "log entries is 500. You provided ".count($log_uuids)." UUIDs.");
-        if (count($log_uuids) != count(array_unique($log_uuids)))
+        }
+        if (count($log_uuids) != count(array_unique($log_uuids))) {
             throw new InvalidParam('log_uuids', "Duplicate UUIDs detected (make sure each UUID is referenced only once).");
+        }
         $fields = $request->get_parameter('fields');
-        if (!$fields) $fields = "date|user|type|comment";
+        if (!$fields) {
+            $fields = "date|user|type|comment";
+        }
         $fields = explode("|", $fields);
-        foreach ($fields as $field)
-            if (!in_array($field, self::$valid_field_names))
+        foreach ($fields as $field) {
+            if (!in_array($field, self::$valid_field_names)) {
                 throw new InvalidParam('fields', "'$field' is not a valid field code.");
+            }
+        }
 
-        if (Settings::get('OC_BRANCH') == 'oc.de')
-        {
+        if (Settings::get('OC_BRANCH') == 'oc.de') {
             $teamentry_field = 'cl.oc_team_comment';
             $ratingdate_condition = 'and cr.rating_date=cl.date';
             $needs_maintenance_SQL = 'cl.needs_maintenance';
             $listing_is_outdated_SQL = 'cl.listing_outdated';
-        }
-        else
-        {
+        } else {
             $teamentry_field = '(cl.type=12)';
             $ratingdate_condition = '';
             $needs_maintenance_SQL = 'IF(cl.type=5, 2, IF(cl.type=6, 1, 0))';
@@ -96,8 +100,7 @@ class WebService
         $results = array();
         $log_id2uuid = array(); /* Maps logs' internal_ids to uuids */
         $flag_options = array('null', 'false', 'true');
-        while ($row = Db::fetch_assoc($rs))
-        {
+        while ($row = Db::fetch_assoc($rs)) {
             $results[$row['uuid']] = array(
                 'uuid' => $row['uuid'],
                 'cache_code' => $row['cache_code'],
@@ -122,8 +125,7 @@ class WebService
 
         # fetch images
 
-        if (in_array('images', $fields))
-        {
+        if (in_array('images', $fields)) {
             # For OCPL log entry images, pictures.seq currently is always = 1,
             # while OCDE uses it for ordering the images.
 
@@ -142,8 +144,7 @@ class WebService
             } else {
                 $object_type_param = '';
             }
-            while ($row = Db::fetch_assoc($rs))
-            {
+            while ($row = Db::fetch_assoc($rs)) {
                 $results[$log_id2uuid[$row['object_id']]]['images'][] =
                     array(
                         'uuid' => $row['uuid'],
@@ -158,22 +159,28 @@ class WebService
 
         # Check which UUIDs were not found and mark them with null.
 
-        foreach ($log_uuids as $log_uuid)
-            if (!isset($results[$log_uuid]))
+        foreach ($log_uuids as $log_uuid) {
+            if (!isset($results[$log_uuid])) {
                 $results[$log_uuid] = null;
+            }
+        }
 
         # Remove unwanted fields.
 
-        foreach (self::$valid_field_names as $field)
-            if (!in_array($field, $fields))
-                foreach ($results as &$result_ref)
+        foreach (self::$valid_field_names as $field) {
+            if (!in_array($field, $fields)) {
+                foreach ($results as &$result_ref) {
                     unset($result_ref[$field]);
+                }
+            }
+        }
 
         # Order the results in the same order as the input codes were given.
 
         $ordered_results = array();
-        foreach ($log_uuids as $log_uuid)
+        foreach ($log_uuids as $log_uuid) {
             $ordered_results[$log_uuid] = $results[$log_uuid];
+        }
 
         return Okapi::formatted_response($request, $ordered_results);
     }

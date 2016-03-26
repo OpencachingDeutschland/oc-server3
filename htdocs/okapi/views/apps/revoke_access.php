@@ -11,7 +11,7 @@ use okapi\OkapiHttpRequest;
 use okapi\OkapiRedirectResponse;
 use okapi\OCSession;
 
-class View
+class revoke_access
 {
     public static function call()
     {
@@ -22,8 +22,7 @@ class View
 
         # Ensure a user is logged in.
 
-        if ($OC_user_id == null)
-        {
+        if ($OC_user_id == null) {
             $after_login = "okapi/apps/"; # it is correct, if you're wondering
             $login_url = Settings::get('SITE_URL')."login.php?target=".urlencode($after_login);
             return new OkapiRedirectResponse($login_url);

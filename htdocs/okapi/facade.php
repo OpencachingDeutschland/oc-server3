@@ -44,7 +44,7 @@ Okapi::init_internals();
 /**
  * Use this class to access OKAPI's services from external code (i.e. OC code).
  */
-class Facade
+class facade
 {
     /**
      * Perform OKAPI service call, signed by internal 'facade' consumer key, and return the result
@@ -78,8 +78,9 @@ class Facade
         );
         $request->i_want_OkapiResponse = true;
         $request->perceive_as_http_request = true;
-        if (isset($_SERVER['HTTP_IF_NONE_MATCH']))
+        if (isset($_SERVER['HTTP_IF_NONE_MATCH'])) {
             $request->etag = $_SERVER['HTTP_IF_NONE_MATCH'];
+        }
         $response = OkapiServiceRunner::call($service_name, $request);
         $response->display();
     }
@@ -118,8 +119,9 @@ class Facade
      */
     public static function schedule_geocache_check($cache_codes)
     {
-        if (!is_array($cache_codes))
+        if (!is_array($cache_codes)) {
             $cache_codes = array($cache_codes);
+        }
         Db::execute("
             update caches
             set okapi_syncbase = now()

@@ -13,7 +13,7 @@ use okapi\OkapiServiceRunner;
 use okapi\Settings;
 use okapi\services\caches\search\SearchAssistant;
 
-class WebService
+class logs
 {
     public static function options()
     {
@@ -24,19 +24,31 @@ class WebService
     public static function call(OkapiRequest $request)
     {
         $cache_code = $request->get_parameter('cache_code');
-        if (!$cache_code) throw new ParamMissing('cache_code');
+        if (!$cache_code) {
+            throw new ParamMissing('cache_code');
+        }
         $fields = $request->get_parameter('fields');
-        if (!$fields) $fields = "uuid|date|user|type|comment";
+        if (!$fields) {
+            $fields = "uuid|date|user|type|comment";
+        }
 
         $offset = $request->get_parameter('offset');
-        if (!$offset) $offset = "0";
-        if ((((int)$offset) != $offset) || ((int)$offset) < 0)
+        if (!$offset) {
+            $offset = "0";
+        }
+        if ((((int)$offset) != $offset) || ((int)$offset) < 0) {
             throw new InvalidParam('offset', "Expecting non-negative integer.");
+        }
         $limit = $request->get_parameter('limit');
-        if (!$limit) $limit = "none";
-        if ($limit == "none") $limit = "999999999";
-        if ((((int)$limit) != $limit) || ((int)$limit) < 0)
+        if (!$limit) {
+            $limit = "none";
+        }
+        if ($limit == "none") {
+            $limit = "999999999";
+        }
+        if ((((int)$limit) != $limit) || ((int)$limit) < 0) {
             throw new InvalidParam('limit', "Expecting non-negative integer or 'none'.");
+        }
 
         # Check if code exists and retrieve cache ID (this will throw
         # a proper exception on invalid code).
@@ -64,8 +76,9 @@ class WebService
         $internal_request->skip_limits = true;
         $logs = OkapiServiceRunner::call('services/logs/entries', $internal_request);
         $results = array();
-        foreach ($log_uuids as $log_uuid)
+        foreach ($log_uuids as $log_uuid) {
             $results[] = $logs[$log_uuid];
+        }
 
         /* Handle OCPL's "access logs" feature. */
 

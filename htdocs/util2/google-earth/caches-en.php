@@ -1,4 +1,3 @@
-<?
-	$_REQUEST['locale'] = 'EN';
-	include "caches.php";
-?>
+<?php
+    $_REQUEST['locale'] = 'EN';
+    include "caches.php";

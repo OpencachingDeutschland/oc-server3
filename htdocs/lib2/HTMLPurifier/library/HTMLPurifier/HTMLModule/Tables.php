@@ -8,8 +8,8 @@ class HTMLPurifier_HTMLModule_Tables extends HTMLPurifier_HTMLModule
 
     public $name = 'Tables';
 
-    public function setup($config) {
-
+    public function setup($config)
+    {
         $this->addElement('caption', false, 'Inline', 'Common');
 
         $this->addElement('table', 'Block',
@@ -61,9 +61,7 @@ class HTMLPurifier_HTMLModule_Tables extends HTMLPurifier_HTMLModule
         $this->addElement('tbody', false, 'Required: tr', 'Common', $cell_align);
         $this->addElement('thead', false, 'Required: tr', 'Common', $cell_align);
         $this->addElement('tfoot', false, 'Required: tr', 'Common', $cell_align);
-
     }
-
 }
 
 // vim: et sw=4 sts=4

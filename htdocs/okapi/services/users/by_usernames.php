@@ -12,7 +12,7 @@ use okapi\OkapiServiceRunner;
 use okapi\OkapiInternalRequest;
 use okapi\Settings;
 
-class WebService
+class by_usernames
 {
     public static function options()
     {
@@ -24,14 +24,18 @@ class WebService
     public static function call(OkapiRequest $request)
     {
         $usernames = $request->get_parameter('usernames');
-        if (!$usernames) throw new ParamMissing('usernames');
+        if (!$usernames) {
+            throw new ParamMissing('usernames');
+        }
         $usernames = explode("|", $usernames);
-        if (count($usernames) > 500)
+        if (count($usernames) > 500) {
             throw new InvalidParam('usernames', "Maximum allowed number of referenced users ".
                 "is 500. You provided ".count($usernames)." usernames.");
+        }
         $fields = $request->get_parameter('fields');
-        if (!$fields)
+        if (!$fields) {
             throw new ParamMissing('fields');
+        }
 
         # There's no need to validate the fields parameter as the 'users'
         # method does this (it will raise a proper exception on invalid values).
@@ -42,16 +46,14 @@ class WebService
             where username collate ".Settings::get('DB_CHARSET')."_general_ci in ('".implode("','", array_map('\okapi\Db::escape_string', $usernames))."')
         ");
         $lower_username2useruuid = array();
-        while ($row = Db::fetch_assoc($rs))
-        {
+        while ($row = Db::fetch_assoc($rs)) {
             $lower_username2useruuid[mb_strtolower($row['username'], 'utf-8')] = $row['uuid'];
         }
         Db::free_result($rs);
 
         # Retrieve data for the found user_uuids.
 
-        if (count($lower_username2useruuid) > 0)
-        {
+        if (count($lower_username2useruuid) > 0) {
             $id_results = OkapiServiceRunner::call('services/users/users', new OkapiInternalRequest(
                 $request->consumer, $request->token, array('user_uuids' => implode("|", array_values($lower_username2useruuid)),
                 'fields' => $fields)));
@@ -63,12 +65,12 @@ class WebService
         # and mark them with null.
 
         $results = array();
-        foreach ($usernames as $username)
-        {
-            if (!isset($lower_username2useruuid[mb_strtolower($username, 'utf-8')]))
+        foreach ($usernames as $username) {
+            if (!isset($lower_username2useruuid[mb_strtolower($username, 'utf-8')])) {
                 $results[$username] = null;
-            else
+            } else {
                 $results[$username] = $id_results[$lower_username2useruuid[mb_strtolower($username, 'utf-8')]];
+            }
         }
 
         return Okapi::formatted_response($request, $results);

@@ -1,30 +1,30 @@
 <?php
 /****************************************************************************
-											./lang/de/ocstyle/editdesc.tpl.php
-															-------------------
-		begin                : July 7 2004
+                                            ./lang/de/ocstyle/editdesc.tpl.php
+                                                            -------------------
+        begin                : July 7 2004
 
-		For license information see doc/license.txt
+        For license information see doc/license.txt
  ****************************************************************************/
 
 /****************************************************************************
-	      
+          
    Unicode Reminder メモ
-                                   				                                
-	 edit a cache listing
-	
-	 template replacement(s):
-			
-			desclang
-			desclang_name
-			cachename
-			reset
-			submit
-			short_desc
-			desc_err
-			desc
-			hints
-			
+                                                                                   
+     edit a cache listing
+    
+     template replacement(s):
+            
+            desclang
+            desclang_name
+            cachename
+            reset
+            submit
+            short_desc
+            desc_err
+            desc
+            hints
+            
  ****************************************************************************/
 ?>
 

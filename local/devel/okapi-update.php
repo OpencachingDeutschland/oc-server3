@@ -14,30 +14,33 @@ require_once(__DIR__ . '/okapi-update-settings.inc.php');
 
 function git($args)
 {
-  return exec('git ' . $args);
+    return exec('git ' . $args);
 }
 
 
 // validate settings, Git health and OKAPI repo state
 
-echo "[okapi-update] validating settings and local OKAPI repo\n"; 
+echo "[okapi-update] validating settings and local OKAPI repo\n";
 
-if (!@chdir(OKAPI_SOURCE_PATH))
-  die("[okapi-update] bad OKAPI_SOURCE_PATH setting");
-if (git('rev-list HEAD --count') < 700)
-  die("[okapi-update] bad git configuration");
-if (git("diff HEAD"))
-  die("[okapi-update] OKAPI working branch is dirty");
+if (!@chdir(OKAPI_SOURCE_PATH)) {
+    die("[okapi-update] bad OKAPI_SOURCE_PATH setting");
+}
+if (git('rev-list HEAD --count') < 700) {
+    die("[okapi-update] bad git configuration");
+}
+if (git("diff HEAD")) {
+    die("[okapi-update] OKAPI working branch is dirty");
+}
 
 $current_okapi_branch = git('rev-parse --abbrev-ref HEAD');
-if ($current_okapi_branch != 'master')
-{
-  echo "[okapi-update] checking out OKAPI master branch\n";
-  echo git('checkout master');
+if ($current_okapi_branch != 'master') {
+    echo "[okapi-update] checking out OKAPI master branch\n";
+    echo git('checkout master');
 }
 $changes = git("log upstream/master..master");
-if ($changes)
-  die("[okapi-update] there are unpushed local commits:\n" . $changes);
+if ($changes) {
+    die("[okapi-update] there are unpushed local commits:\n" . $changes);
+}
 
 echo "[okapi-update] ok.\n";
 
@@ -56,9 +59,9 @@ echo "OKAPI rev. $okapi_git_revision\n";
 passthru(str_replace('%source', OKAPI_SOURCE_PATH . '/okapi',
          str_replace('%dest', $opt['rootpath'] . '/okapi', DIRECTORY_TREE_REPLICATOR)));
 $core = file_get_contents($opt['rootpath'] . '/okapi/core.php');
-$core = str_replace("\$version_number = null", "\$version_number = " . $okapi_version_number,  
+$core = str_replace("\$version_number = null", "\$version_number = " . $okapi_version_number,
         str_replace("\$git_revision = null", "\$git_revision = '" . $okapi_git_revision . "'",
-				$core));
+                $core));
 file_put_contents($opt['rootpath'] . '/okapi/core.php', $core);
 chdir($opt['rootpath']);
 passthru("git status");

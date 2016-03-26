@@ -1,57 +1,56 @@
 <?php
 /****************************************************************************
-											./lang/de/ocstyle/main.tpl.php
-															-------------------
-		begin                : Mon June 14 2004
+                                            ./lang/de/ocstyle/main.tpl.php
+                                                            -------------------
+        begin                : Mon June 14 2004
 
-		For license information see doc/license.txt
+        For license information see doc/license.txt
  ****************************************************************************/
 
 /****************************************************************************
 
    Unicode Reminder メモ
 
-	 german main template
+     german main template
 
-	 template replacement(s):
+     template replacement(s):
 
-	   title          HTML page title
-	   lang           language
-	   style          style
-	   htmlheaders    additional HTML headers
-	   loginbox       login status (login form or username)
-	   functionsbox   available function on this site
-	   template       template to display
-	   runtime        computing time
+       title          HTML page title
+       lang           language
+       style          style
+       htmlheaders    additional HTML headers
+       loginbox       login status (login form or username)
+       functionsbox   available function on this site
+       template       template to display
+       runtime        computing time
 
  ****************************************************************************/
 
-	//Menü laden
-	global $mnu_bgcolor, $mnu_selmenuitem, $develwarning, $tpl_subtitle, $opt, $rootpath, $usr;
+    //Menü laden
+    global $mnu_bgcolor, $mnu_selmenuitem, $develwarning, $tpl_subtitle, $opt, $rootpath, $usr;
 
-	require_once($stylepath . '/lib/menu.php');
-	if (function_exists('post_config'))
-		post_config();
+    require_once($stylepath . '/lib/menu.php');
+    if (function_exists('post_config')) {
+        post_config();
+    }
 
-	require_once($rootpath . 'lib2/smarty/ocplugins/function.season.php');
+    require_once($rootpath . 'lib2/smarty/ocplugins/function.season.php');
 
-	$sUserCountry = getUserCountry();
-	$pageidx = mnu_MainMenuIndexFromPageId($menu, $tplname);
+    $sUserCountry = getUserCountry();
+    $pageidx = mnu_MainMenuIndexFromPageId($menu, $tplname);
 
-	if (isset($menu[$pageidx]['navicolor']))
-	{
-		$mnu_bgcolor = $menu[$pageidx]['navicolor'];
-	}
-	else
-	{
-		$mnu_bgcolor = '#D5D9FF';
-	}
+    if (isset($menu[$pageidx]['navicolor'])) {
+        $mnu_bgcolor = $menu[$pageidx]['navicolor'];
+    } else {
+        $mnu_bgcolor = '#D5D9FF';
+    }
 
-	if ($tplname != 'start')
-		$tpl_subtitle .= htmlspecialchars($mnu_selmenuitem['title'], ENT_COMPAT, 'UTF-8');
-	$tpl_subtitle .= ' - ' . htmlspecialchars($opt['locale'][$locale]['page']['subtitle1'], ENT_COMPAT, 'UTF-8');
-	$meta_keywords = htmlspecialchars($opt['page']['meta']['keywords'], ENT_COMPAT, 'UTF-8');
-	$meta_description = htmlspecialchars($opt['page']['meta']['description'], ENT_COMPAT, 'UTF-8');
+    if ($tplname != 'start') {
+        $tpl_subtitle .= htmlspecialchars($mnu_selmenuitem['title'], ENT_COMPAT, 'UTF-8');
+    }
+    $tpl_subtitle .= ' - ' . htmlspecialchars($opt['locale'][$locale]['page']['subtitle1'], ENT_COMPAT, 'UTF-8');
+    $meta_keywords = htmlspecialchars($opt['page']['meta']['keywords'], ENT_COMPAT, 'UTF-8');
+    $meta_description = htmlspecialchars($opt['page']['meta']['description'], ENT_COMPAT, 'UTF-8');
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -77,16 +76,16 @@
       <script type="text/javascript">
 				<!--
 <?php
-					$seasons = array('winter' => 'resource2/ocstyle/css/seasons/style_winter.css',
-					                 'spring' => 'resource2/ocstyle/css/seasons/style_spring.css',
-					                 'summer' => 'resource2/ocstyle/css/seasons/style_summer.css',
-					                 'autumn' => 'resource2/ocstyle/css/seasons/style_autumn.css');
-					$seasons_stripe
-									 = array('winter' => 'resource2/ocstyle/css/seasons/style_langstripe_winter.css',
-					                 'spring' => 'resource2/ocstyle/css/seasons/style_langstripe_spring.css',
-					                 'summer' => 'resource2/ocstyle/css/seasons/style_langstripe_summer.css',
-					                 'autumn' => 'resource2/ocstyle/css/seasons/style_langstripe_autumn.css');
-					$smarty_dummy = 0;
+                    $seasons = array('winter' => 'resource2/ocstyle/css/seasons/style_winter.css',
+                                     'spring' => 'resource2/ocstyle/css/seasons/style_spring.css',
+                                     'summer' => 'resource2/ocstyle/css/seasons/style_summer.css',
+                                     'autumn' => 'resource2/ocstyle/css/seasons/style_autumn.css');
+                    $seasons_stripe
+                                     = array('winter' => 'resource2/ocstyle/css/seasons/style_langstripe_winter.css',
+                                     'spring' => 'resource2/ocstyle/css/seasons/style_langstripe_spring.css',
+                                     'summer' => 'resource2/ocstyle/css/seasons/style_langstripe_summer.css',
+                                     'autumn' => 'resource2/ocstyle/css/seasons/style_langstripe_autumn.css');
+                    $smarty_dummy = 0;
 ?>
 					var nWindowWidth = 9999;
 					if (window.innerWidth)
@@ -143,36 +142,37 @@
 						<td><strong>{t}Language:{/t}&nbsp;</strong></td>
 						<td>
 <?php
-							foreach ($opt['template']['locales'] AS $k => $lang)
-								if ($lang['show'] == true)
-									echo '<a style="text-decoration: none;" href="index.php?locale=' . $k . '"><img src="' . $lang['flag'] . '" alt="' . $lang['name'] . '" title="' . $lang['name'] . '" width="24px" height="18px" /></a> ';
+                            foreach ($opt['template']['locales'] as $k => $lang) {
+                                if ($lang['show'] == true) {
+                                    echo '<a style="text-decoration: none;" href="index.php?locale=' . $k . '"><img src="' . $lang['flag'] . '" alt="' . $lang['name'] . '" title="' . $lang['name'] . '" width="24px" height="18px" /></a> ';
+                                }
+                            }
 ?>
 						</td>
 						<td>&nbsp;&nbsp;&nbsp;&nbsp;<strong>{t}Country:{/t}&nbsp;</strong></td>
 						<td>
 								<select id="usercountry" onclick="usercountry_change()">
 <?php
-									global $tpl_usercountries;
-									$nLastGroup = 0;
-									for ($i = 0; $i < count($tpl_usercountries); $i++)
-									{
-										if ($nLastGroup != $tpl_usercountries[$i]['group'])
-										{
-											echo '<option disabled="disabled">';
-											if ($tpl_usercountries[$i]['group'] == 1)
-												echo '- ' . t('This OC node') . ' -';
-											elseif ($tpl_usercountries[$i]['group'] == 2)
-												echo '- ' . t('Other OC nodes') . ' -';
-											elseif ($tpl_usercountries[$i]['group'] == 3)
-												echo '- ' . t('Others') . ' -';
-											else
-												echo '-';
-											echo '</option>';
-										}
-										$nLastGroup = $tpl_usercountries[$i]['group'];
+                                    global $tpl_usercountries;
+                                    $nLastGroup = 0;
+                                    for ($i = 0; $i < count($tpl_usercountries); $i++) {
+                                        if ($nLastGroup != $tpl_usercountries[$i]['group']) {
+                                            echo '<option disabled="disabled">';
+                                            if ($tpl_usercountries[$i]['group'] == 1) {
+                                                echo '- ' . t('This OC node') . ' -';
+                                            } elseif ($tpl_usercountries[$i]['group'] == 2) {
+                                                echo '- ' . t('Other OC nodes') . ' -';
+                                            } elseif ($tpl_usercountries[$i]['group'] == 3) {
+                                                echo '- ' . t('Others') . ' -';
+                                            } else {
+                                                echo '-';
+                                            }
+                                            echo '</option>';
+                                        }
+                                        $nLastGroup = $tpl_usercountries[$i]['group'];
 
-										echo '<option value="' . htmlspecialchars($tpl_usercountries[$i]['country'], ENT_COMPAT, 'UTF-8') . '"' . (($sUserCountry==$tpl_usercountries[$i]['country']) ? ' selected="selected"' : '') . '>' . htmlspecialchars($tpl_usercountries[$i]['name'], ENT_COMPAT, 'UTF-8') . '</option>';
-									}
+                                        echo '<option value="' . htmlspecialchars($tpl_usercountries[$i]['country'], ENT_COMPAT, 'UTF-8') . '"' . (($sUserCountry==$tpl_usercountries[$i]['country']) ? ' selected="selected"' : '') . '>' . htmlspecialchars($tpl_usercountries[$i]['name'], ENT_COMPAT, 'UTF-8') . '</option>';
+                                    }
 ?>
 								</select>&nbsp;
             </td>
@@ -200,11 +200,12 @@
 				<div class="nav2">
 					<ul>
 <?php 
-						// $pageidx is -1 e.g. when calling newcache.php as logged-off-user (-> login.tpl.php)
-						if ($pageidx >= 0)
-							mnu_EchoMainMenu($menu[$pageidx]['siteid']);
-						else
-							mnu_EchoMainMenu(-1);
+                        // $pageidx is -1 e.g. when calling newcache.php as logged-off-user (-> login.tpl.php)
+                        if ($pageidx >= 0) {
+                            mnu_EchoMainMenu($menu[$pageidx]['siteid']);
+                        } else {
+                            mnu_EchoMainMenu(-1);
+                        }
 ?>
 					</ul>
 				</div>
@@ -223,18 +224,18 @@
 				<!-- Navigation Level 3 -->
 				<div class="nav3">
 <?php
-					//SubNavigation
-					if (isset($menu[$pageidx]['submenu']))
-					{
-?>
+                    //SubNavigation
+                    if (isset($menu[$pageidx]['submenu'])) {
+                        ?>
 						<ul>
 							<li class="title">{t}Main menu{/t}</li>
 <?php
-							mnu_EchoSubMenu($menu[$pageidx]['submenu'], $tplname, 1, false);
-?>
+                            mnu_EchoSubMenu($menu[$pageidx]['submenu'], $tplname, 1, false);
+                        ?>
 						</ul>
 <?php
-					}
+
+                    }
 ?>
 					<!-- Länderknoten -->
 					<p class="sidebar-maintitle">{t}Country sites{/t}</p>
@@ -252,9 +253,8 @@
 
 					<!-- Paypalbutton -->
 <?php
-					if (isset($opt['page']['showdonations']) && $opt['page']['showdonations'])
-					{
-?>
+                    if (isset($opt['page']['showdonations']) && $opt['page']['showdonations']) {
+                        ?>
 						<p class="sidebar-maintitle">{t}Donations{/t}</p>
 						<div style="margin-top:16px;width:100%;text-align:center;">
 							<a href="articles.php?page=donations">
@@ -263,14 +263,14 @@
 							&nbsp;
 						</div>
 <?php
-					}
+
+                    }
 ?>
 
 					<!-- Social Media -->
 <?php
-					if (isset($opt['page']['showsocialmedia']) && $opt['page']['showsocialmedia'])
-					{
-?>
+                    if (isset($opt['page']['showsocialmedia']) && $opt['page']['showsocialmedia']) {
+                        ?>
 					<p class="sidebar-maintitle">{t}Social media{/t}</p>
 					<div style="margin-top: 10px; margin-bottom: 14px; margin-left: auto; margin-right: auto; text-align: center">
 						<table style="margin-left: auto; margin-right: auto;">
@@ -292,7 +292,8 @@
 						</table>
 					</div>
 <?php
-					}
+
+                    }
 ?>
 
 					<!-- Datalicense -->

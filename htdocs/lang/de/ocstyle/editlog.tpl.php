@@ -1,31 +1,31 @@
 <?php
 /****************************************************************************
-											./lang/de/ocstyle/editlog.tpl.php
-															-------------------
-		begin                : Mon July 5 2004
-		copyright            : (C) 2004 The OpenCaching Group
+                                            ./lang/de/ocstyle/editlog.tpl.php
+                                                            -------------------
+        begin                : Mon July 5 2004
+        copyright            : (C) 2004 The OpenCaching Group
 
-		For license information see doc/license.txt
+        For license information see doc/license.txt
  ****************************************************************************/
 
 /****************************************************************************
 
    Unicode Reminder メモ
 
-	 edit a log listing
+     edit a log listing
 
-	 template replacement(s):
+     template replacement(s):
 
-			cachename
-			logid
-			logtypeoptions
-			date_message
-			logday
-			logmonth
-			logyear
-			logtext
-			reset
-			submit
+            cachename
+            logid
+            logtypeoptions
+            date_message
+            logday
+            logmonth
+            logyear
+            logtext
+            reset
+            submit
 
  ****************************************************************************/
 ?>

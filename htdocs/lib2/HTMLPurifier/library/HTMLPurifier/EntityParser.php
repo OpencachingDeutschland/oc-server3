@@ -54,7 +54,8 @@ class HTMLPurifier_EntityParser
      * @param $string String to have non-special entities parsed.
      * @returns Parsed string.
      */
-    public function substituteNonSpecialEntities($string) {
+    public function substituteNonSpecialEntities($string)
+    {
         // it will try to detect missing semicolons, but don't rely on it
         return preg_replace_callback(
             $this->_substituteEntitiesRegex,
@@ -72,7 +73,8 @@ class HTMLPurifier_EntityParser
      * @returns Replacement string.
      */
 
-    protected function nonSpecialEntityCallback($matches) {
+    protected function nonSpecialEntityCallback($matches)
+    {
         // replaces all but big five
         $entity = $matches[0];
         $is_num = (@$matches[0][1] === '#');
@@ -81,11 +83,15 @@ class HTMLPurifier_EntityParser
             $code = $is_hex ? hexdec($matches[1]) : (int) $matches[2];
 
             // abort for special characters
-            if (isset($this->_special_dec2str[$code]))  return $entity;
+            if (isset($this->_special_dec2str[$code])) {
+                return $entity;
+            }
 
             return HTMLPurifier_Encoder::unichr($code);
         } else {
-            if (isset($this->_special_ent2dec[$matches[3]])) return $entity;
+            if (isset($this->_special_ent2dec[$matches[3]])) {
+                return $entity;
+            }
             if (!$this->_entity_lookup) {
                 $this->_entity_lookup = HTMLPurifier_EntityLookup::instance();
             }
@@ -106,7 +112,8 @@ class HTMLPurifier_EntityParser
      * @param $string String to have non-special entities parsed.
      * @returns Parsed string.
      */
-    public function substituteSpecialEntities($string) {
+    public function substituteSpecialEntities($string)
+    {
         return preg_replace_callback(
             $this->_substituteEntitiesRegex,
             array($this, 'specialEntityCallback'),
@@ -123,7 +130,8 @@ class HTMLPurifier_EntityParser
      *                  or string (respectively).
      * @returns Replacement string.
      */
-    protected function specialEntityCallback($matches) {
+    protected function specialEntityCallback($matches)
+    {
         $entity = $matches[0];
         $is_num = (@$matches[0][1] === '#');
         if ($is_num) {
@@ -138,7 +146,6 @@ class HTMLPurifier_EntityParser
                 $entity;
         }
     }
-
 }
 
 // vim: et sw=4 sts=4

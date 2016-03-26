@@ -11,8 +11,8 @@ class HTMLPurifier_HTMLModule_Object extends HTMLPurifier_HTMLModule
     public $name = 'Object';
     public $safe = false;
 
-    public function setup($config) {
-
+    public function setup($config)
+    {
         $this->addElement('object', 'Inline', 'Optional: #PCDATA | Flow | param', 'Common',
             array(
                 'archive' => 'URI',
@@ -39,9 +39,7 @@ class HTMLPurifier_HTMLModule_Object extends HTMLPurifier_HTMLModule
                 'valuetype' => 'Enum#data,ref,object'
            )
         );
-
     }
-
 }
 
 // vim: et sw=4 sts=4

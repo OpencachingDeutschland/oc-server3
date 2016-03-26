@@ -14,7 +14,7 @@ use okapi\OkapiInternalRequest;
 use okapi\Cache;
 use okapi\Settings;
 
-class WebService
+class issue
 {
     public static function options()
     {
@@ -26,19 +26,19 @@ class WebService
     public static function call(OkapiRequest $request)
     {
         $issue_id = $request->get_parameter('issue_id');
-        if (!$issue_id)
+        if (!$issue_id) {
             throw new ParamMissing('issue_id');
-        if ((!preg_match("/^[0-9]+$/", $issue_id)) || (strlen($issue_id) > 6))
+        }
+        if ((!preg_match("/^[0-9]+$/", $issue_id)) || (strlen($issue_id) > 6)) {
             throw new InvalidParam('issue_id');
+        }
 
         $cache_key = "apiref/issue#".$issue_id;
         $result = Cache::get($cache_key);
-        if ($result == null)
-        {
+        if ($result == null) {
             # Download the number of comments from GitHub Issue Tracker.
 
-            try
-            {
+            try {
                 $extra_headers = array();
                 $extra_headers[] = "Accept: application/vnd.github.v3.html+json";
                 $extra_headers[] = "User-Agent: https://github.com/opencaching/okapi/";
@@ -55,9 +55,7 @@ class WebService
                 $context = stream_context_create($opts);
                 $json = file_get_contents("https://api.github.com/repos/opencaching/okapi/issues/$issue_id",
                     false, $context);
-            }
-            catch (ErrorException $e)
-            {
+            } catch (ErrorException $e) {
                 throw new BadRequest("Sorry, we could not retrieve issue stats from the GitHub site. ".
                     "This is probably due to a temporary connection problem. Try again later or contact ".
                     "us if this seems permanent.");

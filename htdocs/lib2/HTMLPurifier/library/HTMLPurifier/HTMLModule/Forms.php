@@ -13,7 +13,8 @@ class HTMLPurifier_HTMLModule_Forms extends HTMLPurifier_HTMLModule
         'Inline' => 'Formctrl',
     );
 
-    public function setup($config) {
+    public function setup($config)
+    {
         $form = $this->addElement('form', 'Form',
           'Required: Heading | List | Block | fieldset', 'Common', array(
             'accept' => 'ContentTypes',
@@ -112,7 +113,6 @@ class HTMLPurifier_HTMLModule_Forms extends HTMLPurifier_HTMLModule
 
         // Don't forget an injector for <isindex>. This one's a little complex
         // because it maps to multiple elements.
-
     }
 }
 

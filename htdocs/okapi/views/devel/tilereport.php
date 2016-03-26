@@ -15,7 +15,7 @@ use okapi\OkapiServiceRunner;
 use okapi\OkapiInternalRequest;
 use okapi\cronjobs\CronJobController;
 
-class View
+class tilereport
 {
     public static function call()
     {
@@ -57,21 +57,16 @@ class View
         $calls = array('A' => 0, 'B' => 0, 'C' => 0, 'D' => 0);
         $runtime = array('A' => 0.0, 'B' => 0.0, 'C' => 0.0, 'D' => 0.0);
 
-        while (list($name, $c, $r) = Db::fetch_row($rs))
-        {
-            if ($name == 'services/caches/map/tile')
-            {
+        while (list($name, $c, $r) = Db::fetch_row($rs)) {
+            if ($name == 'services/caches/map/tile') {
                 $total_calls = $c;
                 $total_runtime = $r;
-            }
-            elseif (strpos($name, 'extra/caches/map/tile/checkpoint') === 0)
-            {
+            } elseif (strpos($name, 'extra/caches/map/tile/checkpoint') === 0) {
                 $calls[$name[32]] = $c;
                 $runtime[$name[32]] = $r;
             }
         }
-        if ($total_calls != $calls['A'])
-        {
+        if ($total_calls != $calls['A']) {
             print "Partial results. Only ".$calls['A']." out of $total_calls are covered.\n";
             print "All other will count as \"unaccounted for\".\n\n";
             $total_calls = $calls['A'];
@@ -80,10 +75,9 @@ class View
         $calls_left = $total_calls;
         $runtime_left = $total_runtime;
 
-        $perc = function($a, $b) { return ($b > 0) ? sprintf("%.1f", 100 * $a / $b)."%" : "(?)"; };
-        $avg = function($a, $b) { return ($b > 0) ? sprintf("%.4f", $a / $b)."s" : "(?)"; };
-        $get_stats = function() use (&$calls_left, &$runtime_left, &$total_calls, &$total_runtime, &$perc)
-        {
+        $perc = function ($a, $b) { return ($b > 0) ? sprintf("%.1f", 100 * $a / $b)."%" : "(?)"; };
+        $avg = function ($a, $b) { return ($b > 0) ? sprintf("%.4f", $a / $b)."s" : "(?)"; };
+        $get_stats = function () use (&$calls_left, &$runtime_left, &$total_calls, &$total_runtime, &$perc) {
             return (
                 str_pad($perc($calls_left, $total_calls), 6, " ", STR_PAD_LEFT).
                 str_pad($perc($runtime_left, $total_runtime), 7, " ", STR_PAD_LEFT)
@@ -151,8 +145,7 @@ class View
             where score is not null
             group by floor(log2(score))
         ");
-        while (list($log2, $count, $size) = Db::fetch_row($rs))
-        {
+        while (list($log2, $count, $size) = Db::fetch_row($rs)) {
             print $count." elements ($size bytes) with score between ".pow(2, $log2)." and ".pow(2, $log2 + 1).".\n";
         }
 

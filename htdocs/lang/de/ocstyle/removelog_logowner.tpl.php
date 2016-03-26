@@ -1,21 +1,21 @@
 <?php
 /****************************************************************************
-											./lang/de/ocstyle/removelogs.tpl.php
-															-------------------
-		begin                : July 9 2004
+                                            ./lang/de/ocstyle/removelogs.tpl.php
+                                                            -------------------
+        begin                : July 9 2004
 
-		For license information see doc/license.txt
+        For license information see doc/license.txt
  ****************************************************************************/
 
 /****************************************************************************
-	  
+      
    Unicode Reminder メモ
-                                       				                                
-	 remove a cache log
-		
-		cachename
-		logid_urlencode
-		log
+                                                                                       
+     remove a cache log
+        
+        cachename
+        logid_urlencode
+        log
 
  ****************************************************************************/
 ?>

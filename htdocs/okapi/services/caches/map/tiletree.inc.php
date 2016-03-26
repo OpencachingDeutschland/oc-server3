@@ -18,7 +18,6 @@ use okapi\OkapiInternalConsumer;
 use okapi\OkapiServiceRunner;
 use okapi\OkapiLock;
 
-
 class TileTree
 {
     # Static flags (stored in the database).
@@ -64,16 +63,18 @@ class TileTree
         # (and if it was, was it empty).
 
         $status = self::get_tile_status($zoom, $x, $y);
-        if ($status === null)  # Not yet computed.
-        {
+        if ($status === null) {
+            # Not yet computed.
+
             # Note, that computing the tile does not involve taking any
             # search parameters.
 
             $status = self::compute_tile($zoom, $x, $y);
         }
 
-        if ($status === 1)  # Computed and empty.
-        {
+        if ($status === 1) {
+            # Computed and empty.
+
             # This tile was already computed and it is empty.
             return null;
         }
@@ -121,11 +122,11 @@ class TileTree
         # For low-level tiles, this can be expensive.
 
         $status = self::get_tile_status($zoom, $x, $y);
-        if ($status !== null)
+        if ($status !== null) {
             return $status;
+        }
 
-        if ($zoom === 0)
-        {
+        if ($zoom === 0) {
             # When computing zoom zero, we don't have a parent to speed up
             # the computation. We need to use the caches table. Note, that
             # zoom level 0 contains *entire world*, so we don't have to use
@@ -150,8 +151,7 @@ class TileTree
             $internal_request->skip_limits = true;
             $caches = OkapiServiceRunner::call("services/caches/geocaches", $internal_request);
 
-            foreach ($caches as $cache)
-            {
+            foreach ($caches as $cache) {
                 $row = self::generate_short_row($cache);
                 if (!$row) {
                     /* Some caches cannot be included, e.g. the ones near the poles. */
@@ -174,9 +174,7 @@ class TileTree
                 ");
             }
             $status = 2;
-        }
-        else
-        {
+        } else {
             # We will use the parent tile to compute the contents of this tile.
 
             $parent_zoom = $zoom - 1;
@@ -184,18 +182,20 @@ class TileTree
             $parent_y = $y >> 1;
 
             $status = self::get_tile_status($parent_zoom, $parent_x, $parent_y);
-            if ($status === null)  # Not computed.
-            {
+            if ($status === null) {
+                # Not computed.
+
                 $time_started = microtime(true);
                 $status = self::compute_tile($parent_zoom, $parent_x, $parent_y);
             }
 
-            if ($status === 1)  # Computed and empty.
-            {
+            if ($status === 1) {
+                # Computed and empty.
+
                 # No need to check.
-            }
-            else  # Computed, not empty.
-            {
+            } else {
+                # Computed, not empty.
+
                 $scale = 8 + 21 - $zoom;
                 $parentcenter_z21x = (($parent_x << 1) | 1) << $scale;
                 $parentcenter_z21y = (($parent_y << 1) | 1) << $scale;
@@ -209,14 +209,16 @@ class TileTree
                 # |1 2|
                 # |3 4|
 
-                if ($x & 1)  # 2 or 4
+                if ($x & 1) {  # 2 or 4
                     $left_z21x = $parentcenter_z21x - $margin;
-                else  # 1 or 3
+                } else {  # 1 or 3
                     $right_z21x = $parentcenter_z21x + $margin;
-                if ($y & 1)  # 3 or 4
+                }
+                if ($y & 1) {  # 3 or 4
                     $top_z21y = $parentcenter_z21y - $margin;
-                else  # 1 or 2
+                } else {  # 1 or 2
                     $bottom_z21y = $parentcenter_z21y + $margin;
+                }
 
                 # Cache the result.
 
@@ -251,10 +253,11 @@ class TileTree
                         and y = '".Db::escape_string($y)."'
                     limit 1;
                 ");
-                if ($test)
+                if ($test) {
                     $status = 2;
-                else
+                } else {
                     $status = 1;
+                }
             }
         }
 
@@ -289,12 +292,15 @@ class TileTree
             return false;
         }
         $flags = 0;
-        if (($cache['founds'] > 6) && (($cache['recommendations'] / $cache['founds']) > 0.3))
+        if (($cache['founds'] > 6) && (($cache['recommendations'] / $cache['founds']) > 0.3)) {
             $flags |= self::$FLAG_STAR;
-        if ($cache['trackables_count'] > 0)
+        }
+        if ($cache['trackables_count'] > 0) {
             $flags |= self::$FLAG_HAS_TRACKABLES;
-        if ($cache['founds'] == 0)
+        }
+        if ($cache['founds'] == 0) {
             $flags |= self::$FLAG_NOT_YET_FOUND;
+        }
         return array($cache['internal_id'], $z21x, $z21y, Okapi::cache_status_name2id($cache['status']),
             Okapi::cache_type_name2id($cache['type']), $cache['rating'], $flags,
             self::compute_name_crc($cache['name']));

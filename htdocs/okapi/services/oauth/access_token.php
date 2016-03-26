@@ -8,7 +8,7 @@ use okapi\OkapiRequest;
 use okapi\ParamMissing;
 use okapi\InvalidParam;
 
-class WebService
+class access_token
 {
     public static function options()
     {
@@ -21,8 +21,7 @@ class WebService
     public static function call(OkapiRequest $request)
     {
         $verifier = $request->get_parameter('oauth_verifier');
-        if (!$verifier)
-        {
+        if (!$verifier) {
             # We require the 1.0a flow (throw an error when there is no oauth_verifier).
             throw new ParamMissing("oauth_verifier");
         }

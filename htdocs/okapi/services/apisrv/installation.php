@@ -11,7 +11,7 @@ use okapi\InvalidParam;
 use okapi\OkapiServiceRunner;
 use okapi\OkapiInternalRequest;
 
-class WebService
+class installation
 {
     public static function options()
     {

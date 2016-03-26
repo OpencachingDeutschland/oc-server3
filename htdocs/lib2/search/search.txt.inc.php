@@ -1,35 +1,35 @@
 <?php
-	/***************************************************************************
-		For license information see doc/license.txt
+    /***************************************************************************
+        For license information see doc/license.txt
 
-		Unicode Reminder メモ
+        Unicode Reminder メモ
 
-		Plaintext search output, one file per cache
-	****************************************************************************/
+        Plaintext search output, one file per cache
+    ****************************************************************************/
 
-	require_once('lib2/translate.class.php');
+    require_once('lib2/translate.class.php');
 
-	$search_output_file_download = true;
-	$content_type_plain = 'text/plain';
-	$zip_threshold = 1;
-	$add_to_zipfile = false;
+    $search_output_file_download = true;
+    $content_type_plain = 'text/plain';
+    $zip_threshold = 1;
+    $add_to_zipfile = false;
 
 
 function search_output()
 {
-	global $opt, $translate, $txt_record;
-	global $converted_from_html;
-	global $phpzip, $bUseZip;
+    global $opt, $translate, $txt_record;
+    global $converted_from_html;
+    global $phpzip, $bUseZip;
 
-	$txtLine = $txt_record;
+    $txtLine = $txt_record;
 
-	$txtLogs = "<===================>
+    $txtLogs = "<===================>
 {username} / {date} / {type}
 
 {text}
 ";
 
-	$rs = sql_slave("
+    $rs = sql_slave("
 		SELECT SQL_BUFFER_RESULT
 			&searchtmp.`cache_id` `cacheid`,
 			&searchtmp.`longitude` `longitude`,
@@ -70,77 +70,80 @@ function search_output()
 			 LEFT JOIN `sys_trans_text` `stt_country` ON `stt_country`.`trans_id`=`countries`.`trans_id` AND `stt_country`.`lang`='&1'",
      $opt['template']['locale']);
 
-	while ($r = sql_fetch_array($rs))
-	{
-		if (strlen($r['desc_languages']) > 2)
-			$r = get_locale_desc($r);
+    while ($r = sql_fetch_array($rs)) {
+        if (strlen($r['desc_languages']) > 2) {
+            $r = get_locale_desc($r);
+        }
 
-		$thisline = $txtLine;
+        $thisline = $txtLine;
 
-		$lat = sprintf('%01.5f', $r['latitude']);
-		$thisline = mb_ereg_replace('{lat}', help_latToDegreeStr($lat), $thisline);
+        $lat = sprintf('%01.5f', $r['latitude']);
+        $thisline = mb_ereg_replace('{lat}', help_latToDegreeStr($lat), $thisline);
 
-		$lon = sprintf('%01.5f', $r['longitude']);
-		$thisline = mb_ereg_replace('{lon}', help_lonToDegreeStr($lon), $thisline);
+        $lon = sprintf('%01.5f', $r['longitude']);
+        $thisline = mb_ereg_replace('{lon}', help_lonToDegreeStr($lon), $thisline);
 
-		$time = date('d.m.Y', strtotime($r['date_hidden']));
-		$thisline = mb_ereg_replace('{time}', $time, $thisline);
-		$thisline = mb_ereg_replace('{waypoint}', $r['waypoint'], $thisline);
-		$thisline = mb_ereg_replace('{cacheid}', $r['cacheid'], $thisline);
-		$thisline = mb_ereg_replace('{cachename}', $r['name'], $thisline);
-		$thisline = mb_ereg_replace('{country}', $r['country'], $thisline);
+        $time = date('d.m.Y', strtotime($r['date_hidden']));
+        $thisline = mb_ereg_replace('{time}', $time, $thisline);
+        $thisline = mb_ereg_replace('{waypoint}', $r['waypoint'], $thisline);
+        $thisline = mb_ereg_replace('{cacheid}', $r['cacheid'], $thisline);
+        $thisline = mb_ereg_replace('{cachename}', $r['name'], $thisline);
+        $thisline = mb_ereg_replace('{country}', $r['country'], $thisline);
 
-		if ($r['hint'] == '')
-			$thisline = mb_ereg_replace('{hints}', '', $thisline);
-		else
-			$thisline = mb_ereg_replace('{hints}', str_rot13_gc(decodeEntities(strip_tags($r['hint']))), $thisline);
+        if ($r['hint'] == '') {
+            $thisline = mb_ereg_replace('{hints}', '', $thisline);
+        } else {
+            $thisline = mb_ereg_replace('{hints}', str_rot13_gc(decodeEntities(strip_tags($r['hint']))), $thisline);
+        }
 
-		$thisline = mb_ereg_replace('{shortdesc}', $r['short_desc'], $thisline);
+        $thisline = mb_ereg_replace('{shortdesc}', $r['short_desc'], $thisline);
 
-		$license = getLicenseDisclaimer(
-			$r['user_id'], $r['username'], $r['data_license'], $r['cacheid'], $opt['template']['locale'], true, false, true);
-		if ($license != "")
-			$license = "\r\n\r\n$license";
+        $license = getLicenseDisclaimer(
+            $r['user_id'], $r['username'], $r['data_license'], $r['cacheid'], $opt['template']['locale'], true, false, true);
+        if ($license != "") {
+            $license = "\r\n\r\n$license";
+        }
 
-		if ($r['html'] == 0)
-		{
-			$thisline = mb_ereg_replace('{htmlwarn}', '', $thisline);
-			$thisline = mb_ereg_replace('{desc}', decodeEntities(strip_tags($r['desc'])) . $license, $thisline);
-		}
-		else
-		{
-			$thisline = mb_ereg_replace('{htmlwarn}', " ($converted_from_html)", $thisline);
-			$thisline = mb_ereg_replace('{desc}', html2txt($r['desc']) . $license, $thisline);
-		}
+        if ($r['html'] == 0) {
+            $thisline = mb_ereg_replace('{htmlwarn}', '', $thisline);
+            $thisline = mb_ereg_replace('{desc}', decodeEntities(strip_tags($r['desc'])) . $license, $thisline);
+        } else {
+            $thisline = mb_ereg_replace('{htmlwarn}', " ($converted_from_html)", $thisline);
+            $thisline = mb_ereg_replace('{desc}', html2txt($r['desc']) . $license, $thisline);
+        }
 
-		$thisline = mb_ereg_replace('{type}', $r['type'], $thisline);
-		$thisline = mb_ereg_replace('{container}', $r['size'], $thisline);
-		$thisline = mb_ereg_replace('{status}', $r['status'], $thisline);
+        $thisline = mb_ereg_replace('{type}', $r['type'], $thisline);
+        $thisline = mb_ereg_replace('{container}', $r['size'], $thisline);
+        $thisline = mb_ereg_replace('{status}', $r['status'], $thisline);
 
-		$difficulty = sprintf('%01.1f', $r['difficulty'] / 2);
-		$thisline = mb_ereg_replace('{difficulty}', $difficulty, $thisline);
+        $difficulty = sprintf('%01.1f', $r['difficulty'] / 2);
+        $thisline = mb_ereg_replace('{difficulty}', $difficulty, $thisline);
 
-		$terrain = sprintf('%01.1f', $r['terrain'] / 2);
-		$thisline = mb_ereg_replace('{terrain}', $terrain, $thisline);
+        $terrain = sprintf('%01.1f', $r['terrain'] / 2);
+        $thisline = mb_ereg_replace('{terrain}', $terrain, $thisline);
 
-		$thisline = mb_ereg_replace('{siteurl}', $opt['page']['default_absolute_url'], $thisline);
-		$thisline = mb_ereg_replace('{owner}', $r['username'], $thisline);
+        $thisline = mb_ereg_replace('{siteurl}', $opt['page']['default_absolute_url'], $thisline);
+        $thisline = mb_ereg_replace('{owner}', $r['username'], $thisline);
 
-		$flags = array();
-		if ($r['needs_maintenance'] > 0 || $r['listing_outdated'])
-		{
-			if ($r['needs_maintenance'] > 0) $flags[] = 'geocache needs maintenance';
-			if ($r['listing_outdated'] > 0) $flags[] = 'description is outdated';
-		}
-		else
-			$flags[] = 'ok';
-		foreach ($flags as &$flag)
-			$flag = $translate->t($flag, '', basename(__FILE__), __LINE__);
-		$thisline = mb_ereg_replace('{condition}', implode(', ', $flags), $thisline);
+        $flags = array();
+        if ($r['needs_maintenance'] > 0 || $r['listing_outdated']) {
+            if ($r['needs_maintenance'] > 0) {
+                $flags[] = 'geocache needs maintenance';
+            }
+            if ($r['listing_outdated'] > 0) {
+                $flags[] = 'description is outdated';
+            }
+        } else {
+            $flags[] = 'ok';
+        }
+        foreach ($flags as &$flag) {
+            $flag = $translate->t($flag, '', basename(__FILE__), __LINE__);
+        }
+        $thisline = mb_ereg_replace('{condition}', implode(', ', $flags), $thisline);
 
-		// logs ermitteln
-		$logentries = '';
-		$rsLogs = sql_slave("
+        // logs ermitteln
+        $logentries = '';
+        $rsLogs = sql_slave("
 			SELECT
 				`cache_logs`.`id`,
 				`cache_logs`.`text_html`,
@@ -159,62 +162,60 @@ function search_output()
 				`cache_logs`.`date_created` DESC,
 				`cache_logs`.`id` DESC
 			LIMIT 20",
-			$r['cacheid'], $opt['template']['locale']);
+            $r['cacheid'], $opt['template']['locale']);
 
-		while ($rLog = sql_fetch_array($rsLogs))
-		{
-			$thislog = $txtLogs;
+        while ($rLog = sql_fetch_array($rsLogs)) {
+            $thislog = $txtLogs;
 
-			$thislog = mb_ereg_replace('{id}', $rLog['id'], $thislog);
-			if (substr($rLog['date'],11) == "00:00:00")
-				$dateformat = "d.m.Y";
-			else
-				$dateformat = "d.m.Y H:i";
-			$thislog = mb_ereg_replace('{date}', date($dateformat, strtotime($rLog['date'])), $thislog);
-			$thislog = mb_ereg_replace('{username}', $rLog['username'], $thislog);
+            $thislog = mb_ereg_replace('{id}', $rLog['id'], $thislog);
+            if (substr($rLog['date'], 11) == "00:00:00") {
+                $dateformat = "d.m.Y";
+            } else {
+                $dateformat = "d.m.Y H:i";
+            }
+            $thislog = mb_ereg_replace('{date}', date($dateformat, strtotime($rLog['date'])), $thislog);
+            $thislog = mb_ereg_replace('{username}', $rLog['username'], $thislog);
 
-			$logtype = $rLog['type'];
+            $logtype = $rLog['type'];
 
-			$thislog = mb_ereg_replace('{type}', $logtype, $thislog);
-			if ($rLog['text_html'] == 0)
-				$thislog = mb_ereg_replace('{text}', decodeEntities(strip_tags($rLog['text'])), $thislog);
-			else
-				$thislog = mb_ereg_replace('{text}', html2txt($rLog['text']), $thislog);
+            $thislog = mb_ereg_replace('{type}', $logtype, $thislog);
+            if ($rLog['text_html'] == 0) {
+                $thislog = mb_ereg_replace('{text}', decodeEntities(strip_tags($rLog['text'])), $thislog);
+            } else {
+                $thislog = mb_ereg_replace('{text}', html2txt($rLog['text']), $thislog);
+            }
 
-			$logentries .= $thislog . "\n";
-		}
-		$thisline = mb_ereg_replace('{logs}', $logentries, $thisline);
+            $logentries .= $thislog . "\n";
+        }
+        $thisline = mb_ereg_replace('{logs}', $logentries, $thisline);
 
-		$thisline = lf2crlf($thisline);
-		if (!$bUseZip)
-			echo $thisline;
-		else
-		{
-			$phpzip->add_data($r['waypoint'] . '.txt', $thisline);
-		}
-	}
-	mysql_free_result($rs);
+        $thisline = lf2crlf($thisline);
+        if (!$bUseZip) {
+            echo $thisline;
+        } else {
+            $phpzip->add_data($r['waypoint'] . '.txt', $thisline);
+        }
+    }
+    mysql_free_result($rs);
 }
 
 
-	function decodeEntities($str)
-	{
-		return html_entity_decode($str, ENT_COMPAT, "UTF-8");
-	}
+    function decodeEntities($str)
+    {
+        return html_entity_decode($str, ENT_COMPAT, "UTF-8");
+    }
 
-	function html2txt($html)
-	{
-		$str = mb_ereg_replace("\r\n", '', $html);
-		$str = mb_ereg_replace("\n", '', $str);
-		$str = mb_ereg_replace('<br />', "\n", $str);
-		$str = strip_tags($str);
-		$str = decodeEntities($str);
-		return $str;
-	}
+    function html2txt($html)
+    {
+        $str = mb_ereg_replace("\r\n", '', $html);
+        $str = mb_ereg_replace("\n", '', $str);
+        $str = mb_ereg_replace('<br />', "\n", $str);
+        $str = strip_tags($str);
+        $str = decodeEntities($str);
+        return $str;
+    }
 
-	function lf2crlf($str)
-	{
-		return mb_ereg_replace("\r\r\n" ,"\r\n" , mb_ereg_replace("\n" ,"\r\n" , $str));
-	}
-
-?>
+    function lf2crlf($str)
+    {
+        return mb_ereg_replace("\r\r\n", "\r\n", mb_ereg_replace("\n", "\r\n", $str));
+    }

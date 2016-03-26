@@ -12,8 +12,7 @@ use okapi\Cache;
 use okapi\OkapiInternalConsumer;
 use okapi\OkapiInternalRequest;
 
-
-class WebService
+class method_index
 {
     public static function options()
     {
@@ -28,11 +27,9 @@ class WebService
         sort($methodnames);
         $cache_key = "api_ref/method_index#".md5(implode("#", $methodnames));
         $results = Cache::get($cache_key);
-        if ($results == null)
-        {
+        if ($results == null) {
             $results = array();
-            foreach ($methodnames as $methodname)
-            {
+            foreach ($methodnames as $methodname) {
                 $info = OkapiServiceRunner::call('services/apiref/method', new OkapiInternalRequest(
                     new OkapiInternalConsumer(), null, array('name' => $methodname)));
                 $results[] = array(

@@ -1,8 +1,8 @@
 <?php
 /****************************************************************************
-		For license information see doc/license.txt
+        For license information see doc/license.txt
 
-		Unicode Reminder メモ
+        Unicode Reminder メモ
 
     charset related functions
  ****************************************************************************/
@@ -22,54 +22,47 @@ $utf_punct  = "                ------|_'','\"\"\"\"++*>....        %%´\"\"`\"\"
 
 function utf8ToIso88591($s)
 {
-  global $utf_xlatin, $utf_punct;
+    global $utf_xlatin, $utf_punct;
 
-  $pos = 0;
-  $result = "";
+    $pos = 0;
+    $result = "";
 
-  while ($pos < strlen($s))
-  {
-    $c1 = ord($s[$pos++]);
-    if ($c1 < 0xC0)
-      $result .= chr($c1);
-    else if ($pos < strlen($s))
-    {
-      $c2 = ord($s[$pos++]);
-      if ($c1 < 0xE0)
-      {
-        $code = 0x40 * ($c1 & 0x1F) + ($c2 & 0x3F);
-        if ($code < 0x100)
-          $result .= chr($code);
-        else if ($code < 0x200)
-        {
-          $result .= $utf_xlatin[2*($code - 0x100)];
-          if ($utf_xlatin[2*($code - 0x100) + 1] != ' ')
-            $result .= $utf_xlatin[2*($code - 0x100) + 1];
-        }
-        else
-          $result .= "?";
-      }
-      else if ($pos < strlen($s))
-      {
-        $c3 = ord($s[$pos++]);
-        $code = 0x1000 * ($c1 & 0x0F) + 0x40 * ($c2 & 0x3F) + ($c3 & 0x3F);
-        switch ($code)
-        {
+    while ($pos < strlen($s)) {
+        $c1 = ord($s[$pos++]);
+        if ($c1 < 0xC0) {
+            $result .= chr($c1);
+        } elseif ($pos < strlen($s)) {
+            $c2 = ord($s[$pos++]);
+            if ($c1 < 0xE0) {
+                $code = 0x40 * ($c1 & 0x1F) + ($c2 & 0x3F);
+                if ($code < 0x100) {
+                    $result .= chr($code);
+                } elseif ($code < 0x200) {
+                    $result .= $utf_xlatin[2*($code - 0x100)];
+                    if ($utf_xlatin[2*($code - 0x100) + 1] != ' ') {
+                        $result .= $utf_xlatin[2*($code - 0x100) + 1];
+                    }
+                } else {
+                    $result .= "?";
+                }
+            } elseif ($pos < strlen($s)) {
+                $c3 = ord($s[$pos++]);
+                $code = 0x1000 * ($c1 & 0x0F) + 0x40 * ($c2 & 0x3F) + ($c3 & 0x3F);
+                switch ($code) {
           case 0x2026 : $result .= "...";  break;
           case 0x2025 : $result .= "..";   break;
-          case 0x20AC : $result .= "Euro"; break; 
+          case 0x20AC : $result .= "Euro"; break;
           case 0x2605 : $result .= "*";    break;
           default:
-            if ($code >= 0x2000 && $code <= 0x203F)
-              $result .= $utf_punct[$code - 0x2000];
-            else
-              $result .= "?";
+            if ($code >= 0x2000 && $code <= 0x203F) {
+                $result .= $utf_punct[$code - 0x2000];
+            } else {
+                $result .= "?";
+            }
         }
-      }
+            }
+        }
     }
-  }
 
-  return $result;
+    return $result;
 }
-
-?>

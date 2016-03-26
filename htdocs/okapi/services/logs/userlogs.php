@@ -13,7 +13,7 @@ use okapi\OkapiServiceRunner;
 use okapi\Settings;
 use okapi\services\caches\search\SearchAssistant;
 
-class WebService
+class userlogs
 {
     public static function options()
     {
@@ -24,21 +24,31 @@ class WebService
     public static function call(OkapiRequest $request)
     {
         $user_uuid = $request->get_parameter('user_uuid');
-        if (!$user_uuid) throw new ParamMissing('user_uuid');
+        if (!$user_uuid) {
+            throw new ParamMissing('user_uuid');
+        }
         $limit = $request->get_parameter('limit');
-        if (!$limit) $limit = "20";
-        if (!is_numeric($limit))
+        if (!$limit) {
+            $limit = "20";
+        }
+        if (!is_numeric($limit)) {
             throw new InvalidParam('limit', "'$limit'");
+        }
         $limit = intval($limit);
-        if (($limit < 1) || ($limit > 1000))
+        if (($limit < 1) || ($limit > 1000)) {
             throw new InvalidParam('limit', "Has to be in range 1..1000.");
+        }
         $offset = $request->get_parameter('offset');
-        if (!$offset) $offset = "0";
-        if (!is_numeric($offset))
+        if (!$offset) {
+            $offset = "0";
+        }
+        if (!is_numeric($offset)) {
             throw new InvalidParam('offset', "'$offset'");
+        }
         $offset = intval($offset);
-        if ($offset < 0)
+        if ($offset < 0) {
             throw new InvalidParam('offset', "'$offset'");
+        }
 
         # Check if user exists and retrieve user's ID (this will throw
         # a proper exception on invalid UUID).
@@ -60,8 +70,7 @@ class WebService
             limit $offset, $limit
         ");
         $results = array();
-        while ($row = Db::fetch_assoc($rs))
-        {
+        while ($row = Db::fetch_assoc($rs)) {
             $results[] = array(
                 'uuid' => $row['uuid'],
                 'date' => date('c', $row['date']),

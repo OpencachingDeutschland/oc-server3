@@ -17,35 +17,31 @@
  */
 function smarty_block_nocache($param, $content, &$smarty, &$repeat)
 {
-	static $counter = array();
+    static $counter = array();
 
-	if ($repeat)
-	{
-		if (!isset($param['name']))
-			return $content;
+    if ($repeat) {
+        if (!isset($param['name'])) {
+            return $content;
+        }
 
-		$name = $param['name'];
-		unset($param['name']);
+        $name = $param['name'];
+        unset($param['name']);
 
-		if (!isset($counter[$name]))
-			$counter[$name] = 0;
-		$counter[$name]++;
+        if (!isset($counter[$name])) {
+            $counter[$name] = 0;
+        }
+        $counter[$name]++;
 
-	  if ($smarty->_cache_including)
-		{
-			$param = isset($smarty->_cache_info['cached_vars'][$name][$counter[$name]]) ? $smarty->_cache_info['cached_vars'][$name][$counter[$name]] : array();
-		}
-		else
-		{
-			$smarty->_cache_info['cached_vars'][$name][$counter[$name]] = $param;
-		}
+        if ($smarty->_cache_including) {
+            $param = isset($smarty->_cache_info['cached_vars'][$name][$counter[$name]]) ? $smarty->_cache_info['cached_vars'][$name][$counter[$name]] : array();
+        } else {
+            $smarty->_cache_info['cached_vars'][$name][$counter[$name]] = $param;
+        }
 
-		foreach ($param AS $k => $v)
-		{
-			$smarty->_tpl_vars[$k] = $v;
-		}
-	}
+        foreach ($param as $k => $v) {
+            $smarty->_tpl_vars[$k] = $v;
+        }
+    }
 
-	return $content;
+    return $content;
 }
-?>

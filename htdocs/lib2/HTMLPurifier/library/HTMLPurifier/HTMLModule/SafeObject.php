@@ -11,7 +11,8 @@ class HTMLPurifier_HTMLModule_SafeObject extends HTMLPurifier_HTMLModule
 
     public $name = 'SafeObject';
 
-    public function setup($config) {
+    public function setup($config)
+    {
 
         // These definitions are not intrinsically safe: the attribute transforms
         // are a vital part of ensuring safety.
@@ -44,9 +45,7 @@ class HTMLPurifier_HTMLModule_SafeObject extends HTMLPurifier_HTMLModule
         );
         $param->attr_transform_post[] = new HTMLPurifier_AttrTransform_SafeParam();
         $this->info_injector[] = 'SafeObject';
-
     }
-
 }
 
 // vim: et sw=4 sts=4

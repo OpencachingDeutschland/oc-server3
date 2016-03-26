@@ -19,7 +19,7 @@ use okapi\cronjobs\CronJobController;
  * This is an entry point for system's crontab. System's crontab will be
  * running this view every 5 minutes.
  */
-class View
+class cron5
 {
     public static function call()
     {

@@ -15,6 +15,4 @@ function smarty_modifier_urlencode($string)
     return urlencode($string);
 }
 
-/* vim: set expandtab: */
-
-?>
+/* vim: set expandtab: */;

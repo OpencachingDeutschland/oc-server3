@@ -15,7 +15,7 @@ use okapi\OkapiServiceRunner;
 use okapi\OkapiInternalRequest;
 use okapi\Settings;
 
-class View
+class clogentry
 {
     public static function call()
     {

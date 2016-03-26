@@ -5,12 +5,13 @@
  *  Unicode Reminder メモ
  ***************************************************************************/
 
-	if (!isset($maildomain)) $maildomain = 'opencaching.de';
+    if (!isset($maildomain)) {
+        $maildomain = 'opencaching.de';
+    }
 
-	$mailfrom = 'noreply@' . $maildomain;
+    $mailfrom = 'noreply@' . $maildomain;
 
-	$debug = false;
-	$debug_mailto = 'abc@xyz.de';
+    $debug = false;
+    $debug_mailto = 'abc@xyz.de';
 
-	$notifypid = $rootpath . 'cache/notify.pid';
-?>
+    $notifypid = $rootpath . 'cache/notify.pid';

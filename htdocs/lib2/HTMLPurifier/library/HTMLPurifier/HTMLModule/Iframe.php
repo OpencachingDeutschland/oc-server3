@@ -13,7 +13,8 @@ class HTMLPurifier_HTMLModule_Iframe extends HTMLPurifier_HTMLModule
     public $name = 'Iframe';
     public $safe = false;
 
-    public function setup($config) {
+    public function setup($config)
+    {
         if ($config->get('HTML.SafeIframe')) {
             $this->safe = true;
         }
@@ -32,7 +33,6 @@ class HTMLPurifier_HTMLModule_Iframe extends HTMLPurifier_HTMLModule
             )
         );
     }
-
 }
 
 // vim: et sw=4 sts=4

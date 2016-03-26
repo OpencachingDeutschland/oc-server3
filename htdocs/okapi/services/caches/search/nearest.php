@@ -11,7 +11,7 @@ use okapi\ParamMissing;
 use okapi\InvalidParam;
 use okapi\services\caches\search\SearchAssistant;
 
-class WebService
+class nearest
 {
     public static function options()
     {
@@ -30,22 +30,26 @@ class WebService
         # It's much easier to grasp their meaning this way.
 
         $tmp = $request->get_parameter('center');
-        if (!$tmp)
+        if (!$tmp) {
             throw new ParamMissing('center');
+        }
         $parts = explode('|', $tmp);
-        if (count($parts) != 2)
+        if (count($parts) != 2) {
             throw new InvalidParam('center', "Expecting 2 pipe-separated parts, got ".count($parts).".");
-        foreach ($parts as &$part_ref)
-        {
-            if (!preg_match("/^-?[0-9]+(\.?[0-9]*)$/", $part_ref))
+        }
+        foreach ($parts as &$part_ref) {
+            if (!preg_match("/^-?[0-9]+(\.?[0-9]*)$/", $part_ref)) {
                 throw new InvalidParam('center', "'$part_ref' is not a valid float number.");
+            }
             $part_ref = floatval($part_ref);
         }
         list($center_lat, $center_lon) = $parts;
-        if ($center_lat > 90 || $center_lat < -90)
+        if ($center_lat > 90 || $center_lat < -90) {
             throw new InvalidParam('center', "Latitudes have to be within -90..90 range.");
-        if ($center_lon > 180 || $center_lon < -180)
+        }
+        if ($center_lon > 180 || $center_lon < -180) {
             throw new InvalidParam('center', "Longitudes have to be within -180..180 range.");
+        }
 
         #
         # In the method description, we promised to return caches ordered by the *rough*
@@ -66,13 +70,14 @@ class WebService
 
         $where_conds = array();
         $radius = null;
-        if ($tmp = $request->get_parameter('radius'))
-        {
-            if (!preg_match("/^-?[0-9]+(\.?[0-9]*)$/", $tmp))
+        if ($tmp = $request->get_parameter('radius')) {
+            if (!preg_match("/^-?[0-9]+(\.?[0-9]*)$/", $tmp)) {
                 throw new InvalidParam('radius', "'$tmp' is not a valid float number.");
+            }
             $radius = floatval($tmp);  # is given in kilometers
-            if ($radius <= 0)
+            if ($radius <= 0) {
                 throw new InvalidParam('radius', "Has to be a positive number.");
+            }
 
             # Apply a latitude-range prefilter if it looks promising.
             # See https://github.com/opencaching/okapi/issues/363 for more info.
@@ -80,8 +85,7 @@ class WebService
             $optimization_radius = 100;  # in kilometers, optimized for Opencaching.de
             $km2degrees_upper_estimate_factor = 0.01;
 
-            if ($radius <= $optimization_radius)
-            {
+            if ($radius <= $optimization_radius) {
                 $radius_degrees = $radius * $km2degrees_upper_estimate_factor;
                 $where_conds[] = "
                     caches.latitude >= '".Db::escape_string($center_lat - $radius_degrees)."'
@@ -100,8 +104,7 @@ class WebService
         $search_assistant->set_search_params($search_params);
 
         $result = $search_assistant->get_common_search_result();
-        if ($radius == null)
-        {
+        if ($radius == null) {
             # 'more' is meaningless in this case, we'll remove it.
             unset($result['more']);
         }

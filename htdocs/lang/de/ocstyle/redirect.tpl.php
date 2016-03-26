@@ -1,8 +1,8 @@
 <?php
 /****************************************************************************
-		For license information see doc/license.txt
+        For license information see doc/license.txt
 
-		Unicode Reminder メモ
+        Unicode Reminder メモ
  ****************************************************************************/
 
 

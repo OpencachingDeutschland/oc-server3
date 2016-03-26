@@ -7,89 +7,89 @@
  * TODO: use cache() class at all
  ***************************************************************************/
 
-	require('./lib2/web.inc.php');
-	require_once('./lib2/logic/labels.inc.php');
-	require_once('./lib2/logic/cache.class.php');
-	require_once('./lib2/logic/attribute.class.php');
-	require_once('./lib2/logic/cachelist.class.php');
-	require_once('./lib2/logic/coordinate.class.php');
-	require_once('./lib2/logic/useroptions.class.php');
-	require_once('./lib2/logic/logpics.inc.php');
+    require('./lib2/web.inc.php');
+    require_once('./lib2/logic/labels.inc.php');
+    require_once('./lib2/logic/cache.class.php');
+    require_once('./lib2/logic/attribute.class.php');
+    require_once('./lib2/logic/cachelist.class.php');
+    require_once('./lib2/logic/coordinate.class.php');
+    require_once('./lib2/logic/useroptions.class.php');
+    require_once('./lib2/logic/logpics.inc.php');
 
-	$login->verify();
+    $login->verify();
 
 function getChildWaypoints($cacheid)
 {
-  $wphandler = new ChildWp_Handler();
-  $waypoints = $wphandler->getChildWps($cacheid);
-  $count = count($waypoints);
+    $wphandler = new ChildWp_Handler();
+    $waypoints = $wphandler->getChildWps($cacheid);
+    $count = count($waypoints);
 
-  if ($count > 0)
-  {
-    $formatter = new Coordinate_Formatter();
+    if ($count > 0) {
+        $formatter = new Coordinate_Formatter();
 
-    for ($i = 0; $i < $count; $i++)
-    {
-      $waypoints[$i]['coord']['lat'] = $waypoints[$i]['coordinate']->latitude();
-      $waypoints[$i]['coord']['lon'] = $waypoints[$i]['coordinate']->longitude();
-      $waypoints[$i]['coordinateHtml'] = $formatter->formatHtml($waypoints[$i]['coordinate'], '<br />');
-      $waypoints[$i]['description'] = trim($waypoints[$i]['description']);
-      $waypoints[$i]['position'] = $i + 1;
+        for ($i = 0; $i < $count; $i++) {
+            $waypoints[$i]['coord']['lat'] = $waypoints[$i]['coordinate']->latitude();
+            $waypoints[$i]['coord']['lon'] = $waypoints[$i]['coordinate']->longitude();
+            $waypoints[$i]['coordinateHtml'] = $formatter->formatHtml($waypoints[$i]['coordinate'], '<br />');
+            $waypoints[$i]['description'] = trim($waypoints[$i]['description']);
+            $waypoints[$i]['position'] = $i + 1;
+        }
     }
-  }
 
-  return $waypoints;
+    return $waypoints;
 }
 
-	$tpl->name = 'viewcache';
-	$tpl->menuitem = MNU_CACHES_SEARCH_VIEWCACHE;
-	$tpl->assign('use_tooltiplib', true);
+    $tpl->name = 'viewcache';
+    $tpl->menuitem = MNU_CACHES_SEARCH_VIEWCACHE;
+    $tpl->assign('use_tooltiplib', true);
 
-	// get cacheid
-	$cacheid = 0;
-	if (isset($_REQUEST['cacheid']))
-		$cacheid = $_REQUEST['cacheid']+0;
-	else if (isset($_REQUEST['uuid']))
-		$cacheid = cache::cacheIdFromUUID($_REQUEST['uuid']);
-	else if (isset($_REQUEST['wp']))
-		$cacheid = cache::cacheIdFromWP($_REQUEST['wp']);
+    // get cacheid
+    $cacheid = 0;
+    if (isset($_REQUEST['cacheid'])) {
+        $cacheid = $_REQUEST['cacheid']+0;
+    } elseif (isset($_REQUEST['uuid'])) {
+        $cacheid = cache::cacheIdFromUUID($_REQUEST['uuid']);
+    } elseif (isset($_REQUEST['wp'])) {
+        $cacheid = cache::cacheIdFromWP($_REQUEST['wp']);
+    }
 
-	$cache = new cache($cacheid);
+    $cache = new cache($cacheid);
 
-	if ($cache->exist() == false)
-		$tpl->error(ERROR_CACHE_NOT_EXISTS);
+    if ($cache->exist() == false) {
+        $tpl->error(ERROR_CACHE_NOT_EXISTS);
+    }
 
-	if ($cache->allowView() == false)
-		$tpl->error(ERROR_NO_ACCESS);
+    if ($cache->allowView() == false) {
+        $tpl->error(ERROR_NO_ACCESS);
+    }
 
-	if (isset($_REQUEST['visitcounter']) && $_REQUEST['visitcounter'] == 1)
-	{
-		cache::visitCounter($login->userid, $_SERVER["REMOTE_ADDR"], $cacheid);
-		exit;
-	}
+    if (isset($_REQUEST['visitcounter']) && $_REQUEST['visitcounter'] == 1) {
+        cache::visitCounter($login->userid, $_SERVER["REMOTE_ADDR"], $cacheid);
+        exit;
+    }
 
-	$bCrypt = !isset($_REQUEST['nocrypt']) || ($_REQUEST['nocrypt'] != 1);
-	$tpl->assign('crypt', $bCrypt);
+    $bCrypt = !isset($_REQUEST['nocrypt']) || ($_REQUEST['nocrypt'] != 1);
+    $tpl->assign('crypt', $bCrypt);
 
-	if (isset($_REQUEST['desclang']))
-		$sPreferedDescLang = $_REQUEST['desclang'] . ',' . $opt['template']['locale'] . ',EN';
-	else
-		$sPreferedDescLang = $opt['template']['locale'] . ',EN';
+    if (isset($_REQUEST['desclang'])) {
+        $sPreferedDescLang = $_REQUEST['desclang'] . ',' . $opt['template']['locale'] . ',EN';
+    } else {
+        $sPreferedDescLang = $opt['template']['locale'] . ',EN';
+    }
 
-	$logpics = isset($_REQUEST['logpics']) && ($_REQUEST['logpics'] == 1); 
+    $logpics = isset($_REQUEST['logpics']) && ($_REQUEST['logpics'] == 1);
 
-	//$tpl->caching = true;
-	//$tpl->cache_lifetime = 31*24*60*60;
-	//$tpl->cache_id = $cacheid . '|' . $sPreferedDescLang . '|' . $opt['page']['protocol'];
+    //$tpl->caching = true;
+    //$tpl->cache_lifetime = 31*24*60*60;
+    //$tpl->cache_id = $cacheid . '|' . $sPreferedDescLang . '|' . $opt['page']['protocol'];
 
-	if ($login->userid!=0)
-	{
-		$tpl->assign('ignored', sql_value("SELECT 1 FROM `cache_ignore` WHERE `cache_id`='&1' AND `user_id`='&2'", 0, $cacheid, $login->userid));
-		$tpl->assign('watched', sql_value("SELECT 1 FROM `cache_watches` WHERE `cache_id`='&1' AND `user_id`='&2'", 0, $cacheid, $login->userid));
-	}
+    if ($login->userid!=0) {
+        $tpl->assign('ignored', sql_value("SELECT 1 FROM `cache_ignore` WHERE `cache_id`='&1' AND `user_id`='&2'", 0, $cacheid, $login->userid));
+        $tpl->assign('watched', sql_value("SELECT 1 FROM `cache_watches` WHERE `cache_id`='&1' AND `user_id`='&2'", 0, $cacheid, $login->userid));
+    }
 
-	//get cache record
-	$rs = sql("SELECT
+    //get cache record
+    $rs = sql("SELECT
 				`caches`.`cache_id` AS `cacheid`,
 				`caches`.`listing_last_modified` AS `lastmodified`,
 				`caches`.`user_id` AS `userid`,
@@ -150,232 +150,228 @@ function getChildWaypoints($cacheid)
 		     LEFT JOIN `cache_visits` ON `cache_visits`.`cache_id`=`caches`.`cache_id` AND `user_id_ip`='0'
 		     LEFT JOIN `stat_caches` ON `caches`.`cache_id`=`stat_caches`.`cache_id`
 		    WHERE `caches`.`cache_id`='&1'",
-			$cacheid, $opt['template']['locale'], $sPreferedDescLang, $login->userid);
+            $cacheid, $opt['template']['locale'], $sPreferedDescLang, $login->userid);
 
-	$rCache = sql_fetch_assoc($rs);
-	sql_free_result($rs);
+    $rCache = sql_fetch_assoc($rs);
+    sql_free_result($rs);
 
-	if ($rCache === false)
-		$tpl->error(ERROR_CACHE_NOT_EXISTS);
+    if ($rCache === false) {
+        $tpl->error(ERROR_CACHE_NOT_EXISTS);
+    }
 
-	// not published?
-	if ($rCache['status'] == 5)
-	{
-		$tpl->caching = false;
-		$login->verify();
-		if ($rCache['userid'] != $login->userid)
-			$tpl->error(ERROR_CACHE_NOT_PUBLISHED);
-	}
+    // not published?
+    if ($rCache['status'] == 5) {
+        $tpl->caching = false;
+        $login->verify();
+        if ($rCache['userid'] != $login->userid) {
+            $tpl->error(ERROR_CACHE_NOT_PUBLISHED);
+        }
+    }
 
-	// format waylength
-	if ($rCache['waylength'] < 5)
-		if (round($rCache['waylength'],2) != round($rCache['waylength'],1))
-			$digits = 2;
-		else
-			$digits = 1;
-	else if ($rCache['waylength'] < 50)
-		if (round($rCache['waylength'],1) != round($rCache['waylength'],0))
-			$digits = 1;
-		else
-			$digits = 0;
-	else
-		$digits = 0;
-	$rCache['waylength'] = sprintf('%.'.$digits.'f', $rCache['waylength']);
+    // format waylength
+    if ($rCache['waylength'] < 5) {
+        if (round($rCache['waylength'], 2) != round($rCache['waylength'], 1)) {
+            $digits = 2;
+        } else {
+            $digits = 1;
+        }
+    } elseif ($rCache['waylength'] < 50) {
+        if (round($rCache['waylength'], 1) != round($rCache['waylength'], 0)) {
+            $digits = 1;
+        } else {
+            $digits = 0;
+        }
+    } else {
+        $digits = 0;
+    }
+    $rCache['waylength'] = sprintf('%.'.$digits.'f', $rCache['waylength']);
 
-	// replace links
-	$rCache['desc'] = use_current_protocol_in_html($rCache['desc']);
+    // replace links
+    $rCache['desc'] = use_current_protocol_in_html($rCache['desc']);
 
-	$rCache['adminlog'] = !$rCache['log_allowed'] && ($login->admin & ADMIN_USER);
+    $rCache['adminlog'] = !$rCache['log_allowed'] && ($login->admin & ADMIN_USER);
 
-	$rs = sql("
+    $rs = sql("
 		SELECT `short` `code`, `native_name`, `stt`.`text` AS `name`
 		FROM `languages`
 		JOIN `cache_desc` ON `cache_desc`.`language`=`languages`.`short`
 		LEFT JOIN `sys_trans_text` `stt` ON `stt`.`trans_id`=`languages`.`trans_id` AND `stt`.`lang`='&2'
 		WHERE `cache_desc`.`cache_id`='&1'",
-		$cacheid, $opt['template']['locale']);
-	$desclanguages = sql_fetch_assoc_table($rs);
-	if (count($desclanguages) == 1 && $desclanguages[0]['code'] == $opt['template']['locale'])
-		$rCache['desclanguages'] = array();
-	else
-		$rCache['desclanguages'] = $desclanguages;
+        $cacheid, $opt['template']['locale']);
+    $desclanguages = sql_fetch_assoc_table($rs);
+    if (count($desclanguages) == 1 && $desclanguages[0]['code'] == $opt['template']['locale']) {
+        $rCache['desclanguages'] = array();
+    } else {
+        $rCache['desclanguages'] = $desclanguages;
+    }
 
-	$rCache['sizeName'] = labels::getLabelValue('cache_size', $rCache['size']);
-	$rCache['statusName'] = labels::getLabelValue('cache_status', $rCache['status']);
-	$rCache['typeName'] = labels::getLabelValue('cache_type', $rCache['type']);
+    $rCache['sizeName'] = labels::getLabelValue('cache_size', $rCache['size']);
+    $rCache['statusName'] = labels::getLabelValue('cache_status', $rCache['status']);
+    $rCache['typeName'] = labels::getLabelValue('cache_type', $rCache['type']);
 
-	$rCache['userhasfound'] = false;
-	if ($login->userid != 0)
-		$rCache['userhasfound'] = (sql_value("SELECT COUNT(*) FROM `cache_logs` WHERE `cache_id`='&1' AND `user_id`='&2' AND `type` IN (1,7)", 0, $cacheid, $login->userid) > 0);
+    $rCache['userhasfound'] = false;
+    if ($login->userid != 0) {
+        $rCache['userhasfound'] = (sql_value("SELECT COUNT(*) FROM `cache_logs` WHERE `cache_id`='&1' AND `user_id`='&2' AND `type` IN (1,7)", 0, $cacheid, $login->userid) > 0);
+    }
 
-	$tpl->assign('cache', $rCache);
-	$tpl->title = $rCache['wpoc'] . ' ' . $rCache['name'];
+    $tpl->assign('cache', $rCache);
+    $tpl->title = $rCache['wpoc'] . ' ' . $rCache['name'];
 
-	$coord = new coordinate($rCache['latitude'], $rCache['longitude']);
-	$tpl->assign('coordinates', $coord->getDecimalMinutes());
+    $coord = new coordinate($rCache['latitude'], $rCache['longitude']);
+    $tpl->assign('coordinates', $coord->getDecimalMinutes());
 
-	// pictures
-	$rs = sql("SELECT `id`, `uuid`, `url`, `title`, `thumb_url`, `spoiler`, `display` FROM `pictures` WHERE `object_type`=2 AND `object_id`='&1' AND `display`!=0 ORDER BY `seq`", $cacheid);
-	$tpl->assign_rs('pictures', $rs);
-	sql_free_result($rs);
+    // pictures
+    $rs = sql("SELECT `id`, `uuid`, `url`, `title`, `thumb_url`, `spoiler`, `display` FROM `pictures` WHERE `object_type`=2 AND `object_id`='&1' AND `display`!=0 ORDER BY `seq`", $cacheid);
+    $tpl->assign_rs('pictures', $rs);
+    sql_free_result($rs);
 
-	$tpl->assign('childWaypoints', getChildWaypoints($cacheid));
+    $tpl->assign('childWaypoints', getChildWaypoints($cacheid));
 
-	if ($login->userid != 0)
-	{
-		$cacheNotePresenter = new CacheNote_Presenter(new Http_Request(), new Language_Translator());
-		$cacheNotePresenter->init(new CacheNote_Handler(), $login->userid, $cacheid);
+    if ($login->userid != 0) {
+        $cacheNotePresenter = new CacheNote_Presenter(new Http_Request(), new Language_Translator());
+        $cacheNotePresenter->init(new CacheNote_Handler(), $login->userid, $cacheid);
 
-		if (isset($_POST['submit_cache_note']) && $cacheNotePresenter->validate())
-		{
-			$cacheNotePresenter->doSubmit();
-		}
+        if (isset($_POST['submit_cache_note']) && $cacheNotePresenter->validate()) {
+            $cacheNotePresenter->doSubmit();
+        }
 
-		$cacheNotePresenter->prepare($tpl);
-	}
+        $cacheNotePresenter->prepare($tpl);
+    }
 
-	$tpl->assign('enableCacheNote', $login->userid != 0);
+    $tpl->assign('enableCacheNote', $login->userid != 0);
 
-	/* Logentries */
+    /* Logentries */
 
-	/* begin insertion/change Uwe 20091215 for printing purposes
-	   reworked on 20100106 for better performance after Olivers intervention
-	   rewritten 2012-07-22 following for bugfix, first log was lost in print
-	 */
+    /* begin insertion/change Uwe 20091215 for printing purposes
+       reworked on 20100106 for better performance after Olivers intervention
+       rewritten 2012-07-22 following for bugfix, first log was lost in print
+     */
 
-	$rscount = MAX_LOGENTRIES_ON_CACHEPAGE;
+    $rscount = MAX_LOGENTRIES_ON_CACHEPAGE;
 
-	if (isset($_REQUEST['log']))
-	  switch ($_REQUEST['log'])
-		{
-			case 'N': $rscount = 0; 
-								break;
-								
-			case 'A': $rscount = current(cache::getLogsCount($cacheid));
-			          // This option is also used when referencing logs, e.g. from log lists
-			          // and picture galleries.
-								break;
- 								
-			default:  // This is currently used only for the print view function
-			          // with parameters 5 or 10.
-			          if ($_REQUEST['log'] >= 0 && $_REQUEST['log'] <= 100)
-									$rscount = $_REQUEST['log'] + 0;
-		}	
+    if (isset($_REQUEST['log'])) {
+        switch ($_REQUEST['log']) {
+            case 'N': $rscount = 0;
+                                break;
+                                
+            case 'A': $rscount = current(cache::getLogsCount($cacheid));
+                      // This option is also used when referencing logs, e.g. from log lists
+                      // and picture galleries.
+                                break;
+                                
+            default:  // This is currently used only for the print view function
+                      // with parameters 5 or 10.
+                      if ($_REQUEST['log'] >= 0 && $_REQUEST['log'] <= 100) {
+                          $rscount = $_REQUEST['log'] + 0;
+                      }
+        }
+    }
 
-	$logs = cache::getLogsArray($cacheid, 0, $rscount+1, false, $rCache['protect_old_coords']);
-	
-	if (isset($logs[$rscount])) 
-	{
-		unset($logs[$rscount]);
-		$tpl->assign('morelogs', true);
-	}
-	$loganz = sizeof($logs);
-	$tpl->assign('logs', $logs);
-	$tpl->assign('loganz', $loganz);
+    $logs = cache::getLogsArray($cacheid, 0, $rscount+1, false, $rCache['protect_old_coords']);
+    
+    if (isset($logs[$rscount])) {
+        unset($logs[$rscount]);
+        $tpl->assign('morelogs', true);
+    }
+    $loganz = sizeof($logs);
+    $tpl->assign('logs', $logs);
+    $tpl->assign('loganz', $loganz);
 
-	/*end insertion Uwe 20091215*/
+    /*end insertion Uwe 20091215*/
 
-	/* nature protection areas
-	 */
-	$rs = sql("SELECT `npa_areas`.`id` AS `npaId`, `npa_areas`.`type_id` AS `npaType`, `npa_areas`.`name` AS `npaName`, `npa_types`.`name` AS `npaTypeName` 
+    /* nature protection areas
+     */
+    $rs = sql("SELECT `npa_areas`.`id` AS `npaId`, `npa_areas`.`type_id` AS `npaType`, `npa_areas`.`name` AS `npaName`, `npa_types`.`name` AS `npaTypeName` 
 	             FROM `cache_npa_areas` 
 	       INNER JOIN `npa_areas` ON `cache_npa_areas`.`npa_id`=`npa_areas`.`id` 
 	       INNER JOIN `npa_types` ON `npa_areas`.`type_id`=`npa_types`.`id` 
 	            WHERE `cache_npa_areas`.`cache_id`='&1' AND `npa_types`.`no_warning`=0
 	         GROUP BY `npa_areas`.`type_id`, `npa_areas`.`name`
-	         ORDER BY `npa_types`.`ordinal` ASC", 
-	                  $cacheid);
-	$tpl->assign_rs('npaareasWarning', $rs);
-	sql_free_result($rs);
+	         ORDER BY `npa_types`.`ordinal` ASC",
+                      $cacheid);
+    $tpl->assign_rs('npaareasWarning', $rs);
+    sql_free_result($rs);
 
-	$rs = sql("SELECT `npa_areas`.`id` AS `npaId`, `npa_areas`.`type_id` AS `npaType`, `npa_areas`.`name` AS `npaName`, `npa_types`.`name` AS `npaTypeName` 
+    $rs = sql("SELECT `npa_areas`.`id` AS `npaId`, `npa_areas`.`type_id` AS `npaType`, `npa_areas`.`name` AS `npaName`, `npa_types`.`name` AS `npaTypeName` 
 	             FROM `cache_npa_areas` 
 	       INNER JOIN `npa_areas` ON `cache_npa_areas`.`npa_id`=`npa_areas`.`id` 
 	       INNER JOIN `npa_types` ON `npa_areas`.`type_id`=`npa_types`.`id` 
 	            WHERE `cache_npa_areas`.`cache_id`='&1' AND `npa_types`.`no_warning`=1
 	         GROUP BY `npa_areas`.`type_id`, `npa_areas`.`name`
-	         ORDER BY `npa_types`.`ordinal` ASC", 
-	                  $cacheid);
-	$tpl->assign_rs('npaareasNoWarning', $rs);
-	sql_free_result($rs);
+	         ORDER BY `npa_types`.`ordinal` ASC",
+                      $cacheid);
+    $tpl->assign_rs('npaareasNoWarning', $rs);
+    sql_free_result($rs);
 
-	/* attributes and cache lists
-	 */
-	$tpl->assign('attributes', attribute::getAttrbutesListArrayByCacheId($cacheid));
-	$tpl->assign('cachelists', cachelist::getListsByCacheId($cacheid, $rCache['show_cachelists']));
-	$tpl->assign('watchclinfo', isset($_REQUEST['watchinfo']) && $_REQUEST['watchinfo'] == 1 && 
-	                            cachelist::watchingCacheByListsCount($login->userid, $cacheid) > 0);
+    /* attributes and cache lists
+     */
+    $tpl->assign('attributes', attribute::getAttrbutesListArrayByCacheId($cacheid));
+    $tpl->assign('cachelists', cachelist::getListsByCacheId($cacheid, $rCache['show_cachelists']));
+    $tpl->assign('watchclinfo', isset($_REQUEST['watchinfo']) && $_REQUEST['watchinfo'] == 1 &&
+                                cachelist::watchingCacheByListsCount($login->userid, $cacheid) > 0);
 
-	/* geokrets
-	 */
-	$rsGeoKret = sql("SELECT `gk_item`.`id`, `gk_item`.`name` AS `itemname`, `gk_user`.`name` AS `username` FROM `gk_item` INNER JOIN `gk_item_waypoint` ON `gk_item`.`id`=`gk_item_waypoint`.`id` INNER JOIN `gk_user` ON `gk_item`.`userid`=`gk_user`.`id` INNER JOIN `caches` ON `gk_item_waypoint`.`wp`=`caches`.`wp_oc` WHERE `caches`.`cache_id`='&1' AND `gk_item`.`typeid`!=2 AND `gk_item`.`stateid` IN (0, 3) AND `gk_item_waypoint`.`wp`!='' UNION 
+    /* geokrets
+     */
+    $rsGeoKret = sql("SELECT `gk_item`.`id`, `gk_item`.`name` AS `itemname`, `gk_user`.`name` AS `username` FROM `gk_item` INNER JOIN `gk_item_waypoint` ON `gk_item`.`id`=`gk_item_waypoint`.`id` INNER JOIN `gk_user` ON `gk_item`.`userid`=`gk_user`.`id` INNER JOIN `caches` ON `gk_item_waypoint`.`wp`=`caches`.`wp_oc` WHERE `caches`.`cache_id`='&1' AND `gk_item`.`typeid`!=2 AND `gk_item`.`stateid` IN (0, 3) AND `gk_item_waypoint`.`wp`!='' UNION 
 	             SELECT `gk_item`.`id`, `gk_item`.`name` AS `itemname`, `gk_user`.`name` AS `username` FROM `gk_item` INNER JOIN `gk_item_waypoint` ON `gk_item`.`id`=`gk_item_waypoint`.`id` INNER JOIN `gk_user` ON `gk_item`.`userid`=`gk_user`.`id` INNER JOIN `caches` ON `gk_item_waypoint`.`wp`=`caches`.`wp_gc` WHERE `caches`.`cache_id`='&1' AND `gk_item`.`typeid`!=2 AND `gk_item`.`stateid` IN (0, 3) AND `gk_item_waypoint`.`wp`!='' ORDER BY `itemname`", $cacheid);
-	$tpl->assign_rs('geokret', $rsGeoKret);
-	$tpl->assign('geokret_count', sql_num_rows($rsGeoKret));
-	sql_free_result($rsGeoKret);
+    $tpl->assign_rs('geokret', $rsGeoKret);
+    $tpl->assign('geokret_count', sql_num_rows($rsGeoKret));
+    sql_free_result($rsGeoKret);
 
-	if (isset($_REQUEST['print']) && $_REQUEST['print'] == 'y')
-	{
-		$tpl->popup = 1;
-		$tpl->assign('print', true);
-		$tpl->name = 'viewcache_print';
-		$tpl->assign('log', $_REQUEST['log']);
-	}
-	else
-	{
-		$tpl->assign('print', false);
-	}
+    if (isset($_REQUEST['print']) && $_REQUEST['print'] == 'y') {
+        $tpl->popup = 1;
+        $tpl->assign('print', true);
+        $tpl->name = 'viewcache_print';
+        $tpl->assign('log', $_REQUEST['log']);
+    } else {
+        $tpl->assign('print', false);
+    }
 
-	/* logpics
-	 */
-	$tpl->assign('show_logpics', $logpics ? 1 : 0);
-	if ($logpics)
-	{
-		set_paged_pics(LOGPICS_FOR_CACHE_GALLERY, 0, $cacheid, "viewcache.php?cacheid=" . $cacheid . "&logpics=1");
-		$tpl->assign('subtitle',"&lt;&lt; <a href='viewcache.php?cacheid=" . $cacheid . "'>" .
-		             $translate->t('Back to the cache description', '', basename(__FILE__), __LINE__) . "</a>");
+    /* logpics
+     */
+    $tpl->assign('show_logpics', $logpics ? 1 : 0);
+    if ($logpics) {
+        set_paged_pics(LOGPICS_FOR_CACHE_GALLERY, 0, $cacheid, "viewcache.php?cacheid=" . $cacheid . "&logpics=1");
+        $tpl->assign('subtitle', "&lt;&lt; <a href='viewcache.php?cacheid=" . $cacheid . "'>" .
+                     $translate->t('Back to the cache description', '', basename(__FILE__), __LINE__) . "</a>");
+    } else {
+        $tpl->assign('logpics', get_logpics(LOGPICS_FOR_CACHE_STAT, 0, $cacheid));
+    }
 
-	}
-	else
-		$tpl->assign('logpics', get_logpics(LOGPICS_FOR_CACHE_STAT, 0, $cacheid));
+    /* process profile settings
+     */
+    $userzoom = 11;
+    if ($login->userid > 0) {
+        $useropt = new useroptions($login->userid);
+        $userzoom = $useropt->getOptValue(USR_OPT_GMZOOM);
+        $autoload_logs = $useropt->getOptValue(USR_OPT_LOG_AUTOLOAD);
+    } else {
+        $autoload_logs = true;
+    }
+    $tpl->assign('userzoom', $userzoom);
+    $tpl->assign('autoload_logs', $autoload_logs);
 
-	/* process profile settings
-	 */
-	$userzoom = 11;
-	if ($login->userid > 0)
-	{
-		$useropt = new useroptions($login->userid);
-		$userzoom = $useropt->getOptValue(USR_OPT_GMZOOM);
-		$autoload_logs = $useropt->getOptValue(USR_OPT_LOG_AUTOLOAD);
-	}
-	else
-	{
-		$autoload_logs = true;
-	}
-	$tpl->assign('userzoom', $userzoom);
-	$tpl->assign('autoload_logs', $autoload_logs);
-
-	// get the correct mapkey
-	$sHost = strtolower($_SERVER['HTTP_HOST']);
+    // get the correct mapkey
+    $sHost = strtolower($_SERVER['HTTP_HOST']);
 
   $sGMKey = '';
-	if (isset($opt['lib']['google']['mapkey'][$sHost]))
-		$sGMKey = $opt['lib']['google']['mapkey'][$sHost];
+    if (isset($opt['lib']['google']['mapkey'][$sHost])) {
+        $sGMKey = $opt['lib']['google']['mapkey'][$sHost];
+    }
 
   $cachemap['iframe'] = $opt['logic']['cachemaps']['iframe'];
-	$url = $opt['page']['protocol'] . strstr($opt['logic']['cachemaps']['url'], '://');
-	$url = str_replace('{userzoom}', $userzoom, $url);
-	$url = str_replace('{latitude}', $rCache['latitude'], $url);
-	$url = str_replace('{longitude}', $rCache['longitude'], $url);
-	$url = str_replace('{gmkey}', $sGMKey, $url);
-	$cachemap['url'] = $url;
-	$tpl->assign('cachemap', $cachemap);
+    $url = $opt['page']['protocol'] . strstr($opt['logic']['cachemaps']['url'], '://');
+    $url = str_replace('{userzoom}', $userzoom, $url);
+    $url = str_replace('{latitude}', $rCache['latitude'], $url);
+    $url = str_replace('{longitude}', $rCache['longitude'], $url);
+    $url = str_replace('{gmkey}', $sGMKey, $url);
+    $cachemap['url'] = $url;
+    $tpl->assign('cachemap', $cachemap);
 
-	$tpl->assign('shortlink_url', $opt['page']['shortlink_url']);
-	$tpl->assign('listing_admin', $login->listingAdmin());
-	$tpl->assign('npahelplink', helppagelink('npa'));
-	$tpl->assign('garmin_url', $opt['lib']['garmin']['page_url']);
+    $tpl->assign('shortlink_url', $opt['page']['shortlink_url']);
+    $tpl->assign('listing_admin', $login->listingAdmin());
+    $tpl->assign('npahelplink', helppagelink('npa'));
+    $tpl->assign('garmin_url', $opt['lib']['garmin']['page_url']);
 
-	// display the page
-	$tpl->display();
-?>
+    // display the page
+    $tpl->display();

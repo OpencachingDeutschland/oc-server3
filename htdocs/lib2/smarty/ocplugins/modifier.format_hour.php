@@ -18,11 +18,9 @@
  */
 function smarty_modifier_format_hour($value)
 {
-	$hour = floor($value);
+    $hour = floor($value);
 
-	return $hour . ':' . sprintf('%02.0F', ($value - $hour) * 60);
+    return $hour . ':' . sprintf('%02.0F', ($value - $hour) * 60);
 }
 
-/* vim: set expandtab: */
-
-?>
+/* vim: set expandtab: */;

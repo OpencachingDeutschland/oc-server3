@@ -10,7 +10,8 @@ class HTMLPurifier_HTMLModule_Image extends HTMLPurifier_HTMLModule
 
     public $name = 'Image';
 
-    public function setup($config) {
+    public function setup($config)
+    {
         $max = $config->get('HTML.MaxImgLength');
         $img = $this->addElement(
             'img', 'Inline', 'Empty', 'Common',
@@ -34,7 +35,6 @@ class HTMLPurifier_HTMLModule_Image extends HTMLPurifier_HTMLModule
         $img->attr_transform_post[] =
             new HTMLPurifier_AttrTransform_ImgRequired();
     }
-
 }
 
 // vim: et sw=4 sts=4

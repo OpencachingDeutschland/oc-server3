@@ -1,29 +1,29 @@
 <?php
 /****************************************************************************
-											./lang/de/ocstyle/newdesc.tpl.php
-															-------------------
-		begin                : July 7 2004
+                                            ./lang/de/ocstyle/newdesc.tpl.php
+                                                            -------------------
+        begin                : July 7 2004
 
-		For license information see doc/license.txt
+        For license information see doc/license.txt
  ****************************************************************************/
 
 /****************************************************************************
-	     
+         
    Unicode Reminder メモ
-                                    				                                
-	 new cache description
-	 
-	 replacements:
-		name
-		reset
-		submit
-		cacheid
-		langoptions
-		show_all_langs_submit
-		short_desc
-		desc
-		hints
-	 
+                                                                                    
+     new cache description
+     
+     replacements:
+        name
+        reset
+        submit
+        cacheid
+        langoptions
+        show_all_langs_submit
+        short_desc
+        desc
+        hints
+     
  ****************************************************************************/
 ?>
 

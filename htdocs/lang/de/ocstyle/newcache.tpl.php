@@ -1,50 +1,50 @@
 <?php
 /****************************************************************************
-											./lang/de/ocstyle/newcache.tpl.php
-															-------------------
-		begin                : June 24 2004
+                                            ./lang/de/ocstyle/newcache.tpl.php
+                                                            -------------------
+        begin                : June 24 2004
 
-		For license information see doc/license.txt
+        For license information see doc/license.txt
  ****************************************************************************/
 
 /****************************************************************************
 
    Unicode Reminder メモ
 
-	 submit a new cache
+     submit a new cache
 
-	 replacements:
+     replacements:
 
-	     name
-	     typeoptions
-	     sizeoptions
-	     show_all_countries_submit
-	     show_all_langs_submit
-	     latNsel
-	     latSsel
-	     lat_h
-	     lat_min
-	     lonEsel
-	     lonWsel
-	     lon_h
-	     lon_min
-	     countryoptions
-	     langoptions
-	     short_desc
-	     desc
-	     desc_html
-	     desc_message
-	     hints
-	     hidden_since
-	     toschecked
-	     reset
-	     submit_value
-	     hidden_since_message
-	     tos_message
-	     show_all_countries
-	     show_all_langs
-	     difficulty_options
-	     terrain_options
+         name
+         typeoptions
+         sizeoptions
+         show_all_countries_submit
+         show_all_langs_submit
+         latNsel
+         latSsel
+         lat_h
+         lat_min
+         lonEsel
+         lonWsel
+         lon_h
+         lon_min
+         countryoptions
+         langoptions
+         short_desc
+         desc
+         desc_html
+         desc_message
+         hints
+         hidden_since
+         toschecked
+         reset
+         submit_value
+         hidden_since_message
+         tos_message
+         show_all_countries
+         show_all_langs
+         difficulty_options
+         terrain_options
              effort_message
              search_time
              way_length

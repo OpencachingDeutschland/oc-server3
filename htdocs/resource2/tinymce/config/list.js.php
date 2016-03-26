@@ -1,8 +1,9 @@
 <?php
-  if (isset($_REQUEST['lang']))
-    $lang = $_REQUEST['lang'];
-  else
-    $lang = 'de';
+  if (isset($_REQUEST['lang'])) {
+      $lang = $_REQUEST['lang'];
+  } else {
+      $lang = 'de';
+  }
 ?>
 
 tinyMCE_GZ.init({

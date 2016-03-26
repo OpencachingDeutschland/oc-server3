@@ -1,12 +1,12 @@
 <?php
 /****************************************************************************
-													    ./lib/sqldebugger.inc.php
-															--------------------
-		begin                : Mon June 27 2006
+                                                        ./lib/sqldebugger.inc.php
+                                                            --------------------
+        begin                : Mon June 27 2006
 
-		For license information see doc/license.txt
+        For license information see doc/license.txt
 
-		Unicode Reminder メモ
+        Unicode Reminder メモ
  ****************************************************************************/
 
 require_once($opt['rootpath'] . 'lib/bench.inc.php');
@@ -16,8 +16,8 @@ $sqldbg_sumTimes = 0;
 
 function sqldbg_begin()
 {
-	header('Content-type: text/html; charset=utf-8');
-?>
+    header('Content-type: text/html; charset=utf-8');
+    ?>
 <html>
   <head>
    <title></title>
@@ -155,201 +155,199 @@ function sqldbg_begin()
 		</table>
 		<div class="white">*/</div>
 <?php
+
 }
 
 function sqldbg_execute($sql, $bSlave)
 {
-	global $dblink;
-	global $sqldbg_cmdNo;
-	global $sqldbg_sumTimes;
+    global $dblink;
+    global $sqldbg_cmdNo;
+    global $sqldbg_sumTimes;
 
-	$sqldbg_cmdNo++;
+    $sqldbg_cmdNo++;
 
-	echo '<p class="sqlno"><span class="white">/*</span> SQL command ' . $sqldbg_cmdNo . ' ';
-	if ($bSlave)
-		echo '<span class="slave_title">(slave)</span>';
-	echo '<span class="white">*/</span>';
-	echo '</p>';
-	echo '<p class="sqlcommand">';
-	
-	if ($bSlave)
-		echo '<span class="slave_sql">';
-	
-	echo htmlspecialchars($sql, ENT_COMPAT, 'UTF-8');
-	
-	if ($bSlave)
-		echo '</span>';
+    echo '<p class="sqlno"><span class="white">/*</span> SQL command ' . $sqldbg_cmdNo . ' ';
+    if ($bSlave) {
+        echo '<span class="slave_title">(slave)</span>';
+    }
+    echo '<span class="white">*/</span>';
+    echo '</p>';
+    echo '<p class="sqlcommand">';
+    
+    if ($bSlave) {
+        echo '<span class="slave_sql">';
+    }
+    
+    echo htmlspecialchars($sql, ENT_COMPAT, 'UTF-8');
+    
+    if ($bSlave) {
+        echo '</span>';
+    }
 
-	echo ' ;</p>';
+    echo ' ;</p>';
 
-	echo '<div class="comments"><div class="white">/*</div><br>';
-	
-	// Explains
-	$bUseExplain = true;
-	$sqlexplain = $sql;
-	$usebr = false;
+    echo '<div class="comments"><div class="white">/*</div><br>';
+    
+    // Explains
+    $bUseExplain = true;
+    $sqlexplain = $sql;
+    $usebr = false;
 
-	if (mb_strtoupper(mb_substr($sqlexplain, 0, 6)) == 'ALTER ')
-		$bUseExplain = false;
-	else if (mb_strtoupper(mb_substr($sqlexplain, 0, 7)) == 'DELETE ')
-	{
-		$sqlexplain = sqldbg_strip_from($sqlexplain);
-	}
-	else if ((mb_strtoupper(mb_substr($sqlexplain, 0, 12)) == 'INSERT INTO ') || 
-			      (mb_strtoupper(mb_substr($sqlexplain, 0, 19)) == 'INSERT IGNORE INTO '))
-	{
-		$sqlexplain = sqldbg_strip_temptable($sqlexplain);
-		if ($sqlexplain == '')
-			$bUseExplain = false;
-	}
-	else if (mb_strtoupper(mb_substr($sqlexplain, 0, 7)) == 'INSERT ')
-		$bUseExplain = false;
-	else if (mb_strtoupper(mb_substr($sqlexplain, 0, 7)) == 'UPDATE ')
-		$bUseExplain = false;
-	else if (mb_strtoupper(mb_substr($sqlexplain, 0, 11)) == 'DROP TABLE ')
-		$bUseExplain = false;
-	else if (mb_strtoupper(mb_substr($sqlexplain, 0, 23)) == 'CREATE TEMPORARY TABLE ')
-	{
-		$sqlexplain = sqldbg_strip_temptable($sqlexplain);
-		if ($sqlexplain == '')
-			$bUseExplain = false;
-	}
-	
-	if ($bUseExplain == true)
-	{
-		$bFirstLine = true;
-		$nLine = 0;
-		$rs = mysql_query($sqlexplain, $dblink);
-		echo '<div class="selrows">Number of selected rows: ' . mysql_num_rows($rs) . '</div>';
+    if (mb_strtoupper(mb_substr($sqlexplain, 0, 6)) == 'ALTER ') {
+        $bUseExplain = false;
+    } elseif (mb_strtoupper(mb_substr($sqlexplain, 0, 7)) == 'DELETE ') {
+        $sqlexplain = sqldbg_strip_from($sqlexplain);
+    } elseif ((mb_strtoupper(mb_substr($sqlexplain, 0, 12)) == 'INSERT INTO ') ||
+                  (mb_strtoupper(mb_substr($sqlexplain, 0, 19)) == 'INSERT IGNORE INTO ')) {
+        $sqlexplain = sqldbg_strip_temptable($sqlexplain);
+        if ($sqlexplain == '') {
+            $bUseExplain = false;
+        }
+    } elseif (mb_strtoupper(mb_substr($sqlexplain, 0, 7)) == 'INSERT ') {
+        $bUseExplain = false;
+    } elseif (mb_strtoupper(mb_substr($sqlexplain, 0, 7)) == 'UPDATE ') {
+        $bUseExplain = false;
+    } elseif (mb_strtoupper(mb_substr($sqlexplain, 0, 11)) == 'DROP TABLE ') {
+        $bUseExplain = false;
+    } elseif (mb_strtoupper(mb_substr($sqlexplain, 0, 23)) == 'CREATE TEMPORARY TABLE ') {
+        $sqlexplain = sqldbg_strip_temptable($sqlexplain);
+        if ($sqlexplain == '') {
+            $bUseExplain = false;
+        }
+    }
+    
+    if ($bUseExplain == true) {
+        $bFirstLine = true;
+        $nLine = 0;
+        $rs = mysql_query($sqlexplain, $dblink);
+        echo '<div class="selrows">Number of selected rows: ' . mysql_num_rows($rs) . '</div>';
 
-		echo '<table class="firstresultrow" border="1">';
+        echo '<table class="firstresultrow" border="1">';
 
-		while ($r = sql_fetch_assoc($rs))
-		{
-			$usebr = true;
-			$nLine++;
-			if ($bFirstLine == true)
-			{
-				echo '<tr>' . "\n";
-				foreach ($r AS $field => $value)
-				{
-					echo '<th>' . htmlspecialchars($field, ENT_COMPAT, 'UTF-8') . '</th>' . "\n";
-				}
-				echo '</tr>' . "\n";
-			}
+        while ($r = sql_fetch_assoc($rs)) {
+            $usebr = true;
+            $nLine++;
+            if ($bFirstLine == true) {
+                echo '<tr>' . "\n";
+                foreach ($r as $field => $value) {
+                    echo '<th>' . htmlspecialchars($field, ENT_COMPAT, 'UTF-8') . '</th>' . "\n";
+                }
+                echo '</tr>' . "\n";
+            }
 
-			if ($bFirstLine)
-				echo '<tr>';
-			else
-				echo '<tr class="result">';
+            if ($bFirstLine) {
+                echo '<tr>';
+            } else {
+                echo '<tr class="result">';
+            }
 
-			foreach ($r AS $value)
-			{
-				echo '<td>' . htmlspecialchars(($value != null) ? $value : 'NULL', ENT_COMPAT, 'UTF-8') . '</td>';
-			}
-			echo '</tr>' . "\n";
-			
-			if ($nLine == 25) break;
-			$bFirstLine = false;
-		}
-		echo '</table>';
-		mysql_free_result($rs);
+            foreach ($r as $value) {
+                echo '<td>' . htmlspecialchars(($value != null) ? $value : 'NULL', ENT_COMPAT, 'UTF-8') . '</td>';
+            }
+            echo '</tr>' . "\n";
+            
+            if ($nLine == 25) {
+                break;
+            }
+            $bFirstLine = false;
+        }
+        echo '</table>';
+        mysql_free_result($rs);
 
-		echo '<table class="explain" border="1">';
+        echo '<table class="explain" border="1">';
 
-		$bFirstLine = true;
-		$rs = mysql_query('EXPLAIN EXTENDED ' . $sqlexplain);
-		while ($r = sql_fetch_assoc($rs))
-		{
-			if ($bFirstLine == true)
-			{
-				echo '<tr>';
-				foreach ($r AS $field => $value)
-				{
-					echo '<th>' . htmlspecialchars($field, ENT_COMPAT, 'UTF-8') . '</th>';
-				}
-				echo '</tr>' . "\n";
-				
-				$bFirstLine = false;
-			}
-			
-			echo '<tr>';
-			foreach ($r AS $value)
-			{
-				echo '<td>' . htmlspecialchars(($value != null) ? mb_ereg_replace('\*/', '* /', $value) : 'NULL', ENT_COMPAT, 'UTF-8') . '</td>';
-			}
-			echo '</tr>' . "\n";
-		}
-		echo '</table>';
-		$usebr = true;
-	}
+        $bFirstLine = true;
+        $rs = mysql_query('EXPLAIN EXTENDED ' . $sqlexplain);
+        while ($r = sql_fetch_assoc($rs)) {
+            if ($bFirstLine == true) {
+                echo '<tr>';
+                foreach ($r as $field => $value) {
+                    echo '<th>' . htmlspecialchars($field, ENT_COMPAT, 'UTF-8') . '</th>';
+                }
+                echo '</tr>' . "\n";
+                
+                $bFirstLine = false;
+            }
+            
+            echo '<tr>';
+            foreach ($r as $value) {
+                echo '<td>' . htmlspecialchars(($value != null) ? mb_ereg_replace('\*/', '* /', $value) : 'NULL', ENT_COMPAT, 'UTF-8') . '</td>';
+            }
+            echo '</tr>' . "\n";
+        }
+        echo '</table>';
+        $usebr = true;
+    }
 
-	// dont use query cache!
-	$sql = sqldbg_insert_nocache($sql);
+    // dont use query cache!
+    $sql = sqldbg_insert_nocache($sql);
 
-	$bSqlExecution = new Cbench; 
-	$bSqlExecution->start();
-	$rsResult = mysql_query($sql, $dblink);
-	$bError = ($rsResult == false);
-	$bSqlExecution->stop();
-	$sqldbg_sumTimes += $bSqlExecution->Diff();
+    $bSqlExecution = new Cbench;
+    $bSqlExecution->start();
+    $rsResult = mysql_query($sql, $dblink);
+    $bError = ($rsResult == false);
+    $bSqlExecution->stop();
+    $sqldbg_sumTimes += $bSqlExecution->Diff();
 
-	if ($bError == true)
-	{
-		echo '<div class="error">Error while executing SQL command!</div>';
-		echo '<div class="errormsg">';
-		echo '<table>';
-		$rs = mysql_query('SHOW WARNINGS', $dblink);
-		while ($r = sql_fetch_assoc($rs))
-			echo '<tr><td>' . htmlspecialchars($r['Message'], ENT_COMPAT, 'UTF-8') . '</td></tr>';
-		echo '</table>';
-		echo '</div>';
-	}
+    if ($bError == true) {
+        echo '<div class="error">Error while executing SQL command!</div>';
+        echo '<div class="errormsg">';
+        echo '<table>';
+        $rs = mysql_query('SHOW WARNINGS', $dblink);
+        while ($r = sql_fetch_assoc($rs)) {
+            echo '<tr><td>' . htmlspecialchars($r['Message'], ENT_COMPAT, 'UTF-8') . '</td></tr>';
+        }
+        echo '</table>';
+        echo '</div>';
+    }
 
-	echo '<div class="runtime">Runtime: ' . sprintf('%01.5f', $bSqlExecution->Diff()) . ' sek.</div>';
-	echo '<div class="affectedrows">Number of affected rows: ' . mysql_affected_rows($dblink) . '</div>';
+    echo '<div class="runtime">Runtime: ' . sprintf('%01.5f', $bSqlExecution->Diff()) . ' sek.</div>';
+    echo '<div class="affectedrows">Number of affected rows: ' . mysql_affected_rows($dblink) . '</div>';
 
-	echo '<div class="white">*/</div></div>';
-	
-	return $rsResult;
+    echo '<div class="white">*/</div></div>';
+    
+    return $rsResult;
 }
 
 function sqldbg_end()
 {
-	global $sqldbg_sumTimes;
-	
-	echo '<span class="white">/*</span><div class="allruntime"><hr>';
-	echo 'Runtime sum: ' . sprintf('%01.5f', $sqldbg_sumTimes) . ' sek.<span class="white">*/</span></div>';
+    global $sqldbg_sumTimes;
+    
+    echo '<span class="white">/*</span><div class="allruntime"><hr>';
+    echo 'Runtime sum: ' . sprintf('%01.5f', $sqldbg_sumTimes) . ' sek.<span class="white">*/</span></div>';
 
-	echo '</body></html>';
-	exit;
+    echo '</body></html>';
+    exit;
 }
 
 function sqldbg_strip_temptable($sql)
 {
-	$start = mb_strpos(mb_strtoupper($sql), 'SELECT ');
-	
-	if ($start === false)
-		return '';
-	
-	return mb_substr($sql, $start);
+    $start = mb_strpos(mb_strtoupper($sql), 'SELECT ');
+    
+    if ($start === false) {
+        return '';
+    }
+    
+    return mb_substr($sql, $start);
 }
 
 function sqldbg_strip_from($sql)
 {
-	$start = mb_strpos(mb_strtoupper($sql), 'FROM ');
-	
-	if ($start === false)
-		return '';
-	
-	return 'SELECT * ' . mb_substr($sql, $start);
+    $start = mb_strpos(mb_strtoupper($sql), 'FROM ');
+    
+    if ($start === false) {
+        return '';
+    }
+    
+    return 'SELECT * ' . mb_substr($sql, $start);
 }
 
 function sqldbg_insert_nocache($sql)
 {
-	if (mb_strtoupper(mb_substr($sql, 0, 7)) == 'SELECT ')
-		$sql = 'SELECT SQL_NO_CACHE ' . mb_substr($sql, 7);
-	
-	return $sql;
+    if (mb_strtoupper(mb_substr($sql, 0, 7)) == 'SELECT ') {
+        $sql = 'SELECT SQL_NO_CACHE ' . mb_substr($sql, 7);
+    }
+    
+    return $sql;
 }
 ?>

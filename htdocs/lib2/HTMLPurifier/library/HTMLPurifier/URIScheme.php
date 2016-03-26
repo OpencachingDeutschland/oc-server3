@@ -45,7 +45,7 @@ abstract class HTMLPurifier_URIScheme
      * @param $context HTMLPurifier_Context object
      * @return Bool success or failure
      */
-    public abstract function doValidate(&$uri, $config, $context);
+    abstract public function doValidate(&$uri, $config, $context);
 
     /**
      * Public interface for validating components of a URI.  Performs a
@@ -55,8 +55,11 @@ abstract class HTMLPurifier_URIScheme
      * @param $context HTMLPurifier_Context object
      * @return Bool success or failure
      */
-    public function validate(&$uri, $config, $context) {
-        if ($this->default_port == $uri->port) $uri->port = null;
+    public function validate(&$uri, $config, $context)
+    {
+        if ($this->default_port == $uri->port) {
+            $uri->port = null;
+        }
         // kludge: browsers do funny things when the scheme but not the
         // authority is set
         if (!$this->may_omit_host &&
@@ -89,7 +92,6 @@ abstract class HTMLPurifier_URIScheme
         }
         return $this->doValidate($uri, $config, $context);
     }
-
 }
 
 // vim: et sw=4 sts=4

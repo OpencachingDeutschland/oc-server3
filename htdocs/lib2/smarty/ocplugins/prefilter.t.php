@@ -51,26 +51,25 @@
  */
 function smarty_prefilter_t($source, &$smarty)
 {
-	$output = '';
-	$output_start = 0;
+    $output = '';
+    $output_start = 0;
 
-	$end = 0;
-	while (($start = smarty_prefilter_t_strpos_multi($source, array($smarty->left_delimiter . 't ', $smarty->left_delimiter . 't' . $smarty->right_delimiter), $end)) !== false)
-	{
-		$end = mb_strpos($source, $smarty->left_delimiter . '/t' . $smarty->right_delimiter, $start);
-		$block_t = mb_substr($source, $start, $end - $start);
+    $end = 0;
+    while (($start = smarty_prefilter_t_strpos_multi($source, array($smarty->left_delimiter . 't ', $smarty->left_delimiter . 't' . $smarty->right_delimiter), $end)) !== false) {
+        $end = mb_strpos($source, $smarty->left_delimiter . '/t' . $smarty->right_delimiter, $start);
+        $block_t = mb_substr($source, $start, $end - $start);
 
-		$messgage_start = mb_strrpos($block_t, '}') + 1;
-		$block_t = smarty_prefilter_t_process_block(mb_substr($block_t, 0, $messgage_start), mb_substr($block_t, $messgage_start), $smarty, 0);
+        $messgage_start = mb_strrpos($block_t, '}') + 1;
+        $block_t = smarty_prefilter_t_process_block(mb_substr($block_t, 0, $messgage_start), mb_substr($block_t, $messgage_start), $smarty, 0);
 
-		$output .= mb_substr($source, $output_start, $start - $output_start);
-		$output_start = $end + mb_strlen($smarty->left_delimiter . $smarty->right_delimiter) + 2;
+        $output .= mb_substr($source, $output_start, $start - $output_start);
+        $output_start = $end + mb_strlen($smarty->left_delimiter . $smarty->right_delimiter) + 2;
 
-		$output .= $block_t;
-	}
-	$output .= mb_substr($source, $output_start);
+        $output .= $block_t;
+    }
+    $output .= mb_substr($source, $output_start);
 
-	return $output;
+    return $output;
 }
 
 /* $block ... {t[ a=$a|nbsp b="a" ...]}
@@ -78,49 +77,47 @@ function smarty_prefilter_t($source, &$smarty)
  */
 function smarty_prefilter_t_process_block($block, $message, &$smarty, $line)
 {
-	if ($message != '')
-	{
-		$start_attr = mb_strpos($block, ' ');
-		if ($start_attr !== false)
-		{
-			if ((mb_substr($block, 0, 1) != $smarty->left_delimiter) || $start_attr == 1 || mb_substr($block, -1, 1) != $smarty->right_delimiter)
-				$smarty->_syntax_error("internal processing error: '$block'", E_USER_ERROR, __FILE__, __LINE__);
-			$block = mb_substr($block, $start_attr + 1, mb_strlen($block) - $start_attr - 2);
+    if ($message != '') {
+        $start_attr = mb_strpos($block, ' ');
+        if ($start_attr !== false) {
+            if ((mb_substr($block, 0, 1) != $smarty->left_delimiter) || $start_attr == 1 || mb_substr($block, -1, 1) != $smarty->right_delimiter) {
+                $smarty->_syntax_error("internal processing error: '$block'", E_USER_ERROR, __FILE__, __LINE__);
+            }
+            $block = mb_substr($block, $start_attr + 1, mb_strlen($block) - $start_attr - 2);
 
-			// parse the attributes
-			$attrs = smarty_prefilter_t_parse_attrs($block, $smarty);
+            // parse the attributes
+            $attrs = smarty_prefilter_t_parse_attrs($block, $smarty);
 
-			if (isset($attrs['plural']) && isset($attrs['count']))
-			{
-				$message = smarty_prefilter_t_gettext($message, array(), $smarty, $line);
+            if (isset($attrs['plural']) && isset($attrs['count'])) {
+                $message = smarty_prefilter_t_gettext($message, array(), $smarty, $line);
 
-				if ((mb_substr($attrs['plural'], 0, 1) == '"') && mb_substr($attrs['plural'], -1, 1) == '"')
-					$attrs['plural'] = mb_substr($attrs['plural'], 1, mb_strlen($attrs['plural'])-2);
-				$attrs['plural'] = smarty_prefilter_t_gettext($attrs['plural'], array(), $smarty, $line);
+                if ((mb_substr($attrs['plural'], 0, 1) == '"') && mb_substr($attrs['plural'], -1, 1) == '"') {
+                    $attrs['plural'] = mb_substr($attrs['plural'], 1, mb_strlen($attrs['plural'])-2);
+                }
+                $attrs['plural'] = smarty_prefilter_t_gettext($attrs['plural'], array(), $smarty, $line);
 
-				// rebuild block with replaced plural
-				$block = '';
-				foreach ($attrs AS $k => $v)
-				{
-					if ($block != '') $block .= ' ';
-					$block .= $k . '=' . $v;
-				}
+                // rebuild block with replaced plural
+                $block = '';
+                foreach ($attrs as $k => $v) {
+                    if ($block != '') {
+                        $block .= ' ';
+                    }
+                    $block .= $k . '=' . $v;
+                }
 
-				// pass it to block.t
-				return $smarty->left_delimiter . 't ' . $block . $smarty->right_delimiter . $message . $smarty->left_delimiter . '/t' . $smarty->right_delimiter;
-			}
-			unset($attrs['plural']);
-			unset($attrs['count']);
+                // pass it to block.t
+                return $smarty->left_delimiter . 't ' . $block . $smarty->right_delimiter . $message . $smarty->left_delimiter . '/t' . $smarty->right_delimiter;
+            }
+            unset($attrs['plural']);
+            unset($attrs['count']);
 
-			$message = smarty_prefilter_t_gettext($message, $attrs, $smarty, $line);
-		}
-		else
-		{
-			$message = smarty_prefilter_t_gettext($message, array(), $smarty, $line);
-		}
-	}
+            $message = smarty_prefilter_t_gettext($message, $attrs, $smarty, $line);
+        } else {
+            $message = smarty_prefilter_t_gettext($message, array(), $smarty, $line);
+        }
+    }
 
-	return $message;
+    return $message;
 }
 
 /**
@@ -156,16 +153,18 @@ function smarty_prefilter_t_parse_attrs($tag_args, &$smarty)
                 if (preg_match('~^\w+$~', $token)) {
                     $attr_name = $token;
                     $state = 1;
-                } else
+                } else {
                     $smarty->_syntax_error("invalid attribute name: '$token'", E_USER_ERROR, __FILE__, __LINE__);
+                }
                 break;
 
             case 1:
                 /* If the token is '=', then we go to state 2. */
                 if ($token == '=') {
                     $state = 2;
-                } else
+                } else {
                     $smarty->_syntax_error("expecting '=' after attribute name '$last_token'", E_USER_ERROR, __FILE__, __LINE__);
+                }
                 break;
 
             case 2:
@@ -176,36 +175,37 @@ function smarty_prefilter_t_parse_attrs($tag_args, &$smarty)
                         boolean value. */
                     if (preg_match('~^(on|yes|true)$~', $token)) {
                         $token = 'true';
-                    } else if (preg_match('~^(off|no|false)$~', $token)) {
+                    } elseif (preg_match('~^(off|no|false)$~', $token)) {
                         $token = 'false';
-                    } else if ($token == 'null') {
+                    } elseif ($token == 'null') {
                         $token = 'null';
-                    } else if (preg_match('~^' . $smarty->_num_const_regexp . '|0[xX][0-9a-fA-F]+$~', $token)) {
+                    } elseif (preg_match('~^' . $smarty->_num_const_regexp . '|0[xX][0-9a-fA-F]+$~', $token)) {
                         /* treat integer literally */
-                    } else if (!preg_match('~^' . $smarty->_obj_call_regexp . '|' . $smarty->_var_regexp . '(?:' . $smarty->_mod_regexp . ')*$~', $token)) {
+                    } elseif (!preg_match('~^' . $smarty->_obj_call_regexp . '|' . $smarty->_var_regexp . '(?:' . $smarty->_mod_regexp . ')*$~', $token)) {
                         /* treat as a string, double-quote it escaping quotes */
                         $token = '"'.addslashes($token).'"';
                     }
 
                     $attrs[$attr_name] = $token;
                     $state = 0;
-                } else
+                } else {
                     $smarty->_syntax_error("'=' cannot be an attribute value", E_USER_ERROR, __FILE__, __LINE__);
+                }
                 break;
         }
         $last_token = $token;
     }
 
-    if($state != 0) {
-        if($state == 1) {
+    if ($state != 0) {
+        if ($state == 1) {
             $smarty->_syntax_error("expecting '=' after attribute name '$last_token'", E_USER_ERROR, __FILE__, __LINE__);
         } else {
             $smarty->_syntax_error("missing attribute value", E_USER_ERROR, __FILE__, __LINE__);
         }
     }
 
-		// this call would translate the attrs to php code
-		// we dont need it, because its a prefilter ...
+        // this call would translate the attrs to php code
+        // we dont need it, because its a prefilter ...
     //$smarty->_parse_vars_props($attrs);
 
     return $attrs;
@@ -213,50 +213,54 @@ function smarty_prefilter_t_parse_attrs($tag_args, &$smarty)
 
 function smarty_prefilter_t_strpos_multi($haystack, $needles)
 {
-	$arg = func_get_args();
-	$start = false;
+    $arg = func_get_args();
+    $start = false;
 
-	foreach ($needles AS $needle)
-	{
-		$thisstart = mb_strpos($haystack, $needle, $arg[2]);
-		if ($start == false)
-			$start = $thisstart;
-		else if ($thisstart == false)
-		{
-		}
-		else if ($start > $thisstart)
-			$start = $thisstart;
-	}
+    foreach ($needles as $needle) {
+        $thisstart = mb_strpos($haystack, $needle, $arg[2]);
+        if ($start == false) {
+            $start = $thisstart;
+        } elseif ($thisstart == false) {
+        } elseif ($start > $thisstart) {
+            $start = $thisstart;
+        }
+    }
 
-	return $start;
+    return $start;
 }
 
 function smarty_prefilter_t_gettext($message, $attrs, &$smarty, $line)
 {
-	global $opt, $translate;
+    global $opt, $translate;
 
-	if (!isset($translate))
-		return $message;
+    if (!isset($translate)) {
+        return $message;
+    }
 
-	$trans = $translate->t($message, $opt['template']['style'], '', 0);
+    $trans = $translate->t($message, $opt['template']['style'], '', 0);
 
-	// TODO concept escapement
-	if (isset($attrs['escape'])) unset($attrs['escape']);
-	if (isset($attrs['plural'])) unset($attrs['plural']);
-	if (isset($attrs['count'])) unset($attrs['count']);
+    // TODO concept escapement
+    if (isset($attrs['escape'])) {
+        unset($attrs['escape']);
+    }
+    if (isset($attrs['plural'])) {
+        unset($attrs['plural']);
+    }
+    if (isset($attrs['count'])) {
+        unset($attrs['count']);
+    }
 
-	// replace params
-	$number = 1;
-	foreach ($attrs AS $attr)
-	{
-		if (is_numeric($attr))
-			$trans = mb_ereg_replace('%' . $number, $attr, $trans);
-		else
-			$trans = mb_ereg_replace('%' . $number, $smarty->left_delimiter . $attr . $smarty->right_delimiter, $trans);
+    // replace params
+    $number = 1;
+    foreach ($attrs as $attr) {
+        if (is_numeric($attr)) {
+            $trans = mb_ereg_replace('%' . $number, $attr, $trans);
+        } else {
+            $trans = mb_ereg_replace('%' . $number, $smarty->left_delimiter . $attr . $smarty->right_delimiter, $trans);
+        }
 
-		$number++;
-	}
+        $number++;
+    }
 
-	return $trans;
+    return $trans;
 }
-?>

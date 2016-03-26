@@ -3,7 +3,6 @@
 namespace okapi\views\tilestress;
 
 use Exception;
-
 use okapi\Okapi;
 use okapi\Cache;
 use okapi\Db;
@@ -22,7 +21,7 @@ use okapi\OkapiExceptionHandler;
 
 require_once($GLOBALS['rootpath']."okapi/service_runner.php");
 
-class View
+class tilestress
 {
     public static function out($str)
     {
@@ -42,8 +41,7 @@ class View
         $user_id = $_GET['u'];
         self::out("Yo. I'm $user_id.\n\n");
 
-        while (true)
-        {
+        while (true) {
             srand(floor(time() / 10));
             $mode2 = rand(0, 9) <= 7;
             if ($mode2) {
@@ -66,14 +64,15 @@ class View
             }
 
             $tiles = array();
-            for ($xx=$x; $xx<$x+4; $xx++)
-                for ($yy=$y; $yy<$y+4; $yy++)
+            for ($xx=$x; $xx<$x+4; $xx++) {
+                for ($yy=$y; $yy<$y+4; $yy++) {
                     $tiles[] = array($xx, $yy);
+                }
+            }
             srand();
             shuffle($tiles);
 
-            foreach ($tiles as $tile)
-            {
+            foreach ($tiles as $tile) {
                 list($x, $y) = $tile;
                 self::out("Loading ".str_pad("($z, $x, $y)... ", 30));
                 $time_started = microtime(true);
@@ -93,5 +92,4 @@ class View
             }
         }
     }
-
 }

@@ -16,236 +16,228 @@
  *
  ***************************************************************************/
 
-	require('./lib2/web.inc.php');
-	require_once('./lib2/logic/picture.class.php');
-	require_once('./lib2/logic/cache.class.php');
-	require_once('./lib2/logic/cachelog.class.php');
-	$tpl->name = 'picture';
-	$tpl->menuitem = MNU_CACHES_PICTURE;
+    require('./lib2/web.inc.php');
+    require_once('./lib2/logic/picture.class.php');
+    require_once('./lib2/logic/cache.class.php');
+    require_once('./lib2/logic/cachelog.class.php');
+    $tpl->name = 'picture';
+    $tpl->menuitem = MNU_CACHES_PICTURE;
 
-	$login->verify();
-	if ($login->userid == 0)
-		$tpl->redirect_login();
+    $login->verify();
+    if ($login->userid == 0) {
+        $tpl->redirect_login();
+    }
 
-	$action = isset($_REQUEST['action']) ? mb_strtolower($_REQUEST['action']) : '';
-	$redirect = isset($_REQUEST['redirect']) ? $_REQUEST['redirect'] : '';
-	$redirect = $tpl->checkTarget($redirect, '');
-	$tpl->assign('action', $action);
-	$tpl->assign('redirect', $redirect);
+    $action = isset($_REQUEST['action']) ? mb_strtolower($_REQUEST['action']) : '';
+    $redirect = isset($_REQUEST['redirect']) ? $_REQUEST['redirect'] : '';
+    $redirect = $tpl->checkTarget($redirect, '');
+    $tpl->assign('action', $action);
+    $tpl->assign('redirect', $redirect);
 
-	$uuid = isset($_REQUEST['uuid']) ? $_REQUEST['uuid'] : 0;
+    $uuid = isset($_REQUEST['uuid']) ? $_REQUEST['uuid'] : 0;
 
-	if ($action == 'add')  // Ocprop
-	{
-		$picture = new picture();
+    if ($action == 'add') {
+        // Ocprop
 
-		if (isset($_REQUEST['cacheuuid']))  // Ocprop
-		{
-			$cache = cache::fromUUID($_REQUEST['cacheuuid']);
-			if ($cache === null)
-				$tpl->error(ERROR_CACHE_NOT_EXISTS);
+        $picture = new picture();
 
-			if ($cache->allowEdit() == false)
-				$tpl->error(ERROR_NO_ACCESS);
+        if (isset($_REQUEST['cacheuuid'])) {
+            // Ocprop
 
-			$picture->setObjectId($cache->getCacheId());
-			$picture->setObjectType(OBJECT_CACHE);
+            $cache = cache::fromUUID($_REQUEST['cacheuuid']);
+            if ($cache === null) {
+                $tpl->error(ERROR_CACHE_NOT_EXISTS);
+            }
 
-			$cache = null;
-		}
-		else if (isset($_REQUEST['loguuid']))  // Ocprop
-		{
-			$cachelog = cachelog::fromUUID($_REQUEST['loguuid']);
-			if ($cachelog === null)
-				$tpl->error(ERROR_CACHELOG_NOT_EXISTS);
+            if ($cache->allowEdit() == false) {
+                $tpl->error(ERROR_NO_ACCESS);
+            }
 
-			if ($cachelog->allowView() == false)
-				$tpl->error(ERROR_NO_ACCESS);
-			else if ($cachelog->allowEdit() == false)
-				$tpl->error(ERROR_NO_ACCESS);
+            $picture->setObjectId($cache->getCacheId());
+            $picture->setObjectType(OBJECT_CACHE);
 
-			$picture->setObjectId($cachelog->getLogId());
-			$picture->setObjectType(OBJECT_CACHELOG);
+            $cache = null;
+        } elseif (isset($_REQUEST['loguuid'])) {
+            // Ocprop
 
-			$cachelog = null;
-		}
-		else
-			$tpl->error(ERROR_INVALID_OPERATION);
+            $cachelog = cachelog::fromUUID($_REQUEST['loguuid']);
+            if ($cachelog === null) {
+                $tpl->error(ERROR_CACHELOG_NOT_EXISTS);
+            }
 
-		// uploaded file ok?
-		if (isset($_REQUEST['ok']))  // Ocprop
-		{
-			$bError = false;
+            if ($cachelog->allowView() == false) {
+                $tpl->error(ERROR_NO_ACCESS);
+            } elseif ($cachelog->allowEdit() == false) {
+                $tpl->error(ERROR_NO_ACCESS);
+            }
 
-			$picture->setSpoiler(isset($_REQUEST['spoiler']) && $_REQUEST['spoiler']=='1');  // Ocprop
-			$picture->setDisplay((isset($_REQUEST['notdisplay']) && $_REQUEST['notdisplay']=='1') == false);  // Ocprop
-			$picture->setMapPreview(isset($_REQUEST['mappreview']) && $_REQUEST['mappreview']=='1');
+            $picture->setObjectId($cachelog->getLogId());
+            $picture->setObjectType(OBJECT_CACHELOG);
 
-			$title = isset($_REQUEST['title']) ? $_REQUEST['title'] : '';  // Ocprop
-			if ($title == '' ||
-			    ($picture->getObjectType() == OBJECT_CACHELOG && trim($title) == ''))
-			{
-				$tpl->assign('errortitle', true);
-				$bError = true;
-			}
-			else
-				$picture->setTitle($title);
+            $cachelog = null;
+        } else {
+            $tpl->error(ERROR_INVALID_OPERATION);
+        }
 
-			// ignore duplicates (http://redmine.opencaching.de/issues/251)
-			if ($picture->is_duplicate())
-				$tpl->redirect($picture->getPageLink());
+        // uploaded file ok?
+        if (isset($_REQUEST['ok'])) {
+            // Ocprop
 
-			if (!isset($_FILES['file']))  // Ocprop
-			{
-				$tpl->assign('errorfile', ERROR_UPLOAD_ERR_NO_FILE);
-				$bError = true;
-			}
-			else if ($_FILES['file']['error'] == UPLOAD_ERR_NO_FILE)
-			{
-				$tpl->assign('errorfile', ERROR_UPLOAD_ERR_NO_FILE);
-				$bError = true;
-			}
-			else if ($_FILES['file']['error'] == UPLOAD_ERR_FORM_SIZE || $_FILES['file']['error'] == UPLOAD_ERR_INI_SIZE)
-			{
-				$tpl->assign('errorfile', ERROR_UPLOAD_ERR_SIZE);
-				$bError = true;
-			}
-			else if ($_FILES['file']['error'] != UPLOAD_ERR_OK)
-			{
-				$tpl->assign('errorfile', ERROR_UPLOAD_UNKNOWN);
-				$bError = true;
-			}
-			else if ($_FILES['file']['size'] > $opt['logic']['pictures']['maxsize'])
-			{
-				$tpl->assign('errorfile', ERROR_UPLOAD_ERR_SIZE);
-				$bError = true;
-			}
-			else if ($picture->allowedExtension($_FILES['file']['name']) == false)
-			{
-				$tpl->assign('errorfile', ERROR_UPLOAD_ERR_TYPE);
-				$bError = true;
-			}
-			
-			if ($bError == false)
-			{
-				$picture->setLocal(1);
-				$fname = pathinfo($_FILES['file']['name'], PATHINFO_FILENAME);
-				$ext = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
+            $bError = false;
 
-				// try saving file if smaller unchg_size and browser native format
-				if (in_array(mb_strtolower($ext), array('gif','png','jpg','jpeg'))
-				    && ($_FILES['file']['size'] <= $opt['logic']['pictures']['unchg_size']))
-				{
-					$picture->setFilenames($_FILES['file']['name']);
-					if (!$picture->rotate($_FILES['file']['tmp_name']))
-						$bError = true;
-				}
-				// try saving as jpg and shrinking if > PICTURE_MAX_LONG_SIDE file
-				else
-				{
-					$picture->setFilenames(mb_strtolower($fname).'.jpg');
-					if (!$picture->rotate_and_shrink($_FILES['file']['tmp_name'], PICTURE_MAX_LONG_SIDE))
-					  $bError = true;
-				}
-				// try to save in db
-				if (!$bError && $picture->save())
-				{
-					if ($redirect == '')
-						$redirect = $picture->getPageLink();
-					$tpl->redirect($redirect);
-				}
-				else
-				{
-					$tpl->assign('errorfile', ERROR_UPLOAD_UNKNOWN);
-					$bError = true;
-				}
-			}
-		}
-	}
-	else if ($action == 'edit' || $action == 'delete')
-	{
-		$picture = picture::fromUUID($uuid);
+            $picture->setSpoiler(isset($_REQUEST['spoiler']) && $_REQUEST['spoiler']=='1');  // Ocprop
+            $picture->setDisplay((isset($_REQUEST['notdisplay']) && $_REQUEST['notdisplay']=='1') == false);  // Ocprop
+            $picture->setMapPreview(isset($_REQUEST['mappreview']) && $_REQUEST['mappreview']=='1');
 
-		if ($picture === null)
-			$tpl->error(ERROR_PICTURE_NOT_EXISTS);
+            $title = isset($_REQUEST['title']) ? $_REQUEST['title'] : '';  // Ocprop
+            if ($title == '' ||
+                ($picture->getObjectType() == OBJECT_CACHELOG && trim($title) == '')) {
+                $tpl->assign('errortitle', true);
+                $bError = true;
+            } else {
+                $picture->setTitle($title);
+            }
 
-		if ($redirect == '')
-			$redirect = $picture->getPageLink();
+            // ignore duplicates (http://redmine.opencaching.de/issues/251)
+            if ($picture->is_duplicate()) {
+                $tpl->redirect($picture->getPageLink());
+            }
 
-		if ($picture->allowEdit() == false)
-			$tpl->error(ERROR_NO_ACCESS);
+            if (!isset($_FILES['file'])) {
+                // Ocprop
 
-		if ($action == 'edit')
-		{
-			if (isset($_REQUEST['ok']))
-			{
-				// overwrite values
-				$picture->setSpoiler(isset($_REQUEST['spoiler']) && $_REQUEST['spoiler']=='1');
-				$picture->setDisplay((isset($_REQUEST['notdisplay']) && $_REQUEST['notdisplay']=='1') == false);
-				$picture->setMapPreview(isset($_REQUEST['mappreview']) && $_REQUEST['mappreview']=='1');
+                $tpl->assign('errorfile', ERROR_UPLOAD_ERR_NO_FILE);
+                $bError = true;
+            } elseif ($_FILES['file']['error'] == UPLOAD_ERR_NO_FILE) {
+                $tpl->assign('errorfile', ERROR_UPLOAD_ERR_NO_FILE);
+                $bError = true;
+            } elseif ($_FILES['file']['error'] == UPLOAD_ERR_FORM_SIZE || $_FILES['file']['error'] == UPLOAD_ERR_INI_SIZE) {
+                $tpl->assign('errorfile', ERROR_UPLOAD_ERR_SIZE);
+                $bError = true;
+            } elseif ($_FILES['file']['error'] != UPLOAD_ERR_OK) {
+                $tpl->assign('errorfile', ERROR_UPLOAD_UNKNOWN);
+                $bError = true;
+            } elseif ($_FILES['file']['size'] > $opt['logic']['pictures']['maxsize']) {
+                $tpl->assign('errorfile', ERROR_UPLOAD_ERR_SIZE);
+                $bError = true;
+            } elseif ($picture->allowedExtension($_FILES['file']['name']) == false) {
+                $tpl->assign('errorfile', ERROR_UPLOAD_ERR_TYPE);
+                $bError = true;
+            }
+            
+            if ($bError == false) {
+                $picture->setLocal(1);
+                $fname = pathinfo($_FILES['file']['name'], PATHINFO_FILENAME);
+                $ext = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
 
-				$title = isset($_REQUEST['title']) ? $_REQUEST['title'] : $picture->getTitle();
-				if ($title == '')
-					$tpl->assign('errortitle', true);
-				else
-				{
-					$picture->setTitle($title);
+                // try saving file if smaller unchg_size and browser native format
+                if (in_array(mb_strtolower($ext), array('gif', 'png', 'jpg', 'jpeg'))
+                    && ($_FILES['file']['size'] <= $opt['logic']['pictures']['unchg_size'])) {
+                    $picture->setFilenames($_FILES['file']['name']);
+                    if (!$picture->rotate($_FILES['file']['tmp_name'])) {
+                        $bError = true;
+                    }
+                }
+                // try saving as jpg and shrinking if > PICTURE_MAX_LONG_SIDE file
+                else {
+                    $picture->setFilenames(mb_strtolower($fname).'.jpg');
+                    if (!$picture->rotate_and_shrink($_FILES['file']['tmp_name'], PICTURE_MAX_LONG_SIDE)) {
+                        $bError = true;
+                    }
+                }
+                // try to save in db
+                if (!$bError && $picture->save()) {
+                    if ($redirect == '') {
+                        $redirect = $picture->getPageLink();
+                    }
+                    $tpl->redirect($redirect);
+                } else {
+                    $tpl->assign('errorfile', ERROR_UPLOAD_UNKNOWN);
+                    $bError = true;
+                }
+            }
+        }
+    } elseif ($action == 'edit' || $action == 'delete') {
+        $picture = picture::fromUUID($uuid);
 
-					$picture->save();
+        if ($picture === null) {
+            $tpl->error(ERROR_PICTURE_NOT_EXISTS);
+        }
 
-					$tpl->redirect($redirect);
-				}
-			}
-		}
-		else if ($action == 'delete')
-		{
-			if ($picture->delete() == false)
-				$tpl->error(ERROR_NO_ACCESS);
+        if ($redirect == '') {
+            $redirect = $picture->getPageLink();
+        }
 
-			$tpl->redirect($redirect);
-		}
-		else
-			$tpl->error(ERROR_INVALID_OPERATION);
-	}
-	else if ($action == 'up')
-	{
-		$picture = picture::fromUUID($uuid);
+        if ($picture->allowEdit() == false) {
+            $tpl->error(ERROR_NO_ACCESS);
+        }
 
-		if ($picture === null)
-			$tpl->error(ERROR_PICTURE_NOT_EXISTS);
+        if ($action == 'edit') {
+            if (isset($_REQUEST['ok'])) {
+                // overwrite values
+                $picture->setSpoiler(isset($_REQUEST['spoiler']) && $_REQUEST['spoiler']=='1');
+                $picture->setDisplay((isset($_REQUEST['notdisplay']) && $_REQUEST['notdisplay']=='1') == false);
+                $picture->setMapPreview(isset($_REQUEST['mappreview']) && $_REQUEST['mappreview']=='1');
 
-		if ($redirect == '')
-			$redirect = $picture->getPageLink();
+                $title = isset($_REQUEST['title']) ? $_REQUEST['title'] : $picture->getTitle();
+                if ($title == '') {
+                    $tpl->assign('errortitle', true);
+                } else {
+                    $picture->setTitle($title);
 
-		$picture->up();
-		$tpl->redirect($redirect);
-	}
-	else
-		$tpl->error(ERROR_INVALID_OPERATION);
+                    $picture->save();
 
-	// prepare output
-	$tpl->assign('uuid', $picture->getUUID());
-	$tpl->assign('objecttype', $picture->getObjectType());
+                    $tpl->redirect($redirect);
+                }
+            }
+        } elseif ($action == 'delete') {
+            if ($picture->delete() == false) {
+                $tpl->error(ERROR_NO_ACCESS);
+            }
 
-	if ($action == 'add')
-	{
-		if ($picture->getObjectType() == OBJECT_CACHE)
-			$tpl->assign('cacheuuid', $_REQUEST['cacheuuid']);
-		else if ($picture->getObjectType() == OBJECT_CACHELOG)
-			$tpl->assign('loguuid', $_REQUEST['loguuid']);
-	}
+            $tpl->redirect($redirect);
+        } else {
+            $tpl->error(ERROR_INVALID_OPERATION);
+        }
+    } elseif ($action == 'up') {
+        $picture = picture::fromUUID($uuid);
 
-	$rsCache = sql("SELECT `wp_oc`, `name` FROM `caches` WHERE `cache_id`='&1'", $picture->getCacheId());
-	$rCache = sql_fetch_assoc($rsCache);
-	sql_free_result($rsCache);
+        if ($picture === null) {
+            $tpl->error(ERROR_PICTURE_NOT_EXISTS);
+        }
 
-	$tpl->assign('cachewp', $rCache['wp_oc']);
-	$tpl->assign('cachename', $rCache['name']);
+        if ($redirect == '') {
+            $redirect = $picture->getPageLink();
+        }
 
-	$tpl->assign('title', $picture->getTitle());
-	$tpl->assign('spoilerchecked', $picture->getSpoiler());
-	$tpl->assign('displaychecked', $picture->getDisplay());
-	$tpl->assign('mappreviewchecked', $picture->getMapPreview());
+        $picture->up();
+        $tpl->redirect($redirect);
+    } else {
+        $tpl->error(ERROR_INVALID_OPERATION);
+    }
 
-	$tpl->display();
-?>
+    // prepare output
+    $tpl->assign('uuid', $picture->getUUID());
+    $tpl->assign('objecttype', $picture->getObjectType());
+
+    if ($action == 'add') {
+        if ($picture->getObjectType() == OBJECT_CACHE) {
+            $tpl->assign('cacheuuid', $_REQUEST['cacheuuid']);
+        } elseif ($picture->getObjectType() == OBJECT_CACHELOG) {
+            $tpl->assign('loguuid', $_REQUEST['loguuid']);
+        }
+    }
+
+    $rsCache = sql("SELECT `wp_oc`, `name` FROM `caches` WHERE `cache_id`='&1'", $picture->getCacheId());
+    $rCache = sql_fetch_assoc($rsCache);
+    sql_free_result($rsCache);
+
+    $tpl->assign('cachewp', $rCache['wp_oc']);
+    $tpl->assign('cachename', $rCache['name']);
+
+    $tpl->assign('title', $picture->getTitle());
+    $tpl->assign('spoilerchecked', $picture->getSpoiler());
+    $tpl->assign('displaychecked', $picture->getDisplay());
+    $tpl->assign('mappreviewchecked', $picture->getMapPreview());
+
+    $tpl->display();

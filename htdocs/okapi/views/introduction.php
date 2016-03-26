@@ -14,7 +14,7 @@ use okapi\OkapiInternalRequest;
 use okapi\views\menu\OkapiMenu;
 use okapi\OkapiInternalConsumer;
 
-class View
+class introduction
 {
     public static function call()
     {

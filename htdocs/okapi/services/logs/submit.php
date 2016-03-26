@@ -13,14 +13,15 @@ use okapi\OkapiServiceRunner;
 use okapi\Settings;
 use okapi\BadRequest;
 
-
 /**
  * This exception is thrown by WebService::_call method, when error is detected in
  * user-supplied data. It is not a BadRequest exception - it does not imply that
  * the Consumer did anything wrong (it's the user who did). This exception shouldn't
  * be used outside of this file.
  */
-class CannotPublishException extends Exception {}
+class CannotPublishException extends Exception
+{
+}
 
 class WebService
 {
@@ -43,10 +44,14 @@ class WebService
         # "call").
 
         $cache_code = $request->get_parameter('cache_code');
-        if (!$cache_code) throw new ParamMissing('cache_code');
+        if (!$cache_code) {
+            throw new ParamMissing('cache_code');
+        }
 
         $logtype = $request->get_parameter('logtype');
-        if (!$logtype) throw new ParamMissing('logtype');
+        if (!$logtype) {
+            throw new ParamMissing('logtype');
+        }
         if (!in_array($logtype, array(
             'Found it', "Didn't find it", 'Comment', 'Will attend', 'Attended'
         ))) {
@@ -54,16 +59,20 @@ class WebService
         }
 
         $comment = $request->get_parameter('comment');
-        if (!$comment) $comment = "";
+        if (!$comment) {
+            $comment = "";
+        }
 
         $comment_format = $request->get_parameter('comment_format');
-        if (!$comment_format) $comment_format = "auto";
-        if (!in_array($comment_format, array('auto', 'html', 'plaintext')))
+        if (!$comment_format) {
+            $comment_format = "auto";
+        }
+        if (!in_array($comment_format, array('auto', 'html', 'plaintext'))) {
             throw new InvalidParam('comment_format', $comment_format);
+        }
 
         $tmp = $request->get_parameter('when');
-        if ($tmp)
-        {
+        if ($tmp) {
             $when = strtotime($tmp);
             if ($when < 1) {
                 throw new InvalidParam(
@@ -77,13 +86,14 @@ class WebService
                     "the past, but NOT in the future."
                 ));
             }
-        }
-        else {
+        } else {
             $when = time();
         }
 
         $on_duplicate = $request->get_parameter('on_duplicate');
-        if (!$on_duplicate) { $on_duplicate = "silent_success"; }
+        if (!$on_duplicate) {
+            $on_duplicate = "silent_success";
+        }
         if (!in_array($on_duplicate, array(
             'silent_success', 'user_error', 'continue'
         ))) {
@@ -91,7 +101,7 @@ class WebService
         }
 
         $rating = $request->get_parameter('rating');
-        if ($rating !== null && (!in_array($rating, array(1,2,3,4,5)))) {
+        if ($rating !== null && (!in_array($rating, array(1, 2, 3, 4, 5)))) {
             throw new InvalidParam(
                 'rating', "If present, it must be an integer in the 1..5 scale."
             );
@@ -101,8 +111,7 @@ class WebService
                 "Rating is allowed only for 'Found it' and 'Attended' logtypes."
             );
         }
-        if ($rating !== null && (Settings::get('OC_BRANCH') == 'oc.de'))
-        {
+        if ($rating !== null && (Settings::get('OC_BRANCH') == 'oc.de')) {
             # We will remove the rating request and change the success message
             # (which will be returned IF the rest of the query will meet all the
             # requirements).
@@ -115,18 +124,19 @@ class WebService
         }
 
         $recommend = $request->get_parameter('recommend');
-        if (!$recommend) $recommend = 'false';
-        if (!in_array($recommend, array('true', 'false')))
+        if (!$recommend) {
+            $recommend = 'false';
+        }
+        if (!in_array($recommend, array('true', 'false'))) {
             throw new InvalidParam('recommend', "Unknown option: '$recommend'.");
+        }
         $recommend = ($recommend == 'true');
-        if ($recommend && $logtype != 'Found it')
-        {
+        if ($recommend && $logtype != 'Found it') {
             if ($logtype != 'Attended') {
                 throw new BadRequest(
                     "Recommending is allowed only for 'Found it' and 'Attended' logs."
                 );
-            }
-            else if (Settings::get('OC_BRANCH') == 'oc.pl') {
+            } elseif (Settings::get('OC_BRANCH') == 'oc.pl') {
 
                 # We will remove the recommendation request and change the success message
                 # (which will be returned IF the rest of the query will meet all the
@@ -151,14 +161,18 @@ class WebService
                 "needs_maintenance and needs_maintenance2."
             );
         }
-        if (!$needs_maintenance2) { $needs_maintenance2 = 'null'; }
+        if (!$needs_maintenance2) {
+            $needs_maintenance2 = 'null';
+        }
 
         # Parse $needs_maintenance and get rid of it.
 
         if ($needs_maintenance) {
-            if ($needs_maintenance == 'true') { $needs_maintenance2 = 'true'; }
-            else if ($needs_maintenance == 'false') { $needs_maintenance2 = 'null'; }
-            else {
+            if ($needs_maintenance == 'true') {
+                $needs_maintenance2 = 'true';
+            } elseif ($needs_maintenance == 'false') {
+                $needs_maintenance2 = 'null';
+            } else {
                 throw new InvalidParam(
                     'needs_maintenance', "Unknown option: '$needs_maintenance'."
                 );
@@ -208,24 +222,22 @@ class WebService
 
         # Various integrity checks.
 
-        if ($cache['type'] == 'Event')
-        {
+        if ($cache['type'] == 'Event') {
             if (!in_array($logtype, array('Will attend', 'Attended', 'Comment'))) {
                 throw new CannotPublishException(_(
                     'This cache is an Event cache. You cannot "Find" it (but '.
                     'you can attend it, or comment on it)!'
                 ));
             }
-        }
-        else  # type != event
-        {
+        } else {
+            # type != event
+
             if (in_array($logtype, array('Will attend', 'Attended'))) {
                 throw new CannotPublishException(_(
                     'This cache is NOT an Event cache. You cannot "Attend" it '.
                     '(but you can find it, or comment on it)!'
                 ));
-            }
-            else if (!in_array($logtype, array('Found it', "Didn't find it", 'Comment'))) {
+            } elseif (!in_array($logtype, array('Found it', "Didn't find it", 'Comment'))) {
                 throw new Exception("Unknown log entry - should be documented here.");
             }
         }
@@ -237,8 +249,7 @@ class WebService
 
         # Password check.
 
-        if (($logtype == 'Found it' || $logtype == 'Attended') && $cache['req_passwd'])
-        {
+        if (($logtype == 'Found it' || $logtype == 'Attended') && $cache['req_passwd']) {
             $valid_password = Db::select_value("
                 select logpw
                 from caches
@@ -258,8 +269,7 @@ class WebService
         # Prepare our comment to be inserted into the database. This may require
         # some reformatting which depends on the current OC installation.
 
-        if (Settings::get('OC_BRANCH') == 'oc.de')
-        {
+        if (Settings::get('OC_BRANCH') == 'oc.de') {
             # OCDE stores all comments in HTML format, while the 'text_html' field
             # indicates their *original* format as delivered by the user. This
             # allows processing the 'text' field contents without caring about the
@@ -270,8 +280,7 @@ class WebService
             # For user-supplied HTML comments, OCDE requires us to do additional
             # HTML purification prior to the insertion into the database.
 
-            if ($comment_format == 'plaintext')
-            {
+            if ($comment_format == 'plaintext') {
                 # This code is identical to the plaintext processing in OCDE code,
                 # including a space handling bug: Multiple consecutive spaces will
                 # get semantically lost in the generated HTML.
@@ -279,19 +288,16 @@ class WebService
                 $formatted_comment = htmlspecialchars($comment, ENT_COMPAT);
                 $formatted_comment = nl2br($formatted_comment);
                 $value_for_text_html_field = 0;
-            }
-            else
-            {
-                if ($comment_format == 'auto')
-                {
+            } else {
+                if ($comment_format == 'auto') {
                     # 'Auto' is for backward compatibility. Before the "comment_format"
                     # was introduced, OKAPI used a weird format in between (it allowed
                     # HTML, but applied nl2br too).
 
                     $formatted_comment = nl2br($comment);
-                }
-                else
+                } else {
                     $formatted_comment = $comment;
+                }
 
                 # NOTICE: We are including EXTERNAL OCDE library here! This
                 # code does not belong to OKAPI!
@@ -304,9 +310,7 @@ class WebService
                 $formatted_comment = $purifier->purify($formatted_comment);
                 $value_for_text_html_field = 1;
             }
-        }
-        else
-        {
+        } else {
             # OCPL is even weirder. It also stores HTML-lized comments in the database
             # (it doesn't really matter if 'text_html' field is set to FALSE). OKAPI must
             # save it in HTML either way. However, escaping plain-text doesn't work!
@@ -317,8 +321,7 @@ class WebService
             # OCPL doesn't require HTML purification prior to the database insertion.
             # HTML seems to be purified dynamically, before it is displayed.
 
-            if ($comment_format == 'plaintext')
-            {
+            if ($comment_format == 'plaintext') {
                 $formatted_comment = htmlspecialchars($comment, ENT_QUOTES);
                 $formatted_comment = nl2br($formatted_comment);
                 $formatted_comment = str_replace("&amp;", "&amp;#38;", $formatted_comment);
@@ -332,14 +335,10 @@ class WebService
                 # Message-ID: <22b643093838b151b300f969f699aa04@harrieklomp.be>
                 #
                 $value_for_text_html_field = 1;
-            }
-            elseif ($comment_format == 'auto')
-            {
+            } elseif ($comment_format == 'auto') {
                 $formatted_comment = nl2br($comment);
                 $value_for_text_html_field = 1;
-            }
-            else
-            {
+            } else {
                 $formatted_comment = $comment;
                 $value_for_text_html_field = 1;
             }
@@ -365,8 +364,7 @@ class WebService
 
         # Duplicate detection.
 
-        if ($on_duplicate != 'continue')
-        {
+        if ($on_duplicate != 'continue') {
             # Attempt to find a log entry made by the same user, for the same cache, with
             # the same date, type, comment, etc. Note, that these are not ALL the fields
             # we could check, but should work ok in most cases. Also note, that we
@@ -386,15 +384,11 @@ class WebService
                     ".((Settings::get('OC_BRANCH') == 'oc.pl') ? "and deleted = 0" : "")."
                 limit 1
             ");
-            if ($duplicate_uuid != null)
-            {
-                if ($on_duplicate == 'silent_success')
-                {
+            if ($duplicate_uuid != null) {
+                if ($on_duplicate == 'silent_success') {
                     # Act as if the log has been submitted successfully.
                     return $duplicate_uuid;
-                }
-                elseif ($on_duplicate == 'user_error')
-                {
+                } elseif ($on_duplicate == 'user_error') {
                     throw new CannotPublishException(_(
                         "You have already submitted a log entry with exactly ".
                         "the same contents."
@@ -440,8 +434,7 @@ class WebService
         # user submit a rating for it? Anyway, I will stick to the procedure
         # found in log.php. On the bright side, it's fail-safe.
 
-        if ($rating)
-        {
+        if ($rating) {
             $has_already_rated = Db::select_value("
                 select 1
                 from scores
@@ -459,8 +452,7 @@ class WebService
 
         # If user wants to recommend...
 
-        if ($recommend)
-        {
+        if ($recommend) {
             # Do the same "fail-safety" check as we did for the rating.
 
             $already_recommended = Db::select_value("
@@ -497,32 +489,26 @@ class WebService
         # If user checked the "needs_maintenance(2)" flag for OCPL, we will shuffle things
         # a little...
 
-        if (Settings::get('OC_BRANCH') == 'oc.pl' && $needs_maintenance2 == 'true')
-        {
+        if (Settings::get('OC_BRANCH') == 'oc.pl' && $needs_maintenance2 == 'true') {
             # If we're here, then we also know that the "Needs maintenance" log
             # type is supported by this OC site. However, it's a separate log
             # type, so we might have to submit two log types together:
 
-            if ($logtype == 'Comment')
-            {
+            if ($logtype == 'Comment') {
                 # If user submits a "Comment", we'll just change its type to
                 # "Needs maintenance". Only one log entry will be issued.
 
                 $logtype = 'Needs maintenance';
                 $second_logtype = null;
                 $second_formatted_comment = null;
-            }
-            elseif ($logtype == 'Found it')
-            {
+            } elseif ($logtype == 'Found it') {
                 # If "Found it", then we'll issue two log entries: one "Found
                 # it" with the original comment, and second one "Needs
                 # maintenance" with empty comment.
 
                 $second_logtype = 'Needs maintenance';
                 $second_formatted_comment = "";
-            }
-            elseif ($logtype == "Didn't find it")
-            {
+            } elseif ($logtype == "Didn't find it") {
                 # If "Didn't find it", then we'll issue two log entries, but this time
                 # we'll do this the other way around. The first "Didn't find it" entry
                 # will have an empty comment. We will move the comment to the second
@@ -532,22 +518,17 @@ class WebService
                 $second_logtype = 'Needs maintenance';
                 $second_formatted_comment = $formatted_comment;
                 $formatted_comment = "";
-            }
-            else if ($logtype == 'Will attend' || $logtype == 'Attended')
-            {
+            } elseif ($logtype == 'Will attend' || $logtype == 'Attended') {
                 # OC branches which allow maintenance logs, still don't allow them on
                 # event caches.
 
                 throw new CannotPublishException(_(
                     "Event caches cannot \"need maintenance\"."
                 ));
-            }
-            else {
+            } else {
                 throw new Exception();
             }
-        }
-        else
-        {
+        } else {
             # User didn't check the "Needs maintenance" flag OR "Needs maintenance"
             # log type isn't supported by this server.
 
@@ -565,8 +546,7 @@ class WebService
         );
         self::increment_cache_stats($cache['internal_id'], $when, $logtype);
         self::increment_user_stats($user['internal_id'], $logtype);
-        if ($second_logtype != null)
-        {
+        if ($second_logtype != null) {
             # Reminder: This will only be called for OCPL branch.
 
             self::insert_log_row(
@@ -585,8 +565,7 @@ class WebService
 
         # Save the rating.
 
-        if ($rating)
-        {
+        if ($rating) {
             # This code will be called for OCPL branch only. Earlier, we made sure,
             # to set $rating to null, if we're running on OCDE.
 
@@ -600,8 +579,7 @@ class WebService
             # but presumably has some deep logic into it. See also here (Polish):
             # http://wiki.opencaching.pl/index.php/Oceny_skrzynek
 
-            switch ($rating)
-            {
+            switch ($rating) {
                 case 1: $db_score = -2.0; break;
                 case 2: $db_score = -0.5; break;
                 case 3: $db_score = 0.7; break;
@@ -630,10 +608,8 @@ class WebService
 
         # Save recommendation.
 
-        if ($recommend)
-        {
-            if (Db::field_exists('cache_rating', 'rating_date'))
-            {
+        if ($recommend) {
+            if (Db::field_exists('cache_rating', 'rating_date')) {
                 Db::execute("
                     insert into cache_rating (user_id, cache_id, rating_date)
                     values (
@@ -642,9 +618,7 @@ class WebService
                         from_unixtime('".Db::escape_string($when)."')
                     );
                 ");
-            }
-            else
-            {
+            } else {
                 Db::execute("
                     insert into cache_rating (user_id, cache_id)
                     values (
@@ -678,14 +652,15 @@ class WebService
         # This is the "real" entry point. A wrapper for the _call method.
 
         $langpref = $request->get_parameter('langpref');
-        if (!$langpref) $langpref = "en";
+        if (!$langpref) {
+            $langpref = "en";
+        }
 
         # Error messages thrown via CannotPublishException exceptions should be localized.
         # They will be delivered for end user to display in his language.
 
         Okapi::gettext_domain_init(explode("|", $langpref));
-        try
-        {
+        try {
             # If appropriate, $success_message might be changed inside the _call.
             self::$success_message = _("Your cache log entry was posted successfully.");
             $log_uuid = self::_call($request);
@@ -695,9 +670,7 @@ class WebService
                 'log_uuid' => $log_uuid
             );
             Okapi::gettext_domain_restore();
-        }
-        catch (CannotPublishException $e)
-        {
+        } catch (CannotPublishException $e) {
             Okapi::gettext_domain_restore();
             $result = array(
                 'success' => false,
@@ -711,17 +684,13 @@ class WebService
 
     private static function increment_cache_stats($cache_internal_id, $when, $logtype)
     {
-        if (Settings::get('OC_BRANCH') == 'oc.de')
-        {
+        if (Settings::get('OC_BRANCH') == 'oc.de') {
             # OCDE handles cache stats updates using triggers. So, they are already
             # incremented properly.
-        }
-        else
-        {
+        } else {
             # OCPL doesn't use triggers for this. We need to update manually.
 
-            if ($logtype == 'Found it')
-            {
+            if ($logtype == 'Found it') {
                 Db::execute("
                     update caches
                     set
@@ -732,25 +701,19 @@ class WebService
                         )
                     where cache_id = '".Db::escape_string($cache_internal_id)."'
                 ");
-            }
-            elseif ($logtype == "Didn't find it")
-            {
+            } elseif ($logtype == "Didn't find it") {
                 Db::execute("
                     update caches
                     set notfounds = notfounds + 1
                     where cache_id = '".Db::escape_string($cache_internal_id)."'
                 ");
-            }
-            elseif ($logtype == 'Comment')
-            {
+            } elseif ($logtype == 'Comment') {
                 Db::execute("
                     update caches
                     set notes = notes + 1
                     where cache_id = '".Db::escape_string($cache_internal_id)."'
                 ");
-            }
-            else
-            {
+            } else {
                 # This log type is not represented in cache stats.
             }
         }
@@ -758,17 +721,13 @@ class WebService
 
     private static function increment_user_stats($user_internal_id, $logtype)
     {
-        if (Settings::get('OC_BRANCH') == 'oc.de')
-        {
+        if (Settings::get('OC_BRANCH') == 'oc.de') {
             # OCDE handles cache stats updates using triggers. So, they are already
             # incremented properly.
-        }
-        else
-        {
+        } else {
             # OCPL doesn't have triggers for this. We need to update manually.
 
-            switch ($logtype)
-            {
+            switch ($logtype) {
                 case 'Found it': $field_to_increment = 'founds_count'; break;
                 case "Didn't find it": $field_to_increment = 'notfounds_count'; break;
                 case 'Comment': $field_to_increment = 'log_notes_count'; break;
@@ -787,13 +746,12 @@ class WebService
     private static function insert_log_row(
         $consumer_key, $cache_internal_id, $user_internal_id, $logtype, $when,
         $formatted_comment, $text_html, $needs_maintenance2
-    )
-    {
+    ) {
         if (Settings::get('OC_BRANCH') == 'oc.de') {
             $needs_maintenance_field_SQL = ', needs_maintenance';
             if ($needs_maintenance2 == 'true') {
                 $needs_maintenance_SQL = ',2';
-            } else if ($needs_maintenance2 == 'false') {
+            } elseif ($needs_maintenance2 == 'false') {
                 $needs_maintenance_SQL = ',1';
             } else {  // 'null'
                 $needs_maintenance_SQL = ',0';

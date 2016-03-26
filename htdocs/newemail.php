@@ -19,6 +19,8 @@
 	$user = new user($login->userid);
 	$tpl->assign('newemail', $user->getNewEMail());
 
+	include('settingsmenu.php');
+
 	if (isset($_REQUEST['request']))
 	{
 		$email = isset($_REQUEST['email']) ? $_REQUEST['email'] : '';

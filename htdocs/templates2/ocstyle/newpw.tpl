@@ -5,9 +5,11 @@
 ***************************************************************************}
 {* OCSTYLE *}
 <div class="content2-pagetitle">
-	<img src="resource2/{$opt.template.style}/images/profile/32x32-profile.png" style="margin-right: 10px;" width="32" height="32" alt="" />
+	<img src="resource2/{$opt.template.style}/images/profile/32x32-security.png" style="margin-right: 10px;" width="32" height="32" alt="" />
 	{t}Change password{/t}
 </div>
+
+{include file="settingsmenu.tpl"}
 
 {if $passwordChanged==true}
 	<br /><p>&nbsp;<span class="okmsg">{t}The password has been changed.{/t}</span></p>
@@ -36,7 +38,7 @@
 		<tr>
 			<td width="150px">&nbsp;</td>
 			<td>
-        <input type="submit" name="rqcode" value="{t}Request code{/t}" class="formbutton" onclick="submitbutton('rqcode')" />
+        		<input type="submit" name="rqcode" value="{t}Request code{/t}" class="formbutton" onclick="submitbutton('rqcode')" />
 			</td>
 		</tr>
 		{if $emailErrorNotFound==true}

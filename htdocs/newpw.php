@@ -25,6 +25,8 @@
 		$target = 'login.php';
 	}
 
+	include('settingsmenu.php');
+
 	if (isset($_REQUEST['cancel']))
 		$tpl->redirect($target);
 

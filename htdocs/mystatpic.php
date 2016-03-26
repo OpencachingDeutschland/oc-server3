@@ -13,7 +13,9 @@
 	$login->verify();
 	if ($login->userid == 0)
 		$tpl->redirect('login.php?target=mystatpic.php');
-	
+
+	include('settingsmenu.php');
+
 	$tpl->display();
 
 ?>

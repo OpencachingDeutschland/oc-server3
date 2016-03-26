@@ -137,6 +137,4 @@ function smarty_function_config_load($params, &$smarty)
 
 }
 
-/* vim: set expandtab: */
-
-?>
+/* vim: set expandtab: */;

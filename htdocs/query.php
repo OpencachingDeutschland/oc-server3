@@ -138,4 +138,3 @@ function savequery($queryid, $queryname, $saveas, $submit, $saveas_queryid, $sor
 	$tpl->assign('action', 'save');
 	$tpl->display();
 }
-?>

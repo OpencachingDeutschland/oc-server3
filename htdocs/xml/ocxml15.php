@@ -10,5 +10,3 @@
 
 $ocxmlversion = 15;
 include("ocxml11.php");
-
-?>

@@ -78,8 +78,8 @@ class cache_location
 															 FROM `countries`
 													LEFT JOIN `sys_trans` ON `countries`.`trans_id`=`sys_trans`.`id` AND `countries`.`name`=`sys_trans`.`text`
 													LEFT JOIN `sys_trans_text` ON `sys_trans`.`id`=`sys_trans_text`.`trans_id` AND `sys_trans_text`.`lang`='&2'
-															WHERE `countries`.`short`='&1'", 
-																		null, 
+															WHERE `countries`.`short`='&1'",
+																		null,
 																		$sCode,
 																		$opt['template']['default']['locale']);
 
@@ -96,8 +96,8 @@ class cache_location
 				                   INNER JOIN `countries` ON `caches`.`country`=`countries`.`short`
 				                    LEFT JOIN `sys_trans` ON `countries`.`trans_id`=`sys_trans`.`id` AND `countries`.`name`=`sys_trans`.`text`
 				                    LEFT JOIN `sys_trans_text` ON `sys_trans`.`id`=`sys_trans_text`.`trans_id` AND `sys_trans_text`.`lang`='&2'
-				                        WHERE `caches`.`cache_id`='&1'", 
-				                              null, 
+				                        WHERE `caches`.`cache_id`='&1'",
+				                              null,
 				                              $rCache['cache_id'],
 				                              $opt['template']['default']['locale']);
 				$sCode1 = sql_value("SELECT `caches`.`country` FROM `caches` WHERE `caches`.`cache_id`='&1'", null, $rCache['cache_id']);
@@ -107,4 +107,3 @@ class cache_location
 		sql_free_result($rsCache);
 	}
 }
-?>

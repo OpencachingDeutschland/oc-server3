@@ -7,5 +7,3 @@
 
 	$nongc = true;
 	require "map2.php";
-
-?>

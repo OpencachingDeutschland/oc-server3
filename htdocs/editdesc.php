@@ -144,7 +144,7 @@
 
 						// Text from textarea
 						$desc = $_POST['desc'];  // Ocprop
-						
+
 						// fuer alte Versionen von OCProp
 						if (isset($_POST['submit']) && !isset($_POST['version2']))
 						{
@@ -170,7 +170,7 @@
 							            `hint`='&5',
 							            `language`='&6'
 							      WHERE `id`='&7'",
-							            (($desc_html == 1) ? '1' : '0'), 
+							            (($desc_html == 1) ? '1' : '0'),
 							            (($desc_htmledit == 1) ? '1' : '0'),
 							            $desc,
 							            $short_desc,
@@ -220,7 +220,7 @@
 					}
 					
 					//here we only set up the template variables
-					
+
 					tpl_set_var('desc', htmlspecialchars($desc, ENT_COMPAT, 'UTF-8'), true);
 					tpl_set_var('descMode', $descMode);
 					tpl_set_var('htmlnotice', $descMode == 2 ? $htmlnotice : '');
@@ -254,7 +254,7 @@
 					}
 					sql_free_result($rsLanguages);
 
-					tpl_set_var('desclangs', $languages);				
+					tpl_set_var('desclangs', $languages);
 					
 					if ($show_all_langs == false)
 						tpl_set_var('show_all_langs_submit', $show_all_langs_submit);
@@ -301,4 +301,3 @@
 
 	//make the template and send it out
 	tpl_BuildTemplate();
-?>

@@ -35,4 +35,3 @@
 	sql_free_result($rs);
 
 	echo "purged data of $n users\n";
-?>

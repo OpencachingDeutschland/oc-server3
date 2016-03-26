@@ -131,5 +131,3 @@ class Coordinate_Presenter
                  self::lon_min => new Validator_Real(0, 59.999, '{1,2}', '{1,3}'));
   }
 }
-
-?>

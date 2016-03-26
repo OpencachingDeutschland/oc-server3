@@ -532,8 +532,8 @@ function switchdb()
 function ImportUserArray($r)
 {
 	// prüfen ob alle elemente vorhanden sind
-	if (!isset($r['ID']['__DATA']) || 
-	    !isset($r['USERNAME']['__DATA']) || 
+	if (!isset($r['ID']['__DATA']) ||
+	    !isset($r['USERNAME']['__DATA']) ||
 	    !isset($r['LASTMODIFIED']['__DATA']))
 	{
 		echo 'warn: ImportUserArray required element not defined' . "\n";
@@ -608,22 +608,22 @@ function ImportUserArray($r)
 function ImportCacheArray($r)
 {
 	// prüfen ob alle elemente vorhanden sind
-	if (!isset($r['ID']['__DATA']) || 
-	    !isset($r['USERID']['__ATTR']['UUID']) || 
-	    !isset($r['NAME']['__DATA']) || 
-	    !isset($r['LONGITUDE']['__DATA']) || 
-	    !isset($r['LATITUDE']['__DATA']) || 
-	    !isset($r['TYPE']['__ATTR']['ID']) || 
-	    !isset($r['STATUS']['__ATTR']['ID']) || 
-	    !isset($r['COUNTRY']['__ATTR']['ID']) || 
-	    !isset($r['SIZE']['__ATTR']['ID']) || 
-	    !isset($r['DIFFICULTY']['__DATA']) || 
-	    !isset($r['TERRAIN']['__DATA']) || 
-	    !isset($r['RATING']['__ATTR']['WAYLENGTH']) || 
-	    !isset($r['RATING']['__ATTR']['NEEDTIME']) || 
-	    !isset($r['WAYPOINTS']['__ATTR']['OC']) || 
-	    !isset($r['DATEHIDDEN']['__DATA']) || 
-	    !isset($r['DATECREATED']['__DATA']) || 
+	if (!isset($r['ID']['__DATA']) ||
+	    !isset($r['USERID']['__ATTR']['UUID']) ||
+	    !isset($r['NAME']['__DATA']) ||
+	    !isset($r['LONGITUDE']['__DATA']) ||
+	    !isset($r['LATITUDE']['__DATA']) ||
+	    !isset($r['TYPE']['__ATTR']['ID']) ||
+	    !isset($r['STATUS']['__ATTR']['ID']) ||
+	    !isset($r['COUNTRY']['__ATTR']['ID']) ||
+	    !isset($r['SIZE']['__ATTR']['ID']) ||
+	    !isset($r['DIFFICULTY']['__DATA']) ||
+	    !isset($r['TERRAIN']['__DATA']) ||
+	    !isset($r['RATING']['__ATTR']['WAYLENGTH']) ||
+	    !isset($r['RATING']['__ATTR']['NEEDTIME']) ||
+	    !isset($r['WAYPOINTS']['__ATTR']['OC']) ||
+	    !isset($r['DATEHIDDEN']['__DATA']) ||
+	    !isset($r['DATECREATED']['__DATA']) ||
 	    !isset($r['LASTMODIFIED']['__DATA']))
 	{
 		echo 'warn: ImportCacheArray required element not defined' . "\n";
@@ -770,9 +770,9 @@ function ImportCacheDescArray($r)
 	[LASTMODIFIED][__DATA] => 2005-08-22 14:03:33
 */
 	// prüfen ob alle elemente vorhanden sind
-	if (!isset($r['ID']['__DATA']) || 
-	    !isset($r['CACHEID']['__DATA']) || 
-	    !isset($r['LANGUAGE']['__ATTR']['ID']) || 
+	if (!isset($r['ID']['__DATA']) ||
+	    !isset($r['CACHEID']['__DATA']) ||
+	    !isset($r['LANGUAGE']['__ATTR']['ID']) ||
 	    !isset($r['LASTMODIFIED']['__DATA']))
 	{
 		echo 'error: ImportCacheDescArray required element not defined' . "\n";
@@ -836,9 +836,9 @@ function ImportCacheDescArray($r)
 			// update
 			sql("UPDATE `cache_desc` SET `language`='&1', `desc`='&2', `desc_html`=&3, 
 			                             `hint`='&4', `short_desc`='&5', `last_modified`='&6' 
-			                             WHERE `id`=&7 LIMIT 1", 
+			                             WHERE `id`=&7 LIMIT 1",
 										 $r['LANGUAGE']['__ATTR']['ID'], $r['DESC']['__DATA'], ($r['DESC']['__ATTR']['HTML'] == 1 ? '1' : '0'),
-										 $r['HINT']['__DATA'], $r['SHORTDESC']['__DATA'], $r['LASTMODIFIED']['__DATA'], 
+										 $r['HINT']['__DATA'], $r['SHORTDESC']['__DATA'], $r['LASTMODIFIED']['__DATA'],
 										 $rDesc['id']);
 		}
 	}
@@ -868,7 +868,7 @@ function ImportCacheDescArray($r)
 		                               `last_modified`, `uuid`) 
 		                       VALUES ( &1 , '&2', '&3',
 		                                &4 , '&5', '&6',
-		                               '&7', '&8')", 
+		                               '&7', '&8')",
 		                               $rCache['cache_id'], $r['LANGUAGE']['__ATTR']['ID'], $r['DESC']['__DATA'],
 		                               ($r['DESC']['__ATTR']['HTML'] == 1 ? '1' : '0'),  $r['HINT']['__DATA'], $r['SHORTDESC']['__DATA'],
 		                               $r['LASTMODIFIED']['__DATA'], $r['ID']['__DATA']);
@@ -888,12 +888,12 @@ function ImportCachelogArray($r)
     [DATECREATED][__DATA] => 2005-08-14 19:44:01
     [LASTMODIFIED][__DATA] => 2005-08-14 19:44:01
 */
-	if (!isset($r['ID']['__DATA']) || 
-	    !isset($r['CACHEID']['__DATA']) || 
-	    !isset($r['USERID']['__ATTR']['UUID']) || 
-	    !isset($r['LOGTYPE']['__ATTR']['ID']) || 
-	    !isset($r['DATE']['__DATA']) || 
-	    !isset($r['DATECREATED']['__DATA']) || 
+	if (!isset($r['ID']['__DATA']) ||
+	    !isset($r['CACHEID']['__DATA']) ||
+	    !isset($r['USERID']['__ATTR']['UUID']) ||
+	    !isset($r['LOGTYPE']['__ATTR']['ID']) ||
+	    !isset($r['DATE']['__DATA']) ||
+	    !isset($r['DATECREATED']['__DATA']) ||
 	    !isset($r['LASTMODIFIED']['__DATA']))
 	{
 		echo 'error: ImportCachelogArray required element not defined' . "\n";
@@ -983,13 +983,13 @@ function ImportPictureArray($r)
     [DATECREATED][__DATA] => 2005-08-20 19:01:37
     [LASTMODIFIED][__DATA] => 2005-08-20 19:01:37
 */
-	if (!isset($r['ID']['__DATA']) || 
-	    !isset($r['URL']['__DATA']) || 
-	    !isset($r['OBJECT']['__ATTR']['TYPE']) || 
-	    !isset($r['OBJECT']['__DATA']) || 
-	    !isset($r['ATTRIBUTES']['__ATTR']['SPOILER']) || 
-	    !isset($r['ATTRIBUTES']['__ATTR']['DISPLAY']) || 
-	    !isset($r['DATECREATED']['__DATA']) || 
+	if (!isset($r['ID']['__DATA']) ||
+	    !isset($r['URL']['__DATA']) ||
+	    !isset($r['OBJECT']['__ATTR']['TYPE']) ||
+	    !isset($r['OBJECT']['__DATA']) ||
+	    !isset($r['ATTRIBUTES']['__ATTR']['SPOILER']) ||
+	    !isset($r['ATTRIBUTES']['__ATTR']['DISPLAY']) ||
+	    !isset($r['DATECREATED']['__DATA']) ||
 	    !isset($r['LASTMODIFIED']['__DATA']))
 	{
 		echo 'error: ImportPictureArray required element not defined ' . "\n";
@@ -1078,8 +1078,8 @@ function ImportRemovedObjectArray($r)
     [OBJECT][__DATA] => CA1FCA8F-DEED-06D8-F971-53634CC91AEC
     [REMOVEDDATE][__DATA] => 2005-08-14 19:31:32
 */
-	if (!isset($r['OBJECT']['__ATTR']['TYPE']) || 
-	    !isset($r['OBJECT']['__DATA']) || 
+	if (!isset($r['OBJECT']['__ATTR']['TYPE']) ||
+	    !isset($r['OBJECT']['__DATA']) ||
 	    !isset($r['REMOVEDDATE']['__DATA']))
 	{
 		echo 'error: ImportRemovedObjectArray required element not defined' . "\n";

@@ -9,4 +9,3 @@
 	$debug_mailto = 'abc@xyz.de';
 	
 	$watchpid = $rootpath . 'cache/watch.pid';
-?>

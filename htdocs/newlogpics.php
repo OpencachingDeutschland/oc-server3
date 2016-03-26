@@ -18,4 +18,3 @@
 		$tpl->assign('pictures', get_logpics(LOGPICS_FOR_NEWPICS_GALLERY));
 
 	$tpl->display();
-?>

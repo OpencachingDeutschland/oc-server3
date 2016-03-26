@@ -79,6 +79,3 @@ function test_encoding($path)
 			echo "No Unicode Reminder found in $path\n";
 	}
 }
-
-
-?>

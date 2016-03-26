@@ -55,5 +55,3 @@ sql("SELECT acos(cos(0.73304) * cos((90-`caches`.`latitude`) * 3.14159 / 180) + 
            `cache_type`.`id`=`caches`.`type` ORDER BY distance ASC LIMIT 0, 20");
 
 $tpl->display();
-
-?>

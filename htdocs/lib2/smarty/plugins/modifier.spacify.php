@@ -25,6 +25,4 @@ function smarty_modifier_spacify($string, $spacify_char = ' ')
                    preg_split('//', $string, -1, PREG_SPLIT_NO_EMPTY));
 }
 
-/* vim: set expandtab: */
-
-?>
+/* vim: set expandtab: */;

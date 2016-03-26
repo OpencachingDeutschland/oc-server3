@@ -60,4 +60,3 @@ function event_change_statpic($userid)
 function event_notify_new_cache($cache_id)
 {
 }
-?>

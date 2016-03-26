@@ -481,7 +481,7 @@
 		}
 		if (sql_field_exists('cache_watches','last_executed'))  // obsolete pre-OC3 field
 		{
-			sql("ALTER TABLE `cache_watches` DROP COLUMN `last_executed`"); 
+			sql("ALTER TABLE `cache_watches` DROP COLUMN `last_executed`");
 		}
 	}
 
@@ -895,5 +895,4 @@
 	// Trigger updates can be directly included in a mutation, or can be done via
 	// a separate trigger update mutation (see #113 and maintain-113.inc.php).
 	// See also http://wiki.opencaching.de/index.php/Entwicklung/Datenbankversionierung.
-
-?>
+;

@@ -126,4 +126,3 @@
 	$opt['template']['locales']['RU']['show'] = false;
 	$opt['template']['locales']['SV']['show'] = false;
 	$opt['template']['locales']['NO']['show'] = false;
-?>

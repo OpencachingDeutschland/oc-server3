@@ -26,5 +26,3 @@ sql('DELETE FROM result_caches WHERE cache_id IN (SELECT cache_id FROM remove_ca
 sql('DROP TABLE remove_caches');
 
 $tpl->display();
-
-?>

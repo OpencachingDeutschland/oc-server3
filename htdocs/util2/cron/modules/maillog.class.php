@@ -126,5 +126,3 @@ class maillog
 		     $last_date);
 	}
 }
-
-?>

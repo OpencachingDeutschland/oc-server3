@@ -98,4 +98,3 @@ class Coordinate_Coordinate
     return abs(abs($value) - self::getDeg($value)) * 60;
   }
 }
-?>

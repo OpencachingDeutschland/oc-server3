@@ -54,4 +54,3 @@ class Coordinate_Formatter
     return $hem . ' ' . $deg . '&deg; ' . $min . '\'';
   }
 }
-?>

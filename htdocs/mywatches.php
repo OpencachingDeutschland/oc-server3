@@ -123,5 +123,3 @@
 
 	$tpl->assign('action', $action);
 	$tpl->display();
-
-?>

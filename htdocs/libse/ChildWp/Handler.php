@@ -128,5 +128,3 @@ class ChildWp_Handler
     sql("DELETE FROM coordinates WHERE id = &1", $childid);
   }
 }
-
-?>

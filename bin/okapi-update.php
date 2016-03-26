@@ -29,5 +29,3 @@
 			// Then, you must call OKAPI update manually via
 			//   http://site-address/okapi/update
 	}
-
-?>

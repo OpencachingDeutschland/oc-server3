@@ -24,7 +24,7 @@
 	$rid = isset($_REQUEST['rid']) ? $_REQUEST['rid']+0 : 0;
 	$cacheid = isset($_REQUEST['cacheid']) ? $_REQUEST['cacheid']+0 : 0;
 	$ownerid = isset($_REQUEST['ownerid']) ? $_REQUEST['ownerid']+0 : 0;
-	$reporterid =sql_value("SELECT `userid` FROM `cache_reports` WHERE `id`=&1", 0, $rid); 
+	$reporterid =sql_value("SELECT `userid` FROM `cache_reports` WHERE `id`=&1", 0, $rid);
 	$adminid = sql_value("SELECT `adminid` FROM `cache_reports` WHERE `id`=&1", 0, $rid);
 	$age = sql_value("SELECT DATEDIFF(NOW(),`lastmodified`) FROM `cache_reports` WHERE `id`=&1", 0, $rid);
 
@@ -39,8 +39,8 @@
 			$id,
 			$comment);
 	}
-	elseif (isset($_REQUEST['assign']) && $rid > 0 && 
-			($adminid == 0 || ($adminid != $login->userid && $age >= 14)))  
+	elseif (isset($_REQUEST['assign']) && $rid > 0 &&
+			($adminid == 0 || ($adminid != $login->userid && $age >= 14)))
 	{
 		sql("UPDATE `cache_reports` SET `status`=2, `adminid`=&2 WHERE `id`=&1", $rid, $login->userid);
 		$tpl->redirect('adminreports.php?id='.$rid);
@@ -144,7 +144,7 @@
 			      LEFT JOIN `cache_report_status` AS `crs` ON `cr`.`status`=`crs`.`id`
 			      LEFT JOIN `sys_trans_text` AS `tt` ON `crs`.`trans_id`=`tt`.`trans_id` AND `tt`.`lang`='&2'
 			      LEFT JOIN `sys_trans_text` AS `tt2` ON `crr`.`trans_id`=`tt2`.`trans_id` AND `tt2`.`lang`='&2'
-			          WHERE `cr`.`id`=&1", 
+			          WHERE `cr`.`id`=&1",
 			            $id, $opt['template']['locale']);
 
 		if ($record = sql_fetch_assoc($rs))
@@ -201,6 +201,5 @@
 		$cache->setTplHistoryData($id);
 	}
 
-	$tpl->assign('error', $error);	
+	$tpl->assign('error', $error);
 	$tpl->display();
-?>

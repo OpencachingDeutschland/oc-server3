@@ -228,5 +228,3 @@ function assignFromUser($user)
 	$tpl->assign('noHTMLEditor', $user->getNoHTMLEditor());
 	$tpl->assign('sendUsermailAddress', $user->getUsermailSendAddress());
 }
-
-?>

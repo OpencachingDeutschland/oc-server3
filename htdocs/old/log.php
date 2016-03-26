@@ -182,7 +182,7 @@
 						($log_time_minute=="" || is_numeric($log_time_minute)))
 				{
 					$date_ok = checkdate($log_date_month, $log_date_day, $log_date_year)
-											&& ($log_date_year >= 2000) 
+											&& ($log_date_year >= 2000)
 											&& ($log_time_hour>=0) && ($log_time_hour<=23)
 											&& ($log_time_minute>=0) && ($log_time_minute<=59);
 					if ($date_ok)
@@ -274,7 +274,7 @@
 					// build logtype options
 					$logtype_names = get_logtype_names();
 					$allowed_logtypes = get_cache_log_types($cache_id, 0);
-					$default_log_type = isset($_REQUEST['logtype']) ? $_REQUEST['logtype']+0 : 0; 
+					$default_log_type = isset($_REQUEST['logtype']) ? $_REQUEST['logtype']+0 : 0;
 					if (!logtype_ok($cache_id, $default_log_type, 0))
 						$default_log_type = $allowed_logtypes[0];
 
@@ -396,4 +396,3 @@
 		//make the template and send it out
 		tpl_BuildTemplate(false);
 	}
-?>

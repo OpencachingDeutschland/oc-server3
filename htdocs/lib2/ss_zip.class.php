@@ -13,7 +13,7 @@ class ss_zip{
 	*/
 	var $zipfile="";
 	/** compression level	*/
-	var $complevel=6; 
+	var $complevel=6;
 	/** entry counter */
 	var $cnt=0;
 	/** current offset in zipdata segment */
@@ -45,7 +45,7 @@ class ss_zip{
 	*/
 	function clear(){
 		$this->zipfile="";
-		$this->complevel=6; 
+		$this->complevel=6;
 		$this->cnt=0;
 		$this->offset=0;
 		$this->idx=0;
@@ -57,7 +57,7 @@ class ss_zip{
 	This function opens file pointed by zipfile parameter and creates all necessary structures
 	@param str zipfile path to the file
 	@param bool append if true the newlly opened archive will be appended to existing object structure
-	*/	
+	*/
 	function open($zipfile, $append=false){}
 	
 	
@@ -87,7 +87,7 @@ class ss_zip{
 			header("Content-type: application/octet-stream");
 			header("Content-disposition: attachment; filename=\"$zipfile\"");
 			print $this->archive();
-		}	
+		}
 	}
 	
 	/** adds data to zip file
@@ -155,7 +155,7 @@ class ss_zip{
 	@param str filename contains valid path to file to be stored in the arcive. 
 	@param str storedasname the path under which the file will be stored to the archive. If empty, the file will be stored under path given by filename parameter
 	@see ss_zip::add_data()
-	*/	
+	*/
 	function add_file($filename, $storedasname=""){
 		$fh= fopen($filename,"r");
 		$data=fread($fh,filesize($filename));
@@ -172,7 +172,7 @@ class ss_zip{
 		$cds=implode('',$this->cdir);
 		$zdsl=strlen($zds);
 		$cdsl=strlen($cds);
-		$this->zipfile= 
+		$this->zipfile=
 			$zds
 			.$cds
 			."PK\x05\x06\x00\x00\x00\x00"
@@ -271,4 +271,3 @@ the only job for this function is take parameter $v and ouput it with print_r() 
 The $l is a label like l=myvar
 */
 function dbg($v,$l='var'){echo"<xmp>$l=";print_r($v);echo"</xmp>";}
-?>

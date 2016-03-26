@@ -14,7 +14,7 @@ function get_okapi_settings()
 	# [1] http://code.google.com/p/opencaching-pl/source/browse/trunk/okapi_settings.php
 	# [2] http://code.google.com/p/opencaching-api/source/browse/trunk/okapi/settings.php
 	# [3] http://code.google.com/p/opencaching-api/issues/detail?id=132
-	
+
 	$opt['rootpath'] = $GLOBALS['rootpath'];
 	require($opt['rootpath'].'lib2/const.inc.php');   # (into the *local* scope!)
 	require($opt['rootpath'].'config2/settings-dist.inc.php');
@@ -25,14 +25,14 @@ function get_okapi_settings()
 		# Settings which ARE NOT present in settings.inc.php:
 
 		'OC_BRANCH' => 'oc.de',  # Tell OKAPI to work in "OCDE mode".
-		
+
 		# Settings which ARE present in settings.inc.php:
-		
+
 		'ADMINS'           => array($opt['db']['warn']['mail'],'rygielski@mimuw.edu.pl'),
 		'FROM_FIELD'       => $opt['mail']['contact'],
 		'DATA_LICENSE_URL' => $opt['page']['absolute_url'] . $opt['logic']['license']['terms'],
 		'DEBUG'            => ($opt['debug'] & DEBUG_DEVELOPER != 0),
-		'DEBUG_PREVENT_SEMAPHORES' 
+		'DEBUG_PREVENT_SEMAPHORES'
 		                   => !$opt['php']['semaphores'],  # not available on current developer system
 		'DB_SERVER'        => $opt['db']['servername'],
 		'DB_NAME'          => $opt['db']['placeholder']['db'],

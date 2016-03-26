@@ -66,4 +66,3 @@ function action_delete($id)
 {
 	sql("DELETE FROM `news` WHERE `id`='&1'", $id);
 }
-?>

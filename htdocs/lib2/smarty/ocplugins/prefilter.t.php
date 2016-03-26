@@ -259,4 +259,3 @@ function smarty_prefilter_t_gettext($message, $attrs, &$smarty, $line)
 
 	return $trans;
 }
-?>

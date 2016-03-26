@@ -48,5 +48,3 @@
 
 		return $desc;
 	}
-
-?>

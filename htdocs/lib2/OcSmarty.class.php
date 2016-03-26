@@ -516,4 +516,3 @@ class OcSmarty extends Smarty
 		return $sTarget;
 	}
 }
-?>

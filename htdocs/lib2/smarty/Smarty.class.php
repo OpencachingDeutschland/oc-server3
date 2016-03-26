@@ -1058,7 +1058,7 @@ class Smarty
         } else {
             // var non-existant, return valid reference
             $_tmp = null;
-            return $_tmp;   
+            return $_tmp;
         }
     }
 
@@ -1955,6 +1955,4 @@ class Smarty
 
 }
 
-/* vim: set expandtab: */
-
-?>
+/* vim: set expandtab: */;

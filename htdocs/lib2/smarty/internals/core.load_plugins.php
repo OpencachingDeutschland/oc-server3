@@ -120,6 +120,4 @@ function smarty_core_load_plugins($params, &$smarty)
     }
 }
 
-/* vim: set expandtab: */
-
-?>
+/* vim: set expandtab: */;

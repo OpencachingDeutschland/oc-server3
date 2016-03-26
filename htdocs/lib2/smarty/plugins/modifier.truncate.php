@@ -45,6 +45,4 @@ function smarty_modifier_truncate($string, $length = 80, $etc = '...',
     }
 }
 
-/* vim: set expandtab: */
-
-?>
+/* vim: set expandtab: */;

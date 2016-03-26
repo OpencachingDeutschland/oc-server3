@@ -96,6 +96,4 @@ function smarty_core_read_cache_file(&$params, &$smarty)
     return true;
 }
 
-/* vim: set expandtab: */
-
-?>
+/* vim: set expandtab: */;

@@ -42,6 +42,4 @@ function smarty_core_is_trusted($params, &$smarty)
     return $_smarty_trusted;
 }
 
-/* vim: set expandtab: */
-
-?>
+/* vim: set expandtab: */;

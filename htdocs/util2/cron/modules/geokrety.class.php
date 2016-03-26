@@ -298,4 +298,3 @@ class geokrety
 			return $subnode->item(0)->getAttribute($attr);
 	}
 }
-?>

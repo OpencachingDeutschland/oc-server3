@@ -405,7 +405,7 @@ class picture
 		{
 			$this->nPictureId = $this->rePicture->getValue('id');
 			if ($this->getObjectType() == OBJECT_CACHE && $this->getMapPreview())
-				sql("UPDATE `pictures` SET `mappreview`=0 WHERE `object_type`='&1' AND `object_id`='&2' AND `id`!='&3'", 
+				sql("UPDATE `pictures` SET `mappreview`=0 WHERE `object_type`='&1' AND `object_id`='&2' AND `id`!='&3'",
 				    OBJECT_CACHE, $this->getObjectId(), $this->getPictureId());
 			sql_slave_exclude();
 		}
@@ -640,4 +640,3 @@ class picture
 	}
 
 }
-?>

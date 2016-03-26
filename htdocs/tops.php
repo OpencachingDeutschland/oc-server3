@@ -38,4 +38,3 @@
 
 	$tpl->assign('helppagelink', helppagelink('tops'));
 	$tpl->display();
-?>

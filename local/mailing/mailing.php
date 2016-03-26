@@ -37,9 +37,9 @@
 	foreach($sendto as $receiver)
 	{
 		$receiver = trim($receiver);
-		echo ++$n . "/$total: $receiver"; 
-		mail($receiver, 
-				 $subject, 
+		echo ++$n . "/$total: $receiver";
+		mail($receiver,
+				 $subject,
 				 $message,
 				 "From: $from_adr\r\n" .
 				 "MIME-Version: 1.0\r\n" .
@@ -50,5 +50,3 @@
 	}
 
 	echo "Time needed: " . (microtime(TRUE) - $starttime) . "s\n";
-	
-?>

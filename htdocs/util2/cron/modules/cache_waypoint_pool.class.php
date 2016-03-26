@@ -56,8 +56,8 @@ class cache_waypoint_pool
                                 AND ISNULL(`cNext`.`wp_oc`) 
                                 AND ISNULL(`cache_waypoint_pool`.`wp_oc`) 
                            ORDER BY `free_wp` ASC
-                              LIMIT 250", 
-                                    $opt['logic']['waypoint_pool']['prefix'], 
+                              LIMIT 250",
+                                    $opt['logic']['waypoint_pool']['prefix'],
                                     '^' . $opt['logic']['waypoint_pool']['prefix'] . '[' . $opt['logic']['waypoint_pool']['valid_chars'] . ']{1,}$');
     }
     else
@@ -71,8 +71,8 @@ class cache_waypoint_pool
                               UNION
                                    SELECT MAX(WPTODEC(`wp_oc`, '&2')) AS dec_wp
                                      FROM `cache_waypoint_pool` 
-                                 ) AS tbl", 
-                                '^' . $opt['logic']['waypoint_pool']['prefix'] . '[' . $opt['logic']['waypoint_pool']['valid_chars'] . ']{1,}$', 
+                                 ) AS tbl",
+                                '^' . $opt['logic']['waypoint_pool']['prefix'] . '[' . $opt['logic']['waypoint_pool']['valid_chars'] . ']{1,}$',
                                 $opt['logic']['waypoint_pool']['prefix']);
     }
 
@@ -110,10 +110,10 @@ class cache_waypoint_pool
                                    SELECT MIN(WPTODEC(`wp_oc`, '&3')) AS dec_wp
                                      FROM `cache_waypoint_pool` 
                                     WHERE WPTODEC(`wp_oc`, '&3')>WPTODEC('&1', '&3')
-                                 ) AS tbl", 
-                                $opt['logic']['waypoint_pool']['prefix'] . '100000', 
-                                $start_wp, 
-                                '^' . $opt['logic']['waypoint_pool']['prefix'] . '[' . $opt['logic']['waypoint_pool']['valid_chars'] . ']{1,}$', 
+                                 ) AS tbl",
+                                $opt['logic']['waypoint_pool']['prefix'] . '100000',
+                                $start_wp,
+                                '^' . $opt['logic']['waypoint_pool']['prefix'] . '[' . $opt['logic']['waypoint_pool']['valid_chars'] . ']{1,}$',
                                 $opt['logic']['waypoint_pool']['prefix']);
     
     // now, we have start and end waypoints ...
@@ -157,4 +157,3 @@ class cache_waypoint_pool
       return $prefix . $wp_value;
   }
 }
-?>

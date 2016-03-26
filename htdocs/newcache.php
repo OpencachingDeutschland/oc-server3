@@ -183,7 +183,7 @@
 				$headers .= '<script language="javascript" type="text/javascript" src="resource2/tinymce/tiny_mce_gzip.js"></script>' . "\n";
         $headers .= '<script language="javascript" type="text/javascript" src="resource2/tinymce/config/desc.js.php?cacheid=0&lang='.strtolower($locale).'"></script>' . "\n";
 			}
-			$headers .= '<script language="javascript" type="text/javascript" src="' . editorJsPath() . '"></script>' . "\n";	
+			$headers .= '<script language="javascript" type="text/javascript" src="' . editorJsPath() . '"></script>' . "\n";
 			tpl_set_var('htmlheaders', $headers);
 
 			//effort
@@ -949,4 +949,3 @@
 		// make the template and send it out
 		tpl_BuildTemplate();
 	}
-?>

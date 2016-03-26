@@ -134,5 +134,3 @@ abstract class ChildWp_Presenter
     return $this->cacheId;
   }
 }
-
-?>

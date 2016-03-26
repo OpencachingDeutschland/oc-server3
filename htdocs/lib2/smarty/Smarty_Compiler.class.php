@@ -333,7 +333,7 @@ class Smarty_Compiler extends Smarty {
                 for ($j = $i + 1; $j < $for_max; $j++) {
                     /* remove leading and trailing whitespaces of each line */
                     $text_blocks[$j] = preg_replace('![\t ]*[\r\n]+[\t ]*!', '', $text_blocks[$j]);
-                    if ($compiled_tags[$j] == '{/strip}') {                       
+                    if ($compiled_tags[$j] == '{/strip}') {
                         /* remove trailing whitespaces from the last text_block */
                         $text_blocks[$j] = rtrim($text_blocks[$j]);
                     }
@@ -371,7 +371,7 @@ class Smarty_Compiler extends Smarty {
         $compiled_content = preg_replace("~(?<!')language\s*=\s*[\"\']?\s*php\s*[\"\']?~", "<?php echo 'language=php' ?>\n", $compiled_content);
 
         // recover legit tags
-        $compiled_content = str_replace($tag_guard, '<?', $compiled_content); 
+        $compiled_content = str_replace($tag_guard, '<?', $compiled_content);
         
         // remove \n from the end of the file, if any
         if (strlen($compiled_content) && (substr($compiled_content, -1) == "\n") ) {
@@ -585,7 +585,7 @@ class Smarty_Compiler extends Smarty {
                 } else if ($this->_compile_block_tag($tag_command, $tag_args, $tag_modifier, $output)) {
                     return $output;
                 } else if ($this->_compile_custom_tag($tag_command, $tag_args, $tag_modifier, $output)) {
-                    return $output;                    
+                    return $output;
                 } else {
                     $this->_syntax_error("unrecognized tag '$tag_command'", E_USER_ERROR, __FILE__, __LINE__);
                 }
@@ -1266,7 +1266,7 @@ class Smarty_Compiler extends Smarty {
 
         if(empty($tokens)) {
             $_error_msg = $elseif ? "'elseif'" : "'if'";
-            $_error_msg .= ' statement requires arguments'; 
+            $_error_msg .= ' statement requires arguments';
             $this->_syntax_error($_error_msg, E_USER_ERROR, __FILE__, __LINE__);
         }
             
@@ -1368,8 +1368,8 @@ class Smarty_Compiler extends Smarty {
                         if ($is_arg_start != 0) {
                             if (preg_match('~^' . $this->_func_regexp . '$~', $tokens[$is_arg_start-1])) {
                                 $is_arg_start--;
-                            } 
-                        } 
+                            }
+                        }
                     } else
                         $is_arg_start = $i-1;
                     /* Construct the argument for 'is' expression, so it knows
@@ -1400,7 +1400,7 @@ class Smarty_Compiler extends Smarty {
                             }
                     } elseif(preg_match('~^' . $this->_var_regexp . '$~', $token) && (strpos('+-*/^%&|', substr($token, -1)) === false) && isset($tokens[$i+1]) && $tokens[$i+1] == '(') {
                         // variable function call
-                        $this->_syntax_error("variable function call '$token' not allowed in if statement", E_USER_ERROR, __FILE__, __LINE__);                      
+                        $this->_syntax_error("variable function call '$token' not allowed in if statement", E_USER_ERROR, __FILE__, __LINE__);
                     } elseif(preg_match('~^' . $this->_obj_call_regexp . '|' . $this->_var_regexp . '(?:' . $this->_mod_regexp . '*)$~', $token)) {
                         // object or variable
                         $token = $this->_parse_var_props($token);
@@ -2360,6 +2360,4 @@ function _smarty_sort_length($a, $b)
 }
 
 
-/* vim: set et: */
-
-?>
+/* vim: set et: */;

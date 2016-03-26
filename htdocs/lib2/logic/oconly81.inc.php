@@ -45,5 +45,3 @@
 		$tpl->assign('stat81_maxcount',max(10,$maxcount));
 		$tpl->assign('stat81_tsum', $tsum);
 	}
-
-?>

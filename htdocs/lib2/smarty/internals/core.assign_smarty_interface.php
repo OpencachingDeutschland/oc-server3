@@ -38,6 +38,4 @@ function smarty_core_assign_smarty_interface($params, &$smarty)
         $smarty->_smarty_vars['request'] = $_smarty_vars_request;
 }
 
-/* vim: set expandtab: */
-
-?>
+/* vim: set expandtab: */;

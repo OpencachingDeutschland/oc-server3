@@ -95,4 +95,3 @@ class HTMLPurifier_URIScheme_data extends HTMLPurifier_URIScheme {
     public function muteErrorHandler($errno, $errstr) {}
 
 }
-

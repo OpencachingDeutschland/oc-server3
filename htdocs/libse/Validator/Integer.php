@@ -36,5 +36,3 @@ class Validator_Integer extends Validator_Numeric
     return intval($value);
   }
 }
-
-?>

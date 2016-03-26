@@ -15,5 +15,3 @@ function smarty_function_rand($params, &$smarty)
     
     return rand($min, $max);
 }
-
-?>

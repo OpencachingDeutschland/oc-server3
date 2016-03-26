@@ -42,5 +42,3 @@ abstract class Validator_Numeric
   abstract protected function getValidateRegex();
   abstract protected function getValue($value);
 }
-
-?>

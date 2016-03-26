@@ -49,5 +49,3 @@ function getCacheIcon($user_id, $cache_id, $cache_status, $cache_userid, $iconna
 
 	return $iconname . $iconext;
 }
-
-?>

@@ -123,4 +123,3 @@
 	}
 
 	$tpl->redirect('index.php');
-?>

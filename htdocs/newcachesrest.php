@@ -35,7 +35,7 @@
 		                       LEFT JOIN `sys_trans_text` ON `sys_trans`.`id`=`sys_trans_text`.`trans_id` AND `sys_trans_text`.`lang`='&1'
 		                       LEFT JOIN `caches_attributes` `ca` ON `ca`.`cache_id`=`caches`.`cache_id` AND `ca`.`attrib_id`=6
 		                           WHERE `status` = 1
-		                        ORDER BY `country_name`, `caches`.`date_created` DESC LIMIT 200", 
+		                        ORDER BY `country_name`, `caches`.`date_created` DESC LIMIT 200",
 		                                 $opt['template']['locale']);
 		$tpl->assign_rs('newCaches', $rsNewCaches);
 		sql_free_result($rsNewCaches);
@@ -53,7 +53,7 @@
 	              $country,
 	              $opt['template']['locale'])
 			);
-		$tpl->assign('userCountryCode', $login->getUserCountry()); 
+		$tpl->assign('userCountryCode', $login->getUserCountry());
 		$tpl->assign(
 			'userCountryName',
 			sql_value("SELECT IFNULL(`sys_trans_text`.`text`, `countries`.`name`) 
@@ -68,4 +68,3 @@
 }
 
 	$tpl->display();
-?>

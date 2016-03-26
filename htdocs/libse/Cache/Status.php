@@ -15,5 +15,3 @@ class Cache_Status
 	const Blocked = 6;
 	const BlockedHidden = 7;
 }
-
-?>

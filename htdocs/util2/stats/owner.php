@@ -35,12 +35,10 @@
 			HAVING COUNT(*) >= $limit
 			ORDER BY COUNT(*) DESC");
 
-		$n = 1;		
+		$n = 1;
 		while ($r = sql_fetch_assoc($rs))
 			echo "  <tr><td style='text-align:right'>&nbsp;&nbsp;".($n++).".&nbsp;&nbsp;&nbsp;</td><td style='text-align:right'>". $r['count'] . "</td><td>&nbsp;&nbsp;". $r['name'] . "</td></tr>\n";
 		sql_free_result($rs);
 	
 		echo "</table>\n";
-	} 
-		
-?>
+	}

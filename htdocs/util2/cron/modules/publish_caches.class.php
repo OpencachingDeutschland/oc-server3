@@ -31,4 +31,3 @@ class publish_caches
 		sql_free_result($rsPublish);
 	}
 }
-?>

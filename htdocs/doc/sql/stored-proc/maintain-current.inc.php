@@ -44,7 +44,7 @@
 	*   development systems, or to delete bad replicated data from other nodes;
 	*   never delete local caches or users on production systems !!
 	*   'fastdelete' will skip deleting any dependent data.
-	*/ 
+	*/
 
 
 	/* get prefered language from string
@@ -2093,5 +2093,3 @@
 		CREATE FUNCTION `dbsvTriggerVersion` () RETURNS INT
 		RETURN '&1'",
 		current_triggerversion());
-
-?>

@@ -12,5 +12,3 @@ class Validator_AlwaysValid
     return true;
   }
 }
-
-?>

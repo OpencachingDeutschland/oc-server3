@@ -362,7 +362,7 @@ function search_output()
 				ORDER BY
 					`cache_logs`.`order_date` DESC,
 					`cache_logs`.`date_created` DESC,
-					`cache_logs`.`id` DESC"  
+					`cache_logs`.`id` DESC"
 				. $limit,
 				$r['cacheid'], $user_id
 			);
@@ -439,7 +439,7 @@ function search_output()
 		{
 			$thisattribute = mb_ereg_replace('{attrib_id}', '42', $gpxAttributes);
 			$thisattribute = mb_ereg_replace('{attrib_inc}', '1', $thisattribute);
-			$thisattribute = mb_ereg_replace('{attrib_name}', 'Needs maintenance', $thisattribute); 
+			$thisattribute = mb_ereg_replace('{attrib_name}', 'Needs maintenance', $thisattribute);
 			                                                  // with lowercase m, other than log type
 			$attribentries .= $thisattribute . "\n";
 		}
@@ -580,5 +580,3 @@ function search_output()
 
 		return $retval;
 	}
-
-?>

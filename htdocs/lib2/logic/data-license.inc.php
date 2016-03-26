@@ -74,5 +74,3 @@ function getLicenseDisclaimer($userid, $username, $userlicense, $cacheid, $langu
 	else
 		return mb_ereg_replace("&copy;","©",$ltext);
 }
-
-?>

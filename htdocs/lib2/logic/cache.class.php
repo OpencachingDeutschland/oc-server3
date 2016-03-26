@@ -340,7 +340,7 @@ class cache
 	{
 		//prepare the logs
 		$rsLogs = sql("SELECT COUNT(*) FROM `cache_logs` WHERE `cache_id`='&1'", $cacheid);
-		$rLog = sql_fetch_assoc($rsLogs);		
+		$rLog = sql_fetch_assoc($rsLogs);
 		sql_free_result($rsLogs);
 
 		return $rLog;
@@ -531,7 +531,7 @@ class cache
 
 		sql("INSERT INTO `logentries` (`module`, `eventid`, `userid`, `objectid1`, `objectid2`, `logtext`)
 		                       VALUES ('cache', 5, '&1', '&2', '&3', '&4')",
-		                       $login->userid, $this->nCacheId, 0, 
+		                       $login->userid, $this->nCacheId, 0,
 		                       'Cache ' . sql_escape($this->nCacheId) . ' has changed the owner from userid ' . sql_escape($this->getUserId()) . ' to ' . sql_escape($userid) . ' by ' . sql_escape($login->userid));
 			// Adoptions now are recorded by trigger in cache_adoptions table.
 			// Recording adoptions in 'logentries' may be discarded after ensuring that the
@@ -682,7 +682,7 @@ class cache
 		while ($rCoord = sql_fetch_assoc($rs))
 		{
 			$coord = new coordinate($rCoord['latitude'], $rCoord['longitude']);
-			$coords[] = array('date' => $rCoord['date_created'], 
+			$coords[] = array('date' => $rCoord['date_created'],
 			                  'coord' => $coord->getDecimalMinutes(),
 			                  'user_id' => $rCoord['user_id'],
 			                  'username' => $rCoord['username']);
@@ -740,7 +740,7 @@ class cache
 		
 		$logtypeNames = get_logtype_names();
 		$allowedLogtypes = get_cache_log_types($this->getCacheId(), $oldLogType);
-		$defaultLogType = $userLogType; 
+		$defaultLogType = $userLogType;
 		if (!logtype_ok($this->getCacheId(), $defaultLogType, $oldLogType))
 			$defaultLogType = $allowedLogtypes[0];
 		
@@ -775,4 +775,3 @@ class cache
 						$this->getCacheId()) == 1);
 	}
 }
-?>

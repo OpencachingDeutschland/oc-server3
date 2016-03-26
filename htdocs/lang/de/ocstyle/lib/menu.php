@@ -493,5 +493,3 @@ function mnu_EchoHelpLink($tplname)
 	if ($helplink != "")
 		echo $helplink . '<img src="resource2/ocstyle/images/misc/32x32-help.png" /></a>';
 }
-
-?>

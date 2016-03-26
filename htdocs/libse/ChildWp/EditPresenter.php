@@ -34,5 +34,3 @@ class ChildWp_EditPresenter extends ChildWp_Presenter
     $template->assign(self::tpl_child_id, $this->childId);
   }
 }
-
-?>

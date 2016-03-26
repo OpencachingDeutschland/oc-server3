@@ -160,7 +160,7 @@
 			&& ($logTimeMinute == "" || is_numeric($logTimeMinute)))
 		{
 			$validate['dateOk'] = checkdate(	$logDateMonth, $logDateDay, $logDateYear)
-											&& ($logDateYear >= 2000) 
+											&& ($logDateYear >= 2000)
 											&& ($logTimeHour>=0)
 											&& ($logTimeHour<=23)
 											&& ($logTimeMinute>=0)
@@ -328,4 +328,3 @@
 	$tpl->assign('scrollposy', isset($_REQUEST['scrollposy']) ? $_REQUEST['scrollposy'] + 0 : 0);
 	$tpl->assign('validate', $validate);
 	$tpl->display();
-?>

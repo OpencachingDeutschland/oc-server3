@@ -36,4 +36,3 @@
 
 	$tpl->assign('username', $username);
 	$tpl->display();
-?>

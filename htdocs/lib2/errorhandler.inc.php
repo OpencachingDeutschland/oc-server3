@@ -132,5 +132,3 @@ function admin_errormail($to, $errortype, $message, $headers)
 	else
 		return ($old_logsize < $error_mail_limit);
 }
-
-?>

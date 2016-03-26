@@ -88,6 +88,4 @@ function smarty_modifier_escape($string, $esc_type = 'html', $char_set = 'ISO-88
     }
 }
 
-/* vim: set expandtab: */
-
-?>
+/* vim: set expandtab: */;

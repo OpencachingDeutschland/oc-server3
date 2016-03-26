@@ -845,5 +845,3 @@ function verify()
 	}
 	$tpl->assign('inconsistencies', $inconsistencies);
 }
-
-?>

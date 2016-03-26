@@ -53,6 +53,4 @@ function smarty_modifier_date_format($string, $format = '%b %e, %Y', $default_da
     return strftime($format, $timestamp);
 }
 
-/* vim: set expandtab: */
-
-?>
+/* vim: set expandtab: */;

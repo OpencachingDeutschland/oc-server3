@@ -192,5 +192,3 @@ function get_locale_desc($rCache)
 
 	return $rCache;
 }
-
-?>

@@ -95,5 +95,3 @@ class CacheNote_Presenter
     return $this->request->get(self::req_incl_coord);
   }
 }
-
-?>

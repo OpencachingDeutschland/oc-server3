@@ -63,4 +63,3 @@ function pAppendSites($parentId, $viewall, $sublevel, &$aItems)
 	}
 	sql_free_result($rs);
 }
-?>

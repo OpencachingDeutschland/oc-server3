@@ -143,6 +143,3 @@ function search_output()
 
 	append_output($kmlFoot);
 }
-
-
-?>

@@ -216,6 +216,3 @@ function dateDiff($interval, $dateTimeBegin, $dateTimeEnd)
       return(floor($dif/86400)); //86400s=1d
   }
 }
-
-
-?>

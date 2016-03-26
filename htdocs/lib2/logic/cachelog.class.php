@@ -338,13 +338,13 @@ class cachelog
 						ORDER BY `date_created` DESC,
 								 `id` DESC
 						LIMIT 1)",
-				$userId); 
+				$userId);
 				
-		$rLastLog = sql_fetch_array($rs); 
-		sql_free_result($rs); 
+		$rLastLog = sql_fetch_array($rs);
+		sql_free_result($rs);
 		
-		if ($rLastLog) 
-		{ 
+		if ($rLastLog)
+		{
 			$rs = sql("
 						SELECT COUNT(*) as `masslogs`
 						FROM `cache_logs`
@@ -355,14 +355,13 @@ class cachelog
 			$rLastLog['date'],
 			$rLastLog['text']);
 			 
-			$r = sql_fetch_array($rs); 
-			$masslogs = $r['masslogs']; 
-			sql_free_result($rs); 
-		} 
-		else 
+			$r = sql_fetch_array($rs);
+			$masslogs = $r['masslogs'];
+			sql_free_result($rs);
+		}
+		else
 			$masslogs = 0;
 		 
 		return ($masslogs > $opt['logic']['masslog']['count']);
 	}
 }
-?>

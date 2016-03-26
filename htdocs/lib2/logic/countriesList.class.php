@@ -66,4 +66,3 @@ class countriesList
 		return sql_value("SELECT IFNULL(`sys_trans_text`.`text`, `countries`.`name`) FROM `countries` LEFT JOIN `sys_trans` ON `countries`.`trans_id`=`sys_trans`.`id` LEFT JOIN `sys_trans_text` ON `sys_trans`.`id`=`sys_trans_text`.`trans_id` AND `sys_trans_text`.`lang`='&2' WHERE `countries`.`short`='&1'", '', $id, $opt['template']['locale']);;
 	}
 }
-?>

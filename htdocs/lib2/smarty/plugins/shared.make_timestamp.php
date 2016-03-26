@@ -41,6 +41,4 @@ function smarty_make_timestamp($string)
 
 }
 
-/* vim: set expandtab: */
-
-?>
+/* vim: set expandtab: */;

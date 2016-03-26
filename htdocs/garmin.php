@@ -125,4 +125,3 @@
 	$tpl->title = $rCache['name'];
 
 	$tpl->display();
-?>

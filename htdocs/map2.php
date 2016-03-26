@@ -124,7 +124,7 @@
 	// process start params
 	$bGMInitCookiePos = true;
 	if (isset($_REQUEST['lat']) &&
-	    isset($_REQUEST['lon']) && 
+	    isset($_REQUEST['lon']) &&
 	    isset($_REQUEST['zoom']))
 	{
 		$nGMInitLat = $_REQUEST['lat']+0;
@@ -452,7 +452,7 @@ function output_searchresult($nResultId, $compact, $nLon1, $nLon2, $nLat1, $nLat
 			sql_value("SELECT option_value FROM user_options WHERE user_id='&1' AND option_id=8",
 	               $opt['map']['maxrecords'] + 0, $login->userid);
 		if ($user_maxrecords > 0 && (!$useragent_msie || $user_maxrecords < $maxrecords))
-			$maxrecords = min(max($user_maxrecords, $opt['map']['min_maxrecords']), 
+			$maxrecords = min(max($user_maxrecords, $opt['map']['min_maxrecords']),
 			                  $opt['map']['max_maxrecords']);
 	}
 	else
@@ -502,7 +502,7 @@ function output_searchresult($nResultId, $compact, $nLon1, $nLon2, $nLat1, $nLat
 
 		while ($r = sql_fetch_assoc($rs))
 		{
-			$flags = 0; 
+			$flags = 0;
 			if ($r['owned']) $flags |= 1;
 			if ($r['found']) $flags |= 2;
 			if ($r['notfound']) $flags |= 4;
@@ -513,14 +513,14 @@ function output_searchresult($nResultId, $compact, $nLon1, $nLon2, $nLat1, $nLat
 				       xmlentities(
 				         $r['wp_oc'] . '/' . round($r['longitude'],5) . '/' .
 				         round($r['latitude'],5) . '/' . $r['type'] . '/' . $flags) . '"' .
-				         (isset($r['cachename']) ? ' n="' . xmlentities($r['cachename']) . '"' : '') . 
+				         (isset($r['cachename']) ? ' n="' . xmlentities($r['cachename']) . '"' : '') .
 				     ' />';
 			else
 				echo '<cache wp="' . xmlentities($r['wp_oc']) . '"' .
-							' lon="' . xmlentities(round($r['longitude'],5)) . '"' . 
-							' lat="' . xmlentities(round($r['latitude'],5)) . '"' . 
+							' lon="' . xmlentities(round($r['longitude'],5)) . '"' .
+							' lat="' . xmlentities(round($r['latitude'],5)) . '"' .
 							' type="' . xmlentities($r['type']) . '"' .
-							(isset($r['cachename']) ? ' n="' . xmlentities($r['cachename']) . '"' : '') .  
+							(isset($r['cachename']) ? ' n="' . xmlentities($r['cachename']) . '"' : '') .
 							' f="' . xmlentities($flags) . '" />' . "\n";
 		}
 		sql_free_result($rs);
@@ -529,4 +529,3 @@ function output_searchresult($nResultId, $compact, $nLon1, $nLon2, $nLat1, $nLat
 
 	exit;
 }
-?>

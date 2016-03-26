@@ -28,4 +28,3 @@
 
 	//common errors
 	$error_pagenotexist = t('The called page does not exist!');
-?>

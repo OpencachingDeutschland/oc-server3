@@ -15,5 +15,3 @@
 		$tpl->redirect('login.php?target=mystatpic.php');
 	
 	$tpl->display();
-
-?>

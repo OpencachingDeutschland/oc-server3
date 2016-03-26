@@ -218,4 +218,3 @@
 						RETURN 0;
 					END IF;
 			 END;");
-?>

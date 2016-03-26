@@ -22,7 +22,7 @@ function __autoload($class_name)
 	$file3 = $opt['rootpath'] . 'libse/' . str_replace('_', '/', $class_name) . '.php';
 	if (file_exists($file1))
 		require_once($file1);
-	elseif (file_exists($file2)) 
+	elseif (file_exists($file2))
 		require_once($file2);
 	elseif (file_exists($file3))
 		require_once($file3);
@@ -75,7 +75,7 @@ function __autoload($class_name)
 	// set stylepath and langpath
 	if (isset($opt['template']['style']))
 	{
-		if (strpos($opt['template']['style'], '.') !== false || 
+		if (strpos($opt['template']['style'], '.') !== false ||
 		    strpos($opt['template']['style'], '/') !== false)
 			$opt['template']['style'] = $opt['template']['default']['style'];
 
@@ -210,7 +210,7 @@ function set_language()
 
 	if (isset($opt['template']['locale']) && $opt['template']['locale'] != '')
 	{
-		if (strpos($opt['template']['locale'], '.') !== false || 
+		if (strpos($opt['template']['locale'], '.') !== false ||
 		    strpos($opt['template']['locale'], '/') !== false)
 			$opt['template']['locale'] = $opt['template']['default']['locale'];
 
@@ -374,6 +374,3 @@ function use_current_protocol_in_html($url)
 	else
 		return $url;
 }
-
-
-?>

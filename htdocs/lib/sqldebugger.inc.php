@@ -195,7 +195,7 @@ function sqldbg_execute($sql, $bSlave)
 	{
 		$sqlexplain = sqldbg_strip_from($sqlexplain);
 	}
-	else if ((mb_strtoupper(mb_substr($sqlexplain, 0, 12)) == 'INSERT INTO ') || 
+	else if ((mb_strtoupper(mb_substr($sqlexplain, 0, 12)) == 'INSERT INTO ') ||
 			      (mb_strtoupper(mb_substr($sqlexplain, 0, 19)) == 'INSERT IGNORE INTO '))
 	{
 		$sqlexplain = sqldbg_strip_temptable($sqlexplain);
@@ -287,7 +287,7 @@ function sqldbg_execute($sql, $bSlave)
 	// dont use query cache!
 	$sql = sqldbg_insert_nocache($sql);
 
-	$bSqlExecution = new Cbench; 
+	$bSqlExecution = new Cbench;
 	$bSqlExecution->start();
 	$rsResult = mysql_query($sql, $dblink);
 	$bError = ($rsResult == false);

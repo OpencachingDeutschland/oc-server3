@@ -32,7 +32,7 @@
   */
 
   // see also lib2/search/search.kml.inc.php
-  $kmlLine = 
+  $kmlLine =
 '
 <Placemark>
   <description><![CDATA['.$t_by.' {username}<br><br><a href="{urlbase}viewcache.php?cacheid={cacheid}">'.$t_showdesc.'</a><br>&nbsp;<br><table cellspacing="0" cellpadding="0" border="0"><tr><td>{typeimgurl} </td><td>'.$t_type.' {type}<br>'.$t_size.' {size}</td></tr><tr><td colspan="2">'.$t_difficulty.'<br>'.$t_terrain.'</td></tr></table>]]></description>
@@ -337,5 +337,3 @@ function echoZoomIn($lon_from, $lon_to, $lat_from, $lat_to)
 		}
 	}
 }
-
-?>

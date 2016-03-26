@@ -76,7 +76,7 @@ class translate_filescan
 		$nEnd = 0;
 		while ($nEnd==0)
 		{
-			$nEnd = strpos($sCode, "'", $nStartSearch); 
+			$nEnd = strpos($sCode, "'", $nStartSearch);
 			if (substr($sCode, $nEnd-1, 1) == '\\')
 			{
 				$nStartSearch = $nEnd+1;
@@ -93,7 +93,7 @@ class translate_filescan
 		while ($nNextPos !== false)
 		{
 			// check for match
-			if ((substr($this->msContent, $nNextPos, 3) == '{'.'t}') || 
+			if ((substr($this->msContent, $nNextPos, 3) == '{'.'t}') ||
 			    (substr($this->msContent, $nNextPos, 3) == '{'.'t '))
 			{
 				$nStart = strpos($this->msContent, '}', $nNextPos);
@@ -122,4 +122,3 @@ class translate_filescan
 		return $nLine;
 	}
 }
-?>

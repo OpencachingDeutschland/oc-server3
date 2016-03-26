@@ -64,7 +64,10 @@
 	$access = new translateAccess();
 
 	if (!$access->hasAccess())
-		$tpl->error(ERROR_NO_ACCESS);
+		if ($login->admin & ADMIN_USER)
+			$tpl->redirect('adminreports.php');
+		else
+			$tpl->error(ERROR_NO_ACCESS);
 
 	$action = isset($_REQUEST['action']) ? $_REQUEST['action'] : '';
 

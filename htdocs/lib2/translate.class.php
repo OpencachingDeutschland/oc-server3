@@ -171,5 +171,3 @@ class translateEdit extends translate
 		return $text . ' <a href= translate.php?action=edit&id=' . $r['id'] . '>Edit</a>';
 	}
 }
-
-?>

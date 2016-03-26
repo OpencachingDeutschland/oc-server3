@@ -96,4 +96,3 @@
 		$tpl->assign('waitdays_min', false);
 	
 	$tpl->display();
-?>

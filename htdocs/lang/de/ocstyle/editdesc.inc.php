@@ -27,4 +27,3 @@
 	$picturelines = '{lines}';
 
 	$submit = t('Save');
-?>

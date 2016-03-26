@@ -78,4 +78,3 @@
 	$tpl->assign('target', $target);
 
 	$tpl->display();
-?>

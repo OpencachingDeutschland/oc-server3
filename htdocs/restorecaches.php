@@ -527,7 +527,7 @@ function append_data(&$data, &$admins, $wp_oc, $r, $field, $oldvalue, $newvalue)
 		if (!isset($admins[$mdate][$wp]))
 			$admins[$mdate][$wp] = array();
 		$admins[$mdate][$wp][$r['restored_by'] + 0]
-			= "<a href='viewprofile.php?userid=" . $r['restored_by'] . "' target='_blank'>" .  
+			= "<a href='viewprofile.php?userid=" . $r['restored_by'] . "' target='_blank'>" .
 			  sql_value("SELECT `username` FROM `user` WHERE `user_id`='&1'", "", $r['restored_by']) .
 				"</a>";
 	}
@@ -1007,5 +1007,3 @@ function get_current_picid($picid)
 
 	return $picid;
 }
-
-?>

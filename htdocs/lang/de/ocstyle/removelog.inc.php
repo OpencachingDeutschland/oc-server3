@@ -30,6 +30,3 @@ function removed_message_title($lang)
 	global $translate;
 	return $translate->t('The owner of the cache has written the following comment to you:', '', basename(__FILE__), __LINE__, '', 1, $lang) . "\n---";
 }
-
-
-?>

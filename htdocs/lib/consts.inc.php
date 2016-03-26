@@ -34,4 +34,3 @@
 
 	// for ratings
 	define('rating_percentage', 10); // percentage of found caches to be rated
-?>

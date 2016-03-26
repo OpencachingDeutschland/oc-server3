@@ -10,9 +10,9 @@
 	//get the article name to display
 	$article = '';
 	$language = $opt['template']['locale'];
-	if (isset($_REQUEST['page']) && 
-	    (mb_strpos($_REQUEST['page'], '.') === false) && 
-	    (mb_strpos($_REQUEST['page'], '/') === false) && 
+	if (isset($_REQUEST['page']) &&
+	    (mb_strpos($_REQUEST['page'], '.') === false) &&
+	    (mb_strpos($_REQUEST['page'], '/') === false) &&
 	    (mb_strpos($_REQUEST['page'], '\\') === false))
 	{
 		$article = $_REQUEST['page'];
@@ -92,4 +92,3 @@
 	}
 
 	$tpl->display();
-?>

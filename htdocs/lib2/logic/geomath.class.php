@@ -188,4 +188,3 @@ class geomath
 		return $lon - $distance * 180 / (abs(sin((90 - $lat) * 3.14159 / 180 )) * 6378 * $distanceMultiplier * 3.14159);
 	}
 }
-?>

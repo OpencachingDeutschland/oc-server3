@@ -301,5 +301,3 @@ function cronjobs_enabled()
 	       // -- This will not work if the server is access protected.
 	       exec('ps -C httpd|grep httpd');
 }
-
-?>

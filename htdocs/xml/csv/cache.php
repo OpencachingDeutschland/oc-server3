@@ -47,4 +47,3 @@
 		echo ';';
 		echo '""';  // obsolete Navicache WP
 	}
-?>

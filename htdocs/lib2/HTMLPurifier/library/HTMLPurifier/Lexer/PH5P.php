@@ -2229,7 +2229,7 @@ class HTML5TreeConstructer {
                     if($this->elementInScope($token['name'])) {
                         $this->generateImpliedEndTags();
 
-                    } 
+                    }
 
                     if(end($this->stack)->nodeName !== $token['name']) {
                         /* Now, if the current node is not an element with the
@@ -3901,4 +3901,3 @@ class HTML5TreeConstructer {
         return $this->dom;
     }
 }
-?>

@@ -40,4 +40,3 @@
 
 	$tpl->assign('admins',$admins);
 	$tpl->display();
-?>

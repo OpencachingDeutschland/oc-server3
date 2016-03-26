@@ -103,4 +103,3 @@ class rating_tops
 		sql_drop_temp_table('topResult');
 	}
 }
-?>

@@ -40,6 +40,3 @@
 			WHERE `log_types`.`id`='" . sql_escape($logtype) . "'",
 			'');
 	}
-
-
-?>

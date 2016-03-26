@@ -19,5 +19,3 @@ function smarty_modifier_sprintf($text, $format)
 }
 
 /* vim: set expandtab: */
-
-?>

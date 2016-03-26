@@ -19,7 +19,7 @@
 		$tpl->error(ERROR_NO_ACCESS);
 	
 	if (isset($_REQUEST['success']) && $_REQUEST['success'])
-	  $tpl->assign('success','1'); 
+	  $tpl->assign('success','1');
 
 	$action = isset($_REQUEST['action']) ? $_REQUEST['action'] : 'display';
 
@@ -79,12 +79,12 @@ function formAction()
 	if ($commit == 0)
 		$tpl->error($translate->t('You have to check that you are sure!','','',0));
 
-	if ($disduelicense == 1) 
+	if ($disduelicense == 1)
 	{
 		$errmesg = $user->disduelicense();
 		if ($errmesg !== true)
 			$tpl->error($errmesg);
-	} 
+	}
 	else if ($disable == 1)
 	{
 		if ($user->disable() == false)
@@ -100,8 +100,8 @@ function formAction()
 		$user->addEmailProblem($datalicense);
 	}
 	
-	$tpl->redirect('adminuser.php?action=searchuser&username=' . urlencode($username) . 
-								 '&success=' . ($disduelicense + $disable));  
+	$tpl->redirect('adminuser.php?action=searchuser&username=' . urlencode($username) .
+								 '&success=' . ($disduelicense + $disable));
 }
 
 function searchUser()
@@ -147,4 +147,3 @@ function searchUser()
 
 	$tpl->display();
 }
-?>

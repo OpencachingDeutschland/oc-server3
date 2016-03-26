@@ -26,5 +26,3 @@
 		else
 			echo 'unknown';
 	}
-
-?>

@@ -97,5 +97,3 @@ class ChildWp_Controller
       $template->error(ERROR_CACHE_NOT_EXISTS);
   }
 }
-
-?>

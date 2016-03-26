@@ -76,7 +76,7 @@ function getChildWaypoints($cacheid)
 	else
 		$sPreferedDescLang = $opt['template']['locale'] . ',EN';
 
-	$logpics = isset($_REQUEST['logpics']) && ($_REQUEST['logpics'] == 1); 
+	$logpics = isset($_REQUEST['logpics']) && ($_REQUEST['logpics'] == 1);
 
 	//$tpl->caching = true;
 	//$tpl->cache_lifetime = 31*24*60*60;
@@ -248,7 +248,7 @@ function getChildWaypoints($cacheid)
 	if (isset($_REQUEST['log']))
 	  switch ($_REQUEST['log'])
 		{
-			case 'N': $rscount = 0; 
+			case 'N': $rscount = 0;
 								break;
 								
 			case 'A': $rscount = current(cache::getLogsCount($cacheid));
@@ -260,11 +260,11 @@ function getChildWaypoints($cacheid)
 			          // with parameters 5 or 10.
 			          if ($_REQUEST['log'] >= 0 && $_REQUEST['log'] <= 100)
 									$rscount = $_REQUEST['log'] + 0;
-		}	
+		}
 
 	$logs = cache::getLogsArray($cacheid, 0, $rscount+1, false, $rCache['protect_old_coords']);
 	
-	if (isset($logs[$rscount])) 
+	if (isset($logs[$rscount]))
 	{
 		unset($logs[$rscount]);
 		$tpl->assign('morelogs', true);
@@ -283,7 +283,7 @@ function getChildWaypoints($cacheid)
 	       INNER JOIN `npa_types` ON `npa_areas`.`type_id`=`npa_types`.`id` 
 	            WHERE `cache_npa_areas`.`cache_id`='&1' AND `npa_types`.`no_warning`=0
 	         GROUP BY `npa_areas`.`type_id`, `npa_areas`.`name`
-	         ORDER BY `npa_types`.`ordinal` ASC", 
+	         ORDER BY `npa_types`.`ordinal` ASC",
 	                  $cacheid);
 	$tpl->assign_rs('npaareasWarning', $rs);
 	sql_free_result($rs);
@@ -294,7 +294,7 @@ function getChildWaypoints($cacheid)
 	       INNER JOIN `npa_types` ON `npa_areas`.`type_id`=`npa_types`.`id` 
 	            WHERE `cache_npa_areas`.`cache_id`='&1' AND `npa_types`.`no_warning`=1
 	         GROUP BY `npa_areas`.`type_id`, `npa_areas`.`name`
-	         ORDER BY `npa_types`.`ordinal` ASC", 
+	         ORDER BY `npa_types`.`ordinal` ASC",
 	                  $cacheid);
 	$tpl->assign_rs('npaareasNoWarning', $rs);
 	sql_free_result($rs);
@@ -303,7 +303,7 @@ function getChildWaypoints($cacheid)
 	 */
 	$tpl->assign('attributes', attribute::getAttrbutesListArrayByCacheId($cacheid));
 	$tpl->assign('cachelists', cachelist::getListsByCacheId($cacheid, $rCache['show_cachelists']));
-	$tpl->assign('watchclinfo', isset($_REQUEST['watchinfo']) && $_REQUEST['watchinfo'] == 1 && 
+	$tpl->assign('watchclinfo', isset($_REQUEST['watchinfo']) && $_REQUEST['watchinfo'] == 1 &&
 	                            cachelist::watchingCacheByListsCount($login->userid, $cacheid) > 0);
 
 	/* geokrets
@@ -378,4 +378,3 @@ function getChildWaypoints($cacheid)
 
 	// display the page
 	$tpl->display();
-?>

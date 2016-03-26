@@ -66,6 +66,3 @@ function search_output()
 	$ovlFoot = mb_ereg_replace('{symbolscount}', $nr - 1, $ovlFoot);
 	append_output($ovlFoot);
 }
-
-
-?>

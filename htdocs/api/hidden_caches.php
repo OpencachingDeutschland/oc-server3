@@ -23,5 +23,3 @@
 	$wp_ocs = sql_fetch_column($rs);
 	foreach ($wp_ocs as $wp_oc)
 		echo $wp_oc."\n";
-
-?>

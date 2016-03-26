@@ -56,5 +56,3 @@ function smarty_modifier_hyperlink($text)
 }
 
 /* vim: set expandtab: */
-
-?>

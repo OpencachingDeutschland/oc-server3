@@ -66,5 +66,3 @@ function smarty_modifier_rot13html($str)
 }
 
 /* vim: set expandtab: */
-
-?>

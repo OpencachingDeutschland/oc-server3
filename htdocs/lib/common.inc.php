@@ -818,5 +818,3 @@ function helppagelink($ocpage)
 
 	return "";
 }
-
-?>

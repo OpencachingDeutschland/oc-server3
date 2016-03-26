@@ -7,5 +7,3 @@
 
 	$newlogs_rest = true;
 	require("newlogs.php");
-
-?>

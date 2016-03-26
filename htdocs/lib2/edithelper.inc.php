@@ -112,5 +112,3 @@ function editorJsPath()
 {
 	return 'resource2/ocstyle/js/editor.js?ft=' . filemtime('resource2/ocstyle/js/editor.js');
 }
-
-?>

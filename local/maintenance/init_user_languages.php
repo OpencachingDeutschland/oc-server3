@@ -36,5 +36,3 @@
 	}
 	echo "$set of $processed " . ($write ? '' : 'would be ') . "set\n";
 	sql_free_result($rs);
-
-?>

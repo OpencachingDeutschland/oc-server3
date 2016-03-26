@@ -248,4 +248,3 @@
 	$tpl->assign('mappreviewchecked', $picture->getMapPreview());
 
 	$tpl->display();
-?>

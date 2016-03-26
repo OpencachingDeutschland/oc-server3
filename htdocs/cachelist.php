@@ -32,10 +32,8 @@
 		}
 
 		$tpl->redirect("search.php?searchto=searchbylist&listid=" . $id .
-		               ($password != "" ? "&listkey=" . urlencode($password) : "") . 
+		               ($password != "" ? "&listkey=" . urlencode($password) : "") .
 		               "&showresult=1&f_disabled=0&f_inactive=0&f_ignored=1&sort=byname");
 	}
 	else
 		$tpl->redirect("cachelists.php");
-
-?>

@@ -13,5 +13,3 @@ function smarty_modifier_smiley($string)
 
 	return str_replace($smiley['text'], $smiley['spaced_image'], $string);
 }
-
-?>

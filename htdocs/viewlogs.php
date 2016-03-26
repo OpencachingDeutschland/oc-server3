@@ -48,7 +48,7 @@
 	//$tpl->cache_id = $cache_id . '|' . $start . '|' . $count;
 
 	if ($cache_id != 0)
-	{ 
+	{
 		//get cache record
 		$rs = sql("
 			SELECT
@@ -90,4 +90,3 @@
 	
 
 	$tpl->display();
-?>

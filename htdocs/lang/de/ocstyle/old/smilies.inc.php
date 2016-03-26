@@ -103,4 +103,3 @@ $smileyshow = array(
 	'1',
 	'1'
 );
-?>

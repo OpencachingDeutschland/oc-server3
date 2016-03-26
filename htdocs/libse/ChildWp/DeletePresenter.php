@@ -40,5 +40,3 @@ class ChildWp_DeletePresenter extends ChildWp_Presenter
     return true;
   }
 }
-
-?>

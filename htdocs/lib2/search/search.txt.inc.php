@@ -216,5 +216,3 @@ function search_output()
 	{
 		return mb_ereg_replace("\r\r\n" ,"\r\n" , mb_ereg_replace("\n" ,"\r\n" , $str));
 	}
-
-?>

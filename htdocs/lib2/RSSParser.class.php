@@ -97,5 +97,3 @@ class RSSParser {
 		return $rss;
 	}
 }
-
-?>

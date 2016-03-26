@@ -106,7 +106,7 @@
 		var $mimetype;
 
 		function RSSItem()
-		{ 
+		{
 			$this->tags = array();
 		}
 
@@ -160,9 +160,8 @@
 			$umlaute = Array("/ä/","/ö/","/ü/","/Ä/","/Ö/","/Ü/","/ß/");
 			$replace = Array("ae","oe","ue","Ae","Oe","Ue","ss");
 			$output = mb_ereg_replace($umlaute, $replace, $input);
-			return $output;		
-}	
+			return $output;
+}
 
 
 	}
-?>

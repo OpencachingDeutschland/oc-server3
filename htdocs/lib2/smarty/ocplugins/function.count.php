@@ -12,5 +12,3 @@ function smarty_function_count($params, &$smarty)
 {
     return count($params['array']);
 }
-
-?>

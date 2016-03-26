@@ -19,5 +19,3 @@ class Validator_Array
     return in_array($value, $this->values);
   }
 }
-
-?>

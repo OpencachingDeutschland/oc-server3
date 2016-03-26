@@ -60,5 +60,3 @@ class Http_Request
     $this->raw_values[$key] = $value;
   }
 }
-
-?>

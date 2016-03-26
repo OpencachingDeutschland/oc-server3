@@ -16,5 +16,3 @@ function smarty_modifier_urlencode($string)
 }
 
 /* vim: set expandtab: */
-
-?>

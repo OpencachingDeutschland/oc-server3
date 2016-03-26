@@ -46,4 +46,3 @@
 	$opt['urlappend_country'] = '&country={country}';
 	$opt['urlappend_coords'] = '&lon={lon}&lat={lat}&distance={distance}';
 	$opt['url_getsession'] = 'http://www.opencaching.de/xml/ocxml11.php?sessionid={sessionid}&file={file}&zip={zip}&charset=utf-8';
-?>

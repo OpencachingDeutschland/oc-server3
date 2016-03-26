@@ -101,7 +101,7 @@
 	echo "\n";
 	mysql_free_result($rs);
 
-	echo "clearing OKAPI data\n";;	
+	echo "clearing OKAPI data\n";;
 	if (sql_table_exists('okapi_vars'))
 	{
 		echo "clearing OKAPI data\n";;
@@ -120,7 +120,7 @@
 		sql("TRUNCATE `okapi_tokens`");
 	}
 	
-	echo "clearing other nonpublic data\n";;	
+	echo "clearing other nonpublic data\n";;
 	sql("TRUNCATE `news`");
 	$rs = sql("SHOW TABLES WHERE `Tables_in_".$opt['db']['placeholder']['db']."` LIKE '\_%'");
 	$tables = sql_fetch_column($rs);
@@ -128,5 +128,3 @@
 		sql("DROP TABLE ".$table);
 		
 	echo "done.\n";
-
-?>

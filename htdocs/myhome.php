@@ -81,7 +81,7 @@
 	// get number of sent emails
 	// useless information when email protocol is cleaned-up (cronjob 'purge_logs')
 	// $tpl->assign('emails', sql_value("SELECT COUNT(*) FROM `email_user` WHERE `from_user_id`='&1'", 0, $login->userid));
-	
+
 	// get log pictures
 	$allpics = isset($_REQUEST['allpics']) && $_REQUEST['allpics'];
 	$all_pictures = get_logpics(LOGPICS_FOR_MYHOME_GALLERY);
@@ -94,4 +94,3 @@
 
 	// display
 	$tpl->display();
-?>

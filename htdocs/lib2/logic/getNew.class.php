@@ -372,5 +372,3 @@ class getNew
 	}
 
 }
-
-?>

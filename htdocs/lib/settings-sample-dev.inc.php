@@ -24,4 +24,3 @@
 	require("settings-dev.inc.php");
 
 	$sql_errormail = 'root';
-?>

@@ -64,10 +64,7 @@
 	$access = new translateAccess();
 
 	if (!$access->hasAccess())
-		if ($login->admin & ADMIN_USER)
-			$tpl->redirect('adminreports.php');
-		else
-			$tpl->error(ERROR_NO_ACCESS);
+		$tpl->error(ERROR_NO_ACCESS);
 
 	$action = isset($_REQUEST['action']) ? $_REQUEST['action'] : '';
 
@@ -848,5 +845,3 @@ function verify()
 	}
 	$tpl->assign('inconsistencies', $inconsistencies);
 }
-
-?>

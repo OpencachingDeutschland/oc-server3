@@ -38,4 +38,3 @@
 	$tpl->assign('showhistory', $showhistory);
 	$tpl->assign('error', $error);
 	$tpl->display();
-?>

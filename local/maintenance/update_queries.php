@@ -28,10 +28,9 @@
 				$saveopt = serialize($query);
 				// sql("UPDATE queries SET `options`='&1' WHERE `id`='&2'", $saveopt, $r['id']);
 				// ^^ run this line only if you are absolutely sure what you are doing
-				echo "added nano to query " . $r['id'] . "(" . $cachesize . ") of user " . $r['user_id'] . "\n"; 
+				echo "added nano to query " . $r['id'] . "(" . $cachesize . ") of user " . $r['user_id'] . "\n";
 			}
 		}
 	}
 
 	sql_free_result($rs);
-?>

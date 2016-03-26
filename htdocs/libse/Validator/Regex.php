@@ -19,5 +19,3 @@ class Validator_Regex
     return mb_ereg_match($this->regex, $value);
   }
 }
-
-?>

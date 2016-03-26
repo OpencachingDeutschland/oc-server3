@@ -169,4 +169,3 @@ function GetFilename($userid, $lang)
 	global $opt;
 	return $opt['rootpath'] . 'images/statpics/statpic' . $userid . $lang . '.jpg';
 }
-?>

@@ -59,4 +59,3 @@ class orphan_cleanup
 	}
 
 }
-?>

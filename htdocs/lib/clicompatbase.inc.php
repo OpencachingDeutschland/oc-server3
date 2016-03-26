@@ -748,5 +748,3 @@
 
 		return $mailtext;
 	}
-
-?>

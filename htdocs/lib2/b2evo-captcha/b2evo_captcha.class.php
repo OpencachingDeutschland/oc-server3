@@ -726,5 +726,3 @@ class b2evo_captcha
 		}
 
 } // END CLASS b2evo_captcha
-
-?>

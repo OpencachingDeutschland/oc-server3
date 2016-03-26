@@ -26,7 +26,7 @@ class sitemaps
 		{
 			$this->oSitemapXML = new sitemapxml();
 			$this->oSitemapXML->open(
-				$opt['rootpath'], 
+				$opt['rootpath'],
 				$opt['page']['https']['mode'] == HTTPS_ENFORCED ? $opt['page']['absolute_https_url'] : $opt['page']['absolute_http_url']
 				);
 
@@ -141,6 +141,5 @@ class sitemaps
 			$this->oSitemapXML->write('viewcache.php?wp=' . $r['wp_oc'] . '&desclang=' . $r['language'], strtotime($dLastMod));
 		}
 		sql_free_result($rs);
-	}	
+	}
 }
-?>

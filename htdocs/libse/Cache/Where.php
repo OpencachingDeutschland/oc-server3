@@ -17,5 +17,3 @@ class Cache_Where
 		return ' caches.status = ' . Cache_Status::NotYetPubliced . ' AND caches.date_activate <= NOW() ';
 	}
 }
-
-?>

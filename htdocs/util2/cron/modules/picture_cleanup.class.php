@@ -65,5 +65,3 @@ class picture_cleanup
 		sql_free_result($rsDuplicatePic);
 	}
 }
-
-?>

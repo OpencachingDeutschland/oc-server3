@@ -207,7 +207,7 @@ class cachelist
 			WHERE `cache_list_items`.`cache_list_id` = '&1'
 			ORDER BY `caches`.`name`",
 			$this->nCachelistId, $login->userid, ($login->admin & ADMIN_USER) ? 1 : 0);
-		return sql_fetch_assoc_table($rs); 
+		return sql_fetch_assoc_table($rs);
 	}
 
 	function addCacheByWP($wp)
@@ -251,7 +251,7 @@ class cachelist
 	{
 		global $translate;
 
-		if (!$cache->exist() || !$cache->allowView()) 
+		if (!$cache->exist() || !$cache->allowView())
 			return false;
 		else
 		{
@@ -465,7 +465,7 @@ class cachelist
 			LEFT JOIN `cache_list_bookmarks` `b` ON `b`.`cache_list_id`=`cache_lists`.`id` AND `b`.`user_id`='&1'
 			WHERE $condition
 			ORDER BY `prio`, $namefield
-			LIMIT &2,&3", 
+			LIMIT &2,&3",
 			$login->userid, $startat, $maxitems);
 
 		$lists = sql_fetch_assoc_table($rs);
@@ -507,5 +507,3 @@ class cachelist
 	}
 
 }
-
-?>

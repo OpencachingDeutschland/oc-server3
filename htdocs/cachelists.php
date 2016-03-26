@@ -48,5 +48,3 @@
 	$pager->make_from_offset($startat, $listcount, $MAXITEMS);
 
 	$tpl->display();
-
-?>

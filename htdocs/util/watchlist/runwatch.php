@@ -34,7 +34,7 @@
 	// use posix pid-files to lock process 
 	if (!CreatePidFile($watchpid))
 	{
-		CleanupAndExit($watchpid, "Another instance is running!"); 
+		CleanupAndExit($watchpid, "Another instance is running!");
 		exit;
 	}
 
@@ -225,7 +225,7 @@ function process_owner_log($user_id, $log_id)
 	global $opt, $dblink, $translate;
 
 //	echo "process_owner_log($user_id, $log_id)\n";
-	
+
 	$rsLog = sql("
 		SELECT
 			`cache_logs`.`cache_id`,
@@ -289,7 +289,7 @@ function process_log_watch($user_id, $log_id)
 	global $opt, $dblink, $logwatch_text, $translate;
 
 //	echo "process_log_watch($user_id, $log_id)\n";
-	
+
 	$rsLog = sql("
 		SELECT
 			`cache_logs`.`cache_id`,
@@ -429,75 +429,75 @@ function CreatePidFile($PidFile)
         echo "Error: Pidfile (".$PidFile.") already present at ".__FILE__.":".__LINE__."!\n";
         return false;
     }
-    else 
+    else
     {
-        if($pidfile = @fopen($PidFile, "w")) 
+        if($pidfile = @fopen($PidFile, "w"))
         {
-            fputs($pidfile, posix_getpid()); 
-            fclose($pidfile); 
-            return true; 
+            fputs($pidfile, posix_getpid());
+            fclose($pidfile);
+            return true;
         }
-        else 
+        else
         {
-            echo "can't create Pidfile $PidFile at ".__FILE__.":".__LINE__."!\n"; 
-            return false; 
+            echo "can't create Pidfile $PidFile at ".__FILE__.":".__LINE__."!\n";
+            return false;
         }
     }
-} 
+}
 
 // 
 // checks if other instance of process is running.. 
 // 
-function CheckDaemon($PidFile) 
-{ 
-    if($pidfile = @fopen($PidFile, "r")) 
-    { 
-        $pid_daemon = fgets($pidfile, 20); 
-        fclose($pidfile); 
+function CheckDaemon($PidFile)
+{
+    if($pidfile = @fopen($PidFile, "r"))
+    {
+        $pid_daemon = fgets($pidfile, 20);
+        fclose($pidfile);
 
-        $pid_daemon = (int)$pid_daemon; 
+        $pid_daemon = (int)$pid_daemon;
 
         // process running? 
-        if(posix_kill($pid_daemon, 0)) 
-        { 
+        if(posix_kill($pid_daemon, 0))
+        {
             // yes, good bye 
-            echo "Error: process already running with pid=$pid_daemon!\n"; 
-            false; 
-        } 
-        else 
-        { 
+            echo "Error: process already running with pid=$pid_daemon!\n";
+            false;
+        }
+        else
+        {
             // no, remove pid_file 
-            echo "process not running, removing old pid_file (".$PidFile.")\n"; 
-            unlink($PidFile); 
-            return true; 
-        } 
-    } 
-    else 
-    { 
-        return true; 
-    } 
-} 
+            echo "process not running, removing old pid_file (".$PidFile.")\n";
+            unlink($PidFile);
+            return true;
+        }
+    }
+    else
+    {
+        return true;
+    }
+}
 
 // 
 // deletes pid-file 
 // 
-function CleanupAndExit($PidFile, $message = false) 
-{ 
-    if($pidfile = @fopen($PidFile, "r")) 
-    { 
-        $pid = fgets($pidfile, 20); 
-        fclose($pidfile); 
-        if($pid == posix_getpid()) 
-            unlink($PidFile); 
-    } 
-    else 
-    { 
-        echo "Error: can't delete own pidfile (".$PidFile.") at ".__FILE__.":".__LINE__."!\n"; 
-    } 
+function CleanupAndExit($PidFile, $message = false)
+{
+    if($pidfile = @fopen($PidFile, "r"))
+    {
+        $pid = fgets($pidfile, 20);
+        fclose($pidfile);
+        if($pid == posix_getpid())
+            unlink($PidFile);
+    }
+    else
+    {
+        echo "Error: can't delete own pidfile (".$PidFile.") at ".__FILE__.":".__LINE__."!\n";
+    }
 
-    if($message) 
-    { 
-      echo $message . "\n"; 
-    } 
+    if($message)
+    {
+      echo $message . "\n";
+    }
 }
 ?>

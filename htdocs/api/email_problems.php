@@ -19,5 +19,3 @@
 			echo $r['user_id'] . ' ' . $r['email_problems'] . "\n";
 		sql_free_result($rs);
 	}
-
-?>

@@ -30,7 +30,7 @@
 		$subject = $_REQUEST['subject'];
 	} elseif (isset($_REQUEST['wp'])) {
 		$wp = $_REQUEST['wp'];
-		$cachename = trim(sql_value("SELECT `name` FROM `caches` WHERE `wp_oc`='&1'", '', $wp));
+		$cachename = sql_value("SELECT `name` FROM `caches` WHERE `wp_oc`='&1'", '', $wp);
 		if ($cachename)
 			$subject = $translate->t('Your geocache', '', 0, 0) . ' "'.$cachename.'" ('.$wp.')';
 	} elseif (isset($_REQUEST['reportid']) && $login->admin) {
@@ -86,4 +86,3 @@
 	$tpl->assign('username', $user->getUsername());
 
 	$tpl->display();
-?>

@@ -43,7 +43,7 @@
 				$tpl->assign('error', 'userunknown');
 			else if ($tou != 1)
 				$tpl->assign('error', 'tou');
-			else 
+			else
 				addRequest($cacheid, $userid);
 		}
 
@@ -83,7 +83,7 @@ function showAdoptScreen($cacheid, $touerror)
 	       INNER JOIN `user` ON `caches`.`user_id`=`user`.`user_id`
 	       INNER JOIN `cache_adoption` ON `caches`.`cache_id`=`cache_adoption`.`cache_id`
 	            WHERE `caches`.`cache_id`='&1'
-	              AND `cache_adoption`.`user_id`='&2'", 
+	              AND `cache_adoption`.`user_id`='&2'",
 	                  $cacheid, $login->userid);
 	$r = sql_fetch_assoc($rs);
 	if ($r === false)
@@ -197,5 +197,3 @@ function cancelRequest($cacheid, $userid)
 	else
 		$tpl->redirect('adoptcache.php?action=listbycache&cacheid=' . $cacheid);
 }
-
-?>

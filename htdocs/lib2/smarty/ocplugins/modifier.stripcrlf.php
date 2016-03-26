@@ -22,5 +22,3 @@ function smarty_modifier_stripcrlf($string)
 }
 
 /* vim: set expandtab: */
-
-?>

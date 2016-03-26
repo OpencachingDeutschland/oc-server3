@@ -12,5 +12,3 @@
 define('OKAPI_SOURCE_PATH', 'c:/source/oc/okapi');
 define('OKAPI_REMOTE', 'upstream');
 define('DIRECTORY_TREE_REPLICATOR', 'robocopy /MIR %source %dest');
-
-?>

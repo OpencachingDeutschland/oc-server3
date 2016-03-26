@@ -144,7 +144,7 @@
 	set_absolute_urls($opt, 'http://www.opencaching.de/', 'opencaching.de', 2);
 
 	/* The OC site's ID; see settings-dist.inc.php for known IDs.
-	 */ 
+	 */
 	$opt['logic']['node']['id'] = 0;
 
 	/* data license settings
@@ -260,4 +260,3 @@ function post_config()
 			$tpl->redirect('http://www.opencaching.de/index.php');
 	}
 }
-?>

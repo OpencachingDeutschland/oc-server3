@@ -46,4 +46,3 @@
 	}
 
 	$tpl->redirect($target);
-?>

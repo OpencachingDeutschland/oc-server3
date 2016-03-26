@@ -65,7 +65,7 @@ class Menu
 						'title' => $rTown['name'],
 						'menustring' => $rTown['name'],
 						'authlevel' => 0,
-						'href' => 'map2.php?mode=normalscreen&lat=' . $rTown['coord_lat'] . '&lon=' . $rTown['coord_long'] . 
+						'href' => 'map2.php?mode=normalscreen&lat=' . $rTown['coord_lat'] . '&lon=' . $rTown['coord_long'] .
 						          '&zoom=' . $zoom,
 						'visible' => 1,
 						'sublevel' => 1,
@@ -326,4 +326,3 @@ class Menu
 			return '';
 	}
 }
-?>

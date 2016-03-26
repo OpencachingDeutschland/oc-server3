@@ -87,4 +87,3 @@ else
 		echo $gzipped_data;
 	}
 }
-?>

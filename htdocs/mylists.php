@@ -199,5 +199,3 @@
 	$tpl->assign('scrollposy', isset($_REQUEST['scrollposy']) ? $_REQUEST['scrollposy'] + 0 : 0);
 
 	$tpl->display();
-
-?>

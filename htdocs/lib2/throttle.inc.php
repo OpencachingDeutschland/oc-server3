@@ -43,4 +43,3 @@ function CheckThrottle()
 
 	sql("INSERT INTO &tmpdb.`sys_accesslog` (`ip`, `access_time`) VALUES ('&1', CURRENT_TIMESTAMP())", $ip_numeric);
 }
-?>

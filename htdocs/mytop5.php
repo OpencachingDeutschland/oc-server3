@@ -48,4 +48,3 @@
 	sql_free_result($rs);
 
 	$tpl->display();
-?>

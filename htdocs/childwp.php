@@ -35,5 +35,3 @@
   $presenter->prepare($tpl);
 
   $tpl->display();
-
-?>

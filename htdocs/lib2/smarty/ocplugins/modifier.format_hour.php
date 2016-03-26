@@ -24,5 +24,3 @@ function smarty_modifier_format_hour($value)
 }
 
 /* vim: set expandtab: */
-
-?>

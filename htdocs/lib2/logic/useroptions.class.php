@@ -35,7 +35,7 @@ class useroptions
 						SELECT `u`.`option_id` AS `id`, `p`.`name`, `p`.`default_value`, `p`.`check_regex`, `p`.`option_order`, `u`.`option_visible`, `p`.`internal_use`, IFNULL(`u`.`option_value`, `p`.`default_value`) AS `option_value`
 						FROM `user_options` AS `u`
 						LEFT JOIN `profile_options` AS `p` ON `p`.`id`=`u`.`option_id`
-						WHERE `u`.`user_id`='&1'", 
+						WHERE `u`.`user_id`='&1'",
 					$this->nUserId);
 		}
 
@@ -105,7 +105,7 @@ class useroptions
 		if ($pValue != 1 || $this->nOptions[$pId]['internal_use'] == 1)
 		{
 			$pValue = 0;
-		}		
+		}
 
 		$this->nOptions[$pId]['option_visible'] = $pValue;
 		return true;
@@ -140,5 +140,3 @@ class useroptions
 		return true;
 	}
 }
-
-?>

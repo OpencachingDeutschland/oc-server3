@@ -81,5 +81,3 @@ function search_output()
 	{
 		return utf8ToIso88591($str);
 	}
-
-?>

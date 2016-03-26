@@ -53,4 +53,3 @@ function html_insert_sid_callback($match)
 	else
 		return 'href=' . $match[1] . $match[2] . '&' . urlencode(session_name()) . '=' . urlencode(session_id()) . $match[3];
 }
-?>

@@ -28,5 +28,3 @@
 	}
 	else
 		echo "could not open pw_dict\n";
-
-?>

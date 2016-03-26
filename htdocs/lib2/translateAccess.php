@@ -49,5 +49,3 @@ class translateAccess
     $this->languages = explode(',', $options->getOptValue(USR_OPT_TRANSLANG));
   }
 }
-
-?>

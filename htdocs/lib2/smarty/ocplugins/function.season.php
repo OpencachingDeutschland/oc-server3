@@ -40,4 +40,3 @@ function smarty_function_season($params, &$smarty)
 
 	return '';
 }
-?>

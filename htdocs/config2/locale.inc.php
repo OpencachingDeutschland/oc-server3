@@ -357,5 +357,3 @@ function set_php_locale()
 	setlocale(LC_CTYPE, $opt['locale']['EN']['locales']);
 	setlocale(LC_NUMERIC, $opt['locale']['EN']['locales']); // important for mysql-queries!
 }
-
-?>

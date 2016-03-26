@@ -26,5 +26,3 @@ class Cache_Manager
     return $cacheOwner == $login->userid;
   }
 }
-
-?>

@@ -121,5 +121,3 @@ class OcHTMLPurifier extends HTMLPurifier
   }
 }
 */
-
-?>

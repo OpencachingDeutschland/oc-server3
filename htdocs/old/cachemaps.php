@@ -68,4 +68,3 @@ function redirect_na()
 	global $tpl;
 	$tpl->redirect('images/cachemaps/na.gif');
 }
-?>

@@ -96,4 +96,3 @@ function cracklib_checkpw($pw, $addwords)
 
 	return true;
 }
-?>

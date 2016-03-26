@@ -22,5 +22,3 @@ function smarty_modifier_base64encode($string)
 }
 
 /* vim: set expandtab: */
-
-?>

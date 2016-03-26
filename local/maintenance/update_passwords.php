@@ -52,5 +52,3 @@ while ($r = sql_fetch_array($rs))
 mysql_free_result($rs);
 
 echo "Update of passwords finished.\n";
-
-?>

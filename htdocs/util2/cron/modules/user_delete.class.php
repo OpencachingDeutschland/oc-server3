@@ -20,4 +20,3 @@ class user_delete
 		sql("DELETE FROM `user` WHERE `date_created`<DATE_ADD(NOW(), INTERVAL -21 DAY) AND `is_active_flag`=0 AND `activation_code`!=''");
 	}
 }
-?>

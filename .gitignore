@@ -44,3 +44,5 @@
 /local/ocxml11client/data-files
 /local/ocxml11client/tmp
 /local/ocxml11client/settings.php
+/.idea/
+/.vagrant/

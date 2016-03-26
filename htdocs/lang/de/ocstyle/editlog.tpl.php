@@ -91,7 +91,7 @@ function _chkFound () {
 	<tr>
 		<td width="180px">{t}Type of log-enrty{/t}</td>
 		<td align="left">
-			<select name="logtype" onChange="return _chkFound()">
+			<select name="logtype" onChange="return _chkFound()" {type_edit_disabled}>
 				{logtypeoptions}
 			</select>
 			{teamcommentoption}

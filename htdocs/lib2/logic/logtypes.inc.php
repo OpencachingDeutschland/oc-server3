@@ -58,7 +58,7 @@
 	//   type_id => translated type name
 	// first entry is default for new logs
 
-	function get_cache_log_types($cache_id, $old_logtype)
+	function get_cache_log_types($cache_id, $old_logtype, $statuslogs=true)
 	{
 		global $login;
 
@@ -82,7 +82,7 @@
 		{
 			$allowed_logtypes[] = 3;   // note
 		}
-		if ($owner || $admin_report)
+		if (($owner && $statuslogs) || $admin_report)
 		{
 			if ($cache_status != 5 && (($cache_status != 4 && $cache_status != 7) || $admin_report))
 			{

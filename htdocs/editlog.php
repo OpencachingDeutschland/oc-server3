@@ -56,23 +56,29 @@
 			$useradmin = ($login->admin & ADMIN_USER) ? 1 : 0;
 
 			//does log with this logid exist?
-			$log_rs = sql("SELECT `cache_logs`.`cache_id` AS `cache_id`, 
-														`cache_logs`.`node` AS `node`, 
-														`cache_logs`.`text` AS `text`, 
-														`cache_logs`.`date` AS `date`, 
-														`cache_logs`.`user_id` AS `user_id`, 
-														`cache_logs`.`type` AS `logtype`,
-														`cache_logs`.`oc_team_comment` AS `oc_team_comment`,
-														`cache_logs`.`text_html` AS `text_html`, 
-														`cache_logs`.`text_htmledit` AS `text_htmledit`, 
-														`caches`.`name` AS `cachename`, 
-														`caches`.`type` AS `cachetype`, 
-														`caches`.`user_id` AS `cache_user_id`, 
-														`caches`.`logpw` as `logpw`, 
-														`caches`.`status` as `status` 
-											FROM `cache_logs` 
-											INNER JOIN `caches` ON (`caches`.`cache_id`=`cache_logs`.`cache_id`) WHERE `id`='&1'",
-											$log_id);
+			$log_rs = sql("
+				SELECT
+					`cache_logs`.`id` AS `log_id`,
+					`cache_logs`.`cache_id` AS `cache_id`,
+					`cache_logs`.`node` AS `node`,
+					`cache_logs`.`text` AS `text`,
+					`cache_logs`.`date` AS `date`,
+					`cache_logs`.`user_id` AS `user_id`,
+					`cache_logs`.`type` AS `logtype`,
+					`cache_logs`.`oc_team_comment` AS `oc_team_comment`,
+					`cache_logs`.`text_html` AS `text_html`,
+					`cache_logs`.`text_htmledit` AS `text_htmledit`,
+					`caches`.`name` AS `cachename`,
+					`caches`.`type` AS `cachetype`,
+					`caches`.`user_id` AS `cache_user_id`,
+					`caches`.`logpw` as `logpw`,
+					`caches`.`status` as `status`,
+					`log_types`.`cache_status` > 0 AS `is_status_log`
+				FROM `cache_logs`
+				JOIN `log_types` ON `log_types`.`id`=`cache_logs`.`type`
+				INNER JOIN `caches` ON `caches`.`cache_id`=`cache_logs`.`cache_id`
+				WHERE `cache_logs`.`id`='&1'",
+				$log_id);
 			$log_record = sql_fetch_array($log_rs);
 			sql_free_result($log_rs);
 
@@ -264,6 +270,22 @@
 						                             (($descMode == 3) ? 1 : 0),
 						                             $log_id);
 
+						// update cache status if changed by logtype
+						if (is_latest_log($log_record['cache_id'], $log_record['log_id']))
+						{
+							$newstatus = sqlValue("
+								SELECT `cache_status` FROM `log_types`
+								WHERE `id`='" . sql_escape($log_type) . "'",
+								false);
+							if ($newstatus && $newstatus != $log_record['status']) {
+								sql("SET @STATUS_CHANGE_USER_ID='&1'", $login->userid);
+								sql("
+									UPDATE `caches` SET `status`='" . sql_escape($newstatus) . "'
+									WHERE `cache_id`='" . sql_escape($log_record['cache_id']) . "'
+								");
+							}
+						}
+
 						//update user-stat if type changed
 						if ($log_record['logtype'] != $log_type)
 						{
@@ -307,14 +329,27 @@
 					}
 
 					// build logtype options
+					$disable_statuschange = (
+						$log_record['cache_user_id'] == $login->userid
+						&& !is_latest_log($log_record['cache_id'], $log_record['log_id'])
+					);
+
 					$logtype_names = get_logtype_names();
-					$allowed_logtypes = get_cache_log_types($log_record['cache_id'], $log_record['logtype']);
+					$allowed_logtypes = get_cache_log_types($log_record['cache_id'], $log_record['logtype'], !$disable_statuschange);
 					$logtypeoptions = '';
 					foreach ($allowed_logtypes as $logtype)
 					{
 						$selected = ($log_record['logtype'] == $logtype ? ' selected="selected"' : '');
 						$logtypeoptions .= '<option value="' . $logtype . '"' . $selected . '>' . htmlspecialchars($logtype_names[$logtype], ENT_COMPAT, 'UTF-8') . '</option>' . "\n";
 					}
+					$disable_typechange = $disable_statuschange && $log_record['is_status_log'];
+					tpl_set_var('type_edit_disabled', $disable_typechange ? $type_edit_disabled : '');
+
+					// TODO: Enforce the 'diables' when processing the posted data.
+					// It's not that urgent, because nothing can be broken by changing
+					// past status log types (it was even allowed up to OC 3.0.17);
+					// just the log history may look weird.
+
 					if (teamcomment_allowed($log_record['cache_id'], 3, $log_record['oc_team_comment']))
 						tpl_set_var('teamcommentoption',
 							mb_ereg_replace('{chk_sel}', ($oc_team_comment ? 'checked' : ''), $teamcomment_field));
@@ -402,3 +437,16 @@
 
 	//make the template and send it out
 	tpl_BuildTemplate();
+
+
+function is_latest_log($cache_id, $log_id)
+{
+	$lastest_log_id = sqlValue("
+		SELECT `id` FROM `cache_logs`
+		WHERE `cache_id`='" . sql_escape($cache_id) . "'
+		ORDER BY `order_date` DESC, `date_created` DESC, `id` DESC
+		LIMIT 1",
+		0,
+		$cache_id);
+	return ($log_id == $lastest_log_id);
+}

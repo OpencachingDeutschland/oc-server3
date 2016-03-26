@@ -8390,7 +8390,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1360', 'EN', 'This cache stores a GeoKrety', '2010-09-10 23:58:48');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1361', 'EN', 'This cache has %1 recommandation(s)', '2010-09-10 23:58:36');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1362', 'EN', 'Edit log entry for the cache <a href=\"viewcache.php?cacheid={cacheid}\">{cachename}</a>', '2010-09-10 23:58:12');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1363', 'EN', 'Type of log-enrty', '2010-09-10 23:57:46');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1363', 'EN', 'Type of log entry', '2010-09-10 23:57:46');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1364', 'EN', 'JavaScript is disabled in your browser, you can enter text only. To use HTML, or the editor, please enable JavaScript.', '2010-09-10 23:57:54');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1365', 'EN', 'New cache', '2010-09-10 23:57:04');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1366', 'EN', 'Owner:', '2010-09-10 23:56:45');

@@ -3,7 +3,7 @@
  *  For license information see doc/license.txt
  *
  *  Fix some common coding style issues. This script may be run any time
- *  to check and clean up the current code.
+ *  to check and clean up the current OC code.
  *
  *  Unicode Reminder メモ
  ***************************************************************************/
@@ -13,7 +13,8 @@ $exclude = array(
 	'htdocs/cache2',
 	'htdocs/lib2/HTMLPurifier',
 	'htdocs/lib2/smarty',
-	'htdocs/okapi'
+	'htdocs/okapi',
+	'htdocs/var'
 );
 
 chdir(__DIR__ . '/../..');
@@ -32,18 +33,18 @@ function cleanup($path, $exclude)
 		$files = glob($path . '/*.php');
 		foreach ($files as $filepath)
 		{
-			$modified = false;
+			$file_modified = false;
 			$lines = file($filepath);
 
 			# Remove all trailing whitespaces, strip CRs and make sure
-			# that the the last line ends on "\n".
+			# that all - including the last - line end on "\n".
 			foreach ($lines as &$line) {
 				$trimmed_line = trim($line, " \t\r\n");
 				if ($trimmed_line != '' && $trimmed_line != '*') {
 					$old_line = $line;
 					$line = rtrim($line, " \t\r\n") . "\n";
 					if ($line != $old_line)	{
-						$modified = true;
+						$file_modified = true;
 						++$modified_lines;
 					}
 				}
@@ -55,7 +56,7 @@ function cleanup($path, $exclude)
 				$trimmed_line = trim($lines[$l]);
 				if ($trimmed_line == '?>' || $trimmed_line == '') {
 					unset($lines[$l]);
-					$modified = true;
+					$file_modified = true;
 					++$modified_lines;
 				}
 				else
@@ -63,7 +64,7 @@ function cleanup($path, $exclude)
 				--$l;
 			}
 
-			if ($modified) {
+			if ($file_modified) {
 				echo substr($filepath, 2) . "\n";
 				file_put_contents($filepath, implode('', $lines));
 				++$modified_files;

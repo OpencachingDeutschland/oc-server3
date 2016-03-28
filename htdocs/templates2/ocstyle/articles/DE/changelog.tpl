@@ -32,7 +32,7 @@
 
 	<div class="changelog-changes">
 
-	<p id="current"><strong>Laufende Änderungen</strong>, Stand 24. März 2016</p>
+	<p id="current"><strong>Laufende Änderungen</strong>, Stand 28. März 2016</p>
 	<p>Neu:</p>
 	<ul>
 		<li>Anzeige von Markern bei der Koordinatensuche auf der Karte</li>
@@ -45,6 +45,7 @@
 	<p>Geändert / verbessert:</p>
 	<ul>
 		<li>Logs mit und ohne Uhrzeit am gleichen Tag werden sinnvoller geordnet.</li>
+        <li>Beim Ändern des Typs des neuesten Logs durch den Owner wird ggf. auch der Status des Caches mit angepasst. Der Typ älterer Statuslogs ist nicht mehr änderbar.</li>
 		<li>Smiley-Icons auch in Benachrichtigungsmails (Ausgabe als Text-Smileys)</li>
 		<li>Komfortablere Abarbeitung von Cachemeldungen (Admin-Funktion)</li>
 		<li>Bei der Angabe &bdquo;letztes Login&ldquo; im Benutzerprofil wird nun zwischen 1&ndash;2 Jahren und &gt;2 Jahren unterschieden.</li>

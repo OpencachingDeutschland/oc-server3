@@ -41,7 +41,7 @@ function get_logpics($purpose, $userid=0, $cacheid=0)
 	switch ($purpose)
 	{
 		case LOGPICS_FOR_STARTPAGE_GALLERY:
-			// one pic per user and day, 
+			// one pic per user and day,
 			// one pic per cache and day
 			// no spoilers, no bad data, no invisible or unpublished caches
 
@@ -127,7 +127,7 @@ function get_logpics($purpose, $userid=0, $cacheid=0)
 				$rs = sql("SELECT $fields, `logs`.`date` AS `picdate`
 	                   FROM `pictures` AS `pics`
                      $join_logs
-                    WHERE `object_type`=1 AND `logs`.`user_id`='&1' 
+                    WHERE `object_type`=1 AND `logs`.`user_id`='&1'
                  ORDER BY `logs`.`order_date` DESC", $login->userid);
 
 				break;

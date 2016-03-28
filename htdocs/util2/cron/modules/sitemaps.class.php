@@ -128,7 +128,7 @@ class sitemaps
 	function write_viewacache_urls()
 	{
 		$rs = sql("SELECT SQL_BUFFER_RESULT `caches`.`wp_oc`, `caches`.`cache_id`, `cache_desc`.`language`
-		             FROM `caches` 
+		             FROM `caches`
 		       INNER JOIN `cache_desc` ON `caches`.`cache_id`=`cache_desc`.`cache_id`
 					 INNER JOIN `cache_status` ON `caches`.`status`=`cache_status`.`id`
 		            WHERE `cache_status`.`allow_user_view`=1");

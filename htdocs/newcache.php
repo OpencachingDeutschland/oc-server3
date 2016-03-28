@@ -329,11 +329,11 @@
 			//sizeoptions
 			$sSelected = ($sel_size == -1) ? ' selected="selected"' : '';
 			$sizes = '<option value="-1"' . $sSelected . '>' . htmlspecialchars(t('Please select!'), ENT_COMPAT, 'UTF-8') . '</option>';
-			$rsSizes = sql("SELECT `cache_size`.`id`, IFNULL(`sys_trans_text`.`text`, `cache_size`.`name`) AS `name` 
-			                  FROM `cache_size` 
-			             LEFT JOIN `sys_trans` ON `cache_size`.`trans_id`=`sys_trans`.`id` 
-			             LEFT JOIN `sys_trans_text` ON `sys_trans`.`id`=`sys_trans_text`.`trans_id` AND 
-			                       `sys_trans_text`.`lang`='" . sql_escape($locale) . "' 
+			$rsSizes = sql("SELECT `cache_size`.`id`, IFNULL(`sys_trans_text`.`text`, `cache_size`.`name`) AS `name`
+			                  FROM `cache_size`
+			             LEFT JOIN `sys_trans` ON `cache_size`.`trans_id`=`sys_trans`.`id`
+			             LEFT JOIN `sys_trans_text` ON `sys_trans`.`id`=`sys_trans_text`.`trans_id` AND
+			                       `sys_trans_text`.`lang`='" . sql_escape($locale) . "'
 			              ORDER BY `cache_size`.`ordinal` ASC");
 			while ($rSize = sql_fetch_assoc($rsSizes))
 			{
@@ -346,11 +346,11 @@
 			//typeoptions
 			$sSelected = ($sel_type == -1) ? ' selected="selected"' : '';
 			$types = '<option value="-1"' . $sSelected . '>' . htmlspecialchars(t('Please select!'), ENT_COMPAT, 'UTF-8') . '</option>';
-			$rsTypes = sql("SELECT `cache_type`.`id`, IFNULL(`sys_trans_text`.`text`, `cache_type`.`en`) AS `name` 
-			                  FROM `cache_type` 
-			             LEFT JOIN `sys_trans` ON `cache_type`.`trans_id`=`sys_trans`.`id` 
-			             LEFT JOIN `sys_trans_text` ON `sys_trans`.`id`=`sys_trans_text`.`trans_id` AND 
-			                       `sys_trans_text`.`lang`='" . sql_escape($locale) . "' 
+			$rsTypes = sql("SELECT `cache_type`.`id`, IFNULL(`sys_trans_text`.`text`, `cache_type`.`en`) AS `name`
+			                  FROM `cache_type`
+			             LEFT JOIN `sys_trans` ON `cache_type`.`trans_id`=`sys_trans`.`id`
+			             LEFT JOIN `sys_trans_text` ON `sys_trans`.`id`=`sys_trans_text`.`trans_id` AND
+			                       `sys_trans_text`.`lang`='" . sql_escape($locale) . "'
 			              ORDER BY `cache_type`.`ordinal` ASC");
 			while ($rType = sql_fetch_assoc($rsTypes))
 			{
@@ -452,9 +452,9 @@
 			$cache_attrib_array = '';
 			$cache_attribs_string = '';
 
-			$rsAttrGroup = sql("SELECT `attribute_groups`.`id`, IFNULL(`sys_trans_text`.`text`, `attribute_groups`.`name`) AS `name`, `attribute_categories`.`color` 
-			                      FROM `attribute_groups` 
-			                INNER JOIN `attribute_categories` ON `attribute_groups`.`category_id`=`attribute_categories`.`id` 
+			$rsAttrGroup = sql("SELECT `attribute_groups`.`id`, IFNULL(`sys_trans_text`.`text`, `attribute_groups`.`name`) AS `name`, `attribute_categories`.`color`
+			                      FROM `attribute_groups`
+			                INNER JOIN `attribute_categories` ON `attribute_groups`.`category_id`=`attribute_categories`.`id`
 			                 LEFT JOIN `sys_trans` ON `attribute_groups`.`trans_id`=`sys_trans`.`id`
 			                 LEFT JOIN `sys_trans_text` ON `sys_trans`.`id`=`sys_trans_text`.`trans_id` AND `sys_trans_text`.`lang`='&1'
 			                  ORDER BY `attribute_groups`.`category_id` ASC, `attribute_groups`.`id` ASC", $locale);
@@ -462,14 +462,14 @@
 			{
 				$group_line = '';
 
-				$rs = sql("SELECT `cache_attrib`.`id`, IFNULL(`ttname`.`text`, `cache_attrib`.`name`) AS `name`, `cache_attrib`.`icon_undef`, `cache_attrib`.`icon_large`, IFNULL(`ttdesc`.`text`, `cache_attrib`.`html_desc`) AS `html_desc` 
-				             FROM `cache_attrib` 
+				$rs = sql("SELECT `cache_attrib`.`id`, IFNULL(`ttname`.`text`, `cache_attrib`.`name`) AS `name`, `cache_attrib`.`icon_undef`, `cache_attrib`.`icon_large`, IFNULL(`ttdesc`.`text`, `cache_attrib`.`html_desc`) AS `html_desc`
+				             FROM `cache_attrib`
 		            LEFT JOIN `sys_trans` AS `tname` ON `cache_attrib`.`trans_id`=`tname`.`id` AND `cache_attrib`.`name`=`tname`.`text`
 		            LEFT JOIN `sys_trans_text` AS `ttname` ON `tname`.`id`=`ttname`.`trans_id` AND `ttname`.`lang`='&1'
 		            LEFT JOIN `sys_trans` AS `tdesc` ON `cache_attrib`.`html_desc_trans_id`=`tdesc`.`id` AND `cache_attrib`.`html_desc`=`tdesc`.`text`
 		            LEFT JOIN `sys_trans_text` AS `ttdesc` ON `tdesc`.`id`=`ttdesc`.`trans_id` AND `ttdesc`.`lang`='&1'
 				            WHERE `cache_attrib`.`group_id`=" . ($rAttrGroup['id']+0) . " AND
-							NOT IFNULL(`cache_attrib`.`hidden`, 0)=1 AND 
+							NOT IFNULL(`cache_attrib`.`hidden`, 0)=1 AND
 							 `cache_attrib`.`selectable`!=0 ORDER BY `cache_attrib`.`group_id`, `cache_attrib`.`id`", $locale);
 				while($record = sql_fetch_array($rs))
 				{
@@ -866,7 +866,7 @@
 												`wp_gc`,
 												`node`
 											) VALUES (
-												'', '&1', '&2', '&3', '&4', '&5', '&6', '&7', '&8', $activation_date, 
+												'', '&1', '&2', '&3', '&4', '&5', '&6', '&7', '&8', $activation_date,
 												'&9', '&10', '&11', '&12', '&13', '&14', '&15', '&16')",
 											$usr['userid'],
 											$name,

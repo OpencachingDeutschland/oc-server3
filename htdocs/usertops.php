@@ -21,7 +21,7 @@
 	$tpl->assign('oconly',$oconly);
 
 	$rs = sql("SELECT `cache_rating`.`cache_id` AS `cacheid`, `caches`.`name` AS `cachename`, `user`.`username` AS `ownername`, `caches`.`type` AS `type`, `caches`.`status` AS `status`, `ca`.`attrib_id` IS NOT NULL AS `oconly`, `stat_caches`.`toprating` AS `countrating`
-	             FROM `cache_rating` 
+	             FROM `cache_rating`
 	       INNER JOIN `caches` ON `cache_rating`.`cache_id` = `caches`.`cache_id`
 	       INNER JOIN `user` ON `caches`.`user_id`=`user`.`user_id`
 	       INNER JOIN `cache_status` ON `caches`.`status`=`cache_status`.`id`

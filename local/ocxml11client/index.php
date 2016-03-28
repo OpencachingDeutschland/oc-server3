@@ -7,7 +7,7 @@
 
 		For license information see doc/license.txt
 		
-		This code is of 2007 and has to be verified to be compatible with 
+		This code is of 2007 and has to be verified to be compatible with
 		current OC Server Version 3.
  ***************************************************************************/
 
@@ -589,8 +589,8 @@ function ImportUserArray($r)
 		}
 	
 		// neu anlegen
-		sql("INSERT INTO `user` (`username`, 
-		                         `last_modified`, 
+		sql("INSERT INTO `user` (`username`,
+		                         `last_modified`,
 		                         `country`,
 		                         `date_created`,
 		                         `uuid`,
@@ -684,11 +684,11 @@ function ImportCacheArray($r)
 			mysql_free_result($rsWaypoint);
 			
 			// update record
-			sql("UPDATE `caches` SET `name`='&1', `longitude`=&2, `latitude`=&3, 
-			                         `last_modified`='&4', `date_created`='&5', `type`=&6, 
-			                         `status`=&7, `country`='&8', `date_hidden`='&9', 
-			                         `size`=&10, `difficulty`=&11, `terrain`=&12, 
-			                         `search_time`=&13, `way_length`=&14, `wp_gc`='&15', 
+			sql("UPDATE `caches` SET `name`='&1', `longitude`=&2, `latitude`=&3,
+			                         `last_modified`='&4', `date_created`='&5', `type`=&6,
+			                         `status`=&7, `country`='&8', `date_hidden`='&9',
+			                         `size`=&10, `difficulty`=&11, `terrain`=&12,
+			                         `search_time`=&13, `way_length`=&14, `wp_gc`='&15',
 			                         `wp_oc`='&16' WHERE `uuid`='&17' LIMIT 1",
 			                     $r['NAME']['__DATA'],
 			                     $r['LONGITUDE']['__DATA'],
@@ -731,18 +731,18 @@ function ImportCacheArray($r)
 		sql_fetch_array($rsWp);
 		
 		// insert ...
-		sql("INSERT INTO caches (`user_id`, `name`, `longitude`, 
-		                         `latitude`, `last_modified`, `date_created`, 
-		                         `type`, `status`, `country`, 
-		                         `date_hidden`,  
-		                         `size`, `difficulty`, 
-		                         `terrain`, `uuid`, `search_time`, 
+		sql("INSERT INTO caches (`user_id`, `name`, `longitude`,
+		                         `latitude`, `last_modified`, `date_created`,
+		                         `type`, `status`, `country`,
+		                         `date_hidden`,
+		                         `size`, `difficulty`,
+		                         `terrain`, `uuid`, `search_time`,
 		                         `way_length`, `wp_gc`,
-		                         `wp_oc`) 
+		                         `wp_oc`)
 		                 VALUES (  &1 ,  '&2',   &3 ,
 		                           &4 ,  '&5',  '&6',
 		                           &7 ,   &8 ,  '&9',
-		                         '&10', 
+		                         '&10',
 		                          &11 ,  &12 ,
 		                          &13 , '&14',  &15 ,
 		                          &16 , '&17',
@@ -834,8 +834,8 @@ function ImportCacheDescArray($r)
 			}
 			
 			// update
-			sql("UPDATE `cache_desc` SET `language`='&1', `desc`='&2', `desc_html`=&3, 
-			                             `hint`='&4', `short_desc`='&5', `last_modified`='&6' 
+			sql("UPDATE `cache_desc` SET `language`='&1', `desc`='&2', `desc_html`=&3,
+			                             `hint`='&4', `short_desc`='&5', `last_modified`='&6'
 			                             WHERE `id`=&7 LIMIT 1",
 										 $r['LANGUAGE']['__ATTR']['ID'], $r['DESC']['__DATA'], ($r['DESC']['__ATTR']['HTML'] == 1 ? '1' : '0'),
 										 $r['HINT']['__DATA'], $r['SHORTDESC']['__DATA'], $r['LASTMODIFIED']['__DATA'],
@@ -863,9 +863,9 @@ function ImportCacheDescArray($r)
 		}
 		mysql_free_result($rsCount);
 
-		sql("INSERT INTO `cache_desc` (`cache_id`, `language`, `desc`, 
-		                               `desc_html`, `hint`, `short_desc`, 
-		                               `last_modified`, `uuid`) 
+		sql("INSERT INTO `cache_desc` (`cache_id`, `language`, `desc`,
+		                               `desc_html`, `hint`, `short_desc`,
+		                               `last_modified`, `uuid`)
 		                       VALUES ( &1 , '&2', '&3',
 		                                &4 , '&5', '&6',
 		                               '&7', '&8')",
@@ -1197,4 +1197,3 @@ function restorevalues()
 	}
 	mysql_free_result($rs);
 }
-?>

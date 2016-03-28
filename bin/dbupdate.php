@@ -46,5 +46,3 @@
   echo "resetting webcache:\n";
   chdir ($rootpath . '../bin');
   system('php clear-webcache.php');
-
-?>

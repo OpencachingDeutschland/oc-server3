@@ -168,18 +168,18 @@
 		else
 			$orderByCountry = '';
 		
-		$rsLogs = sql_slave("SELECT IFNULL(`sys_trans_text`.`text`, `countries`.`name`) AS `country_name`, 
-		                            `cache_logs`.`id`, 
+		$rsLogs = sql_slave("SELECT IFNULL(`sys_trans_text`.`text`, `countries`.`name`) AS `country_name`,
+		                            `cache_logs`.`id`,
 																`cache_logs`.`date_created`,
-																`cache_logs`.`date`, 
-																`caches`.`name` AS `cachename`, 
-																`caches`.`wp_oc`, 
+																`cache_logs`.`date`,
+																`caches`.`name` AS `cachename`,
+																`caches`.`wp_oc`,
 																`caches`.`country` AS `country`,
 																`cache_logs`.`type`,
 																`cache_logs`.`oc_team_comment`,
 																`cache_logs`.`needs_maintenance`,
 																`cache_logs`.`listing_outdated`,
-																`cacheloguser`.`user_id`, 
+																`cacheloguser`.`user_id`,
 																`cacheloguser`.`username`,
 																`cache_logs`.`cache_id`,
 																`cache_rating`.`rating_date` IS NOT NULL AND `cache_logs`.`type` IN (1,7) AS `recommended`,
@@ -187,11 +187,11 @@
 																'' AS `pic_uuid`,
 																0 AS `picshown`,
 																(SELECT COUNT(*) FROM `pictures` WHERE `object_type`=1 AND `object_id`=`cache_logs`.`id`) AS `pics`
-													 FROM &loglist 
-										 INNER JOIN `cache_logs` ON &loglist.`id`=`cache_logs`.`id` 
-										 INNER JOIN `caches` ON `cache_logs`.`cache_id`=`caches`.`cache_id` 
-										 INNER JOIN `user` AS `cacheloguser` ON `cache_logs`.`user_id`=`cacheloguser`.`user_id` 
-										 INNER JOIN `countries` ON `caches`.`country`=`countries`.`short` 
+													 FROM &loglist
+										 INNER JOIN `cache_logs` ON &loglist.`id`=`cache_logs`.`id`
+										 INNER JOIN `caches` ON `cache_logs`.`cache_id`=`caches`.`cache_id`
+										 INNER JOIN `user` AS `cacheloguser` ON `cache_logs`.`user_id`=`cacheloguser`.`user_id`
+										 INNER JOIN `countries` ON `caches`.`country`=`countries`.`short`
 										  LEFT JOIN `sys_trans_text` ON `countries`.`trans_id`=`sys_trans_text`.`trans_id` AND `sys_trans_text`.`lang`='&1'
 										  LEFT JOIN `cache_logs_restored` ON `cache_logs_restored`.`id`=`cache_logs`.`id`
 										  LEFT JOIN `cache_rating` ON `cache_rating`.`cache_id`=`caches`.`cache_id` AND `cache_rating`.`user_id`=`cache_logs`.`user_id` AND `cache_rating`.`rating_date`=`cache_logs`.`date`
@@ -270,7 +270,7 @@
 		$tpl->assign('countryCode', $country);
 		$tpl->assign(
 			'countryName',
-			sql_value("SELECT IFNULL(`sys_trans_text`.`text`, `countries`.`name`) 
+			sql_value("SELECT IFNULL(`sys_trans_text`.`text`, `countries`.`name`)
 	                FROM `countries`
 	           LEFT JOIN `sys_trans` ON `countries`.`trans_id`=`sys_trans`.`id`
 	           LEFT JOIN `sys_trans_text` ON `sys_trans`.`id`=`sys_trans_text`.`trans_id` AND `sys_trans_text`.`lang`='&2'
@@ -281,7 +281,7 @@
 			);
 		$tpl->assign(
 			'mainCountryName',
-			sql_value("SELECT IFNULL(`sys_trans_text`.`text`, `countries`.`name`) 
+			sql_value("SELECT IFNULL(`sys_trans_text`.`text`, `countries`.`name`)
 	                FROM `countries`
 	           LEFT JOIN `sys_trans` ON `countries`.`trans_id`=`sys_trans`.`id`
 	           LEFT JOIN `sys_trans_text` ON `sys_trans`.`id`=`sys_trans_text`.`trans_id` AND `sys_trans_text`.`lang`='&2'

@@ -42,4 +42,3 @@ tinyMCE.init({
 
 	content_css : "resource2/tinymce/config/content.css"
 });
-

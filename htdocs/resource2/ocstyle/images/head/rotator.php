@@ -112,7 +112,7 @@
 	else
 		$folder = '.';
 
-/*	
+/*
 
 	Most users can safely ignore this part.  If you're a programmer,
 	keep reading, if not, you're done.  Go get some coffee.

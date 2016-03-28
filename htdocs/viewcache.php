@@ -277,10 +277,10 @@ function getChildWaypoints($cacheid)
 
 	/* nature protection areas
 	 */
-	$rs = sql("SELECT `npa_areas`.`id` AS `npaId`, `npa_areas`.`type_id` AS `npaType`, `npa_areas`.`name` AS `npaName`, `npa_types`.`name` AS `npaTypeName` 
-	             FROM `cache_npa_areas` 
-	       INNER JOIN `npa_areas` ON `cache_npa_areas`.`npa_id`=`npa_areas`.`id` 
-	       INNER JOIN `npa_types` ON `npa_areas`.`type_id`=`npa_types`.`id` 
+	$rs = sql("SELECT `npa_areas`.`id` AS `npaId`, `npa_areas`.`type_id` AS `npaType`, `npa_areas`.`name` AS `npaName`, `npa_types`.`name` AS `npaTypeName`
+	             FROM `cache_npa_areas`
+	       INNER JOIN `npa_areas` ON `cache_npa_areas`.`npa_id`=`npa_areas`.`id`
+	       INNER JOIN `npa_types` ON `npa_areas`.`type_id`=`npa_types`.`id`
 	            WHERE `cache_npa_areas`.`cache_id`='&1' AND `npa_types`.`no_warning`=0
 	         GROUP BY `npa_areas`.`type_id`, `npa_areas`.`name`
 	         ORDER BY `npa_types`.`ordinal` ASC",
@@ -288,10 +288,10 @@ function getChildWaypoints($cacheid)
 	$tpl->assign_rs('npaareasWarning', $rs);
 	sql_free_result($rs);
 
-	$rs = sql("SELECT `npa_areas`.`id` AS `npaId`, `npa_areas`.`type_id` AS `npaType`, `npa_areas`.`name` AS `npaName`, `npa_types`.`name` AS `npaTypeName` 
-	             FROM `cache_npa_areas` 
-	       INNER JOIN `npa_areas` ON `cache_npa_areas`.`npa_id`=`npa_areas`.`id` 
-	       INNER JOIN `npa_types` ON `npa_areas`.`type_id`=`npa_types`.`id` 
+	$rs = sql("SELECT `npa_areas`.`id` AS `npaId`, `npa_areas`.`type_id` AS `npaType`, `npa_areas`.`name` AS `npaName`, `npa_types`.`name` AS `npaTypeName`
+	             FROM `cache_npa_areas`
+	       INNER JOIN `npa_areas` ON `cache_npa_areas`.`npa_id`=`npa_areas`.`id`
+	       INNER JOIN `npa_types` ON `npa_areas`.`type_id`=`npa_types`.`id`
 	            WHERE `cache_npa_areas`.`cache_id`='&1' AND `npa_types`.`no_warning`=1
 	         GROUP BY `npa_areas`.`type_id`, `npa_areas`.`name`
 	         ORDER BY `npa_types`.`ordinal` ASC",
@@ -308,7 +308,7 @@ function getChildWaypoints($cacheid)
 
 	/* geokrets
 	 */
-	$rsGeoKret = sql("SELECT `gk_item`.`id`, `gk_item`.`name` AS `itemname`, `gk_user`.`name` AS `username` FROM `gk_item` INNER JOIN `gk_item_waypoint` ON `gk_item`.`id`=`gk_item_waypoint`.`id` INNER JOIN `gk_user` ON `gk_item`.`userid`=`gk_user`.`id` INNER JOIN `caches` ON `gk_item_waypoint`.`wp`=`caches`.`wp_oc` WHERE `caches`.`cache_id`='&1' AND `gk_item`.`typeid`!=2 AND `gk_item`.`stateid` IN (0, 3) AND `gk_item_waypoint`.`wp`!='' UNION 
+	$rsGeoKret = sql("SELECT `gk_item`.`id`, `gk_item`.`name` AS `itemname`, `gk_user`.`name` AS `username` FROM `gk_item` INNER JOIN `gk_item_waypoint` ON `gk_item`.`id`=`gk_item_waypoint`.`id` INNER JOIN `gk_user` ON `gk_item`.`userid`=`gk_user`.`id` INNER JOIN `caches` ON `gk_item_waypoint`.`wp`=`caches`.`wp_oc` WHERE `caches`.`cache_id`='&1' AND `gk_item`.`typeid`!=2 AND `gk_item`.`stateid` IN (0, 3) AND `gk_item_waypoint`.`wp`!='' UNION
 	             SELECT `gk_item`.`id`, `gk_item`.`name` AS `itemname`, `gk_user`.`name` AS `username` FROM `gk_item` INNER JOIN `gk_item_waypoint` ON `gk_item`.`id`=`gk_item_waypoint`.`id` INNER JOIN `gk_user` ON `gk_item`.`userid`=`gk_user`.`id` INNER JOIN `caches` ON `gk_item_waypoint`.`wp`=`caches`.`wp_gc` WHERE `caches`.`cache_id`='&1' AND `gk_item`.`typeid`!=2 AND `gk_item`.`stateid` IN (0, 3) AND `gk_item_waypoint`.`wp`!='' ORDER BY `itemname`", $cacheid);
 	$tpl->assign_rs('geokret', $rsGeoKret);
 	$tpl->assign('geokret_count', sql_num_rows($rsGeoKret));

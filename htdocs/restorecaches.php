@@ -28,7 +28,7 @@ x                    cache_logs_restored   I*     here          datetime     no 
 
 	* only insertions on restore
 
-	(Additional waypoints in table 'coordinates' are currently not monitored. Archiving 
+	(Additional waypoints in table 'coordinates' are currently not monitored. Archiving
 	and restoring waypoints would be as complex as log entries and is not important at
 	vandalism-restore.)
 

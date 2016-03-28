@@ -27,7 +27,7 @@
 	 *  strongly recommended settings
 	 *    register_globals = Off
 	 *
-	 * PHP_DEBUG_ON 
+	 * PHP_DEBUG_ON
 	 *
 	 *  use the following php.ini-settings
 	 *    display_errors = On
@@ -190,7 +190,7 @@
 	/* other template options
 	 *
 	 */
-	$opt['page']['origin_url'] = 'http://www.opencaching.de/';  // production installation for this OC site 
+	$opt['page']['origin_url'] = 'http://www.opencaching.de/';  // production installation for this OC site
 	$opt['page']['develsystem'] = false;
 	$opt['page']['teampic_url'] = 'http://www.opencaching.de/images/team/';
 	$opt['page']['teammember_url'] = 'http://www.opencaching.de/';
@@ -256,7 +256,7 @@
 	
 	/*
 	 * count of identical logs (date and text) that shows a warning message on
-	 * next log 
+	 * next log
 	 */
 	$opt['logic']['masslog']['count'] = 20;
 
@@ -311,7 +311,7 @@
 	$opt['logic']['cachemaps']['iframe'] = false;
 	
 	/* Minimap for the new-caches list on the front page.
-	 * If the url string is empty, no minimap is displayed on the front page. 
+	 * If the url string is empty, no minimap is displayed on the front page.
 	 * 
 	 * Coordinates of new caches are appended to the url.
 	 */

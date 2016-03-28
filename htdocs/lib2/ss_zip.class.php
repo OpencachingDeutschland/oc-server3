@@ -18,7 +18,7 @@ class ss_zip{
 	var $cnt=0;
 	/** current offset in zipdata segment */
 	var $offset=0;
-	/** index of current entry 
+	/** index of current entry
 		@see ss_zip::read()
 	*/
 	var $idx=0;
@@ -64,7 +64,7 @@ class ss_zip{
 	/**saves to the disc or sends zipfile to the browser.
 	@param str zipfile path under which to store the file on the server or file name under which the browser will receive it.
 	If you are saving to the server, you are responsible to obtain appropriate write permissions for this operation.
-	@param char where indicates where should the file be sent 
+	@param char where indicates where should the file be sent
 	<ul>
 	<li>'f' -- filesystem </li>
 	<li>'b' -- browser</li>
@@ -114,10 +114,10 @@ class ss_zip{
 
 		}
 		$fnl=strlen($filename);
-        $fh = "\x14\x00";    // ver needed to extract 
-        $fh .= "\x00\x00";    // gen purpose bit flag 
-        $fh .= "\x08\x00";    // compression method 
-        $fh .= "\x00\x00\x00\x00"; // last mod time and date 
+        $fh = "\x14\x00";    // ver needed to extract
+        $fh .= "\x00\x00";    // gen purpose bit flag
+        $fh .= "\x08\x00";    // compression method
+        $fh .= "\x00\x00\x00\x00"; // last mod time and date
 		$fh .=pack("V3v2",
 			$crc, //crc
 			$gzsize,//c size
@@ -139,10 +139,10 @@ class ss_zip{
 		$cdir.=pack("va*v3V2",
 		0,
 		$fh,
-    	0, 		// file comment length 
-    	0,		// disk number start 
-    	0,		// internal file attributes 
-    	$attr,	// external file attributes - 'archive/directory' bit set 
+    	0, 		// file comment length
+    	0,		// disk number start
+    	0,		// internal file attributes
+    	$attr,	// external file attributes - 'archive/directory' bit set
 		$this->offset
 		).$filename;
 
@@ -152,7 +152,7 @@ class ss_zip{
 		$this->idx = $this->cnt-1;
 	}
 	/** adds a file to the archive
-	@param str filename contains valid path to file to be stored in the arcive. 
+	@param str filename contains valid path to file to be stored in the arcive.
 	@param str storedasname the path under which the file will be stored to the archive. If empty, the file will be stored under path given by filename parameter
 	@see ss_zip::add_data()
 	*/
@@ -162,7 +162,7 @@ class ss_zip{
 		if(!trim($storedasname))$storedasname=$filename;
 		return $this->add_data($storedasname, $data);
 	}
-	/** compile the arcive.	
+	/** compile the arcive.
 	This function produces ZIP archive and returns it.
 	@return str string with zipfile
 	*/
@@ -177,17 +177,17 @@ class ss_zip{
 			.$cds
 			."PK\x05\x06\x00\x00\x00\x00"
 	        .pack('v2V2v'
-        	,$this->cnt			// total # of entries "on this disk" 
-        	,$this->cnt			// total # of entries overall 
-        	,$cdsl					// size of central dir 
-        	,$zdsl					// offset to start of central dir 
-        	,0);							// .zip file comment length 
+        	,$this->cnt			// total # of entries "on this disk"
+        	,$this->cnt			// total # of entries overall
+        	,$cdsl					// size of central dir
+        	,$zdsl					// offset to start of central dir
+        	,0);							// .zip file comment length
 		return $this->zipfile;
 	}
 	/** changes pointer to current entry.
 	Most likely you will always use it to 'rewind' the archive and then using read()
 	Checks for bopundaries, so will not allow index to be set to values < 0 ro > last element
-	@param int idx the new index to which you want to rewind the archive curent pointer 
+	@param int idx the new index to which you want to rewind the archive curent pointer
 	@return int idx the index to which the curent pointer was actually set
 	@see ss_zip::read()
 	*/
@@ -231,7 +231,7 @@ class ss_zip{
 	
 	/** extracts data from the archive and return it as a string.
 		<center><hr nashade>*** This functionality is available in PRO version only. ***<br><a href='http://smiledsoft.com/demos/phpzip/' target='_blank'>please upgrade </a><hr nashade></center>
-	This function returns data identified by idx parameter. 
+	This function returns data identified by idx parameter.
 	@param int idx index of the entry
 	@return array returns associative array of the folloving structure:
 	 <ul>
@@ -248,10 +248,10 @@ class ss_zip{
 	/** extracts the entry and creates it in the file system.
 		<center><hr nashade>*** This functionality is available in PRO version only. ***<br><a href='http://smiledsoft.com/demos/phpzip/' target='_blank'>please upgrade </a><hr nashade></center>
 	@param int idx Index of the entry
-	@param string path the first part of the path where the entry will be stored. So if this 
+	@param string path the first part of the path where the entry will be stored. So if this
 	is '/my/server/path' and entry is arhived/file/path/file.txt then the function will attempt to
 	store it under /my/server/path/arhived/file/path/file.txt You are responsible to ensure that you
-	have write permissions for this operation under your operation system. 
+	have write permissions for this operation under your operation system.
 	*/
 	function extract_file($idx,$path="."){}
 	

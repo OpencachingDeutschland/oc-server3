@@ -98,4 +98,3 @@ function createCaptcha()
 	$ret['id'] = substr($ret['filename'], -36, 32);
 	return $ret;
 }
-?>

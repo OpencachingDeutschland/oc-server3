@@ -34,7 +34,7 @@
 
 		$rsWp = sql("
 				SELECT `wp` FROM `gk_move_waypoint`
-				LEFT JOIN `gk_move` ON `gk_move`.`id`=`gk_move_waypoint`.`id` 
+				LEFT JOIN `gk_move` ON `gk_move`.`id`=`gk_move_waypoint`.`id`
 				WHERE `gk_move`.`id`='&1' AND `logtypeid` IN (0,3)",
 				$lastmove);
 		while ($rWp = sql_fetch_assoc($rsWp))

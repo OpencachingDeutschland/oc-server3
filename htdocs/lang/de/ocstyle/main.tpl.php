@@ -199,7 +199,7 @@
 				<!-- Navigation Level 2 -->
 				<div class="nav2">
 					<ul>
-<?php 
+<?php
 						// $pageidx is -1 e.g. when calling newcache.php as logged-off-user (-> login.tpl.php)
 						if ($pageidx >= 0)
 							mnu_EchoMainMenu($menu[$pageidx]['siteid']);
@@ -282,7 +282,7 @@
 								<td><a href="https://www.facebook.com/opencaching.de"><img src="resource2/{style}/images/media/16x16-facebook.png" width="16" height="16"  /></a></td>
 							</tr>
 							<tr>
-								<td class="mediumsmalltext" colspan="5" style="padding-top:0.6em; text-align:left">{t}Join discussions:{/t}</td>							
+								<td class="mediumsmalltext" colspan="5" style="padding-top:0.6em; text-align:left">{t}Join discussions:{/t}</td>
 							</tr>
 						</table>
 						<table style="margin-left: auto; margin-right: auto;">

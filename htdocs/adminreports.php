@@ -105,7 +105,7 @@
 				               `u`.`username`,
 				               IF(LENGTH(`u3`.`username`)>10, CONCAT(LEFT(`u3`.`username`,9),'.'),`u3`.`username`) AS `adminname`,
 				               `cr`.`lastmodified`,
-				               `cr`.`adminid` IS NOT NULL AND `cr`.`adminid`!=&1 AS otheradmin 
+				               `cr`.`adminid` IS NOT NULL AND `cr`.`adminid`!=&1 AS otheradmin
 				          FROM `cache_reports` `cr`
 				    INNER JOIN `caches` `c` ON `c`.`cache_id` = `cr`.`cacheid`
 				    INNER JOIN `user` `u` ON `u`.`user_id`  = `cr`.`userid`
@@ -114,7 +114,7 @@
 				         WHERE `cr`.`status` < 3 " .
 				         //  AND (`cr`.`adminid` IS NULL OR `cr`.`adminid`=&1)
 		         "ORDER BY (`cr`.`adminid` IS NULL OR `cr`.`adminid`=&1) DESC,
-						            `cr`.`status` ASC, 
+						            `cr`.`status` ASC,
 												`cr`.`lastmodified` ASC",
 			    $login->userid);
 

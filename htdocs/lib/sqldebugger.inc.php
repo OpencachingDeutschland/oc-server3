@@ -352,4 +352,3 @@ function sqldbg_insert_nocache($sql)
 	
 	return $sql;
 }
-?>

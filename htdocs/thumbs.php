@@ -139,7 +139,7 @@
 			if ($r['object_type'] == 1)
 			{
 				// Log picture gallery in thumbs.php relies on this format!
-				// It is large enough to have the pics look nice ... 
+				// It is large enough to have the pics look nice ...
 				$thumb_max_height = 105;
 				$thumb_max_width = 105;
 			}

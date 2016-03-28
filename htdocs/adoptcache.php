@@ -78,8 +78,8 @@ function showAdoptScreen($cacheid, $touerror)
 {
 	global $tpl, $login;
 
-	$rs = sql("SELECT `caches`.`name`, `user`.`username`, `cache_adoption`.`date_created` 
-	             FROM `caches` 
+	$rs = sql("SELECT `caches`.`name`, `user`.`username`, `cache_adoption`.`date_created`
+	             FROM `caches`
 	       INNER JOIN `user` ON `caches`.`user_id`=`user`.`user_id`
 	       INNER JOIN `cache_adoption` ON `caches`.`cache_id`=`cache_adoption`.`cache_id`
 	            WHERE `caches`.`cache_id`='&1'

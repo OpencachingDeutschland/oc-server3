@@ -497,14 +497,14 @@ function __autoload($class_name)
 		/* prepare user country selection
 		 */
 		$tpl_usercountries = array();
-		$rsUserCountries = sql("SELECT `countries_options`.`country`, 
-		                  IF(`countries_options`.`nodeId`='&1', 1, IF(`countries_options`.`nodeId`!=0, 2, 3)) AS `group`, 
-		                  IFNULL(`sys_trans_text`.`text`, `countries`.`name`) AS `name` 
-		             FROM `countries_options` 
+		$rsUserCountries = sql("SELECT `countries_options`.`country`,
+		                  IF(`countries_options`.`nodeId`='&1', 1, IF(`countries_options`.`nodeId`!=0, 2, 3)) AS `group`,
+		                  IFNULL(`sys_trans_text`.`text`, `countries`.`name`) AS `name`
+		             FROM `countries_options`
 		       INNER JOIN `countries` ON `countries_options`.`country`=`countries`.`short`
-		        LEFT JOIN `sys_trans` ON `countries`.`trans_id`=`sys_trans`.`id` 
-		        LEFT JOIN `sys_trans_text` ON `sys_trans`.`id`=`sys_trans_text`.`trans_id` AND `sys_trans_text`.`lang`='&2' 
-		            WHERE `countries_options`.`display`=1 
+		        LEFT JOIN `sys_trans` ON `countries`.`trans_id`=`sys_trans`.`id`
+		        LEFT JOIN `sys_trans_text` ON `sys_trans`.`id`=`sys_trans_text`.`trans_id` AND `sys_trans_text`.`lang`='&2'
+		            WHERE `countries_options`.`display`=1
 		         ORDER BY `group` ASC,
 		                  IFNULL(`sys_trans_text`.`text`, `countries`.`name`) ASC", $oc_nodeid, $locale);
 		while ($rUserCountries = sql_fetch_assoc($rsUserCountries))

@@ -54,5 +54,5 @@ function imageBrowser(field_name, url, type, win)
 
 function fileBrowserReturn(url)
 {
-  fileBrowserWin.document.forms[0].elements[fileBrowserFieldName].value = url;    
+  fileBrowserWin.document.forms[0].elements[fileBrowserFieldName].value = url;
 }

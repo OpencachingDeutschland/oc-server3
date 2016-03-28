@@ -4,11 +4,11 @@
  *
  *  Unicode Reminder メモ
  *
- *  This module is included by each site with HTML-output and contains 
+ *  This module is included by each site with HTML-output and contains
  *  functions that are specific to HTML-output. common.inc.php is included
  *  and will do the setup.
  *
- *  If you include this script from any subdir, you have to set the 
+ *  If you include this script from any subdir, you have to set the
  *  variable $opt['rootpath'], so that it points (relative or absolute)
  *  to the root.
  ***************************************************************************/

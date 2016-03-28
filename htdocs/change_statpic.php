@@ -46,8 +46,8 @@
 	$tpl->assign('statpic_text', isset($_REQUEST['statpic_text']) ? $_REQUEST['statpic_text'] : $sp->getText());
 	$tpl->assign('statpic_style', isset($_REQUEST['statpic_style']) ? $_REQUEST['statpic_style'] : $sp->getStyle());
 
-	$rs = sql("SELECT `statpics`.`id`, `statpics`.`previewpath`, IFNULL(`sys_trans_text`.`text`, `statpics`.`description`) AS `description` 
-	             FROM `statpics` 
+	$rs = sql("SELECT `statpics`.`id`, `statpics`.`previewpath`, IFNULL(`sys_trans_text`.`text`, `statpics`.`description`) AS `description`
+	             FROM `statpics`
 	        LEFT JOIN `sys_trans_text` ON `statpics`.`trans_id`=`sys_trans_text`.`trans_id` AND `sys_trans_text`.`lang`='&1'
 	         ORDER BY `statpics`.`id` ASC",
 					          $opt['template']['locale']);

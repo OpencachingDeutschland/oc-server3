@@ -27,7 +27,7 @@
 		<h1>Opencaching.de momentan ausser Betrieb</h1>
 		<p>Opencaching.de wird gerade umgebaut und um Fehler in der Datenverarbeitung zu vermeiden, haben wir die
 		gesamte Seite gerade ausser Betrieb genommen.</p>
-		<p>Wir bitten um etwas Geduld und bem&uuml;hen uns die Seite wieder m&ouml;glichst schnell  
+		<p>Wir bitten um etwas Geduld und bem&uuml;hen uns die Seite wieder m&ouml;glichst schnell
 		funktionsbereit zu machen.</p>
 		<p>Vielen Dank,<br/>das Opencaching.de-Team</p>
   </div>

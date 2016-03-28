@@ -248,13 +248,13 @@ function cache_locate($nLat, $nLon, $nDistance)
 {
 	global $login;
 
-	$rsCache = sql_slave("SELECT " . geomath::getSqlDistanceFormula($nLon, $nLat, $nDistance) . " AS `distance`, 
+	$rsCache = sql_slave("SELECT " . geomath::getSqlDistanceFormula($nLon, $nLat, $nDistance) . " AS `distance`,
 	                              `caches`.`wp_oc`
-	                         FROM `caches` 
+	                         FROM `caches`
 	                   INNER JOIN `cache_status` ON `caches`.`status`=`cache_status`.`id`
-	                        WHERE `caches`.`latitude`>'&1' AND 
-      										      `caches`.`latitude`<'&2' AND 
-										            `caches`.`longitude`>'&3' AND 
+	                        WHERE `caches`.`latitude`>'&1' AND
+      										      `caches`.`latitude`<'&2' AND
+										            `caches`.`longitude`>'&3' AND
 										            `caches`.`longitude`<'&4' AND
 										            (`cache_status`.`allow_user_view`=1 OR `caches`.`user_id`='&1')
 					             ORDER BY `distance` ASC LIMIT 1",
@@ -280,25 +280,25 @@ function output_cachexml($sWaypoint)
 	global $opt, $login;
 
 	$rsCache = sql_slave("SELECT `caches`.`cache_id`, `caches`.`name`, `caches`.`wp_oc`, `caches`.`cache_id`, `caches`.`type`,
-	                             `caches`.`longitude`, `caches`.`latitude`, 
+	                             `caches`.`longitude`, `caches`.`latitude`,
 	                             `caches`.`status`>1 AS `inactive`,
 	                             IFNULL(`trans_status_text`.`text`, `cache_status`.`name`) AS `statustext`,
-	                             IFNULL(`trans_type_text`.`text`, `cache_type`.`en`) AS `type_text`, `cache_type`.`id` AS `type_id`, 
-	                             IFNULL(`trans_size_text`.`text`, `cache_size`.`name`) AS `size`, 
-	                             `caches`.`difficulty`, `caches`.`terrain`, 
+	                             IFNULL(`trans_type_text`.`text`, `cache_type`.`en`) AS `type_text`, `cache_type`.`id` AS `type_id`,
+	                             IFNULL(`trans_size_text`.`text`, `cache_size`.`name`) AS `size`,
+	                             `caches`.`difficulty`, `caches`.`terrain`,
 	                             `caches`.`date_created`, `caches`.`is_publishdate`,
-	                             IFNULL(`stat_caches`.`toprating`, 0) AS `toprating`, 
-	                             IF(`caches`.`user_id`='&1', 1, 0) AS `owner`, 
+	                             IFNULL(`stat_caches`.`toprating`, 0) AS `toprating`,
+	                             IF(`caches`.`user_id`='&1', 1, 0) AS `owner`,
 	                             `user`.`username`, `user`.`user_id`,
 	                             IF(`caches_attributes`.`attrib_id` IS NULL, 0, 1) AS `oconly`,
 	                             IFNULL(`pictures`.`url`,'') AS `picurl`,
 	                             IFNULL(`pictures`.`title`,'') AS `pictitle`
-	                        FROM `caches` 
-	                  INNER JOIN `cache_type` ON `caches`.`type`=`cache_type`.`id` 
-	                  INNER JOIN `cache_status` ON `caches`.`status`=`cache_status`.`id` 
-	                  INNER JOIN `user` ON `caches`.`user_id`=`user`.`user_id` 
-	                  INNER JOIN `cache_size` ON `caches`.`size`=`cache_size`.`id` 
-	                   LEFT JOIN `stat_caches` ON `caches`.`cache_id`=`stat_caches`.`cache_id` 
+	                        FROM `caches`
+	                  INNER JOIN `cache_type` ON `caches`.`type`=`cache_type`.`id`
+	                  INNER JOIN `cache_status` ON `caches`.`status`=`cache_status`.`id`
+	                  INNER JOIN `user` ON `caches`.`user_id`=`user`.`user_id`
+	                  INNER JOIN `cache_size` ON `caches`.`size`=`cache_size`.`id`
+	                   LEFT JOIN `stat_caches` ON `caches`.`cache_id`=`stat_caches`.`cache_id`
 	                   LEFT JOIN `sys_trans` AS `trans_status` ON `cache_status`.`trans_id`=`trans_status`.`id` AND `cache_status`.`name`=`trans_status`.`text`
 	                   LEFT JOIN `sys_trans_text` AS `trans_status_text` ON `trans_status`.`id`=`trans_status_text`.`trans_id` AND `trans_status_text`.`lang`='&2'
 	                   LEFT JOIN `sys_trans` AS `trans_type` ON `cache_type`.`trans_id`=`trans_type`.`id` AND `cache_type`.`name`=`trans_type`.`text`
@@ -307,7 +307,7 @@ function output_cachexml($sWaypoint)
 	                   LEFT JOIN `sys_trans_text` AS `trans_size_text` ON `trans_size`.`id`=`trans_size_text`.`trans_id` AND `trans_size_text`.`lang`='&2'
 	                   LEFT JOIN `caches_attributes` ON `caches_attributes`.`cache_id`=`caches`.`cache_id` AND `caches_attributes`.`attrib_id`=6
 	                   LEFT JOIN `pictures` ON `pictures`.`object_id`=`caches`.`cache_id` AND `pictures`.`object_type`='&4' AND `pictures`.`mappreview`=1
-	                       WHERE (`caches`.`wp_oc`='&3' OR (`caches`.`wp_oc`!='&3' AND `caches`.`wp_gc_maintained`='&3')) AND 
+	                       WHERE (`caches`.`wp_oc`='&3' OR (`caches`.`wp_oc`!='&3' AND `caches`.`wp_gc_maintained`='&3')) AND
 	                             (`cache_status`.`allow_user_view`=1 OR `caches`.`user_id`='&1')
 	                       LIMIT 1",  // for the case of illegal duplicates in pictures.mappreview etc.
 	                              $login->userid, $opt['template']['locale'], $sWaypoint, OBJECT_CACHE);
@@ -383,12 +383,12 @@ function output_namesearch($sName, $nLat, $nLon, $nResultId)
   global $login, $opt;
 
   echo '<caches>' . "\n";
-  $rs = sql_slave("SELECT " . geomath::getSqlDistanceFormula($nLon, $nLat, 0) . " AS `distance`, 
-                          `caches`.`name`, `caches`.`wp_oc` 
-                     FROM `map2_data` 
+  $rs = sql_slave("SELECT " . geomath::getSqlDistanceFormula($nLon, $nLat, 0) . " AS `distance`,
+                          `caches`.`name`, `caches`.`wp_oc`
+                     FROM `map2_data`
                INNER JOIN `caches` ON `map2_data`.`cache_id`=`caches`.`cache_id`
                INNER JOIN `cache_status` ON `caches`.`status`=`cache_status`.`id`
-                    WHERE `caches`.`name` LIKE '&1' 
+                    WHERE `caches`.`name` LIKE '&1'
                       AND (`cache_status`.`allow_user_view`=1 OR `caches`.`user_id`='&3')
                       AND `map2_data`.`result_id`='&2'
 					       ORDER BY `distance` ASC LIMIT 30",
@@ -470,10 +470,10 @@ function output_searchresult($nResultId, $compact, $nLon1, $nLon2, $nLat1, $nLat
 	if (!$bMaxRecordReached)
 	{
 		$namequery = ($cachenames ? ", `caches`.`name` AS `cachename`" : "");
-		$rs = sql_slave("SELECT SQL_BUFFER_RESULT 
+		$rs = sql_slave("SELECT SQL_BUFFER_RESULT
                             distinct `caches`.`wp_oc`,
                             `caches`.`longitude`, `caches`.`latitude`,
-                            `caches`.`type`, 
+                            `caches`.`type`,
                             `caches`.`status`>1 AS `inactive`,
                             `caches`.`type`=6 AND `caches`.`date_hidden`+INTERVAL 1 DAY < NOW() AS `oldevent`,
                             `user`.`user_id`='&6' AS `owned`,

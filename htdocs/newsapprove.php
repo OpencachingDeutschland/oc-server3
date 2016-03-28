@@ -42,9 +42,9 @@ function action_display()
 {
 	global $tpl;
 
-	$rs = sql('SELECT `news`.`id` AS `id`, `news`.`date_created` AS `date_created`, `news`.`content` AS `content`, `news`.`display` AS `display`, `news_topics`.`name` AS `topic` 
-	             FROM `news` 
-	       INNER JOIN `news_topics` ON `news`.`topic`=`news_topics`.`id` 
+	$rs = sql('SELECT `news`.`id` AS `id`, `news`.`date_created` AS `date_created`, `news`.`content` AS `content`, `news`.`display` AS `display`, `news_topics`.`name` AS `topic`
+	             FROM `news`
+	       INNER JOIN `news_topics` ON `news`.`topic`=`news_topics`.`id`
 	         ORDER BY `news`.`date_created` DESC');
 	$tpl->assign_rs('newsentries', $rs);
 	sql_free_result($rs);

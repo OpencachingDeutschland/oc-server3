@@ -42,4 +42,3 @@
 	}
 
 	mysql_close($dblink);
-?>

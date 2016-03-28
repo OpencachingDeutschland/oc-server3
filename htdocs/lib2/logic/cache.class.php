@@ -245,7 +245,7 @@ class cache
 			FROM `cache_logs`
 			WHERE `cache_id`='&1' AND `listing_outdated`>0
 			ORDER BY `order_date` DESC, `date_created` DESC, `id` DESC",
-			// same sorting order as in DB function sp_update_logstat() 
+			// same sorting order as in DB function sp_update_logstat()
 			$this->getCacheId()
 		);
 		if ($r = sql_fetch_assoc($rs))

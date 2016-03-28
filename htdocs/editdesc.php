@@ -162,11 +162,11 @@
 								tpl_errorMsg('editdesc', $error_desc_exists);
 							mysql_free_result($rs);
 						
-							sql("UPDATE `cache_desc` SET 
+							sql("UPDATE `cache_desc` SET
     					            `desc_html`='&1',
     					            `desc_htmledit`='&2',
-							            `desc`='&3', 
-							            `short_desc`='&4', 
+							            `desc`='&3',
+							            `short_desc`='&4',
 							            `hint`='&5',
 							            `language`='&6'
 							      WHERE `id`='&7'",
@@ -239,7 +239,7 @@
 					                 LEFT JOIN `languages_list_default` ON `languages`.`short`=`languages_list_default`.`show` AND `languages_list_default`.`lang`='&3'
 					                 LEFT JOIN `sys_trans` ON `languages`.`trans_id`=`sys_trans`.`id`
 					                 LEFT JOIN `sys_trans_text` ON `sys_trans`.`id`=`sys_trans_text`.`trans_id` AND `sys_trans_text`.`lang`='&3'
-					                     WHERE `languages`.`short` 
+					                     WHERE `languages`.`short`
 					                              NOT IN (SELECT `language` FROM `cache_desc` WHERE `cache_id`='&1' AND `language`!='&2') AND
 					                           ('&4'=1 OR `languages_list_default`.`show`=`languages`.`short`)
 					                  ORDER BY `name` ASC",

@@ -31,7 +31,7 @@
 	if (!cronjobs_enabled())
 		exit;
 
-	// use posix pid-files to lock process 
+	// use posix pid-files to lock process
 	if (!CreatePidFile($watchpid))
 	{
 		CleanupAndExit($watchpid, "Another instance is running!");
@@ -76,8 +76,8 @@
 /* end owner notifies */
 
 /* begin cache_watches */
-  $rscw = sql("SELECT `watches_logqueue`.`log_id`, `watches_logqueue`.`user_id`, `cache_logs`.`cache_id` 
-                 FROM `watches_logqueue` 
+  $rscw = sql("SELECT `watches_logqueue`.`log_id`, `watches_logqueue`.`user_id`, `cache_logs`.`cache_id`
+                 FROM `watches_logqueue`
            INNER JOIN `cache_logs` ON `watches_logqueue`.`log_id`=`cache_logs`.`id`");
   while($rcw = mysql_fetch_assoc($rscw))
   {
@@ -175,7 +175,7 @@
 							$mailsubject = '[' . $maildomain . '] ' . $translate->t('Your watchlist of', '', basename(__FILE__), __LINE__, '', 1, $language) . ' ' . date($opt['locale'][$language]['format']['phpdate']);
 							mb_send_mail($mailadr, $mailsubject, $mailbody, $email_headers);
 					
-							// logentry($module, $eventid, $userid, $objectid1, $objectid2, $logtext, $details)																
+							// logentry($module, $eventid, $userid, $objectid1, $objectid2, $logtext, $details)
 							logentry('watchlist', 2, $rUser['user_id'], 0, 0, 'Sending mail to ' . $mailadr, array());
 						}
 					}
@@ -280,7 +280,7 @@ function process_owner_log($user_id, $log_id)
 	sql("INSERT IGNORE INTO `watches_waiting` (`user_id`, `object_id`, `object_type`, `date_created`, `watchtext`, `watchtype`) VALUES (
 																		'&1', '&2', 1, NOW(), '&3', 1)", $user_id, $log_id, $watchtext);
 	
-	// logentry($module, $eventid, $userid, $objectid1, $objectid2, $logtext, $details)																
+	// logentry($module, $eventid, $userid, $objectid1, $objectid2, $logtext, $details)
 	logentry('watchlist', 1, $user_id, $log_id, 0, $watchtext, array());
 }
 
@@ -414,9 +414,9 @@ function getToMailDomain($mail)
 }
 
 
-// 
-// checks if other instance is running, creates pid-file for locking 
-// 
+//
+// checks if other instance is running, creates pid-file for locking
+//
 function CreatePidFile($PidFile)
 {
     if(!CheckDaemon($PidFile))
@@ -445,9 +445,9 @@ function CreatePidFile($PidFile)
     }
 }
 
-// 
-// checks if other instance of process is running.. 
-// 
+//
+// checks if other instance of process is running..
+//
 function CheckDaemon($PidFile)
 {
     if($pidfile = @fopen($PidFile, "r"))
@@ -457,16 +457,16 @@ function CheckDaemon($PidFile)
 
         $pid_daemon = (int)$pid_daemon;
 
-        // process running? 
+        // process running?
         if(posix_kill($pid_daemon, 0))
         {
-            // yes, good bye 
+            // yes, good bye
             echo "Error: process already running with pid=$pid_daemon!\n";
             false;
         }
         else
         {
-            // no, remove pid_file 
+            // no, remove pid_file
             echo "process not running, removing old pid_file (".$PidFile.")\n";
             unlink($PidFile);
             return true;
@@ -478,9 +478,9 @@ function CheckDaemon($PidFile)
     }
 }
 
-// 
-// deletes pid-file 
-// 
+//
+// deletes pid-file
+//
 function CleanupAndExit($PidFile, $message = false)
 {
     if($pidfile = @fopen($PidFile, "r"))
@@ -500,4 +500,3 @@ function CleanupAndExit($PidFile, $message = false)
       echo $message . "\n";
     }
 }
-?>

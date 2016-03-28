@@ -25,7 +25,7 @@
 		</table>
   <div id="content">
 		<?php
-			// no references to any other PHP code here except $errtitle and $errmsg, to minimize 
+			// no references to any other PHP code here except $errtitle and $errmsg, to minimize
 			// possibilities of error recursions
 
 			echo "<h1>" . $errtitle . "</h1>";

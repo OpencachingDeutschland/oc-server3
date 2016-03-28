@@ -9,7 +9,7 @@
 	/*  refresh cached files and translations
 	 *
 	 *  stop/start apache
-	 *  delete/recreate cached files 
+	 *  delete/recreate cached files
 	 */
 
 	if (!isset($opt['rootpath']))
@@ -184,6 +184,3 @@ function precompileTemplateWithLanguage($sTemplate, $sLanguage)
 	$preTemplate->name = $sTemplate;
 	$preTemplate->compile($sTemplate . '.tpl', $preTemplate->get_compile_id());
 }
-
-
-?>

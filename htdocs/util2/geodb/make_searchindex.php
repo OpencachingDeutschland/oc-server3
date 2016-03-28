@@ -5,7 +5,7 @@
 		
 		Unicode Reminder メモ
 
-		Dieses Script erstellt den Suchindex für Ortsnamen aus den Daten der 
+		Dieses Script erstellt den Suchindex für Ortsnamen aus den Daten der
 		Opengeodb. (Obsolet, dieser Suchindex wird nicht verwendet.)
 	***************************************************************************/
 
@@ -53,5 +53,3 @@
 	
 		return false;
 	}
-
-?>

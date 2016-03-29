@@ -16,7 +16,7 @@ var cachesizes = {$cachesizes|@count};
 
 {literal}
 
-function textonfocus(arrayid){
+function textonfocus (arrayid) {
 	document.searchbydistance.searchto[arrayid].checked = "checked";
 }
 
@@ -44,8 +44,8 @@ function _radio_click(){
 				return false;
 			}
 		}
-		else if (document.searchbydistance.searchto.value == "searchbyocwp") {
-			if (_sbocwp_click() == true){
+		else if (document.searchbydistance.searchto.value == "searchbywaypoint") {
+			if (_sbwaypoint_click() == true){
 				return true;
 			}
 			else {
@@ -130,17 +130,17 @@ function _sbortplz_click()
 	return true;
 }
 
-function _sbocwp_click()
+function _sbwaypoint_click()
 {
-	if (document.searchbydistance.ocwp.value == "")
+	if (document.searchbydistance.waypoint.value == "")
 	{
-		alert("{/literal}{t}Enter a Opencaching waypoint, please!{/t}{literal}");
+		alert("{/literal}{t}Enter a valid waypoint, please!{/t}{literal}");
 		resetbutton('submit_dist');
 		return false;
 	}
-	else if (!document.searchbydistance.ocwp.value.toLowerCase().startsWith("oc") || document.searchbydistance.ocwp.value.length<=5)
+	else if ((!document.searchbydistance.waypoint.value.toLowerCase().startsWith("oc") && document.searchbydistance.waypoint.value.length<=2) || (!document.searchbydistance.waypoint.value.toLowerCase().startsWith("gc") && document.searchbydistance.waypoint.value.length<=5)  )
 	{
-		alert("{/literal}{t}Enter a valid Opencaching waypoint, please!\nFormat: OCXXXX(X){/t}{literal}");
+		alert("{/literal}{t}Enter a valid waypoint, please!\nFormat: OCxxxx(x) / GCx(xxxx){/t}{literal}");
 		resetbutton('submit_dist');
 		return false;
 	}
@@ -176,10 +176,9 @@ function sync_options(element)
 		"searchbydistance",
 		"searchbyowner",
 		"searchbyfinder",
-		"searchbyortplz",
 		"searchbyfulltext"
 		{/literal}{if $logged_in},"searchall"{/if}{literal}
-		);
+	);
 
 	var sortby = "";
 	if (document.optionsform.sort[0].checked == true)
@@ -534,7 +533,6 @@ function switchAttributeCat2()
 	<tr><td class="separator"></td></tr>
 
 	<form action="search.php" onsubmit="return(_radio_click());" method="{$formmethod}" enctype="application/x-www-form-urlencoded" name="searchbydistance" dir="ltr" style="display:inline;">
-		<!-- <input type="hidden" name="searchto" value="searchbydistance" /> -->
 		<input type="hidden" name="showresult" value="1" />
 		<input type="hidden" name="expert" value="0" />
 		<input type="hidden" name="output" value="HTML" />
@@ -573,16 +571,16 @@ function switchAttributeCat2()
 			<td><input type="submit" name="submit_dist" value="{t}Search{/t}" class="formbutton" onclick="submitbutton('submit_dist')" /></td>
 		</tr>
 		<tr>
-			<td class=""><input type="radio" id="sbortplz" name="searchto" value="searchbyortplz" {if $dbyortplz_checked}checked="checked"{/if}><label for="sbortplz"> {t}from City / Postal Code:{/t}</label></td>
+			<td class=""><input type="radio" id="sbortplz" name="searchto" value="searchbyortplz" {if $dbyortplz_checked}checked="checked"{/if}><label for="sbortplz">... {t}from City / Postal Code:{/t}</label></td>
 			<td><input type="text" name="ortplz" value="{$ortplz}" class="input200" onfocus="textonfocus(0)"/> &nbsp;</td>
 			<td></td>  {* creates empty fourth column which is used by text search options *}
 		</tr>
 		<tr>
-			<td class=""><input type="radio" id="sbocwp" name="searchto" value="searchbyocwp" {if $dbyocwp_checked}checked="checked"{/if}><label for="sbocwp"> {t}from OC Waypoint:{/t}</label></td>
-			<td><input type="text" name="ocwp" value="{$ocwp}" maxlength="7" class="input50" onfocus="textonfocus(1)"/></td>
+			<td class=""><input type="radio" id="swaypoint" name="searchto" value="searchbywaypoint" {if $dbywaypoint_checked}checked="checked"{/if}><label for="sbwaypoint">... {t}from Waypoint:{/t}</label></td>
+			<td><input type="text" name="waypoint" value="{$waypoint}" maxlength="7" class="input50" onfocus="textonfocus(1)"/></td>
 		</tr>
 		<tr>
-			<td valign="top"><input type="radio" id="sbdis" name="searchto" value="searchbydistance" {if $dbydistance_checked}checked="checked"{/if}><label for="sbdis"> {t}from coordinates:{/t}</label></td>
+			<td valign="top"><input type="radio" id="sbdis" name="searchto" value="searchbydistance" {if $dbydistance_checked}checked="checked"{/if}><label for="sbdis">... {t}from coordinates:{/t}</label></td>
 			<td valign="top">
 				<select name="latNS" onfocus="textonfocus(2)">
 					<option value="N" {if $latN_sel}selected="selected"{/if}>{t}N{/t}</option>

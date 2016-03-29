@@ -1,4 +1,4 @@
-﻿-- Content of tables:
+﻿﻿-- Content of tables:
 -- attribute_categories
 -- attribute_groups
 -- cache_attrib

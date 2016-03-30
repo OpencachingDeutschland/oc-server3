@@ -14,7 +14,8 @@ Your contributions to this project are welcome - you may contact the team in the
 [Opencaching.de forum](http://forum.opencaching.de/) if you like to
 join us. Development is usually done on a VirtualBox Linux system that you can run on your
 Linux, Windows or Mac workstation, but you may also try to set up the code directly
-on your Linux machine.
+on your Linux machine. Otherwise you can use our new vagrant box. You get the needed link from a Team Member in
+[Opencaching.de forum](http://forum.opencaching.de/).
 
 This repo contains three branches:
 * the *stable* branch with current Opencaching.de production code

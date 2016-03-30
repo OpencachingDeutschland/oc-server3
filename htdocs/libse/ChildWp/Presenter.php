@@ -5,7 +5,7 @@
  *  Unicode Reminder メモ
  ***************************************************************************/
 
-require_once($opt['rootpath'] . 'lib2/error.inc.php');
+require_once(__DIR__ . '/../../lib2/error.inc.php');
 
 abstract class ChildWp_Presenter
 {

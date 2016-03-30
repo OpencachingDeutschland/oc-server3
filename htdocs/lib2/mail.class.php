@@ -5,7 +5,7 @@
  *  Unicode Reminder メモ
  ***************************************************************************/
 
-require_once($opt['rootpath'] . 'lib2/smarty/Smarty.class.php');
+require_once(__DIR__. '/../vendor/autoload.php');
 
 class mail extends Smarty
 {
@@ -31,7 +31,7 @@ class mail extends Smarty
         $this->compile_dir = $opt['rootpath'] . 'cache2/smarty/compiled/';
         $this->plugins_dir = [
             'plugins',
-            'ocplugins'
+            __DIR__ . '/../src/Oc/SmartyPlugins'
         ];
 
         // disable caching ...

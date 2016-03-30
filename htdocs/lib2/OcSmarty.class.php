@@ -7,7 +7,8 @@
  *  Inherit Smarty-Class and extend it
  ***************************************************************************/
 
-require_once($opt['rootpath'] . 'lib2/smarty/Smarty.class.php');
+// require_once($opt['rootpath'] . 'lib2/smarty/Smarty.class.php');
+require_once(__DIR__ . '/../vendor/autoload.php');
 require_once($opt['rootpath'] . 'lib2/db.inc.php');
 require_once($opt['rootpath'] . 'lib2/logic/labels.inc.php');
 
@@ -33,11 +34,11 @@ class OcSmarty extends Smarty
     // url to call if login is required
     public $target = '';
 
-    public $header_javascript = array();
-    public $body_load = array();
-    public $body_unload = array();
+    public $header_javascript = [];
+    public $body_load = [];
+    public $body_unload = [];
 
-    public function OcSmarty()
+    public function __construct()
     {
         global $opt, $sqldebugger;
         require_once($opt['rootpath'] . 'lib2/bench.inc.php');
@@ -48,17 +49,17 @@ class OcSmarty extends Smarty
         $this->template_dir = $opt['stylepath'];
         $this->compile_dir = $opt['rootpath'] . 'cache2/smarty/compiled/';
         $this->cache_dir = $opt['rootpath'] . 'cache2/smarty/cache/';
-        $this->plugins_dir = array(
+        $this->plugins_dir = [
             'plugins',
-            'ocplugins'
-        );
+            __DIR__ . '/../src/Oc/SmartyPlugins'
+        ];
 
         // disable caching ... if caching is enabled, 1 hour is default
         $this->caching = false;
         $this->cache_lifetime = 3600; // default
 
         // register additional functions
-        require_once($opt['rootpath'] . 'lib2/smarty/ocplugins/block.nocache.php');
+        require_once(__DIR__ . '/../src/Oc/SmartyPlugins/block.nocache.php');
         $this->register_block('nocache', 'smarty_block_nocache', false);
         $this->load_filter('pre', 't');
 
@@ -469,8 +470,9 @@ class OcSmarty extends Smarty
         global $opt;
 
         // we cannot redirect the POST-data
-        if (count($_POST) > 0)
+        if (count($_POST) > 0) {
             $this->error(ERROR_LOGIN_REQUIRED);
+        }
 
         // ok ... redirect the get-data
         $target = ($opt['page']['https']['force_login'] ? 'https' : $opt['page']['protocol'])
@@ -480,7 +482,7 @@ class OcSmarty extends Smarty
 
     public function assign_rs($name, $rs)
     {
-        $items = array();
+        $items = [];
         while ($r = sql_fetch_assoc($rs)) {
             $items[] = $r;
         }

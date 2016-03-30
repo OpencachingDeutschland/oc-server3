@@ -5,7 +5,6 @@
  *  Unicode Reminder メモ
  ***************************************************************************/
 
-require_once(__DIR__ . '/HTMLPurifier/library/HTMLPurifier.auto.php');
 require_once(__DIR__ . '/Net/IDNA2.php');
 
 // !! THIS CODE IS ALSO USED IN OKAPI !!

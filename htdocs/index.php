@@ -5,6 +5,7 @@
  *  Unicode Reminder メモ
  ***************************************************************************/
 
+require_once(__DIR__.'/vendor/autoload.php');
 require('./lib2/web.inc.php');
 require('./lib2/logic/logpics.inc.php');
 $sUserCountry = $login->getUserCountry();

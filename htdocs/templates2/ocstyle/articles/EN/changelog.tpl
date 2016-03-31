@@ -15,6 +15,33 @@
 
 	<div class="changelog-changes">
 
+	<p id="v3.0.18"><strong>OC 3.0 Release 18</strong> &ndash; 31 March 2016</p>
+	<p>New:</p>
+	<ul>
+		<li>Show markers when searching for coordinates on the map</li>
+		<li>Pictures in cache descriptions and logs can be reordered.</li>
+		<li>Convert coordinates of additional waypoints in cache listings</li>
+		<li>OKAPI: Upload log images</li>
+		<li>OKAPI: &bdquo;Geocache needs maintenance&ldquo; can be queried and logged.</li>
+		<li>OKAPI: Consumer keys can be revoked (by sysadmins)</li>
+	</ul>
+
+	<p>Changed / improved:</p>
+	<ul>
+		<li>Better ordering of logs with and without time on the same day.</li>
+        <li>When the owner changes the type of the latest log, the cache status will be adjusted (depending on the old/new log type). The type of older status logs can no longer be changed.</li>
+		<li>Smileys in notification emails (shown as text smilies)</li>
+		<li>Improved cache report handling by OC admins</li>
+		<li>Detail improvements and adjustments for maintenance state logs</li>
+	</ul>
+
+	<p>Fixed:</p>
+	<ul>
+		<li>Repaired coordinate searching on the map</li>
+		<li><a href="doc/xml">XML interface fixes</a>. If you were using the replication feature of version 1.4, you should import a complete dump.</li>
+	</ul>
+	<br />
+
 	<p id="v3.0.17"><strong>OC 3.0 Release 17</strong> &ndash; 7 March 2016</p>
 	<p>New:</p>
 	<ul>

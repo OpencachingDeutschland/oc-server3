@@ -32,7 +32,7 @@
 
 	<div class="changelog-changes">
 
-	<p id="current"><strong>Laufende Änderungen</strong>, Stand 31. März 2016</p>
+	<p id="v3.0.18"><strong>OC 3.0 Version 18</strong> &ndash; 31. März 2016</p>
 	<p>Neu:</p>
 	<ul>
 		<li>Anzeige von Markern bei der Koordinatensuche auf der Karte</li>
@@ -49,7 +49,6 @@
         <li>Beim Ändern des Typs des neuesten Logs durch den Owner wird ggf. auch der Status des Caches mit angepasst. Der Typ älterer Statuslogs ist nicht mehr änderbar.</li>
 		<li>Smiley-Icons auch in Benachrichtigungsmails (Ausgabe als Text-Smileys)</li>
 		<li>Komfortablere Abarbeitung von Cachemeldungen (Admin-Funktion)</li>
-		<li>Bei der Angabe &bdquo;letztes Login&ldquo; im Benutzerprofil wird nun zwischen 1&ndash;2 Jahren und &gt;2 Jahren unterschieden.</li>
 		<li>Detailverbesserungen und -Nachbesserungen bei den Wartungsstatus-Logs</li>
 	</ul>
 

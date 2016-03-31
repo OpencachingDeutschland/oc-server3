@@ -18,7 +18,10 @@
 	           style      get/post/cookie   used style
 
  ****************************************************************************/
-
+/**
+ * @todo reformat code to PSR-2 Standard
+ * @param $class_name
+ */
 function __autoload($class_name)
 {
 	global $opt;

@@ -9,17 +9,8 @@
 /htdocs/util/notification/settings.inc.php
 /htdocs/util/publish_caches/settings.inc.php
 /htdocs/util/watchlist/settings.inc.php
-# obsolete:
+# obsolete, used for testing old versions:
 /htdocs/util/mysql_root/settings.inc.php
-
-# directory permissions
-# these files are contained in the repo, but may be overriden locally
-/htdocs/util/archive/.htaccess
-/htdocs/util/attributes/.htaccess
-/htdocs/util/change_owner/.htaccess
-/htdocs/util/delete/.htaccess
-/htdocs/util/mysql_root/.htaccess
-/htdocs/util/search_index/.htaccess
 
 # other data
 /htdocs/cache/*
@@ -34,12 +25,21 @@
 /htdocs/robots.txt
 /htdocs/sitemap*xml*
 /htdocs/var/*
-# obsolete:
+# obsolete, used for testing old versions:
 /lib/htmlpurifier-4.2.0/library/HTMLPurifier/DefinitionCache/Serializer/CSS/*
 /lib/htmlpurifier-4.2.0/library/HTMLPurifier/DefinitionCache/Serializer/HTML/*
 /lib/htmlpurifier-4.2.0/library/HTMLPurifier/DefinitionCache/Serializer/URI/*
 
-# local tools
+# files which may be replaced locally
+.editorconfig
+/htdocs/util/archive/.htaccess
+/htdocs/util/attributes/.htaccess
+/htdocs/util/change_owner/.htaccess
+/htdocs/util/delete/.htaccess
+/htdocs/util/mysql_root/.htaccess
+/htdocs/util/search_index/.htaccess
+
+# local files
 /local/devel/okapi-update-settings.inc.php
 /local/ocxml11client/data-files
 /local/ocxml11client/tmp

@@ -46,6 +46,9 @@ function get_okapi_settings()
 		'HTTPS'            => $opt['page']['https']['mode'] == HTTPS_DISABLED ? 'unavailable' : ($opt['page']['https']['is_default'] ? 'recommended' : 'available'),
 		'VAR_DIR'          => $opt['okapi']['var_dir'],
 		'IMAGES_DIR'       => rtrim($opt['logic']['pictures']['dir'], '/'),
+		'IMAGES_URL'       => rtrim($opt['logic']['pictures']['url'], '/').'/',
+		'IMAGE_MAX_UPLOAD_SIZE' => 2 * $opt['logic']['pictures']['maxsize'],
+		'IMAGE_MAX_PIXEL_COUNT' => 786432,  # 1024 x 768; TODO: move PICTURE_MAX_LONG_SIDE to settings
 		'SITE_LOGO'        => $opt['page']['absolute_url'] . 'resource2/' . $opt['template']['default']['style'] . '/images/oclogo/oc_logo_alpha3.png',
 		'OC_NODE_ID'       => $opt['logic']['node']['id'],
 		'OC_COOKIE_NAME'   => $opt['session']['cookiename'] . 'data',

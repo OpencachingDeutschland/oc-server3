@@ -727,4 +727,29 @@ class View
             ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
         ");
     }
+
+    private static function ver95()
+    {
+        # See comments on ver7.
+
+        Db::execute("
+            CREATE TABLE okapi_submitted_objects (
+                object_type tinyint(2) NOT NULL,
+                object_id int(11) NOT NULL,
+                consumer_key varchar(20) charset ascii collate ascii_bin NOT NULL,
+                PRIMARY KEY  (object_type, object_id),
+                KEY by_consumer (consumer_key, object_type)
+            ) ENGINE=MyISAM DEFAULT CHARSET=utf8
+            (
+                SELECT
+                    ".Okapi::OBJECT_TYPE_CACHE_LOG." object_type,
+                    log_id object_id,
+                    consumer_key
+                FROM okapi_cache_logs
+            )
+        ");
+        Db::execute("
+            DROP TABLE okapi_cache_logs
+        ");
+    }
 }

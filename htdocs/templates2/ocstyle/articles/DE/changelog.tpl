@@ -32,12 +32,13 @@
 
 	<div class="changelog-changes">
 
-	<p id="current"><strong>Laufende Änderungen</strong>, Stand 28. März 2016</p>
+	<p id="current"><strong>Laufende Änderungen</strong>, Stand 31. März 2016</p>
 	<p>Neu:</p>
 	<ul>
 		<li>Anzeige von Markern bei der Koordinatensuche auf der Karte</li>
 		<li>Die Reihenfolge von Bildern in Cachbeschreibungen und Logs ist nachträglich änderbar.</li>
 		<li>Koordinatenumrechnung für zusätzliche Wegpunkte</li>
+		<li>OKAPI: Logbilder hochladen</li>
 		<li>OKAPI: &bdquo;Cache benötigt Wartung&ldquo; ist abfragbar und logbar</li>
 		<li>OKAPI: Consumer Keys können gesperrt werden (Admin-Funktion)</li>
 	</ul>

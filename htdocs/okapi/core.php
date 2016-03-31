@@ -1003,8 +1003,8 @@ class Okapi
     public static $server;
 
     /* These two get replaced in automatically deployed packages. */
-    public static $version_number = 1207;
-    public static $git_revision = 'b49bf611be4aafdee1213fc10c79996eee713d57';
+    public static $version_number = 1237;
+    public static $git_revision = '93cfc2d9001583eb904c5da0fa3e74385b79a0f2';
 
     private static $okapi_vars = null;
 
@@ -1332,6 +1332,8 @@ class Okapi
         if ($init_made)
             return;
         ini_set('memory_limit', '256M');
+        # The memory limit is - among other - crucial for the maximum size
+        # of processable images; see services/logs/images/add.php: max_pixels()
         Db::connect();
         if (Settings::get('TIMEZONE') !== null)
             date_default_timezone_set(Settings::get('TIMEZONE'));
@@ -1902,6 +1904,28 @@ class Okapi
 
         return $html;
     }
+
+    function php_ini_get_bytes($variable)
+    {
+        $value = trim(ini_get($variable));
+        if (!preg_match("/^[0-9]+[KM]?$/", $value))
+            throw new Exception("Unexpected PHP setting: ".$variable. " = ".$value);
+        $value = str_replace('K', '*1024', $value);
+        $value = str_replace('M', '*1024*1024', $value);
+        $value = eval('return '.$value.';');
+        return $value;
+    }
+
+    # object types in table okapi_submitted_objects
+    const OBJECT_TYPE_CACHE = 1;
+    const OBJECT_TYPE_CACHE_DESCRIPTION = 2;
+    const OBJECT_TYPE_CACHE_IMAGE = 3;
+    const OBJECT_TYPE_CACHE_MP3 = 4;
+    const OBJECT_TYPE_CACHE_LOG = 5;           # implemented
+    const OBJECT_TYPE_CACHE_LOG_IMAGE = 6;     # implemented
+    const OBJECT_TYPE_CACHELIST = 7;
+    const OBJECT_TYPE_EMAIL = 8;
+    const OBJECT_TYPE_CACHE_REPORT = 9;
 }
 
 /** A data caching layer. For slow SQL queries etc. */

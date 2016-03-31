@@ -1,0 +1,73 @@
+<xml>
+    <brief>Edit an existing log entry image</brief>
+    <issue-id>396</issue-id>
+    <desc>
+        <p>This method allows you to change properties of an existing log entry
+        image. If you need to change the image itself, then you'll need to
+        delete it and re-add it.</p>
+
+        <p>At least one of the three parameters <b>caption</b>,
+        <b>is_spoiler</b> and <b>position</b> must be supplied.</p>
+    </desc>
+    <req name='image_uuid'>
+        <p>ID of the log entry image to be edited. The user of your Access
+        Token must be the author of the associated log entry.</p>
+    </req>
+    <opt name='caption'>
+        <p>Plain-text string, a new caption for the image.</p>
+
+        <p>Please note that providing an empty value indicates that your user
+        would like to remove the caption, which will often not be allowed
+        (then <b>success</b> will be <b>false</b>).</p>
+    </opt>
+    <opt name='is_spoiler'>
+        <p>One of the following:</p>
+        <ul>
+            <li>
+                <b>true</b> - marks the image as spoiler, which means that
+                it contains hints for finding the geocache.
+            </li>
+            <li>
+                <b>false</b> - marks the image as non-spoiler.
+            </li>
+         </ul>
+    </opt>
+    <opt name='position'>
+        <p>If given, it indicates the wanted position of this image on the log
+        entry's list of images (do not supply this parameter if you do not want
+        to change the order). This parameter takes the same 0-based value as
+        described in the <b>add</b> method.</p>
+
+        <p>Some Opencaching installations do not allow the order of log images
+        to be changed. Such installations will ignore this parameter (you can
+        check the <b>position</b> field in the response to verify if the order
+        was actually changed).</p>
+    </opt>
+    <common-format-params/>
+    <returns>
+        <p>A dictionary of the following structure:</p>
+        <ul>
+            <li><b>success</b> - <b>true</b>, if the image was edited successfully,</li>
+            <li>
+                <b>message</b> - plain-text string, a message for the user,
+                which acknowledges success or describes an error (usually you
+                want to display this only when <b>success</b> is <b>false</b>),
+            </li>
+            <li>
+                <p><b>position</b>:</p>
+
+                <ul>
+                    <li>If you have supplied the <b>position</b> parameter, then this field
+                    will contain a 0-based position of the image on the log entry's list
+                    of images - the position which was actually saved (it may differ from
+                    the position you have requested).</li>
+
+                    <li>If you have not supplied the <b>position</b> parameter, it will
+                    contain <b>null</b>.</li>
+
+                    <li>In case of an error, it will also contain <b>null</b>.</li>
+                </ul>
+            </li>
+        </ul>
+    </returns>
+</xml>

@@ -1,0 +1,73 @@
+<xml>
+    <brief>Add an image to a log entry</brief>
+    <issue-id>395</issue-id>
+    <desc>
+        <p>Attach a new image to an existing log entry.</p>
+    </desc>
+    <req name='log_uuid'>
+        <p>ID of the log entry to which the image will be attached. The user
+        of your Access Token must be the author of this log entry.</p>
+    </req>
+    <req name='image'>
+        <p>Base64-encoded image file; must be in JPEG, PNG or GIF format.</p>
+
+        <p>There are some <em>dynamic</em> limits on the file size and dimensions
+        of uploaded images; you should query them via the
+        <a href="../apisrv/installation.html">service/apiserv/installation</a>
+        method before uploading. The image may be shrunk, rotated, EXIF-stripped
+        or otherwise be processed before it is stored.</p>
+    </req>
+    <opt name='caption'>
+        <p>Plain-text string, a caption of the image. Captions are usually
+        displayed along with the images.</p>
+
+        <p>You MAY allow your user to attempt submitting anything here (including
+        an empty caption), but you should always be prepared to receive
+        <b>false</b> in the <b>success</b> field due to restrictions on what
+        captions are accepted.</p>
+    </opt>
+    <opt name='is_spoiler' default='false'>
+        <p>Set this to <b>true</b> to indicate that the submitted image contains
+        hints for finding the geocache, i.e. it shows the hiding place. Spoiler images
+        usually will not be shown to users by default, but replaced by a clickable
+        placeholder or caption that leads to the image.</p>
+    </opt>
+    <opt name='position'>
+        <p>Indicates the wanted position of this image on the log entry's list
+        of images. By default, new images will be appended to the end of this
+        list.</p>
+
+        <p>The value is 0-based (so, if you want this image to be displayed as
+        the first one, you should use the 0 value). The position of the image
+        which currently takes the given spot will be shifted downwards (you can
+        never replace any image using this method). If you provide an invalid
+        value (e.g. greater than the number of images), then OKAPI will try to
+        use the its best guess (e.g. append the image to the end).</p>
+
+        <p>Note: Some installations will ignore this option and always append
+        new images to the end of the list.</p>
+    </opt>
+    <common-format-params/>
+    <returns>
+        <p>A dictionary of the following structure:</p>
+        <ul>
+            <li>
+                <b>success</b> - <b>true</b>, if the image was submitted successfully,
+            </li>
+            <li>
+                <b>message</b> - plain-text string, a message for the user,
+                which acknowledges success or describes an error (usually you
+                want to display this only when <b>success</b> is <b>false</b>),
+            </li>
+            <li>
+                <b>image_uuid</b> - ID of the appended image, or <b>null</b> in
+                case of an error,
+            </li>
+            <li>
+                <b>position</b> - 0-based position of the appended image
+                on the log entry's list of images; <b>null</b> in case of
+                an error.
+            </li>
+        </ul>
+    </returns>
+</xml>

@@ -96,6 +96,11 @@ final class Settings
         'IMAGES_DIR' => null,
 
         /**
+         * The URL that corresponds to the IMAGES_DIR.
+         */
+        'IMAGES_URL' => null,
+
+        /**
          * Name of the cookie within which OC stores serialized session id, etc.
          * OKAPI requires to access this in order to make sure which user is logged
          * in.
@@ -180,6 +185,26 @@ final class Settings
          * https://help.github.com/articles/creating-an-access-token-for-command-line-use/
          */
         'GITHUB_ACCESS_TOKEN' => null,
+
+        /**
+         * Maximum size of uploaded images in bytes
+         */
+        'IMAGE_MAX_UPLOAD_SIZE' => 4194304,  # 4 MB
+
+        /**
+         * Maximum 'resolution' of saved images in pixels
+         */
+        'IMAGE_MAX_PIXEL_COUNT' => 524288,  # 0.5 MP
+
+        /**
+         * Quality of saved JPEG images on a scale from 50 to 100. The higher the
+         * quality, the sharper the image and larger the saved image files
+         * (file size grows exponentially). The PHP default is 75, which is also
+         * used in OCPL code. As OKAPI always resamples uploaded images - which
+         * involves a bit of quality loss - we set a higher default:
+         */
+        'JPEG_QUALITY' => 80
+
     );
 
     /**
@@ -237,18 +262,22 @@ final class Settings
         foreach ($dict as $k => $v)
             if ((strpos($k, '_DIR') !== false) && ($k[strlen($k) - 1] == '/'))
                 throw new Exception("None of the *_DIR settings may end with a slash. Check $k.");
-        $notnull = array('OC_COOKIE_NAME', 'DB_SERVER', 'DB_NAME', 'DB_USERNAME', 'SITE_URL', 'OC_NODE_ID');
+        $notnull = array(
+            'OC_COOKIE_NAME', 'DB_SERVER', 'DB_NAME', 'DB_USERNAME', 'SITE_URL',
+            'IMAGES_URL', 'OC_NODE_ID');
         foreach ($notnull as $k)
             if ($dict[$k] === null)
                 throw new Exception("$k cannot be null.");
         if ($dict['ORIGIN_URL'] === null)
             $dict['ORIGIN_URL'] = $dict['SITE_URL'];
-        $slash_keys = array('SITE_URL', 'ORIGIN_URL');
+        $slash_keys = array('SITE_URL', 'ORIGIN_URL', 'IMAGES_URL');
         foreach ($slash_keys as $key)
             if ($dict[$key][strlen($dict[$key]) - 1] != '/')
                 throw new Exception("$key must end with a slash.");
         if ($dict['SITE_LOGO'] === null)
             $dict['SITE_LOGO'] = $dict['SITE_URL'] . 'okapi/static/oc_logo.png';
+        if ($dict['JPEG_QUALITY'] < 50 || $dict['JPEG_QUALITY'] > 100)
+            throw new Exception('JPEG_QUALITY must be between 50 and 100.');
 
         # The OKAPI code is only compatible with utf8 and utf8mb4 charsets.
         if (!in_array($dict['DB_CHARSET'], array('utf8', 'utf8mb4'))) {

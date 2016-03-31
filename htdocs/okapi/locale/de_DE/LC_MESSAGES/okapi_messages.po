@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OKAPI\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-04 20:20+0100\n"
-"PO-Revision-Date: 2016-03-04 20:25+0100\n"
+"POT-Creation-Date: 2016-03-31 06:46+0100\n"
+"PO-Revision-Date: 2016-03-31 06:48+0100\n"
 "Last-Translator: following <following@online.de>\n"
 "Language-Team: following <following@online.de>\n"
 "Language: de\n"
@@ -15,34 +15,34 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Generator: Poedit 1.5.5\n"
-"X-Poedit-SearchPath-0: c:\\source\\oc\\okapi\\okapi\n"
+"X-Poedit-SearchPath-0: c:\\source\\oc\\server-3.0\\htdocs\\okapi\n"
 
-#: c:\source\oc\okapi\okapi/services/caches/geocaches.php:536
+#: c:\source\oc\server-3.0\htdocs\okapi/services/caches/geocaches.php:536
 msgid "Parts of this geocache listing may be outdated."
 msgstr "Teile dieser Cachebeschreibung sind wahrscheinlich veraltet."
 
-#: c:\source\oc\okapi\okapi/services/caches/geocaches.php:537
+#: c:\source\oc\server-3.0\htdocs\okapi/services/caches/geocaches.php:538
 msgid "See the log entries for more information."
 msgstr "Weitere Informationen dazu finden sich in den Logeinträgen."
 
-#: c:\source\oc\okapi\okapi/services/caches/geocaches.php:1016
+#: c:\source\oc\server-3.0\htdocs\okapi/services/caches/geocaches.php:1028
 msgid "Stage"
 msgstr "Station"
 
-#: c:\source\oc\okapi\okapi/services/caches/geocaches.php:1060
+#: c:\source\oc\server-3.0\htdocs\okapi/services/caches/geocaches.php:1072
 msgid "User location"
 msgstr "Benutzerkoordinaten"
 
-#: c:\source\oc\okapi\okapi/services/caches/geocaches.php:1063
+#: c:\source\oc\server-3.0\htdocs\okapi/services/caches/geocaches.php:1075
 #, php-format
 msgid "Your own custom coordinates for the %s geocache"
 msgstr "Die Koordinaten für den Geocache %s aus deiner persönlichen Notiz"
 
-#: c:\source\oc\okapi\okapi/services/caches/geocaches.php:1223
+#: c:\source\oc\server-3.0\htdocs\okapi/services/caches/geocaches.php:1235
 msgid "National Park / Landscape"
 msgstr "Nationalpark / Landschaft"
 
-#: c:\source\oc\okapi\okapi/services/caches/geocaches.php:1397
+#: c:\source\oc\server-3.0\htdocs\okapi/services/caches/geocaches.php:1409
 #, php-format
 msgid ""
 "This <a href='%s'>geocache</a> description comes from the <a href='%s'>%s</"
@@ -50,7 +50,7 @@ msgid ""
 msgstr ""
 "Diese <a href='%s'>Cache</a>-Beschreibung stammt von <a href='%s'>%s</a>."
 
-#: c:\source\oc\okapi\okapi/services/caches/geocaches.php:1409
+#: c:\source\oc\server-3.0\htdocs\okapi/services/caches/geocaches.php:1421
 #, php-format
 msgid ""
 "&copy; <a href='%s'>%s</a>, <a href='%s'>%s</a>, <a href='http://"
@@ -61,7 +61,7 @@ msgstr ""
 "creativecommons.org/licenses/by-nc-nd/3.0/de/'>CC-BY-NC-ND</a>, Stand: %s; "
 "alle Logeinträge &copy; jeweiliger Autor"
 
-#: c:\source\oc\okapi\okapi/services/caches/geocaches.php:1420
+#: c:\source\oc\server-3.0\htdocs\okapi/services/caches/geocaches.php:1432
 #, php-format
 msgid ""
 "&copy; <a href='%s'>%s</a>, <a href='%s'>%s</a>, <a href='http://"
@@ -72,7 +72,7 @@ msgstr ""
 "creativecommons.org/licenses/by-nc-nd/3.0/de/'>CC-BY-NC-ND</a>; alle "
 "Logeinträge &copy; jeweiliger Autor"
 
-#: c:\source\oc\okapi\okapi/services/caches/formatters/gpx.php:408
+#: c:\source\oc\server-3.0\htdocs\okapi/services/caches/formatters/gpx.php:408
 msgid ""
 "<b>Geocache coordinates have been changed.</b> They have been replaced with "
 "your own custom coordinates which you have provided for this geocache."
@@ -80,7 +80,7 @@ msgstr ""
 "<b>Die Koordinaten des Geocaches wurden geändert.</b> Sie wurden durch deine "
 "eigenen Koordinaten aus der persönlichen Notiz für diesen Cache ersetzt."
 
-#: c:\source\oc\okapi\okapi/services/caches/formatters/gpx.php:414
+#: c:\source\oc\server-3.0\htdocs\okapi/services/caches/formatters/gpx.php:414
 msgid ""
 "<b>Geocache coordinates have been changed.</b> Currently they point to one "
 "of the alternate waypoints originally described as:"
@@ -88,72 +88,72 @@ msgstr ""
 "<b>Die Koordinaten des Geocaches wurden geändert.</b> Sie zeigen zurzeit auf "
 "einen der zusätzlichen Wegpunkte mit der ursprünglichen Beschreibung:"
 
-#: c:\source\oc\okapi\okapi/services/caches/formatters/gpx.php:427
+#: c:\source\oc\server-3.0\htdocs\okapi/services/caches/formatters/gpx.php:427
 msgid "Original geocache location"
 msgstr "Originalposition des Caches"
 
-#: c:\source\oc\okapi\okapi/services/caches/formatters/gpx.php:429
+#: c:\source\oc\server-3.0\htdocs\okapi/services/caches/formatters/gpx.php:429
 #, php-format
 msgid "Original (owner-supplied) location of the %s geocache"
 msgstr "Originale, vom Besitzer angegebene Position des Geocaches %s"
 
-#: c:\source\oc\okapi\okapi/services/caches/formatters/gpxfile.tpl.php:38
-#: c:\source\oc\okapi\okapi/services/caches/formatters/gpxfile.tpl.php:73
+#: c:\source\oc\server-3.0\htdocs\okapi/services/caches/formatters/gpxfile.tpl.php:38
+#: c:\source\oc\server-3.0\htdocs\okapi/services/caches/formatters/gpxfile.tpl.php:73
 msgid "hidden by"
 msgstr "versteckt von"
 
-#: c:\source\oc\okapi\okapi/services/caches/formatters/gpxfile.tpl.php:75
+#: c:\source\oc\server-3.0\htdocs\okapi/services/caches/formatters/gpxfile.tpl.php:75
 #, php-format
 msgid "%d recommendation"
 msgid_plural "%d recommendations"
 msgstr[0] "%d Empfehlung"
 msgstr[1] "%d Empfehlungen"
 
-#: c:\source\oc\okapi\okapi/services/caches/formatters/gpxfile.tpl.php:76
+#: c:\source\oc\server-3.0\htdocs\okapi/services/caches/formatters/gpxfile.tpl.php:76
 #, php-format
 msgid "found %d time"
 msgid_plural "found %d times"
 msgstr[0] "%d mal gefunden"
 msgstr[1] "%d mal gefunden"
 
-#: c:\source\oc\okapi\okapi/services/caches/formatters/gpxfile.tpl.php:79
+#: c:\source\oc\server-3.0\htdocs\okapi/services/caches/formatters/gpxfile.tpl.php:79
 #, php-format
 msgid "%d trackable"
 msgid_plural "%d trackables"
 msgstr[0] "%d Geokret"
 msgstr[1] "%d Geokrets"
 
-#: c:\source\oc\okapi\okapi/services/caches/formatters/gpxfile.tpl.php:83
+#: c:\source\oc\server-3.0\htdocs\okapi/services/caches/formatters/gpxfile.tpl.php:83
 msgid "Personal notes"
 msgstr "Persönliche Notizen"
 
-#: c:\source\oc\okapi\okapi/services/caches/formatters/gpxfile.tpl.php:87
+#: c:\source\oc\server-3.0\htdocs\okapi/services/caches/formatters/gpxfile.tpl.php:87
 msgid "Attributes"
 msgstr "Attribute"
 
-#: c:\source\oc\okapi\okapi/services/caches/formatters/gpxfile.tpl.php:91
+#: c:\source\oc\server-3.0\htdocs\okapi/services/caches/formatters/gpxfile.tpl.php:91
 msgid "Trackables"
 msgstr "Geokrets"
 
-#: c:\source\oc\okapi\okapi/services/caches/formatters/gpxfile.tpl.php:101
-#: c:\source\oc\okapi\okapi/services/caches/formatters/gpxfile.tpl.php:117
+#: c:\source\oc\server-3.0\htdocs\okapi/services/caches/formatters/gpxfile.tpl.php:101
+#: c:\source\oc\server-3.0\htdocs\okapi/services/caches/formatters/gpxfile.tpl.php:117
 msgid "Images"
 msgstr "Bilder"
 
-#: c:\source\oc\okapi\okapi/services/caches/formatters/gpxfile.tpl.php:124
+#: c:\source\oc\server-3.0\htdocs\okapi/services/caches/formatters/gpxfile.tpl.php:124
 msgid "Spoilers"
 msgstr "Spoiler"
 
-#: c:\source\oc\okapi\okapi/services/caches/formatters/gpxfile.tpl.php:133
+#: c:\source\oc\server-3.0\htdocs\okapi/services/caches/formatters/gpxfile.tpl.php:133
 msgid "Image descriptions"
 msgstr "Bildbeschreibungen"
 
-#: c:\source\oc\okapi\okapi/services/caches/formatters/gpxfile.tpl.php:141
+#: c:\source\oc\server-3.0\htdocs\okapi/services/caches/formatters/gpxfile.tpl.php:141
 msgid "The cache probably is located in the following protection areas:"
 msgstr ""
 "Der Geocache befindet sich wahrscheinlich in den folgenden Schutzgebieten:"
 
-#: c:\source\oc\okapi\okapi/services/logs/submit.php:75
+#: c:\source\oc\server-3.0\htdocs\okapi/services/logs/submit.php:75
 msgid ""
 "You are trying to publish a log entry with a date in future. Cache log "
 "entries are allowed to be published in the past, but NOT in the future."
@@ -161,7 +161,7 @@ msgstr ""
 "Das Datum deines Logeintrags liegt in der Zukunft. Cache-Logs können nur für "
 "die Vergangenheit oder für heute eingetragen werden."
 
-#: c:\source\oc\okapi\okapi/services/logs/submit.php:111
+#: c:\source\oc\server-3.0\htdocs\okapi/services/logs/submit.php:111
 #, php-format
 msgid ""
 "However, your cache rating was ignored, because %s does not have a rating "
@@ -169,7 +169,7 @@ msgid ""
 msgstr ""
 "Deine Cachewertung wurde jedoch ignoriert, weil %s kein Bewertungssystem hat."
 
-#: c:\source\oc\okapi\okapi/services/logs/submit.php:136
+#: c:\source\oc\server-3.0\htdocs\okapi/services/logs/submit.php:136
 #, php-format
 msgid ""
 "However, your cache recommendation was ignored, because %s does not allow "
@@ -178,25 +178,16 @@ msgstr ""
 "Deine Empfehlung wurde jedoch ignoriert, weil auf %s keine Event-Caches "
 "empfohlen werden können."
 
-#: c:\source\oc\okapi\okapi/services/logs/submit.php:158
-#, php-format
-msgid ""
-"However, your \"needs maintenance\" flag was ignored, because %s does not "
-"support this feature."
-msgstr ""
-"Deine Angabe \"benötigt Wartung\" wurde jedoch ignoriert, weil es diese "
-"Funktion bei %s nicht gibt."
-
-#: c:\source\oc\okapi\okapi/services/logs/submit.php:171
+#: c:\source\oc\server-3.0\htdocs\okapi/services/logs/submit.php:185
 #, php-format
 msgid ""
 "However, your \"does not need maintenance\" flag was ignored, because %s "
-"does not support this feature."
+"does not yet support this feature."
 msgstr ""
 "Deine Angabe \"benötigt Wartung\" wurde jedoch ignoriert, weil es diese "
 "Funktion bei %s nicht gibt. "
 
-#: c:\source\oc\okapi\okapi/services/logs/submit.php:201
+#: c:\source\oc\server-3.0\htdocs\okapi/services/logs/submit.php:215
 msgid ""
 "This cache is an Event cache. You cannot \"Find\" it (but you can attend it, "
 "or comment on it)!"
@@ -204,7 +195,7 @@ msgstr ""
 "Dies ist ein Event-Cache. Du kannst ihn nicht \"finden\" (aber du kannst am "
 "Event teilnehmen oder einen Hinweis loggen)."
 
-#: c:\source\oc\okapi\okapi/services/logs/submit.php:210
+#: c:\source\oc\server-3.0\htdocs\okapi/services/logs/submit.php:224
 msgid ""
 "This cache is NOT an Event cache. You cannot \"Attend\" it (but you can find "
 "it, or comment on it)!"
@@ -212,26 +203,26 @@ msgstr ""
 "Dies ist KEIN Event-Cache. Du kannst an ihm nicht \"teilnehmen\" (aber du "
 "kannst ihn finden oder kommentieren)."
 
-#: c:\source\oc\okapi\okapi/services/logs/submit.php:220
+#: c:\source\oc\server-3.0\htdocs\okapi/services/logs/submit.php:234
 msgid "Your have to supply some text for your comment."
 msgstr "Du musst einen Text für dein Hinweislog eingeben!"
 
-#: c:\source\oc\okapi\okapi/services/logs/submit.php:236
+#: c:\source\oc\server-3.0\htdocs\okapi/services/logs/submit.php:250
 msgid "This cache requires a password. You didn't provide one!"
 msgstr ""
 "Dieser Cache kann nur mit Kennwort geloggt werden, aber du hast keines "
 "angegeben."
 
-#: c:\source\oc\okapi\okapi/services/logs/submit.php:240
+#: c:\source\oc\server-3.0\htdocs\okapi/services/logs/submit.php:254
 msgid "Invalid password!"
 msgstr "Ungültiges Kennwort!"
 
-#: c:\source\oc\okapi\okapi/services/logs/submit.php:385
+#: c:\source\oc\server-3.0\htdocs\okapi/services/logs/submit.php:399
 msgid "You have already submitted a log entry with exactly the same contents."
 msgstr ""
 "Du hast bereits einen Logeintrag mit genau dem gleichen Inhalt gemacht."
 
-#: c:\source\oc\okapi\okapi/services/logs/submit.php:412
+#: c:\source\oc\server-3.0\htdocs\okapi/services/logs/submit.php:426
 msgid ""
 "You have already submitted a \"Found it\" log entry once. Now you may submit "
 "\"Comments\" only!"
@@ -239,53 +230,95 @@ msgstr ""
 "Du hast diesen Cache bereits als gefunden geloggt. Ein zweites Fundlog ist "
 "nicht möglich, aber du kannst stattdessen einen Hinweis loggen."
 
-#: c:\source\oc\okapi\okapi/services/logs/submit.php:418
+#: c:\source\oc\server-3.0\htdocs\okapi/services/logs/submit.php:432
 msgid "You are the owner of this cache. You may submit \"Comments\" only!"
 msgstr ""
 "Als Besitzer des Caches kannst du nur Hinweise loggen, keine Funde oder "
 "Nichtfunde."
 
-#: c:\source\oc\okapi\okapi/services/logs/submit.php:440
+#: c:\source\oc\server-3.0\htdocs\okapi/services/logs/submit.php:454
 msgid "You have already rated this cache once. Your rating cannot be changed."
 msgstr ""
 "Du hast diesen Cache bereits bewertet. Deine Bewertung ist nicht änderbar."
 
-#: c:\source\oc\okapi\okapi/services/logs/submit.php:461
+#: c:\source\oc\server-3.0\htdocs\okapi/services/logs/submit.php:475
 msgid "You have already recommended this cache once."
 msgstr "Du hast diesen Cache bereits empfohlen."
 
-#: c:\source\oc\okapi\okapi/services/logs/submit.php:477
+#: c:\source\oc\server-3.0\htdocs\okapi/services/logs/submit.php:491
 msgid "You don't have any recommendations to give. Find more caches first!"
 msgstr ""
 "Du musst mehr Caches finden, um eine weitere Bewertung abgeben zu können!"
 
-#: c:\source\oc\okapi\okapi/services/logs/submit.php:528
+#: c:\source\oc\server-3.0\htdocs\okapi/services/logs/submit.php:542
 msgid "Event caches cannot \"need maintenance\"."
 msgstr "Event-Caches können keine \"Wartung benötigen\"."
 
-#: c:\source\oc\okapi\okapi/services/logs/submit.php:676
+#: c:\source\oc\server-3.0\htdocs\okapi/services/logs/submit.php:690
 msgid "Your cache log entry was posted successfully."
 msgstr "Dein Log wurde veröffentlicht."
 
-#: c:\source\oc\okapi\okapi/views/apps/authorize.tpl.php:5
+#: c:\source\oc\server-3.0\htdocs\okapi/services/logs/images/add.php:82
+#: c:\source\oc\server-3.0\htdocs\okapi/services/logs/images/edit.php:56
+#, php-format
+msgid "Please enter an image caption."
+msgstr "Bitte gib einen Bildtitel an."
+
+#: c:\source\oc\server-3.0\htdocs\okapi/services/logs/images/add.php:107
+#, php-format
+msgid ""
+"Your image file is too large (%s.%s MB); %s accepts a maximum image size of "
+"%s.%s MB."
+msgstr ""
+"Das hochgeladene Bild ist zu groß (%s,%s MB); die maximale Bildgröße bei %s "
+"ist %s,%s MB."
+
+#: c:\source\oc\server-3.0\htdocs\okapi/services/logs/images/add.php:134
+#, php-format
+msgid ""
+"The uploaded image file is broken, or the image type is not accepted by %s. "
+"Allowed types are JPEG, PNG and GIF."
+msgstr ""
+"Das hochgeladene Bild ist defekt, oder %s unterstützt diesen Bildtyp nicht. "
+"Erlaubt sind JPEG, PNG und GIF."
+
+#: c:\source\oc\server-3.0\htdocs\okapi/services/logs/images/add.php:146
+#, php-format
+msgid "The uploaded image is too large (%s megapixels), please downscale it."
+msgstr ""
+"Das hochgeladene Bild ist zu groß (%s Megapixel); bitte verkleinere es."
+
+#: c:\source\oc\server-3.0\htdocs\okapi/services/logs/images/add.php:155
+msgid "The uploaded image file is broken."
+msgstr "Die hochgeladene Bilddatei ist defekt."
+
+#: c:\source\oc\server-3.0\htdocs\okapi/services/logs/images/add.php:404
+msgid "Your log image has been saved."
+msgstr "Dein Logbild wurde gespeichert."
+
+#: c:\source\oc\server-3.0\htdocs\okapi/services/logs/images/edit.php:215
+msgid "Your log image has been updated."
+msgstr "Dein Logbild wurde aktualisiert."
+
+#: c:\source\oc\server-3.0\htdocs\okapi/views/apps/authorize.tpl.php:5
 msgid "Authorization Form"
 msgstr "Authorisierungs-Formular"
 
-#: c:\source\oc\okapi\okapi/views/apps/authorize.tpl.php:46
+#: c:\source\oc\server-3.0\htdocs\okapi/views/apps/authorize.tpl.php:46
 msgid "Expired request"
 msgstr "Anfrage abgelaufen"
 
-#: c:\source\oc\okapi\okapi/views/apps/authorize.tpl.php:47
+#: c:\source\oc\server-3.0\htdocs\okapi/views/apps/authorize.tpl.php:47
 msgid "Unfortunately, the request has expired. Please try again."
 msgstr ""
 "Die Anfrage ist wegen Zeitüberschreitung abgelaufen. Bitte versuche es noch "
 "einmal."
 
-#: c:\source\oc\okapi\okapi/views/apps/authorize.tpl.php:49
+#: c:\source\oc\server-3.0\htdocs\okapi/views/apps/authorize.tpl.php:49
 msgid "External application is requesting access..."
 msgstr "Eine externe Anwendung wünscht Zugriff ..."
 
-#: c:\source\oc\okapi\okapi/views/apps/authorize.tpl.php:50
+#: c:\source\oc\server-3.0\htdocs\okapi/views/apps/authorize.tpl.php:50
 #, php-format
 msgid ""
 "<b>%s</b> wants to access your <b>%s</b> account. Do you agree to grant "
@@ -294,15 +327,15 @@ msgstr ""
 "<b>%s</b> möchte auf dein <b>%s</b>-Benutzerkonto zugreifen. Möchtest du "
 "dieser Anwendung Zugriff gewähren?"
 
-#: c:\source\oc\okapi\okapi/views/apps/authorize.tpl.php:53
+#: c:\source\oc\server-3.0\htdocs\okapi/views/apps/authorize.tpl.php:53
 msgid "I agree"
 msgstr "Ja"
 
-#: c:\source\oc\okapi\okapi/views/apps/authorize.tpl.php:54
+#: c:\source\oc\server-3.0\htdocs\okapi/views/apps/authorize.tpl.php:54
 msgid "Decline"
 msgstr "Nein"
 
-#: c:\source\oc\okapi\okapi/views/apps/authorize.tpl.php:56
+#: c:\source\oc\server-3.0\htdocs\okapi/views/apps/authorize.tpl.php:56
 #, php-format
 msgid ""
 "\n"
@@ -331,15 +364,15 @@ msgstr ""
 "\t\t\t\t\tDu kannst diese Erlaubnis jederzeit widerrufen.</p>\n"
 "\t\t\t\t"
 
-#: c:\source\oc\okapi\okapi/views/apps/authorized.tpl.php:5
+#: c:\source\oc\server-3.0\htdocs\okapi/views/apps/authorized.tpl.php:5
 msgid "Authorization Succeeded"
 msgstr "Authorisierung erfolgreich"
 
-#: c:\source\oc\okapi\okapi/views/apps/authorized.tpl.php:28
+#: c:\source\oc\server-3.0\htdocs\okapi/views/apps/authorized.tpl.php:28
 msgid "Access successfully granted"
 msgstr "Zugang wurde gewährt"
 
-#: c:\source\oc\okapi\okapi/views/apps/authorized.tpl.php:29
+#: c:\source\oc\server-3.0\htdocs\okapi/views/apps/authorized.tpl.php:29
 #, php-format
 msgid ""
 "\n"
@@ -356,15 +389,15 @@ msgstr ""
 "PIN-Code ein:</p>\n"
 "\t\t\t"
 
-#: c:\source\oc\okapi\okapi/views/apps/index.tpl.php:5
+#: c:\source\oc\server-3.0\htdocs\okapi/views/apps/index.tpl.php:5
 msgid "My Apps"
 msgstr "Meine Apps"
 
-#: c:\source\oc\okapi\okapi/views/apps/index.tpl.php:29
+#: c:\source\oc\server-3.0\htdocs\okapi/views/apps/index.tpl.php:29
 msgid "Your external applications"
 msgstr "Deine externen Anwendungen"
 
-#: c:\source\oc\okapi\okapi/views/apps/index.tpl.php:31
+#: c:\source\oc\server-3.0\htdocs\okapi/views/apps/index.tpl.php:31
 #, php-format
 msgid ""
 "\n"
@@ -386,11 +419,11 @@ msgstr ""
 "Aktionen mehr unter deinem \t\t\t\t\tBenutzername ausführen können.</p>\n"
 "\t\t\t\t"
 
-#: c:\source\oc\okapi\okapi/views/apps/index.tpl.php:45
+#: c:\source\oc\server-3.0\htdocs\okapi/views/apps/index.tpl.php:45
 msgid "remove"
 msgstr "entfernen"
 
-#: c:\source\oc\okapi\okapi/views/apps/index.tpl.php:50
+#: c:\source\oc\server-3.0\htdocs\okapi/views/apps/index.tpl.php:50
 #, php-format
 msgid ""
 "\n"
@@ -410,6 +443,16 @@ msgstr ""
 "\t\t\t\t\tdazu ermächtigt. Sobald du externe Opencaching-Anwendungen "
 "aktivierst, werden diese hier erscheinen.</p>\n"
 "\t\t\t\t"
+
+#~ msgid "Your image has been appended to the log entry."
+#~ msgstr "Dein Logbild wurde an den Logeintrag angehängt."
+
+#~ msgid ""
+#~ "However, your \"needs maintenance\" flag was ignored, because %s does not "
+#~ "support this feature."
+#~ msgstr ""
+#~ "Deine Angabe \"benötigt Wartung\" wurde jedoch ignoriert, weil es diese "
+#~ "Funktion bei %s nicht gibt."
 
 #~ msgid "Recommending is allowed only for 'Found it' logtypes."
 #~ msgstr "Empfehlungen sind nur bei 'Gefunden'-Logs erlaubt."

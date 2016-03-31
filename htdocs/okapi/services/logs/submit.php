@@ -825,12 +825,13 @@ class WebService
         ");
         $log_internal_id = Db::last_insert_id();
 
-        # Store additional information on consumer_key which have created this log entry.
-        # (Maybe we'll want to display this somewhere later.)
+        # Store additional information on consumer_key which has created this log entry.
+        # (Maybe we'll want to display this somewhen later.)
 
         Db::execute("
-            insert into okapi_cache_logs (log_id, consumer_key)
+            insert into okapi_submitted_objects (object_type, object_id, consumer_key)
             values (
+                ".Okapi::OBJECT_TYPE_CACHE_LOG.",
                 '".Db::escape_string($log_internal_id)."',
                 '".Db::escape_string($consumer_key)."'
             );

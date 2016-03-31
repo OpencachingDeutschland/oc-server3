@@ -4,7 +4,7 @@
  *
  *  Unicode Reminder メモ
  *
- *  This module includes all database function necessary to do queries from 
+ *  This module includes all database function necessary to do queries from
  *  the database.
  ***************************************************************************/
 
@@ -20,10 +20,10 @@
 		sql_fetch_array($rs)            ... mysql_fetch_array with charset conversion
 		sql_fetch_assoc($rs)            ... mysql_fetch_assoc with charset conversion
 		sql_fetch_row($rs)              ... mysql_fetch_row with charset conversion
-		sql_fetch_column($rs)           ... fetch column with charset conversion          
-		sql_fetch_assoc_table($rs)      ... fetch_assoc for all rows 
+		sql_fetch_column($rs)           ... fetch column with charset conversion
+		sql_fetch_assoc_table($rs)      ... fetch_assoc for all rows
 		sql_temp_table($table)          ... registers an placeholder for use as temporary
-		                                    table and drop's temporary tables if 
+		                                    table and drop's temporary tables if
 		                                    mysql_pconnect is used
 		sql_drop_temp_table($table)     ... unregisters and drops an tmp-table placeholder
 		sql_free_result($rs)            ... mysql_free_result
@@ -99,7 +99,7 @@
 
 		Important: only use ASCII charecters with ord() < 128 in your queries, otherwise
 		           they will fail when $opt['charset']['mysql'] is not UTF-8.
-		           However, parameters pased with &x or escaped with sql_escape will be 
+		           However, parameters pased with &x or escaped with sql_escape will be
 		           converted from UTF-8 to $opt['charset']['iconv'].
 
 		returns: recordset or false

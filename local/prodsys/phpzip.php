@@ -85,4 +85,3 @@ function checkpath($path)
 
   return true;
 }
-?>

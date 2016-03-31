@@ -94,7 +94,7 @@ function search_output()
 		$rCache['logs'] = sql_fetch_assoc_table($rs);
 		$rCache['firstlog'] = array_shift($rCache['logs']);
 
-		// get direction from search coordinate 
+		// get direction from search coordinate
 		if ($rCache['distance'] > 0) {
 			$direction = geomath::calcBearing($lat_rad / 3.14159 * 180, $lon_rad / 3.14159 * 180, $rCache['latitude'], $rCache['longitude']);
 			$rCache['direction_deg'] = round($direction / 22.5) * 22.5;

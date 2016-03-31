@@ -115,14 +115,14 @@
 						if ($desc_lang_exists == false)
 						{
 							//add to DB
-							sql("INSERT INTO `cache_desc` ( 
-														`id`, 
-														`cache_id`, 
-														`language`, 
-														`desc`, 
-														`desc_html`, 
-														`desc_htmledit`, 
-														`hint`, 
+							sql("INSERT INTO `cache_desc` (
+														`id`,
+														`cache_id`,
+														`language`,
+														`desc`,
+														`desc_html`,
+														`desc_htmledit`,
+														`hint`,
 														`short_desc`,
 														`last_modified`,
 														`node`
@@ -151,8 +151,8 @@
 					// check if any default language is available
 					if ($show_all_langs == 0)
 					{
-						if (sqlValue("SELECT COUNT(*) 
-						                FROM `languages_list_default` 
+						if (sqlValue("SELECT COUNT(*)
+						                FROM `languages_list_default`
 						           LEFT JOIN `cache_desc` ON `languages_list_default`.`show`=`cache_desc`.`language` AND `cache_desc`.`cache_id`='" . sql_escape($cache_id) . "'
 						               WHERE `languages_list_default`.`lang`='" . sql_escape($locale) . "' AND ISNULL(`cache_desc`.`cache_id`)", 0) == 0)
 						{
@@ -163,12 +163,12 @@
 					//build langslist
 					$langoptions = '';
 					$selected = false;
-					$rsLanguages = sql("SELECT `short`, IFNULL(`sys_trans_text`.`text`, `languages`.`name`) AS `name` 
-					                      FROM `languages` 
+					$rsLanguages = sql("SELECT `short`, IFNULL(`sys_trans_text`.`text`, `languages`.`name`) AS `name`
+					                      FROM `languages`
 					                 LEFT JOIN `languages_list_default` ON `languages`.`short`=`languages_list_default`.`show` AND `languages_list_default`.`lang`='&1'
 					                 LEFT JOIN `sys_trans` ON `languages`.`trans_id`=`sys_trans`.`id`
 					                 LEFT JOIN `sys_trans_text` ON `sys_trans`.`id`=`sys_trans_text`.`trans_id` AND `sys_trans_text`.`lang`='&1'
-					                     WHERE `languages`.`short` NOT IN (SELECT `language` FROM `cache_desc` WHERE `cache_id`='&3') AND 
+					                     WHERE `languages`.`short` NOT IN (SELECT `language` FROM `cache_desc` WHERE `cache_id`='&3') AND
 					                           ('&2'=1 OR `languages_list_default`.`show`=`languages`.`short`)
 					                  ORDER BY `name` ASC",
 					                           $locale,

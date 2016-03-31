@@ -166,5 +166,3 @@ function getToMailDomain($mail)
 
 	return $domain;
 }
-
-?>

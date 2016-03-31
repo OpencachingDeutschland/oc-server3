@@ -31,7 +31,7 @@
 		$lastmove = sql_value("
 				SELECT `id` FROM `gk_move`
 				WHERE `itemid`='&1' AND `logtypeid`<>2
-				/* TODO: How does Geokrety.org order moves with same date? We assume by ID: */ 
+				/* TODO: How does Geokrety.org order moves with same date? We assume by ID: */
 				ORDER BY `datemoved` DESC, `id` DESC
 				LIMIT 1",
 				0, $rItem['id']);
@@ -40,7 +40,7 @@
 				INSERT INTO `gk_item_waypoint`
 					(SELECT `gk_move`.`itemid`, `gk_move_waypoint`.`wp`
 					 FROM `gk_move_waypoint`
-					 LEFT JOIN `gk_move` ON `gk_move`.`id`=`gk_move_waypoint`.`id` 
+					 LEFT JOIN `gk_move` ON `gk_move`.`id`=`gk_move_waypoint`.`id`
 					 WHERE `gk_move`.`id`='&1' AND `logtypeid` IN (0,3) AND `wp`<>''
 					)",
 				$lastmove);

@@ -5,7 +5,7 @@
 
 		Unicode Reminder メモ
 
-	Dieses Script liest Dateien von GEOnet Names Server (GNS) ein und importiert 
+	Dieses Script liest Dateien von GEOnet Names Server (GNS) ein und importiert
 	diese in die Table gns_locations.
 
 	Homepage:       http://geonames.nga.mil/gns/html/
@@ -81,5 +81,3 @@
 		sql("UPDATE gns_locations SET full_name='Zitaraves' WHERE uni=-2780984 LIMIT 1");
 		sql("UPDATE gns_locations SET full_name='Zvabek' WHERE uni=105075 LIMIT 1");
 	}
-
-?>

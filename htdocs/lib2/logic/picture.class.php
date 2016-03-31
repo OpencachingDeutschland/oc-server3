@@ -131,8 +131,8 @@ class picture
 		global $login;
 
 		// This function determines if an insert, update oder deletion at pictures table
-		// ist to be recorded for vandalism recovery, depending on WHO OR WHY the 
-		// operation is done. Other conditions, depending on the data, are handled 
+		// ist to be recorded for vandalism recovery, depending on WHO OR WHY the
+		// operation is done. Other conditions, depending on the data, are handled
 		// by triggers.
 		//
 		// Data is passed by ugly global DB variables, so try call this function as

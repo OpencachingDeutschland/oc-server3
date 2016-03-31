@@ -101,7 +101,7 @@ class cachelist
 			return ERROR_BAD_LISTNAME;
 		else
 		{
-			if (sql_value("SELECT `id` FROM `cache_lists` 
+			if (sql_value("SELECT `id` FROM `cache_lists`
 			               WHERE `user_id`='&1' AND `id`<>'&2' AND `name`='&3'",
 			              false, $this->getUserId(), $this->getId(), $name))
 			              // $this->getId() is 0 when creating a new list -> condition has no effect
@@ -153,7 +153,7 @@ class cachelist
 	function getCachesCount()
 	{
 		return sql_value("
-			SELECT `entries` FROM `stat_cache_lists` 
+			SELECT `entries` FROM `stat_cache_lists`
 			WHERE `stat_cache_lists`.`cache_list_id`='" . sql_escape($this->getId()) . "'",
 			0);
 	}
@@ -161,7 +161,7 @@ class cachelist
 	function getWatchersCount()
 	{
 		return sql_value("
-			SELECT `watchers` FROM `stat_cache_lists` 
+			SELECT `watchers` FROM `stat_cache_lists`
 			WHERE `stat_cache_lists`.`cache_list_id`='" . sql_escape($this->getId()) . "'",
 			0);
 	}
@@ -186,7 +186,7 @@ class cachelist
 
 	// locked/hidden caches may be added to a list by the owner or an administrator,
 	// but getCaches() will return visible==0 if the list is queried by someone else.
-	// The 'visible' flag MUST be evaluated and the cache name must not be shown 
+	// The 'visible' flag MUST be evaluated and the cache name must not be shown
 	// if it is 0. This also ensures that cache names are hidden if a cache is locked/hidden
 	// after being added to a list.
 
@@ -221,7 +221,7 @@ class cachelist
 			return $this->addCache($cache);
 	}
 
-	// returns true if all waypoints were valid, or an array of invalid waypoints  
+	// returns true if all waypoints were valid, or an array of invalid waypoints
 	function addCachesByWPs($wps)
 	{
 		$wpa = explode(' ', trim($wps));
@@ -283,7 +283,7 @@ class cachelist
 			{
 				if ($this->allowView())
 					sql("
-						INSERT IGNORE INTO `cache_list_watches` (`cache_list_id`, `user_id`) 
+						INSERT IGNORE INTO `cache_list_watches` (`cache_list_id`, `user_id`)
 						VALUES ('&1','&2')",
 				    $this->getId(), $login->userid);
 			}
@@ -374,7 +374,7 @@ class cachelist
 	static function getPublicListCount($namelike='', $userlike='')
 	{
 		return sql_value("
-			SELECT COUNT(*) 
+			SELECT COUNT(*)
 			FROM `cache_lists`
 			LEFT JOIN `stat_cache_lists` ON  `stat_cache_lists`.`cache_list_id`=`cache_lists`.`id`
 			LEFT JOIN `user` ON `user`.`user_id`=`cache_lists`.`user_id`
@@ -488,7 +488,7 @@ class cachelist
 			return 0;
 		else
 			return sql_value("
-				SELECT `id` FROM `cache_lists` 
+				SELECT `id` FROM `cache_lists`
 			  WHERE `user_id`='&1' AND `last_added`='&2'
 				LIMIT 1", 0,
 			  $login->userid, $maxdate);

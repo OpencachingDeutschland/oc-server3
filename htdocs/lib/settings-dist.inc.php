@@ -7,7 +7,7 @@
 		Unicode Reminder メモ
 	                                         				                                
 		sample settings for an OC production system;
-		see header of config2/settings.inc.php for more setting files 
+		see header of config2/settings.inc.php for more setting files
 	
 		this file may be outdated
  ****************************************************************************/
@@ -87,7 +87,7 @@
 	// 'From' EMail address for admin error messages and log removals
 	if (!isset($emailaddr)) $emailaddr = 'noreply@do.main';
 
-	// team contact email address 
+	// team contact email address
 	if (!isset($opt['mail']['contact'])) $opt['mail']['contact'] = 'contact@do.main';
 
 	// news settings
@@ -134,7 +134,7 @@
 
 	/* default locale
 	 */
-	$opt['template']['default']['locale'] = 'DE';   // can be overwritten by $opt['domain'][<domain>]['locale'] 
+	$opt['template']['default']['locale'] = 'DE';   // can be overwritten by $opt['domain'][<domain>]['locale']
 
   // include all locale settings
   require_once($rootpath . 'config2/locale.inc.php');

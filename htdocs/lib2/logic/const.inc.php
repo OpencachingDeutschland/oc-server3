@@ -16,7 +16,7 @@
 	define('RE_TYPE_FLOAT', 5);
 	define('RE_TYPE_DOUBLE', 6);
 
-	define('RE_INSERT_NOTHING', 0);       // 
+	define('RE_INSERT_NOTHING', 0);       //
 	define('RE_INSERT_OVERWRITE', 1);     // ignore given values and use function
 	define('RE_INSERT_IGNORE', 2);        // dont use this column on insert
 	define('RE_INSERT_AUTOINCREMENT', 4); // column is an auto increment column

@@ -79,7 +79,7 @@
 		$tpl->assign('countryCode', $country);
 		$tpl->assign(
 			'countryName',
-			sql_value("SELECT IFNULL(`sys_trans_text`.`text`, `countries`.`name`) 
+			sql_value("SELECT IFNULL(`sys_trans_text`.`text`, `countries`.`name`)
 	                FROM `countries`
 	           LEFT JOIN `sys_trans` ON `countries`.`trans_id`=`sys_trans`.`id`
 	           LEFT JOIN `sys_trans_text` ON `sys_trans`.`id`=`sys_trans_text`.`trans_id` AND `sys_trans_text`.`lang`='&2'
@@ -90,7 +90,7 @@
 			);
 		$tpl->assign(
 			'mainCountryName',
-			sql_value("SELECT IFNULL(`sys_trans_text`.`text`, `countries`.`name`) 
+			sql_value("SELECT IFNULL(`sys_trans_text`.`text`, `countries`.`name`)
 	                FROM `countries`
 	           LEFT JOIN `sys_trans` ON `countries`.`trans_id`=`sys_trans`.`id`
 	           LEFT JOIN `sys_trans_text` ON `sys_trans`.`id`=`sys_trans_text`.`trans_id` AND `sys_trans_text`.`lang`='&2'

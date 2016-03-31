@@ -128,8 +128,8 @@
 		$tpl->assign('toprating_days', $getNew->ratingDays());
 
 		// country and language parameters
-		$sUserCountryName = sql_value("SELECT IFNULL(`sys_trans_text`.`text`, `countries`.`name`) 
-		                                 FROM `countries` 
+		$sUserCountryName = sql_value("SELECT IFNULL(`sys_trans_text`.`text`, `countries`.`name`)
+		                                 FROM `countries`
 		                            LEFT JOIN `sys_trans` ON `countries`.`trans_id`=`sys_trans`.`id`
 		                            LEFT JOIN `sys_trans_text` ON `sys_trans`.`id`=`sys_trans_text`.`trans_id` AND `sys_trans_text`.`lang`='&2'
 		                                WHERE `countries`.`short`='&1'", '', $sUserCountry, $opt['template']['locale']);

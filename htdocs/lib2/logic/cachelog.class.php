@@ -304,7 +304,7 @@ class cachelog
 		//	 return array();
 		// Logic Error - log types are still valid when no NEW logs are allowed for the cache.
 		// (Would e.g. block admin logs and log-type restoring for locked caches.)
-		return get_cache_log_types($this->getCacheId(),$this->getType());  // depends on userid 
+		return get_cache_log_types($this->getCacheId(),$this->getType());  // depends on userid
 	}
 	
 	static function isDuplicate($cacheId, $userId, $logType, $logDate, $logText)

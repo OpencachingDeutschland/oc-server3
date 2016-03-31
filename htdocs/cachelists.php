@@ -39,7 +39,7 @@
 	$tpl->assign('show_bookmarks', true);
 	$tpl->assign('show_status', false);
 	$tpl->assign('show_user', true);
-	// Do not show watchers because this would allow conclusions on what the list owner watches. 
+	// Do not show watchers because this would allow conclusions on what the list owner watches.
 	$tpl->assign('show_watchers', false);
 	$tpl->assign('show_edit', false);
 	$tpl->assign('togglewatch', 'cachelists.php');

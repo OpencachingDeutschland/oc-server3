@@ -108,12 +108,12 @@
 				$list->watch(false);
 		}
 
-		// The following parameter and variable names are suboptimal; they refer only the the 
+		// The following parameter and variable names are suboptimal; they refer only the the
 		// cache lists and are evaluated by res_cachelists.tpl.
 		$tpl->assign('cachelists', cachelist::getListsWatchedByMe());
 		$tpl->assign('show_status', false);
 		$tpl->assign('show_user', true);
-		// Do not show watchers because this would allow conclusions on what the list owner watches. 
+		// Do not show watchers because this would allow conclusions on what the list owner watches.
 		$tpl->assign('show_watchers', false);
 		$tpl->assign('show_edit', false);
 		$tpl->assign('togglewatch', 'mywatches.php');

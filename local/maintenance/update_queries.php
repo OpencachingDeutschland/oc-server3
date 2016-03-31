@@ -23,7 +23,7 @@
 			if (preg_match('/[;][12][;]/', ';'.$cachesize.';') &&
 			    !preg_match('/[;][8][;]/', ';'.$cachesize.';'))
 			{
-				// echo $r['name'] . ": " . $cachesize . " -> " . $query['cachesize'] .= ";8\n"; 
+				// echo $r['name'] . ": " . $cachesize . " -> " . $query['cachesize'] .= ";8\n";
 				$query['cachesize'] .= ";8";
 				$saveopt = serialize($query);
 				// sql("UPDATE queries SET `options`='&1' WHERE `id`='&2'", $saveopt, $r['id']);

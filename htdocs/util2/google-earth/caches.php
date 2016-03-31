@@ -210,9 +210,9 @@
 		        LEFT JOIN `sys_trans_text` `stt_type` ON `stt_type`.`trans_id`=`cache_type`.`trans_id`
 		        LEFT JOIN `sys_trans_text` `stt_size` ON `stt_size`.`trans_id`=`cache_size`.`trans_id`
 		            WHERE `caches`.`status`=1 AND
-		                  `caches`.`longitude`>='&1' AND 
-											`caches`.`longitude`<='&2' AND 
-											`caches`.`latitude`>='&3' AND 
+		                  `caches`.`longitude`>='&1' AND
+											`caches`.`longitude`<='&2' AND
+											`caches`.`latitude`>='&3' AND
 											`caches`.`latitude`<='&4' AND
 											`stt_type`.`lang`='&5' and `stt_size`.`lang`='&5'",
 											$lon_from, $lon_to, $lat_from, $lat_to,

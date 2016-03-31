@@ -5,7 +5,7 @@
 
 		Unicode Reminder メモ
 
-		Dieses Script berechnet andhand von Geodb-Daten die adm1..adm4-Daten 
+		Dieses Script berechnet andhand von Geodb-Daten die adm1..adm4-Daten
 		für die GNS-DB.
 		
 	***************************************************************************/
@@ -26,15 +26,15 @@
 		$maxlon = geomath::getMaxLon($rLocations['lon'], $rLocations['lat'], 10, 1);
 		
 		// den nächsgelegenen Ort in den geodb ermitteln
-		$sql = 'SELECT ' . geomath::getSqlDistanceFormula($rLocations['lon'], $rLocations['lat'], 10, 1, 'lon', 'lat', 'geodb_coordinates') . ' `distance`, 
+		$sql = 'SELECT ' . geomath::getSqlDistanceFormula($rLocations['lon'], $rLocations['lat'], 10, 1, 'lon', 'lat', 'geodb_coordinates') . ' `distance`,
 							`geodb_coordinates`.`loc_id` `loc_id`
-					  FROM `geodb_coordinates` 
-					  WHERE `lon` > ' . $minlon . ' AND 
-					        `lon` < ' . $maxlon . ' AND 
-					        `lat` > ' . $minlat . ' AND 
+					  FROM `geodb_coordinates`
+					  WHERE `lon` > ' . $minlon . ' AND
+					        `lon` < ' . $maxlon . ' AND
+					        `lat` > ' . $minlat . ' AND
 					        `lat` < ' . $maxlat . '
-					  HAVING `distance` < 10 
-					  ORDER BY `distance` ASC 
+					  HAVING `distance` < 10
+					  ORDER BY `distance` ASC
 					  LIMIT 1';
 		$rs = sql($sql);
 		
@@ -76,5 +76,3 @@
 
 	}
 	mysql_free_result($rsLocations);
-
-?>

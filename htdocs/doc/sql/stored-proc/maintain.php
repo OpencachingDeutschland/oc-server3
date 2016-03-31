@@ -61,5 +61,3 @@
 	{
 		return sql_value("SELECT `value` FROM `sysconfig` WHERE `name`='db_version'", 0);
 	}
-
-?>

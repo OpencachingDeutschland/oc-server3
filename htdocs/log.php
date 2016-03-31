@@ -118,7 +118,7 @@
 		$rateOption = ($logType == 1 || $logType == 7) + 0;
 		
 		// get logtext editormode (from form or from userprofile)
-		// 1 = text; 2 = HTML; 3 = tinyMCE 
+		// 1 = text; 2 = HTML; 3 = tinyMCE
 		if (isset($_POST['descMode']))
 		{
 			$descMode = $_POST['descMode']+0;  // Ocprop: 2

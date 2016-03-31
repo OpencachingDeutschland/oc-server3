@@ -22,33 +22,33 @@
 		$login->verify();
 		if ($login->userid != 0)
 		{
-			// 'show public profile' in my-profile menu 
+			// 'show public profile' in my-profile menu
 			$userid = $login->userid;
 			$tpl->menuitem = MNU_MYPROFILE_PUBLIC;
 		}
 	}
 
 	// user data and basic statistics
-	$rs = sql("SELECT `user`.`username`, 
-										`user`.`last_login`, 
-										`user`.`accept_mailing`, 
-										`user`.`pmr_flag`, 
-										`user`.`date_created`, 
-										`user`.`password`, 
-										`user`.`email`, 
-										`user`.`is_active_flag`, 
-										`user`.`latitude`, 
+	$rs = sql("SELECT `user`.`username`,
+										`user`.`last_login`,
+										`user`.`accept_mailing`,
+										`user`.`pmr_flag`,
+										`user`.`date_created`,
+										`user`.`password`,
+										`user`.`email`,
+										`user`.`is_active_flag`,
+										`user`.`latitude`,
 										`user`.`longitude`,
-										`user`.`data_license`, 
+										`user`.`data_license`,
 										IFNULL(`sys_trans_text`.`text`,`countries`.`name`) AS `country`,
-										`stat_user`.`hidden`, 
-										`stat_user`.`found`, 
-										`stat_user`.`notfound`, 
-										`stat_user`.`note`, 
+										`stat_user`.`hidden`,
+										`stat_user`.`found`,
+										`stat_user`.`notfound`,
+										`stat_user`.`note`,
 										`stat_user`.`maintenance`,
-										`user`.`uuid` 
-							 FROM `user` 
-					LEFT JOIN `stat_user` ON `user`.`user_id`=`stat_user`.`user_id` 
+										`user`.`uuid`
+							 FROM `user`
+					LEFT JOIN `stat_user` ON `user`.`user_id`=`stat_user`.`user_id`
 					LEFT JOIN `countries` ON `user`.`country`=`countries`.`short`
 					LEFT JOIN `sys_trans_text` ON `sys_trans_text`.`lang`='&2' AND `sys_trans_text`.`trans_id`=`countries`.`trans_id`
 							WHERE `user`.`user_id`='&1'", $userid,  $opt['template']['locale']);
@@ -155,7 +155,7 @@
 		SELECT COUNT(*)
 		FROM `cache_logs`
 		INNER JOIN `caches_attributes` ON `caches_attributes`.`cache_id`=`cache_logs`.`cache_id` AND `caches_attributes`.`attrib_id`=6
-		INNER JOIN `cache_rating` ON `cache_rating`.`user_id`=`cache_logs`.`user_id` AND `cache_rating`.`cache_id`=`cache_logs`.`cache_id` AND `cache_rating`.`rating_date`=`cache_logs`.`date` 
+		INNER JOIN `cache_rating` ON `cache_rating`.`user_id`=`cache_logs`.`user_id` AND `cache_rating`.`cache_id`=`cache_logs`.`cache_id` AND `cache_rating`.`rating_date`=`cache_logs`.`date`
 		WHERE `cache_logs`.`user_id`='&1' AND `cache_logs`.`type` IN (1,7)",
 		0, $userid);
 

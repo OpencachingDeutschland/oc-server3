@@ -24,8 +24,8 @@
 		$cacheid = cache::cacheIdFromWP($_REQUEST['wp']);
 
 	// When the domain does not fit the api key, you must be redirected to the correct domain.
-	// As this not all browses reliably redirect popup window locations, the settings meanwhile 
-	// allow to directly link to the registered domain, so the following code should no longer 
+	// As this not all browses reliably redirect popup window locations, the settings meanwhile
+	// allow to directly link to the registered domain, so the following code should no longer
 	// be needed.
 
 	if (($opt['lib']['garmin']['domain'] != $_SERVER['HTTP_HOST']) && !isset($_REQUEST['redirect']))
@@ -65,7 +65,7 @@
 				`caches`.`search_time` AS `searchtime`,
 				`caches`.`way_length` AS `waylength`,
 				`caches`.`country` AS `countryCode`,
-				IFNULL(`ttCountry`.`text`, `countries`.`name`) AS `country`, 
+				IFNULL(`ttCountry`.`text`, `countries`.`name`) AS `country`,
 				`caches`.`logpw` AS `logpw`,
 				`caches`.`date_hidden` AS `datehidden`,
 				`caches`.`wp_oc` AS `wpoc`,

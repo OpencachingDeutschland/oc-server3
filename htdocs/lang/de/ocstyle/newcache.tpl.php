@@ -214,8 +214,8 @@ function toggleAttr(id)
 	<tr>
 		<td>&nbsp;</td>
 		<td class="help"><img src="lang/de/ocstyle/images/misc/hint.gif" border="0" width="15" height="11" alt="{t}Notice{/t}" title="{t}Notice{/t}" />
-			{t}The effort is of course only be estimated and can vary depending on environmental influences. 
-				 If you can not make sufficiently detailed information, write 0 (zero) in both fields. 
+			{t}The effort is of course only be estimated and can vary depending on environmental influences.
+				 If you can not make sufficiently detailed information, write 0 (zero) in both fields.
 				 (See also: <a href="articles.php?page=cacheinfo#time" target="_blank">description</a>){/t}
 		</td>
 	</tr>

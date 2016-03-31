@@ -97,7 +97,7 @@
   /* maximum number of failed logins per hour before that IP address is blocked
    * (used to prevent brute-force-attacks)
    */
-	$opt['page']['max_logins_per_hour'] = 1000;    // for development ... 
+	$opt['page']['max_logins_per_hour'] = 1000;    // for development ...
 	$opt['page']['headoverlay'] = 'oc_head_alpha3';
 
   // data license

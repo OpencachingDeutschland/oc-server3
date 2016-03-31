@@ -4,7 +4,7 @@
  *
  *	This script converts an OC productive database into a developer DB.
  *  It removes all data not intended for the public and disables all user
- *  accounts, while keeping the cache listings' status. 
+ *  accounts, while keeping the cache listings' status.
  *
  *  Unicode Reminder メモ
  ***************************************************************************/
@@ -66,7 +66,7 @@
 	sql("DELETE FROM `coordinates` WHERE `type`=2");   // personal cache notes and coords
 	sql("TRUNCATE `queries`");
 	sql("TRUNCATE `user_options`");
-	sql("UPDATE `user` 
+	sql("UPDATE `user`
 	     SET `is_active_flag`=0,
 			      `last_login`=NULL, `password`=NULL, `email`=NULL, `email_problems`=0,
 	         `first_email_problem`=NULL, `last_email_problem`=NULL, `mailing_problems`=0,

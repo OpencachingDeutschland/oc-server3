@@ -268,7 +268,7 @@
 				) ENGINE=MyISAM");
 	}
 
-	function dbv_107()  // sync of table definitions, developer and production system	
+	function dbv_107()  // sync of table definitions, developer and production system
 	{
 		sql("ALTER TABLE `caches` MODIFY `meta_last_modified` datetime NOT NULL COMMENT 'via Trigger (stat_caches, gk_item_waypoint)'");
 		sql("ALTER TABLE `countries` MODIFY `en` varchar(128) NOT NULL");

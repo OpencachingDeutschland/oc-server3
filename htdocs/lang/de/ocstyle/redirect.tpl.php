@@ -17,9 +17,9 @@
 		<meta http-equiv="pragma" content="no-cache" />
 		<style type="text/css">
 		<!--
-			table, tr, td     
-			{ 
-				font:11px Tahoma; 
+			table, tr, td
+			{
+				font:11px Tahoma;
 				color:#404040;
 			}
 			body
@@ -34,14 +34,14 @@
 				text-decoration:underline;
 				color:#37496D;
 			}
-			a:hover                      
+			a:hover
 			{
 				color:#404040;
 			}
-			#redirect         
+			#redirect
 			{
-				font-size:11px; 
-				font-weight:bold; 
+				font-size:11px;
+				font-weight:bold;
 				border:1 solid #C0C0C0;
 			}
 		-->

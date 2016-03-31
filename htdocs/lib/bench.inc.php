@@ -5,9 +5,9 @@
    Unicode Reminder メモ
  ****************************************************************************/
 
-  // 
-  // bench.inc.php 
-  // 
+  //
+  // bench.inc.php
+  //
   class Cbench
   {
     var $start;

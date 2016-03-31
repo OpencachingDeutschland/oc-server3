@@ -27,5 +27,3 @@
 		ftsearch_refresh();
 		$process_sync->Leave();
 	}
-
-?>

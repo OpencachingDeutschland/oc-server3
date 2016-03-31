@@ -44,7 +44,7 @@ class OcHTMLPurifier extends HTMLPurifier
 
 		// enable 'display' and 'visibility' styles for mystery descriptions
 		$config->set('CSS.AllowTricky', true);                // + display, visibility, overflow
-		$config->set('CSS.ForbiddenProperties', 'overflow');  // - overflow 
+		$config->set('CSS.ForbiddenProperties', 'overflow');  // - overflow
 
 		// prepare additional definitions
 		$def = $config->getHTMLDefinition(true);

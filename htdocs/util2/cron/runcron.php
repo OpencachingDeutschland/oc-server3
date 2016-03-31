@@ -63,5 +63,3 @@ function checkJob(&$job)
 		sqll("INSERT INTO `sys_cron` (`name`, `last_run`) VALUES ('&1', NOW()) ON DUPLICATE KEY UPDATE `last_run`=NOW()", $job->name);
 	}
 }
-
-?>

@@ -710,10 +710,10 @@ class user
 			$mail->send();
 
 			// log
-			sql("INSERT INTO `email_user` (`ipaddress`, 
-			                               `from_user_id`, 
-			                               `from_email`, 
-			                               `to_user_id`, 
+			sql("INSERT INTO `email_user` (`ipaddress`,
+			                               `from_user_id`,
+			                               `from_email`,
+			                               `to_user_id`,
 			                               `to_email`)
 			                       VALUES ('&1', '&2', '&3', '&4', '&5')",
 			                               $_SERVER["REMOTE_ADDR"],
@@ -948,7 +948,7 @@ class user
 			/*
 			// replace pictures
 			$errmesg = $this->replace_pictures(OBJECT_CACHELOG);
-			if ($errmesg !== true) 
+			if ($errmesg !== true)
 				return "removing log pictures: $errmesg";
 			*/
 
@@ -1247,7 +1247,7 @@ class user
 
 		sql("set @allowdelete=1");
 		sql("DELETE FROM `user` WHERE `user_id`='&1'", $this->nUserId);
-		// all data in depending tables is cleared via trigger 
+		// all data in depending tables is cleared via trigger
 
 		$this->reload();
 

@@ -15,7 +15,7 @@
 		- hard-coded default values
 
 	showresult=1 produces an SQL query from search options, executes it and
-	  calls the output formatting module as specified by the 'output' parameter. 
+	  calls the output formatting module as specified by the 'output' parameter.
 		If 'showresult' != 1, the search options form is presented to the user.
 
 		Note that 'showresult' is also stored in saved queries, so it can be

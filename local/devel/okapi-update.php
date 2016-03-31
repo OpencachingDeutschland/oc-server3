@@ -3,7 +3,7 @@
  *  For license information see doc/license.txt
  *
  *  This script replicates the current OKAPI revision into the current
- *  OC code branch (Git -> Git). Please do not confuse with OKAPI's internal 
+ *  OC code branch (Git -> Git). Please do not confuse with OKAPI's internal
  *  update mechanism, which is called via bin/dbupdate.php.
  *
  *  Unicode Reminder メモ
@@ -68,6 +68,3 @@ passthru("git status");
 echo "[okapi-update] committing to local OC Git repo\n";
 echo git('add .') . "\n";
 echo git('commit -m "OKAPI r' . $okapi_version_number . '"') . "\n";
-
-?>
-

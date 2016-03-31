@@ -30,7 +30,7 @@ class rating_tops
 		while ($rCountry = sql_fetch_assoc($rsCountry))
 		{
 			$rsAdm3 = sql("
-				SELECT SQL_BUFFER_RESULT SQL_SMALL_RESULT DISTINCT 
+				SELECT SQL_BUFFER_RESULT SQL_SMALL_RESULT DISTINCT
 				  IF(`cache_location`.`code1`=`caches`.`country`,`cache_location`.`code3`,NULL) `code3`
 				FROM `caches`
 				LEFT JOIN `cache_location` ON `caches`.`cache_id`=`cache_location`.`cache_id`
@@ -72,10 +72,10 @@ class rating_tops
 					WHERE `cache_rating`.`user_id`!=`caches`.`user_id`
 					GROUP BY `cache_rating`.`cache_id`");
 
-				sql("INSERT INTO &topResult (`idx`, `cache_id`, `ratings`, `founds`) 
-				     SELECT SQL_SMALL_RESULT (&topRatings.`ratings`+1)*(&topRatings.`ratings`+1)/(IFNULL(`stat_caches`.`found`, 0)/10+1)*100 AS `idx`, 
+				sql("INSERT INTO &topResult (`idx`, `cache_id`, `ratings`, `founds`)
+				     SELECT SQL_SMALL_RESULT (&topRatings.`ratings`+1)*(&topRatings.`ratings`+1)/(IFNULL(`stat_caches`.`found`, 0)/10+1)*100 AS `idx`,
 				            &topRatings.`cache_id`,
-				            &topRatings.`ratings`, 
+				            &topRatings.`ratings`,
 				            IFNULL(`stat_caches`.`found`, 0) AS founds
 				       FROM &topRatings
 				 INNER JOIN `caches` ON &topRatings.`cache_id`=`caches`.`cache_id`
@@ -89,7 +89,7 @@ class rating_tops
 				}
 
 				sql("INSERT INTO `rating_tops` (`cache_id`, `rating`)
-				     SELECT SQL_BUFFER_RESULT &topResult.`cache_id`, 
+				     SELECT SQL_BUFFER_RESULT &topResult.`cache_id`,
 						        &topResult.`idx` AS `rating`
 				       FROM &topResult
 				   ORDER BY `rating` DESC");

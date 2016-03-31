@@ -33,7 +33,7 @@ class geokrety
 		}
 	}
 
-	/* get file from XML interface 
+	/* get file from XML interface
 	 * and return path of saved xml
 	 * or false on error
 	 */

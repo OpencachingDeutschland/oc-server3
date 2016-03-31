@@ -80,7 +80,7 @@
 	<tr>
 		<td colspan="2">
 			<textarea id="desc" class="cachedesc" name="desc" cols="90" rows="25">{desc}</textarea>
-    </td>	
+    </td>
 	</tr>
 	{htmlnotice}
 	<tr><td class="spacer" colspan="2"></td></tr>

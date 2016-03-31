@@ -93,6 +93,3 @@ foreach ($liste as $lat => $liste2)
 		  echo "," . $cachecounts["caches"][$year] . "," . $cachecounts["logs"][$year];
 		echo  "\r\n";
 	}
-
-?>
-      

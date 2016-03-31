@@ -100,7 +100,7 @@
 
 	/* default locale
 	 */
-	$opt['template']['default']['locale'] = 'DE';   // can be overwritten by $opt['domain'][<domain>]['locale'] 
+	$opt['template']['default']['locale'] = 'DE';   // can be overwritten by $opt['domain'][<domain>]['locale']
 
 	/* multi-domain settings
 	 *

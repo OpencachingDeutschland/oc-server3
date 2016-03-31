@@ -26,7 +26,7 @@
 	 *  strongly recommended settings
 	 *    register_globals = Off
 	 *
-	 * PHP_DEBUG_ON 
+	 * PHP_DEBUG_ON
 	 *
 	 *  use the following php.ini-settings
 	 *    display_errors = On

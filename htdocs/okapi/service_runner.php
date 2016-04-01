@@ -188,6 +188,9 @@ class OkapiServiceRunner
             $calltype = 'internal';
         }
 
+        if (Settings::get('OC_BRANCH') == 'oc.de' && $user_id !== -1)
+            $user_id = 0;
+
         Db::execute("
             insert into okapi_stats_temp (`datetime`, consumer_key, user_id, service_name, calltype, runtime)
             values (

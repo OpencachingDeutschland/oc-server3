@@ -158,6 +158,12 @@ final class Settings
         'DATA_LICENSE_URL' => null,
 
         /**
+         * URLs for registering a new user account at the OC site
+         */
+        'REGISTRATION_URL' => null,
+        'MOBILE_REGISTRATION_URL' => null,
+
+        /**
          * URL of the site's logo image.
          * Minimum size is 64x64 pixels, maximum size 72x72 pixels.
          */
@@ -274,6 +280,8 @@ final class Settings
         foreach ($slash_keys as $key)
             if ($dict[$key][strlen($dict[$key]) - 1] != '/')
                 throw new Exception("$key must end with a slash.");
+        if ($dict['REGISTRATION_URL'] === null)
+            $dict['REGISTRATION_URL'] = $dict['SITE_URL'] . 'register.php';
         if ($dict['SITE_LOGO'] === null)
             $dict['SITE_LOGO'] = $dict['SITE_URL'] . 'okapi/static/oc_logo.png';
         if ($dict['JPEG_QUALITY'] < 50 || $dict['JPEG_QUALITY'] > 100)

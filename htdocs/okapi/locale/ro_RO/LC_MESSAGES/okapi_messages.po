@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OKAPI\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-10 19:07+0200\n"
-"PO-Revision-Date: 2016-03-10 19:08+0200\n"
+"POT-Creation-Date: 2016-04-01 16:31+0300\n"
+"PO-Revision-Date: 2016-04-02 02:15+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ro_RO\n"
@@ -18,7 +18,7 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: .git\n"
 
-#: okapi/services/caches/formatters/gpx.php:389
+#: okapi/services/caches/formatters/gpx.php:408
 msgid ""
 "<b>Geocache coordinates have been changed.</b> They have been replaced with "
 "your own custom coordinates which you have provided for this geocache."
@@ -26,7 +26,7 @@ msgstr ""
 "<b>Coordonatele geocutiei au fost modificate.</b> Acestea au fost înlocuite "
 "cu coordonate alese de tine pentru această geocutie."
 
-#: okapi/services/caches/formatters/gpx.php:395
+#: okapi/services/caches/formatters/gpx.php:414
 msgid ""
 "<b>Geocache coordinates have been changed.</b> Currently they point to one "
 "of the alternate waypoints originally described as:"
@@ -34,11 +34,11 @@ msgstr ""
 "<b>Coordonatele acestei geocutii au fost modificate.</b> Acestea indică unul "
 "din punctele suplimentare descris ca:"
 
-#: okapi/services/caches/formatters/gpx.php:408
+#: okapi/services/caches/formatters/gpx.php:427
 msgid "Original geocache location"
 msgstr "Coordonatele iniţiale ale geocutiei"
 
-#: okapi/services/caches/formatters/gpx.php:410
+#: okapi/services/caches/formatters/gpx.php:429
 #, php-format
 msgid "Original (owner-supplied) location of the %s geocache"
 msgstr ""
@@ -105,36 +105,36 @@ msgstr "Descriere imagine"
 msgid "The cache probably is located in the following protection areas:"
 msgstr "Geocutia probabil că se află undeva în următoarele arii protejate:"
 
-#: okapi/services/caches/geocaches.php:535
+#: okapi/services/caches/geocaches.php:536
 msgid "Parts of this geocache listing may be outdated."
 msgstr ""
 "O parte din informaţiile despre această geocutie s-ar putea să fie vechi şi "
 "neactualizate."
 
-#: okapi/services/caches/geocaches.php:536
+#: okapi/services/caches/geocaches.php:538
 msgid "See the log entries for more information."
 msgstr "Vezi însemnările pentru mai multe informaţii."
 
 # For additional waypoints. As in "Stage 1: Parking".
-#: okapi/services/caches/geocaches.php:1015
+#: okapi/services/caches/geocaches.php:1028
 msgid "Stage"
 msgstr "Etapă"
 
-#: okapi/services/caches/geocaches.php:1059
+#: okapi/services/caches/geocaches.php:1072
 msgid "User location"
 msgstr "Poziţia utilizatorului"
 
-#: okapi/services/caches/geocaches.php:1062
+#: okapi/services/caches/geocaches.php:1075
 #, php-format
 msgid "Your own custom coordinates for the %s geocache"
 msgstr "Coordonatele modificate de tine pentru geocutia %s"
 
 # Is this the attribute - Nature?
-#: okapi/services/caches/geocaches.php:1222
+#: okapi/services/caches/geocaches.php:1235
 msgid "National Park / Landscape"
 msgstr "Rezervaţie naturală"
 
-#: okapi/services/caches/geocaches.php:1396
+#: okapi/services/caches/geocaches.php:1409
 #, php-format
 msgid ""
 "This <a href='%s'>geocache</a> description comes from the <a href='%s'>%s</"
@@ -145,7 +145,7 @@ msgstr ""
 
 # as of %s - what is this string replaced with?
 # I assumed a date or year so far.
-#: okapi/services/caches/geocaches.php:1408
+#: okapi/services/caches/geocaches.php:1421
 #, php-format
 msgid ""
 "&copy; <a href='%s'>%s</a>, <a href='%s'>%s</a>, <a href='http://"
@@ -156,7 +156,7 @@ msgstr ""
 "creativecommons.org/licenses/by-nc-nd/3.0/de/deed.en'>CC-BY-NC-ND</a>, din "
 "%s; toate însemnările &copy; autorii acestora"
 
-#: okapi/services/caches/geocaches.php:1419
+#: okapi/services/caches/geocaches.php:1432
 #, php-format
 msgid ""
 "&copy; <a href='%s'>%s</a>, <a href='%s'>%s</a>, <a href='http://"
@@ -166,6 +166,45 @@ msgstr ""
 "&copy; <a href='%s'>%s</a>, <a href='%s'>%s</a>, <a href='http://"
 "creativecommons.org/licenses/by-nc-nd/3.0/de/deed.en'>CC-BY-NC-ND</a>; toate "
 "însemnările &copy; autorii acestora"
+
+#: okapi/services/logs/images/add.php:82 okapi/services/logs/images/edit.php:56
+#, php-format
+msgid "Please enter an image caption."
+msgstr "Te rog introdu un titlu pentru această poză."
+
+#: okapi/services/logs/images/add.php:107
+#, php-format
+msgid ""
+"Your image file is too large (%s.%s MB); %s accepts a maximum image size of "
+"%s.%s MB."
+msgstr ""
+"Poza este prea mare (%s.%s MB); %s acceptă o dimensiune maximă de %s.%s MB."
+
+#: okapi/services/logs/images/add.php:134
+#, php-format
+msgid ""
+"The uploaded image file is broken, or the image type is not accepted by %s. "
+"Allowed types are JPEG, PNG and GIF."
+msgstr ""
+"Imaginea încărcată este defectă sau într-un alt format decât cele acceptate "
+"de %s. Formatele permise sunt JPEG, PNG şi GIF."
+
+#: okapi/services/logs/images/add.php:146
+#, php-format
+msgid "The uploaded image is too large (%s megapixels), please downscale it."
+msgstr "Poza încărcată este prea mare (%s megapixeli), te rog micşoreaz-o."
+
+#: okapi/services/logs/images/add.php:155
+msgid "The uploaded image file is broken."
+msgstr "Imaginea încărcată este defectă."
+
+#: okapi/services/logs/images/add.php:404
+msgid "Your log image has been saved."
+msgstr "Însemnarea cu poză a fost salvată."
+
+#: okapi/services/logs/images/edit.php:215
+msgid "Your log image has been updated."
+msgstr "Însemnarea cu poză a fost actualizată."
 
 #: okapi/services/logs/submit.php:75
 msgid ""
@@ -190,17 +229,17 @@ msgid ""
 msgstr ""
 "Recomandarea ta a fost ignoratăpentru ca %s nu are suport pentru recomandări."
 
-#: okapi/services/logs/submit.php:158
+#: okapi/services/logs/submit.php:185
 #, php-format
 msgid ""
-"However, your \"needs maintenance\" flag was ignored, because %s does not "
-"support this feature."
+"However, your \"does not need maintenance\" flag was ignored, because %s "
+"does not yet support this feature."
 msgstr ""
-"Indicatorul \"necesită întreţinere\" a fost ignorat pentru ca %s nu are "
-"suport pentru acest indicator."
+"Indicatorul \"nu necesită întreţinere\" a fost ignorat deoarece %s încă nu "
+"are suport pentru această funcţionalitate."
 
 # Missing "you can attend it"
-#: okapi/services/logs/submit.php:188
+#: okapi/services/logs/submit.php:215
 msgid ""
 "This cache is an Event cache. You cannot \"Find\" it (but you can attend it, "
 "or comment on it)!"
@@ -208,7 +247,7 @@ msgstr ""
 "Această geocutie este un eveniment. Nu poate fi \"găsită\" (dar poţi anunţa "
 "că ai participat sau să scrii o notă)!"
 
-#: okapi/services/logs/submit.php:197
+#: okapi/services/logs/submit.php:224
 msgid ""
 "This cache is NOT an Event cache. You cannot \"Attend\" it (but you can find "
 "it, or comment on it)!"
@@ -217,24 +256,24 @@ msgstr ""
 "găseşti sau să scrii o notă)!"
 
 # comment here means log text?
-#: okapi/services/logs/submit.php:207
+#: okapi/services/logs/submit.php:234
 msgid "Your have to supply some text for your comment."
 msgstr "Trebuie să scrii ceva atunci când postezi o însemnare."
 
-#: okapi/services/logs/submit.php:223
+#: okapi/services/logs/submit.php:250
 msgid "This cache requires a password. You didn't provide one!"
 msgstr "Această geocutie necesită o parolă. Nu ai furnizat nici o parolă!"
 
-#: okapi/services/logs/submit.php:227
+#: okapi/services/logs/submit.php:254
 msgid "Invalid password!"
 msgstr "Parolă incorectă!"
 
 # This error will be shown to the user when he tries to submit a log entry which is EXACTLY the same as one he had submitted before.
-#: okapi/services/logs/submit.php:372
+#: okapi/services/logs/submit.php:399
 msgid "You have already submitted a log entry with exactly the same contents."
 msgstr "Deja ai trimis o însemnare cu exact acelaşi conţinut."
 
-#: okapi/services/logs/submit.php:399
+#: okapi/services/logs/submit.php:426
 msgid ""
 "You have already submitted a \"Found it\" log entry once. Now you may submit "
 "\"Comments\" only!"
@@ -242,32 +281,32 @@ msgstr ""
 "Deja ai trimis odată o însemnare \"Am găsit\". De atunci încolo poţi doar să "
 "scrii însemnări de tipul \"Scrie o notă\"!"
 
-#: okapi/services/logs/submit.php:405
+#: okapi/services/logs/submit.php:432
 msgid "You are the owner of this cache. You may submit \"Comments\" only!"
 msgstr ""
 "Eşti proprietarul acestei geocutii. Poţi doar să scrii însemnări de tipul "
 "\"Scrie o notă\"!"
 
-#: okapi/services/logs/submit.php:427
+#: okapi/services/logs/submit.php:454
 msgid "You have already rated this cache once. Your rating cannot be changed."
 msgstr "Deja ai votat aceasta geocutie. Votul dat nu poate fi schimbat."
 
-#: okapi/services/logs/submit.php:448
+#: okapi/services/logs/submit.php:475
 msgid "You have already recommended this cache once."
 msgstr "Deja ai recomandat această geocutie."
 
-#: okapi/services/logs/submit.php:464
+#: okapi/services/logs/submit.php:491
 msgid "You don't have any recommendations to give. Find more caches first!"
 msgstr ""
 "Nu ai dreptul să dai recomandări în acest moment. Mai întâi trebuie să mai "
 "găseşti nişte geocutii!"
 
-#: okapi/services/logs/submit.php:515
+#: okapi/services/logs/submit.php:542
 msgid "Event caches cannot \"need maintenance\"."
 msgstr ""
 "Geocutiile de tip eveniment nu pot fi marcate ca \"necesită întreţinere\""
 
-#: okapi/services/logs/submit.php:658
+#: okapi/services/logs/submit.php:690
 msgid "Your cache log entry was posted successfully."
 msgstr "însemnarea ta a fost publicată."
 
@@ -423,6 +462,13 @@ msgstr ""
 "să foloseşti aplicaţii externe,\n"
 "                    ele vor apărea aici.</p>\n"
 "                "
+
+#~ msgid ""
+#~ "However, your \"needs maintenance\" flag was ignored, because %s does not "
+#~ "support this feature."
+#~ msgstr ""
+#~ "Indicatorul \"necesită întreţinere\" a fost ignorat pentru ca %s nu are "
+#~ "suport pentru acest indicator."
 
 #~ msgid ""
 #~ "This cache is archived. Only admins and the owner are allowed to add a "

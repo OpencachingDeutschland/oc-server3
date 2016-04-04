@@ -1,4 +1,5 @@
 <?php
+
 /***************************************************************************
  *  For license information see doc/license.txt
  *
@@ -6,99 +7,108 @@
  *
  *  summarize methods to get new events, caches, ratings, etc.
  ***************************************************************************/
-
-
 class getNew
 {
-	// class variables
-	private $userCountry;
+    // class variables
+    private $userCountry;
 
 
-	// getter/setter
-	public function get_userCountry()
-	{
-		return $this->userCountry;
-	}
+    // getter/setter
+    public function get_userCountry()
+    {
+        return $this->userCountry;
+    }
 
-	public function set_userCountry($userCountry)
-	{
-		$this->userCountry = $userCountry;
-	}
-
-
-	/**
-	 * constructor
-	 * creates the object
-	 *
-	 * @param string $userCountry country of the loggedin user as parameter for the sql statements
-	 * @return void
-	 */
-	public function __construct($userCountry)
-	{
-		// set userCountry
-		$this->set_userCountry($userCountry);
-	}
+    public function set_userCountry($userCountry)
+    {
+        $this->userCountry = $userCountry;
+    }
 
 
-	/**
-	  * rsForSmarty creates the result from database to use with smarty assign-rs method
-	  * based on $this->type
-	  *
-	  * @param string $type type of the "new"-information, i.e. cache, event, rating, etc
-	  * @param array $args numeric array containing the parameter for "sql_slave"
-	  * @return object mysql result used by smarty assign_rs
-	  */
-	public function rsForSmarty($type,$args=null)
-	{
-		// check type
-		if(method_exists($this,strtolower($type).'Rs'))
-		{
-			return call_user_func(array($this,$type.'Rs'),$args);
-		}
-	}
+    /**
+     * constructor
+     * creates the object
+     *
+     * @param string $userCountry country of the loggedin user as parameter for the sql statements
+     *
+     * @return void
+     */
+    public function __construct($userCountry)
+    {
+        // set userCountry
+        $this->set_userCountry($userCountry);
+    }
 
 
-	/**
-	 * feedForSmarty creates a HTML string to use with smarty assign method
-	 * based on $this->type by using RSSParser class
-	 *
-	 * @param string $type type of the "new"-information, i.e. cache, event, rating, etc
-	 * @param int $items number of feeditems to parse from feed (RSSParser)
-	 * @param string $url url of the feed to parse (RSSParser)
-	 * @param int $timeout maximum seconds to wait for the requested page
-	 * @param boolean $includetext ???following??? add table-tag?
-	 * @return string HTML string used for smarty assign method
-	 */
-	public function feedForSmarty($type,$items=null,$url=null,$timeout=null,$includetext=null)
-	{
-		// check type
-		if (method_exists($this,strtolower($type).'Feed'))
-		{
-			return call_user_func(array($this,$type.'Feed'),$items,$url,$timeout,$includetext);
-		}
-	}
+    /**
+     * rsForSmarty creates the result from database to use with smarty assign-rs method
+     * based on $this->type
+     *
+     * @param string $type type of the "new"-information, i.e. cache, event, rating, etc
+     * @param array  $args numeric array containing the parameter for "sql_slave"
+     *
+     * @return object mysql result used by smarty assign_rs
+     */
+    public function rsForSmarty($type, $args = null)
+    {
+        // check type
+        if (method_exists($this, strtolower($type) . 'Rs')) {
+            return call_user_func([
+                $this,
+                $type . 'Rs'
+            ], $args);
+        }
+    }
 
 
-	/**
-	 * cacheRs executes the database statements for type "cache"
-	 *
-	 * @param array $args numeric array containing the parameter for "sql_slave"
-	 * @return object mysql result used by smarty assign_rs
-	 */
-	private function cacheRs($args=null)
-	{
-		// global
-		global $opt;
+    /**
+     * feedForSmarty creates a HTML string to use with smarty assign method
+     * based on $this->type by using RSSParser class
+     *
+     * @param string  $type        type of the "new"-information, i.e. cache, event, rating, etc
+     * @param int     $items       number of feeditems to parse from feed (RSSParser)
+     * @param string  $url         url of the feed to parse (RSSParser)
+     * @param int     $timeout     maximum seconds to wait for the requested page
+     * @param boolean $includetext ???following??? add table-tag?
+     *
+     * @return string HTML string used for smarty assign method
+     */
+    public function feedForSmarty($type, $items = null, $url = null, $timeout = null, $includetext = null)
+    {
+        // check type
+        if (method_exists($this, strtolower($type) . 'Feed')) {
+            return call_user_func([
+                $this,
+                $type . 'Feed'
+            ], $items, $url, $timeout, $includetext);
+        }
+    }
 
-		// check $args and set defaults
-		if (is_null($args) || !is_array($args))
-		{
-			$args = array($this->get_userCountry(), $opt['template']['locale'],10);
-		}
 
-		// execute sql
-		return sql_slave(
-							 "SELECT `user`.`user_id` `user_id`,
+    /**
+     * cacheRs executes the database statements for type "cache"
+     *
+     * @param array $args numeric array containing the parameter for "sql_slave"
+     *
+     * @return object mysql result used by smarty assign_rs
+     */
+    private function cacheRs($args = null)
+    {
+        // global
+        global $opt;
+
+        // check $args and set defaults
+        if (is_null($args) || !is_array($args)) {
+            $args = array(
+                $this->get_userCountry(),
+                $opt['template']['locale'],
+                10
+            );
+        }
+
+        // execute sql
+        return sql_slave(
+            "SELECT `user`.`user_id` `user_id`,
 									`user`.`username` `username`,
 									`caches`.`cache_id` `cache_id`,
 									`caches`.`name` `name`,
@@ -122,30 +132,35 @@ class getNew
 									`caches`.`status` = 1
 								ORDER BY `caches`.`date_created` DESC
 								LIMIT 0, &3",
-								$args);
-	}
+            $args
+        );
+    }
 
 
-	/**
-	 * eventRs executes the database statements for type "event"
-	 *
-	 * @param array $args numeric array containing the parameter for "sql_slave"
-	 * @return object mysql result used by smarty assign_rs
-	 */
-	private function eventRs($args=null)
-	{
-		// global
-		global $opt;
+    /**
+     * eventRs executes the database statements for type "event"
+     *
+     * @param array $args numeric array containing the parameter for "sql_slave"
+     *
+     * @return object mysql result used by smarty assign_rs
+     */
+    private function eventRs($args = null)
+    {
+        // global
+        global $opt;
 
-		// check $args and set defaults
-		if (is_null($args) || !is_array($args))
-		{
-			$args = array($this->get_userCountry(), $opt['template']['locale'], 10);
-		}
+        // check $args and set defaults
+        if (is_null($args) || !is_array($args)) {
+            $args = array(
+                $this->get_userCountry(),
+                $opt['template']['locale'],
+                10
+            );
+        }
 
-		// execute sql
-		return sql_slave(
-						 "SELECT `user`.`user_id` `user_id`,
+        // execute sql
+        return sql_slave(
+            "SELECT `user`.`user_id` `user_id`,
 								`user`.`username` `username`,
 								`caches`.`cache_id` `cache_id`,
 								`caches`.`name` `name`,
@@ -167,57 +182,59 @@ class getNew
 								`caches`.`status`=1
 							ORDER BY `date_hidden` ASC
 							LIMIT 0, &3",
-							$args);
-	}
+            $args
+        );
+    }
 
 
-	/**
-	 * ratingDays returns the number of days used for top rating calculation
-	 *
-	 * @return days
-	 */
-	public function ratingDays()
-	{
-		// global
-		global $opt;
+    /**
+     * ratingDays returns the number of days used for top rating calculation
+     *
+     * @return days
+     */
+    public function ratingDays()
+    {
+        // global
+        global $opt;
 
-		// Calculate days dependend on country selection.
-		// Todo: make default country configurable and use this also for
-		// "except of [Germany]" new caches and logs lists
+        // Calculate days dependend on country selection.
+        // Todo: make default country configurable and use this also for
+        // "except of [Germany]" new caches and logs lists
 
-		if ($this->get_userCountry() == 'DE')
-			return $opt['logic']['rating']['topdays_mainCountry'];
-		else
-			return $opt['logic']['rating']['topdays_otherCountry'];
-	}
+        if ($this->get_userCountry() == 'DE') {
+            return $opt['logic']['rating']['topdays_mainCountry'];
+        } else {
+            return $opt['logic']['rating']['topdays_otherCountry'];
+        }
+    }
 
-	/**
-	 * ratingRs executes the database statements for type "rating"
-	 *
-	 * @param array $args numeric array containing the parameter for "sql_slave"
-	 * @return object mysql result used by smarty assign_rs
-	 */
-	private function ratingRs($args=null)
-	{
-		// global
-		global $opt;
+    /**
+     * ratingRs executes the database statements for type "rating"
+     *
+     * @param array $args numeric array containing the parameter for "sql_slave"
+     *
+     * @return object mysql result used by smarty assign_rs
+     */
+    private function ratingRs($args = null)
+    {
+        // global
+        global $opt;
 
-		// check $args and set defaults
-		if (is_null($args) || !is_array($args))
-		{
-			$args = array(
-				$this->get_userCountry(),
-				$opt['template']['locale'],
-				10,
-				$this->ratingDays()
-			);
-		}
+        // check $args and set defaults
+        if (is_null($args) || !is_array($args)) {
+            $args = array(
+                $this->get_userCountry(),
+                $opt['template']['locale'],
+                10,
+                $this->ratingDays()
+            );
+        }
 
-		// execute sql
-		// 2012-08-24 following
-		//   optimized by adding rating_date field to cache_rating, so we don't need the log table.
-		return sql_slave(
-						 "SELECT COUNT(`cache_rating`.`user_id`) AS `cRatings`,
+        // execute sql
+        // 2012-08-24 following
+        //   optimized by adding rating_date field to cache_rating, so we don't need the log table.
+        return sql_slave(
+            "SELECT COUNT(`cache_rating`.`user_id`) AS `cRatings`,
 								MAX(`cache_rating`.`rating_date`) AS `dLastLog`,
 								`user`.`user_id` AS `user_id`,
 								`user`.`username` AS `username`,
@@ -245,130 +262,121 @@ class getNew
 								`dLastLog` DESC,
 								`cache_id` DESC
 							LIMIT 0, &3",
-							$args);
-	}
+            $args
+        );
+    }
 
 
-	/**
-	 * blogFeed executes the RSSParser for type "blog"
-	 *
-	 * @param int $items number of feeditems to parse from feed (RSSParser)
-	 * @param string $url url of the feed to parse (RSSParser)
-	 * @param int $timeout maximum seconds to wait for the requested page
-	 * @param boolean $includetext ???following??? add table-tag?
-	 * @return string HTML string used for smarty assign method
-	 */
-	private function blogFeed($items=null,$url=null,$timeout=null,$includetext=null)
-	{
-		// global
-		global $opt;
+    /**
+     * blogFeed executes the RSSParser for type "blog"
+     *
+     * @param int     $items       number of feeditems to parse from feed (RSSParser)
+     * @param string  $url         url of the feed to parse (RSSParser)
+     * @param int     $timeout     maximum seconds to wait for the requested page
+     * @param boolean $includetext ???following??? add table-tag?
+     *
+     * @return string HTML string used for smarty assign method
+     */
+    private function blogFeed($items = null, $url = null, $timeout = null, $includetext = null)
+    {
+        // global
+        global $opt;
 
-		// check $items and set defaults
-		if (is_null($items) || !is_numeric($items))
-		{
-			$items = $opt['news']['count'];
-		}
+        // check $items and set defaults
+        if (is_null($items) || !is_numeric($items)) {
+            $items = $opt['news']['count'];
+        }
 
-		// check $url and set defaults
-		if (is_null($url) || !is_string($url))
-		{
-			$url = $opt['news']['include'];
-		}
-		if (is_null($timeout) || !is_numeric($timeout))
-		{
-			$timeout = $opt['news']['timeout'];
-		}
+        // check $url and set defaults
+        if (is_null($url) || !is_string($url)) {
+            $url = $opt['news']['include'];
+        }
+        if (is_null($timeout) || !is_numeric($timeout)) {
+            $timeout = $opt['news']['timeout'];
+        }
 
-		// check $includetext and set defaults
-		if (is_null($includetext) || !is_bool($includetext))
-		{
-			$includetext = false;
-		}
+        // check $includetext and set defaults
+        if (is_null($includetext) || !is_bool($includetext)) {
+            $includetext = false;
+        }
 
-		// execute RSSParser
-		return RSSParser::parse($items,$url,$timeout,$includetext);
-	}
+        // execute RSSParser
+        return RSSParser::parse($items, $url, $timeout, $includetext);
+    }
 
 
-	/**
-	 * forumFeed executes the RSSParser for type "forum"
-	 *
-	 * @param int $items number of feeditems to parse from feed (RSSParser)
-	 * @param string $url url of the feed to parse (RSSParser)
-	 * @param int $timeout maximum seconds to wait for the requested page
-	 * @param boolean $includetext ???following??? add table-tag?
-	 * @return string HTML string used for smarty assign method
-	 */
-	private function forumFeed($items=null,$url=null,$timeout=null,$includetext=null)
-	{
-		// global
-		global $opt;
+    /**
+     * forumFeed executes the RSSParser for type "forum"
+     *
+     * @param int     $items       number of feeditems to parse from feed (RSSParser)
+     * @param string  $url         url of the feed to parse (RSSParser)
+     * @param int     $timeout     maximum seconds to wait for the requested page
+     * @param boolean $includetext ???following??? add table-tag?
+     *
+     * @return string HTML string used for smarty assign method
+     */
+    private function forumFeed($items = null, $url = null, $timeout = null, $includetext = null)
+    {
+        // global
+        global $opt;
 
-		// check $items and set defaults
-		if (is_null($items) || !is_numeric($items))
-		{
-			$items = $opt['forum']['count'];
-		}
+        // check $items and set defaults
+        if (is_null($items) || !is_numeric($items)) {
+            $items = $opt['forum']['count'];
+        }
 
-		// check $url and set defaults
-		if (is_null($url) || !is_string($url))
-		{
-			$url = $opt['forum']['url'];
-		}
-		if (is_null($timeout) || !is_numeric($timeout))
-		{
-			$timeout = $opt['forum']['timeout'];
-		}
+        // check $url and set defaults
+        if (is_null($url) || !is_string($url)) {
+            $url = $opt['forum']['url'];
+        }
+        if (is_null($timeout) || !is_numeric($timeout)) {
+            $timeout = $opt['forum']['timeout'];
+        }
 
-		// check $includetext and set defaults
-		if (is_null($includetext) || !is_bool($includetext))
-		{
-			$includetext = false;
-		}
+        // check $includetext and set defaults
+        if (is_null($includetext) || !is_bool($includetext)) {
+            $includetext = false;
+        }
 
-		// execute RSSParser
-		return RSSParser::parse($items,$url,$timeout,$includetext);
-	}
+        // execute RSSParser
+        return RSSParser::parse($items, $url, $timeout, $includetext);
+    }
 
 
-	/**
-	 * wikiFeed executes the RSSParser for type "wiki"
-	 *
-	 * @param int $items number of feeditems to parse from feed (RSSParser)
-	 * @param string $url url of the feed to parse (RSSParser)
-	 * @param boolean $includetext ???following??? add table-tag?
-	 * @param int $timeout maximum seconds to wait for the requested page
-	 * @return string HTML string used for smarty assign method
-	 */
-	private function wikiFeed($items=null,$url=null,$timeout=null,$includetext=null)
-	{
-		// global
-		global $opt;
+    /**
+     * wikiFeed executes the RSSParser for type "wiki"
+     *
+     * @param int     $items       number of feeditems to parse from feed (RSSParser)
+     * @param string  $url         url of the feed to parse (RSSParser)
+     * @param boolean $includetext ???following??? add table-tag?
+     * @param int     $timeout     maximum seconds to wait for the requested page
+     *
+     * @return string HTML string used for smarty assign method
+     */
+    private function wikiFeed($items = null, $url = null, $timeout = null, $includetext = null)
+    {
+        // global
+        global $opt;
 
-		// check $items and set defaults
-		if (is_null($items) || !is_numeric($items))
-		{
-			$items = $opt['wikinews']['count'];
-		}
+        // check $items and set defaults
+        if (is_null($items) || !is_numeric($items)) {
+            $items = $opt['wikinews']['count'];
+        }
 
-		// check $url and set defaults
-		if (is_null($url) || !is_string($url))
-		{
-			$url = $opt['wikinews']['url'];
-		}
-		if (is_null($timeout) || !is_numeric($timeout))
-		{
-			$timeout = $opt['wikinews']['timeout'];
-		}
+        // check $url and set defaults
+        if (is_null($url) || !is_string($url)) {
+            $url = $opt['wikinews']['url'];
+        }
+        if (is_null($timeout) || !is_numeric($timeout)) {
+            $timeout = $opt['wikinews']['timeout'];
+        }
 
-		// check $includetext and set defaults
-		if (is_null($includetext) || !is_bool($includetext))
-		{
-			$includetext = false;
-		}
+        // check $includetext and set defaults
+        if (is_null($includetext) || !is_bool($includetext)) {
+            $includetext = false;
+        }
 
-		// execute RSSParser
-		return RSSParser::parse($items,$url,$timeout,$includetext);
-	}
-
+        // execute RSSParser
+        return RSSParser::parse($items, $url, $timeout, $includetext);
+    }
 }

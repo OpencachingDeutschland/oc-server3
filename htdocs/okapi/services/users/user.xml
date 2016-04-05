@@ -26,8 +26,10 @@
             <li><b>uuid</b> - ID of the user,</li>
             <li><b>username</b> - username (login) of the user,</li>
             <li><b>profile_url</b> - URL of the user's Opencaching profile page,</li>
-            <li>
-                <p><b>is_admin</b> - boolean; true is user has admin privileges.</p>
+            <li class='deprecated'>
+                <p><b>is_admin</b> - deprecated
+                (<a href='https://github.com/opencaching/okapi/issues/410'>why?</a>).
+                boolean, true is user has admin privileges.</p>
                 <p>This value can be accessed only with <b>Level 3</b> Authentication
                 and only for the user of your Access Token. For all other reads, is_admin
                 will equal <b>null</b>.</p>

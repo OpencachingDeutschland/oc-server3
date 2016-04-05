@@ -526,7 +526,7 @@ class WebService
                     /* Note, that the "owner" and "internal_id" fields are automatically included,
                      * whenever the cache description is included. */
 
-                    $tmp = Okapi::fix_oc_html($row['desc']);
+                    $tmp = Okapi::fix_oc_html($row['desc'], Okapi::OBJECT_TYPE_CACHE);
 
                     if (in_array($cache_code, $outdated_listings))
                     {

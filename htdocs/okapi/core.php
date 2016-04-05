@@ -1003,8 +1003,8 @@ class Okapi
     public static $server;
 
     /* These two get replaced in automatically deployed packages. */
-    public static $version_number = 1247;
-    public static $git_revision = '1efb22cb376fc050e23f1754ace0f8a6121cfd96';
+    public static $version_number = 1248;
+    public static $git_revision = '6c375069355bd2c28a91caad9ebb26c8746e9e37';
 
     private static $okapi_vars = null;
 
@@ -1881,7 +1881,7 @@ class Okapi
     /**
      * "Fix" user-supplied HTML fetched from the OC database.
      */
-    public static function fix_oc_html($html)
+    public static function fix_oc_html($html, $object_type)
     {
         /* There are thousands of relative URLs in cache descriptions. We will
          * attempt to find them and fix them. In theory, the "proper" way to do this
@@ -1895,6 +1895,19 @@ class Okapi
             "$1=$2".Settings::get("SITE_URL"),
             $html
         );
+
+        if ($object_type == self::OBJECT_TYPE_CACHE_LOG
+            && Settings::get('OC_BRANCH') == 'oc.pl'
+        ) {
+            # Decode special OCPL entity-encoding produced by logs/submit.
+            # See https://github.com/opencaching/okapi/issues/413.
+            #
+            # This might be restricted to log entries created by OKAPI (that are
+            # recorded in okapi_submitted_objects). However, they may have been
+            # edited later, so we don't know who created the HTML encoding.
+
+            $html = preg_replace('/&amp;#(38|60|62);/', '&#$1;', $html);
+        }
 
         /* Other things to do in the future:
          *

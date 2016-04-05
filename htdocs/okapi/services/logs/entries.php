@@ -112,7 +112,7 @@ class WebService
                 'needs_maintenance2' => $flag_options[$row['needs_maintenance2']],
                 'listing_is_outdated' => $flag_options[$row['listing_is_outdated']],
                 'oc_team_entry' => $row['oc_team_entry'] ? true : false,
-                'comment' => Okapi::fix_oc_html($row['text']),
+                'comment' => Okapi::fix_oc_html($row['text'], Okapi::OBJECT_TYPE_CACHE_LOG),
                 'images' => array(),
                 'internal_id' => $row['id'],
             );

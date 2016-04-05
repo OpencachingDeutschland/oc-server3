@@ -5,5 +5,5 @@
  *  Unicode Reminder メモ
  ***************************************************************************/
 
-	$nongc = true;
-	require "map2.php";
+$nongc = true;
+require "map2.php";

@@ -8,5 +8,6 @@ insert_final_newline = true
 # Set default charset
 [*.{php,tpl,js}]
 charset = utf-8
-indent_style = tab
+# TODO: migrate this to space:
+indent_style = space
 indent_size = 4

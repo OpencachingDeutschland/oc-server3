@@ -5,13 +5,14 @@
  *  Unicode Reminder メモ
  ***************************************************************************/
 
-	require_once('./lib2/web.inc.php');
+require_once('./lib2/web.inc.php');
 
-	$tpl->name = 'mystatpic';
-	$tpl->menuitem = MNU_MYPROFILE_DATA_STATPIC;
+$tpl->name = 'mystatpic';
+$tpl->menuitem = MNU_MYPROFILE_DATA_STATPIC;
 
-	$login->verify();
-	if ($login->userid == 0)
-		$tpl->redirect('login.php?target=mystatpic.php');
-	
-	$tpl->display();
+$login->verify();
+if ($login->userid == 0) {
+    $tpl->redirect('login.php?target=mystatpic.php');
+}
+
+$tpl->display();

@@ -1,4 +1,5 @@
 <?php
+
 /***************************************************************************
  *  For license information see doc/license.txt
  *
@@ -6,40 +7,45 @@
  *
  *  Exact time mesurement
  ***************************************************************************/
+class Cbench
+{
+    public $start;
+    public $stop;
 
-  class Cbench
-  {
-    var $start;
-    var $stop;
-
-    function CBench()
+    public function CBench()
     {
-      $this->start = 0;
-      $this->stop = 0;
+        $this->start = 0;
+        $this->stop = 0;
     }
-    function getmicrotime()
+
+    public function getmicrotime()
     {
         list($usec, $sec) = explode(' ', microtime());
+
         return ((float)$usec + (float)$sec);
     }
-    function start()
+
+    public function start()
     {
-       $this->start = $this->getmicrotime();
+        $this->start = $this->getmicrotime();
     }
 
-    function stop()
+    public function stop()
     {
-       $this->stop = $this->getmicrotime();
+        $this->stop = $this->getmicrotime();
     }
 
-    function diff()
+    public function diff()
     {
-       $result = $this->stop - $this->start;
-       return $result;
+        $result = $this->stop - $this->start;
+
+        return $result;
     }
-    function runTime()
+
+    public function runTime()
     {
-       $result = $this->getmicrotime() - $this->start;
-       return $result;
+        $result = $this->getmicrotime() - $this->start;
+
+        return $result;
     }
-  }
+}

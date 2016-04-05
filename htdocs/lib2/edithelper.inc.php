@@ -1,17 +1,16 @@
 <?php
 /****************************************************************************
-
-	Unicode Reminder メモ
-
-	common functions for text editors
-
+ *
+ * Unicode Reminder メモ
+ *
+ * common functions for text editors
  ****************************************************************************/
 
-	// used in both lib1 and lib2 code
+// used in both lib1 and lib2 code
 
-	require_once('smiley.inc.php');
-	require_once('OcHTMLPurifier.class.php');
-	require_once('html2text.class.php');
+require_once('smiley.inc.php');
+require_once('OcHTMLPurifier.class.php');
+require_once('html2text.class.php');
 
 
 /*
@@ -28,41 +27,32 @@
 
 function processEditorInput($oldDescMode, $descMode, $text)
 {
-	global $opt;
+    global $opt;
 
-	if ($descMode != 1)
-	{
-		if ($oldDescMode == 1)
-		{
-			// mode switch from plain text to HTML editor => convert HTML special chars
-			$text = nl2br(htmlspecialchars($text));
-			// .. and smilies
-			$text = str_replace($smiley['text'], $smiley['spaced_image'], $text);
-		}
-		else
-		{
-			// save HTML input => verify / tidy / filter;
-			// also implemented in okapi/services/logs/submit.php
-			$purifier = new OcHTMLPurifier($opt);
-			$text = $purifier->purify($text);
-		}
-	}
-	else
-	{
-		if ($oldDescMode == 1)
-		{
-			// save plain text input => convert to HTML;
-			// also implemented in okapi/services/logs/submit.php
-			$text = nl2br(htmlspecialchars($text, ENT_COMPAT, 'UTF-8'));
-		}
-		else
-		{
-			// mode switch from HTML editor to plain text, or decode HTML-encoded plain text
-			$text = html2plaintext($text, $oldDescMode = 0, 0);
-		}
-	}
+    if ($descMode != 1) {
+        if ($oldDescMode == 1) {
+            // mode switch from plain text to HTML editor => convert HTML special chars
+            $text = nl2br(htmlspecialchars($text));
+            // .. and smilies
+            $text = str_replace($smiley['text'], $smiley['spaced_image'], $text);
+        } else {
+            // save HTML input => verify / tidy / filter;
+            // also implemented in okapi/services/logs/submit.php
+            $purifier = new OcHTMLPurifier($opt);
+            $text = $purifier->purify($text);
+        }
+    } else {
+        if ($oldDescMode == 1) {
+            // save plain text input => convert to HTML;
+            // also implemented in okapi/services/logs/submit.php
+            $text = nl2br(htmlspecialchars($text, ENT_COMPAT, 'UTF-8'));
+        } else {
+            // mode switch from HTML editor to plain text, or decode HTML-encoded plain text
+            $text = html2plaintext($text, $oldDescMode = 0, 0);
+        }
+    }
 
-	return $text;
+    return $text;
 }
 
 
@@ -73,42 +63,51 @@ function processEditorInput($oldDescMode, $descMode, $text)
 
 function html2plaintext($text, $texthtml0, $wrap)
 {
-	global $opt, $smiley;
+    global $opt, $smiley;
 
-	if ($texthtml0)
-	{
-		$text = str_replace(array('<p>', "\n", "\r"), '', $text);
-		$text = str_replace(array('<br />', '</p>'), "\n", $text);
-		$text = html_entity_decode($text, ENT_COMPAT, 'UTF-8');
-	}
-	else
-	{
-		// convert smilies ...
-		for ($n=0; $n < count($smiley['image']); $n++) {
-			$text = mb_ereg_replace(
-				"<img [^>]*?src=[^>]+?".str_replace('.','\.', $smiley['file'][$n])."[^>]+?>",
-				"[s![".$smiley['text'][$n]."]!s]",
-				$text);
-			// the [s[ ]s] is needed to protect the spaces around the smileys
-		}
+    if ($texthtml0) {
+        $text = str_replace(array(
+            '<p>',
+            "\n",
+            "\r"
+        ), '', $text);
+        $text = str_replace(array(
+            '<br />',
+            '</p>'
+        ), "\n", $text);
+        $text = html_entity_decode($text, ENT_COMPAT, 'UTF-8');
+    } else {
+        // convert smilies ...
+        for ($n = 0; $n < count($smiley['image']); $n ++) {
+            $text = mb_ereg_replace(
+                "<img [^>]*?src=[^>]+?" . str_replace('.', '\.', $smiley['file'][$n]) . "[^>]+?>",
+                "[s![" . $smiley['text'][$n] . "]!s]",
+                $text
+            );
+            // the [s[ ]s] is needed to protect the spaces around the smileys
+        }
 
-		$h2t = new html2text($text);
-		$h2t->set_base_url($opt['page']['default_absolute_url']);
-		$h2t->width = $wrap;
-		$text = $h2t->get_text();
+        $h2t = new html2text($text);
+        $h2t->set_base_url($opt['page']['default_absolute_url']);
+        $h2t->width = $wrap;
+        $text = $h2t->get_text();
 
-		$text = str_replace(array('[s![',']!s]'), '', $text);
+        $text = str_replace(array(
+            '[s![',
+            ']!s]'
+        ), '', $text);
 
-		// remove e.g. trailing \n created from </p> by html2text
-		while (substr($text,-2) == "\n\n")
-			$text = substr($text, 0, strlen($text) - 1);
-	}
+        // remove e.g. trailing \n created from </p> by html2text
+        while (substr($text, - 2) == "\n\n") {
+            $text = substr($text, 0, strlen($text) - 1);
+        }
+    }
 
-	return $text;
+    return $text;
 }
 
 
 function editorJsPath()
 {
-	return 'resource2/ocstyle/js/editor.js?ft=' . filemtime('resource2/ocstyle/js/editor.js');
+    return 'resource2/ocstyle/js/editor.js?ft=' . filemtime('resource2/ocstyle/js/editor.js');
 }

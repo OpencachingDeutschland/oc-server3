@@ -9,145 +9,161 @@ require_once($opt['rootpath'] . 'lib2/smarty/Smarty.class.php');
 
 class mail extends Smarty
 {
-	var $name = 'sys_nothing';
-	var $main_template = 'sys_main';
-	var $compile_id = null;
-	var $recipient_locale = null;
+    public $name = 'sys_nothing';
+    public $main_template = 'sys_main';
+    public $compile_id = null;
+    public $recipient_locale = null;
 
-	var $from = '';
-	var $to = '';
-	var $subject = '';
+    public $from = '';
+    public $to = '';
+    public $subject = '';
 
-	var $replyTo = null;
-	var $returnPath = null;
+    public $replyTo = null;
+    public $returnPath = null;
 
-	var $headers = array();
+    public $headers = array();
 
-	function mail()
-	{
-		global $opt;
+    public function mail()
+    {
+        global $opt;
 
-		$this->template_dir = $opt['rootpath'] . 'templates2/mail/';
-		$this->compile_dir = $opt['rootpath'] . 'cache2/smarty/compiled/';
-		$this->plugins_dir = array('plugins', 'ocplugins');
+        $this->template_dir = $opt['rootpath'] . 'templates2/mail/';
+        $this->compile_dir = $opt['rootpath'] . 'cache2/smarty/compiled/';
+        $this->plugins_dir = [
+            'plugins',
+            'ocplugins'
+        ];
 
-		// disable caching ...
-		$this->caching = false;
+        // disable caching ...
+        $this->caching = false;
 
-		// register additional functions
-		$this->load_filter('pre', 't');
+        // register additional functions
+        $this->load_filter('pre', 't');
 
-		// cache control
-		if (($opt['debug'] & DEBUG_TEMPLATES) == DEBUG_TEMPLATES)
-			$this->force_compile = true;
+        // cache control
+        if (($opt['debug'] & DEBUG_TEMPLATES) == DEBUG_TEMPLATES) {
+            $this->force_compile = true;
+        }
 
-		$this->from = $opt['mail']['from'];
-	}
+        $this->from = $opt['mail']['from'];
+    }
 
-	function get_compile_id()
-	{
-		global $opt;
-		return 'mail|' . $opt['template']['locale'] . '|' . $this->compile_id;
-	}
+    public function get_compile_id()
+    {
+        global $opt;
 
-	function assign_rs($name, $rs)
-	{
-		$items = array();
-		while ($r = sql_fetch_assoc($rs))
-			$items[] = $r;
-		$this->assign($name, $items);
-	}
+        return 'mail|' . $opt['template']['locale'] . '|' . $this->compile_id;
+    }
 
-	function send($page_url = false)
-	{
-		global $tpl, $opt;
+    public function assign_rs($name, $rs)
+    {
+        $items = array();
+        while ($r = sql_fetch_assoc($rs)) {
+            $items[] = $r;
+        }
+        $this->assign($name, $items);
+    }
 
-		if (!$this->template_exists($this->name . '.tpl'))
-			$tpl->error(ERROR_MAIL_TEMPLATE_NOT_FOUND);
-		$this->assign('template', $this->name);
-		if (!$this->recipient_locale)
-			$this->recipient_locale = $opt['template']['locale'];
+    public function send($page_url = false)
+    {
+        global $tpl, $opt;
 
-		$optn['mail']['contact'] = $opt['mail']['contact'];
-		$optn['page']['absolute_url'] = ($page_url ? $page_url : $opt['page']['absolute_url']);
-		$optn['page']['sitename'] = $opt['page']['sitename'];
-		$optn['format'] = $opt['locale'][$this->recipient_locale]['format'];
-		$this->assign('opt', $optn);
+        if (!$this->template_exists($this->name . '.tpl')) {
+            $tpl->error(ERROR_MAIL_TEMPLATE_NOT_FOUND);
+        }
+        $this->assign('template', $this->name);
+        if (!$this->recipient_locale) {
+            $this->recipient_locale = $opt['template']['locale'];
+        }
 
-		$this->assign('to', $this->to);
-		$this->assign('from', $this->from);
-		$this->assign('subject', $this->subject);
+        $optn['mail']['contact'] = $opt['mail']['contact'];
+        $optn['page']['absolute_url'] = ($page_url ? $page_url : $opt['page']['absolute_url']);
+        $optn['page']['sitename'] = $opt['page']['sitename'];
+        $optn['format'] = $opt['locale'][$this->recipient_locale]['format'];
+        $this->assign('opt', $optn);
 
-		// This is nasty, but as there is only a global translation system
-		// (based on gettext) and there are no precompiled, language-dependend email
-		// templates available, we must temporarily change the locale according to
-		// the recipient's locale. If some error occurs while running fetch(),
-		// the error message may be displayed in the recipient's language.
+        $this->assign('to', $this->to);
+        $this->assign('from', $this->from);
+        $this->assign('subject', $this->subject);
 
-		$sender_locale = $opt['template']['locale'];
-		if ($this->recipient_locale != $sender_locale)
-		{
-			$opt['template']['locale'] = $this->recipient_locale;
-			set_php_locale();
-		}
+        // This is nasty, but as there is only a global translation system
+        // (based on gettext) and there are no precompiled, language-dependend email
+        // templates available, we must temporarily change the locale according to
+        // the recipient's locale. If some error occurs while running fetch(),
+        // the error message may be displayed in the recipient's language.
 
-		$body = $this->fetch($this->main_template . '.tpl', '', $this->get_compile_id());
+        $sender_locale = $opt['template']['locale'];
+        if ($this->recipient_locale != $sender_locale) {
+            $opt['template']['locale'] = $this->recipient_locale;
+            set_php_locale();
+        }
 
-		if ($this->recipient_locale != $sender_locale)
-		{
-			$opt['template']['locale'] = $sender_locale;
-			set_php_locale();
-		}
+        $body = $this->fetch($this->main_template . '.tpl', '', $this->get_compile_id());
 
-		// check if the target domain exists if the domain does not
-		// exist, the mail is sent to the own domain (?!)
-		$domain = mail::getToMailDomain($this->to);
-		if (mail::is_existent_maildomain($domain) == false)
-			return false;
+        if ($this->recipient_locale != $sender_locale) {
+            $opt['template']['locale'] = $sender_locale;
+            set_php_locale();
+        }
 
-		$aAddHeaders = array();
-		$aAddHeaders[] = 'From: "' . $this->from . '" <' . $this->from . '>';
+        // check if the target domain exists if the domain does not
+        // exist, the mail is sent to the own domain (?!)
+        $domain = mail::getToMailDomain($this->to);
+        if (mail::is_existent_maildomain($domain) == false) {
+            return false;
+        }
 
-		if ($this->replyTo !== null)
-			$aAddHeaders[] = 'Reply-To: ' . $this->replyTo;
+        $aAddHeaders = array();
+        $aAddHeaders[] = 'From: "' . $this->from . '" <' . $this->from . '>';
 
-		if ($this->returnPath !== null)
-			$aAddHeaders[] = 'Return-Path: ' . $this->returnPath;
+        if ($this->replyTo !== null) {
+            $aAddHeaders[] = 'Reply-To: ' . $this->replyTo;
+        }
 
-		$mailheaders = implode("\n", array_merge($aAddHeaders, $this->headers));
-		return mb_send_mail($this->to, $opt['mail']['subject'] . $this->subject, $body, $mailheaders);
-	}
+        if ($this->returnPath !== null) {
+            $aAddHeaders[] = 'Return-Path: ' . $this->returnPath;
+        }
 
-	static function is_existent_maildomain($domain)
-	{
-		if ($domain == "localhost")
-			return true;  // allow maintenance mails e.g. to root
+        $mailheaders = implode("\n", array_merge($aAddHeaders, $this->headers));
 
-		$smtp_serverlist = array();
-		$smtp_serverweight = array();
+        return mb_send_mail($this->to, $opt['mail']['subject'] . $this->subject, $body, $mailheaders);
+    }
 
-		if (getmxrr($domain, $smtp_serverlist, $smtp_serverweight) != false)
-			if (count($smtp_serverlist)>0)
-				return true;
+    public static function is_existent_maildomain($domain)
+    {
+        if ($domain == "localhost") {
+            return true;
+        }  // allow maintenance mails e.g. to root
 
-		// check if A exists
-		$a = dns_get_record($domain, DNS_A);
-		if (count($a) > 0)
-			return true;
+        $smtp_serverlist = array();
+        $smtp_serverweight = array();
 
-		return false;
-	}
+        if (getmxrr($domain, $smtp_serverlist, $smtp_serverweight) != false) {
+            if (count($smtp_serverlist) > 0) {
+                return true;
+            }
+        }
 
-	static function getToMailDomain($mail)
-	{
-		if ($mail == '')
-			return '';
+        // check if A exists
+        $a = dns_get_record($domain, DNS_A);
+        if (count($a) > 0) {
+            return true;
+        }
 
-		if (strrpos($mail, '@') === false)
-			$domain = 'localhost';
-		else
-			$domain = substr($mail, strrpos($mail, '@') + 1);
+        return false;
+    }
 
-		return $domain;
-	}
+    public static function getToMailDomain($mail)
+    {
+        if ($mail == '') {
+            return '';
+        }
+
+        if (strrpos($mail, '@') === false) {
+            $domain = 'localhost';
+        } else {
+            $domain = substr($mail, strrpos($mail, '@') + 1);
+        }
+
+        return $domain;
+    }
 }

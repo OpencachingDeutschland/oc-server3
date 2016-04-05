@@ -258,41 +258,57 @@ class WebService
         # Prepare our comment to be inserted into the database. This may require
         # some reformatting which depends on the current OC installation.
 
-        if (Settings::get('OC_BRANCH') == 'oc.de')
+        # OC sites store all comments in HTML format, while the 'text_html' field
+        # indicates their *original* format as delivered by the user. This
+        # allows processing the 'text' field contents without caring about the
+        # original format, while still being able to re-create the comment in
+        # its original form.
+
+        if ($comment_format == 'plaintext')
         {
-            # OCDE stores all comments in HTML format, while the 'text_html' field
-            # indicates their *original* format as delivered by the user. This
-            # allows processing the 'text' field contents without caring about the
-            # original format, while still being able to re-create the comment in
-            # its original form. It requires us to HTML-encode plaintext comments
-            # and to indicate this by setting 'html_text' to FALSE.
-            #
-            # For user-supplied HTML comments, OCDE requires us to do additional
-            # HTML purification prior to the insertion into the database.
+            # This code is identical to the plaintext processing in OC code,
+            # including a space handling bug: Multiple consecutive spaces will
+            # get semantically lost in the generated HTML.
 
-            if ($comment_format == 'plaintext')
+            $formatted_comment = htmlspecialchars($comment, ENT_COMPAT);
+            $formatted_comment = nl2br($formatted_comment);
+
+            if (Settings::get('OC_BRANCH') == 'oc.de')
             {
-                # This code is identical to the plaintext processing in OCDE code,
-                # including a space handling bug: Multiple consecutive spaces will
-                # get semantically lost in the generated HTML.
-
-                $formatted_comment = htmlspecialchars($comment, ENT_COMPAT);
-                $formatted_comment = nl2br($formatted_comment);
                 $value_for_text_html_field = 0;
             }
             else
             {
-                if ($comment_format == 'auto')
-                {
-                    # 'Auto' is for backward compatibility. Before the "comment_format"
-                    # was introduced, OKAPI used a weird format in between (it allowed
-                    # HTML, but applied nl2br too).
+                # 'text_html' = 0 (false) is broken in OCPL code and has been
+                # deprecated; OCPL code was changed to always set it to 1 (true).
+                # For OKAPI, the value has been changed from 0 to 1 with commit
+                # cb7d222, after an email discussion with Harrie Klomp. This is
+                # an ID of the appropriate email thread:
+                #
+                # Message-ID: <22b643093838b151b300f969f699aa04@harrieklomp.be>
 
-                    $formatted_comment = nl2br($comment);
-                }
-                else
-                    $formatted_comment = $comment;
+                $value_for_text_html_field = 1;
+            }
+        }
+        elseif ($comment_format == 'auto')
+        {
+            # 'Auto' is for backward compatibility. Before the "comment_format"
+            # was introduced, OKAPI used a weird format in between (it allowed
+            # HTML, but applied nl2br too).
 
+            $formatted_comment = nl2br($comment);
+            $value_for_text_html_field = 1;
+        }
+        else
+        {
+            $formatted_comment = $comment;
+
+            # For user-supplied HTML comments, OC sites require us to do
+            # additional HTML purification prior to the insertion into the
+            # database.
+
+            if (Settings::get('OC_BRANCH') == 'oc.de')
+            {
                 # NOTICE: We are including EXTERNAL OCDE library here! This
                 # code does not belong to OKAPI!
 
@@ -302,48 +318,35 @@ class WebService
 
                 $purifier = new \OcHTMLPurifier($opt);
                 $formatted_comment = $purifier->purify($formatted_comment);
-                $value_for_text_html_field = 1;
-            }
-        }
-        else
-        {
-            # OCPL is even weirder. It also stores HTML-lized comments in the database
-            # (it doesn't really matter if 'text_html' field is set to FALSE). OKAPI must
-            # save it in HTML either way. However, escaping plain-text doesn't work!
-            # If we put "&lt;b&gt;" in, it still gets converted to "<b>" before display!
-            # NONE of this process is documented within OCPL code. OKAPI uses a dirty
-            # "hack" to save PLAINTEXT comments (let us hope the hack will remain valid).
-            #
-            # OCPL doesn't require HTML purification prior to the database insertion.
-            # HTML seems to be purified dynamically, before it is displayed.
-
-            if ($comment_format == 'plaintext')
-            {
-                $formatted_comment = htmlspecialchars($comment, ENT_QUOTES);
-                $formatted_comment = nl2br($formatted_comment);
-                $formatted_comment = str_replace("&amp;", "&amp;#38;", $formatted_comment);
-                $formatted_comment = str_replace("&lt;", "&amp;#60;", $formatted_comment);
-                $formatted_comment = str_replace("&gt;", "&amp;#62;", $formatted_comment);
-                #
-                # The following was changed from 0 to 1 by Harrie Klomp. The discussion
-                # regarding this change was exchanged via emails. This is an ID of the
-                # appropriate email thread:
-                #
-                # Message-ID: <22b643093838b151b300f969f699aa04@harrieklomp.be>
-                #
-                $value_for_text_html_field = 1;
-            }
-            elseif ($comment_format == 'auto')
-            {
-                $formatted_comment = nl2br($comment);
-                $value_for_text_html_field = 1;
             }
             else
             {
-                $formatted_comment = $comment;
-                $value_for_text_html_field = 1;
+                # TODO: Add OCPL HTML filtering. The OCPL code for this is:
+
+                # require_once($rootpath . 'lib/class.inputfilter.php');
+                # $myFilter = new InputFilter($allowedtags, $allowedattr, 0, 0, 1);
+                # $log_text = $myFilter->process($log_text);
             }
+
+            $value_for_text_html_field = 1;
         }
+
+        if (Settings::get('OC_BRANCH') == 'oc.pl')
+        {
+            # The HTML processing in OCPL code is broken. Effectively, it
+            # will decode &lt; &gt; and &amp; (and maybe other things?)
+            # before display so that text contents may be interpreted as HTML.
+            # We work around this by applying a double-encoding for & < >:
+
+            $formatted_comment = str_replace("&amp;", "&amp;#38;", $formatted_comment);
+            $formatted_comment = str_replace("&lt;", "&amp;#60;", $formatted_comment);
+            $formatted_comment = str_replace("&gt;", "&amp;#62;", $formatted_comment);
+
+            # Note: This problem also exists when submitting logs on OCPL websites.
+            # If you e.g. enter "<text>" in the editor, it will get lost.
+            # See https://github.com/opencaching/opencaching-pl/issues/469.
+        }
+
         unset($comment);
 
         # Prevent bug #367. Start the transaction and lock all the rows of this

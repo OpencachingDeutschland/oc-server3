@@ -12,7 +12,7 @@
     <returns>
         <p>A dictionary of the following structure:</p>
         <ul>
-            <li><b>success</b> - <b>true</b>, if all went well,</li>
+            <li><b>success</b> - <b>true</b>, if all went well.</li>
         </ul>
         <p>Please note, that this will <em>always</em> be true! Nothing can go
         wrong as long as you pass your parameters in a right way (and if you

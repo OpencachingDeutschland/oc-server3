@@ -17,10 +17,10 @@ define('ERROR_DUPLICATE_LISTNAME', 2);
 
 class cachelist
 {
-	var $nCachelistId = 0;
-	var $reCachelist;
+    public $nCachelistId = 0;
+    public $reCachelist;
 
-	function __construct($nNewCachelistId=ID_NEW, $nUserId=0)
+	public function __construct($nNewCachelistId=ID_NEW, $nUserId=0)
 	{
 		global $opt;
 
@@ -46,68 +46,70 @@ class cachelist
 			$this->reCachelist->load($this->nCachelistId);
 	}
 
-	function exist()
+	public function exist()
 	{
 		return $this->reCachelist->exist();
 	}
 
-	function getId()
+	public function getId()
 	{
 		return $this->nCachelistId;
 	}
 
-	function getUUID()
+	public function getUUID()
 	{
 		return $this->reCachelist->getValue('uuid');
 	}
 
-	function setNode($value)
+	public function setNode($value)
 	{
 		return $this->reCachelist->setValue('node', $value);
 	}
 
-	function getNode()
+	public function getNode()
 	{
 		return $this->reCachelist->getValue('node');
 	}
 
-	function getUserId()
+	public function getUserId()
 	{
 		return $this->reCachelist->getValue('user_id');
 	}
 
-	function isMyList()
+	public function isMyList()
 	{
 		global $login;
 		return $this->getUserId() == $login->userid;
 	}
 
-	function getName()
+	public function getName()
 	{
 		return $this->reCachelist->getValue('name');
 	}
 
 	// 0 = private, 1 = private & friends (not impl.), 2 = public, 3 = public + listing display
-	function getVisibility()
+	public function getVisibility()
 	{
 		return $this->reCachelist->getValue('is_public');
 	}
 
 	// !! This method returns an error state instead of a success flag; false means "no error".
-	function setNameAndVisibility($name, $visibility)
+	public function setNameAndVisibility($name, $visibility)
 	{
 		$name = trim($name);
-		if ($name == '')
-			return ERROR_BAD_LISTNAME;
+		if ($name == '') {
+            return ERROR_BAD_LISTNAME;
+        }
 		else
 		{
 			if (sql_value("SELECT `id` FROM `cache_lists`
 			               WHERE `user_id`='&1' AND `id`<>'&2' AND `name`='&3'",
-			              false, $this->getUserId(), $this->getId(), $name))
-			              // $this->getId() is 0 when creating a new list -> condition has no effect
-				return ERROR_DUPLICATE_LISTNAME;
-			else if ($visibility >= 2 && strlen($name) < 10)
-				return ERROR_BAD_LISTNAME;
+			              false, $this->getUserId(), $this->getId(), $name)) {// $this->getId() is 0 when creating a new list -> condition has no effect
+                return ERROR_DUPLICATE_LISTNAME;
+            }
+			elseif ($visibility >= 2 && strlen($name) < 10) {
+                return ERROR_BAD_LISTNAME;
+            }
 		}
 
 		$error = !$this->reCachelist->setValue('name', trim($name));
@@ -117,68 +119,74 @@ class cachelist
 	}
 
 	// return description in HTML format
-	function getDescription()
+	public function getDescription()
 	{
 		return $this->reCachelist->getValue('description');
 	}
 
-	function getDescriptionForDisplay()
+	public function getDescriptionForDisplay()
 	{
 		return use_current_protocol_in_html(getDescription());
 	}
 
-	function getDescHtmledit()
+	public function getDescHtmledit()
 	{
 		return $this->reCachelist->getValue('desc_htmledit');
 	}
 
 	// set description in HTML format, must be purified!
-	function setDescription($desc, $htmledit)
+	public function setDescription($desc, $htmledit)
 	{
 		global $opt;
 		$this->reCachelist->setValue('desc_htmledit', $htmledit ? 1 : 0);
 		return $this->reCachelist->setValue('description', $desc);
 	}
 
-	function setPassword($pw)
+	public function setPassword($pw)
 	{
 		$this->reCachelist->setValue('password', $pw);
 	}
 
-	function getPassword()
+	public function getPassword()
 	{
 		return $this->reCachelist->getValue('password');
 	}
 
-	function getCachesCount()
+	public function getCachesCount()
 	{
-		return sql_value("
+		return sql_value(
+            "
 			SELECT `entries` FROM `stat_cache_lists`
 			WHERE `stat_cache_lists`.`cache_list_id`='" . sql_escape($this->getId()) . "'",
-			0);
+			0
+        );
 	}
 
-	function getWatchersCount()
+	public function getWatchersCount()
 	{
-		return sql_value("
+		return sql_value(
+            "
 			SELECT `watchers` FROM `stat_cache_lists`
 			WHERE `stat_cache_lists`.`cache_list_id`='" . sql_escape($this->getId()) . "'",
-			0);
+			0
+        );
 	}
 
-	function save()
+	public function save()
 	{
-		if ($this->getVisibility() > 0)
-			$this->setPassword("");
+		if ($this->getVisibility() > 0) {
+            $this->setPassword("");
+        }
 		sql_slave_exclude();
 		if ($this->reCachelist->save())
 		{
-			if ($this->getId() == ID_NEW)
-				$this->nCachelistId = $this->reCachelist->getValue('id');
+			if ($this->getId() == ID_NEW) {
+                $this->nCachelistId = $this->reCachelist->getValue('id');
+            }
 			return true;
-		}
-		else
-			return false;
+		} else {
+            return false;
+        }
 	}
 
 
@@ -190,12 +198,13 @@ class cachelist
 	// if it is 0. This also ensures that cache names are hidden if a cache is locked/hidden
 	// after being added to a list.
 
-	function getCaches()
+	public function getCaches()
 	{
 		global $login;
 		$login->verify();
 
-		$rs = sql("
+		$rs = sql(
+            "
 			SELECT `cache_list_items`.`cache_id`, `caches`.`wp_oc`, `caches`.`name`,
 			       `caches`.`type`, `caches`.`status`,
 			       (`cache_status`.`allow_user_view` OR `caches`.`user_id`='&2' OR '&3') AS `visible`,
@@ -206,23 +215,27 @@ class cachelist
 			LEFT JOIN `caches_attributes` `ca` ON `ca`.`cache_id`=`caches`.`cache_id` AND `ca`.`attrib_id`=6
 			WHERE `cache_list_items`.`cache_list_id` = '&1'
 			ORDER BY `caches`.`name`",
-			$this->nCachelistId, $login->userid, ($login->admin & ADMIN_USER) ? 1 : 0);
+			$this->nCachelistId,
+            $login->userid,
+            ($login->admin & ADMIN_USER) ? 1 : 0
+        );
 		return sql_fetch_assoc_table($rs);
 	}
 
-	function addCacheByWP($wp)
+	public function addCacheByWP($wp)
 	{
 		global $translate;
 
 		$cache = cache::fromWP($wp);
-		if (!is_object($cache))
-			return false;
-		else
-			return $this->addCache($cache);
+		if (!is_object($cache)) {
+            return false;
+        } else {
+            return $this->addCache($cache);
+        }
 	}
 
 	// returns true if all waypoints were valid, or an array of invalid waypoints
-	function addCachesByWPs($wps)
+	public function addCachesByWPs($wps)
 	{
 		$wpa = explode(' ', trim($wps));
 		$non_added_wps = array();
@@ -232,47 +245,56 @@ class cachelist
 			if ($wp)
 			{
 				$result = $this->addCacheByWP($wp);
-				if ($result !== true)
-					$non_added_wps[] = $wp;
+				if ($result !== true) {
+                    $non_added_wps[] = $wp;
+                }
 			}
 		}
-		if (count($non_added_wps))
-			return $non_added_wps;
-		else
-			return true;
+		if (count($non_added_wps)) {
+            return $non_added_wps;
+        } else {
+            return true;
+        }
 	}
 
-	function addCacheByID($cache_id)
+	public function addCacheByID($cache_id)
 	{
 		return $this->addCache(new cache($cache_id));
 	}
 
-	function addCache($cache)
+	public function addCache($cache)
 	{
 		global $translate;
 
-		if (!$cache->exist() || !$cache->allowView())
-			return false;
+		if (!$cache->exist() || !$cache->allowView()) {
+            return false;
+        }
 		else
 		{
-			sql("
+			sql(
+                "
 				INSERT IGNORE INTO `cache_list_items` (`cache_list_id`, `cache_id`)
 				VALUES ('&1', '&2')",
-				$this->nCachelistId, $cache->getCacheId());
+				$this->nCachelistId,
+                $cache->getCacheId()
+            );
 			return true;
 		}
 	}
 
-	function removeCacheById($cache_id)
+	public function removeCacheById($cache_id)
 	{
-		sql("DELETE FROM `cache_list_items` WHERE `cache_list_id`='&1' AND `cache_id`='&2'",
-		    $this->nCachelistId, $cache_id);
+		sql(
+            "DELETE FROM `cache_list_items` WHERE `cache_list_id`='&1' AND `cache_id`='&2'",
+		    $this->nCachelistId,
+            $cache_id
+        );
 	}
 
 
 	// watching, bookmarking and access tests
 
-	function watch($watch)
+	public function watch($watch)
 	{
 		global $login;
 		$login->verify();
@@ -281,23 +303,28 @@ class cachelist
 		{
 			if ($watch)
 			{
-				if ($this->allowView())
-					sql("
+				if ($this->allowView()) {
+                    sql(
+                        "
 						INSERT IGNORE INTO `cache_list_watches` (`cache_list_id`, `user_id`)
 						VALUES ('&1','&2')",
-				    $this->getId(), $login->userid);
-			}
-			else
-			{
-				sql("
+                        $this->getId(),
+                        $login->userid
+                    );
+                }
+			} else {
+				sql(
+                    "
 					DELETE FROM `cache_list_watches`
 					WHERE `cache_list_id`='&1' AND `user_id`='&2'",
-					$this->getId(), $login->userid);
+					$this->getId(),
+                    $login->userid
+                );
 			}
 		}
 	}
 
-	function isWatchedByMe()
+	public function isWatchedByMe()
 	{
 		global $login;
 		return sql_value("
@@ -306,7 +333,7 @@ class cachelist
 			0, $this->getId(), $login->userid) != 0;
 	}
 
-	function bookmark($pw)
+	public function bookmark($pw)
 	{
 		global $login;
 
@@ -315,28 +342,36 @@ class cachelist
 				($this->getVisibility() >= 2 || ($this->getPassword() != "" && $pw == $this->getPassword()))
 			 )
 		{
-			sql("INSERT IGNORE INTO `cache_list_bookmarks` (`cache_list_id`, `user_id`, `password`)
+			sql(
+                "INSERT IGNORE INTO `cache_list_bookmarks` (`cache_list_id`, `user_id`, `password`)
 			     VALUES('&1','&2','&3')
 			     ON DUPLICATE KEY UPDATE `password`='&3'",
-			    $this->getId(), $login->userid, $pw);
+			    $this->getId(),
+                $login->userid,
+                $pw
+            );
 		}
 	}
 
-	function unbookmark()
+	public function unbookmark()
 	{
 		global $login;
 
-		sql("DELETE FROM `cache_list_bookmarks`
+		sql(
+            "DELETE FROM `cache_list_bookmarks`
 		     WHERE `cache_list_id`='&1' AND `user_id`='&2'",
-				$this->getId(), $login->userid);
+			$this->getId(),
+            $login->userid
+        );
 	}
 
-	function allowView($pw='')
+	public function allowView($pw='')
 	{
 		global $login;
 
-		if (!$this->exist())
-			return false;
+		if (!$this->exist()) {
+            return false;
+        }
 
 		return $this->isMyList() ||
 		       $this->getVisibility() >= 2 ||
@@ -351,27 +386,27 @@ class cachelist
 	}
 
 
-	// get list of lists -- static functions
+	// get list of lists -- public static functions
 
-	static function getMyLists()
+	public static function getMyLists()
 	{
 		global $login;
 		return cachelist::getLists("`cache_lists`.`user_id`='" . sql_escape($login->userid) . "'");
 	}
 
-	static function getListsWatchedByMe()
+	public static function getListsWatchedByMe()
 	{
 		global $login;
 		return cachelist::getLists("`id` IN (SELECT `cache_list_id` FROM `cache_list_watches` WHERE `user_id`='" . sql_escape($login->userid) . "')");
 	}
 
-	static function getBookmarkedLists()
+	public static function getBookmarkedLists()
 	{
 		global $login;
 		return cachelist::getLists("`id` IN (SELECT `cache_list_id` FROM `cache_list_bookmarks` WHERE `user_id`='" . sql_escape($login->userid) . "')");
 	}
 
-	static function getPublicListCount($namelike='', $userlike='')
+	public static function getPublicListCount($namelike='', $userlike='')
 	{
 		return sql_value("
 			SELECT COUNT(*)
@@ -384,7 +419,7 @@ class cachelist
 			0);
 	}
 
-	static function getPublicLists($startat=0, $maxitems=PHP_INT_MAX, $namelike='', $userlike='')
+	public static function getPublicLists($startat=0, $maxitems=PHP_INT_MAX, $namelike='', $userlike='')
 	{
 		return cachelist::getLists(
 			"`is_public`>=2 AND `entries`>0"
@@ -396,13 +431,13 @@ class cachelist
 			true);
 	}
 
-	static function getPublicListsOf($userid)
+	public static function getPublicListsOf($userid)
 	{
 		return cachelist::getLists("`is_public`>=2 AND `entries`>0 AND `cache_lists`.`user_id`='" . sql_escape($userid) . "'");
 	}
 
 	// If $all is false, only own lists and public lists of the cache owner will be returned.
-	static function getListsByCacheId($cacheid, $all)
+	public static function getListsByCacheId($cacheid, $all)
 	{
 		global $login;
 
@@ -430,7 +465,7 @@ class cachelist
 			0, 20, true);
 	}
 
-	static function getListById($listid)
+	public static function getListById($listid)
 	{
 		$lists = cachelist::getLists("`id`='" . sql_escape($listid) . "'");
 		if (count($lists))
@@ -438,8 +473,9 @@ class cachelist
 			$lists[0]['description_for_display'] = use_current_protocol_in_html($lists[0]['description']);
 			return $lists[0];
 		}
-		else
-			return false;
+		else {
+            return false;
+        }
 	}
 
 	private static function getLists($condition, $prio=0, $startat=0, $maxitems=PHP_INT_MAX, $strip_nagchars=false)
@@ -448,7 +484,8 @@ class cachelist
 		$login->verify();
 
 		$namefield = ($strip_nagchars ? 'STRIP_LEADING_NONALNUM(`cache_lists`.`name`)' : '`cache_lists`.`name`');
-		$rs = sql("
+		$rs = sql(
+            "
 			SELECT `cache_lists`.`id`, `cache_lists`.`user_id`, `user`.`username`,
 			       $namefield `name`,
 			       `cache_lists`.`is_public` `visibility`, `cache_lists`.`password`,
@@ -469,8 +506,9 @@ class cachelist
 			$login->userid, $startat, $maxitems);
 
 		$lists = sql_fetch_assoc_table($rs);
-		foreach($lists as &$list)
-			$list['description_for_display'] = use_current_protocol_in_html($list['description']);
+		foreach($lists as &$list) {
+            $list['description_for_display'] = use_current_protocol_in_html($list['description']);
+        }
 
 		return $lists;
 	}
@@ -478,32 +516,40 @@ class cachelist
 
 	// other
 
-	static function getMyLastAddedToListId()
+	public static function getMyLastAddedToListId()
 	{
 		global $login;
 		$login->verify();
 
 		$maxdate = sql_value("SELECT MAX(`last_added`) FROM `cache_lists` WHERE `user_id`='&1'", null, $login->userid);
-		if (!$maxdate)
-			return 0;
-		else
-			return sql_value("
-				SELECT `id` FROM `cache_lists`
-			  WHERE `user_id`='&1' AND `last_added`='&2'
-				LIMIT 1", 0,
-			  $login->userid, $maxdate);
+		if (!$maxdate) {
+            return 0;
+        } else {
+            return sql_value(
+                "SELECT `id` FROM `cache_lists`
+			     WHERE `user_id`='&1' AND `last_added`='&2'
+				 LIMIT 1",
+                0,
+                $login->userid,
+                $maxdate
+            );
+        }
 	}
 
-	static function watchingCacheByListsCount($userid, $cacheid)
+	public static function watchingCacheByListsCount($userid, $cacheid)
 	{
-		if (!$userid)
-			return 0;
-		else
-			return sql_value("
-				SELECT COUNT(*)
-				FROM `cache_list_watches` `clw`, `cache_list_items` `cli`
-				WHERE `clw`.`user_id`='&1' AND `cli`.`cache_id`='&2' AND `clw`.`cache_list_id`=`cli`.`cache_list_id`",
-				0, $userid, $cacheid);
+		if (!$userid) {
+            return 0;
+        } else {
+            return sql_value(
+                "SELECT COUNT(*)
+				 FROM `cache_list_watches` `clw`, `cache_list_items` `cli`
+				 WHERE `clw`.`user_id`='&1' AND `cli`.`cache_id`='&2' AND `clw`.`cache_list_id`=`cli`.`cache_list_id`",
+                0,
+                $userid,
+                $cacheid
+            );
+        }
 	}
 
 }

@@ -872,9 +872,24 @@ function enl_mousemv(enl_el)
   }
 }
 
+// test for right button clicked
+function enl_is_rightbutton(e)
+{
+  // http://stackoverflow.com/questions/2405771/is-right-click-a-javascript-event
+  e = e || window.event;
+  if ("which" in e)  // Gecko (Firefox), WebKit (Safari/Chrome) & Opera
+    return e.which == 3;
+  else if ("button" in e)  // IE, Opera
+    return e.button == 2;
+  else
+    return false;
+}
+
 // start dragging
 function enl_buttonpress(enl_el)
 {
+  if (enl_is_rightbutton(enl_el))
+    return;
   enl_drgelem = enl_nn6 ? enl_el.target : event.srcElement; var topenl_el = enl_nn6 ? "HTML" : "BODY"; enl_hasmvd = false; while (enl_drgelem.tagName != topenl_el && !enl_drgelem.newh) {
   enl_drgelem = enl_nn6 ? enl_drgelem.parentNode : enl_drgelem.parentElement; } enl_drgmode = true; enl_zcnt+=3;
   var enl_drgid = enl_drgelem.id;
@@ -887,8 +902,10 @@ function enl_buttonpress(enl_el)
 }
 
 // mouse btn released
-function enl_enddrag()
+function enl_enddrag(enl_el)
 {
+  if (enl_is_rightbutton(enl_el))
+    return;   // ignore right button -- fixes http://redmine.opencaching.de/issues/947
   enl_noevents(enl_drgelem);
   enl_drgelem.newt = parseInt(enl_drgelem.style.top);
   enl_drgelem.newl = parseInt(enl_drgelem.style.left);

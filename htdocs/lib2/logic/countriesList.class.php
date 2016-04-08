@@ -1,68 +1,130 @@
 <?php
+
 /***************************************************************************
  *  For license information see doc/license.txt
  *
  *  Unicode Reminder メモ
  ***************************************************************************/
-
 class countriesList
 {
-	var $locale;
-	var $bDefaultUsed = false;
+    var $locale;
+    var $bDefaultUsed = false;
 
-	function __construct($locale=null)
-	{
-		global $opt;
+    public function __construct($locale = null)
+    {
+        global $opt;
 
-		if ($locale === null)
-			$this->locale = $opt['template']['locale'];
-		else
-			$this->locale = $locale;
-	}
+        if ($locale === null) {
+            $this->locale = $opt['template']['locale'];
+        } else {
+            $this->locale = $locale;
+        }
+    }
 
-	function defaultUsed()
-	{
-		return $this->bDefaultUsed;
-	}
+    public function defaultUsed()
+    {
+        return $this->bDefaultUsed;
+    }
 
-	function isDefault($id)
-	{
-		if (sql_value("SELECT COUNT(*) FROM `countries_list_default` WHERE `lang`='&1' AND `show`='&2'", 0, $this->locale, $id) == 0)
-			return false;
-		else
-			return true;
-	}
+    public function isDefault($id)
+    {
+        $isDefault = sql_value(
+            "SELECT COUNT(*) FROM `countries_list_default` WHERE `lang`='&1' AND `show`='&2'",
+            0,
+            $this->locale,
+            $id
+        );
 
-	function getDefaultRS()
-	{
-		if (sql_value("SELECT COUNT(*) FROM `countries_list_default` WHERE `lang`='&1'", 0, $this->locale) == 0)
-			return $this->getAllRS();
+        if ($isDefault  == 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 
-		$this->bDefaultUsed = true;
+    public function getDefaultRS()
+    {
+        $isDefault = sql_value("SELECT COUNT(*) FROM `countries_list_default` WHERE `lang`='&1'", 0, $this->locale);
+        if ($isDefault == 0) {
+            return $this->getAllRS();
+        }
 
-		return sql("SELECT `countries`.`short` AS `id`, IFNULL(`sys_trans_text`.`text`, `countries`.`name`) AS `name` FROM `countries` INNER JOIN `countries_list_default` ON `countries`.`short`=`countries_list_default`.`show` AND `countries_list_default`.`lang`='&1' LEFT JOIN `sys_trans` ON `countries`.`trans_id`=`sys_trans`.`id` AND `countries`.`name`=`sys_trans`.`text` LEFT JOIN `sys_trans_text` ON `sys_trans`.`id`=`sys_trans_text`.`trans_id` AND `sys_trans_text`.`lang`='&1' ORDER BY `name`", $this->locale);
-	}
+        $this->bDefaultUsed = true;
 
-	function getAllRS()
-	{
-		$this->bDefaultUsed = false;
-		return sql("SELECT `countries`.`short` AS `id`, IFNULL(`sys_trans_text`.`text`, `countries`.`name`) AS `name` FROM `countries` LEFT JOIN `sys_trans` ON `countries`.`trans_id`=`sys_trans`.`id` AND `countries`.`name`=`sys_trans`.`text` LEFT JOIN `sys_trans_text` ON `sys_trans`.`id`=`sys_trans_text`.`trans_id` AND `sys_trans_text`.`lang`='&1' ORDER BY `name`", $this->locale);
-	}
+        $returnValue = sql(
+            "SELECT
+                `countries`.`short` AS `id`,
+                IFNULL(`sys_trans_text`.`text`, `countries`.`name`) AS `name` 
+             FROM `countries` 
+             INNER JOIN `countries_list_default` 
+                 ON `countries`.`short`=`countries_list_default`.`show` 
+                 AND `countries_list_default`.`lang`='&1'
+             LEFT JOIN `sys_trans` 
+                 ON `countries`.`trans_id`=`sys_trans`.`id` 
+                 AND `countries`.`name`=`sys_trans`.`text` 
+             LEFT JOIN `sys_trans_text`
+                 ON `sys_trans`.`id`=`sys_trans_text`.`trans_id` 
+                 AND `sys_trans_text`.`lang`='&1' 
+             ORDER BY `name`",
+            $this->locale
+        );
 
-	function getRS($selectedId, $showall)
-	{
-		if ($showall != false)
-			return $this->getAllRS();
+        return $returnValue;
+    }
 
-		if ($selectedId !== null && !$this->isDefault($selectedId))
-			return $this->getAllRS();
+    public function getAllRS()
+    {
+        $this->bDefaultUsed = false;
 
-		return $this->getDefaultRS();
-	}
+        $returnValue = sql(
+            "SELECT 
+                 `countries`.`short` AS `id`,
+                 IFNULL(`sys_trans_text`.`text`,
+                 `countries`.`name`) AS `name` 
+             FROM `countries` 
+             LEFT JOIN `sys_trans` 
+                 ON `countries`.`trans_id`=`sys_trans`.`id` 
+                 AND `countries`.`name`=`sys_trans`.`text` 
+             LEFT JOIN `sys_trans_text` 
+                 ON `sys_trans`.`id`=`sys_trans_text`.`trans_id`
+                 AND `sys_trans_text`.`lang`='&1'
+             ORDER BY `name`",
+            $this->locale
+        );
 
-	static function getCountryLocaleName($id)
-	{
-		global $opt;
-		return sql_value("SELECT IFNULL(`sys_trans_text`.`text`, `countries`.`name`) FROM `countries` LEFT JOIN `sys_trans` ON `countries`.`trans_id`=`sys_trans`.`id` LEFT JOIN `sys_trans_text` ON `sys_trans`.`id`=`sys_trans_text`.`trans_id` AND `sys_trans_text`.`lang`='&2' WHERE `countries`.`short`='&1'", '', $id, $opt['template']['locale']);;
-	}
+        return $returnValue;
+    }
+
+    public function getRS($selectedId, $showall)
+    {
+        if ($showall != false) {
+            return $this->getAllRS();
+        }
+
+        if ($selectedId !== null && !$this->isDefault($selectedId)) {
+            return $this->getAllRS();
+        }
+
+        return $this->getDefaultRS();
+    }
+
+    public static function getCountryLocaleName($id)
+    {
+        global $opt;
+
+        $returnValue = sql_value(
+            "SELECT IFNULL(`sys_trans_text`.`text`, `countries`.`name`) 
+             FROM `countries` 
+             LEFT JOIN `sys_trans` 
+                 ON `countries`.`trans_id`=`sys_trans`.`id` 
+             LEFT JOIN `sys_trans_text` 
+                 ON `sys_trans`.`id`=`sys_trans_text`.`trans_id` 
+                 AND `sys_trans_text`.`lang`='&2' 
+             WHERE `countries`.`short`='&1'",
+            '',
+            $id,
+            $opt['template']['locale']
+        );
+        return $returnValue;
+    }
 }

@@ -59,5 +59,6 @@ function get_okapi_settings()
         'OC_COOKIE_NAME'   => $opt['session']['cookiename'] . 'data',
         'OCDE_HTML_PURIFIER_SETTINGS'
                            => $opt['html_purifier'],
+        'GITHUB_ACCESS_TOKEN' => $opt['okapi']['github_access_token'],
     );
 }

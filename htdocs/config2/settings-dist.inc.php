@@ -541,6 +541,7 @@
 	 * OKAPI
 	 */
 	$opt['okapi']['var_dir'] = $opt['rootpath'] . 'var/okapi';
+	$opt['okapi']['github_access_token'] = null;
 
 	/* Opencaching Node Daemon
 	 *

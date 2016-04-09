@@ -492,7 +492,10 @@
             </li>
             <li>
                 <b>date_created</b> - date and time (ISO 8601) when the
-                geocache was listed at the Opencaching site,
+                geocache was listed at the Opencaching site. For some OC installations
+                this is the date when it was published, while for the other it is the
+                date when it was originally submitted. These dates differ if the
+                geocache is prepared and then published later.
             </li>
             <li>
                 <p><b>date_hidden</b> - date and time (ISO 8601) when:</p>

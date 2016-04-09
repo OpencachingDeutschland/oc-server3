@@ -18,6 +18,10 @@ body.api { background: #f5f1eb; }
 .signup input.text { border: 1px solid #aaa; padding: 3px 4px 2px 4px; width: 300px }
 .signup .button { margin-top: 10px; padding: 3px 12px; background: #977; border: 2px solid #744; cursor: pointer; color: #fff; font-weight: bold; }
 
+.changelog { border: 1px solid #bbb; }
+.changelog th { background: #e1d7d8; }
+.changelog td { background: #eee9e9; padding: 8px 16px; }
+
 .apimenu { vertical-align: top; width: 225px; font-size: 15px; padding: 0px 20px 0 32px; }
 .apimenu .revision { float: right; font-size: 11px; color: #888; position: relative; top: -30px; }
 .apimenu a { color: #804937; text-decoration: none; }
@@ -38,6 +42,8 @@ body.api { background: #f5f1eb; }
 .article ol { margin-bottom: 15px; margin-left: 35px; }
 .article li { margin: 6px 0; }
 .article li p { margin: 6px 0; }
+.article .floaticonlink { float: right; margin: 0 0 3em 1em; }
+.article .floaticonlink a { outline:0; }
 .article .issue-comments { font-size: 20px; font-weight: bold; }
 .article .issue-comments .notice { font-size: 11px; font-weight: normal; color: #888; padding-left: 10px; }
 .article .deprecated { color: #888; }

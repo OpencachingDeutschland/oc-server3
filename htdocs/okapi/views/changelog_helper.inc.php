@@ -35,7 +35,7 @@ class Changelog
                 $context = stream_context_create($opts);
                 $changes_xml = file_get_contents(
                      # TODO: load from OKAPI repo
-                    'https://raw.githubusercontent.com/following5/okapi/feature/changelog/etc/changes.xml',
+                    'https://raw.githubusercontent.com/opencaching/okapi/master/etc/changes.xml',
                     false, $context
                 );
                 $changelog = simplexml_load_string($changes_xml);

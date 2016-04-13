@@ -163,7 +163,7 @@ class WebService
                 select
                     c.cache_id, c.name, c.longitude, c.latitude, c.listing_last_modified as last_modified,
                     c.date_created, c.type, c.status, c.date_hidden, c.size, c.difficulty,
-                    c.terrain, c.wp_oc, c.wp_gc, c.logpw, c.user_id,
+                    c.terrain, c.wp_oc, c.wp_gc, c.wp_gc_maintained, c.logpw, c.user_id,
                     if(c.search_time=0, null, c.search_time) as trip_time,
                     if(c.way_length=0, null, c.way_length) as trip_distance,
                     c.listing_outdated, c.needs_maintenance,
@@ -195,7 +195,7 @@ class WebService
                 select
                     c.cache_id, c.name, c.longitude, c.latitude, c.last_modified,
                     c.date_created, c.type, c.status, c.date_hidden, c.size, c.difficulty,
-                    c.terrain, c.wp_oc, c.wp_gc, c.logpw, c.user_id,
+                    c.terrain, c.wp_oc, c.wp_gc, '' as wp_gc_maintained, c.logpw, c.user_id,
                     if(c.search_time=0, null, c.search_time) as trip_time,
                     if(c.way_length=0, null, c.way_length) as trip_distance,
                     0 as listing_outdated, 0 as needs_maintenance,
@@ -228,12 +228,14 @@ class WebService
                 {
                     case 'code': $entry['code'] = $row['wp_oc']; break;
                     case 'gc_code':
+                        $wp_gc = $row['wp_gc_maintained'] ? $row['wp_gc_maintained'] : $row['wp_gc'];
                         // OC software allows entering anything here, and that's what users do.
                         // We do a formal verification so that only a valid GC code is returned:
-                        if (preg_match('/^\s*[Gg][Cc][A-Za-z0-9]+\s*$/', $row['wp_gc']))
-                            $entry['gc_code'] = strtoupper(trim($row['wp_gc']));
+                        if (preg_match('/^\s*[Gg][Cc][A-Za-z0-9]+\s*$/', $wp_gc))
+                            $entry['gc_code'] = strtoupper(trim($wp_gc));
                         else
                             $entry['gc_code'] = null;
+                        unset($wp_gc);
                         break;
                     case 'name': $entry['name'] = $row['name']; break;
                     case 'names': $entry['names'] = array(Settings::get('SITELANG') => $row['name']); break; // for the future

@@ -321,11 +321,8 @@ class WebService
             }
             else
             {
-                # TODO: Add OCPL HTML filtering. The OCPL code for this is:
-
-                # require_once($rootpath . 'lib/class.inputfilter.php');
-                # $myFilter = new InputFilter($allowedtags, $allowedattr, 0, 0, 1);
-                # $log_text = $myFilter->process($log_text);
+                # TODO: Add OCPL HTML filtering.
+                # See https://github.com/opencaching/okapi/issues/412.
             }
 
             $value_for_text_html_field = 1;

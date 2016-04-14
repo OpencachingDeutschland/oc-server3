@@ -1,6 +1,6 @@
 <?php
 /***************************************************************************
- *	For license information see doc/license.txt
+ *    For license information see doc/license.txt
  *
  *  Unicode Reminder メモ
  *
@@ -8,4 +8,4 @@
  *  downward compatibility
  ***************************************************************************/
 
-	include "../../util2/stats/rank.php";
+include "../../util2/stats/rank.php";

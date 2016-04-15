@@ -5,5 +5,5 @@
  *  Unicode Reminder メモ
  ***************************************************************************/
 
-	$newlogs_rest = true;
-	require("newlogs.php");
+$newlogs_rest = true;
+require("newlogs.php");

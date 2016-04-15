@@ -39,9 +39,13 @@ if ($process_sync->Enter()) {
             `notify_waiting`.`id`, `notify_waiting`.`cache_id`, `notify_waiting`.`type`,
             `user`.`username`,
             `user2`.`email`, `user2`.`username` AS `recpname`, `user2`.`latitude` AS `lat1`,
-            `user2`.`longitude` AS `lon1`, `user2`.`user_id` AS `recid`, IFNULL(`user2`.`language`,'&1') AS `recp_lang`,
+            `user2`.`longitude` AS `lon1`, `user2`.`user_id` AS `recid`,
+            IFNULL(`user2`.`language`,'&1') AS `recp_lang`,
             `user2`.`domain` AS `recp_domain`,
-            `caches`.`name` AS `cachename`, `caches`.`latitude` AS `lat2`, `caches`.`longitude` AS `lon2`, `caches`.`wp_oc`, `caches`.`date_hidden`,
+            `caches`.`name` AS `cachename`, `caches`.`latitude`
+            AS `lat2`, `caches`.`longitude`
+            AS `lon2`, `caches`.`wp_oc`,
+            `caches`.`date_hidden`,
             `caches`.`type` AS `cachetype`, `caches`.`size` AS `cachesize`,
             `cache_status`.`allow_user_view`,
             `ca`.`attrib_id` IS NOT NULL AS `oconly`
@@ -81,14 +85,30 @@ function process_new_cache($notify)
         case notify_new_cache: // Type: new cache
             $mailbody = fetch_email_template('notify_newcache', $notify['recp_lang'], $notify['recp_domain']);
             $mailsubject = '[' . $maildomain . '] ' .
-                $translate->t($notify['oconly'] ? 'New OConly cache:' : 'New cache:', '', basename(__FILE__), __LINE__, '', 1, $notify['recp_lang']) .
+                $translate->t(
+                    $notify['oconly'] ? 'New OConly cache:' : 'New cache:',
+                    '',
+                    basename(__FILE__),
+                    __LINE__,
+                    '',
+                    1,
+                    $notify['recp_lang']
+                ) .
                 ' ' . $notify['cachename'];
             break;
 
         case notify_new_oconly: // Type: new OConly flag
             $mailbody = fetch_email_template('notify_newoconly', $notify['recp_lang'], $notify['recp_domain']);
             $mailsubject = '[' . $maildomain . '] ' .
-                $translate->t('Cache was marked as OConly:', '', basename(__FILE__), __LINE__, '', 1, $notify['recp_lang']) .
+                $translate->t(
+                    'Cache was marked as OConly:',
+                    '',
+                    basename(__FILE__),
+                    __LINE__,
+                    '',
+                    1,
+                    $notify['recp_lang']
+                ) .
                 ' ' . $notify['cachename'];
             break;
 
@@ -99,17 +119,58 @@ function process_new_cache($notify)
 
     if (!$error) {
         $mailbody = mb_ereg_replace('{username}', $notify['recpname'], $mailbody);
-        $mailbody = mb_ereg_replace('{date}', date($opt['locale'][$notify['recp_lang']]['format']['phpdate'], strtotime($notify['date_hidden'])), $mailbody);
+        $mailbody = mb_ereg_replace(
+            '{date}',
+            date($opt['locale'][$notify['recp_lang']]['format']['phpdate'], strtotime($notify['date_hidden'])),
+            $mailbody
+        );
         $mailbody = mb_ereg_replace('{cacheid}', $notify['cache_id'], $mailbody);
         $mailbody = mb_ereg_replace('{wp_oc}', $notify['wp_oc'], $mailbody);
         $mailbody = mb_ereg_replace('{user}', $notify['username'], $mailbody);
         $mailbody = mb_ereg_replace('{cachename}', $notify['cachename'], $mailbody);
-        $mailbody = mb_ereg_replace('{distance}', round(geomath::calcDistance($notify['lat1'], $notify['lon1'], $notify['lat2'], $notify['lon2'], 1), 1), $mailbody);
+        $mailbody = mb_ereg_replace(
+            '{distance}',
+            round(geomath::calcDistance($notify['lat1'], $notify['lon1'], $notify['lat2'], $notify['lon2'], 1), 1),
+            $mailbody
+        );
         $mailbody = mb_ereg_replace('{unit}', 'km', $mailbody);
-        $mailbody = mb_ereg_replace('{bearing}', geomath::Bearing2Text(geomath::calcBearing($notify['lat1'], $notify['lon1'], $notify['lat2'], $notify['lon2']), 0, $notify['recp_lang']), $mailbody);
-        $mailbody = mb_ereg_replace('{cachetype}', get_cachetype_name($notify['cachetype'], $notify['recp_lang']), $mailbody);
-        $mailbody = mb_ereg_replace('{cachesize}', get_cachesize_name($notify['cachesize'], $notify['recp_lang']), $mailbody);
-        $mailbody = mb_ereg_replace('{oconly-}', $notify['oconly'] ? $translate->t('OConly-', '', basename(__FILE__), __LINE__, '', 1, $notify['recp_lang']) : '', $mailbody);
+        $mailbody = mb_ereg_replace(
+            '{bearing}',
+            geomath::Bearing2Text(
+                geomath::calcBearing(
+                    $notify['lat1'],
+                    $notify['lon1'],
+                    $notify['lat2'],
+                    $notify['lon2']
+                ),
+                0,
+                $notify['recp_lang']
+            ),
+            $mailbody
+        );
+        $mailbody = mb_ereg_replace(
+            '{cachetype}',
+            get_cachetype_name($notify['cachetype'], $notify['recp_lang']),
+            $mailbody
+        );
+        $mailbody = mb_ereg_replace(
+            '{cachesize}',
+            get_cachesize_name($notify['cachesize'], $notify['recp_lang']),
+            $mailbody
+        );
+        $mailbody = mb_ereg_replace(
+            '{oconly-}',
+            $notify['oconly'] ? $translate->t(
+                'OConly-',
+                '',
+                basename(__FILE__),
+                __LINE__,
+                '',
+                1,
+                $notify['recp_lang']
+            ) : '',
+            $mailbody
+        );
 
         /* begin send out everything that has to be sent */
         $email_headers = 'From: "' . $mailfrom . '" <' . $mailfrom . '>';
@@ -129,15 +190,15 @@ function process_new_cache($notify)
     }
 
     // logentry($module, $eventid, $userid, $objectid1, $objectid2, $logtext, $details)
-    logentry('notify_newcache', 8, $notify['recid'], $notify['cache_id'], 0, 'Sending mail to ' . $mailadr, array());
+    logentry('notify_newcache', 8, $notify['recid'], $notify['cache_id'], 0, 'Sending mail to ' . $mailadr, []);
 
     return 0;
 }
 
 function is_existent_maildomain($domain)
 {
-    $smtp_serverlist = array();
-    $smtp_serverweight = array();
+    $smtp_serverlist = [];
+    $smtp_serverweight = [];
 
     if (getmxrr($domain, $smtp_serverlist, $smtp_serverweight) != false) {
         if (count($smtp_serverlist) > 0) {

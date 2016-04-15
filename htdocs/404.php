@@ -41,11 +41,11 @@ if ($isRedirect404) {
 }
 
 // set feeds and options
-$feeds = array(
+$feeds = [
     'blog',
     'forum',
     'wiki'
-);
+];
 $options = $feeds;
 array_push($options, 'newcaches');
 
@@ -75,18 +75,30 @@ foreach ($feeds as $feed) {
 // get newest caches
 if ($isRedirect404) {
     if ($opt404['newcaches']['show']) {
-        $tpl->assign_rs('newcaches', $getNew->rsForSmarty('cache', array(
-            $sUserCountry,
-            $opt['template']['locale'],
-            3
-        )));
+        $tpl->assign_rs(
+            'newcaches',
+            $getNew->rsForSmarty(
+                'cache',
+                [
+                    $sUserCountry,
+                    $opt['template']['locale'],
+                    3
+                ]
+            )
+        );
     }
 } else {
-    $tpl->assign_rs('newcaches', $getNew->rsForSmarty('cache', array(
-        $sUserCountry,
-        $opt['template']['locale'],
-        3
-    )));
+    $tpl->assign_rs(
+        'newcaches',
+        $getNew->rsForSmarty(
+            'cache',
+            [
+                $sUserCountry,
+                $opt['template']['locale'],
+                3
+            ]
+        )
+    );
 }
 
 // assign $opt404

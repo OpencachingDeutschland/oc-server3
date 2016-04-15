@@ -35,9 +35,14 @@ while ($r = sql_fetch_array($rs)) {
 
             $simpletext = search_text2simple($text);
 
-            sql("INSERT INTO `geodb_search` (`loc_id`, `sort`, `simple`, `simplehash`)
+            sql(
+                "INSERT INTO `geodb_search` (`loc_id`, `sort`, `simple`, `simplehash`)
 				     VALUES ('&1', '&2', '&3', '&4')",
-                $r['loc_id'], $text, $simpletext, sprintf("%u", crc32($simpletext)));
+                $r['loc_id'],
+                $text,
+                $simpletext,
+                sprintf("%u", crc32($simpletext))
+            );
         }
     }
 }

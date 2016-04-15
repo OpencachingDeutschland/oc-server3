@@ -13,7 +13,7 @@
 $opt['rootpath'] = dirname(__FILE__) . '/../../';
 require_once($opt['rootpath'] . 'lib2/cli.inc.php');
 
-$itemwps = array();
+$itemwps = [];
 
 // Get item waypoints
 $rs = sql("SELECT `id` AS `itemid`, `wp` FROM `gk_item_waypoint`");

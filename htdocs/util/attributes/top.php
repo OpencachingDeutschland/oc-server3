@@ -100,10 +100,11 @@ mysql_free_result($rs);
     while ($r = sql_fetch_assoc($rs)) {
         echo '<img id="attr' . $r['id'] . '" onmousedown="toggleAttr(' . $r['id'] . ')" src="../../';
 
-        if (isset($attrs[$r['id']]))
+        if (isset($attrs[$r['id']])) {
             echo $r['icon_large'];
-        else
+        } else {
             echo $r['icon_undef'];
+        }
 
         echo '" />&nbsp;';
     }

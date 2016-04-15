@@ -15,12 +15,22 @@ require($opt['rootpath'] . 'templates2/ocstyle/search.tpl.inc.php');
 $bbox = isset($_REQUEST['BBOX']) ? $_REQUEST['BBOX'] : '0,0,0,0';
 $abox = mb_split(',', $bbox);
 
-if (count($abox) != 4) exit;
+if (count($abox) != 4) {
+    exit;
+}
 
-if (!is_numeric($abox[0])) exit;
-if (!is_numeric($abox[1])) exit;
-if (!is_numeric($abox[2])) exit;
-if (!is_numeric($abox[3])) exit;
+if (!is_numeric($abox[0])) {
+    exit;
+}
+if (!is_numeric($abox[1])) {
+    exit;
+}
+if (!is_numeric($abox[2])) {
+    exit;
+}
+if (!is_numeric($abox[3])) {
+    exit;
+}
 
 $lat_from = $abox[1];
 $lon_from = $abox[0];
@@ -217,7 +227,8 @@ if ((abs($lon_from - $lon_to) > 2) || (abs($lat_from - $lat_to) > 2)) {
         $lon_to,
         $lat_from,
         $lat_to,
-        $opt['template']['locale']);
+        $opt['template']['locale']
+    );
 
     $nCount = 0;
     while ($r = sql_fetch_array($rs)) {

@@ -1,0 +1,4 @@
+# fix for https://github.com/opencaching/okapi/issues/377 : "SVG-format RSS icon"
+
+AddType image/svg+xml svg svgz
+AddEncoding gzip svgz

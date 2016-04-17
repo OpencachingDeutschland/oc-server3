@@ -56,7 +56,7 @@
 		<span class="html_attributes">del</span>         cite<br />
 		<span class="html_attributes"><i>font</i></span> color, size<br />
 		<span class="html_attributes">hr</span>          <i>size</i>, <i>noshade</i><br />
-		<span class="html_attributes">img</span>         <i>align</i>, alt, <i>border</i>, height, <i>hspace</i>, src, usemap, <i>vspace</i>, width<br />
+		<span class="html_attributes">img</span>         <i>align</i>, alt, <i>border</i>, height, <i>hspace</i>, src, usemap<sup>2</sup>, <i>vspace</i>, width<br />
 		<span class="html_attributes">ins</span>         cite<br />
 		<span class="html_attributes">map</span>         name<sup>2</sup><br />
 		<span class="html_attributes">ol</span>          <i>compact</i>, type<br />
@@ -80,7 +80,7 @@
 	</p>
 
 	<p>
-		<sup>2</sup> IDs and Names must start with <code>custom_</code>.
+		<sup>2</sup> IDs and names must start with <code>custom_</code>.
 		<br /><br />
 	</p>
 

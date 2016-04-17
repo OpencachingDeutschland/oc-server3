@@ -17,8 +17,10 @@ require_once($opt['rootpath'] . 'lib2/logic/user.class.php');
 
 $login->admin = ADMIN_USER;
 
-$rs = sql("SELECT `user_id`,`username` FROM `user`
-	           WHERE `is_active_flag`=0 AND `data_license`=0");
+$rs = sql(
+    "SELECT `user_id`,`username` FROM `user`
+    WHERE `is_active_flag`=0 AND `data_license`=0"
+);
 
 $n = 0;
 while ($r = sql_fetch_assoc($rs)) {

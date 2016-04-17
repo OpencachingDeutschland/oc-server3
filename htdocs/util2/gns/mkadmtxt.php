@@ -24,7 +24,15 @@ while ($rLocations = sql_fetch_array($rsLocations)) {
     $maxlon = geomath::getMaxLon($rLocations['lon'], $rLocations['lat'], 10, 1);
 
     // den nächsgelegenen Ort in den geodb ermitteln
-    $sql = 'SELECT ' . geomath::getSqlDistanceFormula($rLocations['lon'], $rLocations['lat'], 10, 1, 'lon', 'lat', 'geodb_coordinates') . ' `distance`,
+    $sql = 'SELECT ' . geomath::getSqlDistanceFormula(
+            $rLocations['lon'],
+            $rLocations['lat'],
+            10,
+            1,
+            'lon',
+            'lat',
+            'geodb_coordinates'
+        ) . ' `distance`,
 							`geodb_coordinates`.`loc_id` `loc_id`
 					  FROM `geodb_coordinates`
 					  WHERE `lon` > ' . $minlon . ' AND

@@ -25,11 +25,11 @@ $opt['rootpath'] = '../../';
 require($opt['rootpath'] . 'lib2/cli.inc.php');
 
 /* defaults */
-$importfiles = array(
+$importfiles = [
     "gm.txt",
     "au.txt",
     "sz.txt"
-);
+];
 
 sql("TRUNCATE TABLE gns_locations");
 

@@ -9,91 +9,97 @@ require_once($opt['rootpath'] . 'lib2/error.inc.php');
 
 class ChildWp_Controller
 {
-  const req_cache_id = 'cacheid';
-  const req_child_id = 'childid';
-  const req_delete_id = 'deleteid';
+    const req_cache_id = 'cacheid';
+    const req_child_id = 'childid';
+    const req_delete_id = 'deleteid';
 
-  private $request;
-  private $translator;
+    private $request;
+    private $translator;
 
-  public function __construct($request = false, $translator = false)
-  {
-    $this->request = $this->initRequest($request);
-    $this->translator = $this->initTranslator($translator);
-  }
+    public function __construct($request = false, $translator = false)
+    {
+        $this->request = $this->initRequest($request);
+        $this->translator = $this->initTranslator($translator);
+    }
 
-  private function initRequest($request)
-  {
-    if ($request)
-      return $request;
+    private function initRequest($request)
+    {
+        if ($request) {
+            return $request;
+        }
 
-    return new Http_Request();
-  }
+        return new Http_Request();
+    }
 
-  private function initTranslator($translator)
-  {
-    if ($translator)
-      return $translator;
+    private function initTranslator($translator)
+    {
+        if ($translator) {
+            return $translator;
+        }
 
-    return new Language_Translator();
-  }
+        return new Language_Translator();
+    }
 
-  public function createPresenter($template, $cacheManager, $childWpHandler)
-  {
-    $cacheId = $this->request->getForValidation(self::req_cache_id);
+    public function createPresenter($template, $cacheManager, $childWpHandler)
+    {
+        $cacheId = $this->request->getForValidation(self::req_cache_id);
 
-    $this->verifyCacheId($template, $cacheId, $cacheManager);
+        $this->verifyCacheId($template, $cacheId, $cacheManager);
 
-    $presenter = false;
-    $childId = $this->request->getForValidation(self::req_child_id);
-    $deleteId = $this->request->getForValidation(self::req_delete_id);
+        $presenter = false;
+        $childId = $this->request->getForValidation(self::req_child_id);
+        $deleteId = $this->request->getForValidation(self::req_delete_id);
 
-    if ($childId || $deleteId)
-      $presenter = $this->createEditDeletePresenter($template, $childWpHandler, $cacheId, $childId, $deleteId);
-    else
-      $presenter = $this->createAddPresenter($template, $childWpHandler, $cacheId);
+        if ($childId || $deleteId) {
+            $presenter = $this->createEditDeletePresenter($template, $childWpHandler, $cacheId, $childId, $deleteId);
+        } else {
+            $presenter = $this->createAddPresenter($template, $childWpHandler, $cacheId);
+        }
 
-    $presenter->init($childWpHandler, $cacheId);
+        $presenter->init($childWpHandler, $cacheId);
 
-    return $presenter;
-  }
+        return $presenter;
+    }
 
-  private function createEditDeletePresenter($template, $childWpHandler, $cacheId, $childId, $deleteId)
-  {
-    $id = $childId ? $childId : $deleteId;
+    private function createEditDeletePresenter($template, $childWpHandler, $cacheId, $childId, $deleteId)
+    {
+        $id = $childId ? $childId : $deleteId;
 
-    $childWp = $childWpHandler->getChildWp($id);
+        $childWp = $childWpHandler->getChildWp($id);
 
-    $this->verifyChildWp($template, $childWp, $cacheId);
+        $this->verifyChildWp($template, $childWp, $cacheId);
 
-    if ($childId)
-      $presenter = new ChildWp_EditPresenter($this->request, $this->translator);
-    else
-      $presenter = new ChildWp_DeletePresenter($this->request, $this->translator);
+        if ($childId) {
+            $presenter = new ChildWp_EditPresenter($this->request, $this->translator);
+        } else {
+            $presenter = new ChildWp_DeletePresenter($this->request, $this->translator);
+        }
 
-    $presenter->initChildWp($id, $childWp);
+        $presenter->initChildWp($id, $childWp);
 
-    return $presenter;
-  }
+        return $presenter;
+    }
 
-  private function createAddPresenter($template, $childWpHandler, $cacheId)
-  {
-    $presenter = new ChildWp_AddPresenter($this->request, $this->translator);
-    /* set default waypoint coordinates to cache coordinates */
-    $presenter->initCoordinate( Coordinate_Coordinate::getFromCache( $cacheId ) );
-  
-    return $presenter;
-  }
-  
-  private function verifyCacheId($template, $cacheId, $cacheManager)
-  {
-    if (!$cacheManager->exists($cacheId) || !$cacheManager->userMayModify($cacheId))
-      $template->error(ERROR_CACHE_NOT_EXISTS);
-  }
+    private function createAddPresenter($template, $childWpHandler, $cacheId)
+    {
+        $presenter = new ChildWp_AddPresenter($this->request, $this->translator);
+        /* set default waypoint coordinates to cache coordinates */
+        $presenter->initCoordinate(Coordinate_Coordinate::getFromCache($cacheId));
 
-  private function verifyChildWp($template, $childWp, $cacheId)
-  {
-    if (empty($childWp) || $cacheId != $childWp['cacheid'])
-      $template->error(ERROR_CACHE_NOT_EXISTS);
-  }
+        return $presenter;
+    }
+
+    private function verifyCacheId($template, $cacheId, $cacheManager)
+    {
+        if (!$cacheManager->exists($cacheId) || !$cacheManager->userMayModify($cacheId)) {
+            $template->error(ERROR_CACHE_NOT_EXISTS);
+        }
+    }
+
+    private function verifyChildWp($template, $childWp, $cacheId)
+    {
+        if (empty($childWp) || $cacheId != $childWp['cacheid']) {
+            $template->error(ERROR_CACHE_NOT_EXISTS);
+        }
+    }
 }

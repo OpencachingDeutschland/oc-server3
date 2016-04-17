@@ -1,44 +1,50 @@
 <?php
+
 /***************************************************************************
  *  For license information see doc/license.txt
  *
  *  Unicode Reminder メモ
  ***************************************************************************/
-
 abstract class Validator_Numeric
 {
-  private $min;
-  private $max;
+    private $min;
+    private $max;
 
-  public function __construct($min, $max)
-  {
-    if ($min !== false)
-      $this->min = $min;
-    else
-      $this->min = $this->getMinValue();
+    public function __construct($min, $max)
+    {
+        if ($min !== false) {
+            $this->min = $min;
+        } else {
+            $this->min = $this->getMinValue();
+        }
 
-    if ($max !== false)
-      $this->max = $max;
-    else
-      $this->max = $this->getMaxValue();
+        if ($max !== false) {
+            $this->max = $max;
+        } else {
+            $this->max = $this->getMaxValue();
+        }
 
-    if ($this->min > $this->max)
-      throw new InvalidArgumentException();
-  }
+        if ($this->min > $this->max) {
+            throw new InvalidArgumentException();
+        }
+    }
 
-  abstract protected function getMinValue();
-  abstract protected function getMaxValue();
+    abstract protected function getMinValue();
 
-  public function isValid($value)
-  {
-    if (!mb_ereg_match($this->getValidateRegex(), $value))
-      return false;
+    abstract protected function getMaxValue();
 
-    $num_value = $this->getValue($value);
+    public function isValid($value)
+    {
+        if (!mb_ereg_match($this->getValidateRegex(), $value)) {
+            return false;
+        }
 
-    return $this->min <= $num_value && $num_value <= $this->max;
-  }
+        $num_value = $this->getValue($value);
 
-  abstract protected function getValidateRegex();
-  abstract protected function getValue($value);
+        return $this->min <= $num_value && $num_value <= $this->max;
+    }
+
+    abstract protected function getValidateRegex();
+
+    abstract protected function getValue($value);
 }

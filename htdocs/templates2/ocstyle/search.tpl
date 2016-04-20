@@ -63,7 +63,7 @@ function _radio_click(){
 			}
 		}
 		else {
-			alert("Select a search button, please!");
+			alert("{t}Select a search button, please!{/t}");
 			return false;
 		}
 		return true;
@@ -138,7 +138,7 @@ function _sbwaypoint_click()
 		resetbutton('submit_dist');
 		return false;
 	}
-	else if ((!document.searchbydistance.waypoint.value.toLowerCase().startsWith("oc") && document.searchbydistance.waypoint.value.length<=2) || (!document.searchbydistance.waypoint.value.toLowerCase().startsWith("gc") && document.searchbydistance.waypoint.value.length<=5)  )
+	else if ((!document.searchbydistance.waypoint.value.toLowerCase().startsWith("oc") && document.searchbydistance.waypoint.value.length<=2) || (!document.searchbydistance.waypoint.value.toLowerCase().startsWith("gc") && document.searchbydistance.waypoint.value.length<=5) || (!document.searchbydistance.waypoint.value.toLowerCase().startsWith("oc") && !document.searchbydistance.waypoint.value.toLowerCase().startsWith("gc")) )
 	{
 		alert("{/literal}{t}Enter a valid waypoint, please!\nFormat: OCxxxx(x) / GCx(xxxx){/t}{literal}");
 		resetbutton('submit_dist');
@@ -576,7 +576,7 @@ function switchAttributeCat2()
 			<td></td>  {* creates empty fourth column which is used by text search options *}
 		</tr>
 		<tr>
-			<td class=""><input type="radio" id="swaypoint" name="searchto" value="searchbywaypoint" {if $dbywaypoint_checked}checked="checked"{/if}><label for="sbwaypoint">... {t}from Waypoint:{/t}</label></td>
+			<td class=""><input type="radio" id="sbwaypoint" name="searchto" value="searchbywaypoint" {if $dbywaypoint_checked}checked="checked"{/if}><label for="sbwaypoint">... {t}from Waypoint:{/t}</label></td>
 			<td><input type="text" name="waypoint" value="{$waypoint}" maxlength="7" class="input50" onfocus="textonfocus(1)"/></td>
 		</tr>
 		<tr>

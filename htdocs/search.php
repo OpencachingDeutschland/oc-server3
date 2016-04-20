@@ -619,11 +619,12 @@
                     // ok, wir haben einen ort ... koordinaten ermitteln
                     $locid = $locid + 0;
                     $rs = sql('SELECT `lon`, `lat` FROM `geodb_coordinates` WHERE `loc_id`=' . $locid . ' AND coord_type=200100000');
-                    if ($r = sql_fetch_array($rs))
+                    if (isset($rs) && $r = sql_fetch_array($rs))
                     {
                         // ok ... wir haben koordinaten ...
                         $lat = $r['lat'] + 0;
                         $lon = $r['lon'] + 0;
+						sql_free_result($rs);
 
                         $lon_rad = $lon * 3.14159 / 180;
                         $lat_rad = $lat * 3.14159 / 180;
@@ -635,6 +636,9 @@
                     }
 					else
 					{
+						if (isset($rs)) {
+							sql_free_result($rs);
+						}
 						$options['error_locidnocoords'] = true;
 						outputSearchForm($options);
 						exit;
@@ -746,12 +750,13 @@
 					// ok, wir haben einen ort ... koordinaten ermitteln
 					$locid = $locid + 0;
 					$rs = sql_slave('SELECT `lon`, `lat` FROM `gns_locations` WHERE `uni`=' . $locid . ' LIMIT 1');
-					if ($r = sql_fetch_array($rs))
+					if (isset($rs) && $r = sql_fetch_array($rs))
 					{
 						// ok ... wir haben koordinaten ...
 
 						$lat = $r['lat'] + 0;
 						$lon = $r['lon'] + 0;
+						sql_free_result($rs);
 
 						$lon_rad = $lon * 3.14159 / 180;
 						$lat_rad = $lat * 3.14159 / 180;
@@ -763,6 +768,9 @@
 					}
 					else
 					{
+						if (isset($rs)) {
+							sql_free_result($rs);
+						}
 						$options['error_locidnocoords'] = true;
 						outputSearchForm($options);
 						exit;

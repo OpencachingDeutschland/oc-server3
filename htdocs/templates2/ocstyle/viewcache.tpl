@@ -470,7 +470,7 @@ function showalllists()
 			<div class="viewcache-pictureblock">
 				<div class="img-shadow">
 					<!-- a href="{$pictureItem.url|escape}" target="_blank" -->
-						<img class="enlargegroup_cachepics" src="thumbs.php?type=2&uuid={$pictureItem.uuid|urlencode}" longdesc="{$pictureItem.url|escape}" border="0" align="bottom" onclick="enlarge(this)" />
+						<img class="enlargegroup_cachepics" src="thumbs.php?type=2&uuid={$pictureItem.uuid|urlencode}" longdesc="{$pictureItem.url|escape}" alt="{$pictureItem.title|escape}" border="0" align="bottom" onclick="enlarge(this)" />
 					<!-- /a -->
 				</div>
 				<span class="title">{$pictureItem.title|escape}</span>

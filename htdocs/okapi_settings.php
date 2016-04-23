@@ -28,26 +28,23 @@ function get_okapi_settings()
 
         # Settings which ARE present in settings.inc.php:
 
-        'ADMINS'           => array($opt['db']['warn']['mail'],'rygielski@mimuw.edu.pl'),
+        'ADMINS'           => array($opt['db']['warn']['mail'], 'rygielski@mimuw.edu.pl'),
         'FROM_FIELD'       => $opt['mail']['contact'],
         'DATA_LICENSE_URL' => $opt['page']['absolute_url'] . $opt['logic']['license']['terms'],
         'DEBUG'            => ($opt['debug'] & DEBUG_DEVELOPER != 0),
         'DEBUG_PREVENT_SEMAPHORES'
-		                   => !$opt['php']['semaphores'],  # not available on current developer system
+		                   => !$opt['php']['semaphores'],  # not available on old developer system
         'DB_SERVER'        => $opt['db']['servername'],
         'DB_NAME'          => $opt['db']['placeholder']['db'],
         'DB_USERNAME'      => $opt['db']['username'],
         'DB_PASSWORD'      => $opt['db']['password'],
         'DB_CHARSET'       => $opt['charset']['mysql'],
         'SITELANG'         => strtolower($opt['template']['default']['locale']),
-        'TIMEZONE'         => $opt['php']['timezone'],  # BTW, OCPL doesn't have it in settings.inc.php
+        'TIMEZONE'         => $opt['php']['timezone'],
         'SITE_URL'         => $opt['page']['absolute_url'],
         'REGISTRATION_URL' => $opt['page']['https']['mode'] != HTTPS_DISABLED
                                   ? 'https://' . $opt['page']['domain'] . '/register.php'
                                   : $opt['page']['absolute_url'] . 'register.php',
-        'HTTPS'            => $opt['page']['https']['mode'] == HTTPS_DISABLED
-                                  ? 'unavailable'
-                                  : ($opt['page']['https']['is_default'] ? 'recommended' : 'available'),
         'VAR_DIR'          => $opt['okapi']['var_dir'],
         'IMAGES_DIR'       => rtrim($opt['logic']['pictures']['dir'], '/'),
         'IMAGES_URL'       => rtrim($opt['logic']['pictures']['url'], '/').'/',

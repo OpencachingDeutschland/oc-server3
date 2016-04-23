@@ -122,7 +122,7 @@
                 <p><b>false</b> - use this to indicate that your user thinks that the cache's
                 condition is fine.</p>
 
-                <p>Note: The <b>false</b> option is not evaluated by all OC nodes. Some will
+                <p>Note: The <b>false</b> option is not evaluated by all OC sites. Some will
                 just ignore it.</p>
             </li>
         </ul>

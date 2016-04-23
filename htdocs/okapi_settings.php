@@ -42,7 +42,6 @@ function get_okapi_settings()
         'SITELANG'         => strtolower($opt['template']['default']['locale']),
         'TIMEZONE'         => $opt['php']['timezone'],  # BTW, OCPL doesn't have it in settings.inc.php
         'SITE_URL'         => $opt['page']['absolute_url'],
-        'ORIGIN_URL'       => $opt['page']['origin_url'],
         'REGISTRATION_URL' => $opt['page']['https']['mode'] != HTTPS_DISABLED
                                   ? 'https://' . $opt['page']['domain'] . '/register.php'
                                   : $opt['page']['absolute_url'] . 'register.php',

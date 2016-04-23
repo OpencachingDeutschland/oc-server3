@@ -209,8 +209,8 @@
         <p>Boolean. If set to <b>true</b>, only caches which belong to at
         least one <b>active</b> Power Trail will be included.</p>
 
-        <p>Power Trails are sets of geocaches. Only some Opencaching nodes
-        implement this feature. If this node does not implement it, and you
+        <p>Power Trails are sets of geocaches. Only some Opencaching sites
+        implement this feature. If this site does not implement it, and you
         will set this parameter to <b>true</b>, then you will <b>always</b>
         receive an empty result.</p>
     </opt>
@@ -221,8 +221,8 @@
         consideration, IDs which reference inactive or nonexistent Power Trails
         will be ignored.</p>
 
-        <p>Power Trails are sets of geocaches. Only some Opencaching nodes
-        implement this feature. If this node does not implement it, then
+        <p>Power Trails are sets of geocaches. Only some Opencaching sites
+        implement this feature. If this site does not implement it, then
         whenever you use this parameter, you will <b>always</b> receive an
         empty result. Also, at the time of writing this, there is no method to
         retrieve any Power Trails, or their IDs. So, this parameter is

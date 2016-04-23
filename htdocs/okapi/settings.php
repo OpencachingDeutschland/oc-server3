@@ -130,24 +130,24 @@ final class Settings
         'DB_CHARSET' => 'utf8',
 
         /**
-         * URL of this site (with slash, and without "/okapi"). If this is a
-         * development installation, it should point to the local URL (e.g.
-         * "http://localhost/".
+         * Canonical URL of this Opencaching site (with a trailing slash). If
+         * you prefer your site to be accessed via HTTPS, then this should be
+         * a "https://" URL.
+         *
+         * If this is a development installation, it should point to the local
+         * URL (e.g. "http://localhost/").
          */
         'SITE_URL' => null,
 
         /**
-         * URL of the official OC site. For production sites, it should equal
-         * SITE_URL (this is also the default). For development installations,
-         * it should point to the official OC site from which you got your
-         * database dump (e.g. "http://opencaching.pl/").
+         * Deprecated. For details, see here:
+         * https://github.com/opencaching/okapi/issues/417
          */
         'ORIGIN_URL' => null,
 
         /**
-         * OKAPI needs this when inserting new data to cache_logs table. Node
-         * IDs serve a similar purpose for OC sites that ORIGIN_URL does for
-         * OKAPI.
+         * Node ID. This is the value OKAPI should put into `node_id` columns
+         * in OC tables when it inserts new rows into tables with this column.
          */
         'OC_NODE_ID' => null,
 
@@ -274,9 +274,7 @@ final class Settings
         foreach ($notnull as $k)
             if ($dict[$k] === null)
                 throw new Exception("$k cannot be null.");
-        if ($dict['ORIGIN_URL'] === null)
-            $dict['ORIGIN_URL'] = $dict['SITE_URL'];
-        $slash_keys = array('SITE_URL', 'ORIGIN_URL', 'IMAGES_URL');
+        $slash_keys = array('SITE_URL', 'IMAGES_URL');
         foreach ($slash_keys as $key)
             if ($dict[$key][strlen($dict[$key]) - 1] != '/')
                 throw new Exception("$key must end with a slash.");

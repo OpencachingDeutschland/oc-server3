@@ -115,8 +115,7 @@
 
                 <p>Note: Depending on OC installation and user's log entry type, OKAPI may
                 actually publish two separate log entries when you set this option to
-                <b>true</b> (one of them with empty comment). Even then, you will still receive
-                only one UUID reference (pointing to only one of those entries).</p>
+                <b>true</b> (one of them with empty comment).</p>
             </li>
             <li>
                 <p><b>false</b> - use this to indicate that your user thinks that the cache's
@@ -134,11 +133,26 @@
     <returns>
         <p>A dictionary of the following structure:</p>
         <ul>
-            <li><b>success</b> - true, if the log entry was submitted successfully,</li>
-            <li><b>message</b> - plain-text string, a message for the user, which acknowledges success
-                or describes an error (usually you want to display this only when success is false),</li>
-            <li><b>log_uuid</b> - ID of the newly created log entry, <b>or null</b>
-                in case of an error.</li>
+            <li>
+                <p><b>success</b> - true, if the log entry was submitted
+                successfully,</p>
+            </li>
+            <li>
+                <p><b>message</b> - plain-text string, a message for the user,
+                which acknowledges success or describes an error (usually you
+                want to display this only when success is false),</p>
+            </li>
+            <li>
+                <p><b>log_uuid</b> - ID of the newly created log entry, <b>or
+                null</b> in case of an error. If multiple log entries have been
+                published because <b>needs_maintenance</b> or
+                <b>needs_maintenance2</b> was set to <b>true</b>: The ID of
+                one of those log entries.</p>
+            </li>
+            <li>
+                <p><b>log_uuids</b> - a list of the IDs of the newly created
+                log entries; an empty list in case of an error.</p>
+            </li>
         </ul>
     </returns>
 </xml>

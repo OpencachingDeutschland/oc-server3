@@ -558,10 +558,12 @@ class WebService
         # Finally! Insert the rows into the log entries table. Update
         # cache stats and user stats.
 
-        $log_uuid = self::insert_log_row(
-            $request->consumer->key, $cache['internal_id'], $user['internal_id'],
-            $logtype, $when, $formatted_comment, $value_for_text_html_field,
-            $needs_maintenance2
+        $log_uuids = array(
+            self::insert_log_row(
+                $request->consumer->key, $cache['internal_id'], $user['internal_id'],
+                $logtype, $when, $formatted_comment, $value_for_text_html_field,
+                $needs_maintenance2
+            )
         );
         self::increment_cache_stats($cache['internal_id'], $when, $logtype);
         self::increment_user_stats($user['internal_id'], $logtype);
@@ -569,7 +571,7 @@ class WebService
         {
             # Reminder: This will only be called for OCPL branch.
 
-            self::insert_log_row(
+            $log_uuids[] = self::insert_log_row(
                 $request->consumer->key, $cache['internal_id'], $user['internal_id'],
                 $second_logtype, $when + 1, $second_formatted_comment,
                 $value_for_text_html_field, 'null'
@@ -667,9 +669,9 @@ class WebService
             unlink($filepath);
         }
 
-        # Success. Return the uuid.
+        # Success. Return the uuids.
 
-        return $log_uuid;
+        return $log_uuids;
     }
 
     private static $success_message = null;
@@ -688,11 +690,12 @@ class WebService
         {
             # If appropriate, $success_message might be changed inside the _call.
             self::$success_message = _("Your cache log entry was posted successfully.");
-            $log_uuid = self::_call($request);
+            $log_uuids = self::_call($request);
             $result = array(
                 'success' => true,
                 'message' => self::$success_message,
-                'log_uuid' => $log_uuid
+                'log_uuid' => $log_uuids[0],
+                'log_uuids' => $log_uuids
             );
             Okapi::gettext_domain_restore();
         }
@@ -702,7 +705,8 @@ class WebService
             $result = array(
                 'success' => false,
                 'message' => $e->getMessage(),
-                'log_uuid' => null
+                'log_uuid' => null,
+                'log_uuids' => array()
             );
         }
 

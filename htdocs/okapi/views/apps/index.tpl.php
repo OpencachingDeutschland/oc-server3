@@ -30,7 +30,7 @@
             <?php if (count($vars['apps']) > 0) { ?>
                 <?= sprintf(_("
                     <p>This is the list of applications which you granted access to your <b>%s</b> account.
-                    This page gives you the abbility to revoke all previously granted privileges.
+                    This page gives you the ability to revoke all previously granted privileges.
                     Once you click \"remove\" the application will no longer be able to perform any
                     actions on your behalf.</p>
                 "), $vars['site_name']) ?>

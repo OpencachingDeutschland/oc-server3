@@ -412,14 +412,13 @@ msgid "Your external applications"
 msgstr "Aplicaţiile tale externe"
 
 # This will be shown when user visits /okapi/apps page.
-# To correct "abbility" in english
 #: okapi/views/apps/index.tpl.php:31
 #, php-format
 msgid ""
 "\n"
 "                    <p>This is the list of applications which you granted "
 "access to your <b>%s</b> account.\n"
-"                    This page gives you the abbility to revoke all "
+"                    This page gives you the ability to revoke all "
 "previously granted privileges.\n"
 "                    Once you click \"remove\" the application will no longer "
 "be able to perform any\n"

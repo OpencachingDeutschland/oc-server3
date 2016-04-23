@@ -89,7 +89,7 @@ class AttrHelper
          * installation uses internal IDs of its own. Which "attribute schema"
          * is being used in THIS installation? */
 
-        $my_schema = Settings::get('ORIGIN_URL');
+        $my_schema = Okapi::get_oc_schema_code();
 
         $doc = simplexml_load_string($xml);
         $cachedvalue = array(
@@ -119,12 +119,12 @@ class AttrHelper
             }
             foreach ($attrnode->opencaching as $ocnode)
             {
-                /* If it is used by at least one OC node, then it's NOT discontinued. */
+                /* If it is used by at least one OC site, then it's NOT discontinued. */
                 $attr['is_discontinued'] = false;
 
                 if ((string)$ocnode['schema'] == $my_schema)
                 {
-                    /* It is used by THIS OC node. */
+                    /* It is used by THIS OC site. */
 
                     $internal_id = (int)$ocnode['id'];
                     if (isset($all_internal_ids[$internal_id]))

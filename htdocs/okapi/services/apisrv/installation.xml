@@ -15,10 +15,18 @@
                 level domain of a country).
             </li>
             <li>
-                <b>okapi_base_url</b> - URL of the OKAPI installation (usually this is
-                <b>site_url</b> with "okapi/" appended, but you should not assume
-                that); this value is to be used as a prefix when constructing service
-                method URLs,
+                <b>okapi_base_url</b> - the <i>recommended</i> base URL to be used when
+                accessing this OKAPI installation (it should be used as a prefix when
+                constructing method URLs),
+            </li>
+            <li>
+                <p><b>okapi_base_urls</b> - a list of <i>all</i> base URLs allowed to be used
+                when calling OKAPI methods in this installation.</p>
+                
+                <p>In theory, once a new base URL appears on this list, it should never
+                disappear (it should be allowed to use it forever). However, for various
+                reasons, we cannot guarantee it will indeed be so. Clients SHOULD use the
+                recommended base URL provided in the <b>okapi_base_url</b> field.</p>
             </li>
             <li>
                 <b>site_name</b> - international name of the Opencaching site,

@@ -28,7 +28,7 @@
 
 <p><b>OKAPI</b> is a publically available
 <a href='http://en.wikipedia.org/wiki/Application_programming_interface'>API</a>
-for "National Opencaching" sites (also known as Opencaching National Nodes).</p>
+for "National Opencaching" sites.</p>
 
 <ul>
     <li>It provides OC site with a set of useful well-documented API methods,</li>

@@ -1223,8 +1223,7 @@ class WebService
                     order by npa_types.ordinal
                 ");
             }
-            else if (Settings::get('ORIGIN_URL') == 'http://opencaching.pl/' ||
-                     Settings::get('ORIGIN_URL') == 'http://www.opencaching.nl/')
+            else if (in_array(Okapi::get_oc_schema_code(), array("OCPL", "OCNL")))
             {
                 # Current OCPL table definitions use collation 'latin1' for parkipl
                 # and 'utf8' for np_areas. Union needs identical collations.
@@ -1255,7 +1254,7 @@ class WebService
                     where
                         c.cache_id in (".$cache_ids_escaped_and_imploded.")
                         and cache_npa_areas.npa_id != 0
-                    ");
+                ");
             }
             else
             {
@@ -1399,6 +1398,11 @@ class WebService
         $cache_id, $lang, array $langpref, $owner, $type
     ) {
         $site_url = Settings::get('SITE_URL');
+
+        # Note that $site_url will either start with http:// or https://,
+        # depending on the current request. This applies also to the cronjob
+        # which replicates geocaches!
+
         $site_name = Okapi::get_normalized_site_name();
         $cache_url = $site_url."viewcache.php?cacheid=$cache_id";
 

@@ -1003,8 +1003,8 @@ class Okapi
     public static $server;
 
     /* These two get replaced in automatically deployed packages. */
-    public static $version_number = 1270;
-    public static $git_revision = '187a9de9d26929b8a49c34a754a611d5171ab0a5';
+    public static $version_number = 1285;
+    public static $git_revision = '0b41dc2d3545c97ff5b9494808b0b9f82db105c6';
 
     private static $okapi_vars = null;
 
@@ -1178,6 +1178,132 @@ class Okapi
         } else {
             return "DEVELSITE";
         }
+    }
+
+    /**
+     * Return a "schema code" of this OC site.
+     *
+     * While there are only two primary OC_BRANCHes (OCPL and OCDE), sites
+     * based on the same branch may have a different schema of attributes,
+     * cache types, log types, or even database structures. This method returns
+     * a unique internal code which identifies a set of sites that share the
+     * same schema. As all OCPL-based sites currently have different attribute
+     * sets, there is a separate schema for each OCPL site.
+     *
+     * These values are used internally only, they SHOULD NOT be exposed to
+     * external developers!
+     */
+    public static function get_oc_schema_code()
+    {
+        /* All OCDE-based sites use exactly the same schema. */
+
+        if (Settings::get('OC_BRANCH') == 'oc.de') {
+            return "OCDE";  // OC
+        }
+
+        /* All OCPL-based sites use separate schemas. (Hopefully, this will
+         * change in time.) */
+
+        $mapping = array(
+            2 => "OCPL",  // OP
+            6 => "OCORGUK",  // OK
+            10 => "OCUS",  // OU
+            14 => "OCNL",  // OB
+            16 => "OCRO",  // OR
+            // should be expanded when new OCPL-based sites are added
+        );
+        $oc_node_id = Settings::get("OC_NODE_ID");
+        if (isset($mapping[$oc_node_id])) {
+            return $mapping[$oc_node_id];
+        } else {
+            return "OTHER";
+        }
+    }
+
+    /**
+     * Return the recommended okapi_base_url.
+     *
+     * This is the URL which we want all *new* client applications to use.
+     * OKAPI will suggest URLs with this prefix in various context, e.g. in all
+     * the dynamically generated docs.
+     *
+     * Also see `get_allowed_base_urls` method.
+     */
+    public static function get_recommended_base_url()
+    {
+        return Settings::get('SITE_URL')."okapi/";
+    }
+
+    /**
+     * Return a list of okapi_base_urls allowed to be used when calling OKAPI
+     * methods in this installation.
+     *
+     * Since issue #416, the "recommended" okapi_base_url is *not* the only one
+     * allowed (actually, there were more allowed before issue #416, but they
+     * weren't allowed "officially").
+     */
+    public static function get_allowed_base_urls()
+    {
+        /* Currently, there are no config settings which would let us allow
+         * to determine the proper values for this list. So, we need to have it
+         * hardcoded. (Perhaps we should move this to etc/installations.xml?
+         * But this wouldn't be efficient...)
+         *
+         * TODO: Replace "self::get_oc_schema_code()" by something better.
+         *       Base URls depend on installations, not on schemas.
+         */
+
+        switch (self::get_oc_schema_code()) {
+            case 'OCPL':
+                $urls = array(
+                    "http://opencaching.pl/okapi/",
+                    "http://www.opencaching.pl/okapi/",
+                );
+                break;
+            case 'OCDE':
+                if (in_array(Settings::get('OC_NODE_ID'), array(4,5))) {
+                    $urls = array(
+                        preg_replace("/^https:/", "http:", Settings::get('SITE_URL')) . 'okapi/',
+                        preg_replace("/^http:/", "https:", Settings::get('SITE_URL')) . 'okapi/',
+                    );
+                } else {
+                    $urls = array(
+                        "http://www.opencaching.de/okapi/",
+                        "https://www.opencaching.de/okapi/",
+                    );
+                }
+                break;
+            case 'OCNL':
+                $urls = array(
+                    "http://www.opencaching.nl/okapi/",
+                );
+                break;
+            case 'OCRO':
+                $urls = array(
+                    "http://www.opencaching.ro/okapi/",
+                );
+                break;
+            case 'OCORGUK':
+                $urls = array(
+                    "http://www.opencaching.org.uk/okapi/",
+                );
+                break;
+            case 'OCUS':
+                $urls = array(
+                    "http://www.opencaching.us/okapi/",
+                    "http://opencaching.us/okapi/",
+                );
+                break;
+            default:
+                /* Unknown site. No extra allowed URLs. */
+                $urls = array();
+        }
+
+        if (!in_array(self::get_recommended_base_url(), $urls)) {
+            $urls[] = self::get_recommended_base_url();
+        }
+
+        return $urls;
     }
 
     /**
@@ -1849,7 +1975,7 @@ class Okapi
     /** E.g. 1 => 'Found it'. For unknown ids returns 'Comment'. */
     public static function logtypeid2name($id)
     {
-        # Various OC nodes use different English names, even for primary
+        # Various OC sites use different English names, even for primary
         # log types. OKAPI needs to have them the same across *all* OKAPI
         # installations. That's why all known types are hardcoded here.
         # These names are officially documented and may never change!
@@ -2368,10 +2494,32 @@ class OkapiHttpRequest extends OkapiRequest
     private function init_request()
     {
         $this->request = OAuthRequest::from_request();
-        if (!in_array($this->request->get_normalized_http_method(),
-            array('GET', 'POST')))
-        {
+
+        /* Verify if the request was issued with proper HTTP method. */
+
+        if (!in_array(
+            $this->request->get_normalized_http_method(),
+            array('GET', 'POST')
+        )) {
             throw new BadRequest("Use GET and POST methods only.");
+        }
+
+        /* Verify if the request was issued with proper okapi_base_url. */
+
+        $url = $this->request->get_normalized_http_url();
+        $allowed = false;
+        foreach (Okapi::get_allowed_base_urls() as $allowed_prefix) {
+            if (strpos($url, $allowed_prefix) === 0) {
+                $allowed = true;
+                break;
+            }
+        }
+        if (!$allowed) {
+            throw new BadRequest(
+                "Unrecognized base URL prefix! See `okapi_base_urls` field ".
+                "in the `services/apisrv/installation` method. (Recommended ".
+                "base URL to use is '".Okapi::get_recommended_base_url()."'.)"
+            );
         }
     }
 

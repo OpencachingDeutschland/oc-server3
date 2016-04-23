@@ -20,7 +20,8 @@ class WebService
     {
         $result = array();
         $result['site_url'] = Settings::get('SITE_URL');
-        $result['okapi_base_url'] = $result['site_url']."okapi/";
+        $result['okapi_base_url'] = Okapi::get_recommended_base_url();
+        $result['okapi_base_urls'] = Okapi::get_allowed_base_urls();
         $result['site_name'] = Okapi::get_normalized_site_name();
         $result['okapi_version_number'] = Okapi::$version_number;
         $result['okapi_revision'] = Okapi::$version_number; /* Important for backward-compatibility! */

@@ -22,8 +22,8 @@
     </opt>
     <opt name='only_locally_used' default='false'>
         <p>By default, all known attributes are returned - including those which
-        were used a couple of years back, or those which are used by other OC nodes
-        (and may perhaps be used by the local OC node in the future). If you're
+        were used a couple of years back, or those which are used by other OC sites
+        (and may perhaps be used by the local OC site in the future). If you're
         interested only in the attributes *currently used* within *this* Opencaching
         installation, then you may set this parameter to <b>true</b>.</p>
     </opt>

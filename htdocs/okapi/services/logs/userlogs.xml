@@ -13,7 +13,7 @@
         <p>Note: Some users have thousands of log entries!</p>
     </opt>
     <opt name='offset' default='0'>
-        <p>Combined with the <b>limit</b> argument, this gives you an abbility to get
+        <p>Combined with the <b>limit</b> argument, this gives you an ability to get
         <b>all</b> log entries of the user (with multiple requests).</p>
     </opt>
     <common-format-params/>

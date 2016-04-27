@@ -14,7 +14,7 @@
 <!--
 	var bNoCrypt = 0;
 	var last="";var rot13map;function decryptinit(){var a=new Array();var s="abcdefghijklmnopqrstuvwxyz";for(i=0;i<s.length;i++)a[s.charAt(i)]=s.charAt((i+13)%26);for(i=0;i<s.length;i++)a[s.charAt(i).toUpperCase()]=s.charAt((i+13)%26).toUpperCase();return a}
-	function decrypt(elem){if(elem.nodeType != 3) return; var a = elem.data;if(!rot13map)rot13map=decryptinit();s="";for(i=0;i<a.length;i++){var b=a.charAt(i);s+=(b>='A'&&b<='Z'||b>='a'&&b<='z'?rot13map[b]:b)}elem.data = s}
+	function decrypt(elem){if(elem.nodeType != 3) return; var a = elem.data;if(!rot13map)rot13map=decryptinit();s="";var dec=1;for(i=0;i<a.length;i++){var b=a.charAt(i);if(b=='[')dec=0;else if(b==']')dec=1;s+=(dec&&(b>='A'&&b<='Z'||b>='a'&&b<='z')?rot13map[b]:b);}elem.data = s}
 	
 	function visitCounter()
 	{
@@ -434,9 +434,9 @@ function showalllists()
   		<img src="resource2/{$opt.template.style}/images/description/22x22-encrypted.png" style="margin-right: 10px;" width="22" height="22" alt="" /> {t}Additional hint{/t}&nbsp;&nbsp;
   		<span id="decrypt-info">{if $crypt}
 				<img src="resource2/{$opt.template.style}/images/viewcache/decrypt.png" class="icon32" width="22" height="22" alt="" />
-				<span class="content-title-link" ><a href="viewcache.php?wp={$cache.wpoc}&nocrypt=1&desclang={$cache.desclanguage|urlencode}#decrypt-info" {literal}onclick="var ch = document.getElementById('decrypt-hints').childNodes;for(var i=0;i < ch.length;++i) {var e = ch[i]; decrypt(e);} document.getElementById('decrypt-info').style.display = 'none';
-				bNoCrypt = 1;
-				return false;"{/literal}>{t}Decrypt{/t}</a>{/if}</span>
+				<span class="content-title-link" ><a href="viewcache.php?wp={$cache.wpoc}&nocrypt=1&desclang={$cache.desclanguage|urlencode}#decrypt-info" {literal}onclick="var ch = document.getElementById('decrypt-hints').childNodes;for(var i=0;i < ch.length;++i) {var e = ch[i]; decrypt(e);}{/literal} document.getElementById('crypt-text').innerHTML = (bNoCrypt ? '{t}Decrypt{/t}' : '{t}Encrypt{/t}');
+				bNoCrypt = 1 - bNoCrypt;
+				return false;"><span id="crypt-text">{t}Decrypt{/t}</span></a>{/if}</span>
 			</span>
 		</p>
 	</div>

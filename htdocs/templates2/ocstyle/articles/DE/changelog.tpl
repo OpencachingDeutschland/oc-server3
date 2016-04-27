@@ -32,6 +32,15 @@
 
 	<div class="changelog-changes">
 
+	<p id="current"><strong>Laufende Änderungen</strong></p>
+	<ul>
+		<li>Entschlüsselte Hinweise können wieder verschlüsselt weden.</li>
+		<li>Hinweisteile in [ ] werden beim Entschlüsseln ignoriert.</li>
+		<li>Man kann zwischen den angehängten Bildern einer Cachebeschreibung blättern.</li>
+		<li>Vergrößerte Bilder werden mit einem Rechtsklick nicht mehr geschlossen.</li>
+	</ul>
+	<br />
+
 	<p id="v3.0.18"><strong>OC 3.0 Version 18</strong> &ndash; 31. März 2016</p>
 	<p>Neu:</p>
 	<ul>

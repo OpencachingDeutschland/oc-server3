@@ -128,7 +128,9 @@
 				INNER JOIN `cache_location` ON `cache_location`.`cache_id`=`cache_logs`.`cache_id`
 				LEFT JOIN `countries` ON `countries`.`short`=`caches`.`country`
 				LEFT JOIN `sys_trans_text` `stt` ON `stt`.`lang`='&2' AND `stt`.`trans_id`=`countries`.`trans_id`
+				LEFT JOIN `caches_attributes` `ca` ON `ca`.`cache_id`=`caches`.`cache_id` AND `ca`.`attrib_id`=61
 			WHERE `cache_logs`.`user_id`='&1' AND `cache_logs`.`type` IN (1,7)
+			  AND `ca`.`attrib_id` IS NULL
 			GROUP BY `country`, `state`
 			ORDER BY `count` DESC, `country`, `state`",
 			$userid, $opt['template']['locale'], $login->getUserCountry());
@@ -173,7 +175,9 @@
 				INNER JOIN `cache_location` ON `cache_location`.`cache_id`=`cache_logs`.`cache_id`
 				LEFT JOIN `countries` ON `countries`.`short`=`caches`.`country`
 				LEFT JOIN `sys_trans_text` `stt` ON `stt`.`lang`='&2' AND `stt`.`trans_id`=`countries`.`trans_id`
+				LEFT JOIN `caches_attributes` `ca` ON `ca`.`cache_id`=`caches`.`cache_id` AND `ca`.`attrib_id`=61
 			WHERE `cache_logs`.`user_id`='&1' AND `cache_logs`.`type` IN (1,7)
+			  AND `ca`.`attrib_id` IS NULL
 			GROUP BY `country`, `state`
 			ORDER BY `count` DESC, `country`, `state`",
 			$userid, $opt['template']['locale'], $login->getUserCountry());

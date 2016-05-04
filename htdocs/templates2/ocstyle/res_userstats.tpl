@@ -64,8 +64,8 @@
 								{$region.count} &nbsp;
 							</td>
 							<td class="default" style="padding:0">
-								{if !$region.state}<a href="search.php?showresult=1&amp;expert=0&amp;f_inactive=0&amp;output=HTML&amp;sort=byname&amp;finderid={$userid}&amp;searchbyfinder=&amp;logtype=1,7&amp;country={$region.countrycode}&amp;calledbysearch=0{if $oconly}&amp;cache_attribs=6{/if}">{$region.country}</a>{else}{$region.country}{/if}
-								 {if $region.state}&gt; <a href="search.php?showresult=1&amp;expert=0&amp;f_inactive=0&amp;output=HTML&amp;sort=byname&amp;finderid={$userid}&amp;searchbyfinder=&amp;logtype=1,7&amp;adm2={$region.adm2code}&amp;calledbysearch=0{if $oconly}&amp;cache_attribs=6{/if}">{$region.state}</a>{/if}
+								{if !$region.state}<a href="search.php?showresult=1&amp;expert=0&amp;f_inactive=0&amp;output=HTML&amp;sort=byname&amp;finderid={$userid}&amp;searchbyfinder=&amp;logtype=1,7&amp;country={$region.countrycode}&amp;calledbysearch=0{if $oconly}&amp;cache_attribs=6{/if}&amp;cache_attribs_not=61">{$region.country}</a>{else}{$region.country}{/if}
+								 {if $region.state}&gt; <a href="search.php?showresult=1&amp;expert=0&amp;f_inactive=0&amp;output=HTML&amp;sort=byname&amp;finderid={$userid}&amp;searchbyfinder=&amp;logtype=1,7&amp;adm2={$region.adm2code}&amp;calledbysearch=0{if $oconly}&amp;cache_attribs=6{/if}&amp;cache_attribs_not=61">{$region.state}</a>{/if}
 								&nbsp;<img src="images/flags/{$region.countrycode|lower}.gif" />
 							</td>
 						</tr>

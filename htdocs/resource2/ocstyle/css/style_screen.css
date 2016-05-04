@@ -732,9 +732,9 @@ p.startmessage { line-height: 1.4em; }
 /* Viewcache */
 #cache_name_block { width: 670px; padding-left: 5px; padding-top: 5px;}
 
-div.cachedesc {font-size: 120%; padding-bottom:6px; overflow:hidden; }
-div.cachedesc p {font-size: 100%; line-height:normal;}
-div.cachedesc-print p {line-height:normal;}
+div.cachedesc {font-size: 120%; line-height:1.3; padding-bottom:6px; overflow:hidden; }
+div.cachedesc p, div.cachedesc-print p {font-size: 100%; line-height:1.3;}
+div.cachedesc li, div.cachedesc-print li {line-height:1.4;}
 
 .showcode {font-family: monospace; font-weight: bold; font-size: 13px; color: rgb(255,0,0);}
 

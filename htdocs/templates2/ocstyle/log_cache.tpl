@@ -98,6 +98,7 @@ function logtype_changed()
 	var new_logtype = parseInt(document.editform.logtype.value);
 	var nm = document.getElementById('needs_maintenance');
 	var lo = document.getElementById('listing_outdated');
+	var confirm_Lo = document.getElementById('confirm_listing_ok');
 
 	if (((new_logtype == 2) != (old_logtype == 2)) ||
 	    (dnf_by_logger && (new_logtype == 3) != (old_logtype == 3)))
@@ -121,6 +122,7 @@ function logtype_changed()
 		lo.value = (old_logtype == 10 ? "0" : "1");
 		lo.disabled = (new_logtype == 10);
 		lo.className = (new_logtype == 10 ? 'disabled' : '');
+		confirm_Lo.value = (new_logtype == 10 ? "1" : "0");
 	}
 
 	old_logtype = new_logtype;
@@ -267,7 +269,9 @@ function show_tip(text)
 	</tr>
 	<tr><td class="spacer" colspan="2" id="confirm_listing_ok_spacer" style="display:none"></td></tr>
 	<tr id="confirm_listing_ok_row" style="display:none">
-		<td></td>
+		<td style="vertical-align:top">
+			{if $validate.confirmListingOk===false}<span class="errormsg">{t}Please confirm:{/t}</span>{/if}
+		</td>
 		<td>
 			<input type="checkbox" id="confirm_listing_ok" name="confirm_listing_ok" value="1" class="checkbox" {if $ownerlog}checked{/if}/> <label for="confirm_listing_ok">{t 1=$cache_listing_outdated_log}The problems of the cache description as mentioned in the <a href="%1" target="_blank"><img src="resource2/ocstyle/images/log/16x16-listing-outdated.png" /> log entries</a> do no longer exist.{/t} {if $gcwp}{t}All information (coordinates, container size, difficulty, terrain, description text, encoded hints, additional waypoints) is at least up-to-date with{/t} <a href="http://www.geocaching.com/seek/cache_details.aspx?wp={$gcwp}" target="_blank">{$gcwp}</a>.{/if}
 		</td>

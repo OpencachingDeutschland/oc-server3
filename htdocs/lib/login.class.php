@@ -42,7 +42,7 @@ class login
     public $admin = 0;
     public $verified = false;
 
-    public function login()
+    public function __construct()
     {
         global $cookie;
 
@@ -178,8 +178,9 @@ class login
 
         $this->verify();
 
-        if ($privilege === false)
+        if ($privilege === false) {
             return $this->admin > 0;
+        }
 
         return ($this->admin & $privilege) == $privilege;
     }
@@ -191,20 +192,27 @@ class login
         return $this->hasAdminPriv(ADMIN_LISTING) && $opt['logic']['admin']['enable_listing_admins'];
     }
 
-    function checkLoginsCount()
+    public function checkLoginsCount()
     {
         global $opt;
 
         // cleanup old entries
         // (execute only every 50 search calls)
-        if (rand(1, 50) == 1)
+        if (rand(1, 50) == 1) {
             sql("DELETE FROM `sys_logins` WHERE `date_created`<'&1'", date('Y-m-d H:i:s', time() - 3600));
+        }
 
         // check the number of logins in the last hour ...
-        $logins_count = sqlValue("SELECT COUNT(*) `count` FROM `sys_logins` WHERE `remote_addr`='" . sql_escape($_SERVER['REMOTE_ADDR']) . "' AND `date_created`>'" . sql_escape(date('Y-m-d H:i:s', time() - 3600)) . "'", 0);
-        if ($logins_count > $opt['page']['max_logins_per_hour'])
+        $logins_count = sqlValue(
+            "SELECT COUNT(*) `count` FROM `sys_logins` WHERE `remote_addr`='" . sql_escape(
+                $_SERVER['REMOTE_ADDR']
+            ) . "' AND `date_created`>'" . sql_escape(date('Y-m-d H:i:s', time() - 3600)) . "'",
+            0
+        );
+        if ($logins_count > $opt['page']['max_logins_per_hour']) {
             return false;
-        else
+        } else {
             return true;
+        }
     }
 }

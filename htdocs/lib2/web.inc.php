@@ -14,7 +14,9 @@
  ***************************************************************************/
 
 // setup rootpath
-if (!isset($opt['rootpath'])) $opt['rootpath'] = './';
+if (!isset($opt['rootpath'])) {
+    $opt['rootpath'] = './';
+}
 
 // chicken-egg problem ...
 require_once($opt['rootpath'] . 'lib2/const.inc.php');

@@ -53,7 +53,7 @@ function urlEncodeString($string)
 {
     return translateString(
         $string,
-        array(
+        [
             '.' => '%2E',
             '-' => '%2D',
             '_' => '%5F',
@@ -71,7 +71,7 @@ function urlEncodeString($string)
             // used in converting to IRC compatible nicks:
             '}' => '%7D',
             '{' => '%7B',
-        )
+        ]
     );
 }
 
@@ -82,7 +82,7 @@ function ircConvertString($string)
         // chars/replacement allowed OC usernames and not in IRC nickname
         //   . @ ä ü ö Ä Ü Ö = ) ( / & * + ~ #
         // (adjust if additional username chars are allowed)
-        array(
+        [
             '.' => '',
             '@' => '{at}',
             '=' => '-',
@@ -158,7 +158,7 @@ function ircConvertString($string)
             'ý' => 'y',
             'þ' => '',
             'ÿ' => 'y',
-        )
+        ]
     );
 }
 

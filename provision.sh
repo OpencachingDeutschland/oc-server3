@@ -148,7 +148,7 @@ cp ./htdocs/config2/settings-sample-vagrant.inc.php ./htdocs/config2/settings.in
 cp ./htdocs/lib/settings-sample-vagrant.inc.php ./htdocs/lib/settings.inc.php
 
 echo "download sql dump"
-wget -q http://cdn.opencaching.de/opencaching_dump.sql.gz -O opencaching_dump.sql.gz
+wget -q INSERT-URL-HERE -O opencaching_dump.sql.gz
 
 gzip -d opencaching_dump.sql.gz
 echo "import sql dump"

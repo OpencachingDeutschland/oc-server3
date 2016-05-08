@@ -114,9 +114,6 @@ if ($cacheId != 0) {
             $listingOutdated = 0;
         }
     }
-    if ($listingOutdated == 1 && !$confirmListingOk) {
-        $listingOutdated = 0;
-    }
 
     // if not a found log, ignore the rating
     $rateOption = ($logType == 1 || $logType == 7) + 0;
@@ -205,6 +202,11 @@ if ($cacheId != 0) {
     $validate['logPw'] = true;
     if (isset($_POST['submitform']) && $cache->requireLogPW()) {
         $validate['logPw'] = $cache->validateLogPW($logType, $_POST['log_pw']);
+    }
+
+    // check listing-ok-confirmation
+    if ($listingOutdated == 1 && !$confirmListingOk) {
+        $validate['confirmListingOk'] = false;
     }
 
     // check for errors

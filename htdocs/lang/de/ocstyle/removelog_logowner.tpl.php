@@ -8,15 +8,14 @@
  ****************************************************************************/
 
 /****************************************************************************
-	  
-   Unicode Reminder メモ
-                                       				                                
-	 remove a cache log
-		
-		cachename
-		logid_urlencode
-		log
-
+ *
+ * Unicode Reminder メモ
+ *
+ * remove a cache log
+ *
+ *      cachename
+ *      logid_urlencode
+ *      log
  ****************************************************************************/
 ?>
 <div class="content2-pagetitle"><img src="lang/de/ocstyle/images/description/22x22-logs.png" style="margin-right: 10px;" width="22" height="22"/>{t}remove log entry for <a href="viewcache.php?cacheid={cacheid}">{cachename}</a>{/t}</div>

@@ -8,13 +8,13 @@
  ****************************************************************************/
 
 /****************************************************************************
-
-   Unicode Reminder メモ
-
-	 set smiley array for replacing in logs
-
+ *
+ * Unicode Reminder メモ
+ *
+ * set smiley array for replacing in logs
  ****************************************************************************/
-$smileyimage = array(
+
+$smileyimage = [
 	'<img src="resource2/tinymce/plugins/emotions/img/smiley-smile.gif" alt=":)" border="0" width="18px" height="18px" />',
 	'<img src="resource2/tinymce/plugins/emotions/img/smiley-smile.gif" alt=":-)" border="0" width="18px" height="18px" />',
 	'<img src="resource2/tinymce/plugins/emotions/img/smiley-wink.gif" alt=";)" border="0" width="18px" height="18px" />',
@@ -34,72 +34,72 @@ $smileyimage = array(
 	'<img src="resource2/tinymce/plugins/emotions/img/smiley-undecided.gif" alt=":-/" border="0" width="18px" height="18px" />',
 	'<img src="resource2/tinymce/plugins/emotions/img/smiley-undecided.gif" alt=":/" border="0" width="18px" height="18px" />',
 	'<img src="resource2/tinymce/plugins/emotions/img/smiley-yell.gif" alt="X-O" border="0" width="18px" height="18px" />'
-);
+];
 
 
-$smileyname = array(
-	'smile',
-	'smile',
-	'wink',
-	'wink',
-	'laughing',
-	'cool',
-	'innocent',
-	'surprised',
-	'surprised',
-	'frown',
-	'frown',
-	'embarassed',
-	'cry',
-	'kiss',
-	'tongue-out',
-	'tongue-out',
-	'undecided',
-	'undecided',
-	'yell'
-);
+$smileyname = [
+    'smile',
+    'smile',
+    'wink',
+    'wink',
+    'laughing',
+    'cool',
+    'innocent',
+    'surprised',
+    'surprised',
+    'frown',
+    'frown',
+    'embarassed',
+    'cry',
+    'kiss',
+    'tongue-out',
+    'tongue-out',
+    'undecided',
+    'undecided',
+    'yell'
+];
 
 
-$smileytext = array(
-	" :) ",
-	" :-) ",
-	" ;) ",
-	" ;-) ",
-	" :D ",
-	" 8) ",
-	" O:) ",
-	" :-o ",
-	" :o ",
-	" :( ",
-	" :-( ",
-	" ::| ",
-	" :,-( ",
-	" :-* ",
-	" :P ",
-	" :-P ",
-	" :-/ ",
-	" :/ ",
-	" XO "
-);
+$smileytext = [
+    " :) ",
+    " :-) ",
+    " ;) ",
+    " ;-) ",
+    " :D ",
+    " 8) ",
+    " O:) ",
+    " :-o ",
+    " :o ",
+    " :( ",
+    " :-( ",
+    " ::| ",
+    " :,-( ",
+    " :-* ",
+    " :P ",
+    " :-P ",
+    " :-/ ",
+    " :/ ",
+    " XO "
+];
 
-$smileyshow = array(
-	'1',
-	'0',
-	'1',
-	'0',
-	'1',
-	'1',
-	'1',
-	'0',
-	'1',
-	'1',
-	'0',
-	'1',
-	'1',
-	'1',
-	'1',
-	'0',
-	'0',
-	'1',
-	'1'
-);
+$smileyshow = [
+    '1',
+    '0',
+    '1',
+    '0',
+    '1',
+    '1',
+    '1',
+    '0',
+    '1',
+    '1',
+    '0',
+    '1',
+    '1',
+    '1',
+    '1',
+    '0',
+    '0',
+    '1',
+    '1'
+];

@@ -1,26 +1,25 @@
 <?php
 /****************************************************************************
-											./lang/de/ocstyle/login.tpl.php
-															-------------------
-		begin                : Mon June 14 2004
-
-		For license information see doc/license.txt
+ * ./lang/de/ocstyle/login.tpl.php
+ * -------------------
+ * begin                : Mon June 14 2004
+ *
+ * For license information see doc/license.txt
  ****************************************************************************/
 
 /****************************************************************************
-	   
-   Unicode Reminder メモ
-                                      				                                
-	 login page
-	
-	 template replacement(s):
-	 
-	   username      default username
-	   message       message to display the user
-	   target        page to display after login
-
-	 Is called from lib1 pages when login is required, e.g. newcache.php.
-
+ *
+ * Unicode Reminder メモ
+ *
+ * login page
+ *
+ * template replacement(s):
+ *
+ * username      default username
+ * message       message to display the user
+ * target        page to display after login
+ *
+ * Is called from lib1 pages when login is required, e.g. newcache.php.
  ****************************************************************************/
 ?>
 

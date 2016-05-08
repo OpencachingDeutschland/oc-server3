@@ -139,7 +139,7 @@
 									<b><form action="{$opt.page.login_url}" method="post" enctype="application/x-www-form-urlencoded" name="login" dir="ltr" style="display: inline;">{t}User:{/t}&nbsp;&nbsp;<input name="email" size="10" type="text" class="textboxes" value="" />&nbsp;&nbsp;&nbsp;{t}Password:{/t}&nbsp;&nbsp;<input name="password" size="10" type="password" class="textboxes" value="" />&nbsp;<input type="hidden" name="action" value="login" /><input type="hidden" name="target" value="{$opt.page.target|escape}" /><input type="hidden" name="source" value="titlebar" />&nbsp;<input name="LogMeIn" value="{t}Login{/t}" class="formbutton" style="width: 74px;" type="submit" onclick="submitbutton('LogMeIn')" /></form></b>	
 								{else}  {* Ocprop: <a href="myhome.php">(.*?)<\/a>.*?<a href="login.php
 								                   <a href="myhome.php">.*?<a href="login.php\?action=logout"> *}
-									<b>{t}Logged in as{/t} <a href="myhome.php">{$login.username|escape}</a></b> - <a href="login.php?action=logout">{t}Logout{/t}</a>
+									<b>{t}Logged in as{/t} <a href="myhome.php" class="testing-top-left-corner-username">{$login.username|escape}</a></b> - <a href="login.php?action=logout">{t}Logout{/t}</a>
 								{/if}
 							{/nocache}
 						</td>

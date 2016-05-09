@@ -1,54 +1,52 @@
 <?php
 /****************************************************************************
-											./lang/de/ocstyle/main.tpl.php
-															-------------------
-		begin                : Mon June 14 2004
-
-		For license information see doc/license.txt
+ * ./lang/de/ocstyle/main.tpl.php
+ * -------------------
+ * begin                : Mon June 14 2004
+ *
+ * For license information see doc/license.txt
  ****************************************************************************/
 
 /****************************************************************************
-
-   Unicode Reminder メモ
-
-	 german main template
-
-	 template replacement(s):
-
-	   title          HTML page title
-	   lang           language
-	   style          style
-	   htmlheaders    additional HTML headers
-	   loginbox       login status (login form or username)
-	   functionsbox   available function on this site
-	   template       template to display
-	   runtime        computing time
-
+ *
+ * Unicode Reminder メモ
+ *
+ * german main template
+ *
+ * template replacement(s):
+ *
+ * title          HTML page title
+ * lang           language
+ * style          style
+ * htmlheaders    additional HTML headers
+ * loginbox       login status (login form or username)
+ * functionsbox   available function on this site
+ * template       template to display
+ * runtime        computing time
+ * @codingStandardsIgnoreStart
  ****************************************************************************/
 
 	//Menü laden
 	global $mnu_bgcolor, $mnu_selmenuitem, $develwarning, $tpl_subtitle, $opt, $rootpath, $usr;
 
 	require_once($stylepath . '/lib/menu.php');
-	if (function_exists('post_config'))
-		post_config();
+	if (function_exists('post_config')) {
+        post_config();
+    }
 
 	require_once($rootpath . 'lib2/smarty/ocplugins/function.season.php');
 
 	$sUserCountry = getUserCountry();
 	$pageidx = mnu_MainMenuIndexFromPageId($menu, $tplname);
 
-	if (isset($menu[$pageidx]['navicolor']))
-	{
-		$mnu_bgcolor = $menu[$pageidx]['navicolor'];
-	}
-	else
-	{
-		$mnu_bgcolor = '#D5D9FF';
-	}
+    $mnu_bgcolor = '#D5D9FF';
+    if (isset($menu[$pageidx]['navicolor'])) {
+        $mnu_bgcolor = $menu[$pageidx]['navicolor'];
+    }
 
-	if ($tplname != 'start')
-		$tpl_subtitle .= htmlspecialchars($mnu_selmenuitem['title'], ENT_COMPAT, 'UTF-8');
+	if ($tplname != 'start') {
+        $tpl_subtitle .= htmlspecialchars($mnu_selmenuitem['title'], ENT_COMPAT, 'UTF-8');
+    }
 	$tpl_subtitle .= ' - ' . htmlspecialchars($opt['locale'][$locale]['page']['subtitle1'], ENT_COMPAT, 'UTF-8');
 	$meta_keywords = htmlspecialchars($opt['page']['meta']['keywords'], ENT_COMPAT, 'UTF-8');
 	$meta_description = htmlspecialchars($opt['page']['meta']['description'], ENT_COMPAT, 'UTF-8');
@@ -77,16 +75,20 @@
       <script type="text/javascript">
 				<!--
 <?php
-					$seasons = array('winter' => 'resource2/ocstyle/css/seasons/style_winter.css',
-					                 'spring' => 'resource2/ocstyle/css/seasons/style_spring.css',
-					                 'summer' => 'resource2/ocstyle/css/seasons/style_summer.css',
-					                 'autumn' => 'resource2/ocstyle/css/seasons/style_autumn.css');
-					$seasons_stripe
-									 = array('winter' => 'resource2/ocstyle/css/seasons/style_langstripe_winter.css',
-					                 'spring' => 'resource2/ocstyle/css/seasons/style_langstripe_spring.css',
-					                 'summer' => 'resource2/ocstyle/css/seasons/style_langstripe_summer.css',
-					                 'autumn' => 'resource2/ocstyle/css/seasons/style_langstripe_autumn.css');
-					$smarty_dummy = 0;
+$seasons = [
+    'winter' => 'resource2/ocstyle/css/seasons/style_winter.css',
+    'spring' => 'resource2/ocstyle/css/seasons/style_spring.css',
+    'summer' => 'resource2/ocstyle/css/seasons/style_summer.css',
+    'autumn' => 'resource2/ocstyle/css/seasons/style_autumn.css'
+];
+
+$seasons_stripe = [
+    'winter' => 'resource2/ocstyle/css/seasons/style_langstripe_winter.css',
+    'spring' => 'resource2/ocstyle/css/seasons/style_langstripe_spring.css',
+    'summer' => 'resource2/ocstyle/css/seasons/style_langstripe_summer.css',
+    'autumn' => 'resource2/ocstyle/css/seasons/style_langstripe_autumn.css'
+];
+$smarty_dummy = 0;
 ?>
 					var nWindowWidth = 9999;
 					if (window.innerWidth)
@@ -154,19 +156,21 @@
 <?php
 									global $tpl_usercountries;
 									$nLastGroup = 0;
-									for ($i = 0; $i < count($tpl_usercountries); $i++)
+                                    $maxUserCountries = count($tpl_usercountries);
+									for ($i = 0; $i < $maxUserCountries; $i++)
 									{
 										if ($nLastGroup != $tpl_usercountries[$i]['group'])
 										{
 											echo '<option disabled="disabled">';
-											if ($tpl_usercountries[$i]['group'] == 1)
-												echo '- ' . t('This OC node') . ' -';
-											elseif ($tpl_usercountries[$i]['group'] == 2)
-												echo '- ' . t('Other OC nodes') . ' -';
-											elseif ($tpl_usercountries[$i]['group'] == 3)
-												echo '- ' . t('Others') . ' -';
-											else
-												echo '-';
+                                            if ($tpl_usercountries[$i]['group'] == 1) {
+                                                echo '- ' . t('This OC node') . ' -';
+                                            } elseif ($tpl_usercountries[$i]['group'] == 2) {
+                                                echo '- ' . t('Other OC nodes') . ' -';
+                                            } elseif ($tpl_usercountries[$i]['group'] == 3) {
+                                                echo '- ' . t('Others') . ' -';
+                                            } else {
+                                                echo '-';
+                                            }
 											echo '</option>';
 										}
 										$nLastGroup = $tpl_usercountries[$i]['group'];
@@ -218,7 +222,7 @@
 						<form action="searchplugin.php" method="post" style="display:inline;"><b>{t}Waypoint search:{/t}</b>&nbsp;<input type="hidden" name="sourceid" value="waypoint-search" /> <input type="text" name="userinput" size="10" /> <input type="submit" name="wpsearch" class="formbutton" style="width:auto" value="&nbsp;{t}Go{/t}&nbsp;" onclick="submitbutton('wpsearch')" /></form>
 					</div>
 				</div>
-			
+
 				<!-- NAVIGATION -->
 				<!-- Navigation Level 3 -->
 				<div class="nav3">
@@ -317,7 +321,7 @@
 						<?php mnu_EchoHelpLink($tplname); ?>
 			        <!--[if IE]><div></div><![endif]-->
 					</div>
-			
+
 					<div id="ocmain">
 						{template}
 					</div>

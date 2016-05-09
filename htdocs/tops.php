@@ -5,16 +5,16 @@
  *  Unicode Reminder メモ
  ***************************************************************************/
 
-	require('./lib2/web.inc.php');
-	$tpl->name = 'tops';
-	$tpl->menuitem = MNU_CACHES_TOPS;
+require('./lib2/web.inc.php');
+$tpl->name = 'tops';
+$tpl->menuitem = MNU_CACHES_TOPS;
 
-	$tpl->caching = true;
-	$tpl->cache_lifetime = 600;
+$tpl->caching = true;
+$tpl->cache_lifetime = 600;
 
-	if (!$tpl->is_cached())
-	{
-		$rs = sql("SELECT IFNULL(`sys_trans_text`.`text`,`countries`.`en`) AS `adm1`,
+if (!$tpl->is_cached()) {
+    $rs = sql(
+        "SELECT IFNULL(`sys_trans_text`.`text`,`countries`.`en`) AS `adm1`,
 		                  IF(`cache_location`.`code1`=`caches`.`country`,`cache_location`.`adm3`,NULL) AS `adm3`,
 		                  `caches`.`country` AS `code1`,
 		                  `rating_tops`.`rating` AS `idx`, `stat_caches`.`toprating` AS `ratings`, `stat_caches`.`found` AS `founds`,
@@ -31,10 +31,12 @@
 		         ORDER BY `adm1` ASC,
 		                  `adm3` ASC,
 		                  `rating_tops`.`rating` DESC,
-		                  `caches`.`name` ASC", $opt['template']['locale']);
-		$tpl->assign_rs('tops', $rs);
-		sql_free_result($rs);
-	}
+		                  `caches`.`name` ASC",
+        $opt['template']['locale']
+    );
+    $tpl->assign_rs('tops', $rs);
+    sql_free_result($rs);
+}
 
-	$tpl->assign('helppagelink', helppagelink('tops'));
-	$tpl->display();
+$tpl->assign('helppagelink', helppagelink('tops'));
+$tpl->display();

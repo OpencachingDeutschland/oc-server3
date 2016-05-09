@@ -5,52 +5,53 @@
  *  Unicode Reminder メモ
  ***************************************************************************/
 
-	require('./lib2/web.inc.php');
-	require_once('./lib2/logic/cache.class.php');
+require('./lib2/web.inc.php');
+require_once('./lib2/logic/cache.class.php');
 
-	$tpl->name = 'viewlogs';
-	$tpl->menuitem = MNU_CACHES_VIEWLOGS;
+$tpl->name = 'viewlogs';
+$tpl->menuitem = MNU_CACHES_VIEWLOGS;
 
-	// 'tagloadlogs' produces a stripped-down version of the loglist for
-	// log autoloading (see viewcache.php). The actual log block to be inserted
-	// is tagged with <ocloadlogs>...</ocloadlogs>.
-	$tagloadlogs = (@$_REQUEST['tagloadlogs'] == 1);
-	$tpl->popup = $tagloadlogs;
+// 'tagloadlogs' produces a stripped-down version of the loglist for
+// log autoloading (see viewcache.php). The actual log block to be inserted
+// is tagged with <ocloadlogs>...</ocloadlogs>.
+$tagloadlogs = (@$_REQUEST['tagloadlogs'] == 1);
+$tpl->popup = $tagloadlogs;
 
-	$login->verify();
+$login->verify();
 
-	$cache_id = 0;
-	if (isset($_REQUEST['cacheid']))
-	{
-		$cache_id = $_REQUEST['cacheid'];
-	}
-	else if (isset($_REQUEST['wp']))
-	{
-		$cache_id = sql_value("SELECT `cache_id` FROM `caches` WHERE `wp_oc`='&1'", "", $_REQUEST['wp']);
-	}
-	$start = 0;
-	if (isset($_REQUEST['start']))
-	{
-		$start = $_REQUEST['start'];
-		if (!is_numeric($start)) $start = 0;
-	}
-	$count = 5000;
-	if (isset($_REQUEST['count']))
-	{
-		$count = $_REQUEST['count'];
-		if (!is_numeric($count)) $count = 5000;
-	}
-	$admin_access = ($login->admin && ADMIN_USER) > 0;
-	$deleted = @$_REQUEST['deleted'] > 0 && $admin_access;
+$cache_id = 0;
+if (isset($_REQUEST['cacheid'])) {
+    $cache_id = $_REQUEST['cacheid'];
+} else {
+    if (isset($_REQUEST['wp'])) {
+        $cache_id = sql_value("SELECT `cache_id` FROM `caches` WHERE `wp_oc`='&1'", '', $_REQUEST['wp']);
+    }
+}
+$start = 0;
+if (isset($_REQUEST['start'])) {
+    $start = $_REQUEST['start'];
+    if (!is_numeric($start)) {
+        $start = 0;
+    }
+}
+$count = 5000;
+if (isset($_REQUEST['count'])) {
+    $count = $_REQUEST['count'];
+    if (!is_numeric($count)) {
+        $count = 5000;
+    }
+}
+$admin_access = ($login->admin && ADMIN_USER) > 0;
+$deleted = @$_REQUEST['deleted'] > 0 && $admin_access;
 
-	//$tpl->caching = true;
-	//$tpl->cache_lifetime = 31*24*60*60;
-	//$tpl->cache_id = $cache_id . '|' . $start . '|' . $count;
+//$tpl->caching = true;
+//$tpl->cache_lifetime = 31*24*60*60;
+//$tpl->cache_id = $cache_id . '|' . $start . '|' . $count;
 
-	if ($cache_id != 0)
-	{
-		//get cache record
-		$rs = sql("
+if ($cache_id != 0) {
+    //get cache record
+    $rs = sql(
+        "
 			SELECT
 				`caches`.`cache_id`, `caches`.`wp_oc` AS `wpoc`, `caches`.`cache_id` AS `cacheid`,
 				`caches`.`user_id` AS `userid`, `caches`.`name`,
@@ -67,26 +68,27 @@
 			LEFT JOIN `stat_caches` ON `caches`.`cache_id`=`stat_caches`.`cache_id`
 			INNER JOIN `user` ON `caches`.`user_id`=`user`.`user_id`
 			WHERE `caches`.`cache_id`='&1'",
-			$cache_id);
-		$rCache = sql_fetch_array($rs);
-		sql_free_result($rs);
+        $cache_id
+    );
+    $rCache = sql_fetch_array($rs);
+    sql_free_result($rs);
 
-		if ($rCache === false)
-			$tpl->error(ERROR_CACHE_NOT_EXISTS);
-		else
-		{
-			if ($rCache['allow_user_view'] != 1 && $rCache['userid'] != $login->userid && !$admin_access)
-				$tpl->error(ERROR_NO_ACCESS);
-		}
-	}
-	else
-		$tpl->error(ERROR_CACHE_NOT_EXISTS);
+    if ($rCache === false) {
+        $tpl->error(ERROR_CACHE_NOT_EXISTS);
+    } else {
+        if ($rCache['allow_user_view'] != 1 && $rCache['userid'] != $login->userid && !$admin_access) {
+            $tpl->error(ERROR_NO_ACCESS);
+        }
+    }
+} else {
+    $tpl->error(ERROR_CACHE_NOT_EXISTS);
+}
 
-	$rCache['adminlog'] = ($login->admin & ADMIN_USER);
-	$tpl->assign('cache', $rCache);
+$rCache['adminlog'] = ($login->admin & ADMIN_USER);
+$tpl->assign('cache', $rCache);
 
-	$tpl->assign('logs', cache::getLogsArray($cache_id, $start, $count, $deleted, $rCache['protect_old_coords']));
-	$tpl->assign('tagloadlogs', $tagloadlogs);
-	
+$tpl->assign('logs', cache::getLogsArray($cache_id, $start, $count, $deleted, $rCache['protect_old_coords']));
+$tpl->assign('tagloadlogs', $tagloadlogs);
 
-	$tpl->display();
+
+$tpl->display();

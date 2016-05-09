@@ -5,7 +5,7 @@
  *  Unicode Reminder メモ
  ***************************************************************************/
 
-require_once($opt['rootpath'] . 'lib2/translate.class.php');
+require_once(__DIR__ . '/../../lib2/translate.class.php');
 
 class Language_Translator
 {

@@ -11,7 +11,7 @@ $dev_baseurl = 'http://local.opencaching.de';
 // database acccess
 $dbserver = 'localhost';
 $dbusername = 'root';
-$dbpasswd = '';
+$dbpasswd = 'root';
 $dbpconnect = false;
 // database names
 $dbname = 'opencaching';

@@ -108,7 +108,7 @@ function read_file($file = '')
 // explode with more than one separator
 function explode_multi($str, $sep)
 {
-    $ret = array();
+    $ret = [];
     $nCurPos = 0;
 
     while ($nCurPos < mb_strlen($str)) {
@@ -227,7 +227,7 @@ function sql($sql)
         unset($args);
 
         // correct indizes
-        $args = array_merge(array(0), $tmp_args);
+        $args = array_merge([0], $tmp_args);
         unset($tmp_args);
         unset($args[0]);
     }
@@ -248,7 +248,7 @@ function sql_slave($sql)
         unset($args);
 
         // correct indizes
-        $args = array_merge(array(0), $tmp_args);
+        $args = array_merge([0], $tmp_args);
         unset($tmp_args);
         unset($args[0]);
     }
@@ -280,7 +280,7 @@ function sql_internal($_dblink, $sql, $bSlave)
         unset($args);
 
         // correct indizes
-        $args = array_merge(array(0), $tmp_args);
+        $args = array_merge([0], $tmp_args);
         unset($tmp_args);
         unset($args[0]);
     }
@@ -320,9 +320,19 @@ function sql_internal($_dblink, $sql, $bSlave)
                     if (is_numeric($args[$arg])) {
                         $filtered_sql .= $args[$arg];
                     } else {
-                        if ((mb_substr($sql, $sqlpos - $arglength - 1, 1) == '\'') && (mb_substr($sql, $sqlpos + 1, 1) == '\'')) {
+                        if ((mb_substr($sql, $sqlpos - $arglength - 1, 1) == '\'') && (mb_substr(
+                                    $sql,
+                                    $sqlpos + 1,
+                                    1
+                                ) == '\'')
+                        ) {
                             $filtered_sql .= sql_escape($args[$arg]);
-                        } elseif ((mb_substr($sql, $sqlpos - $arglength - 1, 1) == '`') && (mb_substr($sql, $sqlpos + 1, 1) == '`')) {
+                        } elseif ((mb_substr($sql, $sqlpos - $arglength - 1, 1) == '`') && (mb_substr(
+                                    $sql,
+                                    $sqlpos + 1,
+                                    1
+                                ) == '`')
+                        ) {
                             $filtered_sql .= sql_escape($args[$arg]);
                         } else {
                             sql_error();
@@ -330,7 +340,12 @@ function sql_internal($_dblink, $sql, $bSlave)
                     }
                 } else {
                     // NULL
-                    if ((mb_substr($sql, $sqlpos - $arglength - 1, 1) == '\'') && (mb_substr($sql, $sqlpos + 1, 1) == '\'')) {
+                    if ((mb_substr($sql, $sqlpos - $arglength - 1, 1) == '\'') && (mb_substr(
+                                $sql,
+                                $sqlpos + 1,
+                                1
+                            ) == '\'')
+                    ) {
                         // Anführungszeichen weg machen und NULL einsetzen
                         $filtered_sql = mb_substr($filtered_sql, 0, mb_strlen($filtered_sql) - 1);
                         $filtered_sql .= 'NULL';
@@ -376,7 +391,11 @@ function sql_internal($_dblink, $sql, $bSlave)
     $nextarg = mb_strpos($filtered_sql, '\&');
     while ($nextarg !== false) {
         $escapesCount = 0;
-        while ((($nextarg - $escapesCount - 1) > 0) && (mb_substr($filtered_sql, $nextarg - $escapesCount - 1, 1) == '\\')) {
+        while ((($nextarg - $escapesCount - 1) > 0) && (mb_substr(
+                    $filtered_sql,
+                    $nextarg - $escapesCount - 1,
+                    1
+                ) == '\\')) {
             $escapesCount ++;
         }
         if (($escapesCount % 2) == 0) {
@@ -532,7 +551,7 @@ function sql_fetch_row($rs)
 
 function sql_fetch_column($rs)
 {
-    $col = array();
+    $col = [];
     while ($r = sql_fetch_row($rs)) {
         if (count($r) != 1) {
             return null;
@@ -643,13 +662,19 @@ function db_connect_anyslave()
 
     $nMaxTimeDiff = $opt['db']['slave']['max_behind'];
     if ($usr !== false) {
-        $nMaxTimeDiff = sqlValue("SELECT TIMESTAMP(NOW())-TIMESTAMP(`datExclude`) FROM `sys_repl_exclude` WHERE `user_id`='" . ($usr['userid'] + 0) . "'", $opt['db']['slave']['max_behind']);
+        $nMaxTimeDiff = sqlValue(
+            "SELECT TIMESTAMP(NOW())-TIMESTAMP(`datExclude`) FROM `sys_repl_exclude` WHERE `user_id`='" . ($usr['userid'] + 0) . "'",
+            $opt['db']['slave']['max_behind']
+        );
         if ($nMaxTimeDiff > $opt['db']['slave']['max_behind']) {
             $nMaxTimeDiff = $opt['db']['slave']['max_behind'];
         }
     }
 
-    $id = sqlValue("SELECT `id`, `weight`*RAND() AS `w` FROM `sys_repl_slaves` WHERE `active`=1 AND `online`=1 AND (TIMESTAMP(NOW())-TIMESTAMP(`last_check`)+`time_diff`<'" . ($nMaxTimeDiff + 0) . "') ORDER BY `w` DESC LIMIT 1", - 1);
+    $id = sqlValue(
+        "SELECT `id`, `weight`*RAND() AS `w` FROM `sys_repl_slaves` WHERE `active`=1 AND `online`=1 AND (TIMESTAMP(NOW())-TIMESTAMP(`last_check`)+`time_diff`<'" . ($nMaxTimeDiff + 0) . "') ORDER BY `w` DESC LIMIT 1",
+        - 1
+    );
 
     if ($id == - 1) {
         $dblink_slave = $dblink;
@@ -727,10 +752,10 @@ function get_site_urls($domain)
         }
     }
 
-    return array(
+    return [
         'site_url' => $site_url,
         'shortlink_url' => $shortlink_url
-    );
+    ];
 }
 
 function fetch_email_template($filename, $language, $domain)

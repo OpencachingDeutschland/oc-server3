@@ -38,15 +38,11 @@ class Cbench
 
     public function diff()
     {
-        $result = $this->stop - $this->start;
-
-        return $result;
+        return $this->stop - $this->start;
     }
 
     public function runTime()
     {
-        $result = $this->getmicrotime() - $this->start;
-
-        return $result;
+        return $this->getmicrotime() - $this->start;
     }
 }

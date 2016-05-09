@@ -5,7 +5,7 @@
  *  Unicode Reminder メモ
  ***************************************************************************/
 
-require_once(__DIR__ . '/HTMLPurifier/library/HTMLPurifier.auto.php');
+require_once(__DIR__ . '/../vendor/autoload.php');
 require_once(__DIR__ . '/Net/IDNA2.php');
 
 // !! THIS CODE IS ALSO USED IN OKAPI !!
@@ -36,10 +36,13 @@ class OcHTMLPurifier extends HTMLPurifier
         $config->set('HTML.AllowedCommentsRegexp', '/.*/');
 
         // enable href target='_blank'
-        $config->set('Attr.AllowedFrameTargets', array(
-            '_blank',
-            'blank'
-        ));
+        $config->set(
+            'Attr.AllowedFrameTargets',
+            [
+                '_blank',
+                'blank'
+            ]
+        );
 
         // enable ids/names with namespace 'custom_'
         $config->set('Attr.EnableID', true);
@@ -60,16 +63,22 @@ class OcHTMLPurifier extends HTMLPurifier
             'Common' /* ,array('disabled' => 'Enum#disabled', 'name' => 'ID') */
         ); //  HTML5 attribs currently not supported by TinyMCE
         $def->addElement('legend', 'Inline', 'Flow', 'Common');
-        $def->addElement('q', 'Inline', 'Inline', 'Common', array('cite' => 'URI'));
+        $def->addElement('q', 'Inline', 'Inline', 'Common', ['cite' => 'URI']);
         $def->addElement('strike', 'Inline', 'Inline', 'Common');   // -> wird in CSS umgewandelt
-        $def->addElement('area', 'Inline', 'Empty', 'Common', array(
-            'alt' => 'CDATA',
-            'coords' => 'CDATA',
-            'href' => 'URI',
-            'shape' => 'Enum#default,rect,circle,poly',
-            'target' => 'Enum#_blank,blank'
-        ));
-        $def->addElement('map', 'Block', new HTMLPurifier_ChildDef_Optional('area'), 'Common', array('name' => 'ID'));
+        $def->addElement(
+            'area',
+            'Inline',
+            'Empty',
+            'Common',
+            [
+                'alt' => 'CDATA',
+                'coords' => 'CDATA',
+                'href' => 'URI',
+                'shape' => 'Enum#default,rect,circle,poly',
+                'target' => 'Enum#_blank,blank'
+            ]
+        );
+        $def->addElement('map', 'Block', new HTMLPurifier_ChildDef_Optional('area'), 'Common', ['name' => 'ID']);
 
         // add attributes
         $def->addAttribute('img', 'usemap', 'CDATA');

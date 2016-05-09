@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit>
+    <testsuites>
+        <testsuite name="default">
+            <directory>tests</directory>
+        </testsuite>
+        <testsuite name="login">
+            <directory>tests/Oc/Login/LoginTest</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>

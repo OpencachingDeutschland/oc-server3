@@ -1,23 +1,22 @@
 <?php
 /****************************************************************************
-											./lang/de/ocstyle/error.tpl.php
-															-------------------
-		begin                : Mon June 14 2004
-
-		For license information see doc/license.txt
+ * ./lang/de/ocstyle/error.tpl.php
+ * -------------------
+ * begin                : Mon June 14 2004
+ *
+ * For license information see doc/license.txt
  ****************************************************************************/
 
 /****************************************************************************
-	  
-   Unicode Reminder メモ
-                                       				                                
-	 Critical error messages for the user
-	
-	 template replacement(s):
-	 
-	   tplname       Name of the template in which the error occurs
-	   error_msg     message to display the user
-	
+ *
+ * Unicode Reminder メモ
+ *
+ * Critical error messages for the user
+ *
+ * template replacement(s):
+ *
+ * tplname       Name of the template in which the error occurs
+ * error_msg     message to display the user
  ****************************************************************************/
 ?>
 		  <div class="content2-pagetitle"><img src="resource2/ocstyle/images/misc/32x32-gears.png" style="margin-right: 10px;" width="32" height="32" />{t}error while loading the page{/t}</div>

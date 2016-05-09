@@ -536,6 +536,9 @@ function tpl_BuildTemplate($dbdisconnect = true)
     //process the template replacements
     $sCode = tpl_do_replace($sCode);
 
+    // fixing path issue
+    $sCode = str_replace('lib2/smarty/ocplugins/', 'src/Oc/SmartyPlugins/', $sCode);
+
     //store the cookie
     write_cookie_settings();
 

@@ -22,12 +22,12 @@
 		automatically included when the 'queryid' parameter is given.
 
   search type options:
-    searchbyname
+        searchbyname
 		searchbydistance
 		searchbyowner
 		searchbyfinder
-		searchbyplz
-		searchbyort
+		searchbyortplz
+        searchbywaypoint
 		searchbyfulltext
 		searchbynofilter
 		searchbycacheid
@@ -230,8 +230,8 @@
 			unset($_REQUEST['searchbydistance']);
 			unset($_REQUEST['searchbyowner']);
 			unset($_REQUEST['searchbyfinder']);
-			unset($_REQUEST['searchbyplz']);
-			unset($_REQUEST['searchbyort']);
+			unset($_REQUEST['searchbyortplz']);
+            unset($_REQUEST['searchbywaypoint']);
 			unset($_REQUEST['searchbyfulltext']);
 			unset($_REQUEST['searchbynofilter']);
 			unset($_REQUEST['searchall']);
@@ -306,8 +306,9 @@
 		{
 			$options['searchtype'] = 'byname';
 			$options['cachename'] = isset($_REQUEST['cachename']) ? stripslashes($_REQUEST['cachename']) : '';
-        if (!isset($_REQUEST['utf8']))
-         $options['cachename'] = iconv("ISO-8859-1", "UTF-8", $options['cachename']);
+
+            if (!isset($_REQUEST['utf8']))
+                $options['cachename'] = iconv("ISO-8859-1", "UTF-8", $options['cachename']);
 		}
 		elseif (isset($_REQUEST['searchbyowner']))  // Ocprop
 		{
@@ -324,22 +325,28 @@
 			$options['finder'] = isset($_REQUEST['finder']) ? stripslashes($_REQUEST['finder']) : '';
 			$options['logtype'] = isset($_REQUEST['logtype']) ? $_REQUEST['logtype'] : '1,7';  // Ocprop
 		}
-		elseif (isset($_REQUEST['searchbyort']))
+		elseif (isset($_REQUEST['searchbyortplz']))
 		{
-			$options['searchtype'] = 'byort';
-
-			$options['ort'] = isset($_REQUEST['ort']) ? stripslashes($_REQUEST['ort']) : '';
+			$onlydigits = is_numeric($_REQUEST['ortplz']);
+			if ($onlydigits == true) {
+				$options['searchtype'] = 'byplz';
+			}
+			elseif ($onlydigits == false) {
+				$options['searchtype'] = 'byort';
+			}
+			$options['ortplz'] = isset($_REQUEST['ortplz']) ? stripslashes($_REQUEST['ortplz']) : '';
 			$options['locid'] = isset($_REQUEST['locid']) ? $_REQUEST['locid'] : 0;
 			$options['locid'] = $options['locid'] + 0;
-		}
-		elseif (isset($_REQUEST['searchbyplz']))
-		{
-			$options['searchtype'] = 'byplz';
 
-			$options['plz'] = isset($_REQUEST['plz']) ? stripslashes($_REQUEST['plz']) : '';
-			$options['locid'] = isset($_REQUEST['locid']) ? $_REQUEST['locid'] : 0;
-			$options['locid'] = $options['locid'] + 0;
+			$options['distance'] = isset($_REQUEST['distance']) ? $_REQUEST['distance'] : 0;
 		}
+        elseif (isset($_REQUEST['searchbywaypoint'])){
+            $options['searchtype'] = 'bywaypoint';
+
+            $options['waypoint'] = isset($_REQUEST['waypoint']) ? stripslashes($_REQUEST['waypoint']) : '';
+            $options['distance'] = isset($_REQUEST['distance']) ? $_REQUEST['distance'] : 0;
+
+        }
 		elseif (isset($_REQUEST['searchbydistance']))
 		{
 			$options['searchtype'] = 'bydistance';
@@ -444,7 +451,7 @@
 		$options['terrainmax'] = isset($_REQUEST['terrainmax']) ? $_REQUEST['terrainmax']+0 : 0;
 		$options['recommendationmin'] = isset($_REQUEST['recommendationmin']) ? $_REQUEST['recommendationmin']+0 : 0;
 
-		if (in_array($options['searchtype'], array('byort','byplz','bydistance')))
+		if (in_array($options['searchtype'], array('byort','byplz','bydistance','bywaypoint')))
 		{
 			// For distance-based searches, sort by distance instead of name.
 			if ($options['sort'] == 'byname')
@@ -574,82 +581,64 @@
 			{
 				$locid = $options['locid'];
 
-				if ($options['searchtype'] == 'byplz')
-				{
-					if ($locid == 0)
-					{
-						$plz = $options['plz'];
-
-						$sql = "SELECT `loc_id` FROM `geodb_textdata` WHERE `text_type`=500300000 AND `text_val`='" . sql_escape($plz) . "'";
-						$rs = sql($sql);
-						if (sql_num_rows($rs) == 0)
+                if ($options['searchtype'] == 'byplz')
+                {
+                    if ($locid == 0)
+                    {
+                        if (isset($options['ortplz']))
 						{
-							sql_free_result($rs);
-							$options['error_plz'] = true;
-							outputSearchForm($options);
-							exit;
-						}
-						elseif (sql_num_rows($rs) == 1)
-						{
-							$r = sql_fetch_array($rs);
-							sql_free_result($rs);
-							$locid = $r['loc_id'];
+							$plz = $options['ortplz'];
 						}
 						else
 						{
-							sql_free_result($rs);
-							// ok, viele locations ... alle auflisten ...
-							outputLocidSelectionForm($sql, $options);
-							exit;
+							$plz = $options['plz'];
 						}
-					}
+                        $sql = "SELECT `loc_id` FROM `geodb_textdata` WHERE `text_type`=500300000 AND `text_val`='" . sql_escape($plz) . "'";
+                        $rs = sql($sql);
+                        if (sql_num_rows($rs) == 0)
+                        {
+                            sql_free_result($rs);
+                            $options['error_plz'] = true;
+                            outputSearchForm($options);
+                            exit;
+                        }
+                        elseif (sql_num_rows($rs) == 1)
+                        {
+                            $r = sql_fetch_array($rs);
+                            sql_free_result($rs);
+                            $locid = $r['loc_id'];
+                        }
+                        else
+                        {
+                            sql_free_result($rs);
+                            // ok, viele locations ... alle auflisten ...
+                            outputLocidSelectionForm($sql, $options);
+                            exit;
+                        }
+                    }
+                    // ok, wir haben einen ort ... koordinaten ermitteln
+                    $locid = $locid + 0;
+                    $rs = sql('SELECT `lon`, `lat` FROM `geodb_coordinates` WHERE `loc_id`=' . $locid . ' AND coord_type=200100000');
+                    if (isset($rs) && $r = sql_fetch_array($rs))
+                    {
+                        // ok ... wir haben koordinaten ...
+                        $lat = $r['lat'] + 0;
+                        $lon = $r['lon'] + 0;
+						sql_free_result($rs);
 
-					// ok, wir haben einen ort ... koordinaten ermitteln
-					$locid = $locid + 0;
-					$rs = sql('SELECT `lon`, `lat` FROM `geodb_coordinates` WHERE `loc_id`=' . $locid . ' AND coord_type=200100000');
-					if ($r = sql_fetch_array($rs))
-					{
-						// ok ... wir haben koordinaten ...
+                        $lon_rad = $lon * 3.14159 / 180;
+                        $lat_rad = $lat * 3.14159 / 180;
 
-						$lat = $r['lat'] + 0;
-						$lon = $r['lon'] + 0;
+                        $distance = $options['distance'];
+                        $distance_unit = $options['unit'];
 
-						$distance_unit = $DEFAULT_DISTANCE_UNIT;
-						$distance = $DEFAULT_SEARCH_DISTANCE;
-
-						// ab hier selber code wie bei bydistance ... TODO: in funktion auslagern
-
-						//all target caches are between lat - max_lat_diff and lat + max_lat_diff
-						$max_lat_diff = $distance / (111.12 * $multiplier[$distance_unit]);
-
-						//all target caches are between lon - max_lon_diff and lon + max_lon_diff
-						//TODO: check!!!
-						$max_lon_diff = $distance * 180 / (abs(sin((90 - $lat) * 3.14159 / 180 )) * 6378 * $multiplier[$distance_unit] * 3.14159);
-
-						$lon_rad = $lon * 3.14159 / 180;
-						$lat_rad = $lat * 3.14159 / 180;
-
-						sql_temp_table_slave('result_caches');
-						$cachesFilter =
-											 'CREATE TEMPORARY TABLE &result_caches ENGINE=MEMORY
-												SELECT
-													(' . geomath::getSqlDistanceFormula($lon, $lat, $distance, $multiplier[$distance_unit]) . ') `distance`,
-													`caches`.`cache_id` `cache_id`
-												FROM `caches` FORCE INDEX (`latitude`)
-												WHERE `longitude` > ' . ($lon - $max_lon_diff) . '
-													AND `longitude` < ' . ($lon + $max_lon_diff) . '
-													AND `latitude` > ' . ($lat - $max_lat_diff) . '
-													AND `latitude` < ' . ($lat + $max_lat_diff) . '
-												HAVING `distance` < ' . ($distance+0);
-						sql_slave($cachesFilter);
-						sql_slave('ALTER TABLE &result_caches ADD PRIMARY KEY ( `cache_id` )');
-
-						$sql_select[] = '&result_caches.`cache_id`';
-						$sql_from = '&result_caches';
-						$sql_innerjoin[] = '`caches` ON `caches`.`cache_id`=&result_caches.`cache_id`';
-					}
+                        sqlStringbySearchradius($distance, $lat, $lon, $multiplier, $distance_unit);
+                    }
 					else
 					{
+						if (isset($rs)) {
+							sql_free_result($rs);
+						}
 						$options['error_locidnocoords'] = true;
 						outputSearchForm($options);
 						exit;
@@ -659,8 +648,15 @@
 				{
 					if ($locid == 0)
 					{
-						$ort = $options['ort'];
-						$simpletexts = search_text2sort($ort,true);
+						if (isset($options['ortplz']))
+						{
+							$ort = $options['ortplz'];
+						}
+						else
+						{
+							$ort = $options['ort'];
+						}
+						$simpletexts = search_text2sort($ort, true);
 						$simpletextsarray = explode_multi($simpletexts, ' -/,');
 
 						$sqlhashes = '';
@@ -754,55 +750,123 @@
 					// ok, wir haben einen ort ... koordinaten ermitteln
 					$locid = $locid + 0;
 					$rs = sql_slave('SELECT `lon`, `lat` FROM `gns_locations` WHERE `uni`=' . $locid . ' LIMIT 1');
-					if ($r = sql_fetch_array($rs))
+					if (isset($rs) && $r = sql_fetch_array($rs))
 					{
 						// ok ... wir haben koordinaten ...
 
 						$lat = $r['lat'] + 0;
 						$lon = $r['lon'] + 0;
+						sql_free_result($rs);
 
 						$lon_rad = $lon * 3.14159 / 180;
 						$lat_rad = $lat * 3.14159 / 180;
 
-						$distance_unit = $DEFAULT_DISTANCE_UNIT;
-						$distance = $DEFAULT_SEARCH_DISTANCE;
+						$distance = $options['distance'];
+						$distance_unit = $options['unit'];
 
-						// ab hier selber code wie bei bydistance ... TODO: in funktion auslagern
-
-						//all target caches are between lat - max_lat_diff and lat + max_lat_diff
-						$max_lat_diff = $distance / (111.12 * $multiplier[$distance_unit]);
-
-						//all target caches are between lon - max_lon_diff and lon + max_lon_diff
-						//TODO: check!!!
-						$max_lon_diff = $distance * 180 / (abs(sin((90 - $lat) * 3.14159 / 180 )) * 6378 * $multiplier[$distance_unit] * 3.14159);
-
-						sql_temp_table_slave('result_caches');
-						$cachesFilter =
-											 'CREATE TEMPORARY TABLE &result_caches ENGINE=MEMORY
-												SELECT
-													(' . geomath::getSqlDistanceFormula($lon, $lat, $distance, $multiplier[$distance_unit]) . ') `distance`,
-													`caches`.`cache_id` `cache_id`
-												FROM `caches` FORCE INDEX (`latitude`)
-												WHERE `longitude` > ' . ($lon - $max_lon_diff) . '
-													AND `longitude` < ' . ($lon + $max_lon_diff) . '
-													AND `latitude` > ' . ($lat - $max_lat_diff) . '
-													AND `latitude` < ' . ($lat + $max_lat_diff) . '
-												HAVING `distance` < ' . ($distance+0);
-						sql_slave($cachesFilter);
-						sql_slave('ALTER TABLE &result_caches ADD PRIMARY KEY ( `cache_id` )');
-
-						$sql_select[] = '&result_caches.`cache_id`';
-						$sql_from = '&result_caches';
-						$sql_innerjoin[] = '`caches` ON `caches`.`cache_id`=&result_caches.`cache_id`';
+                        sqlStringbySearchradius($distance,$lat,$lon,$multiplier,$distance_unit);
 					}
 					else
 					{
+						if (isset($rs)) {
+							sql_free_result($rs);
+						}
 						$options['error_locidnocoords'] = true;
 						outputSearchForm($options);
 						exit;
 					}
 				}
 			}
+            elseif ($options['searchtype'] == 'bywaypoint')
+			{
+				$check_ocwp = stripos($options['waypoint'], 'oc');
+				$check_gcwp = stripos($options['waypoint'], 'gc');
+                $check_wp_length = strlen($options['waypoint']);
+
+				//get the cachecoordinates
+				if (isset($options['waypoint']) && ($check_ocwp == 0 && $check_gcwp === false) && ($check_wp_length >= 6)) {
+					$rs = sql_slave("SELECT `longitude`,`latitude`,`wp_oc` FROM `caches` WHERE `wp_oc`='" . $options['waypoint'] . "' ", $options['waypoint']);
+				}
+				if (isset($options['waypoint']) && ($check_gcwp == 0 && $check_ocwp === false) && ($check_wp_length >= 3)) {
+					$rs = sql_slave("SELECT `longitude`,`latitude`,`wp_gc_maintained` FROM `caches` WHERE `wp_gc_maintained`='" . $options['waypoint'] . "' ", $options['waypoint']);
+				}
+
+				if (isset($rs) && $r = sql_fetch_array($rs))
+				{
+					$lat = $r['latitude'];
+					$lon = $r['longitude'];
+					sql_free_result($rs);
+
+					$distance = $options['distance'];
+					$distance_unit = $options['unit'];
+
+					$lon_rad = $lon * 3.14159 / 180;
+					$lat_rad = $lat * 3.14159 / 180;
+
+					sqlStringbySearchradius($distance, $lat, $lon, $multiplier, $distance_unit);
+				}
+				else
+				{
+					if (isset($rs)) {
+						sql_free_result($rs);
+					}
+					$options['error_nowaypointfound'] = true;
+					outputSearchForm($options);
+					exit;
+				}
+            }
+            elseif ($options['searchtype'] == 'bydistance')   // Ocprop
+            {
+                //check the entered data
+                if (isset($options['lat']) && isset($options['lon']))
+                {
+                    $lat = $options['lat']+0;
+                    $lon = $options['lon']+0;
+                }
+                else
+                {
+                    $latNS = $options['latNS'];
+                    $lonEW = $options['lonEW'];
+
+					$lon_h = $options['lon_h'];
+					$lat_h = $options['lat_h'];
+					$lon_min = $options['lon_min'];
+                    $lat_min = $options['lat_min'];
+
+                    if (is_numeric($lon_h) && is_numeric($lon_min))
+                    {
+                        if (($lon_h >= 0) && ($lon_h < 180) && ($lon_min >= 0) && ($lon_min < 60))
+                        {
+                            $lon = $lon_h + $lon_min / 60;
+                            if ($lonEW == 'W') $lon = -$lon;
+                        }
+                    }
+
+                    if (is_numeric($lat_h) && is_numeric($lat_min))
+                    {
+                        if (($lat_h >= 0) && ($lat_h < 90) && ($lat_min >= 0) && ($lat_min < 60))
+                        {
+                            $lat = $lat_h + $lat_min / 60;
+                            if ($latNS == 'S') $lat = -$lat;
+                        }
+                    }
+                }
+
+                $distance = $options['distance'];
+                $distance_unit = $options['unit'];
+
+                if ((!isset($lon)) || (!isset($lat)) || (!is_numeric($distance)))
+                {
+					$options['error_nocoords'] = true;
+                    outputSearchForm($options);
+                    exit;
+                }
+
+                $lon_rad = $lon * 3.14159 / 180;
+                $lat_rad = $lat * 3.14159 / 180;
+
+                sqlStringbySearchradius($distance,$lat,$lon,$multiplier,$distance_unit);
+            }
 			elseif ($options['searchtype'] == 'byfinder')
 			{
 				if ($options['finderid'] != 0)
@@ -837,83 +901,6 @@
 					}
 					$sql_where[] = '`cache_logs`.`type` IN (' . $idNumbers . ')';
 				}
-			}
-			elseif ($options['searchtype'] == 'bydistance')   // Ocprop
-			{
-				//check the entered data
-				if (isset($options['lat']) && isset($options['lon']))
-				{
-					$lat = $options['lat']+0;
-					$lon = $options['lon']+0;
-				}
-				else
-				{
-					$latNS = $options['latNS'];
-					$lonEW = $options['lonEW'];
-
-					$lat_h = $options['lat_h'];
-					$lon_h = $options['lon_h'];
-					$lat_min = $options['lat_min'];
-					$lon_min = $options['lon_min'];
-
-					if (is_numeric($lon_h) && is_numeric($lon_min))
-					{
-						if (($lon_h >= 0) && ($lon_h < 180) && ($lon_min >= 0) && ($lon_min < 60))
-						{
-							$lon = $lon_h + $lon_min / 60;
-							if ($lonEW == 'W') $lon = -$lon;
-						}
-					}
-
-					if (is_numeric($lat_h) && is_numeric($lat_min))
-					{
-						if (($lat_h >= 0) && ($lat_h < 90) && ($lat_min >= 0) && ($lat_min < 60))
-						{
-							$lat = $lat_h + $lat_min / 60;
-							if ($latNS == 'S') $lat = -$lat;
-						}
-					}
-				}
-
-				$distance = $options['distance'];
-				$distance_unit = $options['unit'];
-
-				if ((!isset($lon)) || (!isset($lat)) || (!is_numeric($distance)))
-				{
-					outputSearchForm($options);
-					exit;
-				}
-
-				//make the sql-String
-
-				//all target caches are between lat - max_lat_diff and lat + max_lat_diff
-				$max_lat_diff = $distance / (111.12 * $multiplier[$distance_unit]);
-
-				//all target caches are between lon - max_lon_diff and lon + max_lon_diff
-				//TODO: check!!!
-				$max_lon_diff = $distance * 180 / (abs(sin((90 - $lat) * 3.14159 / 180 )) * 6378 * $multiplier[$distance_unit] * 3.14159);
-
-				$lon_rad = $lon * 3.14159 / 180;
-				$lat_rad = $lat * 3.14159 / 180;
-
-				sql_temp_table_slave('result_caches');
-				$cachesFilter =
-									 'CREATE TEMPORARY TABLE &result_caches ENGINE=MEMORY
-										SELECT
-											(' . geomath::getSqlDistanceFormula($lon, $lat, $distance, $multiplier[$distance_unit]) . ') `distance`,
-											`caches`.`cache_id` `cache_id`
-										FROM `caches` FORCE INDEX (`latitude`)
-										WHERE `longitude` > ' . ($lon - $max_lon_diff) . '
-											AND `longitude` < ' . ($lon + $max_lon_diff) . '
-											AND `latitude` > ' . ($lat - $max_lat_diff) . '
-											AND `latitude` < ' . ($lat + $max_lat_diff) . '
-										HAVING `distance` < ' . ($distance+0);
-				sql_slave($cachesFilter);
-				sql_slave('ALTER TABLE &result_caches ADD PRIMARY KEY ( `cache_id` )');
-
-				$sql_select[] = '&result_caches.`cache_id`';
-				$sql_from = '&result_caches';
-				$sql_innerjoin[] = '`caches` ON `caches`.`cache_id`=&result_caches.`cache_id`';
 			}
 			elseif ($options['searchtype'] == 'bycacheid')
 			{
@@ -1511,17 +1498,52 @@
 //  F6. build and output search options form
 //=============================================================
 
+function sqlStringbySearchradius($distance,$lat,$lon,$multiplier,$distance_unit){
+
+    global $sql_select,$sql_from,$sql_innerjoin;
+
+    //all target caches are between lat - max_lat_diff and lat + max_lat_diff
+    $max_lat_diff = $distance / (111.12 * $multiplier[$distance_unit]);
+
+    //all target caches are between lon - max_lon_diff and lon + max_lon_diff
+    //TODO: check!!!
+    $max_lon_diff = $distance * 180 / (abs(sin((90 - $lat) * 3.14159 / 180 )) * 6378 * $multiplier[$distance_unit] * 3.14159);
+
+    $lon_rad = $lon * 3.14159 / 180;
+    $lat_rad = $lat * 3.14159 / 180;
+
+    sql_temp_table_slave('result_caches');
+    $cachesFilter =
+        'CREATE TEMPORARY TABLE &result_caches ENGINE=MEMORY
+			SELECT
+				(' . geomath::getSqlDistanceFormula($lon, $lat, $distance, $multiplier[$distance_unit]) . ') `distance`,
+				`caches`.`cache_id` `cache_id`
+			FROM `caches` FORCE INDEX (`latitude`)
+			WHERE `longitude` > ' . ($lon - $max_lon_diff) . '
+				AND `longitude` < ' . ($lon + $max_lon_diff) . '
+				AND `latitude` > ' . ($lat - $max_lat_diff) . '
+				AND `latitude` < ' . ($lat + $max_lat_diff) . '
+												HAVING `distance` < ' . ($distance+0);
+    sql_slave($cachesFilter);
+    sql_slave('ALTER TABLE &result_caches ADD PRIMARY KEY ( `cache_id` )');
+
+    $sql_select[] = '&result_caches.`cache_id`';
+    $sql_from = '&result_caches';
+    $sql_innerjoin[] = '`caches` ON `caches`.`cache_id`=&result_caches.`cache_id`';
+}
+
 function outputSearchForm($options)
 {
 	global $tpl, $login, $opt;
-	global $error_plz, $error_locidnocoords, $error_ort, $error_noort, $error_nofulltext, $error_fulltexttoolong;
+	global $error_plz, $error_locidnocoords, $error_ort, $error_noort, $error_nowaypointfound, $error_nocoords, $error_nofulltext, $error_fulltexttoolong;
 	global $cache_attrib_jsarray_line, $cache_attrib_group, $cache_attrib_img_line1, $cache_attrib_img_line2;
-	global $DEFAULT_SEARCH_DISTANCE;
+	global $DEFAULT_SEARCH_DISTANCE,$DEFAULT_DISTANCE_UNIT;
 
 	$tpl->assign('formmethod', 'get');
 
-	// checkboxen
 	$tpl->assign('logged_in', $login->logged_in());
+
+	//sort search by (radio button + 1 checkbox)
 
 	if (isset($options['sort']))
 		$bBynameChecked = ($options['sort'] == 'byname');  // Ocprop
@@ -1557,6 +1579,8 @@ function outputSearchForm($options)
 
 	$tpl->assign('orderRatingFirst_checked', $options['orderRatingFirst']);
 	$tpl->assign('hidopt_orderRatingFirst', $options['orderRatingFirst'] ? '1' : '0');
+
+	//hide caches... (checkboxes)
 
 	$tpl->assign('f_userowner_checked', $login->logged_in() &&($options['f_userowner'] == 1));
 	$tpl->assign('hidopt_userowner', ($options['f_userowner'] == 1) ? '1' : '0');
@@ -1618,13 +1642,41 @@ function outputSearchForm($options)
 
 			$lon_h = floor($lon);
 			$lat_h = floor($lat);
+
 			$lon_min = ($lon - $lon_h) * 60;
 			$lat_min = ($lat - $lat_h) * 60;
 
-			$tpl->assign('lat_h', $lat_h);
-			$tpl->assign('lon_h', $lon_h);
+			if ($lat < 0 && $lat_h < 0)
+			{
+				$lat_min = 60 - $lat_min;
+			}
+			if ($lon < 0 && $lon_h < 0)
+			{
+				$lon_min = 60 - $lon_min;
+			}
+
 			$tpl->assign('lat_min', sprintf("%02.3f", $lat_min));
 			$tpl->assign('lon_min', sprintf("%02.3f", $lon_min));
+
+			if ($lat < 0 && $lat_h < 0)
+			{
+				$lat_h = -$lat_h;
+				if ($lat_min != 0)
+				{
+					$lat_h = $lat_h-1;
+				}
+			}
+			if ($lon < 0 && $lon_h < 0)
+			{
+				$lon_h = -$lon_h;
+				if ($lon_min != 0)
+				{
+					$lon_h = $lon_h-1;
+				}
+			}
+            $tpl->assign('lat_h', $lat_h);
+            $tpl->assign('lon_h', $lon_h);
+
 		}
 		else
 		{
@@ -1663,6 +1715,12 @@ function outputSearchForm($options)
 			$tpl->assign('latN_sel', 'selected="selected"');
 		}
 	}
+	if ($options['searchtype'] == 'bydistance')
+		$dByDistanceChecked = ($options['searchtype'] == 'bydistance');  // Ocprop
+	else
+		$dByDistanceChecked = (!$login->logged_in());
+	$tpl->assign('dbydistance_checked', $dByDistanceChecked);
+
 	$tpl->assign('distance', isset($options['distance']) ? $options['distance'] : $DEFAULT_SEARCH_DISTANCE);
 
 	if (!isset($options['unit'])) $options['unit'] = $DEFAULT_DISTANCE_UNIT;
@@ -1670,9 +1728,44 @@ function outputSearchForm($options)
 	$tpl->assign('sel_sm', $options['unit'] == 'sm');
 	$tpl->assign('sel_nm', $options['unit'] == 'nm');
 
-	// plz
-	$tpl->assign('plz', isset($options['plz']) ? htmlspecialchars($options['plz'], ENT_COMPAT, 'UTF-8') : '');
-	$tpl->assign('ort', isset($options['ort']) ? htmlspecialchars($options['ort'], ENT_COMPAT, 'UTF-8') : '');
+	// ortplz
+	if (isset($options['ortplz']))
+	{
+		$ortplz = htmlspecialchars($options['ortplz'], ENT_COMPAT, 'UTF-8');
+	}
+	elseif (isset($options['ort']))
+	{
+		$ortplz = htmlspecialchars($options['ort'], ENT_COMPAT, 'UTF-8');
+	}
+	elseif (isset($options['plz']))
+	{
+		$ortplz = htmlspecialchars($options['plz'], ENT_COMPAT, 'UTF-8');
+	}
+	else{
+		$ortplz = '';
+	}
+	$tpl->assign('ortplz', $ortplz);
+	if ($options['searchtype'] == 'byplz')
+	{
+		$dByOrtPlzChecked = ($options['searchtype'] == 'byplz');  // Ocprop
+	}
+	elseif ($options['searchtype'] == 'byort')
+	{
+		$dByOrtPlzChecked = ($options['searchtype'] == 'byort');  // Ocprop
+	}
+	else
+	{
+		$dByOrtPlzChecked = (!$login->logged_in());
+	}
+	$tpl->assign('dbyortplz_checked', $dByOrtPlzChecked);
+
+    // waypoint
+    $tpl->assign('waypoint', isset($options['waypoint']) ? htmlspecialchars($options['waypoint'], ENT_COMPAT, 'UTF-8') : '');
+    if ($options['searchtype'] == 'bywaypoint')
+        $dByWaypointChecked = ($options['searchtype'] == 'bywaypoint');  // Ocprop
+    else
+        $dByWaypointChecked = (!$login->logged_in());
+    $tpl->assign('dbywaypoint_checked', $dByWaypointChecked);
 
 	// owner
 	$tpl->assign('owner', isset($options['owner']) ? htmlspecialchars($options['owner'], ENT_COMPAT, 'UTF-8') : '');
@@ -1976,6 +2069,10 @@ function outputSearchForm($options)
 		$tpl->assign('ortserror', $error_locidnocoords);
 	else if (isset($options['error_noort']))
 		$tpl->assign('ortserror', $error_noort);
+    else if (isset($options['error_nowaypointfound']))
+        $tpl->assign('ortserror', $error_nowaypointfound);
+	else if (isset($options['error_nocoords']))
+		$tpl->assign('ortserror', $error_nocoords);
 
 	$tpl->assign('fulltexterror', '');
 	if (isset($options['error_nofulltext']))
@@ -2000,7 +2097,7 @@ function prepareLocSelectionForm($options)
 
 	unset($options['queryid']);
 	unset($options['locid']);
-	$options['searchto'] = 'search' . $options['searchtype'];
+	$options['searchto'] = 'searchbyortplz';
 	unset($options['searchtype']);
 
 	// urlparams zusammenbauen

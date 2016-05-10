@@ -6,6 +6,8 @@
  *
  * For license information see doc/license.txt
  *****************************************************************************/
+use Oc\Libse\ChildWp\HandlerChildWp;
+use Oc\Libse\Coordinate\FormatterCoordinate;
 
 /****************************************************************************
  *
@@ -31,12 +33,12 @@ function getWaypoints($cacheid)
     global $waypointlines;
     global $nowaypoints;
 
-    $wphandler = new ChildWp_Handler();
+    $wphandler = new HandlerChildWp();
     $waypoints = $wphandler->getChildWps($cacheid);
     $ret = '';
 
     if (!empty($waypoints)) {
-        $formatter = new Coordinate_Formatter();
+        $formatter = new FormatterCoordinate();
 
         foreach ($waypoints as $waypoint) {
             $tmpline = $waypointline;

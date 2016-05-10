@@ -19,18 +19,18 @@
       "Oc\\": "src/Oc"
     },
     "psr-0":{
-        "Cache\\": "libse",
-        "CacheNote\\": "libse",
-        "ChildWp\\": "libse",
-        "Coordinate\\": "libse",
-        "Language\\": "libse",
-        "Validator\\": "libse"
+        "Cache\\": "src/Oc/Libse",
+        "CacheNote\\": "src/Oc/Libse",
+        "ChildWp\\": "src/Oc/Libse",
+        "Coordinate\\": "src/Oc/Libse",
+        "Language\\": "src/Oc/Libse",
+        "Validator\\": "src/Oc/Libse"
     }
   ,
     "classmap": [
       "lib2/",
       "lib2/logic/",
-      "libse/"
+      "src/Oc/Libse/"
     ]
   }
 }

@@ -15,7 +15,7 @@
 	<input type="hidden" name="action" value="login" />
 	<input type="hidden" name="source" value="loginpage" />
 	<div class="content-txtbox-noshade">
-		<p style="line-height: 1.6em;">
+		<p style="line-height: 1.6em;" {if $error!=LOGIN_OK && $error!=LOGIN_LOGOUT_OK}class="errormsg"{/if}>
 			{if $error!=LOGIN_OK}
 				{if $error==LOGIN_BADUSERPW}
 					{t}The login was not successfull.{/t}<br />

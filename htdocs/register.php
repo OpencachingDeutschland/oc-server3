@@ -64,12 +64,12 @@ if (isset($_POST['show_all_countries_submit'])) {
         $tpl->assign('error_unkown', 1);
     }
 
-    if ($tos != true) {
+    if ($tos !== true) {
         $bError = true;
         $tpl->assign('error_tos_not_ok', 1);
     }
 
-    if ($bError == false) {
+    if ($bError === false) {
         // try to register
         $user->setActivationCode($user->CreateCode());
         $user->setNode($opt['logic']['node']['id']);
@@ -94,7 +94,7 @@ if (isset($_POST['show_all_countries_submit'])) {
                 $bReasonFound = true;
             }
 
-            if ($bReasonFound == false) {
+            if ($bReasonFound === false) {
                 $tpl->assign('error_unkown', 1);
             }
         }

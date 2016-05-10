@@ -44,7 +44,7 @@ if ($action == 'cookieverify') {
             $tpl->redirect($target);
         }
     }
-} else if ($action == 'logout') {
+} elseif ($action == 'logout') {
     $login->logout();
     $tpl->assign('error', LOGIN_LOGOUT_OK);
 

@@ -198,7 +198,7 @@ class login
 
         // cleanup old entries
         // (execute only every 50 search calls)
-        if (rand(1, 50) == 1) {
+        if (mt_rand(1, 50) === 1) {
             sql("DELETE FROM `sys_logins` WHERE `date_created`<'&1'", date('Y-m-d H:i:s', time() - 3600));
         }
 

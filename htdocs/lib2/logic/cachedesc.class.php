@@ -10,7 +10,7 @@
 
 require_once($opt['rootpath'] . 'lib2/logic/rowEditor.class.php');
 
-class user
+class cachedesc
 {
     public $nCacheDescId = 0;
     public $reCacheDesc;

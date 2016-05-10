@@ -2,11 +2,6 @@
 
 namespace Oc\Libse\ChildWp;
 
-/***************************************************************************
- *  For license information see doc/license.txt
- *
- *  Unicode Reminder メモ
- ***************************************************************************/
 class TypeChildWp
 {
     private $id;

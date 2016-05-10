@@ -1,19 +1,17 @@
 <?php
 
-namespace Oc\Libse\Cache;
+namespace Oc\Libse\Coordinate;
 
 /***************************************************************************
  *  For license information see doc/license.txt
  *
  *  Unicode Reminder メモ
  ***************************************************************************/
-class StatusCache
+
+require_once(__DIR__ . '/../../../../lib2/logic/const.inc.php');
+
+class TypeCoordinate
 {
-    const Active = 1;
-    const TempUnavailable = 2;
-    const Archived = 3;
-    const ToBeApproved = 4;
-    const NotYetPubliced = 5;
-    const Blocked = 6;
-    const BlockedHidden = 7;
+    const ChildWaypoint = COORDINATE_WAYPOINT;
+    const UserNote = COORDINATE_USERNOTE;
 }

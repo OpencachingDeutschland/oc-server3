@@ -2,11 +2,6 @@
 
 namespace Oc\Libse\Validator;
 
-/***************************************************************************
- *  For license information see doc/license.txt
- *
- *  Unicode Reminder メモ
- ***************************************************************************/
 class ArrayValidator
 {
     private $values;

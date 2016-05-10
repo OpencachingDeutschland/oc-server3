@@ -12,7 +12,7 @@ use Oc\Libse\CacheNote\PresenterCacheNote;
 use Oc\Libse\ChildWp\HandlerChildWp;
 use Oc\Libse\Coordinate\FormatterCoordinate;
 use Oc\Libse\Http\RequestHttp;
-use Oc\Libse\Translator\TranslatorLanguage;
+use Oc\Libse\Language\TranslatorLanguage;
 
 require('./lib2/web.inc.php');
 require_once('./lib2/logic/labels.inc.php');

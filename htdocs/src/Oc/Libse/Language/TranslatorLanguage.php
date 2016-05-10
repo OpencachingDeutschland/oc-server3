@@ -1,12 +1,6 @@
 <?php
 
-namespace Oc\Libse\Translator;
-
-/***************************************************************************
- *  For license information see doc/license.txt
- *
- *  Unicode Reminder メモ
- ***************************************************************************/
+namespace Oc\Libse\Language;
 
 require_once(__DIR__ . '/../../../../lib2/translate.class.php');
 
@@ -31,7 +25,7 @@ class TranslatorLanguage
         $lang_string = $this->translate($lang_string);
 
         if (mb_ereg_search_init($lang_string)) {
-            while (false != ($vars = mb_ereg_search_regs("{[^{]*}"))) {
+            while (false !== ($vars = mb_ereg_search_regs("{[^{]*}"))) {
                 foreach ($vars as $curly_pattern) {
                     $pattern = mb_substr($curly_pattern, 1, mb_strlen($curly_pattern) - 2);
                     $value = $args[$pattern];

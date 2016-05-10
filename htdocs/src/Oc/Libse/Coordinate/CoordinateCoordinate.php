@@ -2,11 +2,6 @@
 
 namespace Oc\Libse\Coordinate;
 
-/***************************************************************************
- *  For license information see doc/license.txt
- *
- *  Unicode Reminder メモ
- ***************************************************************************/
 class CoordinateCoordinate
 {
     const epsilon = 8.3333e-6;

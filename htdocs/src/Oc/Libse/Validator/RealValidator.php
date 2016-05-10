@@ -2,11 +2,6 @@
 
 namespace Oc\Libse\Validator;
 
-/***************************************************************************
- *  For license information see doc/license.txt
- *
- *  Unicode Reminder メモ
- ***************************************************************************/
 class RealValidator extends NumericValidator
 {
     private $int_len;
@@ -39,6 +34,6 @@ class RealValidator extends NumericValidator
     {
         $value = str_replace(',', '.', $value);
 
-        return floatval($value);
+        return (float)$value;
     }
 }

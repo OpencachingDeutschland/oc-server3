@@ -1,13 +1,9 @@
 <?php
 
 namespace Oc\Libse\CacheNote;
+
 use Oc\Libse\Coordinate\TypeCoordinate;
 
-/***************************************************************************
- *  For license information see doc/license.txt
- *
- *  Unicode Reminder メモ
- ***************************************************************************/
 class HandlerCacheNote
 {
     public function getCacheNote($userid, $cacheid)

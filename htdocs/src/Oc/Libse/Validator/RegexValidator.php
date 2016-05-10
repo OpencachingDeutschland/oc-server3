@@ -2,11 +2,6 @@
 
 namespace Oc\Libse\Validator;
 
-/***************************************************************************
- *  For license information see doc/license.txt
- *
- *  Unicode Reminder メモ
- ***************************************************************************/
 class RegexValidator
 {
     private $regex;

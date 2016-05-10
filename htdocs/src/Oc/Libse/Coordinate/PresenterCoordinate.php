@@ -3,16 +3,11 @@
 namespace Oc\Libse\Coordinate;
 
 use Oc\Libse\Http\RequestHttp;
-use Oc\Libse\Translator\TranslatorLanguage;
+use Oc\Libse\Language\TranslatorLanguage;
 use Oc\Libse\Validator\IntegerValidator;
 use Oc\Libse\Validator\RealValidator;
 use Oc\Libse\Validator\RegexValidator;
 
-/***************************************************************************
- *  For license information see doc/license.txt
- *
- *  Unicode Reminder メモ
- ***************************************************************************/
 class PresenterCoordinate
 {
     const lat_hem = 'lat_hem';
@@ -124,7 +119,7 @@ class PresenterCoordinate
 
     public function hasCoordinate()
     {
-        return $this->getCoordinate() != new CoordinateCoordinate(0, 0);
+        return $this->getCoordinate() !== new CoordinateCoordinate(0, 0);
     }
 
     public function validate()

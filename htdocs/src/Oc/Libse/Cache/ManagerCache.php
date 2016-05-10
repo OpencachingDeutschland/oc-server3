@@ -2,11 +2,6 @@
 
 namespace Oc\Libse\Cache;
 
-/***************************************************************************
- *  For license information see doc/license.txt
- *
- *  Unicode Reminder メモ
- ***************************************************************************/
 class ManagerCache
 {
     public function exists($cacheid)

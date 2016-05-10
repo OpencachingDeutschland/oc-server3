@@ -2,9 +2,10 @@
 
 namespace Oc\Libse\ChildWp;
 
+use Oc\Libse\CacheNote\PresenterCacheNote;
 use Oc\Libse\Coordinate\CoordinateCoordinate;
 use Oc\Libse\Coordinate\TypeCoordinate;
-use Oc\Libse\Translator\TranslatorLanguage;
+use Oc\Libse\Language\TranslatorLanguage;
 
 class HandlerChildWp
 {
@@ -72,9 +73,9 @@ class HandlerChildWp
     public function getChildWp($childid)
     {
         $rs = sql(
-            "SELECT id, cache_id, type, subtype, latitude, longitude, description 
-            FROM coordinates
-            WHERE id = &1",
+            'SELECT id, cache_id, type, subtype, latitude, longitude, description 
+             FROM coordinates
+             WHERE id = &1',
             $childid
         );
         $ret = $this->recordToArray(sql_fetch_array($rs));
@@ -92,14 +93,14 @@ class HandlerChildWp
         if ($include_usernote) {
             $type2 = TypeCoordinate::UserNote;
         }
-        
+
         $rs = sql(
-            "SELECT id, cache_id, type, subtype, latitude, longitude, description
+            'SELECT id, cache_id, type, subtype, latitude, longitude, description
             FROM coordinates
             WHERE cache_id = &1
             AND type IN (&2,&3)
-            AND (type='&2' OR (user_id='&4' AND latitude!=0 AND longitude!=0))
-            ORDER BY id",
+            AND (type=\'&2\' OR (user_id=\'&4\' AND latitude!=0 AND longitude!=0))
+            ORDER BY id',
             $cacheid,
             TypeCoordinate::ChildWaypoint,
             $type2,
@@ -169,6 +170,6 @@ class HandlerChildWp
 
     public function delete($childid)
     {
-        sql("DELETE FROM coordinates WHERE id = &1", $childid);
+        sql('DELETE FROM coordinates WHERE id = &1', $childid);
     }
 }

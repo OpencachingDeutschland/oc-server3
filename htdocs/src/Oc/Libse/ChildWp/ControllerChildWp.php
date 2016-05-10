@@ -4,9 +4,9 @@ namespace Oc\Libse\ChildWp;
 
 use Oc\Libse\Coordinate\CoordinateCoordinate;
 use Oc\Libse\Http\RequestHttp;
-use Oc\Libse\Translator\TranslatorLanguage;
+use Oc\Libse\Language\TranslatorLanguage;
 
-require_once($opt['rootpath'] . 'lib2/error.inc.php');
+require_once(__DIR__ . '/../../../../lib2/error.inc.php');
 
 class ControllerChildWp
 {

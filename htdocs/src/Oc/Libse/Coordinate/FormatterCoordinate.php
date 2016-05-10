@@ -2,11 +2,6 @@
 
 namespace Oc\Libse\Coordinate;
 
-/***************************************************************************
- *  For license information see doc/license.txt
- *
- *  Unicode Reminder メモ
- ***************************************************************************/
 class FormatterCoordinate
 {
     public function formatLatHem($coordinate)

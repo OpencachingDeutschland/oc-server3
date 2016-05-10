@@ -2,17 +2,11 @@
 
 namespace Oc\Libse\ChildWp;
 
-/***************************************************************************
- *  For license information see doc/license.txt
- *
- *  Unicode Reminder メモ
- ***************************************************************************/
-
 use Oc\Libse\Coordinate\PresenterCoordinate;
 use Oc\Libse\Validator\AlwaysValidValidator;
 use Oc\Libse\Validator\ArrayValidator;
 
-require_once(__DIR__ . '/../../lib2/error.inc.php');
+require_once(__DIR__ . '/../../../../lib2/error.inc.php');
 
 abstract class PresenterChildWp
 {
@@ -43,7 +37,7 @@ abstract class PresenterChildWp
     protected $childId;
     protected $childWpHandler;
 
-    protected function __construct($request = false, $translator = false)
+    public function __construct($request = false, $translator = false)
     {
         $this->request = $request;
         $this->translator = $translator;

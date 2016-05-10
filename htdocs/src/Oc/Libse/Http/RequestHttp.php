@@ -2,11 +2,6 @@
 
 namespace Oc\Libse\Http;
 
-/***************************************************************************
- *  For license information see doc/license.txt
- *
- *  Unicode Reminder メモ
- ***************************************************************************/
 class RequestHttp
 {
     private $raw_values = array();

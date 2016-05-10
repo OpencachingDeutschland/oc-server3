@@ -2,11 +2,6 @@
 
 namespace Oc\Libse\ChildWp;
 
-/***************************************************************************
- *  For license information see doc/license.txt
- *
- *  Unicode Reminder メモ
- ***************************************************************************/
 class AddPresenterChildWp extends PresenterChildWp
 {
     public function __construct($request = false, $translator = false)

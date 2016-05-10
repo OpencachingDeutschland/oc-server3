@@ -2,11 +2,6 @@
 
 namespace Oc\Libse\Validator;
 
-/***************************************************************************
- *  For license information see doc/license.txt
- *
- *  Unicode Reminder メモ
- ***************************************************************************/
 class IntegerValidator extends NumericValidator
 {
     private $int_len;
@@ -35,6 +30,6 @@ class IntegerValidator extends NumericValidator
 
     protected function getValue($value)
     {
-        return intval($value);
+        return (int) $value;
     }
 }

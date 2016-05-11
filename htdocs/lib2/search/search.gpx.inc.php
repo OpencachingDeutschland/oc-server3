@@ -8,6 +8,9 @@
  * used by Ocprop
  ****************************************************************************/
 
+use Oc\Libse\CacheNote\HandlerCacheNote;
+use Oc\Libse\ChildWp\HandlerChildWp;
+
 require_once('lib2/translate.class.php');
 require_once('lib2/logic/npas.inc.php');
 
@@ -165,7 +168,7 @@ function search_output()
     $gpxSymNormal = 'Geocache';
     $gpxSymFound = 'Geocache Found';
 
-    $childwphandler = new ChildWp_Handler();
+    $childwphandler = new HandlerChildWp();
     $children = '';
     $rs = sql('SELECT &searchtmp.`cache_id` `cacheid` FROM &searchtmp');
     while ($r = sql_fetch_array($rs) && $children == '') {
@@ -587,7 +590,7 @@ function changePlaceholder($str, $inverse = false)
 
 function getCacheNote($userid, $cacheid)
 {
-    $cacheNoteHandler = new CacheNote_Handler();
+    $cacheNoteHandler = new HandlerCacheNote();
     $cacheNote = $cacheNoteHandler->getCacheNote($userid, $cacheid);
 
     if (isset($cacheNote['note']) || isset($cacheNote['latitude']) || isset($cacheNote['longitude'])) {

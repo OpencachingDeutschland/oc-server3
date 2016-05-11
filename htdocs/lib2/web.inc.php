@@ -13,6 +13,8 @@
  *  to the root.
  ***************************************************************************/
 
+require_once(__DIR__ . '/../vendor/autoload.php');
+
 // setup rootpath
 if (!isset($opt['rootpath'])) {
     $opt['rootpath'] = './';

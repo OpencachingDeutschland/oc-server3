@@ -10,6 +10,8 @@
  *  TODO: accept-language des Browser auswerten
  ***************************************************************************/
 
+require_once(__DIR__ . '/../vendor/autoload.php');
+
 function __autoload($class_name)
 {
     global $opt;
@@ -20,13 +22,10 @@ function __autoload($class_name)
 
     $file1 = $opt['rootpath'] . 'lib2/' . $class_name . '.class.php';
     $file2 = $opt['rootpath'] . 'lib2/logic/' . $class_name . '.class.php';
-    $file3 = $opt['rootpath'] . 'libse/' . str_replace('_', '/', $class_name) . '.php';
     if (file_exists($file1)) {
         require_once($file1);
     } elseif (file_exists($file2)) {
         require_once($file2);
-    } elseif (file_exists($file3)) {
-        require_once($file3);
     }
 }
 
@@ -117,8 +116,9 @@ require_once($opt['rootpath'] . 'lib2/logic/labels.inc.php');
 // require_once($opt['rootpath'] . 'lib2/throttle.inc.php');
 
 // apply post configuration
-if (function_exists('post_config'))
+if (function_exists('post_config')) {
     post_config();
+}
 
 // check for email address problems
 // use direct database access instead of user class for performance reasons - need not
@@ -152,7 +152,10 @@ function normalize_settings()
     }
 
     if (isset($opt['logic']['cachemaps']['wmsurl']) && strstr($opt['logic']['cachemaps']['wmsurl'], '://')) {
-        $opt['logic']['cachemaps']['wmsurl'] = $opt['page']['protocol'] . strstr($opt['logic']['cachemaps']['wmsurl'], '://');
+        $opt['logic']['cachemaps']['wmsurl'] = $opt['page']['protocol'] . strstr(
+                $opt['logic']['cachemaps']['wmsurl'],
+                '://'
+            );
     }
 }
 
@@ -345,7 +348,9 @@ function use_current_protocol($url)
         && $opt['page']['https']['active']
     ) {
         return 'https' . strstr($url, '://');
-    } elseif (strtolower(substr($url, 0, strlen($opt['page']['absolute_https_url']))) == $opt['page']['absolute_https_url']
+    } elseif (strtolower(
+            substr($url, 0, strlen($opt['page']['absolute_https_url']))
+        ) == $opt['page']['absolute_https_url']
         && !$opt['page']['https']['active']
     ) {
         return 'http' . strstr($url, '://');

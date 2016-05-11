@@ -5,6 +5,8 @@
  *  Unicode Reminder メモ
  ***************************************************************************/
 
+use Oc\Libse\ChildWp\HandlerChildWp;
+
 $build_map_towns_menu = true;
 
 require('./lib2/web.inc.php');
@@ -388,7 +390,7 @@ function output_cachexml($sWaypoint)
         );
     }
 
-    $wphandler = new ChildWp_Handler();
+    $wphandler = new HandlerChildWp();
     $waypoints = $wphandler->getChildWps($rCache['cache_id'], true);
 
     echo '<caches>' . "\n";

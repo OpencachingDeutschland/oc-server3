@@ -11,33 +11,14 @@
  *
  * Unicode Reminder メモ
  *
- * sets up all neccessary variables and handle template and database-things
+ * sets up all necessary variables and handle template and database-things
  * also useful functions
  *
  * parameter: lang       get/post/cookie   used language
  * style      get/post/cookie   used style
  ****************************************************************************/
-/**
- * @todo reformat code to PSR-2 Standard
- *
- * @param $class_name
- */
-function __autoload($class_name)
-{
-    global $opt;
 
-    if (!preg_match('/^[\w]{1,}$/', $class_name)) {
-        return;
-    }
-
-    $class_name = str_replace('_', '/', $class_name);
-
-    $file = $opt['rootpath'] . 'libse/' . $class_name . '.php';
-    if (file_exists($file)) {
-        require_once($file);
-    }
-}
-
+require_once(__DIR__.'/../vendor/autoload.php');
 
 if (isset($opt['rootpath'])) {
     $rootpath = $opt['rootpath'];

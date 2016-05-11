@@ -18,19 +18,9 @@
     "psr-4": {
       "Oc\\": "src/Oc"
     },
-    "psr-0":{
-        "Cache\\": "libse",
-        "CacheNote\\": "libse",
-        "ChildWp\\": "libse",
-        "Coordinate\\": "libse",
-        "Language\\": "libse",
-        "Validator\\": "libse"
-    }
-  ,
     "classmap": [
       "lib2/",
-      "lib2/logic/",
-      "libse/"
+      "lib2/logic/"
     ]
   }
 }

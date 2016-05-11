@@ -7,6 +7,13 @@
  * TODO: use cache() class at all
  ***************************************************************************/
 
+use Oc\Libse\CacheNote\HandlerCacheNote;
+use Oc\Libse\CacheNote\PresenterCacheNote;
+use Oc\Libse\ChildWp\HandlerChildWp;
+use Oc\Libse\Coordinate\FormatterCoordinate;
+use Oc\Libse\Http\RequestHttp;
+use Oc\Libse\Language\TranslatorLanguage;
+
 require('./lib2/web.inc.php');
 require_once('./lib2/logic/labels.inc.php');
 require_once('./lib2/logic/cache.class.php');
@@ -20,12 +27,12 @@ $login->verify();
 
 function getChildWaypoints($cacheid)
 {
-    $wphandler = new ChildWp_Handler();
+    $wphandler = new HandlerChildWp();
     $waypoints = $wphandler->getChildWps($cacheid);
     $count = count($waypoints);
 
     if ($count > 0) {
-        $formatter = new Coordinate_Formatter();
+        $formatter = new FormatterCoordinate();
 
         for ($i = 0; $i < $count; $i ++) {
             $waypoints[$i]['coord']['lat'] = $waypoints[$i]['coordinate']->latitude();
@@ -262,8 +269,8 @@ sql_free_result($rs);
 $tpl->assign('childWaypoints', getChildWaypoints($cacheid));
 
 if ($login->userid != 0) {
-    $cacheNotePresenter = new CacheNote_Presenter(new Http_Request(), new Language_Translator());
-    $cacheNotePresenter->init(new CacheNote_Handler(), $login->userid, $cacheid);
+    $cacheNotePresenter = new PresenterCacheNote(new RequestHttp(), new TranslatorLanguage());
+    $cacheNotePresenter->init(new HandlerCacheNote(), $login->userid, $cacheid);
 
     if (isset($_POST['submit_cache_note']) && $cacheNotePresenter->validate()) {
         $cacheNotePresenter->doSubmit();

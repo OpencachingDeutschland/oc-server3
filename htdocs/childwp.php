@@ -5,6 +5,10 @@
  *  Unicode Reminder メモ
  ***************************************************************************/
 
+use Oc\Libse\Cache\ManagerCache;
+use Oc\Libse\ChildWp\ControllerChildWp;
+use Oc\Libse\ChildWp\HandlerChildWp;
+
 require('./lib2/web.inc.php');
 
 $tpl->name = 'childwp';
@@ -19,9 +23,9 @@ if ($login->userid == 0) {
 $isSubmit = isset($_POST['submitform']);
 $redirect = isset($_POST['back']);
 
-$cacheManager = new Cache_Manager();
-$handler = new ChildWp_Handler();
-$controller = new ChildWp_Controller();
+$cacheManager = new ManagerCache();
+$handler = new HandlerChildWp();
+$controller = new ControllerChildWp();
 $presenter = $controller->createPresenter($tpl, $cacheManager, $handler);
 
 if ($isSubmit && $presenter->validate()) {

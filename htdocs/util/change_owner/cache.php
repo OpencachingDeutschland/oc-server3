@@ -17,8 +17,8 @@
 
 $rootpath = '../../';
 header('Content-type: text/html; charset=utf-8');
-require($rootpath . 'lib/common.inc.php');
-require($rootpath . 'lib/eventhandler.inc.php');
+require_once(__DIR__ . '/../../lib/common.inc.php');
+require_once(__DIR__ . '/../../lib/eventhandler.inc.php');
 
 $action = isset($_REQUEST['action']) ? $_REQUEST['action'] : '';
 

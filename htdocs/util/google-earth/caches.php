@@ -5,4 +5,4 @@
  *  Unicode Reminder メモ
  ***************************************************************************/
 
-require '../../util2/google-earth/caches.php';
+require_once(__DIR__ . '/../../util2/google-earth/caches.php');

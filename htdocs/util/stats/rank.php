@@ -8,4 +8,4 @@
  *  downward compatibility
  ***************************************************************************/
 
-include "../../util2/stats/rank.php";
+require_once(__DIR__ . '/../../util2/stats/rank.php');

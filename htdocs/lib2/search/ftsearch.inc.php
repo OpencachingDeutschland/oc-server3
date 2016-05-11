@@ -147,7 +147,7 @@ $ftsearch_simplerules[] = [
 function ftsearch_hash(&$str)
 {
     $astr = ftsearch_split($str, true);
-    foreach ($astr AS $k => $s) {
+    foreach ($astr as $k => $s) {
         if (strlen($s) > 2) {
             $astr[$k] = sprintf("%u", crc32($s));
         } else {
@@ -232,7 +232,7 @@ function ftsearch_text2simple($str)
     $str = ftsearch_text2sort($str);
 
     // regeln anwenden
-    foreach ($ftsearch_simplerules AS $rule) {
+    foreach ($ftsearch_simplerules as $rule) {
         $str = mb_ereg_replace($rule[0], $rule[1], $str);
     }
 

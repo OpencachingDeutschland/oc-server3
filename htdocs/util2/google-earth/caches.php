@@ -311,7 +311,7 @@ function echoZoomIn($lon_from, $lon_to, $lat_from, $lat_to)
 
     // prepare lines
     $sZoomIn = str_replace("\r", "", $sZoomIn);
-    $sLines = split("\n", $sZoomIn);
+    $sLines = mb_split("\n", $sZoomIn);
     for ($i = 0; $i < count($sLines); $i ++) {
         $sLines[$i] = str_pad($sLines[$i], ($nColumnsCount - 1), ' ');
     }

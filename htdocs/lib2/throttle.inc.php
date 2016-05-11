@@ -14,7 +14,7 @@ function CheckThrottle()
     global $opt, $tpl;
 
     $ip_string = $_SERVER["REMOTE_ADDR"];
-    $ip_blocks = split('\\.', $ip_string);
+    $ip_blocks = mb_split('\\.', $ip_string);
     $ip_numeric = $ip_blocks[3] + $ip_blocks[2] * 256 + $ip_blocks[1] * 65536 + $ip_blocks[0] * 16777216;
 
     sql(
@@ -37,7 +37,7 @@ function CheckThrottle()
     }
 
     // remove old entries every 100st call
-    if (rand(0, 100) == 50) {
+    if (mt_rand(0, 100) == 50) {
         sql(
             "DELETE FROM &tmpdb.`sys_accesslog` WHERE `access_time`<CURRENT_TIMESTAMP()-'&2'",
             $ip_numeric,

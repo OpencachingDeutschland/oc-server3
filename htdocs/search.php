@@ -597,8 +597,16 @@ if ($options['showresult'] == 1) {
                     $lon_rad = $lon * 3.14159 / 180;
                     $lat_rad = $lat * 3.14159 / 180;
 
-                    $distance = $options['distance'];
-                    $distance_unit = $options['unit'];
+                    if (isset($options['distance'])) {
+                        $distance = $options['distance'];
+                    } else {
+                        $distance = $DEFAULT_SEARCH_DISTANCE;
+                    }
+                    if (isset($options['unit'])) {
+                        $distance_unit = $options['unit'];
+                    } else {
+                        $distance_unit = $DEFAULT_DISTANCE_UNIT;
+                    }
 
                     sqlStringbySearchradius($distance, $lat, $lon, $multiplier, $distance_unit);
                 } else {
@@ -724,8 +732,16 @@ if ($options['showresult'] == 1) {
                         $lon_rad = $lon * 3.14159 / 180;
                         $lat_rad = $lat * 3.14159 / 180;
 
-                        $distance = $options['distance'];
-                        $distance_unit = $options['unit'];
+                        if (isset($options['distance'])) {
+                            $distance = $options['distance'];
+                        } else {
+                            $distance = $DEFAULT_SEARCH_DISTANCE;
+                        }
+                        if (isset($options['unit'])) {
+                            $distance_unit = $options['unit'];
+                        } else {
+                            $distance_unit = $DEFAULT_DISTANCE_UNIT;
+                        }
 
                         sqlStringbySearchradius($distance, $lat, $lon, $multiplier, $distance_unit);
                     } else {

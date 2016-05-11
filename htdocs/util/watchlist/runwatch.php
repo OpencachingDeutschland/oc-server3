@@ -19,7 +19,7 @@
  ***************************************************************************/
 
 // needs absolute rootpath because called as cronjob
-$rootpath = dirname(__FILE__) . '/../../';
+$rootpath = __DIR__ . '/../../';
 require_once($rootpath . 'lib/clicompatbase.inc.php');
 require_once($rootpath . 'lib2/translate.class.php');
 require_once('settings.inc.php');

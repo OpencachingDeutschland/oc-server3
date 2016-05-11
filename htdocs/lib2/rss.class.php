@@ -23,7 +23,7 @@ class RSS
     public $items;
     public $tags;
 
-    public function RSS()
+    public function __construct()
     {
         $this->items = array();
         $this->tags = array();
@@ -112,7 +112,7 @@ class RSSItem
     public $length;
     public $mimetype;
 
-    public function RSSItem()
+    public function __construct()
     {
         $this->tags = array();
     }

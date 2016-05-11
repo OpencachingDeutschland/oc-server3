@@ -117,8 +117,9 @@ require_once($opt['rootpath'] . 'lib2/logic/labels.inc.php');
 // require_once($opt['rootpath'] . 'lib2/throttle.inc.php');
 
 // apply post configuration
-if (function_exists('post_config'))
+if (function_exists('post_config')) {
     post_config();
+}
 
 // check for email address problems
 // use direct database access instead of user class for performance reasons - need not

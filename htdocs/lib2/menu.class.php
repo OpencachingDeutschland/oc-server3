@@ -19,7 +19,7 @@ class Menu
     public $nSelectedItem = 0;
     public $sMenuFilename = '';
 
-    public function Menu()
+    public function __construct()
     {
         global $opt, $login, $build_map_towns_menu;
 

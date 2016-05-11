@@ -14,7 +14,7 @@ class cookie
     public $changed = false;
     public $values = array();
 
-    public function cookie()
+    public function __construct()
     {
         global $opt;
 

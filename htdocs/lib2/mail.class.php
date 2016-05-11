@@ -23,8 +23,10 @@ class mail extends Smarty
 
     public $headers = array();
 
-    public function mail()
+    public function __construct()
     {
+        parent::__construct();
+
         global $opt;
 
         $this->template_dir = $opt['rootpath'] . 'templates2/mail/';

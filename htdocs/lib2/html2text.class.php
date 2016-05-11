@@ -357,7 +357,7 @@ class html2text
      * @access public
      * @return void
      */
-    public function html2text($source = '', $from_file = false)
+    public function __construct($source = '', $from_file = false)
     {
         if (!empty($source)) {
             $this->set_html($source, $from_file);

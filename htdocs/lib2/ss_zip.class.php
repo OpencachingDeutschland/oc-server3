@@ -40,11 +40,15 @@ class ss_zip
      *               LIGHT verion, please upgrade to PROfessional version.
      * @param int    complevel compression level, 1-minimal compression, 9-maximal, default is 6
      */
-    public function ss_zip($zipfile = "", $complevel = 6)
+    public function __construct($zipfile = "", $complevel = 6)
     {
         $this->clear();
-        if ($complevel < 1) $complevel = 1;
-        if ($complevel > 9) $complevel = 9;
+        if ($complevel < 1) {
+            $complevel = 1;
+        }
+        if ($complevel > 9) {
+            $complevel = 9;
+        }
         $this->complevel = $complevel;
         $this->open($zipfile);
     }

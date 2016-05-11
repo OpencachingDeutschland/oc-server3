@@ -44,7 +44,7 @@ class login
     public $verified = false;
     public $admin = 0;
 
-    public function login()
+    public function __construct()
     {
         global $cookie;
 

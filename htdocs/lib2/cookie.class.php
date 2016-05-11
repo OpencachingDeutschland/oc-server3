@@ -16,7 +16,7 @@ class cookie
     public $values = array();
     public $session_initalized = false;
 
-    public function cookie()
+    public function __construct()
     {
         global $opt;
 

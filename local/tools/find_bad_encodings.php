@@ -14,7 +14,7 @@ require('lib2/cli.inc.php');
 scan('.', false);
 
 foreach (
-	array('api', 'lang', 'lib', 'lib2', 'libse', 'templates2', 'util', 'util2', 'xml')
+	array('api', 'lang', 'lib', 'lib2', 'src/Oc', 'templates2', 'util', 'util2', 'xml')
 	as $dir)
 {
 	scan($dir,true);

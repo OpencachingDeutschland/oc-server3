@@ -1,12 +1,11 @@
 <?php
-
-namespace Oc\Libse\Coordinate;
-
 /***************************************************************************
  *  For license information see doc/license.txt
  *
  *  Unicode Reminder メモ
  ***************************************************************************/
+
+namespace Oc\Libse\Coordinate;
 
 require_once(__DIR__ . '/../../../../lib2/logic/const.inc.php');
 

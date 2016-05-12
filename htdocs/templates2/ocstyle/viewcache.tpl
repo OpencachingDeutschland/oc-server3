@@ -286,10 +286,10 @@
 				<img src="resource2/{$opt.template.style}/images/viewcache/print-18.png" class="icon16" alt="" />
 				<select class="exportlist" onchange="location.href=this.options[this.selectedIndex].value+'&nocrypt='+bNoCrypt">
 					<option value="#">{t}Print{/t} …</option>
-					<option value="viewcache.php?cacheid={$cache.cacheid}&print=y&log=N">{t}without logs{/t}</option>
-					<option value="viewcache.php?cacheid={$cache.cacheid}&print=y&log=5">{t}with 5 logs{/t}</option>
-					<option value="viewcache.php?cacheid={$cache.cacheid}&print=y&log=10">{t}with 10 logs{/t}</option>
-					<option value="viewcache.php?cacheid={$cache.cacheid}&print=y&log=A">{t}with all logs{/t}</option>
+					<option value="viewcache.php?cacheid={$cache.cacheid}&{if $desclang}desclang={$desclang}&{/if}print=y&log=N">{t}without logs{/t}</option>
+					<option value="viewcache.php?cacheid={$cache.cacheid}&{if $desclang}desclang={$desclang}&{/if}print=y&log=5">{t}with 5 logs{/t}</option>
+					<option value="viewcache.php?cacheid={$cache.cacheid}&{if $desclang}desclang={$desclang}&{/if}print=y&log=10">{t}with 10 logs{/t}</option>
+					<option value="viewcache.php?cacheid={$cache.cacheid}&{if $desclang}desclang={$desclang}&{/if}print=y&log=A">{t}with all logs{/t}</option>
 				</select>&nbsp;
 				<img src="resource2/{$opt.template.style}/images/viewcache/16x16-save.png" class="icon16" alt="" />
 				<select class="exportlist" onchange="location.href=this.options[this.selectedIndex].value"> 

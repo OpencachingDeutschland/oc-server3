@@ -30,7 +30,7 @@
     <tr><td><img src="{$opt.page.teampic_url}dl6hbo.jpg" /></td><td><a href="{$opt.page.teammember_url}viewprofile.php?userid=148310">dl6hbo</a><br />system administration, documentation</td></tr>
     <tr><td><img src="{$opt.page.teampic_url}dogesu.jpg" /></td><td><a href="{$opt.page.teammember_url}viewprofile.php?userid=167651">dogesu</a><br />data maintenance, user support</td></tr>
     <tr><td><img src="{$opt.page.teampic_url}flopp.png" /></td><td><a href="{$opt.page.teammember_url}viewprofile.php?userid=126329">Flopp</a><br />cache maps, system surveillance</td></tr>
-    <tr><td><img src="{$opt.page.teampic_url}following.png" /></td><td><a href="{$opt.page.teammember_url}viewprofile.php?userid=150360">following</a><br />data maintenance, OKAPI development, wiki</td></tr>
+    <tr><td><img src="{$opt.page.teampic_url}following.png" /></td><td><a href="{$opt.page.teammember_url}viewprofile.php?userid=150360">following</a><br />data maintenance, software development, wiki</td></tr>
     <tr><td><img src="{$opt.page.teampic_url}friedrichfroebel.png" /></td><td><a href="{$opt.page.teammember_url}viewprofile.php?userid=234947">FriedrichFröbel</a><br />wiki, message board moderation</td></tr>
     <tr><td><img src="{$opt.page.teampic_url}hanekju.png" /></td><td><a href="{$opt.page.teammember_url}viewprofile.php?userid=205779">Hanekju</a><br />data maintenance</td></tr>
     <tr><td><img src="{$opt.page.teampic_url}joerg.jpg" /></td><td><a href="{$opt.page.teammember_url}viewprofile.php?userid=102153">Jörg</a><br />advisor for nature protection and authority relations</td></tr>

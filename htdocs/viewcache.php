@@ -82,7 +82,8 @@ if (isset($_REQUEST['visitcounter']) && $_REQUEST['visitcounter'] == 1) {
 $bCrypt = !isset($_REQUEST['nocrypt']) || ($_REQUEST['nocrypt'] != 1);
 $tpl->assign('crypt', $bCrypt);
 
-if (isset($_REQUEST['desclang'])) {
+$desclang = isset($_REQUEST['desclang']) ? $_REQUEST['desclang'] : false;
+if ($desclang) {
     $sPreferedDescLang = $_REQUEST['desclang'] . ',' . $opt['template']['locale'] . ',EN';
 } else {
     $sPreferedDescLang = $opt['template']['locale'] . ',EN';
@@ -441,6 +442,7 @@ $tpl->assign('shortlink_url', $opt['page']['shortlink_url']);
 $tpl->assign('listing_admin', $login->listingAdmin());
 $tpl->assign('npahelplink', helppagelink('npa'));
 $tpl->assign('garmin_url', $opt['lib']['garmin']['page_url']);
+$tpl->assign('desclang', $desclang);
 
 // display the page
 $tpl->display();

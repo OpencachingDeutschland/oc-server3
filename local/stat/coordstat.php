@@ -8,21 +8,21 @@
 // statistical data for cache and log activity map
 
 chdir("../htdocs");
-require('lib2/web.inc.php');
+require_once('lib2/web.inc.php');
 
 error_reporting(error_reporting() & ~E_NOTICE);
 
-$grid = $_GET["grid"];
+$grid = $_GET['grid'];
 if ($grid <= 0) {
     $grid = 0.2;
 }
 
 // caches created by year
-$rs = sql("SELECT latitude, longitude, date_created FROM caches");
+$rs = sql('SELECT latitude, longitude, date_created FROM caches');
 while ($cache = sql_fetch_assoc($rs)) {
-    $lat = floor($cache["latitude"] / $grid);
-    $long = floor($cache["longitude"] / $grid);
-    $year = substr($cache["date_created"], 0, 4);
+    $lat = floor($cache['latitude'] / $grid);
+    $long = floor($cache['longitude'] / $grid);
+    $year = substr($cache['date_created'], 0, 4);
     if ($year >= 2005 && $year <= date("Y") && ($lat != 0 || $long != 0)) {
         $years[$year] = true;
         $liste[$lat][$long]["caches"][$year] ++;
@@ -41,7 +41,7 @@ function get_logs($table)
     $rs = sql(
         "SELECT latitude, longitude, date
          FROM $table
-		 INNER JOIN caches ON $table.cache_id=caches.cache_id"
+         INNER JOIN caches ON $table.cache_id=caches.cache_id"
     );
     while ($cache = sql_fetch_assoc($rs)) {
         $lat = floor($cache["latitude"] / $grid);

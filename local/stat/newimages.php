@@ -3,21 +3,25 @@
  *  For license information see doc/license.txt
  *
  *  Unicode Reminder メモ
-***************************************************************************/
+ ***************************************************************************/
 
 // list of new images
 
-chdir ("../..");
+chdir('../..');
 require('lib2/web.inc.php');
 
-if (!isset($_REQUEST['since']))
-  exit;
+if (!isset($_REQUEST['since'])) {
+    exit;
+}
 $since = $_REQUEST['since'];
 
-$rs = sql("SELECT url FROM pictures
+$rs = sql(
+    "SELECT url FROM pictures
             WHERE date_created >= '2013' AND date_created >= '&1'
          ORDER BY date_created",
-            $since);
-while ($pic = sql_fetch_assoc($rs))
-	echo $pic['url'] . "\n";
+    $since
+);
+while ($pic = sql_fetch_assoc($rs)) {
+    echo $pic['url'] . "\n";
+}
 mysql_free_result($rs);

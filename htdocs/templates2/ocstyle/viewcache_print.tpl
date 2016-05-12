@@ -166,23 +166,11 @@
 	<tr>
 		<td class="header-small-print">
 			<!-- <img src="resource2/{$opt.template.style}/images/description/22x22-description.png" width="22" height="22" style="vertical-align:middle" border="0" /> -->
-			{t}Description{/t}&nbsp;&nbsp;
+			{t}Description{/t}&nbsp;
 			{if $cache.desclanguages|@count > 1}
 				<span style="font-weight: 400;">
 					{foreach from=$cache.desclanguages item=desclanguagesItem name=desclanguagesItem}
-						{strip}
-							{if $smarty.foreach.desclanguagesItem.first==false},&nbsp;{/if}
-							<img src="images/flags/{$desclanguagesItem|lower}.gif" style="vertical-align:middle" />&nbsp;
-							<a href="viewcache.php?wp={$cache.wpoc}&desclang={$desclanguagesItem|escape}">
-								{if $cache.desclanguage==$desclanguagesItem}
-									<i>{$desclanguagesItem|escape}</i>
-								{else}
-									{$desclanguagesItem|escape}
-								{/if}
-							</a>
-						{/strip}
-					{foreachelse}
-						<b>{$cache.desclanguage|escape}</b>
+						{if $cache.desclanguage == $desclanguagesItem.code}({$desclanguagesItem.name}){/if}
 					{/foreach}
 				</span>
 			{/if}
@@ -259,15 +247,15 @@
 				<img src="resource2/{$opt.template.style}/images/action/16x16-encrypt.png" width="16" height="16" style="vertical-align:middle" border="0" />
 				{if $crypt==true}
 					{if $log=="5"}
-						<span style="font-weight:400">[<a href="viewcache.php?cacheid={$cache.cacheid}&log=5&print=y&nocrypt=1&desclang={$cache.desclanguage|urlencode}">{t}Decrypt{/t}</a>]
+						<span style="font-weight:400">[<a href="viewcache.php?cacheid={$cache.cacheid}&{if $desclang}desclang={$desclang}&{/if}log=5&print=y&nocrypt=1&desclang={$cache.desclanguage|urlencode}">{t}Decrypt{/t}</a>]
 						</span>
 					{elseif $log =="N"} 
 						<span style="font-weight:400">
-						[<a href="viewcache.php?cacheid={$cache.cacheid}&log=N&print=y&nocrypt=1&desclang={$cache.desclanguage|urlencode}">{t}Decrypt{/t}</a>]
+						[<a href="viewcache.php?cacheid={$cache.cacheid}&{if $desclang}desclang={$desclang}&{/if}log=N&print=y&nocrypt=1&desclang={$cache.desclanguage|urlencode}">{t}Decrypt{/t}</a>]
 						</span>
 					{else}
 						<span style="font-weight:400">
-						[<a href="viewcache.php?cacheid={$cache.cacheid}&log=A&print=y&nocrypt=1&desclang={$cache.desclanguage|urlencode}">{t}Decrypt{/t}</a>]
+						[<a href="viewcache.php?cacheid={$cache.cacheid}&{if $desclang}desclang={$desclang}&{/if}log=A&print=y&nocrypt=1&desclang={$cache.desclanguage|urlencode}">{t}Decrypt{/t}</a>]
 						</span>
 					{/if}
 				{/if}

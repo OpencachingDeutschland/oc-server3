@@ -45,6 +45,7 @@
 					`caches`.`name` as `cachename`, `caches`.`latitude` AS `lat2`, `caches`.`longitude` as `lon2`, `caches`.`wp_oc`, `caches`.`date_hidden`,
 					`caches`.`type` AS `cachetype`, `caches`.`size` AS `cachesize`,
 					`cache_status`.`allow_user_view`,
+					`cache_ignore`.`cache_id` IS NOT NULL AS `ignored`,
 					`ca`.`attrib_id` IS NOT NULL AS `oconly`
 				FROM `notify_waiting`
 				INNER JOIN `caches` ON `notify_waiting`.`cache_id`=`caches`.`cache_id`
@@ -53,12 +54,13 @@
 				INNER JOIN `cache_type` ON `caches`.`type`=`cache_type`.`id`
 				INNER JOIN `cache_size` ON `caches`.`size`=`cache_size`.`id`
 				INNER JOIN `cache_status` ON `caches`.`status`=`cache_status`.`id`
+				LEFT JOIN `cache_ignore` ON `cache_ignore`.`cache_id`=`caches`.`cache_id` AND `cache_ignore`.`user_id`=`notify_waiting`.`user_id`
 				LEFT JOIN `caches_attributes` `ca` ON `ca`.`cache_id`=`caches`.`cache_id` AND `ca`.`attrib_id`=6",
   			$opt['template']['default']['locale']);
 
 	  while ($rNotify = sql_fetch_array($rsNotify))
 	  {
-			if ($rNotify['allow_user_view'])
+			if ($rNotify['allow_user_view'] && !$rNotify['ignored'])
 				process_new_cache($rNotify);
 			sql("DELETE FROM `notify_waiting` WHERE `id` ='&1'", $rNotify['id']);
 	  }

@@ -60,7 +60,7 @@ class dbStructUpdater
     * Constructor
     * @access public
     */
-    function dbStructUpdater()
+    function __construct()
     {
         $this->init();
     }

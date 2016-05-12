@@ -20,7 +20,7 @@ if ($argc != 2 || $argv[1] != 'go') {
         "and confirm it by adding the parameter 'go'.\n");
 }
 
-sql("SET @allowdelete=1");
+sql('SET @allowdelete=1');
 
 echo "clearing histories\n";
 sql('TRUNCATE `caches_attributes_modified`');
@@ -76,7 +76,7 @@ sql(
             `accept_mailing`=0, `usermail_send_addr`=0, `latitude`=0, `longitude`=0,
             `last_name`='', `first_name`='', `country`=NULL, `pmr_flag`=0,
             `new_pw_code`=NULL, `new_pw_date`=NULL, `new_email_code`=NULL, `new_email_date`=NULL,
-            `new_emaiL`='', `permanent_login_flag`=0, `watchmail_mode`=1,
+            `new_email`='', `permanent_login_flag`=0, `watchmail_mode`=1,
             `watchmail_hour`=0, `watchmail_nextmail`='', `watchmail_day`=0,
             `activation_code`='', `statpic_logo`=0, `statpic_text`='Opencaching',
             `no_htmledit_flag`=0, `notify_radius`=0, `notify_oconly`=1, `language`='DE',

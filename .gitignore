@@ -47,3 +47,6 @@
 /.idea/
 /.vagrant/
 /htdocs/vendor
+
+# os generated files
+Thumbs.db

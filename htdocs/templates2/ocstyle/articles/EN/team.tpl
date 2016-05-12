@@ -12,10 +12,10 @@
 
 <p>We appreciate your suggetions and comments. On the <a href="http://www.opencaching.de/articles.php?page=contact">contact page</a>, you will find information on how to contact us. Of course, you may also send Emails directly to the team members by their Opencaching.de user profiles.</p>
 
-<p>At this occasion, we would also like to thank all Opencaching users and unnamed aides and supporters, who contributed to Opencaching's success by their suggestions and commitment.</p>   
- 
+<p>At this occasion, we would also like to thank all Opencaching users and unnamed aides and supporters, who contributed to Opencaching's success by their suggestions and commitment.</p>
+
 <table class="table teamlist">
-    <tr><th colspan="3"><br /><span class="content-title-noshade-size1">Board of the Opencaching Deutschland association</span></td></th>
+    <tr><th colspan="3"><br /><span class="content-title-noshade-size1">Board of the Opencaching Deutschland association</span></th></tr>
     <tr><td></td><td></td><td></td></tr>
     <tr><td><img src="{$opt.page.teampic_url}4_vs.jpg" /></td><td><a href="{$opt.page.teammember_url}viewprofile.php?userid=162754">4_Vs</a><br />chairman</td></tr>
     <tr><td><img src="{$opt.page.teampic_url}clanfamily.jpg" /></td><td><a href="{$opt.page.teammember_url}viewprofile.php?userid=244244">ClanFamily</a><br />vice chairman; system administration</td></tr>
@@ -40,6 +40,7 @@
     <tr><td><img src="{$opt.page.teampic_url}slini11.png" /></td><td><a href="{$opt.page.teammember_url}viewprofile.php?userid=159941">Slini11</a><br />software development</td></tr>
     <tr><td><img src="{$opt.page.teampic_url}spike05de.png" /></td><td><a href="{$opt.page.teammember_url}viewprofile.php?userid=130977">Spike05de</a><br />user support, data maintenance</td></tr>
     <tr><td><img src="{$opt.page.teampic_url}steingesicht.jpg" /></td><td><a href="{$opt.page.teammember_url}viewprofile.php?userid=165774">Steingesicht</a><br />data maintenance, message board moderation</td></tr>
+    <tr><td><img src="{$opt.page.teampic_url}dummy.jpg" /></td><td><a href="{$opt.page.teammember_url}viewprofile.php?userid=325701">teiling88</a><br />software development</td></tr>
     <tr><td></td><td></td><td></td></tr>
   </table>
 

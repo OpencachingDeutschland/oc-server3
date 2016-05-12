@@ -36,7 +36,7 @@ class View
         print "\nAttributes:\n\n";
         require_once($GLOBALS['rootpath'].'okapi/services/attrs/attr_helper.inc.php');
         $internal2acode = AttrHelper::get_internal_id_to_acode_mapping();
-        $dict = self::get_all_atribute_names();
+        $dict = self::get_all_attribute_names();
         foreach ($dict as $internal_id => $langs)
         {
             print $internal_id.": ";
@@ -101,7 +101,7 @@ class View
      * Get an array of all site-specific attributes in the following format:
      * $arr[<id_of_the_attribute>][<language_code>] = <attribute_name>.
      */
-    private static function get_all_atribute_names()
+    private static function get_all_attribute_names()
     {
         if (Settings::get('OC_BRANCH') == 'oc.pl')
         {

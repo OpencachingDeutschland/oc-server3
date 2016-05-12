@@ -364,44 +364,49 @@ class StatsWriterCronJob extends PrerequestCronJob
         if (Okapi::get_var('db_version', 0) + 0 < 32)
             return;
         Db::execute("lock tables okapi_stats_hourly write, okapi_stats_temp write;");
-        $rs = Db::query("
-            select
-                consumer_key,
-                user_id,
-                concat(substr(`datetime`, 1, 13), ':00:00') as period_start,
-                service_name,
-                calltype,
-                count(*) as calls,
-                sum(runtime) as runtime
-            from okapi_stats_temp
-            group by substr(`datetime`, 1, 13), consumer_key, user_id, service_name, calltype
-        ");
-        while ($row = Db::fetch_assoc($rs))
-        {
-            Db::execute("
-                insert into okapi_stats_hourly (consumer_key, user_id, period_start, service_name,
-                    total_calls, http_calls, total_runtime, http_runtime)
-                values (
-                    '".Db::escape_string($row['consumer_key'])."',
-                    '".Db::escape_string($row['user_id'])."',
-                    '".Db::escape_string($row['period_start'])."',
-                    '".Db::escape_string($row['service_name'])."',
-                    '".Db::escape_string($row['calls'])."',
-                    '".Db::escape_string(($row['calltype'] == 'http') ? $row['calls'] : 0)."',
-                    '".Db::escape_string($row['runtime'])."',
-                    '".Db::escape_string(($row['calltype'] == 'http') ? $row['runtime'] : 0)."'
-                )
-                on duplicate key update
-                    ".(($row['calltype'] == 'http') ? "
-                        http_calls = http_calls + '".Db::escape_string($row['calls'])."',
-                        http_runtime = http_runtime + '".Db::escape_string($row['runtime'])."',
-                    " : "")."
-                    total_calls = total_calls + '".Db::escape_string($row['calls'])."',
-                    total_runtime = total_runtime + '".Db::escape_string($row['runtime'])."'
+        try {
+            $rs = Db::query("
+                select
+                    consumer_key,
+                    user_id,
+                    concat(substr(`datetime`, 1, 13), ':00:00') as period_start,
+                    service_name,
+                    calltype,
+                    count(*) as calls,
+                    sum(runtime) as runtime
+                from okapi_stats_temp
+                group by substr(`datetime`, 1, 13), consumer_key, user_id, service_name, calltype
             ");
+            while ($row = Db::fetch_assoc($rs))
+            {
+                Db::execute("
+                    insert into okapi_stats_hourly (consumer_key, user_id, period_start, service_name,
+                        total_calls, http_calls, total_runtime, http_runtime)
+                    values (
+                        '".Db::escape_string($row['consumer_key'])."',
+                        '".Db::escape_string($row['user_id'])."',
+                        '".Db::escape_string($row['period_start'])."',
+                        '".Db::escape_string($row['service_name'])."',
+                        '".Db::escape_string($row['calls'])."',
+                        '".Db::escape_string(($row['calltype'] == 'http') ? $row['calls'] : 0)."',
+                        '".Db::escape_string($row['runtime'])."',
+                        '".Db::escape_string(($row['calltype'] == 'http') ? $row['runtime'] : 0)."'
+                    )
+                    on duplicate key update
+                        ".(($row['calltype'] == 'http') ? "
+                            http_calls = http_calls + '".Db::escape_string($row['calls'])."',
+                            http_runtime = http_runtime + '".Db::escape_string($row['runtime'])."',
+                        " : "")."
+                        total_calls = total_calls + '".Db::escape_string($row['calls'])."',
+                        total_runtime = total_runtime + '".Db::escape_string($row['runtime'])."'
+                ");
+            }
+            Db::execute("delete from okapi_stats_temp;");
+            Db::execute("unlock tables;");
+        } catch (Exception $e) {
+            Db::execute("unlock tables;");  // No "finally" in PHP 5.3
+            throw $e;
         }
-        Db::execute("delete from okapi_stats_temp;");
-        Db::execute("unlock tables;");
     }
 }
 
@@ -432,44 +437,49 @@ class StatsCompressorCronJob extends Cron5Job
                 okapi_stats_monthly m read,
                 okapi_stats_hourly h read;
         ");
+        try {
+            if ($month !== null) {
 
-        if ($month !== null) {
+                # Update the monthly stats.
 
-            # Update the monthly stats.
+                Db::execute("
+                    replace into okapi_stats_monthly (
+                        consumer_key, user_id, period_start, service_name, total_calls, http_calls,
+                        total_runtime, http_runtime
+                    )
+                    select
+                        h.consumer_key,
+                        h.user_id,
+                        concat(substr(h.period_start, 1, 7), '-01 00:00:00') as period_start,
+                        h.service_name,
+                        if(m.total_calls is null, 0, m.total_calls) + sum(h.total_calls) as total_calls,
+                        if(m.http_calls is null, 0, m.http_calls) + sum(h.http_calls) as http_calls,
+                        if(m.total_runtime is null, 0, m.total_runtime) + sum(h.total_runtime) as total_runtime,
+                        if(m.http_runtime is null, 0, m.http_runtime) + sum(h.http_runtime) as http_runtime
+                    from
+                        okapi_stats_hourly h
+                        left join okapi_stats_monthly m
+                            on m.consumer_key = h.consumer_key
+                            and m.user_id = h.user_id
+                            and substr(m.period_start, 1, 7) = substr(h.period_start, 1, 7)
+                            and m.service_name = h.service_name
+                    where substr(h.period_start, 1, 7) = '".Db::escape_string($month)."'
+                    group by substr(h.period_start, 1, 7), h.consumer_key, h.user_id, h.service_name;
+                ");
 
-            Db::execute("
-                replace into okapi_stats_monthly (
-                    consumer_key, user_id, period_start, service_name, total_calls, http_calls,
-                    total_runtime, http_runtime
-                )
-                select
-                    h.consumer_key,
-                    h.user_id,
-                    concat(substr(h.period_start, 1, 7), '-01 00:00:00') as period_start,
-                    h.service_name,
-                    if(m.total_calls is null, 0, m.total_calls) + sum(h.total_calls) as total_calls,
-                    if(m.http_calls is null, 0, m.http_calls) + sum(h.http_calls) as http_calls,
-                    if(m.total_runtime is null, 0, m.total_runtime) + sum(h.total_runtime) as total_runtime,
-                    if(m.http_runtime is null, 0, m.http_runtime) + sum(h.http_runtime) as http_runtime
-                from
-                    okapi_stats_hourly h
-                    left join okapi_stats_monthly m
-                        on m.consumer_key = h.consumer_key
-                        and m.user_id = h.user_id
-                        and substr(m.period_start, 1, 7) = substr(h.period_start, 1, 7)
-                        and m.service_name = h.service_name
-                where substr(h.period_start, 1, 7) = '".Db::escape_string($month)."'
-                group by substr(h.period_start, 1, 7), h.consumer_key, h.user_id, h.service_name;
-            ");
+                # Remove the processed data.
 
-            # Remove the processed data.
+                Db::execute("
+                    delete from okapi_stats_hourly
+                    where substr(period_start, 1, 7) = '".Db::escape_string($month)."'
+                ");
+            }
 
-            Db::execute("
-                delete from okapi_stats_hourly
-                where substr(period_start, 1, 7) = '".Db::escape_string($month)."'
-            ");
+            Db::execute("unlock tables;");
+        } catch (Exception $e) {
+            Db::execute("unlock tables;");  // No "finally" in PHP 5.3
+            throw $e;
         }
-        Db::execute("unlock tables;");
     }
 }
 

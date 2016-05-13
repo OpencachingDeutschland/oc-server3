@@ -40,15 +40,15 @@ class Menu
         ) {
             $rsTowns = sqlf(
                 "
-				SELECT
-					IFNULL(`stt`.`text`,`towns`.`name`) AS `name`,
-					`towns`.`name` AS `native_name`,
-					coord_lat, coord_long
-				FROM
-					`towns`
-					LEFT JOIN `sys_trans_text` `stt` ON `stt`.`trans_id`=`towns`.`trans_id` AND `stt`.`lang`='&2'
-				WHERE `towns`.`country`='&1' AND `towns`.`maplist` > 0
-				ORDER BY `name`",
+                SELECT
+                    IFNULL(`stt`.`text`,`towns`.`name`) AS `name`,
+                    `towns`.`name` AS `native_name`,
+                    coord_lat, coord_long
+                FROM
+                    `towns`
+                    LEFT JOIN `sys_trans_text` `stt` ON `stt`.`trans_id`=`towns`.`trans_id` AND `stt`.`lang`='&2'
+                WHERE `towns`.`country`='&1' AND `towns`.`maplist` > 0
+                ORDER BY `name`",
                 $country,
                 $opt['template']['locale']
             );

@@ -29,9 +29,9 @@ class ss_zip
     /**
      * ZipData segment, each element of this array contains local file header plus zipped data
      */
-    public $zipdata = array();
+    public $zipdata = [];
     /**    central directory array    */
-    public $cdir = array();
+    public $cdir = [];
 
     /**    constructor
      *
@@ -62,8 +62,8 @@ class ss_zip
         $this->cnt = 0;
         $this->offset = 0;
         $this->idx = 0;
-        $this->zipdata = array();
-        $this->cdir = array();
+        $this->zipdata = [];
+        $this->cdir = [];
     }
 
     /**opens zip file.
@@ -222,12 +222,19 @@ class ss_zip
             $zds
             . $cds
             . "PK\x05\x06\x00\x00\x00\x00"
-            . pack('v2V2v'
-                , $this->cnt            // total # of entries "on this disk"
-                , $this->cnt            // total # of entries overall
-                , $cdsl                    // size of central dir
-                , $zdsl                    // offset to start of central dir
-                , 0);                            // .zip file comment length
+            . pack(
+                'v2V2v'
+                ,
+                $this->cnt            // total # of entries "on this disk"
+                ,
+                $this->cnt            // total # of entries overall
+                ,
+                $cdsl                    // size of central dir
+                ,
+                $zdsl                    // offset to start of central dir
+                ,
+                0
+            );                            // .zip file comment length
         return $this->zipfile;
     }
 

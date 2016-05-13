@@ -803,7 +803,7 @@ function sql_slave_exclude()
 
     sql(
         "INSERT INTO `sys_repl_exclude` (`user_id`, `datExclude`) VALUES ('&1', NOW())
-		            ON DUPLICATE KEY UPDATE `datExclude`=NOW()",
+                  ON DUPLICATE KEY UPDATE `datExclude`=NOW()",
         $login->userid
     );
 }
@@ -1208,8 +1208,8 @@ function sql_table_exists($table)
 
     return sql_value(
         "SELECT COUNT(*)
-		                    FROM `information_schema`.`tables`
-		                   WHERE `table_schema`='&1' AND `table_name`='&2'",
+                          FROM `information_schema`.`tables`
+                         WHERE `table_schema`='&1' AND `table_name`='&2'",
         0,
         $opt['db']['placeholder']['db'],
         $table
@@ -1223,8 +1223,8 @@ function sql_field_exists($table, $field)
 
     return sql_value(
         "SELECT COUNT(*)
-		                    FROM `information_schema`.`columns`
-		                   WHERE `table_schema`='&1' AND `table_name`='&2' AND `column_name`='&3'",
+         FROM `information_schema`.`columns`
+         WHERE `table_schema`='&1' AND `table_name`='&2' AND `column_name`='&3'",
         0,
         $opt['db']['placeholder']['db'],
         $table,
@@ -1240,8 +1240,8 @@ function sql_field_type($table, $field)
     return strtoupper(
         sql_value(
             "SELECT `data_type`
-		                    FROM `information_schema`.`columns`
-		                   WHERE `table_schema`='&1' AND `table_name`='&2' AND `column_name`='&3'",
+             FROM `information_schema`.`columns`
+             WHERE `table_schema`='&1' AND `table_name`='&2' AND `column_name`='&3'",
             '',
             $opt['db']['placeholder']['db'],
             $table,
@@ -1257,8 +1257,8 @@ function sql_index_exists($table, $index)
 
     return sql_value(
         "SELECT COUNT(*)
-		                    FROM `information_schema`.`statistics`
-		                   WHERE `table_schema`='&1' AND `table_name`='&2' AND `index_name`='&3'",
+         FROM `information_schema`.`statistics`
+         WHERE `table_schema`='&1' AND `table_name`='&2' AND `index_name`='&3'",
         0,
         $opt['db']['placeholder']['db'],
         $table,

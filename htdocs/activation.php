@@ -27,7 +27,7 @@ $tpl->assign('sucess', false);
 if (isset($_REQUEST['submit']) || ($code != '' && $email != '')) {
     $email_not_ok = is_valid_email_address($email) ? false : true;
 
-    if ($email_not_ok == false) {
+    if ($email_not_ok === false) {
         $rs = sql("SELECT `user_id` `id`, `activation_code` `code` FROM `user` WHERE `email`='&1'", $email);
 
         if ($r = sql_fetch_array($rs)) {

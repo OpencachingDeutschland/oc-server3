@@ -21,7 +21,7 @@ class Cbench
 
     public function getmicrotime()
     {
-        list($usec, $sec) = explode(" ", microtime());
+        list($usec, $sec) = explode(' ', microtime());
 
         return ((float)$usec + (float)$sec);
     }

@@ -52,7 +52,7 @@ class login
             $this->permanent = (($cookie->get('permanent') + 0) == 1);
             $this->lastlogin = $cookie->get('lastlogin');
             $this->sessionid = $cookie->get('sessionid');
-            // $this->admin = $cookie->get('admin');		nonsense
+            // $this->admin = $cookie->get('admin');      nonsense
             $this->verified = false;
 
             $this->verify();
@@ -83,7 +83,7 @@ class login
         $cookie->set('permanent', ($this->permanent == true ? 1 : 0));
         $cookie->set('lastlogin', $this->lastlogin);
         $cookie->set('sessionid', $this->sessionid);
-        // $cookie->set('admin', $this->admin);		nonsense
+        // $cookie->set('admin', $this->admin);      nonsense
     }
 
     public function verify()

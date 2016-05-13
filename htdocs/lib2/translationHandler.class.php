@@ -54,14 +54,14 @@ class TranslationHandler
 
         $rs = sqlf(
             "
-			SELECT
-				`sys_trans`.`text` AS `text`,
-				IFNULL(`stt`.`text`, `stt_en`.`text`) AS `trans`
-			FROM
-				`sys_trans`
-				LEFT JOIN `sys_trans_text` `stt` ON `stt`.`trans_id`=`sys_trans`.`id` AND `stt`.`lang`='&1'
-				LEFT JOIN `sys_trans_text` `stt_en` ON `stt_en`.`trans_id`=`sys_trans`.`id` AND `stt_en`.`lang`='EN'
-				WHERE `sys_trans`.`text`!=''",
+            SELECT
+                `sys_trans`.`text` AS `text`,
+                IFNULL(`stt`.`text`, `stt_en`.`text`) AS `trans`
+            FROM
+                `sys_trans`
+                LEFT JOIN `sys_trans_text` `stt` ON `stt`.`trans_id`=`sys_trans`.`id` AND `stt`.`lang`='&1'
+                LEFT JOIN `sys_trans_text` `stt_en` ON `stt_en`.`trans_id`=`sys_trans`.`id` AND `stt_en`.`lang`='EN'
+                WHERE `sys_trans`.`text`!=''",
             $language_upper
         );
 

@@ -1,5 +1,5 @@
 <?php
- /***************************************************************************
+/***************************************************************************
  *  For license information see doc/license.txt
  *
  *  Example settings file for okapi-update.php. Copy this to

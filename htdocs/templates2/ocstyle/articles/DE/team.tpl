@@ -45,6 +45,7 @@
     <tr><td><img src="{$opt.page.teampic_url}slini11.png" /></td><td><a href="{$opt.page.teammember_url}viewprofile.php?userid=159941">Slini11</a><br />Softwareentwicklung</td></tr>
     <tr><td><img src="{$opt.page.teampic_url}spike05de.png" /></td><td><a href="{$opt.page.teammember_url}viewprofile.php?userid=130977">Spike05de</a><br />Anwendersupport, Datenpflege</td></tr>
     <tr><td><img src="{$opt.page.teampic_url}steingesicht.jpg" /></td><td><a href="{$opt.page.teammember_url}viewprofile.php?userid=165774">Steingesicht</a><br />Datenpflege, Forenmoderation</td></tr>
+    <tr><td><img src="{$opt.page.teampic_url}dummy.jpg" /></td><td><a href="{$opt.page.teammember_url}viewprofile.php?userid=325701">teiling88</a><br />Softwareentwicklung</td></tr>
     <tr><td>&nbsp;</td></tr>
   </table>
 

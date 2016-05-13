@@ -188,7 +188,7 @@ cd /var/www/html/htdocs && composer install --ignore-platform-reqs
 
 label "Install Database Dump from '$DUMP_URL'"
 label "Download SQL Dump"
-wget -q "$DUMP_URL" -O opencaching_dump.sql.gz
+wget "$DUMP_URL" -O opencaching_dump.sql.gz
 gzip -d opencaching_dump.sql.gz
 
 if [ -f opencaching_dump.sql ]; then

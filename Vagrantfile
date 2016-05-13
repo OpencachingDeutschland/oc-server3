@@ -66,7 +66,9 @@ Vagrant.configure(2) do |config|
 	# the image is not compatible with latest vbguest additions,
 	# if you have vbguest plugin installed and it automatically tries to update
 	# it will break the VM
-	config.vbguest.auto_update = false
+	if Vagrant.has_plugin? 'vagrant-vbguest'
+		config.vbguest.auto_update = false
+	end
 
 	config.ssh.insert_key = false
 	config.vm.provision "shell", path: "provision.sh"

@@ -1,11 +1,16 @@
 <?php
+/****************************************************************************
+ * For license information see doc/license.txt
+ *
+ * Unicode Reminder メモ
+ ****************************************************************************/
 
-namespace Oc;
+namespace Oc\Frontend;
 
 use Behat\Mink\Driver\GoutteDriver;
 use Behat\Mink\Session;
 
-abstract class AbstractTest extends \PHPUnit_Framework_TestCase
+abstract class AbstractFrontendTest extends \PHPUnit_Framework_TestCase
 {
     protected $dir;
 
@@ -18,7 +23,7 @@ abstract class AbstractTest extends \PHPUnit_Framework_TestCase
     public function __construct()
     {
         parent::__construct();
-        require_once(__DIR__ . '/../htdocs/vendor/autoload.php');
+        require_once(__DIR__ . '/../../htdocs/vendor/autoload.php');
         $this->dir = __DIR__;
     }
 

@@ -1,10 +1,15 @@
 <?php
+/****************************************************************************
+ * For license information see doc/license.txt
+ *
+ * Unicode Reminder メモ
+ ****************************************************************************/
 
-namespace Oc\Login;
+namespace Oc\Frontend\Login;
 
-use Oc\AbstractTest;
+use Oc\Frontend\AbstractFrontendTest;
 
-class LoginTest extends AbstractTest
+class LoginTest extends AbstractFrontendTest
 {
 
     public function testLoginFormOnStartPage()

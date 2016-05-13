@@ -8,7 +8,7 @@ VM_NAME		= "OpenCaching DEV VM"
 VM_HOST		= "local.opencaching.de"
 
 if Vagrant::Util::Platform.windows?
-  HOSTS_FILE = 'c:\WINDOWS\system32\drivers\etc\hosts'
+  HOSTS_FILE = ENV['SystemRoot'] + '\system32\drivers\etc\hosts'
   SYNCED_FOLDER_TYPE = 'smb'
 else
   HOSTS_FILE = '/etc/hosts'

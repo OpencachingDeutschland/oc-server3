@@ -34,7 +34,7 @@ define('REGEX_STATPIC_TEXT', '^[' . EUROPEAN_LETTERS . '0-9\.\-_ @=)(\/\\\&*\$+~
 define('ADMIN_TRANSLATE', 1);     // edit translation
 define('ADMIN_MAINTAINANCE', 2);  // check table etc.
 define('ADMIN_USER', 4);          // drop users, caches etc.
-define('ADMIN_NEWS', 8);          // approve news entries
+define('ADMIN_NEWS', 8);          // obsolete / reserved
 define('ADMIN_RESTORE', 16);      // restore vandalized listings
 define('ADMIN_ROOT', 128 | 127);  // root + all previous rights
 define('ADMIN_LISTING', 1024);    // can edit any cache listings

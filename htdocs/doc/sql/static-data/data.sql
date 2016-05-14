@@ -895,7 +895,6 @@ INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustrin
 INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('28', 'MNU_START_PRIVACY', 'Privacy statement', '14', 'Privacy statement', '14', '0', 'articles.php?page=dsb', '0', '1', '21', '', '1', NULL);
 INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('29', 'MNU_START_REGISTER_ACTIVATION', 'Activation', '127', 'Activation', '127', '0', 'activation.php', '0', '3', '1', '', '1', NULL);
 INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('30', 'MNU_CACHES_USERPROFILE', 'Userprofile', '128', 'Userprofile', '128', '0', 'viewprofile.php', '0', '10', '4', '', '0', NULL);
-INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('31', 'MNU_START_NEWS_POST', 'Post some news', '180', 'Post some news', '180', '0', 'newstopic.php', '0', '4', '1', '', '0', NULL);
 INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('32', 'MNU_LOGIN', 'Login', '207', 'Login', '207', '0', 'login.php', '0', '0', '8', '#D5D9FF', '1', NULL);
 INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('33', 'MNU_CACHES_USERTOPS', 'Show recommendations', '248', 'Show recommendations', '248', '0', 'usertops.php', '0', '10', '5', '', '0', NULL);
 INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('34', 'MNU_ERROR', 'Error message', '133', 'Error message', '133', '0', '', '0', '0', '9', '#D5D9FF', '0', NULL);
@@ -926,7 +925,6 @@ INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustrin
 INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('63', 'MNU_MYPROFILE_ADOPT', 'Adoptions', '827', 'Adoptions', '827', '0', 'adoptcache.php', '1', '9', '9', '', '1', NULL);
 INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('64', 'MNU_CACHES_ADOPT', 'Adoptions', '827', 'Adoptions', '827', '0', 'adoptcache.php', '0', '10', '9', '', '0', NULL);
 INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('65', 'MNU_ADMIN_USER', 'Manage User', '859', 'Manage User', '859', '0', 'adminuser.php', '1', '12', '5', '', '0', NULL);
-INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('66', 'MNU_ADMIN_NEWS', 'News approve', '873', 'News approve', '873', '1', 'newsapprove.php', '1', '12', '7', '', '0', NULL);
 INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('67', 'MNU_START_DONATE', 'Donations', '900', 'Donations', '900', '0', 'articles.php?page=donations', '1', '1', '13', '', '1', NULL);
 INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('68', 'MNU_START_TOS', 'Terms of use', '906', 'Terms of use', '906', '0', 'articles.php?page=impressum#tos', '1', '1', '16', '', '1', NULL);
 INSERT INTO `sys_menu` (`id`, `id_string`, `title`, `title_trans_id`, `menustring`, `menustring_trans_id`, `access`, `href`, `visible`, `parent`, `position`, `color`, `sitemap`, `only_if_parent`) VALUES ('69', 'MNU_START_TEAM', 'Our Team', '907', 'Our Team', '907', '0', 'articles.php?page=team', '1', '1', '14', '', '1', NULL);
@@ -3057,8 +3055,6 @@ INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('63', 
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('64', 'table:languages;field=name', '0');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('65', './templates2/ocstyle/restorecaches.tpl', '64');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('70', './templates2/ocstyle/news.tpl', '9');
-INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('70', './templates2/ocstyle/newsapprove.tpl', '8');
-INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('70', './templates2/ocstyle/newsapprove.tpl', '9');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('70', './templates2/ocstyle/start.tpl', '25');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('70', './templates2/ocstyle/sys_main.tpl', '231');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('70', 'table:sys_menu;field=menustring', '0');
@@ -3528,9 +3524,6 @@ INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('447',
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('448', './templates2/ocstyle/error.tpl', '62');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('449', './templates2/ocstyle/translate.tpl', '46');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('450', './templates2/ocstyle/sys_outofservice.tpl', '8');
-INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('452', './templates2/ocstyle/newstopic.tpl', '9');
-INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('453', './templates2/ocstyle/newstopic.tpl', '16');
-INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('454', './templates2/ocstyle/newstopic.tpl', '26');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('455', './templates2/ocstyle/activation.tpl', '70');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('455', './templates2/ocstyle/adminuser.tpl', '23');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('455', './templates2/ocstyle/adminuser.tpl', '149');
@@ -3539,21 +3532,10 @@ INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('455',
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('455', './templates2/ocstyle/mydescription.tpl', '52');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('455', './templates2/ocstyle/mydetails.tpl', '91');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('455', './templates2/ocstyle/myprofile.tpl', '227');
-INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('455', './templates2/ocstyle/newstopic.tpl', '99');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('455', './templates2/ocstyle/picture.tpl', '150');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('455', './templates2/ocstyle/remindemail.tpl', '45');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('455', './templates2/ocstyle/restorecaches.tpl', '22');
-INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('456', './templates2/ocstyle/newstopic.tpl', '92');
-INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('457', './templates2/ocstyle/newstopic.tpl', '86');
-INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('458', './templates2/ocstyle/newstopic.tpl', '90');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('459', './templates2/ocstyle/activation.tpl', '39');
-INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('459', './templates2/ocstyle/newstopic.tpl', '81');
-INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('460', './templates2/ocstyle/newstopic.tpl', '79');
-INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('461', './templates2/ocstyle/newstopic.tpl', '72');
-INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('462', './templates2/ocstyle/newstopic.tpl', '67');
-INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('463', './templates2/ocstyle/newstopic.tpl', '61');
-INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('464', './templates2/ocstyle/newstopic.tpl', '53');
-INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('465', './templates2/ocstyle/newstopic.tpl', '29');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('466', './templates2/ocstyle/activation.tpl', '16');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('467', './templates2/ocstyle/activation.tpl', '32');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('467', './templates2/ocstyle/mylists.tpl', '119');
@@ -3563,7 +3545,6 @@ INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('469',
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('470', './templates2/ocstyle/sys_outofservice.tpl', '10');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('471', './templates2/ocstyle/register.tpl', '163');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('472', './templates2/ocstyle/register.tpl', '175');
-INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('473', './templates2/ocstyle/newstopic.tpl', '39');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('474', './templates2/ocstyle/login.tpl', '35');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('475', './templates2/ocstyle/sys_outofservice.tpl', '7');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('477', './templates2/ocstyle/sys_sqldebugger.tpl', '345');
@@ -3791,7 +3772,6 @@ INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('577',
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('577', './lang/de/ocstyle/editcache.inc.php', '39');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('577', './lang/de/ocstyle/editcache.inc.php', '45');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('577', './templates2/ocstyle/adminuser.tpl', '130');
-INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('577', './templates2/ocstyle/newsapprove.tpl', '27');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('577', './templates2/ocstyle/query.tpl', '33');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('577', './templates2/ocstyle/res_cachelists.tpl', '41');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('577', './templates2/ocstyle/res_logentry_logitem.tpl', '68');
@@ -4132,7 +4112,6 @@ INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('812',
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('814', './templates2/ocstyle/viewprofile.tpl', '106');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('815', './templates2/ocstyle/adminhistory.tpl', '17');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('815', './templates2/ocstyle/mydetails.tpl', '64');
-INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('815', './templates2/ocstyle/newsapprove.tpl', '23');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('815', './templates2/ocstyle/res_userstats.tpl', '12');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('815', './templates2/ocstyle/res_userstats.tpl', '40');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('815', './templates2/ocstyle/res_userstats.tpl', '85');
@@ -4218,7 +4197,6 @@ INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('871',
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('872', './templates2/ocstyle/garmin.tpl', '45');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('873', 'table:sys_menu;field=menustring', '0');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('873', 'table:sys_menu;field=title', '0');
-INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('874', './templates2/ocstyle/newsapprove.tpl', '25');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('875', './templates2/ocstyle/res_oconly81.tpl', '10');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('876', './templates2/ocstyle/res_oconly81.tpl', '27');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('877', './templates2/ocstyle/viewcache.tpl', '530');
@@ -4734,7 +4712,6 @@ INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1644'
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1645', 'table:cache_attrib;field=html_desc', '0');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1646', 'table:cache_attrib;field=html_desc', '0');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1647', 'table:cache_attrib;field=html_desc', '0');
-INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1648', './newstopic.php', '61');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1650', './lang/de/expressions.inc.php', '30');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1652', './lang/de/ocstyle/redirect.tpl.php', '12');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1653', './templates2/ocstyle/query.tpl', '33');

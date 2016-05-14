@@ -164,11 +164,6 @@ $opt['logic']['password_hash'] = false;
  */
 $opt['logic']['password_salt'] = '';
 
-/* E-Mail for notification about news (newstopic.php)
- */
-$opt['news']['mail'] = '<admin email>';
-$opt['mail']['subject'] = '[<domain>] ';
-
 /* pregenerated waypoint list for new caches
  * - Waypoint prefix (OC, OP, OZ ... AA=local development)
  * - When pool contains less than min_count, generation process starts

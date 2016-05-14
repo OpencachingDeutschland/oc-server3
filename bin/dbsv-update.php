@@ -1047,6 +1047,20 @@ function dbv_156()  // clean up data created by bad cacheLogsBeforeUpdate trigge
     sql("DELETE FROM `cache_logs_modified` WHERE `date` = '0000-00-00 00:00:00'");
 }
 
+function dbv_157()   // discard news entry system
+{
+    // The feature of displaying news via `news` table stays for now,
+    // but the feature of entering news via the OC website is discarded.
+
+    sql("TRUNCATE TABLE `news`");
+    sql(
+        "UPDATE `user`
+         SET `admin` = `admin` \& ~'&1'
+         WHERE (`admin` \& 255) <> 255",
+        ADMIN_NEWS
+    );
+}
+
 // When adding new mutations, take care that they behave well if run multiple
 // times. This improves robustness of database versioning.
 //

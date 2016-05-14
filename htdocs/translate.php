@@ -211,6 +211,7 @@ switch ($action) {
 
     case 'quickall':
         $cookie->set('translate_mode', 'all');
+        break;
 
     default:
         $action = 'listnew';

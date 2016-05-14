@@ -1028,6 +1028,11 @@ function dbv_155()
     }
 }
 
+function dbv_156()  // clean up data created by bad cacheLogsBeforeUpdate trigger
+{
+    sql("DELETE FROM `cache_logs_modified` WHERE `date` = '0000-00-00 00:00:00'");
+}
+
 // When adding new mutations, take care that they behave well if run multiple
 // times. This improves robustness of database versioning.
 //

@@ -397,6 +397,7 @@
 					 `note`= (SELECT COUNT(*) FROM `cache_logs` WHERE `type` IN (3) AND `cache_logs`.`cache_id` = `stat_caches`.`cache_id`),
 					 `will_attend`= (SELECT COUNT(*) FROM `cache_logs` WHERE `type` IN (8) AND `cache_logs`.`cache_id` = `stat_caches`.`cache_id`),
 					 `maintenance`= (SELECT COUNT(*) FROM `cache_logs` WHERE `type` IN (9,10,11,13,14) AND `cache_logs`.`cache_id` = `stat_caches`.`cache_id`);
+	       SET nModified=nModified+ROW_COUNT();
 
 	       /* stat_cache_logs */
 	       UPDATE `stat_cache_logs` SET
@@ -1171,15 +1172,15 @@
 								 */
 								IF DATEDIFF(NOW(), OLD.`date_created`) > 1 THEN
 									INSERT IGNORE INTO `cache_logs_modified`
-										(`id`, `uuid`, `node`, `date_created`, `entry_last_modified`, `last_modified`, `log_last_modified`,
-										 `cache_id`, `user_id`, `type`, `oc_team_comment`, `date`,
-										 `needs_maintenance`, `listing_outdated`,
-										 `text`, `text_html`, `modify_date`)
-									VALUES
-										(OLD.`id`, OLD.`uuid`, OLD.`node`, OLD.`date_created`, OLD.`entry_last_modified`, OLD.`last_modified`,
-										 OLD.`log_last_modified`, OLD.`cache_id`, OLD.`user_id`, OLD.`type`,
-										 OLD.`needs_maintenance`, OLD.`listing_outdated`,
-										 OLD.`oc_team_comment`, OLD.`date`, OLD.`text`, OLD.`text_html`, NOW());
+										(`id`, `uuid`, `node`, `date_created`, `entry_last_modified`, `last_modified`,
+										 `log_last_modified`, `cache_id`, `user_id`, `type`, `oc_team_comment`, `date`,
+										 `needs_maintenance`, `listing_outdated`, `text`, `text_html`, `modify_date`
+										)
+									VALUES (
+										OLD.`id`, OLD.`uuid`, OLD.`node`, OLD.`date_created`, OLD.`entry_last_modified`, OLD.`last_modified`,
+										OLD.`log_last_modified`, OLD.`cache_id`, OLD.`user_id`, OLD.`type`, OLD.`oc_team_comment`, OLD.`date`,
+										OLD.`needs_maintenance`, OLD.`listing_outdated`, OLD.`text`, OLD.`text_html`, NOW()
+									);
 								END IF;
 
 								SET NEW.`last_modified`=NOW();

@@ -92,7 +92,7 @@ switch ($action) {
     case 'selectlang':
         break;
 
-    case'verify':
+    case 'verify':
         verify();
         break;
 

@@ -50,9 +50,11 @@ class translate
         } else {
             // do not use sql_value(), as this is also used from lib1
             $rs = sql("SELECT IFNULL(`sys_trans_text`.`text`, '&3')
-                        FROM `sys_trans`
-                        LEFT JOIN `sys_trans_text` ON `sys_trans`.`id`=`sys_trans_text`.`trans_id` AND `sys_trans_text`.`lang`='&1'
-                        WHERE `sys_trans`.`text`='&2' LIMIT 1", $lang, $search, $message);
+                       FROM `sys_trans`
+                       LEFT JOIN `sys_trans_text` 
+                         ON `sys_trans`.`id`=`sys_trans_text`.`trans_id` 
+                         AND `sys_trans_text`.`lang`='&1'
+                       WHERE `sys_trans`.`text`='&2' LIMIT 1", $lang, $search, $message);
             if ($r = sql_fetch_array($rs)) {
                 $trans = $r[0];
             } else {
@@ -62,7 +64,7 @@ class translate
         }
 
         // safe w/o mb because asc(%) < 128
-        if (strpos($trans, "%") >= 0) {
+        if (strpos($trans, '%') >= 0) {
             $trans = $this->v($trans);
         }
 

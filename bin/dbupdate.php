@@ -14,6 +14,9 @@ $rootpath = $opt['rootpath'] = __DIR__ . '/../htdocs/';
 chdir($rootpath);
 require_once('lib2/cli.inc.php');
 
+echo "updating composer dependencies\n";
+system('composer install --ignore-platform-reqs');
+
 echo "updating db structure\n";
 require('dbsv-update.php');
 

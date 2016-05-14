@@ -25,12 +25,15 @@ $msDirlist[] = './lib2';
 $msDirlist[] = './lib2/logic';
 $msDirlist[] = './lib2/old';
 $msDirlist[] = './lib2/search';
-$msDirlist[] = './old';
 $msDirlist[] = './templates2/mail';
 $msDirlist[] = './templates2/ocstyle';
 $msDirlist[] = './util/notification';
 $msDirlist[] = './util/watchlist';
+$msDirlist[] = './util2/cron';
 $msDirlist[] = './util2/cron/modules';
+
+// recursively add directory trees to $msDirlist
+addClassesDirectoriesToDirlist('src/Oc/Libse');
 
 $transIdCols = [
     ['table' => 'attribute_categories', 'text' => 'name', 'trans_id' => 'trans_id'],
@@ -53,9 +56,6 @@ $transIdCols = [
     ['table' => 'sys_menu', 'text' => 'title', 'trans_id' => 'title_trans_id'],
     ['table' => 'towns', 'text' => 'name', 'trans_id' => 'trans_id'],
 ];
-
-// directory libse needs to be added recursive
-addClassesDirecotriesToDirlist('libse');
 
 $tpl->name = 'translate';
 $tpl->menuitem = MNU_ADMIN_TRANSLATE;
@@ -88,136 +88,149 @@ if (calcDataSqlChecksum(true) != getSysConfig('datasql_checksum', '')) {
     $tpl->assign('datasqlfailed', false);
 }
 
-// @todo migrate to switch case
+switch ($action) {
+    case 'selectlang':
+        break;
 
-if ($action == 'selectlang') {
-} else {
-    if ($action == 'verify') {
+    case 'verify':
         verify();
-    } else {
-        if ($action == 'resetids') {
-            resetIds();
-        } else {
-            if ($action == 'clearcache') {
-                clearCache();
-            } else {
-                if ($action == 'export') {
-                    export();
-                } else {
-                    if ($action == 'xmlexport') {
-                        xmlexport();
-                    } else {
-                        if ($action == 'xmlimport') {
-                        } else {
-                            if ($action == 'xmlimport2') {
-                                xmlimport2();
-                            } else {
-                                if ($action == 'xmlimport3') {
-                                    xmlimport3();
-                                } else {
-                                    if ($action == 'textexportnew') {
-                                        textexport($translang, false);
-                                    } else {
-                                        if ($action == 'textexportall') {
-                                            textexport($translang, true);
-                                        } else {
-                                            if ($action == 'textimport') {
-                                            } else {
-                                                if ($action == 'textimport2') {
-                                                    textimport($translang);
-                                                } else {
-                                                    if ($action == 'edit') {
-                                                        if (!$access->mayTranslate($translang)) {
-                                                            $tpl->error(ERROR_NO_ACCESS);
-                                                        }
+        break;
 
-                                                        edit();
-                                                    } else {
-                                                        if ($action == 'copy_en') {
-                                                            copy_english_texts();
-                                                        } else {
-                                                            if ($action == 'listfaults') {
-                                                                $trans = sql(
-                                                                    "SELECT `sys_trans`.`id`, `sys_trans`.`text` FROM `sys_trans` LEFT JOIN `sys_trans_ref` ON `sys_trans`.`id`=`sys_trans_ref`.`trans_id` WHERE ISNULL(`sys_trans_ref`.`trans_id`) ORDER BY `sys_trans`.`id` DESC"
-                                                                );
-                                                                $tpl->assign_rs('trans', $trans);
-                                                                sql_free_result($trans);
-                                                            } else {
-                                                                if ($action == 'listall') {
-                                                                    $trans = sql(
-                                                                        "SELECT `sys_trans`.`id`, `sys_trans`.`text`, `sys_trans_text`.`text` AS `trans` FROM `sys_trans` LEFT JOIN `sys_trans_text` ON `sys_trans`.`id`=`sys_trans_text`.`trans_id` AND `sys_trans_text`.`lang`='&1' ORDER BY `sys_trans`.`id` DESC",
-                                                                        $translang
-                                                                    );
-                                                                    $tpl->assign_rs('trans', $trans);
-                                                                    sql_free_result($trans);
-                                                                } else {
-                                                                    if ($action == 'remove') {
-                                                                        if (!$access->mayTranslate($translang)) {
-                                                                            $tpl->error(ERROR_NO_ACCESS);
-                                                                        }
+    case 'resetids':
+        resetIds();
+        break;
 
-                                                                        remove();
-                                                                    } else {
-                                                                        if ($action == 'scan') {
-                                                                            scan();
-                                                                        } else {
-                                                                            if ($action == 'scanstart') {
-                                                                                scanStart();
-                                                                                exit;
-                                                                            } else {
-                                                                                if ($action == 'scanfile') {
-                                                                                    $filename = isset($_REQUEST['filename']) ? $_REQUEST['filename'] : '';
-                                                                                    scanFile($filename);
-                                                                                    exit;
-                                                                                } else {
-                                                                                    if ($action == 'quicknone') {
-                                                                                        $cookie->un_set(
-                                                                                            'translate_mode'
-                                                                                        );
-                                                                                    } else {
-                                                                                        if ($action == 'quicknew') {
-                                                                                            $cookie->set(
-                                                                                                'translate_mode',
-                                                                                                'new'
-                                                                                            );
-                                                                                        } else {
-                                                                                            if ($action == 'quickall') {
-                                                                                                $cookie->set(
-                                                                                                    'translate_mode',
-                                                                                                    'all'
-                                                                                                );
-                                                                                            }
-                                                                                        }
-                                                                                    }
+    case 'clearcache':
+        clearCache();
+        break;
 
-                                                                                    $action = 'listnew';
+    case 'export':
+        export();
+        break;
 
-                                                                                    $trans = sql(
-                                                                                        "SELECT DISTINCT `sys_trans`.`id`, `sys_trans`.`text` FROM `sys_trans` LEFT JOIN `sys_trans_text` ON `sys_trans`.`id`=`sys_trans_text`.`trans_id` AND `sys_trans_text`.`lang`='&1' LEFT JOIN `sys_trans_ref` ON `sys_trans`.`id`=`sys_trans_ref`.`trans_id` WHERE (ISNULL(`sys_trans_text`.`trans_id`) OR `sys_trans_text`.`text`='') ORDER BY `sys_trans`.`id` DESC",
-                                                                                        $translang
-                                                                                    );
-                                                                                    $tpl->assign_rs('trans', $trans);
-                                                                                    sql_free_result($trans);
-                                                                                }
-                                                                            }
-                                                                        }
-                                                                    }
-                                                                }
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+    case 'xmlexport':
+        xmlexport();
+        break;
+
+    case 'xmlimport':
+        break;
+
+    case 'xmlimport2':
+        xmlimport2();
+        break;
+
+    case 'xmlimport3':
+        xmlimport3();
+        break;
+
+    case 'textexportnew':
+        textexport($translang, false);
+        break;
+
+    case 'textexportall':
+        textexport($translang, true);
+        break;
+
+    case 'textimport':
+        break;
+
+    case 'textimport2':
+        textimport($translang);
+        break;
+
+    case 'edit':
+        if (!$access->mayTranslate($translang)) {
+            $tpl->error(ERROR_NO_ACCESS);
         }
-    }
+        edit();
+        break;
+
+    case 'copy_en':
+        copy_english_texts();
+        break;
+
+    case 'listfaults':
+        $trans = sql(
+            "SELECT
+                `sys_trans`.`id`,
+                `sys_trans`.`text`
+             FROM `sys_trans`
+             LEFT JOIN `sys_trans_ref`
+                ON `sys_trans`.`id`=`sys_trans_ref`.`trans_id`
+             WHERE ISNULL(`sys_trans_ref`.`trans_id`)
+             ORDER BY `sys_trans`.`id` DESC"
+        );
+        $tpl->assign_rs('trans', $trans);
+        sql_free_result($trans);
+        break;
+
+    case 'listall':
+        $trans = sql(
+            "SELECT
+                `sys_trans`.`id`,
+                `sys_trans`.`text`,
+                `sys_trans_text`.`text` AS `trans`
+             FROM `sys_trans`
+             LEFT JOIN `sys_trans_text`
+                ON `sys_trans`.`id`=`sys_trans_text`.`trans_id`
+                AND `sys_trans_text`.`lang`='&1'
+             ORDER BY `sys_trans`.`id` DESC",
+            $translang
+        );
+        $tpl->assign_rs('trans', $trans);
+        sql_free_result($trans);
+        break;
+
+    case 'remove':
+        if (!$access->mayTranslate($translang)) {
+            $tpl->error(ERROR_NO_ACCESS);
+        }
+        remove();
+        break;
+
+    case 'scan':
+        scan();
+        break;
+
+    case 'scanstart':
+        scanStart();
+        break;
+
+    case 'scanfile':
+        $filename = isset($_REQUEST['filename']) ? $_REQUEST['filename'] : '';
+        scanFile($filename);
+        exit;
+
+    case 'quicknone':
+        $cookie->un_set('translate_mode');
+        break;
+
+    case 'quicknew':
+        $cookie->set('translate_mode', 'new');
+        break;
+
+    case 'quickall':
+        $cookie->set('translate_mode', 'all');
+        break;
+
+    default:
+        $action = 'listnew';
+        $trans = sql(
+            "SELECT DISTINCT
+                `sys_trans`.`id`,
+                `sys_trans`.`text`
+             FROM `sys_trans`
+             LEFT JOIN `sys_trans_text`
+                ON `sys_trans`.`id`=`sys_trans_text`.`trans_id`
+                AND `sys_trans_text`.`lang`='&1'
+             LEFT JOIN `sys_trans_ref`
+                ON `sys_trans`.`id`=`sys_trans_ref`.`trans_id`
+             WHERE ISNULL(`sys_trans_text`.`trans_id`) OR `sys_trans_text`.`text`=''
+             ORDER BY `sys_trans`.`id` DESC",
+            $translang
+        );
+        $tpl->assign_rs('trans', $trans);
+        sql_free_result($trans);
 }
 
 $languages = [];
@@ -284,10 +297,17 @@ function edit()
     if (isset($_REQUEST['usetrans'])) {
         $usetransid = $_REQUEST['usetrans'] + 0;
 
-        $rs = sql("SELECT `lang`, `text` FROM `sys_trans_text` WHERE `trans_id`='&1'", $usetransid);
+        $rs = sql(
+            "SELECT `lang`, `text`
+             FROM `sys_trans_text`
+             WHERE `trans_id`='&1'",
+            $usetransid
+        );
         while ($r = sql_fetch_assoc($rs)) {
             sql(
-                "INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`) VALUES ('&1', '&2', '&3') ON DUPLICATE KEY UPDATE `text`='&3'",
+                "INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`)
+                 VALUES ('&1', '&2', '&3')
+                 ON DUPLICATE KEY UPDATE `text`='&3'",
                 $id,
                 $r['lang'],
                 $r['text']
@@ -299,7 +319,9 @@ function edit()
         if (isset($_REQUEST['submit'])) {
             $transText = isset($_REQUEST['transText']) ? $_REQUEST['transText'] : '';
             sql(
-                "INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`) VALUES ('&1', '&2', '&3') ON DUPLICATE KEY UPDATE `text`='&3'",
+                "INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`)
+                 VALUES ('&1', '&2', '&3')
+                 ON DUPLICATE KEY UPDATE `text`='&3'",
                 $id,
                 $translang,
                 $transText
@@ -317,19 +339,25 @@ function edit()
     $tpl->assign('text', $r['text']);
 
     $rs = sql(
-        "SELECT `resource_name`, `line` FROM `sys_trans_ref` WHERE `trans_id`='&1' ORDER BY resource_name, line ASC",
+        "SELECT `resource_name`, `line`
+         FROM `sys_trans_ref`
+         WHERE `trans_id`='&1'
+         ORDER BY resource_name, line ASC",
         $id
     );
     $tpl->assign_rs('transRef', $rs);
     sql_free_result($rs);
 
     // built sql string to search for texts with little difference (levensthein() would be better, but not available in MYSQL)
-    $sWhereSql = "SOUNDEX('" . sql_escape($r['text']) . "')=SOUNDEX(`sys_trans`.`text`) OR SOUNDEX('" . sql_escape(
-            $r['text']
-        ) . "')=SOUNDEX(`sys_trans_text`.`text`)";
+    $sWhereSql =
+        "SOUNDEX('" . sql_escape($r['text']) . "')=SOUNDEX(`sys_trans`.`text`)
+         OR SOUNDEX('" . sql_escape($r['text']) . "')=SOUNDEX(`sys_trans_text`.`text`)";
 
     $trans = sql(
-        "SELECT DISTINCT `sys_trans`.`id`, `sys_trans`.`text` FROM `sys_trans` INNER JOIN `sys_trans_text` ON `sys_trans`.`id`=`sys_trans_text`.`trans_id` WHERE `sys_trans`.`id`!='&1' AND (" . $sWhereSql . ")",
+        "SELECT DISTINCT `sys_trans`.`id`, `sys_trans`.`text`
+         FROM `sys_trans`
+         INNER JOIN `sys_trans_text` ON `sys_trans`.`id`=`sys_trans_text`.`trans_id`
+         WHERE `sys_trans`.`id`!='&1' AND (" . $sWhereSql . ")",
         $id
     );
     $tpl->assign_rs('trans', $trans);
@@ -337,7 +365,14 @@ function edit()
 
     $tpl->assign(
         'transText',
-        sql_value("SELECT `text` FROM `sys_trans_text` WHERE `trans_id`='&1' AND `lang`='&2'", '', $id, $translang)
+        sql_value(
+            "SELECT `text`
+             FROM `sys_trans_text`
+             WHERE `trans_id`='&1' AND `lang`='&2'",
+            '',
+            $id,
+            $translang
+        )
     );
 }
 
@@ -391,19 +426,31 @@ function resetIds()
     // clean up dead refs
     sql_temp_table('transDeadIds');
     sql(
-        "CREATE TEMPORARY TABLE &transDeadIds (`trans_id` INT(11) PRIMARY KEY) SELECT DISTINCT `sys_trans_ref`.`trans_id` FROM `sys_trans_ref` LEFT JOIN `sys_trans` ON `sys_trans_ref`.`trans_id`=`sys_trans`.`id` WHERE ISNULL(`sys_trans`.`id`)"
+        "CREATE TEMPORARY TABLE &transDeadIds (`trans_id` INT(11) PRIMARY KEY)
+            SELECT DISTINCT `sys_trans_ref`.`trans_id`
+            FROM `sys_trans_ref`
+            LEFT JOIN `sys_trans` ON `sys_trans_ref`.`trans_id`=`sys_trans`.`id`
+            WHERE ISNULL(`sys_trans`.`id`)"
     );
     sql(
-        "DELETE `sys_trans_ref` FROM `sys_trans_ref`, &transDeadIds WHERE `sys_trans_ref`.`trans_id`=&transDeadIds.`trans_id`"
+        "DELETE `sys_trans_ref`
+         FROM `sys_trans_ref`, &transDeadIds
+         WHERE `sys_trans_ref`.`trans_id`=&transDeadIds.`trans_id`"
     );
     sql_drop_temp_table('transDeadIds');
 
     sql_temp_table('transDeadIds');
     sql(
-        "CREATE TEMPORARY TABLE &transDeadIds (`trans_id` INT(11) PRIMARY KEY) SELECT DISTINCT `sys_trans_text`.`trans_id` FROM `sys_trans_text` LEFT JOIN `sys_trans` ON `sys_trans_text`.`trans_id`=`sys_trans`.`id` WHERE ISNULL(`sys_trans`.`id`)"
+        "CREATE TEMPORARY TABLE &transDeadIds (`trans_id` INT(11) PRIMARY KEY)
+            SELECT DISTINCT `sys_trans_text`.`trans_id`
+            FROM `sys_trans_text`
+            LEFT JOIN `sys_trans` ON `sys_trans_text`.`trans_id`=`sys_trans`.`id`
+            WHERE ISNULL(`sys_trans`.`id`)"
     );
     sql(
-        "DELETE `sys_trans_text` FROM `sys_trans_text`, &transDeadIds WHERE `sys_trans_text`.`trans_id`=&transDeadIds.`trans_id`"
+        "DELETE `sys_trans_text`
+         FROM `sys_trans_text`, &transDeadIds
+         WHERE `sys_trans_text`.`trans_id`=&transDeadIds.`trans_id`"
     );
     sql_drop_temp_table('transDeadIds');
 
@@ -415,7 +462,11 @@ function resetIds()
     $lastId = sql_value("SELECT MAX(`id`) FROM `sys_trans`", 0);
 
     while ($id = sql_value(
-        "SELECT `s1`.`id`+1 FROM `sys_trans` AS `s1` LEFT JOIN `sys_trans` AS `s2` ON `s1`.`id`+1=`s2`.`id` WHERE ISNULL(`s2`.`id`) AND `s1`.`id`<'&1' ORDER BY `s1`.`id` LIMIT 1",
+        "SELECT `s1`.`id`+1
+         FROM `sys_trans` AS `s1`
+         LEFT JOIN `sys_trans` AS `s2` ON `s1`.`id`+1=`s2`.`id`
+         WHERE ISNULL(`s2`.`id`) AND `s1`.`id`<'&1'
+         ORDER BY `s1`.`id` LIMIT 1",
         0,
         $lastId
     )) {
@@ -452,7 +503,9 @@ function setId($oldId, $newId)
 
     foreach ($transIdCols as $col) {
         sql(
-            "UPDATE `" . $col['table'] . "` SET `" . $col['trans_id'] . "`='&1' WHERE `" . $col['trans_id'] . "`='&2'",
+            "UPDATE `" . $col['table'] . "`
+             SET `" . $col['trans_id'] . "`='&1'
+             WHERE `" . $col['trans_id'] . "`='&2'",
             $newId,
             $oldId
         );
@@ -507,9 +560,9 @@ function export()
     $f = fopen($opt['rootpath'] . 'doc/sql/static-data/data.sql', 'a');
     fwrite(
         $f,
-        "INSERT INTO `sysconfig` (`name`, `value`) VALUES ('datasql_checksum', '" . sql_escape(
-            $checksum
-        ) . "') ON DUPLICATE KEY UPDATE `value`='" . sql_escape($checksum) . "';"
+        "INSERT INTO `sysconfig` (`name`, `value`)
+         VALUES ('datasql_checksum', '" . sql_escape($checksum) . "')
+         ON DUPLICATE KEY UPDATE `value`='" . sql_escape($checksum) . "';"
     );
     fclose($f);
 
@@ -630,7 +683,11 @@ function xmlexport()
     $writer->writeAttribute('version', '1.0');
     $writer->writeAttribute('timestamp', date('c'));
 
-    $rs = sql("SELECT `id`, `text` FROM `sys_trans` ORDER BY `id` ASC");
+    $rs = sql(
+        "SELECT `id`, `text`
+         FROM `sys_trans`
+         ORDER BY `id` ASC"
+    );
     while ($r = sql_fetch_assoc($rs)) {
         $writer->startElement('text');
         $writer->writeAttribute('id', $r['id']);
@@ -640,14 +697,21 @@ function xmlexport()
             $writer->writeElement(
                 $lang[$n],
                 sql_value(
-                    "SELECT `text` FROM `sys_trans_text` WHERE `trans_id`='&1' AND `lang`='&2'",
+                    "SELECT `text`
+                     FROM `sys_trans_text`
+                     WHERE `trans_id`='&1' AND `lang`='&2'",
                     '',
                     $r['id'],
                     $lang[$n]
                 )
             );
         }
-        $rsUsage = sql("SELECT `resource_name`, `line` FROM `sys_trans_ref` WHERE `trans_id`='&1'", $r['id']);
+        $rsUsage = sql(
+            "SELECT `resource_name`, `line`
+             FROM `sys_trans_ref`
+             WHERE `trans_id`='&1'",
+            $r['id']
+        );
         while ($rUsage = sql_fetch_assoc($rsUsage)) {
             $line = '';
             if ($rUsage['line'] != 0) {
@@ -768,7 +832,9 @@ function xmlimport3()
                         $sText = base64_decode($_REQUEST[$k . $nIndex . 'new']);
 
                         sql(
-                            "INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`) VALUES ('&1', '&2', '&3') ON DUPLICATE KEY UPDATE `text`='&3'",
+                            "INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`)
+                             VALUES ('&1', '&2', '&3')
+                             ON DUPLICATE KEY UPDATE `text`='&3'",
                             $transId,
                             $k,
                             $sText
@@ -790,18 +856,20 @@ function textexport($translang, $all)
     header('Content-Disposition: attachment; filename="translation.txt"');
 
     $rs = sql(
-        "
-		SELECT
-			`id`,
-			IFNULL(`sys_trans_text`.`text`, `sys_trans`.`text`) AS `text`
-		FROM
-			`sys_trans`
-			LEFT JOIN `sys_trans_text` ON `sys_trans_text`.`trans_id`=`sys_trans`.`id` AND `sys_trans_text`.`lang`='EN'
-		ORDER BY `id` ASC"
+        "SELECT
+            `id`,
+            IFNULL(`sys_trans_text`.`text`, `sys_trans`.`text`) AS `text`
+         FROM `sys_trans`
+         LEFT JOIN `sys_trans_text`
+            ON `sys_trans_text`.`trans_id`=`sys_trans`.`id`
+            AND `sys_trans_text`.`lang`='EN'
+         ORDER BY `id` ASC"
     );
     while ($r = sql_fetch_assoc($rs)) {
         $translated = sql_value(
-            "SELECT `text` FROM `sys_trans_text` WHERE `trans_id`='&1' AND `lang`='&2'",
+            "SELECT `text`
+             FROM `sys_trans_text`
+             WHERE `trans_id`='&1' AND `lang`='&2'",
             '',
             $r['id'],
             $translang
@@ -839,14 +907,18 @@ function textimport($lang)
 
         if ($nId != '') {
             $transId = sql_value(
-                "SELECT `trans_id` FROM `sys_trans_text` WHERE `trans_id`='&1' AND `lang`='EN' AND BINARY `text`='&2'",
+                "SELECT `trans_id`
+                 FROM `sys_trans_text`
+                 WHERE `trans_id`='&1' AND `lang`='EN' AND BINARY `text`='&2'",
                 0,
                 $nId,
                 $sEnText
             );
             if ($transId == 0) {
                 $transId = sql_value(
-                    "SELECT `id` FROM `sys_trans` WHERE `id`='&1' AND BINARY `text`='&2'",
+                    "SELECT `id`
+                     FROM `sys_trans`
+                     WHERE `id`='&1' AND BINARY `text`='&2'",
                     0,
                     $nId,
                     $sEnText
@@ -865,12 +937,20 @@ function textimport($lang)
                 }
             } else {
                 $sOldText = sql_value(
-                    "SELECT `text` FROM `sys_trans_text` WHERE `trans_id`='&1' AND `lang`='&2'",
+                    "SELECT `text`
+                     FROM `sys_trans_text`
+                     WHERE `trans_id`='&1' AND `lang`='&2'",
                     '',
                     $transId,
                     $lang
                 );
-                $sCodeText = sql_value("SELECT `text` FROM `sys_trans` WHERE `id`='&1'", '', $transId);
+                $sCodeText = sql_value(
+                    "SELECT `text`
+                     FROM `sys_trans`
+                     WHERE `id`='&1'",
+                    '',
+                    $transId
+                );
                 if (($sOldText == '') && ($sLangText != '')) {
                     // new translation
                     $saTexts[$sCodeText]['id'] = $transId;
@@ -903,22 +983,22 @@ function copy_english_texts()
 {
     sql_temp_table('transtmp');
     sql(
-        "
-			CREATE TEMPORARY TABLE &transtmp
-			SELECT `st`.`id` AS `trans_id`, 'EN' AS `lang`, `st`.`text`
-			FROM `sys_trans` `st`
-	    LEFT JOIN `sys_trans_text` `stt` ON `stt`.`trans_id`=`st`.`id` AND `stt`.`lang`='EN'
-	    WHERE `stt`.`trans_id` IS NULL"
+        "CREATE TEMPORARY TABLE &transtmp
+            SELECT `st`.`id` AS `trans_id`, 'EN' AS `lang`, `st`.`text`
+            FROM `sys_trans` `st`
+            LEFT JOIN `sys_trans_text` `stt`
+                ON `stt`.`trans_id`=`st`.`id`
+                AND `stt`.`lang`='EN'
+            WHERE `stt`.`trans_id` IS NULL"
     );
     sql(
-        "
-			INSERT INTO `sys_trans_text`
-			SELECT *,NULL FROM &transtmp"
+        "INSERT INTO `sys_trans_text`
+         SELECT *, NULL FROM &transtmp"
     );
     sql_drop_temp_table('transtmp');
 }
 
-function addClassesDirecotriesToDirlist($basedir)
+function addClassesDirectoriesToDirlist($basedir)
 {
     global $msDirlist;
     $msDirlist[] = $basedir;
@@ -934,7 +1014,7 @@ function addClassesDirecotriesToDirlist($basedir)
 
     while (($file = readdir($hDir)) !== false) {
         if ($file != '.' && $file != '..' && is_dir($basedir . $file)) {
-            addClassesDirecotriesToDirlist($basedir . $file);
+            addClassesDirectoriesToDirlist($basedir . $file);
         }
     }
     closedir($hDir);
@@ -948,12 +1028,23 @@ function verify()
     foreach ($transIdCols as $col) {
         if (!isset($col['verify']) || $col['verify']) {
             $rs = sql(
-                "SELECT `" . $col['text'] . "` `text`, `" . $col['trans_id'] . "` `trans_id` FROM `" . $col['table'] . "`"
+                "SELECT
+                    `" . $col['text'] . "` `text`,
+                    `" . $col['trans_id'] . "` `trans_id`
+                 FROM `" . $col['table'] . "`"
             );
             while ($r = sql_fetch_assoc($rs)) {
-                $st = sql_value("SELECT `text` FROM `sys_trans` WHERE `id`='&1'", false, $r['trans_id']);
+                $st = sql_value(
+                    "SELECT `text`
+                     FROM `sys_trans`
+                     WHERE `id`='&1'",
+                    false,
+                    $r['trans_id']
+                );
                 $en = sql_value(
-                    "SELECT `text` FROM `sys_trans_text` WHERE `trans_id`='&1' AND `lang`='EN'",
+                    "SELECT `text`
+                     FROM `sys_trans_text`
+                     WHERE `trans_id`='&1' AND `lang`='EN'",
                     false,
                     $r['trans_id']
                 );

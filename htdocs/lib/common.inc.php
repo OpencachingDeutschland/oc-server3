@@ -18,7 +18,7 @@
  * style      get/post/cookie   used style
  ****************************************************************************/
 
-require_once(__DIR__.'/../vendor/autoload.php');
+require_once(__DIR__ . '/../vendor/autoload.php');
 
 if (isset($opt['rootpath'])) {
     $rootpath = $opt['rootpath'];
@@ -463,15 +463,15 @@ function tpl_BuildTemplate($dbdisconnect = true)
     $tpl_usercountries = [];
     $rsUserCountries = sql(
         "SELECT `countries_options`.`country`,
-		                  IF(`countries_options`.`nodeId`='&1', 1, IF(`countries_options`.`nodeId`!=0, 2, 3)) AS `group`,
-		                  IFNULL(`sys_trans_text`.`text`, `countries`.`name`) AS `name`
-		             FROM `countries_options`
-		       INNER JOIN `countries` ON `countries_options`.`country`=`countries`.`short`
-		        LEFT JOIN `sys_trans` ON `countries`.`trans_id`=`sys_trans`.`id`
-		        LEFT JOIN `sys_trans_text` ON `sys_trans`.`id`=`sys_trans_text`.`trans_id` AND `sys_trans_text`.`lang`='&2'
-		            WHERE `countries_options`.`display`=1
-		         ORDER BY `group` ASC,
-		                  IFNULL(`sys_trans_text`.`text`, `countries`.`name`) ASC",
+                        IF(`countries_options`.`nodeId`='&1', 1, IF(`countries_options`.`nodeId`!=0, 2, 3)) AS `group`,
+                        IFNULL(`sys_trans_text`.`text`, `countries`.`name`) AS `name`
+                   FROM `countries_options`
+             INNER JOIN `countries` ON `countries_options`.`country`=`countries`.`short`
+              LEFT JOIN `sys_trans` ON `countries`.`trans_id`=`sys_trans`.`id`
+              LEFT JOIN `sys_trans_text` ON `sys_trans`.`id`=`sys_trans_text`.`trans_id` AND `sys_trans_text`.`lang`='&2'
+                  WHERE `countries_options`.`display`=1
+               ORDER BY `group` ASC,
+                        IFNULL(`sys_trans_text`.`text`, `countries`.`name`) ASC",
         $oc_nodeid,
         $locale
     );
@@ -734,7 +734,7 @@ function getUserCountry()
     // and will confusingly switch country when switching language  -- following 3.9.2015
     //
     // if (isset($opt['template']['locale']) && isset($opt['locale'][$opt['template']['locale']]['country']))
-    // 	return $opt['locale'][$opt['template']['locale']]['country'];
+    //    return $opt['locale'][$opt['template']['locale']]['country'];
 
     // default country of installation (or domain)
     if (isset($opt['template']['default']['country'])) {

@@ -647,7 +647,7 @@ function db_slave_exclude()
 
     sql(
         "INSERT INTO `sys_repl_exclude` (`user_id`, `datExclude`) VALUES ('&1', NOW())
-		 ON DUPLICATE KEY UPDATE `datExclude`=NOW()",
+         ON DUPLICATE KEY UPDATE `datExclude`=NOW()",
         $usr['userid']
     );
 }

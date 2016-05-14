@@ -14,16 +14,16 @@ require_once('html2text.class.php');
 
 
 /*
-	Do all the conversions needed to process HTML or plain text editor input,
-	for either storing it into the database or (when swiching modes)
-	re-displaying it in another editor mode.
+    Do all the conversions needed to process HTML or plain text editor input,
+    for either storing it into the database or (when swiching modes)
+    re-displaying it in another editor mode.
 
-	oldDescMode is the mode in which the editor was running which output the $text,
-	            or 0 if the text came from the database with `htm_text` = 0.
+    oldDescMode is the mode in which the editor was running which output the $text,
+    or 0 if the text came from the database with `htm_text` = 0.
 
-	descMode    is == descMode if the user hit the editor's "save" button,
-	            or the new mode if the user hit another mode button
-*/
+    descMode    is == descMode if the user hit the editor's "save" button,
+    or the new mode if the user hit another mode button
+    */
 
 function processEditorInput($oldDescMode, $descMode, $text)
 {
@@ -66,15 +66,23 @@ function html2plaintext($text, $texthtml0, $wrap)
     global $opt, $smiley;
 
     if ($texthtml0) {
-        $text = str_replace(array(
-            '<p>',
+        $text = str_replace(
+            [
+                '<p>',
+                "\n",
+                "\r"
+            ],
+            '',
+            $text
+        );
+        $text = str_replace(
+            [
+                '<br />',
+                '</p>'
+            ],
             "\n",
-            "\r"
-        ), '', $text);
-        $text = str_replace(array(
-            '<br />',
-            '</p>'
-        ), "\n", $text);
+            $text
+        );
         $text = html_entity_decode($text, ENT_COMPAT, 'UTF-8');
     } else {
         // convert smilies ...
@@ -92,10 +100,14 @@ function html2plaintext($text, $texthtml0, $wrap)
         $h2t->width = $wrap;
         $text = $h2t->get_text();
 
-        $text = str_replace(array(
-            '[s![',
-            ']!s]'
-        ), '', $text);
+        $text = str_replace(
+            [
+                '[s![',
+                ']!s]'
+            ],
+            '',
+            $text
+        );
 
         // remove e.g. trailing \n created from </p> by html2text
         while (substr($text, - 2) == "\n\n") {

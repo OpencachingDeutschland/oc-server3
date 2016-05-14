@@ -11,9 +11,9 @@ function get_cache_condition_history($cache_id)
 {
     $rs = sql(
         "SELECT `date`, `needs_maintenance`, `listing_outdated`
-		 FROM `cache_logs`
-		 WHERE `cache_id`='&1' AND (`needs_maintenance` IS NOT NULL OR `listing_outdated` IS NOT NULL)
-		 ORDER BY `date`, `id`",
+         FROM `cache_logs`
+         WHERE `cache_id`='&1' AND (`needs_maintenance` IS NOT NULL OR `listing_outdated` IS NOT NULL)
+         ORDER BY `date`, `id`",
         $cache_id
     );
     $nm = $lo = 0;

@@ -236,8 +236,8 @@ class login
             "SELECT `user_id`, `username`, 2 AS `prio`, `is_active_flag`, `permanent_login_flag`, `admin`
              FROM `user` WHERE `username`='&1' AND `password`='&2' 
              UNION
-		     SELECT `user_id`, `username`, 1 AS `prio`, `is_active_flag`, `permanent_login_flag`, `admin`
-		     FROM `user`WHERE `email`='&1' AND `password`='&2' ORDER BY `prio` ASC LIMIT 1",
+             SELECT `user_id`, `username`, 1 AS `prio`, `is_active_flag`, `permanent_login_flag`, `admin`
+             FROM `user`WHERE `email`='&1' AND `password`='&2' ORDER BY `prio` ASC LIMIT 1",
             $user,
             $encryptedPassword
         );
@@ -290,7 +290,7 @@ class login
         if ($username != "") {
             $rs = sql(
                 "SELECT `user_id`,`username`,`admin` FROM `user`
-			     WHERE `username`='&1' AND `is_active_flag`",
+                 WHERE `username`='&1' AND `is_active_flag`",
                 $username
             );
             if ($rUser = sql_fetch_assoc($rs)) {
@@ -347,7 +347,7 @@ class login
         // and will confusingly switch country when switching language  -- following 3.9.2015
         //
         // if (isset($opt['locale'][$opt['template']['locale']]['country']))
-        // 	return $opt['locale'][$opt['template']['locale']]['country'];
+        //    return $opt['locale'][$opt['template']['locale']]['country'];
 
         // default country of installation (or domain)
         return $opt['template']['default']['country'];

@@ -47,7 +47,7 @@ $feeds = [
     'wiki'
 ];
 $options = $feeds;
-array_push($options, 'newcaches');
+$options[] = 'newcaches';
 
 // simplify $opt
 foreach ($options as $option) {

@@ -8,8 +8,8 @@
  *   add/remove etc. is executed instantly
  ***************************************************************************/
 
-require_once($opt['rootpath'] . 'lib2/logic/rowEditor.class.php');
-require_once($opt['rootpath'] . 'lib2/logic/const.inc.php');
+require_once(__DIR__ . '/rowEditor.class.php');
+require_once(__DIR__ . '/const.inc.php');
 
 class picture
 {

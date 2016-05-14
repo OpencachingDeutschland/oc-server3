@@ -9,7 +9,7 @@
  ***************************************************************************/
 global $opt;
 
-require_once($opt['rootpath'] . 'lib2/logic/const.inc.php');
+require_once(__DIR__ . '/const.inc.php');
 
 class useroptions
 {

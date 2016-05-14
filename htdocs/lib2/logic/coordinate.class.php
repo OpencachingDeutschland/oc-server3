@@ -21,10 +21,10 @@ class coordinate
 
     public function getFloat()
     {
-        return array(
+        return [
             'lat' => $this->nLat,
             'lon' => $this->nLon
-        );
+        ];
     }
 
     // d.ddddd°
@@ -42,10 +42,10 @@ class coordinate
             $sLon = 'E ' . sprintf('%09.5f', $this->nLon) . '°';
         }
 
-        return array(
+        return [
             'lat' => $sLat,
             'lon' => $sLon
-        );
+        ];
     }
 
     // d° mm.mmm
@@ -101,9 +101,15 @@ class coordinate
         $nLatMin = ($nLatMin - $nLatSec);
         $nLatSec = $nLatSec * 60;
         if ($bLatN) {
-            $sLat = 'N ' . sprintf("%02d", $nLatDeg) . '° ' . sprintf("%02d", $nLatMin) . '\' ' . sprintf("%02d", $nLatSec) . '\'\'';
+            $sLat = 'N ' . sprintf("%02d", $nLatDeg) . '° ' . sprintf("%02d", $nLatMin) . '\' ' . sprintf(
+                    "%02d",
+                    $nLatSec
+                ) . '\'\'';
         } else {
-            $sLat = 'S ' . sprintf("%02d", $nLatDeg) . '° ' . sprintf("%02d", $nLatMin) . '\' ' . sprintf("%02d", $nLatSec) . '\'\'';
+            $sLat = 'S ' . sprintf("%02d", $nLatDeg) . '° ' . sprintf("%02d", $nLatMin) . '\' ' . sprintf(
+                    "%02d",
+                    $nLatSec
+                ) . '\'\'';
         }
 
         $nLon = $this->nLon;
@@ -117,9 +123,15 @@ class coordinate
         $nLonMin = ($nLonMin - $nLonSec);
         $nLonSec = $nLonSec * 60;
         if ($bLonE) {
-            $sLon = 'E ' . sprintf("%03d", $nLonDeg) . '° ' . sprintf("%02d", $nLonMin) . '\' ' . sprintf("%02d", $nLonSec) . '\'\'';
+            $sLon = 'E ' . sprintf("%03d", $nLonDeg) . '° ' . sprintf("%02d", $nLonMin) . '\' ' . sprintf(
+                    "%02d",
+                    $nLonSec
+                ) . '\'\'';
         } else {
-            $sLon = 'W ' . sprintf("%03d", $nLonDeg) . '° ' . sprintf("%02d", $nLonMin) . '\' ' . sprintf("%02d", $nLonSec) . '\'\'';
+            $sLon = 'W ' . sprintf("%03d", $nLonDeg) . '° ' . sprintf("%02d", $nLonMin) . '\' ' . sprintf(
+                    "%02d",
+                    $nLonSec
+                ) . '\'\'';
         }
 
         return [
@@ -163,8 +175,8 @@ class coordinate
                 0
             ];
         }
-        $lw = doubleval($this->nLon);
-        $bw = doubleval($this->nLat);
+        $lw = (float) $this->nLon;
+        $bw = (float) $this->nLat;
 
         //WGS84 Datum
         //Große Halbachse a und Abplattung f
@@ -211,7 +223,7 @@ class coordinate
         if ($lzn < 10) {
             $lz = "0" . $lzn;
         }
-        $bd = intval(1 + ($bw + 80) / 8);
+        $bd = (int) (1 + ($bw + 80) / 8);
         $bz = substr($b_sel, $bd - 1, 1);
 
         //Geographische Breite in Radianten br
@@ -256,22 +268,22 @@ class coordinate
         $ew = 0.9996 * ($nd * $cos1 * $dl + $nd * $cos3 * (1 - $tan2 + $etasq) * $dl3 / 6 +
                 $nd * $cos5 * (5 - 18 * $tan2 + $tan4) * $dl5 / 120) + 500000;
 
-        $nk = $nw - intval($nw);
+        $nk = $nw - (int) $nw;
         if ($nk < 0.5) {
-            $nw = "" . intval($nw);
+            $nw = '' . (int) $nw;
         } else {
-            $nw = "" . (intval($nw) + 1);
+            $nw = '' . ((int) $nw + 1);
         }
 
         while (strlen($nw) < 7) {
-            $nw = "0" . $nw;
+            $nw = '0' . $nw;
         }
 
-        $nk = $ew - intval($ew);
+        $nk = $ew - (int) $ew;
         if ($nk < 0.5) {
-            $ew = "0" . intval($ew);
+            $ew = '0' . (int) $ew;
         } else {
-            $ew = "0" . intval($ew + 1);
+            $ew = '0' . intval($ew + 1);
         }
 
         return [
@@ -313,14 +325,14 @@ class coordinate
            verschoben um dx = -606 m, dy = -23 m und dz = -413 m.*/
 
         // Geographische Länge lw und Breite bw im WGS84 Datum
-        if ($lw == "" || $bw == "") {
-            return array(
+        if ($lw == '' || $bw == '') {
+            return [
                 0,
                 0
-            );
+            ];
         }
-        $lw = doubleval($lw);
-        $bw = doubleval($bw);
+        $lw = (float) $lw;
+        $bw = (float) $bw;
 
         // Quellsystem WGS 84 Datum
         // Große Halbachse a und Abplattung fq
@@ -398,8 +410,8 @@ class coordinate
                 0
             ];
         }
-        $lp = doubleval($lp);
-        $bp = doubleval($bp);
+        $lp = (float) $lp;
+        $bp = (float) $bp;
 
         // Potsdam Datum
         // Große Halbachse a und Abplattung f
@@ -457,18 +469,18 @@ class coordinate
         $rw = ($nd * $cos1 * $dl + $nd * $cos3 * (1 - $tan2 + $etasq) * $dl3 / 6 +
             $nd * $cos5 * (5 - 18 * $tan2 + $tan4) * $dl5 / 120 + $kz * 1e6 + 500000);
 
-        $nk = $hw - intval($hw);
+        $nk = $hw - (int) $hw;
         if ($nk < 0.5) {
-            $hw = intval($hw);
+            $hw = (int) $hw;
         } else {
-            $hw = intval($hw) + 1;
+            $hw = ((int) $hw) + 1;
         }
 
-        $nk = $rw - intval($rw);
+        $nk = $rw - (int) $rw;
         if ($nk < 0.5) {
-            $rw = intval($rw);
+            $rw = (int) $rw;
         } else {
-            $rw = intval($rw + 1);
+            $rw = (int) ($rw + 1);
         }
 
         return [
@@ -583,11 +595,11 @@ class coordinate
         $mapplus = "<a href=\"http://www.mapplus.ch/frame.php?map=&x=$y&y=$x&zl=13\" target=\"_blank\">MapPlus</a>";
         $mapsearch = "<a href=\"http://map.search.ch/$y,$x\" target=\"_blank\">map.search.ch</a>";
 
-        return array(
+        return [
             'coord' => $swissgrid,
             $mapplus,
             $mapsearch
-        );
+        ];
     }
 
     public static function parseRequestLat($name)
@@ -640,14 +652,16 @@ class coordinate
             'lang' => strtolower($language),
         ];
         $params_str = http_build_query($params);
-        $context = stream_context_create([
-            'http' => [
-                'method' => 'POST',
-                'header' => "Content-Type: application/x-www-form-urlencoded\r\n" .
-                    "Content-Length: " . strlen($params_str) . "\r\n",
-                'content' => $params_str,
-            ],
-        ]);
+        $context = stream_context_create(
+            [
+                'http' => [
+                    'method' => 'POST',
+                    'header' => "Content-Type: application/x-www-form-urlencoded\r\n" .
+                        "Content-Length: " . strlen($params_str) . "\r\n",
+                    'content' => $params_str,
+                ],
+            ]
+        );
 
         $result = @file_get_contents('http://api.what3words.com/position', false, $context);
         if ($result === false) {

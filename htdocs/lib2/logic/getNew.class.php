@@ -45,7 +45,7 @@ class getNew
      * based on $this->type
      *
      * @param string $type type of the "new"-information, i.e. cache, event, rating, etc
-     * @param array  $args numeric array containing the parameter for "sql_slave"
+     * @param array $args numeric array containing the parameter for "sql_slave"
      *
      * @return object mysql result used by smarty assign_rs
      */
@@ -53,10 +53,13 @@ class getNew
     {
         // check type
         if (method_exists($this, strtolower($type) . 'Rs')) {
-            return call_user_func([
-                $this,
-                $type . 'Rs'
-            ], $args);
+            return call_user_func(
+                [
+                    $this,
+                    $type . 'Rs'
+                ],
+                $args
+            );
         }
     }
 
@@ -65,10 +68,10 @@ class getNew
      * feedForSmarty creates a HTML string to use with smarty assign method
      * based on $this->type by using RSSParser class
      *
-     * @param string  $type        type of the "new"-information, i.e. cache, event, rating, etc
-     * @param int     $items       number of feeditems to parse from feed (RSSParser)
-     * @param string  $url         url of the feed to parse (RSSParser)
-     * @param int     $timeout     maximum seconds to wait for the requested page
+     * @param string $type type of the "new"-information, i.e. cache, event, rating, etc
+     * @param int $items number of feeditems to parse from feed (RSSParser)
+     * @param string $url url of the feed to parse (RSSParser)
+     * @param int $timeout maximum seconds to wait for the requested page
      * @param boolean $includetext ???following??? add table-tag?
      *
      * @return string HTML string used for smarty assign method
@@ -77,10 +80,16 @@ class getNew
     {
         // check type
         if (method_exists($this, strtolower($type) . 'Feed')) {
-            return call_user_func([
-                $this,
-                $type . 'Feed'
-            ], $items, $url, $timeout, $includetext);
+            return call_user_func(
+                [
+                    $this,
+                    $type . 'Feed'
+                ],
+                $items,
+                $url,
+                $timeout,
+                $includetext
+            );
         }
     }
 
@@ -99,11 +108,11 @@ class getNew
 
         // check $args and set defaults
         if (is_null($args) || !is_array($args)) {
-            $args = array(
+            $args = [
                 $this->get_userCountry(),
                 $opt['template']['locale'],
                 10
-            );
+            ];
         }
 
         // execute sql
@@ -151,11 +160,11 @@ class getNew
 
         // check $args and set defaults
         if (is_null($args) || !is_array($args)) {
-            $args = array(
+            $args = [
                 $this->get_userCountry(),
                 $opt['template']['locale'],
                 10
-            );
+            ];
         }
 
         // execute sql
@@ -222,12 +231,12 @@ class getNew
 
         // check $args and set defaults
         if (is_null($args) || !is_array($args)) {
-            $args = array(
+            $args = [
                 $this->get_userCountry(),
                 $opt['template']['locale'],
                 10,
                 $this->ratingDays()
-            );
+            ];
         }
 
         // execute sql
@@ -270,9 +279,9 @@ class getNew
     /**
      * blogFeed executes the RSSParser for type "blog"
      *
-     * @param int     $items       number of feeditems to parse from feed (RSSParser)
-     * @param string  $url         url of the feed to parse (RSSParser)
-     * @param int     $timeout     maximum seconds to wait for the requested page
+     * @param int $items number of feeditems to parse from feed (RSSParser)
+     * @param string $url url of the feed to parse (RSSParser)
+     * @param int $timeout maximum seconds to wait for the requested page
      * @param boolean $includetext ???following??? add table-tag?
      *
      * @return string HTML string used for smarty assign method
@@ -308,9 +317,9 @@ class getNew
     /**
      * forumFeed executes the RSSParser for type "forum"
      *
-     * @param int     $items       number of feeditems to parse from feed (RSSParser)
-     * @param string  $url         url of the feed to parse (RSSParser)
-     * @param int     $timeout     maximum seconds to wait for the requested page
+     * @param int $items number of feeditems to parse from feed (RSSParser)
+     * @param string $url url of the feed to parse (RSSParser)
+     * @param int $timeout maximum seconds to wait for the requested page
      * @param boolean $includetext ???following??? add table-tag?
      *
      * @return string HTML string used for smarty assign method
@@ -346,10 +355,10 @@ class getNew
     /**
      * wikiFeed executes the RSSParser for type "wiki"
      *
-     * @param int     $items       number of feeditems to parse from feed (RSSParser)
-     * @param string  $url         url of the feed to parse (RSSParser)
+     * @param int $items number of feeditems to parse from feed (RSSParser)
+     * @param string $url url of the feed to parse (RSSParser)
      * @param boolean $includetext ???following??? add table-tag?
-     * @param int     $timeout     maximum seconds to wait for the requested page
+     * @param int $timeout maximum seconds to wait for the requested page
      *
      * @return string HTML string used for smarty assign method
      */

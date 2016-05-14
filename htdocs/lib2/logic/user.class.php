@@ -8,15 +8,15 @@
  *   add/remove etc. is executed instantly
  ***************************************************************************/
 
-require_once($opt['rootpath'] . 'lib2/mail.class.php');
-require_once($opt['rootpath'] . 'lib2/logic/rowEditor.class.php');
-require_once($opt['rootpath'] . 'lib2/logic/statpic.class.php');
-require_once($opt['rootpath'] . 'lib2/logic/countriesList.class.php');
-require_once($opt['rootpath'] . 'lib2/logic/picture.class.php');
-require_once($opt['rootpath'] . 'lib2/logic/cache.class.php');
-require_once($opt['rootpath'] . 'lib2/logic/cracklib.inc.php');
-require_once($opt['rootpath'] . 'lib2/logic/crypt.class.php');
-require_once($opt['rootpath'] . 'lib2/translate.class.php');
+require_once(__DIR__ . '/../mail.class.php');
+require_once(__DIR__ . '/rowEditor.class.php');
+require_once(__DIR__ . '/statpic.class.php');
+require_once(__DIR__ . '/countriesList.class.php');
+require_once(__DIR__ . '/picture.class.php');
+require_once(__DIR__ . '/cache.class.php');
+require_once(__DIR__ . '/cracklib.inc.php');
+require_once(__DIR__ . '/crypt.class.php');
+require_once(__DIR__ . '/../translate.class.php');
 
 class user
 {

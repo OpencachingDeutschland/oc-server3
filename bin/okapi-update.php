@@ -19,8 +19,8 @@ okapi_update();
 
 function okapi_update()
 {
-    $GLOBALS['rootpath'] = dirname(__FILE__) . '/../htdocs/';
-    require_once($GLOBALS['rootpath'] . "okapi/facade.php");
+    $GLOBALS['rootpath'] = __DIR__ . '/../htdocs/';
+    require_once($GLOBALS['rootpath'] . 'okapi/facade.php');
     okapi\Facade::database_update();
     // This may not work properly if an OKAPI update mutation function relies
     // on catching exceptions. The cryptic error message

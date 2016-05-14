@@ -87,7 +87,7 @@ $CAPTCHA_CONFIG = array(
     'case_sensitive' => $case_sensitive
 );
 
-require_once($opt['rootpath'] . 'lib2/b2evo-captcha/b2evo_captcha.class.php');
+require_once(__DIR__ . '/../b2evo-captcha/b2evo_captcha.class.php');
 
 // return true/false
 function checkCaptcha($id, $string)

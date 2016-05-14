@@ -10,7 +10,7 @@
  * update of tables, indexes, triggers/storedprocs and static data in developer system
  */
 
-$rootpath = $opt['rootpath'] = dirname(__FILE__) . '/../htdocs/';
+$rootpath = $opt['rootpath'] = __DIR__ . '/../htdocs/';
 chdir($rootpath);
 require_once('lib2/cli.inc.php');
 
@@ -18,8 +18,10 @@ echo "updating db structure\n";
 require('dbsv-update.php');
 
 echo "importing data.sql\n";
-system('cat ' . $rootpath . 'doc/sql/static-data/data.sql |' .
-    ' mysql -h' . $opt['db']['servername'] . ' -u' . $opt['db']['username'] . ' --password=' . $opt['db']['password'] . ' ' . $opt['db']['placeholder']['db']);
+system(
+    'cat ' . $rootpath . 'doc/sql/static-data/data.sql |' .
+    ' mysql -h' . $opt['db']['servername'] . ' -u' . $opt['db']['username'] . ' --password=' . $opt['db']['password'] . ' ' . $opt['db']['placeholder']['db']
+);
 
 echo "importing triggers\n";
 chdir($rootpath . 'doc/sql/stored-proc');

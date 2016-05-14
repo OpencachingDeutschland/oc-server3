@@ -8,9 +8,9 @@
  *   add/remove etc. is executed instantly
  ***************************************************************************/
 
-require_once($opt['rootpath'] . 'lib2/logic/rowEditor.class.php');
-require_once($opt['rootpath'] . 'lib2/logic/cache.class.php');
-require_once($opt['rootpath'] . 'lib2/logic/logtypes.inc.php');
+require_once(__DIR__ . '/rowEditor.class.php');
+require_once(__DIR__ . '/cache.class.php');
+require_once(__DIR__ . '/logtypes.inc.php');
 
 class cachelog
 {

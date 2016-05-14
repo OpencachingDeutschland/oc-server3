@@ -5,7 +5,7 @@
  *  Unicode Reminder メモ
  ***************************************************************************/
 
-require_once($opt['rootpath'] . 'lib2/logic/rowEditor.class.php');
+require_once(__DIR__ . '/rowEditor.class.php');
 
 class statpic
 {

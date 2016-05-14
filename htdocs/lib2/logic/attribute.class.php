@@ -30,25 +30,25 @@ class attribute
         $attributes = array();
         $rsAttrGroup = sql(
             "SELECT `attribute_groups`.`id`,
-		             IFNULL(`tt1`.`text`, `attribute_groups`.`name`) AS `name`,
-		             IFNULL(`tt2`.`text`, `attribute_categories`.`name`) AS `category`,
-		             `attribute_categories`.`color`
-			FROM `attribute_groups`
-			INNER JOIN `attribute_categories` 
-			    ON `attribute_groups`.`category_id`=`attribute_categories`.`id`
-			LEFT JOIN `sys_trans` AS `t1` 
-			    ON `attribute_groups`.`trans_id`=`t1`.`id` 
-			    AND `attribute_groups`.`name`=`t1`.`text`
-			LEFT JOIN `sys_trans_text` AS `tt1` 
-			    ON `t1`.`id`=`tt1`.`trans_id` 
-			    AND `tt1`.`lang`='&1'
-			LEFT JOIN `sys_trans` AS `t2` 
-			    ON `attribute_categories`.`trans_id`=`t2`.`id` 
-			    AND `attribute_categories`.`name`=`t2`.`text`
-			LEFT JOIN `sys_trans_text` AS `tt2` 
-			    ON `t2`.`id`=`tt2`.`trans_id` 
-			    AND `tt2`.`lang`='&1'
-			ORDER BY `attribute_groups`.`id` ASC",
+                     IFNULL(`tt1`.`text`, `attribute_groups`.`name`) AS `name`,
+                     IFNULL(`tt2`.`text`, `attribute_categories`.`name`) AS `category`,
+                     `attribute_categories`.`color`
+            FROM `attribute_groups`
+            INNER JOIN `attribute_categories` 
+                ON `attribute_groups`.`category_id`=`attribute_categories`.`id`
+            LEFT JOIN `sys_trans` AS `t1` 
+                ON `attribute_groups`.`trans_id`=`t1`.`id` 
+                AND `attribute_groups`.`name`=`t1`.`text`
+            LEFT JOIN `sys_trans_text` AS `tt1` 
+                ON `t1`.`id`=`tt1`.`trans_id` 
+                AND `tt1`.`lang`='&1'
+            LEFT JOIN `sys_trans` AS `t2` 
+                ON `attribute_categories`.`trans_id`=`t2`.`id` 
+                AND `attribute_categories`.`name`=`t2`.`text`
+            LEFT JOIN `sys_trans_text` AS `tt2` 
+                ON `t2`.`id`=`tt2`.`trans_id` 
+                AND `tt2`.`lang`='&1'
+            ORDER BY `attribute_groups`.`id` ASC",
             $opt['template']['locale']
         );
         while ($rAttrGroup = sql_fetch_assoc($rsAttrGroup)) {
@@ -65,23 +65,23 @@ class attribute
                 $rsAttr = sql(
                     "SELECT `cache_attrib`.`id`, 
                             IFNULL(`tt1`.`text`, `cache_attrib`.`name`) AS `name`,
-							IFNULL(`tt2`.`text`, `cache_attrib`.`html_desc`) AS `html_desc`,
-							`cache_attrib`.`icon`, `cache_attrib`.`search_default`
-					FROM `cache_attrib`
-					LEFT JOIN `sys_trans` AS `t1` 
-					    ON `cache_attrib`.`trans_id`=`t1`.`id` 
-					    AND `cache_attrib`.`name`=`t1`.`text`
-					LEFT JOIN `sys_trans_text` AS `tt1` 
-					    ON `t1`.`id`=`tt1`.`trans_id` 
-					    AND `tt1`.`lang`='&1'
-					LEFT JOIN `sys_trans` AS `t2` 
-					    ON `cache_attrib`.`html_desc_trans_id`=`t2`.`id`
-					LEFT JOIN `sys_trans_text` AS `tt2` 
-					    ON `t2`.`id`=`tt2`.`trans_id` 
-					    AND `tt2`.`lang`='&1'
-					WHERE `cache_attrib`.`group_id`='&2'" . $sAddWhereSql . "
-					AND NOT IFNULL(`cache_attrib`.`hidden`, 0)=1
-					ORDER BY `cache_attrib`.`group_id` ASC",
+                            IFNULL(`tt2`.`text`, `cache_attrib`.`html_desc`) AS `html_desc`,
+                            `cache_attrib`.`icon`, `cache_attrib`.`search_default`
+                    FROM `cache_attrib`
+                    LEFT JOIN `sys_trans` AS `t1` 
+                        ON `cache_attrib`.`trans_id`=`t1`.`id` 
+                        AND `cache_attrib`.`name`=`t1`.`text`
+                    LEFT JOIN `sys_trans_text` AS `tt1` 
+                        ON `t1`.`id`=`tt1`.`trans_id` 
+                        AND `tt1`.`lang`='&1'
+                    LEFT JOIN `sys_trans` AS `t2` 
+                        ON `cache_attrib`.`html_desc_trans_id`=`t2`.`id`
+                    LEFT JOIN `sys_trans_text` AS `tt2` 
+                        ON `t2`.`id`=`tt2`.`trans_id` 
+                        AND `tt2`.`lang`='&1'
+                    WHERE `cache_attrib`.`group_id`='&2'" . $sAddWhereSql . "
+                    AND NOT IFNULL(`cache_attrib`.`hidden`, 0)=1
+                    ORDER BY `cache_attrib`.`group_id` ASC",
                     $opt['template']['locale'],
                     $rAttrGroup['id']
                 );
@@ -89,26 +89,26 @@ class attribute
                 $rsAttr = sql(
                     "SELECT `cache_attrib`.`id`, 
                             IFNULL(`tt1`.`text`, `cache_attrib`.`name`) AS `name`,
-							IFNULL(`tt2`.`text`, `cache_attrib`.`html_desc`) AS `html_desc`,
-							`cache_attrib`.`icon`, `cache_attrib`.`search_default`
-					FROM `caches_attributes`
-					INNER JOIN `cache_attrib` 
-					    ON `caches_attributes`.`attrib_id`=`cache_attrib`.`id`
-					LEFT JOIN `sys_trans` AS `t1` 
-					    ON `cache_attrib`.`trans_id`=`t1`.`id` 
-					    AND `cache_attrib`.`name`=`t1`.`text`
-					LEFT JOIN `sys_trans_text` AS `tt1` 
-					    ON `t1`.`id`=`tt1`.`trans_id` 
-					    AND `tt1`.`lang`='&2'
-					LEFT JOIN `sys_trans` AS `t2` 
-					    ON `cache_attrib`.`html_desc_trans_id`=`t2`.`id`
-					LEFT JOIN `sys_trans_text` AS `tt2` 
-					    ON `t2`.`id`=`tt2`.`trans_id`
-					    AND `tt2`.`lang`='&2'
-					WHERE `caches_attributes`.`cache_id`='&1' 
-					AND `cache_attrib`.`group_id`='&3'
-					AND NOT IFNULL(`cache_attrib`.`hidden`, 0)=1
-					ORDER BY `cache_attrib`.`group_id` ASC",
+                            IFNULL(`tt2`.`text`, `cache_attrib`.`html_desc`) AS `html_desc`,
+                            `cache_attrib`.`icon`, `cache_attrib`.`search_default`
+                    FROM `caches_attributes`
+                    INNER JOIN `cache_attrib` 
+                        ON `caches_attributes`.`attrib_id`=`cache_attrib`.`id`
+                    LEFT JOIN `sys_trans` AS `t1` 
+                        ON `cache_attrib`.`trans_id`=`t1`.`id` 
+                        AND `cache_attrib`.`name`=`t1`.`text`
+                    LEFT JOIN `sys_trans_text` AS `tt1` 
+                        ON `t1`.`id`=`tt1`.`trans_id` 
+                        AND `tt1`.`lang`='&2'
+                    LEFT JOIN `sys_trans` AS `t2` 
+                        ON `cache_attrib`.`html_desc_trans_id`=`t2`.`id`
+                    LEFT JOIN `sys_trans_text` AS `tt2` 
+                        ON `t2`.`id`=`tt2`.`trans_id`
+                        AND `tt2`.`lang`='&2'
+                    WHERE `caches_attributes`.`cache_id`='&1' 
+                    AND `cache_attrib`.`group_id`='&3'
+                    AND NOT IFNULL(`cache_attrib`.`hidden`, 0)=1
+                    ORDER BY `cache_attrib`.`group_id` ASC",
                     $cacheId,
                     $opt['template']['locale'],
                     $rAttrGroup['id']

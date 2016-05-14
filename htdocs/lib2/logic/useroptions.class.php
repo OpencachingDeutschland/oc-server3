@@ -9,7 +9,7 @@
  ***************************************************************************/
 global $opt;
 
-require_once($opt['rootpath'] . 'lib2/logic/const.inc.php');
+require_once(__DIR__ . '/const.inc.php');
 
 class useroptions
 {
@@ -31,7 +31,7 @@ class useroptions
                      `option_order`, 0 AS `option_visible`, 
                      `internal_use`, `default_value` AS `option_value`,
                      `optionset`
-			     FROM `profile_options`'
+                 FROM `profile_options`'
             );
         } else {
             $rs = sqll(
@@ -44,23 +44,23 @@ class useroptions
                      IFNULL(`u`.`option_visible`, 0) AS `option_visible`,
                      `p`.`internal_use`,
                      IFNULL(`u`.`option_value`, `p`.`default_value`) AS `option_value`
-				 FROM `profile_options` AS `p`
-				 LEFT JOIN `user_options` AS `u`
-				     ON `p`.`id`=`u`.`option_id`
-				     AND (`u`.`user_id` IS NULL OR `u`.`user_id`='&1')
-				 UNION
-				 SELECT
-				     `u`.`option_id` AS `id`,
-				     `p`.`name`,
-				     `p`.`default_value`,
-				     `p`.`check_regex`,
-				     `p`.`option_order`,
-				     `u`.`option_visible`,
-				     `p`.`internal_use`,
-				     IFNULL(`u`.`option_value`, `p`.`default_value`) AS `option_value`
-				 FROM `user_options` AS `u`
-				 LEFT JOIN `profile_options` AS `p` ON `p`.`id`=`u`.`option_id`
-				 WHERE `u`.`user_id`='&1'",
+                 FROM `profile_options` AS `p`
+                 LEFT JOIN `user_options` AS `u`
+                     ON `p`.`id`=`u`.`option_id`
+                     AND (`u`.`user_id` IS NULL OR `u`.`user_id`='&1')
+                 UNION
+                 SELECT
+                     `u`.`option_id` AS `id`,
+                     `p`.`name`,
+                     `p`.`default_value`,
+                     `p`.`check_regex`,
+                     `p`.`option_order`,
+                     `u`.`option_visible`,
+                     `p`.`internal_use`,
+                     IFNULL(`u`.`option_value`, `p`.`default_value`) AS `option_value`
+                 FROM `user_options` AS `u`
+                 LEFT JOIN `profile_options` AS `p` ON `p`.`id`=`u`.`option_id`
+                 WHERE `u`.`user_id`='&1'",
                 $this->nUserId
             );
         }
@@ -164,7 +164,7 @@ class useroptions
         foreach ($this->nOptions as $record) {
             sqll(
                 "INSERT INTO `user_options` (`user_id`, `option_id`, `option_visible`, `option_value`)
-			     VALUES ('&1', '&2', '&3', '&4') ON DUPLICATE KEY UPDATE `option_visible`='&3', `option_value`='&4'",
+                 VALUES ('&1', '&2', '&3', '&4') ON DUPLICATE KEY UPDATE `option_visible`='&3', `option_value`='&4'",
                 $this->nUserId,
                 $record['id'],
                 $record['option_visible'],

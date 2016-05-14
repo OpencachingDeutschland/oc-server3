@@ -803,7 +803,7 @@ function sql_slave_exclude()
 
     sql(
         "INSERT INTO `sys_repl_exclude` (`user_id`, `datExclude`) VALUES ('&1', NOW())
-                  ON DUPLICATE KEY UPDATE `datExclude`=NOW()",
+                    ON DUPLICATE KEY UPDATE `datExclude`=NOW()",
         $login->userid
     );
 }
@@ -1208,8 +1208,8 @@ function sql_table_exists($table)
 
     return sql_value(
         "SELECT COUNT(*)
-                          FROM `information_schema`.`tables`
-                         WHERE `table_schema`='&1' AND `table_name`='&2'",
+         FROM `information_schema`.`tables`
+         WHERE `table_schema`='&1' AND `table_name`='&2'",
         0,
         $opt['db']['placeholder']['db'],
         $table

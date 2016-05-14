@@ -8,9 +8,9 @@
  *   add/remove etc. is executed instantly
  ***************************************************************************/
 
-require_once($opt['rootpath'] . 'lib2/logic/rowEditor.class.php');
-require_once($opt['rootpath'] . 'lib2/logic/logtypes.inc.php');
-require_once($opt['rootpath'] . 'lib/cache.inc.php');
+require_once(__DIR__ . '/rowEditor.class.php');
+require_once(__DIR__ . '/logtypes.inc.php');
+require_once(__DIR__ . '/../../lib/cache.inc.php');
 
 class cache
 {
@@ -21,7 +21,7 @@ class cache
     public static function cacheIdFromWP($wp)
     {
         $cacheid = 0;
-        if (mb_strtoupper(mb_substr($wp, 0, 2)) == 'GC') {
+        if (mb_strtoupper(mb_substr($wp, 0, 2)) === 'GC') {
             $rs = sql("SELECT `cache_id` FROM `caches` WHERE `wp_gc_maintained`='&1'", $wp);
             if (sql_num_rows($rs) != 1) {
                 sql_free_result($rs);
@@ -253,10 +253,10 @@ class cache
         $url = '';
         $rs = sql(
             "SELECT `id`, `listing_outdated`
-			 FROM `cache_logs`
-			 WHERE `cache_id`='&1' 
-			 AND `listing_outdated`>0
-			 ORDER BY `order_date` DESC, `date_created` DESC, `id` DESC",
+             FROM `cache_logs`
+             WHERE `cache_id`='&1' 
+             AND `listing_outdated`>0
+             ORDER BY `order_date` DESC, `date_created` DESC, `id` DESC",
             // same sorting order as in DB function sp_update_logstat()
             $this->getCacheId()
         );
@@ -348,7 +348,7 @@ class cache
         sql(
             "INSERT INTO `cache_visits` (`cache_id`, `user_id_ip`, `count`) 
              VALUES (&1, '&2', 1)
-			 ON DUPLICATE KEY UPDATE `count`=`count`+1",
+             ON DUPLICATE KEY UPDATE `count`=`count`+1",
             $nCacheId,
             $sIdentifier
         );
@@ -360,7 +360,7 @@ class cache
                 sql(
                     "INSERT INTO `cache_visits` (`cache_id`, `user_id_ip`, `count`)
                      VALUES (&1, '0', 1)
-					 ON DUPLICATE KEY UPDATE `count`=`count`+1",
+                     ON DUPLICATE KEY UPDATE `count`=`count`+1",
                     $nCacheId
                 );
             }
@@ -389,9 +389,9 @@ class cache
 
         $rsCoords = sql(
             "SELECT `date_created` `date`, `latitude`, `longitude`
-			 FROM `cache_coordinates`
-			 WHERE `cache_id`='&1'
-			 ORDER BY `date_created` DESC",
+             FROM `cache_coordinates`
+             WHERE `cache_id`='&1'
+             ORDER BY `date_created` DESC",
             $cacheid
         );
         $coords = sql_fetch_assoc_table($rsCoords);
@@ -418,34 +418,34 @@ class cache
 
         $rsLogs = sql(
             'SELECT `cache_logs`.`user_id` AS `userid`,
-				    `cache_logs`.`id` AS `id`,
-				    `cache_logs`.`uuid` AS `uuid`,
-				    `cache_logs`.`date` AS `date`,
-				    `cache_logs`.`order_date` AS `order_date`,
-				    `cache_logs`.`entry_last_modified`,
-				    DATEDIFF(`cache_logs`.`entry_last_modified`, `cache_logs`.`date_created`) >= 1 AS `late_modified`,
-				    substr(`cache_logs`.`date`,12) AS `time`,  /* 00:00:01 = 00:00 logged, 00:00:00 = no time */
-				    `cache_logs`.`type` AS `type`,
-				    `cache_logs`.`oc_team_comment` AS `oc_team_comment`,
-				    `cache_logs`.`needs_maintenance` AS `needs_maintenance`,
-				    `cache_logs`.`listing_outdated` AS `listing_outdated`,
-				    `cache_logs`.`text` AS `text`,
-				    `cache_logs`.`text_html` AS `texthtml`,
-				    `cache_logs`.`picture`,
-				    ' . $delfields . ",
-				    `user`.`username` AS `username`,
-				    IF(ISNULL(`cache_rating`.`cache_id`), 0, `cache_logs`.`type` IN (1,7)) AS `recommended`
-			 FROM $table AS `cache_logs`
-			 INNER JOIN `user` 
-			     ON `user`.`user_id` = `cache_logs`.`user_id`
-			 LEFT JOIN `cache_rating` 
-			     ON `cache_logs`.`cache_id`=`cache_rating`.`cache_id` 
-			     AND `cache_logs`.`user_id`=`cache_rating`.`user_id` 
-			     AND `cache_logs`.`date`=`cache_rating`.`rating_date`
-			 " . $addjoin . "
-			 WHERE `cache_logs`.`cache_id`='&1'
-			 ORDER BY `cache_logs`.`order_date` DESC, `cache_logs`.`date_created` DESC, `id` DESC
-			 LIMIT &2, &3",
+                    `cache_logs`.`id` AS `id`,
+                    `cache_logs`.`uuid` AS `uuid`,
+                    `cache_logs`.`date` AS `date`,
+                    `cache_logs`.`order_date` AS `order_date`,
+                    `cache_logs`.`entry_last_modified`,
+                    DATEDIFF(`cache_logs`.`entry_last_modified`, `cache_logs`.`date_created`) >= 1 AS `late_modified`,
+                    substr(`cache_logs`.`date`,12) AS `time`,  /* 00:00:01 = 00:00 logged, 00:00:00 = no time */
+                    `cache_logs`.`type` AS `type`,
+                    `cache_logs`.`oc_team_comment` AS `oc_team_comment`,
+                    `cache_logs`.`needs_maintenance` AS `needs_maintenance`,
+                    `cache_logs`.`listing_outdated` AS `listing_outdated`,
+                    `cache_logs`.`text` AS `text`,
+                    `cache_logs`.`text_html` AS `texthtml`,
+                    `cache_logs`.`picture`,
+                    ' . $delfields . ",
+                    `user`.`username` AS `username`,
+                    IF(ISNULL(`cache_rating`.`cache_id`), 0, `cache_logs`.`type` IN (1,7)) AS `recommended`
+             FROM $table AS `cache_logs`
+             INNER JOIN `user` 
+                 ON `user`.`user_id` = `cache_logs`.`user_id`
+             LEFT JOIN `cache_rating` 
+                 ON `cache_logs`.`cache_id`=`cache_rating`.`cache_id` 
+                 AND `cache_logs`.`user_id`=`cache_rating`.`user_id` 
+                 AND `cache_logs`.`date`=`cache_rating`.`rating_date`
+             " . $addjoin . "
+             WHERE `cache_logs`.`cache_id`='&1'
+             ORDER BY `cache_logs`.`order_date` DESC, `cache_logs`.`date_created` DESC, `id` DESC
+             LIMIT &2, &3",
             $cacheid,
             $start + 0,
             $count + 0
@@ -459,10 +459,10 @@ class cache
             $pictures = array();
             $rsPictures = sql(
                 "SELECT `url`, `title`, `uuid`, `id`, `spoiler`
-				 FROM `pictures`
-				 WHERE `object_id`='&1' 
-				 AND `object_type`=1
-				 ORDER BY `seq`",
+                 FROM `pictures`
+                 WHERE `object_id`='&1' 
+                 AND `object_type`=1
+                 ORDER BY `seq`",
                 $rLog['id']
             );
             while ($rPicture = sql_fetch_assoc($rsPictures)) {
@@ -529,7 +529,7 @@ class cache
     {
         sql(
             "INSERT INTO cache_reports (`cacheid`, `userid`, `reason`, `note`)
-		     VALUES(&1, &2, &3, '&4')",
+             VALUES(&1, &2, &3, '&4')",
             $this->nCacheId,
             $userid,
             $reportreason,
@@ -603,7 +603,7 @@ class cache
 
         sql(
             "INSERT INTO `logentries` (`module`, `eventid`, `userid`, `objectid1`, `objectid2`, `logtext`)
-		     VALUES ('cache', 5, '&1', '&2', '&3', '&4')",
+             VALUES ('cache', 5, '&1', '&2', '&3', '&4')",
             $login->userid,
             $this->nCacheId,
             0,
@@ -625,10 +625,10 @@ class cache
     {
         // cache_adoption exists?
         return (sql_value("
-						SELECT COUNT(*)
-						FROM `cache_adoption`
-						WHERE `cache_id`='&1'
-							AND `user_id`='&2'",
+                        SELECT COUNT(*)
+                        FROM `cache_adoption`
+                        WHERE `cache_id`='&1'
+                            AND `user_id`='&2'",
                 0,
                 $this->nCacheId,
                 $userId) != 0);
@@ -711,30 +711,30 @@ class cache
             "SELECT `cr`.`id`,
                     `cr`.`date_created`,
                     `cr`.`lastmodified`,
-		            `cr`.`userid`,
-		            `cr`.`adminid`,
-				    `users`.`username` AS `usernick`,
-				    `admins`.`username` AS `adminnick`,
-					IFNULL(`tt`.`text`, `crs`.`name`) AS `status`,
-				    IFNULL(`tt2`.`text`, `crr`.`name`) AS `reason`
-			 FROM `cache_reports` AS `cr`
-			 LEFT JOIN `cache_report_reasons` AS `crr` 
-			     ON `cr`.`reason`=`crr`.`id`
-			 LEFT JOIN `user` AS `users` 
-			     ON `users`.`user_id`=`cr`.`userid`
-			 LEFT JOIN `user` AS `admins` 
-			     ON `admins`.`user_id`=`cr`.`adminid`
-			 LEFT JOIN `cache_report_status` AS `crs`
-			     ON `cr`.`status`=`crs`.`id`
-			 LEFT JOIN `sys_trans_text` AS `tt` 
-			     ON `crs`.`trans_id`=`tt`.`trans_id` 
-			     AND `tt`.`lang`='&2'
-			 LEFT JOIN `sys_trans_text` AS `tt2` 
-			     ON `crr`.`trans_id`=`tt2`.`trans_id`
-			     AND `tt2`.`lang`='&2'
-			 WHERE `cr`.`cacheid`='&1'
-			     AND `cr`.`id`<>'&3'
-			 ORDER BY `cr`.`status`,`cr`.`id` DESC",
+                    `cr`.`userid`,
+                    `cr`.`adminid`,
+                    `users`.`username` AS `usernick`,
+                    `admins`.`username` AS `adminnick`,
+                    IFNULL(`tt`.`text`, `crs`.`name`) AS `status`,
+                    IFNULL(`tt2`.`text`, `crr`.`name`) AS `reason`
+             FROM `cache_reports` AS `cr`
+             LEFT JOIN `cache_report_reasons` AS `crr` 
+                 ON `cr`.`reason`=`crr`.`id`
+             LEFT JOIN `user` AS `users` 
+                 ON `users`.`user_id`=`cr`.`userid`
+             LEFT JOIN `user` AS `admins` 
+                 ON `admins`.`user_id`=`cr`.`adminid`
+             LEFT JOIN `cache_report_status` AS `crs`
+                 ON `cr`.`status`=`crs`.`id`
+             LEFT JOIN `sys_trans_text` AS `tt` 
+                 ON `crs`.`trans_id`=`tt`.`trans_id` 
+                 AND `tt`.`lang`='&2'
+             LEFT JOIN `sys_trans_text` AS `tt2` 
+                 ON `crr`.`trans_id`=`tt2`.`trans_id`
+                 AND `tt2`.`lang`='&2'
+             WHERE `cr`.`cacheid`='&1'
+                 AND `cr`.`id`<>'&3'
+             ORDER BY `cr`.`status`,`cr`.`id` DESC",
             $this->getCacheId(),
             $opt['template']['locale'],
             $exclude_report_id
@@ -757,27 +757,27 @@ class cache
         // status changes
         $rs = sql(
             "SELECT `csm`.`date_modified`,
-		            `csm`.`old_state` AS `old_status_id`,
-		            `csm`.`new_state` AS `new_status_id`,
-		            `user`.`username`,
-			        `user`.`user_id`,
-		            IFNULL(`stt_old`.`text`,`cs_old`.`name`) AS `old_status`,
-		            IFNULL(`stt_new`.`text`,`cs_new`.`name`) AS `new_status`
-		    FROM `cache_status_modified` `csm`
-	        LEFT JOIN `cache_status` `cs_old` 
-	            ON `cs_old`.`id`=`csm`.`old_state`
-			LEFT JOIN `sys_trans_text` `stt_old` 
-			    ON `stt_old`.`trans_id`=`cs_old`.`trans_id` 
-			    AND `stt_old`.`lang`='&2'
-	        LEFT JOIN `cache_status` `cs_new`
-	            ON `cs_new`.`id`=`csm`.`new_state`
-			LEFT JOIN `sys_trans_text` `stt_new`
-			    ON `stt_new`.`trans_id`=`cs_new`.`trans_id`
-			    AND `stt_new`.`lang`='&2'
-			LEFT JOIN `user` 
-			    ON `user`.`user_id`=`csm`.`user_id`
-		    WHERE `cache_id`='&1'
-		    ORDER BY `date_modified` DESC",
+                    `csm`.`old_state` AS `old_status_id`,
+                    `csm`.`new_state` AS `new_status_id`,
+                    `user`.`username`,
+                    `user`.`user_id`,
+                    IFNULL(`stt_old`.`text`,`cs_old`.`name`) AS `old_status`,
+                    IFNULL(`stt_new`.`text`,`cs_new`.`name`) AS `new_status`
+            FROM `cache_status_modified` `csm`
+            LEFT JOIN `cache_status` `cs_old` 
+                ON `cs_old`.`id`=`csm`.`old_state`
+            LEFT JOIN `sys_trans_text` `stt_old` 
+                ON `stt_old`.`trans_id`=`cs_old`.`trans_id` 
+                AND `stt_old`.`lang`='&2'
+            LEFT JOIN `cache_status` `cs_new`
+                ON `cs_new`.`id`=`csm`.`new_state`
+            LEFT JOIN `sys_trans_text` `stt_new`
+                ON `stt_new`.`trans_id`=`cs_new`.`trans_id`
+                AND `stt_new`.`lang`='&2'
+            LEFT JOIN `user` 
+                ON `user`.`user_id`=`csm`.`user_id`
+            WHERE `cache_id`='&1'
+            ORDER BY `date_modified` DESC",
             $this->getCacheId(),
             $opt['template']['locale']
         );
@@ -787,14 +787,14 @@ class cache
         // coordinate changes
         $rs = sql(
             "SELECT `cc`.`date_created`, `cc`.`longitude`, `cc`.`latitude`,
-		                  IFNULL(`admin`.`user_id`, `owner`.`user_id`) AS `user_id`,
-		                  IFNULL(`admin`.`username`, `owner`.`username`) AS `username`
-		             FROM `cache_coordinates` `cc`
-		        LEFT JOIN `caches` ON `caches`.`cache_id`=`cc`.`cache_id`
-		        LEFT JOIN `user` `owner` ON `owner`.`user_id`=`caches`.`user_id`
-		        LEFT JOIN `user` `admin` ON `admin`.`user_id`=`cc`.`restored_by`
-		            WHERE `cc`.`cache_id`='&1'
-		         ORDER BY `cc`.`date_created` DESC",
+                          IFNULL(`admin`.`user_id`, `owner`.`user_id`) AS `user_id`,
+                          IFNULL(`admin`.`username`, `owner`.`username`) AS `username`
+                     FROM `cache_coordinates` `cc`
+                LEFT JOIN `caches` ON `caches`.`cache_id`=`cc`.`cache_id`
+                LEFT JOIN `user` `owner` ON `owner`.`user_id`=`caches`.`user_id`
+                LEFT JOIN `user` `admin` ON `admin`.`user_id`=`cc`.`restored_by`
+                    WHERE `cc`.`cache_id`='&1'
+                 ORDER BY `cc`.`date_created` DESC",
             $this->getCacheId()
         );
         $coords = array();
@@ -813,15 +813,15 @@ class cache
         // Adoptions
         $rs = sql(
             "SELECT `cache_adoptions`.`date`,
-		                  `cache_adoptions`.`from_user_id`,
-		                  `cache_adoptions`.`to_user_id`,
-		                  `from_user`.`username` AS `from_username`,
-		                  `to_user`.`username` AS `to_username`
-		             FROM `cache_adoptions`
-		        LEFT JOIN `user` `from_user` ON `from_user`.`user_id`=`from_user_id`
-		        LEFT JOIN `user` `to_user` ON `to_user`.`user_id`=`to_user_id`
-		            WHERE `cache_id`='&1'
-		         ORDER BY `cache_adoptions`.`date`, `cache_adoptions`.`id`",
+                          `cache_adoptions`.`from_user_id`,
+                          `cache_adoptions`.`to_user_id`,
+                          `from_user`.`username` AS `from_username`,
+                          `to_user`.`username` AS `to_username`
+                     FROM `cache_adoptions`
+                LEFT JOIN `user` `from_user` ON `from_user`.`user_id`=`from_user_id`
+                LEFT JOIN `user` `to_user` ON `to_user`.`user_id`=`to_user_id`
+                    WHERE `cache_id`='&1'
+                 ORDER BY `cache_adoptions`.`date`, `cache_adoptions`.`id`",
             $this->getCacheId()
         );
         $tpl->assign_rs('adoptions', $rs);
@@ -889,10 +889,10 @@ class cache
     public function statusUserLogAllowed()
     {
         return (sql_value("
-							SELECT `cache_status`.`allow_user_log`
-							FROM `cache_status`,`caches`
-							WHERE `caches`.`status`=`cache_status`.`id`
-								AND `caches`.`cache_id`='&1'",
+                            SELECT `cache_status`.`allow_user_log`
+                            FROM `cache_status`,`caches`
+                            WHERE `caches`.`status`=`cache_status`.`id`
+                                AND `caches`.`cache_id`='&1'",
                 0,
                 $this->getCacheId()) == 1);
     }

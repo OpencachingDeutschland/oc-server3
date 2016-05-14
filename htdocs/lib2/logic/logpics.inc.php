@@ -26,10 +26,10 @@ function get_logpics($purpose, $userid = 0, $cacheid = 0)
     global $login;
 
     $fields = "`pics`.`uuid` AS `pic_uuid`, `pics`.`url` AS `pic_url`,
-			            `pics`.`title`, `pics`.`date_created`,
-			            `logs`.`user_id`, `logs`.`cache_id`,
-			            `logs`.`date` AS `logdate`, `pics`.`date_created` < LEFT(NOW(),4) AS `oldyear`,
-									`logs`.`id` AS `logid`, `logs`.`type` AS `logtype`";
+                        `pics`.`title`, `pics`.`date_created`,
+                        `logs`.`user_id`, `logs`.`cache_id`,
+                        `logs`.`date` AS `logdate`, `pics`.`date_created` < LEFT(NOW(),4) AS `oldyear`,
+                                    `logs`.`id` AS `logid`, `logs`.`type` AS `logtype`";
     $join_logs = "INNER JOIN `cache_logs` `logs` ON `logs`.`id`=`pics`.`object_id`";
     $join_caches = "INNER JOIN `caches` ON `caches`.`cache_id`=`logs`.`cache_id`";
     $join_cachestatus =
@@ -53,21 +53,21 @@ function get_logpics($purpose, $userid = 0, $cacheid = 0)
 
             $rs = sql_slave(
                 "SELECT $fields, `user`.`username`, `pics`.`date_created` AS `picdate`
-				   FROM (SELECT * FROM
-				            (SELECT `uuid`, `url`, `title`, `date_created`, `object_id` FROM `pictures`
-  		               WHERE `local`=1 AND `display`=1 AND `spoiler`=0 AND `unknown_format`=0
-	                	       AND `object_type`=1
-	                   ORDER BY `date_created` DESC
-		                 LIMIT 240) `piics`
-				  			     /* 20 times reserve for filtering out user dups, cache dups and invisibles */
+                   FROM (SELECT * FROM
+                            (SELECT `uuid`, `url`, `title`, `date_created`, `object_id` FROM `pictures`
+                         WHERE `local`=1 AND `display`=1 AND `spoiler`=0 AND `unknown_format`=0
+                               AND `object_type`=1
+                       ORDER BY `date_created` DESC
+                         LIMIT 240) `piics`
+                                   /* 20 times reserve for filtering out user dups, cache dups and invisibles */
                     GROUP BY `object_id`, LEFT(`date_created`,10)) `pics`   /* max. 1 pic per cache and day */
            $join_logs
            $join_caches
            $join_cachestatus
            $join_user
            GROUP BY `user`.`user_id`, LEFT(`pics`.`date_created`,10)  /* max. 1 pic per user and day */
-	         ORDER BY `pics`.`date_created` DESC
-					 LIMIT 6"
+             ORDER BY `pics`.`date_created` DESC
+                     LIMIT 6"
             );
             break;
 
@@ -78,18 +78,18 @@ function get_logpics($purpose, $userid = 0, $cacheid = 0)
             $rs = sql_slave(
                 "SELECT $fields, `user`.`username`, `pics`.`date_created` AS `picdate`
              FROM (SELECT `uuid`, `url`, `title`, `date_created`, `object_id` FROM `pictures`
-								        WHERE `local`=1 AND `display`=1 AND `spoiler`=0 AND `unknown_format`=0
-			                        AND `object_type`=1
-		  	             ORDER BY `date_created` DESC
-			                  LIMIT 600) `pics`
-			                  /* 10 times reserve for filtering out user dups and invisibles */
-    	       $join_logs
-    	       $join_caches
-    	       $join_cachestatus
-    	       $join_user
-			       GROUP BY `user`.`user_id`, LEFT(`pics`.`date_created`,10)
-			       ORDER BY `date_created` DESC
-							    LIMIT &1",
+                                        WHERE `local`=1 AND `display`=1 AND `spoiler`=0 AND `unknown_format`=0
+                                    AND `object_type`=1
+                           ORDER BY `date_created` DESC
+                              LIMIT 600) `pics`
+                              /* 10 times reserve for filtering out user dups and invisibles */
+               $join_logs
+               $join_caches
+               $join_cachestatus
+               $join_user
+                   GROUP BY `user`.`user_id`, LEFT(`pics`.`date_created`,10)
+                   ORDER BY `date_created` DESC
+                                LIMIT &1",
                 MAX_PICTURES_PER_GALLERY_PAGE
             );
             break;
@@ -104,9 +104,9 @@ function get_logpics($purpose, $userid = 0, $cacheid = 0)
 
             $result = sql_value_slave(
                 "SELECT COUNT(*)
-		             FROM `pictures` `pics`
-			           $join_logs
-					      WHERE `pics`.`object_type`=1 AND `logs`.`user_id`='&1'",
+                     FROM `pictures` `pics`
+                       $join_logs
+                          WHERE `pics`.`object_type`=1 AND `logs`.`user_id`='&1'",
                 0,
                 $userid
             );
@@ -117,12 +117,12 @@ function get_logpics($purpose, $userid = 0, $cacheid = 0)
 
             $rs = sql(
                 "SELECT $fields, `logs`.`date` AS `picdate`
-			      	       FROM `pictures` `pics`
-		                 $join_logs
-		                 $join_caches
-		                 $join_cachestatus
-		                WHERE `object_type`=1 AND `logs`.`user_id`='&1' AND NOT `spoiler`
-				         ORDER BY `logs`.`order_date` DESC",
+                             FROM `pictures` `pics`
+                         $join_logs
+                         $join_caches
+                         $join_cachestatus
+                        WHERE `object_type`=1 AND `logs`.`user_id`='&1' AND NOT `spoiler`
+                         ORDER BY `logs`.`order_date` DESC",
                 $userid
             );
             break;
@@ -133,7 +133,7 @@ function get_logpics($purpose, $userid = 0, $cacheid = 0)
 
             $rs = sql(
                 "SELECT $fields, `logs`.`date` AS `picdate`
-	                   FROM `pictures` AS `pics`
+                       FROM `pictures` AS `pics`
                      $join_logs
                     WHERE `object_type`=1 AND `logs`.`user_id`='&1'
                  ORDER BY `logs`.`order_date` DESC",
@@ -148,11 +148,11 @@ function get_logpics($purpose, $userid = 0, $cacheid = 0)
 
             $result = sql_value(
                 "SELECT COUNT(*)
-				             FROM `pictures` AS `pics`
-				             $join_logs
-				             $join_user
+                             FROM `pictures` AS `pics`
+                             $join_logs
+                             $join_user
                     WHERE `object_type`=1 AND `logs`.`cache_id`='&1'
-										  AND NOT (`data_license` IN ('&2','&3'))",
+                                          AND NOT (`data_license` IN ('&2','&3'))",
                 0,
                 $cacheid,
                 NEW_DATA_LICENSE_ACTIVELY_DECLINED,
@@ -166,11 +166,11 @@ function get_logpics($purpose, $userid = 0, $cacheid = 0)
 
             $rs = sql(
                 "SELECT $fields, `user`.`username`, `logs`.`date` AS `picdate`
-	                   FROM `pictures` AS `pics`
-	                   $join_logs " . ($userid == $login->userid ? "" : "$join_caches $join_cachestatus") . "
-	                   $join_user
+                       FROM `pictures` AS `pics`
+                       $join_logs " . ($userid == $login->userid ? "" : "$join_caches $join_cachestatus") . "
+                       $join_user
                     WHERE `object_type`=1 AND `logs`.`cache_id`='&1'
-										  AND NOT (`data_license` IN ('&2','&3'))
+                                          AND NOT (`data_license` IN ('&2','&3'))
                  ORDER BY `logs`.`order_date` DESC",
                 $cacheid,
                 NEW_DATA_LICENSE_ACTIVELY_DECLINED,

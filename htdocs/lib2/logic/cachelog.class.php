@@ -8,9 +8,9 @@
  *   add/remove etc. is executed instantly
  ***************************************************************************/
 
-require_once($opt['rootpath'] . 'lib2/logic/rowEditor.class.php');
-require_once($opt['rootpath'] . 'lib2/logic/cache.class.php');
-require_once($opt['rootpath'] . 'lib2/logic/logtypes.inc.php');
+require_once(__DIR__ . '/rowEditor.class.php');
+require_once(__DIR__ . '/cache.class.php');
+require_once(__DIR__ . '/logtypes.inc.php');
 
 class cachelog
 {
@@ -301,8 +301,8 @@ class cachelog
     {
         sql(
             "UPDATE `cache_logs` SET `picture` =
-		       (SELECT COUNT(*) FROM `pictures` WHERE `object_type`=1 AND `object_id`='&1')
-		     WHERE `id`= '&1'",
+               (SELECT COUNT(*) FROM `pictures` WHERE `object_type`=1 AND `object_id`='&1')
+             WHERE `id`= '&1'",
             $this->getLogId()
         );
     }
@@ -323,7 +323,12 @@ class cachelog
         );
         if ($allow == 1) {
             return true;
-        } elseif ($login->userid == sql_value("SELECT `user_id` FROM `caches` WHERE `cache_id`='&1'", 0, $this->getCacheId())) {
+        } elseif ($login->userid == sql_value(
+                "SELECT `user_id` FROM `caches` WHERE `cache_id`='&1'",
+                0,
+                $this->getCacheId()
+            )
+        ) {
             return true;
         }
 
@@ -346,10 +351,10 @@ class cachelog
     {
         $cache = new cache($this->getCacheId());
         if ($cache->exist() == false) {
-            return array();
+            return [];
         }
         // if ($cache->allowLog() == false)
-        //	 return array();
+        //     return array();
         // Logic Error - log types are still valid when no NEW logs are allowed for the cache.
         // (Would e.g. block admin logs and log-type restoring for locked caches.)
         return get_cache_log_types($this->getCacheId(), $this->getType());  // depends on userid
@@ -385,15 +390,15 @@ class cachelog
 
         $rs = sql(
             "
-					SELECT `date`, `text`
-					FROM `cache_logs`
-					WHERE `id`= (
-						SELECT `id`
-						FROM `cache_logs`
-						WHERE `user_id`='&1'
-						ORDER BY `date_created` DESC,
-								 `id` DESC
-						LIMIT 1)",
+                    SELECT `date`, `text`
+                    FROM `cache_logs`
+                    WHERE `id`= (
+                        SELECT `id`
+                        FROM `cache_logs`
+                        WHERE `user_id`='&1'
+                        ORDER BY `date_created` DESC,
+                                 `id` DESC
+                        LIMIT 1)",
             $userId
         );
 
@@ -403,11 +408,11 @@ class cachelog
         if ($rLastLog) {
             $rs = sql(
                 "
-						SELECT COUNT(*) AS `masslogs`
-						FROM `cache_logs`
-						WHERE `user_id`='&1'
-							AND `date`='&2'
-							AND `text`='&3'",
+                        SELECT COUNT(*) AS `masslogs`
+                        FROM `cache_logs`
+                        WHERE `user_id`='&1'
+                            AND `date`='&2'
+                            AND `text`='&3'",
                 $userId,
                 $rLastLog['date'],
                 $rLastLog['text']

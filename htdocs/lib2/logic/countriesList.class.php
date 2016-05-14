@@ -7,17 +7,16 @@
  ***************************************************************************/
 class countriesList
 {
-    var $locale;
-    var $bDefaultUsed = false;
+    public $locale;
+    public $bDefaultUsed = false;
 
     public function __construct($locale = null)
     {
         global $opt;
 
+        $this->locale = $locale;
         if ($locale === null) {
             $this->locale = $opt['template']['locale'];
-        } else {
-            $this->locale = $locale;
         }
     }
 
@@ -35,7 +34,7 @@ class countriesList
             $id
         );
 
-        if ($isDefault  == 0) {
+        if ($isDefault == 0) {
             return false;
         } else {
             return true;
@@ -125,6 +124,7 @@ class countriesList
             $id,
             $opt['template']['locale']
         );
+
         return $returnValue;
     }
 }

@@ -13,17 +13,17 @@ require_once('OcHTMLPurifier.class.php');
 require_once('html2text.class.php');
 
 
-/*
-    Do all the conversions needed to process HTML or plain text editor input,
-    for either storing it into the database or (when swiching modes)
-    re-displaying it in another editor mode.
-
-    oldDescMode is the mode in which the editor was running which output the $text,
-    or 0 if the text came from the database with `htm_text` = 0.
-
-    descMode    is == descMode if the user hit the editor's "save" button,
-    or the new mode if the user hit another mode button
-    */
+/**
+ * Do all the conversions needed to process HTML or plain text editor input,
+ * for either storing it into the database or (when swiching modes)
+ * re-displaying it in another editor mode.
+ *
+ * oldDescMode is the mode in which the editor was running which output the $text,
+ * or 0 if the text came from the database with `htm_text` = 0.
+ *
+ * descMode    is == descMode if the user hit the editor's "save" button,
+ * or the new mode if the user hit another mode button
+ */
 
 function processEditorInput($oldDescMode, $descMode, $text)
 {

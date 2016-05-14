@@ -13,20 +13,20 @@ require_once("lib2/logic/cacheIcon.inc.php");
 $search_output_file_download = false;
 
 $sAddFields .= ', `caches`.`name`, `caches`.`difficulty`, `caches`.`terrain`,
-	                  `caches`.`desc_languages`, `caches`.`date_created`,
-	                  `user`.`username`,
-	                  `cache_type`.`icon_large`,
-	                  `stt`.`text` AS `cacheTypeName`,
-	                  IFNULL(`stat_caches`.`found`, 0) `founds`,
-	                  IFNULL(`stat_caches`.`toprating`, 0) `topratings`,
-	                  IF(ISNULL(`tbloconly`.`cache_id`), 0, 1) AS `oconly`';
+                      `caches`.`desc_languages`, `caches`.`date_created`,
+                      `user`.`username`,
+                      `cache_type`.`icon_large`,
+                      `stt`.`text` AS `cacheTypeName`,
+                      IFNULL(`stat_caches`.`found`, 0) `founds`,
+                      IFNULL(`stat_caches`.`toprating`, 0) `topratings`,
+                      IF(ISNULL(`tbloconly`.`cache_id`), 0, 1) AS `oconly`';
 
 $sAddJoin .= ' INNER JOIN `user` ON `caches`.`user_id`=`user`.`user_id`
-	               INNER JOIN `cache_type` ON `cache_type`.`id`=`caches`.`type`
-	                LEFT JOIN `caches_attributes` AS `tbloconly`
-	                       ON `caches`.`cache_id`=`tbloconly`.`cache_id` AND `tbloconly`.`attrib_id`=6
-	                LEFT JOIN `sys_trans_text` `stt` ON `stt`.`trans_id`=`cache_type`.`trans_id`
-	                      AND `stt`.`lang`=\'' . sql_escape($opt['template']['locale']) . '\'';
+                   INNER JOIN `cache_type` ON `cache_type`.`id`=`caches`.`type`
+                    LEFT JOIN `caches_attributes` AS `tbloconly`
+                           ON `caches`.`cache_id`=`tbloconly`.`cache_id` AND `tbloconly`.`attrib_id`=6
+                    LEFT JOIN `sys_trans_text` `stt` ON `stt`.`trans_id`=`cache_type`.`trans_id`
+                          AND `stt`.`lang`=\'' . sql_escape($opt['template']['locale']) . '\'';
 
 
 function search_output()
@@ -66,10 +66,10 @@ function search_output()
         if ($rCache['short_desc'] === false) {
             $rCache['short_desc'] = sql_value_slave(
                 "
-				SELECT `short_desc`
-				FROM `cache_desc`
-				WHERE `cache_id`='&1'
-				AND `language`='EN'",
+                SELECT `short_desc`
+                FROM `cache_desc`
+                WHERE `cache_id`='&1'
+                AND `language`='EN'",
                 false,
                 $rCache['cache_id']
             );
@@ -77,11 +77,11 @@ function search_output()
         if ($rCache['short_desc'] === false) {
             $rCache['short_desc'] = sql_value_slave(
                 "
-				SELECT `short_desc`
-				FROM `cache_desc`
-				WHERE `cache_id`='&1'
-				ORDER BY `date_created`
-				LIMIT 1",
+                SELECT `short_desc`
+                FROM `cache_desc`
+                WHERE `cache_id`='&1'
+                ORDER BY `date_created`
+                LIMIT 1",
                 '',
                 $rCache['cache_id']
             );
@@ -100,12 +100,12 @@ function search_output()
             $ownlogs = " AND `cache_logs`.`user_id`='" . sql_escape($login->userid) . "'";
         }
         $sql = "
-				SELECT `cache_logs`.`id`, `cache_logs`.`type`, `cache_logs`.`date`, `log_types`.`icon_small`
-				FROM `cache_logs`, `log_types`
-				WHERE `cache_logs`.`cache_id`='" . sql_escape($rCache['cache_id']) . "'
-				      AND `log_types`.`id`=`cache_logs`.`type`" . $ownlogs . "
-				ORDER BY `cache_logs`.`order_date` DESC, `cache_logs`.`date_created` DESC, `cache_logs`.`id` DESC
-				LIMIT 6";
+                SELECT `cache_logs`.`id`, `cache_logs`.`type`, `cache_logs`.`date`, `log_types`.`icon_small`
+                FROM `cache_logs`, `log_types`
+                WHERE `cache_logs`.`cache_id`='" . sql_escape($rCache['cache_id']) . "'
+                      AND `log_types`.`id`=`cache_logs`.`type`" . $ownlogs . "
+                ORDER BY `cache_logs`.`order_date` DESC, `cache_logs`.`date_created` DESC, `cache_logs`.`id` DESC
+                LIMIT 6";
         $rs = sql_slave($sql);
         $rCache['logs'] = sql_fetch_assoc_table($rs);
         $rCache['firstlog'] = array_shift($rCache['logs']);

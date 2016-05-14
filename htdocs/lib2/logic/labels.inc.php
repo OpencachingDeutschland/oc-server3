@@ -29,13 +29,13 @@ class labels
                  `cache_attrib`.`id`,
                  IFNULL(`sys_trans_text`.`text`,
                  `cache_attrib`.`name`) AS `name`
-		     FROM `cache_attrib`
-		     LEFT JOIN `sys_trans`
-		         ON `cache_attrib`.`trans_id`=`sys_trans`.`id`
-		         AND `cache_attrib`.`name`=`sys_trans`.`text`
-		     LEFT JOIN `sys_trans_text`
-		         ON `sys_trans`.`id`=`sys_trans_text`.`trans_id`
-		         AND `sys_trans_text`.`lang`='&1'",
+             FROM `cache_attrib`
+             LEFT JOIN `sys_trans`
+                 ON `cache_attrib`.`trans_id`=`sys_trans`.`id`
+                 AND `cache_attrib`.`name`=`sys_trans`.`text`
+             LEFT JOIN `sys_trans_text`
+                 ON `sys_trans`.`id`=`sys_trans_text`.`trans_id`
+                 AND `sys_trans_text`.`lang`='&1'",
             $opt['template']['locale']
         );
         while ($r = sql_fetch_assoc($rs)) {
@@ -50,13 +50,13 @@ class labels
                  `cache_size`.`id`,
                  IFNULL(`sys_trans_text`.`text`,
                  `cache_size`.`name`) AS `name`
-		     FROM `cache_size`
-		     LEFT JOIN `sys_trans` 
-		         ON `cache_size`.`trans_id`=`sys_trans`.`id`
-		         AND `cache_size`.`name`=`sys_trans`.`text`
-		     LEFT JOIN `sys_trans_text`
-		         ON `sys_trans`.`id`=`sys_trans_text`.`trans_id`
-		         AND `sys_trans_text`.`lang`='&1'",
+             FROM `cache_size`
+             LEFT JOIN `sys_trans` 
+                 ON `cache_size`.`trans_id`=`sys_trans`.`id`
+                 AND `cache_size`.`name`=`sys_trans`.`text`
+             LEFT JOIN `sys_trans_text`
+                 ON `sys_trans`.`id`=`sys_trans_text`.`trans_id`
+                 AND `sys_trans_text`.`lang`='&1'",
             $opt['template']['locale']
         );
         while ($r = sql_fetch_assoc($rs)) {
@@ -71,13 +71,13 @@ class labels
                  `cache_status`.`id`,
                  IFNULL(`sys_trans_text`.`text`,
                  `cache_status`.`name`) AS `name`
-		     FROM `cache_status`
-		     LEFT JOIN `sys_trans`
-		         ON `cache_status`.`trans_id`=`sys_trans`.`id`
-		         AND `cache_status`.`name`=`sys_trans`.`text`
-		     LEFT JOIN `sys_trans_text`
-		         ON `sys_trans`.`id`=`sys_trans_text`.`trans_id`
-		         AND `sys_trans_text`.`lang`='&1'",
+             FROM `cache_status`
+             LEFT JOIN `sys_trans`
+                 ON `cache_status`.`trans_id`=`sys_trans`.`id`
+                 AND `cache_status`.`name`=`sys_trans`.`text`
+             LEFT JOIN `sys_trans_text`
+                 ON `sys_trans`.`id`=`sys_trans_text`.`trans_id`
+                 AND `sys_trans_text`.`lang`='&1'",
             $opt['template']['locale']
         );
         while ($r = sql_fetch_assoc($rs)) {
@@ -92,13 +92,13 @@ class labels
                  `cache_type`.`id`,
                  IFNULL(`sys_trans_text`.`text`,
                  `cache_type`.`en`) AS `name`
-		     FROM `cache_type`
-		     LEFT JOIN `sys_trans`
-		         ON `cache_type`.`trans_id`=`sys_trans`.`id`
-		         AND `cache_type`.`name`=`sys_trans`.`text`
-		     LEFT JOIN `sys_trans_text`
-		         ON `sys_trans`.`id`=`sys_trans_text`.`trans_id`
-		         AND `sys_trans_text`.`lang`='&1'",
+             FROM `cache_type`
+             LEFT JOIN `sys_trans`
+                 ON `cache_type`.`trans_id`=`sys_trans`.`id`
+                 AND `cache_type`.`name`=`sys_trans`.`text`
+             LEFT JOIN `sys_trans_text`
+                 ON `sys_trans`.`id`=`sys_trans_text`.`trans_id`
+                 AND `sys_trans_text`.`lang`='&1'",
             $opt['template']['locale']
         );
         while ($r = sql_fetch_assoc($rs)) {
@@ -113,13 +113,13 @@ class labels
                  `log_types`.`id`,
                  IFNULL(`sys_trans_text`.`text`,
                  `log_types`.`name`) AS `name`
-		     FROM `log_types`
-		     LEFT JOIN `sys_trans`
-		         ON `log_types`.`trans_id`=`sys_trans`.`id`
-		         AND `log_types`.`name`=`sys_trans`.`text`
-		     LEFT JOIN `sys_trans_text`
-		         ON `sys_trans`.`id`=`sys_trans_text`.`trans_id`
-		         AND `sys_trans_text`.`lang`='&1'",
+             FROM `log_types`
+             LEFT JOIN `sys_trans`
+                 ON `log_types`.`trans_id`=`sys_trans`.`id`
+                 AND `log_types`.`name`=`sys_trans`.`text`
+             LEFT JOIN `sys_trans_text`
+                 ON `sys_trans`.`id`=`sys_trans_text`.`trans_id`
+                 AND `sys_trans_text`.`lang`='&1'",
             $opt['template']['locale']
         );
         while ($r = sql_fetch_assoc($rs)) {
@@ -133,18 +133,18 @@ class labels
         $rs = sql(
             "SELECT
                  `countries_options`.`country`,
-		         IF(`countries_options`.`nodeId`='&1', 1, IF(`countries_options`.`nodeId`!=0, 2, 3)) AS `group`,
-		         IFNULL(`sys_trans_text`.`text`, `countries`.`name`) AS `name`
-		     FROM `countries_options`
-		     INNER JOIN `countries`
-		         ON `countries_options`.`country`=`countries`.`short`
-		     LEFT JOIN `sys_trans`
-		         ON `countries`.`trans_id`=`sys_trans`.`id`
-		     LEFT JOIN `sys_trans_text`
-		         ON `sys_trans`.`id`=`sys_trans_text`.`trans_id`
-		         AND `sys_trans_text`.`lang`='&2'
-		     WHERE `countries_options`.`display`=1
-		     ORDER BY `group` ASC, IFNULL(`sys_trans_text`.`text`, `countries`.`name`) ASC",
+                 IF(`countries_options`.`nodeId`='&1', 1, IF(`countries_options`.`nodeId`!=0, 2, 3)) AS `group`,
+                 IFNULL(`sys_trans_text`.`text`, `countries`.`name`) AS `name`
+             FROM `countries_options`
+             INNER JOIN `countries`
+                 ON `countries_options`.`country`=`countries`.`short`
+             LEFT JOIN `sys_trans`
+                 ON `countries`.`trans_id`=`sys_trans`.`id`
+             LEFT JOIN `sys_trans_text`
+                 ON `sys_trans`.`id`=`sys_trans_text`.`trans_id`
+                 AND `sys_trans_text`.`lang`='&2'
+             WHERE `countries_options`.`display`=1
+             ORDER BY `group` ASC, IFNULL(`sys_trans_text`.`text`, `countries`.`name`) ASC",
             $opt['logic']['node']['id'],
             $opt['template']['locale']
         );

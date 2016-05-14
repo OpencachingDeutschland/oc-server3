@@ -45,7 +45,7 @@ class getNew
      * based on $this->type
      *
      * @param string $type type of the "new"-information, i.e. cache, event, rating, etc
-     * @param array  $args numeric array containing the parameter for "sql_slave"
+     * @param array $args numeric array containing the parameter for "sql_slave"
      *
      * @return object mysql result used by smarty assign_rs
      */
@@ -53,10 +53,13 @@ class getNew
     {
         // check type
         if (method_exists($this, strtolower($type) . 'Rs')) {
-            return call_user_func([
-                $this,
-                $type . 'Rs'
-            ], $args);
+            return call_user_func(
+                [
+                    $this,
+                    $type . 'Rs'
+                ],
+                $args
+            );
         }
     }
 
@@ -65,10 +68,10 @@ class getNew
      * feedForSmarty creates a HTML string to use with smarty assign method
      * based on $this->type by using RSSParser class
      *
-     * @param string  $type        type of the "new"-information, i.e. cache, event, rating, etc
-     * @param int     $items       number of feeditems to parse from feed (RSSParser)
-     * @param string  $url         url of the feed to parse (RSSParser)
-     * @param int     $timeout     maximum seconds to wait for the requested page
+     * @param string $type type of the "new"-information, i.e. cache, event, rating, etc
+     * @param int $items number of feeditems to parse from feed (RSSParser)
+     * @param string $url url of the feed to parse (RSSParser)
+     * @param int $timeout maximum seconds to wait for the requested page
      * @param boolean $includetext ???following??? add table-tag?
      *
      * @return string HTML string used for smarty assign method
@@ -77,10 +80,16 @@ class getNew
     {
         // check type
         if (method_exists($this, strtolower($type) . 'Feed')) {
-            return call_user_func([
-                $this,
-                $type . 'Feed'
-            ], $items, $url, $timeout, $includetext);
+            return call_user_func(
+                [
+                    $this,
+                    $type . 'Feed'
+                ],
+                $items,
+                $url,
+                $timeout,
+                $includetext
+            );
         }
     }
 
@@ -99,39 +108,39 @@ class getNew
 
         // check $args and set defaults
         if (is_null($args) || !is_array($args)) {
-            $args = array(
+            $args = [
                 $this->get_userCountry(),
                 $opt['template']['locale'],
                 10
-            );
+            ];
         }
 
         // execute sql
         return sql_slave(
             "SELECT `user`.`user_id` `user_id`,
-									`user`.`username` `username`,
-									`caches`.`cache_id` `cache_id`,
-									`caches`.`name` `name`,
-									`caches`.`date_created` `date_created`,
-									`caches`.`type`,
-									`caches`.`longitude` `longitude`,
-									`caches`.`latitude` `latitude`,
-									IFNULL(`sys_trans_text`.`text`,`countries`.`en`) AS `adm1`,
-									IF(`caches`.`country`=`cache_location`.`code1`,`cache_location`.`adm2`,'') `adm2`,
-									IF(`caches`.`country`=`cache_location`.`code1`,`cache_location`.`adm3`,'') `adm3`,
-									IF(`caches`.`country`=`cache_location`.`code1`,`cache_location`.`adm4`,'') `adm4`,
-									`ca`.`attrib_id` IS NOT NULL AS `oconly`
-								FROM `caches`
-									INNER JOIN `user` ON `user`.`user_id`=`caches`.`user_id`
-									LEFT JOIN `cache_location` ON `caches`.`cache_id`=`cache_location`.`cache_id`
-									LEFT JOIN `countries` ON `countries`.`short`=`caches`.`country`
-									LEFT JOIN `sys_trans_text` ON `sys_trans_text`.`trans_id`=`countries`.`trans_id` AND `sys_trans_text`.`lang`='&2'
-									LEFT JOIN `caches_attributes` `ca` ON `ca`.`cache_id`=`caches`.`cache_id` AND `ca`.`attrib_id`=6
-								WHERE `caches`.`country`='&1' AND
-									`caches`.`type` != 6 AND
-									`caches`.`status` = 1
-								ORDER BY `caches`.`date_created` DESC
-								LIMIT 0, &3",
+                                    `user`.`username` `username`,
+                                    `caches`.`cache_id` `cache_id`,
+                                    `caches`.`name` `name`,
+                                    `caches`.`date_created` `date_created`,
+                                    `caches`.`type`,
+                                    `caches`.`longitude` `longitude`,
+                                    `caches`.`latitude` `latitude`,
+                                    IFNULL(`sys_trans_text`.`text`,`countries`.`en`) AS `adm1`,
+                                    IF(`caches`.`country`=`cache_location`.`code1`,`cache_location`.`adm2`,'') `adm2`,
+                                    IF(`caches`.`country`=`cache_location`.`code1`,`cache_location`.`adm3`,'') `adm3`,
+                                    IF(`caches`.`country`=`cache_location`.`code1`,`cache_location`.`adm4`,'') `adm4`,
+                                    `ca`.`attrib_id` IS NOT NULL AS `oconly`
+                                FROM `caches`
+                                    INNER JOIN `user` ON `user`.`user_id`=`caches`.`user_id`
+                                    LEFT JOIN `cache_location` ON `caches`.`cache_id`=`cache_location`.`cache_id`
+                                    LEFT JOIN `countries` ON `countries`.`short`=`caches`.`country`
+                                    LEFT JOIN `sys_trans_text` ON `sys_trans_text`.`trans_id`=`countries`.`trans_id` AND `sys_trans_text`.`lang`='&2'
+                                    LEFT JOIN `caches_attributes` `ca` ON `ca`.`cache_id`=`caches`.`cache_id` AND `ca`.`attrib_id`=6
+                                WHERE `caches`.`country`='&1' AND
+                                    `caches`.`type` != 6 AND
+                                    `caches`.`status` = 1
+                                ORDER BY `caches`.`date_created` DESC
+                                LIMIT 0, &3",
             $args
         );
     }
@@ -151,37 +160,37 @@ class getNew
 
         // check $args and set defaults
         if (is_null($args) || !is_array($args)) {
-            $args = array(
+            $args = [
                 $this->get_userCountry(),
                 $opt['template']['locale'],
                 10
-            );
+            ];
         }
 
         // execute sql
         return sql_slave(
             "SELECT `user`.`user_id` `user_id`,
-								`user`.`username` `username`,
-								`caches`.`cache_id` `cache_id`,
-								`caches`.`name` `name`,
-								`caches`.`date_hidden`,
-								IFNULL(`sys_trans_text`.`text`,`countries`.`en`) AS `adm1`,
-								IF(`caches`.`country`=`cache_location`.`code1`,`cache_location`.`adm2`,'') `adm2`,
-								IF(`caches`.`country`=`cache_location`.`code1`,`cache_location`.`adm3`,'') `adm3`,
-								IF(`caches`.`country`=`cache_location`.`code1`,`cache_location`.`adm4`,'') `adm4`,
-								`ca`.`attrib_id` IS NOT NULL AS `oconly`
-							FROM `caches`
-								INNER JOIN `user` ON `user`.`user_id`=`caches`.`user_id`
-								LEFT JOIN `cache_location` ON `caches`.`cache_id`=`cache_location`.`cache_id`
-								LEFT JOIN `countries` ON `countries`.`short`=`caches`.`country`
-								LEFT JOIN `sys_trans_text` ON `sys_trans_text`.`trans_id`=`countries`.`trans_id` AND `sys_trans_text`.`lang`='&2'
-								LEFT JOIN `caches_attributes` `ca` ON `ca`.`cache_id`=`caches`.`cache_id` AND `ca`.`attrib_id`=6
-							WHERE `caches`.`country`='&1' AND
-								`caches`.`date_hidden` >= curdate() AND
-								`caches`.`type` = 6 AND
-								`caches`.`status`=1
-							ORDER BY `date_hidden` ASC
-							LIMIT 0, &3",
+                                `user`.`username` `username`,
+                                `caches`.`cache_id` `cache_id`,
+                                `caches`.`name` `name`,
+                                `caches`.`date_hidden`,
+                                IFNULL(`sys_trans_text`.`text`,`countries`.`en`) AS `adm1`,
+                                IF(`caches`.`country`=`cache_location`.`code1`,`cache_location`.`adm2`,'') `adm2`,
+                                IF(`caches`.`country`=`cache_location`.`code1`,`cache_location`.`adm3`,'') `adm3`,
+                                IF(`caches`.`country`=`cache_location`.`code1`,`cache_location`.`adm4`,'') `adm4`,
+                                `ca`.`attrib_id` IS NOT NULL AS `oconly`
+                            FROM `caches`
+                                INNER JOIN `user` ON `user`.`user_id`=`caches`.`user_id`
+                                LEFT JOIN `cache_location` ON `caches`.`cache_id`=`cache_location`.`cache_id`
+                                LEFT JOIN `countries` ON `countries`.`short`=`caches`.`country`
+                                LEFT JOIN `sys_trans_text` ON `sys_trans_text`.`trans_id`=`countries`.`trans_id` AND `sys_trans_text`.`lang`='&2'
+                                LEFT JOIN `caches_attributes` `ca` ON `ca`.`cache_id`=`caches`.`cache_id` AND `ca`.`attrib_id`=6
+                            WHERE `caches`.`country`='&1' AND
+                                `caches`.`date_hidden` >= curdate() AND
+                                `caches`.`type` = 6 AND
+                                `caches`.`status`=1
+                            ORDER BY `date_hidden` ASC
+                            LIMIT 0, &3",
             $args
         );
     }
@@ -222,12 +231,12 @@ class getNew
 
         // check $args and set defaults
         if (is_null($args) || !is_array($args)) {
-            $args = array(
+            $args = [
                 $this->get_userCountry(),
                 $opt['template']['locale'],
                 10,
                 $this->ratingDays()
-            );
+            ];
         }
 
         // execute sql
@@ -235,33 +244,35 @@ class getNew
         //   optimized by adding rating_date field to cache_rating, so we don't need the log table.
         return sql_slave(
             "SELECT COUNT(`cache_rating`.`user_id`) AS `cRatings`,
-								MAX(`cache_rating`.`rating_date`) AS `dLastLog`,
-								`user`.`user_id` AS `user_id`,
-								`user`.`username` AS `username`,
-								`caches`.`cache_id` AS `cache_id`,
-								`caches`.`name` AS `name`,
-								`caches`.`type`,
-								IFNULL(`sys_trans_text`.`text`,`countries`.`en`) AS `adm1`,
-								IF(`caches`.`country`=`cache_location`.`code1`,`cache_location`.`adm2`,'') `adm2`,
-								IF(`caches`.`country`=`cache_location`.`code1`,`cache_location`.`adm3`,'') `adm3`,
-								IF(`caches`.`country`=`cache_location`.`code1`,`cache_location`.`adm4`,'') `adm4`,
-								`ca`.`attrib_id` IS NOT NULL AS `oconly`
-							FROM `cache_rating`
-								INNER JOIN `caches` ON `caches`.`cache_id`=`cache_rating`.`cache_id`
-								INNER JOIN `user` ON `user`.`user_id`=`caches`.`user_id`
-								LEFT JOIN `cache_location` ON `cache_rating`.`cache_id`=`cache_location`.`cache_id`
-								LEFT JOIN `countries` ON `countries`.`short`=`caches`.`country`
-								LEFT JOIN `sys_trans_text` ON `sys_trans_text`.`trans_id`=`countries`.`trans_id` AND `sys_trans_text`.`lang`='&2'
-								LEFT JOIN `caches_attributes` `ca` ON `ca`.`cache_id`=`caches`.`cache_id` AND `ca`.`attrib_id`=6
-							WHERE `caches`.`country`='&1' AND
-								`cache_rating`.`rating_date`>DATE_SUB(NOW(), INTERVAL &4 DAY) AND
-								`caches`.`type`!=6 AND
-								`caches`.`status`=1
-							GROUP BY `cache_rating`.`cache_id`
-							ORDER BY `cRatings` DESC,
-								`dLastLog` DESC,
-								`cache_id` DESC
-							LIMIT 0, &3",
+                MAX(`cache_rating`.`rating_date`) AS `dLastLog`,
+                `user`.`user_id` AS `user_id`,
+                `user`.`username` AS `username`,
+                `caches`.`cache_id` AS `cache_id`,
+                `caches`.`name` AS `name`,
+                `caches`.`type`,
+                IFNULL(`sys_trans_text`.`text`,`countries`.`en`) AS `adm1`,
+                IF(`caches`.`country`=`cache_location`.`code1`,`cache_location`.`adm2`,'') `adm2`,
+                IF(`caches`.`country`=`cache_location`.`code1`,`cache_location`.`adm3`,'') `adm3`,
+                IF(`caches`.`country`=`cache_location`.`code1`,`cache_location`.`adm4`,'') `adm4`,
+                `ca`.`attrib_id` IS NOT NULL AS `oconly`
+            FROM `cache_rating`
+                INNER JOIN `caches` ON `caches`.`cache_id`=`cache_rating`.`cache_id`
+                INNER JOIN `user` ON `user`.`user_id`=`caches`.`user_id`
+                LEFT JOIN `cache_location` ON `cache_rating`.`cache_id`=`cache_location`.`cache_id`
+                LEFT JOIN `countries` ON `countries`.`short`=`caches`.`country`
+                LEFT JOIN `sys_trans_text` 
+                  ON `sys_trans_text`.`trans_id`=`countries`.`trans_id`
+                  AND `sys_trans_text`.`lang`='&2'
+                LEFT JOIN `caches_attributes` `ca` ON `ca`.`cache_id`=`caches`.`cache_id` AND `ca`.`attrib_id`=6
+            WHERE `caches`.`country`='&1' AND
+                `cache_rating`.`rating_date`>DATE_SUB(NOW(), INTERVAL &4 DAY) AND
+                `caches`.`type`!=6 AND
+                `caches`.`status`=1
+            GROUP BY `cache_rating`.`cache_id`
+            ORDER BY `cRatings` DESC,
+                `dLastLog` DESC,
+                `cache_id` DESC
+            LIMIT 0, &3",
             $args
         );
     }
@@ -270,9 +281,9 @@ class getNew
     /**
      * blogFeed executes the RSSParser for type "blog"
      *
-     * @param int     $items       number of feeditems to parse from feed (RSSParser)
-     * @param string  $url         url of the feed to parse (RSSParser)
-     * @param int     $timeout     maximum seconds to wait for the requested page
+     * @param int $items number of feeditems to parse from feed (RSSParser)
+     * @param string $url url of the feed to parse (RSSParser)
+     * @param int $timeout maximum seconds to wait for the requested page
      * @param boolean $includetext ???following??? add table-tag?
      *
      * @return string HTML string used for smarty assign method
@@ -308,9 +319,9 @@ class getNew
     /**
      * forumFeed executes the RSSParser for type "forum"
      *
-     * @param int     $items       number of feeditems to parse from feed (RSSParser)
-     * @param string  $url         url of the feed to parse (RSSParser)
-     * @param int     $timeout     maximum seconds to wait for the requested page
+     * @param int $items number of feeditems to parse from feed (RSSParser)
+     * @param string $url url of the feed to parse (RSSParser)
+     * @param int $timeout maximum seconds to wait for the requested page
      * @param boolean $includetext ???following??? add table-tag?
      *
      * @return string HTML string used for smarty assign method
@@ -346,10 +357,10 @@ class getNew
     /**
      * wikiFeed executes the RSSParser for type "wiki"
      *
-     * @param int     $items       number of feeditems to parse from feed (RSSParser)
-     * @param string  $url         url of the feed to parse (RSSParser)
+     * @param int $items number of feeditems to parse from feed (RSSParser)
+     * @param string $url url of the feed to parse (RSSParser)
      * @param boolean $includetext ???following??? add table-tag?
-     * @param int     $timeout     maximum seconds to wait for the requested page
+     * @param int $timeout maximum seconds to wait for the requested page
      *
      * @return string HTML string used for smarty assign method
      */

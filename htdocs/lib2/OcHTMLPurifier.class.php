@@ -24,6 +24,7 @@ class OcHTMLPurifier extends HTMLPurifier
     public function __construct($opt)
     {
         // prepare config
+        /** @var HTMLPurifier_Config $config */
         $config = HTMLPurifier_Config::createDefault();
 
         // set cache directory

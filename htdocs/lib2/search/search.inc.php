@@ -273,10 +273,10 @@ function get_locale_desc($rCache)
     if ($desclang != $rCache['desc_language']) {
         $rs = sql(
             "
-			SELECT `desc`, `short_desc`, `hint`
-			FROM `cache_desc`
-			WHERE `cache_id`='&1'
-			AND `language`='&2'",
+            SELECT `desc`, `short_desc`, `hint`
+            FROM `cache_desc`
+            WHERE `cache_id`='&1'
+            AND `language`='&2'",
             $rCache['cacheid'],
             $desclang
         );

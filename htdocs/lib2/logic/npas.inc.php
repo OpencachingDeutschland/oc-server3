@@ -13,12 +13,12 @@ function get_npas($cache_id)
 {
     $rsNPA = sql(
         "SELECT `npa_areas`.`name` AS `npaName`, `npa_types`.`name` AS `npaTypeName`
-	             FROM `cache_npa_areas`
-	       INNER JOIN `npa_areas` ON `cache_npa_areas`.`npa_id`=`npa_areas`.`id`
-	       INNER JOIN `npa_types` ON `npa_areas`.`type_id`=`npa_types`.`id`
-	            WHERE `cache_npa_areas`.`cache_id`='&1'
-	         GROUP BY `npa_areas`.`type_id`, `npa_areas`.`name`
-	         ORDER BY `npa_types`.`ordinal` ASC",
+                 FROM `cache_npa_areas`
+           INNER JOIN `npa_areas` ON `cache_npa_areas`.`npa_id`=`npa_areas`.`id`
+           INNER JOIN `npa_types` ON `npa_areas`.`type_id`=`npa_types`.`id`
+                WHERE `cache_npa_areas`.`cache_id`='&1'
+             GROUP BY `npa_areas`.`type_id`, `npa_areas`.`name`
+             ORDER BY `npa_types`.`ordinal` ASC",
         $cache_id
     );
     $npas = array();

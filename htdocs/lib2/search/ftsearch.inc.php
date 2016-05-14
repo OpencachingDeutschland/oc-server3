@@ -314,17 +314,17 @@ function ftsearch_refresh_all_caches()
 {
     $rs = sql(
         'SELECT `caches`.`cache_id`
-		 FROM `caches`
-		 LEFT JOIN `search_index_times`
-		     ON `caches`.`cache_id`=`search_index_times`.`object_id` 
+         FROM `caches`
+         LEFT JOIN `search_index_times`
+             ON `caches`.`cache_id`=`search_index_times`.`object_id` 
              AND 2 =`search_index_times`.`object_type`
-		 WHERE `caches`.`status`!= 5
-		 AND ISNULL(`search_index_times`.`object_id`) 
-		 UNION DISTINCT 
-		 SELECT `caches`.`cache_id` 
-		 FROM `caches`
-		 INNER JOIN `search_index_times`
-		     ON `search_index_times`.`object_type`=2 
+         WHERE `caches`.`status`!= 5
+         AND ISNULL(`search_index_times`.`object_id`) 
+         UNION DISTINCT 
+         SELECT `caches`.`cache_id` 
+         FROM `caches`
+         INNER JOIN `search_index_times`
+             ON `search_index_times`.`object_type`=2 
              AND `caches`.`cache_id`=`search_index_times`.`object_id`
          WHERE `caches`.`last_modified` > `search_index_times`.`last_refresh`
              AND `caches`.`status`!=5'
@@ -348,9 +348,9 @@ function ftsearch_refresh_all_cache_desc()
 {
     $rs = sql(
         'SELECT `cache_desc`.`id`
-		 FROM `cache_desc`
-		 INNER JOIN `caches`
-		     ON `caches`.`cache_id`=`cache_desc`.`cache_id`
+         FROM `cache_desc`
+         INNER JOIN `caches`
+             ON `caches`.`cache_id`=`cache_desc`.`cache_id`
          LEFT JOIN `search_index_times`
              ON `cache_desc`.`id`=`search_index_times`.`object_id` 
              AND 3=`search_index_times`.`object_type`

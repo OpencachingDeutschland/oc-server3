@@ -25,8 +25,8 @@ function get_logtype_names()
     $rs = sql(
         "SELECT
              `log_types`.`id`,
-		     IFNULL(`sys_trans_text`.`text`,`log_types`.`en`) AS `type_name`
-		 FROM `log_types`
+             IFNULL(`sys_trans_text`.`text`,`log_types`.`en`) AS `type_name`
+         FROM `log_types`
          LEFT JOIN `sys_trans_text`
              ON `sys_trans_text`.`trans_id` = `log_types`.`trans_id`
              AND `sys_trans_text`.`lang`='" . sql_escape($locale) . "'"

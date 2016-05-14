@@ -136,7 +136,6 @@ class ss_zip
             $gzdata = gzdeflate($data, $this->complevel);
             $gzsize = strlen($gzdata);
             $dir = dirname($filename);
-//			if($dir!=".") $this->add_data("$dir/");
         } else {
             $crc = 0;
             $gzdata = '';

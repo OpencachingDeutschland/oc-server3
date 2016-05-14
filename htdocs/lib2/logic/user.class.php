@@ -8,15 +8,15 @@
  *   add/remove etc. is executed instantly
  ***************************************************************************/
 
-require_once($opt['rootpath'] . 'lib2/mail.class.php');
-require_once($opt['rootpath'] . 'lib2/logic/rowEditor.class.php');
-require_once($opt['rootpath'] . 'lib2/logic/statpic.class.php');
-require_once($opt['rootpath'] . 'lib2/logic/countriesList.class.php');
-require_once($opt['rootpath'] . 'lib2/logic/picture.class.php');
-require_once($opt['rootpath'] . 'lib2/logic/cache.class.php');
-require_once($opt['rootpath'] . 'lib2/logic/cracklib.inc.php');
-require_once($opt['rootpath'] . 'lib2/logic/crypt.class.php');
-require_once($opt['rootpath'] . 'lib2/translate.class.php');
+require_once(__DIR__ . '/../mail.class.php');
+require_once(__DIR__ . '/rowEditor.class.php');
+require_once(__DIR__ . '/statpic.class.php');
+require_once(__DIR__ . '/countriesList.class.php');
+require_once(__DIR__ . '/picture.class.php');
+require_once(__DIR__ . '/cache.class.php');
+require_once(__DIR__ . '/cracklib.inc.php');
+require_once(__DIR__ . '/crypt.class.php');
+require_once(__DIR__ . '/../translate.class.php');
 
 class user
 {
@@ -839,11 +839,11 @@ class user
             // log
             sql(
                 "INSERT INTO `email_user` (`ipaddress`,
-			                               `from_user_id`,
-			                               `from_email`,
-			                               `to_user_id`,
-			                               `to_email`)
-			                       VALUES ('&1', '&2', '&3', '&4', '&5')",
+                                           `from_user_id`,
+                                           `from_email`,
+                                           `to_user_id`,
+                                           `to_email`)
+                                   VALUES ('&1', '&2', '&3', '&4', '&5')",
                 $_SERVER["REMOTE_ADDR"],
                 $fromUser->getUserId(),
                 $fromUser->getEMail(),
@@ -893,7 +893,7 @@ class user
 
         sql(
             "INSERT INTO `logentries` (`module`, `eventid`, `userid`, `objectid1`, `objectid2`, `logtext`, `details`)
-		     VALUES ('user', 6, '&1', '&2', '&3', '&4', '&5')",
+             VALUES ('user', 6, '&1', '&2', '&3', '&4', '&5')",
             $login->userid,
             $this->nUserId,
             0,
@@ -904,13 +904,13 @@ class user
         // delete private and system data
         sql(
             "UPDATE `user` SET `password`=NULL, `email`=NULL,
-		                       `last_name`='', `first_name`='',
-													 `country`=NULL, `latitude`=0, `longitude`=0,
-		                       `is_active_flag`=0, `activation_code`='',
-		                       `new_pw_code`=NULL, `new_pw_date`=NULL,
-		                       `new_email`=NULL, `new_email_code`=NULL, `new_email_date`=NULL,
-		                       `email_problems`=0, `first_email_problem`=NULL, `last_email_problem`=NULL
-		     WHERE `user_id`='&1'",
+           `last_name`='', `first_name`='',
+                                 `country`=NULL, `latitude`=0, `longitude`=0,
+           `is_active_flag`=0, `activation_code`='',
+           `new_pw_code`=NULL, `new_pw_date`=NULL,
+           `new_email`=NULL, `new_email_code`=NULL, `new_email_date`=NULL,
+           `email_problems`=0, `first_email_problem`=NULL, `last_email_problem`=NULL
+             WHERE `user_id`='&1'",
             $this->nUserId
         );
 
@@ -1037,7 +1037,7 @@ class user
                 if ($desc['desc'] != "") {
                     sql(
                         "INSERT IGNORE INTO `saved_texts` (`object_type`, `object_id`, `subtype`, `text`)
-					     VALUES ('&1', '&2', '&3', '&4')",
+                         VALUES ('&1', '&2', '&3', '&4')",
                         OBJECT_CACHEDESC,
                         $desc['id'],
                         1,
@@ -1047,7 +1047,7 @@ class user
                 if ($desc['hint'] != "") {
                     sql(
                         "INSERT IGNORE INTO `saved_texts` (`object_type`, `object_id`, `subtype`, `text`)
-					     VALUES ('&1', '&2', '&3', '&4')",
+                         VALUES ('&1', '&2', '&3', '&4')",
                         OBJECT_CACHEDESC,
                         $desc['id'],
                         2,
@@ -1085,8 +1085,8 @@ class user
         // delete additional waypoint texts
         $rs = sql(
             "SELECT `id`, `description` FROM `coordinates`
-		     WHERE `type`='&1'
-	         AND `cache_id` IN (SELECT `cache_id` FROM `caches` WHERE `user_id`='&2')",
+             WHERE `type`='&1'
+             AND `cache_id` IN (SELECT `cache_id` FROM `caches` WHERE `user_id`='&2')",
             COORDINATE_WAYPOINT,
             $this->getUserId()
         );
@@ -1094,7 +1094,7 @@ class user
             if ($wp['description'] != "") {
                 sql(
                     "INSERT IGNORE INTO `saved_texts` (`object_type`, `object_id`, `subtype`, `text`)
-				     VALUES ('&1', '&2', '&3', '&4')",
+                     VALUES ('&1', '&2', '&3', '&4')",
                     OBJECT_WAYPOINT,
                     $wp['id'],
                     0,
@@ -1115,7 +1115,7 @@ class user
             // of accounts that were disabled before license transition
             sql(
                 "INSERT IGNORE INTO `saved_texts` (`object_type`, `object_id`, `subtype`, `text`)
-			     VALUES ('&1', '&2', '&3', '&4')",
+                 VALUES ('&1', '&2', '&3', '&4')",
                 OBJECT_CACHELOG,
                 $log['id'],
                 0,
@@ -1135,7 +1135,7 @@ class user
             // delete log pictures
             $rsp = sql(
                 "SELECT `id` FROM `pictures`
-			     WHERE `object_type`='&1' AND `object_id`='&2'",
+                 WHERE `object_type`='&1' AND `object_id`='&2'",
                 OBJECT_CACHELOG,
                 $log['id']
             );
@@ -1449,7 +1449,7 @@ class user
 
         sql(
             "INSERT INTO `logentries` (`module`, `eventid`, `userid`, `objectid1`, `objectid2`, `logtext`, `details`)
-		     VALUES ('user', 7, '&1', '&2', '&3', '&4', '&5')",
+             VALUES ('user', 7, '&1', '&2', '&3', '&4', '&5')",
             $login->userid,
             $this->nUserId,
             0,
@@ -1519,9 +1519,9 @@ class user
         // get number of cache ratings for this user
         return sql_value(
             "
-							SELECT COUNT(`user_id`)
-							FROM `cache_rating`
-							WHERE `user_id`='&1'",
+                            SELECT COUNT(`user_id`)
+                            FROM `cache_rating`
+                            WHERE `user_id`='&1'",
             0,
             $this->getUserId()
         );
@@ -1580,12 +1580,12 @@ class user
 
             $rs = sql(
                 "
-				SELECT COUNT(*) AS `count`, `cache_desc`.`language`
-				FROM `cache_logs`
-				JOIN `cache_desc` ON `cache_desc`.`cache_id`=`cache_logs`.`cache_id`
-				WHERE `cache_logs`.`user_id`='&1'
-				GROUP BY `cache_desc`.`language`
-				ORDER BY `count` DESC",
+                SELECT COUNT(*) AS `count`, `cache_desc`.`language`
+                FROM `cache_logs`
+                JOIN `cache_desc` ON `cache_desc`.`cache_id`=`cache_logs`.`cache_id`
+                WHERE `cache_logs`.`user_id`='&1'
+                GROUP BY `cache_desc`.`language`
+                ORDER BY `count` DESC",
                 $this->nUserId
             );
             $total = 0;

@@ -24,10 +24,10 @@ function search_output()
     $locLine =
         '
 <waypoint>
-	<name id="{waypoint}"><![CDATA[{archivedflag}{name} by {username}]]></name>
-	<coord lat="{lat}" lon="{lon}"/>
-	<type>Geocache</type>
-	<link text="Beschreibung">' . $server_address . 'viewcache.php?cacheid={cacheid}</link>
+    <name id="{waypoint}"><![CDATA[{archivedflag}{name} by {username}]]></name>
+    <coord lat="{lat}" lon="{lon}"/>
+    <type>Geocache</type>
+    <link text="Beschreibung">' . $server_address . 'viewcache.php?cacheid={cacheid}</link>
 </waypoint>
 ';
 
@@ -47,20 +47,20 @@ function search_output()
 
     $rs = sql_slave(
         '
-		SELECT SQL_BUFFER_RESULT
-			&searchtmp.`cache_id` `cacheid`,
-			&searchtmp.`longitude`,
-			&searchtmp.`latitude`,
-			`caches`.`name`,
-			`caches`.`status`,
-			`caches`.`wp_oc` `waypoint`,
-			`user`.`username` `username`
-		FROM
-			&searchtmp,
-			`caches`,
-			`user`
-		WHERE $search_simplerules[] = &searchtmp.`cache_id`=`caches`.`cache_id` 
-		AND &searchtmp.`user_id`=`user`.`user_id`'
+        SELECT SQL_BUFFER_RESULT
+            &searchtmp.`cache_id` `cacheid`,
+            &searchtmp.`longitude`,
+            &searchtmp.`latitude`,
+            `caches`.`name`,
+            `caches`.`status`,
+            `caches`.`wp_oc` `waypoint`,
+            `user`.`username` `username`
+        FROM
+            &searchtmp,
+            `caches`,
+            `user`
+        WHERE $search_simplerules[] = &searchtmp.`cache_id`=`caches`.`cache_id` 
+        AND &searchtmp.`user_id`=`user`.`user_id`'
     );
 
     while ($r = sql_fetch_array($rs)) {

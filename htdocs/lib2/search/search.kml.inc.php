@@ -46,13 +46,13 @@ function search_output()
     $kmlDetailHead = mb_ereg_replace("{site_url}", $opt['page']['default_absolute_url'], $kmlDetailHead);
 
     $rsMinMax = sql_slave('
-		SELECT
-			MIN(`longitude`) `minlon`,
-			MAX(`longitude`) `maxlon`,
-			MIN(`latitude`) `minlat`,
-			MAX(`latitude`) `maxlat`
-		FROM
-			&searchtmp');
+        SELECT
+            MIN(`longitude`) `minlon`,
+            MAX(`longitude`) `maxlon`,
+            MIN(`latitude`) `minlat`,
+            MAX(`latitude`) `maxlat`
+        FROM
+            &searchtmp');
     $rMinMax = sql_fetch_array($rsMinMax);
     mysql_free_result($rsMinMax);
 
@@ -66,28 +66,28 @@ function search_output()
 
     $rs = sql_slave(
         "
-		SELECT SQL_BUFFER_RESULT
-			&searchtmp.`cache_id` `cacheid`,
-			&searchtmp.`longitude`,
-			&searchtmp.`latitude`,
-			`caches`.`date_hidden`,
-			`caches`.`name`,
-			`caches`.`status`,
-			IFNULL(`stt_type`.`text`, `cache_type`.`en`) `typedesc`,
-			`cache_type`.`kml_name`,
-			`cache_type`.`icon_large`,
-			IFNULL(`stt_size`.`text`, `cache_size`.`en`) `sizedesc`,
-			`caches`.`terrain`,
-			`caches`.`difficulty`,
-			`user`.`username`
-		FROM &searchtmp
-		JOIN `caches` ON &searchtmp.`cache_id`=`caches`.`cache_id`
-		JOIN `cache_type` ON `caches`.`type`=`cache_type`.`id`
-		JOIN `cache_size` ON `caches`.`size`=`cache_size`.`id`
-		LEFT JOIN `user` ON &searchtmp.`user_id`=`user`.`user_id`
-		LEFT JOIN `sys_trans_text` `stt_type` ON `stt_type`.`trans_id`=`cache_type`.`trans_id` AND `stt_type`.`lang`='&1'
-		LEFT JOIN `sys_trans_text` `stt_size` ON `stt_size`.`trans_id`=`cache_size`.`trans_id` AND `stt_size`.`lang`='&1'
-		",
+        SELECT SQL_BUFFER_RESULT
+            &searchtmp.`cache_id` `cacheid`,
+            &searchtmp.`longitude`,
+            &searchtmp.`latitude`,
+            `caches`.`date_hidden`,
+            `caches`.`name`,
+            `caches`.`status`,
+            IFNULL(`stt_type`.`text`, `cache_type`.`en`) `typedesc`,
+            `cache_type`.`kml_name`,
+            `cache_type`.`icon_large`,
+            IFNULL(`stt_size`.`text`, `cache_size`.`en`) `sizedesc`,
+            `caches`.`terrain`,
+            `caches`.`difficulty`,
+            `user`.`username`
+        FROM &searchtmp
+        JOIN `caches` ON &searchtmp.`cache_id`=`caches`.`cache_id`
+        JOIN `cache_type` ON `caches`.`type`=`cache_type`.`id`
+        JOIN `cache_size` ON `caches`.`size`=`cache_size`.`id`
+        LEFT JOIN `user` ON &searchtmp.`user_id`=`user`.`user_id`
+        LEFT JOIN `sys_trans_text` `stt_type` ON `stt_type`.`trans_id`=`cache_type`.`trans_id` AND `stt_type`.`lang`='&1'
+        LEFT JOIN `sys_trans_text` `stt_size` ON `stt_size`.`trans_id`=`cache_size`.`trans_id` AND `stt_size`.`lang`='&1'
+        ",
         $opt['template']['locale']
     );
 

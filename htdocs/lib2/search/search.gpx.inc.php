@@ -93,7 +93,7 @@ function search_output()
      *    <groundspeak:encoded_hints>(.*?)<\/groundspeak:encoded_hints>
      */
 
-    $gpxAttributes = ' 	      <groundspeak:attribute id="{attrib_id}" inc="{attrib_inc}">{attrib_name}</groundspeak:attribute>';
+    $gpxAttributes = '           <groundspeak:attribute id="{attrib_id}" inc="{attrib_inc}">{attrib_name}</groundspeak:attribute>';
 
     $gpxLog = '      <groundspeak:log id="{id}">
         <groundspeak:date>{date}</groundspeak:date>
@@ -102,9 +102,9 @@ function search_output()
         <groundspeak:text encoded="False">{text}</groundspeak:text>
       </groundspeak:log>';
 
-    $gpxGeokrety = '		<groundspeak:travelbug id="{gkid}" ref="{gkref}">
-		  <groundspeak:name>{gkname}</groundspeak:name>
-		</groundspeak:travelbug>';
+    $gpxGeokrety = '        <groundspeak:travelbug id="{gkid}" ref="{gkref}">
+          <groundspeak:name>{gkname}</groundspeak:name>
+        </groundspeak:travelbug>';
 
     $gpxWaypoints = '  <wpt lat="{wp_lat}" lon="{wp_lon}">
     <time>{time}</time>
@@ -185,43 +185,43 @@ function search_output()
     $user_id = $login->userid;
 
     $rs = sql_slave("
-		SELECT SQL_BUFFER_RESULT
-			&searchtmp.`cache_id` `cacheid`,
-			&searchtmp.`longitude` `longitude`,
-			&searchtmp.`latitude` `latitude`,
-			`caches`.`wp_oc` `waypoint`,
-			`caches`.`date_hidden` `date_hidden`,
-			`caches`.`name` `name`,
-			`caches`.`country` `country`,
-			`caches`.`terrain` `terrain`,
-			`caches`.`difficulty` `difficulty`,
-			`caches`.`desc_languages` `desc_languages`,
-			`caches`.`size` `size`,
-			`caches`.`type` `type`,
-			`caches`.`status` `status`,
-			`caches`.`user_id` `userid`,
-			`caches`.`needs_maintenance`,
-			`caches`.`listing_outdated`,
-			`countries`.`name` AS `country_name`,
-			`cache_location`.`adm2` `state`,
-			`cache_desc`.`desc` `desc`,
-			`cache_desc`.`short_desc` `short_desc`,
-			`cache_desc`.`hint` `hint`,
-			`cache_desc`.`language` `desc_language`,
-			`user`.`username` `username`,
-			`user`.`data_license`,
-			IFNULL(`stat_cache_logs`.`found`, 0) `found`
-		FROM &searchtmp
-		INNER JOIN `caches` ON &searchtmp.`cache_id`=`caches`.`cache_id`
-		INNER JOIN `countries` ON `caches`.`country`=`countries`.`short`
-		INNER JOIN `user` ON &searchtmp.`user_id`=`user`.`user_id`
-		INNER JOIN `cache_desc`
-			ON `caches`.`cache_id`=`cache_desc`.`cache_id`
-			AND `caches`.`default_desclang`=`cache_desc`.`language`
-		LEFT JOIN `cache_location` ON &searchtmp.`cache_id`=`cache_location`.`cache_id`
-		LEFT JOIN `stat_cache_logs`
-			ON &searchtmp.`cache_id`=`stat_cache_logs`.`cache_id`
-			AND `stat_cache_logs`.`user_id`='&1'",
+        SELECT SQL_BUFFER_RESULT
+            &searchtmp.`cache_id` `cacheid`,
+            &searchtmp.`longitude` `longitude`,
+            &searchtmp.`latitude` `latitude`,
+            `caches`.`wp_oc` `waypoint`,
+            `caches`.`date_hidden` `date_hidden`,
+            `caches`.`name` `name`,
+            `caches`.`country` `country`,
+            `caches`.`terrain` `terrain`,
+            `caches`.`difficulty` `difficulty`,
+            `caches`.`desc_languages` `desc_languages`,
+            `caches`.`size` `size`,
+            `caches`.`type` `type`,
+            `caches`.`status` `status`,
+            `caches`.`user_id` `userid`,
+            `caches`.`needs_maintenance`,
+            `caches`.`listing_outdated`,
+            `countries`.`name` AS `country_name`,
+            `cache_location`.`adm2` `state`,
+            `cache_desc`.`desc` `desc`,
+            `cache_desc`.`short_desc` `short_desc`,
+            `cache_desc`.`hint` `hint`,
+            `cache_desc`.`language` `desc_language`,
+            `user`.`username` `username`,
+            `user`.`data_license`,
+            IFNULL(`stat_cache_logs`.`found`, 0) `found`
+        FROM &searchtmp
+        INNER JOIN `caches` ON &searchtmp.`cache_id`=`caches`.`cache_id`
+        INNER JOIN `countries` ON `caches`.`country`=`countries`.`short`
+        INNER JOIN `user` ON &searchtmp.`user_id`=`user`.`user_id`
+        INNER JOIN `cache_desc`
+            ON `caches`.`cache_id`=`cache_desc`.`cache_id`
+            AND `caches`.`default_desclang`=`cache_desc`.`language`
+        LEFT JOIN `cache_location` ON &searchtmp.`cache_id`=`cache_location`.`cache_id`
+        LEFT JOIN `stat_cache_logs`
+            ON &searchtmp.`cache_id`=`stat_cache_logs`.`cache_id`
+            AND `stat_cache_logs`.`user_id`='&1'",
         $user_id
     );
 
@@ -358,26 +358,26 @@ function search_output()
 
             $rsLogs = sql_slave(
                 "
-				SELECT
-					`cache_logs`.`id`,
-					`cache_logs`.`type`,
-					`cache_logs`.`date`,
-					`cache_logs`.`text`,
-					`cache_logs`.`needs_maintenance`,
-					`cache_logs`.`listing_outdated`,
-					`user`.`username`,
-					`user`.`user_id`
-				FROM
-					`cache_logs`,
-					`user`
-				WHERE
-					`cache_logs`.`user_id`=`user`.`user_id` AND
-					`cache_logs`.`cache_id`='&1' AND
-					`user`.`user_id`" . $user_operator . "'&2'
-				ORDER BY
-					`cache_logs`.`order_date` DESC,
-					`cache_logs`.`date_created` DESC,
-					`cache_logs`.`id` DESC". $limit,
+                SELECT
+                    `cache_logs`.`id`,
+                    `cache_logs`.`type`,
+                    `cache_logs`.`date`,
+                    `cache_logs`.`text`,
+                    `cache_logs`.`needs_maintenance`,
+                    `cache_logs`.`listing_outdated`,
+                    `user`.`username`,
+                    `user`.`user_id`
+                FROM
+                    `cache_logs`,
+                    `user`
+                WHERE
+                    `cache_logs`.`user_id`=`user`.`user_id` AND
+                    `cache_logs`.`cache_id`='&1' AND
+                    `user`.`user_id`" . $user_operator . "'&2'
+                ORDER BY
+                    `cache_logs`.`order_date` DESC,
+                    `cache_logs`.`date_created` DESC,
+                    `cache_logs`.`id` DESC". $limit,
                 $r['cacheid'],
                 $user_id
             );
@@ -435,11 +435,11 @@ function search_output()
         // attributes
         $rsAttributes = sql_slave(
             '
-			SELECT `gc_id`, `gc_inc`, `gc_name`
-			FROM `caches_attributes`
-			INNER JOIN `cache_attrib`
-		        ON `cache_attrib`.`id`=`caches_attributes`.`attrib_id`
-			WHERE `caches_attributes`.`cache_id`=&1',
+            SELECT `gc_id`, `gc_inc`, `gc_name`
+            FROM `caches_attributes`
+            INNER JOIN `cache_attrib`
+                ON `cache_attrib`.`id`=`caches_attributes`.`attrib_id`
+            WHERE `caches_attributes`.`cache_id`=&1',
             $r['cacheid']
         );
         $gc_ids = [];

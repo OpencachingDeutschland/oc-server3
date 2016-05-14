@@ -26,25 +26,25 @@ function search_output()
 
     $encoding = 'UTF-8';
 
-    $xmlLine = "	<cache>
-		<name><![CDATA[{cachename}]]></name>
-		<owner id=\"{ownerid}\"><![CDATA[{owner}]]></owner>
-		<id>{cacheid}</id>
-		<waypoint>{waypoint}</waypoint>
-		<hidden>{time}</hidden>
-		<status id=\"{statusid}\">{status}</status>
-		<lon value=\"{lonvalue}\">{lon}</lon>
-		<lat value=\"{latvalue}\">{lat}</lat>
-		<distance unit=\"" . $distance_unit . "\">{distance}</distance>
-		<type id=\"{typeid}\">{type}</type>
-		<difficulty>{difficulty}</difficulty>
-		<terrain>{terrain}</terrain>
-		<size id=\"{sizeid}\">{container}</size>
-		<country id=\"{countryid}\">{country}</country>
-		<link><![CDATA[" . $opt['page']['default_absolute_url'] . "viewcache.php?wp={waypoint}]]></link>
-		<desc><![CDATA[{shortdesc}]]></desc>
-		<hints><![CDATA[{hints}]]></hints>
-	</cache>
+    $xmlLine = "    <cache>
+        <name><![CDATA[{cachename}]]></name>
+        <owner id=\"{ownerid}\"><![CDATA[{owner}]]></owner>
+        <id>{cacheid}</id>
+        <waypoint>{waypoint}</waypoint>
+        <hidden>{time}</hidden>
+        <status id=\"{statusid}\">{status}</status>
+        <lon value=\"{lonvalue}\">{lon}</lon>
+        <lat value=\"{latvalue}\">{lat}</lat>
+        <distance unit=\"" . $distance_unit . "\">{distance}</distance>
+        <type id=\"{typeid}\">{type}</type>
+        <difficulty>{difficulty}</difficulty>
+        <terrain>{terrain}</terrain>
+        <size id=\"{sizeid}\">{container}</size>
+        <country id=\"{countryid}\">{country}</country>
+        <link><![CDATA[" . $opt['page']['default_absolute_url'] . "viewcache.php?wp={waypoint}]]></link>
+        <desc><![CDATA[{shortdesc}]]></desc>
+        <hints><![CDATA[{hints}]]></hints>
+    </cache>
 ";
 
     // create temporary table
@@ -65,12 +65,12 @@ function search_output()
         echo "<?xml version=\"1.0\" encoding=\"" . $encoding . "\"?>\n";
         echo "<result>\n";
 
-        echo "	<docinfo>\n";
-        echo "		<results>" . $rCount['count'] . "</results>\n";
-        echo "		<startat>" . $startat . "</startat>\n";
-        echo "		<perpage>" . $count . "</perpage>\n";
-        echo "		<total>" . $resultcount . "</total>\n";
-        echo "	</docinfo>\n";
+        echo "    <docinfo>\n";
+        echo "        <results>" . $rCount['count'] . "</results>\n";
+        echo "        <startat>" . $startat . "</startat>\n";
+        echo "        <perpage>" . $count . "</perpage>\n";
+        echo "        <total>" . $resultcount . "</total>\n";
+        echo "    </docinfo>\n";
     }
 
     $rs = sql_slave(

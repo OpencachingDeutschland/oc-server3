@@ -150,8 +150,8 @@ class picture
                                                        0, $this->getObjectId());
             */
             $logger_id = sql_value("SELECT
-			                         IFNULL((SELECT `user_id` FROM `cache_logs` WHERE `id`='&1'),
-			                           (SELECT `user_id` FROM `cache_logs_archived` WHERE `id`='&1'))",
+                                     IFNULL((SELECT `user_id` FROM `cache_logs` WHERE `id`='&1'),
+                                       (SELECT `user_id` FROM `cache_logs_archived` WHERE `id`='&1'))",
                 0, $this->getObjectId());
 
             $archive = ($bRestoring || $login->userid != $logger_id);
@@ -417,8 +417,8 @@ class picture
         return $ocpropping &&
         sql_value(
             "
-			SELECT COUNT(*) FROM `pictures`
-			WHERE `object_type`='&1' AND `object_id`='&2' AND `title`='&3'",
+            SELECT COUNT(*) FROM `pictures`
+            WHERE `object_type`='&1' AND `object_id`='&2' AND `title`='&3'",
             0,
             $this->getObjectType(),
             $this->getObjectId(),
@@ -670,9 +670,9 @@ class picture
     {
         $prevpos = sql_value(
             "
-			SELECT MAX(`seq`)
-			FROM `pictures`
-			WHERE `object_type`='&1' AND `object_id`='&2' AND `seq`<'&3'",
+            SELECT MAX(`seq`)
+            FROM `pictures`
+            WHERE `object_type`='&1' AND `object_id`='&2' AND `seq`<'&3'",
             0,
             $this->getObjectType(),
             $this->getObjectId(),
@@ -682,9 +682,9 @@ class picture
         if ($prevpos) {
             $maxpos = sql_value(
                 "
-				SELECT MAX(`seq`)
-				FROM `pictures`
-				WHERE `object_type`='&1' AND `object_id`='&2'",
+                SELECT MAX(`seq`)
+                FROM `pictures`
+                WHERE `object_type`='&1' AND `object_id`='&2'",
                 0,
                 $this->getObjectType(),
                 $this->getObjectId()
@@ -693,16 +693,16 @@ class picture
             // swap positions with the previous pic
             sql(
                 "
-				UPDATE `pictures`
-				SET `seq`='&2'
-				WHERE `id`='&1'",
+                UPDATE `pictures`
+                SET `seq`='&2'
+                WHERE `id`='&1'",
                 $this->getPictureId(),
                 $maxpos + 1
             );
             sql(
                 "
-				UPDATE `pictures` SET `seq`='&4'
-				WHERE `object_type`='&1' AND `object_id`='&2' AND `seq`='&3'",
+                UPDATE `pictures` SET `seq`='&4'
+                WHERE `object_type`='&1' AND `object_id`='&2' AND `seq`='&3'",
                 $this->getObjectType(),
                 $this->getObjectId(),
                 $prevpos,
@@ -710,9 +710,9 @@ class picture
             );
             sql(
                 "
-				UPDATE `pictures`
-				SET `seq`='&2'
-				WHERE `id`='&1'",
+                UPDATE `pictures`
+                SET `seq`='&2'
+                WHERE `id`='&1'",
                 $this->getPictureId(),
                 $prevpos
             );

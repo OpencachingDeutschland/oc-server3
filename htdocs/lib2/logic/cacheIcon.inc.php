@@ -43,13 +43,13 @@ function getCacheIcon($user_id, $cache_id, $cache_status, $cache_userid, $iconna
         } else {
             $logtype = sql_value_slave(
                 "
-				SELECT `type`
-				FROM `cache_logs`
-				WHERE `cache_id`='&1'
-				AND `user_id`='&2'
-				AND `type` IN (1,2,7)
-				ORDER BY `type`
-				LIMIT 1",
+                SELECT `type`
+                FROM `cache_logs`
+                WHERE `cache_id`='&1'
+                AND `user_id`='&2'
+                AND `type` IN (1,2,7)
+                ORDER BY `type`
+                LIMIT 1",
                 0,
                 $cache_id,
                 $user_id

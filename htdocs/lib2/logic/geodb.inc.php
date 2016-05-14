@@ -8,19 +8,19 @@
 function geodb_setAllCacheLocations()
 {
     $rs = sqll(
-        "SELECT `caches`.`cache_id`
+        'SELECT `caches`.`cache_id`
          FROM `caches`
          LEFT JOIN `cache_location`
              ON `caches`.`cache_id`=`cache_location`.`cache_id`
          WHERE ISNULL (`cache_location`.`cache_id`) 
-             OR `cache_location`.`last_modified`!=`caches`.`last_modified`"
+             OR `cache_location`.`last_modified`!=`caches`.`last_modified`'
     );
     while ($r = sql_fetch_assoc($rs)) {
         geodb_setCacheLocation($r['cache_id']);
     }
     sql_free_result($rs);
 
-    sqll("DELETE FROM `cache_location` WHERE `cache_id` NOT IN (SELECT `cache_id` FROM `caches`)");
+    sqll('DELETE FROM `cache_location` WHERE `cache_id` NOT IN (SELECT `cache_id` FROM `caches`)');
 }
 
 function geodb_setCacheLocation($cache_id)
@@ -72,21 +72,21 @@ function geodb_locidFromCoords($lon, $lat)
     if (!is_numeric($lat)) {
         return 0;
     }
-    $lon = $lon + 0;
-    $lat = $lat + 0;
+    $lon += 0;
+    $lat += 0;
 
-    $rs = sqll('	SELECT	`geodb_coordinates`.`loc_id` `loc_id`,
-					(( ' . $lon . ' - `geodb_coordinates`.`lon` ) * ( ' . $lon . ' - `geodb_coordinates`.`lon` ) +
-					 ( ' . $lat . ' - `geodb_coordinates`.`lat` ) * ( ' . $lat . ' - `geodb_coordinates`.`lat` )) `dist`
-				 FROM `geodb_coordinates`
-		   INNER JOIN `geodb_locations` ON `geodb_coordinates`.`loc_id`=`geodb_locations`.`loc_id`
-				WHERE `geodb_locations`.`loc_type`=100700000
-				  AND `geodb_coordinates`.`lon` > ' . ($lon - 0.15) . '
-				  AND `geodb_coordinates`.`lon` < ' . ($lon + 0.15) . '
-				  AND `geodb_coordinates`.`lat` > ' . ($lat - 0.15) . '
-				  AND `geodb_coordinates`.`lat` < ' . ($lat + 0.15) . '
-				ORDER BY `dist` ASC
-				LIMIT 1');
+    $rs = sqll('SELECT    `geodb_coordinates`.`loc_id` `loc_id`,
+                    (( ' . $lon . ' - `geodb_coordinates`.`lon` ) * ( ' . $lon . ' - `geodb_coordinates`.`lon` ) +
+                     ( ' . $lat . ' - `geodb_coordinates`.`lat` ) * ( ' . $lat . ' - `geodb_coordinates`.`lat` )) `dist`
+                 FROM `geodb_coordinates`
+           INNER JOIN `geodb_locations` ON `geodb_coordinates`.`loc_id`=`geodb_locations`.`loc_id`
+                WHERE `geodb_locations`.`loc_type`=100700000
+                  AND `geodb_coordinates`.`lon` > ' . ($lon - 0.15) . '
+                  AND `geodb_coordinates`.`lon` < ' . ($lon + 0.15) . '
+                  AND `geodb_coordinates`.`lat` > ' . ($lat - 0.15) . '
+                  AND `geodb_coordinates`.`lat` < ' . ($lat + 0.15) . '
+                ORDER BY `dist` ASC
+                LIMIT 1');
     if ($r = sql_fetch_array($rs)) {
         return $r['loc_id'];
     } else {
@@ -99,7 +99,7 @@ function geodb_landFromLocid($locid)
     if (!is_numeric($locid)) {
         return 0;
     }
-    $locid = $locid + 0;
+    $locid += 0;
 
     $rs = sqll(
         "SELECT `ld`.`text_val` `land` 
@@ -125,7 +125,7 @@ function geodb_regierungsbezirkFromLocid($locid)
     if (!is_numeric($locid)) {
         return 0;
     }
-    $locid = $locid + 0;
+    $locid += 0;
 
     $rs = sqll(
         "SELECT `rb`.`text_val` `regierungsbezirk` 
@@ -150,7 +150,7 @@ function geodb_landkreisFromLocid($locid)
     if (!is_numeric($locid)) {
         return 0;
     }
-    $locid = $locid + 0;
+    $locid += 0;
 
     $rs = sqll(
         "SELECT `rb`.`text_val` `regierungsbezirk`

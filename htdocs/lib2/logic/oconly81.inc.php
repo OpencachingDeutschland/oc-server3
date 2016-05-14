@@ -35,26 +35,26 @@ function set_oconly81_tpldata($userid)
     if ($userid > 0) {
         $rs = sql(
             "
-				SELECT `difficulty`, `terrain`, COUNT(*) AS `count`
-				FROM `cache_logs`
-				INNER JOIN `caches` ON `caches`.`cache_id`=`cache_logs`.`cache_id`
-				INNER JOIN `caches_attributes` 
-				    ON `caches_attributes`.`cache_id`=`cache_logs`.`cache_id`
-				    AND `caches_attributes`.`attrib_id`=6
-				WHERE `cache_logs`.`user_id`='&1' AND `cache_logs`.`type` = 1
-				GROUP BY `difficulty`, `terrain`",
+                SELECT `difficulty`, `terrain`, COUNT(*) AS `count`
+                FROM `cache_logs`
+                INNER JOIN `caches` ON `caches`.`cache_id`=`cache_logs`.`cache_id`
+                INNER JOIN `caches_attributes` 
+                    ON `caches_attributes`.`cache_id`=`cache_logs`.`cache_id`
+                    AND `caches_attributes`.`attrib_id`=6
+                WHERE `cache_logs`.`user_id`='&1' AND `cache_logs`.`type` = 1
+                GROUP BY `difficulty`, `terrain`",
             $userid
         );
     } else {
         $rs = sql(
             "
-				SELECT `difficulty`, `terrain`, COUNT(*) AS `count`
-				FROM `caches`
-				INNER JOIN `caches_attributes` 
-				    ON `caches_attributes`.`cache_id`=`caches`.`cache_id` 
-				    AND `caches_attributes`.`attrib_id`=6
-				WHERE `status`=1
-				GROUP BY `difficulty`, `terrain`"
+                SELECT `difficulty`, `terrain`, COUNT(*) AS `count`
+                FROM `caches`
+                INNER JOIN `caches_attributes` 
+                    ON `caches_attributes`.`cache_id`=`caches`.`cache_id` 
+                    AND `caches_attributes`.`attrib_id`=6
+                WHERE `status`=1
+                GROUP BY `difficulty`, `terrain`"
         );
     }
     $maxcount = 0;

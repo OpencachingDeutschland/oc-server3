@@ -118,29 +118,29 @@ class getNew
         // execute sql
         return sql_slave(
             "SELECT `user`.`user_id` `user_id`,
-									`user`.`username` `username`,
-									`caches`.`cache_id` `cache_id`,
-									`caches`.`name` `name`,
-									`caches`.`date_created` `date_created`,
-									`caches`.`type`,
-									`caches`.`longitude` `longitude`,
-									`caches`.`latitude` `latitude`,
-									IFNULL(`sys_trans_text`.`text`,`countries`.`en`) AS `adm1`,
-									IF(`caches`.`country`=`cache_location`.`code1`,`cache_location`.`adm2`,'') `adm2`,
-									IF(`caches`.`country`=`cache_location`.`code1`,`cache_location`.`adm3`,'') `adm3`,
-									IF(`caches`.`country`=`cache_location`.`code1`,`cache_location`.`adm4`,'') `adm4`,
-									`ca`.`attrib_id` IS NOT NULL AS `oconly`
-								FROM `caches`
-									INNER JOIN `user` ON `user`.`user_id`=`caches`.`user_id`
-									LEFT JOIN `cache_location` ON `caches`.`cache_id`=`cache_location`.`cache_id`
-									LEFT JOIN `countries` ON `countries`.`short`=`caches`.`country`
-									LEFT JOIN `sys_trans_text` ON `sys_trans_text`.`trans_id`=`countries`.`trans_id` AND `sys_trans_text`.`lang`='&2'
-									LEFT JOIN `caches_attributes` `ca` ON `ca`.`cache_id`=`caches`.`cache_id` AND `ca`.`attrib_id`=6
-								WHERE `caches`.`country`='&1' AND
-									`caches`.`type` != 6 AND
-									`caches`.`status` = 1
-								ORDER BY `caches`.`date_created` DESC
-								LIMIT 0, &3",
+                                    `user`.`username` `username`,
+                                    `caches`.`cache_id` `cache_id`,
+                                    `caches`.`name` `name`,
+                                    `caches`.`date_created` `date_created`,
+                                    `caches`.`type`,
+                                    `caches`.`longitude` `longitude`,
+                                    `caches`.`latitude` `latitude`,
+                                    IFNULL(`sys_trans_text`.`text`,`countries`.`en`) AS `adm1`,
+                                    IF(`caches`.`country`=`cache_location`.`code1`,`cache_location`.`adm2`,'') `adm2`,
+                                    IF(`caches`.`country`=`cache_location`.`code1`,`cache_location`.`adm3`,'') `adm3`,
+                                    IF(`caches`.`country`=`cache_location`.`code1`,`cache_location`.`adm4`,'') `adm4`,
+                                    `ca`.`attrib_id` IS NOT NULL AS `oconly`
+                                FROM `caches`
+                                    INNER JOIN `user` ON `user`.`user_id`=`caches`.`user_id`
+                                    LEFT JOIN `cache_location` ON `caches`.`cache_id`=`cache_location`.`cache_id`
+                                    LEFT JOIN `countries` ON `countries`.`short`=`caches`.`country`
+                                    LEFT JOIN `sys_trans_text` ON `sys_trans_text`.`trans_id`=`countries`.`trans_id` AND `sys_trans_text`.`lang`='&2'
+                                    LEFT JOIN `caches_attributes` `ca` ON `ca`.`cache_id`=`caches`.`cache_id` AND `ca`.`attrib_id`=6
+                                WHERE `caches`.`country`='&1' AND
+                                    `caches`.`type` != 6 AND
+                                    `caches`.`status` = 1
+                                ORDER BY `caches`.`date_created` DESC
+                                LIMIT 0, &3",
             $args
         );
     }
@@ -170,27 +170,27 @@ class getNew
         // execute sql
         return sql_slave(
             "SELECT `user`.`user_id` `user_id`,
-								`user`.`username` `username`,
-								`caches`.`cache_id` `cache_id`,
-								`caches`.`name` `name`,
-								`caches`.`date_hidden`,
-								IFNULL(`sys_trans_text`.`text`,`countries`.`en`) AS `adm1`,
-								IF(`caches`.`country`=`cache_location`.`code1`,`cache_location`.`adm2`,'') `adm2`,
-								IF(`caches`.`country`=`cache_location`.`code1`,`cache_location`.`adm3`,'') `adm3`,
-								IF(`caches`.`country`=`cache_location`.`code1`,`cache_location`.`adm4`,'') `adm4`,
-								`ca`.`attrib_id` IS NOT NULL AS `oconly`
-							FROM `caches`
-								INNER JOIN `user` ON `user`.`user_id`=`caches`.`user_id`
-								LEFT JOIN `cache_location` ON `caches`.`cache_id`=`cache_location`.`cache_id`
-								LEFT JOIN `countries` ON `countries`.`short`=`caches`.`country`
-								LEFT JOIN `sys_trans_text` ON `sys_trans_text`.`trans_id`=`countries`.`trans_id` AND `sys_trans_text`.`lang`='&2'
-								LEFT JOIN `caches_attributes` `ca` ON `ca`.`cache_id`=`caches`.`cache_id` AND `ca`.`attrib_id`=6
-							WHERE `caches`.`country`='&1' AND
-								`caches`.`date_hidden` >= curdate() AND
-								`caches`.`type` = 6 AND
-								`caches`.`status`=1
-							ORDER BY `date_hidden` ASC
-							LIMIT 0, &3",
+                                `user`.`username` `username`,
+                                `caches`.`cache_id` `cache_id`,
+                                `caches`.`name` `name`,
+                                `caches`.`date_hidden`,
+                                IFNULL(`sys_trans_text`.`text`,`countries`.`en`) AS `adm1`,
+                                IF(`caches`.`country`=`cache_location`.`code1`,`cache_location`.`adm2`,'') `adm2`,
+                                IF(`caches`.`country`=`cache_location`.`code1`,`cache_location`.`adm3`,'') `adm3`,
+                                IF(`caches`.`country`=`cache_location`.`code1`,`cache_location`.`adm4`,'') `adm4`,
+                                `ca`.`attrib_id` IS NOT NULL AS `oconly`
+                            FROM `caches`
+                                INNER JOIN `user` ON `user`.`user_id`=`caches`.`user_id`
+                                LEFT JOIN `cache_location` ON `caches`.`cache_id`=`cache_location`.`cache_id`
+                                LEFT JOIN `countries` ON `countries`.`short`=`caches`.`country`
+                                LEFT JOIN `sys_trans_text` ON `sys_trans_text`.`trans_id`=`countries`.`trans_id` AND `sys_trans_text`.`lang`='&2'
+                                LEFT JOIN `caches_attributes` `ca` ON `ca`.`cache_id`=`caches`.`cache_id` AND `ca`.`attrib_id`=6
+                            WHERE `caches`.`country`='&1' AND
+                                `caches`.`date_hidden` >= curdate() AND
+                                `caches`.`type` = 6 AND
+                                `caches`.`status`=1
+                            ORDER BY `date_hidden` ASC
+                            LIMIT 0, &3",
             $args
         );
     }
@@ -244,33 +244,35 @@ class getNew
         //   optimized by adding rating_date field to cache_rating, so we don't need the log table.
         return sql_slave(
             "SELECT COUNT(`cache_rating`.`user_id`) AS `cRatings`,
-								MAX(`cache_rating`.`rating_date`) AS `dLastLog`,
-								`user`.`user_id` AS `user_id`,
-								`user`.`username` AS `username`,
-								`caches`.`cache_id` AS `cache_id`,
-								`caches`.`name` AS `name`,
-								`caches`.`type`,
-								IFNULL(`sys_trans_text`.`text`,`countries`.`en`) AS `adm1`,
-								IF(`caches`.`country`=`cache_location`.`code1`,`cache_location`.`adm2`,'') `adm2`,
-								IF(`caches`.`country`=`cache_location`.`code1`,`cache_location`.`adm3`,'') `adm3`,
-								IF(`caches`.`country`=`cache_location`.`code1`,`cache_location`.`adm4`,'') `adm4`,
-								`ca`.`attrib_id` IS NOT NULL AS `oconly`
-							FROM `cache_rating`
-								INNER JOIN `caches` ON `caches`.`cache_id`=`cache_rating`.`cache_id`
-								INNER JOIN `user` ON `user`.`user_id`=`caches`.`user_id`
-								LEFT JOIN `cache_location` ON `cache_rating`.`cache_id`=`cache_location`.`cache_id`
-								LEFT JOIN `countries` ON `countries`.`short`=`caches`.`country`
-								LEFT JOIN `sys_trans_text` ON `sys_trans_text`.`trans_id`=`countries`.`trans_id` AND `sys_trans_text`.`lang`='&2'
-								LEFT JOIN `caches_attributes` `ca` ON `ca`.`cache_id`=`caches`.`cache_id` AND `ca`.`attrib_id`=6
-							WHERE `caches`.`country`='&1' AND
-								`cache_rating`.`rating_date`>DATE_SUB(NOW(), INTERVAL &4 DAY) AND
-								`caches`.`type`!=6 AND
-								`caches`.`status`=1
-							GROUP BY `cache_rating`.`cache_id`
-							ORDER BY `cRatings` DESC,
-								`dLastLog` DESC,
-								`cache_id` DESC
-							LIMIT 0, &3",
+                MAX(`cache_rating`.`rating_date`) AS `dLastLog`,
+                `user`.`user_id` AS `user_id`,
+                `user`.`username` AS `username`,
+                `caches`.`cache_id` AS `cache_id`,
+                `caches`.`name` AS `name`,
+                `caches`.`type`,
+                IFNULL(`sys_trans_text`.`text`,`countries`.`en`) AS `adm1`,
+                IF(`caches`.`country`=`cache_location`.`code1`,`cache_location`.`adm2`,'') `adm2`,
+                IF(`caches`.`country`=`cache_location`.`code1`,`cache_location`.`adm3`,'') `adm3`,
+                IF(`caches`.`country`=`cache_location`.`code1`,`cache_location`.`adm4`,'') `adm4`,
+                `ca`.`attrib_id` IS NOT NULL AS `oconly`
+            FROM `cache_rating`
+                INNER JOIN `caches` ON `caches`.`cache_id`=`cache_rating`.`cache_id`
+                INNER JOIN `user` ON `user`.`user_id`=`caches`.`user_id`
+                LEFT JOIN `cache_location` ON `cache_rating`.`cache_id`=`cache_location`.`cache_id`
+                LEFT JOIN `countries` ON `countries`.`short`=`caches`.`country`
+                LEFT JOIN `sys_trans_text` 
+                  ON `sys_trans_text`.`trans_id`=`countries`.`trans_id`
+                  AND `sys_trans_text`.`lang`='&2'
+                LEFT JOIN `caches_attributes` `ca` ON `ca`.`cache_id`=`caches`.`cache_id` AND `ca`.`attrib_id`=6
+            WHERE `caches`.`country`='&1' AND
+                `cache_rating`.`rating_date`>DATE_SUB(NOW(), INTERVAL &4 DAY) AND
+                `caches`.`type`!=6 AND
+                `caches`.`status`=1
+            GROUP BY `cache_rating`.`cache_id`
+            ORDER BY `cRatings` DESC,
+                `dLastLog` DESC,
+                `cache_id` DESC
+            LIMIT 0, &3",
             $args
         );
     }

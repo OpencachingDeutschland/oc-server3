@@ -13,14 +13,14 @@ function CheckThrottle()
 {
     global $opt, $tpl;
 
-    $ip_string = $_SERVER["REMOTE_ADDR"];
+    $ip_string = $_SERVER['REMOTE_ADDR'];
     $ip_blocks = mb_split('\\.', $ip_string);
     $ip_numeric = $ip_blocks[3] + $ip_blocks[2] * 256 + $ip_blocks[1] * 65536 + $ip_blocks[0] * 16777216;
 
     sql(
-        "CREATE TABLE IF NOT EXISTS &tmpdb.`sys_accesslog` 
+        'CREATE TABLE IF NOT EXISTS &tmpdb.`sys_accesslog` 
         (`id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY, `ip` INT UNSIGNED NOT NULL,
-         `access_time` TIMESTAMP NOT NULL, INDEX (`access_time`), INDEX (`ip`)) ENGINE = MEMORY"
+         `access_time` TIMESTAMP NOT NULL, INDEX (`access_time`), INDEX (`ip`)) ENGINE = MEMORY'
     );
 
     $rsStaus = sql("SHOW STATUS LIKE 'Threads_connected'");

@@ -14,7 +14,7 @@ class ss_zip
      * @see ss_zip::archive()
      * @see ss_zip::ss_zip()
      */
-    public $zipfile = "";
+    public $zipfile = '';
     /** compression level    */
     public $complevel = 6;
     /** entry counter */
@@ -35,12 +35,12 @@ class ss_zip
 
     /**    constructor
      *
-     * @param string zipfile if not empty must contain path to valid zip file, ss_zip will try to open and parse it.
+     * @param string $zipfile if not empty must contain path to valid zip file, ss_zip will try to open and parse it.
      *               If this parameter is empty, the new empty zip archive is created. This parameter has no meaning in
      *               LIGHT verion, please upgrade to PROfessional version.
-     * @param int    complevel compression level, 1-minimal compression, 9-maximal, default is 6
+     * @param int $complevel compression level, 1-minimal compression, 9-maximal, default is 6
      */
-    public function __construct($zipfile = "", $complevel = 6)
+    public function __construct($zipfile = '', $complevel = 6)
     {
         $this->clear();
         if ($complevel < 1) {
@@ -53,7 +53,7 @@ class ss_zip
         $this->open($zipfile);
     }
 
-    /**Resets the objec, clears all the structures
+    /**Resets the object, clears all the structures
      */
     public function clear()
     {
@@ -71,8 +71,8 @@ class ss_zip
      * href='http://smiledsoft.com/demos/phpzip/' target='_blank'>please upgrade </a><hr nashade></center> This
      * function opens file pointed by zipfile parameter and creates all necessary structures
      *
-     * @param str  zipfile path to the file
-     * @param bool append if true the newlly opened archive will be appended to existing object structure
+     * @param string $zipfile path to the file
+     * @param boolean $append if true the newlly opened archive will be appended to existing object structure
      */
     public function open($zipfile, $append = false)
     {
@@ -81,19 +81,19 @@ class ss_zip
 
     /**saves to the disc or sends zipfile to the browser.
      *
-     * @param str                  zipfile path under which to store the file on the server or file name under which
+     * @param string $zipfile path under which to store the file on the server or file name under which
      *                                     the
      *                             browser will receive it. If you are saving to the server, you are responsible to
      *                             obtain appropriate write permissions for this operation.
-     * @param char                 where indicates where should the file be sent
-     *                             <ul>
-     *                             <li>'f' -- filesystem </li>
-     *                             <li>'b' -- browser</li>
-     *                             <li>'r' -- raw</li>
-     *                             </ul>
-     *                             Please remember that there should not be any other output before you call this
-     *                             function. The only exception is that other headers may be sent. See <a
-     *                             href='http://php.net/header' target='_blank'>http://php.net/header</a>
+     * @param string $where indicates where should the file be sent
+     *        <ul>
+     *          <li>'f' -- filesystem </li>
+     *          <li>'b' -- browser</li>
+     *          <li>'r' -- raw</li>
+     *        </ul>
+     *        Please remember that there should not be any other output before you call this
+     *        function. The only exception is that other headers may be sent. See <a
+     *        href='http://php.net/header' target='_blank'>http://php.net/header</a>
      */
     public function save($zipfile, $where = 'f')
     {
@@ -102,9 +102,9 @@ class ss_zip
         }
         $zipfile = trim($zipfile);
 
-        if (strtolower(trim($where)) == 'f') {
+        if (strtolower(trim($where)) === 'f') {
             $this->_write($zipfile, $this->zipfile);
-        } elseif (strtolower(trim($where)) == 'r') {
+        } elseif (strtolower(trim($where)) === 'r') {
             $zipfile = basename($zipfile);
             print $this->archive();
         } else {
@@ -117,8 +117,8 @@ class ss_zip
 
     /** adds data to zip file
      *
-     * @param str filename path under which the content of data parameter will be stored into the zip archive
-     * @param str data content to be stored under name given by path parameter
+     * @param string $filename path under which the content of data parameter will be stored into the zip archive
+     * @param string $data content to be stored under name given by path parameter
      *
      * @see ss_zip::add_file()
      */
@@ -139,7 +139,7 @@ class ss_zip
 //			if($dir!=".") $this->add_data("$dir/");
         } else {
             $crc = 0;
-            $gzdata = "";
+            $gzdata = '';
             $gzsize = 0;
 
         }
@@ -151,8 +151,8 @@ class ss_zip
         $fh .= pack(
             "V3v2",
             $crc, //crc
-            $gzsize,//c size
-            $datasize,//unc size
+            $gzsize, //c size
+            $datasize, //unc size
             $fnl, //fname lenght
             0 //extra field length
         );
@@ -186,33 +186,33 @@ class ss_zip
 
     /** adds a file to the archive
      *
-     * @param str                           filename contains valid path to file to be stored in the arcive.
-     * @param str                           storedasname the path under which the file will be stored to the archive.
-     *                                                   If empty, the file will be stored under path given by filename
-     *                                                   parameter
+     * @param string $filename contains valid path to file to be stored in the arcive.
+     * @param string $storedasname the path under which the file will be stored to the archive.
+     * If empty, the file will be stored under path given by filename parameter
      *
      * @see ss_zip::add_data()
+     * @return void
      */
-    public function add_file($filename, $storedasname = "")
+    public function add_file($filename, $storedasname = '')
     {
-        $fh = fopen($filename, "r");
+        $fh = fopen($filename, 'r');
         $data = fread($fh, filesize($filename));
         if (!trim($storedasname)) {
             $storedasname = $filename;
         }
 
-        return $this->add_data($storedasname, $data);
+        $this->add_data($storedasname, $data);
     }
 
-    /** compile the arcive.
+    /** compile the archive.
      * This function produces ZIP archive and returns it.
      *
-     * @return str string with zipfile
+     * @return string with zip file
      */
     public function archive()
     {
         if (!$this->zipdata) {
-            return "";
+            return '';
         }
         $zds = implode('', $this->zipdata);
         $cds = implode('', $this->cdir);
@@ -223,28 +223,23 @@ class ss_zip
             . $cds
             . "PK\x05\x06\x00\x00\x00\x00"
             . pack(
-                'v2V2v'
-                ,
-                $this->cnt            // total # of entries "on this disk"
-                ,
-                $this->cnt            // total # of entries overall
-                ,
-                $cdsl                    // size of central dir
-                ,
-                $zdsl                    // offset to start of central dir
-                ,
+                'v2V2v',
+                $this->cnt, // total # of entries "on this disk"
+                $this->cnt, // total # of entries overall
+                $cdsl, // size of central dir
+                $zdsl, // offset to start of central dir
                 0
-            );                            // .zip file comment length
+            );              // .zip file comment length
         return $this->zipfile;
     }
 
     /** changes pointer to current entry.
      * Most likely you will always use it to 'rewind' the archive and then using read()
-     * Checks for bopundaries, so will not allow index to be set to values < 0 ro > last element
+     * Checks for boundaries, so will not allow index to be set to values < 0 ro > last element
      *
-     * @param int idx the new index to which you want to rewind the archive curent pointer
+     * @param int $idx the new index to which you want to rewind the archive curent pointer
      *
-     * @return int idx the index to which the curent pointer was actually set
+     * @return int idx the index to which the current pointer was actually set
      * @see ss_zip::read()
      */
     public function seek_idx($idx)
@@ -291,7 +286,7 @@ class ss_zip
      *
      * @return bool true on success or false on failure
      *
-     * @param int idx
+     * @param int $idx
      */
     public function remove($idx)
     {
@@ -303,7 +298,7 @@ class ss_zip
      * href='http://smiledsoft.com/demos/phpzip/' target='_blank'>please upgrade </a><hr nashade></center> This
      * function returns data identified by idx parameter.
      *
-     * @param int idx index of the entry
+     * @param int $idx index of the entry
      *
      * @return array returns associative array of the folloving structure:
      *            <ul>
@@ -324,8 +319,8 @@ class ss_zip
      * <center><hr nashade>*** This functionality is available in PRO version only. ***<br><a
      * href='http://smiledsoft.com/demos/phpzip/' target='_blank'>please upgrade </a><hr nashade></center>
      *
-     * @param int    idx Index of the entry
-     * @param string path the first part of the path where the entry will be stored. So if this
+     * @param int $idx Index of the entry
+     * @param string $path the first part of the path where the entry will be stored. So if this
      *               is '/my/server/path' and entry is arhived/file/path/file.txt then the function will attempt to
      *               store it under /my/server/path/arhived/file/path/file.txt You are responsible to ensure that you
      *               have write permissions for this operation under your operation system.

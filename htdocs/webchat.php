@@ -24,6 +24,7 @@ if ($login->userid != 0) {
 
 // prepare iframe-URL
 $chatiframeurl = str_replace('{chatusername}', $chatusername, $opt['chat']['url']);
+$chatiframeurl = preg_replace('/^https?:/', $opt['page']['protocol'] . ':', $chatiframeurl);
 
 // assign to template
 $tpl->assign('chatiframeurl', $chatiframeurl);

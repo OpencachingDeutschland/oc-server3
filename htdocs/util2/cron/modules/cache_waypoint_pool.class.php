@@ -33,7 +33,7 @@ class cache_waypoint_pool
 
     public function getCurrentPoolSize()
     {
-        return sql_value("SELECT COUNT(*) FROM `cache_waypoint_pool`", 0);
+        return sql_value('SELECT COUNT(*) FROM `cache_waypoint_pool`', 0);
     }
 
     public function fill($max_inserts_count)

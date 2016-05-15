@@ -14,10 +14,10 @@ checkJob(new cleanup_temptables());
 
 class cleanup_temptables
 {
-    var $name = 'cleanup_temptables';
-    var $interval = 86400;
+    public $name = 'cleanup_temptables';
+    public $interval = 86400;
 
-    function run()
+    public function run()
     {
         $nIds = [];
         $rs = sqlf("SHOW PROCESSLIST");
@@ -26,7 +26,7 @@ class cleanup_temptables
         }
         sql_free_result($rs);
 
-        $rs = sqlf("SELECT DISTINCT `threadid` FROM `sys_temptables`");
+        $rs = sqlf('SELECT DISTINCT `threadid` FROM `sys_temptables`');
         while ($r = sql_fetch_assoc($rs)) {
             if (!isset($nIds[$r['threadid']])) {
                 sqlf("DELETE FROM `sys_temptables` WHERE `threadid`='&1'", $r['threadid']);

@@ -95,8 +95,8 @@ class replication_monitor
 
         sql(
             "INSERT INTO `sys_repl_slaves` (`id`, `server`, `active`, `weight`, `online`, `last_check`, `current_log_name`, `current_log_pos`)
-		                            VALUES ('&1', '&2', '&3', '&4', '&5', NOW(), '&6', '&7')
-		           ON DUPLICATE KEY UPDATE `server`='&2', `active`='&3', `weight`='&4', `online`='&5', `last_check`=NOW(), `current_log_name`='&6', `current_log_pos`='&7'",
+                                    VALUES ('&1', '&2', '&3', '&4', '&5', NOW(), '&6', '&7')
+                   ON DUPLICATE KEY UPDATE `server`='&2', `active`='&3', `weight`='&4', `online`='&5', `last_check`=NOW(), `current_log_name`='&6', `current_log_pos`='&7'",
             $id,
             $slave['server'],
             $nActive,

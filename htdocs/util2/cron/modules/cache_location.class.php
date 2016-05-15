@@ -10,21 +10,21 @@
  *
  ***************************************************************************/
 
-require_once($opt['rootpath'] . 'lib2/logic/gis.class.php');
+require_once(__DIR__ . '/../../../lib2/logic/gis.class.php');
 
 checkJob(new cache_location());
 
 class cache_location
 {
-    var $name = 'cache_location';
-    var $interval = 0;
+    public $name = 'cache_location';
+    public $interval = 0;
 
-    function run()
+    public function run()
     {
         global $opt;
 
         $rsCache = sql(
-            "SELECT `caches`.`cache_id`, `caches`.`latitude`, `caches`.`longitude`
+            'SELECT `caches`.`cache_id`, `caches`.`latitude`, `caches`.`longitude`
             FROM `caches`
             LEFT JOIN `cache_location`
                 ON `caches`.`cache_id`=`cache_location`.`cache_id`
@@ -34,7 +34,7 @@ class cache_location
             FROM `caches`
             INNER JOIN `cache_location`
                 ON `caches`.`cache_id`=`cache_location`.`cache_id`
-            WHERE `caches`.`last_modified`>`cache_location`.`last_modified`"
+            WHERE `caches`.`last_modified`>`cache_location`.`last_modified`'
         );
         while ($rCache = sql_fetch_assoc($rsCache)) {
             $sCode = '';

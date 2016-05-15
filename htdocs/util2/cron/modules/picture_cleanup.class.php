@@ -17,22 +17,20 @@ class picture_cleanup
     public function run()
     {
         $rsDuplicatePic = sql(
-            "
-			SELECT `object_id`, `title`
-			FROM `pictures`
-			WHERE `object_type`=1
-			GROUP BY `object_id`, `title`
-			HAVING COUNT(*) > 1"
+            'SELECT `object_id`, `title`
+             FROM `pictures`
+             WHERE `object_type`=1
+             GROUP BY `object_id`, `title`
+             HAVING COUNT(*) > 1'
         );
 
         while ($rDuplicatePic = sql_fetch_assoc($rsDuplicatePic)) {
             $rsInstances = sql(
-                "
-				SELECT `pictures`.`id` `picid`, `cache_logs`.`cache_id` `cache_id`
-				FROM `pictures`
-				LEFT JOIN `cache_logs` ON `cache_logs`.`id` = `pictures`.`object_id`
-				WHERE `pictures`.`object_type`=1 AND `pictures`.`object_id`='&1' AND `pictures`.`title`='&2'
-				ORDER BY `pictures`.`date_created`",
+                " SELECT `pictures`.`id` `picid`, `cache_logs`.`cache_id` `cache_id`
+                 FROM `pictures`
+                 LEFT JOIN `cache_logs` ON `cache_logs`.`id` = `pictures`.`object_id`
+                 WHERE `pictures`.`object_type`=1 AND `pictures`.`object_id`='&1' AND `pictures`.`title`='&2'
+                 ORDER BY `pictures`.`date_created`",
                 $rDuplicatePic['object_id'],
                 $rDuplicatePic['title']
             );

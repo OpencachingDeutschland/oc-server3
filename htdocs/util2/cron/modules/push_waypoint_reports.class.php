@@ -18,10 +18,9 @@ class push_waypoint_reports
 
         if ($opt['cron']['gcwp']['report']) {
             $rs = sql(
-                "
-				SELECT * FROM `waypoint_reports`
-				WHERE `gcwp_processed`=0
-				ORDER BY `date_reported`"
+                'SELECT * FROM `waypoint_reports`
+                 WHERE `gcwp_processed`=0
+                 ORDER BY `date_reported`'
             );
             while ($r = sql_fetch_assoc($rs)) {
                 if (substr($r['wp_external'], 0, 2) != 'GC') {
@@ -41,9 +40,9 @@ class push_waypoint_reports
                 } else {
                     sql(
                         "
-						UPDATE `waypoint_reports`
-						SET `gcwp_processed`=1
-						WHERE `report_id`='&1'",
+                        UPDATE `waypoint_reports`
+                        SET `gcwp_processed`=1
+                        WHERE `report_id`='&1'",
                         $r['report_id']
                     );
                 }

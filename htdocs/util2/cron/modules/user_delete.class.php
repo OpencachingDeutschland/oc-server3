@@ -16,11 +16,11 @@ class user_delete
 
     public function run()
     {
-        sql("set @allowdelete=1");
+        sql('set @allowdelete=1');
         sql(
-            "DELETE FROM `user`
+            'DELETE FROM `user`
             WHERE `date_created`<DATE_ADD(NOW(), INTERVAL -21 DAY)
-            AND `is_active_flag`=0 AND `activation_code`!=''"
+            AND `is_active_flag`=0 AND `activation_code`!=\'\''
         );
     }
 }

@@ -14,6 +14,11 @@
  *
  ***************************************************************************/
 
+// @codingStandardsIgnoreStart
+//
+// It's probably not worth the effort to adopt current Coding Styles for this
+// old version file.
+
 sql_dropFunction('distance');
 sql("CREATE FUNCTION `distance` (lat1 DOUBLE, lon1 DOUBLE, lat2 DOUBLE, lon2 DOUBLE) RETURNS DOUBLE DETERMINISTIC
      BEGIN
@@ -1752,3 +1757,5 @@ sql_dropFunction('dbsvTriggerVersion');
 sql("
     CREATE FUNCTION `dbsvTriggerVersion` () RETURNS INT
     RETURN 113");
+
+// @codingStandardsIgnoreEnd

@@ -1,10 +1,10 @@
 <?php
 /****************************************************************************
-		./lang/de/ocstyle/smilies.inc.php
-		-------------------
-		begin                : December 12 2005
+        ./lang/de/ocstyle/smilies.inc.php
+        -------------------
+        begin                : December 12 2005
 
-		For license information see doc/license.txt
+        For license information see doc/license.txt
  ****************************************************************************/
 
 /****************************************************************************
@@ -15,25 +15,25 @@
  ****************************************************************************/
 
 $smileyimage = [
-	'<img src="resource2/tinymce/plugins/emotions/img/smiley-smile.gif" alt=":)" border="0" width="18px" height="18px" />',
-	'<img src="resource2/tinymce/plugins/emotions/img/smiley-smile.gif" alt=":-)" border="0" width="18px" height="18px" />',
-	'<img src="resource2/tinymce/plugins/emotions/img/smiley-wink.gif" alt=";)" border="0" width="18px" height="18px" />',
-	'<img src="resource2/tinymce/plugins/emotions/img/smiley-wink.gif" alt=";-)" border="0" width="18px" height="18px" />',
-	'<img src="resource2/tinymce/plugins/emotions/img/smiley-laughing.gif" alt=":-D" border="0" width="18px" height="18px" />',
-	'<img src="resource2/tinymce/plugins/emotions/img/smiley-cool.gif" alt="8-)" border="0" width="18px" height="18px" />',
-	'<img src="resource2/tinymce/plugins/emotions/img/smiley-innocent.gif" alt="O:)" border="0" width="18px" height="18px" />',
-	'<img src="resource2/tinymce/plugins/emotions/img/smiley-surprised.gif" alt=":-o" border="0" width="18px" height="18px" />',
-	'<img src="resource2/tinymce/plugins/emotions/img/smiley-surprised.gif" alt=":o" border="0" width="18px" height="18px" />',
-	'<img src="resource2/tinymce/plugins/emotions/img/smiley-frown.gif" alt=":(" border="0" width="18px" height="18px" />',
-	'<img src="resource2/tinymce/plugins/emotions/img/smiley-frown.gif" alt=":-(" border="0" width="18px" height="18px" />',
-	'<img src="resource2/tinymce/plugins/emotions/img/smiley-embarassed.gif" alt="::|" border="0" width="18px" height="18px" />',
-	'<img src="resource2/tinymce/plugins/emotions/img/smiley-cry.gif" alt=":,-(" border="0" width="18px" height="18px" />',
-	'<img src="resource2/tinymce/plugins/emotions/img/smiley-kiss.gif" alt=":-*" border="0" width="18px" height="18px" />',
-	'<img src="resource2/tinymce/plugins/emotions/img/smiley-tongue-out.gif" alt=":P" border="0" width="18px" height="18px" />',
-	'<img src="resource2/tinymce/plugins/emotions/img/smiley-tongue-out.gif" alt=":-P" border="0" width="18px" height="18px" />',
-	'<img src="resource2/tinymce/plugins/emotions/img/smiley-undecided.gif" alt=":-/" border="0" width="18px" height="18px" />',
-	'<img src="resource2/tinymce/plugins/emotions/img/smiley-undecided.gif" alt=":/" border="0" width="18px" height="18px" />',
-	'<img src="resource2/tinymce/plugins/emotions/img/smiley-yell.gif" alt="X-O" border="0" width="18px" height="18px" />'
+    '<img src="resource2/tinymce/plugins/emotions/img/smiley-smile.gif" alt=":)" border="0" width="18px" height="18px" />',
+    '<img src="resource2/tinymce/plugins/emotions/img/smiley-smile.gif" alt=":-)" border="0" width="18px" height="18px" />',
+    '<img src="resource2/tinymce/plugins/emotions/img/smiley-wink.gif" alt=";)" border="0" width="18px" height="18px" />',
+    '<img src="resource2/tinymce/plugins/emotions/img/smiley-wink.gif" alt=";-)" border="0" width="18px" height="18px" />',
+    '<img src="resource2/tinymce/plugins/emotions/img/smiley-laughing.gif" alt=":-D" border="0" width="18px" height="18px" />',
+    '<img src="resource2/tinymce/plugins/emotions/img/smiley-cool.gif" alt="8-)" border="0" width="18px" height="18px" />',
+    '<img src="resource2/tinymce/plugins/emotions/img/smiley-innocent.gif" alt="O:)" border="0" width="18px" height="18px" />',
+    '<img src="resource2/tinymce/plugins/emotions/img/smiley-surprised.gif" alt=":-o" border="0" width="18px" height="18px" />',
+    '<img src="resource2/tinymce/plugins/emotions/img/smiley-surprised.gif" alt=":o" border="0" width="18px" height="18px" />',
+    '<img src="resource2/tinymce/plugins/emotions/img/smiley-frown.gif" alt=":(" border="0" width="18px" height="18px" />',
+    '<img src="resource2/tinymce/plugins/emotions/img/smiley-frown.gif" alt=":-(" border="0" width="18px" height="18px" />',
+    '<img src="resource2/tinymce/plugins/emotions/img/smiley-embarassed.gif" alt="::|" border="0" width="18px" height="18px" />',
+    '<img src="resource2/tinymce/plugins/emotions/img/smiley-cry.gif" alt=":,-(" border="0" width="18px" height="18px" />',
+    '<img src="resource2/tinymce/plugins/emotions/img/smiley-kiss.gif" alt=":-*" border="0" width="18px" height="18px" />',
+    '<img src="resource2/tinymce/plugins/emotions/img/smiley-tongue-out.gif" alt=":P" border="0" width="18px" height="18px" />',
+    '<img src="resource2/tinymce/plugins/emotions/img/smiley-tongue-out.gif" alt=":-P" border="0" width="18px" height="18px" />',
+    '<img src="resource2/tinymce/plugins/emotions/img/smiley-undecided.gif" alt=":-/" border="0" width="18px" height="18px" />',
+    '<img src="resource2/tinymce/plugins/emotions/img/smiley-undecided.gif" alt=":/" border="0" width="18px" height="18px" />',
+    '<img src="resource2/tinymce/plugins/emotions/img/smiley-yell.gif" alt="X-O" border="0" width="18px" height="18px" />'
 ];
 
 

@@ -1,10 +1,10 @@
 <?php
 /****************************************************************************
-											./lang/de/ocstyle/log_cache.inc.php
-															-------------------
-		begin                : July 4 2004
+                                            ./lang/de/ocstyle/log_cache.inc.php
+                                                            -------------------
+        begin                : July 4 2004
 
-		For license information see doc/license.txt
+        For license information see doc/license.txt
  ****************************************************************************/
 
 /****************************************************************************

@@ -1,10 +1,10 @@
 <?php
 /****************************************************************************
-											./lang/de/ocstyle/removelogs.tpl.php
-															-------------------
-		begin                : July 9 2004
+                                            ./lang/de/ocstyle/removelogs.tpl.php
+                                                            -------------------
+        begin                : July 9 2004
 
-		For license information see doc/license.txt
+        For license information see doc/license.txt
  ****************************************************************************/
 
 /****************************************************************************
@@ -23,26 +23,26 @@
 <input type="hidden" name="commit" value="1"/>
 <input type="hidden" name="logid" value="{logid}"/>
 <table class="table">
-	<tr><td class="spacer"></td></tr>
+    <tr><td class="spacer"></td></tr>
 
-	<tr><td colspan="2">{t}Are you sure to remove your log entry?{/t}</td></tr>
-	<tr><td class="spacer"></td></tr>
+    <tr><td colspan="2">{t}Are you sure to remove your log entry?{/t}</td></tr>
+    <tr><td class="spacer"></td></tr>
 
-	<tr>
-		<td>&nbsp;&nbsp;&nbsp;</td>
-		<td>
-			<div class="textblock">
-				<p>{logimage} {date}{time} &nbsp; {typetext}</p>
-				<p>{logtext}</p>
-			</div>
-		</td>
-	</tr>
-	<tr><td class="spacer">&nbsp;</td></tr>
+    <tr>
+        <td>&nbsp;&nbsp;&nbsp;</td>
+        <td>
+            <div class="textblock">
+                <p>{logimage} {date}{time} &nbsp; {typetext}</p>
+                <p>{logtext}</p>
+            </div>
+        </td>
+    </tr>
+    <tr><td class="spacer">&nbsp;</td></tr>
 
-	<tr>
-		<td class="header-small" colspan="2">
-			<input type="submit" name="submit" value="{t}Remove log entry{/t}"  class="formbutton" style="width: 150px;" onclick="submitbutton('submit')" />
-		</td>
-	</tr>
+    <tr>
+        <td class="header-small" colspan="2">
+            <input type="submit" name="submit" value="{t}Remove log entry{/t}"  class="formbutton" style="width: 150px;" onclick="submitbutton('submit')" />
+        </td>
+    </tr>
 </table>
 </form>

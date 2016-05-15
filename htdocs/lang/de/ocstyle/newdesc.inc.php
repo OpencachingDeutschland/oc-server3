@@ -1,18 +1,18 @@
 <?php
 /****************************************************************************
-												  ./lang/de/ocstyle/newdesc.inc.php
-															-------------------
-		begin                : July 7 2004
+                                                  ./lang/de/ocstyle/newdesc.inc.php
+                                                            -------------------
+        begin                : July 7 2004
 
-		For license information see doc/license.txt
+        For license information see doc/license.txt
  ****************************************************************************/
 
 /****************************************************************************
-	 
+     
    Unicode Reminder メモ
-                                        				                                
-	 set template specific language variables
-	
+                                                                                        
+     set template specific language variables
+    
  ****************************************************************************/
  
 $submit = t('Add');

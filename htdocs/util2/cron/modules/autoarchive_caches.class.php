@@ -1,4 +1,4 @@
-\<?php
+<?php
 /***************************************************************************
  *  For license information see doc/license.txt
  *
@@ -7,8 +7,8 @@
  *  Automatic archiving of disabled caches
  ***************************************************************************/
 
-require_once(__DIR__ . '/../../../lib2/logic/cache.class.php');
-require_once(__DIR__ . '/../../../lib2/logic/cachelog.class.php');
+require_once($opt['rootpath'] . 'lib2/logic/cache.class.php');
+require_once($opt['rootpath'] . 'lib2/logic/cachelog.class.php');
 
 checkJob(new autoarchive());
 

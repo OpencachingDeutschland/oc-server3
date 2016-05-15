@@ -10,7 +10,7 @@
  *
  ***************************************************************************/
 
-require_once(__DIR__ . '/../../../lib2/logic/gis.class.php');
+require_once($opt['rootpath'] . 'lib2/logic/gis.class.php');
 
 checkJob(new cache_npa_areas());
 

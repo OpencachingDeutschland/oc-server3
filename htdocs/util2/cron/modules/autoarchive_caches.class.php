@@ -7,11 +7,7 @@
  *  Automatic archiving of disabled caches
  ***************************************************************************/
 
-require_once(__DIR__ . '/../../../lib2/logic/cache.class.php');
-require_once(__DIR__ . '/../../../lib2/logic/cachelog.class.php');
-
 checkJob(new autoarchive());
-
 
 class autoarchive
 {

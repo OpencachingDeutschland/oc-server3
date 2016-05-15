@@ -9,7 +9,6 @@
 
 checkJob(new maillog());
 
-
 class maillog
 {
     public $name = 'maillog';

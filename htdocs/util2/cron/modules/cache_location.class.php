@@ -10,8 +10,6 @@
  *
  ***************************************************************************/
 
-require_once(__DIR__ . '/../../../lib2/logic/gis.class.php');
-
 checkJob(new cache_location());
 
 class cache_location

@@ -19,11 +19,11 @@ class publish_caches
         global $login;
 
         $rsPublish = sql(
-            "SELECT `cache_id`, `user_id`
+            'SELECT `cache_id`, `user_id`
             FROM `caches`
             WHERE `status`=5
             AND NOT ISNULL(`date_activate`)
-            AND `date_activate`<=NOW()"
+            AND `date_activate`<=NOW()'
         );
         while ($rPublish = sql_fetch_array($rsPublish)) {
             $userid = $rPublish['user_id'];

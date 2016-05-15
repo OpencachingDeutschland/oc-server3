@@ -54,13 +54,13 @@ class maillog
 
         $maillog_where =
             "`" . $col_hostname . "`='" . mysql_real_escape_string($opt['system']['maillog']['syslog_oc_host']) . "' AND
-			`" . $col_program . "` like '" . mysql_real_escape_string($opt['system']['maillog']['syslog_mta']) . "'";
+            `" . $col_program . "` like '" . mysql_real_escape_string($opt['system']['maillog']['syslog_mta']) . "'";
 
         $rs = @mysql_query(
             "
-			SELECT TIMESTAMPDIFF(DAY, MAX(" . $col_created . "), NOW())
-			FROM `" . mysql_real_escape_string($opt['system']['maillog']['syslog_db_table']) . "`
-			WHERE " . $maillog_where
+            SELECT TIMESTAMPDIFF(DAY, MAX(" . $col_created . "), NOW())
+            FROM `" . mysql_real_escape_string($opt['system']['maillog']['syslog_db_table']) . "`
+            WHERE " . $maillog_where
         );
         $r = mysql_fetch_row($rs);
         mysql_free_result($rs);
@@ -82,15 +82,15 @@ class maillog
 
         $rs = @mysql_query(
             "SELECT `" . $col_id . "` `id`,
-			          `" . $col_message . "` `message`,
-			          `" . $col_created . "` `created`
-			     FROM `" . mysql_real_escape_string($opt['system']['maillog']['syslog_db_table']) . "`
-			    WHERE `" . $col_created . "`>='" . mysql_real_escape_string($last_date) . "'
-			      AND (`" . $col_id . "`>'" . mysql_real_escape_string(
+                      `" . $col_message . "` `message`,
+                      `" . $col_created . "` `created`
+                 FROM `" . mysql_real_escape_string($opt['system']['maillog']['syslog_db_table']) . "`
+                WHERE `" . $col_created . "`>='" . mysql_real_escape_string($last_date) . "'
+                  AND (`" . $col_id . "`>'" . mysql_real_escape_string(
                 $last_id
             ) . "' OR `" . $col_created . "`>'" . mysql_real_escape_string($last_date) . "')
-			      AND  " . $maillog_where . "
-			 ORDER BY `" . $col_created . "`,`" . $col_id . "`",
+                  AND  " . $maillog_where . "
+             ORDER BY `" . $col_created . "`,`" . $col_id . "`",
             $dbc
         );
         if ($rs === false) {
@@ -109,7 +109,7 @@ class maillog
                     if ($delivered) {
                         sql(
                             "UPDATE `user` SET `email_problems`=0
-						      WHERE `email`='&1'",
+                              WHERE `email`='&1'",
                             $emailadr
                         );
                     } else {
@@ -117,7 +117,7 @@ class maillog
                         {
                             sql(
                                 "UPDATE `user` SET `email_problems`=`email_problems`+1, `last_email_problem`='&2'
-						      WHERE `email`='&1' AND IFNULL(`last_email_problem`,'') < '&2'",
+                              WHERE `email`='&1' AND IFNULL(`last_email_problem`,'') < '&2'",
                                 $emailadr,
                                 $logentry['created']
                             );
@@ -134,12 +134,12 @@ class maillog
 
         sql(
             "INSERT INTO `sysconfig` (`name`, `value`) VALUES ('syslog_maillog_lastid','&1')
-		     ON DUPLICATE KEY UPDATE `value`='&1'",
+             ON DUPLICATE KEY UPDATE `value`='&1'",
             $last_id
         );
         sql(
             "INSERT INTO `sysconfig` (`name`, `value`) VALUES ('syslog_maillog_lastdate','&1')
-		     ON DUPLICATE KEY UPDATE `value`='&1'",
+             ON DUPLICATE KEY UPDATE `value`='&1'",
             $last_date
         );
     }

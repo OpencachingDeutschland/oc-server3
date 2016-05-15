@@ -31,7 +31,7 @@ class phpbbtopics
         usort($this->topiclist, 'sort_compare_updated');
         $this->topiclist = array_slice($this->topiclist, 0, $opt['cron']['phpbbtopics']['count']);
 
-        $f = fopen($opt['rootpath'] . 'cache2/phpbb.inc.php', 'w');
+        $f = fopen(__DIR__ . '/../../cache2/phpbb.inc.php', 'w');
         fwrite($f, '<?php' . "\n");
         fwrite(
             $f,

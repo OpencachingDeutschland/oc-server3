@@ -43,8 +43,10 @@ class geokrety
     {
         global $opt;
 
-        @mkdir($opt['rootpath'] . 'cache2/geokrety');
-        $path = $opt['rootpath'] . 'cache2/geokrety/import-' . date('Ymd-His') . '.xml';
+        if (!@mkdir(__DIR__ . '/../../../cache2/geokrety')) {
+            // die('can\'t create geogrety cache dir');
+        }
+        $path = __DIR__ . '/../../../cache2/geokrety/import-' . date('Ymd-His') . '.xml';
 
         // Changed default-value for getSysConfig() from '2005-01-01 00:00:00' to 'NOW - 9d 12h'
         // to safely stay in api-limit, even when client and server are in different time zones.
@@ -153,12 +155,12 @@ class geokrety
 
         sql(
             "INSERT INTO `gk_item`
-					(`id`, `name`, `description`, `userid`, `datecreated`,
-					`distancetravelled`, `latitude`, `longitude`, `typeid`, `stateid`)
-			VALUES ('&1', '&2', '&3', '&4', '&5', '&6', '&7', '&8', '&9', '&10')
-			ON DUPLICATE KEY UPDATE
-			`name`='&2', `description`='&3', `userid`='&4', `datecreated`='&5', `distancetravelled`='&6',
-			`latitude`='&7', `longitude`='&8', `typeid`='&9', `stateid`='&10'",
+                    (`id`, `name`, `description`, `userid`, `datecreated`,
+                    `distancetravelled`, `latitude`, `longitude`, `typeid`, `stateid`)
+            VALUES ('&1', '&2', '&3', '&4', '&5', '&6', '&7', '&8', '&9', '&10')
+            ON DUPLICATE KEY UPDATE
+            `name`='&2', `description`='&3', `userid`='&4', `datecreated`='&5', `distancetravelled`='&6',
+            `latitude`='&7', `longitude`='&8', `typeid`='&9', `stateid`='&10'",
             $id,
             $name,
             $description,
@@ -230,11 +232,11 @@ class geokrety
 
         sql(
             "INSERT INTO `gk_move`
-			    (`id`, `itemid`, `latitude`, `longitude`, `datemoved`, `datelogged`, `userid`, `comment`, `logtypeid`)
+                (`id`, `itemid`, `latitude`, `longitude`, `datemoved`, `datelogged`, `userid`, `comment`, `logtypeid`)
             VALUES ('&1', '&2', '&3', '&4', '&5', '&6', '&7', '&8', '&9')
-			ON DUPLICATE KEY UPDATE
-			    `itemid`='&2', `latitude`='&3', `longitude`='&4', `datemoved`='&5',
-			    `datelogged`='&6', `userid`='&7', `comment`='&8', `logtypeid`='&9'",
+            ON DUPLICATE KEY UPDATE
+                `itemid`='&2', `latitude`='&3', `longitude`='&4', `datemoved`='&5',
+                `datelogged`='&6', `userid`='&7', `comment`='&8', `logtypeid`='&9'",
             $id,
             $gkid,
             $latitude,
@@ -264,9 +266,9 @@ class geokrety
         sql("DELETE FROM `gk_item_waypoint` WHERE `id`='&1'", $gkid);
         $rs = sql(
             "
-				SELECT `id`,`logtypeid` FROM `gk_move`
-				WHERE `itemid`='&1' AND `logtypeid`!=2
-				ORDER BY `datemoved` DESC LIMIT 1",
+                SELECT `id`,`logtypeid` FROM `gk_move`
+                WHERE `itemid`='&1' AND `logtypeid`!=2
+                ORDER BY `datemoved` DESC LIMIT 1",
             $gkid
         );
         $r = sql_fetch_assoc($rs);
@@ -278,10 +280,10 @@ class geokrety
         if ($r['logtypeid'] == 0 /* dropped */ || $r['logtypeid'] == 3 /* seen in */) {
             sql(
                 "
-				INSERT INTO `gk_item_waypoint` (`id`, `wp`)
-				SELECT '&1' AS `id`, `wp`
-				FROM `gk_move_waypoint`
-				WHERE `id`='&2' AND `wp`!=''",
+                INSERT INTO `gk_item_waypoint` (`id`, `wp`)
+                SELECT '&1' AS `id`, `wp`
+                FROM `gk_move_waypoint`
+                WHERE `id`='&2' AND `wp`!=''",
                 $gkid,
                 $r['id']
             );  // "late log" bugfix: replaced $id paramter by $r['id']

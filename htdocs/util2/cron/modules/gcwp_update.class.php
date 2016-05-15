@@ -26,7 +26,7 @@ class gcwp_update
         foreach ($opt['cron']['gcwp']['sources'] as $source) {
             $wpdata = @file($source);
             if ($wpdata === false) {
-                echo "gcwp_update: error reading " . $source . "\n";
+                echo 'gcwp_update: error reading ' . $source . "\n";
                 $errors = true;
             } else {
                 foreach ($wpdata as $line) {
@@ -46,9 +46,9 @@ class gcwp_update
         if (!$errors) {
             sql(
                 "
-					UPDATE caches
-					SET wp_gc_maintained = UCASE(TRIM(wp_gc))
-					WHERE wp_oc NOT IN ('" . implode("','", $ocwp_imported) . "')"
+                    UPDATE caches
+                    SET wp_gc_maintained = UCASE(TRIM(wp_gc))
+                    WHERE wp_oc NOT IN ('" . implode("','", $ocwp_imported) . "')"
             );
         }
     }

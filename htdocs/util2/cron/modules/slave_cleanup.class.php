@@ -49,7 +49,7 @@ class slave_cleanup
         sql_disconnect_slave();
     }
 
-    function cleanup_mapresult2($slaveId)
+    public function cleanup_mapresult2($slaveId)
     {
         global $opt;
 

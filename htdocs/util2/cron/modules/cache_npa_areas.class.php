@@ -10,7 +10,7 @@
  *
  ***************************************************************************/
 
-require_once($opt['rootpath'] . 'lib2/logic/gis.class.php');
+require_once(__DIR__ . '/../../../lib2/logic/gis.class.php');
 
 checkJob(new cache_npa_areas());
 
@@ -21,7 +21,7 @@ class cache_npa_areas
 
     public function run()
     {
-        $rsCache = sql("SELECT `cache_id`, `latitude`, `longitude` FROM `caches` WHERE `need_npa_recalc`=1");
+        $rsCache = sql('SELECT `cache_id`, `latitude`, `longitude` FROM `caches` WHERE `need_npa_recalc`=1');
         while ($rCache = sql_fetch_assoc($rsCache)) {
             sql("DELETE FROM `cache_npa_areas` WHERE `cache_id`='&1' AND `calculated`=1", $rCache['cache_id']);
 

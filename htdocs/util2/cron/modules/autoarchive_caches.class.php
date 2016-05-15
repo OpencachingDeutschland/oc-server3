@@ -1,4 +1,4 @@
-<?php
+\<?php
 /***************************************************************************
  *  For license information see doc/license.txt
  *
@@ -7,8 +7,8 @@
  *  Automatic archiving of disabled caches
  ***************************************************************************/
 
-require_once($opt['rootpath'] . "lib2/logic/cache.class.php");
-require_once($opt['rootpath'] . "lib2/logic/cachelog.class.php");
+require_once(__DIR__ . '/../../../lib2/logic/cache.class.php');
+require_once(__DIR__ . '/../../../lib2/logic/cachelog.class.php');
 
 checkJob(new autoarchive());
 
@@ -43,23 +43,23 @@ class autoarchive
 
         // This statement may be optimized. It typically runs for ~15 seconds at OC.de.
         $rs = sql(
-            "
-			SELECT `caches`.`cache_id`,
-			       `caches`.`user_id`,
-			       DATEDIFF(NOW(), `listing_last_modified`) AS `listing_age`,
-			       (SELECT MAX(`date_modified`) FROM `cache_status_modified` `csm`
-			        WHERE `csm`.`cache_id`=`caches`.`cache_id` AND `csm`.`new_state`=2)
-			       `disable_date`,
-			       (SELECT MAX(`user_id`) FROM `cache_status_modified` `csm`
-			        WHERE `csm`.`cache_id`=`cache_id` AND `csm`.`date_modified`=`disable_date`)
-			       `disabled_by`,
-			       IFNULL(DATEDIFF(NOW(), `user`.`last_login`), 150) `login_lag`,
-			       `ca`.`attrib_id` IS NOT NULL `seasonal_cache`
-			FROM `caches`
-			LEFT JOIN `user` ON `user`.`user_id`=`caches`.`user_id`
-			LEFT JOIN `caches_attributes` `ca` ON `ca`.`cache_id`=`caches`.`cache_id` AND `ca`.`attrib_id`=60
-			WHERE `status`=2 AND DATEDIFF(NOW(), `listing_last_modified`) > 184
-			ORDER BY `listing_last_modified`"
+            '
+            SELECT `caches`.`cache_id`,
+                   `caches`.`user_id`,
+                   DATEDIFF(NOW(), `listing_last_modified`) AS `listing_age`,
+                   (SELECT MAX(`date_modified`) FROM `cache_status_modified` `csm`
+                    WHERE `csm`.`cache_id`=`caches`.`cache_id` AND `csm`.`new_state`=2)
+                   `disable_date`,
+                   (SELECT MAX(`user_id`) FROM `cache_status_modified` `csm`
+                    WHERE `csm`.`cache_id`=`cache_id` AND `csm`.`date_modified`=`disable_date`)
+                   `disabled_by`,
+                   IFNULL(DATEDIFF(NOW(), `user`.`last_login`), 150) `login_lag`,
+                   `ca`.`attrib_id` IS NOT NULL `seasonal_cache`
+            FROM `caches`
+            LEFT JOIN `user` ON `user`.`user_id`=`caches`.`user_id`
+            LEFT JOIN `caches_attributes` `ca` ON `ca`.`cache_id`=`caches`.`cache_id` AND `ca`.`attrib_id`=60
+            WHERE `status`=2 AND DATEDIFF(NOW(), `listing_last_modified`) > 184
+            ORDER BY `listing_last_modified`'
         );
 
         $archived = 0;
@@ -74,7 +74,7 @@ class autoarchive
                             &&
                             sql_value(
                                 "SELECT MAX(`date`) FROM `cache_logs` WHERE `cache_logs`.`cache_id`='&1'",
-                                "",
+                                '',
                                 $rCache['cache_id']
                             ) < $rCache['disable_date']
                         )
@@ -107,12 +107,12 @@ class autoarchive
         // event date - before the owner notices it - we also apply a limit of one month
         // to the publication date.
         $rs = sql(
-            "SELECT `cache_id`
+            'SELECT `cache_id`
             FROM `caches`
             WHERE `caches`.`type`=6 AND `caches`.`status`=1
             AND GREATEST(`date_hidden`,`date_created`) < NOW() - INTERVAL 35 DAY
             ORDER BY `date_hidden`
-            LIMIT 1"
+            LIMIT 1'
         );
         while ($rCache = sql_fetch_assoc($rs)) {
             $this->archive_cache(
@@ -156,5 +156,4 @@ class autoarchive
             }
         }
     }
-
 }

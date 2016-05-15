@@ -1,1 +1,0 @@
-see http://sourceforge.net/projects/b2evo-captcha

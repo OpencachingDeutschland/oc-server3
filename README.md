@@ -30,10 +30,6 @@ for a detailed list.
 
 Contributions
 -------------
-**Before you start writing OC code, please contact the developer team in the
-[forum](http://forum.opencaching.de/) and verify if someone is ready to review
-and release your contributions.**
-
 Contributing code to Opencaching.de is easy:
 * Sign up to Github and [install Git](https://help.github.com/articles/set-up-git),
 * create a personal fork of this repository using the Fork button above,

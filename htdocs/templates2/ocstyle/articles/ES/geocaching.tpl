@@ -5,9 +5,9 @@
 ***************************************************************************}
 <div class="content2-pagetitle"><img style="MARGIN-RIGHT: 10px; align: left" height="32" alt="" src="resource2/{$opt.template.style}/images/cacheicon/traditional.gif" width="32" />Acerca de Geocaching </div>
 <div class="content-txtbox-noshade" style="PADDING-RIGHT: 25px">
-	<div style="float:right; margin: 0 0 10px 10px;">
-		<img src="images/ueber_oc.jpg" alt="" />
-	</div>
+    <div style="float:right; margin: 0 0 10px 10px;">
+        <img src="images/ueber_oc.jpg" alt="" />
+    </div>
   <p align="justify">Geocaching ha sido descrito como la búsqueda del   tesoro moderno. En pocas palabras : hay personas que  esconden contenedores con obsequios y un cuaderno o libro de registro. Y las coordenadas del escondite son publicadas en la   web.</p>
   <p align="justify">En la web  tomó nota de esas coordenadas y las introduzco en el dispositivo GPS para comenzar la busqueda de los tesoros. A continuación, una vez encontrado, hago un pequeño intercambio de los obsequios que hay en el contenedor, registro  la visita en el cuaderno y vuelvo a esconderno en el mismo lugar   - para los próximos jugadores...</p>
   <p align="justify">Esas son las reglas básicas. Pero por supuesto hay mucho más detrás de esta actividad.   Por ejemplo, hay diferentes tipos de caches, como los caches sencillos, a los que puedo acceder a ellos sin bajarme del coche, otros que sólo son accesibles con   un equipo especial (por ejemplo, escalar o equipo de snorkel), o podemos encontrarnos con los llamados los puzzle   caches que requieren realizar alguna investigación y resolver puzzles   de lógica.</p>

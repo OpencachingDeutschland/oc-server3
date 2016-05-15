@@ -5,8 +5,8 @@
 ***************************************************************************}
 {* OCSTYLE *}
 <div class="content2-pagetitle">
-	<img src="resource2/{$opt.template.style}/images/misc/32x32-pictures.gif" style="margin-right: 10px;" width="24" height="24" alt="" />
-	{t}New log pictures{/t}
+    <img src="resource2/{$opt.template.style}/images/misc/32x32-pictures.gif" style="margin-right: 10px;" width="24" height="24" alt="" />
+    {t}New log pictures{/t}
 </div>
 
 {include file="res_logpictures.tpl" logdate=true loguser=true}

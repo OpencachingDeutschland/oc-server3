@@ -5,34 +5,34 @@
 ***************************************************************************}
  {* OCSTYLE *}
 {*
-  id				attribute id
+  id                attribute id
 
   icon      icon name
 
-  state			ATTRIB_NO           undef / greyed
-						ATTRIB_SELECTED     selected
-						ATTRIB_UNSELECTED   not selected
+  state            ATTRIB_NO           undef / greyed
+                        ATTRIB_SELECTED     selected
+                        ATTRIB_UNSELECTED   not selected
 
-  name			attribute name
+  name            attribute name
   
-  html_desc	attribute description (html code)
+  html_desc    attribute description (html code)
   
-  hoverfunc	true/false
+  hoverfunc    true/false
 
   color
 
-	onmousedown := javascript funtion name to call on mouse down (to change attribute icons)
-	inputprefix := name/id-prefix of hidden inputbox with state
+    onmousedown := javascript funtion name to call on mouse down (to change attribute icons)
+    inputprefix := name/id-prefix of hidden inputbox with state
 *}
 {capture name=filename}{strip}
-	resource2/{$opt.template.style}/images/attributes/
-	{$icon}
+    resource2/{$opt.template.style}/images/attributes/
+    {$icon}
   {if $state==2}{* ATTRIB_UNSELECTED *}
     -no.png
   {elseif $state==3}{* ATTRIB_UNDEF *}
     -disabled.png
   {else}{* ATTRIB_SELECTED *}
-		.png
+        .png
   {/if}
 {/strip}{/capture}
 
@@ -45,5 +45,5 @@
      />
 
 {if $inputprefix!=''}
-	<input type="hidden" id="{$inputprefix}{$id}" name="{$inputprefix}{$id}" value="{$state}" />
+    <input type="hidden" id="{$inputprefix}{$id}" name="{$inputprefix}{$id}" value="{$state}" />
 {/if}

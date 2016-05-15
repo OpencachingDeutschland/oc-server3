@@ -3,13 +3,13 @@
 *
 *  Unicode Reminder メモ
 ***************************************************************************}
-	<div class="content2-pagetitle">
-		<img src="resource2/{$opt.template.style}/images/misc/32x32-globi.png" style="margin-right: 10px;" width="32" height="32" alt="" />Unser Team
-	</div>
-	<div class="content-txtbox-noshade" style="padding-right: 25px;">
+    <div class="content2-pagetitle">
+        <img src="resource2/{$opt.template.style}/images/misc/32x32-globi.png" style="margin-right: 10px;" width="32" height="32" alt="" />Unser Team
+    </div>
+    <div class="content-txtbox-noshade" style="padding-right: 25px;">
 
-	<p>
-		Hier m&ouml;chten wir euch unser Team vorstellen, das hinter den Kulissen von Opencaching.de unerm&uuml;dlich für euch werkelt.
+    <p>
+        Hier m&ouml;chten wir euch unser Team vorstellen, das hinter den Kulissen von Opencaching.de unerm&uuml;dlich für euch werkelt.
     Wir freuen uns &uuml;ber eure Anregungen, Vorschl&auml;ge und Kritik. Auf der <a href="http://www.opencaching.de/articles.php?page=contact">Kontakt-Seite</a>
     habt ihr M&ouml;glichkeiten, euch n&auml;her über Opencaching zu informieren oder mit uns in Kontakt zu treten. Natürlich k&ouml;nt ihr unsere
     Teammitglieder auch direkt &uuml;ber eines der Benutzerprofile anschreiben.
@@ -17,9 +17,9 @@
   <p>
     An dieser Stelle m&ouml;chten wir uns auch bei allen Benutzern und ungenannten Helfern bedanken, die immer wieder mit neuen Vorschl&auml;gen
     und ihrem Engagement dazu beitragen, dass Opencaching w&auml;chst und weiterentwickelt wird.
-	</p>
+    </p>
 
-	<table class="table teamlist">
+    <table class="table teamlist">
     <tr><th colspan="3"><br /><span class="content-title-noshade-size1">Die Vorstandschaft des Opencaching Deutschland e.V.</span></th></tr>
     <tr><td></td><td></td><td></td></tr>
     <tr><td><img src="{$opt.page.teampic_url}4_vs.jpg" /></td><td><a href="{$opt.page.teammember_url}viewprofile.php?userid=162754">4_Vs</a><br />Vorsitzender</td></tr>

@@ -19,7 +19,7 @@ class phpbbtopics
     {
         global $opt;
 
-        foreach ($opt['cron']['phpbbtopics']['forumids'] AS $id) {
+        foreach ($opt['cron']['phpbbtopics']['forumids'] as $id) {
             $url = $opt['cron']['phpbbtopics']['url'];
             $url = str_replace('{id}', $id, $url);
 
@@ -73,14 +73,6 @@ class phpbbtopics
             $sTitle = preg_replace('/\\&.*\\;/U', '', $sTitle);
 
             $nTopicId = crc32($item->id); // workaround ...
-            /*
-                        $nTopicId = $item->id;
-                        if (mb_strpos($nTopicId, 't=') !== false)
-                            $nTopicId = mb_trim(mb_substr($nTopicId, mb_strpos($nTopicId, 't=') + 2));
-                        if (mb_strpos($nTopicId, '&') !== false)
-                            $nTopicId = mb_trim(mb_substr($nTopicId, 0, mb_strpos($nTopicId, '&')));
-                        $nTopicId = $nTopicId+0;
-            */
             $tUpdated = strtotime($item->updated);
 
             $sUsername = (string)$item->author->name;
@@ -92,25 +84,11 @@ class phpbbtopics
                     $sLink = (string)$value;
                 }
             }
-            /*
-                        $sContent = $item->content;
-                        $sContent = str_replace('<br />', ' ', $sContent);
-                        $sContent = preg_replace('/\\<div class\\=\\"quotetitle\\"\\>.*\\<\\/div\\>/U', '', $sContent);
-                        $sContent = preg_replace('/\\<div class\\=\\"quotecontent\\"\\>.*\\<\\/div\\>/U', '', $sContent);
-                        if (mb_strpos($sContent, '<p>Statistik:') !== false)
-                            $sContent = mb_trim(mb_substr($sContent, 0, mb_strpos($sContent, '<p>Statistik:')));
-                        $sContent = strip_tags($sContent);
-                        $sContent = htmlspecialchars_decode($sContent);
-                        $sContent = preg_replace('/\\&.*\\;/U', '', $sContent);
-                        if (mb_strlen($sContent) > $opt['cron']['phpbbtopics']['maxcontentlength'])
-                            $sContent = mb_substr($sContent, 0, $opt['cron']['phpbbtopics']['maxcontentlength']) . "(...)";
-            */
             $posting['id'] = $nTopicId;
             $posting['title'] = $sTitle;
             $posting['updated'] = $tUpdated;
             $posting['username'] = $sUsername;
             $posting['link'] = $sLink;
-//			$posting['content'] = $sContent;
 
             if ($nTopicId != 0) {
                 if (isset($this->topiclist[$nTopicId]) && $posting['updated'] > $this->topiclist[$nTopicId]['updated']) {

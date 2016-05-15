@@ -65,126 +65,126 @@ $kmlLine =
 $kmlHead =
     '<?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://earth.google.com/kml/2.0">
-	<Document>
-		<Style id="tradi">
-			<IconStyle>
-				<scale>1</scale>
-				<Icon>
-					<href>{urlbase}resource2/ocstyle/images/map/caches2/cachetype-2.png</href>
-				</Icon>
-			</IconStyle>
-			<LabelStyle>
-				<scale>0.6</scale>
-			</LabelStyle>
-		</Style>
-		<Style id="multi">
-			<IconStyle>
-				<scale>1</scale>
-				<Icon>
-					<href>{urlbase}resource2/ocstyle/images/map/caches2/cachetype-3.png</href>
-				</Icon>
-			</IconStyle>
-			<LabelStyle>
-				<scale>0.6</scale>
-			</LabelStyle>
-		</Style>
-		<Style id="virtual">
-			<IconStyle>
-				<scale>1</scale>
-				<Icon>
-					<href>{urlbase}resource2/ocstyle/images/map/caches2/cachetype-4.png</href>
-				</Icon>
-			</IconStyle>
-			<LabelStyle>
-				<scale>0.6</scale>
-			</LabelStyle>
-		</Style>
-		<Style id="webcam">
-			<IconStyle>
-				<scale>1</scale>
-				<Icon>
-					<href>{urlbase}resource2/ocstyle/images/map/caches2/cachetype-5.png</href>
-				</Icon>
-			</IconStyle>
-			<LabelStyle>
-				<scale>0.6</scale>
-			</LabelStyle>
-		</Style>
-		<Style id="event">
-			<IconStyle>
-				<scale>1</scale>
-				<Icon>
-					<href>{urlbase}resource2/ocstyle/images/map/caches2/cachetype-6.png</href>
-				</Icon>
-			</IconStyle>
-			<LabelStyle>
-				<scale>0.6</scale>
-			</LabelStyle>
-		</Style>
-		<Style id="mystery">
-			<IconStyle>
-				<scale>1</scale>
-				<Icon>
-					<href>{urlbase}resource2/ocstyle/images/map/caches2/cachetype-7.png</href>
-				</Icon>
-			</IconStyle>
-			<LabelStyle>
-				<scale>0.6</scale>
-			</LabelStyle>
-		</Style>
-		<Style id="mathe">
-			<IconStyle>
-				<scale>1</scale>
-				<Icon>
-					<href>{urlbase}resource2/ocstyle/images/map/caches2/cachetype-8.png</href>
-				</Icon>
-			</IconStyle>
-			<LabelStyle>
-				<scale>0.6</scale>
-			</LabelStyle>
-		</Style>
-		<Style id="drivein">
-			<IconStyle>
-				<scale>1</scale>
-				<Icon>
-					<href>{urlbase}resource2/ocstyle/images/map/caches2/cachetype-10.png</href>
-				</Icon>
-			</IconStyle>
-			<LabelStyle>
-				<scale>0.6</scale>
-			</LabelStyle>
-		</Style>
-		<Style id="moving">
-			<IconStyle>
-				<scale>1</scale>
-				q<Icon>
-					<href>{urlbase}resource2/ocstyle/images/map/caches2/cachetype-9.png</href>
-				</Icon>
-			</IconStyle>
-			<LabelStyle>
-				<scale>0.6</scale>
-			</LabelStyle>
-		</Style>
-		<Style id="unknown">
-			<IconStyle>
-				<scale>1</scale>
-				<Icon>
-					<href>{urlbase}resource2/ocstyle/images/map/caches2/cachetype-1.png</href>
-				</Icon>
-			</IconStyle>
-			<LabelStyle>
-				<scale>0.6</scale>
-			</LabelStyle>
-		</Style>
-		<Folder>
-			<name>Geocaches (Opencaching)</name>
-			<open>0</open>
-			';
+    <Document>
+        <Style id="tradi">
+            <IconStyle>
+                <scale>1</scale>
+                <Icon>
+                    <href>{urlbase}resource2/ocstyle/images/map/caches2/cachetype-2.png</href>
+                </Icon>
+            </IconStyle>
+            <LabelStyle>
+                <scale>0.6</scale>
+            </LabelStyle>
+        </Style>
+        <Style id="multi">
+            <IconStyle>
+                <scale>1</scale>
+                <Icon>
+                    <href>{urlbase}resource2/ocstyle/images/map/caches2/cachetype-3.png</href>
+                </Icon>
+            </IconStyle>
+            <LabelStyle>
+                <scale>0.6</scale>
+            </LabelStyle>
+        </Style>
+        <Style id="virtual">
+            <IconStyle>
+                <scale>1</scale>
+                <Icon>
+                    <href>{urlbase}resource2/ocstyle/images/map/caches2/cachetype-4.png</href>
+                </Icon>
+            </IconStyle>
+            <LabelStyle>
+                <scale>0.6</scale>
+            </LabelStyle>
+        </Style>
+        <Style id="webcam">
+            <IconStyle>
+                <scale>1</scale>
+                <Icon>
+                    <href>{urlbase}resource2/ocstyle/images/map/caches2/cachetype-5.png</href>
+                </Icon>
+            </IconStyle>
+            <LabelStyle>
+                <scale>0.6</scale>
+            </LabelStyle>
+        </Style>
+        <Style id="event">
+            <IconStyle>
+                <scale>1</scale>
+                <Icon>
+                    <href>{urlbase}resource2/ocstyle/images/map/caches2/cachetype-6.png</href>
+                </Icon>
+            </IconStyle>
+            <LabelStyle>
+                <scale>0.6</scale>
+            </LabelStyle>
+        </Style>
+        <Style id="mystery">
+            <IconStyle>
+                <scale>1</scale>
+                <Icon>
+                    <href>{urlbase}resource2/ocstyle/images/map/caches2/cachetype-7.png</href>
+                </Icon>
+            </IconStyle>
+            <LabelStyle>
+                <scale>0.6</scale>
+            </LabelStyle>
+        </Style>
+        <Style id="mathe">
+            <IconStyle>
+                <scale>1</scale>
+                <Icon>
+                    <href>{urlbase}resource2/ocstyle/images/map/caches2/cachetype-8.png</href>
+                </Icon>
+            </IconStyle>
+            <LabelStyle>
+                <scale>0.6</scale>
+            </LabelStyle>
+        </Style>
+        <Style id="drivein">
+            <IconStyle>
+                <scale>1</scale>
+                <Icon>
+                    <href>{urlbase}resource2/ocstyle/images/map/caches2/cachetype-10.png</href>
+                </Icon>
+            </IconStyle>
+            <LabelStyle>
+                <scale>0.6</scale>
+            </LabelStyle>
+        </Style>
+        <Style id="moving">
+            <IconStyle>
+                <scale>1</scale>
+                q<Icon>
+                    <href>{urlbase}resource2/ocstyle/images/map/caches2/cachetype-9.png</href>
+                </Icon>
+            </IconStyle>
+            <LabelStyle>
+                <scale>0.6</scale>
+            </LabelStyle>
+        </Style>
+        <Style id="unknown">
+            <IconStyle>
+                <scale>1</scale>
+                <Icon>
+                    <href>{urlbase}resource2/ocstyle/images/map/caches2/cachetype-1.png</href>
+                </Icon>
+            </IconStyle>
+            <LabelStyle>
+                <scale>0.6</scale>
+            </LabelStyle>
+        </Style>
+        <Folder>
+            <name>Geocaches (Opencaching)</name>
+            <open>0</open>
+            ';
 
 $kmlFoot = '
-			</Folder>
-		</Document>
-	</kml>';
+            </Folder>
+        </Document>
+    </kml>';
 
 $kmlTimeFormat = 'Y-m-d\TH:i:s\Z';
 
@@ -198,31 +198,31 @@ if ((abs($lon_from - $lon_to) > 2) || (abs($lat_from - $lat_to) > 2)) {
 } else {
     $rs = sql(
         "SELECT `caches`.`cache_id` AS `cacheid`,
-		                  `caches`.`longitude` AS `longitude`,
-		                  `caches`.`latitude` AS `latitude`,
-		                  `caches`.`type` AS `type`,
-		                  `caches`.`status`,
-		                  `caches`.`date_hidden` AS `date_hidden`,
-		                  `caches`.`name` AS `name`,
-		                  IFNULL(`stt_type`.`text`, `cache_type`.`en`) `typedesc`,
-		                  `cache_type`.`kml_name`,
-		                  `cache_type`.`icon_large`,
-		                  IFNULL(`stt_size`.`text`, `cache_size`.`en`) `sizedesc`,
-		                  `caches`.`terrain` AS `terrain`,
-		                  `caches`.`difficulty` AS `difficulty`,
-		                  `user`.`username` AS `username`
-		             FROM `caches`
-		       INNER JOIN `cache_type` ON `caches`.`type`=`cache_type`.`id`
-		       INNER JOIN `cache_size` ON `caches`.`size`=`cache_size`.`id`
-		       INNER JOIN `user` ON `caches`.`user_id`=`user`.`user_id`
-		        LEFT JOIN `sys_trans_text` `stt_type` ON `stt_type`.`trans_id`=`cache_type`.`trans_id`
-		        LEFT JOIN `sys_trans_text` `stt_size` ON `stt_size`.`trans_id`=`cache_size`.`trans_id`
-		            WHERE `caches`.`status`=1 AND
-		                  `caches`.`longitude`>='&1' AND
-											`caches`.`longitude`<='&2' AND
-											`caches`.`latitude`>='&3' AND
-											`caches`.`latitude`<='&4' AND
-											`stt_type`.`lang`='&5' AND `stt_size`.`lang`='&5'",
+                          `caches`.`longitude` AS `longitude`,
+                          `caches`.`latitude` AS `latitude`,
+                          `caches`.`type` AS `type`,
+                          `caches`.`status`,
+                          `caches`.`date_hidden` AS `date_hidden`,
+                          `caches`.`name` AS `name`,
+                          IFNULL(`stt_type`.`text`, `cache_type`.`en`) `typedesc`,
+                          `cache_type`.`kml_name`,
+                          `cache_type`.`icon_large`,
+                          IFNULL(`stt_size`.`text`, `cache_size`.`en`) `sizedesc`,
+                          `caches`.`terrain` AS `terrain`,
+                          `caches`.`difficulty` AS `difficulty`,
+                          `user`.`username` AS `username`
+                     FROM `caches`
+               INNER JOIN `cache_type` ON `caches`.`type`=`cache_type`.`id`
+               INNER JOIN `cache_size` ON `caches`.`size`=`cache_size`.`id`
+               INNER JOIN `user` ON `caches`.`user_id`=`user`.`user_id`
+                LEFT JOIN `sys_trans_text` `stt_type` ON `stt_type`.`trans_id`=`cache_type`.`trans_id`
+                LEFT JOIN `sys_trans_text` `stt_size` ON `stt_size`.`trans_id`=`cache_size`.`trans_id`
+                    WHERE `caches`.`status`=1 AND
+                          `caches`.`longitude`>='&1' AND
+                                            `caches`.`longitude`<='&2' AND
+                                            `caches`.`latitude`>='&3' AND
+                                            `caches`.`latitude`<='&4' AND
+                                            `stt_type`.`lang`='&5' AND `stt_size`.`lang`='&5'",
         $lon_from,
         $lon_to,
         $lat_from,
@@ -282,10 +282,10 @@ function echoZoomIn($lon_from, $lon_to, $lat_from, $lat_to)
     $sZoomIn =
         '
 
-		
-		
-		
-		
+        
+        
+        
+        
            #######  #######  #######  #     #
                 #   #     #  #     #  ##   ##
                #    #     #  #     #  # # # #
@@ -303,10 +303,10 @@ function echoZoomIn($lon_from, $lon_to, $lat_from, $lat_to)
                        #   #    ##
                       ###  #     #
 
-		
-		
-		
-		
+        
+        
+        
+        
 ';
 
     // prepare lines
@@ -326,21 +326,21 @@ function echoZoomIn($lon_from, $lon_to, $lat_from, $lat_to)
                 $nLon = $lon_from + $nDegreePerColumn * $nColumn;
 
                 echo '
-				<Placemark>
-					<description><![CDATA[You have to zoom in to see the Geocaches]]></description>
-					<name></name>
-					<LookAt>
-						<longitude>' . $nLon . '</longitude>
-						<latitude>' . $nLat . '</latitude>
-						<range>5000</range>
-						<tilt>0</tilt>
-						<heading>3</heading>
-					</LookAt>
-					<Point>
-						<coordinates>' . $nLon . ',' . $nLat . ',0</coordinates>
-					</Point>
-				</Placemark>
-				';
+                <Placemark>
+                    <description><![CDATA[You have to zoom in to see the Geocaches]]></description>
+                    <name></name>
+                    <LookAt>
+                        <longitude>' . $nLon . '</longitude>
+                        <latitude>' . $nLat . '</latitude>
+                        <range>5000</range>
+                        <tilt>0</tilt>
+                        <heading>3</heading>
+                    </LookAt>
+                    <Point>
+                        <coordinates>' . $nLon . ',' . $nLat . ',0</coordinates>
+                    </Point>
+                </Placemark>
+                ';
 
             }
         }

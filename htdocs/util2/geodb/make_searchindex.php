@@ -10,8 +10,8 @@
  ***************************************************************************/
 
 $opt['rootpath'] = '../../';
-require_once($opt['rootpath'] . 'lib2/cli.inc.php');
-require_once($opt['rootpath'] . 'lib2/search/search.inc.php');
+require_once(__DIR__.'/../../lib2/cli.inc.php');
+require_once(__DIR__.'/../../lib2/search/search.inc.php');
 
 
 sql('DELETE FROM geodb_search');
@@ -37,7 +37,7 @@ while ($r = sql_fetch_array($rs)) {
 
             sql(
                 "INSERT INTO `geodb_search` (`loc_id`, `sort`, `simple`, `simplehash`)
-				     VALUES ('&1', '&2', '&3', '&4')",
+                 VALUES ('&1', '&2', '&3', '&4')",
                 $r['loc_id'],
                 $text,
                 $simpletext,
@@ -47,7 +47,6 @@ while ($r = sql_fetch_array($rs)) {
     }
 }
 mysql_free_result($rs);
-
 
 function nonalpha($str)
 {

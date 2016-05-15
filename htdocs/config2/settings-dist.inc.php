@@ -287,13 +287,13 @@ $opt['logic']['pictures']['dummy']['replacepic'] = $opt['rootpath'] . 'images/';
 /* cachemaps (obsolete)
  */
 /*
-	$opt['logic']['cachemaps']['url'] = 'images/cachemaps/';
-	$opt['logic']['cachemaps']['dir'] = $opt['rootpath'] . $opt['logic']['cachemaps']['url'];
-	$opt['logic']['cachemaps']['wmsurl'] = 'cachemaps.php?wp={wp_oc}';
-	$opt['logic']['cachemaps']['size']['lat'] = 0.2;
-	$opt['logic']['cachemaps']['size']['lon'] = 0.2;
-	$opt['logic']['cachemaps']['pixel']['y'] = 200;
-	$opt['logic']['cachemaps']['pixel']['x'] = 200;
+    $opt['logic']['cachemaps']['url'] = 'images/cachemaps/';
+    $opt['logic']['cachemaps']['dir'] = $opt['rootpath'] . $opt['logic']['cachemaps']['url'];
+    $opt['logic']['cachemaps']['wmsurl'] = 'cachemaps.php?wp={wp_oc}';
+    $opt['logic']['cachemaps']['size']['lat'] = 0.2;
+    $opt['logic']['cachemaps']['size']['lon'] = 0.2;
+    $opt['logic']['cachemaps']['pixel']['y'] = 200;
+    $opt['logic']['cachemaps']['pixel']['x'] = 200;
 */
 
 /* cachemaps (new)

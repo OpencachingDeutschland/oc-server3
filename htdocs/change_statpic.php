@@ -50,11 +50,11 @@ $rs = sql(
          `statpics`.`id`,
          `statpics`.`previewpath`,
          IFNULL(`sys_trans_text`.`text`, `statpics`.`description`) AS `description`
-	 FROM `statpics`
-	 LEFT JOIN `sys_trans_text` 
-	     ON `statpics`.`trans_id`=`sys_trans_text`.`trans_id` 
-	     AND `sys_trans_text`.`lang`='&1'
-	 ORDER BY `statpics`.`id` ASC",
+     FROM `statpics`
+     LEFT JOIN `sys_trans_text` 
+         ON `statpics`.`trans_id`=`sys_trans_text`.`trans_id` 
+         AND `sys_trans_text`.`lang`='&1'
+     ORDER BY `statpics`.`id` ASC",
     $opt['template']['locale']
 );
 $tpl->assign_rs('statpics', $rs);

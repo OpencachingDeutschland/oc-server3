@@ -284,15 +284,15 @@ function cache_locate($nLat, $nLon, $nDistance)
 
     $rsCache = sql_slave(
         "SELECT " . geomath::getSqlDistanceFormula($nLon, $nLat, $nDistance) . " AS `distance`,
-	                              `caches`.`wp_oc`
-	                         FROM `caches`
-	                   INNER JOIN `cache_status` ON `caches`.`status`=`cache_status`.`id`
-	                        WHERE `caches`.`latitude`>'&1' AND
-      										      `caches`.`latitude`<'&2' AND
-										            `caches`.`longitude`>'&3' AND
-										            `caches`.`longitude`<'&4' AND
-										            (`cache_status`.`allow_user_view`=1 OR `caches`.`user_id`='&1')
-					             ORDER BY `distance` ASC LIMIT 1",
+                                  `caches`.`wp_oc`
+                             FROM `caches`
+                       INNER JOIN `cache_status` ON `caches`.`status`=`cache_status`.`id`
+                            WHERE `caches`.`latitude`>'&1' AND
+                                                    `caches`.`latitude`<'&2' AND
+                                                    `caches`.`longitude`>'&3' AND
+                                                    `caches`.`longitude`<'&4' AND
+                                                    (`cache_status`.`allow_user_view`=1 OR `caches`.`user_id`='&1')
+                                 ORDER BY `distance` ASC LIMIT 1",
         geomath::getMinLat($nLon, $nLat, $nDistance),
         geomath::getMaxLat($nLon, $nLat, $nDistance),
         geomath::getMinLon($nLon, $nLat, $nDistance),
@@ -452,7 +452,7 @@ function output_namesearch($sName, $nLat, $nLon, $nResultId)
                     WHERE `caches`.`name` LIKE '&1'
                       AND (`cache_status`.`allow_user_view`=1 OR `caches`.`user_id`='&3')
                       AND `map2_data`.`result_id`='&2'
-					       ORDER BY `distance` ASC LIMIT 30",
+                           ORDER BY `distance` ASC LIMIT 30",
         '%' . $sName . '%',
         $nResultId,
         $login->userid
@@ -590,11 +590,11 @@ function output_searchresult(
                   LEFT JOIN `cache_logs` `notfound_logs` ON `notfound_logs`.`cache_id`=`caches`.`cache_id` AND `notfound_logs`.`user_id`='&6' AND `notfound_logs`.`type`=2
                   LEFT JOIN `caches_attributes` ON `caches_attributes`.`cache_id`=`caches`.`cache_id` AND `caches_attributes`.`attrib_id`=6
                       WHERE `map2_data`.`result_id`='&1' AND `caches`.`longitude`>'&2' AND `caches`.`longitude`<'&3' AND `caches`.`latitude`>'&4' AND `caches`.`latitude`<'&5'
-	                      AND (`caches`.`status`<>5 OR `caches`.`user_id`='&6')   /* hide unpublished caches */
-	                      AND `caches`.`status`<>'&7' /* ... and vandalized listings, locked duplicates etc. */
-	                      AND `caches`.`status`<>7    /* ... and locked/invisible caches */
-									 ORDER BY `caches`.`status` DESC, `oconly` AND NOT (`found` OR `notfound`), NOT (`found` OR `notfound`), `caches`.`type`<>4, MD5(`caches`.`name`)
-									 LIMIT &8",
+                          AND (`caches`.`status`<>5 OR `caches`.`user_id`='&6')   /* hide unpublished caches */
+                          AND `caches`.`status`<>'&7' /* ... and vandalized listings, locked duplicates etc. */
+                          AND `caches`.`status`<>7    /* ... and locked/invisible caches */
+                                     ORDER BY `caches`.`status` DESC, `oconly` AND NOT (`found` OR `notfound`), NOT (`found` OR `notfound`), `caches`.`type`<>4, MD5(`caches`.`name`)
+                                     LIMIT &8",
             // sort in reverse order, because last are on top of map;
             // fixed order avoids oscillations when panning;
             // MD5 pseudo-randomness gives equal changes for all kinds of caches to be on top

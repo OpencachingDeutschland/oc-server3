@@ -112,17 +112,17 @@ if ($error == false) {
                     if ($desc_lang_exists == false) {
                         //add to DB
                         sql("INSERT INTO `cache_desc` (
-														`id`,
-														`cache_id`,
-														`language`,
-														`desc`,
-														`desc_html`,
-														`desc_htmledit`,
-														`hint`,
-														`short_desc`,
-														`last_modified`,
-														`node`
-													) VALUES ('', '&1', '&2', '&3', '&4', '&5', '&6', '&7', NOW(), '&8')",
+                                                        `id`,
+                                                        `cache_id`,
+                                                        `language`,
+                                                        `desc`,
+                                                        `desc_html`,
+                                                        `desc_htmledit`,
+                                                        `hint`,
+                                                        `short_desc`,
+                                                        `last_modified`,
+                                                        `node`
+                                                    ) VALUES ('', '&1', '&2', '&3', '&4', '&5', '&6', '&7', NOW(), '&8')",
                             $cache_id,
                             $sel_lang,
                             $desc,

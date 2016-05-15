@@ -19,7 +19,7 @@ function get_okapi_settings()
     require($opt['rootpath'].'lib2/const.inc.php');   # (into the *local* scope!)
     require($opt['rootpath'].'config2/settings-dist.inc.php');
     require($opt['rootpath'].'config2/settings.inc.php');
-	
+    
     return array(
 
         # Settings which ARE NOT present in settings.inc.php:
@@ -33,7 +33,7 @@ function get_okapi_settings()
         'DATA_LICENSE_URL' => $opt['page']['absolute_url'] . $opt['logic']['license']['terms'],
         'DEBUG'            => ($opt['debug'] & DEBUG_DEVELOPER != 0),
         'DEBUG_PREVENT_SEMAPHORES'
-		                   => !$opt['php']['semaphores'],  # not available on old developer system
+                           => !$opt['php']['semaphores'],  # not available on old developer system
         'DB_SERVER'        => $opt['db']['servername'],
         'DB_NAME'          => $opt['db']['placeholder']['db'],
         'DB_USERNAME'      => $opt['db']['username'],

@@ -41,9 +41,9 @@ if (isset($_REQUEST['subject'])) {
 } elseif (isset($_REQUEST['reportid']) && $login->admin) {
     $rs = sql(
         "
-			SELECT wp_oc, name FROM caches
-			JOIN cache_reports ON cache_reports.cacheid = caches.cache_id
-			WHERE cache_reports.id='&1'",
+            SELECT wp_oc, name FROM caches
+            JOIN cache_reports ON cache_reports.cacheid = caches.cache_id
+            WHERE cache_reports.id='&1'",
         $_REQUEST['reportid']
     );
     if ($r = sql_fetch_assoc($rs)) {

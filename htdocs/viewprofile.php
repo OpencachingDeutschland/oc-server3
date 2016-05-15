@@ -29,29 +29,29 @@ if ($userid == 0) {
 // user data and basic statistics
 $rs = sql(
     "SELECT `user`.`username`,
-										`user`.`last_login`,
-										`user`.`accept_mailing`,
-										`user`.`pmr_flag`,
-										`user`.`date_created`,
-										`user`.`password`,
-										`user`.`email`,
-										`user`.`is_active_flag`,
-										`user`.`latitude`,
-										`user`.`longitude`,
-										`user`.`data_license`,
-										IFNULL(`sys_trans_text`.`text`,`countries`.`name`) AS `country`,
-										`stat_user`.`hidden`,
-										`stat_user`.`found`,
-										`stat_user`.`notfound`,
-										`stat_user`.`note`,
-										`stat_user`.`maintenance`,
-										`user`.`uuid`
-							 FROM `user`
-					LEFT JOIN `stat_user` ON `user`.`user_id`=`stat_user`.`user_id`
-					LEFT JOIN `countries` ON `user`.`country`=`countries`.`short`
-					LEFT JOIN `sys_trans_text` ON `sys_trans_text`.`lang`='&2'
-					AND `sys_trans_text`.`trans_id`=`countries`.`trans_id`
-							WHERE `user`.`user_id`='&1'",
+                                        `user`.`last_login`,
+                                        `user`.`accept_mailing`,
+                                        `user`.`pmr_flag`,
+                                        `user`.`date_created`,
+                                        `user`.`password`,
+                                        `user`.`email`,
+                                        `user`.`is_active_flag`,
+                                        `user`.`latitude`,
+                                        `user`.`longitude`,
+                                        `user`.`data_license`,
+                                        IFNULL(`sys_trans_text`.`text`,`countries`.`name`) AS `country`,
+                                        `stat_user`.`hidden`,
+                                        `stat_user`.`found`,
+                                        `stat_user`.`notfound`,
+                                        `stat_user`.`note`,
+                                        `stat_user`.`maintenance`,
+                                        `user`.`uuid`
+                             FROM `user`
+                    LEFT JOIN `stat_user` ON `user`.`user_id`=`stat_user`.`user_id`
+                    LEFT JOIN `countries` ON `user`.`country`=`countries`.`short`
+                    LEFT JOIN `sys_trans_text` ON `sys_trans_text`.`lang`='&2'
+                    AND `sys_trans_text`.`trans_id`=`countries`.`trans_id`
+                            WHERE `user`.`user_id`='&1'",
     $userid,
     $opt['template']['locale']
 );
@@ -66,14 +66,14 @@ $active = sql_value("SELECT COUNT(*) FROM `caches` WHERE `user_id`='&1' AND `sta
 
 $rs = sql(
     "SELECT IFNULL(`tt`.`text`, `p`.`name`) AS `name`, `u`.`option_value`, `u`.`option_id` AS `option_id`
-		           FROM `profile_options` AS `p`
-		      LEFT JOIN `user_options` AS `u` ON `p`.`id`=`u`.`option_id`
-		      LEFT JOIN `sys_trans` AS `st` ON `st`.`id`=`p`.`trans_id` AND `st`.`text`=`p`.`name`
-		      LEFT JOIN `sys_trans_text` AS `tt` ON `st`.`id`=`tt`.`trans_id` AND `tt`.`lang` = '&2'
-		          WHERE `u`.`option_visible`=1
-		            AND `p`.`internal_use`=0
-		            AND `u`.`user_id`='&1'
-		       ORDER BY `p`.`option_order`",
+                   FROM `profile_options` AS `p`
+              LEFT JOIN `user_options` AS `u` ON `p`.`id`=`u`.`option_id`
+              LEFT JOIN `sys_trans` AS `st` ON `st`.`id`=`p`.`trans_id` AND `st`.`text`=`p`.`name`
+              LEFT JOIN `sys_trans_text` AS `tt` ON `st`.`id`=`tt`.`trans_id` AND `tt`.`lang` = '&2'
+                  WHERE `u`.`option_visible`=1
+                    AND `p`.`internal_use`=0
+                    AND `u`.`user_id`='&1'
+               ORDER BY `p`.`option_order`",
     $userid,
     $opt['template']['locale']
 );
@@ -95,14 +95,14 @@ if ($show_statistics) {
     // detail statistics
     $rs = sql(
         "SELECT COUNT(*) AS `anzahl`, `t`.`id`, IFNULL(`tt`.`text`, `t`.`name`) AS `cachetype`
-			           FROM `caches` AS `c`
-			      LEFT JOIN `cache_type` AS `t` ON `t`.`id`=`c`.`type`
-			      LEFT JOIN `sys_trans` AS `st` ON `st`.`id`=`t`.`trans_id` AND `t`.`name`=`st`.`text`
-			      LEFT JOIN `sys_trans_text` AS `tt` ON `st`.`id`=`tt`.`trans_id` AND `tt`.`lang`='&2'
-			      LEFT JOIN `cache_status` ON `cache_status`.`id`=`c`.`status`
-			          WHERE `c`.`user_id`='&1' AND `allow_user_view`='1'
-			       GROUP BY `t`.`id`
-			       ORDER BY `anzahl` DESC, `t`.`ordinal` ASC",
+                       FROM `caches` AS `c`
+                  LEFT JOIN `cache_type` AS `t` ON `t`.`id`=`c`.`type`
+                  LEFT JOIN `sys_trans` AS `st` ON `st`.`id`=`t`.`trans_id` AND `t`.`name`=`st`.`text`
+                  LEFT JOIN `sys_trans_text` AS `tt` ON `st`.`id`=`tt`.`trans_id` AND `tt`.`lang`='&2'
+                  LEFT JOIN `cache_status` ON `cache_status`.`id`=`c`.`status`
+                      WHERE `c`.`user_id`='&1' AND `allow_user_view`='1'
+                   GROUP BY `t`.`id`
+                   ORDER BY `anzahl` DESC, `t`.`ordinal` ASC",
         $userid,
         $opt['template']['locale']
     );
@@ -111,14 +111,14 @@ if ($show_statistics) {
 
     $rs = sql(
         "SELECT COUNT(*) AS `anzahl`, `t`.`id`, IFNULL(`tt`.`text`, `t`.`name`) AS `cachetype`
-			           FROM `cache_logs` AS `l`
-			      LEFT JOIN `caches` AS `c` ON `l`.`cache_id`=`c`.`cache_id`
-			      LEFT JOIN `cache_type` AS `t` ON `t`.`id`=`c`.`type`
-			      LEFT JOIN `sys_trans` AS `st` ON `st`.`id`=`t`.`trans_id` AND `t`.`name`=`st`.`text`
-			      LEFT JOIN `sys_trans_text` AS `tt` ON `st`.`id`=`tt`.`trans_id` AND `tt`.`lang`='&2'
-			          WHERE `l`.`user_id`='&1' AND (`l`.`type`=1 OR `l`.`type`=7)
-			       GROUP BY `t`.`id`
-			       ORDER BY `anzahl` DESC, `t`.`ordinal` ASC",
+                       FROM `cache_logs` AS `l`
+                  LEFT JOIN `caches` AS `c` ON `l`.`cache_id`=`c`.`cache_id`
+                  LEFT JOIN `cache_type` AS `t` ON `t`.`id`=`c`.`type`
+                  LEFT JOIN `sys_trans` AS `st` ON `st`.`id`=`t`.`trans_id` AND `t`.`name`=`st`.`text`
+                  LEFT JOIN `sys_trans_text` AS `tt` ON `st`.`id`=`tt`.`trans_id` AND `tt`.`lang`='&2'
+                      WHERE `l`.`user_id`='&1' AND (`l`.`type`=1 OR `l`.`type`=7)
+                   GROUP BY `t`.`id`
+                   ORDER BY `anzahl` DESC, `t`.`ordinal` ASC",
         $userid,
         $opt['template']['locale']
     );
@@ -127,23 +127,23 @@ if ($show_statistics) {
 
     $rs = sql(
         "
-			SELECT
-				COUNT(*) AS `count`,
-				IFNULL(`stt`.`text`, `caches`.`country`) AS `country`,
-				IF(`caches`.`country`='&3' AND `cache_location`.`code1`='&3', `cache_location`.`adm2`, NULL) AS `state`,
-				`caches`.`country` AS `countrycode`,
-				`cache_location`.`code2` AS `adm2code`
-			FROM
-				`cache_logs`
-				INNER JOIN `caches` ON `caches`.`cache_id`=`cache_logs`.`cache_id`
-				INNER JOIN `cache_location` ON `cache_location`.`cache_id`=`cache_logs`.`cache_id`
-				LEFT JOIN `countries` ON `countries`.`short`=`caches`.`country`
-				LEFT JOIN `sys_trans_text` `stt` ON `stt`.`lang`='&2' AND `stt`.`trans_id`=`countries`.`trans_id`
-				LEFT JOIN `caches_attributes` `ca` ON `ca`.`cache_id`=`caches`.`cache_id` AND `ca`.`attrib_id`=61
-			WHERE `cache_logs`.`user_id`='&1' AND `cache_logs`.`type` IN (1,7)
-			  AND `ca`.`attrib_id` IS NULL
-			GROUP BY `country`, `state`
-			ORDER BY `count` DESC, `country`, `state`",
+            SELECT
+                COUNT(*) AS `count`,
+                IFNULL(`stt`.`text`, `caches`.`country`) AS `country`,
+                IF(`caches`.`country`='&3' AND `cache_location`.`code1`='&3', `cache_location`.`adm2`, NULL) AS `state`,
+                `caches`.`country` AS `countrycode`,
+                `cache_location`.`code2` AS `adm2code`
+            FROM
+                `cache_logs`
+                INNER JOIN `caches` ON `caches`.`cache_id`=`cache_logs`.`cache_id`
+                INNER JOIN `cache_location` ON `cache_location`.`cache_id`=`cache_logs`.`cache_id`
+                LEFT JOIN `countries` ON `countries`.`short`=`caches`.`country`
+                LEFT JOIN `sys_trans_text` `stt` ON `stt`.`lang`='&2' AND `stt`.`trans_id`=`countries`.`trans_id`
+                LEFT JOIN `caches_attributes` `ca` ON `ca`.`cache_id`=`caches`.`cache_id` AND `ca`.`attrib_id`=61
+            WHERE `cache_logs`.`user_id`='&1' AND `cache_logs`.`type` IN (1,7)
+              AND `ca`.`attrib_id` IS NULL
+            GROUP BY `country`, `state`
+            ORDER BY `count` DESC, `country`, `state`",
         $userid,
         $opt['template']['locale'],
         $login->getUserCountry()
@@ -156,54 +156,54 @@ if ($show_statistics) {
 // OConly statistics
 $oconly_hidden = sql_value(
     "
-		SELECT COUNT(*)
-		FROM `caches`
-		INNER JOIN `caches_attributes` ON `caches_attributes`.`cache_id`=`caches`.`cache_id` AND `caches_attributes`.`attrib_id`=6
-		INNER JOIN `cache_status` ON `cache_status`.`id`=`caches`.`status` AND `allow_user_view`=1
-		WHERE `user_id`='&1'",
+        SELECT COUNT(*)
+        FROM `caches`
+        INNER JOIN `caches_attributes` ON `caches_attributes`.`cache_id`=`caches`.`cache_id` AND `caches_attributes`.`attrib_id`=6
+        INNER JOIN `cache_status` ON `cache_status`.`id`=`caches`.`status` AND `allow_user_view`=1
+        WHERE `user_id`='&1'",
     0,
     $userid
 );
 $oconly_hidden_active = sql_value(
     "
-		SELECT COUNT(*)
-		FROM `caches`
-		INNER JOIN `caches_attributes` ON `caches_attributes`.`cache_id`=`caches`.`cache_id` AND `caches_attributes`.`attrib_id`=6
-		WHERE `user_id`='&1' AND `caches`.`status`=1",
+        SELECT COUNT(*)
+        FROM `caches`
+        INNER JOIN `caches_attributes` ON `caches_attributes`.`cache_id`=`caches`.`cache_id` AND `caches_attributes`.`attrib_id`=6
+        WHERE `user_id`='&1' AND `caches`.`status`=1",
     0,
     $userid
 );
 $oconly_recommended = sql_value(
     "
-		SELECT COUNT(*)
-		FROM `cache_logs`
-		INNER JOIN `caches_attributes` ON `caches_attributes`.`cache_id`=`cache_logs`.`cache_id` AND `caches_attributes`.`attrib_id`=6
-		INNER JOIN `cache_rating` ON `cache_rating`.`user_id`=`cache_logs`.`user_id` AND `cache_rating`.`cache_id`=`cache_logs`.`cache_id` AND `cache_rating`.`rating_date`=`cache_logs`.`date`
-		WHERE `cache_logs`.`user_id`='&1' AND `cache_logs`.`type` IN (1,7)",
+        SELECT COUNT(*)
+        FROM `cache_logs`
+        INNER JOIN `caches_attributes` ON `caches_attributes`.`cache_id`=`cache_logs`.`cache_id` AND `caches_attributes`.`attrib_id`=6
+        INNER JOIN `cache_rating` ON `cache_rating`.`user_id`=`cache_logs`.`user_id` AND `cache_rating`.`cache_id`=`cache_logs`.`cache_id` AND `cache_rating`.`rating_date`=`cache_logs`.`date`
+        WHERE `cache_logs`.`user_id`='&1' AND `cache_logs`.`type` IN (1,7)",
     0,
     $userid
 );
 
 $rs = sql(
     "
-			SELECT
-				COUNT(*) AS `count`,
-				IFNULL(`stt`.`text`, `caches`.`country`) AS `country`,
-				IF(`caches`.`country`='&3' AND `cache_location`.`code1`='&3', `cache_location`.`adm2`, NULL) AS `state`,
-				`caches`.`country` AS `countrycode`,
-				`cache_location`.`code2` AS `adm2code`
-			FROM
-				`cache_logs`
-				INNER JOIN `caches_attributes` ON `caches_attributes`.`cache_id`=`cache_logs`.`cache_id` AND `caches_attributes`.`attrib_id`=6
-				INNER JOIN `caches` ON `caches`.`cache_id`=`cache_logs`.`cache_id`
-				INNER JOIN `cache_location` ON `cache_location`.`cache_id`=`cache_logs`.`cache_id`
-				LEFT JOIN `countries` ON `countries`.`short`=`caches`.`country`
-				LEFT JOIN `sys_trans_text` `stt` ON `stt`.`lang`='&2' AND `stt`.`trans_id`=`countries`.`trans_id`
-				LEFT JOIN `caches_attributes` `ca` ON `ca`.`cache_id`=`caches`.`cache_id` AND `ca`.`attrib_id`=61
-			WHERE `cache_logs`.`user_id`='&1' AND `cache_logs`.`type` IN (1,7)
-			  AND `ca`.`attrib_id` IS NULL
-			GROUP BY `country`, `state`
-			ORDER BY `count` DESC, `country`, `state`",
+            SELECT
+                COUNT(*) AS `count`,
+                IFNULL(`stt`.`text`, `caches`.`country`) AS `country`,
+                IF(`caches`.`country`='&3' AND `cache_location`.`code1`='&3', `cache_location`.`adm2`, NULL) AS `state`,
+                `caches`.`country` AS `countrycode`,
+                `cache_location`.`code2` AS `adm2code`
+            FROM
+                `cache_logs`
+                INNER JOIN `caches_attributes` ON `caches_attributes`.`cache_id`=`cache_logs`.`cache_id` AND `caches_attributes`.`attrib_id`=6
+                INNER JOIN `caches` ON `caches`.`cache_id`=`cache_logs`.`cache_id`
+                INNER JOIN `cache_location` ON `cache_location`.`cache_id`=`cache_logs`.`cache_id`
+                LEFT JOIN `countries` ON `countries`.`short`=`caches`.`country`
+                LEFT JOIN `sys_trans_text` `stt` ON `stt`.`lang`='&2' AND `stt`.`trans_id`=`countries`.`trans_id`
+                LEFT JOIN `caches_attributes` `ca` ON `ca`.`cache_id`=`caches`.`cache_id` AND `ca`.`attrib_id`=61
+            WHERE `cache_logs`.`user_id`='&1' AND `cache_logs`.`type` IN (1,7)
+              AND `ca`.`attrib_id` IS NULL
+            GROUP BY `country`, `state`
+            ORDER BY `count` DESC, `country`, `state`",
     $userid,
     $opt['template']['locale'],
     $login->getUserCountry()
@@ -214,13 +214,13 @@ sql_free_result($rs);
 
 $rs = sql(
     "
-		SELECT `cache_logs`.`type`, COUNT(*) AS `count`
-		FROM `cache_logs`
-		INNER JOIN `caches_attributes`
-		  ON `caches_attributes`.`cache_id`=`cache_logs`.`cache_id`
-		  AND `caches_attributes`.`attrib_id`=6
-		WHERE `user_id`='&1'
-		GROUP BY `cache_logs`.`type`",
+        SELECT `cache_logs`.`type`, COUNT(*) AS `count`
+        FROM `cache_logs`
+        INNER JOIN `caches_attributes`
+          ON `caches_attributes`.`cache_id`=`cache_logs`.`cache_id`
+          AND `caches_attributes`.`attrib_id`=6
+        WHERE `user_id`='&1'
+        GROUP BY `cache_logs`.`type`",
     $userid
 );
 $oconly_found = 0;
@@ -257,17 +257,17 @@ $tpl->assign('oconly_maint', $oconly_maint);
 if ($show_statistics) {
     $rs = sql(
         "SELECT COUNT(*) AS `anzahl`, `t`.`id`, IFNULL(`tt`.`text`, `t`.`name`) AS `cachetype`
-			           FROM `caches` AS `c`
-			      LEFT JOIN `cache_type` AS `t` ON `t`.`id`=`c`.`type`
-			      LEFT JOIN `sys_trans` AS `st` ON `st`.`id`=`t`.`trans_id` AND `t`.`name`=`st`.`text`
-			      LEFT JOIN `sys_trans_text` AS `tt` ON `st`.`id`=`tt`.`trans_id` AND `tt`.`lang`='&2'
-			      LEFT JOIN `cache_status`ON `cache_status`.`id`=`c`.`status`
-			      INNER JOIN `caches_attributes`
-			        ON `caches_attributes`.`cache_id`=`c`.`cache_id`
-			        AND `caches_attributes`.`attrib_id`=6
-			      WHERE `c`.`user_id`='&1' AND `allow_user_view`='1'
-			       GROUP BY `t`.`id`
-			       ORDER BY `anzahl` DESC, `t`.`ordinal` ASC",
+                       FROM `caches` AS `c`
+                  LEFT JOIN `cache_type` AS `t` ON `t`.`id`=`c`.`type`
+                  LEFT JOIN `sys_trans` AS `st` ON `st`.`id`=`t`.`trans_id` AND `t`.`name`=`st`.`text`
+                  LEFT JOIN `sys_trans_text` AS `tt` ON `st`.`id`=`tt`.`trans_id` AND `tt`.`lang`='&2'
+                  LEFT JOIN `cache_status`ON `cache_status`.`id`=`c`.`status`
+                  INNER JOIN `caches_attributes`
+                    ON `caches_attributes`.`cache_id`=`c`.`cache_id`
+                    AND `caches_attributes`.`attrib_id`=6
+                  WHERE `c`.`user_id`='&1' AND `allow_user_view`='1'
+                   GROUP BY `t`.`id`
+                   ORDER BY `anzahl` DESC, `t`.`ordinal` ASC",
         $userid,
         $opt['template']['locale']
     );
@@ -276,17 +276,17 @@ if ($show_statistics) {
 
     $rs = sql(
         "SELECT COUNT(*) AS `anzahl`, `t`.`id`, IFNULL(`tt`.`text`, `t`.`name`) AS `cachetype`
-			           FROM `cache_logs` AS `l`
-			      LEFT JOIN `caches` AS `c` ON `l`.`cache_id`=`c`.`cache_id`
-			      LEFT JOIN `cache_type` AS `t` ON `t`.`id`=`c`.`type`
-			      LEFT JOIN `sys_trans` AS `st` ON `st`.`id`=`t`.`trans_id` AND `t`.`name`=`st`.`text`
-			      LEFT JOIN `sys_trans_text` AS `tt` ON `st`.`id`=`tt`.`trans_id` AND `tt`.`lang`='&2'
-			      INNER JOIN `caches_attributes`
-			        ON `caches_attributes`.`cache_id`=`c`.`cache_id`
-			        AND `caches_attributes`.`attrib_id`=6
-			          WHERE `l`.`user_id`='&1' AND (`l`.`type`=1 OR `l`.`type`=7)
-			       GROUP BY `t`.`id`
-			       ORDER BY `anzahl` DESC, `t`.`ordinal` ASC",
+                       FROM `cache_logs` AS `l`
+                  LEFT JOIN `caches` AS `c` ON `l`.`cache_id`=`c`.`cache_id`
+                  LEFT JOIN `cache_type` AS `t` ON `t`.`id`=`c`.`type`
+                  LEFT JOIN `sys_trans` AS `st` ON `st`.`id`=`t`.`trans_id` AND `t`.`name`=`st`.`text`
+                  LEFT JOIN `sys_trans_text` AS `tt` ON `st`.`id`=`tt`.`trans_id` AND `tt`.`lang`='&2'
+                  INNER JOIN `caches_attributes`
+                    ON `caches_attributes`.`cache_id`=`c`.`cache_id`
+                    AND `caches_attributes`.`attrib_id`=6
+                      WHERE `l`.`user_id`='&1' AND (`l`.`type`=1 OR `l`.`type`=7)
+                   GROUP BY `t`.`id`
+                   ORDER BY `anzahl` DESC, `t`.`ordinal` ASC",
         $userid,
         $opt['template']['locale']
     );

@@ -140,9 +140,9 @@ if ($queryid != 0) {
 
     $query_rs = sql(
         "
-			SELECT `user_id`, `options`, `name`
-			FROM `queries`
-			WHERE id='&1' AND (`user_id`=0 OR `user_id`='&2')",
+            SELECT `user_id`, `options`, `name`
+            FROM `queries`
+            WHERE id='&1' AND (`user_id`=0 OR `user_id`='&2')",
         $queryid,
         $login->userid
     );
@@ -656,12 +656,12 @@ if ($options['showresult'] == 1) {
                         );
                         sql_slave('ALTER TABLE &tmpuniids ADD INDEX (`uni_id`)');
 
-                        //	BUGFIX: dieser Code sollte nur ausgeführt werden, wenn mehr als ein Suchbegriff eingegeben wurde
-                        //					damit alle Einträge gefiltert, die nicht alle Suchbegriffe enthalten
-                        //					nun wird dieser Quellcode auch ausgeführt, um mehrfache uni_id's zu filtern
+                        //    BUGFIX: dieser Code sollte nur ausgeführt werden, wenn mehr als ein Suchbegriff eingegeben wurde
+                        //                    damit alle Einträge gefiltert, die nicht alle Suchbegriffe enthalten
+                        //                    nun wird dieser Quellcode auch ausgeführt, um mehrfache uni_id's zu filtern
                         //          Notwendig, wenn nach Baden gesucht wird => Baden-Baden war doppelt in der Liste
-                        //	if ($wordscount > 1)
-                        //	{
+                        //    if ($wordscount > 1)
+                        //    {
                         sql_temp_table_slave('tmpuniids2');
                         sql_slave(
                             'CREATE TEMPORARY TABLE &tmpuniids2 (`uni_id` int(11) NOT NULL, `cnt` int(11) NOT NULL, `olduni` int(11) NOT NULL) ENGINE=MEMORY SELECT `uni_id`, COUNT(*) `cnt`, 0 olduni FROM &tmpuniids GROUP BY `uni_id` HAVING `cnt` >= ' . $wordscount
@@ -669,7 +669,7 @@ if ($options['showresult'] == 1) {
                         sql_slave('ALTER TABLE &tmpuniids2 ADD INDEX (`uni_id`)');
                         sql_drop_temp_table_slave('tmpuniids');
                         sql_rename_temp_table_slave('tmpuniids2', 'tmpuniids');
-                        //	}
+                        //    }
 
                         //    add: SELECT g2.uni FROM &tmpuniids JOIN gns_locations g1 ON &tmpuniids.uni_id=g1.uni JOIN gns_locations g2 ON g1.ufi=g2.ufi WHERE g1.nt!='N' AND g2.nt='N'
                         // remove: SELECT g1.uni FROM &tmpuniids JOIN gns_locations g1 ON &tmpuniids.uni_id=g1.uni JOIN gns_locations g2 ON g1.ufi=g2.ufi WHERE g1.nt!='N' AND g2.nt='N'
@@ -956,9 +956,9 @@ if ($options['showresult'] == 1) {
             if ($list->allowView($options['cachelist_pw'])) {
                 $cachesFilter =
                     "CREATE TEMPORARY TABLE &result_caches ENGINE=MEMORY
-										SELECT `cache_id` FROM `cache_list_items`
-										LEFT JOIN `cache_lists` ON `cache_lists`.`id`=`cache_list_items`.`cache_list_id`
-									  WHERE `cache_list_id`=" . sql_escape($options['listid']);
+                                        SELECT `cache_id` FROM `cache_list_items`
+                                        LEFT JOIN `cache_lists` ON `cache_lists`.`id`=`cache_list_items`.`cache_list_id`
+                                      WHERE `cache_list_id`=" . sql_escape($options['listid']);
                 sql_slave($cachesFilter);
                 sql_slave('ALTER TABLE &result_caches ADD PRIMARY KEY ( `cache_id` )');
 
@@ -1026,8 +1026,8 @@ if ($options['showresult'] == 1) {
                     ) > 0
                 ) {
                     $sql_where[] = '`caches`.`cache_id` NOT IN (SELECT `cache_ignore`.`cache_id`
-												FROM `cache_ignore`
-												WHERE `cache_ignore`.`user_id`=\'' . sql_escape($login->userid) . '\')';
+                                                FROM `cache_ignore`
+                                                WHERE `cache_ignore`.`user_id`=\'' . sql_escape($login->userid) . '\')';
                 }
             }
         }
@@ -1260,15 +1260,15 @@ if ($options['showresult'] == 1) {
     }
 
     $sql .= '`caches`.`cache_id`,
-							 `caches`.`status`,
-							 `caches`.`type`,
-							 `caches`.`size`,
-							 `caches`.`longitude`, `caches`.`latitude`,
-							 `caches`.`user_id`,
-							 IFNULL(`stat_caches`.`toprating`, 0) `ratingvalue`' .
+                             `caches`.`status`,
+                             `caches`.`type`,
+                             `caches`.`size`,
+                             `caches`.`longitude`, `caches`.`latitude`,
+                             `caches`.`user_id`,
+                             IFNULL(`stat_caches`.`toprating`, 0) `ratingvalue`' .
         $sAddFields
         . ' FROM `caches`
-		  LEFT JOIN `stat_caches` ON `caches`.`cache_id`=`stat_caches`.`cache_id`' .
+          LEFT JOIN `stat_caches` ON `caches`.`cache_id`=`stat_caches`.`cache_id`' .
         $sAddJoin
         . ' WHERE `caches`.`cache_id` IN (' . $sqlFilter . ')' .
         $sAddWhere . ' ' .
@@ -1353,9 +1353,9 @@ if ($options['showresult'] == 1) {
         if ($count == 1) {
             $sFilebasename = sql_value_slave(
                 '
-					SELECT `caches`.`wp_oc`
-					FROM &searchtmp, `caches`
-					WHERE &searchtmp.`cache_id`=`caches`.`cache_id` LIMIT 1',
+                    SELECT `caches`.`wp_oc`
+                    FROM &searchtmp, `caches`
+                    WHERE &searchtmp.`cache_id`=`caches`.`cache_id` LIMIT 1',
                 '?'
             );
         } else {
@@ -1430,7 +1430,7 @@ if ($options['showresult'] == 1) {
         //    $options['sortorder']
         //    $options['creationdate']
         //    $options['queryid']
-        //	  $options['query_name']
+        //      $options['query_name']
         //    $enable_mapdisplay
         //=================================================================
 
@@ -1481,15 +1481,15 @@ function sqlStringbySearchradius($distance, $lat, $lon, $multiplier, $distance_u
     sql_temp_table_slave('result_caches');
     $cachesFilter =
         'CREATE TEMPORARY TABLE &result_caches ENGINE=MEMORY
-			SELECT
-				(' . geomath::getSqlDistanceFormula($lon, $lat, $distance, $multiplier[$distance_unit]) . ') `distance`,
-				`caches`.`cache_id` `cache_id`
-			FROM `caches` FORCE INDEX (`latitude`)
-			WHERE `longitude` > ' . ($lon - $max_lon_diff) . '
-				AND `longitude` < ' . ($lon + $max_lon_diff) . '
-				AND `latitude` > ' . ($lat - $max_lat_diff) . '
-				AND `latitude` < ' . ($lat + $max_lat_diff) . '
-												HAVING `distance` < ' . ($distance + 0);
+            SELECT
+                (' . geomath::getSqlDistanceFormula($lon, $lat, $distance, $multiplier[$distance_unit]) . ') `distance`,
+                `caches`.`cache_id` `cache_id`
+            FROM `caches` FORCE INDEX (`latitude`)
+            WHERE `longitude` > ' . ($lon - $max_lon_diff) . '
+                AND `longitude` < ' . ($lon + $max_lon_diff) . '
+                AND `latitude` > ' . ($lat - $max_lat_diff) . '
+                AND `latitude` < ' . ($lat + $max_lat_diff) . '
+                                                HAVING `distance` < ' . ($distance + 0);
     sql_slave($cachesFilter);
     sql_slave('ALTER TABLE &result_caches ADD PRIMARY KEY ( `cache_id` )');
 
@@ -1729,16 +1729,16 @@ function outputSearchForm($options)
     // country options
     $rs = sql(
         "
-		SELECT
-			IFNULL(`sys_trans_text`.`text`, `countries`.`name`) AS `name`,
-			`countries`.`short`,
-			`countries`.`short`='&2' AS `selected`
-		FROM
-			`countries`
-			LEFT JOIN `sys_trans` ON `countries`.`trans_id`=`sys_trans`.`id`AND `sys_trans`.`text`=`countries`.`name`
-			LEFT JOIN `sys_trans_text` ON `sys_trans`.`id`=`sys_trans_text`.`trans_id` AND `sys_trans_text`.`lang`='&1'
-		WHERE
-			`countries`.`short` IN (SELECT DISTINCT `country` FROM `caches`) ORDER BY `name` ASC",
+        SELECT
+            IFNULL(`sys_trans_text`.`text`, `countries`.`name`) AS `name`,
+            `countries`.`short`,
+            `countries`.`short`='&2' AS `selected`
+        FROM
+            `countries`
+            LEFT JOIN `sys_trans` ON `countries`.`trans_id`=`sys_trans`.`id`AND `sys_trans`.`text`=`countries`.`name`
+            LEFT JOIN `sys_trans_text` ON `sys_trans`.`id`=`sys_trans_text`.`trans_id` AND `sys_trans_text`.`lang`='&1'
+        WHERE
+            `countries`.`short` IN (SELECT DISTINCT `country` FROM `caches`) ORDER BY `name` ASC",
         $opt['template']['locale'],
         $options['country']
     );
@@ -1749,15 +1749,15 @@ function outputSearchForm($options)
     // language options
     $rs = sql(
         "
-		SELECT
-			IFNULL(`sys_trans_text`.`text`,`languages`.`name`) AS `name`,
-			`short`,
-			`short`='&2' AS `selected`
-		FROM
-			`languages`
-			LEFT JOIN `sys_trans` ON `sys_trans`.`text`=`languages`.`name`
-			LEFT JOIN `sys_trans_text` ON `sys_trans_text`.`trans_id`=`sys_trans`.`id` AND `sys_trans_text`.`lang`='&1'
-			ORDER BY `name`",
+        SELECT
+            IFNULL(`sys_trans_text`.`text`,`languages`.`name`) AS `name`,
+            `short`,
+            `short`='&2' AS `selected`
+        FROM
+            `languages`
+            LEFT JOIN `sys_trans` ON `sys_trans`.`text`=`languages`.`name`
+            LEFT JOIN `sys_trans_text` ON `sys_trans_text`.`trans_id`=`sys_trans`.`id` AND `sys_trans_text`.`lang`='&1'
+            ORDER BY `name`",
         $opt['template']['locale'],
         $options['language']
     );
@@ -1808,16 +1808,16 @@ function outputSearchForm($options)
 
     $rs = sql(
         "
-		SELECT `id`,
-		IFNULL(`sys_trans_text`.`text`, `log_types`.`name`) AS `name`,
-		`id`='&2' AS `selected`
-		FROM (
-			SELECT `id`,`name`,`trans_id` FROM `log_types`
-			UNION
-			SELECT 0,'all',(SELECT id FROM sys_trans WHERE `text`='all')
-		) `log_types`
-		LEFT JOIN `sys_trans_text` ON `sys_trans_text`.`trans_id`=`log_types`.`trans_id` AND `sys_trans_text`.`lang`='&1'
-	  ORDER BY `log_types`.`id` ASC",
+        SELECT `id`,
+        IFNULL(`sys_trans_text`.`text`, `log_types`.`name`) AS `name`,
+        `id`='&2' AS `selected`
+        FROM (
+            SELECT `id`,`name`,`trans_id` FROM `log_types`
+            UNION
+            SELECT 0,'all',(SELECT id FROM sys_trans WHERE `text`='all')
+        ) `log_types`
+        LEFT JOIN `sys_trans_text` ON `sys_trans_text`.`trans_id`=`log_types`.`trans_id` AND `sys_trans_text`.`lang`='&1'
+      ORDER BY `log_types`.`id` ASC",
         $opt['template']['locale'],
         $logtypes ? $logtypes[0] : 0
     );
@@ -1843,14 +1843,14 @@ function outputSearchForm($options)
 
         $rs = sql(
             "SELECT `cache_attrib`.`id`, IFNULL(`ttname`.`text`, `cache_attrib`.`name`) AS `name`, `cache_attrib`.`icon_large`, `cache_attrib`.`icon_no`, `cache_attrib`.`icon_undef`, `cache_attrib`.`search_default`, IFNULL(`ttdesc`.`text`, `cache_attrib`.`html_desc`) AS `html_desc`
-		             FROM `cache_attrib`
-		        LEFT JOIN `sys_trans` AS `tname` ON `cache_attrib`.`trans_id`=`tname`.`id` AND `cache_attrib`.`name`=`tname`.`text`
-		        LEFT JOIN `sys_trans_text` AS `ttname` ON `tname`.`id`=`ttname`.`trans_id` AND `ttname`.`lang`='&1'
-		        LEFT JOIN `sys_trans` AS `tdesc` ON `cache_attrib`.`html_desc_trans_id`=`tdesc`.`id` AND `cache_attrib`.`html_desc`=`tdesc`.`text`
-		        LEFT JOIN `sys_trans_text` AS `ttdesc` ON `tdesc`.`id`=`ttdesc`.`trans_id` AND `ttdesc`.`lang`='&1'
-		            WHERE `cache_attrib`.`group_id`='&2' AND `selectable`
-					  AND NOT IFNULL(`cache_attrib`.`hidden`, 0)=1
-		         ORDER BY `cache_attrib`.`id`",
+                     FROM `cache_attrib`
+                LEFT JOIN `sys_trans` AS `tname` ON `cache_attrib`.`trans_id`=`tname`.`id` AND `cache_attrib`.`name`=`tname`.`text`
+                LEFT JOIN `sys_trans_text` AS `ttname` ON `tname`.`id`=`ttname`.`trans_id` AND `ttname`.`lang`='&1'
+                LEFT JOIN `sys_trans` AS `tdesc` ON `cache_attrib`.`html_desc_trans_id`=`tdesc`.`id` AND `cache_attrib`.`html_desc`=`tdesc`.`text`
+                LEFT JOIN `sys_trans_text` AS `ttdesc` ON `tdesc`.`id`=`ttdesc`.`trans_id` AND `ttdesc`.`lang`='&1'
+                    WHERE `cache_attrib`.`group_id`='&2' AND `selectable`
+                      AND NOT IFNULL(`cache_attrib`.`hidden`, 0)=1
+                 ORDER BY `cache_attrib`.`id`",
             $opt['template']['locale'],
             $rAttrGroup['id']
         );
@@ -1950,15 +1950,15 @@ function outputSearchForm($options)
 
         $rs = sql(
             "SELECT `cache_attrib`.`id`, IFNULL(`ttname`.`text`, `cache_attrib`.`name`) AS `name`, `cache_attrib`.`icon_large`, `cache_attrib`.`icon_no`, `cache_attrib`.`icon_undef`, `cache_attrib`.`search_default`, IFNULL(`ttdesc`.`text`, `cache_attrib`.`html_desc`) AS `html_desc`
-		             FROM `cache_attrib`
-		        LEFT JOIN `sys_trans` AS `tname` ON `cache_attrib`.`trans_id`=`tname`.`id` AND `cache_attrib`.`name`=`tname`.`text`
-		        LEFT JOIN `sys_trans_text` AS `ttname` ON `tname`.`id`=`ttname`.`trans_id` AND `ttname`.`lang`='&1'
-		        LEFT JOIN `sys_trans` AS `tdesc` ON `cache_attrib`.`html_desc_trans_id`=`tdesc`.`id` AND `cache_attrib`.`html_desc`=`tdesc`.`text`
-		        LEFT JOIN `sys_trans_text` AS `ttdesc` ON `tdesc`.`id`=`ttdesc`.`trans_id` AND `ttdesc`.`lang`='&1'
-		            WHERE `cache_attrib`.`group_id`='&2'
-		              AND `cache_attrib`.`search_default`=1 AND `selectable`
-					  AND NOT IFNULL(`cache_attrib`.`hidden`, 0)=1
-		         ORDER BY `cache_attrib`.`id`",
+                     FROM `cache_attrib`
+                LEFT JOIN `sys_trans` AS `tname` ON `cache_attrib`.`trans_id`=`tname`.`id` AND `cache_attrib`.`name`=`tname`.`text`
+                LEFT JOIN `sys_trans_text` AS `ttname` ON `tname`.`id`=`ttname`.`trans_id` AND `ttname`.`lang`='&1'
+                LEFT JOIN `sys_trans` AS `tdesc` ON `cache_attrib`.`html_desc_trans_id`=`tdesc`.`id` AND `cache_attrib`.`html_desc`=`tdesc`.`text`
+                LEFT JOIN `sys_trans_text` AS `ttdesc` ON `tdesc`.`id`=`ttdesc`.`trans_id` AND `ttdesc`.`lang`='&1'
+                    WHERE `cache_attrib`.`group_id`='&2'
+                      AND `cache_attrib`.`search_default`=1 AND `selectable`
+                      AND NOT IFNULL(`cache_attrib`.`hidden`, 0)=1
+                 ORDER BY `cache_attrib`.`id`",
             $opt['template']['locale'],
             $rAttrGroup['id']
         );
@@ -2185,7 +2185,7 @@ function outputUniidSelectionForm($uniSql, $options)
             }
             $locString .= htmlspecialchars($r['admtxt2'], ENT_COMPAT, 'UTF-8');
         }
-        /*		if ($r['admtxt3'] != '')
+        /*        if ($r['admtxt3'] != '')
                 {
                     if ($locString != '') $locString .= ' &gt; ';
                     $locString .= htmlspecialchars($r['admtxt3'], ENT_COMPAT, 'UTF-8');

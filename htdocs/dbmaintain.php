@@ -37,8 +37,8 @@ $tpl->assign('procedures', $procedures);
 if (isset($_REQUEST['ok'])) {
     $proc = isset($_REQUEST['action']) ? $_REQUEST['action'] : '';
 
-//		if (sql_connect_maintenance() == false)
-//			$tpl->error(ERROR_DB_NO_ROOT);
+//        if (sql_connect_maintenance() == false)
+//            $tpl->error(ERROR_DB_NO_ROOT);
 
     // @todo change if to switch/case
     $bError = false;

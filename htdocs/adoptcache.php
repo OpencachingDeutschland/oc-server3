@@ -74,11 +74,11 @@ function showAdoptScreen($cacheid, $touerror)
 
     $rs = sql(
         "SELECT `caches`.`name`, `user`.`username`, `cache_adoption`.`date_created`
-	     FROM `caches`
-	     INNER JOIN `user` ON `caches`.`user_id`=`user`.`user_id`
-	     INNER JOIN `cache_adoption` ON `caches`.`cache_id`=`cache_adoption`.`cache_id`
-	     WHERE `caches`.`cache_id`='&1'
-	     AND `cache_adoption`.`user_id`='&2'",
+         FROM `caches`
+         INNER JOIN `user` ON `caches`.`user_id`=`user`.`user_id`
+         INNER JOIN `cache_adoption` ON `caches`.`cache_id`=`cache_adoption`.`cache_id`
+         WHERE `caches`.`cache_id`='&1'
+         AND `cache_adoption`.`user_id`='&2'",
         $cacheid,
         $login->userid
     );
@@ -118,12 +118,12 @@ function listRequestsByCacheId($cacheid)
              `user`.`user_id` AS `userid`,
              `user`.`username` AS `username`, 
              `cache_adoption`.`date_created`
-	     FROM `caches`
-	     INNER JOIN `cache_adoption` 
-	         ON `caches`.`cache_id` = `cache_adoption`.`cache_id`
-	     INNER JOIN `user` 
-	         ON `cache_adoption`.`user_id`=`user`.`user_id`
-		 WHERE `caches`.`cache_id`='&1'",
+         FROM `caches`
+         INNER JOIN `cache_adoption` 
+             ON `caches`.`cache_id` = `cache_adoption`.`cache_id`
+         INNER JOIN `user` 
+             ON `cache_adoption`.`user_id`=`user`.`user_id`
+         WHERE `caches`.`cache_id`='&1'",
         $cacheid
     );
     $tpl->assign_rs('adoptions', $rs);
@@ -147,12 +147,12 @@ function listRequestsByUserId()
              `user`.`user_id` AS `ownerid`,
              `user`.`username` AS `ownername`,
              `cache_adoption`.`date_created`
-	     FROM `caches`
-	     INNER JOIN `cache_adoption` 
-	         ON `caches`.`cache_id` = `cache_adoption`.`cache_id`
-	     INNER JOIN `user` 
-	         ON `caches`.`user_id`=`user`.`user_id`
-		 WHERE `cache_adoption`.`user_id`='&1'",
+         FROM `caches`
+         INNER JOIN `cache_adoption` 
+             ON `caches`.`cache_id` = `cache_adoption`.`cache_id`
+         INNER JOIN `user` 
+             ON `caches`.`user_id`=`user`.`user_id`
+         WHERE `cache_adoption`.`user_id`='&1'",
         $login->userid
     );
     $tpl->assign_rs('adoptions', $rs);

@@ -10,13 +10,13 @@
  ***************************************************************************/
 
 /*
-	The following tables are monitored. On changes the OLD data is recorded
-	(except for cache_coordinates and cache_countries, where the NEW data is recorded
-	for historical reasons; I = on insert, U = on update, D = on delete;
-	further explanations below:
+    The following tables are monitored. On changes the OLD data is recorded
+    (except for cache_coordinates and cache_countries, where the NEW data is recorded
+    for historical reasons; I = on insert, U = on update, D = on delete;
+    further explanations below:
                                                                 recording    limited #  max.
-	data table         archive tables        ops    recorded by   date         per cache  one p.d.
-	----------         --------------        ---    -----------   ----------   --------   --------
+    data table         archive tables        ops    recorded by   date         per cache  one p.d.
+    ----------         --------------        ---    -----------   ----------   --------   --------
 - caches             cache_coordinates     IU     trigger       datetime     yes        no
 -                    cache_countries       IU     trigger       datetime     yes        no
 c                    caches_modified        U     trigger       date         yes        yes
@@ -26,109 +26,109 @@ x cache_logs         cache_logs_archived     D    removelog     datetime     no 
 x                    cache_logs_restored   I*     here          datetime     no         no
   pictures           pictures_modified     IUD    trigger       datetime     no         no
 
-	* only insertions on restore
+    * only insertions on restore
 
-	(Additional waypoints in table 'coordinates' are currently not monitored. Archiving
-	and restoring waypoints would be as complex as log entries and is not important at
-	vandalism-restore.)
+    (Additional waypoints in table 'coordinates' are currently not monitored. Archiving
+    and restoring waypoints would be as complex as log entries and is not important at
+    vandalism-restore.)
 
-	The whole mechanism heavily relies on autoincrement IDs being unique on one system
-	and NEVER be reused after record deletion. DON'T EVEN THINK ABOUT TRUNCATING AND
-	RENUMBERING ANY OF THE ABOVE 'DATA TABLES' UNDER ANY CIRCUMSTANCES! Use bigint IDs
-	if you worry about how to store your 3 billion logs.
+    The whole mechanism heavily relies on autoincrement IDs being unique on one system
+    and NEVER be reused after record deletion. DON'T EVEN THINK ABOUT TRUNCATING AND
+    RENUMBERING ANY OF THE ABOVE 'DATA TABLES' UNDER ANY CIRCUMSTANCES! Use bigint IDs
+    if you worry about how to store your 3 billion logs.
 
-	Special fields used for recovery are:
-		- date_modified in all tables except for logs.deletion_date and coords/countries.date_created:
-		    the date when the change took place and was recorded
-		- deleted_by in cache_logs_archived: thee user_id who deleted the data
-		    (to determine if it can be vandalism by cache owner);
-		- restored_by in all tables except for cache_logs_*: the restoring admin's user id (or 0)
-		- operation in pictures_modified: I/U/D for a recorded insert/delete/update
-		- was_set in attributes_modified: 1 if the attribute was set before the change
-		- original_id in cache_logs_restored and pictures_modified: the original id of restored
-		    objects, needed to maintain archive integrity
+    Special fields used for recovery are:
+        - date_modified in all tables except for logs.deletion_date and coords/countries.date_created:
+            the date when the change took place and was recorded
+        - deleted_by in cache_logs_archived: thee user_id who deleted the data
+            (to determine if it can be vandalism by cache owner);
+        - restored_by in all tables except for cache_logs_*: the restoring admin's user id (or 0)
+        - operation in pictures_modified: I/U/D for a recorded insert/delete/update
+        - was_set in attributes_modified: 1 if the attribute was set before the change
+        - original_id in cache_logs_restored and pictures_modified: the original id of restored
+            objects, needed to maintain archive integrity
 
-	Insertion of a new record is flagged by:
-		- caches_attributes_modified:  was_set = 0
-		- cache_desc_modified:         desc = null
-		- pictures_modified:           operation = 'I'
-		- cache_logs_restored:         presence of data record (only for restored logs)
+    Insertion of a new record is flagged by:
+        - caches_attributes_modified:  was_set = 0
+        - cache_desc_modified:         desc = null
+        - pictures_modified:           operation = 'I'
+        - cache_logs_restored:         presence of data record (only for restored logs)
 
-	uuids are not recorded (except for cache_logs_archived, which is used elsewhere).
-	Restored records are just copies of the old records, not the old records themselves,
-	so they receive new uuids!
-	The old records stay untouched and deleted in the archives for further reference!
+    uuids are not recorded (except for cache_logs_archived, which is used elsewhere).
+    Restored records are just copies of the old records, not the old records themselves,
+    so they receive new uuids!
+    The old records stay untouched and deleted in the archives for further reference!
 
-	To save log space, the following is NOT recorded:
-		- changes on any data which
-			  - need not to be restored (e.g. cache status),
-				- is recreated on restore (e.g. uuids) or
-				- can be restored by other means (e.g. statistics, thumbnails)
-		- additional changes on the same dataset on the same day for caches_modified,
-		    cache_desc_modified and cache_attributes_modified. They are blocked by unique
-		    indexes which include the date_modified (no time there!).
-		- operations on the same day when the cache was created
-		- operations on own logs, including pictures: own logs are excempt from vandalism-restore
-		- cache attribs, desc and picture changes on the same day when the record was created
+    To save log space, the following is NOT recorded:
+        - changes on any data which
+              - need not to be restored (e.g. cache status),
+                - is recreated on restore (e.g. uuids) or
+                - can be restored by other means (e.g. statistics, thumbnails)
+        - additional changes on the same dataset on the same day for caches_modified,
+            cache_desc_modified and cache_attributes_modified. They are blocked by unique
+            indexes which include the date_modified (no time there!).
+        - operations on the same day when the cache was created
+        - operations on own logs, including pictures: own logs are excempt from vandalism-restore
+        - cache attribs, desc and picture changes on the same day when the record was created
 
   On coordinates and countries every change is recorded for XML interface reasons.
   On logs and pictures, every change must be recorded, because recognizing multiple restores
     of the same record would not be feasible.
 
-	On or after restore, the following is automatically fixed:
-		- caches.desc_languages und .default_desclang
-		                     - by cache_desc triggers
-		- cache_location     - by high-frequency cache_location cronjob (per last_modified)
-		- cache_npa_areas    - by cache_npa_areas cronjob (per modify-trigger -> need_npa_recalc)
-		- stat_caches        - by cache_logs triggers
-		- stat_cache_logs    - by cache_logs triggers
-		- cache_logs.picture - by picture triggers
-		- pic thumbnails     - by thumbs.php (per thumb_last_generated default value)
+    On or after restore, the following is automatically fixed:
+        - caches.desc_languages und .default_desclang
+                             - by cache_desc triggers
+        - cache_location     - by high-frequency cache_location cronjob (per last_modified)
+        - cache_npa_areas    - by cache_npa_areas cronjob (per modify-trigger -> need_npa_recalc)
+        - stat_caches        - by cache_logs triggers
+        - stat_cache_logs    - by cache_logs triggers
+        - cache_logs.picture - by picture triggers
+        - pic thumbnails     - by thumbs.php (per thumb_last_generated default value)
 
-	There is no special treatment of changes by restore operations, so they are recorded
-	and revertible, too, if not done on the same day as the vandalism.
+    There is no special treatment of changes by restore operations, so they are recorded
+    and revertible, too, if not done on the same day as the vandalism.
 
-	The table listing_restored keeps track of the admins who and when restored listings.
+    The table listing_restored keeps track of the admins who and when restored listings.
 
-	Code updates:
-		When adding fields to caches, cache_attributes, cache_desc, cache_logs or pictures
-		which are not filled automatically by triggers or cronjobs, those fields must be added
-		to the archive-and-restore mechanism, i.e.
+    Code updates:
+        When adding fields to caches, cache_attributes, cache_desc, cache_logs or pictures
+        which are not filled automatically by triggers or cronjobs, those fields must be added
+        to the archive-and-restore mechanism, i.e.
 
-			- to the corresponding lib2/logic classes (currently used only for logs and pics,
-			    but anyway ...)
-			- to maintain.php (archiving triggers; use INSERT IGNORE for all recording)
-			- to restorecaches.php (functions get_archive_data and restore_caches),
-			- to the *_modified tables and
-			- eventually to restorecaches.tpl (step 4).
+            - to the corresponding lib2/logic classes (currently used only for logs and pics,
+                but anyway ...)
+            - to maintain.php (archiving triggers; use INSERT IGNORE for all recording)
+            - to restorecaches.php (functions get_archive_data and restore_caches),
+            - to the *_modified tables and
+            - eventually to restorecaches.tpl (step 4).
 
-		While the restore mechanism itself is robust against database extensions and will not
-		crash when fields are added, the archives would grow incomplete and so would be the
-		restored listings. Also, CC-ND license at OC.de requires listings to be published
-		unchanged, so all-or-nothing-restore per listing is desireable.
+        While the restore mechanism itself is robust against database extensions and will not
+        crash when fields are added, the archives would grow incomplete and so would be the
+        restored listings. Also, CC-ND license at OC.de requires listings to be published
+        unchanged, so all-or-nothing-restore per listing is desireable.
 
-		When adding new TABLES for new listing-related data which can be vandalized, decide if -
-		preferrably - max. one recorded change per day is (a) sufficient or (b) not. It is
-		sufficient if the number of records inserted for one cache is limited by some property
-		(like attribute types oder languages). It is insufficient if there can be an arbitrary
-		number of records (like logs and pictures).
-		for (a)
-			- define date_modified field as 'date'
-			- define an unique index on parent id, date_modified and the limiting property/ies
-				  (e.g. see caches_attributes_modified 'cache_id' index)
-			- use INSERT ... ON DUPLICATE UPDATE ...  on restore
-		for (b)
-			- define date_modified field as 'datetime'
-			- truncate date_modified in get_archive_data() to the date, i.e. left 10 chars
-			- order ascending by (full) date_modified in get_archive_data()
-			- define an 'original_id' field and implement a mechanism like get_current_picid()
-				  to take care of changing ids and original_ids
-			- use the corresponding parent table's mechanism for parent ids when restoring
-				  deleted records, if the parent table is also an arbitrary-number table
-					 (see call to get_current_logid() when restoring deleted pictures)
-			- for index definitions see e.g. cache_logs_restored
+        When adding new TABLES for new listing-related data which can be vandalized, decide if -
+        preferrably - max. one recorded change per day is (a) sufficient or (b) not. It is
+        sufficient if the number of records inserted for one cache is limited by some property
+        (like attribute types oder languages). It is insufficient if there can be an arbitrary
+        number of records (like logs and pictures).
+        for (a)
+            - define date_modified field as 'date'
+            - define an unique index on parent id, date_modified and the limiting property/ies
+                  (e.g. see caches_attributes_modified 'cache_id' index)
+            - use INSERT ... ON DUPLICATE UPDATE ...  on restore
+        for (b)
+            - define date_modified field as 'datetime'
+            - truncate date_modified in get_archive_data() to the date, i.e. left 10 chars
+            - order ascending by (full) date_modified in get_archive_data()
+            - define an 'original_id' field and implement a mechanism like get_current_picid()
+                  to take care of changing ids and original_ids
+            - use the corresponding parent table's mechanism for parent ids when restoring
+                  deleted records, if the parent table is also an arbitrary-number table
+                     (see call to get_current_logid() when restoring deleted pictures)
+            - for index definitions see e.g. cache_logs_restored
 
-		If you can't handle these requirements, don't add the new fields/tables.
+        If you can't handle these requirements, don't add the new fields/tables.
 
 */
 
@@ -181,11 +181,11 @@ if (isset($_REQUEST['finduser']) && isset($_REQUEST['username'])) {
             `latitude`,
             `longitude`,
             `status`,
-		    LEFT(`listing_last_modified`,10) AS `last_modified`,
-		    (SELECT COUNT(*) FROM `cache_logs` WHERE `cache_logs`.`cache_id`=`caches`.`cache_id`) AS `logs`
+            LEFT(`listing_last_modified`,10) AS `last_modified`,
+            (SELECT COUNT(*) FROM `cache_logs` WHERE `cache_logs`.`cache_id`=`caches`.`cache_id`) AS `logs`
         FROM `caches`
-		WHERE `user_id`='&1'
-		AND `status`!=5",
+        WHERE `user_id`='&1'
+        AND `status`!=5",
         $user_id
     );
     $caches = array();
@@ -351,9 +351,9 @@ function get_archive_data($caches)
 
     // cache country
     $rs = sql("SELECT `cache_id`, LEFT(`date_created`,10) AS `date_modified`, `country`, `restored_by`
-	           FROM `cache_countries`
-						 WHERE `cache_id` IN " . $cachelist . "
-						 ORDER BY `date_created` ASC");
+               FROM `cache_countries`
+                         WHERE `cache_id` IN " . $cachelist . "
+                         ORDER BY `date_created` ASC");
     // order is relevant, because multiple changes per day possible
     $lastcountry = array();
     while ($r = sql_fetch_assoc($rs)) {
@@ -379,7 +379,7 @@ function get_archive_data($caches)
     $rs = sql(
         "SELECT * FROM `caches_modified`
         WHERE `cache_id` IN " . $cachelist . "
-	    ORDER BY `date_modified` DESC"
+        ORDER BY `date_modified` DESC"
     );
     while ($r = sql_fetch_assoc($rs)) {
         $wp = $wp_oc[$r['cache_id']];
@@ -494,8 +494,8 @@ function get_archive_data($caches)
             LENGTH(`desc`) AS `dl`,
             LENGTH(`hint`) AS `hl`,
             LENGTH(`short_desc`) AS `sdl`
-	    FROM `cache_desc`
-	    WHERE `cache_id` IN " . $cachelist
+        FROM `cache_desc`
+        WHERE `cache_id` IN " . $cachelist
     );
     while ($r = sql_fetch_assoc($rs)) {
         if (!isset($nextdesc[$r['cache_id']])) {
@@ -583,17 +583,17 @@ function get_archive_data($caches)
         FROM
               (SELECT 1 AS `op`, `deletion_date` AS `date_modified`, `cache_id`,
                     `user_id`, `type`, `date`, `restored_by`
-	               FROM `cache_logs_archived`
-	              WHERE `cache_id` IN " . $cachelist . "AND `deleted_by`='&1' AND `user_id`<>'&1'
-	              UNION
-	              SELECT 2 AS `op`, `date_modified`, `cache_id`,
+                   FROM `cache_logs_archived`
+                  WHERE `cache_id` IN " . $cachelist . "AND `deleted_by`='&1' AND `user_id`<>'&1'
+                  UNION
+                  SELECT 2 AS `op`, `date_modified`, `cache_id`,
                        (SELECT `user_id` FROM `cache_logs_archived` WHERE `id`=`original_id`),
                        (SELECT `type` FROM `cache_logs_archived` WHERE `id`=`original_id`),
                        (SELECT `date` FROM `cache_logs_archived` WHERE `id`=`original_id`),
                        `restored_by`
                  FROM `cache_logs_restored`
-	              WHERE `cache_id` IN " . $cachelist . ") `logs`
-	            INNER JOIN `user` ON `user`.`user_id`=`logs`.`user_id`
+                  WHERE `cache_id` IN " . $cachelist . ") `logs`
+                INNER JOIN `user` ON `user`.`user_id`=`logs`.`user_id`
               ORDER BY `logs`.`date_modified` ASC",
         // order may not be exact when redoing reverts, because delete and insert
         // operations then are so quick that dates in both tables are the same
@@ -747,7 +747,7 @@ function restore_listings($cacheids, $rdate, $roptions, $simulate)
         if (in_array("coords", $roptions) &&
             sql_value(
                 "SELECT `cache_id` FROM `cache_coordinates`
-		        WHERE `cache_id`='&1' AND `date_created`>='&2'",
+                WHERE `cache_id`='&1' AND `date_created`>='&2'",
                 0,
                 $cacheid,
                 $rdate
@@ -780,7 +780,7 @@ function restore_listings($cacheids, $rdate, $roptions, $simulate)
         if (in_array("coords", $roptions) &&
             sql_value(
                 "SELECT `cache_id` FROM `cache_countries`
-		        WHERE `cache_id`='&1' AND `date_created`>='&2'",
+                WHERE `cache_id`='&1' AND `date_created`>='&2'",
                 0,
                 $cacheid,
                 $rdate
@@ -788,9 +788,9 @@ function restore_listings($cacheids, $rdate, $roptions, $simulate)
         ) {
             $rs = sql(
                 "SELECT `country` FROM `cache_countries`
-			    WHERE `cache_id`='&1' AND `date_created` < '&2'
-			    ORDER BY `date_created` DESC
-			    LIMIT 1",
+                WHERE `cache_id`='&1' AND `date_created` < '&2'
+                ORDER BY `date_created` DESC
+                LIMIT 1",
                 $cacheid,
                 $rdate
             );
@@ -811,9 +811,9 @@ function restore_listings($cacheids, $rdate, $roptions, $simulate)
         // other cache data
         $rs = sql(
             "SELECT * FROM `caches_modified`
-		    WHERE `cache_id`='&1' AND `date_modified` >='&2'
-		    ORDER BY `date_modified` ASC
-	        LIMIT 1",
+            WHERE `cache_id`='&1' AND `date_modified` >='&2'
+            ORDER BY `date_modified` ASC
+            LIMIT 1",
             $cacheid,
             $rdate
         );
@@ -852,8 +852,8 @@ function restore_listings($cacheids, $rdate, $roptions, $simulate)
         if (in_array('settings', $roptions)) {
             $rs = sql(
                 "SELECT * FROM `caches_attributes_modified`
-			    WHERE `cache_id`='&1' AND `date_modified`>='&2' AND `attrib_id` != 6 /* OConly */
-				ORDER BY `date_modified` DESC",
+                WHERE `cache_id`='&1' AND `date_modified`>='&2' AND `attrib_id` != 6 /* OConly */
+                ORDER BY `date_modified` DESC",
                 $cacheid,
                 $rdate
             );
@@ -867,7 +867,7 @@ function restore_listings($cacheids, $rdate, $roptions, $simulate)
                     if ($r['was_set']) {
                         sql(
                             "INSERT IGNORE INTO `caches_attributes` (`cache_id`,`attrib_id`)
-					        VALUES ('&1','&2')",
+                            VALUES ('&1','&2')",
                             $cacheid,
                             $r['attrib_id']
                         );
@@ -888,8 +888,8 @@ function restore_listings($cacheids, $rdate, $roptions, $simulate)
         if (in_array('desc', $roptions)) {
             $rs = sql(
                 "SELECT * FROM `cache_desc_modified`
-			    WHERE `cache_id`='&1' AND `date_modified`>='&2'
-				ORDER BY `date_modified` DESC",
+                WHERE `cache_id`='&1' AND `date_modified`>='&2'
+                ORDER BY `date_modified` DESC",
                 $cacheid,
                 $rdate
             );
@@ -935,48 +935,48 @@ function restore_listings($cacheids, $rdate, $roptions, $simulate)
         if (in_array('logs', $roptions)) {
             $rs = sql(
                 "
-				SELECT * FROM (
-					SELECT
-						`id`,
-						-1 AS `node`,
-						`date_modified`,
-						`cache_id`,
-						0 AS `user_id`,
-						0 AS `type`,
-						'0' AS `oc_team_comment`,
-						'0' AS `date`,
-						'' AS `text`,
-						0 AS `text_html`,
-						0 AS `text_htmledit`,
-						0 AS `needs_maintenance`,
-						0 AS `listing_outdated`,
-						`original_id`
-					FROM `cache_logs_restored`
-					WHERE `cache_id`='&1' AND `date_modified` >= '&2'
-					UNION
-					SELECT
-						`id`,
-						`node`,
-						`deletion_date`,
-						`cache_id`,
-						`user_id`,
-						`type`,
-						`oc_team_comment`,
-						`date`,
-						`text`,
-						`text_html`,
-						`text_htmledit`,
-						`needs_maintenance`,
-						`listing_outdated`,
-						0 AS `original_id`
-					FROM `cache_logs_archived`
-			        WHERE
-						`cache_id`='&1'
-						AND `deletion_date` >= '&2'
-						AND `deleted_by`='&3'
-						AND `user_id` != '&3'
-			    ) `logs`
-				ORDER BY `date_modified` ASC",
+                SELECT * FROM (
+                    SELECT
+                        `id`,
+                        -1 AS `node`,
+                        `date_modified`,
+                        `cache_id`,
+                        0 AS `user_id`,
+                        0 AS `type`,
+                        '0' AS `oc_team_comment`,
+                        '0' AS `date`,
+                        '' AS `text`,
+                        0 AS `text_html`,
+                        0 AS `text_htmledit`,
+                        0 AS `needs_maintenance`,
+                        0 AS `listing_outdated`,
+                        `original_id`
+                    FROM `cache_logs_restored`
+                    WHERE `cache_id`='&1' AND `date_modified` >= '&2'
+                    UNION
+                    SELECT
+                        `id`,
+                        `node`,
+                        `deletion_date`,
+                        `cache_id`,
+                        `user_id`,
+                        `type`,
+                        `oc_team_comment`,
+                        `date`,
+                        `text`,
+                        `text_html`,
+                        `text_htmledit`,
+                        `needs_maintenance`,
+                        `listing_outdated`,
+                        0 AS `original_id`
+                    FROM `cache_logs_archived`
+                    WHERE
+                        `cache_id`='&1'
+                        AND `deletion_date` >= '&2'
+                        AND `deleted_by`='&3'
+                        AND `user_id` != '&3'
+                ) `logs`
+                ORDER BY `date_modified` ASC",
                 $cacheid,
                 $rdate,
                 $user_id
@@ -1001,7 +1001,7 @@ function restore_listings($cacheids, $rdate, $roptions, $simulate)
                             if (!$simulate) {
                                 sql(
                                     "INSERT INTO `cache_logs_archived`
-								    SELECT *, '0', '&2', '&3' FROM `cache_logs` WHERE `id`='&1'",
+                                    SELECT *, '0', '&2', '&3' FROM `cache_logs` WHERE `id`='&1'",
                                     $revert_logid,
                                     $user_id, // original deletor's ID and not restoring admin's ID!
                                     $login->userid
@@ -1041,8 +1041,8 @@ function restore_listings($cacheids, $rdate, $roptions, $simulate)
                             } else {
                                 sql(
                                     "INSERT IGNORE INTO `cache_logs_restored`
-								      (`id`, `date_modified`, `cache_id`, `original_id`, `restored_by`)
-							        VALUES ('&1', NOW(), '&2', '&3', '&4')",
+                                      (`id`, `date_modified`, `cache_id`, `original_id`, `restored_by`)
+                                    VALUES ('&1', NOW(), '&2', '&3', '&4')",
                                     $log->getLogId(),
                                     $log->getCacheId(),
                                     $revert_logid,
@@ -1087,13 +1087,13 @@ function restore_listings($cacheids, $rdate, $roptions, $simulate)
         if (in_array("desc", $roptions) || in_array("logs", $roptions)) {
             $rs = sql(
                 "SELECT * FROM `pictures_modified`
-			            WHERE ((`object_type`=2 AND '&2' AND `object_id`='&3') OR
-									       (`object_type`=1 AND '&1'
-												  AND IFNULL((SELECT `user_id` FROM `cache_logs` WHERE `id`=`object_id`),(SELECT `user_id` FROM `cache_logs_archived` WHERE `id`=`object_id`)) != '&5'
-											      /* ^^ ignore changes of own log pics (shouldnt be in pictures_modified, anyway) */
-												  AND IFNULL((SELECT `cache_id` FROM `cache_logs` WHERE `id`=`object_id`),(SELECT `cache_id` FROM `cache_logs_archived` WHERE `id`=`object_id`)) = '&3'))
-			              AND `date_modified`>='&4'
-									ORDER BY `date_modified` ASC",
+                        WHERE ((`object_type`=2 AND '&2' AND `object_id`='&3') OR
+                                           (`object_type`=1 AND '&1'
+                                                  AND IFNULL((SELECT `user_id` FROM `cache_logs` WHERE `id`=`object_id`),(SELECT `user_id` FROM `cache_logs_archived` WHERE `id`=`object_id`)) != '&5'
+                                                  /* ^^ ignore changes of own log pics (shouldnt be in pictures_modified, anyway) */
+                                                  AND IFNULL((SELECT `cache_id` FROM `cache_logs` WHERE `id`=`object_id`),(SELECT `cache_id` FROM `cache_logs_archived` WHERE `id`=`object_id`)) = '&3'))
+                          AND `date_modified`>='&4'
+                                    ORDER BY `date_modified` ASC",
                 in_array("logs", $roptions) ? 1 : 0,
                 in_array("desc", $roptions) ? 1 : 0,
                 $cacheid,

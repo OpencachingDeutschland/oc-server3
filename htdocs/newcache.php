@@ -312,11 +312,11 @@ if ($error == false) {
         $sSelected = ($sel_type == - 1) ? ' selected="selected"' : '';
         $types = '<option value="-1"' . $sSelected . '>' . htmlspecialchars(t('Please select!'), ENT_COMPAT, 'UTF-8') . '</option>';
         $rsTypes = sql("SELECT `cache_type`.`id`, IFNULL(`sys_trans_text`.`text`, `cache_type`.`en`) AS `name`
-			                  FROM `cache_type`
-			             LEFT JOIN `sys_trans` ON `cache_type`.`trans_id`=`sys_trans`.`id`
-			             LEFT JOIN `sys_trans_text` ON `sys_trans`.`id`=`sys_trans_text`.`trans_id` AND
-			                       `sys_trans_text`.`lang`='" . sql_escape($locale) . "'
-			              ORDER BY `cache_type`.`ordinal` ASC");
+                              FROM `cache_type`
+                         LEFT JOIN `sys_trans` ON `cache_type`.`trans_id`=`sys_trans`.`id`
+                         LEFT JOIN `sys_trans_text` ON `sys_trans`.`id`=`sys_trans_text`.`trans_id` AND
+                                   `sys_trans_text`.`lang`='" . sql_escape($locale) . "'
+                          ORDER BY `cache_type`.`ordinal` ASC");
         while ($rType = sql_fetch_assoc($rsTypes)) {
             $sSelected = ($rType['id'] == $sel_type) ? ' selected="selected"' : '';
             $types .= '<option value="' . $rType['id'] . '"' . $sSelected . '>' . htmlspecialchars($rType['name'], ENT_COMPAT, 'UTF-8') . '</option>';
@@ -483,7 +483,7 @@ if ($error == false) {
                     `cache_attrib`.`icon_undef`,
                     `cache_attrib`.`icon_large`,
                     IFNULL(`ttdesc`.`text`, `cache_attrib`.`html_desc`) AS `html_desc`
-				FROM `cache_attrib`
+                FROM `cache_attrib`
                 LEFT JOIN `sys_trans` AS `tname`
                     ON `cache_attrib`.`trans_id`=`tname`.`id`
                     AND `cache_attrib`.`name`=`tname`.`text`
@@ -888,17 +888,17 @@ if ($error == false) {
                 //add record to cache_desc table
                 sql(
                     "INSERT INTO `cache_desc` (
-												`id`,
-												`cache_id`,
-												`language`,
-												`desc`,
-												`desc_html`,
-												`hint`,
-												`short_desc`,
-												`last_modified`,
-												`desc_htmledit`,
-												`node`
-											) VALUES ('', '&1', '&2', '&3', '&4', '&5', '&6', NOW(), '&7', '&8')",
+                                                `id`,
+                                                `cache_id`,
+                                                `language`,
+                                                `desc`,
+                                                `desc_html`,
+                                                `hint`,
+                                                `short_desc`,
+                                                `last_modified`,
+                                                `desc_htmledit`,
+                                                `node`
+                                            ) VALUES ('', '&1', '&2', '&3', '&4', '&5', '&6', NOW(), '&7', '&8')",
                     $cache_id,
                     $sel_lang,
                     $desc,

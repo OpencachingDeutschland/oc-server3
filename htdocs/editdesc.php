@@ -178,13 +178,13 @@ if ($error == false) {
 
                         sql(
                             "UPDATE `cache_desc` SET
-    					            `desc_html`='&1',
-    					            `desc_htmledit`='&2',
-							            `desc`='&3',
-							            `short_desc`='&4',
-							            `hint`='&5',
-							            `language`='&6'
-							      WHERE `id`='&7'",
+                                    `desc_html`='&1',
+                                    `desc_htmledit`='&2',
+                                        `desc`='&3',
+                                        `short_desc`='&4',
+                                        `hint`='&5',
+                                        `language`='&6'
+                                  WHERE `id`='&7'",
                             (($desc_html == 1) ? '1' : '0'),
                             (($desc_htmledit == 1) ? '1' : '0'),
                             $desc,

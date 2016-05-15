@@ -219,11 +219,11 @@ if (!$tpl->is_cached()) {
                 FROM `pictures`
                 WHERE `object_type`=1
                 AND `object_id`='&1'
-				AND `local`=1
-				AND `display`=1
-				AND `spoiler`=0
-				AND `unknown_format`=0
-				LIMIT 1",
+                AND `local`=1
+                AND `display`=1
+                AND `spoiler`=0
+                AND `unknown_format`=0
+                LIMIT 1",
                 $rLog['id']
             );
             if ($rPic = sql_fetch_assoc($rsPic)) {

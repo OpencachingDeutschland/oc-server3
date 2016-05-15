@@ -36,9 +36,6 @@ while ($record = sql_fetch_assoc($rs)) {
     if ($record['admin'] & ADMIN_USER) {
         $rights[] = "user/caches";
     }
-    if ($record['admin'] & ADMIN_NEWS) {
-        $rights[] = "newsapprove";
-    }
     if ($record['admin'] & ADMIN_RESTORE) {
         $rights[] = "vand.restore";
     }

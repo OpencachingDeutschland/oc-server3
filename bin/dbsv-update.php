@@ -76,10 +76,9 @@ function check_tables_charset($database)
     global $opt;
 
     $rs = sql(
-        "
-            SELECT TABLE_NAME, TABLE_COLLATION
-            FROM INFORMATION_SCHEMA.TABLES
-            WHERE TABLE_SCHEMA='&1' AND TABLE_NAME NOT LIKE 'okapi_%'",
+        "SELECT TABLE_NAME, TABLE_COLLATION
+         FROM INFORMATION_SCHEMA.TABLES
+         WHERE TABLE_SCHEMA='&1' AND TABLE_NAME NOT LIKE 'okapi_%'",
         $database
     );
 
@@ -93,10 +92,9 @@ function check_tables_charset($database)
                 echo "migrating " . $migrate . "\n";
                 $table_collation[0] = $opt['charset']['mysql'];
                 sql(
-                    "
-                        ALTER TABLE `&1`
-                        CONVERT TO CHARACTER SET '&2'
-                        COLLATE '&3'",
+                    "ALTER TABLE `&1`
+                     CONVERT TO CHARACTER SET '&2'
+                     COLLATE '&3'",
                     $table['TABLE_NAME'],
                     $table_collation[0],
                     implode('_', $table_collation)
@@ -179,10 +177,11 @@ function dbv_101()  // add fields for fixing OKAPI issue #232
             "ALTER TABLE `cache_logs` ADD COLUMN `log_last_modified` DATETIME NOT NULL COMMENT 'via Trigger (stat_caches, gk_item_waypoint)' AFTER `" . $after . "`"
         );
         sql(
-            "UPDATE `cache_logs` SET `log_last_modified` = GREATEST(
-                     `last_modified`,
-                     IFNULL((SELECT MAX(`last_modified`) FROM `pictures` WHERE `pictures`.`object_type`=1 AND `pictures`.`object_id` = `cache_logs`.`id`),'0')
-                     )"
+            "UPDATE `cache_logs`
+             SET `log_last_modified` = GREATEST(
+                `last_modified`,
+                IFNULL((SELECT MAX(`last_modified`) FROM `pictures` WHERE `pictures`.`object_type`=1 AND `pictures`.`object_id` = `cache_logs`.`id`),'0')
+             )"
         );
     }
     if (!sql_field_exists('cache_logs_archived', 'log_last_modified')) {
@@ -200,9 +199,20 @@ function dbv_101()  // add fields for fixing OKAPI issue #232
 
 function dbv_102()  // remove invisible caches from users' hidden stats
 {
-    sql("INSERT IGNORE INTO `stat_user` (`user_id`) SELECT `user_id` FROM `caches` GROUP BY `user_id`");
     sql(
-        "UPDATE `stat_user`, (SELECT `user_id`, COUNT(*) AS `count` FROM `caches` INNER JOIN `cache_status` ON `cache_status`.`id`=`caches`.`status` AND `allow_user_view`=1 GROUP BY `user_id`) AS `tblHidden` SET `stat_user`.`hidden`=`tblHidden`.`count` WHERE `stat_user`.`user_id`=`tblHidden`.`user_id`"
+        "INSERT IGNORE INTO `stat_user` (`user_id`)
+            SELECT `user_id` FROM `caches` GROUP BY `user_id`"
+    );
+    sql(
+        "UPDATE `stat_user`,
+            (SELECT `user_id`, COUNT(*) AS `count`
+             FROM `caches`
+             INNER JOIN `cache_status`
+                ON `cache_status`.`id`=`caches`.`status`
+                AND `allow_user_view`=1
+             GROUP BY `user_id`) AS `tblHidden`
+         SET `stat_user`.`hidden`=`tblHidden`.`count`
+         WHERE `stat_user`.`user_id`=`tblHidden`.`user_id`"
     );
     sql("CALL sp_refreshall_statpic()");
 }
@@ -288,7 +298,9 @@ function dbv_105()  // HTML user profile texts
     if (!sql_field_exists('user', 'description')) {
         sql("ALTER TABLE `user` ADD COLUMN `description` MEDIUMTEXT NOT NULL AFTER `data_license`");
         $rs = sql(
-            "SELECT `user`.`user_id`,`user_options`.`option_value` FROM `user`,`user_options` WHERE `user_options`.`user_id`=`user`.`user_id` AND `user_options`.`option_id`=3"
+            "SELECT `user`.`user_id`,`user_options`.`option_value`
+             FROM `user`,`user_options`
+             WHERE `user_options`.`user_id`=`user`.`user_id` AND `user_options`.`option_id`=3"
         );
         while ($r = sql_fetch_array($rs)) {
             $text = nl2br(htmlspecialchars($r['option_value'], ENT_COMPAT, 'UTF-8'));
@@ -304,13 +316,13 @@ function dbv_106()  // Cache status logging
     if (!sql_table_exists('cache_status_modified')) {
         sql(
             "CREATE TABLE `cache_status_modified` (
-                    `cache_id` INT(10) UNSIGNED NOT NULL,
-                    `date_modified` DATETIME NOT NULL,
-                    `old_state` TINYINT(2) UNSIGNED NOT NULL,
-                    `new_state` TINYINT(2) UNSIGNED NOT NULL,
-                    `user_id` INT(10) UNSIGNED NOT NULL DEFAULT '0',
+                `cache_id` INT(10) UNSIGNED NOT NULL,
+                `date_modified` DATETIME NOT NULL,
+                `old_state` TINYINT(2) UNSIGNED NOT NULL,
+                `new_state` TINYINT(2) UNSIGNED NOT NULL,
+                `user_id` INT(10) UNSIGNED NOT NULL DEFAULT '0',
                 UNIQUE KEY `cache_id` (`cache_id`,`date_modified`)
-                ) ENGINE=MyISAM"
+             ) ENGINE=MyISAM"
         );
     }
 }
@@ -352,23 +364,23 @@ function dbv_110()  // move adoption history to separate table
     if (!sql_table_exists('cache_adoptions')) {
         sql(
             "CREATE TABLE `cache_adoptions` (
-                    `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-                    `cache_id` INT(10) UNSIGNED NOT NULL,
-                    `date` DATETIME NOT NULL,
-                    `from_user_id` INT(10) UNSIGNED NOT NULL,
-                    `to_user_id` INT(10) UNSIGNED NOT NULL,
-                    PRIMARY KEY (`id`),
-                    KEY `cache_id` (`cache_id`,`date`)
-                ) ENGINE=MyISAM AUTO_INCREMENT=1"
+                `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+                `cache_id` INT(10) UNSIGNED NOT NULL,
+                `date` DATETIME NOT NULL,
+                `from_user_id` INT(10) UNSIGNED NOT NULL,
+                `to_user_id` INT(10) UNSIGNED NOT NULL,
+                PRIMARY KEY (`id`),
+                KEY `cache_id` (`cache_id`,`date`)
+             ) ENGINE=MyISAM AUTO_INCREMENT=1"
         );
 
         // Up to commit d15ee5f9, new cache notification logs were erronously stored with
         // event ID 5 (instead of 8). Therefore we need to check for the module, too:
         $rs = sql(
             "SELECT `id`, `date_created`, `objectid1`, `logtext`
-                         FROM `logentries`
-                        WHERE `eventid`=5 AND `module`='cache'
-                     ORDER BY `date_created`, `id`"
+             FROM `logentries`
+             WHERE `eventid`=5 AND `module`='cache'
+             ORDER BY `date_created`, `id`"
         );
         while ($rLog = sql_fetch_assoc($rs)) {
             preg_match(
@@ -383,8 +395,8 @@ function dbv_110()  // move adoption history to separate table
             }
             sql(
                 "INSERT INTO `cache_adoptions`
-                                 (`cache_id`,`date`,`from_user_id`,`to_user_id`)
-                              VALUES ('&1','&2','&3','&4')",
+                    (`cache_id`,`date`,`from_user_id`,`to_user_id`)
+                    VALUES ('&1','&2','&3','&4')",
                 $rLog['objectid1'],
                 $rLog['date_created'],
                 $matches[2],
@@ -401,7 +413,7 @@ function dbv_111()  // fix event ID of old publishing notifications
 {
     sql(
         "UPDATE `logentries` SET `eventid`=8
-              WHERE `eventid`=5 AND `module`='notify_newcache'"
+         WHERE `eventid`=5 AND `module`='notify_newcache'"
     );
 }
 
@@ -445,8 +457,9 @@ function dbv_115()  // remove obsolete functions
 function dbv_116()    // optimize index for sorting logs
 {
     sql(
-        "ALTER TABLE `cache_logs` DROP INDEX `date`,
-             ADD INDEX `date` (`cache_id`,`date`,`date_created`)"
+        "ALTER TABLE `cache_logs`
+            DROP INDEX `date`,
+            ADD INDEX `date` (`cache_id`,`date`,`date_created`)"
     );
 }
 
@@ -503,45 +516,42 @@ function dbv_123()  // add tables, fields and procs for cache lists and list wat
 {
     if (!sql_table_exists('cache_lists')) {
         sql(
-            "
-                CREATE TABLE `cache_lists` (
-                  `id` INT(10) NOT NULL AUTO_INCREMENT,
-                  `uuid` VARCHAR(36) NOT NULL,
-                  `user_id` INT(10) NOT NULL,
-                  `date_created` DATETIME NOT NULL,
-                  `last_modified` DATETIME NOT NULL,
-                  `last_added` DATETIME DEFAULT NULL,
-                  `name` VARCHAR(80) NOT NULL,
-                  `is_public` TINYINT(1) NOT NULL DEFAULT '0',
-                  `entries` INT(6) NOT NULL DEFAULT '0' COMMENT 'via trigger in cache_list_items',
-                  `watchers` INT(10) NOT NULL DEFAULT '0' COMMENT 'via trigger in cache_list_watches',
-                  PRIMARY KEY  (`id`),
-                  UNIQUE KEY `uuid` (`uuid`),
-                  KEY `name` (`name`),
-                  KEY `user_id` (`user_id`)
-                ) ENGINE=MyISAM"
+            "CREATE TABLE `cache_lists` (
+                `id` INT(10) NOT NULL AUTO_INCREMENT,
+                `uuid` VARCHAR(36) NOT NULL,
+                `user_id` INT(10) NOT NULL,
+                `date_created` DATETIME NOT NULL,
+                `last_modified` DATETIME NOT NULL,
+                `last_added` DATETIME DEFAULT NULL,
+                `name` VARCHAR(80) NOT NULL,
+                `is_public` TINYINT(1) NOT NULL DEFAULT '0',
+                `entries` INT(6) NOT NULL DEFAULT '0' COMMENT 'via trigger in cache_list_items',
+                `watchers` INT(10) NOT NULL DEFAULT '0' COMMENT 'via trigger in cache_list_watches',
+                PRIMARY KEY  (`id`),
+                UNIQUE KEY `uuid` (`uuid`),
+                KEY `name` (`name`),
+                KEY `user_id` (`user_id`)
+             ) ENGINE=MyISAM"
         );
     }
     if (!sql_table_exists('cache_list_items')) {
         sql(
-            "
-                CREATE TABLE `cache_list_items` (
-                  `cache_list_id` INT(10) NOT NULL,
-                  `cache_id` INT(10) NOT NULL,
-                  UNIQUE KEY `cache_list_id` (`cache_list_id`,`cache_id`),
-                  KEY `cache_id` (`cache_id`)
-                ) ENGINE=MyISAM"
+            "CREATE TABLE `cache_list_items` (
+                `cache_list_id` INT(10) NOT NULL,
+                `cache_id` INT(10) NOT NULL,
+                UNIQUE KEY `cache_list_id` (`cache_list_id`,`cache_id`),
+                KEY `cache_id` (`cache_id`)
+             ) ENGINE=MyISAM"
         );
     }
     if (!sql_table_exists('cache_list_watches')) {
         sql(
-            "
-                CREATE TABLE `cache_list_watches` (
-                  `cache_list_id` INT(10) NOT NULL,
-                  `user_id` INT(10) NOT NULL,
-                  UNIQUE KEY `cache_list_id` (`cache_list_id`,`user_id`),
-                  KEY `user_id` (`user_id`)
-                ) ENGINE=MyISAM"
+            "CREATE TABLE `cache_list_watches` (
+                `cache_list_id` INT(10) NOT NULL,
+                `user_id` INT(10) NOT NULL,
+                UNIQUE KEY `cache_list_id` (`cache_list_id`,`user_id`),
+                KEY `user_id` (`user_id`)
+             ) ENGINE=MyISAM"
         );
     }
 
@@ -558,13 +568,12 @@ function dbv_124()  // update cache lists implementation
 {
     if (!sql_table_exists('stat_cache_lists')) {
         sql(
-            "
-                CREATE TABLE `stat_cache_lists` (
-                  `cache_list_id` INT(10) NOT NULL,
-                  `entries` INT(6) NOT NULL DEFAULT '0' COMMENT 'via trigger in cache_list_items',
-                  `watchers` INT(6) NOT NULL DEFAULT '0' COMMENT 'via trigger in cache_list_watches',
-                  PRIMARY KEY (`cache_list_id`)
-                ) ENGINE=MyISAM
+            "CREATE TABLE `stat_cache_lists` (
+                `cache_list_id` INT(10) NOT NULL,
+                `entries` INT(6) NOT NULL DEFAULT '0' COMMENT 'via trigger in cache_list_items',
+                `watchers` INT(6) NOT NULL DEFAULT '0' COMMENT 'via trigger in cache_list_watches',
+                PRIMARY KEY (`cache_list_id`)
+             ) ENGINE=MyISAM
                 SELECT `id` `cache_list_id`, `entries`, `watchers` FROM `cache_lists`"
         );
     }
@@ -612,7 +621,7 @@ function dbv_127()  // fix name of Dessau-Köthen
 
 function dbv_128()  // see util2/gns/mksearchindex.php; fix for #175/3
 {
-    sql('DELETE FROM `gns_search`');
+    sql("DELETE FROM `gns_search`");
     if (sql_field_exists('gns_search', 'id')) {
         sql("ALTER TABLE `gns_search` DROP COLUMN `id`");
     }
@@ -624,7 +633,9 @@ function dbv_128()  // see util2/gns/mksearchindex.php; fix for #175/3
         if (preg_match("/[a-z]+/", $text)) {
             $simpletext = search_text2simple($text);
             sql(
-                "INSERT INTO `gns_search` (`uni_id`, `sort`, `simple`, `simplehash`) VALUES ('&1', '&2', '&3', '&4')",
+                "INSERT INTO `gns_search`
+                    (`uni_id`, `sort`, `simple`, `simplehash`)
+                    VALUES ('&1', '&2', '&3', '&4')",
                 $r['uni'],
                 $text,
                 $simpletext,
@@ -644,14 +655,13 @@ function dbv_129()  // cache list passwords & bookmarking
     }
     if (!sql_table_exists('cache_list_bookmarks')) {
         sql(
-            "
-                CREATE TABLE `cache_list_bookmarks` (
-                  `cache_list_id` INT(10) NOT NULL,
-                  `user_id` INT(10) NOT NULL,
-                  `password` VARCHAR(80) NOT NULL,
-                  UNIQUE KEY `cache_list_id` (`cache_list_id`,`user_id`),
-                  KEY `user_id` (`user_id`)
-                ) ENGINE=MyISAM"
+            "CREATE TABLE `cache_list_bookmarks` (
+                `cache_list_id` INT(10) NOT NULL,
+                `user_id` INT(10) NOT NULL,
+                `password` VARCHAR(80) NOT NULL,
+                UNIQUE KEY `cache_list_id` (`cache_list_id`,`user_id`),
+                KEY `user_id` (`user_id`)
+             ) ENGINE=MyISAM"
         );
     }
 }
@@ -694,7 +704,10 @@ function dbv_133()  // add user language for notification emails (#141)
 function dbv_134()  // fix removed cache list node IDs
 {
     global $opt;
-    sql("UPDATE `removed_objects` SET `node`='&1' WHERE `type`=8 AND `node`=0", $opt['logic']['node']['id']);
+    sql(
+        "UPDATE `removed_objects` SET `node`='&1' WHERE `type`=8 AND `node`=0",
+        $opt['logic']['node']['id']
+    );
 }
 
 function dbv_135()  // move KML cache type names from search.kml.inc.php to database
@@ -708,16 +721,15 @@ function dbv_136()  // move main town table from settings into database
 {
     if (!sql_table_exists('towns')) {
         sql(
-            "
-                CREATE TABLE `towns` (
-                  `country` CHAR(2) NOT NULL,
-                  `name` VARCHAR(40) NOT NULL,
-                  `trans_id` INT(10) UNSIGNED NOT NULL,
-                  `coord_lat` DOUBLE NOT NULL,
-                  `coord_long` DOUBLE NOT NULL,
-                  `maplist` TINYINT(1) NOT NULL DEFAULT '0',
-                  KEY `country` (`country`)
-                ) ENGINE=MyISAM"
+            "CREATE TABLE `towns` (
+                `country` CHAR(2) NOT NULL,
+                `name` VARCHAR(40) NOT NULL,
+                `trans_id` INT(10) UNSIGNED NOT NULL,
+                `coord_lat` DOUBLE NOT NULL,
+                `coord_long` DOUBLE NOT NULL,
+                `maplist` TINYINT(1) NOT NULL DEFAULT '0',
+                KEY `country` (`country`)
+             ) ENGINE=MyISAM"
         );
     }
 }
@@ -801,24 +813,23 @@ function dbv_144()   // add log versioning to allow log vandalism restore
 {
     if (!sql_table_exists('cache_logs_modified')) {
         sql(
-            "
-                CREATE TABLE `cache_logs_modified` (
-                  `id` INT(10) UNSIGNED NOT NULL,
-                  `uuid` VARCHAR(36) NOT NULL,
-                  `node` TINYINT(3) UNSIGNED NOT NULL,
-                  `date_created` DATETIME NOT NULL,
-                  `last_modified` DATETIME NOT NULL,
-                  `log_last_modified` DATETIME NOT NULL,
-                  `cache_id` INT(10) UNSIGNED NOT NULL,
-                  `user_id` INT(10) UNSIGNED NOT NULL,
-                  `type` TINYINT(3) UNSIGNED NOT NULL,
-                  `oc_team_comment` TINYINT(1) NOT NULL,
-                  `date` DATETIME NOT NULL,
-                  `text` MEDIUMTEXT NOT NULL,
-                  `text_html` TINYINT(1) NOT NULL,
-                  `modify_date` DATETIME DEFAULT NULL,
-                  KEY `id` (`id`, `modify_date`)
-                ) ENGINE=MyISAM"
+            "CREATE TABLE `cache_logs_modified` (
+                `id` INT(10) UNSIGNED NOT NULL,
+                `uuid` VARCHAR(36) NOT NULL,
+                `node` TINYINT(3) UNSIGNED NOT NULL,
+                `date_created` DATETIME NOT NULL,
+                `last_modified` DATETIME NOT NULL,
+                `log_last_modified` DATETIME NOT NULL,
+                `cache_id` INT(10) UNSIGNED NOT NULL,
+                `user_id` INT(10) UNSIGNED NOT NULL,
+                `type` TINYINT(3) UNSIGNED NOT NULL,
+                `oc_team_comment` TINYINT(1) NOT NULL,
+                `date` DATETIME NOT NULL,
+                `text` MEDIUMTEXT NOT NULL,
+                `text_html` TINYINT(1) NOT NULL,
+                `modify_date` DATETIME DEFAULT NULL,
+                KEY `id` (`id`, `modify_date`)
+             ) ENGINE=MyISAM"
         );
     }
 }
@@ -826,8 +837,9 @@ function dbv_144()   // add log versioning to allow log vandalism restore
 function dbv_145()   // optimize log change recording
 {
     sql(
-        "ALTER TABLE `cache_logs_modified` DROP INDEX `id`,
-             ADD UNIQUE INDEX `id` (`id`, `modify_date`)"
+        "ALTER TABLE `cache_logs_modified`
+            DROP INDEX `id`,
+            ADD UNIQUE INDEX `id` (`id`, `modify_date`)"
     );
     sql("ALTER TABLE `cache_logs_modified` MODIFY `modify_date` DATE DEFAULT NULL");
     // This may produce an error for duplicate dates.
@@ -925,17 +937,16 @@ function dbv_150()   // add history of reported waypoints
 {
     if (!sql_table_exists('waypoint_reports')) {
         sql(
-            "
-                CREATE TABLE `waypoint_reports` (
-                    `report_id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-                    `date_reported` DATETIME NOT NULL,
-                    `wp_oc` VARCHAR(7) NOT NULL,
-                    `wp_external` VARCHAR(8) NOT NULL,
-                    `source` VARCHAR(64) NOT NULL,
-                    `gcwp_processed` TINYINT(1) NOT NULL DEFAULT '0',
-                    PRIMARY KEY  (`report_id`),
-                    KEY `gcwp_processed` (`gcwp_processed`,`date_reported`)
-                ) ENGINE=MyISAM"
+            "CREATE TABLE `waypoint_reports` (
+                `report_id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+                `date_reported` DATETIME NOT NULL,
+                `wp_oc` VARCHAR(7) NOT NULL,
+                `wp_external` VARCHAR(8) NOT NULL,
+                `source` VARCHAR(64) NOT NULL,
+                `gcwp_processed` TINYINT(1) NOT NULL DEFAULT '0',
+                PRIMARY KEY  (`report_id`),
+                KEY `gcwp_processed` (`gcwp_processed`,`date_reported`)
+             ) ENGINE=MyISAM"
         );
     }
 }
@@ -945,12 +956,13 @@ function dbv_151()   // new date field for ordering logs
     if (!sql_field_exists('cache_logs', 'order_date')) {
         sql("ALTER TABLE `cache_logs` ADD COLUMN `order_date` DATETIME NOT NULL AFTER `date`");
         sql(
-            "
-                UPDATE `cache_logs`
-                SET `order_date` = IF(RIGHT(`date`, 8) <> '00:00:00' OR `date` > `date_created`, `date`,
-                                      IF(LEFT(`date_created`, 10) = LEFT(`date`, 10), `date_created`,
-                                         CONCAT(LEFT(`date`, 11), '23:59:58')))
-                "
+            "UPDATE `cache_logs`
+             SET `order_date` =
+                IF(RIGHT(`date`, 8) <> '00:00:00' OR `date` > `date_created`, `date`,
+                   IF(LEFT(`date_created`, 10) = LEFT(`date`, 10), `date_created`,
+                      CONCAT(LEFT(`date`, 11), '23:59:58')
+                   )
+                )"
         );
     }
     if (!sql_index_exists('cache_logs', 'order_date')) {
@@ -959,12 +971,13 @@ function dbv_151()   // new date field for ordering logs
     if (!sql_field_exists('cache_logs_archived', 'order_date')) {
         sql("ALTER TABLE `cache_logs_archived` ADD COLUMN `order_date` DATETIME NOT NULL AFTER `date`");
         sql(
-            "
-                UPDATE `cache_logs_archived`
-                SET `order_date` = IF(RIGHT(`date`, 8) <> '00:00:00' OR `date` > `date_created`, `date`,
-                                      IF(LEFT(`date_created`, 10) = LEFT(`date`, 10), `date_created`,
-                                         CONCAT(LEFT(`date`, 11), '23:59:58')))
-                "
+            "UPDATE `cache_logs_archived`
+             SET `order_date` =
+                IF(RIGHT(`date`, 8) <> '00:00:00' OR `date` > `date_created`, `date`,
+                   IF(LEFT(`date_created`, 10) = LEFT(`date`, 10), `date_created`,
+                      CONCAT(LEFT(`date`, 11), '23:59:58')
+                   )
+                )"
         );
     }
 }
@@ -972,7 +985,7 @@ function dbv_151()   // new date field for ordering logs
 function dbv_152()
 {
     if (!sql_field_exists('cache_reports', 'comment')) {
-        sql('ALTER TABLE `cache_reports` ADD COLUMN `comment` MEDIUMTEXT NOT NULL');
+        sql("ALTER TABLE `cache_reports` ADD COLUMN `comment` MEDIUMTEXT NOT NULL");
     }
 }
 
@@ -984,15 +997,15 @@ function dbv_153()  // generic trigger update, see notes on "maintain.php update
 function dbv_154()  // add pictures order option
 {
     if (!sql_field_exists('pictures', 'seq')) {
-        sql('ALTER TABLE `pictures` ADD COLUMN `seq` SMALLINT(5) NOT NULL DEFAULT \'0\'');
+        sql("ALTER TABLE `pictures` ADD COLUMN `seq` SMALLINT(5) NOT NULL DEFAULT '0'");
     }
 
     // initialize the new ordering field
     if (sql_value("SELECT COUNT(*) FROM `pictures` WHERE `seq`=0", 0)) {
         $rs = sql(
-            'SELECT `id`, `object_type`, `object_id`
+            "SELECT `id`, `object_type`, `object_id`
              FROM `pictures`
-             ORDER BY `object_type`, `object_id`, `date_created`'
+             ORDER BY `object_type`, `object_id`, `date_created`"
         );
         $prev_object_type = - 1;
         $prev_object_id = - 1;
@@ -1016,21 +1029,36 @@ function dbv_154()  // add pictures order option
     }
 
     sql(
-        'ALTER TABLE `pictures` DROP INDEX `object_type`,
-         ADD UNIQUE INDEX `object_type` (`object_type`,`object_id`,`seq`)'
+        "ALTER TABLE `pictures`
+            DROP INDEX `object_type`,
+            ADD UNIQUE INDEX `object_type` (`object_type`,`object_id`,`seq`)"
     );
 }
 
 function dbv_155()
 {
     if (!sql_field_exists('cache_report_reasons', 'order')) {
-        sql('ALTER TABLE `cache_report_reasons` ADD COLUMN `order` TINYINT(2) UNSIGNED NOT NULL');
+        sql("ALTER TABLE `cache_report_reasons` ADD COLUMN `order` TINYINT(2) UNSIGNED NOT NULL");
     }
 }
 
 function dbv_156()  // clean up data created by bad cacheLogsBeforeUpdate trigger
 {
     sql("DELETE FROM `cache_logs_modified` WHERE `date` = '0000-00-00 00:00:00'");
+}
+
+function dbv_157()   // discard news entry system
+{
+    // The feature of displaying news via `news` table stays for now,
+    // but the feature of entering news via the OC website is discarded.
+
+    sql("TRUNCATE TABLE `news`");
+    sql(
+        "UPDATE `user`
+         SET `admin` = `admin` \& ~'&1'
+         WHERE (`admin` \& 255) <> 255",
+        ADMIN_NEWS
+    );
 }
 
 // When adding new mutations, take care that they behave well if run multiple

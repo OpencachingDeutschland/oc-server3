@@ -475,9 +475,6 @@ $opt['news']['redirect'] = '';
 // maximum size of the include file
 $opt['news']['maxsize'] = 25 * 1024;
 
-// E-Mail for notification about news (newstopic.php)
-$opt['news']['mail'] = 'news@devel.opencaching.de';
-
 // show news block in start page
 $opt['news']['onstart'] = true;
 

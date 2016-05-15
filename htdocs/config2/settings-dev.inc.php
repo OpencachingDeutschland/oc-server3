@@ -89,11 +89,6 @@ $opt['mail']['subject'] = '[local.opencaching.de] ';
 $opt['cron']['sitemaps']['generate'] = false;
 $opt['cron']['geokrety']['run'] = false;
 
-/* E-Mail for notification about news (newstopic.php)
- */
-$opt['news']['mail'] = 'root';
-$opt['mail']['subject'] = '[local.opencaching.de] ';
-
 /* Purge log files - age in days (0 = keep infinite)
  */
 $opt['logic']['logs']['purge_email'] = 0;

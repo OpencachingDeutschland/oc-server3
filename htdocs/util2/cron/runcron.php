@@ -17,7 +17,9 @@ require(__DIR__ . '/../../lib2/cli.inc.php');
 // test for user who runs the cronjob
 $processUser = posix_getpwuid(posix_geteuid());
 if ($processUser['name'] != $opt['cron']['username']) {
-    die("ERROR: runcron must be run by '" . $opt['cron']['username'] . "' but was called by '" . $processUser['name'] . "'\n" .
+    die(
+        "ERROR: runcron must be run by '" . $opt['cron']['username']
+        . "' but was called by '" . $processUser['name'] . "'\n" .
         "Try something like 'sudo -u " . $opt['cron']['username'] . " php runcron.php'.\n");
 }
 
@@ -28,22 +30,26 @@ if ($process_sync->Enter()) {
     // This is relevant e.g. for publishing and for auto-archiving caches.
     if ($opt['logic']['systemuser']['user'] != '') {
         if (!$login->system_login($opt['logic']['systemuser']['user'])) {
-            die("ERROR: runcron system user login failed");
+            die('ERROR: runcron system user login failed');
         }
     }
 
     $modules_dir = __DIR__ . '/../../util2/cron/modules/';
+    $param = count($argv) > 1 ? $argv[1] : '';
 
-    if (count($argv) == 2 && !strstr("/", $argv[1])) {
+    if ($param != '' && substr($param, 0, 1) != '-' && !strstr('/', $param)) {
         // run one job manually for debugging purpose
         $ignore_interval = true;
-        require($modules_dir . $argv[1] . ".class.php");
+        require($modules_dir . $argv[1] . '.class.php');
     } else {
         if (cronjobs_enabled()) {
             $ignore_interval = false;
             $hDir = opendir($modules_dir);
             while (false !== ($file = readdir($hDir))) {
-                if (substr($file, - 10) == '.class.php') {
+                if (substr($file, -10) == '.class.php') {
+                    if ($param == '--show') {
+                        echo 'running ' . $file . "\n";
+                    }
                     require($modules_dir . $file);
                 }
             }
@@ -60,7 +66,12 @@ function checkJob(&$job)
 
     $max_last_run = strftime(DB_DATE_FORMAT, time() - ($ignore_interval ? 0 : $job->interval));
     $count = sqll_value(
-        "SELECT COUNT(*) FROM `sys_cron` WHERE `name`='&1' AND `last_run`>'&2' AND `last_run`<=NOW()",
+        "SELECT COUNT(*)
+         FROM `sys_cron`
+         WHERE
+            `name` = '&1'
+            AND `last_run` > '&2'
+            AND `last_run` <= NOW()",
         0,
         $job->name,
         $max_last_run
@@ -68,7 +79,9 @@ function checkJob(&$job)
     if ($count != 1) {
         $job->run();
         sqll(
-            "INSERT INTO `sys_cron` (`name`, `last_run`) VALUES ('&1', NOW()) ON DUPLICATE KEY UPDATE `last_run`=NOW()",
+            "INSERT INTO `sys_cron` (`name`, `last_run`)
+             VALUES ('&1', NOW())
+             ON DUPLICATE KEY UPDATE `last_run` = NOW()",
             $job->name
         );
     }

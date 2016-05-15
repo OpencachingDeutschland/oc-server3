@@ -58,13 +58,13 @@ PHP libraries
         License : LGPL 3.0
 
     2.  Smarty Gettext (modified)
-        Path    : htdocs/lib2/smarty/ocplugins/prefilter.t.php
+        Path    : htdocs/src/Oc/SmartyPlugins/prefilter.t.php
         URI     : http://sourceforge.net/projects/smarty-gettext
         License : LGPL 2.1
 
     3.  RFC(2)822 Email Parser
         Path    : htdocs/lib/common.inc.php
-				          htdocs/lib2/util.inc.php
+                  htdocs/lib2/util.inc.php
         URI     : http://iamcal.com/publish/articles/php/parsing_email
         License : CC BY-SA 2.5 / GPL 3.0
         Author  : Cal Henderson
@@ -95,42 +95,21 @@ PHP libraries
         URI     : http://d.alistapart.com/randomizer/rotate.txt
         License : "freely available to all" (http://alistapart.com/about)
 
-    9.  HTML Purifier
-        Path    : htdocs/lib2/HTMLPurifier/
-        URI     : http://htmlpurifier.org/
-        License : LGPL
-
-   10.  ss_zip class
+    9.  ss_zip class
         Path    : htdocs/lib2/ss_zip.php
         URI     : http://smiledsoft.com/demos/phpzip/  (no longer works?)
         License : ??
 
-   11.  OKAPI: Opencaching API
+   10.  OKAPI: Opencaching API
         Path    : htdocs/okapi/
         URI     : http://code.google.com/p/opencaching-api/
         License : MIT, with exception of okapi/res/attribute icons which
                   are under Opencaching-GPL license
 
-   12.  Net_IDNA2
+   11.  Net_IDNA2
         Path    : htdocs/lib2/Net/
         URI     : https://pear.php.net/package/Net_IDNA2
         Licens  : LGPL 2.1
-
-
-The following PHP libraries are currently not in use and may be discarded.
-Note that they need to be properly licensed as long they are included in
-the distrubution!
-
-   13.  b2evo captcha
-        Path    : htdocs/lib2/b2evo-captcha/
-        URI     : http://sourceforge.net/projects/b2evo-captcha
-        License : GPL
-
-   14.  InputFilter (modified)
-        Path    : htdocs/lib2/logic/old/class.inputfilter.php
-        URI     : http://freshmeat.net/projects/inputfilter/
-                  http://cyberai.users.phpclasses.org/package/2189-PHP-Filter-out-unwanted-PHP-Javascript-HTML-tags-.html
-        License : GPL
 
 
 JavaScript libraries

@@ -14,7 +14,7 @@
  ***************************************************************************/
 
 $opt['rootpath'] = '../';
-require($opt['rootpath'] . 'lib2/web.inc.php');
+require(__DIR__ . '/../lib2/web.inc.php');
 
 if (isset($_REQUEST['report']) && $_REQUEST['report']) {
     header('Content-type: text/plain');
@@ -33,9 +33,9 @@ if (isset($_REQUEST['report']) && $_REQUEST['report']) {
                 echo "error: invalid gcwp\n";
             } else {
                 sql("
-					INSERT INTO `waypoint_reports`
-					(`date_reported`, `wp_oc`, `wp_external`, `source`)
-					VALUES (NOW(), '&1', '&2', '&3')",
+                    INSERT INTO `waypoint_reports`
+                    (`date_reported`, `wp_oc`, `wp_external`, `source`)
+                    VALUES (NOW(), '&1', '&2', '&3')",
                     $ocwp,
                     $gcwp,
                     $source

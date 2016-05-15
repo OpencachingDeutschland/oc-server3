@@ -6,7 +6,7 @@
  ***************************************************************************/
 
 $opt['rootpath'] = '../';
-require($opt['rootpath'] . 'lib2/web.inc.php');
+require(__DIR__ . '/../lib2/web.inc.php');
 
 header('Content-type: text/plain; charset=utf-8');
-echo sql_value("SELECT NOW()", "");
+echo sql_value('SELECT NOW()', '');

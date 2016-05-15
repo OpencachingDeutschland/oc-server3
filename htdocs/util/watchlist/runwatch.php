@@ -107,8 +107,11 @@ while ($rcw = mysql_fetch_assoc($rscw)) {
     // Throttle email sending after undeliverable mails. See also runwatch.php.
     // See also stored procedure sp_notify_new_cache().
     // See http://forum.opencaching.de/index.php?topic=3123.0 on AOL.
-    if (sqlValue("SELECT `email_problems` = 0 OR DATEDIFF(NOW(),`last_email_problem`) > 1+DATEDIFF(`last_email_problem`,`first_email_problem`)
-		                FROM `user` WHERE `user_id`='" . sql_escape($rcw['user_id']) . "'", 1)) {
+    if (sqlValue(
+        "SELECT `email_problems` = 0 OR DATEDIFF(NOW(),`last_email_problem`) > 1+DATEDIFF(`last_email_problem`,`first_email_problem`)
+                        FROM `user` WHERE `user_id`='" . sql_escape($rcw['user_id']) . "'",
+        1
+    )) {
         process_log_watch($rcw['user_id'], $rcw['log_id']);
     }
 
@@ -212,11 +215,19 @@ for ($i = 0; $i < mysql_num_rows($rsUsers); $i ++) {
                 if ($mailadr != '') {
                     if (is_existent_maildomain(getToMailDomain($mailadr))) {
                         $language = $rUser['language'] ? $rUser['language'] : $opt['template']['default']['locale'];
-                        $mailsubject = '[' . $maildomain . '] ' . $translate->t('Your watchlist of', '', basename(__FILE__), __LINE__, '', 1, $language) . ' ' . date($opt['locale'][$language]['format']['phpdate']);
+                        $mailsubject = '[' . $maildomain . '] ' . $translate->t(
+                                'Your watchlist of',
+                                '',
+                                basename(__FILE__),
+                                __LINE__,
+                                '',
+                                1,
+                                $language
+                            ) . ' ' . date($opt['locale'][$language]['format']['phpdate']);
                         mb_send_mail($mailadr, $mailsubject, $mailbody, $email_headers);
 
                         // logentry($module, $eventid, $userid, $objectid1, $objectid2, $logtext, $details)
-                        logentry('watchlist', 2, $rUser['user_id'], 0, 0, 'Sending mail to ' . $mailadr, array());
+                        logentry('watchlist', 2, $rUser['user_id'], 0, 0, 'Sending mail to ' . $mailadr, []);
                     }
                 }
 
@@ -277,7 +288,7 @@ mysql_free_result($rsUsers);
 // periodical runwatch processing (e.g. developer systems).
 // Do NOT move this into CleanupAndExit(), which may be run without processing!
 
-sql("DELETE FROM `watches_waiting` WHERE DATEDIFF(NOW(),`date_created`) > 35");
+sql('DELETE FROM `watches_waiting` WHERE DATEDIFF(NOW(),`date_created`) > 35');
 
 CleanupAndExit($watchpid);
 
@@ -286,28 +297,28 @@ function process_owner_log($user_id, $log_id)
 {
     global $opt, $dblink, $translate;
 
-//	echo "process_owner_log($user_id, $log_id)\n";
+//    echo "process_owner_log($user_id, $log_id)\n";
 
     $rsLog = sql(
         "SELECT
-			`cache_logs`.`cache_id`,
-			`cache_logs`.`type`,
-			`cache_logs`.`text`,
-			`cache_logs`.`text_html`,
-			`cache_logs`.`date` `logdate`,
-			`cache_logs`.`needs_maintenance`,
-			`cache_logs`.`listing_outdated`,
-			`user`.`username`,
-			`caches`.`name` `cachename`,
-			`caches`.`wp_oc`
-		FROM
-			`cache_logs`,
-			`user`,
-			`caches`
-		WHERE
-			`cache_logs`.`user_id`=`user`.`user_id` AND
-			`cache_logs`.`cache_id`=`caches`.`cache_id` AND
-			`cache_logs`.`id` ='&1'",
+            `cache_logs`.`cache_id`,
+            `cache_logs`.`type`,
+            `cache_logs`.`text`,
+            `cache_logs`.`text_html`,
+            `cache_logs`.`date` `logdate`,
+            `cache_logs`.`needs_maintenance`,
+            `cache_logs`.`listing_outdated`,
+            `user`.`username`,
+            `caches`.`name` `cachename`,
+            `caches`.`wp_oc`
+        FROM
+            `cache_logs`,
+            `user`,
+            `caches`
+        WHERE
+            `cache_logs`.`user_id`=`user`.`user_id` AND
+            `cache_logs`.`cache_id`=`caches`.`cache_id` AND
+            `cache_logs`.`id` ='&1'",
         $log_id
     );
     $rLog = sql_fetch_array($rsLog);
@@ -325,7 +336,15 @@ function process_owner_log($user_id, $log_id)
         $dateformat = $opt['locale'][$language]['format']['phpdatetime'];
     }
 
-    $watchtext = '{date} ' . $translate->t('{user} has logged your cache "{cachename}":', '', basename(__FILE__), __LINE__, '', 1, $language) . ' {action}{maintenance_flags}' . "\n" . '{shortlink_url}{wp_oc}' . "\n\n" . '{text}' . "\n\n\n\n";
+    $watchtext = '{date} ' . $translate->t(
+            '{user} has logged your cache "{cachename}":',
+            '',
+            basename(__FILE__),
+            __LINE__,
+            '',
+            1,
+            $language
+        ) . ' {action}{maintenance_flags}' . "\n" . '{shortlink_url}{wp_oc}' . "\n\n" . '{text}' . "\n\n\n\n";
 
     $watchtext = mb_ereg_replace('{date}', date($dateformat, strtotime($rLog['logdate'])), $watchtext);
     $watchtext = mb_ereg_replace('{wp_oc}', $rLog['wp_oc'], $watchtext);
@@ -344,44 +363,44 @@ function process_owner_log($user_id, $log_id)
     }
 
     sql(
-        "INSERT IGNORE INTO `watches_waiting` 
-            (`user_id`, `object_id`, `object_type`, `date_created`, `watchtext`, `watchtype`) 
-        VALUES ('&1', '&2', 1, NOW(), '&3', 1)",
+        "INSERT IGNORE INTO `watches_waiting`
+         (`user_id`, `object_id`, `object_type`, `date_created`, `watchtext`, `watchtype`) 
+         VALUES ('&1', '&2', 1, NOW(), '&3', 1)",
         $user_id,
         $log_id,
         $watchtext
     );
 
     // logentry($module, $eventid, $userid, $objectid1, $objectid2, $logtext, $details)
-    logentry('watchlist', 1, $user_id, $log_id, 0, $watchtext, array());
+    logentry('watchlist', 1, $user_id, $log_id, 0, $watchtext, []);
 }
 
 function process_log_watch($user_id, $log_id)
 {
     global $opt, $dblink, $logwatch_text, $translate;
 
-//	echo "process_log_watch($user_id, $log_id)\n";
+//    echo "process_log_watch($user_id, $log_id)\n";
 
     $rsLog = sql(
         "SELECT
-			`cache_logs`.`cache_id`,
-			`cache_logs`.`type`,
-			`cache_logs`.`text`,
-			`cache_logs`.`text_html`,
-			`cache_logs`.`date` `logdate`,
-			`cache_logs`.`needs_maintenance`,
-			`cache_logs`.`listing_outdated`,
-			`user`.`username`,
-			`caches`.`name` `cachename`,
-			`caches`.`wp_oc`
-		FROM
-			`cache_logs`,
-			`user`,
-			`caches`
-		WHERE
-			`cache_logs`.`user_id`=`user`.`user_id` AND
-			`cache_logs`.`cache_id`=`caches`.`cache_id` AND
-			`cache_logs`.`id` = '&1'",
+            `cache_logs`.`cache_id`,
+            `cache_logs`.`type`,
+            `cache_logs`.`text`,
+            `cache_logs`.`text_html`,
+            `cache_logs`.`date` `logdate`,
+            `cache_logs`.`needs_maintenance`,
+            `cache_logs`.`listing_outdated`,
+            `user`.`username`,
+            `caches`.`name` `cachename`,
+            `caches`.`wp_oc`
+        FROM
+            `cache_logs`,
+            `user`,
+            `caches`
+        WHERE
+            `cache_logs`.`user_id`=`user`.`user_id` AND
+            `cache_logs`.`cache_id`=`caches`.`cache_id` AND
+            `cache_logs`.`id` = '&1'",
         $log_id
     );
     $rLog = sql_fetch_array($rsLog);
@@ -390,14 +409,24 @@ function process_log_watch($user_id, $log_id)
     $logtext = html2plaintext($rLog['text'], $rLog['text_html'] == 0, EMAIL_LINEWRAP);
 
     $language = sqlValue("SELECT `language` FROM `user` WHERE `user_id`='" . sql_escape($user_id) . "'", null);
-    if (!$language)
+    if (!$language) {
         $language = $opt['template']['default']['locale'];
-    if (strpos($rLog['logdate'], '00:00:00') > 0)
+    }
+    if (strpos($rLog['logdate'], '00:00:00') > 0) {
         $dateformat = $opt['locale'][$language]['format']['phpdate'];
-    else
+    } else {
         $dateformat = $opt['locale'][$language]['format']['phpdatetime'];
+    }
 
-    $watchtext = '{date} ' . $translate->t('{user} has logged the cache "{cachename}":', '', basename(__FILE__), __LINE__, '', 1, $language) . ' {action}{maintenance_flags}' . "\n" . '{shortlink_url}{wp_oc}' . "\n{cachelists}\n" . '{text}' . "\n\n\n\n";
+    $watchtext = '{date} ' . $translate->t(
+            '{user} has logged the cache "{cachename}":',
+            '',
+            basename(__FILE__),
+            __LINE__,
+            '',
+            1,
+            $language
+        ) . ' {action}{maintenance_flags}' . "\n" . '{shortlink_url}{wp_oc}' . "\n{cachelists}\n" . '{text}' . "\n\n\n\n";
 
     $watchtext = mb_ereg_replace('{date}', date($dateformat, strtotime($rLog['logdate'])), $watchtext);
     $watchtext = mb_ereg_replace('{wp_oc}', $rLog['wp_oc'], $watchtext);
@@ -409,9 +438,9 @@ function process_log_watch($user_id, $log_id)
 
     $rsLists = sql(
         "SELECT `name` FROM `cache_lists` cl
-		JOIN `cache_list_watches` clw ON clw.`cache_list_id`=cl.`id` AND clw.`user_id`='&1'
-		JOIN `cache_list_items` cli ON cli.`cache_list_id`=cl.`id` AND cli.`cache_id`='&2'
-		ORDER BY `name`",
+        JOIN `cache_list_watches` clw ON clw.`cache_list_id`=cl.`id` AND clw.`user_id`='&1'
+        JOIN `cache_list_items` cli ON cli.`cache_list_id`=cl.`id` AND cli.`cache_id`='&2'
+        ORDER BY `name`",
         $user_id,
         $rLog['cache_id']
     );
@@ -422,17 +451,25 @@ function process_log_watch($user_id, $log_id)
             break;
         case 1:
             $cachelists = $translate->t(
-                'Cache list:',
-                '',
-                basename(__FILE__),
-                __LINE__,
-                '',
-                1,
-                $language
-            ) . ' ' . $cachelist_names[0] . "\n";
+                    'Cache list:',
+                    '',
+                    basename(__FILE__),
+                    __LINE__,
+                    '',
+                    1,
+                    $language
+                ) . ' ' . $cachelist_names[0] . "\n";
             break;
         default:
-            $cachelists = $translate->t('Cache lists:', '', basename(__FILE__), __LINE__, '', 1, $language) . ' ' . implode(', ', $cachelist_names) . "\n";
+            $cachelists = $translate->t(
+                    'Cache lists:',
+                    '',
+                    basename(__FILE__),
+                    __LINE__,
+                    '',
+                    1,
+                    $language
+                ) . ' ' . implode(', ', $cachelist_names) . "\n";
     }
     $watchtext = mb_ereg_replace('{cachelists}', $cachelists, $watchtext);
 
@@ -454,12 +491,11 @@ function process_log_watch($user_id, $log_id)
     );
 }
 
-
 function insert_maintenance_flags($rLog, $language, $watchtext)
 {
     global $translate;
 
-    $flags = array('');
+    $flags = [''];
     if ($rLog['needs_maintenance'] > 0) {
         if ($rLog['needs_maintenance'] == 2) {
             $mstate = 'geocache needs maintenance';
@@ -481,11 +517,10 @@ function insert_maintenance_flags($rLog, $language, $watchtext)
     return mb_ereg_replace('{maintenance_flags}', $flagtext, $watchtext);
 }
 
-
 function is_existent_maildomain($domain)
 {
-    $smtp_serverlist = array();
-    $smtp_serverweight = array();
+    $smtp_serverlist = [];
+    $smtp_serverweight = [];
 
     if (getmxrr($domain, $smtp_serverlist, $smtp_serverweight) != false) {
         if (count($smtp_serverlist) > 0) {
@@ -555,7 +590,7 @@ function CheckDaemon($PidFile)
         $pid_daemon = fgets($pidfile, 20);
         fclose($pidfile);
 
-        $pid_daemon = (int)$pid_daemon;
+        $pid_daemon = (int) $pid_daemon;
 
         // process running?
         if (posix_kill($pid_daemon, 0)) {

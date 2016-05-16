@@ -9,6 +9,7 @@
  *    - set line ends to LF(-only)
  *    - remove ?> and blank lines at end of file
  *    - add missing LF to end of file
+ *    - detect characters before <? at start of file
  *
  *  This script may be run any time to check and clean up the current OC code.
  *
@@ -76,6 +77,15 @@ class StyleCleanup
             foreach ($files as $filepath) {
                 $file_modified = false;
                 $lines = file($filepath);
+
+                # detect illegal characters at start of PHP or XML file
+
+                if (count($lines) && preg_match('/^(.+?)\<\?/', $lines[0], $matches)) {
+                    die(
+                        'invalid character(s) "' . $matches[1] . '"'
+                        . ' at start of ' . $filepath . "\n"
+                    );
+                }
 
                 # Remove trailing whitespaces, strip CRs, expand tabs and
                 # make sure that all - including the last - line end on "\n".

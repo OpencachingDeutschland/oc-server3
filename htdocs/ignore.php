@@ -41,7 +41,7 @@ switch ($action) {
 $map_result_id = sql_value(
     "SELECT `result_id`
      FROM `map2_result`
-     WHERE INSTR(sqlquery,\"`user_id`='" . sql_escape($login->userid) . "'\") 
+     WHERE INSTR(sqlquery,\"`user_id`='" . sql_escape($login->userid) . "'\")
      LIMIT 1",
     0
 );

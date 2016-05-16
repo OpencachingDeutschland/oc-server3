@@ -111,7 +111,7 @@
 {/if}
 
 <!-- Cachemeta -->
-<div class="content2-container line-box" style="float:left">  {* div height will be wroing without float:left - why *}  
+<div class="content2-container line-box" style="float:left">  {* div height will be wroing without float:left - why *}
     <div class="">
         <div class="nav4">
             <ul>

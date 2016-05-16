@@ -31,7 +31,7 @@ if ($r) {
                 "SELECT COUNT(*)
                  FROM `cache_logs`
                  INNER JOIN `caches` ON `cache_logs`.`cache_id`=`caches`.`cache_id`
-                 INNER JOIN `cache_status` ON `caches`.`status`=`cache_status`.`id` 
+                 INNER JOIN `cache_status` ON `caches`.`status`=`cache_status`.`id`
                  WHERE `cache_logs`.`id`='&1'
                  AND (`cache_status`.`allow_user_view`=1 OR `caches`.`user_id`='&2' OR '&3')",
                 0,

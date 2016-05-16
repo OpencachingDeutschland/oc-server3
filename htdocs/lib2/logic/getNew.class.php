@@ -260,7 +260,7 @@ class getNew
                 INNER JOIN `user` ON `user`.`user_id`=`caches`.`user_id`
                 LEFT JOIN `cache_location` ON `cache_rating`.`cache_id`=`cache_location`.`cache_id`
                 LEFT JOIN `countries` ON `countries`.`short`=`caches`.`country`
-                LEFT JOIN `sys_trans_text` 
+                LEFT JOIN `sys_trans_text`
                   ON `sys_trans_text`.`trans_id`=`countries`.`trans_id`
                   AND `sys_trans_text`.`lang`='&2'
                 LEFT JOIN `caches_attributes` `ca` ON `ca`.`cache_id`=`caches`.`cache_id` AND `ca`.`attrib_id`=6

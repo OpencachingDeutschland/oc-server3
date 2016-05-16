@@ -43,7 +43,7 @@ tinyMCE.init({
 	preformatted : true,
 	remove_linebreaks : false,
 	oninit : "postEditorInit",
-	
+
 	content_css : "resource2/tinymce/config/content.css"
 });
 

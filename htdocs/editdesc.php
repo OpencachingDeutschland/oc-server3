@@ -61,7 +61,7 @@ if ($error == false) {
     } else {
 
         $desc_rs = sql(
-            "SELECT 
+            "SELECT
                  `cache_desc`.`cache_id`,
                  `cache_desc`.`node`,
                  `cache_desc`.`language`,
@@ -72,9 +72,9 @@ if ($error == false) {
                  `cache_desc`.`hint`,
                  `cache_desc`.`short_desc`,
                  `cache_desc`.`desc_html`,
-                 `cache_desc`.`desc_htmledit` 
-            FROM `caches`, `cache_desc` 
-            WHERE (`caches`.`cache_id` = `cache_desc`.`cache_id`) 
+                 `cache_desc`.`desc_htmledit`
+            FROM `caches`, `cache_desc`
+            WHERE (`caches`.`cache_id` = `cache_desc`.`cache_id`)
             AND `cache_desc`.`id`='&1'",
             $descid
         );
@@ -161,8 +161,8 @@ if ($error == false) {
                     {
                         // prüfen, ob sprache nicht schon vorhanden
                         $rs = sql(
-                            "SELECT COUNT(*) `count` 
-                             FROM `cache_desc` 
+                            "SELECT COUNT(*) `count`
+                             FROM `cache_desc`
                              WHERE `cache_id`='&1'
                              AND `id` != '&2'
                              AND `language`='&3'",
@@ -249,7 +249,7 @@ if ($error == false) {
                 // ok ... die desclang zusammenbauen
                 if ($show_all_langs == false) {
                     $rs = sql(
-                        "SELECT `show` 
+                        "SELECT `show`
                          FROM `languages_list_default`
                          WHERE `show`='&1'
                          AND `lang`='&2'",
@@ -266,19 +266,19 @@ if ($error == false) {
                 $rsLanguages = sql(
                     "SELECT `languages`.`short`, IFNULL(`sys_trans_text`.`text`, `languages`.`name`) AS `name`
                      FROM `languages`
-                     LEFT JOIN `languages_list_default` 
-                         ON `languages`.`short`=`languages_list_default`.`show` 
+                     LEFT JOIN `languages_list_default`
+                         ON `languages`.`short`=`languages_list_default`.`show`
                          AND `languages_list_default`.`lang`='&3'
-                     LEFT JOIN `sys_trans` 
+                     LEFT JOIN `sys_trans`
                          ON `languages`.`trans_id`=`sys_trans`.`id`
-                     LEFT JOIN `sys_trans_text` 
-                         ON `sys_trans`.`id`=`sys_trans_text`.`trans_id` 
+                     LEFT JOIN `sys_trans_text`
+                         ON `sys_trans`.`id`=`sys_trans_text`.`trans_id`
                          AND `sys_trans_text`.`lang`='&3'
                      WHERE `languages`.`short` NOT IN (
-                          SELECT `language` 
-                          FROM `cache_desc` 
-                          WHERE `cache_id`='&1' 
-                          AND `language`!='&2') 
+                          SELECT `language`
+                          FROM `cache_desc`
+                          WHERE `cache_id`='&1'
+                          AND `language`!='&2')
                           AND ('&4'=1 OR `languages_list_default`.`show`=`languages`.`short`)
                     ORDER BY `name` ASC",
                     $desc_record['cache_id'],

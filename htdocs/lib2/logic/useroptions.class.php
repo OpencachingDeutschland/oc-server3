@@ -23,19 +23,19 @@ class useroptions
 
         if ($nUserId == ID_NEW) {
             $rs = sqll(
-                'SELECT 
+                'SELECT
                      `id`,
                      `name`,
                      `default_value`,
                      `check_regex`,
-                     `option_order`, 0 AS `option_visible`, 
+                     `option_order`, 0 AS `option_visible`,
                      `internal_use`, `default_value` AS `option_value`,
                      `optionset`
                  FROM `profile_options`'
             );
         } else {
             $rs = sqll(
-                "SELECT 
+                "SELECT
                      `p`.`id`,
                      `p`.`name`,
                      `p`.`default_value`,

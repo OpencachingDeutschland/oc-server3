@@ -92,7 +92,7 @@ while ($rLocations = sql_fetch_array($rsLocations)) {
         }
 
         sql(
-            "UPDATE `gns_locations` SET `admtxt1`='&1', `admtxt2`='&2', `admtxt3`='&3', `admtxt4`='&4' 
+            "UPDATE `gns_locations` SET `admtxt1`='&1', `admtxt2`='&2', `admtxt3`='&3', `admtxt4`='&4'
             WHERE uni='&5'",
             $admtxt1,
             $admtxt2,

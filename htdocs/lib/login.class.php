@@ -112,12 +112,12 @@ class login
         $rs = sql(
             "SELECT `sys_sessions`.`last_login`, `user`.`admin`
              FROM &db.`sys_sessions`, &db.`user`
-             WHERE `sys_sessions`.`user_id`=`user`.`user_id` 
-             AND `user`.`is_active_flag`=1 
+             WHERE `sys_sessions`.`user_id`=`user`.`user_id`
+             AND `user`.`is_active_flag`=1
              AND `sys_sessions`.`uuid`='&1'
              AND `sys_sessions`.`user_id`='&2'
-             AND ((`sys_sessions`.`permanent`=1 
-             AND `sys_sessions`.`last_login`>'&3') 
+             AND ((`sys_sessions`.`permanent`=1
+             AND `sys_sessions`.`last_login`>'&3')
              OR (`sys_sessions`.`permanent`=0 AND `sys_sessions`.`last_login`>'&4'))
              ",
             $this->sessionid,
@@ -132,7 +132,7 @@ class login
                 sql(
                     "UPDATE `sys_sessions`
                      SET `sys_sessions`.`last_login`=NOW()
-                     WHERE `sys_sessions`.`uuid`='&1' 
+                     WHERE `sys_sessions`.`uuid`='&1'
                      AND `sys_sessions`.`user_id`='&2'",
                     $this->sessionid,
                     $this->userid
@@ -142,11 +142,11 @@ class login
 
             if (isset($locale)) {
                 sql(
-                    "UPDATE `user` 
+                    "UPDATE `user`
                      SET `last_login`=NOW(),
                          `language`='&2',
                          `language_guessed` = 0,
-                         `domain`='&3' 
+                         `domain`='&3'
                      WHERE `user_id`='&1'",
                     $this->userid,
                     $locale,

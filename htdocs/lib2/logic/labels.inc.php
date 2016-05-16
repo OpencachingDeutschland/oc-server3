@@ -25,7 +25,7 @@ class labels
 
         $a = array();
         $rs = sql(
-            "SELECT 
+            "SELECT
                  `cache_attrib`.`id`,
                  IFNULL(`sys_trans_text`.`text`,
                  `cache_attrib`.`name`) AS `name`
@@ -51,7 +51,7 @@ class labels
                  IFNULL(`sys_trans_text`.`text`,
                  `cache_size`.`name`) AS `name`
              FROM `cache_size`
-             LEFT JOIN `sys_trans` 
+             LEFT JOIN `sys_trans`
                  ON `cache_size`.`trans_id`=`sys_trans`.`id`
                  AND `cache_size`.`name`=`sys_trans`.`text`
              LEFT JOIN `sys_trans_text`

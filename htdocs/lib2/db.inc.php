@@ -833,8 +833,8 @@ function sql_connect_anyslave()
     $id = sqlf_value(
         "SELECT `id`, `weight`*RAND() AS `w`
         FROM `sys_repl_slaves`
-        WHERE `active`= 1 
-        AND `online`= 1 
+        WHERE `active`= 1
+        AND `online`= 1
         AND (TIMESTAMP(NOW())-TIMESTAMP(`last_check`)+`time_diff`<'&1')
         ORDER BY `w` DESC LIMIT 1",
         - 1,

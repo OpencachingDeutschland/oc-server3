@@ -53,7 +53,7 @@ if (!$tpl->is_cached()) {
              LEFT JOIN `sys_trans_text` ON `sys_trans_text`.`trans_id` = `countries`.`trans_id`
                        AND `sys_trans_text`.`lang` = '" . sql_escape($opt['template']['locale']) . "'
              LEFT JOIN `caches_attributes` `ca`
-                  ON `ca`.`cache_id`=`caches`.`cache_id` 
+                  ON `ca`.`cache_id`=`caches`.`cache_id`
                   AND `ca`.`attrib_id`=6
              WHERE `caches`.`status` = 1" . ($country ? " AND `caches`.`country`='" . sql_escape($country) . "'" : "") .
         $cachetype_condition . "

@@ -16,7 +16,7 @@ tinyMCE_GZ.init({
 tinyMCE.init({
 	mode : "textareas",
 	theme : "advanced",
-	
+
 	plugins : "advhr,contextmenu,emotions,insertdatetime,table",
 
 	theme_advanced_buttons1 : "cut,copy,paste,pasteword,pastetext,removeformat,separator,undo,redo,separator,link,unlink,separator,fontselect,fontsizeselect",
@@ -37,7 +37,7 @@ tinyMCE.init({
 	preformatted : true,
 	remove_linebreaks : false,
 	oninit : "postEditorInit",
-	
+
 	content_css : "resource2/tinymce/config/content.css"
 });
 

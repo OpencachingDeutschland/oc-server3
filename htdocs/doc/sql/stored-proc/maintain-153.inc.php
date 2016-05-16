@@ -555,7 +555,7 @@ sql("CREATE PROCEDURE sp_updateall_watchstat (OUT nModified INT)
         ALTER TABLE `tmp_watchstat` ADD PRIMARY KEY (`cache_id`);
 
         /* calculate temp stats for all watches caches (no effect for unwatched) */
-        UPDATE 
+        UPDATE
             `tmp_watchstat`,
             (SELECT `cache_id`, COUNT(*) AS `count`
              FROM
@@ -694,7 +694,7 @@ sql(
             END IF;
 
             UPDATE `stat_caches`
-            SET `stat_caches`.`picture` = 
+            SET `stat_caches`.`picture` =
                 IF(`stat_caches`.`picture`+nPicture>0, `stat_caches`.`picture`+nPicture, 0)
             WHERE `stat_caches`.`cache_id`=nCacheId;
 
@@ -1192,7 +1192,7 @@ sql(
     "CREATE TRIGGER `cacheDescAfterInsert` AFTER INSERT ON `cache_desc`
      FOR EACH ROW BEGIN
         CALL sp_update_cache_listingdate(NEW.`cache_id`);
-        IF 
+        IF
             (SELECT `date_created` FROM `caches` WHERE `cache_id`=NEW.`cache_id`) < LEFT(NOW(),10)
             AND (SELECT `status` FROM `caches` WHERE `caches`.`cache_id`=NEW.`cache_id`) != 5
         THEN
@@ -1250,7 +1250,7 @@ sql(
         IF IFNULL(@deleting_cache,0)=0 THEN
             CALL sp_update_cache_listingdate(OLD.`cache_id`);
             /* changes at date of creation are ignored to save archive space */
-            IF 
+            IF
                 (OLD.`date_created` < LEFT(NOW(),10))
                 AND (SELECT `status` FROM `caches` WHERE `caches`.`cache_id`=OLD.`cache_id`) != 5
             THEN
@@ -1419,7 +1419,7 @@ sql(
                  */
                 IF DATEDIFF(NOW(), OLD.`date_created`) > 1 THEN
                     INSERT IGNORE INTO `cache_logs_modified`
-                        (`id`, `uuid`, `node`, `date_created`, `entry_last_modified`, `last_modified`, 
+                        (`id`, `uuid`, `node`, `date_created`, `entry_last_modified`, `last_modified`,
                          `log_last_modified`, `cache_id`, `user_id`, `type`, `oc_team_comment`, `date`,
                          `needs_maintenance`, `listing_outdated`, `text`, `text_html`, `modify_date`
                         )

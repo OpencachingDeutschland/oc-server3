@@ -25,7 +25,7 @@ class rating_tops
         sql("CREATE TEMPORARY TABLE &topLocationCaches (`cache_id` INT(11) PRIMARY KEY) ENGINE=MEMORY");
         sql("CREATE TEMPORARY TABLE &topRatings (`cache_id` INT(11) PRIMARY KEY, `ratings` INT(11)) ENGINE=MEMORY");
         sql(
-            "CREATE TEMPORARY TABLE &topResult (`idx` INT(11), `cache_id` INT(11) 
+            "CREATE TEMPORARY TABLE &topResult (`idx` INT(11), `cache_id` INT(11)
             PRIMARY KEY, `ratings` INT(11), `founds` INT(11)) ENGINE=MEMORY"
         );
 

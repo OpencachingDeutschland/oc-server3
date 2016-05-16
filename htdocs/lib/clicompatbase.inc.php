@@ -79,7 +79,7 @@ $emailheaders = 'From: "' . $emailaddr . '" <' . $emailaddr . '>';
 function logentry($module, $eventid, $userid, $objectid1, $objectid2, $logtext, $details)
 {
     sql(
-        "INSERT INTO logentries (`module`, `eventid`, `userid`, `objectid1`, `objectid2`, `logtext`, `details`) 
+        "INSERT INTO logentries (`module`, `eventid`, `userid`, `objectid1`, `objectid2`, `logtext`, `details`)
          VALUES ('&1', '&2', '&3', '&4', '&5', '&6', '&7')",
         $module,
         $eventid,

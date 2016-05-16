@@ -254,7 +254,7 @@ class cache
         $rs = sql(
             "SELECT `id`, `listing_outdated`
              FROM `cache_logs`
-             WHERE `cache_id`='&1' 
+             WHERE `cache_id`='&1'
              AND `listing_outdated`>0
              ORDER BY `order_date` DESC, `date_created` DESC, `id` DESC",
             // same sorting order as in DB function sp_update_logstat()
@@ -323,8 +323,8 @@ class cache
 
         // delete cache_visits older 1 day 60*60*24 = 86400
         sql(
-            "DELETE FROM `cache_visits` 
-             WHERE `cache_id`='&1' 
+            "DELETE FROM `cache_visits`
+             WHERE `cache_id`='&1'
              AND `user_id_ip`!='0'
              AND NOW()-`last_modified`>86400",
             $nCacheId
@@ -346,7 +346,7 @@ class cache
 
         // note the visit of this user
         sql(
-            "INSERT INTO `cache_visits` (`cache_id`, `user_id_ip`, `count`) 
+            "INSERT INTO `cache_visits` (`cache_id`, `user_id_ip`, `count`)
              VALUES (&1, '&2', 1)
              ON DUPLICATE KEY UPDATE `count`=`count`+1",
             $nCacheId,
@@ -436,11 +436,11 @@ class cache
                     `user`.`username` AS `username`,
                     IF(ISNULL(`cache_rating`.`cache_id`), 0, `cache_logs`.`type` IN (1,7)) AS `recommended`
              FROM $table AS `cache_logs`
-             INNER JOIN `user` 
+             INNER JOIN `user`
                  ON `user`.`user_id` = `cache_logs`.`user_id`
-             LEFT JOIN `cache_rating` 
-                 ON `cache_logs`.`cache_id`=`cache_rating`.`cache_id` 
-                 AND `cache_logs`.`user_id`=`cache_rating`.`user_id` 
+             LEFT JOIN `cache_rating`
+                 ON `cache_logs`.`cache_id`=`cache_rating`.`cache_id`
+                 AND `cache_logs`.`user_id`=`cache_rating`.`user_id`
                  AND `cache_logs`.`date`=`cache_rating`.`rating_date`
              " . $addjoin . "
              WHERE `cache_logs`.`cache_id`='&1'
@@ -460,7 +460,7 @@ class cache
             $rsPictures = sql(
                 "SELECT `url`, `title`, `uuid`, `id`, `spoiler`
                  FROM `pictures`
-                 WHERE `object_id`='&1' 
+                 WHERE `object_id`='&1'
                  AND `object_type`=1
                  ORDER BY `seq`",
                 $rLog['id']
@@ -559,7 +559,7 @@ class cache
         }
 
         sql(
-            "INSERT IGNORE INTO `cache_adoption` (`cache_id`, `user_id`) 
+            "INSERT IGNORE INTO `cache_adoption` (`cache_id`, `user_id`)
              VALUES ('&1', '&2')",
             $this->nCacheId,
             $userid
@@ -577,8 +577,8 @@ class cache
         }
 
         sql(
-            "DELETE FROM `cache_adoption` 
-             WHERE `user_id`='&1' 
+            "DELETE FROM `cache_adoption`
+             WHERE `user_id`='&1'
              AND `cache_id`='&2'",
             $userid,
             $this->nCacheId
@@ -718,18 +718,18 @@ class cache
                     IFNULL(`tt`.`text`, `crs`.`name`) AS `status`,
                     IFNULL(`tt2`.`text`, `crr`.`name`) AS `reason`
              FROM `cache_reports` AS `cr`
-             LEFT JOIN `cache_report_reasons` AS `crr` 
+             LEFT JOIN `cache_report_reasons` AS `crr`
                  ON `cr`.`reason`=`crr`.`id`
-             LEFT JOIN `user` AS `users` 
+             LEFT JOIN `user` AS `users`
                  ON `users`.`user_id`=`cr`.`userid`
-             LEFT JOIN `user` AS `admins` 
+             LEFT JOIN `user` AS `admins`
                  ON `admins`.`user_id`=`cr`.`adminid`
              LEFT JOIN `cache_report_status` AS `crs`
                  ON `cr`.`status`=`crs`.`id`
-             LEFT JOIN `sys_trans_text` AS `tt` 
-                 ON `crs`.`trans_id`=`tt`.`trans_id` 
+             LEFT JOIN `sys_trans_text` AS `tt`
+                 ON `crs`.`trans_id`=`tt`.`trans_id`
                  AND `tt`.`lang`='&2'
-             LEFT JOIN `sys_trans_text` AS `tt2` 
+             LEFT JOIN `sys_trans_text` AS `tt2`
                  ON `crr`.`trans_id`=`tt2`.`trans_id`
                  AND `tt2`.`lang`='&2'
              WHERE `cr`.`cacheid`='&1'
@@ -764,17 +764,17 @@ class cache
                     IFNULL(`stt_old`.`text`,`cs_old`.`name`) AS `old_status`,
                     IFNULL(`stt_new`.`text`,`cs_new`.`name`) AS `new_status`
             FROM `cache_status_modified` `csm`
-            LEFT JOIN `cache_status` `cs_old` 
+            LEFT JOIN `cache_status` `cs_old`
                 ON `cs_old`.`id`=`csm`.`old_state`
-            LEFT JOIN `sys_trans_text` `stt_old` 
-                ON `stt_old`.`trans_id`=`cs_old`.`trans_id` 
+            LEFT JOIN `sys_trans_text` `stt_old`
+                ON `stt_old`.`trans_id`=`cs_old`.`trans_id`
                 AND `stt_old`.`lang`='&2'
             LEFT JOIN `cache_status` `cs_new`
                 ON `cs_new`.`id`=`csm`.`new_state`
             LEFT JOIN `sys_trans_text` `stt_new`
                 ON `stt_new`.`trans_id`=`cs_new`.`trans_id`
                 AND `stt_new`.`lang`='&2'
-            LEFT JOIN `user` 
+            LEFT JOIN `user`
                 ON `user`.`user_id`=`csm`.`user_id`
             WHERE `cache_id`='&1'
             ORDER BY `date_modified` DESC",

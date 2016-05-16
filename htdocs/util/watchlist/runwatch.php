@@ -129,7 +129,7 @@ $rsUsers = sql(
         `user`.`user_id`,
         `user`.`username`,
         `user`.`email`,
-        `user`.`watchmail_mode`, 
+        `user`.`watchmail_mode`,
         `user`.`watchmail_hour`,
         `user`.`watchmail_day`,
         `user`.`watchmail_nextmail`,
@@ -364,7 +364,7 @@ function process_owner_log($user_id, $log_id)
 
     sql(
         "INSERT IGNORE INTO `watches_waiting`
-         (`user_id`, `object_id`, `object_type`, `date_created`, `watchtext`, `watchtype`) 
+         (`user_id`, `object_id`, `object_type`, `date_created`, `watchtext`, `watchtype`)
          VALUES ('&1', '&2', 1, NOW(), '&3', 1)",
         $user_id,
         $log_id,
@@ -482,8 +482,8 @@ function process_log_watch($user_id, $log_id)
     }
 
     sql(
-        "INSERT IGNORE INTO watches_waiting 
-            (`user_id`, `object_id`, `object_type`, `date_created`, `watchtext`, `watchtype`) 
+        "INSERT IGNORE INTO watches_waiting
+            (`user_id`, `object_id`, `object_type`, `date_created`, `watchtext`, `watchtype`)
             VALUES ('&1', '&2', 1, NOW(), '&3', 2)",
         $user_id,
         $log_id,

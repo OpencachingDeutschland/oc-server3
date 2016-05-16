@@ -113,15 +113,15 @@ function listRequestsByCacheId($cacheid)
     }
 
     $rs = sql(
-        "SELECT 
+        "SELECT
              `caches`.`cache_id` AS `id`,
              `user`.`user_id` AS `userid`,
-             `user`.`username` AS `username`, 
+             `user`.`username` AS `username`,
              `cache_adoption`.`date_created`
          FROM `caches`
-         INNER JOIN `cache_adoption` 
+         INNER JOIN `cache_adoption`
              ON `caches`.`cache_id` = `cache_adoption`.`cache_id`
-         INNER JOIN `user` 
+         INNER JOIN `user`
              ON `cache_adoption`.`user_id`=`user`.`user_id`
          WHERE `caches`.`cache_id`='&1'",
         $cacheid
@@ -141,16 +141,16 @@ function listRequestsByUserId()
     $tpl->menuitem = MNU_MYPROFILE_ADOPT;
 
     $rs = sql(
-        "SELECT 
+        "SELECT
              `caches`.`cache_id` AS `id`,
              `caches`.`name` AS `cachename`,
              `user`.`user_id` AS `ownerid`,
              `user`.`username` AS `ownername`,
              `cache_adoption`.`date_created`
          FROM `caches`
-         INNER JOIN `cache_adoption` 
+         INNER JOIN `cache_adoption`
              ON `caches`.`cache_id` = `cache_adoption`.`cache_id`
-         INNER JOIN `user` 
+         INNER JOIN `user`
              ON `caches`.`user_id`=`user`.`user_id`
          WHERE `cache_adoption`.`user_id`='&1'",
         $login->userid

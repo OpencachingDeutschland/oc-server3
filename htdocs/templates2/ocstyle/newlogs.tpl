@@ -99,7 +99,7 @@
     {/if}
 </p>
 
-<table width="100%" class="table"> 
+<table width="100%" class="table">
     <tr><td class="spacer"></td></tr>
     {assign var='lastCountry' value=''}
 

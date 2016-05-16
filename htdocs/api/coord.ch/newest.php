@@ -13,11 +13,11 @@ $bFirstRow = true;
 
 $rs = sql(
     'SELECT SQL_BUFFER_RESULT `caches`.`wp_oc` , `caches`.`name` , `user`.`user_id` , `user`.`username`
-     FROM `caches` 
+     FROM `caches`
      INNER JOIN `user` ON `caches`.`user_id` = `user`.`user_id`
      INNER JOIN `cache_status` ON `caches`.`status` = `cache_status`.`id`
-     WHERE `cache_status`.`allow_user_view` = 1 
-     ORDER BY `caches`.`date_created` 
+     WHERE `cache_status`.`allow_user_view` = 1
+     ORDER BY `caches`.`date_created`
      DESC LIMIT 3'
 );
 while ($r = sql_fetch_assoc($rs)) {

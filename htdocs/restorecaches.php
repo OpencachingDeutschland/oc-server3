@@ -579,7 +579,7 @@ function get_archive_data($caches)
             `type`,
             `date`,
             `restored_by`,
-            `username` 
+            `username`
         FROM
               (SELECT 1 AS `op`, `deletion_date` AS `date_modified`, `cache_id`,
                     `user_id`, `type`, `date`, `restored_by`
@@ -911,7 +911,7 @@ function restore_listings($cacheids, $rdate, $roptions, $simulate)
                             "INSERT INTO `cache_desc`
                             (`node`, `cache_id`, `language`, `desc`, `desc_html`, `desc_htmledit`, `hint`, `short_desc`)
                             VALUES ('&1','&2','&3','&4','&5','&6','&7','&8')
-                            ON DUPLICATE KEY UPDATE 
+                            ON DUPLICATE KEY UPDATE
                             `desc`='&4', `desc_html`='&5', `desc_htmledit`='&6', `hint`='&7', `short_desc`='&8'",
                             $opt['logic']['node']['id'],
                             $cacheid,

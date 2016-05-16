@@ -78,7 +78,7 @@ class HandlerChildWp
     public function getChildWp($childid)
     {
         $rs = sql(
-            'SELECT id, cache_id, type, subtype, latitude, longitude, description 
+            'SELECT id, cache_id, type, subtype, latitude, longitude, description
              FROM coordinates
              WHERE id = &1',
             $childid

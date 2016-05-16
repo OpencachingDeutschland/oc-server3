@@ -3,10 +3,10 @@
 *
 *  Unicode Reminder メモ
 ***************************************************************************}
-	<div class="content2-pagetitle">
-		<img src="resource2/{$opt.template.style}/images/misc/32x32-verein.png" style="margin-right: 10px;" width="32" height="32" alt="" />Opencaching Deutschland e.V.
-	</div>
-	<div class="content-txtbox-noshade" style="padding-right: 25px;">
+    <div class="content2-pagetitle">
+        <img src="resource2/{$opt.template.style}/images/misc/32x32-verein.png" style="margin-right: 10px;" width="32" height="32" alt="" />Opencaching Deutschland e.V.
+    </div>
+    <div class="content-txtbox-noshade" style="padding-right: 25px;">
 
 <p>The Opencaching Deutschland e.V. (e.V. = registered association) was founded on June&nbsp;9, 2012 as new operator of the Opencaching.de (OC) websites - including opencaching.it, opencachingspain.es and opencaching.fr -, and to ensure future development of OC. The association may also support other upcoming Opencaching projects.</p>
 

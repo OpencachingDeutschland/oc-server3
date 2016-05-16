@@ -104,9 +104,9 @@ function changetext()
         $desc_htmledit = isset($_REQUEST['descMode']) && $_REQUEST['descMode'] == '2' ? '0' : '1';
         sql(
             "
-			UPDATE `user`
-			SET `description`='&2', `desc_htmledit`='&3'
-			WHERE `user_id`='&1'",
+            UPDATE `user`
+            SET `description`='&2', `desc_htmledit`='&3'
+            WHERE `user_id`='&1'",
             $login->userid,
             $desctext,
             $desc_htmledit
@@ -136,12 +136,12 @@ function assignFromDB($userid, $include_editor)
 
     $rs = sql(
         "SELECT `p`.`id`, IFNULL(`tt`.`text`, `p`.`name`) AS `name`, `p`.`default_value`, `p`.`check_regex`, `p`.`option_order`, `u`.`option_visible`, `p`.`internal_use`, `p`.`option_input`, IFNULL(`u`.`option_value`, `p`.`default_value`) AS `option_value`
-		           FROM `profile_options` AS `p`
-		      LEFT JOIN `user_options` AS `u` ON `p`.`id`=`u`.`option_id` AND (`u`.`user_id` IS NULL OR `u`.`user_id`='&1')
-		      LEFT JOIN `sys_trans` AS `st` ON `p`.`trans_id`=`st`.`id` AND `p`.`name`=`st`.`text`
-		      LEFT JOIN `sys_trans_text` AS `tt` ON `st`.`id`=`tt`.`trans_id` AND `tt`.`lang`='&2'
-		          WHERE `optionset`=1
-		       ORDER BY `p`.`internal_use` DESC, `p`.`option_order`",
+                   FROM `profile_options` AS `p`
+              LEFT JOIN `user_options` AS `u` ON `p`.`id`=`u`.`option_id` AND (`u`.`user_id` IS NULL OR `u`.`user_id`='&1')
+              LEFT JOIN `sys_trans` AS `st` ON `p`.`trans_id`=`st`.`id` AND `p`.`name`=`st`.`text`
+              LEFT JOIN `sys_trans_text` AS `tt` ON `st`.`id`=`tt`.`trans_id` AND `tt`.`lang`='&2'
+                  WHERE `optionset`=1
+               ORDER BY `p`.`internal_use` DESC, `p`.`option_order`",
         $userid + 0,
         $opt['template']['locale']
     );

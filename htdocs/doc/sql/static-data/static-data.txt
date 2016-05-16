@@ -18,7 +18,7 @@ Content: political geographic data (de, at, ch)
 Purpose: searching for caches by city (Ortschaften)
 Used by: lang/de/ocstyle/selectlocid.inc.php
          lib2/logic/geodb.inc.php  (not in use)
-				 search.php
+         search.php
          util2/gns/mkadmtxt.php
 Source:  OpenGeoDb
 Import:  ?

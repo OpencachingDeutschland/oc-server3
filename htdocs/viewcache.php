@@ -109,66 +109,66 @@ if ($login->userid != 0) {
 //get cache record
 $rs = sql(
     "SELECT
-				`caches`.`cache_id` AS `cacheid`,
-				`caches`.`listing_last_modified` AS `lastmodified`,
-				`caches`.`user_id` AS `userid`,
-				`caches`.`status` AS `status`,
-				`caches`.`latitude` AS `latitude`,
-				`caches`.`longitude` AS `longitude`,
-				`caches`.`name` AS `name`,
-				`caches`.`type` AS `type`,
-				`caches`.`size` AS `size`,
-				`caches`.`search_time` AS `searchtime`,
-				`caches`.`way_length` AS `waylength`,
-				`caches`.`country` AS `countryCode`,
-				IFNULL(`ttCountry`.`text`, `countries`.`name`) AS `country`,
-				`caches`.`logpw` AS `logpw`,
-				`caches`.`date_hidden` AS `datehidden`,
-				`caches`.`wp_oc` AS `wpoc`,
-				`caches`.`wp_gc` AS `wpgc`,
-				`caches`.`date_created` AS `datecreated`,
-				`caches`.`is_publishdate` AS `is_publishdate`,
-				`caches`.`difficulty` AS `difficulty`,
-				`caches`.`terrain` AS `terrain`,
-				`caches`.`show_cachelists`,
-				`caches`.`protect_old_coords` OR `user`.`is_active_flag`=0 AS `protect_old_coords`,
-				`caches`.`needs_maintenance`,
-				`caches`.`listing_outdated`,
-				`cache_desc`.`language` AS `desclanguage`,
-				`cache_desc`.`short_desc` AS `shortdesc`,
-				`cache_desc`.`desc` AS `desc`,
-				`cache_desc`.`hint` AS `hint`,
-				`cache_desc`.`desc_html` AS `deschtml`,
-				`cache_status`.`allow_user_log`=1 OR `caches`.`user_id`='&4' AS `log_allowed`,
-				IFNULL(`stat_caches`.`found`, 0) AS `found`,
-				IFNULL(`stat_caches`.`notfound`, 0) AS `notfound`,
-				IFNULL(`stat_caches`.`note`, 0) AS `note`,
-				IFNULL(`stat_caches`.`will_attend`, 0) AS `willattend`,
-				IFNULL(`stat_caches`.`maintenance`, 0) AS `maintenance`,
-				IFNULL(`stat_caches`.`watch`, 0) AS `watcher`,
-				`caches`.`desc_languages` AS `desclanguages`,
-				IFNULL(`stat_caches`.`ignore`, 0) AS `ignorercount`,
-				IFNULL(`stat_caches`.`toprating`, 0) AS `topratings`,
-				IFNULL(`cache_visits`.`count`, 0) AS `visits`,
-				`user`.`username` AS `username`,
-				IFNULL(`cache_location`.`code1`, '') AS `code1`,
-				IFNULL(`trans2`.`text`, IFNULL(`cache_location`.`adm1`,'')) AS `adm1`,
-				IFNULL(`cache_location`.`adm2`, '') AS `adm2`,
-				IFNULL(`cache_location`.`adm3`, '') AS `adm3`,
-				IFNULL(`cache_location`.`adm4`, '') AS `adm4`
-		     FROM `caches`
-		    INNER JOIN `user` ON `caches`.`user_id`=`user`.`user_id`
-		    INNER JOIN `cache_desc` ON `caches`.`cache_id`=`cache_desc`.`cache_id` AND `cache_desc`.`language`=PREFERED_LANG(`caches`.`desc_languages`, '&3')
-		    INNER JOIN `cache_status` ON `caches`.`status`=`cache_status`.`id`
-		     LEFT JOIN `cache_location` ON `caches`.`cache_id` = `cache_location`.`cache_id`
-		     LEFT JOIN `countries` ON `caches`.`country`=`countries`.`short`
-		     LEFT JOIN `sys_trans` AS `tCountry` ON `countries`.`trans_id`=`tCountry`.`id` AND `countries`.`name`=`tCountry`.`text`
-		     LEFT JOIN `sys_trans_text` AS `ttCountry` ON `tCountry`.`id`=`ttCountry`.`trans_id` AND `ttCountry`.`lang`='&2'
-		     LEFT JOIN `countries` `c2` ON `c2`.`short`=`cache_location`.`code1`
-		     LEFT JOIN `sys_trans_text` `trans2` ON `trans2`.`trans_id`=`c2`.`trans_id` AND `trans2`.`lang`='&2'
-		     LEFT JOIN `cache_visits` ON `cache_visits`.`cache_id`=`caches`.`cache_id` AND `user_id_ip`='0'
-		     LEFT JOIN `stat_caches` ON `caches`.`cache_id`=`stat_caches`.`cache_id`
-		    WHERE `caches`.`cache_id`='&1'",
+                `caches`.`cache_id` AS `cacheid`,
+                `caches`.`listing_last_modified` AS `lastmodified`,
+                `caches`.`user_id` AS `userid`,
+                `caches`.`status` AS `status`,
+                `caches`.`latitude` AS `latitude`,
+                `caches`.`longitude` AS `longitude`,
+                `caches`.`name` AS `name`,
+                `caches`.`type` AS `type`,
+                `caches`.`size` AS `size`,
+                `caches`.`search_time` AS `searchtime`,
+                `caches`.`way_length` AS `waylength`,
+                `caches`.`country` AS `countryCode`,
+                IFNULL(`ttCountry`.`text`, `countries`.`name`) AS `country`,
+                `caches`.`logpw` AS `logpw`,
+                `caches`.`date_hidden` AS `datehidden`,
+                `caches`.`wp_oc` AS `wpoc`,
+                `caches`.`wp_gc` AS `wpgc`,
+                `caches`.`date_created` AS `datecreated`,
+                `caches`.`is_publishdate` AS `is_publishdate`,
+                `caches`.`difficulty` AS `difficulty`,
+                `caches`.`terrain` AS `terrain`,
+                `caches`.`show_cachelists`,
+                `caches`.`protect_old_coords` OR `user`.`is_active_flag`=0 AS `protect_old_coords`,
+                `caches`.`needs_maintenance`,
+                `caches`.`listing_outdated`,
+                `cache_desc`.`language` AS `desclanguage`,
+                `cache_desc`.`short_desc` AS `shortdesc`,
+                `cache_desc`.`desc` AS `desc`,
+                `cache_desc`.`hint` AS `hint`,
+                `cache_desc`.`desc_html` AS `deschtml`,
+                `cache_status`.`allow_user_log`=1 OR `caches`.`user_id`='&4' AS `log_allowed`,
+                IFNULL(`stat_caches`.`found`, 0) AS `found`,
+                IFNULL(`stat_caches`.`notfound`, 0) AS `notfound`,
+                IFNULL(`stat_caches`.`note`, 0) AS `note`,
+                IFNULL(`stat_caches`.`will_attend`, 0) AS `willattend`,
+                IFNULL(`stat_caches`.`maintenance`, 0) AS `maintenance`,
+                IFNULL(`stat_caches`.`watch`, 0) AS `watcher`,
+                `caches`.`desc_languages` AS `desclanguages`,
+                IFNULL(`stat_caches`.`ignore`, 0) AS `ignorercount`,
+                IFNULL(`stat_caches`.`toprating`, 0) AS `topratings`,
+                IFNULL(`cache_visits`.`count`, 0) AS `visits`,
+                `user`.`username` AS `username`,
+                IFNULL(`cache_location`.`code1`, '') AS `code1`,
+                IFNULL(`trans2`.`text`, IFNULL(`cache_location`.`adm1`,'')) AS `adm1`,
+                IFNULL(`cache_location`.`adm2`, '') AS `adm2`,
+                IFNULL(`cache_location`.`adm3`, '') AS `adm3`,
+                IFNULL(`cache_location`.`adm4`, '') AS `adm4`
+             FROM `caches`
+            INNER JOIN `user` ON `caches`.`user_id`=`user`.`user_id`
+            INNER JOIN `cache_desc` ON `caches`.`cache_id`=`cache_desc`.`cache_id` AND `cache_desc`.`language`=PREFERED_LANG(`caches`.`desc_languages`, '&3')
+            INNER JOIN `cache_status` ON `caches`.`status`=`cache_status`.`id`
+             LEFT JOIN `cache_location` ON `caches`.`cache_id` = `cache_location`.`cache_id`
+             LEFT JOIN `countries` ON `caches`.`country`=`countries`.`short`
+             LEFT JOIN `sys_trans` AS `tCountry` ON `countries`.`trans_id`=`tCountry`.`id` AND `countries`.`name`=`tCountry`.`text`
+             LEFT JOIN `sys_trans_text` AS `ttCountry` ON `tCountry`.`id`=`ttCountry`.`trans_id` AND `ttCountry`.`lang`='&2'
+             LEFT JOIN `countries` `c2` ON `c2`.`short`=`cache_location`.`code1`
+             LEFT JOIN `sys_trans_text` `trans2` ON `trans2`.`trans_id`=`c2`.`trans_id` AND `trans2`.`lang`='&2'
+             LEFT JOIN `cache_visits` ON `cache_visits`.`cache_id`=`caches`.`cache_id` AND `user_id_ip`='0'
+             LEFT JOIN `stat_caches` ON `caches`.`cache_id`=`stat_caches`.`cache_id`
+            WHERE `caches`.`cache_id`='&1'",
     $cacheid,
     $opt['template']['locale'],
     $sPreferedDescLang,
@@ -218,11 +218,11 @@ $rCache['adminlog'] = !$rCache['log_allowed'] && ($login->admin & ADMIN_USER);
 
 $rs = sql(
     "
-		SELECT `short` `code`, `native_name`, `stt`.`text` AS `name`
-		FROM `languages`
-		JOIN `cache_desc` ON `cache_desc`.`language`=`languages`.`short`
-		LEFT JOIN `sys_trans_text` `stt` ON `stt`.`trans_id`=`languages`.`trans_id` AND `stt`.`lang`='&2'
-		WHERE `cache_desc`.`cache_id`='&1'",
+        SELECT `short` `code`, `native_name`, `stt`.`text` AS `name`
+        FROM `languages`
+        JOIN `cache_desc` ON `cache_desc`.`language`=`languages`.`short`
+        LEFT JOIN `sys_trans_text` `stt` ON `stt`.`trans_id`=`languages`.`trans_id` AND `stt`.`lang`='&2'
+        WHERE `cache_desc`.`cache_id`='&1'",
     $cacheid,
     $opt['template']['locale']
 );
@@ -328,12 +328,12 @@ $tpl->assign('loganz', $loganz);
 $rs = sql(
     "SELECT `npa_areas`.`id` AS `npaId`, `npa_areas`.`type_id` AS `npaType`, `npa_areas`.`name` AS `npaName`,
             `npa_types`.`name` AS `npaTypeName`
-	             FROM `cache_npa_areas`
-	       INNER JOIN `npa_areas` ON `cache_npa_areas`.`npa_id`=`npa_areas`.`id`
-	       INNER JOIN `npa_types` ON `npa_areas`.`type_id`=`npa_types`.`id`
-	            WHERE `cache_npa_areas`.`cache_id`='&1' AND `npa_types`.`no_warning`=0
-	         GROUP BY `npa_areas`.`type_id`, `npa_areas`.`name`
-	         ORDER BY `npa_types`.`ordinal` ASC",
+                 FROM `cache_npa_areas`
+           INNER JOIN `npa_areas` ON `cache_npa_areas`.`npa_id`=`npa_areas`.`id`
+           INNER JOIN `npa_types` ON `npa_areas`.`type_id`=`npa_types`.`id`
+                WHERE `cache_npa_areas`.`cache_id`='&1' AND `npa_types`.`no_warning`=0
+             GROUP BY `npa_areas`.`type_id`, `npa_areas`.`name`
+             ORDER BY `npa_types`.`ordinal` ASC",
     $cacheid
 );
 $tpl->assign_rs('npaareasWarning', $rs);
@@ -342,12 +342,12 @@ sql_free_result($rs);
 $rs = sql(
     "SELECT `npa_areas`.`id` AS `npaId`, `npa_areas`.`type_id` AS `npaType`, `npa_areas`.`name` AS `npaName`,
             `npa_types`.`name` AS `npaTypeName`
-	             FROM `cache_npa_areas`
-	       INNER JOIN `npa_areas` ON `cache_npa_areas`.`npa_id`=`npa_areas`.`id`
-	       INNER JOIN `npa_types` ON `npa_areas`.`type_id`=`npa_types`.`id`
-	            WHERE `cache_npa_areas`.`cache_id`='&1' AND `npa_types`.`no_warning`=1
-	         GROUP BY `npa_areas`.`type_id`, `npa_areas`.`name`
-	         ORDER BY `npa_types`.`ordinal` ASC",
+                 FROM `cache_npa_areas`
+           INNER JOIN `npa_areas` ON `cache_npa_areas`.`npa_id`=`npa_areas`.`id`
+           INNER JOIN `npa_types` ON `npa_areas`.`type_id`=`npa_types`.`id`
+                WHERE `cache_npa_areas`.`cache_id`='&1' AND `npa_types`.`no_warning`=1
+             GROUP BY `npa_areas`.`type_id`, `npa_areas`.`name`
+             ORDER BY `npa_types`.`ordinal` ASC",
     $cacheid
 );
 $tpl->assign_rs('npaareasNoWarning', $rs);
@@ -372,12 +372,12 @@ $rsGeoKret = sql(
      INNER JOIN `caches` ON `gk_item_waypoint`.`wp`=`caches`.`wp_oc`
      WHERE `caches`.`cache_id`='&1' AND `gk_item`.`typeid`!=2 AND `gk_item`.`stateid` IN (0, 3)
      AND `gk_item_waypoint`.`wp`!='' UNION
-	             SELECT `gk_item`.`id`, `gk_item`.`name` AS `itemname`, `gk_user`.`name` AS `username` FROM `gk_item`
-	             INNER JOIN `gk_item_waypoint` ON `gk_item`.`id`=`gk_item_waypoint`.`id`
-	             INNER JOIN `gk_user` ON `gk_item`.`userid`=`gk_user`.`id`
-	             INNER JOIN `caches` ON `gk_item_waypoint`.`wp`=`caches`.`wp_gc` WHERE `caches`.`cache_id`='&1'
-	             AND `gk_item`.`typeid`!=2 AND `gk_item`.`stateid` IN (0, 3) AND `gk_item_waypoint`.`wp`!=''
-	             ORDER BY `itemname`",
+                 SELECT `gk_item`.`id`, `gk_item`.`name` AS `itemname`, `gk_user`.`name` AS `username` FROM `gk_item`
+                 INNER JOIN `gk_item_waypoint` ON `gk_item`.`id`=`gk_item_waypoint`.`id`
+                 INNER JOIN `gk_user` ON `gk_item`.`userid`=`gk_user`.`id`
+                 INNER JOIN `caches` ON `gk_item_waypoint`.`wp`=`caches`.`wp_gc` WHERE `caches`.`cache_id`='&1'
+                 AND `gk_item`.`typeid`!=2 AND `gk_item`.`stateid` IN (0, 3) AND `gk_item_waypoint`.`wp`!=''
+                 ORDER BY `itemname`",
     $cacheid
 );
 $tpl->assign_rs('geokret', $rsGeoKret);

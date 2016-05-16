@@ -885,7 +885,7 @@ sql(
             UPDATE `cache_waypoint_pool`
             SET `uuid`=NEW.`uuid`
             WHERE `uuid` IS NULL ORDER BY WPTODEC(`wp_oc`, '&1') ASC LIMIT 1;
-					
+                    
             IF (SELECT COUNT(*) FROM `cache_waypoint_pool` WHERE `uuid`=NEW.`uuid`) = 0 THEN
 
                 /* waypoint reservation was not successfull. Maybe we are on a development machine, where cronjob for waypoint pool
@@ -1180,7 +1180,7 @@ sql(
             SET NEW.`date_created`=NOW();
             SET NEW.`last_modified`=NOW();
         END IF;
-				
+                
         IF ISNULL(NEW.`uuid`) OR NEW.`uuid`='' THEN
             SET NEW.`uuid`=CREATE_UUID();
         END IF;

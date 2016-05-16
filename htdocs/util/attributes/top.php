@@ -29,9 +29,9 @@ if (isset($_REQUEST['post'])) {
 $attrs = array();
 $rsAttribs = sql(
     "SELECT `caches_attributes`.`attrib_id`
-	FROM `caches_attributes`, `caches`
-	WHERE `caches_attributes`.`cache_id`=`caches`.`cache_id`
-	AND `caches`.`wp_oc`='&1'",
+    FROM `caches_attributes`, `caches`
+    WHERE `caches_attributes`.`cache_id`=`caches`.`cache_id`
+    AND `caches`.`wp_oc`='&1'",
     $wp
 );
 while ($rAttribs = sql_fetch_assoc($rsAttribs)) {

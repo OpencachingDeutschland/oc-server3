@@ -103,35 +103,35 @@ if ($error == false) {
     } else {
         $cache_rs = sql(
             "
-				SELECT
-					`caches`.`uuid`,
-					`caches`.`user_id`,
-					`caches`.`name`,
-					`caches`.`type`,
-					`caches`.`size`,
-					`caches`.`date_hidden`,
-					`caches`.`date_activate`,
-					`caches`.`longitude`,
-					`caches`.`latitude`,
-					`caches`.`country`,
-					`caches`.`terrain`,
-					`caches`.`difficulty`,
-					`caches`.`desc_languages`,
-					`caches`.`status`,
-					`caches`.`search_time`,
-					`caches`.`way_length`,
-					`caches`.`logpw`,
-					`caches`.`wp_oc`,
-					`caches`.`wp_gc`,
-					`caches`.`show_cachelists`,
-					`caches`.`protect_old_coords`,
-					`caches`.`node`,
-					`user`.`username`,
-					`stat_caches`.`picture`
-				FROM `caches`
-				INNER JOIN `user` ON `caches`.`user_id`=`user`.`user_id`
-				LEFT JOIN `stat_caches` ON `caches`.`cache_id`=`stat_caches`.`cache_id`
-				WHERE `caches`.`cache_id`='&1'",
+                SELECT
+                    `caches`.`uuid`,
+                    `caches`.`user_id`,
+                    `caches`.`name`,
+                    `caches`.`type`,
+                    `caches`.`size`,
+                    `caches`.`date_hidden`,
+                    `caches`.`date_activate`,
+                    `caches`.`longitude`,
+                    `caches`.`latitude`,
+                    `caches`.`country`,
+                    `caches`.`terrain`,
+                    `caches`.`difficulty`,
+                    `caches`.`desc_languages`,
+                    `caches`.`status`,
+                    `caches`.`search_time`,
+                    `caches`.`way_length`,
+                    `caches`.`logpw`,
+                    `caches`.`wp_oc`,
+                    `caches`.`wp_gc`,
+                    `caches`.`show_cachelists`,
+                    `caches`.`protect_old_coords`,
+                    `caches`.`node`,
+                    `user`.`username`,
+                    `stat_caches`.`picture`
+                FROM `caches`
+                INNER JOIN `user` ON `caches`.`user_id`=`user`.`user_id`
+                LEFT JOIN `stat_caches` ON `caches`.`cache_id`=`stat_caches`.`cache_id`
+                WHERE `caches`.`cache_id`='&1'",
             $cache_id
         );
         $cache_record = sql_fetch_array($cache_rs);
@@ -579,7 +579,7 @@ if ($error == false) {
                             if ($logtype > 0) {
                                 sql(
                                     "INSERT INTO `cache_logs` (`node`, `cache_id`, `user_id`, `type`, `date`)
-									     VALUES ('&1','&2','&3','&4','&5')",
+                                         VALUES ('&1','&2','&3','&4','&5')",
                                     $oc_nodeid,
                                     $cache_id,
                                     $usr['userid'],
@@ -688,11 +688,11 @@ if ($error == false) {
 
                 $rsAttrGroup = sql(
                     "SELECT `attribute_groups`.`id`, IFNULL(`sys_trans_text`.`text`, `attribute_groups`.`name`) AS `name`, `attribute_categories`.`color`
-					                      FROM `attribute_groups`
-					                INNER JOIN `attribute_categories` ON `attribute_groups`.`category_id`=`attribute_categories`.`id`
-			                     LEFT JOIN `sys_trans` ON `attribute_groups`.`trans_id`=`sys_trans`.`id`
-			                     LEFT JOIN `sys_trans_text` ON `sys_trans`.`id`=`sys_trans_text`.`trans_id` AND `sys_trans_text`.`lang`='&1'
-					                  ORDER BY `attribute_groups`.`category_id` ASC, `attribute_groups`.`id` ASC",
+                                          FROM `attribute_groups`
+                                    INNER JOIN `attribute_categories` ON `attribute_groups`.`category_id`=`attribute_categories`.`id`
+                                 LEFT JOIN `sys_trans` ON `attribute_groups`.`trans_id`=`sys_trans`.`id`
+                                 LEFT JOIN `sys_trans_text` ON `sys_trans`.`id`=`sys_trans_text`.`trans_id` AND `sys_trans_text`.`lang`='&1'
+                                      ORDER BY `attribute_groups`.`category_id` ASC, `attribute_groups`.`id` ASC",
                     $locale
                 );
                 while ($rAttrGroup = sql_fetch_assoc($rsAttrGroup)) {
@@ -700,17 +700,17 @@ if ($error == false) {
 
                     $rs = sql(
                         "SELECT `cache_attrib`.`id`, IFNULL(`ttname`.`text`, `cache_attrib`.`name`) AS `name`, `cache_attrib`.`icon_undef`, `cache_attrib`.`icon_large`,
-						                  IFNULL(`ttdesc`.`text`, `cache_attrib`.`html_desc`) AS `html_desc`
-						             FROM `cache_attrib`
-						        LEFT JOIN `caches_attributes` ON `cache_attrib`.`id`=`caches_attributes`.`attrib_id` AND `caches_attributes`.`cache_id`='&2'
-		                LEFT JOIN `sys_trans` AS `tname` ON `cache_attrib`.`trans_id`=`tname`.`id` AND `cache_attrib`.`name`=`tname`.`text`
-		                LEFT JOIN `sys_trans_text` AS `ttname` ON `tname`.`id`=`ttname`.`trans_id` AND `ttname`.`lang`='&1'
-		                LEFT JOIN `sys_trans` AS `tdesc` ON `cache_attrib`.`html_desc_trans_id`=`tdesc`.`id` AND `cache_attrib`.`html_desc`=`tdesc`.`text`
-		                LEFT JOIN `sys_trans_text` AS `ttdesc` ON `tdesc`.`id`=`ttdesc`.`trans_id` AND `ttdesc`.`lang`='&1'
-						            WHERE `cache_attrib`.`group_id`='&3' AND
-										  NOT IFNULL(`cache_attrib`.`hidden`, 0)=1 AND
-						                  (`cache_attrib`.`selectable`!=0 OR `caches_attributes`.`cache_id`='&2')
-						         ORDER BY `cache_attrib`.`group_id` ASC, `cache_attrib`.`id` ASC",
+                                          IFNULL(`ttdesc`.`text`, `cache_attrib`.`html_desc`) AS `html_desc`
+                                     FROM `cache_attrib`
+                                LEFT JOIN `caches_attributes` ON `cache_attrib`.`id`=`caches_attributes`.`attrib_id` AND `caches_attributes`.`cache_id`='&2'
+                        LEFT JOIN `sys_trans` AS `tname` ON `cache_attrib`.`trans_id`=`tname`.`id` AND `cache_attrib`.`name`=`tname`.`text`
+                        LEFT JOIN `sys_trans_text` AS `ttname` ON `tname`.`id`=`ttname`.`trans_id` AND `ttname`.`lang`='&1'
+                        LEFT JOIN `sys_trans` AS `tdesc` ON `cache_attrib`.`html_desc_trans_id`=`tdesc`.`id` AND `cache_attrib`.`html_desc`=`tdesc`.`text`
+                        LEFT JOIN `sys_trans_text` AS `ttdesc` ON `tdesc`.`id`=`ttdesc`.`trans_id` AND `ttdesc`.`lang`='&1'
+                                    WHERE `cache_attrib`.`group_id`='&3' AND
+                                          NOT IFNULL(`cache_attrib`.`hidden`, 0)=1 AND
+                                          (`cache_attrib`.`selectable`!=0 OR `caches_attributes`.`cache_id`='&2')
+                                 ORDER BY `cache_attrib`.`group_id` ASC, `cache_attrib`.`id` ASC",
                         $locale,
                         $cache_id,
                         $rAttrGroup['id']
@@ -812,11 +812,11 @@ if ($error == false) {
                 $types = '';
                 $rsTypes = sql(
                     "SELECT `cache_type`.`id`, IFNULL(`sys_trans_text`.`text`, `cache_type`.`en`) AS `name`
-														FROM `cache_type`
-											 LEFT JOIN `sys_trans` ON `cache_type`.`trans_id`=`sys_trans`.`id`
-											 LEFT JOIN `sys_trans_text` ON `sys_trans`.`id`=`sys_trans_text`.`trans_id` AND
-																 `sys_trans_text`.`lang`='" . sql_escape($locale) . "'
-												ORDER BY `cache_type`.`ordinal` ASC"
+                                                        FROM `cache_type`
+                                             LEFT JOIN `sys_trans` ON `cache_type`.`trans_id`=`sys_trans`.`id`
+                                             LEFT JOIN `sys_trans_text` ON `sys_trans`.`id`=`sys_trans_text`.`trans_id` AND
+                                                                 `sys_trans_text`.`lang`='" . sql_escape($locale) . "'
+                                                ORDER BY `cache_type`.`ordinal` ASC"
                 );
                 while ($rType = sql_fetch_assoc($rsTypes)) {
                     $sSelected = ($rType['id'] == $cache_type) ? ' selected="selected"' : '';
@@ -833,11 +833,11 @@ if ($error == false) {
                 $sizes = '';
                 $rsSizes = sql(
                     "SELECT `cache_size`.`id`, IFNULL(`sys_trans_text`.`text`, `cache_size`.`name`) AS `name`
-														FROM `cache_size`
-											 LEFT JOIN `sys_trans` ON `cache_size`.`trans_id`=`sys_trans`.`id`
-											 LEFT JOIN `sys_trans_text` ON `sys_trans`.`id`=`sys_trans_text`.`trans_id` AND
-																 `sys_trans_text`.`lang`='" . sql_escape($locale) . "'
-												ORDER BY `cache_size`.`ordinal` ASC"
+                                                        FROM `cache_size`
+                                             LEFT JOIN `sys_trans` ON `cache_size`.`trans_id`=`sys_trans`.`id`
+                                             LEFT JOIN `sys_trans_text` ON `sys_trans`.`id`=`sys_trans_text`.`trans_id` AND
+                                                                 `sys_trans_text`.`lang`='" . sql_escape($locale) . "'
+                                                ORDER BY `cache_size`.`ordinal` ASC"
                 );
                 while ($rSize = sql_fetch_assoc($rsSizes)) {
                     $sSelected = ($rSize['id'] == $sel_size) ? ' selected="selected"' : '';
@@ -906,14 +906,14 @@ if ($error == false) {
                 if ($status_old != 7) {
                     $rsStatus = sql(
                         "SELECT `cache_status`.`id`, IFNULL(`sys_trans_text`.`text`, `cache_status`.`name`) AS `name`
-															 FROM `cache_status`
-												  LEFT JOIN `sys_trans` ON `cache_status`.`trans_id`=`sys_trans`.`id`
-												  LEFT JOIN `sys_trans_text` ON `sys_trans`.`id`=`sys_trans_text`.`trans_id` AND
-																	  `sys_trans_text`.`lang`='" . sql_escape($locale) . "'
-														  WHERE `cache_status`.`id` NOT IN (4, 5, 7) OR `cache_status`.`id`='" . sql_escape(
+                                                             FROM `cache_status`
+                                                  LEFT JOIN `sys_trans` ON `cache_status`.`trans_id`=`sys_trans`.`id`
+                                                  LEFT JOIN `sys_trans_text` ON `sys_trans`.`id`=`sys_trans_text`.`trans_id` AND
+                                                                      `sys_trans_text`.`lang`='" . sql_escape($locale) . "'
+                                                          WHERE `cache_status`.`id` NOT IN (4, 5, 7) OR `cache_status`.`id`='" . sql_escape(
                             $status_old + 0
                         ) . "'
-													 ORDER BY `cache_status`.`id` ASC"
+                                                     ORDER BY `cache_status`.`id` ASC"
                     );
                     while ($rStatus = sql_fetch_assoc($rsStatus)) {
                         $sSelected = ($rStatus['id'] == $status) ? ' selected="selected"' : '';

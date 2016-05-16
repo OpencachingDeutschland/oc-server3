@@ -33,15 +33,15 @@ while ($rLocations = sql_fetch_array($rsLocations)) {
             'lat',
             'geodb_coordinates'
         ) . ' `distance`,
-							`geodb_coordinates`.`loc_id` `loc_id`
-					  FROM `geodb_coordinates`
-					  WHERE `lon` > ' . $minlon . ' AND
-					        `lon` < ' . $maxlon . ' AND
-					        `lat` > ' . $minlat . ' AND
-					        `lat` < ' . $maxlat . '
-					  HAVING `distance` < 10
-					  ORDER BY `distance` ASC
-					  LIMIT 1';
+                            `geodb_coordinates`.`loc_id` `loc_id`
+                      FROM `geodb_coordinates`
+                      WHERE `lon` > ' . $minlon . ' AND
+                            `lon` < ' . $maxlon . ' AND
+                            `lat` > ' . $minlat . ' AND
+                            `lat` < ' . $maxlat . '
+                      HAVING `distance` < 10
+                      ORDER BY `distance` ASC
+                      LIMIT 1';
     $rs = sql($sql);
 
     if (mysql_num_rows($rs) == 1) {

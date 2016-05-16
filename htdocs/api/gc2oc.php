@@ -1,4 +1,4 @@
-<?php
+f<?php
 /***************************************************************************
  *  For license information see doc/license.txt
  *
@@ -14,7 +14,7 @@
  ***************************************************************************/
 
 $opt['rootpath'] = '../';
-require($opt['rootpath'] . 'lib2/web.inc.php');
+require(__DIR__ . '/../lib2/web.inc.php');
 
 if (isset($_REQUEST['report']) && $_REQUEST['report']) {
     header('Content-type: text/plain');
@@ -32,10 +32,11 @@ if (isset($_REQUEST['report']) && $_REQUEST['report']) {
             } elseif (!preg_match("/^GC[0-9A-HJ-NPQRTVWXYZ]{3,7}$/", $gcwp)) {
                 echo "error: invalid gcwp\n";
             } else {
-                sql("
-					INSERT INTO `waypoint_reports`
-					(`date_reported`, `wp_oc`, `wp_external`, `source`)
-					VALUES (NOW(), '&1', '&2', '&3')",
+                sql(
+                    "
+                    INSERT INTO `waypoint_reports`
+                    (`date_reported`, `wp_oc`, `wp_external`, `source`)
+                    VALUES (NOW(), '&1', '&2', '&3')",
                     $ocwp,
                     $gcwp,
                     $source

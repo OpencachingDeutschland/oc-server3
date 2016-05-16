@@ -13,7 +13,7 @@ $tpl->menuitem = MNU_LOGIN;
 if (isset($_REQUEST['source']) && $opt['session']['login_statistics']) {
     sql(
         "INSERT INTO `sys_login_stat` (`day`,`type`,`count`) VALUES (NOW(),'&1',1)
-		 ON DUPLICATE KEY UPDATE `count`=`count`+1",
+         ON DUPLICATE KEY UPDATE `count`=`count`+1",
         $_REQUEST['source']
     );
 }

@@ -31,38 +31,38 @@
 <input type="hidden" name="source" value="loginpage" />
 
 <table class="table">
-	<tr><td class="spacer" colspan="2"></td></tr>
-	{message_start}<tr><td colspan="2" class="message">{message}</td></tr><tr><td class="spacer" colspan="2"></td></tr>{message_end}
-	<tr>
-		<td>{t}Username:{/t}</td>
-		<td><input name="email" maxlength="80" type="text"  value="{username}" class="input200" /></td>
-	</tr>
-	<tr>
-		<td>{t}Password:{/t}</td>
-		<td><input name="password" maxlength="60" type="password"  value="" class="input200" /></td>
-	</tr>
-	<tr><td class="spacer" colspan="2"></td></tr>
+    <tr><td class="spacer" colspan="2"></td></tr>
+    {message_start}<tr><td colspan="2" class="message">{message}</td></tr><tr><td class="spacer" colspan="2"></td></tr>{message_end}
+    <tr>
+        <td>{t}Username:{/t}</td>
+        <td><input name="email" maxlength="80" type="text"  value="{username}" class="input200" /></td>
+    </tr>
+    <tr>
+        <td>{t}Password:{/t}</td>
+        <td><input name="password" maxlength="60" type="password"  value="" class="input200" /></td>
+    </tr>
+    <tr><td class="spacer" colspan="2"></td></tr>
 
-	<tr>
-		<td></td>
-		<td class="header-small">
-			<input type="submit" name="LogMeIn" value="{t}Login{/t}" class="formbutton" />
-		</td>
-	</tr>
-	<tr><td class="spacer" colspan="2"></td></tr>
+    <tr>
+        <td></td>
+        <td class="header-small">
+            <input type="submit" name="LogMeIn" value="{t}Login{/t}" class="formbutton" />
+        </td>
+    </tr>
+    <tr><td class="spacer" colspan="2"></td></tr>
 </table>
 
 </form>
 
 <div class="content-txtbox-noshade systemlink">
-	<p style="line-height: 1.6em;">
-		<br />
-		{t}Not registered?{/t} &nbsp;&rarr;&nbsp; <a href="register.php">{t}Register{/t}</a><br />
-		{t}Forgotten your password?{/t} &nbsp;&rarr;&nbsp; <a href="newpw.php">{t}Create a new password{/t}</a><br />
-		{t}Forgotten your E-Mail-Address?{/t} &nbsp;&rarr;&nbsp; <a href="remindemail.php">{t}Remind me{/t}</a>
-	</p>
-	<p>
-		{t}Here you can find more troubleshooting:{/t} {helplink}{t}Problems with login{/t}</a>.
-	</p>
-	<div class="buffer" style="width: 500px;">&nbsp;</div>
+    <p style="line-height: 1.6em;">
+        <br />
+        {t}Not registered?{/t} &nbsp;&rarr;&nbsp; <a href="register.php">{t}Register{/t}</a><br />
+        {t}Forgotten your password?{/t} &nbsp;&rarr;&nbsp; <a href="newpw.php">{t}Create a new password{/t}</a><br />
+        {t}Forgotten your E-Mail-Address?{/t} &nbsp;&rarr;&nbsp; <a href="remindemail.php">{t}Remind me{/t}</a>
+    </p>
+    <p>
+        {t}Here you can find more troubleshooting:{/t} {helplink}{t}Problems with login{/t}</a>.
+    </p>
+    <div class="buffer" style="width: 500px;">&nbsp;</div>
 </div>

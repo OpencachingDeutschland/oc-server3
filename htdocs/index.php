@@ -85,7 +85,7 @@ if (!$tpl->is_cached()) {
 
     $phpbb_topics = array();
     $tpl->assign('phpbb_topics', $phpbb_topics);
-//		$tpl->assign('phpbb_enabled', ($opt['cron']['phpbbtopics']['url'] != ''));
+//        $tpl->assign('phpbb_enabled', ($opt['cron']['phpbbtopics']['url'] != ''));
     $tpl->assign('phpbb_name', $opt['cron']['phpbbtopics']['name']);
     $tpl->assign('phpbb_link', $opt['cron']['phpbbtopics']['link']);
 

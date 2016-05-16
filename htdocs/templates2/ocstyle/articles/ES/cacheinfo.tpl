@@ -4,11 +4,11 @@
 *  Unicode Reminder メモ
 ***************************************************************************}
 
-	<div class="content2-pagetitle">
-		<img src="resource2/{$opt.template.style}/images/misc/32x32-tools.png" style="margin-right: 10px;" width="32" height="32" alt="" />CREAR UN NUEVO CACHE
-	</div>
+    <div class="content2-pagetitle">
+        <img src="resource2/{$opt.template.style}/images/misc/32x32-tools.png" style="margin-right: 10px;" width="32" height="32" alt="" />CREAR UN NUEVO CACHE
+    </div>
 
-	<div id="cachedescinfo" class="content-txtbox-noshade" style="padding-right: 25px;">
+    <div id="cachedescinfo" class="content-txtbox-noshade" style="padding-right: 25px;">
 
   <p><strong>Nombre:</strong> Ha cada cache se le da un nombre. Múltiples caches pueden tener el mismo nombre, pero se debe evitar esto. Buscando un nombre que tenga que ver con el cache -y evitar significativa denominaciones tales como &quot;A81 # 589&quot;. La única restricción en el nombre de la longitud, con un máximo de 60 caracteres están permitidos.</p>
 
@@ -64,9 +64,9 @@
   <p><a name="time" id="time"></a><strong>Esfuerzo:</strong> ¿Cuánto tiempo tardaré en encontrar el cache desde el punto de partida?</p>
 
   <p>
-		<strong>Atributos del Cache:</strong> los atributos donde se puede obtener más datos de la cache.
-		{include file="articles_res_attributes.tpl"}
-	</p>
+        <strong>Atributos del Cache:</strong> los atributos donde se puede obtener más datos de la cache.
+        {include file="articles_res_attributes.tpl"}
+    </p>
 
   <p><strong>Resumen:</strong> En una frase breve una descripción del cache.</p>
   <p><strong>Descripción:</strong> Aquí debe especificar todos los posibles de lo necesario para encontrar el cache.</p>

@@ -59,8 +59,9 @@ function search_output()
             &searchtmp,
             `caches`,
             `user`
-        WHERE $search_simplerules[] = &searchtmp.`cache_id`=`caches`.`cache_id` 
-        AND &searchtmp.`user_id`=`user`.`user_id`'
+        WHERE
+            &searchtmp.`cache_id`=`caches`.`cache_id` AND
+            &searchtmp.`user_id`=`user`.`user_id`'
     );
 
     while ($r = sql_fetch_array($rs)) {

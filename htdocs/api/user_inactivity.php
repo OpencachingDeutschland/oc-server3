@@ -17,8 +17,8 @@ if ($opt['logic']['api']['user_inactivity']['key'] &&
 ) {
     $loginlag = sql_value(
         "SELECT DATEDIFF(NOW(),`last_login`)
-		 FROM `user`
-		 WHERE `user_id`='&1'",
+         FROM `user`
+         WHERE `user_id`='&1'",
         null,
         $_REQUEST['userid']
     );

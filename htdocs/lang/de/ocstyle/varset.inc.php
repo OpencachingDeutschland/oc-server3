@@ -72,12 +72,12 @@ $error_suffix = '</span>';
 
 $htmlnotice =
  '<tr><td class="spacer" colspan="2"></td></tr>
-	<tr>
-		<td class="help" colspan="2">
-			<img src="lang/de/ocstyle/images/misc/hint.gif" border="0" width="15" height="11" alt="' . t('Notice') . '" title="' . t('Notice') . '" />
-			' . t('Your HTML code will be changed again by a special filter. This is necessary to avoid dangerous HTML-tags,
-				 such as &lt;script&gt;. A list of allowed HTML tags, you can find
-				 <a href="articles.php?page=htmltags">here</a>') . '
-		</td>
-	</tr>
-	';
+    <tr>
+        <td class="help" colspan="2">
+            <img src="lang/de/ocstyle/images/misc/hint.gif" border="0" width="15" height="11" alt="' . t('Notice') . '" title="' . t('Notice') . '" />
+            ' . t('Your HTML code will be changed again by a special filter. This is necessary to avoid dangerous HTML-tags,
+                 such as &lt;script&gt;. A list of allowed HTML tags, you can find
+                 <a href="articles.php?page=htmltags">here</a>') . '
+        </td>
+    </tr>
+    ';

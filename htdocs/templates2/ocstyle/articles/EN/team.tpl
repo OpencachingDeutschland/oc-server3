@@ -3,10 +3,10 @@
 *
 *  Unicode Reminder メモ
 ***************************************************************************}
-	<div class="content2-pagetitle">
-		<img src="resource2/{$opt.template.style}/images/misc/32x32-world.png" style="margin-right: 10px;" width="32" height="32" alt="" />The Opencaching.de team
-	</div>
-	<div class="content-txtbox-noshade" style="padding-right: 25px;">
+    <div class="content2-pagetitle">
+        <img src="resource2/{$opt.template.style}/images/misc/32x32-world.png" style="margin-right: 10px;" width="32" height="32" alt="" />The Opencaching.de team
+    </div>
+    <div class="content-txtbox-noshade" style="padding-right: 25px;">
 
 <p>We would like to introduce our team of volunteers, which is restlessly working behind the scenery for you, the users of opencaching.de, opencaching.it, opencachingspain.es and opencaching.fr.</p>
 

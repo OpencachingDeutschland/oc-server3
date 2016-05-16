@@ -3,13 +3,13 @@
 *
 *  Unicode Reminder メモ
 ***************************************************************************}
-	<div class="content2-pagetitle">
-		<img src="resource2/{$opt.template.style}/images/cacheicon/traditional.gif" style="margin-right: 10px;" width="32" height="32" alt="" />&Uuml;ber Geocaching
-	</div>
-	<div class="content-txtbox-noshade" style="padding-right: 25px;">
+    <div class="content2-pagetitle">
+        <img src="resource2/{$opt.template.style}/images/cacheicon/traditional.gif" style="margin-right: 10px;" width="32" height="32" alt="" />&Uuml;ber Geocaching
+    </div>
+    <div class="content-txtbox-noshade" style="padding-right: 25px;">
 
 <div style="float:right; margin: 0 0 10px 10px;">
-	<img src="images/ueber_oc.jpg" alt="" />
+    <img src="images/ueber_oc.jpg" alt="" />
 </div>
 
 <p>Geocaching l&auml;sst sich am besten als eine Art moderner Schnitzeljagd beschreiben. Kurz und allgemein gefasst: Es gibt Leute, die verstecken irgendwo Dosen voller kleiner netter Dinge sowie einem Logbuch, und ver&ouml;ffentlichen das Versteck in Form von Koordinaten im Internet.</p>

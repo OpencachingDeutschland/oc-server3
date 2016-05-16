@@ -3,13 +3,13 @@
 *
 *  Unicode Reminder メモ
 ***************************************************************************}
-	<div class="content2-pagetitle">
-		<img src="resource2/{$opt.template.style}/images/cacheicon/traditional.gif" style="margin-right: 10px;" width="32" height="32" alt="" />About Geocaching
-	</div>
-	<div class="content-txtbox-noshade" style="padding-right: 25px;">
+    <div class="content2-pagetitle">
+        <img src="resource2/{$opt.template.style}/images/cacheicon/traditional.gif" style="margin-right: 10px;" width="32" height="32" alt="" />About Geocaching
+    </div>
+    <div class="content-txtbox-noshade" style="padding-right: 25px;">
 
 <div style="float:right; margin: 0 0 10px 10px;">
-	<img src="images/ueber_oc.jpg" alt="" />
+    <img src="images/ueber_oc.jpg" alt="" />
 </div>
 
 <p>Geocaching is a form of modern treasure hunt. Simplified and generally speaking: There are people who hide containers with nice things and a logbook somewhere, preferrably at nice places, and publish the stash location by means of GPS coordinates on the internet (preferrably at Opencaching). Other people read this <em>geocache listings</em>, note the coordinates and use their GPS device to find the treasures. They log their visit in the on-site logbook, maybe exchange items stored in the cache, hide the container at the same place and log their visit online at the geocaching website.</p>

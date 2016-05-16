@@ -3,13 +3,13 @@
 *
 *  Unicode Reminder メモ
 ***************************************************************************}
-	<div class="content2-pagetitle">
-		<img src="resource2/{$opt.template.style}/images/cacheicon/traditional.gif" style="margin-right: 10px;" width="32" height="32" alt="" />Cosa è il Geocaching
-	</div>
-	<div class="content-txtbox-noshade" style="padding-right: 25px;">
+    <div class="content2-pagetitle">
+        <img src="resource2/{$opt.template.style}/images/cacheicon/traditional.gif" style="margin-right: 10px;" width="32" height="32" alt="" />Cosa è il Geocaching
+    </div>
+    <div class="content-txtbox-noshade" style="padding-right: 25px;">
 
 <div style="float:right; margin: 0 0 10px 10px;">
-	<img src="images/ueber_oc.jpg" alt="" />
+    <img src="images/ueber_oc.jpg" alt="" />
 </div>
 
 <p>Il Geocaching può essere meglio descritto come una caccia al tesoro moderna. In breve: da qualche parte sono nascoste delle scatololine piene di simpatiche piccole cose e contenenti un giornale di bordo. E il nascondiglio della scatola, o meglio le coordinate del luogo, si trovano sul web.</p>

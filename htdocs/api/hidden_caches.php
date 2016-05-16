@@ -10,17 +10,17 @@
  ***************************************************************************/
 
 $opt['rootpath'] = '../';
-require($opt['rootpath'] . 'lib2/web.inc.php');
+require(__DIR__ . '/../lib2/web.inc.php');
 
 header('Content-type: text/plain; charset=utf-8');
 
 $rs = sql(
-    "SELECT `wp_oc`
+    'SELECT `wp_oc`
      FROM `caches`
      JOIN `cache_status` ON `cache_status`.`id`=`caches`.`status`
      WHERE `cache_status`.`allow_user_view`= 0 
      AND `caches`.`status` != 5
-     ORDER BY `cache_id`"
+     ORDER BY `cache_id`'
 );
 $wp_ocs = sql_fetch_column($rs);
 foreach ($wp_ocs as $wp_oc) {

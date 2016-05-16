@@ -11,17 +11,20 @@ header('Content-type: text/html; charset=utf-8');
 
 if (isset($_REQUEST['text'])) {
     $text = $_REQUEST['text'];
-    $text = str_replace(array(
-        '<br>',
-        '<br/>',
-        '<br />'
-    ), "\n", $text);
+    $text = str_replace(
+        [
+            '<br>',
+            '<br/>',
+            '<br />'
+        ],
+        "\n",
+        $text
+    );
     $text = hint_rot13($text);
     $text = htmlentities($text);
     $text = nl2br($text);
     echo $text;
 }
-
 
 function hint_rot13($in)
 {

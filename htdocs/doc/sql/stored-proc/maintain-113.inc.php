@@ -124,7 +124,7 @@ sql("CREATE FUNCTION `ptonline` (nLat DOUBLE, nLon DOUBLE, nLatPt1 DOUBLE, nLonP
                 DECLARE nProjAngle DOUBLE DEFAULT 0;
                 DECLARE nAngleProj DOUBLE DEFAULT 0;
                 DECLARE nAnglePt1Proj DOUBLE DEFAULT 0;
-			
+            
                 IF nLonPt2 < nLonPt1 THEN
                     SET nTmpLon = nLonPt1;
                     SET nTmpLat = nLatPt1;
@@ -133,7 +133,7 @@ sql("CREATE FUNCTION `ptonline` (nLat DOUBLE, nLon DOUBLE, nLatPt1 DOUBLE, nLonP
                     SET nLonPt2 = nTmpLon;
                     SET nLatPt2 = nTmpLat;
                 END IF;
-			
+            
               IF nLonPt1 = nLonPt2 THEN
                     SET nLonPt2 = nLonPt2 + 0.000001;
                 END IF;
@@ -167,7 +167,7 @@ sql("CREATE FUNCTION `ptonline` (nLat DOUBLE, nLon DOUBLE, nLatPt1 DOUBLE, nLonP
                         RETURN 0;
                     END IF;
                 END IF;
-		  
+          
                 IF (nAngleLinePt2 > 90) OR (nAngleLinePt2 < -90) THEN
                     SET nDistancePt2 = distance(nLat, nLon, nLatPt2, nLonPt2);
                     IF nDistancePt2 < nMaxDistance THEN
@@ -202,7 +202,7 @@ sql("CREATE FUNCTION `ptonline` (nLat DOUBLE, nLon DOUBLE, nLatPt1 DOUBLE, nLonP
                 IF nAngleProj < -180 THEN
                     SET nAngleProj = nAngleProj + 360;
                 END IF;
-		  
+          
                 IF (nAngleLinePt1 >= 0) AND (nAngleProj < 0) THEN
                     RETURN 1;
                 ELSEIF (nAngleLinePt1 < 0) AND (nAngleProj >= 0) THEN
@@ -772,18 +772,18 @@ sql("CREATE TRIGGER `cachesBeforeInsert` BEFORE INSERT ON `caches`
                     END IF;
 
                     /* reserve and set cache waypoint
-				 *
+                 *
                      * Table cache_waypoint_pool is used to prevent race conditions
                      * when 2 caches will be inserted simultaneously
                      */
                     IF ISNULL(NEW.`wp_oc`) OR NEW.`wp_oc`='' THEN
-					
+                    
                         /* cleanup previous assignments failures /*
                         DELETE FROM `cache_waypoint_pool` WHERE `uuid`=NEW.`uuid`;
 
                         /* reserve a waypoint */
                         UPDATE `cache_waypoint_pool` SET `uuid`=NEW.`uuid` WHERE `uuid` IS NULL ORDER BY WPTODEC(`wp_oc`, '&1') ASC LIMIT 1;
-					
+                    
                         IF (SELECT COUNT(*) FROM `cache_waypoint_pool` WHERE `uuid`=NEW.`uuid`) = 0 THEN
 
                             /* waypoint reservation was not successfull. Maybe we are on a development machine, where cronjob for waypoint pool
@@ -965,7 +965,7 @@ sql("CREATE TRIGGER `cacheDescBeforeInsert` BEFORE INSERT ON `cache_desc`
                         SET NEW.`date_created`=NOW();
                         SET NEW.`last_modified`=NOW();
                     END IF;
-				
+                
                     IF ISNULL(NEW.`uuid`) OR NEW.`uuid`='' THEN
                         SET NEW.`uuid`=CREATE_UUID();
                     END IF;
@@ -1468,7 +1468,7 @@ sql("CREATE TRIGGER `userBeforeUpdate` BEFORE UPDATE ON `user`
                            NEW.`username`!=OLD.`username` OR
                            NEW.`pmr_flag`!=OLD.`pmr_flag` OR
                            NEW.`description`!=OLD.`description` THEN
-					   
+                       
                             SET NEW.`last_modified`=NOW();
                         END IF;
                     END IF;

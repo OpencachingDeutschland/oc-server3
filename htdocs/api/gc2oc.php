@@ -1,4 +1,4 @@
-<?php
+f<?php
 /***************************************************************************
  *  For license information see doc/license.txt
  *
@@ -32,7 +32,8 @@ if (isset($_REQUEST['report']) && $_REQUEST['report']) {
             } elseif (!preg_match("/^GC[0-9A-HJ-NPQRTVWXYZ]{3,7}$/", $gcwp)) {
                 echo "error: invalid gcwp\n";
             } else {
-                sql("
+                sql(
+                    "
                     INSERT INTO `waypoint_reports`
                     (`date_reported`, `wp_oc`, `wp_external`, `source`)
                     VALUES (NOW(), '&1', '&2', '&3')",

@@ -62,6 +62,9 @@ $opt['db']['error']['subject'] = 'sql_error';
  */
 $opt['debug'] = DEBUG_DEVELOPER | DEBUG_SQLDEBUGGER | DEBUG_TRANSLATE | DEBUG_FORCE_TRANSLATE;
 
+// database charset
+$opt['charset']['mysql'] = 'utf8mb4';
+
 // node options
 // see settings-dist.inc.php for known node IDs
 $opt['logic']['node']['id'] = 4;

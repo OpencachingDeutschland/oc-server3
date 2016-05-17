@@ -48,7 +48,7 @@ do {
     ++ $db_version;
     $dbv_function = 'dbv_' . $db_version;
     if (function_exists($dbv_function)) {
-        echo "applying DB mutation #" . $db_version;
+        echo 'applying DB mutation #' . $db_version;
         call_user_func($dbv_function);
         sql(
             "INSERT INTO `sysconfig` (`name`,`value`) VALUES ('db_version','&1')
@@ -69,11 +69,35 @@ return;
 
 // Check if the tables' charset is consistent with $opt['charset']['mysql'].
 // Do an upgrade from utf8 to utf8mb4 if necessary.
+// A downgrade will be denied, because it might lose data.
+// 
 // OKAPI tables upgrade is done by a similar function in OKAPI's update module.
 
 function check_tables_charset($database)
 {
     global $opt;
+
+    # set DB default charset
+
+    $current_db_charset = sql_value(
+        "SELECT DEFAULT_CHARACTER_SET_NAME
+         FROM INFORMATION_SCHEMA.SCHEMATA
+         WHERE SCHEMA_NAME = '&1'",
+        $opt['db']['placeholder']['db']
+    );
+    if ($current_db_charset != $opt['charset']['mysql']) {
+        if ($opt['charset']['mysql'] == 'utf8mb4') {
+            sql(
+                "ALTER DATABASE
+                 DEFAULT CHARACTER SET 'utf8mb4'
+                 DEFAULT COLLATE 'utf8mb4_general_ci'"
+            );
+        } else {
+            echo 'Warning: cannot migrate database to ' .  $opt['charset']['mysql'] . "\n";
+        }
+    }
+
+    # migrate tables
 
     $rs = sql(
         "SELECT TABLE_NAME, TABLE_COLLATION
@@ -85,11 +109,11 @@ function check_tables_charset($database)
     while ($table = sql_fetch_assoc($rs)) {
         $table_collation = explode('_', $table['TABLE_COLLATION']);
         if ($table_collation[0] != $opt['charset']['mysql']) {
-            $migrate = "table `" . $table['TABLE_NAME'] . "` from charset " .
-                $table_collation[0] . " to " . $opt['charset']['mysql'];
+            $migrate = 'table `' . $table['TABLE_NAME'] . '` from charset ' .
+                $table_collation[0] . ' to ' . $opt['charset']['mysql'];
 
             if ($table_collation[0] == 'utf8' && $opt['charset']['mysql'] == 'utf8mb4') {
-                echo "migrating " . $migrate . "\n";
+                echo 'migrating ' . $migrate . "\n";
                 $table_collation[0] = $opt['charset']['mysql'];
                 sql(
                     "ALTER TABLE `&1`
@@ -100,7 +124,7 @@ function check_tables_charset($database)
                     implode('_', $table_collation)
                 );
             } else {
-                echo "Warning: cannot migrate " . $migrate . "\n";
+                echo 'Warning: cannot migrate ' . $migrate . "\n";
             }
         }
     }

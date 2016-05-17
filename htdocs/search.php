@@ -1675,7 +1675,7 @@ function outputSearchForm($options)
     if ($options['searchtype'] == 'bydistance') {
         $dByDistanceChecked = ($options['searchtype'] == 'bydistance');
     } else { // Ocprop
-        $dByDistanceChecked = (!$login->logged_in());
+        $dByDistanceChecked = false;
     }
     $tpl->assign('dbydistance_checked', $dByDistanceChecked);
 
@@ -1704,7 +1704,7 @@ function outputSearchForm($options)
     } elseif ($options['searchtype'] == 'byort') {
         $dByOrtPlzChecked = ($options['searchtype'] == 'byort');  // Ocprop
     } else {
-        $dByOrtPlzChecked = (!$login->logged_in());
+        $dByOrtPlzChecked = false;
     }
     $tpl->assign('dbyortplz_checked', $dByOrtPlzChecked);
 
@@ -1716,7 +1716,7 @@ function outputSearchForm($options)
     if ($options['searchtype'] == 'bywaypoint') {
         $dByWaypointChecked = ($options['searchtype'] == 'bywaypoint');
     } else { // Ocprop
-        $dByWaypointChecked = (!$login->logged_in());
+        $dByWaypointChecked = false;
     }
     $tpl->assign('dbywaypoint_checked', $dByWaypointChecked);
 
@@ -2058,26 +2058,16 @@ function outputSearchForm($options)
     $tpl->assign('ortserror', '');
     if (isset($options['error_plz'])) {
         $tpl->assign('ortserror', $error_plz);
-    } else {
-        if (isset($options['error_ort'])) {
-            $tpl->assign('ortserror', $error_ort);
-        } else {
-            if (isset($options['error_locidnocoords'])) {
-                $tpl->assign('ortserror', $error_locidnocoords);
-            } else {
-                if (isset($options['error_noort'])) {
-                    $tpl->assign('ortserror', $error_noort);
-                } else {
-                    if (isset($options['error_nowaypointfound'])) {
-                        $tpl->assign('ortserror', $error_nowaypointfound);
-                    } else {
-                        if (isset($options['error_nocoords'])) {
-                            $tpl->assign('ortserror', $error_nocoords);
-                        }
-                    }
-                }
-            }
-        }
+    } elseif (isset($options['error_ort'])) {
+        $tpl->assign('ortserror', $error_ort);
+    } elseif (isset($options['error_locidnocoords'])) {
+        $tpl->assign('ortserror', $error_locidnocoords);
+    } elseif (isset($options['error_noort'])) {
+        $tpl->assign('ortserror', $error_noort);
+    } elseif (isset($options['error_nowaypointfound'])) {
+        $tpl->assign('ortserror', $error_nowaypointfound);
+    } elseif (isset($options['error_nocoords'])) {
+        $tpl->assign('ortserror', $error_nocoords);
     }
 
     $tpl->assign('fulltexterror', '');

@@ -35,7 +35,7 @@ function _radio_click(){
             return false;
         }
 
-        if (document.searchbydistance.searchto.value == "searchbyortplz") {
+        if (document.getElementById('sbortplz').checked) {
             if (_sbortplz_click() == true){
                 return true;
             }
@@ -44,7 +44,7 @@ function _radio_click(){
                 return false;
             }
         }
-        else if (document.searchbydistance.searchto.value == "searchbywaypoint") {
+        else if (document.getElementById('sbwaypoint').checked) {
             if (_sbwaypoint_click() == true){
                 return true;
             }
@@ -53,7 +53,7 @@ function _radio_click(){
                 return false;
             }
         }
-        else if (document.searchbydistance.searchto.value == "searchbydistance") {
+        else if (document.getElementById('sbdis').checked) {
             if (_sbd_click() == true){
                 return true;
             }
@@ -64,9 +64,9 @@ function _radio_click(){
         }
         else {
             alert("{t}Select a search button, please!{/t}");
+            resetbutton('submit_dist');
             return false;
         }
-        return true;
 }
 
 function _sbn_click()
@@ -568,7 +568,6 @@ function switchAttributeCat2()
                     <option value="nm" {if $sel_nm}selected="selected"{/if}>{t}Seamiles{/t}</option>
                 </select>
             </td>
-            <td><input type="submit" name="submit_dist" value="{t}Search{/t}" class="formbutton" onclick="submitbutton('submit_dist')" /></td>
         </tr>
         <tr>
             <td class=""><input type="radio" id="sbortplz" name="searchto" value="searchbyortplz" {if $dbyortplz_checked}checked="checked"{/if}><label for="sbortplz">... {t}from City / Postal Code:{/t}</label></td>
@@ -577,7 +576,7 @@ function switchAttributeCat2()
         </tr>
         <tr>
             <td class=""><input type="radio" id="sbwaypoint" name="searchto" value="searchbywaypoint" {if $dbywaypoint_checked}checked="checked"{/if}><label for="sbwaypoint">... {t}from Waypoint:{/t}</label></td>
-            <td><input type="text" name="waypoint" value="{$waypoint}" maxlength="7" class="input50" onfocus="textonfocus(1)"/></td>
+            <td><input type="text" name="waypoint" value="{$waypoint}" maxlength="7" class="input70" onfocus="textonfocus(1)"/></td>
         </tr>
         <tr>
             <td valign="top"><input type="radio" id="sbdis" name="searchto" value="searchbydistance" {if $dbydistance_checked}checked="checked"{/if}><label for="sbdis">... {t}from coordinates:{/t}</label></td>
@@ -596,6 +595,7 @@ function switchAttributeCat2()
                 <input type="text" name="lon_h" maxlength="3" value="{$lon_h}" class="input30" onfocus="textonfocus(2)"/>&nbsp;°&nbsp;
                 <input type="text" name="lon_min" maxlength="6" value="{$lon_min}" class="input50" onfocus="textonfocus(2)"/>&nbsp;'&nbsp;
             </td>
+            <td><input type="submit" name="submit_dist" value="{t}Search{/t}" class="formbutton" onclick="submitbutton('submit_dist')" /></td>
         </tr>
     </form>
 

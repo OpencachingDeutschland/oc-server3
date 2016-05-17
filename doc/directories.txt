@@ -4,7 +4,7 @@
                      Directory structure
 
 
-There are three library framworks:
+Currently there are three library framworks:
 
 - The old OC 1.0 library which we call "lib1",
 - the new OC 2.0 library which we call "lib2",
@@ -14,11 +14,15 @@ lib1 code is being ported to lib2 and will completely disappear.
 libse hopefully, too (see http://redmine.opencaching.de/issues/733).
 
 
-When adding or renaming code directories, add them also to file scanning in
+When adding or renaming code directories, add them - if applicable - also
+to file scanning in
 
 - htdocs/translate.php
-- local/tools/find_bad_encodings.php
-- local/tools/find_unicode_boms.php
+- local/devel/find_bad_encodings.php
+- local/devel/find_unicode_boms.php
+- local/devel/style-cleanup.php
+
+and check if they need .htaccess protection.
 
 
 Main directories
@@ -32,6 +36,8 @@ htdocs      everything which regularly runs on the Opencaching website
 
 local       Special-purpose tools which may be used on development or
             productive systems.
+
+tests       automated tests
 
 
 htdocs subdirectories
@@ -55,7 +61,7 @@ html        some alternatives to index.php which may be displayed e.g.
             if site is out of service
 
 images      images for several purposes
-  flag/flags:  used by both lib1 and lib2. For compatibility reasons with
+  flag/flags   used by both lib1 and lib2. For compatibility reasons with
                "external" links e.g. in cache descriptions, they will have to stay here.
   icons        GC replacement icons for smiley links in copied cache descriptions and logs
   statpics     cached statistics pictures, referenced indirectly via
@@ -67,8 +73,6 @@ lang        lib1 templates and resources; will all be ported to lib2, but some
 
 lib         OC 1.0 library (leftovers)
 lib2        OC 2.0+ library, including 3rd party libraries
-libse       Opencaching.se library, used for additional waypoints and "personal notes"
-            in cache listings
 
 okapi       replicated from https://github.com/opencaching/okapi/tree/master/okapi, with
             core.php:$version_number and $git_revision replaced by current Git commit
@@ -77,15 +81,24 @@ okapi       replicated from https://github.com/opencaching/okapi/tree/master/oka
 old         obsolete files which are included for reference only and will be removed
             later. There are also some 'old' subdirectories at lower levels.
 
-resource2   all lib2 files which are no PHP or template code
-templates2  all lib2 Smarty-processed templates
+resource2   all (published) lib2 files which are no PHP or template code
+
+src/Oc      new OC library structure (work in progress)
+  Libse       Opencaching.se library, used for additional waypoints and "personal notes"
+              in cache listings
+  SmartyPlugins
 
 statipcs    redirect source for statistics pictures, see images/statpics
+
+templates2  all lib2 Smarty-processed templates
 
 util        lib1 cronjobs and other tools
 util2       lib2 cronjobs and other tools
 
-var/okapi   OKAPI temporary and cached files; may be moved to cache2
 var/errorlog  SQL error protocols
+var/log     miscellaneous protocols
+var/okapi   OKAPI temporary and cached files; may be moved to cache2
+
+vendor      PHP composer data
 
 xml         "XML interface" API

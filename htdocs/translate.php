@@ -23,7 +23,6 @@ $msDirlist[] = './lang/de/ocstyle/lib';
 $msDirlist[] = './lib';
 $msDirlist[] = './lib2';
 $msDirlist[] = './lib2/logic';
-$msDirlist[] = './lib2/old';
 $msDirlist[] = './lib2/search';
 $msDirlist[] = './templates2/mail';
 $msDirlist[] = './templates2/ocstyle';

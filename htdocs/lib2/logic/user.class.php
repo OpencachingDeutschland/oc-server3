@@ -26,7 +26,7 @@ class user
     public $reUserStat;
 
     /**
-     * @param $email
+     * @param string $email
      *
      * @return null|user
      */
@@ -40,6 +40,11 @@ class user
         return new user($userId);
     }
 
+    /**
+     * @param string $username
+     *
+     * @return null|user
+     */
     public static function fromUsername($username)
     {
         $userId = sql_value("SELECT `user_id` FROM `user` WHERE `username`='&1'", 0, $username);
@@ -115,11 +120,21 @@ class user
         return $this->reUser->exist();
     }
 
+    /**
+     * @param string $username
+     *
+     * @return bool
+     */
     public static function existUsername($username)
     {
         return (sql_value("SELECT COUNT(*) FROM `user` WHERE `username`='&1'", 0, $username) != 0);
     }
 
+    /**
+     * @param string $email
+     *
+     * @return bool
+     */
     public static function existEMail($email)
     {
         return (sql_value("SELECT COUNT(*) FROM `user` WHERE `email`='&1'", 0, $email) != 0);

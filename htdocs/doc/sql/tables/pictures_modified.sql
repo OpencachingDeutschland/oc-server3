@@ -16,4 +16,4 @@ CREATE TABLE `pictures_modified` (
   `restored_by` int(10) NOT NULL,
   UNIQUE KEY `id` (`id`,`operation`),
   KEY `object_type` (`object_type`,`object_id`,`date_modified`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 ;

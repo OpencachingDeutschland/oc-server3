@@ -559,9 +559,9 @@ function export()
     $f = fopen($opt['rootpath'] . 'doc/sql/static-data/data.sql', 'a');
     fwrite(
         $f,
-        "INSERT INTO `sysconfig` (`name`, `value`)
-         VALUES ('datasql_checksum', '" . sql_escape($checksum) . "')
-         ON DUPLICATE KEY UPDATE `value`='" . sql_escape($checksum) . "';"
+        "INSERT INTO `sysconfig` (`name`, `value`)"
+        . " VALUES ('datasql_checksum', '" . sql_escape($checksum) . "')"
+        . " ON DUPLICATE KEY UPDATE `value`='" . sql_escape($checksum) . "';\n"
     );
     fclose($f);
 

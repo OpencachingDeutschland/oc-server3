@@ -1,7 +1,7 @@
 SET NAMES 'utf8';
 DROP TABLE IF EXISTS `sys_menu`;
 CREATE TABLE `sys_menu` (
-  `id` smallint(6) NOT NULL auto_increment,
+  `id` smallint(6) NOT NULL AUTO_INCREMENT,
   `id_string` varchar(80) NOT NULL,
   `title` varchar(80) NOT NULL,
   `title_trans_id` int(10) unsigned NOT NULL,
@@ -14,9 +14,9 @@ CREATE TABLE `sys_menu` (
   `position` tinyint(3) unsigned NOT NULL,
   `color` varchar(7) NOT NULL,
   `sitemap` tinyint(1) NOT NULL,
-  `only_if_parent` tinyint(1) default NULL,
-  PRIMARY KEY  (`id`),
+  `only_if_parent` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`id`),
   UNIQUE KEY `id_string` (`id_string`),
   KEY `parent` (`parent`,`position`),
   KEY `href` (`href`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='static content' ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COMMENT='static content' ;

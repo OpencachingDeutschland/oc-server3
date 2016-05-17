@@ -6,4 +6,4 @@ CREATE TABLE `cache_adoption` (
   `date_created` datetime NOT NULL COMMENT 'via Trigger',
   UNIQUE KEY `id` (`cache_id`,`user_id`),
   KEY `user_id` (`user_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 ;

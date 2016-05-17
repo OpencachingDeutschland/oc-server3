@@ -7,4 +7,4 @@ CREATE TABLE `caches_attributes_modified` (
   `was_set` tinyint(1) unsigned NOT NULL,
   `restored_by` int(10) NOT NULL,
   UNIQUE KEY `cache_id` (`cache_id`,`date_modified`,`attrib_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 ;

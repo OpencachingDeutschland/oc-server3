@@ -5,4 +5,4 @@ CREATE TABLE `cache_list_watches` (
   `user_id` int(10) NOT NULL,
   UNIQUE KEY `cache_list_id` (`cache_list_id`,`user_id`),
   KEY `user_id` (`user_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 ;

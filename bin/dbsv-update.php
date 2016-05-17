@@ -1061,6 +1061,16 @@ function dbv_157()   // discard news entry system
     );
 }
 
+function dbv_158()
+{
+    sql(
+        "ALTER TABLE `cache_logs`
+            COMMENT = 'Attention: modifications to this table may need to be " .
+                      "applied also to cache_logs_archived, cache_logs_modified " .
+                      "and trigger cacheLogsBeforeUpdate!'"
+    );
+}
+
 // When adding new mutations, take care that they behave well if run multiple
 // times. This improves robustness of database versioning.
 //

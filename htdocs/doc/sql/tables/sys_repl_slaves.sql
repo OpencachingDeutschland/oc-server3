@@ -10,5 +10,5 @@ CREATE TABLE `sys_repl_slaves` (
   `time_diff` int(10) unsigned NOT NULL,
   `current_log_name` varchar(60) NOT NULL,
   `current_log_pos` bigint(20) NOT NULL,
-  PRIMARY KEY  (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 ;
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 ;

@@ -5,11 +5,11 @@ CREATE TABLE `cache_desc_modified` (
   `language` char(2) NOT NULL,
   `date_modified` date NOT NULL COMMENT 'no time! see restorecaches.php',
   `date_created` datetime NOT NULL,
-  `desc` mediumtext,
-  `desc_html` tinyint(1) NOT NULL default '0',
-  `desc_htmledit` tinyint(1) NOT NULL default '0',
-  `hint` mediumtext,
+  `desc` longtext,
+  `desc_html` tinyint(1) NOT NULL DEFAULT '0',
+  `desc_htmledit` tinyint(1) NOT NULL DEFAULT '0',
+  `hint` longtext,
   `short_desc` varchar(120) NOT NULL,
   `restored_by` int(10) NOT NULL,
   UNIQUE KEY `cache_id` (`cache_id`,`date_modified`,`language`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 ;

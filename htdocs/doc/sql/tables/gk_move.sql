@@ -10,7 +10,7 @@ CREATE TABLE `gk_move` (
   `userid` int(11) NOT NULL,
   `comment` longtext NOT NULL,
   `logtypeid` int(11) NOT NULL,
-  PRIMARY KEY  (`id`),
+  PRIMARY KEY (`id`),
   KEY `userid` (`userid`),
   KEY `itemid` (`itemid`,`datemoved`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 ;

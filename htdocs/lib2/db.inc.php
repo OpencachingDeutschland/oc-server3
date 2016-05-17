@@ -1125,8 +1125,8 @@ function sql_export_recordset($f, $rs, $table, $truncate = true)
 
         fwrite(
             $f,
-            "INSERT INTO `" . sql_escape($table) . "` (" . implode(', ', $fields) . ")
-            VALUES (" . implode(', ', $values) . ");\n"
+            "INSERT INTO `" . sql_escape($table) . "` (" . implode(', ', $fields) . ")"
+            . " VALUES (" . implode(', ', $values) . ");\n"
         );
     }
 }

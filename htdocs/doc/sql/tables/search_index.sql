@@ -4,7 +4,7 @@ CREATE TABLE `search_index` (
   `object_type` tinyint(3) unsigned NOT NULL,
   `cache_id` int(10) unsigned NOT NULL,
   `hash` int(10) unsigned NOT NULL,
-  `count` tinyint(3) unsigned NOT NULL default '0',
-  PRIMARY KEY  (`object_type`,`cache_id`,`hash`),
+  `count` tinyint(3) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`object_type`,`cache_id`,`hash`),
   KEY `object_type` (`object_type`,`hash`,`cache_id`,`count`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='via cronjob' ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COMMENT='via cronjob' ;

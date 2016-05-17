@@ -6,6 +6,6 @@ CREATE TABLE `towns` (
   `trans_id` int(10) unsigned NOT NULL,
   `coord_lat` double NOT NULL,
   `coord_long` double NOT NULL,
-  `maplist` tinyint(1) NOT NULL default '0',
+  `maplist` tinyint(1) NOT NULL DEFAULT '0',
   KEY `country` (`country`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 ;

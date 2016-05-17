@@ -7,6 +7,6 @@ CREATE TABLE `countries_options` (
   `gmLon` double NOT NULL,
   `gmZoom` tinyint(3) unsigned NOT NULL,
   `nodeId` tinyint(3) unsigned NOT NULL,
-  PRIMARY KEY  (`country`),
+  PRIMARY KEY (`country`),
   KEY `ordinal` (`display`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 ;

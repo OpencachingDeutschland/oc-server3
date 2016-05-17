@@ -12,7 +12,6 @@
 
 checkJob(new geokrety());
 
-
 class geokrety
 {
     public $name = 'geokrety';

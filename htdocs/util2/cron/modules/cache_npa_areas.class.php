@@ -10,8 +10,6 @@
  *
  ***************************************************************************/
 
-require_once(__DIR__ . '/../../../lib2/logic/gis.class.php');
-
 checkJob(new cache_npa_areas());
 
 class cache_npa_areas

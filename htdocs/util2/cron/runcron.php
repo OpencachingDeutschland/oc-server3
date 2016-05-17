@@ -12,7 +12,7 @@
  ***************************************************************************/
 
 $opt['rootpath'] = __DIR__ . '/../../';
-require(__DIR__ . '/../../lib2/cli.inc.php');
+require($opt['rootpath'] . 'lib2/cli.inc.php');
 
 // test for user who runs the cronjob
 $processUser = posix_getpwuid(posix_geteuid());
@@ -34,7 +34,7 @@ if ($process_sync->Enter()) {
         }
     }
 
-    $modules_dir = __DIR__ . '/../../util2/cron/modules/';
+    $modules_dir = $opt['rootpath'] . 'util2/cron/modules/';
     $param = count($argv) > 1 ? $argv[1] : '';
 
     if ($param != '' && substr($param, 0, 1) != '-' && !strstr('/', $param)) {

@@ -8,8 +8,6 @@
  *  And send ping to search engines
  ***************************************************************************/
 
-require_once($opt['rootpath'] . 'lib2/logic/sitemapxml.class.php');
-
 checkJob(new sitemaps());
 
 class sitemaps

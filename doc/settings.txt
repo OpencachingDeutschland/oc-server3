@@ -5,7 +5,7 @@ config2/locale.inc.php
 config2/settings-dist-common.inc.php
 
     Global default settings; automatically included in all lib2 code. Must be
-		included in local lib1 settings. Can be locally overridden in local settings.
+    included in local lib1 settings. Can be locally overridden in local settings.
 
 config2/settings-dist.inc.php
 
@@ -39,4 +39,3 @@ lib/settings.inc.php
 util/notification/settings.inc.php
 util/publish_caches/settings.inc.php
 util/watchlist/settings.inc.php
-

@@ -2058,15 +2058,15 @@ function outputSearchForm($options)
     $tpl->assign('ortserror', '');
     if (isset($options['error_plz'])) {
         $tpl->assign('ortserror', $error_plz);
-    } else if (isset($options['error_ort'])) {
+    } elseif (isset($options['error_ort'])) {
         $tpl->assign('ortserror', $error_ort);
-    } else if (isset($options['error_locidnocoords'])) {
+    } elseif (isset($options['error_locidnocoords'])) {
         $tpl->assign('ortserror', $error_locidnocoords);
-    } else if (isset($options['error_noort'])) {
+    } elseif (isset($options['error_noort'])) {
         $tpl->assign('ortserror', $error_noort);
-    } else if (isset($options['error_nowaypointfound'])) {
+    } elseif (isset($options['error_nowaypointfound'])) {
         $tpl->assign('ortserror', $error_nowaypointfound);
-    } else if (isset($options['error_nocoords'])) {
+    } elseif (isset($options['error_nocoords'])) {
         $tpl->assign('ortserror', $error_nocoords);
     }
 

@@ -20,7 +20,7 @@ class cache
 
     public static function cacheIdFromWP($wp)
     {
-        $cacheid = 0;
+        $cacheId = 0;
         if (mb_strtoupper(mb_substr($wp, 0, 2)) === 'GC') {
             $rs = sql("SELECT `cache_id` FROM `caches` WHERE `wp_gc_maintained`='&1'", $wp);
             if (sql_num_rows($rs) != 1) {
@@ -31,37 +31,39 @@ class cache
             $r = sql_fetch_assoc($rs);
             sql_free_result($rs);
 
-            $cacheid = $r['cache_id'];
+            $cacheId = $r['cache_id'];
         } else {
-            $cacheid = sql_value("SELECT `cache_id` FROM `caches` WHERE `wp_oc`='&1'", 0, $wp);
+            $cacheId = sql_value("SELECT `cache_id` FROM `caches` WHERE `wp_oc`='&1'", 0, $wp);
         }
 
-        return $cacheid;
+        return $cacheId;
     }
 
     public static function fromWP($wp)
     {
-        $cacheid = cache::cacheIdFromWP($wp);
-        if ($cacheid == 0)
+        $cacheId = self::cacheIdFromWP($wp);
+        if ($cacheId == 0) {
             return null;
+        }
 
-        return new cache($cacheid);
+        return new cache($cacheId);
     }
 
     public static function cacheIdFromUUID($uuid)
     {
-        $cacheid = sql_value("SELECT `cache_id` FROM `caches` WHERE `uuid`='&1'", 0, $uuid);
+        $cacheId = sql_value("SELECT `cache_id` FROM `caches` WHERE `uuid`='&1'", 0, $uuid);
 
-        return $cacheid;
+        return $cacheId;
     }
 
     public static function fromUUID($uuid)
     {
-        $cacheid = cache::cacheIdFromUUID($uuid);
-        if ($cacheid == 0)
+        $cacheId = self::cacheIdFromUUID($uuid);
+        if ($cacheId == 0) {
             return null;
+        }
 
-        return new cache($cacheid);
+        return new cache($cacheId);
     }
 
     public function __construct($nNewCacheId = ID_NEW)
@@ -384,7 +386,7 @@ class cache
 
         // negative or abornally high numbers like 1.0E+15 can crash the LIMIT statement
         if ($count <= 0 || $count > 10000) {
-            return array();
+            return [];
         }
 
         $rsCoords = sql(
@@ -451,12 +453,12 @@ class cache
             $count + 0
         );
 
-        $logs = array();
+        $logs = [];
         $coordpos = 0;
         $coord_changes = false;
 
         while ($rLog = sql_fetch_assoc($rsLogs)) {
-            $pictures = array();
+            $pictures = [];
             $rsPictures = sql(
                 "SELECT `url`, `title`, `uuid`, `id`, `spoiler`
                  FROM `pictures`
@@ -592,7 +594,13 @@ class cache
         global $login;
 
         // cache_adoption exists?
-        if (sql_value("SELECT COUNT(*) FROM `cache_adoption` WHERE `cache_id`='&1' AND `user_id`='&2'", 0, $this->nCacheId, $userid) == 0) {
+        if (sql_value(
+                "SELECT COUNT(*) FROM `cache_adoption` WHERE `cache_id`='&1' AND `user_id`='&2'",
+                0,
+                $this->nCacheId,
+                $userid
+            ) == 0
+        ) {
             return false;
         }
 
@@ -607,7 +615,9 @@ class cache
             $login->userid,
             $this->nCacheId,
             0,
-            'Cache ' . sql_escape($this->nCacheId) . ' has changed the owner from userid ' . sql_escape($this->getUserId()) . ' to ' . sql_escape($userid) . ' by ' . sql_escape($login->userid)
+            'Cache ' . sql_escape($this->nCacheId) . ' has changed the owner from userid ' . sql_escape(
+                $this->getUserId()
+            ) . ' to ' . sql_escape($userid) . ' by ' . sql_escape($login->userid)
         );
         // Adoptions now are recorded by trigger in cache_adoptions table.
         // Recording adoptions in 'logentries' may be discarded after ensuring that the
@@ -624,14 +634,15 @@ class cache
     public function hasAdopted($userId)
     {
         // cache_adoption exists?
-        return (sql_value("
-                        SELECT COUNT(*)
-                        FROM `cache_adoption`
-                        WHERE `cache_id`='&1'
-                            AND `user_id`='&2'",
+        return (sql_value(
+                "SELECT COUNT(*)
+                 FROM `cache_adoption`
+                 WHERE `cache_id`='&1'
+                 AND `user_id`='&2'",
                 0,
                 $this->nCacheId,
-                $userId) != 0);
+                $userId
+            ) != 0);
     }
 
     // true if anyone can view the cache
@@ -685,13 +696,23 @@ class cache
 
     public function isRecommendedByUser($nUserId)
     {
-        return (sql_value("SELECT COUNT(*) FROM `cache_rating` WHERE `cache_id`='&1' AND `user_id`='&2'", 0, $this->nCacheId, $nUserId) > 0);
+        return (sql_value(
+                "SELECT COUNT(*) FROM `cache_rating` WHERE `cache_id`='&1' AND `user_id`='&2'",
+                0,
+                $this->nCacheId,
+                $nUserId
+            ) > 0);
     }
 
     public function addRecommendation($nUserId, $logdate)
     {
         // rating_date will be set to NOW() by Insert-trigger
-        sql("INSERT IGNORE INTO `cache_rating` (`cache_id`, `user_id`, `rating_date`) VALUES ('&1', '&2', '&3')", $this->nCacheId, $nUserId, $logdate);
+        sql(
+            "INSERT IGNORE INTO `cache_rating` (`cache_id`, `user_id`, `rating_date`) VALUES ('&1', '&2', '&3')",
+            $this->nCacheId,
+            $nUserId,
+            $logdate
+        );
     }
 
     public function removeRecommendation($nUserId)
@@ -797,15 +818,15 @@ class cache
                  ORDER BY `cc`.`date_created` DESC",
             $this->getCacheId()
         );
-        $coords = array();
+        $coords = [];
         while ($rCoord = sql_fetch_assoc($rs)) {
             $coord = new coordinate($rCoord['latitude'], $rCoord['longitude']);
-            $coords[] = array(
+            $coords[] = [
                 'date' => $rCoord['date_created'],
                 'coord' => $coord->getDecimalMinutes(),
                 'user_id' => $rCoord['user_id'],
                 'username' => $rCoord['username']
-            );
+            ];
         }
         sql_free_result($rs);
         $tpl->assign('coordinates', $coords);
@@ -858,7 +879,7 @@ class cache
     {
         global $translate, $login;
 
-        $logTypes = array();
+        $logTypes = [];
 
         $logtypeNames = get_logtype_names();
         $allowedLogtypes = get_cache_log_types($this->getCacheId(), $oldLogType);
@@ -888,12 +909,13 @@ class cache
 
     public function statusUserLogAllowed()
     {
-        return (sql_value("
-                            SELECT `cache_status`.`allow_user_log`
-                            FROM `cache_status`,`caches`
-                            WHERE `caches`.`status`=`cache_status`.`id`
-                                AND `caches`.`cache_id`='&1'",
+        return (sql_value(
+                "SELECT `cache_status`.`allow_user_log`
+                 FROM `cache_status`,`caches`
+                 WHERE `caches`.`status`=`cache_status`.`id`
+                 AND `caches`.`cache_id`='&1'",
                 0,
-                $this->getCacheId()) == 1);
+                $this->getCacheId()
+            ) == 1);
     }
 }

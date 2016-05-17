@@ -13,8 +13,10 @@ require_once(__DIR__ . '/const.inc.php');
 
 class useroptions
 {
-
+    /** @var int $nUserId */
     public $nUserId = 0;
+
+    /** @var array $nOptions */
     public $nOptions;
 
     public function __construct($nUserId = ID_NEW)

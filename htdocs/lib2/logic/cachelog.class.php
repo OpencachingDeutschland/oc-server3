@@ -38,7 +38,7 @@ class cachelog
 
     public static function fromUUID($uuid)
     {
-        $logid = cachelog::logIdFromUUID($uuid);
+        $logid = self::logIdFromUUID($uuid);
         if ($logid == 0) {
             return null;
         }

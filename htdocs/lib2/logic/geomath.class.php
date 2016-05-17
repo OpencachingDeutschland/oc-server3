@@ -133,7 +133,8 @@ class geomath
                 return 'N/A';
             }
             $tb = '';
-            for ($i = 0; $i < strlen($bearing); ++ $i) {
+            $max = strlen($bearing);
+            for ($i = 0; $i < $max; ++ $i) {
                 $tb .= $translate->t($bearing[$i], '', '', 0, '', 1, $language);
             }
             // Translation of N S W E does not work, for whatever reason.
@@ -160,10 +161,10 @@ class geomath
         $latField = 'latitude',
         $tableName = 'caches'
     ) {
-        $lonFrom = $lonFrom + 0;
-        $latFrom = $latFrom + 0;
-        $maxDistance = $maxDistance + 0;
-        $distanceMultiplier = $distanceMultiplier + 0;
+        $lonFrom += 0;
+        $latFrom += 0;
+        $maxDistance += 0;
+        $distanceMultiplier += 0;
 
         if (!mb_ereg_match('^[a-zA-Z][a-zA-Z0-9_]{0,59}$', $lonField)) {
             die('Fatal Error: invalid lonField');

@@ -6,12 +6,12 @@
  *  Unicode Reminder メモ
  *
  *  summarize methods to get new events, caches, ratings, etc.
+ * @todo check unused functions if the are really unused remove them
  ***************************************************************************/
 class getNew
 {
     // class variables
     private $userCountry;
-
 
     // getter/setter
     public function get_userCountry()
@@ -31,7 +31,6 @@ class getNew
      *
      * @param string $userCountry country of the loggedin user as parameter for the sql statements
      *
-     * @return void
      */
     public function __construct($userCountry)
     {
@@ -199,7 +198,7 @@ class getNew
     /**
      * ratingDays returns the number of days used for top rating calculation
      *
-     * @return days
+     * @return integer
      */
     public function ratingDays()
     {

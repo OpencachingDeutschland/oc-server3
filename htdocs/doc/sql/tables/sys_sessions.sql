@@ -5,6 +5,6 @@ CREATE TABLE `sys_sessions` (
   `user_id` int(10) unsigned NOT NULL,
   `permanent` tinyint(1) NOT NULL,
   `last_login` datetime NOT NULL,
-  PRIMARY KEY  (`uuid`),
+  PRIMARY KEY (`uuid`),
   KEY `last_login` (`last_login`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 ;

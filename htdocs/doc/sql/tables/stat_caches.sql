@@ -7,10 +7,10 @@ CREATE TABLE `stat_caches` (
   `note` smallint(5) unsigned NOT NULL,
   `will_attend` smallint(5) unsigned NOT NULL,
   `maintenance` smallint(5) unsigned NOT NULL,
-  `last_found` date default NULL,
+  `last_found` date DEFAULT NULL,
   `watch` smallint(5) unsigned NOT NULL,
   `ignore` smallint(5) unsigned NOT NULL,
   `toprating` smallint(5) unsigned NOT NULL,
   `picture` smallint(5) unsigned NOT NULL,
-  PRIMARY KEY  (`cache_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='via trigger (caches)' ;
+  PRIMARY KEY (`cache_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COMMENT='via trigger (caches)' ;

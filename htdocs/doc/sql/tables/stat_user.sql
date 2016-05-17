@@ -8,5 +8,5 @@ CREATE TABLE `stat_user` (
   `hidden` smallint(5) unsigned NOT NULL,
   `will_attend` smallint(5) unsigned NOT NULL,
   `maintenance` smallint(5) unsigned NOT NULL,
-  PRIMARY KEY  (`user_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='via trigger (user)' ;
+  PRIMARY KEY (`user_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COMMENT='via trigger (user)' ;

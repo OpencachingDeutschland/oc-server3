@@ -11,5 +11,5 @@ CREATE TABLE `gk_item` (
   `longitude` double NOT NULL,
   `typeid` int(11) NOT NULL,
   `stateid` tinyint(4) NOT NULL,
-  PRIMARY KEY  (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 ;
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 ;

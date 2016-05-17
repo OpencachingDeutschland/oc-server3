@@ -5,4 +5,4 @@ CREATE TABLE `helppages` (
   `language` char(2) NOT NULL,
   `helppage` varchar(120) NOT NULL,
   UNIQUE KEY `ocpage` (`ocpage`,`language`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 ;

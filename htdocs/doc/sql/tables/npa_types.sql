@@ -5,6 +5,6 @@ CREATE TABLE `npa_types` (
   `name` varchar(60) NOT NULL,
   `ordinal` tinyint(4) NOT NULL,
   `no_warning` tinyint(1) NOT NULL,
-  PRIMARY KEY  (`id`),
+  PRIMARY KEY (`id`),
   KEY `ordinal` (`ordinal`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='static content' ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COMMENT='static content' ;

@@ -33,7 +33,7 @@ $tpl->assign('cachename', $rCache['name']);
 
 $rsPictures = sql(
     'SELECT `uuid`, `url`, `title`
-    FROM `pictures` 
+    FROM `pictures`
     WHERE `object_id`=&1
     AND `object_type`=2
     ORDER BY `seq`',

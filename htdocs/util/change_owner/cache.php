@@ -33,7 +33,7 @@ if ($action == 'changeowner') {
 
     $rsCache = sql(
         "SELECT caches.cache_id, user.user_id
-        FROM caches 
+        FROM caches
         INNER JOIN user ON caches.user_id=user.user_id
         WHERE caches.cache_id='&1'",
         $cacheid
@@ -84,7 +84,7 @@ if ($action == 'changeowner') {
     $rsCache = sql(
         "SELECT caches.cache_id, caches.wp_oc, caches.name, user.username
         FROM caches
-        INNER JOIN user ON caches.user_id=user.user_id 
+        INNER JOIN user ON caches.user_id=user.user_id
         WHERE caches.cache_id='&1'",
         $cacheid
     );

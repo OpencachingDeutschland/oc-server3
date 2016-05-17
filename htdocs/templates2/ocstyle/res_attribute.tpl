@@ -37,10 +37,10 @@
 {/strip}{/capture}
 
 <img {if $inputprefix!=''}id="img{$inputprefix}{$id}"{/if}
-     src="{$smarty.capture.filename}" 
-     border="0" 
-     onmouseover="Tip('{$html_desc|escapejs}', TITLE, '{$name|escapejs}', TITLEBGCOLOR, '{$color|escapejs}', TITLEFONTCOLOR, '#000000', BGCOLOR, '#FFFFFF', BORDERCOLOR, '{$color|escapejs}', CLICKCLOSE, true, DELAY, 0, FADEIN, false, FADEOUT, false, FONTCOLOR, '#000080', WIDTH, 500)" 
-     onmouseout="UnTip()" 
+     src="{$smarty.capture.filename}"
+     border="0"
+     onmouseover="Tip('{$html_desc|escapejs}', TITLE, '{$name|escapejs}', TITLEBGCOLOR, '{$color|escapejs}', TITLEFONTCOLOR, '#000000', BGCOLOR, '#FFFFFF', BORDERCOLOR, '{$color|escapejs}', CLICKCLOSE, true, DELAY, 0, FADEIN, false, FADEOUT, false, FONTCOLOR, '#000080', WIDTH, 500)"
+     onmouseout="UnTip()"
      {if $onmousedown!=''}onmousedown="{$onmousedown}({$id}, '{$icon}')"{/if}
      />
 

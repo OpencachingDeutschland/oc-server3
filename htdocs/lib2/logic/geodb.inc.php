@@ -12,7 +12,7 @@ function geodb_setAllCacheLocations()
          FROM `caches`
          LEFT JOIN `cache_location`
              ON `caches`.`cache_id`=`cache_location`.`cache_id`
-         WHERE ISNULL (`cache_location`.`cache_id`) 
+         WHERE ISNULL (`cache_location`.`cache_id`)
              OR `cache_location`.`last_modified`!=`caches`.`last_modified`'
     );
     while ($r = sql_fetch_assoc($rs)) {
@@ -51,8 +51,8 @@ function geodb_setCacheLocation($cache_id)
         }
 
         sqll(
-            "INSERT INTO `cache_location` (`cache_id`, `last_modified`, `adm1`, `adm2`, `adm3`) 
-             VALUES ('&1', '&2', '&3', '&4', '&5') 
+            "INSERT INTO `cache_location` (`cache_id`, `last_modified`, `adm1`, `adm2`, `adm3`)
+             VALUES ('&1', '&2', '&3', '&4', '&5')
              ON DUPLICATE KEY UPDATE `cache_id`='&1', `last_modified`='&2',`adm1`='&3', `adm2`='&4', `adm3`='&5'",
             $cache_id,
             $r['last_modified'],
@@ -102,10 +102,10 @@ function geodb_landFromLocid($locid)
     $locid += 0;
 
     $rs = sqll(
-        "SELECT `ld`.`text_val` `land` 
-         FROM `geodb_textdata` `ct`, `geodb_textdata` `ld`, `geodb_hierarchies` `hr` 
-         WHERE `ct`.`loc_id`=`hr`.`loc_id` 
-             AND `hr`.`id_lvl2`=`ld`.`loc_id` 
+        "SELECT `ld`.`text_val` `land`
+         FROM `geodb_textdata` `ct`, `geodb_textdata` `ld`, `geodb_hierarchies` `hr`
+         WHERE `ct`.`loc_id`=`hr`.`loc_id`
+             AND `hr`.`id_lvl2`=`ld`.`loc_id`
              AND `ct`.`text_type`= 500100000
              AND `ld`.`text_locale`='DE'
              AND `ld`.`text_type`= 500100000
@@ -128,11 +128,11 @@ function geodb_regierungsbezirkFromLocid($locid)
     $locid += 0;
 
     $rs = sqll(
-        "SELECT `rb`.`text_val` `regierungsbezirk` 
-         FROM `geodb_textdata` `ct`, `geodb_textdata` `rb`, `geodb_hierarchies` `hr` 
+        "SELECT `rb`.`text_val` `regierungsbezirk`
+         FROM `geodb_textdata` `ct`, `geodb_textdata` `rb`, `geodb_hierarchies` `hr`
          WHERE `ct`.`loc_id`=`hr`.`loc_id`
              AND `hr`.`id_lvl4`=`rb`.`loc_id`
-             AND `ct`.`text_type`= 500100000 
+             AND `ct`.`text_type`= 500100000
              AND `rb`.`text_type`= 500100000
              AND `ct`.`loc_id`='&1'
              AND `hr`.`id_lvl4`!=0",
@@ -154,12 +154,12 @@ function geodb_landkreisFromLocid($locid)
 
     $rs = sqll(
         "SELECT `rb`.`text_val` `regierungsbezirk`
-         FROM `geodb_textdata` `ct`, `geodb_textdata` `rb`, `geodb_hierarchies` `hr` 
+         FROM `geodb_textdata` `ct`, `geodb_textdata` `rb`, `geodb_hierarchies` `hr`
          WHERE `ct`.`loc_id`=`hr`.`loc_id`
-             AND `hr`.`id_lvl5`=`rb`.`loc_id` 
+             AND `hr`.`id_lvl5`=`rb`.`loc_id`
              AND `ct`.`text_type`= 500100000
              AND `rb`.`text_type`= 500100000
-             AND `ct`.`loc_id`='&1' 
+             AND `ct`.`loc_id`='&1'
              AND `hr`.`id_lvl5`!=0",
         $locid
     );

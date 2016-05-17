@@ -313,10 +313,10 @@ class cachelog
 
         $login->verify();
         $allow = sql_value(
-            "SELECT `cache_status`.`allow_user_view` 
-             FROM `caches` 
+            "SELECT `cache_status`.`allow_user_view`
+             FROM `caches`
              INNER JOIN `cache_status`
-                 ON `caches`.`status`=`cache_status`.`id` 
+                 ON `caches`.`status`=`cache_status`.`id`
              WHERE `caches`.`cache_id`='&1'",
             0,
             $this->getCacheId()

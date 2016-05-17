@@ -2,11 +2,16 @@
 /***************************************************************************
  *  For license information see doc/license.txt
  *
- *  Fix some common coding style issues. All changes comply to PSR-2.
- *  This script may be run any time to check and clean up the current OC code.
+ *  This tool currently fixes the following code style issues:
  *
- *  DO NOT EXPAND TABS YET. This must be done when there are no open feature
- *  branches.
+ *    - resolve tabs to 4-char-columns
+ *    - remove trailing whitespaces
+ *    - set line ends to LF(-only)
+ *    - remove ?> and blank lines at end of file
+ *    - add missing LF to end of file
+ *    - detect characters before <? at start of file
+ *
+ *  This script may be run any time to check and clean up the current OC code.
  *
  *  Unicode Reminder メモ
  ***************************************************************************/
@@ -14,36 +19,29 @@
 $exclude = [
     'htdocs/cache',
     'htdocs/cache2',
-    'htdocs/lib2/HTMLPurifier',
     'htdocs/lib2/smarty',
     'htdocs/okapi',
-    'htdocs/var'
+    'htdocs/templates2/mail',
+    'htdocs/var',
+    'htdocs/vendor'
 ];
-
-$expand_tabs = in_array('--tabs', $argv);
 
 chdir(__DIR__ . '/../..');
 
 $cleanup = new StyleCleanup();
-$cleanup->setExpandTabs($expand_tabs);
 $cleanup->run('.', $exclude);
 
-echo $cleanup->getLinesModified() . ' lines in ' . $cleanup->getFilesModified() . ' files'
+echo
+    $cleanup->getLinesModified() . ' lines in ' . $cleanup->getFilesModified() . ' files'
     . " have been cleaned up\n";
 
 
 class StyleCleanup
 {
-    private $expand_tabs;
     private $exclude_dirs;
     private $basedir;
     private $files_modified;
     private $lines_modified;
-
-    public function setExpandTabs($et)
-    {
-        $this->expand_tabs = $et;
-    }
 
     public function run($basedir, $exclude_dirs)
     {
@@ -68,25 +66,41 @@ class StyleCleanup
     private function cleanup($path)
     {
         if (!in_array(substr($path, strlen($this->basedir) + 1), $this->exclude_dirs)) {
+
             # process files in $path
 
-            $files = glob($path . '/*.php');
+            $files = array_merge(
+                glob($path . '/*.php'),
+                glob($path . '/*.tpl')
+            );
+
             foreach ($files as $filepath) {
                 $file_modified = false;
                 $lines = file($filepath);
 
-                # Remove all trailing whitespaces, strip CRs and make sure
-                # that all - including the last - line end on "\n".
-                # Expand Tabs if requested.
+                # detect illegal characters at start of PHP or XML file
+
+                if (count($lines) && preg_match('/^(.+?)\<\?/', $lines[0], $matches)) {
+                    die(
+                        'invalid character(s) "' . $matches[1] . '"'
+                        . ' at start of ' . $filepath . "\n"
+                    );
+                }
+
+                # Remove trailing whitespaces, strip CRs, expand tabs and
+                # make sure that all - including the last - line end on "\n".
+                # Only-whitespace lines are allowed by PSR-2 and will not be
+                # trimmed.
 
                 foreach ($lines as &$line) {
-                    $trimmed_line = trim($line, " \t\r\n");
-                    if ($trimmed_line != '' && $trimmed_line != '*') {
+                    if ((trim($line, " \n") != '' || substr($line, -1) != "\n")
+                        && !preg_match("/^ *\\* *\n$/", $line)) {
+
                         $old_line = $line;
-                        $line = rtrim($line, " \t\r\n") . "\n";
-                        if ($this->expand_tabs) {
-                            $line = $this->expandTabs($line);
-                        }
+                        $line = rtrim($line);   # trims " \t\n\r\0\x0B"
+                        $line = $this->expandTabs($line);
+                        $line .= "\n";
+
                         if ($line != $old_line) {
                             $file_modified = true;
                             ++ $this->lines_modified;
@@ -130,7 +144,8 @@ class StyleCleanup
     private static function expandTabs($line)
     {
         while (($tabpos = strpos($line, "\t")) !== false) {
-            $line = substr($line, 0, $tabpos)
+            $line =
+                substr($line, 0, $tabpos)
                 . substr('    ', 0, 4 - ($tabpos % 4))
                 . substr($line, $tabpos + 1);
         }

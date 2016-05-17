@@ -18,7 +18,7 @@ if ($login->userid == 0) {
 
 //get user record
 $rsUser = sql(
-    "SELECT IFNULL(`stat_user`.`found`, 0) AS `found`, IFNULL(`stat_user`.`hidden`, 0) AS `hidden` 
+    "SELECT IFNULL(`stat_user`.`found`, 0) AS `found`, IFNULL(`stat_user`.`hidden`, 0) AS `hidden`
     FROM `user`
     LEFT JOIN `stat_user` ON `user`.`user_id`=`stat_user`.`user_id`
     WHERE `user`.`user_id`='&1' LIMIT 1",
@@ -45,9 +45,9 @@ $tpl->assign_rs(
        FROM `cache_logs`
  INNER JOIN `caches` ON `cache_logs`.`cache_id`=`caches`.`cache_id`
  INNER JOIN `user` ON `caches`.`user_id`=`user`.`user_id`
-  LEFT JOIN `caches_attributes` `ca` ON `ca`.`cache_id`=`caches`.`cache_id` 
+  LEFT JOIN `caches_attributes` `ca` ON `ca`.`cache_id`=`caches`.`cache_id`
     AND `ca`.`attrib_id`=6
-  LEFT JOIN `cache_rating` ON `cache_rating`.`cache_id`=`caches`.`cache_id` 
+  LEFT JOIN `cache_rating` ON `cache_rating`.`cache_id`=`caches`.`cache_id`
   AND `cache_rating`.`user_id`=`cache_logs`.`user_id` AND `cache_rating`.`rating_date`=`cache_logs`.`date`
       WHERE `cache_logs`.`user_id`='&1'
    ORDER BY `cache_logs`.`order_date` DESC, `cache_logs`.`date_created` DESC, `cache_logs`.`id` DESC
@@ -94,7 +94,7 @@ $tpl->add_body_load('myHomeLoad()');
 $tpl->assign_rs(
     'notpublished',
     sql(
-        "SELECT `caches`.`cache_id`, `caches`.`name`, `caches`.`date_hidden`, 
+        "SELECT `caches`.`cache_id`, `caches`.`name`, `caches`.`date_hidden`,
                 `caches`.`date_activate`, `caches`.`status`, `caches`.`wp_oc`, `caches`.`type`
            FROM `caches`
           WHERE `user_id`='&1'

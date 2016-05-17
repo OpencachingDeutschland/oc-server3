@@ -96,13 +96,13 @@ if (isset($w3w_langs[1])) {
 $wp = isset($_REQUEST['wp']) ? $_REQUEST['wp'] : '';
 if ($wp != '') {
     $rs = sql(
-        "SELECT `caches`.`name`, `user`.`username` 
-         FROM `caches` 
-         INNER JOIN `cache_status` 
-             ON `caches`.`status`=`cache_status`.`id` 
-         INNER JOIN `user` 
-             ON `user`.`user_id`=`caches`.`user_id` 
-         WHERE `cache_status`.`allow_user_view`= 1 
+        "SELECT `caches`.`name`, `user`.`username`
+         FROM `caches`
+         INNER JOIN `cache_status`
+             ON `caches`.`status`=`cache_status`.`id`
+         INNER JOIN `user`
+             ON `user`.`user_id`=`caches`.`user_id`
+         WHERE `cache_status`.`allow_user_view`= 1
          AND `caches`.`wp_oc`='&1'",
         $wp
     );

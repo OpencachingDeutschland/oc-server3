@@ -461,7 +461,7 @@ if ($error == false) {
         $cache_attribs_string = '';
 
         $rsAttrGroup = sql(
-            "SELECT 
+            "SELECT
                 `attribute_groups`.`id`,
                 IFNULL(`sys_trans_text`.`text`,
                 `attribute_groups`.`name`) AS `name`,
@@ -496,9 +496,9 @@ if ($error == false) {
                 LEFT JOIN `sys_trans_text` AS `ttdesc`
                     ON `tdesc`.`id`=`ttdesc`.`trans_id`
                     AND `ttdesc`.`lang`='&1'
-                WHERE `cache_attrib`.`group_id`=" . ($rAttrGroup['id'] + 0) . " 
+                WHERE `cache_attrib`.`group_id`=" . ($rAttrGroup['id'] + 0) . "
                 AND NOT IFNULL(`cache_attrib`.`hidden`, 0)=1
-                AND `cache_attrib`.`selectable`!=0 
+                AND `cache_attrib`.`selectable`!=0
                 ORDER BY `cache_attrib`.`group_id`, `cache_attrib`.`id`",
                 $locale
             );

@@ -1,4 +1,4 @@
-f<?php
+<?php
 /***************************************************************************
  *  For license information see doc/license.txt
  *

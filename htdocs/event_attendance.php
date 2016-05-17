@@ -48,7 +48,7 @@ if ($cache_id != 0) {
         INNER JOIN `user` ON `user`.`user_id`=`cache_logs`.`user_id`
         WHERE `cache_status`.`allow_user_view` = 1
         AND `cache_logs`.`type` = 7
-        AND `cache_logs`.`cache_id`='&1' 
+        AND `cache_logs`.`cache_id`='&1'
         ORDER BY `user`.`username`",
         $cache_id
     );

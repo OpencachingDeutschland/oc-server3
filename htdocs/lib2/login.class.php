@@ -118,15 +118,15 @@ class login
                 `user`.`admin`,
                 `user`.`username`
             FROM &db.`sys_sessions`, &db.`user`
-            WHERE `sys_sessions`.`user_id`=`user`.`user_id` 
+            WHERE `sys_sessions`.`user_id`=`user`.`user_id`
             AND `user`.`is_active_flag`= 1
             AND `sys_sessions`.`uuid`='&1'
-            AND `sys_sessions`.`user_id`='&2' 
-            AND 
+            AND `sys_sessions`.`user_id`='&2'
+            AND
                 (
-                  (`sys_sessions`.`permanent`=1 
+                  (`sys_sessions`.`permanent`=1
                    AND `sys_sessions`.`last_login`>'&3')
-                OR 
+                OR
                   (`sys_sessions`.`permanent`=0 AND `sys_sessions`.`last_login`>'&4')
                 )",
             $this->sessionid,
@@ -149,7 +149,7 @@ class login
 
             if (isset($opt['template']['locale'])) {
                 sqlf(
-                    "UPDATE `user` SET `last_login`=NOW(), `language`='&2', `language_guessed`=0, `domain`='&3' 
+                    "UPDATE `user` SET `last_login`=NOW(), `language`='&2', `language_guessed`=0, `domain`='&3'
                      WHERE `user_id`='&1'",
                     $this->userid,
                     $opt['template']['locale'],
@@ -234,7 +234,7 @@ class login
         // compare $user with email and username, if both matches use email
         $rsUser = sqlf(
             "SELECT `user_id`, `username`, 2 AS `prio`, `is_active_flag`, `permanent_login_flag`, `admin`
-             FROM `user` WHERE `username`='&1' AND `password`='&2' 
+             FROM `user` WHERE `username`='&1' AND `password`='&2'
              UNION
              SELECT `user_id`, `username`, 1 AS `prio`, `is_active_flag`, `permanent_login_flag`, `admin`
              FROM `user`WHERE `email`='&1' AND `password`='&2' ORDER BY `prio` ASC LIMIT 1",

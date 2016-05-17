@@ -24,11 +24,11 @@ if (!$tpl->is_cached()) {
     sql_temp_table_slave('cachelist');
     sql_slave(
         "CREATE TEMPORARY TABLE &cachelist (`cache_id` INT(11) PRIMARY KEY)
-        SELECT `cache_id` 
+        SELECT `cache_id`
         FROM `caches`
         INNER JOIN `cache_status` ON `caches`.`status`=`cache_status`.`id`
         WHERE `cache_status`.`allow_user_view`=1
-        AND `country`!='" . sql_escape($country) . "' 
+        AND `country`!='" . sql_escape($country) . "'
         ORDER BY `date_created` DESC LIMIT 200"
     );
 

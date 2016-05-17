@@ -25,8 +25,8 @@ $rs = sql(
       INNER JOIN `caches` ON `cache_ignore`.`cache_id`=`caches`.`cache_id`
       INNER JOIN `cache_status` ON `caches`.`status`=`cache_status`.`id`
       LEFT JOIN `caches_attributes` `ca` ON `ca`.`cache_id`=`caches`.`cache_id` AND `ca`.`attrib_id`=6
-      WHERE `cache_ignore`.`user_id`='&1' 
-      AND `cache_status`.`allow_user_view`=1 
+      WHERE `cache_ignore`.`user_id`='&1'
+      AND `cache_status`.`allow_user_view`=1
       ORDER BY `caches`.`name`",
     $login->userid
 );

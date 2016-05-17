@@ -46,6 +46,6 @@
 <!--
  init_enlargeit_for_logentries();
 -->
-</script> 
+</script>
 
 {/if}

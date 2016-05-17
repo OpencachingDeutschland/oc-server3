@@ -16,7 +16,7 @@ var tip_general_nm = "{t}Select <i>needs maintenance</i> if the geocache was in 
 var tip_general_lo = "{if $gcwp}{t}Select <i>is outdated</i> if the geocache search is hampered by outdated information<br />in the description, e.g. the location has severely changed or the description lacks<br />important information which has been added at another geocaching website.<br />Please give details in your log.{/t}{else}{t}Select <i>is outdated</i> if the geocache search is hampered by outdated information<br />in the description, e.g. because the location has severely changed. Please give<br />details in your log.{/t}{/if}{if $ownerlog || $cache_listing_is_outdated}<br /><div style='height:0.3em'></div>{if $gcwp}{t 1=$gcwp}Select <i>up to date</i> if you have checked the complete description &ndash; from the<br />container size to encoded hints and additoional wayoints &ndash;, have compared<br />it to the geocaching.com listing (%1) and can confirm that everything is<br />up-to-date.{/t}{else}{t}Select <i>up to date</i> if you have checked the complete description &ndash; from the<br />container size to encoded hints and additoional wayoints &ndash; and can confirm<br />that everything is up-to-date.{/t}{/if}{/if}";
 var tip_activate_nm = '{t}By logging "Available", you also confirm that the geocache is in good condition.{/t}';
 var tip_activate_lo = '{t}By logging "Available", you also confirm that the geocache description is up-to-date.{/t}';
-var tip_disable_nm = "{t}You may indicate here what is the current maintenance state of the geocache.{/t}"; 
+var tip_disable_nm = "{t}You may indicate here what is the current maintenance state of the geocache.{/t}";
 var tip_disable_lo = "{t}You may indicate here if the cache description is up-to-date.{/t}";
 var tip_dnf_nm = "{t}If you are sure that the geocache is gone, and the owner does not<br />react to your log entry, you may report it to the Opencaching team.<br />Use the 'Report this cache' button above the cache description.{/t}";
 
@@ -179,7 +179,7 @@ function show_tip(text)
 
 //-->
 {/literal}
-{* 
+{*
  * capture allows us to "eval" the link tag with the variable values
  * and save the complete link in the variable "cachelink" to use it in translation
  *}
@@ -192,7 +192,7 @@ function show_tip(text)
 </div>
 <form action="log.php" method="post" enctype="application/x-www-form-urlencoded" name="editform" dir="ltr">
 {if $masslog==true}
-<p class="redtext"> 
+<p class="redtext">
     {t 1=$masslogCount}You submitted more than %1 identical logs. Please make sure that you are entering the date of your cache visit, not the current date - also when "late logging" old finds.{/t}
 </p>
 <p>

@@ -113,19 +113,19 @@ function searchUser()
     $tpl->assign('msg', $msg);
 
     $rs = sql(
-        "SELECT `user_id`, 
+        "SELECT `user_id`,
                 `username`,
                 `email`,
                 `email_problems`,
                 `date_created`,
                 `last_modified`,
-                `is_active_flag`, 
+                `is_active_flag`,
                 `activation_code`,
                 `first_name`,
                 `last_name`,
-                `data_license`='&2' AS `license_declined` 
-         FROM `user` 
-         WHERE `username`='&1' 
+                `data_license`='&2' AS `license_declined`
+         FROM `user`
+         WHERE `username`='&1'
          OR `email`='&1'",
         $username,
         NEW_DATA_LICENSE_ACTIVELY_DECLINED

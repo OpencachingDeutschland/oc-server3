@@ -53,17 +53,17 @@ class countriesList
         $returnValue = sql(
             "SELECT
                 `countries`.`short` AS `id`,
-                IFNULL(`sys_trans_text`.`text`, `countries`.`name`) AS `name` 
-             FROM `countries` 
-             INNER JOIN `countries_list_default` 
-                 ON `countries`.`short`=`countries_list_default`.`show` 
+                IFNULL(`sys_trans_text`.`text`, `countries`.`name`) AS `name`
+             FROM `countries`
+             INNER JOIN `countries_list_default`
+                 ON `countries`.`short`=`countries_list_default`.`show`
                  AND `countries_list_default`.`lang`='&1'
-             LEFT JOIN `sys_trans` 
-                 ON `countries`.`trans_id`=`sys_trans`.`id` 
-                 AND `countries`.`name`=`sys_trans`.`text` 
+             LEFT JOIN `sys_trans`
+                 ON `countries`.`trans_id`=`sys_trans`.`id`
+                 AND `countries`.`name`=`sys_trans`.`text`
              LEFT JOIN `sys_trans_text`
-                 ON `sys_trans`.`id`=`sys_trans_text`.`trans_id` 
-                 AND `sys_trans_text`.`lang`='&1' 
+                 ON `sys_trans`.`id`=`sys_trans_text`.`trans_id`
+                 AND `sys_trans_text`.`lang`='&1'
              ORDER BY `name`",
             $this->locale
         );
@@ -76,15 +76,15 @@ class countriesList
         $this->bDefaultUsed = false;
 
         $returnValue = sql(
-            "SELECT 
+            "SELECT
                  `countries`.`short` AS `id`,
                  IFNULL(`sys_trans_text`.`text`,
-                 `countries`.`name`) AS `name` 
-             FROM `countries` 
-             LEFT JOIN `sys_trans` 
-                 ON `countries`.`trans_id`=`sys_trans`.`id` 
-                 AND `countries`.`name`=`sys_trans`.`text` 
-             LEFT JOIN `sys_trans_text` 
+                 `countries`.`name`) AS `name`
+             FROM `countries`
+             LEFT JOIN `sys_trans`
+                 ON `countries`.`trans_id`=`sys_trans`.`id`
+                 AND `countries`.`name`=`sys_trans`.`text`
+             LEFT JOIN `sys_trans_text`
                  ON `sys_trans`.`id`=`sys_trans_text`.`trans_id`
                  AND `sys_trans_text`.`lang`='&1'
              ORDER BY `name`",
@@ -112,13 +112,13 @@ class countriesList
         global $opt;
 
         $returnValue = sql_value(
-            "SELECT IFNULL(`sys_trans_text`.`text`, `countries`.`name`) 
-             FROM `countries` 
-             LEFT JOIN `sys_trans` 
-                 ON `countries`.`trans_id`=`sys_trans`.`id` 
-             LEFT JOIN `sys_trans_text` 
-                 ON `sys_trans`.`id`=`sys_trans_text`.`trans_id` 
-                 AND `sys_trans_text`.`lang`='&2' 
+            "SELECT IFNULL(`sys_trans_text`.`text`, `countries`.`name`)
+             FROM `countries`
+             LEFT JOIN `sys_trans`
+                 ON `countries`.`trans_id`=`sys_trans`.`id`
+             LEFT JOIN `sys_trans_text`
+                 ON `sys_trans`.`id`=`sys_trans_text`.`trans_id`
+                 AND `sys_trans_text`.`lang`='&2'
              WHERE `countries`.`short`='&1'",
             '',
             $id,

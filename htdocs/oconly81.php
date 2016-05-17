@@ -27,12 +27,12 @@ sql(
     INNER JOIN `cache_logs`
         ON `cache_logs`.`user_id`=`user`.`user_id`
         AND `cache_logs`.`type`=1
-    INNER JOIN `caches` 
+    INNER JOIN `caches`
         ON `caches`.`cache_id`=`cache_logs`.`cache_id`
-    INNER JOIN `caches_attributes` 
+    INNER JOIN `caches_attributes`
         ON `caches_attributes`.`cache_id`=`cache_logs`.`cache_id`
         AND `caches_attributes`.`attrib_id`=6
-    INNER JOIN `user_options` 
+    INNER JOIN `user_options`
         ON `user_options`.`user_id`=`user`.`user_id`
     WHERE `user_options`.`option_id` = 13
     AND `user_options`.`option_value`='1'"

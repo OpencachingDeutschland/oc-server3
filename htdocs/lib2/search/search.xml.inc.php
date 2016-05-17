@@ -102,7 +102,7 @@ function search_output()
          INNER JOIN `caches` ON &searchtmp.`cache_id`=`caches`.`cache_id`
          INNER JOIN `user` ON &searchtmp.`user_id`=`user`.`user_id`
          INNER JOIN `cache_desc`
-             ON `caches`.`cache_id`=`cache_desc`.`cache_id` 
+             ON `caches`.`cache_id`=`cache_desc`.`cache_id`
              AND `caches`.`default_desclang`=`cache_desc`.`language`
          INNER JOIN `cache_type` ON `caches`.`type`=`cache_type`.`id`
          INNER JOIN `cache_status` ON `caches`.`status`=`cache_status`.`id`

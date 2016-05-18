@@ -7,7 +7,7 @@
  ***************************************************************************/
 
 /*
- * update of tables, indexes, triggers/storedprocs and static data in developer system
+ * update all code-version-dependent data on a developer system
  */
 
 $rootpath = $opt['rootpath'] = __DIR__ . '/../htdocs/';
@@ -17,7 +17,7 @@ require_once('lib2/cli.inc.php');
 echo "updating composer dependencies\n";
 system('composer install --ignore-platform-reqs');
 
-echo "updating db structure\n";
+echo "applying sql deltas\n";
 require('dbsv-update.php');
 
 echo "importing data.sql\n";

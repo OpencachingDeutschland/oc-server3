@@ -195,9 +195,8 @@ if [ -f opencaching_dump.sql ]; then
 	label "Import SQL Dump"
 	mysql -uroot -proot < opencaching_dump.sql
 
-	label "Apply SQL deltas"
+	label "Run database and cache updates"
 	cd /var/www/html/ && php bin/dbupdate.php
-	cd /var/www/html/ && php bin/dbsv-update.php
 else
 	errorLabel "Could not download or unpack sql dump from '$DUMP_URL'\n\n"
 	exit 1;

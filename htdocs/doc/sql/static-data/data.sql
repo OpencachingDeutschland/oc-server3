@@ -1790,7 +1790,6 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('922', 'INTERNAL
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('923', 'The compilation of the template faild. This should be a temporary failure. Please try again in some minutes.', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('933', 'Scan source codes', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('954', 'Default', '2010-08-28 11:48:04');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('957', 'Chat/IRC', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1059', 'There already exists an account with that username.', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1060', 'Problems with login', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1061', 'Terms of use and legal information', '2010-08-28 11:48:04');
@@ -2468,7 +2467,6 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2061', 'Cache n
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2062', 'Status changes', '2013-05-27 22:00:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2063', 'Changed by', '2013-05-27 22:00:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2065', 'Guest', '2013-04-25 23:00:00');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2066', 'Open chat in a new tab/window', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2067', 'Status', '2013-05-28 16:51:40');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2068', 'since June 2013', '2013-05-28 16:51:40');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2069', 'since deletion date February 2012', '2013-05-28 16:51:40');
@@ -4229,7 +4227,6 @@ INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('922',
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('923', './templates2/ocstyle/error.tpl', '24');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('933', './templates2/ocstyle/translate.tpl', '38');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('954', './templates2/ocstyle/reportcache.tpl', '75');
-INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('957', './templates2/ocstyle/webchat.tpl', '11');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1059', './templates2/ocstyle/myprofile.tpl', '34');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1059', './templates2/ocstyle/register.tpl', '80');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1060', './lang/de/ocstyle/login.tpl.php', '65');
@@ -5149,8 +5146,6 @@ INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('2061'
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('2062', './templates2/ocstyle/adminhistory.tpl', '87');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('2063', './templates2/ocstyle/adminhistory.tpl', '96');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('2063', './templates2/ocstyle/adminhistory.tpl', '125');
-INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('2065', './webchat.php', '20');
-INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('2066', './templates2/ocstyle/webchat.tpl', '14');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('2067', './templates2/ocstyle/adminhistory.tpl', '49');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('2067', './templates2/ocstyle/adminhistory.tpl', '95');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('2067', './templates2/ocstyle/res_cachelists.tpl', '17');
@@ -6439,7 +6434,6 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('923', 'DE', 'Die Erstellung der Seite ist fehlgeschlagen. Dieser Fehler sollte nur kurzzeitig auftreten, bitte rufe die Seite in wenigen Minuten nochmals auf.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('933', 'DE', 'Quelltext durchsuchen', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('954', 'DE', 'Standard', '2010-08-28 11:48:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('957', 'DE', 'Chat/IRC', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1059', 'DE', 'Es ist bereits ein Account mit diesem Benutzername vorhanden.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1060', 'DE', 'Opencaching-Wiki', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1061', 'DE', 'Impressum', '2010-08-28 11:48:07');
@@ -7117,7 +7111,6 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2062', 'DE', 'Statusänderungen', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2063', 'DE', 'Geändert von', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2065', 'DE', 'Gast', '2013-04-25 23:00:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2066', 'DE', 'Chat in neuem Tab/Fenster öffnen', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2067', 'DE', 'Status', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2068', 'DE', 'seit Juni 2013', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2069', 'DE', 'seit Löschdatum Februar 2012', '2013-04-25 23:00:00');
@@ -7592,7 +7585,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('78', 'EN', 'Italian', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('79', 'EN', 'Icelandic', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('80', 'EN', 'Home', '2010-08-28 11:48:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('82', 'EN', 'On this page you will find Geocaches from all over the world, with focus on Germany, Austria, Switzerland, Italy and Spain. We also offer information on miscellaneous geocaching topics, and a forum (message board) and chat for communicating with other cachers.</p><p class=\"startmessage\">If you would like to propagate geocaching in your own country, you may run your own Opencaching site in your own language, using our <a href=\"https://github.com/OpencachingDeutschland/oc-server3\" target=\"_blank\">software</a> and known-how. The long-term plan is to form a global geocaching network out of all Opencaching sites. Please contact us in our <a href=\"http://forum.opencaching.de/index.php?board=24.0\" target=\"_blank\">international forum</a> for more information.', '2013-02-11 14:25:06');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('82', 'EN', 'On this page you will find Geocaches from all over the world, with focus on Germany, Austria, Switzerland, Italy and Spain. We also offer information on miscellaneous geocaching topics and a forum (message board).</p><p class=\"startmessage\">If you would like to propagate geocaching in your own country, you may run your own Opencaching site in your own language, using our <a href=\"https://github.com/OpencachingDeutschland/oc-server3\" target=\"_blank\">software</a> and known-how. The long-term plan is to form a global geocaching network out of all Opencaching sites. Please contact us in our <a href=\"http://forum.opencaching.de/index.php?board=24.0\" target=\"_blank\">international forum</a> for more information.', '2013-02-11 14:25:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('83', 'EN', 'The file was not uploaded correctly.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('84', 'EN', 'The file was too big. The maximum file size is %1 KB.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('85', 'EN', 'No picture file given.', '2010-08-28 11:48:07');
@@ -8363,7 +8356,6 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('923', 'EN', 'The compilation of the template failed. This should be a temporary failure. Please try again in some minutes.', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('933', 'EN', 'Scan source codes', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('954', 'EN', 'Default', '2010-08-28 11:48:08');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('957', 'EN', 'Chat/IRC', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1059', 'EN', 'An account with that username already exists.', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1060', 'EN', 'Opencaching Wiki', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1061', 'EN', 'Terms of use and legal information', '2010-08-28 11:48:08');
@@ -9041,7 +9033,6 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2062', 'EN', 'Status changes', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2063', 'EN', 'Changed by', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2065', 'EN', 'Guest', '2013-02-19 05:48:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2066', 'EN', 'Open chat in a new tab/window', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2067', 'EN', 'Status', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2068', 'EN', 'since June 2013', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2069', 'EN', 'since deletion date February 2012', '2013-04-25 23:00:00');
@@ -9430,7 +9421,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('78', 'ES', 'Italiano', '2010-12-09 00:17:56');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('79', 'ES', 'Islandes', '2010-12-09 00:17:56');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('80', 'ES', 'Inicio', '2010-12-09 00:17:56');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('82', 'ES', 'En esta página podrás encontrar geocaches en todo el mundo, con especial atención a Alemania, Austria, Suiza, España y Italia. También ofrecemos información sobre temas diversos geocaching, y un foro (tablón de anuncios) y chat para comunicarse con otros cachers.', '2010-12-09 00:17:56');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('82', 'ES', 'En esta página podrás encontrar geocaches en todo el mundo, con especial atención a Alemania, Austria, Suiza, España y Italia. También ofrecemos información sobre temas diversos geocaching y un foro (tablón de anuncios).', '2010-12-09 00:17:56');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('83', 'ES', 'El archivo no se ha subido correctamente.', '2010-12-09 00:17:56');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('84', 'ES', 'El archivo era demasiado grande. Se permite un máximo de %1 KB.', '2010-12-09 00:17:56');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('85', 'ES', 'No hay imagen de archivo determinado.', '2010-12-09 00:17:56');
@@ -10201,7 +10192,6 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('923', 'ES', 'La creación del sitio ha fallado. Este error se produce sólo por un corto tiempo, por favor llame a la página de nuevo en unos minutos.', '2010-12-09 00:17:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('933', 'ES', 'Scan source codes', '2010-12-09 00:17:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('954', 'ES', 'Standard', '2010-12-09 00:17:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('957', 'ES', 'Chat/IRC', '2010-12-09 00:17:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1059', 'ES', 'Ya existe una cuenta con este nombre de usuario existe.', '2010-12-09 00:17:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1060', 'ES', 'Opencaching-Wiki', '2010-12-09 00:17:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1061', 'ES', 'Condiciones de uso e información legal', '2010-12-09 00:17:59');
@@ -10975,7 +10965,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('78', 'FR', 'Italien', '2010-10-04 00:17:40');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('79', 'FR', 'Islandais', '2010-10-04 00:17:40');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('80', 'FR', 'Page d\'accueil', '2010-10-04 00:17:40');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('82', 'FR', 'Sur cette page vous trouverez des Geocaches de tout le monde, en mettant l\'accent sur l\'Allemagne, l\'Autriche, la Suisse, l\'Italie, l\'Espagne et la France. Nous offrons également des informations sur les sujets de géocaching divers, et un forum (message board) et le chat pour communiquer avec d\'autres géocacheurs.</p>', '2015-08-25 01:28:59');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('82', 'FR', 'Sur cette page vous trouverez des Geocaches de tout le monde, en mettant l\'accent sur l\'Allemagne, l\'Autriche, la Suisse, l\'Italie, l\'Espagne et la France. Nous offrons également des informations sur les sujets de géocaching divers et un forum (message board).</p>', '2015-08-25 01:28:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('83', 'FR', 'Le fichier n\'est pas téléchargé correctement.', '2015-08-25 01:28:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('84', 'FR', 'Le fichier était trop grand. La taille maximale d\'un fichier est de %1 Ko.', '2015-08-25 01:28:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('85', 'FR', 'Aucun fichier d\'image donné.', '2015-08-25 01:28:59');
@@ -11746,7 +11736,6 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('923', 'FR', 'La compilation de ce modèle ratée. Cela devrait être un échec temporaire. S\'il vous plaît essayer de nouveau dans quelques minutes.', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('933', 'FR', 'Scan codes source', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('954', 'FR', 'Par défaut', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('957', 'FR', 'Chat/IRC', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1059', 'FR', 'Il existe déjà un compte avec ce nom d\'utilisateur.', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1060', 'FR', 'Opencaching-Wiki', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1061', 'FR', 'Conditions d\'utilisation et renseignements juridiques', '2015-08-25 01:29:00');
@@ -12889,7 +12878,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('78', 'IT', 'Italiano', '2010-08-28 21:19:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('79', 'IT', 'Islandese', '2010-08-28 21:27:05');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('80', 'IT', 'Inizio', '2010-08-28 21:19:25');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('82', 'IT', 'In questa pagina trovi le Geocache di tutto il mondo, con particolare riguardo a Germania, Austria, Italia e Spagna. Offriamo anche informazioni su svariati argomenti, e un forum (scambio messaggi) con chat per comunicare con altrio cachers.', '2010-12-19 00:27:25');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('82', 'IT', 'In questa pagina trovi le Geocache di tutto il mondo, con particolare riguardo a Germania, Austria, Italia e Spagna. Offriamo anche informazioni su svariati argomenti e un forum (scambio messaggi).', '2010-12-19 00:27:25');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('83', 'IT', 'Il file non è stato caricato correttamente.', '2010-08-28 21:20:35');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('84', 'IT', 'Il file è troppo grande. La dimensione massima è %1 KB.', '2010-08-28 21:21:01');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('85', 'IT', 'File per l\'immagine non definito.', '2010-08-28 21:22:12');
@@ -13660,7 +13649,6 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('923', 'IT', 'Fallimento nella compilazione del template. Potrebbe trattarsi di un problema temporaneo. Per favore riprova tra qualche minuto.', '2010-09-10 23:15:36');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('933', 'IT', 'Scan codice sorgente', '2010-09-10 23:15:36');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('954', 'IT', 'Standard', '2010-09-10 23:15:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('957', 'IT', 'Chat/IRC', '2010-09-10 23:15:36');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1059', 'IT', 'Esiste già un utente con questo nome.', '2010-09-10 23:15:36');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1060', 'IT', 'Opencaching-Wiki', '2010-10-27 18:49:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1061', 'IT', 'Condizioni d\'uso e informazioni legali', '2010-09-10 23:15:36');
@@ -14338,7 +14326,6 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2062', 'IT', 'stato modificato', '2013-07-24 15:42:12');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2063', 'IT', 'Modificato da', '2013-07-24 15:42:12');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2065', 'IT', 'ospite', '2013-07-24 15:42:12');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2066', 'IT', 'Apri chat in una nuova finestra', '2013-07-24 15:42:12');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2067', 'IT', 'Stato', '2013-07-24 15:42:12');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2068', 'IT', 'dal Giugno 2013', '2013-07-24 15:42:12');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2069', 'IT', 'dalla cancellazione di data Febbraio 2012', '2013-07-24 15:42:12');
@@ -15346,7 +15333,6 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('914', 'NL', 'Beschermd gebied', '2011-02-04 19:50:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('921', 'NL', 'Info', '2011-02-04 19:50:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('922', 'NL', 'NL', '2010-08-28 11:48:08');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('957', 'NL', 'Chat/IRC', '2011-02-04 19:50:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1097', 'NL', 'D/T', '2011-02-04 19:50:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1123', 'NL', 'Cachenaam', '2011-02-04 19:50:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1141', 'NL', 'N', '2011-02-04 19:50:07');

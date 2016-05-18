@@ -25,24 +25,34 @@ class user
     public $reUser;
     public $reUserStat;
 
+    /**
+     * @param string $email
+     *
+     * @return null|user
+     */
     public static function fromEMail($email)
     {
-        $userid = sql_value("SELECT `user_id` FROM `user` WHERE `email`='&1'", 0, $email);
-        if ($userid == 0) {
+        $userId = sql_value("SELECT `user_id` FROM `user` WHERE `email`='&1'", 0, $email);
+        if ($userId == 0) {
             return null;
         }
 
-        return new user($userid);
+        return new user($userId);
     }
 
+    /**
+     * @param string $username
+     *
+     * @return null|user
+     */
     public static function fromUsername($username)
     {
-        $userid = sql_value("SELECT `user_id` FROM `user` WHERE `username`='&1'", 0, $username);
-        if ($userid == 0) {
+        $userId = sql_value("SELECT `user_id` FROM `user` WHERE `username`='&1'", 0, $username);
+        if ($userId == 0) {
             return null;
         }
 
-        return new user($userid);
+        return new user($userId);
     }
 
     public function __construct($nNewUserId = ID_NEW)
@@ -110,11 +120,21 @@ class user
         return $this->reUser->exist();
     }
 
+    /**
+     * @param string $username
+     *
+     * @return bool
+     */
     public static function existUsername($username)
     {
         return (sql_value("SELECT COUNT(*) FROM `user` WHERE `username`='&1'", 0, $username) != 0);
     }
 
+    /**
+     * @param string $email
+     *
+     * @return bool
+     */
     public static function existEMail($email)
     {
         return (sql_value("SELECT COUNT(*) FROM `user` WHERE `email`='&1'", 0, $email) != 0);
@@ -838,12 +858,8 @@ class user
 
             // log
             sql(
-                "INSERT INTO `email_user` (`ipaddress`,
-                                           `from_user_id`,
-                                           `from_email`,
-                                           `to_user_id`,
-                                           `to_email`)
-                                   VALUES ('&1', '&2', '&3', '&4', '&5')",
+                "INSERT INTO `email_user` (`ipaddress`, `from_user_id`, `from_email`, `to_user_id`, `to_email`)
+                 VALUES ('&1', '&2', '&3', '&4', '&5')",
                 $_SERVER["REMOTE_ADDR"],
                 $fromUser->getUserId(),
                 $fromUser->getEMail(),
@@ -903,13 +919,11 @@ class user
 
         // delete private and system data
         sql(
-            "UPDATE `user` SET `password`=NULL, `email`=NULL,
-           `last_name`='', `first_name`='',
-                                 `country`=NULL, `latitude`=0, `longitude`=0,
-           `is_active_flag`=0, `activation_code`='',
-           `new_pw_code`=NULL, `new_pw_date`=NULL,
-           `new_email`=NULL, `new_email_code`=NULL, `new_email_date`=NULL,
-           `email_problems`=0, `first_email_problem`=NULL, `last_email_problem`=NULL
+            "UPDATE `user` SET `password`=NULL, `email`=NULL, `last_name`='', `first_name`='',
+                               `country`=NULL, `latitude`=0, `longitude`=0, `is_active_flag`=0, `activation_code`='',
+                               `new_pw_code`=NULL, `new_pw_date`=NULL, `new_email`=NULL, `new_email_code`=NULL,
+                               `new_email_date`=NULL, `email_problems`=0, `first_email_problem`=NULL,
+                               `last_email_problem`=NULL
              WHERE `user_id`='&1'",
             $this->nUserId
         );

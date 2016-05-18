@@ -10,17 +10,17 @@ class attribute
     /* array with all attributes grouped by attribute group */
     public static function getAttrbutesListArray($firstLetterUppercase = false)
     {
-        return attribute::getAttrbutesListArrayInternal(0, false, $firstLetterUppercase);
+        return self::getAttrbutesListArrayInternal(0, false, $firstLetterUppercase);
     }
 
     public static function getSelectableAttrbutesListArray($firstLetterUppercase = false)
     {
-        return attribute::getAttrbutesListArrayInternal(0, true, $firstLetterUppercase);
+        return self::getAttrbutesListArrayInternal(0, true, $firstLetterUppercase);
     }
 
     public static function getAttrbutesListArrayByCacheId($cacheId, $firstLetterUppercase = false)
     {
-        return attribute::getAttrbutesListArrayInternal($cacheId, false, $firstLetterUppercase);
+        return self::getAttrbutesListArrayInternal($cacheId, false, $firstLetterUppercase);
     }
 
     public static function getAttrbutesListArrayInternal($cacheId, $bOnlySelectable, $firstLetterUppercase)

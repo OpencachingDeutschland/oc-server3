@@ -20,7 +20,7 @@ class cachelist
     public $nCachelistId = 0;
     public $reCachelist;
 
-    public function __construct($nNewCachelistId = ID_NEW, $nUserId = 0)
+    public function __construct($nNewCacheListId = ID_NEW, $nUserId = 0)
     {
         global $opt;
 
@@ -38,9 +38,9 @@ class cachelist
         $this->reCachelist->addInt('desc_htmledit', 1, false);
         $this->reCachelist->addString('password', '', false);
 
-        $this->nCachelistId = $nNewCachelistId + 0;
+        $this->nCachelistId = $nNewCacheListId + 0;
 
-        if ($nNewCachelistId == ID_NEW) {
+        if ($nNewCacheListId == ID_NEW) {
             $this->reCachelist->addNew(null);
         } else {
             $this->reCachelist->load($this->nCachelistId);
@@ -103,8 +103,9 @@ class cachelist
             return ERROR_BAD_LISTNAME;
         } else {
             if (sql_value(
-                "SELECT `id` FROM `cache_lists`
-                           WHERE `user_id`='&1' AND `id`<>'&2' AND `name`='&3'",
+                "SELECT `id`
+                 FROM `cache_lists`
+                 WHERE `user_id`='&1' AND `id`<>'&2' AND `name`='&3'",
                 false,
                 $this->getUserId(),
                 $this->getId(),
@@ -332,9 +333,8 @@ class cachelist
         global $login;
 
         return sql_value(
-            "
-            SELECT 1 FROM `cache_list_watches`
-            WHERE `cache_list_id`='&1' AND `user_id`='&2'",
+            "SELECT 1 FROM `cache_list_watches`
+             WHERE `cache_list_id`='&1' AND `user_id`='&2'",
             0,
             $this->getId(),
             $login->userid
@@ -523,24 +523,23 @@ class cachelist
 
         $namefield = ($strip_nagchars ? 'STRIP_LEADING_NONALNUM(`cache_lists`.`name`)' : '`cache_lists`.`name`');
         $rs = sql(
-            "
-            SELECT `cache_lists`.`id`, `cache_lists`.`user_id`, `user`.`username`,
-                   $namefield `name`,
-                   `cache_lists`.`is_public` `visibility`, `cache_lists`.`password`,
-                   `cache_lists`.`description`, `cache_lists`.`desc_htmledit`,
-                   `cache_lists`.`user_id`='&1' `own_list`,
-                   `stat_cache_lists`.`entries`, `stat_cache_lists`.`watchers`,
-                   `w`.`user_id` IS NOT NULL `watched_by_me`,
-                   `b`.`user_id` IS NOT NULL `bookmarked`,
-                   $prio `prio`
-            FROM `cache_lists`
-            LEFT JOIN `stat_cache_lists` ON `stat_cache_lists`.`cache_list_id`=`cache_lists`.`id`
-            LEFT JOIN `user` ON `user`.`user_id`=`cache_lists`.`user_id`
-            LEFT JOIN `cache_list_watches` `w` ON `w`.`cache_list_id`=`cache_lists`.`id` AND `w`.`user_id`='&1'
-            LEFT JOIN `cache_list_bookmarks` `b` ON `b`.`cache_list_id`=`cache_lists`.`id` AND `b`.`user_id`='&1'
-            WHERE $condition
-            ORDER BY `prio`, $namefield
-            LIMIT &2,&3",
+            "SELECT `cache_lists`.`id`, `cache_lists`.`user_id`, `user`.`username`,
+                    $namefield `name`,
+                    `cache_lists`.`is_public` `visibility`, `cache_lists`.`password`,
+                    `cache_lists`.`description`, `cache_lists`.`desc_htmledit`,
+                    `cache_lists`.`user_id`='&1' `own_list`,
+                    `stat_cache_lists`.`entries`, `stat_cache_lists`.`watchers`,
+                    `w`.`user_id` IS NOT NULL `watched_by_me`,
+                    `b`.`user_id` IS NOT NULL `bookmarked`,
+                    $prio `prio`
+             FROM `cache_lists`
+             LEFT JOIN `stat_cache_lists` ON `stat_cache_lists`.`cache_list_id`=`cache_lists`.`id`
+             LEFT JOIN `user` ON `user`.`user_id`=`cache_lists`.`user_id`
+             LEFT JOIN `cache_list_watches` `w` ON `w`.`cache_list_id`=`cache_lists`.`id` AND `w`.`user_id`='&1'
+             LEFT JOIN `cache_list_bookmarks` `b` ON `b`.`cache_list_id`=`cache_lists`.`id` AND `b`.`user_id`='&1'
+             WHERE $condition
+             ORDER BY `prio`, $namefield
+             LIMIT &2,&3",
             $login->userid,
             $startat,
             $maxitems

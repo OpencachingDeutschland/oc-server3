@@ -493,7 +493,7 @@ function ftsearch_set_entries($object_type, $object_id, $cache_id, &$text, $last
     ftsearch_delete_entries($object_type, $object_id, $cache_id);
 
     $ahash = ftsearch_hash($text);
-    foreach ($ahash AS $k => $h) {
+    foreach ($ahash as $k => $h) {
         sql(
             "INSERT INTO `search_index` (`object_type`, `cache_id`, `hash`, `count`)
             VALUES ('&1', '&2', '&3', '&4') ON DUPLICATE KEY UPDATE `count`=`count`+1",

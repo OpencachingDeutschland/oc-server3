@@ -491,11 +491,6 @@ $opt['wikinews']['url'] = 'http://wiki.opencaching.de/index.php/Spezial:Neue_Sei
 $opt['wikinews']['count'] = 5;
 $opt['wikinews']['timeout'] = 20;
 
-// settings for webchat.php
-$opt['chat']['url'] = 'http://webchat.freenode.net/?nick={chatusername}&amp;channels=opencaching.de&amp;prompt=1';
-$opt['chat']['width'] = 720;
-$opt['chat']['height'] = 480;
-
 /* 3rd party library options
   */
 

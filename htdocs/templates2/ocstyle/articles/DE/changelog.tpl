@@ -38,6 +38,7 @@
         <li>Hinweisteile in [ ] werden beim Entschlüsseln ignoriert.</li>
         <li>Man kann zwischen den angehängten Bildern einer Cachebeschreibung blättern.</li>
         <li>Vergrößerte Bilder werden mit einem Rechtsklick nicht mehr geschlossen.</li>
+        <li>Der Opencaching-Chat entfällt.</li>
         <li>Bugfix: Druckansicht von Cachebeschreibungen erscheint in gewählter Sprache.</li>
         <li>Bugfix: Keine OConly-Benachrichtigungen für ignorierte Caches. [Bug von Version 9]</li>
     </ul>

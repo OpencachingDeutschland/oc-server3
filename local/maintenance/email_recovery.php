@@ -17,7 +17,7 @@
  ***************************************************************************/
 
 $opt['rootpath'] = __DIR__ . '/../../htdocs/';
-require($opt['rootpath'] . 'lib2/cli.inc.php');
+require $opt['rootpath'] . 'lib2/cli.inc.php';
 
 if ($argc < 3 || $argc > 4) {
     die(
@@ -274,7 +274,7 @@ class EmailRecovery
                 $r['cache_id'],
                 $r['longitude'],
                 $r['latitude']
-             );
+            );
         }
         sql_free_result($rs);
 

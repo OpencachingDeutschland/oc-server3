@@ -5,8 +5,7 @@
  *  Unicode Reminder メモ
  ***************************************************************************/
 
-require_once($opt['rootpath'] . 'lib2/logic/const.inc.php');
-require_once($opt['rootpath'] . 'lib2/logic/useroptions.class.php');
+require_once __DIR__ . '/logic/const.inc.php';
 
 class translateAccess
 {

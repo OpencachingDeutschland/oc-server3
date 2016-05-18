@@ -2,14 +2,18 @@
 /***************************************************************************
  *  For license information see doc/license.txt
  *
- *    This script was used for adding nano queries when nano size was implemented.
+ *  This script was used for adding nano queries when nano size was implemented.
  *  It may be adopted for future additions of cache sizes or types.
  *
  *  Unicode Reminder メモ
  ***************************************************************************/
 
-$opt['rootpath'] = '../htdocs/';
-require($opt['rootpath'] . 'lib2/web.inc.php');
+$opt['rootpath'] = '../../htdocs/';
+require $opt['rootpath'] . 'lib2/web.inc.php';
+
+if ($argc != 2 || $argv[1] != 'go') {
+    die("run with parameter 'go' to update queries\n");
+}
 
 $rs = sql('SELECT * FROM queries');
 while ($r = sql_fetch_array($rs)) {

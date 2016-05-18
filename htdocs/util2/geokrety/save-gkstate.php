@@ -9,7 +9,7 @@
  ***************************************************************************/
 
 $opt['rootpath'] = __DIR__ . '/../../';
-require_once($opt['rootpath'] . 'lib2/cli.inc.php');
+require_once $opt['rootpath'] . 'lib2/cli.inc.php';
 
 if (count($argv) != 2 || ($argv[1] != 'init' && $argv[1] != 'discard')) {
     die("\n" .

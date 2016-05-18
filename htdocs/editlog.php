@@ -1,34 +1,24 @@
 <?php
-/***************************************************************************
-                                                                ./editlog.php
-                                                            -------------------
-        begin                : July 5 2004
-
-        For license information see doc/license.txt
-*****************************************************************************/
-
 /****************************************************************************
+ *  For license information see doc/license.txt
+ *
+ *  edit a cache log
+ *
+ *  used template(s): editlog
+ *  GET/POST Parameter: logid
+ *
+ *  Note: when changing recommendation, the last_modified-date of log-record
+ *        has to be updated to trigger resync via xml-interface
+ *
+ *  Unicode Reminder メモ
+ *****************************************************************************/
 
-   Unicode Reminder メモ
-
-     edit a log listing
-
-     used template(s): editlog
-
-     GET/POST Parameter: logid
-     
-     Note: when changing recommendation, the last_modified-date of log-record
-           has to be updated to trigger resync via xml-interface
-
- ****************************************************************************/
-
-  //prepare the templates and include all neccessary
-    require_once('lib/consts.inc.php');
-    $opt['gui'] = GUI_HTML;
-    require_once('lib/common.inc.php');
-    require_once('lib2/logic/logtypes.inc.php');
-    require_once('lib/recommendation.inc.php');
-    require_once('lib2/edithelper.inc.php');
+require_once 'lib/consts.inc.php';
+$opt['gui'] = GUI_HTML;
+require_once 'lib/common.inc.php';
+require_once 'lib2/logic/logtypes.inc.php';
+require_once 'lib/recommendation.inc.php';
+require_once 'lib2/edithelper.inc.php';
 
     //Preprocessing
     if ($error == false)
@@ -86,8 +76,8 @@
                     (($log_record['status'] != 6 || ($log_record['cache_user_id'] == $login->userid && $log_record['user_id'] == $login->userid)) &&
                      $log_record['status'] != 7) || $useradmin)
             {
-                require($stylepath . '/editlog.inc.php');
-                require($stylepath.'/rating.inc.php');
+                require $stylepath . '/editlog.inc.php';
+                require $stylepath.'/rating.inc.php';
 
                 if ($log_record['node'] != $oc_nodeid)
                 {
@@ -290,7 +280,7 @@
                         if ($log_record['logtype'] != $log_type)
                         {
                             //call eventhandler
-                            require_once($opt['rootpath'] . 'lib/eventhandler.inc.php');
+                            require_once $opt['rootpath'] . 'lib/eventhandler.inc.php';
                             event_change_log_type($log_record['cache_id'], $usr['userid']+0);
                         }
 

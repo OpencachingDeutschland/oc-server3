@@ -6,9 +6,7 @@
  ***************************************************************************/
 
 $disable_verifyemail = true;
-require_once('lib2/web.inc.php');
-require_once('lib2/logic/user.class.php');
-require_once('lib2/logic/useroptions.class.php');
+require 'lib2/web.inc.php';
 
 $tpl->name = 'verifyemail';
 $tpl->menuitem = MNU_VERIFY_EMAIL;

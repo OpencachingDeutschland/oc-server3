@@ -29,12 +29,12 @@
     //Menü laden
     global $mnu_bgcolor, $mnu_selmenuitem, $develwarning, $tpl_subtitle, $opt, $rootpath, $usr;
 
-    require_once($stylepath . '/lib/menu.php');
+    require_once $stylepath . '/lib/menu.php';
     if (function_exists('post_config')) {
         post_config();
     }
 
-    require_once($rootpath . 'lib2/smarty/ocplugins/function.season.php');
+    require_once $rootpath . 'lib2/smarty/ocplugins/function.season.php';
 
     $sUserCountry = getUserCountry();
     $pageidx = mnu_MainMenuIndexFromPageId($menu, $tplname);

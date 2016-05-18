@@ -7,7 +7,7 @@
 
 namespace Oc\Libse\Language;
 
-require_once(__DIR__ . '/../../../../lib2/translate.class.php');
+require_once __DIR__ . '/../../../../lib2/translate.class.php';
 
 class TranslatorLanguage
 {

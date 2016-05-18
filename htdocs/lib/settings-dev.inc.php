@@ -36,7 +36,7 @@ if (!isset($timezone)) {
 $style = 'ocstyle';
 
 // include common settings of lib1 and lib2
-require_once($rootpath . 'config2/settings-dist-common.inc.php');
+require_once $rootpath . 'config2/settings-dist-common.inc.php';
 
 //id of the node; see config2/settings-dist.inc.php
 $oc_nodeid = 4;
@@ -123,7 +123,7 @@ $opt['logic']['license']['terms'] = $absolute_server_URI . 'articles.php?page=im
 $opt['logic']['admin']['listingadmin_notification'] = 'root';
 
 // include all locale settings
-require_once($rootpath . 'config2/locale.inc.php');
+require_once $rootpath . 'config2/locale.inc.php';
 
 /* replicated slave databases
  * use same config as in config2/settings.inc.php (!)

@@ -5,8 +5,7 @@
  *  Unicode Reminder メモ
  ***************************************************************************/
 
-require('./lib2/web.inc.php');
-require_once('./lib2/logic/user.class.php');
+require 'lib2/web.inc.php';
 
 $tpl->name = 'mywatches';
 $tpl->menuitem = MNU_MYPROFILE_WATCHES;

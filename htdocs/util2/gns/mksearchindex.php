@@ -10,8 +10,8 @@
  ***************************************************************************/
 
 $opt['rootpath'] = '../../';
-require_once($opt['rootpath'] . 'lib2/cli.inc.php');
-require_once($opt['rootpath'] . 'lib2/search/search.inc.php');
+require_once $opt['rootpath'] . 'lib2/cli.inc.php';
+require_once $opt['rootpath'] . 'lib2/search/search.inc.php';
 
 
 $doubleindex['sankt'] = 'st';

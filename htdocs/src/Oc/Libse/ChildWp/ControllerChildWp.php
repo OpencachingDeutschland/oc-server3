@@ -11,7 +11,7 @@ use Oc\Libse\Coordinate\CoordinateCoordinate;
 use Oc\Libse\Http\RequestHttp;
 use Oc\Libse\Language\TranslatorLanguage;
 
-require_once(__DIR__ . '/../../../../lib2/error.inc.php');
+require_once __DIR__ . '/../../../../lib2/error.inc.php';
 
 class ControllerChildWp
 {

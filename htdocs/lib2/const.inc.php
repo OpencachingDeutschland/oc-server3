@@ -7,7 +7,7 @@
  *  Constant definitions
  ***************************************************************************/
 
-require_once(__DIR__ . '/../lib/consts-common.inc.php');
+require_once __DIR__ . '/../lib/consts-common.inc.php';
 
 define('DEBUG_NO', 0);
 define('DEBUG_DEVELOPER', 1);

@@ -5,9 +5,10 @@
  *  Unicode Reminder メモ
  ***************************************************************************/
 
-$opt['rootpath'] = '../../';
 header('Content-type: text/html; charset=utf-8');
-require($opt['rootpath'] . 'lib2/web.inc.php');
+
+$opt['rootpath'] = '../../';
+require $opt['rootpath'] . 'lib2/web.inc.php';
 
 $n = 1;
 $rs = sql('SELECT `user`.`username`, `stat_user`.`found`

@@ -5,7 +5,7 @@
  *  Unicode Reminder メモ
  ***************************************************************************/
 
-require('./lib2/web.inc.php');
+require 'lib2/web.inc.php';
 
 //get the article name to display
 $article = '';
@@ -74,7 +74,7 @@ if (!$tpl->is_cached()) {
     /* prepare smarty vars for special pages ...
      */
     if ($article == 'cacheinfo') {
-        require_once($opt['rootpath'] . 'lib2/logic/attribute.class.php');
+        require_once $opt['rootpath'] . 'lib2/logic/attribute.class.php';
         $attributes = attribute::getSelectableAttrbutesListArray(true);
         $tpl->assign('attributes', $attributes);
     }

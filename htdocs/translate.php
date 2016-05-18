@@ -5,11 +5,9 @@
  *  Unicode Reminder メモ
  ***************************************************************************/
 
-require('./lib2/web.inc.php');
-require_once('./lib2/translate.class.php');
-require_once('./lib2/translationHandler.class.php');
-require_once('./lib2/translate_filescan.class.php');
-require_once('./lib2/translateAccess.php');
+require 'lib2/web.inc.php';
+require_once 'lib2/translate.class.php';
+require_once 'lib2/translationHandler.class.php';
 
 /* config section
  */

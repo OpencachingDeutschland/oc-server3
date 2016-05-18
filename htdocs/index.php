@@ -5,9 +5,9 @@
  *  Unicode Reminder メモ
  ***************************************************************************/
 
-require_once(__DIR__.'/vendor/autoload.php');
-require('./lib2/web.inc.php');
-require('./lib2/logic/logpics.inc.php');
+require 'lib2/web.inc.php';
+require 'lib2/logic/logpics.inc.php';
+
 $sUserCountry = $login->getUserCountry();
 
 // create object for "newest" information
@@ -65,7 +65,7 @@ if (!$tpl->is_cached()) {
     /*
             // forum entries
             if (file_exists($opt['rootpath'] . 'cache2/phpbb.inc.php'))
-                require_once($opt['rootpath'] . 'cache2/phpbb.inc.php');
+                require_once $opt['rootpath'] . 'cache2/phpbb.inc.php';
             else
     */
 

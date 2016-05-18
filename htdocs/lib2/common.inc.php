@@ -10,7 +10,7 @@
  *  TODO: accept-language des Browser auswerten
  ***************************************************************************/
 
-require_once(__DIR__ . '/../vendor/autoload.php');
+require_once __DIR__ . '/../vendor/autoload.php';
 
 function __autoload($class_name)
 {
@@ -23,9 +23,9 @@ function __autoload($class_name)
     $file1 = $opt['rootpath'] . 'lib2/' . $class_name . '.class.php';
     $file2 = $opt['rootpath'] . 'lib2/logic/' . $class_name . '.class.php';
     if (file_exists($file1)) {
-        require_once($file1);
+        require_once $file1;
     } elseif (file_exists($file2)) {
-        require_once($file2);
+        require_once $file2;
     }
 }
 
@@ -46,9 +46,9 @@ mb_regex_encoding('UTF-8');
 fix_magic_quotes_gpc();
 
 // set options
-require_once($opt['rootpath'] . 'config2/settings-dist.inc.php');
-require_once($opt['rootpath'] . 'config2/settings.inc.php');
-require_once($opt['rootpath'] . 'config2/verify-settings.inc.php');
+require_once $opt['rootpath'] . 'config2/settings-dist.inc.php';
+require_once $opt['rootpath'] . 'config2/settings.inc.php';
+require_once $opt['rootpath'] . 'config2/verify-settings.inc.php';
 
 foreach ($opt['page']['banned_user_agents'] as $ua) {
     if (strpos($useragent, $ua) !== false) {
@@ -72,10 +72,10 @@ if (($opt['debug'] & DEBUG_FORCE_TRANSLATE) != DEBUG_FORCE_TRANSLATE) {
     }
 }
 
-require_once($opt['rootpath'] . 'lib2/errorhandler.inc.php');
+require_once $opt['rootpath'] . 'lib2/errorhandler.inc.php';
 configure_php();
 
-require($opt['rootpath'] . 'lib2/cookie.class.php');
+require $opt['rootpath'] . 'lib2/cookie.class.php';
 normalize_settings();
 set_language();
 set_usercountry();
@@ -101,19 +101,18 @@ check_useragent();
 /* setup smarty
  *
  */
-require($opt['rootpath'] . 'lib2/OcSmarty.class.php');
+require $opt['rootpath'] . 'lib2/OcSmarty.class.php';
 $tpl = new OcSmarty();
 
 // include all we need
-require_once($opt['rootpath'] . 'lib2/logic/const.inc.php');
-require_once($opt['rootpath'] . 'lib2/logic/geomath.class.php');
-require_once($opt['rootpath'] . 'lib2/error.inc.php');
-require_once($opt['rootpath'] . 'lib2/util.inc.php');
-require_once($opt['rootpath'] . 'lib2/db.inc.php');
-require_once($opt['rootpath'] . 'lib2/login.class.php');
-require_once($opt['rootpath'] . 'lib2/menu.class.php');
-require_once($opt['rootpath'] . 'lib2/logic/labels.inc.php');
-// require_once($opt['rootpath'] . 'lib2/throttle.inc.php');
+require_once $opt['rootpath'] . 'lib2/logic/const.inc.php';
+require_once $opt['rootpath'] . 'lib2/error.inc.php';
+require_once $opt['rootpath'] . 'lib2/util.inc.php';
+require_once $opt['rootpath'] . 'lib2/db.inc.php';
+require_once $opt['rootpath'] . 'lib2/login.class.php';
+require_once $opt['rootpath'] . 'lib2/menu.class.php';
+require_once $opt['rootpath'] . 'lib2/logic/labels.inc.php';
+// require_once $opt['rootpath'] . 'lib2/throttle.inc.php';
 
 // apply post configuration
 if (function_exists('post_config')) {

@@ -10,7 +10,7 @@ if (!file_exists($opt['rootpath'] . 'cache2/labels-' . $opt['template']['locale'
     labels::CreateCacheFile();
 }
 
-require($opt['rootpath'] . 'cache2/labels-' . $opt['template']['locale'] . '.inc.php');
+require $opt['rootpath'] . 'cache2/labels-' . $opt['template']['locale'] . '.inc.php';
 
 class labels
 {

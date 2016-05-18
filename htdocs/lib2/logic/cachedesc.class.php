@@ -8,8 +8,6 @@
  *   add/remove etc. is executed instantly
  ***************************************************************************/
 
-require_once(__DIR__ . '/rowEditor.class.php');
-
 class cachedesc
 {
     public $nCacheDescId = 0;

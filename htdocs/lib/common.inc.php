@@ -1,13 +1,6 @@
 <?php
 /****************************************************************************
- * ./lib/common.inc.php
- * --------------------
- * begin                : Mon June 14 2004
- *
  * For license information see doc/license.txt
- ****************************************************************************/
-
-/****************************************************************************
  *
  * Unicode Reminder メモ
  *
@@ -17,8 +10,6 @@
  * parameter: lang       get/post/cookie   used language
  * style      get/post/cookie   used style
  ****************************************************************************/
-
-require_once(__DIR__ . '/../vendor/autoload.php');
 
 if (isset($opt['rootpath'])) {
     $rootpath = $opt['rootpath'];
@@ -91,7 +82,7 @@ if (get_magic_quotes_gpc()) {
 if (!isset($rootpath)) {
     $rootpath = './';
 }
-require_once($rootpath . 'lib/clicompatbase.inc.php');
+require_once $rootpath . 'lib/clicompatbase.inc.php';
 
 // enforce http or https?
 if (isset($opt['gui']) && $opt['gui'] == GUI_HTML) {
@@ -114,7 +105,7 @@ if (isset($opt['gui']) && $opt['gui'] == GUI_HTML) {
 load_domain_settings();
 
 // load HTML specific includes
-require_once($rootpath . 'lib/cookie.class.php');
+require_once $rootpath . 'lib/cookie.class.php';
 
 //site in service?
 if ($site_in_service == false) {
@@ -177,14 +168,14 @@ load_gettext();
 //open a databse connection
 db_connect();
 
-require($opt['rootpath'] . 'lib/auth.inc.php');
-require_once($opt['rootpath'] . 'lib2/translate.class.php');
+require $opt['rootpath'] . 'lib/auth.inc.php';
+require_once $opt['rootpath'] . 'lib2/translate.class.php';
 
 //load language specific strings
-require_once($langpath . '/expressions.inc.php');
+require_once $langpath . '/expressions.inc.php';
 
 //set up the defaults for the main template
-require_once($stylepath . '/varset.inc.php');
+require_once $stylepath . '/varset.inc.php';
 
 if ($dblink === false) {
     //error while connecting to the database
@@ -226,7 +217,7 @@ if ($dblink === false) {
 $ocpropping = isset($_SERVER['HTTP_USER_AGENT']) && strpos($_SERVER['HTTP_USER_AGENT'], "Ocprop/") !== false;
 
 // zeitmessung
-require_once($rootpath . 'lib/bench.inc.php');
+require_once $rootpath . 'lib/bench.inc.php';
 $bScriptExecution = new Cbench;
 $bScriptExecution->start();
 

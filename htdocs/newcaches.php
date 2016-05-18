@@ -5,7 +5,8 @@
  *  Unicode Reminder メモ
  ***************************************************************************/
 
-require('./lib2/web.inc.php');
+require 'lib2/web.inc.php';
+
 $tpl->name = 'newcaches';
 $tpl->menuitem = MNU_START_NEWCACHES;
 $tpl->change_country_inpage = true;
@@ -30,7 +31,7 @@ if ($startat > 10 * $perpage) {
 }
 
 if (!$tpl->is_cached()) {
-    require($opt['rootpath'] . 'lib2/logic/cacheIcon.inc.php');
+    require $opt['rootpath'] . 'lib2/logic/cacheIcon.inc.php';
 
     $cachetype_condition = ($cachetype ? " AND `caches`.`type` = " . sql_escape($cachetype) : "");
     if ($bEvents) {

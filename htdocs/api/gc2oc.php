@@ -13,8 +13,8 @@
  *
  ***************************************************************************/
 
-$opt['rootpath'] = '../';
-require(__DIR__ . '/../lib2/web.inc.php');
+$opt['rootpath'] = __DIR__ . '/../';
+require $opt['rootpath'] . 'lib2/web.inc.php';
 
 if (isset($_REQUEST['report']) && $_REQUEST['report']) {
     header('Content-type: text/plain');

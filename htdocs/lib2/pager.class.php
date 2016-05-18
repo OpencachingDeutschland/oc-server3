@@ -1,5 +1,4 @@
 <?php
-
 /***************************************************************************
  *  For license information see doc/license.txt
  *
@@ -8,6 +7,7 @@
  *  Set template variables for displaying a page browser control.
  *  Output is formatted by templates2/<style>/res_pager.tpl.
  ***************************************************************************/
+
 class pager
 {
     private $link_url;

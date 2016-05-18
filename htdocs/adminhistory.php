@@ -5,8 +5,7 @@
  *  Unicode Reminder メモ
  ***************************************************************************/
 
-require('./lib2/web.inc.php');
-require_once('./lib2/logic/cache.class.php');
+require 'lib2/web.inc.php';
 
 $tpl->name = 'adminhistory';
 $tpl->menuitem = MNU_ADMIN_HISTORY;
@@ -33,7 +32,7 @@ if ($cache_id >= 0 && sql_value("SELECT COUNT(*) FROM `caches` WHERE `cache_id`=
     $error = $translate->t('Cache not found', '', '', 0);
 } elseif ($cache_id > 0) {
     $showhistory = true;
-    $cache = new Cache($cache_id);
+    $cache = new cache($cache_id);
     $cache->setTplHistoryData(0);
 }
 

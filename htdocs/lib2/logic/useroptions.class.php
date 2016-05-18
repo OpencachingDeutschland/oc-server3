@@ -7,9 +7,8 @@
  *   set has to be commited with save
  *
  ***************************************************************************/
-global $opt;
 
-require_once(__DIR__ . '/const.inc.php');
+require_once __DIR__ . '/const.inc.php';
 
 class useroptions
 {

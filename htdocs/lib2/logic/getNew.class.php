@@ -1,5 +1,4 @@
 <?php
-
 /***************************************************************************
  *  For license information see doc/license.txt
  *
@@ -8,6 +7,7 @@
  *  summarize methods to get new events, caches, ratings, etc.
  * @todo check unused functions if the are really unused remove them
  ***************************************************************************/
+
 class getNew
 {
     // class variables

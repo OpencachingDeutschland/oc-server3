@@ -7,7 +7,7 @@
  *  Shortcut for cachelist search
  ***************************************************************************/
 
-require('./lib2/web.inc.php');
+require 'lib2/web.inc.php';
 
 $id = isset($_REQUEST['id']) ? $_REQUEST['id'] + 0 : 0;
 $password = isset($_REQUEST['key']) ? $_REQUEST['key'] : '';

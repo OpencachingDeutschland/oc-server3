@@ -22,7 +22,7 @@
 // ported from lib1 to lib2 / untested!
 
 $opt['rootpath'] = '../../';
-require_once(__DIR__.'/../../lib2/cli.inc.php');
+require_once __DIR__.'/../../lib2/cli.inc.php';
 
 /* defaults */
 $importfiles = [

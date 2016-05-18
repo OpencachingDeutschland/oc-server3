@@ -5,8 +5,7 @@
  *  Unicode Reminder メモ
  ***************************************************************************/
 
-require_once($opt['rootpath'] . 'lib2/translateAccess.php');
-require_once($opt['rootpath'] . 'lib2/translationHandler.class.php');
+require_once $opt['rootpath'] . 'lib2/translationHandler.class.php';
 
 function createTranslate($backtrace_level = 0)
 {

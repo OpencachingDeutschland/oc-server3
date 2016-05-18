@@ -1,26 +1,18 @@
 <?php
 /***************************************************************************
- * ./newcache.php
- * -------------------
- * begin                : June 24 2004
+ *  For license information see doc/license.txt
  *
- * For license information see doc/license.txt
- ****************************************************************************/
+ *  submit a new cache
+ *
+ *  used template(s): newcache, viewcache, login
+ *
+ *  Unicode Reminder メモ
+ ***************************************************************************/
 
-/****************************************************************************
- *
- * Unicode Reminder メモ
- *
- * submitt a new cache
- *
- * used template(s): newcache, viewcache, login
- ****************************************************************************/
-
-//prepare the templates and include all neccessary
-require_once('lib/consts.inc.php');
+require_once 'lib/consts.inc.php';
 $opt['gui'] = GUI_HTML;
-require_once('lib/common.inc.php');
-require_once('lib2/edithelper.inc.php');
+require_once 'lib/common.inc.php';
+require_once 'lib2/edithelper.inc.php';
 
 $no_tpl_build = false;
 
@@ -41,7 +33,7 @@ if ($error == false) {
 
         //set here the template to process
         $tplname = 'newcache';
-        require_once($stylepath . '/' . $tplname . '.inc.php');
+        require_once $stylepath . '/' . $tplname . '.inc.php';
 
         //set template replacements
         tpl_set_var('reset', $reset);  // obsolete

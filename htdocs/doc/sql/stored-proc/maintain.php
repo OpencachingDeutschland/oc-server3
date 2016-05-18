@@ -9,7 +9,7 @@
  ***************************************************************************/
 
 $opt['rootpath'] = __DIR__ . '/../../../';
-require_once($opt['rootpath'] . 'lib2/cli.inc.php');
+require $opt['rootpath'] . 'lib2/cli.inc.php';
 
 if ($opt['db']['maintenance_user'] == '') {
     die("ERROR: \$opt['db']['maintenance_user'] is not set in config2/settings.inc.php\n");

@@ -8,8 +8,8 @@
  *  Do not modify this file - use settings.inc.php!
  ***************************************************************************/
 
-require_once('locale.inc.php');
-require_once('settings-dist-common.inc.php');
+require_once 'locale.inc.php';
+require_once 'settings-dist-common.inc.php';
 
 /* PHP settings
  *

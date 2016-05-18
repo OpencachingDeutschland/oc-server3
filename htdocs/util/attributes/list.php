@@ -5,9 +5,10 @@
  *  Unicode Reminder メモ
  ***************************************************************************/
 
-$rootpath = '../../';
 header('Content-type: text/html; charset=utf-8');
-require_once(__DIR__ . '/../../lib/common.inc.php');
+
+$rootpath = __DIR__ . '/../../';
+require_once $rootpath . 'lib/common.inc.php';
 
 ?>
 <html>

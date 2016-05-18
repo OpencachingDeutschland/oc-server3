@@ -5,7 +5,7 @@
  *  Unicode Reminder メモ
  *
  * TODO:
- *        - limit / clean up archive
+ *        - limit / clean up archive ?
  *        - do not archive anything with is not from our node
  ***************************************************************************/
 
@@ -132,12 +132,8 @@ x                    cache_logs_restored   I*     here          datetime     no 
 
 */
 
-require('./lib2/web.inc.php');
-require_once('./lib2/logic/labels.inc.php');
-require_once('./lib2/logic/cache.class.php');
-require_once('./lib2/logic/cachelog.class.php');
-require_once('./lib2/logic/coordinate.class.php');
-require_once('./lib2/logic/picture.class.php');
+require 'lib2/web.inc.php';
+require_once 'lib2/logic/labels.inc.php';
 
 $tpl->name = 'restorecaches';
 $tpl->menuitem = MNU_ADMIN_RESTORE;

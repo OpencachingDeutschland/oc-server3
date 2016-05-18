@@ -14,7 +14,7 @@
  * named consts
  ****************************************************************************/
 
-require_once(__DIR__ . '/consts-common.inc.php');
+require_once __DIR__ . '/consts-common.inc.php';
 
 // for cachelists
 define('cachelist_type_ignore', 1);

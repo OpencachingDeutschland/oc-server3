@@ -21,6 +21,6 @@ $dbname = 'opencaching';
 $tmpdbname = 'octmp';   // empty db with CREATE and DROP privileges
 
 // common developer system settings
-require("settings-dev.inc.php");
+require 'settings-dev.inc.php';
 
 $sql_errormail = 'root';

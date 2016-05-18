@@ -13,21 +13,19 @@
  *  to the root.
  ***************************************************************************/
 
-require_once(__DIR__ . '/../vendor/autoload.php');
-
 // setup rootpath
 if (!isset($opt['rootpath'])) {
     $opt['rootpath'] = './';
 }
 
 // chicken-egg problem ...
-require_once($opt['rootpath'] . 'lib2/const.inc.php');
+require_once $opt['rootpath'] . 'lib2/const.inc.php';
 
 // do all output in HTML format
 $opt['gui'] = GUI_HTML;
 
 // include the main library
-require_once($opt['rootpath'] . 'lib2/common.inc.php');
+require_once $opt['rootpath'] . 'lib2/common.inc.php';
 
 // enforce http or https?
 if ($opt['page']['https']['mode'] == HTTPS_DISABLED) {

@@ -1,4 +1,4 @@
-<?PHP
+<?php
 
 /** SS_ZIP class is designed to work with ZIP archives
  *

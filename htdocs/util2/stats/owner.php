@@ -5,10 +5,10 @@
  *  Unicode Reminder メモ
  ***************************************************************************/
 
-$opt['rootpath'] = '../../';
-require($opt['rootpath'] . 'lib2/web.inc.php');
-
 header('Content-type: text/html; charset=utf-8');
+
+$opt['rootpath'] = '../../';
+require $opt['rootpath'] . 'lib2/web.inc.php';
 
 echo "<h2>Top-Owner</h2>\n";
 

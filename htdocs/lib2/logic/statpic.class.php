@@ -5,8 +5,6 @@
  *  Unicode Reminder メモ
  ***************************************************************************/
 
-require_once(__DIR__ . '/rowEditor.class.php');
-
 class statpic
 {
     public $nUserId = 0;

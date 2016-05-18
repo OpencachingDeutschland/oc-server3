@@ -5,10 +5,8 @@
  *  Unicode Reminder メモ
  ***************************************************************************/
 
-require_once('lib2/web.inc.php');
-require_once('lib2/logic/user.class.php');
-require_once('lib2/logic/useroptions.class.php');
-require_once('lib2/edithelper.inc.php');
+require 'lib2/web.inc.php';
+require_once 'lib2/edithelper.inc.php';
 
 $tpl->name = 'mydetails';
 $tpl->menuitem = MNU_MYPROFILE_DETAILS;

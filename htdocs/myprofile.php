@@ -5,10 +5,7 @@
  *  Unicode Reminder メモ
  ***************************************************************************/
 
-require_once('./lib2/web.inc.php');
-require_once('./lib2/logic/user.class.php');
-require_once('./lib2/logic/coordinate.class.php');
-require_once('./lib2/logic/countriesList.class.php');
+require 'lib2/web.inc.php';
 
 $tpl->name = 'myprofile';
 $tpl->menuitem = MNU_MYPROFILE_DATA;

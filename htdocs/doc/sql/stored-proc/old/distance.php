@@ -9,13 +9,13 @@
  ***************************************************************************/
 
 $opt['rootpath'] = '../../../';
-require_once($opt['rootpath'] . 'lib/clicompatbase.inc.php');
+require_once $opt['rootpath'] . 'lib/clicompatbase.inc.php';
 
 if (!file_exists($opt['rootpath'] . 'util/mysql_root/sql_root.inc.php')) {
     die("\n" . 'install util/mysql_root/sql_root.inc.php' . "\n\n");
 }
 
-require_once($opt['rootpath'] . 'util/mysql_root/sql_root.inc.php');
+require_once $opt['rootpath'] . 'util/mysql_root/sql_root.inc.php';
 
 /* begin db connect */
 db_root_connect();

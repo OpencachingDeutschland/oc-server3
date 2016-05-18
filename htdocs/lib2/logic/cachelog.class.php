@@ -8,9 +8,7 @@
  *   add/remove etc. is executed instantly
  ***************************************************************************/
 
-require_once(__DIR__ . '/rowEditor.class.php');
-require_once(__DIR__ . '/cache.class.php');
-require_once(__DIR__ . '/logtypes.inc.php');
+require_once __DIR__ . '/logtypes.inc.php';
 
 class cachelog
 {

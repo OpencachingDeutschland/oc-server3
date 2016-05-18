@@ -5,8 +5,7 @@
  *  Unicode Reminder メモ
  ***************************************************************************/
 
-require('./lib2/web.inc.php');
-require_once('./lib2/logic/statpic.class.php');
+require 'lib2/web.inc.php';
 
 $login->verify();
 $tpl->name = 'change_statpic';

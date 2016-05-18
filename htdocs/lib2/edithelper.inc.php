@@ -1,16 +1,13 @@
 <?php
 /****************************************************************************
+ * common functions for text editors
  *
  * Unicode Reminder メモ
- *
- * common functions for text editors
  ****************************************************************************/
 
 // used in both lib1 and lib2 code
 
-require_once('smiley.inc.php');
-require_once('OcHTMLPurifier.class.php');
-require_once('html2text.class.php');
+require_once 'smiley.inc.php';
 
 
 /**
@@ -27,7 +24,7 @@ require_once('html2text.class.php');
 
 function processEditorInput($oldDescMode, $descMode, $text)
 {
-    global $opt;
+    global $opt, $smiley;
 
     if ($descMode != 1) {
         if ($oldDescMode == 1) {

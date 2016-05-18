@@ -1,5 +1,5 @@
 <?php
-/***************************************************************************
+/****************************************************************************
  * For license information see doc/license.txt
  *
  * Unicode Reminder メモ
@@ -8,7 +8,7 @@
  * (Used by Ocprop)
  ****************************************************************************/
 
-require_once("lib2/logic/cacheIcon.inc.php");
+require_once 'lib2/logic/cacheIcon.inc.php';
 
 $search_output_file_download = false;
 

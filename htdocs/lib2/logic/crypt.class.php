@@ -1,5 +1,4 @@
 <?php
-
 /***************************************************************************
  *  For license information see doc/license.txt
  *
@@ -7,6 +6,7 @@
  *
  *  Unicode Reminder メモ
  ***************************************************************************/
+
 class crypt
 {
     public static function encryptPassword($password)

@@ -7,7 +7,8 @@
  *  Displays the Chat/IRC using iframe of freenode.net, escaping usernames
  ***************************************************************************/
 
-require('./lib2/web.inc.php');
+require 'lib2/web.inc.php';
+
 $sUserCountry = $login->getUserCountry();
 
 $tpl->name = 'webchat';

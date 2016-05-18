@@ -16,9 +16,9 @@ function get_okapi_settings()
     # [3] http://code.google.com/p/opencaching-api/issues/detail?id=132
 
     $opt['rootpath'] = $GLOBALS['rootpath'];
-    require($opt['rootpath'].'lib2/const.inc.php');   # (into the *local* scope!)
-    require($opt['rootpath'].'config2/settings-dist.inc.php');
-    require($opt['rootpath'].'config2/settings.inc.php');
+    require $opt['rootpath'] . 'lib2/const.inc.php';   # (into the *local* scope!)
+    require $opt['rootpath'] . 'config2/settings-dist.inc.php';
+    require $opt['rootpath'] . 'config2/settings.inc.php';
     
     return array(
 

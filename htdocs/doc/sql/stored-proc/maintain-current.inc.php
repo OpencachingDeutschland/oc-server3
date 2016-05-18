@@ -1547,7 +1547,9 @@ sql(
         DECLARE done INT DEFAULT 0;
         DECLARE notify_user_id INT;
         DECLARE cur1 CURSOR FOR
-        
+
+        /* see also EmailRecovery::resendLogNotifications() */
+
         /* watches from `cache_watches` */
         SELECT `cache_watches`.`user_id`
         FROM `cache_watches`

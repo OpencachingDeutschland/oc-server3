@@ -12,7 +12,6 @@
 $opt['rootpath'] = '../../';
 require_once $opt['rootpath'] . 'lib2/cli.inc.php';
 require_once $opt['rootpath'] . 'lib2/search/search.inc.php';
-require_once $opt['rootpath'] . 'lib2/logic/geodb.inc.php';
 
 
 $rsLocations = sql("SELECT `uni`, `lat`, `lon`, `rc`, `cc1`, `adm1` FROM `gns_locations` WHERE `dsg` LIKE 'PPL%'");
@@ -49,7 +48,7 @@ while ($rLocations = sql_fetch_array($rsLocations)) {
 
         $locid = $r['loc_id'];
 
-        $admtxt1 = geodb_landFromLocid($locid);
+        $admtxt1 = GeoDb::landFromLocid($locid);
         if ($admtxt1 == '0') {
             $admtxt1 = '';
         }
@@ -80,16 +79,15 @@ while ($rLocations = sql_fetch_array($rsLocations)) {
             $admtxt3 = '';
         }
 
-        $admtxt3 = geodb_regierungsbezirkFromLocid($locid);
+        $admtxt3 = GeoDb::regierungsbezirkFromLocid($locid);
         if ($admtxt3 == '0') {
             $admtxt3 = '';
         }
 
-        $admtxt4 = geodb_landkreisFromLocid($locid);
+        $admtxt4 = GeoDb::landkreisFromLocid($locid);
         if ($admtxt4 == '0') {
             $admtxt4 = '';
         }
-
         sql(
             "UPDATE `gns_locations` SET `admtxt1`='&1', `admtxt2`='&2', `admtxt3`='&3', `admtxt4`='&4'
             WHERE uni='&5'",

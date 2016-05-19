@@ -6,7 +6,6 @@
  ***************************************************************************/
 
 require __DIR__ . '/lib2/web.inc.php';
-require __DIR__ . '/lib2/logic/logpics.inc.php';
 
 $sUserCountry = $login->getUserCountry();
 
@@ -29,7 +28,7 @@ if (!$tpl->is_cached()) {
     }
 
     // pictures
-    $tpl->assign('pictures', get_logpics(LOGPICS_FOR_STARTPAGE_GALLERY));
+    $tpl->assign('pictures', LogPics::get(LogPics::FOR_STARTPAGE_GALLERY));
 
     // news entries
     $tpl->assign('news_onstart', $opt['news']['onstart']);

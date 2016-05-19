@@ -107,7 +107,7 @@ if (isset($_REQUEST['queryid']) || isset($_REQUEST['showresult'])) {  // Ocprop:
         // or saved query to start from
 
         $_REQUEST['cache_attribs'] = '';
-        $rs = sql('SELECT `id` FROM `cache_attrib` WHERE `default`=1 AND NOT IFNULL(`hidden`, 0)=1');
+        $rs = sql("SELECT `id` FROM `cache_attrib` WHERE `default`=1 AND NOT IFNULL(`hidden`, 0)=1");
         while ($r = sql_fetch_assoc($rs)) {
             if ($_REQUEST['cache_attribs'] != '') {
                 $_REQUEST['cache_attribs'] .= ';';
@@ -117,7 +117,7 @@ if (isset($_REQUEST['queryid']) || isset($_REQUEST['showresult'])) {  // Ocprop:
         sql_free_result($rs);
 
         $_REQUEST['cache_attribs_not'] = '';
-        $rs = sql('SELECT `id` FROM `cache_attrib` WHERE `default`=2 AND NOT IFNULL(`hidden`, 0)=1');
+        $rs = sql("SELECT `id` FROM `cache_attrib` WHERE `default`=2 AND NOT IFNULL(`hidden`, 0)=1");
         while ($r = sql_fetch_assoc($rs)) {
             if ($_REQUEST['cache_attribs_not'] != '') {
                 $_REQUEST['cache_attribs_not'] .= ';';
@@ -139,10 +139,9 @@ if ($queryid != 0) {
     // load search options from stored query
 
     $query_rs = sql(
-        "
-            SELECT `user_id`, `options`, `name`
-            FROM `queries`
-            WHERE id='&1' AND (`user_id`=0 OR `user_id`='&2')",
+        "SELECT `user_id`, `options`, `name`
+         FROM `queries`
+         WHERE id='&1' AND (`user_id`=0 OR `user_id`='&2')",
         $queryid,
         $login->userid
     );
@@ -209,8 +208,7 @@ if ($queryid != 0) {
             sql_free_result($rs_name);
         }
     }
-} else  // $queryid == 0
-{
+} else {  // $queryid == 0
     // build search options from GET/POST parameters or default values
 
     // hack
@@ -317,7 +315,6 @@ if ($queryid != 0) {
 
         $options['waypoint'] = isset($_REQUEST['waypoint']) ? stripslashes($_REQUEST['waypoint']) : '';
         $options['distance'] = isset($_REQUEST['distance']) ? $_REQUEST['distance'] : 0;
-
     } elseif (isset($_REQUEST['searchbydistance'])) {
         $options['searchtype'] = 'bydistance';
 
@@ -502,7 +499,6 @@ if (!isset($options['showresult'])) {
     $options['showresult'] = 0;
 }
 if ($options['showresult'] == 1) {
-
     //===============================================================
     //  X5. build basic SQL statement dependend on search type
     //      and filtering options
@@ -563,9 +559,10 @@ if ($options['showresult'] == 1) {
                     } else {
                         $plz = $options['plz'];
                     }
-                    $sql = "SELECT `loc_id` FROM `geodb_textdata` WHERE `text_type`=500300000 AND `text_val`='" . sql_escape(
-                            $plz
-                        ) . "'";
+                    $sql =
+                        "SELECT `loc_id`
+                         FROM `geodb_textdata`
+                         WHERE `text_type`=500300000 AND `text_val`='" . sql_escape($plz) . "'";
                     $rs = sql($sql);
                     if (sql_num_rows($rs) == 0) {
                         sql_free_result($rs);
@@ -586,7 +583,10 @@ if ($options['showresult'] == 1) {
                 // ok, wir haben einen ort ... koordinaten ermitteln
                 $locid = $locid + 0;
                 $rs = sql(
-                    'SELECT `lon`, `lat` FROM `geodb_coordinates` WHERE `loc_id`=' . $locid . ' AND coord_type=200100000'
+                    "SELECT `lon`, `lat`
+                     FROM `geodb_coordinates`
+                     WHERE `loc_id`='&1' AND coord_type=200100000",
+                    $locid
                 );
                 if (isset($rs) && $r = sql_fetch_array($rs)) {
                     // ok ... wir haben koordinaten ...
@@ -652,7 +652,19 @@ if ($options['showresult'] == 1) {
                         sql_drop_temp_table_slave('tmpuniids');
                         sql_temp_table_slave('tmpuniids');
                         sql_slave(
-                            'CREATE TEMPORARY TABLE &tmpuniids (`uni_id` int(11) NOT NULL, `cnt` int(11) NOT NULL, `olduni` int(11) NOT NULL, `simplehash` int(11) NOT NULL) ENGINE=MEMORY SELECT `gns_search`.`uni_id` `uni_id`, 0 `cnt`, 0 `olduni`, `simplehash` FROM `gns_search` WHERE ' . $sqlhashes
+                            "CREATE TEMPORARY TABLE &tmpuniids (
+                                `uni_id` int(11) NOT NULL,
+                                `cnt` int(11) NOT NULL,
+                                `olduni` int(11) NOT NULL,
+                                `simplehash` int(11) NOT NULL
+                             ) ENGINE=MEMORY
+                                 SELECT
+                                    `gns_search`.`uni_id` `uni_id`,
+                                    0 `cnt`,
+                                    0 `olduni`,
+                                    `simplehash`
+                                 FROM `gns_search`
+                                 WHERE " . $sqlhashes
                         );
                         sql_slave('ALTER TABLE &tmpuniids ADD INDEX (`uni_id`)');
 
@@ -664,7 +676,15 @@ if ($options['showresult'] == 1) {
                         //    {
                         sql_temp_table_slave('tmpuniids2');
                         sql_slave(
-                            'CREATE TEMPORARY TABLE &tmpuniids2 (`uni_id` int(11) NOT NULL, `cnt` int(11) NOT NULL, `olduni` int(11) NOT NULL) ENGINE=MEMORY SELECT `uni_id`, COUNT(*) `cnt`, 0 olduni FROM &tmpuniids GROUP BY `uni_id` HAVING `cnt` >= ' . $wordscount
+                            "CREATE TEMPORARY TABLE &tmpuniids2 (
+                                `uni_id` int(11) NOT NULL,
+                                `cnt` int(11) NOT NULL,
+                                `olduni` int(11) NOT NULL
+                             ) ENGINE=MEMORY
+                                SELECT `uni_id`, COUNT(*) `cnt`, 0 olduni
+                                FROM &tmpuniids
+                                GROUP BY `uni_id`
+                                HAVING `cnt` >= " . $wordscount
                         );
                         sql_slave('ALTER TABLE &tmpuniids2 ADD INDEX (`uni_id`)');
                         sql_drop_temp_table_slave('tmpuniids');
@@ -677,19 +697,45 @@ if ($options['showresult'] == 1) {
                         // und jetzt noch alle englischen bezeichnungen durch deutsche ersetzen (wo möglich) ...
                         sql_temp_table_slave('tmpuniidsAdd');
                         sql_slave(
-                            'CREATE TEMPORARY TABLE &tmpuniidsAdd (`uni` int(11) NOT NULL, `olduni` int(11) NOT NULL, PRIMARY KEY  (`uni`)) ENGINE=MEMORY SELECT g2.uni uni, g1.uni olduni FROM &tmpuniids JOIN gns_locations g1 ON &tmpuniids.uni_id=g1.uni JOIN gns_locations g2 ON g1.ufi=g2.ufi WHERE g1.nt!=\'N\' AND g2.nt=\'N\' GROUP BY uni'
+                            "CREATE TEMPORARY TABLE &tmpuniidsAdd (
+                                `uni` int(11) NOT NULL,
+                                `olduni` int(11) NOT NULL,
+                                PRIMARY KEY  (`uni`)
+                            ) ENGINE=MEMORY
+                                SELECT g2.uni uni, g1.uni olduni
+                                FROM &tmpuniids
+                                JOIN gns_locations g1 ON &tmpuniids.uni_id=g1.uni
+                                JOIN gns_locations g2 ON g1.ufi=g2.ufi
+                                WHERE g1.nt!='N' AND g2.nt='N' GROUP BY uni"
                         );
                         sql_temp_table_slave('tmpuniidsRemove');
                         sql_slave(
-                            'CREATE TEMPORARY TABLE &tmpuniidsRemove (`uni` int(11) NOT NULL, PRIMARY KEY  (`uni`)) ENGINE=MEMORY SELECT DISTINCT g1.uni uni FROM &tmpuniids JOIN gns_locations g1 ON &tmpuniids.uni_id=g1.uni JOIN gns_locations g2 ON g1.ufi=g2.ufi WHERE g1.nt!=\'N\' AND g2.nt=\'N\''
+                            "CREATE TEMPORARY TABLE &tmpuniidsRemove (
+                                `uni` int(11) NOT NULL,
+                                PRIMARY KEY  (`uni`)
+                            ) ENGINE=MEMORY
+                                SELECT DISTINCT g1.uni uni
+                                FROM &tmpuniids
+                                JOIN gns_locations g1 ON &tmpuniids.uni_id=g1.uni
+                                JOIN gns_locations g2 ON g1.ufi=g2.ufi
+                                WHERE g1.nt!='N' AND g2.nt='N'"
                         );
-                        sql_slave('DELETE FROM &tmpuniids WHERE uni_id IN (SELECT uni FROM &tmpuniidsRemove)');
-                        sql_slave('DELETE FROM &tmpuniidsAdd WHERE uni IN (SELECT uni_id FROM &tmpuniids)');
-                        sql_slave('INSERT INTO &tmpuniids (uni_id, olduni) SELECT uni, olduni FROM &tmpuniidsAdd');
+                        sql_slave(
+                            "DELETE FROM &tmpuniids
+                             WHERE uni_id IN (SELECT uni FROM &tmpuniidsRemove)"
+                        );
+                        sql_slave(
+                            "DELETE FROM &tmpuniidsAdd
+                             WHERE uni IN (SELECT uni_id FROM &tmpuniids)"
+                        );
+                        sql_slave(
+                            "INSERT INTO &tmpuniids (uni_id, olduni)
+                             SELECT uni, olduni FROM &tmpuniidsAdd"
+                        );
                         sql_drop_temp_table_slave('tmpuniidsAdd');
                         sql_drop_temp_table_slave('tmpuniidsRemove');
 
-                        $rs = sql_slave('SELECT `uni_id` FROM &tmpuniids');
+                        $rs = sql_slave("SELECT `uni_id` FROM &tmpuniids");
                         if (sql_num_rows($rs) == 0) {
                             sql_free_result($rs);
 
@@ -703,17 +749,24 @@ if ($options['showresult'] == 1) {
                             // wenn keine 100%ige übereinstimmung nochmals anzeigen
                             $locid = $r['uni_id'] + 0;
                             $rsCmp = sql_slave(
-                                'SELECT `full_name` FROM `gns_locations` WHERE `uni`=' . $locid . ' LIMIT 1'
+                                "SELECT `full_name` FROM `gns_locations` WHERE `uni`='&1' LIMIT 1",
+                                $locid
                             );
                             $rCmp = sql_fetch_array($rsCmp);
                             sql_free_result($rsCmp);
 
                             if (mb_strtolower($rCmp['full_name']) != mb_strtolower($ort)) {
-                                outputUniidSelectionForm('SELECT `uni_id`, `olduni` FROM `&tmpuniids`', $options);
+                                outputUniidSelectionForm(
+                                    "SELECT `uni_id`, `olduni` FROM `&tmpuniids`",
+                                    $options
+                                );
                             }
                         } else {
                             sql_free_result($rs);
-                            outputUniidSelectionForm('SELECT `uni_id`, `olduni` FROM `&tmpuniids`', $options);
+                            outputUniidSelectionForm(
+                                "SELECT `uni_id`, `olduni` FROM `&tmpuniids`",
+                                $options
+                            );
                             exit;
                         }
                     }
@@ -721,7 +774,10 @@ if ($options['showresult'] == 1) {
 
                     // ok, wir haben einen ort ... koordinaten ermitteln
                     $locid = $locid + 0;
-                    $rs = sql_slave('SELECT `lon`, `lat` FROM `gns_locations` WHERE `uni`=' . $locid . ' LIMIT 1');
+                    $rs = sql_slave(
+                        "SELECT `lon`, `lat` FROM `gns_locations` WHERE `uni`='&1' LIMIT 1",
+                        $locid
+                    );
                     if (isset($rs) && $r = sql_fetch_array($rs)) {
                         // ok ... wir haben koordinaten ...
 
@@ -759,16 +815,20 @@ if ($options['showresult'] == 1) {
             $check_gcwp = stripos($options['waypoint'], 'gc');
             $check_wp_length = strlen($options['waypoint']);
 
-            //get the cachecoordinates
+            // get the cache coordinates
             if (isset($options['waypoint']) && ($check_ocwp == 0 && $check_gcwp === false) && ($check_wp_length >= 6)) {
                 $rs = sql_slave(
-                    "SELECT `longitude`,`latitude`,`wp_oc` FROM `caches` WHERE `wp_oc`='" . $options['waypoint'] . "' ",
+                    "SELECT `longitude`, `latitude`, `wp_oc`
+                     FROM `caches`
+                     WHERE `wp_oc`='&1' ",
                     $options['waypoint']
                 );
             }
             if (isset($options['waypoint']) && ($check_gcwp == 0 && $check_ocwp === false) && ($check_wp_length >= 3)) {
                 $rs = sql_slave(
-                    "SELECT `longitude`,`latitude`,`wp_gc_maintained` FROM `caches` WHERE `wp_gc_maintained`='" . $options['waypoint'] . "' ",
+                    "SELECT `longitude`, `latitude`, `wp_gc_maintained`
+                     FROM `caches`
+                     WHERE `wp_gc_maintained`='&1' ",
                     $options['waypoint']
                 );
             }
@@ -844,7 +904,10 @@ if ($options['showresult'] == 1) {
                 $finder_id = $options['finderid'];
             } else {
                 //get the userid
-                $rs = sql_slave("SELECT `user_id` FROM `user` WHERE `username`='&1'", $options['finder']);
+                $rs = sql_slave(
+                    "SELECT `user_id` FROM `user` WHERE `username`='&1'",
+                    $options['finder']
+                );
                 $finder_record = sql_fetch_array($rs);
                 $finder_id = $finder_record['user_id'];
                 sql_free_result($rs);
@@ -929,14 +992,17 @@ if ($options['showresult'] == 1) {
                 $n ++;
             }
 
-            $sqlFilter = 'SELECT DISTINCT ' . implode(',', $sql_select) .
+            $sqlFilter =
+                'SELECT DISTINCT ' . implode(',', $sql_select) .
                 ' FROM ' . $sql_from .
                 ' INNER JOIN ' . implode(' INNER JOIN ', $sql_innerjoin) .
                 ' WHERE ' . implode(' AND ', $sql_where);
 
             sql_drop_temp_table_slave('tmpFTCaches');
             sql_temp_table_slave('tmpFTCaches');
-            sql_slave('CREATE TEMPORARY TABLE &tmpFTCaches (`cache_id` int (11) PRIMARY KEY) ' . $sqlFilter);
+            sql_slave(
+                "CREATE TEMPORARY TABLE &tmpFTCaches (`cache_id` int (11) PRIMARY KEY) " . $sqlFilter
+            );
 
             $sql_select = [];
             $sql_from = '';
@@ -956,11 +1022,12 @@ if ($options['showresult'] == 1) {
             if ($list->allowView($options['cachelist_pw'])) {
                 $cachesFilter =
                     "CREATE TEMPORARY TABLE &result_caches ENGINE=MEMORY
-                                        SELECT `cache_id` FROM `cache_list_items`
-                                        LEFT JOIN `cache_lists` ON `cache_lists`.`id`=`cache_list_items`.`cache_list_id`
-                                      WHERE `cache_list_id`=" . sql_escape($options['listid']);
+                        SELECT `cache_id`
+                        FROM `cache_list_items`
+                        LEFT JOIN `cache_lists` ON `cache_lists`.`id`=`cache_list_items`.`cache_list_id`
+                        WHERE `cache_list_id`='" . sql_escape($options['listid']) . "'";
                 sql_slave($cachesFilter);
-                sql_slave('ALTER TABLE &result_caches ADD PRIMARY KEY ( `cache_id` )');
+                sql_slave('ALTER TABLE &result_caches ADD PRIMARY KEY (`cache_id`)');
 
                 $sql_select[] = '&result_caches.`cache_id`';
                 $sql_from = '&result_caches';
@@ -993,9 +1060,13 @@ if ($options['showresult'] == 1) {
             $options['f_userfound'] = '0';
         }  // Ocprop
         if ($options['f_userfound'] != 0) {
-            $sql_where[] = '`caches`.`cache_id` NOT IN (SELECT `cache_logs`.`cache_id` FROM `cache_logs` WHERE `cache_logs`.`user_id`=\'' . sql_escape(
-                    $login->userid
-                ) . '\' AND `cache_logs`.`type` IN (1, 7))';
+            $sql_where[] =
+                "`caches`.`cache_id` NOT IN
+                    (SELECT `cache_logs`.`cache_id`
+                     FROM `cache_logs`
+                     WHERE
+                        `cache_logs`.`user_id`='" . sql_escape($login->userid) . "'
+                        AND `cache_logs`.`type` IN (1, 7))";
         }
         if (!isset($options['f_inactive'])) {
             $options['f_inactive'] = '0';
@@ -1021,13 +1092,14 @@ if ($options['showresult'] == 1) {
             if ($options['f_ignored'] != 0) {
                 // only use this filter, if it is realy needed - this enables better caching in map2.php with ignored-filter
                 if (sql_value_slave(
-                        "SELECT COUNT(*) FROM `cache_ignore` WHERE `user_id`='" . sql_escape($login->userid) . "'",
-                        0
-                    ) > 0
-                ) {
-                    $sql_where[] = '`caches`.`cache_id` NOT IN (SELECT `cache_ignore`.`cache_id`
-                                                FROM `cache_ignore`
-                                                WHERE `cache_ignore`.`user_id`=\'' . sql_escape($login->userid) . '\')';
+                    "SELECT COUNT(*) FROM `cache_ignore` WHERE `user_id`='" . sql_escape($login->userid) . "'",
+                    0
+                ) > 0) {
+                    $sql_where[] =
+                        "`caches`.`cache_id` NOT IN
+                            (SELECT `cache_ignore`.`cache_id`
+                             FROM `cache_ignore`
+                             WHERE `cache_ignore`.`user_id`='" . sql_escape($login->userid) . "')";
                 }
             }
         }
@@ -1110,17 +1182,22 @@ if ($options['showresult'] == 1) {
         }
 
         if (isset($options['cache_attribs']) && count($options['cache_attribs']) > 0) {
-            foreach ($options['cache_attribs'] AS $attr) {
+            foreach ($options['cache_attribs'] as $attr) {
                 $sql_innerjoin[] = '`caches_attributes` AS `a' . ($attr + 0) . '` ON `a' . ($attr + 0) . '`.`cache_id`=`caches`.`cache_id`';
                 $sql_where[] = '`a' . ($attr + 0) . '`.`attrib_id`=' . ($attr + 0);
             }
         }
 
         if (isset($options['cache_attribs_not']) && count($options['cache_attribs_not']) > 0) {
-            foreach ($options['cache_attribs_not'] AS $attr) {
-                $sql_where[] = 'NOT EXISTS (SELECT `caches_attributes`.`cache_id` FROM `caches_attributes` WHERE `caches_attributes`.`cache_id`=`caches`.`cache_id` AND `caches_attributes`.`attrib_id`=\'' . sql_escape(
-                        $attr + 0
-                    ) . '\')';
+            foreach ($options['cache_attribs_not'] as $attr) {
+                $sql_where[] =
+                    "NOT EXISTS
+                        (SELECT `caches_attributes`.`cache_id`
+                         FROM `caches_attributes`
+                         WHERE
+                            `caches_attributes`.`cache_id`=`caches`.`cache_id`
+                            AND `caches_attributes`.`attrib_id`='" . sql_escape($attr + 0) . "'
+                        )";
             }
         }
 
@@ -1134,9 +1211,10 @@ if ($options['showresult'] == 1) {
 
         $sql_innerjoin[] = '`cache_status` ON `caches`.`status`=`cache_status`.`id`';
         if ($login->logged_in()) {
-            $sql_where[] = '(`cache_status`.`allow_user_view`=1 OR `caches`.`user_id`=' . sql_escape(
-                    $login->userid
-                ) . ' OR (`caches`.`status`<>5 AND ' . ($login->hasAdminPriv(ADMIN_USER) ? '1' : '0') . '))';
+            $sql_where[] =
+                '(`cache_status`.`allow_user_view`=1 OR `caches`.`user_id`='
+                . sql_escape($login->userid)
+                . ' OR (`caches`.`status`<>5 AND ' . ($login->hasAdminPriv(ADMIN_USER) ? '1' : '0') . '))';
         } else {
             $sql_where[] = '`cache_status`.`allow_user_view`=1';
         }
@@ -1220,17 +1298,20 @@ if ($options['showresult'] == 1) {
 
     if (isset($lat_rad) && isset($lon_rad)) {
         $sql .= geomath::getSqlDistanceFormula(
-                $lon_rad * 180 / 3.14159,
-                $lat_rad * 180 / 3.14159,
-                0,
-                $multiplier[$distance_unit]
-            ) . ' `distance`, ';
+            $lon_rad * 180 / 3.14159,
+            $lat_rad * 180 / 3.14159,
+            0,
+            $multiplier[$distance_unit]
+        ) . ' `distance`, ';
     } else {
         if (!$login->logged_in()) {
             $sql .= 'NULL distance, ';
         } else {
             // get the user's home coords
-            $rs_coords = sql_slave("SELECT `latitude`, `longitude` FROM `user` WHERE `user_id`='&1'", $login->userid);
+            $rs_coords = sql_slave(
+                "SELECT `latitude`, `longitude` FROM `user` WHERE `user_id`='&1'",
+                $login->userid
+            );
             $record_coords = sql_fetch_array($rs_coords);
 
             if ($record_coords['latitude'] == 0 && $record_coords['longitude'] == 0) {
@@ -1240,11 +1321,11 @@ if ($options['showresult'] == 1) {
                 $lat_rad = $record_coords['latitude'] * 3.14159 / 180;
 
                 $sql .= geomath::getSqlDistanceFormula(
-                        $record_coords['longitude'],
-                        $record_coords['latitude'],
-                        0,
-                        $multiplier[$distance_unit]
-                    ) . ' `distance`, ';
+                    $record_coords['longitude'],
+                    $record_coords['latitude'],
+                    0,
+                    $multiplier[$distance_unit]
+                ) . ' `distance`, ';
             }
             sql_free_result($rs_coords);
         }
@@ -1347,15 +1428,15 @@ if ($options['showresult'] == 1) {
         // for the case something went wrong and it was not propery cleaned up
 
         sql_temp_table_slave('searchtmp');
-        sql_slave('CREATE TEMPORARY TABLE &searchtmp SELECT ' . $sql . $sqlLimit);
+        sql_slave("CREATE TEMPORARY TABLE &searchtmp SELECT " . $sql . $sqlLimit);
 
-        $count = sql_value_slave('SELECT COUNT(*) FROM &searchtmp', 0);
+        $count = sql_value_slave("SELECT COUNT(*) FROM &searchtmp", 0);
         if ($count == 1) {
             $sFilebasename = sql_value_slave(
-                '
-                    SELECT `caches`.`wp_oc`
-                    FROM &searchtmp, `caches`
-                    WHERE &searchtmp.`cache_id`=`caches`.`cache_id` LIMIT 1',
+                "SELECT `caches`.`wp_oc`
+                 FROM &searchtmp, `caches`
+                 WHERE &searchtmp.`cache_id`=`caches`.`cache_id`
+                 LIMIT 1",
                 '?'
             );
         } else {
@@ -1471,27 +1552,28 @@ function sqlStringbySearchradius($distance, $lat, $lon, $multiplier, $distance_u
 
     //all target caches are between lon - max_lon_diff and lon + max_lon_diff
     //TODO: check!!!
-    $max_lon_diff = $distance * 180 / (abs(
-                sin((90 - $lat) * 3.14159 / 180)
-            ) * 6378 * $multiplier[$distance_unit] * 3.14159);
+    $max_lon_diff =
+        $distance * 180
+        / (abs(sin((90 - $lat) * 3.14159 / 180)) * 6378 * $multiplier[$distance_unit] * 3.14159);
 
     $lon_rad = $lon * 3.14159 / 180;
     $lat_rad = $lat * 3.14159 / 180;
 
     sql_temp_table_slave('result_caches');
     $cachesFilter =
-        'CREATE TEMPORARY TABLE &result_caches ENGINE=MEMORY
+        "CREATE TEMPORARY TABLE &result_caches ENGINE=MEMORY
             SELECT
-                (' . geomath::getSqlDistanceFormula($lon, $lat, $distance, $multiplier[$distance_unit]) . ') `distance`,
+                (" . geomath::getSqlDistanceFormula($lon, $lat, $distance, $multiplier[$distance_unit]) . ") `distance`,
                 `caches`.`cache_id` `cache_id`
             FROM `caches` FORCE INDEX (`latitude`)
-            WHERE `longitude` > ' . ($lon - $max_lon_diff) . '
-                AND `longitude` < ' . ($lon + $max_lon_diff) . '
-                AND `latitude` > ' . ($lat - $max_lat_diff) . '
-                AND `latitude` < ' . ($lat + $max_lat_diff) . '
-                                                HAVING `distance` < ' . ($distance + 0);
+            WHERE
+                `longitude` > " . ($lon - $max_lon_diff) . "
+                AND `longitude` < " . ($lon + $max_lon_diff) . "
+                AND `latitude` > " . ($lat - $max_lat_diff) . "
+                AND `latitude` < " . ($lat + $max_lat_diff) . "
+            HAVING `distance` < " . ($distance + 0);
     sql_slave($cachesFilter);
-    sql_slave('ALTER TABLE &result_caches ADD PRIMARY KEY ( `cache_id` )');
+    sql_slave("ALTER TABLE &result_caches ADD PRIMARY KEY ( `cache_id` )");
 
     $sql_select[] = '&result_caches.`cache_id`';
     $sql_from = '&result_caches';
@@ -1601,7 +1683,9 @@ function outputSearchForm($options)
     if (!isset($options['lat_h'])) {
         if ($login->logged_in()) {
             $rs = sql(
-                'SELECT `latitude`, `longitude` FROM `user` WHERE `user_id`=\'' . sql_escape($login->userid) . '\''
+                "SELECT `latitude`, `longitude`
+                 FROM `user`
+                 WHERE `user_id`='" . sql_escape($login->userid) . "'"
             );
             $record = sql_fetch_array($rs);
             $lon = $record['longitude'];
@@ -1643,7 +1727,6 @@ function outputSearchForm($options)
             }
             $tpl->assign('lat_h', $lat_h);
             $tpl->assign('lon_h', $lon_h);
-
         } else {
             $tpl->assign('lat_h', '00');
             $tpl->assign('lon_h', '000');
@@ -1728,17 +1811,17 @@ function outputSearchForm($options)
 
     // country options
     $rs = sql(
-        "
-        SELECT
+        "SELECT
             IFNULL(`sys_trans_text`.`text`, `countries`.`name`) AS `name`,
             `countries`.`short`,
             `countries`.`short`='&2' AS `selected`
-        FROM
+         FROM
             `countries`
-            LEFT JOIN `sys_trans` ON `countries`.`trans_id`=`sys_trans`.`id`AND `sys_trans`.`text`=`countries`.`name`
+            LEFT JOIN `sys_trans` ON `countries`.`trans_id`=`sys_trans`.`id` AND `sys_trans`.`text`=`countries`.`name`
             LEFT JOIN `sys_trans_text` ON `sys_trans`.`id`=`sys_trans_text`.`trans_id` AND `sys_trans_text`.`lang`='&1'
-        WHERE
-            `countries`.`short` IN (SELECT DISTINCT `country` FROM `caches`) ORDER BY `name` ASC",
+         WHERE
+            `countries`.`short` IN (SELECT DISTINCT `country` FROM `caches`)
+         ORDER BY `name` ASC",
         $opt['template']['locale'],
         $options['country']
     );
@@ -1748,16 +1831,15 @@ function outputSearchForm($options)
 
     // language options
     $rs = sql(
-        "
-        SELECT
+        "SELECT
             IFNULL(`sys_trans_text`.`text`,`languages`.`name`) AS `name`,
             `short`,
             `short`='&2' AS `selected`
-        FROM
+         FROM
             `languages`
             LEFT JOIN `sys_trans` ON `sys_trans`.`text`=`languages`.`name`
             LEFT JOIN `sys_trans_text` ON `sys_trans_text`.`trans_id`=`sys_trans`.`id` AND `sys_trans_text`.`lang`='&1'
-            ORDER BY `name`",
+         ORDER BY `name`",
         $opt['template']['locale'],
         $options['language']
     );
@@ -1769,10 +1851,12 @@ function outputSearchForm($options)
     $rs = sql("SELECT `id` FROM `cache_type` ORDER BY `ordinal`");
     $rCachetypes = sql_fetch_assoc_table($rs);
     foreach ($rCachetypes as &$rCachetype) {
-        $rCachetype['checked'] = ($options['cachetype'] == '') || (strpos(
-                    ';' . $options['cachetype'] . ';',
-                    ';' . $rCachetype['id'] . ';'
-                ) !== false);
+        $rCachetype['checked'] =
+            ($options['cachetype'] == '')
+            || (strpos(
+                ';' . $options['cachetype'] . ';',
+                ';' . $rCachetype['id'] . ';'
+            ) !== false);
         $rCachetype['unchecked'] = !$rCachetype['checked'];
     }
     $tpl->assign('cachetypes', $rCachetypes);
@@ -1782,10 +1866,12 @@ function outputSearchForm($options)
     $cachesizes = [];
     $rs = sql("SELECT `id` FROM `cache_size`");
     while ($r = sql_fetch_assoc($rs)) {
-        $cachesizes[$r['id']]['checked'] = (strpos(
-                    ';' . $options['cachesize'] . ';',
-                    ';' . $r['id'] . ';'
-                ) !== false) || ($options['cachesize'] == '');
+        $cachesizes[$r['id']]['checked'] =
+            (strpos(
+                ';' . $options['cachesize'] . ';',
+                ';' . $r['id'] . ';'
+            ) !== false)
+            || ($options['cachesize'] == '');
     }
     sql_free_result($rs);
     $tpl->assign('cachesizes', $cachesizes);
@@ -1807,17 +1893,17 @@ function outputSearchForm($options)
     }
 
     $rs = sql(
-        "
-        SELECT `id`,
-        IFNULL(`sys_trans_text`.`text`, `log_types`.`name`) AS `name`,
-        `id`='&2' AS `selected`
-        FROM (
-            SELECT `id`,`name`,`trans_id` FROM `log_types`
-            UNION
-            SELECT 0,'all',(SELECT id FROM sys_trans WHERE `text`='all')
-        ) `log_types`
-        LEFT JOIN `sys_trans_text` ON `sys_trans_text`.`trans_id`=`log_types`.`trans_id` AND `sys_trans_text`.`lang`='&1'
-      ORDER BY `log_types`.`id` ASC",
+        "SELECT
+            `id`,
+            IFNULL(`sys_trans_text`.`text`, `log_types`.`name`) AS `name`,
+            `id`='&2' AS `selected`
+         FROM
+            (SELECT `id`,`name`,`trans_id` FROM `log_types`
+             UNION
+             SELECT 0, 'all', (SELECT id FROM sys_trans WHERE `text`='all')
+            ) `log_types`
+         LEFT JOIN `sys_trans_text` ON `sys_trans_text`.`trans_id`=`log_types`.`trans_id` AND `sys_trans_text`.`lang`='&1'
+         ORDER BY `log_types`.`id` ASC",
         $opt['template']['locale'],
         $logtypes ? $logtypes[0] : 0
     );
@@ -1835,22 +1921,51 @@ function outputSearchForm($options)
 
     /* perpare 'all attributes' */
     $rsAttrGroup = sql(
-        "SELECT `attribute_groups`.`id`, IFNULL(`sys_trans_text`.`text`, `attribute_groups`.`name`) AS `name`, `attribute_categories`.`color` FROM `attribute_groups` INNER JOIN `attribute_categories` ON `attribute_groups`.`category_id`=`attribute_categories`.`id` LEFT JOIN `sys_trans` ON `attribute_groups`.`trans_id`=`sys_trans`.`id` AND `sys_trans`.`text`=`attribute_groups`.`name` LEFT JOIN `sys_trans_text` ON `sys_trans`.`id`=`sys_trans_text`.`trans_id` AND `sys_trans_text`.`lang`='&1' ORDER BY `attribute_groups`.`category_id` ASC, `attribute_groups`.`id` ASC",
+        "SELECT
+            `attribute_groups`.`id`,
+            IFNULL(`sys_trans_text`.`text`, `attribute_groups`.`name`) AS `name`,
+            `attribute_categories`.`color`
+         FROM `attribute_groups`
+         INNER JOIN `attribute_categories`
+            ON `attribute_groups`.`category_id`=`attribute_categories`.`id`
+         LEFT JOIN `sys_trans`
+            ON `attribute_groups`.`trans_id`=`sys_trans`.`id`
+            AND `sys_trans`.`text`=`attribute_groups`.`name`
+         LEFT JOIN `sys_trans_text`
+            ON `sys_trans`.`id`=`sys_trans_text`.`trans_id`
+            AND `sys_trans_text`.`lang`='&1'
+         ORDER BY `attribute_groups`.`category_id` ASC, `attribute_groups`.`id` ASC",
         $opt['template']['locale']
     );
     while ($rAttrGroup = sql_fetch_assoc($rsAttrGroup)) {
         $group_line = '';
 
         $rs = sql(
-            "SELECT `cache_attrib`.`id`, IFNULL(`ttname`.`text`, `cache_attrib`.`name`) AS `name`, `cache_attrib`.`icon_large`, `cache_attrib`.`icon_no`, `cache_attrib`.`icon_undef`, `cache_attrib`.`search_default`, IFNULL(`ttdesc`.`text`, `cache_attrib`.`html_desc`) AS `html_desc`
-                     FROM `cache_attrib`
-                LEFT JOIN `sys_trans` AS `tname` ON `cache_attrib`.`trans_id`=`tname`.`id` AND `cache_attrib`.`name`=`tname`.`text`
-                LEFT JOIN `sys_trans_text` AS `ttname` ON `tname`.`id`=`ttname`.`trans_id` AND `ttname`.`lang`='&1'
-                LEFT JOIN `sys_trans` AS `tdesc` ON `cache_attrib`.`html_desc_trans_id`=`tdesc`.`id` AND `cache_attrib`.`html_desc`=`tdesc`.`text`
-                LEFT JOIN `sys_trans_text` AS `ttdesc` ON `tdesc`.`id`=`ttdesc`.`trans_id` AND `ttdesc`.`lang`='&1'
-                    WHERE `cache_attrib`.`group_id`='&2' AND `selectable`
-                      AND NOT IFNULL(`cache_attrib`.`hidden`, 0)=1
-                 ORDER BY `cache_attrib`.`id`",
+            "SELECT
+                `cache_attrib`.`id`,
+                IFNULL(`ttname`.`text`, `cache_attrib`.`name`) AS `name`,
+                `cache_attrib`.`icon_large`,
+                `cache_attrib`.`icon_no`,
+                `cache_attrib`.`icon_undef`,
+                `cache_attrib`.`search_default`,
+                IFNULL(`ttdesc`.`text`, `cache_attrib`.`html_desc`) AS `html_desc`
+             FROM `cache_attrib`
+             LEFT JOIN `sys_trans` AS `tname`
+                ON `cache_attrib`.`trans_id`=`tname`.`id`
+                AND `cache_attrib`.`name`=`tname`.`text`
+             LEFT JOIN `sys_trans_text` AS `ttname`
+                ON `tname`.`id`=`ttname`.`trans_id`
+                AND `ttname`.`lang`='&1'
+             LEFT JOIN `sys_trans` AS `tdesc`
+                ON `cache_attrib`.`html_desc_trans_id`=`tdesc`.`id`
+                AND `cache_attrib`.`html_desc`=`tdesc`.`text`
+             LEFT JOIN `sys_trans_text` AS `ttdesc`
+                ON `tdesc`.`id`=`ttdesc`.`trans_id`
+                AND `ttdesc`.`lang`='&1'
+             WHERE
+                `cache_attrib`.`group_id`='&2' AND `selectable`
+                AND NOT IFNULL(`cache_attrib`.`hidden`, 0)=1
+             ORDER BY `cache_attrib`.`id`",
             $opt['template']['locale'],
             $rAttrGroup['id']
         );
@@ -1942,23 +2057,54 @@ function outputSearchForm($options)
     $attributes_img1 = '';
 
     $rsAttrGroup = sql(
-        "SELECT `attribute_groups`.`id`, IFNULL(`sys_trans_text`.`text`, `attribute_groups`.`name`) AS `name`, `attribute_categories`.`color` FROM `attribute_groups` INNER JOIN `attribute_categories` ON `attribute_groups`.`category_id`=`attribute_categories`.`id` LEFT JOIN `sys_trans` ON `attribute_groups`.`trans_id`=`sys_trans`.`id` AND `sys_trans`.`text`=`attribute_groups`.`name` LEFT JOIN `sys_trans_text` ON `sys_trans`.`id`=`sys_trans_text`.`trans_id` AND `sys_trans_text`.`lang`='&1' ORDER BY `attribute_groups`.`category_id` ASC, `attribute_groups`.`id` ASC",
+        "SELECT
+            `attribute_groups`.`id`,
+            IFNULL(`sys_trans_text`.`text`, `attribute_groups`.`name`) AS `name`,
+            `attribute_categories`.`color`
+         FROM `attribute_groups`
+         INNER JOIN `attribute_categories`
+            ON `attribute_groups`.`category_id`=`attribute_categories`.`id`
+         LEFT JOIN `sys_trans`
+            ON `attribute_groups`.`trans_id`=`sys_trans`.`id`
+            AND `sys_trans`.`text`=`attribute_groups`.`name`
+         LEFT JOIN `sys_trans_text`
+            ON `sys_trans`.`id`=`sys_trans_text`.`trans_id`
+            AND `sys_trans_text`.`lang`='&1'
+         ORDER BY
+            `attribute_groups`.`category_id` ASC,
+            `attribute_groups`.`id` ASC",
         $opt['template']['locale']
     );
     while ($rAttrGroup = sql_fetch_assoc($rsAttrGroup)) {
         $group_line = '';
 
         $rs = sql(
-            "SELECT `cache_attrib`.`id`, IFNULL(`ttname`.`text`, `cache_attrib`.`name`) AS `name`, `cache_attrib`.`icon_large`, `cache_attrib`.`icon_no`, `cache_attrib`.`icon_undef`, `cache_attrib`.`search_default`, IFNULL(`ttdesc`.`text`, `cache_attrib`.`html_desc`) AS `html_desc`
-                     FROM `cache_attrib`
-                LEFT JOIN `sys_trans` AS `tname` ON `cache_attrib`.`trans_id`=`tname`.`id` AND `cache_attrib`.`name`=`tname`.`text`
-                LEFT JOIN `sys_trans_text` AS `ttname` ON `tname`.`id`=`ttname`.`trans_id` AND `ttname`.`lang`='&1'
-                LEFT JOIN `sys_trans` AS `tdesc` ON `cache_attrib`.`html_desc_trans_id`=`tdesc`.`id` AND `cache_attrib`.`html_desc`=`tdesc`.`text`
-                LEFT JOIN `sys_trans_text` AS `ttdesc` ON `tdesc`.`id`=`ttdesc`.`trans_id` AND `ttdesc`.`lang`='&1'
-                    WHERE `cache_attrib`.`group_id`='&2'
-                      AND `cache_attrib`.`search_default`=1 AND `selectable`
-                      AND NOT IFNULL(`cache_attrib`.`hidden`, 0)=1
-                 ORDER BY `cache_attrib`.`id`",
+            "SELECT
+                `cache_attrib`.`id`,
+                IFNULL(`ttname`.`text`, `cache_attrib`.`name`) AS `name`,
+                `cache_attrib`.`icon_large`,
+                `cache_attrib`.`icon_no`,
+                `cache_attrib`.`icon_undef`,
+                `cache_attrib`.`search_default`,
+                IFNULL(`ttdesc`.`text`, `cache_attrib`.`html_desc`) AS `html_desc`
+             FROM `cache_attrib`
+             LEFT JOIN `sys_trans` AS `tname`
+                ON `cache_attrib`.`trans_id`=`tname`.`id`
+                AND `cache_attrib`.`name`=`tname`.`text`
+             LEFT JOIN `sys_trans_text` AS `ttname`
+                ON `tname`.`id`=`ttname`.`trans_id`
+                AND `ttname`.`lang`='&1'
+             LEFT JOIN `sys_trans` AS `tdesc`
+                ON `cache_attrib`.`html_desc_trans_id`=`tdesc`.`id`
+                AND `cache_attrib`.`html_desc`=`tdesc`.`text`
+             LEFT JOIN `sys_trans_text` AS `ttdesc`
+                ON `tdesc`.`id`=`ttdesc`.`trans_id`
+                AND `ttdesc`.`lang`='&1'
+             WHERE
+                `cache_attrib`.`group_id`='&2'
+                AND `cache_attrib`.`search_default`=1 AND `selectable`
+                AND NOT IFNULL(`cache_attrib`.`hidden`, 0)=1
+             ORDER BY `cache_attrib`.`id`",
             $opt['template']['locale'],
             $rAttrGroup['id']
         );
@@ -2101,11 +2247,11 @@ function prepareLocSelectionForm($options)
 
     // urlparams zusammenbauen
     $urlparamString = '';
-    foreach ($options AS $name => $param) {
+    foreach ($options as $name => $param) {
         // workaround for attribs
         if (is_array($param)) {
             $pnew = '';
-            foreach ($param AS $p) {
+            foreach ($param as $p) {
                 if ($pnew != '') {
                     $pnew .= ';' . $p;
                 } else {
@@ -2136,8 +2282,8 @@ function outputUniidSelectionForm($uniSql, $options)
     $urlparamString = prepareLocSelectionForm($options);
 
     sql_temp_table_slave('uniids');
-    sql_slave('CREATE TEMPORARY TABLE &uniids ENGINE=MEMORY ' . $uniSql);
-    sql_slave('ALTER TABLE &uniids ADD PRIMARY KEY (`uni_id`)');
+    sql_slave("CREATE TEMPORARY TABLE &uniids ENGINE=MEMORY " . $uniSql);
+    sql_slave("ALTER TABLE &uniids ADD PRIMARY KEY (`uni_id`)");
 
     // locidsite
     $locidsite = isset($_REQUEST['locidsite']) ? $_REQUEST['locidsite'] : 0;
@@ -2145,7 +2291,7 @@ function outputUniidSelectionForm($uniSql, $options)
         $locidsite = 0;
     }
 
-    $count = sql_value_slave('SELECT COUNT(*) FROM &uniids', 0);
+    $count = sql_value_slave("SELECT COUNT(*) FROM &uniids", 0);
     $tpl->assign('resultscount', $count);
 
     // create page browser
@@ -2154,7 +2300,22 @@ function outputUniidSelectionForm($uniSql, $options)
 
     // create locations list
     $rs = sql_slave(
-        'SELECT `gns_locations`.`rc` `rc`, `gns_locations`.`cc1` `cc1`, `gns_locations`.`admtxt1` `admtxt1`, `gns_locations`.`admtxt2` `admtxt2`, `gns_locations`.`admtxt3` `admtxt3`, `gns_locations`.`admtxt4` `admtxt4`, `gns_locations`.`uni` `uni_id`, `gns_locations`.`lon` `lon`, `gns_locations`.`lat` `lat`, `gns_locations`.`full_name` `full_name`, &uniids.`olduni` `olduni` FROM `gns_locations`, &uniids WHERE &uniids.`uni_id`=`gns_locations`.`uni` ORDER BY `gns_locations`.`full_name` ASC LIMIT ' . ($locidsite * 20) . ', 20'
+        "SELECT
+            `gns_locations`.`rc` `rc`,
+            `gns_locations`.`cc1` `cc1`,
+            `gns_locations`.`admtxt1` `admtxt1`,
+            `gns_locations`.`admtxt2` `admtxt2`,
+            `gns_locations`.`admtxt3` `admtxt3`,
+            `gns_locations`.`admtxt4` `admtxt4`,
+            `gns_locations`.`uni` `uni_id`,
+            `gns_locations`.`lon` `lon`,
+            `gns_locations`.`lat` `lat`,
+            `gns_locations`.`full_name` `full_name`,
+            &uniids.`olduni` `olduni`
+         FROM `gns_locations`, &uniids
+         WHERE &uniids.`uni_id`=`gns_locations`.`uni`
+         ORDER BY `gns_locations`.`full_name` ASC
+         LIMIT " . ($locidsite * 20) . ", 20"
     );
 
     $nr = $locidsite * 20 + 1;
@@ -2199,7 +2360,10 @@ function outputUniidSelectionForm($uniSql, $options)
             $thissecloc = $secondlocationname;
 
             $r['olduni'] = $r['olduni'] + 0;
-            $rsSecLoc = sql_slave('SELECT full_name FROM gns_locations WHERE uni=' . $r['olduni']);
+            $rsSecLoc = sql_slave(
+                "SELECT full_name FROM gns_locations WHERE uni='&1'",
+                $r['olduni']
+            );
             $rSecLoc = sql_fetch_assoc($rsSecLoc);
             $thissecloc = mb_ereg_replace(
                 '{secondlocationname}',
@@ -2245,11 +2409,18 @@ function outputLocidSelectionForm($locSql, $options)
     $urlparamString = prepareLocSelectionForm($options) . '&locid={locid}';
 
     sql_temp_table_slave('locids');
-    sql_slave('CREATE TEMPORARY TABLE &locids ENGINE=MEMORY ' . $locSql);
-    sql_slave('ALTER TABLE &locids ADD PRIMARY KEY (`loc_id`)');
+    sql_slave("CREATE TEMPORARY TABLE &locids ENGINE=MEMORY " . $locSql);
+    sql_slave("ALTER TABLE &locids ADD PRIMARY KEY (`loc_id`)");
 
     $rs = sql_slave(
-        'SELECT `geodb_textdata`.`loc_id` `loc_id`, `geodb_textdata`.`text_val` `text_val` FROM `geodb_textdata`, &locids WHERE &locids.`loc_id`=`geodb_textdata`.`loc_id` AND `geodb_textdata`.`text_type`=500100000 ORDER BY `text_val`'
+        "SELECT
+            `geodb_textdata`.`loc_id` `loc_id`,
+            `geodb_textdata`.`text_val` `text_val`
+         FROM `geodb_textdata`, &locids
+         WHERE
+            &locids.`loc_id`=`geodb_textdata`.`loc_id`
+            AND `geodb_textdata`.`text_type`=500100000
+         ORDER BY `text_val`"
     );
 
     $nr = 1;
@@ -2259,17 +2430,17 @@ function outputLocidSelectionForm($locSql, $options)
 
         // locationsdings zusammenbauen
         $locString = '';
-        $land = geodb_landFromLocid($r['loc_id']);
+        $land = GeoDb::landFromLocid($r['loc_id']);
         if ($land != '') {
             $locString .= htmlspecialchars($land, ENT_COMPAT, 'UTF-8');
         }
 
-        $rb = geodb_regierungsbezirkFromLocid($r['loc_id']);
+        $rb = GeoDb::regierungsbezirkFromLocid($r['loc_id']);
         if ($rb != '') {
             $locString .= ' &gt; ' . htmlspecialchars($rb, ENT_COMPAT, 'UTF-8');
         }
 
-        $lk = geodb_landkreisFromLocid($r['loc_id']);
+        $lk = GeoDb::landkreisFromLocid($r['loc_id']);
         if ($lk != '') {
             $locString .= ' &gt; ' . htmlspecialchars($lk, ENT_COMPAT, 'UTF-8');
         }
@@ -2278,7 +2449,13 @@ function outputLocidSelectionForm($locSql, $options)
 
         // koordinaten ermitteln
         $r['loc_id'] = $r['loc_id'] + 0;
-        $rsCoords = sql_slave('SELECT `lon`, `lat` FROM `geodb_coordinates` WHERE loc_id=' . $r['loc_id'] . ' LIMIT 1');
+        $rsCoords = sql_slave(
+            "SELECT `lon`, `lat`
+             FROM `geodb_coordinates`
+             WHERE loc_id='&1'
+             LIMIT 1",
+            $r['loc_id']
+        );
         if ($rCoords = sql_fetch_array($rsCoords)) {
             $coordString = help_latToDegreeStr($rCoords['lat']) . ' ' . help_lonToDegreeStr($rCoords['lon']);
         } else {

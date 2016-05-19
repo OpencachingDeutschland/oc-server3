@@ -6,7 +6,6 @@
  ***************************************************************************/
 
 require __DIR__ . '/lib2/web.inc.php';
-require __DIR__ . '/lib2/logic/logpics.inc.php';
 
 $tpl->name = 'myhome';
 $tpl->menuitem = MNU_MYPROFILE_OVERVIEW;
@@ -110,9 +109,9 @@ $tpl->assign_rs(
 
 // get log pictures
 $allpics = isset($_REQUEST['allpics']) && $_REQUEST['allpics'];
-$all_pictures = get_logpics(LOGPICS_FOR_MYHOME_GALLERY);
+$all_pictures = LogPics::get(LogPics::FOR_MYHOME_GALLERY);
 if ($allpics) {
-    set_paged_pics(LOGPICS_FOR_MYHOME_GALLERY, 0, 0, "myhome.php?allpics=1");
+    LogPics::setPaging(LogPics::FOR_MYHOME_GALLERY, 0, 0, "myhome.php?allpics=1");
 } else {
     $tpl->assign('pictures', $all_pictures);
 }

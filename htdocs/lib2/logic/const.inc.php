@@ -59,7 +59,6 @@ define('COORDINATE_WAYPOINT', 1);
 define('COORDINATE_USERNOTE', 2);
 
 define('MAX_LOGENTRIES_ON_CACHEPAGE', 5);
-define('MAX_PICTURES_PER_GALLERY_PAGE', 48);   // must be multiple of 6
 
 // threshold for caches to be marked as "new"
 // changed from 7 to 14  -- following 2013/6/17

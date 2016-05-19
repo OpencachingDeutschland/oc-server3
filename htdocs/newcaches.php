@@ -31,8 +31,6 @@ if ($startat > 10 * $perpage) {
 }
 
 if (!$tpl->is_cached()) {
-    require $opt['rootpath'] . 'lib2/logic/cacheIcon.inc.php';
-
     $cachetype_condition = ($cachetype ? " AND `caches`.`type` = " . sql_escape($cachetype) : "");
     if ($bEvents) {
         $cachetype_condition .= " AND `date_hidden` >= curdate()";

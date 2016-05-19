@@ -18,8 +18,6 @@ $country = isset($_REQUEST['usercountry']) ? $_REQUEST['usercountry'] :
     (isset($_REQUEST['country']) ? $_REQUEST['country'] : $opt['page']['main_country']);
 
 if (!$tpl->is_cached()) {
-    require $opt['rootpath'] . 'lib2/logic/cacheIcon.inc.php';
-
     $newCaches = array();
 
     sql_temp_table_slave('cachelist');

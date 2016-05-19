@@ -6,7 +6,6 @@
  ***************************************************************************/
 
 require __DIR__ . '/lib2/web.inc.php';
-require_once __DIR__ . '/lib2/logic/logpics.inc.php';
 
 $tpl->name = 'viewprofile';
 $tpl->menuitem = MNU_CACHES_USERPROFILE;
@@ -328,9 +327,9 @@ if ($picstat) {
     // user has allowed picture stat and gallery view
     $tpl->assign('allpics', $allpics);
     if (!$allpics) {
-        $tpl->assign('logpics', get_logpics(LOGPICS_FOR_USER_STAT, $userid));
+        $tpl->assign('logpics', LogPics::get(LogPics::FOR_USER_STAT, $userid));
     } else {
-        set_paged_pics(LOGPICS_FOR_USER_GALLERY, $userid, 0, "viewprofile.php?userid=" . $userid . "&allpics=1");
+        LogPics::setPaging(LogPics::FOR_USER_GALLERY, $userid, 0, "viewprofile.php?userid=" . $userid . "&allpics=1");
         $tpl->name = 'viewprofile_pics';
         // actually we dont need all the other stuff here ..
     }

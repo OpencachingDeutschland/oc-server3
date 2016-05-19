@@ -2,7 +2,7 @@
 /***************************************************************************
  *  For license information see doc/license.txt
  *
- *    This script converts an OC productive database into a developer DB.
+ *  This script converts an OC productive database into a developer DB.
  *  It removes all data not intended for the public and disables all user
  *  accounts, while keeping the cache listings' status.
  *
@@ -16,8 +16,10 @@ if (!($opt['debug'] & DEBUG_DEVELOPER)) {
     die("This script deletes lot of data and must be run only on development systems.\n");
 }
 if ($argc != 2 || $argv[1] != 'go') {
-    die("This script deletes lot of data. Make sure that you really want to dos this,\n" .
-        "and confirm it by adding the parameter 'go'.\n");
+    die(
+        "This script deletes lot of data. Make sure that you really want to dos this,\n" .
+        "and confirm it by adding the parameter 'go'.\n"
+    );
 }
 
 sql('SET @allowdelete=1');
@@ -70,8 +72,9 @@ sql('TRUNCATE `queries`');
 sql('TRUNCATE `user_options`');
 sql(
     "UPDATE `user`
-        SET `is_active_flag`=0,
-               `last_login`=NULL, `password`=NULL, `email`=NULL, `email_problems`=0,
+        SET
+            `is_active_flag`=0,
+            `last_login`=NULL, `password`=NULL, `email`=NULL, `email_problems`=0,
             `first_email_problem`=NULL, `last_email_problem`=NULL, `mailing_problems`=0,
             `accept_mailing`=0, `usermail_send_addr`=0, `latitude`=0, `longitude`=0,
             `last_name`='', `first_name`='', `country`=NULL, `pmr_flag`=0,
@@ -81,11 +84,11 @@ sql(
             `activation_code`='', `statpic_logo`=0, `statpic_text`='Opencaching',
             `no_htmledit_flag`=0, `notify_radius`=0, `notify_oconly`=1, `language`='DE',
             `language_guessed`=1, `domain`=NULL, `admin`=0, `data_license`=0,
-                `description`='', `desc_htmledit`=1"
+            `description`='', `desc_htmledit`=1"
 );
 
 echo "deleting hidden and locked caches\n";
-$rs = sql('SELECT `cache_id` FROM `caches` WHERE `status`>3');
+$rs = sql("SELECT `cache_id` FROM `caches` WHERE `status`>3");
 while ($r = sql_fetch_assoc($rs)) {
     echo '.';
     sql("DELETE FROM `caches` WHERE `cache_id`='&1'", $r['cache_id']);
@@ -95,8 +98,12 @@ mysql_free_result($rs);
 
 echo "deleting inactive users\n";
 $rs = sql(
-    'SELECT `user_id` FROM `user` WHERE `user_id` NOT IN
-     (SELECT `user_id` FROM `caches` UNION SELECT `user_id` FROM `cache_logs`)'
+    "SELECT `user_id`
+     FROM `user`
+     WHERE `user_id` NOT IN
+        (SELECT `user_id` FROM `caches`
+         UNION
+         SELECT `user_id` FROM `cache_logs`)"
 );
 while ($r = sql_fetch_assoc($rs)) {
     echo ".";

@@ -202,6 +202,8 @@ else
 	exit 1;
 fi
 
-echo "export PS1='\[\033[1;33m\]OCdev:\[\033[m\w\$ '" >> .bashrc
+echo "export PS1='\[\033[1;33m\]OCdev:\[\033[m\w\$ '" >> /home/vagrant/.bashrc
+echo "cd /var/www/html/htdocs/" >> /home/vagrant/.bashrc
+echo "alias la='ls -alh'" >> /home/vagrant/.bashrc
 
 label "All done, have fun."

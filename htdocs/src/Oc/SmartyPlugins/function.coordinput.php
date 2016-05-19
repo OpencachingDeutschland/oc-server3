@@ -41,23 +41,23 @@ function smarty_function_coordinput($params, &$smarty)
     $retval .= '</select>&nbsp;';
 
     $retval .= '<input type="text" name="' . htmlspecialchars(
-            $prefix,
-            ENT_QUOTES,
-            'UTF-8'
-        ) . 'Lat" value="' . htmlspecialchars(
-            sprintf('%02d', $lat),
-            ENT_QUOTES,
-            'UTF-8'
-        ) . '" size="1" maxlength="2" />&deg; ';
+        $prefix,
+        ENT_QUOTES,
+        'UTF-8'
+    ) . 'Lat" value="' . htmlspecialchars(
+        sprintf('%02d', $lat),
+        ENT_QUOTES,
+        'UTF-8'
+    ) . '" size="1" maxlength="2" />&deg; ';
     $retval .= '<input type="text" name="' . htmlspecialchars(
-            $prefix,
-            ENT_QUOTES,
-            'UTF-8'
-        ) . 'LatMin" value="' . htmlspecialchars(
-            sprintf('%06.3f', $latMin * 60),
-            ENT_QUOTES,
-            'UTF-8'
-        ) . '" size="5" maxlength="6" /> \'';
+        $prefix,
+        ENT_QUOTES,
+        'UTF-8'
+    ) . 'LatMin" value="' . htmlspecialchars(
+        sprintf('%06.3f', $latMin * 60),
+        ENT_QUOTES,
+        'UTF-8'
+    ) . '" size="5" maxlength="6" /> \'';
 
     $retval .= '<br />';
 
@@ -72,23 +72,23 @@ function smarty_function_coordinput($params, &$smarty)
     $retval .= '</select>&nbsp;';
 
     $retval .= '<input type="text" name="' . htmlspecialchars(
-            $prefix,
-            ENT_QUOTES,
-            'UTF-8'
-        ) . 'Lon" value="' . htmlspecialchars(
-            sprintf('%03d', $lon),
-            ENT_QUOTES,
-            'UTF-8'
-        ) . '" size="2" maxlength="3" />&deg; ';
+        $prefix,
+        ENT_QUOTES,
+        'UTF-8'
+    ) . 'Lon" value="' . htmlspecialchars(
+        sprintf('%03d', $lon),
+        ENT_QUOTES,
+        'UTF-8'
+    ) . '" size="2" maxlength="3" />&deg; ';
     $retval .= '<input type="text" name="' . htmlspecialchars(
-            $prefix,
-            ENT_QUOTES,
-            'UTF-8'
-        ) . 'LonMin" value="' . htmlspecialchars(
-            sprintf('%06.3f', $lonMin * 60),
-            ENT_QUOTES,
-            'UTF-8'
-        ) . '" size="5" maxlength="6" /> \'';
+        $prefix,
+        ENT_QUOTES,
+        'UTF-8'
+    ) . 'LonMin" value="' . htmlspecialchars(
+        sprintf('%06.3f', $lonMin * 60),
+        ENT_QUOTES,
+        'UTF-8'
+    ) . '" size="5" maxlength="6" /> \'';
 
     return $retval;
 }

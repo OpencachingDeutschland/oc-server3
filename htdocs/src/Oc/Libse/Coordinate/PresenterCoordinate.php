@@ -15,13 +15,13 @@ use Oc\Libse\Validator\RegexValidator;
 
 class PresenterCoordinate
 {
-    const lat_hem = 'lat_hem';
-    const lat_deg = 'lat_deg';
-    const lat_min = 'lat_min';
-    const lon_hem = 'lon_hem';
-    const lon_deg = 'lon_deg';
-    const lon_min = 'lon_min';
-    const coord_error = 'coord_error';
+    const LAT_HEM = 'lat_hem';
+    const LAT_DEG = 'lat_deg';
+    const LAT_MIN = 'lat_min';
+    const LON_HEM = 'lon_hem';
+    const LON_DEG = 'lon_deg';
+    const LON_MIN = 'lon_min';
+    const COORD_ERROR = 'coord_error';
 
     private $coordinate;
     private $request;
@@ -55,32 +55,32 @@ class PresenterCoordinate
 
     private function getLatHem()
     {
-        return $this->request->get(self::lat_hem, $this->coordinate->latHem() ? 'N' : 'S') == 'N';
+        return $this->request->get(self::LAT_HEM, $this->coordinate->latHem() ? 'N' : 'S') == 'N';
     }
 
     private function getLonHem()
     {
-        return $this->request->get(self::lon_hem, $this->coordinate->lonHem() ? 'E' : 'W') == 'E';
+        return $this->request->get(self::LON_HEM, $this->coordinate->lonHem() ? 'E' : 'W') == 'E';
     }
 
     private function getLatDeg()
     {
-        return $this->request->get(self::lat_deg, $this->coordinate->latDeg());
+        return $this->request->get(self::LAT_DEG, $this->coordinate->latDeg());
     }
 
     private function getLonDeg()
     {
-        return $this->request->get(self::lon_deg, $this->coordinate->lonDeg());
+        return $this->request->get(self::LON_DEG, $this->coordinate->lonDeg());
     }
 
     private function getLatMin()
     {
-        return $this->request->get(self::lat_min, $this->coordinate->latMin());
+        return $this->request->get(self::LAT_MIN, $this->coordinate->latMin());
     }
 
     private function getLonMin()
     {
-        return $this->request->get(self::lon_min, $this->coordinate->lonMin());
+        return $this->request->get(self::LON_MIN, $this->coordinate->lonMin());
     }
 
     public function init($latitude, $longitude)
@@ -98,15 +98,15 @@ class PresenterCoordinate
         $formatter = new FormatterCoordinate();
         $coordinate = $this->getCoordinate();
 
-        $template->assign(self::lat_hem, $formatter->formatLatHem($coordinate));
-        $template->assign(self::lat_deg, $formatter->formatLatDeg($coordinate));
-        $template->assign(self::lat_min, $formatter->formatLatMin($coordinate));
-        $template->assign(self::lon_hem, $formatter->formatLonHem($coordinate));
-        $template->assign(self::lon_deg, $formatter->formatLonDeg($coordinate));
-        $template->assign(self::lon_min, $formatter->formatLonMin($coordinate));
+        $template->assign(self::LAT_HEM, $formatter->formatLatHem($coordinate));
+        $template->assign(self::LAT_DEG, $formatter->formatLatDeg($coordinate));
+        $template->assign(self::LAT_MIN, $formatter->formatLatMin($coordinate));
+        $template->assign(self::LON_HEM, $formatter->formatLonHem($coordinate));
+        $template->assign(self::LON_DEG, $formatter->formatLonDeg($coordinate));
+        $template->assign(self::LON_MIN, $formatter->formatLonMin($coordinate));
 
         if (!$this->valid) {
-            $template->assign(self::coord_error, $this->translator->translate('Invalid coordinate'));
+            $template->assign(self::COORD_ERROR, $this->translator->translate('Invalid coordinate'));
         }
     }
 
@@ -148,12 +148,12 @@ class PresenterCoordinate
     private function getValidators()
     {
         return [
-            self::lat_hem => new RegexValidator('[NS]$'),
-            self::lat_deg => new IntegerValidator(0, 90),
-            self::lat_min => new RealValidator(0, 59.999, '{1,2}', '{1,3}'),
-            self::lon_hem => new RegexValidator('[EW]$'),
-            self::lon_deg => new IntegerValidator(0, 180),
-            self::lon_min => new RealValidator(0, 59.999, '{1,2}', '{1,3}')
+            self::LAT_HEM => new RegexValidator('[NS]$'),
+            self::LAT_DEG => new IntegerValidator(0, 90),
+            self::LAT_MIN => new RealValidator(0, 59.999, '{1,2}', '{1,3}'),
+            self::LON_HEM => new RegexValidator('[EW]$'),
+            self::LON_DEG => new IntegerValidator(0, 180),
+            self::LON_MIN => new RealValidator(0, 59.999, '{1,2}', '{1,3}')
         ];
     }
 }

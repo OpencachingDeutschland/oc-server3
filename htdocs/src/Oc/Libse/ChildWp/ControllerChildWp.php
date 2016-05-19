@@ -15,9 +15,9 @@ require_once(__DIR__ . '/../../../../lib2/error.inc.php');
 
 class ControllerChildWp
 {
-    const req_cache_id = 'cacheid';
-    const req_child_id = 'childid';
-    const req_delete_id = 'deleteid';
+    const REQ_CACHE_ID = 'cacheid';
+    const REQ_CHILD_ID = 'childid';
+    const REQ_DELETE_ID = 'deleteid';
 
     private $request;
     private $translator;
@@ -48,13 +48,13 @@ class ControllerChildWp
 
     public function createPresenter($template, $cacheManager, $childWpHandler)
     {
-        $cacheId = $this->request->getForValidation(self::req_cache_id);
+        $cacheId = $this->request->getForValidation(self::REQ_CACHE_ID);
 
         $this->verifyCacheId($template, $cacheId, $cacheManager);
 
         $presenter = false;
-        $childId = $this->request->getForValidation(self::req_child_id);
-        $deleteId = $this->request->getForValidation(self::req_delete_id);
+        $childId = $this->request->getForValidation(self::REQ_CHILD_ID);
+        $deleteId = $this->request->getForValidation(self::REQ_DELETE_ID);
 
         if ($childId || $deleteId) {
             $presenter = $this->createEditDeletePresenter($template, $childWpHandler, $cacheId, $childId, $deleteId);

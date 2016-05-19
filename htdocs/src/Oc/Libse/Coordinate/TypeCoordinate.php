@@ -11,6 +11,6 @@ require_once(__DIR__ . '/../../../../lib2/logic/const.inc.php');
 
 class TypeCoordinate
 {
-    const ChildWaypoint = COORDINATE_WAYPOINT;
-    const UserNote = COORDINATE_USERNOTE;
+    const CHILD_WAYPOINT = COORDINATE_WAYPOINT;
+    const USER_NOTE = COORDINATE_USERNOTE;
 }

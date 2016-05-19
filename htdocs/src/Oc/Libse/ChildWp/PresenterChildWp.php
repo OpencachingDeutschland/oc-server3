@@ -15,20 +15,20 @@ require_once(__DIR__ . '/../../../../lib2/error.inc.php');
 
 abstract class PresenterChildWp
 {
-    const req_wp_type = 'wp_type';
-    const req_wp_desc = 'desc';
-    const tpl_page_title = 'pagetitle';
-    const tpl_cache_id = 'cacheid';
-    const tpl_child_id = 'childid';
-    const tpl_delete_id = 'deleteid';
-    const tpl_wp_type = 'wpType';
-    const tpl_wp_desc = 'wpDesc';
-    const tpl_wp_type_ids = 'wpTypeIds';
-    const tpl_wp_type_names = 'wpTypeNames';
-    const tpl_wp_name_images = 'wpNameImages';
-    const tpl_wp_type_error = 'wpTypeError';
-    const tpl_submit_button = 'submitButton';
-    const tpl_disabled = 'disabled';
+    const REQ_WP_TYPE = 'wp_type';
+    const REQ_WP_DESC = 'desc';
+    const TPL_PAGE_TITLE = 'pagetitle';
+    const TPL_CACHE_ID = 'cacheid';
+    const TPL_CHILD_ID = 'childid';
+    const TPL_DELETE_ID = 'deleteid';
+    const TPL_WP_TYPE = 'wpType';
+    const TPL_WP_DESC = 'wpDesc';
+    const TPL_WP_TYPE_IDS = 'wpTypeIds';
+    const TPL_WP_TYPE_NAMES = 'wpTypeNames';
+    const TPL_WP_NAME_IMAGES = 'wpNameImages';
+    const TPL_WP_TYPE_ERROR = 'wpTypeError';
+    const TPL_SUBMIT_BUTTON = 'submitButton';
+    const TPL_DISABLED = 'disabled';
 
     private $request;
     private $translator;
@@ -58,12 +58,12 @@ abstract class PresenterChildWp
 
     protected function getType()
     {
-        return $this->request->get(self::req_wp_type, $this->type);
+        return $this->request->get(self::REQ_WP_TYPE, $this->type);
     }
 
     private function getDesc()
     {
-        return $this->request->get(self::req_wp_desc, $this->description);
+        return $this->request->get(self::REQ_WP_DESC, $this->description);
     }
 
     public function init($childWpHandler, $cacheId)
@@ -89,17 +89,17 @@ abstract class PresenterChildWp
 
     public function prepare($template)
     {
-        $template->assign(self::tpl_page_title, $this->translator->Translate($this->getTitle()));
-        $template->assign(self::tpl_submit_button, $this->translator->Translate($this->getSubmitButton()));
-        $template->assign(self::tpl_cache_id, $this->cacheId);
-        $template->assign(self::tpl_wp_desc, $this->getDesc());
-        $template->assign(self::tpl_wp_type, $this->getType());
-        $template->assign(self::tpl_disabled, false);
+        $template->assign(self::TPL_PAGE_TITLE, $this->translator->Translate($this->getTitle()));
+        $template->assign(self::TPL_SUBMIT_BUTTON, $this->translator->Translate($this->getSubmitButton()));
+        $template->assign(self::TPL_CACHE_ID, $this->cacheId);
+        $template->assign(self::TPL_WP_DESC, $this->getDesc());
+        $template->assign(self::TPL_WP_TYPE, $this->getType());
+        $template->assign(self::TPL_DISABLED, false);
         $this->prepareTypes($template);
         $this->coordinate->prepare($template);
 
         if (!$this->waypointTypeValid) {
-            $template->assign(self::tpl_wp_type_error, $this->translator->translate('Select waypoint type'));
+            $template->assign(self::TPL_WP_TYPE_ERROR, $this->translator->translate('Select waypoint type'));
         }
 
         $this->onPrepare($template);
@@ -111,9 +111,9 @@ abstract class PresenterChildWp
 
     private function prepareTypes($template)
     {
-        $template->assign(self::tpl_wp_type_ids, $this->getWaypointTypeIds());
-        $template->assign(self::tpl_wp_type_names, $this->waypointTypes);
-        $template->assign(self::tpl_wp_name_images, $this->typeImages);
+        $template->assign(self::TPL_WP_TYPE_IDS, $this->getWaypointTypeIds());
+        $template->assign(self::TPL_WP_TYPE_NAMES, $this->waypointTypes);
+        $template->assign(self::TPL_WP_NAME_IMAGES, $this->typeImages);
     }
 
     abstract protected function getTitle();
@@ -129,8 +129,8 @@ abstract class PresenterChildWp
     {
         $wpTypeValidator = new ArrayValidator($this->getWaypointTypeIds());
 
-        $this->request->validate(self::req_wp_desc, new AlwaysValidValidator());
-        $this->waypointTypeValid = $this->request->validate(self::req_wp_type, $wpTypeValidator);
+        $this->request->validate(self::REQ_WP_DESC, new AlwaysValidValidator());
+        $this->waypointTypeValid = $this->request->validate(self::REQ_WP_TYPE, $wpTypeValidator);
         $coordinateValid = $this->coordinate->validate();
 
         return $this->waypointTypeValid && $coordinateValid;

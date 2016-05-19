@@ -9,7 +9,7 @@ namespace Oc\Libse\Coordinate;
 
 class CoordinateCoordinate
 {
-    const epsilon = 8.3333e-6;
+    const EPSILON = 8.3333e-6;
 
     private $latitude;
     private $longitude;
@@ -84,7 +84,7 @@ class CoordinateCoordinate
 
     private static function getDeg($value)
     {
-        return floor(abs($value) + self::epsilon);
+        return floor(abs($value) + self::EPSILON);
     }
 
     public function latMin()

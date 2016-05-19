@@ -13,7 +13,7 @@ class HandlerCacheNote
 {
     public function getCacheNote($userid, $cacheid)
     {
-        $rs = sql("SELECT id, latitude, longitude, description FROM coordinates WHERE user_id = &1 AND cache_id = &2 AND type = &3", $userid, $cacheid, TypeCoordinate::UserNote);
+        $rs = sql("SELECT id, latitude, longitude, description FROM coordinates WHERE user_id = &1 AND cache_id = &2 AND type = &3", $userid, $cacheid, TypeCoordinate::USER_NOTE);
         $ret = $this->recordToArray(sql_fetch_array($rs));
         mysql_free_result($rs);
 
@@ -42,13 +42,13 @@ class HandlerCacheNote
                 AND type = &3",
                 $userid,
                 $cacheid,
-                TypeCoordinate::UserNote
+                TypeCoordinate::USER_NOTE
             );
         } elseif (!$noteid) {
             sql(
                 "INSERT INTO coordinates(type, latitude, longitude, cache_id, user_id, description)
                 VALUES(&1, &2, &3, &4, &5, '&6')",
-                TypeCoordinate::UserNote,
+                TypeCoordinate::USER_NOTE,
                 $latitude,
                 $longitude,
                 $cacheid,
@@ -69,7 +69,7 @@ class HandlerCacheNote
                 $noteid,
                 $userid,
                 $cacheid,
-                TypeCoordinate::UserNote
+                TypeCoordinate::USER_NOTE
             );
         }
 

@@ -56,10 +56,10 @@ function smarty_prefilter_t($source, &$smarty)
 
     $end = 0;
     while (($start = smarty_prefilter_t_strpos_multi(
-            $source,
-            [$smarty->left_delimiter . 't ', $smarty->left_delimiter . 't' . $smarty->right_delimiter],
-            $end
-        )) !== false) {
+        $source,
+        [$smarty->left_delimiter . 't ', $smarty->left_delimiter . 't' . $smarty->right_delimiter],
+        $end
+    )) !== false) {
         $end = mb_strpos($source, $smarty->left_delimiter . '/t' . $smarty->right_delimiter, $start);
         $block_t = mb_substr($source, $start, $end - $start);
 
@@ -90,10 +90,10 @@ function smarty_prefilter_t_process_block($block, $message, &$smarty, $line)
         $start_attr = mb_strpos($block, ' ');
         if ($start_attr !== false) {
             if ((mb_substr($block, 0, 1) != $smarty->left_delimiter) || $start_attr == 1 || mb_substr(
-                    $block,
-                    - 1,
-                    1
-                ) != $smarty->right_delimiter
+                $block,
+                - 1,
+                1
+            ) != $smarty->right_delimiter
             ) {
                 $smarty->_syntax_error("internal processing error: '$block'", E_USER_ERROR, __FILE__, __LINE__);
             }
@@ -112,7 +112,7 @@ function smarty_prefilter_t_process_block($block, $message, &$smarty, $line)
 
                 // rebuild block with replaced plural
                 $block = '';
-                foreach ($attrs AS $k => $v) {
+                foreach ($attrs as $k => $v) {
                     if ($block != '') {
                         $block .= ' ';
                     }

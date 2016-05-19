@@ -35,8 +35,8 @@ class DeletePresenterChildWp extends PresenterChildWp
 
     protected function onPrepare($template)
     {
-        $template->assign(parent::tpl_disabled, true);
-        $template->assign(parent::tpl_delete_id, $this->childId);
+        $template->assign(parent::TPL_DISABLED, true);
+        $template->assign(parent::TPL_DELETE_ID, $this->childId);
     }
 
     public function validate()

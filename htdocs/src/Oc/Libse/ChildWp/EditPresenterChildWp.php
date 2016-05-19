@@ -41,6 +41,6 @@ class EditPresenterChildWp extends PresenterChildWp
 
     protected function onPrepare($template)
     {
-        $template->assign(self::tpl_child_id, $this->childId);
+        $template->assign(self::TPL_CHILD_ID, $this->childId);
     }
 }

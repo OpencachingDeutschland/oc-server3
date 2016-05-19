@@ -9,11 +9,11 @@ namespace Oc\Libse\Cache;
 
 class StatusCache
 {
-    const Active = 1;
-    const TempUnavailable = 2;
-    const Archived = 3;
-    const ToBeApproved = 4;
-    const NotYetPubliced = 5;
-    const Blocked = 6;
-    const BlockedHidden = 7;
+    const ACTIVE = 1;
+    const TEMP_UNAVAILABLE = 2;
+    const ARCHIVED = 3;
+    const TO_BE_APPROVED = 4;
+    const NOT_YET_PUBLISHED = 5;
+    const BLOCKED = 6;
+    const BLOCKED_HIDDEN = 7;
 }

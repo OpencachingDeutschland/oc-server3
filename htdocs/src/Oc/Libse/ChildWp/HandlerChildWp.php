@@ -52,7 +52,7 @@ class HandlerChildWp
         sql(
             "INSERT INTO coordinates(type, subtype, latitude, longitude, cache_id, description)
             VALUES(&1, &2, &3, &4, &5, '&6')",
-            TypeCoordinate::ChildWaypoint,
+            TypeCoordinate::CHILD_WAYPOINT,
             $type,
             $lat,
             $lon,
@@ -96,7 +96,7 @@ class HandlerChildWp
         $type2 = 0;
 
         if ($include_usernote) {
-            $type2 = TypeCoordinate::UserNote;
+            $type2 = TypeCoordinate::USER_NOTE;
         }
 
         $rs = sql(
@@ -107,7 +107,7 @@ class HandlerChildWp
             AND (type=\'&2\' OR (user_id=\'&4\' AND latitude!=0 AND longitude!=0))
             ORDER BY id',
             $cacheid,
-            TypeCoordinate::ChildWaypoint,
+            TypeCoordinate::CHILD_WAYPOINT,
             $type2,
             $login->userid
         );
@@ -155,7 +155,7 @@ class HandlerChildWp
         $ret['coordinate'] = new CoordinateCoordinate($ret['latitude'], $ret['longitude']);
         $ret['description'] = $r['description'];
 
-        if ($r['type'] == TypeCoordinate::ChildWaypoint) {
+        if ($r['type'] == TypeCoordinate::CHILD_WAYPOINT) {
             $ret['type'] = $r['subtype'];
             $type = $this->childWpTypes[$ret['type']];
 
@@ -167,7 +167,7 @@ class HandlerChildWp
         } else {
             $ret['type'] = 0;
             $ret['name'] = $this->translator->translate('Personal cache note');
-            $ret['image'] = PresenterCacheNote::image;
+            $ret['image'] = PresenterCacheNote::IMAGE;
         }
 
         return $ret;

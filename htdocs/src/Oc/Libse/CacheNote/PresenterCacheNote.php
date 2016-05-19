@@ -13,13 +13,13 @@ use Oc\Libse\Validator\AlwaysValidValidator;
 
 class PresenterCacheNote
 {
-    const req_note = 'note';
-    const req_incl_coord = 'incl_coord';
-    const tpl_cache_id = 'cacheid';
-    const tpl_note_id = 'noteid';
-    const tpl_note = 'note';
-    const tpl_incl_coord = 'inclCoord';
-    const image = 'resource2/ocstyle/images/misc/wp_note.png';
+    const REQ_NOTE = 'note';
+    const REQ_INCL_COORD = 'incl_coord';
+    const TPL_CACHE_ID = 'cacheid';
+    const TPL_NOTE_ID = 'noteid';
+    const TPL_NOTE = 'note';
+    const TPL_INCL_COORD = 'inclCoord';
+    const IMAGE = 'resource2/ocstyle/images/misc/wp_note.png';
 
     private $request;
     private $translator;
@@ -51,17 +51,17 @@ class PresenterCacheNote
 
     public function prepare($template)
     {
-        $template->assign(self::tpl_note_id, $this->noteId);
-        $template->assign(self::tpl_cache_id, $this->cacheId);
-        $template->assign(self::tpl_note, $this->getNote());
-        $template->assign(self::tpl_incl_coord, $this->coordinate->hasCoordinate());
+        $template->assign(self::TPL_NOTE_ID, $this->noteId);
+        $template->assign(self::TPL_CACHE_ID, $this->cacheId);
+        $template->assign(self::TPL_NOTE, $this->getNote());
+        $template->assign(self::TPL_INCL_COORD, $this->coordinate->hasCoordinate());
         $this->coordinate->prepare($template);
     }
 
     public function validate()
     {
-        $this->request->validate(self::req_incl_coord, new AlwaysValidValidator());
-        $this->request->validate(self::req_note, new AlwaysValidValidator());
+        $this->request->validate(self::REQ_INCL_COORD, new AlwaysValidValidator());
+        $this->request->validate(self::REQ_NOTE, new AlwaysValidValidator());
 
         if ($this->includeCoordinate()) {
             $this->coordinate->validate();
@@ -91,7 +91,7 @@ class PresenterCacheNote
 
     private function getNote()
     {
-        return $this->request->get(self::req_note, $this->note);
+        return $this->request->get(self::REQ_NOTE, $this->note);
     }
 
     private function getCoordinate()
@@ -105,6 +105,6 @@ class PresenterCacheNote
 
     private function includeCoordinate()
     {
-        return $this->request->get(self::req_incl_coord);
+        return $this->request->get(self::REQ_INCL_COORD);
     }
 }

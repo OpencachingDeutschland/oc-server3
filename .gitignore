@@ -25,12 +25,8 @@
 /htdocs/sitemap*xml*
 /htdocs/var/*
 # obsolete, used when testing old code versions:
-/htdocs/lib2/HTMLPurifier/library/HTMLPurifier/DefinitionCache/Serializer/CSS/*
-/htdocs/lib2/HTMLPurifier/library/HTMLPurifier/DefinitionCache/Serializer/HTML/*
-/htdocs/lib2/HTMLPurifier/library/HTMLPurifier/DefinitionCache/Serializer/URI/*
-/lib/htmlpurifier-4.2.0/library/HTMLPurifier/DefinitionCache/Serializer/CSS/*
-/lib/htmlpurifier-4.2.0/library/HTMLPurifier/DefinitionCache/Serializer/HTML/*
-/lib/htmlpurifier-4.2.0/library/HTMLPurifier/DefinitionCache/Serializer/URI/*
+/htdocs/lib2/HTMLPurifier/library/HTMLPurifier/DefinitionCache/*
+/lib/htmlpurifier-4.2.0/library/HTMLPurifier/DefinitionCache/*
 
 # repository files which may be replaced locally
 .editorconfig

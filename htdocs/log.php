@@ -11,11 +11,11 @@ if ((isset($_POST['submit']) || isset($_POST['submitform'])) && !isset($_POST['v
 }
 
 // include librarys
-require('lib2/web.inc.php');
-require_once('lib2/logic/cache.class.php');
-require_once('lib2/logic/user.class.php');
-require_once('lib2/logic/cachelog.class.php');
-require_once('lib2/edithelper.inc.php');
+require 'lib2/web.inc.php';
+require_once 'lib2/logic/cache.class.php';
+require_once 'lib2/logic/user.class.php';
+require_once 'lib2/logic/cachelog.class.php';
+require_once 'lib2/edithelper.inc.php';
 
 // prepare template and menue
 $tpl->name = 'log_cache';

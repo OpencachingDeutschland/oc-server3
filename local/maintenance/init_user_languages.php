@@ -9,8 +9,8 @@
  ***************************************************************************/
 
 $opt['rootpath'] = __DIR__ . '/../../htdocs/';
-require_once($opt['rootpath'] . 'lib2/cli.inc.php');
-require_once($opt['rootpath'] . 'lib2/logic/user.class.php');
+require_once $opt['rootpath'] . 'lib2/cli.inc.php';
+require_once $opt['rootpath'] . 'lib2/logic/user.class.php';
 
 $write = ($argc == 2 && $argv[1] = 'write');
 if (!$write) {

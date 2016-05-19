@@ -15,6 +15,7 @@
  *
  * add in the function all neccessary actions to refresh static files
  ****************************************************************************/
+
 function delete_statpic($userid)
 {
     $userid = $userid + 0;

@@ -11,7 +11,7 @@
  ***************************************************************************/
 
 $opt['rootpath'] = __DIR__ . '/../../';
-require(__DIR__ . '/../../lib2/cli.inc.php');
+require __DIR__ . '/../../lib2/cli.inc.php';
 
 $rs = sql("SELECT `cache_id`, `name` FROM `caches` WHERE `name`<'\"' ORDER BY `name` ASC");
 while ($r = sql_fetch_array($rs)) {

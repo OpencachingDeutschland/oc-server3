@@ -16,7 +16,7 @@
  * Dont include this file by hand - it will be included from common.inc.php
  ****************************************************************************/
 
-require($opt['rootpath'] . 'lib/login.class.php');
+require $opt['rootpath'] . 'lib/login.class.php';
 
 $autherr = 0;
 define('AUTHERR_NOERROR', 0);

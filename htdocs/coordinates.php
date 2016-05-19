@@ -5,8 +5,7 @@
  *  Unicode Reminder メモ
  ***************************************************************************/
 
-require('./lib2/web.inc.php');
-require_once('./lib2/logic/coordinate.class.php');
+require 'lib2/web.inc.php';
 
 $tpl->name = 'coordinates';
 $tpl->popup = true;

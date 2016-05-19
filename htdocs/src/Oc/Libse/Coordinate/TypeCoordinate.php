@@ -7,7 +7,7 @@
 
 namespace Oc\Libse\Coordinate;
 
-require_once(__DIR__ . '/../../../../lib2/logic/const.inc.php');
+require_once __DIR__ . '/../../../../lib2/logic/const.inc.php';
 
 class TypeCoordinate
 {

@@ -32,9 +32,9 @@ $rootpath = __DIR__ . '/../../htdocs/';
 // chdir to proper directory (needed for cronjobs)
 chdir(substr(realpath($_SERVER['PHP_SELF']), 0, strrpos(realpath($_SERVER['PHP_SELF']), '/')));
 
-require_once($rootpath . 'lib/clicompatbase.inc.php');
-require_once('xml2array.inc.php');
-require_once('settings.php');
+require_once $rootpath . 'lib/clicompatbase.inc.php';
+require_once 'xml2array.inc.php';
+require_once 'settings.php';
 
 global $sql_warntime;
 $sql_warntime = 3;

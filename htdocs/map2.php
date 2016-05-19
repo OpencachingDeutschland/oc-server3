@@ -9,11 +9,7 @@ use Oc\Libse\ChildWp\HandlerChildWp;
 
 $build_map_towns_menu = true;
 
-require('./lib2/web.inc.php');
-require_once('./lib2/logic/cache.class.php');
-require_once('./lib2/logic/user.class.php');
-require_once('./lib2/logic/useroptions.class.php');
-require_once('./lib2/logic/attribute.class.php');
+require 'lib2/web.inc.php';
 
 /* because the map does access some private info like
  * ignored caches, we need to verify the login data

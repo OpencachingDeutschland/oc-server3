@@ -16,10 +16,8 @@
  *
  ***************************************************************************/
 
-require('./lib2/web.inc.php');
-require_once('./lib2/logic/picture.class.php');
-require_once('./lib2/logic/cache.class.php');
-require_once('./lib2/logic/cachelog.class.php');
+require 'lib2/web.inc.php';
+
 $tpl->name = 'picture';
 $tpl->menuitem = MNU_CACHES_PICTURE;
 

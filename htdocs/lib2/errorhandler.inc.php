@@ -39,7 +39,7 @@ function errorhandler($errno, $errstr, $errfile, $errline)
             $errmsg = "";
         }
 
-        require(dirname(__FILE__) . "/../html/error.php");
+        require __DIR__ . '/../html/error.php';
         exit;
     }
 }
@@ -77,7 +77,7 @@ function shutdownhandler()
             $errmsg = $error;
         }
 
-        require(dirname(__FILE__) . "/../html/error.php");
+        require __DIR__ . '/../html/error.php';
     }
 }
 

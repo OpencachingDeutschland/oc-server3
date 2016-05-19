@@ -6,8 +6,8 @@
  ***************************************************************************/
 
 $disable_verifyemail = true;
-require('./lib2/web.inc.php');
-require_once('./lib2/logic/user.class.php');
+require 'lib2/web.inc.php';
+
 $tpl->name = 'newemail';
 $tpl->menuitem = MNU_MYPROFILE_DATA;
 

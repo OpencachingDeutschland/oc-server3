@@ -8,7 +8,6 @@
  * Nature Protection Area functions
  ****************************************************************************/
 
-
 function get_npas($cache_id)
 {
     $rsNPA = sql(
@@ -29,7 +28,6 @@ function get_npas($cache_id)
 
     return $npas;
 }
-
 
 function get_desc_npas($cache_id)
 {

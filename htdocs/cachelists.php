@@ -5,9 +5,7 @@
  *  Unicode Reminder メモ
  ***************************************************************************/
 
-require('./lib2/web.inc.php');
-require_once('./lib2/logic/cachelist.class.php');
-require_once('./lib2/pager.class.php');
+require 'lib2/web.inc.php';
 
 $login->verify();
 

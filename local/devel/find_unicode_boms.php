@@ -7,8 +7,8 @@
  *  Searches for Unicode byte order marks in code and template files
  ***************************************************************************/
 
-chdir("../../htdocs");
-require_once('lib2/cli.inc.php');
+chdir(__DIR__ . '/../../htdocs');
+require_once 'lib2/cli.inc.php';
 
 
 scan('.', false);

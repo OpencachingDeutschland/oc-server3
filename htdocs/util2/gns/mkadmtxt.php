@@ -10,10 +10,9 @@
  ***************************************************************************/
 
 $opt['rootpath'] = '../../';
-require_once($opt['rootpath'] . 'lib2/cli.inc.php');
-require_once($opt['rootpath'] . 'lib2/search/search.inc.php');
-require_once($opt['rootpath'] . 'lib2/logic/geomath.class.php');
-require_once($opt['rootpath'] . 'lib2/logic/geodb.inc.php');
+require_once $opt['rootpath'] . 'lib2/cli.inc.php';
+require_once $opt['rootpath'] . 'lib2/search/search.inc.php';
+require_once $opt['rootpath'] . 'lib2/logic/geodb.inc.php';
 
 
 $rsLocations = sql("SELECT `uni`, `lat`, `lon`, `rc`, `cc1`, `adm1` FROM `gns_locations` WHERE `dsg` LIKE 'PPL%'");

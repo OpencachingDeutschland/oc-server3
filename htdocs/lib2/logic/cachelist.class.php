@@ -8,8 +8,7 @@
  *   add/remove etc. is executed instantly
  ***************************************************************************/
 
-require_once(__DIR__ . '/rowEditor.class.php');
-require_once(__DIR__ .'/../translate.class.php');
+require_once __DIR__ . '/../translate.class.php';
 
 define('ERROR_BAD_LISTNAME', 1);
 define('ERROR_DUPLICATE_LISTNAME', 2);

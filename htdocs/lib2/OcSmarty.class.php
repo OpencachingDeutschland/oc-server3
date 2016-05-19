@@ -7,10 +7,9 @@
  *  Inherit Smarty-Class and extend it
  ***************************************************************************/
 
-// require_once($opt['rootpath'] . 'lib2/smarty/Smarty.class.php');
-require_once(__DIR__ . '/../vendor/autoload.php');
-require_once($opt['rootpath'] . 'lib2/db.inc.php');
-require_once($opt['rootpath'] . 'lib2/logic/labels.inc.php');
+require_once __DIR__ . '/../vendor/autoload.php';
+require_once $opt['rootpath'] . 'lib2/db.inc.php';
+require_once $opt['rootpath'] . 'lib2/logic/labels.inc.php';
 
 class OcSmarty extends Smarty
 {
@@ -41,7 +40,7 @@ class OcSmarty extends Smarty
     public function __construct()
     {
         global $opt, $sqldebugger;
-        require_once($opt['rootpath'] . 'lib2/bench.inc.php');
+        require_once $opt['rootpath'] . 'lib2/bench.inc.php';
         $this->bench = new CBench();
         $this->bench->start();
 
@@ -59,7 +58,7 @@ class OcSmarty extends Smarty
         $this->cache_lifetime = 3600; // default
 
         // register additional functions
-        require_once(__DIR__ . '/../src/Oc/SmartyPlugins/block.nocache.php');
+        require_once __DIR__ . '/../src/Oc/SmartyPlugins/block.nocache.php';
         $this->register_block('nocache', 'smarty_block_nocache', false);
         $this->load_filter('pre', 't');
 
@@ -74,7 +73,7 @@ class OcSmarty extends Smarty
 
         // process debug level
         if (($opt['debug'] & DEBUG_SQLDEBUGGER) == DEBUG_SQLDEBUGGER) {
-            require_once($opt['rootpath'] . 'lib2/sqldebugger.class.php');
+            require_once $opt['rootpath'] . 'lib2/sqldebugger.class.php';
         } elseif (($opt['debug'] & DEBUG_OUTOFSERVICE) == DEBUG_OUTOFSERVICE) {
             $this->name = 'sys_outofservice';
             $this->display();
@@ -343,7 +342,7 @@ class OcSmarty extends Smarty
         }
 
         if (($opt['debug'] & DEBUG_SQLDEBUGGER) == DEBUG_SQLDEBUGGER) {
-            require_once($opt['rootpath'] . 'lib2/sqldebugger.class.php');
+            require_once $opt['rootpath'] . 'lib2/sqldebugger.class.php';
 
             parent::fetch($this->main_template . '.tpl', $this->get_cache_id(), $this->get_compile_id());
 

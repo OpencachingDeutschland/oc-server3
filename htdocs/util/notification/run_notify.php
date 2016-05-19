@@ -12,13 +12,13 @@
 // needs absolute rootpath because called as cronjob
 $rootpath = __DIR__ . '/../../';
 
-require_once($rootpath . 'lib/clicompatbase.inc.php');
-require_once($rootpath . 'lib2/translate.class.php');
-require_once('settings.inc.php');
-require_once($rootpath . 'lib/consts.inc.php');
-require_once($rootpath . 'lib2/ProcessSync.class.php');
-require_once($rootpath . 'lib/logic.inc.php');
-require_once($rootpath . 'lib2/logic/geomath.class.php');
+require_once $rootpath . 'lib/clicompatbase.inc.php';
+require_once $rootpath . 'lib2/translate.class.php';
+require_once __DIR__ . '/settings.inc.php';
+require_once $rootpath . 'lib/consts.inc.php';
+require_once $rootpath . 'lib2/ProcessSync.class.php';
+require_once $rootpath . 'lib/logic.inc.php';
+require_once $rootpath . 'lib2/logic/geomath.class.php';
 
 if (!cronjobs_enabled()) {
     exit;

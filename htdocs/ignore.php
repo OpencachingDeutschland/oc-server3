@@ -5,7 +5,7 @@
  *  Unicode Reminder メモ
  ***************************************************************************/
 
-require('./lib2/web.inc.php');
+require 'lib2/web.inc.php';
 
 $cache_id = isset($_GET['cacheid']) ? $_GET['cacheid'] + 0 : 0;
 $action = isset($_GET['action']) ? $_GET['action'] : '';

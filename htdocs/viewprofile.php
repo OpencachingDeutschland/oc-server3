@@ -5,11 +5,8 @@
  *  Unicode Reminder メモ
  ***************************************************************************/
 
-require('./lib2/web.inc.php');
-require_once('./lib2/logic/user.class.php');
-require_once('./lib2/logic/useroptions.class.php');
-require_once('./lib2/logic/cachelist.class.php');
-require_once('./lib2/logic/logpics.inc.php');
+require 'lib2/web.inc.php';
+require_once 'lib2/logic/logpics.inc.php';
 
 $tpl->name = 'viewprofile';
 $tpl->menuitem = MNU_CACHES_USERPROFILE;

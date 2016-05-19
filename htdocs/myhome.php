@@ -5,8 +5,8 @@
  *  Unicode Reminder メモ
  ***************************************************************************/
 
-require_once('./lib2/web.inc.php');
-require('./lib2/logic/logpics.inc.php');
+require 'lib2/web.inc.php';
+require 'lib2/logic/logpics.inc.php';
 
 $tpl->name = 'myhome';
 $tpl->menuitem = MNU_MYPROFILE_OVERVIEW;

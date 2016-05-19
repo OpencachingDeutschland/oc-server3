@@ -6,7 +6,7 @@
  ***************************************************************************/
 
 $disable_verifyemail = true;
-require('./lib2/web.inc.php');
+require 'lib2/web.inc.php';
 
 $tpl->name = 'activation';
 $tpl->menuitem = MNU_START_REGISTER_ACTIVATION;

@@ -1,5 +1,4 @@
 <?php
-
 /****************************************************************************
  * For license information see doc/license.txt
  *
@@ -8,6 +7,7 @@
  * synchronization of processes which must not run concurrently;
  * also used in lib1
  ****************************************************************************/
+
 class ProcessSync
 {
     public $pidfile_path;

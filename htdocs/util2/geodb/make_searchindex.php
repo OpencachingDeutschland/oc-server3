@@ -10,8 +10,8 @@
  ***************************************************************************/
 
 $opt['rootpath'] = '../../';
-require_once(__DIR__.'/../../lib2/cli.inc.php');
-require_once(__DIR__.'/../../lib2/search/search.inc.php');
+require_once __DIR__ . '/../../lib2/cli.inc.php';
+require_once __DIR__ . '/../../lib2/search/search.inc.php';
 
 
 sql('DELETE FROM geodb_search');

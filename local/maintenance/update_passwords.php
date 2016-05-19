@@ -8,9 +8,9 @@
  ***************************************************************************/
 
 global $opt;
-$opt['rootpath'] = '../htdocs/';
-require($opt['rootpath'] . 'lib2/web.inc.php');
-require($opt['rootpath'] . 'lib2/logic/crypt.class.php');
+$opt['rootpath'] = __DIR__ . '/../../htdocs/';
+require $opt['rootpath'] . 'lib2/cli.inc.php';
+require $opt['rootpath'] . 'lib2/logic/crypt.class.php';
 
 if (!isset($opt['logic']['password_salt']) || strlen($opt['logic']['password_salt']) < 32) {
     echo "Warning!\nPassword Salt not set or too short!\n\n";

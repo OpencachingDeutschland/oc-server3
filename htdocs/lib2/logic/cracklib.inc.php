@@ -22,6 +22,7 @@
  * true  ... complex enough
  * false ... not complex enough
  */
+
 function cracklib_checkpw($pw, $addwords)
 {
     global $opt;

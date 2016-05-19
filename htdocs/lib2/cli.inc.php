@@ -19,14 +19,14 @@ if (!isset($opt['rootpath'])) {
 }
 
 // chicken-egg problem ...
-require_once($opt['rootpath'] . 'lib2/const.inc.php');
+require_once $opt['rootpath'] . 'lib2/const.inc.php';
 
 // do all output in text format
 $opt['gui'] = GUI_TEXT;
 
 // include the main library
-require_once($opt['rootpath'] . 'lib2/common.inc.php');
-require_once($opt['rootpath'] . 'lib2/cli.class.php');
+require_once $opt['rootpath'] . 'lib2/common.inc.php';
+require_once $opt['rootpath'] . 'lib2/cli.class.php';
 
 if (($opt['debug'] & DEBUG_OUTOFSERVICE) == DEBUG_OUTOFSERVICE) {
     $cli->debug('exit because DEBUG_OUTOFSERVICE is set');

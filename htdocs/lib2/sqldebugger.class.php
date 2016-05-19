@@ -7,7 +7,8 @@
  *  This modules gives you a very usefull SQL debugger for MySQL ...
  ***************************************************************************/
 
-require_once($opt['rootpath'] . 'lib2/bench.inc.php');
+require_once $opt['rootpath'] . 'lib2/bench.inc.php';
+
 $sqldebugger = new sqldebugger();
 
 class sqldebugger

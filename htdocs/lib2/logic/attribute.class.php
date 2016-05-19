@@ -1,10 +1,10 @@
 <?php
-
 /***************************************************************************
  *  For license information see doc/license.txt
  *
  *  Unicode Reminder メモ
  ***************************************************************************/
+
 class attribute
 {
     /* array with all attributes grouped by attribute group */

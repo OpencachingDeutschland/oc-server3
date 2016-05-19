@@ -310,7 +310,7 @@ function sql_internal($dblink, $sql)
     */
 
     if (isset($db['debug']) && ($db['debug'] == true)) {
-        require_once($opt['rootpath'] . 'lib2/sqldebugger.class.php');
+        require_once $opt['rootpath'] . 'lib2/sqldebugger.class.php';
         $result = $sqldebugger->execute($filtered_sql, $dblink, ($dblink === $db['dblink_slave']), $db['slave_server']);
         if ($result === false) {
             sql_error($filtered_sql);
@@ -318,7 +318,7 @@ function sql_internal($dblink, $sql)
     } else {
         // measure time
         if ($opt['db']['warn']['time'] > 0) {
-            require_once($opt['rootpath'] . 'lib2/bench.inc.php');
+            require_once $opt['rootpath'] . 'lib2/bench.inc.php';
             $cSqlExecution = new Cbench;
             $cSqlExecution->start();
         }
@@ -1022,8 +1022,8 @@ function sql_error($sqlstatement = "")
         } else {
             $errmsg = "";
         }
-        $errtitle = "Datenbankfehler";
-        require("html/error.php");
+        $errtitle = 'Datenbankfehler';
+        require 'html/error.php';
         exit;
     }
     $db['error'] = true;
@@ -1037,7 +1037,7 @@ function sql_error($sqlstatement = "")
             $opt['db']['error']['subject'],
             str_replace("\n", "\r\n", $error) . "\n" . print_r(debug_backtrace(), true),
             "From: " . $opt['mail']['from'])) {
-            require_once($opt['rootpath'] . 'lib2/mail.class.php');
+            require_once $opt['rootpath'] . 'lib2/mail.class.php';
             $mail = new mail();
             $mail->subject = $opt['db']['error']['subject'];
             $mail->to = $opt['db']['error']['mail'];
@@ -1086,7 +1086,7 @@ function sql_warn($warnmessage)
             $opt['db']['warn']['subject'],
             $warnmessage . "\n" . print_r(debug_backtrace(), true),
             "From: " . $opt['mail']['from'])) {
-            require_once($opt['rootpath'] . 'lib2/mail.class.php');
+            require_once $opt['rootpath'] . 'lib2/mail.class.php';
             $mail = new mail();
             $mail->name = 'sql_warn';
             $mail->subject = $opt['db']['warn']['subject'];

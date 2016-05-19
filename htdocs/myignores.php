@@ -5,7 +5,8 @@
  *  Unicode Reminder メモ
  ***************************************************************************/
 
-require('./lib2/web.inc.php');
+require 'lib2/web.inc.php';
+
 $tpl->name = 'myignores';
 $tpl->menuitem = MNU_MYPROFILE_IGNORES;
 

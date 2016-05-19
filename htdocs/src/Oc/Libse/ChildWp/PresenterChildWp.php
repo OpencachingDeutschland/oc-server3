@@ -11,7 +11,7 @@ use Oc\Libse\Coordinate\PresenterCoordinate;
 use Oc\Libse\Validator\AlwaysValidValidator;
 use Oc\Libse\Validator\ArrayValidator;
 
-require_once(__DIR__ . '/../../../../lib2/error.inc.php');
+require_once __DIR__ . '/../../../../lib2/error.inc.php';
 
 abstract class PresenterChildWp
 {

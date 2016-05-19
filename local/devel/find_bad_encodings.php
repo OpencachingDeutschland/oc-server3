@@ -7,8 +7,8 @@
  *  Searches for files which are no longer Unicode-encoded
  ***************************************************************************/
 
-chdir("../../htdocs");
-require_once('lib2/cli.inc.php');
+chdir(__DIR__ . '/../../htdocs');
+require_once 'lib2/cli.inc.php';
 
 
 scan('.', false);

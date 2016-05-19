@@ -5,8 +5,7 @@
  *  Unicode Reminder メモ
  ***************************************************************************/
 
-require('./lib2/web.inc.php');
-require_once('./lib2/logic/cache.class.php');
+require 'lib2/web.inc.php';
 
 $tpl->name = 'viewlogs';
 $tpl->menuitem = MNU_CACHES_VIEWLOGS;

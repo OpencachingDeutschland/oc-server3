@@ -7,8 +7,8 @@
  *  Read anti-cracking password list into database
  ***************************************************************************/
 
-$opt['rootpath'] = '../../../';
-require(__DIR__ . '/../../../lib2/web.inc.php');
+$opt['rootpath'] = __DIR__ . '/../../../';
+require $opt['rootpath'] . 'lib2/cli.inc.php';
 
 $pwf = @fopen('pw_dict', 'r');
 if ($pwf) {

@@ -5,7 +5,8 @@
  *  Unicode Reminder メモ
  ***************************************************************************/
 
-require('./lib2/web.inc.php');
+require 'lib2/web.inc.php';
+
 $tpl->name = 'recommendations';
 $tpl->menuitem = MNU_CACHES_SEARCH_RECOMMENDATIONS;
 

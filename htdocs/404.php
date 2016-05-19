@@ -5,8 +5,8 @@
  *  Unicode Reminder メモ
  ***************************************************************************/
 
-require('lib2/web.inc.php');
-require('lib2/logic/logpics.inc.php');
+require 'lib2/web.inc.php';
+require 'lib2/logic/logpics.inc.php';
 
 $sUserCountry = $login->getUserCountry();
 

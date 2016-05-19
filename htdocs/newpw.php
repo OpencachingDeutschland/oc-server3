@@ -6,8 +6,8 @@
  ***************************************************************************/
 
 $disable_verifyemail = true;
-require('./lib2/web.inc.php');
-require_once('./lib2/logic/user.class.php');
+require 'lib2/web.inc.php';
+
 $tpl->name = 'newpw';
 
 $login->verify();

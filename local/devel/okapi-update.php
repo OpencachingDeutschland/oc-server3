@@ -9,8 +9,8 @@
  *  Unicode Reminder メモ
  ***************************************************************************/
 
-$opt['rootpath'] = __DIR__ . '/../../htdocs';
-require_once(__DIR__ . '/okapi-update-settings.inc.php');
+$opt['rootpath'] = __DIR__ . '/../../htdocs/';
+require_once $opt['rootpath'] . 'okapi-update-settings.inc.php';
 
 function git($args)
 {
@@ -60,10 +60,10 @@ passthru(
     str_replace(
         '%source',
         OKAPI_SOURCE_PATH . '/okapi',
-        str_replace('%dest', $opt['rootpath'] . '/okapi', DIRECTORY_TREE_REPLICATOR)
+        str_replace('%dest', $opt['rootpath'] . 'okapi', DIRECTORY_TREE_REPLICATOR)
     )
 );
-$core = file_get_contents($opt['rootpath'] . '/okapi/core.php');
+$core = file_get_contents($opt['rootpath'] . 'okapi/core.php');
 $core = str_replace(
     "\$version_number = null",
     "\$version_number = " . $okapi_version_number,
@@ -73,7 +73,7 @@ $core = str_replace(
         $core
     )
 );
-file_put_contents($opt['rootpath'] . '/okapi/core.php', $core);
+file_put_contents($opt['rootpath'] . 'okapi/core.php', $core);
 chdir($opt['rootpath']);
 passthru('git status');
 

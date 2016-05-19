@@ -14,14 +14,9 @@ use Oc\Libse\Coordinate\FormatterCoordinate;
 use Oc\Libse\Http\RequestHttp;
 use Oc\Libse\Language\TranslatorLanguage;
 
-require('./lib2/web.inc.php');
-require_once('./lib2/logic/labels.inc.php');
-require_once('./lib2/logic/cache.class.php');
-require_once('./lib2/logic/attribute.class.php');
-require_once('./lib2/logic/cachelist.class.php');
-require_once('./lib2/logic/coordinate.class.php');
-require_once('./lib2/logic/useroptions.class.php');
-require_once('./lib2/logic/logpics.inc.php');
+require 'lib2/web.inc.php';
+require_once 'lib2/logic/labels.inc.php';
+require_once 'lib2/logic/logpics.inc.php';
 
 $login->verify();
 

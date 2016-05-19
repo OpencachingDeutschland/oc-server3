@@ -1,5 +1,4 @@
 <?php
-
 /***************************************************************************
  *  For license information see doc/license.txt
  *
@@ -8,6 +7,7 @@
  *  In lib2 this file is always included via common.inc.php.
  *  Also used in lib1.
  ***************************************************************************/
+
 class geomath
 {
     public static function calcBearing($lat1, $lon1, $lat2, $lon2)

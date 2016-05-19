@@ -1,31 +1,21 @@
 <?php
 /****************************************************************************
- * ./editcache.php
- * -------------------
- * begin                : July 5 2004
+ *  For license information see doc/license.txt
  *
- * For license information see doc/license.txt
+ *  edit a cache listing
+ *
+ *  used template(s): editcache
+ *  GET/POST Parameter: cacheid
+ *
+ *  Unicode Reminder メモ
  *****************************************************************************/
+
 use Oc\Libse\ChildWp\HandlerChildWp;
 use Oc\Libse\Coordinate\FormatterCoordinate;
 
-/****************************************************************************
- *
- * Unicode Reminder メモ
- *
- * edit a cache listing
- *
- * used template(s): editcache
- *
- * GET/POST Parameter: cacheid
- *
- * @todo reformat code to PSR-2
- ****************************************************************************/
-
-//prepare the templates and include all neccessary
-require_once('lib/consts.inc.php');
+require_once 'lib/consts.inc.php';
 $opt['gui'] = GUI_HTML;
-require_once('./lib/common.inc.php');
+require_once 'lib/common.inc.php';
 
 function getWaypoints($cacheid)
 {
@@ -141,7 +131,7 @@ if ($error == false) {
             if ($cache_record['user_id'] == $usr['userid'] || $login->listingAdmin()) {
                 $tplname = 'editcache';
 
-                require($stylepath . '/editcache.inc.php');
+                require $stylepath . '/editcache.inc.php';
 
                 if ($cache_record['node'] != $oc_nodeid) {
                     tpl_errorMsg('editcache', $error_wrong_node);
@@ -613,7 +603,7 @@ if ($error == false) {
                         );
 
                         //call eventhandler
-                        require_once($opt['rootpath'] . 'lib/eventhandler.inc.php');
+                        require_once $opt['rootpath'] . 'lib/eventhandler.inc.php';
                         event_edit_cache($cache_id, $usr['userid'] + 0);
 
                         // if old status is not yet published and new status is published => notify-event

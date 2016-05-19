@@ -16,12 +16,12 @@ if (!isset($ocxmlversion)) {
 }
 
 $opt['rootpath'] = '../';
-require_once(__DIR__.'/../lib/common.inc.php');
-require_once(__DIR__.'/../lib2/charset.inc.php');
-require_once(__DIR__.'/../lib2/const.inc.php');
-require_once(__DIR__.'/../lib2/logic/data-license.inc.php');
-require_once(__DIR__.'/../lib2/logic/npas.inc.php');
-require_once(__DIR__.'/../lib2/logic/geomath.class.php');
+require_once __DIR__ . '/../lib/common.inc.php';
+require_once __DIR__ . '/../lib2/charset.inc.php';
+require_once __DIR__ . '/../lib2/const.inc.php';
+require_once __DIR__ . '/../lib2/logic/data-license.inc.php';
+require_once __DIR__ . '/../lib2/logic/npas.inc.php';
+require_once __DIR__ .' /../lib2/logic/geomath.class.php';
 
 if ($error == true) {
     echo 'Unable to connect to database';

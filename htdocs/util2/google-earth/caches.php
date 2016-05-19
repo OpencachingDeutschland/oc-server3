@@ -7,10 +7,11 @@
   BBOX=2.38443,45.9322,20.7053,55.0289
 */
 
-$opt['rootpath'] = '../../';
 header('Content-type: text/html; charset=utf-8');
-require($opt['rootpath'] . 'lib2/web.inc.php');
-require($opt['rootpath'] . 'templates2/ocstyle/search.tpl.inc.php');
+
+$opt['rootpath'] = '../../';
+require $opt['rootpath'] . 'lib2/web.inc.php';
+require $opt['rootpath'] . 'templates2/ocstyle/search.tpl.inc.php';
 
 $bbox = isset($_REQUEST['BBOX']) ? $_REQUEST['BBOX'] : '0,0,0,0';
 $abox = mb_split(',', $bbox);

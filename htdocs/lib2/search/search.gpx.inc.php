@@ -11,8 +11,8 @@
 use Oc\Libse\CacheNote\HandlerCacheNote;
 use Oc\Libse\ChildWp\HandlerChildWp;
 
-require_once('lib2/translate.class.php');
-require_once('lib2/logic/npas.inc.php');
+require_once 'lib2/translate.class.php';
+require_once 'lib2/logic/npas.inc.php';
 
 $search_output_file_download = true;
 $content_type_plain = 'application/gpx';

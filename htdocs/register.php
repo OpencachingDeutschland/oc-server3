@@ -5,10 +5,7 @@
  *  Unicode Reminder メモ
  ***************************************************************************/
 
-require('./lib2/web.inc.php');
-require_once($opt['rootpath'] . 'lib2/logic/user.class.php');
-require_once($opt['rootpath'] . 'lib2/logic/countriesList.class.php');
-require_once($opt['rootpath'] . 'lib2/mail.class.php');
+require 'lib2/web.inc.php';
 
 $tpl->name = 'register';
 $tpl->menuitem = MNU_START_REGISTER;

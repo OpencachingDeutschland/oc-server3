@@ -15,7 +15,7 @@
 if (!isset($opt['rootpath'])) {
     $opt['rootpath'] = __DIR__ . '/../htdocs/';
 }
-require_once(__DIR__ . '/../htdocs/lib2/cli.inc.php');
+require_once __DIR__ . '/../htdocs/lib2/cli.inc.php';
 
 if ($argc != 2 || $argv[1] != 'pass2') {
     // stop apache

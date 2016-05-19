@@ -20,6 +20,8 @@
  * $dblink
  ****************************************************************************/
 
+require_once __DIR__ . '/../vendor/autoload.php';
+
 global $interface_output, $dblink_slave;
 if (!isset($interface_output)) {
     $interface_output = 'plain';
@@ -47,9 +49,9 @@ define('regex_first_name', '^[a-zA-Z][a-zA-Z0-9\.\- äüöÄÜÖ]{1,59}$');
 define('regex_statpic_text', '^[a-zA-Z0-9\.\-_ @äüöÄÜÖß=)(\/\\\&*\$+~#!§%;,-?:\[\]{}¹²³\'\"`\|µ°]{0,29}$');
 
 //load default webserver-settings and common includes
-require_once($opt['rootpath'] . 'lib/consts.inc.php');
-require_once($opt['rootpath'] . 'lib/settings.inc.php');
-require_once($opt['rootpath'] . 'lib2/errorhandler.inc.php');
+require_once $opt['rootpath'] . 'lib/consts.inc.php';
+require_once $opt['rootpath'] . 'lib/settings.inc.php';
+require_once $opt['rootpath'] . 'lib2/errorhandler.inc.php';
 
 // check for banned UAs
 $useragent = isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : "";
@@ -418,14 +420,14 @@ function sql_internal($_dblink, $sql, $bSlave)
     */
 
     if (isset($sql_debug) && ($sql_debug == true)) {
-        require_once($opt['rootpath'] . 'lib/sqldebugger.inc.php');
+        require_once $opt['rootpath'] . 'lib/sqldebugger.inc.php';
         $result = sqldbg_execute($filtered_sql, $bSlave);
         if ($result === false) {
             sql_error();
         }
     } else {
         // Zeitmessung für die Ausführung
-        require_once($opt['rootpath'] . 'lib/bench.inc.php');
+        require_once $opt['rootpath'] . 'lib/bench.inc.php';
         $cSqlExecution = new Cbench;
         $cSqlExecution->start();
 
@@ -498,8 +500,8 @@ function sql_error()
             // build the error template (e.g. because connection was lost, or an error mail
             // could not load translations from database)
 
-            $errtitle = "Datenbankfehler";
-            require("html/error.php");
+            $errtitle = 'Datenbankfehler';
+            require 'html/error.php';
         }
         exit;
     } elseif ($interface_output == 'plain') {

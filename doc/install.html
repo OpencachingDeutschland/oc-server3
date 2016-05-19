@@ -267,7 +267,7 @@ td
 			Das neue Template-System verwendet Verzeichnisse mit 2 am Ende.</p>
 		<p>
 			Derzeit werden alle Skripte aus dem alten Template-System für das neue System umgeschrieben.<br />
-			Skripts die bereits umgestellt wurden, können in den Quellcodes an require('./lib2/...');
+			Skripts die bereits umgestellt wurden, können in den Quellcodes an require 'lib2/...';
 			erkannt werden und im Browser an den Flaggen oben links.</p>
 		<h4>
 			Altes Templatesystem</h4>
@@ -688,7 +688,7 @@ td
 			&nbsp;***************************************************************************/
 			<br />
 			$opt['rootpath'] = './';<br />
-			require($opt['rootpath'] . '/lib2/web.inc.php');<br />
+			require($opt['rootpath'] . 'lib2/web.inc.php');<br />
 	$tpl->name = 'neuestemplate';<br />
 	$tpl->menuitem = MNU_NEU;<br />
 			...<br />

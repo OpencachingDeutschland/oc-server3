@@ -1,32 +1,22 @@
 <?php
-/***************************************************************************
- * ./editdesc.php
- * -------------------
- * begin                : July 7 2004
- *
- * For license information see doc/license.txt
- *****************************************************************************/
-
 /****************************************************************************
- *
- * Unicode Reminder メモ
+ *  For license information see doc/license.txt
  *
  * edit a cache listing
  *
  * used template(s): editcache
  *
- * GET/POST Parameter: cacheid, desclang
- ****************************************************************************/
+ *  Unicode Reminder メモ
+ *****************************************************************************/
 
-//prepare the templates and include all neccessary
-require_once('lib/consts.inc.php');
+require_once 'lib/consts.inc.php';
 $opt['gui'] = GUI_HTML;
-require_once('lib/common.inc.php');
-require_once('lib2/edithelper.inc.php');
+require_once 'lib/common.inc.php';
+require_once 'lib2/edithelper.inc.php';
 
-//Preprocessing
+// Preprocessing
 if ($error == false) {
-    require($stylepath . '/editdesc.inc.php');
+    require $stylepath . '/editdesc.inc.php';
 
     // check for old-style parameters
     if (isset($_REQUEST['cacheid']) && isset($_REQUEST['desclang']) && !isset($_REQUEST['descid']))  // Ocprop

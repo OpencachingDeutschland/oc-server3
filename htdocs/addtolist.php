@@ -5,8 +5,8 @@
  *  Unicode Reminder メモ
  ***************************************************************************/
 
-require('./lib2/web.inc.php');
-require_once('./lib2/logic/cachelist.class.php');
+require 'lib2/web.inc.php';
+
 $tpl->name = 'addtolist';
 $tpl->menuitem = MNU_CACHES_ADDTOLIST;
 

@@ -5,9 +5,10 @@
  *  Unicode Reminder メモ
  ***************************************************************************/
 
-$opt['rootpath'] = __DIR__ . '/../../htdocs/';
 header('Content-type: text/html; charset=utf-8');
-require(__DIR__ . '/../../htdocs/lib2/web.inc.php');
+
+$opt['rootpath'] = __DIR__ . '/../../htdocs/';
+require $opt['rootpath'] . 'lib2/web.inc.php';
 
 $rs = sql(
     'SELECT email FROM `user`

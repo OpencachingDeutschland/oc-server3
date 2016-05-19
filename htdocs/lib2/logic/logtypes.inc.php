@@ -10,7 +10,6 @@
  * This is included in both, lib1 and lib2 code!
  ****************************************************************************/
 
-
 // return associative array (id => translated name) of all log types
 
 function get_logtype_names()

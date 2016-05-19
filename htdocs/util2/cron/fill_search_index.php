@@ -14,8 +14,8 @@
 // needs absolute rootpath because called as cronjob
 $opt['rootpath'] = __DIR__ . '/../../';
 
-require(__DIR__ . '/../../lib2/cli.inc.php');
-require(__DIR__ . '/../../lib2/search/ftsearch.inc.php');
+require __DIR__ . '/../../lib2/cli.inc.php';
+require __DIR__ . '/../../lib2/search/ftsearch.inc.php';
 
 if (!cronjobs_enabled()) {
     exit;

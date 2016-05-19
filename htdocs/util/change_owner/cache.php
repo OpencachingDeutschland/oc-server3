@@ -1,13 +1,6 @@
 <?php
 /***************************************************************************
- * ./util/change_owner/cache.php
- * -------------------
- * begin                : September 8 2007
- *
  * For license information see doc/license.txt
- ****************************************************************************/
-
-/***************************************************************************
  *
  * Unicode Reminder メモ
  *
@@ -15,10 +8,11 @@
  * Schutz über htpasswd!
  ***************************************************************************/
 
-$rootpath = '../../';
 header('Content-type: text/html; charset=utf-8');
-require_once(__DIR__ . '/../../lib/common.inc.php');
-require_once(__DIR__ . '/../../lib/eventhandler.inc.php');
+
+$rootpath = __DIR__ . '/../../';
+require_once $rootpath . 'lib/common.inc.php';
+require_once $rootpath . 'lib/eventhandler.inc.php';
 
 $action = isset($_REQUEST['action']) ? $_REQUEST['action'] : '';
 

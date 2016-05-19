@@ -1,26 +1,18 @@
 <?php
 /***************************************************************************
- * ./newdesc.php
- * -------------------
- * begin                : July 7 2004
+ *  For license information see doc/license.txt
  *
- * For license information see doc/license.txt
- ****************************************************************************/
+ *  add a cache description to a cache
+ *
+ *  used template(s): newdesc
+ *
+ *  Unicode Reminder メモ
+ ***************************************************************************/
 
-/****************************************************************************
- *
- * Unicode Reminder メモ
- *
- * add a cache description to a cache
- *
- * used template(s): newdesc
- ****************************************************************************/
-
-//prepare the templates and include all neccessary
-require_once('lib/consts.inc.php');
+require_once 'lib/consts.inc.php';
 $opt['gui'] = GUI_HTML;
-require_once('lib/common.inc.php');
-require_once('lib2/edithelper.inc.php');
+require_once 'lib/common.inc.php';
+require_once 'lib2/edithelper.inc.php';
 
 //Preprocessing
 if ($error == false) {
@@ -48,7 +40,7 @@ if ($error == false) {
             if ($cache_record['user_id'] == $usr['userid']) {
                 $tplname = 'newdesc';
 
-                require($stylepath . '/newdesc.inc.php');
+                require $stylepath . '/newdesc.inc.php';
 
                 //get the posted data
                 $show_all_langs = isset($_POST['show_all_langs']) ? $_POST['show_all_langs'] : 0;

@@ -6,9 +6,10 @@
  ***************************************************************************/
 
 // list of new images
+// optional script to be released locally into htdocs/api/stat
 
-chdir('../..');
-require('lib2/web.inc.php');
+$opt['rootpath'] = __DIR__ . '/../../htdocs/';
+require $opt['rootpath'] . 'lib2/web.inc.php';
 
 if (!isset($_REQUEST['since'])) {
     exit;

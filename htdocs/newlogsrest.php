@@ -6,4 +6,4 @@
  ***************************************************************************/
 
 $newlogs_rest = true;
-require("newlogs.php");
+require 'newlogs.php';

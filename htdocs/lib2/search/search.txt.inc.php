@@ -1,5 +1,5 @@
 <?php
-/***************************************************************************
+/****************************************************************************
  * For license information see doc/license.txt
  *
  * Unicode Reminder メモ
@@ -7,7 +7,7 @@
  * Plaintext search output, one file per cache
  ****************************************************************************/
 
-require_once('lib2/translate.class.php');
+require_once 'lib2/translate.class.php';
 
 $search_output_file_download = true;
 $content_type_plain = 'text/plain';

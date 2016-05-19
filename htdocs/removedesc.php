@@ -1,21 +1,13 @@
 <?php
-/****************************************************************************
- * ./removedesc.php
- * -------------------
- * begin                : July 7 2004
+/***************************************************************************
+ *  For license information see doc/license.txt
  *
- * For license information see doc/license.txt
- ****************************************************************************/
+ *  remove a cache description
+ *
+ *  Unicode Reminder メモ
+ ***************************************************************************/
 
-/****************************************************************************
- *
- * Unicode Reminder メモ
- *
- * remove a cache description
- ****************************************************************************/
-
-//prepare the templates and include all neccessary
-require_once('./lib/common.inc.php');
+require_once 'lib/common.inc.php';
 
 //Preprocessing
 if ($error == false) {
@@ -64,7 +56,7 @@ if ($error == false) {
                 if (mysql_num_rows($desc_rs) == 1) {
                     $desc_record = sql_fetch_array($desc_rs);
                     mysql_free_result($desc_rs);
-                    require($stylepath . '/removedesc.inc.php');
+                    require $stylepath . '/removedesc.inc.php';
 
                     if ($desc_record['node'] != $oc_nodeid) {
                         tpl_errorMsg('removedesc', $error_wrong_node);

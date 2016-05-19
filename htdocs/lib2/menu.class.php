@@ -5,13 +5,12 @@
  *  Unicode Reminder メモ
  ***************************************************************************/
 
+require_once $opt['rootpath'] . 'lib2/translate.class.php';
+
 define('AUTH_LEVEL_ALL', 0);
 define('AUTH_LEVEL_ADMIN', '2');
-
 define('MNU_ROOT', 0);
 
-global $opt;
-require_once($opt['rootpath'] . 'lib2/translate.class.php');
 $menu = new Menu();
 
 class Menu
@@ -30,7 +29,7 @@ class Menu
         }
 
         // read static menu
-        require_once($this->sMenuFilename);
+        require_once $this->sMenuFilename;
 
         // add country-dependent town list for small map
         $country = $login->getUserCountry();

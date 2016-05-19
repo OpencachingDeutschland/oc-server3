@@ -1,30 +1,21 @@
 <?php
-/****************************************************************************
- * ./removelogs.php
- * -------------------
- * begin                : July 7 2004
+/***************************************************************************
+ *  For license information see doc/license.txt
  *
- * For license information see doc/license.txt
- ****************************************************************************/
+ *  remove a cache log
+ *
+ *  GET/POST-Parameter: logid
+ *
+ *  Unicode Reminder メモ
+ ***************************************************************************/
 
-/****************************************************************************
- *
- * Unicode Reminder メモ
- *
- * remove a cache log
- *
- * GET/POST-Parameter: logid
- ****************************************************************************/
-
-//prepare the templates and include all neccessary
-require_once('lib/consts.inc.php');
+require_once 'lib/consts.inc.php';
 $opt['gui'] = GUI_HTML;
-require_once('lib/common.inc.php');
-require_once($stylepath . '/lib/icons.inc.php');
-require_once('lib/recommendation.inc.php');
-require_once('lib/logic.inc.php');
-require_once('lib2/edithelper.inc.php');
-require_once('lib2/logic/cache.class.php');
+require_once 'lib/common.inc.php';
+require_once $stylepath . '/lib/icons.inc.php';
+require_once 'lib/recommendation.inc.php';
+require_once 'lib/logic.inc.php';
+require_once 'lib2/edithelper.inc.php';
 
 //Preprocessing
 if ($error == false) {
@@ -78,7 +69,7 @@ if ($error == false) {
             $log_record = sql_fetch_array($log_rs);
             mysql_free_result($log_rs);
 
-            include($stylepath . '/removelog.inc.php');
+            require $stylepath . '/removelog.inc.php';
 
             if ($log_record['node'] != $oc_nodeid) {
                 tpl_errorMsg('removelog', $error_wrong_node);
@@ -233,7 +224,7 @@ if ($error == false) {
                     db_slave_exclude();
 
                     //call eventhandler
-                    require_once($opt['rootpath'] . 'lib/eventhandler.inc.php');
+                    require_once $opt['rootpath'] . 'lib/eventhandler.inc.php';
                     event_remove_log($log_record['cache_id'], $log_record['log_user_id']);
 
                     //cache anzeigen

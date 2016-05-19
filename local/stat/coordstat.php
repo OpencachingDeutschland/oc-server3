@@ -6,9 +6,10 @@
  ***************************************************************************/
 
 // statistical data for cache and log activity map
+// optional script to be released locally into htdocs/api/stat
 
-chdir("../htdocs");
-require_once('lib2/web.inc.php');
+$opt['rootpath'] = __DIR__ . '/../../htdocs/';
+require $opt['rootpath'] . 'lib2/web.inc.php';
 
 error_reporting(error_reporting() & ~E_NOTICE);
 

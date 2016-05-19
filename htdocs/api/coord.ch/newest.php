@@ -5,9 +5,10 @@
  *  Unicode Reminder メモ
  ***************************************************************************/
 
-$opt['rootpath'] = '../../';
 header('Content-type: text/html; charset=utf-8');
-require(__DIR__ . '/../../lib2/web.inc.php');
+
+$opt['rootpath'] = __DIR__ . '/../../';
+require $opt['rootpath'] . 'lib2/web.inc.php';
 
 $bFirstRow = true;
 

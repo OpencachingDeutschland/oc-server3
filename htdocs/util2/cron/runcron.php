@@ -12,7 +12,7 @@
  ***************************************************************************/
 
 $opt['rootpath'] = __DIR__ . '/../../';
-require($opt['rootpath'] . 'lib2/cli.inc.php');
+require $opt['rootpath'] . 'lib2/cli.inc.php';
 
 // test for user who runs the cronjob
 $processUser = posix_getpwuid(posix_geteuid());
@@ -40,7 +40,7 @@ if ($process_sync->Enter()) {
     if ($param != '' && substr($param, 0, 1) != '-' && !strstr('/', $param)) {
         // run one job manually for debugging purpose
         $ignore_interval = true;
-        require($modules_dir . $argv[1] . '.class.php');
+        require $modules_dir . $argv[1] . '.class.php';
     } else {
         if (cronjobs_enabled()) {
             $ignore_interval = false;
@@ -50,7 +50,7 @@ if ($process_sync->Enter()) {
                     if ($param == '--show') {
                         echo 'running ' . $file . "\n";
                     }
-                    require($modules_dir . $file);
+                    require $modules_dir . $file;
                 }
             }
         }

@@ -23,7 +23,7 @@
 
     {if $datasqlfailed}
         <div class="errormsg">
-            {t}doc/sql/static-data/data.sql has been changed with last CVS checkout.<br />
+            {t}sql/static-data/data.sql has been changed with last CVS checkout.<br />
             Before you change translastions, update database with data.sql!<br />
             &nbsp;{/t}
         </div>

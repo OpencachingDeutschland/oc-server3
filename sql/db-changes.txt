@@ -2,7 +2,6 @@ Database changes since Version 3.0
 
 master branch
 
-
 date         commit ID   change
 ----         ---------   --------
 2012-08-06   1ba2be5     changed triggers sysTransBeforeInsert and sysTransTextBeforeInsert

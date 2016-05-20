@@ -2,7 +2,7 @@
 
 // Unicode Reminder メモ
 
-$opt['rootpath'] = __DIR__ . '/../../../';
+$opt['rootpath'] = __DIR__ . '/../';
 require $opt['rootpath'] . 'lib2/web.inc.php';
 
 sql_enable_debugger();
@@ -25,9 +25,8 @@ sql('ALTER TABLE result_caches ADD PRIMARY KEY (cache_id)');
  * User: Team A
  */
 sql(
-    'CREATE TEMPORARY TABLE remove_caches ENGINE=MEMORY SELECT DISTINCT result_caches.cache_id cache_id FROM result_caches, cache_logs WHERE result_caches.cache_id=cache_logs.cache_id AND cache_logs.user_id IN (101254, 101301)'
+    'CREATE TEMPORARY TABLE remove_caches (`cache_id` INT(11) NOT NULL, PRIMARY KEY (cache_id)) ENGINE=MEMORY SELECT DISTINCT result_caches.cache_id cache_id FROM result_caches, cache_logs WHERE result_caches.cache_id=cache_logs.cache_id AND cache_logs.user_id IN (101254, 101301)'
 );
-sql('ALTER TABLE remove_caches ADD PRIMARY KEY (cache_id)');
 sql('DELETE FROM result_caches WHERE cache_id IN (SELECT cache_id FROM remove_caches)');
 sql('DROP TABLE remove_caches');
 

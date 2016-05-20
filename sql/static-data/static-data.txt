@@ -74,14 +74,14 @@ Tabels:  pw_dict
 Content: list of common passwords
 Purpose: password security tests
 Used by: lib2/logic/cracklib.inc.php
-Source:  http://pecl.php.net/package/crack -> doc/sql/static-data/pw_dict.bz2
-Import:  doc/sql/static-data/pwlist.php
+Source:  http://pecl.php.net/package/crack -> /sql/static-data/pw_dict.bz2
+Import:  /sql/static-data/pwlist.php
 License: PHP License
 
 
 Tables:  miscellaneous, see header of data.sql
 Content: all other static data
 Purpose: misc
-Source:  doc/sql/static-data/data.sql
+Source:  /sql/static-data/data.sql
 Import:  SQL import, or bin/dbupdate.php
 License: see doc/license.txt

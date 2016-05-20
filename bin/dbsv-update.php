@@ -27,7 +27,7 @@ if (!sql_field_exists('cache_attrib', 'gc_id')) {
     die(
         "  ERROR: Database structure too old. You must first do a manual update\n" .
         "  up to commit 467aae4 (March 27, 2013) to enable automatic updates.\n" .
-        "  See htdocs/doc/sql/db-changes.txt.\n");
+        "  See /sql/db-changes.txt.\n");
     // Do not continue with dbupdate.php, because the current data.sql and
     // maintain.php will not fit either.
 }

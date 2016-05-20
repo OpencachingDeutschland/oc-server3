@@ -1223,7 +1223,10 @@ sql(
      FOR EACH ROW BEGIN
         SET @dont_update_listingdate=1;
 
-        IF NEW.`longitude` != OLD.`longitude` OR NEW.`latitude` != OLD.`latitude` THEN
+        IF
+            ROUND(NEW.`longitude`,6) != ROUND(OLD.`longitude`,6)
+            OR ROUND(NEW.`latitude`,6) != ROUND(OLD.`latitude`,6)
+        THEN
             INSERT IGNORE INTO `cache_coordinates`
                 (`cache_id`, `date_created`, `longitude`, `latitude`, `restored_by`)
             VALUES (NEW.`cache_id`, NOW(), NEW.`longitude`, NEW.`latitude`, IFNULL(@restoredby,0));

@@ -1,0 +1,11 @@
+#!/usr/bin/env php
+<?php
+
+require __DIR__.'/../htdocs/vendor/autoload.php';
+
+use Oc\Console\Command\CodeSnifferCommand;
+use Symfony\Component\Console\Application;
+
+$application = new Application();
+$application->add(new CodeSnifferCommand());
+$application->run();

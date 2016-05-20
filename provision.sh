@@ -29,7 +29,7 @@ firewall-cmd --reload
 yum -y install php epel-release php-devel ImageMagick-devel ImageMagick gcc
 yum -y install php-gd php-odbc php-pear php-xml php-xmlrpc php-mbstring
 yum -y install php-snmp php-soap curl curl-devel php-mysql php-pdo php-pecl-zip
-yum -y install vim vim-common mutt mlocate man-pages zip mod_ssl
+yum -y install vim vim-common mutt mlocate man-pages zip mod_ssl patch
 
 
 label "Adjust Apache and MariaDB configuration"

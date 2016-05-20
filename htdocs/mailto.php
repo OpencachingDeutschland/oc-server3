@@ -55,8 +55,7 @@ if (isset($_REQUEST['subject'])) {
 $text = isset($_REQUEST['text']) ? $_REQUEST['text'] : '';
 if (isset($_REQUEST['emailaddress'])) {
     $bEmailaddress = ($_REQUEST['emailaddress'] == 1);
-}
-else {
+} else {
     $own_user = new user($login->userid);
     $bEmailaddress = $own_user->getUsermailSendAddress();
 }

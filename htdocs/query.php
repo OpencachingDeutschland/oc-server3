@@ -94,28 +94,56 @@ function savequery($queryid, $queryname, $saveas, $submit, $saveas_queryid, $sor
                 $bError = true;
             }
 
-            if (sql_value("SELECT COUNT(*) FROM `queries` WHERE `name`='&1' AND `user_id`='&2'", 0, $queryname, $login->userid) > 0) {
+            if (sql_value(
+                "SELECT COUNT(*)
+                 FROM `queries`
+                 WHERE `name`='&1' AND `user_id`='&2'",
+                0,
+                $queryname,
+                $login->userid
+            ) > 0) {
                 $tpl->assign('errorNameExists', true);
                 $bError = true;
             }
 
             if ($bError == false) {
                 // save
-                sql("UPDATE `queries` SET `user_id`='&1', `name`='&2', `options`='&4' WHERE `id`='&3'", $login->userid, $queryname, $queryid, $options);
+                sql(
+                    "UPDATE `queries`
+                     SET `user_id`='&1', `name`='&2', `options`='&4'
+                     WHERE `id`='&3'",
+                    $login->userid,
+                    $queryname,
+                    $queryid,
+                    $options
+                );
                 $tpl->redirect('query.php?action=view');
             }
         } else {
             // save as
-            if (sql_value("SELECT COUNT(*) FROM `queries` WHERE `id`='&1' AND `user_id`='&2'", 0, $saveas_queryid, $login->userid) == 0)
+            if (sql_value(
+                "SELECT COUNT(*)
+                 FROM `queries`
+                 WHERE `id`='&1' AND `user_id`='&2'",
+                0,
+                $saveas_queryid,
+                $login->userid
+            ) == 0) {
                 $tpl->assign('errorMustSelectQuery', true);
-            else {
+            } else {
                 sql("UPDATE `queries` SET `options`='&1' WHERE `id`='&2'", $options, $saveas_queryid);
                 $tpl->redirect('query.php?action=view');
             }
         }
     }
 
-    $rs = sql("SELECT `id`, `name` FROM `queries` WHERE `user_id`='&1' ORDER BY `name` ASC", $login->userid);
+    $rs = sql(
+        "SELECT `id`, `name`
+         FROM `queries`
+         WHERE `user_id`='&1'
+         ORDER BY `name` ASC",
+        $login->userid
+    );
     $tpl->assign_rs('queries', $rs);
     sql_free_result($rs);
 

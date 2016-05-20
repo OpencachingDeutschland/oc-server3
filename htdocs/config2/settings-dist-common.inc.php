@@ -88,6 +88,10 @@ $opt['logic']['waypoint_pool']['valid_chars'] = '0123456789ABCDEF';
 // fill_gaps = false: continue with the last waypoint
 $opt['logic']['waypoint_pool']['fill_gaps'] = false;
 
+/* geocache recommendation settings
+ */
+$opt['logic']['rating']['percentageOfFounds'] = 10;
+
 /* admin functions
  */
 // admin may use OC-team-comment log flag only when processing a cache report
@@ -242,10 +246,8 @@ function set_absolute_urls(&$opt, $primary_site_url, $primary_shortlink_domain, 
         } else {
             if ($current_domain == $primary_domain) {
                 $opt['page']['default_shortlink_url'] = $opt['page']['default_primary_shortlink_url'];
-                $opt['page']['shortlink_url'] = $opt['page']['protocol'] . strstr(
-                        $opt['page']['default_shortlink_url'],
-                        '://'
-                    );
+                $opt['page']['shortlink_url'] =
+                    $opt['page']['protocol'] . strstr($opt['page']['default_shortlink_url'], '://');
             } else {
                 $opt['page']['shortlink_url'] = false;
                 $opt['page']['default_shortlink_url'] = false;

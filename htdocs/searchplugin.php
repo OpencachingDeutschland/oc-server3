@@ -84,7 +84,8 @@ if (($sourceid == 'mozilla-search') && ($userinput != '')) {
                     $target = 'oc';
                 }
 
-                if ((($target == 'oc') || ($target == 'gc')) && mb_ereg_match(
+                if ((($target == 'oc') || ($target == 'gc'))
+                    && mb_ereg_match(
                         '((' . $opt['logic']['ocprefixes'] . '|gc)([a-z0-9]){4,5}|n([a-f0-9]){5,5})$',
                         mb_strtolower($searchfor)
                     )

@@ -112,7 +112,7 @@ while ($r = sql_fetch_assoc($rs)) {
 echo "\n";
 mysql_free_result($rs);
 
-echo "clearing OKAPI data\n";;
+echo "clearing OKAPI data\n";
 if (sql_table_exists('okapi_vars')) {
     echo "clearing OKAPI data\n";
     sql('TRUNCATE `okapi_authorizations`');

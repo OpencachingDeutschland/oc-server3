@@ -76,8 +76,7 @@ function getWaypoints($cacheid)
 if ($error == false) {
     //cacheid
     $cache_id = 0;
-    if (isset($_REQUEST['cacheid']))  // Ocprop
-    {
+    if (isset($_REQUEST['cacheid'])) {  // Ocprop
         $cache_id = $_REQUEST['cacheid'];
     }
 
@@ -197,8 +196,7 @@ if ($error == false) {
                 $way_length = isset($_POST['way_length']) ? $_POST['way_length'] : $cache_record['way_length'];
 
                 if ($status_old == 5 && $status == 5) {
-                    if (isset($_POST['publish']))  // Ocprop
-                    {
+                    if (isset($_POST['publish'])) {  // Ocprop
                         $publish = $_POST['publish'];
                         if (!($publish == 'now' || $publish == 'later' || $publish == 'notnow')) {
                             // somebody messed up the POST-data, so we do not publish the cache, since he isn't published right now (status=5)
@@ -228,8 +226,7 @@ if ($error == false) {
                     $status = $status_old;
                 }
 
-                if ($status_old == 7) // cache is locked
-                {
+                if ($status_old == 7) {  // cache is locked
                     // only admins can change status of locked caches
                     if (($bAdmin & ADMIN_USER) != ADMIN_USER) {
                         // no status change allowed for normal user
@@ -358,29 +355,27 @@ if ($error == false) {
 
                 //check hidden_since
                 $hidden_date_not_ok = true;
-                if (is_numeric($cache_hidden_day) && is_numeric($cache_hidden_month) && is_numeric(
-                        $cache_hidden_year
-                    )
+                if (is_numeric($cache_hidden_day) && is_numeric($cache_hidden_month) &&
+                    is_numeric($cache_hidden_year)
                 ) {
-                    $hidden_date_not_ok = (checkdate(
-                            $cache_hidden_month,
-                            $cache_hidden_day,
-                            $cache_hidden_year
-                        ) == false);
+                    $hidden_date_not_ok =
+                        (checkdate($cache_hidden_month, $cache_hidden_day, $cache_hidden_year) == false);
                 }
 
                 //check date_activate
                 if ($status == 5) {
                     $activate_date_not_ok = true;
-                    if (is_numeric($cache_activate_day) && is_numeric($cache_activate_month) && is_numeric(
-                            $cache_activate_year
-                        ) && is_numeric($cache_activate_hour)
+                    if (is_numeric($cache_activate_day) && is_numeric($cache_activate_month) &&
+                        is_numeric($cache_activate_year) && is_numeric($cache_activate_hour)
                     ) {
-                        $activate_date_not_ok = ((checkdate(
-                                    $cache_activate_month,
-                                    $cache_activate_day,
-                                    $cache_activate_year
-                                ) == false) || $cache_activate_hour < 0 || $cache_activate_hour > 23);
+                        $activate_date_not_ok =
+                            checkdate(
+                                $cache_activate_month,
+                                $cache_activate_day,
+                                $cache_activate_year
+                            ) == false
+                            || $cache_activate_hour < 0
+                            || $cache_activate_hour > 23;
                     }
                 } else {
                     $activate_date_not_ok = false;
@@ -439,10 +434,14 @@ if ($error == false) {
                 }
 
                 //try to save to DB?
-                if (isset($_POST['submit']))  // Ocprop
-                {
-                    //all validations ok?
-                    if (!($hidden_date_not_ok || $lat_not_ok || $lon_not_ok || $name_not_ok || $time_not_ok || $way_length_not_ok || $size_not_ok || $activate_date_not_ok || $status_not_ok || $diff_not_ok || $attribs_not_ok || $wpgc_not_ok)) {
+                if (isset($_POST['submit'])) {  // Ocprop
+                    // all validations ok?
+                    if (!(
+                        $hidden_date_not_ok || $lat_not_ok || $lon_not_ok || $name_not_ok ||
+                        $time_not_ok || $way_length_not_ok || $size_not_ok ||
+                        $activate_date_not_ok || $status_not_ok || $diff_not_ok ||
+                        $attribs_not_ok || $wpgc_not_ok
+                    )) {
                         $cache_lat = $coords_lat_h + $coords_lat_min / 60;
                         if ($coords_latNS == 'S') {
                             $cache_lat = - $cache_lat;
@@ -457,7 +456,8 @@ if ($error == false) {
                             $activation_date = 'NULL';
                         } elseif ($publish == 'later') {
                             $status = 5;
-                            $activation_date = "'" . sql_escape(
+                            $activation_date =
+                                "'" . sql_escape(
                                     date(
                                         'Y-m-d H:i:s',
                                         mktime(
@@ -654,15 +654,12 @@ if ($error == false) {
 
                 while ($record = sql_fetch_assoc($rs)) {
                     $sSelected = ($record['short'] == $cache_country) ? ' selected="selected"' : '';
-                    $countriesoptions .= '<option value="' . htmlspecialchars(
-                            $record['short'],
-                            ENT_COMPAT,
-                            'UTF-8'
-                        ) . '"' . $sSelected . '>' . htmlspecialchars(
-                            $record['name'],
-                            ENT_COMPAT,
-                            'UTF-8'
-                        ) . '</option>' . "\n";
+                    $countriesoptions .=
+                        '<option value="'
+                        . htmlspecialchars($record['short'], ENT_COMPAT, 'UTF-8')
+                        . '"' . $sSelected . '>'
+                        . htmlspecialchars($record['name'], ENT_COMPAT, 'UTF-8')
+                        . '</option>' . "\n";
                 }
                 tpl_set_var('countryoptions', $countriesoptions);
                 sql_free_result($rs);
@@ -810,11 +807,10 @@ if ($error == false) {
                 );
                 while ($rType = sql_fetch_assoc($rsTypes)) {
                     $sSelected = ($rType['id'] == $cache_type) ? ' selected="selected"' : '';
-                    $types .= '<option value="' . $rType['id'] . '"' . $sSelected . '>' . htmlspecialchars(
-                            $rType['name'],
-                            ENT_COMPAT,
-                            'UTF-8'
-                        ) . '</option>';
+                    $types .=
+                        '<option value="' . $rType['id'] . '"' . $sSelected . '>'
+                        . htmlspecialchars($rType['name'], ENT_COMPAT, 'UTF-8')
+                        . '</option>';
                 }
                 sql_free_result($rsTypes);
                 tpl_set_var('typeoptions', $types);
@@ -831,11 +827,10 @@ if ($error == false) {
                 );
                 while ($rSize = sql_fetch_assoc($rsSizes)) {
                     $sSelected = ($rSize['id'] == $sel_size) ? ' selected="selected"' : '';
-                    $sizes .= '<option value="' . $rSize['id'] . '"' . $sSelected . '>' . htmlspecialchars(
-                            $rSize['name'],
-                            ENT_COMPAT,
-                            'UTF-8'
-                        ) . '</option>';
+                    $sizes .=
+                        '<option value="' . $rSize['id'] . '"' . $sSelected . '>'
+                        . htmlspecialchars($rSize['name'], ENT_COMPAT, 'UTF-8')
+                        . '</option>';
                 }
                 sql_free_result($rsSizes);
                 tpl_set_var('sizeoptions', $sizes);
@@ -844,16 +839,15 @@ if ($error == false) {
                 $desclangs = mb_split(',', $cache_record['desc_languages']);
                 $cache_descs = '';
                 $gc_com_refs = false;
-                foreach ($desclangs AS $desclang) {
+                foreach ($desclangs as $desclang) {
                     if (count($desclangs) > 1) {
-                        $remove_url = 'removedesc.php?cacheid=' . urlencode($cache_id) . '&desclang=' . urlencode(
-                                $desclang
-                            );
-                        $removedesc = '&nbsp;[<a href="' . htmlspecialchars(
-                                $remove_url,
-                                ENT_COMPAT,
-                                'UTF-8'
-                            ) . '">' . $remove . '</a>]';
+                        $remove_url =
+                            'removedesc.php?cacheid=' . urlencode($cache_id)
+                            . '&desclang=' . urlencode($desclang);
+                        $removedesc =
+                            '&nbsp;[<a href="'
+                            . htmlspecialchars($remove_url, ENT_COMPAT, 'UTF-8')
+                            . '">' . $remove . '</a>]';
                     } else {
                         $removedesc = '';
                     }
@@ -871,15 +865,11 @@ if ($error == false) {
 
                     $edit_url = 'editdesc.php?cacheid=' . urlencode($cache_id) . '&desclang=' . urlencode($desclang);
 
-                    $cache_descs .= '<tr><td colspan="2">' . htmlspecialchars(
-                            db_LanguageFromShort($desclang),
-                            ENT_COMPAT,
-                            'UTF-8'
-                        ) . ' [<a href="' . htmlspecialchars(
-                            $edit_url,
-                            ENT_COMPAT,
-                            'UTF-8'
-                        ) . '">' . $edit . '</a>]' . $removedesc . '</td></tr>';
+                    $cache_descs .=
+                        '<tr><td colspan="2">'
+                        . htmlspecialchars(db_LanguageFromShort($desclang), ENT_COMPAT, 'UTF-8')
+                        . ' [<a href="' . htmlspecialchars($edit_url, ENT_COMPAT, 'UTF-8')
+                        . '">' . $edit . '</a>]' . $removedesc . '</td></tr>';
                 }
                 tpl_set_var('cache_descs', $cache_descs);
 
@@ -908,31 +898,26 @@ if ($error == false) {
                     while ($rStatus = sql_fetch_assoc($rsStatus)) {
                         $sSelected = ($rStatus['id'] == $status) ? ' selected="selected"' : '';
                         if ($sSelected != '' || $status_old == 5) {
-                            $statusoptions .= '<option value="' . htmlspecialchars(
-                                    $rStatus['id'],
-                                    ENT_COMPAT,
-                                    'UTF-8'
-                                ) . '"' . $sSelected . '>' . htmlspecialchars(
-                                    $rStatus['name'],
-                                    ENT_COMPAT,
-                                    'UTF-8'
-                                ) . '</option>';
+                            $statusoptions .=
+                                '<option value="'
+                                . htmlspecialchars($rStatus['id'], ENT_COMPAT, 'UTF-8')
+                                . '"' . $sSelected . '>'
+                                . htmlspecialchars($rStatus['name'], ENT_COMPAT, 'UTF-8')
+                                . '</option>';
                         }
                     }
                     sql_free_result($rsStatus);
                 } else {
-                    $statusoptions .= '<option value="7" selected="selected">' . htmlspecialchars(
-                            t("Locked, invisible"),
-                            ENT_COMPAT,
-                            'UTF-8'
-                        ) . '</option>';
+                    $statusoptions .=
+                        '<option value="7" selected="selected">'
+                        . htmlspecialchars(t("Locked, invisible"), ENT_COMPAT, 'UTF-8')
+                        . '</option>';
                 }
                 tpl_set_var('statusoptions', $statusoptions);
                 tpl_set_var('statuschange', $status_old == 5 ? '' : mb_ereg_replace('%1', $cache_id, $status_change));
 
                 // show activation form?
-                if ($status_old == 5) // status = not yet published
-                {
+                if ($status_old == 5) {  // status = not yet published
                     $tmp = $activation_form;
 
                     $tmp = mb_ereg_replace(

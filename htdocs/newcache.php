@@ -569,11 +569,10 @@ if ($error == false) {
 
         tpl_set_var('firstcache_note', mb_ereg_replace('%1', $opt['page']['sitename'], $firstcache_note));
 
-        if (isset($_POST['submitform']))  // Ocprop
-        {
-            //check the entered data
+        if (isset($_POST['submitform'])) {  // Ocprop
+            // check the entered data
 
-            //check coordinates
+            // check coordinates
             if ($lat_h != '' || $lat_min != '') {
                 if (!mb_ereg_match('^[0-9]{1,2}$', $lat_h)) {
                     tpl_set_var('lat_message', $error_lat_not_ok);
@@ -813,7 +812,8 @@ if ($error == false) {
                     $activation_column = ' ';
                 } elseif ($publish == 'later') {
                     $sel_status = 5;
-                    $activation_date = "'" . date(
+                    $activation_date =
+                        "'" . date(
                             'Y-m-d H:i:s',
                             mktime(
                                 $activate_hour,
@@ -822,7 +822,8 @@ if ($error == false) {
                                 $activate_month,
                                 $activate_day,
                                 $activate_year
-                            )). "'";
+                            )
+                        ) . "'";
                 } elseif ($publish == 'notnow') {
                     $sel_status = 5;
                     $activation_date = 'NULL';

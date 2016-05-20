@@ -88,8 +88,9 @@ if (isset($w3w_langs[1])) {
     $tpl->assign('coordW3W2', $coord->getW3W($w3w_langs[1]));
     $lang2_name = sql_value("SELECT `name` FROM `languages` WHERE `short`='&1'", '', $w3w_langs[1]);
     $tpl->assign('W3Wlang2', $translate->t($lang2_name, '', '', 0));
-} else
+} else {
     $tpl->assign('coordW3W2', false);
+}
 
 // wp gesetzt?
 $wp = isset($_REQUEST['wp']) ? $_REQUEST['wp'] : '';

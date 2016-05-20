@@ -22,24 +22,25 @@ while ($rLocations = sql_fetch_array($rsLocations)) {
     $maxlon = geomath::getMaxLon($rLocations['lon'], $rLocations['lat'], 10, 1);
 
     // den nächsgelegenen Ort in den geodb ermitteln
-    $sql = 'SELECT ' . geomath::getSqlDistanceFormula(
-            $rLocations['lon'],
-            $rLocations['lat'],
-            10,
-            1,
-            'lon',
-            'lat',
-            'geodb_coordinates'
-        ) . ' `distance`,
-                            `geodb_coordinates`.`loc_id` `loc_id`
-                      FROM `geodb_coordinates`
-                      WHERE `lon` > ' . $minlon . ' AND
-                            `lon` < ' . $maxlon . ' AND
-                            `lat` > ' . $minlat . ' AND
-                            `lat` < ' . $maxlat . '
-                      HAVING `distance` < 10
-                      ORDER BY `distance` ASC
-                      LIMIT 1';
+    $sql =
+        "SELECT " .
+            geomath::getSqlDistanceFormula(
+                $rLocations['lon'],
+                $rLocations['lat'],
+                10,
+                1,
+                'lon',
+                'lat',
+                'geodb_coordinates'
+            ) . " `distance`,
+            `geodb_coordinates`.`loc_id` `loc_id`
+         FROM `geodb_coordinates`
+         WHERE
+            `lon` > '" . sql_escape($minlon) . "' AND `lon` < '" . sql_escape($maxlon) . "' AND
+            `lat` > '" . sql_escape($minlat) . "' AND `lat` < '" . sql_escape($maxlat) . "'
+         HAVING `distance` < 10
+         ORDER BY `distance` ASC
+         LIMIT 1";
     $rs = sql($sql);
 
     if (mysql_num_rows($rs) == 1) {
@@ -100,6 +101,6 @@ while ($rLocations = sql_fetch_array($rsLocations)) {
     } else {
         // was tun?
     }
-
 }
+
 mysql_free_result($rsLocations);

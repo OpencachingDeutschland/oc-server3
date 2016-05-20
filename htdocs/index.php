@@ -21,7 +21,7 @@ $tpl->cache_id = $sUserCountry . '|' . $opt['page']['protocol'];
 
 if (!$tpl->is_cached()) {
     // welcome message
-    if (isset ($opt['page']['message'])) {
+    if (isset($opt['page']['message'])) {
         $tpl->assign('message', $opt['page']['message']);
     } else {
         $tpl->assign('message', $translate->t('You can find everything you need to go Geocaching ...', '', '', 0));

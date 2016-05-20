@@ -245,7 +245,6 @@ $opt['logic']['node']['id'] = 0;
 /* settings for business layer
  *
  */
-$opt['logic']['rating']['percentageOfFounds'] = 10;
 $opt['logic']['rating']['topdays_mainCountry'] = 30;
 $opt['logic']['rating']['topdays_otherCountry'] = 180;
 

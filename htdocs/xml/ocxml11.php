@@ -157,9 +157,8 @@ if (isset($_REQUEST['sessionid'])) {
     $nMinute = mb_substr($dModifiedsince, 10, 2);
     $nSecond = mb_substr($dModifiedsince, 12, 2);
 
-    if ((!is_numeric($nYear)) && (!is_numeric($nMonth)) && (!is_numeric($nDay)) && (!is_numeric(
-            $nHour
-        )) && (!is_numeric($nMinute)) && (!is_numeric($nSecond))
+    if ((!is_numeric($nYear)) && (!is_numeric($nMonth)) && (!is_numeric($nDay)) &&
+        (!is_numeric($nHour)) && (!is_numeric($nMinute)) && (!is_numeric($nSecond))
     ) {
         echo 'Invalid modifiedsince value (non-numeric content)';
         exit;
@@ -986,9 +985,11 @@ function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $z
         }
     }
 
-    $call = $safemode_zip . ' --type=' . escapeshellcmd($ziptype) . ' --src=' . escapeshellcmd(
-            $rel_xmlfile
-        ) . ' --dst=' . escapeshellcmd($rel_zipfile);
+    $call =
+        $safemode_zip
+        . ' --type=' . escapeshellcmd($ziptype)
+        . ' --src=' . escapeshellcmd($rel_xmlfile)
+        . ' --dst=' . escapeshellcmd($rel_zipfile);
     system($call);
 
     // datei vorhanden?
@@ -1129,7 +1130,8 @@ function startXmlSession(
             if ($selection['type'] == 2) {
                 $sql = 'CREATE TEMPORARY TABLE `tmpxmlSesssionCaches` (`cache_id` INT(11), `distance` DOUBLE, KEY (`cache_id`)) ENGINE=MEMORY ';
                 $sql .= 'SELECT `cache_coordinates`.`cache_id`, ';
-                $sql .= geomath::getSqlDistanceFormula(
+                $sql .=
+                    geomath::getSqlDistanceFormula(
                         $selection['lon'],
                         $selection['lat'],
                         $selection['distance'],
@@ -1141,22 +1143,26 @@ function startXmlSession(
                 $sql .= 'FROM `caches`, `cache_coordinates` WHERE ';
                 $sql .= '`cache_coordinates`.`cache_id`=`caches`.`cache_id`';
                 $sql .= ' AND `caches`.`status`!=5';
-                $sql .= ' AND `cache_coordinates`.`latitude` > ' . geomath::getMinLat(
+                $sql .= ' AND `cache_coordinates`.`latitude` > ' .
+                    geomath::getMinLat(
                         $selection['lon'],
                         $selection['lat'],
                         $selection['distance']
                     );
-                $sql .= ' AND `cache_coordinates`.`latitude` < ' . geomath::getMaxLat(
+                $sql .= ' AND `cache_coordinates`.`latitude` < ' .
+                    geomath::getMaxLat(
                         $selection['lon'],
                         $selection['lat'],
                         $selection['distance']
                     );
-                $sql .= ' AND `cache_coordinates`.`longitude` >' . geomath::getMinLon(
+                $sql .= ' AND `cache_coordinates`.`longitude` >' .
+                    geomath::getMinLon(
                         $selection['lon'],
                         $selection['lat'],
                         $selection['distance']
                     );
-                $sql .= ' AND `cache_coordinates`.`longitude` < ' . geomath::getMaxLon(
+                $sql .= ' AND `cache_coordinates`.`longitude` < ' .
+                    geomath::getMaxLon(
                         $selection['lon'],
                         $selection['lat'],
                         $selection['distance']
@@ -1167,8 +1173,11 @@ function startXmlSession(
             } else {
                 if ($selection['type'] == 3) {
                     sql(
-                        "CREATE TEMPORARY TABLE `tmpxmlSesssionCaches` (`cache_id` INT(11), PRIMARY KEY (`cache_id`)) ENGINE=MEMORY
-                 SELECT `cache_id` FROM `caches` WHERE `cache_id`='&1' AND `status`!=5",
+                        "CREATE TEMPORARY TABLE `tmpxmlSesssionCaches` (
+                            `cache_id` INT(11),
+                            PRIMARY KEY (`cache_id`)
+                         ) ENGINE=MEMORY
+                            SELECT `cache_id` FROM `caches` WHERE `cache_id`='&1' AND `status`!=5",
                         $selection['cacheid'] + 0
                     );
                 }

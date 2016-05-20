@@ -894,8 +894,9 @@ function sql_connect_slave($id)
     }
 
     if ($db['dblink_slave'] !== false) {
-        if (mysql_select_db($opt['db']['placeholder']['db'], $db['dblink_slave']) == false)
+        if (mysql_select_db($opt['db']['placeholder']['db'], $db['dblink_slave']) == false) {
             sql_error();
+        }
 
         mysql_query("SET NAMES '" . mysql_real_escape_string($opt['charset']['mysql'], $db['dblink_slave']) . "'", $db['dblink_slave']);
 
@@ -1037,9 +1038,10 @@ function sql_error($sqlstatement = "")
         if (admin_errormail($opt['db']['error']['mail'],
             $subject,
             str_replace("\n", "\r\n", $error) . "\n" . print_r(debug_backtrace(), true),
-            "From: " . $opt['mail']['from'])) {
-        #
+            "From: " . $opt['mail']['from']
+        )) {
             require_once $opt['rootpath'] . 'lib2/mail.class.php';
+
             $mail = new mail();
             $mail->subject = $subject;
             $mail->to = $opt['db']['error']['mail'];
@@ -1088,8 +1090,8 @@ function sql_warn($warnmessage)
         if (admin_errormail($opt['db']['error']['mail'],
             $subject,
             $warnmessage . "\n" . print_r(debug_backtrace(), true),
-            "From: " . $opt['mail']['from'])) {
-        #
+            "From: " . $opt['mail']['from']
+        )) {
             require_once $opt['rootpath'] . 'lib2/mail.class.php';
             $mail = new mail();
             $mail->name = 'sql_warn';

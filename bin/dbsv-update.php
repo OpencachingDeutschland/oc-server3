@@ -27,7 +27,8 @@ if (!sql_field_exists('cache_attrib', 'gc_id')) {
     die(
         "  ERROR: Database structure too old. You must first do a manual update\n" .
         "  up to commit 467aae4 (March 27, 2013) to enable automatic updates.\n" .
-        "  See /sql/db-changes.txt.\n");
+        "  See /sql/db-changes.txt.\n"
+    );
     // Do not continue with dbupdate.php, because the current data.sql and
     // maintain.php will not fit either.
 }
@@ -583,8 +584,7 @@ function dbv_123()  // add tables, fields and procs for cache lists and list wat
     if (!sql_field_exists('caches', 'show_cachelists')) {
         sql("ALTER TABLE `caches` ADD COLUMN `show_cachelists` TINYINT(1) NOT NULL DEFAULT '1'");
     }
-    if (sql_field_exists('cache_watches', 'last_executed'))  // obsolete pre-OC3 field
-    {
+    if (sql_field_exists('cache_watches', 'last_executed')) {  // obsolete pre-OC3 field
         sql("ALTER TABLE `cache_watches` DROP COLUMN `last_executed`");
     }
 }

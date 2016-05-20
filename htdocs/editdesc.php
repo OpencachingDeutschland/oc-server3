@@ -19,8 +19,10 @@ if ($error == false) {
     require $stylepath . '/editdesc.inc.php';
 
     // check for old-style parameters
-    if (isset($_REQUEST['cacheid']) && isset($_REQUEST['desclang']) && !isset($_REQUEST['descid']))  // Ocprop
-    {
+    if (isset($_REQUEST['cacheid']) &&
+        isset($_REQUEST['desclang']) &&
+        !isset($_REQUEST['descid'])) {  // Ocprop
+
         $cache_id = $_REQUEST['cacheid'];  // Ocprop
         $desc_lang = $_REQUEST['desclang'];  // Ocprop
 
@@ -49,7 +51,6 @@ if ($error == false) {
         tpl_set_var('message', $login_required);
         tpl_set_var('helplink', helppagelink('login'));
     } else {
-
         $desc_rs = sql(
             "SELECT
                  `cache_desc`.`cache_id`,
@@ -87,8 +88,7 @@ if ($error == false) {
                 $show_all_langs = false;
 
                 //save to DB?
-                if (isset($_POST['post']))  // Ocprop
-                {
+                if (isset($_POST['post'])) {  // Ocprop
                     //here we read all used information from the form if submitted
                     $descMode = isset($_POST['descMode']) ? $_POST['descMode'] + 0 : 1;  // Ocprop
 
@@ -147,8 +147,7 @@ if ($error == false) {
 
                     $desc = processEditorInput($oldDescMode, $descMode, $desc);
 
-                    if (isset($_POST['submitform']))  // Ocprop
-                    {
+                    if (isset($_POST['submitform'])) {  // Ocprop
                         // prüfen, ob sprache nicht schon vorhanden
                         $rs = sql(
                             "SELECT COUNT(*) `count`
@@ -224,8 +223,7 @@ if ($error == false) {
 
                     if ($oldDescMode == 0) {
                         $desc = processEditorInput($oldDescMode, $descMode, $desc_record['desc']);
-                    }
-                    else {
+                    } else {
                         $desc = $desc_record['desc'];
                     }
                 }
@@ -274,7 +272,8 @@ if ($error == false) {
                     $desc_record['cache_id'],
                     $desc_lang,
                     $locale,
-                    ($show_all_langs == true) ? 1 : 0);
+                    ($show_all_langs == true) ? 1 : 0
+                );
                 while ($rLanguage = sql_fetch_assoc($rsLanguages)) {
                     $sSelected = ($rLanguage['short'] == $desc_lang) ? ' selected="selected"' : '';
                     $languages .= '<option value="' . $rLanguage['short'] . '"' . $sSelected . '>' . htmlspecialchars($rLanguage['name'], ENT_COMPAT, 'UTF-8') . '</option>' . "\n";

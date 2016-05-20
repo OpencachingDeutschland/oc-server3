@@ -148,11 +148,13 @@ class picture
                                        (SELECT `cache_id` FROM `cache_logs_archived` WHERE `id`='&1'))",
                                                        0, $this->getObjectId());
             */
-            $logger_id = sql_value("SELECT
-                                     IFNULL((SELECT `user_id` FROM `cache_logs` WHERE `id`='&1'),
-                                       (SELECT `user_id` FROM `cache_logs_archived` WHERE `id`='&1'))",
-                0, $this->getObjectId());
-
+            $logger_id = sql_value(
+                "SELECT
+                    IFNULL((SELECT `user_id` FROM `cache_logs` WHERE `id`='&1'),
+                           (SELECT `user_id` FROM `cache_logs_archived` WHERE `id`='&1'))",
+                0,
+                $this->getObjectId()
+            );
             $archive = ($bRestoring || $login->userid != $logger_id);
         } else {
             $archive = true;
@@ -632,7 +634,6 @@ class picture
             }
 
             return $result;
-
         } else {
             return false;
         }
@@ -738,5 +739,4 @@ class picture
 
         return false;
     }
-
 }

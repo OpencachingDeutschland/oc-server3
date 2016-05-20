@@ -656,12 +656,11 @@ class cache
 
         // cache_adoption exists?
         if (sql_value(
-                "SELECT COUNT(*) FROM `cache_adoption` WHERE `cache_id`='&1' AND `user_id`='&2'",
-                0,
-                $this->nCacheId,
-                $userId
-            ) == 0
-        ) {
+            "SELECT COUNT(*) FROM `cache_adoption` WHERE `cache_id`='&1' AND `user_id`='&2'",
+            0,
+            $this->nCacheId,
+            $userId
+        ) == 0) {
             return false;
         }
 
@@ -695,15 +694,15 @@ class cache
     public function hasAdopted($userId)
     {
         // cache_adoption exists?
-        return (sql_value(
-                "SELECT COUNT(*)
-                 FROM `cache_adoption`
-                 WHERE `cache_id`='&1'
-                 AND `user_id`='&2'",
-                0,
-                $this->nCacheId,
-                $userId
-            ) != 0);
+        return sql_value(
+            "SELECT COUNT(*)
+             FROM `cache_adoption`
+             WHERE `cache_id`='&1'
+             AND `user_id`='&2'",
+            0,
+            $this->nCacheId,
+            $userId
+        ) != 0;
     }
 
     // true if anyone can view the cache
@@ -757,12 +756,12 @@ class cache
 
     public function isRecommendedByUser($nUserId)
     {
-        return (sql_value(
-                "SELECT COUNT(*) FROM `cache_rating` WHERE `cache_id`='&1' AND `user_id`='&2'",
-                0,
-                $this->nCacheId,
-                $nUserId
-            ) > 0);
+        return sql_value(
+            "SELECT COUNT(*) FROM `cache_rating` WHERE `cache_id`='&1' AND `user_id`='&2'",
+            0,
+            $this->nCacheId,
+            $nUserId
+        ) > 0;
     }
 
     public function addRecommendation($nUserId, $logdate)
@@ -970,13 +969,13 @@ class cache
 
     public function statusUserLogAllowed()
     {
-        return (sql_value(
-                "SELECT `cache_status`.`allow_user_log`
-                 FROM `cache_status`,`caches`
-                 WHERE `caches`.`status`=`cache_status`.`id`
-                 AND `caches`.`cache_id`='&1'",
-                0,
-                $this->getCacheId()
-            ) == 1);
+        return sql_value(
+            "SELECT `cache_status`.`allow_user_log`
+             FROM `cache_status`,`caches`
+             WHERE `caches`.`status`=`cache_status`.`id`
+             AND `caches`.`cache_id`='&1'",
+            0,
+            $this->getCacheId()
+        ) == 1;
     }
 }

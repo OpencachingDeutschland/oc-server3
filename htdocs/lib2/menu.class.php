@@ -214,8 +214,10 @@ class Menu
         $ids = $this->GetSelectedMenuIds();
 
         $retval = array();
-        foreach ($menuitem[MNU_ROOT]['subitems'] AS $item) {
-            if (($menuitem[$item]['authlevel'] != AUTH_LEVEL_ADMIN || $login->hasAdminPriv()) && ($menuitem[$item]['visible'] == 1 || ($menuitem[$item]['visible'] == 2 && !$login->logged_in()))) {
+        foreach ($menuitem[MNU_ROOT]['subitems'] as $item) {
+            if (($menuitem[$item]['authlevel'] != AUTH_LEVEL_ADMIN || $login->hasAdminPriv()) &&
+                ($menuitem[$item]['visible'] == 1 || ($menuitem[$item]['visible'] == 2 && !$login->logged_in()))
+            ) {
                 $thisitem = $menuitem[$item];
                 $thisitem['selected'] = isset($ids[$item]);
                 $retval[] = $thisitem;

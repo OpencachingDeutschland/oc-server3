@@ -11,8 +11,8 @@ checkJob(new picture_cleanup());
 
 class picture_cleanup
 {
-    public  $name = 'picture_cleanup';
-    public  $interval = 86400;
+    public $name = 'picture_cleanup';
+    public $interval = 86400;
 
     public function run()
     {
@@ -49,10 +49,11 @@ class picture_cleanup
                                 == file_get_contents($instances[$n]['pic']->getFilename())
                             ) {
                                 $picture = $instances[$n]['pic'];
-                                echo 'deleting duplicate picture ' . $picture->getPictureId(
-                                    ) . ' ("' . $picture->getTitle() . '")' .
-                                    ' from log ' . $rDuplicatePic['object_id'] .
-                                    ' of cache ' . $instances[$n]['cache_id'] . "\n";
+                                echo
+                                    'deleting duplicate picture '
+                                    . $picture->getPictureId() . ' ("' . $picture->getTitle() . '")'
+                                    . ' from log ' . $rDuplicatePic['object_id']
+                                    . ' of cache ' . $instances[$n]['cache_id'] . "\n";
                                 $picture->delete(false);
                                 $instances[$n]['filesize'] = false;
                                 break;

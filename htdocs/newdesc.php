@@ -103,18 +103,21 @@ if ($error == false) {
 
                     if ($desc_lang_exists == false) {
                         //add to DB
-                        sql("INSERT INTO `cache_desc` (
-                                                        `id`,
-                                                        `cache_id`,
-                                                        `language`,
-                                                        `desc`,
-                                                        `desc_html`,
-                                                        `desc_htmledit`,
-                                                        `hint`,
-                                                        `short_desc`,
-                                                        `last_modified`,
-                                                        `node`
-                                                    ) VALUES ('', '&1', '&2', '&3', '&4', '&5', '&6', '&7', NOW(), '&8')",
+                        sql(
+                            "INSERT INTO `cache_desc`
+                                (
+                                    `id`,
+                                    `cache_id`,
+                                    `language`,
+                                    `desc`,
+                                    `desc_html`,
+                                    `desc_htmledit`,
+                                    `hint`,
+                                    `short_desc`,
+                                    `last_modified`,
+                                    `node`
+                                )
+                             VALUES ('', '&1', '&2', '&3', '&4', '&5', '&6', '&7', NOW(), '&8')",
                             $cache_id,
                             $sel_lang,
                             $desc,
@@ -138,14 +141,15 @@ if ($error == false) {
                 // check if any default language is available
                 if ($show_all_langs == 0) {
                     if (sqlValue(
-                            "SELECT COUNT(*)
-                            FROM `languages_list_default`
-                            LEFT JOIN `cache_desc`
-                                ON `languages_list_default`.`show`=`cache_desc`.`language`
-                                AND `cache_desc`.`cache_id`='" . sql_escape($cache_id) . "'
-                            WHERE `languages_list_default`.`lang`='" . sql_escape($locale) . "'
-                            AND ISNULL(`cache_desc`.`cache_id`)", 0) == 0
-                    ) {
+                        "SELECT COUNT(*)
+                         FROM `languages_list_default`
+                         LEFT JOIN `cache_desc`
+                            ON `languages_list_default`.`show`=`cache_desc`.`language`
+                            AND `cache_desc`.`cache_id`='" . sql_escape($cache_id) . "'
+                         WHERE `languages_list_default`.`lang`='" . sql_escape($locale) . "'
+                         AND ISNULL(`cache_desc`.`cache_id`)",
+                        0
+                    ) == 0 ) {
                         $show_all_langs = 1;
                     }
                 }

@@ -51,8 +51,9 @@ do {
         echo 'applying DB mutation #' . $db_version;
         call_user_func($dbv_function);
         sql(
-            "INSERT INTO `sysconfig` (`name`,`value`) VALUES ('db_version','&1')
-                 ON DUPLICATE KEY UPDATE `value`='&1'",
+            "INSERT INTO `sysconfig` (`name`,`value`)
+             VALUES ('db_version', '&1')
+             ON DUPLICATE KEY UPDATE `value`='&1'",
             $db_version
         );
         echo " - ok.\n";

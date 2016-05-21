@@ -9,22 +9,30 @@
  *    - set line ends to LF(-only)
  *    - remove ?> and blank lines at end of file
  *    - add missing LF to end of file
- *    - detect characters before <? at start of file
+ *
+ *  It also warns on the following issues:
+ *
+ *    - characters before open tag at start of file
+ *    - short open tags
  *
  *  This script may be run any time to check and clean up the current OC code.
  *
  *  Unicode Reminder メモ
  ***************************************************************************/
 
-$exclude = [
+# The following code is made to run also on the developer host, which may
+# have a restricted environent like an old Windows PHP. Keep it simple and
+# do not include other OC code.
+
+$exclude = array(
     'htdocs/cache',
     'htdocs/cache2',
     'htdocs/lib2/smarty',
     'htdocs/okapi',
     'htdocs/templates2/mail',
     'htdocs/var',
-    'htdocs/vendor'
-];
+    'htdocs/vendor',
+);
 
 chdir(__DIR__ . '/../..');
 
@@ -38,6 +46,8 @@ echo
 
 class StyleCleanup
 {
+    const TABWIDTH = 4;
+
     private $exclude_dirs;
     private $basedir;
     private $files_modified;
@@ -77,24 +87,25 @@ class StyleCleanup
             foreach ($files as $filepath) {
                 $file_modified = false;
                 $lines = file($filepath);
+                $display_filepath = substr($filepath, strlen($this->basedir) + 1);
 
                 # detect illegal characters at start of PHP or XML file
 
                 if (count($lines) && preg_match('/^(.+?)\<\?/', $lines[0], $matches)) {
-                    die(
-                        'invalid character(s) "' . $matches[1] . '"'
-                        . ' at start of ' . $filepath . "\n"
+                    self::warn(
+                        'invalid character(s) "' . $matches[1] . '" at start of ' . $display_filepath
                     );
                 }
 
-                # Remove trailing whitespaces, strip CRs, expand tabs and
-                # make sure that all - including the last - line end on "\n".
-                # Only-whitespace lines are allowed by PSR-2 and will not be
-                # trimmed.
+                # Remove trailing whitespaces, strip CRs, expand tabs, make
+                # sure that all - including the last - line end on "\n",
+                # and detect short open tags. Only-whitespace lines are
+                # allowed by PSR-2 and will not be trimmed.
 
+                $n = 1;
                 foreach ($lines as &$line) {
                     if ((trim($line, " \n") != '' || substr($line, -1) != "\n")
-                        && !preg_match("/^ *\\* *\n$/", $line)) {
+                        && !preg_match("/^ *(\\*|\/\/|#) *\n$/", $line)) {
 
                         $old_line = $line;
                         $line = rtrim($line);   # trims " \t\n\r\0\x0B"
@@ -106,6 +117,10 @@ class StyleCleanup
                             ++ $this->lines_modified;
                         }
                     }
+                    if (preg_match('/\<\?\s/', $line)) {   # relies on \n at EOL
+                        self::warn('short open tag in line ' . $n . ' of ' . $display_filepath);
+                    }
+                    ++ $n;
                 }
 
                 # remove PHP close tags and empty lines from end of file
@@ -124,7 +139,7 @@ class StyleCleanup
                 }
 
                 if ($file_modified) {
-                    echo substr($filepath, 2) . "\n";
+                    echo 'cleaned ' . substr($filepath, 2) . "\n";
                     file_put_contents($filepath, implode('', $lines));
                     ++ $this->files_modified;
                 }
@@ -146,10 +161,15 @@ class StyleCleanup
         while (($tabpos = strpos($line, "\t")) !== false) {
             $line =
                 substr($line, 0, $tabpos)
-                . substr('    ', 0, 4 - ($tabpos % 4))
+                . substr('    ', 0, self::TABWIDTH - ($tabpos % self::TABWIDTH))
                 . substr($line, $tabpos + 1);
         }
 
         return $line;
+    }
+
+    private static function warn($msg)
+    {
+        echo '! ' . $msg . "\n";
     }
 }

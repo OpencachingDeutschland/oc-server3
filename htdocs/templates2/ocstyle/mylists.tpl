@@ -14,7 +14,7 @@
     </div>
 
     {if $invalid_waypoints}
-        <p class="errormsg">{t}The following waypoints are invalid and could not be added to the list:{/t}&nbsp; {$invalid_waypoints}</p>
+        <p class="errormsg">{t}The following waypoints are invalid and could not be added to the list:{/t}&nbsp; {$invalid_waypoints|escape}</p>
     {/if}
 
     {if !$edit_list && !$newlist_mode && !$name_error}

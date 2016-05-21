@@ -34,7 +34,7 @@ function search_output()
     global $opt, $tpl, $login;
     global $enable_mapdisplay;
     global $called_by_search, $called_by_profile_query, $options, $lat_rad, $lon_rad, $distance_unit;
-    global $startat, $caches_per_page, $sql, $query_userid, $query_name;
+    global $startat, $caches_per_page, $sql, $query_userid, $query_name, $invalid_waypoints;
 
     $tpl->name = 'search.result.caches';
     $tpl->menuitem = MNU_CACHES_SEARCH_RESULT;
@@ -189,6 +189,7 @@ function search_output()
     if (isset($options['cachelist'])) {
         $tpl->assign('cachelist', $options['cachelist']);
         $tpl->assign('cachelist_pw', $options['cachelist_pw']);
+        $tpl->assign('invalid_waypoints', $invalid_waypoints);
     } else {
         $tpl->assign('cachelist', false);
     }

@@ -20,7 +20,7 @@ class LogPics
     const FOR_USER_GALLERY = 4;   // params: userid
     const FOR_MYHOME_GALLERY = 5;
     const FOR_CACHE_STAT = 6;     // params: cacheid
-    const FOR_CACHE_GALLERY = 7;  // params: userid, cacheid
+    const FOR_CACHE_GALLERY = 7;  // params: cacheid
 
     const MAX_PICTURES_PER_GALLERY_PAGE = 48;   // must be multiple of 6
 
@@ -121,12 +121,8 @@ class LogPics
                 break;
 
             case self::FOR_USER_STAT:
-                // just count all the logpics of one user
-
-                // It's faster, sensible and consistend with cache and log handling to count
-                // also invisible data here. Actually, it is present, the pic was made and
-                // uploaded with a log, and it is still visible for the logger himself
-                // (and hopfully some time for all, independend of the invisible listing!).
+                // Consistent with the log statistics, we count all pictures of the
+                // user, also in logs for not publically visible caches.
 
                 $result = sql_value_slave(
                     "SELECT COUNT(*)
@@ -169,8 +165,9 @@ class LogPics
                 break;
 
             case self::FOR_CACHE_STAT:
-                // all pictures for a cache except license-replacement pics
-                // need not to exclude invisible caches, as this is only displayed in listing view
+                // all pictures for a cache except license-replacement pics;
+                // need no option to exclude invisible caches, as this is only displayed
+                // in listing view
 
                 $result = sql_value(
                     "SELECT COUNT(*)
@@ -189,13 +186,14 @@ class LogPics
 
             case self::FOR_CACHE_GALLERY:
                 // all picture for a cache except license-replacement pics
-                // for all users except owner: also excluding invisble caches
+                // for all users except owner: also excluding invisble caches;
+                // need no option to exclude invisible caches, as this is only displayed
+                // in listing view
 
                 $rs = sql(
                     "SELECT $fields, `user`.`username`, `logs`.`date` AS `picdate`
                      FROM `pictures` AS `pics`
-                     $join_logs " .
-                     ($userid == $login->userid ? "" : "$join_caches $join_cachestatus") . "
+                     $join_logs
                      $join_user
                      WHERE
                         `object_type`=1 AND `logs`.`cache_id`='&1'
@@ -208,10 +206,7 @@ class LogPics
                 break;
 
             default:
-                global $tpl;
-                $tpl->error(ERROR_INVALID_OPERATION);
-
-                return null;
+                $result = null;
         }
 
         if ($rs !== false) {

@@ -5,8 +5,8 @@
  *  Unicode Reminder メモ
  ***************************************************************************/
 
-require 'lib2/web.inc.php';
-require_once 'lib2/edithelper.inc.php';
+require __DIR__ . '/lib2/web.inc.php';
+require_once __DIR__ . '/lib2/edithelper.inc.php';
 
 $tpl->name = 'mylists';
 $tpl->menuitem = MNU_MYPROFILE_LISTS;

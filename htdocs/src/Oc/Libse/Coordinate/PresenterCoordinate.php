@@ -124,7 +124,7 @@ class PresenterCoordinate
 
     public function hasCoordinate()
     {
-        return $this->getCoordinate() !== new CoordinateCoordinate(0, 0);
+        return $this->getCoordinate() != new CoordinateCoordinate(0, 0);
     }
 
     public function validate()

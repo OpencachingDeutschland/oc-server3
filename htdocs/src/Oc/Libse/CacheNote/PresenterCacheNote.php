@@ -49,6 +49,9 @@ class PresenterCacheNote
         $this->coordinate->init($cacheNote['latitude'], $cacheNote['longitude']);
     }
 
+    /**
+     * @param \OcSmarty $template
+     */
     public function prepare($template)
     {
         $template->assign(self::tpl_note_id, $this->noteId);

@@ -1,14 +1,16 @@
 <?php
 /***************************************************************************
+ *  For license information see doc/license.txt
  *
- * Unicode Reminder メモ
+ *  Unicode Reminder メモ
  *
- * Ggf. muss die Location des php-Binaries angepasst werden.
- *
- * Erstellt stored procedures.
+ *  This old script created some stored procedures which are currently not
+ *  on use, so you need not to run it. Though the code may me useful some
+ *  time. If needed, add the procedure(s) to maintain-current.inc.php
+ *  and refactor them to current coding style.
  ***************************************************************************/
 
-$opt['rootpath'] = '../../../';
+$opt['rootpath'] = '../../htdocs/';
 require_once $opt['rootpath'] . 'lib/clicompatbase.inc.php';
 
 if (!file_exists($opt['rootpath'] . 'util/mysql_root/sql_root.inc.php')) {

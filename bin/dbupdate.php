@@ -27,7 +27,7 @@ system(
 );
 
 echo "importing triggers\n";
-chdir($rootpath . 'doc/sql/stored-proc');
+chdir($rootpath . '../sql/stored-proc');
 system('php maintain.php');
 
 // We do *two* tests for OKAPI presence to get some robustness agains internal OKAPI changes.

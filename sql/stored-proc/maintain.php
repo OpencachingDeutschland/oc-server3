@@ -8,7 +8,7 @@
  *  Load current stored procs and triggers into database.
  ***************************************************************************/
 
-$opt['rootpath'] = __DIR__ . '/../../../';
+$opt['rootpath'] = __DIR__ . '/../../htdocs/';
 require $opt['rootpath'] . 'lib2/cli.inc.php';
 
 if ($opt['db']['maintenance_user'] == '') {

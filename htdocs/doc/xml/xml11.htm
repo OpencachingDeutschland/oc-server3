@@ -1,18 +1,20 @@
 <html>
     <head>
-        <title>Dokumentation Opencaching XML-Interface Version 1.4</title>
+        <title>Dokumentation Opencaching XML-Interface</title>
         <meta name="vs_showGrid" content="True" />
+        <meta charset="utf-8" />
         <style>
             p, li { line-height: 1.4em; }
             li { padding-bottom: 0.5em; }
         </style>
     </head>
     <body style="font-family: arial, sans-serif, Tahoma, Verdana; font-size:12px">
-        <h1>Dokumentation Opencaching XML-Interface Version 1.2</h1>
+        <h1>Dokumentation Opencaching XML-Interface</h1>
         <p>
             Das XML-Interface dient zum automatisierten abfragen aller Caches, Logeinträge,
             Benutzer und/oder Bilder. Dieses Interface ist nicht für Endbenutzer gedacht,
-            sondern primär für Anwendungs-Entwickler.
+            sondern für Anwendungs-Entwickler. Alternativ steht die modernere
+            <a href="../../okapi/">Opencaching-API</a> (OKAPI) zur Verfügung.
         </p>
         <p>
             <span style="color:red">Die abgerufenen Daten sind urheberrechtlich geschützt und dürfen nur unter den Bedingungen der <a href="http://www.opencaching.de/articles.php?page=impressum#datalicense">Opencaching.de-Datenlizenz</a> weitergegeben und genutzt werden.</span>
@@ -20,7 +22,9 @@
 
         <p>
             <em>The XML interface allows automatic download of cache, logs, user and/or pictures data.
-            It is not made for end-users but for application developers.<br />
+            It is not made for end-users but for application developers. There also is the more
+            modern <a href="../../okapi/">OKAPI</a> interface.
+            <br />
             This documentation is currently available in German only. If you need english text,
             please contact us at <a href="mailto:kontakt@opencaching.de">kontakt@opencaching.de</a>
             and tell us about the application you are going to develop; then we may translate it.<br />
@@ -130,7 +134,7 @@
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;![CDATA[Letterbox (benötigt Stempel)]]&gt;<br />
             &nbsp; &lt;/attr&gt;<br />
             &lt;/attrlist&gt;<br />
-    </p>
+      </p>
         <h3>user (Benutzerdaten)</h3>
         <p>&lt;user&gt;<br />
             &nbsp; &lt;id id="12345"&gt;4CE405E5-C110-CE00-9E88-8907F2212C73&lt;/id&gt;<br />
@@ -155,7 +159,7 @@
             &nbsp; &lt;latitude&gt;49.46393&lt;/latitude&gt;<br />
             &nbsp; &lt;type id="2" short="Trad."&gt;&lt;![CDATA[normaler
             Cache]]&gt;&lt;/type&gt;<br />
-            &nbsp; &lt;status id="2"&gt;&lt;![CDATA[Momentan nicht
+            &nbsp; &lt;status id="2" needs_maintenance="0" listing_outdated="0"&gt;&lt;![CDATA[Momentan nicht
             verfügbar]]&gt;&lt;/status&gt;<br />
             &nbsp; &lt;country id="DE"&gt;&lt;![CDATA[Deutschland]]&gt;&lt;/country&gt;<br />
             &nbsp; &lt;size id="2"&gt;&lt;![CDATA[mikro]]&gt;&lt;/size&gt;<br />
@@ -163,7 +167,7 @@
             &nbsp; &lt;difficulty&gt;4&lt;/difficulty&gt;<br />
             &nbsp; &lt;terrain&gt;2&lt;/terrain&gt;<br />
             &nbsp;&nbsp;&lt;rating waylength="1.5" needtime= "0.5"&gt;&lt;/rating&gt;<br />
-            &nbsp; &lt;waypoints gccom= "" nccom="" oc="OCR2D2"&gt;&lt;/waypoints&gt;<br />
+            &nbsp; &lt;waypoints gccom= "" gccom2="" oc="OCR2D2"&gt;&lt;/waypoints&gt;<br />
             &nbsp; &lt;datehidden&gt;2005-08-01&lt;/datehidden&gt;<br />
             &nbsp; &lt;datecreated ispublishdate="0"&gt;2005-09-08 15:45:02&lt;/datecreated&gt;<br />
             &nbsp; &lt;lastmodified&gt;2005-12-20 20:58:41&lt;/lastmodified&gt;<br />
@@ -211,7 +215,7 @@
             &nbsp; &lt;user id="113"
             uuid="CAA9E3C5-50DF-4E9E-191F-CECABA6A8A19"&gt;&lt;![CDATA[Team
             Schnitzeljagd]]&gt;&lt;/user&gt;<br />
-            &nbsp; &lt;logtype id="1" recommended="0" teamcomment="0"&gt;&lt;![CDATA[Gefunden]]&gt;&lt;/type&gt;<br />
+            &nbsp; &lt;logtype id="1" recommended="0" teamcomment="0" needs_maintenance="0" listing_outdated="0"&gt;&lt;![CDATA[Gefunden]]&gt;&lt;/type&gt;<br />
             &nbsp; &lt;date&gt;2005-05-18 16:20:00&lt;/date&gt;<br />
             &nbsp; &lt;text&gt;&lt;![CDATA[Gut gefunden.&amp;lt;br /&amp;gt;<br />
             Gr&amp;uuml;&amp;szlig;e von&amp;lt;br /&amp;gt;<br />
@@ -235,6 +239,7 @@
             &nbsp; &lt;picattr spoiler="0" display="1" preview="0" /&gt;<br />
             &nbsp; &lt;datecreated&gt;2005-12-24 01:01:38&lt;/datecreated&gt;<br />
             &nbsp; &lt;lastmodified&gt;2005-12-24 01:01:38&lt;/lastmodified&gt;<br />
+            &nbsp; &lt;position&gt;1&lt;/position&gt;<br />
             &lt;/picture&gt;
         </p>
         <h3>removedobject (gelöschte Objekte)</h3>

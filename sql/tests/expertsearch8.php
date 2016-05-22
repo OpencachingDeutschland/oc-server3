@@ -2,7 +2,7 @@
 
 // Unicode Reminder メモ
 
-$opt['rootpath'] = __DIR__ . '/../../../';
+$opt['rootpath'] = __DIR__ . '/../';
 require $opt['rootpath'] . 'lib2/web.inc.php';
 
 sql_enable_debugger();
@@ -28,9 +28,15 @@ sql(
 sql(
     'CREATE TEMPORARY TABLE remove_caches (`cache_id` INT(11) NOT NULL, PRIMARY KEY (cache_id)) ENGINE=MEMORY SELECT DISTINCT result_caches.cache_id cache_id FROM result_caches, cache_logs WHERE result_caches.cache_id=cache_logs.cache_id AND cache_logs.user_id IN (101254, 101301)'
 );
-sql(
-    'DELETE FROM result_caches WHERE cache_id IN (SELECT cache_id FROM remove_caches) OR (status!=1) OR (search_time>2)'
-);
+sql('DELETE FROM result_caches WHERE cache_id IN (SELECT cache_id FROM remove_caches)');
 sql('DROP TABLE remove_caches');
+
+/**
+ * (4) Entferne alle Einträge die nicht diesem Filter entsprechen von der Ergebnisliste
+ *
+ * Filtertyp: nach status
+ * Status: Kann gesucht werden
+ */
+sql('DELETE FROM result_caches WHERE (status!=1) OR (search_time>2)');
 
 $tpl->display();

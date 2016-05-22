@@ -1,0 +1,2 @@
+These are some performence tests for search.php development.
+Copy them to a subdirectory of htdocs on your devel or test site if needed.

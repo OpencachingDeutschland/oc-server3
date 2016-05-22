@@ -1711,7 +1711,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('812', '(*) New 
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('814', 'User statistics', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('815', 'show', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('817', 'The geocache was locked by an administrator because it did not follow the Opencaching terms of use. If you wish to unlock it, contact us using the \"report cache\"-link. Please choose \"other\" as reason and explain shortly what you have changed to make the listing compliant to our terms of use. Thank you!', '2010-08-28 11:48:04');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('818', 'doc/sql/static-data/data.sql has been changed with last CVS checkout.<br /> Before you change translastions, update database with data.sql!<br /> \&nbsp;', '2010-08-28 11:48:04');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('818', '/sql/static-data/data.sql has been changed with last CVS checkout.<br /> Before you change translastions, update database with data.sql!<br /> \&nbsp;', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('819', 'Sorry, the Geocache is locked and can not be viewed.', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('821', 'Locked, visible', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('822', 'Locked, invisible', '2010-08-28 11:48:04');
@@ -6360,7 +6360,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('814', 'DE', 'Benutzerstatistik', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('815', 'DE', 'Anzeigen', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('817', 'DE', 'Der Geocache wurde durch einen Administrator gesperrt, weil er nicht den Nutzungsbedingungen von Opencaching.de entspricht. Wenn du die Sperrung aufheben möchtest, kontaktiere uns mit der \'Cache-melden\'-Funktion. Bitte wähle Sonstiges als Ursache und beschreibe uns, was du geändert hast, um die Nutzungsbedingungen einzuhalten. Danke!', '2010-08-28 11:48:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('818', 'DE', 'doc/sql/static-data/data.sql wurde seit dem letzten SQL-Export geändert.<br /> \r\nVor Änderung der Übersetzungen erst data.sql neu einspielen!<br /> \r\n\&nbsp;', '2010-08-28 11:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('818', 'DE', '/sql/static-data/data.sql wurde seit dem letzten SQL-Export geändert.<br /> \r\nVor Änderung der Übersetzungen erst data.sql neu einspielen!<br /> \r\n\&nbsp;', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('819', 'DE', 'Entschuldigung, der Geocache wurde gesperrt und kann nicht angezeigt werden.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('821', 'DE', 'gesperrt', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('822', 'DE', 'gesperrt, versteckt', '2010-08-28 11:48:07');
@@ -8284,7 +8284,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('814', 'EN', 'User statistics', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('815', 'EN', 'show', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('817', 'EN', 'This geocache has been locked by an administrator because it did not comply with the Opencaching terms of use. If you wish to unlock it, contact us using the \"report cache\" link. Please choose \"other\" as reason and explain briefly what you have changed to make the listing compliant with our terms of use. Thank you!', '2010-08-28 11:48:08');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('818', 'EN', 'doc/sql/static-data/data.sql has been changed with last CVS checkout.<br /> Before you edit translastions, update database from data.sql!<br /> \&nbsp;', '2010-08-28 11:48:08');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('818', 'EN', '/sql/static-data/data.sql has been changed with last CVS checkout.<br /> Before you edit translastions, update database from data.sql!<br /> \&nbsp;', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('819', 'EN', 'Sorry, this geocache is locked and cannot be viewed.', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('821', 'EN', 'Locked, visible', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('822', 'EN', 'Locked, invisible', '2010-08-28 11:48:08');
@@ -10122,7 +10122,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('814', 'ES', 'Statistics del usuario', '2010-12-09 00:17:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('815', 'ES', 'mostrar', '2010-12-09 00:17:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('817', 'ES', 'El geocache fue bloqueado por un administrador, porque no se ajusta a los términos y condiciones de Opencaching.de. Si desea desbloquear, por favor contacte con nosotros utilizando la función \'informe caché\'. Por favor, seleccione otro como la causa y nos describen lo que ha cambiado para dar cumplimiento a las condiciones de uso. ¡Gracias!', '2010-12-09 00:17:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('818', 'ES', 'doc/sql/static-data/data.sql se ha cambiado con la último CVS.<br />Antes de modificar traducciones, actualización de base de datos data.sql!<br /> \&nbsp;', '2010-12-09 00:17:59');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('818', 'ES', '/sql/static-data/data.sql se ha cambiado con la último CVS.<br />Antes de modificar traducciones, actualización de base de datos data.sql!<br /> \&nbsp;', '2010-12-09 00:17:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('819', 'ES', 'Lo sentimos, este geocache está cerrado y no se puede ver.', '2010-12-09 00:17:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('821', 'ES', 'cerrado, visible', '2010-12-09 00:17:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('822', 'ES', 'cerrado, invisible', '2010-12-09 00:17:59');
@@ -11667,7 +11667,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('814', 'FR', 'Statistiques de l\'utilisateur', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('815', 'FR', 'Afficher', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('817', 'FR', 'La géocache a été verrouillé par un administrateur parce qu\'il n\'a pas respecté les termes d\'utilisation d\'Opencaching. Si vous souhaitez le déverrouiller, contacter nous en utilisant le «\&nbsp;rapport cache\&nbsp;» -link. S\'il vous plaît choisissez «\&nbsp;autre\&nbsp;» comme raison et expliquer brièvement ce que vous avez changé de rendre la liste conforme à nos conditions d\'utilisation. Merci\&nbsp;!', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('818', 'FR', 'doc/sql/static-data/data.sql a été changé avec la dernière checkout CVS <br />Avant de changer des translastions, de base de données mise à jour avec data.sql\&nbsp;!<br/> \&nbsp;', '2015-08-25 01:29:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('818', 'FR', '/sql/static-data/data.sql a été changé avec la dernière checkout CVS <br />Avant de changer des translastions, de base de données mise à jour avec data.sql\&nbsp;!<br/> \&nbsp;', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('819', 'FR', 'Désolé, la géocache est verrouillé et ne peut pas être consulté.', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('821', 'FR', 'verrouillé, visible', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('822', 'FR', 'verrouillée, invisible', '2015-08-25 01:29:00');
@@ -13581,7 +13581,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('814', 'IT', 'Statistiche utente', '2010-08-31 20:06:24');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('815', 'IT', 'Visualizza', '2013-07-25 15:53:16');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('817', 'IT', 'Questa cache è stata chiusa dall\'amministratore perchè violava le condizioni d\'uso di Opencaching. Se vuoi riaprirla, contattaci utilizzando il link \"segnala cache\"', '2010-09-01 23:49:32');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('818', 'IT', 'doc/sql/static-data/data.sql è cambiato dall\'ultimo checkout CVS.<br /> Prima di modificare le traduzioni, aggiorna il database dai dati sql!<br /> \&nbsp;', '2010-08-31 20:06:24');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('818', 'IT', '/sql/static-data/data.sql è cambiato dall\'ultimo checkout CVS.<br /> Prima di modificare le traduzioni, aggiorna il database dai dati sql!<br /> \&nbsp;', '2010-08-31 20:06:24');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('819', 'IT', 'Spiacente, la geocache è chiusa e non può essere vista.', '2010-09-01 23:49:32');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('821', 'IT', 'chiusa, visibile', '2010-09-01 23:49:32');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('822', 'IT', 'chiusa, invisibile', '2010-08-31 20:06:24');
@@ -16201,4 +16201,4 @@ TRUNCATE TABLE `watches_waitingtypes`;
 INSERT INTO `watches_waitingtypes` (`id`, `watchtype`) VALUES ('1', 'ownerlog');
 INSERT INTO `watches_waitingtypes` (`id`, `watchtype`) VALUES ('2', 'cache_watches');
 
-INSERT INTO `sysconfig` (`name`, `value`) VALUES ('datasql_checksum', 'cf92af97de367baf05d953e2e3901897') ON DUPLICATE KEY UPDATE `value`='cf92af97de367baf05d953e2e3901897';
+INSERT INTO `sysconfig` (`name`, `value`) VALUES ('datasql_checksum', '416acec531ee1886f827e8615482e263') ON DUPLICATE KEY UPDATE `value`='416acec531ee1886f827e8615482e263';

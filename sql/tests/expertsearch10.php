@@ -2,7 +2,7 @@
 
 // Unicode Reminder メモ
 
-$opt['rootpath'] = __DIR__ . '/../../../';
+$opt['rootpath'] = __DIR__ . '/../';
 require $opt['rootpath'] . 'lib2/web.inc.php';
 
 sql_enable_debugger();

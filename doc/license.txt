@@ -242,7 +242,7 @@ Other resources
 Data content
 ------------
 
-see htdocs/doc/sql/static-data/static-data.txt on usage
+see sql/static-data/static-data.txt on usage
 
     1.  OpenGeoDB
         URI     : http://sourceforge.net/projects/opengeodb/
@@ -258,6 +258,6 @@ see htdocs/doc/sql/static-data/static-data.txt on usage
         Author  : Eurostat
 
     4.  Cracklib password list
-        Path    : doc/sql/static-data/pw_dict.bz2
+        Path    : sql/static-data/pw_dict.bz2
         URI     : http://pecl.php.net/package/crack
         License : PHP

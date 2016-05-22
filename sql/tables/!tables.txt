@@ -1,0 +1,11 @@
+These are the reference defitions of all OCDE database tables (excluding OKAPI).
+
+When changing a table definition, do it (a) here and (b) by adding a mutation
+function to bin/dbsv-update.php, then run bin/dbsv-update.php to update your DB.
+
+translate.php "SQL Export" writes the defition of your local database's tables
+to the .sql files. Then you can look for differences by "git diff".
+
+http://OC.site/okapi/devel/dbstruct shows you the DB stuctures of an OC site.
+Add "&compare=http://another.OC.site/okapi/devel/dbstruct" to compare DB structs
+of two OC sites (including your local devel site).

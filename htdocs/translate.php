@@ -249,11 +249,11 @@ function calcDataSqlChecksum($truncateLastInsert)
 {
     global $opt;
 
-    if (!file_exists($opt['rootpath'] . 'doc/sql/static-data/data.sql')) {
+    if (!file_exists($opt['rootpath'] . '../sql/static-data/data.sql')) {
         return '';
     }
 
-    $content = file_get_contents($opt['rootpath'] . 'doc/sql/static-data/data.sql');
+    $content = file_get_contents($opt['rootpath'] . '../sql/static-data/data.sql');
 
     // at the end is an INSERT of the current checksum
     // to calculate this checksum, we have to trim the end before that statement and the linefeed before
@@ -513,9 +513,9 @@ function export()
 {
     global $opt, $tpl, $translang;
 
-    $structure = enumSqlFiles($opt['rootpath'] . "doc/sql/tables");
+    $structure = enumSqlFiles($opt['rootpath'] . '../sql/tables');
     foreach ($structure AS $sTable) {
-        sql_export_structure_to_file($opt['rootpath'] . 'doc/sql/tables/' . $sTable . '.sql', $sTable);
+        sql_export_structure_to_file($opt['rootpath'] . '../sql/tables/' . $sTable . '.sql', $sTable);
     }
 
     // static data tables
@@ -551,10 +551,10 @@ function export()
     $stab[] = 'towns';
     $stab[] = 'watches_waitingtypes';
 
-    sql_export_tables_to_file($opt['rootpath'] . 'doc/sql/static-data/data.sql', $stab);
+    sql_export_tables_to_file($opt['rootpath'] . '../sql/static-data/data.sql', $stab);
 
     $checksum = calcDataSqlChecksum(false);
-    $f = fopen($opt['rootpath'] . 'doc/sql/static-data/data.sql', 'a');
+    $f = fopen($opt['rootpath'] . '../sql/static-data/data.sql', 'a');
     fwrite(
         $f,
         "INSERT INTO `sysconfig` (`name`, `value`)"

@@ -16,7 +16,6 @@ use Oc\Libse\Language\TranslatorLanguage;
 
 require __DIR__ . '/lib2/web.inc.php';
 require_once __DIR__ . '/lib2/logic/labels.inc.php';
-require_once __DIR__ . '/lib2/logic/logpics.inc.php';
 
 $login->verify();
 
@@ -392,7 +391,7 @@ if (isset($_REQUEST['print']) && $_REQUEST['print'] == 'y') {
  */
 $tpl->assign('show_logpics', $logpics ? 1 : 0);
 if ($logpics) {
-    set_paged_pics(LOGPICS_FOR_CACHE_GALLERY, 0, $cacheid, "viewcache.php?cacheid=" . $cacheid . "&logpics=1");
+    LogPics::setPaging(LogPics::FOR_CACHE_GALLERY, 0, $cacheid, "viewcache.php?cacheid=" . $cacheid . "&logpics=1");
     $tpl->assign(
         'subtitle',
         "&lt;&lt; <a href='viewcache.php?cacheid=" . $cacheid . "'>" .
@@ -400,7 +399,7 @@ if ($logpics) {
     );
 
 } else {
-    $tpl->assign('logpics', get_logpics(LOGPICS_FOR_CACHE_STAT, 0, $cacheid));
+    $tpl->assign('logpics', LogPics::get(LogPics::FOR_CACHE_STAT, 0, $cacheid));
 }
 
 /* process profile settings

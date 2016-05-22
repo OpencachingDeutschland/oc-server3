@@ -6,7 +6,6 @@
  ***************************************************************************/
 
 require __DIR__ . '/lib2/web.inc.php';
-require __DIR__ . '/lib2/logic/logpics.inc.php';
 
 $sUserCountry = $login->getUserCountry();
 

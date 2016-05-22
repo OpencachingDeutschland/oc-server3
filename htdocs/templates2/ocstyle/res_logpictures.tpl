@@ -1,4 +1,4 @@
-{* see lib2/logic/logpics.inc.php for data retreival *}
+{* see lib2/logic/logpics.class.php for data retreival *}
 {* Unicode Reminder メモ *}
 
 {if $pages_list}

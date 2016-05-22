@@ -8,8 +8,6 @@
  * (Used by Ocprop)
  ****************************************************************************/
 
-require_once 'lib2/logic/cacheIcon.inc.php';
-
 $search_output_file_download = false;
 
 $sAddFields .= ', `caches`.`name`, `caches`.`difficulty`, `caches`.`terrain`,
@@ -125,7 +123,7 @@ function search_output()
         }
 
         // other data
-        $rCache['icon'] = getCacheIcon(
+        $rCache['icon'] = CacheIcon::get(
             $login->userid,
             $rCache['cache_id'],
             $rCache['status'],

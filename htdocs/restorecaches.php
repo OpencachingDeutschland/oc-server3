@@ -132,8 +132,8 @@ x                    cache_logs_restored   I*     here          datetime     no 
 
 */
 
-require 'lib2/web.inc.php';
-require_once 'lib2/logic/labels.inc.php';
+require __DIR__ . '/lib2/web.inc.php';
+require_once __DIR__ . '/lib2/logic/labels.inc.php';
 
 $tpl->name = 'restorecaches';
 $tpl->menuitem = MNU_ADMIN_RESTORE;

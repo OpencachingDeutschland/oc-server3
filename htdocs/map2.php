@@ -9,7 +9,7 @@ use Oc\Libse\ChildWp\HandlerChildWp;
 
 $build_map_towns_menu = true;
 
-require 'lib2/web.inc.php';
+require __DIR__ . '/lib2/web.inc.php';
 
 /* because the map does access some private info like
  * ignored caches, we need to verify the login data

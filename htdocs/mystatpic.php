@@ -5,7 +5,7 @@
  *  Unicode Reminder メモ
  ***************************************************************************/
 
-require_once './lib2/web.inc.php';
+require_once __DIR__ . '/./lib2/web.inc.php';
 
 $tpl->name = 'mystatpic';
 $tpl->menuitem = MNU_MYPROFILE_DATA_STATPIC;

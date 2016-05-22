@@ -5,7 +5,7 @@
  *  Unicode Reminder メモ
  ***************************************************************************/
 
-require 'lib2/web.inc.php';
+require __DIR__ . '/lib2/web.inc.php';
 
 $tpl->name = 'viewlogs';
 $tpl->menuitem = MNU_CACHES_VIEWLOGS;

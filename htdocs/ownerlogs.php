@@ -5,7 +5,7 @@
  *  Unicode Reminder メモ
  ***************************************************************************/
 
-require 'lib2/web.inc.php';
+require __DIR__ . '/lib2/web.inc.php';
 
 $tpl->name = 'ownerlogs';
 $tpl->menuitem = MNU_MYPROFILE_OWNERLOGS;
@@ -83,4 +83,4 @@ $tpl->assign(
     )
 );
 
-require 'newlogs.php';
+require __DIR__ . '/newlogs.php';

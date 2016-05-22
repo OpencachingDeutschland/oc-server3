@@ -6,4 +6,4 @@
  ***************************************************************************/
 
 $newlogs_rest = true;
-require 'newlogs.php';
+require __DIR__ . '/newlogs.php';

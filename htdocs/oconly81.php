@@ -5,8 +5,8 @@
  *  Unicode Reminder メモ
  ***************************************************************************/
 
-require 'lib2/web.inc.php';
-require 'lib2/logic/oconly81.inc.php';
+require __DIR__ . '/lib2/web.inc.php';
+require __DIR__ . '/lib2/logic/oconly81.inc.php';
 
 $showall = (@$_REQUEST['showall'] == 1);
 

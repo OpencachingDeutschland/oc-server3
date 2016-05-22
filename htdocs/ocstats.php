@@ -7,7 +7,7 @@
  *  Create / redirect to statpic
  ***************************************************************************/
 
-require 'lib2/web.inc.php';
+require __DIR__ . '/lib2/web.inc.php';
 
 // Parameter
 $jpeg_qualitaet = 80;

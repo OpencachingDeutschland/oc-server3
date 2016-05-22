@@ -5,7 +5,7 @@
  *  Unicode Reminder メモ
  ***************************************************************************/
 
-require 'lib2/web.inc.php';
+require __DIR__ . '/lib2/web.inc.php';
 
 $add_where = '';
 $newLogsPerCountry = $opt['logic']['new_logs_per_country'];

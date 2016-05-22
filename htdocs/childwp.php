@@ -9,7 +9,7 @@ use Oc\Libse\Cache\ManagerCache;
 use Oc\Libse\ChildWp\ControllerChildWp;
 use Oc\Libse\ChildWp\HandlerChildWp;
 
-require 'lib2/web.inc.php';
+require __DIR__ . '/lib2/web.inc.php';
 
 $tpl->name = 'childwp';
 $tpl->menuitem = MNU_CACHES_HIDE;

@@ -9,10 +9,10 @@
  *  Unicode Reminder メモ
  *****************************************************************************/
 
-require_once 'lib/consts.inc.php';
+require_once __DIR__ . '/lib/consts.inc.php';
 $opt['gui'] = GUI_HTML;
-require_once 'lib/common.inc.php';
-require_once 'lib2/edithelper.inc.php';
+require_once __DIR__ . '/lib/common.inc.php';
+require_once __DIR__ . '/lib2/edithelper.inc.php';
 
 // Preprocessing
 if ($error == false) {

@@ -13,9 +13,9 @@
 use Oc\Libse\ChildWp\HandlerChildWp;
 use Oc\Libse\Coordinate\FormatterCoordinate;
 
-require_once 'lib/consts.inc.php';
+require_once __DIR__ . '/lib/consts.inc.php';
 $opt['gui'] = GUI_HTML;
-require_once 'lib/common.inc.php';
+require_once __DIR__ . '/lib/common.inc.php';
 
 function getWaypoints($cacheid)
 {

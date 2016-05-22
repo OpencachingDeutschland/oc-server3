@@ -5,8 +5,8 @@
  *  Unicode Reminder メモ
  ***************************************************************************/
 
-require 'lib2/web.inc.php';
-require_once 'lib2/logic/logpics.inc.php';
+require __DIR__ . '/lib2/web.inc.php';
+require_once __DIR__ . '/lib2/logic/logpics.inc.php';
 
 $tpl->name = 'viewprofile';
 $tpl->menuitem = MNU_CACHES_USERPROFILE;
@@ -292,7 +292,7 @@ if ($show_statistics) {
 }
 
 if ($show_oconly81) {
-    require 'lib2/logic/oconly81.inc.php';
+    require __DIR__ . '/lib2/logic/oconly81.inc.php';
     set_oconly81_tpldata($userid);
 }
 

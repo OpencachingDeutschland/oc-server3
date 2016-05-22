@@ -7,7 +7,7 @@
  *  Unicode Reminder メモ
  ***************************************************************************/
 
-require_once 'lib/common.inc.php';
+require_once __DIR__ . '/lib/common.inc.php';
 
 //Preprocessing
 if ($error == false) {

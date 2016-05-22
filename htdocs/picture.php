@@ -16,7 +16,7 @@
  *
  ***************************************************************************/
 
-require 'lib2/web.inc.php';
+require __DIR__ . '/lib2/web.inc.php';
 
 $tpl->name = 'picture';
 $tpl->menuitem = MNU_CACHES_PICTURE;

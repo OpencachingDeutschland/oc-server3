@@ -6,7 +6,7 @@
  ***************************************************************************/
 
 $disable_verifyemail = true;
-require 'lib2/web.inc.php';
+require __DIR__ . '/lib2/web.inc.php';
 
 $tpl->name = 'login';
 $tpl->menuitem = MNU_LOGIN;

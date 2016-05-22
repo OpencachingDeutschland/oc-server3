@@ -5,9 +5,9 @@
  * Unicode Reminder メモ
  ****************************************************************************/
 
-require 'lib2/web.inc.php';
-require_once 'lib2/logic/labels.inc.php';
-require_once 'lib2/logic/cache.class.php';
+require __DIR__ . '/lib2/web.inc.php';
+require_once __DIR__ . '/lib2/logic/labels.inc.php';
+require_once __DIR__ . '/lib2/logic/cache.class.php';
 
 $tpl->name = 'garmin';
 $tpl->popup = 1;

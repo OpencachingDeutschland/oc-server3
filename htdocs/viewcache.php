@@ -14,9 +14,9 @@ use Oc\Libse\Coordinate\FormatterCoordinate;
 use Oc\Libse\Http\RequestHttp;
 use Oc\Libse\Language\TranslatorLanguage;
 
-require 'lib2/web.inc.php';
-require_once 'lib2/logic/labels.inc.php';
-require_once 'lib2/logic/logpics.inc.php';
+require __DIR__ . '/lib2/web.inc.php';
+require_once __DIR__ . '/lib2/logic/labels.inc.php';
+require_once __DIR__ . '/lib2/logic/logpics.inc.php';
 
 $login->verify();
 

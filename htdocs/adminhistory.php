@@ -5,7 +5,7 @@
  *  Unicode Reminder メモ
  ***************************************************************************/
 
-require 'lib2/web.inc.php';
+require __DIR__ . '/lib2/web.inc.php';
 
 $tpl->name = 'adminhistory';
 $tpl->menuitem = MNU_ADMIN_HISTORY;

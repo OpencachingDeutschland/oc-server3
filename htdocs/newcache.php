@@ -9,10 +9,10 @@
  *  Unicode Reminder メモ
  ***************************************************************************/
 
-require_once 'lib/consts.inc.php';
+require_once __DIR__ . '/lib/consts.inc.php';
 $opt['gui'] = GUI_HTML;
-require_once 'lib/common.inc.php';
-require_once 'lib2/edithelper.inc.php';
+require_once __DIR__ . '/lib/common.inc.php';
+require_once __DIR__ . '/lib2/edithelper.inc.php';
 
 $no_tpl_build = false;
 
@@ -915,7 +915,7 @@ if ($error == false) {
                 // only if cache is published NOW or activate_date is in the past
                 if ($publish == 'now2' || ($publish == 'later' && mktime($activate_hour, 0, 0, $activate_month, $activate_day, $activate_year) <= $today)) {
                     //do event handling
-                    include_once($opt['rootpath'] . '/lib/eventhandler.inc.php');
+                    include_once(__DIR__ . '/lib/eventhandler.inc.php');
 
                     event_notify_new_cache($cache_id + 0);
                     event_new_cache($usr['userid'] + 0);

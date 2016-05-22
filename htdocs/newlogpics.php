@@ -5,8 +5,8 @@
  *  Unicode Reminder メモ
  ***************************************************************************/
 
-require 'lib2/web.inc.php';
-require 'lib2/logic/logpics.inc.php';
+require __DIR__ . '/lib2/web.inc.php';
+require __DIR__ . '/lib2/logic/logpics.inc.php';
 
 $tpl->name = 'newlogpics';
 $tpl->menuitem = MNU_START_NEWLOGPICS;

@@ -55,10 +55,10 @@
  * - wtf is "expert mode"?
  ****************************************************************************/
 
-require 'lib2/web.inc.php';
-require 'lib2/logic/data-license.inc.php';
-require 'lib2/search/search.inc.php';
-require 'templates2/' . $opt['template']['style'] . '/search.tpl.inc.php';
+require __DIR__ . '/lib2/web.inc.php';
+require __DIR__ . '/lib2/logic/data-license.inc.php';
+require __DIR__ . '/lib2/search/search.inc.php';
+require __DIR__ . '/templates2/' . $opt['template']['style'] . '/search.tpl.inc.php';
 
 
 //=========================================================
@@ -2240,7 +2240,7 @@ function outputLocidSelectionForm($locSql, $options)
     global $tpl;
     global $locline, $bgcolor1, $bgcolor2;
 
-    require_once 'lib2/logic/geodb.inc.php';
+    require_once __DIR__ . '/lib2/logic/geodb.inc.php';
 
     $urlparamString = prepareLocSelectionForm($options) . '&locid={locid}';
 

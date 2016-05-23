@@ -77,6 +77,9 @@ ServerAdmin root@localhost
 </Directory>
 
 DocumentRoot "/var/www/html/htdocs"
+ErrorDocument 404 /404.php
+RewriteEngine On
+RewriteRule ^/((OC|GC)[A-Za-z0-9]{1,5})\$ /searchplugin.php?userinput=\$1 [NC]
 
 <Directory "/var/www">
     AllowOverride None
@@ -88,6 +91,14 @@ DocumentRoot "/var/www/html/htdocs"
     Options Indexes FollowSymLinks
     AllowOverride None
     Require all granted
+</Directory>
+
+<Directory "/var/www/html/htdocs/statpics">
+    AllowOverride All
+</Directory>
+
+<Directory "/var/www/html/htdocs/okapi">
+    AllowOverride All
 </Directory>
 
 <IfModule dir_module>
@@ -167,10 +178,11 @@ mysql -u root -proot -e "GRANT GRANT OPTION ON \`opencaching\`.* TO 'opencaching
 mysql -u root -proot -e "SET PASSWORD FOR 'opencaching'@'%' = PASSWORD('opencaching');"
 
 
-label "Configure OpenCaching"
+label "Configure Opencaching"
 cd /var/www/html
 cp ./htdocs/config2/settings-sample-vagrant.inc.php ./htdocs/config2/settings.inc.php
 cp ./htdocs/lib/settings-sample-vagrant.inc.php ./htdocs/lib/settings.inc.php
+cp ./htdocs/statpics/htaccess-dist ./htdocs/statpics/.htaccess
 
 
 label "Install Composer"

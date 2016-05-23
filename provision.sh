@@ -143,6 +143,13 @@ AddDefaultCharset UTF-8
 IncludeOptional conf.d/*.conf
 EOF
 
+label "upgrade to php 5.6"
+rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+rpm -Uvh https://mirror.webtatic.com/yum/el7/webtatic-release.rpm
+
+yum -y install yum-plugin-replace
+yum -y replace php-common --replace-with=php56w-common
+
 systemctl restart mariadb
 systemctl restart httpd
 
@@ -183,7 +190,7 @@ chmod 0777 /usr/bin/composer
 
 
 label "Composer install"
-cd /var/www/html/htdocs && composer install --ignore-platform-reqs
+cd /var/www/html/htdocs && composer install
 
 
 label "Install Database Dump from '$DUMP_URL'"

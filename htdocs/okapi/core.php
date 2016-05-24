@@ -1003,8 +1003,8 @@ class Okapi
     public static $server;
 
     /* These two get replaced in automatically deployed packages. */
-    public static $version_number = 1308;
-    public static $git_revision = '4a195cf9df845dc15a58d3d9bbc7a9523d03f2cb';
+    public static $version_number = 1309;
+    public static $git_revision = '0f8eac87fa916ff70a2c7326d9cadcfa0642f28f';
 
     private static $okapi_vars = null;
 
@@ -2424,21 +2424,6 @@ class OkapiHttpRequest extends OkapiRequest
             {
                 throw new BadRequest("This method requires a valid Token to be included (Level 3 ".
                     "Authentication). You didn't provide one.");
-            }
-
-            # revoke access and abort if user account has been disabled;
-            # see https://github.com/opencaching/okapi/issues/432
-
-            if (is_object($this->token)) {
-                $user_id_escaped = Db::escape_string($this->token->user_id);
-                $user_is_active = Db::select_value(
-                    "select is_active_flag from user where user_id='".$user_id_escaped."'"
-                );
-                if ($user_is_active != 1) {
-                    Db::execute("delete from okapi_tokens where user_id = '".$user_id_escaped."'");
-                    Db::execute("delete from okapi_authorizations where user_id = '".$user_id_escaped."'");
-                    throw new BadRequest("User account has been disabled.");
-                }
             }
         }
         else

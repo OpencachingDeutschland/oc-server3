@@ -95,7 +95,11 @@ function cracklib_checkpw($pw, $addwords)
     if ($opt['logic']['cracklib'] == true) {
         // load cracklib
         if (!function_exists('crack_check')) {
-            @dl('crack.so');
+            try {
+                dl('crack.so');
+            } catch (Exception $e) {
+                // @todo implement login
+            }
         }
 
         // cracklib loaded?

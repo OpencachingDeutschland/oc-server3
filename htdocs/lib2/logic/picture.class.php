@@ -438,7 +438,11 @@ class picture
                 $this->setUrl($original_url);        // set the url, so that we can
                 $filename = $this->getFilename();    // .. retreive the file path+name
                 $this->setFilenames($filename);      // now set url(s) from the new uuid
-                @rename($this->deleted_filename($filename), $this->getFilename());
+                try {
+                    rename($this->deleted_filename($filename), $this->getFilename());
+                } catch (Exception $e) {
+                    // @todo implement login
+                }
             }
         }
 
@@ -481,12 +485,24 @@ class picture
 
         // archive picture if picture record has been archived
         if (sql_value("SELECT `id` FROM `pictures_modified` WHERE `id`='&1'", 0, $this->getPictureId()) != 0) {
-            @rename($filename, $this->deleted_filename($filename));
+            try {
+                rename($filename, $this->deleted_filename($filename));
+            } catch (Exception $e) {
+                // @todo implement login
+            }
         } else {
-            @unlink($filename);
+            try {
+                unlink($filename);
+            } catch (Exception $e) {
+                // @todo implement login
+            }
         }
 
-        @unlink($this->getThumbFilename());
+        try {
+            unlink($this->getThumbFilename());
+        } catch (Exception $e) {
+            // @todo implement login
+        }
 
         return true;
     }

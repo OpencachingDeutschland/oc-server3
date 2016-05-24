@@ -205,8 +205,12 @@ class cookie
         global $opt;
         if ($opt['session']['mode'] == SAVE_SESSION) {
             if ($this->session_initalized == true) {
-                if (count($_SESSION) == 0) {
-                    @session_destroy();
+                if (count($_SESSION) === 0) {
+                    try {
+                        session_destroy();
+                    } catch (Exception $e) {
+                        // @todo implement login
+                    }
                 } else {
                     session_write_close();
                 }

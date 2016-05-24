@@ -87,7 +87,17 @@ class TranslationHandler
 
         fclose($f);
 
-        @exec('msgfmt -o ' . escapeshellcmd($opt['rootpath'] . 'cache2/translate/' . $language_lower . '/LC_MESSAGES/messages.mo') . ' ' . escapeshellcmd($opt['rootpath'] . 'cache2/translate/' . $language_lower . '/LC_MESSAGES/messages.po'));
+        try {
+            exec(
+                'msgfmt -o ' . escapeshellcmd(
+                    $opt['rootpath'] . 'cache2/translate/' . $language_lower . '/LC_MESSAGES/messages.mo'
+                ) . ' ' . escapeshellcmd(
+                    $opt['rootpath'] . 'cache2/translate/' . $language_lower . '/LC_MESSAGES/messages.po'
+                )
+            );
+        } catch (Exception $e) {
+            // @todo implement login
+        }
     }
 
     /* escape string for po-file

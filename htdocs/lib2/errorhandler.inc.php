@@ -93,6 +93,7 @@ function php_errormail($errmsg)
 {
     global $opt, $sql_errormail, $absolute_server_URI;
 
+    $sendMail = true;
     $subject = '[' . $opt['page']['domain'] . '] PHP error';
 
     if (isset($opt['db']['error']['mail']) && $opt['db']['error']['mail'] != '') {
@@ -102,7 +103,7 @@ function php_errormail($errmsg)
     }
 
     if ($sendMail === false) {
-       // @todo implement logging 
+        throw new \RuntimeException('the E-Mail can not be send.');
     }
 }
 

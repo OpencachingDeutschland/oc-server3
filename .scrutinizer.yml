@@ -1,10 +1,11 @@
 filter:
     paths:
         - 'htdocs/*'
+        - 'local/*'
     excluded_paths:
         - 'bin/*'
         - 'doc/*'
-        - 'local/*'
+        - 'htdocs/okapi/*'
     dependency_paths:
         - 'htdocs/vendor/*'
 
@@ -16,17 +17,17 @@ checks:
         one_class_per_file: true
         side_effects_or_types: true
         no_mixed_inline_html: false
-        require_braces_around_control_structures: false
+        require_braces_around_control_structures: true
         php5_style_constructor: true
         no_global_keyword: true
         avoid_usage_of_logical_operators: true
         psr2_class_declaration: true
-        no_underscore_prefix_in_properties: false
-        no_underscore_prefix_in_methods: false
+        no_underscore_prefix_in_properties: true
+        no_underscore_prefix_in_methods: true
         blank_line_after_namespace_declaration: true
-        single_namespace_per_use: false
+        single_namespace_per_use: true
         psr2_switch_declaration: true
-        psr2_control_structure_declaration: false
+        psr2_control_structure_declaration: true
         avoid_superglobals: false
         security_vulnerabilities: true
         no_exit: false
@@ -80,10 +81,10 @@ coding_style:
             around_operators:
                 concatenation: false
             ternary_operator:
-                before_condition: false
-                after_condition: false
-                before_alternative: false
-                after_alternative: false
+                before_condition: true
+                after_condition: true
+                before_alternative: true
+                after_alternative: true
             other:
                 after_type_cast: false
         braces:

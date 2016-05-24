@@ -31,7 +31,7 @@ function errorhandler($errno, $errstr, $errfile, $errline)
         $errtitle = "PHP-Fehler";
 
         $error = "($errno) $errstr at line $errline in $errfile";
-        send_errormail($error);
+        php_errormail($error);
 
         if (display_error()) {
             $errmsg = $error;
@@ -69,7 +69,7 @@ function shutdownhandler()
 
         $error = "(" . $error['type'] . ") " . $error['message'] .
             " at line " . $error['line'] . " of " . $error['file'];
-        send_errormail($error);
+        php_errormail($error);
 
         $errtitle = "PHP-Fehler";
         $errmsg = "";
@@ -89,14 +89,16 @@ function display_error()
     (isset($debug_page) && $debug_page);
 }
 
-function send_errormail($errmsg)
+function php_errormail($errmsg)
 {
     global $opt, $sql_errormail, $absolute_server_URI;
 
+    $subject = '[' . $opt['page']['domain'] . '] PHP error';
+
     if (isset($opt['db']['error']['mail']) && $opt['db']['error']['mail'] != '') {
-        @mb_send_mail($opt['db']['error']['mail'], $opt['mail']['subject'] . " PHP error", $errmsg);
+        @mb_send_mail($opt['db']['error']['mail'], $subject, $errmsg);
     } elseif (isset($sql_errormail) && $sql_errormail != '') {
-        @mb_send_mail($sql_errormail, "[" . $opt['page']['domain'] . "] PHP error", $errmsg);
+        @mb_send_mail($sql_errormail, $subject, $errmsg);
     }
 }
 

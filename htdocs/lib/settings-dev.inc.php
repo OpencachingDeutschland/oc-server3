@@ -65,6 +65,10 @@ set_absolute_urls(
     1
 );
 
+// display error messages on the website - not recommended for productive use!
+$opt['db']['error']['display'] = true;
+$opt['db']['error']['mail'] = 'root';
+
 // EMail address of the sender and team
 if (!isset($maildomain)) {
     $maildomain = 'local.opencaching.de';

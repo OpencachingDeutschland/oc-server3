@@ -63,9 +63,7 @@ foreach ($opt['page']['banned_user_agents'] as $ua) {
 
 // basic PHP settings
 date_default_timezone_set($timezone);
-if ($debug_page) {
-    register_errorhandlers();
-}  // not for production use yet, must be tested
+register_errorhandlers();
 
 $dblink_slave = false;
 $db_error = 0;

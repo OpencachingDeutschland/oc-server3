@@ -105,11 +105,6 @@ $opt['db']['warn']['time'] = 0;
 $opt['db']['warn']['mail'] = 'developer@devel.opencaching.de'; // set '' to disable
 $opt['db']['warn']['subject'] = 'sql_warn';
 
-// display mysql error messages on the website - not recommended for productive use!
-$opt['db']['error']['display'] = false;
-$opt['db']['error']['mail'] = 'developer@devel.opencaching.de'; // set '' to disable
-$opt['db']['error']['subject'] = 'sql_error';
-
 // database placeholder
 
 // productive database with opencaching-tables

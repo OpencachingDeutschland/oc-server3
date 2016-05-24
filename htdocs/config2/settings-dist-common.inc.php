@@ -4,18 +4,22 @@
  *
  *  Unicode Reminder メモ
  *
- * Settings shared by all configurations of lib1 and lib2.
- * See also locale.inc.php, which is included in both lib1 and lib2.
+ *  Settings shared by all configurations of lib1 and lib2.
+ *  See also locale.inc.php, which is included in both lib1 and lib2.
  ***************************************************************************/
 
 /* Database charset
-   *   Frontend and PHP charsets are UTF-8.
-   *   MySQL database default charset is 'utf8' (16 bit restricted Unicode).
-   *   For MySQL or MariaDB >= 5.5, this can be changed to 'utf8mb4' (21 bit full Unicode).
-   *   bin/dbsv-update.php will then migrate the tables' charset.
-   */
+ *   Frontend and PHP charsets are UTF-8.
+ *   MySQL database default charset is 'utf8' (16 bit restricted Unicode).
+ *   For MySQL or MariaDB >= 5.5, this can be changed to 'utf8mb4' (21 bit full Unicode).
+ *   bin/dbsv-update.php will then migrate the tables' charset.
+ */
 $opt['charset']['iconv'] = 'UTF-8'; // 'ISO-8859-1'; // use iconv compatible charset-name
 $opt['charset']['mysql'] = 'utf8';     // use mysql compatible charset-name
+
+// handling of SQL and PHP errors
+$opt['db']['error']['display'] = false;
+$opt['db']['error']['mail'] = 'root';  // set '' to disable
 
 // page title
 $opt['page']['title'] = 'OPENCACHING';

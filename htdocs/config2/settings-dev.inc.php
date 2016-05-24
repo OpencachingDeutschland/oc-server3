@@ -44,10 +44,9 @@ $opt['db']['warn']['time'] = 0;
 $opt['db']['warn']['mail'] = 'root';
 $opt['db']['warn']['subject'] = 'sql_warn';
 
-// display mysql error messages on the website - not recommended for productive use!
+// display error messages on the website - not recommended for productive use!
 $opt['db']['error']['display'] = true;
 $opt['db']['error']['mail'] = 'root';
-$opt['db']['error']['subject'] = 'sql_error';
 
 /* Debug level (combine with OR | )
  *  DEBUG_NO              = productive use

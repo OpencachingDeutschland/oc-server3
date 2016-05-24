@@ -356,6 +356,7 @@ if ($queryid != 0) {
     } elseif (isset($_REQUEST['searchbylist'])) {
         $options['searchtype'] = 'bylist';
         $options['listid'] = isset($_REQUEST['listid']) ? $_REQUEST['listid'] + 0 : 0;
+        $invalid_waypoints = isset($_REQUEST['invalidwp']) ? $_REQUEST['invalidwp'] : false;
 
         $password = isset($_REQUEST['listkey']) ? $_REQUEST['listkey'] : '';
         $list = new cachelist($options['listid']);
@@ -1498,21 +1499,22 @@ if ($options['showresult'] == 1) {
         //
         //  The following variables from search.php are used by output modules:
         //
-        //    $called_by_search
-        //    $called_by_profile_query
-        //    $distance_unit
-        //    $lat_rad, $lon_rad
-        //    $startat
-        //    $count
-        //    $caches_per_page
-        //    $sql
-        //    $sqlLimit
-        //    $options['sort']
-        //    $options['sortorder']
-        //    $options['creationdate']
-        //    $options['queryid']
+        //      $called_by_search
+        //      $called_by_profile_query
+        //      $distance_unit
+        //      $lat_rad, $lon_rad
+        //      $startat
+        //      $count
+        //      $caches_per_page
+        //      $sql
+        //      $sqlLimit
+        //      $options['sort']
+        //      $options['sortorder']
+        //      $options['creationdate']
+        //      $options['queryid']
         //      $options['query_name']
-        //    $enable_mapdisplay
+        //      $enable_mapdisplay
+        //      $invalid_waypoints
         //=================================================================
 
         search_output();

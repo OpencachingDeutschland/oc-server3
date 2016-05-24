@@ -48,6 +48,10 @@
     </div>
 {/if}
 
+{if $invalid_waypoints}
+    <p class="errormsg">{t}The following waypoints are invalid and could not be added to the list:{/t}&nbsp; {$invalid_waypoints|escape}</p>
+{/if}
+
 <div class="content2-container bg-blue02" style="margin-top:20px;">
     <table cellspacing="0" cellpadding="0" width="100%" border="0"><tr>
         <td style="white-space:nowrap; min-width:150px">

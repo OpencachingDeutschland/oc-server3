@@ -34,6 +34,7 @@ if (isset($_REQUEST['descMode'])) {
 
 $edit_list = false;
 $name_error = false;
+$invalid_waypoints = false;
 
 // open a 'create new list' form
 if (isset($_REQUEST['new'])) {
@@ -62,7 +63,8 @@ if (isset($_REQUEST['create'])) {
         if ($list->save()) {
             if ($list_caches != '') {
                 $result = $list->addCachesByWPs($list_caches);
-                $tpl->assign('invalid_waypoints', $result === true ? false : implode(", ", $result));
+                $invalid_waypoints = ($result === true ? false : implode(', ', $result));
+                $tpl->assign('invalid_waypoints', $invalid_waypoints);
             }
             if ($watch) {
                 $list->watch(true);
@@ -118,7 +120,8 @@ if (isset($_REQUEST['save']) && isset($_REQUEST['listid'])) {
         $list->watch($watch);
         if ($list_caches != '') {
             $result = $list->addCachesByWPs($list_caches);
-            $tpl->assign('invalid_waypoints', $result === true ? false : implode(", ", $result));
+            $invalid_waypoints = ($result === true ? false : implode(', ', $result));
+            $tpl->assign('invalid_waypoints', $invalid_waypoints);
             $list_caches = '';
         }
         foreach ($_REQUEST as $key => $value) {
@@ -149,7 +152,8 @@ if (isset($_REQUEST['unbookmark'])) {
 
 // redirect to list search output after editing a list from the search output page
 if ($fromsearch && !$switchDescMode && !$name_error && isset($_REQUEST['listid'])) {
-    $tpl->redirect('cachelist.php?id=' . ($_REQUEST['listid'] + 0));
+    $iwp = ($invalid_waypoints ? '&invalidwp=' . urlencode($invalid_waypoints) : '');
+    $tpl->redirect('cachelist.php?id=' . ($_REQUEST['listid'] + 0) . $iwp);
 }
 
 // prepare editor and editing

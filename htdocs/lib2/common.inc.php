@@ -154,8 +154,6 @@ function configure_php()
 		ini_set('mysql.trace_mode', true);
 			// SQL_CALC_FOUND_ROWS will not work with trace_mode on!
 			// Use the next two functions below as workaround.
-
-		// not for production use yet (has to be tested thoroughly)
 		register_errorhandlers();
 	}
 	else
@@ -163,6 +161,7 @@ function configure_php()
 		ini_set('display_errors', false);
 		ini_set('error_reporting', E_ALL & ~E_NOTICE);
 		ini_set('mysql.trace_mode', false);
+		register_errorhandlers();
 	}
 }
 

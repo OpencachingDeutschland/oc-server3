@@ -968,14 +968,15 @@
 
 		if ($opt['db']['error']['mail'] != '')
 		{
+			$subject = '[' . $opt['page']['domain'] . '] SQL error';
 			if (admin_errormail($opt['db']['error']['mail'],
-			                    $opt['db']['error']['subject'],
+			                    $subject,
 			                    str_replace("\n","\r\n",$error) . "\n" . print_r(debug_backtrace(), true),
 			                    "From: ".$opt['mail']['from']))
 			{
 				require_once($opt['rootpath'] . 'lib2/mail.class.php');
 				$mail = new mail();
-				$mail->subject = $opt['db']['error']['subject'];
+				$mail->subject = $subject;
 				$mail->to = $opt['db']['error']['mail'];
 
 				$mail->name = 'sql_error';
@@ -1022,15 +1023,16 @@
 
 		if ($opt['db']['error']['mail'] != '')
 		{
+			$subject = '[' . $opt['page']['domain'] . '] SQL error';
 			if (admin_errormail($opt['db']['error']['mail'],
-			                    $opt['db']['warn']['subject'],
+			                    $subject,
 			                    $warnmessage . "\n" . print_r(debug_backtrace(), true),
 			                    "From: ".$opt['mail']['from']))
 			{
 				require_once($opt['rootpath'] . 'lib2/mail.class.php');
 				$mail = new mail();
 				$mail->name = 'sql_warn';
-				$mail->subject = $opt['db']['warn']['subject'];
+				$mail->subject = $subject;
 				$mail->to = $opt['db']['warn']['mail'];
 
 				$mail->assign('warnmessage', $warnmessage);

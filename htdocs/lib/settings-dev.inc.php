@@ -55,6 +55,10 @@
 		isset($dev_shortlink_domain) ? $dev_shortlink_domain : 'opencaching.de',
 		1);
 	
+	// display error messages on the website - not recommended for productive use!
+	$opt['db']['error']['display'] = true;
+	$opt['db']['error']['mail'] = 'root';
+
 	// EMail address of the sender and team
 	if (!isset($maildomain)) $maildomain  = 'local.opencaching.de';
 	if (!isset($emailaddr)) $emailaddr = 'root@' . $maildomain;

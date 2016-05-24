@@ -417,6 +417,7 @@ td div.mediumspacer { height:6px; }
 .boldtext { font-weight:bold; color:#505050; }
 .smalltext { font-size:10px !important; line-height:1.4em; }
 .mediumsmalltext { font-size:11px !important; }
+.truncate { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
 div.default { font-size:110%; }
 td.default { font-size:12px; }
@@ -1001,8 +1002,10 @@ div.searchdiv2 td.fieldlabel {
 
 .searchtable th {margin: 0px; color: #404040; padding: 4px 0px 4px 0px; empty-cells: show; text-align: left; font-size: 12px;  background: #d8e5c6 url(../images/page/listheader-bg.png) repeat-x; background-size:contain; }
 .searchtable td { padding-top:2px; }
+.searchtable p { max-width: 435px; }
 td.search_listcolor1 { background:#fff; }
 td.search_listcolor2 { background:#f0f0f0; }
+
 
 .newsymbol { background:#ff9d11; color:#fff; font-size:0.9em; }
 

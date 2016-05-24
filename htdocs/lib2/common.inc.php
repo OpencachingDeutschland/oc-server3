@@ -42,9 +42,6 @@ if (count($ua_matches) > 1) {
 mb_internal_encoding('UTF-8');
 mb_regex_encoding('UTF-8');
 
-// if magic_quotes is enabled, fix it
-fix_magic_quotes_gpc();
-
 // set options
 require_once $opt['rootpath'] . 'config2/settings-dist.inc.php';
 require_once $opt['rootpath'] . 'config2/settings.inc.php';
@@ -267,71 +264,6 @@ function check_useragent()
     // are we Ocprop?
     $ocpropping = isset($_SERVER['HTTP_USER_AGENT']) && strpos($_SERVER['HTTP_USER_AGENT'], "Ocprop/") !== false;
 }
-
-function fix_magic_quotes_gpc()
-{
-    // Disable magic_quotes_runtime
-    @set_magic_quotes_runtime(0);
-
-    if (get_magic_quotes_gpc()) {
-        if (is_array($_GET)) {
-            while (list($k, $v) = each($_GET)) {
-                if (is_array($_GET[$k])) {
-                    while (list($k2, $v2) = each($_GET[$k])) {
-                        $_GET[$k][$k2] = stripslashes($v2);
-                    }
-                    @reset($_GET[$k]);
-                } else {
-                    $_GET[$k] = stripslashes($v);
-                }
-            }
-            @reset($_GET);
-        }
-
-        if (is_array($_POST)) {
-            while (list($k, $v) = each($_POST)) {
-                if (is_array($_POST[$k])) {
-                    while (list($k2, $v2) = each($_POST[$k])) {
-                        $_POST[$k][$k2] = stripslashes($v2);
-                    }
-                    @reset($_POST[$k]);
-                } else {
-                    $_POST[$k] = stripslashes($v);
-                }
-            }
-            @reset($_POST);
-        }
-
-        if (is_array($_REQUEST)) {
-            while (list($k, $v) = each($_REQUEST)) {
-                if (is_array($_REQUEST[$k])) {
-                    while (list($k2, $v2) = each($_REQUEST[$k])) {
-                        $_REQUEST[$k][$k2] = stripslashes($v2);
-                    }
-                    @reset($_REQUEST[$k]);
-                } else {
-                    $_REQUEST[$k] = stripslashes($v);
-                }
-            }
-            @reset($_REQUEST);
-        }
-
-        if (is_array($_COOKIE)) {
-            while (list($k, $v) = each($_COOKIE)) {
-                if (is_array($_COOKIE[$k])) {
-                    while (list($k2, $v2) = each($_COOKIE[$k])) {
-                        $_COOKIE[$k][$k2] = stripslashes($v2);
-                    }
-                    @reset($_COOKIE[$k]);
-                } else {
-                    $_COOKIE[$k] = stripslashes($v);
-                }
-            }
-            @reset($_COOKIE);
-        }
-    }
-}
-
 
 // Exchange the protocol (http or https) in an URL to *this* website to the
 // protocol of the current request. Do not change external links.

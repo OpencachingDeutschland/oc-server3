@@ -32,53 +32,6 @@ tpl_set_var('css', 'main.css');
 //detecting errors
 $error = false;
 
-//no slashes in variables! originally from phpBB2 copied
-@set_magic_quotes_runtime(0); // Disable magic_quotes_runtime
-
-if (get_magic_quotes_gpc()) {
-    if (is_array($_GET)) {
-        while (list($k, $v) = each($_GET)) {
-            if (is_array($_GET[$k])) {
-                while (list($k2, $v2) = each($_GET[$k])) {
-                    $_GET[$k][$k2] = stripslashes($v2);
-                }
-                @reset($_GET[$k]);
-            } else {
-                $_GET[$k] = stripslashes($v);
-            }
-        }
-        @reset($_GET);
-    }
-
-    if (is_array($_POST)) {
-        while (list($k, $v) = each($_POST)) {
-            if (is_array($_POST[$k])) {
-                while (list($k2, $v2) = each($_POST[$k])) {
-                    $_POST[$k][$k2] = stripslashes($v2);
-                }
-                @reset($_POST[$k]);
-            } else {
-                $_POST[$k] = stripslashes($v);
-            }
-        }
-        @reset($_POST);
-    }
-
-    if (is_array($HTTP_COOKIE_VARS)) {
-        while (list($k, $v) = each($HTTP_COOKIE_VARS)) {
-            if (is_array($HTTP_COOKIE_VARS[$k])) {
-                while (list($k2, $v2) = each($HTTP_COOKIE_VARS[$k])) {
-                    $HTTP_COOKIE_VARS[$k][$k2] = stripslashes($v2);
-                }
-                @reset($HTTP_COOKIE_VARS[$k]);
-            } else {
-                $HTTP_COOKIE_VARS[$k] = stripslashes($v);
-            }
-        }
-        @reset($HTTP_COOKIE_VARS);
-    }
-}
-
 if (!isset($rootpath)) {
     $rootpath = './';
 }

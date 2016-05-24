@@ -96,9 +96,13 @@ function php_errormail($errmsg)
     $subject = '[' . $opt['page']['domain'] . '] PHP error';
 
     if (isset($opt['db']['error']['mail']) && $opt['db']['error']['mail'] != '') {
-        @mb_send_mail($opt['db']['error']['mail'], $subject, $errmsg);
+        $sendMail = mb_send_mail($opt['db']['error']['mail'], $subject, $errmsg);
     } elseif (isset($sql_errormail) && $sql_errormail != '') {
-        @mb_send_mail($sql_errormail, $subject, $errmsg);
+        $sendMail = mb_send_mail($sql_errormail, $subject, $errmsg);
+    }
+
+    if ($sendMail === false) {
+       // @todo implement logging 
     }
 }
 

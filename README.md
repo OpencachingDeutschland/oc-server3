@@ -1,3 +1,4 @@
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/OpencachingDeutschland/oc-server3/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/OpencachingDeutschland/oc-server3/?branch=master)
 Opencaching.de Code Repository
 ==============================
 

@@ -6,6 +6,8 @@ filter:
         - 'bin/*'
         - 'doc/*'
         - 'htdocs/okapi/*'
+        - 'htdocs/resource2/tinymce/*'
+        - 'htdocs/templates2/*'
     dependency_paths:
         - 'htdocs/vendor/*'
 

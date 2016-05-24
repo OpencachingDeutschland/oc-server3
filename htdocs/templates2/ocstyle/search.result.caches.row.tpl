@@ -35,7 +35,7 @@
     <td class="{$listcolor}">&nbsp;</td>
     <td class="{$listcolor}" valign="top">{if $cache.direction_deg !== false}<img src="resource2/ocstyle/images/direction/16x16-{$cache.direction_deg}deg.png" title="{t}Cardinal direction:{/t} {$cache.direction_txt}" />&nbsp;{/if}</td>
     <td class="{$listcolor}" colspan="2" valign="top">
-    <p>
+    <p class="truncate">
         {strip}
             {if $cache.topratings<4}
                 {if $cache.topratings>0}<img src="images/rating-star.gif" title="{t}Recommendations{/t}" width="14" height="13" style="margin-top: -3px;"/>{/if}

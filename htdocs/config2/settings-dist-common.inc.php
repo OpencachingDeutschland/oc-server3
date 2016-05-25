@@ -320,7 +320,6 @@ function cronjobs_enabled()
     global $opt;
 
     return $opt['cron']['debug'] ||
-    // @file_get_contents($opt['page']['absolute_http_url'] . 'register.php') !== false;
     // -- This will not work if the server is access protected.
     exec('ps -C httpd|grep httpd');
 }

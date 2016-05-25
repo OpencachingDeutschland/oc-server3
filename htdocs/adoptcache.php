@@ -61,7 +61,7 @@ if ($action == 'listbycache') {
     } else {
         showAdoptScreen($cacheid, $submit);
     }
-} else { // if ($action == 'listbyuser')
+} else {
     $tpl->assign('action', 'listbyuser');
     listRequestsByUserId();
 }

@@ -11,7 +11,7 @@ $dev_codepath = 'oc-server/server-3.0/';
 $dev_baseurl = 'http://local.opencaching.de/oc-server/server-3.0/htdocs';
 
 // common developer system settings
-require 'settings-dev.inc.php';
+require __DIR__ . '/settings-dev.inc.php';
 
 // database access
 $opt['db']['servername'] = 'localhost';

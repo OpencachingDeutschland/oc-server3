@@ -19,7 +19,7 @@ if (($login->admin & ADMIN_MAINTAINANCE) != ADMIN_MAINTAINANCE) {
     $tpl->error(ERROR_NO_ACCESS);
 }
 
-$procedures = array();
+$procedures = [];
 $procedures[] = 'sp_updateall_caches_descLanguages';
 $procedures[] = 'sp_updateall_logstat';
 $procedures[] = 'sp_updateall_hiddenstat';
@@ -38,37 +38,47 @@ $tpl->assign('procedures', $procedures);
 if (isset($_REQUEST['ok'])) {
     $proc = isset($_REQUEST['action']) ? $_REQUEST['action'] : '';
 
-//        if (sql_connect_maintenance() == false)
-//            $tpl->error(ERROR_DB_NO_ROOT);
-
-    // @todo change if to switch/case
     $bError = false;
-    if ($proc == 'sp_updateall_caches_descLanguages') {
-        sql("CALL sp_updateall_caches_descLanguages(@c)");
-    } elseif ($proc == 'sp_updateall_logstat') {
-        sql("CALL sp_updateall_logstat(@c)");
-    } elseif ($proc == 'sp_updateall_hiddenstat') {
-        sql("CALL sp_updateall_hiddenstat(@c)");
-    } elseif ($proc == 'sp_updateall_watchstat') {
-        sql("CALL sp_updateall_watchstat(@c)");
-    } elseif ($proc == 'sp_updateall_ignorestat') {
-        sql("CALL sp_updateall_ignorestat(@c)");
-    } elseif ($proc == 'sp_updateall_topratingstat') {
-        sql("CALL sp_updateall_topratingstat(@c)");
-    } elseif ($proc == 'sp_updateall_cache_picturestat') {
-        sql("CALL sp_updateall_cache_picturestat(@c)");
-    } elseif ($proc == 'sp_updateall_cachelog_picturestat') {
-        sql("CALL sp_updateall_cachelog_picturestat(@c)");
-    } elseif ($proc == 'sp_updateall_cache_listingdates') {
-        sql("CALL sp_updateall_cache_listingdates(@c)");
-    } elseif ($proc == 'sp_updateall_cachelog_logdates') {
-        sql("CALL sp_updateall_cachelog_logdates(@c)");
-    } elseif ($proc == 'sp_updateall_rating_dates') {
-        sql("CALL sp_updateall_rating_dates(@c)");
-    } elseif ($proc == 'sp_updateall_cachelist_counts') {
-        sql("CALL sp_updateall_cachelist_counts(@c)");
-    } else {
-        $bError = true;
+    switch ($proc) {
+        case 'sp_updateall_caches_descLanguages':
+            sql("CALL sp_updateall_caches_descLanguages(@c)");
+            break;
+        case 'sp_updateall_logstat':
+            sql("CALL sp_updateall_logstat(@c)");
+            break;
+        case 'sp_updateall_hiddenstat':
+            sql("CALL sp_updateall_hiddenstat(@c)");
+            break;
+        case 'sp_updateall_watchstat':
+            sql("CALL sp_updateall_watchstat(@c)");
+            break;
+        case 'sp_updateall_ignorestat':
+            sql("CALL sp_updateall_ignorestat(@c)");
+            break;
+        case 'sp_updateall_topratingstat':
+            sql("CALL sp_updateall_topratingstat(@c)");
+            break;
+        case 'sp_updateall_cache_picturestat':
+            sql("CALL sp_updateall_cache_picturestat(@c)");
+            break;
+        case 'sp_updateall_cachelog_picturestat':
+            sql("CALL sp_updateall_cachelog_picturestat(@c)");
+            break;
+        case 'sp_updateall_cache_listingdates':
+            sql("CALL sp_updateall_cache_listingdates(@c)");
+            break;
+        case 'sp_updateall_cachelog_logdates':
+            sql("CALL sp_updateall_cachelog_logdates(@c)");
+            break;
+        case 'sp_updateall_rating_dates':
+            sql("CALL sp_updateall_rating_dates(@c)");
+            break;
+        case 'sp_updateall_cachelist_counts':
+            sql("CALL sp_updateall_cachelist_counts(@c)");
+            break;
+        default:
+            $bError = true;
+            break;
     }
 
     if ($bError === false) {

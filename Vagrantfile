@@ -71,5 +71,5 @@ Vagrant.configure(2) do |config|
 	end
 
 	config.ssh.insert_key = false
-	config.vm.provision "shell", path: "provision.sh"
+	config.vm.provision "shell", path: "bin/provision.sh"
 end

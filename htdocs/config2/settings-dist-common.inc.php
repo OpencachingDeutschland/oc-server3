@@ -319,7 +319,9 @@ function cronjobs_enabled()
 {
     global $opt;
 
-    return $opt['cron']['debug'] ||
-    // -- This will not work if the server is access protected.
-    exec('ps -C httpd|grep httpd');
+    // @todo: replace the 'ps' hack by something more reliable.
+    // Note that the site may be htaccess-password protected (e.g. private
+    // test site), so a simple file_get_contents(page-url) may not work.
+
+    return $opt['cron']['debug'] || exec('ps -C httpd|grep httpd');
 }

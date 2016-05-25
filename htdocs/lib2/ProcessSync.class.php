@@ -100,5 +100,4 @@ class ProcessSync
             echo $message . "\n";
         }
     }
-
 }

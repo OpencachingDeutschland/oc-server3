@@ -24,8 +24,9 @@ $tpl->caching = false;
 
 // check login
 $login->verify();
-if ($login->userid == 0)
+if ($login->userid == 0) {
     $tpl->redirect_login();
+}
 
 // get cache_id if not given
 $cacheId = 0;
@@ -216,8 +217,7 @@ if ($cacheId != 0) {
     $validate['duplicateLog'] = true;
 
     // all checks done, no error => log
-    if (isset($_POST['submitform']) && $loggable)  // Ocprop
-    {
+    if (isset($_POST['submitform']) && $loggable) {  // Ocprop
         /*
          * check if time is logged
          * set seconds 00:00:01, means "00:00 was logged"
@@ -326,12 +326,17 @@ if ($cacheId != 0) {
     $tpl->assign('smileypath', $opt['template']['smiley']);
 
     // DNF state
-    $dnf_by_logger = sql_value("
-            SELECT `type` FROM `cache_logs`
-            WHERE `cache_id`='&1' AND `user_id`='&2' AND `type` IN (1,2)
-            ORDER BY `order_date` DESC, `date_created` DESC, `id` DESC
-            LIMIT 1",
-            0, $cache->getCacheId(), $login->userid) == 2;
+    $dnf_by_logger =
+        sql_value(
+            "SELECT `type`
+             FROM `cache_logs`
+             WHERE `cache_id`='&1' AND `user_id`='&2' AND `type` IN (1,2)
+             ORDER BY `order_date` DESC, `date_created` DESC, `id` DESC
+             LIMIT 1",
+            0,
+            $cache->getCacheId(),
+            $login->userid
+        ) == 2;
     $tpl->assign('dnf_by_logger', $dnf_by_logger);
 } else {
     // not loggable

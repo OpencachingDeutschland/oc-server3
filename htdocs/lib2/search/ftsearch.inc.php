@@ -500,7 +500,8 @@ function ftsearch_set_entries($object_type, $object_id, $cache_id, &$text, $last
             $object_type,
             $cache_id,
             $h,
-            1);
+            1
+        );
     }
     sql(
         "INSERT INTO `search_index_times` (`object_id`, `object_type`, `last_refresh`)

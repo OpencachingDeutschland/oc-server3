@@ -184,8 +184,8 @@ function search_output()
 
     $user_id = $login->userid;
 
-    $rs = sql_slave("
-        SELECT SQL_BUFFER_RESULT
+    $rs = sql_slave(
+        "SELECT SQL_BUFFER_RESULT
             &searchtmp.`cache_id` `cacheid`,
             &searchtmp.`longitude` `longitude`,
             &searchtmp.`latitude` `latitude`,
@@ -211,15 +211,15 @@ function search_output()
             `user`.`username` `username`,
             `user`.`data_license`,
             IFNULL(`stat_cache_logs`.`found`, 0) `found`
-        FROM &searchtmp
-        INNER JOIN `caches` ON &searchtmp.`cache_id`=`caches`.`cache_id`
-        INNER JOIN `countries` ON `caches`.`country`=`countries`.`short`
-        INNER JOIN `user` ON &searchtmp.`user_id`=`user`.`user_id`
-        INNER JOIN `cache_desc`
+         FROM &searchtmp
+         INNER JOIN `caches` ON &searchtmp.`cache_id`=`caches`.`cache_id`
+         INNER JOIN `countries` ON `caches`.`country`=`countries`.`short`
+         INNER JOIN `user` ON &searchtmp.`user_id`=`user`.`user_id`
+         INNER JOIN `cache_desc`
             ON `caches`.`cache_id`=`cache_desc`.`cache_id`
             AND `caches`.`default_desclang`=`cache_desc`.`language`
-        LEFT JOIN `cache_location` ON &searchtmp.`cache_id`=`cache_location`.`cache_id`
-        LEFT JOIN `stat_cache_logs`
+         LEFT JOIN `cache_location` ON &searchtmp.`cache_id`=`cache_location`.`cache_id`
+         LEFT JOIN `stat_cache_logs`
             ON &searchtmp.`cache_id`=`stat_cache_logs`.`cache_id`
             AND `stat_cache_logs`.`user_id`='&1'",
         $user_id

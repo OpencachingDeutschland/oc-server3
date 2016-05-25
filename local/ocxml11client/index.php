@@ -729,7 +729,6 @@ function ImportCacheArray($r)
                 $r['WAYPOINTS']['__ATTR']['OC'],
                 $r['ID']['__DATA']
             );
-
         }
     } else {
         // userid ermitteln
@@ -996,10 +995,9 @@ function ImportCachelogArray($r)
 
     // logtype gültig?
     if (sqlValue(
-            "SELECT COUNT(*) FROM `log_types` WHERE `id`='" . sql_escape($r['LOGTYPE']['__ATTR']['ID']) . "'",
-            0
-        ) == 0
-    ) {
+        "SELECT COUNT(*) FROM `log_types` WHERE `id`='" . sql_escape($r['LOGTYPE']['__ATTR']['ID']) . "'",
+        0
+    ) == 0) {
         importError('cachelog', $r['ID']['__DATA'], $r, 'Logtype not valid, skipping');
 
         return;

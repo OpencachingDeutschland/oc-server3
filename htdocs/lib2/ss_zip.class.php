@@ -140,21 +140,22 @@ class ss_zip
             $crc = 0;
             $gzdata = '';
             $gzsize = 0;
-
         }
+
         $fnl = strlen($filename);
         $fh = "\x14\x00";    // ver needed to extract
         $fh .= "\x00\x00";    // gen purpose bit flag
         $fh .= "\x08\x00";    // compression method
         $fh .= "\x00\x00\x00\x00"; // last mod time and date
-        $fh .= pack(
-            "V3v2",
-            $crc, //crc
-            $gzsize, //c size
-            $datasize, //unc size
-            $fnl, //fname lenght
-            0 //extra field length
-        );
+        $fh .=
+            pack(
+                "V3v2",
+                $crc, //crc
+                $gzsize, //c size
+                $datasize, //unc size
+                $fnl, //fname lenght
+                0 //extra field length
+            );
 
 
         //local file header
@@ -166,7 +167,8 @@ class ss_zip
         $this->zipdata[] = $zipdata;
         //Central Directory Record
         $cdir = "PK\x01\x02";
-        $cdir .= pack(
+        $cdir .=
+            pack(
                 "va*v3V2",
                 0,
                 $fh,

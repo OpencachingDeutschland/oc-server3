@@ -19,7 +19,7 @@ $zipper['zip'] = 'nice --adjustment=19 zip -j -q -1 {dst} {src}';
 $zipper['gzip'] = 'nice --adjustment=19 gzip -1 -c {src} > {dst}';
 $zipper['bzip2'] = 'nice --adjustment=19 bzip2 -1 -c {src} > {dst}';
 
-if ($argv[1] == '--help') {
+if ($argc < 4 || $argv[1] == '--help') {
     echo $argv[0] . " --type=<ziptype> --src=<source> --dst=<destination>
 --type   can be zip, gzip or bzip2
 --src    relative* path to source file
@@ -30,11 +30,9 @@ if ($argv[1] == '--help') {
     exit;
 }
 
-if ((substr($argv[1], 0, 7) != '--type=') || (substr($argv[2], 0, 6) != '--src=') || (substr(
-            $argv[3],
-            0,
-            6
-        ) != '--dst=')
+if ((substr($argv[1], 0, 7) != '--type=') ||
+    (substr($argv[2], 0, 6) != '--src=') ||
+    (substr($argv[3], 0, 6) != '--dst=')
 ) {
     die("wrong paramter\nuse " . $argv[0] . " --help\n");
 }

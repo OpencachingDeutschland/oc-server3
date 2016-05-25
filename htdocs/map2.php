@@ -487,8 +487,7 @@ function output_searchresult(
     $cachenames,
     $smallmap,
     $showlockedcaches
-)
-{
+) {
     global $login, $opt, $useragent_msie;
 
     // check if data is available and connect the right slave server
@@ -622,14 +621,17 @@ function output_searchresult(
                 $flags |= 16;
             }
             if ($compact) {
-                echo '<c d="' .
-                    xmlentities(
+                echo
+                    '<c d="'
+                    . xmlentities(
                         $r['wp_oc'] . '/' . round($r['longitude'], 5) . '/' .
-                        round($r['latitude'], 5) . '/' . $r['type'] . '/' . $flags) . '"' .
-                    (isset($r['cachename']) ? ' n="' . xmlentities($r['cachename']) . '"' : '') .
-                    ' />';
+                        round($r['latitude'], 5) . '/' . $r['type'] . '/' . $flags
+                    ) . '"'
+                    . (isset($r['cachename']) ? ' n="' . xmlentities($r['cachename']) . '"' : '')
+                    . ' />';
             } else {
-                echo '<cache wp="' . xmlentities($r['wp_oc']) . '"' .
+                echo
+                    '<cache wp="' . xmlentities($r['wp_oc']) . '"' .
                     ' lon="' . xmlentities(round($r['longitude'], 5)) . '"' .
                     ' lat="' . xmlentities(round($r['latitude'], 5)) . '"' .
                     ' type="' . xmlentities($r['type']) . '"' .

@@ -84,7 +84,7 @@ function process_new_cache($notify)
 
     // fetch email template
     switch ($notify['type']) {
-        case notify_new_cache: // Type: new cache
+        case NOTIFY_NEW_CACHE: // Type: new cache
             $mailbody = fetch_email_template('notify_newcache', $notify['recp_lang'], $notify['recp_domain']);
             $mailsubject = '[' . $maildomain . '] ' .
                 $translate->t(
@@ -99,7 +99,7 @@ function process_new_cache($notify)
                 ' ' . $notify['cachename'];
             break;
 
-        case notify_new_oconly: // Type: new OConly flag
+        case NOTIFY_NEW_OCONLY: // Type: new OConly flag
             $mailbody = fetch_email_template('notify_newoconly', $notify['recp_lang'], $notify['recp_domain']);
             $mailsubject = '[' . $maildomain . '] ' .
                 $translate->t(

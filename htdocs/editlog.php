@@ -152,16 +152,17 @@ if ($error == false) {
                     0
                 );
 
-                if ($is_top || ($user_tops < floor($user_founds * rating_percentage / 100))) {
+                $rating_percentage = $opt['logic']['rating']['percentageOfFounds'];
+                if ($is_top || ($user_tops < floor($user_founds * $rating_percentage / 100))) {
                     $rating_msg = mb_ereg_replace(
                         '{chk_sel}',
                         ($is_top ? 'checked' : ''),
                         $rating_allowed . '<br />' . $rating_stat
                     );
-                    $rating_msg = mb_ereg_replace('{max}', floor($user_founds * rating_percentage / 100), $rating_msg);
+                    $rating_msg = mb_ereg_replace('{max}', floor($user_founds * $rating_percentage / 100), $rating_msg);
                     $rating_msg = mb_ereg_replace('{curr}', $user_tops, $rating_msg);
                 } else {
-                    $anzahl = ($user_tops + 1 - ($user_founds * rating_percentage / 100)) / (rating_percentage / 100);
+                    $anzahl = ($user_tops + 1 - ($user_founds * $rating_percentage / 100)) / ($rating_percentage / 100);
                     if ($anzahl > 1) {
                         $rating_msg = mb_ereg_replace('{anzahl}', $anzahl, $rating_too_few_founds);
                     } else {

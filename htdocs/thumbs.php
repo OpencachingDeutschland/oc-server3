@@ -26,20 +26,18 @@ $r = sql_fetch_array($rs);
 sql_free_result($rs);
 if ($r) {
     if ($r['object_type'] == 1) {
-        if (
-            sql_value(
-                "SELECT COUNT(*)
-                 FROM `cache_logs`
-                 INNER JOIN `caches` ON `cache_logs`.`cache_id`=`caches`.`cache_id`
-                 INNER JOIN `cache_status` ON `caches`.`status`=`cache_status`.`id`
-                 WHERE `cache_logs`.`id`='&1'
-                 AND (`cache_status`.`allow_user_view`=1 OR `caches`.`user_id`='&2' OR '&3')",
-                0,
-                $r['object_id'],
-                $login->userid,
-                $login->hasAdminPriv(ADMIN_USER) ? 1 : 0
-            ) == 0
-        ) {
+        if (sql_value(
+            "SELECT COUNT(*)
+             FROM `cache_logs`
+             INNER JOIN `caches` ON `cache_logs`.`cache_id`=`caches`.`cache_id`
+             INNER JOIN `cache_status` ON `caches`.`status`=`cache_status`.`id`
+             WHERE `cache_logs`.`id`='&1'
+             AND (`cache_status`.`allow_user_view`=1 OR `caches`.`user_id`='&2' OR '&3')",
+            0,
+            $r['object_id'],
+            $login->userid,
+            $login->hasAdminPriv(ADMIN_USER) ? 1 : 0
+        ) == 0) {
             if ($debug == 1) {
                 die('Debug: line ' . __LINE__);
             } else {
@@ -48,17 +46,16 @@ if ($r) {
         }
     } elseif ($r['object_type'] == 2) {
         if (sql_value(
-                "SELECT COUNT(*)
-                 FROM `caches`
-                 INNER JOIN `cache_status` ON `caches`.`status`=`cache_status`.`id`
-                 WHERE `caches`.`cache_id`='&1'
-                 AND (`cache_status`.`allow_user_view`=1 OR `caches`.`user_id`='&2' OR '&3')",
-                0,
-                $r['object_id'],
-                $login->userid,
-                $login->hasAdminPriv(ADMIN_USER) ? 1 : 0
-            ) == 0
-        ) {
+            "SELECT COUNT(*)
+             FROM `caches`
+             INNER JOIN `cache_status` ON `caches`.`status`=`cache_status`.`id`
+             WHERE `caches`.`cache_id`='&1'
+             AND (`cache_status`.`allow_user_view`=1 OR `caches`.`user_id`='&2' OR '&3')",
+            0,
+            $r['object_id'],
+            $login->userid,
+            $login->hasAdminPriv(ADMIN_USER) ? 1 : 0
+        ) == 0) {
             if ($debug == 1) {
                 die('Debug: line ' . __LINE__);
             } else {
@@ -220,11 +217,10 @@ if ($r) {
             );
         }
 
-        $savedir = $opt['logic']['pictures']['thumb_dir'] . '/' . mb_substr($filename, 0, 1) . '/' . mb_substr(
-                $filename,
-                1,
-                1
-            );
+        $savedir =
+            $opt['logic']['pictures']['thumb_dir'] . '/'
+            . mb_substr($filename, 0, 1) . '/'
+            . mb_substr($filename, 1, 1);
 
         switch ($extension) {
             case 'jpg':

@@ -397,7 +397,6 @@ if ($logpics) {
         "&lt;&lt; <a href='viewcache.php?cacheid=" . $cacheid . "'>" .
         $translate->t('Back to the cache description', '', basename(__FILE__), __LINE__) . "</a>"
     );
-
 } else {
     $tpl->assign('logpics', LogPics::get(LogPics::FOR_CACHE_STAT, 0, $cacheid));
 }

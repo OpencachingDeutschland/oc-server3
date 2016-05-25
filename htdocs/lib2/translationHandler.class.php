@@ -257,5 +257,4 @@ class TranslationHandler
 
         return $langstr;
     }
-
 }

@@ -112,8 +112,7 @@ class maillog
                             $emailadr
                         );
                     } else {
-                        if ($bounced) // maximum one bounce per day is counted, to filter out temporary problems
-                        {
+                        if ($bounced) {  // maximum one bounce per day is counted, to filter out temporary problems
                             sql(
                                 "UPDATE `user` SET `email_problems`=`email_problems`+1, `last_email_problem`='&2'
                               WHERE `email`='&1' AND IFNULL(`last_email_problem`,'') < '&2'",

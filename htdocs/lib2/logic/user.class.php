@@ -187,16 +187,16 @@ class user
         }
 
         if (cracklib_checkpw(
-                $password,
-                [
-                    'open',
-                    'caching',
-                    'cache',
-                    $this->getUsername(),
-                    $this->getFirstName(),
-                    $this->getLastName()
-                ]) === false
-        ) {
+            $password,
+            [
+                'open',
+                'caching',
+                'cache',
+                $this->getUsername(),
+                $this->getFirstName(),
+                $this->getLastName()
+            ]
+        ) === false) {
             return false;
         }
 
@@ -509,10 +509,11 @@ class user
 
     public function getStatNotFound()
     {
-        if ($this->reUserStat->exist())
+        if ($this->reUserStat->exist()) {
             return $this->reUserStat->getValue('notfound');
-        else
+        } else {
             return 0;
+        }
     }
 
     public function getStatNote()
@@ -1170,7 +1171,6 @@ class user
      */
     public function replace_pictures($object_type)
     {
-
         // get optionsarray
         global $opt;
 
@@ -1256,9 +1256,7 @@ class user
          */
         // check if there is something to replace
         if (count($filenames) > 0) {
-
             foreach ($filenames as $fn) {
-
                 // get uuid and extension
                 $uuid = substr($fn, 0, 36);
                 $ext = substr($fn, - 3);
@@ -1287,7 +1285,6 @@ class user
                     && $opt['logic']['pictures']['dummy']['replacepic'] != $opt['rootpath'] . 'images/'
                     && file_exists($opt['logic']['pictures']['dummy']['replacepic'])
                 ) {
-
                     // get dimensions of the replacement
                     list($rw, $rh, $rt, $rattr) = getimagesize($opt['logic']['pictures']['dummy']['replacepic']);
                     $rwh = 0;
@@ -1334,7 +1331,6 @@ class user
                     }
 
                 } else {
-
                     // set text
                     if ($dummytext != '') {
                         imagestring($im, 1, 10, $h / 2, $dummytext, $col_text);

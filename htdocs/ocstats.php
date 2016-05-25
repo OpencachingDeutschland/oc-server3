@@ -17,8 +17,9 @@ $fontfile = $opt['rootpath'] . 'resource2/' . $opt['template']['style'] . '/font
 $userid = isset($_REQUEST['userid']) ? $_REQUEST['userid'] + 0 : 0;
 $lang = isset($_REQUEST['lang']) ? mb_strtoupper($_REQUEST['lang']) : $opt['template']['locale'];
 
-if (!isset($opt['locale'][$lang]))
+if (!isset($opt['locale'][$lang])) {
     $lang = $opt['template']['locale'];
+}
 
 $filename = GetFilename($userid, $lang);
 

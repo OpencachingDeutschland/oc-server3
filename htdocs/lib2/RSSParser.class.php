@@ -42,7 +42,6 @@ class RSSParser
             if ($data !== false && strpos($data, 'rss version=') !== false) {
                 // parse XML
                 try {
-
                     // get SimpleXML-object
                     $xml = new SimpleXMLElement($data);
 
@@ -50,12 +49,10 @@ class RSSParser
                     $headlines = array();
                     // walk through items
                     foreach ($xml->channel->item as $item) {
-
                         // check length
                         if ($items != 0 && $i >= $items) {
                             break;
                         } else {
-
                             // add html
                             if ($includetext) {
                                 // fill array

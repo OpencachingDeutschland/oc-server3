@@ -302,5 +302,4 @@ class EmailRecovery
         sql_free_result($rs);
         self::message(0, $n . ' users have been re-sent the activation code');
     }
-    
 }

@@ -20,7 +20,8 @@ if ($processUser['name'] != $opt['cron']['username']) {
     die(
         "ERROR: runcron must be run by '" . $opt['cron']['username']
         . "' but was called by '" . $processUser['name'] . "'\n" .
-        "Try something like 'sudo -u " . $opt['cron']['username'] . " php runcron.php'.\n");
+        "Try something like 'sudo -u " . $opt['cron']['username'] . " php runcron.php'.\n"
+    );
 }
 
 // ensure that we do not run concurrently

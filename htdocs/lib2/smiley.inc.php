@@ -99,5 +99,4 @@ if (!isset($smiley)) {
             'show' => $smiley['show'][$n]
         ];
     }
-
 }

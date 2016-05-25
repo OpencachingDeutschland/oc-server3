@@ -87,7 +87,7 @@ class coordinate
         ];
     }
 
-    // d° mm ss
+    // dd° mm' ss''
     public function getDecimalMinutesSeconds()
     {
         $nLat = $this->nLat;
@@ -100,17 +100,8 @@ class coordinate
         $nLatSec = $nLatMin - floor($nLatMin);
         $nLatMin = ($nLatMin - $nLatSec);
         $nLatSec = $nLatSec * 60;
-        if ($bLatN) {
-            $sLat = 'N ' . sprintf("%02d", $nLatDeg) . '° ' . sprintf("%02d", $nLatMin) . '\' ' . sprintf(
-                    "%02d",
-                    $nLatSec
-                ) . '\'\'';
-        } else {
-            $sLat = 'S ' . sprintf("%02d", $nLatDeg) . '° ' . sprintf("%02d", $nLatMin) . '\' ' . sprintf(
-                    "%02d",
-                    $nLatSec
-                ) . '\'\'';
-        }
+        $sLat = $bLatN ? 'N ' : 'S ';
+        $sLat .= sprintf("%02d° %02d' %02d''", $nLatDeg, $nLatMin, $nLatSec);
 
         $nLon = $this->nLon;
         $bLonE = ($nLon < 0) ? false : true;
@@ -122,17 +113,8 @@ class coordinate
         $nLonSec = $nLonMin - floor($nLonMin);
         $nLonMin = ($nLonMin - $nLonSec);
         $nLonSec = $nLonSec * 60;
-        if ($bLonE) {
-            $sLon = 'E ' . sprintf("%03d", $nLonDeg) . '° ' . sprintf("%02d", $nLonMin) . '\' ' . sprintf(
-                    "%02d",
-                    $nLonSec
-                ) . '\'\'';
-        } else {
-            $sLon = 'W ' . sprintf("%03d", $nLonDeg) . '° ' . sprintf("%02d", $nLonMin) . '\' ' . sprintf(
-                    "%02d",
-                    $nLonSec
-                ) . '\'\'';
-        }
+        $sLon = $bLonE ? 'E ' : 'W ';
+        $sLon .= sprintf("%02d° %02d' %02d''", $nLonDeg, $nLonMin, $nLonSec);
 
         return [
             'lat' => $sLat,

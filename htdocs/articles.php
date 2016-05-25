@@ -67,7 +67,6 @@ if ($tpl->menuitem == 0) {
 }
 
 if (!$tpl->is_cached()) {
-
     $tpl->assign('article', $article);
     $tpl->assign('language', $language);
 

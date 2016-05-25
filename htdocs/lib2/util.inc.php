@@ -350,7 +350,7 @@ function str_rot13_gc($str)
     while (mb_strlen($retval) < mb_strlen($str)) {
         $nNextStart = false;
         $sNextEndChar = '';
-        foreach ($delimiter AS $del) {
+        foreach ($delimiter as $del) {
             $nThisStart = mb_strpos($str, $del[0], mb_strlen($retval));
 
             if ($nThisStart !== false) {

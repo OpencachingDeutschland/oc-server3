@@ -41,13 +41,6 @@ mb_internal_encoding('UTF-8');
 mb_regex_encoding('UTF-8');
 mb_language('uni');
 
-// language unspecific constants
-define('regex_username', '^[a-zA-Z0-9][a-zA-Z0-9\.\-_ @äüöÄÜÖ=)(\/\\\&*+~#]{2,59}$');
-define('regex_password', '^[a-zA-Z0-9\.\-_ @äüöÄÜÖ=)(\/\\\&*+~#]{3,60}$');
-define('regex_last_name', '^[a-zA-Z][a-zA-Z0-9\.\- äüöÄÜÖ]{1,59}$');
-define('regex_first_name', '^[a-zA-Z][a-zA-Z0-9\.\- äüöÄÜÖ]{1,59}$');
-define('regex_statpic_text', '^[a-zA-Z0-9\.\-_ @äüöÄÜÖß=)(\/\\\&*\$+~#!§%;,-?:\[\]{}¹²³\'\"`\|µ°]{0,29}$');
-
 //load default webserver-settings and common includes
 require_once $opt['rootpath'] . 'lib/consts.inc.php';
 require_once $opt['rootpath'] . 'lib/settings.inc.php';
@@ -320,18 +313,12 @@ function sql_internal($_dblink, $sql, $bSlave)
                     if (is_numeric($args[$arg])) {
                         $filtered_sql .= $args[$arg];
                     } else {
-                        if ((mb_substr($sql, $sqlpos - $arglength - 1, 1) == '\'') && (mb_substr(
-                                    $sql,
-                                    $sqlpos + 1,
-                                    1
-                                ) == '\'')
+                        if ((mb_substr($sql, $sqlpos - $arglength - 1, 1) == '\'') &&
+                            (mb_substr($sql, $sqlpos + 1, 1) == '\'')
                         ) {
                             $filtered_sql .= sql_escape($args[$arg]);
-                        } elseif ((mb_substr($sql, $sqlpos - $arglength - 1, 1) == '`') && (mb_substr(
-                                    $sql,
-                                    $sqlpos + 1,
-                                    1
-                                ) == '`')
+                        } elseif ((mb_substr($sql, $sqlpos - $arglength - 1, 1) == '`') &&
+                                  (mb_substr($sql, $sqlpos + 1, 1) == '`')
                         ) {
                             $filtered_sql .= sql_escape($args[$arg]);
                         } else {
@@ -340,11 +327,8 @@ function sql_internal($_dblink, $sql, $bSlave)
                     }
                 } else {
                     // NULL
-                    if ((mb_substr($sql, $sqlpos - $arglength - 1, 1) == '\'') && (mb_substr(
-                                $sql,
-                                $sqlpos + 1,
-                                1
-                            ) == '\'')
+                    if ((mb_substr($sql, $sqlpos - $arglength - 1, 1) == '\'') &&
+                        (mb_substr($sql, $sqlpos + 1, 1) == '\'')
                     ) {
                         // Anführungszeichen weg machen und NULL einsetzen
                         $filtered_sql = mb_substr($filtered_sql, 0, mb_strlen($filtered_sql) - 1);
@@ -391,11 +375,8 @@ function sql_internal($_dblink, $sql, $bSlave)
     $nextarg = mb_strpos($filtered_sql, '\&');
     while ($nextarg !== false) {
         $escapesCount = 0;
-        while ((($nextarg - $escapesCount - 1) > 0) && (mb_substr(
-                    $filtered_sql,
-                    $nextarg - $escapesCount - 1,
-                    1
-                ) == '\\')) {
+        while ((($nextarg - $escapesCount - 1) > 0) &&
+               (mb_substr($filtered_sql, $nextarg - $escapesCount - 1, 1) == '\\')) {
             $escapesCount ++;
         }
         if (($escapesCount % 2) == 0) {

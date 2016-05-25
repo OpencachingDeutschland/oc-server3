@@ -148,10 +148,8 @@ function normalize_settings()
     }
 
     if (isset($opt['logic']['cachemaps']['wmsurl']) && strstr($opt['logic']['cachemaps']['wmsurl'], '://')) {
-        $opt['logic']['cachemaps']['wmsurl'] = $opt['page']['protocol'] . strstr(
-                $opt['logic']['cachemaps']['wmsurl'],
-                '://'
-            );
+        $opt['logic']['cachemaps']['wmsurl'] =
+            $opt['page']['protocol'] . strstr($opt['logic']['cachemaps']['wmsurl'], '://');
     }
 }
 
@@ -278,10 +276,9 @@ function use_current_protocol($url)
         && $opt['page']['https']['active']
     ) {
         return 'https' . strstr($url, '://');
-    } elseif (strtolower(
-            substr($url, 0, strlen($opt['page']['absolute_https_url']))
-        ) == $opt['page']['absolute_https_url']
-        && !$opt['page']['https']['active']
+    } elseif (strtolower(substr($url, 0, strlen($opt['page']['absolute_https_url'])))
+                  == $opt['page']['absolute_https_url']
+              && !$opt['page']['https']['active']
     ) {
         return 'http' . strstr($url, '://');
     } else {

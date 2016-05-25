@@ -322,11 +322,10 @@ class cachelog
         if ($allow == 1) {
             return true;
         } elseif ($login->userid == sql_value(
-                "SELECT `user_id` FROM `caches` WHERE `cache_id`='&1'",
-                0,
-                $this->getCacheId()
-            )
-        ) {
+            "SELECT `user_id` FROM `caches` WHERE `cache_id`='&1'",
+            0,
+            $this->getCacheId()
+        )) {
             return true;
         }
 
@@ -361,23 +360,22 @@ class cachelog
     public static function isDuplicate($cacheId, $userId, $logType, $logDate, $logText)
     {
         // get info if exact the same values are already in database
-        return (sql_value(
-                "
-                SELECT COUNT(`id`)
-                FROM `cache_logs`
-                WHERE `cache_id`='&1'
-                    AND `user_id`='&2'
-                    AND `type`='&3'
-                    AND `date`='&4'
-                    AND `text`='&5'",
-                0,
-                $cacheId,
-                $userId,
-                $logType,
-                $logDate,
-                $logText
-            ) != 0
-        );
+        return sql_value(
+            "SELECT COUNT(`id`)
+             FROM `cache_logs`
+             WHERE
+                `cache_id`='&1'
+                AND `user_id`='&2'
+                AND `type`='&3'
+                AND `date`='&4'
+                AND `text`='&5'",
+            0,
+            $cacheId,
+            $userId,
+            $logType,
+            $logDate,
+            $logText
+        ) != 0;
     }
 
     public static function isMasslogging($userId)

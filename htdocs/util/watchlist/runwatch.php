@@ -208,7 +208,8 @@ for ($i = 0; $i < mysql_num_rows($rsUsers); $i ++) {
                 if ($mailadr != '') {
                     if (is_existent_maildomain(getToMailDomain($mailadr))) {
                         $language = $rUser['language'] ? $rUser['language'] : $opt['template']['default']['locale'];
-                        $mailsubject = '[' . $maildomain . '] ' . $translate->t(
+                        $mailsubject =
+                            '[' . $maildomain . '] ' . $translate->t(
                                 'Your watchlist of',
                                 '',
                                 basename(__FILE__),
@@ -329,7 +330,8 @@ function process_owner_log($user_id, $log_id)
         $dateformat = $opt['locale'][$language]['format']['phpdatetime'];
     }
 
-    $watchtext = '{date} ' . $translate->t(
+    $watchtext =
+        '{date} ' . $translate->t(
             '{user} has logged your cache "{cachename}":',
             '',
             basename(__FILE__),
@@ -411,7 +413,8 @@ function process_log_watch($user_id, $log_id)
         $dateformat = $opt['locale'][$language]['format']['phpdatetime'];
     }
 
-    $watchtext = '{date} ' . $translate->t(
+    $watchtext =
+        '{date} ' . $translate->t(
             '{user} has logged the cache "{cachename}":',
             '',
             basename(__FILE__),
@@ -443,7 +446,8 @@ function process_log_watch($user_id, $log_id)
             $cachelists = '';
             break;
         case 1:
-            $cachelists = $translate->t(
+            $cachelists =
+                $translate->t(
                     'Cache list:',
                     '',
                     basename(__FILE__),
@@ -454,7 +458,8 @@ function process_log_watch($user_id, $log_id)
                 ) . ' ' . $cachelist_names[0] . "\n";
             break;
         default:
-            $cachelists = $translate->t(
+            $cachelists =
+                $translate->t(
                     'Cache lists:',
                     '',
                     basename(__FILE__),

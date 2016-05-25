@@ -53,16 +53,16 @@ foreach ($itemwps as $itemid => $wps) {
     foreach ($wps as $wp => $flags) {
         if (isset($flags['itemwp']) && !isset($flags['movewp'])) {
             if (sql_value(
-                    "SELECT COUNT(*) FROM `gk_move`, `gk_move_waypoint`
-                    WHERE `gk_move`.`itemid`='&1'
-                      AND `gk_move`.`logtypeid`<>2
-                      AND `gk_move_waypoint`.`id`=`gk_move`.`id`
-                      AND `gk_move_waypoint`.`wp`='&2'",
-                    0,
-                    $itemid,
-                    $wp
-                ) == 0
-            ) {
+                "SELECT COUNT(*) FROM `gk_move`, `gk_move_waypoint`
+                 WHERE
+                    `gk_move`.`itemid`='&1'
+                    AND `gk_move`.`logtypeid`<>2
+                    AND `gk_move_waypoint`.`id`=`gk_move`.`id`
+                    AND `gk_move_waypoint`.`wp`='&2'",
+                0,
+                $itemid,
+                $wp
+            ) == 0) {
                 echo "item " . $itemid . ": " . $wp . " is missing in gk_move_waypoint\n";
             } else {
                 echo "item " . $itemid . ": " . $wp . " is not the current wp in gk_move_waypoint\n";

@@ -231,7 +231,7 @@ switch ($action) {
 }
 
 $languages = [];
-foreach ($opt['locale'] AS $k => $v) {
+foreach ($opt['locale'] as $k => $v) {
     if ($access->mayTranslate($k)) {
         $languages[] = $k;
     }
@@ -514,7 +514,7 @@ function export()
     global $opt, $tpl, $translang;
 
     $structure = enumSqlFiles($opt['rootpath'] . '../sql/tables');
-    foreach ($structure AS $sTable) {
+    foreach ($structure as $sTable) {
         sql_export_structure_to_file($opt['rootpath'] . '../sql/tables/' . $sTable . '.sql', $sTable);
     }
 
@@ -590,7 +590,7 @@ function scan()
     global $tpl, $msDirlist;
 
     $files = [];
-    foreach ($msDirlist AS $dir) {
+    foreach ($msDirlist as $dir) {
         $hDir = opendir($dir);
         if ($hDir !== false) {
             while (($file = readdir($hDir)) !== false) {
@@ -625,7 +625,7 @@ function scanFile($filename)
     /* check if supplied filename is within allowed path!
      */
     $bFound = false;
-    foreach ($msDirlist AS $dir) {
+    foreach ($msDirlist as $dir) {
         if (substr($dir, - 1) != '/') {
             $dir .= '/';
         }
@@ -651,7 +651,7 @@ function scanFile($filename)
     $transFileScan = new translate_filescan($filename);
     $transFileScan->parse();
 
-    foreach ($transFileScan->textlist AS $item) {
+    foreach ($transFileScan->textlist as $item) {
         $translationHandler->addText($item['text'], $filename, $item['line']);
     }
 
@@ -666,7 +666,7 @@ function xmlexport()
     header('Content-Disposition:attachment;filename="translation.xml"');
 
     $lang = [];
-    foreach ($opt['template']['locales'] AS $k => $v) {
+    foreach ($opt['template']['locales'] as $k => $v) {
         $lang[] = $k;
     }
 
@@ -737,7 +737,7 @@ function xmlimport2()
     }
 
     $scanlang = [];
-    foreach ($opt['locale'] AS $k => $v) {
+    foreach ($opt['locale'] as $k => $v) {
         if (isset($_REQUEST['lang' . $k]) && ($_REQUEST['lang' . $k] == '1')) {
             $scanlang[] = $k;
         }
@@ -758,10 +758,10 @@ function xmlimport2()
      */
     $saTexts = [];
 
-    foreach ($doc->documentElement->childNodes AS $textnode) {
+    foreach ($doc->documentElement->childNodes as $textnode) {
         if ($textnode->nodeType == XML_ELEMENT_NODE) {
             $codeElements = $textnode->getElementsByTagName('code');
-            foreach ($scanlang AS $lang) {
+            foreach ($scanlang as $lang) {
                 $langElements = $textnode->getElementsByTagName($lang);
 
                 $sCodeText = $codeElements->item(0)->nodeValue;
@@ -824,7 +824,7 @@ function xmlimport3()
             $transId = sql_value("SELECT `id` FROM `sys_trans` WHERE `text`='&1'", 0, $sCode);
 
             if ($transId != 0) {
-                foreach ($opt['locale'] AS $k => $v) {
+                foreach ($opt['locale'] as $k => $v) {
                     if (isset($_REQUEST[$k . $nIndex . 'new'])) {
                         $sText = base64_decode($_REQUEST[$k . $nIndex . 'new']);
 

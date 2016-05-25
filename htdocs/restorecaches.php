@@ -465,8 +465,9 @@ function get_archive_data($caches)
     // attributes
     $rs = sql(
         "SELECT * FROM `caches_attributes_modified`
-        WHERE `cache_id` IN " . $cachelist . "  /* OConly attrib is shown, but not restorable */
-        ORDER BY `date_modified` ASC");   // order doesn't matter as long it is date only
+         WHERE `cache_id` IN " . $cachelist . "  /* OConly attrib is shown, but not restorable */
+         ORDER BY `date_modified` ASC"
+    );   // order doesn't matter as long it is date only
     while ($r = sql_fetch_assoc($rs)) {
         append_data(
             $data,
@@ -535,7 +536,8 @@ function get_archive_data($caches)
                 $wp_oc,
                 $r,
                 "desc(" . $r['language'] . ")",
-                $r['dl'] + 0, $next['dl'] + 0 . " bytes"
+                $r['dl'] + 0,
+                ($next['dl'] + 0) . ' bytes'
             );
         }
         if ($r['hl'] + 0 != $next['hl'] + 0) {
@@ -546,7 +548,7 @@ function get_archive_data($caches)
                 $r,
                 "hint(" . $r['language'] . ")",
                 $r['hl'] + 0,
-                $next['hl'] + 0 . " bytes"
+                ($next['hl'] + 0) . ' bytes'
             );
         }
         if ($r['sdl'] + 0 != $next['sdl'] + 0) {
@@ -557,7 +559,7 @@ function get_archive_data($caches)
                 $r,
                 "shortdesc(" . $r['language'] . ")",
                 $r['sdl'] + 0,
-                $next['sdl'] + 0 . " bytes"
+                ($next['sdl'] + 0) . ' bytes'
             );
         }
 
@@ -619,8 +621,9 @@ function get_archive_data($caches)
     $piccacheid = "IF(`object_type`=2, `object_id`, IF(`object_type`=1, IFNULL((SELECT `cache_id` FROM `cache_logs` WHERE `id`=`object_id`),(SELECT `cache_id` FROM `cache_logs_archived` WHERE `id`=`object_id`)), 0))";
     $rs = sql(
         "SELECT *, " . $piccacheid . "AS `cache_id` FROM `pictures_modified`
-        WHERE " . $piccacheid . " IN " . $cachelist . "
-        ORDER BY `date_modified` ASC");  // order is relevant for the case of restore-reverts
+         WHERE " . $piccacheid . " IN " . $cachelist . "
+         ORDER BY `date_modified` ASC"
+    );  // order is relevant for the case of restore-reverts
     while ($r = sql_fetch_assoc($rs)) {
         $r['date_modified'] = substr($r['date_modified'], 0, 10);
         switch ($r['operation']) {
@@ -1073,10 +1076,8 @@ function restore_listings($cacheids, $rdate, $roptions, $simulate)
                 if ($logs_restored) {
                     $restored[$wp]['logs'] = true;
                 }
-
             }  // while (all relevant log records)
             sql_free_result($rs);
-
         }  // if logs enabled per roptions
 
         // pictures
@@ -1210,9 +1211,7 @@ function restore_listings($cacheids, $rdate, $roptions, $simulate)
             }  // while (all relevant pic records)
 
             sql_free_result($rs);
-
         }  // if pics enabled per roptions
-
     }  // foreach cache(id)
 
     sql("SET @restoredby=0");

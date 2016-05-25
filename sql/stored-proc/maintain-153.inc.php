@@ -117,7 +117,8 @@ sql(
 );
 
 sql_dropProcedure('sp_updateall_cachelog_logdates');
-sql("CREATE PROCEDURE sp_updateall_cachelog_logdates (OUT nModified INT)
+sql(
+    "CREATE PROCEDURE sp_updateall_cachelog_logdates (OUT nModified INT)
      BEGIN
         /* log_last_modified can be greater then all the other dates, if a picture was deleted.
            Therefore it should generally not be set back to an earlier datetime! */
@@ -538,7 +539,8 @@ sql(
 
 // re-calculate stat_caches.watch for all entries
 sql_dropProcedure('sp_updateall_watchstat');
-sql("CREATE PROCEDURE sp_updateall_watchstat (OUT nModified INT)
+sql(
+    "CREATE PROCEDURE sp_updateall_watchstat (OUT nModified INT)
      BEGIN
         SET nModified=0;
 
@@ -768,7 +770,8 @@ sql(
         WHERE `cache_logs`.`id`=`tblPictures`.`log_id`;
     
         SET nModified = nModified + ROW_COUNT();
-     END;");
+     END;"
+);
 
 // Update out-of-sync rating dates. These probably were caused by rating-related
 // bugs when deleting one of multiple found logs and when changing the log type
@@ -2337,9 +2340,9 @@ sql(
 );
 
 sql_dropTrigger('cacheAttributesAfterDelete');
-sql("
-    CREATE TRIGGER `cacheAttributesAfterDelete` AFTER DELETE ON `caches_attributes`
-    FOR EACH ROW BEGIN
+sql(
+    "CREATE TRIGGER `cacheAttributesAfterDelete` AFTER DELETE ON `caches_attributes`
+     FOR EACH ROW BEGIN
         IF IFNULL(@deleting_cache,0)=0 THEN
             IF (ISNULL(@XMLSYNC) OR @XMLSYNC!=1) THEN
                 UPDATE `caches` SET `last_modified`=NOW() WHERE `cache_id`=OLD.`cache_id`;
@@ -2352,7 +2355,7 @@ sql("
                 INSERT IGNORE INTO `caches_attributes_modified` (`cache_id`, `attrib_id`, `date_modified`, `was_set`, `restored_by`) VALUES (OLD.`cache_id`, OLD.`attrib_id`, NOW(), 1, IFNULL(@restoredby,0));
             END IF;
         END IF;
-    END;"
+     END;"
 );
 
 sql_dropTrigger('map2resultAfterDelete');
@@ -2464,9 +2467,9 @@ sql(
 );
 
 sql_dropTrigger('statCachesAfterUpdate');
-sql("
-    CREATE TRIGGER `statCachesAfterUpdate` AFTER UPDATE ON `stat_caches`
-    FOR EACH ROW BEGIN
+sql(
+    "CREATE TRIGGER `statCachesAfterUpdate` AFTER UPDATE ON `stat_caches`
+     FOR EACH ROW BEGIN
         IF
             NEW.found<>OLD.found
             OR NEW.notfound<>OLD.notfound
@@ -2481,7 +2484,7 @@ sql("
                if OKAPI is installed. */
             UPDATE caches SET meta_last_modified=NOW() WHERE caches.cache_id=NEW.cache_id;
         END IF;
-    END;"
+     END;"
 );
 
 sql_dropTrigger('gkItemWaypointAfterInsert');

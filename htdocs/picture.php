@@ -118,15 +118,7 @@ if ($action == 'add') { // Ocprop
             $ext = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
 
             // try saving file if smaller unchg_size and browser native format
-            if (in_array(
-                    mb_strtolower($ext),
-                    [
-                        'gif',
-                        'png',
-                        'jpg',
-                        'jpeg'
-                    ]
-                )
+            if (in_array(mb_strtolower($ext), ['gif', 'png', 'jpg', 'jpeg'])
                 && ($_FILES['file']['size'] <= $opt['logic']['pictures']['unchg_size'])
             ) {
                 $picture->setFilenames($_FILES['file']['name']);

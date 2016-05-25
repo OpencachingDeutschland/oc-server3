@@ -276,10 +276,10 @@ function sqldbg_execute($sql, $bSlave)
             echo '<tr>';
             foreach ($r as $value) {
                 echo '<td>' . htmlspecialchars(
-                        ($value != null) ? mb_ereg_replace('\*/', '* /', $value) : 'NULL',
-                        ENT_COMPAT,
-                        'UTF-8'
-                    ) . '</td>';
+                    ($value != null) ? mb_ereg_replace('\*/', '* /', $value) : 'NULL',
+                    ENT_COMPAT,
+                    'UTF-8'
+                ) . '</td>';
             }
             echo '</tr>' . "\n";
         }

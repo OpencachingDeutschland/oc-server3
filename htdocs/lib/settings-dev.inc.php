@@ -140,11 +140,5 @@ $opt['db']['slave']['max_behind'] = 180;
 // you can use -1 to use the master (not recommended, because replicated to slaves)
 $opt['db']['slave']['primary'] = - 1;
 
-$opt['template']['locales']['DA']['show'] = false;
-$opt['template']['locales']['JA']['show'] = false;
-$opt['template']['locales']['NL']['show'] = true;
-$opt['template']['locales']['PL']['show'] = false;
-$opt['template']['locales']['PT']['show'] = false;
-$opt['template']['locales']['RU']['show'] = false;
-$opt['template']['locales']['SV']['show'] = false;
-$opt['template']['locales']['NO']['show'] = false;
+// NL translation is complete, but can be tested
+$opt['template']['locales']['NL']['status'] = OC_LOCALE_ACTIVE;

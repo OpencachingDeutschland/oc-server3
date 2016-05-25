@@ -146,7 +146,7 @@ $smarty_dummy = 0;
                         <td>
 <?php
                             foreach ($opt['template']['locales'] AS $k => $lang)
-                                if ($lang['show'] == true)
+                                if ($lang['status'] == OC_LOCALE_ACTIVE)
                                     echo '<a style="text-decoration: none;" href="index.php?locale=' . $k . '"><img src="' . $lang['flag'] . '" alt="' . $lang['name'] . '" title="' . $lang['name'] . '" width="24px" height="18px" /></a> ';
 ?>
                         </td>

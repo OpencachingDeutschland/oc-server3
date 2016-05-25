@@ -146,7 +146,7 @@
                         <td><strong>{t}Language:{/t}&nbsp;</strong></td>
                         <td>
                             {foreach from=$opt.template.locales key=localeKey item=localeItem}
-                                {if $localeItem.show}
+                                {if $localeItem.status == OC_LOCALE_ACTIVE}
                                 <a style="text-decoration: none;" href="{$base_pageadr}locale={$localeKey}"><img src="{$localeItem.flag}" alt="{$localeItem.name|escape}" title="{$localeItem.name|escape}" width="24px" height="18px" /></a>
                             {/if}
                             {/foreach}

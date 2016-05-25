@@ -87,20 +87,22 @@ function createMenuCache()
     global $opt, $translate;
 
     foreach ($opt['locale'] as $sLanguage => $v) {
-        // cheating a little bit
-        $opt['template']['locale'] = $sLanguage;
-        set_php_locale();
+        if ($opt['template']['locales'][$sLanguage]['status'] != OC_LOCALE_DISABLED) {
+            // cheating a little bit
+            $opt['template']['locale'] = $sLanguage;
+            set_php_locale();
 
-        if ($translate->t('INTERNAL_LANG', 'all', 'OcSmarty.class.php', '') != $sLanguage) {
-            die("setlocale() failed to set language to " . $sLanguage . ". Is the translation of INTERNAL_LANG correct?\n");
+            if ($translate->t('INTERNAL_LANG', 'all', 'OcSmarty.class.php', '') != $sLanguage) {
+                die("setlocale() failed to set language to " . $sLanguage . ". Is the translation of INTERNAL_LANG correct?\n");
+            }
+
+            // this will create the cache file
+            $menu = new Menu();
+
+            // change to file owner
+            chown($menu->sMenuFilename, $opt['httpd']['user']);
+            chgrp($menu->sMenuFilename, $opt['httpd']['group']);
         }
-
-        // this will create the cache file
-        $menu = new Menu();
-
-        // change to file owner
-        chown($menu->sMenuFilename, $opt['httpd']['user']);
-        chgrp($menu->sMenuFilename, $opt['httpd']['group']);
     }
 }
 
@@ -109,15 +111,17 @@ function createLabelCache()
     global $opt;
 
     foreach ($opt['locale'] as $sLanguage => $v) {
-        // cheating a little bit
-        $opt['template']['locale'] = $sLanguage;
+        if ($opt['template']['locales'][$sLanguage]['status'] != OC_LOCALE_DISABLED) {
+            // cheating a little bit
+            $opt['template']['locale'] = $sLanguage;
 
-        labels::CreateCacheFile();
+            labels::CreateCacheFile();
 
-        // change to file owner
-        $sFilename = $opt['rootpath'] . 'cache2/labels-' . $opt['template']['locale'] . '.inc.php';
-        chown($sFilename, $opt['httpd']['user']);
-        chgrp($sFilename, $opt['httpd']['group']);
+            // change to file owner
+            $sFilename = $opt['rootpath'] . 'cache2/labels-' . $opt['template']['locale'] . '.inc.php';
+            chown($sFilename, $opt['httpd']['user']);
+            chgrp($sFilename, $opt['httpd']['group']);
+        }
     }
 }
 
@@ -153,7 +157,9 @@ function precompileTemplate($sTemplate)
     global $opt;
 
     foreach ($opt['locale'] as $sLanguage => $v) {
-        precompileTemplateWithLanguage($sTemplate, $sLanguage);
+        if ($opt['template']['locales'][$sLanguage]['status'] != OC_LOCALE_DISABLED) {
+            precompileTemplateWithLanguage($sTemplate, $sLanguage);
+        }
     }
 }
 

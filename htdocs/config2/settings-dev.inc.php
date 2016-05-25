@@ -116,5 +116,5 @@ $opt['logic']['pictures']['dummy']['replacepic'] = $dev_basepath . $dev_codepath
 $opt['logic']['license']['disclaimer'] = true;
 $opt['logic']['admin']['listingadmin_notification'] = 'root';
 
-// NL translation is complete, but can be tested
+// NL translation is incomplete, but can be tested
 $opt['template']['locales']['NL']['status'] = OC_LOCALE_ACTIVE;

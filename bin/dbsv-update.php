@@ -157,7 +157,7 @@ function update_triggers()
         $syncfile = $opt['rootpath'] . 'cache2/dbsv-running';
         file_put_contents($syncfile, 'dbsv is running');
 
-        system('php ' . $opt['rootpath'] . 'doc/sql/stored-proc/maintain.php --dbsv ' . $db_version . ' --flush');
+        system('php ' . $opt['rootpath'] . '../sql/stored-proc/maintain.php --dbsv ' . $db_version . ' --flush');
         // This will also update dbsvTriggerVersion.
 
         if (file_exists($syncfile)) {

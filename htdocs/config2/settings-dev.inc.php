@@ -119,7 +119,7 @@ $opt['logic']['admin']['listingadmin_notification'] = 'root';
 // NL translation is incomplete, but can be tested
 $opt['template']['locales']['NL']['status'] = OC_LOCALE_ACTIVE;
 
-if ($debug_startpage_news) {
+if (isset($debug_startpage_news) && $debug_startpage_news) {
     // Blog news on start page
     $opt['news']['count'] = 6;
     $opt['news']['include'] = 'http://blog.opencaching.de/feed';

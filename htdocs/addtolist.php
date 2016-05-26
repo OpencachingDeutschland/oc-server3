@@ -26,7 +26,7 @@ if (isset($_REQUEST['cancel'])) {
 }
 
 $newlist_name = isset($_REQUEST['newlist_name']) ? trim($_REQUEST['newlist_name']) : false;
-if ($newlist_name == _('New cache list')) {
+if ($newlist_name == $translate->t('New cache list', '', __FILE__, __LINE__)) {
     $newlist_name = false;
 }
 $newlist_public = isset($_REQUEST['newlist_public']);

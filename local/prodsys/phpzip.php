@@ -13,9 +13,7 @@
  * Wrapper for unix-utilities zip, gzip and bz2
  ***************************************************************************/
 
-require_once __DIR__ . '/../../htdocs/lib/settings.inc.php';
-
-$basedir = $zip_basedir;
+$basedir = '/path/to/htdocs/download/zip/';
 
 $zipper['zip'] = 'nice --adjustment=19 zip -j -q -1 {dst} {src}';
 $zipper['gzip'] = 'nice --adjustment=19 gzip -1 -c {src} > {dst}';

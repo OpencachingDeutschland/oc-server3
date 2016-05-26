@@ -20,7 +20,7 @@ require_once $rootpath . 'lib2/ProcessSync.class.php';
 require_once $rootpath . 'lib/logic.inc.php';
 require_once $rootpath . 'lib2/logic/geomath.class.php';
 
-if (!cronjobs_enabled()) {
+if (!Cronjobs::enabled()) {
     exit;
 }
 

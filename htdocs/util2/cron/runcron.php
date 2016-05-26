@@ -14,6 +14,10 @@
 $opt['rootpath'] = __DIR__ . '/../../';
 require $opt['rootpath'] . 'lib2/cli.inc.php';
 
+if (!Cronjobs::enabled()) {
+    exit;
+}
+
 // test for user who runs the cronjob
 $processUser = posix_getpwuid(posix_geteuid());
 if ($processUser['name'] != $opt['cron']['username']) {
@@ -43,16 +47,14 @@ if ($process_sync->Enter()) {
         $ignore_interval = true;
         require $modules_dir . $argv[1] . '.class.php';
     } else {
-        if (cronjobs_enabled()) {
-            $ignore_interval = false;
-            $hDir = opendir($modules_dir);
-            while (false !== ($file = readdir($hDir))) {
-                if (substr($file, -10) == '.class.php') {
-                    if ($param == '--show') {
-                        echo 'running ' . $file . "\n";
-                    }
-                    require $modules_dir . $file;
+        $ignore_interval = false;
+        $hDir = opendir($modules_dir);
+        while (false !== ($file = readdir($hDir))) {
+            if (substr($file, -10) == '.class.php') {
+                if ($param == '--show') {
+                    echo 'running ' . $file . "\n";
                 }
+                require $modules_dir . $file;
             }
         }
     }

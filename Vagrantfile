@@ -32,6 +32,7 @@ Vagrant.configure(2) do |config|
 	config.vm.synced_folder "doc/", 	"/var/www/html/doc",	type: SYNCED_FOLDER_TYPE
 	config.vm.synced_folder "local/", 	"/var/www/html/local",	type: SYNCED_FOLDER_TYPE
 	config.vm.synced_folder "sql/", 	"/var/www/html/sql",	type: SYNCED_FOLDER_TYPE
+	config.vm.synced_folder "tests/", 	"/var/www/html/tests",	type: SYNCED_FOLDER_TYPE
 	if SYNCED_FOLDER_TYPE == "nfs"
 		config.nfs.map_uid = Process.uid
 		config.nfs.map_gid = Process.gid

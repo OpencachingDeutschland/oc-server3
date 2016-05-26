@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "81da01cb3e74b7129f34c02be0d756ba",
-    "content-hash": "4b2a2b7bb75447e978f9aac764dbff0a",
+    "hash": "fc8b2bb73316a296d577e9a5d6fc3230",
+    "content-hash": "7edc3a94d5d109e9ea2b516c9b0b2d3f",
     "packages": [
         {
             "name": "ezyang/htmlpurifier",
@@ -756,6 +756,48 @@
                 "scraper"
             ],
             "time": "2015-11-05 12:58:44"
+        },
+        {
+            "name": "fig-r/psr2r-sniffer",
+            "version": "0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-fig-rectified/psr2r-sniffer.git",
+                "reference": "a152ec876bae77c918cc940944daf2e1baa14a76"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-fig-rectified/psr2r-sniffer/zipball/a152ec876bae77c918cc940944daf2e1baa14a76",
+                "reference": "a152ec876bae77c918cc940944daf2e1baa14a76",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.16",
+                "squizlabs/php_codesniffer": "~2.3"
+            },
+            "bin": [
+                "bin/tokenize",
+                "bin/sniff"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "PSR2R\\": "PSR2R"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mark Scherer",
+                    "homepage": "http://www.dereuromark.de",
+                    "role": "Contributor"
+                }
+            ],
+            "description": "Code-Sniffer, Auto-Fixer and Tokenizer for PSR2-R",
+            "time": "2016-04-13 14:06:16"
         },
         {
             "name": "guzzlehttp/guzzle",

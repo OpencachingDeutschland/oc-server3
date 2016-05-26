@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<ruleset name="Opencaching">
+
+    <!--
+       The name attribute of the ruleset tag is displayed
+       when running PHP_CodeSniffer with the -v command line
+       argument. The description tag below is not displayed anywhere
+       except in this file, so it can contain information for
+       developers who may change this file in the future.
+    -->
+    <description>Opencaching coding standard</description>
+
+    <!--
+        If no files or directories are specified on the command line
+        your custom standard can specify what files should be checked
+        instead.
+
+        Note that specifying any file or directory path
+        on the command line will ignore all file tags.
+     -->
+    <file>../htdocs/</file>
+    <file>../local/</file>
+    <file>../bin/</file>
+    <file>./Frontend/</file>
+    <file>./Modules/</file>
+
+    <exclude-pattern>*/cache/*</exclude-pattern>
+    <exclude-pattern>*/cache2/*</exclude-pattern>
+    <exclude-pattern>*/images/*</exclude-pattern>
+    <exclude-pattern>*/vendor/*</exclude-pattern>
+
+    <exclude-pattern>*/htdocs/okapi/*</exclude-pattern>
+    <exclude-pattern>*/htdocs/resource2/tinymce/*</exclude-pattern>
+    <exclude-pattern>*/htdocs/templates2/*</exclude-pattern>
+
+    <!--
+    You can hard-code command line values into your custom standard.
+     -->
+    <arg value="p"/>
+    <arg value="n"/>
+    <arg name="colors"/>
+
+    <!--
+       You can hard-code custom php.ini settings into your custom standard.
+       The following tag sets the memory limit to 64M.
+    -->
+    <ini name="memory_limit" value="256M"/>
+    <ini name="error_reporting" value="(E_ALL &amp; ~E_NOTICE)"/>
+
+    <!--
+       Include all sniffs in the PSR2 standard. Note that the
+       path to the standard does not have to be specified as the
+       PSR2 standard exists inside the PHP_CodeSniffer install
+       directory.
+    -->
+    <rule ref="PSR2"/>
+
+    <rule ref="../htdocs/vendor/fig-r/psr2r-sniffer/PSR2R/ruleset.xml">
+        <exclude name="PSR2R.Classes.BraceOnSameLine"/>
+        <exclude name="PSR2R.WhiteSpace.TabAndSpace"/>
+        <exclude name="PSR2R.WhiteSpace.TabIndent"/>
+        <exclude name="PSR2R.WhiteSpace.EmptyEnclosingLine"/>
+    </rule>
+
+    <rule ref="Squiz.Commenting.FunctionComment">
+        <exclude name="Squiz.Commenting.FunctionComment.MissingParamComment"/>
+        <exclude name="Squiz.Commenting.FunctionComment.SpacingAfterParamType"/>
+        <exclude name="Squiz.Commenting.FunctionComment.InvalidReturn"/>
+    </rule>
+
+</ruleset>

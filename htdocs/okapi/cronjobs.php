@@ -53,6 +53,7 @@ class CronJobController
                 new TileTreeUpdater(),
                 new SearchSetsCleanerJob(),
                 new TableOptimizerJob(),
+                new TokenRevokerJob(),
             );
             foreach ($cache as $cronjob)
                 if (!in_array($cronjob->get_type(), array('pre-request', 'cron-5')))
@@ -862,5 +863,24 @@ class TableOptimizerJob extends Cron5Job
     {
         Db::query("optimize table okapi_tile_caches");
         Db::query("optimize table okapi_tile_status");
+    }
+}
+
+class TokenRevokerJob extends Cron5Job
+{
+    public function get_period() { return 7200; }
+    public function execute()
+    {
+        # Remove tokens of banned users (there's no need to remove authorizations).
+        # See https://github.com/opencaching/okapi/issues/432
+
+        Db::execute("
+            delete t from
+                okapi_tokens t,
+                user u
+            where
+                t.user_id = u.user_id
+                and u.is_active_flag != 1
+        ");
     }
 }

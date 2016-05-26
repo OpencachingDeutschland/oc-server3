@@ -17,7 +17,7 @@ $opt['rootpath'] = __DIR__ . '/../../';
 require __DIR__ . '/../../lib2/cli.inc.php';
 require __DIR__ . '/../../lib2/search/ftsearch.inc.php';
 
-if (!cronjobs_enabled()) {
+if (!Cronjobs::enabled()) {
     exit;
 }
 

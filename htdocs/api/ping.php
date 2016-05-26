@@ -5,6 +5,8 @@
  *  Unicode Reminder メモ
  ***************************************************************************/
 
+// ATTN: This page is requested by Cronjobs::enabled().
+
 $opt['rootpath'] = __DIR__ . '/../';
 require $opt['rootpath'] . 'lib2/web.inc.php';
 

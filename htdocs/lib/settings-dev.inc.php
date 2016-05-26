@@ -105,7 +105,7 @@ $sql_replacements['db'] = $dbname;
 $sql_replacements['tmpdb'] = $tmpdbname;
 
 // safemode_zip-binary
-$safemode_zip = '/var/www/bin/phpzip.php';
+$safemode_zip = '/var/www/html/bin/phpzip.php';
 $zip_basedir = $dev_basepath . ($dev_codepath == '*' ? '' : $dev_codepath . 'htdocs/') . 'download/zip/';
 $zip_wwwdir = 'download/zip/';
 

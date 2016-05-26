@@ -146,6 +146,23 @@ class Facade
     }
 
     /**
+     * Remove all OAuth Access Tokens bound to a certain user. This method
+     * should be called (once) e.g. after a user is banned. It will disable his
+     * ability to submit cache logs, etc.
+     *
+     * Note, that OKAPI will *automatically* remove Access Tokens of banned
+     * users, but it will perform this action with a slight delay. This method
+     * can be used to do this immediatelly. See #432 for details.
+     */
+    public static function remove_user_tokens($user_id)
+    {
+        Db::execute("
+            delete from okapi_tokens
+            where user_id = '".Db::escape_string($user_id)."'
+        ");
+    }
+
+    /**
      * Run OKAPI database update.
      * Will output messages to stdout.
      */

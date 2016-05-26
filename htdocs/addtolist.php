@@ -26,8 +26,12 @@ if (isset($_REQUEST['cancel'])) {
 }
 
 $newlist_name = isset($_REQUEST['newlist_name']) ? trim($_REQUEST['newlist_name']) : false;
+if ($newlist_name == _('New cache list')) {
+    $newlist_name = false;
+}
 $newlist_public = isset($_REQUEST['newlist_public']);
 $newlist_watch = isset($_REQUEST['newlist_watch']);
+$default_list = isset($_REQUEST['listid']) ? (int) $_REQUEST['listid'] : cachelist::getMyLastAddedToListId();
 
 if (isset($_REQUEST['save']) && isset($_REQUEST['listid'])) {
     $listid = $_REQUEST['listid'] + 0;
@@ -57,7 +61,7 @@ if (isset($_REQUEST['save']) && isset($_REQUEST['listid'])) {
 
 $tpl->assign('cachename', sql_value("SELECT `name` FROM `caches` WHERE `cache_id`='&1'", '', $cacheid));
 $tpl->assign('cachelists', cachelist::getMyLists());
-$tpl->assign('default_list', cachelist::getMyLastAddedToListId());
+$tpl->assign('default_list', $default_list);
 $tpl->assign('newlist_name', $newlist_name);
 $tpl->assign('newlist_public', $newlist_public);
 $tpl->assign('newlist_watch', $newlist_watch);

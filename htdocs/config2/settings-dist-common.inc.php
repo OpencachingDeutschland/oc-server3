@@ -308,20 +308,3 @@ function set_common_domain_config(&$opt)
         }
     }
 }
-
-
-$opt['cron']['debug'] = false;
-
-// Ensure that cronjobs are halted if website is down (for maintenance).
-// For performance reasons, this is not static setting but called on demand:
-
-function cronjobs_enabled()
-{
-    global $opt;
-
-    // @todo: replace the 'ps' hack by something more reliable.
-    // Note that the site may be htaccess-password protected (e.g. private
-    // test site), so a simple file_get_contents(page-url) may not work.
-
-    return $opt['cron']['debug'] || exec('ps -C httpd|grep httpd');
-}

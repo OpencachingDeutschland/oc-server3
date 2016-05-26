@@ -20,7 +20,7 @@ require_once $rootpath . 'lib/consts.inc.php';
 require_once $rootpath . 'lib/logic.inc.php';
 require_once $rootpath . 'lib2/edithelper.inc.php';
 
-if (!cronjobs_enabled()) {
+if (!Cronjobs::enabled()) {
     exit;
 }
 

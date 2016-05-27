@@ -20,6 +20,11 @@ $dbpconnect = false;
 $dbname = 'opencaching';
 $tmpdbname = 'octmp';   // empty db with CREATE and DROP privileges
 
+// enable HTTPS
+if (defined('HTTPS_ENABLED')) {
+    $opt['page']['https']['mode'] = HTTPS_ENABLED;
+}
+
 // common developer system settings
 require 'settings-dev.inc.php';
 

@@ -10,6 +10,12 @@ $dev_basepath = '/var/www/html/';
 $dev_codepath = '*';
 $dev_baseurl = 'http://local.opencaching.de';
 
+// enable HTTPS
+if (defined('HTTPS_ENABLED')) {
+    $opt['page']['https']['mode'] = HTTPS_ENABLED;
+}
+
+// show blog and forum news on index.php
 $debug_startpage_news = false;
 
 // common developer system settings

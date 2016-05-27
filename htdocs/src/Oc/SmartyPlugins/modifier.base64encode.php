@@ -11,7 +11,7 @@
  *
  * @version  1.0
  *
- * @param string
+ * @param string $string
  *
  * @return string
  */

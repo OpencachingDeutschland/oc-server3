@@ -7,6 +7,8 @@
  * Type:     modifier<br>
  * Name:     escapejs<br>
  *
+ * @param string $string
+ *
  * @return string
  */
 function smarty_modifier_escapejs($string)

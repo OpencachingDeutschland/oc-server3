@@ -43,13 +43,17 @@
  * Copyright 2007 Opencaching.de
  */
 
-/*
+/**
  * Smarty plugin for gettext compilation
  *
  * Find all {t}...{/t} and translate its input with gettext
  *
+ * @param string $source
+ * @param \OcSmarty $smarty
+ *
+ * @return string
  */
-function smarty_prefilter_t($source, &$smarty)
+function smarty_prefilter_t($source, \OcSmarty &$smarty)
 {
     $output = '';
     $output_start = 0;
@@ -81,10 +85,17 @@ function smarty_prefilter_t($source, &$smarty)
     return $output;
 }
 
-/* $block ... {t[ a=$a|nbsp b="a" ...]}
+/**
+ * {t[ a=$a|nbsp b="a" ...]}
  *
+ * @param string $block
+ * @param string $message
+ * @param \OcSmarty $smarty
+ * @param int $line
+ *
+ * @return string
  */
-function smarty_prefilter_t_process_block($block, $message, &$smarty, $line)
+function smarty_prefilter_t_process_block($block, $message, \OcSmarty &$smarty, $line)
 {
     if ($message != '') {
         $start_attr = mb_strpos($block, ' ');
@@ -140,10 +151,11 @@ function smarty_prefilter_t_process_block($block, $message, &$smarty, $line)
  *   we need the same source, expect _parse_vars_props at the end
  *
  * @param string $tag_args
+ * @param \OcSmarty $smarty
  *
  * @return array
  */
-function smarty_prefilter_t_parse_attrs($tag_args, &$smarty)
+function smarty_prefilter_t_parse_attrs($tag_args, \OcSmarty &$smarty)
 {
 
     /* Tokenize tag attributes. */
@@ -252,6 +264,12 @@ function smarty_prefilter_t_parse_attrs($tag_args, &$smarty)
     return $attrs;
 }
 
+/**
+ * @param string $haystack
+ * @param string $needles
+ *
+ * @return bool|int
+ */
 function smarty_prefilter_t_strpos_multi($haystack, $needles)
 {
     $arg = func_get_args();
@@ -274,7 +292,15 @@ function smarty_prefilter_t_strpos_multi($haystack, $needles)
     return $start;
 }
 
-function smarty_prefilter_t_gettext($message, $attrs, &$smarty, $line)
+/**
+ * @param string $message
+ * @param array $attrs
+ * @param \OcSmarty $smarty
+ * @param int $line
+ *
+ * @return string
+ */
+function smarty_prefilter_t_gettext($message, array $attrs, \OcSmarty &$smarty, $line)
 {
     global $opt, $translate;
 

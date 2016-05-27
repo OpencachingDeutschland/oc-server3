@@ -3,8 +3,13 @@
  * Smarty plugin
  *
  * Smarty {coordinput prefix="coord" lat=48.12345 lon=9.12345} function plugin
+ *
+ * @param array $params
+ * @param \OcSmarty $smarty
+ *
+ * @return string
  */
-function smarty_function_coordinput($params, &$smarty)
+function smarty_function_coordinput(array $params, \OcSmarty &$smarty)
 {
     $prefix = $params['prefix'];
     $lat = $params['lat'] + 0;

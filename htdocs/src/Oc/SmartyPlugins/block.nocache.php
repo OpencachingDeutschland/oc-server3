@@ -1,13 +1,12 @@
 <?php
 
-
 /***************************************************************************
  *  You can find the license in the docs directory
  *
  *  Unicode Reminder メモ
- ***************************************************************************
- *
- * /* block nocache
+ ***************************************************************************/
+/**
+ * block nocache
  *
  * usage
  *
@@ -16,8 +15,15 @@
  * OR
  *
  * {nocache name="<unique blockname>" <varname1>=$<value1> [...]}...{/nocache}
+ *
+ * @param array $param
+ * @param string $content
+ * @param \OcSmarty $smarty
+ * @param bool $repeat
+ *
+ * @return mixed
  */
-function smarty_block_nocache($param, $content, &$smarty, &$repeat)
+function smarty_block_nocache(array $param, $content, \OcSmarty &$smarty, &$repeat)
 {
     static $counter = [];
 

@@ -8,7 +8,7 @@
 // installation paths
 $dev_basepath = '/var/www/html/';
 $dev_codepath = '*';
-$dev_baseurl = 'http://local.opencaching.de ';
+$dev_baseurl = 'http://local.opencaching.de';
 
 $debug_startpage_news = false;
 

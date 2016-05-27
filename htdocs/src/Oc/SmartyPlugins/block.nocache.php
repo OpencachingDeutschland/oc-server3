@@ -21,7 +21,7 @@
  * @param \OcSmarty $smarty
  * @param bool $repeat
  *
- * @return mixed
+ * @return string
  */
 function smarty_block_nocache(array $param, $content, \OcSmarty &$smarty, &$repeat)
 {

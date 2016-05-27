@@ -13,6 +13,9 @@ use Oc\Modules\AbstractModuleTest;
 class PasswordEncryptionTest extends AbstractModuleTest
 {
 
+    /**
+     * @return void
+     */
     public function testPasswordEncryption()
     {
         global $opt;

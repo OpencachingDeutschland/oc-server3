@@ -13,6 +13,9 @@ use Behat\Mink\Session;
 abstract class AbstractFrontendTest extends \PHPUnit_Framework_TestCase
 {
 
+    /**
+     * @var string
+     */
     protected $dir;
 
     /** @var  \Behat\Mink\Driver\GoutteDriver $driver */
@@ -24,6 +27,9 @@ abstract class AbstractFrontendTest extends \PHPUnit_Framework_TestCase
     /** @var  string $baseUrl */
     protected $baseUrl;
 
+    /**
+     * AbstractFrontendTest constructor.
+     */
     public function __construct()
     {
         parent::__construct();
@@ -32,6 +38,9 @@ abstract class AbstractFrontendTest extends \PHPUnit_Framework_TestCase
         $this->baseUrl = 'http://local.opencaching.de';
     }
 
+    /**
+     * @return void
+     */
     public function setUp()
     {
         parent::setUp();

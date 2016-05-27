@@ -69,6 +69,7 @@
         <exclude name="Squiz.Commenting.FunctionComment.MissingParamComment"/>
         <exclude name="Squiz.Commenting.FunctionComment.SpacingAfterParamType"/>
         <exclude name="Squiz.Commenting.FunctionComment.InvalidReturn"/>
+        <exclude name="Squiz.Commenting.FunctionComment.EmptyThrows"/>
     </rule>
 
 </ruleset>

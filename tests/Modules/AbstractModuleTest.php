@@ -10,8 +10,14 @@ namespace Oc\Modules;
 abstract class AbstractModuleTest extends \PHPUnit_Framework_TestCase
 {
 
+    /**
+     * @var string
+     */
     protected $dir;
 
+    /**
+     * AbstractModuleTest constructor.
+     */
     public function __construct()
     {
         parent::__construct();

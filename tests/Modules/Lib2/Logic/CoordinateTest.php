@@ -77,8 +77,8 @@ class CoordinateTest extends AbstractModuleTest
 
     /**
      * @covers \coordinate::getGK()
+     * @return void
      */
-
     public function testGK()
     {
         $coord = new coordinate(51.52775, -120.89720);

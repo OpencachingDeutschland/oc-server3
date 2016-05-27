@@ -14,7 +14,9 @@ checkJob(new cache_npa_areas());
 
 class cache_npa_areas
 {
+
     public $name = 'cache_npa_areas';
+
     public $interval = 600;
 
     public function run()

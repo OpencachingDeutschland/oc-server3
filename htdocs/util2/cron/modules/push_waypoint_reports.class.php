@@ -9,7 +9,9 @@ checkJob(new push_waypoint_reports());
 
 class push_waypoint_reports
 {
+
     public $name = 'push_waypoint_reports';
+
     public $interval = 120;
 
     public function run()
@@ -35,17 +37,17 @@ class push_waypoint_reports
                     $result = trim($result);
                 }
                 if ($result != 'ok') {
-                    echo "could not push GC waypoint report (id " . $r['report_id'] . "): " . $result . "\n";
+                    echo 'could not push GC waypoint report (id ' . $r['report_id'] . '): ' . $result . "\n";
                     break;
-                } else {
-                    sql(
-                        "
+                }
+
+                sql(
+                    "
                         UPDATE `waypoint_reports`
                         SET `gcwp_processed`=1
                         WHERE `report_id`='&1'",
-                        $r['report_id']
-                    );
-                }
+                    $r['report_id']
+                );
             }
             sql_free_result($rs);
         }

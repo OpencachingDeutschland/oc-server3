@@ -30,7 +30,7 @@ class TranslatorLanguage
         $lang_string = $this->translate($lang_string);
 
         if (mb_ereg_search_init($lang_string)) {
-            while (false !== ($vars = mb_ereg_search_regs("{[^{]*}"))) {
+            while (($vars = mb_ereg_search_regs('{[^{]*}')) !== false) {
                 foreach ($vars as $curly_pattern) {
                     $pattern = mb_substr($curly_pattern, 1, mb_strlen($curly_pattern) - 2);
                     $value = $args[$pattern];

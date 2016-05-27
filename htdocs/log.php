@@ -40,10 +40,10 @@ if (isset($_REQUEST['wp'])) {
 $useradmin = ($login->hasAdminPriv()) ? 1 : 0;
 
 // prepare array to indicate errors in template
-$validate = array();
+$validate = [];
 
 // log and cache type which can be combined with maintenance state flags
-$rs = sql("SELECT `id` FROM `log_types` WHERE `maintenance_logs`");
+$rs = sql('SELECT `id` FROM `log_types` WHERE `maintenance_logs`');
 $logtype_allows_nm = sql_fetch_column($rs);
 
 // proceed loggable, if valid cache_id
@@ -95,8 +95,8 @@ if ($cacheId != 0) {
     $logDateDay = (isset($_POST['logday'])) ? trim($_POST['logday']) : ($datesaved ? $defaultLogDay : date('d'));
     $logDateMonth = (isset($_POST['logmonth'])) ? trim($_POST['logmonth']) : ($datesaved ? $defaultLogMonth : date('m'));
     $logDateYear = (isset($_POST['logyear'])) ? trim($_POST['logyear']) : ($datesaved ? $defaultLogYear : date('Y'));
-    $logTimeHour = (isset($_POST['loghour'])) ? trim($_POST['loghour']) : "";
-    $logTimeMinute = (isset($_POST['logminute'])) ? trim($_POST['logminute']) : "";
+    $logTimeHour = (isset($_POST['loghour'])) ? trim($_POST['loghour']) : '';
+    $logTimeMinute = (isset($_POST['logminute'])) ? trim($_POST['logminute']) : '';
     $needsMaintenance = (isset($_POST['needs_maintenance2'])) ? ($_POST['needs_maintenance2']) + 0 : (isset($_POST['needs_maintenance']) ? ($_POST['needs_maintenance']) + 0 : 0);
     $listingOutdated = (isset($_POST['listing_outdated2'])) ? ($_POST['listing_outdated2']) + 0 : (isset($_POST['listing_outdated']) ? ($_POST['listing_outdated']) + 0 : 0);
     $confirmListingOk = (isset($_POST['confirm_listing_ok'])) ? $_POST['confirm_listing_ok'] + 0 : 0;
@@ -159,8 +159,8 @@ if ($cacheId != 0) {
     if (is_numeric($logDateMonth)
         && is_numeric($logDateDay)
         && is_numeric($logDateYear)
-        && ($logTimeHour . $logTimeMinute == "" || is_numeric($logTimeHour))
-        && ($logTimeMinute == "" || is_numeric($logTimeMinute))
+        && ($logTimeHour . $logTimeMinute == '' || is_numeric($logTimeHour))
+        && ($logTimeMinute == '' || is_numeric($logTimeMinute))
     ) {
         $validate['dateOk'] = checkdate($logDateMonth, $logDateDay, $logDateYear)
             && ($logDateYear >= 2000)
@@ -223,7 +223,7 @@ if ($cacheId != 0) {
          * set seconds 00:00:01, means "00:00 was logged"
          * set seconds 00:00:00, means "no time was logged"
          */
-        $logTimeSecond = ($logTimeHour . $logTimeMinute != ""
+        $logTimeSecond = ($logTimeHour . $logTimeMinute != ''
                 && $logTimeHour == 0
                 && $logTimeMinute == 0) + 0;
 

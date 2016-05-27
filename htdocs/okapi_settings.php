@@ -20,7 +20,7 @@ function get_okapi_settings()
     require $opt['rootpath'] . 'config2/settings-dist.inc.php';
     require $opt['rootpath'] . 'config2/settings.inc.php';
     
-    return array(
+    return [
 
         # Settings which ARE NOT present in settings.inc.php:
 
@@ -28,7 +28,7 @@ function get_okapi_settings()
 
         # Settings which ARE present in settings.inc.php:
 
-        'ADMINS'           => array($opt['db']['warn']['mail'], 'rygielski@mimuw.edu.pl'),
+        'ADMINS'           => [$opt['db']['warn']['mail'], 'rygielski@mimuw.edu.pl'],
         'FROM_FIELD'       => $opt['mail']['contact'],
         'DATA_LICENSE_URL' => $opt['page']['absolute_url'] . $opt['logic']['license']['terms'],
         'DEBUG'            => ($opt['debug'] & DEBUG_DEVELOPER != 0),
@@ -47,7 +47,7 @@ function get_okapi_settings()
                                   : $opt['page']['absolute_url'] . 'register.php',
         'VAR_DIR'          => $opt['okapi']['var_dir'],
         'IMAGES_DIR'       => rtrim($opt['logic']['pictures']['dir'], '/'),
-        'IMAGES_URL'       => rtrim($opt['logic']['pictures']['url'], '/').'/',
+        'IMAGES_URL'       => rtrim($opt['logic']['pictures']['url'], '/') . '/',
         'IMAGE_MAX_UPLOAD_SIZE' => 2 * $opt['logic']['pictures']['maxsize'],
         'IMAGE_MAX_PIXEL_COUNT' => 786432,  # 1024 x 768; TODO: move PICTURE_MAX_LONG_SIDE to settings
         'SITE_LOGO'        => $opt['page']['absolute_url'] . 'resource2/' . $opt['template']['default']['style'] . '/images/oclogo/oc_logo_alpha3.png',
@@ -56,5 +56,5 @@ function get_okapi_settings()
         'OCDE_HTML_PURIFIER_SETTINGS'
                            => $opt['html_purifier'],
         'GITHUB_ACCESS_TOKEN' => $opt['okapi']['github_access_token'],
-    );
+    ];
 }

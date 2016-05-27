@@ -13,14 +13,23 @@ require_once $opt['rootpath'] . 'lib2/logic/labels.inc.php';
 
 class OcSmarty extends Smarty
 {
+
     public $name = 'sys_nothing';
+
     public $main_template = 'sys_main';
+
     public $bench = null;
+
     public $compile_id = null;
+
     public $cache_id = null;    // This is a smarty caching ID, not a caches.cache_id.
+
     public $title = '';
+
     public $menuitem = null;
+
     public $nowpsearch = false;
+
     public $change_country_inpage = false;
 
     // no header, menu or footer
@@ -34,7 +43,9 @@ class OcSmarty extends Smarty
     public $target = '';
 
     public $header_javascript = [];
+
     public $body_load = [];
+
     public $body_unload = [];
 
     public function __construct()
@@ -83,7 +94,7 @@ class OcSmarty extends Smarty
          */
         if (isset($_REQUEST['target'])) {
             $this->target = trim($_REQUEST['target']);
-            if (preg_match("/^https?:/i", $this->target)) {
+            if (preg_match('/^https?:/i', $this->target)) {
                 $this->target = '';
             }
         } else {
@@ -98,8 +109,8 @@ class OcSmarty extends Smarty
             }
             reset($_REQUEST);
 
-            if (mb_substr($target, - 1) == '?' || mb_substr($target, - 1) == '&') {
-                $target = mb_substr($target, 0, - 1);
+            if (mb_substr($target, -1) == '?' || mb_substr($target, -1) == '&') {
+                $target = mb_substr($target, 0, -1);
             }
 
             $this->target = $target;
@@ -245,17 +256,17 @@ class OcSmarty extends Smarty
         // build address for switching locales and countries
         $base_pageadr = $_SERVER['REQUEST_URI'];
         // workaround for http://redmine.opencaching.de/issues/703
-        $strange_things_pos = strpos($base_pageadr, ".php/");
+        $strange_things_pos = strpos($base_pageadr, '.php/');
         if ($strange_things_pos) {
             $base_pageadr = substr($base_pageadr, 0, $strange_things_pos + 4);
         }
-        $lpos = strpos($base_pageadr, "locale=");
+        $lpos = strpos($base_pageadr, 'locale=');
         if ($this->change_country_inpage) {
             if (!$lpos) {
-                $lpos = strpos($base_pageadr, "usercountry=");
+                $lpos = strpos($base_pageadr, 'usercountry=');
             }
             if (!$lpos) {
-                $lpos = strpos($base_pageadr, "country=");
+                $lpos = strpos($base_pageadr, 'country=');
             }
         }
         if ($lpos) {
@@ -301,7 +312,7 @@ class OcSmarty extends Smarty
         } else {
             $this->assign('sys_dbconnected', false);
         }
-        $this->assign('sys_dbslave', ($db['slave_id'] != - 1));
+        $this->assign('sys_dbslave', ($db['slave_id'] != -1));
 
         if ($this->template_exists($this->name . '.tpl')) {
             $this->assign('template', $this->name);
@@ -314,15 +325,15 @@ class OcSmarty extends Smarty
 
         $this->assign(
             'screen_css_time',
-            filemtime($opt['rootpath'] . "resource2/" . $opt['template']['style'] . "/css/style_screen.css")
+            filemtime($opt['rootpath'] . 'resource2/' . $opt['template']['style'] . '/css/style_screen.css')
         );
         $this->assign(
             'screen_msie_css_time',
-            filemtime($opt['rootpath'] . "resource2/" . $opt['template']['style'] . "/css/style_screen_msie.css")
+            filemtime($opt['rootpath'] . 'resource2/' . $opt['template']['style'] . '/css/style_screen_msie.css')
         );
         $this->assign(
             'print_css_time',
-            filemtime($opt['rootpath'] . "resource2/" . $opt['template']['style'] . "/css/style_print.css")
+            filemtime($opt['rootpath'] . 'resource2/' . $opt['template']['style'] . '/css/style_print.css')
         );
 
         // check if the template is compiled
@@ -385,7 +396,7 @@ class OcSmarty extends Smarty
 
         $args = func_get_args();
         unset($args[0]);
-        for ($i = 1; isset($args[$i]); $i ++) {
+        for ($i = 1; isset($args[$i]); $i++) {
             $this->assign('p' . $i, $args[$i]);
         }
 
@@ -441,7 +452,7 @@ class OcSmarty extends Smarty
         }
 
         // redirect
-        if (!preg_match("/^https?:/i", $page)) {
+        if (!preg_match('/^https?:/i', $page)) {
             if (substr($page, 0, 1) == '/') {
                 $page = substr($page, 1);
             }
@@ -451,15 +462,15 @@ class OcSmarty extends Smarty
         if ($opt['session']['mode'] == SAVE_SESSION) {
             if (defined('SID') && SID != '' && session_id() != '') {
                 if (strpos($page, '?') === false) {
-                    header("Location: " . $page . '?' . urlencode(session_name()) . '=' . urlencode(session_id()));
+                    header('Location: ' . $page . '?' . urlencode(session_name()) . '=' . urlencode(session_id()));
                 } else {
-                    header("Location: " . $page . '&' . urlencode(session_name()) . '=' . urlencode(session_id()));
+                    header('Location: ' . $page . '&' . urlencode(session_name()) . '=' . urlencode(session_id()));
                 }
             } else {
-                header("Location: " . $page);
+                header('Location: ' . $page);
             }
         } else {
-            header("Location: " . $page);
+            header('Location: ' . $page);
         }
         exit;
     }
@@ -475,7 +486,7 @@ class OcSmarty extends Smarty
 
         // ok ... redirect the get-data
         $target = ($opt['page']['https']['force_login'] ? 'https' : $opt['page']['protocol'])
-            . '://' . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"];
+            . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
         $this->redirect('login.php?target=' . urlencode($target));
     }
 
@@ -513,14 +524,14 @@ class OcSmarty extends Smarty
             header('Content-type: text/html; charset=utf-8');
 
             // HTTP/1.1
-            header("Cache-Control: no-store, no-cache, must-revalidate");
-            header("Cache-Control: post-check=0, pre-check=0", false);
+            header('Cache-Control: no-store, no-cache, must-revalidate');
+            header('Cache-Control: post-check=0, pre-check=0', false);
             // HTTP/1.0
-            header("Pragma: no-cache");
+            header('Pragma: no-cache');
             // Date in the past
-            header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
+            header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
             // always modified
-            header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
+            header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
 
             // set the cookie
             $cookie->header();

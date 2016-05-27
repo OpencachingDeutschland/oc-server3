@@ -93,7 +93,7 @@ if (($sourceid == 'mozilla-search') && ($userinput != '')) {
                     if ($target == 'gc') {
                         $wpfield = "IF(`wp_gc_maintained`='',`wp_gc`,`wp_gc_maintained`)";
                     } else {
-                        $wpfield = "`wp_oc`";
+                        $wpfield = '`wp_oc`';
                     }
                     // get cache_id from DB
                     // GC/NC waypoints can be duplicates -> return first match with least status number

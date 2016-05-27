@@ -2,14 +2,13 @@
 /**
  * Smarty plugin
  *
- * @package Smarty
- * @subpackage plugins
  *
  * Smarty plugin
  *
  * Type:     modifier<br>
  * Name:     hyperlink<br>
  * Example:  {$text|hyperlink}
+ *
  * @version  1.0
  *
  * @param string

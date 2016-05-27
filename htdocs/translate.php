@@ -261,12 +261,12 @@ function calcDataSqlChecksum($truncateLastInsert)
     $content = str_replace("\r\n", "\n", $content);
 
     if ($truncateLastInsert == true) {
-        $pos = strrpos($content, "INSERT");
+        $pos = strrpos($content, 'INSERT');
         $content = substr($content, 0, $pos);
     }
 
-    while (substr($content, - 1) == "\n") {
-        $content = substr($content, 0, - 1);
+    while (substr($content, -1) == "\n") {
+        $content = substr($content, 0, -1);
     }
 
     return md5($content);
@@ -354,7 +354,7 @@ function edit()
         "SELECT DISTINCT `sys_trans`.`id`, `sys_trans`.`text`
          FROM `sys_trans`
          INNER JOIN `sys_trans_text` ON `sys_trans`.`id`=`sys_trans_text`.`trans_id`
-         WHERE `sys_trans`.`id`!='&1' AND (" . $sWhereSql . ")",
+         WHERE `sys_trans`.`id`!='&1' AND (" . $sWhereSql . ')',
         $id
     );
     $tpl->assign_rs('trans', $trans);
@@ -394,7 +394,7 @@ function unlinkFiles($relbasedir, $ext)
 {
     global $opt;
 
-    if (substr($relbasedir, - 1, 1) != '/') {
+    if (substr($relbasedir, -1, 1) != '/') {
         $relbasedir .= '/';
     }
 
@@ -402,7 +402,7 @@ function unlinkFiles($relbasedir, $ext)
         if ($dh = opendir($opt['rootpath'] . $relbasedir)) {
             while (($file = readdir($dh)) !== false) {
                 if ($file != '.' && $file != '..' && is_file($opt['rootpath'] . $relbasedir . $file)) {
-                    if (substr($file, - (strlen($ext) + 1), strlen($ext) + 1) == '.' . $ext) {
+                    if (substr($file, -(strlen($ext) + 1), strlen($ext) + 1) == '.' . $ext) {
                         unlink($opt['rootpath'] . $relbasedir . $file);
                     }
                 }
@@ -452,11 +452,11 @@ function resetIds()
     sql_drop_temp_table('transDeadIds');
 
     // table sys_trans
-    if (sql_value("SELECT COUNT(*) FROM `sys_trans` WHERE `id`=1", 0) == 0) {
+    if (sql_value('SELECT COUNT(*) FROM `sys_trans` WHERE `id`=1', 0) == 0) {
         useId(1);
     }
 
-    $lastId = sql_value("SELECT MAX(`id`) FROM `sys_trans`", 0);
+    $lastId = sql_value('SELECT MAX(`id`) FROM `sys_trans`', 0);
 
     while ($id = sql_value(
         "SELECT `s1`.`id`+1
@@ -471,19 +471,19 @@ function resetIds()
             break;
         }
         setId($lastId, $id);
-        $lastId = sql_value("SELECT MAX(`id`) FROM `sys_trans`", 0);
+        $lastId = sql_value('SELECT MAX(`id`) FROM `sys_trans`', 0);
     }
 
     // need alter privileges
-    $lastId = sql_value("SELECT MAX(`id`) FROM `sys_trans`", 0);
-    sql("ALTER TABLE `sys_trans` AUTO_INCREMENT = &1", $lastId + 1);
+    $lastId = sql_value('SELECT MAX(`id`) FROM `sys_trans`', 0);
+    sql('ALTER TABLE `sys_trans` AUTO_INCREMENT = &1', $lastId + 1);
 
     $tpl->redirect('translate.php?translang=' . $translang);
 }
 
 function useId($freeId)
 {
-    $lastId = sql_value("SELECT MAX(`id`) FROM `sys_trans`", 0);
+    $lastId = sql_value('SELECT MAX(`id`) FROM `sys_trans`', 0);
     if ($lastId + 1 == $freeId) {
         return;
     }
@@ -500,7 +500,7 @@ function setId($oldId, $newId)
 
     foreach ($transIdCols as $col) {
         sql(
-            "UPDATE `" . $col['table'] . "`
+            'UPDATE `' . $col['table'] . "`
              SET `" . $col['trans_id'] . "`='&1'
              WHERE `" . $col['trans_id'] . "`='&2'",
             $newId,
@@ -557,7 +557,7 @@ function export()
     $f = fopen($opt['rootpath'] . '../sql/static-data/data.sql', 'a');
     fwrite(
         $f,
-        "INSERT INTO `sysconfig` (`name`, `value`)"
+        'INSERT INTO `sysconfig` (`name`, `value`)'
         . " VALUES ('datasql_checksum', '" . sql_escape($checksum) . "')"
         . " ON DUPLICATE KEY UPDATE `value`='" . sql_escape($checksum) . "';\n"
     );
@@ -574,7 +574,7 @@ function enumSqlFiles($dir)
     if (is_dir($dir)) {
         if ($dh = opendir($dir)) {
             while (($file = readdir($dh)) !== false) {
-                if (substr($file, - 4) == '.sql') {
+                if (substr($file, -4) == '.sql') {
                     $retval[] = substr($file, 0, strlen($file) - 4);
                 }
             }
@@ -595,7 +595,7 @@ function scan()
         if ($hDir !== false) {
             while (($file = readdir($hDir)) !== false) {
                 if (is_file($dir . '/' . $file)) {
-                    if ((substr($file, - 4) == '.tpl') || (substr($file, - 4) == '.php')) {
+                    if ((substr($file, -4) == '.tpl') || (substr($file, -4) == '.php')) {
                         $files[] = $dir . '/' . $file;
                     }
                 }
@@ -626,14 +626,14 @@ function scanFile($filename)
      */
     $bFound = false;
     foreach ($msDirlist as $dir) {
-        if (substr($dir, - 1) != '/') {
+        if (substr($dir, -1) != '/') {
             $dir .= '/';
         }
 
         if (substr($filename, 0, strlen($dir)) == $dir) {
             $file = substr($filename, strlen($dir));
             if (strpos($file, '/') === false) {
-                if ((substr($filename, - 4) == '.tpl') || (substr($filename, - 4) == '.php')) {
+                if ((substr($filename, -4) == '.tpl') || (substr($filename, -4) == '.php')) {
                     $bFound = true;
                     break;
                 }
@@ -670,7 +670,7 @@ function xmlexport()
         $lang[] = $k;
     }
 
-    @date_default_timezone_set("GMT");
+    @date_default_timezone_set('GMT');
     $writer = new XMLWriter();
     $writer->openURI('php://output');
     $writer->startDocument('1.0', 'UTF-8', 'yes');
@@ -690,7 +690,7 @@ function xmlexport()
         $writer->writeAttribute('id', $r['id']);
 
         $writer->writeElement('code', $r['text']);
-        for ($n = 0; $n < count($lang); $n ++) {
+        for ($n = 0; $n < count($lang); $n++) {
             $writer->writeElement(
                 $lang[$n],
                 sql_value(
@@ -818,7 +818,7 @@ function xmlimport3()
 
     $nCount = isset($_REQUEST['count']) ? $_REQUEST['count'] + 0 : 0;
 
-    for ($nIndex = 1; $nIndex <= $nCount; $nIndex ++) {
+    for ($nIndex = 1; $nIndex <= $nCount; $nIndex++) {
         if (isset($_REQUEST['useitem' . $nIndex]) && ($_REQUEST['useitem' . $nIndex] == '1')) {
             $sCode = base64_decode($_REQUEST['code' . $nIndex]);
             $transId = sql_value("SELECT `id` FROM `sys_trans` WHERE `text`='&1'", 0, $sCode);
@@ -876,7 +876,7 @@ function textexport($translang, $all)
             $thisline .= $r['text'] . "\r\n";
             $thisline .= $translated . "\r\n";
             $thisline .= "\r\n";
-            echo($thisline);
+            echo $thisline;
         }
     }
     sql_free_result($rs);
@@ -1005,7 +1005,7 @@ function addClassesDirectoriesToDirlist($basedir)
         return;
     }
 
-    if (substr($basedir, 0, - 1) != '/') {
+    if (substr($basedir, 0, -1) != '/') {
         $basedir .= '/';
     }
 
@@ -1028,7 +1028,7 @@ function verify()
                 "SELECT
                     `" . $col['text'] . "` `text`,
                     `" . $col['trans_id'] . "` `trans_id`
-                 FROM `" . $col['table'] . "`"
+                 FROM `" . $col['table'] . '`'
             );
             while ($r = sql_fetch_assoc($rs)) {
                 $st = sql_value(

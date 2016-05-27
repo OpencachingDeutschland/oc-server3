@@ -77,11 +77,11 @@ $db['connected'] = false;
 $db['debug'] = (($opt['debug'] & DEBUG_SQLDEBUGGER) == DEBUG_SQLDEBUGGER);
 $db['dblink'] = false;
 $db['dblink_slave'] = false;
-$db['slave_id'] = - 1;
+$db['slave_id'] = -1;
 $db['slave_server'] = '';
 $db['temptable_initialized'] = false;
-$db['temptables'] = array();
-$db['temptables_slave'] = array();
+$db['temptables'] = [];
+$db['temptables_slave'] = [];
 $db['mode'] = DB_MODE_USER;
 $db['error'] = false;
 
@@ -121,7 +121,7 @@ function sql($sql)
         unset($args);
 
         // correct indizes
-        $args = array_merge(array(0), $tmp_args);
+        $args = array_merge([0], $tmp_args);
         unset($tmp_args);
         unset($args[0]);
     }
@@ -146,7 +146,7 @@ function sql_slave($sql)
         unset($args);
 
         // correct indizes
-        $args = array_merge(array(0), $tmp_args);
+        $args = array_merge([0], $tmp_args);
         unset($tmp_args);
         unset($args[0]);
     }
@@ -171,7 +171,7 @@ function sql_internal($dblink, $sql)
         unset($args);
 
         // correct indizes
-        $args = array_merge(array(0), $tmp_args);
+        $args = array_merge([0], $tmp_args);
         unset($tmp_args);
         unset($args[0]);
     }
@@ -185,10 +185,10 @@ function sql_internal($dblink, $sql)
         // & escaped?
         $escapesCount = 0;
         while ((($nextarg - $escapesCount - 1) > 0) && (substr($sql, $nextarg - $escapesCount - 1, 1) == '\\')) {
-            $escapesCount ++;
+            $escapesCount++;
         }
         if (($escapesCount % 2) == 1) {
-            $nextarg ++;
+            $nextarg++;
         } else {
             $nextchar = substr($sql, $nextarg + 1, 1);
             if (is_numeric($nextchar)) {
@@ -199,7 +199,7 @@ function sql_internal($dblink, $sql)
                 while (preg_match('/^[0-9]{1}/', $nextchar) == 1) {
                     $arg .= $nextchar;
 
-                    $arglength ++;
+                    $arglength++;
                     $nextchar = substr($sql, $nextarg + $arglength + 1, 1);
                 }
 
@@ -225,13 +225,13 @@ function sql_internal($dblink, $sql)
                         // strip apostroph and insert NULL
                         $filtered_sql = substr($filtered_sql, 0, strlen($filtered_sql) - 1);
                         $filtered_sql .= 'NULL';
-                        $sqlpos ++;
+                        $sqlpos++;
                     } else {
                         $filtered_sql .= 'NULL';
                     }
                 }
 
-                $sqlpos ++;
+                $sqlpos++;
             } else {
                 $arglength = 0;
                 $arg = '';
@@ -241,7 +241,7 @@ function sql_internal($dblink, $sql)
                 while (preg_match('/^[a-zA-Z0-9_]{1}/', $nextchar) == 1) {
                     $arg .= $nextchar;
 
-                    $arglength ++;
+                    $arglength++;
                     $nextchar = substr($sql, $nextarg + $arglength + 1, 1);
                 }
 
@@ -288,12 +288,12 @@ function sql_internal($dblink, $sql)
         $escapesCount = 0;
         while ((($nextarg - $escapesCount - 1) > 0)
             && (substr($filtered_sql, $nextarg - $escapesCount - 1, 1) == '\\')) {
-            $escapesCount ++;
+            $escapesCount++;
         }
         if (($escapesCount % 2) == 0) {
             // strip escapes of &
             $filtered_sql = substr($filtered_sql, 0, $nextarg) . '&' . substr($filtered_sql, $nextarg + 2);
-            $nextarg --;
+            $nextarg--;
         }
 
         $nextarg = strpos($filtered_sql, '\&', $nextarg + 2);
@@ -319,7 +319,7 @@ function sql_internal($dblink, $sql)
         // measure time
         if ($opt['db']['warn']['time'] > 0) {
             require_once $opt['rootpath'] . 'lib2/bench.inc.php';
-            $cSqlExecution = new Cbench;
+            $cSqlExecution = new Cbench();
             $cSqlExecution->start();
         }
 
@@ -332,8 +332,8 @@ function sql_internal($dblink, $sql)
             $cSqlExecution->stop();
 
             if ($cSqlExecution->diff() > $opt['db']['warn']['time']) {
-                $ua = isset($_SERVER['HTTP_USER_AGENT']) ? "\r\n" . $_SERVER['HTTP_USER_AGENT'] : "";
-                sql_warn("execution took " . $cSqlExecution->diff() . " seconds" . $ua);
+                $ua = isset($_SERVER['HTTP_USER_AGENT']) ? "\r\n" . $_SERVER['HTTP_USER_AGENT'] : '';
+                sql_warn('execution took ' . $cSqlExecution->diff() . ' seconds' . $ua);
             }
         }
     }
@@ -447,7 +447,7 @@ function sql_value($sql, $default)
         unset($args);
 
         // correct indizes
-        $args = array_merge(array(0), $tmp_args);
+        $args = array_merge([0], $tmp_args);
         unset($tmp_args);
         unset($args[0]);
     }
@@ -466,7 +466,7 @@ function sql_value_slave($sql, $default)
         unset($args);
 
         // correct indizes
-        $args = array_merge(array(0), $tmp_args);
+        $args = array_merge([0], $tmp_args);
         unset($tmp_args);
         unset($args[0]);
     }
@@ -490,7 +490,7 @@ function sql_value_internal($bQuerySlave, $sql, $default)
         unset($args);
 
         // correct indizes
-        $args = array_merge(array(0), $tmp_args);
+        $args = array_merge([0], $tmp_args);
         unset($tmp_args);
         unset($args[0]);
     }
@@ -507,12 +507,12 @@ function sql_value_internal($bQuerySlave, $sql, $default)
     if ($r) {
         if ($r[0] == null) {
             return $default;
-        } else {
-            return $r[0];
         }
-    } else {
-        return $default;
+
+        return $r[0];
     }
+
+    return $default;
 }
 
 /*
@@ -551,7 +551,7 @@ function sql_fetch_assoc($rs)
 
 function sql_fetch_assoc_table($rs)
 {
-    $result = array();
+    $result = [];
     while ($r = sql_fetch_assoc($rs)) {
         $result[] = $r;
     }
@@ -579,7 +579,7 @@ function sql_fetch_row($rs)
 function sql_fetch_column($rs)
 {
     global $opt;
-    $result = array();
+    $result = [];
     while ($r = mysql_fetch_row($rs)) {
         if ($opt['charset']['iconv'] != 'UTF-8') {
             $result[] = iconv($opt['charset']['iconv'], 'UTF-8', $r[0]);
@@ -645,7 +645,7 @@ function sql_temp_table($table)
                 mysql_thread_id($db['dblink'])
             );
             while ($r = sql_fetch_assoc($rs)) {
-                sqlf("DROP TEMPORARY TABLE IF EXISTS &tmpdb.`&1`", $r['name']);
+                sqlf('DROP TEMPORARY TABLE IF EXISTS &tmpdb.`&1`', $r['name']);
             }
             sql_free_result($rs);
             sqlf("DELETE FROM &db.`sys_temptables` WHERE `threadid`='&1'", mysql_thread_id($db['dblink']));
@@ -683,7 +683,7 @@ function sql_drop_temp_table($table)
 {
     global $db, $opt;
 
-    sqlf("DROP TEMPORARY TABLE IF EXISTS &tmpdb.`&1`", $table);
+    sqlf('DROP TEMPORARY TABLE IF EXISTS &tmpdb.`&1`', $table);
 
     if ($opt['db']['pconnect'] == true) {
         sqlf(
@@ -719,7 +719,7 @@ function sql_drop_temp_table_slave($table)
 {
     global $db, $opt;
 
-    sqlf_slave("DROP TEMPORARY TABLE IF EXISTS &tmpdb.`&1`", $table);
+    sqlf_slave('DROP TEMPORARY TABLE IF EXISTS &tmpdb.`&1`', $table);
 
     if ($opt['db']['pconnect'] == true) {
         sqlf_slave(
@@ -837,7 +837,7 @@ function sql_connect_anyslave()
         AND `online`= 1
         AND (TIMESTAMP(NOW())-TIMESTAMP(`last_check`)+`time_diff`<'&1')
         ORDER BY `w` DESC LIMIT 1",
-        - 1,
+        -1,
         $nMaxTimeDiff
     );
 
@@ -856,7 +856,7 @@ function sql_connect_master_as_slave()
     }
 
     // use existing master connection
-    $db['slave_id'] = - 1;
+    $db['slave_id'] = -1;
     $db['dblink_slave'] = $db['dblink'];
     $db['slave_server'] = 'master';
 }
@@ -865,7 +865,7 @@ function sql_connect_slave($id)
 {
     global $opt, $db;
 
-    if ($id == - 1) {
+    if ($id == -1) {
         sql_connect_master_as_slave();
 
         return;
@@ -903,7 +903,7 @@ function sql_connect_slave($id)
         // initialize temp tables on slave server
         $rs = sqlf_slave("SELECT `threadid`, `name` FROM `sys_temptables` WHERE `threadid`='&1'", mysql_thread_id($db['dblink_slave']));
         while ($r = sql_fetch_assoc($rs)) {
-            sqlf_slave("DROP TEMPORARY TABLE IF EXISTS &tmpdb.`&1`", $r['name']);
+            sqlf_slave('DROP TEMPORARY TABLE IF EXISTS &tmpdb.`&1`', $r['name']);
         }
         sql_free_result($rs);
         sqlf_slave("DELETE FROM &db.`sys_temptables` WHERE `threadid`='&1'", mysql_thread_id($db['dblink_slave']));
@@ -939,12 +939,12 @@ function sql_disconnect()
     if (($opt['db']['pconnect'] == true) && ($db['dblink'] !== false)) {
         if (count($db['temptables']) > 0) {
             foreach ($db['temptables'] as $table) {
-                sqlf("DROP TEMPORARY TABLE IF EXISTS &tmpdb.`&1`", $table);
+                sqlf('DROP TEMPORARY TABLE IF EXISTS &tmpdb.`&1`', $table);
             }
 
             sqlf("DELETE FROM &db.`sys_temptables` WHERE `threadid`='&1'", mysql_thread_id($db['dblink']));
-            $db['temptables'] = array();
-            $db['temptables_slave'] = array();
+            $db['temptables'] = [];
+            $db['temptables_slave'] = [];
         }
     }
 
@@ -973,7 +973,7 @@ function sql_disconnect_slave()
         if (count($db['temptables']) > 0) {
             foreach ($db['temptables'] as $k => $table) {
                 if (isset($db['temptables_slave'][$table])) {
-                    sqlf_slave("DROP TEMPORARY TABLE IF EXISTS &tmpdb.`&1`", $table);
+                    sqlf_slave('DROP TEMPORARY TABLE IF EXISTS &tmpdb.`&1`', $table);
                     unset($db['temptables_slave'][$table]);
                     unset($db['temptables'][$k]);
                 }
@@ -985,7 +985,7 @@ function sql_disconnect_slave()
                     mysql_thread_id($db['dblink_slave'])
                 );
             }
-            $db['temptables_slave'] = array();
+            $db['temptables_slave'] = [];
         }
     }
 
@@ -1002,14 +1002,14 @@ function sql_disconnect_slave()
     $db['dblink_slave'] = false;
 }
 
-function sql_error($sqlstatement = "")
+function sql_error($sqlstatement = '')
 {
     global $tpl, $opt, $db;
     global $bSmartyNoTranslate;
 
     $errno = mysql_errno();
     $error = mysql_error();
-    if ($sqlstatement != "") {
+    if ($sqlstatement != '') {
         $error .= "\n\nSQL statement: " . $sqlstatement;
     }
 
@@ -1021,7 +1021,7 @@ function sql_error($sqlstatement = "")
         if ($opt['db']['error']['display'] == true) {
             $errmsg = 'MySQL error recursion (' . $errno . '): ' . $error;
         } else {
-            $errmsg = "";
+            $errmsg = '';
         }
         $errtitle = 'Datenbankfehler';
         require 'html/error.php';
@@ -1035,10 +1035,11 @@ function sql_error($sqlstatement = "")
 
     if ($opt['db']['error']['mail'] != '') {
         $subject = '[' . $opt['page']['domain'] . '] SQL error';
-        if (admin_errormail($opt['db']['error']['mail'],
+        if (admin_errormail(
+            $opt['db']['error']['mail'],
             $subject,
             str_replace("\n", "\r\n", $error) . "\n" . print_r(debug_backtrace(), true),
-            "From: " . $opt['mail']['from']
+            'From: ' . $opt['mail']['from']
         )) {
             require_once $opt['rootpath'] . 'lib2/mail.class.php';
 
@@ -1066,7 +1067,7 @@ function sql_error($sqlstatement = "")
             }
         } else {
             if ($opt['db']['error']['display'] == true) {
-                die('<html><body>' . htmlspecialchars('MySQL error (' . $errno . '): ' . str_replace("\n,", "<br />", $error)) . '</body></html>');
+                die('<html><body>' . htmlspecialchars('MySQL error (' . $errno . '): ' . str_replace("\n,", '<br />', $error)) . '</body></html>');
             } else {
                 die('<html><body>A database command could not be performed</body></html>');
             }
@@ -1087,10 +1088,11 @@ function sql_warn($warnmessage)
 
     if ($opt['db']['error']['mail'] != '') {
         $subject = '[' . $opt['page']['domain'] . '] SQL error';
-        if (admin_errormail($opt['db']['error']['mail'],
+        if (admin_errormail(
+            $opt['db']['error']['mail'],
             $subject,
             $warnmessage . "\n" . print_r(debug_backtrace(), true),
-            "From: " . $opt['mail']['from']
+            'From: ' . $opt['mail']['from']
         )) {
             require_once $opt['rootpath'] . 'lib2/mail.class.php';
             $mail = new mail();
@@ -1112,17 +1114,17 @@ function sql_export_recordset($f, $rs, $table, $truncate = true)
     fwrite($f, "SET NAMES 'utf8';\n");
 
     if ($truncate == true) {
-        fwrite($f, "TRUNCATE TABLE `" . sql_escape($table) . "`;\n");
+        fwrite($f, 'TRUNCATE TABLE `' . sql_escape($table) . "`;\n");
     }
 
     while ($r = sql_fetch_assoc($rs)) {
-        $fields = array();
-        $values = array();
+        $fields = [];
+        $values = [];
 
         foreach ($r as $k => $v) {
             $fields[] = '`' . sql_escape($k) . '`';
             if ($v === null) {
-                $values[] = "NULL";
+                $values[] = 'NULL';
             } else {
                 $values[] = "'" . sql_escape($v) . "'";
             }
@@ -1131,16 +1133,16 @@ function sql_export_recordset($f, $rs, $table, $truncate = true)
 
         fwrite(
             $f,
-            "INSERT INTO `" . sql_escape($table) . "` (" . implode(', ', $fields) . ")"
-            . " VALUES (" . implode(', ', $values) . ");\n"
+            'INSERT INTO `' . sql_escape($table) . '` (' . implode(', ', $fields) . ')'
+            . ' VALUES (' . implode(', ', $values) . ");\n"
         );
     }
 }
 
 function sql_export_table($f, $table)
 {
-    $primary = array();
-    $rsIndex = sql("SHOW INDEX FROM `&1`", $table);
+    $primary = [];
+    $rsIndex = sql('SHOW INDEX FROM `&1`', $table);
     while ($r = sql_fetch_assoc($rsIndex)) {
         if ($r['Key_name'] == 'PRIMARY') {
             $primary[] = '`' . sql_escape($r['Column_name']) . '` ASC';
@@ -1148,7 +1150,7 @@ function sql_export_table($f, $table)
     }
     sql_free_result($rsIndex);
 
-    $sql = "SELECT * FROM `" . sql_escape($table) . "`";
+    $sql = 'SELECT * FROM `' . sql_escape($table) . '`';
     if (count($primary) > 0) {
         $sql .= ' ORDER BY ' . implode(', ', $primary);
     }
@@ -1187,16 +1189,16 @@ function sql_export_table_to_file($filename, $table)
 
 function sql_export_structure($f, $table)
 {
-    $rs = sql("SHOW CREATE TABLE `&1`", $table);
+    $rs = sql('SHOW CREATE TABLE `&1`', $table);
     $r = sql_fetch_array($rs);
     sql_free_result($rs);
 
     $sTableSql = $r[1];
-    $sTableSql = preg_replace("/ AUTO_INCREMENT=[0-9]{1,} /", ' ', $sTableSql);
+    $sTableSql = preg_replace('/ AUTO_INCREMENT=[0-9]{1,} /', ' ', $sTableSql);
     $sTableSql = preg_replace("/,\n +?(KEY )?`okapi_syncbase`.+?(,)?\n/", "\\2\n", $sTableSql);
 
     fwrite($f, "SET NAMES 'utf8';\n");
-    fwrite($f, "DROP TABLE IF EXISTS `" . sql_escape($table) . "`;\n");
+    fwrite($f, 'DROP TABLE IF EXISTS `' . sql_escape($table) . "`;\n");
     fwrite($f, $sTableSql . " ;\n");
 }
 
@@ -1281,10 +1283,10 @@ function sql_fp_exists($type, $name)
     $r = sql_fetch_assoc($rs);
     sql_free_result($rs);
 
-    return ($r &&
+    return $r &&
         $r['Db'] == $opt['db']['placeholder']['db'] &&
         $r['Name'] == $name &&
-        $r['Type'] == $type);
+        $r['Type'] == $type;
 }
 
 // test if a function exists
@@ -1313,7 +1315,7 @@ function sql_dropProcedure($name)
 
 function sql_dropTrigger($triggername)
 {
-    $rs = sql("SHOW TRIGGERS");
+    $rs = sql('SHOW TRIGGERS');
     while ($r = sql_fetch_assoc($rs)) {
         if ($r['Trigger'] == $triggername) {
             sql('DROP TRIGGER `&1`', $triggername);

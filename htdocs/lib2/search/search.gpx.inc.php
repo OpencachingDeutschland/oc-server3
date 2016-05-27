@@ -250,7 +250,7 @@ function search_output()
             $thisline = mb_ereg_replace('{hints}', '', $thisline);
         } else {
             // Ocprop:  <groundspeak:encoded_hints>(.*?)<\/groundspeak:encoded_hints>
-            $hint = html_entity_decode(strip_tags($r['hint']), ENT_COMPAT, "UTF-8");
+            $hint = html_entity_decode(strip_tags($r['hint']), ENT_COMPAT, 'UTF-8');
             $thisline = mb_ereg_replace('{hints}', '      <groundspeak:encoded_hints>' . text_xmlentities($hint) . '</groundspeak:encoded_hints>', $thisline);
         }
 
@@ -273,7 +273,7 @@ function search_output()
             true,
             true
         );
-        if ($license != "") {
+        if ($license != '') {
             $desc .= "<p><em>$license</em></p>\n";
         }
         $desc .= get_desc_npas($r['cacheid']);
@@ -347,7 +347,7 @@ function search_output()
         }
 
         // fetch all logs of the current user, then the last 20 other logs
-        for ($currentuser = ($user_id != 0 ? 1 : 0); $currentuser >= 0; -- $currentuser) {
+        for ($currentuser = ($user_id != 0 ? 1 : 0); $currentuser >= 0; --$currentuser) {
             if ($currentuser) {
                 $user_operator = '=';
                 $limit = '';
@@ -377,7 +377,7 @@ function search_output()
                 ORDER BY
                     `cache_logs`.`order_date` DESC,
                     `cache_logs`.`date_created` DESC,
-                    `cache_logs`.`id` DESC". $limit,
+                    `cache_logs`.`id` DESC" . $limit,
                 $r['cacheid'],
                 $user_id
             );
@@ -421,7 +421,7 @@ function search_output()
                             $flag = '<span style="color:#00c000">' . $ft . '</span>';
                         }
                     }
-                    $logtext = "<p><i>" . implode(', ', $flags) . "</i></p>\n" . $logtext;
+                    $logtext = '<p><i>' . implode(', ', $flags) . "</i></p>\n" . $logtext;
                 }
                 $thislog = mb_ereg_replace('{text}', text_xmlentities($logtext), $thislog);
 
@@ -486,7 +486,7 @@ function search_output()
             $thiskrety = $gpxGeokrety;
 
             $thiskrety = mb_ereg_replace('{gkid}', $rGK['id'], $thiskrety);
-            $thiskrety = mb_ereg_replace('{gkref}', sprintf("GK%04X", $rGK['id']), $thiskrety);
+            $thiskrety = mb_ereg_replace('{gkref}', sprintf('GK%04X', $rGK['id']), $thiskrety);
             $thiskrety = mb_ereg_replace('{gkname}', text_xmlentities($rGK['name']), $thiskrety);
 
             $gkentries .= $thiskrety . "\n";
@@ -497,7 +497,7 @@ function search_output()
         // additional waypoints, including personal cache note
         $childWaypoints = $childwphandler->getChildWps($r['cacheid']);
         $n = 1;
-        $digits = "%0" . strlen(count($childWaypoints)) . "d";
+        $digits = '%0' . strlen(count($childWaypoints)) . 'd';
 
         foreach ($childWaypoints as $childWaypoint) {
             $thiswp = $gpxWaypoints;
@@ -510,29 +510,29 @@ function search_output()
             $thiswp = mb_ereg_replace('{desc}', text_xmlentities($childWaypoint['name']), $thiswp);
             switch ($childWaypoint['type']) {
                 case 1:
-                    $wp_typename = "Parking Area";
+                    $wp_typename = 'Parking Area';
                     break;  // well-known garmin symbols
                 case 2:
-                    $wp_typename = "Flag, Green";
+                    $wp_typename = 'Flag, Green';
                     break;   // stage / ref point
                 case 3:
-                    $wp_typename = "Flag, Blue";
+                    $wp_typename = 'Flag, Blue';
                     break;    // path
                 case 4:
-                    $wp_typename = "Circle with X";
+                    $wp_typename = 'Circle with X';
                     break; // final
                 case 5:
-                    $wp_typename = "Diamond, Green";
+                    $wp_typename = 'Diamond, Green';
                     break;  // point of interest
                 default:
-                    $wp_typename = "Flag, Blue";
+                    $wp_typename = 'Flag, Blue';
                     break;  // for the case new types are forgotten here ..
             }
             $thiswp = mb_ereg_replace('{type}', text_xmlentities($wp_typename), $thiswp);
             $thiswp = mb_ereg_replace('{parent}', $r['waypoint'], $thiswp);
             $thiswp = mb_ereg_replace('{cacheid}', $r['cacheid'], $thiswp);
             $waypoints .= $thiswp;
-            ++ $n;
+            ++$n;
         }
 
         if ($cacheNote && !empty($cacheNote['latitude']) && !empty($cacheNote['longitude'])) {
@@ -544,7 +544,7 @@ function search_output()
             $thiswp = mb_ereg_replace('{cachename}', text_xmlentities($r['name']), $thiswp);
             $thiswp = mb_ereg_replace('{comment}', text_xmlentities($cacheNote['note']), $thiswp);
             $thiswp = mb_ereg_replace('{desc}', text_xmlentities($cache_note_text), $thiswp);
-            $thiswp = mb_ereg_replace('{type}', "Reference Point", $thiswp);
+            $thiswp = mb_ereg_replace('{type}', 'Reference Point', $thiswp);
             $thiswp = mb_ereg_replace('{parent}', $r['waypoint'], $thiswp);
             $thiswp = mb_ereg_replace('{cacheid}', $r['cacheid'], $thiswp);
             $waypoints .= $thiswp;
@@ -563,7 +563,7 @@ function search_output()
 function decodeEntities($str)
 {
     $str = changePlaceholder($str);
-    $str = html_entity_decode($str, ENT_COMPAT, "UTF-8");
+    $str = html_entity_decode($str, ENT_COMPAT, 'UTF-8');
     $str = changePlaceholder($str, true);
 
     return $str;
@@ -571,11 +571,11 @@ function decodeEntities($str)
 
 function changePlaceholder($str, $inverse = false)
 {
-    static $translate = array(
+    static $translate = [
         '&lt;' => '{oc-placeholder-lt}',
         '&gt;' => '{oc-placeholder-gt}',
         '&amp;' => '{oc-placeholder-amp}'
-    );
+    ];
 
     foreach ($translate as $entity => $placeholder) {
         if (!$inverse) {
@@ -604,7 +604,7 @@ function getCacheNote($userid, $cacheid)
 // (also to hide spoilers first)
 function getPictures($cacheid, $server_address)
 {
-    $retval = "";
+    $retval = '';
     $rs = sql_slave(
         "
         SELECT
@@ -621,12 +621,12 @@ function getPictures($cacheid, $server_address)
     );
     while ($r = sql_fetch_array($rs)) {
         $retval .= '<div style="float:left; padding:8px"><a href="' . $r['url'] . '" target="_blank">' .
-            '<img src="' . $server_address . 'thumbs.php?type=2&uuid=' . $r["uuid"] . '" />' .
+            '<img src="' . $server_address . 'thumbs.php?type=2&uuid=' . $r['uuid'] . '" />' .
             '</a><br />' . $r['title'];
         if ($r['spoiler']) {
             $retval .= ' (' . _('click on spoiler to display') . ')';
         }
-        $retval .= "</div>";
+        $retval .= '</div>';
     }
     mysql_free_result($rs);
 

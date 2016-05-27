@@ -14,7 +14,9 @@ use Oc\Libse\Language\TranslatorLanguage;
 
 class HandlerChildWp
 {
+
     private $childWpTypes = [];
+
     private $translator;
 
     public function __construct()

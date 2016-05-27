@@ -5,23 +5,30 @@
  *  Unicode Reminder メモ
  ***************************************************************************/
 
-require_once __DIR__. '/../vendor/autoload.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 
 class mail extends Smarty
 {
+
     public $name = 'sys_nothing';
+
     public $main_template = 'sys_main';
+
     public $compile_id = null;
+
     public $recipient_locale = null;
 
     public $from = '';
+
     public $to = '';
+
     public $subject = '';
 
     public $replyTo = null;
+
     public $returnPath = null;
 
-    public $headers = array();
+    public $headers = [];
 
     public function __construct()
     {
@@ -59,7 +66,7 @@ class mail extends Smarty
 
     public function assign_rs($name, $rs)
     {
-        $items = array();
+        $items = [];
         while ($r = sql_fetch_assoc($rs)) {
             $items[] = $r;
         }
@@ -109,12 +116,12 @@ class mail extends Smarty
 
         // check if the target domain exists if the domain does not
         // exist, the mail is sent to the own domain (?!)
-        $domain = mail::getToMailDomain($this->to);
-        if (mail::is_existent_maildomain($domain) == false) {
+        $domain = self::getToMailDomain($this->to);
+        if (self::is_existent_maildomain($domain) == false) {
             return false;
         }
 
-        $aAddHeaders = array();
+        $aAddHeaders = [];
         $aAddHeaders[] = 'From: "' . $this->from . '" <' . $this->from . '>';
 
         if ($this->replyTo !== null) {
@@ -132,12 +139,12 @@ class mail extends Smarty
 
     public static function is_existent_maildomain($domain)
     {
-        if ($domain == "localhost") {
+        if ($domain == 'localhost') {
             return true;
         }  // allow maintenance mails e.g. to root
 
-        $smtp_serverlist = array();
-        $smtp_serverweight = array();
+        $smtp_serverlist = [];
+        $smtp_serverweight = [];
 
         if (getmxrr($domain, $smtp_serverlist, $smtp_serverweight) != false) {
             if (count($smtp_serverlist) > 0) {

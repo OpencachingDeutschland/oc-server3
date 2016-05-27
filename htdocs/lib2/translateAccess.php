@@ -9,6 +9,7 @@ require_once __DIR__ . '/logic/const.inc.php';
 
 class translateAccess
 {
+
     private $languages = false;
 
     public function hasAccess()
@@ -17,9 +18,9 @@ class translateAccess
 
         if (isset($login)) {
             return $login->hasAdminPriv(ADMIN_TRANSLATE);
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     public function mayTranslate($language)
@@ -28,9 +29,9 @@ class translateAccess
 
         if (isset($login)) {
             return $login->hasAdminPriv(ADMIN_ROOT) || in_array($language, $this->getLanguages());
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     private function getLanguages()

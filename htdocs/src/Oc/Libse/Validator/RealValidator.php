@@ -9,7 +9,9 @@ namespace Oc\Libse\Validator;
 
 class RealValidator extends NumericValidator
 {
+
     private $int_len;
+
     private $dec_len;
 
     public function __construct($min = false, $max = false, $int_len = '+', $dec_len = '+')
@@ -22,7 +24,7 @@ class RealValidator extends NumericValidator
 
     protected function getMinValue()
     {
-        return - 1e38;
+        return -1e38;
     }
 
     protected function getMaxValue()

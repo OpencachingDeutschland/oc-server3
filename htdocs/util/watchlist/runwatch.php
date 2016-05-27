@@ -26,7 +26,7 @@ if (!Cronjobs::enabled()) {
 
 // use posix pid-files to lock process
 if (!CreatePidFile($watchpid)) {
-    CleanupAndExit($watchpid, "Another instance is running!");
+    CleanupAndExit($watchpid, 'Another instance is running!');
     exit;
 }
 
@@ -51,7 +51,7 @@ $rsNewLogs = sql(
     WHERE cache_logs.cache_id=caches.cache_id
     AND cache_logs.owner_notified=0"
 );
-for ($i = 0; $i < mysql_num_rows($rsNewLogs); $i ++) {
+for ($i = 0; $i < mysql_num_rows($rsNewLogs); $i++) {
     $rNewLog = sql_fetch_array($rsNewLogs);
 
     $rsNotified = sql(
@@ -134,7 +134,7 @@ $rsUsers = sql(
     WHERE `user`.`watchmail_nextmail`<NOW()",
     $opt['template']['default']['locale']
 );
-for ($i = 0; $i < mysql_num_rows($rsUsers); $i ++) {
+for ($i = 0; $i < mysql_num_rows($rsUsers); $i++) {
     $rUser = sql_fetch_array($rsUsers);
 
     if ($rUser['watchmail_nextmail'] != '0000-00-00 00:00:00') {
@@ -158,12 +158,12 @@ for ($i = 0; $i < mysql_num_rows($rsUsers); $i ++) {
                 );
                 if (mysql_num_rows($rsWatchesOwner) > 0) {
                     $logtexts = '';
-                    for ($j = 0; $j < mysql_num_rows($rsWatchesOwner); $j ++) {
+                    for ($j = 0; $j < mysql_num_rows($rsWatchesOwner); $j++) {
                         $rWatch = sql_fetch_array($rsWatchesOwner);
                         $logtexts .= $rWatch['watchtext'];
                     }
 
-                    while ((mb_substr($logtexts, - 1) == "\n") || (mb_substr($logtexts, - 1) == "\r")) {
+                    while ((mb_substr($logtexts, -1) == "\n") || (mb_substr($logtexts, -1) == "\r")) {
                         $logtexts = mb_substr($logtexts, 0, mb_strlen($logtexts) - 1);
                     }
 
@@ -183,12 +183,12 @@ for ($i = 0; $i < mysql_num_rows($rsUsers); $i ++) {
                 );
                 if (mysql_num_rows($rsWatchesLog) > 0) {
                     $logtexts = '';
-                    for ($j = 0; $j < mysql_num_rows($rsWatchesLog); $j ++) {
+                    for ($j = 0; $j < mysql_num_rows($rsWatchesLog); $j++) {
                         $rWatch = sql_fetch_array($rsWatchesLog);
                         $logtexts .= $rWatch['watchtext'];
                     }
 
-                    while ((mb_substr($logtexts, - 1) == "\n") || (mb_substr($logtexts, - 1) == "\r")) {
+                    while ((mb_substr($logtexts, -1) == "\n") || (mb_substr($logtexts, -1) == "\r")) {
                         $logtexts = mb_substr($logtexts, 0, mb_strlen($logtexts) - 1);
                     }
 
@@ -352,9 +352,9 @@ function process_owner_log($user_id, $log_id)
     $domain = sqlValue("SELECT `domain` FROM `user` WHERE `user_id`='" . sql_escape($user_id) . "'", null);
     $urls = get_site_urls($domain);
     if ($urls['shortlink_url']) {
-        $watchtext = mb_ereg_replace("{shortlink_url}", $urls['shortlink_url'], $watchtext);
+        $watchtext = mb_ereg_replace('{shortlink_url}', $urls['shortlink_url'], $watchtext);
     } else {
-        $watchtext = mb_ereg_replace("{shortlink_url}", $urls['site_url'], $watchtext);
+        $watchtext = mb_ereg_replace('{shortlink_url}', $urls['site_url'], $watchtext);
     }
 
     sql(
@@ -474,9 +474,9 @@ function process_log_watch($user_id, $log_id)
     $domain = sqlValue("SELECT `domain` FROM `user` WHERE `user_id`='" . sql_escape($user_id) . "'", null);
     $urls = get_site_urls($domain);
     if ($urls['shortlink_url']) {
-        $watchtext = mb_ereg_replace("{shortlink_url}", $urls['shortlink_url'], $watchtext);
+        $watchtext = mb_ereg_replace('{shortlink_url}', $urls['shortlink_url'], $watchtext);
     } else {
-        $watchtext = mb_ereg_replace("{shortlink_url}", $urls['site_url'], $watchtext);
+        $watchtext = mb_ereg_replace('{shortlink_url}', $urls['site_url'], $watchtext);
     }
 
     sql(
@@ -562,21 +562,21 @@ function CreatePidFile($PidFile)
     }
 
     if (file_exists($PidFile)) {
-        echo "Error: Pidfile (" . $PidFile . ") already present at " . __FILE__ . ":" . __LINE__ . "!\n";
+        echo 'Error: Pidfile (' . $PidFile . ') already present at ' . __FILE__ . ':' . __LINE__ . "!\n";
 
         return false;
-    } else {
-        if ($pidfile = @fopen($PidFile, "w")) {
-            fputs($pidfile, posix_getpid());
-            fclose($pidfile);
-
-            return true;
-        } else {
-            echo "can't create Pidfile $PidFile at " . __FILE__ . ":" . __LINE__ . "!\n";
-
-            return false;
-        }
     }
+
+    if ($pidfile = @fopen($PidFile, 'w')) {
+        fwrite($pidfile, posix_getpid());
+        fclose($pidfile);
+
+        return true;
+    }
+
+    echo "can't create Pidfile $PidFile at " . __FILE__ . ':' . __LINE__ . "!\n";
+
+    return false;
 }
 
 //
@@ -584,11 +584,11 @@ function CreatePidFile($PidFile)
 //
 function CheckDaemon($PidFile)
 {
-    if ($pidfile = @fopen($PidFile, "r")) {
+    if ($pidfile = @fopen($PidFile, 'r')) {
         $pid_daemon = fgets($pidfile, 20);
         fclose($pidfile);
 
-        $pid_daemon = (int) $pid_daemon;
+        $pid_daemon = (int)$pid_daemon;
 
         // process running?
         if (posix_kill($pid_daemon, 0)) {
@@ -597,7 +597,7 @@ function CheckDaemon($PidFile)
             false;
         } else {
             // no, remove pid_file
-            echo "process not running, removing old pid_file (" . $PidFile . ")\n";
+            echo 'process not running, removing old pid_file (' . $PidFile . ")\n";
             unlink($PidFile);
 
             return true;
@@ -612,14 +612,14 @@ function CheckDaemon($PidFile)
 //
 function CleanupAndExit($PidFile, $message = false)
 {
-    if ($pidfile = @fopen($PidFile, "r")) {
+    if ($pidfile = @fopen($PidFile, 'r')) {
         $pid = fgets($pidfile, 20);
         fclose($pidfile);
         if ($pid == posix_getpid()) {
             unlink($PidFile);
         }
     } else {
-        echo "Error: can't delete own pidfile (" . $PidFile . ") at " . __FILE__ . ":" . __LINE__ . "!\n";
+        echo "Error: can't delete own pidfile (" . $PidFile . ') at ' . __FILE__ . ':' . __LINE__ . "!\n";
     }
 
     if ($message) {

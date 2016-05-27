@@ -31,8 +31,8 @@ function __autoload($class_name)
 
 
 // check for broken browsers
-$useragent = isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : "";
-$useragent_msie = preg_match('/MSIE ([1-9]+).[0-9]+/', $useragent, $ua_matches) && !strpos($useragent, "Opera");
+$useragent = isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : '';
+$useragent_msie = preg_match('/MSIE ([1-9]+).[0-9]+/', $useragent, $ua_matches) && !strpos($useragent, 'Opera');
 $useragent_msie_version = null;
 if (count($ua_matches) > 1) {
     $useragent_msie_version = $ua_matches[1];
@@ -123,7 +123,7 @@ if (!isset($disable_verifyemail) &&
     $login->userid > 0 &&
     sql_value("SELECT `email_problems` FROM `user` WHERE `user_id`='&1'", 0, $login->userid) != 0
 ) {
-    header("Location: verifyemail.php?page=" . basename($_SERVER['REQUEST_URI']));
+    header('Location: verifyemail.php?page=' . basename($_SERVER['REQUEST_URI']));
     exit;
 }
 
@@ -134,16 +134,16 @@ function normalize_settings()
 
     $opt['charset']['iconv'] = strtoupper($opt['charset']['iconv']);
 
-    if (substr($opt['logic']['pictures']['url'], - 1, 1) != '/') {
+    if (substr($opt['logic']['pictures']['url'], -1, 1) != '/') {
         $opt['logic']['pictures']['url'] .= '/';
     }
-    if (substr($opt['logic']['pictures']['dir'], - 1, 1) != '/') {
+    if (substr($opt['logic']['pictures']['dir'], -1, 1) != '/') {
         $opt['logic']['pictures']['dir'] .= '/';
     }
-    if (substr($opt['logic']['pictures']['thumb_url'], - 1, 1) != '/') {
+    if (substr($opt['logic']['pictures']['thumb_url'], -1, 1) != '/') {
         $opt['logic']['pictures']['thumb_url'] .= '/';
     }
-    if (substr($opt['logic']['pictures']['thumb_dir'], - 1, 1) != '/') {
+    if (substr($opt['logic']['pictures']['thumb_dir'], -1, 1) != '/') {
         $opt['logic']['pictures']['thumb_dir'] .= '/';
     }
 
@@ -260,7 +260,7 @@ function check_useragent()
     global $ocpropping;
 
     // are we Ocprop?
-    $ocpropping = isset($_SERVER['HTTP_USER_AGENT']) && strpos($_SERVER['HTTP_USER_AGENT'], "Ocprop/") !== false;
+    $ocpropping = isset($_SERVER['HTTP_USER_AGENT']) && strpos($_SERVER['HTTP_USER_AGENT'], 'Ocprop/') !== false;
 }
 
 // Exchange the protocol (http or https) in an URL to *this* website to the
@@ -276,14 +276,15 @@ function use_current_protocol($url)
         && $opt['page']['https']['active']
     ) {
         return 'https' . strstr($url, '://');
-    } elseif (strtolower(substr($url, 0, strlen($opt['page']['absolute_https_url'])))
+    }
+    if (strtolower(substr($url, 0, strlen($opt['page']['absolute_https_url'])))
                   == $opt['page']['absolute_https_url']
               && !$opt['page']['https']['active']
     ) {
         return 'http' . strstr($url, '://');
-    } else {
-        return $url;
     }
+
+    return $url;
 }
 
 
@@ -293,7 +294,7 @@ function use_current_protocol_in_html($url)
 
     if ($opt['page']['https']['active']) {
         return str_replace($opt['page']['absolute_http_url'], $opt['page']['absolute_https_url'], $url);
-    } else {
-        return $url;
     }
+
+    return $url;
 }

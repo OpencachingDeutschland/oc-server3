@@ -167,11 +167,11 @@ if ($dblink === false) {
 }
 
 // are we Ocprop?
-$ocpropping = isset($_SERVER['HTTP_USER_AGENT']) && strpos($_SERVER['HTTP_USER_AGENT'], "Ocprop/") !== false;
+$ocpropping = isset($_SERVER['HTTP_USER_AGENT']) && strpos($_SERVER['HTTP_USER_AGENT'], 'Ocprop/') !== false;
 
 // zeitmessung
 require_once $rootpath . 'lib/bench.inc.php';
-$bScriptExecution = new Cbench;
+$bScriptExecution = new Cbench();
 $bScriptExecution->start();
 
 function load_domain_settings()
@@ -216,10 +216,10 @@ function db_LanguageFromShort($langcode)
 
         //return the language
         return $record['text'];
-    } else {
-        //language not found
-        return false;
     }
+
+    //language not found
+    return false;
 }
 
 //get the stored settings and authentification data from the cookie
@@ -260,9 +260,9 @@ function get_cookie_setting($name)
 
     if ($cookie->is_set($name)) {
         return $cookie->get($name);
-    } else {
-        return false;
     }
+
+    return false;
 }
 
 //sets the cookie value
@@ -290,9 +290,9 @@ function tpl_get_var($name)
 
     if (isset($vars[$name])) {
         return $vars[$name];
-    } else {
-        return false;
     }
+
+    return false;
 }
 
 //clear all template vars
@@ -334,12 +334,12 @@ function tpl_BuildTemplate($dbdisconnect = true)
     // country dropdown
     global $tpl_usercountries;
 
-    tpl_set_var('screen_css_time', filemtime($opt['rootpath'] . "resource2/" . $style . "/css/style_screen.css"));
+    tpl_set_var('screen_css_time', filemtime($opt['rootpath'] . 'resource2/' . $style . '/css/style_screen.css'));
     tpl_set_var(
         'screen_msie_css_time',
-        filemtime($opt['rootpath'] . "resource2/" . $style . "/css/style_screen_msie.css")
+        filemtime($opt['rootpath'] . 'resource2/' . $style . '/css/style_screen_msie.css')
     );
-    tpl_set_var('print_css_time', filemtime($opt['rootpath'] . "resource2/" . $style . "/css/style_print.css"));
+    tpl_set_var('print_css_time', filemtime($opt['rootpath'] . 'resource2/' . $style . '/css/style_print.css'));
 
     if (isset($bScriptExecution)) {
         $bScriptExecution->Stop();
@@ -383,7 +383,7 @@ function tpl_BuildTemplate($dbdisconnect = true)
         tpl_set_var('license_disclaimer', '');
     }
 
-    $bTemplateBuild = new Cbench;
+    $bTemplateBuild = new Cbench();
     $bTemplateBuild->Start();
 
     //set {functionsbox}
@@ -485,14 +485,14 @@ function tpl_BuildTemplate($dbdisconnect = true)
 function http_write_no_cache()
 {
     // HTTP/1.1
-    header("Cache-Control: no-store, no-cache, must-revalidate");
-    header("Cache-Control: post-check=0, pre-check=0", false);
+    header('Cache-Control: no-store, no-cache, must-revalidate');
+    header('Cache-Control: post-check=0, pre-check=0', false);
     // HTTP/1.0
-    header("Pragma: no-cache");
+    header('Pragma: no-cache');
     // Date in the past
-    header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
+    header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
     // always modified
-    header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
+    header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
 }
 
 //redirect to another site to display, i.e. to view a cache after logging
@@ -504,9 +504,9 @@ function tpl_redirect($page)
     http_write_no_cache();
 
     if (!preg_match('/^https?:/i', $page)) {
-        header("Location: " . $absolute_server_URI . $page);
+        header('Location: ' . $absolute_server_URI . $page);
     } else {
-        header("Location: " . $page);
+        header('Location: ' . $page);
     }
 
     exit;
@@ -633,7 +633,7 @@ function t($str)
 
     $str = $translate->t($str, '', basename(__FILE__), __LINE__);
     $args = func_get_args();
-    for ($nIndex = count($args) - 1; $nIndex > 0; $nIndex --) {
+    for ($nIndex = count($args) - 1; $nIndex > 0; $nIndex--) {
         $str = str_replace('%' . $nIndex, $args[$nIndex], $str);
     }
 
@@ -727,20 +727,20 @@ function helppagelink($ocpage)
         $record = sql_fetch_array($rs);
         $helppage = $record['helppage'];
     } else {
-        $helppage = "";
+        $helppage = '';
     }
     mysql_free_result($rs);
 
     $imgtitle = $translate->t('Instructions', '', basename(__FILE__), __LINE__);
     $imgtitle = "alt='" . $imgtitle . "' title='" . $imgtitle . "'";
 
-    if (substr($helppage, 0, 1) == "!") {
+    if (substr($helppage, 0, 1) == '!') {
         return "<a class='nooutline' href='" . substr($helppage, 1) . "' " . $imgtitle . " target='_blank'>";
-    } else {
-        if ($helppage != "" && isset($opt['locale'][$help_locale]['helpwiki'])) {
-            return "<a class='nooutline' href='" . $opt['locale'][$help_locale]['helpwiki'] .
+    }
+
+    if ($helppage != '' && isset($opt['locale'][$help_locale]['helpwiki'])) {
+        return "<a class='nooutline' href='" . $opt['locale'][$help_locale]['helpwiki'] .
             str_replace(' ', '_', $helppage) . "' " . $imgtitle . " target='_blank'>";
-        }
     }
 
     return '';

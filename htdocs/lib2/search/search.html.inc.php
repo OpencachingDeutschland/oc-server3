@@ -42,13 +42,13 @@ function search_output()
 
     // run SQL query
     sql_enable_foundrows();
-    $rs_caches = sql_slave("SELECT SQL_BUFFER_RESULT SQL_CALC_FOUND_ROWS " . $sql);
+    $rs_caches = sql_slave('SELECT SQL_BUFFER_RESULT SQL_CALC_FOUND_ROWS ' . $sql);
     $resultcount = sql_value_slave('SELECT FOUND_ROWS()', 0);
     sql_foundrows_done();
     $tpl->assign('results_count', $resultcount);
     $tpl->assign('startat', $startat);
 
-    $caches = array();
+    $caches = [];
     while ($rCache = sql_fetch_array($rs_caches)) {
         // select best-fitting short desc for active language
         $rCache['short_desc'] = sql_value_slave(
@@ -93,7 +93,7 @@ function search_output()
 
         // get last logs
         if ($options['sort'] != 'bymylastlog' || !$login->logged_in()) {
-            $ownlogs = "";
+            $ownlogs = '';
         } else {
             $ownlogs = " AND `cache_logs`.`user_id`='" . sql_escape($login->userid) . "'";
         }
@@ -140,10 +140,10 @@ function search_output()
 
     $page = 'search.php?queryid=' . $options['queryid'] . '&startat={offset}&sortby=' . $options['sort'];
     if (isset($options['sortorder']) && $options['sortorder']) {
-        $page .= "&sortorder=" . $options['sortorder'];
+        $page .= '&sortorder=' . $options['sortorder'];
     }
     if (isset($options['creationdate']) && $options['creationdate']) {
-        $page .= "&creationdate=" . $options['creationdate'];
+        $page .= '&creationdate=' . $options['creationdate'];
     }
     $pager = new pager($page, 2, 9);
     $pager->make_from_offset($startat, $resultcount, $caches_per_page);
@@ -208,44 +208,44 @@ function dateDiff($interval, $dateTimeBegin, $dateTimeEnd)
     //$dateTimeBegin, $dateTimeEnd
 
     $dateTimeBegin = strtotime($dateTimeBegin);
-    if ($dateTimeBegin === - 1) {
-        return ("..begin date Invalid");
+    if ($dateTimeBegin === -1) {
+        return '..begin date Invalid';
     }
 
     $dateTimeEnd = strtotime($dateTimeEnd);
-    if ($dateTimeEnd === - 1) {
-        return ("..end date Invalid");
+    if ($dateTimeEnd === -1) {
+        return '..end date Invalid';
     }
 
     $dif = $dateTimeEnd - $dateTimeBegin;
 
     switch ($interval) {
-        case "s"://seconds
-            return ($dif);
+        case 's'://seconds
+            return $dif;
 
-        case "n"://minutes
-            return (floor($dif / 60)); //60s=1m
+        case 'n'://minutes
+            return floor($dif / 60); //60s=1m
 
-        case "h"://hours
-            return (floor($dif / 3600)); //3600s=1h
+        case 'h'://hours
+            return floor($dif / 3600); //3600s=1h
 
-        case "d"://days
-            return (floor($dif / 86400)); //86400s=1d
+        case 'd'://days
+            return floor($dif / 86400); //86400s=1d
 
-        case "ww"://Week
-            return (floor($dif / 604800)); //604800s=1week=1semana
+        case 'ww'://Week
+            return floor($dif / 604800); //604800s=1week=1semana
 
-        case "m": //similar result "m" dateDiff Microsoft
-            $monthBegin = (date("Y", $dateTimeBegin) * 12) + date("n", $dateTimeBegin);
-            $monthEnd = (date("Y", $dateTimeEnd) * 12) + date("n", $dateTimeEnd);
+        case 'm': //similar result "m" dateDiff Microsoft
+            $monthBegin = (date('Y', $dateTimeBegin) * 12) + date('n', $dateTimeBegin);
+            $monthEnd = (date('Y', $dateTimeEnd) * 12) + date('n', $dateTimeEnd);
             $monthDiff = $monthEnd - $monthBegin;
 
-            return ($monthDiff);
+            return $monthDiff;
 
-        case "yyyy": //similar result "yyyy" dateDiff Microsoft
-            return (date("Y", $dateTimeEnd) - date("Y", $dateTimeBegin));
+        case 'yyyy': //similar result "yyyy" dateDiff Microsoft
+            return date('Y', $dateTimeEnd) - date('Y', $dateTimeBegin);
 
         default:
-            return (floor($dif / 86400)); //86400s=1d
+            return floor($dif / 86400); //86400s=1d
     }
 }

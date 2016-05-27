@@ -59,17 +59,17 @@ function search_output()
 
     // start output
     if (!$db['debug']) {
-        header("Content-type: application/xml; charset=" . $encoding);
+        header('Content-type: application/xml; charset=' . $encoding);
         //header("Content-Disposition: attachment; filename=" . $sFilebasename . ".txt");
 
-        echo "<?xml version=\"1.0\" encoding=\"" . $encoding . "\"?>\n";
+        echo '<?xml version="1.0" encoding="' . $encoding . "\"?>\n";
         echo "<result>\n";
 
         echo "    <docinfo>\n";
-        echo "        <results>" . $rCount['count'] . "</results>\n";
-        echo "        <startat>" . $startat . "</startat>\n";
-        echo "        <perpage>" . $count . "</perpage>\n";
-        echo "        <total>" . $resultcount . "</total>\n";
+        echo '        <results>' . $rCount['count'] . "</results>\n";
+        echo '        <startat>' . $startat . "</startat>\n";
+        echo '        <perpage>' . $count . "</perpage>\n";
+        echo '        <total>' . $resultcount . "</total>\n";
         echo "    </docinfo>\n";
     }
 
@@ -171,7 +171,7 @@ function search_output()
 
         $thisline = str_replace('{owner}', filterevilchars($r['username']), $thisline);
         $thisline = str_replace('{ownerid}', filterevilchars($r['user_id']), $thisline);
-        $thisline = str_replace('{distance}', text_xmlentities(sprintf("%01.1f", $r['distance'])), $thisline);
+        $thisline = str_replace('{distance}', text_xmlentities(sprintf('%01.1f', $r['distance'])), $thisline);
 
         $thisline = lf2crlf($thisline);
 
@@ -190,7 +190,7 @@ function search_output()
 
 function decodeEntities($str)
 {
-    return html_entity_decode($str, ENT_COMPAT, "UTF-8");
+    return html_entity_decode($str, ENT_COMPAT, 'UTF-8');
 }
 
 function html2txt($html)
@@ -210,7 +210,7 @@ function lf2crlf($str)
 
 function filterevilchars($str)
 {
-    $evilchars = array(
+    $evilchars = [
         31 => 31,
         30 => 30,
         29 => 29,
@@ -241,7 +241,7 @@ function filterevilchars($str)
         2 => 2,
         1 => 1,
         0 => 0
-    );
+    ];
 
     foreach ($evilchars as $ascii) {
         $str = str_replace(chr($ascii), '', $str);

@@ -7,6 +7,7 @@
 
 class statpic
 {
+
     public $nUserId = 0;
 
     public $reUser;

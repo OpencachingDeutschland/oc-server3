@@ -31,15 +31,25 @@ abstract class PresenterChildWp
     const tpl_disabled = 'disabled';
 
     private $request;
+
     private $translator;
+
     protected $coordinate;
-    private $waypointTypes = array();
+
+    private $waypointTypes = [];
+
     private $waypointTypeValid = true;
-    private $typeImages = array();
+
+    private $typeImages = [];
+
     protected $type = '0';
+
     protected $description;
+
     protected $cacheId;
+
     protected $childId;
+
     protected $childWpHandler;
 
     public function __construct($request = false, $translator = false)

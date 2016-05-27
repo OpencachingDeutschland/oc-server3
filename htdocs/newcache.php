@@ -24,8 +24,8 @@ if ($error == false) {
 
         tpl_set_var('username', '');
         tpl_set_var('target', 'newcache.php');
-        tpl_set_var('message_start', "");
-        tpl_set_var('message_end', "");
+        tpl_set_var('message_start', '');
+        tpl_set_var('message_end', '');
         tpl_set_var('message', $login_required);
         tpl_set_var('helplink', helppagelink('login'));
     } else {
@@ -58,10 +58,10 @@ if ($error == false) {
             if ($sel_type == 4 || $sel_type == 5) {
                 $sel_size = 7;
             } else {
-                $sel_size = - 1;
+                $sel_size = -1;
             }
         } else {
-            $sel_size = isset($_POST['size']) ? $_POST['size'] : - 1;  // Ocprop
+            $sel_size = isset($_POST['size']) ? $_POST['size'] : -1;  // Ocprop
         }
         $sel_lang = isset($_POST['desc_lang']) ? $_POST['desc_lang'] : $default_lang;
         $sel_country = isset($_POST['country']) ? $_POST['country'] : getUserCountry();  // Ocprop
@@ -133,9 +133,9 @@ if ($error == false) {
             $descMode = (isset($_POST['desc_html']) && ($_POST['desc_html'] == 1)) ? 2 : 1;  // Ocprop
             $_POST['submitform'] = $_POST['submit'];
 
-            $short_desc = iconv("ISO-8859-1", "UTF-8", $short_desc);
-            $desc = iconv("ISO-8859-1", "UTF-8", $desc);
-            $name = iconv("ISO-8859-1", "UTF-8", $name);
+            $short_desc = iconv('ISO-8859-1', 'UTF-8', $short_desc);
+            $desc = iconv('ISO-8859-1', 'UTF-8', $desc);
+            $name = iconv('ISO-8859-1', 'UTF-8', $name);
         }
 
         // Text / normal HTML / HTML editor
@@ -192,7 +192,7 @@ if ($error == false) {
 
         // fuer alte Versionen von OCProp
         if (isset($_POST['submit']) && !isset($_POST['version2'])) {
-            $hints = iconv("ISO-8859-1", "UTF-8", $hints);
+            $hints = iconv('ISO-8859-1', 'UTF-8', $hints);
         }
 
         //tos
@@ -237,7 +237,7 @@ if ($error == false) {
         // fill activate hours
         $activate_hour = isset($_POST['activate_hour']) ? $_POST['activate_hour'] + 0 : date('H') + 0;
         $activation_hours = '';
-        for ($i = 0; $i <= 23; $i ++) {
+        for ($i = 0; $i <= 23; $i++) {
             if ($activate_hour == $i) {
                 $activation_hours .= '<option value="' . $i . '" selected="selected">' . $i . '</option>';
             } else {
@@ -259,7 +259,7 @@ if ($error == false) {
         //difficulty
         $difficulty = isset($_POST['difficulty']) ? $_POST['difficulty'] : 1;  // Ocprop
         $difficulty_options = '<option value="1">' . $sel_message . '</option>';
-        for ($i = 2; $i <= 10; $i ++) {
+        for ($i = 2; $i <= 10; $i++) {
             if ($difficulty == $i) {
                 $difficulty_options .= '<option value="' . $i . '" selected="selected">' . $i / 2 . '</option>';
             } else {
@@ -272,7 +272,7 @@ if ($error == false) {
         //terrain
         $terrain = isset($_POST['terrain']) ? $_POST['terrain'] : 1;  // Ocprop
         $terrain_options = '<option value="1">' . $sel_message . '</option>';
-        for ($i = 2; $i <= 10; $i ++) {
+        for ($i = 2; $i <= 10; $i++) {
             if ($terrain == $i) {
                 $terrain_options .= '<option value="' . $i . '" selected="selected">' . $i / 2 . '</option>';
             } else {
@@ -283,7 +283,7 @@ if ($error == false) {
         tpl_set_var('terrain_options', $terrain_options);
 
         //sizeoptions
-        $sSelected = ($sel_size == - 1) ? ' selected="selected"' : '';
+        $sSelected = ($sel_size == -1) ? ' selected="selected"' : '';
         $sizes = '<option value="-1"' . $sSelected . '>' . htmlspecialchars(t('Please select!'), ENT_COMPAT, 'UTF-8') . '</option>';
         $rsSizes = sql(
             "SELECT `cache_size`.`id`, IFNULL(`sys_trans_text`.`text`, `cache_size`.`name`) AS `name`
@@ -301,7 +301,7 @@ if ($error == false) {
         tpl_set_var('sizeoptions', $sizes);
 
         //typeoptions
-        $sSelected = ($sel_type == - 1) ? ' selected="selected"' : '';
+        $sSelected = ($sel_type == -1) ? ' selected="selected"' : '';
         $types = '<option value="-1"' . $sSelected . '>' . htmlspecialchars(t('Please select!'), ENT_COMPAT, 'UTF-8') . '</option>';
         $rsTypes = sql("SELECT `cache_type`.`id`, IFNULL(`sys_trans_text`.`text`, `cache_type`.`en`) AS `name`
                               FROM `cache_type`
@@ -441,7 +441,7 @@ if ($error == false) {
         tpl_set_var('countryoptions', $countriesoptions);
 
         // cache-attributes
-        $cache_attribs = isset($_POST['cache_attribs']) ? mb_split(';', $_POST['cache_attribs']) : array();
+        $cache_attribs = isset($_POST['cache_attribs']) ? mb_split(';', $_POST['cache_attribs']) : [];
 
         // cache-attributes
         $bBeginLine = true;
@@ -508,7 +508,7 @@ if ($error == false) {
                 $line = mb_ereg_replace('{name}', escape_javascript($record['name']), $line);
                 $line = mb_ereg_replace('{color}', $rAttrGroup['color'], $line);
                 $group_line .= $line;
-                $nLineAttrCount ++;
+                $nLineAttrCount++;
 
                 $line = $cache_attrib_js;
                 $line = mb_ereg_replace('{id}', $record['id'], $line);
@@ -604,7 +604,7 @@ if ($error == false) {
 
                 $latitude = $lat_h + $lat_min / 60;
                 if ($latNS == 'S') {
-                    $latitude = - $latitude;
+                    $latitude = -$latitude;
                 }
 
                 if ($latitude == 0) {
@@ -649,7 +649,7 @@ if ($error == false) {
 
                 $longitude = $lon_h + $lon_min / 60;
                 if ($lonEW == 'W') {
-                    $longitude = - $longitude;
+                    $longitude = -$longitude;
                 }
 
                 if ($longitude == 0) {
@@ -713,7 +713,7 @@ if ($error == false) {
             }
 
             //check GC waypoint
-            $wpgc_not_ok = $wp_gc != "" && !preg_match("/^(?:GC|CX)[0-9A-Z]{3,6}$/", $wp_gc);
+            $wpgc_not_ok = $wp_gc != '' && !preg_match('/^(?:GC|CX)[0-9A-Z]{3,6}$/', $wp_gc);
             if ($wpgc_not_ok) {
                 tpl_set_var('wpgc_message', $bad_wpgc_message);
                 $error = true;
@@ -754,7 +754,7 @@ if ($error == false) {
 
             //cache-size
             $size_not_ok = false;
-            if ($sel_size == - 1) {
+            if ($sel_size == -1) {
                 tpl_set_var('size_message', $size_not_ok_message);
                 $error = true;
                 $size_not_ok = true;
@@ -762,7 +762,7 @@ if ($error == false) {
 
             //cache-type
             $type_not_ok = false;
-            if ($sel_type == - 1) {
+            if ($sel_type == -1) {
                 tpl_set_var('type_message', $type_not_ok_message);
                 $error = true;
                 $type_not_ok = true;
@@ -903,7 +903,7 @@ if ($error == false) {
                 );
 
                 // insert cache-attributes
-                for ($i = 0; $i < count($cache_attribs); $i ++) {
+                for ($i = 0; $i < count($cache_attribs); $i++) {
                     if (($cache_attribs[$i] + 0) > 0) {
                         sql(
                             "INSERT INTO `caches_attributes` (`cache_id`, `attrib_id`) VALUES ('&1', '&2')",
@@ -916,7 +916,7 @@ if ($error == false) {
                 // only if cache is published NOW or activate_date is in the past
                 if ($publish == 'now2' || ($publish == 'later' && mktime($activate_hour, 0, 0, $activate_month, $activate_day, $activate_year) <= $today)) {
                     //do event handling
-                    include_once(__DIR__ . '/lib/eventhandler.inc.php');
+                    include_once __DIR__ . '/lib/eventhandler.inc.php';
 
                     event_notify_new_cache($cache_id + 0);
                     event_new_cache($usr['userid'] + 0);

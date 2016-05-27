@@ -47,19 +47,19 @@ if ($action == 'edit') {
         }
     }
 
-    $hours = array();
-    for ($i = 0; $i < 24; $i ++) {
+    $hours = [];
+    for ($i = 0; $i < 24; $i++) {
         $hours[] = [
             'value' => $i,
             'time' => mktime($i, 0, 0)
         ];
     }
-    $weekdays = array();
-    for ($i = 1; $i <= 7; $i ++) {
-        $weekdays[] = array(
+    $weekdays = [];
+    for ($i = 1; $i <= 7; $i++) {
+        $weekdays[] = [
             'value' => $i,
             'time' => mktime(0, 0, 0, 0, $i + 5, 2000)
-        );
+        ];
     }
 
     $tpl->assign('hours', $hours);

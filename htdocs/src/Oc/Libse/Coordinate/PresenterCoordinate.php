@@ -24,8 +24,11 @@ class PresenterCoordinate
     const coord_error = 'coord_error';
 
     private $coordinate;
+
     private $request;
+
     private $translator;
+
     private $valid = true;
 
     public function __construct($request = false, $translator = false)
@@ -92,6 +95,7 @@ class PresenterCoordinate
      * @todo add phpdoc parameter for $template
      *
      * @param $template
+     * @return void
      */
     public function prepare($template)
     {

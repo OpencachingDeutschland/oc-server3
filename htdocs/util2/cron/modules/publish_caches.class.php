@@ -11,7 +11,9 @@ checkJob(new publish_caches());
 
 class publish_caches
 {
+
     public $name = 'publish_caches';
+
     public $interval = 60;
 
     public function run()

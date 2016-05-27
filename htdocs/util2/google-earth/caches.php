@@ -311,17 +311,17 @@ function echoZoomIn($lon_from, $lon_to, $lat_from, $lat_to)
 ';
 
     // prepare lines
-    $sZoomIn = str_replace("\r", "", $sZoomIn);
+    $sZoomIn = str_replace("\r", '', $sZoomIn);
     $sLines = mb_split("\n", $sZoomIn);
-    for ($i = 0; $i < count($sLines); $i ++) {
+    for ($i = 0; $i < count($sLines); $i++) {
         $sLines[$i] = str_pad($sLines[$i], ($nColumnsCount - 1), ' ');
     }
 
     $nDegreePerLine = ($lat_to - $lat_from) / count($sLines);
     $nDegreePerColumn = ($lon_to - $lon_from) / $nColumnsCount;
 
-    for ($nLine = 0; $nLine < count($sLines); $nLine ++) {
-        for ($nColumn = 0; $nColumn < $nColumnsCount; $nColumn ++) {
+    for ($nLine = 0; $nLine < count($sLines); $nLine++) {
+        for ($nColumn = 0; $nColumn < $nColumnsCount; $nColumn++) {
             if (substr($sLines[$nLine], $nColumn, 1) == '#') {
                 $nLat = $lat_to - $nDegreePerLine * $nLine;
                 $nLon = $lon_from + $nDegreePerColumn * $nColumn;
@@ -342,7 +342,6 @@ function echoZoomIn($lon_from, $lon_to, $lat_from, $lat_to)
                     </Point>
                 </Placemark>
                 ';
-
             }
         }
     }

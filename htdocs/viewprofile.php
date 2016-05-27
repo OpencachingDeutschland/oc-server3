@@ -76,7 +76,7 @@ $rs = sql(
 $tpl->assign_rs('useroptions', $rs);
 sql_free_result($rs);
 
-$user_desc = sql_value("SELECT `description` FROM `user` WHERE `user_id`='&1'", "", $userid);
+$user_desc = sql_value("SELECT `description` FROM `user` WHERE `user_id`='&1'", '', $userid);
 $user_desc = use_current_protocol_in_html($user_desc);
 $tpl->assign('description', $user_desc);
 
@@ -298,7 +298,7 @@ if ($show_oconly81) {
 //Titel
 $menu->SetSelectItem($tpl->menuitem);
 
-$tpl->title = $menu->GetMenuTitle() . " " . $record['username'];
+$tpl->title = $menu->GetMenuTitle() . ' ' . $record['username'];
 
 
 $tpl->assign('username', $record['username']);
@@ -329,7 +329,7 @@ if ($picstat) {
     if (!$allpics) {
         $tpl->assign('logpics', LogPics::get(LogPics::FOR_USER_STAT, $userid));
     } else {
-        LogPics::setPaging(LogPics::FOR_USER_GALLERY, $userid, 0, "viewprofile.php?userid=" . $userid . "&allpics=1");
+        LogPics::setPaging(LogPics::FOR_USER_GALLERY, $userid, 0, 'viewprofile.php?userid=' . $userid . '&allpics=1');
         $tpl->name = 'viewprofile_pics';
         // actually we dont need all the other stuff here ..
     }
@@ -365,16 +365,16 @@ if ($record['password'] == null || $record['email'] == null || $record['is_activ
             date(1, $record['last_login']),
             date('Y', $record['last_login'])
         );
-        if ($record['last_login'] >= mktime(0, 0, 0, date("m") - 1, 1, date("Y"))) {
+        if ($record['last_login'] >= mktime(0, 0, 0, date('m') - 1, 1, date('Y'))) {
             $tpl->assign('lastlogin', 1);
         } else {
-            if ($record['last_login'] >= mktime(0, 0, 0, date("m") - 6, 1, date("Y"))) {
+            if ($record['last_login'] >= mktime(0, 0, 0, date('m') - 6, 1, date('Y'))) {
                 $tpl->assign('lastlogin', 2);
             } else {
-                if ($record['last_login'] >= mktime(0, 0, 0, date("m") - 12, 1, date("Y"))) {
+                if ($record['last_login'] >= mktime(0, 0, 0, date('m') - 12, 1, date('Y'))) {
                     $tpl->assign('lastlogin', 3);
                 } else {
-                    if ($record['last_login'] >= mktime(0, 0, 0, date("m") - 24, 1, date("Y"))) {
+                    if ($record['last_login'] >= mktime(0, 0, 0, date('m') - 24, 1, date('Y'))) {
                         $tpl->assign('lastlogin', 4);
                     } else {
                         $tpl->assign('lastlogin', 5);

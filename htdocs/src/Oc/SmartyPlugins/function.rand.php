@@ -2,8 +2,6 @@
 /**
  * Smarty plugin
  *
- * @package Smarty
- * @subpackage plugins
  ***
  * Smarty {rand} function plugin
  */

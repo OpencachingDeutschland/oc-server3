@@ -7,7 +7,9 @@
 
 class coordinate
 {
+
     public $nLat = 0;
+
     public $nLon = 0;
 
     public function __construct($nNewLat, $nNewLon)
@@ -31,13 +33,13 @@ class coordinate
     public function getDecimal()
     {
         if ($this->nLat < 0) {
-            $sLat = 'S ' . sprintf('%08.5f', - $this->nLat) . '°';
+            $sLat = 'S ' . sprintf('%08.5f', -$this->nLat) . '°';
         } else {
             $sLat = 'N ' . sprintf('%08.5f', $this->nLat) . '°';
         }
 
         if ($this->nLon < 0) {
-            $sLon = 'W ' . sprintf('%09.5f', - $this->nLon) . '°';
+            $sLon = 'W ' . sprintf('%09.5f', -$this->nLon) . '°';
         } else {
             $sLon = 'E ' . sprintf('%09.5f', $this->nLon) . '°';
         }
@@ -57,28 +59,28 @@ class coordinate
         $nLat = $this->nLat;
         $bLatN = ($nLat < 0) ? false : true;
         if (!$bLatN) {
-            $nLat = - $nLat;
+            $nLat = -$nLat;
         }
         $nLatDeg = floor($nLat);
         $nLatMin = ($nLat - $nLatDeg) * 60;
         if ($bLatN) {
-            $sLat = 'N ' . sprintf("%02d", $nLatDeg) . '° ' . sprintf($minute_format, $nLatMin) . '\'';
+            $sLat = 'N ' . sprintf('%02d', $nLatDeg) . '° ' . sprintf($minute_format, $nLatMin) . '\'';
         } else {
-            $sLat = 'S ' . sprintf("%02d", $nLatDeg) . '° ' . sprintf($minute_format, $nLatMin) . '\'';
+            $sLat = 'S ' . sprintf('%02d', $nLatDeg) . '° ' . sprintf($minute_format, $nLatMin) . '\'';
         }
 
         // Ocprop: ([E|W].*?)&#039;
         $nLon = $this->nLon;
         $bLonE = ($nLon < 0) ? false : true;
         if (!$bLonE) {
-            $nLon = - $nLon;
+            $nLon = -$nLon;
         }
         $nLonDeg = floor($nLon);
         $nLonMin = ($nLon - $nLonDeg) * 60;
         if ($bLonE) {
-            $sLon = 'E ' . sprintf("%03d", $nLonDeg) . '° ' . sprintf($minute_format, $nLonMin) . '\'';
+            $sLon = 'E ' . sprintf('%03d', $nLonDeg) . '° ' . sprintf($minute_format, $nLonMin) . '\'';
         } else {
-            $sLon = 'W ' . sprintf("%03d", $nLonDeg) . '° ' . sprintf($minute_format, $nLonMin) . '\'';
+            $sLon = 'W ' . sprintf('%03d', $nLonDeg) . '° ' . sprintf($minute_format, $nLonMin) . '\'';
         }
 
         return [
@@ -93,7 +95,7 @@ class coordinate
         $nLat = $this->nLat;
         $bLatN = ($nLat < 0) ? false : true;
         if (!$bLatN) {
-            $nLat = - $nLat;
+            $nLat = -$nLat;
         }
         $nLatDeg = floor($nLat);
         $nLatMin = ($nLat - $nLatDeg) * 60;
@@ -106,7 +108,7 @@ class coordinate
         $nLon = $this->nLon;
         $bLonE = ($nLon < 0) ? false : true;
         if (!$bLonE) {
-            $nLon = - $nLon;
+            $nLon = -$nLon;
         }
         $nLonDeg = floor($nLon);
         $nLonMin = ($nLon - $nLonDeg) * 60;
@@ -142,23 +144,23 @@ class coordinate
         //Geographische Länge lw und Breite bw im WGS84 Datum
         if ($this->nLon == 0 || $this->nLat == 0) {
             return [
-                'zone' => "",
-                'letter' => "",
+                'zone' => '',
+                'letter' => '',
                 'north' => 'N ' . 0,
                 'east' => 'E ' . 0
             ];
         }
-        if ($this->nLon <= - 180 || $this->nLon > 180 || $this->nLat <= - 80 || $this->nLat >= 84) {
+        if ($this->nLon <= -180 || $this->nLon > 180 || $this->nLat <= -80 || $this->nLat >= 84) {
             // Werte nicht im Bereich des UTM Systems -180° <= nLon < +180°, -80° < nLat < 84° N
             return [
-                "",
-                "",
+                '',
+                '',
                 0,
                 0
             ];
         }
-        $lw = (float) $this->nLon;
-        $bw = (float) $this->nLat;
+        $lw = (float)$this->nLon;
+        $bw = (float)$this->nLat;
 
         //WGS84 Datum
         //Große Halbachse a und Abplattung f
@@ -177,12 +179,12 @@ class coordinate
 
         //Koeffizienten zur Berechnung der Meridianbogenlänge
         $e0 = $c * (pi() / 180) * (1 - 3 * $ex2 / 4 + 45 * $ex4 / 64 - 175 * $ex6 / 256 + 11025 * $ex8 / 16384);
-        $e2 = $c * (- 3 * $ex2 / 8 + 15 * $ex4 / 32 - 525 * $ex6 / 1024 + 2205 * $ex8 / 4096);
+        $e2 = $c * (-3 * $ex2 / 8 + 15 * $ex4 / 32 - 525 * $ex6 / 1024 + 2205 * $ex8 / 4096);
         $e4 = $c * (15 * $ex4 / 256 - 105 * $ex6 / 1024 + 2205 * $ex8 / 16384);
-        $e6 = $c * (- 35 * $ex6 / 3072 + 315 * $ex8 / 12288);
+        $e6 = $c * (-35 * $ex6 / 3072 + 315 * $ex8 / 12288);
 
         //Längenzone lz und Breitenzone (Band) bz
-        $lzn = intval(($lw + 180) / 6) + 1;
+        $lzn = (int)(($lw + 180) / 6) + 1;
 
         if ($bw >= 56.0 && $bw < 64.0 && $lw >= 3.0 && $lw < 12.0) {
             $lzn = 32;
@@ -203,9 +205,9 @@ class coordinate
 
         $lz = "$lzn";
         if ($lzn < 10) {
-            $lz = "0" . $lzn;
+            $lz = '0' . $lzn;
         }
-        $bd = (int) (1 + ($bw + 80) / 8);
+        $bd = (int)(1 + ($bw + 80) / 8);
         $bz = substr($b_sel, $bd - 1, 1);
 
         //Geographische Breite in Radianten br
@@ -250,22 +252,22 @@ class coordinate
         $ew = 0.9996 * ($nd * $cos1 * $dl + $nd * $cos3 * (1 - $tan2 + $etasq) * $dl3 / 6 +
                 $nd * $cos5 * (5 - 18 * $tan2 + $tan4) * $dl5 / 120) + 500000;
 
-        $nk = $nw - (int) $nw;
+        $nk = $nw - (int)$nw;
         if ($nk < 0.5) {
-            $nw = '' . (int) $nw;
+            $nw = '' . (int)$nw;
         } else {
-            $nw = '' . ((int) $nw + 1);
+            $nw = '' . ((int)$nw + 1);
         }
 
         while (strlen($nw) < 7) {
             $nw = '0' . $nw;
         }
 
-        $nk = $ew - (int) $ew;
+        $nk = $ew - (int)$ew;
         if ($nk < 0.5) {
-            $ew = '0' . (int) $ew;
+            $ew = '0' . (int)$ew;
         } else {
-            $ew = '0' . intval($ew + 1);
+            $ew = '0' . (int)($ew + 1);
         }
 
         return [
@@ -313,8 +315,8 @@ class coordinate
                 0
             ];
         }
-        $lw = (float) $lw;
-        $bw = (float) $bw;
+        $lw = (float)$lw;
+        $bw = (float)$bw;
 
         // Quellsystem WGS 84 Datum
         // Große Halbachse a und Abplattung fq
@@ -326,9 +328,9 @@ class coordinate
         $f = $fq - 1.003748e-5;
 
         // Parameter für datum shift
-        $dx = - 606;
-        $dy = - 23;
-        $dz = - 413;
+        $dx = -606;
+        $dy = -23;
+        $dz = -413;
 
         // Quadrat der ersten numerischen Exzentrizität in Quell- und Zielsystem
         $e2q = (2 * $fq - $fq * $fq);
@@ -386,14 +388,14 @@ class coordinate
            gegeben sein. Berechnet werden Rechtswert rw und Hochwert hw.*/
 
         //Geographische Länge lp und Breite bp im Potsdam Datum
-        if ($lp == "" || $bp == "") {
+        if ($lp == '' || $bp == '') {
             return [
                 0,
                 0
             ];
         }
-        $lp = (float) $lp;
-        $bp = (float) $bp;
+        $lp = (float)$lp;
+        $bp = (float)$bp;
 
         // Potsdam Datum
         // Große Halbachse a und Abplattung f
@@ -411,9 +413,9 @@ class coordinate
 
         // Koeffizienten zur Berechnung der Meridianbogenlänge
         $e0 = $c * (pi() / 180) * (1 - 3 * $ex2 / 4 + 45 * $ex4 / 64 - 175 * $ex6 / 256 + 11025 * $ex8 / 16384);
-        $e2 = $c * (- 3 * $ex2 / 8 + 15 * $ex4 / 32 - 525 * $ex6 / 1024 + 2205 * $ex8 / 4096);
+        $e2 = $c * (-3 * $ex2 / 8 + 15 * $ex4 / 32 - 525 * $ex6 / 1024 + 2205 * $ex8 / 4096);
         $e4 = $c * (15 * $ex4 / 256 - 105 * $ex6 / 1024 + 2205 * $ex8 / 16384);
-        $e6 = $c * (- 35 * $ex6 / 3072 + 315 * $ex8 / 12288);
+        $e6 = $c * (-35 * $ex6 / 3072 + 315 * $ex8 / 12288);
 
         // Breite in Radianten
         $br = $bp * pi() / 180;
@@ -451,18 +453,18 @@ class coordinate
         $rw = ($nd * $cos1 * $dl + $nd * $cos3 * (1 - $tan2 + $etasq) * $dl3 / 6 +
             $nd * $cos5 * (5 - 18 * $tan2 + $tan4) * $dl5 / 120 + $kz * 1e6 + 500000);
 
-        $nk = $hw - (int) $hw;
+        $nk = $hw - (int)$hw;
         if ($nk < 0.5) {
-            $hw = (int) $hw;
+            $hw = (int)$hw;
         } else {
-            $hw = ((int) $hw) + 1;
+            $hw = ((int)$hw) + 1;
         }
 
-        $nk = $rw - (int) $rw;
+        $nk = $rw - (int)$rw;
         if ($nk < 0.5) {
-            $rw = (int) $rw;
+            $rw = (int)$rw;
         } else {
-            $rw = (int) ($rw + 1);
+            $rw = (int)($rw + 1);
         }
 
         return [
@@ -481,33 +483,33 @@ class coordinate
         $lat_base = 52.15517440;
         $lon_base = 5.38720621;
 
-        for ($i = 0; $i <= 6; $i ++) {
-            for ($j = 0; $j <= 5; $j ++) {
+        for ($i = 0; $i <= 6; $i++) {
+            for ($j = 0; $j <= 5; $j++) {
                 $rpq[$i][$j] = 0;
                 $spq[$i][$j] = 0;
             }
         }
         //#coefficients
         $rpq[0][1] = 190094.945;
-        $rpq[1][1] = - 11832.228;
-        $rpq[2][1] = - 114.221;
-        $rpq[0][3] = - 32.391;
-        $rpq[1][0] = - 0.705;
-        $rpq[3][1] = - 2.340;
-        $rpq[1][3] = - 0.608;
-        $rpq[0][2] = - 0.008;
+        $rpq[1][1] = -11832.228;
+        $rpq[2][1] = -114.221;
+        $rpq[0][3] = -32.391;
+        $rpq[1][0] = -0.705;
+        $rpq[3][1] = -2.340;
+        $rpq[1][3] = -0.608;
+        $rpq[0][2] = -0.008;
         $rpq[2][3] = 0.148;
 
         $spq[1][0] = 309056.544;
         $spq[0][2] = 3638.893;
         $spq[2][0] = 73.077;
-        $spq[1][2] = - 157.984;
+        $spq[1][2] = -157.984;
         $spq[3][0] = 59.788;
         $spq[0][1] = 0.433;
-        $spq[2][2] = - 6.439;
-        $spq[1][1] = - 0.032;
+        $spq[2][2] = -6.439;
+        $spq[1][1] = -0.032;
         $spq[0][4] = 0.092;
-        $spq[1][4] = - 0.054;
+        $spq[1][4] = -0.054;
 
         // Calculate X, Y of origin
         $latDiff = $this->nLat - $lat_base;
@@ -517,8 +519,8 @@ class coordinate
         $xOrigin = 0;
         $yOrigin = 0;
 
-        for ($q = 0; $q <= 5; $q ++) {
-            for ($p = 0; $p <= 6; $p ++) {
+        for ($q = 0; $q <= 5; $q++) {
+            for ($p = 0; $p <= 6; $p++) {
                 $xOrigin = $xOrigin + ($rpq[$p][$q] * ((pow($dlat, $p)) * (pow($dlon, $q))));
                 $yOrigin = $yOrigin + ($spq[$p][$q] * ((pow($dlat, $p)) * (pow($dlon, $q))));
             }
@@ -549,7 +551,7 @@ class coordinate
         $lat -= $l[3];
         $l[5] = floor($lat * 120 / 5);
 
-        return sprintf("%c%c%c%c%c%c", $l[0] + 65, $l[1] + 65, $l[2] + 48, $l[3] + 48, $l[4] + 65, $l[5] + 65);
+        return sprintf('%c%c%c%c%c%c', $l[0] + 65, $l[1] + 65, $l[2] + 48, $l[3] + 48, $l[4] + 65, $l[5] + 65);
     }
 
     // return string
@@ -596,7 +598,7 @@ class coordinate
 
         $lat = $coordLat + $coordLatMin / 60;
         if ($coordNS == 'S') {
-            $lat = - $lat;
+            $lat = -$lat;
         }
 
         return $lat;
@@ -614,7 +616,7 @@ class coordinate
 
         $lon = $coordLon + $coordLonMin / 60;
         if ($coordEW == 'W') {
-            $lon = - $lon;
+            $lon = -$lon;
         }
 
         return $lon;
@@ -639,7 +641,7 @@ class coordinate
                 'http' => [
                     'method' => 'POST',
                     'header' => "Content-Type: application/x-www-form-urlencoded\r\n" .
-                        "Content-Length: " . strlen($params_str) . "\r\n",
+                        'Content-Length: ' . strlen($params_str) . "\r\n",
                     'content' => $params_str,
                 ],
             ]

@@ -41,7 +41,7 @@ while ($r = sql_fetch_array($rs)) {
                 $r['loc_id'],
                 $text,
                 $simpletext,
-                sprintf("%u", crc32($simpletext))
+                sprintf('%u', crc32($simpletext))
             );
         }
     }
@@ -50,7 +50,7 @@ mysql_free_result($rs);
 
 function nonalpha($str)
 {
-    for ($i = 0; $i < mb_strlen($str); $i ++) {
+    for ($i = 0; $i < mb_strlen($str); $i++) {
         if (!((ord(mb_substr($str, $i, 1)) >= ord('a')) && (ord(mb_substr($str, $i, 1)) <= ord('z')))) {
             return true;
         }

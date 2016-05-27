@@ -31,9 +31,9 @@ while ($r = sql_fetch_assoc($rs)) {
                 $lang
             );
         }
-        ++ $set;
+        ++$set;
     }
-    if (++ $processed % 1000 == 0) {
+    if (++$processed % 1000 == 0) {
         echo "$set of $processed " . ($write ? '' : 'would be ') . "set\n";
     }
 }

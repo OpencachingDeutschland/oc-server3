@@ -149,7 +149,7 @@ function ftsearch_hash(&$str)
     $astr = ftsearch_split($str, true);
     foreach ($astr as $k => $s) {
         if (strlen($s) > 2) {
-            $astr[$k] = sprintf("%u", crc32($s));
+            $astr[$k] = sprintf('%u', crc32($s));
         } else {
             unset($astr[$k]);
         }
@@ -188,7 +188,7 @@ function ftsearch_split(&$str, $simple)
     $str = '';
 
     ftsearch_load_ignores();
-    for ($i = count($astr) - 1; $i >= 0; $i --) {
+    for ($i = count($astr) - 1; $i >= 0; $i--) {
         // ignore?
         if (array_search(mb_strtolower($astr[$i]), $ftsearch_ignores) !== false) {
             unset($astr[$i]);
@@ -237,7 +237,7 @@ function ftsearch_text2simple($str)
     }
 
     // doppelte chars ersetzen
-    for ($c = ord('a'); $c <= ord('z'); $c ++) {
+    for ($c = ord('a'); $c <= ord('z'); $c++) {
         $old_str = '';
         while ($old_str != $str) {
             $old_str = $str;

@@ -27,7 +27,7 @@ if (isset($_REQUEST['post'])) {
     }
 }
 
-$attrs = array();
+$attrs = [];
 $rsAttribs = sql(
     "SELECT `caches_attributes`.`attrib_id`
     FROM `caches_attributes`, `caches`
@@ -41,12 +41,12 @@ while ($rAttribs = sql_fetch_assoc($rsAttribs)) {
 mysql_free_result($rsAttribs);
 
 $attr_js = '';
-$rs = sql("SELECT `id`, `icon_large`, `icon_undef` FROM `cache_attrib`");
+$rs = sql('SELECT `id`, `icon_large`, `icon_undef` FROM `cache_attrib`');
 while ($r = sql_fetch_assoc($rs)) {
     if ($attr_js != '') {
         $attr_js .= ',';
     }
-    $attr_js .= "new Array(" . $r['id'] . ", " . (isset($attrs[$r['id']]) ? 1 : 0) . ", '../../" . $r['icon_undef'] . "', '../../" . $r['icon_large'] . "')";
+    $attr_js .= 'new Array(' . $r['id'] . ', ' . (isset($attrs[$r['id']]) ? 1 : 0) . ", '../../" . $r['icon_undef'] . "', '../../" . $r['icon_large'] . "')";
 }
 mysql_free_result($rs);
 ?>
@@ -97,7 +97,7 @@ mysql_free_result($rs);
 <body onload="load('<?php echo $wp; ?>')">
 <form method="post" name="attr">
     <?php
-    $rs = sql("SELECT `id`, `icon_large`, `icon_undef` FROM `cache_attrib`");
+    $rs = sql('SELECT `id`, `icon_large`, `icon_undef` FROM `cache_attrib`');
     while ($r = sql_fetch_assoc($rs)) {
         echo '<img id="attr' . $r['id'] . '" onmousedown="toggleAttr(' . $r['id'] . ')" src="../../';
 

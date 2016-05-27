@@ -7,13 +7,16 @@
  ***************************************************************************/
 class translate_filescan
 {
+
     private $msFilename;
+
     private $msContent;
+
     public $textlist;
 
     public function __construct($sFilename)
     {
-        $this->filelist = array();
+        $this->filelist = [];
         $this->msFilename = $sFilename;
 
         $sContent = '';
@@ -34,8 +37,8 @@ class translate_filescan
 
     public function scanTranslateFunctionCalls()
     {
-        $nNextPos = strpos($this->msContent, "t" . "('");
-        $nNext_ = strpos($this->msContent, "_" . "('");
+        $nNextPos = strpos($this->msContent, 't' . "('");
+        $nNext_ = strpos($this->msContent, '_' . "('");
         if ($nNext_ !== false && ($nNextPos === false || $nNext_ < $nNextPos)) {
             $nNextPos = $nNext_;
         }
@@ -62,14 +65,14 @@ class translate_filescan
                 $nLine = $this->findLineOfPos($nNextPos);
                 $sText = substr($this->msContent, $nNextPos + 3, $nEnd - $nNextPos - 3);
 
-                $this->textlist[] = array(
+                $this->textlist[] = [
                     'text' => $sText,
                     'line' => $nLine
-                );
+                ];
             }
 
-            $nNext_ = strpos($this->msContent, "_" . "('", $nNextPos + 1);
-            $nNextPos = strpos($this->msContent, "t" . "('", $nNextPos + 1);
+            $nNext_ = strpos($this->msContent, '_' . "('", $nNextPos + 1);
+            $nNextPos = strpos($this->msContent, 't' . "('", $nNextPos + 1);
             if ($nNext_ !== false && ($nNextPos === false || $nNext_ < $nNextPos)) {
                 $nNextPos = $nNext_;
             }
@@ -105,10 +108,10 @@ class translate_filescan
                 $sText = substr($this->msContent, $nStart + 1, $nEnd - $nStart - 1);
 
                 // TODO:plural
-                $this->textlist[] = array(
+                $this->textlist[] = [
                     'text' => $sText,
                     'line' => $nLine
-                );
+                ];
             }
 
             $nNextPos = strpos($this->msContent, '{' . 't', $nNextPos + 1);
@@ -120,9 +123,9 @@ class translate_filescan
     {
         $nLine = 1;
 
-        for ($n = 0; $n < $nPos; $n ++) {
+        for ($n = 0; $n < $nPos; $n++) {
             if (substr($this->msContent, $n, 1) == "\n") {
-                $nLine ++;
+                $nLine++;
             }
         }
 

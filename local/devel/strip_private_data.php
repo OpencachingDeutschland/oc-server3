@@ -88,7 +88,7 @@ sql(
 );
 
 echo "deleting hidden and locked caches\n";
-$rs = sql("SELECT `cache_id` FROM `caches` WHERE `status`>3");
+$rs = sql('SELECT `cache_id` FROM `caches` WHERE `status`>3');
 while ($r = sql_fetch_assoc($rs)) {
     echo '.';
     sql("DELETE FROM `caches` WHERE `cache_id`='&1'", $r['cache_id']);
@@ -106,7 +106,7 @@ $rs = sql(
          SELECT `user_id` FROM `cache_logs`)"
 );
 while ($r = sql_fetch_assoc($rs)) {
-    echo ".";
+    echo '.';
     sql("DELETE FROM `user` WHERE `user_id`='&1'", $r['user_id']);
 }
 echo "\n";
@@ -132,7 +132,7 @@ if (sql_table_exists('okapi_vars')) {
 
 echo "clearing other nonpublic data\n";
 sql('TRUNCATE `news`');
-$rs = sql("SHOW TABLES WHERE `Tables_in_" . $opt['db']['placeholder']['db'] . "` LIKE '\_%'");
+$rs = sql('SHOW TABLES WHERE `Tables_in_' . $opt['db']['placeholder']['db'] . "` LIKE '\_%'");
 $tables = sql_fetch_column($rs);
 foreach ($tables as $table) {
     sql('DROP TABLE ' . $table);

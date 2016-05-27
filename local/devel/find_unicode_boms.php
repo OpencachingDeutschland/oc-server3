@@ -29,7 +29,7 @@ function scan($dir, $subdirs)
             if (is_dir($path) && substr($file, 0, 1) !== '.' && $subdirs) {
                 scan($path, $subdirs);
             } else {
-                if (is_file($path) && ((substr($file, - 4) === '.tpl') || (substr($file, - 4) === '.php'))) {
+                if (is_file($path) && ((substr($file, -4) === '.tpl') || (substr($file, -4) === '.php'))) {
                     testforbom($path);
                 }
             }

@@ -7,17 +7,20 @@
 
 namespace Oc\Libse\Coordinate;
 
+use InvalidArgumentException;
+
 class CoordinateCoordinate
 {
     const epsilon = 8.3333e-6;
 
     private $latitude;
+
     private $longitude;
 
     public function __construct($latitude, $longitude)
     {
         if (abs($latitude) > 90 || abs($longitude) > 180) {
-            throw new \InvalidArgumentException();
+            throw new InvalidArgumentException();
         }
 
         $this->latitude = $latitude;
@@ -29,27 +32,27 @@ class CoordinateCoordinate
         $latitude = self::hemDegMinToFloat($latHem, $latDeg, $latMin);
         $longitude = self::hemDegMinToFloat($lonHem, $lonDeg, $lonMin);
 
-        return new CoordinateCoordinate($latitude, $longitude);
+        return new self($latitude, $longitude);
     }
 
     private static function hemDegMinToFloat($hem, $deg, $min)
     {
         if ($deg < 0 || round($deg) != $deg || $min < 0 || $min >= 60) {
-            throw new \InvalidArgumentException();
+            throw new InvalidArgumentException();
         }
 
         $retval = $deg + $min / 60;
 
-        return $hem ? $retval : - $retval;
+        return $hem ? $retval : -$retval;
     }
 
     public static function getFromCache($cacheid)
     {
-        $rs = sql("SELECT latitude, longitude FROM caches WHERE cache_id = &1", $cacheid);
+        $rs = sql('SELECT latitude, longitude FROM caches WHERE cache_id = &1', $cacheid);
         $r = sql_fetch_array($rs);
         mysql_free_result($rs);
 
-        return new CoordinateCoordinate($r['latitude'], $r['longitude']);
+        return new self($r['latitude'], $r['longitude']);
     }
 
     public function latitude()

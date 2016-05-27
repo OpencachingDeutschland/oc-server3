@@ -54,7 +54,7 @@ $tpl->assign_rs(
         $login->userid
     )
 );
-$tpl->assign('morelogs', sql_value("SELECT FOUND_ROWS()", 0) > 10);
+$tpl->assign('morelogs', sql_value('SELECT FOUND_ROWS()', 0) > 10);
 sql_foundrows_done();
 
 //get last hidden caches
@@ -111,7 +111,7 @@ $tpl->assign_rs(
 $allpics = isset($_REQUEST['allpics']) && $_REQUEST['allpics'];
 $all_pictures = LogPics::get(LogPics::FOR_MYHOME_GALLERY);
 if ($allpics) {
-    LogPics::setPaging(LogPics::FOR_MYHOME_GALLERY, 0, 0, "myhome.php?allpics=1");
+    LogPics::setPaging(LogPics::FOR_MYHOME_GALLERY, 0, 0, 'myhome.php?allpics=1');
 } else {
     $tpl->assign('pictures', $all_pictures);
 }

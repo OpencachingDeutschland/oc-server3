@@ -11,7 +11,9 @@ checkJob(new rating_tops());
 
 class rating_tops
 {
+
     public $name = 'rating_tops';
+
     public $interval = 86400;
 
     public function run()
@@ -22,8 +24,8 @@ class rating_tops
         sql_temp_table('topRatings');
         sql_temp_table('topResult');
 
-        sql("CREATE TEMPORARY TABLE &topLocationCaches (`cache_id` INT(11) PRIMARY KEY) ENGINE=MEMORY");
-        sql("CREATE TEMPORARY TABLE &topRatings (`cache_id` INT(11) PRIMARY KEY, `ratings` INT(11)) ENGINE=MEMORY");
+        sql('CREATE TEMPORARY TABLE &topLocationCaches (`cache_id` INT(11) PRIMARY KEY) ENGINE=MEMORY');
+        sql('CREATE TEMPORARY TABLE &topRatings (`cache_id` INT(11) PRIMARY KEY, `ratings` INT(11)) ENGINE=MEMORY');
         sql(
             "CREATE TEMPORARY TABLE &topResult (`idx` INT(11), `cache_id` INT(11)
             PRIMARY KEY, `ratings` INT(11), `founds` INT(11)) ENGINE=MEMORY"
@@ -41,9 +43,9 @@ class rating_tops
             );
 
             while ($rAdm3 = sql_fetch_assoc($rsAdm3)) {
-                sql("TRUNCATE TABLE &topLocationCaches");
-                sql("TRUNCATE TABLE &topRatings");
-                sql("TRUNCATE TABLE &topResult");
+                sql('TRUNCATE TABLE &topLocationCaches');
+                sql('TRUNCATE TABLE &topRatings');
+                sql('TRUNCATE TABLE &topResult');
 
                 // Alle Caches für diese Gruppe finden
                 if ($rAdm3['code3'] == null) {
@@ -94,8 +96,8 @@ class rating_tops
                    ORDER BY `idx` DESC LIMIT 15"
                 );
 
-                if (sql_value("SELECT COUNT(*) FROM &topResult", 0) > 10) {
-                    $min_idx = sql_value("SELECT `idx` FROM &topResult ORDER BY idx DESC LIMIT 9, 1", 0);
+                if (sql_value('SELECT COUNT(*) FROM &topResult', 0) > 10) {
+                    $min_idx = sql_value('SELECT `idx` FROM &topResult ORDER BY idx DESC LIMIT 9, 1', 0);
                     sql("DELETE FROM &topResult WHERE `idx`<'&1'", $min_idx);
                 }
 

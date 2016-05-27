@@ -15,7 +15,9 @@ $menu = new Menu();
 
 class Menu
 {
+
     public $nSelectedItem = 0;
+
     public $sMenuFilename = '';
 
     public function __construct()
@@ -34,7 +36,7 @@ class Menu
         // add country-dependent town list for small map
         $country = $login->getUserCountry();
         if ($opt['map']['towns']['enable'] &&
-            isset($build_map_towns_menu) && $build_map_towns_menu &&   // optimization
+            isset($build_map_towns_menu) && $build_map_towns_menu && // optimization
             isset($opt['map']['towns'][$country]['enable']) && $opt['map']['towns'][$country]['enable']
         ) {
             $rsTowns = sqlf(
@@ -73,7 +75,7 @@ class Menu
                         'parent' => MNU_MAP
                     ];
                     $menuitem[MNU_MAP]['subitems'][] = $menu_map;
-                    ++ $menu_map;
+                    ++$menu_map;
                 }
             }
         }
@@ -88,19 +90,19 @@ class Menu
         fwrite($f, 'global $menuitem;' . "\n");
         fwrite($f, "\n");
 
-        $rsDefines = sqlf("SELECT `id`, `id_string` FROM `sys_menu`");
+        $rsDefines = sqlf('SELECT `id`, `id_string` FROM `sys_menu`');
         while ($rDefine = sql_fetch_assoc($rsDefines)) {
             fwrite($f, 'if (!defined(\'' . addslashes($rDefine['id_string']) . '\')) define(\'' . addslashes($rDefine['id_string']) . '\', ' . $rDefine['id'] . ");\n");
         }
         sql_free_result($rsDefines);
         fwrite($f, "\n");
 
-        $aMenu = array();
+        $aMenu = [];
         $nPos = 0;
-        $rsSubmenu = sqlf("SELECT `id` FROM `sys_menu` WHERE `parent`=0 ORDER BY `parent` ASC, `position` ASC");
+        $rsSubmenu = sqlf('SELECT `id` FROM `sys_menu` WHERE `parent`=0 ORDER BY `parent` ASC, `position` ASC');
         while ($rSubmenu = sql_fetch_assoc($rsSubmenu)) {
             $aMenu[MNU_ROOT]['subitems'][$nPos] = $rSubmenu['id'];
-            $nPos ++;
+            $nPos++;
         }
         sql_free_result($rsSubmenu);
         fwrite($f, "\n");
@@ -137,7 +139,7 @@ class Menu
             );
             while ($rSubmenu = sql_fetch_assoc($rsSubmenu)) {
                 $aMenu[$r['id']]['subitems'][$nPos] = $rSubmenu['id'];
-                $nPos ++;
+                $nPos++;
             }
             sql_free_result($rsSubmenu);
         }
@@ -145,7 +147,7 @@ class Menu
 
         fwrite($f, '$menuitem = unserialize("' . str_replace('"', '\\"', serialize($aMenu)) . '");' . "\n");
 
-        fwrite($f, "?>");
+        fwrite($f, '?>');
         fclose($f);
     }
 
@@ -190,7 +192,7 @@ class Menu
     {
         global $menuitem;
 
-        $retval = array();
+        $retval = [];
         $retval[] = $menuitem[$this->nSelectedItem];
 
         $nCurItem = $this->nSelectedItem;
@@ -213,7 +215,7 @@ class Menu
 
         $ids = $this->GetSelectedMenuIds();
 
-        $retval = array();
+        $retval = [];
         foreach ($menuitem[MNU_ROOT]['subitems'] as $item) {
             if (($menuitem[$item]['authlevel'] != AUTH_LEVEL_ADMIN || $login->hasAdminPriv()) &&
                 ($menuitem[$item]['visible'] == 1 || ($menuitem[$item]['visible'] == 2 && !$login->logged_in()))
@@ -239,7 +241,7 @@ class Menu
 
         $ids[$topmenu] = $topmenu;
 
-        $retval = array();
+        $retval = [];
         if ($topmenu != MNU_ROOT) {
             $this->pAppendSubMenu($topmenu, $ids, $retval);
         }
@@ -268,7 +270,7 @@ class Menu
     {
         global $menuitem;
 
-        $retval = array();
+        $retval = [];
         $retval[$this->nSelectedItem] = $this->nSelectedItem;
 
         $nCurItem = $this->nSelectedItem;
@@ -300,9 +302,9 @@ class Menu
         }
         if (isset($menuitem[$nCurItem]['color'])) {
             return $menuitem[$nCurItem]['color'];
-        } else {
-            return '';
         }
+
+        return '';
     }
 
     public function GetMenuTitle()
@@ -311,8 +313,8 @@ class Menu
 
         if (isset($menuitem[$this->nSelectedItem])) {
             return isset($menuitem[$this->nSelectedItem]['title']) ? $menuitem[$this->nSelectedItem]['title'] : '';
-        } else {
-            return '';
         }
+
+        return '';
     }
 }

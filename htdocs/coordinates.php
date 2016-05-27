@@ -38,7 +38,7 @@ $tpl->assign('coordSwissGrid', $coord->getSwissGrid());
 // build priority list of W3W languages to display
 
 // 1. current page locale
-$w3w_langs = array();
+$w3w_langs = [];
 if ($opt['locale'][$opt['template']['locale']]['what3words']) {
     $w3w_langs[] = $opt['template']['locale'];
 }

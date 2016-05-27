@@ -29,7 +29,7 @@ function scan($dir, $subdirs)
             if (is_dir($path) && substr($file, 0, 1) !== '.' && $subdirs) {
                 scan($path, $subdirs);
             } else {
-                if (is_file($path) && ((substr($file, - 4) === '.tpl') || (substr($file, - 4) === '.php'))) {
+                if (is_file($path) && ((substr($file, -4) === '.tpl') || (substr($file, -4) === '.php'))) {
                     test_encoding($path);
                 }
             }
@@ -52,11 +52,11 @@ function test_encoding($path)
     ];
 
     $contents = file_get_contents($path, false, null, 0, 2048);
-    $ur = stripos($contents, "Unicode Reminder");
+    $ur = stripos($contents, 'Unicode Reminder');
     if ($ur) {
-        if (mb_trim(mb_substr($contents, $ur + 17, 2)) != "メモ") {
-            $ur = mb_stripos($contents, "Unicode Reminder");
-            if (mb_trim(mb_substr($contents, $ur + 17, 2)) != "メモ") {
+        if (mb_trim(mb_substr($contents, $ur + 17, 2)) != 'メモ') {
+            $ur = mb_stripos($contents, 'Unicode Reminder');
+            if (mb_trim(mb_substr($contents, $ur + 17, 2)) != 'メモ') {
                 echo "Bad Unicode Reminder found in $path: " . mb_trim(mb_substr($contents, $ur + 17, 2)) . "\n";
             } else {
                 echo "Unexpected non-ASCII chars (BOMs?) in header of $path\n";

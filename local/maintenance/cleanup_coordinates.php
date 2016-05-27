@@ -44,7 +44,7 @@ if ($duplicates) {
         echo 'deleting ' . count($duplicates) . " duplicate coordinate records\n";
         sql(
             "DELETE FROM `cache_coordinates`
-             WHERE `id` IN (" . implode(',', $duplicates) . ")"
+             WHERE `id` IN (" . implode(',', $duplicates) . ')'
         );
     } else {
         echo

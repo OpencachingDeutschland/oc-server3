@@ -9,6 +9,7 @@ namespace Oc\Libse\Validator;
 
 class RegexValidator
 {
+
     private $regex;
 
     public function __construct($regex)

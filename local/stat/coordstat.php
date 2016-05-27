@@ -24,15 +24,15 @@ while ($cache = sql_fetch_assoc($rs)) {
     $lat = floor($cache['latitude'] / $grid);
     $long = floor($cache['longitude'] / $grid);
     $year = substr($cache['date_created'], 0, 4);
-    if ($year >= 2005 && $year <= date("Y") && ($lat != 0 || $long != 0)) {
+    if ($year >= 2005 && $year <= date('Y') && ($lat != 0 || $long != 0)) {
         $years[$year] = true;
-        $liste[$lat][$long]["caches"][$year] ++;
+        $liste[$lat][$long]['caches'][$year] ++;
     }
 }
 mysql_free_result($rs);
 
 // logs per logdate by year
-get_logs("cache_logs");
+get_logs('cache_logs');
 // get_logs("cache_logs_archived");
 
 function get_logs($table)
@@ -45,12 +45,12 @@ function get_logs($table)
          INNER JOIN caches ON $table.cache_id=caches.cache_id"
     );
     while ($cache = sql_fetch_assoc($rs)) {
-        $lat = floor($cache["latitude"] / $grid);
-        $long = floor($cache["longitude"] / $grid);
-        $year = substr($cache["date"], 0, 4);
-        if ($year >= 2005 && $year <= date("Y") && ($lat != 0 || $long != 0)) {
+        $lat = floor($cache['latitude'] / $grid);
+        $long = floor($cache['longitude'] / $grid);
+        $year = substr($cache['date'], 0, 4);
+        if ($year >= 2005 && $year <= date('Y') && ($lat != 0 || $long != 0)) {
             $years[$year] = true;
-            $liste[$lat][$long]["logs"][$year] ++;
+            $liste[$lat][$long]['logs'][$year] ++;
         }
     }
     mysql_free_result($rs);
@@ -65,10 +65,10 @@ $rs = sql(
      FROM caches WHERE status=1'
 );
 while ($cache = sql_fetch_assoc($rs)) {
-    $lat = floor($cache["latitude"] / $grid);
-    $long = floor($cache["longitude"] / $grid);
-    $liste[$lat][$long]["caches"]["all"] ++;
-    $liste[$lat][$long]["logs"]["all"] += $cache["logs"];
+    $lat = floor($cache['latitude'] / $grid);
+    $long = floor($cache['longitude'] / $grid);
+    $liste[$lat][$long]['caches']['all'] ++;
+    $liste[$lat][$long]['logs']['all'] += $cache['logs'];
 }
 mysql_free_result($rs);
 
@@ -93,7 +93,7 @@ foreach ($liste as $lat => $liste2) {
             $cachecounts['caches']['all'] . ',' .
             $cachecounts['logs']['all'];
         foreach ($years as $year => $dummy) {
-            echo ',' . $cachecounts["caches"][$year] . ',' . $cachecounts["logs"][$year];
+            echo ',' . $cachecounts['caches'][$year] . ',' . $cachecounts['logs'][$year];
         }
         echo "\r\n";
     }

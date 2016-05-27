@@ -62,9 +62,9 @@ function html_insert_sid_callback($match)
         return 'href=' . $match[1] . $match[2] . '?' . urlencode(session_name()) . '=' . urlencode(
             session_id()
         ) . $match[3];
-    } else {
-        return 'href=' . $match[1] . $match[2] . '&' . urlencode(session_name()) . '=' . urlencode(
-            session_id()
-        ) . $match[3];
     }
+
+    return 'href=' . $match[1] . $match[2] . '&' . urlencode(session_name()) . '=' . urlencode(
+        session_id()
+    ) . $match[3];
 }

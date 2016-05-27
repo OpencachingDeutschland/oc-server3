@@ -40,7 +40,7 @@ $rsPictures = sql(
     ORDER BY `seq`',
     $cacheid
 );
-$pictures = array();
+$pictures = [];
 while ($rPicture = sql_fetch_assoc($rsPictures)) {
     // TinyMCE will create a relative link only of the protocol of the image URL matches.
     // This also avoides MSIE warnings in https mode.

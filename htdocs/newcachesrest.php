@@ -18,7 +18,7 @@ $country = isset($_REQUEST['usercountry']) ? $_REQUEST['usercountry'] :
     (isset($_REQUEST['country']) ? $_REQUEST['country'] : $opt['page']['main_country']);
 
 if (!$tpl->is_cached()) {
-    $newCaches = array();
+    $newCaches = [];
 
     sql_temp_table_slave('cachelist');
     sql_slave(

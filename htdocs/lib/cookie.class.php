@@ -11,8 +11,10 @@ $cookie = new cookie();
 
 class cookie
 {
+
     public $changed = false;
-    public $values = array();
+
+    public $values = [];
 
     public function __construct()
     {
@@ -25,10 +27,10 @@ class cookie
             if ($decoded !== false) {
                 $this->values = @unserialize($decoded);
                 if (!is_array($this->values)) {
-                    $this->values = array();
+                    $this->values = [];
                 }
             } else {
-                $this->values = array();
+                $this->values = [];
             }
         }
     }

@@ -38,7 +38,7 @@ if (isset($ownerid)) {
     $logcount = 100;
     $paging = true;
     $newLogsPerCountry = false;
-    $caches_logged = array();
+    $caches_logged = [];
     $orderByDate = '`cache_logs`.`order_date` DESC, ';
     if ($show_own_logs) {
         $urlparams = '&ownlogs=1';
@@ -70,7 +70,7 @@ if (isset($ownerid)) {
     $tpl->cache_id = $exclude_country;
     $logcount = 250;
     $paging = false;  // paging would have poor performance for all logs
-    $orderByDate = $logselection == 3 ? "{fromtable}.`order_date` DESC, " : "";
+    $orderByDate = $logselection == 3 ? '{fromtable}.`order_date` DESC, ' : '';
 } else {
     // latest logs for all countries or for one country
     $tpl->name = 'newlogs';
@@ -89,19 +89,19 @@ if (isset($ownerid)) {
     $tpl->cache_id = $country;
     $logcount = 250;
     $paging = false;  // paging would have poor performance for all logs
-    $orderByDate = $logselection == 3 ? "{fromtable}.`order_date` DESC, " : "";
+    $orderByDate = $logselection == 3 ? '{fromtable}.`order_date` DESC, ' : '';
     $optimize_for_latest_logs = ($country == '' || $country == $opt['page']['main_country']);
 }
 
 if (isset($_GET['for_maintenance'])) {
-    $add_where = "AND ({fromtable}.`type` IN (2,3) OR {fromtable}.`needs_maintenance`=2 OR {fromtable}.`listing_outdated`=2) AND DATEDIFF({fromtable}.`date_created`, {fromtable}.`date`) < 7 ";
-    $tpl->cache_id .= "|fm";
+    $add_where = 'AND ({fromtable}.`type` IN (2,3) OR {fromtable}.`needs_maintenance`=2 OR {fromtable}.`listing_outdated`=2) AND DATEDIFF({fromtable}.`date_created`, {fromtable}.`date`) < 7 ';
+    $tpl->cache_id .= '|fm';
     $logcount *= 2;
 }
 if ($logselection == 1) {
-    $add_where .= "AND DATEDIFF(NOW(), {fromtable}.`date`) < 30 ";
+    $add_where .= 'AND DATEDIFF(NOW(), {fromtable}.`date`) < 30 ';
 }
-$tpl->cache_id .= "|" . $logselection;
+$tpl->cache_id .= '|' . $logselection;
 
 $tpl->change_country_inpage = true;
 
@@ -121,18 +121,18 @@ if (!$tpl->is_cached()) {
                 `needs_maintenance`, `listing_outdated`, `order_date`
              FROM `cache_logs`
              ORDER BY `date_created` DESC
-             LIMIT " . (4 * $logcount) . ")"
+             LIMIT " . (4 * $logcount) . ')'
         );
         $fromtable = '`&loglist0`';
     } else {
         $fromtable = '`cache_logs`';
     }
-    $add_where = str_replace("{fromtable}", $fromtable, $add_where);
+    $add_where = str_replace('{fromtable}', $fromtable, $add_where);
 
     sql_temp_table_slave('loglist');
     sql_slave(
         "CREATE TEMPORARY TABLE &loglist (`id` INT(11) PRIMARY KEY)
-        SELECT " . ($paging ? "SQL_CALC_FOUND_ROWS" : "") . " " . $fromtable . ".`id`
+        SELECT " . ($paging ? 'SQL_CALC_FOUND_ROWS' : '') . ' ' . $fromtable . ".`id`
         FROM " . $fromtable . "
         INNER JOIN `caches` ON " . $fromtable . ".`cache_id`=`caches`.`cache_id`
         INNER JOIN `cache_status` ON `caches`.`status`=`cache_status`.`id`
@@ -141,7 +141,7 @@ if (!$tpl->is_cached()) {
         AND `caches`.`country` LIKE '&1'
         AND `caches`.`country`<>'&2'
         " . $add_where . "
-        ORDER BY " . str_replace("{fromtable}", $fromtable, $orderByDate) . $fromtable . ".`date_created` DESC
+        ORDER BY " . str_replace('{fromtable}', $fromtable, $orderByDate) . $fromtable . ".`date_created` DESC
         LIMIT &3, &4",
         $include_country,
         $exclude_country,
@@ -149,7 +149,7 @@ if (!$tpl->is_cached()) {
         $logcount
     );
     if ($paging) {
-        $total_logs = sql_value("SELECT FOUND_ROWS()", 0);
+        $total_logs = sql_value('SELECT FOUND_ROWS()', 0);
         sql_foundrows_done();
         $paging = ($total_logs > $logcount);
     }
@@ -202,11 +202,11 @@ if (!$tpl->is_cached()) {
             ON `caches_attributes`.`cache_id`=`caches`.`cache_id`
             AND `caches_attributes`.`attrib_id`=6
         WHERE IFNULL(`cache_logs_restored`.`restored_by`,0)=0
-        ORDER BY " . $orderByCountry . str_replace("{fromtable}", "`cache_logs`", $orderByDate) . "`cache_logs`.`date_created` DESC",
+        ORDER BY " . $orderByCountry . str_replace('{fromtable}', '`cache_logs`', $orderByDate) . '`cache_logs`.`date_created` DESC',
         $opt['template']['locale']
     );
 
-    $newLogs = array();
+    $newLogs = [];
 
     $lines_per_pic = 5;
     $tpl->assign('lines_per_pic', $lines_per_pic);
@@ -247,7 +247,7 @@ if (!$tpl->is_cached()) {
             }
             sql_free_result($rsPic);
         }
-        $pics --;
+        $pics--;
 
         $rLog['first'] = false;
         if (isset($caches_logged)) {
@@ -301,7 +301,7 @@ if (!$tpl->is_cached()) {
 
     $tpl->assign('paging', $paging);
     if ($paging) {
-        $pager = new pager($_SERVER["SCRIPT_NAME"] . '?startat={offset}' . $urlparams);
+        $pager = new pager($_SERVER['SCRIPT_NAME'] . '?startat={offset}' . $urlparams);
         $pager->make_from_offset($startat, $total_logs, $logcount);
     }
 }

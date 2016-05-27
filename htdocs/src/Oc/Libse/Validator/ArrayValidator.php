@@ -9,6 +9,7 @@ namespace Oc\Libse\Validator;
 
 class ArrayValidator
 {
+
     private $values;
 
     public function __construct($values)

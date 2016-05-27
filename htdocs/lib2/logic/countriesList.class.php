@@ -7,7 +7,9 @@
 
 class countriesList
 {
+
     public $locale;
+
     public $bDefaultUsed = false;
 
     public function __construct($locale = null)
@@ -36,9 +38,9 @@ class countriesList
 
         if ($isDefault == 0) {
             return false;
-        } else {
-            return true;
         }
+
+        return true;
     }
 
     public function getDefaultRS()

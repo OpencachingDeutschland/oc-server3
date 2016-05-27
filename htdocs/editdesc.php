@@ -46,8 +46,8 @@ if ($error == false) {
 
         tpl_set_var('username', '');
         tpl_set_var('target', htmlspecialchars('editdesc.php?descid=' . urlencode($descid), ENT_COMPAT, 'UTF-8'));
-        tpl_set_var('message_start', "");
-        tpl_set_var('message_end', "");
+        tpl_set_var('message_start', '');
+        tpl_set_var('message_end', '');
         tpl_set_var('message', $login_required);
         tpl_set_var('helplink', helppagelink('login'));
     } else {
@@ -133,8 +133,8 @@ if ($error == false) {
 
                     // fuer alte Versionen von OCProp
                     if (isset($_POST['submit']) && !isset($_POST['version2'])) {
-                        $short_desc = iconv("ISO-8859-1", "UTF-8", $short_desc);
-                        $hint = iconv("ISO-8859-1", "UTF-8", $hint);
+                        $short_desc = iconv('ISO-8859-1', 'UTF-8', $short_desc);
+                        $hint = iconv('ISO-8859-1', 'UTF-8', $hint);
                     }
 
                     // Text from textarea
@@ -142,7 +142,7 @@ if ($error == false) {
 
                     // fuer alte Versionen von OCProp
                     if (isset($_POST['submit']) && !isset($_POST['version2'])) {
-                        $desc = iconv("ISO-8859-1", "UTF-8", $desc);
+                        $desc = iconv('ISO-8859-1', 'UTF-8', $desc);
                     }
 
                     $desc = processEditorInput($oldDescMode, $descMode, $desc);

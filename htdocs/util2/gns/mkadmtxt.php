@@ -23,7 +23,7 @@ while ($rLocations = sql_fetch_array($rsLocations)) {
 
     // den nächsgelegenen Ort in den geodb ermitteln
     $sql =
-        "SELECT " .
+        'SELECT ' .
             geomath::getSqlDistanceFormula(
                 $rLocations['lon'],
                 $rLocations['lat'],

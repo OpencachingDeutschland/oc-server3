@@ -31,6 +31,8 @@
 
     <exclude-pattern>*/htdocs/okapi/*</exclude-pattern>
     <exclude-pattern>*/htdocs/resource2/tinymce/*</exclude-pattern>
+    <exclude-pattern>*/htdocs/resource2/ocstyle/js/communicator-api/*</exclude-pattern>
+    <exclude-pattern>*/htdocs/resource2/ocstyle/js/enlargeit/*</exclude-pattern>
     <exclude-pattern>*/htdocs/templates2/*</exclude-pattern>
 
     <!--
@@ -60,6 +62,7 @@
         <exclude name="PSR2R.WhiteSpace.TabAndSpace"/>
         <exclude name="PSR2R.WhiteSpace.TabIndent"/>
         <exclude name="PSR2R.WhiteSpace.EmptyEnclosingLine"/>
+        <exclude name="PSR2R.ControlStructures.SwitchDeclaration.BreakIndent"/>
     </rule>
 
     <rule ref="Squiz.Commenting.FunctionComment">

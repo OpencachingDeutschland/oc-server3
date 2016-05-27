@@ -2,8 +2,6 @@
 /**
  * Smarty plugin
  *
- * @package Smarty
- * @subpackage plugins
  * Smarty {nccacheid wp=$wpnc} function plugin
  */
 function smarty_function_nccacheid($params, &$smarty)

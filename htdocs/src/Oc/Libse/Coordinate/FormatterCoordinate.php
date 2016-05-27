@@ -21,12 +21,12 @@ class FormatterCoordinate
 
     public function formatLatDeg($coordinate)
     {
-        return sprintf("%02d", $coordinate->latDeg());
+        return sprintf('%02d', $coordinate->latDeg());
     }
 
     public function formatLonDeg($coordinate)
     {
-        return sprintf("%03d", $coordinate->lonDeg());
+        return sprintf('%03d', $coordinate->lonDeg());
     }
 
     public function formatLatMin($coordinate)
@@ -41,7 +41,7 @@ class FormatterCoordinate
 
     private function formatMin($min)
     {
-        return sprintf("%06.3f", $min);
+        return sprintf('%06.3f', $min);
     }
 
     public function formatHtml($coordinate, $separator = ' ')

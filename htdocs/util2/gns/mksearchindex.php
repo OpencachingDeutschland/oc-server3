@@ -38,7 +38,7 @@ while ($r = sql_fetch_array($rs)) {
                 $r['uni'],
                 $text,
                 $simpletext,
-                sprintf("%u", crc32($simpletext))
+                sprintf('%u', crc32($simpletext))
             );
 
             if (isset($doubleindex[$text])) {
@@ -48,7 +48,7 @@ while ($r = sql_fetch_array($rs)) {
                     $r['uni'],
                     $text,
                     $doubleindex[$text],
-                    sprintf("%u", crc32($doubleindex[$text]))
+                    sprintf('%u', crc32($doubleindex[$text]))
                 );
             }
         }
@@ -59,7 +59,7 @@ mysql_free_result($rs);
 
 function nonalpha($str)
 {
-    for ($i = 0; $i < mb_strlen($str); $i ++) {
+    for ($i = 0; $i < mb_strlen($str); $i++) {
         if (!((ord(mb_substr($str, $i, 1)) >= ord('a')) && (ord(mb_substr($str, $i, 1)) <= ord('z')))) {
             return true;
         }

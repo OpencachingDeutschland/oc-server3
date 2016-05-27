@@ -36,7 +36,7 @@ $sLoggedOut =
     . t('Login')
     . '" class="formbutton" style="width: 74px;" onclick="submitbutton(\'LogMeIn\')" /></form>';
 $sLoggedIn =
-    "<b>"
+    '<b>'
     . t('Logged in as')
     . ' <a href="myhome.php" class="testing-top-left-corner-username">{username}</a></b> - <a href="login.php?action=logout">'
     . t('Logout')
@@ -53,8 +53,8 @@ while (list ($varname, $varvalue) = each($_REQUEST)) {
         $target .= $varname . '=' . $varvalue . '&';
     }
 }
-if (mb_substr($target, - 1) == '?' || mb_substr($target, - 1) == '&') {
-    $target = mb_substr($target, 0, - 1);
+if (mb_substr($target, -1) == '?' || mb_substr($target, -1) == '&') {
+    $target = mb_substr($target, 0, -1);
 }
 $sLoggedOut = mb_ereg_replace('{target}', $target, $sLoggedOut);
 

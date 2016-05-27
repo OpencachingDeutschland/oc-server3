@@ -34,7 +34,7 @@ if (!$tpl->is_cached()) {
     $tpl->assign('news_onstart', $opt['news']['onstart']);
 
     if ($opt['news']['include'] == '') {
-        $news = array();
+        $news = [];
         $rs = sql_slave(
             'SELECT `news`.`date_created` `date`, `news`.`content` `content`, `news_topics`.`name` `topic`
             FROM `news`
@@ -82,7 +82,7 @@ if (!$tpl->is_cached()) {
         $tpl->assign('forum', '');
     }
 
-    $phpbb_topics = array();
+    $phpbb_topics = [];
     $tpl->assign('phpbb_topics', $phpbb_topics);
 //        $tpl->assign('phpbb_enabled', ($opt['cron']['phpbbtopics']['url'] != ''));
     $tpl->assign('phpbb_name', $opt['cron']['phpbbtopics']['name']);
@@ -99,7 +99,7 @@ if (!$tpl->is_cached()) {
     $tpl->assign(
         'total_events',
         sql_value_slave(
-            "SELECT COUNT(*) FROM `caches` WHERE `type`=6 AND `date_hidden` >= curdate() AND `status`=1",
+            'SELECT COUNT(*) FROM `caches` WHERE `type`=6 AND `date_hidden` >= curdate() AND `status`=1',
             0
         )
     );
@@ -144,23 +144,23 @@ if (!$tpl->is_cached()) {
     $tpl->assign('usercountry', $sUserCountryName);
     $tpl->assign('usercountryCode', $sUserCountry);
     if ($opt['template']['locale'] == $opt['page']['main_locale']) {
-        $tpl->assign('sections', array(
+        $tpl->assign('sections', [
             'news',
             'events',
             'logpics',
             'recommendations',
             'forum',
             'newcaches'
-        ));
+        ]);
     } else {
-        $tpl->assign('sections', array(
+        $tpl->assign('sections', [
             'events',
             'recommendations',
             'newcaches',
             'logpics',
             'forum',
             'news'
-        ));
+        ]);
     }
 }
 

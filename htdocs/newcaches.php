@@ -24,20 +24,20 @@ if ($startat < 0) {
 }
 
 $tpl->caching = true;
-$tpl->cache_id = $startat . "-" . $country . "-" . $cachetype;
+$tpl->cache_id = $startat . '-' . $country . '-' . $cachetype;
 $tpl->cache_lifetime = 300;
 if ($startat > 10 * $perpage) {
     $tpl->cache_lifetime = 3600;
 }
 
 if (!$tpl->is_cached()) {
-    $cachetype_condition = ($cachetype ? " AND `caches`.`type` = " . sql_escape($cachetype) : "");
+    $cachetype_condition = ($cachetype ? ' AND `caches`.`type` = ' . sql_escape($cachetype) : '');
     if ($bEvents) {
-        $cachetype_condition .= " AND `date_hidden` >= curdate()";
+        $cachetype_condition .= ' AND `date_hidden` >= curdate()';
     }
     $date_field = ($bEvents ? 'date_hidden' : 'date_created');
     $sort_order = ($bEvents ? 'ASC' : 'DESC');
-    $newCaches = array();
+    $newCaches = [];
 
     $rsNewCaches = sql_slave(
         "SELECT `caches`.`cache_id` `cacheid`, `caches`.`wp_oc` `wpoc`,
@@ -54,10 +54,10 @@ if (!$tpl->is_cached()) {
              LEFT JOIN `caches_attributes` `ca`
                   ON `ca`.`cache_id`=`caches`.`cache_id`
                   AND `ca`.`attrib_id`=6
-             WHERE `caches`.`status` = 1" . ($country ? " AND `caches`.`country`='" . sql_escape($country) . "'" : "") .
+             WHERE `caches`.`status` = 1" . ($country ? " AND `caches`.`country`='" . sql_escape($country) . "'" : '') .
         $cachetype_condition . "
               ORDER BY `caches`.`$date_field` $sort_order
-                   LIMIT " . sprintf("%d", $startat) . ',
+                   LIMIT " . sprintf('%d', $startat) . ',
                    ' . ($perpage + 0)
     );
     // see also write_newcaches_urls() in sitemap.class.php
@@ -68,10 +68,10 @@ if (!$tpl->is_cached()) {
     $tpl->assign('newCaches', $newCaches);
 
     $startat = isset($_REQUEST['startat']) ? $_REQUEST['startat'] + 0 : 0;
-    $cacheype_par = ($cachetype ? "&cachetype=$cachetype" : "");
+    $cacheype_par = ($cachetype ? "&cachetype=$cachetype" : '');
     if ($country == '') {
-        $count = sql_value_slave("SELECT COUNT(*) FROM `caches` WHERE `caches`.`status`=1" . $cachetype_condition, 0);
-        $pager = new pager("newcaches.php?startat={offset}" . $cacheype_par);
+        $count = sql_value_slave('SELECT COUNT(*) FROM `caches` WHERE `caches`.`status`=1' . $cachetype_condition, 0);
+        $pager = new pager('newcaches.php?startat={offset}' . $cacheype_par);
     } else {
         $count = sql_value_slave(
             "SELECT COUNT(*)
@@ -81,7 +81,7 @@ if (!$tpl->is_cached()) {
             0,
             $country
         );
-        $pager = new pager("newcaches.php?country=" . $country . "&startat={offset}" . $cacheype_par);
+        $pager = new pager('newcaches.php?country=' . $country . '&startat={offset}' . $cacheype_par);
     }
     $pager->make_from_offset($startat, $count, 100);
 

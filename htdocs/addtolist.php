@@ -31,7 +31,7 @@ if ($newlist_name == $translate->t('New cache list', '', __FILE__, __LINE__)) {
 }
 $newlist_public = isset($_REQUEST['newlist_public']);
 $newlist_watch = isset($_REQUEST['newlist_watch']);
-$default_list = isset($_REQUEST['listid']) ? (int) $_REQUEST['listid'] : cachelist::getMyLastAddedToListId();
+$default_list = isset($_REQUEST['listid']) ? (int)$_REQUEST['listid'] : cachelist::getMyLastAddedToListId();
 
 if (isset($_REQUEST['save']) && isset($_REQUEST['listid'])) {
     $listid = $_REQUEST['listid'] + 0;

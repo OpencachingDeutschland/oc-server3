@@ -9,7 +9,9 @@ checkJob(new slave_cleanup());
 
 class slave_cleanup
 {
+
     public $name = 'slave_cleanup';
+
     public $interval = 300;
 
     public function run()
@@ -28,7 +30,7 @@ class slave_cleanup
         }
         sql_free_result($rs);
 
-        $this->cleanup_slave(- 1);
+        $this->cleanup_slave(-1);
     }
 
     public function cleanup_slave($slaveId)
@@ -37,7 +39,7 @@ class slave_cleanup
         sql_disconnect_slave();
 
         // connect the slave
-        if ($slaveId == - 1) {
+        if ($slaveId == -1) {
             sql_connect_master_as_slave();
         } else {
             sql_connect_slave($slaveId);
@@ -66,8 +68,8 @@ class slave_cleanup
         sql_free_result($rs);
 
         // now reduce table size? (29 bytes is the average row size)
-        if (sql_value_slave("SELECT COUNT(*) FROM `map2_data`", 0) > $opt['map']['maxcachesize'] / 29) {
-            while (sql_value_slave("SELECT COUNT(*) FROM `map2_data`", 0) > $opt['map']['maxcachereducedsize'] / 29) {
+        if (sql_value_slave('SELECT COUNT(*) FROM `map2_data`', 0) > $opt['map']['maxcachesize'] / 29) {
+            while (sql_value_slave('SELECT COUNT(*) FROM `map2_data`', 0) > $opt['map']['maxcachereducedsize'] / 29) {
                 $resultId = sql_value(
                     "SELECT `result_id` FROM `map2_result` WHERE `slave_id`='&1'
                     ORDER BY `date_lastqueried` DESC LIMIT 1",
@@ -81,9 +83,9 @@ class slave_cleanup
             }
         }
 
-        $nMinId = sql_value("SELECT MIN(`result_id`) FROM `map2_result`", 0);
+        $nMinId = sql_value('SELECT MIN(`result_id`) FROM `map2_result`', 0);
         if ($nMinId == 0) {
-            sql("DELETE FROM `map2_data`");
+            sql('DELETE FROM `map2_data`');
         } else {
             sql("DELETE FROM `map2_data` WHERE `result_id`<'&1'", $nMinId);
         }

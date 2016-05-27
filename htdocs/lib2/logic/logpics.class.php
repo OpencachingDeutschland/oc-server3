@@ -41,11 +41,11 @@ class LogPics
            `logs`.`id` AS `logid`,
            `logs`.`type` AS `logtype`";
 
-        $join_logs = "INNER JOIN `cache_logs` `logs` ON `logs`.`id`=`pics`.`object_id`";
-        $join_caches = "INNER JOIN `caches` ON `caches`.`cache_id`=`logs`.`cache_id`";
+        $join_logs = 'INNER JOIN `cache_logs` `logs` ON `logs`.`id`=`pics`.`object_id`';
+        $join_caches = 'INNER JOIN `caches` ON `caches`.`cache_id`=`logs`.`cache_id`';
         $join_cachestatus =
-            "INNER JOIN `cache_status` ON `caches`.`status`=`cache_status`.`id` AND `allow_user_view`=1";
-        $join_user = "INNER JOIN `user` ON `user`.`user_id`=`logs`.`user_id`";
+            'INNER JOIN `cache_status` ON `caches`.`status`=`cache_status`.`id` AND `allow_user_view`=1';
+        $join_user = 'INNER JOIN `user` ON `user`.`user_id`=`logs`.`user_id`';
 
         $rs = false;
 
@@ -232,8 +232,7 @@ class LogPics
         $pictures = self::get($purpose, $userid, $cacheid);
         $tpl->assign('pictures', array_slice($pictures, $startat, self::MAX_PICTURES_PER_GALLERY_PAGE));
 
-        $pager = new pager($url . "&startat={offset}");
+        $pager = new pager($url . '&startat={offset}');
         $pager->make_from_offset($startat, count($pictures), self::MAX_PICTURES_PER_GALLERY_PAGE);
     }
-
 }

@@ -2,8 +2,6 @@
 /**
  * Smarty plugin
  *
- * @package Smarty
- * @subpackage plugins
  ***
  * Smarty {season winter='...' spring='...' summer='...' autumn='...'} function plugin
  */
@@ -80,7 +78,7 @@ function smarty_function_season($params, &$smarty)
     ];
 
     $nTimestamp = time();
-    for ($nIndex = 0; $nIndex < count($seasons); $nIndex ++) {
+    for ($nIndex = 0; $nIndex < count($seasons); $nIndex++) {
         if (strtotime($seasons[$nIndex][0]) > $nTimestamp) {
             return $params['winter'];
         } //'';

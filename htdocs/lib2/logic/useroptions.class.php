@@ -12,6 +12,7 @@ require_once __DIR__ . '/const.inc.php';
 
 class useroptions
 {
+
     /** @var int $nUserId */
     public $nUserId = 0;
 
@@ -122,7 +123,8 @@ class useroptions
             // enable USR_OPT_SHOWSTATS which is 1 by default. We encounter this by
             // forcing USR_OPT_SHOWSTATS = 0 for disabled users.
             return 0;
-        } elseif (array_key_exists($pId, $this->nOptions)) {
+        }
+        if (array_key_exists($pId, $this->nOptions)) {
             return $this->nOptions[$pId]['option_value'];
         }
 
@@ -150,7 +152,8 @@ class useroptions
             $this->nOptions[$pId]['option_value'] = $pValue;
 
             return true;
-        } elseif (preg_match("/" . $this->nOptions[$pId]['check_regex'] . "/", $pValue) || strlen($pValue) == 0) {
+        }
+        if (preg_match('/' . $this->nOptions[$pId]['check_regex'] . '/', $pValue) || strlen($pValue) == 0) {
             $this->nOptions[$pId]['option_value'] = $pValue;
 
             return true;

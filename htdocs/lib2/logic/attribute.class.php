@@ -27,7 +27,7 @@ class attribute
     {
         global $opt;
 
-        $attributes = array();
+        $attributes = [];
         $rsAttrGroup = sql(
             "SELECT `attribute_groups`.`id`,
                      IFNULL(`tt1`.`text`, `attribute_groups`.`name`) AS `name`,
@@ -52,7 +52,7 @@ class attribute
             $opt['template']['locale']
         );
         while ($rAttrGroup = sql_fetch_assoc($rsAttrGroup)) {
-            $attr = array();
+            $attr = [];
             $bFirst = true;
             $bSearchGroupDefault = false;
 
@@ -126,14 +126,14 @@ class attribute
             sql_free_result($rsAttr);
 
             if (count($attr) > 0) {
-                $attributes[] = array(
+                $attributes[] = [
                     'id' => $rAttrGroup['id'],
                     'name' => $rAttrGroup['name'],
                     'color' => $rAttrGroup['color'],
                     'category' => $rAttrGroup['category'],
                     'search_default' => $bSearchGroupDefault,
                     'attr' => $attr
-                );
+                ];
             }
         }
         sql_free_result($rsAttrGroup);

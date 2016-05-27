@@ -9,6 +9,7 @@ namespace Oc\Libse\Validator;
 
 class IntegerValidator extends NumericValidator
 {
+
     private $int_len;
 
     public function __construct($min = false, $max = false, $int_len = '+')
@@ -35,6 +36,6 @@ class IntegerValidator extends NumericValidator
 
     protected function getValue($value)
     {
-        return (int) $value;
+        return (int)$value;
     }
 }

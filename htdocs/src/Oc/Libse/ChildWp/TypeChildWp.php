@@ -9,9 +9,13 @@ namespace Oc\Libse\ChildWp;
 
 class TypeChildWp
 {
+
     private $id;
+
     private $name;
+
     private $preposition;
+
     private $image;
 
     public function __construct($id, $name, $preposition, $image = false)

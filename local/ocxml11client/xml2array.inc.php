@@ -9,38 +9,42 @@ class xml2Array
 {
 
     public $stack = [];
+
     public $stack_ref;
+
     public $arrOutput = [];
+
     public $resParser;
+
     public $strXmlData;
 
     public function push_pos(&$pos)
     {
-        $this->stack[count($this->stack)] =& $pos;
-        $this->stack_ref =& $pos;
+        $this->stack[count($this->stack)] = &$pos;
+        $this->stack_ref = &$pos;
     }
 
     public function pop_pos()
     {
         unset($this->stack[count($this->stack) - 1]);
-        $this->stack_ref =& $this->stack[count($this->stack) - 1];
+        $this->stack_ref = &$this->stack[count($this->stack) - 1];
     }
 
     public function parse($strInputXML)
     {
 
-        $this->resParser = xml_parser_create("UTF-8");
+        $this->resParser = xml_parser_create('UTF-8');
         xml_set_object($this->resParser, $this);
-        xml_set_element_handler($this->resParser, "tagOpen", "tagClosed");
+        xml_set_element_handler($this->resParser, 'tagOpen', 'tagClosed');
 
-        xml_set_character_data_handler($this->resParser, "tagData");
+        xml_set_character_data_handler($this->resParser, 'tagData');
 
         $this->push_pos($this->arrOutput);
 
         $this->strXmlData = xml_parse($this->resParser, $strInputXML);
         if (!$this->strXmlData) {
             die(sprintf(
-                "XML error: %s at line %d",
+                'XML error: %s at line %d',
                 xml_error_string(xml_get_error_code($this->resParser)),
                 xml_get_current_line_number($this->resParser)
             ));

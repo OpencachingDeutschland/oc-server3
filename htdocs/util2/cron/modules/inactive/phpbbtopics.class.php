@@ -11,8 +11,11 @@ checkJob(new phpbbtopics());
 
 class phpbbtopics
 {
+
     public $name = 'phpbbtopics';
+
     public $interval = 600;
+
     public $topiclist = [];
 
     public function run()
@@ -107,5 +110,5 @@ class phpbbtopics
 
 function sort_compare_updated($a, $b)
 {
-    return ($b['updated'] - $a['updated']);
+    return $b['updated'] - $a['updated'];
 }

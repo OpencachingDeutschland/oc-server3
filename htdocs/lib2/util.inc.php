@@ -27,11 +27,11 @@ function is_valid_email_address($email)
      * DIGIT          =  %x30-39
      */
 
-    $no_ws_ctl = "[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x7f]";
-    $alpha = "[\\x41-\\x5a\\x61-\\x7a]";
-    $digit = "[\\x30-\\x39]";
-    $cr = "\\x0d";
-    $lf = "\\x0a";
+    $no_ws_ctl = '[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x7f]';
+    $alpha = '[\\x41-\\x5a\\x61-\\x7a]';
+    $digit = '[\\x30-\\x39]';
+    $cr = '\\x0d';
+    $lf = '\\x0a';
     $crlf = "($cr$lf)";
 
 
@@ -49,10 +49,10 @@ function is_valid_email_address($email)
      * quoted-pair     =       ("\" text) / obs-qp
      */
 
-    $obs_char = "[\\x00-\\x09\\x0b\\x0c\\x0e-\\x7f]";
+    $obs_char = '[\\x00-\\x09\\x0b\\x0c\\x0e-\\x7f]';
     $obs_text = "($lf*$cr*($obs_char$lf*$cr*)*)";
     $text = "([\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f]|$obs_text)";
-    $obs_qp = "(\\x5c[\\x00-\\x7f])";
+    $obs_qp = '(\\x5c[\\x00-\\x7f])';
     $quoted_pair = "(\\x5c$text|$obs_qp)";
 
 
@@ -75,7 +75,7 @@ function is_valid_email_address($email)
      * instead, we'll recursively strip comments before processing the input
      */
 
-    $wsp = "[\\x20\\x09]";
+    $wsp = '[\\x20\\x09]';
     $obs_fws = "($wsp+($crlf$wsp+)*)";
     $fws = "((($wsp*$crlf)?$wsp+)|$obs_fws)";
     $ctext = "($no_ws_ctl|[\\x21-\\x27\\x2A-\\x5b\\x5d-\\x7e])";
@@ -209,7 +209,7 @@ function mb_trim($str)
 
     $bLoop = true;
     while ($bLoop == true) {
-        $sPos = mb_substr($str, - 1, 1);
+        $sPos = mb_substr($str, -1, 1);
 
         if ($sPos == ' ' || $sPos == "\r" || $sPos == "\n" || $sPos == "\t" || $sPos == "\x0B" || $sPos == "\0") {
             $str = mb_substr($str, 0, mb_strlen($str) - 1);
@@ -224,12 +224,12 @@ function mb_trim($str)
 // explode with more than one separator
 function explode_multi($str, $sep)
 {
-    $ret = array();
+    $ret = [];
     $nCurPos = 0;
 
     while ($nCurPos < mb_strlen($str)) {
         $nNextSep = mb_strlen($str);
-        for ($nSepPos = 0; $nSepPos < mb_strlen($sep); $nSepPos ++) {
+        for ($nSepPos = 0; $nSepPos < mb_strlen($sep); $nSepPos++) {
             $nThisPos = mb_strpos($str, mb_substr($sep, $nSepPos, 1), $nCurPos);
             if ($nThisPos !== false) {
                 if ($nNextSep > $nThisPos) {
@@ -303,14 +303,14 @@ function help_lonToDegreeStr($lon)
 {
     if ($lon < 0) {
         $retval = 'W ';
-        $lon = - $lon;
+        $lon = -$lon;
     } else {
         $retval = 'E ';
     }
 
-    $retval = $retval . sprintf("%03d", floor($lon)) . '° ';
+    $retval = $retval . sprintf('%03d', floor($lon)) . '° ';
     $lon = $lon - floor($lon);
-    $retval = $retval . sprintf("%06.3f", round($lon * 60, 3)) . '\'';
+    $retval = $retval . sprintf('%06.3f', round($lon * 60, 3)) . '\'';
 
     return $retval;
 }
@@ -320,14 +320,14 @@ function help_latToDegreeStr($lat)
 {
     if ($lat < 0) {
         $retval = 'S ';
-        $lat = - $lat;
+        $lat = -$lat;
     } else {
         $retval = 'N ';
     }
 
-    $retval = $retval . sprintf("%02d", floor($lat)) . '° ';
+    $retval = $retval . sprintf('%02d', floor($lat)) . '° ';
     $lat = $lat - floor($lat);
-    $retval = $retval . sprintf("%06.3f", round($lat * 60, 3)) . '\'';
+    $retval = $retval . sprintf('%06.3f', round($lat * 60, 3)) . '\'';
 
     return $retval;
 }
@@ -391,7 +391,7 @@ function number1000($n)
         $opt['locale'][$opt['template']['locale']]['format']['dot1000'] == ','
     ) {
         return number_format($n);
-    } else {
-        return str_replace(',', '.', number_format($n));
     }
+
+    return str_replace(',', '.', number_format($n));
 }

@@ -41,7 +41,7 @@ $tpl->assign('show_watchers', false);
 $tpl->assign('show_edit', false);
 $tpl->assign('togglewatch', 'cachelists.php');
 
-$pager = new pager("cachelists.php?startat={offset}");
+$pager = new pager('cachelists.php?startat={offset}');
 $pager->make_from_offset($startat, $listcount, $MAXITEMS);
 
 $tpl->display();

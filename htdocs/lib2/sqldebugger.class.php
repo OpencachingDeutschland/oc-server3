@@ -13,7 +13,9 @@ $sqldebugger = new sqldebugger();
 
 class sqldebugger
 {
-    public $commands = array();
+
+    public $commands = [];
+
     public $cancel = false;
 
     public function getCancel()
@@ -36,15 +38,15 @@ class sqldebugger
             return mysql_query($sql, $dblink);
         }
 
-        $command = array();
+        $command = [];
 
         $command['sql'] = $sql;
-        $command['explain'] = array();
-        $command['result'] = array();
-        $command['warnings'] = array();
+        $command['explain'] = [];
+        $command['result'] = [];
+        $command['warnings'] = [];
         $command['runtime'] = 0;
         $command['affected'] = 0;
-        $command['count'] = - 1;
+        $command['count'] = -1;
         $command['mode'] = $db['mode'];
         $command['slave'] = $bQuerySlave;
         $command['server'] = $sServer;
@@ -74,7 +76,7 @@ class sqldebugger
                     break;
                 }
                 $command['result'][] = $r;
-                $c ++;
+                $c++;
             }
             sql_free_result($rs);
 
@@ -88,7 +90,7 @@ class sqldebugger
         // dont use query cache!
         $sql = $this->insert_nocache($sql);
 
-        $bSqlExecution = new Cbench;
+        $bSqlExecution = new Cbench();
         $bSqlExecution->start();
         $rsResult = mysql_query($sql, $dblink);
         $bSqlExecution->stop();

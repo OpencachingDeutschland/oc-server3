@@ -24,27 +24,27 @@ if (count($argv) != 2 || ($argv[1] != 'init' && $argv[1] != 'discard')) {
 }
 
 if ($opt['cron']['geokrety']['xml_archive'] != ($argv[1] == 'init')) {
-    die("Error: Geokrety XML archiving is " . ($opt['cron']['geokrety']['xml_archive'] ? 'enabled' : 'disabled') . " in settings\n");
+    die('Error: Geokrety XML archiving is ' . ($opt['cron']['geokrety']['xml_archive'] ? 'enabled' : 'disabled') . " in settings\n");
 }
 
 echo "deleting old archive if exists\n";
 
-sql("DROP TABLE IF EXISTS _backup_gk_item");
-sql("DROP TABLE IF EXISTS _backup_gk_item_waypoint");
-sql("DROP TABLE IF EXISTS _backup_gk_move");
-sql("DROP TABLE IF EXISTS _backup_gk_move_waypoint");
-sql("DROP TABLE IF EXISTS _backup_gk_user");
+sql('DROP TABLE IF EXISTS _backup_gk_item');
+sql('DROP TABLE IF EXISTS _backup_gk_item_waypoint');
+sql('DROP TABLE IF EXISTS _backup_gk_move');
+sql('DROP TABLE IF EXISTS _backup_gk_move_waypoint');
+sql('DROP TABLE IF EXISTS _backup_gk_user');
 
-foreach (glob($opt['rootpath'] . "cache2/geokrety/import-*.xml") as $f) {
+foreach (glob($opt['rootpath'] . 'cache2/geokrety/import-*.xml') as $f) {
     unlink($f);
 }
 
 if ($argv[1] == 'init') {
     echo "initializing new archive\n";
 
-    sql("CREATE TABLE _backup_gk_item (SELECT * FROM gk_item)");
-    sql("CREATE TABLE _backup_gk_item_waypoint (SELECT * FROM gk_item_waypoint)");
-    sql("CREATE TABLE _backup_gk_move (SELECT * FROM gk_move)");
-    sql("CREATE TABLE _backup_gk_move_waypoint (SELECT * FROM gk_move_waypoint)");
-    sql("CREATE TABLE _backup_gk_user (SELECT * FROM gk_user)");
+    sql('CREATE TABLE _backup_gk_item (SELECT * FROM gk_item)');
+    sql('CREATE TABLE _backup_gk_item_waypoint (SELECT * FROM gk_item_waypoint)');
+    sql('CREATE TABLE _backup_gk_move (SELECT * FROM gk_move)');
+    sql('CREATE TABLE _backup_gk_move_waypoint (SELECT * FROM gk_move_waypoint)');
+    sql('CREATE TABLE _backup_gk_user (SELECT * FROM gk_user)');
 }

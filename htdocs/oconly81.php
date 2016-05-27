@@ -46,7 +46,7 @@ $rs = sql(
     INNER JOIN &oconly81 ON &oconly81.`user_id`=`user`.`user_id`
     GROUP BY `user`.`user_id`
     ORDER BY `count` DESC, `username` ASC " .
-    ($showall ? "" : "LIMIT " . sql_escape($opt['logic']['oconly81']['default_maxusers'] + 1))
+    ($showall ? '' : 'LIMIT ' . sql_escape($opt['logic']['oconly81']['default_maxusers'] + 1))
 );
 
 $tpl->assign_rs('users', $rs);

@@ -107,7 +107,7 @@ if (isset($_REQUEST['queryid']) || isset($_REQUEST['showresult'])) {  // Ocprop:
         // or saved query to start from
 
         $_REQUEST['cache_attribs'] = '';
-        $rs = sql("SELECT `id` FROM `cache_attrib` WHERE `default`=1 AND NOT IFNULL(`hidden`, 0)=1");
+        $rs = sql('SELECT `id` FROM `cache_attrib` WHERE `default`=1 AND NOT IFNULL(`hidden`, 0)=1');
         while ($r = sql_fetch_assoc($rs)) {
             if ($_REQUEST['cache_attribs'] != '') {
                 $_REQUEST['cache_attribs'] .= ';';
@@ -117,7 +117,7 @@ if (isset($_REQUEST['queryid']) || isset($_REQUEST['showresult'])) {  // Ocprop:
         sql_free_result($rs);
 
         $_REQUEST['cache_attribs_not'] = '';
-        $rs = sql("SELECT `id` FROM `cache_attrib` WHERE `default`=2 AND NOT IFNULL(`hidden`, 0)=1");
+        $rs = sql('SELECT `id` FROM `cache_attrib` WHERE `default`=2 AND NOT IFNULL(`hidden`, 0)=1');
         while ($r = sql_fetch_assoc($rs)) {
             if ($_REQUEST['cache_attribs_not'] != '') {
                 $_REQUEST['cache_attribs_not'] .= ';';
@@ -222,7 +222,7 @@ if ($queryid != 0) {
         unset($_REQUEST['searchbyfulltext']);
         unset($_REQUEST['searchbynofilter']);
         unset($_REQUEST['searchall']);
-        $_REQUEST[$_REQUEST['searchto']] = "hoho";
+        $_REQUEST[$_REQUEST['searchto']] = 'hoho';
     }
 
     // get the search options parameters and store them in the queries table (to view "the next page")
@@ -245,7 +245,7 @@ if ($queryid != 0) {
     if (isset($_REQUEST['cache_attribs'])) {
         if ($_REQUEST['cache_attribs'] != '') {
             $aAttribs = mb_split(';', $_REQUEST['cache_attribs']);
-            for ($i = 0; $i < count($aAttribs); $i ++) {
+            for ($i = 0; $i < count($aAttribs); $i++) {
                 $options['cache_attribs'][$aAttribs[$i] + 0] = $aAttribs[$i] + 0;
             }
             unset($aAttribs);
@@ -259,7 +259,7 @@ if ($queryid != 0) {
     if (isset($_REQUEST['cache_attribs_not'])) {
         if ($_REQUEST['cache_attribs_not'] != '') {
             $aAttribs = mb_split(';', $_REQUEST['cache_attribs_not']);
-            for ($i = 0; $i < count($aAttribs); $i ++) {
+            for ($i = 0; $i < count($aAttribs); $i++) {
                 $options['cache_attribs_not'][$aAttribs[$i] + 0] = $aAttribs[$i] + 0;
             }
             unset($aAttribs);
@@ -285,7 +285,7 @@ if ($queryid != 0) {
         $options['cachename'] = isset($_REQUEST['cachename']) ? stripslashes($_REQUEST['cachename']) : '';
 
         if (!isset($_REQUEST['utf8'])) {
-            $options['cachename'] = iconv("ISO-8859-1", "UTF-8", $options['cachename']);
+            $options['cachename'] = iconv('ISO-8859-1', 'UTF-8', $options['cachename']);
         }
     } elseif (isset($_REQUEST['searchbyowner'])) { // Ocprop
         $options['searchtype'] = 'byowner';
@@ -361,7 +361,7 @@ if ($queryid != 0) {
         $password = isset($_REQUEST['listkey']) ? $_REQUEST['listkey'] : '';
         $list = new cachelist($options['listid']);
         if (!$list->allowView($password)) {
-            $tpl->redirect("cachelists.php");
+            $tpl->redirect('cachelists.php');
         }
         $options['cachelist'] = cachelist::getListById($options['listid']);  // null for invalid ID
         $options['cachelist_pw'] = $password;
@@ -450,7 +450,7 @@ if ($bRememberQuery) {
 // remove old queries (after 1 hour without use);
 // execute only every 50 search calls
 if (mt_rand(1, 50) == 1) {
-    sql("DELETE FROM `queries` WHERE `last_queried` < NOW() - INTERVAL 1 HOUR AND `user_id`=0");
+    sql('DELETE FROM `queries` WHERE `last_queried` < NOW() - INTERVAL 1 HOUR AND `user_id`=0');
 }
 
 
@@ -638,9 +638,9 @@ if ($options['showresult'] == 1) {
                                 if ($sqlhashes != '') {
                                     $sqlhashes .= ' OR ';
                                 }
-                                $sqlhashes .= '`gns_search`.`simplehash`=' . sprintf("%u", crc32($searchstring));
+                                $sqlhashes .= '`gns_search`.`simplehash`=' . sprintf('%u', crc32($searchstring));
 
-                                $wordscount ++;
+                                $wordscount++;
                             }
                         }
 
@@ -736,7 +736,7 @@ if ($options['showresult'] == 1) {
                         sql_drop_temp_table_slave('tmpuniidsAdd');
                         sql_drop_temp_table_slave('tmpuniidsRemove');
 
-                        $rs = sql_slave("SELECT `uni_id` FROM &tmpuniids");
+                        $rs = sql_slave('SELECT `uni_id` FROM &tmpuniids');
                         if (sql_num_rows($rs) == 0) {
                             sql_free_result($rs);
 
@@ -758,14 +758,14 @@ if ($options['showresult'] == 1) {
 
                             if (mb_strtolower($rCmp['full_name']) != mb_strtolower($ort)) {
                                 outputUniidSelectionForm(
-                                    "SELECT `uni_id`, `olduni` FROM `&tmpuniids`",
+                                    'SELECT `uni_id`, `olduni` FROM `&tmpuniids`',
                                     $options
                                 );
                             }
                         } else {
                             sql_free_result($rs);
                             outputUniidSelectionForm(
-                                "SELECT `uni_id`, `olduni` FROM `&tmpuniids`",
+                                'SELECT `uni_id`, `olduni` FROM `&tmpuniids`',
                                 $options
                             );
                             exit;
@@ -872,7 +872,7 @@ if ($options['showresult'] == 1) {
                     if (($lon_h >= 0) && ($lon_h < 180) && ($lon_min >= 0) && ($lon_min < 60)) {
                         $lon = $lon_h + $lon_min / 60;
                         if ($lonEW == 'W') {
-                            $lon = - $lon;
+                            $lon = -$lon;
                         }
                     }
                 }
@@ -881,7 +881,7 @@ if ($options['showresult'] == 1) {
                     if (($lat_h >= 0) && ($lat_h < 90) && ($lat_min >= 0) && ($lat_min < 60)) {
                         $lat = $lat_h + $lat_min / 60;
                         if ($latNS == 'S') {
-                            $lat = - $lat;
+                            $lat = -$lat;
                         }
                     }
                 }
@@ -990,7 +990,7 @@ if ($options['showresult'] == 1) {
                 $sql_where[] = '`s' . $n . '`.`hash`=\'' . sql_escape($h) . '\'';
                 $sql_where[] = '`s' . $n . '`.`object_type` IN (' . implode(',', $ft_types) . ')';
 
-                $n ++;
+                $n++;
             }
 
             $sqlFilter =
@@ -1002,7 +1002,7 @@ if ($options['showresult'] == 1) {
             sql_drop_temp_table_slave('tmpFTCaches');
             sql_temp_table_slave('tmpFTCaches');
             sql_slave(
-                "CREATE TEMPORARY TABLE &tmpFTCaches (`cache_id` int (11) PRIMARY KEY) " . $sqlFilter
+                'CREATE TEMPORARY TABLE &tmpFTCaches (`cache_id` int (11) PRIMARY KEY) ' . $sqlFilter
             );
 
             $sql_select = [];
@@ -1115,7 +1115,7 @@ if ($options['showresult'] == 1) {
             $options['f_geokrets'] = '0';
         }
         if ($options['f_geokrets'] != 0) {
-            $sql_where[] = "(SELECT COUNT(*) FROM `gk_item_waypoint` WHERE `wp`=`caches`.`wp_oc`)";
+            $sql_where[] = '(SELECT COUNT(*) FROM `gk_item_waypoint` WHERE `wp`=`caches`.`wp_oc`)';
         }
 
         if (!isset($options['country'])) {
@@ -1147,8 +1147,8 @@ if ($options['showresult'] == 1) {
 
         if ($options['cachetype'] != '') {
             $types = explode(';', $options['cachetype']);
-            if (count($types) < sql_value_slave("SELECT COUNT(*) FROM `cache_type`", 0)) {
-                for ($i = 0; $i < count($types); $i ++) {
+            if (count($types) < sql_value_slave('SELECT COUNT(*) FROM `cache_type`', 0)) {
+                for ($i = 0; $i < count($types); $i++) {
                     $types[$i] = "'" . sql_escape($types[$i]) . "'";
                 }
                 $sql_where[] = '`caches`.`type` IN (' . implode(',', $types) . ')';
@@ -1157,8 +1157,8 @@ if ($options['showresult'] == 1) {
 
         if ($options['cachesize'] != '') {
             $sizes = explode(';', $options['cachesize']);
-            if (count($sizes) < sql_value_slave("SELECT COUNT(*) FROM `cache_size`", 0)) {
-                for ($i = 0; $i < count($sizes); $i ++) {
+            if (count($sizes) < sql_value_slave('SELECT COUNT(*) FROM `cache_size`', 0)) {
+                for ($i = 0; $i < count($sizes); $i++) {
                     $sizes[$i] = "'" . sql_escape($sizes[$i]) . "'";
                 }
                 $sql_where[] = '`caches`.`size` IN (' . implode(',', $sizes) . ')';
@@ -1221,10 +1221,10 @@ if ($options['showresult'] == 1) {
         }
 
         //do the search
-        $innerjoin = sizeof($sql_innerjoin) ? ' INNER JOIN ' . implode(' INNER JOIN ', $sql_innerjoin) : '';
-        $leftjoin = sizeof($sql_leftjoin) ? ' LEFT JOIN ' . implode(' LEFT JOIN ', $sql_leftjoin) : '';
-        $group = sizeof($sql_group) ? ' GROUP BY ' . implode(', ', $sql_group) : '';
-        $having = sizeof($sql_having) ? ' HAVING ' . implode(' AND ', $sql_having) : '';
+        $innerjoin = count($sql_innerjoin) ? ' INNER JOIN ' . implode(' INNER JOIN ', $sql_innerjoin) : '';
+        $leftjoin = count($sql_leftjoin) ? ' LEFT JOIN ' . implode(' LEFT JOIN ', $sql_leftjoin) : '';
+        $group = count($sql_group) ? ' GROUP BY ' . implode(', ', $sql_group) : '';
+        $having = count($sql_having) ? ' HAVING ' . implode(' AND ', $sql_having) : '';
 
         $sqlFilter = 'SELECT ' . implode(',', $sql_select) .
             ' FROM ' . $sql_from .
@@ -1429,9 +1429,9 @@ if ($options['showresult'] == 1) {
         // for the case something went wrong and it was not propery cleaned up
 
         sql_temp_table_slave('searchtmp');
-        sql_slave("CREATE TEMPORARY TABLE &searchtmp SELECT " . $sql . $sqlLimit);
+        sql_slave('CREATE TEMPORARY TABLE &searchtmp SELECT ' . $sql . $sqlLimit);
 
-        $count = sql_value_slave("SELECT COUNT(*) FROM &searchtmp", 0);
+        $count = sql_value_slave('SELECT COUNT(*) FROM &searchtmp', 0);
         if ($count == 1) {
             $sFilebasename = sql_value_slave(
                 "SELECT `caches`.`wp_oc`
@@ -1575,7 +1575,7 @@ function sqlStringbySearchradius($distance, $lat, $lon, $multiplier, $distance_u
                 AND `latitude` < " . ($lat + $max_lat_diff) . "
             HAVING `distance` < " . ($distance + 0);
     sql_slave($cachesFilter);
-    sql_slave("ALTER TABLE &result_caches ADD PRIMARY KEY ( `cache_id` )");
+    sql_slave('ALTER TABLE &result_caches ADD PRIMARY KEY ( `cache_id` )');
 
     $sql_select[] = '&result_caches.`cache_id`';
     $sql_from = '&result_caches';
@@ -1712,17 +1712,17 @@ function outputSearchForm($options)
                 $lon_min = 60 - $lon_min;
             }
 
-            $tpl->assign('lat_min', sprintf("%02.3f", $lat_min));
-            $tpl->assign('lon_min', sprintf("%02.3f", $lon_min));
+            $tpl->assign('lat_min', sprintf('%02.3f', $lat_min));
+            $tpl->assign('lon_min', sprintf('%02.3f', $lon_min));
 
             if ($lat < 0 && $lat_h < 0) {
-                $lat_h = - $lat_h;
+                $lat_h = -$lat_h;
                 if ($lat_min != 0) {
                     $lat_h = $lat_h - 1;
                 }
             }
             if ($lon < 0 && $lon_h < 0) {
-                $lon_h = - $lon_h;
+                $lon_h = -$lon_h;
                 if ($lon_min != 0) {
                     $lon_h = $lon_h - 1;
                 }
@@ -1850,7 +1850,7 @@ function outputSearchForm($options)
     $tpl->assign('all_languages', $options['language'] == '');
 
     // cachetype
-    $rs = sql("SELECT `id` FROM `cache_type` ORDER BY `ordinal`");
+    $rs = sql('SELECT `id` FROM `cache_type` ORDER BY `ordinal`');
     $rCachetypes = sql_fetch_assoc_table($rs);
     foreach ($rCachetypes as &$rCachetype) {
         $rCachetype['checked'] =
@@ -1866,7 +1866,7 @@ function outputSearchForm($options)
 
     // cachesize
     $cachesizes = [];
-    $rs = sql("SELECT `id` FROM `cache_size`");
+    $rs = sql('SELECT `id` FROM `cache_size`');
     while ($r = sql_fetch_assoc($rs)) {
         $cachesizes[$r['id']]['checked'] =
             (strpos(
@@ -2022,7 +2022,7 @@ function outputSearchForm($options)
             $line = mb_ereg_replace('{color}', $rAttrGroup['color'], $line);
 
             $group_line .= $line;
-            $nLineAttrCount2 ++;
+            $nLineAttrCount2++;
         }
         sql_free_result($rs);
 
@@ -2133,7 +2133,7 @@ function outputSearchForm($options)
             $line = mb_ereg_replace('{color}', $rAttrGroup['color'], $line);
 
             $group_line .= $line;
-            $nLineAttrCount1 ++;
+            $nLineAttrCount1++;
         }
         sql_free_result($rs);
 
@@ -2284,8 +2284,8 @@ function outputUniidSelectionForm($uniSql, $options)
     $urlparamString = prepareLocSelectionForm($options);
 
     sql_temp_table_slave('uniids');
-    sql_slave("CREATE TEMPORARY TABLE &uniids ENGINE=MEMORY " . $uniSql);
-    sql_slave("ALTER TABLE &uniids ADD PRIMARY KEY (`uni_id`)");
+    sql_slave('CREATE TEMPORARY TABLE &uniids ENGINE=MEMORY ' . $uniSql);
+    sql_slave('ALTER TABLE &uniids ADD PRIMARY KEY (`uni_id`)');
 
     // locidsite
     $locidsite = isset($_REQUEST['locidsite']) ? $_REQUEST['locidsite'] : 0;
@@ -2293,7 +2293,7 @@ function outputUniidSelectionForm($uniSql, $options)
         $locidsite = 0;
     }
 
-    $count = sql_value_slave("SELECT COUNT(*) FROM &uniids", 0);
+    $count = sql_value_slave('SELECT COUNT(*) FROM &uniids', 0);
     $tpl->assign('resultscount', $count);
 
     // create page browser
@@ -2317,7 +2317,7 @@ function outputUniidSelectionForm($uniSql, $options)
          FROM `gns_locations`, &uniids
          WHERE &uniids.`uni_id`=`gns_locations`.`uni`
          ORDER BY `gns_locations`.`full_name` ASC
-         LIMIT " . ($locidsite * 20) . ", 20"
+         LIMIT " . ($locidsite * 20) . ', 20'
     );
 
     $nr = $locidsite * 20 + 1;
@@ -2388,7 +2388,7 @@ function outputUniidSelectionForm($uniSql, $options)
         $thislocation = mb_ereg_replace('{locid}', urlencode($r['uni_id']), $thislocation);
         $thislocation = mb_ereg_replace('{nr}', $nr, $thislocation);
 
-        $nr ++;
+        $nr++;
         $locations .= $thislocation . "\n";
     }
     sql_free_result($rs);
@@ -2411,8 +2411,8 @@ function outputLocidSelectionForm($locSql, $options)
     $urlparamString = prepareLocSelectionForm($options) . '&locid={locid}';
 
     sql_temp_table_slave('locids');
-    sql_slave("CREATE TEMPORARY TABLE &locids ENGINE=MEMORY " . $locSql);
-    sql_slave("ALTER TABLE &locids ADD PRIMARY KEY (`loc_id`)");
+    sql_slave('CREATE TEMPORARY TABLE &locids ENGINE=MEMORY ' . $locSql);
+    sql_slave('ALTER TABLE &locids ADD PRIMARY KEY (`loc_id`)');
 
     $rs = sql_slave(
         "SELECT
@@ -2481,7 +2481,7 @@ function outputLocidSelectionForm($locSql, $options)
             $thislocation = mb_ereg_replace('{bgcolor}', $bgcolor2, $thislocation);
         }
 
-        $nr ++;
+        $nr++;
         $locations .= $thislocation . "\n";
     }
 

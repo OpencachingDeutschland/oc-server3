@@ -184,11 +184,11 @@ if (isset($_REQUEST['finduser']) && isset($_REQUEST['username'])) {
         AND `status`!=5",
         $user_id
     );
-    $caches = array();
+    $caches = [];
     while ($rCache = sql_fetch_assoc($rs)) {
         $coord = new coordinate($rCache['latitude'], $rCache['longitude']);
         $rCache['coordinates'] = $coord->getDecimalMinutes();
-        $rCache['data'] = get_archive_data(array($rCache['cache_id']));
+        $rCache['data'] = get_archive_data([$rCache['cache_id']]);
         if (count($rCache['data'])) {
             $keys = array_keys($rCache['data']);
             $rCache['date'] = $keys[0];
@@ -219,7 +219,7 @@ if (isset($_REQUEST['finduser']) && isset($_REQUEST['username'])) {
         )
     );
 
-    $cacheids = array();
+    $cacheids = [];
     foreach ($_REQUEST as $param => $value) {
         if (substr($param, 0, 6) == 'cache_') {
             $cacheids[] = substr($param, 6);
@@ -237,11 +237,11 @@ if (isset($_REQUEST['finduser']) && isset($_REQUEST['username'])) {
         $tpl->display();
     }
 
-    $today = sql_value("SELECT LEFT(NOW(),10)", 0);
+    $today = sql_value('SELECT LEFT(NOW(),10)', 0);
     $today_usermod = false;
     if (isset($dates[$today])) {
         foreach ($dates[$today] as $cache_changed) {
-            if (strpos($cache_changed, "userchange")) {
+            if (strpos($cache_changed, 'userchange')) {
                 $today_usermod = true;
             }
         }
@@ -269,15 +269,15 @@ if (isset($_REQUEST['finduser']) && isset($_REQUEST['username'])) {
     $simulate = isset($_REQUEST['simulate']) && $_REQUEST['simulate'];
     $tpl->assign('simulate', $simulate);
 
-    $restore_date = isset($_REQUEST['dateselect']) ? $_REQUEST['dateselect'] : "";
-    $restore_options = array();
+    $restore_date = isset($_REQUEST['dateselect']) ? $_REQUEST['dateselect'] : '';
+    $restore_options = [];
     foreach ($_REQUEST as $param => $value) {
-        if (substr($param, 0, 8) == "restore_") {
+        if (substr($param, 0, 8) == 'restore_') {
             $restore_options[] = substr($param, 8);
         }
     }
 
-    if ($restore_date == "") {
+    if ($restore_date == '') {
         $tpl->assign('error', 'nodate');
         $tpl->display();
     } elseif (count($restore_options) == 0) {
@@ -289,7 +289,7 @@ if (isset($_REQUEST['finduser']) && isset($_REQUEST['username'])) {
         $tpl->display();
     }
 
-    $cacheids = explode(",", urldecode($_REQUEST['cacheids']));
+    $cacheids = explode(',', urldecode($_REQUEST['cacheids']));
     $tpl->assign(
         'restored',
         restore_listings($cacheids, $restore_date, $restore_options, $simulate)
@@ -308,12 +308,12 @@ $tpl->display();
 
 function get_archive_data($caches)
 {
-    $cachelist = "(" . implode(",", $caches) . ")";
-    $data = array();
-    $admins = array();
+    $cachelist = '(' . implode(',', $caches) . ')';
+    $data = [];
+    $admins = [];
 
     // make waypoint index
-    $rs = sql("SELECT `cache_id`, `wp_oc` FROM `caches` WHERE `cache_id` IN " . $cachelist);
+    $rs = sql('SELECT `cache_id`, `wp_oc` FROM `caches` WHERE `cache_id` IN ' . $cachelist);
     while ($r = sql_fetch_assoc($rs)) {
         $wp_oc[$r['cache_id']] = $r['wp_oc'];
     }
@@ -332,14 +332,14 @@ function get_archive_data($caches)
         ORDER BY `date_created` ASC"
     );
     // order is relevant, because multiple changes per day possible
-    $lastcoord = array();
+    $lastcoord = [];
     while ($r = sql_fetch_assoc($rs)) {
         $coord = new coordinate($r['latitude'], $r['longitude']);
         $coord = $coord->getDecimalMinutes();
-        $coord = $coord['lat'] . " " . $coord['lon'];
+        $coord = $coord['lat'] . ' ' . $coord['lon'];
         if (isset($lastcoord[$r['cache_id']]) && $coord != $lastcoord[$r['cache_id']]) {
             // the database contains lots of old coord records with unchanged coords, wtf?
-            append_data($data, $admins, $wp_oc, $r, "coord", $lastcoord[$r['cache_id']], $coord);
+            append_data($data, $admins, $wp_oc, $r, 'coord', $lastcoord[$r['cache_id']], $coord);
         }
         $lastcoord[$r['cache_id']] = $coord;
     }
@@ -351,11 +351,11 @@ function get_archive_data($caches)
                          WHERE `cache_id` IN " . $cachelist . "
                          ORDER BY `date_created` ASC");
     // order is relevant, because multiple changes per day possible
-    $lastcountry = array();
+    $lastcountry = [];
     while ($r = sql_fetch_assoc($rs)) {
         if (isset($lastcountry[$r['cache_id']]) && $r['country'] != $lastcountry[$r['cache_id']]) {
             // the database contains some old country records with unchanged coords, wtf?
-            append_data($data, $admins, $wp_oc, $r, "country", $lastcountry[$r['cache_id']], $r['country']);
+            append_data($data, $admins, $wp_oc, $r, 'country', $lastcountry[$r['cache_id']], $r['country']);
         }
         $lastcountry[$r['cache_id']] = $r['country'];
     }
@@ -363,8 +363,8 @@ function get_archive_data($caches)
 
     // all other cache data
     // first the current data ...
-    $nextcd = array();
-    $rs = sql("SELECT * FROM `caches` WHERE `cache_id` IN " . $cachelist);
+    $nextcd = [];
+    $rs = sql('SELECT * FROM `caches` WHERE `cache_id` IN ' . $cachelist);
     while ($r = sql_fetch_assoc($rs)) {
         $nextcd[$r['wp_oc']] = $r;
         $user_id = $r['user_id'];     // is used later for logs
@@ -380,7 +380,7 @@ function get_archive_data($caches)
     while ($r = sql_fetch_assoc($rs)) {
         $wp = $wp_oc[$r['cache_id']];
         if ($r['name'] != $nextcd[$wp]['name']) {
-            append_data($data, $admins, $wp_oc, $r, "name", $r['name'], $nextcd[$wp]['name']);
+            append_data($data, $admins, $wp_oc, $r, 'name', $r['name'], $nextcd[$wp]['name']);
         }
         if ($r['type'] != $nextcd[$wp]['type']) {
             append_data(
@@ -388,7 +388,7 @@ function get_archive_data($caches)
                 $admins,
                 $wp_oc,
                 $r,
-                "type",
+                'type',
                 labels::getLabelValue('cache_type', $r['type']),
                 labels::getLabelValue('cache_type', $nextcd[$wp]['type'])
             );
@@ -399,16 +399,16 @@ function get_archive_data($caches)
                 $admins,
                 $wp_oc,
                 $r,
-                "size",
+                'size',
                 labels::getLabelValue('cache_size', $r['size']),
                 labels::getLabelValue('cache_size', $nextcd[$wp]['size'])
             );
         }
         if ($r['difficulty'] != $nextcd[$wp]['difficulty']) {
-            append_data($data, $admins, $wp_oc, $r, "D", $r['difficulty'] / 2, $nextcd[$wp]['difficulty'] / 2);
+            append_data($data, $admins, $wp_oc, $r, 'D', $r['difficulty'] / 2, $nextcd[$wp]['difficulty'] / 2);
         }
         if ($r['terrain'] != $nextcd[$wp]['terrain']) {
-            append_data($data, $admins, $wp_oc, $r, "T", $r['terrain'] / 2, $nextcd[$wp]['terrain'] / 2);
+            append_data($data, $admins, $wp_oc, $r, 'T', $r['terrain'] / 2, $nextcd[$wp]['terrain'] / 2);
         }
         if ($r['search_time'] != $nextcd[$wp]['search_time']) {
             append_data(
@@ -416,7 +416,7 @@ function get_archive_data($caches)
                 $admins,
                 $wp_oc,
                 $r,
-                "time",
+                'time',
                 $r['search_time'] . '&nbsp;h',
                 $nextcd[$wp]['search_time'] . '&nbsp;h'
             );
@@ -427,7 +427,7 @@ function get_archive_data($caches)
                 $admins,
                 $wp_oc,
                 $r,
-                "way",
+                'way',
                 $r['way_length'] . '&nbsp;km',
                 $nextcd[$wp]['way_length'] . '&nbsp;km'
             );
@@ -438,7 +438,7 @@ function get_archive_data($caches)
                 $admins,
                 $wp_oc,
                 $r,
-                "GC ",
+                'GC ',
                 format_wp($r['wp_gc']),
                 format_wp($nextcd[$wp]['wp_gc'])
             );
@@ -449,13 +449,13 @@ function get_archive_data($caches)
                 $admins,
                 $wp_oc,
                 $r,
-                "GC ",
+                'GC ',
                 format_wp($r['wp_nc']),
                 format_wp($nextcd[$wp]['wp_nc'])
             );
         }
         if ($r['date_hidden'] != $nextcd[$wp]['date_hidden']) {
-            append_data($data, $admins, $wp_oc, $r, "hidden", $r['date_hidden'], $nextcd[$wp]['date_hidden']);
+            append_data($data, $admins, $wp_oc, $r, 'hidden', $r['date_hidden'], $nextcd[$wp]['date_hidden']);
         }
 
         $nextcd[$wp] = $r;
@@ -474,8 +474,8 @@ function get_archive_data($caches)
             $admins,
             $wp_oc,
             $r,
-            "attrib",
-            ($r['was_set'] ? "-" : "+") . labels::getLabelValue('cache_attrib', $r['attrib_id']),
+            'attrib',
+            ($r['was_set'] ? '-' : '+') . labels::getLabelValue('cache_attrib', $r['attrib_id']),
             ''
         );
     }
@@ -483,7 +483,7 @@ function get_archive_data($caches)
 
     // descriptions
     // first the current data ...
-    $nextdesc = array();
+    $nextdesc = [];
     $rs = sql(
         "SELECT
             `cache_id`,
@@ -535,7 +535,7 @@ function get_archive_data($caches)
                 $admins,
                 $wp_oc,
                 $r,
-                "desc(" . $r['language'] . ")",
+                'desc(' . $r['language'] . ')',
                 $r['dl'] + 0,
                 ($next['dl'] + 0) . ' bytes'
             );
@@ -546,7 +546,7 @@ function get_archive_data($caches)
                 $admins,
                 $wp_oc,
                 $r,
-                "hint(" . $r['language'] . ")",
+                'hint(' . $r['language'] . ')',
                 $r['hl'] + 0,
                 ($next['hl'] + 0) . ' bytes'
             );
@@ -557,7 +557,7 @@ function get_archive_data($caches)
                 $admins,
                 $wp_oc,
                 $r,
-                "shortdesc(" . $r['language'] . ")",
+                'shortdesc(' . $r['language'] . ')',
                 $r['sdl'] + 0,
                 ($next['sdl'] + 0) . ' bytes'
             );
@@ -603,8 +603,8 @@ function get_archive_data($caches)
             $admins,
             $wp_oc,
             $r,
-            $r["op"] == 1 ? "dellog" : "restorelog",
-            "<a href='viewprofile.php?userid=" . $r['user_id'] . "' target='_blank'>" . $r['username'] . "</a>/" . $r['date'],
+            $r['op'] == 1 ? 'dellog' : 'restorelog',
+            "<a href='viewprofile.php?userid=" . $r['user_id'] . "' target='_blank'>" . $r['username'] . '</a>/' . $r['date'],
             ''
         );
     }
@@ -618,34 +618,34 @@ function get_archive_data($caches)
      *       rare in case of vandalism ...
      */
 
-    $piccacheid = "IF(`object_type`=2, `object_id`, IF(`object_type`=1, IFNULL((SELECT `cache_id` FROM `cache_logs` WHERE `id`=`object_id`),(SELECT `cache_id` FROM `cache_logs_archived` WHERE `id`=`object_id`)), 0))";
+    $piccacheid = 'IF(`object_type`=2, `object_id`, IF(`object_type`=1, IFNULL((SELECT `cache_id` FROM `cache_logs` WHERE `id`=`object_id`),(SELECT `cache_id` FROM `cache_logs_archived` WHERE `id`=`object_id`)), 0))';
     $rs = sql(
-        "SELECT *, " . $piccacheid . "AS `cache_id` FROM `pictures_modified`
-         WHERE " . $piccacheid . " IN " . $cachelist . "
+        'SELECT *, ' . $piccacheid . "AS `cache_id` FROM `pictures_modified`
+         WHERE " . $piccacheid . ' IN ' . $cachelist . "
          ORDER BY `date_modified` ASC"
     );  // order is relevant for the case of restore-reverts
     while ($r = sql_fetch_assoc($rs)) {
         $r['date_modified'] = substr($r['date_modified'], 0, 10);
         switch ($r['operation']) {
             case 'I':
-                $picchange = "add";
+                $picchange = 'add';
                 break;
             case 'U':
-                $picchange = "mod";
+                $picchange = 'mod';
                 break;
             case 'D':
-                $picchange = "del";
+                $picchange = 'del';
                 break;
         }
         switch ($r['object_type']) {
             case 1:
-                $picchange .= "-log";
+                $picchange .= '-log';
                 break;
             case 2:
-                $picchange .= "-cache";
+                $picchange .= '-cache';
                 break;
         }
-        append_data($data, $admins, $wp_oc, $r, $picchange . "pic", $r['title'], '');
+        append_data($data, $admins, $wp_oc, $r, $picchange . 'pic', $r['title'], '');
     }
     sql_free_result($rs);
 
@@ -665,11 +665,11 @@ function get_archive_data($caches)
 
 function format_wp($wp)
 {
-    if ($wp == "") {
-        return "(leer)";
-    } else {
-        return $wp;
+    if ($wp == '') {
+        return '(leer)';
     }
+
+    return $wp;
 }
 
 
@@ -695,15 +695,15 @@ function append_data(&$data, &$admins, $wp_oc, $r, $field, $oldvalue, $newvalue)
         $data[$mdate] = [];
     }
 
-    $text = "<strong";
+    $text = '<strong';
     if ($byadmin) {
         $text .= " class='adminrestore'";
     } else {
         $text .= " class='userchange'";
     }
-    $text .= ">$field</strong>: $oldvalue" . ($newvalue != "" ? " &rarr; $newvalue" : "");
+    $text .= ">$field</strong>: $oldvalue" . ($newvalue != '' ? " &rarr; $newvalue" : '');
     if (isset($data[$mdate][$wp])) {
-        $data[$mdate][$wp] .= ", " . $text;
+        $data[$mdate][$wp] .= ', ' . $text;
     } else {
         $data[$mdate][$wp] = $text;
     }
@@ -717,8 +717,8 @@ function append_data(&$data, &$admins, $wp_oc, $r, $field, $oldvalue, $newvalue)
         }
         $admins[$mdate][$wp][$r['restored_by'] + 0]
             = "<a href='viewprofile.php?userid=" . $r['restored_by'] . "' target='_blank'>" .
-            sql_value("SELECT `username` FROM `user` WHERE `user_id`='&1'", "", $r['restored_by']) .
-            "</a>";
+            sql_value("SELECT `username` FROM `user` WHERE `user_id`='&1'", '', $r['restored_by']) .
+            '</a>';
     }
 }
 
@@ -730,7 +730,7 @@ function restore_listings($cacheids, $rdate, $roptions, $simulate)
     sql("SET @restoredby='&1'", $login->userid);         // is evaluated by trigger functions
     sql_slave("SET @restoredby='&1'", $login->userid);
 
-    $restored = array();
+    $restored = [];
 
     foreach ($cacheids as $cacheid) {
         $modified = false;
@@ -743,7 +743,7 @@ function restore_listings($cacheids, $rdate, $roptions, $simulate)
         $user_id = $cache['user_id'];
 
         // coordinates
-        if (in_array("coords", $roptions) &&
+        if (in_array('coords', $roptions) &&
             sql_value(
                 "SELECT `cache_id` FROM `cache_coordinates`
                 WHERE `cache_id`='&1' AND `date_created`>='&2'",
@@ -776,7 +776,7 @@ function restore_listings($cacheids, $rdate, $roptions, $simulate)
         }
 
         // country
-        if (in_array("coords", $roptions) &&
+        if (in_array('coords', $roptions) &&
             sql_value(
                 "SELECT `cache_id` FROM `cache_countries`
                 WHERE `cache_id`='&1' AND `date_created`>='&2'",
@@ -831,18 +831,18 @@ function restore_listings($cacheids, $rdate, $roptions, $simulate)
         ];
 
         if ($r = sql_fetch_assoc($rs)) {// can be false
-            $setfields = "";
+            $setfields = '';
             foreach ($fields as $field => $ropt) {
                 if (in_array($ropt, $roptions) && $r[$field] != $cache[$field]) {
-                    if ($setfields != "") {
-                        $setfields .= ",";
+                    if ($setfields != '') {
+                        $setfields .= ',';
                     }
                     $setfields .= "`$field`='" . sql_escape($r[$field]) . "'";
                     $restored[$wp][$field] = true;
                 }
             }
-            if ($setfields != "" && !$simulate) {
-                sql("UPDATE `caches` SET " . $setfields . " WHERE `cache_id`='&1'", $cacheid);
+            if ($setfields != '' && !$simulate) {
+                sql('UPDATE `caches` SET ' . $setfields . " WHERE `cache_id`='&1'", $cacheid);
             }
         }
         sql_free_result($rs);
@@ -985,16 +985,16 @@ function restore_listings($cacheids, $rdate, $roptions, $simulate)
             // After restoring its state, it is added to $logs_processed (by its last known id),
             // and all further operations on the same log are ignored. This prevents unnecessary
             // operations and flooding pictures_modified on restore-reverts.
-            $logs_processed = array();
+            $logs_processed = [];
 
             while ($r = sql_fetch_assoc($rs)) {
-                $error = "";
+                $error = '';
                 $logs_restored = false;
 
                 // the log's id may have changed by multiple delete-and-restores
                 $revert_logid = get_current_logid($r['id']);
                 if (!in_array($revert_logid, $logs_processed)) {
-                    if ($r['node'] == - 1) {
+                    if ($r['node'] == -1) {
                         // if it was not already deleted by a later restore operation ...
                         if (sql_value("SELECT `id` FROM `cache_logs` WHERE `id`='&1'", 0, $revert_logid) != 0) {
                             if (!$simulate) {
@@ -1036,7 +1036,7 @@ function restore_listings($cacheids, $rdate, $roptions, $simulate)
                             $logs_restored = true;
                         } else {
                             if (!$log->save()) {
-                                $error = "restore";
+                                $error = 'restore';
                             } else {
                                 sql(
                                     "INSERT IGNORE INTO `cache_logs_restored`
@@ -1070,8 +1070,8 @@ function restore_listings($cacheids, $rdate, $roptions, $simulate)
                     $logs_processed[] = $revert_logid;
                 }  // not already processed
 
-                if ($error != "") {
-                    $restored[$wp]['internal error - could not $error log ' + $r['id'] + "/" + $logid];
+                if ($error != '') {
+                    $restored[$wp]['internal error - could not $error log ' + $r['id'] + '/' + $logid];
                 }
                 if ($logs_restored) {
                     $restored[$wp]['logs'] = true;
@@ -1081,7 +1081,7 @@ function restore_listings($cacheids, $rdate, $roptions, $simulate)
         }  // if logs enabled per roptions
 
         // pictures
-        if (in_array("desc", $roptions) || in_array("logs", $roptions)) {
+        if (in_array('desc', $roptions) || in_array('logs', $roptions)) {
             $rs = sql(
                 "SELECT * FROM `pictures_modified`
                         WHERE ((`object_type`=2 AND '&2' AND `object_id`='&3') OR
@@ -1091,8 +1091,8 @@ function restore_listings($cacheids, $rdate, $roptions, $simulate)
                                                   AND IFNULL((SELECT `cache_id` FROM `cache_logs` WHERE `id`=`object_id`),(SELECT `cache_id` FROM `cache_logs_archived` WHERE `id`=`object_id`)) = '&3'))
                           AND `date_modified`>='&4'
                                     ORDER BY `date_modified` ASC",
-                in_array("logs", $roptions) ? 1 : 0,
-                in_array("desc", $roptions) ? 1 : 0,
+                in_array('logs', $roptions) ? 1 : 0,
+                in_array('desc', $roptions) ? 1 : 0,
                 $cacheid,
                 $rdate,
                 $user_id
@@ -1102,7 +1102,7 @@ function restore_listings($cacheids, $rdate, $roptions, $simulate)
             // After restoring its state, it is added to $pics_processed (by its last known id),
             // and all further operations on the same pic are ignored. This prevents unnecessary
             // operations and flooding the _modified table on restore-reverts.
-            $pics_processed = array();
+            $pics_processed = [];
 
             while ($r = sql_fetch_assoc($rs)) {
                 $pics_restored = false;
@@ -1116,7 +1116,7 @@ function restore_listings($cacheids, $rdate, $roptions, $simulate)
                         $r['url'],
                         $revert_picid
                     );
-                    $error = "";
+                    $error = '';
 
                     switch ($r['operation']) {
                         case 'I':
@@ -1130,7 +1130,7 @@ function restore_listings($cacheids, $rdate, $roptions, $simulate)
                                     if ($pic->delete(true)) {
                                         $pics_restored = true;
                                     } else {
-                                        $error = "delete";
+                                        $error = 'delete';
                                     }
                                 }
                             }
@@ -1153,7 +1153,7 @@ function restore_listings($cacheids, $rdate, $roptions, $simulate)
                                     if ($pic->save(true)) {
                                         $pics_restored = true;
                                     } else {
-                                        $error = "update";
+                                        $error = 'update';
                                     }
                                 }
                             }
@@ -1192,7 +1192,7 @@ function restore_listings($cacheids, $rdate, $roptions, $simulate)
                                         $pics_restored = true;
                                         $pics_processed[] = $pic->getPictureId();
                                     } else {
-                                        $error = "restore";
+                                        $error = 'restore';
                                     }
                                 }
                             }
@@ -1202,8 +1202,8 @@ function restore_listings($cacheids, $rdate, $roptions, $simulate)
                     $pics_processed[] = $revert_picid;
                 }  // not already processed
 
-                if ($error != "") {
-                    $restored[$wp]['internal error - could not $error picture ' . $r['id'] + "/" + $picid] = true;
+                if ($error != '') {
+                    $restored[$wp]['internal error - could not $error picture ' . $r['id'] + '/' + $picid] = true;
                 }
                 if ($pics_restored) {
                     $restored[$wp]['pictures'] = true;
@@ -1214,8 +1214,8 @@ function restore_listings($cacheids, $rdate, $roptions, $simulate)
         }  // if pics enabled per roptions
     }  // foreach cache(id)
 
-    sql("SET @restoredby=0");
-    sql_slave("SET @restoredby=0");
+    sql('SET @restoredby=0');
+    sql_slave('SET @restoredby=0');
 
     return $restored;
 }

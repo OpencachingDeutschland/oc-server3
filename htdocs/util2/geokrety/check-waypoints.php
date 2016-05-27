@@ -16,14 +16,14 @@ require_once $opt['rootpath'] . 'lib2/cli.inc.php';
 $itemwps = [];
 
 // Get item waypoints
-$rs = sql("SELECT `id` AS `itemid`, `wp` FROM `gk_item_waypoint`");
+$rs = sql('SELECT `id` AS `itemid`, `wp` FROM `gk_item_waypoint`');
 while ($r = sql_fetch_assoc($rs)) {
     $itemwps[$r['itemid']][$r['wp']]['itemwp'] = true;
 }
 sql_free_result($rs);
 
 // Get move waypoints
-$rsItems = sql("SELECT DISTINCT `itemid` AS `id` FROM `gk_move`");
+$rsItems = sql('SELECT DISTINCT `itemid` AS `id` FROM `gk_move`');
 while ($rItem = sql_fetch_assoc($rsItems)) {
     $lastmove = sql_value(
         "SELECT `id` FROM `gk_move`
@@ -63,12 +63,12 @@ foreach ($itemwps as $itemid => $wps) {
                 $itemid,
                 $wp
             ) == 0) {
-                echo "item " . $itemid . ": " . $wp . " is missing in gk_move_waypoint\n";
+                echo 'item ' . $itemid . ': ' . $wp . " is missing in gk_move_waypoint\n";
             } else {
-                echo "item " . $itemid . ": " . $wp . " is not the current wp in gk_move_waypoint\n";
+                echo 'item ' . $itemid . ': ' . $wp . " is not the current wp in gk_move_waypoint\n";
             }
         } elseif (isset($flags['movewp']) && !isset($flags['itemwp'])) {
-            echo "item " . $itemid . ": " . $wp . " is missing in gk_item_waypoint\n";
+            echo 'item ' . $itemid . ': ' . $wp . " is missing in gk_item_waypoint\n";
         }
     }
 }

@@ -33,7 +33,7 @@
         <br />Diese Seite steht momentan nicht zur Verfügung. Das Opencaching-Team
         arbeitet bereits daran, das Problem zu beheben.
     </p>
-    <?php if (basename($_SERVER["SCRIPT_FILENAME"]) != 'index.php') { ?>
+    <?php if (basename($_SERVER['SCRIPT_FILENAME']) != 'index.php') { ?>
         <p><a href="index.php">Zurück zur Startseite</a></p>
     <?php } ?>
     <p>

@@ -24,15 +24,15 @@ function smarty_gettext_strarg($str)
     $tr = [];
     $p = 0;
 
-    for ($i = 1; $i < func_num_args(); $i ++) {
+    for ($i = 1; $i < func_num_args(); $i++) {
         $arg = func_get_arg($i);
 
         if (is_array($arg)) {
             foreach ($arg as $aarg) {
-                $tr['%' . ++ $p] = $aarg;
+                $tr['%' . ++$p] = $aarg;
             }
         } else {
-            $tr['%' . ++ $p] = $arg;
+            $tr['%' . ++$p] = $arg;
         }
     }
 

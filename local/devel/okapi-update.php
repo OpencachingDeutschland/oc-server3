@@ -28,7 +28,7 @@ if (!@chdir(OKAPI_SOURCE_PATH)) {
 if (git('rev-list HEAD --count') < 700) {
     die('[okapi-update] bad git configuration');
 }
-if (git("diff HEAD")) {
+if (git('diff HEAD')) {
     die('[okapi-update] OKAPI working branch is dirty');
 }
 
@@ -65,10 +65,10 @@ passthru(
 );
 $core = file_get_contents($opt['rootpath'] . 'okapi/core.php');
 $core = str_replace(
-    "\$version_number = null",
-    "\$version_number = " . $okapi_version_number,
+    '$version_number = null',
+    '$version_number = ' . $okapi_version_number,
     str_replace(
-        "\$git_revision = null",
+        '$git_revision = null',
         "\$git_revision = '" . $okapi_git_revision . "'",
         $core
     )

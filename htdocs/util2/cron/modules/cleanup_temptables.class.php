@@ -14,13 +14,15 @@ checkJob(new cleanup_temptables());
 
 class cleanup_temptables
 {
+
     public $name = 'cleanup_temptables';
+
     public $interval = 86400;
 
     public function run()
     {
         $nIds = [];
-        $rs = sqlf("SHOW PROCESSLIST");
+        $rs = sqlf('SHOW PROCESSLIST');
         while ($r = sql_fetch_assoc($rs)) {
             $nIds[$r['Id']] = $r['Id'];
         }

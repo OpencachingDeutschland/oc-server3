@@ -10,6 +10,7 @@
 
 class ProcessSync
 {
+
     public $pidfile_path;
 
 
@@ -29,21 +30,21 @@ class ProcessSync
         }
 
         if (file_exists($this->pidfile_path)) {
-            echo "Error: Pidfile (" . $this->pidfile_path . ") already present\n";
+            echo 'Error: Pidfile (' . $this->pidfile_path . ") already present\n";
 
             return false;
-        } else {
-            if ($pidfile = @fopen($this->pidfile_path, "w")) {
-                fputs($pidfile, posix_getpid());
-                fclose($pidfile);
-
-                return true;
-            } else {
-                echo "can't create Pidfile " . $this->pidfile_path . "\n";
-
-                return false;
-            }
         }
+
+        if ($pidfile = @fopen($this->pidfile_path, 'w')) {
+            fwrite($pidfile, posix_getpid());
+            fclose($pidfile);
+
+            return true;
+        }
+
+        echo "can't create Pidfile " . $this->pidfile_path . "\n";
+
+        return false;
     }
 
 
@@ -51,7 +52,7 @@ class ProcessSync
 
     private function CheckDaemon()
     {
-        if ($pidfile = @fopen($this->pidfile_path, "r")) {
+        if ($pidfile = @fopen($this->pidfile_path, 'r')) {
             $pid_daemon = fgets($pidfile, 20);
             fclose($pidfile);
 
@@ -59,19 +60,19 @@ class ProcessSync
 
             // bad PID file, e.g. due to system malfunction while creating the file?
             if ($pid_daemon <= 0) {
-                echo "removing bad pid_file (" . $this->pidfile_path . ")\n";
+                echo 'removing bad pid_file (' . $this->pidfile_path . ")\n";
                 unlink($this->pidfile_path);
 
                 return false;
             } // process running?
             elseif (posix_kill($pid_daemon, 0)) {
                 // yes, good bye
-                echo "Error: process for " . $this->pidfile_path . " is already running with pid=$pid_daemon\n";
+                echo 'Error: process for ' . $this->pidfile_path . " is already running with pid=$pid_daemon\n";
 
                 return false;
             } else {
                 // no, remove pid_file
-                echo "process not running, removing old pid_file (" . $this->pidfile_path . ")\n";
+                echo 'process not running, removing old pid_file (' . $this->pidfile_path . ")\n";
                 unlink($this->pidfile_path);
 
                 return true;
@@ -86,7 +87,7 @@ class ProcessSync
 
     public function Leave($message = false)
     {
-        if ($pidfile = @fopen($this->pidfile_path, "r")) {
+        if ($pidfile = @fopen($this->pidfile_path, 'r')) {
             $pid = fgets($pidfile, 20);
             fclose($pidfile);
             if ($pid == posix_getpid()) {

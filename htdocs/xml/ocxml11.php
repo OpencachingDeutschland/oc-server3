@@ -21,7 +21,7 @@ require_once __DIR__ . '/../lib2/charset.inc.php';
 require_once __DIR__ . '/../lib2/const.inc.php';
 require_once __DIR__ . '/../lib2/logic/data-license.inc.php';
 require_once __DIR__ . '/../lib2/logic/npas.inc.php';
-require_once __DIR__ .' /../lib2/logic/geomath.class.php';
+require_once __DIR__ . ' /../lib2/logic/geomath.class.php';
 
 if ($error == true) {
     echo 'Unable to connect to database';
@@ -217,10 +217,10 @@ if (isset($_REQUEST['sessionid'])) {
                 die('distance is no number');
             }
 
-            if (($lat < - 180) || ($lat > 180)) {
+            if (($lat < -180) || ($lat > 180)) {
                 die('lat out of range');
             }
-            if (($lon < - 180) || ($lon > 180)) {
+            if (($lon < -180) || ($lon > 180)) {
                 die('lon out of range');
             }
             if (($distance < 0) || ($distance > 250)) {
@@ -386,7 +386,7 @@ function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $z
 
     $logtypes = [];
     $rs = sql('SELECT `id`, `de` FROM log_types');
-    for ($i = 0; $i < mysql_num_rows($rs); $i ++) {
+    for ($i = 0; $i < mysql_num_rows($rs); $i++) {
         $r = sql_fetch_array($rs);
         $logtypes[$r['id']] = $r['de'];
     }
@@ -394,7 +394,7 @@ function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $z
 
     $cachetypes = [];
     $rs = sql('SELECT `id`, `short`, `de` FROM cache_type');
-    for ($i = 0; $i < mysql_num_rows($rs); $i ++) {
+    for ($i = 0; $i < mysql_num_rows($rs); $i++) {
         $r = sql_fetch_array($rs);
         $cachetypes[$r['id']]['de'] = $r['de'];
         $cachetypes[$r['id']]['short'] = $r['short'];
@@ -403,7 +403,7 @@ function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $z
 
     $cachestatus = [];
     $rs = sql('SELECT `id`, `de` FROM cache_status');
-    for ($i = 0; $i < mysql_num_rows($rs); $i ++) {
+    for ($i = 0; $i < mysql_num_rows($rs); $i++) {
         $r = sql_fetch_array($rs);
         $cachestatus[$r['id']]['de'] = $r['de'];
     }
@@ -411,7 +411,7 @@ function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $z
 
     $counties = [];
     $rs = sql('SELECT `short`, `de` FROM countries');
-    for ($i = 0; $i < mysql_num_rows($rs); $i ++) {
+    for ($i = 0; $i < mysql_num_rows($rs); $i++) {
         $r = sql_fetch_array($rs);
         $counties[$r['short']]['de'] = $r['de'];
     }
@@ -419,7 +419,7 @@ function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $z
 
     $cachesizes = [];
     $rs = sql('SELECT `id`, `de` FROM cache_size');
-    for ($i = 0; $i < mysql_num_rows($rs); $i ++) {
+    for ($i = 0; $i < mysql_num_rows($rs); $i++) {
         $r = sql_fetch_array($rs);
         $cachesizes[$r['id']]['de'] = $r['de'];
     }
@@ -427,7 +427,7 @@ function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $z
 
     $languages = [];
     $rs = sql('SELECT `short`, `de` FROM languages');
-    for ($i = 0; $i < mysql_num_rows($rs); $i ++) {
+    for ($i = 0; $i < mysql_num_rows($rs); $i++) {
         $r = sql_fetch_array($rs);
         $languages[$r['short']]['de'] = $r['de'];
     }
@@ -451,7 +451,7 @@ function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $z
     while (file_exists(
         $zip_basedir . 'ocxml11/' . $sessionid . '/' . $sessionid . '-' . $filenr . '-' . $fileid . '.xml'
     )) {
-        $fileid ++;
+        $fileid++;
     }
 
     $xmlfilename = $zip_basedir . 'ocxml11/' . $sessionid . '/' . $sessionid . '-' . $filenr . '-' . $fileid . '.xml';
@@ -488,7 +488,7 @@ function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $z
     }
 
     if ($bAttrlist == '1') {
-        $rs = sql("SELECT SQL_BUFFER_RESULT `id`, `name`, `icon_large`, `icon_no`, `icon_undef` FROM `cache_attrib`");
+        $rs = sql('SELECT SQL_BUFFER_RESULT `id`, `name`, `icon_large`, `icon_no`, `icon_undef` FROM `cache_attrib`');
         fwrite($f, $t1 . '<attrlist>' . "\n");
         while ($r = sql_fetch_assoc($rs)) {
             fwrite(
@@ -607,7 +607,7 @@ function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $z
         if ($ocxmlversion >= 12) {
             $pd = ' ispublishdate="' . $r['is_publishdate'] . '"';
         } else {
-            $pd = "";
+            $pd = '';
         }
         fwrite(
             $f,
@@ -716,7 +716,7 @@ function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $z
             $desc = html_entity_decode($desc, ENT_COMPAT, 'UTF-8');
         }
 
-        $lang = ($sLanguage != "" ? $sLanguage : $r['language']);
+        $lang = ($sLanguage != '' ? $sLanguage : $r['language']);
         $disclaimer = getLicenseDisclaimer(
             $r['user_id'],
             $r['username'],
@@ -729,8 +729,8 @@ function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $z
         if ($bLicense) {
             fwrite($f, $t2 . '<license>' . xmlcdata($disclaimer) . '</license>' . "\n");
         } else {
-            if ($disclaimer != "") {
-                $desc .= "<p><em>" . $disclaimer . "</em></p>";
+            if ($disclaimer != '') {
+                $desc .= '<p><em>' . $disclaimer . '</em></p>';
             }
         }
 
@@ -757,9 +757,9 @@ function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $z
     mysql_free_result($rs);
 
     if ($ocxmlversion >= 14) {
-        $rating_condition = "AND `cache_logs`.`date`=`cache_rating`.`rating_date`";
+        $rating_condition = 'AND `cache_logs`.`date`=`cache_rating`.`rating_date`';
     } else {
-        $rating_condition = "";
+        $rating_condition = '';
     }
     $rs = sql(
         'SELECT SQL_BUFFER_RESULT `cache_logs`.`id` `id`, `cache_logs`.`cache_id` `cache_id`, `cache_logs`.`user_id` `user_id`,
@@ -851,7 +851,7 @@ function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $z
         }
 
         if ($bLicense) {
-            $lang = ($sLanguage != "" ? $sLanguage : $r['language']);
+            $lang = ($sLanguage != '' ? $sLanguage : $r['language']);
             $disclaimer = getLicenseDisclaimer(
                 $r['user_id'],
                 $r['username'],
@@ -920,7 +920,7 @@ function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $z
         fwrite($f, $t2 . '<position>' . $r['seq'] . '</position>' . "\n");
 
         if ($bLicense) {
-            $lang = ($sLanguage != "" ? $sLanguage : $r['language']);
+            $lang = ($sLanguage != '' ? $sLanguage : $r['language']);
             $disclaimer = getLicenseDisclaimer(
                 $r['user_id'],
                 $r['username'],
@@ -1309,7 +1309,7 @@ function outputXmlSessionFile($sessionid, $filenr, $bOcXmlTag, $bDocType, $bXmlD
 //    echo $startat . ' ' . $endat . '<br><br>';
 //    echo '<table>';
 //    echo '<tr><td>sql-start</td><td>sql-count</td><td>count</td><td>begin</td><td>end</td></tr>';
-    for ($i = 0; $i < 6; $i ++) {
+    for ($i = 0; $i < 6; $i++) {
         if (($startat >= $recordnr[$i]) && ($startat + 500 < $recordnr[$i + 1])) {
             if ($recordnr[$i + 1] - $startat > 500) {
                 $limits[$i] = ['start' => $startat - $recordnr[$i], 'count' => 500];
@@ -1413,9 +1413,9 @@ function xmlcdata($str)
         $str = mb_ereg_replace(']]>', ']] >', $str);
 
         return '<![CDATA[' . filterevilchars($str) . ']]>';
-    } else {
-        return xmlentities($str);
     }
+
+    return xmlentities($str);
 }
 
 function xmlentities($str)
@@ -1431,7 +1431,7 @@ function xmlentities($str)
     $from[4] = '\'';
     $to[4] = '&apos;';
 
-    for ($i = 0; $i <= 4; $i ++) {
+    for ($i = 0; $i <= 4; $i++) {
         $str = mb_ereg_replace($from[$i], $to[$i], $str);
     }
 
@@ -1454,9 +1454,11 @@ function object_id2uuid($objectid, $objecttype)
 {
     if ($objecttype == '1') {
         return log_id2uuid($objectid);
-    } elseif ($objecttype == '2') {
+    }
+    if ($objecttype == '2') {
         return cache_id2uuid($objectid);
-    } elseif ($objecttype == '4') {
+    }
+    if ($objecttype == '4') {
         return user_id2uuid($objectid);
     }
 }
@@ -1502,7 +1504,7 @@ function unlinkrecursiv($path)
     // requests, which both try to delete entries, files and directories.
     // Therefore errors must be gracefully ignored.
 
-    if (mb_substr($path, - 1) != '/') {
+    if (mb_substr($path, -1) != '/') {
         $path .= '/';
     }
 
@@ -1510,23 +1512,23 @@ function unlinkrecursiv($path)
 
     $hDir = opendir($path);
     if ($hDir === false) {
-        ++ $notunlinked;
+        ++$notunlinked;
     } else {
-        while (false !== ($file = readdir($hDir))) {
+        while (($file = readdir($hDir)) !== false) {
             if (($file != '.') && ($file != '..')) {
                 if (is_dir($path . $file)) {
                     if (unlinkrecursiv($path . $file . '/') == false) {
-                        $notunlinked ++;
+                        $notunlinked++;
                     }
                 } else {
-                    if ((mb_substr($file, - 4) == '.zip') ||
-                        (mb_substr($file, - 3) == '.gz') ||
-                        (mb_substr($file, - 4) == '.bz2') ||
-                        (mb_substr($file, - 4) == '.xml')
+                    if ((mb_substr($file, -4) == '.zip') ||
+                        (mb_substr($file, -3) == '.gz') ||
+                        (mb_substr($file, -4) == '.bz2') ||
+                        (mb_substr($file, -4) == '.xml')
                     ) {
                         @unlink($path . $file);
                     } else {
-                        $notunlinked ++;
+                        $notunlinked++;
                     }
                 }
             }
@@ -1538,9 +1540,9 @@ function unlinkrecursiv($path)
         @rmdir($path);
 
         return true;
-    } else {
-        return false;
     }
+
+    return false;
 }
 
 function output_convert($str)
@@ -1550,12 +1552,12 @@ function output_convert($str)
     if ($sCharset == 'iso-8859-1') {
         if ($str != null) {
             return utf8ToIso88591($str);
-        } else {
-            return $str;
         }
-    } else {
-        if ($sCharset == 'utf-8') {
-            return $str;
-        }
+
+        return $str;
+    }
+
+    if ($sCharset == 'utf-8') {
+        return $str;
     }
 }

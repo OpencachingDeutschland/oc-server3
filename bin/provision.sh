@@ -160,6 +160,26 @@ rpm -Uvh https://mirror.webtatic.com/yum/el7/webtatic-release.rpm
 
 yum -y install yum-plugin-replace
 yum -y replace php-common --replace-with=php56w-common
+yum -y install phpmyadmin
+
+cat <<EOF > /etc/httpd/conf.d/phpMyAdmin.conf
+Alias /phpMyAdmin /usr/share/phpMyAdmin
+Alias /phpmyadmin /usr/share/phpMyAdmin
+
+<Directory /usr/share/phpMyAdmin/>
+   AddDefaultCharset UTF-8
+
+   <IfModule mod_authz_core.c>
+     # Apache 2.4
+     Require all granted
+   </IfModule>
+   <IfModule !mod_authz_core.c>
+     # Apache 2.2
+     Order Allow,deny
+     Allow from all
+   </IfModule>
+</Directory>
+EOF
 
 systemctl restart mariadb
 systemctl restart httpd

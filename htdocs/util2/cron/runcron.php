@@ -49,7 +49,7 @@ if ($process_sync->Enter()) {
     } else {
         $ignore_interval = false;
         $hDir = opendir($modules_dir);
-        while (($file = readdir($hDir)) !== false) {
+        while (false !== ($file = readdir($hDir))) {
             if (substr($file, -10) == '.class.php') {
                 if ($param == '--show') {
                     echo 'running ' . $file . "\n";

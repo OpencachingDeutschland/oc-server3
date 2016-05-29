@@ -238,7 +238,7 @@ class TranslationHandler
 
         // replace variables in string
         if (mb_ereg_search_init($langstr)) {
-            while ($vars = mb_ereg_search_regs('%[^%]*%') != false) {
+            while (false != $vars = mb_ereg_search_regs('%[^%]*%')) {
                 foreach ($vars as $curly_pattern) {
                     // $curly_pattern contatins %pattern% in replacement string
                     $pattern = mb_substr($curly_pattern, 1, mb_strlen($curly_pattern) - 2);

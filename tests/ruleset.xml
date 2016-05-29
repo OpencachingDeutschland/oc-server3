@@ -63,6 +63,8 @@
         <exclude name="PSR2R.WhiteSpace.TabIndent"/>
         <exclude name="PSR2R.WhiteSpace.EmptyEnclosingLine"/>
         <exclude name="PSR2R.ControlStructures.SwitchDeclaration.BreakIndent"/>
+        <!-- ConditionalExpressionOrder (Yoda Comparison) is buggy, so we don't use it at the moment -->
+        <exclude name="PSR2R.ControlStructures.ConditionalExpressionOrder"/>
     </rule>
 
     <rule ref="Squiz.Commenting.FunctionComment">

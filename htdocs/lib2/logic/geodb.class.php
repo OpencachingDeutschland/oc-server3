@@ -24,9 +24,7 @@ class GeoDb
         }
         sql_free_result($rs);
 
-        sqll("
-            DELETE FROM `cache_location`
-            WHERE `cache_id` NOT IN (SELECT `cache_id` FROM `caches`)");
+        sqll('DELETE FROM `cache_location` WHERE `cache_id` NOT IN (SELECT `cache_id` FROM `caches`)');
     }
 
     private static function setCacheLocation($cache_id)

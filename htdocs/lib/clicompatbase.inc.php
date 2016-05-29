@@ -541,7 +541,7 @@ function sql_fetch_column($rs)
             return null;
         }
 
-            $col[] = $r[0];
+        $col[] = $r[0];
     }
     sql_free_result($rs);
 

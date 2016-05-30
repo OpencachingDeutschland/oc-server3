@@ -11,9 +11,7 @@ checkJob(new user_delete());
 
 class user_delete
 {
-
     public $name = 'user_delete';
-
     public $interval = 86400;
 
     public function run()

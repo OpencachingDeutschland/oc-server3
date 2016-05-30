@@ -13,9 +13,7 @@ checkJob(new replication_monitor());
 
 class replication_monitor
 {
-
     public $name = 'replication_monitor';
-
     public $interval = 0;
 
     //var $interval = 60;

@@ -9,7 +9,6 @@ require_once __DIR__ . '/logic/const.inc.php';
 
 class translateAccess
 {
-
     private $languages = false;
 
     public function hasAccess()

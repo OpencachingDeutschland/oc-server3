@@ -12,9 +12,7 @@ checkJob(new orphan_cleanup());
 
 class orphan_cleanup
 {
-
     public $name = 'orphan_cleanup';
-
     public $interval = 86400;   // once per day
 
     public function run()

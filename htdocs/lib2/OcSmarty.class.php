@@ -13,39 +13,24 @@ require_once $opt['rootpath'] . 'lib2/logic/labels.inc.php';
 
 class OcSmarty extends Smarty
 {
-
     public $name = 'sys_nothing';
-
     public $main_template = 'sys_main';
-
     public $bench = null;
-
     public $compile_id = null;
-
     public $cache_id = null;    // This is a smarty caching ID, not a caches.cache_id.
-
     public $title = '';
-
     public $menuitem = null;
-
     public $nowpsearch = false;
-
     public $change_country_inpage = false;
-
-    // no header, menu or footer
+	// no header, menu or footer
     public $popup = false;
-
-    // show a thin border when using popup
+	// show a thin border when using popup
     // disable popupmargin to appear fullscreen
     public $popupmargin = true;
-
-    // url to call if login is required
+	// url to call if login is required
     public $target = '';
-
     public $header_javascript = [];
-
     public $body_load = [];
-
     public $body_unload = [];
 
     public function __construct()

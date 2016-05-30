@@ -7,9 +7,7 @@
 
 class countriesList
 {
-
     public $locale;
-
     public $bDefaultUsed = false;
 
     public function __construct($locale = null)

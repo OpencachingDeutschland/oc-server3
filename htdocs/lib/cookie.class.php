@@ -11,9 +11,7 @@ $cookie = new cookie();
 
 class cookie
 {
-
     public $changed = false;
-
     public $values = [];
 
     public function __construct()

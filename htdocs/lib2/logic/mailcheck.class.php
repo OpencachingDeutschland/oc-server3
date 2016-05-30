@@ -18,13 +18,9 @@ define('CA_ERROR_UNKOWN', 5);
 
 class mailcheck
 {
-
     public $sHostname = 'somehost.org';
-
     public $sFrom = 'postmaster@somehost.org';
-
     public $nConnectTimeout = 15; // (sec)
-
     public $nReadTimeout = 25;   // (sec)
 
     /* check if the mailserver of $sAddress

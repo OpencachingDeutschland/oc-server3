@@ -11,11 +11,8 @@ checkJob(new phpbbtopics());
 
 class phpbbtopics
 {
-
     public $name = 'phpbbtopics';
-
     public $interval = 600;
-
     public $topiclist = [];
 
     public function run()

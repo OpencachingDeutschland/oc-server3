@@ -12,11 +12,8 @@ $cookie = new cookie();
 
 class cookie
 {
-
     public $changed = false;
-
     public $values = [];
-
     public $session_initalized = false;
 
     public function __construct()

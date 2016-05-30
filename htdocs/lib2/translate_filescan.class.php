@@ -7,11 +7,8 @@
  ***************************************************************************/
 class translate_filescan
 {
-
     private $msFilename;
-
     private $msContent;
-
     public $textlist;
 
     public function __construct($sFilename)

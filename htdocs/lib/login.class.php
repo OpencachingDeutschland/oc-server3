@@ -34,19 +34,12 @@ $login = new login();
 
 class login
 {
-
     public $userid = 0;
-
     public $username = '';
-
     public $permanent = false;
-
     public $lastlogin = 0;
-
     public $sessionid = '';
-
     public $admin = 0;
-
     public $verified = false;
 
     public function __construct()

@@ -29,27 +29,16 @@ abstract class PresenterChildWp
     const tpl_wp_type_error = 'wpTypeError';
     const tpl_submit_button = 'submitButton';
     const tpl_disabled = 'disabled';
-
     private $request;
-
     private $translator;
-
     protected $coordinate;
-
     private $waypointTypes = [];
-
     private $waypointTypeValid = true;
-
     private $typeImages = [];
-
     protected $type = '0';
-
     protected $description;
-
     protected $cacheId;
-
     protected $childId;
-
     protected $childWpHandler;
 
     public function __construct($request = false, $translator = false)

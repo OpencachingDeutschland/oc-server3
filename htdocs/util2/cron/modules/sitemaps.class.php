@@ -12,11 +12,8 @@ checkJob(new sitemaps());
 
 class sitemaps
 {
-
     public $name = 'sitemaps';
-
     public $interval = 604800; // once a week
-
     public $oSitemapXML = false;
 
     public function run()

@@ -12,7 +12,6 @@ use Behat\Mink\Session;
 
 abstract class AbstractFrontendTest extends \PHPUnit_Framework_TestCase
 {
-
     /**
      * @var string
      */

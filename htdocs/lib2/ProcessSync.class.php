@@ -10,7 +10,6 @@
 
 class ProcessSync
 {
-
     public $pidfile_path;
 
 

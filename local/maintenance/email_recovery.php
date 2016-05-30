@@ -59,9 +59,7 @@ if ($argc < 4) {
 
 class EmailRecovery
 {
-
     private $fromDateTime;
-
     private $toDateTime;
 
     public function __construct($fromDT, $toDT, &$errormsg)

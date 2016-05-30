@@ -10,9 +10,7 @@
 
 class cachedesc
 {
-
     public $nCacheDescId = 0;
-
     public $reCacheDesc;
 
     public function __construct($nNewCacheDescId = ID_NEW)

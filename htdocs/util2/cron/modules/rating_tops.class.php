@@ -11,9 +11,7 @@ checkJob(new rating_tops());
 
 class rating_tops
 {
-
     public $name = 'rating_tops';
-
     public $interval = 86400;
 
     public function run()

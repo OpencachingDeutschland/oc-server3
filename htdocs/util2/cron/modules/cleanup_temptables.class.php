@@ -14,9 +14,7 @@ checkJob(new cleanup_temptables());
 
 class cleanup_temptables
 {
-
     public $name = 'cleanup_temptables';
-
     public $interval = 86400;
 
     public function run()

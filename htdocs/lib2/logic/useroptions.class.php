@@ -12,7 +12,6 @@ require_once __DIR__ . '/const.inc.php';
 
 class useroptions
 {
-
     /** @var int $nUserId */
     public $nUserId = 0;
 

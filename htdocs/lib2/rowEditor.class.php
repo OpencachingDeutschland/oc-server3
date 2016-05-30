@@ -7,20 +7,14 @@
 
 class rowEditor
 {
-
     public $sTable;
-
     public $sAutoIncrementField = null;
-
     public $pk;     // (idx:name; type, default, nullable, value, insertfunction)
-
     public $fields; // (idx:name; type, default, nullable, value, changed, insertfunction)
 
     // status var
     public $bLoaded = false;
-
     public $bExist = false;
-
     public $bAddNew = false;
 
     /* primaryKey may be an array

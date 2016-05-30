@@ -7,15 +7,10 @@
 
 class xml2Array
 {
-
     public $stack = [];
-
     public $stack_ref;
-
     public $arrOutput = [];
-
     public $resParser;
-
     public $strXmlData;
 
     public function push_pos(&$pos)

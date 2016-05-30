@@ -113,9 +113,7 @@ class translate
 
 class translateEdit extends translate
 {
-
     private $editAll;
-
     private $backtrace_level;
 
     public function __construct($editAll = true, $backtrace_level = 0)

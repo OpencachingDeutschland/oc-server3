@@ -15,9 +15,7 @@ $menu = new Menu();
 
 class Menu
 {
-
     public $nSelectedItem = 0;
-
     public $sMenuFilename = '';
 
     public function __construct()

@@ -9,9 +9,7 @@ checkJob(new slave_cleanup());
 
 class slave_cleanup
 {
-
     public $name = 'slave_cleanup';
-
     public $interval = 300;
 
     public function run()

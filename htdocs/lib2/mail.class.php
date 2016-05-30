@@ -9,25 +9,15 @@ require_once __DIR__ . '/../vendor/autoload.php';
 
 class mail extends Smarty
 {
-
     public $name = 'sys_nothing';
-
     public $main_template = 'sys_main';
-
     public $compile_id = null;
-
     public $recipient_locale = null;
-
     public $from = '';
-
     public $to = '';
-
     public $subject = '';
-
     public $replyTo = null;
-
     public $returnPath = null;
-
     public $headers = [];
 
     public function __construct()

@@ -7,9 +7,7 @@
 
 class coordinate
 {
-
     public $nLat = 0;
-
     public $nLon = 0;
 
     public function __construct($nNewLat, $nNewLon)

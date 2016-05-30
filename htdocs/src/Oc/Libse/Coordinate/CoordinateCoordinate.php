@@ -12,9 +12,7 @@ use InvalidArgumentException;
 class CoordinateCoordinate
 {
     const epsilon = 8.3333e-6;
-
     private $latitude;
-
     private $longitude;
 
     public function __construct($latitude, $longitude)

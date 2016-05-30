@@ -20,21 +20,13 @@ class PresenterCacheNote
     const tpl_note = 'note';
     const tpl_incl_coord = 'inclCoord';
     const image = 'resource2/ocstyle/images/misc/wp_note.png';
-
     private $request;
-
     private $translator;
-
     private $coordinate;
-
     private $userId;
-
     private $noteId;
-
     private $cacheId;
-
     private $note;
-
     private $cacheNoteHandler;
 
     public function __construct($request = false, $translator = false)

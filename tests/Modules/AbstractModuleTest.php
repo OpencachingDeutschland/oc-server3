@@ -9,7 +9,6 @@ namespace Oc\Modules;
 
 abstract class AbstractModuleTest extends \PHPUnit_Framework_TestCase
 {
-
     /**
      * @var string
      */

@@ -22,13 +22,9 @@ class PresenterCoordinate
     const lon_deg = 'lon_deg';
     const lon_min = 'lon_min';
     const coord_error = 'coord_error';
-
     private $coordinate;
-
     private $request;
-
     private $translator;
-
     private $valid = true;
 
     public function __construct($request = false, $translator = false)

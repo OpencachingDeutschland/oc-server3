@@ -18,9 +18,7 @@ class ControllerChildWp
     const req_cache_id = 'cacheid';
     const req_child_id = 'childid';
     const req_delete_id = 'deleteid';
-
     private $request;
-
     private $translator;
 
     public function __construct($request = false, $translator = false)

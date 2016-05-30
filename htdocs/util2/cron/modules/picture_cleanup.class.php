@@ -11,9 +11,7 @@ checkJob(new picture_cleanup());
 
 class picture_cleanup
 {
-
     public $name = 'picture_cleanup';
-
     public $interval = 86400;
 
     public function run()

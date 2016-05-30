@@ -15,19 +15,12 @@
 
 class RSS
 {
-
     public $title;
-
     public $link;
-
     public $description;
-
     public $language = 'de-DE';
-
     public $pubDate;
-
     public $items;
-
     public $tags;
 
     public function __construct()
@@ -109,23 +102,14 @@ class RSS
 
 class RSSItem
 {
-
     public $title;
-
     public $link;
-
     public $description;
-
     public $pubDate;
-
     public $guid;
-
     public $tags;
-
     public $attachment;
-
     public $length;
-
     public $mimetype;
 
     public function __construct()

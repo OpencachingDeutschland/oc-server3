@@ -11,9 +11,7 @@ checkJob(new purge_logs());
 
 class purge_logs
 {
-
     public $name = 'purge_logs';
-
     public $interval = 86400;    // daily
 
     public function run()

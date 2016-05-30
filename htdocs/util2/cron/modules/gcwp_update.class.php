@@ -12,9 +12,7 @@ checkJob(new gcwp_update());
 
 class gcwp_update
 {
-
     public $name = 'gcwp_update';
-
     public $interval = 3600;  // every hour
 
 

@@ -16,9 +16,7 @@ define('ERROR_DUPLICATE_LISTNAME', 2);
 
 class cachelist
 {
-
     public $nCachelistId = 0;
-
     public $reCachelist;
 
     public function __construct($nNewCacheListId = ID_NEW, $nUserId = 0)

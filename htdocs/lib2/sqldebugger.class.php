@@ -13,9 +13,7 @@ $sqldebugger = new sqldebugger();
 
 class sqldebugger
 {
-
     public $commands = [];
-
     public $cancel = false;
 
     public function getCancel()

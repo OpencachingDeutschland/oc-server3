@@ -13,9 +13,7 @@ checkJob(new cache_waypoint_pool());
 
 class cache_waypoint_pool
 {
-
     public $name = 'cache_waypoint_pool';
-
     public $interval = 604800; // once a week
 
     public function run()

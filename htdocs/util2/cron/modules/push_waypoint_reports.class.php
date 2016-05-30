@@ -9,9 +9,7 @@ checkJob(new push_waypoint_reports());
 
 class push_waypoint_reports
 {
-
     public $name = 'push_waypoint_reports';
-
     public $interval = 120;
 
     public function run()

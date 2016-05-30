@@ -10,9 +10,7 @@
 //
 class Cbench
 {
-
     public $start;
-
     public $stop;
 
     public function CBench()

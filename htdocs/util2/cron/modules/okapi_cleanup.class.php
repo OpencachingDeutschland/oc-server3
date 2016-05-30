@@ -11,9 +11,7 @@ checkJob(new okapi_cleanup());
 
 class okapi_cleanup
 {
-
     public $name = 'okapi_cleanup';
-
     public $interval = 3600;
 
     public function run()

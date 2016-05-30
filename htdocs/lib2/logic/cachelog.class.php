@@ -22,9 +22,7 @@ class cachelog
     const LOGTYPE_DISABLED = 11;
     const LOGTYPE_LOCKED = 13;
     const LOGTYPE_LOCKED_INVISIBLE = 14;
-
     public $nLogId = 0;
-
     public $reCacheLog;
 
     public static function logIdFromUUID($uuid)

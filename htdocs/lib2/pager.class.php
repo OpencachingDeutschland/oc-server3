@@ -10,11 +10,8 @@
 
 class pager
 {
-
     private $link_url;
-
     private $min_pages_shown;
-
     private $max_pages_shown;
 
 

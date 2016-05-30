@@ -9,9 +9,7 @@ namespace Oc\Libse\Http;
 
 class RequestHttp
 {
-
     private $raw_values = [];
-
     private $valid_values = [];
 
     public function __construct()

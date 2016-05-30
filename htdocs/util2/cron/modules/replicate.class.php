@@ -11,9 +11,7 @@ checkJob(new replicate());
 
 class replicate
 {
-
     public $name = 'replicate';
-
     public $interval = 3600;
 
     public function run()

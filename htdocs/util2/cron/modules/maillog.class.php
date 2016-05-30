@@ -11,9 +11,7 @@ checkJob(new maillog());
 
 class maillog
 {
-
     public $name = 'maillog';
-
     public $interval = 600;  // every 10 minutes
 
 

@@ -14,9 +14,7 @@ checkJob(new cache_location());
 
 class cache_location
 {
-
     public $name = 'cache_location';
-
     public $interval = 0;
 
     public function run()

@@ -11,9 +11,7 @@ checkJob(new autoarchive());
 
 class autoarchive
 {
-
     public $name = 'autoarchive';
-
     public $interval = 43200;  // twice per day
 
 

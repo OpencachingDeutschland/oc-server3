@@ -11,9 +11,7 @@ use InvalidArgumentException;
 
 abstract class NumericValidator
 {
-
     private $min;
-
     private $max;
 
     public function __construct($min, $max)

@@ -14,7 +14,6 @@ require $opt['rootpath'] . 'cache2/labels-' . $opt['template']['locale'] . '.inc
 
 class labels
 {
-
     public static $aLabels = [];
 
     public static function CreateCacheFile()

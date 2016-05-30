@@ -47,13 +47,9 @@ echo
 class StyleCleanup
 {
     const TABWIDTH = 4;
-
     private $exclude_dirs;
-
     private $basedir;
-
     private $files_modified;
-
     private $lines_modified;
 
     public function run($basedir, $exclude_dirs)

@@ -49,11 +49,11 @@
  * Find all {t}...{/t} and translate its input with gettext
  *
  * @param string $source
- * @param \OcSmarty $smarty
+ * @param \Smarty_Compiler $smarty
  *
  * @return string
  */
-function smarty_prefilter_t($source, \OcSmarty &$smarty)
+function smarty_prefilter_t($source, \Smarty_Compiler &$smarty)
 {
     $output = '';
     $output_start = 0;
@@ -90,12 +90,12 @@ function smarty_prefilter_t($source, \OcSmarty &$smarty)
  *
  * @param string $block
  * @param string $message
- * @param \OcSmarty $smarty
+ * @param \Smarty_Compiler $smarty
  * @param int $line
  *
  * @return string
  */
-function smarty_prefilter_t_process_block($block, $message, \OcSmarty &$smarty, $line)
+function smarty_prefilter_t_process_block($block, $message, \Smarty_Compiler &$smarty, $line)
 {
     if ($message != '') {
         $start_attr = mb_strpos($block, ' ');
@@ -151,11 +151,11 @@ function smarty_prefilter_t_process_block($block, $message, \OcSmarty &$smarty, 
  *   we need the same source, expect _parse_vars_props at the end
  *
  * @param string $tag_args
- * @param \OcSmarty $smarty
+ * @param \Smarty_Compiler $smarty
  *
  * @return array
  */
-function smarty_prefilter_t_parse_attrs($tag_args, \OcSmarty &$smarty)
+function smarty_prefilter_t_parse_attrs($tag_args, \Smarty_Compiler &$smarty)
 {
 
     /* Tokenize tag attributes. */
@@ -295,12 +295,12 @@ function smarty_prefilter_t_strpos_multi($haystack, $needles)
 /**
  * @param string $message
  * @param array $attrs
- * @param \OcSmarty $smarty
+ * @param \Smarty_Compiler $smarty
  * @param int $line
  *
  * @return string
  */
-function smarty_prefilter_t_gettext($message, array $attrs, \OcSmarty &$smarty, $line)
+function smarty_prefilter_t_gettext($message, array $attrs, \Smarty_Compiler &$smarty, $line)
 {
     global $opt, $translate;
 

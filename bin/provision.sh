@@ -12,8 +12,8 @@ function errorLabel {
 }
 
 if [[ -z "$DUMP_URL" ]]; then
-	errorLabel "No dump url given.\nPlease edit provision.sh and enter an url for the sql dump\nRun 'vagrant provision' if you are done.\n\n"
-	exit 1
+    errorLabel "No dump url given.\nPlease edit provision.sh and enter an url for the sql dump\nRun 'vagrant provision' if you are done.\n\n"
+    exit 1
 fi
 
 label "Install required components"
@@ -234,14 +234,17 @@ curl -o opencaching_dump.sql.gz "$DUMP_URL"
 gzip -d opencaching_dump.sql.gz
 
 if [ -f opencaching_dump.sql ]; then
-	label "Import SQL Dump"
-	mysql -uroot -proot < opencaching_dump.sql
+    label "Import SQL Dump"
+    mysql -uroot -proot < opencaching_dump.sql
 
-	label "Run database and cache updates"
-	cd /var/www/html/ && php bin/dbupdate.php
+    label "Run database and cache updates"
+    cd /var/www/html/ && php bin/dbupdate.php
+
+    label "Install OKAPI"
+    curl http://local.opencaching.de/okapi/update?install=true
 else
-	errorLabel "Could not download or unpack sql dump from '$DUMP_URL'\n\n"
-	exit 1;
+    errorLabel "Could not download or unpack sql dump from '$DUMP_URL'\n\n"
+    exit 1;
 fi
 
 echo "export PS1='\[\033[38;5;11m\]OCdev:\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]\[\033[38;5;14m\]\w\[$(tput sgr0)\]\[\033[38;5;15m\]\\$ \[$(tput sgr0)\]'" >> /home/vagrant/.bashrc

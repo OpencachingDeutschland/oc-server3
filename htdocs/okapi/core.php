@@ -1045,8 +1045,8 @@ class Okapi
     public static $server;
 
     /* These two get replaced in automatically deployed packages. */
-    public static $version_number = 1314;
-    public static $git_revision = '66d15ec8254e14829576f45902815c276d73a6e0';
+    public static $version_number = 1315;
+    public static $git_revision = '8893638ba5c9fb5d42e3f09787fa1b72805b5e45';
 
     private static $okapi_vars = null;
 
@@ -1133,8 +1133,11 @@ class Okapi
         $cache_key = 'mail_admins_counter/'.(floor(time() / 3600) * 3600).'/'.md5($subject);
         try {
             $counter = Cache::get($cache_key);
-        } catch (DbException $e) {
-            # This exception can occur during OKAPI update (#156), or when
+        } catch (Exception $e) {
+            # See https://github.com/opencaching/okapi/issues/434 on why
+            # we catch any exceptions here, not just DbException.
+
+            # Exceptions can occur during OKAPI update (#156), or when
             # the cache table is broken (#340). I am not sure which option is
             # better: 1. notify the admins about the error and risk spamming
             # them, 2. don't notify and don't risk spamming them. Currently,

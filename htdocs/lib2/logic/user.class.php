@@ -1506,6 +1506,13 @@ class user
         return $this->reUser->getValue('mailing_problems') & 1;
     }
 
+    function shownDataLicenseMail()
+    {
+        return
+            $this->reUser->setValue('mailing_problems', $this->reUser->getValue('mailing_problems') & ~1)
+            && $this->save();
+    }
+
     public function confirmEmailAddress()
     {
         return $this->reUser->setValue('email_problems', 0) && $this->save();

@@ -26,6 +26,7 @@
 	}
 	else if (isset($_REQUEST['confirm']))
 	{
+		$user->shownDataLicenseMail();
 		$user->confirmEmailAddress();
 		$tpl->redirect($orgpage);
 	}

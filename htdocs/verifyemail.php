@@ -23,6 +23,7 @@ if (isset($_REQUEST['new'])) {
     $tpl->redirect('newemail.php');
 } else {
     if (isset($_REQUEST['confirm'])) {
+        $user->shownDataLicenseMail();
         $user->confirmEmailAddress();
         $tpl->redirect($orgpage);
     } else {

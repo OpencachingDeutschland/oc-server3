@@ -22,6 +22,8 @@ if ($argc != 2 || $argv[1] != 'go') {
     );
 }
 
+// ATTENTION: TRUNCATE does not call deletion triggers!
+
 sql('SET @allowdelete=1');
 
 echo "clearing histories\n";
@@ -63,10 +65,13 @@ sql('TRUNCATE `xmlsession_data`');
 echo "clearing user data\n";
 sql('TRUNCATE `cache_adoption`');
 sql('TRUNCATE `cache_ignore`');
+sql('CALL sp_updateall_ignorestat(@c)');
 sql('DELETE FROM `cache_lists` WHERE `is_public`<2');  // trigger deletes dependent data
 sql('TRUNCATE `cache_list_bookmarks`');
 sql('TRUNCATE `cache_list_watches`');
 sql('TRUNCATE `cache_watches`');
+sql('CALL sp_updateall_watchstat(@c)');
+sql('CALL sp_updateall_cachelist_counts(@c)');
 sql('DELETE FROM `coordinates` WHERE `type`=2');   // personal cache notes and coords
 sql('TRUNCATE `queries`');
 sql('TRUNCATE `user_options`');

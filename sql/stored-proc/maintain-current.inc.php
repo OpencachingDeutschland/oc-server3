@@ -354,15 +354,15 @@ sql(
              WHERE `cache_list_items`.`cache_list_id`=`stat_cache_lists`.`cache_list_id`
             );
 
-            SET nModified = ROW_COUNT();
+        SET nModified = ROW_COUNT();
 
-            UPDATE `stat_cache_lists`
-            SET `watchers`=
-                (SELECT COUNT(*) FROM `cache_list_watches`
-                 WHERE `cache_list_watches`.`cache_list_id`=`stat_cache_lists`.`cache_list_id`
-                );
+        UPDATE `stat_cache_lists`
+        SET `watchers`=
+            (SELECT COUNT(*) FROM `cache_list_watches`
+             WHERE `cache_list_watches`.`cache_list_id`=`stat_cache_lists`.`cache_list_id`
+            );
 
-            SET nModified = nModified + ROW_COUNT();
+        SET nModified = nModified + ROW_COUNT();
      END;"
 );
 

@@ -171,9 +171,10 @@ function search_output()
     $childwphandler = new HandlerChildWp();
     $children = '';
     $rs = sql('SELECT &searchtmp.`cache_id` `cacheid` FROM &searchtmp');
-    while ($r = sql_fetch_array($rs) && $children == '') {
+    while ($r = sql_fetch_array($rs)) {
         if (count($childwphandler->getChildWps($r['cacheid']))) {
             $children = ' (HasChildren)';
+            break;
         }
     }
     mysql_free_result($rs);

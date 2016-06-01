@@ -1371,8 +1371,8 @@
 				FOR EACH ROW
 					BEGIN
 						SET @DELETING_CACHELIST=TRUE;
-						DELETE FROM `cache_list_watches` WHERE `cache_list_watches`.`cache_list_id`=OLD.`id`;
 						DELETE FROM `cache_list_items` WHERE `cache_list_items`.`cache_list_id`=OLD.`id`;
+						DELETE FROM `cache_list_watches` WHERE `cache_list_watches`.`cache_list_id`=OLD.`id`;
 						DELETE FROM `stat_cache_lists` WHERE `cache_list_id`=OLD.`id`;
 						SET @DELETING_CACHELIST=FALSE;
 					END;");
@@ -1423,15 +1423,15 @@
 	sql("CREATE TRIGGER `cacheListItemsAfterDelete` AFTER DELETE ON `cache_list_items`
 				FOR EACH ROW
 					BEGIN
-						/* avoid recursive access to cache_lists; optimization */
-						IF NOT IFNULL(@DELETING_CACHELIST,FALSE) THEN
-							/* dont overwrite date values while XML client is running */
-							IF ISNULL(@XMLSYNC) OR @XMLSYNC!=1 THEN
+						/* dont overwrite date values while XML client is running */
+						IF ISNULL(@XMLSYNC) OR @XMLSYNC!=1 THEN
+							/* avoid recursive access to cache_lists */
+							IF NOT IFNULL(@DELETING_CACHELIST,FALSE) THEN
 								UPDATE `stat_cache_lists` SET `entries`=`entries`-1 WHERE `stat_cache_lists`.`cache_list_id`=OLD.`cache_list_id`;
 								UPDATE `cache_lists` SET `last_modified`=NOW() WHERE `cache_lists`.`id`=OLD.`cache_list_id`;
-								IF (SELECT `user_id` FROM `cache_list_watches` `clw` WHERE `clw`.`cache_list_id`=OLD.`cache_list_id` LIMIT 1) IS NOT NULL THEN
-									CALL sp_update_watchstat(OLD.`cache_id`);
-								END IF;
+							END IF;
+							IF (SELECT `user_id` FROM `cache_list_watches` `clw` WHERE `clw`.`cache_list_id`=OLD.`cache_list_id` LIMIT 1) IS NOT NULL THEN
+								CALL sp_update_watchstat(OLD.`cache_id`);
 							END IF;
 						END IF;
 					END;");
@@ -1466,13 +1466,13 @@
 	sql("CREATE TRIGGER `cacheListWatchesAfterDelete` AFTER DELETE ON `cache_list_watches`
 				FOR EACH ROW
 					BEGIN
-						/* avoid recursive access to cache_lists; optimization */
-						IF NOT IFNULL(@DELETING_CACHELIST,FALSE) THEN
-							/* dont overwrite date values while XML client is running */
-							IF ISNULL(@XMLSYNC) OR @XMLSYNC!=1 THEN
+						/* dont overwrite date values while XML client is running */
+						IF ISNULL(@XMLSYNC) OR @XMLSYNC!=1 THEN
+							/* avoid recursive access to cache_lists */
+							IF NOT IFNULL(@DELETING_CACHELIST,FALSE) THEN
 								UPDATE `stat_cache_lists` SET `watchers`=`watchers`-1 WHERE `stat_cache_lists`.`cache_list_id`=OLD.`cache_list_id`;
-								CALL sp_update_list_watchstat(OLD.`cache_list_id`);
 							END IF;
+							CALL sp_update_list_watchstat(OLD.`cache_list_id`);
 						END IF;
 					END;");
 

@@ -367,11 +367,6 @@ function mapLoad()
         scaleControl: true,
         streetViewControl: false,
 
-        overviewMapControl: true,  {/literal}
-        {if $opt_overview==1}
-        overviewMapControlOptions: {literal}{ opened: true }{/literal},
-        {/if}  {literal}
-
         styles:
             [ { featureType:"poi.business", elementType:"labels", stylers: [{ visibility:"off" }] },
               { featureType:"poi.government", elementType:"labels", stylers: [{ visibility:"off" }] } ]
@@ -1563,7 +1558,6 @@ function toggle_settings()
         // set controls to config values
         document.getElementById('opt_menumap0').selected    = "{if $opt_menumap == 0}selected{/if}";
         document.getElementById('opt_menumap1').selected    = "{if $opt_menumap == 1}selected{/if}";
-        document.getElementById('opt_overview').checked     = "{if $opt_overview == 1}checked{/if}";
         document.getElementById('opt_maxcaches').value      = "{$opt_maxcaches}";
         document.getElementById('opt_cacheicons1').selected = "{if $opt_cacheicons == 1}selected{/if}";
         document.getElementById('opt_cacheicons2').selected = "{if $opt_cacheicons == 2}selected{/if}";
@@ -2330,7 +2324,6 @@ function toggle_attribselection(bSaveCookies)
                     <table>
                         <tr><td><span style="font-size:1.2em; font-weight:bold">{t}Settings{/t}</strong></td><td style="text-align:right"><a href="javascript:toggle_settings()"><img src="resource2/ocstyle/images/navigation/19x19-close.png" style="opacity:0.7" /></a></tr>
                         <tr><td>{t}Menu option 'Map' shows:{/t}</td><td><select name="opt_menumap"><option id="opt_menumap0" value="0">{t}small map{/t}</option><option id="opt_menumap1" value="1">{t}fullscreen map{/t}</option></select></td></tr>
-                        <tr><td>{t}Show overview map:{/t}</td><td><input type="checkbox" id="opt_overview" name="opt_overview" value="1" /></td></tr>
                         <tr><td>{t 1=$min_maxrecords 2=$max_maxrecords}Maximum caches on map<br />(%1-%2, 0=automatic):{/t}</td><td><input type="text" id="opt_maxcaches" name="opt_maxcaches" size="6" /></td></tr>
                         {if $msie}
                             <tr><td colspan="2" style="padding-top:0; white-space:normal">

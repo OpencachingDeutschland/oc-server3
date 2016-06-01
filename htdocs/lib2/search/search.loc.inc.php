@@ -22,8 +22,7 @@ function search_output()
     $locHead = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><loc version="1.0" src="' . $server_domain . '">' . "\n";
 
     $locLine =
-        '
-<waypoint>
+        '<waypoint>
     <name id="{waypoint}"><![CDATA[{archivedflag}{name} by {username}]]></name>
     <coord lat="{lat}" lon="{lon}"/>
     <type>Geocache</type>

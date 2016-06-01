@@ -50,6 +50,7 @@ function search_output()
 			`cache_desc`.`desc` `desc`,
 			`cache_desc`.`short_desc` `short_desc`,
 			`cache_desc`.`hint` `hint`,
+			`cache_desc`.`language` `desc_language`,
 			`cache_desc`.`desc_html` `html`,
 			`user`.`user_id`,
 			`user`.`username`,

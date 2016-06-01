@@ -30,8 +30,7 @@ function search_output()
 ";
 
     $rs = sql_slave(
-        "
-        SELECT SQL_BUFFER_RESULT
+        "SELECT SQL_BUFFER_RESULT
             &searchtmp.`cache_id` `cacheid`,
             &searchtmp.`longitude` `longitude`,
             &searchtmp.`latitude` `latitude`,
@@ -50,21 +49,23 @@ function search_output()
             `user`.`username` `username`,
             `cache_desc`.`desc` `desc`,
             `cache_desc`.`short_desc` `short_desc`,
+            `cache_desc`.`language` `desc_language`,
             `cache_desc`.`hint` `hint`,
             `cache_desc`.`desc_html` `html`,
             `user`.`user_id`,
             `user`.`username`,
             `user`.`data_license`
-        FROM
+         FROM
             &searchtmp
             INNER JOIN `caches` ON &searchtmp.`cache_id`=`caches`.`cache_id`
-            INNER JOIN `cache_desc` ON `cache_desc`.`cache_id`=`caches`.`cache_id`
-             AND `caches`.`default_desclang`=`cache_desc`.`language`
+            INNER JOIN `cache_desc`
+                ON `cache_desc`.`cache_id`=`caches`.`cache_id`
+                AND `caches`.`default_desclang`=`cache_desc`.`language`
              INNER JOIN `cache_type` ON `cache_type`.`id`=`caches`.`type`
              INNER JOIN `cache_size` ON `cache_size`.`id`=`caches`.`size`
              INNER JOIN `cache_status` ON `cache_status`.`id`=`caches`.`status`
              INNER JOIN `user` ON `user`.`user_id`=`caches`.`user_id`
-              LEFT JOIN `countries` ON `countries`.`short`=`caches`.`country`
+             LEFT JOIN `countries` ON `countries`.`short`=`caches`.`country`
              LEFT JOIN `sys_trans_text` `stt_type` ON `stt_type`.`trans_id`=`cache_type`.`trans_id` AND `stt_type`.`lang`='&1'
              LEFT JOIN `sys_trans_text` `stt_size` ON `stt_size`.`trans_id`=`cache_size`.`trans_id` AND `stt_size`.`lang`='&1'
              LEFT JOIN `sys_trans_text` `stt_status` ON `stt_status`.`trans_id`=`cache_status`.`trans_id` AND `stt_status`.`lang`='&1'
@@ -154,25 +155,23 @@ function search_output()
         // logs ermitteln
         $logentries = '';
         $rsLogs = sql_slave(
-            "
-            SELECT
+            "SELECT
                 `cache_logs`.`id`,
                 `cache_logs`.`text_html`,
                 IFNULL(`stt`.`text`, `log_types`.`en`) `type`,
                 `cache_logs`.`date`,
                 `cache_logs`.`text`,
                 `user`.`username`
-            FROM `cache_logs`
-            JOIN `user` ON `cache_logs`.`user_id`=`user`.`user_id`
-            JOIN `log_types` ON `cache_logs`.`type`=`log_types`.`id`
-            LEFT JOIN `sys_trans_text` `stt` ON `stt`.`trans_id`=`log_types`.`trans_id` AND `stt`.`lang`='&2'
-            WHERE
-                `cache_logs`.`cache_id`=&1
-            ORDER BY
+             FROM `cache_logs`
+             JOIN `user` ON `cache_logs`.`user_id`=`user`.`user_id`
+             JOIN `log_types` ON `cache_logs`.`type`=`log_types`.`id`
+             LEFT JOIN `sys_trans_text` `stt` ON `stt`.`trans_id`=`log_types`.`trans_id` AND `stt`.`lang`='&2'
+             WHERE `cache_logs`.`cache_id`=&1
+             ORDER BY
                 `cache_logs`.`order_date` DESC,
                 `cache_logs`.`date_created` DESC,
                 `cache_logs`.`id` DESC
-            LIMIT 20",
+             LIMIT 20",
             $r['cacheid'],
             $opt['template']['locale']
         );

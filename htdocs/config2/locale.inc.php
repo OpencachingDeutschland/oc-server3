@@ -19,7 +19,7 @@
 
 define('OC_LOCALE_ACTIVE', 2);    // enable language and show language button in header line
 define('OC_LOCALE_HIDDEN', 1);    // enable language but hide language button in header line
-define('OC_LOCALE_DISABLED', 0);  //  disable language
+define('OC_LOCALE_DISABLED', 0);  // disable language
 
 $opt['template']['locales']['DE']['status'] = OC_LOCALE_ACTIVE;
 $opt['template']['locales']['DE']['flag'] = 'images/flag/DE.png';
@@ -297,7 +297,7 @@ $opt['locale']['DA']['format']['phpdate'] = 'd-m-Y';
 $opt['locale']['DA']['format']['phpdatetime'] = 'd-m-Y H:i';
 $opt['locale']['DA']['format']['colonspace'] = '';
 $opt['locale']['DA']['country'] = 'DK';
-$opt['locale']['RU']['primary_lang_of'] = ['DK', 'GL'];
+$opt['locale']['DA']['primary_lang_of'] = ['DK', 'GL'];
 $opt['locale']['DA']['page']['subtitle1'] = 'Geocaching med Opencaching';
 $opt['locale']['DA']['page']['subtitle2'] = '';
 $opt['locale']['DA']['mostly_translated'] = false;
@@ -333,7 +333,7 @@ $opt['locale']['JA']['format']['phpdate'] = 'd-m-Y';
 $opt['locale']['JA']['format']['phpdatetime'] = 'd-m-Y H:i';
 $opt['locale']['JA']['format']['colonspace'] = '';
 $opt['locale']['JA']['country'] = 'JP';
-$opt['locale']['RU']['primary_lang_of'] = ['JP'];
+$opt['locale']['JA']['primary_lang_of'] = ['JP'];
 $opt['locale']['JA']['page']['subtitle1'] = 'Opencachingとジオキャッシング';
 $opt['locale']['JA']['page']['subtitle2'] = '';
 $opt['locale']['JA']['mostly_translated'] = false;

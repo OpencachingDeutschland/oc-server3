@@ -94,11 +94,6 @@ if (isset($_REQUEST['submit']) && $_REQUEST['submit'] && $login->userid > 0) {
     if (isset($_REQUEST['opt_menumap'])) {
         $useroptions->setOptValue(USR_OPT_MAP_MENU, $_REQUEST['opt_menumap'] + 0);
     }
-    if (isset($_REQUEST['opt_overview'])) {
-        $useroptions->setOptValue(USR_OPT_MAP_OVERVIEW, $_REQUEST['opt_overview'] + 0);
-    } else {
-        $useroptions->setOptValue(USR_OPT_MAP_OVERVIEW, 0);
-    }
     if (isset($_REQUEST['opt_maxcaches'])) {
         $useroptions->setOptValue(
             USR_OPT_MAP_MAXCACHES,
@@ -254,7 +249,6 @@ $tpl->assign('nongc', isset($nongc) && $nongc);
 // options
 $useroptions = new useroptions($login->userid);
 $tpl->assign('opt_menumap', $useroptions->getOptValue(USR_OPT_MAP_MENU));
-$tpl->assign('opt_overview', $useroptions->getOptValue(USR_OPT_MAP_OVERVIEW));
 $tpl->assign('opt_maxcaches', $useroptions->getOptValue(USR_OPT_MAP_MAXCACHES));
 $tpl->assign('opt_cacheicons', $useroptions->getOptValue(USR_OPT_MAP_ICONSET));
 $tpl->assign('opt_pictures', $useroptions->getOptValue(USR_OPT_MAP_PREVIEW));
